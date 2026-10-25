@@ -14,7 +14,7 @@ e34c8	e34cc	FUN_000e33cc
 e3524	e3544	FUN_000e33cc
 e3640	e3644	FUN_000e3544
 e369c	e36bc	FUN_000e3544
-e3948	e395c	FUN_000e36bc
+e3948	e395c	MachineCodeWriter__encodeProgram
 e42c0	e42c4	FUN_000e3b88
 e5638	e5654	ILReader__ctor_e5570
 e5874	e5878	ILReader__ctor_e5570

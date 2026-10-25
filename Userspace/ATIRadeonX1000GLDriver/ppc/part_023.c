@@ -294,13 +294,13 @@ int Block__ctor_e9d68(this, param_2)
   int param_2;
 {
   undefined4 uVar1;
-  int iVar2;
-  undefined4 extraout_r4;
-  undefined4 in_r5;
-  undefined4 in_r6;
-  undefined4 in_r7;
+  int compiler;
+  undefined4 r4AfterCall;
+  undefined4 staleArgR5;
+  undefined4 staleArgR6;
+  undefined4 staleArgR7;
   undefined4 uVar3;
-  int iVar4;
+  int blockSerial;
   undefined4 uVar5;
   undefined4 uVar6;
   
@@ -310,13 +310,13 @@ int Block__ctor_e9d68(this, param_2)
   *this = &PTR_FUN_001e9b08;
   this[3] = uVar1;
   DListNode__init(this + 0x24);
-  iVar2 = *(int *)(param_2 + 0xa8);
+  compiler = *(int *)(param_2 + 0xa8);
   uVar1 = *(undefined4 *)(param_2 + 0xac);
-  this[0x2a] = iVar2;
+  this[0x2a] = compiler;
   this[0x2b] = uVar1;
-  iVar4 = *(int *)(iVar2 + 0x32c);
-  this[0x2c] = iVar4;
-  *(int *)(iVar2 + 0x32c) = iVar4 + 1;
+  blockSerial = *(int *)(compiler + 0x32c);
+  this[0x2c] = blockSerial;
+  *(int *)(compiler + 0x32c) = blockSerial + 1;
   uVar3 = *(undefined4 *)(param_2 + 0x110);
   uVar1 = *(undefined4 *)(param_2 + 0xc0);
   uVar5 = *(undefined4 *)(param_2 + 0xdc);
@@ -337,7 +337,7 @@ int Block__ctor_e9d68(this, param_2)
   this[0x41] = 0;
   FUN_000e8a08(this);
   Block__createEntryExitInsts(this);
-  uVar1 = Program__allocateBitSetIndex(this[0x2b],extraout_r4,in_r5,in_r6,in_r7,uVar3,uVar5);
+  uVar1 = Program__allocateBitSetIndex(this[0x2b],r4AfterCall,staleArgR5,staleArgR6,staleArgR7,uVar3,uVar5);
   this[0x2d] = uVar1;
   return;
 }
@@ -362,13 +362,13 @@ int Block__ctor_e9f00(this, param_2)
   int param_2;
 {
   undefined4 uVar1;
-  int iVar2;
-  undefined4 extraout_r4;
-  undefined4 in_r5;
-  undefined4 in_r6;
-  undefined4 in_r7;
+  int compiler;
+  undefined4 r4AfterCall;
+  undefined4 staleArgR5;
+  undefined4 staleArgR6;
+  undefined4 staleArgR7;
   undefined4 uVar3;
-  int iVar4;
+  int blockSerial;
   undefined4 uVar5;
   undefined4 uVar6;
   
@@ -378,13 +378,13 @@ int Block__ctor_e9f00(this, param_2)
   *this = &PTR_FUN_001e9b08;
   this[3] = uVar1;
   DListNode__init(this + 0x24);
-  iVar2 = *(int *)(param_2 + 0xa8);
+  compiler = *(int *)(param_2 + 0xa8);
   uVar1 = *(undefined4 *)(param_2 + 0xac);
-  this[0x2a] = iVar2;
+  this[0x2a] = compiler;
   this[0x2b] = uVar1;
-  iVar4 = *(int *)(iVar2 + 0x32c);
-  this[0x2c] = iVar4;
-  *(int *)(iVar2 + 0x32c) = iVar4 + 1;
+  blockSerial = *(int *)(compiler + 0x32c);
+  this[0x2c] = blockSerial;
+  *(int *)(compiler + 0x32c) = blockSerial + 1;
   uVar3 = *(undefined4 *)(param_2 + 0x110);
   uVar1 = *(undefined4 *)(param_2 + 0xc0);
   uVar5 = *(undefined4 *)(param_2 + 0xdc);
@@ -405,7 +405,7 @@ int Block__ctor_e9f00(this, param_2)
   this[0x41] = 0;
   FUN_000e8a08(this);
   Block__createEntryExitInsts(this);
-  uVar1 = Program__allocateBitSetIndex(this[0x2b],extraout_r4,in_r5,in_r6,in_r7,uVar3,uVar5);
+  uVar1 = Program__allocateBitSetIndex(this[0x2b],r4AfterCall,staleArgR5,staleArgR6,staleArgR7,uVar3,uVar5);
   this[0x2d] = uVar1;
   return;
 }
@@ -418,11 +418,11 @@ int Block__ctor_ea020(this, compiler)
   int loopCounter;
   undefined4 *puVar1;
   undefined4 uVar2;
-  undefined4 extraout_r4;
-  undefined4 in_r5;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 r4AfterCall;
+  undefined4 staleArgR5;
+  undefined4 staleArgR6;
+  undefined4 staleArgR7;
+  undefined4 staleArgR8;
   int iVar3;
   
   this[1] = 0;
@@ -460,7 +460,7 @@ int Block__ctor_ea020(this, compiler)
     puVar1 = puVar1 + 1;
     loopCounter = loopCounter + -1;
   } while (loopCounter != 0);
-  uVar2 = Program__allocateBitSetIndex(*(undefined4 *)(this[0x2a] + 0x6c4),extraout_r4,in_r5,in_r6,in_r7,in_r8,
+  uVar2 = Program__allocateBitSetIndex(*(undefined4 *)(this[0x2a] + 0x6c4),r4AfterCall,staleArgR5,staleArgR6,staleArgR7,staleArgR8,
                        0x20);
   this[0x2d] = uVar2;
   return;
@@ -474,11 +474,11 @@ int Block__ctor_ea148(this, compiler)
   int loopCounter;
   undefined4 *puVar1;
   undefined4 uVar2;
-  undefined4 extraout_r4;
-  undefined4 in_r5;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 r4AfterCall;
+  undefined4 staleArgR5;
+  undefined4 staleArgR6;
+  undefined4 staleArgR7;
+  undefined4 staleArgR8;
   int iVar3;
   
   this[1] = 0;
@@ -516,7 +516,7 @@ int Block__ctor_ea148(this, compiler)
     puVar1 = puVar1 + 1;
     loopCounter = loopCounter + -1;
   } while (loopCounter != 0);
-  uVar2 = Program__allocateBitSetIndex(*(undefined4 *)(this[0x2a] + 0x6c4),extraout_r4,in_r5,in_r6,in_r7,in_r8,
+  uVar2 = Program__allocateBitSetIndex(*(undefined4 *)(this[0x2a] + 0x6c4),r4AfterCall,staleArgR5,staleArgR6,staleArgR7,staleArgR8,
                        0x20);
   this[0x2d] = uVar2;
   return;
@@ -526,40 +526,40 @@ int Block__ctor_ea148(this, compiler)
 int Block__dtor_ea270(this)
   undefined4 *this;
 {
-  undefined *puVar1;
-  int iVar2;
+  undefined *baseVtable;
+  int vectorHeader;
   
-  iVar2 = this[0x35];
+  vectorHeader = this[0x35];
   *this = &PTR_FUN_001e9b08;
-  if (iVar2 != 0) {
-    Arena__free(*(undefined4 *)(iVar2 + 0xc),*(undefined4 *)(iVar2 + 8));
-    Arena__free(*(undefined4 *)(iVar2 + -4),iVar2 + -4);
+  if (vectorHeader != 0) {
+    Arena__free(*(undefined4 *)(vectorHeader + 0xc),*(undefined4 *)(vectorHeader + 8));
+    Arena__free(*(undefined4 *)(vectorHeader + -4),vectorHeader + -4);
   }
-  iVar2 = this[0x34];
-  if (iVar2 != 0) {
-    Arena__free(*(undefined4 *)(iVar2 + 0xc),*(undefined4 *)(iVar2 + 8));
-    Arena__free(*(undefined4 *)(iVar2 + -4),iVar2 + -4);
+  vectorHeader = this[0x34];
+  if (vectorHeader != 0) {
+    Arena__free(*(undefined4 *)(vectorHeader + 0xc),*(undefined4 *)(vectorHeader + 8));
+    Arena__free(*(undefined4 *)(vectorHeader + -4),vectorHeader + -4);
   }
-  iVar2 = this[0x3d];
-  if (iVar2 != 0) {
-    Arena__free(*(undefined4 *)(iVar2 + 0xc),*(undefined4 *)(iVar2 + 8));
-    Arena__free(*(undefined4 *)(iVar2 + -4),iVar2 + -4);
+  vectorHeader = this[0x3d];
+  if (vectorHeader != 0) {
+    Arena__free(*(undefined4 *)(vectorHeader + 0xc),*(undefined4 *)(vectorHeader + 8));
+    Arena__free(*(undefined4 *)(vectorHeader + -4),vectorHeader + -4);
   }
-  iVar2 = this[0x3e];
-  if (iVar2 != 0) {
-    Arena__free(*(undefined4 *)(iVar2 + 0xc),*(undefined4 *)(iVar2 + 8));
-    Arena__free(*(undefined4 *)(iVar2 + -4),iVar2 + -4);
+  vectorHeader = this[0x3e];
+  if (vectorHeader != 0) {
+    Arena__free(*(undefined4 *)(vectorHeader + 0xc),*(undefined4 *)(vectorHeader + 8));
+    Arena__free(*(undefined4 *)(vectorHeader + -4),vectorHeader + -4);
   }
-  iVar2 = this[0x31];
-  if (iVar2 != 0) {
-    Arena__free(*(undefined4 *)(iVar2 + 0xc),*(undefined4 *)(iVar2 + 8));
-    Arena__free(*(undefined4 *)(iVar2 + -4),iVar2 + -4);
+  vectorHeader = this[0x31];
+  if (vectorHeader != 0) {
+    Arena__free(*(undefined4 *)(vectorHeader + 0xc),*(undefined4 *)(vectorHeader + 8));
+    Arena__free(*(undefined4 *)(vectorHeader + -4),vectorHeader + -4);
   }
   DListNode__clear(this + 0x24);
-  puVar1 = PTR_DAT_001e8b48 + 8;
-  this[0x24] = puVar1;
-  this[0x27] = puVar1;
-  *this = puVar1;
+  baseVtable = PTR_DAT_001e8b48 + 8;
+  this[0x24] = baseVtable;
+  this[0x27] = baseVtable;
+  *this = baseVtable;
   return;
 }
 
@@ -833,45 +833,45 @@ int EntryBlock__ctor_eabbc(this, compiler)
 }
 
 /* BreakOrContinueBlock__ctor_eac08 @ 0xeac08 (88 bytes) */
-int BreakOrContinueBlock__ctor_eac08(this, param_2)
+int BreakOrContinueBlock__ctor_eac08(this, source)
   undefined4 *this;
-  int param_2;
+  int source;
 {
   undefined *puVar1;
   undefined4 uVar2;
   
-  ((int (*)())Block__ctor_e9f00)(this,param_2);
-  uVar2 = *(undefined4 *)(param_2 + 300);
+  ((int (*)())Block__ctor_e9f00)(this,source);
+  uVar2 = *(undefined4 *)(source + 300);
   puVar1 = PTR_DAT_001e8b54 + 8;
-  this[0x4c] = *(undefined4 *)(param_2 + 0x130);
+  this[0x4c] = *(undefined4 *)(source + 0x130);
   *this = puVar1;
   this[0x4b] = uVar2;
   return;
 }
 
 /* BreakOrContinueBlock__ctor_eac60 @ 0xeac60 (88 bytes) */
-int BreakOrContinueBlock__ctor_eac60(this, param_2)
+int BreakOrContinueBlock__ctor_eac60(this, source)
   undefined4 *this;
-  int param_2;
+  int source;
 {
   undefined *puVar1;
   undefined4 uVar2;
   
-  ((int (*)())Block__ctor_e9f00)(this,param_2);
-  uVar2 = *(undefined4 *)(param_2 + 300);
+  ((int (*)())Block__ctor_e9f00)(this,source);
+  uVar2 = *(undefined4 *)(source + 300);
   puVar1 = PTR_DAT_001e8b54 + 8;
-  this[0x4c] = *(undefined4 *)(param_2 + 0x130);
+  this[0x4c] = *(undefined4 *)(source + 0x130);
   *this = puVar1;
   this[0x4b] = uVar2;
   return;
 }
 
 /* PostLoopFooter__ctor_eacb8 @ 0xeacb8 (80 bytes) */
-int PostLoopFooter__ctor_eacb8(this, param_2)
+int PostLoopFooter__ctor_eacb8(this, source)
   undefined4 *this;
-  undefined4 param_2;
+  undefined4 source;
 {
-  ((int (*)())Block__ctor_e9f00)(this,param_2);
+  ((int (*)())Block__ctor_e9f00)(this,source);
   this[3] = this[3] | 0x20;
   *this = &PTR_FUN_001e9c68;
   return;
@@ -892,22 +892,22 @@ int PostLoopFooter__clone(this)
 }
 
 /* PostLoopFooter__ctor_ead80 @ 0xead80 (80 bytes) */
-int PostLoopFooter__ctor_ead80(this, param_2)
+int PostLoopFooter__ctor_ead80(this, source)
   undefined4 *this;
-  undefined4 param_2;
+  undefined4 source;
 {
-  ((int (*)())Block__ctor_e9f00)(this,param_2);
+  ((int (*)())Block__ctor_e9f00)(this,source);
   this[3] = this[3] | 0x20;
   *this = &PTR_FUN_001e9c68;
   return;
 }
 
 /* LoopFooter__ctor_eadd0 @ 0xeadd0 (80 bytes) */
-int LoopFooter__ctor_eadd0(this, param_2)
+int LoopFooter__ctor_eadd0(this, source)
   undefined4 *this;
-  undefined4 param_2;
+  undefined4 source;
 {
-  ((int (*)())Block__ctor_e9f00)(this,param_2);
+  ((int (*)())Block__ctor_e9f00)(this,source);
   this[3] = this[3] | 0x20;
   *this = &PTR_FUN_001e9c10;
   return;
@@ -928,20 +928,20 @@ int LoopFooter__clone(this)
 }
 
 /* LoopFooter__ctor_eae98 @ 0xeae98 (80 bytes) */
-int LoopFooter__ctor_eae98(this, param_2)
+int LoopFooter__ctor_eae98(this, source)
   undefined4 *this;
-  undefined4 param_2;
+  undefined4 source;
 {
-  ((int (*)())Block__ctor_e9f00)(this,param_2);
+  ((int (*)())Block__ctor_e9f00)(this,source);
   this[3] = this[3] | 0x20;
   *this = &PTR_FUN_001e9c10;
   return;
 }
 
 /* LoopHeader__ctor_eaee8 @ 0xeaee8 (132 bytes) */
-int LoopHeader__ctor_eaee8(this, param_2)
+int LoopHeader__ctor_eaee8(this, source)
   undefined4 *this;
-  int param_2;
+  int source;
 {
   undefined4 uVar1;
   undefined4 uVar2;
@@ -950,13 +950,13 @@ int LoopHeader__ctor_eaee8(this, param_2)
   undefined4 uVar5;
   undefined4 uVar6;
   
-  ((int (*)())Block__ctor_e9f00)(this,param_2);
-  uVar1 = *(undefined4 *)(param_2 + 0x144);
-  uVar4 = *(undefined4 *)(param_2 + 300);
-  uVar6 = *(undefined4 *)(param_2 + 0x134);
-  uVar5 = *(undefined4 *)(param_2 + 0x138);
-  uVar3 = *(undefined4 *)(param_2 + 0x13c);
-  uVar2 = *(undefined4 *)(param_2 + 0x140);
+  ((int (*)())Block__ctor_e9f00)(this,source);
+  uVar1 = *(undefined4 *)(source + 0x144);
+  uVar4 = *(undefined4 *)(source + 300);
+  uVar6 = *(undefined4 *)(source + 0x134);
+  uVar5 = *(undefined4 *)(source + 0x138);
+  uVar3 = *(undefined4 *)(source + 0x13c);
+  uVar2 = *(undefined4 *)(source + 0x140);
   this[3] = this[3] | 0x20;
   *this = &PTR_FUN_001e9bb8;
   this[0x4b] = uVar4;
@@ -983,9 +983,9 @@ int LoopHeader__clone(this)
 }
 
 /* LoopHeader__ctor_eafe4 @ 0xeafe4 (132 bytes) */
-int LoopHeader__ctor_eafe4(this, param_2)
+int LoopHeader__ctor_eafe4(this, source)
   undefined4 *this;
-  int param_2;
+  int source;
 {
   undefined4 uVar1;
   undefined4 uVar2;
@@ -994,13 +994,13 @@ int LoopHeader__ctor_eafe4(this, param_2)
   undefined4 uVar5;
   undefined4 uVar6;
   
-  ((int (*)())Block__ctor_e9f00)(this,param_2);
-  uVar1 = *(undefined4 *)(param_2 + 0x144);
-  uVar4 = *(undefined4 *)(param_2 + 300);
-  uVar6 = *(undefined4 *)(param_2 + 0x134);
-  uVar5 = *(undefined4 *)(param_2 + 0x138);
-  uVar3 = *(undefined4 *)(param_2 + 0x13c);
-  uVar2 = *(undefined4 *)(param_2 + 0x140);
+  ((int (*)())Block__ctor_e9f00)(this,source);
+  uVar1 = *(undefined4 *)(source + 0x144);
+  uVar4 = *(undefined4 *)(source + 300);
+  uVar6 = *(undefined4 *)(source + 0x134);
+  uVar5 = *(undefined4 *)(source + 0x138);
+  uVar3 = *(undefined4 *)(source + 0x13c);
+  uVar2 = *(undefined4 *)(source + 0x140);
   this[3] = this[3] | 0x20;
   *this = &PTR_FUN_001e9bb8;
   this[0x4b] = uVar4;
@@ -1013,11 +1013,11 @@ int LoopHeader__ctor_eafe4(this, param_2)
 }
 
 /* IfFooter__ctor_eb068 @ 0xeb068 (68 bytes) */
-int IfFooter__ctor_eb068(this, param_2)
+int IfFooter__ctor_eb068(this, source)
   undefined4 *this;
-  undefined4 param_2;
+  undefined4 source;
 {
-  ((int (*)())Block__ctor_e9f00)(this,param_2);
+  ((int (*)())Block__ctor_e9f00)(this,source);
   *this = &PTR_FUN_001e9d70;
   return;
 }
@@ -1037,26 +1037,26 @@ int IfFooter__clone(this)
 }
 
 /* IfFooter__ctor_eb124 @ 0xeb124 (68 bytes) */
-int IfFooter__ctor_eb124(this, param_2)
+int IfFooter__ctor_eb124(this, source)
   undefined4 *this;
-  undefined4 param_2;
+  undefined4 source;
 {
-  ((int (*)())Block__ctor_e9f00)(this,param_2);
+  ((int (*)())Block__ctor_e9f00)(this,source);
   *this = &PTR_FUN_001e9d70;
   return;
 }
 
 /* IfHeader__ctor_eb168 @ 0xeb168 (104 bytes) */
-int IfHeader__ctor_eb168(this, param_2)
+int IfHeader__ctor_eb168(this, source)
   undefined4 *this;
-  int param_2;
+  int source;
 {
   undefined4 uVar1;
   undefined4 uVar2;
   
-  ((int (*)())Block__ctor_e9f00)(this,param_2);
-  uVar2 = *(undefined4 *)(param_2 + 0x148);
-  uVar1 = *(undefined4 *)(param_2 + 0x144);
+  ((int (*)())Block__ctor_e9f00)(this,source);
+  uVar2 = *(undefined4 *)(source + 0x148);
+  uVar1 = *(undefined4 *)(source + 0x144);
   this[0x55] = 0;
   *this = &PTR_FUN_001e9cc0;
   this[0x51] = uVar1;
@@ -1081,16 +1081,16 @@ int IfHeader__clone(this)
 }
 
 /* IfHeader__ctor_eb248 @ 0xeb248 (104 bytes) */
-int IfHeader__ctor_eb248(this, param_2)
+int IfHeader__ctor_eb248(this, source)
   undefined4 *this;
-  int param_2;
+  int source;
 {
   undefined4 uVar1;
   undefined4 uVar2;
   
-  ((int (*)())Block__ctor_e9f00)(this,param_2);
-  uVar2 = *(undefined4 *)(param_2 + 0x148);
-  uVar1 = *(undefined4 *)(param_2 + 0x144);
+  ((int (*)())Block__ctor_e9f00)(this,source);
+  uVar2 = *(undefined4 *)(source + 0x148);
+  uVar1 = *(undefined4 *)(source + 0x144);
   this[0x55] = 0;
   *this = &PTR_FUN_001e9cc0;
   this[0x51] = uVar1;
@@ -1101,12 +1101,12 @@ int IfHeader__ctor_eb248(this, param_2)
 }
 
 /* FuncEndBlock__ctor_eb2b0 @ 0xeb2b0 (80 bytes) */
-int FuncEndBlock__ctor_eb2b0(this, param_2)
+int FuncEndBlock__ctor_eb2b0(this, source)
   undefined4 *this;
-  int param_2;
+  int source;
 {
-  ((int (*)())Block__ctor_e9f00)(this,param_2);
-  this[0x4b] = *(undefined4 *)(param_2 + 300);
+  ((int (*)())Block__ctor_e9f00)(this,source);
+  this[0x4b] = *(undefined4 *)(source + 300);
   *this = &PTR_FUN_001e9b60;
   return;
 }
@@ -1126,12 +1126,12 @@ int FuncEndBlock__clone(this)
 }
 
 /* FuncEndBlock__ctor_eb378 @ 0xeb378 (80 bytes) */
-int FuncEndBlock__ctor_eb378(this, param_2)
+int FuncEndBlock__ctor_eb378(this, source)
   undefined4 *this;
-  int param_2;
+  int source;
 {
-  ((int (*)())Block__ctor_e9f00)(this,param_2);
-  this[0x4b] = *(undefined4 *)(param_2 + 300);
+  ((int (*)())Block__ctor_e9f00)(this,source);
+  this[0x4b] = *(undefined4 *)(source + 300);
   *this = &PTR_FUN_001e9b60;
   return;
 }
@@ -1264,21 +1264,21 @@ int IfHeader__ctor_eb688(this, param_2, param_3, param_4, compiler)
 }
 
 /* IfFooterStatic__ctor_eb7e0 @ 0xeb7e0 (68 bytes) */
-int IfFooterStatic__ctor_eb7e0(this, param_2)
+int IfFooterStatic__ctor_eb7e0(this, compiler)
   undefined4 *this;
-  undefined4 param_2;
+  undefined4 compiler;
 {
-  ((int (*)())IfFooter__ctor_eb124)(this,param_2);
+  ((int (*)())IfFooter__ctor_eb124)(this,compiler);
   *this = &PTR_FUN_001e9dc8;
   return;
 }
 
 /* IfFooterStatic__ctor_eb824 @ 0xeb824 (68 bytes) */
-int IfFooterStatic__ctor_eb824(this, param_2)
+int IfFooterStatic__ctor_eb824(this, compiler)
   undefined4 *this;
-  undefined4 param_2;
+  undefined4 compiler;
 {
-  ((int (*)())IfFooter__ctor_eb124)(this,param_2);
+  ((int (*)())IfFooter__ctor_eb124)(this,compiler);
   *this = &PTR_FUN_001e9dc8;
   return;
 }
@@ -1298,21 +1298,21 @@ int IfFooterStatic__clone(this)
 }
 
 /* IfHeaderStatic__ctor_eb8e0 @ 0xeb8e0 (68 bytes) */
-int IfHeaderStatic__ctor_eb8e0(this, param_2)
+int IfHeaderStatic__ctor_eb8e0(this, compiler)
   undefined4 *this;
-  undefined4 param_2;
+  undefined4 compiler;
 {
-  ((int (*)())IfHeader__ctor_eb248)(this,param_2);
+  ((int (*)())IfHeader__ctor_eb248)(this,compiler);
   *this = &PTR_FUN_001e9d18;
   return;
 }
 
 /* IfHeaderStatic__ctor_eb924 @ 0xeb924 (68 bytes) */
-int IfHeaderStatic__ctor_eb924(this, param_2)
+int IfHeaderStatic__ctor_eb924(this, compiler)
   undefined4 *this;
-  undefined4 param_2;
+  undefined4 compiler;
 {
-  ((int (*)())IfHeader__ctor_eb248)(this,param_2);
+  ((int (*)())IfHeader__ctor_eb248)(this,compiler);
   *this = &PTR_FUN_001e9d18;
   return;
 }
@@ -1385,40 +1385,40 @@ int IfHeaderStatic__ctor_ebac8(this, inst, param_3, compiler)
 int Block__dtor(this)
   undefined4 *this;
 {
-  undefined *puVar1;
-  int iVar2;
+  undefined *baseVtable;
+  int vectorHeader;
   
-  iVar2 = this[0x35];
+  vectorHeader = this[0x35];
   *this = &PTR_FUN_001e9b08;
-  if (iVar2 != 0) {
-    Arena__free(*(undefined4 *)(iVar2 + 0xc),*(undefined4 *)(iVar2 + 8));
-    Arena__free(*(undefined4 *)(iVar2 + -4),iVar2 + -4);
+  if (vectorHeader != 0) {
+    Arena__free(*(undefined4 *)(vectorHeader + 0xc),*(undefined4 *)(vectorHeader + 8));
+    Arena__free(*(undefined4 *)(vectorHeader + -4),vectorHeader + -4);
   }
-  iVar2 = this[0x34];
-  if (iVar2 != 0) {
-    Arena__free(*(undefined4 *)(iVar2 + 0xc),*(undefined4 *)(iVar2 + 8));
-    Arena__free(*(undefined4 *)(iVar2 + -4),iVar2 + -4);
+  vectorHeader = this[0x34];
+  if (vectorHeader != 0) {
+    Arena__free(*(undefined4 *)(vectorHeader + 0xc),*(undefined4 *)(vectorHeader + 8));
+    Arena__free(*(undefined4 *)(vectorHeader + -4),vectorHeader + -4);
   }
-  iVar2 = this[0x3d];
-  if (iVar2 != 0) {
-    Arena__free(*(undefined4 *)(iVar2 + 0xc),*(undefined4 *)(iVar2 + 8));
-    Arena__free(*(undefined4 *)(iVar2 + -4),iVar2 + -4);
+  vectorHeader = this[0x3d];
+  if (vectorHeader != 0) {
+    Arena__free(*(undefined4 *)(vectorHeader + 0xc),*(undefined4 *)(vectorHeader + 8));
+    Arena__free(*(undefined4 *)(vectorHeader + -4),vectorHeader + -4);
   }
-  iVar2 = this[0x3e];
-  if (iVar2 != 0) {
-    Arena__free(*(undefined4 *)(iVar2 + 0xc),*(undefined4 *)(iVar2 + 8));
-    Arena__free(*(undefined4 *)(iVar2 + -4),iVar2 + -4);
+  vectorHeader = this[0x3e];
+  if (vectorHeader != 0) {
+    Arena__free(*(undefined4 *)(vectorHeader + 0xc),*(undefined4 *)(vectorHeader + 8));
+    Arena__free(*(undefined4 *)(vectorHeader + -4),vectorHeader + -4);
   }
-  iVar2 = this[0x31];
-  if (iVar2 != 0) {
-    Arena__free(*(undefined4 *)(iVar2 + 0xc),*(undefined4 *)(iVar2 + 8));
-    Arena__free(*(undefined4 *)(iVar2 + -4),iVar2 + -4);
+  vectorHeader = this[0x31];
+  if (vectorHeader != 0) {
+    Arena__free(*(undefined4 *)(vectorHeader + 0xc),*(undefined4 *)(vectorHeader + 8));
+    Arena__free(*(undefined4 *)(vectorHeader + -4),vectorHeader + -4);
   }
   DListNode__clear(this + 0x24);
-  puVar1 = PTR_DAT_001e8b48 + 8;
-  this[0x24] = puVar1;
-  this[0x27] = puVar1;
-  *this = puVar1;
+  baseVtable = PTR_DAT_001e8b48 + 8;
+  this[0x24] = baseVtable;
+  this[0x27] = baseVtable;
+  *this = baseVtable;
   return;
 }
 
@@ -1426,69 +1426,69 @@ int Block__dtor(this)
 int Block__deleting_dtor(this)
   undefined4 *this;
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
-  int iVar3;
+  undefined *baseVtable;
+  undefined4 *arenaBlockStart;
+  int vectorHeader;
   
-  iVar3 = this[0x35];
+  vectorHeader = this[0x35];
   *this = &PTR_FUN_001e9b08;
-  if (iVar3 != 0) {
-    Arena__free(*(undefined4 *)(iVar3 + 0xc),*(undefined4 *)(iVar3 + 8));
-    Arena__free(*(undefined4 *)(iVar3 + -4),iVar3 + -4);
+  if (vectorHeader != 0) {
+    Arena__free(*(undefined4 *)(vectorHeader + 0xc),*(undefined4 *)(vectorHeader + 8));
+    Arena__free(*(undefined4 *)(vectorHeader + -4),vectorHeader + -4);
   }
-  iVar3 = this[0x34];
-  if (iVar3 != 0) {
-    Arena__free(*(undefined4 *)(iVar3 + 0xc),*(undefined4 *)(iVar3 + 8));
-    Arena__free(*(undefined4 *)(iVar3 + -4),iVar3 + -4);
+  vectorHeader = this[0x34];
+  if (vectorHeader != 0) {
+    Arena__free(*(undefined4 *)(vectorHeader + 0xc),*(undefined4 *)(vectorHeader + 8));
+    Arena__free(*(undefined4 *)(vectorHeader + -4),vectorHeader + -4);
   }
-  iVar3 = this[0x3d];
-  if (iVar3 != 0) {
-    Arena__free(*(undefined4 *)(iVar3 + 0xc),*(undefined4 *)(iVar3 + 8));
-    Arena__free(*(undefined4 *)(iVar3 + -4),iVar3 + -4);
+  vectorHeader = this[0x3d];
+  if (vectorHeader != 0) {
+    Arena__free(*(undefined4 *)(vectorHeader + 0xc),*(undefined4 *)(vectorHeader + 8));
+    Arena__free(*(undefined4 *)(vectorHeader + -4),vectorHeader + -4);
   }
-  iVar3 = this[0x3e];
-  if (iVar3 != 0) {
-    Arena__free(*(undefined4 *)(iVar3 + 0xc),*(undefined4 *)(iVar3 + 8));
-    Arena__free(*(undefined4 *)(iVar3 + -4),iVar3 + -4);
+  vectorHeader = this[0x3e];
+  if (vectorHeader != 0) {
+    Arena__free(*(undefined4 *)(vectorHeader + 0xc),*(undefined4 *)(vectorHeader + 8));
+    Arena__free(*(undefined4 *)(vectorHeader + -4),vectorHeader + -4);
   }
-  iVar3 = this[0x31];
-  if (iVar3 != 0) {
-    Arena__free(*(undefined4 *)(iVar3 + 0xc),*(undefined4 *)(iVar3 + 8));
-    Arena__free(*(undefined4 *)(iVar3 + -4),iVar3 + -4);
+  vectorHeader = this[0x31];
+  if (vectorHeader != 0) {
+    Arena__free(*(undefined4 *)(vectorHeader + 0xc),*(undefined4 *)(vectorHeader + 8));
+    Arena__free(*(undefined4 *)(vectorHeader + -4),vectorHeader + -4);
   }
   DListNode__clear(this + 0x24);
-  puVar1 = PTR_DAT_001e8b48 + 8;
-  this[0x27] = puVar1;
-  *this = puVar1;
-  this[0x24] = puVar1;
+  baseVtable = PTR_DAT_001e8b48 + 8;
+  this[0x27] = baseVtable;
+  *this = baseVtable;
+  this[0x24] = baseVtable;
   if (this == (undefined4 *)0x0) {
     return;
   }
-  iVar3 = this[-1];
-  if ((*(int *)(iVar3 + 0x28) != 0) &&
-     (puVar2 = *(undefined4 **)(iVar3 + 0x14), puVar2 == this + -1)) {
-    _memset(puVar2,0,*(int *)(iVar3 + 8) - (int)puVar2);
-    *(undefined4 *)(iVar3 + 8) = *(undefined4 *)(iVar3 + 0x14);
+  vectorHeader = this[-1];
+  if ((*(int *)(vectorHeader + 0x28) != 0) &&
+     (arenaBlockStart = *(undefined4 **)(vectorHeader + 0x14), arenaBlockStart == this + -1)) {
+    _memset(arenaBlockStart,0,*(int *)(vectorHeader + 8) - (int)arenaBlockStart);
+    *(undefined4 *)(vectorHeader + 8) = *(undefined4 *)(vectorHeader + 0x14);
   }
   return;
 }
 
 /* BreakBlock__ctor_ebe70 @ 0xebe70 (68 bytes) */
-int BreakBlock__ctor_ebe70(this, param_2)
+int BreakBlock__ctor_ebe70(this, compiler)
   undefined4 *this;
-  undefined4 param_2;
+  undefined4 compiler;
 {
-  ((int (*)())BreakOrContinueBlock__ctor_eac60)(this,param_2);
+  ((int (*)())BreakOrContinueBlock__ctor_eac60)(this,compiler);
   *this = &PTR_FUN_001e9e20;
   return;
 }
 
 /* BreakBlock__ctor_ebeb4 @ 0xebeb4 (68 bytes) */
-int BreakBlock__ctor_ebeb4(this, param_2)
+int BreakBlock__ctor_ebeb4(this, compiler)
   undefined4 *this;
-  undefined4 param_2;
+  undefined4 compiler;
 {
-  ((int (*)())BreakOrContinueBlock__ctor_eac60)(this,param_2);
+  ((int (*)())BreakOrContinueBlock__ctor_eac60)(this,compiler);
   *this = &PTR_FUN_001e9e20;
   return;
 }
@@ -1508,21 +1508,21 @@ int BreakBlock__clone(this)
 }
 
 /* ContinueBlock__ctor_ebf70 @ 0xebf70 (68 bytes) */
-int ContinueBlock__ctor_ebf70(this, param_2)
+int ContinueBlock__ctor_ebf70(this, compiler)
   undefined4 *this;
-  undefined4 param_2;
+  undefined4 compiler;
 {
-  ((int (*)())BreakOrContinueBlock__ctor_eac60)(this,param_2);
+  ((int (*)())BreakOrContinueBlock__ctor_eac60)(this,compiler);
   *this = &PTR_FUN_001e9e78;
   return;
 }
 
 /* ContinueBlock__ctor_ebfb4 @ 0xebfb4 (68 bytes) */
-int ContinueBlock__ctor_ebfb4(this, param_2)
+int ContinueBlock__ctor_ebfb4(this, compiler)
   undefined4 *this;
-  undefined4 param_2;
+  undefined4 compiler;
 {
-  ((int (*)())BreakOrContinueBlock__ctor_eac60)(this,param_2);
+  ((int (*)())BreakOrContinueBlock__ctor_eac60)(this,compiler);
   *this = &PTR_FUN_001e9e78;
   return;
 }

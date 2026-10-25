@@ -1301,7 +1301,7 @@
 0xe3308	FUN_000e3308	196	no	indirect call (driver context / vtable / callback)
 0xe33cc	FUN_000e33cc	340	no	indirect call (driver context / vtable / callback)
 0xe3544	FUN_000e3544	340	no	indirect call (driver context / vtable / callback)
-0xe36bc	FUN_000e36bc	664	no	indirect call (driver context / vtable / callback)
+0xe36bc	MachineCodeWriter__encodeProgram	664	no	indirect call (driver context / vtable / callback)
 0xe3968	IRInst__createMovForDest	396	no	indirect call (driver context / vtable / callback)
 0xe3af4	FUN_000e3af4	148	yes	
 0xe3b88	FUN_000e3b88	2144	no	indirect call (driver context / vtable / callback)
@@ -1373,7 +1373,7 @@
 0xe8d5c	Block__appendPredecessor	120	yes	
 0xe8dd4	Block__appendSuccessor	120	yes	
 0xe8e4c	Block__connect	96	yes	
-0xe8eac	FUN_000e8eac	608	yes	
+0xe8eac	Block__replaceRegionEdges	608	yes	
 0xe910c	FUN_000e910c	120	yes	
 0xe9184	Block__getPredecessor	136	yes	
 0xe920c	Block__getSuccessor	136	yes	
@@ -1559,7 +1559,7 @@
 0xf4c48	ConstKey__compareOrdered	268	yes	
 0xf4d54	ConstKey__countPresentOperands	44	yes	
 0xf4d80	FUN_000f4d80	92	yes	
-0xf4ddc	FUN_000f4ddc	512	yes	
+0xf4ddc	ConstRecord__insertSwizzleVariants	512	yes	
 0xf4fdc	Compiler__getOrCreateLoadConstN	588	yes	
 0xf5248	FUN_000f5248	376	yes	
 0xf53c0	Compiler__getOrCreateLoadConst3	396	yes	

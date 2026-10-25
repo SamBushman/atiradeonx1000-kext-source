@@ -733,7 +733,7 @@ int HwLimits__vslot43_prependDefaultMov(this, inst, param_3, compiler)
   int destRecord;
   int inst2;
   int destRecord2;
-  double fparam_1;
+  double staleFprArg1;
   undefined4 unwrittenLaneMask;
   undefined4 destSelectBytes [8];
   
@@ -743,8 +743,8 @@ int HwLimits__vslot43_prependDefaultMov(this, inst, param_3, compiler)
   destRecord = IRInst__getOperandRecord(inst,0);
   if (*(int *)(destRecord + 0x10) != DAT_001aa800) {
     inst2 = IRInst__create(0x31,compiler);
-    fparam_1 = (double)FLOAT_001aa0d4;
-    ((void (*)())IRInst__makeLiteralVec4Float)(inst2,*(undefined4 *)(compiler + COMP_currentProgram),1,fparam_1,fparam_1,fparam_1,
+    staleFprArg1 = (double)FLOAT_001aa0d4;
+    ((void (*)())IRInst__makeLiteralVec4Float)(inst2,*(undefined4 *)(compiler + COMP_currentProgram),1,staleFprArg1,staleFprArg1,staleFprArg1,
                  (double)FLOAT_001aa0e8);
     IRInst__setOperandRef(inst2,0,*(undefined4 *)(inst + 0xa4));
     destRecord2 = IRInst__getOperandRecord(inst,0);
@@ -834,7 +834,7 @@ int Program__beginPass(program, param_2)
 {
   int iVar1;
   int iVar2;
-  uint extraout_r4;
+  uint r4AfterCall;
   int loopCounter;
   int *a0;
   uint loopIndex;
@@ -844,7 +844,7 @@ int Program__beginPass(program, param_2)
   while (iVar1 != 0) {
     (**(code **)(*a0 + 0x48))(a0,param_2);
     a0 = (int *)a0[2];
-    param_2 = extraout_r4;
+    param_2 = r4AfterCall;
     iVar1 = a0[2];
   }
   iVar1 = *(int *)(program + PROG_instructionVector);
@@ -2181,8 +2181,8 @@ int FUN_000ef498(program, ilReader)
   int loopCounter;
   undefined4 *allocation;
   undefined4 *tableAlloc;
-  char *extraout_r4;
-  undefined4 extraout_r4_00;
+  char *r4AfterCall;
+  undefined4 r4AfterCall2;
   char *pcVar6;
   int iVar7;
   int *hwDescription;
@@ -2321,7 +2321,7 @@ int FUN_000ef498(program, ilReader)
   hwDescription = *(int **)(*(int *)(program + 8) + 0x30c);
   (**(code **)(*hwDescription + 0x14))(hwDescription,shaderKind,*(int *)(program + 8));
   if (iVar2 == 1) {
-    ((int (*)())FUN_000eec50)(program,extraout_r4_00);
+    ((int (*)())FUN_000eec50)(program,r4AfterCall2);
   }
   else if ((iVar2 == 2) || (iVar2 == 0)) {
     hwDescription = *(int **)(*(int *)(program + 8) + 0x30c);
@@ -2338,7 +2338,7 @@ int FUN_000ef498(program, ilReader)
   while (iVar2 != 0) {
     (**(code **)(*blockCursor + 0x48))(blockCursor,pcVar6);
     blockCursor = (int *)blockCursor[2];
-    pcVar6 = extraout_r4;
+    pcVar6 = r4AfterCall;
     iVar2 = blockCursor[2];
   }
   iVar2 = *(int *)(program + 0x3c4);
@@ -3600,7 +3600,7 @@ int FUN_000f1d7c(pass, afterInst, inst)
   uint uVar8;
   dword argR6;
   undefined4 argR7;
-  undefined4 in_r8;
+  undefined4 staleArgR8;
   uint uVar9;
   dword destRegister;
   dword *destRegisterOffset;
@@ -3772,7 +3772,7 @@ LAB_000f26a4:
         WriteMask__fromSelectWord(&local_48,*(undefined4 *)(operandRecord + 0x10));
         node[3] = local_48;
         iVar4 = (**(code **)(*node + 0x7c))
-                          (node,a1,a2,argR6,argR7,in_r8,*(code **)(*node + 0x7c));
+                          (node,a1,a2,argR6,argR7,staleArgR8,*(code **)(*node + 0x7c));
         walkInstCount = vec4Count;
         if (iVar4 == 0) {
           iVar4 = IRInst__opcodeIsInSet(node);
@@ -4081,11 +4081,11 @@ int FUN_000f29f4(param_1)
   int loopIndex;
   int *piVar1;
   int iVar2;
-  undefined4 extraout_r4;
-  undefined4 in_r5;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 r4AfterCall;
+  undefined4 staleArgR5;
+  undefined4 staleArgR6;
+  undefined4 staleArgR7;
+  undefined4 staleArgR8;
   int iVar3;
   int *piVar4;
   int *piVar5;
@@ -4117,7 +4117,7 @@ int FUN_000f29f4(param_1)
   }
   else {
     ((int (*)())FUN_000ec920)(param_1);
-    ((int (*)())Program__insertExitMarkerAndFlagBlocks)(param_1,extraout_r4,in_r5,in_r6,in_r7,in_r8,iVar3);
+    ((int (*)())Program__insertExitMarkerAndFlagBlocks)(param_1,r4AfterCall,staleArgR5,staleArgR6,staleArgR7,staleArgR8,iVar3);
     piVar9 = *(int **)(*(int *)(param_1 + 0x3a8) + 0x98);
     piVar1 = (int *)piVar9[2];
     if (piVar1 == (int *)0x0) {
