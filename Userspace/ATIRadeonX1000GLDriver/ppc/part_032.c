@@ -568,11 +568,104 @@ LAB_001101ac:
 }
 
 /* FUN_001102e0 @ 0x1102e0 (124 bytes) */
-int FUN_001102e0(program, param_2, vector)
+int FUN_001102e0(program, scopeId, vector)
   int program;
-  int param_2;
+  int scopeId;
   uint *vector;
 {
+  uint *entryMembersVector;
+  uint *entryLaneVector;
+  uint *candLaneVector;
+  uint *bucketMembers;
+  int laneSource;
+  int destOperandRec;
+  int laneNumber;
+  undefined4 *newEntryAlloc;
+  int cloneSrcOperand;
+  int headSrcOperand;
+  int cloneDestOperand;
+  int savedLaneWord;
+  int laneInstValue;
+  int entryLaneBudget;
+  int candSrcOperand;
+  int laneSourceInst;
+  int laneStepsLeft;
+  int savedSwizzle;
+  int laneStep;
+  undefined4 *laneKindTable;
+  undefined4 *vectorSlotRef;
+  undefined4 *laneListRef;
+  undefined4 *groupEntryRef;
+  undefined4 *bucketSlotRef;
+  undefined4 *laneFlagBytePtr;
+  undefined4 *recordRef;
+  undefined4 *bucketVectorAlloc;
+  undefined4 *groupElemRef;
+  undefined4 *outVectorAlloc;
+  undefined4 *allocElemRef;
+  undefined4 *groupVectorAlloc;
+  int laneCountTarget;
+  int lanePriority;
+  int groupInst;
+  int headInst;
+  int bucketInst;
+  int defaultLaneKind;
+  int candidateDestRegister;
+  int matchResult;
+  int laneCountdown;
+  int entryDestOperand;
+  int groupCursor;
+  int entryInst;
+  int requiredLanes;
+  int bucketRegister;
+  int groupSizeRemaining;
+  int needsLaneFixup;
+  int packingSupported;
+  int laneCounter;
+  int groupLimit;
+  undefined1 srcSwizzleByte;
+  bool isLastLane;
+  bool notLastBucket;
+  undefined4 entryBlock;
+  undefined4 cloneDestRegister;
+  undefined4 swizzleCode;
+  undefined4 laneKindValue;
+  uint copyCount;
+  uint allocIndex;
+  uint groupIndex;
+  uint bucketCopyIndex;
+  uint laneListIndex;
+  uint otherIndex;
+  uint copyIndex;
+  uint groupVectorCount;
+  uint bucketVectorCount;
+  uint recordCount;
+  uint packEntryCount;
+  int *candidateWordCursor;
+  int *laneRecord;
+  int *newEntrySlotRef;
+  int *newLaneSlotRef;
+  int *entryLaneFlagCursor;
+  int *candidateGroup;
+  int *otherEntry;
+  int *candidateEntry;
+  int *laneInstRef;
+  int *packEntryRef;
+  int *packEntry;
+  int *bucketCursor;
+  int *laneSourceCursor;
+  int *newSlotRef;
+  int *searchRef;
+  int clonedInst;
+  int headLanesLeft;
+  int headDestOperand;
+  int candidateLaneCount;
+  int laneFlagCursor;
+  int candidateInst;
+  int laneIndex;
+  int srcOperand;
+  int swappedLaneSource;
+  int scanOperand;
   int vectorAt418BElement;
   int vectorAt418Element;
   int *vectorElement2;
@@ -595,52 +688,52 @@ int FUN_001102e0(program, param_2, vector)
   undefined4 *allocation;
   undefined4 vectorData;
   undefined4 arena;
-  bool bVar1;
-  undefined1 uVar2;
-  undefined1 uVar3;
-  int *piVar4;
-  int iVar5;
-  undefined4 *puVar6;
-  uint uVar7;
-  int iVar8;
-  int iVar9;
-  int *piVar10;
-  undefined4 *puVar11;
-  undefined4 *puVar12;
-  int *piVar13;
-  int iVar14;
-  int iVar15;
-  int iVar16;
-  undefined4 *puVar17;
-  int *piVar18;
-  int iVar19;
-  undefined1 *puVar20;
-  int iVar21;
-  int *piVar22;
-  uint *puVar23;
-  int *piVar24;
-  undefined4 uVar25;
-  uint uVar26;
-  undefined4 uVar27;
-  undefined4 *puVar28;
-  uint *puVar29;
-  uint *puVar30;
-  uint uVar31;
-  uint uVar32;
-  uint *puVar33;
+  bool notLastLane;
+  undefined1 swizzleByteA;
+  undefined1 swizzleByteB;
+  int *savedSwizzlePtr;
+  int entryLanesLeft;
+  undefined4 *outRef;
+  uint allocationCount;
+  int recordInst;
+  int operandOrSlot;
+  int *laneSourceWalk;
+  undefined4 *packEntryElemRef;
+  undefined4 *allocRef;
+  int *laneInstCursor;
+  int swapEntryInst;
+  int laneInst;
+  int candDestOperand;
+  undefined4 *copyRef;
+  int *groupWordCursor;
+  int headDestRegister;
+  undefined1 *laneFlagPtr;
+  int wordCountdown;
+  int *linkRecord;
+  uint *allocationVector;
+  int *linkRecordRef;
+  undefined4 destRegister;
+  uint bucketScanIndex;
+  undefined4 candDestRegister;
+  undefined4 *newEntry;
+  uint *groupVector;
+  uint *outVector;
+  uint searchRemaining;
+  uint searchIndex;
+  uint *bucketVector;
   int iStack0000001c;
-  undefined4 local_98;
-  int local_94 [4];
-  undefined1 local_84 [28];
-  int local_68;
-  undefined *local_64;
-  uint local_60;
-  int *local_5c;
-  undefined *local_58;
-  undefined1 *local_54;
+  undefined4 savedLaneKind;
+  int savedSwizzleWords [4];
+  undefined1 savedLaneSources [28];
+  int vec4GroupCount;
+  undefined *laneKindTableBase;
+  uint nextLaneListIndex;
+  int *savedSwizzleWordsAlias;
+  undefined *swizzleTableBase;
+  undefined1 *savedLaneSourcesAlias;
   
   arena = *(undefined4 *)(*(int *)(program + 8) + 0x378);
-  iStack0000001c = param_2;
+  iStack0000001c = scopeId;
   allocation = (undefined4 *)Arena__alloc(arena,0x14);
   *allocation = arena;
   allocation[1] = 2;
@@ -658,65 +751,65 @@ int FUN_001102e0(program, param_2, vector)
           _memset((void *)(vectorAt418BCount * 4 + vectorAt418B[2]),0,(vectorAt418BIndex - vectorAt418BCount) * 4 + 4);
           vectorAt418B[1] = vectorAt418BIndex + 1;
         }
-        piVar24 = (int *)(vectorAt418BIndex * 4 + vectorAt418B[2]);
+        linkRecordRef = (int *)(vectorAt418BIndex * 4 + vectorAt418B[2]);
       }
       else {
-        piVar24 = (int *)Vector__elementRefGrow(vectorAt418B,vectorAt418BIndex);
+        linkRecordRef = (int *)Vector__elementRefGrow(vectorAt418B,vectorAt418BIndex);
       }
       vectorAt418BIndex = vectorAt418BIndex + 1;
-      piVar24 = (int *)*piVar24;
-      if (iStack0000001c == piVar24[7]) {
-        uVar7 = allocation[2];
-        if ((int)uVar7 < 1) {
-          iVar8 = *piVar24;
+      linkRecordRef = (int *)*linkRecordRef;
+      if (iStack0000001c == linkRecordRef[7]) {
+        allocationCount = allocation[2];
+        if ((int)allocationCount < 1) {
+          recordInst = *linkRecordRef;
         }
         else {
-          iVar8 = *piVar24;
-          uVar32 = 0;
-          uVar31 = uVar7;
+          recordInst = *linkRecordRef;
+          searchIndex = 0;
+          searchRemaining = allocationCount;
           do {
-            piVar24 = (int *)0x0;
-            if (uVar32 < uVar7) {
-              piVar24 = (int *)(uVar32 * 4 + allocation[3]);
+            searchRef = (int *)0x0;
+            if (searchIndex < allocationCount) {
+              searchRef = (int *)(searchIndex * 4 + allocation[3]);
             }
-            if (*piVar24 == iVar8) goto LAB_0011047c;
-            uVar32 = uVar32 + 1;
-            uVar31 = uVar31 - 1;
-          } while (uVar31 != 0);
+            if (*searchRef == recordInst) goto LAB_0011047c;
+            searchIndex = searchIndex + 1;
+            searchRemaining = searchRemaining - 1;
+          } while (searchRemaining != 0);
         }
-        if (uVar7 < (uint)allocation[1]) {
-          _memset((void *)(uVar7 * 4 + allocation[3]),0,4);
-          piVar24 = (int *)(uVar7 * 4 + allocation[3]);
-          allocation[2] = uVar7 + 1;
+        if (allocationCount < (uint)allocation[1]) {
+          _memset((void *)(allocationCount * 4 + allocation[3]),0,4);
+          newSlotRef = (int *)(allocationCount * 4 + allocation[3]);
+          allocation[2] = allocationCount + 1;
         }
         else {
-          piVar24 = (int *)Vector__elementRefGrow(allocation + 1,uVar7);
+          newSlotRef = (int *)Vector__elementRefGrow(allocation + 1,allocationCount);
         }
-        *piVar24 = iVar8;
+        *newSlotRef = recordInst;
       }
 LAB_0011047c:
       vectorAt418B = *(uint **)(program + 0x418);
       vectorAt418BCount = vectorAt418B[1];
     } while (vectorAt418BIndex < vectorAt418BCount);
   }
-  uVar7 = allocation[2];
-  local_68 = ((int)uVar7 >> 2) + (uint)((int)uVar7 < 0 && (uVar7 & 3) != 0);
-  *(uint *)(program + 0x428) = uVar7;
-  if ((uVar7 & 3) != 0) {
-    local_68 = local_68 + 1;
+  allocationCount = allocation[2];
+  vec4GroupCount = ((int)allocationCount >> 2) + (uint)((int)allocationCount < 0 && (allocationCount & 3) != 0);
+  *(uint *)(program + 0x428) = allocationCount;
+  if ((allocationCount & 3) != 0) {
+    vec4GroupCount = vec4GroupCount + 1;
   }
-  iVar8 = ((int (*)())FUN_0010f704)(iStack0000001c,vectorAt418B,*(undefined4 *)(program + 8));
-  if (local_68 < iVar8) {
-    uVar7 = vector[1];
+  groupLimit = ((int (*)())FUN_0010f704)(iStack0000001c,vectorAt418B,*(undefined4 *)(program + 8));
+  if (vec4GroupCount < groupLimit) {
+    packEntryCount = vector[1];
     vectorIndex = 0;
-    if (uVar7 == 0) {
-      uVar7 = 0;
+    if (packEntryCount == 0) {
+      packEntryCount = 0;
     }
     else {
       do {
         if (vectorIndex < *vector) {
-          if (uVar7 <= vectorIndex) {
-            _memset((void *)(uVar7 * 4 + vector[2]),0,(vectorIndex - uVar7) * 4 + 4);
+          if (packEntryCount <= vectorIndex) {
+            _memset((void *)(packEntryCount * 4 + vector[2]),0,(vectorIndex - packEntryCount) * 4 + 4);
             vector[1] = vectorIndex + 1;
           }
           vectorElementRef = (undefined4 *)(vectorIndex * 4 + vector[2]);
@@ -726,15 +819,15 @@ LAB_0011047c:
         }
         vectorIndex = vectorIndex + 1;
         DList__unlink(*(undefined4 *)*vectorElementRef);
-        uVar7 = vector[1];
-      } while (vectorIndex < uVar7);
+        packEntryCount = vector[1];
+      } while (vectorIndex < packEntryCount);
     }
-    if (uVar7 != 0) {
+    if (packEntryCount != 0) {
       vectorIndex = 0;
       do {
         if (vectorIndex < *vector) {
-          if (uVar7 <= vectorIndex) {
-            _memset((void *)(uVar7 * 4 + vector[2]),0,(vectorIndex - uVar7) * 4 + 4);
+          if (packEntryCount <= vectorIndex) {
+            _memset((void *)(packEntryCount * 4 + vector[2]),0,(vectorIndex - packEntryCount) * 4 + 4);
             vector[1] = vectorIndex + 1;
           }
           vectorElementRef = (undefined4 *)(vectorIndex * 4 + vector[2]);
@@ -744,15 +837,15 @@ LAB_0011047c:
         }
         vectorIndex = vectorIndex + 1;
         vectorElement = (int *)*vectorElementRef;
-        iVar8 = 0;
-        piVar24 = vectorElement;
+        laneCounter = 0;
+        laneSourceCursor = vectorElement;
         do {
-          iVar9 = IRInst__getOperandRecord(*vectorElement,0);
-          if ((*(char *)(iVar8 + iVar9 + 0x10) != '\x01') &&
-             (iVar9 = FUN_0010e3b4(vectorElement,iVar8), -1 < iVar9)) {
-            iVar5 = vectorElement[5];
-            piVar24[1] = 0;
-            vectorElement[5] = iVar5 + -1;
+          operandOrSlot = IRInst__getOperandRecord(*vectorElement,0);
+          if ((*(char *)(laneCounter + operandOrSlot + 0x10) != '\x01') &&
+             (operandOrSlot = FUN_0010e3b4(vectorElement,laneCounter), -1 < operandOrSlot)) {
+            entryLanesLeft = vectorElement[5];
+            laneSourceCursor[1] = 0;
+            vectorElement[5] = entryLanesLeft + -1;
             vectorAt418B = *(uint **)(program + 0x418);
             vectorAt418BCount = vectorAt418B[1];
             if (vectorAt418BCount != 0) {
@@ -769,9 +862,9 @@ LAB_0011047c:
                   vectorAt418BElementRef = (int *)Vector__elementRefGrow(vectorAt418B,vectorAt418BIndex2);
                 }
                 vectorAt418BElement = *vectorAt418BElementRef;
-                if (((iStack0000001c == *(int *)(vectorAt418BElement + 0x1c)) && (*(int *)(vectorAt418BElement + 0x10) == iVar8)
+                if (((iStack0000001c == *(int *)(vectorAt418BElement + 0x1c)) && (*(int *)(vectorAt418BElement + 0x10) == laneCounter)
                     ) && (*(int *)(vectorAt418BElement + 0xc) == *(int *)(*vectorElement + 0x94))) {
-                  *(int *)(vectorAt418BElement + 0x18) = iVar9;
+                  *(int *)(vectorAt418BElement + 0x18) = operandOrSlot;
                   break;
                 }
                 vectorAt418B = *(uint **)(program + 0x418);
@@ -779,27 +872,27 @@ LAB_0011047c:
                 vectorAt418BCount = vectorAt418B[1];
               } while (vectorAt418BIndex2 < vectorAt418BCount);
             }
-            *(undefined1 *)(iVar8 + *vectorElement + 0x9c) = 1;
+            *(undefined1 *)(laneCounter + *vectorElement + 0x9c) = 1;
           }
-          bVar1 = iVar8 != 3;
-          piVar24 = piVar24 + 1;
-          iVar8 = iVar8 + 1;
-        } while (bVar1);
-        uVar7 = vector[1];
-      } while (vectorIndex < uVar7);
+          notLastLane = laneCounter != 3;
+          laneSourceCursor = laneSourceCursor + 1;
+          laneCounter = laneCounter + 1;
+        } while (notLastLane);
+        packEntryCount = vector[1];
+      } while (vectorIndex < packEntryCount);
     }
-    iVar8 = (**(code **)(**(int **)(*(int *)(program + 8) + 0x30c) + 0xc4))();
-    if (iVar8 == 0) {
-      uVar7 = vector[1];
+    packingSupported = (**(code **)(**(int **)(*(int *)(program + 8) + 0x30c) + 0xc4))();
+    if (packingSupported == 0) {
+      packEntryCount = vector[1];
       vectorIndex = 0;
-      if (uVar7 == 0) {
-        uVar7 = 0;
+      if (packEntryCount == 0) {
+        packEntryCount = 0;
       }
       else {
         do {
           if (vectorIndex < *vector) {
-            if (uVar7 <= vectorIndex) {
-              _memset((void *)(uVar7 * 4 + vector[2]),0,(vectorIndex - uVar7) * 4 + 4);
+            if (packEntryCount <= vectorIndex) {
+              _memset((void *)(packEntryCount * 4 + vector[2]),0,(vectorIndex - packEntryCount) * 4 + 4);
               vector[1] = vectorIndex + 1;
             }
             vectorElementRef = (undefined4 *)(vectorIndex * 4 + vector[2]);
@@ -809,35 +902,35 @@ LAB_0011047c:
           }
           vectorIndex = vectorIndex + 1;
           vectorElement2 = (int *)*vectorElementRef;
-          iVar8 = FUN_0010ecb8(*vectorElement2);
-          if (iVar8 != 0) {
-            iVar8 = 0;
+          needsLaneFixup = FUN_0010ecb8(*vectorElement2);
+          if (needsLaneFixup != 0) {
+            laneCounter = 0;
             do {
-              iVar9 = IRInst__getOperandRecord(*vectorElement2,0);
-              if ((*(char *)(iVar8 + iVar9 + 0x10) == '\x01') && (iVar9 = iVar8 + 1, iVar9 < 4)) {
+              entryDestOperand = IRInst__getOperandRecord(*vectorElement2,0);
+              if ((*(char *)(laneCounter + entryDestOperand + 0x10) == '\x01') && (entryDestOperand = laneCounter + 1, entryDestOperand < 4)) {
                 do {
-                  iVar5 = IRInst__getOperandRecord(*vectorElement2,0);
-                  if (*(char *)(iVar9 + iVar5 + 0x10) == '\0') {
-                    iVar14 = *vectorElement2;
-                    iVar5 = vectorElement2[iVar8 + 1];
-                    vectorElement2[iVar8 + 1] = vectorElement2[iVar9 + 1];
-                    vectorElement2[iVar9 + 1] = iVar5;
-                    *(undefined1 *)(iVar8 + iVar14 + 0x9c) = 0;
-                    *(undefined1 *)(iVar9 + *vectorElement2 + 0x9c) = 1;
-                    iVar5 = IRInst__getOperandRecord(*vectorElement2,1);
-                    uVar3 = *(undefined1 *)(iVar9 + iVar5 + 0x10);
-                    iVar5 = IRInst__getOperandRecord(*vectorElement2,1);
-                    uVar2 = *(undefined1 *)(iVar8 + iVar5 + 0x10);
-                    (**(code **)(*(int *)*vectorElement2 + 0x88))((int *)*vectorElement2,1,iVar8,uVar3);
-                    (**(code **)(*(int *)*vectorElement2 + 0x88))((int *)*vectorElement2,1,iVar9,uVar2);
+                  scanOperand = IRInst__getOperandRecord(*vectorElement2,0);
+                  if (*(char *)(entryDestOperand + scanOperand + 0x10) == '\0') {
+                    swapEntryInst = *vectorElement2;
+                    swappedLaneSource = vectorElement2[laneCounter + 1];
+                    vectorElement2[laneCounter + 1] = vectorElement2[entryDestOperand + 1];
+                    vectorElement2[entryDestOperand + 1] = swappedLaneSource;
+                    *(undefined1 *)(laneCounter + swapEntryInst + 0x9c) = 0;
+                    *(undefined1 *)(entryDestOperand + *vectorElement2 + 0x9c) = 1;
+                    srcOperand = IRInst__getOperandRecord(*vectorElement2,1);
+                    swizzleByteB = *(undefined1 *)(entryDestOperand + srcOperand + 0x10);
+                    srcOperand = IRInst__getOperandRecord(*vectorElement2,1);
+                    swizzleByteA = *(undefined1 *)(laneCounter + srcOperand + 0x10);
+                    (**(code **)(*(int *)*vectorElement2 + 0x88))((int *)*vectorElement2,1,laneCounter,swizzleByteB);
+                    (**(code **)(*(int *)*vectorElement2 + 0x88))((int *)*vectorElement2,1,entryDestOperand,swizzleByteA);
                     break;
                   }
-                  bVar1 = iVar9 != 3;
-                  iVar9 = iVar9 + 1;
-                } while (bVar1);
+                  notLastLane = entryDestOperand != 3;
+                  entryDestOperand = entryDestOperand + 1;
+                } while (notLastLane);
               }
-              iVar8 = iVar8 + 1;
-            } while (iVar8 < 4);
+              laneCounter = laneCounter + 1;
+            } while (laneCounter < 4);
             vectorAt418B = *(uint **)(program + 0x418);
             vectorAt418BIndex2 = 0;
             vectorAt418BCount = vectorAt418B[1];
@@ -848,73 +941,73 @@ LAB_0011047c:
                     _memset((void *)(vectorAt418BCount * 4 + vectorAt418B[2]),0,(vectorAt418BIndex2 - vectorAt418BCount) * 4 + 4);
                     vectorAt418B[1] = vectorAt418BIndex2 + 1;
                   }
-                  piVar22 = (int *)(vectorAt418BIndex2 * 4 + vectorAt418B[2]);
+                  linkRecord = (int *)(vectorAt418BIndex2 * 4 + vectorAt418B[2]);
                 }
                 else {
-                  piVar22 = (int *)Vector__elementRefGrow(vectorAt418B,vectorAt418BIndex2);
+                  linkRecord = (int *)Vector__elementRefGrow(vectorAt418B,vectorAt418BIndex2);
                 }
                 vectorAt418BIndex2 = vectorAt418BIndex2 + 1;
-                piVar22 = (int *)*piVar22;
-                if ((iStack0000001c == piVar22[7]) && (piVar22[3] == *(int *)(*vectorElement2 + 0x94))) {
-                  iVar9 = 4;
-                  iVar8 = 0;
-                  piVar10 = vectorElement2;
+                linkRecord = (int *)*linkRecord;
+                if ((iStack0000001c == linkRecord[7]) && (linkRecord[3] == *(int *)(*vectorElement2 + 0x94))) {
+                  laneCountdown = 4;
+                  laneCounter = 0;
+                  laneSourceWalk = vectorElement2;
                   do {
-                    if (*piVar22 == piVar10[1]) {
-                      piVar22[6] = iVar8;
+                    if (*linkRecord == laneSourceWalk[1]) {
+                      linkRecord[6] = laneCounter;
                       break;
                     }
-                    iVar8 = iVar8 + 1;
-                    piVar10 = piVar10 + 1;
-                    iVar9 = iVar9 + -1;
-                  } while (iVar9 != 0);
+                    laneCounter = laneCounter + 1;
+                    laneSourceWalk = laneSourceWalk + 1;
+                    laneCountdown = laneCountdown + -1;
+                  } while (laneCountdown != 0);
                 }
                 vectorAt418B = *(uint **)(program + 0x418);
                 vectorAt418BCount = vectorAt418B[1];
               } while (vectorAt418BIndex2 < vectorAt418BCount);
             }
           }
-          uVar7 = vector[1];
-        } while (vectorIndex < uVar7);
+          packEntryCount = vector[1];
+        } while (vectorIndex < packEntryCount);
       }
-      iVar8 = 4;
+      groupSizeRemaining = 4;
       do {
-        if (0 < (int)uVar7) {
+        if (0 < (int)packEntryCount) {
           vectorIndex = 0;
           do {
             if (vectorIndex < *vector) {
-              if (uVar7 <= vectorIndex) {
-                _memset((void *)(uVar7 * 4 + vector[2]),0,(vectorIndex - uVar7) * 4 + 4);
+              if (packEntryCount <= vectorIndex) {
+                _memset((void *)(packEntryCount * 4 + vector[2]),0,(vectorIndex - packEntryCount) * 4 + 4);
                 vector[1] = vectorIndex + 1;
-                uVar7 = vectorIndex + 1;
+                packEntryCount = vectorIndex + 1;
               }
               vectorElementRef = (undefined4 *)(vectorIndex * 4 + vector[2]);
             }
             else {
               vectorElementRef = (undefined4 *)Vector__elementRefGrow(vector,vectorIndex);
-              uVar7 = vector[1];
+              packEntryCount = vector[1];
             }
             vectorIndex = vectorIndex + 1;
             vectorElement2 = (int *)*vectorElementRef;
-            if ((iVar8 == vectorElement2[5]) && (uVar31 = 0, 0 < (int)uVar7)) {
+            if ((groupSizeRemaining == vectorElement2[5]) && (otherIndex = 0, 0 < (int)packEntryCount)) {
               do {
-                if (uVar31 < *vector) {
-                  if (uVar7 <= uVar31) {
-                    _memset((void *)(uVar7 * 4 + vector[2]),0,(uVar31 - uVar7) * 4 + 4);
-                    vector[1] = uVar31 + 1;
+                if (otherIndex < *vector) {
+                  if (packEntryCount <= otherIndex) {
+                    _memset((void *)(packEntryCount * 4 + vector[2]),0,(otherIndex - packEntryCount) * 4 + 4);
+                    vector[1] = otherIndex + 1;
                   }
-                  vectorElementRef = (undefined4 *)(uVar31 * 4 + vector[2]);
+                  vectorElementRef = (undefined4 *)(otherIndex * 4 + vector[2]);
                 }
                 else {
-                  vectorElementRef = (undefined4 *)Vector__elementRefGrow(vector,uVar31);
+                  vectorElementRef = (undefined4 *)Vector__elementRefGrow(vector,otherIndex);
                 }
                 vectorElement = (int *)*vectorElementRef;
-                iVar9 = FUN_0010e460(vectorElement,vectorElement2,local_94);
-                if (iVar9 != 0) {
+                matchResult = FUN_0010e460(vectorElement,vectorElement2,savedSwizzleWords);
+                if (matchResult != 0) {
                   vectorAt418B = *(uint **)(program + 0x418);
                   vectorAt418BCount = vectorAt418B[1];
-                  iVar9 = *(int *)(*vectorElement + 0x94);
-                  uVar25 = *(undefined4 *)(*vectorElement2 + 0x94);
+                  candidateDestRegister = *(int *)(*vectorElement + 0x94);
+                  destRegister = *(undefined4 *)(*vectorElement2 + 0x94);
                   if (0 < (int)vectorAt418BCount) {
                     vectorAt418BIndex3 = 0;
                     do {
@@ -931,42 +1024,42 @@ LAB_0011047c:
                       vectorAt418BIndex3 = vectorAt418BIndex3 + 1;
                       vectorAt418BElement = *vectorAt418BElementRef;
                       if (((iStack0000001c == *(int *)(vectorAt418BElement + 0x1c)) &&
-                          (iVar9 == *(int *)(vectorAt418BElement + 0x14))) &&
-                         (local_94[*(int *)(vectorAt418BElement + 0x18)] != -1)) {
-                        *(int *)(vectorAt418BElement + 0x18) = local_94[*(int *)(vectorAt418BElement + 0x18)];
-                        *(undefined4 *)(vectorAt418BElement + 0x14) = uVar25;
+                          (candidateDestRegister == *(int *)(vectorAt418BElement + 0x14))) &&
+                         (savedSwizzleWords[*(int *)(vectorAt418BElement + 0x18)] != -1)) {
+                        *(int *)(vectorAt418BElement + 0x18) = savedSwizzleWords[*(int *)(vectorAt418BElement + 0x18)];
+                        *(undefined4 *)(vectorAt418BElement + 0x14) = destRegister;
                       }
                       vectorAt418B = *(uint **)(program + 0x418);
                       vectorAt418BCount = vectorAt418B[1];
                     } while ((int)vectorAt418BIndex3 < (int)vectorAt418BCount);
                   }
                   Vector__removeValue(vector,vectorElement);
-                  uVar31 = uVar31 - 1;
+                  otherIndex = otherIndex - 1;
                   Program__removeInst(program,*vectorElement);
                   *(int *)(program + 0x230) = *(int *)(program + 0x230) + 1;
                 }
-                uVar7 = vector[1];
-                uVar31 = uVar31 + 1;
-              } while ((int)uVar31 < (int)uVar7);
+                packEntryCount = vector[1];
+                otherIndex = otherIndex + 1;
+              } while ((int)otherIndex < (int)packEntryCount);
             }
-          } while ((int)vectorIndex < (int)uVar7);
+          } while ((int)vectorIndex < (int)packEntryCount);
         }
-        iVar8 = iVar8 + -1;
-      } while (iVar8 != 0);
+        groupSizeRemaining = groupSizeRemaining + -1;
+      } while (groupSizeRemaining != 0);
     }
-    puVar30 = (uint *)0x0;
-    iVar8 = (**(code **)(**(int **)(*(int *)(program + 8) + 0x30c) + 0xc4))();
-    if (iVar8 != 0) {
+    outVector = (uint *)0x0;
+    packingSupported = (**(code **)(**(int **)(*(int *)(program + 8) + 0x30c) + 0xc4))();
+    if (packingSupported != 0) {
       arena = *(undefined4 *)(*(int *)(program + 8) + 0x378);
       allocation = (undefined4 *)Arena__alloc(arena,0x14);
-      puVar30 = allocation + 1;
+      outVector = allocation + 1;
       allocation[1] = 2;
       *allocation = arena;
       allocation[2] = 0;
       allocation[4] = arena;
       vectorData = Arena__alloc(arena,8);
       vectorCount2 = vector[1];
-      iVar8 = 4;
+      groupSizeRemaining = 4;
       allocation[3] = vectorData;
       do {
         if (vectorCount2 == 0) break;
@@ -978,49 +1071,49 @@ LAB_0011047c:
                 _memset((void *)(vectorCount2 * 4 + vector[2]),0,(vectorIndex - vectorCount2) * 4 + 4);
                 vector[1] = vectorIndex + 1;
               }
-              puVar11 = (undefined4 *)(vectorIndex * 4 + vector[2]);
+              packEntryElemRef = (undefined4 *)(vectorIndex * 4 + vector[2]);
             }
             else {
-              puVar11 = (undefined4 *)Vector__elementRefGrow(vector,vectorIndex);
+              packEntryElemRef = (undefined4 *)Vector__elementRefGrow(vector,vectorIndex);
             }
-            puVar11 = (undefined4 *)*puVar11;
-            if (puVar11[5] == 0) {
-              Vector__removeValue(vector,puVar11);
+            packEntryElemRef = (undefined4 *)*packEntryElemRef;
+            if (packEntryElemRef[5] == 0) {
+              Vector__removeValue(vector,packEntryElemRef);
               vectorIndex = vectorIndex - 1;
-              Program__removeInst(program,*puVar11);
+              Program__removeInst(program,*packEntryElemRef);
               *(int *)(program + 0x230) = *(int *)(program + 0x230) + 1;
-              IRInst__getOperandRecord(*puVar11,0);
+              IRInst__getOperandRecord(*packEntryElemRef,0);
             }
-            else if (puVar11[5] == iVar8) {
-              Vector__removeValue(vector,puVar11);
-              FUN_0010f38c(puVar11,vector);
-              ((int (*)())FUN_0010ff24)(puVar11,*(undefined4 *)(program + 0x418));
-              uVar7 = allocation[2];
-              if (uVar7 < *puVar30) {
-                _memset((void *)(uVar7 * 4 + allocation[3]),0,4);
-                puVar12 = (undefined4 *)(uVar7 * 4 + allocation[3]);
-                allocation[2] = uVar7 + 1;
+            else if (packEntryElemRef[5] == groupSizeRemaining) {
+              Vector__removeValue(vector,packEntryElemRef);
+              FUN_0010f38c(packEntryElemRef,vector);
+              ((int (*)())FUN_0010ff24)(packEntryElemRef,*(undefined4 *)(program + 0x418));
+              allocationCount = allocation[2];
+              if (allocationCount < *outVector) {
+                _memset((void *)(allocationCount * 4 + allocation[3]),0,4);
+                allocRef = (undefined4 *)(allocationCount * 4 + allocation[3]);
+                allocation[2] = allocationCount + 1;
               }
               else {
-                puVar12 = (undefined4 *)Vector__elementRefGrow(puVar30,uVar7);
+                allocRef = (undefined4 *)Vector__elementRefGrow(outVector,allocationCount);
               }
-              *puVar12 = puVar11;
+              *allocRef = packEntryElemRef;
               vectorIndex = vectorIndex - 1;
             }
             vectorCount2 = vector[1];
             vectorIndex = vectorIndex + 1;
           } while ((int)vectorIndex < (int)vectorCount2);
         }
-        iVar8 = iVar8 + -1;
-      } while (iVar8 != 0);
+        groupSizeRemaining = groupSizeRemaining + -1;
+      } while (groupSizeRemaining != 0);
     }
-    iVar8 = (**(code **)(**(int **)(*(int *)(program + 8) + 0x30c) + 0xc4))();
-    if (iVar8 == 0) {
-      puVar30 = vector;
+    packingSupported = (**(code **)(**(int **)(*(int *)(program + 8) + 0x30c) + 0xc4))();
+    if (packingSupported == 0) {
+      outVector = vector;
     }
     arena = *(undefined4 *)(*(int *)(program + 8) + 0x378);
     allocation = (undefined4 *)Arena__alloc(arena,0x14);
-    puVar23 = allocation + 1;
+    allocationVector = allocation + 1;
     *allocation = arena;
     allocation[1] = 2;
     allocation[2] = 0;
@@ -1028,223 +1121,223 @@ LAB_0011047c:
     vectorData = Arena__alloc(arena,8);
     allocation[3] = vectorData;
     arena = *(undefined4 *)(*(int *)(program + 8) + 0x378);
-    puVar11 = (undefined4 *)Arena__alloc(arena,0x14);
-    puVar29 = puVar11 + 1;
-    *puVar11 = arena;
-    puVar11[1] = 2;
-    puVar11[2] = 0;
-    puVar11[4] = arena;
+    groupVectorAlloc = (undefined4 *)Arena__alloc(arena,0x14);
+    groupVector = groupVectorAlloc + 1;
+    *groupVectorAlloc = arena;
+    groupVectorAlloc[1] = 2;
+    groupVectorAlloc[2] = 0;
+    groupVectorAlloc[4] = arena;
     vectorData = Arena__alloc(arena,8);
-    puVar11[3] = vectorData;
-    iVar8 = 0;
-    piVar24 = &DAT_001fc1f0;
-    local_64 = &DAT_001b02ec;
+    groupVectorAlloc[3] = vectorData;
+    laneCounter = 0;
+    bucketCursor = &DAT_001fc1f0;
+    laneKindTableBase = &DAT_001b02ec;
     do {
-      piVar24[2] = 4;
-      iVar9 = *(int *)(local_64 + -0x8d8);
-      *piVar24 = iVar8;
-      piVar24[1] = iVar9;
+      bucketCursor[2] = 4;
+      defaultLaneKind = *(int *)(laneKindTableBase + -0x8d8);
+      *bucketCursor = laneCounter;
+      bucketCursor[1] = defaultLaneKind;
       arena = *(undefined4 *)(*(int *)(program + 8) + 0x378);
-      puVar12 = (undefined4 *)Arena__alloc(arena,0x14);
-      puVar12[1] = 2;
-      *puVar12 = arena;
-      puVar12[2] = 0;
-      puVar12[4] = arena;
+      bucketVectorAlloc = (undefined4 *)Arena__alloc(arena,0x14);
+      bucketVectorAlloc[1] = 2;
+      *bucketVectorAlloc = arena;
+      bucketVectorAlloc[2] = 0;
+      bucketVectorAlloc[4] = arena;
       vectorData = Arena__alloc(arena,8);
-      bVar1 = iVar8 != 0xb;
-      puVar12[3] = vectorData;
-      iVar8 = iVar8 + 1;
-      piVar24[3] = (int)(puVar12 + 1);
-      piVar24 = piVar24 + 4;
-    } while (bVar1);
-    uVar7 = puVar30[1];
-    if (0 < (int)uVar7) {
-      uVar26 = 0;
+      notLastBucket = laneCounter != 0xb;
+      bucketVectorAlloc[3] = vectorData;
+      laneCounter = laneCounter + 1;
+      bucketCursor[3] = (int)(bucketVectorAlloc + 1);
+      bucketCursor = bucketCursor + 4;
+    } while (notLastBucket);
+    recordCount = outVector[1];
+    if (0 < (int)recordCount) {
+      bucketScanIndex = 0;
       do {
-        if (uVar26 < *puVar30) {
-          if (uVar7 <= uVar26) {
-            _memset((void *)(uVar7 * 4 + puVar30[2]),0,(uVar26 - uVar7) * 4 + 4);
-            puVar30[1] = uVar26 + 1;
+        if (bucketScanIndex < *outVector) {
+          if (recordCount <= bucketScanIndex) {
+            _memset((void *)(recordCount * 4 + outVector[2]),0,(bucketScanIndex - recordCount) * 4 + 4);
+            outVector[1] = bucketScanIndex + 1;
           }
-          puVar12 = (undefined4 *)(uVar26 * 4 + puVar30[2]);
+          recordRef = (undefined4 *)(bucketScanIndex * 4 + outVector[2]);
         }
         else {
-          puVar12 = (undefined4 *)Vector__elementRefGrow(puVar30,uVar26);
+          recordRef = (undefined4 *)Vector__elementRefGrow(outVector,bucketScanIndex);
         }
-        uVar26 = uVar26 + 1;
-        piVar24 = (int *)*puVar12;
-        iVar5 = 0;
-        iVar9 = *piVar24;
-        iVar8 = *(int *)(iVar9 + 0x94);
-        puVar12 = &DAT_001fc1f4 + iVar8 * 4;
+        bucketScanIndex = bucketScanIndex + 1;
+        packEntry = (int *)*recordRef;
+        laneIndex = 0;
+        bucketInst = *packEntry;
+        bucketRegister = *(int *)(bucketInst + 0x94);
+        laneFlagBytePtr = &DAT_001fc1f4 + bucketRegister * 4;
         while( true ) {
-          iVar9 = IRInst__getOperandRecord(iVar9,0);
-          if (*(char *)(iVar5 + iVar9 + 0x10) != '\x01') {
-            *(undefined1 *)puVar12 = 0;
-            (DAT_001fc1f8)[iVar8 * 4] = (DAT_001fc1f8)[iVar8 * 4] + -1;
+          bucketInst = IRInst__getOperandRecord(bucketInst,0);
+          if (*(char *)(laneIndex + bucketInst + 0x10) != '\x01') {
+            *(undefined1 *)laneFlagBytePtr = 0;
+            (DAT_001fc1f8)[bucketRegister * 4] = (DAT_001fc1f8)[bucketRegister * 4] + -1;
           }
-          bVar1 = iVar5 == 3;
-          puVar12 = (undefined4 *)((int)puVar12 + 1);
-          iVar5 = iVar5 + 1;
-          if (bVar1) break;
-          iVar9 = *piVar24;
+          isLastLane = laneIndex == 3;
+          laneFlagBytePtr = (undefined4 *)((int)laneFlagBytePtr + 1);
+          laneIndex = laneIndex + 1;
+          if (isLastLane) break;
+          bucketInst = *packEntry;
         }
-        puVar33 = (uint *)(DAT_001fc1fc)[iVar8 * 4];
-        uVar7 = puVar33[1];
-        if (uVar7 < *puVar33) {
-          _memset((void *)(uVar7 * 4 + puVar33[2]),0,4);
-          puVar12 = (undefined4 *)(uVar7 * 4 + puVar33[2]);
-          puVar33[1] = uVar7 + 1;
+        bucketVector = (uint *)(DAT_001fc1fc)[bucketRegister * 4];
+        bucketVectorCount = bucketVector[1];
+        if (bucketVectorCount < *bucketVector) {
+          _memset((void *)(bucketVectorCount * 4 + bucketVector[2]),0,4);
+          bucketSlotRef = (undefined4 *)(bucketVectorCount * 4 + bucketVector[2]);
+          bucketVector[1] = bucketVectorCount + 1;
         }
         else {
-          puVar12 = (undefined4 *)Vector__elementRefGrow(puVar33,uVar7);
+          bucketSlotRef = (undefined4 *)Vector__elementRefGrow(bucketVector,bucketVectorCount);
         }
-        *puVar12 = piVar24;
-        uVar7 = puVar30[1];
-      } while ((int)uVar26 < (int)uVar7);
+        *bucketSlotRef = packEntry;
+        recordCount = outVector[1];
+      } while ((int)bucketScanIndex < (int)recordCount);
     }
-    iVar8 = 0;
-    piVar24 = DAT_001fc1f8;
+    laneCounter = 0;
+    bucketCursor = DAT_001fc1f8;
     do {
-      if (*piVar24 == 0) {
-        puVar30 = (uint *)piVar24[1];
-        uVar7 = puVar30[1];
-        if (0 < (int)uVar7) {
-          uVar26 = 0;
+      if (*bucketCursor == 0) {
+        bucketMembers = (uint *)bucketCursor[1];
+        recordCount = bucketMembers[1];
+        if (0 < (int)recordCount) {
+          bucketCopyIndex = 0;
           do {
-            if (uVar26 < *puVar30) {
-              if (uVar7 <= uVar26) {
-                _memset((void *)(uVar7 * 4 + puVar30[2]),0,(uVar26 - uVar7) * 4 + 4);
-                puVar30[1] = uVar26 + 1;
+            if (bucketCopyIndex < *bucketMembers) {
+              if (recordCount <= bucketCopyIndex) {
+                _memset((void *)(recordCount * 4 + bucketMembers[2]),0,(bucketCopyIndex - recordCount) * 4 + 4);
+                bucketMembers[1] = bucketCopyIndex + 1;
               }
-              puVar12 = (undefined4 *)(uVar26 * 4 + puVar30[2]);
+              recordRef = (undefined4 *)(bucketCopyIndex * 4 + bucketMembers[2]);
             }
             else {
-              puVar12 = (undefined4 *)Vector__elementRefGrow(puVar30,uVar26);
+              recordRef = (undefined4 *)Vector__elementRefGrow(bucketMembers,bucketCopyIndex);
             }
-            uVar26 = uVar26 + 1;
-            uVar7 = allocation[2];
-            if (uVar7 < *puVar23) {
-              _memset((void *)(uVar7 * 4 + allocation[3]),0,4);
-              puVar17 = (undefined4 *)(uVar7 * 4 + allocation[3]);
-              allocation[2] = uVar7 + 1;
+            bucketCopyIndex = bucketCopyIndex + 1;
+            allocationCount = allocation[2];
+            if (allocationCount < *allocationVector) {
+              _memset((void *)(allocationCount * 4 + allocation[3]),0,4);
+              copyRef = (undefined4 *)(allocationCount * 4 + allocation[3]);
+              allocation[2] = allocationCount + 1;
             }
             else {
-              puVar17 = (undefined4 *)Vector__elementRefGrow(puVar23,uVar7);
+              copyRef = (undefined4 *)Vector__elementRefGrow(allocationVector,allocationCount);
             }
-            *puVar17 = *puVar12;
-            puVar30 = (uint *)piVar24[1];
-            uVar7 = puVar30[1];
-          } while ((int)uVar26 < (int)uVar7);
+            *copyRef = *recordRef;
+            bucketMembers = (uint *)bucketCursor[1];
+            recordCount = bucketMembers[1];
+          } while ((int)bucketCopyIndex < (int)recordCount);
         }
       }
-      else if (*piVar24 < 4) {
-        uVar7 = puVar11[2];
-        if (uVar7 < *puVar29) {
-          _memset((void *)(uVar7 * 4 + puVar11[3]),0,4);
-          puVar12 = (undefined4 *)(uVar7 * 4 + puVar11[3]);
-          puVar11[2] = uVar7 + 1;
+      else if (*bucketCursor < 4) {
+        groupVectorCount = groupVectorAlloc[2];
+        if (groupVectorCount < *groupVector) {
+          _memset((void *)(groupVectorCount * 4 + groupVectorAlloc[3]),0,4);
+          bucketSlotRef = (undefined4 *)(groupVectorCount * 4 + groupVectorAlloc[3]);
+          groupVectorAlloc[2] = groupVectorCount + 1;
         }
         else {
-          puVar12 = (undefined4 *)Vector__elementRefGrow(puVar29,uVar7);
+          bucketSlotRef = (undefined4 *)Vector__elementRefGrow(groupVector,groupVectorCount);
         }
-        *puVar12 = &DAT_001fc1f0 + iVar8 * 4;
+        *bucketSlotRef = &DAT_001fc1f0 + laneCounter * 4;
       }
-      bVar1 = iVar8 != 0xb;
-      piVar24 = piVar24 + 4;
-      iVar8 = iVar8 + 1;
-    } while (bVar1);
-    local_54 = local_84;
-    uVar7 = puVar11[2];
-    iVar8 = 1;
-    local_58 = &DAT_001b02ec;
+      notLastBucket = laneCounter != 0xb;
+      bucketCursor = bucketCursor + 4;
+      laneCounter = laneCounter + 1;
+    } while (notLastBucket);
+    savedLaneSourcesAlias = savedLaneSources;
+    groupVectorCount = groupVectorAlloc[2];
+    requiredLanes = 1;
+    swizzleTableBase = &DAT_001b02ec;
     do {
-      if (0 < (int)uVar7) {
-        local_5c = local_94;
-        uVar26 = 0;
+      if (0 < (int)groupVectorCount) {
+        savedSwizzleWordsAlias = savedSwizzleWords;
+        groupIndex = 0;
         do {
-          if (uVar26 < *puVar29) {
-            if (uVar7 <= uVar26) {
-              _memset((void *)(uVar7 * 4 + puVar11[3]),0,(uVar26 - uVar7) * 4 + 4);
-              uVar7 = uVar26 + 1;
-              puVar11[2] = uVar7;
+          if (groupIndex < *groupVector) {
+            if (groupVectorCount <= groupIndex) {
+              _memset((void *)(groupVectorCount * 4 + groupVectorAlloc[3]),0,(groupIndex - groupVectorCount) * 4 + 4);
+              groupVectorCount = groupIndex + 1;
+              groupVectorAlloc[2] = groupVectorCount;
             }
-            puVar12 = (undefined4 *)(uVar26 * 4 + puVar11[3]);
+            groupEntryRef = (undefined4 *)(groupIndex * 4 + groupVectorAlloc[3]);
           }
           else {
-            puVar12 = (undefined4 *)Vector__elementRefGrow(puVar29,uVar26);
-            uVar7 = puVar11[2];
+            groupEntryRef = (undefined4 *)Vector__elementRefGrow(groupVector,groupIndex);
+            groupVectorCount = groupVectorAlloc[2];
           }
-          piVar24 = (int *)*puVar12;
-          iVar9 = *piVar24;
-          if ((iVar8 == piVar24[2]) && (uVar31 = 0, 0 < (int)uVar7)) {
+          packEntry = (int *)*groupEntryRef;
+          headInst = *packEntry;
+          if ((requiredLanes == packEntry[2]) && (otherIndex = 0, 0 < (int)groupVectorCount)) {
 LAB_00111270:
-            if (uVar31 < *puVar29) {
-              if (uVar7 <= uVar31) {
-                _memset((void *)(uVar7 * 4 + puVar11[3]),0,(uVar31 - uVar7) * 4 + 4);
-                puVar11[2] = uVar31 + 1;
+            if (otherIndex < *groupVector) {
+              if (groupVectorCount <= otherIndex) {
+                _memset((void *)(groupVectorCount * 4 + groupVectorAlloc[3]),0,(otherIndex - groupVectorCount) * 4 + 4);
+                groupVectorAlloc[2] = otherIndex + 1;
               }
-              puVar12 = (undefined4 *)(uVar31 * 4 + puVar11[3]);
+              groupEntryRef = (undefined4 *)(otherIndex * 4 + groupVectorAlloc[3]);
             }
             else {
-              puVar12 = (undefined4 *)Vector__elementRefGrow(puVar29,uVar31);
+              groupEntryRef = (undefined4 *)Vector__elementRefGrow(groupVector,otherIndex);
             }
-            piVar22 = (int *)*puVar12;
-            iVar5 = *piVar22;
-            if ((iVar5 == iVar9) || (iVar8 < 4 - piVar22[2])) goto LAB_001116e0;
-            Vector__removeValue(puVar29,piVar22);
-            puVar30 = (uint *)piVar22[3];
-            uVar7 = puVar30[1];
-            if (0 < (int)uVar7) {
-              uVar31 = 0;
+            otherEntry = (int *)*groupEntryRef;
+            candidateInst = *otherEntry;
+            if ((candidateInst == headInst) || (requiredLanes < 4 - otherEntry[2])) goto LAB_001116e0;
+            Vector__removeValue(groupVector,otherEntry);
+            candLaneVector = (uint *)otherEntry[3];
+            recordCount = candLaneVector[1];
+            if (0 < (int)recordCount) {
+              laneListIndex = 0;
               do {
-                if (uVar31 < *puVar30) {
-                  local_60 = uVar31 + 1;
-                  if (uVar7 <= uVar31) {
-                    _memset((void *)(uVar7 * 4 + puVar30[2]),0,(uVar31 - uVar7) * 4 + 4);
-                    puVar30[1] = local_60;
+                if (laneListIndex < *candLaneVector) {
+                  nextLaneListIndex = laneListIndex + 1;
+                  if (recordCount <= laneListIndex) {
+                    _memset((void *)(recordCount * 4 + candLaneVector[2]),0,(laneListIndex - recordCount) * 4 + 4);
+                    candLaneVector[1] = nextLaneListIndex;
                   }
-                  piVar10 = (int *)(uVar31 * 4 + puVar30[2]);
+                  laneRecord = (int *)(laneListIndex * 4 + candLaneVector[2]);
                 }
                 else {
-                  piVar10 = (int *)Vector__elementRefGrow(puVar30,uVar31);
-                  local_60 = uVar31 + 1;
+                  laneRecord = (int *)Vector__elementRefGrow(candLaneVector,laneListIndex);
+                  nextLaneListIndex = laneListIndex + 1;
                 }
-                iVar21 = 4;
-                piVar10 = (int *)*piVar10;
-                local_98 = *(undefined4 *)(local_64 + -0x8d8);
-                local_94[0] = *(int *)(local_58 + -0x8dc);
-                iVar14 = 0;
-                iVar15 = *piVar10;
-                piVar18 = piVar10;
+                wordCountdown = 4;
+                laneRecord = (int *)*laneRecord;
+                savedLaneKind = *(undefined4 *)(laneKindTableBase + -0x8d8);
+                savedSwizzleWords[0] = *(int *)(swizzleTableBase + -0x8dc);
+                laneStep = 0;
+                laneInst = *laneRecord;
+                groupWordCursor = laneRecord;
                 do {
-                  *(undefined4 *)(local_54 + iVar14) = 0;
-                  iVar14 = iVar14 + 4;
-                  piVar18[7] = 0;
-                  piVar18 = piVar18 + 1;
-                  iVar21 = iVar21 + -1;
-                } while (iVar21 != 0);
-                iVar14 = 0;
-                piVar18 = piVar24 + 1;
+                  *(undefined4 *)(savedLaneSourcesAlias + laneStep) = 0;
+                  laneStep = laneStep + 4;
+                  groupWordCursor[7] = 0;
+                  groupWordCursor = groupWordCursor + 1;
+                  wordCountdown = wordCountdown + -1;
+                } while (wordCountdown != 0);
+                laneStep = 0;
+                entryLaneFlagCursor = packEntry + 1;
                 do {
-                  if (*(char *)piVar18 == '\x01') {
-                    iVar21 = 0;
-                    puVar20 = (undefined1 *)(iVar15 + 0x9c);
-                    piVar13 = piVar10;
+                  if (*(char *)entryLaneFlagCursor == '\x01') {
+                    laneNumber = 0;
+                    laneFlagPtr = (undefined1 *)(laneInst + 0x9c);
+                    laneInstCursor = laneRecord;
 LAB_001113e0:
-                    piVar13 = piVar13 + 1;
-                    iVar16 = IRInst__getOperandRecord(iVar15,0);
-                    if (*(char *)(iVar21 + iVar16 + 0x10) == '\x01') goto LAB_00111508;
-                    iVar16 = IRInst__getOperandRecord(iVar15,1);
-                    piVar4 = local_5c;
-                    uVar3 = *(undefined1 *)(iVar21 + iVar16 + 0x10);
-                    *(undefined1 *)((int)local_94 + iVar14 + -4) = 0;
-                    *(undefined1 *)(iVar14 + (int)piVar4) = uVar3;
-                    iVar16 = piVar24[2];
-                    *(char *)piVar18 = '\0';
-                    piVar24[2] = iVar16 + -1;
+                    laneInstCursor = laneInstCursor + 1;
+                    candDestOperand = IRInst__getOperandRecord(laneInst,0);
+                    if (*(char *)(laneNumber + candDestOperand + 0x10) == '\x01') goto LAB_00111508;
+                    candSrcOperand = IRInst__getOperandRecord(laneInst,1);
+                    savedSwizzlePtr = savedSwizzleWordsAlias;
+                    srcSwizzleByte = *(undefined1 *)(laneNumber + candSrcOperand + 0x10);
+                    *(undefined1 *)((int)savedSwizzleWords + laneStep + -4) = 0;
+                    *(undefined1 *)(laneStep + (int)savedSwizzlePtr) = srcSwizzleByte;
+                    entryLaneBudget = packEntry[2];
+                    *(char *)entryLaneFlagCursor = '\0';
+                    packEntry[2] = entryLaneBudget + -1;
                     vectorAt418B = *(uint **)(program + 0x418);
-                    *(int *)(local_54 + iVar14 * 4) = *piVar13;
+                    *(int *)(savedLaneSourcesAlias + laneStep * 4) = *laneInstCursor;
                     vectorAt418BCount = vectorAt418B[1];
                     if (0 < (int)vectorAt418BCount) {
                       vectorAt418BIndex2 = 0;
@@ -1260,314 +1353,314 @@ LAB_001113e0:
                           vectorAt418BElementRef2 = (int *)Vector__elementRefGrow(vectorAt418B,vectorAt418BIndex2);
                         }
                         vectorAt418BIndex2 = vectorAt418BIndex2 + 1;
-                        iVar16 = *vectorAt418BElementRef2;
-                        if (((iStack0000001c == *(int *)(iVar16 + 0x1c)) &&
-                            (iVar5 == *(int *)(iVar16 + 0x14))) &&
-                           (iVar21 == *(int *)(iVar16 + 0x18))) {
-                          *(int *)(iVar16 + 0x18) = iVar14;
-                          *(int *)(iVar16 + 0x14) = iVar9;
+                        laneInstValue = *vectorAt418BElementRef2;
+                        if (((iStack0000001c == *(int *)(laneInstValue + 0x1c)) &&
+                            (candidateInst == *(int *)(laneInstValue + 0x14))) &&
+                           (laneNumber == *(int *)(laneInstValue + 0x18))) {
+                          *(int *)(laneInstValue + 0x18) = laneStep;
+                          *(int *)(laneInstValue + 0x14) = headInst;
                         }
                         vectorAt418B = *(uint **)(program + 0x418);
                         vectorAt418BCount = vectorAt418B[1];
                       } while ((int)vectorAt418BIndex2 < (int)vectorAt418BCount);
                     }
-                    *puVar20 = 1;
+                    *laneFlagPtr = 1;
                   }
 LAB_0011151c:
-                  bVar1 = iVar14 != 3;
-                  piVar18 = (int *)((int)piVar18 + 1);
-                  iVar14 = iVar14 + 1;
-                } while (bVar1);
-                iVar21 = 4;
-                iVar14 = 0;
-                piVar18 = piVar10;
+                  notLastLane = laneStep != 3;
+                  entryLaneFlagCursor = (int *)((int)entryLaneFlagCursor + 1);
+                  laneStep = laneStep + 1;
+                } while (notLastLane);
+                wordCountdown = 4;
+                laneStep = 0;
+                groupWordCursor = laneRecord;
                 do {
-                  iVar16 = *(int *)(local_54 + iVar14);
-                  iVar14 = iVar14 + 4;
-                  piVar18[7] = 1;
-                  piVar18[1] = iVar16;
-                  piVar18 = piVar18 + 1;
-                  iVar21 = iVar21 + -1;
-                } while (iVar21 != 0);
-                iVar21 = IRInst__getOperandRecord(iVar15,0);
-                iVar14 = local_94[0];
-                *(int *)(iVar21 + 8) = iVar9;
-                *(undefined4 *)(iVar15 + 0x9c) = local_98;
-                iVar15 = IRInst__getOperandRecord(iVar15,1);
-                *(int *)(iVar15 + 0x10) = iVar14;
-                puVar30 = (uint *)piVar24[3];
-                uVar7 = puVar30[1];
-                if (uVar7 < *puVar30) {
-                  _memset((void *)(uVar7 * 4 + puVar30[2]),0,4);
-                  piVar18 = (int *)(uVar7 * 4 + puVar30[2]);
-                  puVar30[1] = uVar7 + 1;
+                  savedLaneWord = *(int *)(savedLaneSourcesAlias + laneStep);
+                  laneStep = laneStep + 4;
+                  groupWordCursor[7] = 1;
+                  groupWordCursor[1] = savedLaneWord;
+                  groupWordCursor = groupWordCursor + 1;
+                  wordCountdown = wordCountdown + -1;
+                } while (wordCountdown != 0);
+                destOperandRec = IRInst__getOperandRecord(laneInst,0);
+                savedSwizzle = savedSwizzleWords[0];
+                *(int *)(destOperandRec + 8) = headInst;
+                *(undefined4 *)(laneInst + 0x9c) = savedLaneKind;
+                laneInst = IRInst__getOperandRecord(laneInst,1);
+                *(int *)(laneInst + 0x10) = savedSwizzle;
+                entryLaneVector = (uint *)packEntry[3];
+                recordCount = entryLaneVector[1];
+                if (recordCount < *entryLaneVector) {
+                  _memset((void *)(recordCount * 4 + entryLaneVector[2]),0,4);
+                  newLaneSlotRef = (int *)(recordCount * 4 + entryLaneVector[2]);
+                  entryLaneVector[1] = recordCount + 1;
                 }
                 else {
-                  piVar18 = (int *)Vector__elementRefGrow(puVar30,uVar7);
+                  newLaneSlotRef = (int *)Vector__elementRefGrow(entryLaneVector,recordCount);
                 }
-                *piVar18 = (int)piVar10;
-                puVar30 = (uint *)piVar22[3];
-                uVar7 = puVar30[1];
-                uVar31 = local_60;
-              } while ((int)local_60 < (int)uVar7);
+                *newLaneSlotRef = (int)laneRecord;
+                candLaneVector = (uint *)otherEntry[3];
+                recordCount = candLaneVector[1];
+                laneListIndex = nextLaneListIndex;
+              } while ((int)nextLaneListIndex < (int)recordCount);
             }
-            if (piVar24[2] < 1) {
-              puVar30 = (uint *)piVar24[3];
-              uVar31 = 0;
-              uVar7 = puVar30[1];
-              if (0 < (int)uVar7) {
+            if (packEntry[2] < 1) {
+              entryLaneVector = (uint *)packEntry[3];
+              laneListIndex = 0;
+              recordCount = entryLaneVector[1];
+              if (0 < (int)recordCount) {
                 do {
-                  if (uVar31 < *puVar30) {
-                    if (uVar7 <= uVar31) {
-                      _memset((void *)(uVar7 * 4 + puVar30[2]),0,(uVar31 - uVar7) * 4 + 4);
-                      puVar30[1] = uVar31 + 1;
+                  if (laneListIndex < *entryLaneVector) {
+                    if (recordCount <= laneListIndex) {
+                      _memset((void *)(recordCount * 4 + entryLaneVector[2]),0,(laneListIndex - recordCount) * 4 + 4);
+                      entryLaneVector[1] = laneListIndex + 1;
                     }
-                    puVar12 = (undefined4 *)(uVar31 * 4 + puVar30[2]);
+                    laneListRef = (undefined4 *)(laneListIndex * 4 + entryLaneVector[2]);
                   }
                   else {
-                    puVar12 = (undefined4 *)Vector__elementRefGrow(puVar30,uVar31);
+                    laneListRef = (undefined4 *)Vector__elementRefGrow(entryLaneVector,laneListIndex);
                   }
-                  uVar31 = uVar31 + 1;
-                  uVar7 = allocation[2];
-                  if (uVar7 < *puVar23) {
-                    _memset((void *)(uVar7 * 4 + allocation[3]),0,4);
-                    puVar17 = (undefined4 *)(uVar7 * 4 + allocation[3]);
-                    allocation[2] = uVar7 + 1;
+                  laneListIndex = laneListIndex + 1;
+                  allocationCount = allocation[2];
+                  if (allocationCount < *allocationVector) {
+                    _memset((void *)(allocationCount * 4 + allocation[3]),0,4);
+                    copyRef = (undefined4 *)(allocationCount * 4 + allocation[3]);
+                    allocation[2] = allocationCount + 1;
                   }
                   else {
-                    puVar17 = (undefined4 *)Vector__elementRefGrow(puVar23,uVar7);
+                    copyRef = (undefined4 *)Vector__elementRefGrow(allocationVector,allocationCount);
                   }
-                  *puVar17 = *puVar12;
-                  puVar30 = (uint *)piVar24[3];
-                  uVar7 = puVar30[1];
-                } while ((int)uVar31 < (int)uVar7);
+                  *copyRef = *laneListRef;
+                  entryLaneVector = (uint *)packEntry[3];
+                  recordCount = entryLaneVector[1];
+                } while ((int)laneListIndex < (int)recordCount);
               }
-              Vector__removeValue(puVar29,piVar24);
-              uVar7 = puVar11[2];
+              Vector__removeValue(groupVector,packEntry);
+              groupVectorCount = groupVectorAlloc[2];
             }
             else {
-              uVar7 = puVar11[2];
-              iVar8 = piVar24[2] + -1;
-              uVar26 = 1;
+              groupVectorCount = groupVectorAlloc[2];
+              requiredLanes = packEntry[2] + -1;
+              groupIndex = 1;
             }
             goto LAB_001116f4;
           }
 LAB_001116f0:
-          uVar26 = uVar26 + 1;
+          groupIndex = groupIndex + 1;
 LAB_001116f4: ;
-        } while ((int)uVar26 < (int)uVar7);
+        } while ((int)groupIndex < (int)groupVectorCount);
       }
-      iVar8 = iVar8 + 1;
-    } while (iVar8 < 4);
-    uVar26 = 0;
-    if (0 < (int)uVar7) {
+      requiredLanes = requiredLanes + 1;
+    } while (requiredLanes < 4);
+    groupIndex = 0;
+    if (0 < (int)groupVectorCount) {
       do {
-        if (uVar26 < *puVar29) {
-          if (uVar7 <= uVar26) {
-            _memset((void *)(uVar7 * 4 + puVar11[3]),0,(uVar26 - uVar7) * 4 + 4);
-            puVar11[2] = uVar26 + 1;
+        if (groupIndex < *groupVector) {
+          if (groupVectorCount <= groupIndex) {
+            _memset((void *)(groupVectorCount * 4 + groupVectorAlloc[3]),0,(groupIndex - groupVectorCount) * 4 + 4);
+            groupVectorAlloc[2] = groupIndex + 1;
           }
-          piVar24 = (int *)(uVar26 * 4 + puVar11[3]);
+          packEntryRef = (int *)(groupIndex * 4 + groupVectorAlloc[3]);
         }
         else {
-          piVar24 = (int *)Vector__elementRefGrow(puVar29,uVar26);
+          packEntryRef = (int *)Vector__elementRefGrow(groupVector,groupIndex);
         }
-        uVar26 = uVar26 + 1;
-        iVar8 = *piVar24;
-        puVar30 = *(uint **)(iVar8 + 0xc);
-        uVar7 = puVar30[1];
-        if (0 < (int)uVar7) {
-          uVar31 = 0;
+        groupIndex = groupIndex + 1;
+        entryInst = *packEntryRef;
+        entryMembersVector = *(uint **)(entryInst + 0xc);
+        recordCount = entryMembersVector[1];
+        if (0 < (int)recordCount) {
+          laneListIndex = 0;
           do {
-            if (uVar31 < *puVar30) {
-              if (uVar7 <= uVar31) {
-                _memset((void *)(uVar7 * 4 + puVar30[2]),0,(uVar31 - uVar7) * 4 + 4);
-                puVar30[1] = uVar31 + 1;
+            if (laneListIndex < *entryMembersVector) {
+              if (recordCount <= laneListIndex) {
+                _memset((void *)(recordCount * 4 + entryMembersVector[2]),0,(laneListIndex - recordCount) * 4 + 4);
+                entryMembersVector[1] = laneListIndex + 1;
               }
-              piVar24 = (int *)(uVar31 * 4 + puVar30[2]);
+              laneInstRef = (int *)(laneListIndex * 4 + entryMembersVector[2]);
             }
             else {
-              piVar24 = (int *)Vector__elementRefGrow(puVar30,uVar31);
+              laneInstRef = (int *)Vector__elementRefGrow(entryMembersVector,laneListIndex);
             }
-            uVar31 = uVar31 + 1;
-            uVar7 = allocation[2];
-            iVar9 = *piVar24;
-            if (uVar7 < *puVar23) {
-              _memset((void *)(uVar7 * 4 + allocation[3]),0,4);
-              piVar24 = (int *)(uVar7 * 4 + allocation[3]);
-              allocation[2] = uVar7 + 1;
+            laneListIndex = laneListIndex + 1;
+            allocationCount = allocation[2];
+            groupInst = *laneInstRef;
+            if (allocationCount < *allocationVector) {
+              _memset((void *)(allocationCount * 4 + allocation[3]),0,4);
+              newSlotRef = (int *)(allocationCount * 4 + allocation[3]);
+              allocation[2] = allocationCount + 1;
             }
             else {
-              piVar24 = (int *)Vector__elementRefGrow(puVar23,uVar7);
+              newSlotRef = (int *)Vector__elementRefGrow(allocationVector,allocationCount);
             }
-            *piVar24 = iVar9;
-            iVar14 = 4;
-            iVar5 = iVar8;
+            *newSlotRef = groupInst;
+            laneStepsLeft = 4;
+            laneFlagCursor = entryInst;
             do {
-              if (*(char *)(iVar5 + 4) == '\0') {
-                *(undefined4 *)(iVar9 + 0x1c) = 1;
+              if (*(char *)(laneFlagCursor + 4) == '\0') {
+                *(undefined4 *)(groupInst + 0x1c) = 1;
               }
-              iVar5 = iVar5 + 1;
-              iVar9 = iVar9 + 4;
-              iVar14 = iVar14 + -1;
-            } while (iVar14 != 0);
-            puVar30 = *(uint **)(iVar8 + 0xc);
-            uVar7 = puVar30[1];
-          } while ((int)uVar31 < (int)uVar7);
+              laneFlagCursor = laneFlagCursor + 1;
+              groupInst = groupInst + 4;
+              laneStepsLeft = laneStepsLeft + -1;
+            } while (laneStepsLeft != 0);
+            entryMembersVector = *(uint **)(entryInst + 0xc);
+            recordCount = entryMembersVector[1];
+          } while ((int)laneListIndex < (int)recordCount);
         }
-        uVar7 = puVar11[2];
-      } while ((int)uVar26 < (int)uVar7);
+        groupVectorCount = groupVectorAlloc[2];
+      } while ((int)groupIndex < (int)groupVectorCount);
     }
-    uVar7 = allocation[2];
-    if (0 < (int)uVar7) {
-      uVar26 = 0;
+    allocationCount = allocation[2];
+    if (0 < (int)allocationCount) {
+      groupIndex = 0;
       do {
-        if (uVar26 < *puVar23) {
-          if (uVar7 <= uVar26) {
-            _memset((void *)(uVar7 * 4 + allocation[3]),0,(uVar26 - uVar7) * 4 + 4);
-            allocation[2] = uVar26 + 1;
+        if (groupIndex < *allocationVector) {
+          if (allocationCount <= groupIndex) {
+            _memset((void *)(allocationCount * 4 + allocation[3]),0,(groupIndex - allocationCount) * 4 + 4);
+            allocation[2] = groupIndex + 1;
           }
-          puVar11 = (undefined4 *)(uVar26 * 4 + allocation[3]);
+          allocElemRef = (undefined4 *)(groupIndex * 4 + allocation[3]);
         }
         else {
-          puVar11 = (undefined4 *)Vector__elementRefGrow(puVar23,uVar26);
+          allocElemRef = (undefined4 *)Vector__elementRefGrow(allocationVector,groupIndex);
         }
-        uVar26 = uVar26 + 1;
-        puVar11 = (undefined4 *)*puVar11;
-        iVar8 = 0;
+        groupIndex = groupIndex + 1;
+        allocElemRef = (undefined4 *)*allocElemRef;
+        laneCounter = 0;
         do {
-          IRLoadInterp__setLaneKindAndIndex(*puVar11,iVar8,0,0);
-          bVar1 = iVar8 != 3;
-          iVar8 = iVar8 + 1;
-        } while (bVar1);
-        uVar7 = allocation[2];
-      } while ((int)uVar26 < (int)uVar7);
+          IRLoadInterp__setLaneKindAndIndex(*allocElemRef,laneCounter,0,0);
+          notLastLane = laneCounter != 3;
+          laneCounter = laneCounter + 1;
+        } while (notLastLane);
+        allocationCount = allocation[2];
+      } while ((int)groupIndex < (int)allocationCount);
     }
-    iVar8 = (**(code **)(**(int **)(*(int *)(program + 8) + 0x30c) + 0xc4))();
-    if (iVar8 == 0) {
-      uVar7 = allocation[2];
-      puVar30 = (uint *)0x0;
+    packingSupported = (**(code **)(**(int **)(*(int *)(program + 8) + 0x30c) + 0xc4))();
+    if (packingSupported == 0) {
+      allocationCount = allocation[2];
+      outVector = (uint *)0x0;
     }
     else {
       arena = *(undefined4 *)(*(int *)(program + 8) + 0x378);
-      puVar11 = (undefined4 *)Arena__alloc(arena,0x14);
-      puVar30 = puVar11 + 1;
-      *puVar11 = arena;
-      puVar11[1] = 2;
-      puVar11[2] = 0;
-      puVar11[4] = arena;
+      outVectorAlloc = (undefined4 *)Arena__alloc(arena,0x14);
+      outVector = outVectorAlloc + 1;
+      *outVectorAlloc = arena;
+      outVectorAlloc[1] = 2;
+      outVectorAlloc[2] = 0;
+      outVectorAlloc[4] = arena;
       vectorData = Arena__alloc(arena,8);
-      puVar11[3] = vectorData;
-      iVar8 = ((int (*)())FUN_0010f704)(iStack0000001c,*(undefined4 *)(program + 0x418),
+      outVectorAlloc[3] = vectorData;
+      groupCursor = ((int (*)())FUN_0010f704)(iStack0000001c,*(undefined4 *)(program + 0x418),
                            *(undefined4 *)(program + 8));
-      if (local_68 < iVar8) {
-        uVar7 = allocation[2];
+      if (vec4GroupCount < groupCursor) {
+        allocationCount = allocation[2];
         do {
-          iVar9 = 1;
-          piVar24 = (int *)0x0;
+          lanePriority = 1;
+          candidateEntry = (int *)0x0;
           do {
-            uVar26 = 0;
-            if (0 < (int)uVar7) {
+            allocIndex = 0;
+            if (0 < (int)allocationCount) {
               do {
-                if (uVar26 < *puVar23) {
-                  if (uVar7 <= uVar26) {
-                    _memset((void *)(uVar7 * 4 + allocation[3]),0,(uVar26 - uVar7) * 4 + 4);
-                    allocation[2] = uVar26 + 1;
+                if (allocIndex < *allocationVector) {
+                  if (allocationCount <= allocIndex) {
+                    _memset((void *)(allocationCount * 4 + allocation[3]),0,(allocIndex - allocationCount) * 4 + 4);
+                    allocation[2] = allocIndex + 1;
                   }
-                  puVar12 = (undefined4 *)(uVar26 * 4 + allocation[3]);
+                  allocRef = (undefined4 *)(allocIndex * 4 + allocation[3]);
                 }
                 else {
-                  puVar12 = (undefined4 *)Vector__elementRefGrow(puVar23,uVar26);
+                  allocRef = (undefined4 *)Vector__elementRefGrow(allocationVector,allocIndex);
                 }
-                piVar24 = (int *)*puVar12;
-                if (piVar24[5] == iVar9) {
-                  Vector__removeValue(puVar23,piVar24);
-                  Program__removeInst(program,*piVar24);
+                candidateEntry = (int *)*allocRef;
+                if (candidateEntry[5] == lanePriority) {
+                  Vector__removeValue(allocationVector,candidateEntry);
+                  Program__removeInst(program,*candidateEntry);
                   *(int *)(program + 0x230) = *(int *)(program + 0x230) + 1;
-                  uVar7 = allocation[2];
+                  allocationCount = allocation[2];
                   goto code_r0x00111aa4;
                 }
-                uVar7 = allocation[2];
-                uVar26 = uVar26 + 1;
-              } while ((int)uVar26 < (int)uVar7);
+                allocationCount = allocation[2];
+                allocIndex = allocIndex + 1;
+              } while ((int)allocIndex < (int)allocationCount);
             }
-            iVar9 = iVar9 + 1;
-          } while (iVar9 < 5);
+            lanePriority = lanePriority + 1;
+          } while (lanePriority < 5);
 code_r0x00111aa4:
-          iVar9 = 3;
+          laneCountTarget = 3;
           do {
-            if (0 < (int)uVar7) {
-              uVar26 = 0;
+            if (0 < (int)allocationCount) {
+              allocIndex = 0;
               do {
-                if (uVar26 < *puVar23) {
-                  if (uVar7 <= uVar26) {
-                    _memset((void *)(uVar7 * 4 + allocation[3]),0,(uVar26 - uVar7) * 4 + 4);
-                    allocation[2] = uVar26 + 1;
+                if (allocIndex < *allocationVector) {
+                  if (allocationCount <= allocIndex) {
+                    _memset((void *)(allocationCount * 4 + allocation[3]),0,(allocIndex - allocationCount) * 4 + 4);
+                    allocation[2] = allocIndex + 1;
                   }
-                  puVar12 = (undefined4 *)(uVar26 * 4 + allocation[3]);
+                  allocRef = (undefined4 *)(allocIndex * 4 + allocation[3]);
                 }
                 else {
-                  puVar12 = (undefined4 *)Vector__elementRefGrow(puVar23,uVar26);
+                  allocRef = (undefined4 *)Vector__elementRefGrow(allocationVector,allocIndex);
                 }
-                piVar22 = (int *)*puVar12;
-                iVar5 = FUN_0010e95c(piVar22);
-                if (iVar9 == iVar5) {
-                  iVar5 = 0;
-                  puVar12 = (undefined4 *)PTR_DAT_001e8b64;
-                  piVar10 = piVar22;
+                candidateGroup = (int *)*allocRef;
+                candidateLaneCount = FUN_0010e95c(candidateGroup);
+                if (laneCountTarget == candidateLaneCount) {
+                  laneIndex = 0;
+                  laneKindTable = (undefined4 *)PTR_DAT_001e8b64;
+                  candidateWordCursor = candidateGroup;
                   do {
-                    iVar14 = FUN_0010e9d0(piVar22,iVar5);
-                    if (iVar14 != 0) {
-                      iVar14 = 0;
+                    laneSourceInst = FUN_0010e9d0(candidateGroup,laneIndex);
+                    if (laneSourceInst != 0) {
+                      laneStep = 0;
                       do {
-                        iVar15 = IRInst__getOperandRecord(*piVar24,0);
-                        if (*(char *)(iVar14 + iVar15 + 0x10) != '\x01') {
-                          iVar21 = piVar24[iVar14 + 1];
-                          *(undefined1 *)(iVar14 + *piVar24 + 0x9c) = 1;
-                          iVar15 = piVar24[5];
-                          piVar24[iVar14 + 1] = 0;
-                          piVar24[5] = iVar15 + -1;
+                        headDestOperand = IRInst__getOperandRecord(*candidateEntry,0);
+                        if (*(char *)(laneStep + headDestOperand + 0x10) != '\x01') {
+                          laneSource = candidateEntry[laneStep + 1];
+                          *(undefined1 *)(laneStep + *candidateEntry + 0x9c) = 1;
+                          headLanesLeft = candidateEntry[5];
+                          candidateEntry[laneStep + 1] = 0;
+                          candidateEntry[5] = headLanesLeft + -1;
                           goto code_r0x00111b80;
                         }
-                        bVar1 = iVar14 != 3;
-                        iVar14 = iVar14 + 1;
-                      } while (bVar1);
-                      iVar14 = -1;
-                      iVar21 = 0;
+                        notLastLane = laneStep != 3;
+                        laneStep = laneStep + 1;
+                      } while (notLastLane);
+                      laneStep = -1;
+                      laneSource = 0;
 code_r0x00111b80:
-                      iVar19 = *(int *)(*piVar24 + 0x94);
-                      iVar15 = IRInst__clone(*piVar24,*(undefined4 *)(program + 8),0);
-                      uVar27 = *(undefined4 *)(*piVar22 + 0x94);
-                      iVar16 = IRInst__getOperandRecord(iVar15,0);
-                      uVar25 = *puVar12;
-                      *(undefined4 *)(iVar16 + 8) = uVar27;
-                      *(undefined4 *)(iVar15 + 0x9c) = uVar25;
-                      iVar16 = IRInst__getOperandRecord(*piVar24,1);
-                      uVar25 = *(undefined4 *)
-                                (PTR_DAT_001e8b8c + (uint)*(byte *)(iVar14 + iVar16 + 0x10) * 4);
-                      iVar16 = IRInst__getOperandRecord(iVar15,1);
-                      *(undefined4 *)(iVar16 + 0x10) = uVar25;
-                      Program__addInst(program,iVar15);
+                      headDestRegister = *(int *)(*candidateEntry + 0x94);
+                      clonedInst = IRInst__clone(*candidateEntry,*(undefined4 *)(program + 8),0);
+                      candDestRegister = *(undefined4 *)(*candidateGroup + 0x94);
+                      cloneDestOperand = IRInst__getOperandRecord(clonedInst,0);
+                      laneKindValue = *laneKindTable;
+                      *(undefined4 *)(cloneDestOperand + 8) = candDestRegister;
+                      *(undefined4 *)(clonedInst + 0x9c) = laneKindValue;
+                      headSrcOperand = IRInst__getOperandRecord(*candidateEntry,1);
+                      swizzleCode = *(undefined4 *)
+                                (PTR_DAT_001e8b8c + (uint)*(byte *)(laneStep + headSrcOperand + 0x10) * 4);
+                      cloneSrcOperand = IRInst__getOperandRecord(clonedInst,1);
+                      *(undefined4 *)(cloneSrcOperand + 0x10) = swizzleCode;
+                      Program__addInst(program,clonedInst);
                       *(int *)(program + 0x230) = *(int *)(program + 0x230) + -1;
                       arena = *(undefined4 *)(*(int *)(program + 8) + 0x374);
-                      puVar17 = (undefined4 *)Arena__alloc(arena,0x30);
-                      puVar28 = puVar17 + 1;
-                      *puVar17 = arena;
-                      FUN_0010e814(puVar28,iVar15);
-                      puVar17[6] = 1;
-                      puVar28[iVar5 + 1] = iVar21;
-                      uVar7 = puVar11[2];
-                      if (uVar7 < *puVar30) {
-                        _memset((void *)(uVar7 * 4 + puVar11[3]),0,4);
-                        piVar18 = (int *)(uVar7 * 4 + puVar11[3]);
-                        puVar11[2] = uVar7 + 1;
+                      newEntryAlloc = (undefined4 *)Arena__alloc(arena,0x30);
+                      newEntry = newEntryAlloc + 1;
+                      *newEntryAlloc = arena;
+                      FUN_0010e814(newEntry,clonedInst);
+                      newEntryAlloc[6] = 1;
+                      newEntry[laneIndex + 1] = laneSource;
+                      groupVectorCount = outVectorAlloc[2];
+                      if (groupVectorCount < *outVector) {
+                        _memset((void *)(groupVectorCount * 4 + outVectorAlloc[3]),0,4);
+                        newEntrySlotRef = (int *)(groupVectorCount * 4 + outVectorAlloc[3]);
+                        outVectorAlloc[2] = groupVectorCount + 1;
                       }
                       else {
-                        piVar18 = (int *)Vector__elementRefGrow(puVar30,uVar7);
+                        newEntrySlotRef = (int *)Vector__elementRefGrow(outVector,groupVectorCount);
                       }
-                      *piVar18 = (int)puVar28;
-                      uVar25 = *(undefined4 *)(iVar15 + 0x94);
-                      piVar10[7] = 1;
+                      *newEntrySlotRef = (int)newEntry;
+                      cloneDestRegister = *(undefined4 *)(clonedInst + 0x94);
+                      candidateWordCursor[7] = 1;
                       vectorAt418 = *(uint **)(program + 0x418);
                       vectorAt418Count = vectorAt418[1];
                       if (vectorAt418Count != 0) {
@@ -1586,78 +1679,78 @@ code_r0x00111b80:
                           vectorAt418Index = vectorAt418Index + 1;
                           vectorAt418Element = *vectorAt418ElementRef;
                           if (((iStack0000001c == *(int *)(vectorAt418Element + 0x1c)) &&
-                              (iVar19 == *(int *)(vectorAt418Element + 0x14))) &&
-                             (iVar14 == *(int *)(vectorAt418Element + 0x18))) {
-                            *(int *)(vectorAt418Element + 0x18) = iVar5;
-                            *(undefined4 *)(vectorAt418Element + 0x14) = uVar25;
+                              (headDestRegister == *(int *)(vectorAt418Element + 0x14))) &&
+                             (laneStep == *(int *)(vectorAt418Element + 0x18))) {
+                            *(int *)(vectorAt418Element + 0x18) = laneIndex;
+                            *(undefined4 *)(vectorAt418Element + 0x14) = cloneDestRegister;
                           }
                           vectorAt418 = *(uint **)(program + 0x418);
                           vectorAt418Count = vectorAt418[1];
                         } while (vectorAt418Index < vectorAt418Count);
                       }
-                      if (piVar24[5] == 0) {
-                        iVar9 = 0;
+                      if (candidateEntry[5] == 0) {
+                        laneCountTarget = 0;
                         break;
                       }
                     }
-                    bVar1 = iVar5 != 3;
-                    piVar10 = piVar10 + 1;
-                    puVar12 = puVar12 + 1;
-                    iVar5 = iVar5 + 1;
-                  } while (bVar1);
+                    notLastLane = laneIndex != 3;
+                    candidateWordCursor = candidateWordCursor + 1;
+                    laneKindTable = laneKindTable + 1;
+                    laneIndex = laneIndex + 1;
+                  } while (notLastLane);
                 }
-                uVar7 = allocation[2];
-                uVar26 = uVar26 + 1;
-              } while ((int)uVar26 < (int)uVar7);
+                allocationCount = allocation[2];
+                allocIndex = allocIndex + 1;
+              } while ((int)allocIndex < (int)allocationCount);
             }
-            iVar9 = iVar9 + -1;
-          } while (0 < iVar9);
-          iVar8 = iVar8 + -1;
-        } while (local_68 < iVar8);
+            laneCountTarget = laneCountTarget + -1;
+          } while (0 < laneCountTarget);
+          groupCursor = groupCursor + -1;
+        } while (vec4GroupCount < groupCursor);
       }
       else {
-        uVar7 = allocation[2];
+        allocationCount = allocation[2];
       }
     }
-    uVar25 = *(undefined4 *)(program + 0x3a8);
-    if (uVar7 != 0) {
-      uVar26 = 0;
+    entryBlock = *(undefined4 *)(program + 0x3a8);
+    if (allocationCount != 0) {
+      allocIndex = 0;
       do {
-        if (uVar26 < *puVar23) {
-          if (uVar7 <= uVar26) {
-            _memset((void *)(uVar7 * 4 + allocation[3]),0,(uVar26 - uVar7) * 4 + 4);
-            allocation[2] = uVar26 + 1;
+        if (allocIndex < *allocationVector) {
+          if (allocationCount <= allocIndex) {
+            _memset((void *)(allocationCount * 4 + allocation[3]),0,(allocIndex - allocationCount) * 4 + 4);
+            allocation[2] = allocIndex + 1;
           }
-          puVar11 = (undefined4 *)(uVar26 * 4 + allocation[3]);
+          allocElemRef = (undefined4 *)(allocIndex * 4 + allocation[3]);
         }
         else {
-          puVar11 = (undefined4 *)Vector__elementRefGrow(puVar23,uVar26);
+          allocElemRef = (undefined4 *)Vector__elementRefGrow(allocationVector,allocIndex);
         }
-        uVar26 = uVar26 + 1;
-        Block__appendInst(uVar25,*(undefined4 *)*puVar11);
-        uVar7 = allocation[2];
-      } while (uVar26 < uVar7);
+        allocIndex = allocIndex + 1;
+        Block__appendInst(entryBlock,*(undefined4 *)*allocElemRef);
+        allocationCount = allocation[2];
+      } while (allocIndex < allocationCount);
     }
-    iVar8 = (**(code **)(**(int **)(*(int *)(program + 8) + 0x30c) + 0xc4))();
-    if (iVar8 != 0) {
-      uVar26 = puVar30[1];
-      uVar7 = 0;
-      if (uVar26 != 0) {
+    packingSupported = (**(code **)(**(int **)(*(int *)(program + 8) + 0x30c) + 0xc4))();
+    if (packingSupported != 0) {
+      copyCount = outVector[1];
+      copyIndex = 0;
+      if (copyCount != 0) {
         do {
-          if (uVar7 < *puVar30) {
-            if (uVar26 <= uVar7) {
-              _memset((void *)(uVar26 * 4 + puVar30[2]),0,(uVar7 - uVar26) * 4 + 4);
-              puVar30[1] = uVar7 + 1;
+          if (copyIndex < *outVector) {
+            if (copyCount <= copyIndex) {
+              _memset((void *)(copyCount * 4 + outVector[2]),0,(copyIndex - copyCount) * 4 + 4);
+              outVector[1] = copyIndex + 1;
             }
-            puVar11 = (undefined4 *)(uVar7 * 4 + puVar30[2]);
+            groupElemRef = (undefined4 *)(copyIndex * 4 + outVector[2]);
           }
           else {
-            puVar11 = (undefined4 *)Vector__elementRefGrow(puVar30,uVar7);
+            groupElemRef = (undefined4 *)Vector__elementRefGrow(outVector,copyIndex);
           }
-          uVar7 = uVar7 + 1;
-          Block__appendInst(uVar25,*(undefined4 *)*puVar11);
-          uVar26 = puVar30[1];
-        } while (uVar7 < uVar26);
+          copyIndex = copyIndex + 1;
+          Block__appendInst(entryBlock,*(undefined4 *)*groupElemRef);
+          copyCount = outVector[1];
+        } while (copyIndex < copyCount);
       }
     }
     vectorCount2 = vector[1];
@@ -1665,77 +1758,77 @@ code_r0x00111b80:
       Vector__removeAt(vector,0);
       vectorCount2 = vector[1];
     }
-    uVar7 = allocation[2];
-    if (uVar7 != 0) {
-      uVar26 = 0;
+    allocationCount = allocation[2];
+    if (allocationCount != 0) {
+      allocIndex = 0;
       do {
-        if (uVar26 < *puVar23) {
-          if (uVar7 <= uVar26) {
-            _memset((void *)(uVar7 * 4 + allocation[3]),0,(uVar26 - uVar7) * 4 + 4);
-            allocation[2] = uVar26 + 1;
+        if (allocIndex < *allocationVector) {
+          if (allocationCount <= allocIndex) {
+            _memset((void *)(allocationCount * 4 + allocation[3]),0,(allocIndex - allocationCount) * 4 + 4);
+            allocation[2] = allocIndex + 1;
           }
-          puVar11 = (undefined4 *)(uVar26 * 4 + allocation[3]);
+          allocElemRef = (undefined4 *)(allocIndex * 4 + allocation[3]);
         }
         else {
-          puVar11 = (undefined4 *)Vector__elementRefGrow(puVar23,uVar26);
+          allocElemRef = (undefined4 *)Vector__elementRefGrow(allocationVector,allocIndex);
         }
-        uVar26 = uVar26 + 1;
+        allocIndex = allocIndex + 1;
         vectorCount2 = vector[1];
         if (vectorCount2 < *vector) {
           _memset((void *)(vectorCount2 * 4 + vector[2]),0,4);
-          puVar12 = (undefined4 *)(vectorCount2 * 4 + vector[2]);
+          vectorSlotRef = (undefined4 *)(vectorCount2 * 4 + vector[2]);
           vector[1] = vectorCount2 + 1;
         }
         else {
-          puVar12 = (undefined4 *)Vector__elementRefGrow(vector,vectorCount2);
+          vectorSlotRef = (undefined4 *)Vector__elementRefGrow(vector,vectorCount2);
         }
-        *puVar12 = *puVar11;
-        uVar7 = allocation[2];
-      } while (uVar26 < uVar7);
+        *vectorSlotRef = *allocElemRef;
+        allocationCount = allocation[2];
+      } while (allocIndex < allocationCount);
     }
-    iVar8 = (**(code **)(**(int **)(*(int *)(program + 8) + 0x30c) + 0xc4))();
-    if (iVar8 != 0) {
-      uVar26 = puVar30[1];
-      uVar7 = 0;
-      if (uVar26 != 0) {
+    packingSupported = (**(code **)(**(int **)(*(int *)(program + 8) + 0x30c) + 0xc4))();
+    if (packingSupported != 0) {
+      copyCount = outVector[1];
+      copyIndex = 0;
+      if (copyCount != 0) {
         do {
-          if (uVar7 < *puVar30) {
-            if (uVar26 <= uVar7) {
-              _memset((void *)(uVar26 * 4 + puVar30[2]),0,(uVar7 - uVar26) * 4 + 4);
-              puVar30[1] = uVar7 + 1;
+          if (copyIndex < *outVector) {
+            if (copyCount <= copyIndex) {
+              _memset((void *)(copyCount * 4 + outVector[2]),0,(copyIndex - copyCount) * 4 + 4);
+              outVector[1] = copyIndex + 1;
             }
-            puVar6 = (undefined4 *)(uVar7 * 4 + puVar30[2]);
+            outRef = (undefined4 *)(copyIndex * 4 + outVector[2]);
           }
           else {
-            puVar6 = (undefined4 *)Vector__elementRefGrow(puVar30,uVar7);
+            outRef = (undefined4 *)Vector__elementRefGrow(outVector,copyIndex);
           }
-          uVar7 = uVar7 + 1;
+          copyIndex = copyIndex + 1;
           vectorCount = vector[1];
           if (vectorCount < *vector) {
             _memset((void *)(vectorCount * 4 + vector[2]),0,4);
-            puVar11 = (undefined4 *)(vectorCount * 4 + vector[2]);
+            packEntryElemRef = (undefined4 *)(vectorCount * 4 + vector[2]);
             vector[1] = vectorCount + 1;
           }
           else {
-            puVar11 = (undefined4 *)Vector__elementRefGrow(vector,vectorCount);
+            packEntryElemRef = (undefined4 *)Vector__elementRefGrow(vector,vectorCount);
           }
-          *puVar11 = *puVar6;
-          uVar26 = puVar30[1];
-        } while (uVar7 < uVar26);
+          *packEntryElemRef = *outRef;
+          copyCount = outVector[1];
+        } while (copyIndex < copyCount);
       }
     }
   }
   return;
 LAB_001116e0:
-  uVar7 = puVar11[2];
-  uVar31 = uVar31 + 1;
-  if ((int)uVar7 <= (int)uVar31) goto LAB_001116f0;
+  groupVectorCount = groupVectorAlloc[2];
+  otherIndex = otherIndex + 1;
+  if ((int)groupVectorCount <= (int)otherIndex) goto LAB_001116f0;
   goto LAB_00111270;
 LAB_00111508:
-  bVar1 = iVar21 == 3;
-  puVar20 = puVar20 + 1;
-  iVar21 = iVar21 + 1;
-  if (bVar1) goto LAB_0011151c;
+  isLastLane = laneNumber == 3;
+  laneFlagPtr = laneFlagPtr + 1;
+  laneNumber = laneNumber + 1;
+  if (isLastLane) goto LAB_0011151c;
   goto LAB_001113e0;
 }
 
