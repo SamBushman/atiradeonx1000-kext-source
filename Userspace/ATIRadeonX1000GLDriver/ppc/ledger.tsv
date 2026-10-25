@@ -264,7 +264,7 @@
 0x26f80	460	FUN_00026f80	part_004	converted
 0x27150	564	gld_drawArraysStream	part_004	converted
 0x273a0	1484	gld_reserveDrawSpace	part_004	converted
-0x27990	2360	FUN_00027990	part_004	converted
+0x27990	2360	gld_buildVertexStreamCache	part_004	converted
 0x28350	3820	gld_readPixelsViaBlit	part_004	converted
 0x29290	4	glReadPixels_entry	part_004	converted
 0x29294	2376	glReadPixels_impl	part_004	converted
@@ -287,7 +287,7 @@
 0x2c020	148	gld_revalidateStreamProgram	part_004	converted
 0x2c0c0	180	gld_emitVapStreamControl	part_004	converted
 0x2c180	164	gld_emitStreamAddressRegisters	part_004	converted
-0x2c230	1144	FUN_0002c230	part_004	converted
+0x2c230	1144	gld_validateStreamState	part_004	converted
 0x2c6c0	184	FUN_0002c6c0	part_004	converted
 0x2c790	932	gld_initContextHardwareState	part_004	converted
 0x2cb40	200	gldContextFreeResources	part_004	converted
@@ -305,7 +305,7 @@
 0x2f410	148	window_mode_to_ati_format	part_005	converted
 0x2f4d0	708	gldTextureFormatCodeMatchesType	part_005	converted
 0x2f7c0	716	gldTextureFormatCodeFromFormatType	part_005	converted
-0x2fac0	2252	FUN_0002fac0	part_005	converted
+0x2fac0	2252	gld_selectTextureHardwareFormat	part_005	converted
 0x303d0	68	gldCompressedImageBytes	part_005	converted
 0x30420	392	FUN_00030420	part_005	converted
 0x305b0	492	FUN_000305b0	part_005	converted
