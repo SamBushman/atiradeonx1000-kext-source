@@ -2067,6 +2067,7 @@ int FUN_000a4980(glContext, param_2, staleArgR5, staleArgR6, staleArgR7)
   undefined4 staleArgR6;
   undefined4 staleArgR7;
 {
+  undefined4 maskLevelWordb4;
   uint loopIndex7;
   uint loopIndex6;
   uint loopIndex5;
@@ -2535,12 +2536,12 @@ LAB_000a5188:
     *(undefined2 *)(maskTexture + 0x74) = *(undefined2 *)(maskLevel + 0xb0);
     *(undefined2 *)(maskTexture + 0x7c) = *(undefined2 *)(maskLevel + 0xac);
     *(uint *)(maskTexture + 0xc0) = (uint)*(ushort *)(maskLevel + 0xae) * (uint)*(ushort *)(maskLevel + 0xac);
-    uVar21 = *(undefined4 *)(maskLevel + 0xb4);
+    maskLevelWordb4 = *(undefined4 *)(maskLevel + 0xb4);
     *(undefined2 *)(maskTexture + 0xa2) = 0x2600;
     *(uint *)(maskTexture + 0x50) = *(uint *)(maskTexture + 0x50) & 0xfffe01ff | 0x8a00;
     *(uint *)(maskTexture + 0x54) = *(uint *)(maskTexture + 0x54) & 0xfffffffc | 1;
     *(undefined2 *)(maskTexture + 0xa0) = 0x2600;
-    *(undefined4 *)(maskTexture + 0xbc) = uVar21;
+    *(undefined4 *)(maskTexture + 0xbc) = maskLevelWordb4;
     uVar16 = r4AfterCall;
   }
   *(int *)(cacheEntry + 0xbc) = iVar38;

@@ -8204,6 +8204,8 @@ int FUN_000b57a0(ctx, param_2)
   int ctx;
   int param_2;
 {
+  int allocationPtr4024;
+  int allocationWord542c;
   undefined4 *cursor;
   int loopIndex;
   uint ctxWord44;
@@ -8237,21 +8239,21 @@ int FUN_000b57a0(ctx, param_2)
     puVar7 = allocation + 9;
     iVar5 = ilAssembleProgram(ctx,allocation,puVar7);
     if (iVar5 == 0) {
-      iVar5 = allocation[0x150b];
+      allocationWord542c = allocation[0x150b];
       *(undefined1 *)((int)allocation + 0x5497) = 0;
-      iVar9 = allocation[0x1009];
-      *(char *)((int)allocation + 0x5495) = (char)iVar5;
-      uVar1 = (iVar9 + -1) * 0x100000 & 0x3ff00000U | allocation[0x1523] & 0xc00ffc00;
+      allocationPtr4024 = allocation[0x1009];
+      *(char *)((int)allocation + 0x5495) = (char)allocationWord542c;
+      uVar1 = (allocationPtr4024 + -1) * 0x100000 & 0x3ff00000U | allocation[0x1523] & 0xc00ffc00;
       allocation[0x1523] = uVar1;
       if (*(int *)(((unsigned char *)0x00001240) + param_2) < (int)allocation[0x1590]) {
         *(undefined4 *)(((unsigned char *)0x00001240) + param_2) = allocation[0x1590];
         uVar1 = allocation[0x1523];
-        iVar9 = allocation[0x1009];
-        iVar5 = allocation[0x150b];
+        allocationPtr4024 = allocation[0x1009];
+        allocationWord542c = allocation[0x150b];
       }
       uVar3 = 0;
-      iVar8 = iVar9;
-      if (iVar9 != 0) {
+      iVar8 = allocationPtr4024;
+      if (allocationPtr4024 != 0) {
         do {
           uVar3 = puVar7[iVar8 * 4 + -4] & 0xf00;
           if (((uVar3 == 0x200) || (uVar3 == 0x300)) && ((puVar7[iVar8 * 4 + -4] & 0xfe000) == 0)) {
@@ -8265,20 +8267,20 @@ int FUN_000b57a0(ctx, param_2)
       }
       uVar6 = 0;
       allocation[0x1523] = (uVar3 & 0x3ff) << 10 | uVar1 & 0xfff003ff;
-      if (iVar9 != 0) {
-        puVar7 = puVar7 + iVar9 * 4;
+      if (allocationPtr4024 != 0) {
+        puVar7 = puVar7 + allocationPtr4024 * 4;
         do {
           if ((((puVar7[-3] & 7) == 1) || ((puVar7[-2] & 7) == 1)) || ((puVar7[-1] & 7) == 1)) {
-            uVar6 = iVar9 - 1;
+            uVar6 = allocationPtr4024 - 1;
           }
           else {
             uVar6 = 0;
           }
-          iVar9 = iVar9 + -1;
-        } while ((iVar9 != 0) && (puVar7 = puVar7 + -4, uVar6 == 0));
+          allocationPtr4024 = allocationPtr4024 + -1;
+        } while ((allocationPtr4024 != 0) && (puVar7 = puVar7 + -4, uVar6 == 0));
       }
-      *(int *)(((unsigned char *)0x00001038) + param_2) = iVar5;
-      if (0 < iVar5) {
+      *(int *)(((unsigned char *)0x00001038) + param_2) = allocationWord542c;
+      if (0 < allocationWord542c) {
         pcVar10 = (char *)(allocation + 0x100e);
         cursor = allocation + 0x100a;
         loopIndex = 0;
@@ -8298,8 +8300,8 @@ int FUN_000b57a0(ctx, param_2)
           pcVar10 = pcVar10 + 0x14;
           cursor = cursor + 5;
           iVar9 = iVar9 + 0x10;
-          iVar5 = iVar5 + -1;
-        } while (iVar5 != 0);
+          allocationWord542c = allocationWord542c + -1;
+        } while (allocationWord542c != 0);
       }
       iVar5 = 0;
       allocation[0x1524] = uVar6 & 0x3ff | allocation[0x1524] & 0xfffffc00;
