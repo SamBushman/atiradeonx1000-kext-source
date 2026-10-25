@@ -369,8 +369,8 @@ int fpilEmitAngleConstants(param_1, param_2, param_3, param_4, param_5, param_6,
   return param_1[9];
 }
 
-/* FUN_0003ed50 @ 0x3ed50 (60 bytes) */
-int FUN_0003ed50(param_1, param_2)
+/* fpilClassifyDestination @ 0x3ed50 (60 bytes) */
+int fpilClassifyDestination(param_1, param_2)
   int *param_1;
   int param_2;
 {
@@ -521,8 +521,8 @@ int fpilReserveTokens(translator, nWords, outPtr)
   return 0;
 }
 
-/* FUN_0003f050 @ 0x3f050 (336 bytes) */
-int FUN_0003f050(translator, instIndex, outRegister)
+/* fpilMapConstantRegister @ 0x3f050 (336 bytes) */
+int fpilMapConstantRegister(translator, instIndex, outRegister)
   int *translator;
   int instIndex;
   undefined4 *outRegister;
@@ -5625,7 +5625,7 @@ int fragmentTranslateArithmetic(param_1, param_2)
         if (iVar11 == 0) {
 LAB_00046cd4:
           if ((((param_1[5] & 0x20000000U) == 0) || (uVar9 != 0x3a)) ||
-             (iVar11 = ((int (*)())FUN_0003ed50)(param_1,iVar12 + 8), iVar11 != 1)) {
+             (iVar11 = ((int (*)())fpilClassifyDestination)(param_1,iVar12 + 8), iVar11 != 1)) {
             return 0;
           }
           local_68 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_68) + 0)),99);
@@ -5748,6 +5748,28 @@ int fragmentInstructionToIL(translator, unusedArg2, unusedArg3, unusedArg4, unus
   undefined4 unusedArg7;
   undefined4 unusedArg8;
 {
+  int maxRegSpan;
+  int regSpan;
+  int programPtr;
+  int instructionBlock2;
+  int instBlockOffset;
+  int newTempBase;
+  int arraySourceCount;
+  int tempRegBase;
+  int srcWordOffset;
+  int srcSwizzleStatus;
+  int tokenWordCount;
+  int instructionBlock;
+  int instructionBlock4;
+  bool advanceSrc0;
+  bool moreTemps;
+  bool moreSources;
+  short tempRegisterBase;
+  undefined2 ilSelectOpcode;
+  undefined4 emittedSourceCount;
+  uint *src1OperandPtr;
+  uint *src0OperandPtr;
+  uint *dstOutPair;
   uint opcodeInfoWord1;
   int srcStatus3;
   int emitStatus3;
@@ -5765,30 +5787,30 @@ int fragmentInstructionToIL(translator, unusedArg2, unusedArg3, unusedArg4, unus
   int recordByteOffset;
   uint operandCount;
   bool bVar1;
-  bool bVar2;
-  short sVar3;
+  bool advanceSrc1;
+  short tempRegisterIndex;
   uint uVar4;
   int program;
   int iVar6;
   uint opcodeInfoWord0;
-  int iVar8;
-  undefined4 uVar9;
-  undefined2 uVar10;
+  int returnCode;
+  undefined4 saturate;
+  undefined2 tempRegisterHalf;
   uint uVar11;
-  undefined *puVar12;
+  undefined *adjustedSwizzle;
   uint uVar13;
-  int iVar14;
+  int tempRegister;
   int recordSpan;
   int instructionCount;
   int instructionIndex;
   int recordIndex;
   uint *currentRecord;
   uint *instructionRecords;
-  uint *puVar21;
+  uint *sourceRecordCursor;
   uint uVar22;
   int iVar23;
   int iVar24;
-  undefined4 *puVar25;
+  undefined4 *srcOutCursor;
   uint *src0Operand;
   uint dstToken;
   uint dstMask;
@@ -5838,7 +5860,7 @@ int fragmentInstructionToIL(translator, unusedArg2, unusedArg3, unusedArg4, unus
   instructionRecords = (uint *)(program + instructionBlockOffset);
   if (instructionCount < 1) {
 LAB_00048d20:
-    iVar8 = 0;
+    returnCode = 0;
   }
   else {
     opcode = *(uint *)(program + instructionBlockOffset) >> 0x12 & 0xff;
@@ -5853,8 +5875,8 @@ LAB_00048d20:
         operandCount = *currentRecord >> 0x1d;
         recordSpan = operandCount + 2;
         if (uVar13 == 2) {
-          iVar6 = *translator + *(int *)(*translator + 0x54) * 8;
-          uVar13 = *(uint *)(recordByteOffset + iVar6) >> 0x12 & 0xff;
+          instructionBlock = *translator + *(int *)(*translator + 0x54) * 8;
+          uVar13 = *(uint *)(recordByteOffset + instructionBlock) >> 0x12 & 0xff;
           if ((uVar13 - 0x44 < 2) || (iVar23 = 0, uVar13 == 0x47)) {
             iVar23 = 1;
           }
@@ -5862,12 +5884,12 @@ LAB_00048d20:
             bVar1 = true;
           }
           ilInstAPtr = &ilInstAOpcode;
-          iVar24 = iVar6 + recordByteOffset;
+          iVar24 = instructionBlock + recordByteOffset;
           _memset(ilInstAPtr,0,0x24);
           ilInstAOpcode = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstAOpcode) + 0)),(short)(*(uint *)(&DAT_001dac34 + uVar13 * 0x10) >> 1))
           ;
           ((int (*)())fpilTranslateDestination)(translator,iVar24 + 8,&ilInstADst,&ilInstADstMask,
-                       *(uint *)(recordByteOffset + iVar6 + 4) >> 0x14 & 1);
+                       *(uint *)(recordByteOffset + instructionBlock + 4) >> 0x14 & 1);
           ((int (*)())fpilTranslateSource)(translator,iVar24 + 0x10,&ilInstASrc0,&ilInstASwz0);
           if ((translator[5] & 0x20000000U) == 0) {
             ilInstAOpcode = (*(uint *)(iVar24 + 0x18) & 0x1f) << 0x10 | ilInstAOpcode & 0xc000ffff;
@@ -5879,7 +5901,7 @@ LAB_00048d20:
           }
           else {
             reservedTokens = (uint *)0x0;
-            constStatus = ((int (*)())FUN_0003f050)(translator,recordIndex,&reservedTokens);
+            constStatus = ((int (*)())fpilMapConstantRegister)(translator,recordIndex,&reservedTokens);
             if (constStatus != 0) goto LAB_00048a2c;
             ilInstAOpcode = ((uint)reservedTokens & 0x3fff) << 0x10 | ilInstAOpcode & 0xc000ffff;
             uVar13 = *(uint *)(iVar24 + 0x20) >> 5 & 7;
@@ -5897,17 +5919,17 @@ LAB_00048d20:
           if (uVar13 - 5 < 3) {
             ilInstAOpcode = ilInstAOpcode & 0xf3ffffff | 0x4000000;
           }
-          puVar12 = ilInstASwz0;
+          adjustedSwizzle = ilInstASwz0;
           if ((bVar1) &&
-             (puVar12 = (undefined *)((uint)ilInstASwz0 & 0xff1fffff | 0x600000),
+             (adjustedSwizzle = (undefined *)((uint)ilInstASwz0 & 0xff1fffff | 0x600000),
              ((uint)ilInstASwz0 & 0x8000) != 0)) {
-            puVar12 = (undefined *)
+            adjustedSwizzle = (undefined *)
                       (((uint)ilInstASwz0 & 0xff1ff777 ^ 0x8000) & 0x8000 |
                       ((uint)ilInstASwz0 & 0xff1fff77 ^ 0x800) & 0x800 |
                       ((uint)ilInstASwz0 & 0xff1ffff7 ^ 0x80) & 0x80 |
-                      ((uint)puVar12 ^ 8) & 8 | (uint)ilInstASwz0 & 0xff1f7777 | 0x600000);
+                      ((uint)adjustedSwizzle ^ 8) & 8 | (uint)ilInstASwz0 & 0xff1f7777 | 0x600000);
           }
-          ilInstASwz0 = puVar12;
+          ilInstASwz0 = adjustedSwizzle;
           ((int (*)())fpilEmitInstruction)(translator,ilInstAPtr,1,iVar23 + 1);
 LAB_00048c70:
           if (opcode != 0x4d) {
@@ -5932,20 +5954,20 @@ LAB_00048c78:
               ilInstBOpcode = (*(uint *)(&DAT_001dac38 + opcodeInfoOffset) >> 0x13) << 0x10 | ilInstBOpcode & 0xc000ffff;
               if ((*(uint *)(&DAT_001dac40 + opcodeInfoOffset) >> 0x1c & 2) == 0) {
                 if (((currentRecord[1] & 0x100000) != 0) ||
-                   (uVar9 = 0, (*(uint *)(&DAT_001dac40 + opcodeInfoOffset) >> 0x1c & 1) != 0)) {
-                  uVar9 = 1;
+                   (saturate = 0, (*(uint *)(&DAT_001dac40 + opcodeInfoOffset) >> 0x1c & 1) != 0)) {
+                  saturate = 1;
                 }
-                ((int (*)())fpilTranslateDestination)(translator,(int)instructionRecords + recordByteOffset + 8,&ilInstBDst,&ilInstBDstMask,uVar9);
+                ((int (*)())fpilTranslateDestination)(translator,(int)instructionRecords + recordByteOffset + 8,&ilInstBDst,&ilInstBDstMask,saturate);
               }
               if (operandCount != 0) {
                 uVar13 = 0;
-                puVar25 = &ilInstBSrc0;
-                puVar21 = instructionRecords + recordIndex * 2 + 4;
+                srcOutCursor = &ilInstBSrc0;
+                sourceRecordCursor = instructionRecords + recordIndex * 2 + 4;
                 do {
                   uVar13 = uVar13 + 1;
-                  ((int (*)())fpilTranslateSource)(translator,puVar21,puVar25,puVar25 + 3);
-                  puVar25 = puVar25 + 1;
-                  puVar21 = puVar21 + 2;
+                  ((int (*)())fpilTranslateSource)(translator,sourceRecordCursor,srcOutCursor,srcOutCursor + 3);
+                  srcOutCursor = srcOutCursor + 1;
+                  sourceRecordCursor = sourceRecordCursor + 2;
                 } while (operandCount != uVar13);
               }
               (**(code **)(&DAT_001dac3c + opcodeInfoOffset))(translator,recordIndex,ilInstBPtr);
@@ -5960,31 +5982,31 @@ LAB_00048a2c:
               if (uVar13 == 4) {
                 operandCount = operandCount - 1;
               }
-              iVar6 = operandCount * 2 + 1;
+              tokenWordCount = operandCount * 2 + 1;
               if (uVar13 != 3) {
-                iVar6 = operandCount * 2 + 3;
+                tokenWordCount = operandCount * 2 + 3;
               }
-              iVar6 = ((int (*)())fpilReserveTokens)(translator,iVar6,&reservedTokens);
-              if (iVar6 != 0) goto LAB_00048d74;
+              tokenWordCount = ((int (*)())fpilReserveTokens)(translator,tokenWordCount,&reservedTokens);
+              if (tokenWordCount != 0) goto LAB_00048d74;
               *reservedTokens = (opcodeInfoWord1 >> 0x13) << 0x10 | opcodeInfoWord0 >> 1 & 0xffff;
               if ((*(uint *)(&DAT_001dac34 + opcodeInfoOffset) >> 0x11 & 0xf) != 3) {
                 if (((currentRecord[1] & 0x100000) != 0) ||
-                   (uVar9 = 0, (*(uint *)(&DAT_001dac40 + opcodeInfoOffset) & 0x10000000) != 0)) {
-                  uVar9 = 1;
+                   (saturate = 0, (*(uint *)(&DAT_001dac40 + opcodeInfoOffset) & 0x10000000) != 0)) {
+                  saturate = 1;
                 }
-                dstStatus = ((int (*)())fpilTranslateDestination)(translator,(int)instructionRecords + recordByteOffset + 8,&dstToken,&dstMask,uVar9);
+                dstStatus = ((int (*)())fpilTranslateDestination)(translator,(int)instructionRecords + recordByteOffset + 8,&dstToken,&dstMask,saturate);
                 if (dstStatus != 0) goto LAB_00048d74;
                 reservedTokens[1] = dstToken;
                 reservedTokens[2] = dstMask;
               }
               if ((*(uint *)(&DAT_001dac34 + opcodeInfoOffset) >> 0x11 & 0xf) == 4) {
-                iVar6 = ((int (*)())fpilTranslateSourceWithSwizzle)(translator,(int)instructionRecords + recordByteOffset + 0x10,&srcToken,&srcSwizzle,
+                srcSwizzleStatus = ((int (*)())fpilTranslateSourceWithSwizzle)(translator,(int)instructionRecords + recordByteOffset + 0x10,&srcToken,&srcSwizzle,
                                      (int)instructionRecords + recordByteOffset + 0x18);
               }
               else {
-                iVar6 = ((int (*)())fpilTranslateSource)(translator,(int)instructionRecords + recordByteOffset + 0x10,&srcToken,&srcSwizzle);
+                srcSwizzleStatus = ((int (*)())fpilTranslateSource)(translator,(int)instructionRecords + recordByteOffset + 0x10,&srcToken,&srcSwizzle);
               }
-              if (iVar6 != 0) goto LAB_00048d74;
+              if (srcSwizzleStatus != 0) goto LAB_00048d74;
               uVar13 = *(uint *)(&DAT_001dac34 + opcodeInfoOffset) >> 0x11 & 0xf;
               if (uVar13 == 6) {
                 srcSwizzle = srcSwizzle & 0xffff0fff | 0x5000;
@@ -6048,39 +6070,39 @@ LAB_00048418:
             goto LAB_00048c78;
           }
           if (opcode == 0x40) {
-            iVar23 = *translator + *(int *)(*translator + 0x54) * 8;
-            dstStatus = ((int (*)())fpilTranslateDestination)(translator,iVar23 + recordByteOffset + 8,&dstToken2,&dstMask2,
-                                 *(uint *)(recordByteOffset + iVar23 + 4) >> 0x14 & 1);
+            instructionBlock2 = *translator + *(int *)(*translator + 0x54) * 8;
+            dstStatus = ((int (*)())fpilTranslateDestination)(translator,instructionBlock2 + recordByteOffset + 8,&dstToken2,&dstMask2,
+                                 *(uint *)(recordByteOffset + instructionBlock2 + 4) >> 0x14 & 1);
             if (dstStatus == 0) {
               ilInstAPtr = &ilInstAOpcode;
-              iVar6 = 0;
-              iVar23 = recordIndex * 8 + iVar23 + 0x10;
+              srcWordOffset = 0;
+              instructionBlock2 = recordIndex * 8 + instructionBlock2 + 0x10;
               do {
-                srcStatus3 = ((int (*)())fpilTranslateSource)(translator,iVar23,iVar6 + (int)ilInstAPtr,(int)&local_e0 + iVar6);
+                srcStatus3 = ((int (*)())fpilTranslateSource)(translator,instructionBlock2,srcWordOffset + (int)ilInstAPtr,(int)&local_e0 + srcWordOffset);
                 if (srcStatus3 != 0) goto LAB_00048418;
-                bVar1 = iVar6 != 8;
-                iVar23 = iVar23 + 8;
-                iVar6 = iVar6 + 4;
-              } while (bVar1);
-              iVar6 = translator[8];
+                moreSources = srcWordOffset != 8;
+                instructionBlock2 = instructionBlock2 + 8;
+                srcWordOffset = srcWordOffset + 4;
+              } while (moreSources);
+              tempRegBase = translator[8];
               iVar24 = 0;
               iVar23 = 0;
               ilInstBPtr = &ilInstBOpcode;
-              puVar21 = &dstToken;
+              dstOutPair = &dstToken;
               do {
-                sVar3 = (short)iVar6 + (short)iVar24;
-                bVar1 = iVar24 != 2;
+                tempRegisterIndex = (short)tempRegBase + (short)iVar24;
+                moreTemps = iVar24 != 2;
                 iVar24 = iVar24 + 1;
                 *(undefined4 *)(iVar23 + (int)ilInstBPtr) = 0;
-                puVar21[0xd] = puVar21[0xd] & 0xffc0ffff | 0x40000;
-                *(short *)((int)puVar21 + 0x36) = sVar3;
+                dstOutPair[0xd] = dstOutPair[0xd] & 0xffc0ffff | 0x40000;
+                *(short *)((int)dstOutPair + 0x36) = tempRegisterIndex;
                 *(undefined4 *)((int)&local_ec + iVar23) = 0;
                 iVar23 = iVar23 + 4;
-                puVar21[7] = puVar21[7] & 0xffc0ffff | 0x40000;
-                *(short *)((int)puVar21 + 0x1e) = sVar3;
-                puVar21[7] = puVar21[7] | 0x400000;
-                puVar21 = puVar21 + 1;
-              } while (bVar1);
+                dstOutPair[7] = dstOutPair[7] & 0xffc0ffff | 0x40000;
+                *(short *)((int)dstOutPair + 0x1e) = tempRegisterIndex;
+                dstOutPair[7] = dstOutPair[7] | 0x400000;
+                dstOutPair = dstOutPair + 1;
+              } while (moreTemps);
               reserveStatus = ((int (*)())fpilReserveTokens)(translator,7,&reservedTokens);
               uVar13 = local_ec;
               if (reserveStatus == 0) {
@@ -6166,11 +6188,11 @@ LAB_00048418:
             goto LAB_00048418;
           }
           if (opcode == 0x22) {
-            iVar23 = *translator + *(int *)(*translator + 0x54) * 8;
-            iVar24 = iVar23 + recordByteOffset;
-            puVar21 = (uint *)(iVar24 + 0x10);
-            iVar6 = (*(uint *)(iVar24 + 0x10) >> 0xe & 1) + (*(uint *)(iVar24 + 0x18) >> 0xe & 1);
-            if ((iVar6 == 1) &&
+            instructionBlock2 = *translator + *(int *)(*translator + 0x54) * 8;
+            iVar24 = instructionBlock2 + recordByteOffset;
+            src0OperandPtr = (uint *)(iVar24 + 0x10);
+            arraySourceCount = (*(uint *)(iVar24 + 0x10) >> 0xe & 1) + (*(uint *)(iVar24 + 0x18) >> 0xe & 1);
+            if ((arraySourceCount == 1) &&
                (((*(uint *)(iVar24 + 0x10) & 0x3000) == 0 ||
                 ((*(uint *)(iVar24 + 0x18) & 0x3000) == 0)))) {
               iVar6 = ((int (*)())fragmentTranslateArithmetic)(translator,recordIndex);
@@ -6179,40 +6201,40 @@ LAB_00048418:
             ilInstBPtr = &ilInstBOpcode;
             _memset(ilInstBPtr,0,0x24);
             ilInstBOpcode = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstBOpcode) + 0)),0x49);
-            iVar23 = ((int (*)())fpilTranslateDestination)(translator,iVar24 + 8,&ilInstBDst,&ilInstBDstMask,
-                                  *(uint *)(recordByteOffset + iVar23 + 4) >> 0x14 & 1);
-            if (((iVar23 != 0) ||
-                (iVar23 = ((int (*)())fpilTranslateSource)(translator,puVar21,&ilInstBSrc0,&ilInstBSwz0), iVar23 != 0)) ||
-               (iVar23 = ((int (*)())fpilTranslateSource)(translator,(uint *)(iVar24 + 0x18),&ilInstBSrc1,ilInstBSwz12),
-               uVar22 = ilInstBDstMask, uVar13 = ilInstBDst, iVar23 != 0)) {
+            instructionBlock2 = ((int (*)())fpilTranslateDestination)(translator,iVar24 + 8,&ilInstBDst,&ilInstBDstMask,
+                                  *(uint *)(recordByteOffset + instructionBlock2 + 4) >> 0x14 & 1);
+            if (((instructionBlock2 != 0) ||
+                (instructionBlock2 = ((int (*)())fpilTranslateSource)(translator,src0OperandPtr,&ilInstBSrc0,&ilInstBSwz0), instructionBlock2 != 0)) ||
+               (instructionBlock2 = ((int (*)())fpilTranslateSource)(translator,(uint *)(iVar24 + 0x18),&ilInstBSrc1,ilInstBSwz12),
+               uVar22 = ilInstBDstMask, uVar13 = ilInstBDst, instructionBlock2 != 0)) {
 LAB_000479ec:
               iVar6 = translator[9];
               goto joined_r0x00048448;
             }
-            if (iVar6 == 0) {
+            if (arraySourceCount == 0) {
               emitStatus = ((int (*)())fpilEmitInstruction)(translator,ilInstBPtr,1,2);
 joined_r0x000479e8:
               if (emitStatus != 0) goto LAB_000479ec;
             }
-            else if (iVar6 != 1) {
-              uVar10 = (undefined2)translator[8];
-              ilInstBDst = CONCAT22(4,uVar10);
+            else if (arraySourceCount != 1) {
+              tempRegisterHalf = (undefined2)translator[8];
+              ilInstBDst = CONCAT22(4,tempRegisterHalf);
               savedDstToken = uVar13;
-              iVar23 = (*puVar21 >> 0xc & 3) + 1;
-              iVar6 = iVar23 + translator[8];
+              regSpan = (*src0OperandPtr >> 0xc & 3) + 1;
+              newTempBase = regSpan + translator[8];
               savedDstMask = ilInstBDstMask;
-              translator[8] = iVar6;
+              translator[8] = newTempBase;
               ilInstBDstMask = 0x55;
               ilInstBDst = ilInstBDst | 0x400000;
-              if (iVar23 != 0) {
+              if (regSpan != 0) {
                 ilInstAPtr = &ilInstAOpcode;
                 iVar6 = 0;
                 do {
-                  uVar22 = *puVar21 >> 0xc & 3;
+                  uVar22 = *src0OperandPtr >> 0xc & 3;
                   _memcpy(ilInstAPtr,ilInstBPtr,0x24);
-                  iVar14 = translator[8];
+                  tempRegister = translator[8];
                   uVar13 = (uint)ilInstBSwz12[0] >> 3 & 1;
-                  ilInstADst = CONCAT22(4,(short)iVar14);
+                  ilInstADst = CONCAT22(4,(short)tempRegister);
                   ilInstADstMask = 0x55;
                   ilInstASwz1 = (undefined *)
                              (uVar13 << 0xf |
@@ -6225,7 +6247,7 @@ joined_r0x000479e8:
                   ilInstADst = ilInstADst | 0x400000;
                   emitStatus3 = ((int (*)())fpilEmitInstruction)(translator,ilInstAPtr,1,2);
                   if (emitStatus3 == 0) {
-                    ilInstASrc2 = CONCAT22(4,(short)iVar14);
+                    ilInstASrc2 = CONCAT22(4,(short)tempRegister);
                     ilInstASrc0 = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstASrc0) + 0)),(*(unsigned short *)((unsigned char *)&(ilInstASrc0) + 2)) + 1);
                     ilInstAOpcode = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstAOpcode) + 0)),0x40);
                     ilInstASwz2 = ((unsigned char *)0x00003210);
@@ -6281,28 +6303,28 @@ joined_r0x000479e8:
                   iVar6 = iVar6 + 1;
                   ilInstBDst = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstBDst) + 0)),(*(unsigned short *)((unsigned char *)&(ilInstBDst) + 2)) + 1);
                   ilInstBSrc1 = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstBSrc1) + 0)),(*(unsigned short *)((unsigned char *)&(ilInstBSrc1) + 2)) + 1);
-                } while (iVar23 != iVar6);
-                iVar6 = translator[8];
+                } while (regSpan != iVar6);
+                newTempBase = translator[8];
               }
-              ilInstBSrc0 = CONCAT22(4,uVar10);
-              translator[8] = iVar6 - iVar23;
+              ilInstBSrc0 = CONCAT22(4,tempRegisterHalf);
+              translator[8] = newTempBase - regSpan;
               ilInstBOpcode = 0x47;
               ilInstBSwz0 = ((unsigned char *)0x00003210);
               ilInstBDst = savedDstToken;
               ilInstBDstMask = savedDstMask;
               ilInstBSrc0 = ilInstBSrc0 | 0x400000;
-              if (iVar23 != 0) {
+              if (regSpan != 0) {
                 iVar6 = 0;
                 do {
                   iVar6 = iVar6 + 1;
                   ((int (*)())fpilEmitInstruction)(translator,ilInstBPtr,1,1);
                   ilInstBDst = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstBDst) + 0)),(*(unsigned short *)((unsigned char *)&(ilInstBDst) + 2)) + 1);
                   ilInstBSrc0 = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstBSrc0) + 0)),(*(unsigned short *)((unsigned char *)&(ilInstBSrc0) + 2)) + 1);
-                } while (iVar23 != iVar6);
+                } while (regSpan != iVar6);
               }
             }
             else {
-              if ((*puVar21 & 0x4000) == 0) {
+              if ((*src0OperandPtr & 0x4000) == 0) {
                 uVar11 = ilInstBDstMask & 3;
                 ilInstBDst = CONCAT22(4,(short)translator[8]);
                 ilInstBDstMask = 0;
@@ -6355,11 +6377,11 @@ joined_r0x000479e8:
                 } while( true );
               }
               ilInstAPtr = &ilInstAOpcode;
-              uVar22 = *puVar21 >> 0xc & 3;
+              uVar22 = *src0OperandPtr >> 0xc & 3;
               _memcpy(ilInstAPtr,ilInstBPtr,0x24);
-              iVar6 = translator[8];
+              tempRegBase = translator[8];
               uVar13 = (uint)ilInstBSwz12[0] >> 3 & 1;
-              ilInstADst = CONCAT22(4,(short)iVar6);
+              ilInstADst = CONCAT22(4,(short)tempRegBase);
               ilInstADstMask = 0x55;
               ilInstASwz1 = (undefined *)
                          (uVar13 << 0xf |
@@ -6372,7 +6394,7 @@ joined_r0x000479e8:
               ilInstADst = ilInstADst | 0x400000;
               emitStatus2 = ((int (*)())fpilEmitInstruction)(translator,ilInstAPtr,1,2);
               if (emitStatus2 == 0) {
-                ilInstASrc2 = CONCAT22(4,(short)iVar6);
+                ilInstASrc2 = CONCAT22(4,(short)tempRegBase);
                 ilInstASrc0 = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstASrc0) + 0)),(*(unsigned short *)((unsigned char *)&(ilInstASrc0) + 2)) + 1);
                 ilInstASwz2 = ((unsigned char *)0x00003210);
                 ilInstAOpcode = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstAOpcode) + 0)),0x40);
@@ -6433,11 +6455,11 @@ joined_r0x000479e8:
           }
           if (opcode == 0x6c) {
             ilInstAPtr = &ilInstAOpcode;
-            iVar14 = *translator + *(int *)(*translator + 0x54) * 8;
+            instructionBlock4 = *translator + *(int *)(*translator + 0x54) * 8;
             _memset(ilInstAPtr,0,0x24);
-            iVar23 = iVar14 + recordByteOffset;
+            iVar23 = instructionBlock4 + recordByteOffset;
             iVar24 = iVar23 + 8;
-            iVar6 = ((int (*)())FUN_0003ed50)(translator,iVar24);
+            iVar6 = ((int (*)())fpilClassifyDestination)(translator,iVar24);
             if (iVar6 == 1) {
               ilInstAOpcode = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstAOpcode) + 0)),99);
             }
@@ -6449,17 +6471,17 @@ joined_r0x000479e8:
               ilInstAOpcode = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstAOpcode) + 0)),0x47);
             }
             iVar24 = ((int (*)())fpilTranslateDestination)(translator,iVar24,&ilInstADst,&ilInstADstMask,
-                                  *(uint *)(recordByteOffset + iVar14 + 4) >> 0x14 & 1);
+                                  *(uint *)(recordByteOffset + instructionBlock4 + 4) >> 0x14 & 1);
             if ((iVar24 == 0) &&
                (iVar23 = ((int (*)())fpilTranslateSource)(translator,iVar23 + 0x10,&ilInstASrc0,&ilInstASwz0), iVar23 == 0)) {
-              uVar9 = 1;
+              emittedSourceCount = 1;
               if (iVar6 == 2) {
-                uVar9 = 2;
+                emittedSourceCount = 2;
                 ilInstASwz1 = (undefined *)((uint)ilInstASwz1 & 0xffff0000 | 0x4444);
                 ilInstASrc1 = CONCAT22((short)(ilInstASrc1 >> 0x10),(short)translator[8]) & 0xffc0ffff |
                            0x440000;
               }
-              emitStatus = ((int (*)())fpilEmitInstruction)(translator,ilInstAPtr,1,uVar9);
+              emitStatus = ((int (*)())fpilEmitInstruction)(translator,ilInstAPtr,1,emittedSourceCount);
               goto joined_r0x00048414;
             }
             goto LAB_00048418;
@@ -6479,17 +6501,17 @@ LAB_00048d74:
           }
           if (opcode == 10) {
             ilInstAPtr = &ilInstAOpcode;
-            iVar23 = *translator;
-            iVar6 = *(int *)(iVar23 + 0x54);
+            programPtr = *translator;
+            instBlockOffset = *(int *)(programPtr + 0x54);
             _memset(ilInstAPtr,0,0x24);
-            iVar23 = iVar23 + iVar6 * 8 + recordByteOffset;
+            programPtr = programPtr + instBlockOffset * 8 + recordByteOffset;
             ilInstAOpcode = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstAOpcode) + 0)),0x5b);
-            dstStatus = ((int (*)())fpilTranslateDestination)(translator,iVar23 + 8,&ilInstADst,&ilInstADstMask,1);
+            dstStatus = ((int (*)())fpilTranslateDestination)(translator,programPtr + 8,&ilInstADst,&ilInstADstMask,1);
             if (dstStatus == 0) {
               ilInstASwz0 = (undefined *)((uint)ilInstASwz0 & 0xffff0000 | 0x5555);
               ilInstASrc0 = CONCAT22((short)(ilInstASrc0 >> 0x10),(short)translator[8]) & 0xffc0ffff |
                          0x440000;
-              srcStatus = ((int (*)())fpilTranslateSource)(translator,iVar23 + 0x10,&ilInstASrc1,&ilInstASwz1);
+              srcStatus = ((int (*)())fpilTranslateSource)(translator,programPtr + 0x10,&ilInstASrc1,&ilInstASwz1);
               if (srcStatus == 0) {
                 emitStatus = ((int (*)())fpilEmitInstruction)(translator,ilInstAPtr,1,2);
 joined_r0x00048414:
@@ -6500,20 +6522,20 @@ joined_r0x00048414:
           }
           if (opcode == 0x26) {
             ilInstAPtr = &ilInstAOpcode;
-            iVar23 = *translator;
-            iVar6 = *(int *)(iVar23 + 0x54);
+            programPtr = *translator;
+            instBlockOffset = *(int *)(programPtr + 0x54);
             _memset(ilInstAPtr,0,0x24);
-            iVar23 = iVar23 + iVar6 * 8 + recordByteOffset;
+            programPtr = programPtr + instBlockOffset * 8 + recordByteOffset;
             ilInstAOpcode = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstAOpcode) + 0)),0x5b);
             ilInstADstMask = ilInstADstMask & 0xffffff00 | 0x55;
             ilInstADst = CONCAT22((short)(ilInstADst >> 0x10),(short)translator[8]) & 0xffc0ffff | 0x440000
             ;
-            callStatus = ((int (*)())fpilTranslateSource)(translator,iVar23 + 0x10,&ilInstASrc0,&ilInstASwz0);
+            callStatus = ((int (*)())fpilTranslateSource)(translator,programPtr + 0x10,&ilInstASrc0,&ilInstASwz0);
             if (((callStatus == 0) &&
-                (callStatus = ((int (*)())fpilTranslateSource)(translator,iVar23 + 0x18,&ilInstASrc1,&ilInstASwz1), callStatus == 0)) &&
+                (callStatus = ((int (*)())fpilTranslateSource)(translator,programPtr + 0x18,&ilInstASrc1,&ilInstASwz1), callStatus == 0)) &&
                (callStatus = ((int (*)())fpilEmitInstruction)(translator,ilInstAPtr,1,2), callStatus == 0)) {
               ilInstAOpcode = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstAOpcode) + 0)),1);
-              dstStatus = ((int (*)())fpilTranslateDestination)(translator,iVar23 + 8,&ilInstADst,&ilInstADstMask,1);
+              dstStatus = ((int (*)())fpilTranslateDestination)(translator,programPtr + 8,&ilInstADst,&ilInstADstMask,1);
               if (dstStatus == 0) {
                 ilInstASrc0 = CONCAT22(4,(short)translator[8]);
                 ilInstASwz0 = ((unsigned char *)0x00003210);
@@ -6533,66 +6555,66 @@ joined_r0x00048414:
             goto joined_r0x00048448;
           }
           if ((opcode == 0x31) || (opcode == 0x36)) {
-            iVar6 = *translator + *(int *)(*translator + 0x54) * 8;
+            instructionBlock = *translator + *(int *)(*translator + 0x54) * 8;
             if ((translator[5] & 0x20000000U) == 0) {
               src1Advances = 0;
               src0Advances = 0;
             }
             else {
-              src0Advances = *(uint *)(iVar6 + recordByteOffset + 0x10) >> 0xe & 1;
-              src1Advances = *(uint *)(iVar6 + recordByteOffset + 0x18) >> 0xe & 1;
+              src0Advances = *(uint *)(instructionBlock + recordByteOffset + 0x10) >> 0xe & 1;
+              src1Advances = *(uint *)(instructionBlock + recordByteOffset + 0x18) >> 0xe & 1;
             }
-            src0Operand = (uint *)(recordByteOffset + iVar6 + 0x10);
-            puVar21 = (uint *)(recordByteOffset + iVar6 + 0x18);
-            instHeader = (uint *)(recordByteOffset + iVar6);
+            src0Operand = (uint *)(recordByteOffset + instructionBlock + 0x10);
+            src1OperandPtr = (uint *)(recordByteOffset + instructionBlock + 0x18);
+            instHeader = (uint *)(recordByteOffset + instructionBlock);
             ilInstAPtr = &ilInstAOpcode;
             dstRegSpan = (instHeader[1] >> 0x1a & 3) + 1;
             src0RegSpan = (*src0Operand >> 0xc & 3) + 1;
-            src1RegSpan = (*puVar21 >> 0xc & 3) + 1;
+            src1RegSpan = (*src1OperandPtr >> 0xc & 3) + 1;
             _memset(ilInstAPtr,0,0x24);
             ilInstAOpcode = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstAOpcode) + 0)),0x56);
-            ilInstAOpcode = (uint)((*(uint *)(recordByteOffset + iVar6) & 0x3fc0000) == 0xc40000) << 0x10 |
+            ilInstAOpcode = (uint)((*(uint *)(recordByteOffset + instructionBlock) & 0x3fc0000) == 0xc40000) << 0x10 |
                        ilInstAOpcode & 0xc000ffff;
             srcStatus2 = ((int (*)())fpilTranslateSource)(translator,src0Operand,&ilInstASrc0,&ilInstASwz0);
             if ((srcStatus2 == 0) &&
-               (srcStatus2 = ((int (*)())fpilTranslateSource)(translator,puVar21,&ilInstASrc1,&ilInstASwz1), srcStatus2 == 0)) {
+               (srcStatus2 = ((int (*)())fpilTranslateSource)(translator,src1OperandPtr,&ilInstASrc1,&ilInstASwz1), srcStatus2 == 0)) {
               if (dstRegSpan < 2) {
                 ilInstADst = CONCAT22(4,(short)translator[8]);
                 ilInstADstMask = 0x55;
                 ilInstADst = ilInstADst | 0x400000;
                 emitStatus2 = ((int (*)())fpilEmitInstruction)(translator,ilInstAPtr,1,2);
                 if (emitStatus2 == 0) {
-                  iVar23 = src0RegSpan;
+                  maxRegSpan = src0RegSpan;
                   if (src0RegSpan < src1RegSpan) {
-                    iVar23 = src1RegSpan;
+                    maxRegSpan = src1RegSpan;
                   }
-                  bVar1 = src0Advances != 0;
-                  if (((bVar1) || (src1Advances != 0)) && (1 < iVar23)) {
+                  advanceSrc0 = src0Advances != 0;
+                  if (((advanceSrc0) || (src1Advances != 0)) && (1 < maxRegSpan)) {
                     ilInstBPtr = &ilInstBOpcode;
                     ilInstADst = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstADst) + 0)),(short)translator[8] + 1);
                     _memset(ilInstBPtr,0,0x24);
-                    uVar10 = 0x49;
-                    if ((*(uint *)(recordByteOffset + iVar6) & 0x3fc0000) != 0xc40000) {
-                      uVar10 = 3;
+                    ilSelectOpcode = 0x49;
+                    if ((*(uint *)(recordByteOffset + instructionBlock) & 0x3fc0000) != 0xc40000) {
+                      ilSelectOpcode = 3;
                     }
-                    ilInstBOpcode = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstBOpcode) + 0)),uVar10);
-                    sVar3 = (short)translator[8];
-                    ilInstBDst = CONCAT22(4,sVar3);
+                    ilInstBOpcode = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstBOpcode) + 0)),ilSelectOpcode);
+                    tempRegisterBase = (short)translator[8];
+                    ilInstBDst = CONCAT22(4,tempRegisterBase);
                     iVar6 = 1;
-                    ilInstBSrc1 = CONCAT22(4,sVar3 + 1);
-                    ilInstBSrc0 = CONCAT22(4,sVar3);
+                    ilInstBSrc1 = CONCAT22(4,tempRegisterBase + 1);
+                    ilInstBSrc0 = CONCAT22(4,tempRegisterBase);
                     ilInstBDstMask = 0x55;
-                    bVar2 = src1Advances != 0;
+                    advanceSrc1 = src1Advances != 0;
                     ilInstBSwz12[0] = ((unsigned char *)0x00003210);
                     ilInstBSwz0 = ((unsigned char *)0x00003210);
                     ilInstBDst = ilInstBDst | 0x400000;
                     ilInstBSrc1 = ilInstBSrc1 | 0x400000;
                     ilInstBSrc0 = ilInstBSrc0 | 0x400000;
                     do {
-                      if (bVar1) {
+                      if (advanceSrc0) {
                         ilInstASrc0 = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstASrc0) + 0)),(*(unsigned short *)((unsigned char *)&(ilInstASrc0) + 2)) + 1);
                       }
-                      if (bVar2) {
+                      if (advanceSrc1) {
                         ilInstASrc1 = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstASrc1) + 0)),(*(unsigned short *)((unsigned char *)&(ilInstASrc1) + 2)) + 1);
                       }
                       emitStatus3 = ((int (*)())fpilEmitInstruction)(translator,ilInstAPtr,1,2);
@@ -6600,20 +6622,20 @@ joined_r0x00048414:
                          (emitStatus3 = ((int (*)())fpilEmitInstruction)(translator,ilInstBPtr,1,2), emitStatus3 != 0))
                       goto LAB_000488e8;
                       iVar6 = iVar6 + 1;
-                    } while (iVar23 != iVar6);
+                    } while (maxRegSpan != iVar6);
                   }
                   if ((*instHeader & 0x3fc0000) == 0xc40000) {
-                    iVar6 = ((int (*)())fragmentTranslateAll)(translator,recordIndex,iVar23);
+                    iVar6 = ((int (*)())fragmentTranslateAll)(translator,recordIndex,maxRegSpan);
                     goto joined_r0x0004802c;
                   }
                   ilInstBPtr = &ilInstBOpcode;
-                  iVar23 = *translator;
-                  iVar6 = *(int *)(iVar23 + 0x54);
+                  programPtr = *translator;
+                  instBlockOffset = *(int *)(programPtr + 0x54);
                   _memset(ilInstBPtr,0,0x24);
                   ilInstBOpcode = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstBOpcode) + 0)),0x23);
-                  iVar6 = ((int (*)())fpilTranslateDestination)(translator,iVar23 + iVar6 * 8 + recordByteOffset + 8,&ilInstBDst,&ilInstBDstMask,1)
+                  instBlockOffset = ((int (*)())fpilTranslateDestination)(translator,programPtr + instBlockOffset * 8 + recordByteOffset + 8,&ilInstBDst,&ilInstBDstMask,1)
                   ;
-                  if (iVar6 == 0) {
+                  if (instBlockOffset == 0) {
                     ilInstBSrc0 = CONCAT22(4,(short)translator[8]);
                     ilInstBSwz0 = ((unsigned char *)0x00003210);
                     ilInstBSwz12[0] = (undefined *)((uint)ilInstBSwz12[0] & 0xffff0000 | 0x5555);
@@ -6626,7 +6648,7 @@ joined_r0x00048414:
                 }
                 goto LAB_000488e8;
               }
-              ((int (*)())fpilTranslateDestination)(translator,recordByteOffset + iVar6 + 8,&ilInstADst,&ilInstADstMask,0);
+              ((int (*)())fpilTranslateDestination)(translator,recordByteOffset + instructionBlock + 8,&ilInstADst,&ilInstADstMask,0);
               ((int (*)())fpilEmitInstruction)(translator,ilInstAPtr,1,2);
               iVar6 = translator[9];
             }
@@ -6652,13 +6674,13 @@ joined_r0x0004802c:
         break;
       } while( true );
     }
-    iVar8 = translator[9];
-    if (iVar8 == 0) {
-      iVar8 = 3;
+    returnCode = translator[9];
+    if (returnCode == 0) {
+      returnCode = 3;
       translator[9] = 3;
     }
   }
-  return iVar8;
+  return returnCode;
 }
 
 /* fragmentProgramToIL @ 0x48da0 (6552 bytes) */

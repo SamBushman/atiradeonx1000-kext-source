@@ -785,7 +785,7 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 3e90c	3e910	padding	atifsReplayColorAlphaOps	1	
 3ec98	3eca0	padding	atifsReplayProgram	2	
 3ed44	3ed50	padding	fpilEmitAngleConstants	3	
-3ed8c	3ed90	padding	FUN_0003ed50	1	
+3ed8c	3ed90	padding	fpilClassifyDestination	1	
 3ee48	3ee50	padding	fpilSetComponentSelect	2	
 3ee68	3ee70	padding	fpilSetComponentSelect	2	
 3ee88	3ee90	padding	fpilSetComponentSelect	2	
@@ -793,9 +793,9 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 3ef4c	3ef50	padding	fpilEmitScalarConstant	1	
 3f00c	3f010	padding	fpilReserveTokens	1	
 3f044	3f050	padding	fpilReserveTokens	3	
-3f104	3f110	padding	FUN_0003f050	3	
-3f134	3f140	padding	FUN_0003f050	3	
-3f1b8	3f1c0	padding	FUN_0003f050	2	
+3f104	3f110	padding	fpilMapConstantRegister	3	
+3f134	3f140	padding	fpilMapConstantRegister	3	
+3f1b8	3f1c0	padding	fpilMapConstantRegister	2	
 3f234	3f254	table	fpilTranslateSource	8	
 3f2c4	3f2d0	padding	fpilTranslateSource	3	
 3f2f4	3f300	padding	fpilTranslateSource	3	
