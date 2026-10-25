@@ -9,8 +9,23 @@ iVar int, uVar uint, sVar short, bVar flag/byte, cVar char, fVar float, dVar dou
 Parameters are not touched (they have callers to name them).  Variables that were given a real name earlier are not placeholders any more and are
 skipped.  Every such function must be listed in notes_unsplittable_q01.md."""
 import sys, re, glob
-d, out = sys.argv[1], sys.argv[2]
-fns = set(sys.argv[3:])
+import os
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
+HYB = '--hybrid-only' in sys.argv
+args = [a for a in sys.argv[1:] if not a.startswith('--')]
+d, out = args[0], args[1]
+LO = HI = None
+if args[2].isdigit(): LO, HI = int(args[2]), int(args[3]); fns = None
+else: fns = set(args[2:])
+if HYB:
+    import find_webs as F
+def nwebs(fn, var):
+    try:
+        body, brace = F.load(d, fn); nodes, entry = F.build_cfg(body, brace)
+        ws, er = F.webs(nodes, entry, var)
+        return len(ws)
+    except BaseException:
+        return 0
 H = re.compile(r'^/\* (\S+) @ 0x')
 PAT = re.compile(r'\b(pp?p?[a-z]?Var\d+|[iusbcfdl]Var\d+|local_[0-9a-f]+|[a-z]+Stack_[0-9a-f]+|[a-z]Stack[0-9a-f]{8})\b')
 KIND = [('iVar', 'Int'), ('uVar', 'Uint'), ('sVar', 'Short'), ('bVar', 'Flag'), ('cVar', 'Char'), ('fVar', 'Float'), ('dVar', 'Double'), ('lVar', 'Long')]
@@ -31,8 +46,10 @@ def newname(t):
 rows = []
 for pf in sorted(glob.glob(d + '/part_*.c')):
     cur = None; buf = []
+    pn = int(re.search(r'part_(\d+)', pf).group(1))
+    if LO is not None and not LO <= pn <= HI: continue
     def flush():
-        if not cur or cur not in fns: return
+        if not cur or (fns is not None and cur not in fns): return
         text = '\n'.join(buf)
         idents = set(re.findall(r'[A-Za-z_]\w*', text))
         params = set()
@@ -42,6 +59,7 @@ for pf in sorted(glob.glob(d + '/part_*.c')):
         for t in seen:
             nm = newname(t)
             if not nm: continue
+            if HYB and nwebs(cur, t) < 2: continue
             n2 = nm; k = 1
             while n2 in idents: k += 1; n2 = nm + '_' + str(k)
             idents.add(n2)

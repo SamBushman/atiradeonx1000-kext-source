@@ -9198,18 +9198,18 @@ int gld_postDisplayNotification(ctx)
   int driverNotificationName;
   int driverNotificationObject;
   int userInfo;
-  /* local_48/local_44 and local_40/local_3c are each used as a 2-element array (&local_48 /
+  /* local_48/scratchStack44 and local_40/scratchStack3c are each used as a 2-element array (&local_48 /
    * &local_40 passed to _CFDictionaryCreate with count=2) - classic Ghidra stack-split: at -O0
-   * these landed non-adjacent (confirmed live: &local_48+4 == &local_40, not &local_44), so
-   * CFDictionaryCreate read local_40's CFNumber as the 2nd dictionary key instead of local_44's
+   * these landed non-adjacent (confirmed live: &local_48+4 == &local_40, not &scratchStack44), so
+   * CFDictionaryCreate read local_40's CFNumber as the 2nd dictionary key instead of scratchStack44's
    * CFString, corrupting the notification dictionary and crashing inside CFStringCreateCopy.
    * Merged into real contiguous arrays to match the actual usage (issue #64). */
   int local_48_arr[2];
   int local_40_arr[2];
 #define local_48 local_48_arr[0]
-#define local_44 local_48_arr[1]
+#define scratchStack44 local_48_arr[1]
 #define local_40 local_40_arr[0]
-#define local_3c local_40_arr[1]
+#define scratchStack3c local_40_arr[1]
 
   distributedCenter = _CFNotificationCenterGetDistributedCenter();
   pid = _getpid();
@@ -9228,10 +9228,10 @@ int gld_postDisplayNotification(ctx)
     _CFNotificationCenterAddObserver(distributedCenter,ctx,PTR_FUN_001e88c4,displaysNotificationName,displaysNotificationObject,2);
     local_48 = pidKey;
     local_40 = _CFNumberCreate(0,3,ctx + 0x2a60);
-    local_44 = displayMaskKey;
-    local_3c = _CFNumberCreate(0,3,ctx + 0x2a64);
+    scratchStack44 = displayMaskKey;
+    scratchStack3c = _CFNumberCreate(0,3,ctx + 0x2a64);
     if (local_40 != 0) {
-      if (local_3c != 0) {
+      if (scratchStack3c != 0) {
         userInfo = _CFDictionaryCreate(*(undefined4 *)PTR_001e88c0,&local_48,&local_40,2,PTR_001e88b8,
                                     PTR_001e88bc);
         if (userInfo != 0) {
@@ -9243,8 +9243,8 @@ int gld_postDisplayNotification(ctx)
       _CFRelease(local_40);
     }
 LAB_00017cfc:
-    if (local_3c != 0) {
-      _CFRelease(local_3c);
+    if (scratchStack3c != 0) {
+      _CFRelease(scratchStack3c);
     }
   }
   _CFRelease(displaysNotificationName);
@@ -10256,13 +10256,13 @@ int glDrawPixels_impl(ctx, rasterPos, width, height, format, pixelType, pixels, 
   bool notStencil;
   float fVar3;
   float rasterXScaled;
-  float fVar5;
+  float scratchFloat5;
   float rasterXRounded;
   float zoomYScaled;
   undefined *unpackState;
   uint zoomXFlag;
   int iVar10;
-  int iVar11;
+  int scratchInt11;
   undefined4 typeArg;
   uint scaledWidth;
   int convBuffer;
@@ -10276,7 +10276,7 @@ int glDrawPixels_impl(ctx, rasterPos, width, height, format, pixelType, pixels, 
   uint pathFlagsB;
   undefined1 *puVar21;
   char *scratchR9;
-  int iVar23;
+  int scratchInt23;
   uint fullColumns;
   int *piVar25;
   char *scratchR10;
@@ -10303,8 +10303,8 @@ int glDrawPixels_impl(ctx, rasterPos, width, height, format, pixelType, pixels, 
   undefined4 procMask;
   uint procWidth;
   uint procHeight;
-  float local_3ec;
-  float local_3e8;
+  float scratchStack3ec;
+  float scratchStack3e8;
   uint local_3e4;
   uint local_3e0;
   uint local_3dc;
@@ -10426,14 +10426,14 @@ int glDrawPixels_impl(ctx, rasterPos, width, height, format, pixelType, pixels, 
   formatArg = format;
   typeArg = pixelType;
   pfStack0000001c = rasterPos;
-  if (((((((*(int *)(ctx + GLD_unitObject0) == 0) || (iVar11 = FUN_000a4760(ctx), iVar11 == 0)) &&
-         ((*(int *)(ctx + GLD_unitObject1) == 0 || (iVar11 = FUN_000a4760(ctx), iVar11 == 1)))) &&
-        ((*(int *)(ctx + GLD_unitObject2) == 0 || (iVar11 = FUN_000a4760(ctx), iVar11 == 2)))) &&
-       ((*(int *)(ctx + GLD_unitObject3) == 0 || (iVar11 = FUN_000a4760(ctx), iVar11 == 3)))) &&
-      (((*(int *)(ctx + GLD_unitObject4) == 0 || (iVar11 = FUN_000a4760(ctx), iVar11 == 4)) &&
-       ((*(int *)(ctx + GLD_unitObject5) == 0 || (iVar11 = FUN_000a4760(ctx), iVar11 == 5)))))) &&
-     (((*(int *)(ctx + GLD_unitObject6) == 0 || (iVar11 = FUN_000a4760(ctx), iVar11 == 6)) &&
-      ((*(int *)(ctx + GLD_unitObject7) == 0 || (iVar11 = FUN_000a4760(ctx), iVar11 == 7)))))) {
+  if (((((((*(int *)(ctx + GLD_unitObject0) == 0) || (scratchInt11 = FUN_000a4760(ctx), scratchInt11 == 0)) &&
+         ((*(int *)(ctx + GLD_unitObject1) == 0 || (scratchInt11 = FUN_000a4760(ctx), scratchInt11 == 1)))) &&
+        ((*(int *)(ctx + GLD_unitObject2) == 0 || (scratchInt11 = FUN_000a4760(ctx), scratchInt11 == 2)))) &&
+       ((*(int *)(ctx + GLD_unitObject3) == 0 || (scratchInt11 = FUN_000a4760(ctx), scratchInt11 == 3)))) &&
+      (((*(int *)(ctx + GLD_unitObject4) == 0 || (scratchInt11 = FUN_000a4760(ctx), scratchInt11 == 4)) &&
+       ((*(int *)(ctx + GLD_unitObject5) == 0 || (scratchInt11 = FUN_000a4760(ctx), scratchInt11 == 5)))))) &&
+     (((*(int *)(ctx + GLD_unitObject6) == 0 || (scratchInt11 = FUN_000a4760(ctx), scratchInt11 == 6)) &&
+      ((*(int *)(ctx + GLD_unitObject7) == 0 || (scratchInt11 = FUN_000a4760(ctx), scratchInt11 == 7)))))) {
     pathFlagsB = *(uint *)(ctx + GLD_drawPixelsFlags) & 0xfffdffff;
     *(uint *)(ctx + GLD_drawPixelsFlags) = pathFlagsB;
   }
@@ -10490,10 +10490,10 @@ int glDrawPixels_impl(ctx, rasterPos, width, height, format, pixelType, pixels, 
        ((*(uint *)(((unsigned char *)0x000030b4) + ctxState) & 0xff0000) == 0)))))) {
     FUN_0001a010(ctx,*(undefined4 *)(ctx + 0x26a0),widthCopy,heightArg,formatArg,typeArg,ctxState);
   }
-  local_3e8 = 0.0;
+  scratchStack3e8 = 0.0;
   procFlags = 0;
   procMask = 0x7ffff;
-  local_3ec = 0.0;
+  scratchStack3ec = 0.0;
   unpackState = (undefined *)0x0;
   if (rawTransfer == 0) {
     ctxState = *(int *)(ctx + GLD_engineState);
@@ -10527,9 +10527,9 @@ int glDrawPixels_impl(ctx, rasterPos, width, height, format, pixelType, pixels, 
     procChannelFormat = 0xe;
     procChannelSize = 0;
   }
-  local_3ec = *pfStack0000001c;
+  scratchStack3ec = *pfStack0000001c;
   procMode = 2;
-  rasterXScaled = local_3ec * *(float *)(ctx + GLD_rasterScaleX);
+  rasterXScaled = scratchStack3ec * *(float *)(ctx + GLD_rasterScaleX);
   rasterXRounded = rasterXScaled + 0.5;
   if (0.0 <= rasterXRounded) {
     ctxState = (int)rasterXRounded;
@@ -10541,29 +10541,29 @@ int glDrawPixels_impl(ctx, rasterPos, width, height, format, pixelType, pixels, 
   }
   if (((unsigned char *)GLD_yInverted)[ctx] == '\0') {
     fVar3 = *(float *)(ctx + GLD_rasterScaleY);
-    local_3e8 = pfStack0000001c[1];
-    fVar5 = local_3e8 * fVar3 + 0.5;
+    scratchStack3e8 = pfStack0000001c[1];
+    scratchFloat5 = scratchStack3e8 * fVar3 + 0.5;
     scratchR10 = (char *)pfStack0000001c;
-    if (0.0 <= fVar5) {
-      windowY = (uint)(int)fVar5;
+    if (0.0 <= scratchFloat5) {
+      windowY = (uint)(int)scratchFloat5;
       fctiwzSlot5 = (longlong)(int)windowY;
     }
     else {
-      windowY = (uint)(int)(fVar5 - 0.999975);
+      windowY = (uint)(int)(scratchFloat5 - 0.999975);
       fctiwzSlot4 = (longlong)(int)windowY;
     }
   }
   else {
     fVar3 = *(float *)(ctx + GLD_rasterScaleY);
-    local_3e8 = pfStack0000001c[1];
-    fVar5 = local_3e8 * fVar3 - 0.5;
+    scratchStack3e8 = pfStack0000001c[1];
+    scratchFloat5 = scratchStack3e8 * fVar3 - 0.5;
     scratchR10 = "ret_logicalnz ";
-    if (0.0 <= fVar5) {
-      windowY = (uint)(int)fVar5;
+    if (0.0 <= scratchFloat5) {
+      windowY = (uint)(int)scratchFloat5;
       fctiwzSlot3 = (longlong)(int)windowY;
     }
     else {
-      windowY = (uint)(int)(fVar5 + 0.999975);
+      windowY = (uint)(int)(scratchFloat5 + 0.999975);
       fctiwzSlot2 = (longlong)(int)windowY;
     }
   }
@@ -10578,8 +10578,8 @@ int glDrawPixels_impl(ctx, rasterPos, width, height, format, pixelType, pixels, 
   scratchR9 = "ret_logicalnz ";
   if ((zoomXScaled == 1.0) && (zoomYScaled == 1.0)) {
     convRowBytes = bytesPerPixel * width;
-    local_3e8 = 0.0;
-    local_3ec = 0.0;
+    scratchStack3e8 = 0.0;
+    scratchStack3ec = 0.0;
     convBuffer = height * convRowBytes;
     xDir = 1;
     yDir = 1;
@@ -10588,7 +10588,7 @@ int glDrawPixels_impl(ctx, rasterPos, width, height, format, pixelType, pixels, 
     goto LAB_000194f4;
   }
   scratchR10 = "ret_logicalnz ";
-  fVar3 = fVar3 * local_3e8;
+  fVar3 = fVar3 * scratchStack3e8;
   if (zoomXScaled < 0.0) {
     rasterXScaled = rasterXScaled - 0.5;
     if (0.0 <= rasterXScaled) {
@@ -10686,16 +10686,16 @@ LAB_0001931c:
       windowY = windowY - 1;
     }
   }
-  fctiwzSlot18 = (longlong)(int)local_3ec;
-  fctiwzSlot19 = (longlong)(int)local_3e8;
+  fctiwzSlot18 = (longlong)(int)scratchStack3ec;
+  fctiwzSlot19 = (longlong)(int)scratchStack3e8;
   widthI2dLo = width ^ 0x80000000;
   rasterXTruncI2dHi = 0x43300000;
   widthI2dHi = 0x43300000;
   rasterYTruncI2dHi = 0x43300000;
-  rasterXTruncI2dLo = (int)local_3ec ^ 0x80000000;
-  rasterYTruncI2dLo = (int)local_3e8 ^ 0x80000000;
-  local_3ec = local_3ec - (float)((double)CONCAT44(0x43300000,rasterXTruncI2dLo) - 4503601774854144.0);
-  local_3e8 = local_3e8 - (float)((double)CONCAT44(0x43300000,rasterYTruncI2dLo) - 4503601774854144.0);
+  rasterXTruncI2dLo = (int)scratchStack3ec ^ 0x80000000;
+  rasterYTruncI2dLo = (int)scratchStack3e8 ^ 0x80000000;
+  scratchStack3ec = scratchStack3ec - (float)((double)CONCAT44(0x43300000,rasterXTruncI2dLo) - 4503601774854144.0);
+  scratchStack3e8 = scratchStack3e8 - (float)((double)CONCAT44(0x43300000,rasterYTruncI2dLo) - 4503601774854144.0);
   scaledWidth = _glgPixelCenters(convResult,r4AfterCall,puVar16,puVar17,heightCopy,piVar18,scratchR9,scratchR10);
   heightI2dLo = height ^ 0x80000000;
   heightI2dHi = 0x43300000;
@@ -10731,21 +10731,21 @@ LAB_000194f4:
           scaledWidth = (scaledWidth - *(int *)(((unsigned char *)0x00002fb0) + engineState)) + 1;
         }
         scratchR10 = *(char **)(ctx + GLD_engineObjects);
-        iVar23 = *(int *)((int)*(float *)((int)scratchR10 + 0x140) + 0x30);
-        local_3e4 = (uint)*(ushort *)(iVar23 + 0x98);
-        local_3e0 = (uint)*(ushort *)(iVar23 + 0x9a);
-        local_3dc = (uint)*(ushort *)(iVar23 + 0x8c);
-        local_3d8 = *(undefined4 *)(iVar23 + 0x9c);
-        iVar23 = *(int *)((int)*(float *)((int)scratchR10 + 0x148) + 0x30);
-        local_3d4 = (uint)*(ushort *)(iVar23 + 0x98);
-        local_3d0 = (uint)*(ushort *)(iVar23 + 0x9a);
-        local_3cc = (uint)*(ushort *)(iVar23 + 0x8c);
-        local_3c8 = *(undefined4 *)(iVar23 + 0x9c);
-        iVar23 = *(int *)((int)*(float *)((int)scratchR10 + 0x144) + 0x30);
-        local_3c4 = (uint)*(ushort *)(iVar23 + 0x98);
-        local_3c0 = (uint)*(ushort *)(iVar23 + 0x9a);
-        local_3bc = (uint)*(ushort *)(iVar23 + 0x8c);
-        local_3b8 = *(undefined4 *)(iVar23 + 0x9c);
+        scratchInt23 = *(int *)((int)*(float *)((int)scratchR10 + 0x140) + 0x30);
+        local_3e4 = (uint)*(ushort *)(scratchInt23 + 0x98);
+        local_3e0 = (uint)*(ushort *)(scratchInt23 + 0x9a);
+        local_3dc = (uint)*(ushort *)(scratchInt23 + 0x8c);
+        local_3d8 = *(undefined4 *)(scratchInt23 + 0x9c);
+        scratchInt23 = *(int *)((int)*(float *)((int)scratchR10 + 0x148) + 0x30);
+        local_3d4 = (uint)*(ushort *)(scratchInt23 + 0x98);
+        local_3d0 = (uint)*(ushort *)(scratchInt23 + 0x9a);
+        local_3cc = (uint)*(ushort *)(scratchInt23 + 0x8c);
+        local_3c8 = *(undefined4 *)(scratchInt23 + 0x9c);
+        scratchInt23 = *(int *)((int)*(float *)((int)scratchR10 + 0x144) + 0x30);
+        local_3c4 = (uint)*(ushort *)(scratchInt23 + 0x98);
+        local_3c0 = (uint)*(ushort *)(scratchInt23 + 0x9a);
+        local_3bc = (uint)*(ushort *)(scratchInt23 + 0x8c);
+        local_3b8 = *(undefined4 *)(scratchInt23 + 0x9c);
       }
       stateBytes = 0x274;
       zoomXScaledB = *(float *)(((unsigned char *)0x00002e48) + engineState) * *(float *)(ctx + GLD_rasterScaleX);
