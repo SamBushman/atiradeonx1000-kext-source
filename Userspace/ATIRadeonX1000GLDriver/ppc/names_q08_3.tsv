@@ -1,0 +1,104 @@
+use	R300MachineAssembler__assembleAluInstruction	uVar10	classifyFlags	INFERRED	return value of classifyAluOperation: bit0 rgb, bit1 alpha, bit2, bit4 flags unpacked into local_6c/70/74/78	^\s*uVar10\ =\ FUN_0019786c\(param_1,\&local_9c,loopPtr,param_2,a4,piVar25\);$	+3
+use	R300MachineAssembler__assembleAluInstruction	uVar10	classifyFlags	INFERRED	return value of classifyAluOperation: bit0 rgb, bit1 alpha, bit2, bit4 flags unpacked into local_6c/70/74/78	^\s*local_78\ =\ uVar10\ >>\ 4\ \&\ 1;$	+2
+use	R300MachineAssembler__assembleAluInstruction	uVar10	classifyAlphaCopy	INFERRED	copy of the alpha-write bit used as writesAlpha	^\s*uVar10\ =\ local_70;$	+1
+use	R300MachineAssembler__assembleAluInstruction	uVar10	classifyAlphaCopy	INFERRED	copy of the alpha-write bit used as writesAlpha	^\s*if\ \(uVar10\ !=\ 0\)\ \{$	+1
+local	R300MachineAssembler__assembleAluInstruction	local_6c	classifyWritesRgb	INFERRED	classifyFlags & 1
+local	R300MachineAssembler__assembleAluInstruction	local_70	classifyWritesAlpha	INFERRED	classifyFlags >> 1 & 1
+local	R300MachineAssembler__assembleAluInstruction	local_74	classifyFlagBit2	INFERRED	classifyFlags >> 2 & 1; selects srcpEnablesAlpha / classifyOut2b lane enables
+local	R300MachineAssembler__assembleAluInstruction	local_78	classifyFlagBit4	INFERRED	classifyFlags >> 4 & 1; seeds the emulated condition-register word
+local	R300MachineAssembler__assembleAluInstruction	local_68	irOpcode	INFERRED	opcode of irInst (irInst->+0x88->+8); 0xb4 selects the three-source path
+local	R300MachineAssembler__assembleAluInstruction	local_5c	alphaModAlias	INFERRED	pointer copy of the alphaMod array
+local	R300MachineAssembler__assembleAluInstruction	local_60	picBase	INFERRED	PIC base address (&DAT_001b81b8) used to reach the table word at -0x56f8
+local	R300MachineAssembler__assembleAluInstruction	local_64	crFlagsWord	INFERRED	emulated PowerPC CR0 word (lt/gt/eq/so of classifyFlagBit4 << 0x1c); crFlagsByte is its top byte
+local	R300MachineAssembler__assembleAluInstruction	local_7c	sourceReplaced	INFERRED	1 when the source was replaced by the source of the forwarded move
+local	R300MachineAssembler__assembleAluInstruction	local_80	movInst	INFERRED	the forwardable move instruction feeding the source (a0), or null
+local	R300MachineAssembler__assembleAluInstruction	local_84	swizzleMask	INFERRED	out-parameter of SelectWord__readMask(swizzle)
+local	R300MachineAssembler__assembleAluInstruction	local_88	composedSelect	INFERRED	out-parameter of SelectWord__compose
+local	R300MachineAssembler__assembleAluInstruction	local_9c	rgbLaneEnables	INFERRED	out-parameter 1 of classifyAluOperation: lane enables of the rgb part
+local	R300MachineAssembler__assembleAluInstruction	local_ac	alphaLaneEnables	INFERRED	out-parameter 2 of classifyAluOperation: lane enables of the alpha part
+local	R300MachineAssembler__assembleAluInstruction	local_f0	sourceRegister	INFERRED	hardware register index assigned to the current source (-1 if none)
+local	R300MachineAssembler__assembleAluInstruction	local_f4	alphaHwOpcode	INFERRED	out-parameter of classifyAluOperation (alpha hardware opcode)
+local	R300MachineAssembler__assembleAluInstruction	local_f8	rgbHwOpcode	INFERRED	out-parameter of classifyAluOperation (rgb hardware opcode)
+use	R300MachineAssembler__assembleAluInstruction	bVar3	isThirdSource	INFERRED	srcIdx == 3	^\s*bVar3\ =\ piVar22\ ==\ \(int\ \*\)\(\(int\)\(\(unsigned\ char\ \*\)0x0\)\ \+\ 3\);$	+1
+use	R300MachineAssembler__assembleAluInstruction	bVar3	isThirdSource	INFERRED	srcIdx == 3	^\s*if\ \(\(bVar3\)\ \&\&\ \(!\(bool\)\(bVar5\ >>\ 5\ \&\ 1\)\)\)\ \{$	+1
+use	R300MachineAssembler__assembleAluInstruction	bVar3	isThirdSource	INFERRED	srcIdx == 3	^\s*if\ \(bVar3\)\ \{$	+1
+use	R300MachineAssembler__assembleAluInstruction	bVar3	isThirdSource	INFERRED	srcIdx == 3	^\s*if\ \(bVar3\)\ \{$@2	+1
+use	R300MachineAssembler__assembleAluInstruction	bVar3	isThirdSource	INFERRED	srcIdx == 3	^\s*if\ \(\(bVar3\)\ \&\&\ \(local_74\ !=\ 0\)\)\ \{$	+1
+use	R300MachineAssembler__assembleAluInstruction	bVar3	isThirdSource	INFERRED	srcIdx == 3	^\s*if\ \(bVar3\)\ \{$@3	+1
+use	R300MachineAssembler__assembleAluInstruction	bVar3	isThirdSource	INFERRED	srcIdx == 3	^\s*if\ \(bVar3\)\ \{$@4	+1
+use	R300MachineAssembler__assembleAluInstruction	bVar3	swizzleHighClear	INFERRED	upper 24 bits of the swizzle mask are clear	^\s*bVar3\ =\ \(local_84\ \&\ 0xffffff00\)\ ==\ 0;$	+1
+use	R300MachineAssembler__assembleAluInstruction	bVar3	swizzleHighClear	INFERRED	upper 24 bits of the swizzle mask are clear	^\s*if\ \(!bVar3\)\ \{$	+1
+use	R300MachineAssembler__assembleAluInstruction	bVar3	swizzleHighClear	INFERRED	upper 24 bits of the swizzle mask are clear	^\s*if\ \(!bVar3\)\ \{$@2	+1
+use	R300MachineAssembler__assembleAluInstruction	bVar3	swizzleHighClear	INFERRED	upper 24 bits of the swizzle mask are clear	^\s*if\ \(bVar3\)\ \{$@5	+1
+use	R300MachineAssembler__assembleAluInstruction	bVar3	isOpcode9a	INFERRED	flag set when the source opcode is 0x9a and its flags bit 1 is clear	^\s*bVar3\ =\ false;$	+1
+use	R300MachineAssembler__assembleAluInstruction	bVar3	isOpcode9a	INFERRED	flag set when the source opcode is 0x9a and its flags bit 1 is clear	^\s*if\ \(\(iVar13\ ==\ 0x9a\)\ \&\&\ \(bVar3\ =\ true,\ \(piVar19\[8\]\ \&\ 2U\)\ ==\ 0\)\)\ goto\ LAB_00198f58;$	+1
+use	R300MachineAssembler__assembleAluInstruction	bVar3	isOpcode9a	INFERRED	flag set when the source opcode is 0x9a and its flags bit 1 is clear	^\s*bVar3\ =\ false;$@2	+1
+use	R300MachineAssembler__assembleAluInstruction	bVar3	isOpcode9a	INFERRED	flag set when the source opcode is 0x9a and its flags bit 1 is clear	^\s*if\ \(\(bVar3\)\ \|\|\ \(bVar4\)\)\ \{$	+1
+use	R300MachineAssembler__assembleAluInstruction	bVar4	moreSlots	INFERRED	search loop continues while slot index != 3	^\s*bVar4\ =\ loopIndex3\ !=\ 3;$	+1
+use	R300MachineAssembler__assembleAluInstruction	bVar4	moreSlots	INFERRED	search loop continues while slot index != 3	^\s*\}\ while\ \(bVar4\);$	+1
+use	R300MachineAssembler__assembleAluInstruction	bVar4	moreSlots	INFERRED	search loop continues while slot index != 3	^\s*bVar4\ =\ loopIndex3\ !=\ 3;$@2	+1
+use	R300MachineAssembler__assembleAluInstruction	bVar4	moreSlots	INFERRED	search loop continues while slot index != 3	^\s*\}\ while\ \(bVar4\);$@2	+1
+use	R300MachineAssembler__assembleAluInstruction	bVar4	moreSlots	INFERRED	search loop continues while slot index != 3	^\s*bVar4\ =\ loopIndex3\ !=\ 3;$@3	+1
+use	R300MachineAssembler__assembleAluInstruction	bVar4	moreSlots	INFERRED	search loop continues while slot index != 3	^\s*\}\ while\ \(bVar4\);$@3	+1
+use	R300MachineAssembler__assembleAluInstruction	bVar4	moreSlots	INFERRED	search loop continues while slot index != 3	^\s*bVar4\ =\ loopIndex3\ !=\ 3;$@4	+1
+use	R300MachineAssembler__assembleAluInstruction	bVar4	moreSlots	INFERRED	search loop continues while slot index != 3	^\s*\}\ while\ \(bVar4\);$@4	+1
+use	R300MachineAssembler__assembleAluInstruction	bVar4	moreSlots	INFERRED	search loop continues while slot index != 3	^\s*bVar4\ =\ loopIndex3\ !=\ 3;$@5	+1
+use	R300MachineAssembler__assembleAluInstruction	bVar4	moreSlots	INFERRED	search loop continues while slot index != 3	^\s*\}\ while\ \(bVar4\);$@5	+1
+use	R300MachineAssembler__assembleAluInstruction	bVar4	maskByteNonZero	INFERRED	low byte of the swizzle mask is non-zero	^\s*bVar4\ =\ \-1\ <\ \(int\)\-loopIndex3;$	+2
+use	R300MachineAssembler__assembleAluInstruction	bVar4	maskByteNonZero	INFERRED	low byte of the swizzle mask is non-zero	^\s*if\ \(!bVar4\)\ \{$@2	+1
+use	R300MachineAssembler__assembleAluInstruction	bVar4	maskByteNonZero	INFERRED	low byte of the swizzle mask is non-zero	^\s*if\ \(bVar4\)\ \{$	+1
+use	R300MachineAssembler__assembleAluInstruction	bVar4	isOpcode9aAlpha	INFERRED	flag set when the source opcode is 0x9a and its flags bit 1 is clear	^\s*bVar4\ =\ false;$	+1
+use	R300MachineAssembler__assembleAluInstruction	bVar4	isOpcode9aAlpha	INFERRED	flag set when the source opcode is 0x9a and its flags bit 1 is clear	^\s*if\ \(\(iVar13\ ==\ 0x9a\)\ \&\&\ \(bVar4\ =\ true,\ \(piVar19\[8\]\ \&\ 2U\)\ ==\ 0\)\)\ goto\ LAB_00199420;$	+1
+use	R300MachineAssembler__assembleAluInstruction	bVar4	isOpcode9aAlpha	INFERRED	flag set when the source opcode is 0x9a and its flags bit 1 is clear	^\s*bVar4\ =\ false;$@2	+1
+use	R300MachineAssembler__assembleAluInstruction	bVar4	isOpcode9aAlpha	INFERRED	flag set when the source opcode is 0x9a and its flags bit 1 is clear	^\s*if\ \(\(bVar3\)\ \|\|\ \(bVar4\)\)\ \{$	+1
+use	R300MachineAssembler__assembleAluInstruction	iVar8	clearOffset	INFERRED	byte offset while the four select/modifier arrays are zeroed	^\s*iVar8\ =\ 0;$	+1
+use	R300MachineAssembler__assembleAluInstruction	iVar8	clearOffset	INFERRED	byte offset while the four select/modifier arrays are zeroed	^\s*\*\(undefined4\ \*\)\(iVar8\ \+\ \(int\)local_bc\)\ =\ 0;$	+5
+use	R300MachineAssembler__assembleAluInstruction	iVar8	sourceCount	INFERRED	number of sources of irInst (vtable +0x14), 3 for opcode 0xb4	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*param_2\ \+\ 0x14\)\)\(param_2\);$	+1
+use	R300MachineAssembler__assembleAluInstruction	iVar8	sourceCount	INFERRED	number of sources of irInst (vtable +0x14), 3 for opcode 0xb4	^\s*iVar8\ =\ 3;$	+1
+use	R300MachineAssembler__assembleAluInstruction	iVar8	sourceCount	INFERRED	number of sources of irInst (vtable +0x14), 3 for opcode 0xb4	^\s*\}\ while\ \(\(int\)piVar22\ <=\ iVar8\);$	+1
+use	R300MachineAssembler__assembleAluInstruction	iVar8	sourceCount	INFERRED	number of sources of irInst (vtable +0x14), 3 for opcode 0xb4	^\s*else\ if\ \(0\ <\ iVar8\)\ goto\ LAB_00198290;$	+1
+use	R300MachineAssembler__assembleAluInstruction	iVar8	sourceCount	INFERRED	number of sources of irInst (vtable +0x14), 3 for opcode 0xb4	^\s*if\ \(\(\(\(param_2\[0x20\]\ !=\ 0\)\ \&\&\ \(iVar8\ =\ FUN_00126760\(param_2\[0x26\]\),\ iVar8\ !=\ 0\)\)\ \&\&$	+3
+use	R300MachineAssembler__assembleAluInstruction	iVar11	hwRegister2	INFERRED	hardware register of source 2 (0 or vslot 0xe0 result)	^\s*iVar11\ =\ 0;$	+1
+use	R300MachineAssembler__assembleAluInstruction	iVar11	hwRegister2	INFERRED	hardware register of source 2 (0 or vslot 0xe0 result)	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0xe0\)\)\(param_1,uVar14\);$	+1
+use	R300MachineAssembler__assembleAluInstruction	iVar11	hwRegister2	INFERRED	hardware register of source 2 (0 or vslot 0xe0 result)	^\s*iVar11\ =\ thunk_FUN_00134de8\(uVar24,uVar14\);$	+1
+use	R300MachineAssembler__assembleAluInstruction	iVar11	hwRegister2	INFERRED	hardware register of source 2 (0 or vslot 0xe0 result)	^\s*param_1\[0xe\]\ =\ iVar11;$	+1
+use	R300MachineAssembler__assembleAluInstruction	iVar11	hwRegister2	INFERRED	hardware register of source 2 (0 or vslot 0xe0 result)	^\s*param_1\[0xf\]\ =\ iVar11;$	+1
+use	R300MachineAssembler__assembleAluInstruction	iVar11	hwRegister2	INFERRED	hardware register of source 2 (0 or vslot 0xe0 result)	^\s*param_1\[0x12\]\ =\ iVar11;$	+1
+use	R300MachineAssembler__assembleAluInstruction	iVar11	hwRegister2	INFERRED	hardware register of source 2 (0 or vslot 0xe0 result)	^\s*param_1\[0x13\]\ =\ iVar11;$	+1
+use	R300MachineAssembler__assembleAluInstruction	iVar12	hwRegister3	INFERRED	hardware register of source 3 (0 or vslot 0xe0 result)	^\s*iVar12\ =\ 0;$	+1
+use	R300MachineAssembler__assembleAluInstruction	iVar12	hwRegister3	INFERRED	hardware register of source 3 (0 or vslot 0xe0 result)	^\s*iVar12\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0xe0\)\)\(param_1,uVar14\);$	+1
+use	R300MachineAssembler__assembleAluInstruction	iVar12	hwRegister3	INFERRED	hardware register of source 3 (0 or vslot 0xe0 result)	^\s*iVar12\ =\ thunk_FUN_00134de8\(uVar24,uVar14\);$	+1
+use	R300MachineAssembler__assembleAluInstruction	iVar12	hwRegister3	INFERRED	hardware register of source 3 (0 or vslot 0xe0 result)	^\s*param_1\[0xf\]\ =\ iVar12;$	+1
+use	R300MachineAssembler__assembleAluInstruction	iVar12	hwRegister3	INFERRED	hardware register of source 3 (0 or vslot 0xe0 result)	^\s*param_1\[0xe\]\ =\ iVar12;$	+1
+use	R300MachineAssembler__assembleAluInstruction	iVar12	hwRegister3	INFERRED	hardware register of source 3 (0 or vslot 0xe0 result)	^\s*param_1\[0x13\]\ =\ iVar12;$	+1
+use	R300MachineAssembler__assembleAluInstruction	iVar12	hwRegister3	INFERRED	hardware register of source 3 (0 or vslot 0xe0 result)	^\s*param_1\[0x12\]\ =\ iVar12;$	+1
+use	R300MachineAssembler__assembleAluInstruction	iVar13	selectsW	INFERRED	anyEnabledLaneSelectsW result of the alpha swizzle	^\s*iVar13\ =\ FUN_0019534c\(piVar23,loopRemaining\);$	+1
+use	R300MachineAssembler__assembleAluInstruction	iVar13	selectsW	INFERRED	anyEnabledLaneSelectsW result of the alpha swizzle	^\s*if\ \(iVar13\ !=\ 0\)\ \{$@2	+1
+use	R300MachineAssembler__assembleAluInstruction	iVar13	selectsW	INFERRED	anyEnabledLaneSelectsW result of the alpha swizzle	^\s*if\ \(\(a0\ ==\ piVar25\)\ \|\|$@3	+11
+use	R300MachineAssembler__assembleAluInstruction	iVar13	srcOpcode	INFERRED	opcode of the source instruction (a0->+0x88->+8)	^\s*iVar13\ =\ \*\(int\ \*\)\(a0\[0x22\]\ \+\ 8\);$	+1
+use	R300MachineAssembler__assembleAluInstruction	iVar13	srcOpcode	INFERRED	opcode of the source instruction (a0->+0x88->+8)	^\s*\(param_1,\*\(undefined4\ \*\)\(PTR_DAT_001e913c\ \+\ iVar13\ \*\ 0x38\ \+\ 0xc\),loopPtr,$	+2
+use	R300MachineAssembler__assembleAluInstruction	iVar13	srcOpcode	INFERRED	opcode of the source instruction (a0->+0x88->+8)	^\s*\(param_1,\*\(undefined4\ \*\)\(PTR_DAT_001e913c\ \+\ iVar13\ \*\ 0x38\ \+\ 0xc\),loopPtr,$@2	+2
+use	R300MachineAssembler__assembleAluInstruction	iVar13	srcOpcode	INFERRED	opcode of the source instruction (a0->+0x88->+8)	^\s*if\ \(\(iVar13\ ==\ 0x9a\)\ \&\&\ \(bVar3\ =\ true,\ \(piVar19\[8\]\ \&\ 2U\)\ ==\ 0\)\)\ goto\ LAB_00198f58;$	+1
+use	R300MachineAssembler__assembleAluInstruction	iVar13	srcOpcode	INFERRED	opcode of the source instruction (a0->+0x88->+8)	^\s*if\ \(\(iVar13\ ==\ 0x9a\)\ \&\&\ \(bVar4\ =\ true,\ \(piVar19\[8\]\ \&\ 2U\)\ ==\ 0\)\)\ goto\ LAB_00199420;$	+1
+use	R300MachineAssembler__assembleAluInstruction	iVar13	hwRegister	INFERRED	hardware register of source 1 (0 or vslot 0xe0 result)	^\s*iVar13\ =\ 0;$	+1
+use	R300MachineAssembler__assembleAluInstruction	iVar13	hwRegister	INFERRED	hardware register of source 1 (0 or vslot 0xe0 result)	^\s*iVar13\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0xe0\)\)\(param_1,uVar14\);$	+1
+use	R300MachineAssembler__assembleAluInstruction	iVar13	hwRegister	INFERRED	hardware register of source 1 (0 or vslot 0xe0 result)	^\s*iVar13\ =\ thunk_FUN_00134de8\(uVar24,uVar14\);$	+1
+use	R300MachineAssembler__assembleAluInstruction	iVar13	hwRegister	INFERRED	hardware register of source 1 (0 or vslot 0xe0 result)	^\s*param_1\[0xe\]\ =\ iVar13;$	+1
+use	R300MachineAssembler__assembleAluInstruction	iVar13	hwRegister	INFERRED	hardware register of source 1 (0 or vslot 0xe0 result)	^\s*param_1\[0x12\]\ =\ iVar13;$	+1
+use	R300MachineAssembler__assembleAluInstruction	piVar25	slotInst	INFERRED	source instruction already held by slot n of the rgb/alpha register table (this[7+n] / this[10+n])	^\s*piVar25\ =\ \(int\ \*\)loopPtr\[7\];$	+1
+use	R300MachineAssembler__assembleAluInstruction	piVar25	slotInst	INFERRED	source instruction already held by slot n of the rgb/alpha register table (this[7+n] / this[10+n])	^\s*if\ \(\(a0\ ==\ piVar25\)\ \|\|$	+10
+use	R300MachineAssembler__assembleAluInstruction	piVar25	slotInst	INFERRED	source instruction already held by slot n of the rgb/alpha register table (this[7+n] / this[10+n])	^\s*piVar25\ =\ \(int\ \*\)loopPtr\[10\];$	+1
+use	R300MachineAssembler__assembleAluInstruction	piVar25	slotInst	INFERRED	source instruction already held by slot n of the rgb/alpha register table (this[7+n] / this[10+n])	^\s*if\ \(\(a0\ ==\ piVar25\)\ \|\|$@2	+11
+use	R300MachineAssembler__assembleAluInstruction	piVar25	slotInst	INFERRED	source instruction already held by slot n of the rgb/alpha register table (this[7+n] / this[10+n])	^\s*piVar25\ =\ \(int\ \*\)loopPtr2\[7\];$	+1
+use	R300MachineAssembler__assembleAluInstruction	piVar25	slotInst	INFERRED	source instruction already held by slot n of the rgb/alpha register table (this[7+n] / this[10+n])	^\s*if\ \(\(\(a0\ ==\ piVar25\)\ \|\|$	+21
+use	R300MachineAssembler__assembleAluInstruction	piVar25	slotInst	INFERRED	source instruction already held by slot n of the rgb/alpha register table (this[7+n] / this[10+n])	^\s*piVar25\ =\ \(int\ \*\)loopPtr\[10\];$@2	+1
+use	R300MachineAssembler__assembleAluInstruction	piVar25	slotInst	INFERRED	source instruction already held by slot n of the rgb/alpha register table (this[7+n] / this[10+n])	^\s*if\ \(\(a0\ ==\ piVar25\)\ \|\|$@3	+11
+use	R300MachineAssembler__assembleAluInstruction	piVar25	slotInst	INFERRED	source instruction already held by slot n of the rgb/alpha register table (this[7+n] / this[10+n])	^\s*piVar25\ =\ \(int\ \*\)loopPtr\[7\];$@2	+1
+use	R300MachineAssembler__assembleAluInstruction	piVar25	slotInst	INFERRED	source instruction already held by slot n of the rgb/alpha register table (this[7+n] / this[10+n])	^\s*if\ \(\(a0\ ==\ piVar25\)\ \|\|$@4	+10
+use	R300MachineAssembler__assembleAluInstruction	piVar25	selectSrcIdx2	INFERRED	source index passed to the alpha select vslot (srcIdx, 1 or 3)	^\s*piVar25\ =\ piVar22;$	+1
+use	R300MachineAssembler__assembleAluInstruction	piVar25	selectSrcIdx2	INFERRED	source index passed to the alpha select vslot (srcIdx, 1 or 3)	^\s*piVar25\ =\ \(int\ \*\)\(\(int\)\(\(unsigned\ char\ \*\)0x0\)\ \+\ 3\);$	+1
+use	R300MachineAssembler__assembleAluInstruction	piVar25	selectSrcIdx2	INFERRED	source index passed to the alpha select vslot (srcIdx, 1 or 3)	^\s*piVar25\ =\ \(int\ \*\)\(\(int\)\(\(unsigned\ char\ \*\)0x0\)\ \+\ 1\);$	+1
+use	R300MachineAssembler__assembleAluInstruction	piVar25	selectSrcIdx2	INFERRED	source index passed to the alpha select vslot (srcIdx, 1 or 3)	^\s*\*\ piVar23\ directly,\ not\ piVar25\ \(reassigned\ below,\ diverged\ from\ piVar23\ by\ here\)\.\ \*/$	+2
+use	R300MachineAssembler__assembleAluInstruction	uVar14	operandSelectWord	INFERRED	select word (+0x10) of the source operand record	^\s*uVar14\ =\ \*\(undefined4\ \*\)\(loopRemaining\ \+\ 0x10\);$	+1
+use	R300MachineAssembler__assembleAluInstruction	uVar14	operandSelectWord	INFERRED	select word (+0x10) of the source operand record	^\s*FUN_000f2bdc\(\&local_88,uVar14,iVar20\);$	+1
+use	R300MachineAssembler__assembleAluInstruction	uVar14	allocatedRegister	INFERRED	register index returned by FUN_00134de8 for irInst	^\s*uVar14\ =\ thunk_FUN_00134de8\(\*\(undefined4\ \*\)\(param_1\[3\]\ \+\ 0x6c4\),param_2\);$	+2
