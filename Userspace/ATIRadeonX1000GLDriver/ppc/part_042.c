@@ -6941,116 +6941,117 @@ LAB_00143da4:
 #undef vec2Arena
 
 /* FUN_00143e40 @ 0x143e40 (676 bytes) */
-int FUN_00143e40(param_1, param_2)
-  undefined4 *param_1;
-  int *param_2;
+int FUN_00143e40(pass, pair)
+  undefined4 *pass;
+  int *pair;
 {
+  int score;
   int loopIndex3;
   int countdown;
   int splitRgbAlphaEnabled;
-  int iVar1;
-  int iVar2;
-  uint uVar3;
-  int *piVar4;
-  int *piVar5;
-  int iVar6;
-  int iVar7;
+  int firstInst;
+  int userInst;
+  uint userCount;
+  int *elementPtr;
+  int *entryPtr;
+  int entry;
+  int secondInst;
   uint loopIndex;
   uint loopIndex2;
-  uint *puVar10;
-  int local_28;
+  uint *userVec;
+  int writeMaskFirst;
   int local_24 [2];
   
-  piVar5 = param_2 + 5;
-  iVar1 = *param_2;
-  iVar7 = param_2[1];
-  if (param_2[4] != 0) {
-    iVar1 = param_2[1];
-    iVar7 = *param_2;
+  entryPtr = pair + 5;
+  firstInst = *pair;
+  secondInst = pair[1];
+  if (pair[4] != 0) {
+    firstInst = pair[1];
+    secondInst = *pair;
   }
-  splitRgbAlphaEnabled = Compiler__isOptionEnabled(*param_1,0x30);
+  splitRgbAlphaEnabled = Compiler__isOptionEnabled(*pass,0x30);
   if ((splitRgbAlphaEnabled == 0) ||
-     ((((int (*)())FUN_00141044)(&local_28,param_1,iVar1), local_28 != 1 &&
-      (((int (*)())FUN_00141044)(local_24,param_1,iVar7), local_24[0] != 1)))) {
-    puVar10 = *(uint **)(iVar1 + 0x10);
-    uVar3 = puVar10[1];
-    if (uVar3 != 0) {
+     ((((int (*)())FUN_00141044)(&writeMaskFirst,pass,firstInst), writeMaskFirst != 1 &&
+      (((int (*)())FUN_00141044)(local_24,pass,secondInst), local_24[0] != 1)))) {
+    userVec = *(uint **)(firstInst + 0x10);
+    userCount = userVec[1];
+    if (userCount != 0) {
       loopIndex = 0;
       do {
-        if (loopIndex < *puVar10) {
-          if (uVar3 <= loopIndex) {
-            _memset(uVar3 * 4 + puVar10[2],0,(loopIndex - uVar3) * 4 + 4);
-            puVar10[1] = loopIndex + 1;
+        if (loopIndex < *userVec) {
+          if (userCount <= loopIndex) {
+            _memset(userCount * 4 + userVec[2],0,(loopIndex - userCount) * 4 + 4);
+            userVec[1] = loopIndex + 1;
           }
-          piVar4 = (int *)(loopIndex * 4 + puVar10[2]);
+          elementPtr = (int *)(loopIndex * 4 + userVec[2]);
         }
         else {
-          piVar4 = (int *)Vector__elementRefGrow(puVar10,loopIndex);
+          elementPtr = (int *)Vector__elementRefGrow(userVec,loopIndex);
         }
-        iVar2 = *piVar4;
-        if ((iVar2 != 0) &&
-           ((*(int *)(*(int *)(iVar2 + 0x88) + 8) == 0x8e ||
-            (((iVar7 != iVar2 && ((*(uint *)(iVar2 + 0x14) & 0x200) != 0)) &&
-             (iVar2 = IRInst__getOperandSource(iVar2,*(undefined4 *)(iVar2 + 0x84)), iVar1 == iVar2)))))) {
-          puVar10 = *(uint **)(iVar7 + 0x10);
-          uVar3 = puVar10[1];
-          if (uVar3 != 0) {
+        userInst = *elementPtr;
+        if ((userInst != 0) &&
+           ((*(int *)(*(int *)(userInst + 0x88) + 8) == 0x8e ||
+            (((secondInst != userInst && ((*(uint *)(userInst + 0x14) & 0x200) != 0)) &&
+             (userInst = IRInst__getOperandSource(userInst,*(undefined4 *)(userInst + 0x84)), firstInst == userInst)))))) {
+          userVec = *(uint **)(secondInst + 0x10);
+          userCount = userVec[1];
+          if (userCount != 0) {
             loopIndex2 = 0;
             do {
-              if (loopIndex2 < *puVar10) {
-                if (uVar3 <= loopIndex2) {
-                  _memset(uVar3 * 4 + puVar10[2],0,(loopIndex2 - uVar3) * 4 + 4);
-                  puVar10[1] = loopIndex2 + 1;
+              if (loopIndex2 < *userVec) {
+                if (userCount <= loopIndex2) {
+                  _memset(userCount * 4 + userVec[2],0,(loopIndex2 - userCount) * 4 + 4);
+                  userVec[1] = loopIndex2 + 1;
                 }
-                piVar4 = (int *)(loopIndex2 * 4 + puVar10[2]);
+                elementPtr = (int *)(loopIndex2 * 4 + userVec[2]);
               }
               else {
-                piVar4 = (int *)Vector__elementRefGrow(puVar10,loopIndex2);
+                elementPtr = (int *)Vector__elementRefGrow(userVec,loopIndex2);
               }
-              iVar2 = *piVar4;
-              if ((iVar2 != 0) &&
-                 ((*(int *)(*(int *)(iVar2 + 0x88) + 8) == 0x8e ||
-                  (((iVar1 != iVar2 && ((*(uint *)(iVar2 + 0x14) & 0x200) != 0)) &&
-                   (iVar2 = IRInst__getOperandSource(iVar2,*(undefined4 *)(iVar2 + 0x84)), iVar7 == iVar2))))))
+              userInst = *elementPtr;
+              if ((userInst != 0) &&
+                 ((*(int *)(*(int *)(userInst + 0x88) + 8) == 0x8e ||
+                  (((firstInst != userInst && ((*(uint *)(userInst + 0x14) & 0x200) != 0)) &&
+                   (userInst = IRInst__getOperandSource(userInst,*(undefined4 *)(userInst + 0x84)), secondInst == userInst))))))
               goto LAB_001440cc;
-              puVar10 = *(uint **)(iVar7 + 0x10);
+              userVec = *(uint **)(secondInst + 0x10);
               loopIndex2 = loopIndex2 + 1;
-              uVar3 = puVar10[1];
-            } while (loopIndex2 < uVar3);
+              userCount = userVec[1];
+            } while (loopIndex2 < userCount);
           }
         }
-        puVar10 = *(uint **)(iVar1 + 0x10);
+        userVec = *(uint **)(firstInst + 0x10);
         loopIndex = loopIndex + 1;
-        uVar3 = puVar10[1];
-      } while (loopIndex < uVar3);
+        userCount = userVec[1];
+      } while (loopIndex < userCount);
     }
     countdown = 5;
     loopIndex3 = 0;
-    iVar1 = 0;
+    score = 0;
     do {
-      iVar6 = piVar5[1];
-      if ((iVar6 != 0) && (*(int *)(iVar6 + 0x24) == 0)) {
+      entry = entryPtr[1];
+      if ((entry != 0) && (*(int *)(entry + 0x24) == 0)) {
         loopIndex3 = loopIndex3 + 1;
-        if (iVar1 == 0) {
-          iVar6 = *(int *)(iVar6 + 0x28);
+        if (score == 0) {
+          entry = *(int *)(entry + 0x28);
         }
         else {
-          iVar6 = *(int *)(iVar6 + 0x28);
-          if (iVar1 <= iVar6) goto LAB_001440b0;
+          entry = *(int *)(entry + 0x28);
+          if (score <= entry) goto LAB_001440b0;
         }
-        iVar1 = iVar6;
+        score = entry;
       }
 LAB_001440b0:
-      piVar5 = piVar5 + 1;
+      entryPtr = entryPtr + 1;
       countdown = countdown + -1;
     } while (countdown != 0);
-    iVar1 = loopIndex3 * -3000 + 1000 + iVar1 * 0xfa;
+    score = loopIndex3 * -3000 + 1000 + score * 0xfa;
   }
   else {
 LAB_001440cc:
-    iVar1 = -1;
+    score = -1;
   }
-  return iVar1;
+  return score;
 }
 
 /* FUN_001440e4 @ 0x1440e4 (4680 bytes) */
