@@ -1823,7 +1823,7 @@ int gld_resolveProgramSlots(ctx)
     }
     else {
 LAB_00009640:
-      if ((*(int *)(*programObject + 4) == 0) || (engineObjectSlot = FUN_00026650(ctx,programObject), engineObjectSlot == 0)) {
+      if ((*(int *)(*programObject + 4) == 0) || (engineObjectSlot = gld_bindProgramObject(ctx,programObject), engineObjectSlot == 0)) {
         *(undefined4 *)(programSlotPtr + 0x1cc) = 0;
       }
       else {
