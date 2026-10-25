@@ -323,7 +323,7 @@ int FUN_00173af8(ctx, param_2)
   int ctx;
   int *param_2;
 {
-  bool bVar1;
+  bool moreComponents;
   int loopIndex;
   int operandRecord;
   undefined4 local_38 [9];
@@ -338,10 +338,10 @@ int FUN_00173af8(ctx, param_2)
       if ((*(char *)((int)local_38 + loopIndex) == '\0') && (*param_2 != 0)) {
         return;
       }
-      bVar1 = loopIndex != 3;
+      moreComponents = loopIndex != 3;
       param_2 = param_2 + 1;
       loopIndex = loopIndex + 1;
-    } while (bVar1);
+    } while (moreComponents);
     *(undefined4 *)(*(int *)(ctx + 0xb0) + 0x120) = 0;
   }
   return;
@@ -493,6 +493,7 @@ int Compiler__valueNumberForExpr(param_1, param_2)
 int ValueKey__fill(ctx)
   int ctx;
 {
+  bool moreComponents;
   dword *operandIndex2;
   bool bVar1;
   undefined4 *puVar2;
@@ -610,11 +611,11 @@ LAB_00173fa0:
               }
               *loopPtr5 = loopIndex3;
             }
-            bVar1 = loopIndex != 3;
+            moreComponents = loopIndex != 3;
             loopPtr5 = loopPtr5 + 1;
             loopPtr7 = loopPtr7 + 1;
             loopIndex = loopIndex + 1;
-          } while (bVar1);
+          } while (moreComponents);
         }
         goto LAB_00174410;
       }
@@ -949,7 +950,7 @@ int FUN_0017494c(ctx, param_2, param_3)
   undefined4 param_2;
   undefined4 param_3;
 {
-  bool bVar1;
+  bool moreComponents;
   int iVar2;
   undefined4 *allocation;
   int operandRecord;
@@ -980,11 +981,11 @@ int FUN_0017494c(ctx, param_2, param_3)
       else {
         loopPtr2[8] = *(undefined4 *)(iVar2 + 0x20);
       }
-      bVar1 = loopIndex != 3;
+      moreComponents = loopIndex != 3;
       loopPtr2 = loopPtr2 + 1;
       iVar2 = iVar2 + 4;
       loopIndex = loopIndex + 1;
-    } while (bVar1);
+    } while (moreComponents);
     iVar2 = ((int (*)())FUN_00174888)(allocation + 1,param_2,param_3,
                          *(undefined4 *)(*(int *)(ctx + 0x238) + 0x6c4));
     if (iVar2 != 0) {
@@ -1163,6 +1164,8 @@ int FUN_00174ce0(param_1, param_2, param_3)
 int FUN_00174e0c(valueKey)
   int *valueKey;
 {
+  bool isLast;
+  bool moreComponents;
   undefined4 inst2;
   int inst;
   undefined4 nextValueNumberResult;
@@ -1216,11 +1219,11 @@ LAB_00174efc:
       loopPtr4[1] = (int)valueKey;
       HashTable__insert(*(undefined4 *)(valueKey[0x8e] + 1000),loopPtr4);
       HashTable__insert(*(undefined4 *)(valueKey[0x8e] + 0x3ec),loopPtr4);
-      bVar8 = loopIndex2 != 3;
+      moreComponents = loopIndex2 != 3;
       loopIndex2 = loopIndex2 + 1;
       *loopPtr3 = *loopPtr4;
       loopPtr3 = loopPtr3 + 1;
-    } while (bVar8);
+    } while (moreComponents);
     return;
   }
   loopIndex2 = (**(code **)(*(int *)valueKey[0x2c] + 0x60))((int *)valueKey[0x2c]);
@@ -1251,10 +1254,10 @@ LAB_00174efc:
           } while (loopIndex <= *(int *)(inst + 0x84));
         }
       }
-      bVar8 = loopIndex2 == 3;
+      isLast = loopIndex2 == 3;
       loopPtr3 = loopPtr3 + 1;
       loopIndex2 = loopIndex2 + 1;
-      if (bVar8) {
+      if (isLast) {
         loopIndex2 = 0;
         loopPtr3 = valueKey;
         while( true ) {
@@ -1262,10 +1265,10 @@ LAB_00174efc:
           if (*(char *)(loopIndex2 + operandRecord + 0x10) == '\x01') {
             *loopPtr3 = 2;
           }
-          bVar8 = loopIndex2 == 3;
+          isLast = loopIndex2 == 3;
           loopPtr3 = loopPtr3 + 1;
           loopIndex2 = loopIndex2 + 1;
-          if (bVar8) break;
+          if (isLast) break;
           inst = valueKey[0x2c];
         }
         return;
@@ -1303,10 +1306,10 @@ LAB_00174efc:
           loopIndex2 = FUN_00179064(valueKey,loopIndex5);
           *loopPtr3 = *(int *)(loopIndex2 + 4);
         }
-        bVar8 = loopIndex5 == 3;
+        isLast = loopIndex5 == 3;
         loopPtr3 = loopPtr3 + 1;
         loopIndex5 = loopIndex5 + 1;
-        if (bVar8) break;
+        if (isLast) break;
         loopIndex2 = valueKey[0x2c];
       }
       goto LAB_001757ec;
@@ -1418,11 +1421,11 @@ LAB_00175760:
           }
         }
 LAB_001757d8:
-        bVar8 = loopIndex == 3;
+        isLast = loopIndex == 3;
         iVar9 = iVar9 + 4;
         loopPtr3 = loopPtr3 + 1;
         loopIndex = loopIndex + 1;
-        if (bVar8) goto LAB_001757ec;
+        if (isLast) goto LAB_001757ec;
         loopIndex2 = valueKey[0x2c];
       } while( true );
     }
@@ -1992,15 +1995,15 @@ int noop_1762bc()
 int FUN_001762c0(param_1)
   undefined4 param_1;
 {
-  bool bVar1;
+  bool moreComponents;
   int loopIndex;
   
   loopIndex = 1;
   do {
     ((int (*)())FUN_001746c8)(param_1,loopIndex);
-    bVar1 = loopIndex != 3;
+    moreComponents = loopIndex != 3;
     loopIndex = loopIndex + 1;
-  } while (bVar1);
+  } while (moreComponents);
   return;
 }
 
@@ -2054,7 +2057,7 @@ int ValueKey__rowLanesAllEqual(param_1, param_2)
   int param_1;
   int param_2;
 {
-  bool bVar1;
+  bool moreComponents;
   int callResult;
   int iVar3;
   int loopIndex;
@@ -2077,18 +2080,18 @@ int ValueKey__rowLanesAllEqual(param_1, param_2)
         }
       }
     }
-    bVar1 = loopIndex != 3;
+    moreComponents = loopIndex != 3;
     loopPtr2 = loopPtr2 + 1;
     loopPtr3 = loopPtr3 + 1;
     loopIndex = loopIndex + 1;
-  } while (bVar1);
+  } while (moreComponents);
   return 1;
 }
 
 /* ValueKey__findOrInsertLiteral @ 0x176474 (104 bytes) */
 int ValueKey__findOrInsertLiteral(undefined4 param_1,int param_2,int param_3,double fparam_1)
 {
-  bool bVar1;
+  bool isLast;
   int loopIndex;
   float *loopPtr2;
   
@@ -2099,10 +2102,10 @@ int ValueKey__findOrInsertLiteral(undefined4 param_1,int param_2,int param_3,dou
       return loopIndex + 1;
     }
     if ((double)*loopPtr2 == (double)FLOAT_001aa114) break;
-    bVar1 = loopIndex == 3;
+    isLast = loopIndex == 3;
     loopPtr2 = loopPtr2 + 1;
     loopIndex = loopIndex + 1;
-    if (bVar1) {
+    if (isLast) {
       return 0;
     }
   }
@@ -2211,7 +2214,7 @@ int FUN_0017662c(ctx)
   int ctx;
 {
   int operandRecord;
-  bool bVar1;
+  bool moreComponents;
   int iVar2;
   int loopIndex;
   int iVar4;
@@ -2228,10 +2231,10 @@ int FUN_0017662c(ctx)
       }
       *(undefined4 *)(iVar2 + 0xc) = 4;
     }
-    bVar1 = loopIndex != 3;
+    moreComponents = loopIndex != 3;
     iVar4 = iVar4 + 4;
     loopIndex = loopIndex + 1;
-  } while (bVar1);
+  } while (moreComponents);
   return;
 }
 
@@ -2326,7 +2329,7 @@ int FUN_001768d4(param_1, param_2)
   int param_1;
   int param_2;
 {
-  bool bVar1;
+  bool isLast;
   int iVar2;
   int *piVar3;
   int loopIndex;
@@ -2337,10 +2340,10 @@ int FUN_001768d4(param_1, param_2)
   loopIndex = 1;
   while ((-1 < *piVar5 ||
          (piVar3 = (int *)Compiler__exprRecordForValueNumber(*(undefined4 *)(param_1 + 0x238),*piVar5), *piVar3 != 0))) {
-    bVar1 = loopIndex == 2;
+    isLast = loopIndex == 2;
     piVar5 = piVar5 + 4;
     loopIndex = loopIndex + 1;
-    if (bVar1) {
+    if (isLast) {
       return 0;
     }
   }

@@ -2806,7 +2806,7 @@ int Scheduler__scheduleBlock(scheduler, block)
   int node;
   int componentIndex;
   bool continueLoop;
-  int iVar2;
+  int countdown;
   int *liveOutSet;
   undefined4 *clearCursor4;
   int *setCursor;
@@ -2860,14 +2860,14 @@ int Scheduler__scheduleBlock(scheduler, block)
          ((*(uint *)(wordByteOffset + *(int *)(block + 0x104) + 8) >> bitMask & 1) == 0)) {
         *(uint *)(wordByteOffset + scheduler[0x4c] + 8) = 1 << bitMask | *(uint *)(wordByteOffset + scheduler[0x4c] + 8);
       }
-      iVar2 = 4;
+      countdown = 4;
       clearCursor = scheduler;
       do {
         setCursor = clearCursor + 0x4d;
         clearCursor = clearCursor + 1;
         *(undefined4 *)(regIndexU * 4 + *setCursor) = 0;
-        iVar2 = iVar2 + -1;
-      } while (iVar2 != 0);
+        countdown = countdown + -1;
+      } while (countdown != 0);
       hwRegCount = scheduler[0x51];
       regIndexU = regIndexU + 1;
     } while ((int)regIndexU < hwRegCount);
@@ -4179,12 +4179,13 @@ int LaneMatchTable__eqKeys(param_1, param_2)
   int param_1;
   int param_2;
 {
-  bool bVar1;
+  int loopIndex;
+  bool moreComponents;
   int iVar2;
   int iVar3;
-  int iVar4;
+  int countdown;
   
-  iVar4 = 4;
+  countdown = 4;
   iVar2 = param_2;
   iVar3 = param_1;
   while( true ) {
@@ -4192,18 +4193,18 @@ int LaneMatchTable__eqKeys(param_1, param_2)
        (*(int *)(iVar2 + 0x20) != 3)) break;
     iVar3 = iVar3 + 4;
     iVar2 = iVar2 + 4;
-    iVar4 = iVar4 + -1;
-    if (iVar4 == 0) {
-      iVar2 = 0;
+    countdown = countdown + -1;
+    if (countdown == 0) {
+      loopIndex = 0;
       do {
         if (*(int *)(param_1 + 0xb8) != *(int *)(param_2 + 0xb8)) {
           return 0xffffffff;
         }
-        bVar1 = iVar2 != 1;
+        moreComponents = loopIndex != 1;
         param_1 = param_1 + 4;
         param_2 = param_2 + 4;
-        iVar2 = iVar2 + 1;
-      } while (bVar1);
+        loopIndex = loopIndex + 1;
+      } while (moreComponents);
       return 0;
     }
   }
@@ -4219,9 +4220,9 @@ int SwizzleTable__hashKey(param_1)
   int iVar3;
   int iVar4;
   uint uVar5;
-  int iVar6;
+  int countdown;
   
-  iVar6 = 4;
+  countdown = 4;
   iVar4 = 0;
   iVar3 = 0;
   do {
@@ -4232,8 +4233,8 @@ int SwizzleTable__hashKey(param_1)
       iVar4 = iVar2;
     }
     iVar3 = iVar3 + 4;
-    iVar6 = iVar6 + -1;
-  } while (iVar6 != 0);
+    countdown = countdown + -1;
+  } while (countdown != 0);
   return iVar4 % 0x65;
 }
 
@@ -4285,27 +4286,27 @@ int returnZero_172f24()
 int ValueKey__initResultLaneValues(param_1)
   int param_1;
 {
-  bool bVar1;
+  bool moreComponents;
   char cVar2;
   int operandRecord;
-  int iVar4;
+  int loopIndex;
   int iVar5;
   
-  iVar4 = 0;
+  loopIndex = 0;
   iVar5 = param_1;
   do {
     operandRecord = IRInst__getOperandRecord(*(undefined4 *)(param_1 + 0xb0),0);
-    cVar2 = *(char *)(iVar4 + operandRecord + 0x10);
+    cVar2 = *(char *)(loopIndex + operandRecord + 0x10);
     if (cVar2 == '\0') {
       *(undefined4 *)(iVar5 + 0x20) = *(undefined4 *)(iVar5 + 0x178);
     }
     else if (cVar2 == '\x01') {
       *(undefined4 *)(iVar5 + 0x20) = *(undefined4 *)(iVar5 + 0x10);
     }
-    bVar1 = iVar4 != 3;
+    moreComponents = loopIndex != 3;
     iVar5 = iVar5 + 4;
-    iVar4 = iVar4 + 1;
-  } while (bVar1);
+    loopIndex = loopIndex + 1;
+  } while (moreComponents);
   return;
 }
 
@@ -4403,35 +4404,35 @@ int ValueKey__computeSwizzleTo(param_1, param_2, param_3)
   int param_3;
 {
   int operandRecord;
-  bool bVar1;
-  int iVar2;
-  int iVar3;
+  bool moreComponents;
+  int loopIndex;
+  int loopIndexB;
   int *piVar4;
-  int iVar5;
+  int countdown;
   undefined4 local_38 [6];
   
-  iVar3 = 0;
+  loopIndexB = 0;
   piVar4 = (int *)(param_2 + 0x20);
   local_38[0] = DAT_001b01b8;
   do {
     operandRecord = IRInst__getOperandRecord(*(undefined4 *)(param_2 + 0xb0),0);
-    if (*(char *)(iVar3 + operandRecord + 0x10) != '\x01') {
-      iVar5 = 4;
-      iVar2 = 0;
-      while (*(int *)(param_3 + 0x20 + iVar2 * 4) != *piVar4) {
-        iVar2 = iVar2 + 1;
-        iVar5 = iVar5 + -1;
-        if (iVar5 == 0) {
+    if (*(char *)(loopIndexB + operandRecord + 0x10) != '\x01') {
+      countdown = 4;
+      loopIndex = 0;
+      while (*(int *)(param_3 + 0x20 + loopIndex * 4) != *piVar4) {
+        loopIndex = loopIndex + 1;
+        countdown = countdown + -1;
+        if (countdown == 0) {
           *param_1 = DAT_001b01b8;
           return param_1;
         }
       }
-      *(char *)((int)local_38 + iVar3) = (char)iVar2;
+      *(char *)((int)local_38 + loopIndexB) = (char)loopIndex;
     }
-    bVar1 = iVar3 != 3;
+    moreComponents = loopIndexB != 3;
     piVar4 = piVar4 + 1;
-    iVar3 = iVar3 + 1;
-  } while (bVar1);
+    loopIndexB = loopIndexB + 1;
+  } while (moreComponents);
   *param_1 = local_38[0];
   return param_1;
 }
@@ -4451,17 +4452,17 @@ int SwizzleTable__eqKeys(param_1, param_2)
 int ValueKey__propagateLaneValues(param_1)
   undefined4 *param_1;
 {
-  bool bVar1;
+  bool moreComponents;
   char cVar2;
   int operandRecord;
-  int iVar4;
+  int loopIndex;
   undefined4 *puVar5;
   
-  iVar4 = 0;
+  loopIndex = 0;
   puVar5 = param_1;
   do {
     operandRecord = IRInst__getOperandRecord(param_1[0x2c],0);
-    cVar2 = *(char *)(iVar4 + operandRecord + 0x10);
+    cVar2 = *(char *)(loopIndex + operandRecord + 0x10);
     if (cVar2 == '\0') {
       puVar5[8] = *puVar5;
       puVar5[0x1c] = puVar5[0x14];
@@ -4477,10 +4478,10 @@ int ValueKey__propagateLaneValues(param_1)
         puVar5[0x28] = puVar5[0x24];
       }
     }
-    bVar1 = iVar4 != 3;
+    moreComponents = loopIndex != 3;
     puVar5 = puVar5 + 1;
-    iVar4 = iVar4 + 1;
-  } while (bVar1);
+    loopIndex = loopIndex + 1;
+  } while (moreComponents);
   return;
 }
 
