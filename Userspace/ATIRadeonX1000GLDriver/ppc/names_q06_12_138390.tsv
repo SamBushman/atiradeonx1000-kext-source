@@ -1,0 +1,65 @@
+local	FUN_00138390	param_1	block	INFERRED	block whose sub-block (+300) is scanned; its instruction list is at +0x98 and its child vector at +0x12c
+local	FUN_00138390	param_2	usedBits	INFERRED	bitset indexed by register * 4 + lane: set for every lane read or written
+use	FUN_00138390	iVar8	laneCountdown	INFERRED	countdown from 4 over the lane mask bytes	^\s*iVar8\ =\ 4;$	+1
+use	FUN_00138390	iVar8	laneCountdown	INFERRED	countdown from 4 over the lane mask bytes	^\s*iVar8\ =\ iVar8\ \+\ \-1;$	+2
+use	FUN_00138390	iVar8	childBitWordAddr	INFERRED	address of the bitset word for a child instruction's lane	^\s*iVar8\ =\ \(uVar4\ >>\ 3\ \&\ 0x1ffffffc\)\ \+\ param_2;$	+2
+use	FUN_00138390	iVar7	operandCount	INFERRED	instruction operand count, the loop bound	^\s*for\ \(iVar10\ =\ 1;\ iVar7\ =\ \(\*\*\(code\ \*\*\)\(\*piVar11\ \+\ 0x14\)\)\(piVar11\),\ iVar10\ <=\ iVar7;$	+2
+use	FUN_00138390	iVar7	operandCount	INFERRED	instruction operand count, the loop bound	^\s*if\ \(\(\(\(piVar5\[0x20\]\ !=\ 0\)\ \&\&\ \(iVar7\ =\ FUN_00126760\(piVar5\[0x26\]\),\ iVar7\ !=\ 0\)\)\ \&\&$	+3
+use	FUN_00138390	iVar7	operandCount	INFERRED	instruction operand count, the loop bound	^\s*iVar7\ =\ 0;$	+1
+use	FUN_00138390	iVar7	operandCount	INFERRED	instruction operand count, the loop bound	^\s*if\ \(\*\(char\ \*\)\(\(int\)\&local_48\ \+\ iVar7\)\ !=\ '\\0'\)\ \{$	+2
+use	FUN_00138390	iVar7	operandCount	INFERRED	instruction operand count, the loop bound	^\s*iVar7\ =\ iVar7\ \+\ 1;$	+1
+use	FUN_00138390	iVar7	operandCount	INFERRED	instruction operand count, the loop bound	^\s*iVar7\ =\ 0;$@2	+1
+use	FUN_00138390	iVar7	operandCount	INFERRED	instruction operand count, the loop bound	^\s*local_44\ =\ \*\(int\ \*\*\)\(iVar7\ \+\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar10\ \+\ 300\)\ \+\ 8\)\);$	+1
+use	FUN_00138390	iVar7	operandCount	INFERRED	instruction operand count, the loop bound	^\s*iVar7\ =\ iVar7\ \+\ 4;$	+1
+use	FUN_00138390	iVar7	defBitWordAddr	INFERRED	address of the bitset word for a destination lane	^\s*iVar7\ =\ \(uVar3\ >>\ 3\ \&\ 0x1ffffffc\)\ \+\ param_2;$	+2
+use	FUN_00138390	piVar5	nextInstLink	INFERRED	link following the list head	^\s*piVar5\ =\ \(int\ \*\)piVar9\[2\];$	+2
+use	FUN_00138390	piVar5	nextInstLink	INFERRED	link following the list head	^\s*piVar5\ =\ \(int\ \*\)piVar9\[2\];$@2	+1
+use	FUN_00138390	piVar5	nextInstLink	INFERRED	link following the list head	^\s*piVar11\ =\ piVar5;$	+1
+use	FUN_00138390	piVar5	nextInstLink	INFERRED	link following the list head	^\s*piVar5\ =\ \(int\ \*\)piVar11\[2\];$	+2
+use	FUN_00138390	uVar3	instFlags	INFERRED	instruction flag word	^\s*uVar3\ =\ piVar11\[5\];$	+2
+use	FUN_00138390	uVar3	instFlags	INFERRED	instruction flag word	^\s*uVar3\ =\ piVar11\[5\];$@2	+1
+use	FUN_00138390	uVar3	instFlags	INFERRED	instruction flag word	^\s*\}\ while\ \(\(piVar11\ !=\ \(int\ \*\)0x0\)\ \&\&\ \(\(uVar3\ \&\ 4\)\ !=\ 0\)\);$	+1
+use	FUN_00138390	uVar3	usedBitIndex	INFERRED	bit index register * 4 + lane of a read lane	^\s*uVar3\ =\ piVar5\[0x25\]\ \*\ 4\ \+\ iVar7;$	+3
+use	FUN_00138390	uVar3	defBitIndex	INFERRED	bit index register * 4 + lane of a written lane	^\s*uVar3\ =\ piVar11\[0x25\]\ \*\ 4\ \+\ iVar10;$	+3
+use	FUN_00138390	puVar1	prevFlagsPtr	INFERRED	address of the previous instruction's flag word	^\s*puVar1\ =\ \(uint\ \*\)\(piVar9\ \+\ 5\);$	+1
+use	FUN_00138390	puVar1	prevFlagsPtr	INFERRED	address of the previous instruction's flag word	^\s*\}\ while\ \(\(\*puVar1\ \&\ 4\)\ !=\ 0\);$	+1
+use	FUN_00138390	bVar2	moreDefLanes	INFERRED	loop latch: lane index is not the last (3)	^\s*bVar2\ =\ iVar10\ !=\ 3;$	+1
+use	FUN_00138390	bVar2	moreDefLanes	INFERRED	loop latch: lane index is not the last (3)	^\s*\}\ while\ \(bVar2\);$	+1
+use	FUN_00138390	bVar2	moreChildLanes	INFERRED	loop latch: lane index is not the last (3)	^\s*bVar2\ =\ iVar10\ !=\ 3;$@2	+1
+use	FUN_00138390	bVar2	moreChildLanes	INFERRED	loop latch: lane index is not the last (3)	^\s*\}\ while\ \(bVar2\);$@2	+1
+use	FUN_00138390	uVar4	childBitIndex	INFERRED	bit index register * 4 + lane of a child instruction's written lane	^\s*uVar4\ =\ local_44\[0x25\]\ \*\ 4\ \+\ iVar10;$	+3
+use	FUN_00138390	iVar6	usedBitWordAddr	INFERRED	address of the bitset word for a read lane	^\s*iVar6\ =\ \(uVar3\ >>\ 3\ \&\ 0x1ffffffc\)\ \+\ param_2;$	+2
+use	FUN_00138390	piVar9	listHead	INFERRED	first instruction record of the scanned sub-block	^\s*piVar9\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(param_1\ \+\ 300\)\ \+\ 0x98\);$	+2
+use	FUN_00138390	piVar9	listHead	INFERRED	first instruction record of the scanned sub-block	^\s*piVar11\ =\ piVar9;$	+2
+use	FUN_00138390	piVar9	listHead	INFERRED	first instruction record of the scanned sub-block	^\s*piVar5\ =\ \(int\ \*\)piVar9\[2\];$@2	+1
+use	FUN_00138390	piVar9	listHead	INFERRED	first instruction record of the scanned sub-block	^\s*puVar1\ =\ \(uint\ \*\)\(piVar9\ \+\ 5\);$	+1
+use	FUN_00138390	piVar9	listHead	INFERRED	first instruction record of the scanned sub-block	^\s*piVar9\ =\ piVar11;$	+1
+use	FUN_00138390	iVar10	operandNumber	INFERRED	operand number 1..count	^\s*for\ \(iVar10\ =\ 1;\ iVar7\ =\ \(\*\*\(code\ \*\*\)\(\*piVar11\ \+\ 0x14\)\)\(piVar11\),\ iVar10\ <=\ iVar7;$	+3
+use	FUN_00138390	iVar10	operandNumber	INFERRED	operand number 1..count	^\s*iVar7\ =\ FUN_001054ec\(piVar11,iVar10\);$	+1
+use	FUN_00138390	iVar10	operandNumber	INFERRED	operand number 1..count	^\s*if\ \(\(\(piVar11\[0x20\]\ !=\ 0\)\ \&\&\ \(iVar10\ =\ FUN_00126760\(piVar11\[0x26\]\),\ iVar10\ !=\ 0\)\)\ \&\&$	+3
+use	FUN_00138390	iVar10	defLane	INFERRED	lane counter 0..3 of the destination	^\s*iVar10\ =\ 0;$	+1
+use	FUN_00138390	iVar10	defLane	INFERRED	lane counter 0..3 of the destination	^\s*if\ \(\*\(char\ \*\)\(iVar10\ \+\ iVar7\ \+\ 0x10\)\ !=\ '\\x01'\)\ \{$	+2
+use	FUN_00138390	iVar10	defLane	INFERRED	lane counter 0..3 of the destination	^\s*bVar2\ =\ iVar10\ !=\ 3;$	+2
+use	FUN_00138390	iVar10	subBlock	INFERRED	sub-block (block + 300)	^\s*iVar10\ =\ \*\(int\ \*\)\(param_1\ \+\ 300\);$	+1
+use	FUN_00138390	iVar10	subBlock	INFERRED	sub-block (block + 300)	^\s*for\ \(uVar3\ =\ 1;\ uVar3\ <=\ \*\(uint\ \*\)\(\*\(int\ \*\)\(iVar10\ \+\ 300\)\ \+\ 4\);\ uVar3\ =\ uVar3\ \+\ 1\)\ \{$	+2
+use	FUN_00138390	iVar10	subBlock	INFERRED	sub-block (block + 300)	^\s*iVar10\ =\ \*\(int\ \*\)\(param_1\ \+\ 300\);$@2	+1
+use	FUN_00138390	iVar10	childQuery60	INFERRED	instruction vtable slot 0x60 test	^\s*iVar10\ =\ \(\*\*\(code\ \*\*\)\(\*local_44\ \+\ 0x60\)\)\(local_44\);$	+2
+use	FUN_00138390	iVar10	childLane	INFERRED	lane counter 0..3 of the child's destination	^\s*iVar10\ =\ 0;$@2	+1
+use	FUN_00138390	iVar10	childLane	INFERRED	lane counter 0..3 of the child's destination	^\s*if\ \(\*\(char\ \*\)\(iVar10\ \+\ iVar8\ \+\ 0x10\)\ !=\ '\\x01'\)\ \{$	+2
+use	FUN_00138390	iVar10	childLane	INFERRED	lane counter 0..3 of the child's destination	^\s*bVar2\ =\ iVar10\ !=\ 3;$@2	+2
+use	FUN_00138390	piVar11	inst	INFERRED	instruction being scanned	^\s*piVar11\ =\ piVar9;$	+1
+use	FUN_00138390	piVar11	inst	INFERRED	instruction being scanned	^\s*uVar3\ =\ piVar11\[5\];$	+1
+use	FUN_00138390	piVar11	inst	INFERRED	instruction being scanned	^\s*for\ \(iVar10\ =\ 1;\ iVar7\ =\ \(\*\*\(code\ \*\*\)\(\*piVar11\ \+\ 0x14\)\)\(piVar11\),\ iVar10\ <=\ iVar7;$	+3
+use	FUN_00138390	piVar11	inst	INFERRED	instruction being scanned	^\s*iVar7\ =\ FUN_001054ec\(piVar11,iVar10\);$	+1
+use	FUN_00138390	piVar11	inst	INFERRED	instruction being scanned	^\s*if\ \(\(\(piVar11\[0x20\]\ !=\ 0\)\ \&\&\ \(iVar10\ =\ FUN_00126760\(piVar11\[0x26\]\),\ iVar10\ !=\ 0\)\)\ \&\&$	+3
+use	FUN_00138390	piVar11	inst	INFERRED	instruction being scanned	^\s*iVar7\ =\ FUN_001054ec\(piVar11,0\);$	+1
+use	FUN_00138390	piVar11	inst	INFERRED	instruction being scanned	^\s*uVar3\ =\ piVar11\[0x25\]\ \*\ 4\ \+\ iVar10;$	+1
+use	FUN_00138390	piVar11	inst	INFERRED	instruction being scanned	^\s*iVar8\ =\ FUN_001054ec\(piVar11,0\);$	+1
+use	FUN_00138390	piVar11	inst	INFERRED	instruction being scanned	^\s*uVar3\ =\ piVar11\[5\];$@2	+1
+use	FUN_00138390	piVar11	inst	INFERRED	instruction being scanned	^\s*piVar11\ =\ \(int\ \*\)piVar11\[2\];$	+2
+use	FUN_00138390	piVar11	nextInstAdvance	INFERRED	next instruction after the list head	^\s*piVar11\ =\ piVar5;$	+1
+use	FUN_00138390	piVar11	nextInstAdvance	INFERRED	next instruction after the list head	^\s*piVar5\ =\ \(int\ \*\)piVar11\[2\];$	+1
+use	FUN_00138390	piVar11	nextInstAdvance	INFERRED	next instruction after the list head	^\s*piVar9\ =\ piVar11;$	+1
+local	FUN_00138390	local_48	laneMaskWord	INFERRED	four lane mask bytes of the operand (SelectWord__readMask)
+local	FUN_00138390	local_44	childInst	INFERRED	instruction taken from the sub-block's child vector
+local	FUN_00138390	local_38	laneMaskOut	INFERRED	SelectWord__readMask output buffer
