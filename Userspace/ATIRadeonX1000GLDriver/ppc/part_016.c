@@ -5467,9 +5467,9 @@ undefined4 FUN_000afe40(int glContext,int param_2,undefined4 param_3,uint *unuse
   undefined1 auStack_204 [8];
   undefined1 auStack_1fc [8];
   undefined1 auStack_1f4 [8];
-  uint local_1ec;
-  uint local_1e8;
-  int local_1e4;
+  uint wordCount;
+  uint wordCapacity;
+  int wordData;
   undefined4 local_1e0;
   undefined4 local_1dc;
   undefined4 local_1d8;
@@ -5533,125 +5533,125 @@ undefined4 FUN_000afe40(int glContext,int param_2,undefined4 param_3,uint *unuse
   a2 = *(char **)(*(int *)(((unsigned char *)0x00001130) + glContext) * 4 + *(int *)(a1 + 0x70));
   *a2 = '\0';
   if (a1Ptr74_2[0x55] == '\0') {
-    local_1e4 = 0;
-    local_1ec = 0;
-    local_1e8 = 0;
+    wordData = 0;
+    wordCount = 0;
+    wordCapacity = 0;
     allocation = (**(code **)(glContext + 0xc))(0x200);
-    if (local_1e4 != 0) {
-      _memcpy(allocation,local_1e4,local_1ec << 2);
-      (**(code **)(glContext + 0x18))(local_1e4);
+    if (wordData != 0) {
+      _memcpy(allocation,wordData,wordCount << 2);
+      (**(code **)(glContext + 0x18))(wordData);
     }
-    local_1e8 = local_1e8 + 0x80;
-    *(undefined4 *)(allocation + local_1ec * 4) = 1;
-    local_1ec = local_1ec + 1;
-    local_1e4 = allocation;
-    if (local_1e8 <= local_1ec) {
-      allocation2 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
-      if (local_1e4 != 0) {
-        _memcpy(allocation2,local_1e4,local_1ec << 2);
-        (**(code **)(glContext + 0x18))(local_1e4);
+    wordCapacity = wordCapacity + 0x80;
+    *(undefined4 *)(allocation + wordCount * 4) = 1;
+    wordCount = wordCount + 1;
+    wordData = allocation;
+    if (wordCapacity <= wordCount) {
+      allocation2 = (**(code **)(glContext + 0xc))(wordCapacity * 4 + 0x200);
+      if (wordData != 0) {
+        _memcpy(allocation2,wordData,wordCount << 2);
+        (**(code **)(glContext + 0x18))(wordData);
       }
-      local_1e8 = local_1e8 + 0x80;
-      local_1e4 = allocation2;
+      wordCapacity = wordCapacity + 0x80;
+      wordData = allocation2;
     }
-    *(undefined4 *)(local_1ec * 4 + local_1e4) = 0x10200;
-    local_1ec = local_1ec + 1;
-    if (local_1e8 <= local_1ec) {
-      allocation3 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
-      if (local_1e4 != 0) {
-        _memcpy(allocation3,local_1e4,local_1ec << 2);
-        (**(code **)(glContext + 0x18))(local_1e4);
+    *(undefined4 *)(wordCount * 4 + wordData) = 0x10200;
+    wordCount = wordCount + 1;
+    if (wordCapacity <= wordCount) {
+      allocation3 = (**(code **)(glContext + 0xc))(wordCapacity * 4 + 0x200);
+      if (wordData != 0) {
+        _memcpy(allocation3,wordData,wordCount << 2);
+        (**(code **)(glContext + 0x18))(wordData);
       }
-      local_1e8 = local_1e8 + 0x80;
-      local_1e4 = allocation3;
+      wordCapacity = wordCapacity + 0x80;
+      wordData = allocation3;
     }
-    *(undefined4 *)(local_1ec * 4 + local_1e4) = 0x1ff0016;
-    local_1ec = local_1ec + 1;
-    if (local_1e8 <= local_1ec) {
-      allocation4 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
-      if (local_1e4 != 0) {
-        _memcpy(allocation4,local_1e4,local_1ec << 2);
-        (**(code **)(glContext + 0x18))(local_1e4);
+    *(undefined4 *)(wordCount * 4 + wordData) = 0x1ff0016;
+    wordCount = wordCount + 1;
+    if (wordCapacity <= wordCount) {
+      allocation4 = (**(code **)(glContext + 0xc))(wordCapacity * 4 + 0x200);
+      if (wordData != 0) {
+        _memcpy(allocation4,wordData,wordCount << 2);
+        (**(code **)(glContext + 0x18))(wordData);
       }
-      local_1e8 = local_1e8 + 0x80;
-      local_1e4 = allocation4;
+      wordCapacity = wordCapacity + 0x80;
+      wordData = allocation4;
     }
-    *(undefined4 *)(local_1ec * 4 + local_1e4) = 0x120000;
-    local_1ec = local_1ec + 1;
+    *(undefined4 *)(wordCount * 4 + wordData) = 0x120000;
+    wordCount = wordCount + 1;
     if (*a1Ptr74_2 != '\0') {
-      if (local_1e8 <= local_1ec) {
-        allocation5 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
-        if (local_1e4 != 0) {
-          _memcpy(allocation5,local_1e4,local_1ec << 2);
-          (**(code **)(glContext + 0x18))(local_1e4);
+      if (wordCapacity <= wordCount) {
+        allocation5 = (**(code **)(glContext + 0xc))(wordCapacity * 4 + 0x200);
+        if (wordData != 0) {
+          _memcpy(allocation5,wordData,wordCount << 2);
+          (**(code **)(glContext + 0x18))(wordData);
         }
-        local_1e8 = local_1e8 + 0x80;
-        local_1e4 = allocation5;
+        wordCapacity = wordCapacity + 0x80;
+        wordData = allocation5;
       }
-      *(undefined4 *)(local_1ec * 4 + local_1e4) = 0x1ff0016;
-      local_1ec = local_1ec + 1;
-      if (local_1e8 <= local_1ec) {
-        allocation6 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
-        if (local_1e4 != 0) {
-          _memcpy(allocation6,local_1e4,local_1ec << 2);
-          (**(code **)(glContext + 0x18))(local_1e4);
+      *(undefined4 *)(wordCount * 4 + wordData) = 0x1ff0016;
+      wordCount = wordCount + 1;
+      if (wordCapacity <= wordCount) {
+        allocation6 = (**(code **)(glContext + 0xc))(wordCapacity * 4 + 0x200);
+        if (wordData != 0) {
+          _memcpy(allocation6,wordData,wordCount << 2);
+          (**(code **)(glContext + 0x18))(wordData);
         }
-        local_1e8 = local_1e8 + 0x80;
-        local_1e4 = allocation6;
+        wordCapacity = wordCapacity + 0x80;
+        wordData = allocation6;
       }
-      *(undefined4 *)(local_1ec * 4 + local_1e4) = 0x130000;
-      local_1ec = local_1ec + 1;
+      *(undefined4 *)(wordCount * 4 + wordData) = 0x130000;
+      wordCount = wordCount + 1;
     }
     if (a1Ptr74_2[1] != '\0') {
-      if (local_1e8 <= local_1ec) {
-        allocation7 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
-        if (local_1e4 != 0) {
-          _memcpy(allocation7,local_1e4,local_1ec << 2);
-          (**(code **)(glContext + 0x18))(local_1e4);
+      if (wordCapacity <= wordCount) {
+        allocation7 = (**(code **)(glContext + 0xc))(wordCapacity * 4 + 0x200);
+        if (wordData != 0) {
+          _memcpy(allocation7,wordData,wordCount << 2);
+          (**(code **)(glContext + 0x18))(wordData);
         }
-        local_1e8 = local_1e8 + 0x80;
-        local_1e4 = allocation7;
+        wordCapacity = wordCapacity + 0x80;
+        wordData = allocation7;
       }
-      *(undefined4 *)(local_1ec * 4 + local_1e4) = 0x1ff0016;
-      local_1ec = local_1ec + 1;
-      if (local_1e8 <= local_1ec) {
-        allocation8 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
-        if (local_1e4 != 0) {
-          _memcpy(allocation8,local_1e4,local_1ec << 2);
-          (**(code **)(glContext + 0x18))(local_1e4);
+      *(undefined4 *)(wordCount * 4 + wordData) = 0x1ff0016;
+      wordCount = wordCount + 1;
+      if (wordCapacity <= wordCount) {
+        allocation8 = (**(code **)(glContext + 0xc))(wordCapacity * 4 + 0x200);
+        if (wordData != 0) {
+          _memcpy(allocation8,wordData,wordCount << 2);
+          (**(code **)(glContext + 0x18))(wordData);
         }
-        local_1e8 = local_1e8 + 0x80;
-        local_1e4 = allocation8;
+        wordCapacity = wordCapacity + 0x80;
+        wordData = allocation8;
       }
-      *(undefined4 *)(local_1ec * 4 + local_1e4) = 0x100000;
-      local_1ec = local_1ec + 1;
+      *(undefined4 *)(wordCount * 4 + wordData) = 0x100000;
+      wordCount = wordCount + 1;
     }
     if (a1Ptr74_2[2] != '\0') {
       uVar8 = 0x3ff0016;
-      if (local_1e8 <= local_1ec) {
-        allocation9 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
-        if (local_1e4 != 0) {
-          _memcpy(allocation9,local_1e4,local_1ec << 2);
-          (**(code **)(glContext + 0x18))(local_1e4);
+      if (wordCapacity <= wordCount) {
+        allocation9 = (**(code **)(glContext + 0xc))(wordCapacity * 4 + 0x200);
+        if (wordData != 0) {
+          _memcpy(allocation9,wordData,wordCount << 2);
+          (**(code **)(glContext + 0x18))(wordData);
         }
-        local_1e8 = local_1e8 + 0x80;
-        local_1e4 = allocation9;
+        wordCapacity = wordCapacity + 0x80;
+        wordData = allocation9;
       }
-      *(undefined4 *)(local_1ec * 4 + local_1e4) = 0x3ff0016;
-      local_1ec = local_1ec + 1;
-      if (local_1e8 <= local_1ec) {
-        allocation10 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
-        if (local_1e4 != 0) {
-          _memcpy(allocation10,local_1e4,local_1ec << 2);
-          (**(code **)(glContext + 0x18))(local_1e4);
+      *(undefined4 *)(wordCount * 4 + wordData) = 0x3ff0016;
+      wordCount = wordCount + 1;
+      if (wordCapacity <= wordCount) {
+        allocation10 = (**(code **)(glContext + 0xc))(wordCapacity * 4 + 0x200);
+        if (wordData != 0) {
+          _memcpy(allocation10,wordData,wordCount << 2);
+          (**(code **)(glContext + 0x18))(wordData);
         }
-        local_1e8 = local_1e8 + 0x80;
-        local_1e4 = allocation10;
+        wordCapacity = wordCapacity + 0x80;
+        wordData = allocation10;
       }
-      *(undefined **)(local_1ec * 4 + local_1e4) = ((unsigned char *)0x00160000);
-      local_1ec = local_1ec + 1;
+      *(undefined **)(wordCount * 4 + wordData) = ((unsigned char *)0x00160000);
+      wordCount = wordCount + 1;
     }
-    uVar5 = local_1ec;
+    uVar5 = wordCount;
     if (((unsigned char *)0x000013b1)[glContext] != '\0') {
       loopIndex6 = 0;
       cursor = a1Ptr74_2;
@@ -5680,46 +5680,46 @@ undefined4 FUN_000afe40(int glContext,int param_2,undefined4 param_3,uint *unuse
           case 8:
             uVar8 = loopIndex6 << 0x10 | 0x12000019;
           }
-          if (local_1e8 <= uVar5) {
-            allocation11 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
-            if (local_1e4 != 0) {
-              _memcpy(allocation11,local_1e4,local_1ec << 2);
-              (**(code **)(glContext + 0x18))(local_1e4);
+          if (wordCapacity <= uVar5) {
+            allocation11 = (**(code **)(glContext + 0xc))(wordCapacity * 4 + 0x200);
+            if (wordData != 0) {
+              _memcpy(allocation11,wordData,wordCount << 2);
+              (**(code **)(glContext + 0x18))(wordData);
             }
-            local_1e8 = local_1e8 + 0x80;
-            uVar5 = local_1ec;
-            local_1e4 = allocation11;
+            wordCapacity = wordCapacity + 0x80;
+            uVar5 = wordCount;
+            wordData = allocation11;
           }
-          *(uint *)(uVar5 * 4 + local_1e4) = uVar8;
-          uVar5 = local_1ec + 1;
-          local_1ec = uVar5;
+          *(uint *)(uVar5 * 4 + wordData) = uVar8;
+          uVar5 = wordCount + 1;
+          wordCount = uVar5;
         }
         if (((int)loopIndex6 < (int)(uint)(byte)((unsigned char *)0x000013b0)[glContext]) &&
            ((uVar13 & *(uint *)(a1Ptr74_2 + 0xc)) != 0)) {
-          if (local_1e8 <= uVar5) {
-            allocation12 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
-            if (local_1e4 != 0) {
-              _memcpy(allocation12,local_1e4,local_1ec << 2);
-              (**(code **)(glContext + 0x18))(local_1e4);
+          if (wordCapacity <= uVar5) {
+            allocation12 = (**(code **)(glContext + 0xc))(wordCapacity * 4 + 0x200);
+            if (wordData != 0) {
+              _memcpy(allocation12,wordData,wordCount << 2);
+              (**(code **)(glContext + 0x18))(wordData);
             }
-            local_1e8 = local_1e8 + 0x80;
-            uVar5 = local_1ec;
-            local_1e4 = allocation12;
+            wordCapacity = wordCapacity + 0x80;
+            uVar5 = wordCount;
+            wordData = allocation12;
           }
-          *(undefined4 *)(uVar5 * 4 + local_1e4) = 0x1ff0016;
-          local_1ec = local_1ec + 1;
-          if (local_1e8 <= local_1ec) {
-            allocation13 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
-            if (local_1e4 != 0) {
-              _memcpy(allocation13,local_1e4,local_1ec << 2);
-              (**(code **)(glContext + 0x18))(local_1e4);
+          *(undefined4 *)(uVar5 * 4 + wordData) = 0x1ff0016;
+          wordCount = wordCount + 1;
+          if (wordCapacity <= wordCount) {
+            allocation13 = (**(code **)(glContext + 0xc))(wordCapacity * 4 + 0x200);
+            if (wordData != 0) {
+              _memcpy(allocation13,wordData,wordCount << 2);
+              (**(code **)(glContext + 0x18))(wordData);
             }
-            local_1e8 = local_1e8 + 0x80;
-            local_1e4 = allocation13;
+            wordCapacity = wordCapacity + 0x80;
+            wordData = allocation13;
           }
-          *(uint *)(local_1ec * 4 + local_1e4) = loopIndex6 & 0xffff | 0x110000;
-          uVar5 = local_1ec + 1;
-          local_1ec = uVar5;
+          *(uint *)(wordCount * 4 + wordData) = loopIndex6 & 0xffff | 0x110000;
+          uVar5 = wordCount + 1;
+          wordCount = uVar5;
         }
         loopIndex6 = loopIndex6 + 1;
         cursor = cursor + 4;
@@ -5734,135 +5734,135 @@ undefined4 FUN_000afe40(int glContext,int param_2,undefined4 param_3,uint *unuse
         iVar17 = loopIndex4 + *(int *)(a1Ptr74_2 + 0x80);
         if (*(int *)(iVar17 + 8) == 0x34) {
           uVar8 = *(uint *)(iVar17 + 4) & 0xffff | uVar8 & 0xffff0000;
-          if (local_1e8 <= uVar5) {
-            allocation14 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
-            if (local_1e4 != 0) {
-              _memcpy(allocation14,local_1e4,local_1ec << 2);
-              (**(code **)(glContext + 0x18))(local_1e4);
+          if (wordCapacity <= uVar5) {
+            allocation14 = (**(code **)(glContext + 0xc))(wordCapacity * 4 + 0x200);
+            if (wordData != 0) {
+              _memcpy(allocation14,wordData,wordCount << 2);
+              (**(code **)(glContext + 0x18))(wordData);
             }
-            local_1e8 = local_1e8 + 0x80;
-            uVar5 = local_1ec;
-            local_1e4 = allocation14;
+            wordCapacity = wordCapacity + 0x80;
+            uVar5 = wordCount;
+            wordData = allocation14;
           }
-          *(undefined4 *)(uVar5 * 4 + local_1e4) = 0x1c;
-          local_1ec = local_1ec + 1;
-          if (local_1e8 <= local_1ec) {
-            allocation15 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
-            if (local_1e4 != 0) {
-              _memcpy(allocation15,local_1e4,local_1ec << 2);
-              (**(code **)(glContext + 0x18))(local_1e4);
+          *(undefined4 *)(uVar5 * 4 + wordData) = 0x1c;
+          wordCount = wordCount + 1;
+          if (wordCapacity <= wordCount) {
+            allocation15 = (**(code **)(glContext + 0xc))(wordCapacity * 4 + 0x200);
+            if (wordData != 0) {
+              _memcpy(allocation15,wordData,wordCount << 2);
+              (**(code **)(glContext + 0x18))(wordData);
             }
-            local_1e8 = local_1e8 + 0x80;
-            local_1e4 = allocation15;
+            wordCapacity = wordCapacity + 0x80;
+            wordData = allocation15;
           }
-          *(uint *)(local_1ec * 4 + local_1e4) = uVar8;
-          local_1ec = local_1ec + 1;
+          *(uint *)(wordCount * 4 + wordData) = uVar8;
+          wordCount = wordCount + 1;
           uVar4 = *(undefined4 *)(*(int *)(iVar17 + 0xc) * 0x10 + *(int *)(a1Ptr74_2 + 0x8c));
-          if (local_1e8 <= local_1ec) {
-            allocation16 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
-            if (local_1e4 != 0) {
-              _memcpy(allocation16,local_1e4,local_1ec << 2);
-              (**(code **)(glContext + 0x18))(local_1e4);
+          if (wordCapacity <= wordCount) {
+            allocation16 = (**(code **)(glContext + 0xc))(wordCapacity * 4 + 0x200);
+            if (wordData != 0) {
+              _memcpy(allocation16,wordData,wordCount << 2);
+              (**(code **)(glContext + 0x18))(wordData);
             }
-            local_1e8 = local_1e8 + 0x80;
-            local_1e4 = allocation16;
+            wordCapacity = wordCapacity + 0x80;
+            wordData = allocation16;
           }
-          *(undefined4 *)(local_1ec * 4 + local_1e4) = uVar4;
-          local_1ec = local_1ec + 1;
+          *(undefined4 *)(wordCount * 4 + wordData) = uVar4;
+          wordCount = wordCount + 1;
           uVar4 = *(undefined4 *)(*(int *)(iVar17 + 0xc) * 0x10 + *(int *)(a1Ptr74_2 + 0x8c) + 4);
-          if (local_1e8 <= local_1ec) {
-            allocation17 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
-            if (local_1e4 != 0) {
-              _memcpy(allocation17,local_1e4,local_1ec << 2);
-              (**(code **)(glContext + 0x18))(local_1e4);
+          if (wordCapacity <= wordCount) {
+            allocation17 = (**(code **)(glContext + 0xc))(wordCapacity * 4 + 0x200);
+            if (wordData != 0) {
+              _memcpy(allocation17,wordData,wordCount << 2);
+              (**(code **)(glContext + 0x18))(wordData);
             }
-            local_1e8 = local_1e8 + 0x80;
-            local_1e4 = allocation17;
+            wordCapacity = wordCapacity + 0x80;
+            wordData = allocation17;
           }
-          *(undefined4 *)(local_1ec * 4 + local_1e4) = uVar4;
-          local_1ec = local_1ec + 1;
+          *(undefined4 *)(wordCount * 4 + wordData) = uVar4;
+          wordCount = wordCount + 1;
           uVar4 = *(undefined4 *)(*(int *)(iVar17 + 0xc) * 0x10 + *(int *)(a1Ptr74_2 + 0x8c) + 8);
-          if (local_1e8 <= local_1ec) {
-            allocation18 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
-            if (local_1e4 != 0) {
-              _memcpy(allocation18,local_1e4,local_1ec << 2);
-              (**(code **)(glContext + 0x18))(local_1e4);
+          if (wordCapacity <= wordCount) {
+            allocation18 = (**(code **)(glContext + 0xc))(wordCapacity * 4 + 0x200);
+            if (wordData != 0) {
+              _memcpy(allocation18,wordData,wordCount << 2);
+              (**(code **)(glContext + 0x18))(wordData);
             }
-            local_1e8 = local_1e8 + 0x80;
-            local_1e4 = allocation18;
+            wordCapacity = wordCapacity + 0x80;
+            wordData = allocation18;
           }
-          *(undefined4 *)(local_1ec * 4 + local_1e4) = uVar4;
-          local_1ec = local_1ec + 1;
+          *(undefined4 *)(wordCount * 4 + wordData) = uVar4;
+          wordCount = wordCount + 1;
           uVar4 = *(undefined4 *)(*(int *)(iVar17 + 0xc) * 0x10 + *(int *)(a1Ptr74_2 + 0x8c) + 0xc);
-          if (local_1e8 <= local_1ec) {
-            allocation19 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
-            if (local_1e4 != 0) {
-              _memcpy(allocation19,local_1e4,local_1ec << 2);
-              (**(code **)(glContext + 0x18))(local_1e4);
+          if (wordCapacity <= wordCount) {
+            allocation19 = (**(code **)(glContext + 0xc))(wordCapacity * 4 + 0x200);
+            if (wordData != 0) {
+              _memcpy(allocation19,wordData,wordCount << 2);
+              (**(code **)(glContext + 0x18))(wordData);
             }
-            local_1e8 = local_1e8 + 0x80;
-            local_1e4 = allocation19;
+            wordCapacity = wordCapacity + 0x80;
+            wordData = allocation19;
           }
-          *(undefined4 *)(local_1ec * 4 + local_1e4) = uVar4;
-          uVar5 = local_1ec + 1;
+          *(undefined4 *)(wordCount * 4 + wordData) = uVar4;
+          uVar5 = wordCount + 1;
           iVar11 = *(int *)(a1Ptr74_2 + 0x84);
-          local_1ec = uVar5;
+          wordCount = uVar5;
         }
         loopIndex3 = loopIndex3 + 1;
         loopIndex4 = loopIndex4 + 0x14;
       } while (loopIndex3 < iVar11);
     }
     if (**(int **)(a1Ptr74_2 + 100) == 0x41) {
-      local_5c = &local_1ec;
+      local_5c = &wordCount;
 LAB_000b10a0:
-      if (local_1e8 <= uVar5) {
-        allocation20 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
-        if (local_1e4 != 0) {
-          _memcpy(allocation20,local_1e4,local_1ec << 2);
-          (**(code **)(glContext + 0x18))(local_1e4);
+      if (wordCapacity <= uVar5) {
+        allocation20 = (**(code **)(glContext + 0xc))(wordCapacity * 4 + 0x200);
+        if (wordData != 0) {
+          _memcpy(allocation20,wordData,wordCount << 2);
+          (**(code **)(glContext + 0x18))(wordData);
         }
-        local_1e8 = local_1e8 + 0x80;
-        uVar5 = local_1ec;
-        local_1e4 = allocation20;
+        wordCapacity = wordCapacity + 0x80;
+        uVar5 = wordCount;
+        wordData = allocation20;
       }
-      *(undefined4 *)(uVar5 * 4 + local_1e4) = 0x47;
-      local_1ec = local_1ec + 1;
-      if (local_1e8 <= local_1ec) {
-        allocation21 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
-        if (local_1e4 != 0) {
-          _memcpy(allocation21,local_1e4,local_1ec << 2);
-          (**(code **)(glContext + 0x18))(local_1e4);
+      *(undefined4 *)(uVar5 * 4 + wordData) = 0x47;
+      wordCount = wordCount + 1;
+      if (wordCapacity <= wordCount) {
+        allocation21 = (**(code **)(glContext + 0xc))(wordCapacity * 4 + 0x200);
+        if (wordData != 0) {
+          _memcpy(allocation21,wordData,wordCount << 2);
+          (**(code **)(glContext + 0x18))(wordData);
         }
-        local_1e8 = local_1e8 + 0x80;
-        local_1e4 = allocation21;
+        wordCapacity = wordCapacity + 0x80;
+        wordData = allocation21;
       }
-      *(undefined4 *)(local_1ec * 4 + local_1e4) = 0x570000;
-      local_1ec = local_1ec + 1;
-      if (local_1e8 <= local_1ec) {
-        allocation22 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
-        if (local_1e4 != 0) {
-          _memcpy(allocation22,local_1e4,local_1ec << 2);
-          (**(code **)(glContext + 0x18))(local_1e4);
+      *(undefined4 *)(wordCount * 4 + wordData) = 0x570000;
+      wordCount = wordCount + 1;
+      if (wordCapacity <= wordCount) {
+        allocation22 = (**(code **)(glContext + 0xc))(wordCapacity * 4 + 0x200);
+        if (wordData != 0) {
+          _memcpy(allocation22,wordData,wordCount << 2);
+          (**(code **)(glContext + 0x18))(wordData);
         }
-        local_1e8 = local_1e8 + 0x80;
-        local_1e4 = allocation22;
+        wordCapacity = wordCapacity + 0x80;
+        wordData = allocation22;
       }
-      *(undefined4 *)(local_1ec * 4 + local_1e4) = 0;
-      local_1ec = local_1ec + 1;
-      if (local_1e8 <= local_1ec) {
-        allocation23 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
-        if (local_1e4 != 0) {
-          _memcpy(allocation23,local_1e4,local_1ec << 2);
-          (**(code **)(glContext + 0x18))(local_1e4);
+      *(undefined4 *)(wordCount * 4 + wordData) = 0;
+      wordCount = wordCount + 1;
+      if (wordCapacity <= wordCount) {
+        allocation23 = (**(code **)(glContext + 0xc))(wordCapacity * 4 + 0x200);
+        if (wordData != 0) {
+          _memcpy(allocation23,wordData,wordCount << 2);
+          (**(code **)(glContext + 0x18))(wordData);
         }
-        local_1e8 = local_1e8 + 0x80;
-        local_1e4 = allocation23;
+        wordCapacity = wordCapacity + 0x80;
+        wordData = allocation23;
       }
-      *(undefined4 *)(local_1ec * 4 + local_1e4) = 0x40000;
-      local_1ec = local_1ec + 1;
+      *(undefined4 *)(wordCount * 4 + wordData) = 0x40000;
+      wordCount = wordCount + 1;
     }
     else {
-      local_5c = &local_1ec;
+      local_5c = &wordCount;
       loopIndex = 0;
       local_68 = 0;
       local_64 = auStack_1f4;
@@ -5953,21 +5953,21 @@ LAB_000b0fbc:
         loopIndex5 = loopIndex5 + 0x70;
         loopIndex = loopIndex + 1;
       } while (*(int *)(*(int *)(a1Ptr74_2 + 100) + loopIndex5) != 0x41);
-      uVar5 = local_1ec;
+      uVar5 = wordCount;
       if (local_68 == 0) goto LAB_000b10a0;
     }
-    if (local_1e8 <= local_1ec) {
-      allocation24 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
-      if (local_1e4 != 0) {
-        _memcpy(allocation24,local_1e4,local_1ec << 2);
-        (**(code **)(glContext + 0x18))(local_1e4);
+    if (wordCapacity <= wordCount) {
+      allocation24 = (**(code **)(glContext + 0xc))(wordCapacity * 4 + 0x200);
+      if (wordData != 0) {
+        _memcpy(allocation24,wordData,wordCount << 2);
+        (**(code **)(glContext + 0x18))(wordData);
       }
-      local_1e8 = local_1e8 + 0x80;
-      local_1e4 = allocation24;
+      wordCapacity = wordCapacity + 0x80;
+      wordData = allocation24;
     }
-    iVar11 = local_1ec * 4;
-    *(undefined4 *)(iVar11 + local_1e4) = 0x28;
-    local_1ec = local_1ec + 1;
+    iVar11 = wordCount * 4;
+    *(undefined4 *)(iVar11 + wordData) = 0x28;
+    wordCount = wordCount + 1;
     unused = local_5c;
     iVar11 = (**(code **)(((unsigned char *)0x00001288) + glContext))(glContext,a1,a2,local_5c,staleArgR7,staleArgR8,iVar11);
     fpPassThrough1 = f1AfterCall2;
