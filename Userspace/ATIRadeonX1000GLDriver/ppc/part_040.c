@@ -1184,6 +1184,12 @@ int FUN_0012cfa4(param_1, param_2, param_3, param_4)
 int pass_flatten_ifs(flattenPass)
   int flattenPass;
 {
+  int *elseBlockVectorAtd4;
+  int *thenEndBlockVectorAtd0;
+  int *elseEndBlockVectorAtd0;
+  int *blockAfterIfVectorAtd4;
+  int *blockBeforeIfVectorAtd0;
+  int *ifHeaderVectorAtd4;
   int compareCondition;
   int isOperandConstZero;
   undefined4 operandRecord2;
@@ -1272,17 +1278,17 @@ int pass_flatten_ifs(flattenPass)
           }
           uVar27 = CONCAT44(footerPredVectorAlias[2] + 4,uVar13);
         }
-        piVar23 = *(int **)(ifHeader + 0xd4);
+        ifHeaderVectorAtd4 = *(int **)(ifHeader + 0xd4);
         elseEndBlock = *(int *)((ulonglong)uVar27 >> 0x20);
-        if (*piVar23 == 0) {
-          uVar27 = Vector__elementRefGrow(piVar23,0);
+        if (*ifHeaderVectorAtd4 == 0) {
+          uVar27 = Vector__elementRefGrow(ifHeaderVectorAtd4,0);
         }
         else {
-          if (piVar23[1] == 0) {
-            *(undefined4 *)piVar23[2] = 0;
-            piVar23[1] = 1;
+          if (ifHeaderVectorAtd4[1] == 0) {
+            *(undefined4 *)ifHeaderVectorAtd4[2] = 0;
+            ifHeaderVectorAtd4[1] = 1;
           }
-          uVar27 = CONCAT44(piVar23[2],(int)uVar27);
+          uVar27 = CONCAT44(ifHeaderVectorAtd4[2],(int)uVar27);
         }
         blockBeforeIf = *(int *)((ulonglong)uVar27 >> 0x20);
         piVar23 = (int *)block[0x34];
@@ -1297,17 +1303,17 @@ int pass_flatten_ifs(flattenPass)
           uVar27 = CONCAT44(piVar23[2],(int)uVar27);
         }
         blockAfterIf = *(int *)((ulonglong)uVar27 >> 0x20);
-        piVar23 = *(int **)(blockBeforeIf + 0xd0);
+        blockBeforeIfVectorAtd0 = *(int **)(blockBeforeIf + 0xd0);
         blockBeforeIfCopy = blockBeforeIf;
-        if (*piVar23 == 0) {
-          uVar27 = Vector__elementRefGrow(piVar23,0);
+        if (*blockBeforeIfVectorAtd0 == 0) {
+          uVar27 = Vector__elementRefGrow(blockBeforeIfVectorAtd0,0);
         }
         else {
-          if (piVar23[1] == 0) {
-            *(undefined4 *)piVar23[2] = 0;
-            piVar23[1] = 1;
+          if (blockBeforeIfVectorAtd0[1] == 0) {
+            *(undefined4 *)blockBeforeIfVectorAtd0[2] = 0;
+            blockBeforeIfVectorAtd0[1] = 1;
           }
-          uVar27 = CONCAT44(piVar23[2],(int)uVar27);
+          uVar27 = CONCAT44(blockBeforeIfVectorAtd0[2],(int)uVar27);
         }
         *(int *)((ulonglong)uVar27 >> 0x20) = iVar6;
         piVar23 = *(int **)(iVar6 + 0xd4);
@@ -1322,52 +1328,52 @@ int pass_flatten_ifs(flattenPass)
           uVar27 = CONCAT44(piVar23[2],(int)uVar27);
         }
         *(int *)((ulonglong)uVar27 >> 0x20) = blockBeforeIf;
-        piVar23 = *(int **)(blockAfterIf + 0xd4);
-        if (*piVar23 == 0) {
-          uVar27 = Vector__elementRefGrow(piVar23,0);
+        blockAfterIfVectorAtd4 = *(int **)(blockAfterIf + 0xd4);
+        if (*blockAfterIfVectorAtd4 == 0) {
+          uVar27 = Vector__elementRefGrow(blockAfterIfVectorAtd4,0);
         }
         else {
-          if (piVar23[1] == 0) {
-            *(undefined4 *)piVar23[2] = 0;
-            piVar23[1] = 1;
+          if (blockAfterIfVectorAtd4[1] == 0) {
+            *(undefined4 *)blockAfterIfVectorAtd4[2] = 0;
+            blockAfterIfVectorAtd4[1] = 1;
           }
-          uVar27 = CONCAT44(piVar23[2],(int)uVar27);
+          uVar27 = CONCAT44(blockAfterIfVectorAtd4[2],(int)uVar27);
         }
         *(int *)((ulonglong)uVar27 >> 0x20) = elseEndBlock;
-        piVar23 = *(int **)(elseEndBlock + 0xd0);
-        if (*piVar23 == 0) {
-          uVar27 = Vector__elementRefGrow(piVar23,0);
+        elseEndBlockVectorAtd0 = *(int **)(elseEndBlock + 0xd0);
+        if (*elseEndBlockVectorAtd0 == 0) {
+          uVar27 = Vector__elementRefGrow(elseEndBlockVectorAtd0,0);
         }
         else {
-          if (piVar23[1] == 0) {
-            *(undefined4 *)piVar23[2] = 0;
-            piVar23[1] = 1;
+          if (elseEndBlockVectorAtd0[1] == 0) {
+            *(undefined4 *)elseEndBlockVectorAtd0[2] = 0;
+            elseEndBlockVectorAtd0[1] = 1;
           }
-          uVar27 = CONCAT44(piVar23[2],(int)uVar27);
+          uVar27 = CONCAT44(elseEndBlockVectorAtd0[2],(int)uVar27);
         }
         *(int *)((ulonglong)uVar27 >> 0x20) = blockAfterIf;
-        piVar23 = *(int **)(thenEndBlock + 0xd0);
-        if (*piVar23 == 0) {
-          uVar27 = Vector__elementRefGrow(piVar23,0);
+        thenEndBlockVectorAtd0 = *(int **)(thenEndBlock + 0xd0);
+        if (*thenEndBlockVectorAtd0 == 0) {
+          uVar27 = Vector__elementRefGrow(thenEndBlockVectorAtd0,0);
         }
         else {
-          if (piVar23[1] == 0) {
-            *(undefined4 *)piVar23[2] = 0;
-            piVar23[1] = 1;
+          if (thenEndBlockVectorAtd0[1] == 0) {
+            *(undefined4 *)thenEndBlockVectorAtd0[2] = 0;
+            thenEndBlockVectorAtd0[1] = 1;
           }
-          uVar27 = CONCAT44(piVar23[2],(int)uVar27);
+          uVar27 = CONCAT44(thenEndBlockVectorAtd0[2],(int)uVar27);
         }
         *(int *)((ulonglong)uVar27 >> 0x20) = elseBlock;
-        piVar23 = *(int **)(elseBlock + 0xd4);
-        if (*piVar23 == 0) {
-          uVar27 = Vector__elementRefGrow(piVar23,0);
+        elseBlockVectorAtd4 = *(int **)(elseBlock + 0xd4);
+        if (*elseBlockVectorAtd4 == 0) {
+          uVar27 = Vector__elementRefGrow(elseBlockVectorAtd4,0);
         }
         else {
-          if (piVar23[1] == 0) {
-            *(undefined4 *)piVar23[2] = 0;
-            piVar23[1] = 1;
+          if (elseBlockVectorAtd4[1] == 0) {
+            *(undefined4 *)elseBlockVectorAtd4[2] = 0;
+            elseBlockVectorAtd4[1] = 1;
           }
-          uVar27 = CONCAT44(piVar23[2],(int)uVar27);
+          uVar27 = CONCAT44(elseBlockVectorAtd4[2],(int)uVar27);
         }
         *(int *)((ulonglong)uVar27 >> 0x20) = thenEndBlock;
         *(int *)(iVar6 + 0xf0) = blockBeforeIf;
@@ -2289,6 +2295,8 @@ int FUN_0012f0f8(pass, param_2, block, param_4, param_5, param_6)
   int *param_5;
   int *param_6;
 {
+  int *blockVectorAt154;
+  int *blockVectorAt150;
   undefined4 vectorData;
   undefined4 arena;
   int cloneResult;
@@ -2720,13 +2728,13 @@ LAB_0012fafc:
             Block__successorCount(findSimplePredecessorResult);
             Block__predecessorCount(local_60);
           }
-          piVar19 = *(int **)(block + 0x150);
-          if (piVar19 != (int *)0x0) {
-            (**(code **)(*piVar19 + 4))(piVar19);
+          blockVectorAt150 = *(int **)(block + 0x150);
+          if (blockVectorAt150 != (int *)0x0) {
+            (**(code **)(*blockVectorAt150 + 4))(blockVectorAt150);
           }
-          piVar19 = *(int **)(block + 0x154);
-          if (piVar19 != (int *)0x0) {
-            (**(code **)(*piVar19 + 4))(piVar19);
+          blockVectorAt154 = *(int **)(block + 0x154);
+          if (blockVectorAt154 != (int *)0x0) {
+            (**(code **)(*blockVectorAt154 + 4))(blockVectorAt154);
           }
           Block__detach(block);
           arena = *(undefined4 *)(*(int *)(pass + 8) + 0x374);

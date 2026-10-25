@@ -2238,49 +2238,50 @@ int FUN_0010f38c(param_1, vector)
   undefined4 *param_1;
   uint *vector;
 {
+  undefined4 *vectorElementRef;
   int operandRecord2;
   int operandRecord;
   bool bVar1;
-  uint uVar2;
+  uint vectorCount;
   undefined4 *puVar3;
   int iVar4;
   int iVar5;
   int iVar6;
   int iVar7;
-  int *piVar8;
+  int *vectorElement;
   uint loopIndex;
   int *piVar10;
   
-  uVar2 = vector[1];
-  if (uVar2 != 0) {
+  vectorCount = vector[1];
+  if (vectorCount != 0) {
     loopIndex = 0;
     do {
       if (loopIndex < *vector) {
-        if (uVar2 <= loopIndex) {
-          _memset(uVar2 * 4 + vector[2],0,(loopIndex - uVar2) * 4 + 4);
+        if (vectorCount <= loopIndex) {
+          _memset(vectorCount * 4 + vector[2],0,(loopIndex - vectorCount) * 4 + 4);
           vector[1] = loopIndex + 1;
         }
-        puVar3 = (undefined4 *)(loopIndex * 4 + vector[2]);
+        vectorElementRef = (undefined4 *)(loopIndex * 4 + vector[2]);
       }
       else {
-        puVar3 = (undefined4 *)Vector__elementRefGrow(vector,loopIndex);
+        vectorElementRef = (undefined4 *)Vector__elementRefGrow(vector,loopIndex);
       }
       loopIndex = loopIndex + 1;
-      piVar8 = (int *)*puVar3;
+      vectorElement = (int *)*vectorElementRef;
       iVar7 = 0;
       puVar3 = param_1;
       do {
         operandRecord = IRInst__getOperandRecord(*param_1,0);
         if (*(char *)(iVar7 + operandRecord + 0x10) != '\x01') {
           iVar4 = 0;
-          piVar10 = piVar8;
+          piVar10 = vectorElement;
           do {
-            operandRecord2 = IRInst__getOperandRecord(*piVar8,0);
+            operandRecord2 = IRInst__getOperandRecord(*vectorElement,0);
             if ((*(char *)(iVar4 + operandRecord2 + 0x10) != '\x01') && (piVar10[1] == puVar3[1])) {
-              iVar5 = piVar8[5];
-              iVar6 = *piVar8;
+              iVar5 = vectorElement[5];
+              iVar6 = *vectorElement;
               piVar10[1] = 0;
-              piVar8[5] = iVar5 + -1;
+              vectorElement[5] = iVar5 + -1;
               *(undefined1 *)(iVar4 + iVar6 + 0x9c) = 1;
             }
             bVar1 = iVar4 != 3;
@@ -2292,8 +2293,8 @@ int FUN_0010f38c(param_1, vector)
         puVar3 = puVar3 + 1;
         iVar7 = iVar7 + 1;
       } while (bVar1);
-      uVar2 = vector[1];
-    } while (loopIndex < uVar2);
+      vectorCount = vector[1];
+    } while (loopIndex < vectorCount);
   }
   return;
 }
