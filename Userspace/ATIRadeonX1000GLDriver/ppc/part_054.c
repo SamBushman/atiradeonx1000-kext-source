@@ -349,217 +349,226 @@ int R520MachineAssembler__vslot23_emitTexRecord(this, inst, blockArg, compiler)
   undefined4 blockArg;
   int compiler;
 {
+  int textureTargetKind;
+  int samplerIndex;
+  uint src3SelectWord;
+  undefined2 registerIndex16;
+  byte oldAlphaMask;
+  byte oldRgbMask;
+  int recordPtr2;
+  int src1Vslot80Result;
+  int recordIndex;
   undefined4 sourceDef;
   int optionEnabled;
   int operandRecord;
-  bool bVar1;
-  undefined1 uVar2;
+  bool isFlag138One;
+  undefined1 flag1c;
   int *src1Inst;
   int src1IsMix;
   int *effectiveSrc1;
-  undefined2 uVar7;
-  int iVar5;
+  undefined2 sourceRegister16;
+  int recordTable;
   byte lanesToRgbMaskResult;
-  undefined4 uVar6;
-  byte bVar10;
-  uint uVar9;
+  undefined4 src1SelectWord;
+  byte formatCode;
+  uint src2SelectWord;
   undefined4 unaff_r21;
   undefined4 unaff_r22;
   int *mixInst;
   int loopRemaining;
-  int iVar13;
-  undefined4 uVar14;
-  int iVar15;
-  uint local_78 [4];
-  uint local_68 [4];
-  undefined4 local_58 [4];
-  undefined4 local_48;
-  undefined4 local_44;
-  uint local_40;
-  uint local_3c [3];
+  int recordPtr;
+  undefined4 currentProgram;
+  int recordIndex2;
+  uint rgbMixWords [4];
+  uint alphaMixWords [4];
+  undefined4 mixSelectScratch [4];
+  undefined4 composedSelectOut;
+  undefined4 destSelectOut;
+  uint srcSelectScratch;
+  uint texSelectScratch [3];
   
   src1Inst = (int *)IRInst__getOperandSource(inst,1);
   src1IsMix = (**(code **)(*src1Inst + 0x60))(src1Inst);
   if (src1IsMix != 0) {
     loopRemaining = IRInst__getOperandRecord(src1Inst,1);
-    uVar6 = *(undefined4 *)(loopRemaining + 0x10);
+    src1SelectWord = *(undefined4 *)(loopRemaining + 0x10);
     loopRemaining = IRInst__getOperandRecord(inst,1);
     unaff_r22 = *(undefined4 *)(loopRemaining + 0x10);
-    SelectWord__compose(&local_48,uVar6,unaff_r22);
+    SelectWord__compose(&composedSelectOut,src1SelectWord,unaff_r22);
     effectiveSrc1 = (int *)IRInst__getOperandSource(src1Inst,1);
     IRInst__setOperandSource(inst,1,effectiveSrc1,0,compiler);
     loopRemaining = IRInst__getOperandRecord(src1Inst,1);
-    uVar6 = *(undefined4 *)(loopRemaining + 0x10);
+    src1SelectWord = *(undefined4 *)(loopRemaining + 0x10);
     loopRemaining = IRInst__getOperandRecord(inst,1);
-    *(undefined4 *)(loopRemaining + 0x10) = uVar6;
-    unaff_r21 = local_48;
+    *(undefined4 *)(loopRemaining + 0x10) = src1SelectWord;
+    unaff_r21 = composedSelectOut;
     mixInst = src1Inst;
   }
   else {
     mixInst = (int *)0x0;
     effectiveSrc1 = src1Inst;
   }
-  uVar7 = (**(code **)(*this + 0x158))(this,inst,1,compiler);
+  sourceRegister16 = (**(code **)(*this + 0x158))(this,inst,1,compiler);
   *(undefined4 *)(this[0x18] * 0x48 + this[0x2a]) = 2;
-  *(undefined2 *)(this[0x18] * 0x48 + this[0x2a] + 0xe) = uVar7;
-  iVar13 = *(int *)(inst + 0x134);
+  *(undefined2 *)(this[0x18] * 0x48 + this[0x2a] + 0xe) = sourceRegister16;
+  samplerIndex = *(int *)(inst + 0x134);
   loopRemaining = *(int *)(*(int *)(inst + 0x88) + 8);
   if (loopRemaining != 0x77) {
-    *(char *)(this[0x18] * 0x48 + this[0x2a] + 0x19) = (char)iVar13;
-    iVar15 = this[0x18];
-    iVar5 = this[0x2a];
-    uVar7 = thunk_FUN_00134de8(*(undefined4 *)(compiler + COMP_currentProgram),inst);
-    *(undefined2 *)(iVar15 * 0x48 + iVar5 + 0xc) = uVar7;
+    *(char *)(this[0x18] * 0x48 + this[0x2a] + 0x19) = (char)samplerIndex;
+    recordIndex2 = this[0x18];
+    recordTable = this[0x2a];
+    registerIndex16 = thunk_FUN_00134de8(*(undefined4 *)(compiler + COMP_currentProgram),inst);
+    *(undefined2 *)(recordIndex2 * 0x48 + recordTable + 0xc) = registerIndex16;
   }
   else {
     *(undefined1 *)(this[0x18] * 0x48 + this[0x2a] + 0x19) = 0;
     *(undefined2 *)(this[0x18] * 0x48 + this[0x2a] + 0xc) = 0;
     *(undefined4 *)(this[0x2b] + 0x9370) = 1;
   }
-  iVar5 = (**(code **)(*effectiveSrc1 + 0x80))(effectiveSrc1);
-  if (iVar5 == 0) {
-    *(undefined4 *)(iVar13 * 4 + this[0x2b] + 0x9378) = 1;
+  src1Vslot80Result = (**(code **)(*effectiveSrc1 + 0x80))(effectiveSrc1);
+  if (src1Vslot80Result == 0) {
+    *(undefined4 *)(samplerIndex * 4 + this[0x2b] + 0x9378) = 1;
   }
   if (*(int *)(PTR_DAT_001e913c + loopRemaining * 0x38 + 0xc) != -1) {
     *(char *)(this[0x18] * 0x48 + this[0x2a] + 0x1a) =
          (char)*(int *)(PTR_DAT_001e913c + loopRemaining * 0x38 + 0xc);
   }
-  bVar10 = 0xc;
-  iVar13 = *(int *)(iVar13 * 0xc + *(int *)(*(int *)(compiler + COMP_currentProgram) + 0x78) + 4);
-  if (iVar13 != 2) {
-    if (iVar13 < 3) {
-      bVar10 = 0xe;
-      if (iVar13 != 1) {
+  formatCode = 0xc;
+  textureTargetKind = *(int *)(samplerIndex * 0xc + *(int *)(*(int *)(compiler + COMP_currentProgram) + 0x78) + 4);
+  if (textureTargetKind != 2) {
+    if (textureTargetKind < 3) {
+      formatCode = 0xe;
+      if (textureTargetKind != 1) {
 LAB_001a1f84:
-        bVar10 = 0;
+        formatCode = 0;
       }
     }
     else {
-      bVar10 = 8;
-      if (4 < iVar13) goto LAB_001a1f84;
+      formatCode = 8;
+      if (4 < textureTargetKind) goto LAB_001a1f84;
     }
   }
-  bVar1 = *(int *)(inst + 0x138) == 1;
+  isFlag138One = *(int *)(inst + 0x138) == 1;
   if (loopRemaining == 0x77) {
     *(undefined1 *)(this[0x18] * 0x48 + this[0x2a] + 0x1f) = 0;
     operandRecord = IRInst__getOperandRecord(inst,1);
-    FUN_000f32cc(&local_44,*(undefined4 *)(operandRecord + 0x10));
-    *(undefined4 *)(inst + 0x9c) = local_44;
+    FUN_000f32cc(&destSelectOut,*(undefined4 *)(operandRecord + 0x10));
+    *(undefined4 *)(inst + 0x9c) = destSelectOut;
     operandRecord = IRInst__getOperandRecord(inst,1);
     *(undefined4 *)(operandRecord + 0x10) = 0x10203;
     goto LAB_001a20d4;
   }
   if ((loopRemaining - 0x75U < 2) || (loopRemaining == 0xae)) {
-    *(byte *)(this[0x18] * 0x48 + this[0x2a] + 0x1f) = bVar10 & 7;
-    *(bool *)(this[0x18] * 0x48 + this[0x2a] + 0x18) = bVar1;
-    iVar13 = this[0x18] * 0x48 + this[0x2a];
+    *(byte *)(this[0x18] * 0x48 + this[0x2a] + 0x1f) = formatCode & 7;
+    *(bool *)(this[0x18] * 0x48 + this[0x2a] + 0x18) = isFlag138One;
+    recordPtr = this[0x18] * 0x48 + this[0x2a];
     if ((*(uint *)(inst + 0x14) & 0x2000) == 0) goto LAB_001a20b4;
 LAB_001a20cc:
-    uVar2 = 0;
+    flag1c = 0;
   }
   else {
-    *(byte *)(this[0x18] * 0x48 + this[0x2a] + 0x1f) = bVar10;
-    *(bool *)(this[0x18] * 0x48 + this[0x2a] + 0x18) = bVar1;
-    iVar13 = this[0x18] * 0x48 + this[0x2a];
+    *(byte *)(this[0x18] * 0x48 + this[0x2a] + 0x1f) = formatCode;
+    *(bool *)(this[0x18] * 0x48 + this[0x2a] + 0x18) = isFlag138One;
+    recordPtr = this[0x18] * 0x48 + this[0x2a];
     if ((*(uint *)(inst + 0x14) & 0x2000) != 0) goto LAB_001a20cc;
 LAB_001a20b4:
     optionEnabled = Compiler__isOptionEnabled(compiler,0x22);
-    uVar2 = 1;
+    flag1c = 1;
     if (optionEnabled == 0) goto LAB_001a20cc;
   }
-  *(undefined1 *)(iVar13 + 0x1c) = uVar2;
+  *(undefined1 *)(recordPtr + 0x1c) = flag1c;
 LAB_001a20d4:
   operandRecord = IRInst__getOperandRecord(inst,1);
-  FUN_000f3470(&local_40,*(undefined4 *)(operandRecord + 0x10));
-  iVar13 = this[0x18] * 0x48 + this[0x2a];
-  *(uint *)(iVar13 + 0x14) = local_40 >> 2 & 0xc00000 | *(uint *)(iVar13 + 0x14) & 0xff3fffff;
-  iVar13 = this[0x18] * 0x48 + this[0x2a];
-  *(uint *)(iVar13 + 0x14) = (local_40 & 0x30000) << 4 | *(uint *)(iVar13 + 0x14) & 0xffcfffff;
-  iVar13 = this[0x18] * 0x48 + this[0x2a];
-  *(uint *)(iVar13 + 0x14) = (local_40 & 0x300) << 10 | *(uint *)(iVar13 + 0x14) & 0xfff3ffff;
-  iVar13 = this[0x18] * 0x48 + this[0x2a];
-  *(uint *)(iVar13 + 0x14) = (local_40 & 3) << 0x10 | *(uint *)(iVar13 + 0x14) & 0xfffcffff;
-  FUN_000f3470(local_3c,*(undefined4 *)(inst + 0x140));
-  iVar13 = this[0x18] * 0x48 + this[0x2a];
-  *(uint *)(iVar13 + 0x14) = (local_3c[0] & 0x3000000) << 6 | *(uint *)(iVar13 + 0x14) & 0x3fffffff;
-  iVar13 = this[0x18] * 0x48 + this[0x2a];
-  *(uint *)(iVar13 + 0x14) = (local_3c[0] & 0x30000) << 0xc | *(uint *)(iVar13 + 0x14) & 0xcfffffff;
-  iVar13 = this[0x18] * 0x48 + this[0x2a];
-  *(uint *)(iVar13 + 0x14) = (local_3c[0] & 0x300) << 0x12 | *(uint *)(iVar13 + 0x14) & 0xf3ffffff;
-  iVar13 = this[0x18] * 0x48 + this[0x2a];
-  *(uint *)(iVar13 + 0x14) = (local_3c[0] & 3) << 0x18 | *(uint *)(iVar13 + 0x14) & 0xfcffffff;
+  FUN_000f3470(&srcSelectScratch,*(undefined4 *)(operandRecord + 0x10));
+  recordPtr = this[0x18] * 0x48 + this[0x2a];
+  *(uint *)(recordPtr + 0x14) = srcSelectScratch >> 2 & 0xc00000 | *(uint *)(recordPtr + 0x14) & 0xff3fffff;
+  recordPtr = this[0x18] * 0x48 + this[0x2a];
+  *(uint *)(recordPtr + 0x14) = (srcSelectScratch & 0x30000) << 4 | *(uint *)(recordPtr + 0x14) & 0xffcfffff;
+  recordPtr = this[0x18] * 0x48 + this[0x2a];
+  *(uint *)(recordPtr + 0x14) = (srcSelectScratch & 0x300) << 10 | *(uint *)(recordPtr + 0x14) & 0xfff3ffff;
+  recordPtr = this[0x18] * 0x48 + this[0x2a];
+  *(uint *)(recordPtr + 0x14) = (srcSelectScratch & 3) << 0x10 | *(uint *)(recordPtr + 0x14) & 0xfffcffff;
+  FUN_000f3470(texSelectScratch,*(undefined4 *)(inst + 0x140));
+  recordPtr = this[0x18] * 0x48 + this[0x2a];
+  *(uint *)(recordPtr + 0x14) = (texSelectScratch[0] & 0x3000000) << 6 | *(uint *)(recordPtr + 0x14) & 0x3fffffff;
+  recordPtr = this[0x18] * 0x48 + this[0x2a];
+  *(uint *)(recordPtr + 0x14) = (texSelectScratch[0] & 0x30000) << 0xc | *(uint *)(recordPtr + 0x14) & 0xcfffffff;
+  recordPtr = this[0x18] * 0x48 + this[0x2a];
+  *(uint *)(recordPtr + 0x14) = (texSelectScratch[0] & 0x300) << 0x12 | *(uint *)(recordPtr + 0x14) & 0xf3ffffff;
+  recordPtr = this[0x18] * 0x48 + this[0x2a];
+  *(uint *)(recordPtr + 0x14) = (texSelectScratch[0] & 3) << 0x18 | *(uint *)(recordPtr + 0x14) & 0xfcffffff;
   *(undefined1 *)(this[0x18] * 0x48 + this[0x2a] + 0x1d) = 0;
   *(undefined1 *)(this[0x18] * 0x48 + this[0x2a] + 0x1e) = 0;
-  iVar5 = this[0x18] * 0x48 + this[0x2a];
-  bVar10 = *(byte *)(iVar5 + 0x1d);
+  recordPtr2 = this[0x18] * 0x48 + this[0x2a];
+  oldRgbMask = *(byte *)(recordPtr2 + 0x1d);
   operandRecord = IRInst__getOperandRecord(inst,0);
   lanesToRgbMaskResult = lanesToRgbMask(*(undefined4 *)(operandRecord + 0x10));
-  *(byte *)(iVar5 + 0x1d) = bVar10 | lanesToRgbMaskResult;
-  iVar5 = this[0x18] * 0x48 + this[0x2a];
-  bVar10 = *(byte *)(iVar5 + 0x1e);
+  *(byte *)(recordPtr2 + 0x1d) = oldRgbMask | lanesToRgbMaskResult;
+  recordPtr2 = this[0x18] * 0x48 + this[0x2a];
+  oldAlphaMask = *(byte *)(recordPtr2 + 0x1e);
   operandRecord = IRInst__getOperandRecord(inst,0);
-  *(byte *)(iVar5 + 0x1e) = bVar10 | *(char *)(operandRecord + 0x13) == '\0';
+  *(byte *)(recordPtr2 + 0x1e) = oldAlphaMask | *(char *)(operandRecord + 0x13) == '\0';
   *(undefined2 *)(this[0x18] * 0x48 + this[0x2a] + 0x10) = 0;
   *(undefined2 *)(this[0x18] * 0x48 + this[0x2a] + 0x12) = 0;
   this[0x2c] = this[0x18];
   if (loopRemaining == 0x78) {
     loopRemaining = IRInst__getOperandRecord(inst,2);
-    uVar9 = *(uint *)(loopRemaining + 0x10);
+    src2SelectWord = *(uint *)(loopRemaining + 0x10);
     loopRemaining = this[0x18] * 0x48 + this[0x2a];
-    *(uint *)(loopRemaining + 0x14) = uVar9 >> 10 & 0xc000 | *(uint *)(loopRemaining + 0x14) & 0xffff3fff;
+    *(uint *)(loopRemaining + 0x14) = src2SelectWord >> 10 & 0xc000 | *(uint *)(loopRemaining + 0x14) & 0xffff3fff;
     loopRemaining = this[0x18] * 0x48 + this[0x2a];
-    *(uint *)(loopRemaining + 0x14) = uVar9 >> 4 & 0x3000 | *(uint *)(loopRemaining + 0x14) & 0xffffcfff;
+    *(uint *)(loopRemaining + 0x14) = src2SelectWord >> 4 & 0x3000 | *(uint *)(loopRemaining + 0x14) & 0xffffcfff;
     loopRemaining = this[0x18] * 0x48 + this[0x2a];
-    *(uint *)(loopRemaining + 0x14) = (uVar9 & 0x300) << 2 | *(uint *)(loopRemaining + 0x14) & 0xfffff3ff;
+    *(uint *)(loopRemaining + 0x14) = (src2SelectWord & 0x300) << 2 | *(uint *)(loopRemaining + 0x14) & 0xfffff3ff;
     loopRemaining = this[0x18] * 0x48 + this[0x2a];
-    *(uint *)(loopRemaining + 0x14) = (uVar9 & 3) << 8 | *(uint *)(loopRemaining + 0x14) & 0xfffffcff;
-    iVar13 = this[0x18];
+    *(uint *)(loopRemaining + 0x14) = (src2SelectWord & 3) << 8 | *(uint *)(loopRemaining + 0x14) & 0xfffffcff;
+    recordIndex = this[0x18];
     loopRemaining = this[0x2a];
-    uVar14 = *(undefined4 *)(compiler + COMP_currentProgram);
+    currentProgram = *(undefined4 *)(compiler + COMP_currentProgram);
     sourceDef = IRInst__getOperandSource(inst,2);
-    uVar7 = thunk_FUN_00134de8(uVar14,sourceDef);
-    *(undefined2 *)(iVar13 * 0x48 + loopRemaining + 0x10) = uVar7;
+    registerIndex16 = thunk_FUN_00134de8(currentProgram,sourceDef);
+    *(undefined2 *)(recordIndex * 0x48 + loopRemaining + 0x10) = registerIndex16;
     loopRemaining = IRInst__getOperandRecord(inst,3);
-    uVar9 = *(uint *)(loopRemaining + 0x10);
+    src3SelectWord = *(uint *)(loopRemaining + 0x10);
     loopRemaining = this[0x18] * 0x48 + this[0x2a];
-    *(uint *)(loopRemaining + 0x14) = uVar9 >> 0x12 & 0xc0 | *(uint *)(loopRemaining + 0x14) & 0xffffff3f;
+    *(uint *)(loopRemaining + 0x14) = src3SelectWord >> 0x12 & 0xc0 | *(uint *)(loopRemaining + 0x14) & 0xffffff3f;
     loopRemaining = this[0x18] * 0x48 + this[0x2a];
-    *(uint *)(loopRemaining + 0x14) = uVar9 >> 0xc & 0x30 | *(uint *)(loopRemaining + 0x14) & 0xffffffcf;
+    *(uint *)(loopRemaining + 0x14) = src3SelectWord >> 0xc & 0x30 | *(uint *)(loopRemaining + 0x14) & 0xffffffcf;
     loopRemaining = this[0x18] * 0x48 + this[0x2a];
-    *(uint *)(loopRemaining + 0x14) = uVar9 >> 6 & 0xc | *(uint *)(loopRemaining + 0x14) & 0xfffffff3;
+    *(uint *)(loopRemaining + 0x14) = src3SelectWord >> 6 & 0xc | *(uint *)(loopRemaining + 0x14) & 0xfffffff3;
     loopRemaining = this[0x18] * 0x48 + this[0x2a];
-    *(uint *)(loopRemaining + 0x14) = uVar9 & 3 | *(uint *)(loopRemaining + 0x14) & 0xfffffffc;
-    iVar13 = this[0x18];
+    *(uint *)(loopRemaining + 0x14) = src3SelectWord & 3 | *(uint *)(loopRemaining + 0x14) & 0xfffffffc;
+    recordIndex = this[0x18];
     loopRemaining = this[0x2a];
-    uVar14 = *(undefined4 *)(compiler + COMP_currentProgram);
+    currentProgram = *(undefined4 *)(compiler + COMP_currentProgram);
     sourceDef = IRInst__getOperandSource(inst,3);
-    uVar7 = thunk_FUN_00134de8(uVar14,sourceDef);
-    *(undefined2 *)(iVar13 * 0x48 + loopRemaining + 0x12) = uVar7;
+    registerIndex16 = thunk_FUN_00134de8(currentProgram,sourceDef);
+    *(undefined2 *)(recordIndex * 0x48 + loopRemaining + 0x12) = registerIndex16;
   }
   if (src1IsMix != 0) {
     src1IsMix = 0;
     loopRemaining = 4;
     do {
-      *(undefined4 *)(src1IsMix + (int)local_78) = 0;
-      *(undefined4 *)(src1IsMix + (int)local_58) = 0;
-      *(undefined4 *)(src1IsMix + (int)local_68) = 0;
+      *(undefined4 *)(src1IsMix + (int)rgbMixWords) = 0;
+      *(undefined4 *)(src1IsMix + (int)mixSelectScratch) = 0;
+      *(undefined4 *)(src1IsMix + (int)alphaMixWords) = 0;
       src1IsMix = src1IsMix + 4;
       loopRemaining = loopRemaining + -1;
     } while (loopRemaining != 0);
-    (**(code **)(*this + 0xf8))(this,1,local_58,local_78,0,unaff_r21);
-    (**(code **)(*this + 0x108))(this,1,local_78,mixInst,unaff_r22);
-    (**(code **)(*this + 0x10c))(this,1,local_68,mixInst,unaff_r22);
+    (**(code **)(*this + 0xf8))(this,1,mixSelectScratch,rgbMixWords,0,unaff_r21);
+    (**(code **)(*this + 0x108))(this,1,rgbMixWords,mixInst,unaff_r22);
+    (**(code **)(*this + 0x10c))(this,1,alphaMixWords,mixInst,unaff_r22);
     IRInst__setOperandSource(inst,1,mixInst,0,compiler);
     src1IsMix = IRInst__getOperandRecord(inst,1);
     *(undefined4 *)(src1IsMix + 0x10) = unaff_r22;
     src1IsMix = this[0x18] * 0x48 + this[0x2a];
-    *(uint *)(src1IsMix + 0x14) = (local_78[1] & 3) << 0x16 | *(uint *)(src1IsMix + 0x14) & 0xff3fffff;
+    *(uint *)(src1IsMix + 0x14) = (rgbMixWords[1] & 3) << 0x16 | *(uint *)(src1IsMix + 0x14) & 0xff3fffff;
     src1IsMix = this[0x18] * 0x48 + this[0x2a];
-    *(uint *)(src1IsMix + 0x14) = (local_78[1] & 0x18) << 0x11 | *(uint *)(src1IsMix + 0x14) & 0xffcfffff;
+    *(uint *)(src1IsMix + 0x14) = (rgbMixWords[1] & 0x18) << 0x11 | *(uint *)(src1IsMix + 0x14) & 0xffcfffff;
     src1IsMix = this[0x18] * 0x48 + this[0x2a];
-    *(uint *)(src1IsMix + 0x14) = (local_78[1] & 0xc0) << 0xc | *(uint *)(src1IsMix + 0x14) & 0xfff3ffff;
+    *(uint *)(src1IsMix + 0x14) = (rgbMixWords[1] & 0xc0) << 0xc | *(uint *)(src1IsMix + 0x14) & 0xfff3ffff;
     src1IsMix = this[0x18] * 0x48 + this[0x2a];
-    *(uint *)(src1IsMix + 0x14) = (local_68[1] & 0x600) << 7 | *(uint *)(src1IsMix + 0x14) & 0xfffcffff;
+    *(uint *)(src1IsMix + 0x14) = (alphaMixWords[1] & 0x600) << 7 | *(uint *)(src1IsMix + 0x14) & 0xfffcffff;
   }
   return;
 }

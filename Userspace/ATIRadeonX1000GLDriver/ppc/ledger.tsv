@@ -2936,7 +2936,7 @@
 0x184bf0	232	FUN_00184bf0	part_048	converted
 0x184cd8	164	FUN_00184cd8	part_048	converted
 0x184d7c	372	Inst__splitAndMerge	part_048	converted
-0x184ef0	2440	FUN_00184ef0	part_048	converted
+0x184ef0	2440	IRInst__foldResultScaleIntoUsers	part_048	converted
 0x1859bc	640	Inst__tryDp3Add	part_048	converted
 0x185da4	1900	FUN_00185da4	part_048	converted
 0x186510	1400	FUN_00186510	part_049	converted
