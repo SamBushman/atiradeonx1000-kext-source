@@ -1,0 +1,1 @@
+func	FUN_0004fd80	extvsUpdateVertexAttributeConstants	INFERRED	compares the eight current vertex attribute values with the cached copies of the active vertex program and emits a 4-word register write packet (0x1300 + 4n) for every attribute that changed

@@ -1978,7 +1978,7 @@ int FUN_0012e488(param_1, block)
     Block__ctor_ea020(landingBlock,*(undefined4 *)(param_1 + 8));
     allocation[0x2f] = *(undefined4 *)(block + 0xb8);
     Program__insertBlockAfter(param_1,block,landingBlock);
-    FUN_000e977c(block,successor,landingBlock);
+    Block__splitOutgoingEdge(block,successor,landingBlock);
     Block__connect(landingBlock,successor);
   }
   return landingBlock;
@@ -2037,7 +2037,7 @@ int IfFooter__ctor_12e56c(conditionRegister, loopBlock, compiler)
     Block__ctor_ea020(preHeaderBlock,compiler);
     allocation[0x2f] = headerWordB8;
     Program__insertBlockAfter(program,loopHeader,preHeaderBlock);
-    FUN_000e977c(loopHeader,loopExitTarget,preHeaderBlock);
+    Block__splitOutgoingEdge(loopHeader,loopExitTarget,preHeaderBlock);
     headerChainBlock = FUN_0012b140(loopHeader);
     arenaAt374 = *(undefined4 *)(compiler + COMP_arenaA);
     allocation = (undefined4 *)Arena__alloc(arenaAt374,0x130);
@@ -2118,7 +2118,7 @@ int FUN_0012e8c0(program, block, lastBlock)
       Block__ctor_ea020(newSuccessorBlock,*(undefined4 *)(program + 8));
       allocation[0x2f] = block[0x2e];
       Program__insertBlockAfter(program,block,newSuccessorBlock);
-      FUN_000e9adc(block,successor,newSuccessorBlock);
+      Block__splitEdge(block,successor,newSuccessorBlock);
     }
     blockQuery24 = (**(code **)(*block + 0x24))(block);
     if (((blockQuery24 != 0) || (blockQuery24 = (**(code **)(*block + 0x2c))(block), blockQuery24 != 0)) &&
@@ -2131,7 +2131,7 @@ int FUN_0012e8c0(program, block, lastBlock)
       Block__ctor_ea020(newPredecessorBlock,*(undefined4 *)(program + 8));
       allocation[0x2f] = block[0x2e];
       Program__insertBlockBefore(program,block,newPredecessorBlock);
-      FUN_000e9adc(predecessor,block,newPredecessorBlock);
+      Block__splitEdge(predecessor,block,newPredecessorBlock);
     }
   } while (block != lastBlock);
   return;
@@ -2255,7 +2255,7 @@ int FUN_0012eacc(program)
           Block__ctor_ea020(newSplitBlock,*(undefined4 *)(program + 8));
           allocation[0x2f] = blockCursor[0x2e];
           Program__insertBlockAfter(program,blockCursor,newSplitBlock);
-          FUN_000e9adc(blockCursor,successorBlock,newSplitBlock);
+          Block__splitEdge(blockCursor,successorBlock,newSplitBlock);
         }
         blockQuery24 = (**(code **)(*blockCursor + 0x24))(blockCursor);
         if (((blockQuery24 != 0) || (blockQuery24 = (**(code **)(*blockCursor + 0x2c))(blockCursor), blockQuery24 != 0)) &&
@@ -2268,7 +2268,7 @@ int FUN_0012eacc(program)
           Block__ctor_ea020(newSplitBlock,*(undefined4 *)(program + 8));
           allocation[0x2f] = blockCursor[0x2e];
           Program__insertBlockBefore(program,blockCursor,newSplitBlock);
-          FUN_000e9adc(predecessorBlock,blockCursor,newSplitBlock);
+          Block__splitEdge(predecessorBlock,blockCursor,newSplitBlock);
         }
       } while (blockCursor != lastBlock);
       return;
@@ -2377,8 +2377,8 @@ LAB_0012ed24:
         *blockAlloc = arenaAt374;
         puVar8 = blockAlloc + 1;
         Block__ctor_ea020(puVar8,*(undefined4 *)(program + 8));
-        FUN_000e977c(predecessor,movDestOperand,puVar8);
-        FUN_000e9948(ifHeader,movDestOperand,puVar8);
+        Block__splitOutgoingEdge(predecessor,movDestOperand,puVar8);
+        Block__splitIncomingEdge(ifHeader,movDestOperand,puVar8);
         Program__insertBlockAfter(program,predecessor,puVar8);
       }
       Program__insertBlockAfter(program,puVar8,ifHeader);
@@ -2393,9 +2393,9 @@ LAB_0012ed24:
       Program__insertBlockAfter(program,puVar9,ifFooterBlock);
       Block__setField0xb8AndChildren(ifHeader,headerWordB8);
       Block__connect(ifHeader,puVar9);
-      FUN_000e977c(puVar8,movDestOperand,ifHeader);
+      Block__splitOutgoingEdge(puVar8,movDestOperand,ifHeader);
       Block__connect(puVar9,ifFooterBlock);
-      FUN_000e977c(predecessor2,pendingEntry,ifFooterBlock);
+      Block__splitOutgoingEdge(predecessor2,pendingEntry,ifFooterBlock);
       Block__connect(ifFooterBlock,pendingEntry);
       IRInst__bindOperandRegisters(program,branchInst);
       ((int (*)())IfFooter__ctor_12e56c)(predicateRegister,pendingEntry,*(undefined4 *)(program + 8));

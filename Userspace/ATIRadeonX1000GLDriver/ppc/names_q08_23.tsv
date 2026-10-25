@@ -1,0 +1,33 @@
+local	FUN_00189df4	param_2	vectorSlotUse	INFERRED	out: vector ALU unit use class of the instruction (-1 if none)
+local	FUN_00189df4	param_3	scalarSlotUse	INFERRED	out: scalar ALU unit use class of the instruction (-1 if none)
+use	FUN_00189df4	iVar2	isFetch	INFERRED	result of the virtual call at vtable +0x28 (fetch instruction)	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0x28\)\)\(param_1,param_2,param_3\);$	+2
+use	FUN_00189df4	iVar2	vectorClass	INFERRED	candidate vector unit class of the opcode	^\s*iVar2\ =\ iVar4;$	+1
+use	FUN_00189df4	iVar2	vectorClass	INFERRED	candidate vector unit class of the opcode	^\s*if\ \(iVar2\ <\ 0\)\ goto\ LAB_00189f94;$	+1
+use	FUN_00189df4	iVar2	vectorClass	INFERRED	candidate vector unit class of the opcode	^\s*\*param_2\ =\ iVar2;$	+1
+use	FUN_00189df4	iVar2	vectorClass	INFERRED	candidate vector unit class of the opcode	^\s*if\ \(\(uVar1\ >>\ 0x18\ ==\ 0\)\ \|\|$	+3
+use	FUN_00189df4	iVar2	vectorClass	INFERRED	candidate vector unit class of the opcode	^\s*iVar2\ =\ 0x98;$	+1
+use	FUN_00189df4	iVar4	opcodeOrScalarClass	INFERRED	opcode of inst, then the candidate scalar unit class	^\s*iVar4\ =\ \*\(int\ \*\)\(param_1\[0x22\]\ \+\ 8\);$	+6
+use	FUN_00189df4	iVar4	opcodeOrScalarClass	INFERRED	opcode of inst, then the candidate scalar unit class	^\s*iVar4\ =\ \-1;$	+1
+use	FUN_00189df4	iVar4	opcodeOrScalarClass	INFERRED	opcode of inst, then the candidate scalar unit class	^\s*if\ \(\(\(\(\(iVar4\ !=\ 0x37\)\ \&\&\ \(iVar4\ !=\ 0x3a\)\)\ \&\&$	+4
+use	FUN_00189df4	iVar4	opcodeOrScalarClass	INFERRED	opcode of inst, then the candidate scalar unit class	^\s*iVar2\ =\ iVar4;$@2	+1
+use	FUN_00189df4	iVar4	opcodeOrScalarClass	INFERRED	opcode of inst, then the candidate scalar unit class	^\s*iVar4\ =\ \-1;$@2	+1
+use	FUN_00189df4	iVar4	opcodeOrScalarClass	INFERRED	opcode of inst, then the candidate scalar unit class	^\s*if\ \(iVar4\ <\ 0\)\ goto\ LAB_00189fb4;$	+1
+use	FUN_00189df4	iVar4	opcodeOrScalarClass	INFERRED	opcode of inst, then the candidate scalar unit class	^\s*\*param_3\ =\ iVar4;$	+1
+use	FUN_00189df4	uVar1	destSelectWord	INFERRED	select word of the destination operand (lane bytes tested for zero)	^\s*uVar1\ =\ \*\(uint\ \*\)\(iVar2\ \+\ 0x10\);$	+3
+use	FUN_00189df4	uVar1	destSelectWord	INFERRED	select word of the destination operand (lane bytes tested for zero)	^\s*if\ \(\(uVar1\ \&\ 0xff\)\ !=\ 0\)\ \{$	+1
+use	FUN_00189df4	uVar1	destSelectWord2	INFERRED	select word of the destination operand (lane bytes tested for zero)	^\s*uVar1\ =\ \*\(uint\ \*\)\(iVar2\ \+\ 0x10\);$@2	+2
+use	FUN_00189df4	uVar3	result	INFERRED	return value: 1 when both unit classes were assigned	^\s*uVar3\ =\ 0;$	+1
+use	FUN_00189df4	uVar3	result	INFERRED	return value: 1 when both unit classes were assigned	^\s*uVar3\ =\ 1;$	+1
+use	FUN_00189df4	uVar3	result	INFERRED	return value: 1 when both unit classes were assigned	^\s*return\ uVar3;$	+1
+use	FUN_0018b1bc	bVar1	rangeNonEmpty	INFERRED	rangeLo <= rangeHi	^\s*bVar1\ =\ param_3\ <=\ param_4;$	+2
+use	FUN_0018b1bc	bVar1	rangeNonEmpty	INFERRED	rangeLo <= rangeHi	^\s*if\ \(bVar1\)\ \{$@2	+1
+use	FUN_0018b1bc	bVar1	rangeNonEmpty	INFERRED	rangeLo <= rangeHi	^\s*if\ \(bVar1\)\ \{$@3	+1
+use	FUN_0018b1bc	bVar1	rangeNonEmpty	INFERRED	rangeLo <= rangeHi	^\s*if\ \(bVar1\)\ \{$@4	+1
+use	FUN_0018b1bc	bVar1	rangeNonEmpty	INFERRED	rangeLo <= rangeHi	^\s*if\ \(bVar1\)\ \{$@5	+1
+use	FUN_0018b1bc	bVar2	moreLanes	INFERRED	lane counter != 3	^\s*bVar2\ =\ iVar10\ !=\ 3;$	+1
+use	FUN_0018b1bc	bVar2	moreLanes	INFERRED	lane counter != 3	^\s*\}\ while\ \(bVar2\);$	+1
+local	FUN_0018b1bc	in_r8	staleArg6	INFERRED	stale argument register r8 forwarded to the indirect call
+local	FUN_0018b1bc	param_2	packNode	INFERRED	node with +0x40 entry vector and per-slot counters at +0x48 + slot*4
+local	FUN_0018b1bc	param_3	rangeLo	INFERRED	first slot of the range being reassigned
+local	FUN_0018b1bc	param_4	rangeHi	INFERRED	last slot of the range being reassigned
+local	FUN_0018b1bc	param_5	targetSlot	INFERRED	slot the entries of the range are merged into

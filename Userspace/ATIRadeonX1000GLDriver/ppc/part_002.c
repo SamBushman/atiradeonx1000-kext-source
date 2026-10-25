@@ -8679,7 +8679,7 @@ LAB_00016a6c:
     gaPointSizeValue = *(undefined4 *)(ring + 0x1ccc);
     *(undefined4 *)(writeCursor + 4 + trailerOffset) = gaPointSizeValue;
     FUN_0009d3b0(ring,staleArgR4Forward,width,trailerOffset,packetStart,packetVertexCount,gaPointSizeValue);
-    FUN_000872e0(ring,puStack_ac);
+    gldLeaveInternalDrawState(ring,puStack_ac);
   }
   return;
 }
@@ -9439,65 +9439,65 @@ int glCopyPixels_impl(ctx, rasterPos, srcX, srcY, width, height, copyType)
   uint gb_mspos1;
   uint sc_screendoor;
   uint sc_edgerule;
-  float fVar1;
-  float fVar2;
-  float fVar3;
-  float fVar4;
-  float fVar5;
-  float fVar6;
-  float fVar7;
+  float scratchFloat1;
+  float scratchFloat2;
+  float scratchFloat3;
+  float scratchFloat4;
+  float scratchFloat5;
+  float scratchFloat6;
+  float scratchFloat7;
   ushort bufferWidth16;
   ushort bufferHeight16;
-  float fVar10;
-  float fVar11;
-  float fVar12;
-  float fVar13;
-  float fVar14;
-  float fVar15;
-  float fVar16;
-  float fVar17;
-  float fVar18;
-  float fVar19;
-  float fVar20;
-  float fVar21;
+  float scratchFloat10;
+  float scratchFloat11;
+  float scratchFloat12;
+  float scratchFloat13;
+  float scratchFloat14;
+  float scratchFloat15;
+  float scratchFloat16;
+  float scratchFloat17;
+  float scratchFloat18;
+  float scratchFloat19;
+  float scratchFloat20;
+  float scratchFloat21;
   bool srcDstOverlap;
   double doubleBias;
-  int iVar24;
-  uint uVar26;
-  int iVar27;
+  int scratchInt24;
+  uint scratchUint26;
+  int scratchInt27;
   uint writeMaskByte;
-  int iVar29;
+  int scratchInt29;
   uint *previousHeader;
   uint *lastHeader;
-  undefined4 uVar32;
-  int iVar33;
-  int iVar34;
+  undefined4 scratchUint32;
+  int scratchInt33;
+  int scratchInt34;
   undefined4 *packetAlloc;
-  uint uVar36;
-  uint uVar37;
-  int iVar38;
-  uint uVar39;
-  int iVar40;
-  uint uVar41;
-  undefined *puVar42;
-  uint uVar43;
+  uint scratchUint36;
+  uint scratchUint37;
+  int scratchInt38;
+  uint scratchUint39;
+  int scratchInt40;
+  uint scratchUint41;
+  undefined *scratchPtr42;
+  uint scratchUint43;
   int destEndY;
-  uint uVar44;
-  uint uVar45;
-  uint uVar46;
-  uint uVar47;
-  uint uVar48;
-  uint uVar49;
+  uint scratchUint44;
+  uint scratchUint45;
+  uint scratchUint46;
+  uint scratchUint47;
+  uint scratchUint48;
+  uint scratchUint49;
   int engineState;
   undefined4 *packetBase;
-  uint uVar52;
+  uint scratchUint52;
   
   engineState = *(int *)(ctx + 0x10);
-  iVar34 = srcX;
-  iVar29 = srcY;
-  iVar38 = width;
-  iVar40 = height;
-  uVar32 = ((int (*)())gld_textureVariantClass)((uint)*(ushort *)(((unsigned char *)0x00002db8) + engineState),*(undefined4 *)(ctx + 0x154));
+  scratchInt34 = srcX;
+  scratchInt29 = srcY;
+  scratchInt38 = width;
+  scratchInt40 = height;
+  scratchUint32 = ((int (*)())gld_textureVariantClass)((uint)*(ushort *)(((unsigned char *)0x00002db8) + engineState),*(undefined4 *)(ctx + 0x154));
   if ((((unsigned char *)0x00002d84)[engineState] == '\0') ||
      ((((((*(int *)(((unsigned char *)0x00002d68) + engineState) == 0x10000 &&
           (*(int *)(((unsigned char *)0x00002d6c) + engineState) == 0x10000)) &&
@@ -9505,111 +9505,111 @@ int glCopyPixels_impl(ctx, rasterPos, srcX, srcY, width, height, copyType)
         ((*(short *)(((unsigned char *)0x00002d80) + engineState) != -0x7ff9 &&
          (*(short *)(((unsigned char *)0x00002d82) + engineState) != -0x7ff5)))) &&
        (*(short *)(((unsigned char *)0x00002d82) + engineState) != -0x7ff9)) || (((unsigned char *)0x00002e33)[engineState] != '\0')))) {
-    uVar41 = *(uint *)(ctx + 0x26b0) & 0xfffffffd;
-    *(uint *)(ctx + 0x26b0) = uVar41;
+    scratchUint41 = *(uint *)(ctx + 0x26b0) & 0xfffffffd;
+    *(uint *)(ctx + 0x26b0) = scratchUint41;
   }
   else {
-    uVar41 = *(uint *)(ctx + 0x26b0) | 2;
-    *(uint *)(ctx + 0x26b0) = uVar41;
+    scratchUint41 = *(uint *)(ctx + 0x26b0) | 2;
+    *(uint *)(ctx + 0x26b0) = scratchUint41;
   }
   if (((unsigned char *)0x00002d66)[engineState] == '\0') {
-    uVar41 = uVar41 & 0xfffffffe;
-    *(uint *)(ctx + 0x26b0) = uVar41;
+    scratchUint41 = scratchUint41 & 0xfffffffe;
+    *(uint *)(ctx + 0x26b0) = scratchUint41;
   }
   else {
-    uVar41 = uVar41 | 1;
-    *(uint *)(ctx + 0x26b0) = uVar41;
+    scratchUint41 = scratchUint41 | 1;
+    *(uint *)(ctx + 0x26b0) = scratchUint41;
   }
   if ((*(uint *)(((unsigned char *)0x000030b4) + engineState) & 0xcff1) == 0) {
-    uVar41 = uVar41 & 0xfffff7ff;
-    *(uint *)(ctx + 0x26b0) = uVar41;
+    scratchUint41 = scratchUint41 & 0xfffff7ff;
+    *(uint *)(ctx + 0x26b0) = scratchUint41;
   }
   else {
-    uVar41 = uVar41 | 0x800;
-    *(uint *)(ctx + 0x26b0) = uVar41;
+    scratchUint41 = scratchUint41 | 0x800;
+    *(uint *)(ctx + 0x26b0) = scratchUint41;
   }
   if ((((unsigned char *)0x00002ddc)[engineState] == '\0') || ((*(uint *)(ctx + 0x154) & 0xf) != 3)) {
-    uVar41 = uVar41 & 0xffffffdf;
-    *(uint *)(ctx + 0x26b0) = uVar41;
+    scratchUint41 = scratchUint41 & 0xffffffdf;
+    *(uint *)(ctx + 0x26b0) = scratchUint41;
   }
   else {
-    uVar41 = uVar41 | 0x20;
-    *(uint *)(ctx + 0x26b0) = uVar41;
+    scratchUint41 = scratchUint41 | 0x20;
+    *(uint *)(ctx + 0x26b0) = scratchUint41;
   }
   if ((((*(uint *)(((unsigned char *)0x000031c0) + engineState) & 1) == 0) || ((*(uint *)(ctx + 0x154) & 0x80) == 0))
      || ((*(short *)(((unsigned char *)0x000031a0) + engineState) == 0x207 &&
          (*(int *)(((unsigned char *)0x000031a4) + engineState) == 0x1e001e00)))) {
-    uVar41 = uVar41 & 0xfffeffff;
-    *(uint *)(ctx + 0x26b0) = uVar41;
+    scratchUint41 = scratchUint41 & 0xfffeffff;
+    *(uint *)(ctx + 0x26b0) = scratchUint41;
   }
   else {
-    uVar41 = uVar41 | 0x10000;
-    *(uint *)(ctx + 0x26b0) = uVar41;
+    scratchUint41 = scratchUint41 | 0x10000;
+    *(uint *)(ctx + 0x26b0) = scratchUint41;
   }
   if ((((unsigned char *)0x00002dc8)[engineState] == '\0') || ((*(uint *)(ctx + 0x154) & 0x40) == 0)) {
-    uVar41 = uVar41 & 0xffffffef;
-    *(uint *)(ctx + 0x26b0) = uVar41;
+    scratchUint41 = scratchUint41 & 0xffffffef;
+    *(uint *)(ctx + 0x26b0) = scratchUint41;
   }
   else {
-    uVar41 = uVar41 | 0x10;
-    *(uint *)(ctx + 0x26b0) = uVar41;
+    scratchUint41 = scratchUint41 | 0x10;
+    *(uint *)(ctx + 0x26b0) = scratchUint41;
   }
   if (((unsigned char *)0x00002e0a)[engineState] == '\0') {
-    *(uint *)(ctx + 0x26b0) = uVar41 & 0xffffffbf;
+    *(uint *)(ctx + 0x26b0) = scratchUint41 & 0xffffffbf;
   }
   else {
-    *(uint *)(ctx + 0x26b0) = uVar41 | 0x40;
+    *(uint *)(ctx + 0x26b0) = scratchUint41 | 0x40;
   }
-  if (((((((*(int *)(ctx + 0x18c) == 0) || (iVar33 = FUN_000a4760(ctx), iVar33 == 0)) &&
-         ((*(int *)(ctx + 400) == 0 || (iVar33 = FUN_000a4760(ctx), iVar33 == 1)))) &&
-        ((*(int *)(ctx + 0x194) == 0 || (iVar33 = FUN_000a4760(ctx), iVar33 == 2)))) &&
-       ((*(int *)(ctx + 0x198) == 0 || (iVar33 = FUN_000a4760(ctx), iVar33 == 3)))) &&
-      ((((*(int *)(ctx + 0x19c) == 0 || (iVar33 = FUN_000a4760(ctx), iVar33 == 4)) &&
-        ((*(int *)(ctx + 0x1a0) == 0 || (iVar33 = FUN_000a4760(ctx), iVar33 == 5)))) &&
-       ((*(int *)(ctx + 0x1a4) == 0 || (iVar33 = FUN_000a4760(ctx), iVar33 == 6)))))) &&
-     ((*(int *)(ctx + 0x1a8) == 0 || (iVar33 = FUN_000a4760(ctx), iVar33 == 7)))) {
-    uVar41 = *(uint *)(ctx + 0x26b0) & 0xfffdffff;
-    *(uint *)(ctx + 0x26b0) = uVar41;
+  if (((((((*(int *)(ctx + 0x18c) == 0) || (scratchInt33 = FUN_000a4760(ctx), scratchInt33 == 0)) &&
+         ((*(int *)(ctx + 400) == 0 || (scratchInt33 = FUN_000a4760(ctx), scratchInt33 == 1)))) &&
+        ((*(int *)(ctx + 0x194) == 0 || (scratchInt33 = FUN_000a4760(ctx), scratchInt33 == 2)))) &&
+       ((*(int *)(ctx + 0x198) == 0 || (scratchInt33 = FUN_000a4760(ctx), scratchInt33 == 3)))) &&
+      ((((*(int *)(ctx + 0x19c) == 0 || (scratchInt33 = FUN_000a4760(ctx), scratchInt33 == 4)) &&
+        ((*(int *)(ctx + 0x1a0) == 0 || (scratchInt33 = FUN_000a4760(ctx), scratchInt33 == 5)))) &&
+       ((*(int *)(ctx + 0x1a4) == 0 || (scratchInt33 = FUN_000a4760(ctx), scratchInt33 == 6)))))) &&
+     ((*(int *)(ctx + 0x1a8) == 0 || (scratchInt33 = FUN_000a4760(ctx), scratchInt33 == 7)))) {
+    scratchUint41 = *(uint *)(ctx + 0x26b0) & 0xfffdffff;
+    *(uint *)(ctx + 0x26b0) = scratchUint41;
   }
   else {
-    uVar41 = *(uint *)(ctx + 0x26b0) | 0x20000;
-    *(uint *)(ctx + 0x26b0) = uVar41;
+    scratchUint41 = *(uint *)(ctx + 0x26b0) | 0x20000;
+    *(uint *)(ctx + 0x26b0) = scratchUint41;
   }
   if (((unsigned char *)0x00002e33)[engineState] == '\0') {
-    uVar41 = uVar41 & 0xfffffdff;
-    *(uint *)(ctx + 0x26b0) = uVar41;
+    scratchUint41 = scratchUint41 & 0xfffffdff;
+    *(uint *)(ctx + 0x26b0) = scratchUint41;
   }
   else {
-    uVar41 = uVar41 | 0x200;
-    *(uint *)(ctx + 0x26b0) = uVar41;
+    scratchUint41 = scratchUint41 | 0x200;
+    *(uint *)(ctx + 0x26b0) = scratchUint41;
   }
   if ((((((unsigned char *)0x00002e43)[engineState] == '\0') || (((unsigned char *)0x00002e40)[engineState] == '\0')) ||
       (((unsigned char *)0x00002e41)[engineState] == '\0')) || (((unsigned char *)0x00002e42)[engineState] == '\0')) {
-    puVar42 = (undefined *)(uVar41 | 0x400);
-    *(undefined **)(ctx + 0x26b0) = puVar42;
+    scratchPtr42 = (undefined *)(scratchUint41 | 0x400);
+    *(undefined **)(ctx + 0x26b0) = scratchPtr42;
   }
   else {
-    puVar42 = (undefined *)(uVar41 & 0xfffffbff);
-    *(undefined **)(ctx + 0x26b0) = puVar42;
+    scratchPtr42 = (undefined *)(scratchUint41 & 0xfffffbff);
+    *(undefined **)(ctx + 0x26b0) = scratchPtr42;
   }
   if (*(short *)(((unsigned char *)0x00002dba) + engineState) == *(short *)(((unsigned char *)0x00002db8) + engineState)) {
-    iVar40 = srcX + width;
-    iVar38 = srcY + height;
-    iVar33 = (int)*rasterPos;
+    scratchInt40 = srcX + width;
+    scratchInt38 = srcY + height;
+    scratchInt33 = (int)*rasterPos;
     if (((unsigned char *)0x00002b7c)[ctx] == '\0') {
-      fVar1 = rasterPos[1];
+      scratchFloat1 = rasterPos[1];
     }
     else {
-      fVar1 = (float)((double)CONCAT44(0x43300000,*(uint *)(ctx + 0x160) ^ 0x80000000) -
+      scratchFloat1 = (float)((double)CONCAT44(0x43300000,*(uint *)(ctx + 0x160) ^ 0x80000000) -
                      DOUBLE_001aa1e0) - (rasterPos[1] + FLOAT_001aa0e8);
     }
-    iVar24 = (int)fVar1;
-    iVar27 = width + iVar33;
-    destEndY = iVar24 + height;
-    if (((((iVar33 < srcX) || (iVar40 < iVar33)) && ((iVar27 < srcX || (iVar40 < iVar27)))) ||
-        ((iVar24 < srcY || (iVar38 < iVar24)))) &&
-       (((iVar33 < srcX || (((iVar40 < iVar33 || (destEndY < srcY)) || (iVar38 < destEndY)))) &&
-        (((iVar27 < srcX || (iVar40 < iVar27)) || ((destEndY < srcY || (iVar38 < destEndY))))))))
+    scratchInt24 = (int)scratchFloat1;
+    scratchInt27 = width + scratchInt33;
+    destEndY = scratchInt24 + height;
+    if (((((scratchInt33 < srcX) || (scratchInt40 < scratchInt33)) && ((scratchInt27 < srcX || (scratchInt40 < scratchInt27)))) ||
+        ((scratchInt24 < srcY || (scratchInt38 < scratchInt24)))) &&
+       (((scratchInt33 < srcX || (((scratchInt40 < scratchInt33 || (destEndY < srcY)) || (scratchInt38 < destEndY)))) &&
+        (((scratchInt27 < srcX || (scratchInt40 < scratchInt27)) || ((destEndY < srcY || (scratchInt38 < destEndY))))))))
     goto LAB_000185c0;
     srcDstOverlap = true;
   }
@@ -9618,55 +9618,55 @@ LAB_000185c0:
     srcDstOverlap = false;
   }
   if (((copyType == 0x1801) && ((*(uint *)(ctx + 0x154) & 0x30000) != 0)) &&
-     ((iVar33 = *(int *)(ctx + 0x10), *(int *)(((unsigned char *)0x00002e40U) + iVar33) == 0 &&
-      ((((((unsigned char *)0x00002e44)[iVar33] != '\0' && (((uint)puVar42 & 0x10001) == 0)) &&
-        (((uint)puVar42 & 0x10) != 0)) && (*(short *)(((unsigned char *)0x00002dc4) + iVar33) == 0x207)))))) {
-    iVar33 = FUN_0001a010(ctx,4,iVar34,iVar29,iVar38,iVar40,puVar42);
-    if (iVar33 == 0) {
-      iVar33 = 3;
+     ((scratchInt33 = *(int *)(ctx + 0x10), *(int *)(((unsigned char *)0x00002e40U) + scratchInt33) == 0 &&
+      ((((((unsigned char *)0x00002e44)[scratchInt33] != '\0' && (((uint)scratchPtr42 & 0x10001) == 0)) &&
+        (((uint)scratchPtr42 & 0x10) != 0)) && (*(short *)(((unsigned char *)0x00002dc4) + scratchInt33) == 0x207)))))) {
+    scratchInt33 = FUN_0001a010(ctx,4,scratchInt34,scratchInt29,scratchInt38,scratchInt40,scratchPtr42);
+    if (scratchInt33 == 0) {
+      scratchInt33 = 3;
       goto LAB_00018700;
     }
-    puVar42 = *(undefined **)(ctx + 0x26b0);
+    scratchPtr42 = *(undefined **)(ctx + 0x26b0);
   }
-  if ((((((uint)puVar42 & 0x20800) != 0) || (copyType - 0x1801U < 2)) ||
+  if ((((((uint)scratchPtr42 & 0x20800) != 0) || (copyType - 0x1801U < 2)) ||
       (((*(uint *)(((unsigned char *)0x000030b0) + *(int *)(ctx + 0x10)) & 0x1ff) != 0 ||
        ((*(uint *)(((unsigned char *)0x000030b4) + *(int *)(ctx + 0x10)) & 0xff0000) != 0)))) ||
-     (((((uint)puVar42 & 0x10073) == 0 &&
-       (puVar42 = PTR_DAT_001e88c8 + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24,
-       (*(uint *)(puVar42 + 0x14) & 7) < 3)) &&
+     (((((uint)scratchPtr42 & 0x10073) == 0 &&
+       (scratchPtr42 = PTR_DAT_001e88c8 + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24,
+       (*(uint *)(scratchPtr42 + 0x14) & 7) < 3)) &&
       ((srcDstOverlap && ((*(uint *)(ctx + 0x154) & 0x20) != 0)))))) {
-    iVar33 = 0;
+    scratchInt33 = 0;
   }
   else {
-    iVar33 = 2;
+    scratchInt33 = 2;
   }
 LAB_00018700:
   if ((*(int *)(*(int *)(ctx + 0x18) + 0x1a0) != 0) ||
      (1 < (*(uint *)(ctx + 0x1ae4) >> 6 & 0xffff))) {
-    iVar33 = 0;
+    scratchInt33 = 0;
   }
-  if ((srcDstOverlap) && (iVar33 - 2U < 2)) {
-    iVar33 = 0;
+  if ((srcDstOverlap) && (scratchInt33 - 2U < 2)) {
+    scratchInt33 = 0;
   }
-  iVar24 = FUN_0001a010(ctx,uVar32,iVar34,iVar29,iVar38,iVar40,puVar42);
-  if (((iVar24 == 0) &&
-      (iVar34 = FUN_0001a010(ctx,*(undefined4 *)(ctx + 0x26a0),iVar34,iVar29,iVar38,iVar40,
-                             puVar42), iVar34 == 0)) && (iVar33 != 0)) {
-    fVar1 = *rasterPos + FLOAT_001aa10c;
-    if (fVar1 < FLOAT_001aa0d4) {
-      fVar1 = fVar1 - FLOAT_001aa118;
+  scratchInt24 = FUN_0001a010(ctx,scratchUint32,scratchInt34,scratchInt29,scratchInt38,scratchInt40,scratchPtr42);
+  if (((scratchInt24 == 0) &&
+      (scratchInt34 = FUN_0001a010(ctx,*(undefined4 *)(ctx + 0x26a0),scratchInt34,scratchInt29,scratchInt38,scratchInt40,
+                             scratchPtr42), scratchInt34 == 0)) && (scratchInt33 != 0)) {
+    scratchFloat1 = *rasterPos + FLOAT_001aa10c;
+    if (scratchFloat1 < FLOAT_001aa0d4) {
+      scratchFloat1 = scratchFloat1 - FLOAT_001aa118;
     }
-    uVar41 = (uint)fVar1;
-    fVar1 = rasterPos[1] + FLOAT_001aa10c;
-    if (fVar1 < FLOAT_001aa0d4) {
-      fVar1 = fVar1 - FLOAT_001aa118;
+    scratchUint41 = (uint)scratchFloat1;
+    scratchFloat1 = rasterPos[1] + FLOAT_001aa10c;
+    if (scratchFloat1 < FLOAT_001aa0d4) {
+      scratchFloat1 = scratchFloat1 - FLOAT_001aa118;
     }
-    uVar43 = (uint)fVar1;
+    scratchUint43 = (uint)scratchFloat1;
     if (((unsigned char *)0x00002b7c)[ctx] != '\0') {
-      uVar43 = uVar43 - height;
+      scratchUint43 = scratchUint43 - height;
       srcY = (*(int *)(ctx + 0x160) - srcY) - height;
     }
-    if (iVar33 == 1) {
+    if (scratchInt33 == 1) {
       if (((unsigned char *)0x00002e33)[engineState] == '\0') {
         writeMaskNibble = 0xc;
         writeMaskByte = 0xc0;
@@ -9675,116 +9675,116 @@ LAB_00018700:
         writeMaskNibble = *(uint *)(ctx + 0x1d38) >> 8 & 0xf;
         writeMaskByte = writeMaskNibble << 4;
       }
-      FUN_00020b30(ctx,srcX,srcY,width,height,uVar41,uVar43,uVar32,writeMaskNibble | writeMaskByte);
+      FUN_00020b30(ctx,srcX,srcY,width,height,scratchUint41,scratchUint43,scratchUint32,writeMaskNibble | writeMaskByte);
     }
     else {
-      if (iVar33 == 3) {
-        iVar34 = ctx + 0x240;
+      if (scratchInt33 == 3) {
+        scratchInt34 = ctx + 0x240;
         bufferWidth16 = *(ushort *)(ctx + 0x11e);
         surfaceWidth = (uint)bufferWidth16;
         bufferHeight16 = *(ushort *)(ctx + 0x122);
         surfaceHeight = (uint)bufferHeight16;
-        fVar1 = (float)((double)CONCAT44(0x43300000,srcY - uVar43 ^ 0x80000000) - DOUBLE_001aa1e0
+        scratchFloat1 = (float)((double)CONCAT44(0x43300000,srcY - scratchUint43 ^ 0x80000000) - DOUBLE_001aa1e0
                        );
-        fVar2 = (float)((double)CONCAT44(0x43300000,uVar41 ^ 0x80000000) - DOUBLE_001aa1e0);
-        fVar3 = (float)((double)CONCAT44(0x43300000,uVar43 ^ 0x80000000) - DOUBLE_001aa1e0);
-        fVar4 = (float)((double)CONCAT44(0x43300000,uVar41 + width ^ 0x80000000) - DOUBLE_001aa1e0
+        scratchFloat2 = (float)((double)CONCAT44(0x43300000,scratchUint41 ^ 0x80000000) - DOUBLE_001aa1e0);
+        scratchFloat3 = (float)((double)CONCAT44(0x43300000,scratchUint43 ^ 0x80000000) - DOUBLE_001aa1e0);
+        scratchFloat4 = (float)((double)CONCAT44(0x43300000,scratchUint41 + width ^ 0x80000000) - DOUBLE_001aa1e0
                        );
-        fVar5 = (float)((double)CONCAT44(0x43300000,uVar43 + height ^ 0x80000000) - DOUBLE_001aa1e0
+        scratchFloat5 = (float)((double)CONCAT44(0x43300000,scratchUint43 + height ^ 0x80000000) - DOUBLE_001aa1e0
                        );
-        fVar6 = (float)((double)CONCAT44(0x43300000,srcX - uVar41 ^ 0x80000000) - DOUBLE_001aa1e0
+        scratchFloat6 = (float)((double)CONCAT44(0x43300000,srcX - scratchUint41 ^ 0x80000000) - DOUBLE_001aa1e0
                        );
         if ((surfaceWidth < 0x1001) && (surfaceHeight < 0x1001)) {
-          uVar41 = 0;
-          uVar47 = 0;
-          uVar48 = 0;
-          uVar43 = 0;
-          uVar46 = 0;
-          iVar29 = 0xc;
-          fVar15 = FLOAT_001aa0d4;
-          fVar10 = FLOAT_001aa0d4;
-          fVar16 = FLOAT_001aa0d4;
-          fVar11 = FLOAT_001aa0d4;
+          scratchUint41 = 0;
+          scratchUint47 = 0;
+          scratchUint48 = 0;
+          scratchUint43 = 0;
+          scratchUint46 = 0;
+          scratchInt29 = 0xc;
+          scratchFloat15 = FLOAT_001aa0d4;
+          scratchFloat10 = FLOAT_001aa0d4;
+          scratchFloat16 = FLOAT_001aa0d4;
+          scratchFloat11 = FLOAT_001aa0d4;
         }
         else {
-          fVar10 = fVar3 + fVar1;
-          fVar11 = fVar5 + fVar1;
-          fVar7 = fVar2 + fVar6;
-          fVar16 = fVar4 + fVar6;
-          fVar15 = fVar11;
-          if (fVar11 < fVar10) {
-            fVar15 = fVar10;
-            fVar10 = fVar11;
+          scratchFloat10 = scratchFloat3 + scratchFloat1;
+          scratchFloat11 = scratchFloat5 + scratchFloat1;
+          scratchFloat7 = scratchFloat2 + scratchFloat6;
+          scratchFloat16 = scratchFloat4 + scratchFloat6;
+          scratchFloat15 = scratchFloat11;
+          if (scratchFloat11 < scratchFloat10) {
+            scratchFloat15 = scratchFloat10;
+            scratchFloat10 = scratchFloat11;
           }
-          fVar11 = fVar7;
-          if (fVar16 < fVar7) {
-            fVar11 = fVar16;
-            fVar16 = fVar7;
+          scratchFloat11 = scratchFloat7;
+          if (scratchFloat16 < scratchFloat7) {
+            scratchFloat11 = scratchFloat16;
+            scratchFloat16 = scratchFloat7;
           }
-          uVar41 = (int)fVar11 - 1;
-          uVar41 = (((int)uVar41 >> 9) + (uint)((int)uVar41 < 0 && (uVar41 & 0x1ff) != 0)) * 0x200;
-          uVar43 = 0;
-          if ((-1 < (int)uVar41) && (uVar43 = bufferWidth16 & 0xfe00, (int)uVar41 <= (int)(bufferWidth16 & 0xfe00)))
+          scratchUint41 = (int)scratchFloat11 - 1;
+          scratchUint41 = (((int)scratchUint41 >> 9) + (uint)((int)scratchUint41 < 0 && (scratchUint41 & 0x1ff) != 0)) * 0x200;
+          scratchUint43 = 0;
+          if ((-1 < (int)scratchUint41) && (scratchUint43 = bufferWidth16 & 0xfe00, (int)scratchUint41 <= (int)(bufferWidth16 & 0xfe00)))
           {
-            uVar43 = uVar41 & 0xfe00;
+            scratchUint43 = scratchUint41 & 0xfe00;
           }
-          uVar41 = 0x40;
-          if ((0x40 < surfaceHeight) && (uVar41 = bufferHeight16 & 0xffc0, (int)(surfaceHeight - uVar41) < 0x40)) {
-            uVar41 = uVar41 - 0x40;
+          scratchUint41 = 0x40;
+          if ((0x40 < surfaceHeight) && (scratchUint41 = bufferHeight16 & 0xffc0, (int)(surfaceHeight - scratchUint41) < 0x40)) {
+            scratchUint41 = scratchUint41 - 0x40;
           }
-          uVar46 = 0;
-          uVar47 = (int)fVar10 - 1;
-          uVar47 = (((int)uVar47 >> 6) + (uint)((int)uVar47 < 0 && (uVar47 & 0x3f) != 0)) * 0x40;
-          if ((-1 < (int)uVar47) && (uVar46 = uVar41 & 0xffff, (int)uVar47 <= (int)uVar41)) {
-            uVar46 = uVar47 & 0xffc0;
+          scratchUint46 = 0;
+          scratchUint47 = (int)scratchFloat10 - 1;
+          scratchUint47 = (((int)scratchUint47 >> 6) + (uint)((int)scratchUint47 < 0 && (scratchUint47 & 0x3f) != 0)) * 0x40;
+          if ((-1 < (int)scratchUint47) && (scratchUint46 = scratchUint41 & 0xffff, (int)scratchUint47 <= (int)scratchUint41)) {
+            scratchUint46 = scratchUint47 & 0xffc0;
           }
-          uVar41 = 0x200;
-          if (0x1ff < uVar43) {
-            uVar41 = uVar43;
+          scratchUint41 = 0x200;
+          if (0x1ff < scratchUint43) {
+            scratchUint41 = scratchUint43;
           }
-          uVar47 = surfaceWidth - 1;
-          uVar48 = (((int)uVar47 >> 9) + (uint)((int)uVar47 < 0 && (uVar47 & 0x1ff) != 0)) * 0x200;
-          uVar47 = (uint)fVar16;
-          if ((FLOAT_001aa0d4 < fVar16) &&
-             ((float)((double)CONCAT44(0x43300000,uVar47 ^ 0x80000000) - DOUBLE_001aa1e0) < fVar16))
+          scratchUint47 = surfaceWidth - 1;
+          scratchUint48 = (((int)scratchUint47 >> 9) + (uint)((int)scratchUint47 < 0 && (scratchUint47 & 0x1ff) != 0)) * 0x200;
+          scratchUint47 = (uint)scratchFloat16;
+          if ((FLOAT_001aa0d4 < scratchFloat16) &&
+             ((float)((double)CONCAT44(0x43300000,scratchUint47 ^ 0x80000000) - DOUBLE_001aa1e0) < scratchFloat16))
           {
-            uVar47 = uVar47 + 1;
+            scratchUint47 = scratchUint47 + 1;
           }
-          if ((int)uVar47 <= (int)uVar48) {
-            uVar48 = uVar47;
+          if ((int)scratchUint47 <= (int)scratchUint48) {
+            scratchUint48 = scratchUint47;
           }
-          uVar47 = 1;
-          if ((int)uVar41 < (int)uVar48) {
-            uVar47 = (int)((uVar48 - uVar41) + 0xbff) / 0xc00 & 0xff;
+          scratchUint47 = 1;
+          if ((int)scratchUint41 < (int)scratchUint48) {
+            scratchUint47 = (int)((scratchUint48 - scratchUint41) + 0xbff) / 0xc00 & 0xff;
           }
-          uVar41 = 0x40;
-          if (0x3f < uVar46) {
-            uVar41 = uVar46;
+          scratchUint41 = 0x40;
+          if (0x3f < scratchUint46) {
+            scratchUint41 = scratchUint46;
           }
-          uVar48 = surfaceHeight - 1;
-          uVar36 = (((int)uVar48 >> 6) + (uint)((int)uVar48 < 0 && (uVar48 & 0x3f) != 0)) * 0x40;
-          uVar48 = (uint)(int)fVar15;
-          if ((FLOAT_001aa0d4 < fVar15) &&
-             ((float)((double)CONCAT44(0x43300000,uVar48 ^ 0x80000000) - DOUBLE_001aa1e0) < fVar15))
+          scratchUint48 = surfaceHeight - 1;
+          scratchUint36 = (((int)scratchUint48 >> 6) + (uint)((int)scratchUint48 < 0 && (scratchUint48 & 0x3f) != 0)) * 0x40;
+          scratchUint48 = (uint)(int)scratchFloat15;
+          if ((FLOAT_001aa0d4 < scratchFloat15) &&
+             ((float)((double)CONCAT44(0x43300000,scratchUint48 ^ 0x80000000) - DOUBLE_001aa1e0) < scratchFloat15))
           {
-            uVar48 = uVar48 + 1;
+            scratchUint48 = scratchUint48 + 1;
           }
-          if ((int)uVar48 <= (int)uVar36) {
-            uVar36 = uVar48;
+          if ((int)scratchUint48 <= (int)scratchUint36) {
+            scratchUint36 = scratchUint48;
           }
-          uVar48 = 1;
-          if ((int)uVar41 < (int)uVar36) {
-            uVar48 = (int)((uVar36 - uVar41) + 0xf7f) / 0xf80 & 0xff;
+          scratchUint48 = 1;
+          if ((int)scratchUint41 < (int)scratchUint36) {
+            scratchUint48 = (int)((scratchUint36 - scratchUint41) + 0xf7f) / 0xf80 & 0xff;
           }
-          uVar41 = uVar47 * uVar48 & 0xff;
-          iVar29 = uVar41 << 4;
+          scratchUint41 = scratchUint47 * scratchUint48 & 0xff;
+          scratchInt29 = scratchUint41 << 4;
         }
-        iVar38 = iVar29 + 0x56f;
+        scratchInt38 = scratchInt29 + 0x56f;
         *(undefined1 *)(ctx + 0x2a5e) = 1;
         if (*(char *)(ctx + 0x2a42) == '\0') {
-          iVar38 = iVar29 + 0x571;
+          scratchInt38 = scratchInt29 + 0x571;
         }
-        packetAlloc = (undefined4 *)(**(code **)(ctx + 0x2998))(iVar34,iVar38);
+        packetAlloc = (undefined4 *)(**(code **)(ctx + 0x2998))(scratchInt34,scratchInt38);
         *(undefined4 **)(ctx + 0x298c) = packetAlloc;
         packetBase = packetAlloc;
         if (*(char *)(ctx + 0x2a42) == '\0') {
@@ -9793,183 +9793,183 @@ LAB_00018700:
           packetAlloc[1] = 0x10000000;
           *(undefined1 *)(ctx + 0x2a42) = 1;
         }
-        puVar42 = PTR_DAT_001e88d0;
+        scratchPtr42 = PTR_DAT_001e88d0;
         previousHeader = *(uint **)(ctx + 0x1d8);
         *previousHeader = (int)packetBase - (int)previousHeader >> 2 | *previousHeader;
         *(undefined4 **)(ctx + 0x1d8) = packetBase;
-        packetBase[2] = uVar32;
+        packetBase[2] = scratchUint32;
         packetBase[1] = 1000;
         *packetBase = 0x31000000;
-        packetBase[3] = uVar41;
+        packetBase[3] = scratchUint41;
         packetBase[4] = CONCAT22(bufferHeight16,bufferWidth16);
-        _memcpy(packetBase + 1000,puVar42,0x2f4);
+        _memcpy(packetBase + 1000,scratchPtr42,0x2f4);
         packetCursor = packetBase + 0x4a5;
         packetBase[0x496] = 0xe - ((int)-(*(uint *)(ctx + 0x154) & 0x30000 ^ 0x30000) >> 0x1f);
-        fVar7 = FLOAT_001aa12c;
-        if (uVar41 == 0) {
-          fVar10 = FLOAT_001aa0d4;
+        scratchFloat7 = FLOAT_001aa12c;
+        if (scratchUint41 == 0) {
+          scratchFloat10 = FLOAT_001aa0d4;
           if (surfaceWidth != 0) {
-            fVar10 = FLOAT_001aa0e8 /
+            scratchFloat10 = FLOAT_001aa0e8 /
                      (float)((double)CONCAT44(0x43300000,surfaceWidth ^ 0x80000000) - DOUBLE_001aa1e0);
           }
-          fVar11 = FLOAT_001aa0d4;
+          scratchFloat11 = FLOAT_001aa0d4;
           if (surfaceHeight != 0) {
-            fVar11 = FLOAT_001aa0e8 /
+            scratchFloat11 = FLOAT_001aa0e8 /
                      (float)((double)CONCAT44(0x43300000,surfaceHeight ^ 0x80000000) - DOUBLE_001aa1e0);
           }
           *packetCursor = 0x31080;
           packetBase[0x4aa] = ((unsigned char *)0x00001087U);
-          packetBase[0x4a6] = fVar10 * (fVar2 + fVar6);
-          packetBase[0x4a8] = fVar10 * (fVar4 + fVar6);
-          packetBase[0x4a7] = fVar11 * (fVar5 + fVar1);
-          packetBase[0x4a9] = fVar11 * (fVar3 + fVar1);
-          fVar1 = (fVar2 + fVar4) * FLOAT_001aa10c;
-          fVar6 = (fVar3 + fVar5) * FLOAT_001aa10c;
+          packetBase[0x4a6] = scratchFloat10 * (scratchFloat2 + scratchFloat6);
+          packetBase[0x4a8] = scratchFloat10 * (scratchFloat4 + scratchFloat6);
+          packetBase[0x4a7] = scratchFloat11 * (scratchFloat5 + scratchFloat1);
+          packetBase[0x4a9] = scratchFloat11 * (scratchFloat3 + scratchFloat1);
+          scratchFloat1 = (scratchFloat2 + scratchFloat4) * FLOAT_001aa10c;
+          scratchFloat6 = (scratchFloat3 + scratchFloat5) * FLOAT_001aa10c;
           packetBase[0x4ac] = 0xc0033500;
           packetBase[0x4ad] = 0x10031;
-          packetBase[0x4ae] = fVar1;
-          packetBase[0x4af] = fVar6;
-          packetBase[0x4ab] = (int)((fVar4 - fVar2) * fVar7) << 0x10 | (int)((fVar5 - fVar3) * fVar7);
+          packetBase[0x4ae] = scratchFloat1;
+          packetBase[0x4af] = scratchFloat6;
+          packetBase[0x4ab] = (int)((scratchFloat4 - scratchFloat2) * scratchFloat7) << 0x10 | (int)((scratchFloat5 - scratchFloat3) * scratchFloat7);
           packetBase[0x4b0] = 0;
           packetCursor = packetBase + 0x4b1;
         }
-        else if (uVar48 != 0) {
-          uVar36 = surfaceHeight - uVar46;
-          uVar49 = 0;
-          iVar29 = 0;
-          uVar41 = uVar46;
+        else if (scratchUint48 != 0) {
+          scratchUint36 = surfaceHeight - scratchUint46;
+          scratchUint49 = 0;
+          scratchInt29 = 0;
+          scratchUint41 = scratchUint46;
           do {
-            if (uVar47 != 0) {
-              uVar37 = iVar29 + uVar46;
-              uVar39 = surfaceWidth - uVar43;
-              iVar38 = 0;
-              fVar2 = (float)((double)CONCAT44(0x43300000,uVar37 ^ 0x80000000) - DOUBLE_001aa1e0);
-              uVar44 = uVar43;
-              uVar52 = uVar47;
+            if (scratchUint47 != 0) {
+              scratchUint37 = scratchInt29 + scratchUint46;
+              scratchUint39 = surfaceWidth - scratchUint43;
+              scratchInt38 = 0;
+              scratchFloat2 = (float)((double)CONCAT44(0x43300000,scratchUint37 ^ 0x80000000) - DOUBLE_001aa1e0);
+              scratchUint44 = scratchUint43;
+              scratchUint52 = scratchUint47;
               do {
-                *packetCursor = uVar44;
-                packetCursor[1] = uVar41;
-                uVar26 = uVar39;
-                if ((int)(uVar44 + 0x1000) <= (int)surfaceWidth) {
-                  uVar26 = 0x1000;
+                *packetCursor = scratchUint44;
+                packetCursor[1] = scratchUint41;
+                scratchUint26 = scratchUint39;
+                if ((int)(scratchUint44 + 0x1000) <= (int)surfaceWidth) {
+                  scratchUint26 = 0x1000;
                 }
-                uVar45 = uVar36;
-                if ((int)(uVar37 + 0x1000) <= (int)surfaceHeight) {
-                  uVar45 = 0x1000;
+                scratchUint45 = scratchUint36;
+                if ((int)(scratchUint37 + 0x1000) <= (int)surfaceHeight) {
+                  scratchUint45 = 0x1000;
                 }
-                packetCursor[2] = uVar26;
-                packetCursor[3] = uVar45;
+                packetCursor[2] = scratchUint26;
+                packetCursor[3] = scratchUint45;
                 doubleBias = DOUBLE_001aa1e0;
-                fVar3 = fVar11;
-                if (iVar38 != 0) {
-                  fVar3 = (float)((double)CONCAT44(0x43300000,uVar44 + 0x200 ^ 0x80000000) -
+                scratchFloat3 = scratchFloat11;
+                if (scratchInt38 != 0) {
+                  scratchFloat3 = (float)((double)CONCAT44(0x43300000,scratchUint44 + 0x200 ^ 0x80000000) -
                                  DOUBLE_001aa1e0);
                 }
-                fVar4 = fVar10;
-                if (uVar49 != 0) {
-                  fVar4 = (float)((double)CONCAT44(0x43300000,uVar37 + 0x40 ^ 0x80000000) -
+                scratchFloat4 = scratchFloat10;
+                if (scratchUint49 != 0) {
+                  scratchFloat4 = (float)((double)CONCAT44(0x43300000,scratchUint37 + 0x40 ^ 0x80000000) -
                                  DOUBLE_001aa1e0);
                 }
-                fVar5 = fVar16;
-                if (iVar38 != uVar47 - 1) {
-                  fVar5 = (float)((double)CONCAT44(0x43300000,uVar44 + 0xe00 ^ 0x80000000) -
+                scratchFloat5 = scratchFloat16;
+                if (scratchInt38 != scratchUint47 - 1) {
+                  scratchFloat5 = (float)((double)CONCAT44(0x43300000,scratchUint44 + 0xe00 ^ 0x80000000) -
                                  DOUBLE_001aa1e0);
                 }
-                fVar7 = fVar15;
-                if (uVar49 != uVar48 - 1) {
-                  fVar7 = (float)((double)CONCAT44(0x43300000,uVar37 + 0xfc0 ^ 0x80000000) -
+                scratchFloat7 = scratchFloat15;
+                if (scratchUint49 != scratchUint48 - 1) {
+                  scratchFloat7 = (float)((double)CONCAT44(0x43300000,scratchUint37 + 0xfc0 ^ 0x80000000) -
                                  DOUBLE_001aa1e0);
                 }
-                fVar12 = fVar10;
-                if (fVar10 - fVar4 < 0.0) {
-                  fVar12 = fVar4;
+                scratchFloat12 = scratchFloat10;
+                if (scratchFloat10 - scratchFloat4 < 0.0) {
+                  scratchFloat12 = scratchFloat4;
                 }
-                fVar13 = fVar15;
-                if (fVar7 - fVar15 < 0.0) {
-                  fVar13 = fVar7;
+                scratchFloat13 = scratchFloat15;
+                if (scratchFloat7 - scratchFloat15 < 0.0) {
+                  scratchFloat13 = scratchFloat7;
                 }
-                fVar14 = fVar16;
-                if (fVar5 - fVar16 < 0.0) {
-                  fVar14 = fVar5;
+                scratchFloat14 = scratchFloat16;
+                if (scratchFloat5 - scratchFloat16 < 0.0) {
+                  scratchFloat14 = scratchFloat5;
                 }
-                fVar17 = fVar11;
-                if (fVar11 - fVar3 < 0.0) {
-                  fVar17 = fVar3;
+                scratchFloat17 = scratchFloat11;
+                if (scratchFloat11 - scratchFloat3 < 0.0) {
+                  scratchFloat17 = scratchFloat3;
                 }
-                if (-(fVar10 - fVar4) < 0.0) {
-                  fVar4 = fVar12;
+                if (-(scratchFloat10 - scratchFloat4) < 0.0) {
+                  scratchFloat4 = scratchFloat12;
                 }
-                if (-(fVar7 - fVar15) < 0.0) {
-                  fVar7 = fVar13;
+                if (-(scratchFloat7 - scratchFloat15) < 0.0) {
+                  scratchFloat7 = scratchFloat13;
                 }
-                if (-(fVar11 - fVar3) < 0.0) {
-                  fVar3 = fVar17;
+                if (-(scratchFloat11 - scratchFloat3) < 0.0) {
+                  scratchFloat3 = scratchFloat17;
                 }
-                if (-(fVar5 - fVar16) < 0.0) {
-                  fVar5 = fVar14;
+                if (-(scratchFloat5 - scratchFloat16) < 0.0) {
+                  scratchFloat5 = scratchFloat14;
                 }
-                fVar12 = fVar7 + -fVar1;
-                fVar13 = fVar4 + -fVar1;
-                fVar18 = fVar3 + -fVar6;
-                fVar17 = fVar5 + -fVar6;
-                fVar14 = fVar4;
-                fVar19 = fVar12;
-                if (fVar12 < fVar13) {
-                  fVar14 = fVar7;
-                  fVar7 = fVar4;
-                  fVar19 = fVar13;
-                  fVar13 = fVar12;
+                scratchFloat12 = scratchFloat7 + -scratchFloat1;
+                scratchFloat13 = scratchFloat4 + -scratchFloat1;
+                scratchFloat18 = scratchFloat3 + -scratchFloat6;
+                scratchFloat17 = scratchFloat5 + -scratchFloat6;
+                scratchFloat14 = scratchFloat4;
+                scratchFloat19 = scratchFloat12;
+                if (scratchFloat12 < scratchFloat13) {
+                  scratchFloat14 = scratchFloat7;
+                  scratchFloat7 = scratchFloat4;
+                  scratchFloat19 = scratchFloat13;
+                  scratchFloat13 = scratchFloat12;
                 }
-                fVar4 = fVar5;
-                fVar12 = fVar18;
-                if (fVar17 < fVar18) {
-                  fVar4 = fVar3;
-                  fVar3 = fVar5;
-                  fVar12 = fVar17;
-                  fVar17 = fVar18;
+                scratchFloat4 = scratchFloat5;
+                scratchFloat12 = scratchFloat18;
+                if (scratchFloat17 < scratchFloat18) {
+                  scratchFloat4 = scratchFloat3;
+                  scratchFloat3 = scratchFloat5;
+                  scratchFloat12 = scratchFloat17;
+                  scratchFloat17 = scratchFloat18;
                 }
-                fVar5 = FLOAT_001aa0d4;
-                if (uVar26 != 0) {
-                  fVar5 = FLOAT_001aa0e8 /
-                          (float)((double)CONCAT44(0x43300000,uVar26 ^ 0x80000000) - DOUBLE_001aa1e0
+                scratchFloat5 = FLOAT_001aa0d4;
+                if (scratchUint26 != 0) {
+                  scratchFloat5 = FLOAT_001aa0e8 /
+                          (float)((double)CONCAT44(0x43300000,scratchUint26 ^ 0x80000000) - DOUBLE_001aa1e0
                                  );
                 }
-                fVar18 = FLOAT_001aa0d4;
-                if (uVar45 != 0) {
-                  fVar18 = FLOAT_001aa0e8 /
-                           (float)((double)CONCAT44(0x43300000,uVar45 ^ 0x80000000) -
+                scratchFloat18 = FLOAT_001aa0d4;
+                if (scratchUint45 != 0) {
+                  scratchFloat18 = FLOAT_001aa0e8 /
+                           (float)((double)CONCAT44(0x43300000,scratchUint45 ^ 0x80000000) -
                                   DOUBLE_001aa1e0);
                 }
-                uVar26 = uVar44 ^ 0x80000000;
-                iVar38 = iVar38 + 1;
-                uVar44 = uVar44 + 0xc00;
-                uVar39 = uVar39 - 0xc00;
-                fVar20 = (fVar17 - fVar12) * FLOAT_001aa12c;
-                fVar21 = (fVar19 - fVar13) * FLOAT_001aa12c;
-                fVar12 = (fVar17 + fVar12) * FLOAT_001aa10c;
-                fVar13 = (fVar19 + fVar13) * FLOAT_001aa10c;
+                scratchUint26 = scratchUint44 ^ 0x80000000;
+                scratchInt38 = scratchInt38 + 1;
+                scratchUint44 = scratchUint44 + 0xc00;
+                scratchUint39 = scratchUint39 - 0xc00;
+                scratchFloat20 = (scratchFloat17 - scratchFloat12) * FLOAT_001aa12c;
+                scratchFloat21 = (scratchFloat19 - scratchFloat13) * FLOAT_001aa12c;
+                scratchFloat12 = (scratchFloat17 + scratchFloat12) * FLOAT_001aa10c;
+                scratchFloat13 = (scratchFloat19 + scratchFloat13) * FLOAT_001aa10c;
                 packetCursor[4] = 0x31080;
-                packetCursor[6] = (uint)GH_F2U((float)((fVar18 * (fVar7 - fVar2))));
-                packetCursor[8] = (uint)GH_F2U((float)((fVar18 * (fVar14 - fVar2))));
+                packetCursor[6] = (uint)GH_F2U((float)((scratchFloat18 * (scratchFloat7 - scratchFloat2))));
+                packetCursor[8] = (uint)GH_F2U((float)((scratchFloat18 * (scratchFloat14 - scratchFloat2))));
                 packetCursor[9] = (uint)((unsigned char *)0x00001087U);
-                fVar7 = (float)((double)CONCAT44(0x43300000,uVar26) - doubleBias);
-                packetCursor[7] = (uint)GH_F2U((float)((fVar5 * (fVar4 - fVar7))));
-                packetCursor[5] = (uint)GH_F2U((float)((fVar5 * (fVar3 - fVar7))));
+                scratchFloat7 = (float)((double)CONCAT44(0x43300000,scratchUint26) - doubleBias);
+                packetCursor[7] = (uint)GH_F2U((float)((scratchFloat5 * (scratchFloat4 - scratchFloat7))));
+                packetCursor[5] = (uint)GH_F2U((float)((scratchFloat5 * (scratchFloat3 - scratchFloat7))));
                 packetCursor[0xb] = 0xc0033500;
                 packetCursor[0xc] = 0x10031;
-                packetCursor[0xd] = (uint)GH_F2U((float)(fVar12));
-                packetCursor[0xe] = (uint)GH_F2U((float)(fVar13));
-                packetCursor[10] = (int)fVar20 << 0x10 | (int)fVar21;
+                packetCursor[0xd] = (uint)GH_F2U((float)(scratchFloat12));
+                packetCursor[0xe] = (uint)GH_F2U((float)(scratchFloat13));
+                packetCursor[10] = (int)scratchFloat20 << 0x10 | (int)scratchFloat21;
                 packetCursor[0xf] = 0;
                 packetCursor = packetCursor + 0x10;
-                uVar52 = uVar52 - 1;
-              } while (uVar52 != 0);
+                scratchUint52 = scratchUint52 - 1;
+              } while (scratchUint52 != 0);
             }
-            uVar49 = uVar49 + 1;
-            iVar29 = iVar29 + 0xf80;
-            uVar36 = uVar36 - 0xf80;
-            uVar41 = uVar41 + 0xf80;
-          } while (uVar49 != uVar48);
+            scratchUint49 = scratchUint49 + 1;
+            scratchInt29 = scratchInt29 + 0xf80;
+            scratchUint36 = scratchUint36 - 0xf80;
+            scratchUint41 = scratchUint41 + 0xf80;
+          } while (scratchUint49 != scratchUint48);
         }
         lastHeader = *(uint **)(ctx + 0x1d8);
         *lastHeader = (int)packetCursor - (int)lastHeader >> 2 | *lastHeader;
@@ -10034,26 +10034,26 @@ LAB_00018700:
         packetCursor[0x28] = vap_out_vtx_fmt_1;
         packetCursor[0x2a] = *(uint *)(0x000026c8 + ctx + 4);
         packetCursor[0x2b] = 0x854;
-        puVar42 = PTR_DAT_001e88c8;
-        uVar41 = **(uint **)(ctx + 0x2680);
+        scratchPtr42 = PTR_DAT_001e88c8;
+        scratchUint41 = **(uint **)(ctx + 0x2680);
         packetCursor[0x2d] = 0x878;
-        packetCursor[0x2c] = uVar41;
-        uVar41 = **(uint **)(ctx + 0x2684);
+        packetCursor[0x2c] = scratchUint41;
+        scratchUint41 = **(uint **)(ctx + 0x2684);
         packetCursor[0x2f] = (uint)((unsigned char *)0x000013c0U);
-        packetCursor[0x2e] = uVar41;
+        packetCursor[0x2e] = scratchUint41;
         zb_cntl = *(uint *)(ctx + 0x1ce0);
         packetCursor[0x31] = (uint)((unsigned char *)0x000012f0U);
         packetCursor[0x30] = zb_cntl;
         packetCursor[0x32] = *(uint *)(ctx + 0x1d2c);
-        if ((*(uint *)(puVar42 + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24 + 0x18) & 0x8000) == 0)
+        if ((*(uint *)(scratchPtr42 + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24 + 0x18) & 0x8000) == 0)
         {
           packetCursor[0x32] = packetCursor[0x32] & 0xfffffffe;
         }
-        puVar42 = PTR_DAT_001e88c8;
+        scratchPtr42 = PTR_DAT_001e88c8;
         packetCursor[0x33] = (uint)((unsigned char *)0x000012f5U);
         fg_alpha_func = *(uint *)(ctx + 0x1c8c);
         packetCursor[0x34] = fg_alpha_func;
-        if ((*(uint *)(puVar42 + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24 + 0x18) & 0x8000) == 0)
+        if ((*(uint *)(scratchPtr42 + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24 + 0x18) & 0x8000) == 0)
         {
           packetCursor[0x34] = fg_alpha_func & 0xfffff7ff;
         }
@@ -10063,14 +10063,14 @@ LAB_00018700:
         packetCursor[0x36] = ga_poly_mode;
         rb3d_blendcntl = *(uint *)(ctx + 0x1cc0);
         packetCursor[0x38] = rb3d_blendcntl;
-        if ((*(uint *)(puVar42 + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24 + 0x18) & 0x4000) == 0)
+        if ((*(uint *)(scratchPtr42 + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24 + 0x18) & 0x4000) == 0)
         {
           packetCursor[0x38] = rb3d_blendcntl & 0xfffffffc;
         }
         packetCursor[0x39] = (uint)((unsigned char *)0x0000109eU);
-        uVar41 = *(uint *)(ctx + 0x1d6c);
+        scratchUint41 = *(uint *)(ctx + 0x1d6c);
         packetCursor[0x3b] = (uint)((unsigned char *)0x00001096U);
-        packetCursor[0x3a] = uVar41;
+        packetCursor[0x3a] = scratchUint41;
         ga_color_control = *(uint *)(ctx + 0x1df8);
         packetCursor[0x3d] = (uint)((unsigned char *)0x00001041U);
         packetCursor[0x3a] = ga_color_control;
@@ -10163,7 +10163,7 @@ LAB_00018700:
         packetCursor[0xba] = *(uint *)(ctx + 0x1f04);
         packetCursor[0xbb] = *(uint *)(ctx + 0x1f00);
         packetCursor[0xbc] = *(uint *)(ctx + 0x1f08);
-        FUN_0004c100(packetCursor + 2,iVar34);
+        FUN_0004c100(packetCursor + 2,scratchInt34);
         packetCursor[0xbf] = (uint)((unsigned char *)0x000013c4U);
         packetCursor[200] = (uint)((unsigned char *)0x000013caU);
         packetCursor[0xc4] = (uint)((unsigned char *)0x000013cdU);
@@ -10171,10 +10171,10 @@ LAB_00018700:
         packetCursor[0xc1] = 0x113c8;
         *(uint **)(ctx + 0x298c) = packetCursor + 0xca;
         /* dropped 2nd arg, same defect class as gld_startPacket (issue #64). */
-        (**(code **)(ctx + 0x299c))(iVar34,packetCursor + 0xca);
+        (**(code **)(ctx + 0x299c))(scratchInt34,packetCursor + 0xca);
         return;
       }
-      gld_emitCopyBlitPacket(ctx,srcX,srcY,width,height,uVar41,uVar43,destEndY,uVar32);
+      gld_emitCopyBlitPacket(ctx,srcX,srcY,width,height,scratchUint41,scratchUint43,destEndY,scratchUint32);
     }
   }
   else {
@@ -10183,39 +10183,39 @@ LAB_00018700:
         return;
       }
       if ((*(uint *)(ctx + 0x154) & 0x20000) == 0) {
-        iVar34 = width << 1;
-        puVar42 = ((unsigned char *)0x00001403U);
-        uVar32 = 0x1902;
+        scratchInt34 = width << 1;
+        scratchPtr42 = ((unsigned char *)0x00001403U);
+        scratchUint32 = 0x1902;
       }
       else {
-        iVar34 = width << 2;
-        puVar42 = ((unsigned char *)0x00001405U);
-        uVar32 = 0x1902;
+        scratchInt34 = width << 2;
+        scratchPtr42 = ((unsigned char *)0x00001405U);
+        scratchUint32 = 0x1902;
       }
     }
     else if (copyType == 0x1802) {
       if ((*(uint *)(ctx + 0x154) & 0x30000) != 0x30000) {
         return;
       }
-      puVar42 = ((unsigned char *)0x00001401U);
-      uVar32 = 0x1901;
-      iVar34 = width;
+      scratchPtr42 = ((unsigned char *)0x00001401U);
+      scratchUint32 = 0x1901;
+      scratchInt34 = width;
     }
     else {
       if (copyType != 0x1800) {
         return;
       }
-      puVar42 = ((unsigned char *)0x00001401U);
-      uVar32 = 0x1908;
-      iVar34 = width << 2;
+      scratchPtr42 = ((unsigned char *)0x00001401U);
+      scratchUint32 = 0x1908;
+      scratchInt34 = width << 2;
     }
-    iVar34 = _malloc(iVar34 * height);
-    if (iVar34 != 0) {
-      glReadPixels_entry(ctx,srcX,srcY,width,height,uVar32,puVar42,iVar34,2,0);
-      ((int (*)())gld_drawPixelsDispatch)(ctx,rasterPos,width,height,uVar32,puVar42,iVar34,1,0);
+    scratchInt34 = _malloc(scratchInt34 * height);
+    if (scratchInt34 != 0) {
+      glReadPixels_entry(ctx,srcX,srcY,width,height,scratchUint32,scratchPtr42,scratchInt34,2,0);
+      ((int (*)())gld_drawPixelsDispatch)(ctx,rasterPos,width,height,scratchUint32,scratchPtr42,scratchInt34,1,0);
                     
                     
-      (*(code *)PTR_FUN_001e8754)(iVar34);
+      (*(code *)PTR_FUN_001e8754)(scratchInt34);
       return;
     }
   }

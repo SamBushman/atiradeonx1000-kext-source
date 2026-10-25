@@ -2541,3 +2541,322 @@ local	pass_assign_slots	piVar4	lastKind7Prev	INFERRED	loop carry of the last kin
 local	pass_assign_slots	piVar5	lastKind7Inst	INFERRED	last instruction of kind 7 (field +0x13c == 7) in the exit block
 local	pass_assign_slots	piVar6	lastKind6Prev	INFERRED	loop carry of the last kind-6 instruction (field +0x13c == 6) seen before the current one
 local	pass_assign_slots	piVar7	lastKind6Inst	INFERRED	last instruction of kind 6 (field +0x13c == 6) in the exit block
+use	FUN_000fb230	iVar1	boolConstCount	INFERRED	number of default boolean constants for the program kind (FUN_000d9fc0)	^\s*iVar1\ =\ FUN_000d9fc0\(\*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x398\),uVar2\);$	+2
+use	FUN_000fb230	iVar1	boolConstCount	INFERRED	number of default boolean constants for the program kind (FUN_000d9fc0)	^\s*\}\ while\ \(iVar1\ !=\ iVar3\);$	+1
+use	FUN_000fb230	iVar1	intConstCount	INFERRED	number of default integer constants (FUN_000d9fa0)	^\s*iVar1\ =\ FUN_000d9fa0\(\*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x398\),uVar2\);$	+2
+use	FUN_000fb230	iVar1	intConstCount	INFERRED	number of default integer constants (FUN_000d9fa0)	^\s*\}\ while\ \(iVar1\ !=\ iVar3\);$@2	+1
+use	FUN_000fb230	iVar1	floatConstCount	INFERRED	number of default float constants (FUN_000d9f80)	^\s*iVar1\ =\ FUN_000d9f80\(\*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x398\),uVar2\);$	+2
+use	FUN_000fb230	iVar1	floatConstCount	INFERRED	number of default float constants (FUN_000d9f80)	^\s*\}\ while\ \(iVar1\ !=\ iVar3\);$@3	+1
+use	FUN_000fb230	iVar3	nextConstIndex	INFERRED	constIndex + 1	^\s*iVar3\ =\ iVar4\ \+\ 1;$	+1
+use	FUN_000fb230	iVar3	nextConstIndex	INFERRED	constIndex + 1	^\s*iVar4\ =\ iVar3;$	+2
+use	FUN_000fb230	iVar3	nextConstIndex	INFERRED	constIndex + 1	^\s*iVar3\ =\ iVar4\ \+\ 1;$@2	+1
+use	FUN_000fb230	iVar3	nextConstIndex	INFERRED	constIndex + 1	^\s*iVar4\ =\ iVar3;$@2	+2
+use	FUN_000fb230	iVar3	nextConstIndex	INFERRED	constIndex + 1	^\s*iVar3\ =\ iVar4\ \+\ 1;$@3	+1
+use	FUN_000fb230	iVar3	nextConstIndex	INFERRED	constIndex + 1	^\s*iVar4\ =\ iVar3;$@3	+2
+use	FUN_000fb230	iVar4	constIndex	INFERRED	register number of the default constant being created	^\s*iVar4\ =\ 0;$	+1
+use	FUN_000fb230	iVar4	constIndex	INFERRED	register number of the default constant being created	^\s*FUN_000da070\(\*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x398\),uVar2,iVar4,1,\&local_48\);$	+5
+use	FUN_000fb230	iVar4	constIndex	INFERRED	register number of the default constant being created	^\s*iVar4\ =\ 0;$@2	+1
+use	FUN_000fb230	iVar4	constIndex	INFERRED	register number of the default constant being created	^\s*FUN_000da028\(\*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x398\),uVar2,iVar4,4,\&local_48\);$	+5
+use	FUN_000fb230	iVar4	constIndex	INFERRED	register number of the default constant being created	^\s*iVar4\ =\ 0;$@3	+1
+use	FUN_000fb230	iVar4	constIndex	INFERRED	register number of the default constant being created	^\s*FUN_000d9fe0\(\*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x398\),uVar2,iVar4,4,\&local_38\);$	+6
+use	FUN_000fb230	uVar2	programKindSet	INFERRED	selector of the constant set: program flag bit 0 | flag bit 14	^\s*uVar2\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x30\)\ \&\ 1\ \|\ \*\(uint\ \*\)\(param_1\ \+\ 0x30\)\ >>\ 0xe\ \&\ 1;$	+2
+use	FUN_000fb230	uVar2	programKindSet	INFERRED	selector of the constant set: program flag bit 0 | flag bit 14	^\s*FUN_000da070\(\*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x398\),uVar2,iVar4,1,\&local_48\);$	+1
+use	FUN_000fb230	uVar2	programKindSet	INFERRED	selector of the constant set: program flag bit 0 | flag bit 14	^\s*iVar1\ =\ FUN_000d9fa0\(\*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x398\),uVar2\);$	+1
+use	FUN_000fb230	uVar2	programKindSet	INFERRED	selector of the constant set: program flag bit 0 | flag bit 14	^\s*FUN_000da028\(\*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x398\),uVar2,iVar4,4,\&local_48\);$	+1
+use	FUN_000fb230	uVar2	programKindSet	INFERRED	selector of the constant set: program flag bit 0 | flag bit 14	^\s*iVar1\ =\ FUN_000d9f80\(\*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x398\),uVar2\);$	+1
+use	FUN_000fb230	uVar2	programKindSet	INFERRED	selector of the constant set: program flag bit 0 | flag bit 14	^\s*FUN_000d9fe0\(\*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x398\),uVar2,iVar4,4,\&local_38\);$	+1
+local	FUN_000e2094	param_2	compileRequest	INFERRED	compile request: +4 flags (0x20: second source), +8 stage count, +0xc / +0x14 table of per-stage IL sources
+use	FUN_000e2094	iVar1	stageIndex	INFERRED	index of the stage being compiled (counts down from stageCount - 1; compiler+0x52c)	^\s*iVar1\ =\ \*\(int\ \*\)\(param_2\ \+\ 8\)\ \+\ \-1;$	+3
+use	FUN_000e2094	iVar1	stageIndex	INFERRED	index of the stage being compiled (counts down from stageCount - 1; compiler+0x52c)	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x52c\)\ \+\ \-1;$	+2
+use	FUN_000e2094	iVar1	stageIndexCopy	INFERRED	compiler+0x52c stage index used to pick the IL source	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x52c\);$	+3
+use	FUN_000e2094	iVar1	stageIndexCopy	INFERRED	compiler+0x52c stage index used to pick the IL source	^\s*uVar5\ =\ \*\(undefined4\ \*\)\(pcVar4\ \+\ iVar1\ \*\ 4\);$	+1
+use	FUN_000e2094	iVar1	compilerArg	INFERRED	the compiler, passed as constructor argument	^\s*iVar1\ =\ param_1;$	+1
+use	FUN_000e2094	iVar1	compilerArg	INFERRED	the compiler, passed as constructor argument	^\s*\(\(int\ \(\*\)\(\)\)FUN_000e1c50\)\(\*\(undefined4\ \*\)\(param_1\ \+\ COMP_currentProgram\),\(int\)uVar8,iVar1,in_r6,in_r7,in_r8,pcVar4\);$	+1
+use	FUN_000e2094	iVar1	stageByteOffset	INFERRED	stage index * 4 + compiler (offset of the per-stage statistic slot)	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x52c\)\ \*\ 4\ \+\ param_1;$	+1
+use	FUN_000e2094	iVar1	stageByteOffset	INFERRED	stage index * 4 + compiler (offset of the per-stage statistic slot)	^\s*\(\*\(undefined4\ \*\*\)\(param_1\ \+\ COMP_target\),\*\(undefined4\ \*\)\(iVar1\ \+\ 0x524\),$	+2
+use	FUN_000e2094	iVar1	currentProgramValue	INFERRED	compiler+COMP_currentProgram	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ COMP_currentProgram\);$	+4
+use	FUN_000e2094	iVar2	nextStageIndex	INFERRED	stage index + 1: index of the second IL source	^\s*iVar2\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x52c\)\ \+\ 1;$	+3
+use	FUN_000e2094	iVar2	nextStageIndex	INFERRED	stage index + 1: index of the second IL source	^\s*uVar5\ =\ \*\(undefined4\ \*\)\(pcVar4\ \+\ iVar2\ \*\ 4\);$	+1
+use	FUN_000e2094	pcVar4	sourceTable	INFERRED	pointer to the per-stage IL source table of the request (+0x14) for stage indices >= 2	^\s*pcVar4\ =\ "ASSEMBLY";$	+1
+use	FUN_000e2094	pcVar4	sourceTable	INFERRED	pointer to the per-stage IL source table of the request (+0x14) for stage indices >= 2	^\s*pcVar4\ =\ \*\(char\ \*\*\)\(param_2\ \+\ 0x14\);$	+2
+use	FUN_000e2094	pcVar4	sourceTable	INFERRED	pointer to the per-stage IL source table of the request (+0x14) for stage indices >= 2	^\s*pcVar4\ =\ \*\(char\ \*\*\)\(param_2\ \+\ 0x14\);$@2	+2
+use	FUN_000e2094	pcVar4	sourceTable	INFERRED	pointer to the per-stage IL source table of the request (+0x14) for stage indices >= 2	^\s*\(\(int\ \(\*\)\(\)\)FUN_000e1c50\)\(\*\(undefined4\ \*\)\(param_1\ \+\ COMP_currentProgram\),\(int\)uVar8,iVar1,in_r6,in_r7,in_r8,pcVar4\);$	+1
+use	FUN_000e2094	pcVar4	sourceTable	INFERRED	pointer to the per-stage IL source table of the request (+0x14) for stage indices >= 2	^\s*pcVar4\ =\ \(char\ \*\)\*\*\(undefined4\ \*\*\)\(param_1\ \+\ COMP_target\);$	+1
+use	FUN_000e2094	pcVar4	sourceTable	INFERRED	pointer to the per-stage IL source table of the request (+0x14) for stage indices >= 2	^\s*\(\*\*\(code\ \*\*\)\(pcVar4\ \+\ 0x8c\)\)$	+1
+use	FUN_000e2094	puVar3	programAlloc	INFERRED	0x484-byte Program block allocated in arena A	^\s*puVar3\ =\ \(undefined4\ \*\)FUN_00193e18\(uVar6,0x484\);$	+3
+use	FUN_000e2094	puVar3	programAlloc	INFERRED	0x484-byte Program block allocated in arena A	^\s*\*\(undefined4\ \*\*\)\(param_1\ \+\ COMP_currentProgram\)\ =\ puVar3\ \+\ 1;$	+1
+use	FUN_000e2094	puVar3	readerAlloc	INFERRED	0x290-byte ILReader block allocated in arena B	^\s*puVar3\ =\ \(undefined4\ \*\)FUN_00193e18\(uVar6,0x290\);$	+3
+use	FUN_000e2094	puVar3	readerAlloc	INFERRED	0x290-byte ILReader block allocated in arena B	^\s*FUN_00193cc0\(\*puVar3,puVar3\);$	+1
+use	FUN_000e2094	puVar7	ilReader	INFERRED	ILReader object (allocation + 1) constructed for the stage source	^\s*puVar7\ =\ puVar3\ \+\ 1;$	+1
+use	FUN_000e2094	puVar7	ilReader	INFERRED	ILReader object (allocation + 1) constructed for the stage source	^\s*FUN_000e5570\(puVar7,uVar5,param_1\);$	+1
+use	FUN_000e2094	puVar7	ilReader	INFERRED	ILReader object (allocation + 1) constructed for the stage source	^\s*\(\(int\ \(\*\)\(\)\)FUN_000e4400\)\(puVar7,uVar5\);$	+1
+use	FUN_000e2094	puVar7	ilReader	INFERRED	ILReader object (allocation + 1) constructed for the stage source	^\s*FUN_000ef498\(\*\(undefined4\ \*\)\(param_1\ \+\ COMP_currentProgram\),puVar7\);$	+3
+use	FUN_000e2094	uVar5	stageSource	INFERRED	IL token stream of the stage	^\s*uVar5\ =\ \*\(undefined4\ \*\)\(iVar1\ \*\ 4\ \+\ param_2\ \+\ 0xc\);$	+1
+use	FUN_000e2094	uVar5	stageSource	INFERRED	IL token stream of the stage	^\s*uVar5\ =\ \*\(undefined4\ \*\)\(pcVar4\ \+\ iVar1\ \*\ 4\);$	+1
+use	FUN_000e2094	uVar5	stageSource	INFERRED	IL token stream of the stage	^\s*FUN_000e5570\(puVar7,uVar5,param_1\);$	+1
+use	FUN_000e2094	uVar5	secondSource	INFERRED	IL token stream of the next stage (flag 0x20)	^\s*uVar5\ =\ \*\(undefined4\ \*\)\(iVar2\ \*\ 4\ \+\ param_2\ \+\ 0xc\);$	+1
+use	FUN_000e2094	uVar5	secondSource	INFERRED	IL token stream of the next stage (flag 0x20)	^\s*uVar5\ =\ \*\(undefined4\ \*\)\(pcVar4\ \+\ iVar2\ \*\ 4\);$	+1
+use	FUN_000e2094	uVar5	secondSource	INFERRED	IL token stream of the next stage (flag 0x20)	^\s*\(\(int\ \(\*\)\(\)\)FUN_000e4400\)\(puVar7,uVar5\);$	+1
+func	FUN_000fb230	Program__loadDefaultConstants	INFERRED	registers the default boolean, integer and float constants of the program kind with the ILReader constant lists and creates their constant virtual registers
+func	FUN_000e2094	Compiler__compileStages	INFERRED	compiles the stages of a request from the last to the first: builds a Program and an ILReader per stage source, runs the hardware translation (FUN_000ef498), tears the stage down and frees the lists
+use	FUN_000ec728	iVar1	block	INFERRED	current block of the program block list (+900)	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 900\);$	+1
+use	FUN_000ec728	iVar1	block	INFERRED	current block of the program block list (+900)	^\s*iVar7\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar1\ \+\ 0x98\)\ \+\ 8\);$	+2
+use	FUN_000ec728	iVar1	block	INFERRED	current block of the program block list (+900)	^\s*iVar8\ =\ \*\(int\ \*\)\(iVar1\ \+\ 8\);$	+1
+use	FUN_000ec728	iVar1	block	INFERRED	current block of the program block list (+900)	^\s*iVar1\ =\ iVar8;$	+1
+use	FUN_000ec728	iVar5	sourceCursor	INFERRED	walks the source slots of the instruction (stride 0x18) counting kinds	^\s*iVar5\ =\ iVar10;$	+1
+use	FUN_000ec728	iVar5	sourceCursor	INFERRED	walks the source slots of the instruction (stride 0x18) counting kinds	^\s*if\ \(\*\(int\ \*\)\(iVar5\ \+\ 0xb0\)\ \-\ 2U\ <\ 3\)\ \{$	+1
+use	FUN_000ec728	iVar5	sourceCursor	INFERRED	walks the source slots of the instruction (stride 0x18) counting kinds	^\s*else\ if\ \(\*\(int\ \*\)\(iVar5\ \+\ 0xb0\)\ ==\ 0xc\)\ \{$	+1
+use	FUN_000ec728	iVar5	sourceCursor	INFERRED	walks the source slots of the instruction (stride 0x18) counting kinds	^\s*iVar5\ =\ iVar5\ \+\ 0x18;$	+1
+use	FUN_000ec728	iVar8	sourceCursor2	INFERRED	walks the source slots of the instruction (stride 0x18) inserting copies	^\s*iVar8\ =\ iVar10;$	+1
+use	FUN_000ec728	iVar8	sourceCursor2	INFERRED	walks the source slots of the instruction (stride 0x18) inserting copies	^\s*if\ \(\(\(\*\(int\ \*\)\(iVar8\ \+\ 0xb0\)\ \-\ 2U\ <\ 3\)\ \&\&\ \(iVar4\ >=\ iVar6\)\)\ \|\|$	+2
+use	FUN_000ec728	iVar8	sourceCursor2	INFERRED	walks the source slots of the instruction (stride 0x18) inserting copies	^\s*uVar9\ =\ \*\(undefined4\ \*\)\(iVar8\ \+\ 0xa4\);$	+1
+use	FUN_000ec728	iVar8	sourceCursor2	INFERRED	walks the source slots of the instruction (stride 0x18) inserting copies	^\s*iVar8\ =\ iVar8\ \+\ 0x18;$	+1
+use	FUN_000ec728	iVar10	candidateInst	INFERRED	instruction being examined	^\s*iVar10\ =\ \*\(int\ \*\)\(iVar1\ \+\ 0x98\);$	+1
+use	FUN_000ec728	iVar10	candidateInst	INFERRED	instruction being examined	^\s*if\ \(\(\(\*\(uint\ \*\)\(iVar10\ \+\ 0x14\)\ \&\ 1\)\ !=\ 0\)\ \&\&\ \(iVar7\ =\ \*\(int\ \*\)\(iVar10\ \+\ 0x84\),\ 0\ <\ iVar7\)\)\ \{$	+1
+use	FUN_000ec728	iVar10	candidateInst	INFERRED	instruction being examined	^\s*iVar5\ =\ iVar10;$	+1
+use	FUN_000ec728	iVar10	candidateInst	INFERRED	instruction being examined	^\s*iVar8\ =\ iVar10;$	+1
+use	FUN_000ec728	iVar10	candidateInst	INFERRED	instruction being examined	^\s*FUN_001235b8\(uVar9,iVar10,uVar2\);$	+3
+use	FUN_000ec728	iVar10	candidateInst	INFERRED	instruction being examined	^\s*iVar8\ =\ \*\(int\ \*\)\(iVar10\ \+\ 8\);$	+1
+use	FUN_000ec728	iVar10	candidateInst	INFERRED	instruction being examined	^\s*iVar10\ =\ iVar8;$	+1
+use	FUN_000ec728	iVar11	sourcesLeft	INFERRED	loop counter over the source slots	^\s*iVar11\ =\ iVar7;$	+1
+use	FUN_000ec728	iVar11	sourcesLeft	INFERRED	loop counter over the source slots	^\s*iVar11\ =\ iVar11\ \+\ \-1;$	+2
+use	FUN_000ec728	uVar3	tempVReg	INFERRED	virtual register created for the copied source	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x3ac\);$	+1
+use	FUN_000ec728	uVar3	tempVReg	INFERRED	virtual register created for the copied source	^\s*uVar3\ =\ FUN_00127608\(uVar3,0,iVar11,0\);$	+2
+use	FUN_000ec728	uVar3	tempVReg	INFERRED	virtual register created for the copied source	^\s*FUN_001046c8\(iVar10,iVar5,uVar3\);$	+1
+use	FUN_000ec728	uVar9	sourceVReg	INFERRED	virtual register read from the source slot (+0xa4)	^\s*uVar9\ =\ \*\(undefined4\ \*\)\(iVar8\ \+\ 0xa4\);$	+1
+use	FUN_000ec728	uVar9	sourceVReg	INFERRED	virtual register read from the source slot (+0xa4)	^\s*FUN_001046c8\(uVar2,1,uVar9\);$	+2
+local	FUN_000f04d4	param_1	program	INFERRED	Program (+8 compiler)
+local	FUN_000f04d4	param_2	inst	INFERRED	instruction whose source-1 constant may be folded into an output scale
+use	FUN_000f04d4	bVar1	notLastLane	INFERRED	loop condition over the four lanes	^\s*bVar1\ =\ iVar3\ !=\ 3;$	+1
+use	FUN_000f04d4	bVar1	notLastLane	INFERRED	loop condition over the four lanes	^\s*\}\ while\ \(bVar1\);$	+1
+use	FUN_000f04d4	bVar2	allLanesFoldable	INFERRED	true while every written lane of source 1 is an output-scale value	^\s*bVar2\ =\ true;$	+1
+use	FUN_000f04d4	bVar2	allLanesFoldable	INFERRED	true while every written lane of source 1 is an output-scale value	^\s*bVar2\ =\ false;$	+1
+use	FUN_000f04d4	bVar2	allLanesFoldable	INFERRED	true while every written lane of source 1 is an output-scale value	^\s*if\ \(bVar2\)\ \{$	+1
+use	FUN_000f04d4	fVar6	scaleValue	INFERRED	the common output-scale value of the written lanes	^\s*fVar6\ =\ 0\.0;$	+1
+use	FUN_000f04d4	fVar6	scaleValue	INFERRED	the common output-scale value of the written lanes	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(piVar5\[uVar8\ \*\ 6\ \+\ 8\]\)\);$	+1
+use	FUN_000f04d4	fVar6	scaleValue	INFERRED	the common output-scale value of the written lanes	^\s*else\ if\ \(fVar6\ !=\ GH_U2F\(\(unsigned\ int\)\(piVar5\[uVar8\ \*\ 6\ \+\ 8\]\)\)\)\ \{$	+1
+use	FUN_000f04d4	iVar3	isCopyLike	INFERRED	virtual slot 0x68 / 100 queries of the instruction	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*param_2\ \+\ 0x68\)\)\(param_2,param_2\);$	+2
+use	FUN_000f04d4	iVar3	sourceIndex	INFERRED	index of the source operand being tested for identity select	^\s*for\ \(iVar3\ =\ 1;\ iVar4\ =\ \(\*\*\(code\ \*\*\)\(\*param_2\ \+\ 0x14\)\)\(param_2\),\ iVar3\ <=\ iVar4;$	+4
+use	FUN_000f04d4	iVar3	sourceIndex	INFERRED	index of the source operand being tested for identity select	^\s*if\ \(\(\(param_2\[0x20\]\ !=\ 0\)\ \&\&$	+3
+use	FUN_000f04d4	iVar3	scaleExponent	INFERRED	exponent code of the output scale (outputScaleExponent)	^\s*iVar3\ =\ \(\(int\ \(\*\)\(\)\)FUN_0010ab40\)\(\(double\)GH_U2F\(\(unsigned\ int\)\(piVar5\[uVar7\ \*\ 6\ \+\ 8\]\)\)\);$	+1
+use	FUN_000f04d4	iVar3	scaleExponent	INFERRED	exponent code of the output scale (outputScaleExponent)	^\s*iVar4\ =\ \(\*\*\(code\ \*\*\)\(\*piVar5\ \+\ 0xfc\)\)\(piVar5,iVar3,param_2\);$	+1
+use	FUN_000f04d4	iVar3	scaleExponent	INFERRED	exponent code of the output scale (outputScaleExponent)	^\s*param_2\[0x49\]\ =\ iVar3;$	+1
+use	FUN_000f04d4	iVar4	sourceCount	INFERRED	virtual slot 0x14: number of sources	^\s*for\ \(iVar3\ =\ 1;\ iVar4\ =\ \(\*\*\(code\ \*\*\)\(\*param_2\ \+\ 0x14\)\)\(param_2\),\ iVar3\ <=\ iVar4;$	+4
+use	FUN_000f04d4	iVar4	isOutputScale	INFERRED	isOutputScaleValue of the lane value	^\s*iVar4\ =\ FUN_001054ec\(param_2,1\);$	+4
+use	FUN_000f04d4	iVar4	canApplyScale	INFERRED	hardware description virtual slot 0xfc: the scale is supported	^\s*iVar4\ =\ \(\*\*\(code\ \*\*\)\(\*piVar5\ \+\ 0xfc\)\)\(piVar5,iVar3,param_2\);$	+2
+use	FUN_000f04d4	piVar5	selectBytePtr	INFERRED	walks the select bytes at inst+0x9c	^\s*piVar5\ =\ param_2;$	+1
+use	FUN_000f04d4	piVar5	selectBytePtr	INFERRED	walks the select bytes at inst+0x9c	^\s*if\ \(\(uint\)\(\*\(byte\ \*\)\(piVar5\ \+\ 0x27\)\ \-\ 2\)\ <\ 2\)\ goto\ LAB_000f0628;$	+2
+use	FUN_000f04d4	piVar5	hwDescription	INFERRED	compiler hardware description (+0x30c)	^\s*piVar5\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x30c\);$	+2
+use	FUN_000f04d4	uVar7	scaleLane	INFERRED	first lane that carries the scale (-1 before one is found)	^\s*uVar7\ =\ 0xffffffff;$	+1
+use	FUN_000f04d4	uVar7	scaleLane	INFERRED	first lane that carries the scale (-1 before one is found)	^\s*else\ if\ \(uVar7\ ==\ 0xffffffff\)\ \{$	+1
+use	FUN_000f04d4	uVar7	scaleLane	INFERRED	first lane that carries the scale (-1 before one is found)	^\s*uVar7\ =\ uVar8;$	+1
+use	FUN_000f04d4	uVar7	scaleLane	INFERRED	first lane that carries the scale (-1 before one is found)	^\s*iVar3\ =\ \(\(int\ \(\*\)\(\)\)FUN_0010ab40\)\(\(double\)GH_U2F\(\(unsigned\ int\)\(piVar5\[uVar7\ \*\ 6\ \+\ 8\]\)\)\);$	+1
+use	FUN_000f04d4	uVar8	sourceLane	INFERRED	select byte of source 1 for the lane	^\s*uVar8\ =\ \(uint\)\*\(byte\ \*\)\(iVar3\ \+\ iVar4\ \+\ 0x10\);$	+3
+use	FUN_000f04d4	uVar8	sourceLane	INFERRED	select byte of source 1 for the lane	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(piVar5\[uVar8\ \*\ 6\ \+\ 8\]\)\);$	+2
+use	FUN_000f04d4	uVar8	sourceLane	INFERRED	select byte of source 1 for the lane	^\s*else\ if\ \(fVar6\ !=\ GH_U2F\(\(unsigned\ int\)\(piVar5\[uVar8\ \*\ 6\ \+\ 8\]\)\)\)\ \{$	+1
+local	FUN_000fadc4	param_1	program	INFERRED	Program (+8 compiler)
+local	FUN_000fadc4	param_3	blockKey	INFERRED	key stored in the new block's field +0xb8 (Block__setField0xb8AndChildren)
+local	FUN_000fadc4	param_4	elseTarget	INFERRED	second block argument of IfHeader__ctor_ea6d0
+local	FUN_000fadc4	param_6	scopeStack	INFERRED	vector of enclosing scope blocks: the top one's counter at +300 is incremented
+local	FUN_000fadc4	param_7	sourceArg	INFERRED	forwarded to FUN_000fa958
+use	FUN_000fadc4	piVar5	vectorSlot	INFERRED	slot of the new block in the block vector	^\s*piVar5\ =\ \(int\ \*\)\(uVar8\ \*\ 4\ \+\ param_5\[2\]\);$	+1
+use	FUN_000fadc4	piVar5	vectorSlot	INFERRED	slot of the new block in the block vector	^\s*piVar5\ =\ \(int\ \*\)FUN_0019423c\(param_5,uVar8\);$	+1
+use	FUN_000fadc4	piVar5	vectorSlot	INFERRED	slot of the new block in the block vector	^\s*\*piVar5\ =\ \(int\)puVar6;$	+1
+use	FUN_000fadc4	piVar5	scopeTop	INFERRED	top element of the scope stack	^\s*piVar5\ =\ \(int\ \*\)0x0;$	+1
+use	FUN_000fadc4	piVar5	scopeTop	INFERRED	top element of the scope stack	^\s*piVar5\ =\ \(int\ \*\)\(\(uVar8\ \-\ 1\)\ \*\ 4\ \+\ \*\(int\ \*\)\(param_6\ \+\ 8\)\);$	+1
+use	FUN_000fadc4	piVar5	scopeTop	INFERRED	top element of the scope stack	^\s*\*\(int\ \*\)\(\*piVar5\ \+\ 300\)\ =\ \*\(int\ \*\)\(\*piVar5\ \+\ 300\)\ \+\ 1;$	+1
+use	FUN_000fadc4	puVar6	ifHeader	INFERRED	new IfHeader block (arena A allocation + 1)	^\s*puVar6\ =\ puVar3\ \+\ 1;$	+3
+use	FUN_000fadc4	puVar6	ifHeader	INFERRED	new IfHeader block (arena A allocation + 1)	^\s*\(\(int\ \(\*\)\(\)\)FUN_000fa958\)\(param_1,5,1,param_7,param_2,1,DAT_001aa9dc,local_48,param_6,1,puVar6\);$	+1
+use	FUN_000fadc4	puVar6	ifHeader	INFERRED	new IfHeader block (arena A allocation + 1)	^\s*\*piVar5\ =\ \(int\)puVar6;$	+1
+use	FUN_000fadc4	puVar6	ifHeader	INFERRED	new IfHeader block (arena A allocation + 1)	^\s*return\ puVar6;$	+1
+use	FUN_000fadc4	uVar1	broadcastByte	INFERRED	top byte of the source select word, replicated into all four lanes	^\s*uVar1\ =\ \(\*\(unsigned\ char\ \*\)\(\(unsigned\ char\ \*\)\&\(local_48\[0\]\)\ \+\ 0\)\);$	+1
+use	FUN_000fadc4	uVar1	broadcastByte	INFERRED	top byte of the source select word, replicated into all four lanes	^\s*\*\(undefined1\ \*\)\(\(int\)local_48\ \+\ iVar2\)\ =\ uVar1;$	+1
+use	FUN_000fadc4	uVar7	broadcastSelect	INFERRED	select word with the top lane byte broadcast to all lanes	^\s*uVar7\ =\ local_48\[0\];$	+1
+use	FUN_000fadc4	uVar7	broadcastSelect	INFERRED	select word with the top lane byte broadcast to all lanes	^\s*\*\(undefined4\ \*\)\(iVar2\ \+\ 0x10\)\ =\ uVar7;$	+1
+use	FUN_000fadc4	uVar8	vectorCount	INFERRED	element count of the block vector	^\s*uVar8\ =\ 0;$	+1
+use	FUN_000fadc4	uVar8	vectorCount	INFERRED	element count of the block vector	^\s*uVar8\ =\ param_5\[1\];$	+1
+use	FUN_000fadc4	uVar8	vectorCount	INFERRED	element count of the block vector	^\s*if\ \(uVar8\ <\ \*param_5\)\ \{$	+4
+use	FUN_000fadc4	uVar8	vectorCount	INFERRED	element count of the block vector	^\s*piVar5\ =\ \(int\ \*\)FUN_0019423c\(param_5,uVar8\);$	+1
+use	FUN_000fadc4	uVar8	scopeCount	INFERRED	element count of the scope stack	^\s*uVar8\ =\ \*\(uint\ \*\)\(param_6\ \+\ 4\);$	+2
+use	FUN_000fadc4	uVar8	scopeCount	INFERRED	element count of the scope stack	^\s*if\ \(uVar8\ \-\ 1\ <\ uVar8\)\ \{$	+2
+func	FUN_000ec728	Program__splitMixedSourceKinds	INFERRED	for every instruction that mixes constant sources (kinds 2-4) and kind 0xc sources, copies the minority kind through a new mov into a fresh temporary
+func	FUN_000f04d4	IRInst__tryFoldOutputScale	INFERRED	checks that all written lanes of source 1 are the same output-scale constant and, when the hardware accepts it, folds the scale into the instruction
+func	FUN_000fadc4	Program__createIfBlock	INFERRED	creates an IfHeader block for a condition instruction (broadcasting its select), pushes it on the block vector and counts it in the enclosing scope
+use	FUN_000eea24	iVar1	hwRegisterBias	INFERRED	hardware register base (vslot 0xe4) or program+0x3ec bound used to offset the pinned registers (stored in program+0x3e0 as the difference to +0x3d8)	^\s*iVar1\ =\ iVar3;$	+3
+use	FUN_000eea24	iVar1	hwRegisterBias	INFERRED	hardware register base (vslot 0xe4) or program+0x3ec bound used to offset the pinned registers (stored in program+0x3e0 as the difference to +0x3d8)	^\s*\*\(int\ \*\)\(param_1\ \+\ 0x3e0\)\ =\ iVar1\ \-\ iVar3;$	+1
+use	FUN_000eea24	iVar1	inputVReg	INFERRED	virtual register of file 5 (IL type 5) for the register number	^\s*iVar1\ =\ FUN_00127534\(uVar7,uVar4,iVar3,0\);$	+2
+use	FUN_000eea24	iVar1	inputVReg	INFERRED	virtual register of file 5 (IL type 5) for the register number	^\s*for\ \(uVar6\ =\ 1;\ uVar6\ <=\ \*\(uint\ \*\)\(\*\(int\ \*\)\(iVar1\ \+\ 0x18\)\ \+\ 4\);\ uVar6\ =\ uVar6\ \+\ 1\)\ \{$	+2
+use	FUN_000eea24	iVar1	inputVReg	INFERRED	virtual register of file 5 (IL type 5) for the register number	^\s*\*\(int\ \*\)\(iVar1\ \+\ 0x10\)\ =\ iVar3\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x3e0\);$	+2
+use	FUN_000eea24	iVar1	inputVReg	INFERRED	virtual register of file 5 (IL type 5) for the register number	^\s*iVar1\ =\ FUN_00127534\(uVar7,uVar4,iVar3,0\);$@2	+2
+use	FUN_000eea24	iVar1	inputVReg	INFERRED	virtual register of file 5 (IL type 5) for the register number	^\s*for\ \(uVar6\ =\ 1;\ uVar6\ <=\ \*\(uint\ \*\)\(\*\(int\ \*\)\(iVar1\ \+\ 0x18\)\ \+\ 4\);\ uVar6\ =\ uVar6\ \+\ 1\)\ \{$@2	+2
+use	FUN_000eea24	iVar2	userInst	INFERRED	instruction in the virtual register's use vector (+0x18): flagged 0x10 and added to the program	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar5\ \+\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar1\ \+\ 0x18\)\ \+\ 8\)\);$	+4
+use	FUN_000eea24	iVar2	userInst	INFERRED	instruction in the virtual register's use vector (+0x18): flagged 0x10 and added to the program	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar5\ \+\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar1\ \+\ 0x18\)\ \+\ 8\)\);$@2	+4
+use	FUN_000eea24	iVar3	hwBaseRegister	INFERRED	first hardware register from hardware description virtual slot 0xe4	^\s*if\ \(\(\(\*\(uint\ \*\)\(param_1\ \+\ 0x30\)\ \&\ 1\)\ !=\ 0\)\ \&\&$	+3
+use	FUN_000eea24	iVar3	hwBaseRegister	INFERRED	first hardware register from hardware description virtual slot 0xe4	^\s*iVar1\ =\ iVar3;$	+3
+use	FUN_000eea24	iVar3	registerNumber	INFERRED	register number in program+0x3d8 .. +0x3dc being pinned	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x3d8\);$	+3
+use	FUN_000eea24	iVar3	registerNumber	INFERRED	register number in program+0x3d8 .. +0x3dc being pinned	^\s*iVar1\ =\ FUN_00127534\(uVar7,uVar4,iVar3,0\);$	+1
+use	FUN_000eea24	iVar3	registerNumber	INFERRED	register number in program+0x3d8 .. +0x3dc being pinned	^\s*\*\(int\ \*\)\(iVar1\ \+\ 0x10\)\ =\ iVar3\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x3e0\);$	+1
+use	FUN_000eea24	iVar3	registerNumber	INFERRED	register number in program+0x3d8 .. +0x3dc being pinned	^\s*FUN_00130444\(param_1,iVar3\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x3e0\)\);$	+2
+use	FUN_000eea24	iVar3	registerNumber	INFERRED	register number in program+0x3d8 .. +0x3dc being pinned	^\s*iVar3\ =\ iVar3\ \+\ 1;$	+2
+use	FUN_000eea24	iVar3	registerNumber	INFERRED	register number in program+0x3d8 .. +0x3dc being pinned	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x3d8\);$@2	+2
+use	FUN_000eea24	iVar3	registerNumber	INFERRED	register number in program+0x3d8 .. +0x3dc being pinned	^\s*iVar1\ =\ FUN_00127534\(uVar7,uVar4,iVar3,0\);$@2	+1
+use	FUN_000eea24	iVar3	registerNumber	INFERRED	register number in program+0x3d8 .. +0x3dc being pinned	^\s*iVar3\ =\ iVar3\ \+\ 1;$@2	+2
+use	FUN_000eea24	uVar4	registerFile5	INFERRED	register file of IL type 5	^\s*uVar4\ =\ \(\(int\ \(\*\)\(\)\)FUN_000ec208\)\(param_1,5\);$	+2
+use	FUN_000eea24	uVar4	registerFile5	INFERRED	register file of IL type 5	^\s*uVar4\ =\ \(\(int\ \(\*\)\(\)\)FUN_000ec208\)\(param_1,5\);$@2	+2
+use	FUN_000eea24	uVar7	registerMap	INFERRED	program+0x3ac	^\s*uVar7\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x3ac\);$	+1
+use	FUN_000eea24	uVar7	registerMap	INFERRED	program+0x3ac	^\s*iVar1\ =\ FUN_00127534\(uVar7,uVar4,iVar3,0\);$	+1
+use	FUN_000eea24	uVar7	registerMap	INFERRED	program+0x3ac	^\s*uVar7\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x3ac\);$@2	+1
+use	FUN_000eea24	uVar7	registerMap	INFERRED	program+0x3ac	^\s*iVar1\ =\ FUN_00127534\(uVar7,uVar4,iVar3,0\);$@2	+1
+local	FUN_000ecd28	param_1	program	INFERRED	Program (+8 compiler)
+local	FUN_000ecd28	param_4	destRegisterOffset	INFERRED	destination register offset stored by IRInst__setHardwareRegisterAndAdd
+local	FUN_000ecd28	param_5	destRegister	INFERRED	destination register number stored by IRInst__setHardwareRegisterAndAdd
+local	FUN_000ecd28	param_6	sourceSelectWord	INFERRED	select word of the mov's source operand
+use	FUN_000ecd28	iVar3	sourceBlock	INFERRED	block of the new source (+0x158)	^\s*iVar3\ =\ param_2\[0x56\];$	+5
+use	FUN_000ecd28	iVar3	sourceBlock	INFERRED	block of the new source (+0x158)	^\s*else\ if\ \(\(\*\(uint\ \*\)\(iVar3\ \+\ 0xc\)\ \&\ 8\)\ ==\ 0\)\ goto\ LAB_000ece34;$	+1
+use	FUN_000ecd28	iVar3	isEntryLike	INFERRED	virtual slot 0x2c of the target block	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*piVar4\ \+\ 0x2c\)\)\(piVar4\);$	+2
+use	FUN_000ecd28	iVar3	isStoreLike	INFERRED	virtual slot 0x7c of the instruction	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*param_3\ \+\ 0x7c\)\)\(param_3\);$	+2
+use	FUN_000ecd28	piVar1	nextInst	INFERRED	next instruction of the block list	^\s*for\ \(piVar1\ =\ \(int\ \*\)\(\*\(int\ \*\*\)\(iVar3\ \+\ 0x98\)\)\[2\];\ piVar1\ !=\ \(int\ \*\)0x0;$	+2
+use	FUN_000ecd28	piVar1	nextInst	INFERRED	next instruction of the block list	^\s*piVar4\ =\ piVar1;$	+1
+use	FUN_000ecd28	piVar2	newMov	INFERRED	IRMov created to copy newSource	^\s*piVar2\ =\ \(int\ \*\)FUN_001084b8\(0x31,\*\(undefined4\ \*\)\(param_1\ \+\ 8\)\);$	+4
+use	FUN_000ecd28	piVar2	newMov	INFERRED	IRMov created to copy newSource	^\s*piVar2\[0x27\]\ =\ local_28\[0\];$	+2
+use	FUN_000ecd28	piVar2	newMov	INFERRED	IRMov created to copy newSource	^\s*FUN_000e76c4\(piVar4\[0x55\],piVar2\);$	+1
+use	FUN_000ecd28	piVar2	newMov	INFERRED	IRMov created to copy newSource	^\s*FUN_000e8424\(piVar4,piVar2\);$	+1
+use	FUN_000ecd28	piVar2	newMov	INFERRED	IRMov created to copy newSource	^\s*return\ FUN_000e7738\(piVar4,param_3,piVar2\);$	+1
+use	FUN_000ecd28	piVar4	scanInst	INFERRED	instruction of the block scanned for afterInst / newSource order	^\s*piVar4\ =\ \*\(int\ \*\*\)\(iVar3\ \+\ 0x98\);$	+1
+use	FUN_000ecd28	piVar4	scanInst	INFERRED	instruction of the block scanned for afterInst / newSource order	^\s*if\ \(\(piVar4\[5\]\ \&\ 1U\)\ !=\ 0\)\ \{$	+3
+use	FUN_000ecd28	piVar4	scanInst	INFERRED	instruction of the block scanned for afterInst / newSource order	^\s*piVar4\ =\ piVar1;$	+1
+use	FUN_000ecd28	piVar4	targetBlock	INFERRED	block that receives the mov (field +0x158 of the insertion point)	^\s*piVar4\ =\ \(int\ \*\)param_3\[0x56\];$	+2
+use	FUN_000ecd28	piVar4	targetBlock	INFERRED	block that receives the mov (field +0x158 of the insertion point)	^\s*FUN_000e76c4\(piVar4\[0x55\],piVar2\);$	+1
+use	FUN_000ecd28	piVar4	targetBlock	INFERRED	block that receives the mov (field +0x158 of the insertion point)	^\s*FUN_000e8424\(piVar4,piVar2\);$	+1
+use	FUN_000ecd28	piVar4	targetBlock	INFERRED	block that receives the mov (field +0x158 of the insertion point)	^\s*return\ FUN_000e7738\(piVar4,param_3,piVar2\);$	+1
+local	FUN_000e9adc	param_1	fromBlock	INFERRED	block whose edge to toBlock is split
+local	FUN_000e9adc	param_2	toBlock	INFERRED	block at the other end of the split edge
+local	FUN_000e9adc	param_3	newBlock	INFERRED	block inserted on the edge: replaces toBlock in fromBlock's successors and fromBlock in toBlock's predecessors
+use	FUN_000e9adc	puVar3	successorSlot	INFERRED	slot of toBlock in fromBlock's successor vector	^\s*puVar3\ =\ \(undefined4\ \*\)\(uVar1\ \*\ 4\ \+\ puVar4\[2\]\);$	+1
+use	FUN_000e9adc	puVar3	successorSlot	INFERRED	slot of toBlock in fromBlock's successor vector	^\s*puVar3\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar4,uVar1\);$	+1
+use	FUN_000e9adc	puVar3	successorSlot	INFERRED	slot of toBlock in fromBlock's successor vector	^\s*\*puVar3\ =\ param_3;$	+1
+use	FUN_000e9adc	puVar3	predecessorSlot	INFERRED	slot of fromBlock in toBlock's predecessor vector	^\s*puVar3\ =\ \(undefined4\ \*\)\(uVar1\ \*\ 4\ \+\ puVar4\[2\]\);$@2	+1
+use	FUN_000e9adc	puVar3	predecessorSlot	INFERRED	slot of fromBlock in toBlock's predecessor vector	^\s*puVar3\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar4,uVar1\);$@2	+1
+use	FUN_000e9adc	puVar3	predecessorSlot	INFERRED	slot of fromBlock in toBlock's predecessor vector	^\s*\*puVar3\ =\ param_3;$@2	+1
+use	FUN_000e9adc	puVar4	successorVector	INFERRED	successor vector header of fromBlock (+0xd0)	^\s*puVar4\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 0xd0\);$	+3
+use	FUN_000e9adc	puVar4	successorVector	INFERRED	successor vector header of fromBlock (+0xd0)	^\s*_memset\(uVar2\ \*\ 4\ \+\ puVar4\[2\],0,\(uVar1\ \-\ uVar2\)\ \*\ 4\ \+\ 4\);$	+2
+use	FUN_000e9adc	puVar4	successorVector	INFERRED	successor vector header of fromBlock (+0xd0)	^\s*puVar3\ =\ \(undefined4\ \*\)\(uVar1\ \*\ 4\ \+\ puVar4\[2\]\);$	+1
+use	FUN_000e9adc	puVar4	successorVector	INFERRED	successor vector header of fromBlock (+0xd0)	^\s*puVar3\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar4,uVar1\);$	+1
+use	FUN_000e9adc	puVar4	predecessorVector	INFERRED	predecessor vector header of toBlock (+0xd4)	^\s*puVar4\ =\ \*\(uint\ \*\*\)\(param_2\ \+\ 0xd4\);$	+3
+use	FUN_000e9adc	puVar4	predecessorVector	INFERRED	predecessor vector header of toBlock (+0xd4)	^\s*_memset\(uVar2\ \*\ 4\ \+\ puVar4\[2\],0,\(uVar1\ \-\ uVar2\)\ \*\ 4\ \+\ 4\);$@2	+2
+use	FUN_000e9adc	puVar4	predecessorVector	INFERRED	predecessor vector header of toBlock (+0xd4)	^\s*puVar3\ =\ \(undefined4\ \*\)\(uVar1\ \*\ 4\ \+\ puVar4\[2\]\);$@2	+1
+use	FUN_000e9adc	puVar4	predecessorVector	INFERRED	predecessor vector header of toBlock (+0xd4)	^\s*puVar3\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar4,uVar1\);$@2	+1
+use	FUN_000e9adc	uVar1	successorIndex	INFERRED	index of toBlock in the successor vector (FUN_000e7fe0)	^\s*uVar1\ =\ FUN_000e7fe0\(param_1,param_2\);$	+1
+use	FUN_000e9adc	uVar1	successorIndex	INFERRED	index of toBlock in the successor vector (FUN_000e7fe0)	^\s*if\ \(uVar1\ <\ \*puVar4\)\ \{$	+1
+use	FUN_000e9adc	uVar1	successorIndex	INFERRED	index of toBlock in the successor vector (FUN_000e7fe0)	^\s*if\ \(uVar2\ <=\ uVar1\)\ \{$	+3
+use	FUN_000e9adc	uVar1	successorIndex	INFERRED	index of toBlock in the successor vector (FUN_000e7fe0)	^\s*puVar3\ =\ \(undefined4\ \*\)\(uVar1\ \*\ 4\ \+\ puVar4\[2\]\);$	+1
+use	FUN_000e9adc	uVar1	successorIndex	INFERRED	index of toBlock in the successor vector (FUN_000e7fe0)	^\s*puVar3\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar4,uVar1\);$	+1
+use	FUN_000e9adc	uVar2	edgeVectorCount	INFERRED	count word of the vector, compared while growing	^\s*uVar2\ =\ puVar4\[1\];$	+3
+use	FUN_000e9adc	uVar2	edgeVectorCount	INFERRED	count word of the vector, compared while growing	^\s*uVar2\ =\ puVar4\[1\];$@2	+3
+func	FUN_000eea24	Program__pinInputRegisters	INFERRED	for registers program+0x3d8 .. +0x3dc of IL type 5: flags and adds the instructions that use them, and (unless hardware flag 0x2000) assigns them hardware registers offset by program+0x3e0
+func	FUN_000ecd28	Program__insertMovAfter	INFERRED	creates a mov (opcode 0x31) of newSource into a hardware register and inserts it after afterInst (or at the block start / after a special instruction)
+func	FUN_000e9adc	Block__splitEdge	INFERRED	replaces the control-flow edge fromBlock -> toBlock by fromBlock -> newBlock -> toBlock
+local	FUN_000ed124	param_1	program	INFERRED	Program being destroyed (+0x430/+0x42c bitsets, +0x3c8/+0x3c4 vectors, +0x3ac register map, +0x37c block list)
+local	FUN_000ed124	iVar1	ownedObject	INFERRED	object (bitset block, vector header or register map) released in turn
+local	FUN_000ed124	puVar2	baseVtable	INFERRED	DListNode base vtable stored back after the block list is cleared
+func	FUN_000ed124	Program__dtor_ed124	INFERRED	frees the two bitsets, the vectors at +0x3c8/+0x3c4, the register map, the six work arrays and clears the block list
+local	FUN_000ecfac	param_1	program	INFERRED	Program being destroyed (+0x430/+0x42c bitsets, +0x3c8/+0x3c4 vectors, +0x3ac register map, +0x37c block list)
+local	FUN_000ecfac	iVar1	ownedObject	INFERRED	object (bitset block, vector header or register map) released in turn
+local	FUN_000ecfac	puVar2	baseVtable	INFERRED	DListNode base vtable stored back after the block list is cleared
+func	FUN_000ecfac	Program__dtor_ecfac	INFERRED	twin of Program__dtor_ed124 (same body)
+local	FUN_000f8044	param_1	domInfo	INFERRED	dominator-analysis object being released
+local	FUN_000f8044	iVar2	bucketNode	INFERRED	current node of a bucket list ({vertex, next})
+local	FUN_000f8044	iVar3	bucketArray	INFERRED	domInfo[5]: array of bucket list heads
+local	FUN_000f8044	iVar5	nextBucketNode	INFERRED	node after the current one (+4)
+func	FUN_000f8044	DominatorTree__free	INFERRED	frees the bucket lists and the parent, semi, idom, ancestor, label, vertex and bucket arrays of the dominator analysis
+local	FUN_000f7f1c	param_1	domInfo	INFERRED	dominator-analysis object being released
+local	FUN_000f7f1c	iVar2	bucketNode	INFERRED	current node of a bucket list ({vertex, next})
+local	FUN_000f7f1c	iVar3	bucketArray	INFERRED	domInfo[5]: array of bucket list heads
+local	FUN_000f7f1c	iVar5	nextBucketNode	INFERRED	node after the current one (+4)
+func	FUN_000f7f1c	DominatorTree__free_f7f1c	INFERRED	twin of DominatorTree__free (same body)
+local	FUN_000e9948	param_1	block	INFERRED	block whose predecessor edge is split
+local	FUN_000e9948	param_2	predecessor	INFERRED	predecessor at the other end of the edge
+local	FUN_000e9948	param_3	newBlock	INFERRED	block inserted on the edge: replaces the predecessor entry of block and the successor entry of the predecessor
+local	FUN_000e9948	puVar8	predecessorVector	INFERRED	predecessor vector header of block (+0xd4)
+local	FUN_000e9948	piVar2	predecessorSlot	INFERRED	slot of the replaced predecessor entry
+local	FUN_000e9948	iVar5	predecessorSuccessors	INFERRED	successor vector header of the predecessor (+0xd0)
+func	FUN_000e9948	Block__splitIncomingEdge	INFERRED	replaces the edge predecessor -> block by predecessor -> newBlock -> block
+local	FUN_000e977c	param_1	block	INFERRED	block whose successor edge is split
+local	FUN_000e977c	param_2	successor	INFERRED	successor at the other end of the edge
+local	FUN_000e977c	param_3	newBlock	INFERRED	block inserted on the edge: replaces the successor entry of block and the predecessor entry of the successor
+local	FUN_000e977c	puVar8	successorVector	INFERRED	successor vector header of block (+0xd0)
+local	FUN_000e977c	piVar2	successorSlot	INFERRED	slot of the replaced successor entry
+local	FUN_000e977c	iVar5	successorPredecessors	INFERRED	predecessor vector header of the successor (+0xd4)
+func	FUN_000e977c	Block__splitOutgoingEdge	INFERRED	replaces the edge block -> successor by block -> newBlock -> successor
+local	FUN_000f7cd8	param_1	domInfo	INFERRED	dominator-analysis object being constructed: [0] parent .. [6] vertex arrays, [7] vertex count, [8] Program, [9] compiler
+local	FUN_000f7cd8	param_2	program	INFERRED	Program whose block list (+0x37c) is analysed
+local	FUN_000f7cd8	iVar1	arrayBytes	INFERRED	(vertex count * 4 + 4): byte size of each per-vertex array
+local	FUN_000f7cd8	iVar3	compiler	INFERRED	program+8: its arena B (+0x378) provides the arrays
+func	FUN_000f7cd8	DominatorTree__ctor_f7cd8	INFERRED	stores the Program, counts its blocks and allocates the seven per-vertex arrays in arena B
+local	FUN_000f7bf4	param_1	domInfo	INFERRED	dominator-analysis object being constructed: [0] parent .. [6] vertex arrays, [7] vertex count, [8] Program, [9] compiler
+local	FUN_000f7bf4	param_2	program	INFERRED	Program whose block list (+0x37c) is analysed
+local	FUN_000f7bf4	iVar1	arrayBytes	INFERRED	(vertex count * 4 + 4): byte size of each per-vertex array
+local	FUN_000f7bf4	iVar3	compiler	INFERRED	program+8: its arena B (+0x378) provides the arrays
+func	FUN_000f7bf4	DominatorTree__ctor_f7bf4	INFERRED	twin of DominatorTree__ctor_f7cd8 (same body)
+local	FUN_000f4d80	param_1	constTables	INFERRED	object holding the constant hash tables at +4..+0x14
+local	FUN_000f4d80	param_2	constRecord	INFERRED	constant record: used-lane mask byte at +0x15c
+local	FUN_000f4d80	puVar2	selectedTable	INFERRED	points into local_cluster at the table for the first unused lane (lanes counted while their used bit is set)
+func	FUN_000f4d80	ConstRecord__findInTable	INFERRED	picks the constant hash table by the number of leading used lanes of the record and looks the record up in it (FUN_00194720)
+local	FUN_000e7a9c	param_1	block	INFERRED	block whose chain is followed (starts at its field +0x138 [0x4e])
+local	FUN_000e7a9c	piVar3	chainBlock	INFERRED	block reached so far along the chain of single-exit structured blocks
+local	FUN_000e7a9c	piVar1	firstSuccessorSlot	INFERRED	slot of the first entry of the block's successor vector (0 when empty)
+func	FUN_000e7a9c	Block__lastBlockOfChain_e7a9c	INFERRED	follows the chain of structured blocks (through field +0x13c / +0x154 / the first successor) from field +0x138 while each block has successors and fails the virtual-slot 0x38/0x3c tests; returns the last block reached
+local	FUN_000e7b9c	param_1	block	INFERRED	block whose chain is followed (starts at its field +0x134)
+local	FUN_000e7b9c	piVar3	chainBlock	INFERRED	block reached so far along the chain of single-exit structured blocks
+local	FUN_000e7b9c	piVar1	firstSuccessorSlot	INFERRED	slot of the first entry of the block's successor vector (0 when empty)
+func	FUN_000e7b9c	Block__lastBlockOfChain_e7b9c	INFERRED	same walk as Block__lastBlockOfChain_e7a9c but starting at the block's field +0x134
+local	FUN_000e2668	param_1	compiler	INFERRED	Compiler: +4 jump buffer, +0x398 emit context, +0x524 current shader
+local	FUN_000e2668	param_2	shader	INFERRED	shader object: +0xf8 / +0xfc are reset and set from the emit context before compiling
+local	FUN_000e2668	param_3	sourceA	INFERRED	first argument of FUN_00193b3c (builds the compile request)
+local	FUN_000e2668	param_4	sourceB	INFERRED	second argument of FUN_00193b3c
+local	FUN_000e2668	param_5	optionsArg	INFERRED	passed to FUN_000e0cd0 (option setup)
+local	FUN_000e2668	param_6	unusedArg6	INFERRED	not used
+local	FUN_000e2668	param_7	emitContext	INFERRED	stored at compiler+0x398: the context the constant stores are emitted into
+local	FUN_000e2668	iVar2	retryHandled	INFERRED	FUN_000e161c result: the failure was handled and the compile is retried
+func	FUN_000e2668	Compiler__compile	INFERRED	top-level compile with error recovery: sets the emit context, runs setjmp, resets the compiler, builds the request, compiles the stages and releases the pools; repeats while the error handler asks for a retry
+local	FUN_000d9c90	param_2	registerKey	INFERRED	register number used as the key of the constant entry
+local	FUN_000d9c90	param_3	laneValue	INFERRED	value stored in the lane slot of the entry
+local	FUN_000d9c90	param_4	lane	INFERRED	lane number (index of the value word inside the entry)
+local	FUN_000d9c90	param_5	bank	INFERRED	constant bank: first set (entries of 0x14 bytes at +0x88/+0x8c, count +0x7c/+0x80, limit +0x70/+0x74) or global list (entries of 0x24 bytes at +0x64/+0x68, count +0x58/+0x5c, limit +0x4c/+0x50)
+local	FUN_000d9c90	param_6	useGlobalList	INFERRED	non-zero: store in the global 0x24-byte entry list instead of the per-register 0x14-byte list
+local	FUN_000d9c90	iVar1	nextEntryOffset	INFERRED	byte offset of the entry after the one being compared
+local	FUN_000d9c90	iVar3	entryOffset	INFERRED	byte offset of the entry that receives the value
+local	FUN_000d9c90	piVar5	entryCursor	INFERRED	walks the 0x14-byte entries comparing their key
+local	FUN_000d9c90	uVar6	entriesLeft	INFERRED	entries still to compare
+local	FUN_000d9d74	param_2	registerKey	INFERRED	register number used as the key of the constant entry
+local	FUN_000d9d74	param_3	laneValue	INFERRED	value stored in the lane slot of the entry
+local	FUN_000d9d74	param_4	lane	INFERRED	lane number (index of the value word inside the entry)
+local	FUN_000d9d74	param_5	bank	INFERRED	constant bank: first set (entries of 0x14 bytes at +0x88/+0x8c, count +0x7c/+0x80, limit +0x70/+0x74) or global list (entries of 0x24 bytes at +0x64/+0x68, count +0x58/+0x5c, limit +0x4c/+0x50)
+local	FUN_000d9d74	param_6	useGlobalList	INFERRED	non-zero: store in the global 0x24-byte entry list instead of the per-register 0x14-byte list
+local	FUN_000d9d74	iVar1	nextEntryOffset	INFERRED	byte offset of the entry after the one being compared
+local	FUN_000d9d74	iVar3	entryOffset	INFERRED	byte offset of the entry that receives the value
+local	FUN_000d9d74	piVar5	entryCursor	INFERRED	walks the 0x14-byte entries comparing their key
+local	FUN_000d9d74	uVar6	entriesLeft	INFERRED	entries still to compare
+local	FUN_000d9c90	piVar4	entryTable	INFERRED	array of 0x14-byte entries (key + four lane words) at bank+0x88
+local	FUN_000d9d74	piVar4	entryTable	INFERRED	array of 0x14-byte entries (key + four lane words) at bank+0x8c
+func	FUN_000d9c90	ConstBank__storeIntLane	INFERRED	finds or appends the entry for a register in the bank and stores an integer lane value (kind 3 constants)
+func	FUN_000d9d74	ConstBank__storeBoolLane	INFERRED	finds or appends the entry for a register in the bank and stores a boolean lane value
+local	FUN_000da4b8	param_1	state	INFERRED	output state: [0] user data, [1] allocator data, [2] compiler, [3] hardware id, [4] option, [5] flags, [10] chip kind
+local	FUN_000da4b8	param_2	request	INFERRED	create request: [0xb] allocator data, [0xc] allocate callback, [0xd] free callback, [3]/[4] limits
+func	FUN_000da4b8	Compiler__createFromRequest	INFERRED	allocates a 0x6c8-byte Compiler through the request's allocator, initialises it (Compiler__init_e1a48), selects the hardware family from the request id and clamps the register limits
+local	FUN_000d9e98	param_2	registerKey	INFERRED	register key stored at entry+0
+local	FUN_000d9e98	param_5	valueLo	INFERRED	stored at entry+0x10
+local	FUN_000d9e98	param_6	valueHi	INFERRED	stored at entry+0xc
+local	FUN_000d9e98	param_7	maskByte	INFERRED	0xff selects the full-mask kinds (0x15 / 0x17), anything else 0x16 / 0x18
+local	FUN_000d9e98	param_8	sourceRegister	INFERRED	-1 selects kinds 0x15 / 0x16 (no source register); otherwise stored at entry+0x1c with kinds 0x17 / 0x18
+local	FUN_000d9e98	param_9	extraWord	INFERRED	stored at entry+0x20
+local	FUN_000d9e98	param_10	bank	INFERRED	constant bank whose global list of 0x24-byte entries (+0x64, count +0x58, limit +0x4c) receives the entry
+local	FUN_000d9e98	iVar2	entry	INFERRED	0x24-byte entry just appended to the global list
+local	FUN_000d9e98	uVar1	entryIndex	INFERRED	index of the new entry (count before the increment)
+func	FUN_000d9e98	ConstBank__addMappedEntry	INFERRED	appends a 0x24-byte entry (kind 0x15-0x18 chosen from the mask byte and source register) to the bank's global list; returns 0 when the list is full
+local	ildisPrintFixedPoint	iVar3	integerBitsLeft	INFERRED	loop counter while the integer-field mask is built
+local	ildisPrintFixedPoint	uVar7	bitIndex	INFERRED	shift amount of the bit being added to a mask
+local	ildisPrintFixedPoint	uVar2	fractionBitIndex	INFERRED	shift amount of the bit being added to the fraction mask
+local	ildisPrintFixedPoint	local_28	intToDoubleHi	INFERRED	0x43300000: high word of the int-to-double conversion idiom (first use)
+local	ildisPrintFixedPoint	local_20	intToDoubleHi2	INFERRED	0x43300000: high word of the int-to-double conversion idiom (second use)
+local	ildisPrintFixedPoint	local_18	intToDoubleHi3	INFERRED	0x43300000: high word of the int-to-double conversion idiom (third use)
