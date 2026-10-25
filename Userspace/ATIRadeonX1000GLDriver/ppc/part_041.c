@@ -308,248 +308,278 @@ int FUN_00131c74(param_1, param_2, param_3)
 }
 
 /* FUN_00131d08 @ 0x131d08 (1440 bytes) */
-int FUN_00131d08(param_1, param_2, param_3, param_4, param_5)
-  int param_1;
-  undefined4 param_2;
-  int param_3;
-  undefined4 param_4;
-  int param_5;
+int FUN_00131d08(program, virtualRegCount, physicalRegCount, totalRegCount, virtualIdsAlreadyOffset)
+  int program;
+  undefined4 virtualRegCount;
+  int physicalRegCount;
+  undefined4 totalRegCount;
+  int virtualIdsAlreadyOffset;
 {
+  int *instNextC;
+  int *physicalSetCursor;
+  int blockCursorC;
+  int prefixPrevious;
+  int classIndexCounter;
+  int regClassB;
+  int regKindFlagB;
+  int nextBlockC;
+  int wordCountdown;
+  undefined4 *classNextVirtual;
+  int *classBaseOffsets;
+  int *virtualSetCursor;
+  int *instAfter;
+  int *inst;
+  int virtualMapBase;
+  int newRegByteOffset;
+  int physicalSetA;
+  int virtualSetA;
+  int lastClassOffset;
+  int physicalCountArray;
+  int virtualCountArray;
+  int classCount;
+  int blockCursor;
+  int newRegister;
+  int nextBlock;
+  int classOffset;
+  int regClass;
+  int regKindFlag;
+  int blockCursorB;
+  int compiler;
   undefined4 *allocation;
   undefined4 arena;
   int allocation2;
   int operandRecord;
   int loopIndex;
-  int *piVar1;
-  int *piVar2;
-  int iVar3;
-  int iVar4;
-  undefined4 uVar5;
-  int *piVar6;
-  undefined4 *puVar7;
-  undefined4 *puVar8;
-  uint in_r8;
-  uint uVar9;
-  int *in_r10;
-  int iVar10;
-  int iVar11;
-  int iVar12;
-  int *piVar13;
+  int *instNextA;
+  int *instNextB;
+  int compilerB;
+  int classArrayBytes;
+  undefined4 logTrailingArg;
+  int *backendTarget;
+  undefined4 *zeroCursor;
+  undefined4 *bitsetWordCursor;
+  uint wordOrClassIndex;
+  uint registerNumber;
+  int *bitsetOrCursor;
+  int compilerC;
+  int nextBlockB;
+  int classByteOffset;
+  int *instC;
   
-  iVar4 = *(int *)(*(int *)(*(int *)(param_1 + 8) + 0x30c) + 0x14) << 2;
-  allocation2 = Arena__alloc(*(undefined4 *)(*(int *)(param_1 + 8) + 0x378),iVar4);
-  iVar4 = Arena__alloc(*(undefined4 *)(*(int *)(param_1 + 8) + 0x378),iVar4);
-  arena = Arena__alloc(*(undefined4 *)(*(int *)(param_1 + 8) + 0x378),
-                       *(int *)(*(int *)(*(int *)(param_1 + 8) + 0x30c) + 0x14) << 2);
-  piVar6 = *(int **)(*(int *)(param_1 + 8) + 0x30c);
-  (**(code **)(*piVar6 + 0x134))(piVar6,arena,*(int *)(param_1 + 8));
-  iVar10 = *(int *)(param_1 + 8);
-  if (0 < *(int *)(*(int *)(iVar10 + 0x30c) + 0x14)) {
+  classArrayBytes = *(int *)(*(int *)(*(int *)(program + 8) + 0x30c) + 0x14) << 2;
+  allocation2 = Arena__alloc(*(undefined4 *)(*(int *)(program + 8) + 0x378),classArrayBytes);
+  classArrayBytes = Arena__alloc(*(undefined4 *)(*(int *)(program + 8) + 0x378),classArrayBytes);
+  arena = Arena__alloc(*(undefined4 *)(*(int *)(program + 8) + 0x378),
+                       *(int *)(*(int *)(*(int *)(program + 8) + 0x30c) + 0x14) << 2);
+  backendTarget = *(int **)(*(int *)(program + 8) + 0x30c);
+  (**(code **)(*backendTarget + 0x134))(backendTarget,arena,*(int *)(program + 8));
+  compilerC = *(int *)(program + 8);
+  if (0 < *(int *)(*(int *)(compilerC + 0x30c) + 0x14)) {
     loopIndex = 0;
-    iVar12 = 0;
+    classByteOffset = 0;
     do {
-      arena = *(undefined4 *)(iVar10 + 0x378);
+      arena = *(undefined4 *)(compilerC + 0x378);
       allocation = (undefined4 *)Arena__alloc(arena,0x20c);
-      iVar10 = 0x80;
+      wordCountdown = 0x80;
       *allocation = arena;
       allocation[1] = 0x80;
       allocation[2] = 0x1000;
-      puVar8 = allocation + 1;
+      bitsetWordCursor = allocation + 1;
       do {
-        puVar8[2] = 0;
-        puVar8 = puVar8 + 1;
-        iVar10 = iVar10 + -1;
-      } while (iVar10 != 0);
-      *(undefined4 **)(allocation2 + iVar12) = allocation + 1;
-      arena = *(undefined4 *)(*(int *)(param_1 + 8) + 0x378);
+        bitsetWordCursor[2] = 0;
+        bitsetWordCursor = bitsetWordCursor + 1;
+        wordCountdown = wordCountdown + -1;
+      } while (wordCountdown != 0);
+      *(undefined4 **)(allocation2 + classByteOffset) = allocation + 1;
+      arena = *(undefined4 *)(*(int *)(program + 8) + 0x378);
       allocation = (undefined4 *)Arena__alloc(arena,0x20c);
-      iVar10 = 0x80;
+      wordCountdown = 0x80;
       *allocation = arena;
       allocation[1] = 0x80;
       allocation[2] = 0x1000;
-      puVar8 = allocation + 1;
+      bitsetWordCursor = allocation + 1;
       do {
-        puVar8[2] = 0;
-        puVar8 = puVar8 + 1;
-        iVar10 = iVar10 + -1;
-      } while (iVar10 != 0);
-      *(undefined4 **)(iVar4 + iVar12) = allocation + 1;
+        bitsetWordCursor[2] = 0;
+        bitsetWordCursor = bitsetWordCursor + 1;
+        wordCountdown = wordCountdown + -1;
+      } while (wordCountdown != 0);
+      *(undefined4 **)(classArrayBytes + classByteOffset) = allocation + 1;
       loopIndex = loopIndex + 1;
-      iVar10 = *(int *)(param_1 + 8);
-      iVar12 = iVar12 + 4;
-    } while (loopIndex < *(int *)(*(int *)(iVar10 + 0x30c) + 0x14));
+      compilerC = *(int *)(program + 8);
+      classByteOffset = classByteOffset + 4;
+    } while (loopIndex < *(int *)(*(int *)(compilerC + 0x30c) + 0x14));
   }
-  iVar11 = *(int *)(*(int *)(param_1 + 900) + 8);
-  iVar12 = *(int *)(param_1 + 900);
-  if (iVar11 != 0) {
+  nextBlockB = *(int *)(*(int *)(program + 900) + 8);
+  blockCursor = *(int *)(program + 900);
+  if (nextBlockB != 0) {
     do {
-      iVar10 = iVar11;
-      piVar13 = *(int **)(iVar12 + 0x98);
-      piVar6 = (int *)piVar13[2];
-      if ((int *)piVar13[2] != (int *)0x0) {
+      nextBlockC = nextBlockB;
+      instC = *(int **)(blockCursor + 0x98);
+      instAfter = (int *)instC[2];
+      if ((int *)instC[2] != (int *)0x0) {
         do {
-          piVar1 = piVar6;
-          if (((piVar13[5] & 1U) != 0) && (piVar13[0x20] != 0)) {
-            iVar10 = RegKind__flagBit0(piVar13[0x26]);
-            if ((iVar10 == 0) ||
-               (((piVar13[5] & 2U) != 0 ||
-                (iVar10 = (**(code **)(*piVar13 + 0x50))(piVar13), iVar10 != 0)))) {
+          instNextA = instAfter;
+          if (((instC[5] & 1U) != 0) && (instC[0x20] != 0)) {
+            regKindFlagB = RegKind__flagBit0(instC[0x26]);
+            if ((regKindFlagB == 0) ||
+               (((instC[5] & 2U) != 0 ||
+                (regKindFlagB = (**(code **)(*instC + 0x50))(instC), regKindFlagB != 0)))) {
 LAB_00131f98:
-              piVar1 = (int *)piVar13[2];
+              instNextA = (int *)instC[2];
             }
             else {
-              iVar10 = FUN_00130bfc(param_1,piVar13);
-              uVar9 = piVar13[0x25];
-              if ((piVar13[5] & 0x40U) == 0) {
-                iVar10 = iVar10 * 4;
-                in_r8 = uVar9 >> 3 & 0x1ffffffc;
-                if ((*(uint *)(in_r8 + *(int *)(iVar4 + iVar10) + 8) >> (uVar9 & 0x1f) & 1) != 0)
+              regClassB = FUN_00130bfc(program,instC);
+              registerNumber = instC[0x25];
+              if ((instC[5] & 0x40U) == 0) {
+                regClassB = regClassB * 4;
+                wordOrClassIndex = registerNumber >> 3 & 0x1ffffffc;
+                if ((*(uint *)(wordOrClassIndex + *(int *)(classArrayBytes + regClassB) + 8) >> (registerNumber & 0x1f) & 1) != 0)
                 goto LAB_00131f98;
-                iVar11 = *(int *)(*(int *)(param_1 + 0x3c0) + 0x18);
-                *(int *)(iVar10 + iVar11) = *(int *)(iVar10 + iVar11) + 1;
-                iVar10 = *(int *)(iVar4 + iVar10);
+                virtualCountArray = *(int *)(*(int *)(program + 0x3c0) + 0x18);
+                *(int *)(regClassB + virtualCountArray) = *(int *)(regClassB + virtualCountArray) + 1;
+                regClassB = *(int *)(classArrayBytes + regClassB);
               }
               else {
-                iVar10 = iVar10 * 4;
-                in_r8 = uVar9 >> 3 & 0x1ffffffc;
-                if ((*(uint *)(in_r8 + *(int *)(allocation2 + iVar10) + 8) >> (uVar9 & 0x1f) & 1) != 0)
+                regClassB = regClassB * 4;
+                wordOrClassIndex = registerNumber >> 3 & 0x1ffffffc;
+                if ((*(uint *)(wordOrClassIndex + *(int *)(allocation2 + regClassB) + 8) >> (registerNumber & 0x1f) & 1) != 0)
                 goto LAB_00131f98;
-                iVar11 = *(int *)(*(int *)(param_1 + 0x3c0) + 0x14);
-                *(int *)(iVar10 + iVar11) = *(int *)(iVar10 + iVar11) + 1;
-                iVar10 = *(int *)(allocation2 + iVar10);
+                physicalCountArray = *(int *)(*(int *)(program + 0x3c0) + 0x14);
+                *(int *)(regClassB + physicalCountArray) = *(int *)(regClassB + physicalCountArray) + 1;
+                regClassB = *(int *)(allocation2 + regClassB);
               }
-              in_r10 = (int *)(1 << (uVar9 & 0x1f) | *(uint *)(in_r8 + iVar10 + 8));
-              *(int **)(in_r8 + iVar10 + 8) = in_r10;
-              piVar1 = (int *)piVar13[2];
+              bitsetOrCursor = (int *)(1 << (registerNumber & 0x1f) | *(uint *)(wordOrClassIndex + regClassB + 8));
+              *(int **)(wordOrClassIndex + regClassB + 8) = bitsetOrCursor;
+              instNextA = (int *)instC[2];
             }
           }
-          piVar6 = (int *)piVar1[2];
-          piVar13 = piVar1;
-        } while ((int *)piVar1[2] != (int *)0x0);
-        iVar10 = *(int *)(iVar12 + 8);
+          instAfter = (int *)instNextA[2];
+          instC = instNextA;
+        } while ((int *)instNextA[2] != (int *)0x0);
+        nextBlockC = *(int *)(blockCursor + 8);
       }
-      iVar11 = *(int *)(iVar10 + 8);
-      iVar12 = iVar10;
-    } while (*(int *)(iVar10 + 8) != 0);
-    iVar10 = *(int *)(param_1 + 8);
+      nextBlockB = *(int *)(nextBlockC + 8);
+      blockCursor = nextBlockC;
+    } while (*(int *)(nextBlockC + 8) != 0);
+    compilerC = *(int *)(program + 8);
   }
-  iVar12 = *(int *)(*(int *)(iVar10 + 0x30c) + 0x14);
-  iVar11 = iVar12 + -1;
-  if (-1 < iVar11) {
-    iVar11 = iVar11 * 4;
-    iVar10 = 0;
-    piVar13 = (int *)(allocation2 + iVar11);
-    piVar6 = (int *)(iVar4 + iVar11);
+  classCount = *(int *)(*(int *)(compilerC + 0x30c) + 0x14);
+  lastClassOffset = classCount + -1;
+  if (-1 < lastClassOffset) {
+    lastClassOffset = lastClassOffset * 4;
+    classIndexCounter = 0;
+    physicalSetCursor = (int *)(allocation2 + lastClassOffset);
+    virtualSetCursor = (int *)(classArrayBytes + lastClassOffset);
     do {
-      iVar11 = *piVar6;
-      if (iVar11 != 0) {
-        Arena__free(*(undefined4 *)(iVar11 + -4),iVar11 + -4);
+      virtualSetA = *virtualSetCursor;
+      if (virtualSetA != 0) {
+        Arena__free(*(undefined4 *)(virtualSetA + -4),virtualSetA + -4);
       }
-      iVar11 = *piVar13;
-      if (iVar11 != 0) {
-        Arena__free(*(undefined4 *)(iVar11 + -4),iVar11 + -4);
+      physicalSetA = *physicalSetCursor;
+      if (physicalSetA != 0) {
+        Arena__free(*(undefined4 *)(physicalSetA + -4),physicalSetA + -4);
       }
-      iVar10 = iVar10 + 1;
-      piVar6 = piVar6 + -1;
-      piVar13 = piVar13 + -1;
-    } while (iVar12 != iVar10);
-    iVar10 = *(int *)(param_1 + 8);
+      classIndexCounter = classIndexCounter + 1;
+      virtualSetCursor = virtualSetCursor + -1;
+      physicalSetCursor = physicalSetCursor + -1;
+    } while (classCount != classIndexCounter);
+    compilerC = *(int *)(program + 8);
   }
-  Arena__free(*(undefined4 *)(iVar10 + 0x378),iVar4);
-  Arena__free(*(undefined4 *)(*(int *)(param_1 + 8) + 0x378),allocation2);
-  iVar4 = *(int *)(*(int *)(*(int *)(param_1 + 8) + 0x30c) + 0x14) << 2;
-  piVar6 = (int *)Arena__alloc(*(undefined4 *)(*(int *)(param_1 + 8) + 0x378),iVar4);
-  *piVar6 = 0;
-  iVar3 = *(int *)(param_1 + 8);
-  if (1 < *(int *)(*(int *)(iVar3 + 0x30c) + 0x14)) {
-    in_r8 = 1;
-    in_r10 = piVar6;
+  Arena__free(*(undefined4 *)(compilerC + 0x378),classArrayBytes);
+  Arena__free(*(undefined4 *)(*(int *)(program + 8) + 0x378),allocation2);
+  classArrayBytes = *(int *)(*(int *)(*(int *)(program + 8) + 0x30c) + 0x14) << 2;
+  classBaseOffsets = (int *)Arena__alloc(*(undefined4 *)(*(int *)(program + 8) + 0x378),classArrayBytes);
+  *classBaseOffsets = 0;
+  compilerB = *(int *)(program + 8);
+  if (1 < *(int *)(*(int *)(compilerB + 0x30c) + 0x14)) {
+    wordOrClassIndex = 1;
+    bitsetOrCursor = classBaseOffsets;
     do {
-      iVar3 = in_r8 * 4;
-      iVar10 = *in_r10;
-      in_r8 = in_r8 + 1;
-      in_r10 = in_r10 + 1;
-      *in_r10 = iVar10 + *(int *)(iVar3 + *(int *)(*(int *)(param_1 + 0x3c0) + 0x14) + -4);
-      iVar3 = *(int *)(param_1 + 8);
-    } while ((int)in_r8 < *(int *)(*(int *)(iVar3 + 0x30c) + 0x14));
+      classOffset = wordOrClassIndex * 4;
+      prefixPrevious = *bitsetOrCursor;
+      wordOrClassIndex = wordOrClassIndex + 1;
+      bitsetOrCursor = bitsetOrCursor + 1;
+      *bitsetOrCursor = prefixPrevious + *(int *)(classOffset + *(int *)(*(int *)(program + 0x3c0) + 0x14) + -4);
+      compilerB = *(int *)(program + 8);
+    } while ((int)wordOrClassIndex < *(int *)(*(int *)(compilerB + 0x30c) + 0x14));
   }
-  puVar8 = (undefined4 *)Arena__alloc(*(undefined4 *)(iVar3 + 0x378),iVar4);
-  iVar4 = *(int *)(param_1 + 8);
-  if (0 < *(int *)(*(int *)(iVar4 + 0x30c) + 0x14)) {
-    in_r10 = (int *)0x0;
-    in_r8 = 0;
-    puVar7 = puVar8;
+  classNextVirtual = (undefined4 *)Arena__alloc(*(undefined4 *)(compilerB + 0x378),classArrayBytes);
+  compiler = *(int *)(program + 8);
+  if (0 < *(int *)(*(int *)(compiler + 0x30c) + 0x14)) {
+    bitsetOrCursor = (int *)0x0;
+    wordOrClassIndex = 0;
+    zeroCursor = classNextVirtual;
     do {
-      *puVar7 = 0;
-      in_r10 = (int *)((int)in_r10 + 1);
-      iVar4 = *(int *)(param_1 + 8);
-      puVar7 = puVar7 + 1;
-    } while ((int)in_r10 < *(int *)(*(int *)(iVar4 + 0x30c) + 0x14));
+      *zeroCursor = 0;
+      bitsetOrCursor = (int *)((int)bitsetOrCursor + 1);
+      compiler = *(int *)(program + 8);
+      zeroCursor = zeroCursor + 1;
+    } while ((int)bitsetOrCursor < *(int *)(*(int *)(compiler + 0x30c) + 0x14));
   }
-  iVar3 = *(int *)(*(int *)(param_1 + 900) + 8);
-  iVar10 = *(int *)(param_1 + 900);
-  if (iVar3 != 0) {
+  nextBlock = *(int *)(*(int *)(program + 900) + 8);
+  blockCursorC = *(int *)(program + 900);
+  if (nextBlock != 0) {
     do {
-      iVar4 = iVar3;
-      piVar13 = (int *)(*(int **)(iVar10 + 0x98))[2];
-      piVar1 = *(int **)(iVar10 + 0x98);
-      if (piVar13 != (int *)0x0) {
+      blockCursorB = nextBlock;
+      instNextC = (int *)(*(int **)(blockCursorC + 0x98))[2];
+      inst = *(int **)(blockCursorC + 0x98);
+      if (instNextC != (int *)0x0) {
         do {
-          piVar2 = piVar13;
-          if (((piVar1[5] & 1U) != 0) && (piVar1[0x20] != 0)) {
-            iVar4 = RegKind__flagBit0(piVar1[0x26]);
-            if ((iVar4 == 0) ||
-               (((piVar1[5] & 2U) != 0 ||
-                (iVar4 = (**(code **)(*piVar1 + 0x50))(piVar1), iVar4 != 0)))) {
-              piVar2 = (int *)piVar1[2];
+          instNextB = instNextC;
+          if (((inst[5] & 1U) != 0) && (inst[0x20] != 0)) {
+            regKindFlag = RegKind__flagBit0(inst[0x26]);
+            if ((regKindFlag == 0) ||
+               (((inst[5] & 2U) != 0 ||
+                (regKindFlag = (**(code **)(*inst + 0x50))(inst), regKindFlag != 0)))) {
+              instNextB = (int *)inst[2];
             }
             else {
-              iVar4 = FUN_00130bfc(param_1,piVar1);
-              if ((piVar1[5] & 0x40U) == 0) {
-                if (param_5 == 0) {
-                  iVar3 = param_3 + piVar1[0x25];
+              regClass = FUN_00130bfc(program,inst);
+              if ((inst[5] & 0x40U) == 0) {
+                if (virtualIdsAlreadyOffset == 0) {
+                  newRegister = physicalRegCount + inst[0x25];
                 }
                 else {
-                  iVar3 = piVar1[0x25];
+                  newRegister = inst[0x25];
                 }
-                iVar11 = iVar3 * 4;
-                *(undefined4 *)(*(int *)(param_1 + 0x458) + iVar11) = 0xffffffff;
+                newRegByteOffset = newRegister * 4;
+                *(undefined4 *)(*(int *)(program + 0x458) + newRegByteOffset) = 0xffffffff;
               }
               else {
-                in_r10 = (int *)piVar1[0x25];
-                iVar11 = *(int *)(param_1 + 0x460);
-                iVar3 = (int)in_r10 * 4;
-                if (*(int *)(iVar3 + iVar11) == -1) {
-                  *(undefined4 *)(iVar3 + iVar11) = puVar8[iVar4];
-                  puVar8[iVar4] = puVar8[iVar4] + 1;
-                  iVar11 = *(int *)(param_1 + 0x460);
+                bitsetOrCursor = (int *)inst[0x25];
+                virtualMapBase = *(int *)(program + 0x460);
+                newRegister = (int)bitsetOrCursor * 4;
+                if (*(int *)(newRegister + virtualMapBase) == -1) {
+                  *(undefined4 *)(newRegister + virtualMapBase) = classNextVirtual[regClass];
+                  classNextVirtual[regClass] = classNextVirtual[regClass] + 1;
+                  virtualMapBase = *(int *)(program + 0x460);
                 }
-                iVar3 = *(int *)(iVar3 + iVar11) + piVar6[iVar4];
-                iVar11 = iVar3 * 4;
-                *(int **)(*(int *)(param_1 + 0x458) + iVar11) = in_r10;
+                newRegister = *(int *)(newRegister + virtualMapBase) + classBaseOffsets[regClass];
+                newRegByteOffset = newRegister * 4;
+                *(int **)(*(int *)(program + 0x458) + newRegByteOffset) = bitsetOrCursor;
               }
-              operandRecord = IRInst__getOperandRecord(piVar1,0);
-              *(int *)(operandRecord + 8) = iVar3;
-              *(int *)(*(int *)(param_1 + 0x45c) + iVar11) = iVar4;
-              piVar2 = (int *)piVar1[2];
+              operandRecord = IRInst__getOperandRecord(inst,0);
+              *(int *)(operandRecord + 8) = newRegister;
+              *(int *)(*(int *)(program + 0x45c) + newRegByteOffset) = regClass;
+              instNextB = (int *)inst[2];
             }
           }
-          piVar13 = (int *)piVar2[2];
-          piVar1 = piVar2;
-        } while ((int *)piVar2[2] != (int *)0x0);
-        iVar4 = *(int *)(iVar10 + 8);
+          instNextC = (int *)instNextB[2];
+          inst = instNextB;
+        } while ((int *)instNextB[2] != (int *)0x0);
+        blockCursorB = *(int *)(blockCursorC + 8);
       }
-      iVar3 = *(int *)(iVar4 + 8);
-      iVar10 = iVar4;
-    } while (*(int *)(iVar4 + 8) != 0);
-    iVar4 = *(int *)(param_1 + 8);
+      nextBlock = *(int *)(blockCursorB + 8);
+      blockCursorC = blockCursorB;
+    } while (*(int *)(blockCursorB + 8) != 0);
+    compiler = *(int *)(program + 8);
   }
-  uVar5 = 0;
-  *(undefined4 *)(param_1 + 0x34) = 4;
-  Arena__free(*(undefined4 *)(iVar4 + 0x378),piVar6);
-  return Compiler__logf(*(undefined4 *)(param_1 + 8),
-               "Register puVar7 : Repartition -> %d physical + %d virtual = %d regs\n",param_3,
-               param_2,param_4,in_r8,uVar5,in_r10);
+  logTrailingArg = 0;
+  *(undefined4 *)(program + 0x34) = 4;
+  Arena__free(*(undefined4 *)(compiler + 0x378),classBaseOffsets);
+  return Compiler__logf(*(undefined4 *)(program + 8),
+               "Register puVar7 : Repartition -> %d physical + %d virtual = %d regs\n",physicalRegCount,
+               virtualRegCount,totalRegCount,wordOrClassIndex,logTrailingArg,bitsetOrCursor);
 }
 
 /* HwLimits__buildInterferenceGraph @ 0x1322a8 (416 bytes) */

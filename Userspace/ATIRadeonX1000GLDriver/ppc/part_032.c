@@ -2103,237 +2103,256 @@ LAB_00112378:
 }
 
 /* KhanVs__vslot88_assignOutputBindings @ 0x1128a0 (1640 bytes) */
-int KhanVs__vslot88_assignOutputBindings(this, param_2)
+int KhanVs__vslot88_assignOutputBindings(this, program)
   int *this;
-  int param_2;
+  int program;
 {
+  uint *exportVector;
+  code *bindGroupFn;
+  uint slotMask;
+  uint exportIndex;
+  uint scanIndex;
+  undefined4 interpolatorCode;
+  uint nextExportIndex;
+  int *exportRecordRef;
+  undefined4 semanticCode;
+  undefined4 semanticWord;
+  undefined4 kind7LaneIndex;
+  int outputRecord;
+  int slotBase;
+  int byteOffset;
+  int fixedLayout;
+  uint recordCountB;
+  uint outputSlot;
+  int interpolatorKind;
+  int bindingKindB;
   int exportPackingEnabled;
   uint loopIndex;
-  int iVar1;
-  undefined4 uVar2;
-  undefined4 *puVar3;
-  undefined4 uVar4;
-  uint uVar5;
-  int iVar6;
-  int *piVar7;
-  int *piVar8;
-  uint uVar9;
-  undefined4 uVar10;
-  int *piVar11;
-  uint uVar12;
-  uint uVar13;
-  code *pcVar14;
-  int *piVar15;
-  uint *puVar16;
-  int *piVar17;
-  int iVar18;
-  int local_58;
-  undefined1 auStack_54 [4];
-  undefined4 auStack_50 [10];
+  int instQuery68;
+  undefined4 kind6LaneIndex;
+  undefined4 *outputRecordRef;
+  undefined4 defaultLaneMask;
+  uint recordCountA;
+  int bindingKind;
+  int *nextInstInList;
+  int *nextInst;
+  uint recordCapacity;
+  undefined4 compiler;
+  int *outputKind7Inst;
+  uint nextIndex;
+  uint recordCount;
+  code *bindOutputFn;
+  int *inst;
+  uint *kind2Vector;
+  int *outputKind6Inst;
+  int recordInst;
+  int nextSlot;
+  undefined1 slotFlagBytes [4];
+  undefined4 slotValueWords [10];
   
-  piVar15 = *(int **)(*(int *)(param_2 + 0x3a8) + 0x98);
-  piVar7 = (int *)piVar15[2];
-  if (piVar7 == (int *)0x0) {
-    piVar17 = (int *)0x0;
-    piVar11 = (int *)0x0;
+  inst = *(int **)(*(int *)(program + 0x3a8) + 0x98);
+  nextInstInList = (int *)inst[2];
+  if (nextInstInList == (int *)0x0) {
+    outputKind6Inst = (int *)0x0;
+    outputKind7Inst = (int *)0x0;
   }
   else {
-    piVar17 = (int *)0x0;
-    piVar11 = (int *)0x0;
+    outputKind6Inst = (int *)0x0;
+    outputKind7Inst = (int *)0x0;
     do {
-      piVar8 = piVar7;
-      if ((piVar15[5] & 1U) != 0) {
-        iVar1 = (**(code **)(*piVar15 + 0x68))(piVar15);
-        if (iVar1 == 0) {
+      nextInst = nextInstInList;
+      if ((inst[5] & 1U) != 0) {
+        instQuery68 = (**(code **)(*inst + 0x68))(inst);
+        if (instQuery68 == 0) {
 LAB_0011293c:
-          piVar8 = (int *)piVar15[2];
+          nextInst = (int *)inst[2];
         }
-        else if (piVar15[0x4f] == 6) {
-          piVar8 = (int *)piVar15[2];
-          piVar17 = piVar15;
+        else if (inst[0x4f] == 6) {
+          nextInst = (int *)inst[2];
+          outputKind6Inst = inst;
         }
         else {
-          if (piVar15[0x4f] != 7) goto LAB_0011293c;
-          piVar8 = (int *)piVar15[2];
-          piVar11 = piVar15;
+          if (inst[0x4f] != 7) goto LAB_0011293c;
+          nextInst = (int *)inst[2];
+          outputKind7Inst = inst;
         }
       }
-      piVar7 = (int *)piVar8[2];
-      piVar15 = piVar8;
-    } while ((int *)piVar8[2] != (int *)0x0);
+      nextInstInList = (int *)nextInst[2];
+      inst = nextInst;
+    } while ((int *)nextInst[2] != (int *)0x0);
   }
-  local_58 = 0;
-  uVar10 = *(undefined4 *)(param_2 + 8);
-  if (piVar17 != (int *)0x0) {
-    piVar17[0x25] = 0;
-    piVar17[0x26] = 5;
-    local_58 = 1;
-    pcVar14 = *(code **)(*this + 0x54);
-    uVar2 = IRLoadInterp__laneIndex_104180(piVar17,0);
-    uVar4 = DAT_001afa0c;
-    IRLoadInterp__laneIndex_104180(piVar17,0);
-    (*pcVar14)(this,0,0,uVar2,uVar4,0,0,0);
+  nextSlot = 0;
+  compiler = *(undefined4 *)(program + 8);
+  if (outputKind6Inst != (int *)0x0) {
+    outputKind6Inst[0x25] = 0;
+    outputKind6Inst[0x26] = 5;
+    nextSlot = 1;
+    bindOutputFn = *(code **)(*this + 0x54);
+    kind6LaneIndex = IRLoadInterp__laneIndex_104180(outputKind6Inst,0);
+    defaultLaneMask = DAT_001afa0c;
+    IRLoadInterp__laneIndex_104180(outputKind6Inst,0);
+    (*bindOutputFn)(this,0,0,kind6LaneIndex,defaultLaneMask,0,0,0);
   }
-  if (piVar11 != (int *)0x0) {
-    piVar11[0x25] = 1;
-    piVar11[0x26] = 5;
-    local_58 = local_58 + 1;
-    pcVar14 = *(code **)(*this + 0x54);
-    uVar2 = IRLoadInterp__laneIndex_104180(piVar11,0);
-    uVar4 = DAT_001afa0c;
-    IRLoadInterp__laneIndex_104180(piVar11,0);
-    (*pcVar14)(this,1,1,uVar2,uVar4,0,0,0);
+  if (outputKind7Inst != (int *)0x0) {
+    outputKind7Inst[0x25] = 1;
+    outputKind7Inst[0x26] = 5;
+    nextSlot = nextSlot + 1;
+    bindOutputFn = *(code **)(*this + 0x54);
+    kind7LaneIndex = IRLoadInterp__laneIndex_104180(outputKind7Inst,0);
+    defaultLaneMask = DAT_001afa0c;
+    IRLoadInterp__laneIndex_104180(outputKind7Inst,0);
+    (*bindOutputFn)(this,1,1,kind7LaneIndex,defaultLaneMask,0,0,0);
   }
-  iVar1 = FUN_0010f4d4(param_2);
-  *(int *)(param_2 + 0x3e4) = iVar1;
-  if (iVar1 == 0) {
-    Vector__shellSort(*(undefined4 *)(param_2 + 0x420),FUN_0010e870);
-    puVar16 = *(uint **)(param_2 + 0x420);
-    uVar13 = puVar16[1];
-    if (uVar13 != 0) {
+  fixedLayout = FUN_0010f4d4(program);
+  *(int *)(program + 0x3e4) = fixedLayout;
+  if (fixedLayout == 0) {
+    Vector__shellSort(*(undefined4 *)(program + 0x420),FUN_0010e870);
+    kind2Vector = *(uint **)(program + 0x420);
+    recordCount = kind2Vector[1];
+    if (recordCount != 0) {
       loopIndex = 0;
-      uVar12 = 1;
-      iVar1 = 0;
+      nextIndex = 1;
+      byteOffset = 0;
       do {
-        uVar9 = *puVar16;
-        if (loopIndex < uVar9) {
-          if (uVar13 <= loopIndex) {
-            _memset(uVar13 * 4 + puVar16[2],0,(loopIndex - uVar13) * 4 + 4);
-            uVar9 = *puVar16;
-            puVar16[1] = uVar12;
+        recordCapacity = *kind2Vector;
+        if (loopIndex < recordCapacity) {
+          if (recordCount <= loopIndex) {
+            _memset(recordCount * 4 + kind2Vector[2],0,(loopIndex - recordCount) * 4 + 4);
+            recordCapacity = *kind2Vector;
+            kind2Vector[1] = nextIndex;
           }
-          puVar3 = (undefined4 *)(iVar1 + puVar16[2]);
+          outputRecordRef = (undefined4 *)(byteOffset + kind2Vector[2]);
         }
         else {
-          puVar3 = (undefined4 *)Vector__elementRefGrow(puVar16,loopIndex);
-          uVar9 = *puVar16;
+          outputRecordRef = (undefined4 *)Vector__elementRefGrow(kind2Vector,loopIndex);
+          recordCapacity = *kind2Vector;
         }
-        uVar4 = *(undefined4 *)(*(int *)*puVar3 + 0x13c);
-        if (loopIndex < uVar9) {
-          uVar13 = puVar16[1];
-          if (uVar13 <= loopIndex) {
-            _memset(uVar13 * 4 + puVar16[2],0,(loopIndex - uVar13) * 4 + 4);
-            puVar16[1] = uVar12;
+        semanticWord = *(undefined4 *)(*(int *)*outputRecordRef + 0x13c);
+        if (loopIndex < recordCapacity) {
+          recordCount = kind2Vector[1];
+          if (recordCount <= loopIndex) {
+            _memset(recordCount * 4 + kind2Vector[2],0,(loopIndex - recordCount) * 4 + 4);
+            kind2Vector[1] = nextIndex;
           }
-          puVar3 = (undefined4 *)(iVar1 + puVar16[2]);
+          outputRecordRef = (undefined4 *)(byteOffset + kind2Vector[2]);
         }
         else {
-          puVar3 = (undefined4 *)Vector__elementRefGrow(puVar16,loopIndex);
+          outputRecordRef = (undefined4 *)Vector__elementRefGrow(kind2Vector,loopIndex);
         }
-        iVar6 = FUN_0010e40c(uVar4,*(undefined4 *)(*(int *)*puVar3 + 0x140));
-        if (iVar6 - 2U < 2) {
-          exportPackingEnabled = Compiler__isOptionEnabled(uVar10,0x3f);
-          iVar1 = local_58;
+        bindingKind = FUN_0010e40c(semanticWord,*(undefined4 *)(*(int *)*outputRecordRef + 0x140));
+        if (bindingKind - 2U < 2) {
+          exportPackingEnabled = Compiler__isOptionEnabled(compiler,0x3f);
+          slotBase = nextSlot;
           if (exportPackingEnabled == 0) {
-            puVar16 = *(uint **)(param_2 + 0x420);
-            local_58 = local_58 + 4;
-            uVar13 = puVar16[1];
-            if (uVar13 != 0) {
-              uVar12 = 0;
+            kind2Vector = *(uint **)(program + 0x420);
+            nextSlot = nextSlot + 4;
+            recordCount = kind2Vector[1];
+            if (recordCount != 0) {
+              scanIndex = 0;
               do {
-                if (uVar12 < *puVar16) {
-                  if (uVar13 <= uVar12) {
-                    _memset(uVar13 * 4 + puVar16[2],0,(uVar12 - uVar13) * 4 + 4);
-                    puVar16[1] = uVar12 + 1;
+                if (scanIndex < *kind2Vector) {
+                  if (recordCount <= scanIndex) {
+                    _memset(recordCount * 4 + kind2Vector[2],0,(scanIndex - recordCount) * 4 + 4);
+                    kind2Vector[1] = scanIndex + 1;
                   }
-                  puVar3 = (undefined4 *)(uVar12 * 4 + puVar16[2]);
+                  outputRecordRef = (undefined4 *)(scanIndex * 4 + kind2Vector[2]);
                 }
                 else {
-                  puVar3 = (undefined4 *)Vector__elementRefGrow(puVar16,uVar12);
+                  outputRecordRef = (undefined4 *)Vector__elementRefGrow(kind2Vector,scanIndex);
                 }
-                uVar12 = uVar12 + 1;
-                iVar18 = *(int *)*puVar3;
-                iVar6 = FUN_0010e40c(*(undefined4 *)(iVar18 + 0x13c),*(undefined4 *)(iVar18 + 0x140)
+                scanIndex = scanIndex + 1;
+                recordInst = *(int *)*outputRecordRef;
+                bindingKindB = FUN_0010e40c(*(undefined4 *)(recordInst + 0x13c),*(undefined4 *)(recordInst + 0x140)
                                     );
-                if (iVar6 < 4) {
-                  *(undefined4 *)(iVar18 + 0x98) = 5;
-                  *(int *)(iVar18 + 0x94) = iVar1 + iVar6;
+                if (bindingKindB < 4) {
+                  *(undefined4 *)(recordInst + 0x98) = 5;
+                  *(int *)(recordInst + 0x94) = slotBase + bindingKindB;
                 }
                 else {
-                  *(int *)(iVar18 + 0x94) = local_58;
-                  *(undefined4 *)(iVar18 + 0x98) = 5;
-                  local_58 = local_58 + 1;
+                  *(int *)(recordInst + 0x94) = nextSlot;
+                  *(undefined4 *)(recordInst + 0x98) = 5;
+                  nextSlot = nextSlot + 1;
                 }
-                puVar16 = *(uint **)(param_2 + 0x420);
-                uVar13 = puVar16[1];
-              } while (uVar12 < uVar13);
+                kind2Vector = *(uint **)(program + 0x420);
+                recordCount = kind2Vector[1];
+              } while (scanIndex < recordCount);
             }
           }
           else {
-            ((int (*)())FUN_0010fb54)(*(undefined4 *)(param_2 + 0x420),&local_58,param_2);
+            ((int (*)())FUN_0010fb54)(*(undefined4 *)(program + 0x420),&nextSlot,program);
           }
           goto LAB_00112c28;
         }
-        uVar13 = puVar16[1];
+        recordCount = kind2Vector[1];
         loopIndex = loopIndex + 1;
-        uVar12 = uVar12 + 1;
-        iVar1 = iVar1 + 4;
-      } while (loopIndex < uVar13);
-      puVar16 = *(uint **)(param_2 + 0x420);
+        nextIndex = nextIndex + 1;
+        byteOffset = byteOffset + 4;
+      } while (loopIndex < recordCount);
+      kind2Vector = *(uint **)(program + 0x420);
     }
-    ((int (*)())FUN_0010fd98)(2,puVar16,&local_58,param_2);
+    ((int (*)())FUN_0010fd98)(2,kind2Vector,&nextSlot,program);
 LAB_00112c28:
-    ((int (*)())FUN_0010fd98)(3,*(undefined4 *)(param_2 + 0x424),&local_58,param_2);
-    Vector__shellSort(*(undefined4 *)(param_2 + 0x41c),FUN_0010e8c4);
-    ((int (*)())FUN_0010fd98)(1,*(undefined4 *)(param_2 + 0x41c),&local_58,param_2);
+    ((int (*)())FUN_0010fd98)(3,*(undefined4 *)(program + 0x424),&nextSlot,program);
+    Vector__shellSort(*(undefined4 *)(program + 0x41c),FUN_0010e8c4);
+    ((int (*)())FUN_0010fd98)(1,*(undefined4 *)(program + 0x41c),&nextSlot,program);
   }
   else {
-    *(int *)(param_2 + 0x3f0) = local_58 - *(int *)(param_2 + 1000);
-    ((int (*)())FUN_0010fc88)(2,*(undefined4 *)(param_2 + 0x420),&local_58,param_2);
-    ((int (*)())FUN_0010fc88)(3,*(undefined4 *)(param_2 + 0x424),&local_58,param_2);
-    ((int (*)())FUN_0010fc88)(1,*(undefined4 *)(param_2 + 0x41c),&local_58,param_2);
+    *(int *)(program + 0x3f0) = nextSlot - *(int *)(program + 1000);
+    ((int (*)())FUN_0010fc88)(2,*(undefined4 *)(program + 0x420),&nextSlot,program);
+    ((int (*)())FUN_0010fc88)(3,*(undefined4 *)(program + 0x424),&nextSlot,program);
+    ((int (*)())FUN_0010fc88)(1,*(undefined4 *)(program + 0x41c),&nextSlot,program);
   }
-  *(int *)(param_2 + 0x234) = local_58 + 1;
-  uVar13 = 0;
-  uVar12 = 0;
+  *(int *)(program + 0x234) = nextSlot + 1;
+  slotMask = 0;
+  exportIndex = 0;
 LAB_00112ec4:
-  puVar16 = *(uint **)(param_2 + 0x418);
-  uVar5 = puVar16[1];
-  if (uVar5 <= uVar12) {
+  exportVector = *(uint **)(program + 0x418);
+  recordCountA = exportVector[1];
+  if (recordCountA <= exportIndex) {
     return;
   }
-  if (uVar12 < *puVar16) {
-    if (uVar5 <= uVar12) {
-      _memset(uVar5 * 4 + puVar16[2],0,(uVar12 - uVar5) * 4 + 4);
-      puVar16[1] = uVar12 + 1;
+  if (exportIndex < *exportVector) {
+    if (recordCountA <= exportIndex) {
+      _memset(recordCountA * 4 + exportVector[2],0,(exportIndex - recordCountA) * 4 + 4);
+      exportVector[1] = exportIndex + 1;
     }
-    piVar7 = (int *)(uVar12 * 4 + puVar16[2]);
+    exportRecordRef = (int *)(exportIndex * 4 + exportVector[2]);
   }
   else {
-    piVar7 = (int *)Vector__elementRefGrow(puVar16,uVar12);
+    exportRecordRef = (int *)Vector__elementRefGrow(exportVector,exportIndex);
   }
-  uVar9 = uVar12 + 1;
-  iVar1 = *piVar7;
-  uVar5 = *(uint *)(iVar1 + 0x10);
-  auStack_50[uVar5] = *(undefined4 *)(iVar1 + 0x14);
-  auStack_54[*(int *)(iVar1 + 0x10)] = (char)*(undefined4 *)(iVar1 + 0x18);
-  puVar16 = *(uint **)(param_2 + 0x418);
-  uVar13 = uVar13 | 1 << (uVar5 & 0x3f);
-  uVar5 = puVar16[1];
-  if (uVar5 != uVar9) goto code_r0x00112df4;
-  iVar6 = *(int *)(iVar1 + 4);
+  nextExportIndex = exportIndex + 1;
+  outputRecord = *exportRecordRef;
+  outputSlot = *(uint *)(outputRecord + 0x10);
+  slotValueWords[outputSlot] = *(undefined4 *)(outputRecord + 0x14);
+  slotFlagBytes[*(int *)(outputRecord + 0x10)] = (char)*(undefined4 *)(outputRecord + 0x18);
+  exportVector = *(uint **)(program + 0x418);
+  slotMask = slotMask | 1 << (outputSlot & 0x3f);
+  recordCountB = exportVector[1];
+  if (recordCountB != nextExportIndex) goto code_r0x00112df4;
+  interpolatorKind = *(int *)(outputRecord + 4);
   goto LAB_00112e78;
 code_r0x00112df4:
-  if (uVar9 < *puVar16) {
-    if (uVar5 <= uVar9) {
-      _memset(uVar5 * 4 + puVar16[2],0,(uVar9 - uVar5) * 4 + 4);
-      puVar16[1] = uVar12 + 2;
+  if (nextExportIndex < *exportVector) {
+    if (recordCountB <= nextExportIndex) {
+      _memset(recordCountB * 4 + exportVector[2],0,(nextExportIndex - recordCountB) * 4 + 4);
+      exportVector[1] = exportIndex + 2;
     }
-    piVar7 = (int *)(uVar9 * 4 + puVar16[2]);
+    exportRecordRef = (int *)(nextExportIndex * 4 + exportVector[2]);
   }
   else {
-    piVar7 = (int *)Vector__elementRefGrow(puVar16,uVar9);
+    exportRecordRef = (int *)Vector__elementRefGrow(exportVector,nextExportIndex);
   }
-  iVar6 = *(int *)(iVar1 + 4);
-  if ((iVar6 != *(int *)(*piVar7 + 4)) ||
-     (uVar12 = uVar9, *(int *)(iVar1 + 8) != *(int *)(*piVar7 + 8))) {
+  interpolatorKind = *(int *)(outputRecord + 4);
+  if ((interpolatorKind != *(int *)(*exportRecordRef + 4)) ||
+     (exportIndex = nextExportIndex, *(int *)(outputRecord + 8) != *(int *)(*exportRecordRef + 8))) {
 LAB_00112e78:
-    pcVar14 = *(code **)(*this + 0x58);
-    uVar10 = Table__interpolatorKindToCode(param_2,iVar6);
-    uVar4 = FUN_0010e530(*(undefined4 *)(iVar1 + 4),*(undefined4 *)(iVar1 + 8));
-    (*pcVar14)(this,auStack_50,auStack_54,uVar10,uVar4,uVar13);
-    uVar13 = 0;
-    uVar12 = uVar9;
+    bindGroupFn = *(code **)(*this + 0x58);
+    interpolatorCode = Table__interpolatorKindToCode(program,interpolatorKind);
+    semanticCode = FUN_0010e530(*(undefined4 *)(outputRecord + 4),*(undefined4 *)(outputRecord + 8));
+    (*bindGroupFn)(this,slotValueWords,slotFlagBytes,interpolatorCode,semanticCode,slotMask);
+    slotMask = 0;
+    exportIndex = nextExportIndex;
   }
   goto LAB_00112ec4;
 }
