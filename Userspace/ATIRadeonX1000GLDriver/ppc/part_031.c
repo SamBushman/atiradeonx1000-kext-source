@@ -282,11 +282,28 @@ LAB_0010c648:
 }
 
 /* FUN_0010c670 @ 0x10c670 (1240 bytes) */
-int FUN_0010c670(inst, inst2, param_3)
+int FUN_0010c670(inst, inst2, pass)
   int inst;
   int *inst2;
-  int param_3;
+  int pass;
 {
+  double constantValueB;
+  uint savedLaneSelectByte;
+  uint candidateLaneByteB;
+  bool moreLanesB;
+  int laneIndexB;
+  int laneIndex;
+  int foundOperandNumberB;
+  int shiftSourceNumber;
+  int foundOperandNumberA;
+  int insertedOperandNumberB;
+  int foundSlotB;
+  int targetOperandCount;
+  int insertedOperandNumber;
+  int foundSlotA;
+  int sourceOperandNumber;
+  undefined8 allHwConstantsResult;
+  undefined4 rebuiltSwizzle;
   undefined4 sourceDef3;
   undefined8 sourceDef2;
   int operandRecord3;
@@ -296,132 +313,132 @@ int FUN_0010c670(inst, inst2, param_3)
   int operandRecord2;
   int loopIndex2;
   int loopIndex;
-  bool bVar1;
-  int *a0;
-  int iVar2;
-  int *piVar3;
+  bool moreLanes;
+  int *sourceInst;
+  int sourceIsCopyBarrier;
+  int *clonedSourceDef;
   int iVar4;
   int operandRecord;
-  undefined4 uVar6;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
-  undefined4 in_r9;
-  int iVar7;
-  int iVar8;
-  uint uVar9;
-  uint uVar10;
-  double dVar11;
+  undefined4 sourceSwizzleWord;
+  undefined4 staleArg6;
+  undefined4 staleArg7;
+  undefined4 staleArg8;
+  undefined4 staleArg9;
+  int inputBasePlusOne;
+  int inputBase;
+  uint candidateLaneByte;
+  uint laneSelectByte;
+  double constantValueA;
   undefined8 uVar12;
-  undefined4 local_48;
-  int local_44 [6];
+  undefined4 swizzleWord;
+  int foundSlotOut [6];
   
-  a0 = (int *)IRInst__getOperandSource(inst,1);
+  sourceInst = (int *)IRInst__getOperandSource(inst,1);
   operandRecord2 = IRInst__getOperandRecord(inst,1);
-  uVar6 = *(undefined4 *)(operandRecord2 + 0x10);
-  uVar12 = IRInst__allSelectsAreHwConstants(a0,param_3,uVar6,in_r6,in_r7,in_r8,in_r9);
-  if ((int)((ulonglong)uVar12 >> 0x20) == 0) {
-    iVar8 = *(int *)(*(int *)(param_3 + 0x6c4) + 0x478);
-    iVar2 = (**(code **)(*a0 + 0x5c))
-                      (a0,(int)uVar12,uVar6,in_r6,in_r7,in_r8,*(int *)(param_3 + 0x6c4));
-    if (iVar2 == 0) {
-      if (iVar8 < a0[0x58]) {
-        a0[0x58] = a0[0x58] + 1;
+  sourceSwizzleWord = *(undefined4 *)(operandRecord2 + 0x10);
+  allHwConstantsResult = IRInst__allSelectsAreHwConstants(sourceInst,pass,sourceSwizzleWord,staleArg6,staleArg7,staleArg8,staleArg9);
+  if ((int)((ulonglong)allHwConstantsResult >> 0x20) == 0) {
+    inputBase = *(int *)(*(int *)(pass + 0x6c4) + 0x478);
+    sourceIsCopyBarrier = (**(code **)(*sourceInst + 0x5c))
+                      (sourceInst,(int)allHwConstantsResult,sourceSwizzleWord,staleArg6,staleArg7,staleArg8,*(int *)(pass + 0x6c4));
+    if (sourceIsCopyBarrier == 0) {
+      if (inputBase < sourceInst[0x58]) {
+        sourceInst[0x58] = sourceInst[0x58] + 1;
       }
       else {
-        a0[0x58] = iVar8 + 1;
+        sourceInst[0x58] = inputBase + 1;
       }
     }
     else {
-      iVar7 = iVar8 + 1;
-      piVar3 = (int *)IRInst__clone(a0,param_3,0);
-      piVar3[0x26] = 0x31;
-      piVar3[0x25] = piVar3[0x53];
-      Block__insertInstAfter(a0[0x56],a0,piVar3);
-      piVar3[0x58] = iVar7;
-      sourceDef = IRInst__getOperandSource(piVar3,1);
-      if (iVar8 < *(int *)(sourceDef + 0x160)) {
+      inputBasePlusOne = inputBase + 1;
+      clonedSourceDef = (int *)IRInst__clone(sourceInst,pass,0);
+      clonedSourceDef[0x26] = 0x31;
+      clonedSourceDef[0x25] = clonedSourceDef[0x53];
+      Block__insertInstAfter(sourceInst[0x56],sourceInst,clonedSourceDef);
+      clonedSourceDef[0x58] = inputBasePlusOne;
+      sourceDef = IRInst__getOperandSource(clonedSourceDef,1);
+      if (inputBase < *(int *)(sourceDef + 0x160)) {
         *(int *)(sourceDef + 0x160) = *(int *)(sourceDef + 0x160) + 1;
       }
       else {
-        *(int *)(sourceDef + 0x160) = iVar7;
+        *(int *)(sourceDef + 0x160) = inputBasePlusOne;
       }
-      a0 = piVar3;
-      if (1 < piVar3[0x21]) {
-        sourceDef = IRInst__getOperandSource(piVar3,2);
-        if (iVar8 < *(int *)(sourceDef + 0x160)) {
+      sourceInst = clonedSourceDef;
+      if (1 < clonedSourceDef[0x21]) {
+        sourceDef = IRInst__getOperandSource(clonedSourceDef,2);
+        if (inputBase < *(int *)(sourceDef + 0x160)) {
           *(int *)(sourceDef + 0x160) = *(int *)(sourceDef + 0x160) + 1;
         }
         else {
-          *(int *)(sourceDef + 0x160) = iVar7;
+          *(int *)(sourceDef + 0x160) = inputBasePlusOne;
         }
       }
     }
-    IRInst__setOperandSource(inst2,1,a0,0,param_3);
-    if ((*(uint *)(*(int *)(param_3 + 0x6c4) + 0x30) & 8) == 0) {
+    IRInst__setOperandSource(inst2,1,sourceInst,0,pass);
+    if ((*(uint *)(*(int *)(pass + 0x6c4) + 0x30) & 8) == 0) {
       IRInst__setOperandRef(inst2,1,*(undefined4 *)(inst + 0xa4));
     }
     else {
-      IRInst__dropCounterAndDeleteIfUnused(inst,param_3);
+      IRInst__dropCounterAndDeleteIfUnused(inst,pass);
     }
-    iVar2 = 0;
-    local_48 = 0x4040404;
+    laneIndex = 0;
+    swizzleWord = 0x4040404;
     do {
       operandRecord3 = IRInst__getOperandRecord(inst2,1);
-      uVar10 = (uint)*(byte *)(iVar2 + operandRecord3 + 0x10);
-      if (uVar10 != 4) {
+      laneSelectByte = (uint)*(byte *)(laneIndex + operandRecord3 + 0x10);
+      if (laneSelectByte != 4) {
         operandRecord3 = IRInst__getOperandRecord(inst,1);
-        if (*(char *)(uVar10 + operandRecord3 + 0x10) == '\x04') {
+        if (*(char *)(laneSelectByte + operandRecord3 + 0x10) == '\x04') {
           if (1 < *(int *)(inst + 0x84)) {
-            iVar8 = 2;
+            sourceOperandNumber = 2;
             do {
-              operandRecord5 = IRInst__getOperandRecord(inst,iVar8);
-              uVar9 = (uint)*(byte *)(uVar10 + operandRecord5 + 0x10);
-              if (uVar9 != 4) {
-                sourceDef2 = IRInst__getOperandSource(inst,iVar8);
-                dVar11 = (double)*(float *)(uVar9 * 0x18 + (int)((ulonglong)sourceDef2 >> 0x20) + 0x20);
-                uVar12 = ((int (*)())IRInst__findConstantOperandWithValue)(inst2,(int)sourceDef2,local_44,dVar11);
-                iVar8 = local_44[0];
-                iVar7 = (int)((ulonglong)uVar12 >> 0x20);
-                if (iVar7 == 0) {
-                  iVar8 = inst2[0x21];
-                  ((void (*)())IRInst__setLiteralOperandAndSource)(inst2,(int)uVar12,iVar8 + 1,param_3,dVar11);
-                  (**(code **)(*inst2 + 0x88))(inst2,iVar8 + 1,iVar2,iVar2);
+              operandRecord5 = IRInst__getOperandRecord(inst,sourceOperandNumber);
+              candidateLaneByte = (uint)*(byte *)(laneSelectByte + operandRecord5 + 0x10);
+              if (candidateLaneByte != 4) {
+                sourceDef2 = IRInst__getOperandSource(inst,sourceOperandNumber);
+                constantValueA = (double)*(float *)(candidateLaneByte * 0x18 + (int)((ulonglong)sourceDef2 >> 0x20) + 0x20);
+                uVar12 = ((int (*)())IRInst__findConstantOperandWithValue)(inst2,(int)sourceDef2,foundSlotOut,constantValueA);
+                foundSlotA = foundSlotOut[0];
+                foundOperandNumberA = (int)((ulonglong)uVar12 >> 0x20);
+                if (foundOperandNumberA == 0) {
+                  insertedOperandNumber = inst2[0x21];
+                  ((void (*)())IRInst__setLiteralOperandAndSource)(inst2,(int)uVar12,insertedOperandNumber + 1,pass,constantValueA);
+                  (**(code **)(*inst2 + 0x88))(inst2,insertedOperandNumber + 1,laneIndex,laneIndex);
                 }
-                else if (local_44[0] != iVar2) {
-                  operandRecord4 = IRInst__getOperandRecord(inst2,iVar7);
+                else if (foundSlotOut[0] != laneIndex) {
+                  operandRecord4 = IRInst__getOperandRecord(inst2,foundOperandNumberA);
                   (**(code **)(*inst2 + 0x88))
-                            (inst2,iVar7,iVar2,*(undefined1 *)(iVar8 + operandRecord4 + 0x10));
+                            (inst2,foundOperandNumberA,laneIndex,*(undefined1 *)(foundSlotA + operandRecord4 + 0x10));
                 }
                 break;
               }
-              iVar8 = iVar8 + 1;
-            } while (iVar8 <= *(int *)(inst + 0x84));
+              sourceOperandNumber = sourceOperandNumber + 1;
+            } while (sourceOperandNumber <= *(int *)(inst + 0x84));
           }
         }
         else {
           operandRecord3 = IRInst__getOperandRecord(inst,1);
-          *(undefined1 *)((int)local_44 + iVar2 + -4) = *(undefined1 *)(uVar10 + operandRecord3 + 0x10);
+          *(undefined1 *)((int)foundSlotOut + laneIndex + -4) = *(undefined1 *)(laneSelectByte + operandRecord3 + 0x10);
         }
       }
-      uVar6 = local_48;
-      bVar1 = iVar2 != 3;
-      iVar2 = iVar2 + 1;
-    } while (bVar1);
+      rebuiltSwizzle = swizzleWord;
+      moreLanes = laneIndex != 3;
+      laneIndex = laneIndex + 1;
+    } while (moreLanes);
     operandRecord2 = IRInst__getOperandRecord(inst2,1);
-    *(undefined4 *)(operandRecord2 + 0x10) = uVar6;
+    *(undefined4 *)(operandRecord2 + 0x10) = rebuiltSwizzle;
   }
   else {
     operandRecord2 = IRInst__getOperandRecord(inst2,1);
-    iVar8 = inst2[0x21];
-    local_48 = *(undefined4 *)(operandRecord2 + 0x10);
-    if (1 < iVar8) {
-      iVar7 = 2;
+    targetOperandCount = inst2[0x21];
+    swizzleWord = *(undefined4 *)(operandRecord2 + 0x10);
+    if (1 < targetOperandCount) {
+      shiftSourceNumber = 2;
       loopIndex = 1;
       do {
-        sourceDef3 = IRInst__getOperandSource(inst2,iVar7);
-        IRInst__setOperandSource(inst2,loopIndex,sourceDef3,0,param_3);
-        operandRecord4 = IRInst__getOperandRecord(inst2,iVar7);
+        sourceDef3 = IRInst__getOperandSource(inst2,shiftSourceNumber);
+        IRInst__setOperandSource(inst2,loopIndex,sourceDef3,0,pass);
+        operandRecord4 = IRInst__getOperandRecord(inst2,shiftSourceNumber);
         iVar4 = *(int *)(operandRecord4 + 0x10);
         if (loopIndex == 0) {
           inst2[0x27] = iVar4;
@@ -430,44 +447,44 @@ int FUN_0010c670(inst, inst2, param_3)
           operandRecord = IRInst__getOperandRecord(inst2,loopIndex);
           *(int *)(operandRecord + 0x10) = iVar4;
         }
-        iVar7 = iVar7 + 1;
+        shiftSourceNumber = shiftSourceNumber + 1;
         loopIndex = loopIndex + 1;
-      } while (iVar7 <= iVar8);
+      } while (shiftSourceNumber <= targetOperandCount);
     }
-    inst2[0x21] = iVar8 + -1;
-    iVar2 = 0;
+    inst2[0x21] = targetOperandCount + -1;
+    laneIndexB = 0;
     do {
-      uVar10 = (uint)*(byte *)((int)local_44 + iVar2 + -4);
-      if ((uVar10 != 4) && (0 < *(int *)(inst + 0x84))) {
+      savedLaneSelectByte = (uint)*(byte *)((int)foundSlotOut + laneIndexB + -4);
+      if ((savedLaneSelectByte != 4) && (0 < *(int *)(inst + 0x84))) {
         loopIndex2 = 1;
         do {
           operandRecord5 = IRInst__getOperandRecord(inst,loopIndex2);
-          uVar9 = (uint)*(byte *)(uVar10 + operandRecord5 + 0x10);
-          if (uVar9 != 4) {
+          candidateLaneByteB = (uint)*(byte *)(savedLaneSelectByte + operandRecord5 + 0x10);
+          if (candidateLaneByteB != 4) {
             sourceDef2 = IRInst__getOperandSource(inst,loopIndex2);
-            dVar11 = (double)*(float *)(uVar9 * 0x18 + (int)((ulonglong)sourceDef2 >> 0x20) + 0x20);
-            uVar12 = ((int (*)())IRInst__findConstantOperandWithValue)(inst2,(int)sourceDef2,local_44,dVar11);
-            iVar8 = local_44[0];
-            iVar7 = (int)((ulonglong)uVar12 >> 0x20);
-            if (iVar7 == 0) {
-              iVar8 = inst2[0x21];
-              ((void (*)())IRInst__setLiteralOperandAndSource)(inst2,(int)uVar12,iVar8 + 1,param_3,dVar11);
-              (**(code **)(*inst2 + 0x88))(inst2,iVar8 + 1,iVar2,iVar2);
+            constantValueB = (double)*(float *)(candidateLaneByteB * 0x18 + (int)((ulonglong)sourceDef2 >> 0x20) + 0x20);
+            uVar12 = ((int (*)())IRInst__findConstantOperandWithValue)(inst2,(int)sourceDef2,foundSlotOut,constantValueB);
+            foundSlotB = foundSlotOut[0];
+            foundOperandNumberB = (int)((ulonglong)uVar12 >> 0x20);
+            if (foundOperandNumberB == 0) {
+              insertedOperandNumberB = inst2[0x21];
+              ((void (*)())IRInst__setLiteralOperandAndSource)(inst2,(int)uVar12,insertedOperandNumberB + 1,pass,constantValueB);
+              (**(code **)(*inst2 + 0x88))(inst2,insertedOperandNumberB + 1,laneIndexB,laneIndexB);
             }
-            else if (local_44[0] != iVar2) {
-              operandRecord4 = IRInst__getOperandRecord(inst2,iVar7);
+            else if (foundSlotOut[0] != laneIndexB) {
+              operandRecord4 = IRInst__getOperandRecord(inst2,foundOperandNumberB);
               (**(code **)(*inst2 + 0x88))
-                        (inst2,iVar7,iVar2,*(undefined1 *)(iVar8 + operandRecord4 + 0x10));
+                        (inst2,foundOperandNumberB,laneIndexB,*(undefined1 *)(foundSlotB + operandRecord4 + 0x10));
             }
             break;
           }
           loopIndex2 = loopIndex2 + 1;
         } while (loopIndex2 <= *(int *)(inst + 0x84));
       }
-      bVar1 = iVar2 != 3;
-      iVar2 = iVar2 + 1;
-    } while (bVar1);
-    IRInst__dropCounterAndDeleteIfUnused(inst,param_3);
+      moreLanesB = laneIndexB != 3;
+      laneIndexB = laneIndexB + 1;
+    } while (moreLanesB);
+    IRInst__dropCounterAndDeleteIfUnused(inst,pass);
   }
   return;
 }

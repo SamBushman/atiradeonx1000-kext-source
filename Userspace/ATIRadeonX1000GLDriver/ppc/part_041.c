@@ -1795,99 +1795,108 @@ code_r0x001342f8:
 }
 
 /* FUN_00134400 @ 0x134400 (600 bytes) */
-int FUN_00134400(param_1)
-  int param_1;
+int FUN_00134400(allocator)
+  int allocator;
 {
-  int *piVar1;
-  uint uVar2;
-  int iVar3;
-  uint uVar4;
-  int *piVar5;
-  undefined4 *puVar6;
-  int iVar7;
-  uint *puVar8;
-  int *piVar9;
+  uint *nodeVectorB;
+  int *nodeRefA;
+  uint nodeVectorCountB;
+  int instQuery50;
+  int regKindFlag;
+  int hasDestination;
+  uint destRegisterB;
+  uint destRegisterA;
+  int *inst;
+  int *nextInstLink;
+  uint instFlags;
+  int nextBlock;
+  uint nodeVectorCountA;
+  int *nextInstLinkB;
+  undefined4 *nodeRefB;
+  int block;
+  uint *nodeVectorA;
+  int *listHead;
   
-  iVar7 = *(int *)(*(int *)(*(int *)(param_1 + 0x2c) + 0x6c4) + 900);
-  iVar3 = *(int *)(iVar7 + 8);
+  block = *(int *)(*(int *)(*(int *)(allocator + 0x2c) + 0x6c4) + 900);
+  nextBlock = *(int *)(block + 8);
   do {
-    if (iVar3 == 0) {
+    if (nextBlock == 0) {
       return;
     }
-    piVar1 = (int *)(*(int **)(iVar7 + 0xa0))[1];
-    piVar9 = *(int **)(iVar7 + 0xa0);
-    if (piVar1 != (int *)0x0) {
+    nextInstLink = (int *)(*(int **)(block + 0xa0))[1];
+    listHead = *(int **)(block + 0xa0);
+    if (nextInstLink != (int *)0x0) {
       do {
-        piVar5 = piVar1;
-        if (((piVar9 == *(int **)(iVar7 + 0x98)) || ((piVar5[5] & 4U) == 0)) &&
-           (piVar1 = piVar9, piVar9 != (int *)0x0)) {
+        nextInstLinkB = nextInstLink;
+        if (((listHead == *(int **)(block + 0x98)) || ((nextInstLinkB[5] & 4U) == 0)) &&
+           (inst = listHead, listHead != (int *)0x0)) {
           do {
-            uVar2 = piVar1[5];
-            if ((uVar2 & 1) != 0) {
-              iVar3 = 0;
-              if (piVar1[0x20] != 0) {
-                iVar3 = RegKind__flagBit0(piVar1[0x26]);
-                if (((iVar3 == 0) || ((piVar1[5] & 2U) != 0)) ||
-                   ((iVar3 = (**(code **)(*piVar1 + 0x50))(piVar1), iVar3 != 0 ||
-                    ((piVar1[5] & 0x8000000U) == 0)))) {
-                  iVar3 = piVar1[0x20];
+            instFlags = inst[5];
+            if ((instFlags & 1) != 0) {
+              hasDestination = 0;
+              if (inst[0x20] != 0) {
+                regKindFlag = RegKind__flagBit0(inst[0x26]);
+                if (((regKindFlag == 0) || ((inst[5] & 2U) != 0)) ||
+                   ((regKindFlag = (**(code **)(*inst + 0x50))(inst), regKindFlag != 0 ||
+                    ((inst[5] & 0x8000000U) == 0)))) {
+                  hasDestination = inst[0x20];
                 }
                 else {
-                  puVar8 = *(uint **)(param_1 + 4);
-                  uVar2 = piVar1[0x25];
-                  if (uVar2 < *puVar8) {
-                    uVar4 = puVar8[1];
-                    if (uVar4 <= uVar2) {
-                      _memset(uVar4 * 4 + puVar8[2],0,(uVar2 - uVar4) * 4 + 4);
-                      puVar8[1] = uVar2 + 1;
+                  nodeVectorA = *(uint **)(allocator + 4);
+                  destRegisterA = inst[0x25];
+                  if (destRegisterA < *nodeVectorA) {
+                    nodeVectorCountA = nodeVectorA[1];
+                    if (nodeVectorCountA <= destRegisterA) {
+                      _memset(nodeVectorCountA * 4 + nodeVectorA[2],0,(destRegisterA - nodeVectorCountA) * 4 + 4);
+                      nodeVectorA[1] = destRegisterA + 1;
                     }
-                    piVar5 = (int *)(uVar2 * 4 + puVar8[2]);
+                    nodeRefA = (int *)(destRegisterA * 4 + nodeVectorA[2]);
                   }
                   else {
-                    piVar5 = (int *)Vector__elementRefGrow(puVar8,uVar2);
+                    nodeRefA = (int *)Vector__elementRefGrow(nodeVectorA,destRegisterA);
                   }
-                  *(undefined4 *)(*piVar5 + 0x18) = 1;
-                  iVar3 = piVar1[0x20];
+                  *(undefined4 *)(*nodeRefA + 0x18) = 1;
+                  hasDestination = inst[0x20];
                 }
               }
-              if ((iVar3 == 0) || (iVar3 = RegKind__flagBit0(piVar1[0x26]), iVar3 == 0)) {
+              if ((hasDestination == 0) || (hasDestination = RegKind__flagBit0(inst[0x26]), hasDestination == 0)) {
 LAB_001345fc:
-                uVar2 = piVar1[5];
+                instFlags = inst[5];
               }
               else {
-                uVar2 = piVar1[5];
-                if ((uVar2 & 2) == 0) {
-                  iVar3 = (**(code **)(*piVar1 + 0x50))(piVar1);
-                  if (iVar3 != 0) goto LAB_001345fc;
-                  puVar8 = *(uint **)(param_1 + 4);
-                  uVar2 = piVar1[0x25];
-                  if (uVar2 < *puVar8) {
-                    uVar4 = puVar8[1];
-                    if (uVar4 <= uVar2) {
-                      _memset(uVar4 * 4 + puVar8[2],0,(uVar2 - uVar4) * 4 + 4);
-                      puVar8[1] = uVar2 + 1;
+                instFlags = inst[5];
+                if ((instFlags & 2) == 0) {
+                  instQuery50 = (**(code **)(*inst + 0x50))(inst);
+                  if (instQuery50 != 0) goto LAB_001345fc;
+                  nodeVectorB = *(uint **)(allocator + 4);
+                  destRegisterB = inst[0x25];
+                  if (destRegisterB < *nodeVectorB) {
+                    nodeVectorCountB = nodeVectorB[1];
+                    if (nodeVectorCountB <= destRegisterB) {
+                      _memset(nodeVectorCountB * 4 + nodeVectorB[2],0,(destRegisterB - nodeVectorCountB) * 4 + 4);
+                      nodeVectorB[1] = destRegisterB + 1;
                     }
-                    puVar6 = (undefined4 *)(uVar2 * 4 + puVar8[2]);
+                    nodeRefB = (undefined4 *)(destRegisterB * 4 + nodeVectorB[2]);
                   }
                   else {
-                    puVar6 = (undefined4 *)Vector__elementRefGrow(puVar8,uVar2);
+                    nodeRefB = (undefined4 *)Vector__elementRefGrow(nodeVectorB,destRegisterB);
                   }
-                  ((int (*)())FUN_00134aa8)(*puVar6,piVar1[0x1f]);
-                  uVar2 = piVar1[5];
+                  ((int (*)())FUN_00134aa8)(*nodeRefB,inst[0x1f]);
+                  instFlags = inst[5];
                 }
               }
             }
-          } while (((int *)piVar1[2] != (int *)0x0) && (piVar1 = (int *)piVar1[2], (uVar2 & 4) != 0)
+          } while (((int *)inst[2] != (int *)0x0) && (inst = (int *)inst[2], (instFlags & 4) != 0)
                   );
-          piVar5 = (int *)piVar9[1];
+          nextInstLinkB = (int *)listHead[1];
         }
-        piVar1 = (int *)piVar5[1];
-        piVar9 = piVar5;
-      } while ((int *)piVar5[1] != (int *)0x0);
-      iVar3 = *(int *)(iVar7 + 8);
+        nextInstLink = (int *)nextInstLinkB[1];
+        listHead = nextInstLinkB;
+      } while ((int *)nextInstLinkB[1] != (int *)0x0);
+      nextBlock = *(int *)(block + 8);
     }
-    iVar7 = iVar3;
-    iVar3 = *(int *)(iVar3 + 8);
+    block = nextBlock;
+    nextBlock = *(int *)(nextBlock + 8);
   } while( true );
 }
 
@@ -3597,34 +3606,45 @@ code_r0x00136cac:
 }
 
 /* FUN_00136ec4 @ 0x136ec4 (152 bytes) */
-int FUN_00136ec4(param_1, param_2, param_3, param_4, compiler)
-  int *param_1;
-  int param_2;
-  int param_3;
-  int param_4;
+int FUN_00136ec4(this, ownerArg, nodeCount, ownerArg4, compiler)
+  int *this;
+  int ownerArg;
+  int nodeCount;
+  int ownerArg4;
   int compiler;
 {
+  uint edgeBitsetWordCount;
+  uint nodePairProduct;
+  undefined4 *tableAlloc;
+  undefined4 *edgeBitsetWords;
+  undefined4 *tableWordCursor;
+  int classByteOffset;
+  int compilerObj;
+  int classArrayB;
+  int wordCountdown;
+  int edgeBitCount;
+  int nodeCountNow;
   undefined4 *allocation;
   int allocation2;
   int loopIndex2;
   int loopIndex;
   int iVar1;
-  undefined4 *puVar2;
-  undefined4 *puVar3;
-  int iVar4;
-  uint *puVar5;
+  undefined4 *bitsetClearCursor;
+  undefined4 *nodeSlotRef;
+  int classArrayBytes;
+  uint *nodeVector;
   undefined4 arena;
-  uint uVar7;
+  uint nodeVectorCount;
   
-  param_1[2] = param_2;
-  param_1[10] = param_4;
-  *param_1 = 0;
-  param_1[3] = param_3;
-  param_1[0xb] = compiler;
-  if (param_3 != 0) {
-    allocation2 = Arena__alloc(*(undefined4 *)(compiler + COMP_arenaB),param_3 << 2);
-    param_1[8] = allocation2;
-    arena = *(undefined4 *)(param_1[0xb] + 0x378);
+  this[2] = ownerArg;
+  this[10] = ownerArg4;
+  *this = 0;
+  this[3] = nodeCount;
+  this[0xb] = compiler;
+  if (nodeCount != 0) {
+    allocation2 = Arena__alloc(*(undefined4 *)(compiler + COMP_arenaB),nodeCount << 2);
+    this[8] = allocation2;
+    arena = *(undefined4 *)(this[0xb] + 0x378);
     allocation = (undefined4 *)Arena__alloc(arena,0x14);
     *allocation = arena;
     allocation[1] = 2;
@@ -3633,115 +3653,126 @@ int FUN_00136ec4(param_1, param_2, param_3, param_4, compiler)
     arena = Arena__alloc(arena,8);
     allocation[3] = arena;
     loopIndex2 = 0;
-    iVar1 = param_1[3];
-    param_1[1] = (int)(allocation + 1);
-    if (0 < iVar1) {
+    nodeCountNow = this[3];
+    this[1] = (int)(allocation + 1);
+    if (0 < nodeCountNow) {
       do {
-        puVar5 = (uint *)param_1[1];
-        arena = *(undefined4 *)(param_1[0xb] + 0x378);
+        nodeVector = (uint *)this[1];
+        arena = *(undefined4 *)(this[0xb] + 0x378);
         allocation = (undefined4 *)Arena__alloc(arena,0x28);
         *allocation = arena;
-        ((int (*)())FUN_001351c4)(allocation + 1,loopIndex2,0,param_1,param_1[0xb]);
-        uVar7 = puVar5[1];
-        if (uVar7 < *puVar5) {
-          _memset((void *)(uVar7 * 4 + puVar5[2]),0,4);
-          puVar3 = (undefined4 *)(uVar7 * 4 + puVar5[2]);
-          puVar5[1] = uVar7 + 1;
+        ((int (*)())FUN_001351c4)(allocation + 1,loopIndex2,0,this,this[0xb]);
+        nodeVectorCount = nodeVector[1];
+        if (nodeVectorCount < *nodeVector) {
+          _memset((void *)(nodeVectorCount * 4 + nodeVector[2]),0,4);
+          nodeSlotRef = (undefined4 *)(nodeVectorCount * 4 + nodeVector[2]);
+          nodeVector[1] = nodeVectorCount + 1;
         }
         else {
-          puVar3 = (undefined4 *)Vector__elementRefGrow(puVar5,uVar7);
+          nodeSlotRef = (undefined4 *)Vector__elementRefGrow(nodeVector,nodeVectorCount);
         }
-        *puVar3 = allocation + 1;
+        *nodeSlotRef = allocation + 1;
         loopIndex2 = loopIndex2 + 1;
-        iVar1 = param_1[3];
-      } while (loopIndex2 < iVar1);
+        nodeCountNow = this[3];
+      } while (loopIndex2 < nodeCountNow);
     }
-    arena = *(undefined4 *)(param_1[0xb] + 0x378);
-    uVar7 = iVar1 * iVar1 - iVar1;
-    iVar1 = ((int)uVar7 >> 1) + (uint)((int)uVar7 < 0 && (uVar7 & 1) != 0);
-    uVar7 = iVar1 + 0x1fU >> 5;
-    allocation = (undefined4 *)Arena__alloc(arena,uVar7 * 4 + 0xc);
-    puVar3 = allocation + 1;
+    arena = *(undefined4 *)(this[0xb] + 0x378);
+    nodePairProduct = nodeCountNow * nodeCountNow - nodeCountNow;
+    edgeBitCount = ((int)nodePairProduct >> 1) + (uint)((int)nodePairProduct < 0 && (nodePairProduct & 1) != 0);
+    edgeBitsetWordCount = edgeBitCount + 0x1fU >> 5;
+    allocation = (undefined4 *)Arena__alloc(arena,edgeBitsetWordCount * 4 + 0xc);
+    edgeBitsetWords = allocation + 1;
     *allocation = arena;
-    allocation[1] = uVar7;
-    allocation[2] = iVar1;
-    if (uVar7 != 0) {
-      puVar2 = puVar3;
-      if (uVar7 == 0) {
-        uVar7 = 1;
+    allocation[1] = edgeBitsetWordCount;
+    allocation[2] = edgeBitCount;
+    if (edgeBitsetWordCount != 0) {
+      bitsetClearCursor = edgeBitsetWords;
+      if (edgeBitsetWordCount == 0) {
+        edgeBitsetWordCount = 1;
       }
       do {
-        puVar2[2] = 0;
-        puVar2 = puVar2 + 1;
-        uVar7 = uVar7 - 1;
-      } while (uVar7 != 0);
+        bitsetClearCursor[2] = 0;
+        bitsetClearCursor = bitsetClearCursor + 1;
+        edgeBitsetWordCount = edgeBitsetWordCount - 1;
+      } while (edgeBitsetWordCount != 0);
     }
-    *param_1 = (int)puVar3;
-    iVar1 = *(int *)(*(int *)(param_1[0xb] + 0x30c) + 0x14) << 2;
-    iVar4 = Arena__alloc(*(undefined4 *)(param_1[0xb] + 0x378),iVar1);
-    param_1[4] = iVar4;
-    (**(code **)(**(int **)(param_1[0xb] + 0x30c) + 0x134))(*(int **)(param_1[0xb] + 0x30c),iVar4);
-    iVar4 = Arena__alloc(*(undefined4 *)(param_1[0xb] + 0x378),iVar1);
-    param_1[6] = iVar4;
-    allocation2 = Arena__alloc(*(undefined4 *)(param_1[0xb] + 0x378),iVar1);
-    iVar4 = param_1[0xb];
-    param_1[5] = allocation2;
-    if (0 < *(int *)(*(int *)(iVar4 + 0x30c) + 0x14)) {
+    *this = (int)edgeBitsetWords;
+    iVar1 = *(int *)(*(int *)(this[0xb] + 0x30c) + 0x14) << 2;
+    classArrayBytes = Arena__alloc(*(undefined4 *)(this[0xb] + 0x378),iVar1);
+    this[4] = classArrayBytes;
+    (**(code **)(**(int **)(this[0xb] + 0x30c) + 0x134))(*(int **)(this[0xb] + 0x30c),classArrayBytes);
+    classArrayB = Arena__alloc(*(undefined4 *)(this[0xb] + 0x378),iVar1);
+    this[6] = classArrayB;
+    allocation2 = Arena__alloc(*(undefined4 *)(this[0xb] + 0x378),iVar1);
+    compilerObj = this[0xb];
+    this[5] = allocation2;
+    if (0 < *(int *)(*(int *)(compilerObj + 0x30c) + 0x14)) {
       loopIndex = 0;
       do {
-        iVar4 = loopIndex * 4;
+        classByteOffset = loopIndex * 4;
         loopIndex = loopIndex + 1;
-        *(undefined4 *)(param_1[6] + iVar4) = 0;
-        *(undefined4 *)(param_1[5] + iVar4) = 0;
-        iVar4 = param_1[0xb];
-      } while (loopIndex < *(int *)(*(int *)(iVar4 + 0x30c) + 0x14));
+        *(undefined4 *)(this[6] + classByteOffset) = 0;
+        *(undefined4 *)(this[5] + classByteOffset) = 0;
+        compilerObj = this[0xb];
+      } while (loopIndex < *(int *)(*(int *)(compilerObj + 0x30c) + 0x14));
     }
-    arena = *(undefined4 *)(iVar4 + 0x378);
-    puVar3 = (undefined4 *)Arena__alloc(arena,0x20c);
-    puVar3[1] = 0x80;
-    iVar1 = 0x80;
-    *puVar3 = arena;
-    puVar3[2] = 0x1000;
-    puVar2 = puVar3 + 1;
+    arena = *(undefined4 *)(compilerObj + 0x378);
+    tableAlloc = (undefined4 *)Arena__alloc(arena,0x20c);
+    tableAlloc[1] = 0x80;
+    wordCountdown = 0x80;
+    *tableAlloc = arena;
+    tableAlloc[2] = 0x1000;
+    tableWordCursor = tableAlloc + 1;
     do {
-      puVar2[2] = 0;
-      puVar2 = puVar2 + 1;
-      iVar1 = iVar1 + -1;
-    } while (iVar1 != 0);
-    param_1[9] = (int)(puVar3 + 1);
+      tableWordCursor[2] = 0;
+      tableWordCursor = tableWordCursor + 1;
+      wordCountdown = wordCountdown + -1;
+    } while (wordCountdown != 0);
+    this[9] = (int)(tableAlloc + 1);
   }
   return;
 }
 
 /* FUN_0013719c @ 0x13719c (152 bytes) */
-int FUN_0013719c(param_1, param_2, param_3, param_4, compiler)
-  int *param_1;
-  int param_2;
-  int param_3;
-  int param_4;
+int FUN_0013719c(this, ownerArg, nodeCount, ownerArg4, compiler)
+  int *this;
+  int ownerArg;
+  int nodeCount;
+  int ownerArg4;
   int compiler;
 {
+  uint edgeBitsetWordCount;
+  uint nodePairProduct;
+  undefined4 *tableAlloc;
+  undefined4 *edgeBitsetWords;
+  undefined4 *tableWordCursor;
+  int classByteOffset;
+  int compilerObj;
+  int classArrayB;
+  int wordCountdown;
+  int edgeBitCount;
+  int nodeCountNow;
   undefined4 *allocation;
   int allocation2;
   int loopIndex2;
   int loopIndex;
   int iVar1;
-  undefined4 *puVar2;
-  undefined4 *puVar3;
-  int iVar4;
-  uint *puVar5;
+  undefined4 *bitsetClearCursor;
+  undefined4 *nodeSlotRef;
+  int classArrayBytes;
+  uint *nodeVector;
   undefined4 arena;
-  uint uVar7;
+  uint nodeVectorCount;
   
-  param_1[2] = param_2;
-  param_1[10] = param_4;
-  *param_1 = 0;
-  param_1[3] = param_3;
-  param_1[0xb] = compiler;
-  if (param_3 != 0) {
-    allocation2 = Arena__alloc(*(undefined4 *)(compiler + COMP_arenaB),param_3 << 2);
-    param_1[8] = allocation2;
-    arena = *(undefined4 *)(param_1[0xb] + 0x378);
+  this[2] = ownerArg;
+  this[10] = ownerArg4;
+  *this = 0;
+  this[3] = nodeCount;
+  this[0xb] = compiler;
+  if (nodeCount != 0) {
+    allocation2 = Arena__alloc(*(undefined4 *)(compiler + COMP_arenaB),nodeCount << 2);
+    this[8] = allocation2;
+    arena = *(undefined4 *)(this[0xb] + 0x378);
     allocation = (undefined4 *)Arena__alloc(arena,0x14);
     *allocation = arena;
     allocation[1] = 2;
@@ -3750,82 +3781,82 @@ int FUN_0013719c(param_1, param_2, param_3, param_4, compiler)
     arena = Arena__alloc(arena,8);
     allocation[3] = arena;
     loopIndex2 = 0;
-    iVar1 = param_1[3];
-    param_1[1] = (int)(allocation + 1);
-    if (0 < iVar1) {
+    nodeCountNow = this[3];
+    this[1] = (int)(allocation + 1);
+    if (0 < nodeCountNow) {
       do {
-        puVar5 = (uint *)param_1[1];
-        arena = *(undefined4 *)(param_1[0xb] + 0x378);
+        nodeVector = (uint *)this[1];
+        arena = *(undefined4 *)(this[0xb] + 0x378);
         allocation = (undefined4 *)Arena__alloc(arena,0x28);
         *allocation = arena;
-        ((int (*)())FUN_001351c4)(allocation + 1,loopIndex2,0,param_1,param_1[0xb]);
-        uVar7 = puVar5[1];
-        if (uVar7 < *puVar5) {
-          _memset((void *)(uVar7 * 4 + puVar5[2]),0,4);
-          puVar3 = (undefined4 *)(uVar7 * 4 + puVar5[2]);
-          puVar5[1] = uVar7 + 1;
+        ((int (*)())FUN_001351c4)(allocation + 1,loopIndex2,0,this,this[0xb]);
+        nodeVectorCount = nodeVector[1];
+        if (nodeVectorCount < *nodeVector) {
+          _memset((void *)(nodeVectorCount * 4 + nodeVector[2]),0,4);
+          nodeSlotRef = (undefined4 *)(nodeVectorCount * 4 + nodeVector[2]);
+          nodeVector[1] = nodeVectorCount + 1;
         }
         else {
-          puVar3 = (undefined4 *)Vector__elementRefGrow(puVar5,uVar7);
+          nodeSlotRef = (undefined4 *)Vector__elementRefGrow(nodeVector,nodeVectorCount);
         }
-        *puVar3 = allocation + 1;
+        *nodeSlotRef = allocation + 1;
         loopIndex2 = loopIndex2 + 1;
-        iVar1 = param_1[3];
-      } while (loopIndex2 < iVar1);
+        nodeCountNow = this[3];
+      } while (loopIndex2 < nodeCountNow);
     }
-    arena = *(undefined4 *)(param_1[0xb] + 0x378);
-    uVar7 = iVar1 * iVar1 - iVar1;
-    iVar1 = ((int)uVar7 >> 1) + (uint)((int)uVar7 < 0 && (uVar7 & 1) != 0);
-    uVar7 = iVar1 + 0x1fU >> 5;
-    allocation = (undefined4 *)Arena__alloc(arena,uVar7 * 4 + 0xc);
-    puVar3 = allocation + 1;
+    arena = *(undefined4 *)(this[0xb] + 0x378);
+    nodePairProduct = nodeCountNow * nodeCountNow - nodeCountNow;
+    edgeBitCount = ((int)nodePairProduct >> 1) + (uint)((int)nodePairProduct < 0 && (nodePairProduct & 1) != 0);
+    edgeBitsetWordCount = edgeBitCount + 0x1fU >> 5;
+    allocation = (undefined4 *)Arena__alloc(arena,edgeBitsetWordCount * 4 + 0xc);
+    edgeBitsetWords = allocation + 1;
     *allocation = arena;
-    allocation[1] = uVar7;
-    allocation[2] = iVar1;
-    if (uVar7 != 0) {
-      puVar2 = puVar3;
-      if (uVar7 == 0) {
-        uVar7 = 1;
+    allocation[1] = edgeBitsetWordCount;
+    allocation[2] = edgeBitCount;
+    if (edgeBitsetWordCount != 0) {
+      bitsetClearCursor = edgeBitsetWords;
+      if (edgeBitsetWordCount == 0) {
+        edgeBitsetWordCount = 1;
       }
       do {
-        puVar2[2] = 0;
-        puVar2 = puVar2 + 1;
-        uVar7 = uVar7 - 1;
-      } while (uVar7 != 0);
+        bitsetClearCursor[2] = 0;
+        bitsetClearCursor = bitsetClearCursor + 1;
+        edgeBitsetWordCount = edgeBitsetWordCount - 1;
+      } while (edgeBitsetWordCount != 0);
     }
-    *param_1 = (int)puVar3;
-    iVar1 = *(int *)(*(int *)(param_1[0xb] + 0x30c) + 0x14) << 2;
-    iVar4 = Arena__alloc(*(undefined4 *)(param_1[0xb] + 0x378),iVar1);
-    param_1[4] = iVar4;
-    (**(code **)(**(int **)(param_1[0xb] + 0x30c) + 0x134))(*(int **)(param_1[0xb] + 0x30c),iVar4);
-    iVar4 = Arena__alloc(*(undefined4 *)(param_1[0xb] + 0x378),iVar1);
-    param_1[6] = iVar4;
-    allocation2 = Arena__alloc(*(undefined4 *)(param_1[0xb] + 0x378),iVar1);
-    iVar4 = param_1[0xb];
-    param_1[5] = allocation2;
-    if (0 < *(int *)(*(int *)(iVar4 + 0x30c) + 0x14)) {
+    *this = (int)edgeBitsetWords;
+    iVar1 = *(int *)(*(int *)(this[0xb] + 0x30c) + 0x14) << 2;
+    classArrayBytes = Arena__alloc(*(undefined4 *)(this[0xb] + 0x378),iVar1);
+    this[4] = classArrayBytes;
+    (**(code **)(**(int **)(this[0xb] + 0x30c) + 0x134))(*(int **)(this[0xb] + 0x30c),classArrayBytes);
+    classArrayB = Arena__alloc(*(undefined4 *)(this[0xb] + 0x378),iVar1);
+    this[6] = classArrayB;
+    allocation2 = Arena__alloc(*(undefined4 *)(this[0xb] + 0x378),iVar1);
+    compilerObj = this[0xb];
+    this[5] = allocation2;
+    if (0 < *(int *)(*(int *)(compilerObj + 0x30c) + 0x14)) {
       loopIndex = 0;
       do {
-        iVar4 = loopIndex * 4;
+        classByteOffset = loopIndex * 4;
         loopIndex = loopIndex + 1;
-        *(undefined4 *)(param_1[6] + iVar4) = 0;
-        *(undefined4 *)(param_1[5] + iVar4) = 0;
-        iVar4 = param_1[0xb];
-      } while (loopIndex < *(int *)(*(int *)(iVar4 + 0x30c) + 0x14));
+        *(undefined4 *)(this[6] + classByteOffset) = 0;
+        *(undefined4 *)(this[5] + classByteOffset) = 0;
+        compilerObj = this[0xb];
+      } while (loopIndex < *(int *)(*(int *)(compilerObj + 0x30c) + 0x14));
     }
-    arena = *(undefined4 *)(iVar4 + 0x378);
-    puVar3 = (undefined4 *)Arena__alloc(arena,0x20c);
-    puVar3[1] = 0x80;
-    iVar1 = 0x80;
-    *puVar3 = arena;
-    puVar3[2] = 0x1000;
-    puVar2 = puVar3 + 1;
+    arena = *(undefined4 *)(compilerObj + 0x378);
+    tableAlloc = (undefined4 *)Arena__alloc(arena,0x20c);
+    tableAlloc[1] = 0x80;
+    wordCountdown = 0x80;
+    *tableAlloc = arena;
+    tableAlloc[2] = 0x1000;
+    tableWordCursor = tableAlloc + 1;
     do {
-      puVar2[2] = 0;
-      puVar2 = puVar2 + 1;
-      iVar1 = iVar1 + -1;
-    } while (iVar1 != 0);
-    param_1[9] = (int)(puVar3 + 1);
+      tableWordCursor[2] = 0;
+      tableWordCursor = tableWordCursor + 1;
+      wordCountdown = wordCountdown + -1;
+    } while (wordCountdown != 0);
+    this[9] = (int)(tableAlloc + 1);
   }
   return;
 }
