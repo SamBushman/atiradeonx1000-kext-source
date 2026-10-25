@@ -3145,11 +3145,11 @@ int FUN_000bda40(stream, unusedArgR4, dirtyBitsArg, scratchR6, dirtyWord3, dirty
 }
 
 /* FUN_000bde70 @ 0xbde70 (1504 bytes) */
-int FUN_000bde70(param_1, param_2, param_3, param_4)
-  uint *param_1;
-  uint *param_2;
-  undefined4 *param_3;
-  undefined4 *param_4;
+int FUN_000bde70(rsWords, programImage, outProgram, scCallbacks)
+  uint *rsWords;
+  uint *programImage;
+  undefined4 *outProgram;
+  undefined4 *scCallbacks;
 {
   uint cursor4Word0;
   uint cursor5Word0;
@@ -3175,42 +3175,42 @@ int FUN_000bde70(param_1, param_2, param_3, param_4)
   uint uVar17;
   uint uVar18;
   
-  if (((param_4 == (undefined4 *)0x0) || (param_4[0xd] != -0x54520ff3)) ||
-     (param_3 == (undefined4 *)0x0)) {
+  if (((scCallbacks == (undefined4 *)0x0) || (scCallbacks[0xd] != -0x54520ff3)) ||
+     (outProgram == (undefined4 *)0x0)) {
     uVar8 = 0x80000005;
   }
   else {
-    iVar14 = -(*param_2 & 7);
+    iVar14 = -(*programImage & 7);
     uVar18 = iVar14 + 3;
-    uVar17 = (*param_1 & 0xf) + 1;
+    uVar17 = (*rsWords & 0xf) + 1;
     if (uVar18 < 4) {
       uVar13 = uVar18;
       uVar6 = uVar18;
-      if ((*param_2 >> 3 & 1) != 0) goto LAB_000bdeec;
+      if ((*programImage >> 3 & 1) != 0) goto LAB_000bdeec;
       while( true ) {
-        uVar17 = uVar17 + (param_2[uVar6 + 2] >> 6 & 0x3f) + 1;
+        uVar17 = uVar17 + (programImage[uVar6 + 2] >> 6 & 0x3f) + 1;
         uVar13 = uVar6 + 1;
         if (3 < uVar6 + 1) break;
 LAB_000bdeec:
-        uVar17 = uVar17 + (param_2[uVar13 + 2] >> 0x11 & 0x1f) + 1;
+        uVar17 = uVar17 + (programImage[uVar13 + 2] >> 0x11 & 0x1f) + 1;
         uVar6 = uVar13;
       }
     }
-    piVar16 = (int *)*param_3;
+    piVar16 = (int *)*outProgram;
     if (piVar16 == (int *)0x0) {
-      piVar16 = (int *)(*(code *)*param_4)(uVar17 * 0x48 + 0x48);
+      piVar16 = (int *)(*(code *)*scCallbacks)(uVar17 * 0x48 + 0x48);
       *piVar16 = 0;
       piVar16[1] = uVar17 + 1;
-      *param_3 = piVar16;
+      *outProgram = piVar16;
     }
     else if ((*piVar16 != 0) || ((uint)piVar16[1] <= uVar17)) {
       return 0x80000006;
     }
     *(undefined2 *)(piVar16 + 5) = 0;
     piVar16[2] = 0;
-    *(byte *)((int)piVar16 + 0xd) = (byte)(*param_1 >> 5) & 7;
+    *(byte *)((int)piVar16 + 0xd) = (byte)(*rsWords >> 5) & 7;
     uVar13 = 0;
-    cursor4 = param_1;
+    cursor4 = rsWords;
     cursor = piVar16;
     do {
       uVar4 = uVar13;
@@ -3229,11 +3229,11 @@ LAB_000bdeec:
       *(undefined1 *)((int)cursor + 0x56) = 0;
       *(ushort *)(cursor + 0x13) = (ushort)(cursor4Word0 >> 5) & 0x7f;
       cursor = cursor + 0x12;
-    } while (uVar13 <= (*param_1 & 0xf));
+    } while (uVar13 <= (*rsWords & 0xf));
     iVar9 = uVar4 + 2;
-    uVar13 = *param_2 >> 3 & 1;
+    uVar13 = *programImage >> 3 & 1;
     if (uVar18 < 4) {
-      cursor5 = param_2 + iVar14 + 5;
+      cursor5 = programImage + iVar14 + 5;
       do {
         cursor5Word0 = *cursor5;
         cursor5 = cursor5 + 1;
@@ -3248,13 +3248,13 @@ LAB_000bdeec:
             bVar3 = uVar11 == uVar10;
             uVar11 = uVar11 + 1;
             iVar9 = iVar9 + 1;
-            *(byte *)((int)cursor2 + 0x19) = (byte)(*(uint *)(iVar14 + param_2[7]) >> 0xb) & 0xf;
-            uVar5 = *(uint *)(iVar14 + param_2[7]);
+            *(byte *)((int)cursor2 + 0x19) = (byte)(*(uint *)(iVar14 + programImage[7]) >> 0xb) & 0xf;
+            uVar5 = *(uint *)(iVar14 + programImage[7]);
             *(bool *)(cursor2 + 8) = bVar3;
             *(undefined1 *)((int)cursor2 + 0x1f) = 0;
             *(byte *)((int)cursor2 + 0x1a) = (byte)(uVar5 >> 0xf) & 7;
-            *(ushort *)((int)cursor2 + 0xe) = (ushort)*(undefined4 *)(iVar14 + param_2[7]) & 0x1f;
-            puVar1 = (uint *)(iVar14 + param_2[7]);
+            *(ushort *)((int)cursor2 + 0xe) = (ushort)*(undefined4 *)(iVar14 + programImage[7]) & 0x1f;
+            puVar1 = (uint *)(iVar14 + programImage[7]);
             iVar14 = iVar14 + 4;
             *(ushort *)(cursor2 + 3) = (ushort)(*puVar1 >> 6) & 0x1f;
             cursor2 = cursor2 + 0x12;
@@ -3266,50 +3266,50 @@ LAB_000bdeec:
           cursor3 = piVar16 + iVar9 * 0x12;
           do {
             *cursor3 = 3;
-            *(byte *)(cursor3 + 5) = (byte)(*(uint *)(param_2[8] + iVar14) >> 0x17) & 7;
+            *(byte *)(cursor3 + 5) = (byte)(*(uint *)(programImage[8] + iVar14) >> 0x17) & 7;
             *(byte *)((int)cursor3 + 0x15) =
-                 (byte)((uint)*(undefined4 *)(param_2[8] + iVar14) >> 0x1a) & 7;
+                 (byte)((uint)*(undefined4 *)(programImage[8] + iVar14) >> 0x1a) & 7;
             *(byte *)((int)cursor3 + 0x16) =
-                 (byte)((uint)*(undefined4 *)(param_2[8] + iVar14) >> 0x1d) & 3;
-            uVar4 = *(uint *)(param_2[8] + iVar14) & 0x3f;
+                 (byte)((uint)*(undefined4 *)(programImage[8] + iVar14) >> 0x1d) & 3;
+            uVar4 = *(uint *)(programImage[8] + iVar14) & 0x3f;
             uVar7 = (ushort)uVar4;
             if (0x1f < uVar4) {
               uVar7 = uVar7 - 0x20 | 0x8000;
             }
             *(ushort *)((int)cursor3 + 0xe) = uVar7;
-            uVar4 = *(uint *)(param_2[8] + iVar14) >> 6 & 0x3f;
+            uVar4 = *(uint *)(programImage[8] + iVar14) >> 6 & 0x3f;
             uVar7 = (ushort)uVar4;
             if (0x1f < uVar4) {
               uVar7 = uVar7 - 0x20 | 0x8000;
             }
             *(ushort *)(cursor3 + 4) = uVar7;
-            uVar4 = *(uint *)(param_2[8] + iVar14) >> 0xc & 0x3f;
+            uVar4 = *(uint *)(programImage[8] + iVar14) >> 0xc & 0x3f;
             uVar7 = (ushort)uVar4;
             if (0x1f < uVar4) {
               uVar7 = uVar7 - 0x20 | 0x8000;
             }
             *(ushort *)((int)cursor3 + 0x12) = uVar7;
             *(ushort *)(cursor3 + 3) =
-                 (ushort)((uint)*(undefined4 *)(param_2[8] + iVar14) >> 0x12) & 0x1f;
-            *(byte *)(cursor3 + 8) = (byte)(*(uint *)(param_2[9] + iVar14) >> 0x17) & 1;
-            *(byte *)((int)cursor3 + 0x21) = *(byte *)(param_2[9] + iVar14) & 1;
+                 (ushort)((uint)*(undefined4 *)(programImage[8] + iVar14) >> 0x12) & 0x1f;
+            *(byte *)(cursor3 + 8) = (byte)(*(uint *)(programImage[9] + iVar14) >> 0x17) & 1;
+            *(byte *)((int)cursor3 + 0x21) = *(byte *)(programImage[9] + iVar14) & 1;
             *(byte *)((int)cursor3 + 0x22) =
-                 (byte)((uint)*(undefined4 *)(param_2[9] + iVar14) >> 0x19) & 3;
+                 (byte)((uint)*(undefined4 *)(programImage[9] + iVar14) >> 0x19) & 3;
             *(byte *)((int)cursor3 + 0x23) =
-                 (byte)((uint)*(undefined4 *)(param_2[9] + iVar14) >> 0x1b) & 1;
-            uVar4 = *(uint *)(param_2[9] + iVar14) & 0x3f;
+                 (byte)((uint)*(undefined4 *)(programImage[9] + iVar14) >> 0x1b) & 1;
+            uVar4 = *(uint *)(programImage[9] + iVar14) & 0x3f;
             uVar7 = (ushort)uVar4;
             if (0x1f < uVar4) {
               uVar7 = uVar7 - 0x20 | 0x8000;
             }
             *(ushort *)((int)cursor3 + 0x1a) = uVar7;
-            uVar4 = *(uint *)(param_2[9] + iVar14) >> 6 & 0x3f;
+            uVar4 = *(uint *)(programImage[9] + iVar14) >> 6 & 0x3f;
             uVar7 = (ushort)uVar4;
             if (0x1f < uVar4) {
               uVar7 = uVar7 - 0x20 | 0x8000;
             }
             *(ushort *)(cursor3 + 7) = uVar7;
-            uVar4 = *(uint *)(param_2[9] + iVar14) >> 0xc & 0x3f;
+            uVar4 = *(uint *)(programImage[9] + iVar14) >> 0xc & 0x3f;
             uVar7 = (ushort)uVar4;
             if (0x1f < uVar4) {
               uVar7 = uVar7 - 0x20 | 0x8000;
@@ -3318,31 +3318,31 @@ LAB_000bdeec:
             uVar6 = uVar6 + 1;
             iVar9 = iVar9 + 1;
             *(ushort *)(cursor3 + 6) =
-                 (ushort)((uint)*(undefined4 *)(param_2[9] + iVar14) >> 0x12) & 0x1f;
-            *(byte *)((int)cursor3 + 0x2a) = (byte)*(undefined4 *)(param_2[0xb] + iVar14) & 0x1f;
-            *(byte *)((int)cursor3 + 0x2d) = (byte)(*(uint *)(param_2[0xb] + iVar14) >> 5) & 3;
-            *(byte *)((int)cursor3 + 0x2b) = (byte)(*(uint *)(param_2[0xb] + iVar14) >> 7) & 0x1f;
-            *(byte *)((int)cursor3 + 0x2e) = (byte)(*(uint *)(param_2[0xb] + iVar14) >> 0xc) & 3;
-            *(byte *)(cursor3 + 0xb) = (byte)(*(uint *)(param_2[0xb] + iVar14) >> 0xe) & 0x1f;
-            *(byte *)((int)cursor3 + 0x2f) = (byte)(*(uint *)(param_2[0xb] + iVar14) >> 0x13) & 3;
-            *(byte *)(cursor3 + 0xc) = (byte)(*(uint *)(param_2[0xb] + iVar14) >> 0x15) & 3;
-            *(byte *)((int)cursor3 + 0x31) = (byte)(*(uint *)(param_2[0xb] + iVar14) >> 0x17) & 0xf;
+                 (ushort)((uint)*(undefined4 *)(programImage[9] + iVar14) >> 0x12) & 0x1f;
+            *(byte *)((int)cursor3 + 0x2a) = (byte)*(undefined4 *)(programImage[0xb] + iVar14) & 0x1f;
+            *(byte *)((int)cursor3 + 0x2d) = (byte)(*(uint *)(programImage[0xb] + iVar14) >> 5) & 3;
+            *(byte *)((int)cursor3 + 0x2b) = (byte)(*(uint *)(programImage[0xb] + iVar14) >> 7) & 0x1f;
+            *(byte *)((int)cursor3 + 0x2e) = (byte)(*(uint *)(programImage[0xb] + iVar14) >> 0xc) & 3;
+            *(byte *)(cursor3 + 0xb) = (byte)(*(uint *)(programImage[0xb] + iVar14) >> 0xe) & 0x1f;
+            *(byte *)((int)cursor3 + 0x2f) = (byte)(*(uint *)(programImage[0xb] + iVar14) >> 0x13) & 3;
+            *(byte *)(cursor3 + 0xc) = (byte)(*(uint *)(programImage[0xb] + iVar14) >> 0x15) & 3;
+            *(byte *)((int)cursor3 + 0x31) = (byte)(*(uint *)(programImage[0xb] + iVar14) >> 0x17) & 0xf;
             *(byte *)((int)cursor3 + 0x32) =
-                 (byte)((uint)*(undefined4 *)(param_2[0xb] + iVar14) >> 0x1b) & 7;
+                 (byte)((uint)*(undefined4 *)(programImage[0xb] + iVar14) >> 0x1b) & 7;
             *(byte *)((int)cursor3 + 0x33) =
-                 (byte)((uint)*(undefined4 *)(param_2[0xb] + iVar14) >> 0x1e) & 1;
-            *(byte *)(cursor3 + 0xd) = (byte)((uint)*(undefined4 *)(param_2[0xb] + iVar14) >> 0x1f);
-            *(byte *)((int)cursor3 + 0x39) = (byte)*(undefined4 *)(iVar14 + param_2[0xc]) & 0x1f;
-            *(byte *)(cursor3 + 0xf) = (byte)(*(uint *)(iVar14 + param_2[0xc]) >> 5) & 3;
-            *(byte *)((int)cursor3 + 0x3a) = (byte)(*(uint *)(iVar14 + param_2[0xc]) >> 7) & 0x1f;
-            *(byte *)((int)cursor3 + 0x3d) = (byte)(*(uint *)(iVar14 + param_2[0xc]) >> 0xc) & 3;
-            *(byte *)((int)cursor3 + 0x3b) = (byte)(*(uint *)(iVar14 + param_2[0xc]) >> 0xe) & 0x1f;
-            *(byte *)((int)cursor3 + 0x3e) = (byte)(*(uint *)(iVar14 + param_2[0xc]) >> 0x13) & 3;
-            *(byte *)((int)cursor3 + 0x3f) = (byte)(*(uint *)(iVar14 + param_2[0xc]) >> 0x15) & 3;
-            *(byte *)(cursor3 + 0x10) = (byte)(*(uint *)(iVar14 + param_2[0xc]) >> 0x17) & 0xf;
+                 (byte)((uint)*(undefined4 *)(programImage[0xb] + iVar14) >> 0x1e) & 1;
+            *(byte *)(cursor3 + 0xd) = (byte)((uint)*(undefined4 *)(programImage[0xb] + iVar14) >> 0x1f);
+            *(byte *)((int)cursor3 + 0x39) = (byte)*(undefined4 *)(iVar14 + programImage[0xc]) & 0x1f;
+            *(byte *)(cursor3 + 0xf) = (byte)(*(uint *)(iVar14 + programImage[0xc]) >> 5) & 3;
+            *(byte *)((int)cursor3 + 0x3a) = (byte)(*(uint *)(iVar14 + programImage[0xc]) >> 7) & 0x1f;
+            *(byte *)((int)cursor3 + 0x3d) = (byte)(*(uint *)(iVar14 + programImage[0xc]) >> 0xc) & 3;
+            *(byte *)((int)cursor3 + 0x3b) = (byte)(*(uint *)(iVar14 + programImage[0xc]) >> 0xe) & 0x1f;
+            *(byte *)((int)cursor3 + 0x3e) = (byte)(*(uint *)(iVar14 + programImage[0xc]) >> 0x13) & 3;
+            *(byte *)((int)cursor3 + 0x3f) = (byte)(*(uint *)(iVar14 + programImage[0xc]) >> 0x15) & 3;
+            *(byte *)(cursor3 + 0x10) = (byte)(*(uint *)(iVar14 + programImage[0xc]) >> 0x17) & 0xf;
             *(byte *)((int)cursor3 + 0x41) =
-                 (byte)((uint)*(undefined4 *)(iVar14 + param_2[0xc]) >> 0x1b) & 7;
-            puVar2 = (undefined4 *)(iVar14 + param_2[0xc]);
+                 (byte)((uint)*(undefined4 *)(iVar14 + programImage[0xc]) >> 0x1b) & 7;
+            puVar2 = (undefined4 *)(iVar14 + programImage[0xc]);
             iVar14 = iVar14 + 4;
             *(byte *)((int)cursor3 + 0x42) = (byte)((uint)*puVar2 >> 0x1e) & 1;
             cursor3 = cursor3 + 0x12;
@@ -4421,96 +4421,96 @@ LAB_000bfb34:
 }
 
 /* FUN_000bfcc0 @ 0xbfcc0 (440 bytes) */
-int FUN_000bfcc0(param_1, param_2)
-  uint *param_1;
-  undefined4 *param_2;
+int FUN_000bfcc0(swizzleCode, channelSelect)
+  uint *swizzleCode;
+  undefined4 *channelSelect;
 {
   uint uVar1;
   
-  uVar1 = *param_1;
+  uVar1 = *swizzleCode;
   if ((uVar1 & 0x80) == 0) {
     switch(uVar1) {
     case 0:
-      *param_1 = 0;
-      *param_2 = 0;
+      *swizzleCode = 0;
+      *channelSelect = 0;
       return;
     case 1:
-      *param_1 = 0;
-      *param_2 = 1;
+      *swizzleCode = 0;
+      *channelSelect = 1;
       return;
     case 2:
-      *param_1 = 0;
-      *param_2 = 2;
+      *swizzleCode = 0;
+      *channelSelect = 2;
       return;
     case 3:
-      *param_1 = 1;
-      *param_2 = 0;
+      *swizzleCode = 1;
+      *channelSelect = 0;
       return;
     case 4:
-      *param_1 = 1;
-      *param_2 = 1;
+      *swizzleCode = 1;
+      *channelSelect = 1;
       return;
     case 5:
-      *param_1 = 1;
-      *param_2 = 2;
+      *swizzleCode = 1;
+      *channelSelect = 2;
       return;
     case 6:
-      *param_1 = 2;
-      *param_2 = 0;
+      *swizzleCode = 2;
+      *channelSelect = 0;
       return;
     case 7:
-      *param_1 = 2;
-      *param_2 = 1;
+      *swizzleCode = 2;
+      *channelSelect = 1;
       return;
     case 8:
-      *param_1 = 2;
-      *param_2 = 2;
+      *swizzleCode = 2;
+      *channelSelect = 2;
       return;
     case 9:
-      *param_1 = 0;
-      *param_2 = 3;
+      *swizzleCode = 0;
+      *channelSelect = 3;
       return;
     case 10:
-      *param_1 = 1;
-      *param_2 = 3;
+      *swizzleCode = 1;
+      *channelSelect = 3;
       return;
     case 0xb:
-      *param_1 = 2;
-      *param_2 = 3;
+      *swizzleCode = 2;
+      *channelSelect = 3;
       return;
     case 0xc:
-      *param_1 = 3;
-      *param_2 = 0;
+      *swizzleCode = 3;
+      *channelSelect = 0;
       return;
     case 0xd:
-      *param_1 = 3;
-      *param_2 = 1;
+      *swizzleCode = 3;
+      *channelSelect = 1;
       return;
     case 0xe:
-      *param_1 = 3;
-      *param_2 = 2;
+      *swizzleCode = 3;
+      *channelSelect = 2;
       return;
     case 0xf:
-      *param_1 = 3;
-      *param_2 = 3;
+      *swizzleCode = 3;
+      *channelSelect = 3;
       return;
     case 0x10:
-      *param_1 = 0;
-      *param_2 = 4;
+      *swizzleCode = 0;
+      *channelSelect = 4;
       return;
     case 0x11:
-      *param_1 = 0;
-      *param_2 = 6;
+      *swizzleCode = 0;
+      *channelSelect = 6;
       return;
     case 0x12:
-      *param_1 = 0;
-      *param_2 = 5;
+      *swizzleCode = 0;
+      *channelSelect = 5;
       return;
     default:
       return;
     }
   }
-  *param_1 = uVar1 & 0xffffff7f;
+  *swizzleCode = uVar1 & 0xffffff7f;
   return;
 }
 

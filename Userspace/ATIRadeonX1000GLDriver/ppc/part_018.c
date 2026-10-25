@@ -589,60 +589,60 @@ int ilEmitPrologue(outCursor, programRecord, passThroughR5, passThroughR6, passT
 }
 
 /* FUN_000c8600 @ 0xc8600 (316 bytes) */
-int FUN_000c8600(param_1, param_2, param_3, destinationExtraWord, param_5)
-  uint param_1;
-  int param_2;
-  int *param_3;
+int FUN_000c8600(registerIndex, registerKind, usageInfo, destinationExtraWord, param_5)
+  uint registerIndex;
+  int registerKind;
+  int *usageInfo;
   uint destinationExtraWord;
   int param_5;
 {
   int iVar1;
   
-  if ((int)param_1 < *param_3) {
-    iVar1 = param_3[1];
+  if ((int)registerIndex < *usageInfo) {
+    iVar1 = usageInfo[1];
   }
   else {
-    iVar1 = param_3[1];
-    if (iVar1 < (int)param_1) goto LAB_000c8650;
-    *param_3 = param_1 + 1;
+    iVar1 = usageInfo[1];
+    if (iVar1 < (int)registerIndex) goto LAB_000c8650;
+    *usageInfo = registerIndex + 1;
   }
-  if (((int)param_1 <= iVar1) && (*param_3 <= (int)param_1)) {
-    param_3[1] = param_1 - 1;
+  if (((int)registerIndex <= iVar1) && (*usageInfo <= (int)registerIndex)) {
+    usageInfo[1] = registerIndex - 1;
   }
 LAB_000c8650:
-  if (param_2 == 0x17) {
-    param_3[param_1 + 0x87c] = 1;
+  if (registerKind == 0x17) {
+    usageInfo[registerIndex + 0x87c] = 1;
     if (((((destinationExtraWord & 3) != 1) && ((destinationExtraWord & 0xc) != 4)) && ((destinationExtraWord & 0x30) != 0x10)) &&
        (((destinationExtraWord & 0xc0) != 0x40 && (param_5 != 0)))) {
       return;
     }
-    param_3[0x889] = 1;
+    usageInfo[0x889] = 1;
     return;
   }
-  if (param_2 == 0x18) {
-    param_3[0x88a] = 1;
-    param_3[0x889] = 1;
+  if (registerKind == 0x18) {
+    usageInfo[0x88a] = 1;
+    usageInfo[0x889] = 1;
     return;
   }
-  if (param_2 == 0x12) {
-    param_3[param_1 + 0x885] = 1;
+  if (registerKind == 0x12) {
+    usageInfo[registerIndex + 0x885] = 1;
     return;
   }
-  if (param_2 == 0x13) {
-    param_3[param_1 + 0x887] = 1;
+  if (registerKind == 0x13) {
+    usageInfo[registerIndex + 0x887] = 1;
     return;
   }
-  if (param_2 != 0x10) {
-    if (param_2 != 0x11) {
+  if (registerKind != 0x10) {
+    if (registerKind != 0x11) {
       return;
     }
-    if (param_3[0x8c7] < (int)param_1) {
-      param_3[0x8c7] = param_1;
+    if (usageInfo[0x8c7] < (int)registerIndex) {
+      usageInfo[0x8c7] = registerIndex;
     }
-    param_3[2] = 1 << (param_1 & 0x3f) | param_3[2];
+    usageInfo[2] = 1 << (registerIndex & 0x3f) | usageInfo[2];
     return;
   }
-  param_3[0x883] = 1;
+  usageInfo[0x883] = 1;
   return;
 }
 
