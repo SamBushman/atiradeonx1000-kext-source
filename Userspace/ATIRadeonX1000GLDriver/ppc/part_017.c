@@ -2932,14 +2932,14 @@ LAB_000bd970:
 }
 
 /* FUN_000bd9a0 @ 0xbd9a0 (160 bytes) */
-void FUN_000bd9a0(int glContext,undefined4 param_2,undefined4 param_3,undefined4 param_4,double fparam_1)
+void FUN_000bd9a0(int glContext,undefined4 param_2,undefined4 param_3,undefined4 param_4,double fpPassThrough1)
 {
   code *glContextPtr275c;
   int iVar2;
   undefined4 *puVar3;
-  undefined4 extraout_r4;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 r4AfterCall;
+  undefined4 staleArgR7;
+  undefined4 staleArgR8;
   int a6;
   
   if ((*(uint *)(glContext + 0x44) & 0x100000) == 0) {
@@ -2951,12 +2951,12 @@ void FUN_000bd9a0(int glContext,undefined4 param_2,undefined4 param_3,undefined4
     iVar2 = *(int *)(0x00002748 + glContext + 4);
     glContextPtr275c = *(code **)(glContext + 0x275c);
     *(int *)(0x00002748 + glContext + 4) = iVar2 + 8;
-    (*glContextPtr275c)(glContext,iVar2 + 8,param_3,param_4,in_r7,in_r8,a6);
+    (*glContextPtr275c)(glContext,iVar2 + 8,param_3,param_4,staleArgR7,staleArgR8,a6);
     FUN_0009be00(glContext);
-    fparam_1 = (double)FUN_0009cc30(glContext);
-    param_2 = extraout_r4;
+    fpPassThrough1 = (double)FUN_0009cc30(glContext);
+    param_2 = r4AfterCall;
   }
-  ((void (*)())FUN_0004d620)(glContext,param_2,param_3,param_4,fparam_1);
+  ((void (*)())FUN_0004d620)(glContext,param_2,param_3,param_4,fpPassThrough1);
   return;
 }
 
@@ -4544,10 +4544,10 @@ int FUN_000bfed0(psnProgram, param_2, param_3)
   uint uVar42;
   uint uVar43;
   uint uVar44;
-  undefined4 in_r6;
-  undefined4 in_r7;
+  undefined4 staleArgR6;
+  undefined4 staleArgR7;
   int *piVar45;
-  undefined4 in_r8;
+  undefined4 staleArgR8;
   int *piVar46;
   uint uVar47;
   uint uVar48;
@@ -4586,7 +4586,7 @@ int FUN_000bfed0(psnProgram, param_2, param_3)
   if (0xff < *(ushort *)(psnProgram + 0x24)) {
     return 0x80000013;
   }
-  ((int (*)())FUN_000bf400)(psnProgram,1,puVar60,in_r6,in_r7,in_r8,(uint)*(ushort *)(psnProgram + 0x20));
+  ((int (*)())FUN_000bf400)(psnProgram,1,puVar60,staleArgR6,staleArgR7,staleArgR8,(uint)*(ushort *)(psnProgram + 0x20));
   psnProgramWord8 = *(uint *)(psnProgram + 8);
   if ((*(int *)(psnProgram + 0x48) == 1) && (psnProgramWord8 != 0)) {
     piVar46 = (int *)(psnProgram + 0x90);
@@ -7111,7 +7111,7 @@ int psnDecAllocateTempsAndCompact(psnState, decodedProgram, rsWords, programImag
   bool loopContinue;
   int entryMode;
   uint freeEntryNext;
-  undefined4 extraout_r4;
+  undefined4 r4AfterCall;
   int slotCounter;
   int groupUsageBase;
   int slotOffset;
@@ -7329,7 +7329,7 @@ int psnDecAllocateTempsAndCompact(psnState, decodedProgram, rsWords, programImag
       ((int (*)())psnDecRecomputeSourceUsage)(entry);
       ((int (*)())psnDecSortAddressSlots)(entry,0);
       ((int (*)())psnDecSortAddressSlots)(entry,1);
-      ((int (*)())psnDecCanonicalizeEntry)(entry,extraout_r4,slotCounter,groupUsageBase,uVar7,groupCounter,psVar12,groupUsageCursor);
+      ((int (*)())psnDecCanonicalizeEntry)(entry,r4AfterCall,slotCounter,groupUsageBase,uVar7,groupCounter,psVar12,groupUsageCursor);
     }
     loopIndex = loopIndex + 1;
     entryOffset = entryOffset + -0xa0;
@@ -7585,7 +7585,7 @@ int psnDecRetargetSourceReg(entry, oldComponentSelect, newComponentSelect, newSl
   ushort sourceSwizzle;
   uint uVar3;
   int halfCursor;
-  undefined4 extraout_r4;
+  undefined4 r4AfterCall;
   uint newSlotCode;
   int newSlotAddressPtr;
   int oldAddressOffset;
@@ -7627,7 +7627,7 @@ int psnDecRetargetSourceReg(entry, oldComponentSelect, newComponentSelect, newSl
   } while (loopContinue);
   if (*(int *)(entry + 0x8c) == 2) {
     ((int (*)())psnDecRecomputeSourceUsage)(entry);
-    ((int (*)())psnDecCanonicalizeEntry)(entry,extraout_r4,newSlotCode,newSlotAddressPtr,oldAddressOffset,sourceCounter,sourceSwizzlePtr,uVar3);
+    ((int (*)())psnDecCanonicalizeEntry)(entry,r4AfterCall,newSlotCode,newSlotAddressPtr,oldAddressOffset,sourceCounter,sourceSwizzlePtr,uVar3);
   }
   return 1;
 }
@@ -7653,7 +7653,7 @@ int psnDecReplaceSourceAddress(entry, param_2, param_3, param_4, oldAddressOffse
   uint uVar8;
   int *piVar9;
   uint uVar10;
-  undefined4 extraout_r4;
+  undefined4 r4AfterCall;
   uint uVar11;
   int iVar12;
   uint loopIndex2;
@@ -7807,7 +7807,7 @@ int psnDecReplaceSourceAddress(entry, param_2, param_3, param_4, oldAddressOffse
   }
   if (*(int *)(entry + 0x8c) == 2) {
     ((int (*)())psnDecRecomputeSourceUsage)(entry);
-    ((int (*)())psnDecCanonicalizeEntry)(entry,extraout_r4,uVar11,param_4,oldAddressOffset,uVar14,sourceSwizzlePtr,param_8);
+    ((int (*)())psnDecCanonicalizeEntry)(entry,r4AfterCall,uVar11,param_4,oldAddressOffset,uVar14,sourceSwizzlePtr,param_8);
   }
   return 0;
 }
@@ -8028,7 +8028,7 @@ int psnDecTryRebindAddressWithRollback(entry, param_2, param_3, param_4, param_5
   uint uVar10;
   uint uVar11;
   int iVar12;
-  undefined4 extraout_r4;
+  undefined4 r4AfterCall;
   undefined4 uVar13;
   int iVar14;
   int iVar15;
@@ -8216,7 +8216,7 @@ LAB_000c3ab0:
           *(undefined2 *)(entry + 0x86) = (*(unsigned short *)((unsigned char *)&(param_3) + 2));
         }
         ((int (*)())psnDecRecomputeSourceUsage)(entry);
-        ((int (*)())psnDecCanonicalizeEntry)(entry,extraout_r4,iVar19,loopIndex,puVar20,uVar13,puVar16,puVar18);
+        ((int (*)())psnDecCanonicalizeEntry)(entry,r4AfterCall,iVar19,loopIndex,puVar20,uVar13,puVar16,puVar18);
       }
       else {
         _memcpy(entry,auStack_100,0xa0);
@@ -8366,8 +8366,8 @@ int psnDecTryMergeAddressSlots(entry, otherEntry, reverseRoles, param_4, param_5
   short *usageWordPtr;
   uint otherSelect;
   undefined2 *clearSlotPtr;
-  undefined4 extraout_r4;
-  undefined4 extraout_r4_00;
+  undefined4 r4AfterCall;
+  undefined4 r4AfterCall2;
   undefined4 halfSize;
   uint uVar9;
   int sourceIndex;
@@ -8514,9 +8514,9 @@ int psnDecTryMergeAddressSlots(entry, otherEntry, reverseRoles, param_4, param_5
             clearSlotPtr = clearSlotPtr + 2;
           } while (loopContinue);
           ((int (*)())psnDecRecomputeSourceUsage)(entry);
-          ((int (*)())psnDecCanonicalizeEntry)(entry,extraout_r4,halfSize,param_4,uVar9,slotSearchIndex,iVar12,puVar14);
+          ((int (*)())psnDecCanonicalizeEntry)(entry,r4AfterCall,halfSize,param_4,uVar9,slotSearchIndex,iVar12,puVar14);
           ((int (*)())psnDecRecomputeSourceUsage)(otherEntry);
-          ((int (*)())psnDecCanonicalizeEntry)(otherEntry,extraout_r4_00,halfSize,param_4,uVar9,slotSearchIndex,iVar12,puVar14);
+          ((int (*)())psnDecCanonicalizeEntry)(otherEntry,r4AfterCall2,halfSize,param_4,uVar9,slotSearchIndex,iVar12,puVar14);
           return 1;
         }
       } while( true );
@@ -8543,7 +8543,7 @@ int psnProgramToDecoded(decodedProgram, recordCursor)
   uint recordKind;
   uint sourceSelectCode;
   ushort uVar6;
-  undefined4 extraout_r4;
+  undefined4 r4AfterCall;
   uint *puVar7;
   byte *pbVar8;
   ushort *recField0e;
@@ -8882,7 +8882,7 @@ LAB_000c4a74:
         pcVar10 = recField42;
         pbVar12 = recField41;
         ((int (*)())psnDecRecomputeSourceUsage)(entry);
-        ((int (*)())psnDecCanonicalizeEntry)(entry,extraout_r4,puVar7,pbVar8,pcVar10,alphaHalf,pbVar12,slotCounter);
+        ((int (*)())psnDecCanonicalizeEntry)(entry,r4AfterCall,puVar7,pbVar8,pcVar10,alphaHalf,pbVar12,slotCounter);
       }
       recField1a = recField1a + 0x24;
       recField40 = recField40 + 0x12;
