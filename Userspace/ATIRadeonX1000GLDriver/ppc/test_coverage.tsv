@@ -261,10 +261,10 @@
 0x26440	gld_bindProgramRecord	500	no	calls an import (calloc); calls an import (glpFreePPShaderLinearize); calls an import (glpFreePPShaderToProgram)
 0x26650	FUN_00026650	792	no	calls an import (calloc)
 0x269a0	gld_getProgramParameter	516	yes	
-0x26bf0	FUN_00026bf0	876	yes	
+0x26bf0	gld_drawArraysDirect	876	yes	
 0x26f80	FUN_00026f80	460	no	calls an import (io_connect_method_scalarI_scalarO)
 0x27150	FUN_00027150	564	yes	
-0x273a0	FUN_000273a0	1484	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x273a0	gld_reserveDrawSpace	1484	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x27990	FUN_00027990	2360	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x28350	gld_readPixelsViaBlit	3820	no	atomic / cache / barrier instruction; calls an import (pthread_mutex_lock); calls an import (pthread_mutex_unlock)
 0x29290	glReadPixels_entry	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
@@ -276,7 +276,7 @@
 0x2b3c0	gld_sumQueryCounters	464	yes	
 0x2b5a0	_gldGetQueryInfo	404	no	calls an import (usleep)
 0x2b740	FUN_0002b740	172	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0x2b7f0	FUN_0002b7f0	968	no	atomic / cache / barrier instruction
+0x2b7f0	gld_emitQueryBeginPacket	968	no	atomic / cache / barrier instruction
 0x2bbc4	FUN_0002bbc4	564	no	atomic / cache / barrier instruction
 0x2be00	FUN_0002be00	88	yes	
 0x2be60	FUN_0002be60	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises

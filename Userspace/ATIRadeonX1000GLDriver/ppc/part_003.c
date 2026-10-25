@@ -209,7 +209,7 @@ int gld_submitRing(ctx, terminatorWord)
   writeCursor[3] = 0x20000;
   writeCursor = writeCursor + 4;
   if (hasPreamble != '\0') {
-    writeCursor = (undefined4 *)FUN_0002b7f0(ctx,writeCursor);
+    writeCursor = (undefined4 *)gld_emitQueryBeginPacket(ctx,writeCursor);
   }
   headerWord = *(uint **)(ctx + GLD_lastHeader);
   *(int *)(*(int *)(ctx + GLD_ringMap) + 0x10) =

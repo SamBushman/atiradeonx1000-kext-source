@@ -1505,149 +1505,150 @@ LAB_00026ae0:
   return;
 }
 
-/* FUN_00026bf0 @ 0x26bf0 (876 bytes) */
-int FUN_00026bf0(param_1, param_2, param_3, param_4, param_5)
-  int param_1;
-  undefined4 param_2;
-  int param_3;
-  int param_4;
-  undefined4 param_5;
+/* gld_drawArraysDirect @ 0x26bf0 (876 bytes) */
+int gld_drawArraysDirect(ctx, staleArgR4, primitiveMode, vertexCount, staleArgR7)
+  int ctx;
+  undefined4 staleArgR4;
+  int primitiveMode;
+  int vertexCount;
+  undefined4 staleArgR7;
 {
-  byte bVar1;
-  int iVar2;
-  uint *puVar3;
-  int iVar4;
-  int iVar5;
-  undefined4 *puVar6;
+  uint streamCountField;
+  byte vertexStrideWords;
+  int streamRecordExt;
+  uint *lastHeader;
+  int streamRecord;
+  int trimmedCount;
+  undefined4 *ringCursor;
   int iVar7;
-  undefined4 *puVar8;
-  uint uVar9;
-  undefined4 uVar10;
-  uint uVar11;
+  undefined4 *packetEnd;
+  uint primFlagsIndirect;
+  undefined4 vapVteCntl;
+  uint primFlags;
   int iVar12;
   
-  if (param_4 < 4) {
-    iVar5 = ((int (*)())gldTrimVertexCountToPrimitiveMin)(param_1,param_3,param_4);
+  if (vertexCount < 4) {
+    trimmedCount = ((int (*)())gldTrimVertexCountToPrimitiveMin)(ctx,primitiveMode,vertexCount);
   }
   else {
-    iVar5 = ((int (*)())gldTrimVertexCountToPrimitive)(param_1,param_3,param_4);
+    trimmedCount = ((int (*)())gldTrimVertexCountToPrimitive)(ctx,primitiveMode,vertexCount);
   }
-  if (iVar5 == 0) {
+  if (trimmedCount == 0) {
     return;
   }
-  if ((*(uint *)(param_1 + 0x27d8) & 6) == 0) {
-    if (*(char *)(param_1 + 0x27d4) == '\0') {
-      bVar1 = *(byte *)(*(int *)(((unsigned char *)0x000027cc) + param_1) + 2);
+  if ((*(uint *)(ctx + 0x27d8) & 6) == 0) {
+    if (*(char *)(ctx + 0x27d4) == '\0') {
+      vertexStrideWords = *(byte *)(*(int *)(((unsigned char *)0x000027cc) + ctx) + 2);
     }
     else {
-      bVar1 = *(byte *)(*(int *)(0x000027d0 + param_1) + 2);
+      vertexStrideWords = *(byte *)(*(int *)(0x000027d0 + ctx) + 2);
     }
-    puVar6 = *(undefined4 **)(param_1 + 0x1dc);
-    *(undefined4 **)(param_1 + 0x298c) = puVar6;
-    if (*(char *)(param_1 + 0x27d4) == '\0') {
-      iVar7 = param_1 + 0x2840;
-      if (*(int *)(param_1 + 0x2680) != iVar7) {
-        uVar10 = *(undefined4 *)(param_1 + 0x28e0);
-        iVar12 = param_1 + 0x2860;
+    ringCursor = *(undefined4 **)(ctx + 0x1dc);
+    *(undefined4 **)(ctx + 0x298c) = ringCursor;
+    if (*(char *)(ctx + 0x27d4) == '\0') {
+      iVar7 = ctx + 0x2840;
+      if (*(int *)(ctx + 0x2680) != iVar7) {
+        vapVteCntl = *(undefined4 *)(ctx + 0x28e0);
+        iVar12 = ctx + 0x2860;
         goto LAB_00026ea8;
       }
     }
     else {
-      iVar7 = param_1 + 0x28e4;
-      if (*(int *)(param_1 + 0x2680) != iVar7) {
-        uVar10 = *(undefined4 *)(param_1 + 0x2984);
-        iVar12 = param_1 + 0x2904;
+      iVar7 = ctx + 0x28e4;
+      if (*(int *)(ctx + 0x2680) != iVar7) {
+        vapVteCntl = *(undefined4 *)(ctx + 0x2984);
+        iVar12 = ctx + 0x2904;
 LAB_00026ea8:
-        *(int *)(param_1 + 0x2680) = iVar7;
-        *(int *)(param_1 + 0x2684) = iVar12;
-        *(undefined4 *)(0x000026c8 + param_1 + 4) = uVar10;
-        puVar6 = (undefined4 *)((int (*)())gld_emitVapStreamControl)(param_1,puVar6);
+        *(int *)(ctx + 0x2680) = iVar7;
+        *(int *)(ctx + 0x2684) = iVar12;
+        *(undefined4 *)(0x000026c8 + ctx + 4) = vapVteCntl;
+        ringCursor = (undefined4 *)((int (*)())gld_emitVapStreamControl)(ctx,ringCursor);
       }
     }
-    if (*(char *)(param_1 + 0x2a42) == '\0') {
-      *puVar6 = 0x5c8;
-      puVar6[1] = 0x10000000;
-      puVar6 = puVar6 + 2;
-      *(undefined1 *)(param_1 + 0x2a42) = 1;
+    if (*(char *)(ctx + 0x2a42) == '\0') {
+      *ringCursor = 0x5c8;
+      ringCursor[1] = 0x10000000;
+      ringCursor = ringCursor + 2;
+      *(undefined1 *)(ctx + 0x2a42) = 1;
     }
-    iVar7 = (uint)bVar1 * iVar5;
-    *puVar6 = 0x82c;
-    puVar6[1] = *(undefined4 *)(0x00001dc4 + param_1);
-    uVar11 = *(uint *)(&DAT_001d9888 + param_3 * 4);
-    puVar6[2] = iVar7 * 0x10000 | 0xc0003500;
-    puVar6[3] = iVar5 << 0x10 | uVar11 & 0xf | 0x30;
-    puVar6[iVar7 + 4] = ((unsigned char *)0x00001393U);
-    puVar6[iVar7 + 5] = 0;
-    *(undefined4 **)(param_1 + 0x298c) = puVar6 + iVar7 + 6;
-    *(undefined4 **)(param_1 + 0x1dc) = puVar6 + iVar7 + 6;
+    iVar7 = (uint)vertexStrideWords * trimmedCount;
+    *ringCursor = 0x82c;
+    ringCursor[1] = *(undefined4 *)(0x00001dc4 + ctx);
+    primFlags = *(uint *)(&DAT_001d9888 + primitiveMode * 4);
+    ringCursor[2] = iVar7 * 0x10000 | 0xc0003500;
+    ringCursor[3] = trimmedCount << 0x10 | primFlags & 0xf | 0x30;
+    ringCursor[iVar7 + 4] = ((unsigned char *)0x00001393U);
+    ringCursor[iVar7 + 5] = 0;
+    *(undefined4 **)(ctx + 0x298c) = ringCursor + iVar7 + 6;
+    *(undefined4 **)(ctx + 0x1dc) = ringCursor + iVar7 + 6;
     goto LAB_00026f60;
   }
-  uVar11 = *(uint *)(param_1 + 0x283c) & 0x1f;
-  if (*(char *)(param_1 + 0x27d4) == '\0') {
-    bVar1 = *(byte *)(*(int *)(((unsigned char *)0x000027cc) + param_1) + 2);
+  streamCountField = *(uint *)(ctx + 0x283c) & 0x1f;
+  if (*(char *)(ctx + 0x27d4) == '\0') {
+    vertexStrideWords = *(byte *)(*(int *)(((unsigned char *)0x000027cc) + ctx) + 2);
   }
   else {
-    bVar1 = *(byte *)(*(int *)(0x000027d0 + param_1) + 2);
+    vertexStrideWords = *(byte *)(*(int *)(0x000027d0 + ctx) + 2);
   }
-  iVar12 = *(int *)(param_1 + 0x1ec);
-  puVar6 = *(undefined4 **)(param_1 + 0x1dc);
-  iVar7 = (uint)bVar1 * iVar5 * 4;
-  *(int *)(param_1 + 0x1ec) = iVar12 + iVar7;
-  *(undefined4 **)(param_1 + 0x298c) = puVar6;
-  puVar3 = *(uint **)(param_1 + 0x1d8);
-  *puVar3 = (int)puVar6 - (int)puVar3 >> 2 | *puVar3;
-  *(undefined4 **)(param_1 + 0x1d8) = puVar6;
-  puVar6[1] = uVar11;
-  puVar6[2] = iVar12 - (int)puVar6 >> 2;
-  *puVar6 = 0x38000000;
-  puVar6[3] = 0;
-  if (*(char *)(param_1 + 0x27d4) == '\0') {
-    *(int *)(param_1 + 0x26d4) = param_1 + 0x2880;
-    *(int *)(param_1 + 0x26d8) = param_1 + 0x28a0;
-    *(undefined4 *)(param_1 + 0x26d0) = *(undefined4 *)(param_1 + 0x283c);
-    puVar6 = (undefined4 *)((int (*)())gld_emitStreamAddressRegisters)(param_1,puVar6 + 4);
-    iVar4 = param_1 + 0x2840;
-    if (*(int *)(param_1 + 0x2680) != iVar4) {
-      iVar2 = param_1 + 0x2860;
+  iVar12 = *(int *)(ctx + 0x1ec);
+  ringCursor = *(undefined4 **)(ctx + 0x1dc);
+  iVar7 = (uint)vertexStrideWords * trimmedCount * 4;
+  *(int *)(ctx + 0x1ec) = iVar12 + iVar7;
+  *(undefined4 **)(ctx + 0x298c) = ringCursor;
+  lastHeader = *(uint **)(ctx + 0x1d8);
+  *lastHeader = (int)ringCursor - (int)lastHeader >> 2 | *lastHeader;
+  *(undefined4 **)(ctx + 0x1d8) = ringCursor;
+  ringCursor[1] = streamCountField;
+  ringCursor[2] = iVar12 - (int)ringCursor >> 2;
+  *ringCursor = 0x38000000;
+  ringCursor[3] = 0;
+  if (*(char *)(ctx + 0x27d4) == '\0') {
+    *(int *)(ctx + 0x26d4) = ctx + 0x2880;
+    *(int *)(ctx + 0x26d8) = ctx + 0x28a0;
+    *(undefined4 *)(ctx + 0x26d0) = *(undefined4 *)(ctx + 0x283c);
+    ringCursor = (undefined4 *)((int (*)())gld_emitStreamAddressRegisters)(ctx,ringCursor + 4);
+    streamRecord = ctx + 0x2840;
+    if (*(int *)(ctx + 0x2680) != streamRecord) {
+      streamRecordExt = ctx + 0x2860;
       goto LAB_00026d64;
     }
   }
   else {
-    *(int *)(param_1 + 0x26d4) = param_1 + 0x2924;
-    *(int *)(param_1 + 0x26d8) = param_1 + 0x2944;
-    *(undefined4 *)(param_1 + 0x26d0) = *(undefined4 *)(param_1 + 0x283c);
-    puVar6 = (undefined4 *)((int (*)())gld_emitStreamAddressRegisters)(param_1,puVar6 + 4);
-    iVar4 = param_1 + 0x28e4;
-    if (*(int *)(param_1 + 0x2680) != iVar4) {
-      iVar2 = param_1 + 0x2904;
+    *(int *)(ctx + 0x26d4) = ctx + 0x2924;
+    *(int *)(ctx + 0x26d8) = ctx + 0x2944;
+    *(undefined4 *)(ctx + 0x26d0) = *(undefined4 *)(ctx + 0x283c);
+    ringCursor = (undefined4 *)((int (*)())gld_emitStreamAddressRegisters)(ctx,ringCursor + 4);
+    streamRecord = ctx + 0x28e4;
+    if (*(int *)(ctx + 0x2680) != streamRecord) {
+      streamRecordExt = ctx + 0x2904;
 LAB_00026d64:
-      *(int *)(param_1 + 0x2680) = iVar4;
-      *(int *)(param_1 + 0x2684) = iVar2;
-      puVar6 = (undefined4 *)((int (*)())gld_emitVapStreamControl)(param_1,puVar6);
+      *(int *)(ctx + 0x2680) = streamRecord;
+      *(int *)(ctx + 0x2684) = streamRecordExt;
+      ringCursor = (undefined4 *)((int (*)())gld_emitVapStreamControl)(ctx,ringCursor);
     }
   }
-  if (*(char *)(param_1 + 0x2a42) != '\0') {
-    *puVar6 = 0x5c8;
-    puVar6[1] = 0x10000000;
-    puVar6 = puVar6 + 2;
-    *(undefined1 *)(param_1 + 0x2a42) = 0;
+  if (*(char *)(ctx + 0x2a42) != '\0') {
+    *ringCursor = 0x5c8;
+    ringCursor[1] = 0x10000000;
+    ringCursor = ringCursor + 2;
+    *(undefined1 *)(ctx + 0x2a42) = 0;
   }
-  puVar8 = puVar6 + 6;
-  uVar9 = *(uint *)(&DAT_001d9888 + param_3 * 4);
-  *puVar6 = 0x82c;
-  uVar10 = *(undefined4 *)(0x00001dc4 + param_1);
-  puVar6[4] = ((unsigned char *)0x00001393U);
-  puVar6[2] = 0xc0003400;
-  puVar6[5] = 0;
-  puVar6[1] = uVar10;
-  puVar6[3] = iVar5 << 0x10 | uVar9 & 0xf | 0x820;
-  *(undefined4 **)(param_1 + 0x298c) = puVar8;
-  *(undefined4 **)(param_1 + 0x1dc) = puVar8;
-  if (((*(uint *)(param_1 + 0x27d8) & 2) != 0) && ((*(uint *)(param_1 + 0x24) & 2) != 0)) {
-    gldFlushDataCacheRange(param_1,iVar12,iVar7,param_4,param_5,uVar11,0xc0003400,puVar8);
+  packetEnd = ringCursor + 6;
+  primFlagsIndirect = *(uint *)(&DAT_001d9888 + primitiveMode * 4);
+  *ringCursor = 0x82c;
+  vapVteCntl = *(undefined4 *)(0x00001dc4 + ctx);
+  ringCursor[4] = ((unsigned char *)0x00001393U);
+  ringCursor[2] = 0xc0003400;
+  ringCursor[5] = 0;
+  ringCursor[1] = vapVteCntl;
+  ringCursor[3] = trimmedCount << 0x10 | primFlagsIndirect & 0xf | 0x820;
+  *(undefined4 **)(ctx + 0x298c) = packetEnd;
+  *(undefined4 **)(ctx + 0x1dc) = packetEnd;
+  if (((*(uint *)(ctx + 0x27d8) & 2) != 0) && ((*(uint *)(ctx + 0x24) & 2) != 0)) {
+    gldFlushDataCacheRange(ctx,iVar12,iVar7,vertexCount,staleArgR7,streamCountField,0xc0003400,packetEnd);
   }
 LAB_00026f60:
-  *(undefined1 *)(param_1 + 0x2a5e) = 1;
+  *(undefined1 *)(ctx + 0x2a5e) = 1;
   return;
 }
 
@@ -1814,145 +1815,145 @@ int FUN_00027150(param_1, param_2, param_3, param_4)
   return;
 }
 
-/* FUN_000273a0 @ 0x273a0 (1484 bytes) */
-uint FUN_000273a0(int param_1,uint *param_2,uint *param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+/* gld_reserveDrawSpace @ 0x273a0 (1484 bytes) */
+uint gld_reserveDrawSpace(int ctx,uint *altCountPtr,uint *countInOut,undefined4 staleArgR6,undefined4 staleArgR7,undefined4 staleArgR8,undefined4 staleArgR9,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
 {
-  byte bVar1;
-  bool bVar2;
-  undefined1 uVar4;
-  undefined4 *puVar3;
+  byte vertexStrideWords;
+  bool usesSecondRecord;
+  undefined1 recordSelector;
+  undefined4 *alignedRingEnd;
   uint uVar5;
   uint uVar6;
-  uint *puVar7;
+  uint *activeCountPtr;
   uint uVar8;
-  uint uVar9;
-  uint uVar10;
+  uint modeBit;
+  uint fittingCount;
   int iVar11;
   int iVar12;
   uint uVar13;
-  undefined4 *puVar14;
-  uint uVar15;
-  uint uVar16;
+  undefined4 *ringCursor;
+  uint newModeWord;
+  uint vertexStride;
   uint uVar17;
   uint uVar18;
   double staleStackArg_ffffff98;
   
-  puVar7 = param_3;
-  if (((unsigned char *)0x00002b80)[param_1] != '\0') {
-    puVar7 = param_2;
-    staleFprArg1 = (double)((int (*)())FUN_0002be90)(param_1,1,param_2,param_4,param_5,param_6,param_7);
+  activeCountPtr = countInOut;
+  if (((unsigned char *)0x00002b80)[ctx] != '\0') {
+    activeCountPtr = altCountPtr;
+    staleFprArg1 = (double)((int (*)())FUN_0002be90)(ctx,1,altCountPtr,staleArgR6,staleArgR7,staleArgR8,staleArgR9);
   }
-  if (*(int *)(param_1 + 0x1b68) != 0) {
-    ((void (*)())gld_revalidateStreamProgram)(param_1 + 0x240,param_2,puVar7,param_4,param_5,param_6,param_7,staleFprArg1,staleFprArg2,
+  if (*(int *)(ctx + 0x1b68) != 0) {
+    ((void (*)())gld_revalidateStreamProgram)(ctx + 0x240,altCountPtr,activeCountPtr,staleArgR6,staleArgR7,staleArgR8,staleArgR9,staleFprArg1,staleFprArg2,
                  staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleStackArg_ffffff98);
   }
-  if ((*param_3 == 0) || (*(int *)(*(int *)(param_1 + 0x14) + 0x120) == 0)) {
-    bVar2 = false;
-    uVar4 = 0;
-    bVar1 = *(byte *)(*(int *)(((unsigned char *)0x000027cc) + param_1) + 2);
+  if ((*countInOut == 0) || (*(int *)(*(int *)(ctx + 0x14) + 0x120) == 0)) {
+    usesSecondRecord = false;
+    recordSelector = 0;
+    vertexStrideWords = *(byte *)(*(int *)(((unsigned char *)0x000027cc) + ctx) + 2);
   }
   else {
-    bVar2 = true;
-    uVar4 = 1;
-    bVar1 = *(byte *)(*(int *)(0x000027d0 + param_1) + 2);
+    usesSecondRecord = true;
+    recordSelector = 1;
+    vertexStrideWords = *(byte *)(*(int *)(0x000027d0 + ctx) + 2);
   }
-  uVar16 = (uint)bVar1;
-  *(undefined1 *)(param_1 + 0x27d4) = uVar4;
-  uVar5 = *(uint *)(param_1 + 0x27d8);
-  if (!bVar2) {
+  vertexStride = (uint)vertexStrideWords;
+  *(undefined1 *)(ctx + 0x27d4) = recordSelector;
+  uVar5 = *(uint *)(ctx + 0x27d8);
+  if (!usesSecondRecord) {
     if ((uVar5 & 0x10) != 0) goto LAB_00027478;
 LAB_00027458:
-    uVar9 = 1;
+    modeBit = 1;
   }
   else {
     if ((uVar5 & 8) == 0) goto LAB_00027458;
 LAB_00027478:
-    uVar9 = 2;
+    modeBit = 2;
   }
-  uVar15 = uVar9 | uVar5 & 0x18;
-  if (uVar5 != uVar15) {
-    *(int *)(param_1 + 0x2680) = param_1 + 0x26dc;
+  newModeWord = modeBit | uVar5 & 0x18;
+  if (uVar5 != newModeWord) {
+    *(int *)(ctx + 0x2680) = ctx + 0x26dc;
   }
-  if ((uVar9 & 2) == 0) {
-    if (*(char *)(param_1 + 0x27d4) == '\0') {
-      if (*(int *)(param_1 + 0x2680) != param_1 + 0x2840) goto LAB_000276e0;
+  if ((modeBit & 2) == 0) {
+    if (*(char *)(ctx + 0x27d4) == '\0') {
+      if (*(int *)(ctx + 0x2680) != ctx + 0x2840) goto LAB_000276e0;
 LAB_000276f8:
       iVar12 = 2;
       iVar11 = 4;
     }
     else {
-      if (*(int *)(param_1 + 0x2680) == param_1 + 0x28e4) goto LAB_000276f8;
+      if (*(int *)(ctx + 0x2680) == ctx + 0x28e4) goto LAB_000276f8;
 LAB_000276e0:
-      uVar5 = *(int *)(param_1 + 0x267c) + 1U & 0xfffffffe;
+      uVar5 = *(int *)(ctx + 0x267c) + 1U & 0xfffffffe;
       iVar11 = uVar5 + 8;
       iVar12 = uVar5 + 6;
     }
-    if (*(char *)(param_1 + 0x2a42) == '\0') {
+    if (*(char *)(ctx + 0x2a42) == '\0') {
       iVar11 = iVar12 + 4;
     }
-    if ((int)*param_3 < 0xc) {
-      uVar5 = uVar16 * 0xc;
-      uVar10 = 0xc;
+    if ((int)*countInOut < 0xc) {
+      uVar5 = vertexStride * 0xc;
+      fittingCount = 0xc;
     }
     else {
-      uVar10 = ((int)*param_3 / 0xc) * 0xc;
-      uVar5 = uVar16 * uVar10;
+      fittingCount = ((int)*countInOut / 0xc) * 0xc;
+      uVar5 = vertexStride * fittingCount;
       if (0x3fff < uVar5) {
-        uVar10 = ((0x3fff / uVar16) / 0xc) * 0xc;
-        uVar5 = uVar16 * uVar10;
+        fittingCount = ((0x3fff / vertexStride) / 0xc) * 0xc;
+        uVar5 = vertexStride * fittingCount;
       }
     }
-    puVar14 = *(undefined4 **)(param_1 + 0x1dc);
-    if (*(undefined4 **)(param_1 + 0x1e0) <=
-        puVar14 + uVar5 + iVar11 + 2 + (uint)(*(byte *)(param_1 + 8) >> 1) + 4) {
-      gld_submitRing(param_1,0x1000000);
-      puVar14 = *(undefined4 **)(param_1 + 0x1dc);
+    ringCursor = *(undefined4 **)(ctx + 0x1dc);
+    if (*(undefined4 **)(ctx + 0x1e0) <=
+        ringCursor + uVar5 + iVar11 + 2 + (uint)(*(byte *)(ctx + 8) >> 1) + 4) {
+      gld_submitRing(ctx,0x1000000);
+      ringCursor = *(undefined4 **)(ctx + 0x1dc);
     }
-    uVar5 = (int)puVar14 + iVar11 * 4 + 0xf & 0xfffffff0;
-    puVar3 = (undefined4 *)(uVar5 + iVar11 * -4);
-    *(undefined4 **)(param_1 + 0x1dc) = puVar3;
-    for (; puVar14 < puVar3; puVar14 = puVar14 + 1) {
-      *puVar14 = 0x80000000;
+    uVar5 = (int)ringCursor + iVar11 * 4 + 0xf & 0xfffffff0;
+    alignedRingEnd = (undefined4 *)(uVar5 + iVar11 * -4);
+    *(undefined4 **)(ctx + 0x1dc) = alignedRingEnd;
+    for (; ringCursor < alignedRingEnd; ringCursor = ringCursor + 1) {
+      *ringCursor = 0x80000000;
     }
-    if (*param_3 != 0) goto LAB_00027854;
-    uVar8 = (((*(int *)(param_1 + 0x1e0) - *(int *)(param_1 + 0x1dc) >> 2) + -1) -
-            (uint)(*(byte *)(param_1 + 8) >> 1)) - (iVar11 + 2);
+    if (*countInOut != 0) goto LAB_00027854;
+    uVar8 = (((*(int *)(ctx + 0x1e0) - *(int *)(ctx + 0x1dc) >> 2) + -1) -
+            (uint)(*(byte *)(ctx + 8) >> 1)) - (iVar11 + 2);
     if (0x600 < uVar8) {
       uVar8 = 0x600;
     }
   }
   else {
-    uVar5 = *param_3;
-    uVar10 = 0x8b;
-    if ((uVar5 != 0) && (uVar10 = 0x1000a, uVar5 < 0x10000)) {
-      uVar10 = uVar5 + 0xb;
+    uVar5 = *countInOut;
+    fittingCount = 0x8b;
+    if ((uVar5 != 0) && (fittingCount = 0x1000a, uVar5 < 0x10000)) {
+      fittingCount = uVar5 + 0xb;
     }
-    uVar8 = (uint)*(byte *)(param_1 + 8);
+    uVar8 = (uint)*(byte *)(ctx + 8);
     iVar12 = 0xc;
-    uVar10 = (uVar10 / 0xc) * 0xc;
-    uVar17 = uVar16 * uVar10 + (uint)(*(byte *)(param_1 + 8) >> 1) + 0x20;
-    if (*(char *)(param_1 + 0x2a42) == '\0') {
+    fittingCount = (fittingCount / 0xc) * 0xc;
+    uVar17 = vertexStride * fittingCount + (uint)(*(byte *)(ctx + 8) >> 1) + 0x20;
+    if (*(char *)(ctx + 0x2a42) == '\0') {
       iVar12 = 10;
     }
-    uVar18 = iVar12 + ((*(uint *)(param_1 + 0x283c) & 0x1f) + 1 >> 1) * 3 + 3;
-    if (!bVar2) {
-      if (*(int *)(param_1 + 0x2680) != param_1 + 0x2840) goto LAB_00027540;
+    uVar18 = iVar12 + ((*(uint *)(ctx + 0x283c) & 0x1f) + 1 >> 1) * 3 + 3;
+    if (!usesSecondRecord) {
+      if (*(int *)(ctx + 0x2680) != ctx + 0x2840) goto LAB_00027540;
     }
-    else if (*(int *)(param_1 + 0x2680) != param_1 + 0x28e4) {
+    else if (*(int *)(ctx + 0x2680) != ctx + 0x28e4) {
 LAB_00027540:
-      uVar18 = uVar18 + (*(int *)(param_1 + 0x267c) + 1U & 0xfffffffe) + 4;
+      uVar18 = uVar18 + (*(int *)(ctx + 0x267c) + 1U & 0xfffffffe) + 4;
     }
-    uVar5 = *(uint *)(param_1 + 0x1ec);
+    uVar5 = *(uint *)(ctx + 0x1ec);
     if (uVar5 == 0) {
-      uVar13 = *(uint *)(param_1 + 0x1dc);
-      iVar11 = *(int *)(param_1 + 0x1e0);
+      uVar13 = *(uint *)(ctx + 0x1dc);
+      iVar11 = *(int *)(ctx + 0x1e0);
       uVar5 = ((int)(iVar11 - uVar13) >> 2) - 1;
       if (uVar5 < uVar18 + uVar17) {
-        if (*(int *)(param_1 + 0x1e4) + 0x28U < uVar13) {
-          gld_submitRing(param_1,0x1000000);
-          uVar8 = (uint)*(byte *)(param_1 + 8);
-          uVar13 = *(uint *)(param_1 + 0x1dc);
-          iVar11 = *(int *)(param_1 + 0x1e0);
+        if (*(int *)(ctx + 0x1e4) + 0x28U < uVar13) {
+          gld_submitRing(ctx,0x1000000);
+          uVar8 = (uint)*(byte *)(ctx + 8);
+          uVar13 = *(uint *)(ctx + 0x1dc);
+          iVar11 = *(int *)(ctx + 0x1e0);
         }
         iVar12 = iVar11 - uVar13;
 LAB_00027630:
@@ -1970,72 +1971,72 @@ LAB_00027630:
         uVar17 = uVar18;
       }
       iVar12 = iVar11 + 0x94;
-      *(int *)(param_1 + 0x1f0) = iVar12;
+      *(int *)(ctx + 0x1f0) = iVar12;
       uVar5 = uVar13 + uVar17 * 4 + 0x9f & 0xfffffff8;
-      *(uint *)(param_1 + 0x1e0) = uVar5;
+      *(uint *)(ctx + 0x1e0) = uVar5;
       uVar5 = uVar5 + 0x7f & 0xffffff80;
-      *(uint *)(param_1 + 0x1ec) = uVar5;
+      *(uint *)(ctx + 0x1ec) = uVar5;
     }
     else {
-      uVar13 = *(uint *)(param_1 + 0x1dc);
-      iVar11 = *(int *)(param_1 + 0x1e0);
-      iVar12 = *(int *)(param_1 + 0x1f0);
+      uVar13 = *(uint *)(ctx + 0x1dc);
+      iVar11 = *(int *)(ctx + 0x1e0);
+      iVar12 = *(int *)(ctx + 0x1f0);
       if ((((int)(iVar11 - uVar13) >> 2) - 1U < uVar18) ||
          ((uint)((int)(iVar12 - uVar5) >> 2) < uVar17)) {
-        if (*(int *)(param_1 + 0x1e4) + 0x28U < uVar13) {
-          gld_submitRing(param_1,0x1000000);
-          uVar8 = (uint)*(byte *)(param_1 + 8);
-          uVar13 = *(uint *)(param_1 + 0x1dc);
-          iVar11 = *(int *)(param_1 + 0x1e0);
+        if (*(int *)(ctx + 0x1e4) + 0x28U < uVar13) {
+          gld_submitRing(ctx,0x1000000);
+          uVar8 = (uint)*(byte *)(ctx + 8);
+          uVar13 = *(uint *)(ctx + 0x1dc);
+          iVar11 = *(int *)(ctx + 0x1e0);
         }
         iVar12 = iVar11 - uVar13;
         goto LAB_00027630;
       }
     }
     uVar8 = ((int)(iVar12 - uVar5) >> 2) - (uVar8 >> 1);
-    if (uVar16 * uVar10 <= uVar8) goto LAB_00027854;
+    if (vertexStride * fittingCount <= uVar8) goto LAB_00027854;
   }
-  uVar10 = ((uVar8 / uVar16) / 0xc) * 0xc;
+  fittingCount = ((uVar8 / vertexStride) / 0xc) * 0xc;
 LAB_00027854:
-  *param_3 = uVar10;
-  uVar8 = (uint)*(byte *)(param_1 + 8);
+  *countInOut = fittingCount;
+  uVar8 = (uint)*(byte *)(ctx + 8);
   if (uVar8 != 0x20) {
-    if ((*(uint *)(param_1 + 0x27d8) & 1) == 0) {
-      uVar17 = *(uint *)(param_1 + 0x2838);
+    if ((*(uint *)(ctx + 0x27d8) & 1) == 0) {
+      uVar17 = *(uint *)(ctx + 0x2838);
     }
     else {
-      uVar17 = *(uint *)(param_1 + 0x2834);
+      uVar17 = *(uint *)(ctx + 0x2834);
     }
     uVar18 = uVar17;
     if (uVar17 <= uVar5) {
       uVar18 = (uVar5 + uVar8) - 1 & -uVar8;
     }
-    uVar16 = uVar5 + uVar16 * uVar10 * 4;
-    if (uVar17 <= uVar16) {
-      uVar17 = (uVar16 + uVar8) - 1 & -uVar8;
+    vertexStride = uVar5 + vertexStride * fittingCount * 4;
+    if (uVar17 <= vertexStride) {
+      uVar17 = (vertexStride + uVar8) - 1 & -uVar8;
     }
     if (uVar18 < uVar17) {
-      uVar10 = uVar17 - uVar18;
-      for (uVar16 = uVar10 >> 9; uVar16 != 0; uVar16 = uVar16 - 1) {
+      fittingCount = uVar17 - uVar18;
+      for (vertexStride = fittingCount >> 9; vertexStride != 0; vertexStride = vertexStride - 1) {
         dataCacheBlockClearToZero(uVar18);
         dataCacheBlockClearToZero(uVar18 + uVar8);
         dataCacheBlockClearToZero(uVar18 + uVar8 * 2);
         dataCacheBlockClearToZero(uVar18 + uVar8 * 3);
         uVar18 = uVar18 + 0x200;
       }
-      for (uVar16 = uVar10 >> 7 & 3; uVar16 != 0; uVar16 = uVar16 - 1) {
+      for (vertexStride = fittingCount >> 7 & 3; vertexStride != 0; vertexStride = vertexStride - 1) {
         dataCacheBlockClearToZero(uVar18);
         uVar18 = uVar18 + 0x80;
       }
-      if ((uVar9 & 1) == 0) {
-        *(uint *)(param_1 + 0x2838) = uVar17;
+      if ((modeBit & 1) == 0) {
+        *(uint *)(ctx + 0x2838) = uVar17;
       }
       else {
-        *(uint *)(param_1 + 0x2834) = uVar17;
+        *(uint *)(ctx + 0x2834) = uVar17;
       }
     }
   }
-  *(uint *)(param_1 + 0x27d8) = uVar15;
+  *(uint *)(ctx + 0x27d8) = newModeWord;
   return uVar5;
 }
 
@@ -5216,43 +5217,43 @@ void FUN_0002b740(int ctx,int *param_2,undefined4 param_3,undefined4 param_4,und
   return;
 }
 
-/* FUN_0002b7f0 @ 0x2b7f0 (968 bytes) */
-int FUN_0002b7f0(ctx, writeCursor)
+/* gld_emitQueryBeginPacket @ 0x2b7f0 (968 bytes) */
+int gld_emitQueryBeginPacket(ctx, writeCursor)
   int ctx;
   uint *writeCursor;
 {
-  bool bVar1;
+  bool zpassOnly;
   uint uVar2;
   int *piVar3;
-  uint *puVar4;
+  uint *lastHeader;
   undefined4 uVar5;
   uint uVar6;
-  uint uVar7;
-  int *piVar8;
-  undefined4 *puVar9;
-  undefined4 *puVar10;
+  uint counterCount;
+  int *queryPool;
+  undefined4 *packetBody;
+  undefined4 *packetCursor;
   uint uVar11;
-  undefined4 uVar12;
-  undefined4 *puVar13;
-  int iVar14;
+  undefined4 queryValue;
+  undefined4 *queryRecordWord;
+  int slotIndex;
   bool bVar15;
   char reservation;
   byte crField0;
   int iVar16;
   
-  piVar8 = *(int **)(ctx + 0x224);
-  uVar12 = *(undefined4 *)(ctx + 0x1cf8);
-  uVar7 = *(uint *)(ctx + 0x2610);
-  puVar13 = (undefined4 *)**(undefined4 **)(ctx + 0x234);
+  queryPool = *(int **)(ctx + 0x224);
+  queryValue = *(undefined4 *)(ctx + 0x1cf8);
+  counterCount = *(uint *)(ctx + 0x2610);
+  queryRecordWord = (undefined4 *)**(undefined4 **)(ctx + 0x234);
   uVar6 = *(uint *)(ctx + 0x154) & 0x30000;
-  if ((piVar8 != (int *)0x0) && (((unsigned char *)0x00002b7e)[ctx] != '\0')) {
-    bVar1 = *(int *)(ctx + 0x261c) != 2;
-    if ((uVar7 == 1) && (!bVar1)) {
-      uVar7 = 2;
+  if ((queryPool != (int *)0x0) && (((unsigned char *)0x00002b7e)[ctx] != '\0')) {
+    zpassOnly = *(int *)(ctx + 0x261c) != 2;
+    if ((counterCount == 1) && (!zpassOnly)) {
+      counterCount = 2;
     }
-    if (*piVar8 == 0) {
+    if (*queryPool == 0) {
       iVar16 = 0x10;
-      piVar3 = piVar8;
+      piVar3 = queryPool;
       do {
         piVar3[4] = 0;
         piVar3[8] = 0;
@@ -5261,53 +5262,53 @@ int FUN_0002b7f0(ctx, writeCursor)
         piVar3 = piVar3 + 8;
         iVar16 = iVar16 + -1;
       } while (iVar16 != 0);
-      iVar14 = 0;
+      slotIndex = 0;
       iVar16 = 0;
-      piVar8[1] = 1;
+      queryPool[1] = 1;
     }
     else {
-      iVar14 = piVar8[1];
-      piVar8[1] = iVar14 + 1U & 0xf;
-      uVar11 = piVar8[piVar8[2] * 8 + 0x85];
+      slotIndex = queryPool[1];
+      queryPool[1] = slotIndex + 1U & 0xf;
+      uVar11 = queryPool[queryPool[2] * 8 + 0x85];
       if (uVar6 == 0x10000) {
-        uVar2 = piVar8[iVar14 * 8 + 4] << 0x10 | (uint)piVar8[iVar14 * 8 + 4] >> 0x10;
+        uVar2 = queryPool[slotIndex * 8 + 4] << 0x10 | (uint)queryPool[slotIndex * 8 + 4] >> 0x10;
       }
       else {
-        uVar2 = piVar8[iVar14 * 8 + 4];
+        uVar2 = queryPool[slotIndex * 8 + 4];
       }
-      iVar16 = iVar14 * 0x20;
+      iVar16 = slotIndex * 0x20;
       if ((uVar2 != 0) && (bVar15 = CARRY4(uVar11,uVar2), uVar11 = uVar11 + uVar2, bVar15)) {
         uVar11 = 0xffffffff;
       }
-      if (1 < uVar7) {
+      if (1 < counterCount) {
         if (uVar6 == 0x10000) {
-          uVar2 = piVar8[iVar14 * 8 + 8] << 0x10 | (uint)piVar8[iVar14 * 8 + 8] >> 0x10;
+          uVar2 = queryPool[slotIndex * 8 + 8] << 0x10 | (uint)queryPool[slotIndex * 8 + 8] >> 0x10;
         }
         else {
-          uVar2 = piVar8[iVar14 * 8 + 8];
+          uVar2 = queryPool[slotIndex * 8 + 8];
         }
         if ((uVar2 != 0) && (bVar15 = CARRY4(uVar11,uVar2), uVar11 = uVar11 + uVar2, bVar15)) {
           uVar11 = 0xffffffff;
         }
       }
-      if (2 < uVar7) {
+      if (2 < counterCount) {
         if (uVar6 == 0x10000) {
-          uVar2 = piVar8[iVar14 * 8 + 6] << 0x10 | (uint)piVar8[iVar14 * 8 + 6] >> 0x10;
+          uVar2 = queryPool[slotIndex * 8 + 6] << 0x10 | (uint)queryPool[slotIndex * 8 + 6] >> 0x10;
         }
         else {
-          uVar2 = piVar8[iVar14 * 8 + 6];
+          uVar2 = queryPool[slotIndex * 8 + 6];
         }
         if ((uVar2 != 0) && (bVar15 = CARRY4(uVar11,uVar2), uVar11 = uVar11 + uVar2, bVar15)) {
           uVar11 = 0xffffffff;
         }
       }
       uVar2 = uVar11;
-      if (3 < uVar7) {
+      if (3 < counterCount) {
         if (uVar6 == 0x10000) {
-          uVar6 = piVar8[iVar14 * 8 + 7] << 0x10 | (uint)piVar8[iVar14 * 8 + 7] >> 0x10;
+          uVar6 = queryPool[slotIndex * 8 + 7] << 0x10 | (uint)queryPool[slotIndex * 8 + 7] >> 0x10;
         }
         else {
-          uVar6 = piVar8[iVar14 * 8 + 7];
+          uVar6 = queryPool[slotIndex * 8 + 7];
         }
         if (uVar6 != 0) {
           uVar2 = 0xffffffff;
@@ -5316,13 +5317,13 @@ int FUN_0002b7f0(ctx, writeCursor)
           }
         }
       }
-      piVar8[piVar8[2] * 8 + 0x85] = uVar2;
+      queryPool[queryPool[2] * 8 + 0x85] = uVar2;
     }
-    piVar3 = puVar13 + 4;
-    *(undefined4 *)((int)piVar8 + iVar16 + 0x1c) = 0;
-    *(undefined4 *)((int)piVar8 + iVar16 + 0x10) = 0;
-    *(undefined4 *)((int)piVar8 + iVar16 + 0x20) = 0;
-    *(undefined4 *)((int)piVar8 + iVar16 + 0x18) = 0;
+    piVar3 = queryRecordWord + 4;
+    *(undefined4 *)((int)queryPool + iVar16 + 0x1c) = 0;
+    *(undefined4 *)((int)queryPool + iVar16 + 0x10) = 0;
+    *(undefined4 *)((int)queryPool + iVar16 + 0x20) = 0;
+    *(undefined4 *)((int)queryPool + iVar16 + 0x18) = 0;
     do {
       if (reservation != '\0') {
         iVar16 = storeWordConditionalIndexed(*piVar3 + 0x10000,0,piVar3);
@@ -5330,58 +5331,58 @@ int FUN_0002b7f0(ctx, writeCursor)
         crField0 = 2;
       }
     } while (!(bool)(crField0 >> 1 & 1));
-    puVar9 = (undefined4 *)((uint)(writeCursor + 0xb) & 0xffffffe0);
-    puVar10 = puVar9 + 4;
-    *writeCursor = (((int)puVar9 - (int)writeCursor) + -8) * 0x4000 | 0xc0001000;
-    puVar9[-1] = (int)puVar9 - (int)writeCursor;
-    puVar4 = *(uint **)(ctx + 0x1d8);
-    *puVar4 = (int)puVar9 - (int)puVar4 >> 2 | *puVar4;
-    *(undefined4 **)(ctx + 0x1d8) = puVar9;
-    *puVar9 = 0x3b000000;
-    uVar5 = *puVar13;
-    puVar9[2] = 1;
-    puVar9[3] = iVar14;
-    puVar9[1] = uVar5;
-    if (bVar1) {
-      if (uVar7 != 0) {
+    packetBody = (undefined4 *)((uint)(writeCursor + 0xb) & 0xffffffe0);
+    packetCursor = packetBody + 4;
+    *writeCursor = (((int)packetBody - (int)writeCursor) + -8) * 0x4000 | 0xc0001000;
+    packetBody[-1] = (int)packetBody - (int)writeCursor;
+    lastHeader = *(uint **)(ctx + 0x1d8);
+    *lastHeader = (int)packetBody - (int)lastHeader >> 2 | *lastHeader;
+    *(undefined4 **)(ctx + 0x1d8) = packetBody;
+    *packetBody = 0x3b000000;
+    uVar5 = *queryRecordWord;
+    packetBody[2] = 1;
+    packetBody[3] = slotIndex;
+    packetBody[1] = uVar5;
+    if (zpassOnly) {
+      if (counterCount != 0) {
         uVar6 = 0;
         do {
-          *puVar10 = ((unsigned char *)0x000010b2U);
-          puVar10[2] = ((unsigned char *)0x000013d7U);
-          puVar10[3] = 0;
-          puVar10[1] = 1 << (uVar6 & 0x3f);
+          *packetCursor = ((unsigned char *)0x000010b2U);
+          packetCursor[2] = ((unsigned char *)0x000013d7U);
+          packetCursor[3] = 0;
+          packetCursor[1] = 1 << (uVar6 & 0x3f);
           uVar6 = uVar6 + 1;
-          puVar10 = puVar10 + 4;
-          uVar7 = uVar7 - 1;
-        } while (uVar7 != 0);
+          packetCursor = packetCursor + 4;
+          counterCount = counterCount - 1;
+        } while (counterCount != 0);
       }
-      writeCursor = puVar10 + 2;
-      *puVar10 = ((unsigned char *)0x000010b2U);
-      puVar10[1] = 0xf;
+      writeCursor = packetCursor + 2;
+      *packetCursor = ((unsigned char *)0x000010b2U);
+      packetCursor[1] = 0xf;
     }
     else {
-      puVar9[5] = 0;
-      puVar9[4] = ((unsigned char *)0x000013c5U);
+      packetBody[5] = 0;
+      packetBody[4] = ((unsigned char *)0x000013c5U);
       uVar6 = 0;
       iVar16 = 2;
-      puVar13 = puVar9 + 6;
+      queryRecordWord = packetBody + 6;
       do {
-        puVar9 = puVar13;
-        *puVar9 = ((unsigned char *)0x000012faU);
-        puVar9[2] = ((unsigned char *)0x000013d7U);
-        puVar9[3] = 0;
-        puVar9[1] = 1 << (uVar6 & 0x3f);
+        packetBody = queryRecordWord;
+        *packetBody = ((unsigned char *)0x000012faU);
+        packetBody[2] = ((unsigned char *)0x000013d7U);
+        packetBody[3] = 0;
+        packetBody[1] = 1 << (uVar6 & 0x3f);
         uVar6 = uVar6 + 1;
         iVar16 = iVar16 + -1;
-        puVar13 = puVar9 + 4;
+        queryRecordWord = packetBody + 4;
       } while (iVar16 != 0);
-      puVar9[4] = ((unsigned char *)0x000012faU);
-      puVar9[7] = uVar12;
-      writeCursor = puVar9 + 8;
-      puVar9[5] = 3;
-      puVar9[6] = ((unsigned char *)0x000013c5U);
+      packetBody[4] = ((unsigned char *)0x000012faU);
+      packetBody[7] = queryValue;
+      writeCursor = packetBody + 8;
+      packetBody[5] = 3;
+      packetBody[6] = ((unsigned char *)0x000013c5U);
     }
-    *piVar8 = 1;
+    *queryPool = 1;
   }
   return writeCursor;
 }
@@ -6774,13 +6775,13 @@ asm(".set gldPrimWrapperLineStrip_23a24, _gldPrimWrapperLineStrip_23a24");
 asm(".globl gld_drawElementsImmediate");
 asm(".set gld_drawElementsImmediate, _gld_drawElementsImmediate");
 asm(".globl FUN_00026bf0");
-asm(".set FUN_00026bf0, _FUN_00026bf0");
+asm(".set FUN_00026bf0, _gld_drawArraysDirect");
 asm(".globl FUN_00026f80");
 asm(".set FUN_00026f80, _FUN_00026f80");
 asm(".globl FUN_00027150");
 asm(".set FUN_00027150, _FUN_00027150");
 asm(".globl FUN_000273a0");
-asm(".set FUN_000273a0, _FUN_000273a0");
+asm(".set FUN_000273a0, _gld_reserveDrawSpace");
 asm(".globl glReadPixels_entry");
 asm(".set glReadPixels_entry, _glReadPixels_entry");
 asm(".globl FUN_0002b740");
