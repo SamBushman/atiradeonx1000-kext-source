@@ -1,0 +1,23 @@
+use	VertexRegister__clone	puVar4	valueKey	INFERRED	ValueKey__init on arena alloc+1	^\s*puVar4\ =\ puVar2\ \+\ 1;$	+1
+use	VertexRegister__clone	puVar4	valueKey	INFERRED	ValueKey__init on arena alloc+1	^\s*FUN_00173938\(puVar4,iVar1,param_3\);$	+1
+use	VertexRegister__clone	puVar4	valueKey	INFERRED	ValueKey__init on arena alloc+1	^\s*FUN_00174e0c\(puVar4\);$	+2
+use	VertexRegister__clone	puVar4	valueKey	INFERRED	ValueKey__init on arena alloc+1	^\s*return\ puVar4;$	+1
+use	VertexRegister__clone	iVar1	loadVertexInst	INFERRED	IRLoadVertex inst created by clone	^\s*iVar1\ =\ FUN_00109810\(0xa4,param_3\);$	+4
+use	VertexRegister__clone	iVar1	loadVertexInst	INFERRED	IRLoadVertex inst created by clone	^\s*FUN_00173938\(puVar4,iVar1,param_3\);$	+1
+use	VertexRegister__clone	iVar1	loadVertexInst	INFERRED	IRLoadVertex inst created by clone	^\s*\(\(int\ \(\*\)\(\)\)FUN_0012306c\)\(param_1,iVar1\);$	+3
+use	Resource__clone	puVar3	valueKey	INFERRED	ValueKey__init on arena alloc+1	^\s*puVar3\ =\ puVar1\ \+\ 1;$	+1
+use	Resource__clone	puVar3	valueKey	INFERRED	ValueKey__init on arena alloc+1	^\s*FUN_00173938\(puVar3,puVar5,param_3\);$	+1
+use	Resource__clone	puVar3	valueKey	INFERRED	ValueKey__init on arena alloc+1	^\s*FUN_00174e0c\(puVar3\);$	+2
+use	Resource__clone	puVar3	valueKey	INFERRED	ValueKey__init on arena alloc+1	^\s*return\ puVar3;$	+1
+use	Resource__clone	puVar5	loadInst	INFERRED	IR load inst created by clone	^\s*puVar5\ =\ puVar1\ \+\ 1;$	+1
+use	Resource__clone	puVar5	loadInst	INFERRED	IR load inst created by clone	^\s*FUN_00109348\(puVar5,param_1,param_3\);$	+2
+use	Resource__clone	puVar5	loadInst	INFERRED	IR load inst created by clone	^\s*FUN_00173938\(puVar3,puVar5,param_3\);$	+1
+use	Resource__clone	puVar5	loadInst	INFERRED	IR load inst created by clone	^\s*\(\(int\ \(\*\)\(\)\)FUN_0012306c\)\(param_1,puVar5\);$	+3
+use	FixedValue__clone	puVar3	valueKey	INFERRED	ValueKey__init on arena alloc+1	^\s*puVar3\ =\ puVar1\ \+\ 1;$	+1
+use	FixedValue__clone	puVar3	valueKey	INFERRED	ValueKey__init on arena alloc+1	^\s*FUN_00173938\(puVar3,puVar5,param_3\);$	+1
+use	FixedValue__clone	puVar3	valueKey	INFERRED	ValueKey__init on arena alloc+1	^\s*FUN_00174e0c\(puVar3\);$	+2
+use	FixedValue__clone	puVar3	valueKey	INFERRED	ValueKey__init on arena alloc+1	^\s*return\ puVar3;$	+1
+use	FixedValue__clone	puVar5	loadInst	INFERRED	IR load inst created by clone	^\s*puVar5\ =\ puVar1\ \+\ 1;$	+1
+use	FixedValue__clone	puVar5	loadInst	INFERRED	IR load inst created by clone	^\s*FUN_00109938\(puVar5,param_3\);$	+2
+use	FixedValue__clone	puVar5	loadInst	INFERRED	IR load inst created by clone	^\s*FUN_00173938\(puVar3,puVar5,param_3\);$	+1
+use	FixedValue__clone	puVar5	loadInst	INFERRED	IR load inst created by clone	^\s*\(\(int\ \(\*\)\(\)\)FUN_0012306c\)\(param_1,puVar5\);$	+3
