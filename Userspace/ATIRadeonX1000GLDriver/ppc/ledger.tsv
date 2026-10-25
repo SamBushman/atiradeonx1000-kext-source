@@ -554,7 +554,7 @@
 0x5e0d0	1676	extvsEmitFogOutput	part_009	converted
 0x5e770	108	popFirstNonNull32	part_009	converted
 0x5e7f0	3156	extvsAssignVertexInputs	part_009	converted
-0x5f540	688	FUN_0005f540	part_009	converted
+0x5f540	688	extvsRewriteHardwareInstructions	part_009	converted
 0x5f810	9624	extvsPrepareHardwareProgram	part_009	converted
 0x61dc0	224	vpUploadConstantArray	part_009	converted
 0x61eb0	604	vpUploadConstantsWithFog	part_009	converted
@@ -567,7 +567,7 @@
 0x62510	92	FUN_00062510	part_009	converted
 0x62570	616	extvsStateCacheCreate	part_009	converted
 0x627e4	328	extvsStateCacheFreeAll	part_009	converted
-0x62940	276	FUN_00062940	part_009	converted
+0x62940	276	extvsUploadSingleConstant	part_009	converted
 0x62a60	4	noop_62a60	part_009	converted
 0x62a70	116	extvsStateCacheInsert	part_009	converted
 0x62af0	5624	extvsBuildStreamDescriptors	part_009	converted

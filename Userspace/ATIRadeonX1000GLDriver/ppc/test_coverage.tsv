@@ -555,7 +555,7 @@
 0x5e0d0	extvsEmitFogOutput	1676	no	indirect call (driver context / vtable / callback)
 0x5e770	popFirstNonNull32	108	yes	
 0x5e7f0	extvsAssignVertexInputs	3156	no	indirect call (driver context / vtable / callback)
-0x5f540	FUN_0005f540	688	no	indirect call (driver context / vtable / callback)
+0x5f540	extvsRewriteHardwareInstructions	688	no	indirect call (driver context / vtable / callback)
 0x5f810	extvsPrepareHardwareProgram	9624	no	indirect call (driver context / vtable / callback)
 0x61dc0	vpUploadConstantArray	224	no	indirect call (driver context / vtable / callback)
 0x61eb0	vpUploadConstantsWithFog	604	no	indirect call (driver context / vtable / callback)
@@ -568,7 +568,7 @@
 0x62510	FUN_00062510	92	no	indirect call (driver context / vtable / callback)
 0x62570	extvsStateCacheCreate	616	no	indirect call (driver context / vtable / callback)
 0x627e4	extvsStateCacheFreeAll	328	no	indirect call (driver context / vtable / callback)
-0x62940	FUN_00062940	276	no	indirect call (driver context / vtable / callback)
+0x62940	extvsUploadSingleConstant	276	no	indirect call (driver context / vtable / callback)
 0x62a60	noop_62a60	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x62a70	extvsStateCacheInsert	116	yes	
 0x62af0	extvsBuildStreamDescriptors	5624	yes	
