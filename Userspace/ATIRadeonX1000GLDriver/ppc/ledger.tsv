@@ -2926,9 +2926,9 @@
 0x1819b4	252	FUN_001819b4	part_048	converted
 0x181ab0	208	FUN_00181ab0	part_048	converted
 0x181b80	896	FUN_00181b80	part_048	converted
-0x181f00	220	FUN_00181f00	part_048	converted
+0x181f00	220	Block__flattenAndRebuildAddMulTree	part_048	converted
 0x183ac8	212	FUN_00183ac8	part_048	converted
-0x183b9c	1152	FUN_00183b9c	part_048	converted
+0x183b9c	1152	Block__rebuildAddMulTreesWhereProfitable	part_048	converted
 0x18401c	144	FUN_0018401c	part_048	converted
 0x18413c	224	FUN_0018413c	part_048	converted
 0x184ab4	280	pass_minreg_order	part_048	converted
