@@ -3151,6 +3151,8 @@ int FUN_000bde70(param_1, param_2, param_3, param_4)
   undefined4 *param_3;
   undefined4 *param_4;
 {
+  uint cursor4Word0;
+  uint cursor5Word0;
   uint *cursor5;
   int *cursor3;
   int *cursor2;
@@ -3222,10 +3224,10 @@ LAB_000bdeec:
       *(byte *)((int)cursor + 0x55) = (byte)(cursor4[1] >> 0x1b);
       *(ushort *)((int)cursor + 0x4e) = (ushort)(cursor4[1] >> 0x12) & 0x7f;
       cursor4 = cursor4 + 1;
-      uVar6 = *cursor4;
+      cursor4Word0 = *cursor4;
       *(undefined1 *)((int)cursor + 0x57) = 0;
       *(undefined1 *)((int)cursor + 0x56) = 0;
-      *(ushort *)(cursor + 0x13) = (ushort)(uVar6 >> 5) & 0x7f;
+      *(ushort *)(cursor + 0x13) = (ushort)(cursor4Word0 >> 5) & 0x7f;
       cursor = cursor + 0x12;
     } while (uVar13 <= (*param_1 & 0xf));
     iVar9 = uVar4 + 2;
@@ -3233,11 +3235,11 @@ LAB_000bdeec:
     if (uVar18 < 4) {
       cursor5 = param_2 + iVar14 + 5;
       do {
-        uVar4 = *cursor5;
+        cursor5Word0 = *cursor5;
         cursor5 = cursor5 + 1;
-        uVar6 = uVar4 & 0x3f;
-        uVar10 = uVar4 >> 0xc & 0x1f;
-        if ((uVar13 != 0) && (uVar13 = uVar10 + (uVar4 >> 0x11 & 0x1f), uVar10 <= uVar13)) {
+        uVar6 = cursor5Word0 & 0x3f;
+        uVar10 = cursor5Word0 >> 0xc & 0x1f;
+        if ((uVar13 != 0) && (uVar13 = uVar10 + (cursor5Word0 >> 0x11 & 0x1f), uVar10 <= uVar13)) {
           iVar14 = uVar10 << 2;
           cursor2 = piVar16 + iVar9 * 0x12;
           uVar11 = uVar10;
@@ -3258,7 +3260,7 @@ LAB_000bdeec:
             cursor2 = cursor2 + 0x12;
           } while (uVar11 <= uVar13);
         }
-        uVar13 = uVar6 + (uVar4 >> 6 & 0x3f);
+        uVar13 = uVar6 + (cursor5Word0 >> 6 & 0x3f);
         if (uVar6 <= uVar13) {
           iVar14 = uVar6 << 2;
           cursor3 = piVar16 + iVar9 * 0x12;
@@ -6827,6 +6829,7 @@ int psnDecEncodeHwWords(decodedProgram, rsWords, programImage)
   int rsWords;
   int programImage;
 {
+  uint decodedProgramWord0;
   uint decodedProgramWord8;
   int loopIndex2;
   int loopIndex;
@@ -6848,8 +6851,8 @@ int psnDecEncodeHwWords(decodedProgram, rsWords, programImage)
   uint uVar16;
   double dVar17;
   
-  uVar9 = *decodedProgram;
-  if (uVar9 != 0) {
+  decodedProgramWord0 = *decodedProgram;
+  if (decodedProgramWord0 != 0) {
     loopIndex3 = 0;
     do {
       decodedProgramWord8 = decodedProgram[2];
@@ -6875,7 +6878,7 @@ int psnDecEncodeHwWords(decodedProgram, rsWords, programImage)
         *(uint *)(iVar6 + 0x18) = uVar7 | uVar9 | uVar12 & 0xfffc7fe0;
         *(uint *)(iVar6 + 0x18) =
              (*(ushort *)(iVar8 + 0x28) & 0xf00) << 3 | uVar7 | uVar9 | uVar12 & 0xfff807e0;
-        uVar9 = *decodedProgram;
+        decodedProgramWord0 = *decodedProgram;
       }
       else if (iVar5 == 0) {
         iVar6 = iVar6 * 4;
@@ -6927,7 +6930,7 @@ int psnDecEncodeHwWords(decodedProgram, rsWords, programImage)
         *(uint *)(iVar6 + 4) = uVar9 | uVar7 & 0x7ffffff;
         *(uint *)(iVar6 + 4) =
              (uint)(*(float *)(iVar8 + 0x6c) != fVar4) << 0x19 | uVar9 | uVar7 & 0x5ffffff;
-        uVar9 = *decodedProgram;
+        decodedProgramWord0 = *decodedProgram;
       }
       else if (iVar5 == 2) {
         iVar6 = iVar6 * 4;
@@ -7112,10 +7115,10 @@ int psnDecEncodeHwWords(decodedProgram, rsWords, programImage)
           iVar5 = iVar5 + 0x40;
           loopIndex = loopIndex + 1;
         } while (bVar1);
-        uVar9 = *decodedProgram;
+        decodedProgramWord0 = *decodedProgram;
       }
       loopIndex3 = loopIndex3 + 1;
-    } while (loopIndex3 < uVar9);
+    } while (loopIndex3 < decodedProgramWord0);
   }
   return;
 }

@@ -110,6 +110,7 @@ int ilEmitShadowCompare(programRecord, param_2, coordinateOperand, coordinateExt
   uint *outCursor;
   undefined4 param_8;
 {
+  uint coordinateOperandWord0;
   uint programRecordWord184;
   uint programRecordWord180;
   ushort uVar1;
@@ -131,9 +132,9 @@ int ilEmitShadowCompare(programRecord, param_2, coordinateOperand, coordinateExt
     outCursor[4] = 0x2222;
     outCursor[3] = programRecordWord184 & 0xffff | 0x440000;
     uVar1 = *(ushort *)coordinateOperand;
-    uVar7 = *coordinateOperand;
+    coordinateOperandWord0 = *coordinateOperand;
     outCursor[6] = 0x2222;
-    outCursor[5] = (uint)(ushort)uVar7 | (uVar1 & 0x3f) << 0x10 | 0x400000;
+    outCursor[5] = (uint)(ushort)coordinateOperandWord0 | (uVar1 & 0x3f) << 0x10 | 0x400000;
     switch(*(undefined4 *)(unitByteOffset + programRecord + 0x138)) {
     case 0x200:
     case 0x202:
@@ -179,9 +180,9 @@ int ilEmitShadowCompare(programRecord, param_2, coordinateOperand, coordinateExt
     }
     tokenPtr[1] = (uint)puVar4;
     outCursor = tokenPtr + 6;
-    uVar7 = *coordinateOperand;
+    coordinateOperandWord0 = *coordinateOperand;
     tokenPtr[3] = (uint)((unsigned char *)0x00005555);
-    tokenPtr[2] = (ushort)uVar7 | 0x440000;
+    tokenPtr[2] = (ushort)coordinateOperandWord0 | 0x440000;
     uVar7 = *(uint *)(unitByteOffset + programRecord + 0xb8);
     tokenPtr[5] = 0x2222;
     tokenPtr[4] = uVar7 & 0xffff | 0x410000;
@@ -831,6 +832,7 @@ int ilCopyInstructionRemapped(dstCursorPtr, srcCursorPtr, hasDestination, source
   int sourceCount;
   int programRecord;
 {
+  uint srcCursorWord0;
   uint *nextSrcCursor;
   uint uVar2;
   int remapSlot;
@@ -880,10 +882,10 @@ int ilCopyInstructionRemapped(dstCursorPtr, srcCursorPtr, hasDestination, source
     *dstCursor = destinationWord;
     dstCursor = dstStart + 2;
     if ((destinationWord & 0x400000) != 0) {
-      uVar2 = *srcCursor;
+      srcCursorWord0 = *srcCursor;
       dstCursor = dstStart + 3;
       srcCursor = srcStart + 3;
-      dstStart[2] = uVar2;
+      dstStart[2] = srcCursorWord0;
     }
   }
   if (0 < sourceCount) {
@@ -903,9 +905,9 @@ int ilCopyInstructionRemapped(dstCursorPtr, srcCursorPtr, hasDestination, source
     }
     dstCursor = nextSrcCursor;
     if ((sourceWord0 & 0x1800000) != 0) {
-      uVar2 = *srcCursor;
+      srcCursorWord0 = *srcCursor;
       srcCursor = srcCursor + 1;
-      *dstCursor = uVar2;
+      *dstCursor = srcCursorWord0;
       dstCursor = dstCursor + 1;
     }
   }
@@ -926,9 +928,9 @@ int ilCopyInstructionRemapped(dstCursorPtr, srcCursorPtr, hasDestination, source
     }
     dstCursor = nextSrcCursor;
     if ((sourceWord1 & 0x1800000) != 0) {
-      uVar2 = *srcCursor;
+      srcCursorWord0 = *srcCursor;
       srcCursor = srcCursor + 1;
-      *dstCursor = uVar2;
+      *dstCursor = srcCursorWord0;
       dstCursor = dstCursor + 1;
     }
   }
@@ -949,9 +951,9 @@ int ilCopyInstructionRemapped(dstCursorPtr, srcCursorPtr, hasDestination, source
     }
     dstCursor = nextSrcCursor;
     if ((sourceWord2 & 0x1800000) != 0) {
-      uVar2 = *srcCursor;
+      srcCursorWord0 = *srcCursor;
       srcCursor = srcCursor + 1;
-      *dstCursor = uVar2;
+      *dstCursor = srcCursorWord0;
       dstCursor = dstCursor + 1;
     }
   }
@@ -965,13 +967,13 @@ int ilPushDclRecord(listHeadPtr, record)
   int *listHeadPtr;
   undefined4 record;
 {
-  int iVar1;
+  int listHeadPtrWord0;
   int allocation;
   
   allocation = _malloc(0x28);
-  iVar1 = *listHeadPtr;
+  listHeadPtrWord0 = *listHeadPtr;
   *listHeadPtr = allocation;
-  *(int *)(allocation + 0x24) = iVar1;
+  *(int *)(allocation + 0x24) = listHeadPtrWord0;
   return _memcpy(allocation,record,0x24);
 }
 
