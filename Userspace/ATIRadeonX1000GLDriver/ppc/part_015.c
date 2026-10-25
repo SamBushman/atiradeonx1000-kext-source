@@ -1305,16 +1305,16 @@ int atifsSetConstant(ctx, shader, dst, value, inShader)
 }
 
 /* FUN_000a3560 @ 0xa3560 (164 bytes) */
-uint FUN_000a3560(int param_1,double fparam_1)
+uint FUN_000a3560(int glContext,double fparam_1)
 {
   uint uVar1;
   
-  uVar1 = *(uint *)(((unsigned char *)0x000013e0) + param_1);
-  if ((double)(float)((double)CONCAT44(0x43300000,*(uint *)(((unsigned char *)0x000013e0) + param_1) ^ 0x80000000) -
+  uVar1 = *(uint *)(((unsigned char *)0x000013e0) + glContext);
+  if ((double)(float)((double)CONCAT44(0x43300000,*(uint *)(((unsigned char *)0x000013e0) + glContext) ^ 0x80000000) -
                      DOUBLE_001aa1e0) < fparam_1) {
-    uVar1 = *(uint *)(((unsigned char *)0x000013e4) + param_1);
+    uVar1 = *(uint *)(((unsigned char *)0x000013e4) + glContext);
     if (fparam_1 <
-        (double)(float)((double)CONCAT44(0x43300000,*(uint *)(((unsigned char *)0x000013e4) + param_1) ^ 0x80000000)
+        (double)(float)((double)CONCAT44(0x43300000,*(uint *)(((unsigned char *)0x000013e4) + glContext) ^ 0x80000000)
                        - DOUBLE_001aa1e0)) {
       uVar1 = (uint)(int)(fparam_1 + (double)FLOAT_001aa10c);
     }
@@ -1357,16 +1357,16 @@ int FUN_000a3610(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
 }
 
 /* FUN_000a3670 @ 0xa3670 (48 bytes) */
-int FUN_000a3670(param_1)
-  int param_1;
+int FUN_000a3670(glContext)
+  int glContext;
 {
   uint uVar1;
   
-  if ((*(uint *)(param_1 + 0x44) & 0x100000) == 0) {
-    uVar1 = *(uint *)(param_1 + 0xe8) & 1;
+  if ((*(uint *)(glContext + 0x44) & 0x100000) == 0) {
+    uVar1 = *(uint *)(glContext + 0xe8) & 1;
   }
   else {
-    uVar1 = *(uint *)(param_1 + 0x44) & 0x80;
+    uVar1 = *(uint *)(glContext + 0x44) & 0x80;
   }
   if (uVar1 == 0) {
     return 0;
@@ -1968,10 +1968,10 @@ int FUN_000a46d0(param_1)
 }
 
 /* FUN_000a4760 @ 0xa4760 (8 bytes) */
-int FUN_000a4760(param_1)
-  int param_1;
+int FUN_000a4760(ctx)
+  int ctx;
 {
-  return *(undefined4 *)(param_1 + 0x29ac);
+  return *(undefined4 *)(ctx + 0x29ac);
 }
 
 /* FUN_000a4770 @ 0xa4770 (504 bytes) */
@@ -2038,8 +2038,8 @@ int FUN_000a4770(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
 }
 
 /* FUN_000a4980 @ 0xa4980 (4768 bytes) */
-int FUN_000a4980(param_1, param_2, param_3, param_4, param_5)
-  int param_1;
+int FUN_000a4980(glContext, param_2, param_3, param_4, param_5)
+  int glContext;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
@@ -2142,50 +2142,50 @@ int FUN_000a4980(param_1, param_2, param_3, param_4, param_5)
   undefined4 local_90;
   uint uStack_8c;
   
-  uVar25 = *(uint *)(param_1 + 0x44);
+  uVar25 = *(uint *)(glContext + 0x44);
   if ((uVar25 & 0x60020000) != 0x40000000) {
-    iVar40 = *(int *)(param_1 + 4);
+    iVar40 = *(int *)(glContext + 4);
     if ((((unsigned char *)0x00002e2d)[*(int *)(iVar40 + 0x10)] != '\0') && ((uVar25 & 0x20000) == 0)) {
       iVar40 = FUN_0001a010(iVar40,*(undefined4 *)(iVar40 + 0x26a0),param_3,param_4,param_5,in_r8,
                             uVar25);
       if (iVar40 == 0) goto LAB_000a4a50;
-      iVar40 = *(int *)(param_1 + 4);
+      iVar40 = *(int *)(glContext + 4);
     }
     iVar40 = *(int *)(iVar40 + 0x10);
-    if ((((((unsigned char *)0x00002e2c)[iVar40] == '\0') || ((*(uint *)(param_1 + 0x44) & 0x20000) != 0)) ||
+    if ((((((unsigned char *)0x00002e2c)[iVar40] == '\0') || ((*(uint *)(glContext + 0x44) & 0x20000) != 0)) ||
         (*(short *)(((unsigned char *)0x00002e28) + iVar40) == -1)) &&
-       (((((unsigned char *)0x00003178)[iVar40] == '\0' || ((*(uint *)(param_1 + 0x44) & 0x20000) != 0)) ||
+       (((((unsigned char *)0x00003178)[iVar40] == '\0' || ((*(uint *)(glContext + 0x44) & 0x20000) != 0)) ||
         ((*(short *)(((unsigned char *)0x00003170) + iVar40) != 0x1b02 &&
          (*(short *)(((unsigned char *)0x00003172) + iVar40) != 0x1b02)))))) {
-      if (*(int *)(param_1 + 0x2768) == 0) {
+      if (*(int *)(glContext + 0x2768) == 0) {
         return 0;
       }
-      ((int (*)())FUN_000a4550)(param_1);
+      ((int (*)())FUN_000a4550)(glContext);
       return 0;
     }
   }
 LAB_000a4a50:
-  uVar25 = *(uint *)(param_1 + 0x276c);
-  uVar26 = *(uint *)(param_1 + 0x38);
+  uVar25 = *(uint *)(glContext + 0x276c);
+  uVar26 = *(uint *)(glContext + 0x38);
   if (-1 < (int)uVar25) {
-    uVar16 = uVar26 & 0x10310e | (int)(uint)*(ushort *)(param_1 + 0x34) >> (uVar25 & 0x3f) & 1U;
+    uVar16 = uVar26 & 0x10310e | (int)(uint)*(ushort *)(glContext + 0x34) >> (uVar25 & 0x3f) & 1U;
   }
   else {
     uVar16 = 1;
   }
-  if (uVar16 == 0 && *(int *)(param_1 + 0x2458) == 0) {
+  if (uVar16 == 0 && *(int *)(glContext + 0x2458) == 0) {
     return 0;
   }
-  uVar30 = (uint)(byte)((unsigned char *)0x000013b2)[param_1];
+  uVar30 = (uint)(byte)((unsigned char *)0x000013b2)[glContext];
   uVar16 = uVar30 - 1;
   if (-1 < (int)uVar16) {
-    puVar17 = (uint *)(uVar16 * 4 + param_1 + 0x48);
+    puVar17 = (uint *)(uVar16 * 4 + glContext + 0x48);
     do {
       if ((((*puVar17 & 0x1f) == 0) || (puVar17[0x4ec] == 0)) &&
-         ((uVar34 = *(uint *)(param_1 + 0x44), (uVar34 & 0x2000) == 0 ||
-          (((((int)(uint)(byte)((unsigned char *)0x000011d3)[param_1] >> (uVar16 & 0x3f) & 1U) == 0 &&
-            (((uVar34 & 0x800) == 0 || ((byte)((unsigned char *)0x000011d1)[param_1] != uVar16)))) &&
-           (((uVar34 & 0x400) == 0 || ((byte)((unsigned char *)0x000011d2)[param_1] != uVar16)))))))) break;
+         ((uVar34 = *(uint *)(glContext + 0x44), (uVar34 & 0x2000) == 0 ||
+          (((((int)(uint)(byte)((unsigned char *)0x000011d3)[glContext] >> (uVar16 & 0x3f) & 1U) == 0 &&
+            (((uVar34 & 0x800) == 0 || ((byte)((unsigned char *)0x000011d1)[glContext] != uVar16)))) &&
+           (((uVar34 & 0x400) == 0 || ((byte)((unsigned char *)0x000011d2)[glContext] != uVar16)))))))) break;
       uVar16 = uVar16 - 1;
       puVar17 = puVar17 + -1;
       uVar30 = uVar30 - 1;
@@ -2202,25 +2202,25 @@ LAB_000a4a50:
   }
   if (pcVar24 != (char *)0x0) {
     uVar26 = uVar26 | 0x200;
-    *(uint *)(param_1 + 0x38) = uVar26;
-    *(ushort *)(param_1 + 0x32) = (ushort)pcVar24 | *(ushort *)(param_1 + 0x32);
-    *(ushort *)(param_1 + 0x34) = (ushort)pcVar24 | *(ushort *)(param_1 + 0x34);
+    *(uint *)(glContext + 0x38) = uVar26;
+    *(ushort *)(glContext + 0x32) = (ushort)pcVar24 | *(ushort *)(glContext + 0x32);
+    *(ushort *)(glContext + 0x34) = (ushort)pcVar24 | *(ushort *)(glContext + 0x34);
   }
-  *(uint *)(param_1 + 0x276c) = uVar16;
+  *(uint *)(glContext + 0x276c) = uVar16;
   if ((int)uVar16 < 0) goto LAB_000a52dc;
-  iVar40 = *(int *)(param_1 + 4);
-  cVar2 = *(char *)(param_1 + 0x245b);
+  iVar40 = *(int *)(glContext + 4);
+  cVar2 = *(char *)(glContext + 0x245b);
   iVar38 = *(int *)(iVar40 + 0x10);
-  uVar16 = *(uint *)(param_1 + 0x44) & 0x60020000 ^ 0x40000000;
+  uVar16 = *(uint *)(glContext + 0x44) & 0x60020000 ^ 0x40000000;
   pcVar22 = (char *)-uVar16;
   iVar40 = FUN_0001a010(iVar40,*(undefined4 *)(iVar40 + 0x26a0),param_3,param_4,pcVar22,pcVar24,
                         uVar26);
-  uVar47 = ((int (*)())FUN_000a36b0)(param_1,(uint)(iVar40 == 0));
+  uVar47 = ((int (*)())FUN_000a36b0)(glContext,(uint)(iVar40 == 0));
   uVar21 = (undefined4)uVar47;
-  iVar41 = *(int *)(param_1 + 4);
+  iVar41 = *(int *)(glContext + 4);
   sVar6 = *(short *)(((unsigned char *)0x00002e0e) + iVar38);
   uVar25 = *(uint *)(iVar41 + 0x10);
-  if ((((unsigned char *)0x00002e2d)[uVar25] == '\0') || ((*(uint *)(param_1 + 0x44) & 0x20000) != 0)) {
+  if ((((unsigned char *)0x00002e2d)[uVar25] == '\0') || ((*(uint *)(glContext + 0x44) & 0x20000) != 0)) {
 LAB_000a4c38:
     cVar14 = '\0';
   }
@@ -2229,38 +2229,38 @@ LAB_000a4c38:
                           uVar25);
     uVar21 = (undefined4)uVar48;
     if ((int)((ulonglong)uVar48 >> 0x20) != 0) {
-      iVar41 = *(int *)(param_1 + 4);
+      iVar41 = *(int *)(glContext + 4);
       goto LAB_000a4c38;
     }
-    iVar41 = *(int *)(param_1 + 4);
+    iVar41 = *(int *)(glContext + 4);
     cVar14 = '\x01';
   }
   if (((((unsigned char *)0x00002e2c)[*(int *)(iVar41 + 0x10)] == '\0') ||
-      ((*(uint *)(param_1 + 0x44) & 0x20000) != 0)) ||
+      ((*(uint *)(glContext + 0x44) & 0x20000) != 0)) ||
      (cVar31 = '\x01', *(short *)(((unsigned char *)0x00002e28) + *(int *)(iVar41 + 0x10)) == -1)) {
     cVar31 = '\0';
   }
-  iVar41 = ((int (*)())FUN_000a4770)(param_1,uVar21,param_3,param_4,pcVar22,pcVar24,uVar25);
+  iVar41 = ((int (*)())FUN_000a4770)(glContext,uVar21,param_3,param_4,pcVar22,pcVar24,uVar25);
   fVar4 = *(float *)(((unsigned char *)0x00002e20) + iVar38);
-  fVar5 = *(float *)(((unsigned char *)0x000013e8) + param_1);
+  fVar5 = *(float *)(((unsigned char *)0x000013e8) + glContext);
   sVar7 = *(short *)(((unsigned char *)0x00002e10) + iVar38);
   fVar11 = fVar5;
   if ((fVar5 < fVar4) &&
-     (fVar11 = *(float *)(((unsigned char *)0x000013ec) + param_1), fVar4 < *(float *)(((unsigned char *)0x000013ec) + param_1))) {
+     (fVar11 = *(float *)(((unsigned char *)0x000013ec) + glContext), fVar4 < *(float *)(((unsigned char *)0x000013ec) + glContext))) {
     pcVar22 = "ram[";
     pcVar24 = "ram[";
     local_100 = 0x43300000;
-    uStack_fc = (uint)(int)((fVar4 - fVar5) / *(float *)(((unsigned char *)0x000013f0) + param_1) + 0.5);
+    uStack_fc = (uint)(int)((fVar4 - fVar5) / *(float *)(((unsigned char *)0x000013f0) + glContext) + 0.5);
     local_108 = (longlong)(int)uStack_fc;
     uStack_fc = uStack_fc ^ 0x80000000;
-    fVar11 = *(float *)(((unsigned char *)0x000013f0) + param_1) *
+    fVar11 = *(float *)(((unsigned char *)0x000013f0) + glContext) *
              (float)((double)CONCAT44(0x43300000,uStack_fc) - 4503601774854144.0) + fVar5;
   }
-  iVar42 = *(int *)(param_1 + 4);
+  iVar42 = *(int *)(glContext + 4);
   sVar8 = *(short *)(((unsigned char *)0x00002e28) + iVar38);
   iVar18 = *(int *)(iVar42 + 0x10);
   if (((((unsigned char *)0x00003178)[iVar18] == '\0') ||
-      (uVar25 = *(uint *)(param_1 + 0x44) & 0x20000, uVar25 != 0)) ||
+      (uVar25 = *(uint *)(glContext + 0x44) & 0x20000, uVar25 != 0)) ||
      ((*(short *)(((unsigned char *)0x00003170) + iVar18) != 0x1b02 &&
       (*(short *)(((unsigned char *)0x00003172) + iVar18) != 0x1b02)))) {
     cVar32 = '\0';
@@ -2274,7 +2274,7 @@ LAB_000a4c38:
     cVar31 = '\x01';
     cVar32 = '\x01';
   }
-  pcVar39 = *(char **)(param_1 + 0x2764);
+  pcVar39 = *(char **)(glContext + 0x2764);
   if (pcVar39 != (char *)0x0) {
     do {
       if ((((bool)*pcVar39 == (uVar16 == 0)) &&
@@ -2308,23 +2308,23 @@ LAB_000a4e90:
       pcVar39 = *(char **)(pcVar39 + 0x138);
     } while (pcVar39 != (char *)0x0);
   }
-  if (*(int *)(param_1 + 0x2778) == 0x100) {
-    ((int (*)())FUN_000a43f0)(param_1);
-    iVar42 = *(int *)(param_1 + 4);
+  if (*(int *)(glContext + 0x2778) == 0x100) {
+    ((int (*)())FUN_000a43f0)(glContext);
+    iVar42 = *(int *)(glContext + 4);
   }
   iVar40 = *(int *)(iVar42 + 0x10);
-  cVar2 = *(char *)(param_1 + 0x245b);
-  pcVar39 = (char *)(**(code **)(param_1 + 0x10))(1,0x13c);
+  cVar2 = *(char *)(glContext + 0x245b);
+  pcVar39 = (char *)(**(code **)(glContext + 0x10))(1,0x13c);
   if (pcVar39 == (char *)0x0) goto LAB_000a52dc;
-  *pcVar39 = (*(uint *)(param_1 + 0x44) & 0x60020000) == 0x40000000;
-  uVar47 = FUN_0001a010(*(int *)(param_1 + 4),*(undefined4 *)(*(int *)(param_1 + 4) + 0x26a0),
+  *pcVar39 = (*(uint *)(glContext + 0x44) & 0x60020000) == 0x40000000;
+  uVar47 = FUN_0001a010(*(int *)(glContext + 4),*(undefined4 *)(*(int *)(glContext + 4) + 0x26a0),
                         param_3,param_4,pcVar22,pcVar24,uVar25);
   uVar21 = (undefined4)uVar47;
   pcVar39[1] = (int)((ulonglong)uVar47 >> 0x20) == 0;
   pcVar39[8] = *(short *)(((unsigned char *)0x00002e0e) + iVar40) == 0x1102;
-  iVar38 = *(int *)(param_1 + 4);
+  iVar38 = *(int *)(glContext + 4);
   if ((((unsigned char *)0x00002e2d)[*(int *)(iVar38 + 0x10)] == '\0') ||
-     (pcVar22 = (char *)(*(uint *)(param_1 + 0x44) & 0x20000), pcVar22 != (char *)0x0)) {
+     (pcVar22 = (char *)(*(uint *)(glContext + 0x44) & 0x20000), pcVar22 != (char *)0x0)) {
 LAB_000a4f50:
     cVar14 = '\0';
   }
@@ -2337,28 +2337,28 @@ LAB_000a4f50:
   pcVar39[0x14] = cVar14;
   pcVar39[0x1c] = *(short *)(((unsigned char *)0x00002e10) + iVar40) == 0x1102;
   fVar4 = *(float *)(((unsigned char *)0x00002e20) + iVar40);
-  fVar5 = *(float *)(((unsigned char *)0x000013e8) + param_1);
+  fVar5 = *(float *)(((unsigned char *)0x000013e8) + glContext);
   fVar11 = fVar5;
   if ((fVar5 < fVar4) &&
-     (fVar11 = *(float *)(((unsigned char *)0x000013ec) + param_1), fVar4 < *(float *)(((unsigned char *)0x000013ec) + param_1))) {
+     (fVar11 = *(float *)(((unsigned char *)0x000013ec) + glContext), fVar4 < *(float *)(((unsigned char *)0x000013ec) + glContext))) {
     pcVar22 = "ram[";
     pcVar24 = "ram[";
     local_f0 = 0x43300000;
-    uStack_ec = (uint)(int)((fVar4 - fVar5) / *(float *)(((unsigned char *)0x000013f0) + param_1) + 0.5);
+    uStack_ec = (uint)(int)((fVar4 - fVar5) / *(float *)(((unsigned char *)0x000013f0) + glContext) + 0.5);
     local_f8 = (longlong)(int)uStack_ec;
     uStack_ec = uStack_ec ^ 0x80000000;
-    fVar11 = *(float *)(((unsigned char *)0x000013f0) + param_1) *
+    fVar11 = *(float *)(((unsigned char *)0x000013f0) + glContext) *
              (float)((double)CONCAT44(0x43300000,uStack_ec) - 4503601774854144.0) + fVar5;
   }
   *(float *)(pcVar39 + 0x20) = fVar11;
-  iVar38 = *(int *)(*(int *)(param_1 + 4) + 0x10);
-  if (((((unsigned char *)0x00002e2c)[iVar38] == '\0') || ((*(uint *)(param_1 + 0x44) & 0x20000) != 0)) ||
+  iVar38 = *(int *)(*(int *)(glContext + 4) + 0x10);
+  if (((((unsigned char *)0x00002e2c)[iVar38] == '\0') || ((*(uint *)(glContext + 0x44) & 0x20000) != 0)) ||
      (uVar27 = 1, *(short *)(((unsigned char *)0x00002e28) + iVar38) == -1)) {
     uVar27 = 0;
   }
   pcVar39[0x15] = (char)uVar27;
-  iVar38 = *(int *)(*(int *)(param_1 + 4) + 0x10);
-  if (((((unsigned char *)0x00003178)[iVar38] == '\0') || ((*(uint *)(param_1 + 0x44) & 0x20000) != 0)) ||
+  iVar38 = *(int *)(*(int *)(glContext + 4) + 0x10);
+  if (((((unsigned char *)0x00003178)[iVar38] == '\0') || ((*(uint *)(glContext + 0x44) & 0x20000) != 0)) ||
      ((*(short *)(((unsigned char *)0x00003170) + iVar38) != 0x1b02 &&
       (*(short *)(((unsigned char *)0x00003172) + iVar38) != 0x1b02)))) {
     cVar14 = '\0';
@@ -2380,7 +2380,7 @@ LAB_000a4f50:
     uVar25 = 0;
   }
   else {
-    uVar47 = ((int (*)())FUN_000a36b0)(param_1,(uint)(byte)pcVar39[1]);
+    uVar47 = ((int (*)())FUN_000a36b0)(glContext,(uint)(byte)pcVar39[1]);
     iVar41 = (int)((ulonglong)uVar47 >> 0x20);
     uVar21 = (undefined4)uVar47;
     iVar38 = iVar41 << 2;
@@ -2406,7 +2406,7 @@ LAB_000a5108:
       uVar20 = *(undefined2 *)(((unsigned char *)0x00002e28) + iVar40);
     }
     *(undefined2 *)(pcVar39 + 0x28) = uVar20;
-    iVar42 = ((int (*)())FUN_000a4770)(param_1,uVar21,param_3,param_4,pcVar22,pcVar24,uVar27);
+    iVar42 = ((int (*)())FUN_000a4770)(glContext,uVar21,param_3,param_4,pcVar22,pcVar24,uVar27);
     *(int *)(pcVar39 + 0x18) = iVar42;
     if (iVar38 < iVar42 << 2) {
       iVar41 = iVar42 << 2;
@@ -2420,9 +2420,9 @@ LAB_000a5188:
   }
   if (pcVar39[0x2a] != '\0') {
     param_3 = 0x80;
-    (**(code **)(((unsigned char *)0x00001344) + param_1))(pcVar39 + 0x2c,((unsigned char *)0x000030e8) + iVar40,0x80);
-    *(undefined4 *)(pcVar39 + 0xac) = *(undefined4 *)(param_1 + 0x2770);
-    *(undefined4 *)(pcVar39 + 0xb0) = *(undefined4 *)(param_1 + 0x2774);
+    (**(code **)(((unsigned char *)0x00001344) + glContext))(pcVar39 + 0x2c,((unsigned char *)0x000030e8) + iVar40,0x80);
+    *(undefined4 *)(pcVar39 + 0xac) = *(undefined4 *)(glContext + 0x2770);
+    *(undefined4 *)(pcVar39 + 0xb0) = *(undefined4 *)(glContext + 0x2774);
     if (iVar38 < 0x20) {
       iVar38 = 0x20;
     }
@@ -2431,13 +2431,13 @@ LAB_000a5188:
     }
     uVar25 = uVar25 + 1;
   }
-  uVar21 = ((int (*)())FUN_000a3610)(param_1,iVar38,param_3,param_4,pcVar22,pcVar24,uVar27);
-  uVar27 = ((int (*)())FUN_000a3610)(param_1,iVar18,param_3,param_4,pcVar22,pcVar24,uVar27);
+  uVar21 = ((int (*)())FUN_000a3610)(glContext,iVar38,param_3,param_4,pcVar22,pcVar24,uVar27);
+  uVar27 = ((int (*)())FUN_000a3610)(glContext,iVar18,param_3,param_4,pcVar22,pcVar24,uVar27);
   uVar26 = uVar25;
   if (1 < uVar25) {
     uVar26 = 4;
   }
-  uVar37 = *(undefined4 *)(param_1 + 4);
+  uVar37 = *(undefined4 *)(glContext + 4);
   if (uVar25 < 2) {
     uVar29 = 3;
   }
@@ -2445,7 +2445,7 @@ LAB_000a5188:
     uVar29 = 1;
   }
   pcVar24 = (char *)0x1;
-  uVar47 = FUN_00030c50(param_1,uVar21,uVar27,uVar26,0x1909,1,((unsigned char *)0x00001401U),uVar29);
+  uVar47 = FUN_00030c50(glContext,uVar21,uVar27,uVar26,0x1909,1,((unsigned char *)0x00001401U),uVar29);
   iVar40 = (int)((ulonglong)uVar47 >> 0x20);
   uVar16 = (uint)uVar47;
   iVar38 = 0;
@@ -2489,7 +2489,7 @@ LAB_000a5188:
         fVar5 = 0.0;
       }
       else {
-        uVar49 = (**(code **)(param_1 + 0xc))(uVar30);
+        uVar49 = (**(code **)(glContext + 0xc))(uVar30);
         uVar16 = (uint)(uVar49 >> 0x20);
         bVar1 = uVar16 == 0;
         if (bVar1) {
@@ -2497,18 +2497,18 @@ LAB_000a5188:
         }
         else {
           uVar26 = uVar16;
-          if ((*(uint *)(param_1 + 0xe8) & 1) == 0) {
-            dVar45 = (double)*(float *)(param_1 + 0xe0);
+          if ((*(uint *)(glContext + 0xe8) & 1) == 0) {
+            dVar45 = (double)*(float *)(glContext + 0xe0);
             if (pcVar39[8] != '\0') goto LAB_000a53ac;
-            ((void (*)())FUN_000a3a60)(param_1,(int)uVar49,uVar34,uVar16,local_118,dVar45,in_f2,in_f3,in_f4,in_f5,
+            ((void (*)())FUN_000a3a60)(glContext,(int)uVar49,uVar34,uVar16,local_118,dVar45,in_f2,in_f3,in_f4,in_f5,
                          in_f6,in_f7,in_f8,in_stack_fffffeb8,in_stack_fffffec0,in_stack_fffffec8,
                          in_stack_fffffed0,in_stack_fffffed8);
             uVar21 = extraout_r4_01;
           }
           else {
-            dVar45 = (double)*(float *)(param_1 + 0x104);
+            dVar45 = (double)*(float *)(glContext + 0x104);
 LAB_000a53ac:
-            ((void (*)())FUN_000a3790)(param_1,(int)uVar49,uVar34,uVar16,local_118,dVar45,in_f2,in_f3,in_f4,in_f5,
+            ((void (*)())FUN_000a3790)(glContext,(int)uVar49,uVar34,uVar16,local_118,dVar45,in_f2,in_f3,in_f4,in_f5,
                          in_f6,in_f7,in_f8,in_stack_fffffeb8,in_stack_fffffec0,in_stack_fffffec8,
                          in_stack_fffffed0);
             uVar21 = extraout_r4_00;
@@ -2585,7 +2585,7 @@ LAB_000a53ac:
           } while (uVar33 != uVar16);
         }
         pcVar24 = "ram[";
-        (**(code **)(param_1 + 0x18))(iVar38);
+        (**(code **)(glContext + 0x18))(iVar38);
         uVar16 = extraout_r4_02;
       }
       uStack_cc = uVar34 ^ 0x80000000;
@@ -2616,7 +2616,7 @@ LAB_000a53ac:
       uVar34 = (uint)*(ushort *)(iVar38 + 0x3a);
       iVar18 = *(int *)(pcVar39 + 0x18);
       iVar42 = (int)(uint)*(ushort *)(iVar38 + 0x3c) >> 4;
-      iVar41 = *(int *)(*(int *)(param_1 + 4) + 0x10);
+      iVar41 = *(int *)(*(int *)(glContext + 4) + 0x10);
       uVar30 = iVar18 * 4;
       uVar33 = iVar40 + uVar34 * (*(ushort *)(iVar38 + 0x3c) - 1);
       if (pcVar39[0x14] == '\0') {
@@ -2630,43 +2630,43 @@ LAB_000a53ac:
         uVar26 = uVar33;
         if (pcVar39[0x1c] == '\0') {
           dVar44 = (double)*(float *)(((unsigned char *)0x00002e20) + iVar41);
-          dVar46 = (double)*(float *)(((unsigned char *)0x000013e8) + param_1);
+          dVar46 = (double)*(float *)(((unsigned char *)0x000013e8) + glContext);
           dVar45 = dVar46;
           if ((dVar46 < dVar44) &&
-             (dVar45 = (double)*(float *)(((unsigned char *)0x000013ec) + param_1),
-             dVar44 < (double)*(float *)(((unsigned char *)0x000013ec) + param_1))) {
+             (dVar45 = (double)*(float *)(((unsigned char *)0x000013ec) + glContext),
+             dVar44 < (double)*(float *)(((unsigned char *)0x000013ec) + glContext))) {
             local_a0 = 0x43300000;
             uStack_9c = (uint)(int)((float)((double)(float)(dVar44 - dVar46) /
-                                      (double)*(float *)(((unsigned char *)0x000013f0) + param_1)) + 0.5);
+                                      (double)*(float *)(((unsigned char *)0x000013f0) + glContext)) + 0.5);
             local_a8 = (longlong)(int)uStack_9c;
             uStack_9c = uStack_9c ^ 0x80000000;
-            dVar45 = (double)(float)((double)*(float *)(((unsigned char *)0x000013f0) + param_1) *
+            dVar45 = (double)(float)((double)*(float *)(((unsigned char *)0x000013f0) + glContext) *
                                      (double)(float)((double)CONCAT44(0x43300000,uStack_9c) -
                                                     4503601774854144.0) + dVar46);
           }
           piVar23 = local_118;
-          ((void (*)())FUN_000a3a60)(param_1,uVar16,uVar30,uVar33,piVar23,dVar45,in_f2,in_f3,in_f4,in_f5,in_f6,
+          ((void (*)())FUN_000a3a60)(glContext,uVar16,uVar30,uVar33,piVar23,dVar45,in_f2,in_f3,in_f4,in_f5,in_f6,
                        in_f7,in_f8,in_stack_fffffeb8,in_stack_fffffec0,in_stack_fffffec8,
                        in_stack_fffffed0,in_stack_fffffed8);
         }
         else {
           dVar44 = (double)*(float *)(((unsigned char *)0x00002e20) + iVar41);
-          dVar46 = (double)*(float *)(((unsigned char *)0x000013e8) + param_1);
+          dVar46 = (double)*(float *)(((unsigned char *)0x000013e8) + glContext);
           dVar45 = dVar46;
           if ((dVar46 < dVar44) &&
-             (dVar45 = (double)*(float *)(((unsigned char *)0x000013ec) + param_1),
-             dVar44 < (double)*(float *)(((unsigned char *)0x000013ec) + param_1))) {
+             (dVar45 = (double)*(float *)(((unsigned char *)0x000013ec) + glContext),
+             dVar44 < (double)*(float *)(((unsigned char *)0x000013ec) + glContext))) {
             local_b0 = 0x43300000;
             uStack_ac = (uint)(int)((float)((double)(float)(dVar44 - dVar46) /
-                                      (double)*(float *)(((unsigned char *)0x000013f0) + param_1)) + 0.5);
+                                      (double)*(float *)(((unsigned char *)0x000013f0) + glContext)) + 0.5);
             local_b8 = (longlong)(int)uStack_ac;
             uStack_ac = uStack_ac ^ 0x80000000;
-            dVar45 = (double)(float)((double)*(float *)(((unsigned char *)0x000013f0) + param_1) *
+            dVar45 = (double)(float)((double)*(float *)(((unsigned char *)0x000013f0) + glContext) *
                                      (double)(float)((double)CONCAT44(0x43300000,uStack_ac) -
                                                     4503601774854144.0) + dVar46);
           }
           piVar23 = local_118;
-          ((void (*)())FUN_000a3790)(param_1,uVar16,uVar30,uVar33,piVar23,dVar45,in_f2,in_f3,in_f4,in_f5,in_f6,
+          ((void (*)())FUN_000a3790)(glContext,uVar16,uVar30,uVar33,piVar23,dVar45,in_f2,in_f3,in_f4,in_f5,in_f6,
                        in_f7,in_f8,in_stack_fffffeb8,in_stack_fffffec0,in_stack_fffffec8,
                        in_stack_fffffed0);
         }
@@ -2690,9 +2690,9 @@ LAB_000a53ac:
              (float)((double)CONCAT44(0x43300000,uStack_94) - 4503601774854144.0) /
              (float)((double)CONCAT44(0x43300000,uStack_8c) - 4503601774854144.0);
       }
-      iVar38 = *(int *)(*(int *)(param_1 + 4) + 0x10);
+      iVar38 = *(int *)(*(int *)(glContext + 4) + 0x10);
       if (((((unsigned char *)0x00002e2c)[iVar38] == '\0') ||
-          (piVar23 = (int *)(*(uint *)(param_1 + 0x44) & 0x20000), piVar23 != (int *)0x0)) ||
+          (piVar23 = (int *)(*(uint *)(glContext + 0x44) & 0x20000), piVar23 != (int *)0x0)) ||
          (uVar16 = (uint)*(ushort *)(((unsigned char *)0x00002e28) + iVar38), uVar16 == 0xffff)) {
         uVar16 = 0xffff;
       }
@@ -2714,7 +2714,7 @@ LAB_000a53ac:
             do {
               iVar36 = iVar36 + 1;
               iVar41 = iVar40 + uVar34;
-              (**(code **)(((unsigned char *)0x00001344) + param_1))(iVar40,uVar33,uVar34);
+              (**(code **)(((unsigned char *)0x00001344) + glContext))(iVar40,uVar33,uVar34);
               iVar40 = iVar41;
             } while (iVar18 != iVar36);
           }
@@ -2782,7 +2782,7 @@ LAB_000a58ec:
 LAB_000a59f4:
       iVar38 = *(int *)(pcVar39 + 0xbc);
     }
-    iVar40 = FUN_000341a0(param_1,*(undefined4 *)(iVar38 + 0x7c),*(undefined4 *)(param_1 + 0x276c),
+    iVar40 = FUN_000341a0(glContext,*(undefined4 *)(iVar38 + 0x7c),*(undefined4 *)(glContext + 0x276c),
                           uVar26,piVar23,pcVar24);
     if (iVar40 != 0) {
       uVar25 = (uint)*(byte *)(*(int *)(pcVar39 + 0xbc) + 0x31);
@@ -2870,23 +2870,23 @@ LAB_000a59f4:
       *(uint *)(pcVar39 + 0x114) = uVar26;
       *(uint *)(pcVar39 + 0x118) = uVar26;
       *(uint *)(pcVar39 + 0x110) = *(uint *)(pcVar39 + 0x110) & 0xffffffef;
-      *(undefined4 *)(pcVar39 + 0x138) = *(undefined4 *)(param_1 + 0x2764);
-      *(undefined4 *)(param_1 + 0x2764) = pcVar39;
-      *(int *)(param_1 + 0x2778) = *(int *)(param_1 + 0x2778) + 1;
+      *(undefined4 *)(pcVar39 + 0x138) = *(undefined4 *)(glContext + 0x2764);
+      *(undefined4 *)(glContext + 0x2764) = pcVar39;
+      *(int *)(glContext + 0x2778) = *(int *)(glContext + 0x2778) + 1;
 LAB_000a5b9c:
-      *(char **)(param_1 + 0x2768) = pcVar39;
-      ((int (*)())FUN_000a46d0)(param_1);
-      *(uint *)(param_1 + 0x38) = *(uint *)(param_1 + 0x38) | 0x200;
-      *(undefined1 *)(param_1 + 0x29) = 1;
-      *(ushort *)(param_1 + 0x34) =
-           (ushort)(1 << (*(uint *)(param_1 + 0x276c) & 0x3f)) | *(ushort *)(param_1 + 0x34);
-      *(undefined4 *)(param_1 + 0x277c) = 0xffffffff;
+      *(char **)(glContext + 0x2768) = pcVar39;
+      ((int (*)())FUN_000a46d0)(glContext);
+      *(uint *)(glContext + 0x38) = *(uint *)(glContext + 0x38) | 0x200;
+      *(undefined1 *)(glContext + 0x29) = 1;
+      *(ushort *)(glContext + 0x34) =
+           (ushort)(1 << (*(uint *)(glContext + 0x276c) & 0x3f)) | *(ushort *)(glContext + 0x34);
+      *(undefined4 *)(glContext + 0x277c) = 0xffffffff;
       return 0;
     }
   }
   _free(pcVar39);
 LAB_000a52dc:
-  ((int (*)())FUN_000a4550)(param_1);
+  ((int (*)())FUN_000a4550)(glContext);
   return 1;
 }
 
@@ -2965,8 +2965,8 @@ int FUN_000a5c40(param_1)
 }
 
 /* FUN_000a5ec0 @ 0xa5ec0 (620 bytes) */
-int FUN_000a5ec0(param_1)
-  int param_1;
+int FUN_000a5ec0(glContext)
+  int glContext;
 {
   float fVar1;
   int iVar2;
@@ -2979,45 +2979,45 @@ int FUN_000a5ec0(param_1)
   char cVar9;
   int iVar10;
   
-  uVar4 = *(uint *)(param_1 + 0x1a4c);
-  iVar6 = *(int *)(param_1 + 0x1a60);
-  *(uint *)(param_1 + 0x1a4c) = uVar4 & 0xfffeffff;
-  *(undefined4 *)(param_1 + 0x1a60) = 0;
-  iVar10 = *(int *)(*(int *)(param_1 + 4) + 0x2a50);
+  uVar4 = *(uint *)(glContext + 0x1a4c);
+  iVar6 = *(int *)(glContext + 0x1a60);
+  *(uint *)(glContext + 0x1a4c) = uVar4 & 0xfffeffff;
+  *(undefined4 *)(glContext + 0x1a60) = 0;
+  iVar10 = *(int *)(*(int *)(glContext + 4) + 0x2a50);
   if (iVar10 == 1) {
-    uVar7 = *(uint *)(param_1 + 0x44);
+    uVar7 = *(uint *)(glContext + 0x44);
     if ((uVar7 & 0x10000000) == 0) {
-      *(undefined4 *)(param_1 + 0x1a68) = 0x66666666;
-      *(undefined4 *)(param_1 + 0x1a6c) = 0x6666666;
-      *(undefined4 *)(param_1 + 0x1b60) = 0xffffff;
+      *(undefined4 *)(glContext + 0x1a68) = 0x66666666;
+      *(undefined4 *)(glContext + 0x1a6c) = 0x6666666;
+      *(undefined4 *)(glContext + 0x1b60) = 0xffffff;
       goto LAB_000a6110;
     }
   }
   else {
-    uVar7 = *(uint *)(param_1 + 0x44);
+    uVar7 = *(uint *)(glContext + 0x44);
   }
   iVar10 = iVar10 >> 1;
   iVar2 = (iVar10 + -1) * 4;
   uVar3 = *(uint *)(&DAT_001aa7e8 + iVar2);
-  *(uint *)(param_1 + 0x2354) = *(uint *)(param_1 + 0x2354) & 0xfffffffe;
+  *(uint *)(glContext + 0x2354) = *(uint *)(glContext + 0x2354) & 0xfffffffe;
   uVar4 = (uint)(iVar10 == 3) << 0x11 | uVar4 & 0xfffcffff;
-  *(undefined4 *)(param_1 + 0x1a6c) = *(undefined4 *)(&DAT_001aa7d0 + iVar2);
-  *(uint *)(param_1 + 0x1a4c) = uVar4;
+  *(undefined4 *)(glContext + 0x1a6c) = *(undefined4 *)(&DAT_001aa7d0 + iVar2);
+  *(uint *)(glContext + 0x1a4c) = uVar4;
   uVar5 = *(undefined4 *)(&DAT_001aa7dc + iVar2);
-  *(uint *)(param_1 + 0x1a60) = (uVar3 & 3) << 1 | 1;
-  *(undefined4 *)(param_1 + 0x1a68) = uVar5;
+  *(uint *)(glContext + 0x1a60) = (uVar3 & 3) << 1 | 1;
+  *(undefined4 *)(glContext + 0x1a68) = uVar5;
   if ((uVar7 & 0x10000000) == 0) {
     cVar9 = '\0';
     uVar3 = 0;
     fVar1 = FLOAT_001aa0e8;
   }
   else {
-    fVar1 = *(float *)(param_1 + 0x438);
-    cVar9 = *(char *)(param_1 + 0x43c);
+    fVar1 = *(float *)(glContext + 0x438);
+    cVar9 = *(char *)(glContext + 0x43c);
     uVar3 = uVar7 >> 0x19 & 1;
-    *(uint *)(param_1 + 0x1a4c) = uVar7 >> 0xb & 0x10000 | uVar4;
+    *(uint *)(glContext + 0x1a4c) = uVar7 >> 0xb & 0x10000 | uVar4;
   }
-  uVar4 = *(uint *)(*(int *)(param_1 + 4) + 0x2a50);
+  uVar4 = *(uint *)(*(int *)(glContext + 4) + 0x2a50);
   if (uVar3 == 0) {
     uVar4 = (1 << (uVar4 & 0x3f)) - 1;
     uVar4 = uVar4 | uVar4 * 0x40000 | uVar4 * 0x1000 | uVar4 * 0x40;
@@ -3037,12 +3037,12 @@ int FUN_000a5ec0(param_1)
             (uVar8 ^ (1 << (uVar7 + (1 < uVar3) & 0x3f)) - 1U) << 0xc |
             (uVar8 ^ (1 << (uVar7 + (2 < uVar3) & 0x3f)) - 1U) << 6;
   }
-  *(uint *)(param_1 + 0x1b60) = uVar4;
+  *(uint *)(glContext + 0x1b60) = uVar4;
 LAB_000a6110:
-  uVar4 = *(uint *)(param_1 + 0x1930);
-  *(uint *)(param_1 + 0x1930) = uVar4 | 0x80200;
-  if (iVar6 != *(int *)(param_1 + 0x1a60)) {
-    *(uint *)(param_1 + 0x1930) = uVar4 | 0x2080340;
+  uVar4 = *(uint *)(glContext + 0x1930);
+  *(uint *)(glContext + 0x1930) = uVar4 | 0x80200;
+  if (iVar6 != *(int *)(glContext + 0x1a60)) {
+    *(uint *)(glContext + 0x1930) = uVar4 | 0x2080340;
   }
   return;
 }
@@ -3965,8 +3965,8 @@ int gldFreeEngineState(ctx)
 }
 
 /* FUN_000a7a60 @ 0xa7a60 (496 bytes) */
-int FUN_000a7a60(param_1)
-  int param_1;
+int FUN_000a7a60(ctx)
+  int ctx;
 {
   undefined *puVar1;
   uint uVar2;
@@ -3978,13 +3978,13 @@ int FUN_000a7a60(param_1)
   int iVar8;
   
   puVar1 = PTR_DAT_001e88c8;
-  iVar7 = param_1 + 0x240;
-  ((unsigned char *)0x000015f8)[param_1] = ((unsigned char *)0x00002b7c)[param_1];
-  uVar5 = *(uint *)(param_1 + 0x1ae4);
-  uVar2 = *(uint *)(puVar1 + (uint)(byte)((unsigned char *)0x00002b7f)[param_1] * 0x24 + 0x18);
-  uVar4 = *(uint *)(puVar1 + (uint)(byte)((unsigned char *)0x00002b7f)[param_1] * 0x24 + 0x1c);
-  *(uint *)(param_1 + 0x1ae4) = uVar5 & 0xffc0003f;
-  piVar3 = *(int **)(*(int *)(param_1 + 0x18) + 0x1a0);
+  iVar7 = ctx + 0x240;
+  ((unsigned char *)0x000015f8)[ctx] = ((unsigned char *)0x00002b7c)[ctx];
+  uVar5 = *(uint *)(ctx + 0x1ae4);
+  uVar2 = *(uint *)(puVar1 + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24 + 0x18);
+  uVar4 = *(uint *)(puVar1 + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24 + 0x1c);
+  *(uint *)(ctx + 0x1ae4) = uVar5 & 0xffc0003f;
+  piVar3 = *(int **)(*(int *)(ctx + 0x18) + 0x1a0);
   uVar2 = uVar4 >> 0xe & 0xc000 |
           uVar4 >> 0x12 & 0x3000 | (uVar2 & 6) << 9 | (uVar2 & 0x18) << 5 | uVar2 >> 5 & 0x1f;
   if (piVar3 == (int *)0x0) {
@@ -3992,14 +3992,14 @@ int FUN_000a7a60(param_1)
     iVar8 = 4;
     iVar6 = iVar7;
     do {
-      if (*(short *)(((unsigned char *)0x00002dba) + uVar4 * 2 + *(int *)(param_1 + 0x10)) == 0) {
+      if (*(short *)(((unsigned char *)0x00002dba) + uVar4 * 2 + *(int *)(ctx + 0x10)) == 0) {
         *(undefined4 *)(iVar6 + 0x233c) = 0xf;
       }
       else {
         *(uint *)(iVar6 + 0x233c) = uVar2;
-        *(uint *)(param_1 + 0x1ae4) =
-             ((*(uint *)(param_1 + 0x1ae4) >> 6 | 1 << (uVar4 & 0x3f)) & 0xffff) << 6 |
-             *(uint *)(param_1 + 0x1ae4) & 0xffc0003f;
+        *(uint *)(ctx + 0x1ae4) =
+             ((*(uint *)(ctx + 0x1ae4) >> 6 | 1 << (uVar4 & 0x3f)) & 0xffff) << 6 |
+             *(uint *)(ctx + 0x1ae4) & 0xffc0003f;
       }
       uVar4 = uVar4 + 1;
       iVar6 = iVar6 + 4;
@@ -4016,27 +4016,27 @@ int FUN_000a7a60(param_1)
       }
       else {
         *(uint *)(iVar6 + 0x233c) = uVar2;
-        *(uint *)(param_1 + 0x1ae4) =
-             ((*(uint *)(param_1 + 0x1ae4) >> 6 | 1 << (uVar4 & 0x3f)) & 0xffff) << 6 |
-             *(uint *)(param_1 + 0x1ae4) & 0xffc0003f;
+        *(uint *)(ctx + 0x1ae4) =
+             ((*(uint *)(ctx + 0x1ae4) >> 6 | 1 << (uVar4 & 0x3f)) & 0xffff) << 6 |
+             *(uint *)(ctx + 0x1ae4) & 0xffc0003f;
       }
       uVar4 = uVar4 + 1;
       iVar6 = iVar6 + 4;
       iVar8 = iVar8 + -1;
     } while (iVar8 != 0);
   }
-  uVar4 = *(uint *)(param_1 + 0x1ae4);
+  uVar4 = *(uint *)(ctx + 0x1ae4);
   uVar2 = uVar4 >> 6 & 0xffff;
   if (*(int *)(((unsigned char *)0x00001448) + uVar2 * 4 + iVar7) == 0) {
     FUN_000b6020(iVar7,0,uVar2);
-    uVar4 = *(uint *)(param_1 + 0x1ae4);
+    uVar4 = *(uint *)(ctx + 0x1ae4);
   }
   if ((((uVar5 >> 6 & 0xffff) != (uVar4 >> 6 & 0xffff)) && ((uVar4 & 0x3fffc0) != 0)) &&
-     (((unsigned char *)0x0000430c)[*(int *)(param_1 + 0x10)] == '\0')) {
+     (((unsigned char *)0x0000430c)[*(int *)(ctx + 0x10)] == '\0')) {
     FUN_000b6580(iVar7,0);
-    (**(code **)(((unsigned char *)0x00002b8c) + param_1))(iVar7,*(undefined4 *)(param_1 + 0x209c));
+    (**(code **)(((unsigned char *)0x00002b8c) + ctx))(iVar7,*(undefined4 *)(ctx + 0x209c));
   }
-  *(uint *)(param_1 + 0x1b70) = *(uint *)(param_1 + 0x1b70) | 0x40;
+  *(uint *)(ctx + 0x1b70) = *(uint *)(ctx + 0x1b70) | 0x40;
   return;
 }
 
