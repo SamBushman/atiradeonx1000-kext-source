@@ -4080,7 +4080,7 @@ int FUN_00029c00(ctx, param_2, procWidth, procHeight, srcRowBytes, bytesPerPixel
       pfVar14 = afStack_148;
       pfVar13 = (float *)0x0;
       iVar9 = 0;
-      FUN_00086ba0(iVar21,1,0,0,pfVar14);
+      gldEnterInternalDrawState(iVar21,1,0,0,pfVar14);
     }
     iVar12 = iVar20 * 8 + 0x1b;
   }
@@ -4088,7 +4088,7 @@ int FUN_00029c00(ctx, param_2, procWidth, procHeight, srcRowBytes, bytesPerPixel
     pfVar14 = afStack_148;
     pfVar13 = (float *)0x0;
     iVar9 = 1;
-    FUN_00086ba0(iVar21,0,0,1,pfVar14);
+    gldEnterInternalDrawState(iVar21,0,0,1,pfVar14);
     iVar12 = iVar20 * 0x10 + 0x19;
   }
   if (*(char *)(ctx + 0x2a42) == '\0') {
@@ -4248,7 +4248,7 @@ int FUN_00029c00(ctx, param_2, procWidth, procHeight, srcRowBytes, bytesPerPixel
   uStack_b4 = uVar19;
   (**(code **)(ctx + 0x299c))(iVar21,pfVar15 + 2);
   FUN_0009d3b0(iVar21,r4AfterCall,pfVar13,iVar9,pfVar14,pfVar15,pfVar16);
-  return FUN_000872e0(iVar21,afStack_148);
+  return gldLeaveInternalDrawState(iVar21,afStack_148);
 }
 
 /* FUN_0002a260 @ 0x2a260 (356 bytes) */
@@ -5793,11 +5793,11 @@ LAB_0002c610:
     if (*(char *)(iVar10 + 0x20) == '\0') {
       FUN_000a7d10(param_1);
     }
-    FUN_00065370(param_1);
+    ffvpSelectLitProgramVariant(param_1);
     FUN_00090960(param_1);
     uVar8 = *dirtyBits;
     if (((uVar8 & 0x20000000) != 0) || (*(char *)(iVar10 + 0x2a43) != '\0')) {
-      FUN_00022eb0(iVar10,0);
+      gld_emitDirtyStatePackets(iVar10,0);
       uVar8 = *dirtyBits;
     }
     if ((((uVar8 & 0x180) != 0) || (*(char *)(iVar10 + 0x2a43) != '\0')) &&

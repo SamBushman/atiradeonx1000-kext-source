@@ -24,33 +24,35 @@ int IRInst__sourcesAreSameValue(inst)
 }
 
 /* FUN_0011e894 @ 0x11e894 (180 bytes) */
-int FUN_0011e894(param_1)
-  int param_1;
+int FUN_0011e894(program)
+  int program;
 {
-  int iVar1;
-  int iVar2;
+  int successorByteOffset;
+  int blockQuery79b8;
+  int nextBlock;
+  int successor;
   uint loopIndex;
-  int iVar4;
+  int block;
   
-  iVar4 = *(int *)(param_1 + 900);
-  iVar1 = *(int *)(iVar4 + 8);
+  block = *(int *)(program + 900);
+  nextBlock = *(int *)(block + 8);
   do {
-    if (iVar1 == 0) {
+    if (nextBlock == 0) {
       return 1;
     }
-    iVar1 = FUN_000e79b8(iVar4);
-    if (iVar1 != 0) {
-      iVar1 = 0;
-      for (loopIndex = 1; loopIndex <= *(uint *)(*(int *)(iVar4 + 0xd4) + 4); loopIndex = loopIndex + 1) {
-        iVar2 = *(int *)(*(int *)(*(int *)(iVar4 + 0xd4) + 8) + iVar1);
-        if ((iVar2 != 0) && (iVar2 = Block__hasMultipleSuccessors(iVar2), iVar2 != 0)) {
+    blockQuery79b8 = FUN_000e79b8(block);
+    if (blockQuery79b8 != 0) {
+      successorByteOffset = 0;
+      for (loopIndex = 1; loopIndex <= *(uint *)(*(int *)(block + 0xd4) + 4); loopIndex = loopIndex + 1) {
+        successor = *(int *)(*(int *)(*(int *)(block + 0xd4) + 8) + successorByteOffset);
+        if ((successor != 0) && (successor = Block__hasMultipleSuccessors(successor), successor != 0)) {
           return 0;
         }
-        iVar1 = iVar1 + 4;
+        successorByteOffset = successorByteOffset + 4;
       }
     }
-    iVar4 = *(int *)(iVar4 + 8);
-    iVar1 = *(int *)(iVar4 + 8);
+    block = *(int *)(block + 8);
+    nextBlock = *(int *)(block + 8);
   } while( true );
 }
 
@@ -694,29 +696,29 @@ int FUN_0011f7fc(param_1, param_2, vector)
   uint *vector;
 {
   uint vectorCount;
-  int *piVar1;
-  int iVar2;
-  uint uVar3;
+  int *vectorElementSlot;
+  int baseIndex;
+  uint slotIndex;
   
-  iVar2 = *(int *)(param_1 + 0x474);
-  if (iVar2 < *(int *)(param_2 + 0x150)) {
-    uVar3 = *(int *)(param_2 + 0x150) - iVar2;
+  baseIndex = *(int *)(param_1 + 0x474);
+  if (baseIndex < *(int *)(param_2 + 0x150)) {
+    slotIndex = *(int *)(param_2 + 0x150) - baseIndex;
   }
   else {
     vectorCount = vector[1];
     if (vectorCount < *vector) {
       _memset(vectorCount * 4 + vector[2],0,4);
-      piVar1 = (int *)(vectorCount * 4 + vector[2]);
+      vectorElementSlot = (int *)(vectorCount * 4 + vector[2]);
       vector[1] = vectorCount + 1;
     }
     else {
-      piVar1 = (int *)Vector__elementRefGrow(vector,vectorCount);
+      vectorElementSlot = (int *)Vector__elementRefGrow(vector,vectorCount);
     }
-    *piVar1 = param_2;
-    uVar3 = vector[1];
-    *(uint *)(param_2 + 0x150) = uVar3 + iVar2;
+    *vectorElementSlot = param_2;
+    slotIndex = vector[1];
+    *(uint *)(param_2 + 0x150) = slotIndex + baseIndex;
   }
-  return uVar3 - 1;
+  return slotIndex - 1;
 }
 
 /* FUN_0011f8a0 @ 0x11f8a0 (756 bytes) */
@@ -2917,26 +2919,27 @@ int ExportValue__vslot10(this, param_2)
 }
 
 /* FUN_00122f28 @ 0x122f28 (124 bytes) */
-int FUN_00122f28(param_1, param_2)
-  int *param_1;
-  int param_2;
+int FUN_00122f28(value, inst)
+  int *value;
+  int inst;
 {
-  int iVar1;
-  int iVar2;
+  int valueRegister;
+  int valueQuery18;
+  int valueKind;
   
-  if ((param_1[9] & 2U) == 0) {
-    iVar1 = (**(code **)(*param_1 + 0x18))(param_1);
-    if (iVar1 != 0) {
-      *(undefined4 *)(param_2 + 0x98) = 0;
-      *(undefined4 *)(param_2 + 0x94) = *(undefined4 *)(param_2 + 0x14c);
+  if ((value[9] & 2U) == 0) {
+    valueQuery18 = (**(code **)(*value + 0x18))(value);
+    if (valueQuery18 != 0) {
+      *(undefined4 *)(inst + 0x98) = 0;
+      *(undefined4 *)(inst + 0x94) = *(undefined4 *)(inst + 0x14c);
     }
   }
   else {
-    iVar1 = param_1[4];
-    iVar2 = param_1[1];
-    *(uint *)(param_2 + 0x14) = *(uint *)(param_2 + 0x14) | 0x40;
-    *(int *)(param_2 + 0x94) = iVar1;
-    *(int *)(param_2 + 0x98) = iVar2;
+    valueRegister = value[4];
+    valueKind = value[1];
+    *(uint *)(inst + 0x14) = *(uint *)(inst + 0x14) | 0x40;
+    *(int *)(inst + 0x94) = valueRegister;
+    *(int *)(inst + 0x98) = valueKind;
   }
   return;
 }
@@ -2977,25 +2980,25 @@ int VReg__currentDefinition(vreg, block, createArg)
 }
 
 /* FUN_0012306c @ 0x12306c (120 bytes) */
-int FUN_0012306c(param_1, param_2)
-  int param_1;
-  undefined4 param_2;
+int FUN_0012306c(vreg, user)
+  int vreg;
+  undefined4 user;
 {
-  undefined4 *puVar1;
-  uint uVar2;
-  uint *puVar3;
+  undefined4 *listSlotRef;
+  uint listCount;
+  uint *listVector;
   
-  puVar3 = *(uint **)(param_1 + 0x18);
-  uVar2 = puVar3[1];
-  if (uVar2 < *puVar3) {
-    _memset(uVar2 * 4 + puVar3[2],0,4);
-    puVar1 = (undefined4 *)(uVar2 * 4 + puVar3[2]);
-    puVar3[1] = uVar2 + 1;
+  listVector = *(uint **)(vreg + 0x18);
+  listCount = listVector[1];
+  if (listCount < *listVector) {
+    _memset(listCount * 4 + listVector[2],0,4);
+    listSlotRef = (undefined4 *)(listCount * 4 + listVector[2]);
+    listVector[1] = listCount + 1;
   }
   else {
-    puVar1 = (undefined4 *)Vector__elementRefGrow(puVar3,uVar2);
+    listSlotRef = (undefined4 *)Vector__elementRefGrow(listVector,listCount);
   }
-  *puVar1 = param_2;
+  *listSlotRef = user;
   return;
 }
 
@@ -3284,30 +3287,30 @@ LAB_00123718:
 }
 
 /* VRegInfo__ctor_12379c @ 0x12379c (296 bytes) */
-int VRegInfo__ctor_12379c(param_1, param_2, param_3, param_4, compiler)
-  undefined4 *param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
+int VRegInfo__ctor_12379c(this, ctorWord2, ctorWord1, ctorWord3, compiler)
+  undefined4 *this;
+  undefined4 ctorWord2;
+  undefined4 ctorWord1;
+  undefined4 ctorWord3;
   int compiler;
 {
   undefined *vtable;
-  int iVar2;
+  int vregSerial;
   undefined4 *allocation;
   undefined4 arena;
   
-  param_1[2] = param_2;
+  this[2] = ctorWord2;
   vtable = PTR_DAT_001e90f0;
-  param_1[1] = param_3;
-  param_1[3] = param_4;
-  *param_1 = vtable + 8;
-  param_1[4] = 0xffffffff;
-  param_1[7] = 0xffffffff;
-  iVar2 = *(int *)(compiler + 0x348);
-  param_1[8] = iVar2;
-  *(int *)(compiler + 0x348) = iVar2 + 1;
-  param_1[10] = 0xffffffff;
-  param_1[9] = 0;
+  this[1] = ctorWord1;
+  this[3] = ctorWord3;
+  *this = vtable + 8;
+  this[4] = 0xffffffff;
+  this[7] = 0xffffffff;
+  vregSerial = *(int *)(compiler + 0x348);
+  this[8] = vregSerial;
+  *(int *)(compiler + 0x348) = vregSerial + 1;
+  this[10] = 0xffffffff;
+  this[9] = 0;
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x14);
   *allocation = arena;
@@ -3316,7 +3319,7 @@ int VRegInfo__ctor_12379c(param_1, param_2, param_3, param_4, compiler)
   allocation[2] = 0;
   arena = Arena__alloc(arena,8);
   allocation[3] = arena;
-  param_1[5] = allocation + 1;
+  this[5] = allocation + 1;
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x14);
   *allocation = arena;
@@ -3325,7 +3328,7 @@ int VRegInfo__ctor_12379c(param_1, param_2, param_3, param_4, compiler)
   allocation[2] = 0;
   arena = Arena__alloc(arena,8);
   allocation[3] = arena;
-  param_1[6] = allocation + 1;
+  this[6] = allocation + 1;
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x14);
   *allocation = arena;
@@ -3334,35 +3337,35 @@ int VRegInfo__ctor_12379c(param_1, param_2, param_3, param_4, compiler)
   allocation[4] = arena;
   arena = Arena__alloc(arena,8);
   allocation[3] = arena;
-  param_1[0xb] = allocation + 1;
+  this[0xb] = allocation + 1;
   return;
 }
 
 /* VRegInfo__ctor_1238e8 @ 0x1238e8 (296 bytes) */
-int VRegInfo__ctor_1238e8(param_1, param_2, param_3, param_4, compiler)
-  undefined4 *param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
+int VRegInfo__ctor_1238e8(this, ctorWord2, ctorWord1, ctorWord3, compiler)
+  undefined4 *this;
+  undefined4 ctorWord2;
+  undefined4 ctorWord1;
+  undefined4 ctorWord3;
   int compiler;
 {
   undefined *vtable;
-  int iVar2;
+  int vregSerial;
   undefined4 *allocation;
   undefined4 arena;
   
-  param_1[2] = param_2;
+  this[2] = ctorWord2;
   vtable = PTR_DAT_001e90f0;
-  param_1[1] = param_3;
-  param_1[3] = param_4;
-  *param_1 = vtable + 8;
-  param_1[4] = 0xffffffff;
-  param_1[7] = 0xffffffff;
-  iVar2 = *(int *)(compiler + 0x348);
-  param_1[8] = iVar2;
-  *(int *)(compiler + 0x348) = iVar2 + 1;
-  param_1[10] = 0xffffffff;
-  param_1[9] = 0;
+  this[1] = ctorWord1;
+  this[3] = ctorWord3;
+  *this = vtable + 8;
+  this[4] = 0xffffffff;
+  this[7] = 0xffffffff;
+  vregSerial = *(int *)(compiler + 0x348);
+  this[8] = vregSerial;
+  *(int *)(compiler + 0x348) = vregSerial + 1;
+  this[10] = 0xffffffff;
+  this[9] = 0;
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x14);
   *allocation = arena;
@@ -3371,7 +3374,7 @@ int VRegInfo__ctor_1238e8(param_1, param_2, param_3, param_4, compiler)
   allocation[2] = 0;
   arena = Arena__alloc(arena,8);
   allocation[3] = arena;
-  param_1[5] = allocation + 1;
+  this[5] = allocation + 1;
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x14);
   *allocation = arena;
@@ -3380,7 +3383,7 @@ int VRegInfo__ctor_1238e8(param_1, param_2, param_3, param_4, compiler)
   allocation[2] = 0;
   arena = Arena__alloc(arena,8);
   allocation[3] = arena;
-  param_1[6] = allocation + 1;
+  this[6] = allocation + 1;
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x14);
   *allocation = arena;
@@ -3389,7 +3392,7 @@ int VRegInfo__ctor_1238e8(param_1, param_2, param_3, param_4, compiler)
   allocation[4] = arena;
   arena = Arena__alloc(arena,8);
   allocation[3] = arena;
-  param_1[0xb] = allocation + 1;
+  this[0xb] = allocation + 1;
   return;
 }
 
@@ -3650,35 +3653,35 @@ int TempValue__clone(this, param_2, compiler)
   int compiler;
 {
   undefined4 *allocation;
-  int iVar1;
-  undefined4 *puVar2;
+  int newInst;
+  undefined4 *foldedValue;
   int callResult;
-  undefined4 *puVar4;
+  undefined4 *valueKey;
   undefined4 arena;
   
   if (*(int *)(this + 4) == 0x1a) {
-    iVar1 = (**(code **)(**(int **)(compiler + COMP_target) + 0x50))
+    newInst = (**(code **)(**(int **)(compiler + COMP_target) + 0x50))
                       (*(int **)(compiler + COMP_target),*(undefined4 *)(this + 8));
-    IRInst__setOperandRef(iVar1,0,this);
-    *(undefined4 *)(iVar1 + 0x9c) = DAT_001afee8;
-    ((int (*)())FUN_0012306c)(this,iVar1);
+    IRInst__setOperandRef(newInst,0,this);
+    *(undefined4 *)(newInst + 0x9c) = DAT_001afee8;
+    ((int (*)())FUN_0012306c)(this,newInst);
     arena = *(undefined4 *)(compiler + COMP_arenaB);
     allocation = (undefined4 *)Arena__alloc(arena,0x240);
-    puVar4 = allocation + 1;
+    valueKey = allocation + 1;
     *allocation = arena;
-    ValueKey__init(puVar4,iVar1,compiler);
+    ValueKey__init(valueKey,newInst,compiler);
     callResult = Compiler__isOptionEnabled(compiler,7);
     if (callResult != 0) {
-      FUN_00174e0c(puVar4);
-      ValueKey__propagateLaneValues(puVar4);
+      FUN_00174e0c(valueKey);
+      ValueKey__propagateLaneValues(valueKey);
     }
     *(uint *)(*(int *)(compiler + COMP_target) + 8) = *(uint *)(*(int *)(compiler + COMP_target) + 8) | 0x20;
-    (**(code **)(*param_2 + 0xc))(param_2,iVar1);
-    ((int (*)())FUN_00122f28)(this,iVar1);
-    return puVar4;
+    (**(code **)(*param_2 + 0xc))(param_2,newInst);
+    ((int (*)())FUN_00122f28)(this,newInst);
+    return valueKey;
   }
-  puVar2 = (undefined4 *)((int (*)())FUN_00123c08)(*(undefined4 *)(compiler + COMP_currentProgram),param_2,this);
-  return puVar2;
+  foldedValue = (undefined4 *)((int (*)())FUN_00123c08)(*(undefined4 *)(compiler + COMP_currentProgram),param_2,this);
+  return foldedValue;
 }
 
 /* ExportSlot__clone @ 0x1241fc (184 bytes) */
@@ -3788,86 +3791,86 @@ int FixedValue__clone(this, param_2, compiler)
 }
 
 /* FixedValue__ctor_1245a8 @ 0x1245a8 (304 bytes) */
-int FixedValue__ctor_1245a8(this, param_2, param_3, param_4, compiler)
+int FixedValue__ctor_1245a8(this, registerIndex, registerFile, baseCtorArg4, compiler)
   undefined4 *this;
-  int param_2;
-  int param_3;
-  undefined4 param_4;
+  int registerIndex;
+  int registerFile;
+  undefined4 baseCtorArg4;
   int compiler;
 {
   undefined4 *allocation;
-  int *piVar2;
-  undefined4 *puVar3;
+  int *entryBlock;
+  undefined4 *loadConstInst;
   undefined4 arena;
   
-  ((int (*)())VRegInfo__ctor_12379c)(this,param_2,param_3,param_4,compiler);
-  this[4] = param_2;
+  ((int (*)())VRegInfo__ctor_12379c)(this,registerIndex,registerFile,baseCtorArg4,compiler);
+  this[4] = registerIndex;
   *this = &PTR_FUN_001ea898;
   *(int *)(compiler + 0x338) = *(int *)(compiler + 0x338) + 1;
-  if (param_3 == 3) {
-    if (*(int *)(*(int *)(compiler + COMP_target) + 0x24) <= param_2) {
+  if (registerFile == 3) {
+    if (*(int *)(*(int *)(compiler + COMP_target) + 0x24) <= registerIndex) {
       Compiler__fail(compiler,10);
     }
   }
-  else if (param_3 == 4) {
-    if (*(int *)(*(int *)(compiler + COMP_target) + 0x28) <= param_2) {
+  else if (registerFile == 4) {
+    if (*(int *)(*(int *)(compiler + COMP_target) + 0x28) <= registerIndex) {
       Compiler__fail(compiler,0xc);
     }
   }
-  else if ((param_3 == 2) && (*(int *)(*(int *)(compiler + COMP_target) + 0x2c) <= param_2)) {
+  else if ((registerFile == 2) && (*(int *)(*(int *)(compiler + COMP_target) + 0x2c) <= registerIndex)) {
     Compiler__fail(compiler,0xb);
   }
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
-  puVar3 = allocation + 1;
+  loadConstInst = allocation + 1;
   *allocation = arena;
-  IRLoadConst__ctor_109614(puVar3,this,compiler);
-  piVar2 = *(int **)(*(int *)(compiler + COMP_currentProgram) + 0x3a0);
-  (**(code **)(*piVar2 + 0xc))(piVar2,puVar3);
-  IRInst__setOperandRef(puVar3,0,this);
-  ((int (*)())FUN_0012306c)(this,puVar3);
+  IRLoadConst__ctor_109614(loadConstInst,this,compiler);
+  entryBlock = *(int **)(*(int *)(compiler + COMP_currentProgram) + 0x3a0);
+  (**(code **)(*entryBlock + 0xc))(entryBlock,loadConstInst);
+  IRInst__setOperandRef(loadConstInst,0,this);
+  ((int (*)())FUN_0012306c)(this,loadConstInst);
   return;
 }
 
 /* FixedValue__ctor_124724 @ 0x124724 (304 bytes) */
-int FixedValue__ctor_124724(this, param_2, param_3, param_4, compiler)
+int FixedValue__ctor_124724(this, registerIndex, registerFile, baseCtorArg4, compiler)
   undefined4 *this;
-  int param_2;
-  int param_3;
-  undefined4 param_4;
+  int registerIndex;
+  int registerFile;
+  undefined4 baseCtorArg4;
   int compiler;
 {
   undefined4 *allocation;
-  int *piVar2;
-  undefined4 *puVar3;
+  int *entryBlock;
+  undefined4 *loadConstInst;
   undefined4 arena;
   
-  ((int (*)())VRegInfo__ctor_12379c)(this,param_2,param_3,param_4,compiler);
-  this[4] = param_2;
+  ((int (*)())VRegInfo__ctor_12379c)(this,registerIndex,registerFile,baseCtorArg4,compiler);
+  this[4] = registerIndex;
   *this = &PTR_FUN_001ea898;
   *(int *)(compiler + 0x338) = *(int *)(compiler + 0x338) + 1;
-  if (param_3 == 3) {
-    if (*(int *)(*(int *)(compiler + COMP_target) + 0x24) <= param_2) {
+  if (registerFile == 3) {
+    if (*(int *)(*(int *)(compiler + COMP_target) + 0x24) <= registerIndex) {
       Compiler__fail(compiler,10);
     }
   }
-  else if (param_3 == 4) {
-    if (*(int *)(*(int *)(compiler + COMP_target) + 0x28) <= param_2) {
+  else if (registerFile == 4) {
+    if (*(int *)(*(int *)(compiler + COMP_target) + 0x28) <= registerIndex) {
       Compiler__fail(compiler,0xc);
     }
   }
-  else if ((param_3 == 2) && (*(int *)(*(int *)(compiler + COMP_target) + 0x2c) <= param_2)) {
+  else if ((registerFile == 2) && (*(int *)(*(int *)(compiler + COMP_target) + 0x2c) <= registerIndex)) {
     Compiler__fail(compiler,0xb);
   }
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
-  puVar3 = allocation + 1;
+  loadConstInst = allocation + 1;
   *allocation = arena;
-  IRLoadConst__ctor_109614(puVar3,this,compiler);
-  piVar2 = *(int **)(*(int *)(compiler + COMP_currentProgram) + 0x3a0);
-  (**(code **)(*piVar2 + 0xc))(piVar2,puVar3);
-  IRInst__setOperandRef(puVar3,0,this);
-  ((int (*)())FUN_0012306c)(this,puVar3);
+  IRLoadConst__ctor_109614(loadConstInst,this,compiler);
+  entryBlock = *(int **)(*(int *)(compiler + COMP_currentProgram) + 0x3a0);
+  (**(code **)(*entryBlock + 0xc))(entryBlock,loadConstInst);
+  IRInst__setOperandRef(loadConstInst,0,this);
+  ((int (*)())FUN_0012306c)(this,loadConstInst);
   return;
 }
 

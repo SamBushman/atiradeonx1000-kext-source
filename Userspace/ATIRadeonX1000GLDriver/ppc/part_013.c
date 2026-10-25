@@ -1503,11 +1503,11 @@ int arbfpInternParameter(parser, table, countPtr, capacity, fullMessage, entry)
 }
 
 /* arbValidateProgram @ 0x8c590 (3768 bytes) */
-int arbValidateProgram(callbacks, program, param_3, param_4)
+int arbValidateProgram(callbacks, program, sourceLength, sourceText)
   int callbacks;
   undefined1 *program;
-  int *param_3;
-  undefined4 param_4;
+  int *sourceLength;
+  undefined4 sourceText;
 {
   int loopCounterD;
   int loopCounterC;
@@ -1541,8 +1541,8 @@ int arbValidateProgram(callbacks, program, param_3, param_4)
   uint *puVar20;
   int *piVar21;
   int iVar22;
-  int local_d8 [16];
-  int *local_98;
+  int unitTarget [16];
+  int *hasFogOption;
   int loopCounterE;
   int local_90;
   int *local_8c;
@@ -1558,7 +1558,7 @@ int arbValidateProgram(callbacks, program, param_3, param_4)
   int local_60;
   int *local_5c;
   
-  workArea = (int *)(**(code **)(callbacks + 0xc))(0x24a30,program,param_3,param_4);
+  workArea = (int *)(**(code **)(callbacks + 0xc))(0x24a30,program,sourceLength,sourceText);
   piVar15 = (int *)0x0;
   program[0x54] = 0;
   local_80 = 0;
@@ -1605,19 +1605,19 @@ int arbValidateProgram(callbacks, program, param_3, param_4)
       loopCounterB = loopCounterB + 1;
     } while (loopCounterB < *(int *)(((unsigned char *)0x000011d4) + callbacks));
   }
-  iVar12 = (**(code **)(callbacks + 0xc))((undefined *)((int)param_3 + 1));
+  iVar12 = (**(code **)(callbacks + 0xc))((undefined *)((int)sourceLength + 1));
   if (iVar12 == 0) {
     _free(workArea);
     return;
   }
-  a2 = param_3;
-  _memcpy(iVar12,param_4,param_3);
-  *(undefined1 *)(iVar12 + (int)param_3) = 0;
+  a2 = sourceLength;
+  _memcpy(iVar12,sourceText,sourceLength);
+  *(undefined1 *)(iVar12 + (int)sourceLength) = 0;
   workArea[3] = iVar12;
   *workArea = callbacks;
   workArea[1] = iVar12;
   workArea[2] = iVar12;
-  workArea[4] = (int)(iVar12 + (int)param_3);
+  workArea[4] = (int)(iVar12 + (int)sourceLength);
   workArea[0xb] = -1;
   workArea[10] = -1;
   workArea[9] = 1;
@@ -1659,7 +1659,7 @@ int arbValidateProgram(callbacks, program, param_3, param_4)
       if (*(char *)(workArea + 0xe) == '\x01') {
         bVar8 = bVar8 + 1;
       }
-      local_98 = piVar13;
+      hasFogOption = piVar13;
       if (bVar8 < 2) {
 LAB_0008c88c:
         piVar21 = (int *)workArea[0xf];
@@ -1668,8 +1668,8 @@ LAB_0008c88c:
           if (piVar21 != (int *)0x0) {
             piVar13 = workArea + 0x914a;
             local_6c = (int *)&DAT_001ac5a4;
-            bVar1 = local_98 == (int *)0x0;
-            local_8c = local_98;
+            bVar1 = hasFogOption == (int *)0x0;
+            local_8c = hasFogOption;
             piVar15 = workArea + 0x928a;
             local_88 = (int *)&DAT_001ac5a4;
             local_68 = piVar13;
@@ -1735,7 +1735,7 @@ LAB_0008c88c:
             piVar13 = *(int **)(((unsigned char *)0x000011d4) + iVar12);
             iVar2 = iVar16 + workArea[0x9015];
             if (iVar2 <= (int)piVar13) {
-              bVar1 = local_98 == (int *)0x0;
+              bVar1 = hasFogOption == (int *)0x0;
               if (!bVar1) {
                 if (*(char *)(workArea + 0xd) == '\x01') {
                   if (iVar16 <= *(int *)(((unsigned char *)0x00001204) + iVar12) + -3) {
@@ -1759,7 +1759,7 @@ LAB_0008ca70:
               }
               uVar5 = (uint)(byte)((unsigned char *)0x000013b1)[iVar12];
               if (uVar5 != 0) {
-                piVar15 = local_d8;
+                piVar15 = unitTarget;
                 do {
                   *piVar15 = 0;
                   piVar15 = piVar15 + 1;
@@ -1771,7 +1771,7 @@ LAB_0008ca70:
                 loopCounterD = 1;
               }
               else {
-                piVar15 = local_d8;
+                piVar15 = unitTarget;
                 uVar5 = 0;
                 uVar14 = 0;
                 in_r7 = (int *)0x0;
@@ -1951,7 +1951,7 @@ LAB_0008ce38:
                     program[5] = 1;
                   }
                   if (bVar1) {
-                    *(int **)(program + 8) = local_98;
+                    *(int **)(program + 8) = hasFogOption;
                   }
                   else {
                     program[1] = 1;
@@ -1970,7 +1970,7 @@ LAB_0008ce38:
                   }
                   if (((unsigned char *)0x000013b1)[iVar12] != '\0') {
                     loopCounter = 0;
-                    piVar13 = local_d8;
+                    piVar13 = unitTarget;
                     puVar3 = program;
                     do {
                       iVar16 = *piVar13;
@@ -3663,7 +3663,7 @@ int FUN_0008f7f0(ctx, param_2, param_3, param_4, param_5)
   uVar14 = 0;
   a3_00 = 0;
   a4 = auStack_f8;
-  FUN_00086ba0(ctx,1,0,0,a4);
+  gldEnterInternalDrawState(ctx,1,0,0,a4);
   uVar13 = 0x25;
   if (*(char *)(ctx + 0x2802) != '\0') {
     uVar13 = 0x23;
@@ -3727,7 +3727,7 @@ int FUN_0008f7f0(ctx, param_2, param_3, param_4, param_5)
   *(undefined4 **)(0x00002748 + ctx + 4) = a1_00;
   (**(code **)(ctx + 0x275c))(ctx,a1_00,puVar12,a3_00,((unsigned char *)0x00001087U),a1_00,a6,0xc0083500);
   FUN_0009d3b0(ctx,extraout_r4,puVar12,a3_00,puVar15,a1_00,a6);
-  FUN_000872e0(ctx,auStack_f8);
+  gldLeaveInternalDrawState(ctx,auStack_f8);
   if (bVar9) {
     *(int *)(a1 + 4) = *(int *)(0x00002748 + ctx + 4) - iVar16 >> 2;
   }
@@ -3751,7 +3751,7 @@ int FUN_0008fb70(ctx)
   *(undefined1 *)(ctx + 0x23ec) = 1;
   if (*(char *)(ctx + 0x1868) == '\0') {
     if ((*(uint *)(ctx + 0x44) & 0x100000) != 0) {
-      FUN_000651e0(ctx);
+      extvsFlushConstantUploads(ctx);
     }
   }
   else if ((*(uint *)(ctx + 0x44) & 0x100000) != 0) {
@@ -4137,7 +4137,7 @@ void gldValidateState(int glContext,undefined4 param_2,undefined4 param_3,undefi
       }
       if ((dirtyMask & 0x1000) != 0) {
         if (*(char *)(glContext + 0x1868) == '\0') {
-          FUN_00064f40(glContext,param_2);
+          extvsValidateProgramState(glContext,param_2);
           param_2 = extraout_r4_12;
         }
         else {

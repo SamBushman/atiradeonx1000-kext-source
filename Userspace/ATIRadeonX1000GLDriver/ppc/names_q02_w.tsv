@@ -1,0 +1,97 @@
+local	FUN_00064a10	param_1	glContext	INFERRED	GL context
+local	FUN_00064a10	param_2	shader	INFERRED	EXT_vertex_shader object; shader[8] is the symbol list (0x54-byte entries)
+use	FUN_00064a10	piVar20	constAlloc	INFERRED	glContext+0x11b4: two-word constant memory allocation cursor {x, y}	^\s*piVar20\ =\ \*\(int\ \*\*\)\(\(\(unsigned\ char\ \*\)0x000011b4\)\ \+\ param_1\);$	+1
+use	FUN_00064a10	piVar20	constAlloc	INFERRED	glContext+0x11b4: two-word constant memory allocation cursor {x, y}	^\s*iVar9\ =\ \*piVar20;$	+1
+use	FUN_00064a10	piVar20	constAlloc	INFERRED	glContext+0x11b4: two-word constant memory allocation cursor {x, y}	^\s*iVar12\ =\ piVar20\[1\]\ \-\ \*\(int\ \*\)\(param_1\ \+\ 0x2448\);$	+1
+use	FUN_00064a10	piVar20	constAlloc	INFERRED	glContext+0x11b4: two-word constant memory allocation cursor {x, y}	^\s*\*piVar20\ =\ uVar17\ \+\ \*piVar20;$	+2
+use	FUN_00064a10	piVar20	constAlloc	INFERRED	glContext+0x11b4: two-word constant memory allocation cursor {x, y}	^\s*\*piVar20\ =\ 0;$	+2
+use	FUN_00064a10	piVar20	constIndexCursor	INFERRED	cursor over programState+0x220: symbol list indices of the constants to upload, four at a time	^\s*piVar20\ =\ \*\(int\ \*\*\)\(pcVar21\ \+\ 0x220\);$	+6
+use	FUN_00064a10	piVar20	constIndexCursor	INFERRED	cursor over programState+0x220: symbol list indices of the constants to upload, four at a time	^\s*piVar20\ =\ piVar20\ \+\ 4;$	+1
+use	FUN_00064a10	piVar20	constIndexCursor	INFERRED	cursor over programState+0x220: symbol list indices of the constants to upload, four at a time	^\s*for\ \(;\ piVar20\ <\ piVar18;\ piVar20\ =\ piVar20\ \+\ 1\)\ \{$	+2
+use	FUN_00064a10	puVar16	hwProgramSlot	INFERRED	hardware program slot entry of the shader; word 0x22 is the constant block	^\s*puVar16\ =\ \*\(undefined4\ \*\*\)\(\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x0000118c\)\ \+\ param_1\)\ \*\ 4\ \+\ \*param_2\);$	+2
+use	FUN_00064a10	puVar16	hwProgramSlot	INFERRED	hardware program slot entry of the shader; word 0x22 is the constant block	^\s*iVar6\ =\ puVar16\[0x22\];$	+1
+use	FUN_00064a10	puVar16	hwProgramSlot	INFERRED	hardware program slot entry of the shader; word 0x22 is the constant block	^\s*in_r6\ =\ puVar16\[0x22\];$	+1
+use	FUN_00064a10	puVar16	cmdBuffer	INFERRED	command space returned by the glContext+0x2758 reserve callback	^\s*puVar16\ =\ \(undefined4\ \*\)\(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x2758\)\)\(param_1,4\);$	+3
+use	FUN_00064a10	puVar16	cmdBuffer	INFERRED	command space returned by the glContext+0x2758 reserve callback	^\s*puVar16\ =\ \(undefined4\ \*\)\(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x2758\)\)\(param_1,2\);$	+3
+local	FUN_00064a10	pcVar21	programState	INFERRED	hardware program record *hwProgramSlot
+local	FUN_00064a10	piVar18	constIndexEnd	INFERRED	end of the constant symbol index list (programState+0x220 + count)
+use	FUN_00064a10	iVar6	constantBlock	INFERRED	hwProgramSlot[0x22]: block that receives the constant vectors at slot * 0x10	^\s*iVar6\ =\ puVar16\[0x22\];$	+1
+use	FUN_00064a10	iVar6	constantBlock	INFERRED	hwProgramSlot[0x22]: block that receives the constant vectors at slot * 0x10	^\s*\*\(undefined8\ \*\)\(iVar6\ \+\ iVar12\)\ =\ \*puVar5;$	+8
+use	FUN_00064a10	iVar6	constantBlock	INFERRED	hwProgramSlot[0x22]: block that receives the constant vectors at slot * 0x10	^\s*\*\(undefined8\ \*\)\(iVar6\ \+\ iVar12\)\ =\ \*puVar2;$	+2
+use	FUN_00064a10	iVar6	cacheMode	INFERRED	glContext+0xd8: constant cache size mode (0 = 128 wide, 1 = 254, 2 = 256)	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xd8\);$	+1
+use	FUN_00064a10	iVar6	cacheMode	INFERRED	glContext+0xd8: constant cache size mode (0 = 128 wide, 1 = 254, 2 = 256)	^\s*if\ \(iVar6\ ==\ 1\)\ goto\ LAB_00064ac0;$	+2
+use	FUN_00064a10	iVar6	cacheMode	INFERRED	glContext+0xd8: constant cache size mode (0 = 128 wide, 1 = 254, 2 = 256)	^\s*if\ \(iVar6\ !=\ 2\)\ goto\ LAB_00064af0;$	+1
+use	FUN_00064a10	iVar6	cacheMode	INFERRED	glContext+0xd8: constant cache size mode (0 = 128 wide, 1 = 254, 2 = 256)	^\s*if\ \(iVar6\ ==\ 1\)\ break;$	+3
+use	FUN_00064a10	iVar6	cacheMode	INFERRED	glContext+0xd8: constant cache size mode (0 = 128 wide, 1 = 254, 2 = 256)	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xd8\);$@2	+1
+use	FUN_00064a10	iVar6	cacheMode	INFERRED	glContext+0xd8: constant cache size mode (0 = 128 wide, 1 = 254, 2 = 256)	^\s*iVar6\ =\ 1;$	+1
+use	FUN_00064a10	iVar6	cacheMode	INFERRED	glContext+0xd8: constant cache size mode (0 = 128 wide, 1 = 254, 2 = 256)	^\s*iVar6\ =\ 2;$	+1
+local	FUN_00064a10	pcVar1	commitCallback	INFERRED	glContext+0x275c: command buffer commit callback
+use	FUN_00064a10	iVar9	symbolList	INFERRED	shader[8]: symbol list entries	^\s*iVar9\ =\ param_2\[8\];$	+1
+use	FUN_00064a10	iVar9	symbolList	INFERRED	shader[8]: symbol list entries	^\s*iVar12\ =\ iVar9\ \+\ \*piVar20\ \*\ 0x54;$	+4
+use	FUN_00064a10	iVar9	symbolList	INFERRED	shader[8]: symbol list entries	^\s*iVar12\ =\ iVar9\ \+\ \*piVar20\ \*\ 0x54;$@2	+1
+use	FUN_00064a10	iVar9	allocX	INFERRED	constAlloc[0]: x position of the allocation cursor	^\s*iVar9\ =\ \*piVar20;$	+1
+use	FUN_00064a10	iVar9	allocX	INFERRED	constAlloc[0]: x position of the allocation cursor	^\s*uVar15\ =\ 0x80\ \-\ iVar9;$	+1
+use	FUN_00064a10	iVar9	allocX	INFERRED	constAlloc[0]: x position of the allocation cursor	^\s*uVar15\ =\ 0x100\ \-\ iVar9;$	+1
+use	FUN_00064a10	iVar9	allocX	INFERRED	constAlloc[0]: x position of the allocation cursor	^\s*\*\(int\ \*\)\(pcVar21\ \+\ 4\)\ =\ iVar9;$	+2
+use	FUN_00064a10	iVar9	allocX	INFERRED	constAlloc[0]: x position of the allocation cursor	^\s*iVar9\ =\ 0;$	+1
+use	FUN_00064a10	iVar9	allocX	INFERRED	constAlloc[0]: x position of the allocation cursor	^\s*uVar15\ =\ 0xfe\ \-\ iVar9;$	+1
+use	FUN_00064a10	iVar12	allocY	INFERRED	constAlloc[1] - glContext+0x2448: y position of the allocation cursor relative to the base row	^\s*iVar12\ =\ piVar20\[1\]\ \-\ \*\(int\ \*\)\(param_1\ \+\ 0x2448\);$	+1
+use	FUN_00064a10	iVar12	allocY	INFERRED	constAlloc[1] - glContext+0x2448: y position of the allocation cursor relative to the base row	^\s*uVar14\ =\ 0x80\ \-\ iVar12;$	+1
+use	FUN_00064a10	iVar12	allocY	INFERRED	constAlloc[1] - glContext+0x2448: y position of the allocation cursor relative to the base row	^\s*uVar14\ =\ 0x100\ \-\ iVar12;$	+1
+use	FUN_00064a10	iVar12	allocY	INFERRED	constAlloc[1] - glContext+0x2448: y position of the allocation cursor relative to the base row	^\s*\*\(int\ \*\)\(pcVar21\ \+\ 0x14\)\ =\ iVar12;$	+1
+use	FUN_00064a10	iVar12	allocY	INFERRED	constAlloc[1] - glContext+0x2448: y position of the allocation cursor relative to the base row	^\s*iVar12\ =\ 0;$	+1
+use	FUN_00064a10	iVar12	allocY	INFERRED	constAlloc[1] - glContext+0x2448: y position of the allocation cursor relative to the base row	^\s*uVar14\ =\ 0x100\ \-\ iVar12;$@2	+1
+use	FUN_00064a10	iVar12	entryA	INFERRED	symbol list entry of the first constant of the group of four (then its destination offset slot * 0x10)	^\s*iVar12\ =\ iVar9\ \+\ \*piVar20\ \*\ 0x54;$	+1
+use	FUN_00064a10	iVar12	entryA	INFERRED	symbol list entry of the first constant of the group of four (then its destination offset slot * 0x10)	^\s*puVar5\ =\ \*\(undefined8\ \*\*\)\(iVar12\ \+\ 0x38\);$	+1
+use	FUN_00064a10	iVar12	entryA	INFERRED	symbol list entry of the first constant of the group of four (then its destination offset slot * 0x10)	^\s*iVar12\ =\ \*\(int\ \*\)\(iVar12\ \+\ 4\)\ \*\ 0x10;$	+1
+use	FUN_00064a10	iVar12	entryA	INFERRED	symbol list entry of the first constant of the group of four (then its destination offset slot * 0x10)	^\s*\*\(undefined8\ \*\)\(iVar6\ \+\ iVar12\)\ =\ \*puVar5;$	+2
+use	FUN_00064a10	iVar7	entryB	INFERRED	symbol list entry of the second constant of the group	^\s*iVar7\ =\ iVar9\ \+\ piVar20\[1\]\ \*\ 0x54;$	+1
+use	FUN_00064a10	iVar7	entryB	INFERRED	symbol list entry of the second constant of the group	^\s*puVar4\ =\ \*\(undefined8\ \*\*\)\(iVar7\ \+\ 0x38\);$	+1
+use	FUN_00064a10	iVar7	entryB	INFERRED	symbol list entry of the second constant of the group	^\s*in_r8\ =\ \*\(int\ \*\)\(iVar7\ \+\ 4\)\ \*\ 0x10;$	+1
+local	FUN_00064a10	iVar13	entryC	INFERRED	symbol list entry of the third constant of the group
+local	FUN_00064a10	iVar10	entryD	INFERRED	symbol list entry of the fourth constant of the group
+use	FUN_00064a10	iVar12	entrySingle	INFERRED	symbol list entry of the constant copied by the single-constant tail loop	^\s*iVar12\ =\ iVar9\ \+\ \*piVar20\ \*\ 0x54;$@2	+2
+use	FUN_00064a10	iVar12	entrySingle	INFERRED	symbol list entry of the constant copied by the single-constant tail loop	^\s*iVar12\ =\ \*\(int\ \*\)\(iVar12\ \+\ 4\)\ \*\ 0x10;$@2	+3
+local	FUN_00064a10	puVar5	valueA	INFERRED	entryA + 0x38: pointer to the 16 bytes of the first constant vector
+local	FUN_00064a10	puVar4	valueB	INFERRED	pointer to the 16 bytes of the second constant vector
+use	FUN_00064a10	puVar2	valueC	INFERRED	pointer to the 16 bytes of the third constant vector	^\s*puVar2\ =\ \*\(undefined8\ \*\*\)\(iVar13\ \+\ 0x38\);$	+1
+use	FUN_00064a10	puVar2	valueC	INFERRED	pointer to the 16 bytes of the third constant vector	^\s*uVar24\ =\ puVar2\[1\];$	+1
+use	FUN_00064a10	puVar2	valueC	INFERRED	pointer to the 16 bytes of the third constant vector	^\s*uVar27\ =\ \*puVar2;$	+1
+local	FUN_00064a10	puVar8	valueD	INFERRED	pointer to the 16 bytes of the fourth constant vector
+use	FUN_00064a10	puVar2	valueSingle	INFERRED	pointer to the 16 bytes of the constant copied by the tail loop	^\s*puVar2\ =\ \*\(undefined8\ \*\*\)\(iVar12\ \+\ 0x38\);$	+2
+use	FUN_00064a10	puVar2	valueSingle	INFERRED	pointer to the 16 bytes of the constant copied by the tail loop	^\s*\*\(undefined8\ \*\)\(iVar6\ \+\ iVar12\)\ =\ \*puVar2;$	+1
+use	FUN_00064a10	uVar22	valueAHigh	INFERRED	second 8 bytes of the first constant vector	^\s*uVar22\ =\ puVar5\[1\];$	+1
+use	FUN_00064a10	uVar22	valueAHigh	INFERRED	second 8 bytes of the first constant vector	^\s*\*\(undefined8\ \*\)\(iVar6\ \+\ iVar12\ \+\ 8\)\ =\ uVar22;$	+1
+use	FUN_00064a10	uVar22	valueSingleHigh	INFERRED	second 8 bytes of the tail-loop constant vector	^\s*uVar22\ =\ puVar2\[1\];$	+1
+use	FUN_00064a10	uVar22	valueSingleHigh	INFERRED	second 8 bytes of the tail-loop constant vector	^\s*\*\(undefined8\ \*\)\(iVar6\ \+\ iVar12\ \+\ 8\)\ =\ uVar22;$@2	+1
+local	FUN_00064a10	uVar25	valueBHigh	INFERRED	second 8 bytes of the second constant vector
+local	FUN_00064a10	uVar24	valueCHigh	INFERRED	second 8 bytes of the third constant vector
+local	FUN_00064a10	uVar23	valueDHigh	INFERRED	second 8 bytes of the fourth constant vector
+local	FUN_00064a10	uVar28	valueBLow	INFERRED	first 8 bytes of the second constant vector
+local	FUN_00064a10	uVar27	valueCLow	INFERRED	first 8 bytes of the third constant vector
+local	FUN_00064a10	uVar26	valueDLow	INFERRED	first 8 bytes of the fourth constant vector
+use	FUN_00064a10	uVar17	regionWidth	INFERRED	programState+0x18: width of the constant footprint to allocate	^\s*uVar17\ =\ \*\(uint\ \*\)\(pcVar21\ \+\ 0x18\);$	+1
+use	FUN_00064a10	uVar17	regionWidth	INFERRED	programState+0x18: width of the constant footprint to allocate	^\s*if\ \(\(uVar17\ <=\ uVar15\)\ \&\&\ \(uVar19\ <=\ uVar14\)\)\ \{$	+1
+use	FUN_00064a10	uVar17	regionWidth	INFERRED	programState+0x18: width of the constant footprint to allocate	^\s*\*\(uint\ \*\)\(pcVar21\ \+\ 0x10\)\ =\ uVar17\ \+\ iVar9\ \+\ \-1;$	+2
+use	FUN_00064a10	uVar19	regionHeight	INFERRED	programState+0x5c: height (rows) of the constant footprint to allocate	^\s*uVar19\ =\ \*\(uint\ \*\)\(pcVar21\ \+\ 0x5c\);$	+1
+use	FUN_00064a10	uVar19	regionHeight	INFERRED	programState+0x5c: height (rows) of the constant footprint to allocate	^\s*if\ \(uVar19\ !=\ 0\)\ \{$	+1
+use	FUN_00064a10	uVar19	regionHeight	INFERRED	programState+0x5c: height (rows) of the constant footprint to allocate	^\s*if\ \(\(uVar17\ <=\ uVar15\)\ \&\&\ \(uVar19\ <=\ uVar14\)\)\ \{$	+1
+use	FUN_00064a10	uVar19	regionHeight	INFERRED	programState+0x5c: height (rows) of the constant footprint to allocate	^\s*piVar20\[1\]\ =\ uVar19\ \+\ piVar20\[1\];$	+1
+use	FUN_00064a10	uVar19	regionHeight	INFERRED	programState+0x5c: height (rows) of the constant footprint to allocate	^\s*uVar19\ =\ \*\(uint\ \*\)\(pcVar21\ \+\ 0x5c\);$@2	+1
+local	FUN_00064a10	uVar15	freeWidth	INFERRED	columns left in the allocation row (limit - allocX)
+use	FUN_00064a10	uVar14	freeHeight	INFERRED	rows left in the allocation window (limit - allocY)	^\s*uVar14\ =\ 0;$	+1
+use	FUN_00064a10	uVar14	freeHeight	INFERRED	rows left in the allocation window (limit - allocY)	^\s*uVar14\ =\ 0x80\ \-\ iVar12;$	+1
+use	FUN_00064a10	uVar14	freeHeight	INFERRED	rows left in the allocation window (limit - allocY)	^\s*uVar14\ =\ 0x100\ \-\ iVar12;$	+1
+use	FUN_00064a10	uVar14	freeHeight	INFERRED	rows left in the allocation window (limit - allocY)	^\s*if\ \(\(uVar17\ <=\ uVar15\)\ \&\&\ \(uVar19\ <=\ uVar14\)\)\ \{$	+1
+use	FUN_00064a10	uVar14	freeHeight	INFERRED	rows left in the allocation window (limit - allocY)	^\s*uVar14\ =\ 0x100\ \-\ iVar12;$@2	+1
+use	FUN_00064a10	puVar3	cmdBufferB	INFERRED	command space returned by the glContext+0x2758 reserve callback (flush and register packets)	^\s*puVar3\ =\ \(undefined4\ \*\)\(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x2758\)\)\(param_1,2\);$	+3
+use	FUN_00064a10	puVar3	cmdBufferB	INFERRED	command space returned by the glContext+0x2758 reserve callback (flush and register packets)	^\s*puVar3\ =\ \(undefined4\ \*\)\(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x2758\)\)\(param_1,2\);$@2	+3
+use	FUN_00064a10	iVar6	cmdEnd	INFERRED	command cursor after the packet; handed to the commit callback	^\s*iVar6\ =\ \*\(int\ \*\)\(0x00002748\ \+\ param_1\ \+\ 4\);$	+1
+use	FUN_00064a10	iVar6	cmdEnd	INFERRED	command cursor after the packet; handed to the commit callback	^\s*\*\(int\ \*\)\(0x00002748\ \+\ param_1\ \+\ 4\)\ =\ iVar6\ \+\ 8;$	+2
+use	FUN_00064a10	iVar6	cmdEnd	INFERRED	command cursor after the packet; handed to the commit callback	^\s*iVar6\ =\ \*\(int\ \*\)\(0x00002748\ \+\ param_1\ \+\ 4\);$@2	+1
+use	FUN_00064a10	iVar6	cmdEnd	INFERRED	command cursor after the packet; handed to the commit callback	^\s*\*\(int\ \*\)\(0x00002748\ \+\ param_1\ \+\ 4\)\ =\ iVar6\ \+\ 0x10;$	+2
+use	FUN_00064a10	iVar6	cmdEnd	INFERRED	command cursor after the packet; handed to the commit callback	^\s*iVar6\ =\ \*\(int\ \*\)\(0x00002748\ \+\ param_1\ \+\ 4\);$@3	+1
+use	FUN_00064a10	iVar6	cmdEnd	INFERRED	command cursor after the packet; handed to the commit callback	^\s*\*\(int\ \*\)\(0x00002748\ \+\ param_1\ \+\ 4\)\ =\ iVar6\ \+\ 8;$@2	+2
+use	FUN_00064a10	iVar6	cmdEnd	INFERRED	command cursor after the packet; handed to the commit callback	^\s*iVar6\ =\ \*\(int\ \*\)\(0x00002748\ \+\ param_1\ \+\ 4\)\ \+\ 8;$	+3
+use	FUN_00064a10	iVar9	cmdEndB	INFERRED	command cursor after the 8-byte flush packet	^\s*iVar9\ =\ \*\(int\ \*\)\(0x00002748\ \+\ param_1\ \+\ 4\);$	+2
+use	FUN_00064a10	iVar9	cmdEndB	INFERRED	command cursor after the 8-byte flush packet	^\s*\(\*pcVar1\)\(param_1,iVar6\ \+\ 8,in_r5,in_r6,in_r7,in_r8,iVar9\);$	+1

@@ -526,7 +526,7 @@
 0x182010	Block__flattenAndRebuildAddMulTree
 0x182040	Block__flattenAndRebuildAddMulTree
 0x183a98	Block__flattenAndRebuildAddMulTree
-0x1840ac	FUN_0018401c
+0x1840ac	pass_height_reduction
 0x18421c	FUN_0018413c
 0x184250	FUN_0018413c
 0x184290	FUN_0018413c

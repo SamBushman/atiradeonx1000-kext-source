@@ -1,0 +1,120 @@
+local	FUN_0017e3f4	param_2	newOpcode	INFERRED	opcode the key instruction is re-initialised with (binary)
+use	FUN_0017e3f4	bVar1	noExtraSource	INFERRED	instruction flag 0x200 clear: no extra source operand	^\s*bVar1\ =\ \(\*\(uint\ \*\)\(iVar8\ \+\ 0x14\)\ \&\ 0x200\)\ ==\ 0;$	+1
+use	FUN_0017e3f4	bVar1	noExtraSource	INFERRED	instruction flag 0x200 clear: no extra source operand	^\s*if\ \(bVar1\)\ \{$	+1
+use	FUN_0017e3f4	bVar1	noExtraSource	INFERRED	instruction flag 0x200 clear: no extra source operand	^\s*if\ \(bVar1\)\ \{$@2	+1
+use	FUN_0017e3f4	iVar5	rebuiltInst	INFERRED	the key instruction re-initialised as a binary instruction	^\s*iVar5\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xb0\);$@4	+5
+use	FUN_0017e3f4	iVar5	rebuiltInst	INFERRED	the key instruction re-initialised as a binary instruction	^\s*FUN_001049e8\(iVar5,uVar21\);$	+2
+use	FUN_0017e3f4	iVar5	rebuiltInst	INFERRED	the key instruction re-initialised as a binary instruction	^\s*\*\(undefined4\ \*\)\(iVar5\ \+\ 0x9c\)\ =\ uVar9;$	+5
+use	FUN_0017e3f4	iVar5	rebuiltInst	INFERRED	the key instruction re-initialised as a binary instruction	^\s*FUN_00103d50\(iVar5\ \+\ 0xa4,1,uVar4\ \&\ 1\);$	+4
+use	FUN_0017e3f4	iVar5	rebuiltInst	INFERRED	the key instruction re-initialised as a binary instruction	^\s*FUN_00103d50\(iVar5\ \+\ 0xbc,1,uVar7\ \&\ 1\);$	+2
+use	FUN_0017e3f4	iVar5	rebuiltInst	INFERRED	the key instruction re-initialised as a binary instruction	^\s*FUN_00193f74\(iVar5,uVar2\);$	+2
+use	FUN_0017e3f4	uVar11	src1SelectWord	INFERRED	select word of source operand 1	^\s*uVar11\ =\ \*\(undefined4\ \*\)\(iVar8\ \+\ 0x10\);$	+1
+use	FUN_0017e3f4	uVar11	src1SelectWord	INFERRED	select word of source operand 1	^\s*\*\(undefined4\ \*\)\(iVar8\ \+\ 0x10\)\ =\ uVar11;$	+1
+use	FUN_0017e3f4	uVar12	src2SelectWord	INFERRED	select word of source operand 2	^\s*uVar12\ =\ \*\(undefined4\ \*\)\(iVar5\ \+\ 0x10\);$	+1
+use	FUN_0017e3f4	uVar12	src2SelectWord	INFERRED	select word of source operand 2	^\s*\*\(undefined4\ \*\)\(iVar8\ \+\ 0x10\)\ =\ uVar12;$	+1
+use	FUN_0017e3f4	uVar18	src1ValueNumber	INFERRED	value number slot of source operand 1 (ctx+0x210+n*4)	^\s*uVar18\ =\ \*\(undefined4\ \*\)\(param_3\ \*\ 4\ \+\ param_1\ \+\ 0x210\);$	+1
+use	FUN_0017e3f4	uVar18	src1ValueNumber	INFERRED	value number slot of source operand 1 (ctx+0x210+n*4)	^\s*\*\(undefined4\ \*\)\(param_1\ \+\ 0x214\)\ =\ uVar18;$	+1
+use	FUN_0017e3f4	uVar19	extraValueNumber	INFERRED	value number slot of the extra source (0 when there is none)	^\s*uVar19\ =\ 0;$	+1
+use	FUN_0017e3f4	uVar19	extraValueNumber	INFERRED	value number slot of the extra source (0 when there is none)	^\s*uVar19\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(iVar8\ \+\ 0x84\)\ \*\ 4\ \+\ param_1\ \+\ 0x210\);$	+1
+use	FUN_0017e3f4	uVar19	extraValueNumber	INFERRED	value number slot of the extra source (0 when there is none)	^\s*\*\(undefined4\ \*\)\(param_1\ \+\ 0x21c\)\ =\ uVar19;$	+1
+use	FUN_0017e3f4	uVar20	src2ValueNumber	INFERRED	value number slot of source operand 2	^\s*uVar20\ =\ \*\(undefined4\ \*\)\(param_4\ \*\ 4\ \+\ param_1\ \+\ 0x210\);$	+1
+use	FUN_0017e3f4	uVar20	src2ValueNumber	INFERRED	value number slot of source operand 2	^\s*\*\(undefined4\ \*\)\(param_1\ \+\ 0x218\)\ =\ uVar20;$	+1
+use	FUN_0017e3f4	uVar3	blockRef	INFERRED	block of the key instruction (+0x158)	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(iVar5\ \+\ 0x158\);$	+1
+use	FUN_0017e3f4	uVar3	blockRef	INFERRED	block of the key instruction (+0x158)	^\s*\*\(undefined4\ \*\)\(iVar5\ \+\ 0x158\)\ =\ uVar3;$	+1
+use	FUN_0017e3f4	uVar4	src1Flags	INFERRED	flags word of source operand 1 (negate / abs)	^\s*uVar4\ =\ \*\(uint\ \*\)\(param_3\ \*\ 0x18\ \+\ iVar5\ \+\ 0xa0\);$	+1
+use	FUN_0017e3f4	uVar4	src1Flags	INFERRED	flags word of source operand 1 (negate / abs)	^\s*FUN_00103d50\(iVar5\ \+\ 0xa4,1,uVar4\ \&\ 1\);$	+2
+use	FUN_0017e3f4	uVar7	src2Flags	INFERRED	flags word of source operand 2 (negate / abs)	^\s*uVar7\ =\ \*\(uint\ \*\)\(param_4\ \*\ 0x18\ \+\ iVar8\ \+\ 0xa0\);$	+1
+use	FUN_0017e3f4	uVar7	src2Flags	INFERRED	flags word of source operand 2 (negate / abs)	^\s*FUN_00103d50\(iVar5\ \+\ 0xbc,1,uVar7\ \&\ 1\);$	+2
+use	FUN_0017e3f4	uVar9	destSelectWord	INFERRED	select word of the destination operand	^\s*uVar9\ =\ \*\(undefined4\ \*\)\(iVar8\ \+\ 0x10\);$	+1
+use	FUN_0017e3f4	uVar9	destSelectWord	INFERRED	select word of the destination operand	^\s*\*\(undefined4\ \*\)\(iVar5\ \+\ 0x9c\)\ =\ uVar9;$	+1
+use	FUN_0017e7e0	bVar1	hasExtraSource	INFERRED	instruction flag 0x200 set: the instruction carries an extra source	^\s*bVar1\ =\ \(\*\(uint\ \*\)\(iVar6\ \+\ 0x14\)\ >>\ 9\ \&\ 1\)\ !=\ 0;$	+1
+use	FUN_0017e7e0	bVar1	hasExtraSource	INFERRED	instruction flag 0x200 set: the instruction carries an extra source	^\s*if\ \(bVar1\)\ \{$	+1
+use	FUN_0017e7e0	bVar1	hasExtraSource	INFERRED	instruction flag 0x200 set: the instruction carries an extra source	^\s*if\ \(bVar1\)\ \{$@2	+1
+local	FUN_0017e7e0	local_58	savedSaturate	INFERRED	saturate flag (+0x120) of the original mad
+local	FUN_0017e7e0	local_5c	savedResultScale	INFERRED	result scale code (+0x124) of the original mad
+local	FUN_0017e7e0	local_68	src3SelectWord	INFERRED	select word of source operand 3 (the addend)
+local	FUN_0017e7e0	local_74	tmpSelect	INFERRED	select word of the temporary product plus identity lane bytes (fake array)
+local	FUN_0017e7e0	local_78	destSelectWord	INFERRED	select word of the destination operand
+use	FUN_0017e7e0	piVar18	operandCursor	INFERRED	address of operand n of the new add (step 6 words)	^\s*piVar18\ =\ piVar7;$	+1
+use	FUN_0017e7e0	piVar18	operandCursor	INFERRED	address of operand n of the new add (step 6 words)	^\s*FUN_001236e4\(piVar18\[0x29\],iVar4,piVar7\);$	+1
+use	FUN_0017e7e0	piVar18	operandCursor	INFERRED	address of operand n of the new add (step 6 words)	^\s*piVar18\ =\ piVar18\ \+\ 6;$	+1
+use	FUN_0017e7e0	uVar9	savedDestRegister	INFERRED	destination register field (+0x94)	^\s*uVar9\ =\ \*\(undefined4\ \*\)\(iVar4\ \+\ 0x94\);$	+1
+use	FUN_0017e7e0	uVar9	savedDestRegister	INFERRED	destination register field (+0x94)	^\s*\*\(undefined4\ \*\)\(iVar16\ \+\ 0x94\)\ =\ uVar9;$	+1
+use	FUN_0017e7e0	uVar9	tmpSelectWord	INFERRED	select word of the temporary product read by the add	^\s*uVar9\ =\ local_74\[0\];$	+1
+use	FUN_0017e7e0	uVar9	tmpSelectWord	INFERRED	select word of the temporary product read by the add	^\s*\*\(undefined4\ \*\)\(iVar4\ \+\ 0x10\)\ =\ uVar9;$	+1
+use	FUN_0017e7e0	uVar10	savedDestRegisterOffset	INFERRED	destination register offset field (+0x98)	^\s*uVar10\ =\ \*\(undefined4\ \*\)\(iVar4\ \+\ 0x98\);$	+1
+use	FUN_0017e7e0	uVar10	savedDestRegisterOffset	INFERRED	destination register offset field (+0x98)	^\s*\*\(undefined4\ \*\)\(iVar16\ \+\ 0x98\)\ =\ uVar10;$	+1
+use	FUN_0017e7e0	uVar11	src2SelectWord	INFERRED	select word of source operand 2	^\s*uVar11\ =\ \*\(undefined4\ \*\)\(iVar6\ \+\ 0x10\);$	+1
+use	FUN_0017e7e0	uVar11	src2SelectWord	INFERRED	select word of source operand 2	^\s*\*\(undefined4\ \*\)\(iVar4\ \+\ 0x10\)\ =\ uVar11;$	+1
+use	FUN_0017e7e0	uVar13	src1SelectWord	INFERRED	select word of source operand 1	^\s*uVar13\ =\ \*\(undefined4\ \*\)\(iVar6\ \+\ 0x10\);$	+1
+use	FUN_0017e7e0	uVar13	src1SelectWord	INFERRED	select word of source operand 1	^\s*\*\(undefined4\ \*\)\(iVar4\ \+\ 0x10\)\ =\ uVar13;$	+1
+use	FUN_0017e7e0	uVar2	src1Flags	INFERRED	flags word of source operand 1	^\s*uVar2\ =\ \*\(uint\ \*\)\(iVar4\ \+\ 0xb8\);$	+1
+use	FUN_0017e7e0	uVar2	src1Flags	INFERRED	flags word of source operand 1	^\s*FUN_00103d50\(iVar16\ \+\ 0xa4,1,uVar2\ \&\ 1\);$	+2
+use	FUN_0017e7e0	uVar3	src2Flags	INFERRED	flags word of source operand 2	^\s*uVar3\ =\ \*\(uint\ \*\)\(iVar4\ \+\ 0xd0\);$	+1
+use	FUN_0017e7e0	uVar3	src2Flags	INFERRED	flags word of source operand 2	^\s*FUN_00103d50\(iVar16\ \+\ 0xbc,1,uVar3\ \&\ 1\);$	+2
+use	FUN_0017e7e0	uVar5	src3Flags	INFERRED	flags word of source operand 3	^\s*uVar5\ =\ \*\(uint\ \*\)\(iVar6\ \+\ 0xe8\);$	+1
+use	FUN_0017e7e0	uVar5	src3Flags	INFERRED	flags word of source operand 3	^\s*local_60\ =\ uVar5\ >>\ 1\ \&\ 1;$	+1
+use	FUN_0017e7e0	uVar5	src3Flags	INFERRED	flags word of source operand 3	^\s*FUN_00103d50\(piVar7\ \+\ 0x2f,1,uVar5\ \&\ 1\);$	+1
+use	ValueKey__foldDot4UnitVectorSource	iVar1	laneEntryBase	INFERRED	address of the lane entries of the operand (ctx+0x20 minus 0x10 per step)	^\s*iVar1\ =\ param_1\ \+\ 0x20;$	+1
+use	ValueKey__foldDot4UnitVectorSource	iVar1	laneEntryBase	INFERRED	address of the lane entries of the operand (ctx+0x20 minus 0x10 per step)	^\s*iVar7\ =\ \*\(int\ \*\)\(iVar1\ \+\ 0x16c\);$	+3
+use	ValueKey__foldDot4UnitVectorSource	iVar1	laneEntryBase	INFERRED	address of the lane entries of the operand (ctx+0x20 minus 0x10 per step)	^\s*if\ \(iVar9\ ==\ \*\(int\ \*\)\(iVar1\ \+\ 0x168\)\)\ \{$	+3
+use	ValueKey__foldDot4UnitVectorSource	iVar1	laneEntryBase	INFERRED	address of the lane entries of the operand (ctx+0x20 minus 0x10 per step)	^\s*if\ \(\(iVar9\ ==\ \*\(int\ \*\)\(iVar1\ \+\ 0x174\)\)\ \&\&\ \(iVar5\ ==\ iVar6\)\)\ \{$	+1
+use	ValueKey__foldDot4UnitVectorSource	iVar1	laneEntryBase	INFERRED	address of the lane entries of the operand (ctx+0x20 minus 0x10 per step)	^\s*if\ \(\(iVar9\ ==\ iVar6\)\ \&\&\ \(iVar5\ ==\ \*\(int\ \*\)\(iVar1\ \+\ 0x174\)\)\)\ \{$	+1
+use	ValueKey__foldDot4UnitVectorSource	iVar1	laneEntryBase	INFERRED	address of the lane entries of the operand (ctx+0x20 minus 0x10 per step)	^\s*iVar1\ =\ iVar1\ \+\ \-0x10;$	+1
+use	ValueKey__foldDot4UnitVectorSource	iVar2	operandNumber	INFERRED	operand number 1 or 2 checked for a unit vector	^\s*iVar2\ =\ 1;$	+1
+use	ValueKey__foldDot4UnitVectorSource	iVar2	operandNumber	INFERRED	operand number 1 or 2 checked for a unit vector	^\s*\(\(int\ \(\*\)\(\)\)FUN_0017bd78\)\(param_1,iVar2,uVar3,uVar4\);$	+1
+use	ValueKey__foldDot4UnitVectorSource	iVar2	operandNumber	INFERRED	operand number 1 or 2 checked for a unit vector	^\s*iVar2\ =\ \(iVar8\ ==\ 1\)\ \+\ 1;$	+1
+use	ValueKey__foldDot4UnitVectorSource	iVar5	oneValueNumber	INFERRED	value number of the constant 1.0 (expression record +4)	^\s*iVar5\ =\ \*\(int\ \*\)\(iVar1\ \+\ 4\);$	+1
+use	ValueKey__foldDot4UnitVectorSource	iVar5	oneValueNumber	INFERRED	value number of the constant 1.0 (expression record +4)	^\s*if\ \(\(\(\(iVar9\ ==\ iVar7\)\ \&\&\ \(iVar9\ ==\ \*\(int\ \*\)\(iVar1\ \+\ 0x170\)\)\)\ \&\&$	+2
+use	ValueKey__foldDot4UnitVectorSource	iVar5	oneValueNumber	INFERRED	value number of the constant 1.0 (expression record +4)	^\s*if\ \(\(\(iVar9\ ==\ iVar6\)\ \&\&\ \(iVar6\ ==\ \*\(int\ \*\)\(iVar1\ \+\ 0x174\)\)\)\ \&\&\ \(iVar5\ ==\ iVar7\)\)\ \{$	+1
+use	ValueKey__foldDot4UnitVectorSource	iVar5	oneValueNumber	INFERRED	value number of the constant 1.0 (expression record +4)	^\s*if\ \(\(iVar9\ ==\ \*\(int\ \*\)\(iVar1\ \+\ 0x174\)\)\ \&\&\ \(iVar5\ ==\ iVar6\)\)\ \{$	+1
+use	ValueKey__foldDot4UnitVectorSource	iVar5	oneValueNumber	INFERRED	value number of the constant 1.0 (expression record +4)	^\s*if\ \(\(iVar9\ ==\ iVar6\)\ \&\&\ \(iVar5\ ==\ \*\(int\ \*\)\(iVar1\ \+\ 0x174\)\)\)\ \{$	+1
+use	ValueKey__foldDot4UnitVectorSource	iVar9	zeroValueNumber	INFERRED	value number of the constant 0.0 (expression record +4)	^\s*iVar9\ =\ \*\(int\ \*\)\(iVar1\ \+\ 4\);$	+1
+use	ValueKey__foldDot4UnitVectorSource	iVar9	zeroValueNumber	INFERRED	value number of the constant 0.0 (expression record +4)	^\s*if\ \(\(\(\(iVar9\ ==\ iVar7\)\ \&\&\ \(iVar9\ ==\ \*\(int\ \*\)\(iVar1\ \+\ 0x170\)\)\)\ \&\&$	+2
+use	ValueKey__foldDot4UnitVectorSource	iVar9	zeroValueNumber	INFERRED	value number of the constant 0.0 (expression record +4)	^\s*if\ \(iVar9\ ==\ \*\(int\ \*\)\(iVar1\ \+\ 0x168\)\)\ \{$	+1
+use	ValueKey__foldDot4UnitVectorSource	iVar9	zeroValueNumber	INFERRED	value number of the constant 0.0 (expression record +4)	^\s*if\ \(\(\(iVar9\ ==\ iVar6\)\ \&\&\ \(iVar6\ ==\ \*\(int\ \*\)\(iVar1\ \+\ 0x174\)\)\)\ \&\&\ \(iVar5\ ==\ iVar7\)\)\ \{$	+1
+use	ValueKey__foldDot4UnitVectorSource	iVar9	zeroValueNumber	INFERRED	value number of the constant 0.0 (expression record +4)	^\s*if\ \(iVar9\ ==\ iVar7\)\ \{$	+2
+use	ValueKey__foldDot4UnitVectorSource	iVar9	zeroValueNumber	INFERRED	value number of the constant 0.0 (expression record +4)	^\s*if\ \(\(iVar9\ ==\ iVar6\)\ \&\&\ \(iVar5\ ==\ \*\(int\ \*\)\(iVar1\ \+\ 0x174\)\)\)\ \{$	+1
+use	ValueKey__foldDot4UnitVectorSource	iVar6	laneValueNumber2	INFERRED	lane 2 value number of the operand	^\s*iVar6\ =\ \*\(int\ \*\)\(iVar1\ \+\ 0x170\);$	+2
+use	ValueKey__foldDot4UnitVectorSource	iVar6	laneValueNumber2	INFERRED	lane 2 value number of the operand	^\s*if\ \(\(iVar9\ ==\ \*\(int\ \*\)\(iVar1\ \+\ 0x174\)\)\ \&\&\ \(iVar5\ ==\ iVar6\)\)\ \{$	+1
+use	ValueKey__foldDot4UnitVectorSource	iVar6	laneValueNumber2	INFERRED	lane 2 value number of the operand	^\s*if\ \(\(iVar9\ ==\ iVar6\)\ \&\&\ \(iVar5\ ==\ \*\(int\ \*\)\(iVar1\ \+\ 0x174\)\)\)\ \{$	+1
+use	ValueKey__foldDot4UnitVectorSource	iVar7	laneValueNumber1	INFERRED	lane 1 value number of the operand	^\s*iVar7\ =\ \*\(int\ \*\)\(iVar1\ \+\ 0x16c\);$	+3
+use	ValueKey__foldDot4UnitVectorSource	iVar7	laneValueNumber1	INFERRED	lane 1 value number of the operand	^\s*if\ \(\(\(iVar9\ ==\ iVar6\)\ \&\&\ \(iVar6\ ==\ \*\(int\ \*\)\(iVar1\ \+\ 0x174\)\)\)\ \&\&\ \(iVar5\ ==\ iVar7\)\)\ \{$	+1
+use	ValueKey__foldDot4UnitVectorSource	iVar7	laneValueNumber1	INFERRED	lane 1 value number of the operand	^\s*if\ \(iVar9\ ==\ iVar7\)\ \{$	+1
+use	ValueKey__foldDot4UnitVectorSource	uVar3	unitLane	INFERRED	index (0..3) of the lane that holds 1.0 while the others hold 0.0	^\s*uVar3\ =\ 0;$	+1
+use	ValueKey__foldDot4UnitVectorSource	uVar3	unitLane	INFERRED	index (0..3) of the lane that holds 1.0 while the others hold 0.0	^\s*uVar3\ =\ 1;$	+1
+use	ValueKey__foldDot4UnitVectorSource	uVar3	unitLane	INFERRED	index (0..3) of the lane that holds 1.0 while the others hold 0.0	^\s*uVar3\ =\ 2;$	+1
+use	ValueKey__foldDot4UnitVectorSource	uVar3	unitLane	INFERRED	index (0..3) of the lane that holds 1.0 while the others hold 0.0	^\s*\(\(int\ \(\*\)\(\)\)FUN_0017bd78\)\(param_1,iVar2,uVar3,uVar4\);$	+1
+use	ValueKey__foldDot4UnitVectorSource	uVar3	unitLane	INFERRED	index (0..3) of the lane that holds 1.0 while the others hold 0.0	^\s*uVar3\ =\ 3;$	+1
+use	ValueKey__foldDot4UnitVectorSource	uVar4	resultScaleCode	INFERRED	result scale code (+0x124) of the key instruction	^\s*uVar4\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xb0\)\ \+\ 0x124\);$	+1
+use	ValueKey__foldDot4UnitVectorSource	uVar4	resultScaleCode	INFERRED	result scale code (+0x124) of the key instruction	^\s*uVar4\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xb0\)\ \+\ 0x124\);$@2	+1
+use	ValueKey__foldDot4UnitVectorSource	uVar4	resultScaleCode	INFERRED	result scale code (+0x124) of the key instruction	^\s*uVar4\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xb0\)\ \+\ 0x124\);$@3	+1
+use	ValueKey__foldDot4UnitVectorSource	uVar4	resultScaleCode	INFERRED	result scale code (+0x124) of the key instruction	^\s*\(\(int\ \(\*\)\(\)\)FUN_0017bd78\)\(param_1,iVar2,uVar3,uVar4\);$	+1
+use	ValueKey__foldDot4UnitVectorSource	uVar4	resultScaleCode	INFERRED	result scale code (+0x124) of the key instruction	^\s*uVar4\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xb0\)\ \+\ 0x124\);$@4	+1
+use	ValueKey__foldDotPowerOfTwoIntoOutputScale	bVar1	notNegative	INFERRED	sign bit of the lane constant is clear	^\s*bVar1\ =\ \-1\ <\ \(int\)GH_F2U\(local_48\[0\]\);$	+2
+use	ValueKey__foldDotPowerOfTwoIntoOutputScale	bVar1	notNegative	INFERRED	sign bit of the lane constant is clear	^\s*if\ \(!bVar1\)\ \{$	+1
+use	ValueKey__foldDotPowerOfTwoIntoOutputScale	bVar1	moreOperands	INFERRED	operand counter != 2	^\s*bVar1\ =\ iVar6\ !=\ 2;$	+1
+use	ValueKey__foldDotPowerOfTwoIntoOutputScale	bVar1	moreOperands	INFERRED	operand counter != 2	^\s*\}\ while\ \(bVar1\);$	+1
+use	ValueKey__foldDotPowerOfTwoIntoOutputScale	fparam_1	absValue	INFERRED	absolute value of the lane constant (FPR argument)	^\s*fparam_1\ =\ \(double\)local_48\[0\];$	+1
+use	ValueKey__foldDotPowerOfTwoIntoOutputScale	fparam_1	absValue	INFERRED	absolute value of the lane constant (FPR argument)	^\s*fparam_1\ =\ \-\(double\)local_48\[0\];$	+1
+use	ValueKey__foldDotPowerOfTwoIntoOutputScale	fparam_1	absValue	INFERRED	absolute value of the lane constant (FPR argument)	^\s*if\ \(\(fparam_1\ !=\ 1\.0\)\ \&\&\ \(iVar2\ =\ \(\(undefined4\ \(\*\)\(\)\)FUN_0010aafc\)\(fparam_1\),\ iVar2\ !=\ 0\)\)\ \{$	+2
+use	ValueKey__foldDotPowerOfTwoIntoOutputScale	iVar2	scaleCodeOrFlag	INFERRED	isOutputScaleValue flag, then outputScaleExponent + current result scale code	^\s*if\ \(\(fparam_1\ !=\ 1\.0\)\ \&\&\ \(iVar2\ =\ \(\(undefined4\ \(\*\)\(\)\)FUN_0010aafc\)\(fparam_1\),\ iVar2\ !=\ 0\)\)\ \{$	+2
+use	ValueKey__foldDotPowerOfTwoIntoOutputScale	iVar2	scaleCodeOrFlag	INFERRED	isOutputScaleValue flag, then outputScaleExponent + current result scale code	^\s*iVar2\ =\ iVar2\ \+\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xb0\)\ \+\ 0x124\);$	+2
+use	ValueKey__foldDotPowerOfTwoIntoOutputScale	iVar2	scaleCodeOrFlag	INFERRED	isOutputScaleValue flag, then outputScaleExponent + current result scale code	^\s*\*\(int\ \*\)\(iVar3\ \+\ 0x124\)\ =\ iVar2;$	+1
+use	ValueKey__foldDotPowerOfTwoIntoOutputScale	iVar3	limitsOk	INFERRED	result of the hardware limits virtual call (vtable +0xfc) for the new scale	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0xfc\)\)\(a0,iVar2,\*\(int\ \*\)\(param_1\ \+\ 0xb0\),in_r6,in_r7,in_r8,a0\);$	+2
+use	ValueKey__foldDotPowerOfTwoIntoOutputScale	iVar3	keyInst	INFERRED	the key instruction (ctx+0xb0)	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xb0\);$	+1
+use	ValueKey__foldDotPowerOfTwoIntoOutputScale	iVar3	keyInst	INFERRED	the key instruction (ctx+0xb0)	^\s*\*\(int\ \*\)\(iVar3\ \+\ 0x124\)\ =\ iVar2;$	+1
+use	ValueKey__foldDotPowerOfTwoIntoOutputScale	iVar5	operandRecOffset	INFERRED	byte offset 0x98 + 0x18*n of the operand record	^\s*iVar5\ =\ 0x98;$	+1
+use	ValueKey__foldDotPowerOfTwoIntoOutputScale	iVar5	operandRecOffset	INFERRED	byte offset 0x98 + 0x18*n of the operand record	^\s*FUN_00103d50\(iVar5\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0xb0\)\ \+\ 0xc,1,0\);$	+2
+use	ValueKey__foldDotPowerOfTwoIntoOutputScale	iVar5	operandRecOffset	INFERRED	byte offset 0x98 + 0x18*n of the operand record	^\s*iVar5\ =\ iVar5\ \+\ 0x18;$	+1
+use	ValueKey__foldDotPowerOfTwoIntoOutputScale	iVar5	operandRecAddr	INFERRED	address of the operand record of the other operand	^\s*iVar5\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xb0\)\ \+\ \(\(iVar6\ ==\ 1\)\ \-\ 1\)\ \*\ 0x18\ \+\ 0xb0;$	+2
+local	ValueKey__foldDotPowerOfTwoIntoOutputScale	in_r6	staleArg4	INFERRED	stale argument register r6 forwarded to the limits call
+local	ValueKey__foldDotPowerOfTwoIntoOutputScale	in_r7	staleArg5	INFERRED	stale argument register r7 forwarded to the limits call
+local	ValueKey__foldDotPowerOfTwoIntoOutputScale	in_r8	staleArg6	INFERRED	stale argument register r8 forwarded to the limits call
+local	ValueKey__foldDotPowerOfTwoIntoOutputScale	local_48	laneValue	INFERRED	lane constant written by FUN_00178d78
+local	ValueKey__foldDotPowerOfTwoIntoOutputScale	local_4c	unitConst3	INFERRED	constant 1.0 (word 3 of the unit vector)
+local	ValueKey__foldDotPowerOfTwoIntoOutputScale	local_50	unitConst2	INFERRED	constant 1.0 (word 2 of the unit vector)
+local	ValueKey__foldDotPowerOfTwoIntoOutputScale	local_54	unitConst1	INFERRED	constant 1.0 (word 1 of the unit vector)
+local	ValueKey__foldDotPowerOfTwoIntoOutputScale	local_58	unitConst0	INFERRED	constant 1.0 (word 0 of the unit vector)
+use	ValueKey__foldDotPowerOfTwoIntoOutputScale	uVar4	literalValueNumber	INFERRED	value number of the replacement literal vector (FUN_0017a130)	^\s*uVar4\ =\ \(\(int\ \(\*\)\(\)\)FUN_0017a130\)\(iVar6,\&local_58,\*\(undefined4\ \*\)\(param_1\ \+\ 0xb0\),$	+2
+use	ValueKey__foldDotPowerOfTwoIntoOutputScale	uVar4	literalValueNumber	INFERRED	value number of the replacement literal vector (FUN_0017a130)	^\s*\*puVar7\ =\ uVar4;$	+1

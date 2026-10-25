@@ -226,11 +226,11 @@
 0x20420	gldDisplayNotificationCallback	1716	no	calls an import (CFDictionaryGetValue); calls an import (CFNumberGetValue); calls an import (CFRelease)
 0x20b00	FUN_00020b00	40	yes	
 0x20b30	FUN_00020b30	620	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0x21c70	FUN_00021c70	1540	no	indirect call (driver context / vtable / callback)
+0x21c70	gld_emitCopyBlitPacket	1540	no	indirect call (driver context / vtable / callback)
 0x22280	noop_22280	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x22290	_gldUpdateDispatch	2632	no	calls an import (pthread_mutex_lock); calls an import (pthread_mutex_unlock)
 0x22ce0	_gldInitDispatch	456	yes	
-0x22eb0	FUN_00022eb0	536	no	indirect call (driver context / vtable / callback)
+0x22eb0	gld_emitDirtyStatePackets	536	no	indirect call (driver context / vtable / callback)
 0x230d0	gld_emitSurfaceCopyPacket	1544	no	indirect call (driver context / vtable / callback)
 0x236f0	returnSecondArgument	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x23700	gldEmitCurrentAttributeRegisters	360	yes	
@@ -301,8 +301,8 @@
 0x2d2b0	gldPackColorForSurfaceFormat	2388	yes	
 0x2dcf0	gldTextureHasNonPowerOfTwoSize2	236	yes	
 0x2ddf0	FUN_0002ddf0	3396	yes	
-0x2ebc0	FUN_0002ebc0	596	yes	
-0x2ee30	FUN_0002ee30	1476	yes	
+0x2ebc0	gld_applyAnisotropyOverride	596	yes	
+0x2ee30	gld_updateTextureSamplerState	1476	yes	
 0x2f410	window_mode_to_ati_format	148	yes	
 0x2f4d0	gldTextureFormatCodeMatchesType	708	yes	
 0x2f7c0	gldTextureFormatCodeFromFormatType	716	yes	
@@ -575,14 +575,14 @@
 0x640f0	gldCurrentAttributePacketHeader	220	yes	
 0x64230	FUN_00064230	1256	no	indirect call (driver context / vtable / callback)
 0x64720	FUN_00064720	304	no	indirect call (driver context / vtable / callback)
-0x64850	FUN_00064850	436	no	indirect call (driver context / vtable / callback)
-0x64a10	FUN_00064a10	1304	no	indirect call (driver context / vtable / callback)
-0x64f40	FUN_00064f40	708	no	indirect call (driver context / vtable / callback)
-0x651e0	FUN_000651e0	400	no	indirect call (driver context / vtable / callback)
-0x65370	FUN_00065370	636	no	indirect call (driver context / vtable / callback)
+0x64850	extvsApplyStreamDescriptors	436	no	indirect call (driver context / vtable / callback)
+0x64a10	extvsUploadProgramConstants	1304	no	indirect call (driver context / vtable / callback)
+0x64f40	extvsValidateProgramState	708	no	indirect call (driver context / vtable / callback)
+0x651e0	extvsFlushConstantUploads	400	no	indirect call (driver context / vtable / callback)
+0x65370	ffvpSelectLitProgramVariant	636	no	indirect call (driver context / vtable / callback)
 0x65610	FUN_00065610	152	yes	
-0x656b0	FUN_000656b0	780	no	indirect call (driver context / vtable / callback)
-0x659d0	FUN_000659d0	612	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x656b0	ffvpSelectPassThroughVariant	780	no	indirect call (driver context / vtable / callback)
+0x659d0	vpFillConstantBank	612	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x65c40	FUN_00065c40	52	yes	
 0x65c80	noop_65c80	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x65c90	arbEmitIlHeader	328	no	indirect call (driver context / vtable / callback)
@@ -750,9 +750,9 @@
 0x86840	FUN_00086840	228	no	indirect call (driver context / vtable / callback)
 0x86930	FUN_00086930	204	yes	
 0x86a10	FUN_00086a10	96	yes	
-0x86a80	FUN_00086a80	284	yes	
-0x86ba0	FUN_00086ba0	1840	no	indirect call (driver context / vtable / callback)
-0x872e0	FUN_000872e0	1296	no	indirect call (driver context / vtable / callback)
+0x86a80	gldSaveRasterState	284	yes	
+0x86ba0	gldEnterInternalDrawState	1840	no	indirect call (driver context / vtable / callback)
+0x872e0	gldLeaveInternalDrawState	1296	no	indirect call (driver context / vtable / callback)
 0x87800	arbfpUpdateConstantsFp24	344	yes	
 0x87960	arbfpInitResourceLimits	120	yes	
 0x879e0	noop_879e0	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
@@ -2849,7 +2849,7 @@
 0x178b1c	FUN_00178b1c	360	no	indirect call (driver context / vtable / callback)
 0x178c84	FUN_00178c84	244	no	indirect call (driver context / vtable / callback)
 0x178d78	FUN_00178d78	280	yes	
-0x178e90	FUN_00178e90	468	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x178e90	ValueKey__evalLitLane	468	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x179064	FUN_00179064	212	no	indirect call (driver context / vtable / callback)
 0x179138	FUN_00179138	408	no	indirect call (driver context / vtable / callback)
 0x1792f0	FUN_001792f0	232	no	indirect call (driver context / vtable / callback)
@@ -2929,7 +2929,7 @@
 0x181f00	Block__flattenAndRebuildAddMulTree	7020	no	indirect call (driver context / vtable / callback)
 0x183ac8	FUN_00183ac8	212	yes	
 0x183b9c	Block__rebuildAddMulTreesWhereProfitable	1152	yes	
-0x18401c	FUN_0018401c	256	yes	
+0x18401c	pass_height_reduction	256	yes	
 0x18413c	FUN_0018413c	2336	no	indirect call (driver context / vtable / callback)
 0x184ab4	pass_minreg_order	280	no	indirect call (driver context / vtable / callback)
 0x184bcc	compareIntsAscending	36	yes	
