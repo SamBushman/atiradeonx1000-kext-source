@@ -2287,446 +2287,497 @@ LAB_0012ed24:
 }
 
 /* FUN_0012f0f8 @ 0x12f0f8 (3356 bytes) */
-int FUN_0012f0f8(pass, param_2, block, param_4, param_5, param_6)
+int FUN_0012f0f8(pass, loopStack, block, lastBlockRef, newBlockOut, blockCounter)
   int pass;
-  int param_2;
+  int loopStack;
   int block;
-  int *param_4;
-  int *param_5;
-  int *param_6;
+  int *lastBlockRef;
+  int *newBlockOut;
+  int *blockCounter;
 {
+  int *nextExitInst;
+  int *clonedBlockObj;
+  int *origBlock;
+  int *bodyBlock;
+  int *instCursor;
+  int instIter;
+  int nextFixBlock;
+  int rewireCursor;
+  int prevCopyEnd;
+  uint targetCloneIndex;
+  uint instLinkedFlag;
+  uint cloneFilledCountE;
+  int rewireBlockCursor;
+  int nextOrigBlock;
+  int origBlockCursor;
+  int savedLoopFooter;
+  uint cloneFilledCountD;
+  uint cloneFilledCountC;
+  int *rewiredCloneRef;
+  int *srcInst;
+  undefined4 *cloneSlotRefD;
+  undefined4 *cloneSlotRefC;
+  undefined4 *cloneSlotRefB;
+  uint successorCloneIndex;
+  uint successorIndex;
+  int blockAt134;
+  int blockQuery30;
+  int blockQuery2c;
+  int blockQuery28;
+  int blockQuery24;
+  int successorSlot;
+  int clonedBlock;
+  int loopEndBlock;
+  int instListHead;
+  int operandCount;
+  int loopFooterBlock;
+  int instQuery3c;
+  int fixupBlock;
+  int nextBodyBlock;
+  int loopStepArg;
+  int needsOffsetFix;
+  int nextInst;
+  int operandNumber;
+  int instQuery34b;
+  bool moreBlocksB;
+  int successorOffset;
+  int extraBranchArg;
+  int instQuery38;
+  undefined4 fromClone;
+  int *exitInst;
+  int *bodyInst;
   int *blockVectorAt154;
   int *blockVectorAt150;
   undefined4 vectorData;
   undefined4 arena;
   int cloneResult;
   int isLoopHeader;
-  bool bVar1;
-  bool bVar2;
-  int iVar3;
-  int iVar4;
-  int iVar5;
-  int iVar6;
-  int iVar7;
-  int iVar8;
-  int iVar9;
+  bool moreBlocksA;
+  bool hasBody;
+  int successorBlock;
+  int blockArg;
+  int unrollEnabled;
+  int unrollCount;
+  int loopStart;
+  int loopStep;
+  int cannotUnroll;
   int findSimplePredecessorResult;
-  int iVar11;
+  int isLoopHeaderBlock;
   undefined4 *allocation;
-  int iVar13;
-  int *piVar14;
-  uint uVar15;
-  uint uVar16;
-  undefined4 *puVar17;
-  int *piVar18;
-  int *piVar19;
-  uint uVar20;
-  uint uVar21;
-  int iVar22;
-  int iVar23;
-  uint uVar24;
-  int iVar25;
-  undefined4 uVar26;
-  int *piVar27;
-  uint *puVar28;
+  int needsOffsetFixClone;
+  int *nextInstRef;
+  uint cloneFilledCountA;
+  uint cloneFilledCountB;
+  undefined4 *cloneSlotRefA;
+  int *clonedBlockRef;
+  int *counterRefArg;
+  uint cloneCapacity;
+  uint lastCloneIndex;
+  int instQuery34;
+  int blockOrdinal;
+  uint cloneIndex;
+  int bodyBlockCursor;
+  undefined4 compiler;
+  int *instNext;
+  uint *cloneVector;
   undefined8 isIfHeader;
   int iStack0000001c;
-  int local_68;
-  int local_64;
-  undefined4 local_60;
+  int iteration;
+  int counterValue;
+  undefined4 exitBlock;
   
-  piVar19 = param_6;
-  iStack0000001c = param_2;
-  iVar5 = Compiler__isOptionEnabled(*(undefined4 *)(pass + 8),2);
-  if ((((iVar5 != 0) && (iVar5 = FUN_000e9cc8(block), iVar5 != 0)) &&
+  counterRefArg = blockCounter;
+  iStack0000001c = loopStack;
+  unrollEnabled = Compiler__isOptionEnabled(*(undefined4 *)(pass + 8),2);
+  if ((((unrollEnabled != 0) && (unrollEnabled = FUN_000e9cc8(block), unrollEnabled != 0)) &&
       (*(int *)(block + 0x138) < 1)) && (*(int *)(block + 0x13c) == 0)) {
-    iVar6 = FUN_000e8c7c(block);
-    iVar7 = FUN_000e8c14(block);
-    iVar8 = FUN_000e8bac(block);
-    uVar26 = *(undefined4 *)(pass + 8);
-    iVar5 = iVar8;
-    iVar4 = block;
-    iVar9 = FUN_0012aa78(uVar26,iVar6,iVar7,iVar8,block);
-    if (iVar9 == 0) {
-      FUN_0012aae0(uVar26,iVar6);
+    unrollCount = FUN_000e8c7c(block);
+    loopStart = FUN_000e8c14(block);
+    loopStep = FUN_000e8bac(block);
+    compiler = *(undefined4 *)(pass + 8);
+    loopStepArg = loopStep;
+    blockArg = block;
+    cannotUnroll = FUN_0012aa78(compiler,unrollCount,loopStart,loopStep,block);
+    if (cannotUnroll == 0) {
+      FUN_0012aae0(compiler,unrollCount);
       *(int *)(pass + 0x98) = *(int *)(pass + 0x98) + 1;
       findSimplePredecessorResult = Block__findSimplePredecessor(block);
-      local_60 = *(undefined4 *)(block + 8);
-      iVar9 = *param_4;
-      if (iVar6 == 0) {
-        while (block != iVar9) {
-          iVar5 = *(int *)(iVar9 + 4);
-          piVar19 = *(int **)(iVar9 + 0x98);
-          for (piVar27 = (int *)(*(int **)(iVar9 + 0x98))[2]; piVar27 != (int *)0x0;
-              piVar27 = (int *)piVar27[2]) {
-            if ((piVar19[5] & 1U) != 0) {
-              iVar4 = (**(code **)(*piVar19 + 0x34))(piVar19);
-              if ((iVar4 == 0) && (iVar4 = (**(code **)(*piVar19 + 0x38))(piVar19), iVar4 == 0)) {
-                iVar4 = 1;
-                piVar27 = piVar19;
+      exitBlock = *(undefined4 *)(block + 8);
+      loopEndBlock = *lastBlockRef;
+      if (unrollCount == 0) {
+        while (block != loopEndBlock) {
+          nextBodyBlock = *(int *)(loopEndBlock + 4);
+          bodyInst = *(int **)(loopEndBlock + 0x98);
+          for (instNext = (int *)(*(int **)(loopEndBlock + 0x98))[2]; instNext != (int *)0x0;
+              instNext = (int *)instNext[2]) {
+            if ((bodyInst[5] & 1U) != 0) {
+              instQuery34b = (**(code **)(*bodyInst + 0x34))(bodyInst);
+              if ((instQuery34b == 0) && (instQuery34b = (**(code **)(*bodyInst + 0x38))(bodyInst), instQuery34b == 0)) {
+                operandNumber = 1;
+                instCursor = bodyInst;
                 while( true ) {
-                  iVar7 = (**(code **)(*piVar19 + 0x14))(piVar19);
-                  if (iVar7 < iVar4) break;
-                  iVar4 = iVar4 + 1;
-                  FUN_001234d8(piVar27[0x29],piVar19);
-                  piVar27 = piVar27 + 6;
+                  operandCount = (**(code **)(*bodyInst + 0x14))(bodyInst);
+                  if (operandCount < operandNumber) break;
+                  operandNumber = operandNumber + 1;
+                  FUN_001234d8(instCursor[0x29],bodyInst);
+                  instCursor = instCursor + 6;
                 }
-                (**(code **)(*piVar19 + 0xc))(piVar19,0,*(undefined4 *)(pass + 8));
-                piVar27 = (int *)piVar19[2];
+                (**(code **)(*bodyInst + 0xc))(bodyInst,0,*(undefined4 *)(pass + 8));
+                instNext = (int *)bodyInst[2];
               }
               else {
-                piVar27 = (int *)piVar19[2];
+                instNext = (int *)bodyInst[2];
               }
             }
-            piVar19 = piVar27;
+            bodyInst = instNext;
           }
-          Block__detach(iVar9);
-          iVar9 = iVar5;
+          Block__detach(loopEndBlock);
+          loopEndBlock = nextBodyBlock;
         }
-        *param_4 = findSimplePredecessorResult;
-        local_60 = *(undefined4 *)(block + 8);
+        *lastBlockRef = findSimplePredecessorResult;
+        exitBlock = *(undefined4 *)(block + 8);
       }
       else {
-        if ((1 < iVar6) && (block != iVar9)) {
-          iVar23 = 0;
-          iVar25 = block;
+        if ((1 < unrollCount) && (block != loopEndBlock)) {
+          blockOrdinal = 0;
+          bodyBlockCursor = block;
           do {
-            iVar25 = *(int *)(iVar25 + 8);
-            *(int *)(iVar25 + 0xc0) = iVar23;
-            iVar23 = iVar23 + 1;
-          } while (iVar9 != iVar25);
+            bodyBlockCursor = *(int *)(bodyBlockCursor + 8);
+            *(int *)(bodyBlockCursor + 0xc0) = blockOrdinal;
+            blockOrdinal = blockOrdinal + 1;
+          } while (loopEndBlock != bodyBlockCursor);
         }
-        bVar2 = block != iVar9;
-        iVar23 = *(int *)(block + 0x14c);
-        iVar25 = block;
-        bVar1 = bVar2;
-        while (bVar1) {
-          piVar27 = *(int **)(iVar25 + 8);
-          piVar27[0x2e] = piVar27[0x2e] + -1;
-          iVar11 = (**(code **)(*piVar27 + 0x2c))(piVar27);
-          if ((iVar11 != 0) && (block == piVar27[0x53])) {
-            piVar27[0x53] = iVar23;
+        hasBody = block != loopEndBlock;
+        savedLoopFooter = *(int *)(block + 0x14c);
+        bodyBlockCursor = block;
+        moreBlocksA = hasBody;
+        while (moreBlocksA) {
+          bodyBlock = *(int **)(bodyBlockCursor + 8);
+          bodyBlock[0x2e] = bodyBlock[0x2e] + -1;
+          isLoopHeaderBlock = (**(code **)(*bodyBlock + 0x2c))(bodyBlock);
+          if ((isLoopHeaderBlock != 0) && (block == bodyBlock[0x53])) {
+            bodyBlock[0x53] = savedLoopFooter;
           }
-          iVar25 = *(int *)(iVar25 + 8);
-          bVar1 = iVar9 != iVar25;
+          bodyBlockCursor = *(int *)(bodyBlockCursor + 8);
+          moreBlocksA = loopEndBlock != bodyBlockCursor;
         }
         arena = *(undefined4 *)(*(int *)(pass + 8) + 0x378);
         allocation = (undefined4 *)Arena__alloc(arena,0x14);
-        puVar28 = allocation + 1;
+        cloneVector = allocation + 1;
         allocation[1] = 2;
         *allocation = arena;
         allocation[2] = 0;
         allocation[4] = arena;
         vectorData = Arena__alloc(arena,8);
         allocation[3] = vectorData;
-        if (1 < iVar6) {
-          local_68 = 1;
-          iVar25 = iVar9;
-          local_64 = iVar7;
+        if (1 < unrollCount) {
+          iteration = 1;
+          prevCopyEnd = loopEndBlock;
+          counterValue = loopStart;
           do {
-            local_64 = local_64 + iVar8;
-            if (bVar2) {
-              iVar23 = block;
-              uVar24 = 0;
+            counterValue = counterValue + loopStep;
+            if (hasBody) {
+              origBlockCursor = block;
+              cloneIndex = 0;
               do {
-                uVar21 = uVar24;
-                piVar27 = *(int **)(iVar23 + 8);
-                iVar11 = (**(code **)(*piVar27 + 8))(piVar27);
-                if (uVar21 < *puVar28) {
-                  uVar24 = allocation[2];
-                  if (uVar24 <= uVar21) {
-                    _memset(uVar24 * 4 + allocation[3],0,(uVar21 - uVar24) * 4 + 4);
-                    allocation[2] = uVar21 + 1;
+                lastCloneIndex = cloneIndex;
+                origBlock = *(int **)(origBlockCursor + 8);
+                clonedBlock = (**(code **)(*origBlock + 8))(origBlock);
+                if (lastCloneIndex < *cloneVector) {
+                  cloneFilledCountE = allocation[2];
+                  if (cloneFilledCountE <= lastCloneIndex) {
+                    _memset(cloneFilledCountE * 4 + allocation[3],0,(lastCloneIndex - cloneFilledCountE) * 4 + 4);
+                    allocation[2] = lastCloneIndex + 1;
                   }
-                  piVar18 = (int *)(uVar21 * 4 + allocation[3]);
+                  clonedBlockRef = (int *)(lastCloneIndex * 4 + allocation[3]);
                 }
                 else {
-                  piVar18 = (int *)Vector__elementRefGrow(puVar28,uVar21);
+                  clonedBlockRef = (int *)Vector__elementRefGrow(cloneVector,lastCloneIndex);
                 }
-                *piVar18 = iVar11;
-                piVar18 = (int *)piVar27[0x26];
-                for (piVar14 = (int *)((int *)piVar27[0x26])[2]; piVar14 != (int *)0x0;
-                    piVar14 = (int *)piVar14[2]) {
-                  uVar24 = piVar18[5] & 1;
-                  if (uVar24 != 0) {
-                    iVar22 = (**(code **)(*piVar18 + 0x34))(piVar18);
-                    if (iVar22 == 0) {
-                      iVar22 = (**(code **)(*piVar18 + 0x38))(piVar18);
-                      if (iVar22 != 0) break;
-                      iVar22 = 0;
-                      cloneResult = IRInst__clone(piVar18,*(undefined4 *)(pass + 8),0);
+                *clonedBlockRef = clonedBlock;
+                srcInst = (int *)origBlock[0x26];
+                for (nextInstRef = (int *)((int *)origBlock[0x26])[2]; nextInstRef != (int *)0x0;
+                    nextInstRef = (int *)nextInstRef[2]) {
+                  instLinkedFlag = srcInst[5] & 1;
+                  if (instLinkedFlag != 0) {
+                    instQuery34 = (**(code **)(*srcInst + 0x34))(srcInst);
+                    if (instQuery34 == 0) {
+                      instQuery38 = (**(code **)(*srcInst + 0x38))(srcInst);
+                      if (instQuery38 != 0) break;
+                      extraBranchArg = 0;
+                      cloneResult = IRInst__clone(srcInst,*(undefined4 *)(pass + 8),0);
                       if ((*(int *)(block + 0x134) == 0) &&
-                         (iVar13 = FUN_0012ab04(cloneResult), iVar13 != 0)) {
-                        iVar22 = pass;
-                        ((int (*)())FUN_0012c3d0)(cloneResult,local_64,pass);
+                         (needsOffsetFixClone = FUN_0012ab04(cloneResult), needsOffsetFixClone != 0)) {
+                        extraBranchArg = pass;
+                        ((int (*)())FUN_0012c3d0)(cloneResult,counterValue,pass);
                       }
                       if ((*(uint *)(cloneResult + 0x14) & 0x10) != 0) {
                         Program__addInst(pass,cloneResult);
                       }
-                      isIfHeader = (**(code **)(*piVar27 + 0x24))(piVar27);
+                      isIfHeader = (**(code **)(*origBlock + 0x24))(origBlock);
                       if (((int)((ulonglong)isIfHeader >> 0x20) != 0) &&
-                         (piVar14 = (int *)Block__getBranchInst(piVar27,(int)isIfHeader,iVar22,iVar5,iVar4,
-                                                        piVar19,uVar24), piVar18 == piVar14)) {
-                        *(int *)(iVar11 + 0x130) = cloneResult;
+                         (nextInstRef = (int *)Block__getBranchInst(origBlock,(int)isIfHeader,extraBranchArg,loopStepArg,blockArg,
+                                                        counterRefArg,instLinkedFlag), srcInst == nextInstRef)) {
+                        *(int *)(clonedBlock + 0x130) = cloneResult;
                       }
-                      isLoopHeader = (**(code **)(*piVar27 + 0x2c))(piVar27);
-                      if ((isLoopHeader != 0) && (piVar18 == (int *)piVar27[0x52])) {
-                        *(int *)(iVar11 + 0x148) = cloneResult;
+                      isLoopHeader = (**(code **)(*origBlock + 0x2c))(origBlock);
+                      if ((isLoopHeader != 0) && (srcInst == (int *)origBlock[0x52])) {
+                        *(int *)(clonedBlock + 0x148) = cloneResult;
                       }
-                      Program__appendInst(pass,cloneResult,iVar11);
-                      piVar14 = (int *)piVar18[2];
+                      Program__appendInst(pass,cloneResult,clonedBlock);
+                      nextInstRef = (int *)srcInst[2];
                     }
                     else {
-                      piVar14 = (int *)piVar18[2];
+                      nextInstRef = (int *)srcInst[2];
                     }
                   }
-                  piVar18 = piVar14;
+                  srcInst = nextInstRef;
                 }
-                Program__insertBlockAfter(pass,*param_4,iVar11);
-                *param_4 = iVar11;
-                iVar23 = *(int *)(iVar23 + 8);
-                uVar24 = uVar21 + 1;
-              } while (iVar9 != iVar23);
+                Program__insertBlockAfter(pass,*lastBlockRef,clonedBlock);
+                *lastBlockRef = clonedBlock;
+                origBlockCursor = *(int *)(origBlockCursor + 8);
+                cloneIndex = lastCloneIndex + 1;
+              } while (loopEndBlock != origBlockCursor);
             }
             else {
-              uVar21 = 0xffffffff;
+              lastCloneIndex = 0xffffffff;
             }
-            iVar23 = *(int *)(block + 8);
-            if (0 < (int)uVar21) {
-              uVar24 = 0;
-              iVar11 = 1;
+            nextOrigBlock = *(int *)(block + 8);
+            if (0 < (int)lastCloneIndex) {
+              cloneIndex = 0;
+              successorSlot = 1;
               do {
-                if (uVar24 < *puVar28) {
-                  uVar15 = allocation[2];
-                  if (uVar15 <= uVar24) {
-                    _memset(uVar15 * 4 + allocation[3],0,(uVar24 - uVar15) * 4 + 4);
-                    allocation[2] = iVar11;
+                if (cloneIndex < *cloneVector) {
+                  cloneFilledCountA = allocation[2];
+                  if (cloneFilledCountA <= cloneIndex) {
+                    _memset(cloneFilledCountA * 4 + allocation[3],0,(cloneIndex - cloneFilledCountA) * 4 + 4);
+                    allocation[2] = successorSlot;
                   }
                 }
                 else {
-                  Vector__elementRefGrow(puVar28,uVar24);
+                  Vector__elementRefGrow(cloneVector,cloneIndex);
                 }
-                iVar22 = 0;
-                for (uVar15 = 1; uVar15 <= *(uint *)(*(int *)(iVar23 + 0xd0) + 4);
-                    uVar15 = uVar15 + 1) {
-                  iVar3 = *(int *)(iVar22 + *(int *)(*(int *)(iVar23 + 0xd0) + 8));
-                  if (iVar3 != 0) {
-                    uVar20 = *puVar28;
-                    if (uVar24 < uVar20) {
-                      uVar16 = allocation[2];
-                      if (uVar16 <= uVar24) {
-                        _memset(uVar16 * 4 + allocation[3],0,(uVar24 - uVar16) * 4 + 4);
-                        uVar20 = *puVar28;
-                        allocation[2] = iVar11;
+                successorOffset = 0;
+                for (successorIndex = 1; successorIndex <= *(uint *)(*(int *)(nextOrigBlock + 0xd0) + 4);
+                    successorIndex = successorIndex + 1) {
+                  successorBlock = *(int *)(successorOffset + *(int *)(*(int *)(nextOrigBlock + 0xd0) + 8));
+                  if (successorBlock != 0) {
+                    cloneCapacity = *cloneVector;
+                    if (cloneIndex < cloneCapacity) {
+                      cloneFilledCountB = allocation[2];
+                      if (cloneFilledCountB <= cloneIndex) {
+                        _memset(cloneFilledCountB * 4 + allocation[3],0,(cloneIndex - cloneFilledCountB) * 4 + 4);
+                        cloneCapacity = *cloneVector;
+                        allocation[2] = successorSlot;
                       }
-                      puVar17 = (undefined4 *)(uVar24 * 4 + allocation[3]);
+                      cloneSlotRefA = (undefined4 *)(cloneIndex * 4 + allocation[3]);
                     }
                     else {
-                      puVar17 = (undefined4 *)Vector__elementRefGrow(puVar28,uVar24);
-                      uVar20 = *puVar28;
+                      cloneSlotRefA = (undefined4 *)Vector__elementRefGrow(cloneVector,cloneIndex);
+                      cloneCapacity = *cloneVector;
                     }
-                    uVar26 = *puVar17;
-                    uVar16 = *(uint *)(iVar3 + 0xc0);
-                    if (uVar16 < uVar20) {
-                      uVar20 = allocation[2];
-                      if (uVar20 <= uVar16) {
-                        _memset(uVar20 * 4 + allocation[3],0,(uVar16 - uVar20) * 4 + 4);
-                        allocation[2] = uVar16 + 1;
+                    fromClone = *cloneSlotRefA;
+                    successorCloneIndex = *(uint *)(successorBlock + 0xc0);
+                    if (successorCloneIndex < cloneCapacity) {
+                      cloneFilledCountC = allocation[2];
+                      if (cloneFilledCountC <= successorCloneIndex) {
+                        _memset(cloneFilledCountC * 4 + allocation[3],0,(successorCloneIndex - cloneFilledCountC) * 4 + 4);
+                        allocation[2] = successorCloneIndex + 1;
                       }
-                      puVar17 = (undefined4 *)(uVar16 * 4 + allocation[3]);
+                      cloneSlotRefB = (undefined4 *)(successorCloneIndex * 4 + allocation[3]);
                     }
                     else {
-                      puVar17 = (undefined4 *)Vector__elementRefGrow(puVar28,uVar16);
+                      cloneSlotRefB = (undefined4 *)Vector__elementRefGrow(cloneVector,successorCloneIndex);
                     }
-                    Block__connect(uVar26,*puVar17);
+                    Block__connect(fromClone,*cloneSlotRefB);
                   }
-                  iVar22 = iVar22 + 4;
+                  successorOffset = successorOffset + 4;
                 }
-                uVar24 = uVar24 + 1;
-                iVar23 = *(int *)(iVar23 + 8);
-                iVar11 = iVar11 + 1;
-              } while (uVar21 != uVar24);
+                cloneIndex = cloneIndex + 1;
+                nextOrigBlock = *(int *)(nextOrigBlock + 8);
+                successorSlot = successorSlot + 1;
+              } while (lastCloneIndex != cloneIndex);
             }
-            if (*puVar28 == 0) {
-              puVar17 = (undefined4 *)Vector__elementRefGrow(puVar28,0);
+            if (*cloneVector == 0) {
+              cloneSlotRefC = (undefined4 *)Vector__elementRefGrow(cloneVector,0);
             }
             else {
               if (allocation[2] == 0) {
                 *(undefined4 *)allocation[3] = 0;
                 allocation[2] = 1;
               }
-              puVar17 = (undefined4 *)allocation[3];
+              cloneSlotRefC = (undefined4 *)allocation[3];
             }
-            Block__connect(iVar25,*puVar17);
-            iVar25 = block;
-            bVar1 = bVar2;
-            while (bVar1) {
-              iVar23 = *(int *)(iVar25 + 8);
-              uVar24 = *(uint *)(iVar23 + 0xc0);
-              if (uVar24 < *puVar28) {
-                uVar21 = allocation[2];
-                if (uVar21 <= uVar24) {
-                  _memset(uVar21 * 4 + allocation[3],0,(uVar24 - uVar21) * 4 + 4);
-                  allocation[2] = uVar24 + 1;
+            Block__connect(prevCopyEnd,*cloneSlotRefC);
+            rewireCursor = block;
+            moreBlocksB = hasBody;
+            while (moreBlocksB) {
+              rewireBlockCursor = *(int *)(rewireCursor + 8);
+              targetCloneIndex = *(uint *)(rewireBlockCursor + 0xc0);
+              if (targetCloneIndex < *cloneVector) {
+                cloneFilledCountD = allocation[2];
+                if (cloneFilledCountD <= targetCloneIndex) {
+                  _memset(cloneFilledCountD * 4 + allocation[3],0,(targetCloneIndex - cloneFilledCountD) * 4 + 4);
+                  allocation[2] = targetCloneIndex + 1;
                 }
-                puVar17 = (undefined4 *)(uVar24 * 4 + allocation[3]);
+                cloneSlotRefD = (undefined4 *)(targetCloneIndex * 4 + allocation[3]);
               }
               else {
-                puVar17 = (undefined4 *)Vector__elementRefGrow(puVar28,uVar24);
+                cloneSlotRefD = (undefined4 *)Vector__elementRefGrow(cloneVector,targetCloneIndex);
               }
-              piVar27 = (int *)*puVar17;
-              iVar11 = (**(code **)(*piVar27 + 0x24))(piVar27);
-              if (iVar11 == 0) {
-                iVar11 = (**(code **)(*piVar27 + 0x28))(piVar27);
-                if (iVar11 == 0) {
-                  iVar11 = (**(code **)(*piVar27 + 0x2c))(piVar27);
-                  if (iVar11 == 0) {
-                    iVar11 = (**(code **)(*piVar27 + 0x30))(piVar27);
-                    if (((iVar11 != 0) ||
-                        (iVar11 = (**(code **)(*piVar27 + 0x34))(piVar27), iVar11 != 0)) ||
-                       (iVar11 = (**(code **)(*piVar27 + 0x38))(piVar27), iVar11 != 0))
+              clonedBlockObj = (int *)*cloneSlotRefD;
+              blockQuery24 = (**(code **)(*clonedBlockObj + 0x24))(clonedBlockObj);
+              if (blockQuery24 == 0) {
+                blockQuery28 = (**(code **)(*clonedBlockObj + 0x28))(clonedBlockObj);
+                if (blockQuery28 == 0) {
+                  blockQuery2c = (**(code **)(*clonedBlockObj + 0x2c))(clonedBlockObj);
+                  if (blockQuery2c == 0) {
+                    blockQuery30 = (**(code **)(*clonedBlockObj + 0x30))(clonedBlockObj);
+                    if (((blockQuery30 != 0) ||
+                        (blockQuery30 = (**(code **)(*clonedBlockObj + 0x34))(clonedBlockObj), blockQuery30 != 0)) ||
+                       (blockQuery30 = (**(code **)(*clonedBlockObj + 0x38))(clonedBlockObj), blockQuery30 != 0))
                     goto LAB_0012fafc;
-                    (**(code **)(*piVar27 + 0x3c))(piVar27);
+                    (**(code **)(*clonedBlockObj + 0x3c))(clonedBlockObj);
                   }
                   else {
-                    uVar24 = *(uint *)(*(int *)(iVar23 + 0x150) + 0xc0);
-                    if (uVar24 < *puVar28) {
-                      uVar21 = allocation[2];
-                      if (uVar21 <= uVar24) {
-                        _memset(uVar21 * 4 + allocation[3],0,(uVar24 - uVar21) * 4 + 4);
-                        allocation[2] = uVar24 + 1;
+                    targetCloneIndex = *(uint *)(*(int *)(rewireBlockCursor + 0x150) + 0xc0);
+                    if (targetCloneIndex < *cloneVector) {
+                      cloneFilledCountD = allocation[2];
+                      if (cloneFilledCountD <= targetCloneIndex) {
+                        _memset(cloneFilledCountD * 4 + allocation[3],0,(targetCloneIndex - cloneFilledCountD) * 4 + 4);
+                        allocation[2] = targetCloneIndex + 1;
                       }
-                      piVar18 = (int *)(uVar24 * 4 + allocation[3]);
+                      rewiredCloneRef = (int *)(targetCloneIndex * 4 + allocation[3]);
                     }
                     else {
-                      piVar18 = (int *)Vector__elementRefGrow(puVar28,uVar24);
+                      rewiredCloneRef = (int *)Vector__elementRefGrow(cloneVector,targetCloneIndex);
                     }
-                    iVar23 = *(int *)(iVar23 + 0x154);
-                    piVar27[0x54] = *piVar18;
-                    uVar24 = *(uint *)(iVar23 + 0xc0);
-                    if (uVar24 < *puVar28) {
-                      uVar21 = allocation[2];
-                      if (uVar21 <= uVar24) {
-                        _memset(uVar21 * 4 + allocation[3],0,(uVar24 - uVar21) * 4 + 4);
-                        allocation[2] = uVar24 + 1;
+                    rewireBlockCursor = *(int *)(rewireBlockCursor + 0x154);
+                    clonedBlockObj[0x54] = *rewiredCloneRef;
+                    targetCloneIndex = *(uint *)(rewireBlockCursor + 0xc0);
+                    if (targetCloneIndex < *cloneVector) {
+                      cloneFilledCountD = allocation[2];
+                      if (cloneFilledCountD <= targetCloneIndex) {
+                        _memset(cloneFilledCountD * 4 + allocation[3],0,(targetCloneIndex - cloneFilledCountD) * 4 + 4);
+                        allocation[2] = targetCloneIndex + 1;
                       }
-                      piVar18 = (int *)(uVar24 * 4 + allocation[3]);
+                      rewiredCloneRef = (int *)(targetCloneIndex * 4 + allocation[3]);
                     }
                     else {
-                      piVar18 = (int *)Vector__elementRefGrow(puVar28,uVar24);
+                      rewiredCloneRef = (int *)Vector__elementRefGrow(cloneVector,targetCloneIndex);
                     }
-                    piVar27[0x55] = *piVar18;
+                    clonedBlockObj[0x55] = *rewiredCloneRef;
                   }
                 }
                 else {
 LAB_0012fafc:
-                  uVar24 = *(uint *)(*(int *)(iVar23 + 300) + 0xc0);
-                  if (uVar24 < *puVar28) {
-                    uVar21 = allocation[2];
-                    if (uVar21 <= uVar24) {
-                      _memset(uVar21 * 4 + allocation[3],0,(uVar24 - uVar21) * 4 + 4);
-                      allocation[2] = uVar24 + 1;
+                  targetCloneIndex = *(uint *)(*(int *)(rewireBlockCursor + 300) + 0xc0);
+                  if (targetCloneIndex < *cloneVector) {
+                    cloneFilledCountD = allocation[2];
+                    if (cloneFilledCountD <= targetCloneIndex) {
+                      _memset(cloneFilledCountD * 4 + allocation[3],0,(targetCloneIndex - cloneFilledCountD) * 4 + 4);
+                      allocation[2] = targetCloneIndex + 1;
                     }
-                    piVar18 = (int *)(uVar24 * 4 + allocation[3]);
+                    rewiredCloneRef = (int *)(targetCloneIndex * 4 + allocation[3]);
                   }
                   else {
-                    piVar18 = (int *)Vector__elementRefGrow(puVar28,uVar24);
+                    rewiredCloneRef = (int *)Vector__elementRefGrow(cloneVector,targetCloneIndex);
                   }
-                  piVar27[0x4b] = *piVar18;
+                  clonedBlockObj[0x4b] = *rewiredCloneRef;
                 }
               }
               else {
-                uVar24 = *(uint *)(*(int *)(iVar23 + 0x13c) + 0xc0);
-                if (uVar24 < *puVar28) {
-                  uVar21 = allocation[2];
-                  if (uVar21 <= uVar24) {
-                    _memset(uVar21 * 4 + allocation[3],0,(uVar24 - uVar21) * 4 + 4);
-                    allocation[2] = uVar24 + 1;
+                targetCloneIndex = *(uint *)(*(int *)(rewireBlockCursor + 0x13c) + 0xc0);
+                if (targetCloneIndex < *cloneVector) {
+                  cloneFilledCountD = allocation[2];
+                  if (cloneFilledCountD <= targetCloneIndex) {
+                    _memset(cloneFilledCountD * 4 + allocation[3],0,(targetCloneIndex - cloneFilledCountD) * 4 + 4);
+                    allocation[2] = targetCloneIndex + 1;
                   }
-                  piVar18 = (int *)(uVar24 * 4 + allocation[3]);
+                  rewiredCloneRef = (int *)(targetCloneIndex * 4 + allocation[3]);
                 }
                 else {
-                  piVar18 = (int *)Vector__elementRefGrow(puVar28,uVar24);
+                  rewiredCloneRef = (int *)Vector__elementRefGrow(cloneVector,targetCloneIndex);
                 }
-                iVar11 = *(int *)(iVar23 + 0x134);
-                piVar27[0x4f] = *piVar18;
-                uVar24 = *(uint *)(iVar11 + 0xc0);
-                if (uVar24 < *puVar28) {
-                  uVar21 = allocation[2];
-                  if (uVar21 <= uVar24) {
-                    _memset(uVar21 * 4 + allocation[3],0,(uVar24 - uVar21) * 4 + 4);
-                    allocation[2] = uVar24 + 1;
+                blockAt134 = *(int *)(rewireBlockCursor + 0x134);
+                clonedBlockObj[0x4f] = *rewiredCloneRef;
+                targetCloneIndex = *(uint *)(blockAt134 + 0xc0);
+                if (targetCloneIndex < *cloneVector) {
+                  cloneFilledCountD = allocation[2];
+                  if (cloneFilledCountD <= targetCloneIndex) {
+                    _memset(cloneFilledCountD * 4 + allocation[3],0,(targetCloneIndex - cloneFilledCountD) * 4 + 4);
+                    allocation[2] = targetCloneIndex + 1;
                   }
-                  piVar18 = (int *)(uVar24 * 4 + allocation[3]);
+                  rewiredCloneRef = (int *)(targetCloneIndex * 4 + allocation[3]);
                 }
                 else {
-                  piVar18 = (int *)Vector__elementRefGrow(puVar28,uVar24);
+                  rewiredCloneRef = (int *)Vector__elementRefGrow(cloneVector,targetCloneIndex);
                 }
-                iVar23 = *(int *)(iVar23 + 0x138);
-                piVar27[0x4d] = *piVar18;
-                uVar24 = *(uint *)(iVar23 + 0xc0);
-                if (uVar24 < *puVar28) {
-                  uVar21 = allocation[2];
-                  if (uVar21 <= uVar24) {
-                    _memset(uVar21 * 4 + allocation[3],0,(uVar24 - uVar21) * 4 + 4);
-                    allocation[2] = uVar24 + 1;
+                rewireBlockCursor = *(int *)(rewireBlockCursor + 0x138);
+                clonedBlockObj[0x4d] = *rewiredCloneRef;
+                targetCloneIndex = *(uint *)(rewireBlockCursor + 0xc0);
+                if (targetCloneIndex < *cloneVector) {
+                  cloneFilledCountD = allocation[2];
+                  if (cloneFilledCountD <= targetCloneIndex) {
+                    _memset(cloneFilledCountD * 4 + allocation[3],0,(targetCloneIndex - cloneFilledCountD) * 4 + 4);
+                    allocation[2] = targetCloneIndex + 1;
                   }
-                  piVar18 = (int *)(uVar24 * 4 + allocation[3]);
+                  rewiredCloneRef = (int *)(targetCloneIndex * 4 + allocation[3]);
                 }
                 else {
-                  piVar18 = (int *)Vector__elementRefGrow(puVar28,uVar24);
+                  rewiredCloneRef = (int *)Vector__elementRefGrow(cloneVector,targetCloneIndex);
                 }
-                piVar27[0x4e] = *piVar18;
+                clonedBlockObj[0x4e] = *rewiredCloneRef;
               }
-              iVar25 = *(int *)(iVar25 + 8);
-              bVar1 = iVar9 != iVar25;
+              rewireCursor = *(int *)(rewireCursor + 8);
+              moreBlocksB = loopEndBlock != rewireCursor;
             }
-            local_68 = local_68 + 1;
-            iVar25 = *param_4;
-          } while (iVar6 != local_68);
+            iteration = iteration + 1;
+            prevCopyEnd = *lastBlockRef;
+          } while (unrollCount != iteration);
         }
-        iVar5 = block;
+        fixupBlock = block;
         if (*(int *)(block + 0x134) == 0) {
-          while (bVar2) {
-            iVar25 = *(int *)(iVar5 + 8);
-            iVar4 = *(int *)(*(int *)(iVar25 + 0x98) + 8);
-            iVar8 = *(int *)(iVar25 + 0x98);
-            if (iVar4 != 0) {
+          while (hasBody) {
+            nextFixBlock = *(int *)(fixupBlock + 8);
+            nextInst = *(int *)(*(int *)(nextFixBlock + 0x98) + 8);
+            instListHead = *(int *)(nextFixBlock + 0x98);
+            if (nextInst != 0) {
               do {
-                iVar25 = iVar4;
-                if ((*(uint *)(iVar8 + 0x14) & 1) != 0) {
-                  iVar4 = FUN_0012ab04(iVar8);
-                  if (iVar4 == 0) {
-                    iVar25 = *(int *)(iVar8 + 8);
+                instIter = nextInst;
+                if ((*(uint *)(instListHead + 0x14) & 1) != 0) {
+                  needsOffsetFix = FUN_0012ab04(instListHead);
+                  if (needsOffsetFix == 0) {
+                    instIter = *(int *)(instListHead + 8);
                   }
                   else {
-                    ((int (*)())FUN_0012c3d0)(iVar8,iVar7,pass);
-                    iVar25 = *(int *)(iVar8 + 8);
+                    ((int (*)())FUN_0012c3d0)(instListHead,loopStart,pass);
+                    instIter = *(int *)(instListHead + 8);
                   }
                 }
-                iVar4 = *(int *)(iVar25 + 8);
-                iVar8 = iVar25;
-              } while (*(int *)(iVar25 + 8) != 0);
-              iVar25 = *(int *)(iVar5 + 8);
+                nextInst = *(int *)(instIter + 8);
+                instListHead = instIter;
+              } while (*(int *)(instIter + 8) != 0);
+              nextFixBlock = *(int *)(fixupBlock + 8);
             }
-            bVar2 = iVar9 != iVar25;
-            iVar5 = iVar25;
+            hasBody = loopEndBlock != nextFixBlock;
+            fixupBlock = nextFixBlock;
           }
         }
       }
       Vector__removeAt(iStack0000001c,*(int *)(iStack0000001c + 4) + -1);
-      *param_6 = *param_6 + -1;
-      piVar19 = *(int **)(block + 0x98);
-      piVar27 = (int *)(*(int **)(block + 0x98))[2];
+      *blockCounter = *blockCounter + -1;
+      exitInst = *(int **)(block + 0x98);
+      nextExitInst = (int *)(*(int **)(block + 0x98))[2];
       do {
-        if (piVar27 == (int *)0x0) {
-          Block__bypass(block,findSimplePredecessorResult,local_60);
-          if (iVar6 == 0) {
+        if (nextExitInst == (int *)0x0) {
+          Block__bypass(block,findSimplePredecessorResult,exitBlock);
+          if (unrollCount == 0) {
             Block__successorCount(findSimplePredecessorResult);
           }
           else {
             Block__successorCount(findSimplePredecessorResult);
-            Block__predecessorCount(local_60);
+            Block__predecessorCount(exitBlock);
           }
           blockVectorAt150 = *(int **)(block + 0x150);
           if (blockVectorAt150 != (int *)0x0) {
@@ -2741,40 +2792,40 @@ LAB_0012fafc:
           allocation = (undefined4 *)Arena__alloc(arena,0x130);
           *allocation = arena;
           Block__ctor_ea020(allocation + 1,*(undefined4 *)(pass + 8));
-          *param_5 = (int)(allocation + 1);
-          allocation[0x2f] = *param_6;
-          Program__insertBlockAfter(pass,*param_4,*param_5);
-          Block__connect(*param_4,*param_5);
-          ((int (*)())FUN_0012e8c0)(pass,findSimplePredecessorResult,*param_4);
-          *param_4 = *param_5;
+          *newBlockOut = (int)(allocation + 1);
+          allocation[0x2f] = *blockCounter;
+          Program__insertBlockAfter(pass,*lastBlockRef,*newBlockOut);
+          Block__connect(*lastBlockRef,*newBlockOut);
+          ((int (*)())FUN_0012e8c0)(pass,findSimplePredecessorResult,*lastBlockRef);
+          *lastBlockRef = *newBlockOut;
           return 1;
         }
-        if ((piVar19[5] & 1U) != 0) {
-          iVar5 = (**(code **)(*piVar19 + 0x3c))(piVar19);
-          if (iVar5 == 0) {
-            if (*(int *)(piVar19[0x22] + 4) == 3) {
+        if ((exitInst[5] & 1U) != 0) {
+          instQuery3c = (**(code **)(*exitInst + 0x3c))(exitInst);
+          if (instQuery3c == 0) {
+            if (*(int *)(exitInst[0x22] + 4) == 3) {
               if (*(int *)(block + 0x134) == 0) goto LAB_0012fc9c;
-              FUN_001234d8(piVar19[0x29],piVar19);
-              DList__unlink(piVar19);
-              iVar5 = *(int *)(block + 0x14c);
-              IRInst__setOperandRef(piVar19,1,*(undefined4 *)(*(int *)(iVar5 + 0x148) + 0x8c));
-              FUN_000ed63c(pass,piVar19);
-              Block__appendInst(iVar5,piVar19);
-              piVar27 = (int *)piVar19[2];
+              FUN_001234d8(exitInst[0x29],exitInst);
+              DList__unlink(exitInst);
+              loopFooterBlock = *(int *)(block + 0x14c);
+              IRInst__setOperandRef(exitInst,1,*(undefined4 *)(*(int *)(loopFooterBlock + 0x148) + 0x8c));
+              FUN_000ed63c(pass,exitInst);
+              Block__appendInst(loopFooterBlock,exitInst);
+              nextExitInst = (int *)exitInst[2];
             }
             else {
-              piVar27 = (int *)piVar19[2];
+              nextExitInst = (int *)exitInst[2];
             }
           }
           else {
 LAB_0012fc9c:
-            FUN_001234d8(piVar19[0x29],piVar19);
-            (**(code **)(*piVar19 + 0xc))(piVar19,0,*(undefined4 *)(pass + 8));
-            piVar27 = (int *)piVar19[2];
+            FUN_001234d8(exitInst[0x29],exitInst);
+            (**(code **)(*exitInst + 0xc))(exitInst,0,*(undefined4 *)(pass + 8));
+            nextExitInst = (int *)exitInst[2];
           }
         }
-        piVar19 = piVar27;
-        piVar27 = (int *)piVar27[2];
+        exitInst = nextExitInst;
+        nextExitInst = (int *)nextExitInst[2];
       } while( true );
     }
   }
