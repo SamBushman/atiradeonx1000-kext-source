@@ -1855,28 +1855,28 @@ int FUN_0010e9d0(param_1, param_2)
 int FUN_0010ea30(param_1)
   int param_1;
 {
-  uint uVar1;
+  uint programFlags;
   code *UNRECOVERED_JUMPTABLE;
-  int *piVar2;
-  int iVar3;
+  int *targetObject;
+  int compiler;
   
-  iVar3 = *(int *)(param_1 + 8);
-  uVar1 = *(uint *)(*(int *)(iVar3 + 0x6c4) + 0x30);
-  if ((uVar1 & 1) == 0) {
-    if ((uVar1 & 0x2000) == 0) {
+  compiler = *(int *)(param_1 + 8);
+  programFlags = *(uint *)(*(int *)(compiler + 0x6c4) + 0x30);
+  if ((programFlags & 1) == 0) {
+    if ((programFlags & 0x2000) == 0) {
       return;
     }
-    piVar2 = *(int **)(iVar3 + 0x30c);
-    UNRECOVERED_JUMPTABLE = *(code **)(*piVar2 + 0x15c);
+    targetObject = *(int **)(compiler + 0x30c);
+    UNRECOVERED_JUMPTABLE = *(code **)(*targetObject + 0x15c);
   }
   else {
-    (**(code **)(**(int **)(iVar3 + 0x30c) + 0x164))(*(int **)(iVar3 + 0x30c),param_1);
-    piVar2 = *(int **)(*(int *)(param_1 + 8) + 0x30c);
-    UNRECOVERED_JUMPTABLE = *(code **)(*piVar2 + 0x160);
+    (**(code **)(**(int **)(compiler + 0x30c) + 0x164))(*(int **)(compiler + 0x30c),param_1);
+    targetObject = *(int **)(*(int *)(param_1 + 8) + 0x30c);
+    UNRECOVERED_JUMPTABLE = *(code **)(*targetObject + 0x160);
   }
                     
                     
-  (*UNRECOVERED_JUMPTABLE)(piVar2,param_1);
+  (*UNRECOVERED_JUMPTABLE)(targetObject,param_1);
   return;
 }
 

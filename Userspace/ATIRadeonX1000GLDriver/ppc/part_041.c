@@ -2506,28 +2506,28 @@ int FUN_001351c4(param_1, param_2, param_3, param_4, compiler)
 int FUN_00135278(param_1)
   int param_1;
 {
-  uint uVar1;
-  int *piVar2;
+  uint vectorCount;
+  int *elementSlot;
   uint loopIndex;
-  uint *puVar4;
+  uint *slotVector;
   
   if (0 < *(int *)(param_1 + 0xc)) {
     loopIndex = 0;
     do {
-      puVar4 = *(uint **)(param_1 + 4);
-      if (loopIndex < *puVar4) {
-        uVar1 = puVar4[1];
-        if (uVar1 <= loopIndex) {
-          _memset(uVar1 * 4 + puVar4[2],0,(loopIndex - uVar1) * 4 + 4);
-          puVar4[1] = loopIndex + 1;
+      slotVector = *(uint **)(param_1 + 4);
+      if (loopIndex < *slotVector) {
+        vectorCount = slotVector[1];
+        if (vectorCount <= loopIndex) {
+          _memset(vectorCount * 4 + slotVector[2],0,(loopIndex - vectorCount) * 4 + 4);
+          slotVector[1] = loopIndex + 1;
         }
-        piVar2 = (int *)(loopIndex * 4 + puVar4[2]);
+        elementSlot = (int *)(loopIndex * 4 + slotVector[2]);
       }
       else {
-        piVar2 = (int *)Vector__elementRefGrow(puVar4,loopIndex);
+        elementSlot = (int *)Vector__elementRefGrow(slotVector,loopIndex);
       }
       loopIndex = loopIndex + 1;
-      *(undefined4 *)(*piVar2 + 4) = 0;
+      *(undefined4 *)(*elementSlot + 4) = 0;
     } while ((int)loopIndex < *(int *)(param_1 + 0xc));
   }
   return;
