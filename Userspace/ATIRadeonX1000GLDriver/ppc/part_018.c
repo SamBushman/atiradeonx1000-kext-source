@@ -4086,30 +4086,30 @@ joined_r0x000cc708:
 #undef local_c044
 
 /* FUN_000cd05c @ 0xcd05c (176 bytes) */
-int FUN_000cd05c(param_1, param_2, param_3)
-  int param_1;
+int FUN_000cd05c(scCallbacks, param_2, allocTag)
+  int scCallbacks;
   int param_2;
-  uint param_3;
+  uint allocTag;
 {
   int a1;
   int iVar1;
   
-  if ((((((param_1 == 0) || (*(code **)(param_1 + 0x30) == (code *)0x0)) ||
-        (*(int *)(param_1 + 0x34) == 0)) ||
-       ((*(int *)(param_1 + 0x38) == 0 || (*(int *)(param_1 + 0x40) == 0)))) ||
-      ((*(int *)(param_1 + 0x44) == 0 ||
-       ((*(int *)(param_1 + 0x48) == 0 || (*(int *)(param_1 + 0x4c) == 0)))))) ||
+  if ((((((scCallbacks == 0) || (*(code **)(scCallbacks + 0x30) == (code *)0x0)) ||
+        (*(int *)(scCallbacks + 0x34) == 0)) ||
+       ((*(int *)(scCallbacks + 0x38) == 0 || (*(int *)(scCallbacks + 0x40) == 0)))) ||
+      ((*(int *)(scCallbacks + 0x44) == 0 ||
+       ((*(int *)(scCallbacks + 0x48) == 0 || (*(int *)(scCallbacks + 0x4c) == 0)))))) ||
      ((param_2 == 0 ||
-      (a1 = (**(code **)(param_1 + 0x30))(*(undefined4 *)(param_1 + 0x2c),0x44,param_3), a1 == 0))))
+      (a1 = (**(code **)(scCallbacks + 0x30))(*(undefined4 *)(scCallbacks + 0x2c),0x44,allocTag), a1 == 0))))
   {
     a1 = 0;
   }
   else {
-    FUN_000da0c0(a1,param_1);
+    FUN_000da0c0(a1,scCallbacks);
     iVar1 = FUN_000da420(a1);
     if (iVar1 != 0) {
       scDestroyCompilerObject(a1,1);
-      (**(code **)(param_1 + 0x34))(*(undefined4 *)(param_1 + 0x2c),a1,param_3);
+      (**(code **)(scCallbacks + 0x34))(*(undefined4 *)(scCallbacks + 0x2c),a1,allocTag);
       a1 = 0;
     }
   }

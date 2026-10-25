@@ -9500,10 +9500,10 @@ code_r0x000c5994:
 }
 
 /* psnRaReleaseUse @ 0xc59c0 (580 bytes) */
-int psnRaReleaseUse(param_1, param_2, param_3)
-  ushort *param_1;
-  int *param_2;
-  int *param_3;
+int psnRaReleaseUse(operand, tempTable, freeList)
+  ushort *operand;
+  int *tempTable;
+  int *freeList;
 {
   uint uVar1;
   ushort uVar2;
@@ -9518,26 +9518,26 @@ int psnRaReleaseUse(param_1, param_2, param_3)
   int iVar11;
   uint uVar12;
   
-  uVar2 = param_1[1];
+  uVar2 = operand[1];
   if (uVar2 == 0) {
-    *param_1 = 0;
+    *operand = 0;
     return;
   }
-  uVar1 = (uint)*param_1;
-  if (uVar1 < *(ushort *)(param_2 + 2)) {
-    iVar6 = param_2[1];
+  uVar1 = (uint)*operand;
+  if (uVar1 < *(ushort *)(tempTable + 2)) {
+    iVar6 = tempTable[1];
     uVar8 = (uVar2 == 8) + 7;
   }
   else {
-    iVar6 = *param_2;
+    iVar6 = *tempTable;
     uVar8 = 0xf;
-    uVar1 = uVar1 - *(ushort *)(param_2 + 2) & 0xffff;
+    uVar1 = uVar1 - *(ushort *)(tempTable + 2) & 0xffff;
   }
   iVar11 = iVar6 + uVar1 * 8;
   uVar2 = uVar2 & *(ushort *)(iVar11 + 4);
-  param_1[1] = uVar2;
+  operand[1] = uVar2;
   if (uVar2 == 0) {
-    *param_1 = 0;
+    *operand = 0;
     return;
   }
   if (uVar8 == 8) {
@@ -9546,22 +9546,22 @@ int psnRaReleaseUse(param_1, param_2, param_3)
   else {
     uVar2 = *(ushort *)(iVar6 + uVar1 * 8);
   }
-  *param_1 = uVar2;
-  uVar3 = *(ushort *)(iVar11 + 4) & ~param_1[1];
+  *operand = uVar2;
+  uVar3 = *(ushort *)(iVar11 + 4) & ~operand[1];
   *(ushort *)(iVar11 + 4) = uVar3;
-  uVar9 = (uint)*(ushort *)(param_3 + 1);
-  uVar2 = *param_1;
+  uVar9 = (uint)*(ushort *)(freeList + 1);
+  uVar2 = *operand;
   uVar1 = uVar9 - 1;
   if ((uVar8 & uVar3) != 0) {
     return;
   }
   if (uVar1 == 0) {
-    iVar11 = *param_3;
+    iVar11 = *freeList;
     iVar6 = 0;
     uVar1 = 0;
   }
   else {
-    iVar11 = *param_3;
+    iVar11 = *freeList;
     iVar6 = uVar1 * 4;
     if (uVar2 <= *(ushort *)(iVar6 + iVar11 + -4)) {
       puVar5 = (ushort *)(iVar6 + iVar11 + -8);
@@ -9581,7 +9581,7 @@ int psnRaReleaseUse(param_1, param_2, param_3)
   }
   if (*(ushort *)(iVar6 + iVar11) == uVar2) {
     *(ushort *)(iVar6 + iVar11 + 2) = uVar8 | *(ushort *)(iVar6 + iVar11 + 2);
-    uVar2 = *(ushort *)(param_3 + 1);
+    uVar2 = *(ushort *)(freeList + 1);
   }
   else {
     if (uVar1 < uVar9) {
@@ -9595,17 +9595,17 @@ int psnRaReleaseUse(param_1, param_2, param_3)
         iVar7 = iVar7 + -4;
         iVar4 = iVar4 + -1;
         if (iVar4 == 0) break;
-        iVar11 = *param_3;
+        iVar11 = *freeList;
       }
-      iVar11 = *param_3;
+      iVar11 = *freeList;
     }
     *(ushort *)(iVar6 + iVar11) = uVar2;
-    *(ushort *)(iVar6 + *param_3 + 2) = uVar8;
-    uVar2 = *(short *)(param_3 + 1) + 1;
-    *(ushort *)(param_3 + 1) = uVar2;
+    *(ushort *)(iVar6 + *freeList + 2) = uVar8;
+    uVar2 = *(short *)(freeList + 1) + 1;
+    *(ushort *)(freeList + 1) = uVar2;
   }
   uVar1 = (uint)uVar2;
-  iVar6 = *param_3;
+  iVar6 = *freeList;
   if (uVar1 - 1 == 0) {
     return;
   }
@@ -9619,7 +9619,7 @@ int psnRaReleaseUse(param_1, param_2, param_3)
     while( true ) {
       iVar11 = iVar11 + -4;
       uVar2 = uVar2 - 1;
-      *(ushort *)(param_3 + 1) = uVar2;
+      *(ushort *)(freeList + 1) = uVar2;
       iVar7 = iVar7 + -1;
       if (iVar7 == 0) {
         return;
@@ -9636,10 +9636,10 @@ int psnRaReleaseUse(param_1, param_2, param_3)
 }
 
 /* psnRaAssignDefinition @ 0xc5c50 (476 bytes) */
-int psnRaAssignDefinition(param_1, param_2, param_3, unusedArgR6, unusedArgR7, unusedArgR8, unusedArgR9, unusedArgR10)
-  ushort *param_1;
-  int *param_2;
-  int *param_3;
+int psnRaAssignDefinition(operand, tempTable, freeList, unusedArgR6, unusedArgR7, unusedArgR8, unusedArgR9, unusedArgR10)
+  ushort *operand;
+  int *tempTable;
+  int *freeList;
   undefined4 unusedArgR6;
   undefined4 unusedArgR7;
   undefined4 unusedArgR8;
@@ -9657,23 +9657,23 @@ int psnRaAssignDefinition(param_1, param_2, param_3, unusedArgR6, unusedArgR7, u
   int iVar8;
   ushort *puVar10;
   
-  uVar3 = (uint)*param_1;
-  if ((*param_1 & 0x8000) == 0) {
-    uVar9 = param_1[1];
+  uVar3 = (uint)*operand;
+  if ((*operand & 0x8000) == 0) {
+    uVar9 = operand[1];
     uVar2 = 0;
     if (uVar9 != 0) {
-      if (uVar3 < *(ushort *)(param_2 + 2)) {
-        iVar5 = param_2[1];
+      if (uVar3 < *(ushort *)(tempTable + 2)) {
+        iVar5 = tempTable[1];
         uVar2 = 8;
         if (uVar9 != 8) {
           uVar2 = 7;
-          param_1[1] = uVar9 & 0xfff7;
+          operand[1] = uVar9 & 0xfff7;
         }
       }
       else {
-        iVar5 = *param_2;
+        iVar5 = *tempTable;
         uVar2 = 0xf;
-        uVar3 = uVar3 - *(ushort *)(param_2 + 2) & 0xffff;
+        uVar3 = uVar3 - *(ushort *)(tempTable + 2) & 0xffff;
       }
       puVar7 = (ushort *)(iVar5 + uVar3 * 8);
       uVar9 = puVar7[2];
@@ -9681,9 +9681,9 @@ int psnRaAssignDefinition(param_1, param_2, param_3, unusedArgR6, unusedArgR7, u
         *(undefined2 *)(iVar5 + uVar3 * 8) = 0xffff;
         puVar7[1] = 0xffff;
       }
-      puVar7[2] = uVar9 | param_1[1];
+      puVar7[2] = uVar9 | operand[1];
       if ((uVar2 & uVar9) == 0) {
-        puVar10 = (ushort *)*param_3;
+        puVar10 = (ushort *)*freeList;
         uVar9 = puVar10[1];
         if ((uVar2 & ~uVar9) == 0) {
           uVar3 = 0;
@@ -9706,26 +9706,26 @@ int psnRaAssignDefinition(param_1, param_2, param_3, unusedArgR6, unusedArgR7, u
         }
         uVar1 = *puVar10;
         puVar10[1] = uVar9 & ~uVar2;
-        if (*(ushort *)(param_3 + 1) == uVar6) {
-          if (*(short *)(iVar5 + *param_3 + 2) != 0) {
-            *(short *)(param_3 + 1) = (short)uVar6 + 1;
+        if (*(ushort *)(freeList + 1) == uVar6) {
+          if (*(short *)(iVar5 + *freeList + 2) != 0) {
+            *(short *)(freeList + 1) = (short)uVar6 + 1;
             uVar3 = uVar6;
           }
-          *(ushort *)(*param_3 + uVar3 * 4) = uVar1 + 1;
-          *(undefined2 *)(uVar3 * 4 + *param_3 + 2) = 0xf;
+          *(ushort *)(*freeList + uVar3 * 4) = uVar1 + 1;
+          *(undefined2 *)(uVar3 * 4 + *freeList + 2) = 0xf;
         }
         else {
-          iVar8 = *param_3;
+          iVar8 = *freeList;
           if ((*(short *)(iVar8 + iVar5 + 2) == 0) &&
-             (uVar6 = *(ushort *)(param_3 + 1) - 1, *(short *)(param_3 + 1) = (short)uVar6,
+             (uVar6 = *(ushort *)(freeList + 1) - 1, *(short *)(freeList + 1) = (short)uVar6,
              uVar3 < (uVar6 & 0xffff))) {
             iVar5 = uVar3 << 2;
             while( true ) {
               uVar3 = uVar3 + 1;
               *(undefined4 *)(iVar5 + iVar8) = *(undefined4 *)(iVar5 + iVar8 + 4);
               iVar5 = iVar5 + 4;
-              if (*(ushort *)(param_3 + 1) <= uVar3) break;
-              iVar8 = *param_3;
+              if (*(ushort *)(freeList + 1) <= uVar3) break;
+              iVar8 = *freeList;
             }
           }
         }
@@ -9743,7 +9743,7 @@ int psnRaAssignDefinition(param_1, param_2, param_3, unusedArgR6, unusedArgR7, u
         uVar2 = *puVar7;
       }
     }
-    *param_1 = uVar2;
+    *operand = uVar2;
     return;
   }
   return;
@@ -10489,22 +10489,22 @@ int scCallbackGetFlagZero(unusedArgR3, unusedArgR4, param_3)
 }
 
 /* scCallbackAppendFormatted @ 0xc6e90 (88 bytes) */
-int scCallbackAppendFormatted(unusedArgR3, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int scCallbackAppendFormatted(unusedArgR3, prefix, format, formatArg1, formatArg2, formatArg3, formatArg4, formatArg5)
   undefined4 unusedArgR3;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+  undefined4 prefix;
+  undefined4 format;
+  undefined4 formatArg1;
+  undefined4 formatArg2;
+  undefined4 formatArg3;
+  undefined4 formatArg4;
+  undefined4 formatArg5;
 {
   int length;
   undefined1 auStack_118 [264];
   
-  _strcpy(auStack_118,param_2);
+  _strcpy(auStack_118,prefix);
   length = _strlen(auStack_118);
-  return printf_LDBLStub_1a3428(auStack_118 + length,0x100 - length,param_3,param_4,param_5,param_6,param_7,param_8);
+  return printf_LDBLStub_1a3428(auStack_118 + length,0x100 - length,format,formatArg1,formatArg2,formatArg3,formatArg4,formatArg5);
 }
 
 /* scCallbackFopen @ 0xc6ef0 (88 bytes) */
