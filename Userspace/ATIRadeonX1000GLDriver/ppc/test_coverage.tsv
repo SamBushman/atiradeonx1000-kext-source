@@ -2936,7 +2936,7 @@
 0x184bf0	FUN_00184bf0	232	no	indirect call (driver context / vtable / callback)
 0x184cd8	FUN_00184cd8	164	no	indirect call (driver context / vtable / callback)
 0x184d7c	Inst__splitAndMerge	372	yes	
-0x184ef0	FUN_00184ef0	2760	no	indirect call (driver context / vtable / callback)
+0x184ef0	IRInst__foldResultScaleIntoUsers	2760	no	indirect call (driver context / vtable / callback)
 0x1859bc	Inst__tryDp3Add	996	yes	
 0x185da4	FUN_00185da4	1900	no	indirect call (driver context / vtable / callback)
 0x186510	FUN_00186510	1400	no	indirect call (driver context / vtable / callback)

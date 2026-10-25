@@ -3142,7 +3142,7 @@ extern int compareIntsAscending();
 extern int FUN_00184bf0();
 extern int FUN_00184cd8();
 extern int Inst__splitAndMerge();
-extern int FUN_00184ef0();
+extern int IRInst__foldResultScaleIntoUsers();
 extern int Inst__tryDp3Add();
 extern int FUN_00185da4();
 extern int FUN_00186510();
