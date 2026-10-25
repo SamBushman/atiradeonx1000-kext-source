@@ -166,11 +166,11 @@
 17e338	FUN_0017e338	r6	PASS-deep	17e354 bl 0x179c44
 17e338	FUN_0017e338	r7	PASS-deep	17e354 bl 0x179c44
 17e338	FUN_0017e338	r8	PASS-deep	17e354 bl 0x179c44
-17ee0	FUN_00017ee0	r6	PASS-no	17f00 bl 0x1a3ae0	; symbol stub for: _getpid
-17ee0	FUN_00017ee0	r7	PASS-no	17f00 bl 0x1a3ae0	; symbol stub for: _getpid
-17ee0	FUN_00017ee0	r8	PASS-no	17f00 bl 0x1a3ae0	; symbol stub for: _getpid
-17ee0	FUN_00017ee0	r9	PASS-no	17f00 bl 0x1a3ae0	; symbol stub for: _getpid
-17ee0	FUN_00017ee0	r10	PASS-no	17f00 bl 0x1a3ae0	; symbol stub for: _getpid
+17ee0	gld_printApplicationPath	r6	PASS-no	17f00 bl 0x1a3ae0	; symbol stub for: _getpid
+17ee0	gld_printApplicationPath	r7	PASS-no	17f00 bl 0x1a3ae0	; symbol stub for: _getpid
+17ee0	gld_printApplicationPath	r8	PASS-no	17f00 bl 0x1a3ae0	; symbol stub for: _getpid
+17ee0	gld_printApplicationPath	r9	PASS-no	17f00 bl 0x1a3ae0	; symbol stub for: _getpid
+17ee0	gld_printApplicationPath	r10	PASS-no	17f00 bl 0x1a3ae0	; symbol stub for: _getpid
 17f1f8	FUN_0017f1f8	r7	PASS-deep	17f27c bl 0x1054ec
 17f1f8	FUN_0017f1f8	r8	PASS-deep	17f27c bl 0x1054ec
 18120	glCopyPixels_impl	r10	PASS-no	18168 bl 0xa2f0
@@ -218,8 +218,8 @@
 1a3000	R520MachineAssembler__vslot37_closeBranch	r6	PASS-no	1a3020 bl 0x194034
 1a3000	R520MachineAssembler__vslot37_closeBranch	r7	PASS-no	1a3020 bl 0x194034
 1a3000	R520MachineAssembler__vslot37_closeBranch	r8	PASS-no	1a3020 bl 0x194034
-1e280	FUN_0001e280	r6	PASS-no	1e32c bl 0xb620
-1e280	FUN_0001e280	r10	PASS-no	1e3dc bl 0x1db50
+1e280	gld_prepareBufferBacking	r6	PASS-no	1e32c bl 0xb620
+1e280	gld_prepareBufferBacking	r10	PASS-no	1e3dc bl 0x1db50
 1f70	run_routines	r5	PASS-import	__keymgr_set_and_unlock_processwide_ptr	
 1f70	run_routines	r6	PASS-import	__keymgr_set_and_unlock_processwide_ptr	
 1f70	run_routines	r7	PASS-import	__keymgr_set_and_unlock_processwide_ptr	
