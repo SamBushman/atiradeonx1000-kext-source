@@ -1,0 +1,53 @@
+local	FUN_00110020	param_2	valueKey	INFERRED	ValueKey of the output instruction (+0xb0 instruction, +0x20 lane values)
+use	FUN_00110020	uVar10	exportListCount	INFERRED	filled count of the per-kind export list that receives the record	^\s*uVar10\ =\ puVar15\[1\];$	+2
+use	FUN_00110020	uVar10	exportListCount	INFERRED	filled count of the per-kind export list that receives the record	^\s*uVar10\ =\ puVar15\[1\];$@2	+2
+use	FUN_00110020	uVar10	exportListCount	INFERRED	filled count of the per-kind export list that receives the record	^\s*puVar3\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar15,uVar10\);$	+1
+use	FUN_00110020	uVar10	exportListCount	INFERRED	filled count of the per-kind export list that receives the record	^\s*uVar10\ =\ puVar15\[1\];$@3	+2
+use	FUN_00110020	uVar10	exportListCount	INFERRED	filled count of the per-kind export list that receives the record	^\s*_memset\(\(void\ \*\)\(uVar10\ \*\ 4\ \+\ puVar15\[2\]\),0,4\);$	+3
+use	FUN_00110020	puVar15	exportListVector	INFERRED	per-kind export list (program +0x41c, +0x420 or +0x424) chosen by the output kind	^\s*puVar15\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 0x424\);$	+3
+use	FUN_00110020	puVar15	exportListVector	INFERRED	per-kind export list (program +0x41c, +0x420 or +0x424) chosen by the output kind	^\s*puVar15\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 0x420\);$	+3
+use	FUN_00110020	puVar15	exportListVector	INFERRED	per-kind export list (program +0x41c, +0x420 or +0x424) chosen by the output kind	^\s*puVar3\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar15,uVar10\);$	+1
+use	FUN_00110020	puVar15	exportListVector	INFERRED	per-kind export list (program +0x41c, +0x420 or +0x424) chosen by the output kind	^\s*puVar15\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 0x41c\);$	+3
+use	FUN_00110020	puVar15	exportListVector	INFERRED	per-kind export list (program +0x41c, +0x420 or +0x424) chosen by the output kind	^\s*_memset\(\(void\ \*\)\(uVar10\ \*\ 4\ \+\ puVar15\[2\]\),0,4\);$	+3
+use	FUN_00110020	puVar3	exportListSlotRef	INFERRED	slot reference in the per-kind export list	^\s*puVar3\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar15,uVar10\);$	+1
+use	FUN_00110020	puVar3	exportListSlotRef	INFERRED	slot reference in the per-kind export list	^\s*puVar3\ =\ \(undefined4\ \*\)\(uVar10\ \*\ 4\ \+\ puVar15\[2\]\);$	+1
+use	FUN_00110020	puVar3	exportListSlotRef	INFERRED	slot reference in the per-kind export list	^\s*\*puVar3\ =\ piVar8;$	+1
+use	FUN_00110020	uVar12	laneKind	INFERRED	IRLoadInterp lane kind of the lane	^\s*uVar12\ =\ FUN_00104ee4\(\*piVar8,iVar2\);$	+1
+use	FUN_00110020	uVar12	laneKind	INFERRED	IRLoadInterp lane kind of the lane	^\s*puVar3\[2\]\ =\ uVar12;$	+1
+use	FUN_00110020	iVar2	isOutputInst	INFERRED	FUN_0010e634 test: the instruction is an output write	^\s*iVar2\ =\ FUN_0010e634\(piVar14\);$	+2
+use	FUN_00110020	iVar2	kindQuery744	INFERRED	FUN_0010e744 test of the output kind (list +0x41c)	^\s*iVar2\ =\ FUN_0010e744\(piVar14\);$	+2
+use	FUN_00110020	iVar2	kindQuery6e8	INFERRED	FUN_0010e6e8 test of the output kind (list +0x420)	^\s*iVar2\ =\ FUN_0010e6e8\(piVar14\);$	+2
+use	FUN_00110020	iVar2	kindQuery690	INFERRED	FUN_0010e690 test of the output kind (list +0x424)	^\s*iVar2\ =\ FUN_0010e690\(piVar14\);$	+2
+use	FUN_00110020	iVar2	laneNumber	INFERRED	lane counter 0..3	^\s*iVar2\ =\ 0;$	+1
+use	FUN_00110020	iVar2	laneNumber	INFERRED	lane counter 0..3	^\s*if\ \(\*\(char\ \*\)\(iVar2\ \+\ iVar4\ \+\ 0x10\)\ !=\ '\\x01'\)\ \{$	+1
+use	FUN_00110020	iVar2	laneNumber	INFERRED	lane counter 0..3	^\s*uVar12\ =\ FUN_00104ee4\(\*piVar8,iVar2\);$	+2
+use	FUN_00110020	iVar2	laneNumber	INFERRED	lane counter 0..3	^\s*puVar3\[5\]\ =\ iVar2;$	+2
+use	FUN_00110020	iVar2	laneNumber	INFERRED	lane counter 0..3	^\s*bVar1\ =\ iVar2\ !=\ 3;$	+1
+use	FUN_00110020	iVar2	laneNumber	INFERRED	lane counter 0..3	^\s*iVar2\ =\ iVar2\ \+\ 1;$	+1
+use	FUN_00110020	bVar1	moreLanes	INFERRED	loop latch: lane index is not the last (3)	^\s*bVar1\ =\ iVar2\ !=\ 3;$	+1
+use	FUN_00110020	bVar1	moreLanes	INFERRED	loop latch: lane index is not the last (3)	^\s*\}\ while\ \(bVar1\);$	+1
+use	FUN_00110020	uVar5	laneIndexValue	INFERRED	IRLoadInterp lane index of the lane	^\s*uVar5\ =\ FUN_00104180\(\*piVar8,iVar2\);$	+1
+use	FUN_00110020	uVar5	laneIndexValue	INFERRED	IRLoadInterp lane index of the lane	^\s*puVar3\[3\]\ =\ uVar5;$	+1
+use	FUN_00110020	uVar6	semanticCode	INFERRED	FUN_0010e368 code of the instruction's semantic word (+0x13c)	^\s*uVar6\ =\ FUN_0010e368\(\*\(undefined4\ \*\)\(\*piVar8\ \+\ 0x13c\)\);$	+1
+use	FUN_00110020	uVar6	semanticCode	INFERRED	FUN_0010e368 code of the instruction's semantic word (+0x13c)	^\s*puVar3\[8\]\ =\ uVar6;$	+1
+use	FUN_00110020	puVar7	laneRecordSlotRef	INFERRED	slot reference in the program lane record vector (+0x418)	^\s*puVar7\ =\ \(undefined4\ \*\)\(uVar10\ \*\ 4\ \+\ puVar15\[2\]\);$	+1
+use	FUN_00110020	puVar7	laneRecordSlotRef	INFERRED	slot reference in the program lane record vector (+0x418)	^\s*puVar7\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar15,uVar10\);$	+1
+use	FUN_00110020	puVar7	laneRecordSlotRef	INFERRED	slot reference in the program lane record vector (+0x418)	^\s*\*puVar7\ =\ puVar3\ \+\ 1;$	+1
+use	FUN_00110020	piVar8	exportRecord	INFERRED	export record built from the instruction (allocation + 1)	^\s*piVar8\ =\ puVar3\ \+\ 1;$	+1
+use	FUN_00110020	piVar8	exportRecord	INFERRED	export record built from the instruction (allocation + 1)	^\s*FUN_0010e814\(piVar8,piVar14\);$	+1
+use	FUN_00110020	piVar8	exportRecord	INFERRED	export record built from the instruction (allocation + 1)	^\s*\*puVar3\ =\ piVar8;$	+1
+use	FUN_00110020	piVar8	exportRecord	INFERRED	export record built from the instruction (allocation + 1)	^\s*FUN_0010e8e4\(piVar8,param_2\ \+\ 0x20\);$	+1
+use	FUN_00110020	piVar8	exportRecord	INFERRED	export record built from the instruction (allocation + 1)	^\s*iVar4\ =\ FUN_001054ec\(\*piVar8,0\);$	+1
+use	FUN_00110020	piVar8	exportRecord	INFERRED	export record built from the instruction (allocation + 1)	^\s*uVar12\ =\ FUN_00104ee4\(\*piVar8,iVar2\);$	+4
+use	FUN_00110020	uVar9	laneValue	INFERRED	lane value taken from the key (+0x20 + 4 * lane)	^\s*uVar9\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x20\);$	+1
+use	FUN_00110020	uVar9	laneValue	INFERRED	lane value taken from the key (+0x20 + 4 * lane)	^\s*puVar3\[1\]\ =\ uVar9;$	+1
+use	FUN_00110020	uVar11	destRegister	INFERRED	destination register of the output instruction (+0x94)	^\s*uVar11\ =\ \*\(undefined4\ \*\)\(\*piVar8\ \+\ 0x94\);$	+1
+use	FUN_00110020	uVar11	destRegister	INFERRED	destination register of the output instruction (+0x94)	^\s*puVar3\[6\]\ =\ uVar11;$	+1
+use	FUN_00110020	uVar11	destRegister	INFERRED	destination register of the output instruction (+0x94)	^\s*puVar3\[4\]\ =\ uVar11;$	+1
+use	FUN_00110020	piVar14	outputInst	INFERRED	instruction of the key (ValueKey +0xb0)	^\s*piVar14\ =\ \*\(int\ \*\*\)\(param_2\ \+\ 0xb0\);$	+2
+use	FUN_00110020	piVar14	outputInst	INFERRED	instruction of the key (ValueKey +0xb0)	^\s*iVar2\ =\ FUN_001054ec\(piVar14,0\);$	+1
+use	FUN_00110020	piVar14	outputInst	INFERRED	instruction of the key (ValueKey +0xb0)	^\s*FUN_000ef970\(param_1,piVar14\);$	+1
+use	FUN_00110020	piVar14	outputInst	INFERRED	instruction of the key (ValueKey +0xb0)	^\s*\(\*\*\(code\ \*\*\)\(\*piVar14\ \+\ 0xc\)\)\(piVar14,0,\*\(undefined4\ \*\)\(param_1\ \+\ 8\)\);$	+1
+use	FUN_00110020	piVar14	outputInst	INFERRED	instruction of the key (ValueKey +0xb0)	^\s*FUN_0010e814\(piVar8,piVar14\);$	+2
+use	FUN_00110020	piVar14	outputInst	INFERRED	instruction of the key (ValueKey +0xb0)	^\s*iVar2\ =\ FUN_0010e6e8\(piVar14\);$	+1
+use	FUN_00110020	piVar14	outputInst	INFERRED	instruction of the key (ValueKey +0xb0)	^\s*iVar2\ =\ FUN_0010e690\(piVar14\);$	+1

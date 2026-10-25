@@ -1816,36 +1816,36 @@ int Block__getBranchInst(block, param_2, param_3, param_4, param_5, param_6, par
   return *(undefined4 *)(block + 0x130);
 }
 
-/* FUN_000e78c0 @ 0xe78c0 (56 bytes) */
-int FUN_000e78c0(param_1, param_2)
-  int param_1;
-  undefined4 param_2;
+/* Block__setField0xb8AndChildren @ 0xe78c0 (56 bytes) */
+int Block__setField0xb8AndChildren(block, value)
+  int block;
+  undefined4 value;
 {
-  *(undefined4 *)(param_1 + 0xb8) = param_2;
-  if (*(int *)(param_1 + 0x134) != 0) {
-    *(undefined4 *)(*(int *)(param_1 + 0x134) + 0xb8) = param_2;
+  *(undefined4 *)(block + 0xb8) = value;
+  if (*(int *)(block + 0x134) != 0) {
+    *(undefined4 *)(*(int *)(block + 0x134) + 0xb8) = value;
   }
-  if (*(int *)(param_1 + 0x138) != 0) {
-    *(undefined4 *)(*(int *)(param_1 + 0x138) + 0xb8) = param_2;
+  if (*(int *)(block + 0x138) != 0) {
+    *(undefined4 *)(*(int *)(block + 0x138) + 0xb8) = value;
   }
-  if (*(int *)(param_1 + 0x13c) == 0) {
+  if (*(int *)(block + 0x13c) == 0) {
     return;
   }
-  *(undefined4 *)(*(int *)(param_1 + 0x13c) + 0xb8) = param_2;
+  *(undefined4 *)(*(int *)(block + 0x13c) + 0xb8) = value;
   return;
 }
 
-/* FUN_000e78f8 @ 0xe78f8 (44 bytes) */
-int FUN_000e78f8(param_1, param_2)
-  int param_1;
-  int param_2;
+/* Block__isAncestorOf @ 0xe78f8 (44 bytes) */
+int Block__isAncestorOf(ancestor, block)
+  int ancestor;
+  int block;
 {
   do {
-    if (param_2 == param_1) {
+    if (block == ancestor) {
       return 1;
     }
-    param_2 = *(int *)(param_2 + 0xf0);
-  } while (param_2 != 0);
+    block = *(int *)(block + 0xf0);
+  } while (block != 0);
   return 0;
 }
 
@@ -1857,8 +1857,8 @@ int Block__nearestCommonAncestor(param_1, param_2)
   int iVar1;
   int iVar2;
   
-  while ((iVar1 = ((int (*)())FUN_000e78f8)(param_1,param_2), iVar2 = param_1, iVar1 == 0 &&
-         (iVar1 = ((int (*)())FUN_000e78f8)(param_2,param_1), iVar2 = param_2, iVar1 == 0))) {
+  while ((iVar1 = ((int (*)())Block__isAncestorOf)(param_1,param_2), iVar2 = param_1, iVar1 == 0 &&
+         (iVar1 = ((int (*)())Block__isAncestorOf)(param_2,param_1), iVar2 = param_2, iVar1 == 0))) {
     param_1 = *(int *)(param_1 + 0xf0);
     param_2 = *(int *)(param_2 + 0xf0);
   }
@@ -1900,11 +1900,11 @@ int Block__predecessorCount(block)
   return *(undefined4 *)(*(int *)(block + 0xd4) + 4);
 }
 
-/* FUN_000e79e8 @ 0xe79e8 (20 bytes) */
-int FUN_000e79e8(param_1)
-  int param_1;
+/* Block__hasSuccessors @ 0xe79e8 (20 bytes) */
+int Block__hasSuccessors(block)
+  int block;
 {
-  return *(int *)(*(int *)(param_1 + 0xd0) + 4) != 0;
+  return *(int *)(*(int *)(block + 0xd0) + 4) != 0;
 }
 
 /* Block__vectorD4NonEmpty @ 0xe79fc (20 bytes) */
@@ -1955,7 +1955,7 @@ int FUN_000e7a9c(param_1)
   int *piVar3;
   
   piVar3 = (int *)param_1[0x4e];
-  while ((((piVar3 != (int *)0x0 && (iVar2 = ((int (*)())FUN_000e79e8)(piVar3), param_1 = piVar3, iVar2 != 0)) &&
+  while ((((piVar3 != (int *)0x0 && (iVar2 = ((int (*)())Block__hasSuccessors)(piVar3), param_1 = piVar3, iVar2 != 0)) &&
           (iVar2 = (**(code **)(*piVar3 + 0x38))(piVar3), iVar2 == 0)) &&
          (iVar2 = (**(code **)(*piVar3 + 0x3c))(piVar3), iVar2 == 0))) {
     iVar2 = (**(code **)(*piVar3 + 0x2c))(piVar3);
@@ -1991,7 +1991,7 @@ int FUN_000e7b9c(param_1)
   int *piVar3;
   
   piVar3 = *(int **)(param_1 + 0x134);
-  while ((((piVar3 != (int *)0x0 && (iVar2 = ((int (*)())FUN_000e79e8)(piVar3), iVar2 != 0)) &&
+  while ((((piVar3 != (int *)0x0 && (iVar2 = ((int (*)())Block__hasSuccessors)(piVar3), iVar2 != 0)) &&
           (iVar2 = (**(code **)(*piVar3 + 0x38))(piVar3), iVar2 == 0)) &&
          (iVar2 = (**(code **)(*piVar3 + 0x3c))(piVar3), iVar2 == 0))) {
     iVar2 = (**(code **)(*piVar3 + 0x2c))(piVar3);
@@ -2603,8 +2603,8 @@ int IfHeader__canFlatten(ifHeader, outFlag)
   return 0;
 }
 
-/* FUN_000e8938 @ 0xe8938 (132 bytes) */
-int FUN_000e8938(block)
+/* Block__createEntryExitInsts @ 0xe8938 (132 bytes) */
+int Block__createEntryExitInsts(block)
   int block;
 {
   undefined4 *instAlloc;
@@ -2769,16 +2769,16 @@ int FUN_000e8ce4(param_1, param_2)
   return;
 }
 
-/* FUN_000e8d5c @ 0xe8d5c (120 bytes) */
-int FUN_000e8d5c(param_1, param_2)
-  int param_1;
-  undefined4 param_2;
+/* Block__appendPredecessor @ 0xe8d5c (120 bytes) */
+int Block__appendPredecessor(block, predecessor)
+  int block;
+  undefined4 predecessor;
 {
   undefined4 *puVar1;
   uint uVar2;
   uint *puVar3;
   
-  puVar3 = *(uint **)(param_1 + 0xd4);
+  puVar3 = *(uint **)(block + 0xd4);
   uVar2 = puVar3[1];
   if (uVar2 < *puVar3) {
     _memset(uVar2 * 4 + puVar3[2],0,4);
@@ -2788,20 +2788,20 @@ int FUN_000e8d5c(param_1, param_2)
   else {
     puVar1 = (undefined4 *)Vector__elementRefGrow(puVar3,uVar2);
   }
-  *puVar1 = param_2;
+  *puVar1 = predecessor;
   return;
 }
 
-/* FUN_000e8dd4 @ 0xe8dd4 (120 bytes) */
-int FUN_000e8dd4(param_1, param_2)
-  int param_1;
-  undefined4 param_2;
+/* Block__appendSuccessor @ 0xe8dd4 (120 bytes) */
+int Block__appendSuccessor(block, successor)
+  int block;
+  undefined4 successor;
 {
   undefined4 *puVar1;
   uint uVar2;
   uint *puVar3;
   
-  puVar3 = *(uint **)(param_1 + 0xd0);
+  puVar3 = *(uint **)(block + 0xd0);
   uVar2 = puVar3[1];
   if (uVar2 < *puVar3) {
     _memset(uVar2 * 4 + puVar3[2],0,4);
@@ -2811,7 +2811,7 @@ int FUN_000e8dd4(param_1, param_2)
   else {
     puVar1 = (undefined4 *)Vector__elementRefGrow(puVar3,uVar2);
   }
-  *puVar1 = param_2;
+  *puVar1 = successor;
   return;
 }
 
@@ -2824,8 +2824,8 @@ int Block__connect(fromBlock, toBlock)
   
   alreadyLinked = ((int (*)())Block__isInVectorD4Of)(fromBlock,toBlock);
   if (alreadyLinked == 0) {
-    ((int (*)())FUN_000e8dd4)(fromBlock,toBlock);
-    ((int (*)())FUN_000e8d5c)(toBlock,fromBlock);
+    ((int (*)())Block__appendSuccessor)(fromBlock,toBlock);
+    ((int (*)())Block__appendPredecessor)(toBlock,fromBlock);
     return;
   }
   return;
@@ -2864,7 +2864,7 @@ int FUN_000e8eac(param_1, param_2, param_3)
         }
         iVar3 = *(int *)(loopCounterB + *(int *)(iVar4 + 8));
         if (iVar3 != 0) {
-          ((int (*)())FUN_000e8dd4)(param_3,iVar3);
+          ((int (*)())Block__appendSuccessor)(param_3,iVar3);
           loopCounter = 0;
           uVar9 = 0xffffffff;
           for (loopIndex2 = 1; loopIndex2 <= *(uint *)(*(int *)(iVar3 + 0xd4) + 4); loopIndex2 = loopIndex2 + 1) {
@@ -2899,7 +2899,7 @@ LAB_000e9098:
     }
     iVar3 = *(int *)(loopCounterB + *(int *)(iVar4 + 8));
     if (iVar3 != 0) {
-      ((int (*)())FUN_000e8d5c)(param_3,iVar3);
+      ((int (*)())Block__appendPredecessor)(param_3,iVar3);
       loopCounter = 0;
       uVar9 = 0xffffffff;
       for (loopIndex2 = 1; loopIndex2 <= *(uint *)(*(int *)(iVar3 + 0xd0) + 4); loopIndex2 = loopIndex2 + 1) {

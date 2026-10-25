@@ -489,16 +489,16 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 25cec	25cf0	padding	FUN_00025bf0	1	
 25d3c	25d40	padding	FUN_00025bf0	1	
 25d94	25da0	padding	FUN_00025bf0	3	
-25e74	25e80	padding	FUN_00025da0	3	
-25eb4	25ec0	padding	FUN_00025da0	3	
+25e74	25e80	padding	gld_deleteContextProgramObjects	3	
+25eb4	25ec0	padding	gld_deleteContextProgramObjects	3	
 25f58	25f60	padding	FUN_00025ec0	2	
 263bc	263c0	padding	FUN_00025ec0	1	
 26414	26420	padding	FUN_00025ec0	3	
 26434	26440	padding	FUN_00025ec0	3	
-264cc	264d0	padding	FUN_00026440	1	
-26608	26610	padding	FUN_00026440	2	
-2662c	26630	padding	FUN_00026440	1	
-26644	26650	padding	FUN_00026440	3	
+264cc	264d0	padding	gld_bindProgramRecord	1	
+26608	26610	padding	gld_bindProgramRecord	2	
+2662c	26630	padding	gld_bindProgramRecord	1	
+26644	26650	padding	gld_bindProgramRecord	3	
 266a8	266b0	padding	FUN_00026650	2	
 267d8	267e0	padding	FUN_00026650	2	
 26804	26810	padding	FUN_00026650	3	
@@ -506,8 +506,8 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 2695c	26960	padding	FUN_00026650	1	
 2697c	26980	padding	FUN_00026650	1	
 26994	269a0	padding	FUN_00026650	3	
-26b10	26b54	table	FUN_000269a0	17	
-26be8	26bf0	padding	FUN_000269a0	2	
+26b10	26b54	table	gld_getProgramParameter	17	
+26be8	26bf0	padding	gld_getProgramParameter	2	
 26c2c	26c30	padding	FUN_00026bf0	1	
 26c78	26c80	padding	FUN_00026bf0	2	
 26d2c	26d30	padding	FUN_00026bf0	1	
@@ -723,16 +723,16 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 391ec	391f0	padding	gldRendererFamilyString	1	
 39244	39250	padding	_gldGetVersion	3	
 39290	392a4	table	_gldGetString	5	
-39604	39610	padding	FUN_00039330	3	
-39a54	39a60	padding	FUN_00039610	3	
-39d34	39d40	padding	FUN_00039a60	3	
-3a014	3a020	padding	FUN_00039d40	3	
-3a2f4	3a300	padding	FUN_0003a020	3	
-3a5d4	3a5e0	padding	FUN_0003a300	3	
-3a8b4	3a8c0	padding	FUN_0003a5e0	3	
-3ab94	3aba0	padding	FUN_0003a8c0	3	
-3ae74	3ae80	padding	FUN_0003aba0	3	
-3b154	3b160	padding	FUN_0003ae80	3	
+39604	39610	padding	gldPrimInlineLineStrip	3	
+39a54	39a60	padding	gldPrimInlineTriangleFan	3	
+39d34	39d40	padding	gldPrimInlineTriangles	3	
+3a014	3a020	padding	gldPrimInlineTriangleStrip	3	
+3a2f4	3a300	padding	gldPrimInlineQuads	3	
+3a5d4	3a5e0	padding	gldPrimInlineQuadStrip	3	
+3a8b4	3a8c0	padding	gldPrimInlinePolygon	3	
+3ab94	3aba0	padding	gldPrimInlinePoints	3	
+3ae74	3ae80	padding	gldPrimInlineLines	3	
+3b154	3b160	padding	gldPrimInlineLineLoop	3	
 3b24c	3b250	padding	FUN_0003b160	1	
 3b3d4	3b3e0	padding	FUN_0003b280	3	
 3b49c	3b4a0	padding	FUN_0003b280	1	
@@ -2875,9 +2875,9 @@ e0e04	e0e0c	millicode	FUN_000e0cd0	2
 e1480	e1484	millicode	Compiler__timerOutputFileName	1	
 e1a08	e1a0c	eh-pad	FUN_000e1920	1	__Unwind_Resume
 e1b30	e1b34	eh-pad	FUN_000e1a48	1	__Unwind_Resume
-e1bf0	e1bf4	millicode	FUN_000e1b70	1	
-e1c20	e1c24	eh-pad	FUN_000e1b70	1	__Unwind_Resume
-e2084	e2094	other	FUN_000e1fe4	4	
+e1bf0	e1bf4	millicode	Compiler__setHardwareFamily	1	
+e1c20	e1c24	eh-pad	Compiler__setHardwareFamily	1	__Unwind_Resume
+e2084	e2094	other	Compiler__releaseChipAndPools	4	
 e21b8	e21bc	millicode	FUN_000e2094	1	
 e21cc	e21ec	eh-pad	FUN_000e2094	8	0x193cc0,__Unwind_Resume
 e2884	e28f0	other	Block__accept	27	
@@ -2901,7 +2901,7 @@ e67b8	e67d0	table	ILReader__nextInstruction	6
 e7650	e7658	other	ILReader__nextInstruction	2	
 e86d0	e86f0	millicode	Block__verify	8	
 e87dc	e87e4	millicode	LoopHeader__verify	2	
-e89bc	e89dc	eh-pad	FUN_000e8938	8	0x193cc0,__Unwind_Resume
+e89bc	e89dc	eh-pad	Block__createEntryExitInsts	8	0x193cc0,__Unwind_Resume
 e8ad4	e8ad8	millicode	FUN_000e8a08	1	
 e8b20	e8b24	millicode	FUN_000e8a08	1	
 e8b6c	e8b70	millicode	FUN_000e8a08	1	
@@ -2975,10 +2975,10 @@ f293c	f2950	other	FUN_000f1d7c	5	0x193cc0
 f2960	f2974	other	FUN_000f1d7c	5	0x193cc0
 f2984	f2998	other	FUN_000f1d7c	5	0x193cc0
 f29b8	f29d0	eh-pad	FUN_000f1d7c	6	0x193cc0,__Unwind_Resume
-f3cf8	f3d38	table	FUN_000f3c30	16	
+f3cf8	f3d38	table	IRInst__computeSourceLaneMask	16	
 f40d4	f4114	table	FUN_000f403c	16	
 f513c	f515c	eh-pad	Compiler__getOrCreateLoadConstN	8	0x193cc0,__Unwind_Resume
-f6c50	f6c70	eh-pad	FUN_000f6a04	8	0x193cc0,__Unwind_Resume
+f6c50	f6c70	eh-pad	Program__findOrCreateConstInst	8	0x193cc0,__Unwind_Resume
 f8258	f8278	eh-pad	FUN_000f816c	8	0x193cc0,__Unwind_Resume
 f8430	f8450	eh-pad	FUN_000f83cc	8	0x193cc0,__Unwind_Resume
 f8908	f8928	eh-pad	FUN_000f88b4	8	0x193cc0,__Unwind_Resume
@@ -3419,10 +3419,10 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 17f03c	17f040	eh-pad	FUN_0017ee68	1	__Unwind_Resume
 1801a4	1801f8	table	FUN_0017f7ec	21	
 1811d8	1811f8	eh-pad	ValueKey__simplifyModifiersAndAddressing	8	0x193cc0,__Unwind_Resume
-181fdc	181ff8	other	FUN_00181f00	7	0x193cc0
-182010	18202c	other	FUN_00181f00	7	0x193cc0
-182040	182060	eh-pad	FUN_00181f00	8	0x193cc0,__Unwind_Resume
-183a98	183a9c	eh-pad	FUN_00181f00	1	__Unwind_Resume
+181fdc	181ff8	other	Block__flattenAndRebuildAddMulTree	7	0x193cc0
+182010	18202c	other	Block__flattenAndRebuildAddMulTree	7	0x193cc0
+182040	182060	eh-pad	Block__flattenAndRebuildAddMulTree	8	0x193cc0,__Unwind_Resume
+183a98	183a9c	eh-pad	Block__flattenAndRebuildAddMulTree	1	__Unwind_Resume
 1840ac	1840cc	eh-pad	FUN_0018401c	8	0x193cc0,__Unwind_Resume
 18421c	184238	other	FUN_0018413c	7	0x193cc0
 184250	18426c	other	FUN_0018413c	7	0x193cc0
