@@ -1,0 +1,77 @@
+local	extvsStateCacheCreate	param_1	ctx	INFERRED	GL context (callbacks at +0xc and +0x10 allocate, +0x116c holds the shader table)
+local	extvsStateCacheCreate	param_2	shader	INFERRED	EXT_vertex_shader object whose per-slot program records are created
+local	extvsStateCacheCreate	param_3	slotIndex	INFERRED	slot to create the record for, or 0xffffffff for every slot (loop from 0 to the table size)
+local	extvsStateCacheCreate	uVar8	endSlot	INFERRED	one past the last slot to create (slotIndex + 1, or the shader table size)
+local	extvsStateCacheCreate	iVar9	slotByteOffset	INFERRED	slotIndex * 4: offset of the slot's entry in the shader slot table
+local	extvsStateCacheCreate	puVar4	programState	INFERRED	new 700-byte hardware program record (instruction array, register slot arrays and flags are initialised here)
+use	extvsStateCacheCreate	uVar5	instArray	INFERRED	0x1000-byte initial hardware instruction array (0x100 instructions of 16 bytes)	^\s*uVar5\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ 0xc\)\)\(0x1000\);$	+1
+use	extvsStateCacheCreate	uVar5	instArray	INFERRED	0x1000-byte initial hardware instruction array (0x100 instructions of 16 bytes)	^\s*\*\(undefined4\ \*\)\(puVar4\ \+\ 0x1c\)\ =\ uVar5;$	+1
+use	extvsStateCacheCreate	uVar5	tempSlotArray	INFERRED	0x20 register slot entries of 0x28 bytes (programState+0x4c)	^\s*uVar5\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x10\)\)\(0x20,0x28\);$	+2
+use	extvsStateCacheCreate	uVar5	constSlotArray	INFERRED	0x100 register slot entries of 0x28 bytes (programState+0x54)	^\s*uVar5\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x10\)\)\(0x100,0x28\);$	+1
+use	extvsStateCacheCreate	uVar5	constSlotArray	INFERRED	0x100 register slot entries of 0x28 bytes (programState+0x54)	^\s*\*\(undefined4\ \*\)\(puVar4\ \+\ 0x54\)\ =\ uVar5;$	+1
+use	extvsStateCacheCreate	iVar6	hwSlotArray	INFERRED	0x16 slot entries of 0x28 bytes at programState+0x24; entry 0 is marked in use	^\s*iVar6\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x10\)\)\(0x16,0x28\);$	+2
+use	extvsStateCacheCreate	iVar6	hwSlotArray	INFERRED	0x16 slot entries of 0x28 bytes at programState+0x24; entry 0 is marked in use	^\s*\*\(undefined1\ \*\)\(iVar6\ \+\ 0x10\)\ =\ 1;$	+1
+local	extvsStateCacheCreate	puVar7	slotEntry	INFERRED	0x90-byte per-slot table entry; word 0 points at programState
+local	extvsStateCacheCreate	puVar3	clearPtr	INFERRED	cursor that zeroes the first 0x20 words of a new slot entry
+use	extvsStateCacheCreate	puVar1	clearBytePtr	INFERRED	cursor that zeroes the 8-byte flag arrays at programState+0x2e / +0x36	^\s*puVar1\ =\ puVar4;$	+1
+use	extvsStateCacheCreate	puVar1	clearBytePtr	INFERRED	cursor that zeroes the 8-byte flag arrays at programState+0x2e / +0x36	^\s*puVar1\[0x2e\]\ =\ 0;$	+2
+use	extvsStateCacheCreate	puVar1	clearBytePtr	INFERRED	cursor that zeroes the 8-byte flag arrays at programState+0x2e / +0x36	^\s*puVar1\ =\ puVar4;$@2	+1
+use	extvsStateCacheCreate	puVar1	clearBytePtr	INFERRED	cursor that zeroes the 8-byte flag arrays at programState+0x2e / +0x36	^\s*puVar1\[0x36\]\ =\ 0;$	+2
+use	extvsStateCacheCreate	piVar2	shaderFlagPtr	INFERRED	cursor that zeroes the shader flag bytes at +0x6d / +0x71	^\s*piVar2\ =\ param_2;$	+1
+use	extvsStateCacheCreate	piVar2	shaderFlagPtr	INFERRED	cursor that zeroes the shader flag bytes at +0x6d / +0x71	^\s*\*\(undefined1\ \*\)\(\(int\)piVar2\ \+\ 0x6d\)\ =\ 0;$	+2
+use	extvsStateCacheCreate	piVar2	shaderFlagPtr	INFERRED	cursor that zeroes the shader flag bytes at +0x6d / +0x71	^\s*piVar2\ =\ param_2;$@2	+1
+use	extvsStateCacheCreate	piVar2	shaderFlagPtr	INFERRED	cursor that zeroes the shader flag bytes at +0x6d / +0x71	^\s*\*\(undefined1\ \*\)\(\(int\)piVar2\ \+\ 0x71\)\ =\ 0;$	+2
+use	extvsStateCacheCreate	iVar6	clearCount	INFERRED	loop counter of the zeroing loops	^\s*iVar6\ =\ 8;$	+1
+use	extvsStateCacheCreate	iVar6	clearCount	INFERRED	loop counter of the zeroing loops	^\s*iVar6\ =\ iVar6\ \+\ \-1;$	+2
+use	extvsStateCacheCreate	iVar6	clearCount	INFERRED	loop counter of the zeroing loops	^\s*iVar6\ =\ 8;$@2	+1
+use	extvsStateCacheCreate	iVar6	clearCount	INFERRED	loop counter of the zeroing loops	^\s*iVar6\ =\ iVar6\ \+\ \-1;$@2	+2
+use	extvsStateCacheCreate	iVar6	clearCount	INFERRED	loop counter of the zeroing loops	^\s*iVar6\ =\ 4;$	+1
+use	extvsStateCacheCreate	iVar6	clearCount	INFERRED	loop counter of the zeroing loops	^\s*iVar6\ =\ iVar6\ \+\ \-1;$@3	+2
+use	extvsStateCacheCreate	iVar6	clearCount	INFERRED	loop counter of the zeroing loops	^\s*iVar6\ =\ 8;$@3	+1
+use	extvsStateCacheCreate	iVar6	clearCount	INFERRED	loop counter of the zeroing loops	^\s*iVar6\ =\ iVar6\ \+\ \-1;$@4	+2
+use	extvsStateCacheCreate	iVar6	clearCount	INFERRED	loop counter of the zeroing loops	^\s*iVar6\ =\ 0x20;$	+1
+use	extvsStateCacheCreate	iVar6	clearCount	INFERRED	loop counter of the zeroing loops	^\s*iVar6\ =\ iVar6\ \+\ \-1;$@5	+2
+local	FUN_00062940	param_1	glContext	INFERRED	GL context
+local	FUN_00062940	param_2	shader	INFERRED	EXT_vertex_shader object
+local	FUN_00062940	param_3	symbol	INFERRED	symbol list entry of the constant: +4 register slot, +0x38 pointer to the four value words
+local	FUN_00062940	puVar8	values	INFERRED	symbol + 0x38: the four 32-bit components of the constant
+use	FUN_00062940	uVar6	valueX	INFERRED	values[0]	^\s*uVar6\ =\ \*puVar8;$	+1
+use	FUN_00062940	uVar6	valueX	INFERRED	values[0]	^\s*\*\(undefined4\ \*\)\(iVar3\ \+\ a7\[0x22\]\)\ =\ uVar6;$	+1
+use	FUN_00062940	uVar6	valueX	INFERRED	values[0]	^\s*puVar4\ =\ \(undefined4\ \*\)\(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x2758\)\)\(param_1,9,param_3,uVar5,uVar6,a5,iVar3,a7\);$	+1
+use	FUN_00062940	uVar5	valueY	INFERRED	values[1]	^\s*uVar5\ =\ puVar8\[1\];$	+1
+use	FUN_00062940	uVar5	valueY	INFERRED	values[1]	^\s*\*\(undefined4\ \*\)\(iVar2\ \+\ 4\)\ =\ uVar5;$	+2
+local	FUN_00062940	a5	valueZ	INFERRED	values[2]
+use	FUN_00062940	uVar1	valueW	INFERRED	values[3]	^\s*uVar1\ =\ puVar8\[3\];$	+1
+use	FUN_00062940	uVar1	valueW	INFERRED	values[3]	^\s*\*\(undefined4\ \*\)\(iVar2\ \+\ 0xc\)\ =\ uVar1;$	+1
+use	FUN_00062940	iVar3	slotByteOffset	INFERRED	symbol register slot * 0x10: offset of the constant in the program constant block	^\s*iVar3\ =\ \*\(int\ \*\)\(param_3\ \+\ 4\)\ \*\ 0x10;$	+1
+use	FUN_00062940	iVar3	slotByteOffset	INFERRED	symbol register slot * 0x10: offset of the constant in the program constant block	^\s*iVar2\ =\ iVar3\ \+\ a7\[0x22\];$	+2
+use	FUN_00062940	iVar3	slotByteOffset	INFERRED	symbol register slot * 0x10: offset of the constant in the program constant block	^\s*puVar4\ =\ \(undefined4\ \*\)\(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x2758\)\)\(param_1,9,param_3,uVar5,uVar6,a5,iVar3,a7\);$	+1
+use	FUN_00062940	iVar3	cmdBase	INFERRED	command cursor read back after the register packet header was written	^\s*iVar3\ =\ \*\(int\ \*\)\(0x00002748\ \+\ param_1\ \+\ 4\);$	+1
+use	FUN_00062940	iVar3	cmdBase	INFERRED	command cursor read back after the register packet header was written	^\s*\*\(undefined4\ \*\)\(iVar3\ \+\ 0x20\)\ =\ puVar8\[3\];$	+4
+local	FUN_00062940	iVar2	constantAddr	INFERRED	constant block + slotByteOffset: where the four components are stored
+local	FUN_00062940	a7	hwProgramSlot	INFERRED	hardware program slot entry of the shader; word 0x22 is the constant block
+local	FUN_00062940	iVar7	programState	INFERRED	hardware program record *hwProgramSlot
+local	FUN_00062940	puVar4	cmdBuffer	INFERRED	command space returned by the glContext+0x2758 reserve callback (9 words)
+local	FUN_00062940	UNRECOVERED_JUMPTABLE	commitCallback	INFERRED	glContext+0x275c: command buffer commit callback
+local	FUN_0005f540	param_1	ctx	INFERRED	GL context
+local	FUN_0005f540	param_2	shader	INFERRED	EXT_vertex_shader object
+local	FUN_0005f540	iVar11	hwProgram	INFERRED	hardware program record of the shader (+0x18 instruction count, +0x1c instruction array)
+local	FUN_0005f540	iVar3	newInstArray	INFERRED	copy buffer (instruction count * 16 bytes) that receives the rewritten instructions
+local	FUN_0005f540	puVar4	buildJob	INFERRED	job object created by FUN_000774c0 and passed to recordProgramBuildDependencies: instruction array in, rewritten array and counts out
+local	FUN_0005f540	iVar5	buildStatus	INFERRED	result of recordProgramBuildDependencies; zero on success
+local	FUN_0005f540	uVar7	oldInstCount	INFERRED	hwProgram+0x18 before the rewrite
+local	FUN_0005f540	puVar2	instCursor	INFERRED	cursor over the 16-byte hardware instructions
+local	FUN_0005f540	uVar1	instWord0	INFERRED	first word of the instruction: opcode in the low 6 bits
+use	FUN_0005f540	uVar6	srcIndex0	INFERRED	instruction word 1 >> 5 & 0xff: register index of source 0	^\s*uVar6\ =\ puVar2\[1\]\ >>\ 5\ \&\ 0xff;$	+1
+use	FUN_0005f540	uVar6	srcIndex0	INFERRED	instruction word 1 >> 5 & 0xff: register index of source 0	^\s*if\ \(\(\(uVar6\ !=\ uVar10\)\ \&\&\ \(uVar8\ =\ puVar2\[3\]\ >>\ 5\ \&\ 0xff,\ uVar6\ !=\ uVar8\)\)\ \&\&$	+2
+use	FUN_0005f540	uVar6	srcIndex0	INFERRED	instruction word 1 >> 5 & 0xff: register index of source 0	^\s*uVar6\ =\ puVar2\[1\]\ >>\ 5\ \&\ 0xff;$@2	+1
+use	FUN_0005f540	uVar6	srcIndex0	INFERRED	instruction word 1 >> 5 & 0xff: register index of source 0	^\s*if\ \(\(\(uVar6\ !=\ uVar10\)\ \&\&\ \(uVar8\ =\ puVar2\[3\]\ >>\ 5\ \&\ 0xff,\ uVar6\ !=\ uVar8\)\)\ \&\&$@2	+2
+use	FUN_0005f540	uVar10	srcIndex1	INFERRED	instruction word 2 >> 5 & 0xff: register index of source 1	^\s*uVar10\ =\ puVar2\[2\]\ >>\ 5\ \&\ 0xff;$	+3
+use	FUN_0005f540	uVar10	srcIndex1	INFERRED	instruction word 2 >> 5 & 0xff: register index of source 1	^\s*uVar10\ =\ puVar2\[2\]\ >>\ 5\ \&\ 0xff;$@2	+3
+local	FUN_0005f540	uVar8	srcIndex2	INFERRED	instruction word 3 >> 5 & 0xff: register index of source 2
+use	FUN_0005f540	uVar9	scanIndex	INFERRED	instruction count counted down while scanning backwards for the last instruction with a temp-0 source	^\s*uVar9\ =\ uStack_38;$	+1
+use	FUN_0005f540	uVar9	scanIndex	INFERRED	instruction count counted down while scanning backwards for the last instruction with a temp-0 source	^\s*\*\(uint\ \*\)\(iVar11\ \+\ 0xc\)\ =\ uVar9\ \-\ 1;$	+1
+use	FUN_0005f540	uVar9	scanIndex	INFERRED	instruction count counted down while scanning backwards for the last instruction with a temp-0 source	^\s*uVar9\ =\ uVar9\ \-\ 1;$	+2
+use	FUN_0005f540	uVar9	instIndex	INFERRED	0 .. instruction count: instruction being examined	^\s*uVar9\ =\ 0;$	+1
+use	FUN_0005f540	uVar9	instIndex	INFERRED	0 .. instruction count: instruction being examined	^\s*uVar9\ =\ uVar9\ \+\ 1;$	+1
+use	FUN_0005f540	uVar9	instIndex	INFERRED	0 .. instruction count: instruction being examined	^\s*\}\ while\ \(uVar9\ <\ uStack_38\);$	+1

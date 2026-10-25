@@ -1946,73 +1946,73 @@ int Block__popDefinitions(param_1)
   return;
 }
 
-/* FUN_000e7a9c @ 0xe7a9c (256 bytes) */
-int FUN_000e7a9c(param_1)
-  int *param_1;
+/* Block__lastBlockOfChain_e7a9c @ 0xe7a9c (256 bytes) */
+int Block__lastBlockOfChain_e7a9c(block)
+  int *block;
 {
-  int *piVar1;
+  int *firstSuccessorSlot;
   int iVar2;
-  int *piVar3;
+  int *chainBlock;
   
-  piVar3 = (int *)param_1[0x4e];
-  while ((((piVar3 != (int *)0x0 && (iVar2 = ((int (*)())Block__hasSuccessors)(piVar3), param_1 = piVar3, iVar2 != 0)) &&
-          (iVar2 = (**(code **)(*piVar3 + 0x38))(piVar3), iVar2 == 0)) &&
-         (iVar2 = (**(code **)(*piVar3 + 0x3c))(piVar3), iVar2 == 0))) {
-    iVar2 = (**(code **)(*piVar3 + 0x2c))(piVar3);
+  chainBlock = (int *)block[0x4e];
+  while ((((chainBlock != (int *)0x0 && (iVar2 = ((int (*)())Block__hasSuccessors)(chainBlock), block = chainBlock, iVar2 != 0)) &&
+          (iVar2 = (**(code **)(*chainBlock + 0x38))(chainBlock), iVar2 == 0)) &&
+         (iVar2 = (**(code **)(*chainBlock + 0x3c))(chainBlock), iVar2 == 0))) {
+    iVar2 = (**(code **)(*chainBlock + 0x2c))(chainBlock);
     if (iVar2 == 0) {
-      iVar2 = (**(code **)(*piVar3 + 0x24))(piVar3);
+      iVar2 = (**(code **)(*chainBlock + 0x24))(chainBlock);
       if (iVar2 == 0) {
-        piVar1 = (int *)0x0;
-        if (*(int *)(piVar3[0x34] + 4) != 0) {
-          piVar1 = *(int **)(piVar3[0x34] + 8);
+        firstSuccessorSlot = (int *)0x0;
+        if (*(int *)(chainBlock[0x34] + 4) != 0) {
+          firstSuccessorSlot = *(int **)(chainBlock[0x34] + 8);
         }
-        piVar3 = (int *)*piVar1;
-        param_1 = piVar3;
+        chainBlock = (int *)*firstSuccessorSlot;
+        block = chainBlock;
       }
       else {
-        piVar3 = (int *)piVar3[0x4f];
-        param_1 = piVar3;
+        chainBlock = (int *)chainBlock[0x4f];
+        block = chainBlock;
       }
     }
     else {
-      piVar3 = (int *)piVar3[0x55];
-      param_1 = piVar3;
+      chainBlock = (int *)chainBlock[0x55];
+      block = chainBlock;
     }
   }
-  return param_1;
+  return block;
 }
 
-/* FUN_000e7b9c @ 0xe7b9c (252 bytes) */
-int FUN_000e7b9c(param_1)
-  int param_1;
+/* Block__lastBlockOfChain_e7b9c @ 0xe7b9c (252 bytes) */
+int Block__lastBlockOfChain_e7b9c(block)
+  int block;
 {
-  int *piVar1;
+  int *firstSuccessorSlot;
   int iVar2;
-  int *piVar3;
+  int *chainBlock;
   
-  piVar3 = *(int **)(param_1 + 0x134);
-  while ((((piVar3 != (int *)0x0 && (iVar2 = ((int (*)())Block__hasSuccessors)(piVar3), iVar2 != 0)) &&
-          (iVar2 = (**(code **)(*piVar3 + 0x38))(piVar3), iVar2 == 0)) &&
-         (iVar2 = (**(code **)(*piVar3 + 0x3c))(piVar3), iVar2 == 0))) {
-    iVar2 = (**(code **)(*piVar3 + 0x2c))(piVar3);
+  chainBlock = *(int **)(block + 0x134);
+  while ((((chainBlock != (int *)0x0 && (iVar2 = ((int (*)())Block__hasSuccessors)(chainBlock), iVar2 != 0)) &&
+          (iVar2 = (**(code **)(*chainBlock + 0x38))(chainBlock), iVar2 == 0)) &&
+         (iVar2 = (**(code **)(*chainBlock + 0x3c))(chainBlock), iVar2 == 0))) {
+    iVar2 = (**(code **)(*chainBlock + 0x2c))(chainBlock);
     if (iVar2 == 0) {
-      iVar2 = (**(code **)(*piVar3 + 0x24))(piVar3);
+      iVar2 = (**(code **)(*chainBlock + 0x24))(chainBlock);
       if (iVar2 == 0) {
-        piVar1 = (int *)0x0;
-        if (*(int *)(piVar3[0x34] + 4) != 0) {
-          piVar1 = *(int **)(piVar3[0x34] + 8);
+        firstSuccessorSlot = (int *)0x0;
+        if (*(int *)(chainBlock[0x34] + 4) != 0) {
+          firstSuccessorSlot = *(int **)(chainBlock[0x34] + 8);
         }
-        piVar3 = (int *)*piVar1;
+        chainBlock = (int *)*firstSuccessorSlot;
       }
       else {
-        piVar3 = (int *)piVar3[0x4f];
+        chainBlock = (int *)chainBlock[0x4f];
       }
     }
     else {
-      piVar3 = (int *)piVar3[0x55];
+      chainBlock = (int *)chainBlock[0x55];
     }
   }
-  return piVar3;
+  return chainBlock;
 }
 
 /* Block__resolveRedirect @ 0xe7c98 (88 bytes) */
