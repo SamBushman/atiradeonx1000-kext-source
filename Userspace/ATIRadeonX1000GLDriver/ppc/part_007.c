@@ -4394,7 +4394,7 @@ int FUN_00052e60(glContext, param_2, param_3)
   *(uint *)(glContext + 0x44) =
        (param_3 & 1) << 0x13 | (param_3 & 1) << 0x14 | *(uint *)(glContext + 0x44) & 0xffe7ffff;
   if (*(char *)(glContext + 0x1868) == '\0') {
-    FUN_00064f40(glContext,param_2);
+    extvsValidateProgramState(glContext,param_2);
   }
   else {
     (**(code **)((int)((unsigned char *)0x000011cc) + glContext))(glContext);

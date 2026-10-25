@@ -288,22 +288,22 @@
 64a10	FUN_00064a10	r6	PASS-indirect	64d64 bctrl 
 64a10	FUN_00064a10	r7	PASS-indirect	64d64 bctrl 
 64a10	FUN_00064a10	r8	PASS-indirect	64d64 bctrl 
-64f40	FUN_00064f40	r5	PASS-indirect	64fa0 bctrl 
-64f40	FUN_00064f40	r6	PASS-indirect	64fa0 bctrl 
-64f40	FUN_00064f40	r7	PASS-indirect	64fa0 bctrl 
-64f40	FUN_00064f40	r8	PASS-indirect	64fa0 bctrl 
-651e0	FUN_000651e0	r5	PASS-indirect	65218 bl 0x61dc0
-651e0	FUN_000651e0	r6	PASS-indirect	65218 bl 0x61dc0
-651e0	FUN_000651e0	r7	PASS-indirect	65218 bl 0x61dc0
-651e0	FUN_000651e0	r8	PASS-indirect	65218 bl 0x61dc0
-65370	FUN_00065370	r5	PASS-indirect	653a8 bctrl 
-65370	FUN_00065370	r6	PASS-indirect	653a8 bctrl 
-65370	FUN_00065370	r7	PASS-indirect	653a8 bctrl 
-65370	FUN_00065370	r8	PASS-indirect	653a8 bctrl 
-65370	FUN_00065370	r10	PASS-indirect	653a8 bctrl 
-656b0	FUN_000656b0	r7	PASS-no	656dc bl 0x1a3760	; symbol stub for: _memset
-656b0	FUN_000656b0	r8	PASS-no	656dc bl 0x1a3760	; symbol stub for: _memset
-656b0	FUN_000656b0	r9	PASS-no	656dc bl 0x1a3760	; symbol stub for: _memset
+64f40	extvsValidateProgramState	r5	PASS-indirect	64fa0 bctrl 
+64f40	extvsValidateProgramState	r6	PASS-indirect	64fa0 bctrl 
+64f40	extvsValidateProgramState	r7	PASS-indirect	64fa0 bctrl 
+64f40	extvsValidateProgramState	r8	PASS-indirect	64fa0 bctrl 
+651e0	extvsFlushConstantUploads	r5	PASS-indirect	65218 bl 0x61dc0
+651e0	extvsFlushConstantUploads	r6	PASS-indirect	65218 bl 0x61dc0
+651e0	extvsFlushConstantUploads	r7	PASS-indirect	65218 bl 0x61dc0
+651e0	extvsFlushConstantUploads	r8	PASS-indirect	65218 bl 0x61dc0
+65370	ffvpSelectLitProgramVariant	r5	PASS-indirect	653a8 bctrl 
+65370	ffvpSelectLitProgramVariant	r6	PASS-indirect	653a8 bctrl 
+65370	ffvpSelectLitProgramVariant	r7	PASS-indirect	653a8 bctrl 
+65370	ffvpSelectLitProgramVariant	r8	PASS-indirect	653a8 bctrl 
+65370	ffvpSelectLitProgramVariant	r10	PASS-indirect	653a8 bctrl 
+656b0	ffvpSelectPassThroughVariant	r7	PASS-no	656dc bl 0x1a3760	; symbol stub for: _memset
+656b0	ffvpSelectPassThroughVariant	r8	PASS-no	656dc bl 0x1a3760	; symbol stub for: _memset
+656b0	ffvpSelectPassThroughVariant	r9	PASS-no	656dc bl 0x1a3760	; symbol stub for: _memset
 71bc0	evsAssignVertexInputs	r7	PASS-no	71c48 bl 0x70cd0
 79e70	FUN_00079e70	r5	PASS-no	79f10 bl 0x79e10
 79e70	FUN_00079e70	r6	PASS-no	79f10 bl 0x79e10
