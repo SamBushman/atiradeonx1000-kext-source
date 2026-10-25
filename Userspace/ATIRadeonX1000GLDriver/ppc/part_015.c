@@ -3397,9 +3397,9 @@ LAB_000a6564:
 }
 
 /* FUN_000a6860 @ 0xa6860 (1096 bytes) */
-int FUN_000a6860(glContext, param_2)
+int FUN_000a6860(glContext, dirtyMask)
   int glContext;
-  uint param_2;
+  uint dirtyMask;
 {
   undefined4 glContextWord1b84;
   uint uVar1;
@@ -3456,10 +3456,10 @@ int FUN_000a6860(glContext, param_2)
   fVar3 = (float)((double)CONCAT44(0x43300000,i2dLo2) - DOUBLE_001aa1e0);
   fVar4 = (float)((double)CONCAT44(0x43300000,uStack_7c) - DOUBLE_001aa1e0);
   fVar5 = (float)((double)CONCAT44(0x43300000,uStack_84) - DOUBLE_001aa1e0);
-  if (((param_2 & 0x400) == 0) || (iVar20 = 1, ((unsigned char *)0x00001491)[glContext] == '\0')) {
+  if (((dirtyMask & 0x400) == 0) || (iVar20 = 1, ((unsigned char *)0x00001491)[glContext] == '\0')) {
     iVar20 = 0;
   }
-  if (((param_2 & 0x100) == 0) || (iVar21 = 1, ((unsigned char *)0x00001490)[glContext] == '\0')) {
+  if (((dirtyMask & 0x100) == 0) || (iVar21 = 1, ((unsigned char *)0x00001490)[glContext] == '\0')) {
     iVar21 = 0;
   }
   iVar16 = iVar21;
