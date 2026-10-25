@@ -3790,86 +3790,86 @@ int FixedValue__clone(this, param_2, compiler)
 }
 
 /* FixedValue__ctor_1245a8 @ 0x1245a8 (304 bytes) */
-int FixedValue__ctor_1245a8(this, param_2, param_3, param_4, compiler)
+int FixedValue__ctor_1245a8(this, registerIndex, registerFile, baseCtorArg4, compiler)
   undefined4 *this;
-  int param_2;
-  int param_3;
-  undefined4 param_4;
+  int registerIndex;
+  int registerFile;
+  undefined4 baseCtorArg4;
   int compiler;
 {
   undefined4 *allocation;
-  int *piVar2;
-  undefined4 *puVar3;
+  int *entryBlock;
+  undefined4 *loadConstInst;
   undefined4 arena;
   
-  ((int (*)())VRegInfo__ctor_12379c)(this,param_2,param_3,param_4,compiler);
-  this[4] = param_2;
+  ((int (*)())VRegInfo__ctor_12379c)(this,registerIndex,registerFile,baseCtorArg4,compiler);
+  this[4] = registerIndex;
   *this = &PTR_FUN_001ea898;
   *(int *)(compiler + 0x338) = *(int *)(compiler + 0x338) + 1;
-  if (param_3 == 3) {
-    if (*(int *)(*(int *)(compiler + COMP_target) + 0x24) <= param_2) {
+  if (registerFile == 3) {
+    if (*(int *)(*(int *)(compiler + COMP_target) + 0x24) <= registerIndex) {
       Compiler__fail(compiler,10);
     }
   }
-  else if (param_3 == 4) {
-    if (*(int *)(*(int *)(compiler + COMP_target) + 0x28) <= param_2) {
+  else if (registerFile == 4) {
+    if (*(int *)(*(int *)(compiler + COMP_target) + 0x28) <= registerIndex) {
       Compiler__fail(compiler,0xc);
     }
   }
-  else if ((param_3 == 2) && (*(int *)(*(int *)(compiler + COMP_target) + 0x2c) <= param_2)) {
+  else if ((registerFile == 2) && (*(int *)(*(int *)(compiler + COMP_target) + 0x2c) <= registerIndex)) {
     Compiler__fail(compiler,0xb);
   }
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
-  puVar3 = allocation + 1;
+  loadConstInst = allocation + 1;
   *allocation = arena;
-  IRLoadConst__ctor_109614(puVar3,this,compiler);
-  piVar2 = *(int **)(*(int *)(compiler + COMP_currentProgram) + 0x3a0);
-  (**(code **)(*piVar2 + 0xc))(piVar2,puVar3);
-  IRInst__setOperandRef(puVar3,0,this);
-  ((int (*)())FUN_0012306c)(this,puVar3);
+  IRLoadConst__ctor_109614(loadConstInst,this,compiler);
+  entryBlock = *(int **)(*(int *)(compiler + COMP_currentProgram) + 0x3a0);
+  (**(code **)(*entryBlock + 0xc))(entryBlock,loadConstInst);
+  IRInst__setOperandRef(loadConstInst,0,this);
+  ((int (*)())FUN_0012306c)(this,loadConstInst);
   return;
 }
 
 /* FixedValue__ctor_124724 @ 0x124724 (304 bytes) */
-int FixedValue__ctor_124724(this, param_2, param_3, param_4, compiler)
+int FixedValue__ctor_124724(this, registerIndex, registerFile, baseCtorArg4, compiler)
   undefined4 *this;
-  int param_2;
-  int param_3;
-  undefined4 param_4;
+  int registerIndex;
+  int registerFile;
+  undefined4 baseCtorArg4;
   int compiler;
 {
   undefined4 *allocation;
-  int *piVar2;
-  undefined4 *puVar3;
+  int *entryBlock;
+  undefined4 *loadConstInst;
   undefined4 arena;
   
-  ((int (*)())VRegInfo__ctor_12379c)(this,param_2,param_3,param_4,compiler);
-  this[4] = param_2;
+  ((int (*)())VRegInfo__ctor_12379c)(this,registerIndex,registerFile,baseCtorArg4,compiler);
+  this[4] = registerIndex;
   *this = &PTR_FUN_001ea898;
   *(int *)(compiler + 0x338) = *(int *)(compiler + 0x338) + 1;
-  if (param_3 == 3) {
-    if (*(int *)(*(int *)(compiler + COMP_target) + 0x24) <= param_2) {
+  if (registerFile == 3) {
+    if (*(int *)(*(int *)(compiler + COMP_target) + 0x24) <= registerIndex) {
       Compiler__fail(compiler,10);
     }
   }
-  else if (param_3 == 4) {
-    if (*(int *)(*(int *)(compiler + COMP_target) + 0x28) <= param_2) {
+  else if (registerFile == 4) {
+    if (*(int *)(*(int *)(compiler + COMP_target) + 0x28) <= registerIndex) {
       Compiler__fail(compiler,0xc);
     }
   }
-  else if ((param_3 == 2) && (*(int *)(*(int *)(compiler + COMP_target) + 0x2c) <= param_2)) {
+  else if ((registerFile == 2) && (*(int *)(*(int *)(compiler + COMP_target) + 0x2c) <= registerIndex)) {
     Compiler__fail(compiler,0xb);
   }
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
-  puVar3 = allocation + 1;
+  loadConstInst = allocation + 1;
   *allocation = arena;
-  IRLoadConst__ctor_109614(puVar3,this,compiler);
-  piVar2 = *(int **)(*(int *)(compiler + COMP_currentProgram) + 0x3a0);
-  (**(code **)(*piVar2 + 0xc))(piVar2,puVar3);
-  IRInst__setOperandRef(puVar3,0,this);
-  ((int (*)())FUN_0012306c)(this,puVar3);
+  IRLoadConst__ctor_109614(loadConstInst,this,compiler);
+  entryBlock = *(int **)(*(int *)(compiler + COMP_currentProgram) + 0x3a0);
+  (**(code **)(*entryBlock + 0xc))(entryBlock,loadConstInst);
+  IRInst__setOperandRef(loadConstInst,0,this);
+  ((int (*)())FUN_0012306c)(this,loadConstInst);
   return;
 }
 

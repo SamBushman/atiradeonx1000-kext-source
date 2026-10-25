@@ -881,22 +881,22 @@ int ConstKey__compare3(param_1, param_2)
 }
 
 /* ConstKey__compare4 @ 0x127778 (156 bytes) */
-int ConstKey__compare4(param_1, param_2)
-  int param_1;
-  int param_2;
+int ConstKey__compare4(keyA, keyB)
+  int keyA;
+  int keyB;
 {
-  uint uVar1;
-  uint uVar2;
+  uint keyBFlags;
+  uint keyAFlags;
   
-  uVar2 = (uint)*(char *)(param_1 + 0x15c);
-  uVar1 = (uint)*(char *)(param_2 + 0x15c);
-  if ((((((uVar2 & 1) == (uVar1 & 1)) && (*(int *)(param_1 + 0x20) == *(int *)(param_2 + 0x20))) &&
-       ((uVar2 >> 1 & 1) == (uVar1 >> 1 & 1))) &&
-      ((*(int *)(param_1 + 0x38) == *(int *)(param_2 + 0x38) &&
-       ((uVar2 >> 2 & 1) == (uVar1 >> 2 & 1))))) &&
-     ((*(int *)(param_1 + 0x50) == *(int *)(param_2 + 0x50) &&
-      (((uVar2 >> 3 & 1) == (uVar1 >> 3 & 1) &&
-       (*(int *)(param_1 + 0x68) == *(int *)(param_2 + 0x68))))))) {
+  keyAFlags = (uint)*(char *)(keyA + 0x15c);
+  keyBFlags = (uint)*(char *)(keyB + 0x15c);
+  if ((((((keyAFlags & 1) == (keyBFlags & 1)) && (*(int *)(keyA + 0x20) == *(int *)(keyB + 0x20))) &&
+       ((keyAFlags >> 1 & 1) == (keyBFlags >> 1 & 1))) &&
+      ((*(int *)(keyA + 0x38) == *(int *)(keyB + 0x38) &&
+       ((keyAFlags >> 2 & 1) == (keyBFlags >> 2 & 1))))) &&
+     ((*(int *)(keyA + 0x50) == *(int *)(keyB + 0x50) &&
+      (((keyAFlags >> 3 & 1) == (keyBFlags >> 3 & 1) &&
+       (*(int *)(keyA + 0x68) == *(int *)(keyB + 0x68))))))) {
     return 0;
   }
   return 0xffffffff;
