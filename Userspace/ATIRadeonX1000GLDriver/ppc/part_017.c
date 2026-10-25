@@ -91,10 +91,10 @@ int extvsOptimizeProgram(ctx, shader)
   undefined4 *addInst;
   undefined4 *mulInst;
   int iStack00000018;
-  char local_68;
-  char local_67;
-  char local_66;
-  char local_65 [25];
+  char readsX;
+  char readsY;
+  char readsZ;
+  char readsW [25];
   
   symbolTable = shader + 0x1c;
   instCountAtEntry = *(uint *)(shader + 0x14);
@@ -234,11 +234,11 @@ LAB_000ba1a0:
                      (shaderWord20 = *(int *)(instEnd + -0x6c), *(int *)(laterInstPtr + 0x40) == shaderWord20)))) ||
                    ((*(int *)(laterInstPtr + 0x58) == 2 &&
                     (shaderWord20 = *(int *)(instEnd + -0x6c), *(int *)(laterInstPtr + 0x5c) == shaderWord20)))) {
-                  extvsInstReadsTempComponents(symbolTable,laterInstPtr,shaderWord20,&local_68,&local_67,&local_66,local_65);
-                  if (((((bVar1) || ((local_68 == '\0' || (bVar15 != 0)))) &&
-                       ((destEnableY == '\0' || ((local_67 == '\0' || (bVar12 != 0)))))) &&
-                      ((destEnableZ == '\0' || ((local_66 == '\0' || (bVar11 != 0)))))) &&
-                     ((destEnableW == '\0' || ((local_65[0] == '\0' || (bVar10 != 0)))))) {
+                  extvsInstReadsTempComponents(symbolTable,laterInstPtr,shaderWord20,&readsX,&readsY,&readsZ,readsW);
+                  if (((((bVar1) || ((readsX == '\0' || (bVar15 != 0)))) &&
+                       ((destEnableY == '\0' || ((readsY == '\0' || (bVar12 != 0)))))) &&
+                      ((destEnableZ == '\0' || ((readsZ == '\0' || (bVar11 != 0)))))) &&
+                     ((destEnableW == '\0' || ((readsW[0] == '\0' || (bVar10 != 0)))))) {
                     instCount = *(uint *)(shader + 0x14);
                   }
                   else {
@@ -284,11 +284,11 @@ LAB_000ba1a0:
                    (shaderWord20 = *(int *)(instEnd + -0x6c), *(int *)(iVar18 + 0x40) == shaderWord20)))) ||
                  ((*(int *)(iVar18 + 0x58) == 2 &&
                   (shaderWord20 = *(int *)(instEnd + -0x6c), *(int *)(iVar18 + 0x5c) == shaderWord20)))) {
-                extvsInstReadsTempComponents(symbolTable,iVar18,shaderWord20,&local_68,&local_67,&local_66,local_65);
-                if ((((bVar1) || ((local_68 == '\0' || (bVar11 != 0)))) &&
-                    (((destEnableY == '\0' || ((local_67 == '\0' || (bVar12 != 0)))) &&
-                     ((destEnableZ == '\0' || ((local_66 == '\0' || (bVar15 != 0)))))))) &&
-                   ((destEnableW == '\0' || ((local_65[0] == '\0' || (bVar10 != 0)))))) {
+                extvsInstReadsTempComponents(symbolTable,iVar18,shaderWord20,&readsX,&readsY,&readsZ,readsW);
+                if ((((bVar1) || ((readsX == '\0' || (bVar11 != 0)))) &&
+                    (((destEnableY == '\0' || ((readsY == '\0' || (bVar12 != 0)))) &&
+                     ((destEnableZ == '\0' || ((readsZ == '\0' || (bVar15 != 0)))))))) &&
+                   ((destEnableW == '\0' || ((readsW[0] == '\0' || (bVar10 != 0)))))) {
                   instCount = *(uint *)(shader + 0x14);
                 }
                 else {
