@@ -1,0 +1,177 @@
+local	FUN_000a4980	fVar50	distSq	INFERRED	squared distance of a texel centre from the mask centre (x*x + y*y), compared against the squared radius and sqrt'd for the edge ramp index
+local	FUN_000a4980	uVar43	colsLeft	INFERRED	inner-loop down-counter of the mask width
+local	FUN_000a4980	puVar3	mirrorSrc	INFERRED	source byte of the reversed copy loop (index counts up from the start of the ramp)
+local	FUN_000a4980	puVar28	mirrorDst	INFERRED	destination byte of the reversed copy loop (pointer counts down from the end of the ramp)
+local	FUN_000a4980	uVar35	maskWidth	INFERRED	ushort at maskSurface+0x3a, the row width in texels/bytes
+use	FUN_000a4980	uVar33	maskHeight	INFERRED	ushort at maskSurface+0x3c, the number of rows	^\s*uVar33\ =\ \(uint\)\*\(ushort\ \*\)\(iVar38\ \+\ 0x3c\);$	+1
+use	FUN_000a4980	uVar33	maskHeight	INFERRED	ushort at maskSurface+0x3c, the number of rows	^\s*if\ \(uVar33\ !=\ 0\)\ \{$	+1
+use	FUN_000a4980	uVar33	maskHeight	INFERRED	ushort at maskSurface+0x3c, the number of rows	^\s*\}\ while\ \(uVar33\ !=\ uVar30\);$	+1
+use	FUN_000a4980	uVar33	maskHeight	INFERRED	ushort at maskSurface+0x3c, the number of rows	^\s*if\ \(uVar33\ !=\ 0\)\ \{$@2	+1
+use	FUN_000a4980	uVar33	maskHeight	INFERRED	ushort at maskSurface+0x3c, the number of rows	^\s*\}\ while\ \(uVar33\ !=\ uVar16\);$	+1
+use	FUN_000a4980	uVar33	maskHeight	INFERRED	ushort at maskSurface+0x3c, the number of rows	^\s*uStack_bc\ =\ uVar33\ \^\ 0x80000000;$	+1
+use	FUN_000a4980	uVar33	lastRowPtr	INFERRED	pixel data + width*(height-1): the last row, which is written first and copied upwards	^\s*uVar33\ =\ iVar40\ \+\ uVar34\ \*\ \(\*\(ushort\ \*\)\(iVar38\ \+\ 0x3c\)\ \-\ 1\);$	+1
+use	FUN_000a4980	uVar33	lastRowPtr	INFERRED	pixel data + width*(height-1): the last row, which is written first and copied upwards	^\s*_memset\(uVar33,0xff,uVar34\);$	+1
+use	FUN_000a4980	uVar33	lastRowPtr	INFERRED	pixel data + width*(height-1): the last row, which is written first and copied upwards	^\s*uVar26\ =\ uVar33;$	+1
+use	FUN_000a4980	uVar33	lastRowPtr	INFERRED	pixel data + width*(height-1): the last row, which is written first and copied upwards	^\s*\(\(void\ \(\*\)\(\)\)FUN_000a3a60\)\(param_1,uVar16,uVar30,uVar33,piVar23,dVar45,in_f2,in_f3,in_f4,in_f5,in_f6,$	+3
+use	FUN_000a4980	uVar33	lastRowPtr	INFERRED	pixel data + width*(height-1): the last row, which is written first and copied upwards	^\s*\(\(void\ \(\*\)\(\)\)FUN_000a3790\)\(param_1,uVar16,uVar30,uVar33,piVar23,dVar45,in_f2,in_f3,in_f4,in_f5,in_f6,$	+3
+use	FUN_000a4980	uVar33	lastRowPtr	INFERRED	pixel data + width*(height-1): the last row, which is written first and copied upwards	^\s*puVar28\ =\ \(undefined1\ \*\)\(uVar33\ \+\ uVar30\);$	+1
+use	FUN_000a4980	uVar33	lastRowPtr	INFERRED	pixel data + width*(height-1): the last row, which is written first and copied upwards	^\s*puVar3\ =\ \(undefined1\ \*\)\(iVar38\ \+\ uVar33\);$	+1
+use	FUN_000a4980	uVar33	lastRowPtr	INFERRED	pixel data + width*(height-1): the last row, which is written first and copied upwards	^\s*_memset\(uVar33\ \+\ local_118\[0\],0xff,uVar30\ \+\ local_118\[0\]\ \*\ \-2\);$	+2
+use	FUN_000a4980	uVar33	lastRowPtr	INFERRED	pixel data + width*(height-1): the last row, which is written first and copied upwards	^\s*\(\*\*\(code\ \*\*\)\(\(\(unsigned\ char\ \*\)0x00001344\)\ \+\ param_1\)\)\(iVar40,uVar33,uVar34\);$	+1
+use	FUN_000a4980	iVar38	rampBuffer	INFERRED	scratch buffer returned by the allocation hook at glContext+0xc and released through the hook at glContext+0x18	^\s*iVar38\ =\ \(int\)\(uVar49\ >>\ 0x20\);$	+1
+use	FUN_000a4980	iVar38	rampBuffer	INFERRED	scratch buffer returned by the allocation hook at glContext+0xc and released through the hook at glContext+0x18	^\s*\*\(undefined1\ \*\)\(iVar40\ \+\ uVar30\)\ =\ \*\(undefined1\ \*\)\(iVar38\ \+\ iVar41\);$	+1
+use	FUN_000a4980	iVar38	rampBuffer	INFERRED	scratch buffer returned by the allocation hook at glContext+0xc and released through the hook at glContext+0x18	^\s*\(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x18\)\)\(iVar38\);$	+1
+use	FUN_000a4980	iVar40	maskTexture	INFERRED	texture object returned (high word) by FUN_00030c50, the 1-component mask texture	^\s*iVar40\ =\ \(int\)\(\(ulonglong\)uVar47\ >>\ 0x20\);$	+1
+use	FUN_000a4980	iVar40	maskTexture	INFERRED	texture object returned (high word) by FUN_00030c50, the 1-component mask texture	^\s*if\ \(iVar40\ !=\ 0\)\ \{$	+4
+use	FUN_000a4980	iVar40	maskTexture	INFERRED	texture object returned (high word) by FUN_00030c50, the 1-component mask texture	^\s*\*\(undefined1\ \*\)\(iVar40\ \+\ 0x39\)\ =\ 0xff;$	+4
+use	FUN_000a4980	iVar40	maskTexture	INFERRED	texture object returned (high word) by FUN_00030c50, the 1-component mask texture	^\s*\*\(undefined2\ \*\)\(iVar40\ \+\ 0xa2\)\ =\ 0x2600;$	+5
+use	FUN_000a4980	iVar40	pixelCursor	INFERRED	maskSurface+0x80 (pixel data), advanced row by row while the mask is filled	^\s*iVar40\ =\ \*\(int\ \*\)\(iVar38\ \+\ 0x80\);$	+1
+use	FUN_000a4980	iVar40	pixelCursor	INFERRED	maskSurface+0x80 (pixel data), advanced row by row while the mask is filled	^\s*_memset\(iVar40,0xff,\*\(undefined4\ \*\)\(iVar38\ \+\ 0x84\)\);$	+1
+use	FUN_000a4980	iVar40	pixelCursor	INFERRED	maskSurface+0x80 (pixel data), advanced row by row while the mask is filled	^\s*\*\(undefined1\ \*\)\(iVar40\ \+\ iVar38\)\ =\ uVar15;$	+1
+use	FUN_000a4980	iVar40	pixelCursor	INFERRED	maskSurface+0x80 (pixel data), advanced row by row while the mask is filled	^\s*iVar40\ =\ iVar40\ \+\ uVar35;$	+1
+use	FUN_000a4980	iVar40	pixelCursor	INFERRED	maskSurface+0x80 (pixel data), advanced row by row while the mask is filled	^\s*\*\(undefined1\ \*\)\(iVar40\ \+\ uVar30\)\ =\ 0;$	+1
+use	FUN_000a4980	iVar40	pixelCursor	INFERRED	maskSurface+0x80 (pixel data), advanced row by row while the mask is filled	^\s*\*\(undefined1\ \*\)\(iVar40\ \+\ uVar30\)\ =\ \*\(undefined1\ \*\)\(iVar38\ \+\ iVar41\);$	+1
+use	FUN_000a4980	iVar40	pixelCursor	INFERRED	maskSurface+0x80 (pixel data), advanced row by row while the mask is filled	^\s*\*\(undefined1\ \*\)\(iVar40\ \+\ uVar30\)\ =\ 0xff;$	+1
+use	FUN_000a4980	iVar40	pixelCursor	INFERRED	maskSurface+0x80 (pixel data), advanced row by row while the mask is filled	^\s*iVar40\ =\ iVar40\ \+\ uVar35;$@2	+1
+use	FUN_000a4980	iVar40	pixelCursor	INFERRED	maskSurface+0x80 (pixel data), advanced row by row while the mask is filled	^\s*iVar40\ =\ \*\(int\ \*\)\(iVar38\ \+\ 0x80\);$@2	+1
+use	FUN_000a4980	iVar40	pixelCursor	INFERRED	maskSurface+0x80 (pixel data), advanced row by row while the mask is filled	^\s*iVar40\ =\ iVar40\ \+\ \*\(int\ \*\)\(iVar38\ \+\ 0x84\);$	+1
+use	FUN_000a4980	iVar40	pixelCursor	INFERRED	maskSurface+0x80 (pixel data), advanced row by row while the mask is filled	^\s*_memset\(iVar40,0xff,\*\(undefined4\ \*\)\(iVar38\ \+\ 0x84\)\);$@2	+1
+use	FUN_000a4980	iVar40	pixelCursor	INFERRED	maskSurface+0x80 (pixel data), advanced row by row while the mask is filled	^\s*uVar33\ =\ iVar40\ \+\ uVar34\ \*\ \(\*\(ushort\ \*\)\(iVar38\ \+\ 0x3c\)\ \-\ 1\);$	+1
+use	FUN_000a4980	iVar40	pixelCursor	INFERRED	maskSurface+0x80 (pixel data), advanced row by row while the mask is filled	^\s*iVar41\ =\ iVar40\ \+\ uVar34\ \*\ iVar42;$	+2
+use	FUN_000a4980	iVar40	pixelCursor	INFERRED	maskSurface+0x80 (pixel data), advanced row by row while the mask is filled	^\s*iVar41\ =\ iVar40;$	+1
+use	FUN_000a4980	iVar40	pixelCursor	INFERRED	maskSurface+0x80 (pixel data), advanced row by row while the mask is filled	^\s*iVar41\ =\ iVar40\ \+\ uVar34;$	+3
+use	FUN_000a4980	iVar40	pixelCursor	INFERRED	maskSurface+0x80 (pixel data), advanced row by row while the mask is filled	^\s*iVar40\ =\ iVar41;$@2	+1
+use	FUN_000a4980	iVar40	pixelCursor	INFERRED	maskSurface+0x80 (pixel data), advanced row by row while the mask is filled	^\s*iVar40\ =\ \*\(int\ \*\)\(iVar38\ \+\ 0x80\);$@3	+1
+use	FUN_000a4980	iVar40	pixelCursor	INFERRED	maskSurface+0x80 (pixel data), advanced row by row while the mask is filled	^\s*iVar40\ =\ iVar40\ \+\ \*\(int\ \*\)\(iVar38\ \+\ 0x84\)\ \*\ 2;$	+1
+use	FUN_000a4980	iVar40	pixelCursor	INFERRED	maskSurface+0x80 (pixel data), advanced row by row while the mask is filled	^\s*_memset\(iVar40,0xff,\*\(undefined4\ \*\)\(iVar38\ \+\ 0x84\)\);$@3	+1
+use	FUN_000a4980	iVar40	pixelCursor	INFERRED	maskSurface+0x80 (pixel data), advanced row by row while the mask is filled	^\s*iVar42\ =\ uVar26\ \+\ iVar40;$	+1
+use	FUN_000a4980	iVar40	pixelCursor	INFERRED	maskSurface+0x80 (pixel data), advanced row by row while the mask is filled	^\s*iVar40\ =\ iVar40\ \+\ uVar16\ \*\ \(int\)pcVar24;$	+1
+use	FUN_000a4980	iVar40	uploadResult	INFERRED	return value of FUN_000341a0 (non-zero: the mask was accepted and the cache entry's constants are filled)	^\s*iVar40\ =\ FUN_000341a0\(param_1,\*\(undefined4\ \*\)\(iVar38\ \+\ 0x7c\),\*\(undefined4\ \*\)\(param_1\ \+\ 0x276c\),$	+3
+use	FUN_000a4980	iVar41	maskLevel	INFERRED	*(maskTexture+0x30): the level-0 image of the new mask texture	^\s*iVar41\ =\ \*\(int\ \*\)\(iVar40\ \+\ 0x30\);$	+1
+use	FUN_000a4980	iVar41	maskLevel	INFERRED	*(maskTexture+0x30): the level-0 image of the new mask texture	^\s*\*\(undefined2\ \*\)\(iVar40\ \+\ 0x74\)\ =\ \*\(undefined2\ \*\)\(iVar41\ \+\ 0xb0\);$	+4
+use	FUN_000a4980	iVar41	rampIndex	INFERRED	(int)(radius - distance + 0.5): index into the edge ramp	^\s*iVar41\ =\ \(int\)\(\(fVar4\ \-\ fVar50\)\ \+\ 0\.5\);$	+3
+use	FUN_000a4980	iVar41	rowsEnd	INFERRED	pixelCursor + rowBytes*blockRows: end of the zero-filled rows	^\s*iVar41\ =\ iVar40\ \+\ uVar34\ \*\ iVar42;$	+1
+use	FUN_000a4980	iVar41	rowsEnd	INFERRED	pixelCursor + rowBytes*blockRows: end of the zero-filled rows	^\s*iVar41\ =\ iVar40;$	+1
+use	FUN_000a4980	iVar41	rowsEnd	INFERRED	pixelCursor + rowBytes*blockRows: end of the zero-filled rows	^\s*iVar41\ =\ iVar40\ \+\ uVar34;$	+1
+use	FUN_000a4980	iVar41	rowsEnd	INFERRED	pixelCursor + rowBytes*blockRows: end of the zero-filled rows	^\s*iVar40\ =\ iVar41;$	+1
+use	FUN_000a4980	iVar41	rowsEnd	INFERRED	pixelCursor + rowBytes*blockRows: end of the zero-filled rows	^\s*iVar40\ =\ iVar41;$@2	+1
+use	FUN_000a4980	iVar41	blocksLeft	INFERRED	count of 32 pattern rows still to emit (counts down from 0x20)	^\s*iVar41\ =\ 0x20;$	+1
+use	FUN_000a4980	iVar41	blocksLeft	INFERRED	count of 32 pattern rows still to emit (counts down from 0x20)	^\s*iVar41\ =\ iVar41\ \+\ \-1;$	+1
+use	FUN_000a4980	iVar41	blocksLeft	INFERRED	count of 32 pattern rows still to emit (counts down from 0x20)	^\s*\}\ while\ \(iVar41\ !=\ 0\);$	+1
+use	FUN_000a4980	iVar42	blockRows	INFERRED	mask height >> 4: rows per 1/16th block	^\s*iVar42\ =\ \(int\)\(uint\)\*\(ushort\ \*\)\(iVar38\ \+\ 0x3c\)\ >>\ 4;$	+1
+use	FUN_000a4980	iVar42	blockRows	INFERRED	mask height >> 4: rows per 1/16th block	^\s*iVar41\ =\ iVar40\ \+\ uVar34\ \*\ iVar42;$	+2
+use	FUN_000a4980	iVar42	blockRows	INFERRED	mask height >> 4: rows per 1/16th block	^\s*iVar18\ =\ iVar42;$	+1
+use	FUN_000a4980	iVar42	blockRows	INFERRED	mask height >> 4: rows per 1/16th block	^\s*iVar18\ =\ iVar42\ \+\ \-1;$	+1
+use	FUN_000a4980	iVar18	rowsThisBlock	INFERRED	blockRows, minus one for the last of the 16 blocks	^\s*iVar18\ =\ iVar42;$	+1
+use	FUN_000a4980	iVar18	rowsThisBlock	INFERRED	blockRows, minus one for the last of the 16 blocks	^\s*iVar18\ =\ iVar42\ \+\ \-1;$	+1
+use	FUN_000a4980	iVar18	rowsThisBlock	INFERRED	blockRows, minus one for the last of the 16 blocks	^\s*if\ \(0\ <\ iVar18\)\ \{$	+1
+use	FUN_000a4980	iVar18	rowsThisBlock	INFERRED	blockRows, minus one for the last of the 16 blocks	^\s*\}\ while\ \(iVar18\ !=\ iVar36\);$	+1
+use	FUN_000a4980	iVar18	patternCol	INFERRED	column counter 0..31 of the 32x32 stipple expansion	^\s*iVar18\ =\ 0;$	+1
+use	FUN_000a4980	iVar18	patternCol	INFERRED	column counter 0..31 of the 32x32 stipple expansion	^\s*bVar1\ =\ iVar18\ !=\ 0x1f;$	+1
+use	FUN_000a4980	iVar18	patternCol	INFERRED	column counter 0..31 of the 32x32 stipple expansion	^\s*iVar18\ =\ iVar18\ \+\ 1;$	+1
+local	FUN_000a4980	iVar19	fillCol	INFERRED	inner counter of the byte-fill loop
+use	FUN_000a4980	bVar1	maskIsHardEdged	INFERRED	cacheEntry[1] == 0: the mask is built without the soft edge ramp	^\s*bVar1\ =\ pcVar39\[1\]\ ==\ '\\0';$	+1
+use	FUN_000a4980	bVar1	maskIsHardEdged	INFERRED	cacheEntry[1] == 0: the mask is built without the soft edge ramp	^\s*if\ \(bVar1\)\ \{$	+1
+use	FUN_000a4980	bVar1	maskIsHardEdged	INFERRED	cacheEntry[1] == 0: the mask is built without the soft edge ramp	^\s*bVar1\ =\ uVar16\ ==\ 0;$	+2
+use	FUN_000a4980	bVar1	maskIsHardEdged	INFERRED	cacheEntry[1] == 0: the mask is built without the soft edge ramp	^\s*if\ \(bVar1\)\ \{$@3	+1
+use	FUN_000a4980	bVar1	notLastBlock	INFERRED	block index != 0xf	^\s*bVar1\ =\ iVar38\ !=\ 0xf;$	+1
+use	FUN_000a4980	bVar1	notLastBlock	INFERRED	block index != 0xf	^\s*\}\ while\ \(bVar1\);$	+1
+use	FUN_000a4980	bVar1	notLastPatternCol	INFERRED	patternCol != 0x1f	^\s*bVar1\ =\ iVar18\ !=\ 0x1f;$	+1
+use	FUN_000a4980	bVar1	notLastPatternCol	INFERRED	patternCol != 0x1f	^\s*\}\ while\ \(bVar1\);$@2	+1
+use	FUN_000a4980	fVar11	firstCoord	INFERRED	0.5 - radius: coordinate of the first texel centre relative to the mask centre	^\s*fVar11\ =\ 0\.5\ \-\ fVar4;$	+1
+use	FUN_000a4980	fVar11	firstCoord	INFERRED	0.5 - radius: coordinate of the first texel centre relative to the mask centre	^\s*fVar5\ =\ fVar11;$	+1
+use	FUN_000a4980	fVar11	firstCoord	INFERRED	0.5 - radius: coordinate of the first texel centre relative to the mask centre	^\s*fVar12\ =\ fVar11;$	+1
+use	FUN_000a4980	fVar11	firstCoord	INFERRED	0.5 - radius: coordinate of the first texel centre relative to the mask centre	^\s*fVar12\ =\ fVar11;$@2	+1
+use	FUN_000a4980	fVar11	firstCoord	INFERRED	0.5 - radius: coordinate of the first texel centre relative to the mask centre	^\s*fVar13\ =\ fVar11;$	+1
+use	FUN_000a4980	fVar12	colCoord	INFERRED	running column coordinate (starts at firstCoord, +1.0 per texel)	^\s*fVar12\ =\ fVar11;$	+1
+use	FUN_000a4980	fVar12	colCoord	INFERRED	running column coordinate (starts at firstCoord, +1.0 per texel)	^\s*if\ \(fVar4\ \*\ fVar4\ <=\ fVar12\ \*\ fVar12\ \+\ fVar5\ \*\ fVar5\)\ \{$	+1
+use	FUN_000a4980	fVar12	colCoord	INFERRED	running column coordinate (starts at firstCoord, +1.0 per texel)	^\s*fVar12\ =\ fVar12\ \+\ 1\.0;$	+1
+use	FUN_000a4980	fVar12	rowCoord	INFERRED	running row coordinate (starts at firstCoord, +1.0 per row)	^\s*fVar12\ =\ fVar11;$@2	+1
+use	FUN_000a4980	fVar12	rowCoord	INFERRED	running row coordinate (starts at firstCoord, +1.0 per row)	^\s*fVar50\ =\ fVar13\ \*\ fVar13\ \+\ fVar12\ \*\ fVar12;$	+1
+use	FUN_000a4980	fVar12	rowCoord	INFERRED	running row coordinate (starts at firstCoord, +1.0 per row)	^\s*fVar12\ =\ fVar12\ \+\ 1\.0;$@2	+1
+local	FUN_000a4980	fVar13	colCoord2	INFERRED	running column coordinate in the soft-edge loop
+use	FUN_000a4980	fVar5	innerLimitSq	INFERRED	squared radius below which the mask is fully covered (0.0 for the hard-edged mask)	^\s*fVar5\ =\ 0\.0;$	+1
+use	FUN_000a4980	fVar5	innerLimitSq	INFERRED	squared radius below which the mask is fully covered (0.0 for the hard-edged mask)	^\s*fVar5\ =\ 0\.0;$@2	+1
+use	FUN_000a4980	fVar5	innerLimitSq	INFERRED	squared radius below which the mask is fully covered (0.0 for the hard-edged mask)	^\s*fVar5\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uStack_dc\)\ \-\ 4503601774854144\.0\)\ \-\ 0\.5;$	+2
+use	FUN_000a4980	fVar5	innerLimitSq	INFERRED	squared radius below which the mask is fully covered (0.0 for the hard-edged mask)	^\s*if\ \(fVar5\ <=\ fVar50\)\ \{$	+1
+use	FUN_000a4980	fVar5	rowCoord2	INFERRED	running row coordinate in the hard-edged loop	^\s*fVar5\ =\ fVar11;$	+1
+use	FUN_000a4980	fVar5	rowCoord2	INFERRED	running row coordinate in the hard-edged loop	^\s*if\ \(fVar4\ \*\ fVar4\ <=\ fVar12\ \*\ fVar12\ \+\ fVar5\ \*\ fVar5\)\ \{$	+1
+use	FUN_000a4980	fVar5	rowCoord2	INFERRED	running row coordinate in the hard-edged loop	^\s*fVar5\ =\ fVar5\ \+\ 1\.0;$	+1
+use	FUN_000a4980	uVar15	maskValue	INFERRED	0xff inside the circle, 0 outside	^\s*uVar15\ =\ 0xff;$	+1
+use	FUN_000a4980	uVar15	maskValue	INFERRED	0xff inside the circle, 0 outside	^\s*uVar15\ =\ 0;$	+1
+use	FUN_000a4980	uVar15	maskValue	INFERRED	0xff inside the circle, 0 outside	^\s*\*\(undefined1\ \*\)\(iVar40\ \+\ iVar38\)\ =\ uVar15;$	+1
+use	FUN_000a4980	uVar15	stippleByte	INFERRED	0xff when the pattern bit is set, else 0	^\s*uVar15\ =\ 0xff;$@2	+1
+use	FUN_000a4980	uVar15	stippleByte	INFERRED	0xff when the pattern bit is set, else 0	^\s*uVar15\ =\ 0;$@2	+1
+use	FUN_000a4980	uVar15	stippleByte	INFERRED	0xff when the pattern bit is set, else 0	^\s*\*\(undefined1\ \*\)\(iVar42\ \+\ iVar19\)\ =\ uVar15;$	+1
+use	FUN_000a4980	dVar44	engineFloat2e20	INFERRED	float at engineState+0x2e20 (the value that is quantised to the 0x13e8..0x13ec / step 0x13f0 grid)	^\s*dVar44\ =\ \(double\)\*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x00002e20\)\ \+\ iVar41\);$	+1
+use	FUN_000a4980	dVar44	engineFloat2e20	INFERRED	float at engineState+0x2e20 (the value that is quantised to the 0x13e8..0x13ec / step 0x13f0 grid)	^\s*if\ \(\(dVar46\ <\ dVar44\)\ \&\&$	+3
+use	FUN_000a4980	dVar44	engineFloat2e20	INFERRED	float at engineState+0x2e20 (the value that is quantised to the 0x13e8..0x13ec / step 0x13f0 grid)	^\s*uStack_9c\ =\ \(uint\)\(int\)\(\(float\)\(\(double\)\(float\)\(dVar44\ \-\ dVar46\)\ /$	+2
+use	FUN_000a4980	dVar44	engineFloat2e20	INFERRED	float at engineState+0x2e20 (the value that is quantised to the 0x13e8..0x13ec / step 0x13f0 grid)	^\s*dVar44\ =\ \(double\)\*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x00002e20\)\ \+\ iVar41\);$@2	+1
+use	FUN_000a4980	dVar44	engineFloat2e20	INFERRED	float at engineState+0x2e20 (the value that is quantised to the 0x13e8..0x13ec / step 0x13f0 grid)	^\s*if\ \(\(dVar46\ <\ dVar44\)\ \&\&$@2	+3
+use	FUN_000a4980	dVar44	engineFloat2e20	INFERRED	float at engineState+0x2e20 (the value that is quantised to the 0x13e8..0x13ec / step 0x13f0 grid)	^\s*uStack_ac\ =\ \(uint\)\(int\)\(\(float\)\(\(double\)\(float\)\(dVar44\ \-\ dVar46\)\ /$	+2
+use	FUN_000a4980	dVar45	contextFloatArg	INFERRED	float at glContext+0xe0 / +0x104 passed to the ramp builders	^\s*dVar45\ =\ \(double\)\*\(float\ \*\)\(param_1\ \+\ 0xe0\);$	+1
+use	FUN_000a4980	dVar45	contextFloatArg	INFERRED	float at glContext+0xe0 / +0x104 passed to the ramp builders	^\s*\(\(void\ \(\*\)\(\)\)FUN_000a3a60\)\(param_1,\(int\)uVar49,uVar34,uVar16,local_118,dVar45,in_f2,in_f3,in_f4,in_f5,$	+3
+use	FUN_000a4980	dVar45	contextFloatArg	INFERRED	float at glContext+0xe0 / +0x104 passed to the ramp builders	^\s*dVar45\ =\ \(double\)\*\(float\ \*\)\(param_1\ \+\ 0x104\);$	+1
+use	FUN_000a4980	dVar45	contextFloatArg	INFERRED	float at glContext+0xe0 / +0x104 passed to the ramp builders	^\s*\(\(void\ \(\*\)\(\)\)FUN_000a3790\)\(param_1,\(int\)uVar49,uVar34,uVar16,local_118,dVar45,in_f2,in_f3,in_f4,in_f5,$	+3
+use	FUN_000a4980	dVar45	quantizedValue	INFERRED	engineFloat2e20 snapped to min + step*round((v-min)/step), passed to the ramp builders	^\s*dVar45\ =\ dVar46;$	+1
+use	FUN_000a4980	dVar45	quantizedValue	INFERRED	engineFloat2e20 snapped to min + step*round((v-min)/step), passed to the ramp builders	^\s*if\ \(\(dVar46\ <\ dVar44\)\ \&\&$	+3
+use	FUN_000a4980	dVar45	quantizedValue	INFERRED	engineFloat2e20 snapped to min + step*round((v-min)/step), passed to the ramp builders	^\s*dVar45\ =\ \(double\)\(float\)\(\(double\)\*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x000013f0\)\ \+\ param_1\)\ \*$	+3
+use	FUN_000a4980	dVar45	quantizedValue	INFERRED	engineFloat2e20 snapped to min + step*round((v-min)/step), passed to the ramp builders	^\s*\(\(void\ \(\*\)\(\)\)FUN_000a3a60\)\(param_1,uVar16,uVar30,uVar33,piVar23,dVar45,in_f2,in_f3,in_f4,in_f5,in_f6,$	+3
+use	FUN_000a4980	dVar45	quantizedValue	INFERRED	engineFloat2e20 snapped to min + step*round((v-min)/step), passed to the ramp builders	^\s*dVar45\ =\ dVar46;$@2	+1
+use	FUN_000a4980	dVar45	quantizedValue	INFERRED	engineFloat2e20 snapped to min + step*round((v-min)/step), passed to the ramp builders	^\s*if\ \(\(dVar46\ <\ dVar44\)\ \&\&$@2	+3
+use	FUN_000a4980	dVar45	quantizedValue	INFERRED	engineFloat2e20 snapped to min + step*round((v-min)/step), passed to the ramp builders	^\s*dVar45\ =\ \(double\)\(float\)\(\(double\)\*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x000013f0\)\ \+\ param_1\)\ \*$@2	+3
+use	FUN_000a4980	dVar45	quantizedValue	INFERRED	engineFloat2e20 snapped to min + step*round((v-min)/step), passed to the ramp builders	^\s*\(\(void\ \(\*\)\(\)\)FUN_000a3790\)\(param_1,uVar16,uVar30,uVar33,piVar23,dVar45,in_f2,in_f3,in_f4,in_f5,in_f6,$	+3
+use	FUN_000a4980	uVar25	levelCount	INFERRED	number of mask images in use (0, +1 per extra image, max 4 when more than one)	^\s*uVar25\ =\ 0;$	+1
+use	FUN_000a4980	uVar25	levelCount	INFERRED	number of mask images in use (0, +1 per extra image, max 4 when more than one)	^\s*uVar25\ =\ 1;$	+1
+use	FUN_000a4980	uVar25	levelCount	INFERRED	number of mask images in use (0, +1 per extra image, max 4 when more than one)	^\s*uVar25\ =\ 1;$@2	+1
+use	FUN_000a4980	uVar25	levelCount	INFERRED	number of mask images in use (0, +1 per extra image, max 4 when more than one)	^\s*uVar25\ =\ uVar25\ \+\ 1;$	+1
+use	FUN_000a4980	uVar25	levelCount	INFERRED	number of mask images in use (0, +1 per extra image, max 4 when more than one)	^\s*uVar25\ =\ uVar25\ \+\ 1;$@2	+1
+use	FUN_000a4980	uVar25	levelCount	INFERRED	number of mask images in use (0, +1 per extra image, max 4 when more than one)	^\s*uVar26\ =\ uVar25;$	+2
+use	FUN_000a4980	uVar25	levelCount	INFERRED	number of mask images in use (0, +1 per extra image, max 4 when more than one)	^\s*if\ \(uVar25\ <\ 2\)\ \{$	+1
+use	FUN_000a4980	uVar25	levelCount	INFERRED	number of mask images in use (0, +1 per extra image, max 4 when more than one)	^\s*if\ \(1\ <\ uVar25\)\ \{$@2	+1
+use	FUN_000a4980	uVar25	levelCount	INFERRED	number of mask images in use (0, +1 per extra image, max 4 when more than one)	^\s*if\ \(1\ <\ uVar25\)\ \{$@3	+1
+use	FUN_000a4980	uVar25	levelCount	INFERRED	number of mask images in use (0, +1 per extra image, max 4 when more than one)	^\s*if\ \(1\ <\ uVar25\)\ \{$@4	+1
+use	FUN_000a4980	uVar25	levelCount	INFERRED	number of mask images in use (0, +1 per extra image, max 4 when more than one)	^\s*if\ \(1\ <\ uVar25\)\ \{$@5	+1
+use	FUN_000a4980	uVar25	levelCount	INFERRED	number of mask images in use (0, +1 per extra image, max 4 when more than one)	^\s*if\ \(1\ <\ uVar25\)\ \{$@6	+1
+use	FUN_000a4980	uVar25	levelFormat	INFERRED	byte at maskSurface+0x31: the texture format code	^\s*uVar25\ =\ \(uint\)\*\(byte\ \*\)\(\*\(int\ \*\)\(pcVar39\ \+\ 0xbc\)\ \+\ 0x31\);$	+1
+use	FUN_000a4980	uVar25	levelFormat	INFERRED	byte at maskSurface+0x31: the texture format code	^\s*iVar40\ =\ 1\ \-\ \(\(int\)\-\(uVar25\ \^\ 2\)\ >>\ 0x1f\);$	+2
+use	FUN_000a4980	uVar25	levelFormat	INFERRED	byte at maskSurface+0x31: the texture format code	^\s*\*\(uint\ \*\)\(pcVar39\ \+\ 0xd0\)\ =\ uVar25;$	+1
+use	FUN_000a4980	uVar25	levelFormat	INFERRED	byte at maskSurface+0x31: the texture format code	^\s*if\ \(\(\(\*\(uint\ \*\)\(pcVar39\ \+\ 0x14\)\ \&\ 0xffff0000\)\ ==\ 0\)\ \&\&\ \(uVar25\ !=\ 3\)\)\ \{$	+1
+use	FUN_000a4980	uVar25	levelFormat	INFERRED	byte at maskSurface+0x31: the texture format code	^\s*\*\(uint\ \*\)\(pcVar39\ \+\ 0xc4\)\ =\ uVar25;$	+1
+use	FUN_000a4980	uVar25	levelFormat	INFERRED	byte at maskSurface+0x31: the texture format code	^\s*\*\(uint\ \*\)\(pcVar39\ \+\ 0xd0\)\ =\ uVar25;$@2	+1
+use	FUN_000a4980	uVar25	levelFormat	INFERRED	byte at maskSurface+0x31: the texture format code	^\s*if\ \(\(pcVar39\[0x2a\]\ !=\ 0\)\ \|\|\ \(uVar25\ ==\ 3\)\)\ \{$	+2
+use	FUN_000a4980	uVar25	flagBits120	INFERRED	cacheEntry+0x120 with bit 4 replaced by cacheEntry[0x2a]	^\s*uVar25\ =\ \-\(uint\)\(byte\)pcVar39\[0x2a\]\ >>\ 0x1b\ \&\ 0x10\ \|\ \*\(uint\ \*\)\(pcVar39\ \+\ 0x120\)\ \&\ 0xffffffef;$	+1
+use	FUN_000a4980	uVar25	flagBits120	INFERRED	cacheEntry+0x120 with bit 4 replaced by cacheEntry[0x2a]	^\s*\*\(uint\ \*\)\(pcVar39\ \+\ 0x134\)\ =\ uVar25;$	+6
+use	FUN_000a4980	uVar26	levelCountClamped	INFERRED	levelCount, replaced by 4 when more than one level	^\s*uVar26\ =\ uVar25;$	+1
+use	FUN_000a4980	uVar26	levelCountClamped	INFERRED	levelCount, replaced by 4 when more than one level	^\s*uVar26\ =\ 4;$	+1
+use	FUN_000a4980	uVar26	levelCountClamped	INFERRED	levelCount, replaced by 4 when more than one level	^\s*uVar47\ =\ FUN_00030c50\(param_1,uVar21,uVar27,uVar26,0x1909,1,\(\(unsigned\ char\ \*\)0x00001401U\),uVar29\);$	+1
+use	FUN_000a4980	uVar26	levelCountClamped	INFERRED	levelCount, replaced by 4 when more than one level	^\s*uVar26\ =\ uVar16;$	+1
+use	FUN_000a4980	uVar26	levelCountClamped	INFERRED	levelCount, replaced by 4 when more than one level	^\s*uVar26\ =\ uVar33;$	+1
+use	FUN_000a4980	uVar26	levelCountClamped	INFERRED	levelCount, replaced by 4 when more than one level	^\s*uVar26\ =\ 0;$	+1
+use	FUN_000a4980	uVar26	levelCountClamped	INFERRED	levelCount, replaced by 4 when more than one level	^\s*iVar42\ =\ uVar26\ \+\ iVar40;$	+1
+use	FUN_000a4980	uVar26	levelCountClamped	INFERRED	levelCount, replaced by 4 when more than one level	^\s*uVar26\ =\ uVar26\ \+\ iVar38;$	+1
+use	FUN_000a4980	uVar26	levelCountClamped	INFERRED	levelCount, replaced by 4 when more than one level	^\s*iVar40\ =\ FUN_000341a0\(param_1,\*\(undefined4\ \*\)\(iVar38\ \+\ 0x7c\),\*\(undefined4\ \*\)\(param_1\ \+\ 0x276c\),$	+2
+use	FUN_000a4980	uVar26	flagBits114	INFERRED	cacheEntry+0x114 with bit 4 replaced by the (+0x14 high half != 0) test	^\s*uVar26\ =\ \(uint\)\(\(\*\(uint\ \*\)\(pcVar39\ \+\ 0x14\)\ \&\ 0xffff0000\)\ !=\ 0\)\ \*\ 0x10\ \|$	+1
+use	FUN_000a4980	uVar26	flagBits114	INFERRED	cacheEntry+0x114 with bit 4 replaced by the (+0x14 high half != 0) test	^\s*\*\(uint\ \*\)\(pcVar39\ \+\ 0x11c\)\ =\ uVar26;$	+1
+use	FUN_000a4980	uVar26	flagBits114	INFERRED	cacheEntry+0x114 with bit 4 replaced by the (+0x14 high half != 0) test	^\s*\*\(uint\ \*\)\(pcVar39\ \+\ 0x114\)\ =\ uVar26;$	+2
+use	FUN_000a4980	uVar27	entryFlag15	INFERRED	0/1 test of the 0x2e28 short, stored to cacheEntry[0x15]	^\s*if\ \(\(\(\(\(unsigned\ char\ \*\)0x00002e2c\)\[iVar38\]\ ==\ '\\0'\)\ \|\|\ \(\(\*\(uint\ \*\)\(param_1\ \+\ 0x44\)\ \&\ 0x20000\)\ !=\ 0\)\)\ \|\|$	+3
+use	FUN_000a4980	uVar27	entryFlag15	INFERRED	0/1 test of the 0x2e28 short, stored to cacheEntry[0x15]	^\s*pcVar39\[0x15\]\ =\ \(char\)uVar27;$	+1
+use	FUN_000a4980	uVar27	entryFlag15	INFERRED	0/1 test of the 0x2e28 short, stored to cacheEntry[0x15]	^\s*iVar42\ =\ \(\(int\ \(\*\)\(\)\)FUN_000a4770\)\(param_1,uVar21,param_3,param_4,pcVar22,pcVar24,uVar27\);$	+1
+use	FUN_000a4980	uVar27	entryFlag15	INFERRED	0/1 test of the 0x2e28 short, stored to cacheEntry[0x15]	^\s*uVar21\ =\ \(\(int\ \(\*\)\(\)\)FUN_000a3610\)\(param_1,iVar38,param_3,param_4,pcVar22,pcVar24,uVar27\);$	+2
+use	FUN_000a4980	uVar27	entryFlag15	INFERRED	0/1 test of the 0x2e28 short, stored to cacheEntry[0x15]	^\s*uVar47\ =\ FUN_00030c50\(param_1,uVar21,uVar27,uVar26,0x1909,1,\(\(unsigned\ char\ \*\)0x00001401U\),uVar29\);$	+1
+use	FUN_000a4980	uVar30	entryWord4X2	INFERRED	cacheEntry+4 * 2	^\s*uVar30\ =\ \*\(int\ \*\)\(pcVar39\ \+\ 4\)\ \*\ 2;$	+1
+use	FUN_000a4980	uVar30	entryWord4X2	INFERRED	cacheEntry+4 * 2	^\s*uStack_e4\ =\ uVar30\ \^\ 0x80000000;$	+1
+use	FUN_000a4980	uVar30	entryWord4X2	INFERRED	cacheEntry+4 * 2	^\s*uVar49\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ 0xc\)\)\(uVar30\);$	+1
+use	FUN_000a4980	uVar30	entryWord4X2	INFERRED	cacheEntry+4 * 2	^\s*uStack_dc\ =\ uVar30\ \-\ local_118\[0\]\ \^\ 0x80000000;$	+1
+use	FUN_000a4980	uVar34	entryWord4X4	INFERRED	cacheEntry+4 << 2	^\s*uVar34\ =\ \*\(int\ \*\)\(pcVar39\ \+\ 4\)\ <<\ 2;$	+1
+use	FUN_000a4980	uVar34	entryWord4X4	INFERRED	cacheEntry+4 << 2	^\s*\(\(void\ \(\*\)\(\)\)FUN_000a3a60\)\(param_1,\(int\)uVar49,uVar34,uVar16,local_118,dVar45,in_f2,in_f3,in_f4,in_f5,$	+3
+use	FUN_000a4980	uVar34	entryWord4X4	INFERRED	cacheEntry+4 << 2	^\s*\(\(void\ \(\*\)\(\)\)FUN_000a3790\)\(param_1,\(int\)uVar49,uVar34,uVar16,local_118,dVar45,in_f2,in_f3,in_f4,in_f5,$	+3
+use	FUN_000a4980	uVar34	entryWord4X4	INFERRED	cacheEntry+4 << 2	^\s*uStack_cc\ =\ uVar34\ \^\ 0x80000000;$	+1
+use	FUN_000a4980	fVar4	entryWord4X2F	INFERRED	entryWord4X2 converted to float (2^52 trick)	^\s*fVar4\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uStack_e4\)\ \-\ 4503601774854144\.0\);$	+1
+use	FUN_000a4980	fVar4	entryWord4X2F	INFERRED	entryWord4X2 converted to float (2^52 trick)	^\s*fVar11\ =\ 0\.5\ \-\ fVar4;$	+1
+use	FUN_000a4980	fVar4	entryWord4X2F	INFERRED	entryWord4X2 converted to float (2^52 trick)	^\s*if\ \(fVar4\ \*\ fVar4\ <=\ fVar12\ \*\ fVar12\ \+\ fVar5\ \*\ fVar5\)\ \{$	+1
+use	FUN_000a4980	fVar4	entryWord4X2F	INFERRED	entryWord4X2 converted to float (2^52 trick)	^\s*if\ \(fVar4\ \*\ fVar4\ <=\ fVar50\)\ \{$	+1
+use	FUN_000a4980	fVar4	entryWord4X2F	INFERRED	entryWord4X2 converted to float (2^52 trick)	^\s*iVar41\ =\ \(int\)\(\(fVar4\ \-\ fVar50\)\ \+\ 0\.5\);$	+1
+use	FUN_000a4980	fVar4	entryWord4X4F	INFERRED	entryWord4X4 converted to float (2^52 trick)	^\s*fVar4\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uStack_cc\)\ \-\ 4503601774854144\.0\);$	+1
+use	FUN_000a4980	fVar4	entryWord4X4F	INFERRED	entryWord4X4 converted to float (2^52 trick)	^\s*fVar4\ /\ \(float\)\(\(double\)CONCAT44\(0x43300000,uStack_c4\)\ \-\ 4503601774854144\.0\);$	+1
+use	FUN_000a4980	fVar4	entryWord4X4F	INFERRED	entryWord4X4 converted to float (2^52 trick)	^\s*fVar4\ /\ \(float\)\(\(double\)CONCAT44\(0x43300000,uStack_bc\)\ \-\ 4503601774854144\.0\);$	+1

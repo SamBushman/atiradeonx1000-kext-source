@@ -2056,6 +2056,31 @@ int FUN_000a4980(glContext, param_2, staleArgR5, staleArgR6, staleArgR7)
   undefined4 staleArgR6;
   undefined4 staleArgR7;
 {
+  float entryWord4X4F;
+  uint entryWord4X4;
+  uint entryWord4X2;
+  uint flagBits114;
+  uint flagBits120;
+  uint levelFormat;
+  double quantizedValue;
+  undefined1 stippleByte;
+  float rowCoord2;
+  float rowCoord;
+  float firstCoord;
+  bool notLastPatternCol;
+  bool notLastBlock;
+  int patternCol;
+  int rowsThisBlock;
+  int blockRows;
+  int blocksLeft;
+  int rowsEnd;
+  int rampIndex;
+  int maskLevel;
+  int uploadResult;
+  int pixelCursor;
+  int maskTexture;
+  int rampBuffer;
+  uint lastRowPtr;
   undefined4 cacheEntryWordf8;
   uint cacheEntryWordb8;
   uint cacheEntryWordb0;
@@ -2079,26 +2104,26 @@ int FUN_000a4980(glContext, param_2, staleArgR5, staleArgR6, staleArgR7)
   int glContextPtr4;
   float glContextFloat13e8_3;
   float glContextFloat13e8_2;
-  bool bVar1;
+  bool maskIsHardEdged;
   char glContextByte245b;
-  undefined1 *puVar3;
-  float fVar4;
-  float fVar5;
+  undefined1 *mirrorSrc;
+  float entryWord4X2F;
+  float innerLimitSq;
   short engineStateShort2e0e;
   short engineStateShort2e10;
   short engineStateShort2e28;
   ushort engineStateShort3172;
   ushort engineStateShort3170;
   float fVar11;
-  float fVar12;
-  float fVar13;
+  float colCoord;
+  float colCoord2;
   char cVar14;
-  undefined1 uVar15;
+  undefined1 maskValue;
   uint uVar16;
   uint *puVar17;
   int iVar18;
   undefined2 uVar20;
-  int iVar19;
+  int fillCol;
   undefined4 uVar21;
   uint r4AfterCall;
   undefined4 r4AfterCall2;
@@ -2109,17 +2134,17 @@ int FUN_000a4980(glContext, param_2, staleArgR5, staleArgR6, staleArgR7)
   int *entryWord14High;
   undefined4 staleArgR8;
   char *pcVar24;
-  uint uVar25;
-  uint uVar26;
-  undefined4 uVar27;
-  undefined1 *puVar28;
+  uint levelCount;
+  uint levelCountClamped;
+  undefined4 entryFlag15;
+  undefined1 *mirrorDst;
   undefined4 uVar29;
   uint uVar30;
   char cVar31;
   char cVar32;
-  uint uVar33;
+  uint maskHeight;
   uint uVar34;
-  uint uVar35;
+  uint maskWidth;
   int iVar36;
   undefined4 glContextWord4;
   int iVar38;
@@ -2127,9 +2152,9 @@ int FUN_000a4980(glContext, param_2, staleArgR5, staleArgR6, staleArgR7)
   int iVar40;
   int iVar41;
   int iVar42;
-  uint uVar43;
-  double dVar44;
-  double dVar45;
+  uint colsLeft;
+  double engineFloat2e20;
+  double contextFloatArg;
   double glContextFloat13e8;
   double staleArgF2;
   double staleArgF3;
@@ -2141,40 +2166,40 @@ int FUN_000a4980(glContext, param_2, staleArgR5, staleArgR6, staleArgR7)
   undefined8 uVar47;
   undefined8 uVar48;
   ulonglong uVar49;
-  float fVar50;
+  float distSq;
   double staleStackArg_fffffeb8;
   double staleStackArg_fffffec0;
   double staleStackArg_fffffec8;
   double staleStackArg_fffffed0;
   double staleStackArg_fffffed8;
   int local_118 [4];
-  longlong local_108;
-  undefined4 local_100;
-  uint uStack_fc;
-  longlong local_f8;
-  undefined4 local_f0;
-  uint uStack_ec;
-  undefined4 local_e8;
-  uint uStack_e4;
-  undefined4 local_e0;
-  uint uStack_dc;
-  longlong local_d8;
-  undefined4 local_d0;
-  uint uStack_cc;
-  undefined4 local_c8;
-  uint uStack_c4;
-  undefined4 local_c0;
-  uint uStack_bc;
-  longlong local_b8;
-  undefined4 local_b0;
-  uint uStack_ac;
-  longlong local_a8;
-  undefined4 local_a0;
-  uint uStack_9c;
-  undefined4 local_98;
-  uint uStack_94;
-  undefined4 local_90;
-  uint uStack_8c;
+  longlong fctiwzSlot0;
+  undefined4 i2dHi1;
+  uint i2dLo1;
+  longlong fctiwzSlot1;
+  undefined4 i2dHi2;
+  uint i2dLo2;
+  undefined4 i2dHi3;
+  uint i2dLo3;
+  undefined4 i2dHi4;
+  uint i2dLo4;
+  longlong fctiwzSlot2;
+  undefined4 i2dHi5;
+  uint i2dLo5;
+  undefined4 i2dHi6;
+  uint i2dLo6;
+  undefined4 i2dHi7;
+  uint i2dLo7;
+  longlong fctiwzSlot4;
+  undefined4 i2dHi9;
+  uint i2dLo9;
+  longlong fctiwzSlot3;
+  undefined4 i2dHi8;
+  uint i2dLo8;
+  undefined4 i2dHi11;
+  uint i2dLo11;
+  undefined4 i2dHi10;
+  uint i2dLo10;
   
   glContextWord44 = *(uint *)(glContext + 0x44);
   if ((glContextWord44 & 0x60020000) != 0x40000000) {
@@ -2283,12 +2308,12 @@ LAB_000a4c38:
      (fVar11 = *(float *)(((unsigned char *)0x000013ec) + glContext), engineStateFloat2e20 < *(float *)(((unsigned char *)0x000013ec) + glContext))) {
     pcVar22 = "ram[";
     pcVar24 = "ram[";
-    local_100 = 0x43300000;
-    uStack_fc = (uint)(int)((engineStateFloat2e20 - glContextFloat13e8_2) / *(float *)(((unsigned char *)0x000013f0) + glContext) + 0.5);
-    local_108 = (longlong)(int)uStack_fc;
-    uStack_fc = uStack_fc ^ 0x80000000;
+    i2dHi1 = 0x43300000;
+    i2dLo1 = (uint)(int)((engineStateFloat2e20 - glContextFloat13e8_2) / *(float *)(((unsigned char *)0x000013f0) + glContext) + 0.5);
+    fctiwzSlot0 = (longlong)(int)i2dLo1;
+    i2dLo1 = i2dLo1 ^ 0x80000000;
     fVar11 = *(float *)(((unsigned char *)0x000013f0) + glContext) *
-             (float)((double)CONCAT44(0x43300000,uStack_fc) - 4503601774854144.0) + glContextFloat13e8_2;
+             (float)((double)CONCAT44(0x43300000,i2dLo1) - 4503601774854144.0) + glContextFloat13e8_2;
   }
   glContextPtr4_5 = *(int *)(glContext + 4);
   engineStateShort2e28 = *(short *)(((unsigned char *)0x00002e28) + engineState);
@@ -2377,20 +2402,20 @@ LAB_000a4f50:
      (fVar11 = *(float *)(((unsigned char *)0x000013ec) + glContext), engineState2Float2e20 < *(float *)(((unsigned char *)0x000013ec) + glContext))) {
     pcVar22 = "ram[";
     pcVar24 = "ram[";
-    local_f0 = 0x43300000;
-    uStack_ec = (uint)(int)((engineState2Float2e20 - glContextFloat13e8_3) / *(float *)(((unsigned char *)0x000013f0) + glContext) + 0.5);
-    local_f8 = (longlong)(int)uStack_ec;
-    uStack_ec = uStack_ec ^ 0x80000000;
+    i2dHi2 = 0x43300000;
+    i2dLo2 = (uint)(int)((engineState2Float2e20 - glContextFloat13e8_3) / *(float *)(((unsigned char *)0x000013f0) + glContext) + 0.5);
+    fctiwzSlot1 = (longlong)(int)i2dLo2;
+    i2dLo2 = i2dLo2 ^ 0x80000000;
     fVar11 = *(float *)(((unsigned char *)0x000013f0) + glContext) *
-             (float)((double)CONCAT44(0x43300000,uStack_ec) - 4503601774854144.0) + glContextFloat13e8_3;
+             (float)((double)CONCAT44(0x43300000,i2dLo2) - 4503601774854144.0) + glContextFloat13e8_3;
   }
   *(float *)(cacheEntry + 0x20) = fVar11;
   engineState = *(int *)(*(int *)(glContext + 4) + 0x10);
   if (((((unsigned char *)0x00002e2c)[engineState] == '\0') || ((*(uint *)(glContext + 0x44) & 0x20000) != 0)) ||
-     (uVar27 = 1, *(short *)(((unsigned char *)0x00002e28) + engineState) == -1)) {
-    uVar27 = 0;
+     (entryFlag15 = 1, *(short *)(((unsigned char *)0x00002e28) + engineState) == -1)) {
+    entryFlag15 = 0;
   }
-  cacheEntry[0x15] = (char)uVar27;
+  cacheEntry[0x15] = (char)entryFlag15;
   engineState = *(int *)(*(int *)(glContext + 4) + 0x10);
   if (((((unsigned char *)0x00003178)[engineState] == '\0') || ((*(uint *)(glContext + 0x44) & 0x20000) != 0)) ||
      ((*(short *)(((unsigned char *)0x00003170) + engineState) != 0x1b02 &&
@@ -2411,7 +2436,7 @@ LAB_000a4f50:
     if ((*(int *)(cacheEntry + 0xb4) == 0x1b00) || (*(int *)(cacheEntry + 0xb8) == 0x1b00))
     goto LAB_000a5108;
     iVar38 = 0;
-    uVar25 = 0;
+    levelCount = 0;
   }
   else {
     uVar47 = ((int (*)())FUN_000a36b0)(glContext,(uint)(byte)cacheEntry[1]);
@@ -2422,10 +2447,10 @@ LAB_000a4f50:
     if (iVar38 < 1) {
 LAB_000a5108:
       iVar38 = 0;
-      uVar25 = 1;
+      levelCount = 1;
     }
     else {
-      uVar25 = 1;
+      levelCount = 1;
     }
   }
   iVar41 = iVar38;
@@ -2440,7 +2465,7 @@ LAB_000a5108:
       uVar20 = *(undefined2 *)(((unsigned char *)0x00002e28) + engineState2);
     }
     *(undefined2 *)(cacheEntry + 0x28) = uVar20;
-    iVar42 = ((int (*)())FUN_000a4770)(glContext,uVar21,staleArgR5,staleArgR6,pcVar22,pcVar24,uVar27);
+    iVar42 = ((int (*)())FUN_000a4770)(glContext,uVar21,staleArgR5,staleArgR6,pcVar22,pcVar24,entryFlag15);
     *(int *)(cacheEntry + 0x18) = iVar42;
     if (iVar38 < iVar42 << 2) {
       iVar41 = iVar42 << 2;
@@ -2449,7 +2474,7 @@ LAB_000a5108:
       iVar18 = 0x10;
     }
 LAB_000a5188:
-    uVar25 = uVar25 + 1;
+    levelCount = levelCount + 1;
     iVar38 = iVar41;
   }
   if (cacheEntry[0x2a] != '\0') {
@@ -2463,266 +2488,266 @@ LAB_000a5188:
     if (iVar18 < 0x20) {
       iVar18 = 0x20;
     }
-    uVar25 = uVar25 + 1;
+    levelCount = levelCount + 1;
   }
-  uVar21 = ((int (*)())FUN_000a3610)(glContext,iVar38,staleArgR5,staleArgR6,pcVar22,pcVar24,uVar27);
-  uVar27 = ((int (*)())FUN_000a3610)(glContext,iVar18,staleArgR5,staleArgR6,pcVar22,pcVar24,uVar27);
-  uVar26 = uVar25;
-  if (1 < uVar25) {
-    uVar26 = 4;
+  uVar21 = ((int (*)())FUN_000a3610)(glContext,iVar38,staleArgR5,staleArgR6,pcVar22,pcVar24,entryFlag15);
+  entryFlag15 = ((int (*)())FUN_000a3610)(glContext,iVar18,staleArgR5,staleArgR6,pcVar22,pcVar24,entryFlag15);
+  levelCountClamped = levelCount;
+  if (1 < levelCount) {
+    levelCountClamped = 4;
   }
   glContextWord4 = *(undefined4 *)(glContext + 4);
-  if (uVar25 < 2) {
+  if (levelCount < 2) {
     uVar29 = 3;
   }
   else {
     uVar29 = 1;
   }
   pcVar24 = (char *)0x1;
-  uVar47 = FUN_00030c50(glContext,uVar21,uVar27,uVar26,0x1909,1,((unsigned char *)0x00001401U),uVar29);
-  iVar40 = (int)((ulonglong)uVar47 >> 0x20);
+  uVar47 = FUN_00030c50(glContext,uVar21,entryFlag15,levelCountClamped,0x1909,1,((unsigned char *)0x00001401U),uVar29);
+  maskTexture = (int)((ulonglong)uVar47 >> 0x20);
   uVar16 = (uint)uVar47;
   iVar38 = 0;
-  if (iVar40 != 0) {
-    FUN_0002ddf0(glContextWord4,iVar40);
-    iVar41 = *(int *)(iVar40 + 0x30);
-    iVar38 = iVar40 + 0x3c;
+  if (maskTexture != 0) {
+    FUN_0002ddf0(glContextWord4,maskTexture);
+    maskLevel = *(int *)(maskTexture + 0x30);
+    iVar38 = maskTexture + 0x3c;
     pcVar24 = (char *)0x2600;
-    *(undefined1 *)(iVar40 + 0x39) = 0xff;
-    *(undefined2 *)(iVar40 + 0x74) = *(undefined2 *)(iVar41 + 0xb0);
-    *(undefined2 *)(iVar40 + 0x7c) = *(undefined2 *)(iVar41 + 0xac);
-    *(uint *)(iVar40 + 0xc0) = (uint)*(ushort *)(iVar41 + 0xae) * (uint)*(ushort *)(iVar41 + 0xac);
-    uVar21 = *(undefined4 *)(iVar41 + 0xb4);
-    *(undefined2 *)(iVar40 + 0xa2) = 0x2600;
-    *(uint *)(iVar40 + 0x50) = *(uint *)(iVar40 + 0x50) & 0xfffe01ff | 0x8a00;
-    *(uint *)(iVar40 + 0x54) = *(uint *)(iVar40 + 0x54) & 0xfffffffc | 1;
-    *(undefined2 *)(iVar40 + 0xa0) = 0x2600;
-    *(undefined4 *)(iVar40 + 0xbc) = uVar21;
+    *(undefined1 *)(maskTexture + 0x39) = 0xff;
+    *(undefined2 *)(maskTexture + 0x74) = *(undefined2 *)(maskLevel + 0xb0);
+    *(undefined2 *)(maskTexture + 0x7c) = *(undefined2 *)(maskLevel + 0xac);
+    *(uint *)(maskTexture + 0xc0) = (uint)*(ushort *)(maskLevel + 0xae) * (uint)*(ushort *)(maskLevel + 0xac);
+    uVar21 = *(undefined4 *)(maskLevel + 0xb4);
+    *(undefined2 *)(maskTexture + 0xa2) = 0x2600;
+    *(uint *)(maskTexture + 0x50) = *(uint *)(maskTexture + 0x50) & 0xfffe01ff | 0x8a00;
+    *(uint *)(maskTexture + 0x54) = *(uint *)(maskTexture + 0x54) & 0xfffffffc | 1;
+    *(undefined2 *)(maskTexture + 0xa0) = 0x2600;
+    *(undefined4 *)(maskTexture + 0xbc) = uVar21;
     uVar16 = r4AfterCall;
   }
   *(int *)(cacheEntry + 0xbc) = iVar38;
   if (iVar38 != 0) {
-    iVar40 = *(int *)(iVar38 + 0x80);
+    pixelCursor = *(int *)(iVar38 + 0x80);
     if (*cacheEntry == '\0') {
-      if (1 < uVar25) {
-        _memset(iVar40,0xff,*(undefined4 *)(iVar38 + 0x84));
+      if (1 < levelCount) {
+        _memset(pixelCursor,0xff,*(undefined4 *)(iVar38 + 0x84));
         uVar16 = r4AfterCall5;
       }
     }
     else {
-      uVar33 = (uint)*(ushort *)(iVar38 + 0x3c);
-      uVar35 = (uint)*(ushort *)(iVar38 + 0x3a);
-      local_e8 = 0x43300000;
-      uVar30 = *(int *)(cacheEntry + 4) * 2;
-      uVar34 = *(int *)(cacheEntry + 4) << 2;
-      uStack_e4 = uVar30 ^ 0x80000000;
-      bVar1 = cacheEntry[1] == '\0';
-      fVar4 = (float)((double)CONCAT44(0x43300000,uStack_e4) - 4503601774854144.0);
-      if (bVar1) {
+      maskHeight = (uint)*(ushort *)(iVar38 + 0x3c);
+      maskWidth = (uint)*(ushort *)(iVar38 + 0x3a);
+      i2dHi3 = 0x43300000;
+      entryWord4X2 = *(int *)(cacheEntry + 4) * 2;
+      entryWord4X4 = *(int *)(cacheEntry + 4) << 2;
+      i2dLo3 = entryWord4X2 ^ 0x80000000;
+      maskIsHardEdged = cacheEntry[1] == '\0';
+      entryWord4X2F = (float)((double)CONCAT44(0x43300000,i2dLo3) - 4503601774854144.0);
+      if (maskIsHardEdged) {
         uVar49 = (ulonglong)uVar16;
-        fVar5 = 0.0;
+        innerLimitSq = 0.0;
       }
       else {
-        uVar49 = (**(code **)(glContext + 0xc))(uVar30);
+        uVar49 = (**(code **)(glContext + 0xc))(entryWord4X2);
         uVar16 = (uint)(uVar49 >> 0x20);
-        bVar1 = uVar16 == 0;
-        if (bVar1) {
-          fVar5 = 0.0;
+        maskIsHardEdged = uVar16 == 0;
+        if (maskIsHardEdged) {
+          innerLimitSq = 0.0;
         }
         else {
-          uVar26 = uVar16;
+          levelCountClamped = uVar16;
           if ((*(uint *)(glContext + 0xe8) & 1) == 0) {
-            dVar45 = (double)*(float *)(glContext + 0xe0);
+            contextFloatArg = (double)*(float *)(glContext + 0xe0);
             if (cacheEntry[8] != '\0') goto LAB_000a53ac;
-            ((void (*)())FUN_000a3a60)(glContext,(int)uVar49,uVar34,uVar16,local_118,dVar45,staleArgF2,staleArgF3,staleArgF4,staleArgF5,
+            ((void (*)())FUN_000a3a60)(glContext,(int)uVar49,entryWord4X4,uVar16,local_118,contextFloatArg,staleArgF2,staleArgF3,staleArgF4,staleArgF5,
                          staleArgF6,staleArgF7,staleArgF8,staleStackArg_fffffeb8,staleStackArg_fffffec0,staleStackArg_fffffec8,
                          staleStackArg_fffffed0,staleStackArg_fffffed8);
             uVar21 = r4AfterCall3;
           }
           else {
-            dVar45 = (double)*(float *)(glContext + 0x104);
+            contextFloatArg = (double)*(float *)(glContext + 0x104);
 LAB_000a53ac:
-            ((void (*)())FUN_000a3790)(glContext,(int)uVar49,uVar34,uVar16,local_118,dVar45,staleArgF2,staleArgF3,staleArgF4,staleArgF5,
+            ((void (*)())FUN_000a3790)(glContext,(int)uVar49,entryWord4X4,uVar16,local_118,contextFloatArg,staleArgF2,staleArgF3,staleArgF4,staleArgF5,
                          staleArgF6,staleArgF7,staleArgF8,staleStackArg_fffffeb8,staleStackArg_fffffec0,staleStackArg_fffffec8,
                          staleStackArg_fffffed0);
             uVar21 = r4AfterCall2;
           }
           uVar49 = CONCAT44(uVar16,uVar21);
-          local_e0 = 0x43300000;
-          uStack_dc = uVar30 - local_118[0] ^ 0x80000000;
-          fVar5 = (float)((double)CONCAT44(0x43300000,uStack_dc) - 4503601774854144.0) - 0.5;
-          fVar5 = fVar5 * fVar5;
+          i2dHi4 = 0x43300000;
+          i2dLo4 = entryWord4X2 - local_118[0] ^ 0x80000000;
+          innerLimitSq = (float)((double)CONCAT44(0x43300000,i2dLo4) - 4503601774854144.0) - 0.5;
+          innerLimitSq = innerLimitSq * innerLimitSq;
         }
       }
-      iVar38 = (int)(uVar49 >> 0x20);
+      rampBuffer = (int)(uVar49 >> 0x20);
       uVar16 = (uint)uVar49;
       pcVar24 = "ram[";
-      fVar11 = 0.5 - fVar4;
-      if (bVar1) {
-        if (uVar33 != 0) {
+      firstCoord = 0.5 - entryWord4X2F;
+      if (maskIsHardEdged) {
+        if (maskHeight != 0) {
           uVar30 = 0;
-          fVar5 = fVar11;
+          rowCoord2 = firstCoord;
           do {
-            if (uVar35 != 0) {
+            if (maskWidth != 0) {
               iVar38 = 0;
-              uVar43 = uVar35;
-              fVar12 = fVar11;
+              colsLeft = maskWidth;
+              colCoord = firstCoord;
               do {
-                uVar15 = 0xff;
-                if (fVar4 * fVar4 <= fVar12 * fVar12 + fVar5 * fVar5) {
-                  uVar15 = 0;
+                maskValue = 0xff;
+                if (entryWord4X2F * entryWord4X2F <= colCoord * colCoord + rowCoord2 * rowCoord2) {
+                  maskValue = 0;
                 }
-                *(undefined1 *)(iVar40 + iVar38) = uVar15;
+                *(undefined1 *)(pixelCursor + iVar38) = maskValue;
                 iVar38 = iVar38 + 1;
-                fVar12 = fVar12 + 1.0;
-                uVar43 = uVar43 - 1;
-              } while (uVar43 != 0);
+                colCoord = colCoord + 1.0;
+                colsLeft = colsLeft - 1;
+              } while (colsLeft != 0);
             }
             pcVar24 = "ram[";
             uVar30 = uVar30 + 1;
-            iVar40 = iVar40 + uVar35;
-            fVar5 = fVar5 + 1.0;
-          } while (uVar33 != uVar30);
+            pixelCursor = pixelCursor + maskWidth;
+            rowCoord2 = rowCoord2 + 1.0;
+          } while (maskHeight != uVar30);
         }
       }
       else {
-        if (uVar33 != 0) {
+        if (maskHeight != 0) {
           uVar16 = 0;
-          fVar12 = fVar11;
+          rowCoord = firstCoord;
           do {
-            if (uVar35 != 0) {
+            if (maskWidth != 0) {
               uVar30 = 0;
-              fVar13 = fVar11;
+              colCoord2 = firstCoord;
               do {
-                fVar50 = fVar13 * fVar13 + fVar12 * fVar12;
-                if (fVar5 <= fVar50) {
-                  if (fVar4 * fVar4 <= fVar50) {
-                    *(undefined1 *)(iVar40 + uVar30) = 0;
+                distSq = colCoord2 * colCoord2 + rowCoord * rowCoord;
+                if (innerLimitSq <= distSq) {
+                  if (entryWord4X2F * entryWord4X2F <= distSq) {
+                    *(undefined1 *)(pixelCursor + uVar30) = 0;
                   }
                   else {
-                    fVar50 = _sqrtf(fVar50);
-                    iVar41 = (int)((fVar4 - fVar50) + 0.5);
-                    local_d8 = (longlong)iVar41;
-                    *(undefined1 *)(iVar40 + uVar30) = *(undefined1 *)(iVar38 + iVar41);
+                    distSq = _sqrtf(distSq);
+                    rampIndex = (int)((entryWord4X2F - distSq) + 0.5);
+                    fctiwzSlot2 = (longlong)rampIndex;
+                    *(undefined1 *)(pixelCursor + uVar30) = *(undefined1 *)(rampBuffer + rampIndex);
                   }
                 }
                 else {
-                  *(undefined1 *)(iVar40 + uVar30) = 0xff;
+                  *(undefined1 *)(pixelCursor + uVar30) = 0xff;
                 }
                 uVar30 = uVar30 + 1;
-                fVar13 = fVar13 + 1.0;
-              } while (uVar35 != uVar30);
+                colCoord2 = colCoord2 + 1.0;
+              } while (maskWidth != uVar30);
             }
             uVar16 = uVar16 + 1;
-            iVar40 = iVar40 + uVar35;
-            fVar12 = fVar12 + 1.0;
-          } while (uVar33 != uVar16);
+            pixelCursor = pixelCursor + maskWidth;
+            rowCoord = rowCoord + 1.0;
+          } while (maskHeight != uVar16);
         }
         pcVar24 = "ram[";
-        (**(code **)(glContext + 0x18))(iVar38);
+        (**(code **)(glContext + 0x18))(rampBuffer);
         uVar16 = r4AfterCall4;
       }
-      uStack_cc = uVar34 ^ 0x80000000;
-      uStack_c4 = uVar35 ^ 0x80000000;
-      local_d0 = 0x43300000;
-      uStack_bc = uVar33 ^ 0x80000000;
-      local_c8 = 0x43300000;
-      fVar4 = (float)((double)CONCAT44(0x43300000,uStack_cc) - 4503601774854144.0);
+      i2dLo5 = entryWord4X4 ^ 0x80000000;
+      i2dLo6 = maskWidth ^ 0x80000000;
+      i2dHi5 = 0x43300000;
+      i2dLo7 = maskHeight ^ 0x80000000;
+      i2dHi6 = 0x43300000;
+      entryWord4X4F = (float)((double)CONCAT44(0x43300000,i2dLo5) - 4503601774854144.0);
       *(float *)(cacheEntry + 0xc) =
-           fVar4 / (float)((double)CONCAT44(0x43300000,uStack_c4) - 4503601774854144.0);
-      local_c0 = 0x43300000;
+           entryWord4X4F / (float)((double)CONCAT44(0x43300000,i2dLo6) - 4503601774854144.0);
+      i2dHi7 = 0x43300000;
       *(float *)(cacheEntry + 0x10) =
-           fVar4 / (float)((double)CONCAT44(0x43300000,uStack_bc) - 4503601774854144.0);
+           entryWord4X4F / (float)((double)CONCAT44(0x43300000,i2dLo7) - 4503601774854144.0);
     }
     cacheEntryPtrbc = *(int *)(cacheEntry + 0xbc);
-    iVar40 = *(int *)(cacheEntryPtrbc + 0x80);
-    if (1 < uVar25) {
-      iVar40 = iVar40 + *(int *)(cacheEntryPtrbc + 0x84);
+    pixelCursor = *(int *)(cacheEntryPtrbc + 0x80);
+    if (1 < levelCount) {
+      pixelCursor = pixelCursor + *(int *)(cacheEntryPtrbc + 0x84);
     }
     entryWord14High = (int *)(*(uint *)(cacheEntry + 0x14) & 0xffff0000);
     if (entryWord14High == (int *)0x0) {
-      if (1 < uVar25) {
-        _memset(iVar40,0xff,*(undefined4 *)(cacheEntryPtrbc + 0x84));
+      if (1 < levelCount) {
+        _memset(pixelCursor,0xff,*(undefined4 *)(cacheEntryPtrbc + 0x84));
         goto LAB_000a58ec;
       }
     }
     else {
       uVar34 = (uint)*(ushort *)(cacheEntryPtrbc + 0x3a);
       cacheEntryWord18 = *(int *)(cacheEntry + 0x18);
-      iVar42 = (int)(uint)*(ushort *)(cacheEntryPtrbc + 0x3c) >> 4;
+      blockRows = (int)(uint)*(ushort *)(cacheEntryPtrbc + 0x3c) >> 4;
       iVar41 = *(int *)(*(int *)(glContext + 4) + 0x10);
       uVar30 = cacheEntryWord18 * 4;
-      uVar33 = iVar40 + uVar34 * (*(ushort *)(cacheEntryPtrbc + 0x3c) - 1);
+      lastRowPtr = pixelCursor + uVar34 * (*(ushort *)(cacheEntryPtrbc + 0x3c) - 1);
       if (cacheEntry[0x14] == '\0') {
-        _memset(uVar33,0xff,uVar34);
+        _memset(lastRowPtr,0xff,uVar34);
         cacheEntry[0x24] = '?';
         cacheEntry[0x25] = -0x80;
         cacheEntry[0x26] = '\0';
         cacheEntry[0x27] = '\0';
       }
       else {
-        uVar26 = uVar33;
+        levelCountClamped = lastRowPtr;
         if (cacheEntry[0x1c] == '\0') {
-          dVar44 = (double)*(float *)(((unsigned char *)0x00002e20) + iVar41);
+          engineFloat2e20 = (double)*(float *)(((unsigned char *)0x00002e20) + iVar41);
           glContextFloat13e8 = (double)*(float *)(((unsigned char *)0x000013e8) + glContext);
-          dVar45 = glContextFloat13e8;
-          if ((glContextFloat13e8 < dVar44) &&
-             (dVar45 = (double)*(float *)(((unsigned char *)0x000013ec) + glContext),
-             dVar44 < (double)*(float *)(((unsigned char *)0x000013ec) + glContext))) {
-            local_a0 = 0x43300000;
-            uStack_9c = (uint)(int)((float)((double)(float)(dVar44 - glContextFloat13e8) /
+          quantizedValue = glContextFloat13e8;
+          if ((glContextFloat13e8 < engineFloat2e20) &&
+             (quantizedValue = (double)*(float *)(((unsigned char *)0x000013ec) + glContext),
+             engineFloat2e20 < (double)*(float *)(((unsigned char *)0x000013ec) + glContext))) {
+            i2dHi8 = 0x43300000;
+            i2dLo8 = (uint)(int)((float)((double)(float)(engineFloat2e20 - glContextFloat13e8) /
                                       (double)*(float *)(((unsigned char *)0x000013f0) + glContext)) + 0.5);
-            local_a8 = (longlong)(int)uStack_9c;
-            uStack_9c = uStack_9c ^ 0x80000000;
-            dVar45 = (double)(float)((double)*(float *)(((unsigned char *)0x000013f0) + glContext) *
-                                     (double)(float)((double)CONCAT44(0x43300000,uStack_9c) -
+            fctiwzSlot3 = (longlong)(int)i2dLo8;
+            i2dLo8 = i2dLo8 ^ 0x80000000;
+            quantizedValue = (double)(float)((double)*(float *)(((unsigned char *)0x000013f0) + glContext) *
+                                     (double)(float)((double)CONCAT44(0x43300000,i2dLo8) -
                                                     4503601774854144.0) + glContextFloat13e8);
           }
           entryWord14High = local_118;
-          ((void (*)())FUN_000a3a60)(glContext,uVar16,uVar30,uVar33,entryWord14High,dVar45,staleArgF2,staleArgF3,staleArgF4,staleArgF5,staleArgF6,
+          ((void (*)())FUN_000a3a60)(glContext,uVar16,uVar30,lastRowPtr,entryWord14High,quantizedValue,staleArgF2,staleArgF3,staleArgF4,staleArgF5,staleArgF6,
                        staleArgF7,staleArgF8,staleStackArg_fffffeb8,staleStackArg_fffffec0,staleStackArg_fffffec8,
                        staleStackArg_fffffed0,staleStackArg_fffffed8);
         }
         else {
-          dVar44 = (double)*(float *)(((unsigned char *)0x00002e20) + iVar41);
+          engineFloat2e20 = (double)*(float *)(((unsigned char *)0x00002e20) + iVar41);
           glContextFloat13e8 = (double)*(float *)(((unsigned char *)0x000013e8) + glContext);
-          dVar45 = glContextFloat13e8;
-          if ((glContextFloat13e8 < dVar44) &&
-             (dVar45 = (double)*(float *)(((unsigned char *)0x000013ec) + glContext),
-             dVar44 < (double)*(float *)(((unsigned char *)0x000013ec) + glContext))) {
-            local_b0 = 0x43300000;
-            uStack_ac = (uint)(int)((float)((double)(float)(dVar44 - glContextFloat13e8) /
+          quantizedValue = glContextFloat13e8;
+          if ((glContextFloat13e8 < engineFloat2e20) &&
+             (quantizedValue = (double)*(float *)(((unsigned char *)0x000013ec) + glContext),
+             engineFloat2e20 < (double)*(float *)(((unsigned char *)0x000013ec) + glContext))) {
+            i2dHi9 = 0x43300000;
+            i2dLo9 = (uint)(int)((float)((double)(float)(engineFloat2e20 - glContextFloat13e8) /
                                       (double)*(float *)(((unsigned char *)0x000013f0) + glContext)) + 0.5);
-            local_b8 = (longlong)(int)uStack_ac;
-            uStack_ac = uStack_ac ^ 0x80000000;
-            dVar45 = (double)(float)((double)*(float *)(((unsigned char *)0x000013f0) + glContext) *
-                                     (double)(float)((double)CONCAT44(0x43300000,uStack_ac) -
+            fctiwzSlot4 = (longlong)(int)i2dLo9;
+            i2dLo9 = i2dLo9 ^ 0x80000000;
+            quantizedValue = (double)(float)((double)*(float *)(((unsigned char *)0x000013f0) + glContext) *
+                                     (double)(float)((double)CONCAT44(0x43300000,i2dLo9) -
                                                     4503601774854144.0) + glContextFloat13e8);
           }
           entryWord14High = local_118;
-          ((void (*)())FUN_000a3790)(glContext,uVar16,uVar30,uVar33,entryWord14High,dVar45,staleArgF2,staleArgF3,staleArgF4,staleArgF5,staleArgF6,
+          ((void (*)())FUN_000a3790)(glContext,uVar16,uVar30,lastRowPtr,entryWord14High,quantizedValue,staleArgF2,staleArgF3,staleArgF4,staleArgF5,staleArgF6,
                        staleArgF7,staleArgF8,staleStackArg_fffffeb8,staleStackArg_fffffec0,staleStackArg_fffffec8,
                        staleStackArg_fffffed0);
         }
         if (0 < local_118[0]) {
           iVar38 = 0;
-          puVar28 = (undefined1 *)(uVar33 + uVar30);
+          mirrorDst = (undefined1 *)(lastRowPtr + uVar30);
           do {
-            puVar3 = (undefined1 *)(iVar38 + uVar33);
+            mirrorSrc = (undefined1 *)(iVar38 + lastRowPtr);
             iVar38 = iVar38 + 1;
-            puVar28 = puVar28 + -1;
-            *puVar28 = *puVar3;
+            mirrorDst = mirrorDst + -1;
+            *mirrorDst = *mirrorSrc;
           } while (iVar38 < local_118[0]);
         }
-        _memset(uVar33 + local_118[0],0xff,uVar30 + local_118[0] * -2);
-        _memset((undefined1 *)(uVar33 + uVar30),0,uVar34 + cacheEntryWord18 * -4);
-        uStack_94 = uVar30 ^ 0x80000000;
-        uStack_8c = uVar34 ^ 0x80000000;
-        local_90 = 0x43300000;
-        local_98 = 0x43300000;
+        _memset(lastRowPtr + local_118[0],0xff,uVar30 + local_118[0] * -2);
+        _memset((undefined1 *)(lastRowPtr + uVar30),0,uVar34 + cacheEntryWord18 * -4);
+        i2dLo11 = uVar30 ^ 0x80000000;
+        i2dLo10 = uVar34 ^ 0x80000000;
+        i2dHi10 = 0x43300000;
+        i2dHi11 = 0x43300000;
         *(float *)(cacheEntry + 0x24) =
-             (float)((double)CONCAT44(0x43300000,uStack_94) - 4503601774854144.0) /
-             (float)((double)CONCAT44(0x43300000,uStack_8c) - 4503601774854144.0);
+             (float)((double)CONCAT44(0x43300000,i2dLo11) - 4503601774854144.0) /
+             (float)((double)CONCAT44(0x43300000,i2dLo10) - 4503601774854144.0);
       }
       engineState = *(int *)(*(int *)(glContext + 4) + 0x10);
       if (((((unsigned char *)0x00002e2c)[engineState] == '\0') ||
@@ -2734,69 +2759,69 @@ LAB_000a53ac:
       do {
         pcVar24 = (char *)(uVar16 & 1);
         if (pcVar24 == (char *)0x0) {
-          iVar41 = iVar40 + uVar34 * iVar42;
-          _memset(iVar40,0,uVar34 * iVar42);
+          rowsEnd = pixelCursor + uVar34 * blockRows;
+          _memset(pixelCursor,0,uVar34 * blockRows);
         }
         else {
-          iVar18 = iVar42;
+          rowsThisBlock = blockRows;
           if (iVar38 == 0xf) {
-            iVar18 = iVar42 + -1;
+            rowsThisBlock = blockRows + -1;
           }
-          iVar41 = iVar40;
-          if (0 < iVar18) {
+          rowsEnd = pixelCursor;
+          if (0 < rowsThisBlock) {
             iVar36 = 0;
             do {
               iVar36 = iVar36 + 1;
-              iVar41 = iVar40 + uVar34;
-              (**(code **)(((unsigned char *)0x00001344) + glContext))(iVar40,uVar33,uVar34);
-              iVar40 = iVar41;
-            } while (iVar18 != iVar36);
+              rowsEnd = pixelCursor + uVar34;
+              (**(code **)(((unsigned char *)0x00001344) + glContext))(pixelCursor,lastRowPtr,uVar34);
+              pixelCursor = rowsEnd;
+            } while (rowsThisBlock != iVar36);
           }
         }
-        bVar1 = iVar38 != 0xf;
+        notLastBlock = iVar38 != 0xf;
         uVar16 = uVar16 >> 1;
         iVar38 = iVar38 + 1;
-        iVar40 = iVar41;
-      } while (bVar1);
+        pixelCursor = rowsEnd;
+      } while (notLastBlock);
 LAB_000a58ec:
       cacheEntryPtrbc = *(int *)(cacheEntry + 0xbc);
     }
-    iVar40 = *(int *)(cacheEntryPtrbc + 0x80);
-    if (1 < uVar25) {
-      iVar40 = iVar40 + *(int *)(cacheEntryPtrbc + 0x84) * 2;
+    pixelCursor = *(int *)(cacheEntryPtrbc + 0x80);
+    if (1 < levelCount) {
+      pixelCursor = pixelCursor + *(int *)(cacheEntryPtrbc + 0x84) * 2;
     }
     if (cacheEntry[0x2a] == '\0') {
-      if (1 < uVar25) {
-        _memset(iVar40,0xff,*(undefined4 *)(cacheEntryPtrbc + 0x84));
+      if (1 < levelCount) {
+        _memset(pixelCursor,0xff,*(undefined4 *)(cacheEntryPtrbc + 0x84));
         goto LAB_000a59f4;
       }
     }
     else {
       uVar16 = (uint)*(ushort *)(cacheEntryPtrbc + 0x3a);
-      iVar41 = 0x20;
+      blocksLeft = 0x20;
       entryWord14High = *(int **)(cacheEntry + 0xac);
       cacheEntryWordb0 = *(uint *)(cacheEntry + 0xb0);
       pcVar24 = (char *)((int)(uint)*(ushort *)(cacheEntryPtrbc + 0x3c) >> 5);
       iVar38 = (int)uVar16 >> 5;
       do {
-        iVar18 = 0;
-        uVar26 = 0;
+        patternCol = 0;
+        levelCountClamped = 0;
         do {
-          uVar15 = 0xff;
+          stippleByte = 0xff;
           if ((1 << ((uint)entryWord14High & 0x3f) & *(uint *)(cacheEntry + (0x1f - cacheEntryWordb0) * 4 + 0x2c)) == 0)
           {
-            uVar15 = 0;
+            stippleByte = 0;
           }
-          iVar42 = uVar26 + iVar40;
+          iVar42 = levelCountClamped + pixelCursor;
           if (pcVar24 != (char *)0x0) {
             pcVar22 = (char *)0x0;
             do {
               if (iVar38 != 0) {
-                iVar19 = 0;
+                fillCol = 0;
                 iVar36 = iVar38;
                 do {
-                  *(undefined1 *)(iVar42 + iVar19) = uVar15;
-                  iVar19 = iVar19 + 1;
+                  *(undefined1 *)(iVar42 + fillCol) = stippleByte;
+                  fillCol = fillCol + 1;
                   iVar36 = iVar36 + -1;
                 } while (iVar36 != 0);
               }
@@ -2804,22 +2829,22 @@ LAB_000a58ec:
               iVar42 = iVar42 + uVar16;
             } while (pcVar24 != pcVar22);
           }
-          bVar1 = iVar18 != 0x1f;
-          uVar26 = uVar26 + iVar38;
-          iVar18 = iVar18 + 1;
+          notLastPatternCol = patternCol != 0x1f;
+          levelCountClamped = levelCountClamped + iVar38;
+          patternCol = patternCol + 1;
           entryWord14High = (int *)((int)entryWord14High + 1U & 0x1f);
-        } while (bVar1);
-        iVar41 = iVar41 + -1;
-        iVar40 = iVar40 + uVar16 * (int)pcVar24;
+        } while (notLastPatternCol);
+        blocksLeft = blocksLeft + -1;
+        pixelCursor = pixelCursor + uVar16 * (int)pcVar24;
         cacheEntryWordb0 = cacheEntryWordb0 + 1 & 0x1f;
-      } while (iVar41 != 0);
+      } while (blocksLeft != 0);
 LAB_000a59f4:
       cacheEntryPtrbc = *(int *)(cacheEntry + 0xbc);
     }
-    iVar40 = FUN_000341a0(glContext,*(undefined4 *)(cacheEntryPtrbc + 0x7c),*(undefined4 *)(glContext + 0x276c),
-                          uVar26,entryWord14High,pcVar24);
-    if (iVar40 != 0) {
-      uVar25 = (uint)*(byte *)(*(int *)(cacheEntry + 0xbc) + 0x31);
+    uploadResult = FUN_000341a0(glContext,*(undefined4 *)(cacheEntryPtrbc + 0x7c),*(undefined4 *)(glContext + 0x276c),
+                          levelCountClamped,entryWord14High,pcVar24);
+    if (uploadResult != 0) {
+      levelFormat = (uint)*(byte *)(*(int *)(cacheEntry + 0xbc) + 0x31);
       cacheEntry[0xf8] = '\0';
       cacheEntry[0xf9] = '\0';
       cacheEntry[0xfa] = '\0';
@@ -2828,8 +2853,8 @@ LAB_000a59f4:
       cacheEntry[0xd1] = '\0';
       cacheEntry[0xd2] = '\0';
       cacheEntry[0xd3] = '\0';
-      iVar40 = 1 - ((int)-(uVar25 ^ 2) >> 0x1f);
-      if ((*cacheEntry == '\0') && (uVar25 != 3)) {
+      iVar40 = 1 - ((int)-(levelFormat ^ 2) >> 0x1f);
+      if ((*cacheEntry == '\0') && (levelFormat != 3)) {
         cacheEntry[0xe8] = '\0';
         cacheEntry[0xe9] = '\0';
         cacheEntry[0xea] = '\0';
@@ -2849,11 +2874,11 @@ LAB_000a59f4:
         cacheEntry[0xea] = '\0';
         cacheEntry[0xeb] = '\x01';
         if ((*(int *)(cacheEntry + 0xb4) == 0x1b00) || (*(int *)(cacheEntry + 0xb8) == 0x1b00)) {
-          *(uint *)(cacheEntry + 0xd0) = uVar25;
+          *(uint *)(cacheEntry + 0xd0) = levelFormat;
           *(int *)(cacheEntry + 0xf8) = iVar40;
         }
       }
-      if (((*(uint *)(cacheEntry + 0x14) & 0xffff0000) == 0) && (uVar25 != 3)) {
+      if (((*(uint *)(cacheEntry + 0x14) & 0xffff0000) == 0) && (levelFormat != 3)) {
         cacheEntry[0xec] = '\0';
         cacheEntry[0xed] = '\0';
         cacheEntry[0xee] = '\0';
@@ -2864,34 +2889,34 @@ LAB_000a59f4:
         cacheEntry[199] = '\0';
       }
       else {
-        *(uint *)(cacheEntry + 0xc4) = uVar25;
+        *(uint *)(cacheEntry + 0xc4) = levelFormat;
         *(int *)(cacheEntry + 0xec) = iVar40;
         if ((*(int *)(cacheEntry + 0xb4) == 0x1b01) || (*(int *)(cacheEntry + 0xb8) == 0x1b01)) {
-          *(uint *)(cacheEntry + 0xd0) = uVar25;
+          *(uint *)(cacheEntry + 0xd0) = levelFormat;
           *(int *)(cacheEntry + 0xf8) = iVar40;
         }
       }
-      if ((cacheEntry[0x2a] != 0) || (uVar25 == 3)) {
-        *(uint *)(cacheEntry + 0xd0) = uVar25;
+      if ((cacheEntry[0x2a] != 0) || (levelFormat == 3)) {
+        *(uint *)(cacheEntry + 0xd0) = levelFormat;
         *(int *)(cacheEntry + 0xf8) = iVar40;
       }
-      uVar26 = (uint)((*(uint *)(cacheEntry + 0x14) & 0xffff0000) != 0) * 0x10 |
+      flagBits114 = (uint)((*(uint *)(cacheEntry + 0x14) & 0xffff0000) != 0) * 0x10 |
                *(uint *)(cacheEntry + 0x114) & 0xffffffef;
       cacheEntryWordf8 = *(undefined4 *)(cacheEntry + 0xf8);
-      uVar25 = -(uint)(byte)cacheEntry[0x2a] >> 0x1b & 0x10 | *(uint *)(cacheEntry + 0x120) & 0xffffffef;
+      flagBits120 = -(uint)(byte)cacheEntry[0x2a] >> 0x1b & 0x10 | *(uint *)(cacheEntry + 0x120) & 0xffffffef;
       cacheEntryWordd0 = *(undefined4 *)(cacheEntry + 0xd0);
       *(undefined4 *)(cacheEntry + 0xcc) = *(undefined4 *)(cacheEntry + 0xc4);
       *(undefined4 *)(cacheEntry + 200) = *(undefined4 *)(cacheEntry + 0xc4);
       *(undefined4 *)(cacheEntry + 0xf4) = *(undefined4 *)(cacheEntry + 0xec);
       *(undefined4 *)(cacheEntry + 0xf0) = *(undefined4 *)(cacheEntry + 0xec);
       *(undefined4 *)(cacheEntry + 0x10c) = cacheEntryWordf8;
-      *(uint *)(cacheEntry + 0x11c) = uVar26;
-      *(uint *)(cacheEntry + 0x134) = uVar25;
-      *(uint *)(cacheEntry + 0x120) = uVar25;
-      *(uint *)(cacheEntry + 0x124) = uVar25;
-      *(uint *)(cacheEntry + 0x128) = uVar25;
-      *(uint *)(cacheEntry + 300) = uVar25;
-      *(uint *)(cacheEntry + 0x130) = uVar25;
+      *(uint *)(cacheEntry + 0x11c) = flagBits114;
+      *(uint *)(cacheEntry + 0x134) = flagBits120;
+      *(uint *)(cacheEntry + 0x120) = flagBits120;
+      *(uint *)(cacheEntry + 0x124) = flagBits120;
+      *(uint *)(cacheEntry + 0x128) = flagBits120;
+      *(uint *)(cacheEntry + 300) = flagBits120;
+      *(uint *)(cacheEntry + 0x130) = flagBits120;
       *(undefined4 *)(cacheEntry + 0xe4) = cacheEntryWordd0;
       *(undefined4 *)(cacheEntry + 0xd4) = cacheEntryWordd0;
       *(undefined4 *)(cacheEntry + 0xfc) = cacheEntryWordf8;
@@ -2901,8 +2926,8 @@ LAB_000a59f4:
       *(undefined4 *)(cacheEntry + 0x104) = cacheEntryWordf8;
       *(undefined4 *)(cacheEntry + 0xe0) = cacheEntryWordd0;
       *(undefined4 *)(cacheEntry + 0x108) = cacheEntryWordf8;
-      *(uint *)(cacheEntry + 0x114) = uVar26;
-      *(uint *)(cacheEntry + 0x118) = uVar26;
+      *(uint *)(cacheEntry + 0x114) = flagBits114;
+      *(uint *)(cacheEntry + 0x118) = flagBits114;
       *(uint *)(cacheEntry + 0x110) = *(uint *)(cacheEntry + 0x110) & 0xffffffef;
       *(undefined4 *)(cacheEntry + 0x138) = *(undefined4 *)(glContext + 0x2764);
       *(undefined4 *)(glContext + 0x2764) = cacheEntry;
@@ -3378,35 +3403,35 @@ int FUN_000a6860(param_1, param_2)
   undefined1 auStack_128 [144];
   undefined4 local_98;
   uint i2dLo1;
-  undefined4 local_90;
-  uint uStack_8c;
+  undefined4 i2dHi2;
+  uint i2dLo2;
   undefined4 i2dHi1;
   uint uStack_84;
   undefined4 local_80;
   uint uStack_7c;
-  undefined4 local_78;
-  undefined4 uStack_74;
-  longlong local_70;
-  longlong local_68;
-  undefined4 local_60;
-  undefined4 uStack_5c;
-  longlong local_58;
-  longlong local_50;
+  undefined4 i2dHi3;
+  undefined4 i2dLo3;
+  longlong fctiwzSlot0;
+  longlong fctiwzSlot1;
+  undefined4 i2dHi4;
+  undefined4 i2dLo4;
+  longlong fctiwzSlot2;
+  longlong fctiwzSlot3;
   float fVar9;
   float fVar10;
   float fVar11;
   
   local_80 = 0x43300000;
   local_98 = 0x43300000;
-  local_90 = 0x43300000;
+  i2dHi2 = 0x43300000;
   i2dHi1 = 0x43300000;
   i2dLo1 = *(int *)(((unsigned char *)0x00001358) + param_1) - *(int *)(((unsigned char *)0x000013d8) + param_1) ^ 0x80000000;
-  uStack_8c = *(int *)(((unsigned char *)0x00001360) + param_1) - *(int *)(((unsigned char *)0x000013d8) + param_1) ^ 0x80000000;
+  i2dLo2 = *(int *)(((unsigned char *)0x00001360) + param_1) - *(int *)(((unsigned char *)0x000013d8) + param_1) ^ 0x80000000;
   uStack_84 = *(int *)(((unsigned char *)0x0000135c) + param_1) - *(int *)(((unsigned char *)0x000013dc) + param_1) ^ 0x80000000;
   uStack_7c = *(int *)(((unsigned char *)0x00001364) + param_1) - *(int *)(((unsigned char *)0x000013dc) + param_1) ^ 0x80000000;
   dVar22 = *(double *)(((unsigned char *)0x00002d88) + *(int *)(*(int *)(param_1 + 4) + 0x10));
   fVar2 = (float)((double)CONCAT44(0x43300000,i2dLo1) - DOUBLE_001aa1e0);
-  fVar3 = (float)((double)CONCAT44(0x43300000,uStack_8c) - DOUBLE_001aa1e0);
+  fVar3 = (float)((double)CONCAT44(0x43300000,i2dLo2) - DOUBLE_001aa1e0);
   fVar4 = (float)((double)CONCAT44(0x43300000,uStack_7c) - DOUBLE_001aa1e0);
   fVar5 = (float)((double)CONCAT44(0x43300000,uStack_84) - DOUBLE_001aa1e0);
   if (((param_2 & 0x400) == 0) || (iVar20 = 1, ((unsigned char *)0x00001491)[param_1] == '\0')) {
@@ -3432,8 +3457,8 @@ int FUN_000a6860(param_1, param_2)
       *(undefined1 *)(param_1 + 0x2802) = 1;
     }
     puVar14 = (undefined4 *)FUN_00083c90(param_1,puVar14);
-    uStack_74 = *(undefined4 *)(param_1 + 8);
-    local_78 = 0x43300000;
+    i2dLo3 = *(undefined4 *)(param_1 + 8);
+    i2dHi3 = 0x43300000;
     *(undefined4 **)(param_1 + 0x2794) = puVar14;
     fVar11 = FLOAT_001aa194;
     fVar10 = FLOAT_001aa190;
@@ -3441,11 +3466,11 @@ int FUN_000a6860(param_1, param_2)
     fVar8 = FLOAT_001aa188;
     fVar13 = (fVar5 + fVar4) * FLOAT_001aa10c;
     fVar12 = (fVar2 + fVar3) * FLOAT_001aa10c;
-    fVar6 = (float)((double)CONCAT44(0x43300000,uStack_74) - DOUBLE_001aa250);
+    fVar6 = (float)((double)CONCAT44(0x43300000,i2dLo3) - DOUBLE_001aa250);
     uVar1 = (uint)(int)(*(float *)(param_1 + 0x2818) * FLOAT_001aa10c * fVar6 * (fVar4 - fVar5));
-    local_70 = (longlong)(int)uVar1;
+    fctiwzSlot0 = (longlong)(int)uVar1;
     iVar20 = (int)(fVar6 * *(float *)(param_1 + 0x2814) * FLOAT_001aa10c * (fVar3 - fVar2));
-    local_68 = (longlong)iVar20;
+    fctiwzSlot1 = (longlong)iVar20;
     puVar14[2] = 0x82c;
     *puVar14 = ((unsigned char *)0x00001087U);
     puVar14[1] = iVar20 << 0x10 | uVar1 & 0xffff;
@@ -3465,8 +3490,8 @@ int FUN_000a6860(param_1, param_2)
       *(undefined1 *)(param_1 + 0x2802) = 1;
     }
     puVar14 = (undefined4 *)FUN_00083c90(param_1,puVar14);
-    uStack_5c = *(undefined4 *)(param_1 + 8);
-    local_60 = 0x43300000;
+    i2dLo4 = *(undefined4 *)(param_1 + 8);
+    i2dHi4 = 0x43300000;
     *(undefined4 **)(param_1 + 0x2794) = puVar14;
     fVar11 = FLOAT_001aa194;
     fVar10 = FLOAT_001aa190;
@@ -3474,11 +3499,11 @@ int FUN_000a6860(param_1, param_2)
     fVar8 = FLOAT_001aa188;
     fVar13 = (fVar5 + fVar4) * FLOAT_001aa10c;
     fVar12 = (fVar2 + fVar3) * FLOAT_001aa10c;
-    fVar6 = (float)((double)CONCAT44(0x43300000,uStack_5c) - DOUBLE_001aa250);
+    fVar6 = (float)((double)CONCAT44(0x43300000,i2dLo4) - DOUBLE_001aa250);
     uVar1 = (uint)(int)(*(float *)(param_1 + 0x2818) * FLOAT_001aa10c * fVar6 * (fVar4 - fVar5));
-    local_58 = (longlong)(int)uVar1;
+    fctiwzSlot2 = (longlong)(int)uVar1;
     iVar20 = (int)(fVar6 * *(float *)(param_1 + 0x2814) * FLOAT_001aa10c * (fVar3 - fVar2));
-    local_50 = (longlong)iVar20;
+    fctiwzSlot3 = (longlong)iVar20;
     puVar14[2] = 0x82c;
     *puVar14 = ((unsigned char *)0x00001087U);
     puVar14[1] = iVar20 << 0x10 | uVar1 & 0xffff;
