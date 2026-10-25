@@ -152,7 +152,7 @@ FUN_0017a130 compiler
 FUN_0017ae28 compiler
 Block__flattenAndRebuildAddMulTree compiler
 Inst__foldConstantMovIntoResultScale compiler
-FUN_0018d4b4 compiler
+PackState__tryPlaceInstructionSources compiler
 R300MachineAssembler__resolveSourceRegister compiler
 R300MachineAssembler__create compiler
 R300MachineAssembler__emitTexRecord compiler

@@ -181,7 +181,7 @@
 18b654	R300SchedModel__vslot11	r8	PASS-deep	18b714 bl 0xf3a30
 18b9cc	R300SchedModel__vslot14	r7	PASS-indirect	18ba00 bl 0x126760
 18b9cc	R300SchedModel__vslot14	r8	PASS-indirect	18ba00 bl 0x126760
-18d4b4	FUN_0018d4b4	r8	PASS-indirect	18d50c bl 0x105594
+18d4b4	PackState__tryPlaceInstructionSources	r8	PASS-indirect	18d50c bl 0x105594
 1906c8	R300VSchedModel__vslot3_canAddInstruction	r5	PASS-indirect	190720 bctrl 
 1906c8	R300VSchedModel__vslot3_canAddInstruction	r6	PASS-indirect	190720 bctrl 
 190990	R300VSchedModel__vslot27	r5	PASS-indirect	1909d4 bctrl 

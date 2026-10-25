@@ -1,0 +1,2 @@
+func	FUN_00181b80	RebuildState__computeNodeLevels	INFERRED	forward pass over the block list sets each node level to 1 + the highest source node level, backward pass propagates levels to the sources and returns the highest level (param 3) and the scheduling model result (param 4)
+func	FUN_0018d4b4	PackState__tryPlaceInstructionSources	INFERRED	places the source registers of inst into the PackState through FUN_0018d388/FUN_0018cdd8/FUN_0018c7f4/FUN_0018c980; returns 0 when a source cannot be placed
