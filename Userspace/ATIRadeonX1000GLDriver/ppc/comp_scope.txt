@@ -1,6 +1,6 @@
 # functions whose variable `compiler` is the shader-compiler Compiler (distinctive offsets used); fork E3
 Compiler__isOptionEnabled compiler
-FUN_000e2094 compiler
+Compiler__compileStages compiler
 FUN_000e33cc compiler
 FUN_000e3544 compiler
 Block__ctor_ea020 compiler

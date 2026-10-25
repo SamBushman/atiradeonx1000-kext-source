@@ -2878,8 +2878,8 @@ e1b30	e1b34	eh-pad	Compiler__init_e1a48	1	__Unwind_Resume
 e1bf0	e1bf4	millicode	Compiler__setHardwareFamily	1	
 e1c20	e1c24	eh-pad	Compiler__setHardwareFamily	1	__Unwind_Resume
 e2084	e2094	other	Compiler__releaseChipAndPools	4	
-e21b8	e21bc	millicode	FUN_000e2094	1	
-e21cc	e21ec	eh-pad	FUN_000e2094	8	0x193cc0,__Unwind_Resume
+e21b8	e21bc	millicode	Compiler__compileStages	1	
+e21cc	e21ec	eh-pad	Compiler__compileStages	8	0x193cc0,__Unwind_Resume
 e2884	e28f0	other	Block__accept	27	
 e2950	e2a04	other	IfFooterStatic__accept	45	
 e2ac4	e2acc	millicode	IREndMakeCall__acceptCallPseudo	2	
@@ -2947,8 +2947,8 @@ ec038	ec058	eh-pad	ContinueBlock__clone	8	0x193cc0,__Unwind_Resume
 ec1e4	ec1ec	other	FUN_000ec1d0	2	
 ec56c	ec58c	eh-pad	FUN_000ec4f0	8	0x193cc0,__Unwind_Resume
 ecf5c	ecf7c	eh-pad	FUN_000eced0	8	0x193cc0,__Unwind_Resume
-ed0e4	ed0fc	eh-pad	FUN_000ecfac	6	__Unwind_Resume
-ed25c	ed274	eh-pad	FUN_000ed124	6	__Unwind_Resume
+ed0e4	ed0fc	eh-pad	Program__dtor_ecfac	6	__Unwind_Resume
+ed25c	ed274	eh-pad	Program__dtor_ed124	6	__Unwind_Resume
 edbf0	edc10	eh-pad	FUN_000ed89c	8	0x193cc0,__Unwind_Resume
 ee114	ee118	millicode	Program__ctor_edd98	1	
 ee214	ee218	millicode	Program__ctor_edd98	1	
@@ -2993,7 +2993,7 @@ fa144	fa160	other	FUN_000f9a58	7	0x193cc0
 fa27c	fa298	other	FUN_000f9a58	7	0x193cc0
 fa45c	fa460	millicode	FUN_000f9a58	1	
 fa544	fa564	eh-pad	FUN_000f9a58	8	0x193cc0,__Unwind_Resume
-faeb4	faed4	eh-pad	FUN_000fadc4	8	0x193cc0,__Unwind_Resume
+faeb4	faed4	eh-pad	Program__createIfBlock	8	0x193cc0,__Unwind_Resume
 fb584	fb588	millicode	FUN_000fb3d4	1	
 fb690	fb694	millicode	FUN_000fb3d4	1	
 fb77c	fb780	millicode	FUN_000fb3d4	1	

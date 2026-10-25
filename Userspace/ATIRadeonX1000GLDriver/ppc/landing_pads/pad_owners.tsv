@@ -8,8 +8,8 @@
 0xe1b30	Compiler__init_e1a48
 0xe1bf0	Compiler__setHardwareFamily
 0xe1c20	Compiler__setHardwareFamily
-0xe21b8	FUN_000e2094
-0xe21cc	FUN_000e2094
+0xe21b8	Compiler__compileStages
+0xe21cc	Compiler__compileStages
 0xe34c8	FUN_000e33cc
 0xe3524	FUN_000e33cc
 0xe3640	FUN_000e3544
@@ -79,8 +79,8 @@
 0xec038	ContinueBlock__clone
 0xec56c	FUN_000ec4f0
 0xecf5c	FUN_000eced0
-0xed0e4	FUN_000ecfac
-0xed25c	FUN_000ed124
+0xed0e4	Program__dtor_ecfac
+0xed25c	Program__dtor_ed124
 0xedbf0	FUN_000ed89c
 0xee114	Program__ctor_edd98
 0xee214	Program__ctor_edd98
@@ -121,7 +121,7 @@
 0xfa27c	FUN_000f9a58
 0xfa45c	FUN_000f9a58
 0xfa544	FUN_000f9a58
-0xfaeb4	FUN_000fadc4
+0xfaeb4	Program__createIfBlock
 0xfb584	FUN_000fb3d4
 0xfb690	FUN_000fb3d4
 0xfb77c	FUN_000fb3d4

@@ -418,9 +418,9 @@ e0694	ildisPrintProgram	r7	PASS-no	e06b4 bl 0xda8d0
 e0694	ildisPrintProgram	r8	PASS-no	e06b4 bl 0xda8d0
 e0694	ildisPrintProgram	r9	PASS-no	e06b4 bl 0xda8d0
 e0694	ildisPrintProgram	r10	PASS-no	e06b4 bl 0xda8d0
-e2094	FUN_000e2094	r6	PASS-no	e20b4 bl 0xe15b8
-e2094	FUN_000e2094	r7	PASS-no	e20b4 bl 0xe15b8
-e2094	FUN_000e2094	r8	PASS-no	e20b4 bl 0xe15b8
+e2094	Compiler__compileStages	r6	PASS-no	e20b4 bl 0xe15b8
+e2094	Compiler__compileStages	r7	PASS-no	e20b4 bl 0xe15b8
+e2094	Compiler__compileStages	r8	PASS-no	e20b4 bl 0xe15b8
 e36bc	MachineCodeWriter__encodeProgram	r8	PASS-deep	e36ec bl 0xe3544
 e36bc	MachineCodeWriter__encodeProgram	r9	PASS-deep	e36ec bl 0xe3544
 e36bc	MachineCodeWriter__encodeProgram	r10	PASS-deep	e36ec bl 0xe3544

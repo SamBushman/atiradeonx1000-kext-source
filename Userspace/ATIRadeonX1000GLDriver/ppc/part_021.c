@@ -525,11 +525,17 @@ int Compiler__releaseChipAndPools(compiler, releaseChip)
   return;
 }
 
-/* FUN_000e2094 @ 0xe2094 (292 bytes) */
-int FUN_000e2094(compiler, param_2)
+/* Compiler__compileStages @ 0xe2094 (292 bytes) */
+int Compiler__compileStages(compiler, compileRequest)
   int compiler;
-  int param_2;
+  int compileRequest;
 {
+  undefined4 secondSource;
+  undefined4 *readerAlloc;
+  int currentProgramValue;
+  int stageByteOffset;
+  int compilerArg;
+  int stageIndexCopy;
   int pairInstructionsEnabled;
   int mapChannelsEnabled;
   int reduceDepEnabled;
@@ -539,16 +545,16 @@ int FUN_000e2094(compiler, param_2)
   int peepholeEnabled;
   int deadCodeEnabled;
   undefined4 arenaAt378;
-  int iVar1;
-  int iVar2;
-  undefined4 *puVar3;
+  int stageIndex;
+  int nextStageIndex;
+  undefined4 *programAlloc;
   int argR6;
   undefined4 staleArgR7;
   undefined4 staleArgR8;
-  char *pcVar4;
-  undefined4 uVar5;
+  char *sourceTable;
+  undefined4 stageSource;
   undefined4 arenaAt374;
-  undefined4 *puVar7;
+  undefined4 *ilReader;
   undefined8 deleteComputationsThatCouldBeVsEnabled;
   
   ((int (*)())Compiler__propagateFlag5a1Bit1)(compiler);
@@ -558,49 +564,49 @@ int FUN_000e2094(compiler, param_2)
   *(char **)(compiler + 0x5e4) = "PEEPHOLE";
   *(char **)(compiler + 0x5f8) = "SCHED";
   *(char **)(compiler + 0x60c) = "REPLACE_PHI";
-  pcVar4 = "ASSEMBLY";
+  sourceTable = "ASSEMBLY";
   *(char **)(compiler + 0x620) = "GLOBAL_ALLOC";
   *(char **)(compiler + 0x634) = "ASSEMBLY";
   FUN_00115fa0(compiler);
-  iVar1 = *(int *)(param_2 + 8) + -1;
-  *(int *)(compiler + 0x52c) = iVar1;
-  while (-1 < iVar1) {
+  stageIndex = *(int *)(compileRequest + 8) + -1;
+  *(int *)(compiler + 0x52c) = stageIndex;
+  while (-1 < stageIndex) {
     FUN_000e13b4(compiler);
-    iVar1 = *(int *)(compiler + 0x52c);
-    if (iVar1 < 2) {
-      uVar5 = *(undefined4 *)(iVar1 * 4 + param_2 + 0xc);
+    stageIndexCopy = *(int *)(compiler + 0x52c);
+    if (stageIndexCopy < 2) {
+      stageSource = *(undefined4 *)(stageIndexCopy * 4 + compileRequest + 0xc);
     }
     else {
-      pcVar4 = *(char **)(param_2 + 0x14);
-      uVar5 = *(undefined4 *)(pcVar4 + iVar1 * 4);
+      sourceTable = *(char **)(compileRequest + 0x14);
+      stageSource = *(undefined4 *)(sourceTable + stageIndexCopy * 4);
     }
     arenaAt374 = *(undefined4 *)(compiler + COMP_arenaA);
-    puVar3 = (undefined4 *)Arena__alloc(arenaAt374,0x484);
-    *puVar3 = arenaAt374;
-    Program__ctor_ee29c(puVar3 + 1,compiler);
+    programAlloc = (undefined4 *)Arena__alloc(arenaAt374,0x484);
+    *programAlloc = arenaAt374;
+    Program__ctor_ee29c(programAlloc + 1,compiler);
     arenaAt378 = *(undefined4 *)(compiler + COMP_arenaB);
-    *(undefined4 **)(compiler + COMP_currentProgram) = puVar3 + 1;
-    puVar3 = (undefined4 *)Arena__alloc(arenaAt378,0x290);
-    puVar7 = puVar3 + 1;
-    *puVar3 = arenaAt378;
-    iVar1 = compiler;
-    ILReader__ctor_e5570(puVar7,uVar5,compiler);
-    if ((*(uint *)(param_2 + 4) & 0x20) != 0) {
-      iVar2 = *(int *)(compiler + 0x52c) + 1;
-      if (iVar2 < 2) {
-        uVar5 = *(undefined4 *)(iVar2 * 4 + param_2 + 0xc);
+    *(undefined4 **)(compiler + COMP_currentProgram) = programAlloc + 1;
+    readerAlloc = (undefined4 *)Arena__alloc(arenaAt378,0x290);
+    ilReader = readerAlloc + 1;
+    *readerAlloc = arenaAt378;
+    compilerArg = compiler;
+    ILReader__ctor_e5570(ilReader,stageSource,compiler);
+    if ((*(uint *)(compileRequest + 4) & 0x20) != 0) {
+      nextStageIndex = *(int *)(compiler + 0x52c) + 1;
+      if (nextStageIndex < 2) {
+        secondSource = *(undefined4 *)(nextStageIndex * 4 + compileRequest + 0xc);
       }
       else {
-        pcVar4 = *(char **)(param_2 + 0x14);
-        uVar5 = *(undefined4 *)(pcVar4 + iVar2 * 4);
+        sourceTable = *(char **)(compileRequest + 0x14);
+        secondSource = *(undefined4 *)(sourceTable + nextStageIndex * 4);
       }
-      ((int (*)())setWord30)(puVar7,uVar5);
+      ((int (*)())setWord30)(ilReader,secondSource);
     }
     (**(code **)(**(int **)(compiler + COMP_target) + 0x60))(*(int **)(compiler + COMP_target));
-    FUN_000ef498(*(undefined4 *)(compiler + COMP_currentProgram),puVar7);
-    if (puVar7 != (undefined4 *)0x0) {
-      ((int (*)())ILReader__dtor_e4934)(puVar7);
-      Arena__free(*puVar3,puVar3);
+    FUN_000ef498(*(undefined4 *)(compiler + COMP_currentProgram),ilReader);
+    if (ilReader != (undefined4 *)0x0) {
+      ((int (*)())ILReader__dtor_e4934)(ilReader);
+      Arena__free(*readerAlloc,readerAlloc);
     }
     List__freeAllNodes(*(undefined4 *)(compiler + COMP_arenaB));
     FUN_00122de8(*(undefined4 *)(compiler + COMP_currentProgram));
@@ -620,7 +626,7 @@ int FUN_000e2094(compiler, param_2)
     }
     deleteComputationsThatCouldBeVsEnabled = Compiler__isOptionEnabled(compiler,0x10);
     if ((int)((ulonglong)deleteComputationsThatCouldBeVsEnabled >> 0x20) != 0) {
-      ((int (*)())Program__forwardMulOperandToUsers)(*(undefined4 *)(compiler + COMP_currentProgram),(int)deleteComputationsThatCouldBeVsEnabled,iVar1,argR6,staleArgR7,staleArgR8,pcVar4);
+      ((int (*)())Program__forwardMulOperandToUsers)(*(undefined4 *)(compiler + COMP_currentProgram),(int)deleteComputationsThatCouldBeVsEnabled,compilerArg,argR6,staleArgR7,staleArgR8,sourceTable);
     }
     *(uint *)(*(int *)(compiler + COMP_currentProgram) + 0x30) = *(uint *)(*(int *)(compiler + COMP_currentProgram) + 0x30) | 0x80
     ;
@@ -675,21 +681,21 @@ int FUN_000e2094(compiler, param_2)
     FUN_0013061c(*(undefined4 *)(compiler + COMP_currentProgram),0);
     (**(code **)(**(int **)(compiler + COMP_target) + 0x38))
               (*(int **)(compiler + COMP_target),*(undefined4 *)(compiler + 0x52c),compiler);
-    pcVar4 = (char *)**(undefined4 **)(compiler + COMP_target);
-    iVar1 = *(int *)(compiler + 0x52c) * 4 + compiler;
+    sourceTable = (char *)**(undefined4 **)(compiler + COMP_target);
+    stageByteOffset = *(int *)(compiler + 0x52c) * 4 + compiler;
     argR6 = compiler;
-    (**(code **)(pcVar4 + 0x8c))
-              (*(undefined4 **)(compiler + COMP_target),*(undefined4 *)(iVar1 + 0x524),
-               *(undefined4 *)(iVar1 + 0x4d4));
-    iVar1 = *(int *)(compiler + COMP_currentProgram);
-    if (iVar1 != 0) {
-      FUN_000ecfac(iVar1);
-      Arena__free(*(undefined4 *)(iVar1 + -4),iVar1 + -4);
+    (**(code **)(sourceTable + 0x8c))
+              (*(undefined4 **)(compiler + COMP_target),*(undefined4 *)(stageByteOffset + 0x524),
+               *(undefined4 *)(stageByteOffset + 0x4d4));
+    currentProgramValue = *(int *)(compiler + COMP_currentProgram);
+    if (currentProgramValue != 0) {
+      Program__dtor_ecfac(currentProgramValue);
+      Arena__free(*(undefined4 *)(currentProgramValue + -4),currentProgramValue + -4);
     }
     List__freeAllNodes(*(undefined4 *)(compiler + COMP_arenaA));
     List__freeAllNodes(*(undefined4 *)(compiler + COMP_arenaB));
-    iVar1 = *(int *)(compiler + 0x52c) + -1;
-    *(int *)(compiler + 0x52c) = iVar1;
+    stageIndex = *(int *)(compiler + 0x52c) + -1;
+    *(int *)(compiler + 0x52c) = stageIndex;
   }
   return;
 }
@@ -735,7 +741,7 @@ int FUN_000e2524(param_1, param_2, param_3, param_4, param_5)
       }
       *(undefined4 *)(iStack0000001c + 0xfc) =
            *(undefined4 *)(*(int *)(iStack00000018 + 0x398) + 0x28);
-      ((int (*)())FUN_000e2094)(iStack00000018,iVar1);
+      ((int (*)())Compiler__compileStages)(iStack00000018,iVar1);
       if (iVar1 != 0) {
         FUN_00193be8(iVar1);
         Arena__free(*(undefined4 *)(iVar1 + -4),iVar1 + -4);
@@ -787,7 +793,7 @@ int FUN_000e2668(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
       *(undefined4 *)(iStack0000001c + 0xf8) = 0;
       *(undefined4 *)(iStack0000001c + 0xfc) =
            *(undefined4 *)(*(int *)(iStack00000018 + 0x398) + 0x28);
-      ((int (*)())FUN_000e2094)(iStack00000018,iVar1);
+      ((int (*)())Compiler__compileStages)(iStack00000018,iVar1);
       if (iVar1 != 0) {
         FUN_00193be8(iVar1);
         Arena__free(*(undefined4 *)(iVar1 + -4),iVar1 + -4);
@@ -1489,7 +1495,7 @@ int MachineCodeWriter__encodeProgram(writer, outBuffer, outSize)
    * callee's own body - so auStack_74's real required size is 0x38 bytes, not the 0x20 the auStack_74..
    * local_54 gap alone would suggest (an earlier version of this fix under-sized it at 0x28 total, which
    * still let FUN_000e3544's tail writes (words 9-0xd, past local_54) overflow past this whole buffer -
-   * confirmed live: that overflow was clobbering a saved register in the CALLER's (FUN_000e2094's) frame,
+   * confirmed live: that overflow was clobbering a saved register in the CALLER's (Compiler__compileStages's) frame,
    * corrupting its r30 and causing a second crash further into gldCreateContext). Those extra words are
    * never read back by any other statement in this function (no name exists for them, hence no overflow
    * was visible from local C code alone) - only sized correctly by checking the callee's real write range

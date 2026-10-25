@@ -1273,7 +1273,7 @@
 0xe1b70	Compiler__setHardwareFamily	216	no	indirect call (driver context / vtable / callback)
 0xe1c50	Program__forwardMulOperandToUsers	916	no	indirect call (driver context / vtable / callback)
 0xe1fe4	Compiler__releaseChipAndPools	160	yes	
-0xe2094	FUN_000e2094	1132	no	indirect call (driver context / vtable / callback)
+0xe2094	Compiler__compileStages	1132	no	indirect call (driver context / vtable / callback)
 0xe2524	FUN_000e2524	324	no	calls an import (setjmp)
 0xe2668	FUN_000e2668	280	no	calls an import (setjmp)
 0xe2780	FUN_000e2780	140	yes	
@@ -1380,10 +1380,10 @@
 0xe9294	FUN_000e9294	280	no	indirect call (driver context / vtable / callback)
 0xe93ac	Block__bypass	900	no	indirect call (driver context / vtable / callback)
 0xe9730	Block__bypassAndDetach	76	yes	
-0xe977c	FUN_000e977c	404	yes	
+0xe977c	Block__splitOutgoingEdge	404	yes	
 0xe9910	FUN_000e9910	56	yes	
-0xe9948	FUN_000e9948	404	yes	
-0xe9adc	FUN_000e9adc	292	yes	
+0xe9948	Block__splitIncomingEdge	404	yes	
+0xe9adc	Block__splitEdge	292	yes	
 0xe9c00	Block__recordDefinition	200	yes	
 0xe9cc8	FUN_000e9cc8	160	yes	
 0xe9d68	Block__ctor_e9d68	252	yes	
@@ -1461,17 +1461,17 @@
 0xec5b8	Program__getBlocksArray	160	yes	
 0xec658	FUN_000ec658	88	yes	
 0xec6b0	FUN_000ec6b0	120	yes	
-0xec728	FUN_000ec728	444	yes	
+0xec728	Program__splitMixedSourceKinds	444	yes	
 0xec8e4	FUN_000ec8e4	60	yes	
 0xec920	FUN_000ec920	240	no	indirect call (driver context / vtable / callback)
 0xeca10	KhanVs__vslot17_isSimpleInst	192	no	indirect call (driver context / vtable / callback)
 0xecad0	KhanPs__vslot17_isSimpleInst	192	no	indirect call (driver context / vtable / callback)
 0xecb90	FUN_000ecb90	140	yes	
 0xecc1c	IRInst__isForwardable	268	no	indirect call (driver context / vtable / callback)
-0xecd28	FUN_000ecd28	424	no	indirect call (driver context / vtable / callback)
+0xecd28	Program__insertMovAfter	424	no	indirect call (driver context / vtable / callback)
 0xeced0	FUN_000eced0	188	yes	
-0xecfac	FUN_000ecfac	352	yes	
-0xed124	FUN_000ed124	352	yes	
+0xecfac	Program__dtor_ecfac	352	yes	
+0xed124	Program__dtor_ed124	352	yes	
 0xed29c	HwLimits__vslot43_prependDefaultMov	264	yes	
 0xed63c	IRInst__bindOperandRegisters	424	no	indirect call (driver context / vtable / callback)
 0xed7e4	Program__beginPass	184	no	indirect call (driver context / vtable / callback)
@@ -1480,7 +1480,7 @@
 0xee29c	Program__ctor_ee29c	1216	yes	
 0xee7a0	Program__buildBlockArrayByKey	492	yes	
 0xee9ac	Program__addInst	120	yes	
-0xeea24	FUN_000eea24	556	no	indirect call (driver context / vtable / callback)
+0xeea24	Program__pinInputRegisters	556	no	indirect call (driver context / vtable / callback)
 0xeec50	FUN_000eec50	1140	no	indirect call (driver context / vtable / callback)
 0xeee4c	FUN_000eee4c	920	no	indirect call (driver context / vtable / callback)
 0xef204	Program__splitExports	660	no	indirect call (driver context / vtable / callback)
@@ -1490,7 +1490,7 @@
 0xefa4c	FUN_000efa4c	860	yes	
 0xefde4	Program__insertExitMarkerAndFlagBlocks	888	no	indirect call (driver context / vtable / callback)
 0xf019c	FUN_000f019c	792	no	indirect call (driver context / vtable / callback)
-0xf04d4	FUN_000f04d4	724	no	indirect call (driver context / vtable / callback)
+0xf04d4	IRInst__tryFoldOutputScale	724	no	indirect call (driver context / vtable / callback)
 0xf07a8	FUN_000f07a8	3348	no	indirect call (driver context / vtable / callback)
 0xf14f8	FUN_000f14f8	2148	no	indirect call (driver context / vtable / callback)
 0xf1d7c	FUN_000f1d7c	3108	no	indirect call (driver context / vtable / callback)
@@ -1586,8 +1586,8 @@
 0xf7bf4	FUN_000f7bf4	228	yes	
 0xf7cd8	FUN_000f7cd8	228	yes	
 0xf7dbc	DominatorTree__computeDominanceFrontiers	352	yes	
-0xf7f1c	FUN_000f7f1c	296	yes	
-0xf8044	FUN_000f8044	296	yes	
+0xf7f1c	DominatorTree__free_f7f1c	296	yes	
+0xf8044	DominatorTree__free	296	yes	
 0xf816c	DominatorTree__dfsNumber	576	yes	
 0xf83cc	DominatorTree__compress	412	yes	
 0xf8588	DominatorTree__eval	72	yes	
@@ -1613,9 +1613,9 @@
 0xf94dc	FUN_000f94dc	1268	no	indirect call (driver context / vtable / callback)
 0xf9a58	FUN_000f9a58	3748	no	indirect call (driver context / vtable / callback)
 0xfa958	FUN_000fa958	1132	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0xfadc4	FUN_000fadc4	448	yes	
+0xfadc4	Program__createIfBlock	448	yes	
 0xfafa4	Program__createConstantVReg	652	yes	
-0xfb230	FUN_000fb230	420	yes	
+0xfb230	Program__loadDefaultConstants	420	yes	
 0xfb3d4	FUN_000fb3d4	8428	no	indirect call (driver context / vtable / callback)
 0xfd50c	FUN_000fd50c	188	yes	
 0xfd5c8	FUN_000fd5c8	24388	no	indirect call (driver context / vtable / callback)
