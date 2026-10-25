@@ -937,339 +937,369 @@ int FUN_0013a774(param_1, param_2, param_3)
 int FUN_0013a8a4(pass)
   uint pass;
 {
-  bool bVar1;
-  bool bVar2;
-  byte bVar3;
-  bool bVar4;
-  uint uVar5;
-  int iVar6;
-  int *piVar7;
-  int *piVar8;
-  int iVar9;
-  int iVar10;
+  bool moreComponentsB;
+  bool laneByteZero;
+  bool chainFailed;
+  uint candidateMask;
+  uint savedLaneWord;
+  uint laneTagB;
+  uint laneTag;
+  uint foldMask;
+  int *nextInst;
+  int *targetInfo;
+  int *sourceInst;
+  int chainDestRecord;
+  int componentIdxB;
+  int sourceId;
+  int operandRecordB;
+  int laneTagValue;
+  int nextBlockB;
+  int laneEntryPtr;
+  int sourceInstB;
+  int laneIndex;
+  int destOperandRecord;
+  int srcDestRecord;
+  int operandRecordA;
+  int predicateResult;
+  int laneFillIndex;
+  int opcodeDesc;
+  int destRecord;
+  int flagResult;
+  int operandIndex;
+  int opcodeKind;
+  bool moreComponents;
+  bool sawRemappedComponent;
+  byte laneTagByte;
+  bool sawComponent3;
+  uint usableMask;
+  int blockCursor;
+  int *lookaheadInst;
+  int *chainInst;
+  int laneTable;
+  int operandLimit;
   int operandRecord;
-  undefined4 in_r7;
-  undefined4 in_r8;
-  int iVar12;
-  uint uVar13;
-  uint uVar14;
-  int iVar15;
-  undefined4 uVar16;
-  uint uVar17;
-  code *pcVar18;
-  int iVar19;
-  int *piVar20;
-  undefined4 local_b8;
-  uint local_a8;
-  int local_a4;
-  int local_a0;
-  uint local_9c;
-  uint local_98;
-  uint local_94;
-  uint local_90;
-  uint local_8c;
-  uint local_88;
-  uint local_84;
-  uint local_80;
-  uint local_7c;
-  uint local_78;
-  uint local_74;
-  uint local_70;
-  uint local_6c;
-  uint local_68;
-  uint local_64;
-  uint local_60;
+  undefined4 staleArg5;
+  undefined4 staleArg6;
+  int laneEntryAddr;
+  uint requiredLaneMask;
+  uint componentIndex;
+  int nextBlock;
+  undefined4 compiler;
+  uint operandComponent;
+  code *setComponentFn;
+  int laneCountdown;
+  int *inst;
+  undefined4 laneWord;
+  uint maskedSelectWord;
+  int currentBlock;
+  int blockListObject;
+  uint laneWordInsert1;
+  uint laneWordInsert2;
+  uint laneWordInsert3;
+  uint laneWordInsert4;
+  uint laneWordInsert5;
+  uint laneWordInsert6;
+  uint laneWordInsert7;
+  uint laneWordInsert8;
+  uint laneWordInsert9;
+  uint laneWordInsert10;
+  uint laneWordInsert11;
+  uint laneWordInsert12;
+  uint laneWordInsert13;
+  uint laneWordInsert14;
+  uint laneWordInsert15;
+  uint laneWordInsert16;
   
-  local_a0 = pass + 0x37c;
-  iVar9 = FUN_00193e74(*(undefined4 *)(*(int *)(pass + 8) + 0x378),
+  blockListObject = pass + 0x37c;
+  laneTable = FUN_00193e74(*(undefined4 *)(*(int *)(pass + 8) + 0x378),
                        *(int *)(*(int *)(pass + 8) + 0x324) << 2,1);
-  iVar6 = *(int *)(local_a0 + 8);
-  local_9c = 0;
-  local_98 = 0;
-  local_94 = 0;
-  local_90 = 0;
-  local_8c = 0;
-  local_88 = 0;
-  local_84 = 0;
-  local_80 = 0;
-  local_7c = 0;
-  local_78 = 0;
-  local_74 = 0;
-  local_70 = 0;
-  local_6c = 0;
-  local_68 = 0;
-  local_64 = 0;
-  local_60 = 0;
-  iVar15 = *(int *)(iVar6 + 8);
-  local_a4 = iVar6;
-  if (*(int *)(iVar6 + 8) != 0) {
+  blockCursor = *(int *)(blockListObject + 8);
+  laneWordInsert1 = 0;
+  laneWordInsert2 = 0;
+  laneWordInsert3 = 0;
+  laneWordInsert4 = 0;
+  laneWordInsert5 = 0;
+  laneWordInsert6 = 0;
+  laneWordInsert7 = 0;
+  laneWordInsert8 = 0;
+  laneWordInsert9 = 0;
+  laneWordInsert10 = 0;
+  laneWordInsert11 = 0;
+  laneWordInsert12 = 0;
+  laneWordInsert13 = 0;
+  laneWordInsert14 = 0;
+  laneWordInsert15 = 0;
+  laneWordInsert16 = 0;
+  nextBlock = *(int *)(blockCursor + 8);
+  currentBlock = blockCursor;
+  if (*(int *)(blockCursor + 8) != 0) {
     do {
-      iVar6 = iVar15;
-      piVar7 = (int *)(*(int **)(local_a4 + 0x98))[2];
-      piVar20 = *(int **)(local_a4 + 0x98);
-      if (piVar7 != (int *)0x0) {
+      blockCursor = nextBlock;
+      lookaheadInst = (int *)(*(int **)(currentBlock + 0x98))[2];
+      inst = *(int **)(currentBlock + 0x98);
+      if (lookaheadInst != (int *)0x0) {
         do {
-          piVar8 = piVar7;
-          if ((piVar20[5] & 1U) != 0) {
-            iVar6 = *(int *)(piVar20[0x22] + 8);
-            for (iVar15 = 1; iVar10 = (**(code **)(*piVar20 + 0x14))(piVar20), iVar15 <= iVar10;
-                iVar15 = iVar15 + 1) {
-              piVar7 = (int *)IRInst__getOperandSource(piVar20,iVar15);
-              local_b8 = *(uint *)(iVar9 + piVar7[0x53] * 4);
-              if (iVar6 == 0x8e) {
+          nextInst = lookaheadInst;
+          if ((inst[5] & 1U) != 0) {
+            opcodeKind = *(int *)(inst[0x22] + 8);
+            for (operandIndex = 1; operandLimit = (**(code **)(*inst + 0x14))(inst), operandIndex <= operandLimit;
+                operandIndex = operandIndex + 1) {
+              sourceInst = (int *)IRInst__getOperandSource(inst,operandIndex);
+              laneWord = *(uint *)(laneTable + sourceInst[0x53] * 4);
+              if (opcodeKind == 0x8e) {
 LAB_0013a9dc:
-                iVar10 = 0;
-                iVar19 = 4;
+                laneFillIndex = 0;
+                laneCountdown = 4;
                 do {
-                  *(byte *)((int)&local_b8 + iVar10) =
-                       (byte)iVar10 & 0x3f | *(byte *)((int)&local_b8 + iVar10) & 0xc0 | 0x80;
-                  iVar10 = iVar10 + 1;
-                  iVar19 = iVar19 + -1;
-                } while (iVar19 != 0);
+                  *(byte *)((int)&laneWord + laneFillIndex) =
+                       (byte)laneFillIndex & 0x3f | *(byte *)((int)&laneWord + laneFillIndex) & 0xc0 | 0x80;
+                  laneFillIndex = laneFillIndex + 1;
+                  laneCountdown = laneCountdown + -1;
+                } while (laneCountdown != 0);
 LAB_0013ae00:
-                *(uint *)(iVar9 + piVar7[0x53] * 4) = local_b8;
+                *(uint *)(laneTable + sourceInst[0x53] * 4) = laneWord;
               }
               else {
-                uVar16 = *(undefined4 *)(pass + 8);
-                iVar10 = (**(code **)(*piVar7 + 0x24))(piVar7);
-                if (((iVar10 == 0) || (iVar10 = OpcodeTraits__instFlagBit2(uVar16,piVar7), iVar10 != 0)) ||
-                   ((piVar7[5] & 0x400000U) != 0)) goto LAB_0013a9dc;
-                bVar4 = false;
-                bVar2 = false;
-                uVar5 = 0xf;
-                uVar13 = 0;
-                uVar14 = 0;
+                compiler = *(undefined4 *)(pass + 8);
+                predicateResult = (**(code **)(*sourceInst + 0x24))(sourceInst);
+                if (((predicateResult == 0) || (predicateResult = OpcodeTraits__instFlagBit2(compiler,sourceInst), predicateResult != 0)) ||
+                   ((sourceInst[5] & 0x400000U) != 0)) goto LAB_0013a9dc;
+                sawComponent3 = false;
+                sawRemappedComponent = false;
+                usableMask = 0xf;
+                requiredLaneMask = 0;
+                componentIndex = 0;
                 do {
-                  iVar10 = IRInst__getOperandRecord(piVar20,iVar15);
-                  uVar17 = (uint)*(byte *)(uVar14 + iVar10 + 0x10);
-                  iVar10 = IRInst__getOperandRecord(piVar7,0);
-                  if (*(char *)(uVar14 + iVar10 + 0x10) != '\x01') {
-                    uVar5 = uVar5 & ~(1 << (uVar14 & 0x3f));
+                  operandRecordA = IRInst__getOperandRecord(inst,operandIndex);
+                  operandComponent = (uint)*(byte *)(componentIndex + operandRecordA + 0x10);
+                  srcDestRecord = IRInst__getOperandRecord(sourceInst,0);
+                  if (*(char *)(componentIndex + srcDestRecord + 0x10) != '\x01') {
+                    usableMask = usableMask & ~(1 << (componentIndex & 0x3f));
                   }
-                  if (uVar17 != 4) {
-                    if (uVar17 == 3) {
-                      local_9c = local_b8 << 0x18 | local_9c & 0xffffff;
-                      if (((int)local_9c < 0) &&
-                         (local_98 = local_b8 << 0x18 | local_98 & 0xffffff, (local_b8 & 0x3f) != 3)
+                  if (operandComponent != 4) {
+                    if (operandComponent == 3) {
+                      laneWordInsert1 = laneWord << 0x18 | laneWordInsert1 & 0xffffff;
+                      if (((int)laneWordInsert1 < 0) &&
+                         (laneWordInsert2 = laneWord << 0x18 | laneWordInsert2 & 0xffffff, (laneWord & 0x3f) != 3)
                          ) {
-                        uVar5 = uVar5 & 0xfffffff7;
-                        bVar4 = true;
-                        local_94 = local_b8 << 0x18 | local_94 & 0xffffff;
-                        uVar13 = uVar13 | 1 << (local_b8 & 0x3f);
+                        usableMask = usableMask & 0xfffffff7;
+                        sawComponent3 = true;
+                        laneWordInsert3 = laneWord << 0x18 | laneWordInsert3 & 0xffffff;
+                        requiredLaneMask = requiredLaneMask | 1 << (laneWord & 0x3f);
                       }
                       else {
-                        uVar5 = uVar5 & 0xfffffff7;
-                        bVar4 = true;
-                        local_90 = (local_b8 & 0xc0) << 0x18 | local_90 & 0xffffff | 0x3000000;
-                        local_b8 = CONCAT31((*(unsigned int *)((unsigned char *)&(local_b8) + 0)),(char)(local_90 >> 0x18));
+                        usableMask = usableMask & 0xfffffff7;
+                        sawComponent3 = true;
+                        laneWordInsert4 = (laneWord & 0xc0) << 0x18 | laneWordInsert4 & 0xffffff | 0x3000000;
+                        laneWord = CONCAT31((*(unsigned int *)((unsigned char *)&(laneWord) + 0)),(char)(laneWordInsert4 >> 0x18));
                       }
                     }
                     else {
-                      local_8c = local_b8 << 0x18 | local_8c & 0xffffff;
-                      if (((int)local_8c < 0) &&
-                         (local_88 = local_b8 << 0x18 | local_88 & 0xffffff,
-                         uVar17 == (local_b8 & 0x3f))) {
-                        uVar5 = 0;
-                        local_84 = (local_b8 & 0xc0) << 0x18 | local_84 & 0xffffff | 0x3000000;
-                        local_b8 = CONCAT31((*(unsigned int *)((unsigned char *)&(local_b8) + 0)),(char)(local_84 >> 0x18));
-                        local_80 = (uVar17 & 0x3f) << 0x18 |
-                                   (*(byte *)((int)&local_b8 + uVar17) & 0xc0) << 0x18 |
-                                   local_80 & 0xffffff;
-                        *(char *)((int)&local_b8 + uVar17) = (char)(local_80 >> 0x18);
+                      laneWordInsert5 = laneWord << 0x18 | laneWordInsert5 & 0xffffff;
+                      if (((int)laneWordInsert5 < 0) &&
+                         (laneWordInsert6 = laneWord << 0x18 | laneWordInsert6 & 0xffffff,
+                         operandComponent == (laneWord & 0x3f))) {
+                        usableMask = 0;
+                        laneWordInsert7 = (laneWord & 0xc0) << 0x18 | laneWordInsert7 & 0xffffff | 0x3000000;
+                        laneWord = CONCAT31((*(unsigned int *)((unsigned char *)&(laneWord) + 0)),(char)(laneWordInsert7 >> 0x18));
+                        laneWordInsert8 = (operandComponent & 0x3f) << 0x18 |
+                                   (*(byte *)((int)&laneWord + operandComponent) & 0xc0) << 0x18 |
+                                   laneWordInsert8 & 0xffffff;
+                        *(char *)((int)&laneWord + operandComponent) = (char)(laneWordInsert8 >> 0x18);
                       }
                       else {
-                        uVar5 = uVar5 & ~(1 << (uVar17 & 0x3f));
-                        bVar2 = true;
-                        local_7c = (uVar17 & 0x3f) << 0x18 |
-                                   (*(byte *)((int)&local_b8 + uVar17) & 0xc0) << 0x18 |
-                                   local_7c & 0xffffff;
-                        *(char *)((int)&local_b8 + uVar17) = (char)(local_7c >> 0x18);
+                        usableMask = usableMask & ~(1 << (operandComponent & 0x3f));
+                        sawRemappedComponent = true;
+                        laneWordInsert9 = (operandComponent & 0x3f) << 0x18 |
+                                   (*(byte *)((int)&laneWord + operandComponent) & 0xc0) << 0x18 |
+                                   laneWordInsert9 & 0xffffff;
+                        *(char *)((int)&laneWord + operandComponent) = (char)(laneWordInsert9 >> 0x18);
                       }
                     }
-                    *(byte *)((int)&local_b8 + uVar17) = *(byte *)((int)&local_b8 + uVar17) | 0x80;
+                    *(byte *)((int)&laneWord + operandComponent) = *(byte *)((int)&laneWord + operandComponent) | 0x80;
                   }
-                  bVar1 = uVar14 != 3;
-                  uVar14 = uVar14 + 1;
-                } while (bVar1);
-                if (((((uVar5 != 0) && (bVar2)) && (bVar4)) &&
-                    ((uVar14 = uVar5, uVar13 == 0 || (uVar14 = uVar13, (uVar5 & uVar13) != 0)))) &&
-                   (uVar5 = ((int (*)())FUN_0013a774)(piVar7,uVar14,pass), uVar5 != 0)) {
-                  iVar10 = IRInst__getOperandRecord(piVar7,0);
-                  if (*(char *)(iVar10 + 0x13) == '\x01') {
-                    if ((piVar7[5] & 0x200U) != 0) {
-                      piVar8 = (int *)IRInst__getOperandSource(piVar7,piVar7[0x21]);
-                      bVar2 = false;
-                      for (; piVar8 != (int *)0x0; piVar8 = (int *)IRInst__getOperandSource(piVar8,piVar8[0x21])
+                  moreComponents = componentIndex != 3;
+                  componentIndex = componentIndex + 1;
+                } while (moreComponents);
+                if (((((usableMask != 0) && (sawRemappedComponent)) && (sawComponent3)) &&
+                    ((candidateMask = usableMask, requiredLaneMask == 0 || (candidateMask = requiredLaneMask, (usableMask & requiredLaneMask) != 0)))) &&
+                   (foldMask = ((int (*)())FUN_0013a774)(sourceInst,candidateMask,pass), foldMask != 0)) {
+                  destOperandRecord = IRInst__getOperandRecord(sourceInst,0);
+                  if (*(char *)(destOperandRecord + 0x13) == '\x01') {
+                    if ((sourceInst[5] & 0x200U) != 0) {
+                      chainInst = (int *)IRInst__getOperandSource(sourceInst,sourceInst[0x21]);
+                      chainFailed = false;
+                      for (; chainInst != (int *)0x0; chainInst = (int *)IRInst__getOperandSource(chainInst,chainInst[0x21])
                           ) {
-                        iVar10 = IRInst__getOperandRecord(piVar8,0);
-                        if (*(char *)(iVar10 + 0x13) == '\x01') {
-                          uVar5 = ((int (*)())FUN_0013a774)(piVar8,uVar5,pass);
-                          bVar2 = uVar5 == 0;
+                        destOperandRecord = IRInst__getOperandRecord(chainInst,0);
+                        if (*(char *)(destOperandRecord + 0x13) == '\x01') {
+                          foldMask = ((int (*)())FUN_0013a774)(chainInst,foldMask,pass);
+                          chainFailed = foldMask == 0;
                         }
                         else {
-                          iVar10 = (**(code **)(*piVar8 + 0x24))(piVar8);
-                          if ((iVar10 == 0) ||
-                             (iVar10 = OpcodeTraits__instFlagBit2(*(undefined4 *)(pass + 8),piVar8),
-                             iVar10 != 0)) goto LAB_0013ae10;
+                          predicateResult = (**(code **)(*chainInst + 0x24))(chainInst);
+                          if ((predicateResult == 0) ||
+                             (predicateResult = OpcodeTraits__instFlagBit2(*(undefined4 *)(pass + 8),chainInst),
+                             predicateResult != 0)) goto LAB_0013ae10;
                         }
-                        if (bVar2) goto LAB_0013ae10;
-                        if ((piVar8[5] & 0x200U) == 0) break;
+                        if (chainFailed) goto LAB_0013ae10;
+                        if ((chainInst[5] & 0x200U) == 0) break;
                       }
                     }
-                    if ((uVar5 & 1) == 0) {
-                      if ((uVar5 & 2) == 0) {
-                        iVar10 = 2;
-                        iVar19 = 2;
+                    if ((foldMask & 1) == 0) {
+                      if ((foldMask & 2) == 0) {
+                        laneIndex = 2;
+                        laneTagValue = 2;
                       }
                       else {
-                        iVar10 = 1;
-                        iVar19 = 1;
+                        laneIndex = 1;
+                        laneTagValue = 1;
                       }
                     }
                     else {
-                      iVar10 = 0;
-                      iVar19 = 0;
+                      laneIndex = 0;
+                      laneTagValue = 0;
                     }
-                    operandRecord = IRInst__getOperandRecord(piVar7,0);
-                    if ((*(char *)(operandRecord + 0x13) == '\x01') && ((piVar7[5] & 0x200U) != 0)) {
-                      for (operandRecord = IRInst__getOperandSource(piVar7,piVar7[0x21]); operandRecord != 0;
+                    operandRecord = IRInst__getOperandRecord(sourceInst,0);
+                    if ((*(char *)(operandRecord + 0x13) == '\x01') && ((sourceInst[5] & 0x200U) != 0)) {
+                      for (operandRecord = IRInst__getOperandSource(sourceInst,sourceInst[0x21]); operandRecord != 0;
                           operandRecord = IRInst__getOperandSource(operandRecord,*(undefined4 *)(operandRecord + 0x84))) {
-                        iVar12 = iVar9 + *(int *)(operandRecord + 0x14c) * 4;
-                        local_78 = iVar19 << 0x18 |
-                                   (*(byte *)(iVar12 + 3) & 0xc0) << 0x18 | local_78 & 0xffffff;
-                        *(char *)(iVar12 + 3) = (char)(local_78 >> 0x18);
-                        iVar12 = iVar9 + *(int *)(operandRecord + 0x14c) * 4;
-                        local_74 = (uint)*(byte *)(iVar12 + 3) << 0x18 | local_74 & 0xffffff |
+                        laneEntryAddr = laneTable + *(int *)(operandRecord + 0x14c) * 4;
+                        laneWordInsert10 = laneTagValue << 0x18 |
+                                   (*(byte *)(laneEntryAddr + 3) & 0xc0) << 0x18 | laneWordInsert10 & 0xffffff;
+                        *(char *)(laneEntryAddr + 3) = (char)(laneWordInsert10 >> 0x18);
+                        laneEntryAddr = laneTable + *(int *)(operandRecord + 0x14c) * 4;
+                        laneWordInsert11 = (uint)*(byte *)(laneEntryAddr + 3) << 0x18 | laneWordInsert11 & 0xffffff |
                                    0x80000000;
-                        *(char *)(iVar12 + 3) = (char)(local_74 >> 0x18);
-                        iVar12 = iVar9 + *(int *)(operandRecord + 0x14c) * 4;
-                        local_70 = (uint)*(byte *)(iVar12 + iVar10) << 0x18 | local_70 & 0xffffff |
+                        *(char *)(laneEntryAddr + 3) = (char)(laneWordInsert11 >> 0x18);
+                        laneEntryAddr = laneTable + *(int *)(operandRecord + 0x14c) * 4;
+                        laneWordInsert12 = (uint)*(byte *)(laneEntryAddr + laneIndex) << 0x18 | laneWordInsert12 & 0xffffff |
                                    0x80000000;
-                        *(char *)(iVar12 + iVar10) = (char)(local_70 >> 0x18);
-                        iVar12 = IRInst__getOperandRecord(operandRecord,0);
-                        if ((*(char *)(iVar12 + 0x13) != '\x01') ||
+                        *(char *)(laneEntryAddr + laneIndex) = (char)(laneWordInsert12 >> 0x18);
+                        chainDestRecord = IRInst__getOperandRecord(operandRecord,0);
+                        if ((*(char *)(chainDestRecord + 0x13) != '\x01') ||
                            ((*(uint *)(operandRecord + 0x14) & 0x200) == 0)) break;
                       }
                     }
-                    local_6c = iVar19 << 0x18 | (local_b8 & 0xc0) << 0x18 | local_6c & 0xffffff;
-                    local_b8 = CONCAT31((*(unsigned int *)((unsigned char *)&(local_b8) + 0)),(char)(local_6c >> 0x18));
+                    laneWordInsert13 = laneTagValue << 0x18 | (laneWord & 0xc0) << 0x18 | laneWordInsert13 & 0xffffff;
+                    laneWord = CONCAT31((*(unsigned int *)((unsigned char *)&(laneWord) + 0)),(char)(laneWordInsert13 >> 0x18));
                   }
                   goto LAB_0013ae00;
                 }
               }
 LAB_0013ae10: ;
             }
-            piVar8 = (int *)piVar20[2];
+            nextInst = (int *)inst[2];
           }
-          piVar7 = (int *)piVar8[2];
-          piVar20 = piVar8;
-        } while ((int *)piVar8[2] != (int *)0x0);
-        iVar6 = *(int *)(local_a4 + 8);
+          lookaheadInst = (int *)nextInst[2];
+          inst = nextInst;
+        } while ((int *)nextInst[2] != (int *)0x0);
+        blockCursor = *(int *)(currentBlock + 8);
       }
-      iVar15 = *(int *)(iVar6 + 8);
-      local_a4 = iVar6;
-    } while (*(int *)(iVar6 + 8) != 0);
-    iVar6 = *(int *)(local_a0 + 8);
+      nextBlock = *(int *)(blockCursor + 8);
+      currentBlock = blockCursor;
+    } while (*(int *)(blockCursor + 8) != 0);
+    blockCursor = *(int *)(blockListObject + 8);
   }
-  iVar15 = *(int *)(iVar6 + 8);
-  while (iVar10 = iVar15, iVar10 != 0) {
-    piVar20 = *(int **)(iVar6 + 0x98);
-    piVar7 = (int *)piVar20[2];
-    if ((int *)piVar20[2] != (int *)0x0) {
+  nextBlock = *(int *)(blockCursor + 8);
+  while (nextBlockB = nextBlock, nextBlockB != 0) {
+    inst = *(int **)(blockCursor + 0x98);
+    lookaheadInst = (int *)inst[2];
+    if ((int *)inst[2] != (int *)0x0) {
       do {
-        piVar8 = piVar7;
-        if ((piVar20[5] & 1U) != 0) {
-          iVar15 = (**(code **)(*piVar20 + 0x24))(piVar20);
-          if ((iVar15 != 0) &&
-             (iVar15 = OpcodeTraits__instFlagBit2(*(undefined4 *)(pass + 8),piVar20), iVar15 == 0)) {
-            uVar5 = (uint)*(byte *)(piVar20[0x53] * 4 + iVar9 + 3);
-            local_68 = uVar5 << 0x18 | local_68 & 0xffffff;
-            if ((int)local_68 < 0) {
-              local_64 = uVar5 << 0x18 | local_64 & 0xffffff;
-              uVar5 = uVar5 & 0x3f;
-              IRInst__getOperandRecord(piVar20,0);
-              if (uVar5 != 3) {
-                iVar15 = IRInst__getOperandRecord(piVar20,0);
-                SelectWord__selectWhereMasked(&local_a8,*(undefined4 *)(iVar15 + 0x10),piVar20[3]);
-                local_b8 = local_a8;
-                uVar13 = local_b8;
-                (*(unsigned char *)((unsigned char *)&(local_b8) + 3)) = (char)local_a8;
-                bVar2 = (char)local_b8 == '\0';
-                local_b8 = uVar13;
-                if (bVar2) {
-                  (*(unsigned int *)((unsigned char *)&(local_b8) + 0)) = (undefined3)(local_a8 >> 8);
-                  local_b8 = CONCAT31((*(unsigned int *)((unsigned char *)&(local_b8) + 0)),1);
-                  *(undefined1 *)((int)&local_b8 + uVar5) = 0;
-                  iVar15 = piVar20[0x22];
-                  *(undefined1 *)((int)piVar20 + 0xf) = 0;
-                  *(undefined1 *)((int)piVar20 + uVar5 + 0xc) = 1;
-                  iVar15 = OpcodeTraits__flagBit7(*(undefined4 *)(iVar15 + 8),*(undefined4 *)(pass + 8));
-                  if (iVar15 == 0) {
-                    for (iVar15 = 1; iVar10 = (**(code **)(*piVar20 + 0x14))(piVar20),
-                        iVar15 <= iVar10; iVar15 = iVar15 + 1) {
-                      iVar10 = IRInst__getOperandSource(piVar20,iVar15);
-                      iVar19 = IRInst__getOperandRecord(piVar20,iVar15);
-                      if (*(char *)(uVar5 + iVar19 + 0x10) != '\x04') {
-                        IRInst__getOperandRecord(piVar20,iVar15);
-                        IRInst__getOperandRecord(piVar20,iVar15);
+        nextInst = lookaheadInst;
+        if ((inst[5] & 1U) != 0) {
+          flagResult = (**(code **)(*inst + 0x24))(inst);
+          if ((flagResult != 0) &&
+             (flagResult = OpcodeTraits__instFlagBit2(*(undefined4 *)(pass + 8),inst), flagResult == 0)) {
+            laneTag = (uint)*(byte *)(inst[0x53] * 4 + laneTable + 3);
+            laneWordInsert14 = laneTag << 0x18 | laneWordInsert14 & 0xffffff;
+            if ((int)laneWordInsert14 < 0) {
+              laneWordInsert15 = laneTag << 0x18 | laneWordInsert15 & 0xffffff;
+              laneTag = laneTag & 0x3f;
+              IRInst__getOperandRecord(inst,0);
+              if (laneTag != 3) {
+                destRecord = IRInst__getOperandRecord(inst,0);
+                SelectWord__selectWhereMasked(&maskedSelectWord,*(undefined4 *)(destRecord + 0x10),inst[3]);
+                laneWord = maskedSelectWord;
+                savedLaneWord = laneWord;
+                (*(unsigned char *)((unsigned char *)&(laneWord) + 3)) = (char)maskedSelectWord;
+                laneByteZero = (char)laneWord == '\0';
+                laneWord = savedLaneWord;
+                if (laneByteZero) {
+                  (*(unsigned int *)((unsigned char *)&(laneWord) + 0)) = (undefined3)(maskedSelectWord >> 8);
+                  laneWord = CONCAT31((*(unsigned int *)((unsigned char *)&(laneWord) + 0)),1);
+                  *(undefined1 *)((int)&laneWord + laneTag) = 0;
+                  opcodeDesc = inst[0x22];
+                  *(undefined1 *)((int)inst + 0xf) = 0;
+                  *(undefined1 *)((int)inst + laneTag + 0xc) = 1;
+                  flagResult = OpcodeTraits__flagBit7(*(undefined4 *)(opcodeDesc + 8),*(undefined4 *)(pass + 8));
+                  if (flagResult == 0) {
+                    for (operandIndex = 1; operandLimit = (**(code **)(*inst + 0x14))(inst),
+                        operandIndex <= operandLimit; operandIndex = operandIndex + 1) {
+                      sourceInstB = IRInst__getOperandSource(inst,operandIndex);
+                      operandRecordB = IRInst__getOperandRecord(inst,operandIndex);
+                      if (*(char *)(laneTag + operandRecordB + 0x10) != '\x04') {
+                        IRInst__getOperandRecord(inst,operandIndex);
+                        IRInst__getOperandRecord(inst,operandIndex);
                       }
-                      pcVar18 = *(code **)(*piVar20 + 0x88);
-                      iVar19 = IRInst__getOperandRecord(piVar20,iVar15);
-                      (*pcVar18)(piVar20,iVar15,uVar5,*(undefined1 *)(iVar19 + 0x13));
-                      (**(code **)(*piVar20 + 0x88))
-                                (piVar20,iVar15,3,4,in_r7,in_r8,*(code **)(*piVar20 + 0x88));
-                      if (*(int *)(iVar10 + 0x98) == 0x33) {
-                        (**(code **)(*piVar20 + 0x88))(piVar20,iVar15,uVar5,uVar5);
-                        *(undefined1 *)(iVar10 + uVar5 + 0x9c) = 0;
-                        *(undefined1 *)(iVar10 + uVar5 + 0xc) = 1;
+                      setComponentFn = *(code **)(*inst + 0x88);
+                      operandRecordB = IRInst__getOperandRecord(inst,operandIndex);
+                      (*setComponentFn)(inst,operandIndex,laneTag,*(undefined1 *)(operandRecordB + 0x13));
+                      (**(code **)(*inst + 0x88))
+                                (inst,operandIndex,3,4,staleArg5,staleArg6,*(code **)(*inst + 0x88));
+                      if (*(int *)(sourceInstB + 0x98) == 0x33) {
+                        (**(code **)(*inst + 0x88))(inst,operandIndex,laneTag,laneTag);
+                        *(undefined1 *)(sourceInstB + laneTag + 0x9c) = 0;
+                        *(undefined1 *)(sourceInstB + laneTag + 0xc) = 1;
                       }
                     }
                   }
-                  piVar7 = *(int **)(*(int *)(pass + 8) + 0x30c);
-                  iVar15 = (**(code **)(*piVar7 + 0x7c))(piVar7,piVar20);
-                  if (iVar15 != 0) {
-                    piVar20[0x27] = local_b8;
+                  targetInfo = *(int **)(*(int *)(pass + 8) + 0x30c);
+                  flagResult = (**(code **)(*targetInfo + 0x7c))(targetInfo,inst);
+                  if (flagResult != 0) {
+                    inst[0x27] = laneWord;
                   }
                 }
               }
             }
           }
-          for (iVar15 = 1; iVar10 = (**(code **)(*piVar20 + 0x14))(piVar20), iVar15 <= iVar10;
-              iVar15 = iVar15 + 1) {
-            piVar7 = (int *)IRInst__getOperandSource(piVar20,iVar15);
-            iVar19 = piVar7[0x53];
-            iVar10 = (**(code **)(*piVar7 + 0x24))(piVar7);
-            if (iVar10 != 0) {
-              iVar10 = iVar9 + iVar19 * 4;
-              bVar3 = *(byte *)(iVar10 + 3);
-              if (((int)((uint)bVar3 << 0x18) < 0) && ((bVar3 & 0x3f) != 3)) {
-                iVar19 = 0;
+          for (operandIndex = 1; operandLimit = (**(code **)(*inst + 0x14))(inst), operandIndex <= operandLimit;
+              operandIndex = operandIndex + 1) {
+            sourceInst = (int *)IRInst__getOperandSource(inst,operandIndex);
+            sourceId = sourceInst[0x53];
+            predicateResult = (**(code **)(*sourceInst + 0x24))(sourceInst);
+            if (predicateResult != 0) {
+              laneEntryPtr = laneTable + sourceId * 4;
+              laneTagByte = *(byte *)(laneEntryPtr + 3);
+              if (((int)((uint)laneTagByte << 0x18) < 0) && ((laneTagByte & 0x3f) != 3)) {
+                componentIdxB = 0;
                 do {
-                  operandRecord = IRInst__getOperandRecord(piVar20,iVar15);
-                  if (*(char *)(iVar19 + operandRecord + 0x10) == '\x03') {
-                    uVar5 = (uint)*(byte *)(iVar10 + 3);
-                    local_60 = uVar5 << 0x18 | local_60 & 0xffffff;
-                    (**(code **)(*piVar20 + 0x88))
-                              (piVar20,iVar15,iVar19,uVar5 & 0x3f,in_r7,in_r8,
-                               *(code **)(*piVar20 + 0x88));
+                  operandRecord = IRInst__getOperandRecord(inst,operandIndex);
+                  if (*(char *)(componentIdxB + operandRecord + 0x10) == '\x03') {
+                    laneTagB = (uint)*(byte *)(laneEntryPtr + 3);
+                    laneWordInsert16 = laneTagB << 0x18 | laneWordInsert16 & 0xffffff;
+                    (**(code **)(*inst + 0x88))
+                              (inst,operandIndex,componentIdxB,laneTagB & 0x3f,staleArg5,staleArg6,
+                               *(code **)(*inst + 0x88));
                   }
-                  bVar2 = iVar19 != 3;
-                  iVar19 = iVar19 + 1;
-                } while (bVar2);
+                  moreComponentsB = componentIdxB != 3;
+                  componentIdxB = componentIdxB + 1;
+                } while (moreComponentsB);
               }
             }
           }
-          piVar8 = (int *)piVar20[2];
+          nextInst = (int *)inst[2];
         }
-        piVar7 = (int *)piVar8[2];
-        piVar20 = piVar8;
-      } while ((int *)piVar8[2] != (int *)0x0);
-      iVar10 = *(int *)(iVar6 + 8);
+        lookaheadInst = (int *)nextInst[2];
+        inst = nextInst;
+      } while ((int *)nextInst[2] != (int *)0x0);
+      nextBlockB = *(int *)(blockCursor + 8);
     }
-    iVar6 = iVar10;
-    iVar15 = *(int *)(iVar10 + 8);
+    blockCursor = nextBlockB;
+    nextBlock = *(int *)(nextBlockB + 8);
   }
-  return Arena__free(*(undefined4 *)(*(int *)(pass + 8) + 0x378),iVar9);
+  return Arena__free(*(undefined4 *)(*(int *)(pass + 8) + 0x378),laneTable);
 }
 
 /* FUN_0013b1e8 @ 0x13b1e8 (520 bytes) */
