@@ -2208,6 +2208,7 @@ int FUN_0017ebb0(ctx, param_2, param_3, negateFlag)
 int FUN_0017ee68(ctx)
   int ctx;
 {
+  bool hasExtraSource;
   undefined4 resultScaleCode;
   undefined4 saturate;
   undefined4 operandRef2;
@@ -2216,126 +2217,126 @@ int FUN_0017ee68(ctx)
   int inst;
   int operandIndex;
   int operandRecord;
-  bool bVar1;
-  uint uVar2;
-  uint uVar3;
-  undefined *puVar4;
-  int iVar5;
+  bool isLastLane;
+  uint selectConstA;
+  uint selectConstA2;
+  undefined *selectTable;
+  int newValueNumber;
   undefined4 operandRef3;
-  undefined4 uVar7;
-  undefined4 uVar8;
+  undefined4 selectTemp;
+  undefined4 selectTemp2;
   undefined4 operandRef4;
-  undefined4 uVar10;
-  int iVar11;
-  undefined4 uVar12;
+  undefined4 destSelectWord;
+  int origOpcode;
+  undefined4 operandValueNumber;
   undefined4 operandRef;
-  uint uVar14;
-  undefined4 uVar15;
-  undefined4 uVar16;
+  uint operandSelect;
+  undefined4 savedDestRegister;
+  undefined4 savedDestRegisterOffset;
   int loopIndex;
-  int iVar18;
+  int rebuiltInst;
   undefined4 block;
   undefined4 afterInst;
-  float local_58 [5];
+  float laneValues [5];
   
   loopIndex = 1;
-  while ((FUN_00178d78(local_58,ctx,loopIndex), local_58[0] != FLOAT_001aa0e8 &&
-         (local_58[0] != FLOAT_001aa114))) {
-    bVar1 = loopIndex == 2;
+  while ((FUN_00178d78(laneValues,ctx,loopIndex), laneValues[0] != FLOAT_001aa0e8 &&
+         (laneValues[0] != FLOAT_001aa114))) {
+    isLastLane = loopIndex == 2;
     loopIndex = loopIndex + 1;
-    if (bVar1) {
+    if (isLastLane) {
       return 0;
     }
   }
   inst = *(int *)(ctx + 0xb0);
   operandIndex = (loopIndex == 1) + 1;
   operandRef4 = *(undefined4 *)(inst + 0x8c);
-  iVar11 = *(int *)(*(int *)(inst + 0x88) + 8);
+  origOpcode = *(int *)(*(int *)(inst + 0x88) + 8);
   loopIndex = IRInst__getOperandRecord(inst,0);
   inst2 = *(int *)(ctx + 0xb0);
-  uVar10 = *(undefined4 *)(loopIndex + 0x10);
+  destSelectWord = *(undefined4 *)(loopIndex + 0x10);
   operandRef = *(undefined4 *)(operandIndex * 0x18 + inst2 + 0x8c);
   saturate = *(undefined4 *)(inst2 + 0x120);
   resultScaleCode = *(undefined4 *)(inst2 + 0x124);
   loopIndex = IRInst__getOperandRecord(inst2,operandIndex);
   node = *(int *)(ctx + 0xb0);
-  uVar14 = *(uint *)(loopIndex + 0x10);
-  uVar12 = *(undefined4 *)(operandIndex * 4 + ctx + 0x210);
-  bVar1 = (*(uint *)(node + 0x14) >> 9 & 1) != 0;
-  if (bVar1) {
+  operandSelect = *(uint *)(loopIndex + 0x10);
+  operandValueNumber = *(undefined4 *)(operandIndex * 4 + ctx + 0x210);
+  hasExtraSource = (*(uint *)(node + 0x14) >> 9 & 1) != 0;
+  if (hasExtraSource) {
     operandRef3 = *(undefined4 *)(*(int *)(node + 0x84) * 0x18 + node + 0x8c);
   }
   else {
     operandRef3 = 0;
   }
   afterInst = *(undefined4 *)(node + 4);
-  uVar15 = *(undefined4 *)(node + 0x94);
-  uVar16 = *(undefined4 *)(node + 0x98);
+  savedDestRegister = *(undefined4 *)(node + 0x94);
+  savedDestRegisterOffset = *(undefined4 *)(node + 0x98);
   block = *(undefined4 *)(node + 0x158);
   DList__unlink(node);
-  iVar18 = *(int *)(ctx + 0xb0);
-  IRInst__reinitAsBinary(iVar18,0x12,*(undefined4 *)(ctx + 0x238));
-  Block__insertInstAfter(block,afterInst,iVar18);
+  rebuiltInst = *(int *)(ctx + 0xb0);
+  IRInst__reinitAsBinary(rebuiltInst,0x12,*(undefined4 *)(ctx + 0x238));
+  Block__insertInstAfter(block,afterInst,rebuiltInst);
   loopIndex = *(int *)(ctx + 0x238);
-  iVar5 = *(int *)(loopIndex + 0x3ac) + -1;
+  newValueNumber = *(int *)(loopIndex + 0x3ac) + -1;
   operandRef2 = *(undefined4 *)(*(int *)(loopIndex + 0x6c4) + 0x3ac);
-  *(int *)(loopIndex + 0x3ac) = iVar5;
-  operandRef2 = FUN_00127608(operandRef2,0,iVar5,0);
+  *(int *)(loopIndex + 0x3ac) = newValueNumber;
+  operandRef2 = FUN_00127608(operandRef2,0,newValueNumber,0);
   FUN_0012306c(operandRef2,*(undefined4 *)(ctx + 0xb0));
   IRInst__setOperandRef(*(undefined4 *)(ctx + 0xb0),0,operandRef2);
-  *(undefined4 *)(iVar18 + 0x94) = uVar15;
-  *(undefined4 *)(iVar18 + 0x98) = uVar16;
-  IRInst__setOperandRef(iVar18,1,operandRef);
-  IRInst__setOperandRef(iVar18,2,operandRef);
+  *(undefined4 *)(rebuiltInst + 0x94) = savedDestRegister;
+  *(undefined4 *)(rebuiltInst + 0x98) = savedDestRegisterOffset;
+  IRInst__setOperandRef(rebuiltInst,1,operandRef);
+  IRInst__setOperandRef(rebuiltInst,2,operandRef);
   loopIndex = IRInst__create(0x12,*(undefined4 *)(ctx + 0x238));
-  Block__insertInstAfter(block,iVar18,loopIndex);
+  Block__insertInstAfter(block,rebuiltInst,loopIndex);
   IRInst__setOperandRef(loopIndex,0,operandRef4);
-  *(undefined4 *)(loopIndex + 0x94) = uVar15;
-  *(undefined4 *)(loopIndex + 0x98) = uVar16;
-  *(undefined4 *)(loopIndex + 0x9c) = uVar10;
-  if (bVar1) {
+  *(undefined4 *)(loopIndex + 0x94) = savedDestRegister;
+  *(undefined4 *)(loopIndex + 0x98) = savedDestRegisterOffset;
+  *(undefined4 *)(loopIndex + 0x9c) = destSelectWord;
+  if (hasExtraSource) {
     IRInst__appendSource(loopIndex,operandRef3);
     *(uint *)(loopIndex + 0x14) = *(uint *)(loopIndex + 0x14) | 0x200;
   }
   *(undefined4 *)(loopIndex + 0x120) = saturate;
   *(undefined4 *)(loopIndex + 0x124) = resultScaleCode;
-  *(undefined4 *)(ctx + 0x218) = uVar12;
-  *(undefined4 *)(ctx + 0x214) = uVar12;
-  puVar4 = PTR_DAT_001e8b8c;
-  uVar2 = DAT_001b01d8;
-  if (iVar11 == 0x1c) {
-    uVar7 = *(undefined4 *)(PTR_DAT_001e8b8c + (uVar14 >> 0x16 & 0x3fc));
-    *(uint *)(iVar18 + 0x9c) = DAT_001b01d0 & 0xffffff;
-    operandRecord = IRInst__getOperandRecord(iVar18,1);
-    uVar8 = *(undefined4 *)(puVar4 + (uVar14 >> 0xe & 0x3fc));
-    *(undefined4 *)(operandRecord + 0x10) = uVar7;
-    operandRecord = IRInst__getOperandRecord(iVar18,2);
-    *(undefined4 *)(operandRecord + 0x10) = uVar8;
+  *(undefined4 *)(ctx + 0x218) = operandValueNumber;
+  *(undefined4 *)(ctx + 0x214) = operandValueNumber;
+  selectTable = PTR_DAT_001e8b8c;
+  selectConstA = DAT_001b01d8;
+  if (origOpcode == 0x1c) {
+    selectTemp = *(undefined4 *)(PTR_DAT_001e8b8c + (operandSelect >> 0x16 & 0x3fc));
+    *(uint *)(rebuiltInst + 0x9c) = DAT_001b01d0 & 0xffffff;
+    operandRecord = IRInst__getOperandRecord(rebuiltInst,1);
+    selectTemp2 = *(undefined4 *)(selectTable + (operandSelect >> 0xe & 0x3fc));
+    *(undefined4 *)(operandRecord + 0x10) = selectTemp;
+    operandRecord = IRInst__getOperandRecord(rebuiltInst,2);
+    *(undefined4 *)(operandRecord + 0x10) = selectTemp2;
     IRInst__setOperandRef(loopIndex,1,operandRef2);
     IRInst__setOperandRef(loopIndex,2,operandRef);
-    uVar7 = *(undefined4 *)puVar4;
+    selectTemp = *(undefined4 *)selectTable;
     operandRecord = IRInst__getOperandRecord(loopIndex,1);
-    *(undefined4 *)(operandRecord + 0x10) = uVar7;
-    uVar7 = *(undefined4 *)(puVar4 + (uVar14 >> 6 & 0x3fc));
+    *(undefined4 *)(operandRecord + 0x10) = selectTemp;
+    selectTemp = *(undefined4 *)(selectTable + (operandSelect >> 6 & 0x3fc));
     loopIndex = IRInst__getOperandRecord(loopIndex,2);
-    *(undefined4 *)(loopIndex + 0x10) = uVar7;
+    *(undefined4 *)(loopIndex + 0x10) = selectTemp;
   }
-  else if (iVar11 == 0x1d) {
-    *(uint *)(iVar18 + 0x9c) = DAT_001b01d0 & 0xffff;
-    operandRecord = IRInst__getOperandRecord(iVar18,1);
-    uVar3 = DAT_001b01d8;
-    *(uint *)(operandRecord + 0x10) = uVar14 & 0xff0000 | uVar14 & 0xff000000 | uVar2 & 0xffff;
-    operandRecord = IRInst__getOperandRecord(iVar18,2);
-    *(uint *)(operandRecord + 0x10) = (uVar14 & 0xff) << 0x10 | (uVar14 & 0xff00) << 0x10 | uVar3 & 0xffff;
+  else if (origOpcode == 0x1d) {
+    *(uint *)(rebuiltInst + 0x9c) = DAT_001b01d0 & 0xffff;
+    operandRecord = IRInst__getOperandRecord(rebuiltInst,1);
+    selectConstA2 = DAT_001b01d8;
+    *(uint *)(operandRecord + 0x10) = operandSelect & 0xff0000 | operandSelect & 0xff000000 | selectConstA & 0xffff;
+    operandRecord = IRInst__getOperandRecord(rebuiltInst,2);
+    *(uint *)(operandRecord + 0x10) = (operandSelect & 0xff) << 0x10 | (operandSelect & 0xff00) << 0x10 | selectConstA2 & 0xffff;
     IRInst__setOperandRef(loopIndex,1,operandRef2);
     IRInst__setOperandRef(loopIndex,2,operandRef2);
-    puVar4 = PTR_DAT_001e8b8c;
-    uVar7 = *(undefined4 *)PTR_DAT_001e8b8c;
+    selectTable = PTR_DAT_001e8b8c;
+    selectTemp = *(undefined4 *)PTR_DAT_001e8b8c;
     operandRecord = IRInst__getOperandRecord(loopIndex,1);
-    uVar8 = *(undefined4 *)(puVar4 + 4);
-    *(undefined4 *)(operandRecord + 0x10) = uVar7;
+    selectTemp2 = *(undefined4 *)(selectTable + 4);
+    *(undefined4 *)(operandRecord + 0x10) = selectTemp;
     loopIndex = IRInst__getOperandRecord(loopIndex,2);
-    *(undefined4 *)(loopIndex + 0x10) = uVar8;
+    *(undefined4 *)(loopIndex + 0x10) = selectTemp2;
   }
   ValueKey__rebuild(ctx);
   return 1;
