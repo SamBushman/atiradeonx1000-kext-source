@@ -1,0 +1,29 @@
+use	FUN_0012dd58	iVar2	successorBlock	INFERRED	successor block read from the current block's successor array	^\s*iVar2\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_2\[0x34\]\ \+\ 8\)\ \+\ iVar1\);$	+4
+use	FUN_0012dd58	iVar2	successorBlock	INFERRED	successor block read from the current block's successor array	^\s*\*piVar3\ =\ iVar2;$	+1
+use	FUN_0012dd58	iVar1	successorByteOffset	INFERRED	byte offset into the current block's successor array	^\s*iVar1\ =\ 0;$	+1
+use	FUN_0012dd58	iVar1	successorByteOffset	INFERRED	byte offset into the current block's successor array	^\s*iVar2\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_2\[0x34\]\ \+\ 8\)\ \+\ iVar1\);$	+1
+use	FUN_0012dd58	iVar1	successorByteOffset	INFERRED	byte offset into the current block's successor array	^\s*iVar1\ =\ iVar1\ \+\ 4;$	+1
+use	FUN_0012dd58	iVar1	successorByteOffset	INFERRED	byte offset into the current block's successor array	^\s*if\ \(\(param_2\ ==\ \(int\ \*\)0x0\)\ \|\|\ \(iVar1\ =\ FUN_00194374\(\&local_44,param_2\),\ iVar1\ ==\ 0\)\)\ break;$	+1
+use	FUN_0012dd58	piVar3	workSlotRef	INFERRED	slot reference in the work list	^\s*piVar3\ =\ local_3c\ \+\ local_40;$	+1
+use	FUN_0012dd58	piVar3	workSlotRef	INFERRED	slot reference in the work list	^\s*piVar3\ =\ \(int\ \*\)FUN_0019423c\(\&local_44,local_40\);$	+1
+use	FUN_0012dd58	piVar3	workSlotRef	INFERRED	slot reference in the work list	^\s*\*piVar3\ =\ iVar2;$	+1
+use	FUN_0012dd58	piVar3	workSlotRef	INFERRED	slot reference in the work list	^\s*if\ \(\(\(int\)\(\(ulonglong\)uVar7\ >>\ 0x20\)\ !=\ 0\)\ \&\&$	+4
+use	FUN_0012dd58	piVar3	workSlotRef	INFERRED	slot reference in the work list	^\s*\(\*\*\(code\ \*\*\)\(\*piVar3\ \+\ 0xc\)\)\(piVar3,\*\(uint\ \*\)\(param_1\ \+\ 0x30\)\ >>\ 7\ \&\ 1,a2\);$	+1
+use	FUN_0012dd58	puVar4	workFirstRef	INFERRED	first element reference of the work list	^\s*puVar4\ =\ local_3c;$	+1
+use	FUN_0012dd58	puVar4	workFirstRef	INFERRED	first element reference of the work list	^\s*puVar4\ =\ \(undefined4\ \*\)FUN_0019423c\(\&local_44,0\);$	+1
+use	FUN_0012dd58	puVar4	workFirstRef	INFERRED	first element reference of the work list	^\s*param_2\ =\ \(int\ \*\)\*puVar4;$	+1
+use	FUN_0012dd58	a2	extraArg	INFERRED	end block, later the compiler, passed as a trailing argument	^\s*a2\ =\ param_3;$	+1
+use	FUN_0012dd58	a2	extraArg	INFERRED	end block, later the compiler, passed as a trailing argument	^\s*if\ \(\(\(int\)\(\(ulonglong\)uVar7\ >>\ 0x20\)\ !=\ 0\)\ \&\&$	+3
+use	FUN_0012dd58	a2	extraArg	INFERRED	end block, later the compiler, passed as a trailing argument	^\s*a2\ =\ \*\(int\ \*\)\(param_1\ \+\ 8\);$	+2
+use	FUN_0012dd58	in_r6	staleArg6	INFERRED	r6 left over, forwarded to Block__getBranchInst	^\s*if\ \(\(\(int\)\(\(ulonglong\)uVar7\ >>\ 0x20\)\ !=\ 0\)\ \&\&$	+3
+use	FUN_0012dd58	in_r7	staleArg7	INFERRED	r7 left over, forwarded to Block__getBranchInst	^\s*if\ \(\(\(int\)\(\(ulonglong\)uVar7\ >>\ 0x20\)\ !=\ 0\)\ \&\&$	+3
+use	FUN_0012dd58	in_r8	staleArg8	INFERRED	r8 left over, forwarded to Block__getBranchInst	^\s*if\ \(\(\(int\)\(\(ulonglong\)uVar7\ >>\ 0x20\)\ !=\ 0\)\ \&\&$	+3
+use	FUN_0012dd58	uVar5	visitStampOrCount	INFERRED	program visit stamp, reused for the work list count after the push	^\s*uVar5\ =\ \*\(uint\ \*\)\(param_1\ \+\ 8\);$	+1
+use	FUN_0012dd58	uVar5	visitStampOrCount	INFERRED	program visit stamp, reused for the work list count after the push	^\s*local_38\ =\ \*\(undefined4\ \*\)\(uVar5\ \+\ 0x378\);$	+1
+use	FUN_0012dd58	uVar5	visitStampOrCount	INFERRED	program visit stamp, reused for the work list count after the push	^\s*if\ \(\(\(iVar2\ !=\ 0\)\ \&\&\ \(uVar5\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x474\),\ uVar5\ !=\ \*\(uint\ \*\)\(iVar2\ \+\ 0x118\)\)\)$	+3
+use	FUN_0012dd58	uVar5	visitStampOrCount	INFERRED	program visit stamp, reused for the work list count after the push	^\s*uVar5\ =\ local_40\ \+\ 1;$	+1
+use	FUN_0012dd58	uVar5	visitStampOrCount	INFERRED	program visit stamp, reused for the work list count after the push	^\s*local_40\ =\ uVar5;$	+1
+use	FUN_0012dd58	uVar5	visitStampOrCount	INFERRED	program visit stamp, reused for the work list count after the push	^\s*if\ \(\(\(int\)\(\(ulonglong\)uVar7\ >>\ 0x20\)\ !=\ 0\)\ \&\&$	+3
+use	FUN_0012dd58	uVar7	branchHeaderQuery	INFERRED	block vtable slot 0x24 return pair (is an if header)	^\s*uVar7\ =\ \(\*\*\(code\ \*\*\)\(\*param_2\ \+\ 0x24\)\)\(param_2\);$	+4
+local	FUN_0012dd58	param_3	regionEnd	INFERRED	last block of the region; its successor is reconnected to the region's predecessor
+local	FUN_0012dd58	param_2	currentBlock	INFERRED	block being removed (the region's first block, then each block from the work list)

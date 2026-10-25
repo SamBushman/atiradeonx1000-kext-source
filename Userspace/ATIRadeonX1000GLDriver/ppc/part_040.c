@@ -1651,24 +1651,24 @@ int FudoPs__flattenIfs(this, flattenPass)
 }
 
 /* FUN_0012dd58 @ 0x12dd58 (512 bytes) */
-int FUN_0012dd58(program, param_2, param_3)
+int FUN_0012dd58(program, currentBlock, regionEnd)
   int program;
-  int *param_2;
-  int param_3;
+  int *currentBlock;
+  int regionEnd;
 {
   int successor;
   int predecessor;
-  int iVar1;
-  int iVar2;
-  int *piVar3;
-  undefined4 *puVar4;
-  int a2;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
-  uint uVar5;
+  int successorByteOffset;
+  int successorBlock;
+  int *workSlotRef;
+  undefined4 *workFirstRef;
+  int extraArg;
+  undefined4 staleArg6;
+  undefined4 staleArg7;
+  undefined4 staleArg8;
+  uint visitStampOrCount;
   uint loopIndex;
-  undefined8 uVar7;
+  undefined8 branchHeaderQuery;
   /* issue #64 (auto): growable-vector header (capacity/count/data-pointer/arena) used with Vector__elementRefGrow - vecCapacity/vecCount/vecData/vecArena are its four words by their own hex offsets. Vector__elementRefGrow unconditionally reads all four on every call (even its "no grow needed" path reallocs+copies+frees), so they must be one contiguous buffer; left as four separate locals, an -O0 rebuild does not place them contiguously. Merged into one 0x10-byte buffer (part of the issue #64 live-differential sweep). */
   unsigned char local_44_buf [0x10];
   #define vecCapacity (*(uint *)(local_44_buf + 0x00))
@@ -1676,57 +1676,57 @@ int FUN_0012dd58(program, param_2, param_3)
   #define vecData (*(undefined4 * *)(local_44_buf + 0x08))
   #define vecArena (*(undefined4 *)(local_44_buf + 0x0c))
   
-  uVar5 = *(uint *)(program + 8);
+  visitStampOrCount = *(uint *)(program + 8);
   *(int *)(program + 0x474) = *(int *)(program + 0x474) + 1;
-  vecArena = *(undefined4 *)(uVar5 + 0x378);
+  vecArena = *(undefined4 *)(visitStampOrCount + 0x378);
   vecCount = 0;
   vecCapacity = 2;
-  a2 = param_3;
+  extraArg = regionEnd;
   vecData = (undefined4 *)Arena__alloc(vecArena,8);
-  predecessor = Block__getPredecessor(param_2,0);
-  Vector__removeValue(*(undefined4 *)(predecessor + 0xd0),param_2);
-  successor = Block__getSuccessor(param_3,0);
-  Vector__removeValue(*(undefined4 *)(successor + 0xd4),param_3);
+  predecessor = Block__getPredecessor(currentBlock,0);
+  Vector__removeValue(*(undefined4 *)(predecessor + 0xd0),currentBlock);
+  successor = Block__getSuccessor(regionEnd,0);
+  Vector__removeValue(*(undefined4 *)(successor + 0xd4),regionEnd);
   Block__connect(predecessor,successor);
   while( true ) {
-    iVar1 = 0;
-    for (loopIndex = 1; loopIndex <= *(uint *)(param_2[0x34] + 4); loopIndex = loopIndex + 1) {
-      iVar2 = *(int *)(*(int *)(param_2[0x34] + 8) + iVar1);
-      if (((iVar2 != 0) && (uVar5 = *(uint *)(program + 0x474), uVar5 != *(uint *)(iVar2 + 0x118)))
-         && (param_3 != iVar2)) {
-        *(uint *)(iVar2 + 0x118) = uVar5;
+    successorByteOffset = 0;
+    for (loopIndex = 1; loopIndex <= *(uint *)(currentBlock[0x34] + 4); loopIndex = loopIndex + 1) {
+      successorBlock = *(int *)(*(int *)(currentBlock[0x34] + 8) + successorByteOffset);
+      if (((successorBlock != 0) && (visitStampOrCount = *(uint *)(program + 0x474), visitStampOrCount != *(uint *)(successorBlock + 0x118)))
+         && (regionEnd != successorBlock)) {
+        *(uint *)(successorBlock + 0x118) = visitStampOrCount;
         if (vecCount < vecCapacity) {
-          uVar5 = vecCount + 1;
+          visitStampOrCount = vecCount + 1;
           vecData[vecCount] = 0;
-          piVar3 = vecData + vecCount;
-          vecCount = uVar5;
+          workSlotRef = vecData + vecCount;
+          vecCount = visitStampOrCount;
         }
         else {
-          piVar3 = (int *)Vector__elementRefGrow(&vecCapacity,vecCount);
+          workSlotRef = (int *)Vector__elementRefGrow(&vecCapacity,vecCount);
         }
-        *piVar3 = iVar2;
+        *workSlotRef = successorBlock;
       }
-      iVar1 = iVar1 + 4;
+      successorByteOffset = successorByteOffset + 4;
     }
-    uVar7 = (**(code **)(*param_2 + 0x24))(param_2);
-    if (((int)((ulonglong)uVar7 >> 0x20) != 0) &&
-       (piVar3 = (int *)Block__getBranchInst(param_2,(int)uVar7,a2,in_r6,in_r7,in_r8,uVar5),
-       piVar3 != (int *)0x0)) {
-      Program__removeInst(program,piVar3);
-      a2 = *(int *)(program + 8);
-      (**(code **)(*piVar3 + 0xc))(piVar3,*(uint *)(program + 0x30) >> 7 & 1,a2);
-      param_2[0x4c] = 0;
+    branchHeaderQuery = (**(code **)(*currentBlock + 0x24))(currentBlock);
+    if (((int)((ulonglong)branchHeaderQuery >> 0x20) != 0) &&
+       (workSlotRef = (int *)Block__getBranchInst(currentBlock,(int)branchHeaderQuery,extraArg,staleArg6,staleArg7,staleArg8,visitStampOrCount),
+       workSlotRef != (int *)0x0)) {
+      Program__removeInst(program,workSlotRef);
+      extraArg = *(int *)(program + 8);
+      (**(code **)(*workSlotRef + 0xc))(workSlotRef,*(uint *)(program + 0x30) >> 7 & 1,extraArg);
+      currentBlock[0x4c] = 0;
     }
-    Block__detach(param_2);
+    Block__detach(currentBlock);
     if (vecCount == 0) break;
-    puVar4 = vecData;
+    workFirstRef = vecData;
     if (vecCapacity == 0) {
-      puVar4 = (undefined4 *)Vector__elementRefGrow(&vecCapacity,0);
+      workFirstRef = (undefined4 *)Vector__elementRefGrow(&vecCapacity,0);
     }
-    param_2 = (int *)*puVar4;
-    if ((param_2 == (int *)0x0) || (iVar1 = Vector__removeValue(&vecCapacity,param_2), iVar1 == 0)) break;
+    currentBlock = (int *)*workFirstRef;
+    if ((currentBlock == (int *)0x0) || (successorByteOffset = Vector__removeValue(&vecCapacity,currentBlock), successorByteOffset == 0)) break;
   }
-  Block__detach(param_3);
+  Block__detach(regionEnd);
   return Arena__free(vecArena,vecData);
 }
 #undef vecCapacity
@@ -3901,47 +3901,52 @@ int FUN_001312f4(inst, newSource, param_3, ref, compiler)
 }
 
 /* FUN_001314b8 @ 0x1314b8 (320 bytes) */
-int FUN_001314b8(param_1)
-  int param_1;
+int FUN_001314b8(allocator)
+  int allocator;
 {
-  int iVar1;
-  int iVar2;
+  int fillByteOffset;
+  int fillIndex;
+  int tableBytes;
+  int tableEntryCount;
+  int physicalRegCountA;
+  int virtualRegCount;
+  int physicalRegCountB;
   undefined4 allocation;
-  int iVar4;
-  int *piVar5;
+  int compilerThenTotal;
+  int *backend;
   
-  *(int *)(param_1 + 0x468) = *(int *)(*(int *)(param_1 + 8) + 0x3c4) + 1;
-  iVar1 = ((int (*)())FUN_001304a4)(param_1);
-  iVar4 = *(int *)(param_1 + 8);
-  *(int *)(param_1 + 0x46c) = iVar1;
-  *(int *)(param_1 + 0x464) = iVar1 + *(int *)(param_1 + 0x468);
-  piVar5 = *(int **)(iVar4 + 0x30c);
-  iVar1 = (**(code **)(*piVar5 + 0x138))(piVar5,iVar4);
-  iVar2 = (**(code **)(*piVar5 + 0x140))(piVar5,iVar4);
-  iVar4 = (**(code **)(*piVar5 + 0x13c))(piVar5,iVar4);
-  iVar4 = iVar1 + iVar2 + iVar4;
-  iVar1 = *(int *)(param_1 + 0x464);
-  if (*(int *)(param_1 + 0x464) <= iVar4) {
-    iVar1 = iVar4;
+  *(int *)(allocator + 0x468) = *(int *)(*(int *)(allocator + 8) + 0x3c4) + 1;
+  virtualRegCount = ((int (*)())FUN_001304a4)(allocator);
+  compilerThenTotal = *(int *)(allocator + 8);
+  *(int *)(allocator + 0x46c) = virtualRegCount;
+  *(int *)(allocator + 0x464) = virtualRegCount + *(int *)(allocator + 0x468);
+  backend = *(int **)(compilerThenTotal + 0x30c);
+  physicalRegCountA = (**(code **)(*backend + 0x138))(backend,compilerThenTotal);
+  physicalRegCountB = (**(code **)(*backend + 0x140))(backend,compilerThenTotal);
+  compilerThenTotal = (**(code **)(*backend + 0x13c))(backend,compilerThenTotal);
+  compilerThenTotal = physicalRegCountA + physicalRegCountB + compilerThenTotal;
+  tableEntryCount = *(int *)(allocator + 0x464);
+  if (*(int *)(allocator + 0x464) <= compilerThenTotal) {
+    tableEntryCount = compilerThenTotal;
   }
-  if (iVar1 < 0x1000) {
-    iVar1 = 0x1000;
+  if (tableEntryCount < 0x1000) {
+    tableEntryCount = 0x1000;
   }
-  iVar2 = iVar1 << 2;
-  allocation = Arena__alloc(*(undefined4 *)(*(int *)(param_1 + 8) + 0x374),iVar2);
-  *(undefined4 *)(param_1 + 0x458) = allocation;
-  allocation = Arena__alloc(*(undefined4 *)(*(int *)(param_1 + 8) + 0x374),iVar2);
-  *(undefined4 *)(param_1 + 0x45c) = allocation;
-  allocation = Arena__alloc(*(undefined4 *)(*(int *)(param_1 + 8) + 0x374),iVar2);
-  *(undefined4 *)(param_1 + 0x460) = allocation;
-  if (0 < iVar1) {
-    iVar2 = 0;
+  tableBytes = tableEntryCount << 2;
+  allocation = Arena__alloc(*(undefined4 *)(*(int *)(allocator + 8) + 0x374),tableBytes);
+  *(undefined4 *)(allocator + 0x458) = allocation;
+  allocation = Arena__alloc(*(undefined4 *)(*(int *)(allocator + 8) + 0x374),tableBytes);
+  *(undefined4 *)(allocator + 0x45c) = allocation;
+  allocation = Arena__alloc(*(undefined4 *)(*(int *)(allocator + 8) + 0x374),tableBytes);
+  *(undefined4 *)(allocator + 0x460) = allocation;
+  if (0 < tableEntryCount) {
+    fillIndex = 0;
     do {
-      iVar4 = iVar2 * 4;
-      iVar2 = iVar2 + 1;
-      *(undefined4 *)(iVar4 + *(int *)(param_1 + 0x460)) = 0xffffffff;
-      iVar1 = iVar1 + -1;
-    } while (iVar1 != 0);
+      fillByteOffset = fillIndex * 4;
+      fillIndex = fillIndex + 1;
+      *(undefined4 *)(fillByteOffset + *(int *)(allocator + 0x460)) = 0xffffffff;
+      tableEntryCount = tableEntryCount + -1;
+    } while (tableEntryCount != 0);
   }
   return;
 }

@@ -1,0 +1,25 @@
+local	FUN_001318a4	param_1	allocator	INFERRED	register allocator object (+4 node vector, +0x2c pass)
+local	FUN_001318a4	param_2	nodeIndex	INFERRED	index of the node whose spill slot is wanted
+local	FUN_001318a4	param_3	spillState	INFERRED	per-run spill state (+0x130 base location, +0x138 next slot number)
+use	FUN_001318a4	uVar1	nodeVectorCount	INFERRED	filled count of the node vector	^\s*uVar1\ =\ puVar5\[1\];$	+3
+use	FUN_001318a4	uVar1	nodeVectorCount	INFERRED	filled count of the node vector	^\s*uVar1\ =\ puVar5\[1\];$@2	+3
+use	FUN_001318a4	puVar2	nodeRef	INFERRED	element reference of the node in the node vector	^\s*puVar2\ =\ \(undefined4\ \*\)\(param_2\ \*\ 4\ \+\ puVar5\[2\]\);$	+1
+use	FUN_001318a4	puVar2	nodeRef	INFERRED	element reference of the node in the node vector	^\s*puVar2\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar5,param_2\);$	+1
+use	FUN_001318a4	puVar2	nodeRef	INFERRED	element reference of the node in the node vector	^\s*iVar3\ =\ \(\(int\ \(\*\)\(\)\)FUN_00134ab0\)\(\*puVar2\);$	+1
+use	FUN_001318a4	puVar2	nodeRef	INFERRED	element reference of the node in the node vector	^\s*puVar2\ =\ \(undefined4\ \*\)\(param_2\ \*\ 4\ \+\ puVar5\[2\]\);$@2	+1
+use	FUN_001318a4	puVar2	nodeRef	INFERRED	element reference of the node in the node vector	^\s*puVar2\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar5,param_2\);$@2	+1
+use	FUN_001318a4	puVar2	nodeRef	INFERRED	element reference of the node in the node vector	^\s*\(\(int\ \(\*\)\(\)\)FUN_00134aa8\)\(\*puVar2,iVar3\);$	+1
+use	FUN_001318a4	iVar3	spillSlot	INFERRED	existing spill slot of the node, else the freshly created one (returned)	^\s*iVar3\ =\ \(\(int\ \(\*\)\(\)\)FUN_00134ab0\)\(\*puVar2\);$	+2
+use	FUN_001318a4	iVar3	spillSlot	INFERRED	existing spill slot of the node, else the freshly created one (returned)	^\s*iVar3\ =\ FUN_00130f64\(\*\(undefined4\ \*\)\(param_3\ \+\ 0x130\),iVar4,\*\(undefined4\ \*\)\(param_1\ \+\ 0x2c\)\);$	+1
+use	FUN_001318a4	iVar3	spillSlot	INFERRED	existing spill slot of the node, else the freshly created one (returned)	^\s*\(\(int\ \(\*\)\(\)\)FUN_00134aa8\)\(\*puVar2,iVar3\);$	+1
+use	FUN_001318a4	iVar3	spillSlot	INFERRED	existing spill slot of the node, else the freshly created one (returned)	^\s*return\ iVar3;$	+1
+use	FUN_001318a4	iVar4	newSlotNumber	INFERRED	next slot number before it is incremented	^\s*iVar4\ =\ \*\(int\ \*\)\(param_3\ \+\ 0x138\);$	+2
+use	FUN_001318a4	iVar4	newSlotNumber	INFERRED	next slot number before it is incremented	^\s*\*\(int\ \*\)\(param_3\ \+\ 0x138\)\ =\ iVar4\ \+\ 1;$	+1
+use	FUN_001318a4	puVar5	nodeVector	INFERRED	node vector header (allocator +4)	^\s*puVar5\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 4\);$	+3
+use	FUN_001318a4	puVar5	nodeVector	INFERRED	node vector header (allocator +4)	^\s*_memset\(uVar1\ \*\ 4\ \+\ puVar5\[2\],0,\(param_2\ \-\ uVar1\)\ \*\ 4\ \+\ 4\);$	+2
+use	FUN_001318a4	puVar5	nodeVector	INFERRED	node vector header (allocator +4)	^\s*puVar2\ =\ \(undefined4\ \*\)\(param_2\ \*\ 4\ \+\ puVar5\[2\]\);$	+1
+use	FUN_001318a4	puVar5	nodeVector	INFERRED	node vector header (allocator +4)	^\s*puVar2\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar5,param_2\);$	+1
+use	FUN_001318a4	puVar5	nodeVector	INFERRED	node vector header (allocator +4)	^\s*puVar5\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 4\);$@2	+3
+use	FUN_001318a4	puVar5	nodeVector	INFERRED	node vector header (allocator +4)	^\s*_memset\(uVar1\ \*\ 4\ \+\ puVar5\[2\],0,\(param_2\ \-\ uVar1\)\ \*\ 4\ \+\ 4\);$@2	+2
+use	FUN_001318a4	puVar5	nodeVector	INFERRED	node vector header (allocator +4)	^\s*puVar2\ =\ \(undefined4\ \*\)\(param_2\ \*\ 4\ \+\ puVar5\[2\]\);$@2	+1
+use	FUN_001318a4	puVar5	nodeVector	INFERRED	node vector header (allocator +4)	^\s*puVar2\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar5,param_2\);$@2	+1

@@ -125,49 +125,49 @@ int FUN_001315f8(allocator, inst, newSource, registerCountRef, beforeInst, block
 }
 
 /* FUN_001318a4 @ 0x1318a4 (300 bytes) */
-int FUN_001318a4(param_1, param_2, param_3)
-  int param_1;
-  uint param_2;
-  int param_3;
+int FUN_001318a4(allocator, nodeIndex, spillState)
+  int allocator;
+  uint nodeIndex;
+  int spillState;
 {
-  uint uVar1;
-  undefined4 *puVar2;
-  int iVar3;
-  int iVar4;
-  uint *puVar5;
+  uint nodeVectorCount;
+  undefined4 *nodeRef;
+  int spillSlot;
+  int newSlotNumber;
+  uint *nodeVector;
   
-  puVar5 = *(uint **)(param_1 + 4);
-  if (param_2 < *puVar5) {
-    uVar1 = puVar5[1];
-    if (uVar1 <= param_2) {
-      _memset(uVar1 * 4 + puVar5[2],0,(param_2 - uVar1) * 4 + 4);
-      puVar5[1] = param_2 + 1;
+  nodeVector = *(uint **)(allocator + 4);
+  if (nodeIndex < *nodeVector) {
+    nodeVectorCount = nodeVector[1];
+    if (nodeVectorCount <= nodeIndex) {
+      _memset(nodeVectorCount * 4 + nodeVector[2],0,(nodeIndex - nodeVectorCount) * 4 + 4);
+      nodeVector[1] = nodeIndex + 1;
     }
-    puVar2 = (undefined4 *)(param_2 * 4 + puVar5[2]);
+    nodeRef = (undefined4 *)(nodeIndex * 4 + nodeVector[2]);
   }
   else {
-    puVar2 = (undefined4 *)Vector__elementRefGrow(puVar5,param_2);
+    nodeRef = (undefined4 *)Vector__elementRefGrow(nodeVector,nodeIndex);
   }
-  iVar3 = ((int (*)())FUN_00134ab0)(*puVar2);
-  if (iVar3 == 0) {
-    iVar4 = *(int *)(param_3 + 0x138);
-    iVar3 = FUN_00130f64(*(undefined4 *)(param_3 + 0x130),iVar4,*(undefined4 *)(param_1 + 0x2c));
-    puVar5 = *(uint **)(param_1 + 4);
-    if (param_2 < *puVar5) {
-      uVar1 = puVar5[1];
-      if (uVar1 <= param_2) {
-        _memset(uVar1 * 4 + puVar5[2],0,(param_2 - uVar1) * 4 + 4);
-        puVar5[1] = param_2 + 1;
+  spillSlot = ((int (*)())FUN_00134ab0)(*nodeRef);
+  if (spillSlot == 0) {
+    newSlotNumber = *(int *)(spillState + 0x138);
+    spillSlot = FUN_00130f64(*(undefined4 *)(spillState + 0x130),newSlotNumber,*(undefined4 *)(allocator + 0x2c));
+    nodeVector = *(uint **)(allocator + 4);
+    if (nodeIndex < *nodeVector) {
+      nodeVectorCount = nodeVector[1];
+      if (nodeVectorCount <= nodeIndex) {
+        _memset(nodeVectorCount * 4 + nodeVector[2],0,(nodeIndex - nodeVectorCount) * 4 + 4);
+        nodeVector[1] = nodeIndex + 1;
       }
-      puVar2 = (undefined4 *)(param_2 * 4 + puVar5[2]);
+      nodeRef = (undefined4 *)(nodeIndex * 4 + nodeVector[2]);
     }
     else {
-      puVar2 = (undefined4 *)Vector__elementRefGrow(puVar5,param_2);
+      nodeRef = (undefined4 *)Vector__elementRefGrow(nodeVector,nodeIndex);
     }
-    ((int (*)())FUN_00134aa8)(*puVar2,iVar3);
-    *(int *)(param_3 + 0x138) = iVar4 + 1;
+    ((int (*)())FUN_00134aa8)(*nodeRef,spillSlot);
+    *(int *)(spillState + 0x138) = newSlotNumber + 1;
   }
-  return iVar3;
+  return spillSlot;
 }
 
 /* FUN_001319d0 @ 0x1319d0 (176 bytes) */
@@ -2605,58 +2605,58 @@ int FUN_00135334(graph, nodeA, nodeB)
 }
 
 /* FUN_0013555c @ 0x13555c (296 bytes) */
-int FUN_0013555c(param_1, param_2, param_3)
-  int param_1;
-  int param_2;
-  uint param_3;
+int FUN_0013555c(graph, targetNode, sourceNodeIndex)
+  int graph;
+  int targetNode;
+  uint sourceNodeIndex;
 {
-  bool bVar1;
-  uint uVar2;
-  int *piVar3;
-  undefined4 uVar4;
+  bool blockFull;
+  uint nodeVectorCount;
+  int *sourceNodeRef;
+  undefined4 addedEdge;
   int callResult;
-  int iVar6;
-  int iVar7;
+  int alreadyInterfere;
+  int sourceNode;
   int loopIndex;
-  int iVar9;
-  int iVar10;
-  uint *puVar11;
+  int neighbourBlock;
+  int slotInBlock;
+  uint *nodeVector;
   
-  puVar11 = *(uint **)(param_1 + 4);
-  if (param_3 < *puVar11) {
-    uVar2 = puVar11[1];
-    if (uVar2 <= param_3) {
-      _memset(uVar2 * 4 + puVar11[2],0,(param_3 - uVar2) * 4 + 4);
-      puVar11[1] = param_3 + 1;
+  nodeVector = *(uint **)(graph + 4);
+  if (sourceNodeIndex < *nodeVector) {
+    nodeVectorCount = nodeVector[1];
+    if (nodeVectorCount <= sourceNodeIndex) {
+      _memset(nodeVectorCount * 4 + nodeVector[2],0,(sourceNodeIndex - nodeVectorCount) * 4 + 4);
+      nodeVector[1] = sourceNodeIndex + 1;
     }
-    piVar3 = (int *)(param_3 * 4 + puVar11[2]);
+    sourceNodeRef = (int *)(sourceNodeIndex * 4 + nodeVector[2]);
   }
   else {
-    piVar3 = (int *)Vector__elementRefGrow(puVar11,param_3);
+    sourceNodeRef = (int *)Vector__elementRefGrow(nodeVector,sourceNodeIndex);
   }
-  iVar7 = *piVar3;
-  uVar4 = 0;
-  iVar9 = *(int *)(iVar7 + 8);
-  if (0 < *(int *)(iVar7 + 4)) {
-    iVar10 = -1;
+  sourceNode = *sourceNodeRef;
+  addedEdge = 0;
+  neighbourBlock = *(int *)(sourceNode + 8);
+  if (0 < *(int *)(sourceNode + 4)) {
+    slotInBlock = -1;
     loopIndex = 0;
-    uVar4 = 0;
+    addedEdge = 0;
     do {
-      bVar1 = iVar10 == 6;
-      iVar10 = iVar10 + 1;
-      if (bVar1) {
-        iVar9 = *(int *)(iVar9 + 0x1c);
-        iVar10 = 0;
+      blockFull = slotInBlock == 6;
+      slotInBlock = slotInBlock + 1;
+      if (blockFull) {
+        neighbourBlock = *(int *)(neighbourBlock + 0x1c);
+        slotInBlock = 0;
       }
-      callResult = ((int (*)())FUN_00134bf0)(param_1,*(undefined4 *)(iVar9 + iVar10 * 4),1);
-      if ((callResult != param_2) && (iVar6 = ((int (*)())InterferenceMatrix__testPair)(param_1,param_2,callResult), iVar6 == 0)) {
-        uVar4 = 1;
-        ((int (*)())FUN_00135334)(param_1,param_2,callResult);
+      callResult = ((int (*)())FUN_00134bf0)(graph,*(undefined4 *)(neighbourBlock + slotInBlock * 4),1);
+      if ((callResult != targetNode) && (alreadyInterfere = ((int (*)())InterferenceMatrix__testPair)(graph,targetNode,callResult), alreadyInterfere == 0)) {
+        addedEdge = 1;
+        ((int (*)())FUN_00135334)(graph,targetNode,callResult);
       }
       loopIndex = loopIndex + 1;
-    } while (loopIndex < *(int *)(iVar7 + 4));
+    } while (loopIndex < *(int *)(sourceNode + 4));
   }
-  return uVar4;
+  return addedEdge;
 }
 
 /* FUN_00135684 @ 0x135684 (336 bytes) */
