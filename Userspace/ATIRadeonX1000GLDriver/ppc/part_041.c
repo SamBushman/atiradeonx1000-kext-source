@@ -125,49 +125,49 @@ int FUN_001315f8(allocator, inst, newSource, registerCountRef, beforeInst, block
 }
 
 /* FUN_001318a4 @ 0x1318a4 (300 bytes) */
-int FUN_001318a4(param_1, param_2, param_3)
-  int param_1;
-  uint param_2;
-  int param_3;
+int FUN_001318a4(allocator, nodeIndex, spillState)
+  int allocator;
+  uint nodeIndex;
+  int spillState;
 {
-  uint uVar1;
-  undefined4 *puVar2;
-  int iVar3;
-  int iVar4;
-  uint *puVar5;
+  uint nodeVectorCount;
+  undefined4 *nodeRef;
+  int spillSlot;
+  int newSlotNumber;
+  uint *nodeVector;
   
-  puVar5 = *(uint **)(param_1 + 4);
-  if (param_2 < *puVar5) {
-    uVar1 = puVar5[1];
-    if (uVar1 <= param_2) {
-      _memset(uVar1 * 4 + puVar5[2],0,(param_2 - uVar1) * 4 + 4);
-      puVar5[1] = param_2 + 1;
+  nodeVector = *(uint **)(allocator + 4);
+  if (nodeIndex < *nodeVector) {
+    nodeVectorCount = nodeVector[1];
+    if (nodeVectorCount <= nodeIndex) {
+      _memset(nodeVectorCount * 4 + nodeVector[2],0,(nodeIndex - nodeVectorCount) * 4 + 4);
+      nodeVector[1] = nodeIndex + 1;
     }
-    puVar2 = (undefined4 *)(param_2 * 4 + puVar5[2]);
+    nodeRef = (undefined4 *)(nodeIndex * 4 + nodeVector[2]);
   }
   else {
-    puVar2 = (undefined4 *)Vector__elementRefGrow(puVar5,param_2);
+    nodeRef = (undefined4 *)Vector__elementRefGrow(nodeVector,nodeIndex);
   }
-  iVar3 = ((int (*)())FUN_00134ab0)(*puVar2);
-  if (iVar3 == 0) {
-    iVar4 = *(int *)(param_3 + 0x138);
-    iVar3 = FUN_00130f64(*(undefined4 *)(param_3 + 0x130),iVar4,*(undefined4 *)(param_1 + 0x2c));
-    puVar5 = *(uint **)(param_1 + 4);
-    if (param_2 < *puVar5) {
-      uVar1 = puVar5[1];
-      if (uVar1 <= param_2) {
-        _memset(uVar1 * 4 + puVar5[2],0,(param_2 - uVar1) * 4 + 4);
-        puVar5[1] = param_2 + 1;
+  spillSlot = ((int (*)())FUN_00134ab0)(*nodeRef);
+  if (spillSlot == 0) {
+    newSlotNumber = *(int *)(spillState + 0x138);
+    spillSlot = FUN_00130f64(*(undefined4 *)(spillState + 0x130),newSlotNumber,*(undefined4 *)(allocator + 0x2c));
+    nodeVector = *(uint **)(allocator + 4);
+    if (nodeIndex < *nodeVector) {
+      nodeVectorCount = nodeVector[1];
+      if (nodeVectorCount <= nodeIndex) {
+        _memset(nodeVectorCount * 4 + nodeVector[2],0,(nodeIndex - nodeVectorCount) * 4 + 4);
+        nodeVector[1] = nodeIndex + 1;
       }
-      puVar2 = (undefined4 *)(param_2 * 4 + puVar5[2]);
+      nodeRef = (undefined4 *)(nodeIndex * 4 + nodeVector[2]);
     }
     else {
-      puVar2 = (undefined4 *)Vector__elementRefGrow(puVar5,param_2);
+      nodeRef = (undefined4 *)Vector__elementRefGrow(nodeVector,nodeIndex);
     }
-    ((int (*)())FUN_00134aa8)(*puVar2,iVar3);
-    *(int *)(param_3 + 0x138) = iVar4 + 1;
+    ((int (*)())FUN_00134aa8)(*nodeRef,spillSlot);
+    *(int *)(spillState + 0x138) = newSlotNumber + 1;
   }
-  return iVar3;
+  return spillSlot;
 }
 
 /* FUN_001319d0 @ 0x1319d0 (176 bytes) */
@@ -2605,110 +2605,113 @@ int FUN_00135334(graph, nodeA, nodeB)
 }
 
 /* FUN_0013555c @ 0x13555c (296 bytes) */
-int FUN_0013555c(param_1, param_2, param_3)
-  int param_1;
-  int param_2;
-  uint param_3;
+int FUN_0013555c(graph, targetNode, sourceNodeIndex)
+  int graph;
+  int targetNode;
+  uint sourceNodeIndex;
 {
-  bool bVar1;
-  uint uVar2;
-  int *piVar3;
-  undefined4 uVar4;
+  bool blockFull;
+  uint nodeVectorCount;
+  int *sourceNodeRef;
+  undefined4 addedEdge;
   int callResult;
-  int iVar6;
-  int iVar7;
+  int alreadyInterfere;
+  int sourceNode;
   int loopIndex;
-  int iVar9;
-  int iVar10;
-  uint *puVar11;
+  int neighbourBlock;
+  int slotInBlock;
+  uint *nodeVector;
   
-  puVar11 = *(uint **)(param_1 + 4);
-  if (param_3 < *puVar11) {
-    uVar2 = puVar11[1];
-    if (uVar2 <= param_3) {
-      _memset(uVar2 * 4 + puVar11[2],0,(param_3 - uVar2) * 4 + 4);
-      puVar11[1] = param_3 + 1;
+  nodeVector = *(uint **)(graph + 4);
+  if (sourceNodeIndex < *nodeVector) {
+    nodeVectorCount = nodeVector[1];
+    if (nodeVectorCount <= sourceNodeIndex) {
+      _memset(nodeVectorCount * 4 + nodeVector[2],0,(sourceNodeIndex - nodeVectorCount) * 4 + 4);
+      nodeVector[1] = sourceNodeIndex + 1;
     }
-    piVar3 = (int *)(param_3 * 4 + puVar11[2]);
+    sourceNodeRef = (int *)(sourceNodeIndex * 4 + nodeVector[2]);
   }
   else {
-    piVar3 = (int *)Vector__elementRefGrow(puVar11,param_3);
+    sourceNodeRef = (int *)Vector__elementRefGrow(nodeVector,sourceNodeIndex);
   }
-  iVar7 = *piVar3;
-  uVar4 = 0;
-  iVar9 = *(int *)(iVar7 + 8);
-  if (0 < *(int *)(iVar7 + 4)) {
-    iVar10 = -1;
+  sourceNode = *sourceNodeRef;
+  addedEdge = 0;
+  neighbourBlock = *(int *)(sourceNode + 8);
+  if (0 < *(int *)(sourceNode + 4)) {
+    slotInBlock = -1;
     loopIndex = 0;
-    uVar4 = 0;
+    addedEdge = 0;
     do {
-      bVar1 = iVar10 == 6;
-      iVar10 = iVar10 + 1;
-      if (bVar1) {
-        iVar9 = *(int *)(iVar9 + 0x1c);
-        iVar10 = 0;
+      blockFull = slotInBlock == 6;
+      slotInBlock = slotInBlock + 1;
+      if (blockFull) {
+        neighbourBlock = *(int *)(neighbourBlock + 0x1c);
+        slotInBlock = 0;
       }
-      callResult = ((int (*)())FUN_00134bf0)(param_1,*(undefined4 *)(iVar9 + iVar10 * 4),1);
-      if ((callResult != param_2) && (iVar6 = ((int (*)())InterferenceMatrix__testPair)(param_1,param_2,callResult), iVar6 == 0)) {
-        uVar4 = 1;
-        ((int (*)())FUN_00135334)(param_1,param_2,callResult);
+      callResult = ((int (*)())FUN_00134bf0)(graph,*(undefined4 *)(neighbourBlock + slotInBlock * 4),1);
+      if ((callResult != targetNode) && (alreadyInterfere = ((int (*)())InterferenceMatrix__testPair)(graph,targetNode,callResult), alreadyInterfere == 0)) {
+        addedEdge = 1;
+        ((int (*)())FUN_00135334)(graph,targetNode,callResult);
       }
       loopIndex = loopIndex + 1;
-    } while (loopIndex < *(int *)(iVar7 + 4));
+    } while (loopIndex < *(int *)(sourceNode + 4));
   }
-  return uVar4;
+  return addedEdge;
 }
 
 /* FUN_00135684 @ 0x135684 (336 bytes) */
-int FUN_00135684(param_1, param_2, param_3)
-  int param_1;
-  uint param_2;
-  uint param_3;
+int FUN_00135684(graph, nodeA, nodeB)
+  int graph;
+  uint nodeA;
+  uint nodeB;
 {
-  uint uVar1;
-  int *piVar2;
-  undefined4 *puVar3;
-  undefined4 *puVar4;
-  uint *puVar5;
-  uint *puVar6;
+  uint *nodeAList;
+  uint listCount;
+  uint nodeVectorCountB;
+  uint nodeVectorCountA;
+  int *nodeARef;
+  undefined4 *listSlotRef;
+  undefined4 *nodeBRef;
+  uint *nodeVectorHeader;
+  uint *nodeVectorAlias;
   
-  puVar5 = *(uint **)(param_1 + 4);
-  if (param_2 < *puVar5) {
-    uVar1 = puVar5[1];
-    puVar6 = puVar5;
-    if (uVar1 <= param_2) {
-      _memset(uVar1 * 4 + puVar5[2],0,(param_2 - uVar1) * 4 + 4);
-      puVar5[1] = param_2 + 1;
-      puVar6 = *(uint **)(param_1 + 4);
+  nodeVectorHeader = *(uint **)(graph + 4);
+  if (nodeA < *nodeVectorHeader) {
+    nodeVectorCountA = nodeVectorHeader[1];
+    nodeVectorAlias = nodeVectorHeader;
+    if (nodeVectorCountA <= nodeA) {
+      _memset(nodeVectorCountA * 4 + nodeVectorHeader[2],0,(nodeA - nodeVectorCountA) * 4 + 4);
+      nodeVectorHeader[1] = nodeA + 1;
+      nodeVectorAlias = *(uint **)(graph + 4);
     }
-    piVar2 = (int *)(param_2 * 4 + puVar5[2]);
+    nodeARef = (int *)(nodeA * 4 + nodeVectorHeader[2]);
   }
   else {
-    piVar2 = (int *)Vector__elementRefGrow(puVar5,param_2);
-    puVar6 = *(uint **)(param_1 + 4);
+    nodeARef = (int *)Vector__elementRefGrow(nodeVectorHeader,nodeA);
+    nodeVectorAlias = *(uint **)(graph + 4);
   }
-  puVar5 = *(uint **)(*piVar2 + 0x10);
-  if (param_3 < *puVar6) {
-    uVar1 = puVar6[1];
-    if (uVar1 <= param_3) {
-      _memset(uVar1 * 4 + puVar6[2],0,(param_3 - uVar1) * 4 + 4);
-      puVar6[1] = param_3 + 1;
+  nodeAList = *(uint **)(*nodeARef + 0x10);
+  if (nodeB < *nodeVectorAlias) {
+    nodeVectorCountB = nodeVectorAlias[1];
+    if (nodeVectorCountB <= nodeB) {
+      _memset(nodeVectorCountB * 4 + nodeVectorAlias[2],0,(nodeB - nodeVectorCountB) * 4 + 4);
+      nodeVectorAlias[1] = nodeB + 1;
     }
-    puVar4 = (undefined4 *)(param_3 * 4 + puVar6[2]);
+    nodeBRef = (undefined4 *)(nodeB * 4 + nodeVectorAlias[2]);
   }
   else {
-    puVar4 = (undefined4 *)Vector__elementRefGrow(puVar6,param_3);
+    nodeBRef = (undefined4 *)Vector__elementRefGrow(nodeVectorAlias,nodeB);
   }
-  uVar1 = puVar5[1];
-  if (uVar1 < *puVar5) {
-    _memset(uVar1 * 4 + puVar5[2],0,4);
-    puVar3 = (undefined4 *)(uVar1 * 4 + puVar5[2]);
-    puVar5[1] = uVar1 + 1;
+  listCount = nodeAList[1];
+  if (listCount < *nodeAList) {
+    _memset(listCount * 4 + nodeAList[2],0,4);
+    listSlotRef = (undefined4 *)(listCount * 4 + nodeAList[2]);
+    nodeAList[1] = listCount + 1;
   }
   else {
-    puVar3 = (undefined4 *)Vector__elementRefGrow(puVar5,uVar1);
+    listSlotRef = (undefined4 *)Vector__elementRefGrow(nodeAList,listCount);
   }
-  *puVar3 = *puVar4;
+  *listSlotRef = *nodeBRef;
   return;
 }
 
@@ -4303,55 +4306,60 @@ int FUN_00137e98(inst, operandIndex, param_3)
 }
 
 /* FUN_00137f14 @ 0x137f14 (364 bytes) */
-int FUN_00137f14(param_1, param_2, param_3)
-  int param_1;
-  int *param_2;
-  int param_3;
+int FUN_00137f14(liveness, inst, liveBits)
+  int liveness;
+  int *inst;
+  int liveBits;
 {
-  int iVar1;
-  int iVar2;
-  int *piVar3;
-  uint uVar4;
-  uint uVar5;
-  int iVar6;
+  int copyLiveOutWordAddr;
+  uint copySourceRegisterId;
+  int copySourceVReg;
+  int instQuery78;
+  int defBitWordAddr;
+  int operandCountdown;
+  int liveOutWordAddr;
+  int *operandSlotCursor;
+  uint sourceRegisterId;
+  uint bitWordOffset;
+  int sourceVReg;
   
-  iVar1 = param_2[0x21];
-  if (0 < iVar1) {
-    piVar3 = param_2 + iVar1 * 6 + 0x23;
+  operandCountdown = inst[0x21];
+  if (0 < operandCountdown) {
+    operandSlotCursor = inst + operandCountdown * 6 + 0x23;
     do {
-      iVar6 = *piVar3;
-      uVar4 = *(uint *)(iVar6 + 0x1c);
-      if ((int)uVar4 < 0) {
-        if (*(int *)(iVar6 + 4) == 0x2c) {
-          *(undefined4 *)(param_1 + 0x3b4) = 1;
-          *(uint *)(iVar6 + 0x24) = *(uint *)(iVar6 + 0x24) | 1;
+      sourceVReg = *operandSlotCursor;
+      sourceRegisterId = *(uint *)(sourceVReg + 0x1c);
+      if ((int)sourceRegisterId < 0) {
+        if (*(int *)(sourceVReg + 4) == 0x2c) {
+          *(undefined4 *)(liveness + 0x3b4) = 1;
+          *(uint *)(sourceVReg + 0x24) = *(uint *)(sourceVReg + 0x24) | 1;
         }
       }
       else {
-        uVar5 = uVar4 >> 3 & 0x1ffffffc;
-        if ((*(uint *)(uVar5 + param_3 + 8) >> (uVar4 & 0x1f) & 1) == 0) {
-          iVar2 = uVar5 + *(int *)(param_1 + 0x3b0);
-          *(uint *)(iVar2 + 8) = 1 << (uVar4 & 0x1f) | *(uint *)(iVar2 + 8);
-          *(uint *)(iVar6 + 0x24) = *(uint *)(iVar6 + 0x24) | 1;
+        bitWordOffset = sourceRegisterId >> 3 & 0x1ffffffc;
+        if ((*(uint *)(bitWordOffset + liveBits + 8) >> (sourceRegisterId & 0x1f) & 1) == 0) {
+          liveOutWordAddr = bitWordOffset + *(int *)(liveness + 0x3b0);
+          *(uint *)(liveOutWordAddr + 8) = 1 << (sourceRegisterId & 0x1f) | *(uint *)(liveOutWordAddr + 8);
+          *(uint *)(sourceVReg + 0x24) = *(uint *)(sourceVReg + 0x24) | 1;
         }
       }
-      piVar3 = piVar3 + -6;
-      iVar1 = iVar1 + -1;
-    } while (iVar1 != 0);
+      operandSlotCursor = operandSlotCursor + -6;
+      operandCountdown = operandCountdown + -1;
+    } while (operandCountdown != 0);
   }
-  if (((0 < param_2[0x20]) && ((param_2[5] & 2U) == 0)) &&
-     (uVar4 = *(uint *)(param_2[0x23] + 0x1c), -1 < (int)uVar4)) {
-    iVar1 = (uVar4 >> 3 & 0x1ffffffc) + param_3;
-    *(uint *)(iVar1 + 8) = 1 << (uVar4 & 0x1f) | *(uint *)(iVar1 + 8);
+  if (((0 < inst[0x20]) && ((inst[5] & 2U) == 0)) &&
+     (sourceRegisterId = *(uint *)(inst[0x23] + 0x1c), -1 < (int)sourceRegisterId)) {
+    defBitWordAddr = (sourceRegisterId >> 3 & 0x1ffffffc) + liveBits;
+    *(uint *)(defBitWordAddr + 8) = 1 << (sourceRegisterId & 0x1f) | *(uint *)(defBitWordAddr + 8);
   }
-  iVar1 = (**(code **)(*param_2 + 0x78))(param_2);
-  if (iVar1 != 0) {
-    iVar1 = param_2[0x29];
-    uVar4 = *(uint *)(iVar1 + 0x1c);
-    if (-1 < (int)uVar4) {
-      iVar6 = (uVar4 >> 3 & 0x1ffffffc) + *(int *)(param_1 + 0x3b0);
-      *(uint *)(iVar6 + 8) = 1 << (uVar4 & 0x1f) | *(uint *)(iVar6 + 8);
-      *(uint *)(iVar1 + 0x24) = *(uint *)(iVar1 + 0x24) | 1;
+  instQuery78 = (**(code **)(*inst + 0x78))(inst);
+  if (instQuery78 != 0) {
+    copySourceVReg = inst[0x29];
+    copySourceRegisterId = *(uint *)(copySourceVReg + 0x1c);
+    if (-1 < (int)copySourceRegisterId) {
+      copyLiveOutWordAddr = (copySourceRegisterId >> 3 & 0x1ffffffc) + *(int *)(liveness + 0x3b0);
+      *(uint *)(copyLiveOutWordAddr + 8) = 1 << (copySourceRegisterId & 0x1f) | *(uint *)(copyLiveOutWordAddr + 8);
+      *(uint *)(copySourceVReg + 0x24) = *(uint *)(copySourceVReg + 0x24) | 1;
     }
   }
   return;

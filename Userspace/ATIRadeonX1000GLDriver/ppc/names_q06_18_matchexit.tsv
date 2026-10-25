@@ -1,0 +1,49 @@
+use	LoopInfo__matchExit	iVar3	compareOpcode	INFERRED	opcode of the exit test instruction (0x8b compare, 0x8c compare-and-combine)	^\s*iVar3\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_2\ \+\ 0x88\)\ \+\ 8\);$	+2
+use	LoopInfo__matchExit	iVar3	compareOpcode	INFERRED	opcode of the exit test instruction (0x8b compare, 0x8c compare-and-combine)	^\s*if\ \(iVar3\ !=\ 0x8c\)\ \{$	+1
+use	LoopInfo__matchExit	iVar3	counterSource	INFERRED	source operand 1 of the compare, tested against the loop counter register	^\s*iVar3\ =\ FUN_00105594\(param_2,1\);$	+2
+use	LoopInfo__matchExit	iVar3	boundQuery48	INFERRED	bound definition vtable slot 0x48 test (is a constant)	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*piVar6\ \+\ 0x48\)\)\(piVar6\);$	+2
+use	LoopInfo__matchExit	iVar3	exitCompareCondition	INFERRED	compare condition of the exit test	^\s*iVar3\ =\ FUN_0010b5f8\(param_2\);$	+2
+use	LoopInfo__matchExit	iVar3	boundOperandRecord	INFERRED	operand record 2 of the compare (bound operand)	^\s*iVar3\ =\ FUN_001054ec\(param_2,2\);$	+2
+use	LoopInfo__matchExit	iVar3	leftQuery48	INFERRED	left operand vtable slot 0x48 test (is a constant)	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*piVar5\ \+\ 0x48\)\)\(piVar5\);$	+1
+use	LoopInfo__matchExit	iVar3	leftQuery48	INFERRED	left operand vtable slot 0x48 test (is a constant)	^\s*if\ \(iVar3\ ==\ 0\)\ \{$@2	+1
+use	LoopInfo__matchExit	iVar3	rightQuery48	INFERRED	right operand vtable slot 0x48 test (is a constant)	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*piVar6\ \+\ 0x48\)\)\(piVar6\);$@2	+2
+use	LoopInfo__matchExit	iVar3	compareUseCount	INFERRED	IRInst__useCount of the inner compare (must be 1)	^\s*iVar3\ =\ FUN_00104054\(uVar4,\*\(undefined4\ \*\)\(param_1\ \+\ 0x40\)\);$	+2
+use	LoopInfo__matchExit	iVar3	testOperandRecord	INFERRED	operand record 1 of the exit test	^\s*iVar3\ =\ FUN_001054ec\(param_2,1\);$	+2
+use	LoopInfo__matchExit	iVar3	innerRecord1	INFERRED	operand record 1 of the inner compare	^\s*iVar3\ =\ FUN_001054ec\(uVar4,1\);$	+2
+use	LoopInfo__matchExit	iVar3	innerRecord2	INFERRED	operand record 2 of the inner compare	^\s*iVar3\ =\ FUN_001054ec\(uVar4,2\);$	+2
+use	LoopInfo__matchExit	iVar3	thenBlock	INFERRED	then block of the branch header (+0x134)	^\s*iVar3\ =\ \*\(int\ \*\)\(param_3\ \+\ 0x134\);$	+1
+use	LoopInfo__matchExit	iVar3	thenBlock	INFERRED	then block of the branch header (+0x134)	^\s*iVar8\ =\ FUN_00194034\(iVar3\ \+\ 0x90\);$	+1
+use	LoopInfo__matchExit	iVar3	thenBlock	INFERRED	then block of the branch header (+0x134)	^\s*piVar7\ =\ \(int\ \*\)FUN_000e920c\(iVar3,0\);$	+1
+use	LoopInfo__matchExit	iVar3	thenBlock	INFERRED	then block of the branch header (+0x134)	^\s*uVar4\ =\ FUN_000e920c\(iVar3,0\);$	+1
+use	LoopInfo__matchExit	iVar3	elseIsSimple	INFERRED	Block__isSimple of the else block	^\s*iVar3\ =\ FUN_000e7770\(iVar10\);$	+2
+use	LoopInfo__matchExit	iVar3	exitSuccessorQuery38	INFERRED	successor block vtable slot 0x38 test	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0x38\)\)\(piVar7\);$	+2
+use	LoopInfo__matchExit	iVar3	footerSuccessorIsSimple	INFERRED	Block__isSimple of the footer-side successor	^\s*iVar3\ =\ FUN_000e7770\(uVar4\);$	+4
+use	LoopInfo__matchExit	uVar4	vregList	INFERRED	program virtual register list (compiler +0x3ac)	^\s*uVar4\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x40\)\ \+\ 0x3ac\);$	+1
+use	LoopInfo__matchExit	uVar4	vregList	INFERRED	program virtual register list (compiler +0x3ac)	^\s*piVar6\ =\ \(int\ \*\)FUN_000f57f0\(uVar4,\&local_34,local_30,piVar7\);$	+1
+use	LoopInfo__matchExit	uVar4	innerCompare	INFERRED	inner compare instruction feeding the exit test	^\s*uVar4\ =\ FUN_00105594\(param_2,1\);$	+3
+use	LoopInfo__matchExit	uVar4	innerCompare	INFERRED	inner compare instruction feeding the exit test	^\s*iVar3\ =\ FUN_00104054\(uVar4,\*\(undefined4\ \*\)\(param_1\ \+\ 0x40\)\);$	+1
+use	LoopInfo__matchExit	uVar4	innerCompare	INFERRED	inner compare instruction feeding the exit test	^\s*iVar3\ =\ FUN_0010b5f8\(uVar4\);$	+1
+use	LoopInfo__matchExit	uVar4	innerCompare	INFERRED	inner compare instruction feeding the exit test	^\s*iVar3\ =\ FUN_001054ec\(uVar4,1\);$	+1
+use	LoopInfo__matchExit	uVar4	innerCompare	INFERRED	inner compare instruction feeding the exit test	^\s*iVar3\ =\ FUN_001054ec\(uVar4,2\);$	+1
+use	LoopInfo__matchExit	piVar7	staleOutFlagRef	INFERRED	copy of the out parameter pointer kept in a register	^\s*piVar7\ =\ param_4;$	+1
+use	LoopInfo__matchExit	piVar7	staleOutFlagRef	INFERRED	copy of the out parameter pointer kept in a register	^\s*piVar6\ =\ \(int\ \*\)FUN_000f57f0\(uVar4,\&local_34,local_30,piVar7\);$	+1
+use	LoopInfo__matchExit	piVar7	boundOperand	INFERRED	bound operand of the inner compare (constant side)	^\s*piVar7\ =\ piVar5;$	+1
+use	LoopInfo__matchExit	piVar7	boundOperand	INFERRED	bound operand of the inner compare (constant side)	^\s*piVar7\ =\ piVar6;$	+1
+use	LoopInfo__matchExit	piVar7	boundOperand	INFERRED	bound operand of the inner compare (constant side)	^\s*if\ \(\(\*\(byte\ \*\)\(piVar7\ \+\ 0x57\)\ \&\ 1\)\ ==\ 0\)\ \{$	+2
+use	LoopInfo__matchExit	piVar7	boundOperand	INFERRED	bound operand of the inner compare (constant side)	^\s*fVar2\ =\ GH_U2F\(\(unsigned\ int\)\(piVar7\[8\]\)\);$	+1
+use	LoopInfo__matchExit	piVar6	boundDefinition	INFERRED	definition of the bound operand	^\s*piVar6\ =\ \(int\ \*\)FUN_00105594\(param_2,2\);$	+2
+use	LoopInfo__matchExit	piVar6	boundDefinition	INFERRED	definition of the bound operand	^\s*if\ \(piVar6\[0x26\]\ ==\ 0x33\)\ \{$	+2
+use	LoopInfo__matchExit	piVar6	boundDefinition	INFERRED	definition of the bound operand	^\s*piVar6\ =\ \(int\ \*\)FUN_000f57f0\(uVar4,\&local_34,local_30,piVar7\);$	+1
+use	LoopInfo__matchExit	piVar6	boundDefinition	INFERRED	definition of the bound operand	^\s*if\ \(piVar6\ ==\ \(int\ \*\)0x0\)\ \{$	+1
+use	LoopInfo__matchExit	piVar6	boundDefinition	INFERRED	definition of the bound operand	^\s*\*\(int\ \*\)\(param_1\ \+\ 0x10\)\ =\ piVar6\[0x25\];$	+1
+use	LoopInfo__matchExit	piVar6	counterOperand	INFERRED	operand compared against the loop counter	^\s*piVar6\ =\ \(int\ \*\)FUN_00105594\(uVar4,2\);$	+1
+use	LoopInfo__matchExit	piVar6	counterOperand	INFERRED	operand compared against the loop counter	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*piVar6\ \+\ 0x48\)\)\(piVar6\);$@2	+1
+use	LoopInfo__matchExit	piVar6	counterOperand	INFERRED	operand compared against the loop counter	^\s*piVar7\ =\ piVar6;$	+2
+use	LoopInfo__matchExit	piVar6	counterOperand	INFERRED	operand compared against the loop counter	^\s*if\ \(piVar6\ !=\ \*\(int\ \*\*\)\(param_1\ \+\ 0x34\)\)\ \{$	+1
+use	LoopInfo__matchExit	iVar10	elseBlock	INFERRED	else block of the branch header (+0x138)	^\s*iVar10\ =\ \*\(int\ \*\)\(param_3\ \+\ 0x138\);$	+1
+use	LoopInfo__matchExit	iVar10	elseBlock	INFERRED	else block of the branch header (+0x138)	^\s*if\ \(\(iVar8\ <\ 3\)\ \&\&\ \(iVar10\ =\ FUN_00194034\(iVar10\ \+\ 0x90\),\ iVar10\ <\ 3\)\)\ \{$	+1
+use	LoopInfo__matchExit	iVar10	elseBlock	INFERRED	else block of the branch header (+0x138)	^\s*iVar3\ =\ FUN_000e7770\(iVar10\);$	+3
+use	LoopInfo__matchExit	iVar10	exitBlockQuery38	INFERRED	exit block vtable slot 0x38 test	^\s*iVar10\ =\ \(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0x38\)\)\(piVar7\);$	+2
+local	LoopInfo__matchExit	local_30	laneSwizzleBytes	INFERRED	rebuilt per-lane swizzle bytes for the constant vector lookup
+local	LoopInfo__matchExit	local_28	boundAsInt64	INFERRED	loop bound converted to a 64-bit integer
+local	LoopInfo__matchExit	local_34	constVectorWord	INFERRED	first lane constant of the bound vector, passed to RegisterMap__findConstVector
