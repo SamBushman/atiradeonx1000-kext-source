@@ -2716,91 +2716,93 @@ int FUN_00135684(graph, nodeA, nodeB)
 }
 
 /* FUN_001357d4 @ 0x1357d4 (300 bytes) */
-int FUN_001357d4(param_1)
-  int param_1;
+int FUN_001357d4(graph)
+  int graph;
 {
-  uint uVar1;
-  int *piVar2;
+  int nodeVectorBlock;
+  uint nodeVectorCount;
+  int *nodeRef;
   uint loopIndex;
-  uint *puVar4;
-  int iVar5;
+  uint *nodeVector;
+  int node;
   
-  Arena__free(*(undefined4 *)(*(int *)(param_1 + 0x2c) + 0x378),*(undefined4 *)(param_1 + 0x14));
-  Arena__free(*(undefined4 *)(*(int *)(param_1 + 0x2c) + 0x378),*(undefined4 *)(param_1 + 0x18));
-  Arena__free(*(undefined4 *)(*(int *)(param_1 + 0x2c) + 0x378),*(undefined4 *)(param_1 + 0x10));
-  if (0 < *(int *)(param_1 + 0xc)) {
+  Arena__free(*(undefined4 *)(*(int *)(graph + 0x2c) + 0x378),*(undefined4 *)(graph + 0x14));
+  Arena__free(*(undefined4 *)(*(int *)(graph + 0x2c) + 0x378),*(undefined4 *)(graph + 0x18));
+  Arena__free(*(undefined4 *)(*(int *)(graph + 0x2c) + 0x378),*(undefined4 *)(graph + 0x10));
+  if (0 < *(int *)(graph + 0xc)) {
     loopIndex = 0;
     do {
-      puVar4 = *(uint **)(param_1 + 4);
-      if (loopIndex < *puVar4) {
-        uVar1 = puVar4[1];
-        if (uVar1 <= loopIndex) {
-          _memset(uVar1 * 4 + puVar4[2],0,(loopIndex - uVar1) * 4 + 4);
-          puVar4[1] = loopIndex + 1;
+      nodeVector = *(uint **)(graph + 4);
+      if (loopIndex < *nodeVector) {
+        nodeVectorCount = nodeVector[1];
+        if (nodeVectorCount <= loopIndex) {
+          _memset(nodeVectorCount * 4 + nodeVector[2],0,(loopIndex - nodeVectorCount) * 4 + 4);
+          nodeVector[1] = loopIndex + 1;
         }
-        piVar2 = (int *)(loopIndex * 4 + puVar4[2]);
+        nodeRef = (int *)(loopIndex * 4 + nodeVector[2]);
       }
       else {
-        piVar2 = (int *)Vector__elementRefGrow(puVar4,loopIndex);
+        nodeRef = (int *)Vector__elementRefGrow(nodeVector,loopIndex);
       }
       loopIndex = loopIndex + 1;
-      iVar5 = *piVar2;
-      if (iVar5 != 0) {
-        ((int (*)())FUN_00135090)(iVar5);
-        Arena__free(*(undefined4 *)(iVar5 + -4),iVar5 + -4);
+      node = *nodeRef;
+      if (node != 0) {
+        ((int (*)())FUN_00135090)(node);
+        Arena__free(*(undefined4 *)(node + -4),node + -4);
       }
-    } while ((int)loopIndex < *(int *)(param_1 + 0xc));
+    } while ((int)loopIndex < *(int *)(graph + 0xc));
   }
-  iVar5 = *(int *)(param_1 + 4);
-  if (iVar5 != 0) {
-    Arena__free(*(undefined4 *)(iVar5 + 0xc),*(undefined4 *)(iVar5 + 8));
-    Arena__free(*(undefined4 *)(iVar5 + -4),iVar5 + -4);
+  nodeVectorBlock = *(int *)(graph + 4);
+  if (nodeVectorBlock != 0) {
+    Arena__free(*(undefined4 *)(nodeVectorBlock + 0xc),*(undefined4 *)(nodeVectorBlock + 8));
+    Arena__free(*(undefined4 *)(nodeVectorBlock + -4),nodeVectorBlock + -4);
   }
-  return Arena__free(*(undefined4 *)(*(int *)(param_1 + 0x2c) + 0x378),*(undefined4 *)(param_1 + 0x20));
+  return Arena__free(*(undefined4 *)(*(int *)(graph + 0x2c) + 0x378),*(undefined4 *)(graph + 0x20));
 }
 
 /* FUN_00135900 @ 0x135900 (300 bytes) */
-int FUN_00135900(param_1)
-  int param_1;
+int FUN_00135900(graph)
+  int graph;
 {
-  uint uVar1;
-  int *piVar2;
+  int nodeVectorBlock;
+  uint nodeVectorCount;
+  int *nodeRef;
   uint loopIndex;
-  uint *puVar4;
-  int iVar5;
+  uint *nodeVector;
+  int node;
   
-  Arena__free(*(undefined4 *)(*(int *)(param_1 + 0x2c) + 0x378),*(undefined4 *)(param_1 + 0x14));
-  Arena__free(*(undefined4 *)(*(int *)(param_1 + 0x2c) + 0x378),*(undefined4 *)(param_1 + 0x18));
-  Arena__free(*(undefined4 *)(*(int *)(param_1 + 0x2c) + 0x378),*(undefined4 *)(param_1 + 0x10));
-  if (0 < *(int *)(param_1 + 0xc)) {
+  Arena__free(*(undefined4 *)(*(int *)(graph + 0x2c) + 0x378),*(undefined4 *)(graph + 0x14));
+  Arena__free(*(undefined4 *)(*(int *)(graph + 0x2c) + 0x378),*(undefined4 *)(graph + 0x18));
+  Arena__free(*(undefined4 *)(*(int *)(graph + 0x2c) + 0x378),*(undefined4 *)(graph + 0x10));
+  if (0 < *(int *)(graph + 0xc)) {
     loopIndex = 0;
     do {
-      puVar4 = *(uint **)(param_1 + 4);
-      if (loopIndex < *puVar4) {
-        uVar1 = puVar4[1];
-        if (uVar1 <= loopIndex) {
-          _memset(uVar1 * 4 + puVar4[2],0,(loopIndex - uVar1) * 4 + 4);
-          puVar4[1] = loopIndex + 1;
+      nodeVector = *(uint **)(graph + 4);
+      if (loopIndex < *nodeVector) {
+        nodeVectorCount = nodeVector[1];
+        if (nodeVectorCount <= loopIndex) {
+          _memset(nodeVectorCount * 4 + nodeVector[2],0,(loopIndex - nodeVectorCount) * 4 + 4);
+          nodeVector[1] = loopIndex + 1;
         }
-        piVar2 = (int *)(loopIndex * 4 + puVar4[2]);
+        nodeRef = (int *)(loopIndex * 4 + nodeVector[2]);
       }
       else {
-        piVar2 = (int *)Vector__elementRefGrow(puVar4,loopIndex);
+        nodeRef = (int *)Vector__elementRefGrow(nodeVector,loopIndex);
       }
       loopIndex = loopIndex + 1;
-      iVar5 = *piVar2;
-      if (iVar5 != 0) {
-        ((int (*)())FUN_00135090)(iVar5);
-        Arena__free(*(undefined4 *)(iVar5 + -4),iVar5 + -4);
+      node = *nodeRef;
+      if (node != 0) {
+        ((int (*)())FUN_00135090)(node);
+        Arena__free(*(undefined4 *)(node + -4),node + -4);
       }
-    } while ((int)loopIndex < *(int *)(param_1 + 0xc));
+    } while ((int)loopIndex < *(int *)(graph + 0xc));
   }
-  iVar5 = *(int *)(param_1 + 4);
-  if (iVar5 != 0) {
-    Arena__free(*(undefined4 *)(iVar5 + 0xc),*(undefined4 *)(iVar5 + 8));
-    Arena__free(*(undefined4 *)(iVar5 + -4),iVar5 + -4);
+  nodeVectorBlock = *(int *)(graph + 4);
+  if (nodeVectorBlock != 0) {
+    Arena__free(*(undefined4 *)(nodeVectorBlock + 0xc),*(undefined4 *)(nodeVectorBlock + 8));
+    Arena__free(*(undefined4 *)(nodeVectorBlock + -4),nodeVectorBlock + -4);
   }
-  return Arena__free(*(undefined4 *)(*(int *)(param_1 + 0x2c) + 0x378),*(undefined4 *)(param_1 + 0x20));
+  return Arena__free(*(undefined4 *)(*(int *)(graph + 0x2c) + 0x378),*(undefined4 *)(graph + 0x20));
 }
 
 /* FUN_00135a2c @ 0x135a2c (500 bytes) */

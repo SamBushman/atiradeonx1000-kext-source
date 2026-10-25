@@ -1551,41 +1551,41 @@ int FUN_0010e40c(param_1, param_2)
 }
 
 /* FUN_0010e460 @ 0x10e460 (140 bytes) */
-int FUN_0010e460(param_1, param_2, param_3)
-  int *param_1;
-  int *param_2;
-  int param_3;
+int FUN_0010e460(entryA, entryB, laneMapOut)
+  int *entryA;
+  int *entryB;
+  int laneMapOut;
 {
-  bool bVar1;
-  int iVar2;
-  int *piVar3;
-  int iVar4;
-  int iVar5;
+  bool moreLanes;
+  int laneByteOffset;
+  int *candidateLaneCursor;
+  int matchedLane;
+  int candidatesLeft;
   
-  if ((*param_1 != *param_2) && (param_1[5] <= param_2[5])) {
-    iVar2 = 0;
+  if ((*entryA != *entryB) && (entryA[5] <= entryB[5])) {
+    laneByteOffset = 0;
     do {
-      if (param_1[1] == 0) {
-        *(undefined4 *)(param_3 + iVar2) = 0xffffffff;
+      if (entryA[1] == 0) {
+        *(undefined4 *)(laneMapOut + laneByteOffset) = 0xffffffff;
       }
       else {
-        iVar5 = 4;
-        iVar4 = 0;
-        piVar3 = param_2;
-        while (param_1[1] != piVar3[1]) {
-          iVar4 = iVar4 + 1;
-          piVar3 = piVar3 + 1;
-          iVar5 = iVar5 + -1;
-          if (iVar5 == 0) {
+        candidatesLeft = 4;
+        matchedLane = 0;
+        candidateLaneCursor = entryB;
+        while (entryA[1] != candidateLaneCursor[1]) {
+          matchedLane = matchedLane + 1;
+          candidateLaneCursor = candidateLaneCursor + 1;
+          candidatesLeft = candidatesLeft + -1;
+          if (candidatesLeft == 0) {
             return 0;
           }
         }
-        *(int *)(iVar2 + param_3) = iVar4;
+        *(int *)(laneByteOffset + laneMapOut) = matchedLane;
       }
-      bVar1 = iVar2 != 0xc;
-      param_1 = param_1 + 1;
-      iVar2 = iVar2 + 4;
-    } while (bVar1);
+      moreLanes = laneByteOffset != 0xc;
+      entryA = entryA + 1;
+      laneByteOffset = laneByteOffset + 4;
+    } while (moreLanes);
     return 1;
   }
   return 0;

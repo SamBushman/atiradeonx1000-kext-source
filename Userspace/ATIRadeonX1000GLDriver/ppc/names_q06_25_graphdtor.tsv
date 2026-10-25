@@ -1,0 +1,22 @@
+local	FUN_00135900	param_1	graph	INFERRED	register graph object being released (+4 node vector, +0xc node count, +0x10/+0x14/+0x18/+0x20 arrays, +0x2c compiler)
+use	FUN_00135900	uVar1	nodeVectorCount	INFERRED	filled count of the node vector	^\s*uVar1\ =\ puVar4\[1\];$	+3
+use	FUN_00135900	piVar2	nodeRef	INFERRED	element reference of a node in the node vector	^\s*piVar2\ =\ \(int\ \*\)\(uVar3\ \*\ 4\ \+\ puVar4\[2\]\);$	+1
+use	FUN_00135900	piVar2	nodeRef	INFERRED	element reference of a node in the node vector	^\s*piVar2\ =\ \(int\ \*\)FUN_0019423c\(puVar4,uVar3\);$	+1
+use	FUN_00135900	piVar2	nodeRef	INFERRED	element reference of a node in the node vector	^\s*iVar5\ =\ \*piVar2;$	+1
+use	FUN_00135900	puVar4	nodeVector	INFERRED	node vector header (graph +4)	^\s*puVar4\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 4\);$	+3
+use	FUN_00135900	puVar4	nodeVector	INFERRED	node vector header (graph +4)	^\s*_memset\(uVar1\ \*\ 4\ \+\ puVar4\[2\],0,\(uVar3\ \-\ uVar1\)\ \*\ 4\ \+\ 4\);$	+2
+use	FUN_00135900	puVar4	nodeVector	INFERRED	node vector header (graph +4)	^\s*piVar2\ =\ \(int\ \*\)\(uVar3\ \*\ 4\ \+\ puVar4\[2\]\);$	+1
+use	FUN_00135900	puVar4	nodeVector	INFERRED	node vector header (graph +4)	^\s*piVar2\ =\ \(int\ \*\)FUN_0019423c\(puVar4,uVar3\);$	+1
+use	FUN_00135900	iVar5	node	INFERRED	node object being destroyed and freed	^\s*iVar5\ =\ \*piVar2;$	+4
+use	FUN_00135900	iVar5	nodeVectorBlock	INFERRED	node vector header block, freed at the end	^\s*iVar5\ =\ \*\(int\ \*\)\(param_1\ \+\ 4\);$	+4
+local	FUN_001357d4	param_1	graph	INFERRED	register graph object being released (+4 node vector, +0xc node count, +0x10/+0x14/+0x18/+0x20 arrays, +0x2c compiler)
+use	FUN_001357d4	uVar1	nodeVectorCount	INFERRED	filled count of the node vector	^\s*uVar1\ =\ puVar4\[1\];$	+3
+use	FUN_001357d4	piVar2	nodeRef	INFERRED	element reference of a node in the node vector	^\s*piVar2\ =\ \(int\ \*\)\(uVar3\ \*\ 4\ \+\ puVar4\[2\]\);$	+1
+use	FUN_001357d4	piVar2	nodeRef	INFERRED	element reference of a node in the node vector	^\s*piVar2\ =\ \(int\ \*\)FUN_0019423c\(puVar4,uVar3\);$	+1
+use	FUN_001357d4	piVar2	nodeRef	INFERRED	element reference of a node in the node vector	^\s*iVar5\ =\ \*piVar2;$	+1
+use	FUN_001357d4	puVar4	nodeVector	INFERRED	node vector header (graph +4)	^\s*puVar4\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 4\);$	+3
+use	FUN_001357d4	puVar4	nodeVector	INFERRED	node vector header (graph +4)	^\s*_memset\(uVar1\ \*\ 4\ \+\ puVar4\[2\],0,\(uVar3\ \-\ uVar1\)\ \*\ 4\ \+\ 4\);$	+2
+use	FUN_001357d4	puVar4	nodeVector	INFERRED	node vector header (graph +4)	^\s*piVar2\ =\ \(int\ \*\)\(uVar3\ \*\ 4\ \+\ puVar4\[2\]\);$	+1
+use	FUN_001357d4	puVar4	nodeVector	INFERRED	node vector header (graph +4)	^\s*piVar2\ =\ \(int\ \*\)FUN_0019423c\(puVar4,uVar3\);$	+1
+use	FUN_001357d4	iVar5	node	INFERRED	node object being destroyed and freed	^\s*iVar5\ =\ \*piVar2;$	+4
+use	FUN_001357d4	iVar5	nodeVectorBlock	INFERRED	node vector header block, freed at the end	^\s*iVar5\ =\ \*\(int\ \*\)\(param_1\ \+\ 4\);$	+4
