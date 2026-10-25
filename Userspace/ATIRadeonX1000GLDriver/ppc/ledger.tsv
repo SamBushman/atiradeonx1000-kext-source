@@ -2849,7 +2849,7 @@
 0x178b1c	360	FUN_00178b1c	part_047	converted
 0x178c84	244	FUN_00178c84	part_047	converted
 0x178d78	280	FUN_00178d78	part_047	converted
-0x178e90	468	FUN_00178e90	part_047	converted
+0x178e90	468	ValueKey__evalLitLane	part_047	converted
 0x179064	212	FUN_00179064	part_047	converted
 0x179138	240	FUN_00179138	part_047	converted
 0x1792f0	232	FUN_001792f0	part_047	converted
@@ -2929,7 +2929,7 @@
 0x181f00	220	Block__flattenAndRebuildAddMulTree	part_048	converted
 0x183ac8	212	FUN_00183ac8	part_048	converted
 0x183b9c	1152	Block__rebuildAddMulTreesWhereProfitable	part_048	converted
-0x18401c	144	FUN_0018401c	part_048	converted
+0x18401c	144	pass_height_reduction	part_048	converted
 0x18413c	224	FUN_0018413c	part_048	converted
 0x184ab4	280	pass_minreg_order	part_048	converted
 0x184bcc	36	compareIntsAscending	part_048	converted

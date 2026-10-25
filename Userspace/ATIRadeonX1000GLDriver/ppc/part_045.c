@@ -3516,7 +3516,7 @@ int Scheduler__run(program)
   DListNode__init(local_e0);
   heightReductionEnabled = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),0x42);
   if (heightReductionEnabled != 0) {
-    FUN_0018401c(auStack_1d8,program,in_r5,in_r6,in_r7,in_r8,in_r9);
+    pass_height_reduction(auStack_1d8,program,in_r5,in_r6,in_r7,in_r8,in_r9);
   }
   ((int (*)())pass_sched_preprocess_and_schedule_inst)(auStack_1d8,program);
   sentinelCursorBack = &uStack_e4;

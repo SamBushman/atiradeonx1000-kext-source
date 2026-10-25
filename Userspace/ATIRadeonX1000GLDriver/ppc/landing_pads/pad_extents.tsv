@@ -526,7 +526,7 @@ ffd5c	ffd60	FUN_000fd5c8
 182010	18202c	Block__flattenAndRebuildAddMulTree
 182040	182060	Block__flattenAndRebuildAddMulTree
 183a98	183a9c	Block__flattenAndRebuildAddMulTree
-1840ac	1840cc	FUN_0018401c
+1840ac	1840cc	pass_height_reduction
 18421c	184238	FUN_0018413c
 184250	18426c	FUN_0018413c
 184290	1842b0	FUN_0018413c
