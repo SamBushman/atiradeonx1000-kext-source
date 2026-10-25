@@ -1,0 +1,182 @@
+use	FUN_000a3610	uVar3	glContextByte13b7	INFERRED	every definition of this web is a load from glContext+0x13b7 (positional name; no field row)	^\s*uVar3\ =\ \(uint\)\(byte\)\(\(unsigned\ char\ \*\)0x000013b7\)\[param_1\];$	+2
+use	FUN_000a3610	uVar3	glContextByte13b7	INFERRED	every definition of this web is a load from glContext+0x13b7 (positional name; no field row)	^\s*iVar2\ =\ uVar3\ \+\ 1;$	+1
+use	FUN_000a3610	uVar3	glContextByte13b7	INFERRED	every definition of this web is a load from glContext+0x13b7 (positional name; no field row)	^\s*uVar3\ =\ uVar3\ \-\ 1;$	+1
+use	FUN_000a3610	uVar3	glContextByte13b7	INFERRED	every definition of this web is a load from glContext+0x13b7 (positional name; no field row)	^\s*uVar1\ =\ 1\ <<\ \(uVar3\ \&\ 0x3f\);$@2	+1
+use	FUN_000a3610	uVar3	glContextByte13b7	INFERRED	every definition of this web is a load from glContext+0x13b7 (positional name; no field row)	^\s*uVar1\ =\ 1\ <<\ \(uVar3\ \&\ 0x3f\);$@3	+1
+use	FUN_000a3be0	uVar13	glContextWord1f2c	INFERRED	every definition of this web is a load from glContext+0x1f2c (positional name; no field row)	^\s*uVar13\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1f2c\);$	+1
+use	FUN_000a3be0	uVar13	glContextWord1f2c	INFERRED	every definition of this web is a load from glContext+0x1f2c (positional name; no field row)	^\s*puVar8\[1\]\ =\ uVar13;$	+1
+use	FUN_000a3be0	uVar13	glContextWord1b50	INFERRED	every definition of this web is a load from glContext+0x1b50 (positional name; no field row)	^\s*uVar13\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1b50\);$	+1
+use	FUN_000a3be0	uVar13	glContextWord1b50	INFERRED	every definition of this web is a load from glContext+0x1b50 (positional name; no field row)	^\s*puVar8\[1\]\ =\ uVar13;$@2	+1
+use	FUN_000a3be0	uVar13	glContextWord1ba0	INFERRED	every definition of this web is a load from glContext+0x1ba0 (positional name; no field row)	^\s*uVar13\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1ba0\);$	+1
+use	FUN_000a3be0	uVar13	glContextWord1ba0	INFERRED	every definition of this web is a load from glContext+0x1ba0 (positional name; no field row)	^\s*puVar8\[3\]\ =\ uVar13;$	+1
+use	FUN_000a3be0	uVar13	glContextWord1a64	INFERRED	every definition of this web is a load from glContext+0x1a64 (positional name; no field row)	^\s*uVar13\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1a64\);$	+1
+use	FUN_000a3be0	uVar13	glContextWord1a64	INFERRED	every definition of this web is a load from glContext+0x1a64 (positional name; no field row)	^\s*puVar8\[5\]\ =\ uVar13;$	+1
+use	FUN_000a3be0	uVar13	glContextWord1b64	INFERRED	every definition of this web is a load from glContext+0x1b64 (positional name; no field row)	^\s*uVar13\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1b64\);$	+1
+use	FUN_000a3be0	uVar13	glContextWord1b64	INFERRED	every definition of this web is a load from glContext+0x1b64 (positional name; no field row)	^\s*puVar8\[7\]\ =\ uVar13;$	+1
+use	FUN_000a3be0	uVar13	glContextWord1b68	INFERRED	every definition of this web is a load from glContext+0x1b68 (positional name; no field row)	^\s*uVar13\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1b68\);$	+1
+use	FUN_000a3be0	uVar13	glContextWord1b68	INFERRED	every definition of this web is a load from glContext+0x1b68 (positional name; no field row)	^\s*puVar8\[9\]\ =\ uVar13;$	+1
+use	FUN_000a3be0	uVar13	glContextWord1b68	INFERRED	every definition of this web is a load from glContext+0x1b68 (positional name; no field row)	^\s*\(\*UNRECOVERED_JUMPTABLE\)\(param_1,iVar11\ \+\ 0x30,param_3,uVar10,param_5,param_6,uVar13\);$	+1
+use	FUN_000a3be0	uVar14	glContextWord1ba4	INFERRED	every definition of this web is a load from glContext+0x1ba4 (positional name; no field row)	^\s*uVar14\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x1ba4\);$	+2
+use	FUN_000a3be0	uVar14	glContextWord1ba4	INFERRED	every definition of this web is a load from glContext+0x1ba4 (positional name; no field row)	^\s*uVar14\ =\ uVar14\ \&\ \~\(7\ <<\ \(uVar15\ \&\ 0x3f\)\);$	+1
+use	FUN_000a3be0	uVar14	glContextWord1ba4	INFERRED	every definition of this web is a load from glContext+0x1ba4 (positional name; no field row)	^\s*uVar14\ =\ uVar14\ \&\ \~\(7\ <<\ \(uVar15\ \&\ 0x3f\)\);$@2	+1
+use	FUN_000a3be0	uVar14	glContextWord1ba4	INFERRED	every definition of this web is a load from glContext+0x1ba4 (positional name; no field row)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x1ba8\)\ =\ uVar14;$	+1
+use	FUN_000a3be0	uVar5	glContextWord44	INFERRED	every definition of this web is a load from glContext+0x44 (positional name; no field row)	^\s*uVar5\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x44\);$	+1
+use	FUN_000a3be0	uVar5	glContextWord44	INFERRED	every definition of this web is a load from glContext+0x44 (positional name; no field row)	^\s*bVar2\ =\ \(uVar5\ >>\ 0x1d\ \&\ 1\)\ ==\ 0;$	+1
+use	FUN_000a3be0	uVar5	glContextWord44	INFERRED	every definition of this web is a load from glContext+0x44 (positional name; no field row)	^\s*if\ \(\(uVar5\ \&\ 0x40000000\)\ ==\ 0\)\ \{$	+1
+use	FUN_000a3be0	uVar5	glContextWord44	INFERRED	every definition of this web is a load from glContext+0x44 (positional name; no field row)	^\s*if\ \(\(uVar5\ \&\ 0x20000\)\ ==\ 0\)\ \{$	+1
+use	FUN_000a3be0	uVar5	glContextWord44	INFERRED	every definition of this web is a load from glContext+0x44 (positional name; no field row)	^\s*if\ \(\(uVar5\ \&\ 0x2000\)\ ==\ 0\)\ \{$	+1
+use	FUN_000a3be0	uVar5	glContextWord44	INFERRED	every definition of this web is a load from glContext+0x44 (positional name; no field row)	^\s*if\ \(\(uVar5\ \&\ 0x20000\)\ ==\ 0\)\ \{$@2	+1
+use	FUN_000a3be0	uVar5	glContextWord44	INFERRED	every definition of this web is a load from glContext+0x44 (positional name; no field row)	^\s*if\ \(\(uVar5\ \&\ 0x2000\)\ ==\ 0\)\ \{$@2	+1
+use	FUN_000a3be0	uVar5	glContextWordec	INFERRED	every definition of this web is a load from glContext+0xec (positional name; no field row)	^\s*uVar5\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0xec\);$	+1
+use	FUN_000a3be0	uVar5	glContextWordec	INFERRED	every definition of this web is a load from glContext+0xec (positional name; no field row)	^\s*if\ \(\(\(bVar3\ \&\ uVar5\)\ >>\ \(param_3\ \&\ 0x3f\)\ \&\ 1\)\ ==\ 0\)\ \{$	+1
+use	FUN_000a3be0	uVar5	glContextPtr13b2	INFERRED	every definition of this web is a load from glContext+0x13b2 (positional name; no field row)	^\s*uVar5\ =\ \(uint\)\(byte\)\(\(unsigned\ char\ \*\)0x000013b2\)\[param_1\];$	+2
+use	FUN_000a3be0	uVar5	glContextPtr13b2	INFERRED	every definition of this web is a load from glContext+0x13b2 (positional name; no field row)	^\s*uVar5\ =\ \(uint\)\(byte\)\(\(unsigned\ char\ \*\)0x000013b2\)\[param_1\];$@2	+1
+use	FUN_000a3be0	uVar5	glContextPtr13b2	INFERRED	every definition of this web is a load from glContext+0x13b2 (positional name; no field row)	^\s*\}\ while\ \(iVar11\ <\ \(int\)uVar5\);$	+1
+use	FUN_000a3be0	uVar5	glContextPtr13b2	INFERRED	every definition of this web is a load from glContext+0x13b2 (positional name; no field row)	^\s*uVar5\ =\ \(uint\)\(byte\)\(\(unsigned\ char\ \*\)0x000013b2\)\[param_1\];$@3	+2
+use	FUN_000a3be0	uVar5	glContextPtr13b2	INFERRED	every definition of this web is a load from glContext+0x13b2 (positional name; no field row)	^\s*uVar5\ =\ \(uint\)\(byte\)\(\(unsigned\ char\ \*\)0x000013b2\)\[param_1\];$@4	+1
+use	FUN_000a3be0	uVar5	glContextPtr13b2	INFERRED	every definition of this web is a load from glContext+0x13b2 (positional name; no field row)	^\s*\}\ while\ \(\(int\)uVar7\ <\ \(int\)uVar5\);$	+1
+use	FUN_000a4490	iVar1	glContextPtr2764	INFERRED	every definition of this web is a load from glContext+0x2764 (positional name; no field row)	^\s*for\ \(iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x2764\);\ iVar1\ !=\ 0;\ iVar1\ =\ \*\(int\ \*\)\(iVar1\ \+\ 0x138\)\)\ \{$	+2
+use	FUN_000a4550	iVar5	glContextPtr1154	INFERRED	every definition of this web is a load from glContext+0x1154 (positional name; no field row)	^\s*iVar5\ =\ \*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001154\)\ \+\ param_1\);$	+2
+use	FUN_000a4550	iVar5	glContextPtr1154	INFERRED	every definition of this web is a load from glContext+0x1154 (positional name; no field row)	^\s*iVar2\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x0000113c\)\ \+\ param_1\)\ \*\ 4\ \+$	+2
+use	FUN_000a4550	iVar5	glContextPtr1154	INFERRED	every definition of this web is a load from glContext+0x1154 (positional name; no field row)	^\s*uVar1\ =\ \*\(uint\ \*\)\(iVar5\ \+\ 4\);$@2	+1
+use	FUN_000a4550	iVar5	glContextPtr112c	INFERRED	every definition of this web is a load from glContext+0x112c (positional name; no field row)	^\s*iVar5\ =\ \*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x0000112c\)\ \+\ param_1\);$	+2
+use	FUN_000a4550	iVar5	glContextPtr112c	INFERRED	every definition of this web is a load from glContext+0x112c (positional name; no field row)	^\s*iVar2\ =\ iVar4\ \+\ \*\(int\ \*\)\(iVar5\ \+\ 8\);$	+1
+use	FUN_000a4550	iVar5	glContextPtr112c	INFERRED	every definition of this web is a load from glContext+0x112c (positional name; no field row)	^\s*uVar1\ =\ \*\(uint\ \*\)\(iVar5\ \+\ 4\);$@4	+1
+use	FUN_000a4770	fVar2	glContextFloat13e8	INFERRED	every definition of this web is a load from glContext+0x13e8 (positional name; no field row)	^\s*fVar2\ =\ \*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x000013e8\)\ \+\ param_1\);$	+4
+use	FUN_000a4770	fVar2	glContextFloat13e8	INFERRED	every definition of this web is a load from glContext+0x13e8 (positional name; no field row)	^\s*\(float\)\(\(double\)CONCAT44\(0x43300000,$	+3
+use	FUN_000a4770	iVar5	glContextPtr4	INFERRED	every definition of this web is a load from glContext+0x4 (positional name; no field row)	^\s*iVar5\ =\ \*\(int\ \*\)\(param_1\ \+\ 4\);$	+1
+use	FUN_000a4770	iVar5	glContextPtr4	INFERRED	every definition of this web is a load from glContext+0x4 (positional name; no field row)	^\s*iVar7\ =\ \*\(int\ \*\)\(iVar5\ \+\ 0x10\);$	+4
+use	FUN_000a4770	iVar6	glContextWord8	INFERRED	every definition of this web is a load from glContext+0x8 (positional name; no field row)	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 8\);$	+1
+use	FUN_000a4770	iVar6	glContextWord8	INFERRED	every definition of this web is a load from glContext+0x8 (positional name; no field row)	^\s*uVar4\ =\ iVar6\ \*\ uVar4\ >>\ 1;$	+1
+use	FUN_000a4770	iVar6	glContextWord8	INFERRED	every definition of this web is a load from glContext+0x8 (positional name; no field row)	^\s*uVar4\ =\ \(uint\)\(int\)\(\(float\)\(\(double\)CONCAT44\(0x43300000,iVar6\)\ \-\ DOUBLE_001aa250\)\ \*\ FLOAT_001aa10c\ \*$	+2
+use	FUN_000a6140	uVar2	ringWord1b74	INFERRED	every definition of this web is a load from ring+0x1b74 (positional name; no field row)	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1b74\);$	+1
+use	FUN_000a6140	uVar2	ringWord1b74	INFERRED	every definition of this web is a load from ring+0x1b74 (positional name; no field row)	^\s*puVar1\[1\]\ =\ uVar2;$	+1
+use	FUN_000a6140	uVar2	ringWord1b84	INFERRED	every definition of this web is a load from ring+0x1b84 (positional name; no field row)	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1b84\);$	+1
+use	FUN_000a6140	uVar2	ringWord1b84	INFERRED	every definition of this web is a load from ring+0x1b84 (positional name; no field row)	^\s*puVar1\[3\]\ =\ uVar2;$	+1
+use	FUN_000a6140	uVar2	ringWord1b30	INFERRED	every definition of this web is a load from ring+0x1b30 (positional name; no field row)	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1b30\);$	+1
+use	FUN_000a6140	uVar2	ringWord1b30	INFERRED	every definition of this web is a load from ring+0x1b30 (positional name; no field row)	^\s*puVar1\[5\]\ =\ uVar2;$	+1
+use	FUN_000a6140	uVar2	ringWord1b50	INFERRED	every definition of this web is a load from ring+0x1b50 (positional name; no field row)	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1b50\);$	+1
+use	FUN_000a6140	uVar2	ringWord1b50	INFERRED	every definition of this web is a load from ring+0x1b50 (positional name; no field row)	^\s*puVar1\[7\]\ =\ uVar2;$	+1
+use	FUN_000a6140	uVar2	ringWord1b9c	INFERRED	every definition of this web is a load from ring+0x1b9c (positional name; no field row)	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1b9c\);$	+1
+use	FUN_000a6140	uVar2	ringWord1b9c	INFERRED	every definition of this web is a load from ring+0x1b9c (positional name; no field row)	^\s*puVar1\[9\]\ =\ uVar2;$	+1
+use	FUN_000a6140	uVar2	ringWord1ba0	INFERRED	every definition of this web is a load from ring+0x1ba0 (positional name; no field row)	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1ba0\);$	+1
+use	FUN_000a6140	uVar2	ringWord1ba0	INFERRED	every definition of this web is a load from ring+0x1ba0 (positional name; no field row)	^\s*puVar1\[0xb\]\ =\ uVar2;$	+1
+use	FUN_000a6140	uVar2	ringWord248c	INFERRED	every definition of this web is a load from ring+0x248c (positional name; no field row)	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x248c\);$	+1
+use	FUN_000a6140	uVar2	ringWord248c	INFERRED	every definition of this web is a load from ring+0x248c (positional name; no field row)	^\s*puVar1\[0xd\]\ =\ uVar2;$	+1
+use	FUN_000a6140	uVar2	ringWord1a50	INFERRED	every definition of this web is a load from ring+0x1a50 (positional name; no field row)	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1a50\);$	+1
+use	FUN_000a6140	uVar2	ringWord1a50	INFERRED	every definition of this web is a load from ring+0x1a50 (positional name; no field row)	^\s*puVar1\[0x15\]\ =\ uVar2;$	+1
+use	FUN_000a6140	uVar2	ringWord1b60	INFERRED	every definition of this web is a load from ring+0x1b60 (positional name; no field row)	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1b60\);$	+1
+use	FUN_000a6140	uVar2	ringWord1b60	INFERRED	every definition of this web is a load from ring+0x1b60 (positional name; no field row)	^\s*puVar1\[0x17\]\ =\ uVar2;$	+1
+use	FUN_000a6140	uVar2	ringWord1bc0	INFERRED	every definition of this web is a load from ring+0x1bc0 (positional name; no field row)	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1bc0\);$	+1
+use	FUN_000a6140	uVar2	ringWord1bc0	INFERRED	every definition of this web is a load from ring+0x1bc0 (positional name; no field row)	^\s*puVar3\[1\]\ =\ uVar2;$	+1
+use	FUN_000a6cb0	iVar6	glContextPtr4	INFERRED	every definition of this web is a load from glContext+0x4 (positional name; no field row)	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 4\);$	+2
+use	FUN_000a6cb0	iVar6	glContextPtr4	INFERRED	every definition of this web is a load from glContext+0x4 (positional name; no field row)	^\s*if\ \(\(\(\(\*\(int\ \*\)\(param_1\ \+\ 0x440\)\ ==\ 0\)\ \&\&\ \(\*\(int\ \*\)\(param_1\ \+\ 0x444\)\ ==\ 0\)\)\ \&\&$	+3
+use	FUN_000a6cb0	iVar6	glContextPtr4	INFERRED	every definition of this web is a load from glContext+0x4 (positional name; no field row)	^\s*uVar7\ =\ \*\(uint\ \*\)\(iVar6\ \+\ 0x154\);$	+4
+use	FUN_000a6cb0	iVar6	glContextPtr4	INFERRED	every definition of this web is a load from glContext+0x4 (positional name; no field row)	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 4\);$@2	+1
+use	FUN_000a6cb0	iVar6	glContextPtr4	INFERRED	every definition of this web is a load from glContext+0x4 (positional name; no field row)	^\s*puVar3\ =\ \*\(uint\ \*\*\)\(iVar6\ \+\ 0x1d8\);$	+1
+use	FUN_000a6cb0	iVar6	glContextPtr4	INFERRED	every definition of this web is a load from glContext+0x4 (positional name; no field row)	^\s*\*\(undefined4\ \*\*\)\(iVar6\ \+\ 0x1d8\)\ =\ puVar4;$	+1
+use	FUN_000a6cb0	pcVar2	glContextPtr275c	INFERRED	every definition of this web is a load from glContext+0x275c (positional name; no field row)	^\s*pcVar2\ =\ \*\(code\ \*\*\)\(param_1\ \+\ 0x275c\);$	+1
+use	FUN_000a6cb0	pcVar2	glContextPtr275c	INFERRED	every definition of this web is a load from glContext+0x275c (positional name; no field row)	^\s*\(\*pcVar2\)\(param_1,iVar6\);$	+1
+use	FUN_000a6cb0	uVar9	glContextWord1ae0	INFERRED	every definition of this web is a load from glContext+0x1ae0 (positional name; no field row)	^\s*uVar9\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1ae0\);$	+1
+use	FUN_000a6cb0	uVar9	glContextWord1ae0	INFERRED	every definition of this web is a load from glContext+0x1ae0 (positional name; no field row)	^\s*puVar4\[2\]\ =\ uVar9;$	+1
+use	FUN_000a7050	cVar1	ctxByte1aa8	INFERRED	every definition of this web is a load from ctx+0x1aa8 (positional name; no field row)	^\s*cVar1\ =\ \*\(char\ \*\)\(param_1\ \+\ 0x1aa8\);$	+1
+use	FUN_000a7050	cVar1	ctxByte1aa8	INFERRED	every definition of this web is a load from ctx+0x1aa8 (positional name; no field row)	^\s*if\ \(cVar1\ ==\ '\\0'\)\ \{$	+1
+use	FUN_000a7050	cVar1	ctxByte1aa8	INFERRED	every definition of this web is a load from ctx+0x1aa8 (positional name; no field row)	^\s*if\ \(cVar1\ ==\ '\\0'\)\ \{$@2	+1
+use	FUN_000a7050	iVar5	ctxPtr244	INFERRED	every definition of this web is a load from ctx+0x244 (positional name; no field row)	^\s*iVar5\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x244\);$	+1
+use	FUN_000a7050	iVar5	ctxPtr244	INFERRED	every definition of this web is a load from ctx+0x244 (positional name; no field row)	^\s*\*\(undefined1\ \*\)\(iVar5\ \+\ 0xf6\)\ =\ 0;$	+1
+use	FUN_000a7050	iVar5	ctxPtr244	INFERRED	every definition of this web is a load from ctx+0x244 (positional name; no field row)	^\s*iVar5\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x244\);$@2	+2
+use	FUN_000a7050	iVar5	ctxPtr244	INFERRED	every definition of this web is a load from ctx+0x244 (positional name; no field row)	^\s*uVar8\ =\ \*\(uint\ \*\)\(iVar5\ \+\ 0x24\)\ \&\ 0x7ff00000;$@2	+1
+use	FUN_000a7050	pcVar4	ctxPtr24c	INFERRED	every definition of this web is a load from ctx+0x24c (positional name; no field row)	^\s*pcVar4\ =\ \*\(code\ \*\*\)\(param_1\ \+\ 0x24c\);$	+1
+use	FUN_000a7050	pcVar4	ctxPtr24c	INFERRED	every definition of this web is a load from ctx+0x24c (positional name; no field row)	^\s*uVar11\ =\ \(\*pcVar4\)\(0x90\);$	+1
+use	FUN_000a7050	pcVar4	ctxPtr24c	INFERRED	every definition of this web is a load from ctx+0x24c (positional name; no field row)	^\s*pcVar4\ =\ \*\(code\ \*\*\)\(param_1\ \+\ 0x24c\);$@2	+1
+use	FUN_000a7050	pcVar4	ctxPtr24c	INFERRED	every definition of this web is a load from ctx+0x24c (positional name; no field row)	^\s*uVar6\ =\ \(\*pcVar4\)\(0x14,\(int\)uVar11,in_r5,in_r6,a4,uVar7,pcVar4\);$	+1
+use	FUN_000a7050	pcVar4	ctxPtr250	INFERRED	every definition of this web is a load from ctx+0x250 (positional name; no field row)	^\s*pcVar4\ =\ \*\(code\ \*\*\)\(param_1\ \+\ 0x250\);$	+1
+use	FUN_000a7050	pcVar4	ctxPtr250	INFERRED	every definition of this web is a load from ctx+0x250 (positional name; no field row)	^\s*uVar7\ =\ \(\*pcVar4\)\(1,\(\(unsigned\ char\ \*\)0x00003754U\),uVar7,in_r6,a4,uVar6,0\);$	+1
+use	FUN_000a7050	pcVar4	ctxPtr24c	INFERRED	every definition of this web is a load from ctx+0x24c (positional name; no field row)	^\s*pcVar4\ =\ \*\(code\ \*\*\)\(param_1\ \+\ 0x24c\);$@3	+1
+use	FUN_000a7050	pcVar4	ctxPtr24c	INFERRED	every definition of this web is a load from ctx+0x24c (positional name; no field row)	^\s*uVar7\ =\ \(\*pcVar4\)\(10\);$	+1
+use	FUN_000a7050	pcVar4	ctxPtr24c	INFERRED	every definition of this web is a load from ctx+0x24c (positional name; no field row)	^\s*pcVar4\ =\ \*\(code\ \*\*\)\(param_1\ \+\ 0x24c\);$@4	+1
+use	FUN_000a7050	pcVar4	ctxPtr24c	INFERRED	every definition of this web is a load from ctx+0x24c (positional name; no field row)	^\s*uVar6\ =\ \(\*pcVar4\)\(0x40,a1,iVar5,in_r6,a4,uVar6,pcVar4\);$	+1
+use	FUN_000a7050	uVar8	ctxWord2cc	INFERRED	every definition of this web is a load from ctx+0x2cc (positional name; no field row)	^\s*uVar8\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x2cc\);$	+1
+use	FUN_000a7050	uVar8	ctxWord2cc	INFERRED	every definition of this web is a load from ctx+0x2cc (positional name; no field row)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x2cc\)\ =\ uVar8\ \&\ 0xc02fffff\ \|\ 0x40200000;$	+1
+use	FUN_000a7050	uVar8	ctxWord284	INFERRED	every definition of this web is a load from ctx+0x284 (positional name; no field row)	^\s*uVar8\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x284\);$	+1
+use	FUN_000a7050	uVar8	ctxWord284	INFERRED	every definition of this web is a load from ctx+0x284 (positional name; no field row)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x284\)\ =\ uVar8\ \&\ 0xff8220ff;$	+1
+use	FUN_000a8630	uVar23	streamWord38	INFERRED	every definition of this web is a load from stream+0x38 (positional name; no field row)	^\s*uVar23\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x38\);$	+1
+use	FUN_000a8630	uVar23	streamWord38	INFERRED	every definition of this web is a load from stream+0x38 (positional name; no field row)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x38\)\ =\ uVar23\ \|\ 0x20080;$	+1
+use	FUN_000a8630	uVar24	streamWord40	INFERRED	every definition of this web is a load from stream+0x40 (positional name; no field row)	^\s*uVar24\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x40\);$	+1
+use	FUN_000a8630	uVar24	streamWord40	INFERRED	every definition of this web is a load from stream+0x40 (positional name; no field row)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x40\)\ =\ uVar24\ \|\ 0x20000;$	+1
+use	FUN_000a8c00	iVar3	streamPtr4	INFERRED	every definition of this web is a load from stream+0x4 (positional name; no field row)	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 4\);$	+7
+use	FUN_000a8c00	iVar3	streamPtr4	INFERRED	every definition of this web is a load from stream+0x4 (positional name; no field row)	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 4\);$@3	+1
+use	FUN_000a8c00	iVar3	streamPtr4	INFERRED	every definition of this web is a load from stream+0x4 (positional name; no field row)	^\s*if\ \(\(\(\(\(unsigned\ char\ \*\)0x00002e2c\)\[\*\(int\ \*\)\(iVar3\ \+\ 0x10\)\]\ ==\ '\\0'\)\ \|\|$	+3
+use	FUN_000a8c00	uVar2	streamWord1928	INFERRED	every definition of this web is a load from stream+0x1928 (positional name; no field row)	^\s*uVar2\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x1928\);$	+3
+use	FUN_000a8c00	uVar2	streamWord1928	INFERRED	every definition of this web is a load from stream+0x1928 (positional name; no field row)	^\s*uVar2\ \&\ 0xffffffe7\ \|\ uVar1\ \|\ uVar4\ <<\ 4\ \|\ \(uVar2\ \&\ 8\)\ >>\ 3\ \^\ uVar5\ \|\ uVar5\ <<\ 3;$	+1
+use	FUN_000a8e20	uVar1	streamWord38	INFERRED	every definition of this web is a load from stream+0x38 (positional name; no field row)	^\s*uVar1\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x38\);$	+1
+use	FUN_000a8e20	uVar1	streamWord38	INFERRED	every definition of this web is a load from stream+0x38 (positional name; no field row)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x38\)\ =\ uVar1\ \|\ 0x100;$	+1
+use	FUN_000a8e20	uVar1	streamWord38	INFERRED	every definition of this web is a load from stream+0x38 (positional name; no field row)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x38\)\ =\ uVar1\ \|\ 0x120;$	+1
+use	FUN_000a8e20	uVar2	streamWord18a4	INFERRED	every definition of this web is a load from stream+0x18a4 (positional name; no field row)	^\s*uVar2\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x18a4\);$	+1
+use	FUN_000a8e20	uVar2	streamWord18a4	INFERRED	every definition of this web is a load from stream+0x18a4 (positional name; no field row)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x18a4\)\ =\ uVar4\ \|\ uVar2\ \&\ 0xfffffffb;$	+1
+use	FUN_000a8e20	uVar2	streamWord18a4	INFERRED	every definition of this web is a load from stream+0x18a4 (positional name; no field row)	^\s*\(\(byte\)\(\(unsigned\ char\ \*\)0x00002d48\)\[param_2\ \+\ 4\]\ \&\ 1\)\ <<\ 1\ \|\ uVar4\ \|\ uVar2\ \&\ 0xfffffff9;$	+1
+use	FUN_000a8e20	uVar3	streamWord44	INFERRED	every definition of this web is a load from stream+0x44 (positional name; no field row)	^\s*uVar3\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x44\);$	+1
+use	FUN_000a8e20	uVar3	streamWord44	INFERRED	every definition of this web is a load from stream+0x44 (positional name; no field row)	^\s*uVar3\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x44\);$@2	+1
+use	FUN_000a8e20	uVar3	streamWord44	INFERRED	every definition of this web is a load from stream+0x44 (positional name; no field row)	^\s*if\ \(\(uVar3\ \&\ 0x2000\)\ !=\ 0\)\ goto\ LAB_000a8e54;$	+1
+use	FUN_000a8e20	uVar3	streamWord44	INFERRED	every definition of this web is a load from stream+0x44 (positional name; no field row)	^\s*uVar4\ =\ uVar2\ <<\ 0x18\ \|\ uVar3\ \&\ 0xfeffffff;$	+1
+use	FUN_000a8e20	uVar3	streamWord44	INFERRED	every definition of this web is a load from stream+0x44 (positional name; no field row)	^\s*if\ \(\(\(\(\(unsigned\ char\ \*\)0x00002d48\)\[param_2\ \+\ 2\]\ !=\ '\\0'\ \|\|\ \(\(unsigned\ char\ \*\)0x00002e0b\)\[param_2\]\ !=\ 0\)\ \|\|$	+2
+use	FUN_000a8e20	uVar3	streamWord38_2	INFERRED	every definition of this web is a load from stream+0x38 (positional name; no field row)	^\s*uVar3\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x38\);$	+1
+use	FUN_000a8e20	uVar3	streamWord38_2	INFERRED	every definition of this web is a load from stream+0x38 (positional name; no field row)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x38\)\ =\ uVar3\ \|\ 0x120;$	+1
+use	FUN_000a8e20	uVar3	streamWord38_2	INFERRED	every definition of this web is a load from stream+0x38 (positional name; no field row)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x38\)\ =\ uVar3\ \|\ 0x2320;$	+1
+use	FUN_000a8e20	uVar4	streamWord38_3	INFERRED	every definition of this web is a load from stream+0x38 (positional name; no field row)	^\s*uVar4\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x38\);$	+1
+use	FUN_000a8e20	uVar4	streamWord38_3	INFERRED	every definition of this web is a load from stream+0x38 (positional name; no field row)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x38\)\ =\ uVar4\ \|\ 0x100;$	+1
+use	FUN_000a8e20	uVar4	streamWord38_3	INFERRED	every definition of this web is a load from stream+0x38 (positional name; no field row)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x38\)\ =\ uVar4\ \|\ 0x120;$	+1
+use	FUN_000a9640	fVar3	streamFloat13cc	INFERRED	every definition of this web is a load from stream+0x13cc (positional name; no field row)	^\s*fVar3\ =\ \*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x000013cc\)\ \+\ param_1\);$	+1
+use	FUN_000a9640	fVar3	streamFloat13cc	INFERRED	every definition of this web is a load from stream+0x13cc (positional name; no field row)	^\s*fVar7\ =\ fVar3\ \*\ \(float\)\(\(double\)CONCAT44\(0x43300000,$	+3
+use	FUN_000a9640	fVar3	streamFloat13cc	INFERRED	every definition of this web is a load from stream+0x13cc (positional name; no field row)	^\s*fVar7\ =\ fVar3\ \*\ \(float\)\(\(double\)CONCAT44\(0x43300000,$@2	+3
+use	FUN_000a9640	fVar4	streamFloat13c4	INFERRED	every definition of this web is a load from stream+0x13c4 (positional name; no field row)	^\s*fVar4\ =\ \*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x000013c4\)\ \+\ param_1\);$	+1
+use	FUN_000a9640	fVar4	streamFloat13c4	INFERRED	every definition of this web is a load from stream+0x13c4 (positional name; no field row)	^\s*if\ \(fVar3\ \-\ fVar4\ <\ 0\.0\)\ \{$	+2
+use	FUN_000a9640	fVar4	streamFloat13c4	INFERRED	every definition of this web is a load from stream+0x13c4 (positional name; no field row)	^\s*fVar6\ =\ fVar4;$	+2
+use	FUN_000a9640	fVar4	streamFloat13c4	INFERRED	every definition of this web is a load from stream+0x13c4 (positional name; no field row)	^\s*fVar7\ =\ fVar4;$	+5
+use	FUN_000a9640	fVar4	streamFloat13c4	INFERRED	every definition of this web is a load from stream+0x13c4 (positional name; no field row)	^\s*fVar7\ =\ fVar4;$@2	+5
+use	FUN_000a9640	uVar10	streamWord44	INFERRED	every definition of this web is a load from stream+0x44 (positional name; no field row)	^\s*uVar10\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x44\);$	+1
+use	FUN_000a9640	uVar10	streamWord44	INFERRED	every definition of this web is a load from stream+0x44 (positional name; no field row)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x44\)\ =\ uVar12\ \|\ uVar10\ \&\ 0xbfffffff;$	+1
+use	FUN_000a9640	uVar10	streamWord44	INFERRED	every definition of this web is a load from stream+0x44 (positional name; no field row)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x44\)\ =\ \(bVar2\ \&\ 1\)\ <<\ 0x1d\ \|\ uVar12\ \|\ uVar10\ \&\ 0x9fffffff;$	+1
+use	FUN_000a9640	uVar11	streamWord13d4	INFERRED	every definition of this web is a load from stream+0x13d4 (positional name; no field row)	^\s*uVar11\ =\ \*\(undefined4\ \*\)\(\(\(unsigned\ char\ \*\)0x000013d4\)\ \+\ param_1\);$	+1
+use	FUN_000a9640	uVar11	streamWord13d4	INFERRED	every definition of this web is a load from stream+0x13d4 (positional name; no field row)	^\s*if\ \(\(float\)\(\(double\)CONCAT44\(0x43300000,uVar11\)\ \-\ DOUBLE_001aa250\)\ <=\ fVar3\)\ \{$	+2
+use	FUN_000ac720	iVar15	glContextWord11e0	INFERRED	every definition of this web is a load from glContext+0x11e0 (positional name; no field row)	^\s*iVar15\ =\ \*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x000011e0\)\ \+\ param_1\);$	+1
+use	FUN_000ac720	iVar15	glContextWord11e0	INFERRED	every definition of this web is a load from glContext+0x11e0 (positional name; no field row)	^\s*\*\(uint\ \*\)\(uVar11\ \*\ 4\ \+\ param_3\[2\]\)\ =\ iVar15\ \+\ 1U\ \&\ 0xffff\ \|\ 0x40000;$	+1
+use	FUN_000b4400	iVar8	compileRecordPtrc	INFERRED	every definition of this web is a load from compileRecord+0xc (positional name; no field row)	^\s*iVar8\ =\ param_3\[3\];$	+2
+use	FUN_000b4400	iVar8	compileRecordPtrc	INFERRED	every definition of this web is a load from compileRecord+0xc (positional name; no field row)	^\s*uVar6\ =\ FUN_000a6f70\(\(\(uint\)\*\(ushort\ \*\)\(iVar8\ \+\ 0x1c\)\ \+\ \(uint\)\*\(ushort\ \*\)\(iVar8\ \+\ 0x1a\)\ \+$	+2
+use	FUN_000b57a0	uVar1	ctxWord44	INFERRED	every definition of this web is a load from ctx+0x44 (positional name; no field row)	^\s*uVar1\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x44\);$	+1
+use	FUN_000b57a0	uVar1	ctxWord44	INFERRED	every definition of this web is a load from ctx+0x44 (positional name; no field row)	^\s*puVar4\[6\]\ =\ uVar1\ >>\ 7\ \&\ 1;$	+1
+use	FUN_000b5c00	cVar1	glContextByte124	INFERRED	every definition of this web is a load from glContext+0x124 (positional name; no field row)	^\s*cVar1\ =\ \*\(char\ \*\)\(param_1\ \+\ 0x124\);$	+1
+use	FUN_000b5c00	cVar1	glContextByte124	INFERRED	every definition of this web is a load from glContext+0x124 (positional name; no field row)	^\s*if\ \(\(cVar1\ ==\ '\\0'\)\ \|\|\ \(\(\*\(uint\ \*\)\(param_1\ \+\ 0x44\)\ \&\ 0x100000\)\ ==\ 0\)\)\ \{$	+1
+use	FUN_000b5c00	uVar3	glContextWord8c	INFERRED	every definition of this web is a load from glContext+0x8c (positional name; no field row)	^\s*uVar3\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x8c\);$	+2
+use	FUN_000b5c00	uVar3	glContextWord1ca0	INFERRED	every definition of this web is a load from glContext+0x1ca0 (positional name; no field row)	^\s*uVar3\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x1ca0\);$	+2
+use	FUN_000b5c00	uVar3	glContextWord1ca0	INFERRED	every definition of this web is a load from glContext+0x1ca0 (positional name; no field row)	^\s*uVar6\ =\ uVar3\ \|\ 0xc;$	+1
+use	FUN_000b5c00	uVar8	glContextWord44	INFERRED	every definition of this web is a load from glContext+0x44 (positional name; no field row)	^\s*uVar8\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x44\);$	+1
+use	FUN_000b5c00	uVar8	glContextWord44	INFERRED	every definition of this web is a load from glContext+0x44 (positional name; no field row)	^\s*if\ \(\(uVar8\ \&\ 0x100000\)\ ==\ 0\)\ \{$	+1
+use	FUN_000b5c00	uVar8	glContextWord44	INFERRED	every definition of this web is a load from glContext+0x44 (positional name; no field row)	^\s*if\ \(\(int\)uVar8\ <\ 0\)\ \{$	+1
+use	FUN_000b5c00	uVar8	glContextWord44	INFERRED	every definition of this web is a load from glContext+0x44 (positional name; no field row)	^\s*if\ \(\(uVar8\ \&\ 0xa10000\)\ !=\ 0\)\ \{$	+1
+use	FUN_000b5c00	uVar8	glContextWord44	INFERRED	every definition of this web is a load from glContext+0x44 (positional name; no field row)	^\s*if\ \(\(\(uVar8\ \&\ 0x1000800\)\ !=\ 0\)\ \&\&\ \(\*\(short\ \*\)\(\(\(unsigned\ char\ \*\)0x00002e06\)\ \+\ iVar7\)\ ==\ \-0x7baf\)\)\ \{$	+1
+use	FUN_000b5c00	uVar8	glContextWord44	INFERRED	every definition of this web is a load from glContext+0x44 (positional name; no field row)	^\s*if\ \(\(uVar8\ \&\ 0x20000\)\ ==\ 0\)\ \{$	+1
+use	FUN_000b5c00	uVar8	glContextWord44	INFERRED	every definition of this web is a load from glContext+0x44 (positional name; no field row)	^\s*if\ \(\(uVar8\ \&\ 0x2000\)\ ==\ 0\)\ \{$	+1
+use	FUN_000bda40	bVar1	streamByte13b0	INFERRED	every definition of this web is a load from stream+0x13b0 (positional name; no field row)	^\s*bVar1\ =\ \(\(unsigned\ char\ \*\)0x000013b0\)\[param_1\];$	+1
+use	FUN_000bda40	bVar1	streamByte13b0	INFERRED	every definition of this web is a load from stream+0x13b0 (positional name; no field row)	^\s*if\ \(\(uint\)bVar1\ <\ \(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x2b\)\)\ \{$	+2
+use	FUN_000bda40	uVar11	streamWord8c	INFERRED	every definition of this web is a load from stream+0x8c (positional name; no field row)	^\s*uVar11\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x8c\);$	+2
+use	FUN_000bda40	uVar11	streamWord8c	INFERRED	every definition of this web is a load from stream+0x8c (positional name; no field row)	^\s*uVar12\ =\ \(uVar4\ \|\ \(uVar11\ \&\ 0xf7ffffff\)\ >>\ 0x1a\ \&\ 1\)\ <<\ 0x1a;$	+8
+use	FUN_000bda40	uVar14	streamWord44	INFERRED	every definition of this web is a load from stream+0x44 (positional name; no field row)	^\s*uVar14\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x44\);$	+3
+use	FUN_000bda40	uVar14	streamWord44	INFERRED	every definition of this web is a load from stream+0x44 (positional name; no field row)	^\s*if\ \(\(uVar14\ \&\ 0x20000\)\ ==\ 0\)\ \{$	+1
+use	FUN_000bda40	uVar14	streamWord44	INFERRED	every definition of this web is a load from stream+0x44 (positional name; no field row)	^\s*if\ \(\(uVar14\ \&\ 0x2000\)\ ==\ 0\)\ \{$	+1
+use	FUN_000bda40	uVar14	streamWord44	INFERRED	every definition of this web is a load from stream+0x44 (positional name; no field row)	^\s*if\ \(\(uVar14\ \&\ 0x20000\)\ ==\ 0\)\ \{$@2	+1
+use	FUN_000bda40	uVar14	streamWord44	INFERRED	every definition of this web is a load from stream+0x44 (positional name; no field row)	^\s*uVar14\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x44\);$@2	+1
+use	FUN_000bef40	uVar21	psnProgramWord8	INFERRED	every definition of this web is a load from psnProgram+0x8 (positional name; no field row)	^\s*uVar21\ =\ \*\(uint\ \*\)\(param_1\ \+\ 8\);$	+1
+use	FUN_000bef40	uVar21	psnProgramWord8	INFERRED	every definition of this web is a load from psnProgram+0x8 (positional name; no field row)	^\s*if\ \(\(uVar21\ !=\ 0\)\ \&\&$	+3
+use	FUN_000bef40	uVar21	psnProgramWord8	INFERRED	every definition of this web is a load from psnProgram+0x8 (positional name; no field row)	^\s*if\ \(uVar21\ <\ uVar18\)\ break;$	+1
+use	FUN_000bef40	uVar21	psnProgramWord8	INFERRED	every definition of this web is a load from psnProgram+0x8 (positional name; no field row)	^\s*\}\ while\ \(uVar18\ <=\ uVar21\);$	+1
+use	FUN_000bfed0	uVar24	psnProgramShort12	INFERRED	every definition of this web is a load from psnProgram+0x12 (positional name; no field row)	^\s*uVar24\ =\ \*\(ushort\ \*\)\(param_1\ \+\ 0x12\);$	+1
+use	FUN_000bfed0	uVar24	psnProgramShort12	INFERRED	every definition of this web is a load from psnProgram+0x12 (positional name; no field row)	^\s*param_3\[2\]\ =\ \(uVar24\ \&\ 0x1ff\)\ <<\ 0x10\ \|\ uVar55;$	+1
+use	FUN_000bfed0	uVar24	psnProgramShort28	INFERRED	every definition of this web is a load from psnProgram+0x28 (positional name; no field row)	^\s*uVar24\ =\ \*\(ushort\ \*\)\(param_1\ \+\ 0x28\);$	+1
+use	FUN_000bfed0	uVar24	psnProgramShort28	INFERRED	every definition of this web is a load from psnProgram+0x28 (positional name; no field row)	^\s*param_3\[1\]\ =\ \(uint\)uVar24\ <<\ 0x1f;$	+1
+use	FUN_000bfed0	uVar24	psnProgramShort22	INFERRED	every definition of this web is a load from psnProgram+0x22 (positional name; no field row)	^\s*uVar24\ =\ \*\(ushort\ \*\)\(param_1\ \+\ 0x22\);$	+1
+use	FUN_000bfed0	uVar24	psnProgramShort22	INFERRED	every definition of this web is a load from psnProgram+0x22 (positional name; no field row)	^\s*\*param_3\ =\ uVar24\ \&\ 0x7f;$	+1
+use	FUN_000bfed0	uVar55	psnProgramWord8	INFERRED	every definition of this web is a load from psnProgram+0x8 (positional name; no field row)	^\s*uVar55\ =\ \*\(uint\ \*\)\(param_1\ \+\ 8\);$	+2
+use	FUN_000bfed0	uVar55	psnProgramWord8	INFERRED	every definition of this web is a load from psnProgram+0x8 (positional name; no field row)	^\s*\}\ while\ \(uVar59\ <=\ uVar55\);$	+1
+use	FUN_000bfed0	uVar55	psnProgramWord8	INFERRED	every definition of this web is a load from psnProgram+0x8 (positional name; no field row)	^\s*if\ \(uVar55\ <\ uVar59\)\ \{$	+1
+use	FUN_000bfed0	uVar55	psnProgramWord8	INFERRED	every definition of this web is a load from psnProgram+0x8 (positional name; no field row)	^\s*\}\ while\ \(uVar59\ <=\ uVar55\);$@2	+1
