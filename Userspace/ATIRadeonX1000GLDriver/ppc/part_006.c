@@ -6687,6 +6687,26 @@ joined_r0x0004802c:
 int fragmentProgramToIL(translator)
   int *translator;
 {
+  bool moreChannels;
+  uint channelIndex;
+  uint translatorFlags;
+  uint fogMode;
+  uint outputIndex;
+  uint *outputEntry;
+  uint outputCount;
+  uint constantIndex;
+  uint paramTypeBits;
+  uint paramIndex;
+  uint *paramEntry;
+  uint paramCount;
+  uint requiredTokenWords;
+  uint *attribEntry;
+  int attribRemaining;
+  int outputRemaining;
+  int optionEntry;
+  int optionCount;
+  int allocation2;
+  int allocation;
   uint tokenCapacity4;
   uint tokenCapacity3;
   uint tokenCapacity;
@@ -6701,13 +6721,13 @@ int fragmentProgramToIL(translator)
   undefined **ppuVar1;
   undefined4 *puVar2;
   bool bVar3;
-  ushort uVar4;
+  ushort attribBinding;
   short sVar5;
   undefined2 uVar6;
   short sVar7;
-  double dVar8;
+  double intToDoubleBias;
   uint uVar9;
-  uint *puVar10;
+  uint *outputScanEntry;
   uint tokenCapacity2;
   int iVar12;
   int iVar13;
@@ -6730,10 +6750,10 @@ int fragmentProgramToIL(translator)
   undefined4 *tokenWritePtr;
   dword *pdVar16;
   int iVar17;
-  uint uVar18;
+  uint paramKind;
   undefined4 *puVar19;
   undefined **ppuVar20;
-  int *piVar21;
+  int *program;
   undefined *puVar22;
   uint uVar23;
   undefined4 uVar24;
@@ -6747,25 +6767,25 @@ int fragmentProgramToIL(translator)
   undefined4 local_a8;
   undefined4 local_a4;
   undefined *local_a0 [10];
-  undefined4 local_78;
-  uint uStack_74;
-  undefined4 local_70;
-  uint uStack_6c;
-  undefined4 local_68;
-  uint uStack_64;
-  undefined4 local_60;
-  uint uStack_5c;
+  undefined4 intToDoubleHiA;
+  uint intToDoubleLoA;
+  undefined4 intToDoubleHiB;
+  uint intToDoubleLoB;
+  undefined4 intToDoubleHiC;
+  uint intToDoubleLoC;
+  undefined4 intToDoubleHiD;
+  uint intToDoubleLoD;
   
-  piVar21 = (int *)*translator;
-  if (piVar21 == (int *)0x0) {
+  program = (int *)*translator;
+  if (program == (int *)0x0) {
     if (translator[9] != 0) {
       return translator[9];
     }
     translator[9] = 2;
     return 2;
   }
-  translator[8] = piVar21[4] + piVar21[0xc] + 1;
-  iVar12 = *piVar21;
+  translator[8] = program[4] + program[0xc] + 1;
+  iVar12 = *program;
   if ((iVar12 != 0x8804) && (iVar12 != 0x8b30)) {
 switchD_00049180_caseD_0:
     if (translator[9] != 0) {
@@ -6789,15 +6809,15 @@ LAB_0004a4ec:
     for (; tokenCapacity < tokenCount + 2U; tokenCapacity = tokenCapacity << 1) {
     }
     if (*tokenDataPtrAddr == 0) {
-      iVar12 = _malloc(tokenCapacity << 2);
+      allocation = _malloc(tokenCapacity << 2);
       in_r4 = extraout_r4;
     }
     else {
-      iVar12 = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
+      allocation = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
       in_r4 = extraout_r4_00;
     }
-    if (iVar12 != 0) {
-      *tokenDataPtrAddr = iVar12;
+    if (allocation != 0) {
+      *tokenDataPtrAddr = allocation;
       translator[0xc] = tokenCapacity;
       tokenCount = translator[0xb];
       goto LAB_00048eb4;
@@ -6822,24 +6842,24 @@ LAB_00048eb4:
   *tokenWritePtr3 = 1;
   *pdVar16 = 0x10200;
   iVar27 = *translator;
-  iVar12 = *(int *)(iVar27 + 0x30);
-  puVar10 = (uint *)(iVar27 + *(int *)(iVar27 + 0x34) * 8);
-  if (0 < iVar12) {
+  outputRemaining = *(int *)(iVar27 + 0x30);
+  outputScanEntry = (uint *)(iVar27 + *(int *)(iVar27 + 0x34) * 8);
+  if (0 < outputRemaining) {
     do {
-      if (((*puVar10 >> 0x10 & 0xf) == 4) && ((*puVar10 & 0xe) != 0)) {
+      if (((*outputScanEntry >> 0x10 & 0xf) == 4) && ((*outputScanEntry & 0xe) != 0)) {
         *(uint *)(translator[0xd] + 0x20) = *(uint *)(translator[0xd] + 0x20) | 0x400000;
         iVar27 = *translator;
         break;
       }
-      puVar10 = puVar10 + 2;
-      iVar12 = iVar12 + -1;
-    } while (iVar12 != 0);
+      outputScanEntry = outputScanEntry + 2;
+      outputRemaining = outputRemaining + -1;
+    } while (outputRemaining != 0);
   }
-  iVar13 = *(int *)(iVar27 + 0x48);
-  iVar12 = iVar27 + *(int *)(iVar27 + 0x4c) * 8;
-  if (0 < iVar13) {
+  optionCount = *(int *)(iVar27 + 0x48);
+  optionEntry = iVar27 + *(int *)(iVar27 + 0x4c) * 8;
+  if (0 < optionCount) {
     do {
-      switch(*(undefined1 *)(iVar12 + 3)) {
+      switch(*(undefined1 *)(optionEntry + 3)) {
       case 0:
       case 8:
       case 10:
@@ -6858,41 +6878,41 @@ LAB_00048eb4:
       case 3:
         translator[5] = translator[5] & 0xe7ffffffU | 0x8000000;
       }
-      iVar13 = iVar13 + -1;
-      iVar12 = iVar12 + 8;
-    } while (iVar13 != 0);
+      optionCount = optionCount + -1;
+      optionEntry = optionEntry + 8;
+    } while (optionCount != 0);
   }
 LAB_00049048:
-  iVar12 = *(int *)(iVar27 + 0x20);
+  attribRemaining = *(int *)(iVar27 + 0x20);
   tokenCount2 = translator[0xb];
   tokenCapacity = translator[0xc];
-  uVar14 = iVar12 * 2 + tokenCount2;
-  puVar10 = (uint *)(iVar27 + *(int *)(iVar27 + 0x24) * 8);
-  if (tokenCapacity < uVar14) {
+  requiredTokenWords = attribRemaining * 2 + tokenCount2;
+  attribEntry = (uint *)(iVar27 + *(int *)(iVar27 + 0x24) * 8);
+  if (tokenCapacity < requiredTokenWords) {
     if (tokenCapacity == 0) {
       tokenCapacity = 0x10;
     }
     else {
       tokenCapacity = tokenCapacity << 1;
     }
-    for (; tokenCapacity < uVar14; tokenCapacity = tokenCapacity << 1) {
+    for (; tokenCapacity < requiredTokenWords; tokenCapacity = tokenCapacity << 1) {
     }
     if (*tokenDataPtrAddr == 0) {
-      iVar27 = _malloc(tokenCapacity << 2);
+      allocation2 = _malloc(tokenCapacity << 2);
       in_r4 = extraout_r4_01;
     }
     else {
-      iVar27 = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
+      allocation2 = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
       in_r4 = extraout_r4_02;
     }
-    if (iVar27 == 0) goto LAB_0004a55c;
-    *tokenDataPtrAddr = iVar27;
+    if (allocation2 == 0) goto LAB_0004a55c;
+    *tokenDataPtrAddr = allocation2;
     translator[0xc] = tokenCapacity;
     tokenCount2 = translator[0xb];
   }
-  translator[0xb] = iVar12 * 2 + tokenCount2;
+  translator[0xb] = attribRemaining * 2 + tokenCount2;
   tokenWritePtr = (undefined4 *)(tokenCount2 * 4 + *tokenDataPtrAddr);
-  if (iVar12 < 1) {
+  if (attribRemaining < 1) {
 LAB_0004921c:
     if ((translator[5] & 0x18000000U) != 0) {
       tokenCount = translator[0xb];
@@ -6907,15 +6927,15 @@ LAB_0004921c:
         for (; tokenCapacity < tokenCount + 2U; tokenCapacity = tokenCapacity << 1) {
         }
         if (*tokenDataPtrAddr == 0) {
-          iVar12 = _malloc(tokenCapacity << 2);
+          allocation = _malloc(tokenCapacity << 2);
           in_r4 = extraout_r4_03;
         }
         else {
-          iVar12 = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
+          allocation = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
           in_r4 = extraout_r4_04;
         }
-        if (iVar12 == 0) goto LAB_0004a55c;
-        *tokenDataPtrAddr = iVar12;
+        if (allocation == 0) goto LAB_0004a55c;
+        *tokenDataPtrAddr = allocation;
         translator[0xc] = tokenCapacity;
         tokenCount = translator[0xb];
       }
@@ -6928,15 +6948,15 @@ LAB_0004921c:
   else {
     in_r5 = 0;
     do {
-      uVar4 = *(ushort *)puVar10;
-      if ((uVar4 & 0xf) == 1) {
+      attribBinding = *(ushort *)attribEntry;
+      if ((attribBinding & 0xf) == 1) {
         *tokenWritePtr = 0x3ff0016;
 switchD_00049180_caseD_1:
         puVar22 = ((unsigned char *)0x00160000);
       }
       else {
         *tokenWritePtr = 0x1ff0016;
-        switch(uVar4 & 0xf) {
+        switch(attribBinding & 0xf) {
         default:
           goto switchD_00049180_caseD_0;
         case 1:
@@ -6952,14 +6972,14 @@ switchD_00049180_caseD_1:
           puVar22 = (undefined *)0x100000;
           break;
         case 7:
-          puVar22 = (undefined *)(*puVar10 & 0x1f | 0x110000);
+          puVar22 = (undefined *)(*attribEntry & 0x1f | 0x110000);
         }
       }
-      iVar12 = iVar12 + -1;
+      attribRemaining = attribRemaining + -1;
       tokenWritePtr[1] = puVar22;
       tokenWritePtr = tokenWritePtr + 2;
-      puVar10 = puVar10 + 2;
-    } while (iVar12 != 0);
+      attribEntry = attribEntry + 2;
+    } while (attribRemaining != 0);
     in_r6 = 0;
     if (in_r5 == 0) goto LAB_0004921c;
   }
@@ -7015,15 +7035,15 @@ switchD_00049180_caseD_1:
     for (; tokenCapacity < (uint)(iVar13 + tokenCount); tokenCapacity = tokenCapacity << 1) {
     }
     if (*tokenDataPtrAddr == 0) {
-      iVar27 = _malloc(tokenCapacity << 2);
+      allocation2 = _malloc(tokenCapacity << 2);
       in_r4 = extraout_r4_05;
     }
     else {
-      iVar27 = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
+      allocation2 = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
       in_r4 = extraout_r4_06;
     }
-    if (iVar27 != 0) {
-      *tokenDataPtrAddr = iVar27;
+    if (allocation2 != 0) {
+      *tokenDataPtrAddr = allocation2;
       translator[0xc] = tokenCapacity;
       tokenCount = translator[0xb];
       goto LAB_00049448;
@@ -7054,23 +7074,23 @@ LAB_00049448:
       iVar13 = iVar13 + -1;
     } while (iVar13 != 0);
   }
-  dVar8 = DOUBLE_001aa1e0;
+  intToDoubleBias = DOUBLE_001aa1e0;
   iVar27 = *translator;
-  uVar9 = *(uint *)(iVar27 + 0x28);
-  puVar10 = (uint *)(iVar27 + *(int *)(iVar27 + 0x2c) * 8);
+  paramCount = *(uint *)(iVar27 + 0x28);
+  paramEntry = (uint *)(iVar27 + *(int *)(iVar27 + 0x2c) * 8);
   iVar27 = iVar27 + *(int *)(iVar27 + 0x6c) * 8;
-  if (0 < (int)uVar9) {
-    uVar14 = 0;
+  if (0 < (int)paramCount) {
+    paramIndex = 0;
     do {
-      uVar23 = *puVar10 & 0x1c000000;
-      uVar18 = *puVar10 >> 0x10 & 0x1f;
-      if ((((uVar23 != 0xc000000) && (uVar23 != 0x4000000)) && (uVar23 != 0x10000000)) &&
-         (uVar23 != 0)) {
+      paramTypeBits = *paramEntry & 0x1c000000;
+      paramKind = *paramEntry >> 0x10 & 0x1f;
+      if ((((paramTypeBits != 0xc000000) && (paramTypeBits != 0x4000000)) && (paramTypeBits != 0x10000000)) &&
+         (paramTypeBits != 0)) {
         translatorError3 = translator[9];
         if (translatorError3 == 0) goto LAB_0004a4ec;
         goto LAB_0004980c;
       }
-      if (uVar18 == 0x11) {
+      if (paramKind == 0x11) {
         tokenCount2 = translator[0xb];
         tokenCapacity4 = translator[0xc];
         if (tokenCapacity4 < tokenCount2 + 6U) {
@@ -7083,15 +7103,15 @@ LAB_00049448:
           for (; tokenCapacity4 < tokenCount2 + 6U; tokenCapacity4 = tokenCapacity4 << 1) {
           }
           if (*tokenDataPtrAddr == 0) {
-            iVar12 = _malloc(tokenCapacity4 << 2);
+            allocation = _malloc(tokenCapacity4 << 2);
             in_r4 = extraout_r4_07;
           }
           else {
-            iVar12 = _realloc(*tokenDataPtrAddr,tokenCapacity4 << 2);
+            allocation = _realloc(*tokenDataPtrAddr,tokenCapacity4 << 2);
             in_r4 = extraout_r4_08;
           }
-          if (iVar12 == 0) goto LAB_0004a55c;
-          *tokenDataPtrAddr = iVar12;
+          if (allocation == 0) goto LAB_0004a55c;
+          *tokenDataPtrAddr = allocation;
           translator[0xc] = tokenCapacity4;
           tokenCount2 = translator[0xb];
         }
@@ -7099,41 +7119,41 @@ LAB_00049448:
         translator[0xb] = tokenCount;
         tokenWritePtr2 = (undefined4 *)(tokenCount2 * 4 + *tokenDataPtrAddr);
         *tokenWritePtr2 = 0x1c;
-        tokenWritePtr2[1] = uVar14 & 0xffff | 0x10000;
-        uVar23 = (uint)(ushort)*puVar10;
-        if ((*puVar10 & 0x1c000000) == 0xc000000) {
-          local_78 = 0x43300000;
-          iVar13 = iVar27 + uVar23 * 0x10;
-          uStack_74 = *(uint *)(uVar23 * 0x10 + iVar27) ^ 0x80000000;
-          tokenWritePtr2[2] = (float)((double)CONCAT44(0x43300000,uStack_74) - dVar8);
-          local_70 = 0x43300000;
-          uStack_6c = *(uint *)(iVar13 + 4) ^ 0x80000000;
-          tokenWritePtr2[3] = (float)((double)CONCAT44(0x43300000,uStack_6c) - dVar8);
-          local_68 = 0x43300000;
-          uStack_64 = *(uint *)(iVar13 + 8) ^ 0x80000000;
-          tokenWritePtr2[4] = (float)((double)CONCAT44(0x43300000,uStack_64) - dVar8);
-          local_60 = 0x43300000;
-          uStack_5c = *(uint *)(iVar13 + 0xc) ^ 0x80000000;
-          tokenWritePtr2[5] = (float)((double)CONCAT44(0x43300000,uStack_5c) - dVar8);
+        tokenWritePtr2[1] = paramIndex & 0xffff | 0x10000;
+        constantIndex = (uint)(ushort)*paramEntry;
+        if ((*paramEntry & 0x1c000000) == 0xc000000) {
+          intToDoubleHiA = 0x43300000;
+          iVar13 = iVar27 + constantIndex * 0x10;
+          intToDoubleLoA = *(uint *)(constantIndex * 0x10 + iVar27) ^ 0x80000000;
+          tokenWritePtr2[2] = (float)((double)CONCAT44(0x43300000,intToDoubleLoA) - intToDoubleBias);
+          intToDoubleHiB = 0x43300000;
+          intToDoubleLoB = *(uint *)(iVar13 + 4) ^ 0x80000000;
+          tokenWritePtr2[3] = (float)((double)CONCAT44(0x43300000,intToDoubleLoB) - intToDoubleBias);
+          intToDoubleHiC = 0x43300000;
+          intToDoubleLoC = *(uint *)(iVar13 + 8) ^ 0x80000000;
+          tokenWritePtr2[4] = (float)((double)CONCAT44(0x43300000,intToDoubleLoC) - intToDoubleBias);
+          intToDoubleHiD = 0x43300000;
+          intToDoubleLoD = *(uint *)(iVar13 + 0xc) ^ 0x80000000;
+          tokenWritePtr2[5] = (float)((double)CONCAT44(0x43300000,intToDoubleLoD) - intToDoubleBias);
         }
-        else if ((*puVar10 & 0x1c000000) == 0x10000000) {
-          iVar13 = iVar27 + uVar23 * 0x10;
-          tokenWritePtr2[2] = (uint)(*(int *)(iVar27 + uVar23 * 0x10) != 0);
+        else if ((*paramEntry & 0x1c000000) == 0x10000000) {
+          iVar13 = iVar27 + constantIndex * 0x10;
+          tokenWritePtr2[2] = (uint)(*(int *)(iVar27 + constantIndex * 0x10) != 0);
           tokenWritePtr2[3] = (uint)(*(int *)(iVar13 + 4) != 0);
           tokenWritePtr2[4] = (uint)(*(int *)(iVar13 + 8) != 0);
           tokenWritePtr2[5] = (uint)(*(int *)(iVar13 + 0xc) != 0);
         }
         else {
-          iVar13 = iVar27 + uVar23 * 0x10;
-          tokenWritePtr2[2] = *(undefined4 *)(iVar27 + uVar23 * 0x10);
+          iVar13 = iVar27 + constantIndex * 0x10;
+          tokenWritePtr2[2] = *(undefined4 *)(iVar27 + constantIndex * 0x10);
           tokenWritePtr2[3] = *(undefined4 *)(iVar13 + 4);
           tokenWritePtr2[4] = *(undefined4 *)(iVar13 + 8);
           tokenWritePtr2[5] = *(undefined4 *)(iVar13 + 0xc);
         }
       }
-      uVar14 = uVar14 + 1;
-      puVar10 = puVar10 + 2;
-    } while (uVar9 != uVar14);
+      paramIndex = paramIndex + 1;
+      paramEntry = paramEntry + 2;
+    } while (paramCount != paramIndex);
   }
   translator[6] = translator[0xb];
   tokenCount3 = translator[0xb];
@@ -7148,14 +7168,14 @@ LAB_00049448:
     for (; tokenCapacity < tokenCount3 + 0xc6U; tokenCapacity = tokenCapacity << 1) {
     }
     if (*tokenDataPtrAddr == 0) {
-      iVar12 = _malloc(tokenCapacity << 2);
+      allocation = _malloc(tokenCapacity << 2);
       in_r4 = extraout_r4_09;
     }
     else {
-      iVar12 = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
+      allocation = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
       in_r4 = extraout_r4_10;
     }
-    if (iVar12 == 0) {
+    if (allocation == 0) {
 LAB_0004a55c:
       if (translator[9] != 0) {
         return translator[9];
@@ -7163,17 +7183,17 @@ LAB_0004a55c:
       translator[9] = 1;
       return 1;
     }
-    *tokenDataPtrAddr = iVar12;
+    *tokenDataPtrAddr = allocation;
     translator[0xc] = tokenCapacity;
     tokenCount3 = translator[0xb];
   }
   tokenCount = tokenCount3 + 0xc6;
   translator[0xb] = tokenCount;
-  uVar18 = tokenCount3 * 4 + *tokenDataPtrAddr;
+  paramKind = tokenCount3 * 4 + *tokenDataPtrAddr;
   iVar27 = 0;
   iVar13 = 0xc6;
   do {
-    *(undefined4 *)(iVar27 + uVar18) = 0x4b;
+    *(undefined4 *)(iVar27 + paramKind) = 0x4b;
     iVar27 = iVar27 + 4;
     iVar13 = iVar13 + -1;
   } while (iVar13 != 0);
@@ -7183,41 +7203,41 @@ LAB_0004980c:
   if (translatorError3 != 0) {
     return translatorError3;
   }
-  tokenCount = ((int (*)())fragmentInstructionToIL)(translator,in_r4,in_r5,in_r6,tokenWritePtr,tokenCount,uVar18,tokenWritePtr2);
+  tokenCount = ((int (*)())fragmentInstructionToIL)(translator,in_r4,in_r5,in_r6,tokenWritePtr,tokenCount,paramKind,tokenWritePtr2);
   if (tokenCount != 0) goto LAB_0004a7b4;
   iVar12 = *translator;
-  uVar9 = *(uint *)(iVar12 + 0x30);
-  puVar10 = (uint *)(iVar12 + *(int *)(iVar12 + 0x34) * 8);
-  if (0 < (int)uVar9) {
-    uVar14 = 0;
+  outputCount = *(uint *)(iVar12 + 0x30);
+  outputEntry = (uint *)(iVar12 + *(int *)(iVar12 + 0x34) * 8);
+  if (0 < (int)outputCount) {
+    outputIndex = 0;
     do {
-      if ((1 << (uVar14 & 0x3f) & translator[4]) != 0) {
+      if ((1 << (outputIndex & 0x3f) & translator[4]) != 0) {
         uVar24 = 0x55;
         puVar22 = ((unsigned char *)0x00003210);
-        uVar23 = uVar14 + *(int *)(*translator + 0x10) + 1 & 0xffff | 0x440000;
-        if ((*(ushort *)puVar10 & 0xf) == 4) {
+        uVar23 = outputIndex + *(int *)(*translator + 0x10) + 1 & 0xffff | 0x440000;
+        if ((*(ushort *)outputEntry & 0xf) == 4) {
           iVar12 = translator[0xd];
           if (((*(uint *)(iVar12 + 0x20) & 0x400000) != 0) ||
              (bVar3 = true, (*(uint *)(iVar12 + 0x20) >> 0x12 & 0xf) < 2)) {
             bVar3 = false;
           }
-          uVar18 = translator[5];
-          translator[5] = uVar18 | 0x80000000;
-          uVar25 = *puVar10 >> 1 & 7 | 0x570000;
-          if ((uVar18 & 0x18000000) != 0) {
+          translatorFlags = translator[5];
+          translator[5] = translatorFlags | 0x80000000;
+          uVar25 = *outputEntry >> 1 & 7 | 0x570000;
+          if ((translatorFlags & 0x18000000) != 0) {
             *(uint *)(iVar12 + 0x20) = *(uint *)(iVar12 + 0x20) | 0x2000000;
             uVar6 = (undefined2)translator[8];
             sVar7 = ((ushort)((uint)*(undefined4 *)(translator[0xd] + 0x20) >> 0x1a) & 1) +
                     (short)*(undefined4 *)(*translator + 0x28);
             _memset(&local_b8,0,0x24);
             sVar5 = sVar7 + 1;
-            uVar18 = (uint)translator[5] >> 0x1b & 3;
+            fogMode = (uint)translator[5] >> 0x1b & 3;
             local_b4 = CONCAT22(4,uVar6);
             local_b0 = 0x55;
             local_a0[0] = (undefined *)((uint)local_a0[0] & 0xffff0000);
             local_ac = (undefined *)((uint)local_ac & 0xffc0ffff | 0x500000);
             local_b4 = local_b4 | 0x400000;
-            if (uVar18 == 1) {
+            if (fogMode == 1) {
               translatorError = translator[9];
               local_b8 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_b8) + 0)),0x40);
               local_b0 = 0x155;
@@ -7238,12 +7258,12 @@ LAB_0004980c:
                   for (; tokenCapacity3 < tokenCount + 9U; tokenCapacity3 = tokenCapacity3 << 1) {
                   }
                   if (*tokenDataPtrAddr == 0) {
-                    iVar12 = _malloc(tokenCapacity3 << 2);
+                    allocation = _malloc(tokenCapacity3 << 2);
                   }
                   else {
-                    iVar12 = _realloc(*tokenDataPtrAddr,tokenCapacity3 << 2);
+                    allocation = _realloc(*tokenDataPtrAddr,tokenCapacity3 << 2);
                   }
-                  if (iVar12 == 0) {
+                  if (allocation == 0) {
 LAB_0004a188:
                     translatorError = translator[9];
                     if (translatorError == 0) {
@@ -7252,7 +7272,7 @@ LAB_0004a188:
                     }
                     goto LAB_0004a0d8;
                   }
-                  *tokenDataPtrAddr = iVar12;
+                  *tokenDataPtrAddr = allocation;
                   translator[0xc] = tokenCapacity3;
                   tokenCount = translator[0xb];
                 }
@@ -7273,7 +7293,7 @@ LAB_0004a188:
               }
             }
             else {
-              if ((uVar18 == 0) || (3 < uVar18)) goto LAB_0004a474;
+              if ((fogMode == 0) || (3 < fogMode)) goto LAB_0004a474;
               local_b8 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_b8) + 0)),0x49);
               if ((translator[5] & 0x18000000U) == 0x10000000) {
                 local_a8 = CONCAT22(1,sVar5);
@@ -7293,12 +7313,12 @@ LAB_0004a188:
                     for (; tokenCapacity3 < tokenCount + 7U; tokenCapacity3 = tokenCapacity3 << 1) {
                     }
                     if (*tokenDataPtrAddr == 0) {
-                      iVar12 = _malloc(tokenCapacity3 << 2);
+                      allocation = _malloc(tokenCapacity3 << 2);
                     }
                     else {
-                      iVar12 = _realloc(*tokenDataPtrAddr,tokenCapacity3 << 2);
+                      allocation = _realloc(*tokenDataPtrAddr,tokenCapacity3 << 2);
                     }
-                    if (iVar12 == 0) {
+                    if (allocation == 0) {
 LAB_00049f94:
                       translatorError = translator[9];
                       if (translatorError == 0) {
@@ -7307,7 +7327,7 @@ LAB_00049f94:
                       }
                       goto LAB_00049fa8;
                     }
-                    *tokenDataPtrAddr = iVar12;
+                    *tokenDataPtrAddr = allocation;
                     translator[0xc] = tokenCapacity3;
                     tokenCount = translator[0xb];
                   }
@@ -7346,12 +7366,12 @@ LAB_00049f80:
                     for (; tokenCapacity3 < tokenCount + 7U; tokenCapacity3 = tokenCapacity3 << 1) {
                     }
                     if (*tokenDataPtrAddr == 0) {
-                      iVar12 = _malloc(tokenCapacity3 << 2);
+                      allocation = _malloc(tokenCapacity3 << 2);
                     }
                     else {
-                      iVar12 = _realloc(*tokenDataPtrAddr,tokenCapacity3 << 2);
+                      allocation = _realloc(*tokenDataPtrAddr,tokenCapacity3 << 2);
                     }
-                    if (iVar12 == 0) {
+                    if (allocation == 0) {
                       translatorError = translator[9];
                       if (translatorError == 0) {
                         translatorError = 1;
@@ -7359,7 +7379,7 @@ LAB_00049f80:
                       }
                       goto LAB_00049e2c;
                     }
-                    *tokenDataPtrAddr = iVar12;
+                    *tokenDataPtrAddr = allocation;
                     translator[0xc] = tokenCapacity3;
                     tokenCount = translator[0xb];
                   }
@@ -7399,13 +7419,13 @@ LAB_00049e2c:
                     for (; tokenCapacity3 < tokenCount + 7U; tokenCapacity3 = tokenCapacity3 << 1) {
                     }
                     if (*tokenDataPtrAddr == 0) {
-                      iVar12 = _malloc(tokenCapacity3 << 2);
+                      allocation = _malloc(tokenCapacity3 << 2);
                     }
                     else {
-                      iVar12 = _realloc(*tokenDataPtrAddr,tokenCapacity3 << 2);
+                      allocation = _realloc(*tokenDataPtrAddr,tokenCapacity3 << 2);
                     }
-                    if (iVar12 == 0) goto LAB_00049f94;
-                    *tokenDataPtrAddr = iVar12;
+                    if (allocation == 0) goto LAB_00049f94;
+                    *tokenDataPtrAddr = allocation;
                     translator[0xc] = tokenCapacity3;
                     tokenCount = translator[0xb];
                   }
@@ -7444,13 +7464,13 @@ LAB_00049fa8:
                 for (; tokenCapacity3 < tokenCount + 5U; tokenCapacity3 = tokenCapacity3 << 1) {
                 }
                 if (*tokenDataPtrAddr == 0) {
-                  iVar12 = _malloc(tokenCapacity3 << 2);
+                  allocation = _malloc(tokenCapacity3 << 2);
                 }
                 else {
-                  iVar12 = _realloc(*tokenDataPtrAddr,tokenCapacity3 << 2);
+                  allocation = _realloc(*tokenDataPtrAddr,tokenCapacity3 << 2);
                 }
-                if (iVar12 == 0) goto LAB_0004a188;
-                *tokenDataPtrAddr = iVar12;
+                if (allocation == 0) goto LAB_0004a188;
+                *tokenDataPtrAddr = allocation;
                 translator[0xc] = tokenCapacity3;
                 tokenCount = translator[0xb];
               }
@@ -7468,7 +7488,7 @@ LAB_0004a0d8:
             iVar27 = *translator;
             local_b8 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_b8) + 0)),0x47);
             local_b0 = 0x155;
-            sVar5 = (short)uVar14;
+            sVar5 = (short)outputIndex;
             local_b4 = CONCAT22(4,sVar5 + (short)*(undefined4 *)(iVar27 + 0x10) + 1);
             local_b4 = local_b4 | 0x400000;
             local_a0[0] = ((unsigned char *)0x00003210);
@@ -7487,12 +7507,12 @@ LAB_0004a0d8:
                 for (; tokenCapacity3 < tokenCount + 5U; tokenCapacity3 = tokenCapacity3 << 1) {
                 }
                 if (*tokenDataPtrAddr == 0) {
-                  iVar12 = _malloc(tokenCapacity3 << 2);
+                  allocation = _malloc(tokenCapacity3 << 2);
                 }
                 else {
-                  iVar12 = _realloc(*tokenDataPtrAddr,tokenCapacity3 << 2);
+                  allocation = _realloc(*tokenDataPtrAddr,tokenCapacity3 << 2);
                 }
-                if (iVar12 == 0) {
+                if (allocation == 0) {
                   translatorError = translator[9];
                   if (translatorError == 0) {
                     translatorError = 1;
@@ -7501,7 +7521,7 @@ LAB_0004a0d8:
                   iVar27 = *translator;
                   goto LAB_0004a25c;
                 }
-                *tokenDataPtrAddr = iVar12;
+                *tokenDataPtrAddr = allocation;
                 translator[0xc] = tokenCapacity3;
                 tokenCount = translator[0xb];
               }
@@ -7542,18 +7562,18 @@ LAB_0004a25c:
                 for (; tokenCapacity3 < tokenCount + 9U; tokenCapacity3 = tokenCapacity3 << 1) {
                 }
                 if (*tokenDataPtrAddr == 0) {
-                  iVar12 = _malloc(tokenCapacity3 << 2);
+                  allocation = _malloc(tokenCapacity3 << 2);
                 }
                 else {
-                  iVar12 = _realloc(*tokenDataPtrAddr,tokenCapacity3 << 2);
+                  allocation = _realloc(*tokenDataPtrAddr,tokenCapacity3 << 2);
                 }
-                if (iVar12 == 0) {
+                if (allocation == 0) {
                   if (translator[9] == 0) {
                     translator[9] = 1;
                   }
                   goto LAB_0004a474;
                 }
-                *tokenDataPtrAddr = iVar12;
+                *tokenDataPtrAddr = allocation;
                 translator[0xc] = tokenCapacity3;
                 tokenCount = translator[0xb];
               }
@@ -7573,10 +7593,10 @@ LAB_0004a25c:
             }
           }
 LAB_0004a474:
-          uVar18 = 0;
+          channelIndex = 0;
           if (bVar3) {
             do {
-              if (((int)(*(uint *)(translator[0xd] + 0x20) >> 0x12 & 0xf) >> (uVar18 & 0x3f) & 1U) != 0
+              if (((int)(*(uint *)(translator[0xd] + 0x20) >> 0x12 & 0xf) >> (channelIndex & 0x3f) & 1U) != 0
                  ) {
                 tokenCount = translator[0xb];
                 tokenCapacity2 = translator[0xc];
@@ -7590,17 +7610,17 @@ LAB_0004a474:
                   for (; tokenCapacity2 < tokenCount + 5U; tokenCapacity2 = tokenCapacity2 << 1) {
                   }
                   if (*tokenDataPtrAddr == 0) {
-                    iVar12 = _malloc(tokenCapacity2 << 2);
+                    allocation = _malloc(tokenCapacity2 << 2);
                   }
                   else {
-                    iVar12 = _realloc(*tokenDataPtrAddr,tokenCapacity2 << 2);
+                    allocation = _realloc(*tokenDataPtrAddr,tokenCapacity2 << 2);
                   }
-                  if (iVar12 == 0) goto LAB_0004a55c;
-                  *tokenDataPtrAddr = iVar12;
+                  if (allocation == 0) goto LAB_0004a55c;
+                  *tokenDataPtrAddr = allocation;
                   translator[0xc] = tokenCapacity2;
                   tokenCount = translator[0xb];
                 }
-                uVar25 = uVar18 & 0xffff | uVar25 & 0xffff0000;
+                uVar25 = channelIndex & 0xffff | uVar25 & 0xffff0000;
                 translator[0xb] = tokenCount + 5;
                 iVar27 = tokenCount * 4 + *tokenDataPtrAddr;
                 *(undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr) = 0x47;
@@ -7609,19 +7629,19 @@ LAB_0004a474:
                 *(undefined4 *)(iVar27 + 8) = 0x55;
                 *(uint *)(iVar27 + 0xc) = uVar23;
               }
-              bVar3 = uVar18 != 3;
-              uVar18 = uVar18 + 1;
-            } while (bVar3);
+              moreChannels = channelIndex != 3;
+              channelIndex = channelIndex + 1;
+            } while (moreChannels);
             goto LAB_0004a680;
           }
         }
         else {
-          if ((*(ushort *)puVar10 & 0xf) != 7) goto switchD_00049180_caseD_0;
-          uVar18 = translator[5];
+          if ((*(ushort *)outputEntry & 0xf) != 7) goto switchD_00049180_caseD_0;
+          translatorFlags = translator[5];
           uVar24 = 0x155;
-          translator[5] = uVar18 | 0x40000000;
+          translator[5] = translatorFlags | 0x40000000;
           uVar25 = 0x580000;
-          if ((uVar18 & 0x20000000) == 0) {
+          if ((translatorFlags & 0x20000000) == 0) {
             puVar22 = ((unsigned char *)0x00003212);
           }
         }
@@ -7637,13 +7657,13 @@ LAB_0004a474:
           for (; tokenCapacity3 < tokenCount + 5U; tokenCapacity3 = tokenCapacity3 << 1) {
           }
           if (*tokenDataPtrAddr == 0) {
-            iVar12 = _malloc(tokenCapacity3 << 2);
+            allocation = _malloc(tokenCapacity3 << 2);
           }
           else {
-            iVar12 = _realloc(*tokenDataPtrAddr,tokenCapacity3 << 2);
+            allocation = _realloc(*tokenDataPtrAddr,tokenCapacity3 << 2);
           }
-          if (iVar12 == 0) goto LAB_0004a55c;
-          *tokenDataPtrAddr = iVar12;
+          if (allocation == 0) goto LAB_0004a55c;
+          *tokenDataPtrAddr = allocation;
           translator[0xc] = tokenCapacity3;
           tokenCount = translator[0xb];
         }
@@ -7656,9 +7676,9 @@ LAB_0004a474:
         tokenWritePtr[3] = uVar23;
       }
 LAB_0004a680:
-      uVar14 = uVar14 + 1;
-      puVar10 = puVar10 + 2;
-    } while (uVar9 != uVar14);
+      outputIndex = outputIndex + 1;
+      outputEntry = outputEntry + 2;
+    } while (outputCount != outputIndex);
   }
   tokenCount = translator[0xb];
   tokenCapacity = translator[0xc];
@@ -7672,13 +7692,13 @@ LAB_0004a680:
     for (; tokenCapacity < tokenCount + 1U; tokenCapacity = tokenCapacity << 1) {
     }
     if (*tokenDataPtrAddr == 0) {
-      iVar12 = _malloc(tokenCapacity << 2);
+      allocation = _malloc(tokenCapacity << 2);
     }
     else {
-      iVar12 = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
+      allocation = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
     }
-    if (iVar12 != 0) {
-      *tokenDataPtrAddr = iVar12;
+    if (allocation != 0) {
+      *tokenDataPtrAddr = allocation;
       translator[0xc] = tokenCapacity;
       tokenCount = translator[0xb];
       goto LAB_0004a708;
