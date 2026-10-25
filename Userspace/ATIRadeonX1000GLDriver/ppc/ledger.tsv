@@ -219,7 +219,7 @@
 0x1eae0	16	copyIndices16Swapped_dcbz_entry	part_003	converted
 0x1eaf0	468	copyIndices16Swapped_dcbz	part_003	converted
 0x1ecd0	696	gld_drawVertexArray	part_003	converted
-0x1fd00	1208	FUN_0001fd00	part_003	converted
+0x1fd00	1208	gld_buildVertexStreamLayout	part_003	converted
 0x20210	280	FUN_00020210	part_003	converted
 0x20330	216	FUN_00020330	part_003	converted
 0x20420	1716	gldDisplayNotificationCallback	part_003	converted
@@ -230,7 +230,7 @@
 0x22290	2632	_gldUpdateDispatch	part_003	converted
 0x22ce0	456	_gldInitDispatch	part_003	converted
 0x22eb0	536	FUN_00022eb0	part_003	converted
-0x230d0	1544	FUN_000230d0	part_003	converted
+0x230d0	1544	gld_emitSurfaceCopyPacket	part_003	converted
 0x236f0	8	returnSecondArgument	part_003	converted
 0x23700	360	gldEmitCurrentAttributeRegisters	part_003	converted
 0x23870	420	gldEmitCurrentAttributeRegistersMasked	part_003	converted

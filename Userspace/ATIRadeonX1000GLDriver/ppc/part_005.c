@@ -5021,7 +5021,7 @@ LAB_00035740:
       boundFramebuffer = *(int *)(ctx + 0x150);
     }
     else {
-      FUN_000230d0(ctx,0,iVar33,0,(int)fVar15,(int)(fVar17 + fVar5),(int)(fVar6 - fVar15),
+      gld_emitSurfaceCopyPacket(ctx,0,iVar33,0,(int)fVar15,(int)(fVar17 + fVar5),(int)(fVar6 - fVar15),
                    (int)((fVar8 + fVar5) - (fVar17 + fVar5)));
       boundFramebuffer = *(int *)(ctx + 0x150);
     }

@@ -3438,7 +3438,7 @@ LAB_00029a74:
           if (format != 0x1902) {
             prepareResult = FUN_0001a010(ctx,readSurfaceCode,puVar11,puVar12,iVar17,puVar13,piVar20);
             if (prepareResult != 0) {
-              FUN_000230d0(ctx,0,readSurfaceCode,0,0,0,*(undefined4 *)(ctx + GLD_renderWidth),
+              gld_emitSurfaceCopyPacket(ctx,0,readSurfaceCode,0,0,0,*(undefined4 *)(ctx + GLD_renderWidth),
                            *(undefined4 *)(ctx + GLD_renderHeight));
             }
             if (*(int *)(ctx + GLD_rb3d_ropcntl) != 0) {
@@ -3850,7 +3850,7 @@ LAB_00029a74:
               savedHeight = 0;
               a5 = (uint *)0x0;
               a2 = readSurfaceCode;
-              FUN_000230d0(ctx,0,readSurfaceCode,0,0,0,*(undefined4 *)(ctx + GLD_renderWidth),
+              gld_emitSurfaceCopyPacket(ctx,0,readSurfaceCode,0,0,0,*(undefined4 *)(ctx + GLD_renderWidth),
                            *(undefined4 *)(ctx + GLD_renderHeight));
             }
             if (*(int *)(ctx + GLD_rb3d_ropcntl) != 0) {
@@ -5908,7 +5908,7 @@ LAB_0002c610:
 LAB_0002c67c:
   if ((((dirtyBits[3] & 0x100000) != 0) || ((*(uint *)(param_1 + 0x2488) & 4) != 0)) ||
      (*(char *)(param_1 + 0x247d) != '\0')) {
-    FUN_0001fd00(param_1);
+    gld_buildVertexStreamLayout(param_1);
   }
   return;
 }
