@@ -7648,6 +7648,9 @@ int FUN_001541f0(node, inst, pass)
   int *inst;
   int pass;
 {
+  uint remapComponentB;
+  uint remapComponentA;
+  uint srcCComponent;
   int firstCompInst2;
   int lastOperandSource;
   int firstCompInst1;
@@ -7686,7 +7689,7 @@ int FUN_001541f0(node, inst, pass)
   int *newSrcB;
   int *newSrcC;
   int *inst1;
-  uint remapComponentA;
+  uint srcAComponent;
   undefined4 staleArg3;
   undefined4 staleArg4;
   undefined4 staleArg5;
@@ -7700,7 +7703,7 @@ int FUN_001541f0(node, inst, pass)
   uint remapComponentC;
   int *inst2;
   undefined4 compiler;
-  uint remapComponentB;
+  uint srcBComponent;
   uint instFlags;
   int countdown2;
   undefined4 destSelectNode;
@@ -7852,41 +7855,41 @@ int FUN_001541f0(node, inst, pass)
                     firstCompInst1 = firstCompInst1Copy;
                     firstCompInst2 = firstCompInst2Copy;
                   } while (countdown2 != 0);
-                  remapComponentB = (uint)*(byte *)((int)&operandSelectB + firstCompInst1Copy);
-                  remapComponentA = (uint)*(byte *)((int)&operandSelectC + firstCompInst1Copy);
-                  *(undefined1 *)((int)&newSrcBSelect + remapComponentB) = 0;
-                  *(undefined1 *)((int)&newSrcASelect + remapComponentA) = 0;
-                  (**(code **)(*a0 + 0x88))(a0,1,remapComponentA,remapComponentA,compiler,staleArg5,(int)&destSelectNode + remapComponentB)
+                  srcBComponent = (uint)*(byte *)((int)&operandSelectB + firstCompInst1Copy);
+                  srcAComponent = (uint)*(byte *)((int)&operandSelectC + firstCompInst1Copy);
+                  *(undefined1 *)((int)&newSrcBSelect + srcBComponent) = 0;
+                  *(undefined1 *)((int)&newSrcASelect + srcAComponent) = 0;
+                  (**(code **)(*a0 + 0x88))(a0,1,srcAComponent,srcAComponent,compiler,staleArg5,(int)&destSelectNode + srcBComponent)
                   ;
-                  (**(code **)(*newSrcB + 0x88))(newSrcB,1,remapComponentB,remapComponentB);
+                  (**(code **)(*newSrcB + 0x88))(newSrcB,1,srcBComponent,srcBComponent);
                   if (hasSecondCompInst1) {
-                    remapComponentB = (uint)*(byte *)((int)&operandSelectB + secondCompInst1);
-                    remapComponentA = (uint)*(byte *)((int)&operandSelectC + secondCompInst1);
-                    *(undefined1 *)((int)&newSrcBSelect + remapComponentB) = 0;
-                    *(undefined1 *)((int)&newSrcASelect + remapComponentA) = 0;
+                    srcBComponent = (uint)*(byte *)((int)&operandSelectB + secondCompInst1);
+                    srcAComponent = (uint)*(byte *)((int)&operandSelectC + secondCompInst1);
+                    *(undefined1 *)((int)&newSrcBSelect + srcBComponent) = 0;
+                    *(undefined1 *)((int)&newSrcASelect + srcAComponent) = 0;
                     (**(code **)(*a0 + 0x88))
-                              (a0,1,remapComponentA,remapComponentA,compiler,staleArg5,(int)&destSelectNode + remapComponentB);
-                    (**(code **)(*newSrcB + 0x88))(newSrcB,1,remapComponentB,remapComponentB);
+                              (a0,1,srcAComponent,srcAComponent,compiler,staleArg5,(int)&destSelectNode + srcBComponent);
+                    (**(code **)(*newSrcB + 0x88))(newSrcB,1,srcBComponent,srcBComponent);
                     if (0 < thirdCompInst1) {
-                      remapComponentB = (uint)*(byte *)((int)&operandSelectB + thirdCompInst1);
-                      remapComponentA = (uint)*(byte *)((int)&operandSelectC + thirdCompInst1);
-                      *(undefined1 *)((int)&newSrcBSelect + remapComponentB) = 0;
-                      *(undefined1 *)((int)&newSrcASelect + remapComponentA) = 0;
-                      (**(code **)(*a0 + 0x88))(a0,1,remapComponentA,remapComponentA,compiler,staleArg5,*a0);
-                      (**(code **)(*newSrcB + 0x88))(newSrcB,1,remapComponentB,remapComponentB);
+                      srcBComponent = (uint)*(byte *)((int)&operandSelectB + thirdCompInst1);
+                      srcAComponent = (uint)*(byte *)((int)&operandSelectC + thirdCompInst1);
+                      *(undefined1 *)((int)&newSrcBSelect + srcBComponent) = 0;
+                      *(undefined1 *)((int)&newSrcASelect + srcAComponent) = 0;
+                      (**(code **)(*a0 + 0x88))(a0,1,srcAComponent,srcAComponent,compiler,staleArg5,*a0);
+                      (**(code **)(*newSrcB + 0x88))(newSrcB,1,srcBComponent,srcBComponent);
                     }
                   }
-                  remapComponentA = (uint)*(byte *)((int)&operandSelect + firstCompInst2Copy);
-                  *(undefined1 *)((int)local_c8 + remapComponentA) = 0;
-                  (**(code **)(*newSrcC + 0x88))(newSrcC,1,remapComponentA,remapComponentA);
+                  srcCComponent = (uint)*(byte *)((int)&operandSelect + firstCompInst2Copy);
+                  *(undefined1 *)((int)local_c8 + srcCComponent) = 0;
+                  (**(code **)(*newSrcC + 0x88))(newSrcC,1,srcCComponent,srcCComponent);
                   if (!noSecondCompInst2) {
-                    remapComponentA = (uint)*(byte *)((int)&operandSelect + secondCompInst2);
-                    *(undefined1 *)((int)local_c8 + remapComponentA) = 0;
-                    (**(code **)(*newSrcC + 0x88))(newSrcC,1,remapComponentA,remapComponentA);
+                    srcCComponent = (uint)*(byte *)((int)&operandSelect + secondCompInst2);
+                    *(undefined1 *)((int)local_c8 + srcCComponent) = 0;
+                    (**(code **)(*newSrcC + 0x88))(newSrcC,1,srcCComponent,srcCComponent);
                     if (-1 < thirdCompInst2) {
-                      remapComponentA = (uint)*(byte *)((int)&operandSelect + thirdCompInst2);
-                      *(undefined1 *)((int)local_c8 + remapComponentA) = 0;
-                      (**(code **)(*newSrcC + 0x88))(newSrcC,1,remapComponentA,remapComponentA);
+                      srcCComponent = (uint)*(byte *)((int)&operandSelect + thirdCompInst2);
+                      *(undefined1 *)((int)local_c8 + srcCComponent) = 0;
+                      (**(code **)(*newSrcC + 0x88))(newSrcC,1,srcCComponent,srcCComponent);
                     }
                   }
                   remapComponentA = 0xffffffff;
