@@ -5,41 +5,41 @@
 0x17b8	cxa_atexit_check_1	120	not a C function of the rebuilt image	
 0x1830	check_cxa_atexit	204	not a C function of the rebuilt image	
 0x18fc	find_atexit_10_3	504	not a C function of the rebuilt image	
-0x1af4	FUN_00001af4	32	not a C function of the rebuilt image	
-0x1b14	FUN_00001b14	32	not a C function of the rebuilt image	
+0x1af4	_strcmp_stub_00001af4	32	not a C function of the rebuilt image	
+0x1b14	dyld_func_lookup_stub_00001b14	32	not a C function of the rebuilt image	
 0x1b34	get_globals	528	not a C function of the rebuilt image	
-0x1d44	FUN_00001d44	32	not a C function of the rebuilt image	
-0x1d64	FUN_00001d64	32	not a C function of the rebuilt image	
+0x1d44	__keymgr_set_and_unlock_processwide_ptr_stub_00001d44	32	not a C function of the rebuilt image	
+0x1d64	check_cxa_atexit_stub_00001d64	32	not a C function of the rebuilt image	
 0x1d84	dlsym_stub_00001d84	32	not a C function of the rebuilt image	
-0x1da4	FUN_00001da4	32	not a C function of the rebuilt image	
+0x1da4	find_atexit_10_3_stub_00001da4	32	not a C function of the rebuilt image	
 0x1dc4	dlopen_stub_00001dc4	32	not a C function of the rebuilt image	
 0x1de4	calloc_stub_00001de4	32	not a C function of the rebuilt image	
-0x1e04	FUN_00001e04	32	not a C function of the rebuilt image	
+0x1e04	__keymgr_get_and_lock_processwide_ptr_stub_00001e04	32	not a C function of the rebuilt image	
 0x1e24	add_routine	268	not a C function of the rebuilt image	
-0x1f30	FUN_00001f30	32	not a C function of the rebuilt image	
+0x1f30	__keymgr_set_and_unlock_processwide_ptr_stub_00001f30	32	not a C function of the rebuilt image	
 0x1f50	malloc_stub_00001f50	32	not a C function of the rebuilt image	
 0x1f70	run_routines	292	not a C function of the rebuilt image	
-0x2094	FUN_00002094	32	not a C function of the rebuilt image	
+0x2094	__keymgr_get_and_lock_processwide_ptr_stub_00002094	32	not a C function of the rebuilt image	
 0x20b4	free_stub_000020b4	32	not a C function of the rebuilt image	
-0x20d4	FUN_000020d4	32	not a C function of the rebuilt image	
+0x20d4	__keymgr_set_and_unlock_processwide_ptr_stub_000020d4	32	not a C function of the rebuilt image	
 0x20f4	cxa_atexit_wrapper	312	not a C function of the rebuilt image	
 0x222c	run_routines_stub_0000222c	32	not a C function of the rebuilt image	
-0x224c	FUN_0000224c	32	not a C function of the rebuilt image	
-0x226c	FUN_0000226c	32	not a C function of the rebuilt image	
+0x224c	__keymgr_set_and_unlock_processwide_ptr_stub_0000224c	32	not a C function of the rebuilt image	
+0x226c	__keymgr_get_and_lock_processwide_ptr_stub_0000226c	32	not a C function of the rebuilt image	
 0x228c	our_atexit	188	not a C function of the rebuilt image	
-0x2348	FUN_00002348	32	not a C function of the rebuilt image	
-0x2368	FUN_00002368	32	not a C function of the rebuilt image	
-0x2388	FUN_00002388	32	not a C function of the rebuilt image	
+0x2348	__keymgr_set_and_unlock_processwide_ptr_stub_00002348	32	not a C function of the rebuilt image	
+0x2368	run_routines_stub_00002368	32	not a C function of the rebuilt image	
+0x2388	__keymgr_get_and_lock_processwide_ptr_stub_00002388	32	not a C function of the rebuilt image	
 0x23a8	atexit_common	672	not a C function of the rebuilt image	
 0x2648	malloc_stub_00002648	32	not a C function of the rebuilt image	
-0x2668	FUN_00002668	32	not a C function of the rebuilt image	
-0x2688	FUN_00002688	32	not a C function of the rebuilt image	
-0x26a8	FUN_000026a8	32	not a C function of the rebuilt image	
+0x2668	__keymgr_set_and_unlock_processwide_ptr_stub_00002668	32	not a C function of the rebuilt image	
+0x2688	add_routine_stub_00002688	32	not a C function of the rebuilt image	
+0x26a8	get_globals_stub_000026a8	32	not a C function of the rebuilt image	
 0x26c8	cxa_atexit	96	not a C function of the rebuilt image	
-0x2728	FUN_00002728	32	not a C function of the rebuilt image	
+0x2728	atexit_common_stub_00002728	32	not a C function of the rebuilt image	
 0x2748	atexit	92	yes	
-0x27a4	FUN_000027a4	32	not a C function of the rebuilt image	
-0x27d0	FUN_000027d0	776	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x27a4	atexit_common_stub_000027a4	32	not a C function of the rebuilt image	
+0x27d0	gld_clearSoftwareColorBuffer	776	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x2ae0	glAccum_impl	11028	no	calls an import (malloc)
 0x5630	_gldSetInteger	1116	no	calls an import (io_connect_method_scalarI_structureI)
 0x5aa0	_gldGetInteger	616	no	calls an import (io_connect_method_scalarI_scalarO)

@@ -1,6 +1,6 @@
 start	end	kind	owner	instructions	calls
-27c4	27d0	padding	FUN_000027a4	3	
-2ad8	2ae0	padding	FUN_000027d0	2	
+27c4	27d0	padding	atexit_common_stub_000027a4	3	
+2ad8	2ae0	padding	gld_clearSoftwareColorBuffer	2	
 2b38	2b4c	table	glAccum_impl	5	
 3b9c	3ba0	padding	glAccum_impl	1	
 4d88	4d90	padding	glAccum_impl	2	
