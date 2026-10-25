@@ -1,0 +1,28 @@
+use	FUN_001541f0	uVar12	srcAComponent	INFERRED	component byte read from the select word of new source A	^\s*uVar12\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)\&local_dc\ \+\ iVar14\);$	+1
+use	FUN_001541f0	uVar12	srcAComponent	INFERRED	component byte read from the select word of new source A	^\s*\*\(undefined1\ \*\)\(\(int\)\&local_d0\ \+\ uVar12\)\ =\ 0;$	+2
+use	FUN_001541f0	uVar12	srcAComponent	INFERRED	component byte read from the select word of new source A	^\s*uVar12\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)\&local_dc\ \+\ iVar17\);$	+1
+use	FUN_001541f0	uVar12	srcAComponent	INFERRED	component byte read from the select word of new source A	^\s*\*\(undefined1\ \*\)\(\(int\)\&local_d0\ \+\ uVar12\)\ =\ 0;$@2	+1
+use	FUN_001541f0	uVar12	srcAComponent	INFERRED	component byte read from the select word of new source A	^\s*\(a0,1,uVar12,uVar12,uVar21,in_r8,\(int\)\&local_e8\ \+\ uVar22\);$	+1
+use	FUN_001541f0	uVar12	srcAComponent	INFERRED	component byte read from the select word of new source A	^\s*uVar12\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)\&local_dc\ \+\ iVar18\);$	+1
+use	FUN_001541f0	uVar12	srcAComponent	INFERRED	component byte read from the select word of new source A	^\s*\*\(undefined1\ \*\)\(\(int\)\&local_d0\ \+\ uVar12\)\ =\ 0;$@3	+2
+use	FUN_001541f0	uVar12	srcCComponent	INFERRED	component byte read from the select word of new source C	^\s*uVar12\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)\&local_d4\ \+\ iVar16\);$	+3
+use	FUN_001541f0	uVar12	srcCComponent	INFERRED	component byte read from the select word of new source C	^\s*uVar12\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)\&local_d4\ \+\ iVar7\);$	+3
+use	FUN_001541f0	uVar12	srcCComponent	INFERRED	component byte read from the select word of new source C	^\s*uVar12\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)\&local_d4\ \+\ iVar8\);$	+3
+use	FUN_001541f0	uVar12	remapComponentA	INFERRED	first component of new source A that must be remapped (-1 = none yet)	^\s*uVar12\ =\ 0xffffffff;$	+1
+use	FUN_001541f0	uVar12	remapComponentA	INFERRED	first component of new source A that must be remapped (-1 = none yet)	^\s*if\ \(\(uVar23\ !=\ \*\(byte\ \*\)\(uVar23\ \+\ iVar4\ \+\ 0x10\)\)\ \&\&\ \(\(int\)uVar12\ <\ 0\)\)\ \{$	+1
+use	FUN_001541f0	uVar12	remapComponentA	INFERRED	first component of new source A that must be remapped (-1 = none yet)	^\s*uVar12\ =\ uVar23;$	+1
+use	FUN_001541f0	uVar12	remapComponentA	INFERRED	first component of new source A that must be remapped (-1 = none yet)	^\s*\(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0x88\)\)\(param_1,1,iVar4,uVar12\);$	+1
+use	FUN_001541f0	uVar22	srcBComponent	INFERRED	component byte read from the select word of new source B	^\s*uVar22\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)\&local_d8\ \+\ iVar14\);$	+1
+use	FUN_001541f0	uVar22	srcBComponent	INFERRED	component byte read from the select word of new source B	^\s*\*\(undefined1\ \*\)\(\(int\)\&local_cc\ \+\ uVar22\)\ =\ 0;$	+1
+use	FUN_001541f0	uVar22	srcBComponent	INFERRED	component byte read from the select word of new source B	^\s*\(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x88\)\)\(a0,1,uVar12,uVar12,uVar21,in_r8,\(int\)\&local_e8\ \+\ uVar22\)$	+1
+use	FUN_001541f0	uVar22	srcBComponent	INFERRED	component byte read from the select word of new source B	^\s*\(\*\*\(code\ \*\*\)\(\*piVar9\ \+\ 0x88\)\)\(piVar9,1,uVar22,uVar22\);$	+1
+use	FUN_001541f0	uVar22	srcBComponent	INFERRED	component byte read from the select word of new source B	^\s*uVar22\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)\&local_d8\ \+\ iVar17\);$	+1
+use	FUN_001541f0	uVar22	srcBComponent	INFERRED	component byte read from the select word of new source B	^\s*\*\(undefined1\ \*\)\(\(int\)\&local_cc\ \+\ uVar22\)\ =\ 0;$@2	+1
+use	FUN_001541f0	uVar22	srcBComponent	INFERRED	component byte read from the select word of new source B	^\s*\(a0,1,uVar12,uVar12,uVar21,in_r8,\(int\)\&local_e8\ \+\ uVar22\);$	+2
+use	FUN_001541f0	uVar22	srcBComponent	INFERRED	component byte read from the select word of new source B	^\s*uVar22\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)\&local_d8\ \+\ iVar18\);$	+1
+use	FUN_001541f0	uVar22	srcBComponent	INFERRED	component byte read from the select word of new source B	^\s*\*\(undefined1\ \*\)\(\(int\)\&local_cc\ \+\ uVar22\)\ =\ 0;$@3	+1
+use	FUN_001541f0	uVar22	srcBComponent	INFERRED	component byte read from the select word of new source B	^\s*\(\*\*\(code\ \*\*\)\(\*piVar9\ \+\ 0x88\)\)\(piVar9,1,uVar22,uVar22\);$@3	+1
+use	FUN_001541f0	uVar22	remapComponentB	INFERRED	first component of new source B that must be remapped (-1 = none yet)	^\s*uVar22\ =\ 0xffffffff;$	+1
+use	FUN_001541f0	uVar22	remapComponentB	INFERRED	first component of new source B that must be remapped (-1 = none yet)	^\s*if\ \(\(uVar23\ !=\ \*\(byte\ \*\)\(uVar23\ \+\ iVar4\ \+\ 0x10\)\)\ \&\&\ \(\(int\)uVar22\ <\ 0\)\)\ \{$	+1
+use	FUN_001541f0	uVar22	remapComponentB	INFERRED	first component of new source B that must be remapped (-1 = none yet)	^\s*uVar22\ =\ uVar23;$	+1
+use	FUN_001541f0	uVar22	remapComponentB	INFERRED	first component of new source B that must be remapped (-1 = none yet)	^\s*\(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0x88\)\)\(param_1,2,iVar4,uVar22\);$	+1

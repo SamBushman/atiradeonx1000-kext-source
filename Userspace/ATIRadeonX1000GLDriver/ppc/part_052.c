@@ -1340,7 +1340,7 @@ int R300VMachineAssembler__vslot48_declareAndAssemble(this, node)
   int *this;
   undefined4 node;
 {
-  FUN_000e2c78(node,this,this[3]);
+  ConstRecord__emitStores(node,this,this[3]);
                     
                     
   (**(code **)(*this + 0x88))(this,node);
@@ -2841,29 +2841,41 @@ int R300VMachineAssembler__encodeDualMathOperands(this, inst, instructionWords)
   int *inst;
   uint *instructionWords;
 {
+  uint newDualMathWord;
+  uint selectWord1;
+  uint oldDualMathWord;
+  uint source2Word;
+  uint opcodeTraitWord;
+  uint selectWord2;
+  uint src2Select;
+  uint src1Select;
+  uint negateBit2;
+  uint negateBit1;
+  int regBias;
+  int srcRegister;
   undefined4 sourceDef2;
   undefined4 sourceDef;
   int operandRecord;
   uint source1Flags;
   int *operandVReg;
-  byte bVar1;
-  uint uVar2;
-  uint uVar3;
+  byte laneSelectByte;
+  uint source1Word;
+  uint srcRegisterIndex;
   int loopIndex;
-  int *piVar5;
-  int iVar6;
-  undefined4 uVar7;
+  int *hwLimits;
+  int srcIsMov;
+  undefined4 srcSelectWord;
   int *hwLimitsObj8;
   int regBias9;
   uint *a2;
   undefined4 passThroughR6;
   undefined4 passThroughR7;
   undefined4 passThroughR8;
-  uint uVar10;
+  uint dualMathFlags;
   uint *dualMathWord;
-  undefined4 uVar12;
+  undefined4 currentProgram;
   undefined8 srcOffsetPair;
-  undefined8 uVar14;
+  undefined8 maxPair;
   int constNegated [4];
   uint composedSwizzle1;
   uint composedSwizzle2 [2];
@@ -2888,93 +2900,93 @@ int R300VMachineAssembler__encodeDualMathOperands(this, inst, instructionWords)
   if (loopIndex == 0x37) {
     *(undefined4 *)(this + 0x30) = *(undefined4 *)(this + 0x58);
   }
-  iVar6 = (**(code **)(*operandVReg + 0x60))(operandVReg);
-  if (iVar6 == 0) {
+  srcIsMov = (**(code **)(*operandVReg + 0x60))(operandVReg);
+  if (srcIsMov == 0) {
     srcOffsetPair = thunk_FUN_00134de8(*(undefined4 *)(*(int *)(this + 0xc) + 0x6c4),operandVReg);
   }
   else {
-    uVar12 = *(undefined4 *)(*(int *)(this + 0xc) + 0x6c4);
+    currentProgram = *(undefined4 *)(*(int *)(this + 0xc) + 0x6c4);
     sourceDef2 = IRInst__getOperandSource(operandVReg,1);
-    srcOffsetPair = thunk_FUN_00134de8(uVar12,sourceDef2);
+    srcOffsetPair = thunk_FUN_00134de8(currentProgram,sourceDef2);
   }
-  iVar6 = (int)((ulonglong)srcOffsetPair >> 0x20);
+  srcRegister = (int)((ulonglong)srcOffsetPair >> 0x20);
   if (loopIndex == 1) {
     hwLimitsObj8 = *(int **)(*(int *)(this + 0xc) + 0x30c);
     regBias9 = (**(code **)(*hwLimitsObj8 + 0x138))(hwLimitsObj8,0);
-    uVar14 = ((int (*)())maxSigned)(*(undefined4 *)(this + 0x38),iVar6 - regBias9);
-    srcOffsetPair = CONCAT44(iVar6 - regBias9,(int)uVar14);
-    *(int *)(this + 0x38) = (int)((ulonglong)uVar14 >> 0x20);
+    maxPair = ((int (*)())maxSigned)(*(undefined4 *)(this + 0x38),srcRegister - regBias9);
+    srcOffsetPair = CONCAT44(srcRegister - regBias9,(int)maxPair);
+    *(int *)(this + 0x38) = (int)((ulonglong)maxPair >> 0x20);
   }
   else if (loopIndex == 0) {
-    uVar14 = ((int (*)())maxSigned)(*(undefined4 *)(this + 0x34),iVar6);
-    srcOffsetPair = CONCAT44(iVar6,(int)uVar14);
-    *(int *)(this + 0x34) = (int)((ulonglong)uVar14 >> 0x20);
+    maxPair = ((int (*)())maxSigned)(*(undefined4 *)(this + 0x34),srcRegister);
+    srcOffsetPair = CONCAT44(srcRegister,(int)maxPair);
+    *(int *)(this + 0x34) = (int)((ulonglong)maxPair >> 0x20);
   }
-  uVar3 = (uint)((ulonglong)srcOffsetPair >> 0x20);
+  srcRegisterIndex = (uint)((ulonglong)srcOffsetPair >> 0x20);
   source1Flags = inst[0x2e];
   if ((source1Flags & 2) == 0) {
-    uVar10 = *dualMathWord;
+    dualMathFlags = *dualMathWord;
   }
   else {
-    uVar10 = *dualMathWord | 8;
-    *dualMathWord = uVar10;
+    dualMathFlags = *dualMathWord | 8;
+    *dualMathWord = dualMathFlags;
     source1Flags = inst[0x2e];
   }
   if ((source1Flags & 1) != 0) {
-    uVar10 = uVar10 | 0x2000000;
-    *dualMathWord = uVar10;
+    dualMathFlags = dualMathFlags | 0x2000000;
+    *dualMathWord = dualMathFlags;
   }
   if ((inst[0x34] & 1U) != 0) {
-    uVar10 = uVar10 | 0x4000000;
-    *dualMathWord = uVar10;
+    dualMathFlags = dualMathFlags | 0x4000000;
+    *dualMathWord = dualMathFlags;
   }
   if (operandVReg[0x26] == 0x33) {
-    uVar2 = instructionWords[1];
-    if ((uVar2 & 0x80000010) == 0) {
-      *dualMathWord = uVar2 & 3 | uVar10 & 0xfffffffc;
-      *dualMathWord = instructionWords[1] & 0x1fe0 | uVar2 & 3 | uVar10 & 0xffffe01c;
+    source1Word = instructionWords[1];
+    if ((source1Word & 0x80000010) == 0) {
+      *dualMathWord = source1Word & 3 | dualMathFlags & 0xfffffffc;
+      *dualMathWord = instructionWords[1] & 0x1fe0 | source1Word & 3 | dualMathFlags & 0xffffe01c;
     }
     else {
-      uVar3 = instructionWords[2];
-      if ((uVar3 & 0x80000010) == 0) {
-        *dualMathWord = uVar3 & 3 | uVar10 & 0xfffffffc;
-        *dualMathWord = instructionWords[2] & 0x1fe0 | uVar3 & 3 | uVar10 & 0xffffe01c;
+      source2Word = instructionWords[2];
+      if ((source2Word & 0x80000010) == 0) {
+        *dualMathWord = source2Word & 3 | dualMathFlags & 0xfffffffc;
+        *dualMathWord = instructionWords[2] & 0x1fe0 | source2Word & 3 | dualMathFlags & 0xffffe01c;
       }
-      else if (((uVar2 & 7) == 0) && ((uVar3 & 7) == 0)) {
-        *dualMathWord = uVar10 & 0xffffe01c | 2;
+      else if (((source1Word & 7) == 0) && ((source2Word & 7) == 0)) {
+        *dualMathWord = dualMathFlags & 0xffffe01c | 2;
       }
       else {
-        *dualMathWord = uVar10 & 0xffffe01c;
+        *dualMathWord = dualMathFlags & 0xffffe01c;
       }
     }
     *(undefined4 *)(this + 0x84) = 1;
     loopIndex = IRInst__getOperandRecord(inst,1);
-    uVar2 = ((int (*)())vsSourceSelectForConstant)(operandVReg,(uint)*(byte *)(loopIndex + 0x13),constNegated);
-    uVar3 = *dualMathWord;
-    uVar2 = (uVar2 & 7) << 0xd;
-    *dualMathWord = uVar2 | uVar3 & 0xffff1fff;
-    uVar10 = uVar3 >> 0x19 & 1;
+    src1Select = ((int (*)())vsSourceSelectForConstant)(operandVReg,(uint)*(byte *)(loopIndex + 0x13),constNegated);
+    oldDualMathWord = *dualMathWord;
+    src1Select = (src1Select & 7) << 0xd;
+    *dualMathWord = src1Select | oldDualMathWord & 0xffff1fff;
+    negateBit1 = oldDualMathWord >> 0x19 & 1;
     if (constNegated[0] != 0) {
-      uVar10 = 1 - uVar10;
+      negateBit1 = 1 - negateBit1;
     }
-    *dualMathWord = (uVar10 & 1) << 0x19 | uVar2 | uVar3 & 0xfdff1fff;
+    *dualMathWord = (negateBit1 & 1) << 0x19 | src1Select | oldDualMathWord & 0xfdff1fff;
     loopIndex = (**(code **)(*inst + 0x14))(inst);
     if (1 < loopIndex) {
       sourceDef2 = IRInst__getOperandSource(inst,2);
       loopIndex = IRInst__getOperandRecord(inst,2);
-      uVar2 = ((int (*)())vsSourceSelectForConstant)(sourceDef2,(uint)*(byte *)(loopIndex + 0x10),constNegated);
-      uVar3 = *dualMathWord;
-      uVar2 = (uVar2 & 7) << 0x10;
-      *dualMathWord = uVar2 | uVar3 & 0xfff8ffff;
-      uVar10 = uVar3 >> 0x1a & 1;
+      src2Select = ((int (*)())vsSourceSelectForConstant)(sourceDef2,(uint)*(byte *)(loopIndex + 0x10),constNegated);
+      oldDualMathWord = *dualMathWord;
+      src2Select = (src2Select & 7) << 0x10;
+      *dualMathWord = src2Select | oldDualMathWord & 0xfff8ffff;
+      negateBit2 = oldDualMathWord >> 0x1a & 1;
       if (constNegated[0] != 0) {
-        uVar10 = 1 - uVar10;
+        negateBit2 = 1 - negateBit2;
       }
-      *dualMathWord = (uVar10 & 1) << 0x1a | uVar2 | uVar3 & 0xfbf8ffff;
+      *dualMathWord = (negateBit2 & 1) << 0x1a | src2Select | oldDualMathWord & 0xfbf8ffff;
     }
     goto LAB_0019d024;
   }
-  *dualMathWord = *(uint *)(&DAT_001b2c14 + loopIndex * 4) & 3 | uVar10 & 0xfffffffc;
+  *dualMathWord = *(uint *)(&DAT_001b2c14 + loopIndex * 4) & 3 | dualMathFlags & 0xfffffffc;
   loopIndex = (**(code **)(*operandVReg + 0x60))(operandVReg,(int)srcOffsetPair,a2,passThroughR6,passThroughR7,passThroughR8,loopIndex * 4);
   if (loopIndex == 0) {
     loopIndex = RegKind__flagBit7(operandVReg[0x26]);
@@ -2983,93 +2995,93 @@ int R300VMachineAssembler__encodeDualMathOperands(this, inst, instructionWords)
     loopIndex = IRInst__getOperandSource(operandVReg,1);
     loopIndex = RegKind__flagBit7(*(undefined4 *)(loopIndex + 0x98));
   }
-  if ((loopIndex != 0) && (*(uint *)(this + 0x4c) < uVar3)) {
-    *(uint *)(this + 0x4c) = uVar3;
+  if ((loopIndex != 0) && (*(uint *)(this + 0x4c) < srcRegisterIndex)) {
+    *(uint *)(this + 0x4c) = srcRegisterIndex;
   }
-  *dualMathWord = (uVar3 & 0xff) << 5 | *dualMathWord & 0xffffe01f;
+  *dualMathWord = (srcRegisterIndex & 0xff) << 5 | *dualMathWord & 0xffffe01f;
   loopIndex = IRInst__getOperandRecord(inst,1);
-  uVar3 = *(uint *)(loopIndex + 0x10);
+  selectWord1 = *(uint *)(loopIndex + 0x10);
   loopIndex = (**(code **)(*inst + 0x14))(inst);
-  uVar2 = uVar3;
+  selectWord2 = selectWord1;
   if (1 < loopIndex) {
     loopIndex = IRInst__getOperandRecord(inst,2);
-    uVar2 = *(uint *)(loopIndex + 0x10);
+    selectWord2 = *(uint *)(loopIndex + 0x10);
   }
   loopIndex = (**(code **)(*operandVReg + 0x60))(operandVReg);
   if (loopIndex == 0) {
     loopIndex = (**(code **)(*inst + 0x14))(inst);
     if (loopIndex < 2) {
-      uVar3 = *(uint *)(&DAT_001b2be8 + (uVar3 & 0xff) * 4);
-      uVar2 = uVar3;
+      selectWord1 = *(uint *)(&DAT_001b2be8 + (selectWord1 & 0xff) * 4);
+      selectWord2 = selectWord1;
     }
     else {
-      uVar3 = *(uint *)(&DAT_001b2be8 + (uVar3 & 0xff) * 4);
-      uVar2 = *(uint *)(&DAT_001b2be8 + (uVar2 >> 0x16 & 0x3fc));
+      selectWord1 = *(uint *)(&DAT_001b2be8 + (selectWord1 & 0xff) * 4);
+      selectWord2 = *(uint *)(&DAT_001b2be8 + (selectWord2 >> 0x16 & 0x3fc));
     }
   }
   else {
     loopIndex = IRInst__getOperandRecord(operandVReg,1);
-    uVar7 = *(undefined4 *)(loopIndex + 0x10);
-    SelectWord__compose(&composedSwizzle1,uVar7,uVar3);
-    if (((uVar3 & 0xff) == 4) || ((composedSwizzle1 & 0xff) == 4)) {
+    srcSelectWord = *(undefined4 *)(loopIndex + 0x10);
+    SelectWord__compose(&composedSwizzle1,srcSelectWord,selectWord1);
+    if (((selectWord1 & 0xff) == 4) || ((composedSwizzle1 & 0xff) == 4)) {
       loopIndex = 1;
       if (0 < operandVReg[0x21]) {
         do {
           operandRecord = IRInst__getOperandRecord(operandVReg,loopIndex);
-          bVar1 = *(byte *)(operandRecord + 0x13);
-          if (bVar1 != 4) {
+          laneSelectByte = *(byte *)(operandRecord + 0x13);
+          if (laneSelectByte != 4) {
             sourceDef = IRInst__getOperandSource(operandVReg,loopIndex);
-            uVar3 = ((int (*)())vsSourceSelectForConstant)(sourceDef,(uint)bVar1,constNegated);
+            selectWord1 = ((int (*)())vsSourceSelectForConstant)(sourceDef,(uint)laneSelectByte,constNegated);
             goto LAB_0019cf10;
           }
           loopIndex = loopIndex + 1;
         } while (loopIndex <= operandVReg[0x21]);
       }
-      uVar3 = 0;
+      selectWord1 = 0;
     }
     else {
-      uVar3 = *(uint *)(&DAT_001b2be8 + (composedSwizzle1 & 0xff) * 4);
+      selectWord1 = *(uint *)(&DAT_001b2be8 + (composedSwizzle1 & 0xff) * 4);
     }
 LAB_0019cf10:
     loopIndex = (**(code **)(*inst + 0x14))(inst);
     if (1 < loopIndex) {
-      SelectWord__compose(composedSwizzle2,uVar7,uVar2);
-      if ((uVar2 >> 0x18 != 4) && (composedSwizzle2[0] >> 0x18 != 4)) {
-        uVar2 = *(uint *)(&DAT_001b2be8 + (composedSwizzle2[0] >> 0x18) * 4);
+      SelectWord__compose(composedSwizzle2,srcSelectWord,selectWord2);
+      if ((selectWord2 >> 0x18 != 4) && (composedSwizzle2[0] >> 0x18 != 4)) {
+        selectWord2 = *(uint *)(&DAT_001b2be8 + (composedSwizzle2[0] >> 0x18) * 4);
         goto LAB_0019d014;
       }
       loopIndex = 1;
       if (0 < operandVReg[0x21]) {
         do {
           operandRecord = IRInst__getOperandRecord(operandVReg,loopIndex);
-          bVar1 = *(byte *)(operandRecord + 0x10);
-          if (bVar1 != 4) {
+          laneSelectByte = *(byte *)(operandRecord + 0x10);
+          if (laneSelectByte != 4) {
             sourceDef2 = IRInst__getOperandSource(operandVReg,loopIndex);
-            uVar2 = ((int (*)())vsSourceSelectForConstant)(sourceDef2,(uint)bVar1,constNegated);
+            selectWord2 = ((int (*)())vsSourceSelectForConstant)(sourceDef2,(uint)laneSelectByte,constNegated);
             goto LAB_0019d014;
           }
           loopIndex = loopIndex + 1;
         } while (loopIndex <= operandVReg[0x21]);
       }
     }
-    uVar2 = 0;
+    selectWord2 = 0;
   }
 LAB_0019d014:
-  *dualMathWord = (uVar2 & 7) << 0x10 | (uVar3 & 7) << 0xd | *dualMathWord & 0xfff81fff;
+  *dualMathWord = (selectWord2 & 7) << 0x10 | (selectWord1 & 7) << 0xd | *dualMathWord & 0xfff81fff;
 LAB_0019d024:
-  piVar5 = *(int **)(*(int *)(this + 0xc) + 0x30c);
-  loopIndex = (**(code **)(*piVar5 + 0x16c))(piVar5);
-  uVar2 = *(uint *)(*(int *)(inst[0x22] + 8) * 0x38 + loopIndex + 0xc);
-  if (uVar2 == 0xffffffff) {
+  hwLimits = *(int **)(*(int *)(this + 0xc) + 0x30c);
+  loopIndex = (**(code **)(*hwLimits + 0x16c))(hwLimits);
+  opcodeTraitWord = *(uint *)(*(int *)(inst[0x22] + 8) * 0x38 + loopIndex + 0xc);
+  if (opcodeTraitWord == 0xffffffff) {
     if (*(int *)(inst[0x22] + 8) == 0x66) {
       *dualMathWord = *dualMathWord & 0xfe18ffff | 0x1450000;
     }
   }
   else {
-    uVar3 = (uVar2 & 0xf) << 0x15 | *dualMathWord & 0xfe1fffff;
-    *dualMathWord = uVar3;
-    if (0xf < (int)uVar2) {
-      *dualMathWord = uVar3 | 4;
+    newDualMathWord = (opcodeTraitWord & 0xf) << 0x15 | *dualMathWord & 0xfe1fffff;
+    *dualMathWord = newDualMathWord;
+    if (0xf < (int)opcodeTraitWord) {
+      *dualMathWord = newDualMathWord | 4;
     }
   }
   loopIndex = IRInst__getOperandRecord(inst,0);
@@ -3087,12 +3099,12 @@ LAB_0019d024:
     *dualMathWord = *dualMathWord & 0xe7ffffff | 0x18000000;
   }
   loopIndex = thunk_FUN_00134de8(*(undefined4 *)(*(int *)(this + 0xc) + 0x6c4),inst);
-  piVar5 = *(int **)(*(int *)(this + 0xc) + 0x30c);
-  iVar6 = (**(code **)(*piVar5 + 0x138))(piVar5,0);
-  *dualMathWord = (loopIndex - iVar6) * 0x80000 & 0x180000U | *dualMathWord & 0xffe7ffff;
+  hwLimits = *(int **)(*(int *)(this + 0xc) + 0x30c);
+  regBias = (**(code **)(*hwLimits + 0x138))(hwLimits,0);
+  *dualMathWord = (loopIndex - regBias) * 0x80000 & 0x180000U | *dualMathWord & 0xffe7ffff;
   if (inst[0x48] != 0) {
-    piVar5 = *(int **)(*(int *)(this + 0xc) + 0x30c);
-    (**(code **)(*piVar5 + 0x80))(piVar5);
+    hwLimits = *(int **)(*(int *)(this + 0xc) + 0x30c);
+    (**(code **)(*hwLimits + 0x80))(hwLimits);
     *instructionWords = *instructionWords | 0x2000000;
   }
   return;

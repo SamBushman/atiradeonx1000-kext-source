@@ -14,7 +14,7 @@
 0xe3524	FUN_000e33cc
 0xe3640	FUN_000e3544
 0xe369c	FUN_000e3544
-0xe3948	FUN_000e36bc
+0xe3948	MachineCodeWriter__encodeProgram
 0xe42c0	FUN_000e3b88
 0xe5638	ILReader__ctor_e5570
 0xe5874	ILReader__ctor_e5570
@@ -97,9 +97,9 @@
 0xef7f8	FUN_000ef498
 0xefaf0	FUN_000efa4c
 0xefb0c	FUN_000efa4c
-0xefe3c	FUN_000efde4
-0xefea0	FUN_000efde4
-0xf001c	FUN_000efde4
+0xefe3c	Program__insertExitMarkerAndFlagBlocks
+0xefea0	Program__insertExitMarkerAndFlagBlocks
+0xf001c	Program__insertExitMarkerAndFlagBlocks
 0xf02c0	FUN_000f019c
 0xf0978	FUN_000f07a8
 0xf09bc	FUN_000f07a8
@@ -110,8 +110,8 @@
 0xf29b8	FUN_000f1d7c
 0xf513c	Compiler__getOrCreateLoadConstN
 0xf6c50	Program__findOrCreateConstInst
-0xf8258	FUN_000f816c
-0xf8430	FUN_000f83cc
+0xf8258	DominatorTree__dfsNumber
+0xf8430	DominatorTree__compress
 0xf8908	FUN_000f88b4
 0xf95e4	FUN_000f94dc
 0xf97a8	FUN_000f94dc
@@ -522,10 +522,10 @@
 0x17edb0	FUN_0017ebb0
 0x17f03c	FUN_0017ee68
 0x1811d8	ValueKey__simplifyModifiersAndAddressing
-0x181fdc	FUN_00181f00
-0x182010	FUN_00181f00
-0x182040	FUN_00181f00
-0x183a98	FUN_00181f00
+0x181fdc	Block__flattenAndRebuildAddMulTree
+0x182010	Block__flattenAndRebuildAddMulTree
+0x182040	Block__flattenAndRebuildAddMulTree
+0x183a98	Block__flattenAndRebuildAddMulTree
 0x1840ac	FUN_0018401c
 0x18421c	FUN_0018413c
 0x184250	FUN_0018413c

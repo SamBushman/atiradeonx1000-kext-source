@@ -1,0 +1,42 @@
+local	FUN_00183b9c	param_1	rebuildState	INFERRED	object with +4 compiler/program, +8 budget record (+0xc limit, +0x10 reserve, +0x14 used), +0x1c per-instruction node vector
+local	FUN_00183b9c	param_2	block	INFERRED	basic block whose instruction list (block+0x98) is walked
+local	FUN_00183b9c	param_3	staleArg3	INFERRED	stale argument register forwarded to the callees
+local	FUN_00183b9c	param_4	staleArg4	INFERRED	stale argument register forwarded to the callees
+local	FUN_00183b9c	param_5	staleArg5	INFERRED	stale argument register forwarded to the callees
+local	FUN_00183b9c	param_6	staleArg6	INFERRED	stale argument register forwarded to the callees
+local	FUN_00183b9c	param_7	opcodeInfo	INFERRED	instruction opcode info (inst->+0x88; +8 = opcode)
+local	FUN_00183b9c	local_48	costLow	INFERRED	first out-parameter of FUN_00181b80
+local	FUN_00183b9c	local_44	costHigh	INFERRED	second out-parameter of FUN_00181b80 (compared with costLow)
+use	FUN_00183b9c	iVar6	opcodeKind	INFERRED	canonical opcode of inst: 0x13 (mul) or 0x12 (add)	^\s*iVar6\ =\ 0x13;$	+1
+use	FUN_00183b9c	iVar6	opcodeKind	INFERRED	canonical opcode of inst: 0x13 (mul) or 0x12 (add)	^\s*iVar6\ =\ 0x12;$	+1
+use	FUN_00183b9c	iVar6	opcodeKind	INFERRED	canonical opcode of inst: 0x13 (mul) or 0x12 (add)	^\s*if\ \(\(\(\(\(\(iVar6\ ==\ \*\(int\ \*\)\(param_7\ \+\ 8\)\)\ \&\&\ \(\*\(int\ \*\)\(iVar7\ \+\ 0x120\)\ ==\ 0\)\)\ \&\&$	+14
+use	FUN_00183b9c	uVar8	nodeSlot	INFERRED	instruction slot (+0x150) used as index into the node vector	^\s*uVar8\ =\ \*\(uint\ \*\)\(iVar7\ \+\ 0x150\);$	+2
+use	FUN_00183b9c	uVar8	nodeSlot	INFERRED	instruction slot (+0x150) used as index into the node vector	^\s*if\ \(uVar2\ <=\ uVar8\)\ \{$	+3
+use	FUN_00183b9c	uVar8	nodeSlot	INFERRED	instruction slot (+0x150) used as index into the node vector	^\s*piVar3\ =\ \(int\ \*\)\(uVar8\ \*\ 4\ \+\ puVar9\[2\]\);$	+1
+use	FUN_00183b9c	uVar8	nodeSlot	INFERRED	instruction slot (+0x150) used as index into the node vector	^\s*piVar3\ =\ \(int\ \*\)FUN_0019423c\(puVar9,uVar8\);$	+1
+use	FUN_00183b9c	uVar8	nodeSlot	INFERRED	instruction slot (+0x150) used as index into the node vector	^\s*uVar8\ =\ \*\(uint\ \*\)\(iVar4\ \+\ 0x150\);$	+2
+use	FUN_00183b9c	uVar8	nodeSlot	INFERRED	instruction slot (+0x150) used as index into the node vector	^\s*if\ \(uVar2\ <=\ uVar8\)\ \{$@2	+3
+use	FUN_00183b9c	uVar8	nodeSlot	INFERRED	instruction slot (+0x150) used as index into the node vector	^\s*piVar3\ =\ \(int\ \*\)\(uVar8\ \*\ 4\ \+\ puVar9\[2\]\);$@2	+1
+use	FUN_00183b9c	uVar8	nodeSlot	INFERRED	instruction slot (+0x150) used as index into the node vector	^\s*piVar3\ =\ \(int\ \*\)FUN_0019423c\(puVar9,uVar8\);$@2	+1
+use	FUN_00183b9c	uVar8	nodeSlot	INFERRED	instruction slot (+0x150) used as index into the node vector	^\s*uVar8\ =\ \*\(uint\ \*\)\(iVar6\ \+\ 0x150\);$	+2
+use	FUN_00183b9c	uVar8	nodeSlot	INFERRED	instruction slot (+0x150) used as index into the node vector	^\s*if\ \(uVar2\ <=\ uVar8\)\ \{$@3	+3
+use	FUN_00183b9c	uVar8	nodeSlot	INFERRED	instruction slot (+0x150) used as index into the node vector	^\s*piVar3\ =\ \(int\ \*\)\(uVar8\ \*\ 4\ \+\ puVar9\[2\]\);$@3	+1
+use	FUN_00183b9c	uVar8	nodeSlot	INFERRED	instruction slot (+0x150) used as index into the node vector	^\s*piVar3\ =\ \(int\ \*\)FUN_0019423c\(puVar9,uVar8\);$@3	+1
+use	FUN_00183b9c	iVar1	nodeRec	INFERRED	budget record (rebuildState+8), then the per-instruction node record read from the node vector (+8 use count, +0xc source inst, +0x10 operand index, +0x14 flag)	^\s*if\ \(\(local_48\ <\ local_44\[0\]\)\ \&\&$	+3
+use	FUN_00183b9c	iVar1	nodeRec	INFERRED	budget record (rebuildState+8), then the per-instruction node record read from the node vector (+8 use count, +0xc source inst, +0x10 operand index, +0x14 flag)	^\s*iVar1\ =\ \*piVar3;$	+16
+use	FUN_00183b9c	iVar1	nodeRec	INFERRED	budget record (rebuildState+8), then the per-instruction node record read from the node vector (+8 use count, +0xc source inst, +0x10 operand index, +0x14 flag)	^\s*\*\(int\ \*\)\(iVar1\ \+\ 8\)\ =\ \*\(int\ \*\)\(iVar1\ \+\ 8\)\ \+\ 1;$	+1
+use	FUN_00183b9c	iVar1	nodeRec	INFERRED	budget record (rebuildState+8), then the per-instruction node record read from the node vector (+8 use count, +0xc source inst, +0x10 operand index, +0x14 flag)	^\s*\*\(int\ \*\)\(iVar1\ \+\ 8\)\ =\ \*\(int\ \*\)\(iVar1\ \+\ 8\)\ \+\ \*\(int\ \*\)\(iVar4\ \+\ 8\);$	+1
+use	FUN_00183b9c	iVar1	nodeRec	INFERRED	budget record (rebuildState+8), then the per-instruction node record read from the node vector (+8 use count, +0xc source inst, +0x10 operand index, +0x14 flag)	^\s*\*\(int\ \*\)\(iVar1\ \+\ 8\)\ =\ \*\(int\ \*\)\(iVar1\ \+\ 8\)\ \+\ \*\(int\ \*\)\(iVar4\ \+\ 8\);$@2	+1
+use	FUN_00183b9c	iVar1	nodeRec	INFERRED	budget record (rebuildState+8), then the per-instruction node record read from the node vector (+8 use count, +0xc source inst, +0x10 operand index, +0x14 flag)	^\s*if\ \(\(\(\*\(int\ \*\)\(iVar1\ \+\ 0x14\)\ !=\ 0\)\ \&\&\ \(1\ <\ \*\(int\ \*\)\(iVar1\ \+\ 8\)\)\)\ \&\&$	+2
+use	FUN_00183b9c	iVar1	nextNode	INFERRED	next instruction list node	^\s*iVar1\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_2\ \+\ 0x98\)\ \+\ 8\);$	+1
+use	FUN_00183b9c	iVar1	nextNode	INFERRED	next instruction list node	^\s*if\ \(iVar1\ !=\ 0\)\ \{$	+1
+use	FUN_00183b9c	iVar1	nextNode	INFERRED	next instruction list node	^\s*iVar4\ =\ iVar1;$	+1
+use	FUN_00183b9c	iVar1	nextNode	INFERRED	next instruction list node	^\s*iVar1\ =\ \*\(int\ \*\)\(iVar4\ \+\ 8\);$	+1
+use	FUN_00183b9c	iVar1	opcode	INFERRED	opcode of inst (opcodeInfo+8): 0x13/0x14 mul, 0x12 add	^\s*iVar1\ =\ \*\(int\ \*\)\(param_7\ \+\ 8\);$	+2
+use	FUN_00183b9c	iVar1	opcode	INFERRED	opcode of inst (opcodeInfo+8): 0x13/0x14 mul, 0x12 add	^\s*if\ \(iVar1\ !=\ 0x12\)\ goto\ LAB_00183fe8;$	+1
+use	FUN_00183b9c	iVar4	curNode	INFERRED	current instruction list node, also scratch for operand-record and single-use test results	^\s*iVar4\ =\ iVar1;$	+1
+use	FUN_00183b9c	iVar4	curNode	INFERRED	current instruction list node, also scratch for operand-record and single-use test results	^\s*if\ \(\(\(\(\(\(iVar6\ ==\ \*\(int\ \*\)\(param_7\ \+\ 8\)\)\ \&\&\ \(\*\(int\ \*\)\(iVar7\ \+\ 0x120\)\ ==\ 0\)\)\ \&\&$	+14
+use	FUN_00183b9c	iVar4	curNode	INFERRED	current instruction list node, also scratch for operand-record and single-use test results	^\s*iVar4\ =\ \*\(int\ \*\)\(iVar7\ \+\ 8\);$	+1
+use	FUN_00183b9c	iVar4	curNode	INFERRED	current instruction list node, also scratch for operand-record and single-use test results	^\s*iVar1\ =\ \*\(int\ \*\)\(iVar4\ \+\ 8\);$	+3
+use	FUN_00183b9c	iVar4	producerNode	INFERRED	node record of a producer of inst read from the node vector	^\s*iVar4\ =\ \*piVar3;$	+3
+use	FUN_00183b9c	iVar4	producerNode	INFERRED	node record of a producer of inst read from the node vector	^\s*iVar4\ =\ \*piVar3;$@2	+3

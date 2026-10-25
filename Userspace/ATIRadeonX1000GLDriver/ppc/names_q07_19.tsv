@@ -1,0 +1,31 @@
+local	FUN_0013b1e8	bVar1	noCommonYet	INFERRED	role read off the web: common dominator block of all users of an instruction (walk the dominator tree by depth)
+use	FUN_0013b1e8	iVar2	operandCursor	INFERRED	role read off the web: common dominator block of all users of an instruction (walk the dominator tree by depth)	^\s*iVar2\ =\ 0;$	+1
+use	FUN_0013b1e8	iVar2	operandCursor	INFERRED	role read off the web: common dominator block of all users of an instruction (walk the dominator tree by depth)	^\s*iVar11\ =\ iVar2;$	+1
+use	FUN_0013b1e8	iVar2	operandCursor	INFERRED	role read off the web: common dominator block of all users of an instruction (walk the dominator tree by depth)	^\s*iVar2\ =\ iVar11\ \+\ 1;$	+1
+use	FUN_0013b1e8	iVar2	userBlockDepth	INFERRED	role read off the web: common dominator block of all users of an instruction (walk the dominator tree by depth)	^\s*iVar2\ =\ piVar4\[0x2f\];$	+1
+use	FUN_0013b1e8	iVar2	userBlockDepth	INFERRED	role read off the web: common dominator block of all users of an instruction (walk the dominator tree by depth)	^\s*if\ \(iVar6\ <\ iVar2\)\ \{$	+1
+use	FUN_0013b1e8	iVar2	userBlockDepth	INFERRED	role read off the web: common dominator block of all users of an instruction (walk the dominator tree by depth)	^\s*else\ if\ \(iVar2\ <\ iVar6\)\ \{$	+1
+use	FUN_0013b1e8	iVar2	userBlockDepth	INFERRED	role read off the web: common dominator block of all users of an instruction (walk the dominator tree by depth)	^\s*else\ if\ \(iVar2\ ==\ iVar6\)\ \{$	+1
+use	FUN_0013b1e8	iVar6	userInst	INFERRED	role read off the web: common dominator block of all users of an instruction (walk the dominator tree by depth)	^\s*iVar6\ =\ \*piVar4;$	+2
+use	FUN_0013b1e8	iVar6	userInst	INFERRED	role read off the web: common dominator block of all users of an instruction (walk the dominator tree by depth)	^\s*if\ \(\*\(int\ \*\)\(\*\(int\ \*\)\(iVar6\ \+\ 0x88\)\ \+\ 8\)\ ==\ 0x8e\)\ \{$	+1
+use	FUN_0013b1e8	iVar6	userInst	INFERRED	role read off the web: common dominator block of all users of an instruction (walk the dominator tree by depth)	^\s*if\ \(\*\(int\ \*\)\(iVar6\ \+\ 0x84\)\ <=\ iVar11\)\ goto\ LAB_0013b2d8;$	+2
+use	FUN_0013b1e8	iVar6	successorCount	INFERRED	role read off the web: common dominator block of all users of an instruction (walk the dominator tree by depth)	^\s*iVar6\ =\ FUN_000e79d0\(piVar7\);$	+3
+local	FUN_0013b1e8	iVar11	operandIdx	INFERRED	role read off the web: common dominator block of all users of an instruction (walk the dominator tree by depth)
+local	FUN_0013b1e8	param_1	producer	INFERRED	role read off the web: common dominator block of all users of an instruction (walk the dominator tree by depth)
+local	FUN_0013b1e8	param_2	program	INFERRED	role read off the web: common dominator block of all users of an instruction (walk the dominator tree by depth)
+use	FUN_0013b1e8	piVar4	elementPtr	INFERRED	role read off the web: common dominator block of all users of an instruction (walk the dominator tree by depth)	^\s*piVar4\ =\ \(int\ \*\)\(uVar8\ \*\ 4\ \+\ puVar10\[2\]\);$	+1
+use	FUN_0013b1e8	piVar4	elementPtr	INFERRED	role read off the web: common dominator block of all users of an instruction (walk the dominator tree by depth)	^\s*piVar4\ =\ \(int\ \*\)FUN_0019423c\(puVar10,uVar8\);$	+1
+use	FUN_0013b1e8	piVar4	elementPtr	INFERRED	role read off the web: common dominator block of all users of an instruction (walk the dominator tree by depth)	^\s*iVar6\ =\ \*piVar4;$	+1
+use	FUN_0013b1e8	piVar4	userBlock	INFERRED	role read off the web: common dominator block of all users of an instruction (walk the dominator tree by depth)	^\s*piVar4\ =\ \*\(int\ \*\*\)\(iVar6\ \+\ 0x158\);$	+2
+use	FUN_0013b1e8	piVar4	userBlock	INFERRED	role read off the web: common dominator block of all users of an instruction (walk the dominator tree by depth)	^\s*piVar4\ =\ \(int\ \*\)FUN_000e9184\(piVar4,iVar11\);$	+1
+use	FUN_0013b1e8	piVar4	userBlock	INFERRED	role read off the web: common dominator block of all users of an instruction (walk the dominator tree by depth)	^\s*iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*piVar4\ \+\ 0x24\)\)\(piVar4\);$	+3
+use	FUN_0013b1e8	piVar4	userBlock	INFERRED	role read off the web: common dominator block of all users of an instruction (walk the dominator tree by depth)	^\s*piVar9\ =\ piVar4;$	+2
+use	FUN_0013b1e8	piVar4	userBlock	INFERRED	role read off the web: common dominator block of all users of an instruction (walk the dominator tree by depth)	^\s*iVar2\ =\ piVar4\[0x2f\];$	+1
+use	FUN_0013b1e8	piVar4	userBlock	INFERRED	role read off the web: common dominator block of all users of an instruction (walk the dominator tree by depth)	^\s*piVar4\ =\ \(int\ \*\)piVar4\[0x3c\];$	+1
+use	FUN_0013b1e8	piVar4	userBlock	INFERRED	role read off the web: common dominator block of all users of an instruction (walk the dominator tree by depth)	^\s*if\ \(piVar4\ ==\ \(int\ \*\)0x0\)\ goto\ LAB_0013b3c4;$	+1
+use	FUN_0013b1e8	piVar4	userBlock	INFERRED	role read off the web: common dominator block of all users of an instruction (walk the dominator tree by depth)	^\s*piVar4\ =\ \(int\ \*\)piVar4\[0x3c\];$@2	+1
+use	FUN_0013b1e8	piVar4	userBlock	INFERRED	role read off the web: common dominator block of all users of an instruction (walk the dominator tree by depth)	^\s*piVar9\ =\ piVar4;$@2	+2
+local	FUN_0013b1e8	piVar7	commonBlock	INFERRED	role read off the web: common dominator block of all users of an instruction (walk the dominator tree by depth)
+local	FUN_0013b1e8	piVar9	nextCommonBlock	INFERRED	role read off the web: common dominator block of all users of an instruction (walk the dominator tree by depth)
+local	FUN_0013b1e8	puVar10	userVec	INFERRED	role read off the web: common dominator block of all users of an instruction (walk the dominator tree by depth)
+local	FUN_0013b1e8	uVar3	userCount	INFERRED	role read off the web: common dominator block of all users of an instruction (walk the dominator tree by depth)

@@ -1,0 +1,6 @@
+local	psnReallocateTemps	puVar14	inst	INFERRED	walks the program's instruction records (0x48 bytes each) from the last one backwards (puVar14 + -0x12 words per step)
+local	psnReallocateTemps	puVar13	lastVisitedInst	INFERRED	the record visited in the previous iteration (set to inst at the bottom of the loop); tested for kind 2 and flag +0x20
+local	psnReallocateTemps	uVar10	collectedCount	INFERRED	number of register ids collected in the auStack_864 list (0 reset when the previous record is not a kind-2 record)
+use	psnReallocateTemps	uVar5	instKind	INFERRED	*inst: the record kind (1..4) dispatched on	^\s*uVar5\ =\ \*puVar14;$	+2
+use	psnReallocateTemps	uVar5	instKind	INFERRED	*inst: the record kind (1..4) dispatched on	^\s*if\ \(uVar5\ <\ 3\)\ \{$	+2
+use	psnReallocateTemps	uVar5	instKind	INFERRED	*inst: the record kind (1..4) dispatched on	^\s*if\ \(4\ <\ uVar5\)\ goto\ LAB_000c6e10;$	+1

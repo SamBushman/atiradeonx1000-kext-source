@@ -1,0 +1,40 @@
+func	FUN_00026650	gld_bindProgramObject	INFERRED	applies pending generation bits and binds a shared program object by kind: ARB vertex (gld_bindProgramRecord), ARB fragment (FUN_00025ec0) or ATI fragment shader (atifsReplayProgram), creating the per-context record on demand
+func	FUN_00025ec0	gld_bindFragmentProgramRecord	INFERRED	finds or creates the per-context record of an ARB fragment program, rebuilds its translated IL/text (fpilCreateTranslator, fragmentProgramToIL, arbProgramIrToText) when the source or state generation changed and binds it as ARB program 0x8804
+func	FUN_00027150	gld_drawArraysStream	INFERRED	trims a draw to whole primitives, reserves the vertex data in the staging buffer and emits the 0x36000000 stream-draw packet with the stream-address registers and a 0xc0003400 draw header
+local	FUN_00026650	param_1	ctx	CONFIRMED	GLDContext
+local	FUN_00026650	param_2	programObject	CONFIRMED	shared program object (kind shorts at [0], per-context record list at +0x20, generation words at +0x14/+0x18/+0x3c)
+local	FUN_00026650	psVar3	programHeader	INFERRED	*programObject: two shorts {kind, subkind}
+local	FUN_00026650	piVar5	contextRecord	INFERRED	per-context record of the program (found or created)
+local	FUN_00026650	piVar7	recordListHead	INFERRED	programObject+0x20: head of the per-context record list
+local	FUN_00026650	sVar1	programKind	INFERRED	kind code from the program header (-0x77fc ARB vertex, -0x74d0 ARB fragment, -0x7e00 ATI fragment shader)
+use	FUN_00026650	uVar2	pendingGenerationBits	INFERRED	programObject[0xf]: bit 0 = source changed, bit 1 = state changed; folded into the generation counters	^\s*uVar2\ =\ param_2\[0xf\];$	+3
+use	FUN_00026650	uVar2	pendingGenerationBits	INFERRED	programObject[0xf]: bit 0 = source changed, bit 1 = state changed; folded into the generation counters	^\s*if\ \(\(uVar2\ \&\ 2\)\ !=\ 0\)\ \{$	+1
+use	FUN_00026650	uVar2	bindResult	INFERRED	result of the kind-specific bind function	^\s*uVar2\ =\ \(\(int\ \(\*\)\(\)\)FUN_00026440\)\(param_1,param_2\);$	+2
+use	FUN_00026650	uVar2	bindResult	INFERRED	result of the kind-specific bind function	^\s*uVar2\ =\ \(\(int\ \(\*\)\(\)\)FUN_00026440\)\(param_1,param_2\);$@2	+2
+use	FUN_00026650	uVar2	bindResult	INFERRED	result of the kind-specific bind function	^\s*uVar2\ =\ \(\(int\ \(\*\)\(\)\)FUN_00025ec0\)\(param_1,param_2\);$	+2
+use	FUN_00026650	uVar2	bindResult	INFERRED	result of the kind-specific bind function	^\s*uVar2\ =\ \(\(int\ \(\*\)\(\)\)FUN_00025ec0\)\(param_1,param_2\);$@2	+2
+local	FUN_00025ec0	param_1	ctx	CONFIRMED	GLDContext
+local	FUN_00025ec0	param_2	programObject	CONFIRMED	shared ARB program object
+local	FUN_00025ec0	piVar6	contextRecord	INFERRED	per-context record of the program (created on first use, linked into the object's list)
+local	FUN_00025ec0	piVar14	recordProgramId	INFERRED	contextRecord+0x14: the ARB program name of this context's copy
+local	FUN_00025ec0	piVar15	commandStream	INFERRED	ctx+0x240, the embedded command stream
+local	FUN_00025ec0	piVar7	translator	INFERRED	fpilCreateTranslator result: input/output description of the fragment program being rebuilt
+local	FUN_00025ec0	pbVar13	constantUseCursor	INFERRED	walks the program's {register, value} constant-use pairs
+local	FUN_00025ec0	uVar11	programFlags	INFERRED	flag word of the program's parameter block (+0x20): constant count in bits 27..31, y-flip bit 23
+local	FUN_00025ec0	uVar8	bindResult	INFERRED	1 when the program is bound and valid, 0 otherwise
+local	FUN_00027150	param_1	ctx	CONFIRMED	GLDContext
+local	FUN_00027150	param_2	staleArgR4	INFERRED	incoming register, unused
+local	FUN_00027150	param_3	primitiveMode	CONFIRMED	GL primitive mode; indexes the primitive-flags table at DAT_001d9888
+local	FUN_00027150	param_4	vertexCount	CONFIRMED	vertices requested; trimmed to whole primitives
+local	FUN_00027150	iVar5	trimmedCount	CONFIRMED	vertex count after gldTrimVertexCountToPrimitive[Min] (0 = nothing to draw)
+local	FUN_00027150	bVar1	vertexStrideWords	INFERRED	words per vertex taken from the current vertex-array record (+2)
+local	FUN_00027150	puVar6	packetBody	INFERRED	start of the 0x36000000 stream-draw packet
+local	FUN_00027150	puVar3	lastHeader	INFERRED	ctx+0x1d8: header word of the previous packet, patched with the packet length
+local	FUN_00027150	iVar10	dataCursorBefore	INFERRED	ctx+0x1f4 data cursor before this draw's vertices were reserved
+local	FUN_00027150	iVar8	dataBase	INFERRED	ctx+0x1fc: start of the staging data buffer
+local	FUN_00027150	iVar11	streamAddrArray	INFERRED	stream-address shadow array of the selected vertex-array record
+local	FUN_00027150	iVar9	streamExtArray	INFERRED	extension array paired with streamAddrArray
+use	FUN_00027150	uVar2	streamCountWord	INFERRED	ctx+0x283c: stream count of the current record (low five bits are stored)	^\s*uVar2\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x283c\);$	+1
+use	FUN_00027150	uVar2	streamCountWord	INFERRED	ctx+0x283c: stream count of the current record (low five bits are stored)	^\s*puVar6\[2\]\ =\ uVar2\ \&\ 0x1f;$	+1
+use	FUN_00027150	uVar2	primFlags	INFERRED	primitive-type bits from the table at DAT_001d9888	^\s*uVar2\ =\ \*\(uint\ \*\)\(\&DAT_001d9888\ \+\ param_3\ \*\ 4\);$	+1
+use	FUN_00027150	uVar2	primFlags	INFERRED	primitive-type bits from the table at DAT_001d9888	^\s*puVar7\[3\]\ =\ iVar5\ <<\ 0x10\ \|\ uVar2\ \&\ 0xf\ \|\ 0x820;$	+1

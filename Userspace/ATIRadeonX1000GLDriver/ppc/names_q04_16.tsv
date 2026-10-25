@@ -1,0 +1,3 @@
+local	FUN_000afe40	local_1ec	wordCount	INFERRED	growable word buffer idiom (count/capacity/data): number of words appended so far
+local	FUN_000afe40	local_1e8	wordCapacity	INFERRED	growable word buffer idiom (count/capacity/data): allocated capacity in words (grows by 0x80)
+local	FUN_000afe40	local_1e4	wordData	INFERRED	growable word buffer idiom (count/capacity/data): pointer to the word array (reallocated through the context hooks at +0xc / +0x18)

@@ -1,0 +1,5 @@
+use	Program__eliminateDeadInstsAndRecountUses	iVar11	epochIndex	INFERRED	program->useEpochIndex before the increment	^\s*iVar11\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x2ac\);$	+1
+use	Program__eliminateDeadInstsAndRecountUses	iVar11	epochIndex	INFERRED	program->useEpochIndex before the increment	^\s*\*\(int\ \*\)\(param_1\ \+\ 0x2ac\)\ =\ iVar11\ \+\ 1;$	+1
+use	Program__eliminateDeadInstsAndRecountUses	iVar11	epochIndex	INFERRED	program->useEpochIndex before the increment	^\s*iVar11\ =\ iVar11\ \*\ 4\ \+\ param_1;$	+1	rhs	none
+use	Program__eliminateDeadInstsAndRecountUses	iVar11	statsSlot	INFERRED	address of the per-epoch statistics slot (program + epoch*4); +0x2b0 counts removed instructions	^\s*iVar11\ =\ iVar11\ \*\ 4\ \+\ param_1;$	+1	lhs	none
+use	Program__eliminateDeadInstsAndRecountUses	iVar11	statsSlot	INFERRED	address of the per-epoch statistics slot (program + epoch*4); +0x2b0 counts removed instructions	^\s*\*\(int\ \*\)\(iVar11\ \+\ 0x2b0\)\ =\ \*\(int\ \*\)\(iVar11\ \+\ 0x2b0\)\ \+\ 1;$	+1

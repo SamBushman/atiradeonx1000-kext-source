@@ -138,7 +138,7 @@
 18b654	R300SchedModel__vslot11	r8	PASS-deep	GARBAGE	
 18b9cc	R300SchedModel__vslot14	r7	PASS-indirect	GARBAGE	
 18b9cc	R300SchedModel__vslot14	r8	PASS-indirect	GARBAGE	
-18d4b4	FUN_0018d4b4	r8	PASS-indirect	GARBAGE	
+18d4b4	PackState__tryPlaceInstructionSources	r8	PASS-indirect	GARBAGE	
 1906c8	R300VSchedModel__vslot3_canAddInstruction	r5	PASS-indirect	GARBAGE-UNSUPPLIED	supply=GARBAGE []; 190720 bctrl via +0x4c (argument registers up to r5)
 1906c8	R300VSchedModel__vslot3_canAddInstruction	r6	PASS-indirect	GARBAGE	
 190990	R300VSchedModel__vslot27	r5	PASS-indirect	GARBAGE-UNSUPPLIED	supply=GARBAGE []; 1909d4 bctrl via +0x80 (argument registers up to r5)
@@ -291,9 +291,9 @@ bd9a0	FUN_000bd9a0	r7	PASS-indirect	GARBAGE
 bd9a0	FUN_000bd9a0	r8	PASS-indirect	GARBAGE	
 db574	ildisPrintFixedPoint	r8	PASS-import	GARBAGE	
 db574	ildisPrintFixedPoint	r10	PASS-import	GARBAGE	
-e36bc	FUN_000e36bc	r8	PASS-deep	GARBAGE	
-e36bc	FUN_000e36bc	r9	PASS-deep	GARBAGE	
-e36bc	FUN_000e36bc	r10	PASS-deep	GARBAGE	
+e36bc	MachineCodeWriter__encodeProgram	r8	PASS-deep	GARBAGE	
+e36bc	MachineCodeWriter__encodeProgram	r9	PASS-deep	GARBAGE	
+e36bc	MachineCodeWriter__encodeProgram	r10	PASS-deep	GARBAGE	
 f1d7c	FUN_000f1d7c	r6	PASS-indirect	GARBAGE	
 f1d7c	FUN_000f1d7c	r7	PASS-indirect	GARBAGE	
 f1d7c	FUN_000f1d7c	r8	PASS-indirect	GARBAGE	
