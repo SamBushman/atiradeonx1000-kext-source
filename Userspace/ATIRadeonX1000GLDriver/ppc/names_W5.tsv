@@ -22,7 +22,6 @@ local	FUN_000ea6d0	param_1	this	CONFIRMED	constructor/initializer: stores a vtab
 local	FUN_000ea6d0	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
 local	FUN_000ea6d0	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
 local	FUN_000ea828	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
-local	FUN_000ea828	uVar5	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
 local	FUN_000ea828	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
 local	FUN_000eec50	puVar8	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
 local	FUN_000eee4c	puVar5	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
@@ -32,7 +31,6 @@ local	FUN_000f07a8	puVar5	allocation	INFERRED	result of FUN_00193e18; *allocatio
 local	FUN_000f14f8	puVar3	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
 local	FUN_000f94dc	puVar3	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
 local	FUN_000f9a58	puVar7	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
-local	FUN_000fb3d4	uVar8	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
 local	FUN_000fb3d4	puVar9	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
 local	FUN_000fd50c	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
 local	FUN_0010bd50	uVar4	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
