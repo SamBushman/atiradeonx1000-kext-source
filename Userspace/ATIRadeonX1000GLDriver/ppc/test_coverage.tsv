@@ -226,11 +226,11 @@
 0x20420	gldDisplayNotificationCallback	1716	no	calls an import (CFDictionaryGetValue); calls an import (CFNumberGetValue); calls an import (CFRelease)
 0x20b00	FUN_00020b00	40	yes	
 0x20b30	FUN_00020b30	620	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0x21c70	FUN_00021c70	1540	no	indirect call (driver context / vtable / callback)
+0x21c70	gld_emitCopyBlitPacket	1540	no	indirect call (driver context / vtable / callback)
 0x22280	noop_22280	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x22290	_gldUpdateDispatch	2632	no	calls an import (pthread_mutex_lock); calls an import (pthread_mutex_unlock)
 0x22ce0	_gldInitDispatch	456	yes	
-0x22eb0	FUN_00022eb0	536	no	indirect call (driver context / vtable / callback)
+0x22eb0	gld_emitDirtyStatePackets	536	no	indirect call (driver context / vtable / callback)
 0x230d0	gld_emitSurfaceCopyPacket	1544	no	indirect call (driver context / vtable / callback)
 0x236f0	returnSecondArgument	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x23700	gldEmitCurrentAttributeRegisters	360	yes	
@@ -301,8 +301,8 @@
 0x2d2b0	gldPackColorForSurfaceFormat	2388	yes	
 0x2dcf0	gldTextureHasNonPowerOfTwoSize2	236	yes	
 0x2ddf0	FUN_0002ddf0	3396	yes	
-0x2ebc0	FUN_0002ebc0	596	yes	
-0x2ee30	FUN_0002ee30	1476	yes	
+0x2ebc0	gld_applyAnisotropyOverride	596	yes	
+0x2ee30	gld_updateTextureSamplerState	1476	yes	
 0x2f410	window_mode_to_ati_format	148	yes	
 0x2f4d0	gldTextureFormatCodeMatchesType	708	yes	
 0x2f7c0	gldTextureFormatCodeFromFormatType	716	yes	

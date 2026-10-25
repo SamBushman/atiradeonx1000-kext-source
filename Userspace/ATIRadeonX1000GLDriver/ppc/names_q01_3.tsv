@@ -90,7 +90,7 @@ local	FUN_0002cd50	param_2	unitObject	INFERRED	callers pass their variable `unit
 local	FUN_0002ddf0	param_1	ctxSaved	INFERRED	callers pass their variable `ctxSaved` here (1 call site(s), e.g. in gldTextureMakeResident)
 local	FUN_0002ddf0	param_2	texture	INFERRED	callers pass their variable `texture` here (1 call site(s), e.g. in gldTextureMakeResident)
 local	FUN_0002ebc0	param_1	ctx	INFERRED	callers pass their variable `ctx` here (1 call site(s), e.g. in FUN_000a7ee0)
-local	FUN_0002ebc0	param_2	loopIndex	INFERRED	callers pass their variable `loopIndex` here (1 call site(s), e.g. in FUN_000a7ee0)
+local	FUN_0002ebc0	param_2	unitIndex	INFERRED	callers pass their variable `loopIndex` here (1 call site(s), e.g. in FUN_000a7ee0)
 local	FUN_0002ee30	param_1	ctxSaved	INFERRED	callers pass their variable `ctxSaved` here (1 call site(s), e.g. in gldTextureMakeResident)
 local	FUN_0002ee30	param_2	texture	INFERRED	callers pass their variable `texture` here (1 call site(s), e.g. in gldTextureMakeResident)
 local	FUN_0002fac0	param_2	texture	INFERRED	callers pass their variable `texture` here (2 call site(s), e.g. in gldTextureFormatEntryForLevel)

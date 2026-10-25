@@ -225,11 +225,11 @@
 0x20420	1716	gldDisplayNotificationCallback	part_003	converted
 0x20b00	40	FUN_00020b00	part_003	converted
 0x20b30	620	FUN_00020b30	part_003	converted
-0x21c70	1540	FUN_00021c70	part_003	converted
+0x21c70	1540	gld_emitCopyBlitPacket	part_003	converted
 0x22280	4	noop_22280	part_003	converted
 0x22290	2632	_gldUpdateDispatch	part_003	converted
 0x22ce0	456	_gldInitDispatch	part_003	converted
-0x22eb0	536	FUN_00022eb0	part_003	converted
+0x22eb0	536	gld_emitDirtyStatePackets	part_003	converted
 0x230d0	1544	gld_emitSurfaceCopyPacket	part_003	converted
 0x236f0	8	returnSecondArgument	part_003	converted
 0x23700	360	gldEmitCurrentAttributeRegisters	part_003	converted
@@ -300,8 +300,8 @@
 0x2d2b0	2388	gldPackColorForSurfaceFormat	part_004	converted
 0x2dcf0	236	gldTextureHasNonPowerOfTwoSize2	part_005	converted
 0x2ddf0	3396	FUN_0002ddf0	part_005	converted
-0x2ebc0	596	FUN_0002ebc0	part_005	converted
-0x2ee30	1476	FUN_0002ee30	part_005	converted
+0x2ebc0	596	gld_applyAnisotropyOverride	part_005	converted
+0x2ee30	1476	gld_updateTextureSamplerState	part_005	converted
 0x2f410	148	window_mode_to_ati_format	part_005	converted
 0x2f4d0	708	gldTextureFormatCodeMatchesType	part_005	converted
 0x2f7c0	716	gldTextureFormatCodeFromFormatType	part_005	converted
