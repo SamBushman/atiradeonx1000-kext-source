@@ -1,0 +1,178 @@
+local	FUN_00131d08	param_1	program	INFERRED	the Program (pass object); +8 compiler, +900 block list
+local	FUN_00131d08	param_2	virtualRegCount	INFERRED	logged as "virtual" in the repartition message
+local	FUN_00131d08	param_3	physicalRegCount	INFERRED	logged as "physical"; added to a virtual register number when param_5 is 0
+local	FUN_00131d08	param_4	totalRegCount	INFERRED	logged as the total register count
+local	FUN_00131d08	param_5	virtualIdsAlreadyOffset	INFERRED	0: virtual register ids are offset by physicalRegCount; non-zero: ids are used as they are
+use	FUN_00131d08	iVar4	classArrayBytes	INFERRED	register class count * 4	^\s*iVar4\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x30c\)\ \+\ 0x14\)\ <<\ 2;$	+3
+use	FUN_00131d08	iVar4	classArrayBytes	INFERRED	register class count * 4	^\s*\*\(undefined4\ \*\*\)\(iVar4\ \+\ iVar12\)\ =\ puVar7\ \+\ 1;$	+1
+use	FUN_00131d08	iVar4	classArrayBytes	INFERRED	register class count * 4	^\s*if\ \(\(\*\(uint\ \*\)\(in_r8\ \+\ \*\(int\ \*\)\(iVar4\ \+\ iVar10\)\ \+\ 8\)\ >>\ \(uVar9\ \&\ 0x1f\)\ \&\ 1\)\ !=\ 0\)$	+2
+use	FUN_00131d08	iVar4	classArrayBytes	INFERRED	register class count * 4	^\s*iVar10\ =\ \*\(int\ \*\)\(iVar4\ \+\ iVar10\);$	+1
+use	FUN_00131d08	iVar4	classArrayBytes	INFERRED	register class count * 4	^\s*piVar6\ =\ \(int\ \*\)\(iVar4\ \+\ iVar11\);$	+1
+use	FUN_00131d08	iVar4	classArrayBytes	INFERRED	register class count * 4	^\s*FUN_00193cc0\(\*\(undefined4\ \*\)\(iVar10\ \+\ 0x378\),iVar4\);$	+1
+use	FUN_00131d08	iVar4	classArrayBytes	INFERRED	register class count * 4	^\s*iVar4\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x30c\)\ \+\ 0x14\)\ <<\ 2;$@2	+2
+use	FUN_00131d08	iVar4	classArrayBytes	INFERRED	register class count * 4	^\s*puVar8\ =\ \(undefined4\ \*\)FUN_00193e18\(\*\(undefined4\ \*\)\(iVar3\ \+\ 0x378\),iVar4\);$	+1
+use	FUN_00131d08	iVar4	compiler	INFERRED	program->compiler	^\s*iVar4\ =\ \*\(int\ \*\)\(param_1\ \+\ 8\);$	+2
+use	FUN_00131d08	iVar4	compiler	INFERRED	program->compiler	^\s*iVar4\ =\ \*\(int\ \*\)\(param_1\ \+\ 8\);$@2	+1
+use	FUN_00131d08	iVar4	compiler	INFERRED	program->compiler	^\s*\}\ while\ \(\(int\)in_r10\ <\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar4\ \+\ 0x30c\)\ \+\ 0x14\)\);$	+1
+use	FUN_00131d08	iVar4	compiler	INFERRED	program->compiler	^\s*iVar4\ =\ \*\(int\ \*\)\(param_1\ \+\ 8\);$@3	+1
+use	FUN_00131d08	iVar4	compiler	INFERRED	program->compiler	^\s*FUN_00193cc0\(\*\(undefined4\ \*\)\(iVar4\ \+\ 0x378\),piVar6\);$	+1
+use	FUN_00131d08	iVar4	blockCursorB	INFERRED	stale block cursor	^\s*iVar4\ =\ iVar3;$	+1
+use	FUN_00131d08	iVar4	blockCursorB	INFERRED	stale block cursor	^\s*iVar4\ =\ \*\(int\ \*\)\(iVar10\ \+\ 8\);$	+1
+use	FUN_00131d08	iVar4	blockCursorB	INFERRED	stale block cursor	^\s*iVar3\ =\ \*\(int\ \*\)\(iVar4\ \+\ 8\);$	+3
+use	FUN_00131d08	iVar4	regKindFlag	INFERRED	RegKind flag test of the destination register kind	^\s*iVar4\ =\ FUN_00126760\(piVar1\[0x26\]\);$	+4
+use	FUN_00131d08	iVar4	regClass	INFERRED	FUN_00130bfc: register class of the instruction's destination	^\s*iVar4\ =\ FUN_00130bfc\(param_1,piVar1\);$	+1
+use	FUN_00131d08	iVar4	regClass	INFERRED	FUN_00130bfc: register class of the instruction's destination	^\s*\*\(undefined4\ \*\)\(iVar3\ \+\ iVar11\)\ =\ puVar8\[iVar4\];$	+2
+use	FUN_00131d08	iVar4	regClass	INFERRED	FUN_00130bfc: register class of the instruction's destination	^\s*iVar3\ =\ \*\(int\ \*\)\(iVar3\ \+\ iVar11\)\ \+\ piVar6\[iVar4\];$	+1
+use	FUN_00131d08	iVar4	regClass	INFERRED	FUN_00130bfc: register class of the instruction's destination	^\s*\*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x45c\)\ \+\ iVar11\)\ =\ iVar4;$	+1
+use	FUN_00131d08	iVar3	compilerB	INFERRED	program->compiler	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 8\);$	+2
+use	FUN_00131d08	iVar3	compilerB	INFERRED	program->compiler	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 8\);$@2	+2
+use	FUN_00131d08	iVar3	compilerB	INFERRED	program->compiler	^\s*puVar8\ =\ \(undefined4\ \*\)FUN_00193e18\(\*\(undefined4\ \*\)\(iVar3\ \+\ 0x378\),iVar4\);$	+1
+use	FUN_00131d08	iVar3	classOffset	INFERRED	byte offset of the class entry	^\s*iVar3\ =\ in_r8\ \*\ 4;$	+1
+use	FUN_00131d08	iVar3	classOffset	INFERRED	byte offset of the class entry	^\s*\*in_r10\ =\ iVar10\ \+\ \*\(int\ \*\)\(iVar3\ \+\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x3c0\)\ \+\ 0x14\)\ \+\ \-4\);$	+1
+use	FUN_00131d08	iVar3	nextBlock	INFERRED	next block in the block list	^\s*iVar3\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 900\)\ \+\ 8\);$	+1
+use	FUN_00131d08	iVar3	nextBlock	INFERRED	next block in the block list	^\s*if\ \(iVar3\ !=\ 0\)\ \{$	+1
+use	FUN_00131d08	iVar3	nextBlock	INFERRED	next block in the block list	^\s*iVar4\ =\ iVar3;$	+1
+use	FUN_00131d08	iVar3	nextBlock	INFERRED	next block in the block list	^\s*iVar3\ =\ \*\(int\ \*\)\(iVar4\ \+\ 8\);$	+1
+use	FUN_00131d08	iVar3	newRegister	INFERRED	register number after repartition	^\s*iVar3\ =\ param_3\ \+\ piVar1\[0x25\];$	+1
+use	FUN_00131d08	iVar3	newRegister	INFERRED	register number after repartition	^\s*iVar3\ =\ piVar1\[0x25\];$	+1
+use	FUN_00131d08	iVar3	newRegister	INFERRED	register number after repartition	^\s*iVar11\ =\ iVar3\ \*\ 4;$	+1
+use	FUN_00131d08	iVar3	newRegister	INFERRED	register number after repartition	^\s*iVar3\ =\ \(int\)in_r10\ \*\ 4;$	+3
+use	FUN_00131d08	iVar3	newRegister	INFERRED	register number after repartition	^\s*iVar3\ =\ \*\(int\ \*\)\(iVar3\ \+\ iVar11\)\ \+\ piVar6\[iVar4\];$	+2
+use	FUN_00131d08	iVar3	newRegister	INFERRED	register number after repartition	^\s*\*\(int\ \*\)\(iVar12\ \+\ 8\)\ =\ iVar3;$	+1
+use	FUN_00131d08	iVar12	classByteOffset	INFERRED	byte offset into the per-class arrays	^\s*iVar12\ =\ 0;$	+1
+use	FUN_00131d08	iVar12	classByteOffset	INFERRED	byte offset into the per-class arrays	^\s*\*\(undefined4\ \*\*\)\(iVar3\ \+\ iVar12\)\ =\ puVar7\ \+\ 1;$	+1
+use	FUN_00131d08	iVar12	classByteOffset	INFERRED	byte offset into the per-class arrays	^\s*\*\(undefined4\ \*\*\)\(iVar4\ \+\ iVar12\)\ =\ puVar7\ \+\ 1;$	+1
+use	FUN_00131d08	iVar12	classByteOffset	INFERRED	byte offset into the per-class arrays	^\s*iVar12\ =\ iVar12\ \+\ 4;$	+1
+use	FUN_00131d08	iVar12	blockCursor	INFERRED	block being walked	^\s*iVar12\ =\ \*\(int\ \*\)\(param_1\ \+\ 900\);$	+1
+use	FUN_00131d08	iVar12	blockCursor	INFERRED	block being walked	^\s*piVar13\ =\ \*\(int\ \*\*\)\(iVar12\ \+\ 0x98\);$	+1
+use	FUN_00131d08	iVar12	blockCursor	INFERRED	block being walked	^\s*iVar10\ =\ \*\(int\ \*\)\(iVar12\ \+\ 8\);$	+1
+use	FUN_00131d08	iVar12	blockCursor	INFERRED	block being walked	^\s*iVar12\ =\ iVar10;$	+1
+use	FUN_00131d08	iVar12	classCount	INFERRED	number of register classes (backend word 0x14)	^\s*iVar12\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar10\ \+\ 0x30c\)\ \+\ 0x14\);$	+2
+use	FUN_00131d08	iVar12	classCount	INFERRED	number of register classes (backend word 0x14)	^\s*\}\ while\ \(iVar12\ !=\ iVar10\);$	+1
+use	FUN_00131d08	iVar11	nextBlockB	INFERRED	next block in the block list	^\s*iVar11\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 900\)\ \+\ 8\);$	+1
+use	FUN_00131d08	iVar11	nextBlockB	INFERRED	next block in the block list	^\s*if\ \(iVar11\ !=\ 0\)\ \{$	+1
+use	FUN_00131d08	iVar11	nextBlockB	INFERRED	next block in the block list	^\s*iVar10\ =\ iVar11;$	+1
+use	FUN_00131d08	iVar11	nextBlockB	INFERRED	next block in the block list	^\s*iVar11\ =\ \*\(int\ \*\)\(iVar10\ \+\ 8\);$	+1
+use	FUN_00131d08	iVar11	virtualCountArray	INFERRED	per-class virtual register counters (stats +0x18)	^\s*iVar11\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x3c0\)\ \+\ 0x18\);$	+2
+use	FUN_00131d08	iVar11	physicalCountArray	INFERRED	per-class physical register counters (stats +0x14)	^\s*iVar11\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x3c0\)\ \+\ 0x14\);$	+2
+use	FUN_00131d08	iVar11	lastClassOffset	INFERRED	byte offset of the last class	^\s*iVar11\ =\ iVar12\ \+\ \-1;$	+3
+use	FUN_00131d08	iVar11	lastClassOffset	INFERRED	byte offset of the last class	^\s*piVar13\ =\ \(int\ \*\)\(iVar3\ \+\ iVar11\);$	+2
+use	FUN_00131d08	iVar11	virtualSetA	INFERRED	bitset of the class (virtual)	^\s*iVar11\ =\ \*piVar6;$	+3
+use	FUN_00131d08	iVar11	physicalSetA	INFERRED	bitset of the class (physical)	^\s*iVar11\ =\ \*piVar13;$	+3
+use	FUN_00131d08	iVar11	newRegByteOffset	INFERRED	byte offset of the new register in the remap tables	^\s*iVar11\ =\ iVar3\ \*\ 4;$	+2
+use	FUN_00131d08	iVar11	newRegByteOffset	INFERRED	byte offset of the new register in the remap tables	^\s*iVar11\ =\ iVar3\ \*\ 4;$@2	+2
+use	FUN_00131d08	iVar11	newRegByteOffset	INFERRED	byte offset of the new register in the remap tables	^\s*\*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x45c\)\ \+\ iVar11\)\ =\ iVar4;$	+1
+use	FUN_00131d08	iVar11	virtualMapBase	INFERRED	virtual register map (program +0x460)	^\s*iVar11\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x460\);$	+1
+use	FUN_00131d08	iVar11	virtualMapBase	INFERRED	virtual register map (program +0x460)	^\s*if\ \(\*\(int\ \*\)\(iVar3\ \+\ iVar11\)\ ==\ \-1\)\ \{$	+2
+use	FUN_00131d08	iVar11	virtualMapBase	INFERRED	virtual register map (program +0x460)	^\s*iVar11\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x460\);$@2	+1
+use	FUN_00131d08	iVar11	virtualMapBase	INFERRED	virtual register map (program +0x460)	^\s*iVar3\ =\ \*\(int\ \*\)\(iVar3\ \+\ iVar11\)\ \+\ piVar6\[iVar4\];$	+1
+use	FUN_00131d08	piVar1	instNextA	INFERRED	next instruction in the block	^\s*piVar1\ =\ piVar6;$	+1
+use	FUN_00131d08	piVar1	instNextA	INFERRED	next instruction in the block	^\s*piVar1\ =\ \(int\ \*\)piVar13\[2\];$	+1
+use	FUN_00131d08	piVar1	instNextA	INFERRED	next instruction in the block	^\s*piVar1\ =\ \(int\ \*\)piVar13\[2\];$@2	+1
+use	FUN_00131d08	piVar1	instNextA	INFERRED	next instruction in the block	^\s*piVar6\ =\ \(int\ \*\)piVar1\[2\];$	+3
+use	FUN_00131d08	piVar1	inst	INFERRED	instruction being renumbered	^\s*piVar1\ =\ \*\(int\ \*\*\)\(iVar10\ \+\ 0x98\);$	+1
+use	FUN_00131d08	piVar1	inst	INFERRED	instruction being renumbered	^\s*if\ \(\(\(piVar1\[5\]\ \&\ 1U\)\ !=\ 0\)\ \&\&\ \(piVar1\[0x20\]\ !=\ 0\)\)\ \{$	+6
+use	FUN_00131d08	piVar1	inst	INFERRED	instruction being renumbered	^\s*iVar4\ =\ FUN_00130bfc\(param_1,piVar1\);$	+2
+use	FUN_00131d08	piVar1	inst	INFERRED	instruction being renumbered	^\s*iVar3\ =\ param_3\ \+\ piVar1\[0x25\];$	+1
+use	FUN_00131d08	piVar1	inst	INFERRED	instruction being renumbered	^\s*iVar3\ =\ piVar1\[0x25\];$	+1
+use	FUN_00131d08	piVar1	inst	INFERRED	instruction being renumbered	^\s*in_r10\ =\ \(int\ \*\)piVar1\[0x25\];$	+1
+use	FUN_00131d08	piVar1	inst	INFERRED	instruction being renumbered	^\s*iVar12\ =\ FUN_001054ec\(piVar1,0\);$	+1
+use	FUN_00131d08	piVar1	inst	INFERRED	instruction being renumbered	^\s*piVar2\ =\ \(int\ \*\)piVar1\[2\];$@2	+1
+use	FUN_00131d08	piVar1	inst	INFERRED	instruction being renumbered	^\s*piVar1\ =\ piVar2;$	+1
+use	FUN_00131d08	piVar2	instNextB	INFERRED	next instruction in the block	^\s*piVar2\ =\ piVar13;$	+1
+use	FUN_00131d08	piVar2	instNextB	INFERRED	next instruction in the block	^\s*piVar2\ =\ \(int\ \*\)piVar1\[2\];$	+1
+use	FUN_00131d08	piVar2	instNextB	INFERRED	next instruction in the block	^\s*piVar2\ =\ \(int\ \*\)piVar1\[2\];$@2	+1
+use	FUN_00131d08	piVar2	instNextB	INFERRED	next instruction in the block	^\s*piVar13\ =\ \(int\ \*\)piVar2\[2\];$	+3
+use	FUN_00131d08	piVar6	backendTarget	INFERRED	compiler backend object (compiler + 0x30c)	^\s*piVar6\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x30c\);$	+2
+use	FUN_00131d08	piVar6	instAfter	INFERRED	instruction following the cursor	^\s*piVar6\ =\ \(int\ \*\)piVar13\[2\];$	+1
+use	FUN_00131d08	piVar6	instAfter	INFERRED	instruction following the cursor	^\s*piVar1\ =\ piVar6;$	+1
+use	FUN_00131d08	piVar6	instAfter	INFERRED	instruction following the cursor	^\s*piVar6\ =\ \(int\ \*\)piVar1\[2\];$	+1
+use	FUN_00131d08	piVar6	virtualSetCursor	INFERRED	cursor over the per-class virtual bitsets	^\s*piVar6\ =\ \(int\ \*\)\(iVar4\ \+\ iVar11\);$	+1
+use	FUN_00131d08	piVar6	virtualSetCursor	INFERRED	cursor over the per-class virtual bitsets	^\s*iVar11\ =\ \*piVar6;$	+1
+use	FUN_00131d08	piVar6	virtualSetCursor	INFERRED	cursor over the per-class virtual bitsets	^\s*piVar6\ =\ piVar6\ \+\ \-1;$	+1
+use	FUN_00131d08	piVar6	classBaseOffsets	INFERRED	prefix sums of the per-class virtual counters	^\s*piVar6\ =\ \(int\ \*\)FUN_00193e18\(\*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x378\),iVar4\);$	+2
+use	FUN_00131d08	piVar6	classBaseOffsets	INFERRED	prefix sums of the per-class virtual counters	^\s*in_r10\ =\ piVar6;$	+1
+use	FUN_00131d08	piVar6	classBaseOffsets	INFERRED	prefix sums of the per-class virtual counters	^\s*iVar3\ =\ \*\(int\ \*\)\(iVar3\ \+\ iVar11\)\ \+\ piVar6\[iVar4\];$	+1
+use	FUN_00131d08	piVar6	classBaseOffsets	INFERRED	prefix sums of the per-class virtual counters	^\s*FUN_00193cc0\(\*\(undefined4\ \*\)\(iVar4\ \+\ 0x378\),piVar6\);$	+1
+use	FUN_00131d08	puVar8	bitsetWordCursor	INFERRED	cursor clearing a new bitset's words	^\s*puVar8\ =\ puVar7\ \+\ 1;$	+1
+use	FUN_00131d08	puVar8	bitsetWordCursor	INFERRED	cursor clearing a new bitset's words	^\s*puVar8\[2\]\ =\ 0;$	+2
+use	FUN_00131d08	puVar8	bitsetWordCursor	INFERRED	cursor clearing a new bitset's words	^\s*puVar8\ =\ puVar7\ \+\ 1;$@2	+1
+use	FUN_00131d08	puVar8	bitsetWordCursor	INFERRED	cursor clearing a new bitset's words	^\s*puVar8\[2\]\ =\ 0;$@2	+2
+use	FUN_00131d08	puVar8	classNextVirtual	INFERRED	per-class next virtual register counter	^\s*puVar8\ =\ \(undefined4\ \*\)FUN_00193e18\(\*\(undefined4\ \*\)\(iVar3\ \+\ 0x378\),iVar4\);$	+1
+use	FUN_00131d08	puVar8	classNextVirtual	INFERRED	per-class next virtual register counter	^\s*puVar7\ =\ puVar8;$	+1
+use	FUN_00131d08	puVar8	classNextVirtual	INFERRED	per-class next virtual register counter	^\s*\*\(undefined4\ \*\)\(iVar3\ \+\ iVar11\)\ =\ puVar8\[iVar4\];$	+2
+use	FUN_00131d08	in_r8	wordOrClassIndex	INFERRED	bit word offset, later reused as the class index (value left in r8)	^\s*in_r8\ =\ uVar9\ >>\ 3\ \&\ 0x1ffffffc;$	+3
+use	FUN_00131d08	in_r8	wordOrClassIndex	INFERRED	bit word offset, later reused as the class index (value left in r8)	^\s*in_r8\ =\ uVar9\ >>\ 3\ \&\ 0x1ffffffc;$@2	+3
+use	FUN_00131d08	in_r8	wordOrClassIndex	INFERRED	bit word offset, later reused as the class index (value left in r8)	^\s*in_r10\ =\ \(int\ \*\)\(1\ <<\ \(uVar9\ \&\ 0x1f\)\ \|\ \*\(uint\ \*\)\(in_r8\ \+\ iVar10\ \+\ 8\)\);$	+2
+use	FUN_00131d08	in_r8	wordOrClassIndex	INFERRED	bit word offset, later reused as the class index (value left in r8)	^\s*in_r8\ =\ 1;$	+1
+use	FUN_00131d08	in_r8	wordOrClassIndex	INFERRED	bit word offset, later reused as the class index (value left in r8)	^\s*iVar3\ =\ in_r8\ \*\ 4;$	+1
+use	FUN_00131d08	in_r8	wordOrClassIndex	INFERRED	bit word offset, later reused as the class index (value left in r8)	^\s*in_r8\ =\ in_r8\ \+\ 1;$	+1
+use	FUN_00131d08	in_r8	wordOrClassIndex	INFERRED	bit word offset, later reused as the class index (value left in r8)	^\s*\}\ while\ \(\(int\)in_r8\ <\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar3\ \+\ 0x30c\)\ \+\ 0x14\)\);$	+1
+use	FUN_00131d08	in_r8	wordOrClassIndex	INFERRED	bit word offset, later reused as the class index (value left in r8)	^\s*in_r8\ =\ 0;$	+1
+use	FUN_00131d08	in_r8	wordOrClassIndex	INFERRED	bit word offset, later reused as the class index (value left in r8)	^\s*return\ FUN_000e0e0c\(\*\(undefined4\ \*\)\(param_1\ \+\ 8\),$	+3
+use	FUN_00131d08	in_r10	bitsetOrCursor	INFERRED	bitset word, later reused as a cursor (value left in r10)	^\s*in_r10\ =\ \(int\ \*\)\(1\ <<\ \(uVar9\ \&\ 0x1f\)\ \|\ \*\(uint\ \*\)\(in_r8\ \+\ iVar10\ \+\ 8\)\);$	+2
+use	FUN_00131d08	in_r10	bitsetOrCursor	INFERRED	bitset word, later reused as a cursor (value left in r10)	^\s*in_r10\ =\ piVar6;$	+1
+use	FUN_00131d08	in_r10	bitsetOrCursor	INFERRED	bitset word, later reused as a cursor (value left in r10)	^\s*iVar10\ =\ \*in_r10;$	+1
+use	FUN_00131d08	in_r10	bitsetOrCursor	INFERRED	bitset word, later reused as a cursor (value left in r10)	^\s*in_r10\ =\ in_r10\ \+\ 1;$	+2
+use	FUN_00131d08	in_r10	bitsetOrCursor	INFERRED	bitset word, later reused as a cursor (value left in r10)	^\s*in_r10\ =\ \(int\ \*\)0x0;$	+1
+use	FUN_00131d08	in_r10	bitsetOrCursor	INFERRED	bitset word, later reused as a cursor (value left in r10)	^\s*in_r10\ =\ \(int\ \*\)\(\(int\)in_r10\ \+\ 1\);$	+1
+use	FUN_00131d08	in_r10	bitsetOrCursor	INFERRED	bitset word, later reused as a cursor (value left in r10)	^\s*\}\ while\ \(\(int\)in_r10\ <\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar4\ \+\ 0x30c\)\ \+\ 0x14\)\);$	+1
+use	FUN_00131d08	in_r10	bitsetOrCursor	INFERRED	bitset word, later reused as a cursor (value left in r10)	^\s*in_r10\ =\ \(int\ \*\)piVar1\[0x25\];$	+1
+use	FUN_00131d08	in_r10	bitsetOrCursor	INFERRED	bitset word, later reused as a cursor (value left in r10)	^\s*iVar3\ =\ \(int\)in_r10\ \*\ 4;$	+1
+use	FUN_00131d08	in_r10	bitsetOrCursor	INFERRED	bitset word, later reused as a cursor (value left in r10)	^\s*\*\(int\ \*\*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x458\)\ \+\ iVar11\)\ =\ in_r10;$	+1
+use	FUN_00131d08	in_r10	bitsetOrCursor	INFERRED	bitset word, later reused as a cursor (value left in r10)	^\s*return\ FUN_000e0e0c\(\*\(undefined4\ \*\)\(param_1\ \+\ 8\),$	+3
+use	FUN_00131d08	uVar9	registerNumber	INFERRED	instruction destination register number (+0x94)	^\s*uVar9\ =\ piVar13\[0x25\];$	+1
+use	FUN_00131d08	uVar9	registerNumber	INFERRED	instruction destination register number (+0x94)	^\s*in_r8\ =\ uVar9\ >>\ 3\ \&\ 0x1ffffffc;$	+3
+use	FUN_00131d08	uVar9	registerNumber	INFERRED	instruction destination register number (+0x94)	^\s*in_r8\ =\ uVar9\ >>\ 3\ \&\ 0x1ffffffc;$@2	+3
+use	FUN_00131d08	uVar9	registerNumber	INFERRED	instruction destination register number (+0x94)	^\s*in_r10\ =\ \(int\ \*\)\(1\ <<\ \(uVar9\ \&\ 0x1f\)\ \|\ \*\(uint\ \*\)\(in_r8\ \+\ iVar10\ \+\ 8\)\);$	+1
+use	FUN_00131d08	iVar10	compilerC	INFERRED	program->compiler	^\s*iVar10\ =\ \*\(int\ \*\)\(param_1\ \+\ 8\);$	+2
+use	FUN_00131d08	iVar10	compilerC	INFERRED	program->compiler	^\s*uVar5\ =\ \*\(undefined4\ \*\)\(iVar10\ \+\ 0x378\);$	+1
+use	FUN_00131d08	iVar10	compilerC	INFERRED	program->compiler	^\s*iVar10\ =\ \*\(int\ \*\)\(param_1\ \+\ 8\);$@2	+1
+use	FUN_00131d08	iVar10	compilerC	INFERRED	program->compiler	^\s*\}\ while\ \(iVar11\ <\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar10\ \+\ 0x30c\)\ \+\ 0x14\)\);$	+1
+use	FUN_00131d08	iVar10	compilerC	INFERRED	program->compiler	^\s*iVar10\ =\ \*\(int\ \*\)\(param_1\ \+\ 8\);$@3	+1
+use	FUN_00131d08	iVar10	compilerC	INFERRED	program->compiler	^\s*iVar12\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar10\ \+\ 0x30c\)\ \+\ 0x14\);$	+1
+use	FUN_00131d08	iVar10	compilerC	INFERRED	program->compiler	^\s*iVar10\ =\ \*\(int\ \*\)\(param_1\ \+\ 8\);$@4	+1
+use	FUN_00131d08	iVar10	compilerC	INFERRED	program->compiler	^\s*FUN_00193cc0\(\*\(undefined4\ \*\)\(iVar10\ \+\ 0x378\),iVar4\);$	+1
+use	FUN_00131d08	iVar10	wordCountdown	INFERRED	countdown from 0x80 over the new bitset table	^\s*iVar10\ =\ 0x80;$	+1
+use	FUN_00131d08	iVar10	wordCountdown	INFERRED	countdown from 0x80 over the new bitset table	^\s*iVar10\ =\ iVar10\ \+\ \-1;$	+2
+use	FUN_00131d08	iVar10	wordCountdown	INFERRED	countdown from 0x80 over the new bitset table	^\s*iVar10\ =\ 0x80;$@2	+1
+use	FUN_00131d08	iVar10	wordCountdown	INFERRED	countdown from 0x80 over the new bitset table	^\s*iVar10\ =\ iVar10\ \+\ \-1;$@2	+2
+use	FUN_00131d08	iVar10	nextBlockC	INFERRED	next block saved	^\s*iVar10\ =\ iVar11;$	+1
+use	FUN_00131d08	iVar10	nextBlockC	INFERRED	next block saved	^\s*iVar10\ =\ \*\(int\ \*\)\(iVar12\ \+\ 8\);$	+1
+use	FUN_00131d08	iVar10	nextBlockC	INFERRED	next block saved	^\s*iVar11\ =\ \*\(int\ \*\)\(iVar10\ \+\ 8\);$	+3
+use	FUN_00131d08	iVar10	regKindFlagB	INFERRED	RegKind flag test of the destination register kind	^\s*iVar10\ =\ FUN_00126760\(piVar13\[0x26\]\);$	+4
+use	FUN_00131d08	iVar10	regClassB	INFERRED	FUN_00130bfc: register class of the instruction	^\s*iVar10\ =\ FUN_00130bfc\(param_1,piVar13\);$	+1
+use	FUN_00131d08	iVar10	regClassB	INFERRED	FUN_00130bfc: register class of the instruction	^\s*iVar10\ =\ iVar10\ \*\ 4;$	+1
+use	FUN_00131d08	iVar10	regClassB	INFERRED	FUN_00130bfc: register class of the instruction	^\s*if\ \(\(\*\(uint\ \*\)\(in_r8\ \+\ \*\(int\ \*\)\(iVar4\ \+\ iVar10\)\ \+\ 8\)\ >>\ \(uVar9\ \&\ 0x1f\)\ \&\ 1\)\ !=\ 0\)$	+2
+use	FUN_00131d08	iVar10	regClassB	INFERRED	FUN_00130bfc: register class of the instruction	^\s*\*\(int\ \*\)\(iVar10\ \+\ iVar11\)\ =\ \*\(int\ \*\)\(iVar10\ \+\ iVar11\)\ \+\ 1;$	+2
+use	FUN_00131d08	iVar10	regClassB	INFERRED	FUN_00130bfc: register class of the instruction	^\s*iVar10\ =\ iVar10\ \*\ 4;$@2	+1
+use	FUN_00131d08	iVar10	regClassB	INFERRED	FUN_00130bfc: register class of the instruction	^\s*if\ \(\(\*\(uint\ \*\)\(in_r8\ \+\ \*\(int\ \*\)\(iVar3\ \+\ iVar10\)\ \+\ 8\)\ >>\ \(uVar9\ \&\ 0x1f\)\ \&\ 1\)\ !=\ 0\)$	+2
+use	FUN_00131d08	iVar10	regClassB	INFERRED	FUN_00130bfc: register class of the instruction	^\s*\*\(int\ \*\)\(iVar10\ \+\ iVar11\)\ =\ \*\(int\ \*\)\(iVar10\ \+\ iVar11\)\ \+\ 1;$@2	+2
+use	FUN_00131d08	iVar10	regClassB	INFERRED	FUN_00130bfc: register class of the instruction	^\s*in_r10\ =\ \(int\ \*\)\(1\ <<\ \(uVar9\ \&\ 0x1f\)\ \|\ \*\(uint\ \*\)\(in_r8\ \+\ iVar10\ \+\ 8\)\);$	+2
+use	FUN_00131d08	iVar10	classIndexCounter	INFERRED	counter over the register classes	^\s*iVar10\ =\ 0;$	+1
+use	FUN_00131d08	iVar10	classIndexCounter	INFERRED	counter over the register classes	^\s*iVar10\ =\ iVar10\ \+\ 1;$	+1
+use	FUN_00131d08	iVar10	classIndexCounter	INFERRED	counter over the register classes	^\s*\}\ while\ \(iVar12\ !=\ iVar10\);$	+1
+use	FUN_00131d08	iVar10	prefixPrevious	INFERRED	previous prefix sum entry	^\s*iVar10\ =\ \*in_r10;$	+1
+use	FUN_00131d08	iVar10	prefixPrevious	INFERRED	previous prefix sum entry	^\s*\*in_r10\ =\ iVar10\ \+\ \*\(int\ \*\)\(iVar3\ \+\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x3c0\)\ \+\ 0x14\)\ \+\ \-4\);$	+1
+use	FUN_00131d08	iVar10	blockCursorC	INFERRED	block being walked	^\s*iVar10\ =\ \*\(int\ \*\)\(param_1\ \+\ 900\);$	+1
+use	FUN_00131d08	iVar10	blockCursorC	INFERRED	block being walked	^\s*piVar13\ =\ \(int\ \*\)\(\*\(int\ \*\*\)\(iVar10\ \+\ 0x98\)\)\[2\];$	+2
+use	FUN_00131d08	iVar10	blockCursorC	INFERRED	block being walked	^\s*iVar4\ =\ \*\(int\ \*\)\(iVar10\ \+\ 8\);$	+1
+use	FUN_00131d08	iVar10	blockCursorC	INFERRED	block being walked	^\s*iVar10\ =\ iVar4;$	+1
+use	FUN_00131d08	piVar13	instC	INFERRED	instruction being scanned	^\s*piVar13\ =\ \*\(int\ \*\*\)\(iVar12\ \+\ 0x98\);$	+3
+use	FUN_00131d08	piVar13	instC	INFERRED	instruction being scanned	^\s*if\ \(\(\(piVar13\[5\]\ \&\ 1U\)\ !=\ 0\)\ \&\&\ \(piVar13\[0x20\]\ !=\ 0\)\)\ \{$	+5
+use	FUN_00131d08	piVar13	instC	INFERRED	instruction being scanned	^\s*piVar1\ =\ \(int\ \*\)piVar13\[2\];$	+1
+use	FUN_00131d08	piVar13	instC	INFERRED	instruction being scanned	^\s*iVar10\ =\ FUN_00130bfc\(param_1,piVar13\);$	+3
+use	FUN_00131d08	piVar13	instC	INFERRED	instruction being scanned	^\s*piVar1\ =\ \(int\ \*\)piVar13\[2\];$@2	+1
+use	FUN_00131d08	piVar13	instC	INFERRED	instruction being scanned	^\s*piVar13\ =\ piVar1;$	+1
+use	FUN_00131d08	piVar13	physicalSetCursor	INFERRED	cursor over the per-class physical bitsets	^\s*piVar13\ =\ \(int\ \*\)\(iVar3\ \+\ iVar11\);$	+1
+use	FUN_00131d08	piVar13	physicalSetCursor	INFERRED	cursor over the per-class physical bitsets	^\s*iVar11\ =\ \*piVar13;$	+1
+use	FUN_00131d08	piVar13	physicalSetCursor	INFERRED	cursor over the per-class physical bitsets	^\s*piVar13\ =\ piVar13\ \+\ \-1;$	+1
+use	FUN_00131d08	piVar13	instNextC	INFERRED	next instruction in the block	^\s*piVar13\ =\ \(int\ \*\)\(\*\(int\ \*\*\)\(iVar10\ \+\ 0x98\)\)\[2\];$	+1
+use	FUN_00131d08	piVar13	instNextC	INFERRED	next instruction in the block	^\s*if\ \(piVar13\ !=\ \(int\ \*\)0x0\)\ \{$	+1
+use	FUN_00131d08	piVar13	instNextC	INFERRED	next instruction in the block	^\s*piVar2\ =\ piVar13;$	+1
+use	FUN_00131d08	piVar13	instNextC	INFERRED	next instruction in the block	^\s*piVar13\ =\ \(int\ \*\)piVar2\[2\];$	+1
+use	FUN_00131d08	puVar7	zeroCursor	INFERRED	cursor clearing the per-class virtual counters	^\s*puVar7\ =\ puVar8;$	+1
+use	FUN_00131d08	puVar7	zeroCursor	INFERRED	cursor clearing the per-class virtual counters	^\s*\*puVar7\ =\ 0;$	+1
+use	FUN_00131d08	puVar7	zeroCursor	INFERRED	cursor clearing the per-class virtual counters	^\s*puVar7\ =\ puVar7\ \+\ 1;$	+1
+use	FUN_00131d08	uVar5	logTrailingArg	INFERRED	zero passed as a trailing log argument	^\s*uVar5\ =\ 0;$	+1
+use	FUN_00131d08	uVar5	logTrailingArg	INFERRED	zero passed as a trailing log argument	^\s*return\ FUN_000e0e0c\(\*\(undefined4\ \*\)\(param_1\ \+\ 8\),$	+3
