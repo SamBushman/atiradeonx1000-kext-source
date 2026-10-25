@@ -1,11 +1,31 @@
 #include "decls.h"
 
 /* ILReader__decodeInstruction @ 0xe4c40 (1764 bytes) */
-int ILReader__decodeInstruction(ilReader, param_2, param_3)
+int ILReader__decodeInstruction(ilReader, tokenIndexPtr, compiler)
   int ilReader;
-  int *param_2;
-  int param_3;
+  int *tokenIndexPtr;
+  int compiler;
 {
+  int *sourceRecord;
+  uint sourceModifierFlags;
+  uint sourceFlags;
+  uint extraWordFlag;
+  uint destModifierFlags;
+  uint destFlags;
+  int sourceStartIndex;
+  int destReplicaCount;
+  int sourceCopyOffset;
+  int sourceByteIndex;
+  int sourceReplicaOffset;
+  int sourceReplicaCount;
+  int sourceSlotOffset;
+  int sourceCount;
+  int extraTokenCount;
+  int streamCursor;
+  int opcodeClass;
+  int tailIndex;
+  int destCount;
+  int extraWordCount;
   int loopIndex6;
   int loopIndex4;
   int loopIndex3;
@@ -13,31 +33,31 @@ int ILReader__decodeInstruction(ilReader, param_2, param_3)
   int loopIndex2;
   int loopIndex7;
   int loopIndex5;
-  int *piVar1;
-  short sVar2;
-  uint uVar3;
-  uint uVar4;
-  int iVar5;
-  undefined4 uVar6;
-  undefined4 uVar7;
-  int iVar8;
-  int iVar9;
-  int iVar10;
-  int iVar11;
-  int iVar12;
-  int iVar13;
-  int iVar14;
-  uint *puVar15;
-  int iVar16;
-  int iVar17;
-  int iVar18;
-  int iVar19;
+  int *destRecord;
+  short replicaNumber;
+  uint tokenWord;
+  uint repeatIndex;
+  int streamBase;
+  undefined4 opcode;
+  undefined4 trailingTokenCount;
+  int loopCountToken;
+  int sourceCopyAddress;
+  int tokenIndex;
+  int fetchIndex;
+  int operandStartIndex;
+  int destModifierSlot;
+  int destRecordOffset;
+  uint *tokenWindow;
+  int destTokenSlot;
+  int destCopyOffset;
+  int sourceTokenSlot;
+  int sourceModifierSlot;
   
   *(undefined4 *)(ilReader + 0x60) = 0;
-  iVar10 = *param_2;
-  *param_2 = iVar10 + 1;
-  iVar10 = ILReader__fetchToken(ilReader,iVar10);
-  if (iVar10 == 0) {
+  tokenIndex = *tokenIndexPtr;
+  *tokenIndexPtr = tokenIndex + 1;
+  tokenIndex = ILReader__fetchToken(ilReader,tokenIndex);
+  if (tokenIndex == 0) {
     *(int *)(ilReader + 0x34) = *(int *)(ilReader + 0x34) + 1;
     if ((*(int *)(ilReader + 0x30) != 0) && (*(int *)(ilReader + 0x84) == 0)) {
       *(undefined4 *)(ilReader + 0x84) = 1;
@@ -47,36 +67,36 @@ int ILReader__decodeInstruction(ilReader, param_2, param_3)
     }
     return 0;
   }
-  uVar6 = ILReader__currentOpcode(ilReader);
-  puVar15 = (uint *)(ilReader + 0x8c);
-  iVar10 = FUN_000f89a4(uVar6,*(undefined4 *)(*(int *)(param_3 + 0x30c) + 0xc));
-  if (iVar10 == 6) {
+  opcode = ILReader__currentOpcode(ilReader);
+  tokenWindow = (uint *)(ilReader + 0x8c);
+  opcodeClass = FUN_000f89a4(opcode,*(undefined4 *)(*(int *)(compiler + 0x30c) + 0xc));
+  if (opcodeClass == 6) {
     *(ushort *)(ilReader + 0x8e) =
          ((ushort)((uint)*(undefined4 *)(ilReader + 0x8c) >> 0x10) & 0x3fff) + 0xcf;
-    uVar6 = ILReader__currentOpcode(ilReader);
+    opcode = ILReader__currentOpcode(ilReader);
   }
-  switch(uVar6) {
+  switch(opcode) {
   case 0x76:
-    if ((int)*puVar15 < 0) {
-      iVar5 = *(int *)(ilReader + 0x28);
+    if ((int)*tokenWindow < 0) {
+      streamBase = *(int *)(ilReader + 0x28);
       *(undefined4 *)(ilReader + 0x58) = 2;
-      iVar11 = *param_2;
-      iVar10 = *(int *)(ilReader + 0x74);
-      *param_2 = iVar11 + 1;
-      ILReader__fetchToken(ilReader,iVar11);
-      iVar11 = *param_2;
+      fetchIndex = *tokenIndexPtr;
+      streamCursor = *(int *)(ilReader + 0x74);
+      *tokenIndexPtr = fetchIndex + 1;
+      ILReader__fetchToken(ilReader,fetchIndex);
+      fetchIndex = *tokenIndexPtr;
       loopIndex7 = 0;
-      iVar8 = *(int *)(iVar11 * 4 + ilReader + 0x88);
-      if (0 < iVar8) {
+      loopCountToken = *(int *)(fetchIndex * 4 + ilReader + 0x88);
+      if (0 < loopCountToken) {
         while( true ) {
           loopIndex7 = loopIndex7 + 1;
-          ILReader__fetchToken(ilReader,iVar11);
-          if (iVar8 == loopIndex7) break;
-          iVar11 = *param_2;
+          ILReader__fetchToken(ilReader,fetchIndex);
+          if (loopCountToken == loopIndex7) break;
+          fetchIndex = *tokenIndexPtr;
         }
-        iVar11 = *param_2;
+        fetchIndex = *tokenIndexPtr;
       }
-      *(int *)(iVar11 * 4 + ilReader + 0x8c) = iVar10 - iVar5 >> 2;
+      *(int *)(fetchIndex * 4 + ilReader + 0x8c) = streamCursor - streamBase >> 2;
       return 1;
     }
     break;
@@ -95,7 +115,7 @@ int ILReader__decodeInstruction(ilReader, param_2, param_3)
   case 0x84:
   case 0x85:
   case 0x89:
-    uVar3 = *puVar15;
+    tokenWord = *tokenWindow;
     goto LAB_000e4e4c;
   case 0x7d:
     break;
@@ -105,217 +125,217 @@ int ILReader__decodeInstruction(ilReader, param_2, param_3)
   case 0x8b:
   case 0x8c:
   case 0x8d:
-    uVar3 = *puVar15;
-    if ((uVar3 & 0x20000000) == 0) goto LAB_000e4e4c;
-    iVar5 = 2;
+    tokenWord = *tokenWindow;
+    if ((tokenWord & 0x20000000) == 0) goto LAB_000e4e4c;
+    extraWordCount = 2;
     *(undefined4 *)(ilReader + 0x60) = 1;
-    uVar3 = *puVar15;
+    tokenWord = *tokenWindow;
     goto LAB_000e4e50;
   case 0x87:
-    iVar10 = 1;
+    extraTokenCount = 1;
     goto LAB_000e4e74;
   default:
-    uVar3 = *(uint *)(ilReader + 0x8c);
+    tokenWord = *(uint *)(ilReader + 0x8c);
 LAB_000e4e4c:
-    iVar5 = 1;
+    extraWordCount = 1;
 LAB_000e4e50:
-    if ((int)uVar3 < 0) {
-      iVar5 = iVar5 + 1;
+    if ((int)tokenWord < 0) {
+      extraWordCount = extraWordCount + 1;
     }
-    iVar10 = iVar5 + -1;
-    if ((uVar3 & 0x40000000) != 0) {
-      iVar10 = iVar5;
+    extraTokenCount = extraWordCount + -1;
+    if ((tokenWord & 0x40000000) != 0) {
+      extraTokenCount = extraWordCount;
     }
-    if (0 < iVar10) {
+    if (0 < extraTokenCount) {
 LAB_000e4e74:
       loopIndex6 = 0;
       do {
-        iVar11 = *param_2;
+        fetchIndex = *tokenIndexPtr;
         loopIndex6 = loopIndex6 + 1;
-        *param_2 = iVar11 + 1;
-        ILReader__fetchToken(ilReader,iVar11);
-      } while (iVar10 != loopIndex6);
+        *tokenIndexPtr = fetchIndex + 1;
+        ILReader__fetchToken(ilReader,fetchIndex);
+      } while (extraTokenCount != loopIndex6);
     }
   }
-  iVar5 = FUN_000f8960(uVar6,*(undefined4 *)(*(int *)(param_3 + 0x30c) + 0xc));
-  iVar11 = FUN_000f8970(uVar6,*(undefined4 *)(*(int *)(param_3 + 0x30c) + 0xc));
-  uVar7 = FUN_000f8994(uVar6,*(undefined4 *)(*(int *)(param_3 + 0x30c) + 0xc));
-  *(undefined4 *)(ilReader + 0x5c) = uVar7;
-  iVar8 = FUN_000e4710(uVar6,0,*(undefined4 *)(*(int *)(param_3 + 0x30c) + 0xc));
-  iVar12 = *param_2;
-  iVar10 = iVar12;
-  if (iVar5 < 1) goto LAB_000e50f4;
-  **(int **)(ilReader + 100) = iVar12 * 4 + ilReader + 0x8c;
-  iVar10 = *param_2;
-  *param_2 = iVar10 + 1;
-  ILReader__fetchToken(ilReader,iVar10);
-  iVar10 = *param_2;
-  iVar16 = ilReader + iVar10 * 4 + 0x7c;
-  uVar3 = *(uint *)(iVar16 + 0xc);
-  if ((uVar3 & 0x400000) != 0) {
-    *param_2 = iVar10 + 1;
-    ILReader__fetchToken(ilReader,iVar10);
-    iVar10 = *param_2;
-    uVar3 = *(uint *)(iVar16 + 0xc);
+  destCount = FUN_000f8960(opcode,*(undefined4 *)(*(int *)(compiler + 0x30c) + 0xc));
+  sourceCount = FUN_000f8970(opcode,*(undefined4 *)(*(int *)(compiler + 0x30c) + 0xc));
+  trailingTokenCount = FUN_000f8994(opcode,*(undefined4 *)(*(int *)(compiler + 0x30c) + 0xc));
+  *(undefined4 *)(ilReader + 0x5c) = trailingTokenCount;
+  destReplicaCount = FUN_000e4710(opcode,0,*(undefined4 *)(*(int *)(compiler + 0x30c) + 0xc));
+  operandStartIndex = *tokenIndexPtr;
+  tokenIndex = operandStartIndex;
+  if (destCount < 1) goto LAB_000e50f4;
+  **(int **)(ilReader + 100) = operandStartIndex * 4 + ilReader + 0x8c;
+  tokenIndex = *tokenIndexPtr;
+  *tokenIndexPtr = tokenIndex + 1;
+  ILReader__fetchToken(ilReader,tokenIndex);
+  tokenIndex = *tokenIndexPtr;
+  destTokenSlot = ilReader + tokenIndex * 4 + 0x7c;
+  destFlags = *(uint *)(destTokenSlot + 0xc);
+  if ((destFlags & 0x400000) != 0) {
+    *tokenIndexPtr = tokenIndex + 1;
+    ILReader__fetchToken(ilReader,tokenIndex);
+    tokenIndex = *tokenIndexPtr;
+    destFlags = *(uint *)(destTokenSlot + 0xc);
   }
-  if ((uVar3 & 0x23f0000) == 0x21e0000) {
-    *param_2 = iVar10 + 1;
-    ILReader__fetchToken(ilReader,iVar10);
-    uVar3 = *(uint *)(iVar16 + 0xc);
-    iVar10 = *param_2;
+  if ((destFlags & 0x23f0000) == 0x21e0000) {
+    *tokenIndexPtr = tokenIndex + 1;
+    ILReader__fetchToken(ilReader,tokenIndex);
+    destFlags = *(uint *)(destTokenSlot + 0xc);
+    tokenIndex = *tokenIndexPtr;
   }
-  if ((uVar3 & 0x1800000) == 0x800000) {
+  if ((destFlags & 0x1800000) == 0x800000) {
 LAB_000e5044:
-    *param_2 = iVar10 + 1;
-    ILReader__fetchToken(ilReader,iVar10);
-    iVar10 = *param_2;
+    *tokenIndexPtr = tokenIndex + 1;
+    ILReader__fetchToken(ilReader,tokenIndex);
+    tokenIndex = *tokenIndexPtr;
   }
-  else if ((uVar3 & 0x1800000) == 0x1000000) {
-    *param_2 = iVar10 + 1;
-    ILReader__fetchToken(ilReader,iVar10);
-    iVar10 = *param_2;
-    iVar13 = ilReader + iVar10 * 4 + 0x7c;
-    uVar3 = *(uint *)(iVar13 + 0xc);
-    if ((uVar3 & 0x400000) != 0) {
-      *param_2 = iVar10 + 1;
-      ILReader__fetchToken(ilReader,iVar10);
-      iVar10 = *param_2;
-      uVar3 = *(uint *)(iVar13 + 0xc);
+  else if ((destFlags & 0x1800000) == 0x1000000) {
+    *tokenIndexPtr = tokenIndex + 1;
+    ILReader__fetchToken(ilReader,tokenIndex);
+    tokenIndex = *tokenIndexPtr;
+    destModifierSlot = ilReader + tokenIndex * 4 + 0x7c;
+    destModifierFlags = *(uint *)(destModifierSlot + 0xc);
+    if ((destModifierFlags & 0x400000) != 0) {
+      *tokenIndexPtr = tokenIndex + 1;
+      ILReader__fetchToken(ilReader,tokenIndex);
+      tokenIndex = *tokenIndexPtr;
+      destModifierFlags = *(uint *)(destModifierSlot + 0xc);
     }
-    if (((uVar3 & 0x1800000) == 0) && (uVar4 = 0, (uVar3 & 0x2000000) != 0)) {
+    if (((destModifierFlags & 0x1800000) == 0) && (repeatIndex = 0, (destModifierFlags & 0x2000000) != 0)) {
       while( true ) {
-        *param_2 = iVar10 + 1;
-        ILReader__fetchToken(ilReader,iVar10);
-        uVar3 = *(uint *)(iVar13 + 0xc);
-        uVar4 = uVar4 + 1;
-        if ((uVar3 >> 0x19 & 1) <= uVar4) break;
-        iVar10 = *param_2;
+        *tokenIndexPtr = tokenIndex + 1;
+        ILReader__fetchToken(ilReader,tokenIndex);
+        destModifierFlags = *(uint *)(destModifierSlot + 0xc);
+        repeatIndex = repeatIndex + 1;
+        if ((destModifierFlags >> 0x19 & 1) <= repeatIndex) break;
+        tokenIndex = *tokenIndexPtr;
       }
-      iVar10 = *param_2;
+      tokenIndex = *tokenIndexPtr;
     }
     else {
-      uVar3 = *(uint *)(iVar13 + 0xc);
+      destModifierFlags = *(uint *)(destModifierSlot + 0xc);
     }
-    if ((uVar3 & 0x4000000) != 0) goto LAB_000e5044;
+    if ((destModifierFlags & 0x4000000) != 0) goto LAB_000e5044;
   }
-  if ((*(uint *)(iVar16 + 0xc) & 0x4000000) != 0) {
-    *param_2 = iVar10 + 1;
-    ILReader__fetchToken(ilReader,iVar10);
-    iVar10 = *param_2;
+  if ((*(uint *)(destTokenSlot + 0xc) & 0x4000000) != 0) {
+    *tokenIndexPtr = tokenIndex + 1;
+    ILReader__fetchToken(ilReader,tokenIndex);
+    tokenIndex = *tokenIndexPtr;
   }
-  if (0 < iVar8) {
+  if (0 < destReplicaCount) {
     loopIndex2 = 0;
-    iVar14 = 0x14;
-    iVar17 = 100;
+    destRecordOffset = 0x14;
+    destCopyOffset = 100;
     do {
-      *(int *)(iVar14 + *(int *)(ilReader + 100)) = iVar17 + *(int *)(ilReader + 0x68);
-      _memcpy(iVar17 + *(int *)(ilReader + 0x68),**(undefined4 **)(ilReader + 100),
-              (iVar10 - iVar12) * 4);
-      iVar17 = iVar17 + 100;
-      sVar2 = (short)loopIndex2;
+      *(int *)(destRecordOffset + *(int *)(ilReader + 100)) = destCopyOffset + *(int *)(ilReader + 0x68);
+      _memcpy(destCopyOffset + *(int *)(ilReader + 0x68),**(undefined4 **)(ilReader + 100),
+              (tokenIndex - operandStartIndex) * 4);
+      destCopyOffset = destCopyOffset + 100;
+      replicaNumber = (short)loopIndex2;
       loopIndex2 = loopIndex2 + 1;
-      piVar1 = (int *)(iVar14 + *(int *)(ilReader + 100));
-      iVar14 = iVar14 + 0x14;
-      *(short *)(*piVar1 + 2) = sVar2 + *(short *)(iVar16 + 0xe) + 1;
-    } while (iVar8 != loopIndex2);
-    iVar10 = *param_2;
+      destRecord = (int *)(destRecordOffset + *(int *)(ilReader + 100));
+      destRecordOffset = destRecordOffset + 0x14;
+      *(short *)(*destRecord + 2) = replicaNumber + *(short *)(destTokenSlot + 0xe) + 1;
+    } while (destReplicaCount != loopIndex2);
+    tokenIndex = *tokenIndexPtr;
   }
 LAB_000e50f4:
-  if (0 < iVar11) {
+  if (0 < sourceCount) {
     loopIndex = 0;
-    iVar12 = 0x14;
-    iVar8 = iVar10;
+    sourceSlotOffset = 0x14;
+    sourceStartIndex = tokenIndex;
     do {
-      iVar13 = loopIndex * 4;
-      iVar14 = FUN_000e4710(uVar6,iVar5 + loopIndex,*(undefined4 *)(*(int *)(param_3 + 0x30c) + 0xc));
-      *(int *)(*(int *)(ilReader + 0x6c) + iVar13) = iVar8 * 4 + ilReader + 0x8c;
-      iVar10 = *param_2;
-      *param_2 = iVar10 + 1;
-      ILReader__fetchToken(ilReader,iVar10);
-      uVar3 = **(uint **)(iVar13 + *(int *)(ilReader + 0x6c)) >> 0x19 & 1;
-      if (uVar3 == 0xffffffff) {
-        iVar10 = *param_2;
+      sourceByteIndex = loopIndex * 4;
+      sourceReplicaCount = FUN_000e4710(opcode,destCount + loopIndex,*(undefined4 *)(*(int *)(compiler + 0x30c) + 0xc));
+      *(int *)(*(int *)(ilReader + 0x6c) + sourceByteIndex) = sourceStartIndex * 4 + ilReader + 0x8c;
+      tokenIndex = *tokenIndexPtr;
+      *tokenIndexPtr = tokenIndex + 1;
+      ILReader__fetchToken(ilReader,tokenIndex);
+      extraWordFlag = **(uint **)(sourceByteIndex + *(int *)(ilReader + 0x6c)) >> 0x19 & 1;
+      if (extraWordFlag == 0xffffffff) {
+        tokenIndex = *tokenIndexPtr;
       }
       else {
-        iVar10 = *param_2;
+        tokenIndex = *tokenIndexPtr;
         loopIndex3 = 0;
 LAB_000e5190:
-        iVar18 = ilReader + iVar10 * 4 + 0x7c;
-        uVar4 = *(uint *)(iVar18 + 0xc);
-        if ((uVar4 & 0x400000) != 0) {
-          *param_2 = iVar10 + 1;
-          ILReader__fetchToken(ilReader,iVar10);
-          uVar4 = *(uint *)(iVar18 + 0xc);
-          iVar10 = *param_2;
+        sourceTokenSlot = ilReader + tokenIndex * 4 + 0x7c;
+        sourceFlags = *(uint *)(sourceTokenSlot + 0xc);
+        if ((sourceFlags & 0x400000) != 0) {
+          *tokenIndexPtr = tokenIndex + 1;
+          ILReader__fetchToken(ilReader,tokenIndex);
+          sourceFlags = *(uint *)(sourceTokenSlot + 0xc);
+          tokenIndex = *tokenIndexPtr;
         }
-        uVar4 = uVar4 & 0x1800000;
-        if (uVar4 != 0) {
-          if (uVar4 == 0x800000) {
+        sourceFlags = sourceFlags & 0x1800000;
+        if (sourceFlags != 0) {
+          if (sourceFlags == 0x800000) {
 LAB_000e523c:
-            *param_2 = iVar10 + 1;
-            ILReader__fetchToken(ilReader,iVar10);
-            iVar10 = *param_2;
+            *tokenIndexPtr = tokenIndex + 1;
+            ILReader__fetchToken(ilReader,tokenIndex);
+            tokenIndex = *tokenIndexPtr;
           }
-          else if (uVar4 == 0x1000000) {
-            *param_2 = iVar10 + 1;
-            ILReader__fetchToken(ilReader,iVar10);
-            iVar10 = *param_2;
-            iVar19 = ilReader + iVar10 * 4 + 0x7c;
-            uVar4 = *(uint *)(iVar19 + 0xc);
-            if ((uVar4 & 0x400000) != 0) {
-              *param_2 = iVar10 + 1;
-              ILReader__fetchToken(ilReader,iVar10);
-              uVar4 = *(uint *)(iVar19 + 0xc);
-              iVar10 = *param_2;
+          else if (sourceFlags == 0x1000000) {
+            *tokenIndexPtr = tokenIndex + 1;
+            ILReader__fetchToken(ilReader,tokenIndex);
+            tokenIndex = *tokenIndexPtr;
+            sourceModifierSlot = ilReader + tokenIndex * 4 + 0x7c;
+            sourceModifierFlags = *(uint *)(sourceModifierSlot + 0xc);
+            if ((sourceModifierFlags & 0x400000) != 0) {
+              *tokenIndexPtr = tokenIndex + 1;
+              ILReader__fetchToken(ilReader,tokenIndex);
+              sourceModifierFlags = *(uint *)(sourceModifierSlot + 0xc);
+              tokenIndex = *tokenIndexPtr;
             }
-            if ((uVar4 & 0x4000000) != 0) goto LAB_000e523c;
+            if ((sourceModifierFlags & 0x4000000) != 0) goto LAB_000e523c;
           }
         }
-        if ((*(uint *)(iVar18 + 0xc) & 0x4000000) != 0) {
-          *param_2 = iVar10 + 1;
-          ILReader__fetchToken(ilReader,iVar10);
-          iVar10 = *param_2;
+        if ((*(uint *)(sourceTokenSlot + 0xc) & 0x4000000) != 0) {
+          *tokenIndexPtr = tokenIndex + 1;
+          ILReader__fetchToken(ilReader,tokenIndex);
+          tokenIndex = *tokenIndexPtr;
         }
         loopIndex3 = loopIndex3 + 1;
-        if (loopIndex3 != uVar3 + 1) {
+        if (loopIndex3 != extraWordFlag + 1) {
           if (0 < loopIndex3) {
-            *param_2 = iVar10 + 1;
-            ILReader__fetchToken(ilReader,iVar10);
-            iVar10 = *param_2;
+            *tokenIndexPtr = tokenIndex + 1;
+            ILReader__fetchToken(ilReader,tokenIndex);
+            tokenIndex = *tokenIndexPtr;
           }
           goto LAB_000e5190;
         }
       }
-      if (0 < iVar14) {
-        iVar19 = iVar12 * 5;
+      if (0 < sourceReplicaCount) {
+        sourceCopyOffset = sourceSlotOffset * 5;
         loopIndex4 = 0;
-        iVar17 = iVar12;
+        sourceReplicaOffset = sourceSlotOffset;
         do {
-          *(int *)(*(int *)(ilReader + 0x6c) + iVar17) = iVar19 + *(int *)(ilReader + 0x70);
-          iVar9 = iVar19 + *(int *)(ilReader + 0x70);
-          iVar19 = iVar19 + 100;
-          _memcpy(iVar9,*(undefined4 *)(iVar13 + *(int *)(ilReader + 0x6c)),(iVar10 - iVar8) * 4);
-          piVar1 = (int *)(*(int *)(ilReader + 0x6c) + iVar17);
-          iVar17 = iVar17 + 0x14;
-          sVar2 = (short)loopIndex4;
+          *(int *)(*(int *)(ilReader + 0x6c) + sourceReplicaOffset) = sourceCopyOffset + *(int *)(ilReader + 0x70);
+          sourceCopyAddress = sourceCopyOffset + *(int *)(ilReader + 0x70);
+          sourceCopyOffset = sourceCopyOffset + 100;
+          _memcpy(sourceCopyAddress,*(undefined4 *)(sourceByteIndex + *(int *)(ilReader + 0x6c)),(tokenIndex - sourceStartIndex) * 4);
+          sourceRecord = (int *)(*(int *)(ilReader + 0x6c) + sourceReplicaOffset);
+          sourceReplicaOffset = sourceReplicaOffset + 0x14;
+          replicaNumber = (short)loopIndex4;
           loopIndex4 = loopIndex4 + 1;
-          *(short *)(*piVar1 + 2) =
-               sVar2 + *(short *)(*(int *)(iVar13 + *(int *)(ilReader + 0x6c)) + 2) + 1;
-        } while (iVar14 != loopIndex4);
-        iVar10 = *param_2;
+          *(short *)(*sourceRecord + 2) =
+               replicaNumber + *(short *)(*(int *)(sourceByteIndex + *(int *)(ilReader + 0x6c)) + 2) + 1;
+        } while (sourceReplicaCount != loopIndex4);
+        tokenIndex = *tokenIndexPtr;
       }
       loopIndex = loopIndex + 1;
-      iVar12 = iVar12 + 4;
-      iVar8 = iVar10;
-    } while (iVar11 != loopIndex);
+      sourceSlotOffset = sourceSlotOffset + 4;
+      sourceStartIndex = tokenIndex;
+    } while (sourceCount != loopIndex);
   }
-  *(int *)(ilReader + 0x58) = iVar10;
+  *(int *)(ilReader + 0x58) = tokenIndex;
   if (0 < *(int *)(ilReader + 0x5c)) {
     loopIndex5 = 0;
     do {
-      iVar5 = *param_2;
-      *param_2 = iVar5 + 1;
-      ILReader__fetchToken(ilReader,iVar5);
+      tailIndex = *tokenIndexPtr;
+      *tokenIndexPtr = tailIndex + 1;
+      ILReader__fetchToken(ilReader,tailIndex);
       loopIndex5 = loopIndex5 + 1;
     } while (loopIndex5 < *(int *)(ilReader + 0x5c));
   }
@@ -323,13 +343,13 @@ LAB_000e523c:
 }
 
 /* ILReader__beginRewrittenReplay_e5384 @ 0xe5384 (248 bytes) */
-int ILReader__beginRewrittenReplay_e5384(ilReader, opcodeToken, tokenIndex, replacementToken, argR7, param_6)
+int ILReader__beginRewrittenReplay_e5384(ilReader, opcodeToken, tokenIndex, replacementToken, argR7, unusedR8)
   int ilReader;
   undefined4 opcodeToken;
   int tokenIndex;
   undefined4 replacementToken;
   undefined4 argR7;
-  undefined4 param_6;
+  undefined4 unusedR8;
 {
   undefined4 windowToken;
   int loopIndex;
@@ -377,13 +397,13 @@ int ILReader__beginRewrittenReplay_e5384(ilReader, opcodeToken, tokenIndex, repl
 }
 
 /* ILReader__beginRewrittenReplay_e547c @ 0xe547c (244 bytes) */
-int ILReader__beginRewrittenReplay_e547c(ilReader, opcodeToken, tokenIndex, replacementToken, argR7, param_6)
+int ILReader__beginRewrittenReplay_e547c(ilReader, opcodeToken, tokenIndex, replacementToken, argR7, unusedR8)
   int ilReader;
   undefined4 opcodeToken;
   int tokenIndex;
   undefined4 replacementToken;
   undefined4 argR7;
-  undefined4 param_6;
+  undefined4 unusedR8;
 {
   undefined4 windowToken;
   int loopIndex;

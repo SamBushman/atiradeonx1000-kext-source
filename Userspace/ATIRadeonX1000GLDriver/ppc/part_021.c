@@ -1953,51 +1953,51 @@ int ILReader__currentOpcode(ilReader)
    * then used the unclamped value (0xc000 in the reproducing run) as an unbounded switch/table
    * index, crashing in FUN_000e4710's table lookup three calls later. Added the same clamp every
    * other consumer already has. */
-  undefined2 uVar1;
-  uVar1 = *(undefined2 *)(ilReader + 0x8e);
-  if (0xbe < (ushort)uVar1) {
-    uVar1 = 0;
+  undefined2 opcode;
+  opcode = *(undefined2 *)(ilReader + 0x8e);
+  if (0xbe < (ushort)opcode) {
+    opcode = 0;
   }
-  return uVar1;
+  return opcode;
 }
 
 /* ILReader__lookupBoolConst @ 0xe4410 (64 bytes) */
-int ILReader__lookupBoolConst(ilReader, param_2)
+int ILReader__lookupBoolConst(ilReader, registerIndex)
   int ilReader;
-  int param_2;
+  int registerIndex;
 {
-  int *piVar1;
+  int *boolRecord;
   
-  piVar1 = *(int **)(*(int *)(ilReader + 0xc) + 8);
+  boolRecord = *(int **)(*(int *)(ilReader + 0xc) + 8);
   do {
-    if (*piVar1 == param_2) {
-      return piVar1[1];
+    if (*boolRecord == registerIndex) {
+      return boolRecord[1];
     }
-  } while ((*(int **)(ilReader + 0x10) != piVar1) &&
-          (piVar1 = (int *)piVar1[2], piVar1 != (int *)0x0));
+  } while ((*(int **)(ilReader + 0x10) != boolRecord) &&
+          (boolRecord = (int *)boolRecord[2], boolRecord != (int *)0x0));
   return -1;
 }
 
 /* ILReader__appendIntConst @ 0xe4450 (116 bytes) */
-int ILReader__appendIntConst(ilReader, param_2, param_3, param_4, param_5, param_6)
+int ILReader__appendIntConst(ilReader, registerIndex, constX, constY, constZ, constW)
   int *ilReader;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
+  undefined4 registerIndex;
+  undefined4 constX;
+  undefined4 constY;
+  undefined4 constZ;
+  undefined4 constW;
 {
-  undefined4 *puVar1;
+  undefined4 *record;
   
-  puVar1 = (undefined4 *)Arena__alloc(*(undefined4 *)(*ilReader + 0x378),0x18);
-  puVar1[5] = 0;
-  *puVar1 = param_2;
-  puVar1[1] = param_3;
-  puVar1[2] = param_4;
-  puVar1[3] = param_5;
-  puVar1[4] = param_6;
-  *(undefined4 **)(ilReader[6] + 0x14) = puVar1;
-  ilReader[6] = (int)puVar1;
+  record = (undefined4 *)Arena__alloc(*(undefined4 *)(*ilReader + 0x378),0x18);
+  record[5] = 0;
+  *record = registerIndex;
+  record[1] = constX;
+  record[2] = constY;
+  record[3] = constZ;
+  record[4] = constW;
+  *(undefined4 **)(ilReader[6] + 0x14) = record;
+  ilReader[6] = (int)record;
   return;
 }
 
@@ -2134,36 +2134,36 @@ int FUN_000e4710(param_1, param_2, param_3)
 }
 
 /* ILReader__appendBoolConst @ 0xe4724 (92 bytes) */
-int ILReader__appendBoolConst(ilReader, param_2, param_3)
+int ILReader__appendBoolConst(ilReader, registerIndex, value)
   int *ilReader;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 registerIndex;
+  undefined4 value;
 {
-  undefined4 *puVar1;
+  undefined4 *record;
   
-  puVar1 = (undefined4 *)Arena__alloc(*(undefined4 *)(*ilReader + 0x378),0xc);
-  puVar1[2] = 0;
-  *puVar1 = param_2;
-  puVar1[1] = param_3;
-  *(undefined4 **)(ilReader[4] + 8) = puVar1;
-  ilReader[4] = (int)puVar1;
+  record = (undefined4 *)Arena__alloc(*(undefined4 *)(*ilReader + 0x378),0xc);
+  record[2] = 0;
+  *record = registerIndex;
+  record[1] = value;
+  *(undefined4 **)(ilReader[4] + 8) = record;
+  ilReader[4] = (int)record;
   return;
 }
 
 /* ILReader__appendFloatConst @ 0xe4780 (116 bytes) */
-void ILReader__appendFloatConst(int *param_1,undefined4 param_2,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void ILReader__appendFloatConst(int *ilReader,undefined4 registerIndex,double constX,double constY,double constZ,double constW)
 {
-  undefined4 *puVar1;
+  undefined4 *record;
   
-  puVar1 = (undefined4 *)Arena__alloc(*(undefined4 *)(*param_1 + 0x378),0x18);
-  puVar1[5] = 0;
-  *puVar1 = param_2;
-  puVar1[1] = (float)fparam_1;
-  puVar1[2] = (float)fparam_2;
-  puVar1[3] = (float)fparam_3;
-  puVar1[4] = (float)fparam_4;
-  *(undefined4 **)(param_1[8] + 0x14) = puVar1;
-  param_1[8] = (int)puVar1;
+  record = (undefined4 *)Arena__alloc(*(undefined4 *)(*ilReader + 0x378),0x18);
+  record[5] = 0;
+  *record = registerIndex;
+  record[1] = (float)constX;
+  record[2] = (float)constY;
+  record[3] = (float)constZ;
+  record[4] = (float)constW;
+  *(undefined4 **)(ilReader[8] + 0x14) = record;
+  ilReader[8] = (int)record;
   return;
 }
 
@@ -2268,7 +2268,7 @@ int ILReader__fetchToken(ilReader, tokenIndex)
   int readState;
   int streamBase;
   int tokenSlot;
-  ushort uVar7;
+  ushort opcode;
   undefined4 *replayStackTop;
   undefined4 streamToken;
   int *replayStackLast;
@@ -2301,9 +2301,9 @@ int ILReader__fetchToken(ilReader, tokenIndex)
         *(undefined4 *)(tokenSlot + 0x8c) = streamToken;
       }
     }
-    uVar7 = *(ushort *)(ilReader + 0x8e);
-    if (0xbe < uVar7) {
-      uVar7 = 0;
+    opcode = *(ushort *)(ilReader + 0x8e);
+    if (0xbe < opcode) {
+      opcode = 0;
     }
     if (((readState == 1) && (isFirstToken)) && (*(int *)(ilReader + 0x8c) == -1)) {
       replayStack = *(int *)(ilReader + 0x88);
@@ -2340,11 +2340,11 @@ int ILReader__fetchToken(ilReader, tokenIndex)
       replayFinished = false;
     }
     if (*(int *)(ilReader + 0x80) == 0) {
-      if (isFirstToken && uVar7 == 0x2b) {
+      if (isFirstToken && opcode == 0x2b) {
         *(undefined4 *)(ilReader + 0x7c) = 2;
         return 0;
       }
-      if (isFirstToken && uVar7 == 0x28) {
+      if (isFirstToken && opcode == 0x28) {
         *(undefined4 *)(ilReader + 0x7c) = 2;
         return 0;
       }
