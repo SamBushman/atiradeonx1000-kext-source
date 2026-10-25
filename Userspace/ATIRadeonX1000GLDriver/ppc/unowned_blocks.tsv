@@ -2976,11 +2976,11 @@ f2960	f2974	other	FUN_000f1d7c	5	0x193cc0
 f2984	f2998	other	FUN_000f1d7c	5	0x193cc0
 f29b8	f29d0	eh-pad	FUN_000f1d7c	6	0x193cc0,__Unwind_Resume
 f3cf8	f3d38	table	IRInst__computeSourceLaneMask	16	
-f40d4	f4114	table	FUN_000f403c	16	
+f40d4	f4114	table	IRInst__computeSourceReadMask	16	
 f513c	f515c	eh-pad	Compiler__getOrCreateLoadConstN	8	0x193cc0,__Unwind_Resume
 f6c50	f6c70	eh-pad	Program__findOrCreateConstInst	8	0x193cc0,__Unwind_Resume
-f8258	f8278	eh-pad	FUN_000f816c	8	0x193cc0,__Unwind_Resume
-f8430	f8450	eh-pad	FUN_000f83cc	8	0x193cc0,__Unwind_Resume
+f8258	f8278	eh-pad	DominatorTree__dfsNumber	8	0x193cc0,__Unwind_Resume
+f8430	f8450	eh-pad	DominatorTree__compress	8	0x193cc0,__Unwind_Resume
 f8908	f8928	eh-pad	FUN_000f88b4	8	0x193cc0,__Unwind_Resume
 f8cc8	f8ccc	millicode	FUN_000f8c88	1	
 f91e8	f9288	table	FUN_000f9140	40	
