@@ -62,14 +62,15 @@ for fn, addr in funcs.items():
     cur = F.CURRENT
     text = '\n'.join(cur)
     idents = set(re.findall(r'[A-Za-z_]\w*', text))
+    first = next((i for i in range(brace + 1, len(cur)) if cur[i].strip() and not re.match(r'^\s*[\w ]+[\s\*]+\w+(\[\d+\])?;$', cur[i])), brace + 1)
     # element sizes of pointer parameters/locals
     decl = {}
-    for l in cur[:brace + 40]:
+    for l in cur[:first]:
         for m in re.finditer(r'\b(u?int|uint|undefined4|float|ulong|long)\s*\*+\s*(\w+)', l): decl[m.group(2)] = 4
-    first = next((i for i in range(brace + 1, len(cur)) if cur[i].strip() and not re.match(r'^\s*[\w ]+[\s\*]+\w+(\[\d+\])?;$', cur[i])), brace + 1)
     names = sorted({m for i in range(brace + 1, len(cur)) for m in re.findall(r'\b([A-Za-z]{0,4}Var\d+|p+_?[A-Za-z]*Var\d+|local_[0-9a-f]+)\b', cur[i]) if VAR.match(m)})
     spec = []; used = collections.Counter(); owner = {}
     for var in names:
+        if any(re.search(r'&\s*%s\b' % re.escape(var), c) for c in cur): stat['addr'] += 1; continue
         if sum(1 for i in range(brace + 1, first) if re.match(r'^\s*[\w ]+[\s\*]+%s;$' % re.escape(var), cur[i])) != 1: stat['nodecl'] += 1; continue
         try: ws, er = F.webs(nodes, entry, var)
         except BaseException: stat['refused'] += 1; continue
