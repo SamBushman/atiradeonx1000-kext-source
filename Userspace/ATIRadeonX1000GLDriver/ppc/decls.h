@@ -3059,7 +3059,7 @@ extern int ValueKey__evalLitLane();
 extern int FUN_00179064();
 extern int FUN_00179138();
 extern int FUN_001792f0();
-extern int FUN_001793d8();
+extern int ValueKey__findLaneWithSameValue();
 extern int FUN_00179608();
 extern int FUN_001797d0();
 extern int ValueKey__foldCompareSameSourcesValueNumber();

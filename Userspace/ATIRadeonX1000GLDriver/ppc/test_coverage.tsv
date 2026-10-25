@@ -2853,7 +2853,7 @@
 0x179064	FUN_00179064	212	no	indirect call (driver context / vtable / callback)
 0x179138	FUN_00179138	408	no	indirect call (driver context / vtable / callback)
 0x1792f0	FUN_001792f0	232	no	indirect call (driver context / vtable / callback)
-0x1793d8	FUN_001793d8	560	yes	
+0x1793d8	ValueKey__findLaneWithSameValue	560	yes	
 0x179608	FUN_00179608	456	yes	
 0x1797d0	FUN_001797d0	196	yes	
 0x179894	ValueKey__foldCompareSameSourcesValueNumber	184	yes	

@@ -3200,7 +3200,7 @@ LAB_001804a4:
       }
       if ((*(int *)(*(int *)(*(int *)(*loopPtr7 + 0xb0) + 0x88) + 8) != 0x8e) ||
          (*(int *)(*loopPtr7 + 0xb4) != 0)) {
-        sourceKindCode = FUN_001793d8(key,loopIndex,*(undefined4 *)(keyWordPtr + 0x228));
+        sourceKindCode = ValueKey__findLaneWithSameValue(key,loopIndex,*(undefined4 *)(keyWordPtr + 0x228));
         if (sourceKindCode == 4) {
           operandRecord2 = IRInst__getOperandRecord(*(undefined4 *)(key + 0xb0),loopIndex);
           origSelect = *(int *)(operandRecord2 + 0x10);
