@@ -808,6 +808,9 @@ int FUN_00147f54(inst, compiler)
   int *inst;
   int compiler;
 {
+  int vcallfcResult;
+  int useStamp;
+  int opcodeKind;
   int operandSelect;
   bool isLast;
   int resultScaleCode;
@@ -822,37 +825,37 @@ int FUN_00147f54(inst, compiler)
   int operandRecord2;
   int useCount;
   int loopIndex;
-  bool bVar1;
+  bool hasLastOperand;
   int iVar2;
-  uint uVar3;
+  uint instFlags;
   int iVar4;
   int operandRecord;
-  uint uVar6;
+  uint keptOperandModifiers;
   int saturate;
   int afterInst;
-  int iVar9;
+  int usersVec;
   int operandSelectB;
   int destRegisterOffset;
   undefined4 operandSelectC;
   int destRegister;
-  int iVar14;
+  int keptOperandVreg;
   uint negateFlag;
-  undefined4 uVar16;
-  int iVar17;
-  int iVar18;
-  double dVar19;
+  undefined4 literalOperandIndex;
+  int foldMode;
+  int keptOperandVregHi;
+  double literalValue;
   int local_a8 [5];
   undefined1 auStack_94 [4];
-  float local_90;
-  undefined4 local_7c;
-  undefined4 local_78;
-  undefined4 local_68;
-  uint local_58;
+  float uniformConstantValue;
+  undefined4 lastOperandRecord;
+  undefined4 lastOperandSource;
+  undefined4 lastOperandTail;
+  uint hasLastOperandFlag;
   
   local_a8[0] = 0;
-  iVar2 = *(int *)(inst[0x22] + 8);
+  opcodeKind = *(int *)(inst[0x22] + 8);
   resultScaleCode = inst[0x49];
-  if (iVar2 == 0x13) {
+  if (opcodeKind == 0x13) {
     loopIndex = 1;
     while( true ) {
       operandRecord3 = IRInst__getOperandRecord(inst,0);
@@ -864,29 +867,29 @@ int FUN_00147f54(inst, compiler)
         return inst;
       }
     }
-    iVar4 = ((undefined4 (*)())tryOutputScaleExponent)(uniformSourceConstant,local_a8,(double)local_90);
+    iVar4 = ((undefined4 (*)())tryOutputScaleExponent)(uniformSourceConstant,local_a8,(double)uniformConstantValue);
     if (iVar4 == 0) {
       return inst;
     }
     local_a8[0] = resultScaleCode + local_a8[0];
     if (loopIndex == 1) {
-      iVar17 = 2;
-      uVar16 = 0xffffffff;
+      foldMode = 2;
+      literalOperandIndex = 0xffffffff;
       operandIndex = 2;
     }
     else {
-      iVar17 = 2;
-      uVar16 = 0xffffffff;
+      foldMode = 2;
+      literalOperandIndex = 0xffffffff;
       operandIndex = 1;
     }
   }
-  else if (iVar2 == 0x14) {
+  else if (opcodeKind == 0x14) {
     operandRecord2 = IRInst__getOperandRecord(inst,0);
     uniformSourceConstant2 = IRInst__getUniformSourceConstant(inst,3,*(undefined4 *)(operandRecord2 + 0x10),auStack_94);
     if (uniformSourceConstant2 == 0) {
       return inst;
     }
-    if ((local_90 != FLOAT_001aa114) && (local_90 != FLOAT_001aa0e8)) {
+    if ((uniformConstantValue != FLOAT_001aa114) && (uniformConstantValue != FLOAT_001aa0e8)) {
       return inst;
     }
     local_a8[4] = 0x40000000;
@@ -902,19 +905,19 @@ int FUN_00147f54(inst, compiler)
         return inst;
       }
       local_a8[0] = resultScaleCode + 1;
-      iVar17 = 3;
-      uVar16 = 2;
+      foldMode = 3;
+      literalOperandIndex = 2;
       operandIndex = 1;
     }
     else {
       local_a8[0] = resultScaleCode + 1;
-      iVar17 = 3;
-      uVar16 = 1;
+      foldMode = 3;
+      literalOperandIndex = 1;
       operandIndex = 2;
     }
   }
   else {
-    if (iVar2 != 0x12) {
+    if (opcodeKind != 0x12) {
       return inst;
     }
     sourceDef = IRInst__getOperandSource(inst,1);
@@ -935,29 +938,29 @@ int FUN_00147f54(inst, compiler)
       return inst;
     }
     local_a8[0] = resultScaleCode + 1;
-    iVar17 = 1;
-    uVar16 = 0xffffffff;
+    foldMode = 1;
+    literalOperandIndex = 0xffffffff;
     operandIndex = 1;
   }
-  iVar4 = (**(code **)(**(int **)(compiler + COMP_target) + 0xfc))
+  vcallfcResult = (**(code **)(**(int **)(compiler + COMP_target) + 0xfc))
                     (*(int **)(compiler + COMP_target),local_a8[0],inst);
-  if (iVar4 != 0) {
+  if (vcallfcResult != 0) {
     program = *(int *)(compiler + COMP_currentProgram);
     *(int *)(program + 0x158) = *(int *)(program + 0x158) + 1;
-    if (iVar17 == 2) {
-      negateFlag = (uint)(local_90 < FLOAT_001aa0d4) ^ inst[operandIndex * 6 + 0x28] & 1U;
+    if (foldMode == 2) {
+      negateFlag = (uint)(uniformConstantValue < FLOAT_001aa0d4) ^ inst[operandIndex * 6 + 0x28] & 1U;
     }
     else {
-      if (iVar17 == 3) {
-        dVar19 = (double)FLOAT_001aa0e8;
+      if (foldMode == 3) {
+        literalValue = (double)FLOAT_001aa0e8;
         inst[0x49] = local_a8[0];
-        ((void (*)())IRInst__makeLiteralVec4Float)(inst,program,uVar16,dVar19,dVar19,dVar19,dVar19);
-        dVar19 = (double)FLOAT_001aa10c;
-        ((void (*)())IRInst__makeLiteralVec4Float)(inst,program,3,dVar19,dVar19,dVar19,dVar19);
-        IROperand__setModifierBits(inst + 0x35,1,(uint)(local_90 < FLOAT_001aa0d4));
+        ((void (*)())IRInst__makeLiteralVec4Float)(inst,program,literalOperandIndex,literalValue,literalValue,literalValue,literalValue);
+        literalValue = (double)FLOAT_001aa10c;
+        ((void (*)())IRInst__makeLiteralVec4Float)(inst,program,3,literalValue,literalValue,literalValue,literalValue);
+        IROperand__setModifierBits(inst + 0x35,1,(uint)(uniformConstantValue < FLOAT_001aa0d4));
         return inst;
       }
-      if (iVar17 == 1) {
+      if (foldMode == 1) {
         negateFlag = inst[operandIndex * 6 + 0x28] & 1;
       }
       else {
@@ -965,52 +968,52 @@ int FUN_00147f54(inst, compiler)
       }
     }
     afterInst = inst[1];
-    iVar9 = inst[4];
+    usersVec = inst[4];
     useCount = IRInst__useCount(inst,program);
-    uVar3 = inst[5];
+    instFlags = inst[5];
     destRegisterOffset = inst[0x26];
     destRegister = inst[0x25];
     operandRecord = IRInst__getOperandRecord(inst,0);
     operandSelectB = *(int *)(operandRecord + 0x10);
     saturate = inst[0x48];
     sourceDef3 = IRInst__getOperandSource(inst,operandIndex);
-    iVar14 = inst[operandIndex * 6 + 0x25];
-    iVar18 = inst[operandIndex * 6 + 0x26];
+    keptOperandVreg = inst[operandIndex * 6 + 0x25];
+    keptOperandVregHi = inst[operandIndex * 6 + 0x26];
     operandRecord = IRInst__getOperandRecord(inst,operandIndex);
     operandSelectC = *(undefined4 *)(operandRecord + 0x10);
-    bVar1 = (inst[5] & 0x200U) != 0;
-    uVar6 = inst[operandIndex * 6 + 0x28];
-    local_68 = 0;
-    local_7c = 0;
-    local_78 = 0;
-    local_58 = 0;
-    if (bVar1) {
-      IRInst__readLastOperand(inst,&local_7c);
+    hasLastOperand = (inst[5] & 0x200U) != 0;
+    keptOperandModifiers = inst[operandIndex * 6 + 0x28];
+    lastOperandTail = 0;
+    lastOperandRecord = 0;
+    lastOperandSource = 0;
+    hasLastOperandFlag = 0;
+    if (hasLastOperand) {
+      IRInst__readLastOperand(inst,&lastOperandRecord);
     }
-    local_58 = (uint)bVar1;
+    hasLastOperandFlag = (uint)hasLastOperand;
     (**(code **)(*inst + 0xc))(inst,1,compiler);
     IRInst__reinitAsMov(inst,0x31,compiler);
-    if ((uVar3 & 2) != 0) {
+    if ((instFlags & 2) != 0) {
       inst[5] = inst[5] | 2;
     }
-    inst[4] = iVar9;
-    iVar2 = *(int *)(program + 0x478);
+    inst[4] = usersVec;
+    useStamp = *(int *)(program + 0x478);
     inst[0x25] = destRegister;
     inst[0x26] = destRegisterOffset;
-    inst[0x58] = useCount + iVar2;
+    inst[0x58] = useCount + useStamp;
     operandRecord2 = IRInst__getOperandRecord(inst,1);
-    *(int *)(operandRecord2 + 0xc) = iVar18;
-    *(int *)(operandRecord2 + 8) = iVar14;
+    *(int *)(operandRecord2 + 0xc) = keptOperandVregHi;
+    *(int *)(operandRecord2 + 8) = keptOperandVreg;
     inst[0x27] = operandSelectB;
     IRInst__setOperandSource(inst,1,sourceDef3,1,compiler);
     operandRecord2 = IRInst__getOperandRecord(inst,1);
     *(undefined4 *)(operandRecord2 + 0x10) = operandSelectC;
-    IROperand__setModifierBits(inst + 0x29,2,uVar6 >> 1 & 1);
+    IROperand__setModifierBits(inst + 0x29,2,keptOperandModifiers >> 1 & 1);
     IROperand__setModifierBits(inst + 0x29,1,negateFlag);
     inst[0x48] = saturate;
     inst[0x49] = local_a8[0];
-    if (local_58 != 0) {
-      IRInst__setLastOperandFromRecord(inst,&local_7c,1,compiler);
+    if (hasLastOperandFlag != 0) {
+      IRInst__setLastOperandFromRecord(inst,&lastOperandRecord,1,compiler);
     }
     Block__insertInstAfter(*(undefined4 *)(afterInst + 0x158),afterInst,inst);
   }
