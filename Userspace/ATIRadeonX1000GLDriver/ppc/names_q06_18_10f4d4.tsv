@@ -1,0 +1,46 @@
+local	FUN_0010f4d4	param_1	program	INFERRED	the Program; +0x41c/+0x420/+0x424 per-kind export lists
+use	FUN_0010f4d4	uVar1	listCount	INFERRED	filled count of the export list being scanned	^\s*uVar1\ =\ puVar4\[1\];$	+2
+use	FUN_0010f4d4	uVar1	listCount	INFERRED	filled count of the export list being scanned	^\s*if\ \(uVar1\ <=\ uVar6\)\ \{$	+2
+use	FUN_0010f4d4	uVar1	listCount	INFERRED	filled count of the export list being scanned	^\s*uVar1\ =\ puVar4\[1\];$@2	+2
+use	FUN_0010f4d4	uVar1	listCount	INFERRED	filled count of the export list being scanned	^\s*uVar1\ =\ puVar4\[1\];$@3	+2
+use	FUN_0010f4d4	uVar1	listCount	INFERRED	filled count of the export list being scanned	^\s*if\ \(uVar1\ <=\ uVar6\)\ \{$@2	+2
+use	FUN_0010f4d4	uVar1	listCount	INFERRED	filled count of the export list being scanned	^\s*uVar1\ =\ puVar4\[1\];$@4	+2
+use	FUN_0010f4d4	uVar1	listCount	INFERRED	filled count of the export list being scanned	^\s*uVar1\ =\ puVar4\[1\];$@5	+2
+use	FUN_0010f4d4	uVar1	listCount	INFERRED	filled count of the export list being scanned	^\s*if\ \(uVar1\ <=\ uVar6\)\ \{$@3	+2
+use	FUN_0010f4d4	uVar1	listCount	INFERRED	filled count of the export list being scanned	^\s*uVar1\ =\ puVar4\[1\];$@6	+2
+use	FUN_0010f4d4	puVar2	listSlotRef	INFERRED	element reference into the export list	^\s*puVar2\ =\ \(undefined4\ \*\)\(uVar6\ \*\ 4\ \+\ puVar4\[2\]\);$	+1
+use	FUN_0010f4d4	puVar2	listSlotRef	INFERRED	element reference into the export list	^\s*puVar2\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar4,uVar6\);$	+1
+use	FUN_0010f4d4	puVar2	listSlotRef	INFERRED	element reference into the export list	^\s*uVar5\ =\ \*\(undefined4\ \*\)\*puVar2;$	+1
+use	FUN_0010f4d4	puVar2	listSlotRef	INFERRED	element reference into the export list	^\s*puVar2\ =\ \(undefined4\ \*\)\(uVar6\ \*\ 4\ \+\ puVar4\[2\]\);$@2	+1
+use	FUN_0010f4d4	puVar2	listSlotRef	INFERRED	element reference into the export list	^\s*puVar2\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar4,uVar6\);$@2	+1
+use	FUN_0010f4d4	puVar2	listSlotRef	INFERRED	element reference into the export list	^\s*uVar5\ =\ \*\(undefined4\ \*\)\*puVar2;$@2	+1
+use	FUN_0010f4d4	puVar2	listSlotRef	INFERRED	element reference into the export list	^\s*puVar2\ =\ \(undefined4\ \*\)\(uVar6\ \*\ 4\ \+\ puVar4\[2\]\);$@3	+1
+use	FUN_0010f4d4	puVar2	listSlotRef	INFERRED	element reference into the export list	^\s*puVar2\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar4,uVar6\);$@3	+1
+use	FUN_0010f4d4	puVar2	listSlotRef	INFERRED	element reference into the export list	^\s*uVar5\ =\ \*\(undefined4\ \*\)\*puVar2;$@3	+1
+use	FUN_0010f4d4	iVar3	destKindClass	INFERRED	IRInst__operandKindClass of the export's destination operand (non-zero: not a plain register)	^\s*iVar3\ =\ FUN_00105dbc\(uVar5,0\);$	+2
+use	FUN_0010f4d4	iVar3	destKindClass	INFERRED	IRInst__operandKindClass of the export's destination operand (non-zero: not a plain register)	^\s*iVar3\ =\ FUN_00105dbc\(uVar5,0\);$@2	+2
+use	FUN_0010f4d4	iVar3	destKindClass	INFERRED	IRInst__operandKindClass of the export's destination operand (non-zero: not a plain register)	^\s*iVar3\ =\ FUN_00105dbc\(uVar5,0\);$@3	+2
+use	FUN_0010f4d4	puVar4	exportList41c	INFERRED	export list at program +0x41c	^\s*puVar4\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 0x41c\);$	+2
+use	FUN_0010f4d4	puVar4	exportList41c	INFERRED	export list at program +0x41c	^\s*if\ \(uVar6\ <\ \*puVar4\)\ \{$	+1
+use	FUN_0010f4d4	puVar4	exportList41c	INFERRED	export list at program +0x41c	^\s*_memset\(uVar1\ \*\ 4\ \+\ puVar4\[2\],0,\(uVar6\ \-\ uVar1\)\ \*\ 4\ \+\ 4\);$	+2
+use	FUN_0010f4d4	puVar4	exportList41c	INFERRED	export list at program +0x41c	^\s*puVar2\ =\ \(undefined4\ \*\)\(uVar6\ \*\ 4\ \+\ puVar4\[2\]\);$	+1
+use	FUN_0010f4d4	puVar4	exportList41c	INFERRED	export list at program +0x41c	^\s*puVar2\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar4,uVar6\);$	+1
+use	FUN_0010f4d4	puVar4	exportList41c	INFERRED	export list at program +0x41c	^\s*puVar4\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 0x41c\);$@2	+1
+use	FUN_0010f4d4	puVar4	exportList41c	INFERRED	export list at program +0x41c	^\s*uVar1\ =\ puVar4\[1\];$@2	+1
+use	FUN_0010f4d4	puVar4	exportList420	INFERRED	export list at program +0x420	^\s*puVar4\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 0x420\);$	+2
+use	FUN_0010f4d4	puVar4	exportList420	INFERRED	export list at program +0x420	^\s*if\ \(uVar6\ <\ \*puVar4\)\ \{$@2	+1
+use	FUN_0010f4d4	puVar4	exportList420	INFERRED	export list at program +0x420	^\s*_memset\(uVar1\ \*\ 4\ \+\ puVar4\[2\],0,\(uVar6\ \-\ uVar1\)\ \*\ 4\ \+\ 4\);$@2	+2
+use	FUN_0010f4d4	puVar4	exportList420	INFERRED	export list at program +0x420	^\s*puVar2\ =\ \(undefined4\ \*\)\(uVar6\ \*\ 4\ \+\ puVar4\[2\]\);$@2	+1
+use	FUN_0010f4d4	puVar4	exportList420	INFERRED	export list at program +0x420	^\s*puVar2\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar4,uVar6\);$@2	+1
+use	FUN_0010f4d4	puVar4	exportList420	INFERRED	export list at program +0x420	^\s*puVar4\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 0x420\);$@2	+1
+use	FUN_0010f4d4	puVar4	exportList420	INFERRED	export list at program +0x420	^\s*uVar1\ =\ puVar4\[1\];$@4	+1
+use	FUN_0010f4d4	puVar4	exportList424	INFERRED	export list at program +0x424	^\s*puVar4\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 0x424\);$	+2
+use	FUN_0010f4d4	puVar4	exportList424	INFERRED	export list at program +0x424	^\s*if\ \(uVar6\ <\ \*puVar4\)\ \{$@3	+1
+use	FUN_0010f4d4	puVar4	exportList424	INFERRED	export list at program +0x424	^\s*_memset\(uVar1\ \*\ 4\ \+\ puVar4\[2\],0,\(uVar6\ \-\ uVar1\)\ \*\ 4\ \+\ 4\);$@3	+2
+use	FUN_0010f4d4	puVar4	exportList424	INFERRED	export list at program +0x424	^\s*puVar2\ =\ \(undefined4\ \*\)\(uVar6\ \*\ 4\ \+\ puVar4\[2\]\);$@3	+1
+use	FUN_0010f4d4	puVar4	exportList424	INFERRED	export list at program +0x424	^\s*puVar2\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar4,uVar6\);$@3	+1
+use	FUN_0010f4d4	puVar4	exportList424	INFERRED	export list at program +0x424	^\s*puVar4\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 0x424\);$@2	+1
+use	FUN_0010f4d4	puVar4	exportList424	INFERRED	export list at program +0x424	^\s*uVar1\ =\ puVar4\[1\];$@6	+1
+use	FUN_0010f4d4	uVar5	exportInst	INFERRED	instruction of the export record	^\s*uVar5\ =\ \*\(undefined4\ \*\)\*puVar2;$	+3
+use	FUN_0010f4d4	uVar5	exportInst	INFERRED	instruction of the export record	^\s*uVar5\ =\ \*\(undefined4\ \*\)\*puVar2;$@2	+3
+use	FUN_0010f4d4	uVar5	exportInst	INFERRED	instruction of the export record	^\s*uVar5\ =\ \*\(undefined4\ \*\)\*puVar2;$@3	+3

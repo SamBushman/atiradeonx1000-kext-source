@@ -503,67 +503,69 @@ int Program__hasKillTexture(param_1)
 }
 
 /* FudoPs__vslot69_shouldFlattenIf @ 0x12c134 (424 bytes) */
-int FudoPs__vslot69_shouldFlattenIf(this, param_2, param_3, param_4, param_5, param_6, param_7)
+int FudoPs__vslot69_shouldFlattenIf(this, ifHeader, optionSource, staleArg4, staleArg5, staleArg6, staleArg7)
   undefined4 this;
-  int param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+  int ifHeader;
+  undefined4 optionSource;
+  undefined4 staleArg4;
+  undefined4 staleArg5;
+  undefined4 staleArg6;
+  undefined4 staleArg7;
 {
-  float fVar1;
-  float fVar2;
-  float fVar3;
-  int iVar4;
+  int elseNotFlattenable;
+  int thenHasKillTexture;
+  float thenArmCost;
+  float elseCostScratch;
+  float largerCost;
+  int isIfRegion;
   uint listCount;
   uint listCount2;
-  undefined4 uVar7;
-  int iVar8;
-  int iVar9;
-  double dVar10;
-  undefined8 uVar11;
+  undefined4 armLimitKind;
+  int elseBlock;
+  int thenBlock;
+  double intToDoubleBias;
+  undefined8 optionResult;
   
-  iVar4 = FUN_000e9294(param_2);
-  if (iVar4 != 0) {
-    iVar9 = *(int *)(param_2 + 0x134);
-    iVar8 = *(int *)(param_2 + 0x138);
-    iVar4 = ((int (*)())Program__hasKillTexture)(iVar9);
-    if ((iVar4 == 0) && (iVar4 = ((int (*)())Program__hasKillTexture)(iVar8), iVar4 == 0)) {
-      uVar7 = 3;
-      uVar11 = FUN_000e0830(param_3,0,3);
-      if ((int)((ulonglong)uVar11 >> 0x20) == 0) {
-        if ((*(uint *)(param_2 + 0xc) & 0x800) == 0) {
-          uVar11 = FUN_0012ae6c(iVar9,(int)uVar11,uVar7,param_4,param_5,param_6,param_7);
-          if ((int)((ulonglong)uVar11 >> 0x20) != 0) {
+  isIfRegion = FUN_000e9294(ifHeader);
+  if (isIfRegion != 0) {
+    thenBlock = *(int *)(ifHeader + 0x134);
+    elseBlock = *(int *)(ifHeader + 0x138);
+    thenHasKillTexture = ((int (*)())Program__hasKillTexture)(thenBlock);
+    if ((thenHasKillTexture == 0) && (thenHasKillTexture = ((int (*)())Program__hasKillTexture)(elseBlock), thenHasKillTexture == 0)) {
+      armLimitKind = 3;
+      optionResult = FUN_000e0830(optionSource,0,3);
+      if ((int)((ulonglong)optionResult >> 0x20) == 0) {
+        if ((*(uint *)(ifHeader + 0xc) & 0x800) == 0) {
+          optionResult = FUN_0012ae6c(thenBlock,(int)optionResult,armLimitKind,staleArg4,staleArg5,staleArg6,staleArg7);
+          if ((int)((ulonglong)optionResult >> 0x20) != 0) {
             return 0;
           }
-          iVar4 = FUN_0012ae6c(iVar8,(int)uVar11,uVar7,param_4,param_5,param_6,param_7);
-          if (iVar4 != 0) {
+          elseNotFlattenable = FUN_0012ae6c(elseBlock,(int)optionResult,armLimitKind,staleArg4,staleArg5,staleArg6,staleArg7);
+          if (elseNotFlattenable != 0) {
             return 0;
           }
-          listCount = DList__count(iVar9 + 0x90);
-          dVar10 = DOUBLE_001aa1e0;
-          fVar2 = FLOAT_001aa108;
-          listCount2 = DList__count(iVar8 + 0x90);
-          fVar1 = (float)((double)CONCAT44(0x43300000,listCount ^ 0x80000000) - dVar10) - fVar2;
+          listCount = DList__count(thenBlock + 0x90);
+          intToDoubleBias = DOUBLE_001aa1e0;
+          elseCostScratch = FLOAT_001aa108;
+          listCount2 = DList__count(elseBlock + 0x90);
+          thenArmCost = (float)((double)CONCAT44(0x43300000,listCount ^ 0x80000000) - intToDoubleBias) - elseCostScratch;
         }
         else {
-          listCount = DList__count(iVar9 + 0x90);
-          dVar10 = DOUBLE_001aa1e0;
-          fVar2 = FLOAT_001aa108;
-          listCount2 = DList__count(iVar8 + 0x90);
-          fVar1 = (float)((double)CONCAT44(0x43300000,listCount ^ 0x80000000) - dVar10) - fVar2;
+          listCount = DList__count(thenBlock + 0x90);
+          intToDoubleBias = DOUBLE_001aa1e0;
+          elseCostScratch = FLOAT_001aa108;
+          listCount2 = DList__count(elseBlock + 0x90);
+          thenArmCost = (float)((double)CONCAT44(0x43300000,listCount ^ 0x80000000) - intToDoubleBias) - elseCostScratch;
         }
-        fVar2 = (float)((double)CONCAT44(0x43300000,listCount2 ^ 0x80000000) - dVar10) - fVar2;
-        fVar3 = fVar1;
-        if (fVar1 - fVar2 < 0.0) {
-          fVar3 = fVar2;
+        elseCostScratch = (float)((double)CONCAT44(0x43300000,listCount2 ^ 0x80000000) - intToDoubleBias) - elseCostScratch;
+        largerCost = thenArmCost;
+        if (thenArmCost - elseCostScratch < 0.0) {
+          largerCost = elseCostScratch;
         }
-        if (-(fVar1 - fVar2) < 0.0) {
-          fVar2 = fVar3;
+        if (-(thenArmCost - elseCostScratch) < 0.0) {
+          elseCostScratch = largerCost;
         }
-        if (FLOAT_001aa1bc < fVar2) {
+        if (FLOAT_001aa1bc < elseCostScratch) {
           return 0;
         }
       }
@@ -811,91 +813,109 @@ int LoopInfo__matchExit(loopInfo, inst, branchHeader, outBoundOnRight)
   int branchHeader;
   int *outBoundOnRight;
 {
+  int exitBlockQuery38;
+  int *counterOperand;
+  int *boundOperand;
+  undefined4 innerCompare;
+  int footerSuccessorIsSimple;
+  int exitSuccessorQuery38;
+  int elseIsSimple;
+  int thenBlock;
+  int innerRecord2;
+  int innerRecord1;
+  int testOperandRecord;
+  int compareUseCount;
+  int rightQuery48;
+  int leftQuery48;
+  int boundOperandRecord;
+  int exitCompareCondition;
+  int boundQuery48;
+  int counterSource;
   int compareCondition;
   undefined4 successor2;
   int *successor;
   byte boundLaneSwizzle;
   float constantBound;
-  int iVar3;
-  undefined4 uVar4;
+  int compareOpcode;
+  undefined4 vregList;
   int *operandVReg;
-  int *piVar6;
-  int *piVar7;
+  int *boundDefinition;
+  int *staleOutFlagRef;
   int callResult;
   uint lane;
-  int iVar10;
+  int elseBlock;
   undefined4 swizzleWord;
-  int local_34;
-  byte local_30 [8];
-  longlong local_28;
+  int constVectorWord;
+  byte laneSwizzleBytes [8];
+  longlong boundAsInt64;
   
   *outBoundOnRight = 0;
   if (inst == 0) {
     return 0;
   }
-  iVar3 = *(int *)(*(int *)(inst + 0x88) + 8);
-  if (iVar3 == 0x8b) {
-    piVar7 = outBoundOnRight;
-    iVar3 = IRInst__getOperandSource(inst,1);
-    if (iVar3 != *(int *)(loopInfo + 0x34)) {
+  compareOpcode = *(int *)(*(int *)(inst + 0x88) + 8);
+  if (compareOpcode == 0x8b) {
+    staleOutFlagRef = outBoundOnRight;
+    counterSource = IRInst__getOperandSource(inst,1);
+    if (counterSource != *(int *)(loopInfo + 0x34)) {
       return 0;
     }
-    piVar6 = (int *)IRInst__getOperandSource(inst,2);
-    iVar3 = (**(code **)(*piVar6 + 0x48))(piVar6);
-    if (iVar3 == 0) {
+    boundDefinition = (int *)IRInst__getOperandSource(inst,2);
+    boundQuery48 = (**(code **)(*boundDefinition + 0x48))(boundDefinition);
+    if (boundQuery48 == 0) {
       return 0;
     }
-    iVar3 = IRInst__getCompareCondition(inst);
-    if (iVar3 != 3) {
+    exitCompareCondition = IRInst__getCompareCondition(inst);
+    if (exitCompareCondition != 3) {
       return 0;
     }
-    iVar3 = IRInst__getOperandRecord(inst,2);
-    swizzleWord = *(undefined4 *)(iVar3 + 0x10);
+    boundOperandRecord = IRInst__getOperandRecord(inst,2);
+    swizzleWord = *(undefined4 *)(boundOperandRecord + 0x10);
     boundLaneSwizzle = *(byte *)((int)&swizzleWord + *(int *)(loopInfo + 0x38));
     lane = (uint)boundLaneSwizzle;
     *(uint *)(loopInfo + 0x14) = lane;
-    if (piVar6[0x26] == 0x33) {
-      local_34 = piVar6[lane * 6 + 8];
-      uVar4 = *(undefined4 *)(*(int *)(loopInfo + 0x40) + 0x3ac);
-      local_30[0] = 4;
-      local_30[1] = 4;
-      local_30[2] = 4;
-      local_30[3] = 4;
-      local_30[lane] = boundLaneSwizzle;
-      piVar6 = (int *)RegisterMap__findConstVector(uVar4,&local_34,local_30,piVar7);
-      *(uint *)(loopInfo + 0x14) = (uint)local_30[*(int *)(loopInfo + 0x14)];
-      if (piVar6 == (int *)0x0) {
+    if (boundDefinition[0x26] == 0x33) {
+      constVectorWord = boundDefinition[lane * 6 + 8];
+      vregList = *(undefined4 *)(*(int *)(loopInfo + 0x40) + 0x3ac);
+      laneSwizzleBytes[0] = 4;
+      laneSwizzleBytes[1] = 4;
+      laneSwizzleBytes[2] = 4;
+      laneSwizzleBytes[3] = 4;
+      laneSwizzleBytes[lane] = boundLaneSwizzle;
+      boundDefinition = (int *)RegisterMap__findConstVector(vregList,&constVectorWord,laneSwizzleBytes,staleOutFlagRef);
+      *(uint *)(loopInfo + 0x14) = (uint)laneSwizzleBytes[*(int *)(loopInfo + 0x14)];
+      if (boundDefinition == (int *)0x0) {
         return 0;
       }
     }
-    *(int *)(loopInfo + 0x10) = piVar6[0x25];
+    *(int *)(loopInfo + 0x10) = boundDefinition[0x25];
   }
   else {
-    if (iVar3 != 0x8c) {
+    if (compareOpcode != 0x8c) {
       return 0;
     }
-    uVar4 = IRInst__getOperandSource(inst,1);
-    operandVReg = (int *)IRInst__getOperandSource(uVar4,1);
-    piVar6 = (int *)IRInst__getOperandSource(uVar4,2);
-    iVar3 = (**(code **)(*operandVReg + 0x48))(operandVReg);
-    piVar7 = operandVReg;
-    if (iVar3 == 0) {
-      iVar3 = (**(code **)(*piVar6 + 0x48))(piVar6);
-      if (iVar3 == 0) {
+    innerCompare = IRInst__getOperandSource(inst,1);
+    operandVReg = (int *)IRInst__getOperandSource(innerCompare,1);
+    counterOperand = (int *)IRInst__getOperandSource(innerCompare,2);
+    leftQuery48 = (**(code **)(*operandVReg + 0x48))(operandVReg);
+    boundOperand = operandVReg;
+    if (leftQuery48 == 0) {
+      rightQuery48 = (**(code **)(*counterOperand + 0x48))(counterOperand);
+      if (rightQuery48 == 0) {
         return 0;
       }
       *outBoundOnRight = 1;
-      piVar7 = piVar6;
-      piVar6 = operandVReg;
+      boundOperand = counterOperand;
+      counterOperand = operandVReg;
     }
-    if (piVar6 != *(int **)(loopInfo + 0x34)) {
+    if (counterOperand != *(int **)(loopInfo + 0x34)) {
       return 0;
     }
-    iVar3 = IRInst__useCount(uVar4,*(undefined4 *)(loopInfo + 0x40));
-    if (iVar3 != 1) {
+    compareUseCount = IRInst__useCount(innerCompare,*(undefined4 *)(loopInfo + 0x40));
+    if (compareUseCount != 1) {
       return 0;
     }
-    compareCondition = IRInst__getCompareCondition(uVar4);
+    compareCondition = IRInst__getCompareCondition(innerCompare);
     if (*outBoundOnRight == 0) {
       if (compareCondition != 2) {
         return 0;
@@ -905,37 +925,37 @@ int LoopInfo__matchExit(loopInfo, inst, branchHeader, outBoundOnRight)
       return 0;
     }
     *(undefined4 *)(loopInfo + 0x1c) = 0;
-    if ((*(byte *)(piVar7 + 0x57) & 1) == 0) {
-      *(int *)(loopInfo + 0x10) = piVar7[0x25];
-      iVar3 = IRInst__getOperandRecord(inst,1);
-      swizzleWord = *(undefined4 *)(iVar3 + 0x10);
+    if ((*(byte *)(boundOperand + 0x57) & 1) == 0) {
+      *(int *)(loopInfo + 0x10) = boundOperand[0x25];
+      testOperandRecord = IRInst__getOperandRecord(inst,1);
+      swizzleWord = *(undefined4 *)(testOperandRecord + 0x10);
       *(uint *)(loopInfo + 0x14) = (uint)*(byte *)((int)&swizzleWord + *(int *)(loopInfo + 0x38));
       if (*outBoundOnRight == 0) {
-        iVar3 = IRInst__getOperandRecord(uVar4,1);
-        swizzleWord = *(undefined4 *)(iVar3 + 0x10);
+        innerRecord1 = IRInst__getOperandRecord(innerCompare,1);
+        swizzleWord = *(undefined4 *)(innerRecord1 + 0x10);
       }
       else {
-        iVar3 = IRInst__getOperandRecord(uVar4,2);
-        swizzleWord = *(undefined4 *)(iVar3 + 0x10);
+        innerRecord2 = IRInst__getOperandRecord(innerCompare,2);
+        swizzleWord = *(undefined4 *)(innerRecord2 + 0x10);
       }
       *(uint *)(loopInfo + 0x14) = (uint)*(byte *)((int)&swizzleWord + *(int *)(loopInfo + 0x14));
     }
     else {
-      constantBound = GH_U2F((unsigned int)(piVar7[8]));
+      constantBound = GH_U2F((unsigned int)(boundOperand[8]));
       *(undefined4 *)(loopInfo + 0x1c) = 1;
-      local_28 = (longlong)(int)constantBound;
+      boundAsInt64 = (longlong)(int)constantBound;
       *(int *)(loopInfo + 0x18) = (int)constantBound;
     }
   }
-  iVar3 = *(int *)(branchHeader + 0x134);
-  iVar10 = *(int *)(branchHeader + 0x138);
+  thenBlock = *(int *)(branchHeader + 0x134);
+  elseBlock = *(int *)(branchHeader + 0x138);
   if (*outBoundOnRight == 0) {
-    callResult = DList__count(iVar3 + 0x90);
-    if ((callResult < 3) && (iVar10 = DList__count(iVar10 + 0x90), iVar10 < 3)) {
-      successor = (int *)Block__getSuccessor(iVar3,0);
-      iVar10 = (**(code **)(*successor + 0x38))(successor);
-      if (iVar10 != 0) {
-        successor2 = Block__getSuccessor(iVar3,0);
+    callResult = DList__count(thenBlock + 0x90);
+    if ((callResult < 3) && (elseBlock = DList__count(elseBlock + 0x90), elseBlock < 3)) {
+      successor = (int *)Block__getSuccessor(thenBlock,0);
+      exitBlockQuery38 = (**(code **)(*successor + 0x38))(successor);
+      if (exitBlockQuery38 != 0) {
+        successor2 = Block__getSuccessor(thenBlock,0);
         *(undefined4 *)(loopInfo + 0x24) = successor2;
 LAB_0012cc9c:
         *(int *)(loopInfo + 0x28) = branchHeader;
@@ -944,16 +964,16 @@ LAB_0012cc9c:
     }
   }
   else {
-    iVar3 = Block__isSimple(iVar10);
-    if ((iVar3 != 0) && (iVar3 = DList__count(iVar10 + 0x90), iVar3 < 3)) {
-      successor = (int *)Block__getSuccessor(iVar10,0);
+    elseIsSimple = Block__isSimple(elseBlock);
+    if ((elseIsSimple != 0) && (elseIsSimple = DList__count(elseBlock + 0x90), elseIsSimple < 3)) {
+      successor = (int *)Block__getSuccessor(elseBlock,0);
       *(int **)(loopInfo + 0x24) = successor;
-      iVar3 = (**(code **)(*successor + 0x38))(successor);
-      if (iVar3 != 0) {
+      exitSuccessorQuery38 = (**(code **)(*successor + 0x38))(successor);
+      if (exitSuccessorQuery38 != 0) {
         successor2 = Block__getSuccessor(*(undefined4 *)(branchHeader + 0x13c),0);
-        iVar3 = Block__isSimple(successor2);
-        if ((iVar3 != 0) &&
-           (iVar3 = Block__getSuccessor(successor2,0), iVar3 == *(int *)(*(int *)(loopInfo + 0x2c) + 0x150)))
+        footerSuccessorIsSimple = Block__isSimple(successor2);
+        if ((footerSuccessorIsSimple != 0) &&
+           (footerSuccessorIsSimple = Block__getSuccessor(successor2,0), footerSuccessorIsSimple == *(int *)(*(int *)(loopInfo + 0x2c) + 0x150)))
         goto LAB_0012cc9c;
       }
     }
@@ -1948,94 +1968,96 @@ int FUN_0012e488(param_1, block)
 }
 
 /* IfFooter__ctor_12e56c @ 0x12e56c (660 bytes) */
-int IfFooter__ctor_12e56c(param_1, param_2, compiler)
-  undefined4 param_1;
-  int *param_2;
+int IfFooter__ctor_12e56c(conditionRegister, loopBlock, compiler)
+  undefined4 conditionRegister;
+  int *loopBlock;
   int compiler;
 {
+  undefined4 headerChainBlock;
+  undefined4 loopExitTarget;
   undefined4 arena;
   int operandRecord;
   undefined4 arenaAt3742;
   undefined *vtable;
-  int iVar2;
+  int blockQuery30;
   undefined4 *allocation;
-  undefined4 *puVar4;
-  undefined4 uVar5;
-  undefined4 *puVar6;
-  int iVar7;
-  undefined4 *puVar8;
-  undefined4 *puVar9;
-  undefined4 *puVar10;
-  undefined4 uVar11;
-  undefined4 *puVar12;
-  undefined4 uVar13;
+  undefined4 *ifFooterAlloc;
+  undefined4 program;
+  undefined4 *branchInst;
+  int loopHeader;
+  undefined4 *preHeaderBlock;
+  undefined4 *breakBlock;
+  undefined4 *thenBlock;
+  undefined4 headerWordB8;
+  undefined4 *ifHeader;
+  undefined4 swizzleTableWord;
   undefined4 arenaAt374;
-  undefined4 *puVar15;
+  undefined4 *ifFooter;
   
-  iVar2 = (**(code **)(*param_2 + 0x30))(param_2,param_2,compiler);
-  if (iVar2 != 0) {
+  blockQuery30 = (**(code **)(*loopBlock + 0x30))(loopBlock,loopBlock,compiler);
+  if (blockQuery30 != 0) {
     arena = *(undefined4 *)(compiler + COMP_arenaA);
-    iVar7 = param_2[0x4b];
-    uVar5 = *(undefined4 *)(compiler + COMP_currentProgram);
+    loopHeader = loopBlock[0x4b];
+    program = *(undefined4 *)(compiler + COMP_currentProgram);
     allocation = (undefined4 *)Arena__alloc(arena,0x168);
-    puVar6 = allocation + 1;
+    branchInst = allocation + 1;
     *allocation = arena;
-    IRInst__ctor_10502c(puVar6,0x8c,compiler);
+    IRInst__ctor_10502c(branchInst,0x8c,compiler);
     allocation[0x4c] = 6;
-    operandRecord = IRInst__getOperandRecord(puVar6,1);
+    operandRecord = IRInst__getOperandRecord(branchInst,1);
     vtable = PTR_DAT_001e8b8c;
     *(undefined4 *)(operandRecord + 0xc) = 0;
-    uVar13 = *(undefined4 *)vtable;
-    *(undefined4 *)(operandRecord + 8) = param_1;
-    operandRecord = IRInst__getOperandRecord(puVar6,1);
-    *(undefined4 *)(operandRecord + 0x10) = uVar13;
-    uVar11 = *(undefined4 *)(iVar7 + 0xb8);
-    uVar13 = Block__getSuccessor(iVar7,0);
+    swizzleTableWord = *(undefined4 *)vtable;
+    *(undefined4 *)(operandRecord + 8) = conditionRegister;
+    operandRecord = IRInst__getOperandRecord(branchInst,1);
+    *(undefined4 *)(operandRecord + 0x10) = swizzleTableWord;
+    headerWordB8 = *(undefined4 *)(loopHeader + 0xb8);
+    loopExitTarget = Block__getSuccessor(loopHeader,0);
     arenaAt374 = *(undefined4 *)(compiler + COMP_arenaA);
     allocation = (undefined4 *)Arena__alloc(arenaAt374,0x130);
-    puVar8 = allocation + 1;
+    preHeaderBlock = allocation + 1;
     *allocation = arenaAt374;
-    Block__ctor_ea020(puVar8,compiler);
-    allocation[0x2f] = uVar11;
-    Program__insertBlockAfter(uVar5,iVar7,puVar8);
-    FUN_000e977c(iVar7,uVar13,puVar8);
-    uVar11 = FUN_0012b140(iVar7);
+    Block__ctor_ea020(preHeaderBlock,compiler);
+    allocation[0x2f] = headerWordB8;
+    Program__insertBlockAfter(program,loopHeader,preHeaderBlock);
+    FUN_000e977c(loopHeader,loopExitTarget,preHeaderBlock);
+    headerChainBlock = FUN_0012b140(loopHeader);
     arenaAt374 = *(undefined4 *)(compiler + COMP_arenaA);
     allocation = (undefined4 *)Arena__alloc(arenaAt374,0x130);
-    puVar10 = allocation + 1;
+    thenBlock = allocation + 1;
     *allocation = arenaAt374;
-    Block__ctor_ea020(puVar10,compiler);
+    Block__ctor_ea020(thenBlock,compiler);
     arenaAt374 = *(undefined4 *)(compiler + COMP_arenaA);
     allocation = (undefined4 *)Arena__alloc(arenaAt374,0x138);
-    puVar9 = allocation + 1;
+    breakBlock = allocation + 1;
     *allocation = arenaAt374;
-    BreakBlock__ctor_ec0c8(puVar9,iVar7,1,compiler);
+    BreakBlock__ctor_ec0c8(breakBlock,loopHeader,1,compiler);
     arenaAt374 = *(undefined4 *)(compiler + COMP_arenaA);
     allocation = (undefined4 *)Arena__alloc(arenaAt374,0x15c);
-    puVar12 = allocation + 1;
+    ifHeader = allocation + 1;
     *allocation = arenaAt374;
-    IfHeader__ctor_ea6d0(puVar12,puVar6,uVar11,puVar10,compiler);
+    IfHeader__ctor_ea6d0(ifHeader,branchInst,headerChainBlock,thenBlock,compiler);
     arenaAt3742 = *(undefined4 *)(compiler + COMP_arenaA);
-    puVar4 = (undefined4 *)Arena__alloc(arenaAt3742,0x134);
-    puVar15 = puVar4 + 1;
-    *puVar4 = arenaAt3742;
-    Block__ctor_ea148(puVar15,compiler);
-    puVar4[0x4c] = puVar12;
-    *puVar15 = PTR_DAT_001e9130 + 8;
-    allocation[0x4e] = puVar10;
-    allocation[0x4f] = puVar9;
-    allocation[0x50] = puVar15;
-    Program__insertBlockAfter(uVar5,puVar8,puVar12);
-    Program__insertBlockAfter(uVar5,puVar12,puVar10);
-    Program__insertBlockAfter(uVar5,puVar10,puVar9);
-    Program__insertBlockAfter(uVar5,puVar9,puVar15);
-    Block__connect(puVar8,puVar12);
-    Block__connect(puVar12,puVar10);
-    Block__connect(puVar12,puVar9);
-    Block__connect(puVar10,puVar15);
-    Block__connect(puVar9,*(undefined4 *)(iVar7 + 0x154));
-    Block__connect(puVar15,uVar13);
-    IRInst__bindOperandRegisters(uVar5,puVar6);
+    ifFooterAlloc = (undefined4 *)Arena__alloc(arenaAt3742,0x134);
+    ifFooter = ifFooterAlloc + 1;
+    *ifFooterAlloc = arenaAt3742;
+    Block__ctor_ea148(ifFooter,compiler);
+    ifFooterAlloc[0x4c] = ifHeader;
+    *ifFooter = PTR_DAT_001e9130 + 8;
+    allocation[0x4e] = thenBlock;
+    allocation[0x4f] = breakBlock;
+    allocation[0x50] = ifFooter;
+    Program__insertBlockAfter(program,preHeaderBlock,ifHeader);
+    Program__insertBlockAfter(program,ifHeader,thenBlock);
+    Program__insertBlockAfter(program,thenBlock,breakBlock);
+    Program__insertBlockAfter(program,breakBlock,ifFooter);
+    Block__connect(preHeaderBlock,ifHeader);
+    Block__connect(ifHeader,thenBlock);
+    Block__connect(ifHeader,breakBlock);
+    Block__connect(thenBlock,ifFooter);
+    Block__connect(breakBlock,*(undefined4 *)(loopHeader + 0x154));
+    Block__connect(ifFooter,loopExitTarget);
+    IRInst__bindOperandRegisters(program,branchInst);
     return;
   }
   return;

@@ -1,0 +1,45 @@
+local	FudoPs__vslot69_shouldFlattenIf	param_2	ifHeader	INFERRED	the if header block being considered (+0x134 then arm, +0x138 else arm, word 3 flags)
+local	FudoPs__vslot69_shouldFlattenIf	param_3	optionSource	INFERRED	object queried by FUN_000e0830 for the flatten limit option
+local	FudoPs__vslot69_shouldFlattenIf	param_4	staleArg4	INFERRED	argument register forwarded unchanged to FUN_0012ae6c
+local	FudoPs__vslot69_shouldFlattenIf	param_5	staleArg5	INFERRED	argument register forwarded unchanged to FUN_0012ae6c
+local	FudoPs__vslot69_shouldFlattenIf	param_6	staleArg6	INFERRED	argument register forwarded unchanged to FUN_0012ae6c
+local	FudoPs__vslot69_shouldFlattenIf	param_7	staleArg7	INFERRED	argument register forwarded unchanged to FUN_0012ae6c
+use	FudoPs__vslot69_shouldFlattenIf	fVar1	thenArmCost	INFERRED	instruction count of the then arm as a float, minus the bias	^\s*fVar1\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uVar5\ \^\ 0x80000000\)\ \-\ dVar10\)\ \-\ fVar2;$	+1
+use	FudoPs__vslot69_shouldFlattenIf	fVar1	thenArmCost	INFERRED	instruction count of the then arm as a float, minus the bias	^\s*fVar1\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uVar5\ \^\ 0x80000000\)\ \-\ dVar10\)\ \-\ fVar2;$@2	+1
+use	FudoPs__vslot69_shouldFlattenIf	fVar1	thenArmCost	INFERRED	instruction count of the then arm as a float, minus the bias	^\s*fVar3\ =\ fVar1;$	+2
+use	FudoPs__vslot69_shouldFlattenIf	fVar1	thenArmCost	INFERRED	instruction count of the then arm as a float, minus the bias	^\s*if\ \(\-\(fVar1\ \-\ fVar2\)\ <\ 0\.0\)\ \{$	+1
+use	FudoPs__vslot69_shouldFlattenIf	fVar2	elseCostScratch	INFERRED	bias constant first, then the else arm's cost, then the larger of the two costs	^\s*fVar2\ =\ FLOAT_001aa108;$	+1
+use	FudoPs__vslot69_shouldFlattenIf	fVar2	elseCostScratch	INFERRED	bias constant first, then the else arm's cost, then the larger of the two costs	^\s*fVar1\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uVar5\ \^\ 0x80000000\)\ \-\ dVar10\)\ \-\ fVar2;$	+1
+use	FudoPs__vslot69_shouldFlattenIf	fVar2	elseCostScratch	INFERRED	bias constant first, then the else arm's cost, then the larger of the two costs	^\s*fVar2\ =\ FLOAT_001aa108;$@2	+1
+use	FudoPs__vslot69_shouldFlattenIf	fVar2	elseCostScratch	INFERRED	bias constant first, then the else arm's cost, then the larger of the two costs	^\s*fVar1\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uVar5\ \^\ 0x80000000\)\ \-\ dVar10\)\ \-\ fVar2;$@2	+1
+use	FudoPs__vslot69_shouldFlattenIf	fVar2	elseCostScratch	INFERRED	bias constant first, then the else arm's cost, then the larger of the two costs	^\s*fVar2\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uVar6\ \^\ 0x80000000\)\ \-\ dVar10\)\ \-\ fVar2;$	+1
+use	FudoPs__vslot69_shouldFlattenIf	fVar2	elseCostScratch	INFERRED	bias constant first, then the else arm's cost, then the larger of the two costs	^\s*if\ \(fVar1\ \-\ fVar2\ <\ 0\.0\)\ \{$	+2
+use	FudoPs__vslot69_shouldFlattenIf	fVar2	elseCostScratch	INFERRED	bias constant first, then the else arm's cost, then the larger of the two costs	^\s*if\ \(\-\(fVar1\ \-\ fVar2\)\ <\ 0\.0\)\ \{$	+2
+use	FudoPs__vslot69_shouldFlattenIf	fVar2	elseCostScratch	INFERRED	bias constant first, then the else arm's cost, then the larger of the two costs	^\s*if\ \(FLOAT_001aa1bc\ <\ fVar2\)\ \{$	+1
+use	FudoPs__vslot69_shouldFlattenIf	fVar3	largerCost	INFERRED	the larger of the two arm costs while the maximum is formed	^\s*fVar3\ =\ fVar1;$	+1
+use	FudoPs__vslot69_shouldFlattenIf	fVar3	largerCost	INFERRED	the larger of the two arm costs while the maximum is formed	^\s*fVar3\ =\ fVar2;$	+1
+use	FudoPs__vslot69_shouldFlattenIf	fVar3	largerCost	INFERRED	the larger of the two arm costs while the maximum is formed	^\s*fVar2\ =\ fVar3;$	+1
+use	FudoPs__vslot69_shouldFlattenIf	iVar4	isIfRegion	INFERRED	FUN_000e9294 test of the if header	^\s*iVar4\ =\ FUN_000e9294\(param_2\);$	+2
+use	FudoPs__vslot69_shouldFlattenIf	iVar4	thenHasKillTexture	INFERRED	Program__hasKillTexture of the then arm	^\s*iVar4\ =\ \(\(int\ \(\*\)\(\)\)FUN_0012c0e4\)\(iVar9\);$	+2
+use	FudoPs__vslot69_shouldFlattenIf	iVar4	elseNotFlattenable	INFERRED	FUN_0012ae6c result for the else arm	^\s*iVar4\ =\ FUN_0012ae6c\(iVar8,\(int\)uVar11,uVar7,param_4,param_5,param_6,param_7\);$	+2
+use	FudoPs__vslot69_shouldFlattenIf	uVar7	armLimitKind	INFERRED	constant 3: kind of limit passed to FUN_0012ae6c	^\s*uVar7\ =\ 3;$	+1
+use	FudoPs__vslot69_shouldFlattenIf	uVar7	armLimitKind	INFERRED	constant 3: kind of limit passed to FUN_0012ae6c	^\s*uVar11\ =\ FUN_0012ae6c\(iVar9,\(int\)uVar11,uVar7,param_4,param_5,param_6,param_7\);$	+1
+use	FudoPs__vslot69_shouldFlattenIf	uVar7	armLimitKind	INFERRED	constant 3: kind of limit passed to FUN_0012ae6c	^\s*iVar4\ =\ FUN_0012ae6c\(iVar8,\(int\)uVar11,uVar7,param_4,param_5,param_6,param_7\);$	+1
+use	FudoPs__vslot69_shouldFlattenIf	iVar8	elseBlock	INFERRED	else arm block	^\s*iVar8\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x138\);$	+1
+use	FudoPs__vslot69_shouldFlattenIf	iVar8	elseBlock	INFERRED	else arm block	^\s*if\ \(\(iVar4\ ==\ 0\)\ \&\&\ \(iVar4\ =\ \(\(int\ \(\*\)\(\)\)FUN_0012c0e4\)\(iVar8\),\ iVar4\ ==\ 0\)\)\ \{$	+1
+use	FudoPs__vslot69_shouldFlattenIf	iVar8	elseBlock	INFERRED	else arm block	^\s*iVar4\ =\ FUN_0012ae6c\(iVar8,\(int\)uVar11,uVar7,param_4,param_5,param_6,param_7\);$	+1
+use	FudoPs__vslot69_shouldFlattenIf	iVar8	elseBlock	INFERRED	else arm block	^\s*uVar6\ =\ FUN_00194034\(iVar8\ \+\ 0x90\);$	+1
+use	FudoPs__vslot69_shouldFlattenIf	iVar8	elseBlock	INFERRED	else arm block	^\s*uVar6\ =\ FUN_00194034\(iVar8\ \+\ 0x90\);$@2	+1
+use	FudoPs__vslot69_shouldFlattenIf	iVar9	thenBlock	INFERRED	then arm block	^\s*iVar9\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x134\);$	+1
+use	FudoPs__vslot69_shouldFlattenIf	iVar9	thenBlock	INFERRED	then arm block	^\s*iVar4\ =\ \(\(int\ \(\*\)\(\)\)FUN_0012c0e4\)\(iVar9\);$	+1
+use	FudoPs__vslot69_shouldFlattenIf	iVar9	thenBlock	INFERRED	then arm block	^\s*uVar11\ =\ FUN_0012ae6c\(iVar9,\(int\)uVar11,uVar7,param_4,param_5,param_6,param_7\);$	+1
+use	FudoPs__vslot69_shouldFlattenIf	iVar9	thenBlock	INFERRED	then arm block	^\s*uVar5\ =\ FUN_00194034\(iVar9\ \+\ 0x90\);$	+1
+use	FudoPs__vslot69_shouldFlattenIf	iVar9	thenBlock	INFERRED	then arm block	^\s*uVar5\ =\ FUN_00194034\(iVar9\ \+\ 0x90\);$@2	+1
+use	FudoPs__vslot69_shouldFlattenIf	dVar10	intToDoubleBias	INFERRED	DOUBLE_001aa1e0: bias used to convert an unsigned count to float	^\s*dVar10\ =\ DOUBLE_001aa1e0;$	+1
+use	FudoPs__vslot69_shouldFlattenIf	dVar10	intToDoubleBias	INFERRED	DOUBLE_001aa1e0: bias used to convert an unsigned count to float	^\s*fVar1\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uVar5\ \^\ 0x80000000\)\ \-\ dVar10\)\ \-\ fVar2;$	+1
+use	FudoPs__vslot69_shouldFlattenIf	dVar10	intToDoubleBias	INFERRED	DOUBLE_001aa1e0: bias used to convert an unsigned count to float	^\s*dVar10\ =\ DOUBLE_001aa1e0;$@2	+1
+use	FudoPs__vslot69_shouldFlattenIf	dVar10	intToDoubleBias	INFERRED	DOUBLE_001aa1e0: bias used to convert an unsigned count to float	^\s*fVar1\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uVar5\ \^\ 0x80000000\)\ \-\ dVar10\)\ \-\ fVar2;$@2	+1
+use	FudoPs__vslot69_shouldFlattenIf	dVar10	intToDoubleBias	INFERRED	DOUBLE_001aa1e0: bias used to convert an unsigned count to float	^\s*fVar2\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uVar6\ \^\ 0x80000000\)\ \-\ dVar10\)\ \-\ fVar2;$	+1
+use	FudoPs__vslot69_shouldFlattenIf	uVar11	optionResult	INFERRED	FUN_000e0830 return pair (option present flag in the high word)	^\s*uVar11\ =\ FUN_000e0830\(param_3,0,3\);$	+2
+use	FudoPs__vslot69_shouldFlattenIf	uVar11	optionResult	INFERRED	FUN_000e0830 return pair (option present flag in the high word)	^\s*uVar11\ =\ FUN_0012ae6c\(iVar9,\(int\)uVar11,uVar7,param_4,param_5,param_6,param_7\);$	+2
+use	FudoPs__vslot69_shouldFlattenIf	uVar11	optionResult	INFERRED	FUN_000e0830 return pair (option present flag in the high word)	^\s*iVar4\ =\ FUN_0012ae6c\(iVar8,\(int\)uVar11,uVar7,param_4,param_5,param_6,param_7\);$	+1
