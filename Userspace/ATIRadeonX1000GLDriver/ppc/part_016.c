@@ -416,7 +416,7 @@ int FUN_000a8340(streamPtr4, dirtyBitsWord4)
 }
 
 /* FUN_000a8630 @ 0xa8630 (968 bytes) */
-double FUN_000a8630(int stream,int param_2,uint dirtyBitsWord8,double fpPassThrough1,double fpPassThrough2,double fpPassThrough3,double fpPassThrough4,double fpPassThrough5,double fpPassThrough6,double fpPassThrough7,double fpPassThrough8,double fpPassThrough9,double fpPassThrough10,double fpPassThrough11,double fpPassThrough12,double fpPassThrough13)
+double FUN_000a8630(int stream,int engineState,uint dirtyBitsWord8,double fpPassThrough1,double fpPassThrough2,double fpPassThrough3,double fpPassThrough4,double fpPassThrough5,double fpPassThrough6,double fpPassThrough7,double fpPassThrough8,double fpPassThrough9,double fpPassThrough10,double fpPassThrough11,double fpPassThrough12,double fpPassThrough13)
 {
   uint loopIndex;
   uint streamWord40;
@@ -466,24 +466,24 @@ double FUN_000a8630(int stream,int param_2,uint dirtyBitsWord8,double fpPassThro
     *(uint *)(stream + 0x40) = *(uint *)(stream + 0x40) | 0x20000;
     *(undefined1 *)(stream + 0x29) = 1;
   }
-  if (((dirtyBitsWord8 & 0x3f000008) != 0) && (*(int *)(((unsigned char *)0x00003e28) + param_2) != 0)) {
-    fVar11 = *(float *)(param_2 + 0x1920);
-    dVar34 = (double)*(float *)(param_2 + 0x192c);
-    dVar36 = (double)*(float *)(param_2 + 0x1958);
-    dVar35 = (double)*(float *)(param_2 + 0x195c);
-    dVar38 = (double)*(float *)(param_2 + 0x1928);
-    dVar37 = (double)*(float *)(param_2 + 0x1938);
-    dVar39 = (double)*(float *)(param_2 + 0x1948);
-    dVar29 = (double)*(float *)(param_2 + 0x193c);
-    fVar12 = *(float *)(param_2 + 0x1934);
+  if (((dirtyBitsWord8 & 0x3f000008) != 0) && (*(int *)(((unsigned char *)0x00003e28) + engineState) != 0)) {
+    fVar11 = *(float *)(engineState + 0x1920);
+    dVar34 = (double)*(float *)(engineState + 0x192c);
+    dVar36 = (double)*(float *)(engineState + 0x1958);
+    dVar35 = (double)*(float *)(engineState + 0x195c);
+    dVar38 = (double)*(float *)(engineState + 0x1928);
+    dVar37 = (double)*(float *)(engineState + 0x1938);
+    dVar39 = (double)*(float *)(engineState + 0x1948);
+    dVar29 = (double)*(float *)(engineState + 0x193c);
+    fVar12 = *(float *)(engineState + 0x1934);
     fVar2 = (float)(dVar38 * dVar35 - (double)(float)(dVar34 * dVar36));
     fVar3 = (float)(dVar38 * dVar29 - (double)(float)(dVar34 * dVar37));
     fVar4 = (float)(dVar37 * dVar35 - (double)(float)(dVar29 * dVar36));
-    fVar13 = *(float *)(param_2 + 0x1924);
-    fVar14 = *(float *)(param_2 + 0x1944);
-    dVar30 = (double)*(float *)(param_2 + 0x194c);
-    fVar15 = *(float *)(param_2 + 0x1954);
-    fVar16 = *(float *)(param_2 + 0x1940);
+    fVar13 = *(float *)(engineState + 0x1924);
+    fVar14 = *(float *)(engineState + 0x1944);
+    dVar30 = (double)*(float *)(engineState + 0x194c);
+    fVar15 = *(float *)(engineState + 0x1954);
+    fVar16 = *(float *)(engineState + 0x1940);
     fVar5 = (float)(dVar38 * dVar30 - (double)(float)(dVar34 * dVar39));
     fVar20 = fVar15 * fVar3 + (fVar13 * fVar4 - fVar12 * fVar2);
     fVar6 = (float)(dVar37 * dVar30 - (double)(float)(dVar29 * dVar39));
@@ -491,8 +491,8 @@ double FUN_000a8630(int stream,int param_2,uint dirtyBitsWord8,double fpPassThro
     dVar28 = (double)(fVar11 * fVar14 - fVar13 * fVar16);
     fVar22 = -(fVar13 * fVar6 - (fVar12 * fVar5 - fVar14 * fVar3));
     fVar21 = -(fVar13 * fVar7 - (fVar14 * fVar2 - fVar15 * fVar5));
-    fVar17 = *(float *)(param_2 + 0x1950);
-    fVar18 = *(float *)(param_2 + 0x1930);
+    fVar17 = *(float *)(engineState + 0x1950);
+    fVar18 = *(float *)(engineState + 0x1930);
     fVar19 = fVar15 * fVar6 + (fVar12 * fVar7 - fVar14 * fVar4);
     dVar33 = (double)(fVar11 * fVar15 - fVar13 * fVar17);
     fpPassThrough8 = (double)(fVar18 * fVar15 - fVar12 * fVar17);
@@ -582,9 +582,9 @@ double FUN_000a8630(int stream,int param_2,uint dirtyBitsWord8,double fpPassThro
       uVar23 = *(uint *)(stream + 0x40) | 0x10000;
       *(uint *)(stream + 0x40) = uVar23;
     }
-    if (((unsigned char *)0x00004301)[param_2] != '\0') {
-      uVar24 = (uint)(byte)((unsigned char *)0x00004300)[param_2];
-      if ((uint)(byte)((unsigned char *)0x000013b4)[stream] < (uint)(byte)((unsigned char *)0x00004300)[param_2]) {
+    if (((unsigned char *)0x00004301)[engineState] != '\0') {
+      uVar24 = (uint)(byte)((unsigned char *)0x00004300)[engineState];
+      if ((uint)(byte)((unsigned char *)0x000013b4)[stream] < (uint)(byte)((unsigned char *)0x00004300)[engineState]) {
         uVar24 = (uint)(byte)((unsigned char *)0x000013b4)[stream];
       }
       if (1 < uVar24) {
@@ -7373,9 +7373,9 @@ int noop_b43f0()
 }
 
 /* FUN_000b4400 @ 0xb4400 (2136 bytes) */
-int FUN_000b4400(glContext, param_2, compileRecord, ilSource, glContextWord1e5c)
+int FUN_000b4400(glContext, compileOutput, compileRecord, ilSource, glContextWord1e5c)
   int glContext;
-  int *param_2;
+  int *compileOutput;
   int *compileRecord;
   int *ilSource;
   int glContextWord1e5c;
@@ -7394,31 +7394,31 @@ int FUN_000b4400(glContext, param_2, compileRecord, ilSource, glContextWord1e5c)
   int iVar10;
   undefined1 local_38 [28];
   
-  if ((((param_2 == (int *)0x0) || (compileRecord == (int *)0x0)) || (ilSource == (int *)0x0)) ||
+  if ((((compileOutput == (int *)0x0) || (compileRecord == (int *)0x0)) || (ilSource == (int *)0x0)) ||
      (glContextWord1e5c == 0)) {
     return 1;
   }
-  *param_2 = glContext;
-  param_2[0xe] = 0;
-  param_2[1] = 0;
+  *compileOutput = glContext;
+  compileOutput[0xe] = 0;
+  compileOutput[1] = 0;
   iVar8 = 0;
-  param_2[2] = 0;
-  *(undefined1 *)(param_2 + 3) = 0;
-  *(undefined1 *)((int)param_2 + 0xd) = 0;
-  *(undefined1 *)((int)param_2 + 0xe) = 0;
-  param_2[4] = 0;
-  param_2[5] = 0;
-  param_2[7] = 0;
-  param_2[9] = 0;
-  param_2[10] = 0;
-  param_2[0xb] = 0;
-  param_2[0xc] = 0;
-  *(undefined1 *)(param_2 + 0xd) = 0;
-  param_2[8] = 0;
-  param_2[6] = 0x21;
-  piVar4 = param_2;
-  piVar7 = param_2;
-  piVar9 = param_2;
+  compileOutput[2] = 0;
+  *(undefined1 *)(compileOutput + 3) = 0;
+  *(undefined1 *)((int)compileOutput + 0xd) = 0;
+  *(undefined1 *)((int)compileOutput + 0xe) = 0;
+  compileOutput[4] = 0;
+  compileOutput[5] = 0;
+  compileOutput[7] = 0;
+  compileOutput[9] = 0;
+  compileOutput[10] = 0;
+  compileOutput[0xb] = 0;
+  compileOutput[0xc] = 0;
+  *(undefined1 *)(compileOutput + 0xd) = 0;
+  compileOutput[8] = 0;
+  compileOutput[6] = 0x21;
+  piVar4 = compileOutput;
+  piVar7 = compileOutput;
+  piVar9 = compileOutput;
   do {
     bVar1 = iVar8 != 2;
     piVar4[0xf] = 0x21;
@@ -7442,12 +7442,12 @@ int FUN_000b4400(glContext, param_2, compileRecord, ilSource, glContextWord1e5c)
     piVar7 = (int *)((int)piVar7 + 1);
     iVar8 = iVar8 + 1;
   } while (bVar1);
-  param_2[0x2d] = 0;
-  *(undefined1 *)(param_2 + 0x2b) = 0;
-  param_2[0x2c] = 0;
+  compileOutput[0x2d] = 0;
+  *(undefined1 *)(compileOutput + 0x2b) = 0;
+  compileOutput[0x2c] = 0;
   iVar8 = 0x10;
-  piVar4 = param_2;
-  piVar7 = param_2;
+  piVar4 = compileOutput;
+  piVar7 = compileOutput;
   do {
     *(undefined1 *)(piVar4 + 0x56e) = 0;
     piVar7[0x572] = 0;
@@ -7459,8 +7459,8 @@ int FUN_000b4400(glContext, param_2, compileRecord, ilSource, glContextWord1e5c)
     iVar8 = iVar8 + -1;
   } while (iVar8 != 0);
   iVar8 = 0x30;
-  piVar4 = param_2;
-  piVar7 = param_2;
+  piVar4 = compileOutput;
+  piVar7 = compileOutput;
   do {
     *(undefined1 *)(piVar7 + 0x58a) = 0;
     piVar4[0x658] = 0;
@@ -7468,13 +7468,13 @@ int FUN_000b4400(glContext, param_2, compileRecord, ilSource, glContextWord1e5c)
     piVar4 = piVar4 + 1;
     iVar8 = iVar8 + -1;
   } while (iVar8 != 0);
-  param_2[0x788] = 0;
-  param_2[0x656] = 0;
-  param_2[0x78a] = 0x100;
+  compileOutput[0x788] = 0;
+  compileOutput[0x656] = 0;
+  compileOutput[0x78a] = 0x100;
   loopIndex = 0;
-  piVar4 = param_2;
-  piVar7 = param_2;
-  piVar9 = param_2;
+  piVar4 = compileOutput;
+  piVar7 = compileOutput;
+  piVar9 = compileOutput;
   do {
     *(undefined1 *)(piVar7 + 0x596) = 0;
     *(undefined1 *)(piVar7 + 0x5d6) = 0;
@@ -7488,20 +7488,20 @@ int FUN_000b4400(glContext, param_2, compileRecord, ilSource, glContextWord1e5c)
     piVar9 = piVar9 + 1;
     piVar7 = (int *)((int)piVar7 + 1);
     piVar4 = piVar4 + 5;
-  } while (loopIndex < param_2[0x78a]);
-  param_2[0x7a5] = 0;
-  param_2[0x657] = 0;
-  param_2[0x789] = 0;
-  *(undefined1 *)(param_2 + 0x78b) = 0;
+  } while (loopIndex < compileOutput[0x78a]);
+  compileOutput[0x7a5] = 0;
+  compileOutput[0x657] = 0;
+  compileOutput[0x789] = 0;
+  *(undefined1 *)(compileOutput + 0x78b) = 0;
   iVar8 = 8;
-  *(undefined1 *)((int)param_2 + 0x1e2d) = 0;
-  *(undefined1 *)((int)param_2 + 0x1e2e) = 0;
-  *(undefined1 *)((int)param_2 + 0x1e2f) = 0;
-  *(undefined1 *)(param_2 + 0x78c) = 0;
-  param_2[0x7a3] = 0;
-  param_2[0x7a4] = 0;
-  piVar4 = param_2;
-  piVar7 = param_2;
+  *(undefined1 *)((int)compileOutput + 0x1e2d) = 0;
+  *(undefined1 *)((int)compileOutput + 0x1e2e) = 0;
+  *(undefined1 *)((int)compileOutput + 0x1e2f) = 0;
+  *(undefined1 *)(compileOutput + 0x78c) = 0;
+  compileOutput[0x7a3] = 0;
+  compileOutput[0x7a4] = 0;
+  piVar4 = compileOutput;
+  piVar7 = compileOutput;
   do {
     *(undefined1 *)((int)piVar7 + 0x1e31) = 0;
     *(undefined1 *)((int)piVar7 + 0x1e39) = 0;
@@ -7511,39 +7511,39 @@ int FUN_000b4400(glContext, param_2, compileRecord, ilSource, glContextWord1e5c)
     piVar4 = piVar4 + 1;
     iVar8 = iVar8 + -1;
   } while (iVar8 != 0);
-  param_2[0x7a9] = 0;
-  param_2[0x791] = 0;
-  param_2[0x792] = 0;
-  *(undefined1 *)(param_2 + 0x7a6) = 0;
+  compileOutput[0x7a9] = 0;
+  compileOutput[0x791] = 0;
+  compileOutput[0x792] = 0;
+  *(undefined1 *)(compileOutput + 0x7a6) = 0;
   iVar8 = 4;
-  *(undefined1 *)((int)param_2 + 0x1e99) = 0;
-  *(undefined1 *)((int)param_2 + 0x1e9a) = 0;
-  *(undefined1 *)((int)param_2 + 0x1e9b) = 0;
-  *(undefined1 *)(param_2 + 0x7a7) = 0;
-  *(undefined1 *)((int)param_2 + 0x1e9d) = 0;
-  *(undefined1 *)((int)param_2 + 0x1e9e) = 0;
-  *(undefined1 *)((int)param_2 + 0x1e9f) = 0;
-  *(undefined1 *)(param_2 + 0x7a8) = 0;
-  *(undefined1 *)((int)param_2 + 0x1ea1) = 0;
-  *(undefined1 *)(param_2 + 0x7ba) = 0;
-  param_2[0x7bb] = 0;
-  param_2[0x7bc] = 0;
-  param_2[0x7bd] = 0;
-  piVar4 = param_2;
+  *(undefined1 *)((int)compileOutput + 0x1e99) = 0;
+  *(undefined1 *)((int)compileOutput + 0x1e9a) = 0;
+  *(undefined1 *)((int)compileOutput + 0x1e9b) = 0;
+  *(undefined1 *)(compileOutput + 0x7a7) = 0;
+  *(undefined1 *)((int)compileOutput + 0x1e9d) = 0;
+  *(undefined1 *)((int)compileOutput + 0x1e9e) = 0;
+  *(undefined1 *)((int)compileOutput + 0x1e9f) = 0;
+  *(undefined1 *)(compileOutput + 0x7a8) = 0;
+  *(undefined1 *)((int)compileOutput + 0x1ea1) = 0;
+  *(undefined1 *)(compileOutput + 0x7ba) = 0;
+  compileOutput[0x7bb] = 0;
+  compileOutput[0x7bc] = 0;
+  compileOutput[0x7bd] = 0;
+  piVar4 = compileOutput;
   do {
     *(undefined1 *)(piVar4 + 0x7be) = 0;
     piVar4 = (int *)((int)piVar4 + 1);
     iVar8 = iVar8 + -1;
   } while (iVar8 != 0);
-  *(undefined1 *)(param_2 + 0x7c1) = 0;
-  *(undefined1 *)(param_2 + 0x7bf) = 0;
-  *(undefined1 *)((int)param_2 + 0x1efd) = 0;
-  param_2[0x7c5] = 0;
-  param_2[0x7c3] = 0;
-  param_2[0x7c2] = 1;
-  param_2[0x7c6] = 0;
-  param_2[0x7c4] = 0;
-  param_2[0x7c7] = 0x8000;
+  *(undefined1 *)(compileOutput + 0x7c1) = 0;
+  *(undefined1 *)(compileOutput + 0x7bf) = 0;
+  *(undefined1 *)((int)compileOutput + 0x1efd) = 0;
+  compileOutput[0x7c5] = 0;
+  compileOutput[0x7c3] = 0;
+  compileOutput[0x7c2] = 1;
+  compileOutput[0x7c6] = 0;
+  compileOutput[0x7c4] = 0;
+  compileOutput[0x7c7] = 0x8000;
   *compileRecord = glContextWord1e5c;
   compileRecord[1] = (int)(((unsigned char *)0x000010ec) + glContextWord1e5c);
   *(undefined4 *)(((unsigned char *)0x000012fc) + glContextWord1e5c) = 0;
@@ -7622,13 +7622,13 @@ int FUN_000b4400(glContext, param_2, compileRecord, ilSource, glContextWord1e5c)
   *(undefined1 *)((int)compileRecord + 0x10d) = 0;
   *(undefined1 *)((int)compileRecord + 0x10e) = 0;
   *(undefined1 *)((int)compileRecord + 0x10f) = 0;
-  param_2[2] = *ilSource;
-  *(byte *)((int)param_2 + 0x1f05) = (byte)ilSource[3] & 1;
-  *(byte *)((int)param_2 + 0x1f06) = (byte)ilSource[3] & 2;
+  compileOutput[2] = *ilSource;
+  *(byte *)((int)compileOutput + 0x1f05) = (byte)ilSource[3] & 1;
+  *(byte *)((int)compileOutput + 0x1f06) = (byte)ilSource[3] & 2;
   uVar3 = (uint)ilSource[3] >> 2 & 3;
   compileRecord[0x45] = uVar3;
   if (uVar3 != 0) {
-    *(undefined1 *)(param_2 + 0x7a8) = 1;
+    *(undefined1 *)(compileOutput + 0x7a8) = 1;
   }
   if ((ilSource[3] & 0x100U) == 0) {
     *(undefined1 *)(compileRecord + 0x46) = 0;
@@ -7668,10 +7668,10 @@ int FUN_000b4400(glContext, param_2, compileRecord, ilSource, glContextWord1e5c)
   *puVar5 = 0;
   puVar5[2] = 0;
   compileRecord[2] = (int)(puVar5 + 0x12);
-  iVar8 = FUN_000879f0(glContext,param_2,compileRecord,compileRecord[1],puVar5 + 0x12,local_38,0);
+  iVar8 = FUN_000879f0(glContext,compileOutput,compileRecord,compileRecord[1],puVar5 + 0x12,local_38,0);
   iVar10 = 0;
   compileRecord[2] = iVar8;
-  *(undefined1 *)(param_2 + 0x7c8) = 1;
+  *(undefined1 *)(compileOutput + 0x7c8) = 1;
   iVar8 = 0x10;
   do {
     iVar2 = iVar10 * 0x10;
@@ -7691,7 +7691,7 @@ int FUN_000b4400(glContext, param_2, compileRecord, ilSource, glContextWord1e5c)
     }
     iVar8 = glContext + 0x186c;
   }
-  iVar8 = ilRewriteForTextureState(glContext,param_2,compileRecord,ilSource,iVar8);
+  iVar8 = ilRewriteForTextureState(glContext,compileOutput,compileRecord,ilSource,iVar8);
   if (iVar8 != 0) {
     return 2;
   }
@@ -7720,10 +7720,10 @@ int FUN_000b4400(glContext, param_2, compileRecord, ilSource, glContextWord1e5c)
   }
   ((unsigned char *)0x000036c5)[*compileRecord] = 1;
   _free(compileRecord[3]);
-  if (8 < (uint)(((param_2[0x791] + param_2[0x792]) -
-                 ((int)-(uint)*(byte *)((int)param_2 + 0x1e2e) >> 0x1f)) -
-                ((int)-(uint)*(byte *)((int)param_2 + 0x1e2f) >> 0x1f))) {
-    param_2[1] = 6;
+  if (8 < (uint)(((compileOutput[0x791] + compileOutput[0x792]) -
+                 ((int)-(uint)*(byte *)((int)compileOutput + 0x1e2e) >> 0x1f)) -
+                ((int)-(uint)*(byte *)((int)compileOutput + 0x1e2f) >> 0x1f))) {
+    compileOutput[1] = 6;
     return 6;
   }
   if (iVar8 == 0) {
@@ -7916,28 +7916,28 @@ void FUN_000b4f50(int param_1,int param_2,undefined4 unusedArgR5,undefined4 unus
 }
 
 /* FUN_000b5010 @ 0xb5010 (132 bytes) */
-void FUN_000b5010(int param_1,int param_2,int *param_3,int param_4,double fpPassThrough1,double fpPassThrough2,double fpPassThrough3,double fpPassThrough4)
+void FUN_000b5010(int glContext,int engineState,int *slotRecord,int param_4,double fpPassThrough1,double fpPassThrough2,double fpPassThrough3,double fpPassThrough4)
 {
   undefined4 staleArgR7;
   undefined4 staleArgR8;
   
-  if ((param_4 < 0x100) && (((unsigned char *)0x00001658)[param_4 + param_2] != '\0')) {
-    if (*(char *)(param_4 + param_2 + 0x1758) == '\0') {
-      ((void (*)())FUN_000b4f50)(*param_3,*(int *)(param_4 * 4 + param_2 + 0x1a20) - *(int *)(param_2 + 0x1f1c),
-                   param_3,param_4,staleArgR7,staleArgR8,*(undefined4 *)(param_1 + 0x2454),fpPassThrough1,fpPassThrough2,
+  if ((param_4 < 0x100) && (((unsigned char *)0x00001658)[param_4 + engineState] != '\0')) {
+    if (*(char *)(param_4 + engineState + 0x1758) == '\0') {
+      ((void (*)())FUN_000b4f50)(*slotRecord,*(int *)(param_4 * 4 + engineState + 0x1a20) - *(int *)(engineState + 0x1f1c),
+                   slotRecord,param_4,staleArgR7,staleArgR8,*(undefined4 *)(glContext + 0x2454),fpPassThrough1,fpPassThrough2,
                    fpPassThrough3,fpPassThrough4);
-      *(undefined4 *)(param_1 + 0x1e64) = 0;
-      ((unsigned char *)0x000010eb)[*param_3] = 0;
+      *(undefined4 *)(glContext + 0x1e64) = 0;
+      ((unsigned char *)0x000010eb)[*slotRecord] = 0;
     }
   }
   return;
 }
 
 /* FUN_000b50a0 @ 0xb50a0 (228 bytes) */
-int FUN_000b50a0(param_1, param_2, param_3)
-  int param_1;
-  int param_2;
-  int *param_3;
+int FUN_000b50a0(glContext, engineState, slotRecord)
+  int glContext;
+  int engineState;
+  int *slotRecord;
 {
   float fVar1;
   int *piVar2;
@@ -7951,28 +7951,28 @@ int FUN_000b50a0(param_1, param_2, param_3)
   int iVar7;
   
   fVar1 = FLOAT_001aa0e8;
-  if (((unsigned char *)0x000013b1)[param_1] != '\0') {
+  if (((unsigned char *)0x000013b1)[glContext] != '\0') {
     loopIndex = 0;
-    piVar2 = param_3;
-    iVar5 = param_1;
-    iVar6 = param_2;
-    iVar7 = param_2;
+    piVar2 = slotRecord;
+    iVar5 = glContext;
+    iVar6 = engineState;
+    iVar7 = engineState;
     do {
       if (((unsigned char *)0x00001618)[iVar7] != '\0') {
         iVar3 = *(int *)(((unsigned char *)0x000013f8) + iVar5);
         if (iVar3 != 0) {
-          ((void (*)())FUN_000b4f50)(*param_3,(*(int *)(iVar6 + 0x1ea8) - *(int *)(param_2 + 0x1f1c)) +
-                                param_3[0x36],piVar2,staleArgR6,staleArgR7,staleArgR8,
-                       *(undefined4 *)(param_1 + 0x2454),(double)(fVar1 / *(float *)(iVar3 + 0x44)),
+          ((void (*)())FUN_000b4f50)(*slotRecord,(*(int *)(iVar6 + 0x1ea8) - *(int *)(engineState + 0x1f1c)) +
+                                slotRecord[0x36],piVar2,staleArgR6,staleArgR7,staleArgR8,
+                       *(undefined4 *)(glContext + 0x2454),(double)(fVar1 / *(float *)(iVar3 + 0x44)),
                        (double)(fVar1 / *(float *)(iVar3 + 0x48)),(double)*(float *)(iVar3 + 0x50),
-                       (double)*(float *)(((unsigned char *)0x00001620) + loopIndex * 4 + *param_3));
+                       (double)*(float *)(((unsigned char *)0x00001620) + loopIndex * 4 + *slotRecord));
         }
       }
       loopIndex = loopIndex + 1;
       iVar7 = iVar7 + 1;
       iVar5 = iVar5 + 4;
       iVar6 = iVar6 + 4;
-    } while (loopIndex < (int)(uint)(byte)((unsigned char *)0x000013b1)[param_1]);
+    } while (loopIndex < (int)(uint)(byte)((unsigned char *)0x000013b1)[glContext]);
   }
   return;
 }
@@ -7984,10 +7984,10 @@ int noop_b5190()
 }
 
 /* FUN_000b51a0 @ 0xb51a0 (376 bytes) */
-int FUN_000b51a0(param_1, param_2, param_3)
-  int param_1;
-  int param_2;
-  undefined4 *param_3;
+int FUN_000b51a0(glContext, engineState, slotRecord)
+  int glContext;
+  int engineState;
+  undefined4 *slotRecord;
 {
   float fVar1;
   float fVar2;
@@ -8002,9 +8002,9 @@ int FUN_000b51a0(param_1, param_2, param_3)
   double fpPassThrough2;
   double fpPassThrough1;
   
-  iVar5 = *(int *)(param_1 + 4);
+  iVar5 = *(int *)(glContext + 4);
   iVar7 = *(int *)(iVar5 + 0x10);
-  if (*(char *)(param_2 + 0x1e2f) != '\0') {
+  if (*(char *)(engineState + 0x1e2f) != '\0') {
     uVar3 = *(uint *)(iVar7 + 0x1840);
     fVar1 = *(float *)(iVar5 + 0x2a58);
     fVar2 = *(float *)(iVar5 + 0x2a54);
@@ -8015,13 +8015,13 @@ int FUN_000b51a0(param_1, param_2, param_3)
     fpPassThrough2 = (double)(fVar1 * (float)((double)CONCAT44(0x43300000,
                                                          *(uint *)(iVar7 + 0x184c) ^ 0x80000000) -
                                        4503601774854144.0) * 0.5);
-    puVar6 = param_3;
-    ((void (*)())FUN_000b4f50)(*param_3,param_3[0x2e] - *(int *)(param_2 + 0x1f1c),param_3,staleArgR6,staleArgR7,staleArgR8,
-                 *(undefined4 *)(param_1 + 0x2454),fpPassThrough1,fpPassThrough2,
+    puVar6 = slotRecord;
+    ((void (*)())FUN_000b4f50)(*slotRecord,slotRecord[0x2e] - *(int *)(engineState + 0x1f1c),slotRecord,staleArgR6,staleArgR7,staleArgR8,
+                 *(undefined4 *)(glContext + 0x2454),fpPassThrough1,fpPassThrough2,
                  (double)(float)((*(double *)(iVar7 + 0x1838) - *(double *)(0x00001830 + iVar7)) *
                                 0.5),0.0);
-    ((void (*)())FUN_000b4f50)(*param_3,param_3[0x2f] - *(int *)(param_2 + 0x1f1c),puVar6,staleArgR6,staleArgR7,staleArgR8,
-                 *(undefined4 *)(param_1 + 0x2454),
+    ((void (*)())FUN_000b4f50)(*slotRecord,slotRecord[0x2f] - *(int *)(engineState + 0x1f1c),puVar6,staleArgR6,staleArgR7,staleArgR8,
+                 *(undefined4 *)(glContext + 0x2454),
                  (double)(float)((double)(fVar2 * (float)((double)CONCAT44(0x43300000,
                                                                            uVar3 ^ 0x80000000) -
                                                          4503601774854144.0)) + fpPassThrough1),
@@ -8030,7 +8030,7 @@ int FUN_000b51a0(param_1, param_2, param_3)
                                                          4503601774854144.0)) + fpPassThrough2),
                  (double)(float)((*(double *)(iVar7 + 0x1838) + *(double *)(0x00001830 + iVar7)) *
                                 0.5),0.0);
-    *(undefined4 *)(param_1 + 0x1e64) = 0;
+    *(undefined4 *)(glContext + 0x1e64) = 0;
   }
   return;
 }
