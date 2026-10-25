@@ -1,0 +1,18 @@
+func	FUN_000273a0	gld_reserveDrawSpace	INFERRED	reserves ring/staging space for a draw of countInOut vertices (padding the ring with 0x80000000 words or carving a block from the data buffer), reduces the count to what fits and returns the start of the reserved space
+local	FUN_000273a0	param_1	ctx	CONFIRMED	GLDContext
+local	FUN_000273a0	param_2	altCountPtr	INFERRED	count word used instead of param_3 when the software-fallback byte at ctx+0x2b80 is set
+local	FUN_000273a0	param_3	countInOut	CONFIRMED	vertex count: in = requested, out = vertices that fit into the reserved space
+local	FUN_000273a0	param_4	staleArgR6	INFERRED	forwarded unchanged to the callees; unused
+local	FUN_000273a0	param_5	staleArgR7	INFERRED	forwarded unchanged to the callees; unused
+local	FUN_000273a0	param_6	staleArgR8	INFERRED	forwarded unchanged to the callees; unused
+local	FUN_000273a0	param_7	staleArgR9	INFERRED	forwarded unchanged to the callees; unused
+local	FUN_000273a0	puVar7	activeCountPtr	INFERRED	param_3, or param_2 when the software-fallback byte is set: count word passed on to the revalidation call
+local	FUN_000273a0	bVar1	vertexStrideWords	INFERRED	words per vertex taken from the current vertex-array record (+2)
+local	FUN_000273a0	uVar16	vertexStride	INFERRED	vertexStrideWords widened
+local	FUN_000273a0	bVar2	usesSecondRecord	INFERRED	count word is non-zero and the engine flag at +0x120 is set: the second vertex-array record (ctx+0x27d0) is used
+local	FUN_000273a0	uVar4	recordSelector	INFERRED	0/1 stored at ctx+0x27d4: which vertex-array record is in use
+local	FUN_000273a0	uVar9	modeBit	INFERRED	1 or 2: reservation mode derived from the record selector and the previous mode word
+local	FUN_000273a0	uVar15	newModeWord	INFERRED	modeBit | (previous mode word & 0x18): stored back to ctx+0x27d8
+local	FUN_000273a0	uVar10	fittingCount	INFERRED	vertex count that fits in the reserved space (multiple of 12)
+local	FUN_000273a0	puVar14	ringCursor	INFERRED	ring write cursor (ctx+0x1dc) while space is reserved and padded with 0x80000000 words
+local	FUN_000273a0	puVar3	alignedRingEnd	INFERRED	ring cursor after reserving and 16-byte aligning the packet words

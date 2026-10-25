@@ -1,0 +1,115 @@
+use	extvsAllocConstantRegisters	bVar1	searching	INFERRED	true while the scan for a free hardware register slot (flag byte +0x10 of the 0x28-byte slot entries at programState+0x54) has not found one	^\s*bVar1\ =\ true;$	+1
+use	extvsAllocConstantRegisters	bVar1	searching	INFERRED	true while the scan for a free hardware register slot (flag byte +0x10 of the 0x28-byte slot entries at programState+0x54) has not found one	^\s*if\ \(!bVar1\)\ goto\ LAB_00055f2c;$	+1
+use	extvsAllocConstantRegisters	bVar1	searching	INFERRED	true while the scan for a free hardware register slot (flag byte +0x10 of the 0x28-byte slot entries at programState+0x54) has not found one	^\s*bVar1\ =\ false;$	+1
+use	extvsAllocConstantRegisters	bVar1	searching	INFERRED	true while the scan for a free hardware register slot (flag byte +0x10 of the 0x28-byte slot entries at programState+0x54) has not found one	^\s*bVar1\ =\ true;$@4	+1
+use	extvsAllocConstantRegisters	bVar1	searching	INFERRED	true while the scan for a free hardware register slot (flag byte +0x10 of the 0x28-byte slot entries at programState+0x54) has not found one	^\s*if\ \(!bVar1\)\ goto\ LAB_00055f2c;$@2	+1
+use	extvsAllocConstantRegisters	bVar1	searching	INFERRED	true while the scan for a free hardware register slot (flag byte +0x10 of the 0x28-byte slot entries at programState+0x54) has not found one	^\s*bVar1\ =\ false;$@4	+1
+use	extvsAllocConstantRegisters	bVar1	searching	INFERRED	true while the scan for a free hardware register slot (flag byte +0x10 of the 0x28-byte slot entries at programState+0x54) has not found one	^\s*if\ \(bVar1\)\ \{$	+1
+use	extvsAllocConstantRegisters	bVar1	searching	INFERRED	true while the scan for a free hardware register slot (flag byte +0x10 of the 0x28-byte slot entries at programState+0x54) has not found one	^\s*bVar1\ =\ true;$@2	+1
+use	extvsAllocConstantRegisters	bVar1	searching	INFERRED	true while the scan for a free hardware register slot (flag byte +0x10 of the 0x28-byte slot entries at programState+0x54) has not found one	^\s*if\ \(!bVar1\)\ goto\ LAB_00055fac;$	+1
+use	extvsAllocConstantRegisters	bVar1	searching	INFERRED	true while the scan for a free hardware register slot (flag byte +0x10 of the 0x28-byte slot entries at programState+0x54) has not found one	^\s*bVar1\ =\ false;$@2	+1
+use	extvsAllocConstantRegisters	bVar1	searching	INFERRED	true while the scan for a free hardware register slot (flag byte +0x10 of the 0x28-byte slot entries at programState+0x54) has not found one	^\s*if\ \(!bVar1\)\ \{$	+1
+use	extvsAllocConstantRegisters	bVar1	searching	INFERRED	true while the scan for a free hardware register slot (flag byte +0x10 of the 0x28-byte slot entries at programState+0x54) has not found one	^\s*bVar1\ =\ true;$@3	+1
+use	extvsAllocConstantRegisters	bVar1	searching	INFERRED	true while the scan for a free hardware register slot (flag byte +0x10 of the 0x28-byte slot entries at programState+0x54) has not found one	^\s*if\ \(!bVar1\)\ goto\ LAB_0005618c;$	+1
+use	extvsAllocConstantRegisters	bVar1	searching	INFERRED	true while the scan for a free hardware register slot (flag byte +0x10 of the 0x28-byte slot entries at programState+0x54) has not found one	^\s*bVar1\ =\ false;$@3	+1
+use	extvsAllocConstantRegisters	bVar1	searching	INFERRED	true while the scan for a free hardware register slot (flag byte +0x10 of the 0x28-byte slot entries at programState+0x54) has not found one	^\s*bVar1\ =\ true;$@6	+1
+use	extvsAllocConstantRegisters	bVar1	searching	INFERRED	true while the scan for a free hardware register slot (flag byte +0x10 of the 0x28-byte slot entries at programState+0x54) has not found one	^\s*if\ \(!bVar1\)\ goto\ LAB_0005618c;$@2	+1
+use	extvsAllocConstantRegisters	bVar1	searching	INFERRED	true while the scan for a free hardware register slot (flag byte +0x10 of the 0x28-byte slot entries at programState+0x54) has not found one	^\s*bVar1\ =\ false;$@6	+1
+use	extvsAllocConstantRegisters	bVar1	searching	INFERRED	true while the scan for a free hardware register slot (flag byte +0x10 of the 0x28-byte slot entries at programState+0x54) has not found one	^\s*if\ \(bVar1\)\ \{$@2	+1
+use	extvsAllocConstantRegisters	bVar1	searching	INFERRED	true while the scan for a free hardware register slot (flag byte +0x10 of the 0x28-byte slot entries at programState+0x54) has not found one	^\s*bVar1\ =\ true;$@5	+1
+use	extvsAllocConstantRegisters	bVar1	searching	INFERRED	true while the scan for a free hardware register slot (flag byte +0x10 of the 0x28-byte slot entries at programState+0x54) has not found one	^\s*if\ \(!bVar1\)\ goto\ LAB_0005636c;$	+1
+use	extvsAllocConstantRegisters	bVar1	searching	INFERRED	true while the scan for a free hardware register slot (flag byte +0x10 of the 0x28-byte slot entries at programState+0x54) has not found one	^\s*bVar1\ =\ false;$@5	+1
+use	extvsAllocConstantRegisters	bVar1	searching	INFERRED	true while the scan for a free hardware register slot (flag byte +0x10 of the 0x28-byte slot entries at programState+0x54) has not found one	^\s*if\ \(!bVar1\)\ \{$@2	+1
+use	extvsAllocConstantRegisters	iVar4	symbolKind	INFERRED	*(symbol + 0x24): constant kind 0x87be / 0x87bf (one slot) or 0x87c0 (matrix, four slots)	^\s*iVar4\ =\ \*\(int\ \*\)\(param_4\ \+\ 0x24\);$	+1
+use	extvsAllocConstantRegisters	iVar4	symbolKind	INFERRED	*(symbol + 0x24): constant kind 0x87be / 0x87bf (one slot) or 0x87c0 (matrix, four slots)	^\s*if\ \(iVar4\ ==\ 0x87bf\)\ \{$	+1
+use	extvsAllocConstantRegisters	iVar4	symbolKind	INFERRED	*(symbol + 0x24): constant kind 0x87be / 0x87bf (one slot) or 0x87c0 (matrix, four slots)	^\s*if\ \(iVar4\ ==\ 0x87c0\)\ \{$	+1
+use	extvsAllocConstantRegisters	iVar4	symbolKind	INFERRED	*(symbol + 0x24): constant kind 0x87be / 0x87bf (one slot) or 0x87c0 (matrix, four slots)	^\s*if\ \(iVar4\ !=\ 0x87be\)\ \{$	+1
+use	extvsAllocConstantRegisters	iVar4	symbolKind	INFERRED	*(symbol + 0x24): constant kind 0x87be / 0x87bf (one slot) or 0x87c0 (matrix, four slots)	^\s*iVar4\ =\ \*\(int\ \*\)\(param_4\ \+\ 0x24\);$@2	+2
+use	extvsAllocConstantRegisters	iVar4	symbolKind	INFERRED	*(symbol + 0x24): constant kind 0x87be / 0x87bf (one slot) or 0x87c0 (matrix, four slots)	^\s*if\ \(iVar4\ ==\ 0x87c0\)\ \{$@2	+1
+use	extvsAllocConstantRegisters	iVar4	symbolKind	INFERRED	*(symbol + 0x24): constant kind 0x87be / 0x87bf (one slot) or 0x87c0 (matrix, four slots)	^\s*if\ \(iVar4\ !=\ 0x87be\)\ \{$@2	+1
+use	extvsAllocConstantRegisters	iVar4	slotByteOffset	INFERRED	0, 0x28, 0x50 ...: byte offset of the slot entry examined by the scan	^\s*iVar4\ =\ 0;$	+1
+use	extvsAllocConstantRegisters	iVar4	slotByteOffset	INFERRED	0, 0x28, 0x50 ...: byte offset of the slot entry examined by the scan	^\s*if\ \(\*\(char\ \*\)\(iVar4\ \+\ \*\(int\ \*\)\(param_3\ \+\ 0x54\)\ \+\ 0x10\)\ ==\ '\\0'\)\ \{$	+1
+use	extvsAllocConstantRegisters	iVar4	slotByteOffset	INFERRED	0, 0x28, 0x50 ...: byte offset of the slot entry examined by the scan	^\s*iVar4\ =\ iVar4\ \+\ 0x28;$	+1
+use	extvsAllocConstantRegisters	iVar4	slotByteOffset	INFERRED	0, 0x28, 0x50 ...: byte offset of the slot entry examined by the scan	^\s*iVar4\ =\ 0;$@2	+1
+use	extvsAllocConstantRegisters	iVar4	slotByteOffset	INFERRED	0, 0x28, 0x50 ...: byte offset of the slot entry examined by the scan	^\s*if\ \(\*\(char\ \*\)\(iVar4\ \+\ \*\(int\ \*\)\(param_3\ \+\ 0x54\)\ \+\ 0x10\)\ ==\ '\\0'\)\ \{$@2	+1
+use	extvsAllocConstantRegisters	iVar4	slotByteOffset	INFERRED	0, 0x28, 0x50 ...: byte offset of the slot entry examined by the scan	^\s*iVar4\ =\ iVar4\ \+\ 0x28;$@2	+1
+use	extvsAllocConstantRegisters	iVar4	slotByteOffset	INFERRED	0, 0x28, 0x50 ...: byte offset of the slot entry examined by the scan	^\s*iVar4\ =\ 0;$@4	+1
+use	extvsAllocConstantRegisters	iVar4	slotByteOffset	INFERRED	0, 0x28, 0x50 ...: byte offset of the slot entry examined by the scan	^\s*if\ \(\*\(char\ \*\)\(iVar4\ \+\ \*\(int\ \*\)\(param_3\ \+\ 0x54\)\ \+\ 0x10\)\ ==\ '\\0'\)\ \{$@3	+1
+use	extvsAllocConstantRegisters	iVar4	slotByteOffset	INFERRED	0, 0x28, 0x50 ...: byte offset of the slot entry examined by the scan	^\s*iVar4\ =\ iVar4\ \+\ 0x28;$@4	+1
+use	extvsAllocConstantRegisters	iVar4	slotByteOffset	INFERRED	0, 0x28, 0x50 ...: byte offset of the slot entry examined by the scan	^\s*iVar4\ =\ 0;$@5	+1
+use	extvsAllocConstantRegisters	iVar4	slotByteOffset	INFERRED	0, 0x28, 0x50 ...: byte offset of the slot entry examined by the scan	^\s*if\ \(\*\(char\ \*\)\(iVar4\ \+\ \*\(int\ \*\)\(param_3\ \+\ 0x54\)\ \+\ 0x10\)\ ==\ '\\0'\)\ \{$@4	+1
+use	extvsAllocConstantRegisters	iVar4	slotByteOffset	INFERRED	0, 0x28, 0x50 ...: byte offset of the slot entry examined by the scan	^\s*iVar4\ =\ iVar4\ \+\ 0x28;$@5	+1
+use	extvsAllocConstantRegisters	iVar4	slotByteOffset	INFERRED	0, 0x28, 0x50 ...: byte offset of the slot entry examined by the scan	^\s*iVar4\ =\ 0;$@6	+1
+use	extvsAllocConstantRegisters	iVar4	slotByteOffset	INFERRED	0, 0x28, 0x50 ...: byte offset of the slot entry examined by the scan	^\s*if\ \(\*\(char\ \*\)\(iVar4\ \+\ \*\(int\ \*\)\(param_3\ \+\ 0x54\)\ \+\ 0x10\)\ ==\ '\\0'\)\ \{$@5	+1
+use	extvsAllocConstantRegisters	iVar4	slotByteOffset	INFERRED	0, 0x28, 0x50 ...: byte offset of the slot entry examined by the scan	^\s*iVar4\ =\ iVar4\ \+\ 0x28;$@6	+1
+use	extvsAllocConstantRegisters	iVar4	slotByteOffset	INFERRED	0, 0x28, 0x50 ...: byte offset of the slot entry examined by the scan	^\s*iVar4\ =\ 0;$@8	+1
+use	extvsAllocConstantRegisters	iVar4	slotByteOffset	INFERRED	0, 0x28, 0x50 ...: byte offset of the slot entry examined by the scan	^\s*if\ \(\*\(char\ \*\)\(iVar4\ \+\ \*\(int\ \*\)\(param_3\ \+\ 0x54\)\ \+\ 0x10\)\ ==\ '\\0'\)\ \{$@6	+1
+use	extvsAllocConstantRegisters	iVar4	slotByteOffset	INFERRED	0, 0x28, 0x50 ...: byte offset of the slot entry examined by the scan	^\s*iVar4\ =\ iVar4\ \+\ 0x28;$@8	+1
+use	extvsAllocConstantRegisters	iVar4	slotEntryAddr	INFERRED	slot array + slotIndex * 0x28: address of the first of the four consecutive slot entries	^\s*iVar4\ =\ iVar8\ \+\ \*\(int\ \*\)\(param_3\ \+\ 0x54\);$	+3
+use	extvsAllocConstantRegisters	iVar4	slotEntryAddr	INFERRED	slot array + slotIndex * 0x28: address of the first of the four consecutive slot entries	^\s*iVar4\ =\ iVar8\ \+\ \*\(int\ \*\)\(param_3\ \+\ 0x54\);$@2	+3
+use	extvsAllocConstantRegisters	iVar4	rowIndex	INFERRED	0 .. 3: matrix row being assigned its slot	^\s*iVar4\ =\ 0;$@3	+1
+use	extvsAllocConstantRegisters	iVar4	rowIndex	INFERRED	0 .. 3: matrix row being assigned its slot	^\s*iVar2\ =\ uVar7\ \+\ iVar4;$	+2
+use	extvsAllocConstantRegisters	iVar4	rowIndex	INFERRED	0 .. 3: matrix row being assigned its slot	^\s*iVar4\ =\ 0;$@7	+1
+use	extvsAllocConstantRegisters	iVar4	rowIndex	INFERRED	0 .. 3: matrix row being assigned its slot	^\s*iVar2\ =\ uVar7\ \+\ iVar4;$@2	+2
+use	extvsAllocConstantRegisters	iVar4	newSlotByteOffset	INFERRED	old slot count * 0x28: byte offset of the first newly appended slot entry	^\s*iVar4\ =\ iVar10\ \*\ 0x28;$	+1
+use	extvsAllocConstantRegisters	iVar4	newSlotByteOffset	INFERRED	old slot count * 0x28: byte offset of the first newly appended slot entry	^\s*iVar3\ =\ \*\(int\ \*\)\(param_3\ \+\ 0x54\)\ \+\ iVar4;$	+2
+use	extvsAllocConstantRegisters	iVar4	newSlotByteOffset	INFERRED	old slot count * 0x28: byte offset of the first newly appended slot entry	^\s*iVar4\ =\ iVar10\ \*\ 0x28;$@2	+1
+use	extvsAllocConstantRegisters	iVar4	newSlotByteOffset	INFERRED	old slot count * 0x28: byte offset of the first newly appended slot entry	^\s*iVar3\ =\ \*\(int\ \*\)\(param_3\ \+\ 0x54\)\ \+\ iVar4;$@2	+2
+use	extvsAllocConstantRegisters	iVar4	oldSlotCountBeforeGrow	INFERRED	programState+0x58: number of slot entries before the array grows by 0x10	^\s*iVar4\ =\ \*\(int\ \*\)\(param_3\ \+\ 0x58\);$	+2
+use	extvsAllocConstantRegisters	iVar4	oldSlotCountBeforeGrow	INFERRED	programState+0x58: number of slot entries before the array grows by 0x10	^\s*iVar4\ =\ \*\(int\ \*\)\(param_3\ \+\ 0x58\);$@2	+2
+use	extvsAllocConstantRegisters	iVar4	oldSlotCountBeforeGrow	INFERRED	programState+0x58: number of slot entries before the array grows by 0x10	^\s*\*\(int\ \*\)\(param_4\ \+\ 4\)\ =\ iVar4;$	+2
+use	extvsAllocConstantRegisters	iVar2	assignedSlot	INFERRED	slot index of the current matrix row (slotIndex + rowIndex)	^\s*iVar2\ =\ uVar7\ \+\ iVar4;$	+1
+use	extvsAllocConstantRegisters	iVar2	assignedSlot	INFERRED	slot index of the current matrix row (slotIndex + rowIndex)	^\s*\*\(int\ \*\)\(param_4\ \+\ 0x10\)\ =\ iVar2;$	+1
+use	extvsAllocConstantRegisters	iVar2	assignedSlot	INFERRED	slot index of the current matrix row (slotIndex + rowIndex)	^\s*iVar2\ =\ uVar7\ \+\ iVar4;$@2	+1
+use	extvsAllocConstantRegisters	iVar2	assignedSlot	INFERRED	slot index of the current matrix row (slotIndex + rowIndex)	^\s*\*\(int\ \*\)\(param_4\ \+\ 0x10\)\ =\ iVar2;$@2	+1
+use	extvsAllocConstantRegisters	iVar2	slotEntryPtr	INFERRED	programState slot array + byte offset: slot entry whose in-use flag is set	^\s*iVar2\ =\ \*\(int\ \*\)\(param_3\ \+\ 0x54\)\ \+\ iVar8;$	+1
+use	extvsAllocConstantRegisters	iVar2	slotEntryPtr	INFERRED	programState slot array + byte offset: slot entry whose in-use flag is set	^\s*\*\(undefined1\ \*\)\(iVar2\ \+\ 0x10\)\ =\ 1;$	+1
+use	extvsAllocConstantRegisters	iVar2	slotEntryPtr	INFERRED	programState slot array + byte offset: slot entry whose in-use flag is set	^\s*iVar2\ =\ \*\(int\ \*\)\(param_3\ \+\ 0x54\)\ \+\ iVar8;$@2	+1
+use	extvsAllocConstantRegisters	iVar2	slotEntryPtr	INFERRED	programState slot array + byte offset: slot entry whose in-use flag is set	^\s*\*\(undefined1\ \*\)\(iVar2\ \+\ 0x10\)\ =\ 1;$@2	+1
+use	extvsAllocConstantRegisters	iVar2	growRowsLeft	INFERRED	4 .. 0: matrix rows left to assign after the slot array grew	^\s*iVar2\ =\ 4;$	+1
+use	extvsAllocConstantRegisters	iVar2	growRowsLeft	INFERRED	4 .. 0: matrix rows left to assign after the slot array grew	^\s*iVar2\ =\ iVar2\ \+\ \-1;$	+2
+use	extvsAllocConstantRegisters	iVar2	growRowsLeft	INFERRED	4 .. 0: matrix rows left to assign after the slot array grew	^\s*iVar2\ =\ 4;$@2	+1
+use	extvsAllocConstantRegisters	iVar2	growRowsLeft	INFERRED	4 .. 0: matrix rows left to assign after the slot array grew	^\s*iVar2\ =\ iVar2\ \+\ \-1;$@2	+2
+use	extvsAllocConstantRegisters	iVar3	assignedSlot2	INFERRED	old slot count + row: slot index of the current matrix row in newly appended slots	^\s*iVar3\ =\ iVar10\ \+\ iVar8;$	+1
+use	extvsAllocConstantRegisters	iVar3	assignedSlot2	INFERRED	old slot count + row: slot index of the current matrix row in newly appended slots	^\s*\*\(int\ \*\)\(param_4\ \+\ 0x10\)\ =\ iVar3;$	+1
+use	extvsAllocConstantRegisters	iVar3	assignedSlot2	INFERRED	old slot count + row: slot index of the current matrix row in newly appended slots	^\s*iVar3\ =\ iVar10\ \+\ iVar8;$@2	+1
+use	extvsAllocConstantRegisters	iVar3	assignedSlot2	INFERRED	old slot count + row: slot index of the current matrix row in newly appended slots	^\s*\*\(int\ \*\)\(param_4\ \+\ 0x10\)\ =\ iVar3;$@2	+1
+use	extvsAllocConstantRegisters	iVar3	slotEntryPtr2	INFERRED	programState slot array + byte offset: newly appended slot entry whose in-use flag is set	^\s*iVar3\ =\ \*\(int\ \*\)\(param_3\ \+\ 0x54\)\ \+\ iVar4;$	+1
+use	extvsAllocConstantRegisters	iVar3	slotEntryPtr2	INFERRED	programState slot array + byte offset: newly appended slot entry whose in-use flag is set	^\s*\*\(undefined1\ \*\)\(iVar3\ \+\ 0x10\)\ =\ 1;$	+1
+use	extvsAllocConstantRegisters	iVar3	slotEntryPtr2	INFERRED	programState slot array + byte offset: newly appended slot entry whose in-use flag is set	^\s*iVar3\ =\ \*\(int\ \*\)\(param_3\ \+\ 0x54\)\ \+\ iVar4;$@2	+1
+use	extvsAllocConstantRegisters	iVar3	slotEntryPtr2	INFERRED	programState slot array + byte offset: newly appended slot entry whose in-use flag is set	^\s*\*\(undefined1\ \*\)\(iVar3\ \+\ 0x10\)\ =\ 1;$@2	+1
+local	extvsAllocConstantRegisters	uVar5	newSlotArray	INFERRED	new slot array returned by the ctx+0x10 allocation callback (old count + 0x10 entries of 0x28 bytes)
+local	extvsAllocConstantRegisters	uVar6	slotFoundFlag	INFERRED	0, set to 1 when a free slot is found; stored into shader+0x10 when the array has to grow
+use	extvsAllocConstantRegisters	uVar9	newSlotArray2	INFERRED	new slot array returned by the ctx+0x10 allocation callback	^\s*uVar9\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x10\)\)\(iVar10\ \+\ 0x10,0x28\);$	+1
+use	extvsAllocConstantRegisters	uVar9	newSlotArray2	INFERRED	new slot array returned by the ctx+0x10 allocation callback	^\s*\(uVar9,\*\(undefined4\ \*\)\(param_3\ \+\ 0x54\),\*\(int\ \*\)\(param_3\ \+\ 0x58\)\ \*\ 0x28\);$	+1
+use	extvsAllocConstantRegisters	uVar9	newSlotArray2	INFERRED	new slot array returned by the ctx+0x10 allocation callback	^\s*\*\(undefined4\ \*\)\(param_3\ \+\ 0x54\)\ =\ uVar9;$	+1
+use	extvsAllocConstantRegisters	uVar9	newSlotArray2	INFERRED	new slot array returned by the ctx+0x10 allocation callback	^\s*uVar9\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x10\)\)\(iVar4\ \+\ 0x10,0x28\);$	+1
+use	extvsAllocConstantRegisters	uVar9	newSlotArray2	INFERRED	new slot array returned by the ctx+0x10 allocation callback	^\s*\(uVar9,\*\(undefined4\ \*\)\(param_3\ \+\ 0x54\),\*\(int\ \*\)\(param_3\ \+\ 0x58\)\ \*\ 0x28\);$@2	+1
+use	extvsAllocConstantRegisters	uVar9	newSlotArray2	INFERRED	new slot array returned by the ctx+0x10 allocation callback	^\s*\*\(undefined4\ \*\)\(param_3\ \+\ 0x54\)\ =\ uVar9;$@2	+1
+use	extvsAllocConstantRegisters	uVar9	newSlotArray2	INFERRED	new slot array returned by the ctx+0x10 allocation callback	^\s*uVar9\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x10\)\)\(iVar10\ \+\ 0x10,0x28\);$@2	+1
+use	extvsAllocConstantRegisters	uVar9	newSlotArray2	INFERRED	new slot array returned by the ctx+0x10 allocation callback	^\s*\(uVar9,\*\(undefined4\ \*\)\(param_3\ \+\ 0x54\),\*\(int\ \*\)\(param_3\ \+\ 0x58\)\ \*\ 0x28\);$@3	+1
+use	extvsAllocConstantRegisters	uVar9	newSlotArray2	INFERRED	new slot array returned by the ctx+0x10 allocation callback	^\s*\*\(undefined4\ \*\)\(param_3\ \+\ 0x54\)\ =\ uVar9;$@3	+1
+use	extvsAllocConstantRegisters	uVar9	slotFoundFlag2	INFERRED	0, set to 1 when a free slot is found; stored into shader+0x10	^\s*uVar9\ =\ 0;$	+1
+use	extvsAllocConstantRegisters	uVar9	slotFoundFlag2	INFERRED	0, set to 1 when a free slot is found; stored into shader+0x10	^\s*uVar9\ =\ 1;$	+1
+use	extvsAllocConstantRegisters	uVar9	slotFoundFlag2	INFERRED	0, set to 1 when a free slot is found; stored into shader+0x10	^\s*uVar9\ =\ 0;$@2	+1
+use	extvsAllocConstantRegisters	uVar9	slotFoundFlag2	INFERRED	0, set to 1 when a free slot is found; stored into shader+0x10	^\s*uVar9\ =\ 1;$@2	+1
+use	extvsAllocConstantRegisters	uVar9	slotFoundFlag2	INFERRED	0, set to 1 when a free slot is found; stored into shader+0x10	^\s*\*\(char\ \*\)\(param_2\ \+\ 0x10\)\ =\ \(char\)uVar9;$	+1
+use	extvsAllocConstantRegisters	uVar9	slotFoundFlag2	INFERRED	0, set to 1 when a free slot is found; stored into shader+0x10	^\s*\*\(undefined4\ \*\)\(param_4\ \+\ 8\)\ =\ uVar9;$	+1
+use	extvsAllocConstantRegisters	iVar8	matrixSlotOffset	INFERRED	slotIndex * 0x28, advanced by 0x28 per row: byte offset of the matrix row's slot entry	^\s*iVar8\ =\ uVar7\ \*\ 0x28;$	+2
+use	extvsAllocConstantRegisters	iVar8	matrixSlotOffset	INFERRED	slotIndex * 0x28, advanced by 0x28 per row: byte offset of the matrix row's slot entry	^\s*iVar2\ =\ \*\(int\ \*\)\(param_3\ \+\ 0x54\)\ \+\ iVar8;$	+2
+use	extvsAllocConstantRegisters	iVar8	matrixSlotOffset	INFERRED	slotIndex * 0x28, advanced by 0x28 per row: byte offset of the matrix row's slot entry	^\s*iVar8\ =\ uVar7\ \*\ 0x28;$@2	+2
+use	extvsAllocConstantRegisters	iVar8	matrixSlotOffset	INFERRED	slotIndex * 0x28, advanced by 0x28 per row: byte offset of the matrix row's slot entry	^\s*iVar2\ =\ \*\(int\ \*\)\(param_3\ \+\ 0x54\)\ \+\ iVar8;$@2	+2
+use	extvsAllocConstantRegisters	iVar8	growRowIndex	INFERRED	0 .. 3: matrix row counter in the grown slot range	^\s*iVar8\ =\ 0;$	+1
+use	extvsAllocConstantRegisters	iVar8	growRowIndex	INFERRED	0 .. 3: matrix row counter in the grown slot range	^\s*iVar3\ =\ iVar10\ \+\ iVar8;$	+2
+use	extvsAllocConstantRegisters	iVar8	growRowIndex	INFERRED	0 .. 3: matrix row counter in the grown slot range	^\s*iVar8\ =\ 0;$@2	+1
+use	extvsAllocConstantRegisters	iVar8	growRowIndex	INFERRED	0 .. 3: matrix row counter in the grown slot range	^\s*iVar3\ =\ iVar10\ \+\ iVar8;$@2	+2
+use	extvsAllocConstantRegisters	iVar10	rowsLeft	INFERRED	4 .. 0: matrix rows left to assign	^\s*iVar10\ =\ 4;$	+1
+use	extvsAllocConstantRegisters	iVar10	rowsLeft	INFERRED	4 .. 0: matrix rows left to assign	^\s*iVar10\ =\ iVar10\ \+\ \-1;$	+2
+use	extvsAllocConstantRegisters	iVar10	rowsLeft	INFERRED	4 .. 0: matrix rows left to assign	^\s*iVar10\ =\ 4;$@2	+1
+use	extvsAllocConstantRegisters	iVar10	rowsLeft	INFERRED	4 .. 0: matrix rows left to assign	^\s*iVar10\ =\ iVar10\ \+\ \-1;$@2	+2
+use	extvsAllocConstantRegisters	iVar10	oldSlotCount	INFERRED	programState+0x58: slot entry count before the array grows	^\s*iVar10\ =\ \*\(int\ \*\)\(param_3\ \+\ 0x58\);$	+2
+use	extvsAllocConstantRegisters	iVar10	oldSlotCount	INFERRED	programState+0x58: slot entry count before the array grows	^\s*iVar4\ =\ iVar10\ \*\ 0x28;$	+1
+use	extvsAllocConstantRegisters	iVar10	oldSlotCount	INFERRED	programState+0x58: slot entry count before the array grows	^\s*iVar3\ =\ iVar10\ \+\ iVar8;$	+1
+use	extvsAllocConstantRegisters	iVar10	oldSlotCount	INFERRED	programState+0x58: slot entry count before the array grows	^\s*iVar10\ =\ \*\(int\ \*\)\(param_3\ \+\ 0x58\);$@2	+2
+use	extvsAllocConstantRegisters	iVar10	oldSlotCount	INFERRED	programState+0x58: slot entry count before the array grows	^\s*iVar4\ =\ iVar10\ \*\ 0x28;$@2	+1
+use	extvsAllocConstantRegisters	iVar10	oldSlotCount	INFERRED	programState+0x58: slot entry count before the array grows	^\s*iVar3\ =\ iVar10\ \+\ iVar8;$@2	+1

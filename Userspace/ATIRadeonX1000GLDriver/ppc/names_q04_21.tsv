@@ -1,0 +1,34 @@
+use	FUN_000bfed0	puVar60	outCursor	INFERRED	starts at param_3 (the output record) and is used to read its fields before the program walk	^\s*puVar60\ =\ param_3;$	+1
+use	FUN_000bfed0	puVar60	outCursor	INFERRED	starts at param_3 (the output record) and is used to read its fields before the program walk	^\s*\(\(int\ \(\*\)\(\)\)FUN_000bf400\)\(param_1,1,puVar60,in_r6,in_r7,in_r8,\(uint\)\*\(ushort\ \*\)\(param_1\ \+\ 0x20\)\);$	+1
+use	FUN_000bfed0	puVar60	inst	INFERRED	instruction record of the program at psnProgram + index*0x48 (index in uVar59), advanced 0x12 words per step	^\s*puVar60\ =\ \(uint\ \*\)\(uVar59\ \*\ 0x48\ \+\ param_1\);$	+1
+use	FUN_000bfed0	puVar60	inst	INFERRED	instruction record of the program at psnProgram + index*0x48 (index in uVar59), advanced 0x12 words per step	^\s*uVar43\ =\ \*puVar60;$	+1
+use	FUN_000bfed0	puVar60	inst	INFERRED	instruction record of the program at psnProgram + index*0x48 (index in uVar59), advanced 0x12 words per step	^\s*uVar24\ =\ \*\(ushort\ \*\)\(\(int\)puVar60\ \+\ 0xe\);$	+2
+use	FUN_000bfed0	puVar60	inst	INFERRED	instruction record of the program at psnProgram + index*0x48 (index in uVar59), advanced 0x12 words per step	^\s*uVar43\ =\ puVar60\[5\];$	+12
+use	FUN_000bfed0	puVar60	inst	INFERRED	instruction record of the program at psnProgram + index*0x48 (index in uVar59), advanced 0x12 words per step	^\s*\(\*\(byte\ \*\)\(\(int\)puVar60\ \+\ 0x1b\)\ \&\ 1\)\ <<\ 0x19\ \|$	+5
+use	FUN_000bfed0	puVar60	inst	INFERRED	instruction record of the program at psnProgram + index*0x48 (index in uVar59), advanced 0x12 words per step	^\s*uVar24\ =\ \*\(ushort\ \*\)\(\(int\)puVar60\ \+\ 0xe\);$@2	+1
+use	FUN_000bfed0	puVar60	inst	INFERRED	instruction record of the program at psnProgram + index*0x48 (index in uVar59), advanced 0x12 words per step	^\s*uVar48\ =\ \(\*\(byte\ \*\)\(puVar60\ \+\ 0x11\)\ \&\ 3\)\ <<\ 0x17\ \|$	+16
+use	FUN_000bfed0	puVar60	inst	INFERRED	instruction record of the program at psnProgram + index*0x48 (index in uVar59), advanced 0x12 words per step	^\s*uVar17\ =\ \*\(ushort\ \*\)\(puVar60\ \+\ 4\);$	+1
+use	FUN_000bfed0	puVar60	inst	INFERRED	instruction record of the program at psnProgram + index*0x48 (index in uVar59), advanced 0x12 words per step	^\s*uVar18\ =\ \*\(ushort\ \*\)\(\(int\)puVar60\ \+\ 0x12\);$	+1
+use	FUN_000bfed0	puVar60	inst	INFERRED	instruction record of the program at psnProgram + index*0x48 (index in uVar59), advanced 0x12 words per step	^\s*uVar19\ =\ \*\(ushort\ \*\)\(\(int\)puVar60\ \+\ 0x1a\);$	+2
+use	FUN_000bfed0	puVar60	inst	INFERRED	instruction record of the program at psnProgram + index*0x48 (index in uVar59), advanced 0x12 words per step	^\s*uVar20\ =\ \*\(ushort\ \*\)\(puVar60\ \+\ 7\);$	+1
+use	FUN_000bfed0	puVar60	inst	INFERRED	instruction record of the program at psnProgram + index*0x48 (index in uVar59), advanced 0x12 words per step	^\s*uVar21\ =\ \*\(ushort\ \*\)\(\(int\)puVar60\ \+\ 0x1e\);$	+1
+use	FUN_000bfed0	puVar60	inst	INFERRED	instruction record of the program at psnProgram + index*0x48 (index in uVar59), advanced 0x12 words per step	^\s*local_6c\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)puVar60\ \+\ 0x2a\);$	+3
+use	FUN_000bfed0	puVar60	inst	INFERRED	instruction record of the program at psnProgram + index*0x48 (index in uVar59), advanced 0x12 words per step	^\s*uVar44\ =\ puVar60\[9\];$	+1
+use	FUN_000bfed0	puVar60	inst	INFERRED	instruction record of the program at psnProgram + index*0x48 (index in uVar59), advanced 0x12 words per step	^\s*local_70\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)puVar60\ \+\ 0x2b\);$	+1
+use	FUN_000bfed0	puVar60	inst	INFERRED	instruction record of the program at psnProgram + index*0x48 (index in uVar59), advanced 0x12 words per step	^\s*bVar3\ =\ \*\(byte\ \*\)\(\(int\)puVar60\ \+\ 0x2d\);$	+5
+use	FUN_000bfed0	puVar60	inst	INFERRED	instruction record of the program at psnProgram + index*0x48 (index in uVar59), advanced 0x12 words per step	^\s*local_78\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)puVar60\ \+\ 0x36\);$	+2
+use	FUN_000bfed0	puVar60	inst	INFERRED	instruction record of the program at psnProgram + index*0x48 (index in uVar59), advanced 0x12 words per step	^\s*local_6c\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)puVar60\ \+\ 0x37\);$	+2
+use	FUN_000bfed0	puVar60	inst	INFERRED	instruction record of the program at psnProgram + index*0x48 (index in uVar59), advanced 0x12 words per step	^\s*bVar8\ =\ \*\(byte\ \*\)\(puVar60\ \+\ 0xf\);$	+6
+use	FUN_000bfed0	puVar60	inst	INFERRED	instruction record of the program at psnProgram + index*0x48 (index in uVar59), advanced 0x12 words per step	^\s*bVar12\ =\ \*\(byte\ \*\)\(\(int\)puVar60\ \+\ 0x23\);$	+2
+use	FUN_000bfed0	puVar60	inst	INFERRED	instruction record of the program at psnProgram + index*0x48 (index in uVar59), advanced 0x12 words per step	^\s*bVar14\ =\ \*\(byte\ \*\)\(\(int\)puVar60\ \+\ 0x31\);$	+2
+use	FUN_000bfed0	puVar60	inst	INFERRED	instruction record of the program at psnProgram + index*0x48 (index in uVar59), advanced 0x12 words per step	^\s*local_6c\ =\ \(uint\)\*\(byte\ \*\)\(puVar60\ \+\ 0xb\);$	+1
+use	FUN_000bfed0	puVar60	inst	INFERRED	instruction record of the program at psnProgram + index*0x48 (index in uVar59), advanced 0x12 words per step	^\s*local_78\ =\ \(uint\)\*\(byte\ \*\)\(puVar60\ \+\ 0xe\);$	+1
+use	FUN_000bfed0	puVar60	inst	INFERRED	instruction record of the program at psnProgram + index*0x48 (index in uVar59), advanced 0x12 words per step	^\s*local_70\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)puVar60\ \+\ 0x3b\);$	+1
+use	FUN_000bfed0	puVar60	inst	INFERRED	instruction record of the program at psnProgram + index*0x48 (index in uVar59), advanced 0x12 words per step	^\s*bVar15\ =\ \*\(byte\ \*\)\(\(int\)puVar60\ \+\ 0x2f\);$	+2
+use	FUN_000bfed0	puVar60	inst	INFERRED	instruction record of the program at psnProgram + index*0x48 (index in uVar59), advanced 0x12 words per step	^\s*if\ \(\*puVar60\ ==\ 3\)\ \{$	+2
+use	FUN_000bfed0	puVar60	inst	INFERRED	instruction record of the program at psnProgram + index*0x48 (index in uVar59), advanced 0x12 words per step	^\s*bVar1\ =\ \*\(byte\ \*\)\(\(int\)puVar60\ \+\ 0xe\);$	+2
+use	FUN_000bfed0	puVar60	inst	INFERRED	instruction record of the program at psnProgram + index*0x48 (index in uVar59), advanced 0x12 words per step	^\s*bVar3\ =\ \*\(byte\ \*\)\(puVar60\ \+\ 4\);$	+15
+use	FUN_000bfed0	puVar60	inst	INFERRED	instruction record of the program at psnProgram + index*0x48 (index in uVar59), advanced 0x12 words per step	^\s*puVar60\ =\ puVar60\ \+\ 0x12;$	+1
+local	FUN_000bfed0	piVar46	scanInst	INFERRED	instruction record scanned by the leading loop: starts at psnProgram+0x90 and advances 0x12 words per step
+local	FUN_000bfed0	piVar52	prevScanInst	INFERRED	the record before scanInst (starts at psnProgram+0x48); its fields +2/+9 are read for the header bits
+local	FUN_000bfed0	piVar39	nextScanInst	INFERRED	scanInst, kept while piVar45 follows

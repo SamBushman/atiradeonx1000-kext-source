@@ -562,8 +562,8 @@ int _gldDestroyFramebuffer(ctx, framebuffer)
   return 0;
 }
 
-/* FUN_00007d50 @ 0x7d50 (368 bytes) */
-int FUN_00007d50(ctx, dispatch, dirtyBits, scratchR6, scratchR7, scratchR8)
+/* gld_bindCurrentFramebuffer @ 0x7d50 (368 bytes) */
+int gld_bindCurrentFramebuffer(ctx, dispatch, dirtyBits, scratchR6, scratchR7, scratchR8)
   int ctx;
   undefined4 dispatch;
   undefined4 dirtyBits;
@@ -571,68 +571,71 @@ int FUN_00007d50(ctx, dispatch, dirtyBits, scratchR6, scratchR7, scratchR8)
   undefined4 scratchR7;
   undefined4 scratchR8;
 {
-  bool bVar1;
-  bool bVar2;
-  int iVar3;
-  int iVar4;
-  int *piVar5;
-  int *piVar6;
+  int casResult2;
+  int oldAttachmentsLeft;
+  int attachmentsLeft;
+  int validateResult;
+  bool hadFramebuffer;
+  bool noNewFramebuffer;
+  int casResult;
+  int oldAttachmentCursor;
+  int *refCountWord;
+  int *newFramebuffer;
   char reservation;
   byte crField0;
-  int iVar7;
   
-  iVar4 = *(int *)(ctx + 0x150);
-  bVar1 = iVar4 != 0;
-  piVar6 = *(int **)(*(int *)(ctx + 0x18) + 0x1a0);
-  if (bVar1) {
-    iVar7 = 6;
+  oldAttachmentCursor = *(int *)(ctx + 0x150);
+  hadFramebuffer = oldAttachmentCursor != 0;
+  newFramebuffer = *(int **)(*(int *)(ctx + 0x18) + 0x1a0);
+  if (hadFramebuffer) {
+    oldAttachmentsLeft = 6;
     do {
-      if (*(int *)(iVar4 + 0x4c) != 0) {
-        piVar5 = (int *)(*(int *)(iVar4 + 0x4c) + 0x10);
+      if (*(int *)(oldAttachmentCursor + 0x4c) != 0) {
+        refCountWord = (int *)(*(int *)(oldAttachmentCursor + 0x4c) + 0x10);
         do {
           if (reservation != '\0') {
-            iVar3 = storeWordConditionalIndexed(*piVar5 + -0x10000,0,piVar5);
-            *piVar5 = iVar3;
+            casResult = storeWordConditionalIndexed(*refCountWord + -0x10000,0,refCountWord);
+            *refCountWord = casResult;
             crField0 = 2;
           }
         } while (!(bool)(crField0 >> 1 & 1));
       }
-      iVar4 = iVar4 + 4;
-      iVar7 = iVar7 + -1;
-    } while (iVar7 != 0);
+      oldAttachmentCursor = oldAttachmentCursor + 4;
+      oldAttachmentsLeft = oldAttachmentsLeft + -1;
+    } while (oldAttachmentsLeft != 0);
   }
-  bVar2 = piVar6 == (int *)0x0;
-  if ((!bVar2) && (*(int *)(*piVar6 + 0xa0) == 0)) {
-    if (*(int *)(piVar6[1] + 0x18) == 0) {
-      if (*(int *)(piVar6[1] + 0x1c) == 0) goto LAB_00007e28;
+  noNewFramebuffer = newFramebuffer == (int *)0x0;
+  if ((!noNewFramebuffer) && (*(int *)(*newFramebuffer + 0xa0) == 0)) {
+    if (*(int *)(newFramebuffer[1] + 0x18) == 0) {
+      if (*(int *)(newFramebuffer[1] + 0x1c) == 0) goto LAB_00007e28;
     }
     else {
-      iVar4 = FUN_0001b510(ctx,piVar6,dirtyBits,scratchR6,scratchR7,scratchR8);
-      if (iVar4 != 0) goto LAB_00007e28;
+      validateResult = gld_validateFramebuffer(ctx,newFramebuffer,dirtyBits,scratchR6,scratchR7,scratchR8);
+      if (validateResult != 0) goto LAB_00007e28;
     }
   }
-  piVar6 = (int *)0x0;
-  bVar2 = true;
+  newFramebuffer = (int *)0x0;
+  noNewFramebuffer = true;
 LAB_00007e28:
-  *(int **)(ctx + 0x150) = piVar6;
-  if (!bVar2) {
-    iVar4 = 6;
+  *(int **)(ctx + 0x150) = newFramebuffer;
+  if (!noNewFramebuffer) {
+    attachmentsLeft = 6;
     do {
-      if (piVar6[0x13] != 0) {
-        piVar5 = (int *)(piVar6[0x13] + 0x10);
+      if (newFramebuffer[0x13] != 0) {
+        refCountWord = (int *)(newFramebuffer[0x13] + 0x10);
         do {
           if (reservation != '\0') {
-            iVar7 = storeWordConditionalIndexed(*piVar5 + 0x10000,0,piVar5);
-            *piVar5 = iVar7;
+            casResult2 = storeWordConditionalIndexed(*refCountWord + 0x10000,0,refCountWord);
+            *refCountWord = casResult2;
             crField0 = 2;
           }
         } while (!(bool)(crField0 >> 1 & 1));
       }
-      piVar6 = piVar6 + 1;
-      iVar4 = iVar4 + -1;
-    } while (iVar4 != 0);
+      newFramebuffer = newFramebuffer + 1;
+      attachmentsLeft = attachmentsLeft + -1;
+    } while (attachmentsLeft != 0);
   }
-  if ((*(int *)(*(int *)(ctx + 0x18) + 0x1a0) == 0) && (bVar1)) {
+  if ((*(int *)(*(int *)(ctx + 0x18) + 0x1a0) == 0) && (hadFramebuffer)) {
     gld_updateYInvertedFlag(ctx);
     return;
   }
@@ -1768,7 +1771,7 @@ int _gldGetPipelineProgramInfo(arg0, arg1, arg2, arg3)
   undefined4 arg2;
   undefined4 arg3;
 {
-  FUN_000269a0(arg0,arg1,arg2,arg3);
+  gld_getProgramParameter(arg0,arg1,arg2,arg3);
   return 0;
 }
 
@@ -1796,183 +1799,183 @@ int _gldDestroyPipelineProgram(ctx, program)
   return 0;
 }
 
-/* FUN_000095e0 @ 0x95e0 (192 bytes) */
-int FUN_000095e0(ctx)
+/* gld_resolveProgramSlots @ 0x95e0 (192 bytes) */
+int gld_resolveProgramSlots(ctx)
   int ctx;
 {
-  bool bVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
-  int *piVar5;
+  bool isLastSlot;
+  int engineObjectSlot;
+  int programIndex;
+  int programSlotPtr;
+  int *programObject;
   
-  iVar3 = 0;
-  iVar4 = ctx;
+  programIndex = 0;
+  programSlotPtr = ctx;
   do {
-    iVar2 = iVar3 * 4 + *(int *)(ctx + 0x18);
-    piVar5 = *(int **)(iVar2 + 0x198);
-    if (piVar5 == (int *)0x0) {
-      if (((unsigned char *)0x00004304)[iVar3 * 8 + *(int *)(ctx + 0x10)] != '\0') {
-        piVar5 = *(int **)(iVar2 + 0x18c);
+    engineObjectSlot = programIndex * 4 + *(int *)(ctx + 0x18);
+    programObject = *(int **)(engineObjectSlot + 0x198);
+    if (programObject == (int *)0x0) {
+      if (((unsigned char *)0x00004304)[programIndex * 8 + *(int *)(ctx + 0x10)] != '\0') {
+        programObject = *(int **)(engineObjectSlot + 0x18c);
         goto LAB_00009640;
       }
-      *(undefined4 *)(iVar4 + 0x1cc) = 0;
+      *(undefined4 *)(programSlotPtr + 0x1cc) = 0;
     }
     else {
 LAB_00009640:
-      if ((*(int *)(*piVar5 + 4) == 0) || (iVar2 = FUN_00026650(ctx,piVar5), iVar2 == 0)) {
-        *(undefined4 *)(iVar4 + 0x1cc) = 0;
+      if ((*(int *)(*programObject + 4) == 0) || (engineObjectSlot = gld_bindProgramObject(ctx,programObject), engineObjectSlot == 0)) {
+        *(undefined4 *)(programSlotPtr + 0x1cc) = 0;
       }
       else {
-        *(int **)(iVar4 + 0x1cc) = piVar5;
+        *(int **)(programSlotPtr + 0x1cc) = programObject;
       }
     }
-    bVar1 = iVar3 == 1;
-    iVar4 = iVar4 + 4;
-    iVar3 = iVar3 + 1;
-    if (bVar1) {
+    isLastSlot = programIndex == 1;
+    programSlotPtr = programSlotPtr + 4;
+    programIndex = programIndex + 1;
+    if (isLastSlot) {
       return;
     }
   } while( true );
 }
 
-/* FUN_000096b0 @ 0x96b0 (72 bytes) */
-int FUN_000096b0(param_1, param_2, param_3, param_4)
-  uint param_1;
-  undefined4 param_2;
-  int *param_3;
-  undefined4 *param_4;
+/* gld_decodeProgramOperandOffset @ 0x96b0 (72 bytes) */
+int gld_decodeProgramOperandOffset(operandWord, staleArgR4, offsetOut, byteSizeOut)
+  uint operandWord;
+  undefined4 staleArgR4;
+  int *offsetOut;
+  undefined4 *byteSizeOut;
 {
   uint uVar1;
   uint uVar2;
   uint uVar3;
   int iVar4;
   
-  *param_4 = 4;
-  switch(param_1 >> 0x10 & 0x1f) {
+  *byteSizeOut = 4;
+  switch(operandWord >> 0x10 & 0x1f) {
   case 0:
   case 1:
   case 9:
   case 0xf:
     return;
   case 2:
-    *param_3 = (param_1 & 0xffff) * 0x10 + 0x10;
+    *offsetOut = (operandWord & 0xffff) * 0x10 + 0x10;
     return;
   case 3:
-    uVar2 = param_1 & 0xff;
-    switch(param_1 >> 8 & 0xf) {
+    uVar2 = operandWord & 0xff;
+    switch(operandWord >> 8 & 0xf) {
     case 0:
-      *param_3 = uVar2 * 0x80 + 0x24c0;
+      *offsetOut = uVar2 * 0x80 + 0x24c0;
       return;
     case 1:
-      *param_3 = uVar2 * 0x80 + 0x24d0;
+      *offsetOut = uVar2 * 0x80 + 0x24d0;
       return;
     case 2:
-      *param_3 = uVar2 * 0x80 + 0x24e0;
+      *offsetOut = uVar2 * 0x80 + 0x24e0;
       return;
     case 3:
-      *param_3 = uVar2 * 0x80 + 0x24f0;
+      *offsetOut = uVar2 * 0x80 + 0x24f0;
       return;
     case 4:
-      *param_3 = uVar2 * 0x80 + 0x2500;
+      *offsetOut = uVar2 * 0x80 + 0x2500;
       return;
     case 5:
-      *param_3 = uVar2 * 0x80 + 0x2510;
+      *offsetOut = uVar2 * 0x80 + 0x2510;
       return;
     case 6:
-      *param_3 = uVar2 * 0x80 + 0x2520;
+      *offsetOut = uVar2 * 0x80 + 0x2520;
       return;
     default:
       return;
     }
   case 4:
-    uVar3 = param_1 & 0xff;
-    uVar1 = param_1 >> 9 & 3;
-    uVar2 = param_1 >> 8 & 1;
+    uVar3 = operandWord & 0xff;
+    uVar1 = operandWord >> 9 & 3;
+    uVar2 = operandWord >> 8 & 1;
     if (uVar1 == 1) {
-      *param_3 = uVar2 * 0x240 + uVar3 * 0x30 + 0x2920;
+      *offsetOut = uVar2 * 0x240 + uVar3 * 0x30 + 0x2920;
       return;
     }
     if (uVar1 == 2) {
-      *param_3 = uVar2 * 0x240 + uVar3 * 0x30 + 0x2930;
+      *offsetOut = uVar2 * 0x240 + uVar3 * 0x30 + 0x2930;
       return;
     }
     if (uVar1 == 0) {
-      *param_3 = uVar2 * 0x240 + uVar3 * 0x30 + 0x2910;
+      *offsetOut = uVar2 * 0x240 + uVar3 * 0x30 + 0x2910;
       return;
     }
     return;
   case 5:
-    uVar2 = param_1 & 1;
-    switch(param_1 >> 1 & 7) {
+    uVar2 = operandWord & 1;
+    switch(operandWord >> 1 & 7) {
     case 0:
-      *param_3 = uVar2 * 0x240 + 0x28c0;
+      *offsetOut = uVar2 * 0x240 + 0x28c0;
       return;
     case 1:
-      *param_3 = uVar2 * 0x240 + 0x28d0;
+      *offsetOut = uVar2 * 0x240 + 0x28d0;
       return;
     case 2:
-      *param_3 = uVar2 * 0x240 + 0x28e0;
+      *offsetOut = uVar2 * 0x240 + 0x28e0;
       return;
     case 3:
-      *param_3 = uVar2 * 0x240 + 0x28f0;
+      *offsetOut = uVar2 * 0x240 + 0x28f0;
       return;
     case 4:
-      *param_3 = uVar2 * 0x240 + 0x2900;
+      *offsetOut = uVar2 * 0x240 + 0x2900;
       return;
     case 5:
-      *param_3 = uVar2 * 0x240 + 0x2a90;
+      *offsetOut = uVar2 * 0x240 + 0x2a90;
       return;
     default:
       return;
     }
   case 6:
-    *param_3 = 0x24b0;
+    *offsetOut = 0x24b0;
     return;
   case 7:
     break;
   case 8:
-    uVar1 = param_1 >> 5 & 7;
-    uVar2 = param_1 & 0x1f;
+    uVar1 = operandWord >> 5 & 7;
+    uVar2 = operandWord & 0x1f;
     if (uVar1 == 1) {
-      *param_3 = (int)(((unsigned char *)0x000039c0) + uVar2 * 0x94);
+      *offsetOut = (int)(((unsigned char *)0x000039c0) + uVar2 * 0x94);
       return;
     }
     if (uVar1 < 2) {
       if (uVar1 == 0) {
-        *param_3 = (int)(((unsigned char *)0x0000399c) + uVar2 * 0x94);
+        *offsetOut = (int)(((unsigned char *)0x0000399c) + uVar2 * 0x94);
         return;
       }
       return;
     }
     if (uVar1 == 2) {
-      *param_3 = (int)(((unsigned char *)0x000039e4) + uVar2 * 0x94);
+      *offsetOut = (int)(((unsigned char *)0x000039e4) + uVar2 * 0x94);
       return;
     }
     if (uVar1 == 3) {
-      *param_3 = (int)(((unsigned char *)0x00003a08) + uVar2 * 0x94);
+      *offsetOut = (int)(((unsigned char *)0x00003a08) + uVar2 * 0x94);
       return;
     }
     return;
   case 10:
-    *param_3 = (int)(((unsigned char *)0x00003e2c) + (param_1 & 0xff) * 0x10);
+    *offsetOut = (int)(((unsigned char *)0x00003e2c) + (operandWord & 0xff) * 0x10);
     return;
   case 0xb:
-    *param_3 = (int)((unsigned char *)0x00002de0);
+    *offsetOut = (int)((unsigned char *)0x00002de0);
     return;
   case 0xc:
-    *param_3 = (int)((unsigned char *)0x00002df0);
+    *offsetOut = (int)((unsigned char *)0x00002df0);
     return;
   case 0xd:
-    *param_3 = (int)((unsigned char *)0x000030bc);
+    *offsetOut = (int)((unsigned char *)0x000030bc);
     return;
   case 0xe:
-    *param_3 = (int)((unsigned char *)0x000030cc);
+    *offsetOut = (int)((unsigned char *)0x000030cc);
     return;
   case 0x10:
-    uVar2 = param_1 & 0xff;
+    uVar2 = operandWord & 0xff;
     iVar4 = uVar2 << 6;
-    switch(param_1 >> 8 & 7) {
+    switch(operandWord >> 8 & 7) {
     case 0:
       iVar4 = 0;
       break;
@@ -1991,250 +1994,250 @@ int FUN_000096b0(param_1, param_2, param_3, param_4)
     case 5:
       iVar4 = (uVar2 + 8) * 0x40;
     }
-    uVar2 = param_1 >> 0xe & 3;
+    uVar2 = operandWord >> 0xe & 3;
     if (uVar2 < 2) {
-      *param_3 = iVar4 + 0x1860;
+      *offsetOut = iVar4 + 0x1860;
     }
     else {
-      *param_3 = iVar4 + 0x1e60;
+      *offsetOut = iVar4 + 0x1e60;
     }
-    uVar1 = param_1 >> 0xc & 3;
+    uVar1 = operandWord >> 0xc & 3;
     if (uVar2 < 3) {
       if (uVar2 != 0) {
-        *param_3 = uVar1 * 0x10 + *param_3;
+        *offsetOut = uVar1 * 0x10 + *offsetOut;
         return;
       }
     }
     else if (uVar2 != 3) {
       return;
     }
-    *param_3 = uVar1 * 4 + *param_3;
-    *param_4 = 0x10;
+    *offsetOut = uVar1 * 4 + *offsetOut;
+    *byteSizeOut = 0x10;
     return;
   default:
     return;
   }
-  uVar1 = param_1 >> 5 & 7;
-  uVar2 = param_1 & 0x1f;
+  uVar1 = operandWord >> 5 & 7;
+  uVar2 = operandWord & 0x1f;
   if (uVar1 == 1) {
-    *param_3 = (int)(((unsigned char *)0x000039b0) + uVar2 * 0x94);
+    *offsetOut = (int)(((unsigned char *)0x000039b0) + uVar2 * 0x94);
     return;
   }
   if (uVar1 < 2) {
     if (uVar1 == 0) {
-      *param_3 = (int)(((unsigned char *)0x0000398c) + uVar2 * 0x94);
+      *offsetOut = (int)(((unsigned char *)0x0000398c) + uVar2 * 0x94);
       return;
     }
     return;
   }
   if (uVar1 == 2) {
-    *param_3 = (int)(((unsigned char *)0x000039d4) + uVar2 * 0x94);
+    *offsetOut = (int)(((unsigned char *)0x000039d4) + uVar2 * 0x94);
     return;
   }
   if (uVar1 == 3) {
-    *param_3 = (int)(((unsigned char *)0x000039f8) + uVar2 * 0x94);
+    *offsetOut = (int)(((unsigned char *)0x000039f8) + uVar2 * 0x94);
     return;
   }
   return;
 }
 
-/* FUN_0000973c @ 0x973c (20 bytes) */
-int FUN_0000973c(param_1, param_2, param_3)
-  undefined4 param_1;
-  undefined4 param_2;
-  int *param_3;
+/* gld_decodeProgramOperandOffset_frag_0000973c @ 0x973c (20 bytes) */
+int gld_decodeProgramOperandOffset_frag_0000973c(operandWord, staleArgR4, offsetOut)
+  undefined4 operandWord;
+  undefined4 staleArgR4;
+  int *offsetOut;
 {
-  undefined2 uStack_16;
+  undefined2 registerIndexShort;
   
-  *param_3 = (uint)uStack_16 * 0x10 + 0x10;
+  *offsetOut = (uint)registerIndexShort * 0x10 + 0x10;
   return;
 }
 
-/* FUN_00009750 @ 0x9750 (48 bytes) */
-int FUN_00009750(param_1, param_2, param_3, param_4, param_5, param_6)
-  undefined4 param_1;
-  undefined4 param_2;
-  int *param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  int param_6;
+/* gld_decodeProgramOperandOffset_frag_00009750 @ 0x9750 (48 bytes) */
+int gld_decodeProgramOperandOffset_frag_00009750(operandWord, staleArgR4, offsetOut, byteSizeOut, staleArgR7, jumpTableBase)
+  undefined4 operandWord;
+  undefined4 staleArgR4;
+  int *offsetOut;
+  undefined4 byteSizeOut;
+  undefined4 staleArgR7;
+  int jumpTableBase;
 {
-  uint uVar1;
-  uint uVar2;
-  undefined4 uStack_18;
+  uint fileSelect;
+  uint registerIndex;
+  undefined4 operandWordReg;
   
-  uVar2 = uStack_18 & 0xff;
-  uVar1 = uStack_18 >> 8 & 0xf;
-  if (6 < uVar1) {
+  registerIndex = operandWordReg & 0xff;
+  fileSelect = operandWordReg >> 8 & 0xf;
+  if (6 < fileSelect) {
     return;
   }
                     
-  switch(*(int *)(uVar1 * 4 + param_6 + 0xbc) + param_6 + 0xbc) {
+  switch(*(int *)(fileSelect * 4 + jumpTableBase + 0xbc) + jumpTableBase + 0xbc) {
   case 0x979c:
-    *param_3 = uVar2 * 0x80 + 0x24c0;
+    *offsetOut = registerIndex * 0x80 + 0x24c0;
     return;
   case 0x97ac:
-    *param_3 = uVar2 * 0x80 + 0x24d0;
+    *offsetOut = registerIndex * 0x80 + 0x24d0;
     return;
   case 0x97bc:
-    *param_3 = uVar2 * 0x80 + 0x24e0;
+    *offsetOut = registerIndex * 0x80 + 0x24e0;
     return;
   case 0x97cc:
-    *param_3 = uVar2 * 0x80 + 0x24f0;
+    *offsetOut = registerIndex * 0x80 + 0x24f0;
     return;
   case 0x97dc:
-    *param_3 = uVar2 * 0x80 + 0x2500;
+    *offsetOut = registerIndex * 0x80 + 0x2500;
     return;
   case 0x97ec:
-    *param_3 = uVar2 * 0x80 + 0x2510;
+    *offsetOut = registerIndex * 0x80 + 0x2510;
     return;
   case 0x97fc:
-    *param_3 = uVar2 * 0x80 + 0x2520;
+    *offsetOut = registerIndex * 0x80 + 0x2520;
     return;
   }
 }
 
-/* FUN_0000979c @ 0x979c (16 bytes) */
-int FUN_0000979c(param_1, param_2, param_3)
-  undefined4 param_1;
-  undefined4 param_2;
-  int *param_3;
+/* gld_decodeProgramOperandOffset_frag_0000979c @ 0x979c (16 bytes) */
+int gld_decodeProgramOperandOffset_frag_0000979c(operandWord, staleArgR4, offsetOut)
+  undefined4 operandWord;
+  undefined4 staleArgR4;
+  int *offsetOut;
 {
-  int staleArgR11;
+  int registerIndex;
   
-  *param_3 = staleArgR11 * 0x80 + 0x24c0;
+  *offsetOut = registerIndex * 0x80 + 0x24c0;
   return;
 }
 
-/* FUN_000097ac @ 0x97ac (16 bytes) */
-int FUN_000097ac(param_1, param_2, param_3)
-  undefined4 param_1;
-  undefined4 param_2;
-  int *param_3;
+/* gld_decodeProgramOperandOffset_frag_000097ac @ 0x97ac (16 bytes) */
+int gld_decodeProgramOperandOffset_frag_000097ac(operandWord, staleArgR4, offsetOut)
+  undefined4 operandWord;
+  undefined4 staleArgR4;
+  int *offsetOut;
 {
-  int staleArgR11;
+  int registerIndex;
   
-  *param_3 = staleArgR11 * 0x80 + 0x24d0;
+  *offsetOut = registerIndex * 0x80 + 0x24d0;
   return;
 }
 
-/* FUN_000097bc @ 0x97bc (16 bytes) */
-int FUN_000097bc(param_1, param_2, param_3)
-  undefined4 param_1;
-  undefined4 param_2;
-  int *param_3;
+/* gld_decodeProgramOperandOffset_frag_000097bc @ 0x97bc (16 bytes) */
+int gld_decodeProgramOperandOffset_frag_000097bc(operandWord, staleArgR4, offsetOut)
+  undefined4 operandWord;
+  undefined4 staleArgR4;
+  int *offsetOut;
 {
-  int staleArgR11;
+  int registerIndex;
   
-  *param_3 = staleArgR11 * 0x80 + 0x24e0;
+  *offsetOut = registerIndex * 0x80 + 0x24e0;
   return;
 }
 
-/* FUN_000097cc @ 0x97cc (16 bytes) */
-int FUN_000097cc(param_1, param_2, param_3)
-  undefined4 param_1;
-  undefined4 param_2;
-  int *param_3;
+/* gld_decodeProgramOperandOffset_frag_000097cc @ 0x97cc (16 bytes) */
+int gld_decodeProgramOperandOffset_frag_000097cc(operandWord, staleArgR4, offsetOut)
+  undefined4 operandWord;
+  undefined4 staleArgR4;
+  int *offsetOut;
 {
-  int staleArgR11;
+  int registerIndex;
   
-  *param_3 = staleArgR11 * 0x80 + 0x24f0;
+  *offsetOut = registerIndex * 0x80 + 0x24f0;
   return;
 }
 
-/* FUN_000097dc @ 0x97dc (16 bytes) */
-int FUN_000097dc(param_1, param_2, param_3)
-  undefined4 param_1;
-  undefined4 param_2;
-  int *param_3;
+/* gld_decodeProgramOperandOffset_frag_000097dc @ 0x97dc (16 bytes) */
+int gld_decodeProgramOperandOffset_frag_000097dc(operandWord, staleArgR4, offsetOut)
+  undefined4 operandWord;
+  undefined4 staleArgR4;
+  int *offsetOut;
 {
-  int staleArgR11;
+  int registerIndex;
   
-  *param_3 = staleArgR11 * 0x80 + 0x2500;
+  *offsetOut = registerIndex * 0x80 + 0x2500;
   return;
 }
 
-/* FUN_000097ec @ 0x97ec (16 bytes) */
-int FUN_000097ec(param_1, param_2, param_3)
-  undefined4 param_1;
-  undefined4 param_2;
-  int *param_3;
+/* gld_decodeProgramOperandOffset_frag_000097ec @ 0x97ec (16 bytes) */
+int gld_decodeProgramOperandOffset_frag_000097ec(operandWord, staleArgR4, offsetOut)
+  undefined4 operandWord;
+  undefined4 staleArgR4;
+  int *offsetOut;
 {
-  int staleArgR11;
+  int registerIndex;
   
-  *param_3 = staleArgR11 * 0x80 + 0x2510;
+  *offsetOut = registerIndex * 0x80 + 0x2510;
   return;
 }
 
-/* FUN_000097fc @ 0x97fc (16 bytes) */
-int FUN_000097fc(param_1, param_2, param_3)
-  undefined4 param_1;
-  undefined4 param_2;
-  int *param_3;
+/* gld_decodeProgramOperandOffset_frag_000097fc @ 0x97fc (16 bytes) */
+int gld_decodeProgramOperandOffset_frag_000097fc(operandWord, staleArgR4, offsetOut)
+  undefined4 operandWord;
+  undefined4 staleArgR4;
+  int *offsetOut;
 {
-  int staleArgR11;
+  int registerIndex;
   
-  *param_3 = staleArgR11 * 0x80 + 0x2520;
+  *offsetOut = registerIndex * 0x80 + 0x2520;
   return;
 }
 
-/* FUN_00009810 @ 0x9810 (112 bytes) */
-int FUN_00009810(param_1, param_2, param_3)
-  undefined4 param_1;
-  undefined4 param_2;
-  int *param_3;
+/* gld_decodeProgramOperandOffset_frag_00009810 @ 0x9810 (112 bytes) */
+int gld_decodeProgramOperandOffset_frag_00009810(operandWord, staleArgR4, offsetOut)
+  undefined4 operandWord;
+  undefined4 staleArgR4;
+  int *offsetOut;
 {
-  uint uVar1;
-  uint uVar2;
-  uint uVar3;
-  undefined4 uStack_18;
+  uint bankSelect;
+  uint kindSelect;
+  uint registerIndex;
+  undefined4 operandWordReg;
   
-  uVar3 = uStack_18 & 0xff;
-  uVar2 = uStack_18 >> 9 & 3;
-  uVar1 = uStack_18 >> 8 & 1;
-  if (uVar2 == 1) {
-    *param_3 = uVar1 * 0x240 + uVar3 * 0x30 + 0x2920;
+  registerIndex = operandWordReg & 0xff;
+  kindSelect = operandWordReg >> 9 & 3;
+  bankSelect = operandWordReg >> 8 & 1;
+  if (kindSelect == 1) {
+    *offsetOut = bankSelect * 0x240 + registerIndex * 0x30 + 0x2920;
     return;
   }
-  if (uVar2 != 2) {
-    if (uVar2 != 0) {
+  if (kindSelect != 2) {
+    if (kindSelect != 0) {
       return;
     }
-    *param_3 = uVar1 * 0x240 + uVar3 * 0x30 + 0x2910;
+    *offsetOut = bankSelect * 0x240 + registerIndex * 0x30 + 0x2910;
     return;
   }
-  *param_3 = uVar1 * 0x240 + uVar3 * 0x30 + 0x2930;
+  *offsetOut = bankSelect * 0x240 + registerIndex * 0x30 + 0x2930;
   return;
 }
 
-/* FUN_00009880 @ 0x9880 (48 bytes) */
-int FUN_00009880(param_1, param_2, param_3, param_4, param_5, param_6)
-  undefined4 param_1;
-  undefined4 param_2;
-  int *param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  int param_6;
+/* gld_decodeProgramOperandOffset_frag_00009880 @ 0x9880 (48 bytes) */
+int gld_decodeProgramOperandOffset_frag_00009880(operandWord, staleArgR4, offsetOut, byteSizeOut, staleArgR7, staleArgR8)
+  undefined4 operandWord;
+  undefined4 staleArgR4;
+  int *offsetOut;
+  undefined4 byteSizeOut;
+  undefined4 staleArgR7;
+  int staleArgR8;
 {
-  uint uStack_18;
+  uint operandWordReg;
   
-  if ((uStack_18 >> 1 & 7) < 6) {
+  if ((operandWordReg >> 1 & 7) < 6) {
                     
-    *param_3 = (uStack_18 & 1) * 0x240 + 0x28c0;
+    *offsetOut = (operandWordReg & 1) * 0x240 + 0x28c0;
     return;
   }
   return;
 }
 
-/* FUN_000098c8 @ 0x98c8 (16 bytes) */
-int FUN_000098c8(param_1, param_2, param_3)
-  undefined4 param_1;
-  undefined4 param_2;
-  int *param_3;
+/* gld_decodeProgramOperandOffset_frag_000098c8 @ 0x98c8 (16 bytes) */
+int gld_decodeProgramOperandOffset_frag_000098c8(operandWord, staleArgR4, offsetOut)
+  undefined4 operandWord;
+  undefined4 staleArgR4;
+  int *offsetOut;
 {
-  int staleArgR11;
+  int registerIndex;
   
-  *param_3 = staleArgR11 * 0x240 + 0x28c0;
+  *offsetOut = registerIndex * 0x240 + 0x28c0;
   return;
 }
 
@@ -2545,87 +2548,87 @@ int gldFormatAlphaBits(formatMask, param_2, param_3, param_4, param_5, param_6, 
   return formatMask >> 0x16 & 0x20;
 }
 
-/* FUN_0000a180 @ 0xa180 (344 bytes) */
-int FUN_0000a180(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  uint param_1;
-  undefined2 *param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+/* gld_channelBitsForFormat @ 0xa180 (344 bytes) */
+int gld_channelBitsForFormat(formatWord, bitsOut, staleArgR5, staleArgR6, staleArgR7, staleArgR8, staleArgR9)
+  uint formatWord;
+  undefined2 *bitsOut;
+  undefined4 staleArgR5;
+  undefined4 staleArgR6;
+  undefined4 staleArgR7;
+  undefined4 staleArgR8;
+  undefined4 staleArgR9;
 {
-  undefined2 uVar1;
+  undefined2 alphaBits;
   
-  *param_2 = 0;
-  param_2[4] = 0;
-  param_2[1] = 0;
-  param_2[2] = 0;
-  param_2[3] = 0;
-  if ((param_1 & 0x3c) == 0) {
-    if ((param_1 & 0x1c0) == 0) {
-      if ((param_1 & 0xe00) == 0) {
-        if ((param_1 & 0x3000) == 0) {
-          if ((param_1 & 0x1c000) == 0) {
-            if ((param_1 & 0xe0000) == 0) {
-              if ((param_1 & 0x300000) == 0) {
-                if ((param_1 & 0x2c00000) == 0) {
-                  if ((param_1 & 0x8000000) == 0) {
+  *bitsOut = 0;
+  bitsOut[4] = 0;
+  bitsOut[1] = 0;
+  bitsOut[2] = 0;
+  bitsOut[3] = 0;
+  if ((formatWord & 0x3c) == 0) {
+    if ((formatWord & 0x1c0) == 0) {
+      if ((formatWord & 0xe00) == 0) {
+        if ((formatWord & 0x3000) == 0) {
+          if ((formatWord & 0x1c000) == 0) {
+            if ((formatWord & 0xe0000) == 0) {
+              if ((formatWord & 0x300000) == 0) {
+                if ((formatWord & 0x2c00000) == 0) {
+                  if ((formatWord & 0x8000000) == 0) {
                     return 0;
                   }
-                  param_2[2] = 0x20;
-                  *param_2 = 0x20;
-                  param_2[1] = 0x20;
+                  bitsOut[2] = 0x20;
+                  *bitsOut = 0x20;
+                  bitsOut[1] = 0x20;
                 }
                 else {
-                  param_2[2] = 0x10;
-                  *param_2 = 0x10;
-                  param_2[1] = 0x10;
+                  bitsOut[2] = 0x10;
+                  *bitsOut = 0x10;
+                  bitsOut[1] = 0x10;
                 }
               }
               else {
-                param_2[2] = 0xc;
-                *param_2 = 0xc;
-                param_2[1] = 0xc;
+                bitsOut[2] = 0xc;
+                *bitsOut = 0xc;
+                bitsOut[1] = 0xc;
               }
             }
             else {
-              param_2[2] = 10;
-              *param_2 = 10;
-              param_2[1] = 10;
+              bitsOut[2] = 10;
+              *bitsOut = 10;
+              bitsOut[1] = 10;
             }
           }
           else {
-            param_2[2] = 8;
-            *param_2 = 8;
-            param_2[1] = 8;
+            bitsOut[2] = 8;
+            *bitsOut = 8;
+            bitsOut[1] = 8;
           }
         }
         else {
-          param_2[2] = 5;
-          param_2[1] = 6;
-          *param_2 = 5;
+          bitsOut[2] = 5;
+          bitsOut[1] = 6;
+          *bitsOut = 5;
         }
       }
       else {
-        param_2[2] = 5;
-        *param_2 = 5;
-        param_2[1] = 5;
+        bitsOut[2] = 5;
+        *bitsOut = 5;
+        bitsOut[1] = 5;
       }
     }
     else {
-      param_2[2] = 4;
-      *param_2 = 4;
-      param_2[1] = 4;
+      bitsOut[2] = 4;
+      *bitsOut = 4;
+      bitsOut[1] = 4;
     }
   }
   else {
-    param_2[1] = 3;
-    param_2[2] = 2;
-    *param_2 = 3;
+    bitsOut[1] = 3;
+    bitsOut[2] = 2;
+    *bitsOut = 3;
   }
-  uVar1 = ((int (*)())gldFormatAlphaBits)(param_1,param_2,param_3,param_4,param_5,param_6,param_7);
-  param_2[3] = uVar1;
+  alphaBits = ((int (*)())gldFormatAlphaBits)(formatWord,bitsOut,staleArgR5,staleArgR6,staleArgR7,staleArgR8,staleArgR9);
+  bitsOut[3] = alphaBits;
   return 1;
 }
 

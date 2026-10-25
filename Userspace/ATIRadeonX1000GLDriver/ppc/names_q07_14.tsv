@@ -1,0 +1,16 @@
+local	FUN_0013d3b8	iVar2	block	INFERRED	role read off the web: split instructions that write several components into per-component clones
+local	FUN_0013d3b8	param_1	program	INFERRED	role read off the web: split instructions that write several components into per-component clones
+use	FUN_0013d3b8	piVar3	lookaheadInst	INFERRED	role read off the web: split instructions that write several components into per-component clones	^\s*piVar3\ =\ \(int\ \*\)\(\*\(int\ \*\*\)\(iVar2\ \+\ 0x98\)\)\[2\];$	+1
+use	FUN_0013d3b8	piVar3	lookaheadInst	INFERRED	role read off the web: split instructions that write several components into per-component clones	^\s*if\ \(piVar3\ !=\ \(int\ \*\)0x0\)\ \{$	+1
+use	FUN_0013d3b8	piVar3	lookaheadInst	INFERRED	role read off the web: split instructions that write several components into per-component clones	^\s*piVar4\ =\ piVar3;$	+1
+use	FUN_0013d3b8	piVar3	lookaheadInst	INFERRED	role read off the web: split instructions that write several components into per-component clones	^\s*piVar3\ =\ \(int\ \*\)piVar4\[2\];$	+1
+use	FUN_0013d3b8	piVar3	componentSelectTable	INFERRED	role read off the web: split instructions that write several components into per-component clones	^\s*piVar3\ =\ \(int\ \*\)PTR_DAT_001e8b64;$	+1
+use	FUN_0013d3b8	piVar3	componentSelectTable	INFERRED	role read off the web: split instructions that write several components into per-component clones	^\s*piVar10\[0x27\]\ =\ \*piVar3;$	+1
+use	FUN_0013d3b8	piVar3	componentSelectTable	INFERRED	role read off the web: split instructions that write several components into per-component clones	^\s*\*\(int\ \*\)\(iVar7\ \+\ 0x9c\)\ =\ \*piVar3;$	+1
+use	FUN_0013d3b8	piVar3	componentSelectTable	INFERRED	role read off the web: split instructions that write several components into per-component clones	^\s*piVar3\ =\ piVar3\ \+\ 1;$	+1
+local	FUN_0013d3b8	piVar4	nextInst	INFERRED	role read off the web: split instructions that write several components into per-component clones
+local	FUN_0013d3b8	piVar10	inst	INFERRED	role read off the web: split instructions that write several components into per-component clones
+use	FUN_0013d3b8	uVar8	cloneVregId	INFERRED	role read off the web: split instructions that write several components into per-component clones	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(iVar5\ \+\ 0x14c\);$	+1
+use	FUN_0013d3b8	uVar8	cloneVregId	INFERRED	role read off the web: split instructions that write several components into per-component clones	^\s*\*\(undefined4\ \*\)\(iVar6\ \+\ 8\)\ =\ uVar8;$	+1
+use	FUN_0013d3b8	uVar8	cloneVregIdB	INFERRED	role read off the web: split instructions that write several components into per-component clones	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(iVar6\ \+\ 0x14c\);$	+1
+use	FUN_0013d3b8	uVar8	cloneVregIdB	INFERRED	role read off the web: split instructions that write several components into per-component clones	^\s*\*\(undefined4\ \*\)\(iVar7\ \+\ 8\)\ =\ uVar8;$	+1

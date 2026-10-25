@@ -1,0 +1,29 @@
+local	FUN_001235b8	param_1	owner	INFERRED	object whose +0x14 vector holds the entries searched
+local	FUN_001235b8	param_2	oldEntry	INFERRED	entry value looked for in the vector
+local	FUN_001235b8	param_3	newEntry	INFERRED	value stored in place of oldEntry
+use	FUN_001235b8	uVar1	vectorCount	INFERRED	filled count of the vector, first read	^\s*uVar1\ =\ \(\*\(uint\ \*\*\)\(param_1\ \+\ 0x14\)\)\[1\];$	+2
+use	FUN_001235b8	uVar1	vectorCount	INFERRED	filled count of the vector, first read	^\s*if\ \(uVar1\ <=\ uVar4\)\ \{$	+2
+use	FUN_001235b8	uVar1	vectorCount	INFERRED	filled count of the vector, first read	^\s*uVar1\ =\ puVar6\[1\];$@2	+1
+use	FUN_001235b8	uVar1	vectorCount	INFERRED	filled count of the vector, first read	^\s*\}\ while\ \(uVar4\ <\ uVar1\);$	+1
+use	FUN_001235b8	uVar1	vectorCountB	INFERRED	filled count of the vector, re-read at the match and at the loop end	^\s*uVar1\ =\ puVar6\[1\];$	+3
+use	FUN_001235b8	piVar2	entryRef	INFERRED	element reference being compared with oldEntry	^\s*piVar2\ =\ \(int\ \*\)\(uVar4\ \*\ 4\ \+\ puVar5\[2\]\);$	+1
+use	FUN_001235b8	piVar2	entryRef	INFERRED	element reference being compared with oldEntry	^\s*piVar2\ =\ \(int\ \*\)FUN_0019423c\(puVar5,uVar4\);$	+1
+use	FUN_001235b8	piVar2	entryRef	INFERRED	element reference being compared with oldEntry	^\s*if\ \(\*piVar2\ ==\ param_2\)\ \{$	+1
+use	FUN_001235b8	puVar3	matchRef	INFERRED	element reference of the matching entry	^\s*puVar3\ =\ \(undefined4\ \*\)\(uVar4\ \*\ 4\ \+\ puVar6\[2\]\);$	+1
+use	FUN_001235b8	puVar3	matchRef	INFERRED	element reference of the matching entry	^\s*puVar3\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar6,uVar4\);$	+1
+use	FUN_001235b8	puVar3	matchRef	INFERRED	element reference of the matching entry	^\s*\*puVar3\ =\ param_3;$	+1
+use	FUN_001235b8	puVar5	entryVector	INFERRED	vector header (owner +0x14), as read before the lookup	^\s*puVar5\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 0x14\);$	+1
+use	FUN_001235b8	puVar5	entryVector	INFERRED	vector header (owner +0x14), as read before the lookup	^\s*if\ \(uVar4\ <\ \*puVar5\)\ \{$	+2
+use	FUN_001235b8	puVar5	entryVector	INFERRED	vector header (owner +0x14), as read before the lookup	^\s*_memset\(uVar1\ \*\ 4\ \+\ puVar5\[2\],0,\(uVar4\ \-\ uVar1\)\ \*\ 4\ \+\ 4\);$	+2
+use	FUN_001235b8	puVar5	entryVector	INFERRED	vector header (owner +0x14), as read before the lookup	^\s*piVar2\ =\ \(int\ \*\)\(uVar4\ \*\ 4\ \+\ puVar5\[2\]\);$	+1
+use	FUN_001235b8	puVar5	entryVector	INFERRED	vector header (owner +0x14), as read before the lookup	^\s*piVar2\ =\ \(int\ \*\)FUN_0019423c\(puVar5,uVar4\);$	+1
+use	FUN_001235b8	puVar5	entryVector	INFERRED	vector header (owner +0x14), as read before the lookup	^\s*puVar5\ =\ puVar6;$	+1
+use	FUN_001235b8	puVar6	entryVectorAlias	INFERRED	vector header re-read after a possible growth	^\s*puVar6\ =\ puVar5;$	+1
+use	FUN_001235b8	puVar6	entryVectorAlias	INFERRED	vector header re-read after a possible growth	^\s*puVar6\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 0x14\);$	+1
+use	FUN_001235b8	puVar6	entryVectorAlias	INFERRED	vector header re-read after a possible growth	^\s*puVar6\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 0x14\);$@2	+1
+use	FUN_001235b8	puVar6	entryVectorAlias	INFERRED	vector header re-read after a possible growth	^\s*if\ \(uVar4\ <\ \*puVar6\)\ \{$	+2
+use	FUN_001235b8	puVar6	entryVectorAlias	INFERRED	vector header re-read after a possible growth	^\s*_memset\(uVar1\ \*\ 4\ \+\ puVar6\[2\],0,\(uVar4\ \-\ uVar1\)\ \*\ 4\ \+\ 4\);$	+2
+use	FUN_001235b8	puVar6	entryVectorAlias	INFERRED	vector header re-read after a possible growth	^\s*puVar3\ =\ \(undefined4\ \*\)\(uVar4\ \*\ 4\ \+\ puVar6\[2\]\);$	+1
+use	FUN_001235b8	puVar6	entryVectorAlias	INFERRED	vector header re-read after a possible growth	^\s*puVar3\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar6,uVar4\);$	+1
+use	FUN_001235b8	puVar6	entryVectorAlias	INFERRED	vector header re-read after a possible growth	^\s*uVar1\ =\ puVar6\[1\];$@2	+1
+use	FUN_001235b8	puVar6	entryVectorAlias	INFERRED	vector header re-read after a possible growth	^\s*puVar5\ =\ puVar6;$	+1

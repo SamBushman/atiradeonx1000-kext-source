@@ -1,0 +1,30 @@
+func	FUN_00026bf0	gld_drawArraysDirect	INFERRED	trims a glDrawArrays call to whole primitives and emits either an immediate 0xc0003500 draw packet or the indirect 0x38000000 stream-address packet plus 0xc0003400 draw, then marks the context as drawing
+func	FUN_0002b7f0	gld_emitQueryBeginPacket	INFERRED	starts a hardware query in the query pool: picks the next 32-byte slot, accumulates the previous counter values, and writes the 0x3b000000 packet that selects the counter registers
+local	FUN_00026bf0	param_1	ctx	CONFIRMED	GLDContext
+local	FUN_00026bf0	param_2	staleArgR4	INFERRED	incoming register, unused
+local	FUN_00026bf0	param_3	primitiveMode	CONFIRMED	GL primitive mode; indexes the primitive-flags table at DAT_001d9888
+local	FUN_00026bf0	param_4	vertexCount	CONFIRMED	vertices requested; trimmed to whole primitives
+local	FUN_00026bf0	param_5	staleArgR7	INFERRED	forwarded to gldFlushDataCacheRange; unused
+local	FUN_00026bf0	iVar5	trimmedCount	CONFIRMED	vertex count after gldTrimVertexCountToPrimitive[Min] (0 = nothing to draw)
+local	FUN_00026bf0	bVar1	vertexStrideWords	INFERRED	words per vertex taken from the current vertex-array record (+2)
+local	FUN_00026bf0	puVar6	ringCursor	INFERRED	ring write cursor while the draw packets are written
+local	FUN_00026bf0	puVar3	lastHeader	INFERRED	ctx+0x1d8: header word of the previous packet, patched with the packet length
+local	FUN_00026bf0	puVar8	packetEnd	INFERRED	end of the indirect-draw packet; becomes the new ring cursor
+local	FUN_00026bf0	uVar9	primFlagsIndirect	INFERRED	primitive-type bits from the table at DAT_001d9888 (indirect path)
+local	FUN_00026bf0	uVar10	vapVteCntl	INFERRED	VAP_VTE_CNTL shadow (ctx+0x1dc4)
+local	FUN_00026bf0	iVar4	streamRecord	INFERRED	stream record (ctx+0x2840 or +0x28e4) selected by ctx+0x27d4
+local	FUN_00026bf0	iVar2	streamRecordExt	INFERRED	extension record paired with streamRecord (+0x20)
+use	FUN_00026bf0	uVar11	primFlags	INFERRED	primitive-type bits from the table at DAT_001d9888 (immediate path)	^\s*uVar11\ =\ \*\(uint\ \*\)\(\&DAT_001d9888\ \+\ param_3\ \*\ 4\);$	+1
+use	FUN_00026bf0	uVar11	primFlags	INFERRED	primitive-type bits from the table at DAT_001d9888 (immediate path)	^\s*puVar6\[3\]\ =\ iVar5\ <<\ 0x10\ \|\ uVar11\ \&\ 0xf\ \|\ 0x30;$	+1
+use	FUN_00026bf0	uVar11	streamCountField	INFERRED	ctx+0x283c & 0x1f: stream count of the current record	^\s*uVar11\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x283c\)\ \&\ 0x1f;$	+1
+use	FUN_00026bf0	uVar11	streamCountField	INFERRED	ctx+0x283c & 0x1f: stream count of the current record	^\s*puVar6\[1\]\ =\ uVar11;$	+1
+use	FUN_00026bf0	uVar11	streamCountField	INFERRED	ctx+0x283c & 0x1f: stream count of the current record	^\s*FUN_0000b620\(param_1,iVar12,iVar7,param_4,param_5,uVar11,0xc0003400,puVar8\);$	+1
+local	FUN_0002b7f0	piVar8	queryPool	CONFIRMED	ctx+0x224: the query pool; word 0 = in use, word 1 = next slot, +0x14.. 32-byte slot records
+local	FUN_0002b7f0	uVar12	queryValue	INFERRED	ctx+0x1cf8: value written with the end-of-query register pair
+local	FUN_0002b7f0	uVar7	counterCount	INFERRED	ctx+0x2610: number of counters (1..4) the query reads (raised to 2 when ctx+0x261c == 2)
+local	FUN_0002b7f0	puVar13	queryRecordWord	INFERRED	first word of the pending query record (ctx+0x234 record)
+local	FUN_0002b7f0	bVar1	zpassOnly	INFERRED	ctx+0x261c != 2: only the first counter pair is used
+local	FUN_0002b7f0	iVar14	slotIndex	INFERRED	index of the query slot being started (0 for the first query of a pool)
+local	FUN_0002b7f0	puVar9	packetBody	INFERRED	32-byte aligned body of the 0x3b000000 query packet
+local	FUN_0002b7f0	puVar10	packetCursor	INFERRED	cursor through the counter-select register pairs
+local	FUN_0002b7f0	puVar4	lastHeader	INFERRED	ctx+0x1d8: header word of the previous packet, patched with the packet length

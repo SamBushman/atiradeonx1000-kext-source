@@ -1,0 +1,40 @@
+local	FUN_0011f578	param_1	program	INFERRED	the Program (+8 compiler, +0x3a0 entry block)
+use	FUN_0011f578	uVar1	parentWeight	INFERRED	execution weight (word 0x45) of the block being propagated from	^\s*uVar1\ =\ piVar6\[0x45\];$	+2
+use	FUN_0011f578	iVar2	successorQuery34	INFERRED	successor vtable slot 0x34 test	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x34\)\)\(a0\);$	+2
+use	FUN_0011f578	iVar2	blockQuery24	INFERRED	block vtable slot 0x24 test	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*piVar6\ \+\ 0x24\)\)\(piVar6\);$	+2
+use	FUN_0011f578	iVar2	successorQuery28	INFERRED	successor vtable slot 0x28 test	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x28\)\)\(a0\);$	+2
+use	FUN_0011f578	iVar2	inheritedWeight	INFERRED	weight handed on to the successor (parent weight, half of it, or the loop weight)	^\s*iVar2\ =\ piVar6\[0x45\];$	+1
+use	FUN_0011f578	iVar2	inheritedWeight	INFERRED	weight handed on to the successor (parent weight, half of it, or the loop weight)	^\s*iVar2\ =\ \(\(int\)uVar1\ >>\ 1\)\ \+\ \(uint\)\(\(int\)uVar1\ <\ 0\ \&\&\ \(uVar1\ \&\ 1\)\ !=\ 0\);$	+3
+use	FUN_0011f578	iVar2	inheritedWeight	INFERRED	weight handed on to the successor (parent weight, half of it, or the loop weight)	^\s*a0\[0x45\]\ =\ iVar2;$	+1
+use	FUN_0011f578	puVar3	workSlotRef	INFERRED	slot reference in the work list	^\s*puVar3\ =\ local_3c\ \+\ local_40;$	+1
+use	FUN_0011f578	puVar3	workSlotRef	INFERRED	slot reference in the work list	^\s*puVar3\ =\ \(undefined4\ \*\)FUN_0019423c\(\&local_44,local_40\);$	+1
+use	FUN_0011f578	puVar3	workSlotRef	INFERRED	slot reference in the work list	^\s*\*puVar3\ =\ uVar5;$	+1
+use	FUN_0011f578	puVar3	workFirstRef	INFERRED	first element reference of the work list	^\s*puVar3\ =\ \(undefined4\ \*\)FUN_0019423c\(\&local_44,0\);$	+1
+use	FUN_0011f578	puVar3	workFirstRef	INFERRED	first element reference of the work list	^\s*puVar3\ =\ local_3c;$	+1
+use	FUN_0011f578	puVar3	workFirstRef	INFERRED	first element reference of the work list	^\s*piVar6\ =\ \(int\ \*\)\*puVar3;$	+1
+use	FUN_0011f578	puVar3	workSlotRefB	INFERRED	slot reference in the work list	^\s*puVar3\ =\ local_3c\ \+\ local_40;$@2	+1
+use	FUN_0011f578	puVar3	workSlotRefB	INFERRED	slot reference in the work list	^\s*puVar3\ =\ \(undefined4\ \*\)FUN_0019423c\(\&local_44,local_40\);$@2	+1
+use	FUN_0011f578	puVar3	workSlotRefB	INFERRED	slot reference in the work list	^\s*\*puVar3\ =\ a0;$	+1
+use	FUN_0011f578	a0	successor	INFERRED	successor block whose weight is still unset	^\s*a0\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(piVar6\[0x34\]\ \+\ 8\)\ \+\ iVar4\);$	+4
+use	FUN_0011f578	a0	successor	INFERRED	successor block whose weight is still unset	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x34\)\)\(a0\);$	+1
+use	FUN_0011f578	a0	successor	INFERRED	successor block whose weight is still unset	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x28\)\)\(a0\);$	+1
+use	FUN_0011f578	a0	successor	INFERRED	successor block whose weight is still unset	^\s*a0\[0x45\]\ =\ piVar6\[0x45\]\ <<\ 1;$	+1
+use	FUN_0011f578	a0	successor	INFERRED	successor block whose weight is still unset	^\s*a0\[0x45\]\ =\ iVar2;$	+1
+use	FUN_0011f578	a0	successor	INFERRED	successor block whose weight is still unset	^\s*a0\[0x45\]\ =\ \*\(int\ \*\)\(a0\[0x4b\]\ \+\ 0x114\);$	+1
+use	FUN_0011f578	a0	successor	INFERRED	successor block whose weight is still unset	^\s*\*puVar3\ =\ a0;$	+1
+use	FUN_0011f578	iVar4	successorByteOffset	INFERRED	byte offset into the block's successor array	^\s*iVar4\ =\ 0;$	+1
+use	FUN_0011f578	iVar4	successorByteOffset	INFERRED	byte offset into the block's successor array	^\s*a0\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(piVar6\[0x34\]\ \+\ 8\)\ \+\ iVar4\);$	+1
+use	FUN_0011f578	iVar4	successorByteOffset	INFERRED	byte offset into the block's successor array	^\s*iVar4\ =\ iVar4\ \+\ 4;$	+1
+use	FUN_0011f578	uVar5	entryBlock	INFERRED	program entry block (weight 0x10)	^\s*uVar5\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x3a0\);$	+1
+use	FUN_0011f578	uVar5	entryBlock	INFERRED	program entry block (weight 0x10)	^\s*\*puVar3\ =\ uVar5;$	+1
+use	FUN_0011f578	piVar6	block	INFERRED	block taken from the work list	^\s*piVar6\ =\ \(int\ \*\)\*puVar3;$	+1
+use	FUN_0011f578	piVar6	block	INFERRED	block taken from the work list	^\s*for\ \(uVar7\ =\ 1;\ uVar7\ <=\ \*\(uint\ \*\)\(piVar6\[0x34\]\ \+\ 4\);\ uVar7\ =\ uVar7\ \+\ 1\)\ \{$	+2
+use	FUN_0011f578	piVar6	block	INFERRED	block taken from the work list	^\s*if\ \(piVar6\[0x2e\]\ <\ a0\[0x2e\]\)\ \{$	+2
+use	FUN_0011f578	piVar6	block	INFERRED	block taken from the work list	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*piVar6\ \+\ 0x24\)\)\(piVar6\);$	+1
+use	FUN_0011f578	piVar6	block	INFERRED	block taken from the work list	^\s*a0\[0x45\]\ =\ piVar6\[0x45\]\ <<\ 1;$	+1
+use	FUN_0011f578	piVar6	block	INFERRED	block taken from the work list	^\s*iVar2\ =\ piVar6\[0x45\];$	+1
+use	FUN_0011f578	piVar6	block	INFERRED	block taken from the work list	^\s*uVar1\ =\ piVar6\[0x45\];$	+1
+local	FUN_0011f578	local_44	workCapacity	INFERRED	capacity word of the work list header
+local	FUN_0011f578	local_40	workCount	INFERRED	count word of the work list header
+local	FUN_0011f578	local_3c	workData	INFERRED	data word of the work list header
+local	FUN_0011f578	local_38	workArena	INFERRED	arena that owns the work list storage

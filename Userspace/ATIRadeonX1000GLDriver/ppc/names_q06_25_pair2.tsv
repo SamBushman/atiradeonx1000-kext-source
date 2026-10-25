@@ -1,0 +1,38 @@
+local	FUN_0010e460	param_1	entryA	INFERRED	first record (word 0 instruction, words 1..4 lane sources, word 5 lane count)
+local	FUN_0010e460	param_2	entryB	INFERRED	second record, searched for each lane source of entryA
+local	FUN_0010e460	param_3	laneMapOut	INFERRED	out array of four words: for each lane of entryA the matching lane of entryB, -1 for an unused lane
+use	FUN_0010e460	bVar1	moreLanes	INFERRED	loop latch: lane index is not the last (offset 0xc)	^\s*bVar1\ =\ iVar2\ !=\ 0xc;$	+1
+use	FUN_0010e460	bVar1	moreLanes	INFERRED	loop latch: lane index is not the last (offset 0xc)	^\s*\}\ while\ \(bVar1\);$	+1
+use	FUN_0010e460	iVar2	laneByteOffset	INFERRED	byte offset of the lane in the output array (0..0xc)	^\s*iVar2\ =\ 0;$	+1
+use	FUN_0010e460	iVar2	laneByteOffset	INFERRED	byte offset of the lane in the output array (0..0xc)	^\s*\*\(undefined4\ \*\)\(param_3\ \+\ iVar2\)\ =\ 0xffffffff;$	+1
+use	FUN_0010e460	iVar2	laneByteOffset	INFERRED	byte offset of the lane in the output array (0..0xc)	^\s*\*\(int\ \*\)\(iVar2\ \+\ param_3\)\ =\ iVar4;$	+1
+use	FUN_0010e460	iVar2	laneByteOffset	INFERRED	byte offset of the lane in the output array (0..0xc)	^\s*bVar1\ =\ iVar2\ !=\ 0xc;$	+1
+use	FUN_0010e460	iVar2	laneByteOffset	INFERRED	byte offset of the lane in the output array (0..0xc)	^\s*iVar2\ =\ iVar2\ \+\ 4;$	+1
+use	FUN_0010e460	piVar3	candidateLaneCursor	INFERRED	cursor over the lane sources of entryB	^\s*piVar3\ =\ param_2;$	+2
+use	FUN_0010e460	piVar3	candidateLaneCursor	INFERRED	cursor over the lane sources of entryB	^\s*piVar3\ =\ piVar3\ \+\ 1;$	+1
+use	FUN_0010e460	iVar4	matchedLane	INFERRED	index of the lane of entryB that equals the lane source of entryA	^\s*iVar4\ =\ 0;$	+1
+use	FUN_0010e460	iVar4	matchedLane	INFERRED	index of the lane of entryB that equals the lane source of entryA	^\s*iVar4\ =\ iVar4\ \+\ 1;$	+1
+use	FUN_0010e460	iVar4	matchedLane	INFERRED	index of the lane of entryB that equals the lane source of entryA	^\s*\*\(int\ \*\)\(iVar2\ \+\ param_3\)\ =\ iVar4;$	+1
+use	FUN_0010e460	iVar5	candidatesLeft	INFERRED	lanes of entryB still to compare	^\s*iVar5\ =\ 4;$	+1
+use	FUN_0010e460	iVar5	candidatesLeft	INFERRED	lanes of entryB still to compare	^\s*iVar5\ =\ iVar5\ \+\ \-1;$	+2
+local	FUN_001312f4	param_3	addressSource	INFERRED	source defining the store address (operand 2 of the store)
+use	FUN_001312f4	uVar6	spillDestRegister	INFERRED	destination register of the stored value (+0x94), put into the store's word 0x26	^\s*uVar6\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x94\);$	+1
+use	FUN_001312f4	uVar6	spillDestRegister	INFERRED	destination register of the stored value (+0x94), put into the store's word 0x26	^\s*puVar4\[0x26\]\ =\ uVar6;$	+1
+use	FUN_001312f4	uVar6	addressSwizzleConstant	INFERRED	constant swizzle word UNK_001affdc for the address operand	^\s*uVar6\ =\ UNK_001affdc;$	+1
+use	FUN_001312f4	uVar6	addressSwizzleConstant	INFERRED	constant swizzle word UNK_001affdc for the address operand	^\s*\*\(undefined4\ \*\)\(iVar2\ \+\ 0x10\)\ =\ uVar6;$	+1
+use	FUN_001312f4	uVar6	insertAfterWord	INFERRED	word 0x158 of the insertion reference, copied to the store's word 0x57	^\s*uVar6\ =\ \*\(undefined4\ \*\)\(param_4\ \+\ 0x158\);$	+1
+use	FUN_001312f4	uVar6	insertAfterWord	INFERRED	word 0x158 of the insertion reference, copied to the store's word 0x57	^\s*puVar4\[0x57\]\ =\ uVar6;$	+1
+use	FUN_001312f4	bVar1	moreLanes	INFERRED	loop latch: lane index is not the last (3)	^\s*bVar1\ =\ iVar5\ !=\ 3;$	+1
+use	FUN_001312f4	bVar1	moreLanes	INFERRED	loop latch: lane index is not the last (3)	^\s*\}\ while\ \(bVar1\);$	+1
+use	FUN_001312f4	iVar5	laneIndex	INFERRED	lane counter 0..3	^\s*iVar5\ =\ 0;$	+1
+use	FUN_001312f4	iVar5	laneIndex	INFERRED	lane counter 0..3	^\s*if\ \(\(\*\(char\ \*\)\(iVar5\ \+\ iVar3\ \+\ 0x10\)\ ==\ '\\x01'\)\ \&\&$	+3
+use	FUN_001312f4	iVar5	laneIndex	INFERRED	lane counter 0..3	^\s*bVar1\ =\ iVar5\ !=\ 3;$	+2
+use	FUN_001312f4	puVar7	storeInst	INFERRED	new IRMemStore (allocation + 1)	^\s*puVar7\ =\ puVar4\ \+\ 1;$	+1
+use	FUN_001312f4	puVar7	storeInst	INFERRED	new IRMemStore (allocation + 1)	^\s*FUN_001071fc\(puVar7,0xfc,param_5\);$	+1
+use	FUN_001312f4	puVar7	storeInst	INFERRED	new IRMemStore (allocation + 1)	^\s*FUN_00106004\(puVar7,1,param_1,0,param_5\);$	+2
+use	FUN_001312f4	puVar7	storeInst	INFERRED	new IRMemStore (allocation + 1)	^\s*FUN_00106004\(puVar7,2,param_3,0,param_5\);$	+1
+use	FUN_001312f4	puVar7	storeInst	INFERRED	new IRMemStore (allocation + 1)	^\s*iVar2\ =\ FUN_001054ec\(puVar7,2\);$	+1
+use	FUN_001312f4	puVar7	storeInst	INFERRED	new IRMemStore (allocation + 1)	^\s*FUN_00106004\(puVar7,3,param_2,0,param_5\);$	+1
+use	FUN_001312f4	puVar7	storeInst	INFERRED	new IRMemStore (allocation + 1)	^\s*FUN_00193f74\(puVar7,param_4\);$	+1
+local	FUN_001312f4	local_48	writtenLaneMask	INFERRED	destination mask of the stored instruction, lanes without a definition cleared
+local	FUN_001312f4	local_34	storeWriteMask	INFERRED	WriteMask__fromUsedLanes output

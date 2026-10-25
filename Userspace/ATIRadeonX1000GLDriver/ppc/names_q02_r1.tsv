@@ -1,0 +1,5 @@
+local	extvsEmitIndex	uVar1	swizzleWord	INFERRED	swizzle/select word written by extvsEncodeSourceSwizzle into the hardware instruction slot (or read back from it) and re-stored with index bits
+use	extvsEmitIndex	iVar6	instCountLocal	INFERRED	hwProgram + 0x18: number of hardware instructions before this sequence (before the 16-byte slot address is computed in place)	^\s*iVar6\ =\ \*\(int\ \*\)\(iVar3\ \+\ 0x18\);$	+2
+use	extvsEmitIndex	iVar6	instCountLocal	INFERRED	hwProgram + 0x18: number of hardware instructions before this sequence (before the 16-byte slot address is computed in place)	^\s*iVar6\ =\ \*\(int\ \*\)\(iVar3\ \+\ 0x18\);$@2	+2
+use	extvsEmitIndex	iVar6	instCountLocal	INFERRED	hwProgram + 0x18: number of hardware instructions before this sequence (before the 16-byte slot address is computed in place)	^\s*iVar6\ =\ \*\(int\ \*\)\(iVar3\ \+\ 0x18\);$@3	+1
+use	extvsEmitIndex	iVar6	instCountLocal	INFERRED	hwProgram + 0x18: number of hardware instructions before this sequence (before the 16-byte slot address is computed in place)	^\s*iVar3\ =\ iVar6\ \*\ 0x10\ \+\ \*\(int\ \*\)\(iVar3\ \+\ 0x1c\);$	+1

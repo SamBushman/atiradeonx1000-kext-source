@@ -1,0 +1,26 @@
+local	FUN_00138130	param_1	liveness	INFERRED	liveness state (+8 compiler, +900 block list); FUN_00137f14 updates the live-out set per instruction
+use	FUN_00138130	piVar1	tableWordCursor	INFERRED	cursor clearing the 0x80-word live table	^\s*piVar1\ =\ piVar5;$	+1
+use	FUN_00138130	piVar1	tableWordCursor	INFERRED	cursor clearing the 0x80-word live table	^\s*piVar1\[2\]\ =\ 0;$	+2
+use	FUN_00138130	piVar1	tableWordCursor	INFERRED	cursor clearing the 0x80-word live table	^\s*piVar1\ =\ piVar5;$@2	+1
+use	FUN_00138130	piVar1	tableWordCursor	INFERRED	cursor clearing the 0x80-word live table	^\s*piVar1\[2\]\ =\ 0;$@2	+2
+use	FUN_00138130	iVar2	nextInstLink	INFERRED	link to the instruction after the cursor	^\s*for\ \(iVar2\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar7\ \+\ 0x98\)\ \+\ 8\);\ iVar2\ !=\ 0;\ iVar2\ =\ \*\(int\ \*\)\(iVar2\ \+\ 8\)\)\ \{$	+1
+use	FUN_00138130	iVar2	nextInstLink	INFERRED	link to the instruction after the cursor	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar4\ \+\ 8\);$	+1
+use	FUN_00138130	iVar2	nextInstLink	INFERRED	link to the instruction after the cursor	^\s*iVar4\ =\ iVar2;$	+1
+use	FUN_00138130	iVar4	clearCountdown	INFERRED	countdown over the live table words (0x80)	^\s*iVar4\ =\ 0x80;$	+1
+use	FUN_00138130	iVar4	clearCountdown	INFERRED	countdown over the live table words (0x80)	^\s*if\ \(iVar4\ !=\ 0\)\ \{$	+1
+use	FUN_00138130	iVar4	clearCountdown	INFERRED	countdown over the live table words (0x80)	^\s*if\ \(iVar4\ ==\ 0\)\ \{$	+2
+use	FUN_00138130	iVar4	clearCountdown	INFERRED	countdown over the live table words (0x80)	^\s*iVar4\ =\ iVar4\ \+\ \-1;$	+2
+use	FUN_00138130	iVar4	clearCountdown	INFERRED	countdown over the live table words (0x80)	^\s*iVar4\ =\ \*piVar5;$	+1
+use	FUN_00138130	iVar4	inst	INFERRED	instruction being passed to the liveness update	^\s*iVar4\ =\ \*\(int\ \*\)\(iVar7\ \+\ 0x98\);$	+1
+use	FUN_00138130	iVar4	inst	INFERRED	instruction being passed to the liveness update	^\s*if\ \(\(\*\(uint\ \*\)\(iVar4\ \+\ 0x14\)\ \&\ 1\)\ !=\ 0\)\ \{$	+3
+use	FUN_00138130	iVar4	inst	INFERRED	instruction being passed to the liveness update	^\s*iVar4\ =\ iVar2;$	+1
+use	FUN_00138130	piVar5	liveTable	INFERRED	0x80-word live bit table (allocation + 1)	^\s*piVar5\ =\ puVar3\ \+\ 1;$	+1
+use	FUN_00138130	piVar5	liveTable	INFERRED	0x80-word live bit table (allocation + 1)	^\s*piVar1\ =\ piVar5;$	+1
+use	FUN_00138130	piVar5	liveTable	INFERRED	0x80-word live bit table (allocation + 1)	^\s*piVar1\ =\ piVar5;$@2	+1
+use	FUN_00138130	piVar5	liveTable	INFERRED	0x80-word live bit table (allocation + 1)	^\s*\(\(int\ \(\*\)\(\)\)FUN_00137f14\)\(param_1,iVar4,piVar5\);$	+1
+use	FUN_00138130	piVar5	liveTable	INFERRED	0x80-word live bit table (allocation + 1)	^\s*iVar4\ =\ \*piVar5;$	+1
+use	FUN_00138130	iVar7	initCountdown	INFERRED	countdown from 0x80 for the first clear of the table	^\s*iVar7\ =\ 0x80;$	+1
+use	FUN_00138130	iVar7	initCountdown	INFERRED	countdown from 0x80 for the first clear of the table	^\s*iVar7\ =\ iVar7\ \+\ \-1;$	+2
+use	FUN_00138130	iVar7	block	INFERRED	block being scanned	^\s*iVar7\ =\ \*\(int\ \*\)\(param_1\ \+\ 900\);$	+2
+use	FUN_00138130	iVar7	block	INFERRED	block being scanned	^\s*iVar4\ =\ \*\(int\ \*\)\(iVar7\ \+\ 0x98\);$	+2
+use	FUN_00138130	iVar7	block	INFERRED	block being scanned	^\s*iVar7\ =\ \*\(int\ \*\)\(iVar7\ \+\ 8\);$	+2

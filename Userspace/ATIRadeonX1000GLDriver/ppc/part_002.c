@@ -9056,13 +9056,13 @@ int gld_fillCapsBlock(ctx, stateBlock, pixelFormat)
   *(char *)((int)stateBlock + 0x26) = (char)pixelFormatFlag1;
   *(byte *)((int)stateBlock + 0x27) = (byte)(-(uint)(*(uint *)(pixelFormat + 0x10) & 0x3f000000) >> 0x1f);
   pixelFormatHome = pixelFormat;
-  FUN_0000a180(*(undefined4 *)(pixelFormat + 0x10),&channelBits0,pixelFormat,staleArgR6,staleArgR7,staleArgR8,pixelFormatFlag1);
+  gld_channelBitsForFormat(*(undefined4 *)(pixelFormat + 0x10),&channelBits0,pixelFormat,staleArgR6,staleArgR7,staleArgR8,pixelFormatFlag1);
   stateBlock[10] = (int)channelBits4;
   stateBlock[0xb] = (int)channelBits0;
   stateBlock[0xc] = (int)channelBits1;
   stateBlock[0xd] = (int)channelBits2;
   stateBlock[0xe] = (int)channelBits3;
-  FUN_0000a180(*(undefined4 *)(pixelFormat + 0x14),&channelBits0,pixelFormatHome,staleArgR6,staleArgR7,staleArgR8,(int)channelBits2);
+  gld_channelBitsForFormat(*(undefined4 *)(pixelFormat + 0x14),&channelBits0,pixelFormatHome,staleArgR6,staleArgR7,staleArgR8,(int)channelBits2);
   stateBlock[0x11] = (int)channelBits0;
   stateBlock[0x12] = (int)channelBits1;
   stateBlock[0x13] = (int)channelBits2;
@@ -9481,7 +9481,7 @@ int glCopyPixels_impl(ctx, rasterPos, srcX, srcY, width, height, copyType)
   uint uVar41;
   undefined *puVar42;
   uint uVar43;
-  int staleArgR10;
+  int destEndY;
   uint uVar44;
   uint uVar45;
   uint uVar46;
@@ -9605,11 +9605,11 @@ int glCopyPixels_impl(ctx, rasterPos, srcX, srcY, width, height, copyType)
     }
     iVar24 = (int)fVar1;
     iVar27 = width + iVar33;
-    staleArgR10 = iVar24 + height;
+    destEndY = iVar24 + height;
     if (((((iVar33 < srcX) || (iVar40 < iVar33)) && ((iVar27 < srcX || (iVar40 < iVar27)))) ||
         ((iVar24 < srcY || (iVar38 < iVar24)))) &&
-       (((iVar33 < srcX || (((iVar40 < iVar33 || (staleArgR10 < srcY)) || (iVar38 < staleArgR10)))) &&
-        (((iVar27 < srcX || (iVar40 < iVar27)) || ((staleArgR10 < srcY || (iVar38 < staleArgR10))))))))
+       (((iVar33 < srcX || (((iVar40 < iVar33 || (destEndY < srcY)) || (iVar38 < destEndY)))) &&
+        (((iVar27 < srcX || (iVar40 < iVar27)) || ((destEndY < srcY || (iVar38 < destEndY))))))))
     goto LAB_000185c0;
     srcDstOverlap = true;
   }
@@ -10174,7 +10174,7 @@ LAB_00018700:
         (**(code **)(ctx + 0x299c))(iVar34,packetCursor + 0xca);
         return;
       }
-      FUN_00021c70(ctx,srcX,srcY,width,height,uVar41,uVar43,staleArgR10,uVar32);
+      FUN_00021c70(ctx,srcX,srcY,width,height,uVar41,uVar43,destEndY,uVar32);
     }
   }
   else {

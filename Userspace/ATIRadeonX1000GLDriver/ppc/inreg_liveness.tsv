@@ -181,7 +181,7 @@
 18b654	R300SchedModel__vslot11	r8	PASS-deep	18b714 bl 0xf3a30
 18b9cc	R300SchedModel__vslot14	r7	PASS-indirect	18ba00 bl 0x126760
 18b9cc	R300SchedModel__vslot14	r8	PASS-indirect	18ba00 bl 0x126760
-18d4b4	FUN_0018d4b4	r8	PASS-indirect	18d50c bl 0x105594
+18d4b4	PackState__tryPlaceInstructionSources	r8	PASS-indirect	18d50c bl 0x105594
 1906c8	R300VSchedModel__vslot3_canAddInstruction	r5	PASS-indirect	190720 bctrl 
 1906c8	R300VSchedModel__vslot3_canAddInstruction	r6	PASS-indirect	190720 bctrl 
 190990	R300VSchedModel__vslot27	r5	PASS-indirect	1909d4 bctrl 
@@ -234,17 +234,17 @@
 23a8	atexit_common	r8	PASS-import		
 24190	FUN_00024190	r7	PASS-indirect	241ec bctrl 
 24190	FUN_00024190	r8	PASS-indirect	241ec bctrl 
-25ec0	FUN_00025ec0	r6	PASS-no	25f18 bl 0x1a3700	; symbol stub for: _calloc
-25ec0	FUN_00025ec0	r7	PASS-no	25f18 bl 0x1a3700	; symbol stub for: _calloc
-25ec0	FUN_00025ec0	r8	PASS-no	25f18 bl 0x1a3700	; symbol stub for: _calloc
-25ec0	FUN_00025ec0	r9	PASS-no	25f18 bl 0x1a3700	; symbol stub for: _calloc
-269a0	FUN_000269a0	r7	PASS-no	269d4 bl 0x1a3940	; symbol stub for: _pthread_mut
-269a0	FUN_000269a0	r8	PASS-no	269d4 bl 0x1a3940	; symbol stub for: _pthread_mut
+25ec0	gld_bindFragmentProgramRecord	r6	PASS-no	25f18 bl 0x1a3700	; symbol stub for: _calloc
+25ec0	gld_bindFragmentProgramRecord	r7	PASS-no	25f18 bl 0x1a3700	; symbol stub for: _calloc
+25ec0	gld_bindFragmentProgramRecord	r8	PASS-no	25f18 bl 0x1a3700	; symbol stub for: _calloc
+25ec0	gld_bindFragmentProgramRecord	r9	PASS-no	25f18 bl 0x1a3700	; symbol stub for: _calloc
+269a0	gld_getProgramParameter	r7	PASS-no	269d4 bl 0x1a3940	; symbol stub for: _pthread_mut
+269a0	gld_getProgramParameter	r8	PASS-no	269d4 bl 0x1a3940	; symbol stub for: _pthread_mut
 2c230	FUN_0002c230	r5	PASS-indirect	2c2f8 bl 0x90990
 2c230	FUN_0002c230	r6	PASS-indirect	2c2f8 bl 0x90990
 2c230	FUN_0002c230	r7	PASS-indirect	2c2f8 bl 0x90990
 2c230	FUN_0002c230	r8	PASS-indirect	2c2f8 bl 0x90990
-2cc30	FUN_0002cc30	r9	PASS-no	2ccd8 bl 0x2bf30
+2cc30	gld_prepareDrawCount	r9	PASS-no	2ccd8 bl 0x2bf30
 2ce40	FUN_0002ce40	r5	PASS-indirect	2cfb4 bctrl 
 2ce40	FUN_0002ce40	r6	PASS-indirect	2cfb4 bctrl 
 34200	glGenerateMipmap_impl	r8	PASS-no	34244 bl 0x1a3940	; symbol stub for: _pthread_mut

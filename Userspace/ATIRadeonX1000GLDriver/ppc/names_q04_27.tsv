@@ -1,0 +1,4 @@
+local	extvsOptimizeProgram	local_68	readsX	CONFIRMED	out-parameter outReadsX of extvsInstReadsTempComponents (address passed as the matching argument)
+local	extvsOptimizeProgram	local_67	readsY	CONFIRMED	out-parameter outReadsY of extvsInstReadsTempComponents (address passed as the matching argument)
+local	extvsOptimizeProgram	local_66	readsZ	CONFIRMED	out-parameter outReadsZ of extvsInstReadsTempComponents (address passed as the matching argument)
+local	extvsOptimizeProgram	local_65	readsW	CONFIRMED	out-parameter outReadsW of extvsInstReadsTempComponents (address passed as the matching argument)

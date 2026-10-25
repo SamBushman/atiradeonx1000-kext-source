@@ -1,0 +1,17 @@
+use	FUN_000ac540	uVar1	wordVectorWord0	INFERRED	every definition of this web is a load from wordVector+0x0 (positional name; no field row)	^\s*uVar1\ =\ \*param_2;$	+2
+use	FUN_000ac540	uVar1	wordVectorWord0	INFERRED	every definition of this web is a load from wordVector+0x0 (positional name; no field row)	^\s*uVar1\ =\ \*param_2;$@2	+1
+use	FUN_000ac540	uVar1	wordVectorWord0	INFERRED	every definition of this web is a load from wordVector+0x0 (positional name; no field row)	^\s*\*\(undefined4\ \*\)\(uVar1\ \*\ 4\ \+\ param_2\[2\]\)\ =\ 0xe;$	+1
+use	FUN_000aec40	uVar8	wordVectorWord0	INFERRED	every definition of this web is a load from wordVector+0x0 (positional name; no field row)	^\s*uVar8\ =\ \*param_3;$	+2
+use	FUN_000aec40	uVar8	wordVectorWord0	INFERRED	every definition of this web is a load from wordVector+0x0 (positional name; no field row)	^\s*uVar8\ =\ \*param_3;$@2	+1
+use	FUN_000aec40	uVar8	wordVectorWord0	INFERRED	every definition of this web is a load from wordVector+0x0 (positional name; no field row)	^\s*\*\(undefined4\ \*\)\(uVar8\ \*\ 4\ \+\ param_3\[2\]\)\ =\ 0x47;$	+1
+use	FUN_000be460	uVar1	psnProgramShort16	INFERRED	every definition of this web is a load from psnProgram+0x16 (positional name; no field row)	^\s*uVar1\ =\ \*\(ushort\ \*\)\(param_1\ \+\ 0x16\);$	+1
+use	FUN_000be460	uVar1	psnProgramShort16	INFERRED	every definition of this web is a load from psnProgram+0x16 (positional name; no field row)	^\s*iVar24\ =\ 4\ \-\ \(uint\)uVar1;$	+1
+use	FUN_000be460	uVar1	psnProgramShort16	INFERRED	every definition of this web is a load from psnProgram+0x16 (positional name; no field row)	^\s*\*param_3\ =\ uVar1\ \-\ 1\ \&\ 7;$	+1
+use	FUN_000be460	uVar2	psnProgramShort22	INFERRED	every definition of this web is a load from psnProgram+0x22 (positional name; no field row)	^\s*uVar2\ =\ \*\(ushort\ \*\)\(param_1\ \+\ 0x22\);$	+1
+use	FUN_000be460	uVar2	psnProgramShort22	INFERRED	every definition of this web is a load from psnProgram+0x22 (positional name; no field row)	^\s*param_3\[1\]\ =\ uVar2\ \&\ 0x7f;$	+1
+use	FUN_000be460	uVar21	psnProgramWord8	INFERRED	every definition of this web is a load from psnProgram+0x8 (positional name; no field row)	^\s*uVar21\ =\ \*\(uint\ \*\)\(param_1\ \+\ 8\);$	+1
+use	FUN_000be460	uVar21	psnProgramWord8	INFERRED	every definition of this web is a load from psnProgram+0x8 (positional name; no field row)	^\s*if\ \(\(\*\(int\ \*\)\(param_1\ \+\ 0x48\)\ ==\ 1\)\ \&\&\ \(uVar21\ !=\ 0\)\)\ \{$	+1
+use	FUN_000be460	uVar21	psnProgramWord8	INFERRED	every definition of this web is a load from psnProgram+0x8 (positional name; no field row)	^\s*\}\ while\ \(uVar12\ <=\ uVar21\);$	+1
+use	FUN_000be460	uVar21	psnProgramWord8	INFERRED	every definition of this web is a load from psnProgram+0x8 (positional name; no field row)	^\s*if\ \(uVar12\ <=\ uVar21\)\ \{$	+1
+use	FUN_000be460	uVar21	psnProgramWord8	INFERRED	every definition of this web is a load from psnProgram+0x8 (positional name; no field row)	^\s*if\ \(\(uVar12\ ==\ uVar21\)\ \|\|\ \(\(puVar18\[\-8\]\ ==\ 2\ \&\&\ \(\(bVar4\ \|\|\ \(\*\(char\ \*\)puVar18\ !=\ '\\0'\)\)\)\)\)\)\ \{$	+1
+use	FUN_000be460	uVar21	psnProgramWord8	INFERRED	every definition of this web is a load from psnProgram+0x8 (positional name; no field row)	^\s*\}\ while\ \(uVar12\ <=\ uVar21\);$@2	+1

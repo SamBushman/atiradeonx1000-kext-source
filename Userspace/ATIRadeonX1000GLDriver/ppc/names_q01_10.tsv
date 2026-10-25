@@ -1,0 +1,116 @@
+local	FUN_0003a8c0	param_2	data	CONFIRMED	client vertex data (16 bytes per vertex element), advanced per primitive
+local	FUN_0003a8c0	param_3	elementCount	CONFIRMED	number of elements; passed to FUN_0002cc30 which trims it to whole primitives
+local	FUN_0003a8c0	param_4	primFlag	INFERRED	second selector passed to FUN_0002cc30 (0 for the plain variants)
+local	FUN_0003a8c0	param_5	extraArg4	INFERRED	forwarded unchanged to FUN_0002cc30 and the stream allocator
+local	FUN_0003a8c0	param_6	extraArg5	INFERRED	forwarded unchanged to FUN_0002cc30
+local	FUN_0003a8c0	uVar1	element1	INFERRED	second component word of the vertex element
+local	FUN_0003a8c0	uVar2	element2	INFERRED	third component word of the vertex element
+local	FUN_0003a8c0	uVar3	element3	INFERRED	fourth component word of the vertex element
+local	FUN_0003a8c0	uVar4	weightWord	INFERRED	per-vertex weight word read from the program's table
+local	FUN_0003a8c0	iVar5	unitCount	INFERRED	trimmed element count, later the program's table pointer
+local	FUN_0003a8c0	puVar6	ringStart	INFERRED	start of the packet allocated from the command stream
+local	FUN_0003a8c0	puVar7	ringCursor	INFERRED	write cursor through the per-slot 0x917 records
+local	FUN_0003a8c0	uVar8	topology	INFERRED	stale topology value, then the first component word of the vertex element
+local	FUN_0003a8c0	uVar10	dataEnd	INFERRED	data + count * stride * 16: end of the vertex data
+local	FUN_0003a8c0	iVar11	vertexArrayInfo	INFERRED	current program's vertex-array info, later stride - 1
+local	FUN_0003a8c0	puVar12	weightCursor	INFERRED	walks the weight table backwards
+local	FUN_0003a8c0	iVar13	programState	INFERRED	ctx+0x29e8 program record, later the inner element counter
+local	FUN_0003a8c0	iVar14	vertexStride	INFERRED	vertexArrayInfo+0x20: vertex stride in 16-byte elements
+local	FUN_0003ae80	param_2	data	CONFIRMED	client vertex data (16 bytes per vertex element), advanced per primitive
+local	FUN_0003ae80	param_3	elementCount	CONFIRMED	number of elements; passed to FUN_0002cc30 which trims it to whole primitives
+local	FUN_0003ae80	param_4	primFlag	INFERRED	second selector passed to FUN_0002cc30 (0 for the plain variants)
+local	FUN_0003ae80	param_5	extraArg4	INFERRED	forwarded unchanged to FUN_0002cc30 and the stream allocator
+local	FUN_0003ae80	param_6	extraArg5	INFERRED	forwarded unchanged to FUN_0002cc30
+local	FUN_0003ae80	uVar1	element1	INFERRED	second component word of the vertex element
+local	FUN_0003ae80	uVar2	element2	INFERRED	third component word of the vertex element
+local	FUN_0003ae80	uVar3	element3	INFERRED	fourth component word of the vertex element
+local	FUN_0003ae80	uVar4	weightWord	INFERRED	per-vertex weight word read from the program's table
+local	FUN_0003ae80	iVar5	unitCount	INFERRED	trimmed element count, later the program's table pointer
+local	FUN_0003ae80	puVar6	ringStart	INFERRED	start of the packet allocated from the command stream
+local	FUN_0003ae80	puVar7	ringCursor	INFERRED	write cursor through the per-slot 0x917 records
+local	FUN_0003ae80	uVar8	topology	INFERRED	stale topology value, then the first component word of the vertex element
+local	FUN_0003ae80	uVar10	dataEnd	INFERRED	data + count * stride * 16: end of the vertex data
+local	FUN_0003ae80	iVar11	vertexArrayInfo	INFERRED	current program's vertex-array info, later stride - 1
+local	FUN_0003ae80	puVar12	weightCursor	INFERRED	walks the weight table backwards
+local	FUN_0003ae80	iVar13	programState	INFERRED	ctx+0x29e8 program record, later the inner element counter
+local	FUN_0003ae80	iVar14	vertexStride	INFERRED	vertexArrayInfo+0x20: vertex stride in 16-byte elements
+local	FUN_00039330	param_2	data	CONFIRMED	client vertex data (16 bytes per vertex element), advanced per primitive
+local	FUN_00039330	param_3	elementCount	CONFIRMED	number of elements; passed to FUN_0002cc30 which trims it to whole primitives
+local	FUN_00039330	param_4	primFlag	INFERRED	second selector passed to FUN_0002cc30 (0 for the plain variants)
+local	FUN_00039330	param_5	extraArg4	INFERRED	forwarded unchanged to FUN_0002cc30 and the stream allocator
+local	FUN_00039330	param_6	extraArg5	INFERRED	forwarded unchanged to FUN_0002cc30
+local	FUN_00039330	uVar1	element1	INFERRED	second component word of the vertex element
+local	FUN_00039330	uVar2	element2	INFERRED	third component word of the vertex element
+local	FUN_00039330	uVar3	element3	INFERRED	fourth component word of the vertex element
+local	FUN_00039330	uVar4	weightWord	INFERRED	per-vertex weight word read from the program's table
+local	FUN_00039330	iVar5	unitCount	INFERRED	trimmed element count, later the program's table pointer
+local	FUN_00039330	puVar6	ringStart	INFERRED	start of the packet allocated from the command stream
+local	FUN_00039330	puVar7	ringCursor	INFERRED	write cursor through the per-slot 0x917 records
+local	FUN_00039330	uVar8	topology	INFERRED	stale topology value, then the first component word of the vertex element
+local	FUN_00039330	uVar10	dataEnd	INFERRED	data + count * stride * 16: end of the vertex data
+local	FUN_00039330	iVar11	vertexArrayInfo	INFERRED	current program's vertex-array info, later stride - 1
+local	FUN_00039330	puVar12	weightCursor	INFERRED	walks the weight table backwards
+local	FUN_00039330	iVar13	programState	INFERRED	ctx+0x29e8 program record, later the inner element counter
+local	FUN_00039330	iVar14	vertexStride	INFERRED	vertexArrayInfo+0x20: vertex stride in 16-byte elements
+func	FUN_00039a60	gldPrimInlineTriangles	INFERRED	copies the vertex elements and per-vertex weights of a client array into the command stream as an immediate draw packet for GL_TRIANGLES (FUN_0002cc30 is passed the mode)
+func	FUN_00039d40	gldPrimInlineTriangleStrip	INFERRED	copies the vertex elements and per-vertex weights of a client array into the command stream as an immediate draw packet for GL_TRIANGLE_STRIP (FUN_0002cc30 is passed the mode)
+func	FUN_0003a020	gldPrimInlineQuads	INFERRED	copies the vertex elements and per-vertex weights of a client array into the command stream as an immediate draw packet for GL_QUADS (FUN_0002cc30 is passed the mode)
+func	FUN_0003a300	gldPrimInlineQuadStrip	INFERRED	copies the vertex elements and per-vertex weights of a client array into the command stream as an immediate draw packet for GL_QUAD_STRIP (FUN_0002cc30 is passed the mode)
+func	FUN_0003a5e0	gldPrimInlinePolygon	INFERRED	copies the vertex elements and per-vertex weights of a client array into the command stream as an immediate draw packet for GL_POLYGON (FUN_0002cc30 is passed the mode)
+func	FUN_0003aba0	gldPrimInlineLines	INFERRED	copies the vertex elements and per-vertex weights of a client array into the command stream as an immediate draw packet for GL_LINES (FUN_0002cc30 is passed the mode)
+func	FUN_0003a8c0	gldPrimInlinePoints	INFERRED	copies the vertex elements and per-vertex weights of a client array into the command stream as an immediate draw packet for GL_POINTS (FUN_0002cc30 is passed the mode)
+func	FUN_0003ae80	gldPrimInlineLineLoop	INFERRED	copies the vertex elements and per-vertex weights of a client array into the command stream as an immediate draw packet for GL_LINE_LOOP (FUN_0002cc30 is passed the mode)
+func	FUN_00039330	gldPrimInlineLineStrip	INFERRED	copies the vertex elements and per-vertex weights of a client array into the command stream as an immediate draw packet for GL_LINE_STRIP (FUN_0002cc30 is passed the mode)
+func	FUN_00039610	gldPrimInlineTriangleFan	INFERRED	copies the vertex elements and per-vertex weights of a client array into the command stream as an immediate draw packet for GL_TRIANGLE_FAN (FUN_0002cc30 is passed the mode)
+local	FUN_00039610	param_2	fanCenterData	INFERRED	vertex data of the fan's first (shared) vertex, copied before every other vertex
+local	FUN_00039610	param_3	data	INFERRED	vertex data of the remaining fan vertices
+local	FUN_00039610	param_4	elementCount	CONFIRMED	vertex count; passed to FUN_0002cc30 which trims it
+local	FUN_00039610	param_5	extraArg4	INFERRED	forwarded unchanged to FUN_0002cc30 and the stream allocator
+local	FUN_00039610	param_6	extraArg5	INFERRED	forwarded unchanged to FUN_0002cc30
+local	FUN_00039610	uVar1	element1	INFERRED	second component word of the vertex element
+local	FUN_00039610	uVar2	element2	INFERRED	third component word of the vertex element
+local	FUN_00039610	uVar3	element3	INFERRED	fourth component word of the vertex element
+local	FUN_00039610	uVar5	weightWord	INFERRED	per-vertex weight word read from the program's table
+local	FUN_00039610	uVar9	topology	INFERRED	stale topology value, then the first component word of the vertex element
+local	FUN_00039610	uVar10	rangeEnd	INFERRED	end of the vertex data range being copied (center vertex, then the remaining vertices)
+local	FUN_00039610	iVar16	vertexStride	INFERRED	vertexArrayInfo+0x20: vertex stride in 16-byte elements
+local	FUN_00039610	iVar17	innerLeft	INFERRED	countdown of elements left in the current vertex
+local	FUN_00039610	puVar8	ringCursor	INFERRED	write cursor through the per-slot 0x917 records
+local	FUN_00039610	puVar14	weightCursor	INFERRED	walks the weight table backwards
+local	FUN_00039610	iVar4	lastElementCenter	INFERRED	vertexStride - 1 while the center vertex is copied
+use	FUN_00039610	iVar6	lastElementRest	INFERRED	vertexStride - 1 while the remaining vertices are copied	^\s*iVar6\ =\ iVar16\ \+\ \-1;$	+1
+use	FUN_00039610	iVar6	lastElementRest	INFERRED	vertexStride - 1 while the remaining vertices are copied	^\s*if\ \(\-1\ <\ iVar6\)\ \{$	+1
+use	FUN_00039610	iVar6	unitCount	INFERRED	trimmed vertex count returned by FUN_0002cc30 (0 = nothing to draw)	^\s*iVar6\ =\ \(\(uint\ \(\*\)\(\)\)FUN_0002cc30\)\(param_1,0,6,param_4,param_5,param_6,in_r9,fparam_1,fparam_2,fparam_3,fparam_4,$	+1
+use	FUN_00039610	iVar6	unitCount	INFERRED	trimmed vertex count returned by FUN_0002cc30 (0 = nothing to draw)	^\s*if\ \(iVar6\ !=\ 0\)\ \{$	+1
+use	FUN_00039610	iVar6	unitCount	INFERRED	trimmed vertex count returned by FUN_0002cc30 (0 = nothing to draw)	^\s*iVar13\ =\ iVar16\ \*\ \(iVar6\ \*\ 5\ \+\ 5\);$	+1
+use	FUN_00039610	iVar6	unitCount	INFERRED	trimmed vertex count returned by FUN_0002cc30 (0 = nothing to draw)	^\s*iVar6\ \*\ 2\ \+\ iVar13\ \+\ \(\*\(int\ \*\)\(param_1\ \+\ 0x267c\)\ \+\ 1U\ \&\ 0xfffffffe\)\ \+\ 0x18,$	+1
+use	FUN_00039610	iVar6	unitCount	INFERRED	trimmed vertex count returned by FUN_0002cc30 (0 = nothing to draw)	^\s*uVar10\ =\ param_3\ \+\ iVar16\ \*\ 4\ \*\ iVar6\ \*\ 4;$	+1
+use	FUN_00039610	iVar11	programState	INFERRED	ctx+0x29e8 program record	^\s*iVar11\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x29e8\);$	+1
+use	FUN_00039610	iVar11	programState	INFERRED	ctx+0x29e8 program record	^\s*uVar9,param_4,param_5,iVar11,iVar13,iVar15\);$	+1
+use	FUN_00039610	iVar11	programState	INFERRED	ctx+0x29e8 program record	^\s*iVar15\ =\ \*\(int\ \*\)\(iVar11\ \+\ 0x2c\);$	+1
+use	FUN_00039610	iVar11	programState	INFERRED	program record whose +0x2c is the weight table	^\s*iVar11\ =\ \*\(int\ \*\)\(iVar11\ \+\ 0x2c\);$	+1	rhs	none
+use	FUN_00039610	iVar11	weightTableRest	INFERRED	program's weight table for the second pass	^\s*iVar11\ =\ \*\(int\ \*\)\(iVar11\ \+\ 0x2c\);$	+1	lhs	none
+use	FUN_00039610	iVar11	weightTableRest	INFERRED	program's weight table for the second pass	^\s*puVar14\ =\ \(undefined4\ \*\)\(iVar11\ \+\ iVar6\ \*\ 4\);$	+1
+use	FUN_00039610	iVar13	allocWords	INFERRED	stride * (count * 5 + 5): words of vertex records reserved in the packet	^\s*iVar13\ =\ iVar16\ \*\ \(iVar6\ \*\ 5\ \+\ 5\);$	+1
+use	FUN_00039610	iVar13	allocWords	INFERRED	stride * (count * 5 + 5): words of vertex records reserved in the packet	^\s*iVar6\ \*\ 2\ \+\ iVar13\ \+\ \(\*\(int\ \*\)\(param_1\ \+\ 0x267c\)\ \+\ 1U\ \&\ 0xfffffffe\)\ \+\ 0x18,$	+2
+use	FUN_00039610	iVar13	strideBytes	INFERRED	vertexStride * 16: bytes per vertex of client data	^\s*iVar13\ =\ iVar16\ \*\ 0x10;$	+1
+use	FUN_00039610	iVar13	strideBytes	INFERRED	vertexStride * 16: bytes per vertex of client data	^\s*uVar10\ =\ param_2\ \+\ iVar13;$	+1
+use	FUN_00039610	iVar13	strideBytes	INFERRED	vertexStride * 16: bytes per vertex of client data	^\s*param_2\ =\ param_2\ \+\ iVar13;$	+1
+use	FUN_00039610	iVar13	strideBytes	INFERRED	vertexStride * 16: bytes per vertex of client data	^\s*param_3\ =\ param_3\ \+\ iVar13;$	+1
+use	FUN_00039610	iVar15	vertexArrayInfo	INFERRED	current program's vertex-array info	^\s*iVar15\ =\ \*\(int\ \*\)\(\*\*\(int\ \*\*\)\(param_1\ \+\ 0x1cc\)\ \+\ 4\);$	+2
+use	FUN_00039610	iVar15	vertexArrayInfo	INFERRED	current program's vertex-array info	^\s*uVar9,param_4,param_5,iVar11,iVar13,iVar15\);$	+1
+use	FUN_00039610	iVar15	weightTable	INFERRED	program's weight table for the center vertex pass	^\s*iVar15\ =\ \*\(int\ \*\)\(iVar11\ \+\ 0x2c\);$	+1
+use	FUN_00039610	iVar15	weightTable	INFERRED	program's weight table for the center vertex pass	^\s*puVar14\ =\ \(undefined4\ \*\)\(iVar15\ \+\ iVar4\ \*\ 4\);$	+1
+use	FUN_00039610	iVar15	innerLeft2	INFERRED	countdown of elements left in the current vertex (second pass)	^\s*iVar15\ =\ iVar16;$	+1
+use	FUN_00039610	iVar15	innerLeft2	INFERRED	countdown of elements left in the current vertex (second pass)	^\s*iVar15\ =\ iVar15\ \+\ \-1;$	+2
+use	FUN_00039610	puVar7	ringStart	INFERRED	start of the packet allocated from the command stream	^\s*puVar7\ =\ \(undefined4\ \*\)$	+1
+use	FUN_00039610	puVar7	ringStart	INFERRED	start of the packet allocated from the command stream	^\s*\*\(undefined4\ \*\*\)\(param_1\ \+\ 0x298c\)\ =\ puVar7;$	+1
+use	FUN_00039610	puVar7	ringStart	INFERRED	start of the packet allocated from the command stream	^\s*puVar7\ =\ \(undefined4\ \*\)FUN_0002c0c0\(param_1,puVar7\);$	+1
+use	FUN_00039610	puVar7	ringStart	INFERRED	start of the packet allocated from the command stream	^\s*\*puVar7\ =\ 0x5c8;$	+3
+use	FUN_00039610	puVar7	ringStart	INFERRED	start of the packet allocated from the command stream	^\s*puVar8\ =\ puVar7\ \+\ 4;$	+2
+use	FUN_00039610	puVar7	ringStart	INFERRED	start of the packet allocated from the command stream	^\s*puVar7\[2\]\ =\ 0x821;$	+3
+use	FUN_00039610	puVar7	elementPtr	INFERRED	walks the center vertex's elements backwards	^\s*puVar7\ =\ \(undefined4\ \*\)\(param_2\ \+\ iVar4\ \*\ 0x10\);$	+1
+use	FUN_00039610	puVar7	elementPtr	INFERRED	walks the center vertex's elements backwards	^\s*uVar9\ =\ \*puVar7;$	+5
+use	FUN_00039610	puVar7	elementPtr	INFERRED	walks the current vertex's elements backwards	^\s*puVar7\ =\ \(undefined4\ \*\)\(param_3\ \+\ iVar6\ \*\ 0x10\);$	+1
+use	FUN_00039610	puVar7	elementPtr	INFERRED	walks the current vertex's elements backwards	^\s*uVar9\ =\ \*puVar7;$@2	+5
+use	FUN_00039610	iVar6	lastElementRest	INFERRED	vertexStride - 1 while the remaining vertices are copied	^\s*puVar14\ =\ \(undefined4\ \*\)\(iVar11\ \+\ iVar6\ \*\ 4\);$	+2

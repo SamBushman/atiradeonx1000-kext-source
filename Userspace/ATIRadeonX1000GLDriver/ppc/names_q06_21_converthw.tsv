@@ -1,0 +1,43 @@
+use	LoopInfo__convertToHardwareLoop	uVar10	conversionResult	INFERRED	return value: 1 when the loop was converted, else 0	^\s*uVar10\ =\ 0;$	+1
+use	LoopInfo__convertToHardwareLoop	uVar10	conversionResult	INFERRED	return value: 1 when the loop was converted, else 0	^\s*uVar10\ =\ 1;$	+1
+use	LoopInfo__convertToHardwareLoop	uVar10	conversionResult	INFERRED	return value: 1 when the loop was converted, else 0	^\s*return\ uVar10;$	+1
+use	LoopInfo__convertToHardwareLoop	uVar10	staleArg5	INFERRED	zero kept in r5 and forwarded to Block__getBranchInst	^\s*uVar10\ =\ 0;$@2	+1
+use	LoopInfo__convertToHardwareLoop	uVar10	staleArg5	INFERRED	zero kept in r5 and forwarded to Block__getBranchInst	^\s*piVar7\ =\ \(int\ \*\)FUN_000e7804\(param_1\[10\],uVar6,puVar8,uVar10,iVar3,param_6,uVar9\);$	+1
+use	LoopInfo__convertToHardwareLoop	iVar1	predecessorEntry	INFERRED	entry of the successor's predecessor vector	^\s*iVar1\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(\*\(int\ \*\)\(iVar2\ \+\ 0xd4\)\ \+\ 8\)\ \+\ iVar11\);$	+3
+use	LoopInfo__convertToHardwareLoop	iVar4	counterUseCount	INFERRED	IRInst__useCount of the counter source	^\s*iVar4\ =\ FUN_00104054\(iVar3,param_1\[0x10\]\);$	+2
+use	LoopInfo__convertToHardwareLoop	iVar4	keptSuccessor	INFERRED	successor of the exit test that stays in the program	^\s*iVar4\ =\ FUN_000e920c\(\*\(undefined4\ \*\)\(param_1\[10\]\ \+\ 0x13c\),0\);$	+1
+use	LoopInfo__convertToHardwareLoop	iVar4	keptSuccessor	INFERRED	successor of the exit test that stays in the program	^\s*iVar4\ =\ \*\(int\ \*\)\(param_1\[10\]\ \+\ 0x134\);$	+1
+use	LoopInfo__convertToHardwareLoop	iVar4	keptSuccessor	INFERRED	successor of the exit test that stays in the program	^\s*\*\(undefined4\ \*\)\(\*\(int\ \*\)\(iVar4\ \+\ 0xd4\)\ \+\ 4\)\ =\ 0;$	+2
+use	LoopInfo__convertToHardwareLoop	iVar4	predecessorIndex	INFERRED	index of the loop block in the successor's predecessor vector	^\s*iVar4\ =\ 0;$	+1
+use	LoopInfo__convertToHardwareLoop	iVar4	predecessorIndex	INFERRED	index of the loop block in the successor's predecessor vector	^\s*FUN_00194208\(\*\(undefined4\ \*\)\(iVar2\ \+\ 0xd4\),iVar4\);$	+1
+use	LoopInfo__convertToHardwareLoop	iVar4	predecessorIndex	INFERRED	index of the loop block in the successor's predecessor vector	^\s*iVar4\ =\ iVar4\ \+\ 1;$	+1
+use	LoopInfo__convertToHardwareLoop	iVar4	bodyBlockCursor	INFERRED	loop body block detached while walking back to the header	^\s*iVar4\ =\ FUN_000e9184\(param_1\[9\],0\);$	+1
+use	LoopInfo__convertToHardwareLoop	iVar4	bodyBlockCursor	INFERRED	loop body block detached while walking back to the header	^\s*if\ \(iVar4\ !=\ iVar2\)\ \{$	+1
+use	LoopInfo__convertToHardwareLoop	iVar4	bodyBlockCursor	INFERRED	loop body block detached while walking back to the header	^\s*FUN_000e7658\(iVar4\);$	+3
+use	LoopInfo__convertToHardwareLoop	iVar4	bodyBlockCursor	INFERRED	loop body block detached while walking back to the header	^\s*\}\ while\ \(iVar2\ !=\ iVar4\);$	+1
+use	LoopInfo__convertToHardwareLoop	iVar4	footerBlockCursor	INFERRED	loop footer-side block detached while walking back to the header	^\s*iVar4\ =\ \*\(int\ \*\)\(iVar2\ \+\ 0x13c\);$	+2
+use	LoopInfo__convertToHardwareLoop	iVar4	footerBlockCursor	INFERRED	loop footer-side block detached while walking back to the header	^\s*FUN_000e7658\(iVar4\);$@2	+3
+use	LoopInfo__convertToHardwareLoop	iVar4	footerBlockCursor	INFERRED	loop footer-side block detached while walking back to the header	^\s*\}\ while\ \(iVar4\ !=\ param_1\[10\]\);$	+1
+use	LoopInfo__convertToHardwareLoop	uVar6	staleArg4A	INFERRED	r4 left over, forwarded to Block__getBranchInst	^\s*uVar6\ =\ extraout_r4_00;$	+1
+use	LoopInfo__convertToHardwareLoop	uVar6	staleArg4A	INFERRED	r4 left over, forwarded to Block__getBranchInst	^\s*uVar6\ =\ \(undefined4\)uVar12;$	+1
+use	LoopInfo__convertToHardwareLoop	uVar6	staleArg4A	INFERRED	r4 left over, forwarded to Block__getBranchInst	^\s*uVar6\ =\ \(undefined4\)uVar12;$@2	+1
+use	LoopInfo__convertToHardwareLoop	uVar6	staleArg4A	INFERRED	r4 left over, forwarded to Block__getBranchInst	^\s*uVar6\ =\ extraout_r4;$	+1
+use	LoopInfo__convertToHardwareLoop	uVar6	staleArg4A	INFERRED	r4 left over, forwarded to Block__getBranchInst	^\s*uVar6\ =\ extraout_r4_01;$	+1
+use	LoopInfo__convertToHardwareLoop	uVar6	staleArg4A	INFERRED	r4 left over, forwarded to Block__getBranchInst	^\s*piVar7\ =\ \(int\ \*\)FUN_000e7804\(param_1\[10\],uVar6,puVar8,uVar10,iVar3,param_6,uVar9\);$	+1
+use	LoopInfo__convertToHardwareLoop	uVar6	staleArg4B	INFERRED	r4 holding the loop body's first predecessor	^\s*uVar6\ =\ FUN_000e9184\(param_1\[9\],0\);$	+2
+use	LoopInfo__convertToHardwareLoop	extraout_r4	staleArg4C	INFERRED	r4 left over from the detach call	^\s*uVar6\ =\ extraout_r4;$	+1
+use	LoopInfo__convertToHardwareLoop	extraout_r4_00	staleArg4D	INFERRED	r4 left over from the detach call	^\s*uVar6\ =\ extraout_r4_00;$	+1
+use	LoopInfo__convertToHardwareLoop	extraout_r4_01	staleArg4E	INFERRED	r4 left over from the release call	^\s*uVar6\ =\ extraout_r4_01;$	+1
+use	LoopInfo__convertToHardwareLoop	puVar8	constInst	INFERRED	new IRLoadConst holding the hardware loop counter constants (allocation + 1)	^\s*puVar8\ =\ puVar5\ \+\ 1;$	+1
+use	LoopInfo__convertToHardwareLoop	puVar8	constInst	INFERRED	new IRLoadConst holding the hardware loop counter constants (allocation + 1)	^\s*FUN_00109938\(puVar8,iVar3\);$	+2
+use	LoopInfo__convertToHardwareLoop	puVar8	constInst	INFERRED	new IRLoadConst holding the hardware loop counter constants (allocation + 1)	^\s*FUN_00106004\(param_1\[0xf\],1,puVar8,0,iVar3\);$	+1
+use	LoopInfo__convertToHardwareLoop	puVar8	constInst	INFERRED	new IRLoadConst holding the hardware loop counter constants (allocation + 1)	^\s*puVar8\ =\ \*\(undefined4\ \*\*\)\(uVar9\ \+\ 8\);$	+1
+use	LoopInfo__convertToHardwareLoop	puVar8	constInst	INFERRED	new IRLoadConst holding the hardware loop counter constants (allocation + 1)	^\s*piVar7\ =\ \(int\ \*\)FUN_000e7804\(param_1\[10\],uVar6,puVar8,uVar10,iVar3,param_6,uVar9\);$	+1
+use	LoopInfo__convertToHardwareLoop	uVar9	predecessorNumber	INFERRED	predecessor number 1..count	^\s*for\ \(uVar9\ =\ 1;\ uVar9\ <=\ \*\(uint\ \*\)\(\*\(int\ \*\)\(iVar2\ \+\ 0xd4\)\ \+\ 4\);\ uVar9\ =\ uVar9\ \+\ 1\)\ \{$	+1
+use	LoopInfo__convertToHardwareLoop	uVar9	predecessorNumber	INFERRED	predecessor number 1..count	^\s*uVar9\ =\ param_1\[0x10\];$	+2
+use	LoopInfo__convertToHardwareLoop	uVar9	predecessorNumber	INFERRED	predecessor number 1..count	^\s*piVar7\ =\ \(int\ \*\)FUN_000e7804\(param_1\[10\],uVar6,puVar8,uVar10,iVar3,param_6,uVar9\);$	+1
+use	LoopInfo__convertToHardwareLoop	iVar11	inputBase	INFERRED	program word 0x478: first input slot number	^\s*iVar11\ =\ \*\(int\ \*\)\(param_1\[0x10\]\ \+\ 0x478\);$	+1
+use	LoopInfo__convertToHardwareLoop	iVar11	inputBase	INFERRED	program word 0x478: first input slot number	^\s*\*\(int\ \*\)\(iVar3\ \+\ 0x160\)\ =\ iVar11\ \+\ iVar4\ \+\ \-1;$	+1
+use	LoopInfo__convertToHardwareLoop	iVar11	predecessorByteOffset	INFERRED	byte offset into the predecessor vector	^\s*iVar11\ =\ 0;$	+1
+use	LoopInfo__convertToHardwareLoop	iVar11	predecessorByteOffset	INFERRED	byte offset into the predecessor vector	^\s*iVar1\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(\*\(int\ \*\)\(iVar2\ \+\ 0xd4\)\ \+\ 8\)\ \+\ iVar11\);$	+1
+use	LoopInfo__convertToHardwareLoop	iVar11	predecessorByteOffset	INFERRED	byte offset into the predecessor vector	^\s*iVar11\ =\ iVar11\ \+\ 4;$	+1

@@ -1,0 +1,24 @@
+local	FUN_001314b8	param_1	allocator	INFERRED	register allocator object (+8 compiler, +0x458/+0x45c/+0x460 register tables, +0x464 total, +0x468 first virtual, +0x46c virtual count)
+use	FUN_001314b8	iVar1	virtualRegCount	INFERRED	FUN_001304a4: number of virtual registers	^\s*iVar1\ =\ \(\(int\ \(\*\)\(\)\)FUN_001304a4\)\(param_1\);$	+1
+use	FUN_001314b8	iVar1	virtualRegCount	INFERRED	FUN_001304a4: number of virtual registers	^\s*\*\(int\ \*\)\(param_1\ \+\ 0x46c\)\ =\ iVar1;$	+2
+use	FUN_001314b8	iVar1	physicalRegCountA	INFERRED	backend vtable slot 0x138: number of physical registers	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*piVar5\ \+\ 0x138\)\)\(piVar5,iVar4\);$	+1
+use	FUN_001314b8	iVar1	physicalRegCountA	INFERRED	backend vtable slot 0x138: number of physical registers	^\s*iVar4\ =\ iVar1\ \+\ iVar2\ \+\ iVar4;$	+1
+use	FUN_001314b8	iVar1	tableEntryCount	INFERRED	register table entry count: max(total, physical sum), at least 0x1000	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x464\);$	+1
+use	FUN_001314b8	iVar1	tableEntryCount	INFERRED	register table entry count: max(total, physical sum), at least 0x1000	^\s*iVar1\ =\ iVar4;$	+1
+use	FUN_001314b8	iVar1	tableEntryCount	INFERRED	register table entry count: max(total, physical sum), at least 0x1000	^\s*if\ \(iVar1\ <\ 0x1000\)\ \{$	+2
+use	FUN_001314b8	iVar1	tableEntryCount	INFERRED	register table entry count: max(total, physical sum), at least 0x1000	^\s*iVar2\ =\ iVar1\ <<\ 2;$	+1
+use	FUN_001314b8	iVar1	tableEntryCount	INFERRED	register table entry count: max(total, physical sum), at least 0x1000	^\s*if\ \(0\ <\ iVar1\)\ \{$	+1
+use	FUN_001314b8	iVar1	tableEntryCount	INFERRED	register table entry count: max(total, physical sum), at least 0x1000	^\s*iVar1\ =\ iVar1\ \+\ \-1;$	+2
+use	FUN_001314b8	iVar2	physicalRegCountB	INFERRED	backend vtable slot 0x140: second register count	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*piVar5\ \+\ 0x140\)\)\(piVar5,iVar4\);$	+1
+use	FUN_001314b8	iVar2	physicalRegCountB	INFERRED	backend vtable slot 0x140: second register count	^\s*iVar4\ =\ iVar1\ \+\ iVar2\ \+\ iVar4;$	+1
+use	FUN_001314b8	iVar2	tableBytes	INFERRED	table entry count * 4	^\s*iVar2\ =\ iVar1\ <<\ 2;$	+2
+use	FUN_001314b8	iVar2	tableBytes	INFERRED	table entry count * 4	^\s*uVar3\ =\ FUN_00193e18\(\*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x374\),iVar2\);$@2	+1
+use	FUN_001314b8	iVar2	tableBytes	INFERRED	table entry count * 4	^\s*uVar3\ =\ FUN_00193e18\(\*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x374\),iVar2\);$@3	+1
+use	FUN_001314b8	iVar2	fillIndex	INFERRED	index while the third table is filled with -1	^\s*iVar2\ =\ 0;$	+1
+use	FUN_001314b8	iVar2	fillIndex	INFERRED	index while the third table is filled with -1	^\s*iVar4\ =\ iVar2\ \*\ 4;$	+2
+use	FUN_001314b8	iVar4	compilerThenTotal	INFERRED	compiler pointer, then the sum of the three backend register counts	^\s*iVar4\ =\ \*\(int\ \*\)\(param_1\ \+\ 8\);$	+1
+use	FUN_001314b8	iVar4	compilerThenTotal	INFERRED	compiler pointer, then the sum of the three backend register counts	^\s*piVar5\ =\ \*\(int\ \*\*\)\(iVar4\ \+\ 0x30c\);$	+5
+use	FUN_001314b8	iVar4	compilerThenTotal	INFERRED	compiler pointer, then the sum of the three backend register counts	^\s*if\ \(\*\(int\ \*\)\(param_1\ \+\ 0x464\)\ <=\ iVar4\)\ \{$	+2
+use	FUN_001314b8	iVar4	fillByteOffset	INFERRED	byte offset of the entry being filled with -1	^\s*iVar4\ =\ iVar2\ \*\ 4;$	+1
+use	FUN_001314b8	iVar4	fillByteOffset	INFERRED	byte offset of the entry being filled with -1	^\s*\*\(undefined4\ \*\)\(iVar4\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x460\)\)\ =\ 0xffffffff;$	+1
+use	FUN_001314b8	piVar5	backend	INFERRED	compiler backend object (compiler + 0x30c)	^\s*piVar5\ =\ \*\(int\ \*\*\)\(iVar4\ \+\ 0x30c\);$	+4

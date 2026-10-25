@@ -1,0 +1,29 @@
+local	FUN_0010ff24	param_1	packEntry	INFERRED	pack entry (word 0 instruction, words 1..4 lane sources, word 6 scope id)
+use	FUN_0010ff24	iVar1	entryDestRegister	INFERRED	destination register (+0x94) of the entry's instruction	^\s*iVar1\ =\ \*\(int\ \*\)\(\*param_1\ \+\ 0x94\);$	+1
+use	FUN_0010ff24	iVar1	entryDestRegister	INFERRED	destination register (+0x94) of the entry's instruction	^\s*piVar3\[5\]\ =\ iVar1;$	+1
+use	FUN_0010ff24	piVar3	record	INFERRED	lane record taken from the record vector	^\s*piVar3\ =\ \(int\ \*\)\(uVar6\ \*\ 4\ \+\ param_2\[2\]\);$	+1
+use	FUN_0010ff24	piVar3	record	INFERRED	lane record taken from the record vector	^\s*piVar3\ =\ \(int\ \*\)FUN_0019423c\(param_2,uVar6\);$	+1
+use	FUN_0010ff24	piVar3	record	INFERRED	lane record taken from the record vector	^\s*piVar3\ =\ \(int\ \*\)\*piVar3;$	+2
+use	FUN_0010ff24	piVar3	record	INFERRED	lane record taken from the record vector	^\s*if\ \(\*piVar3\ ==\ piVar4\[1\]\)\ \{$	+1
+use	FUN_0010ff24	piVar3	record	INFERRED	lane record taken from the record vector	^\s*piVar3\[6\]\ =\ iVar5;$	+2
+use	FUN_0010ff24	piVar4	laneSourceCursor	INFERRED	cursor over the entry's lane sources	^\s*piVar4\ =\ param_1;$	+1
+use	FUN_0010ff24	piVar4	laneSourceCursor	INFERRED	cursor over the entry's lane sources	^\s*if\ \(\*piVar3\ ==\ piVar4\[1\]\)\ \{$	+1
+use	FUN_0010ff24	piVar4	laneSourceCursor	INFERRED	cursor over the entry's lane sources	^\s*piVar4\ =\ piVar4\ \+\ 1;$	+1
+use	FUN_0010ff24	iVar5	laneNumber	INFERRED	lane counter 0..3	^\s*iVar5\ =\ 0;$	+1
+use	FUN_0010ff24	iVar5	laneNumber	INFERRED	lane counter 0..3	^\s*piVar3\[6\]\ =\ iVar5;$	+1
+use	FUN_0010ff24	iVar5	laneNumber	INFERRED	lane counter 0..3	^\s*iVar5\ =\ iVar5\ \+\ 1;$	+1
+use	FUN_0010ff24	iVar7	laneCountdown	INFERRED	countdown from 4 over the lanes	^\s*iVar7\ =\ 4;$	+1
+use	FUN_0010ff24	iVar7	laneCountdown	INFERRED	countdown from 4 over the lanes	^\s*iVar7\ =\ iVar7\ \+\ \-1;$	+2
+local	FUN_0010e56c	param_1	backend	INFERRED	backend object whose vtable slot 0xe4 gives the first hardware register to use
+use	FUN_0010e56c	iVar1	nextHwRegister	INFERRED	hardware register being handed to the next vertex load	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0xe4\)\)\(param_1\);$	+1
+use	FUN_0010e56c	iVar1	nextHwRegister	INFERRED	hardware register being handed to the next vertex load	^\s*while\ \(iVar2\ =\ FUN_00130478\(param_2,iVar1\),\ iVar2\ ==\ 0\)\ \{$	+2
+use	FUN_0010e56c	iVar1	nextHwRegister	INFERRED	hardware register being handed to the next vertex load	^\s*FUN_00130444\(param_2,iVar1\);$	+1
+use	FUN_0010e56c	iVar1	nextHwRegister	INFERRED	hardware register being handed to the next vertex load	^\s*\*\(int\ \*\)\(iVar3\ \+\ 0x94\)\ =\ iVar1;$	+1
+use	FUN_0010e56c	iVar2	nextInstLink	INFERRED	link to the instruction after the cursor	^\s*for\ \(iVar2\ =\ \*\(int\ \*\)\(iVar3\ \+\ 8\);\ iVar2\ !=\ 0;\ iVar2\ =\ \*\(int\ \*\)\(iVar2\ \+\ 8\)\)\ \{$	+1
+use	FUN_0010e56c	iVar2	nextInstLink	INFERRED	link to the instruction after the cursor	^\s*while\ \(iVar2\ =\ FUN_00130478\(param_2,iVar1\),\ iVar2\ ==\ 0\)\ \{$	+1
+use	FUN_0010e56c	iVar2	nextInstLink	INFERRED	link to the instruction after the cursor	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar3\ \+\ 8\);$	+1
+use	FUN_0010e56c	iVar2	nextInstLink	INFERRED	link to the instruction after the cursor	^\s*iVar3\ =\ iVar2;$	+1
+use	FUN_0010e56c	iVar3	inst	INFERRED	instruction being examined in the entry block's list	^\s*iVar3\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x3a0\);$	+1
+use	FUN_0010e56c	iVar3	inst	INFERRED	instruction being examined in the entry block's list	^\s*iVar3\ =\ \*\(int\ \*\)\(iVar3\ \+\ 0x98\);$	+3
+use	FUN_0010e56c	iVar3	inst	INFERRED	instruction being examined in the entry block's list	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar3\ \+\ 8\);$	+3
+use	FUN_0010e56c	iVar3	inst	INFERRED	instruction being examined in the entry block's list	^\s*iVar3\ =\ iVar2;$	+1

@@ -1821,37 +1821,39 @@ int R520MachineAssembler__setRgbOpcode(this, hardwareOpcode, irOpcode, irInst)
   int irOpcode;
   int irInst;
 {
-  undefined1 uVar1;
-  uint uVar2;
+  int recordIndex;
+  int recordTable;
+  undefined1 savedByte2d;
+  uint wordTmp;
   undefined1 rgbOpcode;
-  int iVar4;
-  uint uVar5;
-  int iVar6;
+  int recordPtr;
+  uint savedWord24;
+  int recordPtr2;
   
   rgbOpcode = (undefined1)hardwareOpcode;
   if (hardwareOpcode != -1) goto LAB_001a0654;
   if (irOpcode == 0x34) {
 LAB_001a0260:
     rgbOpcode = 0;
-    iVar4 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-    *(undefined1 *)(iVar4 + 0x2c) = *(undefined1 *)(iVar4 + 0x2b);
-    iVar4 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-    *(undefined1 *)(iVar4 + 0x2f) = *(undefined1 *)(iVar4 + 0x2e);
-    iVar4 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-    *(uint *)(iVar4 + 0x28) =
-         (*(uint *)(iVar4 + 0x24) & 0xe000) << 0x10 | *(uint *)(iVar4 + 0x28) & 0x1fffffff;
-    iVar4 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-    *(uint *)(iVar4 + 0x28) =
-         (*(uint *)(iVar4 + 0x24) & 0x1c00) << 0x10 | *(uint *)(iVar4 + 0x28) & 0xe3ffffff;
-    iVar4 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-    *(uint *)(iVar4 + 0x28) =
-         (*(uint *)(iVar4 + 0x24) & 0x380) << 0x10 | *(uint *)(iVar4 + 0x28) & 0xfc7fffff;
-    iVar4 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-    *(uint *)(iVar4 + 0x24) = *(uint *)(iVar4 + 0x24) & 0xffff1fff | 0xc000;
-    iVar4 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-    *(uint *)(iVar4 + 0x24) = *(uint *)(iVar4 + 0x24) & 0xffffe3ff | 0x1800;
-    iVar4 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-    *(uint *)(iVar4 + 0x24) = *(uint *)(iVar4 + 0x24) & 0xfffffc7f | 0x300;
+    recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+    *(undefined1 *)(recordPtr + 0x2c) = *(undefined1 *)(recordPtr + 0x2b);
+    recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+    *(undefined1 *)(recordPtr + 0x2f) = *(undefined1 *)(recordPtr + 0x2e);
+    recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+    *(uint *)(recordPtr + 0x28) =
+         (*(uint *)(recordPtr + 0x24) & 0xe000) << 0x10 | *(uint *)(recordPtr + 0x28) & 0x1fffffff;
+    recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+    *(uint *)(recordPtr + 0x28) =
+         (*(uint *)(recordPtr + 0x24) & 0x1c00) << 0x10 | *(uint *)(recordPtr + 0x28) & 0xe3ffffff;
+    recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+    *(uint *)(recordPtr + 0x28) =
+         (*(uint *)(recordPtr + 0x24) & 0x380) << 0x10 | *(uint *)(recordPtr + 0x28) & 0xfc7fffff;
+    recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+    *(uint *)(recordPtr + 0x24) = *(uint *)(recordPtr + 0x24) & 0xffff1fff | 0xc000;
+    recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+    *(uint *)(recordPtr + 0x24) = *(uint *)(recordPtr + 0x24) & 0xffffe3ff | 0x1800;
+    recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+    *(uint *)(recordPtr + 0x24) = *(uint *)(recordPtr + 0x24) & 0xfffffc7f | 0x300;
     *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8) + 0x2e) = 0;
   }
   else {
@@ -1859,12 +1861,12 @@ LAB_001a0260:
       if (irOpcode == 0x13) {
 LAB_001a0200:
         rgbOpcode = 0;
-        iVar4 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-        *(uint *)(iVar4 + 0x28) = *(uint *)(iVar4 + 0x28) & 0x1fffffff | 0x80000000;
-        iVar4 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-        *(uint *)(iVar4 + 0x28) = *(uint *)(iVar4 + 0x28) & 0xe3ffffff | 0x10000000;
-        iVar4 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-        *(uint *)(iVar4 + 0x28) = *(uint *)(iVar4 + 0x28) & 0xfc7fffff | 0x2000000;
+        recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+        *(uint *)(recordPtr + 0x28) = *(uint *)(recordPtr + 0x28) & 0x1fffffff | 0x80000000;
+        recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+        *(uint *)(recordPtr + 0x28) = *(uint *)(recordPtr + 0x28) & 0xe3ffffff | 0x10000000;
+        recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+        *(uint *)(recordPtr + 0x28) = *(uint *)(recordPtr + 0x28) & 0xfc7fffff | 0x2000000;
         goto LAB_001a0654;
       }
       if (irOpcode < 0x14) {
@@ -1873,45 +1875,45 @@ LAB_001a0200:
       else {
         if (irOpcode == 0x25) {
 LAB_001a044c:
-          iVar6 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-          rgbOpcode = *(undefined1 *)(iVar6 + 0x2a);
-          *(undefined1 *)(iVar6 + 0x2a) = *(undefined1 *)(iVar6 + 0x2b);
-          uVar5 = *(uint *)(iVar6 + 0x24);
-          iVar4 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-          uVar1 = *(undefined1 *)(iVar6 + 0x2d);
-          *(undefined1 *)(iVar4 + 0x2d) = *(undefined1 *)(iVar4 + 0x2e);
-          iVar4 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-          uVar2 = *(uint *)(iVar4 + 0x24);
-          *(uint *)(iVar4 + 0x24) = (uVar2 & 0x1c00) << 0x10 | uVar2 & 0xe3ffffff;
-          iVar4 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-          uVar2 = *(uint *)(iVar4 + 0x24);
-          *(uint *)(iVar4 + 0x24) = (uVar2 & 0x380) << 0x10 | uVar2 & 0xfc7fffff;
-          iVar4 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-          uVar2 = *(uint *)(iVar4 + 0x24);
-          *(uint *)(iVar4 + 0x24) = (uVar2 & 0xe000) << 0x10 | uVar2 & 0x1fffffff;
-          iVar4 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-          *(undefined1 *)(iVar4 + 0x2b) = *(undefined1 *)(iVar4 + 0x2c);
-          iVar4 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-          *(undefined1 *)(iVar4 + 0x2e) = *(undefined1 *)(iVar4 + 0x2f);
-          iVar4 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-          *(uint *)(iVar4 + 0x24) =
-               *(uint *)(iVar4 + 0x28) >> 0x10 & 0xe000 | *(uint *)(iVar4 + 0x24) & 0xffff1fff;
-          iVar4 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-          *(uint *)(iVar4 + 0x24) =
-               *(uint *)(iVar4 + 0x28) >> 0x10 & 0x1c00 | *(uint *)(iVar4 + 0x24) & 0xffffe3ff;
-          iVar4 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-          *(uint *)(iVar4 + 0x24) =
-               *(uint *)(iVar4 + 0x28) >> 0x10 & 0x380 | *(uint *)(iVar4 + 0x24) & 0xfffffc7f;
+          recordPtr2 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+          rgbOpcode = *(undefined1 *)(recordPtr2 + 0x2a);
+          *(undefined1 *)(recordPtr2 + 0x2a) = *(undefined1 *)(recordPtr2 + 0x2b);
+          savedWord24 = *(uint *)(recordPtr2 + 0x24);
+          recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+          savedByte2d = *(undefined1 *)(recordPtr2 + 0x2d);
+          *(undefined1 *)(recordPtr + 0x2d) = *(undefined1 *)(recordPtr + 0x2e);
+          recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+          wordTmp = *(uint *)(recordPtr + 0x24);
+          *(uint *)(recordPtr + 0x24) = (wordTmp & 0x1c00) << 0x10 | wordTmp & 0xe3ffffff;
+          recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+          wordTmp = *(uint *)(recordPtr + 0x24);
+          *(uint *)(recordPtr + 0x24) = (wordTmp & 0x380) << 0x10 | wordTmp & 0xfc7fffff;
+          recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+          wordTmp = *(uint *)(recordPtr + 0x24);
+          *(uint *)(recordPtr + 0x24) = (wordTmp & 0xe000) << 0x10 | wordTmp & 0x1fffffff;
+          recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+          *(undefined1 *)(recordPtr + 0x2b) = *(undefined1 *)(recordPtr + 0x2c);
+          recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+          *(undefined1 *)(recordPtr + 0x2e) = *(undefined1 *)(recordPtr + 0x2f);
+          recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+          *(uint *)(recordPtr + 0x24) =
+               *(uint *)(recordPtr + 0x28) >> 0x10 & 0xe000 | *(uint *)(recordPtr + 0x24) & 0xffff1fff;
+          recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+          *(uint *)(recordPtr + 0x24) =
+               *(uint *)(recordPtr + 0x28) >> 0x10 & 0x1c00 | *(uint *)(recordPtr + 0x24) & 0xffffe3ff;
+          recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+          *(uint *)(recordPtr + 0x24) =
+               *(uint *)(recordPtr + 0x28) >> 0x10 & 0x380 | *(uint *)(recordPtr + 0x24) & 0xfffffc7f;
           *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8) + 0x2c) = rgbOpcode
           ;
-          *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8) + 0x2f) = uVar1
+          *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8) + 0x2f) = savedByte2d
           ;
-          iVar4 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-          *(uint *)(iVar4 + 0x28) = uVar5 & 0xe0000000 | *(uint *)(iVar4 + 0x28) & 0x1fffffff;
-          iVar4 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-          *(uint *)(iVar4 + 0x28) = uVar5 & 0x1c000000 | *(uint *)(iVar4 + 0x28) & 0xe3ffffff;
-          iVar4 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-          *(uint *)(iVar4 + 0x28) = uVar5 & 0x3800000 | *(uint *)(iVar4 + 0x28) & 0xfc7fffff;
+          recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+          *(uint *)(recordPtr + 0x28) = savedWord24 & 0xe0000000 | *(uint *)(recordPtr + 0x28) & 0x1fffffff;
+          recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+          *(uint *)(recordPtr + 0x28) = savedWord24 & 0x1c000000 | *(uint *)(recordPtr + 0x28) & 0xe3ffffff;
+          recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+          *(uint *)(recordPtr + 0x28) = savedWord24 & 0x3800000 | *(uint *)(recordPtr + 0x28) & 0xfc7fffff;
           if (irOpcode == 0x9d) {
             rgbOpcode = 7;
           }
@@ -1923,18 +1925,18 @@ LAB_001a044c:
         if (irOpcode == 0x31) {
 LAB_001a0390:
           rgbOpcode = 0;
-          iVar4 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-          *(uint *)(iVar4 + 0x24) = *(uint *)(iVar4 + 0x24) & 0xffff1fff | 0xc000;
-          iVar4 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-          *(uint *)(iVar4 + 0x24) = *(uint *)(iVar4 + 0x24) & 0xffffe3ff | 0x1800;
-          iVar4 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-          *(uint *)(iVar4 + 0x24) = *(uint *)(iVar4 + 0x24) & 0xfffffc7f | 0x300;
-          iVar4 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-          *(uint *)(iVar4 + 0x28) = *(uint *)(iVar4 + 0x28) & 0x1fffffff | 0x80000000;
-          iVar4 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-          *(uint *)(iVar4 + 0x28) = *(uint *)(iVar4 + 0x28) & 0xe3ffffff | 0x10000000;
-          iVar4 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-          *(uint *)(iVar4 + 0x28) = *(uint *)(iVar4 + 0x28) & 0xfc7fffff | 0x2000000;
+          recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+          *(uint *)(recordPtr + 0x24) = *(uint *)(recordPtr + 0x24) & 0xffff1fff | 0xc000;
+          recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+          *(uint *)(recordPtr + 0x24) = *(uint *)(recordPtr + 0x24) & 0xffffe3ff | 0x1800;
+          recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+          *(uint *)(recordPtr + 0x24) = *(uint *)(recordPtr + 0x24) & 0xfffffc7f | 0x300;
+          recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+          *(uint *)(recordPtr + 0x28) = *(uint *)(recordPtr + 0x28) & 0x1fffffff | 0x80000000;
+          recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+          *(uint *)(recordPtr + 0x28) = *(uint *)(recordPtr + 0x28) & 0xe3ffffff | 0x10000000;
+          recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+          *(uint *)(recordPtr + 0x28) = *(uint *)(recordPtr + 0x28) & 0xfc7fffff | 0x2000000;
           goto LAB_001a0654;
         }
       }
@@ -1950,18 +1952,18 @@ LAB_001a0390:
         if (irOpcode == 0xb4) {
           *(undefined4 *)(this + 0x9c) = 1;
           rgbOpcode = 0;
-          iVar4 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-          *(uint *)(iVar4 + 0x24) = *(uint *)(iVar4 + 0x24) & 0xfc7fffff | 0x3000000;
-          iVar4 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-          *(uint *)(iVar4 + 0x24) = *(uint *)(iVar4 + 0x24) & 0xffff1fff | 0xc000;
-          iVar4 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-          *(uint *)(iVar4 + 0x24) = *(uint *)(iVar4 + 0x24) & 0xffffe3ff | 0x1800;
-          iVar4 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-          *(uint *)(iVar4 + 0x28) = *(uint *)(iVar4 + 0x28) & 0x1fffffff | 0x80000000;
-          iVar4 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-          *(uint *)(iVar4 + 0x28) = *(uint *)(iVar4 + 0x28) & 0xfc7fffff | 0x2000000;
-          iVar4 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-          *(uint *)(iVar4 + 0x28) = *(uint *)(iVar4 + 0x28) & 0xe3ffffff | 0x10000000;
+          recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+          *(uint *)(recordPtr + 0x24) = *(uint *)(recordPtr + 0x24) & 0xfc7fffff | 0x3000000;
+          recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+          *(uint *)(recordPtr + 0x24) = *(uint *)(recordPtr + 0x24) & 0xffff1fff | 0xc000;
+          recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+          *(uint *)(recordPtr + 0x24) = *(uint *)(recordPtr + 0x24) & 0xffffe3ff | 0x1800;
+          recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+          *(uint *)(recordPtr + 0x28) = *(uint *)(recordPtr + 0x28) & 0x1fffffff | 0x80000000;
+          recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+          *(uint *)(recordPtr + 0x28) = *(uint *)(recordPtr + 0x28) & 0xfc7fffff | 0x2000000;
+          recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+          *(uint *)(recordPtr + 0x28) = *(uint *)(recordPtr + 0x28) & 0xe3ffffff | 0x10000000;
           goto LAB_001a0654;
         }
       }
@@ -1973,10 +1975,10 @@ LAB_001a0654:
   if (*(int *)(irInst + 0x120) != 0) {
     *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8) + 0x33) = 1;
   }
-  iVar6 = *(int *)(this + 0x60);
-  iVar4 = *(int *)(this + 0xa8);
+  recordIndex = *(int *)(this + 0x60);
+  recordTable = *(int *)(this + 0xa8);
   rgbOpcode = psnOutputScaleCode(*(undefined4 *)(irInst + 0x124));
-  *(undefined1 *)(iVar6 * 0x48 + iVar4 + 0x32) = rgbOpcode;
+  *(undefined1 *)(recordIndex * 0x48 + recordTable + 0x32) = rgbOpcode;
   return;
 }
 

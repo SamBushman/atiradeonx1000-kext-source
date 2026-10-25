@@ -1,0 +1,25 @@
+local	FUN_000242f0	param_1	ctx	CONFIRMED	GLDContext; ctx+0x240 is the embedded command stream
+local	FUN_000242f0	uVar1	vertexCount	CONFIRMED	vertex count after gld_prepareDrawCount trimmed it to whole primitives (0 = nothing to draw)
+local	FUN_000242f0	param_2	vertexAttribs	CONFIRMED	forwarded to gld_emitPrimitiveVertices
+local	FUN_000242f0	param_3	elementCount	CONFIRMED	vertex count passed to gld_prepareDrawCount
+local	FUN_000242f0	param_4	extraArg	CONFIRMED	forwarded to gld_emitPrimitiveVertices as extraArg
+local	FUN_000242f0	param_5	extraArg4	INFERRED	forwarded unchanged to gld_prepareDrawCount
+local	FUN_000242f0	param_6	staleArgR8	INFERRED	forwarded to gld_prepareDrawCount; unused
+local	FUN_00024370	param_1	ctx	CONFIRMED	GLDContext; ctx+0x240 is the embedded command stream
+local	FUN_00024370	uVar1	vertexCount	CONFIRMED	vertex count after gld_prepareDrawCount trimmed it to whole primitives (0 = nothing to draw)
+local	FUN_00024370	param_2	vertexAttribs	CONFIRMED	forwarded to gld_emitPrimitiveVertices
+local	FUN_00024370	param_3	elementCount	CONFIRMED	vertex count passed to gld_prepareDrawCount
+local	FUN_00024370	param_4	extraArg	CONFIRMED	forwarded to gld_emitPrimitiveVertices as extraArg
+local	FUN_00024370	param_5	extraArg4	INFERRED	forwarded unchanged to gld_prepareDrawCount
+local	FUN_00024370	param_6	staleArgR8	INFERRED	forwarded to gld_prepareDrawCount; unused
+local	FUN_00023870	param_3	vertexAttribs	CONFIRMED	current-attribute block of one vertex (register values at +0x20..+0x8c)
+local	FUN_00023870	param_4	packetCursor	CONFIRMED	command-stream write cursor; returned advanced
+local	FUN_00023870	bVar1	flagByte	INFERRED	byte +0x7c of the attribute block, stored as 0/1 in the closing 0x917 record
+local	FUN_00023870	uVar2	attrBit	INFERRED	one-bit mask 0x400 << index of the per-unit group being tested
+local	FUN_00023870	iVar3	unitBlock	INFERRED	per-unit attribute block (stride 0x10)
+local	FUN_00023870	uVar4	registerId	INFERRED	register id of the current per-unit run (starts at 0x8e8, +4 per unit)
+local	FUN_00023870	uVar5	unitIndex	INFERRED	index of the per-unit group, 0..7
+local	FUN_00023870	iVar6	unitsLeft	INFERRED	countdown of the eight per-unit groups
+func	FUN_00023870	gldEmitCurrentAttributeRegistersMasked	INFERRED	writes the register runs 0x8c4/0x8c8/0x8cc, the eight per-unit 0x8e8.. runs, 0x908/0x90c and the closing 0x917 record for the vertex attributes selected by the mask; masked counterpart of gldEmitCurrentAttributeRegisters
+func	FUN_000242f0	gldPrimWrapperTriangles_23a24	INFERRED	wrapper: trims the count for GL_TRIANGLES (mode 4) and calls gld_emitPrimitiveVertices with hardware primitive 4
+func	FUN_00024370	gldPrimWrapperTriangleStrip_23a24	INFERRED	wrapper: trims the count for GL_TRIANGLE_STRIP (mode 5) and calls gld_emitPrimitiveVertices with hardware primitive 6

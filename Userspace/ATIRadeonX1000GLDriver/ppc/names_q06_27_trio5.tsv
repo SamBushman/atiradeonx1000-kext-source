@@ -1,0 +1,44 @@
+use	FUN_0012aef0	uVar2	mergeResult	INFERRED	return value: 1 when the second block was folded into the first	^\s*uVar2\ =\ 0;$	+1
+use	FUN_0012aef0	uVar2	mergeResult	INFERRED	return value: 1 when the second block was folded into the first	^\s*uVar2\ =\ 1;$	+1
+use	FUN_0012aef0	uVar2	mergeResult	INFERRED	return value: 1 when the second block was folded into the first	^\s*return\ uVar2;$	+1
+use	FUN_0012aef0	iVar1	isSimple	INFERRED	Block__isSimple / counts test result	^\s*iVar1\ =\ FUN_000e7770\(param_2\);$	+4
+use	FUN_0012aef0	iVar1	isSimple	INFERRED	Block__isSimple / counts test result	^\s*while\ \(piVar4\ =\ piVar3,\ iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*piVar4\ \+\ 0x38\)\)\(piVar4\),\ iVar1\ ==\ 0\)\ \{$	+1
+use	FUN_0012aef0	piVar3	nextInst	INFERRED	instruction after the cursor in the second block	^\s*piVar3\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(param_3\ \+\ 200\)\ \+\ 8\);$	+3
+use	FUN_0012aef0	piVar4	inst	INFERRED	instruction being moved into the first block	^\s*while\ \(piVar4\ =\ piVar3,\ iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*piVar4\ \+\ 0x38\)\)\(piVar4\),\ iVar1\ ==\ 0\)\ \{$	+5
+local	FUN_0012aef0	param_2	firstBlock	INFERRED	block that absorbs the instructions of the second block
+local	FUN_001234d8	param_1	owner	INFERRED	object whose +0x14 vector holds the entries
+local	FUN_001234d8	param_2	entry	INFERRED	entry removed from the vector
+use	FUN_001234d8	uVar1	vectorCount	INFERRED	filled count of the vector	^\s*uVar1\ =\ \(\*\(uint\ \*\*\)\(param_1\ \+\ 0x14\)\)\[1\];$	+2
+use	FUN_001234d8	uVar1	vectorCount	INFERRED	filled count of the vector	^\s*if\ \(uVar1\ <=\ uVar3\)\ \{$	+2
+use	FUN_001234d8	uVar1	vectorCount	INFERRED	filled count of the vector	^\s*uVar1\ =\ puVar5\[1\];$	+1
+use	FUN_001234d8	uVar1	vectorCount	INFERRED	filled count of the vector	^\s*\}\ while\ \(uVar3\ <\ uVar1\);$	+1
+use	FUN_001234d8	piVar2	entryRef	INFERRED	element reference being compared with entry	^\s*piVar2\ =\ \(int\ \*\)\(uVar3\ \*\ 4\ \+\ puVar4\[2\]\);$	+1
+use	FUN_001234d8	piVar2	entryRef	INFERRED	element reference being compared with entry	^\s*piVar2\ =\ \(int\ \*\)FUN_0019423c\(puVar4,uVar3\);$	+1
+use	FUN_001234d8	piVar2	entryRef	INFERRED	element reference being compared with entry	^\s*if\ \(\*piVar2\ ==\ param_2\)\ \{$	+1
+use	FUN_001234d8	puVar4	entryVector	INFERRED	vector header (owner +0x14)	^\s*puVar4\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 0x14\);$	+1
+use	FUN_001234d8	puVar4	entryVector	INFERRED	vector header (owner +0x14)	^\s*if\ \(uVar3\ <\ \*puVar4\)\ \{$	+2
+use	FUN_001234d8	puVar4	entryVector	INFERRED	vector header (owner +0x14)	^\s*_memset\(uVar1\ \*\ 4\ \+\ puVar4\[2\],0,\(uVar3\ \-\ uVar1\)\ \*\ 4\ \+\ 4\);$	+2
+use	FUN_001234d8	puVar4	entryVector	INFERRED	vector header (owner +0x14)	^\s*piVar2\ =\ \(int\ \*\)\(uVar3\ \*\ 4\ \+\ puVar4\[2\]\);$	+1
+use	FUN_001234d8	puVar4	entryVector	INFERRED	vector header (owner +0x14)	^\s*piVar2\ =\ \(int\ \*\)FUN_0019423c\(puVar4,uVar3\);$	+1
+use	FUN_001234d8	puVar4	entryVector	INFERRED	vector header (owner +0x14)	^\s*puVar4\ =\ puVar5;$	+1
+use	FUN_001234d8	puVar5	entryVectorAlias	INFERRED	vector header re-read after a possible growth	^\s*puVar5\ =\ puVar4;$	+1
+use	FUN_001234d8	puVar5	entryVectorAlias	INFERRED	vector header re-read after a possible growth	^\s*puVar5\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 0x14\);$	+1
+use	FUN_001234d8	puVar5	entryVectorAlias	INFERRED	vector header re-read after a possible growth	^\s*puVar5\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 0x14\);$@2	+1
+use	FUN_001234d8	puVar5	entryVectorAlias	INFERRED	vector header re-read after a possible growth	^\s*FUN_00194208\(puVar5,uVar3\);$	+1
+use	FUN_001234d8	puVar5	entryVectorAlias	INFERRED	vector header re-read after a possible growth	^\s*uVar1\ =\ puVar5\[1\];$	+1
+use	FUN_001234d8	puVar5	entryVectorAlias	INFERRED	vector header re-read after a possible growth	^\s*puVar4\ =\ puVar5;$	+1
+local	FUN_0010fc88	param_1	bindContext	INFERRED	first argument forwarded unchanged to FUN_0010fa24
+local	FUN_0010fc88	param_4	program	INFERRED	the Program (+0x3f0 output base, +0x418 lane record vector)
+use	FUN_0010fc88	iVar1	assignedSlot	INFERRED	output base + the export's slot offset (+0x140)	^\s*iVar1\ =\ iVar7\ \+\ \*\(int\ \*\)\(iVar3\ \+\ 0x140\);$	+2
+use	FUN_0010fc88	iVar1	assignedSlot	INFERRED	output base + the export's slot offset (+0x140)	^\s*\*\(int\ \*\)\(iVar3\ \+\ 0x94\)\ =\ iVar1;$	+3
+use	FUN_0010fc88	iVar3	exportInstA	INFERRED	instruction of the export record (first read)	^\s*iVar3\ =\ \*piVar6;$	+3
+use	FUN_0010fc88	iVar3	exportInstB	INFERRED	instruction of the export record (second read)	^\s*iVar3\ =\ \*piVar6;$@2	+3
+use	FUN_0010fc88	iVar5	slotEnd	INFERRED	highest slot assigned + 1, passed to FUN_0010fa24	^\s*iVar5\ =\ 1;$	+1
+use	FUN_0010fc88	iVar5	slotEnd	INFERRED	highest slot assigned + 1, passed to FUN_0010fa24	^\s*iVar5\ =\ 0;$	+1
+use	FUN_0010fc88	iVar5	slotEnd	INFERRED	highest slot assigned + 1, passed to FUN_0010fa24	^\s*if\ \(iVar5\ <\ iVar1\)\ \{$	+2
+use	FUN_0010fc88	iVar5	slotEnd	INFERRED	highest slot assigned + 1, passed to FUN_0010fa24	^\s*iVar5\ =\ iVar5\ \+\ 1;$	+1
+use	FUN_0010fc88	iVar5	slotEnd	INFERRED	highest slot assigned + 1, passed to FUN_0010fa24	^\s*return\ \(\(int\ \(\*\)\(\)\)FUN_0010fa24\)\(param_1,auStack_f8,iVar7,iVar5,\*\(undefined4\ \*\)\(param_4\ \+\ 0x418\)\);$	+1
+use	FUN_0010fc88	iVar7	outputBase	INFERRED	program output base (+0x3f0)	^\s*iVar7\ =\ \*\(int\ \*\)\(param_4\ \+\ 0x3f0\);$	+1
+use	FUN_0010fc88	iVar7	outputBase	INFERRED	program output base (+0x3f0)	^\s*iVar1\ =\ iVar7\ \+\ \*\(int\ \*\)\(iVar3\ \+\ 0x140\);$	+1
+use	FUN_0010fc88	iVar7	outputBase	INFERRED	program output base (+0x3f0)	^\s*return\ \(\(int\ \(\*\)\(\)\)FUN_0010fa24\)\(param_1,auStack_f8,iVar7,iVar5,\*\(undefined4\ \*\)\(param_4\ \+\ 0x418\)\);$	+1
+local	FUN_0010fc88	auStack_f8	slotOwnerRegister	INFERRED	for each slot, the register the export had before renumbering

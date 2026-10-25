@@ -1,0 +1,28 @@
+local	FUN_00131c74	param_1	allocator	INFERRED	register allocator object (+0x8c slot vector)
+local	FUN_00131c74	param_2	spillRecord	INFERRED	spill record (+0x12c receives the slot value, +0x130 is its slot index)
+local	FUN_00131c74	param_3	slotValue	INFERRED	value stored in the record and in the slot vector
+use	FUN_00131c74	uVar1	slotVectorCount	INFERRED	filled count of the slot vector	^\s*uVar1\ =\ puVar4\[1\];$	+3
+use	FUN_00131c74	puVar2	slotRef	INFERRED	element reference of the record's slot in the slot vector	^\s*puVar2\ =\ \(undefined4\ \*\)\(uVar3\ \*\ 4\ \+\ puVar4\[2\]\);$	+1
+use	FUN_00131c74	puVar2	slotRef	INFERRED	element reference of the record's slot in the slot vector	^\s*puVar2\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar4,uVar3\);$	+1
+use	FUN_00131c74	puVar2	slotRef	INFERRED	element reference of the record's slot in the slot vector	^\s*\*puVar2\ =\ param_3;$	+1
+use	FUN_00131c74	uVar3	slotIndex	INFERRED	slot index of the record (+0x130)	^\s*uVar3\ =\ \*\(uint\ \*\)\(param_2\ \+\ 0x130\);$	+2
+use	FUN_00131c74	uVar3	slotIndex	INFERRED	slot index of the record (+0x130)	^\s*if\ \(uVar1\ <=\ uVar3\)\ \{$	+3
+use	FUN_00131c74	uVar3	slotIndex	INFERRED	slot index of the record (+0x130)	^\s*puVar2\ =\ \(undefined4\ \*\)\(uVar3\ \*\ 4\ \+\ puVar4\[2\]\);$	+1
+use	FUN_00131c74	uVar3	slotIndex	INFERRED	slot index of the record (+0x130)	^\s*puVar2\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar4,uVar3\);$	+1
+use	FUN_00131c74	puVar4	slotVector	INFERRED	slot vector header (allocator +0x8c)	^\s*puVar4\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 0x8c\);$	+1
+use	FUN_00131c74	puVar4	slotVector	INFERRED	slot vector header (allocator +0x8c)	^\s*if\ \(uVar3\ <\ \*puVar4\)\ \{$	+2
+use	FUN_00131c74	puVar4	slotVector	INFERRED	slot vector header (allocator +0x8c)	^\s*_memset\(uVar1\ \*\ 4\ \+\ puVar4\[2\],0,\(uVar3\ \-\ uVar1\)\ \*\ 4\ \+\ 4\);$	+2
+use	FUN_00131c74	puVar4	slotVector	INFERRED	slot vector header (allocator +0x8c)	^\s*puVar2\ =\ \(undefined4\ \*\)\(uVar3\ \*\ 4\ \+\ puVar4\[2\]\);$	+1
+use	FUN_00131c74	puVar4	slotVector	INFERRED	slot vector header (allocator +0x8c)	^\s*puVar2\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar4,uVar3\);$	+1
+local	FUN_001304a4	param_1	allocator	INFERRED	register allocator object (+8 compiler)
+use	FUN_001304a4	iVar1	physicalRegCountA	INFERRED	backend vtable slot 0x138: number of physical registers	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*piVar4\ \+\ 0x138\)\)\(piVar4,iVar3\);$	+1
+use	FUN_001304a4	iVar1	physicalRegCountA	INFERRED	backend vtable slot 0x138: number of physical registers	^\s*iVar3\ =\ iVar1\ \+\ iVar2\ \+\ iVar3;$	+1
+use	FUN_001304a4	iVar2	physicalRegCountB	INFERRED	backend vtable slot 0x140: second register count	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*piVar4\ \+\ 0x140\)\)\(piVar4,iVar3\);$	+1
+use	FUN_001304a4	iVar2	physicalRegCountB	INFERRED	backend vtable slot 0x140: second register count	^\s*iVar3\ =\ iVar1\ \+\ iVar2\ \+\ iVar3;$	+1
+use	FUN_001304a4	iVar2	isPhysicalOrAssigned	INFERRED	FUN_00130478 result: the register already has a fixed assignment	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)FUN_00130478\)\(param_1,iVar1\);$	+2
+use	FUN_001304a4	iVar3	compilerThenTotal	INFERRED	compiler pointer, then the sum of the three backend register counts	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 8\);$	+7
+use	FUN_001304a4	iVar3	compilerThenTotal	INFERRED	compiler pointer, then the sum of the three backend register counts	^\s*\}\ while\ \(iVar3\ !=\ iVar1\);$	+1
+use	FUN_001304a4	piVar4	backend	INFERRED	compiler backend object (compiler + 0x30c)	^\s*piVar4\ =\ \*\(int\ \*\*\)\(iVar3\ \+\ 0x30c\);$	+4
+use	FUN_001304a4	iVar5	virtualRegCount	INFERRED	number of registers without a fixed assignment (returned)	^\s*iVar5\ =\ 0;$	+1
+use	FUN_001304a4	iVar5	virtualRegCount	INFERRED	number of registers without a fixed assignment (returned)	^\s*iVar5\ =\ iVar5\ \+\ 1;$	+1
+use	FUN_001304a4	iVar5	virtualRegCount	INFERRED	number of registers without a fixed assignment (returned)	^\s*return\ iVar5;$	+1

@@ -1,0 +1,2 @@
+func	FUN_00181f00	Block__flattenAndRebuildAddMulTree	INFERRED	collects the operand leaves of the add/mul tree rooted at inst (worklist vectors), then rebuilds it as a chain of new add/mul instructions inserted before inst, distributing the result-scale code (+0x124) within the compiler scale limits
+func	FUN_00183b9c	Block__rebuildAddMulTreesWhereProfitable	INFERRED	walks the block list, accumulates per-instruction use counts in the node vector and calls Block__flattenAndRebuildAddMulTree on add/mul instructions whose cost drops (FUN_00181b80 costLow < costHigh)
