@@ -1,0 +1,2 @@
+local	FUN_000ac540	param_2	wordVector	INFERRED	growable word buffer {count, capacity, data}: P[1]*4+0x200 allocation through the context hook (+0xc), P[2] = new data, P[1] += 0x80
+local	FUN_000aec40	param_3	wordVector	INFERRED	growable word buffer {count, capacity, data}: P[1]*4+0x200 allocation through the context hook (+0xc), P[2] = new data, P[1] += 0x80

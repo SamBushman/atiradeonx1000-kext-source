@@ -24,7 +24,7 @@ for fn, addr in funcs.items():
     try: body, brace = F.load(d, fn); nodes, entry = F.build_cfg(body, brace)
     except BaseException: stat['noload'] += 1; continue
     cur = F.CURRENT; idents = set(re.findall(r'[A-Za-z_]\w*', '\n'.join(cur))); used = collections.Counter()
-    first = next((i for i in range(brace + 1, len(cur)) if cur[i].strip() and not re.match(r'^\s*[\w ]+[\s\*]+\w+(\[\d+\])?;$', cur[i])), brace + 1)
+    first = next((i for i in range(brace + 1, len(cur)) if cur[i].strip() and not re.match(r'^\s*[\w ]+[\s\*]+\w+ ?(\[\w+\])?;$', cur[i])), brace + 1)
     names = sorted({m for i in range(brace + 1, len(cur)) for m in re.findall(r'\b([A-Za-z]{0,4}Var\d+|p+_?[A-Za-z]*Var\d+)\b', cur[i]) if VAR.match(m)})
     spec = []
     for var in names:

@@ -48,6 +48,8 @@ def key(rhs, var, decl):
     if m: return m.group(3), offs(m.group(2)), kind(m.group(1))
     m = PATS[3].match(r)
     if m: return m.group(2), offs(m.group(1)), 'Byte'
+    m = re.match(r'^\*(\w+)$', r)
+    if m and m.group(1) in decl: return m.group(1), '0', 'Word'
     m = re.match(r'^(\w+)\[(0x[0-9a-f]+|\d+)\]$', r)
     if m and m.group(1) in decl and decl[m.group(1)] == 4:
         return m.group(1), offs(str(int(m.group(2), 0) * 4)), 'Word'
@@ -62,7 +64,7 @@ for fn, addr in funcs.items():
     cur = F.CURRENT
     text = '\n'.join(cur)
     idents = set(re.findall(r'[A-Za-z_]\w*', text))
-    first = next((i for i in range(brace + 1, len(cur)) if cur[i].strip() and not re.match(r'^\s*[\w ]+[\s\*]+\w+(\[\d+\])?;$', cur[i])), brace + 1)
+    first = next((i for i in range(brace + 1, len(cur)) if cur[i].strip() and not re.match(r'^\s*[\w ]+[\s\*]+\w+ ?(\[\w+\])?;$', cur[i])), brace + 1)
     # element sizes of pointer parameters/locals
     decl = {}
     for l in cur[:first]:
