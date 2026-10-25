@@ -1963,25 +1963,25 @@ int FUN_0012e488(param_1, block)
   int block;
 {
   undefined4 *successor;
-  int iVar2;
+  int successorInstCount;
   undefined4 *allocation;
-  undefined4 *puVar4;
+  undefined4 *landingBlock;
   undefined4 arena;
   
   successor = (undefined4 *)Block__getSuccessor(block,0);
-  iVar2 = DList__count(successor + 0x24);
-  if ((2 < iVar2) || (iVar2 = Block__isSimple(successor), puVar4 = successor, iVar2 == 0)) {
+  successorInstCount = DList__count(successor + 0x24);
+  if ((2 < successorInstCount) || (successorInstCount = Block__isSimple(successor), landingBlock = successor, successorInstCount == 0)) {
     arena = *(undefined4 *)(*(int *)(param_1 + 8) + 0x374);
     allocation = (undefined4 *)Arena__alloc(arena,0x130);
     *allocation = arena;
-    puVar4 = allocation + 1;
-    Block__ctor_ea020(puVar4,*(undefined4 *)(param_1 + 8));
+    landingBlock = allocation + 1;
+    Block__ctor_ea020(landingBlock,*(undefined4 *)(param_1 + 8));
     allocation[0x2f] = *(undefined4 *)(block + 0xb8);
-    Program__insertBlockAfter(param_1,block,puVar4);
-    Block__splitOutgoingEdge(block,successor,puVar4);
-    Block__connect(puVar4,successor);
+    Program__insertBlockAfter(param_1,block,landingBlock);
+    Block__splitOutgoingEdge(block,successor,landingBlock);
+    Block__connect(landingBlock,successor);
   }
-  return puVar4;
+  return landingBlock;
 }
 
 /* IfFooter__ctor_12e56c @ 0x12e56c (660 bytes) */
@@ -3452,18 +3452,18 @@ int FUN_0013097c(param_1, param_2)
   int param_1;
   int param_2;
 {
-  uint uVar1;
-  int iVar2;
+  uint bitIndex;
+  int remainingLanes;
   
-  uVar1 = param_2 << 2;
-  iVar2 = 4;
+  bitIndex = param_2 << 2;
+  remainingLanes = 4;
   do {
-    if ((*(uint *)((uVar1 >> 3 & 0x1ffffffc) + param_1 + 8) >> (uVar1 & 0x1f) & 1) != 0) {
+    if ((*(uint *)((bitIndex >> 3 & 0x1ffffffc) + param_1 + 8) >> (bitIndex & 0x1f) & 1) != 0) {
       return 1;
     }
-    uVar1 = uVar1 + 1;
-    iVar2 = iVar2 + -1;
-  } while (iVar2 != 0);
+    bitIndex = bitIndex + 1;
+    remainingLanes = remainingLanes + -1;
+  } while (remainingLanes != 0);
   return 0;
 }
 

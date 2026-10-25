@@ -1,0 +1,25 @@
+use	FUN_0012e488	iVar2	successorInstCount	INFERRED	DList__count of successor insts	^\s*iVar2\ =\ FUN_00194034\(puVar1\ \+\ 0x24\);$	+2
+use	FUN_0012e488	puVar4	landingBlock	INFERRED	successor itself or new inserted block	^\s*if\ \(\(2\ <\ iVar2\)\ \|\|\ \(iVar2\ =\ FUN_000e7770\(puVar1\),\ puVar4\ =\ puVar1,\ iVar2\ ==\ 0\)\)\ \{$	+1
+use	FUN_0012e488	puVar4	landingBlock	INFERRED	successor itself or new inserted block	^\s*puVar4\ =\ puVar3\ \+\ 1;$	+2
+use	FUN_0012e488	puVar4	landingBlock	INFERRED	successor itself or new inserted block	^\s*FUN_000ec3ac\(param_1,param_2,puVar4\);$	+3
+use	FUN_0012e488	puVar4	landingBlock	INFERRED	successor itself or new inserted block	^\s*return\ puVar4;$	+1
+use	FUN_00139034	iVar1	currentValue	INFERRED	param_1+0x158 compared to three candidates	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x158\);$	+2
+use	FUN_001382b8	iVar1	vtableQueryResult	INFERRED	vtable slot 100 test	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 100\)\)\(param_1\);$	+2
+use	FUN_001382b8	uVar2	laneIndexBefore	INFERRED	*param_3 lane read	^\s*uVar2\ =\ \*param_3;$	+1
+use	FUN_001382b8	uVar2	laneIndexBefore	INFERRED	*param_3 lane read	^\s*if\ \(\*\(char\ \*\)\(uVar2\ \+\ iVar1\ \+\ 0x10\)\ ==\ '\\0'\)\ \{$	+1
+use	FUN_001382b8	uVar2	laneIndexAfter	INFERRED	*param_3 lane read	^\s*uVar2\ =\ \*param_3;$@2	+1
+use	FUN_001382b8	uVar2	laneIndexAfter	INFERRED	*param_3 lane read	^\s*\*param_3\ =\ \(uint\)\*\(byte\ \*\)\(uVar2\ \+\ iVar1\ \+\ 0x10\);$	+1
+use	FUN_00135090	iVar1	chunk	INFERRED	chunk list head at +8 freed via Arena__free	^\s*while\ \(iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 8\),\ iVar1\ !=\ 0\)\ \{$	+3
+use	FUN_00135090	iVar1	sideTable	INFERRED	object at +0x10 freed	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x10\);$	+4
+use	FUN_00135010	iVar1	chunk	INFERRED	chunk list head at +8 freed via Arena__free	^\s*while\ \(iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 8\),\ iVar1\ !=\ 0\)\ \{$	+3
+use	FUN_00135010	iVar1	sideTable	INFERRED	object at +0x10 freed	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x10\);$	+4
+use	FUN_00134db0	iVar1	remainingWords	INFERRED	bitset word count countdown	^\s*iVar1\ =\ \*piVar2;$	+2
+use	FUN_00134db0	iVar1	remainingWords	INFERRED	bitset word count countdown	^\s*if\ \(iVar1\ ==\ 0\)\ \{$@2	+2
+use	FUN_00134db0	iVar1	remainingWords	INFERRED	bitset word count countdown	^\s*iVar1\ =\ iVar1\ \+\ \-1;$	+2
+use	FUN_00134db0	piVar2	bitSet	INFERRED	bitset cursor cleared word by word	^\s*piVar2\ =\ \(int\ \*\)\*param_1;$	+2
+use	FUN_00134db0	piVar2	bitSet	INFERRED	bitset cursor cleared word by word	^\s*piVar2\[2\]\ =\ 0;$	+2
+use	FUN_0013097c	uVar1	bitIndex	INFERRED	param_2*4 plus lane	^\s*uVar1\ =\ param_2\ <<\ 2;$	+1
+use	FUN_0013097c	uVar1	bitIndex	INFERRED	param_2*4 plus lane	^\s*if\ \(\(\*\(uint\ \*\)\(\(uVar1\ >>\ 3\ \&\ 0x1ffffffc\)\ \+\ param_1\ \+\ 8\)\ >>\ \(uVar1\ \&\ 0x1f\)\ \&\ 1\)\ !=\ 0\)\ \{$	+1
+use	FUN_0013097c	uVar1	bitIndex	INFERRED	param_2*4 plus lane	^\s*uVar1\ =\ uVar1\ \+\ 1;$	+1
+use	FUN_0013097c	iVar2	remainingLanes	INFERRED	4 lane loop counter	^\s*iVar2\ =\ 4;$	+1
+use	FUN_0013097c	iVar2	remainingLanes	INFERRED	4 lane loop counter	^\s*iVar2\ =\ iVar2\ \+\ \-1;$	+2

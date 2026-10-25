@@ -3068,30 +3068,30 @@ int VertexRegister__clone(this, param_2, compiler)
   int *param_2;
   int compiler;
 {
-  int iVar1;
+  int loadVertexInst;
   undefined4 *allocation;
   int callResult;
-  undefined4 *puVar4;
+  undefined4 *valueKey;
   undefined4 arena;
   
-  iVar1 = IRLoadVertex__new_109810(0xa4,compiler);
-  IRInst__setOperandRef(iVar1,0,this);
-  *(undefined4 *)(iVar1 + 0x9c) = DAT_001afee8;
-  *(undefined4 *)(iVar1 + 300) = *(undefined4 *)(this + 8);
+  loadVertexInst = IRLoadVertex__new_109810(0xa4,compiler);
+  IRInst__setOperandRef(loadVertexInst,0,this);
+  *(undefined4 *)(loadVertexInst + 0x9c) = DAT_001afee8;
+  *(undefined4 *)(loadVertexInst + 300) = *(undefined4 *)(this + 8);
   arena = *(undefined4 *)(compiler + COMP_arenaB);
   allocation = (undefined4 *)Arena__alloc(arena,0x240);
-  puVar4 = allocation + 1;
+  valueKey = allocation + 1;
   *allocation = arena;
-  ValueKey__init(puVar4,iVar1,compiler);
+  ValueKey__init(valueKey,loadVertexInst,compiler);
   callResult = Compiler__isOptionEnabled(compiler,7);
   if (callResult != 0) {
-    FUN_00174e0c(puVar4);
-    ValueKey__propagateLaneValues(puVar4);
+    FUN_00174e0c(valueKey);
+    ValueKey__propagateLaneValues(valueKey);
   }
-  ((int (*)())FUN_0012306c)(this,iVar1);
-  (**(code **)(*param_2 + 0xc))(param_2,iVar1);
-  ((int (*)())FUN_00122f28)(this,iVar1);
-  return puVar4;
+  ((int (*)())FUN_0012306c)(this,loadVertexInst);
+  (**(code **)(*param_2 + 0xc))(param_2,loadVertexInst);
+  ((int (*)())FUN_00122f28)(this,loadVertexInst);
+  return valueKey;
 }
 
 /* VReg__setTopDefinition @ 0x123398 (140 bytes) */
@@ -3730,30 +3730,30 @@ int Resource__clone(this, param_2, compiler)
 {
   undefined4 *allocation;
   int callResult;
-  undefined4 *puVar3;
+  undefined4 *valueKey;
   undefined4 arena;
-  undefined4 *puVar5;
+  undefined4 *loadInst;
   
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
-  puVar5 = allocation + 1;
+  loadInst = allocation + 1;
   *allocation = arena;
-  IRLoadTemp__ctor_109348(puVar5,this,compiler);
-  IRInst__setOperandRef(puVar5,0,this);
+  IRLoadTemp__ctor_109348(loadInst,this,compiler);
+  IRInst__setOperandRef(loadInst,0,this);
   arena = *(undefined4 *)(compiler + COMP_arenaB);
   allocation = (undefined4 *)Arena__alloc(arena,0x240);
-  puVar3 = allocation + 1;
+  valueKey = allocation + 1;
   *allocation = arena;
-  ValueKey__init(puVar3,puVar5,compiler);
+  ValueKey__init(valueKey,loadInst,compiler);
   callResult = Compiler__isOptionEnabled(compiler,7);
   if (callResult != 0) {
-    FUN_00174e0c(puVar3);
-    ValueKey__propagateLaneValues(puVar3);
+    FUN_00174e0c(valueKey);
+    ValueKey__propagateLaneValues(valueKey);
   }
-  ((int (*)())FUN_0012306c)(this,puVar5);
-  (**(code **)(*param_2 + 0xc))(param_2,puVar5);
-  ((int (*)())FUN_00122f28)(this,puVar5);
-  return puVar3;
+  ((int (*)())FUN_0012306c)(this,loadInst);
+  (**(code **)(*param_2 + 0xc))(param_2,loadInst);
+  ((int (*)())FUN_00122f28)(this,loadInst);
+  return valueKey;
 }
 
 /* FixedValue__clone @ 0x12447c (148 bytes) */
@@ -3764,30 +3764,30 @@ int FixedValue__clone(this, param_2, compiler)
 {
   undefined4 *allocation;
   int callResult;
-  undefined4 *puVar3;
+  undefined4 *valueKey;
   undefined4 arena;
-  undefined4 *puVar5;
+  undefined4 *loadInst;
   
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
-  puVar5 = allocation + 1;
+  loadInst = allocation + 1;
   *allocation = arena;
-  IRLoadConst__ctor_109938(puVar5,compiler);
-  IRInst__setOperandRef(puVar5,0,this);
+  IRLoadConst__ctor_109938(loadInst,compiler);
+  IRInst__setOperandRef(loadInst,0,this);
   arena = *(undefined4 *)(compiler + COMP_arenaB);
   allocation = (undefined4 *)Arena__alloc(arena,0x240);
-  puVar3 = allocation + 1;
+  valueKey = allocation + 1;
   *allocation = arena;
-  ValueKey__init(puVar3,puVar5,compiler);
+  ValueKey__init(valueKey,loadInst,compiler);
   callResult = Compiler__isOptionEnabled(compiler,7);
   if (callResult != 0) {
-    FUN_00174e0c(puVar3);
-    ValueKey__propagateLaneValues(puVar3);
+    FUN_00174e0c(valueKey);
+    ValueKey__propagateLaneValues(valueKey);
   }
-  ((int (*)())FUN_0012306c)(this,puVar5);
-  (**(code **)(*param_2 + 0xc))(param_2,puVar5);
-  ((int (*)())FUN_00122f28)(this,puVar5);
-  return puVar3;
+  ((int (*)())FUN_0012306c)(this,loadInst);
+  (**(code **)(*param_2 + 0xc))(param_2,loadInst);
+  ((int (*)())FUN_00122f28)(this,loadInst);
+  return valueKey;
 }
 
 /* FixedValue__ctor_1245a8 @ 0x1245a8 (304 bytes) */
