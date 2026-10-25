@@ -1,0 +1,83 @@
+local	FUN_0012bb48	param_1	pass	INFERRED	pass object (+8 compiler)
+use	FUN_0012bb48	iVar11	thenBlock	INFERRED	then-arm block of the if region (block word 0x4d)	^\s*iVar11\ =\ param_2\[0x4d\];$	+1
+use	FUN_0012bb48	iVar11	thenBlock	INFERRED	then-arm block of the if region (block word 0x4d)	^\s*if\ \(\(\(\(\(\(\(int\)\(\(ulonglong\)uVar14\ >>\ 0x20\)\ !=\ 0\)\ \&\&$	+12
+use	FUN_0012bb48	iVar11	thenBlock	INFERRED	then-arm block of the if region (block word 0x4d)	^\s*iVar9\ =\ \*\(int\ \*\)\(iVar11\ \+\ 0xdc\);$	+4
+use	FUN_0012bb48	iVar11	thenBlock	INFERRED	then-arm block of the if region (block word 0x4d)	^\s*FUN_000e7658\(iVar11\);$	+1
+use	FUN_0012bb48	iVar12	elseBlock	INFERRED	else-arm block of the if region (block word 0x4e)	^\s*iVar12\ =\ param_2\[0x4e\];$	+1
+use	FUN_0012bb48	iVar12	elseBlock	INFERRED	else-arm block of the if region (block word 0x4e)	^\s*if\ \(\(\(\(\(\(\(int\)\(\(ulonglong\)uVar14\ >>\ 0x20\)\ !=\ 0\)\ \&\&$	+12
+use	FUN_0012bb48	iVar12	elseBlock	INFERRED	else-arm block of the if region (block word 0x4e)	^\s*piVar7\ =\ \*\(int\ \*\*\)\(iVar12\ \+\ 0x98\);$	+3
+use	FUN_0012bb48	iVar12	elseBlock	INFERRED	else-arm block of the if region (block word 0x4e)	^\s*FUN_000e7658\(iVar12\);$	+1
+use	FUN_0012bb48	iVar3	footerBlock	INFERRED	footer block of the if region (block word 0x4f)	^\s*if\ \(\(\(\(\(\(\(int\)\(\(ulonglong\)uVar14\ >>\ 0x20\)\ !=\ 0\)\ \&\&$	+12
+use	FUN_0012bb48	iVar3	footerBlock	INFERRED	footer block of the if region (block word 0x4f)	^\s*FUN_000e8eac\(param_2,iVar3,piVar13\);$	+1
+use	FUN_0012bb48	iVar3	footerBlock	INFERRED	footer block of the if region (block word 0x4f)	^\s*bVar1\ =\ \*\(int\ \*\)\(iVar3\ \+\ 0xdc\)\ ==\ 0;$	+4
+use	FUN_0012bb48	iVar3	footerBlock	INFERRED	footer block of the if region (block word 0x4f)	^\s*FUN_000e7658\(iVar3\);$	+1
+use	FUN_0012bb48	iVar4	successorByteOffset	INFERRED	byte offset into the merged block's successor array	^\s*iVar4\ =\ 0;$	+1
+use	FUN_0012bb48	iVar4	successorByteOffset	INFERRED	byte offset into the merged block's successor array	^\s*iVar9\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(puVar6\[0x35\]\ \+\ 8\)\ \+\ iVar4\);$	+1
+use	FUN_0012bb48	iVar4	successorByteOffset	INFERRED	byte offset into the merged block's successor array	^\s*iVar4\ =\ iVar4\ \+\ 4;$	+1
+use	FUN_0012bb48	uVar8	branchInstFlags	INFERRED	flag word of the old branch instruction	^\s*uVar8\ =\ \*\(uint\ \*\)\(iVar4\ \+\ 0x14\);$	+1
+use	FUN_0012bb48	uVar8	branchInstFlags	INFERRED	flag word of the old branch instruction	^\s*\*\(uint\ \*\)\(iVar4\ \+\ 0x14\)\ =\ uVar8\ \|\ 0x80000;$	+1
+use	FUN_0012bb48	uVar8	branchInstFlags	INFERRED	flag word of the old branch instruction	^\s*\*\(uint\ \*\)\(iVar4\ \+\ 0x14\)\ =\ uVar8\ \|\ 0x81000;$	+1
+use	FUN_0012bb48	bVar1	footerMarkNotSet	INFERRED	footer block word 0xdc is zero; cleared once an instruction takes over the 0x1000 mark	^\s*bVar1\ =\ \*\(int\ \*\)\(iVar3\ \+\ 0xdc\)\ ==\ 0;$	+1
+use	FUN_0012bb48	bVar1	footerMarkNotSet	INFERRED	footer block word 0xdc is zero; cleared once an instruction takes over the 0x1000 mark	^\s*if\ \(!bVar1\)\ \{$	+1
+use	FUN_0012bb48	bVar1	footerMarkNotSet	INFERRED	footer block word 0xdc is zero; cleared once an instruction takes over the 0x1000 mark	^\s*bVar1\ =\ true;$	+1
+use	FUN_0012bb48	bVar1	footerMarkNotSet	INFERRED	footer block word 0xdc is zero; cleared once an instruction takes over the 0x1000 mark	^\s*bVar1\ =\ false;$	+1
+use	FUN_0012bb48	bVar1	footerMarkNotSet	INFERRED	footer block word 0xdc is zero; cleared once an instruction takes over the 0x1000 mark	^\s*if\ \(!bVar1\)\ \{$@2	+1
+use	FUN_0012bb48	piVar2	nextInstLink	INFERRED	link to the instruction after the cursor	^\s*for\ \(piVar2\ =\ \(int\ \*\)\(\(int\ \*\)param_2\[0x26\]\)\[2\];\ piVar2\ !=\ \(int\ \*\)0x0;$	+2
+use	FUN_0012bb48	piVar2	nextInstLink	INFERRED	link to the instruction after the cursor	^\s*piVar7\ =\ piVar2;$	+1
+use	FUN_0012bb48	piVar2	nextInstLink	INFERRED	link to the instruction after the cursor	^\s*for\ \(piVar2\ =\ \(int\ \*\)\(\*\(int\ \*\*\)\(iVar11\ \+\ 0x98\)\)\[2\];\ piVar2\ !=\ \(int\ \*\)0x0;$	+2
+use	FUN_0012bb48	piVar2	nextInstLink	INFERRED	link to the instruction after the cursor	^\s*piVar7\ =\ piVar2;$@2	+1
+use	FUN_0012bb48	piVar2	nextInstLink	INFERRED	link to the instruction after the cursor	^\s*for\ \(piVar2\ =\ \(int\ \*\)\(\*\(int\ \*\*\)\(iVar12\ \+\ 0x98\)\)\[2\];\ piVar2\ !=\ \(int\ \*\)0x0;$	+2
+use	FUN_0012bb48	piVar2	nextInstLink	INFERRED	link to the instruction after the cursor	^\s*piVar7\ =\ piVar2;$@3	+1
+use	FUN_0012bb48	piVar2	nextInstLink	INFERRED	link to the instruction after the cursor	^\s*for\ \(piVar2\ =\ \(int\ \*\)\(\*\(int\ \*\*\)\(iVar3\ \+\ 0x98\)\)\[2\];\ piVar2\ !=\ \(int\ \*\)0x0;$	+2
+use	FUN_0012bb48	piVar2	nextInstLink	INFERRED	link to the instruction after the cursor	^\s*piVar7\ =\ piVar2;$@4	+1
+use	FUN_0012bb48	iVar5	instQuery34	INFERRED	instruction vtable slot 0x34 test	^\s*iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0x34\)\)\(piVar7\);$	+2
+use	FUN_0012bb48	iVar5	instQuery34	INFERRED	instruction vtable slot 0x34 test	^\s*iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0x34\)\)\(piVar7\);$@2	+2
+use	FUN_0012bb48	extraout_r4	staleArg4A	INFERRED	r4 left over from the caller, forwarded to Block__getBranchInst	^\s*uVar14\ =\ FUN_000e7804\(param_2,extraout_r4,in_r5,in_r6,in_r7,in_r8,a6\);$	+1
+use	FUN_0012bb48	extraout_r4_00	staleArg4B	INFERRED	r4 left over from the caller, forwarded to Block__getBranchInst	^\s*iVar4\ =\ FUN_000e7804\(param_2,extraout_r4_00,piVar7,in_r6,in_r7,in_r8,a6\);$	+1
+use	FUN_0012bb48	in_r5	staleArg5	INFERRED	r5 left over from the caller	^\s*\(\*a6\)\(param_2,param_2,in_r5,in_r6,in_r7,in_r8,a6\);$	+1
+use	FUN_0012bb48	in_r5	staleArg5	INFERRED	r5 left over from the caller	^\s*uVar14\ =\ FUN_000e7804\(param_2,extraout_r4,in_r5,in_r6,in_r7,in_r8,a6\);$	+13
+use	FUN_0012bb48	in_r6	staleArg6	INFERRED	r6 left over from the caller	^\s*\(\*a6\)\(param_2,param_2,in_r5,in_r6,in_r7,in_r8,a6\);$	+1
+use	FUN_0012bb48	in_r6	staleArg6	INFERRED	r6 left over from the caller	^\s*uVar14\ =\ FUN_000e7804\(param_2,extraout_r4,in_r5,in_r6,in_r7,in_r8,a6\);$	+13
+use	FUN_0012bb48	in_r6	staleArg6	INFERRED	r6 left over from the caller	^\s*iVar4\ =\ FUN_000e7804\(param_2,extraout_r4_00,piVar7,in_r6,in_r7,in_r8,a6\);$	+1
+use	FUN_0012bb48	in_r7	staleArg7	INFERRED	r7 left over from the caller	^\s*\(\*a6\)\(param_2,param_2,in_r5,in_r6,in_r7,in_r8,a6\);$	+1
+use	FUN_0012bb48	in_r7	staleArg7	INFERRED	r7 left over from the caller	^\s*uVar14\ =\ FUN_000e7804\(param_2,extraout_r4,in_r5,in_r6,in_r7,in_r8,a6\);$	+13
+use	FUN_0012bb48	in_r7	staleArg7	INFERRED	r7 left over from the caller	^\s*iVar4\ =\ FUN_000e7804\(param_2,extraout_r4_00,piVar7,in_r6,in_r7,in_r8,a6\);$	+1
+use	FUN_0012bb48	in_r8	staleArg8	INFERRED	r8 left over from the caller	^\s*\(\*a6\)\(param_2,param_2,in_r5,in_r6,in_r7,in_r8,a6\);$	+1
+use	FUN_0012bb48	in_r8	staleArg8	INFERRED	r8 left over from the caller	^\s*uVar14\ =\ FUN_000e7804\(param_2,extraout_r4,in_r5,in_r6,in_r7,in_r8,a6\);$	+13
+use	FUN_0012bb48	in_r8	staleArg8	INFERRED	r8 left over from the caller	^\s*iVar4\ =\ FUN_000e7804\(param_2,extraout_r4_00,piVar7,in_r6,in_r7,in_r8,a6\);$	+1
+use	FUN_0012bb48	piVar7	mergedBlockArg	INFERRED	merged block forwarded as a stale argument	^\s*piVar7\ =\ piVar13;$	+1
+use	FUN_0012bb48	piVar7	mergedBlockArg	INFERRED	merged block forwarded as a stale argument	^\s*iVar4\ =\ FUN_000e7804\(param_2,extraout_r4_00,piVar7,in_r6,in_r7,in_r8,a6\);$	+1
+use	FUN_0012bb48	piVar7	inst	INFERRED	instruction being moved into the merged block	^\s*piVar7\ =\ \(int\ \*\)param_2\[0x26\];$	+1
+use	FUN_0012bb48	piVar7	inst	INFERRED	instruction being moved into the merged block	^\s*iVar9\ =\ \(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0x34\)\)\(piVar7\);$	+4
+use	FUN_0012bb48	piVar7	inst	INFERRED	instruction being moved into the merged block	^\s*piVar7\ =\ piVar2;$	+1
+use	FUN_0012bb48	piVar7	inst	INFERRED	instruction being moved into the merged block	^\s*piVar7\ =\ \*\(int\ \*\*\)\(iVar11\ \+\ 0x98\);$	+1
+use	FUN_0012bb48	piVar7	inst	INFERRED	instruction being moved into the merged block	^\s*iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0x34\)\)\(piVar7\);$	+6
+use	FUN_0012bb48	piVar7	inst	INFERRED	instruction being moved into the merged block	^\s*if\ \(\(piVar7\[5\]\ \&\ 0x10000U\)\ ==\ 0\)\ \{$	+1
+use	FUN_0012bb48	piVar7	inst	INFERRED	instruction being moved into the merged block	^\s*piVar7\[5\]\ =\ piVar7\[5\]\ \|\ 0x1000;$	+1
+use	FUN_0012bb48	piVar7	inst	INFERRED	instruction being moved into the merged block	^\s*piVar7\ =\ piVar2;$@2	+1
+use	FUN_0012bb48	piVar7	inst	INFERRED	instruction being moved into the merged block	^\s*piVar7\ =\ \*\(int\ \*\*\)\(iVar12\ \+\ 0x98\);$	+1
+use	FUN_0012bb48	piVar7	inst	INFERRED	instruction being moved into the merged block	^\s*iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0x34\)\)\(piVar7\);$@2	+6
+use	FUN_0012bb48	piVar7	inst	INFERRED	instruction being moved into the merged block	^\s*if\ \(\(piVar7\[5\]\ \&\ 0x10000U\)\ ==\ 0\)\ \{$@2	+1
+use	FUN_0012bb48	piVar7	inst	INFERRED	instruction being moved into the merged block	^\s*piVar7\[5\]\ =\ piVar7\[5\]\ \|\ 0x1000;$@2	+1
+use	FUN_0012bb48	piVar7	inst	INFERRED	instruction being moved into the merged block	^\s*piVar7\ =\ piVar2;$@3	+1
+use	FUN_0012bb48	piVar7	inst	INFERRED	instruction being moved into the merged block	^\s*piVar7\ =\ \*\(int\ \*\*\)\(iVar3\ \+\ 0x98\);$	+1
+use	FUN_0012bb48	piVar7	inst	INFERRED	instruction being moved into the merged block	^\s*iVar9\ =\ \(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0x34\)\)\(piVar7\);$@2	+5
+use	FUN_0012bb48	piVar7	inst	INFERRED	instruction being moved into the merged block	^\s*if\ \(\(piVar7\[5\]\ \&\ 0x10000U\)\ ==\ 0\)\ \{$@3	+2
+use	FUN_0012bb48	piVar7	inst	INFERRED	instruction being moved into the merged block	^\s*piVar7\ =\ piVar2;$@4	+1
+use	FUN_0012bb48	iVar9	headerWord37	INFERRED	header block word 0x37 (non-zero when the footer must keep the 0x1000 mark)	^\s*iVar9\ =\ param_2\[0x37\];$	+1
+use	FUN_0012bb48	iVar9	headerWord37	INFERRED	header block word 0x37 (non-zero when the footer must keep the 0x1000 mark)	^\s*if\ \(iVar9\ !=\ 0\)\ \{$	+1
+use	FUN_0012bb48	iVar9	instQuery34b	INFERRED	instruction vtable slot 0x34 test	^\s*iVar9\ =\ \(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0x34\)\)\(piVar7\);$	+2
+use	FUN_0012bb48	iVar9	thenBlockMarked	INFERRED	then-arm block word 0xdc (marker kept while moving its instructions)	^\s*iVar9\ =\ \*\(int\ \*\)\(iVar11\ \+\ 0xdc\);$	+1
+use	FUN_0012bb48	iVar9	thenBlockMarked	INFERRED	then-arm block word 0xdc (marker kept while moving its instructions)	^\s*if\ \(iVar9\ !=\ 0\)\ \{$@2	+2
+use	FUN_0012bb48	iVar9	thenBlockMarked	INFERRED	then-arm block word 0xdc (marker kept while moving its instructions)	^\s*iVar9\ =\ 0;$	+1
+use	FUN_0012bb48	iVar9	thenBlockMarked	INFERRED	then-arm block word 0xdc (marker kept while moving its instructions)	^\s*if\ \(iVar9\ !=\ 0\)\ \{$@3	+2
+use	FUN_0012bb48	iVar9	thenBlockMarked	INFERRED	then-arm block word 0xdc (marker kept while moving its instructions)	^\s*iVar9\ =\ 0;$@2	+1
+use	FUN_0012bb48	iVar9	instQuery34c	INFERRED	instruction vtable slot 0x34 test	^\s*iVar9\ =\ \(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0x34\)\)\(piVar7\);$@2	+2
+use	FUN_0012bb48	iVar9	mergedSuccessor	INFERRED	successor of the merged block read from its successor array	^\s*iVar9\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(puVar6\[0x35\]\ \+\ 8\)\ \+\ iVar4\);$	+3
+use	FUN_0012bb48	piVar13	mergedBlock	INFERRED	new block that replaces header, arms and footer (allocation + 1)	^\s*piVar13\ =\ puVar6\ \+\ 1;$	+5
+use	FUN_0012bb48	piVar13	mergedBlock	INFERRED	new block that replaces header, arms and footer (allocation + 1)	^\s*FUN_000e7688\(piVar13,iVar4\);$	+1
+use	FUN_0012bb48	piVar13	mergedBlock	INFERRED	new block that replaces header, arms and footer (allocation + 1)	^\s*FUN_000e7700\(piVar13,iVar4,piVar7\);$	+1
+use	FUN_0012bb48	piVar13	mergedBlock	INFERRED	new block that replaces header, arms and footer (allocation + 1)	^\s*FUN_000e7688\(piVar13,piVar7\);$	+1
+use	FUN_0012bb48	piVar13	mergedBlock	INFERRED	new block that replaces header, arms and footer (allocation + 1)	^\s*FUN_000e7688\(piVar13,piVar7\);$@2	+1
+use	FUN_0012bb48	piVar13	mergedBlock	INFERRED	new block that replaces header, arms and footer (allocation + 1)	^\s*FUN_000e7688\(piVar13,piVar7\);$@3	+1
+use	FUN_0012bb48	piVar13	mergedBlock	INFERRED	new block that replaces header, arms and footer (allocation + 1)	^\s*param_2\ =\ piVar13;$	+1

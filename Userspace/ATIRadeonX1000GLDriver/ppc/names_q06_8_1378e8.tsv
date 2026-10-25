@@ -1,0 +1,133 @@
+local	FUN_001378e8	param_1	regInfoOwner	INFERRED	object whose +4 vector holds the per-register info records (+0x18 defined count, +0x1c spill weight, +0x20 flag)
+local	FUN_001378e8	param_2	pass	INFERRED	pass object; +0x6c4 -> program, program +900 -> block list
+use	FUN_001378e8	iVar8	block	INFERRED	block being weighted	^\s*iVar8\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_2\ \+\ 0x6c4\)\ \+\ 900\);$	+2
+use	FUN_001378e8	iVar8	block	INFERRED	block being weighted	^\s*piVar1\ =\ \(int\ \*\)\(\*\(int\ \*\*\)\(iVar8\ \+\ 0xa0\)\)\[1\];$	+2
+use	FUN_001378e8	iVar8	block	INFERRED	block being weighted	^\s*if\ \(\(\(piVar9\ ==\ \*\(int\ \*\*\)\(iVar8\ \+\ 0x98\)\)\ \|\|\ \(\(piVar5\[5\]\ \&\ 4U\)\ ==\ 0\)\)\ \&\&$	+2
+use	FUN_001378e8	iVar8	block	INFERRED	block being weighted	^\s*iVar7\ =\ \*\(int\ \*\)\(iVar8\ \+\ 8\);$@2	+1
+use	FUN_001378e8	iVar8	block	INFERRED	block being weighted	^\s*iVar8\ =\ iVar7;$	+1
+use	FUN_001378e8	iVar7	nextBlock	INFERRED	next block in the list	^\s*iVar7\ =\ \*\(int\ \*\)\(iVar8\ \+\ 8\);$	+1
+use	FUN_001378e8	iVar7	nextBlock	INFERRED	next block in the list	^\s*if\ \(iVar7\ ==\ 0\)\ \{$	+1
+use	FUN_001378e8	iVar7	nextBlock	INFERRED	next block in the list	^\s*iVar7\ =\ \*\(int\ \*\)\(iVar8\ \+\ 8\);$@2	+1
+use	FUN_001378e8	iVar7	nextBlock	INFERRED	next block in the list	^\s*iVar8\ =\ iVar7;$	+2
+use	FUN_001378e8	iVar7	loopDepthWeight	INFERRED	block word 0xb8: weight of the loop depth the block sits in	^\s*if\ \(\(\(piVar9\ ==\ \*\(int\ \*\*\)\(iVar8\ \+\ 0x98\)\)\ \|\|\ \(\(piVar5\[5\]\ \&\ 4U\)\ ==\ 0\)\)\ \&\&$	+2
+use	FUN_001378e8	iVar7	loopDepthWeight	INFERRED	block word 0xb8: weight of the loop depth the block sits in	^\s*if\ \(\(\(piVar1\[5\]\ \&\ 0x20000000U\)\ ==\ 0\)\ \&\&$	+2
+use	FUN_001378e8	iVar7	loopDepthWeight	INFERRED	block word 0xb8: weight of the loop depth the block sits in	^\s*\*\(int\ \*\)\(\*piVar5\ \+\ 0x1c\)\ =\ iVar7\ \+\ \*\(int\ \*\)\(\*piVar5\ \+\ 0x1c\);$	+1
+use	FUN_001378e8	piVar9	instListHead	INFERRED	first instruction record of the block (+0xa0)	^\s*piVar9\ =\ \*\(int\ \*\*\)\(iVar8\ \+\ 0xa0\);$	+1
+use	FUN_001378e8	piVar9	instListHead	INFERRED	first instruction record of the block (+0xa0)	^\s*if\ \(\(\(piVar9\ ==\ \*\(int\ \*\*\)\(iVar8\ \+\ 0x98\)\)\ \|\|\ \(\(piVar5\[5\]\ \&\ 4U\)\ ==\ 0\)\)\ \&\&$	+3
+use	FUN_001378e8	piVar9	instListHead	INFERRED	first instruction record of the block (+0xa0)	^\s*piVar5\ =\ \(int\ \*\)piVar9\[1\];$	+1
+use	FUN_001378e8	piVar9	instListHead	INFERRED	first instruction record of the block (+0xa0)	^\s*piVar9\ =\ piVar5;$	+1
+use	FUN_001378e8	piVar1	nextInstLink	INFERRED	link following the list head	^\s*piVar1\ =\ \(int\ \*\)\(\*\(int\ \*\*\)\(iVar8\ \+\ 0xa0\)\)\[1\];$	+1
+use	FUN_001378e8	piVar1	nextInstLink	INFERRED	link following the list head	^\s*if\ \(piVar1\ !=\ \(int\ \*\)0x0\)\ \{$	+1
+use	FUN_001378e8	piVar1	nextInstLink	INFERRED	link following the list head	^\s*piVar5\ =\ piVar1;$	+1
+use	FUN_001378e8	piVar1	nextInstLink	INFERRED	link following the list head	^\s*piVar1\ =\ \(int\ \*\)piVar5\[1\];$	+1
+use	FUN_001378e8	piVar1	inst	INFERRED	instruction being weighted	^\s*piVar1\ =\ piVar9;$	+1
+use	FUN_001378e8	piVar1	inst	INFERRED	instruction being weighted	^\s*uVar2\ =\ piVar1\[5\];$	+1
+use	FUN_001378e8	piVar1	inst	INFERRED	instruction being weighted	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*piVar1\ \+\ 0x7c\)\)\(piVar1\);$	+1
+use	FUN_001378e8	piVar1	inst	INFERRED	instruction being weighted	^\s*if\ \(\(\(piVar1\[0x20\]\ !=\ 0\)\ \&\&\ \(iVar3\ =\ FUN_00126760\(piVar1\[0x26\]\),\ iVar3\ !=\ 0\)\)\ \&\&$	+11
+use	FUN_001378e8	piVar1	inst	INFERRED	instruction being weighted	^\s*iVar6\ =\ FUN_00105594\(piVar1,iVar3\);$	+1
+use	FUN_001378e8	piVar1	inst	INFERRED	instruction being weighted	^\s*uVar4\ =\ piVar1\[5\]\ \&\ 0xdfffffff;$	+2
+use	FUN_001378e8	piVar1	inst	INFERRED	instruction being weighted	^\s*FUN_001054ec\(piVar1,iVar3\);$	+1
+use	FUN_001378e8	piVar1	inst	INFERRED	instruction being weighted	^\s*iVar6\ =\ FUN_00105dbc\(piVar1,iVar3\);$	+1
+use	FUN_001378e8	piVar1	inst	INFERRED	instruction being weighted	^\s*uVar4\ =\ piVar1\[5\];$	+1
+use	FUN_001378e8	piVar1	inst	INFERRED	instruction being weighted	^\s*uVar4\ =\ piVar1\[5\];$@2	+1
+use	FUN_001378e8	piVar1	inst	INFERRED	instruction being weighted	^\s*if\ \(\(\(piVar1\[5\]\ \&\ 0x20000000U\)\ ==\ 0\)\ \&\&$	+2
+use	FUN_001378e8	piVar1	inst	INFERRED	instruction being weighted	^\s*for\ \(iVar3\ =\ 1;\ iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*piVar1\ \+\ 0x14\)\)\(piVar1\),\ iVar3\ <=\ iVar6;$@2	+3
+use	FUN_001378e8	piVar1	inst	INFERRED	instruction being weighted	^\s*uVar2\ =\ piVar1\[5\];$@2	+1
+use	FUN_001378e8	piVar1	inst	INFERRED	instruction being weighted	^\s*piVar1\ =\ \(int\ \*\)piVar1\[2\];$	+2
+use	FUN_001378e8	piVar5	operandCursor	INFERRED	cursor over the operand slots of the instruction	^\s*piVar5\ =\ piVar1;$	+3
+use	FUN_001378e8	piVar5	operandCursor	INFERRED	cursor over the operand slots of the instruction	^\s*piVar5\ =\ \(int\ \*\)piVar9\[1\];$	+1
+use	FUN_001378e8	piVar5	operandCursor	INFERRED	cursor over the operand slots of the instruction	^\s*piVar1\ =\ \(int\ \*\)piVar5\[1\];$	+3
+use	FUN_001378e8	piVar5	operandCursor	INFERRED	cursor over the operand slots of the instruction	^\s*piVar5\ =\ piVar1;$@2	+1
+use	FUN_001378e8	piVar5	operandCursor	INFERRED	cursor over the operand slots of the instruction	^\s*iVar6\ =\ piVar5\[0x2c\];$	+1
+use	FUN_001378e8	piVar5	operandCursor	INFERRED	cursor over the operand slots of the instruction	^\s*piVar5\ =\ piVar5\ \+\ 6;$	+1
+use	FUN_001378e8	piVar5	regInfoRef	INFERRED	element reference into the per-register info vector	^\s*piVar5\ =\ \(int\ \*\)\(uVar2\ \*\ 4\ \+\ puVar10\[2\]\);$	+1
+use	FUN_001378e8	piVar5	regInfoRef	INFERRED	element reference into the per-register info vector	^\s*piVar5\ =\ \(int\ \*\)FUN_0019423c\(puVar10,uVar2\);$	+1
+use	FUN_001378e8	piVar5	regInfoRef	INFERRED	element reference into the per-register info vector	^\s*\*\(undefined4\ \*\)\(\*piVar5\ \+\ 0x20\)\ =\ 0;$	+1
+use	FUN_001378e8	piVar5	regInfoRef	INFERRED	element reference into the per-register info vector	^\s*piVar5\ =\ \(int\ \*\)\(uVar2\ \*\ 4\ \+\ puVar10\[2\]\);$@2	+1
+use	FUN_001378e8	piVar5	regInfoRef	INFERRED	element reference into the per-register info vector	^\s*piVar5\ =\ \(int\ \*\)FUN_0019423c\(puVar10,uVar2\);$@2	+1
+use	FUN_001378e8	piVar5	regInfoRef	INFERRED	element reference into the per-register info vector	^\s*\*\(undefined4\ \*\)\(\*piVar5\ \+\ 0x20\)\ =\ 1;$	+1
+use	FUN_001378e8	piVar5	regInfoRef	INFERRED	element reference into the per-register info vector	^\s*piVar5\ =\ \(int\ \*\)\(uVar2\ \*\ 4\ \+\ puVar10\[2\]\);$@3	+1
+use	FUN_001378e8	piVar5	regInfoRef	INFERRED	element reference into the per-register info vector	^\s*piVar5\ =\ \(int\ \*\)FUN_0019423c\(puVar10,uVar2\);$@3	+1
+use	FUN_001378e8	piVar5	regInfoRef	INFERRED	element reference into the per-register info vector	^\s*if\ \(\*\(int\ \*\)\(\*piVar5\ \+\ 0x18\)\ ==\ 0\)\ \{$	+1
+use	FUN_001378e8	piVar5	regInfoRef	INFERRED	element reference into the per-register info vector	^\s*piVar5\ =\ \(int\ \*\)\(uVar2\ \*\ 4\ \+\ puVar10\[2\]\);$@4	+1
+use	FUN_001378e8	piVar5	regInfoRef	INFERRED	element reference into the per-register info vector	^\s*piVar5\ =\ \(int\ \*\)FUN_0019423c\(puVar10,uVar2\);$@4	+1
+use	FUN_001378e8	piVar5	regInfoRef	INFERRED	element reference into the per-register info vector	^\s*\*\(int\ \*\)\(\*piVar5\ \+\ 0x1c\)\ =\ iVar3\ \+\ \*\(int\ \*\)\(\*piVar5\ \+\ 0x1c\);$	+1
+use	FUN_001378e8	piVar5	regInfoRef	INFERRED	element reference into the per-register info vector	^\s*piVar5\ =\ \(int\ \*\)\(uVar2\ \*\ 4\ \+\ puVar10\[2\]\);$@5	+1
+use	FUN_001378e8	piVar5	regInfoRef	INFERRED	element reference into the per-register info vector	^\s*piVar5\ =\ \(int\ \*\)FUN_0019423c\(puVar10,uVar2\);$@5	+1
+use	FUN_001378e8	piVar5	regInfoRef	INFERRED	element reference into the per-register info vector	^\s*if\ \(\*\(int\ \*\)\(\*piVar5\ \+\ 0x18\)\ ==\ 0\)\ \{$@2	+1
+use	FUN_001378e8	piVar5	regInfoRef	INFERRED	element reference into the per-register info vector	^\s*piVar5\ =\ \(int\ \*\)\(uVar2\ \*\ 4\ \+\ puVar10\[2\]\);$@6	+1
+use	FUN_001378e8	piVar5	regInfoRef	INFERRED	element reference into the per-register info vector	^\s*piVar5\ =\ \(int\ \*\)FUN_0019423c\(puVar10,uVar2\);$@6	+1
+use	FUN_001378e8	piVar5	regInfoRef	INFERRED	element reference into the per-register info vector	^\s*\*\(int\ \*\)\(\*piVar5\ \+\ 0x1c\)\ =\ iVar7\ \+\ \*\(int\ \*\)\(\*piVar5\ \+\ 0x1c\);$	+1
+use	FUN_001378e8	uVar2	instFlags	INFERRED	instruction flag word (+0x14)	^\s*uVar2\ =\ piVar1\[5\];$	+2
+use	FUN_001378e8	uVar2	instFlags	INFERRED	instruction flag word (+0x14)	^\s*uVar2\ =\ piVar1\[5\];$@2	+1
+use	FUN_001378e8	uVar2	instFlags	INFERRED	instruction flag word (+0x14)	^\s*\}\ while\ \(\(piVar1\ !=\ \(int\ \*\)0x0\)\ \&\&\ \(\(uVar2\ \&\ 4\)\ !=\ 0\)\);$	+1
+use	FUN_001378e8	uVar2	destRegister	INFERRED	destination register of the instruction	^\s*uVar2\ =\ piVar1\[0x25\];$	+1
+use	FUN_001378e8	uVar2	destRegister	INFERRED	destination register of the instruction	^\s*if\ \(uVar2\ <\ \*puVar10\)\ \{$	+1
+use	FUN_001378e8	uVar2	destRegister	INFERRED	destination register of the instruction	^\s*if\ \(uVar4\ <=\ uVar2\)\ \{$	+3
+use	FUN_001378e8	uVar2	destRegister	INFERRED	destination register of the instruction	^\s*piVar5\ =\ \(int\ \*\)\(uVar2\ \*\ 4\ \+\ puVar10\[2\]\);$	+1
+use	FUN_001378e8	uVar2	destRegister	INFERRED	destination register of the instruction	^\s*piVar5\ =\ \(int\ \*\)FUN_0019423c\(puVar10,uVar2\);$	+1
+use	FUN_001378e8	uVar2	destRegister	INFERRED	destination register of the instruction	^\s*if\ \(uVar2\ <\ \*puVar10\)\ \{$@2	+1
+use	FUN_001378e8	uVar2	destRegister	INFERRED	destination register of the instruction	^\s*if\ \(uVar4\ <=\ uVar2\)\ \{$@2	+3
+use	FUN_001378e8	uVar2	destRegister	INFERRED	destination register of the instruction	^\s*piVar5\ =\ \(int\ \*\)\(uVar2\ \*\ 4\ \+\ puVar10\[2\]\);$@2	+1
+use	FUN_001378e8	uVar2	destRegister	INFERRED	destination register of the instruction	^\s*piVar5\ =\ \(int\ \*\)FUN_0019423c\(puVar10,uVar2\);$@2	+1
+use	FUN_001378e8	uVar2	destRegister	INFERRED	destination register of the instruction	^\s*if\ \(uVar2\ <\ \*puVar10\)\ \{$@3	+1
+use	FUN_001378e8	uVar2	destRegister	INFERRED	destination register of the instruction	^\s*if\ \(uVar4\ <=\ uVar2\)\ \{$@3	+3
+use	FUN_001378e8	uVar2	destRegister	INFERRED	destination register of the instruction	^\s*piVar5\ =\ \(int\ \*\)\(uVar2\ \*\ 4\ \+\ puVar10\[2\]\);$@3	+1
+use	FUN_001378e8	uVar2	destRegister	INFERRED	destination register of the instruction	^\s*piVar5\ =\ \(int\ \*\)FUN_0019423c\(puVar10,uVar2\);$@3	+1
+use	FUN_001378e8	uVar2	destRegister	INFERRED	destination register of the instruction	^\s*if\ \(uVar2\ <\ \*puVar10\)\ \{$@4	+1
+use	FUN_001378e8	uVar2	destRegister	INFERRED	destination register of the instruction	^\s*if\ \(uVar4\ <=\ uVar2\)\ \{$@4	+3
+use	FUN_001378e8	uVar2	destRegister	INFERRED	destination register of the instruction	^\s*piVar5\ =\ \(int\ \*\)\(uVar2\ \*\ 4\ \+\ puVar10\[2\]\);$@4	+1
+use	FUN_001378e8	uVar2	destRegister	INFERRED	destination register of the instruction	^\s*piVar5\ =\ \(int\ \*\)FUN_0019423c\(puVar10,uVar2\);$@4	+1
+use	FUN_001378e8	uVar2	sourceRegister	INFERRED	register of a source operand	^\s*uVar2\ =\ piVar5\[0x25\];$	+1
+use	FUN_001378e8	uVar2	sourceRegister	INFERRED	register of a source operand	^\s*if\ \(uVar2\ <\ \*puVar10\)\ \{$@5	+1
+use	FUN_001378e8	uVar2	sourceRegister	INFERRED	register of a source operand	^\s*if\ \(uVar4\ <=\ uVar2\)\ \{$@5	+3
+use	FUN_001378e8	uVar2	sourceRegister	INFERRED	register of a source operand	^\s*piVar5\ =\ \(int\ \*\)\(uVar2\ \*\ 4\ \+\ puVar10\[2\]\);$@5	+1
+use	FUN_001378e8	uVar2	sourceRegister	INFERRED	register of a source operand	^\s*piVar5\ =\ \(int\ \*\)FUN_0019423c\(puVar10,uVar2\);$@5	+1
+use	FUN_001378e8	uVar2	sourceRegister	INFERRED	register of a source operand	^\s*if\ \(uVar2\ <\ \*puVar10\)\ \{$@6	+1
+use	FUN_001378e8	uVar2	sourceRegister	INFERRED	register of a source operand	^\s*if\ \(uVar4\ <=\ uVar2\)\ \{$@6	+3
+use	FUN_001378e8	uVar2	sourceRegister	INFERRED	register of a source operand	^\s*piVar5\ =\ \(int\ \*\)\(uVar2\ \*\ 4\ \+\ puVar10\[2\]\);$@6	+1
+use	FUN_001378e8	uVar2	sourceRegister	INFERRED	register of a source operand	^\s*piVar5\ =\ \(int\ \*\)FUN_0019423c\(puVar10,uVar2\);$@6	+1
+use	FUN_001378e8	iVar3	copySource	INFERRED	instruction vtable slot 0x7c result (non-zero for a copy)	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*piVar1\ \+\ 0x7c\)\)\(piVar1\);$	+5
+use	FUN_001378e8	iVar3	instQuery40	INFERRED	instruction vtable slot 0x40 test	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*piVar1\ \+\ 0x40\)\)\(piVar1\);$	+2
+use	FUN_001378e8	iVar3	operandNumberA	INFERRED	operand number 1..count	^\s*for\ \(iVar3\ =\ 1;\ iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*piVar1\ \+\ 0x14\)\)\(piVar1\),\ iVar3\ <=\ iVar6;$	+3
+use	FUN_001378e8	iVar3	operandNumberA	INFERRED	operand number 1..count	^\s*iVar6\ =\ FUN_00105594\(piVar1,iVar3\);$	+1
+use	FUN_001378e8	iVar3	operandNumberA	INFERRED	operand number 1..count	^\s*FUN_001054ec\(piVar1,iVar3\);$	+1
+use	FUN_001378e8	iVar3	operandNumberA	INFERRED	operand number 1..count	^\s*iVar6\ =\ FUN_00105dbc\(piVar1,iVar3\);$	+1
+use	FUN_001378e8	iVar3	useWeight	INFERRED	spill weight added for the destination: 0, loopDepthWeight * 100, or 0x7fffffff when the instruction is pinned	^\s*iVar3\ =\ 0;$	+1
+use	FUN_001378e8	iVar3	useWeight	INFERRED	spill weight added for the destination: 0, loopDepthWeight * 100, or 0x7fffffff when the instruction is pinned	^\s*if\ \(\(\(piVar1\[5\]\ \&\ 0x20000000U\)\ ==\ 0\)\ \&\&$	+3
+use	FUN_001378e8	iVar3	useWeight	INFERRED	spill weight added for the destination: 0, loopDepthWeight * 100, or 0x7fffffff when the instruction is pinned	^\s*\*\(int\ \*\)\(\*piVar5\ \+\ 0x1c\)\ =\ iVar3\ \+\ \*\(int\ \*\)\(\*piVar5\ \+\ 0x1c\);$	+1
+use	FUN_001378e8	iVar3	operandNumberB	INFERRED	operand number 1..count	^\s*for\ \(iVar3\ =\ 1;\ iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*piVar1\ \+\ 0x14\)\)\(piVar1\),\ iVar3\ <=\ iVar6;$@2	+3
+use	FUN_001378e8	uVar4	clearedFlags	INFERRED	instruction flags with bit 0x20000000 cleared	^\s*uVar4\ =\ piVar1\[5\]\ \&\ 0xdfffffff;$	+2
+use	FUN_001378e8	uVar4	clearedFlags	INFERRED	instruction flags with bit 0x20000000 cleared	^\s*uVar4\ =\ piVar1\[5\];$	+1
+use	FUN_001378e8	uVar4	clearedFlags	INFERRED	instruction flags with bit 0x20000000 cleared	^\s*uVar4\ =\ piVar1\[5\];$@2	+1
+use	FUN_001378e8	uVar4	clearedFlags	INFERRED	instruction flags with bit 0x20000000 cleared	^\s*if\ \(\(uVar4\ \&\ 0x20000000\)\ !=\ 0\)\ \{$	+1
+use	FUN_001378e8	uVar4	regInfoCount	INFERRED	filled count of the per-register info vector	^\s*uVar4\ =\ puVar10\[1\];$	+3
+use	FUN_001378e8	uVar4	regInfoCount	INFERRED	filled count of the per-register info vector	^\s*uVar4\ =\ puVar10\[1\];$@2	+3
+use	FUN_001378e8	uVar4	regInfoCount	INFERRED	filled count of the per-register info vector	^\s*uVar4\ =\ puVar10\[1\];$@3	+3
+use	FUN_001378e8	uVar4	regInfoCount	INFERRED	filled count of the per-register info vector	^\s*uVar4\ =\ puVar10\[1\];$@4	+3
+use	FUN_001378e8	uVar4	regInfoCount	INFERRED	filled count of the per-register info vector	^\s*uVar4\ =\ puVar10\[1\];$@5	+3
+use	FUN_001378e8	uVar4	regInfoCount	INFERRED	filled count of the per-register info vector	^\s*uVar4\ =\ puVar10\[1\];$@6	+3
+use	FUN_001378e8	puVar10	regInfoVector	INFERRED	per-register info vector (regInfoOwner + 4)	^\s*puVar10\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 4\);$	+3
+use	FUN_001378e8	puVar10	regInfoVector	INFERRED	per-register info vector (regInfoOwner + 4)	^\s*_memset\(uVar4\ \*\ 4\ \+\ puVar10\[2\],0,\(uVar2\ \-\ uVar4\)\ \*\ 4\ \+\ 4\);$	+2
+use	FUN_001378e8	puVar10	regInfoVector	INFERRED	per-register info vector (regInfoOwner + 4)	^\s*piVar5\ =\ \(int\ \*\)\(uVar2\ \*\ 4\ \+\ puVar10\[2\]\);$	+1
+use	FUN_001378e8	puVar10	regInfoVector	INFERRED	per-register info vector (regInfoOwner + 4)	^\s*piVar5\ =\ \(int\ \*\)FUN_0019423c\(puVar10,uVar2\);$	+1
+use	FUN_001378e8	puVar10	regInfoVector	INFERRED	per-register info vector (regInfoOwner + 4)	^\s*puVar10\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 4\);$@2	+3
+use	FUN_001378e8	puVar10	regInfoVector	INFERRED	per-register info vector (regInfoOwner + 4)	^\s*_memset\(uVar4\ \*\ 4\ \+\ puVar10\[2\],0,\(uVar2\ \-\ uVar4\)\ \*\ 4\ \+\ 4\);$@2	+2
+use	FUN_001378e8	puVar10	regInfoVector	INFERRED	per-register info vector (regInfoOwner + 4)	^\s*piVar5\ =\ \(int\ \*\)\(uVar2\ \*\ 4\ \+\ puVar10\[2\]\);$@2	+1
+use	FUN_001378e8	puVar10	regInfoVector	INFERRED	per-register info vector (regInfoOwner + 4)	^\s*piVar5\ =\ \(int\ \*\)FUN_0019423c\(puVar10,uVar2\);$@2	+1
+use	FUN_001378e8	puVar10	regInfoVector	INFERRED	per-register info vector (regInfoOwner + 4)	^\s*puVar10\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 4\);$@3	+3
+use	FUN_001378e8	puVar10	regInfoVector	INFERRED	per-register info vector (regInfoOwner + 4)	^\s*_memset\(uVar4\ \*\ 4\ \+\ puVar10\[2\],0,\(uVar2\ \-\ uVar4\)\ \*\ 4\ \+\ 4\);$@3	+2
+use	FUN_001378e8	puVar10	regInfoVector	INFERRED	per-register info vector (regInfoOwner + 4)	^\s*piVar5\ =\ \(int\ \*\)\(uVar2\ \*\ 4\ \+\ puVar10\[2\]\);$@3	+1
+use	FUN_001378e8	puVar10	regInfoVector	INFERRED	per-register info vector (regInfoOwner + 4)	^\s*piVar5\ =\ \(int\ \*\)FUN_0019423c\(puVar10,uVar2\);$@3	+1
+use	FUN_001378e8	puVar10	regInfoVector	INFERRED	per-register info vector (regInfoOwner + 4)	^\s*puVar10\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 4\);$@4	+3
+use	FUN_001378e8	puVar10	regInfoVector	INFERRED	per-register info vector (regInfoOwner + 4)	^\s*_memset\(uVar4\ \*\ 4\ \+\ puVar10\[2\],0,\(uVar2\ \-\ uVar4\)\ \*\ 4\ \+\ 4\);$@4	+2
+use	FUN_001378e8	puVar10	regInfoVector	INFERRED	per-register info vector (regInfoOwner + 4)	^\s*piVar5\ =\ \(int\ \*\)\(uVar2\ \*\ 4\ \+\ puVar10\[2\]\);$@4	+1
+use	FUN_001378e8	puVar10	regInfoVector	INFERRED	per-register info vector (regInfoOwner + 4)	^\s*piVar5\ =\ \(int\ \*\)FUN_0019423c\(puVar10,uVar2\);$@4	+1
+use	FUN_001378e8	puVar10	regInfoVector	INFERRED	per-register info vector (regInfoOwner + 4)	^\s*puVar10\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 4\);$@5	+3
+use	FUN_001378e8	puVar10	regInfoVector	INFERRED	per-register info vector (regInfoOwner + 4)	^\s*_memset\(uVar4\ \*\ 4\ \+\ puVar10\[2\],0,\(uVar2\ \-\ uVar4\)\ \*\ 4\ \+\ 4\);$@5	+2
+use	FUN_001378e8	puVar10	regInfoVector	INFERRED	per-register info vector (regInfoOwner + 4)	^\s*piVar5\ =\ \(int\ \*\)\(uVar2\ \*\ 4\ \+\ puVar10\[2\]\);$@5	+1
+use	FUN_001378e8	puVar10	regInfoVector	INFERRED	per-register info vector (regInfoOwner + 4)	^\s*piVar5\ =\ \(int\ \*\)FUN_0019423c\(puVar10,uVar2\);$@5	+1
+use	FUN_001378e8	puVar10	regInfoVector	INFERRED	per-register info vector (regInfoOwner + 4)	^\s*puVar10\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 4\);$@6	+3
+use	FUN_001378e8	puVar10	regInfoVector	INFERRED	per-register info vector (regInfoOwner + 4)	^\s*_memset\(uVar4\ \*\ 4\ \+\ puVar10\[2\],0,\(uVar2\ \-\ uVar4\)\ \*\ 4\ \+\ 4\);$@6	+2
+use	FUN_001378e8	puVar10	regInfoVector	INFERRED	per-register info vector (regInfoOwner + 4)	^\s*piVar5\ =\ \(int\ \*\)\(uVar2\ \*\ 4\ \+\ puVar10\[2\]\);$@6	+1
+use	FUN_001378e8	puVar10	regInfoVector	INFERRED	per-register info vector (regInfoOwner + 4)	^\s*piVar5\ =\ \(int\ \*\)FUN_0019423c\(puVar10,uVar2\);$@6	+1
