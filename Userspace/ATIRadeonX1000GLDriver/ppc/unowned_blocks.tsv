@@ -689,7 +689,7 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 31338	31340	padding	gldTextureFormatEntryForLevel	2	
 3178c	31790	padding	FUN_00031340	1	
 3188c	31890	padding	FUN_00031340	1	
-31b44	31b50	padding	FUN_00031940	3	
+31b44	31b50	padding	gld_uploadTextureLevel	3	
 32178	32180	padding	gldTextureMakeResident	2	
 322a4	322b0	padding	gldTextureMakeResident	3	
 3238c	32390	padding	gldTextureMakeResident	1	

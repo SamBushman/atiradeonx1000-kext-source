@@ -531,7 +531,7 @@ extern int gldTextureFormatLookup();
 extern int gldTextureFormatEntryForLevel();
 extern int FUN_00031340();
 extern int _gldGetTextureLevel();
-extern int FUN_00031940();
+extern int gld_uploadTextureLevel();
 extern int gldTextureMakeResident();
 extern int FUN_000341a0();
 extern int glGenerateMipmap_impl();

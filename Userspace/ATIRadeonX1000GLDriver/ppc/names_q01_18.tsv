@@ -1,0 +1,22 @@
+func	FUN_00031940	gld_uploadTextureLevel	INFERRED	allocates the backing for a texture level, copies or converts its texels into it (memcpy, _glgProcessPixels or _glgConvertType), flushes the data cache and builds the register packets (format words, 0x575 run, FUN_00030420 state packet); returns 1 on success
+local	FUN_00031940	bVar2	baseLevelByte	INFERRED	texImages+0x5e: index of the level being uploaded (also kept widened in levelNumber)
+local	FUN_00031940	uVar21	levelNumber	INFERRED	bVar2 widened: mip level index used to address the 0x18-byte level records and the packet slots
+local	FUN_00031940	uVar3	dirtyLevelMask	INFERRED	texImages+0x7c: bit mask of levels that need uploading (bit 0 = this level's data)
+local	FUN_00031940	iVar30	levelRecord	CONFIRMED	texImages + 0xa0 + level * 0x18: record of the level being uploaded (width +4, height +6, border +0xa, format +0x10/+0x12, data +0x14)
+local	FUN_00031940	uVar25	levelWidth	INFERRED	level width minus twice the border, at least 1
+local	FUN_00031940	uVar24	levelHeight	INFERRED	level height minus twice the border, at least 1
+local	FUN_00031940	uVar6	alignedRowBytes	INFERRED	(levelWidth << log2 bytes per texel) rounded up to 32 bytes
+local	FUN_00031940	piVar27	backing	CONFIRMED	*texture: the texture's hardware backing block (packets at +0xa00, state shadows at +0xc18)
+local	FUN_00031940	piVar28	uploadPtr	INFERRED	backing+0xa00: destination of the linear texel copy and start of the register packets
+local	FUN_00031940	piVar20	packetEndA	INFERRED	end of the optional 0x575 register run in the backing packet
+local	FUN_00031940	puVar29	formatEntry	INFERRED	0x24-byte pixel-format table entry (DAT_001d9f34 + format*0x24), or one of the fixed fallback entries
+local	FUN_00031940	puVar12	packetEndB	INFERRED	end of the state packet written by FUN_00030420
+local	FUN_00031940	puVar13	packetEndC	INFERRED	end of the packet written by FUN_00030a60
+local	FUN_00031940	bVar1	fitsSizeLimit	INFERRED	(levelWidth << log2) >> shift is below 0x2000: the level fits the hardware size limit
+local	FUN_00031940	puVar16	outputBlockPtr	INFERRED	stack block receiving the format lookup outputs (also passed to _glgConvertType)
+local	FUN_00031940	puVar15	convertBlockPtr	INFERRED	stack block passed to _glgConvertType / _glgProcessPixels
+local	FUN_00031940	local_5c	formatLookupBlockPtr	INFERRED	&local_e4: output block of gldTextureFormatLookup
+local	FUN_00031940	local_f8	texelShift	INFERRED	log2 of the bytes per texel, first output of gldTextureFormatLookup
+local	FUN_00031940	local_f4	formatClass	INFERRED	small format class (< 3, 3..4, 6) output of gldTextureFormatLookup; selects the size shift
+local	FUN_00031940	local_f0	hwFormatCode	INFERRED	hardware format code output of gldTextureFormatLookup, written into the 0x575 run
+local	FUN_00031940	local_ec	bytesPerTexel	INFERRED	bytes per texel output of gldTextureFormatLookup; times the width is the copied row size

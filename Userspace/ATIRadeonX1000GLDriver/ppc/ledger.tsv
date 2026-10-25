@@ -324,7 +324,7 @@
 0x31220	280	gldTextureFormatEntryForLevel	part_005	converted
 0x31340	1352	FUN_00031340	part_005	converted
 0x31890	176	_gldGetTextureLevel	part_005	converted
-0x31940	1972	FUN_00031940	part_005	converted
+0x31940	1972	gld_uploadTextureLevel	part_005	converted
 0x32100	8252	gldTextureMakeResident	part_005	converted
 0x341a0	92	FUN_000341a0	part_005	converted
 0x34200	4472	glGenerateMipmap_impl	part_005	converted
