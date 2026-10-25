@@ -5354,7 +5354,7 @@ int FUN_000656b0(param_1)
       uVar10 = *(uint *)(param_1 + 0x1804);
       bVar1 = ((unsigned char *)0x000011d2)[param_1];
       uVar8 = *(uint *)(param_1 + 0x44) >> 10 & 1;
-      puVar5 = (undefined4 *)FUN_00092bf0(param_1,1,0);
+      puVar5 = (undefined4 *)ffvpCreateBuilder(param_1,1,0);
       *puVar5 = 0;
       ((int (*)())FUN_00065610)(param_1,puVar5);
       if (uVar8 == 0) {
@@ -5368,7 +5368,7 @@ int FUN_000656b0(param_1)
         in_r9 = (uVar10 & 1) + uVar12;
         uVar9 = (uint)bVar1 + uVar2 * 2 + in_r9 + 2;
       }
-      FUN_00092d40(puVar5,uVar8,(uint)bVar1);
+      ffvpEmitPositionPassThrough(puVar5,uVar8,(uint)bVar1);
       if (uVar12 == 0) {
         iVar4 = 1;
         iVar11 = 2;
@@ -5377,33 +5377,33 @@ int FUN_000656b0(param_1)
         iVar4 = 2;
         iVar11 = 3;
         puVar5[0x13] = 1;
-        FUN_00093130(puVar5);
+        ffvpEmitPointSizePassThrough(puVar5);
       }
       puVar5[3] = iVar4;
       uVar6 = 0;
       uVar7 = 0;
-      FUN_00092ea0(puVar5,3,0,0);
+      ffvpEmitColorPassThrough(puVar5,3,0,0);
       if ((uVar10 & 1) != 0) {
         puVar5[4] = iVar11;
         uVar6 = 1;
         uVar7 = 0;
-        FUN_00092ea0(puVar5,4,1,0);
+        ffvpEmitColorPassThrough(puVar5,4,1,0);
         if ((uVar10 & 4) != 0) {
           puVar5[0x14] = iVar11;
           puVar5[0x15] = 3;
-          FUN_000931e0(puVar5);
+          ffvpEmitFogPassThrough(puVar5);
         }
         iVar11 = iVar4 + 2;
       }
       if (uVar2 != 0) {
         puVar5[5] = iVar11;
-        FUN_00092ea0(puVar5,3,2,1);
+        ffvpEmitColorPassThrough(puVar5,3,2,1);
         puVar5[6] = iVar11 + 1;
         puVar5[0x20] = 0;
         uVar6 = 3;
         uVar7 = 1;
         iVar11 = iVar11 + 2;
-        FUN_00092ea0(puVar5,4,3,1);
+        ffvpEmitColorPassThrough(puVar5,4,3,1);
       }
       uVar8 = (uint)(uVar2 != 0);
       if (uVar10 >> 4 != 0) {
@@ -5420,7 +5420,7 @@ int FUN_000656b0(param_1)
           loopIndex = loopIndex + 1;
           uVar8 = uVar8 + 1;
           iVar4 = iVar4 + 4;
-          FUN_00093000(puVar5,iVar3,uVar6,uVar7,in_r7,in_r8,in_r9);
+          ffvpEmitTexCoordPassThrough(puVar5,iVar3,uVar6,uVar7,in_r7,in_r8,in_r9);
         } while (uVar10 >> 4 != loopIndex);
       }
       FUN_0009a910(puVar5);

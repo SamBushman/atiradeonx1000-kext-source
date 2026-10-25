@@ -816,8 +816,8 @@
 0x90990	FUN_00090990	772	yes	
 0x90ca0	ffvpAllocTempRegister	1240	yes	
 0x911a0	FUN_000911a0	316	yes	
-0x912f0	FUN_000912f0	208	yes	
-0x913e0	FUN_000913e0	224	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x912f0	ffvpResolveMaterialSource	208	yes	
+0x913e0	ffvpResolveFixedSource	224	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x914c0	noop_914c0	28	yes	
 0x914e0	ffvpEmitEyePositionMad	492	no	indirect call (driver context / vtable / callback)
 0x916d0	ffvpEmitEyePositionDp4	420	no	indirect call (driver context / vtable / callback)
@@ -832,12 +832,12 @@
 0x92350	ffvpEmitReflectionVector	512	no	indirect call (driver context / vtable / callback)
 0x92570	ffvpEmitSphereMapCoord	796	no	indirect call (driver context / vtable / callback)
 0x928a0	ffvpEmitFogExp2	792	no	indirect call (driver context / vtable / callback)
-0x92bf0	FUN_00092bf0	328	no	indirect call (driver context / vtable / callback)
-0x92d40	FUN_00092d40	340	no	indirect call (driver context / vtable / callback)
-0x92ea0	FUN_00092ea0	324	no	indirect call (driver context / vtable / callback)
-0x93000	FUN_00093000	288	no	indirect call (driver context / vtable / callback)
-0x93130	FUN_00093130	168	no	indirect call (driver context / vtable / callback)
-0x931e0	FUN_000931e0	404	no	indirect call (driver context / vtable / callback)
+0x92bf0	ffvpCreateBuilder	328	no	indirect call (driver context / vtable / callback)
+0x92d40	ffvpEmitPositionPassThrough	340	no	indirect call (driver context / vtable / callback)
+0x92ea0	ffvpEmitColorPassThrough	324	no	indirect call (driver context / vtable / callback)
+0x93000	ffvpEmitTexCoordPassThrough	288	no	indirect call (driver context / vtable / callback)
+0x93130	ffvpEmitPointSizePassThrough	168	no	indirect call (driver context / vtable / callback)
+0x931e0	ffvpEmitFogPassThrough	404	no	indirect call (driver context / vtable / callback)
 0x93390	FUN_00093390	352	no	indirect call (driver context / vtable / callback)
 0x934f0	FUN_000934f0	20	yes	
 0x93510	ffvpEmitBlendedEyeNormal	1220	no	indirect call (driver context / vtable / callback)
@@ -853,8 +853,8 @@
 0x95dd0	ffvpEmitClipPosition	1792	no	indirect call (driver context / vtable / callback)
 0x96500	ffvpPrepareEyeNormal	52	yes	
 0x96540	ffvpPrepareFogExp2	172	yes	
-0x96600	FUN_00096600	1872	no	indirect call (driver context / vtable / callback)
-0x96d80	FUN_00096d80	1700	no	indirect call (driver context / vtable / callback)
+0x96600	ffvpEmitTexCoordGen	1872	no	indirect call (driver context / vtable / callback)
+0x96d80	ffvpEmitSceneColor	1700	no	indirect call (driver context / vtable / callback)
 0x97440	FUN_00097440	4212	no	indirect call (driver context / vtable / callback)
 0x98500	ffvpEmitLight	6432	no	indirect call (driver context / vtable / callback)
 0x99e50	FUN_00099e50	1796	no	indirect call (driver context / vtable / callback)
