@@ -172,7 +172,7 @@ int LoopInfo__convertToHardwareLoop(loopInfo, boundOnRight, passThroughR5, passT
   int inputBase;
   undefined8 predecessor;
   
-  constRegister = FUN_000f4a84(*(undefined4 *)(loopInfo[0x10] + 0x3ac),3,1,passThroughR6,passThroughR7,passThroughR8,passThroughR9);
+  constRegister = Emitter__allocateConstantSlot(*(undefined4 *)(loopInfo[0x10] + 0x3ac),3,1,passThroughR6,passThroughR7,passThroughR8,passThroughR9);
   if (constRegister < 0) {
 LAB_0012ba38:
     conversionResult = 0;
@@ -3323,32 +3323,33 @@ int FUN_00130690(program, param_2)
 }
 
 /* FUN_00130728 @ 0x130728 (164 bytes) */
-int FUN_00130728(param_1)
-  int *param_1;
+int FUN_00130728(inst)
+  int *inst;
 {
-  int *piVar1;
-  uint uVar2;
-  int iVar3;
+  int instQuery28;
+  int *nextInst;
+  uint instFlags;
+  int instQuery34;
   
-  iVar3 = (**(code **)(*param_1 + 0x34))(param_1);
-  if (iVar3 == 0) {
-    iVar3 = (**(code **)(*param_1 + 0x28))(param_1);
-    piVar1 = param_1;
-    if (iVar3 == 0) {
+  instQuery34 = (**(code **)(*inst + 0x34))(inst);
+  if (instQuery34 == 0) {
+    instQuery28 = (**(code **)(*inst + 0x28))(inst);
+    nextInst = inst;
+    if (instQuery28 == 0) {
       do {
-        param_1 = piVar1;
-        piVar1 = (int *)param_1[1];
-      } while ((((int *)param_1[1])[5] & 4U) != 0);
+        inst = nextInst;
+        nextInst = (int *)inst[1];
+      } while ((((int *)inst[1])[5] & 4U) != 0);
     }
     else {
-      uVar2 = param_1[5];
-      while ((uVar2 & 0x1000) == 0) {
-        param_1 = (int *)param_1[1];
-        uVar2 = param_1[5];
+      instFlags = inst[5];
+      while ((instFlags & 0x1000) == 0) {
+        inst = (int *)inst[1];
+        instFlags = inst[5];
       }
     }
   }
-  return param_1;
+  return inst;
 }
 
 /* FUN_001307cc @ 0x1307cc (44 bytes) */

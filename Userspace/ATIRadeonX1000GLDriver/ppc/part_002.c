@@ -10174,7 +10174,7 @@ LAB_00018700:
         (**(code **)(ctx + 0x299c))(iVar34,packetCursor + 0xca);
         return;
       }
-      FUN_00021c70(ctx,srcX,srcY,width,height,uVar41,uVar43,destEndY,uVar32);
+      gld_emitCopyBlitPacket(ctx,srcX,srcY,width,height,uVar41,uVar43,destEndY,uVar32);
     }
   }
   else {

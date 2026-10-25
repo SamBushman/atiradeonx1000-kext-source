@@ -1,0 +1,23 @@
+local	FUN_0001ecd0	param_2	drawKind	INFERRED	draw selector: 2 = the client-array indexed path that may use the unsigned-int index fast route
+local	FUN_0001ecd0	bVar2	hasVertices	INFERRED	trimmed vertex count (puVar19) is positive
+local	FUN_0001ecd0	puVar10	elementBufferRecord	INFERRED	vertexArray[1]+0x80: the bound element-buffer record
+local	FUN_0001ecd0	puVar33	refCountWord	INFERRED	refcount word (+0x10) of an array's backing, decremented by the store-conditional loop
+local	FUN_0001ecd0	uVar24	casResult	INFERRED	result of the store-conditional that updates a refcount
+local	FUN_0001ecd0	iVar12	casResult2	INFERRED	result of the store-conditional that updates a refcount
+local	FUN_0001ecd0	iStack_60	clientDataBase	INFERRED	arrayState+0x314: client address of the non-buffer vertex data (0 when buffers are used)
+local	FUN_0001ecd0	uStack00000030	drawFlagsArg	INFERRED	drawFlags stored as the seventh (stack) argument of gld_prepareDrawCount
+local	FUN_0001ecd0	pcVar27	arrayRecordCursor	INFERRED	walks the per-array record pointers at ctx+0x2728
+local	FUN_0002ee30	iVar12	hwState	INFERRED	texture+0x3c: the texture's hardware register shadow words (same object as hwState in gld_updateTextureHardwareState)
+local	FUN_0002ee30	iVar11	texImages	CONFIRMED	texture+0x30: the image-level record array
+local	FUN_0002ee30	dVar13	doubleConst	INFERRED	a double constant (DOUBLE_001aa1e8) kept in a register for the float to unsigned conversions
+local	FUN_0002ee30	uVar4	minFilterField	INFERRED	texImages+0x16: minification filter / base level field compared with the cached copy at texture+0xa0
+local	FUN_0002ee30	sVar5	baseFormatCode	INFERRED	short at texImages->+2 (format kind): 0x1902 = depth texture, 0x8049 = -0x7fb7
+local	FUN_0002ee30	uVar6	depthCompareWord	INFERRED	texImages+0x40: depth-texture compare mode word copied to texture+0x98
+local	FUN_0002ee30	cVar10	flag72	INFERRED	texture+0x72 flag sampled before the filter updates; compared afterwards to reset the cached wrap words
+local	FUN_0002ee30	cVar9	flag71	INFERRED	texture+0x71 flag copied back to texture+0x70
+local	FUN_0002ebc0	iVar5	texture	INFERRED	the texture object bound to the unit
+local	FUN_0002ebc0	uVar4	filterWord	INFERRED	texImages+0xa0 filter value, later the wrap/coordinate bits written to texture+0x50
+local	FUN_0002ebc0	uVar6	wrapWord	INFERRED	cached wrap modes (texture+0x9c / +0x9e) being encoded into texture+0x50
+local	FUN_0002ebc0	bVar1	flag72Unset	INFERRED	texture+0x72 == 0 after the update: selects the repeat-mirror bit encoding
+local	FUN_0002ebc0	cVar2	flag72Before	INFERRED	texture+0x72 before FUN_0002d030/FUN_0002d210 ran
+local	FUN_0002ebc0	sVar3	filterKind	INFERRED	texImages+0x16 (min filter) tested against the nearest/linear codes 0x2600/0x2700/0x2702

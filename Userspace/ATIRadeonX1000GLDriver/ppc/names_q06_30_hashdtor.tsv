@@ -1,0 +1,30 @@
+local	FUN_001278d0	param_1	owner	INFERRED	object being released (+4 hash table, torn down after FUN_0012740c)
+use	FUN_001278d0	uVar1	bucketCount	INFERRED	number of buckets of the hash table (first word)	^\s*uVar1\ =\ \*puVar4;$	+2
+use	FUN_001278d0	uVar1	bucketCount	INFERRED	number of buckets of the hash table (first word)	^\s*uVar1\ =\ \*puVar4;$@2	+1
+use	FUN_001278d0	uVar1	bucketCount	INFERRED	number of buckets of the hash table (first word)	^\s*\}\ while\ \(uVar5\ <\ uVar1\);$	+1
+use	FUN_001278d0	iVar2	bucketChain	INFERRED	chain head stored in the bucket, freed with the table's arena	^\s*iVar2\ =\ \*\(int\ \*\)\(uVar5\ \*\ 4\ \+\ uVar3\);$	+3
+use	FUN_001278d0	uVar3	bucketArray	INFERRED	bucket array pointer of the hash table (word 2)	^\s*uVar3\ =\ puVar4\[2\];$	+1
+use	FUN_001278d0	uVar3	bucketArray	INFERRED	bucket array pointer of the hash table (word 2)	^\s*uVar3\ =\ puVar4\[2\];$@2	+1
+use	FUN_001278d0	uVar3	bucketArray	INFERRED	bucket array pointer of the hash table (word 2)	^\s*iVar2\ =\ \*\(int\ \*\)\(uVar5\ \*\ 4\ \+\ uVar3\);$	+1
+use	FUN_001278d0	uVar3	bucketArray	INFERRED	bucket array pointer of the hash table (word 2)	^\s*uVar3\ =\ puVar4\[2\];$@3	+1
+use	FUN_001278d0	uVar3	bucketArray	INFERRED	bucket array pointer of the hash table (word 2)	^\s*FUN_00193cc0\(puVar4\[5\],uVar3\);$	+1
+use	FUN_001278d0	puVar4	hashTable	INFERRED	hash table header (owner +4)	^\s*puVar4\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 4\);$	+3
+use	FUN_001278d0	puVar4	hashTable	INFERRED	hash table header (owner +4)	^\s*uVar3\ =\ puVar4\[2\];$	+1
+use	FUN_001278d0	puVar4	hashTable	INFERRED	hash table header (owner +4)	^\s*uVar3\ =\ puVar4\[2\];$@2	+1
+use	FUN_001278d0	puVar4	hashTable	INFERRED	hash table header (owner +4)	^\s*FUN_00193cc0\(puVar4\[5\],iVar2\);$	+3
+use	FUN_001278d0	puVar4	hashTable	INFERRED	hash table header (owner +4)	^\s*FUN_00193cc0\(puVar4\[5\],uVar3\);$	+2
+local	FUN_00127470	param_1	owner	INFERRED	object being released (+4 hash table, torn down after FUN_0012740c)
+use	FUN_00127470	uVar1	bucketCount	INFERRED	number of buckets of the hash table (first word)	^\s*uVar1\ =\ \*puVar4;$	+2
+use	FUN_00127470	uVar1	bucketCount	INFERRED	number of buckets of the hash table (first word)	^\s*uVar1\ =\ \*puVar4;$@2	+1
+use	FUN_00127470	uVar1	bucketCount	INFERRED	number of buckets of the hash table (first word)	^\s*\}\ while\ \(uVar5\ <\ uVar1\);$	+1
+use	FUN_00127470	iVar2	bucketChain	INFERRED	chain head stored in the bucket, freed with the table's arena	^\s*iVar2\ =\ \*\(int\ \*\)\(uVar5\ \*\ 4\ \+\ uVar3\);$	+3
+use	FUN_00127470	uVar3	bucketArray	INFERRED	bucket array pointer of the hash table (word 2)	^\s*uVar3\ =\ puVar4\[2\];$	+1
+use	FUN_00127470	uVar3	bucketArray	INFERRED	bucket array pointer of the hash table (word 2)	^\s*uVar3\ =\ puVar4\[2\];$@2	+1
+use	FUN_00127470	uVar3	bucketArray	INFERRED	bucket array pointer of the hash table (word 2)	^\s*iVar2\ =\ \*\(int\ \*\)\(uVar5\ \*\ 4\ \+\ uVar3\);$	+1
+use	FUN_00127470	uVar3	bucketArray	INFERRED	bucket array pointer of the hash table (word 2)	^\s*uVar3\ =\ puVar4\[2\];$@3	+1
+use	FUN_00127470	uVar3	bucketArray	INFERRED	bucket array pointer of the hash table (word 2)	^\s*FUN_00193cc0\(puVar4\[5\],uVar3\);$	+1
+use	FUN_00127470	puVar4	hashTable	INFERRED	hash table header (owner +4)	^\s*puVar4\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 4\);$	+3
+use	FUN_00127470	puVar4	hashTable	INFERRED	hash table header (owner +4)	^\s*uVar3\ =\ puVar4\[2\];$	+1
+use	FUN_00127470	puVar4	hashTable	INFERRED	hash table header (owner +4)	^\s*uVar3\ =\ puVar4\[2\];$@2	+1
+use	FUN_00127470	puVar4	hashTable	INFERRED	hash table header (owner +4)	^\s*FUN_00193cc0\(puVar4\[5\],iVar2\);$	+3
+use	FUN_00127470	puVar4	hashTable	INFERRED	hash table header (owner +4)	^\s*FUN_00193cc0\(puVar4\[5\],uVar3\);$	+2

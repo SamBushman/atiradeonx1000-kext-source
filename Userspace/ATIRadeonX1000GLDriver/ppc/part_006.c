@@ -1926,75 +1926,85 @@ LAB_000408d0:
 }
 
 /* FUN_00040ac4 @ 0x40ac4 (2096 bytes) */
-int FUN_00040ac4(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  int *param_1;
-  int param_2;
-  undefined4 *param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+int FUN_00040ac4(translator, slot, ilInstr, unusedArg4, unusedArg5, unusedArg6, unusedArg7, unusedArg8)
+  int *translator;
+  int slot;
+  undefined4 *ilInstr;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
+  undefined4 unusedArg8;
 {
+  uint src1SelectComp3;
+  uint src1NegateComp3;
+  uint src0NegateComp2;
+  uint src1SelectComp2;
+  uint src0NegateComp3;
+  uint src0SelectComp2;
+  uint src0SelectComp1;
+  uint src0SelectComp3;
+  uint src1NegateComp2;
+  uint src1NegateComp1;
   uint tokenCapacity2;
   uint tokenCapacity;
   int translatorError;
   int tokenCount;
   int allocation;
-  undefined4 *puVar1;
-  bool bVar2;
-  int iVar3;
-  uint uVar4;
-  uint uVar5;
-  undefined4 *puVar6;
+  undefined4 *recordSwzNext;
+  bool moreSources;
+  int srcIndex;
+  uint src0NegateComp0;
+  uint src1SelectComp1;
+  undefined4 *recordPtr;
   int iVar7;
-  uint uVar8;
-  uint uVar9;
+  uint src1NegateComp0;
+  uint src0NegateComp1;
   undefined4 *tokenWritePtr;
   undefined4 unaff_r19;
   undefined4 unaff_r20;
-  uint uVar11;
-  uint *puVar12;
-  uint *puVar13;
-  uint *puVar14;
-  uint uVar15;
-  uint uVar16;
+  uint repeatCount;
+  uint *dstMaskPtr;
+  uint *srcSwizzle1Ptr;
+  uint *srcSwizzle0Ptr;
+  uint srcSwizzle1;
+  uint srcSwizzle0;
   int *tokenDataPtrAddr;
   
-  uVar11 = 1;
-  if ((param_1[5] & 0x20000000U) != 0) {
-    uVar11 = (*(uint *)(param_2 * 8 + *param_1 + *(int *)(*param_1 + 0x54) * 8 + 4) >> 0x1a & 3) + 1
+  repeatCount = 1;
+  if ((translator[5] & 0x20000000U) != 0) {
+    repeatCount = (*(uint *)(slot * 8 + *translator + *(int *)(*translator + 0x54) * 8 + 4) >> 0x1a & 3) + 1
     ;
   }
-  uVar16 = param_3[6];
-  uVar15 = param_3[7];
-  if (uVar11 >= 2) {
-    iVar7 = param_1[8];
-    unaff_r20 = param_3[1];
-    unaff_r19 = param_3[2];
-    param_3[1] = 0x40000;
-    *(short *)((int)param_3 + 6) = (short)iVar7;
-    param_3[2] = 0x55;
-    param_3[1] = param_3[1] | 0x400000;
+  srcSwizzle0 = ilInstr[6];
+  srcSwizzle1 = ilInstr[7];
+  if (repeatCount >= 2) {
+    iVar7 = translator[8];
+    unaff_r20 = ilInstr[1];
+    unaff_r19 = ilInstr[2];
+    ilInstr[1] = 0x40000;
+    *(short *)((int)ilInstr + 6) = (short)iVar7;
+    ilInstr[2] = 0x55;
+    ilInstr[1] = ilInstr[1] | 0x400000;
   }
-  uVar4 = uVar16 >> 3 & 1;
-  uVar8 = uVar15 >> 3 & 1;
-  puVar14 = param_3 + 6;
-  puVar13 = param_3 + 7;
-  param_3[6] = uVar4 << 0xf |
-               (uVar16 & 7) << 0xc |
-               uVar4 << 0xb |
-               (uVar16 & 7) << 8 | uVar4 << 7 | (uVar16 & 7) << 4 | uVar4 << 3 | uVar16 & 0xffff0007
+  src0NegateComp0 = srcSwizzle0 >> 3 & 1;
+  src1NegateComp0 = srcSwizzle1 >> 3 & 1;
+  srcSwizzle0Ptr = ilInstr + 6;
+  srcSwizzle1Ptr = ilInstr + 7;
+  ilInstr[6] = src0NegateComp0 << 0xf |
+               (srcSwizzle0 & 7) << 0xc |
+               src0NegateComp0 << 0xb |
+               (srcSwizzle0 & 7) << 8 | src0NegateComp0 << 7 | (srcSwizzle0 & 7) << 4 | src0NegateComp0 << 3 | srcSwizzle0 & 0xffff0007
   ;
-  param_3[7] = uVar8 << 0xf |
-               (uVar15 & 7) << 0xc |
-               uVar8 << 0xb |
-               (uVar15 & 7) << 8 | uVar8 << 7 | (uVar15 & 7) << 4 | uVar8 << 3 | uVar15 & 0xffff0007
+  ilInstr[7] = src1NegateComp0 << 0xf |
+               (srcSwizzle1 & 7) << 0xc |
+               src1NegateComp0 << 0xb |
+               (srcSwizzle1 & 7) << 8 | src1NegateComp0 << 7 | (srcSwizzle1 & 7) << 4 | src1NegateComp0 << 3 | srcSwizzle1 & 0xffff0007
   ;
-  if (param_1[9] == 0) {
-    tokenDataPtrAddr = param_1 + 10;
-    tokenCount = param_1[0xb];
-    tokenCapacity = param_1[0xc];
+  if (translator[9] == 0) {
+    tokenDataPtrAddr = translator + 10;
+    tokenCount = translator[0xb];
+    tokenCapacity = translator[0xc];
     if (tokenCapacity < tokenCount + 7U) {
       if (tokenCapacity == 0) {
         tokenCapacity = 0x10;
@@ -2011,54 +2021,54 @@ int FUN_00040ac4(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
         allocation = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
       }
       if (allocation == 0) {
-        if (param_1[9] == 0) {
-          param_1[9] = 1;
+        if (translator[9] == 0) {
+          translator[9] = 1;
         }
         goto LAB_00040cf0;
       }
       *tokenDataPtrAddr = allocation;
-      param_1[0xc] = tokenCapacity;
-      tokenCount = param_1[0xb];
+      translator[0xc] = tokenCapacity;
+      tokenCount = translator[0xb];
     }
-    iVar3 = 0;
-    param_1[0xb] = tokenCount + 7;
+    srcIndex = 0;
+    translator[0xb] = tokenCount + 7;
     tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
-    *tokenWritePtr = *param_3;
-    tokenWritePtr[1] = param_3[1];
-    tokenWritePtr[2] = param_3[2];
-    puVar6 = param_3;
+    *tokenWritePtr = *ilInstr;
+    tokenWritePtr[1] = ilInstr[1];
+    tokenWritePtr[2] = ilInstr[2];
+    recordPtr = ilInstr;
     do {
-      bVar2 = iVar3 != 1;
-      iVar3 = iVar3 + 1;
-      tokenWritePtr[3] = puVar6[3];
-      puVar1 = puVar6 + 6;
-      puVar6 = puVar6 + 1;
-      tokenWritePtr[4] = *puVar1;
+      moreSources = srcIndex != 1;
+      srcIndex = srcIndex + 1;
+      tokenWritePtr[3] = recordPtr[3];
+      recordSwzNext = recordPtr + 6;
+      recordPtr = recordPtr + 1;
+      tokenWritePtr[4] = *recordSwzNext;
       tokenWritePtr = tokenWritePtr + 2;
-    } while (bVar2);
+    } while (moreSources);
   }
 LAB_00040cf0:
-  if (uVar11 < 2) {
-    return param_1[9];
+  if (repeatCount < 2) {
+    return translator[9];
   }
-  uVar8 = uVar16 >> 4 & 7;
-  uVar9 = uVar16 >> 7 & 1;
-  uVar5 = uVar15 >> 4 & 7;
-  uVar4 = uVar15 >> 7 & 1;
-  puVar12 = param_3 + 2;
-  param_3[2] = param_3[2] & 0xfffffffc;
-  *puVar14 = uVar9 << 0xf |
-             uVar8 << 0xc |
-             uVar9 << 0xb |
-             uVar8 << 8 | uVar9 << 7 | uVar8 << 4 | uVar9 << 3 | uVar8 | *puVar14 & 0xffff0000;
-  *puVar13 = uVar4 << 0xf |
-             uVar5 << 0xc |
-             uVar4 << 0xb |
-             uVar5 << 8 | uVar4 << 7 | uVar5 << 4 | uVar4 << 3 | uVar5 | *puVar13 & 0xffff0000;
-  if (param_1[9] == 0) {
-    tokenDataPtrAddr = param_1 + 10;
-    tokenCount = param_1[0xb];
-    tokenCapacity = param_1[0xc];
+  src0SelectComp1 = srcSwizzle0 >> 4 & 7;
+  src0NegateComp1 = srcSwizzle0 >> 7 & 1;
+  src1SelectComp1 = srcSwizzle1 >> 4 & 7;
+  src1NegateComp1 = srcSwizzle1 >> 7 & 1;
+  dstMaskPtr = ilInstr + 2;
+  ilInstr[2] = ilInstr[2] & 0xfffffffc;
+  *srcSwizzle0Ptr = src0NegateComp1 << 0xf |
+             src0SelectComp1 << 0xc |
+             src0NegateComp1 << 0xb |
+             src0SelectComp1 << 8 | src0NegateComp1 << 7 | src0SelectComp1 << 4 | src0NegateComp1 << 3 | src0SelectComp1 | *srcSwizzle0Ptr & 0xffff0000;
+  *srcSwizzle1Ptr = src1NegateComp1 << 0xf |
+             src1SelectComp1 << 0xc |
+             src1NegateComp1 << 0xb |
+             src1SelectComp1 << 8 | src1NegateComp1 << 7 | src1SelectComp1 << 4 | src1NegateComp1 << 3 | src1SelectComp1 | *srcSwizzle1Ptr & 0xffff0000;
+  if (translator[9] == 0) {
+    tokenDataPtrAddr = translator + 10;
+    tokenCount = translator[0xb];
+    tokenCapacity = translator[0xc];
     if (tokenCapacity < tokenCount + 7U) {
       if (tokenCapacity == 0) {
         tokenCapacity = 0x10;
@@ -2075,51 +2085,51 @@ LAB_00040cf0:
         allocation = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
       }
       if (allocation == 0) {
-        if (param_1[9] == 0) {
-          param_1[9] = 1;
+        if (translator[9] == 0) {
+          translator[9] = 1;
         }
         goto LAB_00040e70;
       }
       *tokenDataPtrAddr = allocation;
-      param_1[0xc] = tokenCapacity;
-      tokenCount = param_1[0xb];
+      translator[0xc] = tokenCapacity;
+      tokenCount = translator[0xb];
     }
-    iVar3 = 0;
-    param_1[0xb] = tokenCount + 7;
+    srcIndex = 0;
+    translator[0xb] = tokenCount + 7;
     tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
-    *tokenWritePtr = *param_3;
-    tokenWritePtr[1] = param_3[1];
-    tokenWritePtr[2] = param_3[2];
-    puVar6 = param_3;
+    *tokenWritePtr = *ilInstr;
+    tokenWritePtr[1] = ilInstr[1];
+    tokenWritePtr[2] = ilInstr[2];
+    recordPtr = ilInstr;
     do {
-      bVar2 = iVar3 != 1;
-      iVar3 = iVar3 + 1;
-      tokenWritePtr[3] = puVar6[3];
-      puVar1 = puVar6 + 6;
-      puVar6 = puVar6 + 1;
-      tokenWritePtr[4] = *puVar1;
+      moreSources = srcIndex != 1;
+      srcIndex = srcIndex + 1;
+      tokenWritePtr[3] = recordPtr[3];
+      recordSwzNext = recordPtr + 6;
+      recordPtr = recordPtr + 1;
+      tokenWritePtr[4] = *recordSwzNext;
       tokenWritePtr = tokenWritePtr + 2;
-    } while (bVar2);
+    } while (moreSources);
   }
 LAB_00040e70:
-  if (uVar11 < 3) goto LAB_00041170;
-  uVar8 = uVar16 >> 8 & 7;
-  uVar9 = uVar16 >> 0xb & 1;
-  uVar5 = uVar15 >> 8 & 7;
-  uVar4 = uVar15 >> 0xb & 1;
-  *puVar12 = *puVar12 & 0xfffffff3;
-  *puVar14 = uVar9 << 0xf |
-             uVar8 << 0xc |
-             uVar9 << 0xb |
-             uVar8 << 8 | uVar9 << 7 | uVar8 << 4 | uVar9 << 3 | uVar8 | *puVar14 & 0xffff0000;
-  *puVar13 = uVar4 << 0xf |
-             uVar5 << 0xc |
-             uVar4 << 0xb |
-             uVar5 << 8 | uVar4 << 7 | uVar5 << 4 | uVar4 << 3 | uVar5 | *puVar13 & 0xffff0000;
-  if (param_1[9] == 0) {
-    tokenDataPtrAddr = param_1 + 10;
-    tokenCount = param_1[0xb];
-    tokenCapacity = param_1[0xc];
+  if (repeatCount < 3) goto LAB_00041170;
+  src0SelectComp2 = srcSwizzle0 >> 8 & 7;
+  src0NegateComp2 = srcSwizzle0 >> 0xb & 1;
+  src1SelectComp2 = srcSwizzle1 >> 8 & 7;
+  src1NegateComp2 = srcSwizzle1 >> 0xb & 1;
+  *dstMaskPtr = *dstMaskPtr & 0xfffffff3;
+  *srcSwizzle0Ptr = src0NegateComp2 << 0xf |
+             src0SelectComp2 << 0xc |
+             src0NegateComp2 << 0xb |
+             src0SelectComp2 << 8 | src0NegateComp2 << 7 | src0SelectComp2 << 4 | src0NegateComp2 << 3 | src0SelectComp2 | *srcSwizzle0Ptr & 0xffff0000;
+  *srcSwizzle1Ptr = src1NegateComp2 << 0xf |
+             src1SelectComp2 << 0xc |
+             src1NegateComp2 << 0xb |
+             src1SelectComp2 << 8 | src1NegateComp2 << 7 | src1SelectComp2 << 4 | src1NegateComp2 << 3 | src1SelectComp2 | *srcSwizzle1Ptr & 0xffff0000;
+  if (translator[9] == 0) {
+    tokenDataPtrAddr = translator + 10;
+    tokenCount = translator[0xb];
+    tokenCapacity = translator[0xc];
     if (tokenCapacity < tokenCount + 7U) {
       if (tokenCapacity == 0) {
         tokenCapacity = 0x10;
@@ -2136,52 +2146,52 @@ LAB_00040e70:
         allocation = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
       }
       if (allocation == 0) {
-        if (param_1[9] == 0) {
-          param_1[9] = 1;
+        if (translator[9] == 0) {
+          translator[9] = 1;
         }
         goto LAB_00040ff0;
       }
       *tokenDataPtrAddr = allocation;
-      param_1[0xc] = tokenCapacity;
-      tokenCount = param_1[0xb];
+      translator[0xc] = tokenCapacity;
+      tokenCount = translator[0xb];
     }
-    iVar3 = 0;
-    param_1[0xb] = tokenCount + 7;
+    srcIndex = 0;
+    translator[0xb] = tokenCount + 7;
     tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
-    *tokenWritePtr = *param_3;
-    tokenWritePtr[1] = param_3[1];
-    tokenWritePtr[2] = param_3[2];
-    puVar6 = param_3;
+    *tokenWritePtr = *ilInstr;
+    tokenWritePtr[1] = ilInstr[1];
+    tokenWritePtr[2] = ilInstr[2];
+    recordPtr = ilInstr;
     do {
-      bVar2 = iVar3 != 1;
-      iVar3 = iVar3 + 1;
-      tokenWritePtr[3] = puVar6[3];
-      puVar1 = puVar6 + 6;
-      puVar6 = puVar6 + 1;
-      tokenWritePtr[4] = *puVar1;
+      moreSources = srcIndex != 1;
+      srcIndex = srcIndex + 1;
+      tokenWritePtr[3] = recordPtr[3];
+      recordSwzNext = recordPtr + 6;
+      recordPtr = recordPtr + 1;
+      tokenWritePtr[4] = *recordSwzNext;
       tokenWritePtr = tokenWritePtr + 2;
-    } while (bVar2);
+    } while (moreSources);
   }
 LAB_00040ff0:
-  if (uVar11 == 4) {
-    uVar4 = uVar16 >> 0xc & 7;
-    uVar8 = uVar16 >> 0xf & 1;
-    uVar16 = uVar15 >> 0xc & 7;
-    uVar11 = uVar15 >> 0xf & 1;
-    *puVar12 = *puVar12 & 0xffffffcf;
-    *puVar14 = uVar8 << 0xf |
-               uVar4 << 0xc |
-               uVar8 << 0xb |
-               uVar4 << 8 | uVar8 << 7 | uVar4 << 4 | uVar8 << 3 | uVar4 | *puVar14 & 0xffff0000;
-    *puVar13 = uVar11 << 0xf |
-               uVar16 << 0xc |
-               uVar11 << 0xb |
-               uVar16 << 8 |
-               uVar11 << 7 | uVar16 << 4 | uVar11 << 3 | uVar16 | *puVar13 & 0xffff0000;
-    if (param_1[9] == 0) {
-      tokenDataPtrAddr = param_1 + 10;
-      tokenCount = param_1[0xb];
-      tokenCapacity2 = param_1[0xc];
+  if (repeatCount == 4) {
+    src0SelectComp3 = srcSwizzle0 >> 0xc & 7;
+    src0NegateComp3 = srcSwizzle0 >> 0xf & 1;
+    src1SelectComp3 = srcSwizzle1 >> 0xc & 7;
+    src1NegateComp3 = srcSwizzle1 >> 0xf & 1;
+    *dstMaskPtr = *dstMaskPtr & 0xffffffcf;
+    *srcSwizzle0Ptr = src0NegateComp3 << 0xf |
+               src0SelectComp3 << 0xc |
+               src0NegateComp3 << 0xb |
+               src0SelectComp3 << 8 | src0NegateComp3 << 7 | src0SelectComp3 << 4 | src0NegateComp3 << 3 | src0SelectComp3 | *srcSwizzle0Ptr & 0xffff0000;
+    *srcSwizzle1Ptr = src1NegateComp3 << 0xf |
+               src1SelectComp3 << 0xc |
+               src1NegateComp3 << 0xb |
+               src1SelectComp3 << 8 |
+               src1NegateComp3 << 7 | src1SelectComp3 << 4 | src1NegateComp3 << 3 | src1SelectComp3 | *srcSwizzle1Ptr & 0xffff0000;
+    if (translator[9] == 0) {
+      tokenDataPtrAddr = translator + 10;
+      tokenCount = translator[0xb];
+      tokenCapacity2 = translator[0xc];
       if (tokenCapacity2 < tokenCount + 7U) {
         if (tokenCapacity2 == 0) {
           tokenCapacity2 = 0x10;
@@ -2198,50 +2208,50 @@ LAB_00040ff0:
           allocation = _realloc(*tokenDataPtrAddr,tokenCapacity2 << 2);
         }
         if (allocation == 0) {
-          if (param_1[9] == 0) {
-            param_1[9] = 1;
+          if (translator[9] == 0) {
+            translator[9] = 1;
           }
           goto LAB_00041170;
         }
         *tokenDataPtrAddr = allocation;
-        param_1[0xc] = tokenCapacity2;
-        tokenCount = param_1[0xb];
+        translator[0xc] = tokenCapacity2;
+        tokenCount = translator[0xb];
       }
-      iVar3 = 0;
-      param_1[0xb] = tokenCount + 7;
+      srcIndex = 0;
+      translator[0xb] = tokenCount + 7;
       tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
-      *tokenWritePtr = *param_3;
-      tokenWritePtr[1] = param_3[1];
-      tokenWritePtr[2] = param_3[2];
-      puVar6 = param_3;
+      *tokenWritePtr = *ilInstr;
+      tokenWritePtr[1] = ilInstr[1];
+      tokenWritePtr[2] = ilInstr[2];
+      recordPtr = ilInstr;
       do {
-        bVar2 = iVar3 != 1;
-        iVar3 = iVar3 + 1;
-        tokenWritePtr[3] = puVar6[3];
-        puVar1 = puVar6 + 6;
-        puVar6 = puVar6 + 1;
-        tokenWritePtr[4] = *puVar1;
+        moreSources = srcIndex != 1;
+        srcIndex = srcIndex + 1;
+        tokenWritePtr[3] = recordPtr[3];
+        recordSwzNext = recordPtr + 6;
+        recordPtr = recordPtr + 1;
+        tokenWritePtr[4] = *recordSwzNext;
         tokenWritePtr = tokenWritePtr + 2;
-      } while (bVar2);
+      } while (moreSources);
     }
   }
 LAB_00041170:
-  iVar7 = param_1[8];
-  param_3[3] = 0;
-  *puVar14 = 0;
-  param_3[3] = param_3[3] & 0xffc0ffff | 0x40000;
-  *(short *)((int)param_3 + 0xe) = (short)iVar7;
-  param_3[3] = param_3[3] | 0x400000;
-  *puVar14 = *puVar14 & 0xffff0000 | 0x3210;
-  *param_3 = 0;
-  param_3[1] = unaff_r20;
-  param_3[2] = unaff_r19;
-  *(undefined2 *)((int)param_3 + 2) = 0x47;
-  translatorError = param_1[9];
+  iVar7 = translator[8];
+  ilInstr[3] = 0;
+  *srcSwizzle0Ptr = 0;
+  ilInstr[3] = ilInstr[3] & 0xffc0ffff | 0x40000;
+  *(short *)((int)ilInstr + 0xe) = (short)iVar7;
+  ilInstr[3] = ilInstr[3] | 0x400000;
+  *srcSwizzle0Ptr = *srcSwizzle0Ptr & 0xffff0000 | 0x3210;
+  *ilInstr = 0;
+  ilInstr[1] = unaff_r20;
+  ilInstr[2] = unaff_r19;
+  *(undefined2 *)((int)ilInstr + 2) = 0x47;
+  translatorError = translator[9];
   if (translatorError == 0) {
-    tokenDataPtrAddr = param_1 + 10;
-    tokenCount = param_1[0xb];
-    tokenCapacity2 = param_1[0xc];
+    tokenDataPtrAddr = translator + 10;
+    tokenCount = translator[0xb];
+    tokenCapacity2 = translator[0xc];
     if (tokenCapacity2 < tokenCount + 5U) {
       if (tokenCapacity2 == 0) {
         tokenCapacity2 = 0x10;
@@ -2258,24 +2268,24 @@ LAB_00041170:
         allocation = _realloc(*tokenDataPtrAddr,tokenCapacity2 << 2);
       }
       if (allocation == 0) {
-        if (param_1[9] != 0) {
-          return param_1[9];
+        if (translator[9] != 0) {
+          return translator[9];
         }
-        param_1[9] = 1;
+        translator[9] = 1;
         return 1;
       }
       *tokenDataPtrAddr = allocation;
-      param_1[0xc] = tokenCapacity2;
-      tokenCount = param_1[0xb];
+      translator[0xc] = tokenCapacity2;
+      tokenCount = translator[0xb];
     }
-    param_1[0xb] = tokenCount + 5;
+    translator[0xb] = tokenCount + 5;
     tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
-    *tokenWritePtr = *param_3;
-    tokenWritePtr[1] = param_3[1];
-    tokenWritePtr[2] = param_3[2];
-    tokenWritePtr[3] = param_3[3];
-    tokenWritePtr[4] = param_3[6];
-    translatorError = param_1[9];
+    *tokenWritePtr = *ilInstr;
+    tokenWritePtr[1] = ilInstr[1];
+    tokenWritePtr[2] = ilInstr[2];
+    tokenWritePtr[3] = ilInstr[3];
+    tokenWritePtr[4] = ilInstr[6];
+    translatorError = translator[9];
   }
   return translatorError;
 }

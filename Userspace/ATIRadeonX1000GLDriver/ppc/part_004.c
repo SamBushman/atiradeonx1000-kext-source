@@ -5797,7 +5797,7 @@ LAB_0002c610:
     FUN_00090960(param_1);
     uVar8 = *dirtyBits;
     if (((uVar8 & 0x20000000) != 0) || (*(char *)(iVar10 + 0x2a43) != '\0')) {
-      FUN_00022eb0(iVar10,0);
+      gld_emitDirtyStatePackets(iVar10,0);
       uVar8 = *dirtyBits;
     }
     if ((((uVar8 & 0x180) != 0) || (*(char *)(iVar10 + 0x2a43) != '\0')) &&
