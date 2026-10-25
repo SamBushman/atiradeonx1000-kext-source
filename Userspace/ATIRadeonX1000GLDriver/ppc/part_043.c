@@ -7648,6 +7648,11 @@ int FUN_001541f0(node, inst, pass)
   int *inst;
   int pass;
 {
+  int firstCompInst2;
+  int lastOperandSource;
+  int firstCompInst1;
+  int mergedLanesCopy;
+  int predicateResult;
   int vcall64ResultB;
   int vcall60Result;
   int vcall64Result;
@@ -7669,54 +7674,54 @@ int FUN_001541f0(node, inst, pass)
   int sourceDef2;
   int operandRecord;
   int *operandVReg;
-  bool bVar1;
-  bool bVar2;
-  bool bVar3;
+  bool noSecondCompInst1;
+  bool hasSecondCompInst1;
+  bool noSecondCompInst2;
   int iVar4;
-  undefined4 uVar5;
+  undefined4 savedDestSelect;
   int iVar6;
-  int iVar7;
-  int iVar8;
+  int secondCompInst2;
+  int thirdCompInst2;
   int *a0;
-  int *piVar9;
-  int *piVar10;
+  int *newSrcB;
+  int *newSrcC;
   int *inst1;
-  uint uVar12;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
-  undefined4 in_r9;
+  uint remapComponentA;
+  undefined4 staleArg3;
+  undefined4 staleArg4;
+  undefined4 staleArg5;
+  undefined4 staleArg6;
   int loopIndexC;
-  int iVar14;
-  int iVar15;
-  int iVar16;
-  int iVar17;
-  int iVar18;
-  uint uVar19;
+  int firstCompInst1Copy;
+  int resultScaleCode;
+  int firstCompInst2Copy;
+  int secondCompInst1;
+  int thirdCompInst1;
+  uint remapComponentC;
   int *inst2;
-  undefined4 uVar21;
-  uint uVar22;
-  uint uVar23;
-  int iVar24;
-  undefined4 local_e8;
-  undefined4 local_e4;
-  int local_e0;
+  undefined4 compiler;
+  uint remapComponentB;
+  uint instFlags;
+  int countdown2;
+  undefined4 destSelectNode;
+  undefined4 destSelectInst;
+  int mergedLanes;
   undefined4 operandSelectC;
   undefined4 operandSelectB;
   undefined4 operandSelect;
-  int local_d0;
-  int local_cc;
+  int newSrcASelect;
+  int newSrcBSelect;
   int local_c8 [9];
-  undefined4 local_a4;
-  undefined4 local_a0;
-  undefined4 local_9c;
-  undefined4 local_8c;
-  undefined4 local_88;
-  undefined4 local_84;
-  undefined4 local_74;
-  undefined4 local_70;
-  undefined4 local_6c;
-  undefined4 local_5c;
+  undefined4 lastOperandTail;
+  undefined4 operandCopyA;
+  undefined4 operandCopyAWord1;
+  undefined4 operandCopyAWord5;
+  undefined4 operandCopyB;
+  undefined4 operandCopyBWord1;
+  undefined4 operandCopyBWord5;
+  undefined4 operandCopyC;
+  undefined4 operandCopyCWord1;
+  undefined4 operandCopyCWord5;
   int local_58 [3];
   
   vcall64Result = (**(code **)(*node + 100))(node,inst,pass);
@@ -7724,37 +7729,37 @@ int FUN_001541f0(node, inst, pass)
      ((vcall64Result = (**(code **)(*inst + 100))(inst), vcall64Result != 0 &&
       (*(int *)(node[0x22] + 8) == 0x13)))) {
     sourceDef = IRInst__getOperandSource(node,1);
-    uVar21 = *(undefined4 *)(pass + 8);
+    compiler = *(undefined4 *)(pass + 8);
     operandRecord = IRInst__getOperandRecord(node,1);
-    iVar4 = IRInst__allSelectsAreHwConstants(sourceDef,uVar21,*(undefined4 *)(operandRecord + 0x10),in_r6,in_r7,in_r8,in_r9);
+    iVar4 = IRInst__allSelectsAreHwConstants(sourceDef,compiler,*(undefined4 *)(operandRecord + 0x10),staleArg3,staleArg4,staleArg5,staleArg6);
     sourceDef = IRInst__getOperandSource(inst,1);
-    uVar21 = *(undefined4 *)(pass + 8);
+    compiler = *(undefined4 *)(pass + 8);
     operandRecord4 = IRInst__getOperandRecord(inst,1);
-    iVar6 = IRInst__allSelectsAreHwConstants(sourceDef,uVar21,*(undefined4 *)(operandRecord4 + 0x10),in_r6,in_r7,in_r8,in_r9);
+    iVar6 = IRInst__allSelectsAreHwConstants(sourceDef,compiler,*(undefined4 *)(operandRecord4 + 0x10),staleArg3,staleArg4,staleArg5,staleArg6);
     if ((inst[0x48] == node[0x48]) && (node[0x49] == inst[0x49])) {
       operandRecord3 = IRInst__getOperandRecord(node,0);
-      local_e8 = *(undefined4 *)(operandRecord3 + 0x10);
+      destSelectNode = *(undefined4 *)(operandRecord3 + 0x10);
       operandRecord5 = IRInst__getOperandRecord(inst,0);
       loopIndexB = 0;
-      local_e4 = *(undefined4 *)(operandRecord5 + 0x10);
+      destSelectInst = *(undefined4 *)(operandRecord5 + 0x10);
       countdown = 4;
       do {
-        if ((*(char *)((int)&local_e8 + loopIndexB) != '\x01') &&
-           (*(char *)((int)&local_e4 + loopIndexB) != '\x01')) {
+        if ((*(char *)((int)&destSelectNode + loopIndexB) != '\x01') &&
+           (*(char *)((int)&destSelectInst + loopIndexB) != '\x01')) {
           return 0;
         }
         loopIndexB = loopIndexB + 1;
         countdown = countdown + -1;
       } while (countdown != 0);
       splitRgbAlphaEnabled = Compiler__isOptionEnabled(*(undefined4 *)(pass + 8),0x30);
-      if ((splitRgbAlphaEnabled == 0) || (((char)local_e8 != '\0' && ((char)local_e4 != '\0')))) {
+      if ((splitRgbAlphaEnabled == 0) || (((char)destSelectNode != '\0' && ((char)destSelectInst != '\0')))) {
         vcall64ResultB = (**(code **)(*node + 100))(node);
-        uVar5 = local_e8;
+        savedDestSelect = destSelectNode;
         inst1 = inst;
         inst2 = node;
         if (vcall64ResultB == 0) {
-          local_e8 = local_e4;
-          local_e4 = uVar5;
+          destSelectNode = destSelectInst;
+          destSelectInst = savedDestSelect;
           inst1 = node;
           inst2 = inst;
           iVar4 = iVar6;
@@ -7762,38 +7767,38 @@ int FUN_001541f0(node, inst, pass)
         if (iVar4 == 0) {
           sourceDef = IRInst__getOperandSource(inst2,1);
           sourceDef3 = IRInst__getOperandSource(inst1,1);
-          iVar4 = ((int (*)())Inst__opcodeOrSourcesDiffer)(sourceDef,sourceDef3);
-          if (iVar4 == 0) {
+          predicateResult = ((int (*)())Inst__opcodeOrSourcesDiffer)(sourceDef,sourceDef3);
+          if (predicateResult == 0) {
             sourceDef = IRInst__getOperandSource(inst2,1);
             sourceDef3 = IRInst__getOperandSource(inst1,2);
-            iVar4 = ((int (*)())Inst__opcodeOrSourcesDiffer)(sourceDef,sourceDef3);
-            if (iVar4 == 0) {
+            predicateResult = ((int (*)())Inst__opcodeOrSourcesDiffer)(sourceDef,sourceDef3);
+            if (predicateResult == 0) {
               sourceDef2 = IRInst__getOperandSource(inst2,1);
               sourceDef4 = IRInst__getOperandSource(inst1,1);
               if (sourceDef2 != sourceDef4) {
                 iVar4 = IRInst__getOperandSource(inst2,1);
                 sourceDef4 = IRInst__getOperandSource(inst1,2);
                 if ((iVar4 != sourceDef4) && (iVar4 = IRInst__hasSingleUse(inst,pass), iVar4 != 0)) {
-                  iVar8 = -1;
-                  bVar3 = true;
-                  bVar2 = false;
-                  SelectWord__mergeWrittenLanes(local_58,local_e4,local_e8);
-                  local_e0 = local_58[0];
-                  iVar15 = node[0x49];
+                  thirdCompInst2 = -1;
+                  noSecondCompInst2 = true;
+                  hasSecondCompInst1 = false;
+                  SelectWord__mergeWrittenLanes(local_58,destSelectInst,destSelectNode);
+                  mergedLanes = local_58[0];
+                  resultScaleCode = node[0x49];
                   sourceDef = IRInst__getOperandSource(inst1,1);
-                  iVar7 = -1;
+                  secondCompInst2 = -1;
                   a0 = (int *)((int (*)())IRInst__createWithConstantOperands)(2,local_58[0],sourceDef,pass,*(undefined4 *)(pass + 8),
                                            0.0);
-                  iVar4 = local_e0;
+                  mergedLanesCopy = mergedLanes;
                   sourceDef = IRInst__getOperandSource(inst1,2);
-                  iVar17 = -1;
-                  piVar9 = (int *)((int (*)())IRInst__createWithConstantOperands)(2,iVar4,sourceDef,pass,*(undefined4 *)(pass + 8),
+                  secondCompInst1 = -1;
+                  newSrcB = (int *)((int (*)())IRInst__createWithConstantOperands)(2,mergedLanesCopy,sourceDef,pass,*(undefined4 *)(pass + 8),
                                                0.0);
-                  iVar4 = local_e0;
+                  mergedLanesCopy = mergedLanes;
                   sourceDef = IRInst__getOperandSource(inst2,1);
-                  uVar21 = *(undefined4 *)(pass + 8);
-                  iVar18 = -1;
-                  piVar10 = (int *)((int (*)())IRInst__createWithConstantOperands)(2,iVar4,sourceDef,pass,uVar21,0.0);
+                  compiler = *(undefined4 *)(pass + 8);
+                  thirdCompInst1 = -1;
+                  newSrcC = (int *)((int (*)())IRInst__createWithConstantOperands)(2,mergedLanesCopy,sourceDef,pass,compiler,0.0);
                   operandRecord = IRInst__getOperandRecord(inst1,1);
                   operandSelectC = *(undefined4 *)(operandRecord + 0x10);
                   operandRecord = IRInst__getOperandRecord(inst1,2);
@@ -7802,184 +7807,184 @@ int FUN_001541f0(node, inst, pass)
                   operandSelect = *(undefined4 *)(operandRecord + 0x10);
                   local_c8[0] = 0x1010101;
                   loopIndexC = 0;
-                  local_d0 = 0x1010101;
-                  iVar24 = 4;
-                  local_cc = 0x1010101;
-                  iVar4 = -1;
-                  iVar6 = -1;
-                  bVar1 = bVar3;
+                  newSrcASelect = 0x1010101;
+                  countdown2 = 4;
+                  newSrcBSelect = 0x1010101;
+                  firstCompInst1 = -1;
+                  firstCompInst2 = -1;
+                  noSecondCompInst1 = noSecondCompInst2;
                   do {
-                    iVar14 = iVar4;
-                    iVar16 = iVar6;
-                    if (*(char *)((int)&local_e8 + loopIndexC) == '\0') {
-                      iVar16 = loopIndexC;
-                      if (-1 < iVar6) {
-                        if (bVar3) {
-                          bVar3 = loopIndexC < 0;
-                          iVar16 = iVar6;
-                          iVar7 = loopIndexC;
+                    firstCompInst1Copy = firstCompInst1;
+                    firstCompInst2Copy = firstCompInst2;
+                    if (*(char *)((int)&destSelectNode + loopIndexC) == '\0') {
+                      firstCompInst2Copy = loopIndexC;
+                      if (-1 < firstCompInst2) {
+                        if (noSecondCompInst2) {
+                          noSecondCompInst2 = loopIndexC < 0;
+                          firstCompInst2Copy = firstCompInst2;
+                          secondCompInst2 = loopIndexC;
                         }
                         else {
-                          iVar16 = iVar6;
-                          if (iVar8 < 0) {
-                            iVar8 = loopIndexC;
+                          firstCompInst2Copy = firstCompInst2;
+                          if (thirdCompInst2 < 0) {
+                            thirdCompInst2 = loopIndexC;
                           }
                         }
                       }
                     }
-                    else if ((*(char *)((int)&local_e4 + loopIndexC) == '\0') &&
-                            (iVar14 = loopIndexC, -1 < iVar4)) {
-                      if (bVar1) {
-                        bVar1 = loopIndexC < 0;
-                        bVar2 = 0 < loopIndexC;
-                        iVar14 = iVar4;
-                        iVar17 = loopIndexC;
+                    else if ((*(char *)((int)&destSelectInst + loopIndexC) == '\0') &&
+                            (firstCompInst1Copy = loopIndexC, -1 < firstCompInst1)) {
+                      if (noSecondCompInst1) {
+                        noSecondCompInst1 = loopIndexC < 0;
+                        hasSecondCompInst1 = 0 < loopIndexC;
+                        firstCompInst1Copy = firstCompInst1;
+                        secondCompInst1 = loopIndexC;
                       }
                       else {
-                        iVar14 = iVar4;
-                        if (iVar18 < 0) {
-                          iVar18 = loopIndexC;
+                        firstCompInst1Copy = firstCompInst1;
+                        if (thirdCompInst1 < 0) {
+                          thirdCompInst1 = loopIndexC;
                         }
                       }
                     }
                     loopIndexC = loopIndexC + 1;
-                    iVar24 = iVar24 + -1;
-                    iVar4 = iVar14;
-                    iVar6 = iVar16;
-                  } while (iVar24 != 0);
-                  uVar22 = (uint)*(byte *)((int)&operandSelectB + iVar14);
-                  uVar12 = (uint)*(byte *)((int)&operandSelectC + iVar14);
-                  *(undefined1 *)((int)&local_cc + uVar22) = 0;
-                  *(undefined1 *)((int)&local_d0 + uVar12) = 0;
-                  (**(code **)(*a0 + 0x88))(a0,1,uVar12,uVar12,uVar21,in_r8,(int)&local_e8 + uVar22)
+                    countdown2 = countdown2 + -1;
+                    firstCompInst1 = firstCompInst1Copy;
+                    firstCompInst2 = firstCompInst2Copy;
+                  } while (countdown2 != 0);
+                  remapComponentB = (uint)*(byte *)((int)&operandSelectB + firstCompInst1Copy);
+                  remapComponentA = (uint)*(byte *)((int)&operandSelectC + firstCompInst1Copy);
+                  *(undefined1 *)((int)&newSrcBSelect + remapComponentB) = 0;
+                  *(undefined1 *)((int)&newSrcASelect + remapComponentA) = 0;
+                  (**(code **)(*a0 + 0x88))(a0,1,remapComponentA,remapComponentA,compiler,staleArg5,(int)&destSelectNode + remapComponentB)
                   ;
-                  (**(code **)(*piVar9 + 0x88))(piVar9,1,uVar22,uVar22);
-                  if (bVar2) {
-                    uVar22 = (uint)*(byte *)((int)&operandSelectB + iVar17);
-                    uVar12 = (uint)*(byte *)((int)&operandSelectC + iVar17);
-                    *(undefined1 *)((int)&local_cc + uVar22) = 0;
-                    *(undefined1 *)((int)&local_d0 + uVar12) = 0;
+                  (**(code **)(*newSrcB + 0x88))(newSrcB,1,remapComponentB,remapComponentB);
+                  if (hasSecondCompInst1) {
+                    remapComponentB = (uint)*(byte *)((int)&operandSelectB + secondCompInst1);
+                    remapComponentA = (uint)*(byte *)((int)&operandSelectC + secondCompInst1);
+                    *(undefined1 *)((int)&newSrcBSelect + remapComponentB) = 0;
+                    *(undefined1 *)((int)&newSrcASelect + remapComponentA) = 0;
                     (**(code **)(*a0 + 0x88))
-                              (a0,1,uVar12,uVar12,uVar21,in_r8,(int)&local_e8 + uVar22);
-                    (**(code **)(*piVar9 + 0x88))(piVar9,1,uVar22,uVar22);
-                    if (0 < iVar18) {
-                      uVar22 = (uint)*(byte *)((int)&operandSelectB + iVar18);
-                      uVar12 = (uint)*(byte *)((int)&operandSelectC + iVar18);
-                      *(undefined1 *)((int)&local_cc + uVar22) = 0;
-                      *(undefined1 *)((int)&local_d0 + uVar12) = 0;
-                      (**(code **)(*a0 + 0x88))(a0,1,uVar12,uVar12,uVar21,in_r8,*a0);
-                      (**(code **)(*piVar9 + 0x88))(piVar9,1,uVar22,uVar22);
+                              (a0,1,remapComponentA,remapComponentA,compiler,staleArg5,(int)&destSelectNode + remapComponentB);
+                    (**(code **)(*newSrcB + 0x88))(newSrcB,1,remapComponentB,remapComponentB);
+                    if (0 < thirdCompInst1) {
+                      remapComponentB = (uint)*(byte *)((int)&operandSelectB + thirdCompInst1);
+                      remapComponentA = (uint)*(byte *)((int)&operandSelectC + thirdCompInst1);
+                      *(undefined1 *)((int)&newSrcBSelect + remapComponentB) = 0;
+                      *(undefined1 *)((int)&newSrcASelect + remapComponentA) = 0;
+                      (**(code **)(*a0 + 0x88))(a0,1,remapComponentA,remapComponentA,compiler,staleArg5,*a0);
+                      (**(code **)(*newSrcB + 0x88))(newSrcB,1,remapComponentB,remapComponentB);
                     }
                   }
-                  uVar12 = (uint)*(byte *)((int)&operandSelect + iVar16);
-                  *(undefined1 *)((int)local_c8 + uVar12) = 0;
-                  (**(code **)(*piVar10 + 0x88))(piVar10,1,uVar12,uVar12);
-                  if (!bVar3) {
-                    uVar12 = (uint)*(byte *)((int)&operandSelect + iVar7);
-                    *(undefined1 *)((int)local_c8 + uVar12) = 0;
-                    (**(code **)(*piVar10 + 0x88))(piVar10,1,uVar12,uVar12);
-                    if (-1 < iVar8) {
-                      uVar12 = (uint)*(byte *)((int)&operandSelect + iVar8);
-                      *(undefined1 *)((int)local_c8 + uVar12) = 0;
-                      (**(code **)(*piVar10 + 0x88))(piVar10,1,uVar12,uVar12);
+                  remapComponentA = (uint)*(byte *)((int)&operandSelect + firstCompInst2Copy);
+                  *(undefined1 *)((int)local_c8 + remapComponentA) = 0;
+                  (**(code **)(*newSrcC + 0x88))(newSrcC,1,remapComponentA,remapComponentA);
+                  if (!noSecondCompInst2) {
+                    remapComponentA = (uint)*(byte *)((int)&operandSelect + secondCompInst2);
+                    *(undefined1 *)((int)local_c8 + remapComponentA) = 0;
+                    (**(code **)(*newSrcC + 0x88))(newSrcC,1,remapComponentA,remapComponentA);
+                    if (-1 < thirdCompInst2) {
+                      remapComponentA = (uint)*(byte *)((int)&operandSelect + thirdCompInst2);
+                      *(undefined1 *)((int)local_c8 + remapComponentA) = 0;
+                      (**(code **)(*newSrcC + 0x88))(newSrcC,1,remapComponentA,remapComponentA);
                     }
                   }
-                  uVar12 = 0xffffffff;
-                  uVar22 = 0xffffffff;
-                  uVar19 = 0xffffffff;
+                  remapComponentA = 0xffffffff;
+                  remapComponentB = 0xffffffff;
+                  remapComponentC = 0xffffffff;
                   loopIndexD = 0;
                   do {
                     operandRecord = IRInst__getOperandRecord(a0,1);
-                    if ((loopIndexD != *(byte *)(loopIndexD + operandRecord + 0x10)) && ((int)uVar12 < 0)) {
+                    if ((loopIndexD != *(byte *)(loopIndexD + operandRecord + 0x10)) && ((int)remapComponentA < 0)) {
                       (**(code **)(*a0 + 0x88))(a0,2,loopIndexD,loopIndexD);
-                      *(undefined1 *)((int)&local_d0 + loopIndexD) = 0;
-                      uVar12 = loopIndexD;
+                      *(undefined1 *)((int)&newSrcASelect + loopIndexD) = 0;
+                      remapComponentA = loopIndexD;
                     }
-                    operandRecord = IRInst__getOperandRecord(piVar9,1);
-                    if ((loopIndexD != *(byte *)(loopIndexD + operandRecord + 0x10)) && ((int)uVar22 < 0)) {
-                      (**(code **)(*piVar9 + 0x88))(piVar9,2,loopIndexD,loopIndexD);
-                      *(undefined1 *)((int)&local_cc + loopIndexD) = 0;
-                      uVar22 = loopIndexD;
+                    operandRecord = IRInst__getOperandRecord(newSrcB,1);
+                    if ((loopIndexD != *(byte *)(loopIndexD + operandRecord + 0x10)) && ((int)remapComponentB < 0)) {
+                      (**(code **)(*newSrcB + 0x88))(newSrcB,2,loopIndexD,loopIndexD);
+                      *(undefined1 *)((int)&newSrcBSelect + loopIndexD) = 0;
+                      remapComponentB = loopIndexD;
                     }
-                    operandRecord = IRInst__getOperandRecord(piVar10,1);
-                    if ((loopIndexD != *(byte *)(loopIndexD + operandRecord + 0x10)) && ((int)uVar19 < 0)) {
-                      (**(code **)(*piVar10 + 0x88))(piVar10,2,loopIndexD,loopIndexD);
+                    operandRecord = IRInst__getOperandRecord(newSrcC,1);
+                    if ((loopIndexD != *(byte *)(loopIndexD + operandRecord + 0x10)) && ((int)remapComponentC < 0)) {
+                      (**(code **)(*newSrcC + 0x88))(newSrcC,2,loopIndexD,loopIndexD);
                       *(undefined1 *)((int)local_c8 + loopIndexD) = 0;
-                      uVar19 = loopIndexD;
+                      remapComponentC = loopIndexD;
                     }
                     moreComponents = loopIndexD != 3;
                     loopIndexD = loopIndexD + 1;
                   } while (moreComponents);
-                  iVar4 = 0;
-                  a0[0x27] = local_d0;
-                  piVar9[0x27] = local_cc;
-                  piVar10[0x27] = local_c8[0];
-                  uVar23 = inst[5];
-                  if ((uVar23 & 0x200) != 0) {
-                    iVar4 = IRInst__getOperandSource(inst,inst[0x21]);
-                    uVar23 = inst[5];
+                  lastOperandSource = 0;
+                  a0[0x27] = newSrcASelect;
+                  newSrcB[0x27] = newSrcBSelect;
+                  newSrcC[0x27] = local_c8[0];
+                  instFlags = inst[5];
+                  if ((instFlags & 0x200) != 0) {
+                    lastOperandSource = IRInst__getOperandSource(inst,inst[0x21]);
+                    instFlags = inst[5];
                   }
                   local_c8[4] = 0;
                   local_c8[5] = 0;
-                  local_a4 = 0;
-                  if ((uVar23 & 0x200) != 0) {
+                  lastOperandTail = 0;
+                  if ((instFlags & 0x200) != 0) {
                     IRInst__readLastOperand(inst,local_c8 + 4);
                   }
-                  local_a0 = 0;
-                  local_9c = 0;
-                  local_8c = 0;
-                  local_88 = 0;
-                  local_84 = 0;
-                  local_74 = 0;
-                  local_70 = 0;
-                  local_6c = 0;
-                  local_5c = 0;
+                  operandCopyA = 0;
+                  operandCopyAWord1 = 0;
+                  operandCopyAWord5 = 0;
+                  operandCopyB = 0;
+                  operandCopyBWord1 = 0;
+                  operandCopyBWord5 = 0;
+                  operandCopyC = 0;
+                  operandCopyCWord1 = 0;
+                  operandCopyCWord5 = 0;
                   afterInst = node[1];
                   operandRecord2 = IRInst__getOperandRecord(inst2,1);
-                  IROperand__copyFrom(&local_70,operandRecord2);
+                  IROperand__copyFrom(&operandCopyC,operandRecord2);
                   operandRecord2 = IRInst__getOperandRecord(inst1,1);
-                  IROperand__copyFrom(&local_a0,operandRecord2);
+                  IROperand__copyFrom(&operandCopyA,operandRecord2);
                   operandRecord2 = IRInst__getOperandRecord(inst1,2);
-                  IROperand__copyFrom(&local_88,operandRecord2);
+                  IROperand__copyFrom(&operandCopyB,operandRecord2);
                   local_c8[3] = 0;
                   local_c8[1] = 0;
                   local_c8[2] = 0;
                   IRInst__saveCounters(node,local_c8 + 1,0xffffffff);
                   DList__unlink(node);
                   IRInst__reinitAsTrinary(node,0x14,*(undefined4 *)(pass + 8));
-                  if (iVar4 != 0) {
+                  if (lastOperandSource != 0) {
                     IRInst__setLastOperandFromRecord(node,local_c8 + 4,0,*(undefined4 *)(pass + 8));
-                    if (*(int *)(pass + 0x478) < *(int *)(iVar4 + 0x160)) {
-                      *(int *)(iVar4 + 0x160) = *(int *)(iVar4 + 0x160) + 1;
+                    if (*(int *)(pass + 0x478) < *(int *)(lastOperandSource + 0x160)) {
+                      *(int *)(lastOperandSource + 0x160) = *(int *)(lastOperandSource + 0x160) + 1;
                     }
                     else {
-                      *(int *)(iVar4 + 0x160) = *(int *)(pass + 0x478) + 1;
+                      *(int *)(lastOperandSource + 0x160) = *(int *)(pass + 0x478) + 1;
                     }
                   }
                   IRInst__restoreCounters(node,local_c8 + 1);
                   saturate = inst[0x48];
-                  node[0x49] = iVar15;
+                  node[0x49] = resultScaleCode;
                   node[0x48] = saturate;
                   operandRecord2 = IRInst__getOperandRecord(node,3);
-                  IROperand__copyFrom(operandRecord2,&local_70);
+                  IROperand__copyFrom(operandRecord2,&operandCopyC);
                   loopIndex = 0;
                   operandRecord2 = IRInst__getOperandRecord(node,1);
-                  IROperand__copyFrom(operandRecord2,&local_a0);
+                  IROperand__copyFrom(operandRecord2,&operandCopyA);
                   operandRecord2 = IRInst__getOperandRecord(node,2);
-                  IROperand__copyFrom(operandRecord2,&local_88);
+                  IROperand__copyFrom(operandRecord2,&operandCopyB);
                   do {
-                    if (*(char *)((int)&local_e0 + loopIndex) == '\0') {
+                    if (*(char *)((int)&mergedLanes + loopIndex) == '\0') {
                       operandRecord3 = IRInst__getOperandRecord(node,1);
                       if (*(char *)(loopIndex + operandRecord3 + 0x10) == '\x04') {
-                        (**(code **)(*node + 0x88))(node,1,loopIndex,uVar12);
+                        (**(code **)(*node + 0x88))(node,1,loopIndex,remapComponentA);
                       }
                       operandRecord3 = IRInst__getOperandRecord(node,2);
                       if (*(char *)(loopIndex + operandRecord3 + 0x10) == '\x04') {
-                        (**(code **)(*node + 0x88))(node,2,loopIndex,uVar22);
+                        (**(code **)(*node + 0x88))(node,2,loopIndex,remapComponentB);
                       }
                       operandRecord3 = IRInst__getOperandRecord(node,3);
                       if (*(char *)(loopIndex + operandRecord3 + 0x10) == '\x04') {
-                        (**(code **)(*node + 0x88))(node,3,loopIndex,uVar19);
+                        (**(code **)(*node + 0x88))(node,3,loopIndex,remapComponentC);
                       }
                     }
                     moreComponents = loopIndex != 3;
@@ -7989,12 +7994,12 @@ int FUN_001541f0(node, inst, pass)
                   node[0x25] = node[0x53];
                   Block__insertInstAfter(*(undefined4 *)(afterInst + 0x158),afterInst,node);
                   IRInst__setOperandSource(node,1,a0,0,*(undefined4 *)(pass + 8));
-                  IRInst__setOperandSource(node,2,piVar9,0,*(undefined4 *)(pass + 8));
-                  IRInst__setOperandSource(node,3,piVar10,0,*(undefined4 *)(pass + 8));
+                  IRInst__setOperandSource(node,2,newSrcB,0,*(undefined4 *)(pass + 8));
+                  IRInst__setOperandSource(node,3,newSrcC,0,*(undefined4 *)(pass + 8));
                   Block__insertInstBefore(node[0x56],node,a0);
-                  Block__insertInstBefore(node[0x56],node,piVar9);
-                  Block__insertInstBefore(node[0x56],node,piVar10);
-                  node[0x27] = local_e0;
+                  Block__insertInstBefore(node[0x56],node,newSrcB);
+                  Block__insertInstBefore(node[0x56],node,newSrcC);
+                  node[0x27] = mergedLanes;
                   sourceDef2 = IRInst__getOperandSource(inst,1);
                   if (*(int *)(pass + 0x478) < *(int *)(sourceDef2 + 0x160)) {
                     *(int *)(sourceDef2 + 0x160) = *(int *)(sourceDef2 + 0x160) + 1;
@@ -8017,17 +8022,17 @@ int FUN_001541f0(node, inst, pass)
                     sourceDef = IRInst__getOperandSource(a0,1);
                     FUN_0010c670(sourceDef,a0,*(undefined4 *)(pass + 8));
                   }
-                  operandVReg = (int *)IRInst__getOperandSource(piVar9,1);
+                  operandVReg = (int *)IRInst__getOperandSource(newSrcB,1);
                   vcall60Result = (**(code **)(*operandVReg + 0x60))();
                   if (vcall60Result != 0) {
-                    sourceDef = IRInst__getOperandSource(piVar9,1);
-                    FUN_0010c670(sourceDef,piVar9,*(undefined4 *)(pass + 8));
+                    sourceDef = IRInst__getOperandSource(newSrcB,1);
+                    FUN_0010c670(sourceDef,newSrcB,*(undefined4 *)(pass + 8));
                   }
-                  operandVReg = (int *)IRInst__getOperandSource(piVar10,1);
+                  operandVReg = (int *)IRInst__getOperandSource(newSrcC,1);
                   vcall60Result = (**(code **)(*operandVReg + 0x60))();
                   if (vcall60Result != 0) {
-                    sourceDef = IRInst__getOperandSource(piVar10,1);
-                    FUN_0010c670(sourceDef,piVar10,*(undefined4 *)(pass + 8));
+                    sourceDef = IRInst__getOperandSource(newSrcC,1);
+                    FUN_0010c670(sourceDef,newSrcC,*(undefined4 *)(pass + 8));
                   }
                   IRInst__dropCounterAndDeleteIfUnused(inst,*(undefined4 *)(pass + 8));
                   return 1;
