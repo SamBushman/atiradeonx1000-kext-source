@@ -1625,37 +1625,48 @@ LAB_00133bd0:
 #undef vec2Arena
 
 /* FUN_00133fe4 @ 0x133fe4 (140 bytes) */
-int FUN_00133fe4(param_1)
-  int param_1;
+int FUN_00133fe4(allocator)
+  int allocator;
 {
+  int *foundPendingRef;
+  undefined4 reloadModeA;
+  undefined4 reloadModeB;
+  undefined4 spillAddress;
+  undefined4 spillSlotB;
+  int *nextInstLink;
+  int reloadSource;
+  int pendingInst;
+  int pendingCount;
+  int instQuery78;
+  int spillTempCount;
   undefined4 vectorData;
   undefined4 arena;
   int operandRecord;
   int *operandVReg;
   int loopIndex;
-  undefined4 uVar1;
+  undefined4 spillState;
   undefined4 *allocation;
-  int iVar3;
-  undefined4 *puVar4;
-  undefined4 uVar5;
-  undefined4 uVar6;
-  int iVar7;
+  int regKindFlag;
+  undefined4 *pendingSlotRef;
+  undefined4 spillLocationA;
+  undefined4 spillModeA;
+  int nextBlock;
   uint loopIndex2;
-  int *piVar9;
-  int iVar10;
+  int *nextInstB;
+  int program;
   uint *puVar11;
-  int iVar12;
-  undefined4 uVar13;
-  uint uVar14;
-  int iVar15;
-  int *piVar16;
-  undefined4 uVar17;
-  int *piVar18;
-  uint uVar19;
+  int block;
+  undefined4 operandSwizzle;
+  uint pendingCountB;
+  int sourceRegister;
+  int *pendingElemRef;
+  undefined4 insertedReload;
+  int *inst;
+  uint searchRemaining;
   
-  iVar10 = *(int *)(*(int *)(param_1 + 0x2c) + 0x6c4);
-  uVar1 = ((int (*)())FUN_00131c10)(iVar10);
-  arena = *(undefined4 *)(*(int *)(param_1 + 0x2c) + 0x378);
+  program = *(int *)(*(int *)(allocator + 0x2c) + 0x6c4);
+  spillState = ((int (*)())FUN_00131c10)(program);
+  arena = *(undefined4 *)(*(int *)(allocator + 0x2c) + 0x378);
   allocation = (undefined4 *)Arena__alloc(arena,0x14);
   puVar11 = allocation + 1;
   *allocation = arena;
@@ -1664,118 +1675,118 @@ int FUN_00133fe4(param_1)
   allocation[4] = arena;
   vectorData = Arena__alloc(arena,8);
   allocation[3] = vectorData;
-  uVar17 = 0;
-  iVar12 = *(int *)(iVar10 + 900);
-  iVar7 = *(int *)(*(int *)(iVar10 + 900) + 8);
+  insertedReload = 0;
+  block = *(int *)(program + 900);
+  nextBlock = *(int *)(*(int *)(program + 900) + 8);
   do {
-    if (iVar7 == 0) {
-      iVar12 = allocation[2];
-      if (0 < iVar12) {
-        uVar17 = 1;
+    if (nextBlock == 0) {
+      pendingCount = allocation[2];
+      if (0 < pendingCount) {
+        insertedReload = 1;
       }
-      if (iVar12 == 0) {
-        iVar7 = *(int *)(iVar10 + 0x454);
+      if (pendingCount == 0) {
+        spillTempCount = *(int *)(program + 0x454);
       }
       else {
         do {
-          piVar16 = (int *)0x0;
-          if (iVar12 - 1U < (uint)allocation[2]) {
-            piVar16 = (int *)((iVar12 - 1U) * 4 + allocation[3]);
+          pendingElemRef = (int *)0x0;
+          if (pendingCount - 1U < (uint)allocation[2]) {
+            pendingElemRef = (int *)((pendingCount - 1U) * 4 + allocation[3]);
           }
-          iVar12 = *piVar16;
+          pendingInst = *pendingElemRef;
           Vector__removeAt(puVar11,allocation[2] - 1);
-          uVar5 = FUN_001308e0(iVar12);
-          FUN_00130abc(uVar5,param_1,*(undefined4 *)(param_1 + 0x2c));
-          uVar5 = ((int (*)())FUN_001318a4)(param_1,*(undefined4 *)(iVar12 + 0x94),uVar1);
-          uVar6 = thunk_FUN_001307f8(iVar12);
-          FUN_001312f4(iVar12,uVar1,uVar5,uVar6,*(undefined4 *)(param_1 + 0x2c));
-          iVar7 = *(int *)(iVar10 + 0x454) + 1;
-          *(int *)(iVar10 + 0x454) = iVar7;
-          iVar12 = allocation[2];
-        } while (iVar12 != 0);
+          spillLocationA = FUN_001308e0(pendingInst);
+          FUN_00130abc(spillLocationA,allocator,*(undefined4 *)(allocator + 0x2c));
+          spillSlotB = ((int (*)())FUN_001318a4)(allocator,*(undefined4 *)(pendingInst + 0x94),spillState);
+          spillModeA = thunk_FUN_001307f8(pendingInst);
+          FUN_001312f4(pendingInst,spillState,spillSlotB,spillModeA,*(undefined4 *)(allocator + 0x2c));
+          spillTempCount = *(int *)(program + 0x454) + 1;
+          *(int *)(program + 0x454) = spillTempCount;
+          pendingCount = allocation[2];
+        } while (pendingCount != 0);
       }
-      ((int (*)())FUN_00131c74)(iVar10,uVar1,iVar7 << 2);
-      return uVar17;
+      ((int (*)())FUN_00131c74)(program,spillState,spillTempCount << 2);
+      return insertedReload;
     }
-    piVar16 = (int *)(*(int **)(iVar12 + 0x98))[2];
-    piVar18 = *(int **)(iVar12 + 0x98);
-    if (piVar16 != (int *)0x0) {
+    nextInstLink = (int *)(*(int **)(block + 0x98))[2];
+    inst = *(int **)(block + 0x98);
+    if (nextInstLink != (int *)0x0) {
       do {
-        piVar9 = piVar16;
-        if (((piVar18[5] & 1U) != 0) && (*(int *)(piVar18[0x22] + 8) != 0x8e)) {
-          iVar7 = (**(code **)(*piVar18 + 0x78))(piVar18);
-          if ((iVar7 == 0) && (0 < piVar18[0x21])) {
+        nextInstB = nextInstLink;
+        if (((inst[5] & 1U) != 0) && (*(int *)(inst[0x22] + 8) != 0x8e)) {
+          instQuery78 = (**(code **)(*inst + 0x78))(inst);
+          if ((instQuery78 == 0) && (0 < inst[0x21])) {
             loopIndex = 1;
             do {
-              operandVReg = (int *)IRInst__getOperandSource(piVar18,loopIndex);
-              if ((((operandVReg[0x20] != 0) && (iVar3 = RegKind__flagBit0(operandVReg[0x26]), iVar3 != 0)) &&
+              operandVReg = (int *)IRInst__getOperandSource(inst,loopIndex);
+              if ((((operandVReg[0x20] != 0) && (regKindFlag = RegKind__flagBit0(operandVReg[0x26]), regKindFlag != 0)) &&
                   ((operandVReg[5] & 2U) == 0)) &&
-                 (iVar3 = (**(code **)(*operandVReg + 0x50))(operandVReg), iVar3 == 0)) {
-                iVar15 = operandVReg[0x25];
-                iVar3 = FUN_001309bc(param_1,iVar15);
-                if (iVar3 != 0) {
-                  iVar3 = *piVar18;
+                 (regKindFlag = (**(code **)(*operandVReg + 0x50))(operandVReg), regKindFlag == 0)) {
+                sourceRegister = operandVReg[0x25];
+                regKindFlag = FUN_001309bc(allocator,sourceRegister);
+                if (regKindFlag != 0) {
+                  regKindFlag = *inst;
                   operandVReg[5] = operandVReg[5] | 0x8000000;
-                  iVar3 = (**(code **)(iVar3 + 0x14))(piVar18);
-                  if ((loopIndex <= iVar3) && (iVar3 = FUN_00131008(1,piVar18,loopIndex), iVar3 != 0)) {
-                    FUN_00130abc(piVar18,param_1,*(undefined4 *)(param_1 + 0x2c));
+                  regKindFlag = (**(code **)(regKindFlag + 0x14))(inst);
+                  if ((loopIndex <= regKindFlag) && (regKindFlag = FUN_00131008(1,inst,loopIndex), regKindFlag != 0)) {
+                    FUN_00130abc(inst,allocator,*(undefined4 *)(allocator + 0x2c));
                     if (((operandVReg[5] & 0x20000000U) == 0) || ((operandVReg[6] & 1U) != 0)) {
-                      iVar3 = ((int (*)())FUN_001318a4)(param_1,iVar15,uVar1);
-                      iVar15 = FUN_00130a08(piVar18,*(undefined4 *)(iVar3 + 0x13c));
-                      if (iVar15 == 0) {
-                        uVar5 = FUN_00130424(param_1);
-                        operandRecord = IRInst__getOperandRecord(piVar18,loopIndex);
-                        uVar13 = *(undefined4 *)(operandRecord + 0x10);
-                        uVar6 = FUN_00130904(piVar18);
-                        iVar15 = FUN_001311cc(uVar5,uVar13,uVar1,iVar3,uVar6,
-                                              *(undefined4 *)(param_1 + 0x2c));
+                      regKindFlag = ((int (*)())FUN_001318a4)(allocator,sourceRegister,spillState);
+                      reloadSource = FUN_00130a08(inst,*(undefined4 *)(regKindFlag + 0x13c));
+                      if (reloadSource == 0) {
+                        spillAddress = FUN_00130424(allocator);
+                        operandRecord = IRInst__getOperandRecord(inst,loopIndex);
+                        operandSwizzle = *(undefined4 *)(operandRecord + 0x10);
+                        reloadModeA = FUN_00130904(inst);
+                        reloadSource = FUN_001311cc(spillAddress,operandSwizzle,spillState,regKindFlag,reloadModeA,
+                                              *(undefined4 *)(allocator + 0x2c));
                       }
-                      IRInst__setOperandSource(piVar18,loopIndex,iVar15,0,*(undefined4 *)(param_1 + 0x2c));
-                      uVar14 = allocation[2];
-                      if (0 < (int)uVar14) {
+                      IRInst__setOperandSource(inst,loopIndex,reloadSource,0,*(undefined4 *)(allocator + 0x2c));
+                      pendingCountB = allocation[2];
+                      if (0 < (int)pendingCountB) {
                         loopIndex2 = 0;
-                        uVar19 = uVar14;
+                        searchRemaining = pendingCountB;
                         do {
-                          piVar9 = (int *)0x0;
-                          if (loopIndex2 < uVar14) {
-                            piVar9 = (int *)(loopIndex2 * 4 + allocation[3]);
+                          foundPendingRef = (int *)0x0;
+                          if (loopIndex2 < pendingCountB) {
+                            foundPendingRef = (int *)(loopIndex2 * 4 + allocation[3]);
                           }
-                          if (operandVReg == (int *)*piVar9) goto code_r0x001342f8;
+                          if (operandVReg == (int *)*foundPendingRef) goto code_r0x001342f8;
                           loopIndex2 = loopIndex2 + 1;
-                          uVar19 = uVar19 - 1;
-                        } while (uVar19 != 0);
+                          searchRemaining = searchRemaining - 1;
+                        } while (searchRemaining != 0);
                       }
-                      if (uVar14 < *puVar11) {
-                        _memset((void *)(uVar14 * 4 + allocation[3]),0,4);
-                        allocation[2] = uVar14 + 1;
-                        puVar4 = (undefined4 *)(uVar14 * 4 + allocation[3]);
+                      if (pendingCountB < *puVar11) {
+                        _memset((void *)(pendingCountB * 4 + allocation[3]),0,4);
+                        allocation[2] = pendingCountB + 1;
+                        pendingSlotRef = (undefined4 *)(pendingCountB * 4 + allocation[3]);
                       }
                       else {
-                        puVar4 = (undefined4 *)Vector__elementRefGrow(puVar11,uVar14);
+                        pendingSlotRef = (undefined4 *)Vector__elementRefGrow(puVar11,pendingCountB);
                       }
-                      *puVar4 = operandVReg;
+                      *pendingSlotRef = operandVReg;
                     }
                     else {
-                      uVar17 = 1;
-                      uVar5 = FUN_00130904(piVar18);
-                      FUN_00130da0(param_1,piVar18,loopIndex,uVar5,*(undefined4 *)(param_1 + 0x2c));
+                      insertedReload = 1;
+                      reloadModeB = FUN_00130904(inst);
+                      FUN_00130da0(allocator,inst,loopIndex,reloadModeB,*(undefined4 *)(allocator + 0x2c));
                     }
                   }
                 }
               }
 code_r0x001342f8:
               loopIndex = loopIndex + 1;
-            } while (loopIndex <= piVar18[0x21]);
+            } while (loopIndex <= inst[0x21]);
           }
-          piVar9 = (int *)piVar18[2];
+          nextInstB = (int *)inst[2];
         }
-        piVar16 = (int *)piVar9[2];
-        piVar18 = piVar9;
-      } while ((int *)piVar9[2] != (int *)0x0);
-      iVar7 = *(int *)(iVar12 + 8);
+        nextInstLink = (int *)nextInstB[2];
+        inst = nextInstB;
+      } while ((int *)nextInstB[2] != (int *)0x0);
+      nextBlock = *(int *)(block + 8);
     }
-    iVar12 = iVar7;
-    iVar7 = *(int *)(iVar7 + 8);
+    block = nextBlock;
+    nextBlock = *(int *)(nextBlock + 8);
   } while( true );
 }
 
@@ -1880,110 +1891,129 @@ LAB_001345fc:
 int FUN_00134658(pass)
   int pass;
 {
+  uint copyCountB;
+  int *usageBitsetBData;
+  int *usageBitsetAData;
+  int *backendB;
+  int spilledBitset;
+  int usageBitsetACursor;
+  int allocatorObj;
+  int restoreWordCountB;
+  int restoreWordCountA;
+  int compilerB;
+  int spilledBitCount;
+  int bitsetByteSize;
+  uint *savedBitsetARestoreCursor;
+  uint *savedBitsetBCursor;
+  uint *savedBitsetB;
+  uint *restoreSrcWordB;
+  uint *restoreSrcWordA;
+  int allocationRound;
+  int usageBitsetBSrc;
   int pass_color_graphResult;
   uint loopIndex;
-  uint *puVar1;
-  uint *puVar2;
-  uint *puVar3;
-  int iVar4;
-  int iVar5;
+  uint *usageBitsetBSrcWord;
+  uint *savedBitsetACursor;
+  uint *usageBitsetASrcWord;
+  int physicalRegCountA;
+  int physicalRegCountB;
   undefined4 *allocation;
   int loopIndex2;
-  uint *puVar8;
-  int iVar9;
-  int *piVar10;
+  uint *savedBitsetA;
+  int compiler;
+  int *backend;
   undefined4 arena;
-  uint uVar12;
-  uint uVar13;
-  uint uVar14;
+  uint clearCountA;
+  uint copyCountA;
+  uint bitsetWordCount;
   
   FUN_001314b8(pass);
-  iVar9 = *(int *)(pass + 8);
-  if (*(int *)(iVar9 + 0x3c4) == -1) {
+  compiler = *(int *)(pass + 8);
+  if (*(int *)(compiler + 0x3c4) == -1) {
     return;
   }
   *(undefined4 *)(pass + 0x454) = 0;
   *(undefined4 *)(pass + 0x438) = 0;
   *(uint *)(pass + 0x30) = *(uint *)(pass + 0x30) | 0x400;
-  piVar10 = *(int **)(iVar9 + 0x30c);
-  iVar4 = (**(code **)(*piVar10 + 0x138))(piVar10,iVar9);
-  iVar5 = (**(code **)(*piVar10 + 0x140))(piVar10,iVar9);
-  iVar9 = (**(code **)(*piVar10 + 0x13c))(piVar10,iVar9);
-  iVar9 = iVar4 + iVar5 + iVar9;
+  backend = *(int **)(compiler + 0x30c);
+  physicalRegCountA = (**(code **)(*backend + 0x138))(backend,compiler);
+  physicalRegCountB = (**(code **)(*backend + 0x140))(backend,compiler);
+  compiler = (**(code **)(*backend + 0x13c))(backend,compiler);
+  compiler = physicalRegCountA + physicalRegCountB + compiler;
   arena = *(undefined4 *)(*(int *)(pass + 8) + 0x374);
-  uVar14 = iVar9 + 0x1fU >> 5;
-  iVar4 = uVar14 * 4 + 0xc;
-  allocation = (undefined4 *)Arena__alloc(arena,iVar4);
-  puVar8 = allocation + 1;
+  bitsetWordCount = compiler + 0x1fU >> 5;
+  bitsetByteSize = bitsetWordCount * 4 + 0xc;
+  allocation = (undefined4 *)Arena__alloc(arena,bitsetByteSize);
+  savedBitsetA = allocation + 1;
   *allocation = arena;
-  allocation[1] = uVar14;
-  allocation[2] = iVar9;
-  if (uVar14 == 0) {
-    uVar13 = *puVar8;
+  allocation[1] = bitsetWordCount;
+  allocation[2] = compiler;
+  if (bitsetWordCount == 0) {
+    copyCountA = *savedBitsetA;
   }
   else {
-    puVar2 = puVar8;
-    uVar12 = uVar14;
-    if (uVar14 == 0) {
-      uVar12 = 1;
+    savedBitsetACursor = savedBitsetA;
+    clearCountA = bitsetWordCount;
+    if (bitsetWordCount == 0) {
+      clearCountA = 1;
     }
     do {
-      puVar2[2] = 0;
-      puVar2 = puVar2 + 1;
-      uVar12 = uVar12 - 1;
-      uVar13 = uVar14;
-    } while (uVar12 != 0);
+      savedBitsetACursor[2] = 0;
+      savedBitsetACursor = savedBitsetACursor + 1;
+      clearCountA = clearCountA - 1;
+      copyCountA = bitsetWordCount;
+    } while (clearCountA != 0);
   }
-  iVar5 = *(int *)(pass + 0x42c);
-  if (uVar13 != 0) {
-    puVar2 = puVar8;
-    if (uVar13 == 0) {
-      uVar13 = 1;
+  usageBitsetACursor = *(int *)(pass + 0x42c);
+  if (copyCountA != 0) {
+    savedBitsetACursor = savedBitsetA;
+    if (copyCountA == 0) {
+      copyCountA = 1;
     }
     do {
-      puVar3 = (uint *)(iVar5 + 8);
-      iVar5 = iVar5 + 4;
-      puVar2[2] = *puVar3;
-      puVar2 = puVar2 + 1;
-      uVar13 = uVar13 - 1;
-    } while (uVar13 != 0);
+      usageBitsetASrcWord = (uint *)(usageBitsetACursor + 8);
+      usageBitsetACursor = usageBitsetACursor + 4;
+      savedBitsetACursor[2] = *usageBitsetASrcWord;
+      savedBitsetACursor = savedBitsetACursor + 1;
+      copyCountA = copyCountA - 1;
+    } while (copyCountA != 0);
   }
   arena = *(undefined4 *)(*(int *)(pass + 8) + 0x374);
-  allocation = (undefined4 *)Arena__alloc(arena,iVar4);
-  puVar2 = allocation + 1;
+  allocation = (undefined4 *)Arena__alloc(arena,bitsetByteSize);
+  savedBitsetB = allocation + 1;
   *allocation = arena;
-  allocation[1] = uVar14;
-  allocation[2] = iVar9;
-  if (uVar14 == 0) {
-    uVar14 = *puVar2;
+  allocation[1] = bitsetWordCount;
+  allocation[2] = compiler;
+  if (bitsetWordCount == 0) {
+    bitsetWordCount = *savedBitsetB;
   }
   else {
-    puVar3 = puVar2;
-    uVar13 = uVar14;
-    if (uVar14 == 0) {
-      uVar13 = 1;
+    savedBitsetBCursor = savedBitsetB;
+    copyCountB = bitsetWordCount;
+    if (bitsetWordCount == 0) {
+      copyCountB = 1;
     }
     do {
-      puVar3[2] = 0;
-      puVar3 = puVar3 + 1;
-      uVar13 = uVar13 - 1;
-    } while (uVar13 != 0);
+      savedBitsetBCursor[2] = 0;
+      savedBitsetBCursor = savedBitsetBCursor + 1;
+      copyCountB = copyCountB - 1;
+    } while (copyCountB != 0);
   }
-  iVar9 = *(int *)(pass + 0x430);
-  if (uVar14 != 0) {
-    puVar3 = puVar2;
-    if (uVar14 == 0) {
-      uVar14 = 1;
+  usageBitsetBSrc = *(int *)(pass + 0x430);
+  if (bitsetWordCount != 0) {
+    savedBitsetBCursor = savedBitsetB;
+    if (bitsetWordCount == 0) {
+      bitsetWordCount = 1;
     }
     do {
-      puVar1 = (uint *)(iVar9 + 8);
-      iVar9 = iVar9 + 4;
-      puVar3[2] = *puVar1;
-      puVar3 = puVar3 + 1;
-      uVar14 = uVar14 - 1;
-    } while (uVar14 != 0);
+      usageBitsetBSrcWord = (uint *)(usageBitsetBSrc + 8);
+      usageBitsetBSrc = usageBitsetBSrc + 4;
+      savedBitsetBCursor[2] = *usageBitsetBSrcWord;
+      savedBitsetBCursor = savedBitsetBCursor + 1;
+      bitsetWordCount = bitsetWordCount - 1;
+    } while (bitsetWordCount != 0);
   }
-  iVar9 = 0;
+  allocationRound = 0;
   do {
     arena = *(undefined4 *)(*(int *)(pass + 8) + 0x378);
     allocation = (undefined4 *)Arena__alloc(arena,0x34);
@@ -1992,89 +2022,89 @@ int FUN_00134658(pass)
                  pass,*(undefined4 *)(pass + 8));
     *(undefined4 **)(pass + 0x3c0) = allocation + 1;
     ((int (*)())FUN_00131d08)(pass,*(undefined4 *)(pass + 0x468),*(undefined4 *)(pass + 0x46c),
-                 *(undefined4 *)(pass + 0x464),iVar9);
-    if (iVar9 != 0) {
+                 *(undefined4 *)(pass + 0x464),allocationRound);
+    if (allocationRound != 0) {
       ((int (*)())FUN_00134400)(*(undefined4 *)(pass + 0x3c0));
     }
-    piVar10 = *(int **)(*(int *)(pass + 8) + 0x30c);
-    (**(code **)(*piVar10 + 0x144))(piVar10,*(undefined4 *)(pass + 0x464),pass);
+    backendB = *(int **)(*(int *)(pass + 8) + 0x30c);
+    (**(code **)(*backendB + 0x144))(backendB,*(undefined4 *)(pass + 0x464),pass);
     ((int (*)())FUN_0013323c)(pass,*(undefined4 *)(pass + 0x3c0));
     ((int (*)())FUN_00138080)(pass);
-    if (iVar9 != 0) {
+    if (allocationRound != 0) {
       ((int (*)())FUN_001378e8)(*(undefined4 *)(pass + 0x3c0),*(undefined4 *)(pass + 8));
     }
     pass_color_graphResult = ((int (*)())pass_color_graph)(*(undefined4 *)(pass + 0x3c0));
     if (pass_color_graphResult != 0) {
-      iVar5 = *(int *)(*(int *)(pass + 0x3c0) + 0x24);
-      iVar4 = *(int *)(iVar5 + 4);
-      if (iVar4 == 0) {
+      spilledBitset = *(int *)(*(int *)(pass + 0x3c0) + 0x24);
+      spilledBitCount = *(int *)(spilledBitset + 4);
+      if (spilledBitCount == 0) {
 code_r0x001348ac:
-        iVar4 = *(int *)(pass + 8);
+        compilerB = *(int *)(pass + 8);
       }
       else {
         loopIndex = 0;
         loopIndex2 = 0;
         do {
-          if ((*(uint *)((loopIndex >> 3 & 0x1ffffffc) + iVar5 + 8) >> (loopIndex & 0x1f) & 1) != 0) {
+          if ((*(uint *)((loopIndex >> 3 & 0x1ffffffc) + spilledBitset + 8) >> (loopIndex & 0x1f) & 1) != 0) {
             loopIndex2 = loopIndex2 + 1;
           }
           loopIndex = loopIndex + 1;
-          iVar4 = iVar4 + -1;
-        } while (iVar4 != 0);
+          spilledBitCount = spilledBitCount + -1;
+        } while (spilledBitCount != 0);
         if (loopIndex2 == 0) goto code_r0x001348ac;
-        iVar4 = *(int *)(pass + 8);
-        if (*(int *)(pass + 0x264) < *(int *)(iVar4 + 0x67c)) {
+        compilerB = *(int *)(pass + 8);
+        if (*(int *)(pass + 0x264) < *(int *)(compilerB + 0x67c)) {
           *(int *)(pass + 0x264) = *(int *)(pass + 0x264) + 1;
           ((int (*)())FUN_00133fe4)(*(int *)(pass + 0x3c0));
-          piVar10 = *(int **)(*(int *)(pass + 8) + 0x30c);
-          (**(code **)(*piVar10 + 0x14c))(piVar10,pass);
-          piVar10 = *(int **)(pass + 0x42c);
-          iVar4 = *piVar10;
-          if (iVar4 != 0) {
-            puVar3 = puVar8;
-            if (iVar4 == 0) {
-              iVar4 = 1;
+          backendB = *(int **)(*(int *)(pass + 8) + 0x30c);
+          (**(code **)(*backendB + 0x14c))(backendB,pass);
+          usageBitsetAData = *(int **)(pass + 0x42c);
+          restoreWordCountA = *usageBitsetAData;
+          if (restoreWordCountA != 0) {
+            savedBitsetARestoreCursor = savedBitsetA;
+            if (restoreWordCountA == 0) {
+              restoreWordCountA = 1;
             }
             do {
-              puVar1 = puVar3 + 2;
-              puVar3 = puVar3 + 1;
-              piVar10[2] = *puVar1;
-              piVar10 = piVar10 + 1;
-              iVar4 = iVar4 + -1;
-            } while (iVar4 != 0);
+              restoreSrcWordA = savedBitsetARestoreCursor + 2;
+              savedBitsetARestoreCursor = savedBitsetARestoreCursor + 1;
+              usageBitsetAData[2] = *restoreSrcWordA;
+              usageBitsetAData = usageBitsetAData + 1;
+              restoreWordCountA = restoreWordCountA + -1;
+            } while (restoreWordCountA != 0);
           }
-          piVar10 = *(int **)(pass + 0x430);
-          iVar4 = *piVar10;
-          if (iVar4 != 0) {
-            puVar3 = puVar2;
-            if (iVar4 == 0) {
-              iVar4 = 1;
+          usageBitsetBData = *(int **)(pass + 0x430);
+          restoreWordCountB = *usageBitsetBData;
+          if (restoreWordCountB != 0) {
+            savedBitsetBCursor = savedBitsetB;
+            if (restoreWordCountB == 0) {
+              restoreWordCountB = 1;
             }
             do {
-              puVar1 = puVar3 + 2;
-              puVar3 = puVar3 + 1;
-              piVar10[2] = *puVar1;
-              piVar10 = piVar10 + 1;
-              iVar4 = iVar4 + -1;
-            } while (iVar4 != 0);
+              restoreSrcWordB = savedBitsetBCursor + 2;
+              savedBitsetBCursor = savedBitsetBCursor + 1;
+              usageBitsetBData[2] = *restoreSrcWordB;
+              usageBitsetBData = usageBitsetBData + 1;
+              restoreWordCountB = restoreWordCountB + -1;
+            } while (restoreWordCountB != 0);
           }
           FUN_001314b8(pass);
           goto LAB_00134a58;
         }
       }
-      Compiler__fail(iVar4,4);
+      Compiler__fail(compilerB,4);
     }
 LAB_00134a58:
-    iVar4 = *(int *)(pass + 0x3c0);
-    if (iVar4 != 0) {
-      ((int (*)())FUN_001357d4)(iVar4);
-      Arena__free(*(undefined4 *)(iVar4 + -4),iVar4 + -4);
+    allocatorObj = *(int *)(pass + 0x3c0);
+    if (allocatorObj != 0) {
+      ((int (*)())FUN_001357d4)(allocatorObj);
+      Arena__free(*(undefined4 *)(allocatorObj + -4),allocatorObj + -4);
     }
     if (pass_color_graphResult == 0) {
       *(undefined4 *)(pass + 0x34) = 6;
       return;
     }
-    iVar9 = 1;
+    allocationRound = 1;
   } while( true );
 }
 

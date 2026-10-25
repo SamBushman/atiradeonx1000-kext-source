@@ -1699,26 +1699,43 @@ int Program__foldConstantIfRegion(program, ifHeader, ifFooter, outSurvivingEntry
   int *outSurvivingEntry;
   int *outSurvivingExit;
 {
-  undefined4 *puVar1;
-  int *piVar2;
-  uint uVar3;
-  uint uVar4;
+  int conditionValue;
+  int successorByteOffset;
+  int blockQuery38b;
+  int headerPredecessor;
+  uint successorNumber;
+  uint lastWorkIndex;
+  int footerSuccessor;
+  int workStackByteOffsetB;
+  int firstPredOfSuccessor;
+  int blockQuery38;
+  int *footerSuccPredVector;
+  int *exitSuccVector;
+  int *headerPredSuccVector;
+  int *entrySuccPredVector;
+  uint workStackCountB;
+  undefined4 *workStackSlotRef;
+  undefined4 *predSlotRef;
+  undefined4 *workStackTopRef;
+  int *deadSuccPredVector;
+  uint predecessorIndex;
+  uint predVectorCount;
   int *deadBlockSuccessor;
-  int *piVar5;
-  int iVar6;
+  int *staleOutEntry;
+  int workStackByteOffset;
   int survivingEntry;
-  undefined4 extraout_r4;
-  uint uVar8;
-  undefined4 extraout_r4_00;
-  undefined4 uVar9;
-  dword *pdVar10;
-  int *piVar11;
-  undefined4 in_r8;
-  int iVar12;
-  int iVar13;
-  uint *puVar14;
+  undefined4 staleArg4;
+  uint workStackCountSnapshot;
+  undefined4 staleArg4b;
+  undefined4 staleArg4c;
+  dword *staleArg5;
+  int *staleArg7;
+  undefined4 staleArg8;
+  int compiler;
+  int deadArmEntry;
+  uint *predVectorOfSurvivor;
   int *deadBlock;
-  undefined8 uVar16;
+  undefined8 slotRefPair;
   /* issue #64 (auto): growable-vector header (capacity/count/data-pointer/arena) used with Vector__elementRefGrow - vecCapacity/vecCount/vecData/vecArena are its four words by their own hex offsets. Vector__elementRefGrow unconditionally reads all four on every call (even its "no grow needed" path reallocs+copies+frees), so they must be one contiguous buffer; left as four separate locals, an -O0 rebuild does not place them contiguously. Merged into one 0x10-byte buffer (part of the issue #64 live-differential sweep). */
   unsigned char local_64_buf [0x10];
   #define vecCapacity (*(uint *)(local_64_buf + 0x00))
@@ -1727,160 +1744,160 @@ int Program__foldConstantIfRegion(program, ifHeader, ifFooter, outSurvivingEntry
   #define vecArena (*(undefined4 *)(local_64_buf + 0x0c))
   
   if (ifHeader[0x53] == 1) {
-    iVar13 = ifHeader[0x4e];
+    deadArmEntry = ifHeader[0x4e];
   }
   else {
-    iVar13 = ifHeader[0x4d];
+    deadArmEntry = ifHeader[0x4d];
   }
-  iVar12 = *(int *)(program + PROG_compiler);
+  compiler = *(int *)(program + PROG_compiler);
   *(int *)(program + PROG_visitStamp) = *(int *)(program + PROG_visitStamp) + 1;
-  vecArena = *(undefined4 *)(iVar12 + 0x378);
+  vecArena = *(undefined4 *)(compiler + 0x378);
   vecCount = 0;
   vecCapacity = 2;
-  pdVar10 = ifFooter;
-  piVar5 = outSurvivingEntry;
-  piVar11 = outSurvivingExit;
+  staleArg5 = ifFooter;
+  staleOutEntry = outSurvivingEntry;
+  staleArg7 = outSurvivingExit;
   vecData = Arena__alloc(vecArena,8);
-  uVar8 = vecCount;
+  workStackCountSnapshot = vecCount;
   if (vecCount < vecCapacity) {
-    iVar6 = vecCount * 4;
-    pdVar10 = ((unsigned char *)0x4);
-    _memset(vecData + iVar6,0,4);
-    vecCount = uVar8 + 1;
-    uVar16 = CONCAT44(iVar6 + vecData,extraout_r4);
+    workStackByteOffset = vecCount * 4;
+    staleArg5 = ((unsigned char *)0x4);
+    _memset(vecData + workStackByteOffset,0,4);
+    vecCount = workStackCountSnapshot + 1;
+    slotRefPair = CONCAT44(workStackByteOffset + vecData,staleArg4);
   }
   else {
-    uVar16 = Vector__elementRefGrow(&vecCapacity,vecCount);
+    slotRefPair = Vector__elementRefGrow(&vecCapacity,vecCount);
   }
-  uVar9 = (undefined4)uVar16;
-  *(int *)((ulonglong)uVar16 >> 0x20) = iVar13;
-  *(undefined4 *)(iVar13 + 0x118) = *(undefined4 *)(program + PROG_visitStamp);
+  staleArg4c = (undefined4)slotRefPair;
+  *(int *)((ulonglong)slotRefPair >> 0x20) = deadArmEntry;
+  *(undefined4 *)(deadArmEntry + 0x118) = *(undefined4 *)(program + PROG_visitStamp);
   while (vecCount != 0) {
-    uVar8 = vecCount - 1;
-    puVar1 = (undefined4 *)0x0;
-    if (uVar8 < vecCount) {
-      puVar1 = (undefined4 *)(uVar8 * 4 + vecData);
+    lastWorkIndex = vecCount - 1;
+    workStackTopRef = (undefined4 *)0x0;
+    if (lastWorkIndex < vecCount) {
+      workStackTopRef = (undefined4 *)(lastWorkIndex * 4 + vecData);
     }
-    deadBlock = (int *)*puVar1;
-    Vector__removeAt(&vecCapacity,uVar8);
-    iVar13 = (**(code **)(*deadBlock + 0x38))(deadBlock);
-    if ((iVar13 == 0) && (iVar13 = (**(code **)(*deadBlock + 0x3c))(deadBlock), iVar13 == 0)) {
-      iVar13 = 0;
-      for (uVar8 = 1; uVar8 <= *(uint *)(deadBlock[0x34] + 4); uVar8 = uVar8 + 1) {
-        deadBlockSuccessor = *(int **)(iVar13 + *(int *)(deadBlock[0x34] + 8));
+    deadBlock = (int *)*workStackTopRef;
+    Vector__removeAt(&vecCapacity,lastWorkIndex);
+    blockQuery38b = (**(code **)(*deadBlock + 0x38))(deadBlock);
+    if ((blockQuery38b == 0) && (blockQuery38b = (**(code **)(*deadBlock + 0x3c))(deadBlock), blockQuery38b == 0)) {
+      successorByteOffset = 0;
+      for (successorNumber = 1; successorNumber <= *(uint *)(deadBlock[0x34] + 4); successorNumber = successorNumber + 1) {
+        deadBlockSuccessor = *(int **)(successorByteOffset + *(int *)(deadBlock[0x34] + 8));
         if ((((deadBlockSuccessor != (int *)0x0) && (*(int *)(program + PROG_visitStamp) != deadBlockSuccessor[0x46])) &&
             ((dword *)deadBlockSuccessor != ifFooter)) && (deadBlockSuccessor != ifHeader)) {
-          iVar6 = (**(code **)(*deadBlockSuccessor + 0x38))(deadBlockSuccessor);
-          if ((iVar6 != 0) || (iVar6 = (**(code **)(*deadBlockSuccessor + 0x3c))(deadBlockSuccessor), iVar6 != 0)) {
-            piVar2 = (int *)deadBlockSuccessor[0x34];
-            if (*piVar2 == 0) {
-              piVar2 = (int *)Vector__elementRefGrow(piVar2,0);
+          blockQuery38 = (**(code **)(*deadBlockSuccessor + 0x38))(deadBlockSuccessor);
+          if ((blockQuery38 != 0) || (blockQuery38 = (**(code **)(*deadBlockSuccessor + 0x3c))(deadBlockSuccessor), blockQuery38 != 0)) {
+            deadSuccPredVector = (int *)deadBlockSuccessor[0x34];
+            if (*deadSuccPredVector == 0) {
+              deadSuccPredVector = (int *)Vector__elementRefGrow(deadSuccPredVector,0);
             }
             else {
-              if (piVar2[1] == 0) {
-                *(undefined4 *)piVar2[2] = 0;
-                piVar2[1] = 1;
+              if (deadSuccPredVector[1] == 0) {
+                *(undefined4 *)deadSuccPredVector[2] = 0;
+                deadSuccPredVector[1] = 1;
               }
-              piVar2 = (int *)piVar2[2];
+              deadSuccPredVector = (int *)deadSuccPredVector[2];
             }
-            iVar6 = *piVar2;
-            uVar3 = Block__predecessorIndex(iVar6,deadBlockSuccessor);
-            puVar14 = *(uint **)(iVar6 + 0xd4);
-            if (uVar3 < *puVar14) {
-              uVar4 = puVar14[1];
-              if (uVar4 <= uVar3) {
-                pdVar10 = (dword *)((uVar3 - uVar4) * 4 + 4);
-                _memset(uVar4 * 4 + puVar14[2],0,pdVar10);
-                puVar14[1] = uVar3 + 1;
+            firstPredOfSuccessor = *deadSuccPredVector;
+            predecessorIndex = Block__predecessorIndex(firstPredOfSuccessor,deadBlockSuccessor);
+            predVectorOfSurvivor = *(uint **)(firstPredOfSuccessor + 0xd4);
+            if (predecessorIndex < *predVectorOfSurvivor) {
+              predVectorCount = predVectorOfSurvivor[1];
+              if (predVectorCount <= predecessorIndex) {
+                staleArg5 = (dword *)((predecessorIndex - predVectorCount) * 4 + 4);
+                _memset(predVectorCount * 4 + predVectorOfSurvivor[2],0,staleArg5);
+                predVectorOfSurvivor[1] = predecessorIndex + 1;
               }
-              puVar1 = (undefined4 *)(uVar3 * 4 + puVar14[2]);
+              predSlotRef = (undefined4 *)(predecessorIndex * 4 + predVectorOfSurvivor[2]);
             }
             else {
-              puVar1 = (undefined4 *)Vector__elementRefGrow(puVar14,uVar3);
+              predSlotRef = (undefined4 *)Vector__elementRefGrow(predVectorOfSurvivor,predecessorIndex);
             }
-            *puVar1 = 0;
+            *predSlotRef = 0;
           }
-          uVar3 = vecCount;
+          workStackCountB = vecCount;
           deadBlockSuccessor[0x46] = *(int *)(program + PROG_visitStamp);
           if (vecCount < vecCapacity) {
-            iVar6 = vecCount * 4;
-            pdVar10 = ((unsigned char *)0x4);
-            _memset(iVar6 + vecData,0,4);
-            vecCount = uVar3 + 1;
-            puVar1 = (undefined4 *)(iVar6 + vecData);
+            workStackByteOffsetB = vecCount * 4;
+            staleArg5 = ((unsigned char *)0x4);
+            _memset(workStackByteOffsetB + vecData,0,4);
+            vecCount = workStackCountB + 1;
+            workStackSlotRef = (undefined4 *)(workStackByteOffsetB + vecData);
           }
           else {
-            puVar1 = (undefined4 *)Vector__elementRefGrow(&vecCapacity,vecCount);
+            workStackSlotRef = (undefined4 *)Vector__elementRefGrow(&vecCapacity,vecCount);
           }
-          *puVar1 = deadBlockSuccessor;
+          *workStackSlotRef = deadBlockSuccessor;
         }
-        iVar13 = iVar13 + 4;
+        successorByteOffset = successorByteOffset + 4;
       }
     }
     DList__count(deadBlock + 0x24);
     Block__detach(deadBlock);
-    uVar9 = extraout_r4_00;
+    staleArg4c = staleArg4b;
   }
-  piVar5 = (int *)Block__getBranchInst(ifHeader,uVar9,pdVar10,piVar5,piVar11,in_r8,iVar12);
+  staleOutEntry = (int *)Block__getBranchInst(ifHeader,staleArg4c,staleArg5,staleOutEntry,staleArg7,staleArg8,compiler);
   ifHeader[0x4c] = 0;
-  Program__removeInst(program,piVar5);
-  (**(code **)(*piVar5 + 0xc))(piVar5,0,*(undefined4 *)(program + PROG_compiler));
+  Program__removeInst(program,staleOutEntry);
+  (**(code **)(*staleOutEntry + 0xc))(staleOutEntry,0,*(undefined4 *)(program + PROG_compiler));
   DList__count(ifHeader + 0x24);
-  iVar12 = Block__findSimplePredecessor(ifHeader);
-  iVar6 = Block__findSimpleSuccessor(ifFooter);
-  iVar13 = ifHeader[0x53];
-  survivingEntry = Block__getSuccessor(ifHeader,(uint)(iVar13 != 1));
+  headerPredecessor = Block__findSimplePredecessor(ifHeader);
+  footerSuccessor = Block__findSimpleSuccessor(ifFooter);
+  conditionValue = ifHeader[0x53];
+  survivingEntry = Block__getSuccessor(ifHeader,(uint)(conditionValue != 1));
   *outSurvivingEntry = survivingEntry;
-  piVar5 = *(int **)(survivingEntry + 0xd4);
-  if (*piVar5 == 0) {
-    piVar5 = (int *)Vector__elementRefGrow(piVar5,0);
+  entrySuccPredVector = *(int **)(survivingEntry + 0xd4);
+  if (*entrySuccPredVector == 0) {
+    entrySuccPredVector = (int *)Vector__elementRefGrow(entrySuccPredVector,0);
   }
   else {
-    if (piVar5[1] == 0) {
-      *(undefined4 *)piVar5[2] = 0;
-      piVar5[1] = 1;
+    if (entrySuccPredVector[1] == 0) {
+      *(undefined4 *)entrySuccPredVector[2] = 0;
+      entrySuccPredVector[1] = 1;
     }
-    piVar5 = (int *)piVar5[2];
+    entrySuccPredVector = (int *)entrySuccPredVector[2];
   }
-  *piVar5 = iVar12;
-  piVar5 = *(int **)(iVar12 + 0xd0);
-  if (*piVar5 == 0) {
-    piVar5 = (int *)Vector__elementRefGrow(piVar5,0);
+  *entrySuccPredVector = headerPredecessor;
+  headerPredSuccVector = *(int **)(headerPredecessor + 0xd0);
+  if (*headerPredSuccVector == 0) {
+    headerPredSuccVector = (int *)Vector__elementRefGrow(headerPredSuccVector,0);
   }
   else {
-    if (piVar5[1] == 0) {
-      *(undefined4 *)piVar5[2] = 0;
-      piVar5[1] = 1;
+    if (headerPredSuccVector[1] == 0) {
+      *(undefined4 *)headerPredSuccVector[2] = 0;
+      headerPredSuccVector[1] = 1;
     }
-    piVar5 = (int *)piVar5[2];
+    headerPredSuccVector = (int *)headerPredSuccVector[2];
   }
-  *piVar5 = *outSurvivingEntry;
-  iVar13 = Block__getPredecessor(ifFooter,(uint)(iVar13 != 1));
-  *outSurvivingExit = iVar13;
-  piVar5 = *(int **)(iVar13 + 0xd0);
-  if (*piVar5 == 0) {
-    piVar5 = (int *)Vector__elementRefGrow(piVar5,0);
+  *headerPredSuccVector = *outSurvivingEntry;
+  conditionValue = Block__getPredecessor(ifFooter,(uint)(conditionValue != 1));
+  *outSurvivingExit = conditionValue;
+  exitSuccVector = *(int **)(conditionValue + 0xd0);
+  if (*exitSuccVector == 0) {
+    exitSuccVector = (int *)Vector__elementRefGrow(exitSuccVector,0);
   }
   else {
-    if (piVar5[1] == 0) {
-      *(undefined4 *)piVar5[2] = 0;
-      piVar5[1] = 1;
+    if (exitSuccVector[1] == 0) {
+      *(undefined4 *)exitSuccVector[2] = 0;
+      exitSuccVector[1] = 1;
     }
-    piVar5 = (int *)piVar5[2];
+    exitSuccVector = (int *)exitSuccVector[2];
   }
-  *piVar5 = iVar6;
-  piVar5 = *(int **)(iVar6 + 0xd4);
-  if (*piVar5 == 0) {
-    piVar5 = (int *)Vector__elementRefGrow(piVar5,0);
+  *exitSuccVector = footerSuccessor;
+  footerSuccPredVector = *(int **)(footerSuccessor + 0xd4);
+  if (*footerSuccPredVector == 0) {
+    footerSuccPredVector = (int *)Vector__elementRefGrow(footerSuccPredVector,0);
   }
   else {
-    if (piVar5[1] == 0) {
-      *(undefined4 *)piVar5[2] = 0;
-      piVar5[1] = 1;
+    if (footerSuccPredVector[1] == 0) {
+      *(undefined4 *)footerSuccPredVector[2] = 0;
+      footerSuccPredVector[1] = 1;
     }
-    piVar5 = (int *)piVar5[2];
+    footerSuccPredVector = (int *)footerSuccPredVector[2];
   }
-  *piVar5 = *outSurvivingExit;
+  *footerSuccPredVector = *outSurvivingExit;
   Block__detach(ifHeader);
   Block__detach(ifFooter);
   Program__freeWorkArrays(program);

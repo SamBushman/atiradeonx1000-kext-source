@@ -1545,29 +1545,43 @@ int FUN_00120cd4(pass)
 }
 
 /* FUN_00121000 @ 0x121000 (1160 bytes) */
-int FUN_00121000(param_1)
-  int param_1;
+int FUN_00121000(program)
+  int program;
 {
+  undefined4 dominatedChild;
+  int currentBlock;
+  int *childVectorFirstRef;
+  int *workStackTopRef;
+  int operandCounter;
+  undefined4 *workStackSlotRefB;
+  undefined4 *candidateSlotRef;
+  bool notUsedByPhi;
+  uint lastWorkStackIndex;
+  int *candidateRef;
+  int workStackByteOffset;
+  int userInst;
+  int candidateByteOffset;
+  int blockQuery2c;
   int sourceDef;
   int *operandVReg;
   uint loopIndex;
-  bool bVar1;
-  int *piVar2;
-  uint uVar3;
-  int *piVar4;
-  undefined4 *puVar5;
-  int iVar6;
-  int iVar7;
-  int *piVar8;
-  int *piVar9;
-  int iVar10;
-  int *piVar11;
-  int *piVar12;
-  int iVar13;
-  uint uVar14;
-  undefined4 uVar15;
-  int **ppiVar16;
-  int *piVar17;
+  bool chainContainsBlock;
+  int *nextInst;
+  uint workStackCountB;
+  int *chainCursor;
+  undefined4 *workStackSlotRefA;
+  int instQuery68;
+  int chainIndexByteOffset;
+  int *firstOperandBlock;
+  int *inst;
+  int chainIndex;
+  int *targetBlock;
+  int *lastChainBlock;
+  int workStackSlotOffset;
+  uint workStackCountSnapshot;
+  undefined4 entryBlockValue;
+  int **operandBlockCursor;
+  int *chainBlock;
   /* issue #64 (auto): growable-vector header (capacity/count/data-pointer/arena) used with Vector__elementRefGrow - vecCapacity/vecCount/vecData/vecArena are its four words by their own hex offsets. Vector__elementRefGrow unconditionally reads all four on every call (even its "no grow needed" path reallocs+copies+frees), so they must be one contiguous buffer; left as four separate locals, an -O0 rebuild does not place them contiguously. Merged into one 0x10-byte buffer (part of the issue #64 live-differential sweep). */
   unsigned char local_78_buf [0x10];
   #define vecCapacity (*(uint *)(local_78_buf + 0x00))
@@ -1580,168 +1594,168 @@ int FUN_00121000(param_1)
   #define vec2Count (*(uint *)(local_68_buf + 0x04))
   #define vec2Data (*(int *)(local_68_buf + 0x08))
   #define vec2Arena (*(undefined4 *)(local_68_buf + 0x0c))
-  int *local_58 [11];
+  int *operandBlocks [11];
   
-  vecArena = *(undefined4 *)(*(int *)(param_1 + 8) + 0x378);
+  vecArena = *(undefined4 *)(*(int *)(program + 8) + 0x378);
   vecCount = 0;
   vecCapacity = 2;
   vecData = Arena__alloc(vecArena,8);
-  uVar14 = vecCount;
-  uVar15 = *(undefined4 *)(param_1 + 0x3a0);
+  workStackCountSnapshot = vecCount;
+  entryBlockValue = *(undefined4 *)(program + 0x3a0);
   if (vecCount < vecCapacity) {
-    iVar13 = vecCount * 4;
-    _memset(vecData + iVar13,0,4);
-    vecCount = uVar14 + 1;
-    puVar5 = (undefined4 *)(iVar13 + vecData);
+    workStackSlotOffset = vecCount * 4;
+    _memset(vecData + workStackSlotOffset,0,4);
+    vecCount = workStackCountSnapshot + 1;
+    workStackSlotRefA = (undefined4 *)(workStackSlotOffset + vecData);
   }
   else {
-    puVar5 = (undefined4 *)Vector__elementRefGrow(&vecCapacity,vecCount);
+    workStackSlotRefA = (undefined4 *)Vector__elementRefGrow(&vecCapacity,vecCount);
   }
-  *puVar5 = uVar15;
-  vec2Arena = *(undefined4 *)(*(int *)(param_1 + 8) + 0x378);
+  *workStackSlotRefA = entryBlockValue;
+  vec2Arena = *(undefined4 *)(*(int *)(program + 8) + 0x378);
   vec2Count = 0;
   vec2Capacity = 2;
-  iVar13 = *(int *)(param_1 + 0x3a0);
+  currentBlock = *(int *)(program + 0x3a0);
   vec2Data = Arena__alloc(vec2Arena,8);
   do {
-    piVar9 = *(int **)(iVar13 + 0x98);
-    for (piVar2 = (int *)(*(int **)(iVar13 + 0x98))[2]; piVar2 != (int *)0x0;
-        piVar2 = (int *)piVar2[2]) {
-      if (((((*(int *)(piVar9[0x22] + 8) != 0x8e) &&
-            (iVar6 = (**(code **)(*piVar9 + 0x68))(piVar9), iVar6 == 0)) &&
-           (iVar6 = FUN_0012ab04(piVar9), iVar6 == 0)) &&
-          ((piVar9[0x21] != 0 && ((piVar9[5] & 8U) == 0)))) &&
-         (iVar6 = IRInst__isProjectionOfClass26or3a(piVar9), iVar6 == 0)) {
-        iVar6 = 0;
-        piVar11 = (int *)piVar9[0x56];
-        if (0 < piVar9[0x21]) {
-          ppiVar16 = local_58;
+    inst = *(int **)(currentBlock + 0x98);
+    for (nextInst = (int *)(*(int **)(currentBlock + 0x98))[2]; nextInst != (int *)0x0;
+        nextInst = (int *)nextInst[2]) {
+      if (((((*(int *)(inst[0x22] + 8) != 0x8e) &&
+            (instQuery68 = (**(code **)(*inst + 0x68))(inst), instQuery68 == 0)) &&
+           (instQuery68 = FUN_0012ab04(inst), instQuery68 == 0)) &&
+          ((inst[0x21] != 0 && ((inst[5] & 8U) == 0)))) &&
+         (instQuery68 = IRInst__isProjectionOfClass26or3a(inst), instQuery68 == 0)) {
+        operandCounter = 0;
+        targetBlock = (int *)inst[0x56];
+        if (0 < inst[0x21]) {
+          operandBlockCursor = operandBlocks;
           do {
-            iVar6 = iVar6 + 1;
-            sourceDef = IRInst__getOperandSource(piVar9,iVar6);
-            *ppiVar16 = *(int **)(sourceDef + 0x158);
-            ppiVar16 = ppiVar16 + 1;
-          } while (iVar6 < piVar9[0x21]);
+            operandCounter = operandCounter + 1;
+            sourceDef = IRInst__getOperandSource(inst,operandCounter);
+            *operandBlockCursor = *(int **)(sourceDef + 0x158);
+            operandBlockCursor = operandBlockCursor + 1;
+          } while (operandCounter < inst[0x21]);
         }
-        piVar8 = local_58[0];
+        firstOperandBlock = operandBlocks[0];
         vec2Count = 0;
-        piVar12 = (int *)0x0;
-        if (piVar11 != (int *)0x0) {
-          piVar12 = piVar11;
-          piVar17 = piVar11;
+        lastChainBlock = (int *)0x0;
+        if (targetBlock != (int *)0x0) {
+          lastChainBlock = targetBlock;
+          chainBlock = targetBlock;
           do {
-            if (iVar6 < 0) {
+            if (operandCounter < 0) {
 LAB_001211d0:
-              bVar1 = false;
+              chainContainsBlock = false;
             }
             else {
-              iVar10 = 0;
-              iVar7 = 0;
-              piVar4 = piVar8;
-              while (piVar17 != piVar4) {
-                iVar10 = iVar10 + 1;
-                if (iVar6 < iVar10) goto LAB_001211d0;
-                iVar7 = iVar10 * 4;
-                piVar4 = local_58[iVar10];
+              chainIndex = 0;
+              chainIndexByteOffset = 0;
+              chainCursor = firstOperandBlock;
+              while (chainBlock != chainCursor) {
+                chainIndex = chainIndex + 1;
+                if (operandCounter < chainIndex) goto LAB_001211d0;
+                chainIndexByteOffset = chainIndex * 4;
+                chainCursor = operandBlocks[chainIndex];
               }
-              bVar1 = true;
-              piVar11 = *(int **)((int)local_58 + iVar7);
+              chainContainsBlock = true;
+              targetBlock = *(int **)((int)operandBlocks + chainIndexByteOffset);
             }
-            iVar7 = (**(code **)(*piVar17 + 0x2c))(piVar17);
-            if (iVar7 != 0) {
+            blockQuery2c = (**(code **)(*chainBlock + 0x2c))(chainBlock);
+            if (blockQuery2c != 0) {
               if (vec2Count < vec2Capacity) {
-                iVar7 = vec2Count * 4;
+                candidateByteOffset = vec2Count * 4;
                 vec2Count = vec2Count + 1;
-                *(undefined4 *)(iVar7 + vec2Data) = 0;
-                puVar5 = (undefined4 *)(iVar7 + vec2Data);
+                *(undefined4 *)(candidateByteOffset + vec2Data) = 0;
+                candidateSlotRef = (undefined4 *)(candidateByteOffset + vec2Data);
               }
               else {
-                puVar5 = (undefined4 *)Vector__elementRefGrow(&vec2Capacity,vec2Count);
+                candidateSlotRef = (undefined4 *)Vector__elementRefGrow(&vec2Capacity,vec2Count);
               }
-              *puVar5 = piVar17;
+              *candidateSlotRef = chainBlock;
             }
-          } while ((!bVar1) &&
-                  (piVar4 = piVar17 + 0x3c, piVar12 = piVar17, piVar17 = (int *)*piVar4,
-                  (int *)*piVar4 != (int *)0x0));
+          } while ((!chainContainsBlock) &&
+                  (chainCursor = chainBlock + 0x3c, lastChainBlock = chainBlock, chainBlock = (int *)*chainCursor,
+                  (int *)*chainCursor != (int *)0x0));
         }
-        iVar6 = (**(code **)(*piVar11 + 0x2c))(piVar11);
-        if (iVar6 != 0) {
-          piVar11 = piVar12;
+        instQuery68 = (**(code **)(*targetBlock + 0x2c))(targetBlock);
+        if (instQuery68 != 0) {
+          targetBlock = lastChainBlock;
         }
         loopIndex = 0;
         if (vec2Count != 0) {
           do {
             if (loopIndex < vec2Capacity) {
-              piVar8 = (int *)(loopIndex * 4 + vec2Data);
+              candidateRef = (int *)(loopIndex * 4 + vec2Data);
             }
             else {
-              piVar8 = (int *)Vector__elementRefGrow(&vec2Capacity,loopIndex);
+              candidateRef = (int *)Vector__elementRefGrow(&vec2Capacity,loopIndex);
             }
-            iVar6 = *(int *)(*piVar8 + 0x98);
-            for (iVar7 = *(int *)(*(int *)(*piVar8 + 0x98) + 8); iVar7 != 0;
-                iVar7 = *(int *)(iVar7 + 8)) {
-              if (((*(uint *)(iVar6 + 0x14) & 1) != 0) &&
-                 (*(int *)(*(int *)(iVar6 + 0x88) + 8) == 0x8e)) {
-                operandVReg = (int *)IRInst__getOperandSource(iVar6,1);
-                if (piVar9 == operandVReg) {
-                  bVar1 = false;
+            instQuery68 = *(int *)(*candidateRef + 0x98);
+            for (userInst = *(int *)(*(int *)(*candidateRef + 0x98) + 8); userInst != 0;
+                userInst = *(int *)(userInst + 8)) {
+              if (((*(uint *)(instQuery68 + 0x14) & 1) != 0) &&
+                 (*(int *)(*(int *)(instQuery68 + 0x88) + 8) == 0x8e)) {
+                operandVReg = (int *)IRInst__getOperandSource(instQuery68,1);
+                if (inst == operandVReg) {
+                  notUsedByPhi = false;
                   goto LAB_00121318;
                 }
-                iVar7 = *(int *)(iVar6 + 8);
+                userInst = *(int *)(instQuery68 + 8);
               }
-              iVar6 = iVar7;
+              instQuery68 = userInst;
             }
-            bVar1 = true;
+            notUsedByPhi = true;
 LAB_00121318:
             loopIndex = loopIndex + 1;
-            if (!bVar1) goto LAB_00121390;
+            if (!notUsedByPhi) goto LAB_00121390;
           } while (loopIndex < vec2Count);
         }
-        if ((piVar11 != (int *)piVar9[0x56]) && (piVar11[0x45] < ((int *)piVar9[0x56])[0x45])) {
-          IRInst__unlinkAndClearFlag0(piVar9);
-          piVar9[5] = piVar9[5] | 1;
-          Block__appendInst(piVar11,piVar9);
-          iVar6 = *(int *)(*(int *)(param_1 + 8) + 0x6c4);
-          *(int *)(iVar6 + 0x1b8) = *(int *)(iVar6 + 0x1b8) + 1;
+        if ((targetBlock != (int *)inst[0x56]) && (targetBlock[0x45] < ((int *)inst[0x56])[0x45])) {
+          IRInst__unlinkAndClearFlag0(inst);
+          inst[5] = inst[5] | 1;
+          Block__appendInst(targetBlock,inst);
+          instQuery68 = *(int *)(*(int *)(program + 8) + 0x6c4);
+          *(int *)(instQuery68 + 0x1b8) = *(int *)(instQuery68 + 0x1b8) + 1;
         }
       }
 LAB_00121390:
-      piVar9 = piVar2;
+      inst = nextInst;
     }
-    iVar6 = Block__hasDominatedChildren(iVar13);
-    if (iVar6 == 0) {
-      piVar9 = (int *)0x0;
-      uVar14 = vecCount - 1;
-      if (uVar14 < vecCount) {
-        piVar9 = (int *)(uVar14 * 4 + vecData);
+    instQuery68 = Block__hasDominatedChildren(currentBlock);
+    if (instQuery68 == 0) {
+      workStackTopRef = (int *)0x0;
+      lastWorkStackIndex = vecCount - 1;
+      if (lastWorkStackIndex < vecCount) {
+        workStackTopRef = (int *)(lastWorkStackIndex * 4 + vecData);
       }
-      iVar13 = *piVar9;
-      Vector__removeAt(&vecCapacity,uVar14);
+      currentBlock = *workStackTopRef;
+      Vector__removeAt(&vecCapacity,lastWorkStackIndex);
     }
     else {
-      iVar6 = *(int *)(iVar13 + 0xf4);
-      piVar9 = (int *)0x0;
-      if (*(uint *)(iVar6 + 4) != 0) {
-        piVar9 = *(int **)(iVar6 + 8);
+      instQuery68 = *(int *)(currentBlock + 0xf4);
+      childVectorFirstRef = (int *)0x0;
+      if (*(uint *)(instQuery68 + 4) != 0) {
+        childVectorFirstRef = *(int **)(instQuery68 + 8);
       }
-      iVar13 = *piVar9;
-      if (1 < *(uint *)(iVar6 + 4)) {
+      currentBlock = *childVectorFirstRef;
+      if (1 < *(uint *)(instQuery68 + 4)) {
         loopIndex = 1;
         do {
-          uVar3 = vecCount;
-          uVar15 = *(undefined4 *)(loopIndex * 4 + *(int *)(iVar6 + 8));
+          workStackCountB = vecCount;
+          dominatedChild = *(undefined4 *)(loopIndex * 4 + *(int *)(instQuery68 + 8));
           if (vecCount < vecCapacity) {
-            iVar7 = vecCount * 4;
-            _memset(iVar7 + vecData,0,4);
-            vecCount = uVar3 + 1;
-            puVar5 = (undefined4 *)(iVar7 + vecData);
+            workStackByteOffset = vecCount * 4;
+            _memset(workStackByteOffset + vecData,0,4);
+            vecCount = workStackCountB + 1;
+            workStackSlotRefB = (undefined4 *)(workStackByteOffset + vecData);
           }
           else {
-            puVar5 = (undefined4 *)Vector__elementRefGrow(&vecCapacity,vecCount);
+            workStackSlotRefB = (undefined4 *)Vector__elementRefGrow(&vecCapacity,vecCount);
           }
-          *puVar5 = uVar15;
+          *workStackSlotRefB = dominatedChild;
           loopIndex = loopIndex + 1;
-        } while (loopIndex < *(uint *)(iVar6 + 4));
+        } while (loopIndex < *(uint *)(instQuery68 + 4));
       }
     }
     if (vecCount == 0) {
