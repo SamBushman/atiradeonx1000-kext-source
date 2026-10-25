@@ -579,12 +579,14 @@ int FudoPs__ctor_1920e0(this, compiler, createSchedModels)
 }
 
 /* FUN_001922c4 @ 0x1922c4 (1016 bytes) */
-int FUN_001922c4(param_1, param_2, inst, program)
-  undefined4 param_1;
-  undefined4 param_2;
+int FUN_001922c4(staleArg1, staleArg2, inst, program)
+  undefined4 staleArg1;
+  undefined4 staleArg2;
   int *inst;
   int program;
 {
+  int operandNumber;
+  double literalZero;
   int newSource;
   int operandIndex2;
   int operandRecord1;
@@ -592,35 +594,35 @@ int FUN_001922c4(param_1, param_2, inst, program)
   undefined4 sourceDef;
   int operandRecord2;
   int operandRecord;
-  bool bVar1;
-  int iVar2;
+  bool moreLanes;
+  int opcode;
   int inst2;
-  undefined4 uVar4;
+  undefined4 operandSelectWord;
   int loopIndex;
-  int iVar6;
+  int operandCount;
   undefined4 absFlag;
   undefined4 negateFlag;
-  undefined4 uVar9;
-  undefined4 uVar10;
-  undefined4 uVar11;
-  int iVar12;
-  double dVar13;
-  undefined4 local_48;
-  undefined4 local_44;
-  undefined4 local_40;
+  undefined4 literalIndexZero;
+  undefined4 literalIndexOne;
+  undefined4 compilerArena;
+  int savedField10;
+  double literalOne;
+  undefined4 savedCounters;
+  undefined4 savedCounters1;
+  undefined4 savedCounters2;
   
-  uVar11 = *(undefined4 *)(program + 8);
-  iVar2 = *(int *)(inst[0x22] + 8);
-  if (((((iVar2 == 0x5d) || (iVar2 == 0x29)) || (iVar2 == 0x5b)) ||
-      ((iVar2 == 0x27 || (iVar2 == 0x5e)))) ||
-     ((iVar2 == 0x2a || ((iVar2 == 0x5c || (iVar2 == 0x28)))))) {
-    switch(iVar2) {
+  compilerArena = *(undefined4 *)(program + 8);
+  opcode = *(int *)(inst[0x22] + 8);
+  if (((((opcode == 0x5d) || (opcode == 0x29)) || (opcode == 0x5b)) ||
+      ((opcode == 0x27 || (opcode == 0x5e)))) ||
+     ((opcode == 0x2a || ((opcode == 0x5c || (opcode == 0x28)))))) {
+    switch(opcode) {
     case 0x27:
     case 0x5b:
       operandIndex = 1;
       operandIndex2 = 2;
-      uVar9 = 3;
-      uVar10 = 2;
+      literalIndexZero = 3;
+      literalIndexOne = 2;
       negateFlag = 1;
       absFlag = 1;
       break;
@@ -628,8 +630,8 @@ int FUN_001922c4(param_1, param_2, inst, program)
     case 0x5c:
       operandIndex = 2;
       operandIndex2 = 1;
-      uVar9 = 2;
-      uVar10 = 3;
+      literalIndexZero = 2;
+      literalIndexOne = 3;
       negateFlag = 0;
       absFlag = 0;
       break;
@@ -637,8 +639,8 @@ int FUN_001922c4(param_1, param_2, inst, program)
     case 0x5d:
       operandIndex = 1;
       operandIndex2 = 2;
-      uVar9 = 3;
-      uVar10 = 2;
+      literalIndexZero = 3;
+      literalIndexOne = 2;
       negateFlag = 0;
       absFlag = 0;
       break;
@@ -646,42 +648,42 @@ int FUN_001922c4(param_1, param_2, inst, program)
     case 0x5e:
       operandIndex = 1;
       operandIndex2 = 2;
-      uVar9 = 2;
-      uVar10 = 3;
+      literalIndexZero = 2;
+      literalIndexOne = 3;
       negateFlag = 1;
       absFlag = 1;
       break;
     default:
       operandIndex = 0;
       operandIndex2 = 0;
-      uVar9 = 0;
-      uVar10 = 0;
+      literalIndexZero = 0;
+      literalIndexOne = 0;
       negateFlag = 0;
       absFlag = 0;
     }
-    inst2 = IRInst__create(0x12,uVar11);
+    inst2 = IRInst__create(0x12,compilerArena);
     sourceDef = IRInst__getOperandSource(inst,operandIndex);
-    IRInst__setOperandSource(inst2,operandIndex,sourceDef,*(uint *)(program + 0x30) >> 7 & 1,uVar11);
+    IRInst__setOperandSource(inst2,operandIndex,sourceDef,*(uint *)(program + 0x30) >> 7 & 1,compilerArena);
     loopIndex = IRInst__getOperandRecord(inst,operandIndex);
-    uVar4 = *(undefined4 *)(loopIndex + 0x10);
+    operandSelectWord = *(undefined4 *)(loopIndex + 0x10);
     loopIndex = IRInst__getOperandRecord(inst2,operandIndex);
-    *(undefined4 *)(loopIndex + 0x10) = uVar4;
+    *(undefined4 *)(loopIndex + 0x10) = operandSelectWord;
     loopIndex = inst2 + operandIndex * 0x18 + 0x8c;
     IROperand__setModifierBits(loopIndex,2,(uint)inst[operandIndex * 6 + 0x28] >> 1 & 1);
     IROperand__setModifierBits(loopIndex,1,inst[operandIndex * 6 + 0x28] & 1);
     sourceDef = IRInst__getOperandSource(inst,operandIndex2);
-    IRInst__setOperandSource(inst2,operandIndex2,sourceDef,*(uint *)(program + 0x30) >> 7 & 1,uVar11);
+    IRInst__setOperandSource(inst2,operandIndex2,sourceDef,*(uint *)(program + 0x30) >> 7 & 1,compilerArena);
     operandRecord = IRInst__getOperandRecord(inst,operandIndex2);
-    uVar4 = *(undefined4 *)(operandRecord + 0x10);
+    operandSelectWord = *(undefined4 *)(operandRecord + 0x10);
     operandRecord = IRInst__getOperandRecord(inst2,operandIndex2);
-    *(undefined4 *)(operandRecord + 0x10) = uVar4;
+    *(undefined4 *)(operandRecord + 0x10) = operandSelectWord;
     operandRecord1 = inst2 + operandIndex2 * 0x18 + 0x8c;
     IROperand__setModifierBits(operandRecord1,2,(uint)inst[operandIndex2 * 6 + 0x28] >> 1 & 1);
     IROperand__setModifierBits(operandRecord1,1,inst[operandIndex2 * 6 + 0x28] & 1U ^ 1);
     operandRecord2 = IRInst__getOperandRecord(inst,0);
-    uVar4 = *(undefined4 *)(operandRecord2 + 0x10);
+    operandSelectWord = *(undefined4 *)(operandRecord2 + 0x10);
     *(undefined4 *)(inst2 + 0x94) = *(undefined4 *)(inst2 + 0x14c);
-    *(undefined4 *)(inst2 + 0x9c) = uVar4;
+    *(undefined4 *)(inst2 + 0x9c) = operandSelectWord;
     *(undefined4 *)(inst2 + 0x98) = 0;
     ((int (*)())DList__insertBefore)(inst2,inst);
     if ((*(uint *)(program + 0x30) & 0x80) == 0) {
@@ -689,28 +691,28 @@ int FUN_001922c4(param_1, param_2, inst, program)
     }
     *(int *)(inst2 + 0x158) = inst[0x56];
     newSource = 0;
-    local_40 = 0;
-    local_48 = 0;
-    local_44 = 0;
-    IRInst__saveCounters(inst,&local_48,0xffffffff);
+    savedCounters2 = 0;
+    savedCounters = 0;
+    savedCounters1 = 0;
+    IRInst__saveCounters(inst,&savedCounters,0xffffffff);
     if ((inst[5] & 0x200U) != 0) {
       newSource = IRInst__getOperandSource(inst,inst[0x21]);
     }
-    iVar12 = inst[4];
+    savedField10 = inst[4];
     ((int (*)())DList__unlink)(inst);
-    IRInst__setOperandSource(inst,1,0,*(uint *)(program + 0x30) >> 7 & 1,uVar11);
-    IRInst__setOperandSource(inst,2,0,*(uint *)(program + 0x30) >> 7 & 1,uVar11);
+    IRInst__setOperandSource(inst,1,0,*(uint *)(program + 0x30) >> 7 & 1,compilerArena);
+    IRInst__setOperandSource(inst,2,0,*(uint *)(program + 0x30) >> 7 & 1,compilerArena);
     IRInst__reinitAsTrinary(inst,0x25,*(undefined4 *)(program + 8));
-    IRInst__restoreCounters(inst,&local_48);
-    inst[4] = iVar12;
-    IRInst__setOperandSource(inst,1,inst2,*(uint *)(program + 0x30) >> 7 & 1,uVar11);
+    IRInst__restoreCounters(inst,&savedCounters);
+    inst[4] = savedField10;
+    IRInst__setOperandSource(inst,1,inst2,*(uint *)(program + 0x30) >> 7 & 1,compilerArena);
     loopIndex = 0;
     IROperand__setModifierBits(inst + 0x29,1,negateFlag);
     IROperand__setModifierBits(inst + 0x29,2,absFlag);
-    dVar13 = (double)FLOAT_001aa0e8;
-    ((void (*)())IRInst__makeLiteralVec4Float)(inst,program,uVar10,dVar13,dVar13,dVar13,dVar13);
-    dVar13 = (double)FLOAT_001aa0d4;
-    ((void (*)())IRInst__makeLiteralVec4Float)(inst,program,uVar9,dVar13,dVar13,dVar13,dVar13);
+    literalOne = (double)FLOAT_001aa0e8;
+    ((void (*)())IRInst__makeLiteralVec4Float)(inst,program,literalIndexOne,literalOne,literalOne,literalOne,literalOne);
+    literalZero = (double)FLOAT_001aa0d4;
+    ((void (*)())IRInst__makeLiteralVec4Float)(inst,program,literalIndexZero,literalZero,literalZero,literalZero,literalZero);
     inst[0x25] = inst[0x53];
     inst[0x26] = 0;
     operandRecord = IRInst__getOperandRecord(inst2,0);
@@ -718,16 +720,16 @@ int FUN_001922c4(param_1, param_2, inst, program)
     do {
       operandRecord = IRInst__getOperandRecord(inst2,0);
       if (*(char *)(loopIndex + operandRecord + 0x10) == '\x01') {
-        for (iVar12 = 1; iVar6 = (**(code **)(*inst + 0x14))(inst), iVar12 <= iVar6;
-            iVar12 = iVar12 + 1) {
-          (**(code **)(*inst + 0x88))(inst,iVar12,loopIndex,4);
+        for (operandNumber = 1; operandCount = (**(code **)(*inst + 0x14))(inst), operandNumber <= operandCount;
+            operandNumber = operandNumber + 1) {
+          (**(code **)(*inst + 0x88))(inst,operandNumber,loopIndex,4);
         }
       }
-      bVar1 = loopIndex != 3;
+      moreLanes = loopIndex != 3;
       loopIndex = loopIndex + 1;
-    } while (bVar1);
+    } while (moreLanes);
     if (newSource != 0) {
-      IRInst__setExtraOperandSource(inst,newSource,*(uint *)(program + 0x30) >> 7 & 1,uVar11);
+      IRInst__setExtraOperandSource(inst,newSource,*(uint *)(program + 0x30) >> 7 & 1,compilerArena);
     }
     inst[0x56] = *(int *)(inst2 + 0x158);
     ((int (*)())DList__insertAfter)(inst,inst2);

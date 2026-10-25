@@ -225,11 +225,11 @@
 0x20420	1716	gldDisplayNotificationCallback	part_003	converted
 0x20b00	40	FUN_00020b00	part_003	converted
 0x20b30	620	FUN_00020b30	part_003	converted
-0x21c70	1540	FUN_00021c70	part_003	converted
+0x21c70	1540	gld_emitCopyBlitPacket	part_003	converted
 0x22280	4	noop_22280	part_003	converted
 0x22290	2632	_gldUpdateDispatch	part_003	converted
 0x22ce0	456	_gldInitDispatch	part_003	converted
-0x22eb0	536	FUN_00022eb0	part_003	converted
+0x22eb0	536	gld_emitDirtyStatePackets	part_003	converted
 0x230d0	1544	gld_emitSurfaceCopyPacket	part_003	converted
 0x236f0	8	returnSecondArgument	part_003	converted
 0x23700	360	gldEmitCurrentAttributeRegisters	part_003	converted
@@ -300,8 +300,8 @@
 0x2d2b0	2388	gldPackColorForSurfaceFormat	part_004	converted
 0x2dcf0	236	gldTextureHasNonPowerOfTwoSize2	part_005	converted
 0x2ddf0	3396	FUN_0002ddf0	part_005	converted
-0x2ebc0	596	FUN_0002ebc0	part_005	converted
-0x2ee30	1476	FUN_0002ee30	part_005	converted
+0x2ebc0	596	gld_applyAnisotropyOverride	part_005	converted
+0x2ee30	1476	gld_updateTextureSamplerState	part_005	converted
 0x2f410	148	window_mode_to_ati_format	part_005	converted
 0x2f4d0	708	gldTextureFormatCodeMatchesType	part_005	converted
 0x2f7c0	716	gldTextureFormatCodeFromFormatType	part_005	converted
@@ -749,9 +749,9 @@
 0x86840	228	FUN_00086840	part_012	converted
 0x86930	204	FUN_00086930	part_012	converted
 0x86a10	96	FUN_00086a10	part_012	converted
-0x86a80	284	FUN_00086a80	part_012	converted
-0x86ba0	1840	FUN_00086ba0	part_012	converted
-0x872e0	1296	FUN_000872e0	part_012	converted
+0x86a80	284	gldSaveRasterState	part_012	converted
+0x86ba0	1840	gldEnterInternalDrawState	part_012	converted
+0x872e0	1296	gldLeaveInternalDrawState	part_012	converted
 0x87800	344	arbfpUpdateConstantsFp24	part_012	converted
 0x87960	120	arbfpInitResourceLimits	part_012	converted
 0x879e0	4	noop_879e0	part_012	converted
@@ -1238,7 +1238,7 @@
 0xe07b8	36	Compiler__clearOptionBit	part_020	converted
 0xe07dc	84	Compiler__isOptionEnabled	part_020	converted
 0xe0830	32	FUN_000e0830	part_020	converted
-0xe0850	1112	FUN_000e0850	part_020	converted
+0xe0850	1112	Compiler__setDefaultOptions	part_020	converted
 0xe0ca8	28	FUN_000e0ca8	part_020	converted
 0xe0cc8	8	testBit24	part_020	converted
 0xe0cd0	308	FUN_000e0cd0	part_020	converted
@@ -1268,8 +1268,8 @@
 0xe17b4	88	Compiler__setBitInSelectedBlock98	part_021	converted
 0xe180c	124	FUN_000e180c	part_021	converted
 0xe1888	152	Compiler__resetState	part_021	converted
-0xe1920	232	FUN_000e1920	part_021	converted
-0xe1a48	232	FUN_000e1a48	part_021	converted
+0xe1920	232	Compiler__init_e1920	part_021	converted
+0xe1a48	232	Compiler__init_e1a48	part_021	converted
 0xe1b70	172	Compiler__setHardwareFamily	part_021	converted
 0xe1c50	916	Program__forwardMulOperandToUsers	part_021	converted
 0xe1fe4	160	Compiler__releaseChipAndPools	part_021	converted
@@ -1478,12 +1478,12 @@
 0xed89c	852	FUN_000ed89c	part_024	converted
 0xedd98	1216	Program__ctor_edd98	part_024	converted
 0xee29c	1216	Program__ctor_ee29c	part_024	converted
-0xee7a0	144	FUN_000ee7a0	part_024	converted
+0xee7a0	144	Program__buildBlockArrayByKey	part_024	converted
 0xee9ac	120	Program__addInst	part_024	converted
 0xeea24	556	FUN_000eea24	part_024	converted
 0xeec50	1072	FUN_000eec50	part_024	converted
 0xeee4c	492	FUN_000eee4c	part_024	converted
-0xef204	660	FUN_000ef204	part_024	converted
+0xef204	660	Program__splitExports	part_024	converted
 0xef498	860	FUN_000ef498	part_024	converted
 0xef8f8	120	Program__appendToVector3c8	part_024	converted
 0xef970	220	Program__removeInst	part_024	converted
@@ -1494,7 +1494,7 @@
 0xf07a8	464	FUN_000f07a8	part_024	converted
 0xf14f8	132	FUN_000f14f8	part_024	converted
 0xf1d7c	3008	FUN_000f1d7c	part_024	converted
-0xf29f4	488	FUN_000f29f4	part_024	converted
+0xf29f4	488	pass_assign_slots	part_024	converted
 0xf2bdc	128	SelectWord__compose	part_024	converted
 0xf2c5c	80	SelectWord__isSplat	part_024	converted
 0xf2cac	92	FUN_000f2cac	part_024	converted
@@ -1552,7 +1552,7 @@
 0xf4a24	56	FUN_000f4a24	part_025	converted
 0xf4a5c	20	FUN_000f4a5c	part_025	converted
 0xf4a70	20	isRegKindBelow21	part_025	converted
-0xf4a84	324	FUN_000f4a84	part_025	converted
+0xf4a84	324	Emitter__allocateConstantSlot	part_025	converted
 0xf4bc8	32	floatLess	part_025	converted
 0xf4be8	92	BitSet__findFirstSet	part_025	converted
 0xf4c44	4	noop_f4c44	part_025	converted
@@ -1571,7 +1571,7 @@
 0xf5cf0	412	IRInst__getUniformSourceConstant	part_026	converted
 0xf5e8c	264	FUN_000f5e8c	part_026	converted
 0xf5f94	304	RegisterMap__findConstVectorExact	part_026	converted
-0xf60c4	388	FUN_000f60c4	part_026	converted
+0xf60c4	388	Program__dumpConstantRegisters	part_026	converted
 0xf6248	532	Compiler__getOrCreateConstVectorN	part_026	converted
 0xf645c	376	Compiler__getOrCreateConstVector4	part_026	converted
 0xf65d4	396	Compiler__getOrCreateConstVector3	part_026	converted
@@ -1605,7 +1605,7 @@
 0xf8aa0	488	Program__applySourceTokenToOperand	part_026	converted
 0xf8c88	64	FUN_000f8c88	part_026	converted
 0xf8ccc	132	FUN_000f8ccc	part_026	converted
-0xf8d50	568	FUN_000f8d50	part_026	converted
+0xf8d50	568	IRInst__applyDescriptorSelects	part_026	converted
 0xf8f88	176	IRInst__applyDescriptorSwizzle	part_026	converted
 0xf9038	264	FUN_000f9038	part_026	converted
 0xf9140	284	FUN_000f9140	part_026	converted
@@ -2849,7 +2849,7 @@
 0x178b1c	360	FUN_00178b1c	part_047	converted
 0x178c84	244	FUN_00178c84	part_047	converted
 0x178d78	280	FUN_00178d78	part_047	converted
-0x178e90	468	FUN_00178e90	part_047	converted
+0x178e90	468	ValueKey__evalLitLane	part_047	converted
 0x179064	212	FUN_00179064	part_047	converted
 0x179138	240	FUN_00179138	part_047	converted
 0x1792f0	232	FUN_001792f0	part_047	converted
@@ -2929,7 +2929,7 @@
 0x181f00	220	Block__flattenAndRebuildAddMulTree	part_048	converted
 0x183ac8	212	FUN_00183ac8	part_048	converted
 0x183b9c	1152	Block__rebuildAddMulTreesWhereProfitable	part_048	converted
-0x18401c	144	FUN_0018401c	part_048	converted
+0x18401c	144	pass_height_reduction	part_048	converted
 0x18413c	224	FUN_0018413c	part_048	converted
 0x184ab4	280	pass_minreg_order	part_048	converted
 0x184bcc	36	compareIntsAscending	part_048	converted

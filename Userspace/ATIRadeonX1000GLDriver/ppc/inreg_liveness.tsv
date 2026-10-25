@@ -324,10 +324,10 @@
 86840	FUN_00086840	r6	PASS-indirect	868a0 bctrl 
 86840	FUN_00086840	r7	PASS-indirect	868a0 bctrl 
 86840	FUN_00086840	r8	PASS-indirect	868a0 bctrl 
-872e0	FUN_000872e0	r5	PASS-indirect	87428 bctrl 
-872e0	FUN_000872e0	r6	PASS-indirect	87428 bctrl 
-872e0	FUN_000872e0	r7	PASS-indirect	87428 bctrl 
-872e0	FUN_000872e0	r8	PASS-indirect	87428 bctrl 
+872e0	gldLeaveInternalDrawState	r5	PASS-indirect	87428 bctrl 
+872e0	gldLeaveInternalDrawState	r6	PASS-indirect	87428 bctrl 
+872e0	gldLeaveInternalDrawState	r7	PASS-indirect	87428 bctrl 
+872e0	gldLeaveInternalDrawState	r8	PASS-indirect	87428 bctrl 
 8b6d0	arbParseSwizzleSuffix	r5	PASS-deep	8b6f0 bl 0x89740
 8b960	arbfpParseScalarSourceOperand	r5	PASS-deep	8b978 bl 0x89740
 8b9f0	arbParseProgramText	r5	PASS-deep	8baf4 bl 0x88e70
@@ -443,12 +443,12 @@ ea148	Block__ctor_ea148	r8	PASS-no	ea194 bl 0x1940a8
 f1d7c	FUN_000f1d7c	r6	PASS-indirect	f1dd8 bl 0x193e18
 f1d7c	FUN_000f1d7c	r7	PASS-indirect	f1dd8 bl 0x193e18
 f1d7c	FUN_000f1d7c	r8	PASS-indirect	f1dd8 bl 0x193e18
-f29f4	FUN_000f29f4	r5	PASS-indirect	f2a10 bl 0x10ea30
-f29f4	FUN_000f29f4	r6	PASS-indirect	f2a10 bl 0x10ea30
-f29f4	FUN_000f29f4	r7	PASS-indirect	f2a10 bl 0x10ea30
-f29f4	FUN_000f29f4	r8	PASS-indirect	f2a10 bl 0x10ea30
-f60c4	FUN_000f60c4	r9	PASS-indirect	f6148 bl 0x19423c
-f60c4	FUN_000f60c4	r10	PASS-indirect	f6148 bl 0x19423c
+f29f4	pass_assign_slots	r5	PASS-indirect	f2a10 bl 0x10ea30
+f29f4	pass_assign_slots	r6	PASS-indirect	f2a10 bl 0x10ea30
+f29f4	pass_assign_slots	r7	PASS-indirect	f2a10 bl 0x10ea30
+f29f4	pass_assign_slots	r8	PASS-indirect	f2a10 bl 0x10ea30
+f60c4	Program__dumpConstantRegisters	r9	PASS-indirect	f6148 bl 0x19423c
+f60c4	Program__dumpConstantRegisters	r10	PASS-indirect	f6148 bl 0x19423c
 f620	arbProgramIrToText	r6	PASS-no	f650 bl 0x1a3660	; symbol stub for: _malloc
 f620	arbProgramIrToText	r7	PASS-no	f650 bl 0x1a3660	; symbol stub for: _malloc
 f620	arbProgramIrToText	r8	PASS-no	f650 bl 0x1a3660	; symbol stub for: _malloc

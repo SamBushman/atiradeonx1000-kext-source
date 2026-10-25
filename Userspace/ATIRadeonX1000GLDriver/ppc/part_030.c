@@ -340,32 +340,32 @@ int IRPhiNode__ctor_10a2bc(this, compiler)
   undefined4 *this;
   int compiler;
 {
-  bool bVar1;
-  int iVar2;
-  undefined4 uVar3;
-  int iVar4;
-  int iVar5;
-  int iVar6;
+  bool moreRows;
+  int rowTable;
+  undefined4 rowAlloc;
+  int columnByteOffset;
+  int rowByteOffset;
+  int columnCountdown;
   
   IRPseudo__ctor(this,0x8e,compiler);
   this[0x20] = 1;
   *this = &PTR_FUN_001ea1c0;
-  iVar2 = Arena__alloc(*(undefined4 *)(compiler + COMP_arenaB),0x84);
-  iVar5 = 0;
+  rowTable = Arena__alloc(*(undefined4 *)(compiler + COMP_arenaB),0x84);
+  rowByteOffset = 0;
   do {
-    uVar3 = Arena__alloc(*(undefined4 *)(compiler + COMP_arenaB),0x10);
-    *(undefined4 *)(iVar5 + iVar2) = uVar3;
-    iVar6 = 4;
-    iVar4 = 0;
+    rowAlloc = Arena__alloc(*(undefined4 *)(compiler + COMP_arenaB),0x10);
+    *(undefined4 *)(rowByteOffset + rowTable) = rowAlloc;
+    columnCountdown = 4;
+    columnByteOffset = 0;
     do {
-      *(undefined4 *)(iVar4 + *(int *)(iVar5 + iVar2)) = 1;
-      iVar4 = iVar4 + 4;
-      iVar6 = iVar6 + -1;
-    } while (iVar6 != 0);
-    bVar1 = iVar5 != 0x80;
-    iVar5 = iVar5 + 4;
-  } while (bVar1);
-  this[0x4e] = iVar2;
+      *(undefined4 *)(columnByteOffset + *(int *)(rowByteOffset + rowTable)) = 1;
+      columnByteOffset = columnByteOffset + 4;
+      columnCountdown = columnCountdown + -1;
+    } while (columnCountdown != 0);
+    moreRows = rowByteOffset != 0x80;
+    rowByteOffset = rowByteOffset + 4;
+  } while (moreRows);
+  this[0x4e] = rowTable;
   this[0x4d] = 0;
   return;
 }
@@ -375,32 +375,32 @@ int IRPhiNode__ctor_10a398(this, compiler)
   undefined4 *this;
   int compiler;
 {
-  bool bVar1;
-  int iVar2;
-  undefined4 uVar3;
-  int iVar4;
-  int iVar5;
-  int iVar6;
+  bool moreRows;
+  int rowTable;
+  undefined4 rowAlloc;
+  int columnByteOffset;
+  int rowByteOffset;
+  int columnCountdown;
   
   IRPseudo__ctor(this,0x8e,compiler);
   this[0x20] = 1;
   *this = &PTR_FUN_001ea1c0;
-  iVar2 = Arena__alloc(*(undefined4 *)(compiler + COMP_arenaB),0x84);
-  iVar5 = 0;
+  rowTable = Arena__alloc(*(undefined4 *)(compiler + COMP_arenaB),0x84);
+  rowByteOffset = 0;
   do {
-    uVar3 = Arena__alloc(*(undefined4 *)(compiler + COMP_arenaB),0x10);
-    *(undefined4 *)(iVar5 + iVar2) = uVar3;
-    iVar6 = 4;
-    iVar4 = 0;
+    rowAlloc = Arena__alloc(*(undefined4 *)(compiler + COMP_arenaB),0x10);
+    *(undefined4 *)(rowByteOffset + rowTable) = rowAlloc;
+    columnCountdown = 4;
+    columnByteOffset = 0;
     do {
-      *(undefined4 *)(iVar4 + *(int *)(iVar5 + iVar2)) = 1;
-      iVar4 = iVar4 + 4;
-      iVar6 = iVar6 + -1;
-    } while (iVar6 != 0);
-    bVar1 = iVar5 != 0x80;
-    iVar5 = iVar5 + 4;
-  } while (bVar1);
-  this[0x4e] = iVar2;
+      *(undefined4 *)(columnByteOffset + *(int *)(rowByteOffset + rowTable)) = 1;
+      columnByteOffset = columnByteOffset + 4;
+      columnCountdown = columnCountdown + -1;
+    } while (columnCountdown != 0);
+    moreRows = rowByteOffset != 0x80;
+    rowByteOffset = rowByteOffset + 4;
+  } while (moreRows);
+  this[0x4e] = rowTable;
   this[0x4d] = 0;
   return;
 }

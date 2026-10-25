@@ -1,0 +1,97 @@
+local	FUN_0017dbdc	param_2	laneResultsOut	INFERRED	out: four per-lane result codes (0x7ffffffe = not constant)
+use	FUN_0017dbdc	bVar1	moreLanes	INFERRED	lane counter != 3	^\s*bVar1\ =\ iVar7\ !=\ 3;$	+1
+use	FUN_0017dbdc	bVar1	moreLanes	INFERRED	lane counter != 3	^\s*\}\ while\ \(bVar1\);$	+1
+use	FUN_0017dbdc	bVar1	moreLanes	INFERRED	lane counter != 3	^\s*bVar1\ =\ iVar4\ !=\ 3;$	+1
+use	FUN_0017dbdc	bVar1	moreLanes	INFERRED	lane counter != 3	^\s*\}\ while\ \(bVar1\);$@2	+1
+use	FUN_0017dbdc	bVar1	moreLanes	INFERRED	lane counter != 3	^\s*bVar1\ =\ iVar7\ !=\ 3;$@2	+1
+use	FUN_0017dbdc	bVar1	moreLanes	INFERRED	lane counter != 3	^\s*\}\ while\ \(bVar1\);$@3	+1
+use	FUN_0017dbdc	bVar1	moreLanes	INFERRED	lane counter != 3	^\s*bVar1\ =\ iVar4\ !=\ 3;$@2	+1
+use	FUN_0017dbdc	bVar1	moreLanes	INFERRED	lane counter != 3	^\s*\}\ while\ \(bVar1\);$@4	+1
+use	FUN_0017dbdc	bVar1	cannotFold	INFERRED	true when the instruction could not be evaluated	^\s*bVar1\ =\ true;$	+1
+use	FUN_0017dbdc	bVar1	cannotFold	INFERRED	true when the instruction could not be evaluated	^\s*bVar1\ =\ false;$	+1
+use	FUN_0017dbdc	bVar1	cannotFold	INFERRED	true when the instruction could not be evaluated	^\s*if\ \(\(iVar4\ ==\ 0\)\ \&\&\ \(!bVar1\)\)\ \{$	+1
+use	FUN_0017dbdc	iVar2	isOpcodeKindA	INFERRED	FUN_00176564(opcode) result	^\s*iVar2\ =\ FUN_00176564\(uVar6\);$	+2
+use	FUN_0017dbdc	iVar2	isOpcodeKindB	INFERRED	FUN_00176574(opcode) result	^\s*iVar2\ =\ FUN_00176574\(uVar6\);$	+2
+use	FUN_0017dbdc	iVar2	isOpcodeKindB	INFERRED	FUN_00176574(opcode) result	^\s*local_58\[0\]\ =\ iVar2;$	+1
+use	FUN_0017dbdc	iVar2	isOpcodeKindB	INFERRED	FUN_00176574(opcode) result	^\s*local_58\[0\]\ =\ iVar2;$@2	+1
+use	FUN_0017dbdc	iVar2	partialFlag	INFERRED	set to 1 when a written lane has a non-zero fold flag; returned in the result pair	^\s*iVar2\ =\ 0;$	+1
+use	FUN_0017dbdc	iVar2	partialFlag	INFERRED	set to 1 when a written lane has a non-zero fold flag; returned in the result pair	^\s*iVar2\ =\ 1;$	+1
+use	FUN_0017dbdc	iVar2	partialFlag	INFERRED	set to 1 when a written lane has a non-zero fold flag; returned in the result pair	^\s*iVar2\ =\ local_58\[0\];$	+1
+use	FUN_0017dbdc	iVar2	partialFlag	INFERRED	set to 1 when a written lane has a non-zero fold flag; returned in the result pair	^\s*iVar2\ =\ 0;$@2	+1
+use	FUN_0017dbdc	iVar2	partialFlag	INFERRED	set to 1 when a written lane has a non-zero fold flag; returned in the result pair	^\s*iVar2\ =\ local_58\[0\];$@2	+1
+use	FUN_0017dbdc	iVar2	partialFlag	INFERRED	set to 1 when a written lane has a non-zero fold flag; returned in the result pair	^\s*iVar2\ =\ 0;$@3	+1
+use	FUN_0017dbdc	iVar2	partialFlag	INFERRED	set to 1 when a written lane has a non-zero fold flag; returned in the result pair	^\s*iVar2\ =\ 1;$@2	+1
+use	FUN_0017dbdc	iVar2	partialFlag	INFERRED	set to 1 when a written lane has a non-zero fold flag; returned in the result pair	^\s*if\ \(\(\*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xb0\)\ \+\ 0x120\)\ !=\ 0\)\ \&\&\ \(iVar2\ ==\ 0\)\)\ \{$	+1
+local	FUN_0017dbdc	local_3c	laneResultOutA	INFERRED	out-parameter of FUN_00176c40: lane result of the generic path
+local	FUN_0017dbdc	local_40	laneResultOutB	INFERRED	out-parameter of FUN_001781a4: result of the dot path
+local	FUN_0017dbdc	local_44	laneResultOutC	INFERRED	out-parameter of FUN_00176a94: result of the vector path
+local	FUN_0017dbdc	local_48	laneResultOutD	INFERRED	out-parameter of FUN_00178e90: lane result of the compare path
+local	FUN_0017dbdc	local_58	foldFlags	INFERRED	out flags of the per-lane evaluators (non-zero: result depends on a non-constant)
+local	FUN_0019651c	param_1	assembler	INFERRED	machine assembler: [3] compiler, [0x25] next slot A, [0x26] next slot B
+local	FUN_0019651c	param_3	staleArg3	INFERRED	unused stale argument register
+use	FUN_0019651c	bVar1	moreLanes	INFERRED	lane counter != 3	^\s*bVar1\ =\ uVar5\ !=\ 3;$	+1
+use	FUN_0019651c	bVar1	moreLanes	INFERRED	lane counter != 3	^\s*\}\ while\ \(bVar1\);$	+1
+use	FUN_0019651c	iVar2	fetchKind	INFERRED	inst->+0x144: fetch instruction kind (0x16/0x17, 0x1b, 0x23, other)	^\s*iVar2\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x144\);$	+2
+use	FUN_0019651c	iVar2	fetchKind	INFERRED	inst->+0x144: fetch instruction kind (0x16/0x17, 0x1b, 0x23, other)	^\s*uVar3\ =\ FUN_0010e40c\(iVar2,\*\(undefined4\ \*\)\(param_2\ \+\ 0x148\)\);$	+1
+use	FUN_0019651c	iVar2	fetchKind	INFERRED	inst->+0x144: fetch instruction kind (0x16/0x17, 0x1b, 0x23, other)	^\s*else\ if\ \(iVar2\ ==\ 0x1b\)\ \{$	+1
+use	FUN_0019651c	iVar2	fetchKind	INFERRED	inst->+0x144: fetch instruction kind (0x16/0x17, 0x1b, 0x23, other)	^\s*if\ \(iVar2\ !=\ 0x23\)\ \{$	+1
+use	FUN_0019651c	iVar2	testResult	INFERRED	FUN_000d9f3c result for the target description	^\s*iVar2\ =\ FUN_000d9f3c\(\*\(undefined4\ \*\)\(param_1\[3\]\ \+\ 0x398\),0\);$	+2
+use	FUN_0019651c	iVar2	slotB	INFERRED	assembler[0x26]: next slot B index	^\s*iVar2\ =\ param_1\[0x26\];$	+1
+use	FUN_0019651c	iVar2	slotB	INFERRED	assembler[0x26]: next slot B index	^\s*\(\*pcVar4\)\(param_1,iVar2,uVar5,1,uVar3,\(\*\(uint\ \*\)\(param_2\ \+\ 0x13c\)\ \^\ 1\)\ \&\ 1\);$	+1
+use	FUN_0019651c	iVar2	compilerRef	INFERRED	assembler[3]: the compiler	^\s*iVar2\ =\ param_1\[3\];$	+1
+use	FUN_0019651c	iVar2	compilerRef	INFERRED	assembler[3]: the compiler	^\s*if\ \(\*\(int\ \*\)\(\*\(int\ \*\)\(iVar2\ \+\ 0x6c4\)\ \+\ 0x80\)\ <\ \(int\)uVar5\)\ \{$	+3
+use	FUN_0019651c	iVar2	compilerRef	INFERRED	assembler[3]: the compiler	^\s*\*\(uint\ \*\)\(\*\(int\ \*\)\(iVar2\ \+\ 0x6c4\)\ \+\ 0x88\)\ =$	+2
+use	FUN_0019651c	iVar2	slotA	INFERRED	assembler[0x25]: next slot A index, then the slot count	^\s*iVar2\ =\ param_1\[0x25\];$	+1
+use	FUN_0019651c	iVar2	slotA	INFERRED	assembler[0x25]: next slot A index, then the slot count	^\s*iVar2\ =\ param_1\[0x25\]\ \+\ 1;$	+2
+use	FUN_0019651c	iVar2	slotA	INFERRED	assembler[0x25]: next slot A index, then the slot count	^\s*if\ \(iVar2\ <=\ param_1\[0x26\]\)\ \{$	+2
+use	FUN_0019651c	iVar2	slotA	INFERRED	assembler[0x25]: next slot A index, then the slot count	^\s*param_1\[0x1d\]\ =\ iVar2\ \+\ \-1;$	+2
+use	FUN_0019651c	pcVar4	emitSlotAFn	INFERRED	virtual method at vtable +0xc4: emit a fetch record in slot A	^\s*pcVar4\ =\ \*\(code\ \*\*\)\(\*param_1\ \+\ 0xc4\);$	+1
+use	FUN_0019651c	pcVar4	emitSlotAFn	INFERRED	virtual method at vtable +0xc4: emit a fetch record in slot A	^\s*pcVar4\ =\ \*\(code\ \*\*\)\(\*param_1\ \+\ 0xc4\);$@2	+1
+use	FUN_0019651c	pcVar4	emitSlotAFn	INFERRED	virtual method at vtable +0xc4: emit a fetch record in slot A	^\s*pcVar4\ =\ \*\(code\ \*\*\)\(\*param_1\ \+\ 0xc4\);$@3	+1
+use	FUN_0019651c	pcVar4	emitSlotAFn	INFERRED	virtual method at vtable +0xc4: emit a fetch record in slot A	^\s*\(\*pcVar4\)\(param_1,a1,uVar3,a3,a4,0\);$	+1
+use	FUN_0019651c	pcVar4	emitSlotBFn	INFERRED	virtual method at vtable +0xc8: emit a fetch record in slot B	^\s*pcVar4\ =\ \*\(code\ \*\*\)\(\*param_1\ \+\ 200\);$	+1
+use	FUN_0019651c	pcVar4	emitSlotBFn	INFERRED	virtual method at vtable +0xc8: emit a fetch record in slot B	^\s*\(\*pcVar4\)\(param_1,iVar2,uVar5,1,uVar3,\(\*\(uint\ \*\)\(param_2\ \+\ 0x13c\)\ \^\ 1\)\ \&\ 1\);$	+1
+use	FUN_0019651c	uVar3	fetchArg	INFERRED	second fetch argument (inst+0x148, or FUN_0010e40c of it)	^\s*uVar3\ =\ FUN_0010e40c\(iVar2,\*\(undefined4\ \*\)\(param_2\ \+\ 0x148\)\);$	+1
+use	FUN_0019651c	uVar3	fetchArg	INFERRED	second fetch argument (inst+0x148, or FUN_0010e40c of it)	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x148\);$	+1
+use	FUN_0019651c	uVar3	fetchArg	INFERRED	second fetch argument (inst+0x148, or FUN_0010e40c of it)	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x148\);$@2	+1
+use	FUN_0019651c	uVar3	fetchArg	INFERRED	second fetch argument (inst+0x148, or FUN_0010e40c of it)	^\s*\(\*pcVar4\)\(param_1,a1,uVar3,a3,a4,0\);$	+1
+use	FUN_0019651c	uVar3	registerIndex	INFERRED	register index from thunk_FUN_00134de8	^\s*uVar3\ =\ thunk_FUN_00134de8\(\*\(undefined4\ \*\)\(param_1\[3\]\ \+\ 0x6c4\),param_2\);$	+2
+local	FUN_001922c4	param_1	staleArg1	INFERRED	unused stale argument register
+local	FUN_001922c4	param_2	staleArg2	INFERRED	unused stale argument register
+use	FUN_001922c4	bVar1	moreLanes	INFERRED	lane counter != 3	^\s*bVar1\ =\ iVar5\ !=\ 3;$	+1
+use	FUN_001922c4	bVar1	moreLanes	INFERRED	lane counter != 3	^\s*\}\ while\ \(bVar1\);$	+1
+use	FUN_001922c4	dVar13	literalOne	INFERRED	FLOAT_001aa0e8 as double: literal passed to IRInst__makeLiteralVec4Float	^\s*dVar13\ =\ \(double\)FLOAT_001aa0e8;$	+2
+use	FUN_001922c4	dVar13	literalZero	INFERRED	FLOAT_001aa0d4 as double: literal passed to IRInst__makeLiteralVec4Float	^\s*dVar13\ =\ \(double\)FLOAT_001aa0d4;$	+2
+use	FUN_001922c4	iVar12	savedField10	INFERRED	inst[4] (+0x10) kept across the rebuild into a trinary	^\s*iVar12\ =\ param_3\[4\];$	+1
+use	FUN_001922c4	iVar12	savedField10	INFERRED	inst[4] (+0x10) kept across the rebuild into a trinary	^\s*param_3\[4\]\ =\ iVar12;$	+1
+use	FUN_001922c4	iVar12	operandNumber	INFERRED	operand number 1..count	^\s*for\ \(iVar12\ =\ 1;\ iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*param_3\ \+\ 0x14\)\)\(param_3\),\ iVar12\ <=\ iVar6;$	+3
+use	FUN_001922c4	iVar2	opcode	INFERRED	opcode of inst: the 0x27..0x2a / 0x5b..0x5e compare opcodes	^\s*iVar2\ =\ \*\(int\ \*\)\(param_3\[0x22\]\ \+\ 8\);$	+5
+use	FUN_001922c4	iVar6	operandCount	INFERRED	operand count of inst (vtable +0x14)	^\s*for\ \(iVar12\ =\ 1;\ iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*param_3\ \+\ 0x14\)\)\(param_3\),\ iVar12\ <=\ iVar6;$	+2
+local	FUN_001922c4	local_40	savedCounters2	INFERRED	third word of the saved counter record (IRInst__saveCounters)
+local	FUN_001922c4	local_44	savedCounters1	INFERRED	second word of the saved counter record
+local	FUN_001922c4	local_48	savedCounters	INFERRED	saved counter record written by IRInst__saveCounters
+use	FUN_001922c4	uVar10	literalIndexOne	INFERRED	operand index of the literal 1.0 operand (2 or 3)	^\s*uVar10\ =\ 2;$	+1
+use	FUN_001922c4	uVar10	literalIndexOne	INFERRED	operand index of the literal 1.0 operand (2 or 3)	^\s*uVar10\ =\ 3;$	+1
+use	FUN_001922c4	uVar10	literalIndexOne	INFERRED	operand index of the literal 1.0 operand (2 or 3)	^\s*uVar10\ =\ 2;$@2	+1
+use	FUN_001922c4	uVar10	literalIndexOne	INFERRED	operand index of the literal 1.0 operand (2 or 3)	^\s*uVar10\ =\ 3;$@2	+1
+use	FUN_001922c4	uVar10	literalIndexOne	INFERRED	operand index of the literal 1.0 operand (2 or 3)	^\s*uVar10\ =\ 0;$	+1
+use	FUN_001922c4	uVar10	literalIndexOne	INFERRED	operand index of the literal 1.0 operand (2 or 3)	^\s*\(\(void\ \(\*\)\(\)\)FUN_000f79c4\)\(param_3,param_4,uVar10,dVar13,dVar13,dVar13,dVar13\);$	+1
+use	FUN_001922c4	uVar9	literalIndexZero	INFERRED	operand index of the literal 0.0 operand (3 or 2)	^\s*uVar9\ =\ 3;$	+1
+use	FUN_001922c4	uVar9	literalIndexZero	INFERRED	operand index of the literal 0.0 operand (3 or 2)	^\s*uVar9\ =\ 2;$	+1
+use	FUN_001922c4	uVar9	literalIndexZero	INFERRED	operand index of the literal 0.0 operand (3 or 2)	^\s*uVar9\ =\ 3;$@2	+1
+use	FUN_001922c4	uVar9	literalIndexZero	INFERRED	operand index of the literal 0.0 operand (3 or 2)	^\s*uVar9\ =\ 2;$@2	+1
+use	FUN_001922c4	uVar9	literalIndexZero	INFERRED	operand index of the literal 0.0 operand (3 or 2)	^\s*uVar9\ =\ 0;$	+1
+use	FUN_001922c4	uVar9	literalIndexZero	INFERRED	operand index of the literal 0.0 operand (3 or 2)	^\s*\(\(void\ \(\*\)\(\)\)FUN_000f79c4\)\(param_3,param_4,uVar9,dVar13,dVar13,dVar13,dVar13\);$	+1
+use	FUN_001922c4	uVar11	compilerArena	INFERRED	program+8: compiler used for the new instruction	^\s*uVar11\ =\ \*\(undefined4\ \*\)\(param_4\ \+\ 8\);$	+1
+use	FUN_001922c4	uVar11	compilerArena	INFERRED	program+8: compiler used for the new instruction	^\s*iVar3\ =\ FUN_001043f0\(0x12,uVar11\);$	+1
+use	FUN_001922c4	uVar11	compilerArena	INFERRED	program+8: compiler used for the new instruction	^\s*FUN_00106004\(iVar3,iVar12,uVar4,\*\(uint\ \*\)\(param_4\ \+\ 0x30\)\ >>\ 7\ \&\ 1,uVar11\);$	+1
+use	FUN_001922c4	uVar11	compilerArena	INFERRED	program+8: compiler used for the new instruction	^\s*FUN_00106004\(iVar3,iVar2,uVar4,\*\(uint\ \*\)\(param_4\ \+\ 0x30\)\ >>\ 7\ \&\ 1,uVar11\);$	+1
+use	FUN_001922c4	uVar11	compilerArena	INFERRED	program+8: compiler used for the new instruction	^\s*FUN_00106004\(param_3,1,0,\*\(uint\ \*\)\(param_4\ \+\ 0x30\)\ >>\ 7\ \&\ 1,uVar11\);$	+2
+use	FUN_001922c4	uVar11	compilerArena	INFERRED	program+8: compiler used for the new instruction	^\s*FUN_00106004\(param_3,1,iVar3,\*\(uint\ \*\)\(param_4\ \+\ 0x30\)\ >>\ 7\ \&\ 1,uVar11\);$	+1
+use	FUN_001922c4	uVar11	compilerArena	INFERRED	program+8: compiler used for the new instruction	^\s*FUN_00106804\(param_3,iVar2,\*\(uint\ \*\)\(param_4\ \+\ 0x30\)\ >>\ 7\ \&\ 1,uVar11\);$	+1
+use	FUN_001922c4	uVar4	operandSelectWord	INFERRED	select word of the source operand copied to the new instruction	^\s*uVar4\ =\ \*\(undefined4\ \*\)\(iVar5\ \+\ 0x10\);$	+1
+use	FUN_001922c4	uVar4	operandSelectWord	INFERRED	select word of the source operand copied to the new instruction	^\s*\*\(undefined4\ \*\)\(iVar5\ \+\ 0x10\)\ =\ uVar4;$	+1
+use	FUN_001922c4	uVar4	operandSelectWord	INFERRED	select word of the source operand copied to the new instruction	^\s*uVar4\ =\ \*\(undefined4\ \*\)\(iVar12\ \+\ 0x10\);$	+1
+use	FUN_001922c4	uVar4	operandSelectWord	INFERRED	select word of the source operand copied to the new instruction	^\s*\*\(undefined4\ \*\)\(iVar12\ \+\ 0x10\)\ =\ uVar4;$	+1
+use	FUN_001922c4	uVar4	operandSelectWord	INFERRED	select word of the source operand copied to the new instruction	^\s*uVar4\ =\ \*\(undefined4\ \*\)\(iVar2\ \+\ 0x10\);$	+1
+use	FUN_001922c4	uVar4	operandSelectWord	INFERRED	select word of the source operand copied to the new instruction	^\s*\*\(undefined4\ \*\)\(iVar3\ \+\ 0x9c\)\ =\ uVar4;$	+1

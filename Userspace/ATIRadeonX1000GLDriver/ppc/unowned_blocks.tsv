@@ -431,11 +431,11 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 215d4	215e0	padding	FUN_00020b30	3	
 21764	21770	padding	FUN_00020b30	3	
 21c6c	21c70	padding	FUN_00020b30	1	
-22274	22280	padding	FUN_00021c70	3	
+22274	22280	padding	gld_emitCopyBlitPacket	3	
 22284	22290	padding	noop_22280	3	
 224f8	22500	padding	_gldUpdateDispatch	2	
 22ea8	22eb0	padding	_gldInitDispatch	2	
-230c8	230d0	padding	FUN_00022eb0	2	
+230c8	230d0	padding	gld_emitDirtyStatePackets	2	
 23138	23140	padding	gld_emitSurfaceCopyPacket	2	
 236c8	236d0	padding	gld_emitSurfaceCopyPacket	2	
 236e8	236f0	padding	gld_emitSurfaceCopyPacket	2	
@@ -635,12 +635,12 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 2e9cc	2e9d0	padding	FUN_0002ddf0	1	
 2ea48	2ea50	padding	FUN_0002ddf0	2	
 2ebb8	2ebc0	padding	FUN_0002ddf0	2	
-2ec5c	2ec60	padding	FUN_0002ebc0	1	
-2ecd4	2ece0	padding	FUN_0002ebc0	3	
-2ee24	2ee30	padding	FUN_0002ebc0	3	
-2ef54	2ef60	padding	FUN_0002ee30	3	
-2f328	2f330	padding	FUN_0002ee30	2	
-2f408	2f410	padding	FUN_0002ee30	2	
+2ec5c	2ec60	padding	gld_applyAnisotropyOverride	1	
+2ecd4	2ece0	padding	gld_applyAnisotropyOverride	3	
+2ee24	2ee30	padding	gld_applyAnisotropyOverride	3	
+2ef54	2ef60	padding	gld_updateTextureSamplerState	3	
+2f328	2f330	padding	gld_updateTextureSamplerState	2	
+2f408	2f410	padding	gld_updateTextureSamplerState	2	
 2f44c	2f478	table	window_mode_to_ati_format	11	
 2f4fc	2f500	padding	gldTextureFormatCodeMatchesType	1	
 2f52c	2f530	padding	gldTextureFormatCodeMatchesType	1	
@@ -1800,12 +1800,12 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 86a08	86a10	padding	FUN_00086930	2	
 86a4c	86a50	padding	FUN_00086a10	1	
 86a74	86a80	padding	FUN_00086a10	3	
-86b9c	86ba0	padding	FUN_00086a80	1	
-86c4c	86c50	padding	FUN_00086ba0	1	
-86ef4	86f00	padding	FUN_00086ba0	3	
-8745c	87460	padding	FUN_000872e0	1	
-87498	874a0	padding	FUN_000872e0	2	
-877fc	87800	padding	FUN_000872e0	1	
+86b9c	86ba0	padding	gldSaveRasterState	1	
+86c4c	86c50	padding	gldEnterInternalDrawState	1	
+86ef4	86f00	padding	gldEnterInternalDrawState	3	
+8745c	87460	padding	gldLeaveInternalDrawState	1	
+87498	874a0	padding	gldLeaveInternalDrawState	2	
+877fc	87800	padding	gldLeaveInternalDrawState	1	
 87958	87960	padding	arbfpUpdateConstantsFp24	2	
 879d8	879e0	padding	arbfpInitResourceLimits	2	
 879e4	879f0	padding	noop_879e0	3	
@@ -2873,8 +2873,8 @@ e0790	e0794	millicode	ildisDisassembleBody	1
 e0cc4	e0cc8	millicode	FUN_000e0ca8	1	
 e0e04	e0e0c	millicode	FUN_000e0cd0	2	
 e1480	e1484	millicode	Compiler__timerOutputFileName	1	
-e1a08	e1a0c	eh-pad	FUN_000e1920	1	__Unwind_Resume
-e1b30	e1b34	eh-pad	FUN_000e1a48	1	__Unwind_Resume
+e1a08	e1a0c	eh-pad	Compiler__init_e1920	1	__Unwind_Resume
+e1b30	e1b34	eh-pad	Compiler__init_e1a48	1	__Unwind_Resume
 e1bf0	e1bf4	millicode	Compiler__setHardwareFamily	1	
 e1c20	e1c24	eh-pad	Compiler__setHardwareFamily	1	__Unwind_Resume
 e2084	e2094	other	Compiler__releaseChipAndPools	4	
@@ -2958,7 +2958,7 @@ ee618	ee61c	millicode	Program__ctor_ee29c	1
 ee718	ee71c	millicode	Program__ctor_ee29c	1	
 ee748	ee764	other	Program__ctor_ee29c	7	0x193cc0
 ee780	ee7a0	eh-pad	FUN_000eec50	8	__Unwind_Resume
-ee830	ee850	eh-pad	FUN_000ee7a0	8	0x193cc0,__Unwind_Resume
+ee830	ee850	eh-pad	Program__buildBlockArrayByKey	8	0x193cc0,__Unwind_Resume
 eede8	eee08	eh-pad	FUN_000eec50	8	0x193cc0,__Unwind_Resume
 ef038	ef058	eh-pad	FUN_000eee4c	8	0x193cc0,__Unwind_Resume
 ef79c	ef7a0	millicode	FUN_000ef498	1	
@@ -3423,7 +3423,7 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 182010	18202c	other	Block__flattenAndRebuildAddMulTree	7	0x193cc0
 182040	182060	eh-pad	Block__flattenAndRebuildAddMulTree	8	0x193cc0,__Unwind_Resume
 183a98	183a9c	eh-pad	Block__flattenAndRebuildAddMulTree	1	__Unwind_Resume
-1840ac	1840cc	eh-pad	FUN_0018401c	8	0x193cc0,__Unwind_Resume
+1840ac	1840cc	eh-pad	pass_height_reduction	8	0x193cc0,__Unwind_Resume
 18421c	184238	other	FUN_0018413c	7	0x193cc0
 184250	18426c	other	FUN_0018413c	7	0x193cc0
 184290	1842b0	eh-pad	FUN_0018413c	8	0x193cc0,__Unwind_Resume

@@ -100,15 +100,15 @@ LAB_000c7584:
 }
 
 /* ilEmitShadowCompare @ 0xc7650 (680 bytes) */
-int ilEmitShadowCompare(programRecord, param_2, coordinateOperand, coordinateExtraWordPtr, unitIndex, copyExtraWord, outCursor, param_8)
+int ilEmitShadowCompare(programRecord, unusedArgR4, coordinateOperand, coordinateExtraWordPtr, unitIndex, copyExtraWord, outCursor, unusedArgR10)
   int programRecord;
-  undefined4 param_2;
+  undefined4 unusedArgR4;
   uint *coordinateOperand;
   uint *coordinateExtraWordPtr;
   uint unitIndex;
   int copyExtraWord;
   uint *outCursor;
-  undefined4 param_8;
+  undefined4 unusedArgR10;
 {
   uint coordinateOperandWord0;
   uint programRecordWord184;
@@ -191,13 +191,13 @@ int ilEmitShadowCompare(programRecord, param_2, coordinateOperand, coordinateExt
 }
 
 /* FUN_000c7930 @ 0xc7930 (2004 bytes) */
-int FUN_000c7930(param_1, param_2, scanTokenWord, param_4, param_5, param_6, opcodeTimes4)
+int FUN_000c7930(param_1, param_2, scanTokenWord, unusedArgR6, unusedArgR7, unusedArgR8, opcodeTimes4)
   undefined4 *param_1;
   int param_2;
   undefined4 scanTokenWord;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
+  undefined4 unusedArgR6;
+  undefined4 unusedArgR7;
+  undefined4 unusedArgR8;
   uint opcodeTimes4;
 {
   uint loopIndex;
@@ -589,60 +589,60 @@ int ilEmitPrologue(outCursor, programRecord, passThroughR5, passThroughR6, passT
 }
 
 /* FUN_000c8600 @ 0xc8600 (316 bytes) */
-int FUN_000c8600(param_1, param_2, param_3, destinationExtraWord, param_5)
-  uint param_1;
-  int param_2;
-  int *param_3;
+int FUN_000c8600(registerIndex, registerKind, usageInfo, destinationExtraWord, param_5)
+  uint registerIndex;
+  int registerKind;
+  int *usageInfo;
   uint destinationExtraWord;
   int param_5;
 {
   int iVar1;
   
-  if ((int)param_1 < *param_3) {
-    iVar1 = param_3[1];
+  if ((int)registerIndex < *usageInfo) {
+    iVar1 = usageInfo[1];
   }
   else {
-    iVar1 = param_3[1];
-    if (iVar1 < (int)param_1) goto LAB_000c8650;
-    *param_3 = param_1 + 1;
+    iVar1 = usageInfo[1];
+    if (iVar1 < (int)registerIndex) goto LAB_000c8650;
+    *usageInfo = registerIndex + 1;
   }
-  if (((int)param_1 <= iVar1) && (*param_3 <= (int)param_1)) {
-    param_3[1] = param_1 - 1;
+  if (((int)registerIndex <= iVar1) && (*usageInfo <= (int)registerIndex)) {
+    usageInfo[1] = registerIndex - 1;
   }
 LAB_000c8650:
-  if (param_2 == 0x17) {
-    param_3[param_1 + 0x87c] = 1;
+  if (registerKind == 0x17) {
+    usageInfo[registerIndex + 0x87c] = 1;
     if (((((destinationExtraWord & 3) != 1) && ((destinationExtraWord & 0xc) != 4)) && ((destinationExtraWord & 0x30) != 0x10)) &&
        (((destinationExtraWord & 0xc0) != 0x40 && (param_5 != 0)))) {
       return;
     }
-    param_3[0x889] = 1;
+    usageInfo[0x889] = 1;
     return;
   }
-  if (param_2 == 0x18) {
-    param_3[0x88a] = 1;
-    param_3[0x889] = 1;
+  if (registerKind == 0x18) {
+    usageInfo[0x88a] = 1;
+    usageInfo[0x889] = 1;
     return;
   }
-  if (param_2 == 0x12) {
-    param_3[param_1 + 0x885] = 1;
+  if (registerKind == 0x12) {
+    usageInfo[registerIndex + 0x885] = 1;
     return;
   }
-  if (param_2 == 0x13) {
-    param_3[param_1 + 0x887] = 1;
+  if (registerKind == 0x13) {
+    usageInfo[registerIndex + 0x887] = 1;
     return;
   }
-  if (param_2 != 0x10) {
-    if (param_2 != 0x11) {
+  if (registerKind != 0x10) {
+    if (registerKind != 0x11) {
       return;
     }
-    if (param_3[0x8c7] < (int)param_1) {
-      param_3[0x8c7] = param_1;
+    if (usageInfo[0x8c7] < (int)registerIndex) {
+      usageInfo[0x8c7] = registerIndex;
     }
-    param_3[2] = 1 << (param_1 & 0x3f) | param_3[2];
+    usageInfo[2] = 1 << (registerIndex & 0x3f) | usageInfo[2];
     return;
   }
-  param_3[0x883] = 1;
+  usageInfo[0x883] = 1;
   return;
 }
 
@@ -4086,30 +4086,30 @@ joined_r0x000cc708:
 #undef local_c044
 
 /* FUN_000cd05c @ 0xcd05c (176 bytes) */
-int FUN_000cd05c(param_1, param_2, param_3)
-  int param_1;
+int FUN_000cd05c(scCallbacks, param_2, allocTag)
+  int scCallbacks;
   int param_2;
-  uint param_3;
+  uint allocTag;
 {
   int a1;
   int iVar1;
   
-  if ((((((param_1 == 0) || (*(code **)(param_1 + 0x30) == (code *)0x0)) ||
-        (*(int *)(param_1 + 0x34) == 0)) ||
-       ((*(int *)(param_1 + 0x38) == 0 || (*(int *)(param_1 + 0x40) == 0)))) ||
-      ((*(int *)(param_1 + 0x44) == 0 ||
-       ((*(int *)(param_1 + 0x48) == 0 || (*(int *)(param_1 + 0x4c) == 0)))))) ||
+  if ((((((scCallbacks == 0) || (*(code **)(scCallbacks + 0x30) == (code *)0x0)) ||
+        (*(int *)(scCallbacks + 0x34) == 0)) ||
+       ((*(int *)(scCallbacks + 0x38) == 0 || (*(int *)(scCallbacks + 0x40) == 0)))) ||
+      ((*(int *)(scCallbacks + 0x44) == 0 ||
+       ((*(int *)(scCallbacks + 0x48) == 0 || (*(int *)(scCallbacks + 0x4c) == 0)))))) ||
      ((param_2 == 0 ||
-      (a1 = (**(code **)(param_1 + 0x30))(*(undefined4 *)(param_1 + 0x2c),0x44,param_3), a1 == 0))))
+      (a1 = (**(code **)(scCallbacks + 0x30))(*(undefined4 *)(scCallbacks + 0x2c),0x44,allocTag), a1 == 0))))
   {
     a1 = 0;
   }
   else {
-    FUN_000da0c0(a1,param_1);
+    FUN_000da0c0(a1,scCallbacks);
     iVar1 = FUN_000da420(a1);
     if (iVar1 != 0) {
       scDestroyCompilerObject(a1,1);
-      (**(code **)(param_1 + 0x34))(*(undefined4 *)(param_1 + 0x2c),a1,param_3);
+      (**(code **)(scCallbacks + 0x34))(*(undefined4 *)(scCallbacks + 0x2c),a1,allocTag);
       a1 = 0;
     }
   }
