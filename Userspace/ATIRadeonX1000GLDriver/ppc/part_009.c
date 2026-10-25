@@ -323,6 +323,7 @@ int extvsEmitMmul(ctx, shader, instRecord)
   int *shader;
   int instRecord;
 {
+  int dstOperand;
   int instCount;
   int instSlot;
   int hwProgram;
@@ -333,7 +334,7 @@ int extvsEmitMmul(ctx, shader, instRecord)
   int src0Operand;
   int *symbolList;
   int src1Operand;
-  int iVar7;
+  int hwProgram2;
   int iVar8;
   int iVar9;
   undefined4 uStack_88;
@@ -358,41 +359,41 @@ int extvsEmitMmul(ctx, shader, instRecord)
     src1Operand = instRecord + 0x3c;
     iVar2 = extvsOperandsConflictInBank(symbolList,src0Operand,src1Operand);
     if (iVar2 == 0) {
-      iVar7 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
-      iVar2 = *(int *)(iVar7 + 0x18);
+      hwProgram2 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
+      iVar2 = *(int *)(hwProgram2 + 0x18);
       if (0x100 < iVar2 + 4U) {
         *(undefined1 *)(shader + 4) = 0;
-        iVar2 = *(int *)(iVar7 + 0x18);
-        if (*(uint *)(iVar7 + 0x20) < iVar2 + 4U) {
-          newInstArray = (**(code **)(ctx + 0xc))(*(uint *)(iVar7 + 0x20) * 0x10 + 0x100);
+        iVar2 = *(int *)(hwProgram2 + 0x18);
+        if (*(uint *)(hwProgram2 + 0x20) < iVar2 + 4U) {
+          newInstArray = (**(code **)(ctx + 0xc))(*(uint *)(hwProgram2 + 0x20) * 0x10 + 0x100);
           (**(code **)(((unsigned char *)0x00001344) + ctx))
-                    (newInstArray,*(undefined4 *)(iVar7 + 0x1c),*(int *)(iVar7 + 0x20) << 4);
-          (**(code **)(ctx + 0x18))(*(undefined4 *)(iVar7 + 0x1c));
-          *(undefined4 *)(iVar7 + 0x1c) = newInstArray;
-          iVar2 = *(int *)(iVar7 + 0x18);
-          *(int *)(iVar7 + 0x20) = *(int *)(iVar7 + 0x20) + 0x10;
+                    (newInstArray,*(undefined4 *)(hwProgram2 + 0x1c),*(int *)(hwProgram2 + 0x20) << 4);
+          (**(code **)(ctx + 0x18))(*(undefined4 *)(hwProgram2 + 0x1c));
+          *(undefined4 *)(hwProgram2 + 0x1c) = newInstArray;
+          iVar2 = *(int *)(hwProgram2 + 0x18);
+          *(int *)(hwProgram2 + 0x20) = *(int *)(hwProgram2 + 0x20) + 0x10;
         }
       }
-      iVar8 = *(int *)(iVar7 + 0x1c);
+      iVar8 = *(int *)(hwProgram2 + 0x1c);
       iVar2 = iVar2 * 0x10;
-      iVar7 = instRecord + 4;
+      dstOperand = instRecord + 4;
       iVar9 = iVar2 + iVar8;
-      extvsEncodeSourceOperand(ctx,shader,iVar7,iVar9,1,0,0);
+      extvsEncodeSourceOperand(ctx,shader,dstOperand,iVar9,1,0,0);
       *(uint *)(iVar2 + iVar8) = *(uint *)(iVar2 + iVar8) & 0xff1fffff;
       extvsEncodeSourceSwizzle(shader,symbolList,src0Operand,iVar9 + 4,0);
       extvsEncodeSourceSwizzle(shader,symbolList,src1Operand,iVar9 + 8,0);
       *(undefined4 *)(iVar9 + 0xc) = *(undefined4 *)(iVar9 + 8);
-      extvsEncodeSourceOperand(ctx,shader,iVar7,iVar9 + 0x10,1,0,0);
+      extvsEncodeSourceOperand(ctx,shader,dstOperand,iVar9 + 0x10,1,0,0);
       *(uint *)(iVar9 + 0x10) = *(uint *)(iVar9 + 0x10) & 0xff2fffff;
       extvsEncodeSourceSwizzle(shader,symbolList,src0Operand,iVar9 + 0x14,1);
       extvsEncodeSourceSwizzle(shader,symbolList,src1Operand,iVar9 + 0x18,0);
       *(undefined4 *)(iVar9 + 0x1c) = *(undefined4 *)(iVar9 + 0x18);
-      extvsEncodeSourceOperand(ctx,shader,iVar7,iVar9 + 0x20,1,0,0);
+      extvsEncodeSourceOperand(ctx,shader,dstOperand,iVar9 + 0x20,1,0,0);
       *(uint *)(iVar9 + 0x20) = *(uint *)(iVar9 + 0x20) & 0xff4fffff;
       extvsEncodeSourceSwizzle(shader,symbolList,src0Operand,iVar9 + 0x24,2);
       extvsEncodeSourceSwizzle(shader,symbolList,src1Operand,iVar9 + 0x28,0);
       *(undefined4 *)(iVar9 + 0x2c) = *(undefined4 *)(iVar9 + 0x28);
-      extvsEncodeSourceOperand(ctx,shader,iVar7,iVar9 + 0x30,1,0,0);
+      extvsEncodeSourceOperand(ctx,shader,dstOperand,iVar9 + 0x30,1,0,0);
       *(uint *)(iVar9 + 0x30) = *(uint *)(iVar9 + 0x30) & 0xff8fffff;
       extvsEncodeSourceSwizzle(shader,symbolList,src0Operand,iVar9 + 0x34,3);
       extvsEncodeSourceSwizzle(shader,symbolList,src1Operand,iVar9 + 0x38,0);
@@ -417,7 +418,7 @@ int extvsEmitMmul(ctx, shader, instRecord)
       *(int *)(hwProgram + 0x20) = *(int *)(hwProgram + 0x20) + 0x10;
     }
   }
-  iVar7 = instRecord + 4;
+  dstOperand = instRecord + 4;
   instSlot = instCount * 0x10 + *(int *)(hwProgram + 0x1c);
   tempIndex = extvsAllocTempSlot(ctx,shader);
   uStack_88 = 3;
@@ -432,7 +433,7 @@ int extvsEmitMmul(ctx, shader, instRecord)
   uVar1 = *(uint *)(instSlot + 4) & 0xfe001fff | 0x1248000;
   *(uint *)(instSlot + 0xc) = uVar1;
   *(uint *)(instSlot + 8) = uVar1;
-  extvsEncodeSourceOperand(ctx,shader,iVar7,instSlot + 0x10,1,0,0);
+  extvsEncodeSourceOperand(ctx,shader,dstOperand,instSlot + 0x10,1,0,0);
   *(uint *)(instSlot + 0x10) = *(uint *)(instSlot + 0x10) & 0xff1fffff;
   extvsEncodeSourceSwizzle(shader,symbolList,iVar2,instSlot + 0x14,0);
   uStack_6c = 3;
@@ -444,17 +445,17 @@ int extvsEmitMmul(ctx, shader, instRecord)
   uStack_68 = tempIndex;
   extvsEncodeSourceSwizzle(shader,symbolList,&uStack_6c,instSlot + 0x18,0);
   *(undefined4 *)(instSlot + 0x1c) = *(undefined4 *)(instSlot + 0x18);
-  extvsEncodeSourceOperand(ctx,shader,iVar7,instSlot + 0x20,1,0,0);
+  extvsEncodeSourceOperand(ctx,shader,dstOperand,instSlot + 0x20,1,0,0);
   *(uint *)(instSlot + 0x20) = *(uint *)(instSlot + 0x20) & 0xff2fffff;
   extvsEncodeSourceSwizzle(shader,symbolList,iVar2,instSlot + 0x24,1);
   extvsEncodeSourceSwizzle(shader,symbolList,&uStack_6c,instSlot + 0x28,0);
   *(undefined4 *)(instSlot + 0x2c) = *(undefined4 *)(instSlot + 0x28);
-  extvsEncodeSourceOperand(ctx,shader,iVar7,instSlot + 0x30,1,0,0);
+  extvsEncodeSourceOperand(ctx,shader,dstOperand,instSlot + 0x30,1,0,0);
   *(uint *)(instSlot + 0x30) = *(uint *)(instSlot + 0x30) & 0xff4fffff;
   extvsEncodeSourceSwizzle(shader,symbolList,iVar2,instSlot + 0x34,2);
   extvsEncodeSourceSwizzle(shader,symbolList,&uStack_6c,instSlot + 0x38,0);
   *(undefined4 *)(instSlot + 0x3c) = *(undefined4 *)(instSlot + 0x38);
-  extvsEncodeSourceOperand(ctx,shader,iVar7,instSlot + 0x40,1,0,0);
+  extvsEncodeSourceOperand(ctx,shader,dstOperand,instSlot + 0x40,1,0,0);
   *(uint *)(instSlot + 0x40) = *(uint *)(instSlot + 0x40) & 0xff8fffff;
   extvsEncodeSourceSwizzle(shader,symbolList,iVar2,instSlot + 0x44,3);
   extvsEncodeSourceSwizzle(shader,symbolList,&uStack_6c,instSlot + 0x48,0);
