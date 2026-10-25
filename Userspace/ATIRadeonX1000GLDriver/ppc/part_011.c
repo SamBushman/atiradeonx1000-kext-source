@@ -787,83 +787,83 @@ int recordRegisterIsAssignable(ctx, program, reg, usedValueMask, recordIndex, co
   int loopIndex;
   int loopIndex2;
   bool moreComponents;
-  bool bVar2;
-  int iVar3;
+  bool conflict;
+  int regOffset;
   uint *puVar4;
-  undefined4 *puVar5;
+  undefined4 *headCursor;
   int iVar6;
   uint uVar7;
   uint uVar8;
   uint loopCounterD;
   uint uVar10;
-  int *piVar11;
-  uint uVar12;
+  int *valueIdCursor;
+  uint boundMask;
   uint uVar13;
   int iVar14;
   uint *puVar15;
   int *piVar16;
   int remainingB;
-  int iVar18;
-  int local_68 [4];
-  uint local_58 [7];
+  int seenCountdown;
+  int seenValueIds [4];
+  uint earliestWriter [7];
   
-  iVar3 = reg * 0x10;
+  regOffset = reg * 0x10;
   remainingB = 4;
-  puVar4 = (uint *)(iVar3 + ctx + 0x2d87c);
+  puVar4 = (uint *)(regOffset + ctx + 0x2d87c);
   loopCounterF = 0;
   do {
     if (((componentMask & 1 << (loopCounterF & 0x3f)) == 0) ||
        ((((int)*(char *)(reg + ctx + 0x3087c) >> (loopCounterF & 0x3f) & 1U) != 0 &&
         (recordIndex == *puVar4)))) {
-      bVar2 = false;
+      conflict = false;
     }
     else {
-      bVar2 = true;
+      conflict = true;
     }
     loopCounterF = loopCounterF + 1;
     remainingB = remainingB + -1;
     if (remainingB == 0) {
-      if (!bVar2) {
+      if (!conflict) {
         return 0;
       }
       break;
     }
     puVar4 = puVar4 + 1;
-  } while (!bVar2);
-  uVar12 = (uint)*(char *)(reg + ctx + 0x3087c);
-  if ((uVar12 & usedValueMask) == 0) {
+  } while (!conflict);
+  boundMask = (uint)*(char *)(reg + ctx + 0x3087c);
+  if ((boundMask & usedValueMask) == 0) {
     return 0;
   }
   loopCounterE = 0;
-  bVar2 = false;
+  conflict = false;
   remainingB = 4;
-  puVar5 = (undefined4 *)(iVar3 + ctx + 0x2a87c);
+  headCursor = (undefined4 *)(regOffset + ctx + 0x2a87c);
   do {
     componentBit = 1 << (loopCounterE & 0x3f);
-    if (((((componentBit & uVar12) != 0) && (puVar4 = (uint *)*puVar5, puVar4 != (uint *)0x0)) &&
+    if (((((componentBit & boundMask) != 0) && (puVar4 = (uint *)*headCursor, puVar4 != (uint *)0x0)) &&
         (recordIndex == *puVar4)) && (puVar4[1] == 0)) {
-      uVar12 = uVar12 & ~componentBit;
-      bVar2 = true;
+      boundMask = boundMask & ~componentBit;
+      conflict = true;
     }
     loopCounterE = loopCounterE + 1;
-    puVar5 = puVar5 + 1;
+    headCursor = headCursor + 1;
     remainingB = remainingB + -1;
   } while (remainingB != 0);
-  if ((uVar12 != 0) && (bVar2)) {
+  if ((boundMask != 0) && (conflict)) {
     loopIndex = 0;
     componentIndex = 0;
-    bVar2 = false;
-    piVar11 = (int *)(iVar3 + ctx + 0x2d87c);
+    conflict = false;
+    valueIdCursor = (int *)(regOffset + ctx + 0x2d87c);
     do {
-      if ((1 << (componentIndex & 0x3f) & uVar12) != 0) {
-        if (bVar2) {
-          iVar14 = *piVar11;
+      if ((1 << (componentIndex & 0x3f) & boundMask) != 0) {
+        if (conflict) {
+          iVar14 = *valueIdCursor;
           loopCounter = 0;
-          iVar18 = loopIndex;
+          seenCountdown = loopIndex;
           do {
-            piVar16 = local_68 + loopCounter;
-            iVar18 = iVar18 + -1;
-            if (iVar18 == 0) {
+            piVar16 = seenValueIds + loopCounter;
+            seenCountdown = seenCountdown + -1;
+            if (seenCountdown == 0) {
               if (*piVar16 != iVar14) goto LAB_00077f68;
               break;
             }
@@ -871,24 +871,24 @@ int recordRegisterIsAssignable(ctx, program, reg, usedValueMask, recordIndex, co
           } while (*piVar16 != iVar14);
         }
         else {
-          iVar14 = *piVar11;
+          iVar14 = *valueIdCursor;
 LAB_00077f68:
-          local_68[loopIndex] = iVar14;
-          bVar2 = 0 < loopIndex + 1;
+          seenValueIds[loopIndex] = iVar14;
+          conflict = 0 < loopIndex + 1;
           loopIndex = loopIndex + 1;
         }
       }
       moreComponents = componentIndex != 3;
-      piVar11 = piVar11 + 1;
+      valueIdCursor = valueIdCursor + 1;
       componentIndex = componentIndex + 1;
     } while (moreComponents);
-    if (bVar2) {
+    if (conflict) {
       loopIndex2 = 0;
       uVar10 = 0;
-      piVar11 = local_68;
+      valueIdCursor = seenValueIds;
       do {
-        iVar6 = *piVar11;
-        piVar11 = piVar11 + 1;
+        iVar6 = *valueIdCursor;
+        valueIdCursor = valueIdCursor + 1;
         if (iVar6 != -1) {
           for (puVar4 = *(uint **)(iVar6 * 4 + ctx + 0xc450); puVar4 != (uint *)0x0;
               puVar4 = (uint *)puVar4[4]) {
@@ -896,11 +896,11 @@ LAB_00077f68:
             if ((*(uint *)(uVar13 * 4 + ctx + 0x3348c) & 0x40000) == 0) {
               uVar8 = ((int (*)())recordGetWriteMask)(uVar13 * 0x10 + program);
               loopCounterD = 0;
-              puVar15 = local_58;
+              puVar15 = earliestWriter;
               remaining = 4;
               do {
                 uVar7 = 1 << (loopCounterD & 0x3f);
-                if ((uVar8 & uVar7 & ~uVar12) != 0) {
+                if ((uVar8 & uVar7 & ~boundMask) != 0) {
                   if ((uVar7 & uVar10) == 0) {
                     *puVar15 = uVar13;
                     uVar10 = uVar10 | uVar7;
@@ -920,7 +920,7 @@ LAB_00077f68:
       } while (loopIndex2 != loopIndex);
       if (uVar10 != 0) {
         loopCounterG = 0;
-        puVar4 = local_58;
+        puVar4 = earliestWriter;
         remainingB = 4;
         do {
           uVar8 = 1 << (loopCounterG & 0x3f);
@@ -937,54 +937,54 @@ LAB_00077f68:
   }
   uVar10 = 0;
 LAB_000780d4:
-  if (((usedValueMask & uVar12) == 0) && ((uVar10 & usedValueMask) != 0)) {
+  if (((usedValueMask & boundMask) == 0) && ((uVar10 & usedValueMask) != 0)) {
     return 1;
   }
-  uVar12 = usedValueMask & (uVar10 | uVar12);
-  if (uVar12 != 0) {
+  boundMask = usedValueMask & (uVar10 | boundMask);
+  if (boundMask != 0) {
     componentIndex = 0;
-    puVar4 = (uint *)(iVar3 + ctx + 0x2d87c);
+    puVar4 = (uint *)(regOffset + ctx + 0x2d87c);
     do {
       componentBit = 1 << (componentIndex & 0x3f);
-      if ((componentBit & uVar12) != 0) {
+      if ((componentBit & boundMask) != 0) {
         if ((componentMask & componentBit) == 0) {
           puVar15 = *(uint **)(recordIndex * 4 + ctx + 0xc450);
           if (puVar15 != (uint *)0x0) {
             do {
               if (*puVar15 == *puVar4) {
-                uVar12 = uVar12 & ~componentBit;
+                boundMask = boundMask & ~componentBit;
               }
               puVar15 = (uint *)puVar15[4];
             } while (puVar15 != (uint *)0x0);
           }
         }
         else if (recordIndex == *puVar4) {
-          uVar12 = uVar12 & ~componentBit;
+          boundMask = boundMask & ~componentBit;
         }
       }
       moreComponentsB = componentIndex != 3;
       puVar4 = puVar4 + 1;
       componentIndex = componentIndex + 1;
     } while (moreComponentsB);
-    if (uVar12 != 0) {
+    if (boundMask != 0) {
       componentIndex = 0;
-      piVar11 = (int *)(iVar3 + ctx + 0x2d87c);
+      valueIdCursor = (int *)(regOffset + ctx + 0x2d87c);
       do {
         componentBit = 1 << (componentIndex & 0x3f);
-        if ((((componentBit & uVar12) != 0) && ((componentBit & componentMask) == 0)) &&
+        if ((((componentBit & boundMask) != 0) && ((componentBit & componentMask) == 0)) &&
            (piVar16 = *(int **)(recordIndex * 4 + ctx + 0xe450), piVar16 != (int *)0x0)) {
           do {
-            if (*piVar16 == *piVar11) {
-              uVar12 = uVar12 & ~componentBit;
+            if (*piVar16 == *valueIdCursor) {
+              boundMask = boundMask & ~componentBit;
             }
             piVar16 = (int *)piVar16[4];
           } while (piVar16 != (int *)0x0);
         }
         moreComponentsB = componentIndex != 3;
-        piVar11 = piVar11 + 1;
+        valueIdCursor = valueIdCursor + 1;
         componentIndex = componentIndex + 1;
       } while (moreComponentsB);
-      if (uVar12 != 0) {
+      if (boundMask != 0) {
         return 1;
       }
     }
@@ -1289,86 +1289,86 @@ LAB_00078b54:
 }
 
 /* recordRetargetDestination @ 0x78b80 (560 bytes) */
-int recordRetargetDestination(ctx, param_2, param_3)
+int recordRetargetDestination(ctx, recordIndex, newRegId)
   int ctx;
-  int param_2;
-  uint param_3;
+  int recordIndex;
+  uint newRegId;
 {
   bool moreSources;
-  bool bVar1;
-  int iVar2;
-  int *piVar3;
-  uint uVar4;
+  bool referencesRecord;
+  int consumerIndex;
+  int *readerNode;
+  uint oldSourceWord;
   uint uVar5;
-  uint uVar6;
-  int iVar7;
-  uint uVar8;
-  int *piVar9;
-  int *piVar10;
-  int iVar11;
+  uint newFile;
+  int programBase;
+  uint newFileIndex;
+  int *consumerNode;
+  int *sourceWordAddrCursor;
+  int consumerRecord;
   uint sourceIndex;
-  undefined4 *puVar13;
-  int local_68 [9];
+  undefined4 *listCursor;
+  int sourceWordAddrs [9];
   
-  iVar7 = ctx + 0x1286c;
-  uVar5 = *(uint *)(iVar7 + param_2 * 0x10);
-  uVar8 = (uint)(char)(DAT_001aa764)[param_3 >> 8];
-  if ((char)(DAT_001aa758)[uVar5 >> 8 & 0xf] * 0x100 + (uVar5 >> 0xd & 0x7f) != param_3) {
-    *(uint *)(iVar7 + param_2 * 0x10) =
-         (param_3 & 0x7f) << 0xd | (uVar8 & 0xf) << 8 | uVar5 & 0xfff010ff;
-    piVar9 = *(int **)(param_2 * 4 + ctx + 0xa450);
-    if (piVar9 != (int *)0x0) {
+  programBase = ctx + 0x1286c;
+  uVar5 = *(uint *)(programBase + recordIndex * 0x10);
+  newFileIndex = (uint)(char)(DAT_001aa764)[newRegId >> 8];
+  if ((char)(DAT_001aa758)[uVar5 >> 8 & 0xf] * 0x100 + (uVar5 >> 0xd & 0x7f) != newRegId) {
+    *(uint *)(programBase + recordIndex * 0x10) =
+         (newRegId & 0x7f) << 0xd | (newFileIndex & 0xf) << 8 | uVar5 & 0xfff010ff;
+    consumerNode = *(int **)(recordIndex * 4 + ctx + 0xa450);
+    if (consumerNode != (int *)0x0) {
       do {
-        iVar2 = *piVar9;
+        consumerIndex = *consumerNode;
         sourceIndex = 0;
-        piVar10 = local_68;
-        iVar11 = iVar2 * 0x10 + iVar7;
-        uVar5 = *(uint *)(iVar2 * 4 + ctx + 0x6450);
-        local_68[0] = iVar11 + 4;
-        local_68[1] = iVar11 + 8;
-        local_68[2] = iVar11 + 0xc;
-        puVar13 = (undefined4 *)(iVar2 * 0xc + ctx + 0x450);
+        sourceWordAddrCursor = sourceWordAddrs;
+        consumerRecord = consumerIndex * 0x10 + programBase;
+        uVar5 = *(uint *)(consumerIndex * 4 + ctx + 0x6450);
+        sourceWordAddrs[0] = consumerRecord + 4;
+        sourceWordAddrs[1] = consumerRecord + 8;
+        sourceWordAddrs[2] = consumerRecord + 0xc;
+        listCursor = (undefined4 *)(consumerIndex * 0xc + ctx + 0x450);
         do {
           if (((uVar5 & 1 << (sourceIndex & 0x3f)) != 0) &&
-             (piVar3 = (int *)*puVar13, piVar3 != (int *)0x0)) {
-            bVar1 = false;
+             (readerNode = (int *)*listCursor, readerNode != (int *)0x0)) {
+            referencesRecord = false;
             do {
-              if (param_2 == *piVar3) {
-                bVar1 = true;
+              if (recordIndex == *readerNode) {
+                referencesRecord = true;
               }
-              piVar3 = (int *)piVar3[4];
-            } while (piVar3 != (int *)0x0);
-            if (bVar1) {
-              uVar6 = uVar8;
+              readerNode = (int *)readerNode[4];
+            } while (readerNode != (int *)0x0);
+            if (referencesRecord) {
+              newFile = newFileIndex;
               if ((**(uint **)(ctx + 0x34) & 0x40) != 0) {
-                if (uVar8 == 4) {
-                  uVar6 = 3;
+                if (newFileIndex == 4) {
+                  newFile = 3;
                 }
-                else if (uVar8 == 5) {
-                  uVar6 = 1;
+                else if (newFileIndex == 5) {
+                  newFile = 1;
                 }
                 else {
-                  uVar6 = 0;
+                  newFile = 0;
                 }
               }
-              uVar4 = *(uint *)*piVar10;
-              if (((param_3 & 0xff) != (uVar4 >> 5 & 0xff)) || (uVar6 != (uVar4 & 0xf))) {
-                *(uint *)*piVar10 = (param_3 & 0xff) << 5 | uVar6 & 0xf | uVar4 & 0xffffe010;
-                ((int (*)())recordCountSourceRegisterFiles)(ctx,ctx + 0x3148c + iVar2 * 4,iVar11);
+              oldSourceWord = *(uint *)*sourceWordAddrCursor;
+              if (((newRegId & 0xff) != (oldSourceWord >> 5 & 0xff)) || (newFile != (oldSourceWord & 0xf))) {
+                *(uint *)*sourceWordAddrCursor = (newRegId & 0xff) << 5 | newFile & 0xf | oldSourceWord & 0xffffe010;
+                ((int (*)())recordCountSourceRegisterFiles)(ctx,ctx + 0x3148c + consumerIndex * 4,consumerRecord);
               }
             }
           }
           moreSources = sourceIndex != 2;
-          piVar10 = piVar10 + 1;
-          puVar13 = puVar13 + 1;
+          sourceWordAddrCursor = sourceWordAddrCursor + 1;
+          listCursor = listCursor + 1;
           sourceIndex = sourceIndex + 1;
         } while (moreSources);
-        piVar9 = (int *)piVar9[4];
-      } while (piVar9 != (int *)0x0);
+        consumerNode = (int *)consumerNode[4];
+      } while (consumerNode != (int *)0x0);
     }
-    for (puVar13 = *(undefined4 **)(param_2 * 4 + ctx + 0xc450); puVar13 != (undefined4 *)0x0;
-        puVar13 = (undefined4 *)puVar13[4]) {
-      ((int (*)())recordRetargetDestination)(ctx,*puVar13,param_3);
+    for (listCursor = *(undefined4 **)(recordIndex * 4 + ctx + 0xc450); listCursor != (undefined4 *)0x0;
+        listCursor = (undefined4 *)listCursor[4]) {
+      ((int (*)())recordRetargetDestination)(ctx,*listCursor,newRegId);
     }
   }
   return;
@@ -2133,95 +2133,95 @@ int FUN_00079e10(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
 }
 
 /* FUN_00079e70 @ 0x79e70 (488 bytes) */
-int FUN_00079e70(param_1, param_2)
-  int param_1;
+int FUN_00079e70(alloc, param_2)
+  int alloc;
   int param_2;
 {
   bool bVar1;
-  bool bVar2;
-  bool bVar3;
-  uint uVar4;
+  bool overlaps;
+  bool conflictFound;
+  uint recordWord0;
   byte bVar5;
   undefined4 in_r5;
   undefined4 in_r6;
   undefined4 in_r7;
   undefined4 in_r8;
   uint uVar6;
-  undefined4 uVar7;
-  uint uVar8;
-  uint *puVar9;
-  int iVar10;
-  int *piVar11;
-  int iVar12;
+  undefined4 resultCode;
+  uint queueCount;
+  uint *record;
+  int programBase;
+  int *dependencyNode;
+  int laterRecordIndex;
   uint loopIndex;
-  int *piVar14;
+  int *laterQueueCursor;
   int iVar15;
-  uint uVar16;
+  uint laterQueueIndex;
   undefined8 uVar17;
   
-  iVar10 = param_1 + 0x1286c;
-  uVar8 = *(uint *)(param_1 + 0x2a878);
-  if (uVar8 != 0) {
+  programBase = alloc + 0x1286c;
+  queueCount = *(uint *)(alloc + 0x2a878);
+  if (queueCount != 0) {
     bVar1 = param_2 != 0;
     loopIndex = 0;
-    uVar7 = 6;
-    bVar3 = false;
+    resultCode = 6;
+    conflictFound = false;
     do {
-      iVar15 = *(int *)(loopIndex * 4 + param_1 + 0x28878);
-      puVar9 = (uint *)(iVar10 + iVar15 * 0x10);
-      if ((((bVar1) && ((**(uint **)(param_1 + 0x34) & 0x40) != 0)) &&
-          (bVar5 = (char)*puVar9 + 0xbc, bVar5 < 0xb)) &&
+      iVar15 = *(int *)(loopIndex * 4 + alloc + 0x28878);
+      record = (uint *)(programBase + iVar15 * 0x10);
+      if ((((bVar1) && ((**(uint **)(alloc + 0x34) & 0x40) != 0)) &&
+          (bVar5 = (char)*record + 0xbc, bVar5 < 0xb)) &&
          (uVar6 = 1 << ((int)(char)bVar5 & 0x3fU) & 0x601, uVar6 != 0)) {
-        uVar17 = ((int (*)())FUN_00079e10)(puVar9,param_2,in_r5,in_r6,in_r7,in_r8,uVar6);
+        uVar17 = ((int (*)())FUN_00079e10)(record,param_2,in_r5,in_r6,in_r7,in_r8,uVar6);
         param_2 = (int)uVar17;
         if ((int)((ulonglong)uVar17 >> 0x20) != 0) {
-          bVar3 = true;
-          uVar7 = 8;
+          conflictFound = true;
+          resultCode = 8;
         }
       }
-      piVar11 = *(int **)(iVar15 * 4 + param_1 + 0xa450);
-      if (piVar11 != (int *)0x0) {
+      dependencyNode = *(int **)(iVar15 * 4 + alloc + 0xa450);
+      if (dependencyNode != (int *)0x0) {
         uVar6 = loopIndex + 1;
         do {
-          if (uVar6 < uVar8) {
-            uVar4 = *puVar9;
-            iVar15 = *piVar11;
-            piVar14 = (int *)(param_1 + uVar6 * 4 + 0x28878);
-            uVar16 = uVar6;
+          if (uVar6 < queueCount) {
+            recordWord0 = *record;
+            iVar15 = *dependencyNode;
+            laterQueueCursor = (int *)(alloc + uVar6 * 4 + 0x28878);
+            laterQueueIndex = uVar6;
             do {
-              iVar12 = *piVar14;
-              if ((*(uint *)(iVar10 + iVar12 * 0x10) & 0xfef00) == (uVar4 & 0xfef00)) {
-                uVar17 = ((int (*)())recordGetWriteMask)(iVar10 + iVar12 * 0x10);
+              laterRecordIndex = *laterQueueCursor;
+              if ((*(uint *)(programBase + laterRecordIndex * 0x10) & 0xfef00) == (recordWord0 & 0xfef00)) {
+                uVar17 = ((int (*)())recordGetWriteMask)(programBase + laterRecordIndex * 0x10);
                 param_2 = (int)uVar17;
-                bVar2 = true;
-                if (((uint)((ulonglong)uVar17 >> 0x20) & piVar11[1]) == 0) goto LAB_00079fc0;
+                overlaps = true;
+                if (((uint)((ulonglong)uVar17 >> 0x20) & dependencyNode[1]) == 0) goto LAB_00079fc0;
               }
               else {
 LAB_00079fc0:
-                bVar2 = false;
+                overlaps = false;
               }
-              uVar16 = uVar16 + 1;
-              if (uVar8 == uVar16) {
-                if (bVar2) {
+              laterQueueIndex = laterQueueIndex + 1;
+              if (queueCount == laterQueueIndex) {
+                if (overlaps) {
 LAB_00079ffc:
-                  if (iVar12 != iVar15) {
-                    bVar3 = true;
-                    uVar7 = 9;
+                  if (laterRecordIndex != iVar15) {
+                    conflictFound = true;
+                    resultCode = 9;
                   }
                 }
                 break;
               }
-              if (bVar2) goto LAB_00079ffc;
-              piVar14 = piVar14 + 1;
-            } while (iVar12 != iVar15);
+              if (overlaps) goto LAB_00079ffc;
+              laterQueueCursor = laterQueueCursor + 1;
+            } while (laterRecordIndex != iVar15);
           }
-          piVar11 = (int *)piVar11[4];
-        } while (piVar11 != (int *)0x0);
+          dependencyNode = (int *)dependencyNode[4];
+        } while (dependencyNode != (int *)0x0);
       }
       loopIndex = loopIndex + 1;
-    } while (loopIndex < uVar8);
-    if (bVar3) {
-      return uVar7;
+    } while (loopIndex < queueCount);
+    if (conflictFound) {
+      return resultCode;
     }
   }
   return 0;
@@ -2276,10 +2276,10 @@ int FUN_0007a110(param_1)
 }
 
 /* FUN_0007a1a0 @ 0x7a1a0 (756 bytes) */
-int FUN_0007a1a0(param_1, param_2, param_3)
-  int param_1;
-  int param_2;
-  uint param_3;
+int FUN_0007a1a0(alloc, recordIndex, swizzle)
+  int alloc;
+  int recordIndex;
+  uint swizzle;
 {
   uint loopCounterC;
   uint loopCounterB;
@@ -2288,55 +2288,55 @@ int FUN_0007a1a0(param_1, param_2, param_3)
   int remaining;
   bool moreComponents;
   bool moreSources;
-  bool bVar1;
-  int iVar2;
-  uint uVar3;
+  bool found;
+  int recordSlot;
+  uint sourceSelects;
   uint uVar4;
-  int *piVar5;
+  int *readerNode;
   uint uVar6;
-  int *piVar7;
+  int *consumerNode;
   uint componentIndex;
-  uint uVar9;
-  undefined4 *puVar10;
+  uint selectShift;
+  undefined4 *listHeadCursor;
   uint sourceIndexB;
-  uint *puVar12;
+  uint *sourceWordCursor;
   uint uVar13;
-  uint uVar14;
-  uint *puVar15;
-  int iVar16;
+  uint remappedMask;
+  uint *recordWordCursor;
+  int consumerIndex;
   int remainingB;
   
-  iVar2 = param_2 * 4;
-  puVar15 = (uint *)(param_1 + 0x1286c + param_2 * 0x10);
-  uVar14 = 0;
-  uVar13 = *(uint *)(iVar2 + param_1 + 0x6450);
-  uVar6 = ((int (*)())recordGetWriteMask)(puVar15);
+  recordSlot = recordIndex * 4;
+  recordWordCursor = (uint *)(alloc + 0x1286c + recordIndex * 0x10);
+  remappedMask = 0;
+  uVar13 = *(uint *)(recordSlot + alloc + 0x6450);
+  uVar6 = ((int (*)())recordGetWriteMask)(recordWordCursor);
   loopCounter = 0;
   remaining = 4;
   do {
     if ((uVar6 & 1 << (loopCounter & 0x3f)) != 0) {
-      uVar14 = uVar14 | 1 << (param_3 >> ((loopCounter & 0xf) << 2) & 0xf);
+      remappedMask = remappedMask | 1 << (swizzle >> ((loopCounter & 0xf) << 2) & 0xf);
     }
     loopCounter = loopCounter + 1;
     remaining = remaining + -1;
   } while (remaining != 0);
-  if (uVar6 != uVar14) {
+  if (uVar6 != remappedMask) {
     componentIndex = 0;
     uVar4 = 0xd;
     do {
       if ((uVar6 & 1 << (componentIndex & 0x3f)) != 0) {
         sourceIndexB = 0;
-        uVar9 = (param_3 >> ((componentIndex & 0xf) << 2) & 0xf) * 3 + 0xd;
-        puVar12 = puVar15;
+        selectShift = (swizzle >> ((componentIndex & 0xf) << 2) & 0xf) * 3 + 0xd;
+        sourceWordCursor = recordWordCursor;
         do {
           if ((uVar13 & 1 << (sourceIndexB & 0x3f)) != 0) {
-            uVar3 = puVar12[1];
-            puVar12[1] = (uVar3 & ~(7 << (uVar4 & 0x3f)) |
-                         (uVar3 >> (uVar9 & 0x3f) & 7) << (uVar4 & 0x3f)) & ~(7 << (uVar9 & 0x3f)) |
-                         (uVar3 >> (uVar4 & 0x3f) & 7) << (uVar9 & 0x3f);
+            sourceSelects = sourceWordCursor[1];
+            sourceWordCursor[1] = (sourceSelects & ~(7 << (uVar4 & 0x3f)) |
+                         (sourceSelects >> (selectShift & 0x3f) & 7) << (uVar4 & 0x3f)) & ~(7 << (selectShift & 0x3f)) |
+                         (sourceSelects >> (uVar4 & 0x3f) & 7) << (selectShift & 0x3f);
           }
           moreSources = sourceIndexB != 2;
-          puVar12 = puVar12 + 1;
+          sourceWordCursor = sourceWordCursor + 1;
           sourceIndexB = sourceIndexB + 1;
         } while (moreSources);
       }
@@ -2344,73 +2344,73 @@ int FUN_0007a1a0(param_1, param_2, param_3)
       uVar4 = uVar4 + 3;
       componentIndex = componentIndex + 1;
     } while (moreComponents);
-    *puVar15 = *puVar15 & 0xff0fffff | uVar14 << 0x14;
-    for (piVar7 = *(int **)(iVar2 + param_1 + 0xa450); piVar7 != (int *)0x0;
-        piVar7 = (int *)piVar7[4]) {
-      iVar16 = *piVar7;
+    *recordWordCursor = *recordWordCursor & 0xff0fffff | remappedMask << 0x14;
+    for (consumerNode = *(int **)(recordSlot + alloc + 0xa450); consumerNode != (int *)0x0;
+        consumerNode = (int *)consumerNode[4]) {
+      consumerIndex = *consumerNode;
       uVar6 = 0;
       loopCounterB = 0;
       remainingB = 4;
-      uVar4 = *(uint *)(iVar16 * 4 + param_1 + 0x6450);
-      puVar15 = (uint *)(param_1 + iVar16 * 0x10 + 0x12870);
+      uVar4 = *(uint *)(consumerIndex * 4 + alloc + 0x6450);
+      recordWordCursor = (uint *)(alloc + consumerIndex * 0x10 + 0x12870);
       do {
-        if ((piVar7[1] & 1 << (loopCounterB & 0x3f)) != 0) {
-          uVar6 = uVar6 | 1 << (param_3 >> ((loopCounterB & 0xf) << 2) & 0xf);
+        if ((consumerNode[1] & 1 << (loopCounterB & 0x3f)) != 0) {
+          uVar6 = uVar6 | 1 << (swizzle >> ((loopCounterB & 0xf) << 2) & 0xf);
         }
         loopCounterB = loopCounterB + 1;
         remainingB = remainingB + -1;
       } while (remainingB != 0);
-      piVar7[1] = uVar6;
+      consumerNode[1] = uVar6;
       sourceIndex = 0;
-      puVar10 = (undefined4 *)(iVar16 * 0xc + param_1 + 0x450);
+      listHeadCursor = (undefined4 *)(consumerIndex * 0xc + alloc + 0x450);
       do {
-        if (((uVar4 & 1 << (sourceIndex & 0x3f)) != 0) && (piVar5 = (int *)*puVar10, piVar5 != (int *)0x0)
+        if (((uVar4 & 1 << (sourceIndex & 0x3f)) != 0) && (readerNode = (int *)*listHeadCursor, readerNode != (int *)0x0)
            ) {
-          bVar1 = false;
+          found = false;
           do {
-            if (param_2 == *piVar5) {
+            if (recordIndex == *readerNode) {
               uVar13 = 0;
               loopCounterC = 0;
               remaining = 4;
               do {
-                if ((piVar5[1] & 1 << (loopCounterC & 0x3f)) != 0) {
-                  uVar13 = uVar13 | 1 << (param_3 >> ((loopCounterC & 0xf) << 2) & 0xf);
+                if ((readerNode[1] & 1 << (loopCounterC & 0x3f)) != 0) {
+                  uVar13 = uVar13 | 1 << (swizzle >> ((loopCounterC & 0xf) << 2) & 0xf);
                 }
                 loopCounterC = loopCounterC + 1;
                 remaining = remaining + -1;
               } while (remaining != 0);
-              piVar5[1] = uVar13;
-              bVar1 = true;
+              readerNode[1] = uVar13;
+              found = true;
             }
-            piVar5 = (int *)piVar5[4];
-          } while (piVar5 != (int *)0x0);
-          if (bVar1) {
-            *puVar15 = (param_3 >> (*puVar15 >> 0x1b & 0xc) & 3) << 0x1d | *puVar15 & 0x9fffffff;
+            readerNode = (int *)readerNode[4];
+          } while (readerNode != (int *)0x0);
+          if (found) {
+            *recordWordCursor = (swizzle >> (*recordWordCursor >> 0x1b & 0xc) & 3) << 0x1d | *recordWordCursor & 0x9fffffff;
           }
         }
         moreSources = sourceIndex != 2;
-        puVar15 = puVar15 + 1;
-        puVar10 = puVar10 + 1;
+        recordWordCursor = recordWordCursor + 1;
+        listHeadCursor = listHeadCursor + 1;
         sourceIndex = sourceIndex + 1;
       } while (moreSources);
     }
-    for (puVar10 = *(undefined4 **)(iVar2 + param_1 + 0xc450); puVar10 != (undefined4 *)0x0;
-        puVar10 = (undefined4 *)puVar10[4]) {
-      ((int (*)())FUN_0007a1a0)(param_1,*puVar10,param_3);
+    for (listHeadCursor = *(undefined4 **)(recordSlot + alloc + 0xc450); listHeadCursor != (undefined4 *)0x0;
+        listHeadCursor = (undefined4 *)listHeadCursor[4]) {
+      ((int (*)())FUN_0007a1a0)(alloc,*listHeadCursor,swizzle);
     }
   }
   return;
 }
 
 /* FUN_0007a4a0 @ 0x7a4a0 (1544 bytes) */
-int FUN_0007a4a0(ctx, program, param_3, param_4, recordIndex, param_6, param_7)
+int FUN_0007a4a0(ctx, program, laterPass, tempRegLimit, recordIndex, keepFlagOut, chosenRegOut)
   int ctx;
   int program;
-  int param_3;
-  uint param_4;
+  int laterPass;
+  uint tempRegLimit;
   int recordIndex;
-  undefined1 *param_6;
-  uint *param_7;
+  undefined1 *keepFlagOut;
+  uint *chosenRegOut;
 {
   uint loopCounterC;
   uint loopCounterB;
@@ -2421,121 +2421,121 @@ int FUN_0007a4a0(ctx, program, param_3, param_4, recordIndex, param_6, param_7)
   int remaining;
   bool lastComponent;
   bool moreComponents;
-  bool bVar1;
-  char cVar2;
-  undefined *puVar3;
+  bool matched;
+  char regFileBase;
+  undefined *chosenSwizzle;
   int iVar4;
   int iVar5;
   uint uVar6;
-  uint uVar7;
-  int *piVar8;
-  undefined4 uVar9;
-  undefined4 uVar10;
-  uint uVar11;
-  undefined4 *puVar12;
-  uint uVar13;
-  uint uVar14;
-  uint uVar15;
-  uint *puVar16;
+  uint writeMask;
+  int *listNode;
+  undefined4 result;
+  undefined4 destWriteMask;
+  uint fixedMask;
+  undefined4 *fixedHeadCursor;
+  uint swizzleShiftBits;
+  uint writeMaskSwizzled;
+  uint combinedSwizzledMask;
+  uint *record;
   int *piVar17;
-  undefined *puVar18;
+  undefined *swizzleWord;
   
-  *param_6 = 0;
-  *param_7 = 0xffffffff;
-  puVar16 = (uint *)(recordIndex * 0x10 + program);
-  iVar5 = ((int (*)())FUN_000777b0)(puVar16,param_3);
+  *keepFlagOut = 0;
+  *chosenRegOut = 0xffffffff;
+  record = (uint *)(recordIndex * 0x10 + program);
+  iVar5 = ((int (*)())FUN_000777b0)(record,laterPass);
   if (iVar5 == 0) {
-    iVar5 = ((int (*)())FUN_00077800)(puVar16,param_3);
+    iVar5 = ((int (*)())FUN_00077800)(record,laterPass);
     if (iVar5 != 0) {
-      puVar18 = ((unsigned char *)0x00003210U);
+      swizzleWord = ((unsigned char *)0x00003210U);
       uVar6 = ((int (*)())recordCombinedWriteMask)(ctx,recordIndex);
-      uVar7 = ((int (*)())recordGetWriteMask)(puVar16);
+      writeMask = ((int (*)())recordGetWriteMask)(record);
       loopCounterC = 0;
       componentIndexB = 0;
       iVar5 = recordIndex * 4 + ctx;
-      uVar11 = (uint)*(char *)(ctx + 0x30b9c);
+      fixedMask = (uint)*(char *)(ctx + 0x30b9c);
 LAB_0007a7b0:
-      if (((uVar6 & uVar11 & 1 << (componentIndexB & 0x3f)) == 0) || (4 < loopCounterC)) goto LAB_0007aa50;
+      if (((uVar6 & fixedMask & 1 << (componentIndexB & 0x3f)) == 0) || (4 < loopCounterC)) goto LAB_0007aa50;
       if (loopCounterC != 4) {
-        if ((1 << (loopCounterC & 0x3f) & ~(uVar6 | uVar11)) == 0) {
+        if ((1 << (loopCounterC & 0x3f) & ~(uVar6 | fixedMask)) == 0) {
           iVar4 = 5 - loopCounterC;
           do {
             loopCounterC = loopCounterC + 1;
             iVar4 = iVar4 + -1;
             if (iVar4 == 0) goto LAB_0007aa50;
             if (loopCounterC == 4) goto LAB_0007a7e8;
-          } while ((1 << (loopCounterC & 0x3f) & ~(uVar6 | uVar11)) == 0);
+          } while ((1 << (loopCounterC & 0x3f) & ~(uVar6 | fixedMask)) == 0);
         }
-        uVar13 = loopCounterC << (componentIndexB << 2 & 0x3c);
+        swizzleShiftBits = loopCounterC << (componentIndexB << 2 & 0x3c);
         loopCounterC = loopCounterC + 1;
-        puVar18 = (undefined *)((uint)puVar18 & ~(0xf << (componentIndexB << 2 & 0x3c)) | uVar13);
+        swizzleWord = (undefined *)((uint)swizzleWord & ~(0xf << (componentIndexB << 2 & 0x3c)) | swizzleShiftBits);
         goto LAB_0007aa50;
       }
 LAB_0007a7e8:
-      uVar15 = 0;
+      combinedSwizzledMask = 0;
       loopCounterB = 0;
       remaining = 4;
       do {
         if ((uVar6 & 1 << (loopCounterB & 0x3f)) != 0) {
-          uVar15 = uVar15 | 1 << ((uint)puVar18 >> ((loopCounterB & 0xf) << 2) & 0xf);
+          combinedSwizzledMask = combinedSwizzledMask | 1 << ((uint)swizzleWord >> ((loopCounterB & 0xf) << 2) & 0xf);
         }
         loopCounterB = loopCounterB + 1;
         remaining = remaining + -1;
       } while (remaining != 0);
-      uVar14 = 0;
+      writeMaskSwizzled = 0;
       loopCounter = 0;
       remaining = 4;
       do {
-        if ((uVar7 & 1 << (loopCounter & 0x3f)) != 0) {
-          uVar14 = uVar14 | 1 << ((uint)puVar18 >> ((loopCounter & 0xf) << 2) & 0xf);
+        if ((writeMask & 1 << (loopCounter & 0x3f)) != 0) {
+          writeMaskSwizzled = writeMaskSwizzled | 1 << ((uint)swizzleWord >> ((loopCounter & 0xf) << 2) & 0xf);
         }
         loopCounter = loopCounter + 1;
         remaining = remaining + -1;
       } while (remaining != 0);
-      uVar11 = uVar11 & uVar15;
-      if (uVar11 == 0) {
+      fixedMask = fixedMask & combinedSwizzledMask;
+      if (fixedMask == 0) {
 LAB_0007aa5c:
-        puVar3 = puVar18;
+        chosenSwizzle = swizzleWord;
       }
       else {
-        puVar12 = (undefined4 *)(ctx + 0x30b7c);
+        fixedHeadCursor = (undefined4 *)(ctx + 0x30b7c);
         loopCounter = 0;
         remaining = 4;
         do {
           componentBit = 1 << (loopCounter & 0x3f);
-          if (((((componentBit & uVar11) != 0) && (piVar17 = (int *)*puVar12, piVar17 != (int *)0x0)) &&
+          if (((((componentBit & fixedMask) != 0) && (piVar17 = (int *)*fixedHeadCursor, piVar17 != (int *)0x0)) &&
               (recordIndex == *piVar17)) && (piVar17[1] == 0)) {
-            uVar11 = uVar11 & ~componentBit;
+            fixedMask = fixedMask & ~componentBit;
           }
           loopCounter = loopCounter + 1;
-          puVar12 = puVar12 + 1;
+          fixedHeadCursor = fixedHeadCursor + 1;
           remaining = remaining + -1;
         } while (remaining != 0);
-        if (uVar11 == 0) goto LAB_0007aa5c;
+        if (fixedMask == 0) goto LAB_0007aa5c;
         piVar17 = (int *)(ctx + 0x30b8c);
         componentIndex = 0;
         do {
           componentBit = 1 << (componentIndex & 0x3f);
-          if ((componentBit & uVar11) != 0) {
-            if ((componentBit & uVar14) == 0) {
-              piVar8 = *(int **)(iVar5 + 0xc450);
-              if (piVar8 != (int *)0x0) {
+          if ((componentBit & fixedMask) != 0) {
+            if ((componentBit & writeMaskSwizzled) == 0) {
+              listNode = *(int **)(iVar5 + 0xc450);
+              if (listNode != (int *)0x0) {
                 do {
-                  if (((componentBit & piVar8[1]) == 0) || (bVar1 = true, *piVar8 != *piVar17)) {
-                    bVar1 = false;
+                  if (((componentBit & listNode[1]) == 0) || (matched = true, *listNode != *piVar17)) {
+                    matched = false;
                   }
-                  piVar8 = (int *)piVar8[4];
-                  if (piVar8 == (int *)0x0) {
-                    if (!bVar1) goto LAB_0007a948;
+                  listNode = (int *)listNode[4];
+                  if (listNode == (int *)0x0) {
+                    if (!matched) goto LAB_0007a948;
                     break;
                   }
-                } while (!bVar1);
+                } while (!matched);
                 goto LAB_0007a944;
               }
             }
             else if (recordIndex == *piVar17) {
 LAB_0007a944:
-              uVar11 = uVar11 & ~componentBit;
+              fixedMask = fixedMask & ~componentBit;
             }
           }
 LAB_0007a948:
@@ -2543,112 +2543,112 @@ LAB_0007a948:
           piVar17 = piVar17 + 1;
           componentIndex = componentIndex + 1;
         } while (moreComponents);
-        if (uVar11 == 0) goto LAB_0007aa5c;
+        if (fixedMask == 0) goto LAB_0007aa5c;
         piVar17 = (int *)(ctx + 0x30b8c);
         componentIndex = 0;
         do {
           componentBit = 1 << (componentIndex & 0x3f);
-          if ((((componentBit & uVar11) != 0) && ((componentBit & uVar14) == 0)) &&
-             (piVar8 = *(int **)(iVar5 + 0xe450), piVar8 != (int *)0x0)) {
+          if ((((componentBit & fixedMask) != 0) && ((componentBit & writeMaskSwizzled) == 0)) &&
+             (listNode = *(int **)(iVar5 + 0xe450), listNode != (int *)0x0)) {
             do {
-              if (((componentBit & piVar8[1]) == 0) || (bVar1 = true, *piVar8 != *piVar17)) {
-                bVar1 = false;
+              if (((componentBit & listNode[1]) == 0) || (matched = true, *listNode != *piVar17)) {
+                matched = false;
               }
-              piVar8 = (int *)piVar8[4];
-              if (piVar8 == (int *)0x0) {
-                if (!bVar1) goto LAB_0007a9d4;
+              listNode = (int *)listNode[4];
+              if (listNode == (int *)0x0) {
+                if (!matched) goto LAB_0007a9d4;
                 break;
               }
-            } while (!bVar1);
-            uVar11 = uVar11 & ~componentBit;
+            } while (!matched);
+            fixedMask = fixedMask & ~componentBit;
           }
 LAB_0007a9d4:
           moreComponents = componentIndex != 3;
           piVar17 = piVar17 + 1;
           componentIndex = componentIndex + 1;
         } while (moreComponents);
-        puVar3 = (undefined *)0xffffffff;
-        if (uVar11 == 0) goto LAB_0007aa5c;
+        chosenSwizzle = (undefined *)0xffffffff;
+        if (fixedMask == 0) goto LAB_0007aa5c;
       }
-      *param_7 = (uint)puVar3;
-      if (puVar3 != (undefined *)0xffffffff) {
-        if (puVar3 == ((unsigned char *)0x00003210U)) goto LAB_0007a680;
+      *chosenRegOut = (uint)chosenSwizzle;
+      if (chosenSwizzle != (undefined *)0xffffffff) {
+        if (chosenSwizzle == ((unsigned char *)0x00003210U)) goto LAB_0007a680;
         goto LAB_0007aa80;
       }
       goto LAB_0007aa90;
     }
 LAB_0007a680:
-    uVar9 = 1;
+    result = 1;
   }
   else {
     if (((*(uint *)(recordIndex * 4 + ctx + 0x3348c) & 0x1000) != 0) &&
-       (iVar5 = ((int (*)())recordAssignDestinationRegister)(ctx,program,recordIndex,param_6,param_7), iVar5 != 0)) {
+       (iVar5 = ((int (*)())recordAssignDestinationRegister)(ctx,program,recordIndex,keepFlagOut,chosenRegOut), iVar5 != 0)) {
       return 1;
     }
-    uVar6 = ((int (*)())recordGetWriteMask)(puVar16);
+    uVar6 = ((int (*)())recordGetWriteMask)(record);
     for (piVar17 = *(int **)(recordIndex * 4 + ctx + 0xe450); piVar17 != (int *)0x0;
         piVar17 = (int *)piVar17[4]) {
       iVar5 = *piVar17;
-      uVar7 = ((int (*)())recordGetWriteMask)(program + iVar5 * 0x10);
-      if (((uVar6 & uVar7) != 0) &&
+      writeMask = ((int (*)())recordGetWriteMask)(program + iVar5 * 0x10);
+      if (((uVar6 & writeMask) != 0) &&
          (iVar5 = iVar5 * 4 + ctx, (*(uint *)(iVar5 + 0x3348c) & 0x40000) != 0)) {
-        for (piVar8 = *(int **)(iVar5 + 0xa450); piVar8 != (int *)0x0; piVar8 = (int *)piVar8[4]) {
-          if (((recordIndex != *piVar8) && ((uVar6 & uVar7 & piVar8[1]) != 0)) &&
-             ((*(uint *)(*piVar8 * 4 + ctx + 0x3348c) & 0x40000) == 0)) goto LAB_0007aa90;
+        for (listNode = *(int **)(iVar5 + 0xa450); listNode != (int *)0x0; listNode = (int *)listNode[4]) {
+          if (((recordIndex != *listNode) && ((uVar6 & writeMask & listNode[1]) != 0)) &&
+             ((*(uint *)(*listNode * 4 + ctx + 0x3348c) & 0x40000) == 0)) goto LAB_0007aa90;
         }
       }
     }
-    uVar9 = ((int (*)())recordCombinedWriteMask)(ctx,recordIndex);
-    iVar5 = ((int (*)())recordDestFileIs0)(puVar16);
+    result = ((int (*)())recordCombinedWriteMask)(ctx,recordIndex);
+    iVar5 = ((int (*)())recordDestFileIs0)(record);
     if (iVar5 == 0) {
-      uVar6 = *puVar16;
+      uVar6 = *record;
 LAB_0007a634:
-      cVar2 = (DAT_001aa758)[uVar6 >> 8 & 0xf];
-      uVar10 = ((int (*)())recordGetWriteMask)(puVar16);
-      iVar5 = ((int (*)())recordRegisterIsAssignable)(ctx,program,cVar2 * 0x100 + (uVar6 >> 0xd & 0x7f),uVar9,recordIndex,
-                           uVar10);
+      regFileBase = (DAT_001aa758)[uVar6 >> 8 & 0xf];
+      destWriteMask = ((int (*)())recordGetWriteMask)(record);
+      iVar5 = ((int (*)())recordRegisterIsAssignable)(ctx,program,regFileBase * 0x100 + (uVar6 >> 0xd & 0x7f),result,recordIndex,
+                           destWriteMask);
       if (iVar5 == 0) goto LAB_0007a680;
     }
     else {
-      uVar6 = *puVar16;
-      if ((uVar6 >> 0xd & 0x7f) < param_4) goto LAB_0007a634;
+      uVar6 = *record;
+      if ((uVar6 >> 0xd & 0x7f) < tempRegLimit) goto LAB_0007a634;
     }
-    iVar5 = ((int (*)())recordDestFileIs0)(puVar16);
+    iVar5 = ((int (*)())recordDestFileIs0)(record);
     if (iVar5 == 0) {
-      if (((*puVar16 & 0xf00) != 0x400) || (bVar1 = true, param_3 == 0)) {
-        bVar1 = false;
+      if (((*record & 0xf00) != 0x400) || (matched = true, laterPass == 0)) {
+        matched = false;
       }
-      if (bVar1) {
-        uVar10 = ((int (*)())recordGetWriteMask)(puVar16);
-        uVar6 = ((int (*)())recordFindFreeTempRegister)(ctx,program,uVar9,recordIndex,uVar10);
-        *param_7 = uVar6;
+      if (matched) {
+        destWriteMask = ((int (*)())recordGetWriteMask)(record);
+        uVar6 = ((int (*)())recordFindFreeTempRegister)(ctx,program,result,recordIndex,destWriteMask);
+        *chosenRegOut = uVar6;
       }
     }
     else {
-      uVar10 = ((int (*)())recordGetWriteMask)(puVar16);
-      if (param_4 != 0) {
+      destWriteMask = ((int (*)())recordGetWriteMask)(record);
+      if (tempRegLimit != 0) {
         loopCounter = 0;
         do {
-          iVar5 = ((int (*)())recordRegisterIsAssignable)(ctx,program,loopCounter,uVar9,recordIndex,uVar10);
+          iVar5 = ((int (*)())recordRegisterIsAssignable)(ctx,program,loopCounter,result,recordIndex,destWriteMask);
           if (iVar5 == 0) goto LAB_0007a6e4;
           loopCounter = loopCounter + 1;
-        } while (param_4 != loopCounter);
+        } while (tempRegLimit != loopCounter);
       }
       loopCounter = 0xffffffff;
 LAB_0007a6e4:
-      *param_7 = loopCounter;
+      *chosenRegOut = loopCounter;
     }
-    if ((int)*param_7 < 0) {
+    if ((int)*chosenRegOut < 0) {
 LAB_0007aa90:
-      uVar9 = 0;
+      result = 0;
     }
     else {
 LAB_0007aa80:
-      uVar9 = 1;
-      *param_6 = 1;
+      result = 1;
+      *keepFlagOut = 1;
     }
   }
-  return uVar9;
+  return result;
 LAB_0007aa50:
   lastComponent = componentIndexB == 3;
   componentIndexB = componentIndexB + 1;
@@ -2657,15 +2657,15 @@ LAB_0007aa50:
 }
 
 /* FUN_0007aae0 @ 0x7aae0 (1460 bytes) */
-int FUN_0007aae0(ctx, param_2, param_3, keepFlag, chosenReg, program, param_7, param_8)
+int FUN_0007aae0(ctx, registerCount, readyCycle, keepFlag, chosenReg, program, param_7, laterPass)
   int ctx;
-  int param_2;
-  uint param_3;
+  int registerCount;
+  uint readyCycle;
   undefined1 *keepFlag;
   undefined4 *chosenReg;
   int program;
   undefined4 param_7;
-  undefined4 param_8;
+  undefined4 laterPass;
 {
   uint sourceIndexB;
   int loopCounterB;
@@ -2674,51 +2674,51 @@ int FUN_0007aae0(ctx, param_2, param_3, keepFlag, chosenReg, program, param_7, p
   bool moreSources;
   uint loopIndex;
   uint loopIndex2;
-  bool bVar1;
+  bool allOwned;
   byte bVar2;
   int iVar3;
   int iVar4;
   uint *puVar5;
-  undefined4 *puVar6;
+  undefined4 *userHeadCursor;
   int iVar7;
   int iVar8;
   undefined4 a2;
   int a4;
   byte *a5;
-  int *piVar9;
-  int iVar10;
-  undefined4 uVar11;
-  int iVar12;
+  int *userNode;
+  int candidateSlot;
+  undefined4 chosenRegValue;
+  int otherAllowed;
   char *pcVar13;
-  uint uVar14;
-  uint uVar15;
-  int iVar16;
-  uint *puVar17;
-  int *piVar18;
-  uint uVar19;
+  uint sourceMask;
+  uint chosenUnit;
+  int candidateIndex;
+  uint *otherRecord;
+  int *queueCursor;
+  uint otherUnit;
   uint uStack00000020;
   undefined1 *puStack00000024;
   undefined4 *puStack00000028;
-  byte local_78;
-  undefined1 local_77 [3];
-  undefined4 local_74;
-  undefined4 local_70 [2];
-  int local_68;
-  int local_64;
-  uint local_60;
+  byte candidateKeepFlag;
+  undefined1 keepFlagTmp [3];
+  undefined4 candidateRegValue;
+  undefined4 chosenRegTmp [2];
+  int chosenRecord;
+  int haveChoice;
+  uint chosenKeepFlag;
   int local_5c;
   undefined4 *local_58;
   
   *keepFlag = 0;
-  local_78 = 0;
-  local_74 = 0;
-  if (param_2 == 0) {
+  candidateKeepFlag = 0;
+  candidateRegValue = 0;
+  if (registerCount == 0) {
     loopCounterB = 0;
   }
   else {
     loopCounterB = 0;
     pcVar13 = (char *)(ctx + 0x3087c);
-    iVar3 = param_2;
+    iVar3 = registerCount;
     do {
       if (*pcVar13 == '\0') {
         loopCounterB = loopCounterB + 1;
@@ -2728,170 +2728,170 @@ int FUN_0007aae0(ctx, param_2, param_3, keepFlag, chosenReg, program, param_7, p
     } while (iVar3 != 0);
   }
   iVar3 = *(int *)(ctx + 0x35490);
-  uStack00000020 = param_3;
+  uStack00000020 = readyCycle;
   puStack00000024 = keepFlag;
   puStack00000028 = chosenReg;
   if (iVar3 == 2) {
-    local_68 = *(int *)(ctx + 0x35494);
+    chosenRecord = *(int *)(ctx + 0x35494);
     *(undefined4 *)(ctx + 0x35490) = 3;
-    iVar3 = ((int (*)())recordAssignDestinationRegister)(ctx,program,local_68,keepFlag,chosenReg);
+    iVar3 = ((int (*)())recordAssignDestinationRegister)(ctx,program,chosenRecord,keepFlag,chosenReg);
     if (iVar3 != 0) {
       ((int (*)())FUN_00078950)(ctx);
-      return local_68;
+      return chosenRecord;
     }
   }
   else if (iVar3 == 3) {
     *(undefined4 *)(ctx + 0x35490) = 0;
   }
   else if (iVar3 == 1) {
-    local_68 = *(int *)(ctx + 0x35498);
-    local_77[0] = 0;
-    iVar3 = ((int (*)())FUN_0007a4a0)(ctx,program,param_8,param_2,local_68,local_77,local_70);
+    chosenRecord = *(int *)(ctx + 0x35498);
+    keepFlagTmp[0] = 0;
+    iVar3 = ((int (*)())FUN_0007a4a0)(ctx,program,laterPass,registerCount,chosenRecord,keepFlagTmp,chosenRegTmp);
     *(undefined4 *)(ctx + 0x35490) = 3;
     if (iVar3 != 0) {
-      *puStack00000024 = local_77[0];
-      *puStack00000028 = local_70[0];
+      *puStack00000024 = keepFlagTmp[0];
+      *puStack00000028 = chosenRegTmp[0];
       ((int (*)())FUN_00078950)(ctx);
-      return local_68;
+      return chosenRecord;
     }
   }
-  local_68 = 0;
+  chosenRecord = 0;
   if (*(int *)(ctx + 0x28874) != 0) {
     local_5c = ctx + 0x20000;
-    local_58 = &local_74;
+    local_58 = &candidateRegValue;
     iVar3 = -1;
-    piVar18 = (int *)(ctx + 0x26874);
-    local_60 = 0;
-    local_64 = 0;
+    queueCursor = (int *)(ctx + 0x26874);
+    chosenKeepFlag = 0;
+    haveChoice = 0;
     loopIndex = 0;
-    uVar11 = 0;
+    chosenRegValue = 0;
     do {
       sourceIndex = 0;
-      local_78 = 0;
-      a4 = *piVar18;
+      candidateKeepFlag = 0;
+      a4 = *queueCursor;
       do {
         moreSources = sourceIndex != 2;
         sourceIndex = sourceIndex + 1;
       } while (moreSources);
-      a5 = &local_78;
-      a2 = param_8;
-      iVar4 = param_2;
-      iVar7 = ((int (*)())FUN_0007a4a0)(ctx,program,param_8,param_2,a4,a5,local_58);
+      a5 = &candidateKeepFlag;
+      a2 = laterPass;
+      iVar4 = registerCount;
+      iVar7 = ((int (*)())FUN_0007a4a0)(ctx,program,laterPass,registerCount,a4,a5,local_58);
       if (iVar7 != 0) {
         iVar7 = 100;
-        if (uStack00000020 <= (uint)piVar18[-0x1001]) {
+        if (uStack00000020 <= (uint)queueCursor[-0x1001]) {
           iVar7 = 0;
         }
-        iVar16 = *piVar18;
-        iVar10 = iVar16 * 4 + ctx;
-        iVar7 = *(int *)(iVar10 + 0x10454) * 2 + iVar7;
-        if (*(int *)(iVar10 + 0x8450) != 0) {
+        candidateIndex = *queueCursor;
+        candidateSlot = candidateIndex * 4 + ctx;
+        iVar7 = *(int *)(candidateSlot + 0x10454) * 2 + iVar7;
+        if (*(int *)(candidateSlot + 0x8450) != 0) {
           iVar7 = iVar7 + 0x20;
         }
-        uVar14 = *(uint *)(iVar10 + 0x6450);
+        sourceMask = *(uint *)(candidateSlot + 0x6450);
         loopCounter = 0;
         sourceIndexB = 0;
-        puVar5 = (uint *)(program + iVar16 * 0x10);
+        puVar5 = (uint *)(program + candidateIndex * 0x10);
         do {
           puVar5 = puVar5 + 1;
-          if (((uVar14 & 1 << (sourceIndexB & 0x3f)) != 0) && (iVar8 = ((int (*)())recordSourceFileIs0)(puVar5), iVar8 != 0))
+          if (((sourceMask & 1 << (sourceIndexB & 0x3f)) != 0) && (iVar8 = ((int (*)())recordSourceFileIs0)(puVar5), iVar8 != 0))
           {
-            bVar1 = true;
+            allOwned = true;
             iVar8 = 4;
-            puVar6 = (undefined4 *)
+            userHeadCursor = (undefined4 *)
                      (((char)(DAT_001aa760)[*puVar5 & 0xf] * 0x100 + (*puVar5 >> 5 & 0xff)) * 0x10
                       + ctx + 0x2a87c);
             do {
-              piVar9 = (int *)*puVar6;
-              if ((piVar9 != (int *)0x0) && ((iVar16 != *piVar9 || (piVar9[1] != 0)))) {
-                bVar1 = false;
+              userNode = (int *)*userHeadCursor;
+              if ((userNode != (int *)0x0) && ((candidateIndex != *userNode || (userNode[1] != 0)))) {
+                allOwned = false;
               }
               iVar8 = iVar8 + -1;
               if (iVar8 == 0) {
-                if (bVar1) {
+                if (allOwned) {
                   loopCounter = loopCounter + 1;
                 }
                 break;
               }
-              puVar6 = puVar6 + 1;
-            } while (bVar1);
+              userHeadCursor = userHeadCursor + 1;
+            } while (allOwned);
           }
           moreSources = sourceIndexB != 2;
           sourceIndexB = sourceIndexB + 1;
         } while (moreSources);
-        iVar7 = loopCounter * (param_2 - loopCounterB) * 2 + iVar7;
+        iVar7 = loopCounter * (registerCount - loopCounterB) * 2 + iVar7;
         if ((iVar3 < iVar7) || (loopIndex == 0)) {
-          local_60 = (uint)local_78;
-          local_64 = 1;
-          uVar11 = local_74;
+          chosenKeepFlag = (uint)candidateKeepFlag;
+          haveChoice = 1;
+          chosenRegValue = candidateRegValue;
           iVar3 = iVar7;
-          local_68 = iVar16;
+          chosenRecord = candidateIndex;
         }
       }
       loopIndex = loopIndex + 1;
-      piVar18 = piVar18 + 1;
+      queueCursor = queueCursor + 1;
     } while (loopIndex < *(uint *)(ctx + 0x28874));
-    if (local_64 != 0) {
-      *puStack00000024 = (char)local_60;
-      *puStack00000028 = uVar11;
-      puVar5 = (uint *)(program + local_68 * 0x10);
+    if (haveChoice != 0) {
+      *puStack00000024 = (char)chosenKeepFlag;
+      *puStack00000028 = chosenRegValue;
+      puVar5 = (uint *)(program + chosenRecord * 0x10);
       bVar2 = (byte)*puVar5 >> 6;
-      uVar15 = bVar2 & 1;
-      iVar3 = (*(code *)(PTR_FUN_001e9150)[uVar15])
-                        (ctx,local_68,a2,iVar4,a4,a5,&PTR_FUN_001e9150);
+      chosenUnit = bVar2 & 1;
+      iVar3 = (*(code *)(PTR_FUN_001e9150)[chosenUnit])
+                        (ctx,chosenRecord,a2,iVar4,a4,a5,&PTR_FUN_001e9150);
       if (iVar3 == 0) {
-        return local_68;
+        return chosenRecord;
       }
       if (*(int *)(ctx + 0x28874) == 0) {
-        return local_68;
+        return chosenRecord;
       }
       iVar3 = ctx + 0x3148c;
       loopIndex2 = 0;
-      piVar18 = (int *)(local_5c + 0x6874);
-      pcVar13 = (char *)(iVar3 + local_68 * 4);
+      queueCursor = (int *)(local_5c + 0x6874);
+      pcVar13 = (char *)(iVar3 + chosenRecord * 4);
       do {
-        iVar7 = *piVar18;
-        puVar17 = (uint *)(program + iVar7 * 0x10);
-        uVar19 = (byte)((byte)*puVar17 >> 6) & 1;
-        iVar12 = (*(code *)(PTR_FUN_001e9150)[uVar19])
+        iVar7 = *queueCursor;
+        otherRecord = (uint *)(program + iVar7 * 0x10);
+        otherUnit = (byte)((byte)*otherRecord >> 6) & 1;
+        otherAllowed = (*(code *)(PTR_FUN_001e9150)[otherUnit])
                            (ctx,iVar7,a2,iVar4,a4,a5,&PTR_FUN_001e9150);
-        if ((iVar12 != 0) && (uVar15 != uVar19)) {
-          iVar12 = iVar3 + iVar7 * 4;
+        if ((otherAllowed != 0) && (chosenUnit != otherUnit)) {
+          otherAllowed = iVar3 + iVar7 * 4;
           if ((*puVar5 & 0x40) == 0) {
-            puVar17 = puVar5;
+            otherRecord = puVar5;
           }
           if (((((int)*pcVar13 + (int)*(char *)(iVar3 + iVar7 * 4) < 3) &&
-               ((int)pcVar13[1] + (int)*(char *)(iVar12 + 1) < 2)) &&
-              ((int)pcVar13[2] + (int)*(char *)(iVar12 + 2) < 2)) &&
-             (((int)pcVar13[3] + (int)*(char *)(iVar12 + 3) < 2 && ((*puVar17 & 0xf00) != 0x400))))
+               ((int)pcVar13[1] + (int)*(char *)(otherAllowed + 1) < 2)) &&
+              ((int)pcVar13[2] + (int)*(char *)(otherAllowed + 2) < 2)) &&
+             (((int)pcVar13[3] + (int)*(char *)(otherAllowed + 3) < 2 && ((*otherRecord & 0xf00) != 0x400))))
           {
             if ((bVar2 & 1) == 0) {
               *(int *)(ctx + 0x35494) = iVar7;
-              *(int *)(ctx + 0x35498) = local_68;
+              *(int *)(ctx + 0x35498) = chosenRecord;
             }
             else {
               *(int *)(ctx + 0x35498) = iVar7;
-              *(int *)(ctx + 0x35494) = local_68;
+              *(int *)(ctx + 0x35494) = chosenRecord;
             }
-            if (*(int *)(ctx + 0x35494) == local_68) {
-              iVar3 = ((int (*)())recordAssignDestinationRegister)(ctx,program,local_68,local_77,local_70);
+            if (*(int *)(ctx + 0x35494) == chosenRecord) {
+              iVar3 = ((int (*)())recordAssignDestinationRegister)(ctx,program,chosenRecord,keepFlagTmp,chosenRegTmp);
               if (iVar3 != 0) {
                 *(undefined4 *)(ctx + 0x35490) = 1;
-                *puStack00000024 = local_77[0];
-                *puStack00000028 = local_70[0];
-                return local_68;
+                *puStack00000024 = keepFlagTmp[0];
+                *puStack00000028 = chosenRegTmp[0];
+                return chosenRecord;
               }
               *(undefined4 *)(ctx + 0x35490) = 0;
-              return local_68;
+              return chosenRecord;
             }
             *(undefined4 *)(ctx + 0x35490) = 2;
-            return local_68;
+            return chosenRecord;
           }
         }
         loopIndex2 = loopIndex2 + 1;
-        piVar18 = piVar18 + 1;
+        queueCursor = queueCursor + 1;
         if (*(uint *)(ctx + 0x28874) <= loopIndex2) {
-          return local_68;
+          return chosenRecord;
         }
       } while( true );
     }
@@ -4947,25 +4947,25 @@ int evsFoldConstantMoves(compiler, shaderProgram)
   int instructions;
   byte bVar12;
   byte bVar14;
-  int iVar13;
+  int laterRecord;
   uint instructionIndex;
   uint instructionCount;
   undefined4 *selectorBase;
   uint uVar18;
   undefined4 uVar19;
   undefined4 uVar20;
-  int *piVar21;
+  int *laterSlotCursor;
   undefined4 uVar22;
   int symbol;
   undefined4 selectorEnumerant;
-  uint uVar25;
-  uint uVar26;
-  uint uVar27;
+  uint writeEnableX;
+  uint writeEnableY;
+  uint writeEnableZ;
   byte bVar29;
-  uint uVar28;
+  uint writeEnableW;
   uint uVar30;
   int currentInstruction;
-  int iVar32;
+  int movRecord;
   byte in_xer_so = 0;
   bool bVar33;
   bool bVar34;
@@ -4974,9 +4974,9 @@ int evsFoldConstantMoves(compiler, shaderProgram)
   bool bVar37;
   bool yIsZero;
   bool wIsZero;
-  char cStack_88;
-  char cStack_87;
-  char cStack_86;
+  char readsX;
+  char readsY;
+  char readsZ;
   char acStack_85 [13];
   int iStack_78;
   undefined4 uStack_70;
@@ -5015,86 +5015,86 @@ LAB_0007de3c:
            (((yIsOne || (constantY == -1.0)) || (bVar37)))) ||
           (((bVar36 || (constantZ == -1.0)) || ((wIsZero || ((wIsOne || (constantW == -1.0)))))))) &&
          (uVar30 = instructionIndex + 1, uVar30 < instructionCount)) {
-        iVar32 = uVar30 * 0x74;
+        movRecord = uVar30 * 0x74;
         bVar6 = false;
         uVar18 = uVar30;
-        symbol = iVar32;
+        symbol = movRecord;
         do {
-          iVar13 = symbol + instructions;
-          if (((*(int *)(symbol + instructions) == 0x879b) && (*(int *)(iVar13 + 4) == 2)) &&
-             (*(int *)(iVar13 + 8) == *(int *)(currentInstruction + 8))) {
-            bVar1 = *(int *)(iVar13 + 0xc) != 0;
+          laterRecord = symbol + instructions;
+          if (((*(int *)(symbol + instructions) == 0x879b) && (*(int *)(laterRecord + 4) == 2)) &&
+             (*(int *)(laterRecord + 8) == *(int *)(currentInstruction + 8))) {
+            bVar1 = *(int *)(laterRecord + 0xc) != 0;
             bVar10 = (byte)((uint)iStack_78 >> 0x18);
             if (((bVar1) || (!(bool)(bVar10 >> 5 & 1))) || ((xIsOne || (bVar12 = 0, constantX == -1.0)))
                ) {
               bVar12 = 1;
             }
-            if (((*(int *)(iVar13 + 0x10) != 0) || (yIsZero)) ||
+            if (((*(int *)(laterRecord + 0x10) != 0) || (yIsZero)) ||
                ((yIsOne || (bVar14 = 0, constantY == -1.0)))) {
               bVar14 = 1;
             }
-            if ((((*(int *)(iVar13 + 0x14) != 0) || (bVar37)) || (bVar36)) ||
+            if ((((*(int *)(laterRecord + 0x14) != 0) || (bVar37)) || (bVar36)) ||
                (bVar29 = 0, constantZ == -1.0)) {
               bVar29 = 1;
             }
-            if (((*(int *)(iVar13 + 0x18) != 0) || (wIsZero)) ||
+            if (((*(int *)(laterRecord + 0x18) != 0) || (wIsZero)) ||
                ((wIsOne || (bVar7 = 0, constantW == -1.0)))) {
               bVar7 = 1;
             }
             bVar6 = (bool)(bVar7 & bVar29 & bVar14 & bVar12);
             if (bVar6) {
               if (!bVar1) {
-                *(undefined4 *)(iVar13 + 0xc) = 1;
+                *(undefined4 *)(laterRecord + 0xc) = 1;
                 if ((bool)(bVar10 >> 5 & 1)) {
                   if (xIsOne) {
-                    *(undefined4 *)(iVar13 + 0x28) = 0x87de;
+                    *(undefined4 *)(laterRecord + 0x28) = 0x87de;
                   }
                   else {
-                    *(undefined4 *)(iVar13 + 0x28) = selectorEnumerant;
+                    *(undefined4 *)(laterRecord + 0x28) = selectorEnumerant;
                   }
                 }
                 else {
-                  *(undefined4 *)(iVar13 + 0x28) = 0x87dd;
+                  *(undefined4 *)(laterRecord + 0x28) = 0x87dd;
                 }
               }
-              if (*(int *)(iVar13 + 0x10) == 0) {
-                *(undefined4 *)(iVar13 + 0x10) = 1;
+              if (*(int *)(laterRecord + 0x10) == 0) {
+                *(undefined4 *)(laterRecord + 0x10) = 1;
                 if (yIsZero) {
-                  *(undefined4 *)(iVar13 + 0x2c) = 0x87dd;
+                  *(undefined4 *)(laterRecord + 0x2c) = 0x87dd;
                 }
                 else if (yIsOne) {
-                  *(undefined4 *)(iVar13 + 0x2c) = 0x87de;
+                  *(undefined4 *)(laterRecord + 0x2c) = 0x87de;
                 }
                 else {
-                  *(undefined4 *)(iVar13 + 0x2c) = selectorEnumerant;
+                  *(undefined4 *)(laterRecord + 0x2c) = selectorEnumerant;
                 }
               }
-              if (*(int *)(iVar13 + 0x14) == 0) {
-                *(undefined4 *)(iVar13 + 0x14) = 1;
+              if (*(int *)(laterRecord + 0x14) == 0) {
+                *(undefined4 *)(laterRecord + 0x14) = 1;
                 if (bVar37) {
-                  *(undefined4 *)(iVar13 + 0x30) = 0x87dd;
+                  *(undefined4 *)(laterRecord + 0x30) = 0x87dd;
                 }
                 else if (bVar36) {
-                  *(undefined4 *)(iVar13 + 0x30) = 0x87de;
+                  *(undefined4 *)(laterRecord + 0x30) = 0x87de;
                 }
                 else {
-                  *(undefined4 *)(iVar13 + 0x30) = selectorEnumerant;
+                  *(undefined4 *)(laterRecord + 0x30) = selectorEnumerant;
                 }
               }
-              if (*(int *)(iVar13 + 0x18) == 0) {
-                *(undefined4 *)(iVar13 + 0x18) = 1;
+              if (*(int *)(laterRecord + 0x18) == 0) {
+                *(undefined4 *)(laterRecord + 0x18) = 1;
                 if (wIsZero) {
-                  *(undefined4 *)(iVar13 + 0x34) = 0x87dd;
+                  *(undefined4 *)(laterRecord + 0x34) = 0x87dd;
                   bVar1 = true;
                   instructionCount = *(uint *)(shaderProgram + 0x14);
                 }
                 else if (wIsOne) {
-                  *(undefined4 *)(iVar13 + 0x34) = 0x87de;
+                  *(undefined4 *)(laterRecord + 0x34) = 0x87de;
                   bVar1 = true;
                   instructionCount = *(uint *)(shaderProgram + 0x14);
                 }
                 else {
-                  *(undefined4 *)(iVar13 + 0x34) = selectorEnumerant;
+                  *(undefined4 *)(laterRecord + 0x34) = selectorEnumerant;
                   bVar1 = true;
                   instructionCount = *(uint *)(shaderProgram + 0x14);
                 }
@@ -5133,25 +5133,25 @@ LAB_0007e330:
                      && (*(int *)(instructions + -0x40) == 0x87d8)))))) {
         if (uVar30 < instructionCount) {
           symbol = instructionCount - uVar30;
-          piVar21 = (int *)(instructions + 0x20);
+          laterSlotCursor = (int *)(instructions + 0x20);
           bVar29 = 0;
           bVar10 = 0;
           bVar12 = 0;
           bVar14 = 0;
           bVar34 = true;
           do {
-            if (((*piVar21 == 2) && (piVar21[1] == *(int *)(instructions + -0x50))) ||
-               (((piVar21[7] == 2 && (piVar21[8] == *(int *)(instructions + -0x50))) ||
-                ((piVar21[0xe] == 2 && (piVar21[0xf] == *(int *)(instructions + -0x50))))))) {
+            if (((*laterSlotCursor == 2) && (laterSlotCursor[1] == *(int *)(instructions + -0x50))) ||
+               (((laterSlotCursor[7] == 2 && (laterSlotCursor[8] == *(int *)(instructions + -0x50))) ||
+                ((laterSlotCursor[0xe] == 2 && (laterSlotCursor[0xf] == *(int *)(instructions + -0x50))))))) {
               bVar35 = true;
               bVar34 = false;
             }
             else {
-              if ((piVar21[-7] == 2) && (piVar21[-6] == *(int *)(instructions + -0x50))) {
-                bVar29 = bVar29 | *(byte *)((int)piVar21 + -0x11);
-                bVar10 = bVar10 | *(byte *)((int)piVar21 + -0xd);
-                bVar12 = bVar12 | *(byte *)((int)piVar21 + -9);
-                bVar14 = bVar14 | *(byte *)((int)piVar21 + -5);
+              if ((laterSlotCursor[-7] == 2) && (laterSlotCursor[-6] == *(int *)(instructions + -0x50))) {
+                bVar29 = bVar29 | *(byte *)((int)laterSlotCursor + -0x11);
+                bVar10 = bVar10 | *(byte *)((int)laterSlotCursor + -0xd);
+                bVar12 = bVar12 | *(byte *)((int)laterSlotCursor + -9);
+                bVar14 = bVar14 | *(byte *)((int)laterSlotCursor + -5);
                 if ((bVar29 != 0) && ((bVar10 != 0 && (bVar12 != 0)))) {
                   bVar35 = bVar14 != 0;
                   goto LAB_0007e530;
@@ -5161,15 +5161,15 @@ LAB_0007e330:
             }
 LAB_0007e530:
             symbol = symbol + -1;
-          } while ((symbol != 0) && (piVar21 = piVar21 + 0x1d, !bVar35));
+          } while ((symbol != 0) && (laterSlotCursor = laterSlotCursor + 0x1d, !bVar35));
           if (!bVar34) goto LAB_0007e760;
         }
         uVar18 = uVar30 - 1;
         if (uVar18 != 0) {
-          uVar28 = 0;
-          uVar27 = 0;
-          uVar26 = 0;
-          uVar25 = 0;
+          writeEnableW = 0;
+          writeEnableZ = 0;
+          writeEnableY = 0;
+          writeEnableX = 0;
           bVar34 = false;
           do {
             symbol = *(int *)(shaderProgram + 0x18) + uVar18 * 0x74;
@@ -5195,12 +5195,12 @@ LAB_0007e530:
             uVar18 = uVar18 - 1;
             if (((*(int *)(symbol + -0x74) != 0x879c) && (*(int *)(symbol + -0x70) == 2)) &&
                (*(int *)(symbol + -0x6c) == *(int *)(instructions + -0x50))) {
-              uVar25 = uVar25 | *(byte *)(symbol + -0x65);
-              uVar26 = uVar26 | *(byte *)(symbol + -0x61);
-              uVar28 = uVar28 | *(byte *)(symbol + -0x59);
-              uVar27 = uVar27 | *(byte *)(symbol + -0x5d);
-              if (((*(uint *)(instructions + -0x68) <= uVar25) && (*(uint *)(instructions + -100) <= uVar26)) &&
-                 ((*(uint *)(instructions + -0x60) <= uVar27 && (*(uint *)(instructions + -0x5c) <= uVar28)))) {
+              writeEnableX = writeEnableX | *(byte *)(symbol + -0x65);
+              writeEnableY = writeEnableY | *(byte *)(symbol + -0x61);
+              writeEnableW = writeEnableW | *(byte *)(symbol + -0x59);
+              writeEnableZ = writeEnableZ | *(byte *)(symbol + -0x5d);
+              if (((*(uint *)(instructions + -0x68) <= writeEnableX) && (*(uint *)(instructions + -100) <= writeEnableY)) &&
+                 ((*(uint *)(instructions + -0x60) <= writeEnableZ && (*(uint *)(instructions + -0x5c) <= writeEnableW)))) {
                 bVar35 = true;
                 bVar34 = true;
                 instructionIndex = uVar18;
@@ -5208,31 +5208,31 @@ LAB_0007e530:
             }
           } while ((uVar18 != 0) && (!bVar35));
           if (bVar34) {
-            extvsInstReadsTempComponents(shaderProgram + 0x1c,instructions + -0x74,*(undefined4 *)(instructions + -0x50),&cStack_88,
-                         &cStack_87,&cStack_86,acStack_85);
-            if (((((cStack_88 == '\0') || (uVar25 != 0)) && ((cStack_87 == '\0' || (uVar26 != 0))))
-                && ((cStack_86 == '\0' || (uVar27 != 0)))) &&
-               ((acStack_85[0] == '\0' || (uVar28 != 0)))) {
+            extvsInstReadsTempComponents(shaderProgram + 0x1c,instructions + -0x74,*(undefined4 *)(instructions + -0x50),&readsX,
+                         &readsY,&readsZ,acStack_85);
+            if (((((readsX == '\0') || (writeEnableX != 0)) && ((readsY == '\0' || (writeEnableY != 0))))
+                && ((readsZ == '\0' || (writeEnableZ != 0)))) &&
+               ((acStack_85[0] == '\0' || (writeEnableW != 0)))) {
               if (instructionIndex < uVar30) {
                 symbol = uVar30 - instructionIndex;
-                iVar32 = instructionIndex * 0x74;
+                movRecord = instructionIndex * 0x74;
                 do {
-                  iVar13 = iVar32 + *(int *)(shaderProgram + 0x18);
-                  if (((*(int *)(iVar32 + *(int *)(shaderProgram + 0x18)) != 0x879c) &&
-                      (*(int *)(iVar13 + 4) == 2)) &&
-                     (*(int *)(iVar13 + 8) == *(int *)(instructions + -0x50))) {
+                  laterRecord = movRecord + *(int *)(shaderProgram + 0x18);
+                  if (((*(int *)(movRecord + *(int *)(shaderProgram + 0x18)) != 0x879c) &&
+                      (*(int *)(laterRecord + 4) == 2)) &&
+                     (*(int *)(laterRecord + 8) == *(int *)(instructions + -0x50))) {
                     selectorEnumerant = *(undefined4 *)(instructions + -0x6c);
-                    *(undefined4 *)(iVar13 + 4) = *(undefined4 *)(instructions + -0x70);
-                    *(undefined4 *)(iVar13 + 8) = selectorEnumerant;
+                    *(undefined4 *)(laterRecord + 4) = *(undefined4 *)(instructions + -0x70);
+                    *(undefined4 *)(laterRecord + 8) = selectorEnumerant;
                     instructionCount = *(uint *)(instructions + -0x5c);
-                    uVar25 = *(uint *)(instructions + -100);
+                    writeEnableX = *(uint *)(instructions + -100);
                     uVar18 = *(uint *)(instructions + -0x60);
-                    *(uint *)(iVar13 + 0xc) = *(uint *)(iVar13 + 0xc) & *(uint *)(instructions + -0x68);
-                    *(uint *)(iVar13 + 0x10) = *(uint *)(iVar13 + 0x10) & uVar25;
-                    *(uint *)(iVar13 + 0x14) = *(uint *)(iVar13 + 0x14) & uVar18;
-                    *(uint *)(iVar13 + 0x18) = *(uint *)(iVar13 + 0x18) & instructionCount;
+                    *(uint *)(laterRecord + 0xc) = *(uint *)(laterRecord + 0xc) & *(uint *)(instructions + -0x68);
+                    *(uint *)(laterRecord + 0x10) = *(uint *)(laterRecord + 0x10) & writeEnableX;
+                    *(uint *)(laterRecord + 0x14) = *(uint *)(laterRecord + 0x14) & uVar18;
+                    *(uint *)(laterRecord + 0x18) = *(uint *)(laterRecord + 0x18) & instructionCount;
                   }
-                  iVar32 = iVar32 + 0x74;
+                  movRecord = movRecord + 0x74;
                   symbol = symbol + -1;
                 } while (symbol != 0);
               }
@@ -5265,27 +5265,27 @@ LAB_0007e760: ;
         currentInstruction = *(int *)(shaderProgram + 0x18);
         symbol = uVar30 * 0x74;
         instructions = *(int *)(currentInstruction + symbol);
-        iVar32 = currentInstruction + symbol;
+        movRecord = currentInstruction + symbol;
         if ((((instructions == 0x879b) || (instructions == 0x8799)) || (instructions == 0x879a)) &&
-           ((((*(char *)(iVar32 + 0x38) == '\0' && (*(int *)(iVar32 + 4) == 2)) &&
+           ((((*(char *)(movRecord + 0x38) == '\0' && (*(int *)(movRecord + 4) == 2)) &&
              ((*(char *)(shaderProgram + 0x7b) == '\0' ||
-              (*(int *)(*(int *)(iVar32 + 8) * 0x54 + *(int *)(shaderProgram + 0x20) + 0x28) != 0x87c4))))
-            && ((((*(int *)(iVar32 + 0xc) != 0 && (*(int *)(iVar32 + 0x10) != 0)) &&
-                 (*(int *)(iVar32 + 0x14) != 0)) && (*(int *)(iVar32 + 0x18) != 0)))))) {
-          uVar25 = uVar30 + 1;
-          uVar18 = uVar25;
+              (*(int *)(*(int *)(movRecord + 8) * 0x54 + *(int *)(shaderProgram + 0x20) + 0x28) != 0x87c4))))
+            && ((((*(int *)(movRecord + 0xc) != 0 && (*(int *)(movRecord + 0x10) != 0)) &&
+                 (*(int *)(movRecord + 0x14) != 0)) && (*(int *)(movRecord + 0x18) != 0)))))) {
+          writeEnableX = uVar30 + 1;
+          uVar18 = writeEnableX;
           instructionIndex = instructionCount;
-          if (uVar25 < instructionCount) {
+          if (writeEnableX < instructionCount) {
             bVar34 = true;
             do {
               instructions = currentInstruction + uVar18 * 0x74;
               if (*(int *)(instructions + 4) == 2) {
                 instructions = *(int *)(instructions + 8);
-                bVar35 = instructions == *(int *)(iVar32 + 8);
+                bVar35 = instructions == *(int *)(movRecord + 8);
                 if (bVar35) {
                   instructionIndex = uVar18 + 1;
                 }
-                if (*(int *)(iVar32 + 0x24) == instructions) {
+                if (*(int *)(movRecord + 0x24) == instructions) {
                   bVar35 = true;
                   bVar34 = false;
                 }
@@ -5309,15 +5309,15 @@ LAB_0007e760: ;
             while( true ) {
               currentInstruction = instructions + currentInstruction;
               if ((((*(int *)(currentInstruction + 0x20) == 2) &&
-                   (iVar13 = *(int *)(iVar32 + 8), *(int *)(currentInstruction + 0x24) == iVar13)) ||
+                   (laterRecord = *(int *)(movRecord + 8), *(int *)(currentInstruction + 0x24) == laterRecord)) ||
                   ((*(int *)(currentInstruction + 0x3c) == 2 &&
-                   (iVar13 = *(int *)(iVar32 + 8), *(int *)(currentInstruction + 0x40) == iVar13)))) ||
+                   (laterRecord = *(int *)(movRecord + 8), *(int *)(currentInstruction + 0x40) == laterRecord)))) ||
                  ((*(int *)(currentInstruction + 0x58) == 2 &&
-                  (iVar13 = *(int *)(iVar32 + 8), *(int *)(currentInstruction + 0x5c) == iVar13)))) {
-                extvsInstReadsTempComponents(shaderProgram + 0x1c,currentInstruction,iVar13,&cStack_88,&cStack_87,&cStack_86,
+                  (laterRecord = *(int *)(movRecord + 8), *(int *)(currentInstruction + 0x5c) == laterRecord)))) {
+                extvsInstReadsTempComponents(shaderProgram + 0x1c,currentInstruction,laterRecord,&readsX,&readsY,&readsZ,
                              acStack_85);
-                if (((cStack_88 == '\0') || (bVar12 != 0)) &&
-                   ((((cStack_87 == '\0' || (bVar14 != 0)) && ((cStack_86 == '\0' || (bVar29 != 0)))
+                if (((readsX == '\0') || (bVar12 != 0)) &&
+                   ((((readsY == '\0' || (bVar14 != 0)) && ((readsZ == '\0' || (bVar29 != 0)))
                      ) && ((acStack_85[0] == '\0' || (bVar10 != 0)))))) {
                   instructionCount = *(uint *)(shaderProgram + 0x14);
                 }
@@ -5326,7 +5326,7 @@ LAB_0007e760: ;
                   bVar34 = false;
                 }
               }
-              if ((*(int *)(currentInstruction + 4) == 2) && (*(int *)(currentInstruction + 8) == *(int *)(iVar32 + 8))) {
+              if ((*(int *)(currentInstruction + 4) == 2) && (*(int *)(currentInstruction + 8) == *(int *)(movRecord + 8))) {
                 bVar10 = bVar10 | *(byte *)(currentInstruction + 0x1b);
                 bVar12 = bVar12 | *(byte *)(currentInstruction + 0xf);
                 bVar14 = bVar14 | *(byte *)(currentInstruction + 0x13);
@@ -5339,28 +5339,28 @@ LAB_0007e760: ;
             }
             if (!bVar34) goto LAB_00080860;
           }
-          if (uVar25 < instructionIndex) {
-            currentInstruction = uVar25 * 0x74;
-            instructions = instructionIndex - uVar25;
+          if (writeEnableX < instructionIndex) {
+            currentInstruction = writeEnableX * 0x74;
+            instructions = instructionIndex - writeEnableX;
             do {
-              iVar13 = currentInstruction + *(int *)(shaderProgram + 0x18);
-              if ((*(int *)(iVar13 + 0x20) == 2) &&
-                 (*(int *)(iVar13 + 0x24) == *(int *)(iVar32 + 8))) {
-                selectorEnumerant = *(undefined4 *)(iVar13 + 0x28);
-                selectorBase = (undefined4 *)(iVar32 + 0x28);
-                *(undefined4 *)(iVar13 + 0x24) = *(undefined4 *)(iVar32 + 0x24);
+              laterRecord = currentInstruction + *(int *)(shaderProgram + 0x18);
+              if ((*(int *)(laterRecord + 0x20) == 2) &&
+                 (*(int *)(laterRecord + 0x24) == *(int *)(movRecord + 8))) {
+                selectorEnumerant = *(undefined4 *)(laterRecord + 0x28);
+                selectorBase = (undefined4 *)(movRecord + 0x28);
+                *(undefined4 *)(laterRecord + 0x24) = *(undefined4 *)(movRecord + 0x24);
                 switch(selectorEnumerant) {
                 case 0x87d5:
                   selectorEnumerant = *selectorBase;
                   break;
                 case 0x87d6:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x2c);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x2c);
                   break;
                 case 0x87d7:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x30);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x30);
                   break;
                 case 0x87d8:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x34);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x34);
                   break;
                 case 0x87d9:
                   selectorEnumerant = *selectorBase;
@@ -5407,7 +5407,7 @@ code_r0x0007ed88:
                   }
                   break;
                 case 0x87da:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x2c);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x2c);
                   switch(selectorEnumerant) {
                   case 0x87d5:
                     goto code_r0x0007ed7c;
@@ -5432,7 +5432,7 @@ code_r0x0007ed88:
                   }
                   break;
                 case 0x87db:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x30);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x30);
                   switch(selectorEnumerant) {
                   case 0x87d5:
                     goto code_r0x0007ed7c;
@@ -5457,7 +5457,7 @@ code_r0x0007ed88:
                   }
                   break;
                 case 0x87dc:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x34);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x34);
                   switch(selectorEnumerant) {
                   case 0x87d5:
                     goto code_r0x0007ed7c;
@@ -5481,20 +5481,20 @@ code_r0x0007ed88:
                     goto code_r0x0007ed88;
                   }
                 }
-                writerSrc0SelectorY = *(undefined4 *)(iVar13 + 0x2c);
-                *(undefined4 *)(iVar13 + 0x28) = selectorEnumerant;
+                writerSrc0SelectorY = *(undefined4 *)(laterRecord + 0x2c);
+                *(undefined4 *)(laterRecord + 0x28) = selectorEnumerant;
                 switch(writerSrc0SelectorY) {
                 case 0x87d5:
                   writerSrc0SelectorY = *selectorBase;
                   break;
                 case 0x87d6:
-                  writerSrc0SelectorY = *(undefined4 *)(iVar32 + 0x2c);
+                  writerSrc0SelectorY = *(undefined4 *)(movRecord + 0x2c);
                   break;
                 case 0x87d7:
-                  writerSrc0SelectorY = *(undefined4 *)(iVar32 + 0x30);
+                  writerSrc0SelectorY = *(undefined4 *)(movRecord + 0x30);
                   break;
                 case 0x87d8:
-                  writerSrc0SelectorY = *(undefined4 *)(iVar32 + 0x34);
+                  writerSrc0SelectorY = *(undefined4 *)(movRecord + 0x34);
                   break;
                 case 0x87d9:
                   writerSrc0SelectorY = *selectorBase;
@@ -5541,7 +5541,7 @@ code_r0x0007efe0:
                   }
                   break;
                 case 0x87da:
-                  writerSrc0SelectorY = *(undefined4 *)(iVar32 + 0x2c);
+                  writerSrc0SelectorY = *(undefined4 *)(movRecord + 0x2c);
                   switch(writerSrc0SelectorY) {
                   case 0x87d5:
                     goto code_r0x0007efd4;
@@ -5566,7 +5566,7 @@ code_r0x0007efe0:
                   }
                   break;
                 case 0x87db:
-                  writerSrc0SelectorY = *(undefined4 *)(iVar32 + 0x30);
+                  writerSrc0SelectorY = *(undefined4 *)(movRecord + 0x30);
                   switch(writerSrc0SelectorY) {
                   case 0x87d5:
                     goto code_r0x0007efd4;
@@ -5591,7 +5591,7 @@ code_r0x0007efe0:
                   }
                   break;
                 case 0x87dc:
-                  writerSrc0SelectorY = *(undefined4 *)(iVar32 + 0x34);
+                  writerSrc0SelectorY = *(undefined4 *)(movRecord + 0x34);
                   switch(writerSrc0SelectorY) {
                   case 0x87d5:
                     goto code_r0x0007efd4;
@@ -5615,20 +5615,20 @@ code_r0x0007efe0:
                     goto code_r0x0007efe0;
                   }
                 }
-                selectorEnumerant = *(undefined4 *)(iVar13 + 0x30);
-                *(undefined4 *)(iVar13 + 0x2c) = writerSrc0SelectorY;
+                selectorEnumerant = *(undefined4 *)(laterRecord + 0x30);
+                *(undefined4 *)(laterRecord + 0x2c) = writerSrc0SelectorY;
                 switch(selectorEnumerant) {
                 case 0x87d5:
                   selectorEnumerant = *selectorBase;
                   break;
                 case 0x87d6:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x2c);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x2c);
                   break;
                 case 0x87d7:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x30);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x30);
                   break;
                 case 0x87d8:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x34);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x34);
                   break;
                 case 0x87d9:
                   selectorEnumerant = *selectorBase;
@@ -5675,7 +5675,7 @@ code_r0x0007f238:
                   }
                   break;
                 case 0x87da:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x2c);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x2c);
                   switch(selectorEnumerant) {
                   case 0x87d5:
                     goto code_r0x0007f22c;
@@ -5700,7 +5700,7 @@ code_r0x0007f238:
                   }
                   break;
                 case 0x87db:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x30);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x30);
                   switch(selectorEnumerant) {
                   case 0x87d5:
                     goto code_r0x0007f22c;
@@ -5725,7 +5725,7 @@ code_r0x0007f238:
                   }
                   break;
                 case 0x87dc:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x34);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x34);
                   switch(selectorEnumerant) {
                   case 0x87d5:
                     goto code_r0x0007f22c;
@@ -5749,20 +5749,20 @@ code_r0x0007f238:
                     goto code_r0x0007f238;
                   }
                 }
-                writerSrc0SelectorW = *(undefined4 *)(iVar13 + 0x34);
-                *(undefined4 *)(iVar13 + 0x30) = selectorEnumerant;
+                writerSrc0SelectorW = *(undefined4 *)(laterRecord + 0x34);
+                *(undefined4 *)(laterRecord + 0x30) = selectorEnumerant;
                 switch(writerSrc0SelectorW) {
                 case 0x87d5:
                   writerSrc0SelectorW = *selectorBase;
                   break;
                 case 0x87d6:
-                  writerSrc0SelectorW = *(undefined4 *)(iVar32 + 0x2c);
+                  writerSrc0SelectorW = *(undefined4 *)(movRecord + 0x2c);
                   break;
                 case 0x87d7:
-                  writerSrc0SelectorW = *(undefined4 *)(iVar32 + 0x30);
+                  writerSrc0SelectorW = *(undefined4 *)(movRecord + 0x30);
                   break;
                 case 0x87d8:
-                  writerSrc0SelectorW = *(undefined4 *)(iVar32 + 0x34);
+                  writerSrc0SelectorW = *(undefined4 *)(movRecord + 0x34);
                   break;
                 case 0x87d9:
                   writerSrc0SelectorW = *selectorBase;
@@ -5809,7 +5809,7 @@ code_r0x0007f490:
                   }
                   break;
                 case 0x87da:
-                  writerSrc0SelectorW = *(undefined4 *)(iVar32 + 0x2c);
+                  writerSrc0SelectorW = *(undefined4 *)(movRecord + 0x2c);
                   switch(writerSrc0SelectorW) {
                   case 0x87d5:
                     goto code_r0x0007f484;
@@ -5834,7 +5834,7 @@ code_r0x0007f490:
                   }
                   break;
                 case 0x87db:
-                  writerSrc0SelectorW = *(undefined4 *)(iVar32 + 0x30);
+                  writerSrc0SelectorW = *(undefined4 *)(movRecord + 0x30);
                   switch(writerSrc0SelectorW) {
                   case 0x87d5:
                     goto code_r0x0007f484;
@@ -5859,7 +5859,7 @@ code_r0x0007f490:
                   }
                   break;
                 case 0x87dc:
-                  writerSrc0SelectorW = *(undefined4 *)(iVar32 + 0x34);
+                  writerSrc0SelectorW = *(undefined4 *)(movRecord + 0x34);
                   switch(writerSrc0SelectorW) {
                   case 0x87d5:
                     goto code_r0x0007f484;
@@ -5883,25 +5883,25 @@ code_r0x0007f490:
                     goto code_r0x0007f490;
                   }
                 }
-                *(undefined4 *)(iVar13 + 0x34) = writerSrc0SelectorW;
+                *(undefined4 *)(laterRecord + 0x34) = writerSrc0SelectorW;
               }
-              if ((*(int *)(iVar13 + 0x3c) == 2) &&
-                 (*(int *)(iVar13 + 0x40) == *(int *)(iVar32 + 8))) {
-                selectorEnumerant = *(undefined4 *)(iVar13 + 0x44);
-                selectorBase = (undefined4 *)(iVar32 + 0x28);
-                *(undefined4 *)(iVar13 + 0x40) = *(undefined4 *)(iVar32 + 0x24);
+              if ((*(int *)(laterRecord + 0x3c) == 2) &&
+                 (*(int *)(laterRecord + 0x40) == *(int *)(movRecord + 8))) {
+                selectorEnumerant = *(undefined4 *)(laterRecord + 0x44);
+                selectorBase = (undefined4 *)(movRecord + 0x28);
+                *(undefined4 *)(laterRecord + 0x40) = *(undefined4 *)(movRecord + 0x24);
                 switch(selectorEnumerant) {
                 case 0x87d5:
                   selectorEnumerant = *selectorBase;
                   break;
                 case 0x87d6:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x2c);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x2c);
                   break;
                 case 0x87d7:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x30);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x30);
                   break;
                 case 0x87d8:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x34);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x34);
                   break;
                 case 0x87d9:
                   selectorEnumerant = *selectorBase;
@@ -5948,7 +5948,7 @@ code_r0x0007f714:
                   }
                   break;
                 case 0x87da:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x2c);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x2c);
                   switch(selectorEnumerant) {
                   case 0x87d5:
                     goto code_r0x0007f708;
@@ -5973,7 +5973,7 @@ code_r0x0007f714:
                   }
                   break;
                 case 0x87db:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x30);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x30);
                   switch(selectorEnumerant) {
                   case 0x87d5:
                     goto code_r0x0007f708;
@@ -5998,7 +5998,7 @@ code_r0x0007f714:
                   }
                   break;
                 case 0x87dc:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x34);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x34);
                   switch(selectorEnumerant) {
                   case 0x87d5:
                     goto code_r0x0007f708;
@@ -6022,20 +6022,20 @@ code_r0x0007f714:
                     goto code_r0x0007f714;
                   }
                 }
-                writerSrc1SelectorY = *(undefined4 *)(iVar13 + 0x48);
-                *(undefined4 *)(iVar13 + 0x44) = selectorEnumerant;
+                writerSrc1SelectorY = *(undefined4 *)(laterRecord + 0x48);
+                *(undefined4 *)(laterRecord + 0x44) = selectorEnumerant;
                 switch(writerSrc1SelectorY) {
                 case 0x87d5:
                   writerSrc1SelectorY = *selectorBase;
                   break;
                 case 0x87d6:
-                  writerSrc1SelectorY = *(undefined4 *)(iVar32 + 0x2c);
+                  writerSrc1SelectorY = *(undefined4 *)(movRecord + 0x2c);
                   break;
                 case 0x87d7:
-                  writerSrc1SelectorY = *(undefined4 *)(iVar32 + 0x30);
+                  writerSrc1SelectorY = *(undefined4 *)(movRecord + 0x30);
                   break;
                 case 0x87d8:
-                  writerSrc1SelectorY = *(undefined4 *)(iVar32 + 0x34);
+                  writerSrc1SelectorY = *(undefined4 *)(movRecord + 0x34);
                   break;
                 case 0x87d9:
                   writerSrc1SelectorY = *selectorBase;
@@ -6082,7 +6082,7 @@ code_r0x0007f96c:
                   }
                   break;
                 case 0x87da:
-                  writerSrc1SelectorY = *(undefined4 *)(iVar32 + 0x2c);
+                  writerSrc1SelectorY = *(undefined4 *)(movRecord + 0x2c);
                   switch(writerSrc1SelectorY) {
                   case 0x87d5:
                     goto code_r0x0007f960;
@@ -6107,7 +6107,7 @@ code_r0x0007f96c:
                   }
                   break;
                 case 0x87db:
-                  writerSrc1SelectorY = *(undefined4 *)(iVar32 + 0x30);
+                  writerSrc1SelectorY = *(undefined4 *)(movRecord + 0x30);
                   switch(writerSrc1SelectorY) {
                   case 0x87d5:
                     goto code_r0x0007f960;
@@ -6132,7 +6132,7 @@ code_r0x0007f96c:
                   }
                   break;
                 case 0x87dc:
-                  writerSrc1SelectorY = *(undefined4 *)(iVar32 + 0x34);
+                  writerSrc1SelectorY = *(undefined4 *)(movRecord + 0x34);
                   switch(writerSrc1SelectorY) {
                   case 0x87d5:
                     goto code_r0x0007f960;
@@ -6156,20 +6156,20 @@ code_r0x0007f96c:
                     goto code_r0x0007f96c;
                   }
                 }
-                selectorEnumerant = *(undefined4 *)(iVar13 + 0x4c);
-                *(undefined4 *)(iVar13 + 0x48) = writerSrc1SelectorY;
+                selectorEnumerant = *(undefined4 *)(laterRecord + 0x4c);
+                *(undefined4 *)(laterRecord + 0x48) = writerSrc1SelectorY;
                 switch(selectorEnumerant) {
                 case 0x87d5:
                   selectorEnumerant = *selectorBase;
                   break;
                 case 0x87d6:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x2c);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x2c);
                   break;
                 case 0x87d7:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x30);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x30);
                   break;
                 case 0x87d8:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x34);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x34);
                   break;
                 case 0x87d9:
                   selectorEnumerant = *selectorBase;
@@ -6216,7 +6216,7 @@ code_r0x0007fbc4:
                   }
                   break;
                 case 0x87da:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x2c);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x2c);
                   switch(selectorEnumerant) {
                   case 0x87d5:
                     goto code_r0x0007fbb8;
@@ -6241,7 +6241,7 @@ code_r0x0007fbc4:
                   }
                   break;
                 case 0x87db:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x30);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x30);
                   switch(selectorEnumerant) {
                   case 0x87d5:
                     goto code_r0x0007fbb8;
@@ -6266,7 +6266,7 @@ code_r0x0007fbc4:
                   }
                   break;
                 case 0x87dc:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x34);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x34);
                   switch(selectorEnumerant) {
                   case 0x87d5:
                     goto code_r0x0007fbb8;
@@ -6290,20 +6290,20 @@ code_r0x0007fbc4:
                     goto code_r0x0007fbc4;
                   }
                 }
-                writerSrc1SelectorW = *(undefined4 *)(iVar13 + 0x50);
-                *(undefined4 *)(iVar13 + 0x4c) = selectorEnumerant;
+                writerSrc1SelectorW = *(undefined4 *)(laterRecord + 0x50);
+                *(undefined4 *)(laterRecord + 0x4c) = selectorEnumerant;
                 switch(writerSrc1SelectorW) {
                 case 0x87d5:
                   writerSrc1SelectorW = *selectorBase;
                   break;
                 case 0x87d6:
-                  writerSrc1SelectorW = *(undefined4 *)(iVar32 + 0x2c);
+                  writerSrc1SelectorW = *(undefined4 *)(movRecord + 0x2c);
                   break;
                 case 0x87d7:
-                  writerSrc1SelectorW = *(undefined4 *)(iVar32 + 0x30);
+                  writerSrc1SelectorW = *(undefined4 *)(movRecord + 0x30);
                   break;
                 case 0x87d8:
-                  writerSrc1SelectorW = *(undefined4 *)(iVar32 + 0x34);
+                  writerSrc1SelectorW = *(undefined4 *)(movRecord + 0x34);
                   break;
                 case 0x87d9:
                   writerSrc1SelectorW = *selectorBase;
@@ -6350,7 +6350,7 @@ code_r0x0007fe1c:
                   }
                   break;
                 case 0x87da:
-                  writerSrc1SelectorW = *(undefined4 *)(iVar32 + 0x2c);
+                  writerSrc1SelectorW = *(undefined4 *)(movRecord + 0x2c);
                   switch(writerSrc1SelectorW) {
                   case 0x87d5:
                     goto code_r0x0007fe10;
@@ -6375,7 +6375,7 @@ code_r0x0007fe1c:
                   }
                   break;
                 case 0x87db:
-                  writerSrc1SelectorW = *(undefined4 *)(iVar32 + 0x30);
+                  writerSrc1SelectorW = *(undefined4 *)(movRecord + 0x30);
                   switch(writerSrc1SelectorW) {
                   case 0x87d5:
                     goto code_r0x0007fe10;
@@ -6400,7 +6400,7 @@ code_r0x0007fe1c:
                   }
                   break;
                 case 0x87dc:
-                  writerSrc1SelectorW = *(undefined4 *)(iVar32 + 0x34);
+                  writerSrc1SelectorW = *(undefined4 *)(movRecord + 0x34);
                   switch(writerSrc1SelectorW) {
                   case 0x87d5:
                     goto code_r0x0007fe10;
@@ -6424,25 +6424,25 @@ code_r0x0007fe1c:
                     goto code_r0x0007fe1c;
                   }
                 }
-                *(undefined4 *)(iVar13 + 0x50) = writerSrc1SelectorW;
+                *(undefined4 *)(laterRecord + 0x50) = writerSrc1SelectorW;
               }
-              if ((*(int *)(iVar13 + 0x58) == 2) &&
-                 (*(int *)(iVar13 + 0x5c) == *(int *)(iVar32 + 8))) {
-                selectorEnumerant = *(undefined4 *)(iVar13 + 0x60);
-                selectorBase = (undefined4 *)(iVar32 + 0x28);
-                *(undefined4 *)(iVar13 + 0x5c) = *(undefined4 *)(iVar32 + 0x24);
+              if ((*(int *)(laterRecord + 0x58) == 2) &&
+                 (*(int *)(laterRecord + 0x5c) == *(int *)(movRecord + 8))) {
+                selectorEnumerant = *(undefined4 *)(laterRecord + 0x60);
+                selectorBase = (undefined4 *)(movRecord + 0x28);
+                *(undefined4 *)(laterRecord + 0x5c) = *(undefined4 *)(movRecord + 0x24);
                 switch(selectorEnumerant) {
                 case 0x87d5:
                   selectorEnumerant = *selectorBase;
                   break;
                 case 0x87d6:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x2c);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x2c);
                   break;
                 case 0x87d7:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x30);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x30);
                   break;
                 case 0x87d8:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x34);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x34);
                   break;
                 case 0x87d9:
                   selectorEnumerant = *selectorBase;
@@ -6489,7 +6489,7 @@ code_r0x000800a0:
                   }
                   break;
                 case 0x87da:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x2c);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x2c);
                   switch(selectorEnumerant) {
                   case 0x87d5:
                     goto code_r0x00080094;
@@ -6514,7 +6514,7 @@ code_r0x000800a0:
                   }
                   break;
                 case 0x87db:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x30);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x30);
                   switch(selectorEnumerant) {
                   case 0x87d5:
                     goto code_r0x00080094;
@@ -6539,7 +6539,7 @@ code_r0x000800a0:
                   }
                   break;
                 case 0x87dc:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x34);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x34);
                   switch(selectorEnumerant) {
                   case 0x87d5:
                     goto code_r0x00080094;
@@ -6563,20 +6563,20 @@ code_r0x000800a0:
                     goto code_r0x000800a0;
                   }
                 }
-                writerSrc2SelectorY = *(undefined4 *)(iVar13 + 100);
-                *(undefined4 *)(iVar13 + 0x60) = selectorEnumerant;
+                writerSrc2SelectorY = *(undefined4 *)(laterRecord + 100);
+                *(undefined4 *)(laterRecord + 0x60) = selectorEnumerant;
                 switch(writerSrc2SelectorY) {
                 case 0x87d5:
                   writerSrc2SelectorY = *selectorBase;
                   break;
                 case 0x87d6:
-                  writerSrc2SelectorY = *(undefined4 *)(iVar32 + 0x2c);
+                  writerSrc2SelectorY = *(undefined4 *)(movRecord + 0x2c);
                   break;
                 case 0x87d7:
-                  writerSrc2SelectorY = *(undefined4 *)(iVar32 + 0x30);
+                  writerSrc2SelectorY = *(undefined4 *)(movRecord + 0x30);
                   break;
                 case 0x87d8:
-                  writerSrc2SelectorY = *(undefined4 *)(iVar32 + 0x34);
+                  writerSrc2SelectorY = *(undefined4 *)(movRecord + 0x34);
                   break;
                 case 0x87d9:
                   writerSrc2SelectorY = *selectorBase;
@@ -6623,7 +6623,7 @@ code_r0x000802f8:
                   }
                   break;
                 case 0x87da:
-                  writerSrc2SelectorY = *(undefined4 *)(iVar32 + 0x2c);
+                  writerSrc2SelectorY = *(undefined4 *)(movRecord + 0x2c);
                   switch(writerSrc2SelectorY) {
                   case 0x87d5:
                     goto code_r0x000802ec;
@@ -6648,7 +6648,7 @@ code_r0x000802f8:
                   }
                   break;
                 case 0x87db:
-                  writerSrc2SelectorY = *(undefined4 *)(iVar32 + 0x30);
+                  writerSrc2SelectorY = *(undefined4 *)(movRecord + 0x30);
                   switch(writerSrc2SelectorY) {
                   case 0x87d5:
                     goto code_r0x000802ec;
@@ -6673,7 +6673,7 @@ code_r0x000802f8:
                   }
                   break;
                 case 0x87dc:
-                  writerSrc2SelectorY = *(undefined4 *)(iVar32 + 0x34);
+                  writerSrc2SelectorY = *(undefined4 *)(movRecord + 0x34);
                   switch(writerSrc2SelectorY) {
                   case 0x87d5:
                     goto code_r0x000802ec;
@@ -6697,20 +6697,20 @@ code_r0x000802f8:
                     goto code_r0x000802f8;
                   }
                 }
-                selectorEnumerant = *(undefined4 *)(iVar13 + 0x68);
-                *(undefined4 *)(iVar13 + 100) = writerSrc2SelectorY;
+                selectorEnumerant = *(undefined4 *)(laterRecord + 0x68);
+                *(undefined4 *)(laterRecord + 100) = writerSrc2SelectorY;
                 switch(selectorEnumerant) {
                 case 0x87d5:
                   selectorEnumerant = *selectorBase;
                   break;
                 case 0x87d6:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x2c);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x2c);
                   break;
                 case 0x87d7:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x30);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x30);
                   break;
                 case 0x87d8:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x34);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x34);
                   break;
                 case 0x87d9:
                   selectorEnumerant = *selectorBase;
@@ -6757,7 +6757,7 @@ code_r0x00080550:
                   }
                   break;
                 case 0x87da:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x2c);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x2c);
                   switch(selectorEnumerant) {
                   case 0x87d5:
                     goto code_r0x00080544;
@@ -6782,7 +6782,7 @@ code_r0x00080550:
                   }
                   break;
                 case 0x87db:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x30);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x30);
                   switch(selectorEnumerant) {
                   case 0x87d5:
                     goto code_r0x00080544;
@@ -6807,7 +6807,7 @@ code_r0x00080550:
                   }
                   break;
                 case 0x87dc:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x34);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x34);
                   switch(selectorEnumerant) {
                   case 0x87d5:
                     goto code_r0x00080544;
@@ -6831,20 +6831,20 @@ code_r0x00080550:
                     goto code_r0x00080550;
                   }
                 }
-                writerSrc2SelectorW = *(undefined4 *)(iVar13 + 0x6c);
-                *(undefined4 *)(iVar13 + 0x68) = selectorEnumerant;
+                writerSrc2SelectorW = *(undefined4 *)(laterRecord + 0x6c);
+                *(undefined4 *)(laterRecord + 0x68) = selectorEnumerant;
                 switch(writerSrc2SelectorW) {
                 case 0x87d5:
                   writerSrc2SelectorW = *selectorBase;
                   break;
                 case 0x87d6:
-                  writerSrc2SelectorW = *(undefined4 *)(iVar32 + 0x2c);
+                  writerSrc2SelectorW = *(undefined4 *)(movRecord + 0x2c);
                   break;
                 case 0x87d7:
-                  writerSrc2SelectorW = *(undefined4 *)(iVar32 + 0x30);
+                  writerSrc2SelectorW = *(undefined4 *)(movRecord + 0x30);
                   break;
                 case 0x87d8:
-                  writerSrc2SelectorW = *(undefined4 *)(iVar32 + 0x34);
+                  writerSrc2SelectorW = *(undefined4 *)(movRecord + 0x34);
                   break;
                 case 0x87d9:
                   writerSrc2SelectorW = *selectorBase;
@@ -6891,7 +6891,7 @@ code_r0x000807a8:
                   }
                   break;
                 case 0x87da:
-                  writerSrc2SelectorW = *(undefined4 *)(iVar32 + 0x2c);
+                  writerSrc2SelectorW = *(undefined4 *)(movRecord + 0x2c);
                   switch(writerSrc2SelectorW) {
                   case 0x87d5:
                     goto code_r0x0008079c;
@@ -6916,7 +6916,7 @@ code_r0x000807a8:
                   }
                   break;
                 case 0x87db:
-                  writerSrc2SelectorW = *(undefined4 *)(iVar32 + 0x30);
+                  writerSrc2SelectorW = *(undefined4 *)(movRecord + 0x30);
                   switch(writerSrc2SelectorW) {
                   case 0x87d5:
                     goto code_r0x0008079c;
@@ -6941,7 +6941,7 @@ code_r0x000807a8:
                   }
                   break;
                 case 0x87dc:
-                  writerSrc2SelectorW = *(undefined4 *)(iVar32 + 0x34);
+                  writerSrc2SelectorW = *(undefined4 *)(movRecord + 0x34);
                   switch(writerSrc2SelectorW) {
                   case 0x87d5:
                     goto code_r0x0008079c;
@@ -6965,7 +6965,7 @@ code_r0x000807a8:
                     goto code_r0x000807a8;
                   }
                 }
-                *(undefined4 *)(iVar13 + 0x6c) = writerSrc2SelectorW;
+                *(undefined4 *)(laterRecord + 0x6c) = writerSrc2SelectorW;
               }
               instructions = instructions + -1;
               currentInstruction = currentInstruction + 0x74;
@@ -7005,34 +7005,34 @@ LAB_00080860:
           symbol = uVar18 - uVar30;
           bVar34 = true;
           bVar33 = false;
-          piVar21 = (int *)(instructions + *(int *)(shaderProgram + 0x18) + 4);
+          laterSlotCursor = (int *)(instructions + *(int *)(shaderProgram + 0x18) + 4);
           do {
-            if ((*piVar21 != 2) || (piVar21[1] != *(int *)(currentInstruction + -0x6c))) {
+            if ((*laterSlotCursor != 2) || (laterSlotCursor[1] != *(int *)(currentInstruction + -0x6c))) {
               if (bVar33) {
-                if ((((piVar21[7] == 2) && (piVar21[8] == *(int *)(currentInstruction + -0x6c))) ||
-                    ((piVar21[0xe] == 2 && (piVar21[0xf] == *(int *)(currentInstruction + -0x6c))))) ||
-                   ((piVar21[0x15] == 2 && (piVar21[0x16] == *(int *)(currentInstruction + -0x6c)))))
+                if ((((laterSlotCursor[7] == 2) && (laterSlotCursor[8] == *(int *)(currentInstruction + -0x6c))) ||
+                    ((laterSlotCursor[0xe] == 2 && (laterSlotCursor[0xf] == *(int *)(currentInstruction + -0x6c))))) ||
+                   ((laterSlotCursor[0x15] == 2 && (laterSlotCursor[0x16] == *(int *)(currentInstruction + -0x6c)))))
                 goto code_r0x00080a40;
                 bVar35 = false;
               }
               else {
-                if (((*piVar21 == 2) && (*(int *)(currentInstruction + -0x54) == 2)) &&
-                   (piVar21[1] == *(int *)(currentInstruction + -0x50))) {
-                  iVar32 = *(int *)(currentInstruction + -0x34);
-                  if (iVar32 == 0) {
-                    iVar32 = piVar21[2];
+                if (((*laterSlotCursor == 2) && (*(int *)(currentInstruction + -0x54) == 2)) &&
+                   (laterSlotCursor[1] == *(int *)(currentInstruction + -0x50))) {
+                  movRecord = *(int *)(currentInstruction + -0x34);
+                  if (movRecord == 0) {
+                    movRecord = laterSlotCursor[2];
                   }
-                  else if (iVar32 == 1) {
-                    iVar32 = piVar21[3];
+                  else if (movRecord == 1) {
+                    movRecord = laterSlotCursor[3];
                   }
-                  else if (iVar32 == 2) {
-                    iVar32 = piVar21[4];
+                  else if (movRecord == 2) {
+                    movRecord = laterSlotCursor[4];
                   }
                   else {
-                    if (iVar32 != 3) goto code_r0x000809ec;
-                    iVar32 = piVar21[5];
+                    if (movRecord != 3) goto code_r0x000809ec;
+                    movRecord = laterSlotCursor[5];
                   }
-                  if (iVar32 != 0) {
+                  if (movRecord != 0) {
                     bVar35 = false;
                     bVar33 = true;
                     goto code_r0x00080a54;
@@ -7043,15 +7043,15 @@ code_r0x000809ec:
                 bVar33 = false;
               }
             }
-            else if (((piVar21[2] == 0) || (piVar21[3] == 0)) ||
-                    ((piVar21[4] == 0 || (bVar35 = true, piVar21[5] == 0)))) {
+            else if (((laterSlotCursor[2] == 0) || (laterSlotCursor[3] == 0)) ||
+                    ((laterSlotCursor[4] == 0 || (bVar35 = true, laterSlotCursor[5] == 0)))) {
 code_r0x00080a40:
               bVar35 = true;
               bVar34 = false;
             }
 code_r0x00080a54:
             symbol = symbol + -1;
-          } while ((symbol != 0) && (piVar21 = piVar21 + 0x1d, !bVar35));
+          } while ((symbol != 0) && (laterSlotCursor = laterSlotCursor + 0x1d, !bVar35));
           if (!bVar34) goto code_r0x00082600;
         }
         symbol = *(int *)(currentInstruction + -0x34);
@@ -7068,15 +7068,15 @@ code_r0x00080a54:
           selectorEnumerant = *(undefined4 *)(currentInstruction + -0x40);
         }
         symbol = instructions;
-        uVar25 = uVar30;
+        writeEnableX = uVar30;
         if (uVar30 < uVar18) {
           do {
-            iVar32 = symbol + *(int *)(shaderProgram + 0x18);
-            if ((*(int *)(iVar32 + 0x20) != 2) ||
-               (*(int *)(iVar32 + 0x24) != *(int *)(currentInstruction + -0x6c))) goto code_r0x000813a8;
-            *(undefined4 *)(iVar32 + 0x24) = *(undefined4 *)(currentInstruction + -0x50);
-            candidateSrc0SelectorX = *(undefined4 *)(iVar32 + 0x28);
-            switch(*(undefined4 *)(iVar32 + 0x28)) {
+            movRecord = symbol + *(int *)(shaderProgram + 0x18);
+            if ((*(int *)(movRecord + 0x20) != 2) ||
+               (*(int *)(movRecord + 0x24) != *(int *)(currentInstruction + -0x6c))) goto code_r0x000813a8;
+            *(undefined4 *)(movRecord + 0x24) = *(undefined4 *)(currentInstruction + -0x50);
+            candidateSrc0SelectorX = *(undefined4 *)(movRecord + 0x28);
+            switch(*(undefined4 *)(movRecord + 0x28)) {
             case 0x87d5:
             case 0x87d6:
             case 0x87d7:
@@ -7205,9 +7205,9 @@ code_r0x00080cb8:
 code_r0x00080c98:
             candidateSrc0SelectorX = selectorEnumerant;
 code_r0x00080d14:
-            *(undefined4 *)(iVar32 + 0x28) = candidateSrc0SelectorX;
-            candidateSrc0SelectorY = *(undefined4 *)(iVar32 + 0x2c);
-            switch(*(undefined4 *)(iVar32 + 0x2c)) {
+            *(undefined4 *)(movRecord + 0x28) = candidateSrc0SelectorX;
+            candidateSrc0SelectorY = *(undefined4 *)(movRecord + 0x2c);
+            switch(*(undefined4 *)(movRecord + 0x2c)) {
             case 0x87d5:
             case 0x87d6:
             case 0x87d7:
@@ -7336,9 +7336,9 @@ code_r0x00080ee8:
 code_r0x00080ec8:
             candidateSrc0SelectorY = selectorEnumerant;
 code_r0x00080f44:
-            *(undefined4 *)(iVar32 + 0x2c) = candidateSrc0SelectorY;
-            candidateSrc0SelectorZ = *(undefined4 *)(iVar32 + 0x30);
-            switch(*(undefined4 *)(iVar32 + 0x30)) {
+            *(undefined4 *)(movRecord + 0x2c) = candidateSrc0SelectorY;
+            candidateSrc0SelectorZ = *(undefined4 *)(movRecord + 0x30);
+            switch(*(undefined4 *)(movRecord + 0x30)) {
             case 0x87d5:
             case 0x87d6:
             case 0x87d7:
@@ -7467,9 +7467,9 @@ code_r0x00081118:
 code_r0x000810f8:
             candidateSrc0SelectorZ = selectorEnumerant;
 code_r0x00081174:
-            *(undefined4 *)(iVar32 + 0x30) = candidateSrc0SelectorZ;
-            candidateSrc0SelectorW = *(undefined4 *)(iVar32 + 0x34);
-            switch(*(undefined4 *)(iVar32 + 0x34)) {
+            *(undefined4 *)(movRecord + 0x30) = candidateSrc0SelectorZ;
+            candidateSrc0SelectorW = *(undefined4 *)(movRecord + 0x34);
+            switch(*(undefined4 *)(movRecord + 0x34)) {
             case 0x87d5:
             case 0x87d6:
             case 0x87d7:
@@ -7598,13 +7598,13 @@ code_r0x00081348:
 code_r0x00081328:
             candidateSrc0SelectorW = selectorEnumerant;
 code_r0x000813a4:
-            *(undefined4 *)(iVar32 + 0x34) = candidateSrc0SelectorW;
+            *(undefined4 *)(movRecord + 0x34) = candidateSrc0SelectorW;
 code_r0x000813a8:
-            if ((*(int *)(iVar32 + 0x3c) != 2) ||
-               (*(int *)(iVar32 + 0x40) != *(int *)(currentInstruction + -0x6c))) goto code_r0x00081c90;
-            *(undefined4 *)(iVar32 + 0x40) = *(undefined4 *)(currentInstruction + -0x50);
-            candidateSrc1SelectorX = *(undefined4 *)(iVar32 + 0x44);
-            switch(*(undefined4 *)(iVar32 + 0x44)) {
+            if ((*(int *)(movRecord + 0x3c) != 2) ||
+               (*(int *)(movRecord + 0x40) != *(int *)(currentInstruction + -0x6c))) goto code_r0x00081c90;
+            *(undefined4 *)(movRecord + 0x40) = *(undefined4 *)(currentInstruction + -0x50);
+            candidateSrc1SelectorX = *(undefined4 *)(movRecord + 0x44);
+            switch(*(undefined4 *)(movRecord + 0x44)) {
             case 0x87d5:
             case 0x87d6:
             case 0x87d7:
@@ -7733,9 +7733,9 @@ code_r0x000815a0:
 code_r0x00081580:
             candidateSrc1SelectorX = selectorEnumerant;
 code_r0x000815fc:
-            *(undefined4 *)(iVar32 + 0x44) = candidateSrc1SelectorX;
-            candidateSrc1SelectorY = *(undefined4 *)(iVar32 + 0x48);
-            switch(*(undefined4 *)(iVar32 + 0x48)) {
+            *(undefined4 *)(movRecord + 0x44) = candidateSrc1SelectorX;
+            candidateSrc1SelectorY = *(undefined4 *)(movRecord + 0x48);
+            switch(*(undefined4 *)(movRecord + 0x48)) {
             case 0x87d5:
             case 0x87d6:
             case 0x87d7:
@@ -7864,9 +7864,9 @@ code_r0x000817d0:
 code_r0x000817b0:
             candidateSrc1SelectorY = selectorEnumerant;
 code_r0x0008182c:
-            *(undefined4 *)(iVar32 + 0x48) = candidateSrc1SelectorY;
-            candidateSrc1SelectorZ = *(undefined4 *)(iVar32 + 0x4c);
-            switch(*(undefined4 *)(iVar32 + 0x4c)) {
+            *(undefined4 *)(movRecord + 0x48) = candidateSrc1SelectorY;
+            candidateSrc1SelectorZ = *(undefined4 *)(movRecord + 0x4c);
+            switch(*(undefined4 *)(movRecord + 0x4c)) {
             case 0x87d5:
             case 0x87d6:
             case 0x87d7:
@@ -7995,9 +7995,9 @@ code_r0x00081a00:
 code_r0x000819e0:
             candidateSrc1SelectorZ = selectorEnumerant;
 code_r0x00081a5c:
-            *(undefined4 *)(iVar32 + 0x4c) = candidateSrc1SelectorZ;
-            candidateSrc1SelectorW = *(undefined4 *)(iVar32 + 0x50);
-            switch(*(undefined4 *)(iVar32 + 0x50)) {
+            *(undefined4 *)(movRecord + 0x4c) = candidateSrc1SelectorZ;
+            candidateSrc1SelectorW = *(undefined4 *)(movRecord + 0x50);
+            switch(*(undefined4 *)(movRecord + 0x50)) {
             case 0x87d5:
             case 0x87d6:
             case 0x87d7:
@@ -8126,13 +8126,13 @@ code_r0x00081c30:
 code_r0x00081c10:
             candidateSrc1SelectorW = selectorEnumerant;
 code_r0x00081c8c:
-            *(undefined4 *)(iVar32 + 0x50) = candidateSrc1SelectorW;
+            *(undefined4 *)(movRecord + 0x50) = candidateSrc1SelectorW;
 code_r0x00081c90:
-            if ((*(int *)(iVar32 + 0x58) != 2) ||
-               (*(int *)(iVar32 + 0x5c) != *(int *)(currentInstruction + -0x6c))) goto code_r0x00082578;
-            *(undefined4 *)(iVar32 + 0x5c) = *(undefined4 *)(currentInstruction + -0x50);
-            candidateSrc2SelectorX = *(undefined4 *)(iVar32 + 0x60);
-            switch(*(undefined4 *)(iVar32 + 0x60)) {
+            if ((*(int *)(movRecord + 0x58) != 2) ||
+               (*(int *)(movRecord + 0x5c) != *(int *)(currentInstruction + -0x6c))) goto code_r0x00082578;
+            *(undefined4 *)(movRecord + 0x5c) = *(undefined4 *)(currentInstruction + -0x50);
+            candidateSrc2SelectorX = *(undefined4 *)(movRecord + 0x60);
+            switch(*(undefined4 *)(movRecord + 0x60)) {
             case 0x87d5:
             case 0x87d6:
             case 0x87d7:
@@ -8261,9 +8261,9 @@ code_r0x00081e88:
 code_r0x00081e68:
             candidateSrc2SelectorX = selectorEnumerant;
 code_r0x00081ee4:
-            *(undefined4 *)(iVar32 + 0x60) = candidateSrc2SelectorX;
-            candidateSrc2SelectorY = *(undefined4 *)(iVar32 + 100);
-            switch(*(undefined4 *)(iVar32 + 100)) {
+            *(undefined4 *)(movRecord + 0x60) = candidateSrc2SelectorX;
+            candidateSrc2SelectorY = *(undefined4 *)(movRecord + 100);
+            switch(*(undefined4 *)(movRecord + 100)) {
             case 0x87d5:
             case 0x87d6:
             case 0x87d7:
@@ -8392,9 +8392,9 @@ code_r0x000820b8:
 code_r0x00082098:
             candidateSrc2SelectorY = selectorEnumerant;
 code_r0x00082114:
-            *(undefined4 *)(iVar32 + 100) = candidateSrc2SelectorY;
-            candidateSrc2SelectorZ = *(undefined4 *)(iVar32 + 0x68);
-            switch(*(undefined4 *)(iVar32 + 0x68)) {
+            *(undefined4 *)(movRecord + 100) = candidateSrc2SelectorY;
+            candidateSrc2SelectorZ = *(undefined4 *)(movRecord + 0x68);
+            switch(*(undefined4 *)(movRecord + 0x68)) {
             case 0x87d5:
             case 0x87d6:
             case 0x87d7:
@@ -8523,9 +8523,9 @@ code_r0x000822e8:
 code_r0x000822c8:
             candidateSrc2SelectorZ = selectorEnumerant;
 code_r0x00082344:
-            *(undefined4 *)(iVar32 + 0x68) = candidateSrc2SelectorZ;
-            candidateSrc2SelectorW = *(undefined4 *)(iVar32 + 0x6c);
-            switch(*(undefined4 *)(iVar32 + 0x6c)) {
+            *(undefined4 *)(movRecord + 0x68) = candidateSrc2SelectorZ;
+            candidateSrc2SelectorW = *(undefined4 *)(movRecord + 0x6c);
+            switch(*(undefined4 *)(movRecord + 0x6c)) {
             case 0x87d5:
             case 0x87d6:
             case 0x87d7:
@@ -8654,14 +8654,14 @@ code_r0x00082518:
 code_r0x000824f8:
             candidateSrc2SelectorW = selectorEnumerant;
 code_r0x00082574:
-            *(undefined4 *)(iVar32 + 0x6c) = candidateSrc2SelectorW;
+            *(undefined4 *)(movRecord + 0x6c) = candidateSrc2SelectorW;
 code_r0x00082578:
-            if ((*(int *)(iVar32 + 4) != 2) ||
-               (bVar33 = true, *(int *)(iVar32 + 8) != *(int *)(currentInstruction + -0x6c))) {
+            if ((*(int *)(movRecord + 4) != 2) ||
+               (bVar33 = true, *(int *)(movRecord + 8) != *(int *)(currentInstruction + -0x6c))) {
               bVar33 = false;
             }
             uVar18 = *(uint *)(shaderProgram + 0x14);
-          } while ((uVar25 + 1 < uVar18) && (symbol = symbol + 0x74, uVar25 = uVar25 + 1, !bVar33));
+          } while ((writeEnableX + 1 < uVar18) && (symbol = symbol + 0x74, writeEnableX = writeEnableX + 1, !bVar33));
           currentInstruction = instructions;
           if (uVar30 < uVar18) {
             do {
@@ -8697,19 +8697,19 @@ code_r0x00082770:
     if (instructionCount < *(uint *)(shaderProgram + 0x14)) {
       symbol = *(uint *)(shaderProgram + 0x14) - instructionCount;
       bVar33 = true;
-      piVar21 = (int *)(currentInstruction + *(int *)(shaderProgram + 0x18) + 0x20);
+      laterSlotCursor = (int *)(currentInstruction + *(int *)(shaderProgram + 0x18) + 0x20);
       do {
-        if ((((*piVar21 == 2) && (piVar21[1] == *(int *)(instructions + -0x50))) ||
-            ((piVar21[7] == 2 && (piVar21[8] == *(int *)(instructions + -0x50))))) ||
-           ((piVar21[0xe] == 2 && (piVar21[0xf] == *(int *)(instructions + -0x50))))) {
+        if ((((*laterSlotCursor == 2) && (laterSlotCursor[1] == *(int *)(instructions + -0x50))) ||
+            ((laterSlotCursor[7] == 2 && (laterSlotCursor[8] == *(int *)(instructions + -0x50))))) ||
+           ((laterSlotCursor[0xe] == 2 && (laterSlotCursor[0xf] == *(int *)(instructions + -0x50))))) {
           bVar34 = true;
           bVar33 = false;
         }
-        else if ((piVar21[-7] != 2) || (bVar34 = true, piVar21[-6] != *(int *)(instructions + -0x50))) {
+        else if ((laterSlotCursor[-7] != 2) || (bVar34 = true, laterSlotCursor[-6] != *(int *)(instructions + -0x50))) {
           bVar34 = false;
         }
         symbol = symbol + -1;
-      } while ((symbol != 0) && (piVar21 = piVar21 + 0x1d, !bVar34));
+      } while ((symbol != 0) && (laterSlotCursor = laterSlotCursor + 0x1d, !bVar34));
       if (!bVar33) goto code_r0x00082770;
     }
     instructionIndex = instructionCount - 1;
@@ -8718,10 +8718,10 @@ code_r0x00082770:
       bVar33 = false;
       uVar30 = instructionIndex;
       do {
-        iVar32 = symbol + *(int *)(shaderProgram + 0x18);
-        if ((*(int *)(iVar32 + -0x70) == 2) &&
-           (*(int *)(iVar32 + -0x6c) == *(int *)(instructions + -0x50))) {
-          if (*(int *)(iVar32 + -0x74) - 0x879bU < 2) {
+        movRecord = symbol + *(int *)(shaderProgram + 0x18);
+        if ((*(int *)(movRecord + -0x70) == 2) &&
+           (*(int *)(movRecord + -0x6c) == *(int *)(instructions + -0x50))) {
+          if (*(int *)(movRecord + -0x74) - 0x879bU < 2) {
 code_r0x0008286c:
             bVar34 = true;
           }
@@ -8733,21 +8733,21 @@ code_r0x0008286c:
             selectorEnumerant = *(undefined4 *)(instructions + -0x5c);
             uVar9 = *(undefined4 *)(instructions + -0x70);
             uVar20 = *(undefined4 *)(instructions + -0x6c);
-            *(undefined4 *)(iVar32 + -0x68) = *(undefined4 *)(instructions + -0x68);
-            *(undefined4 *)(iVar32 + -100) = uVar22;
-            *(undefined4 *)(iVar32 + -0x5c) = selectorEnumerant;
-            *(undefined4 *)(iVar32 + -0x60) = uVar19;
-            *(undefined4 *)(iVar32 + -0x70) = uVar9;
-            *(undefined4 *)(iVar32 + -0x6c) = uVar20;
+            *(undefined4 *)(movRecord + -0x68) = *(undefined4 *)(instructions + -0x68);
+            *(undefined4 *)(movRecord + -100) = uVar22;
+            *(undefined4 *)(movRecord + -0x5c) = selectorEnumerant;
+            *(undefined4 *)(movRecord + -0x60) = uVar19;
+            *(undefined4 *)(movRecord + -0x70) = uVar9;
+            *(undefined4 *)(movRecord + -0x6c) = uVar20;
           }
         }
         else {
-          if ((((*(int *)(iVar32 + -0x54) == 2) &&
-               (*(int *)(iVar32 + -0x50) == *(int *)(instructions + -0x50))) ||
-              ((*(int *)(iVar32 + -0x38) == 2 &&
-               (*(int *)(iVar32 + -0x34) == *(int *)(instructions + -0x50))))) ||
-             ((*(int *)(iVar32 + -0x1c) == 2 &&
-              (*(int *)(iVar32 + -0x18) == *(int *)(instructions + -0x50))))) goto code_r0x0008286c;
+          if ((((*(int *)(movRecord + -0x54) == 2) &&
+               (*(int *)(movRecord + -0x50) == *(int *)(instructions + -0x50))) ||
+              ((*(int *)(movRecord + -0x38) == 2 &&
+               (*(int *)(movRecord + -0x34) == *(int *)(instructions + -0x50))))) ||
+             ((*(int *)(movRecord + -0x1c) == 2 &&
+              (*(int *)(movRecord + -0x18) == *(int *)(instructions + -0x50))))) goto code_r0x0008286c;
           bVar34 = false;
         }
         uVar30 = uVar30 - 1;
@@ -8772,8 +8772,8 @@ LAB_0007e2d4:
     if (uVar30 < instructionCount) {
       do {
         uVar30 = uVar30 + 1;
-        instructions = iVar32 + *(int *)(shaderProgram + 0x18);
-        iVar32 = iVar32 + 0x74;
+        instructions = movRecord + *(int *)(shaderProgram + 0x18);
+        movRecord = movRecord + 0x74;
         uStack_70 = selectorEnumerant;
         _memcpy(instructions + -0x74,instructions,0x74);
         instructionCount = *(uint *)(shaderProgram + 0x14);

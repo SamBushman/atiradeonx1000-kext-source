@@ -3,13 +3,13 @@ d0340	d0344	vsDisassembleToString
 d0398	d039c	vsDisassembleVertexProgram
 d4ec8	d4ecc	scDumpPixelProgram
 da180	da184	FUN_000da0c0
-da578	da57c	FUN_000da4b8
-e1a08	e1a0c	FUN_000e1920
-e1b30	e1b34	FUN_000e1a48
+da578	da57c	Compiler__createFromRequest
+e1a08	e1a0c	Compiler__init_e1920
+e1b30	e1b34	Compiler__init_e1a48
 e1bf0	e1bf4	Compiler__setHardwareFamily
 e1c20	e1c24	Compiler__setHardwareFamily
-e21b8	e21bc	FUN_000e2094
-e21cc	e21ec	FUN_000e2094
+e21b8	e21bc	Compiler__compileStages
+e21cc	e21ec	Compiler__compileStages
 e34c8	e34cc	FUN_000e33cc
 e3524	e3544	FUN_000e33cc
 e3640	e3644	FUN_000e3544
@@ -79,8 +79,8 @@ ebf38	ebf58	BreakBlock__clone
 ec038	ec058	ContinueBlock__clone
 ec56c	ec58c	FUN_000ec4f0
 ecf5c	ecf7c	FUN_000eced0
-ed0e4	ed0fc	FUN_000ecfac
-ed25c	ed274	FUN_000ed124
+ed0e4	ed0fc	Program__dtor_ecfac
+ed25c	ed274	Program__dtor_ed124
 edbf0	edc10	FUN_000ed89c
 ee114	ee118	Program__ctor_edd98
 ee214	ee218	Program__ctor_edd98
@@ -90,7 +90,7 @@ ee618	ee61c	Program__ctor_ee29c
 ee718	ee71c	Program__ctor_ee29c
 ee748	ee764	Program__ctor_ee29c
 ee780	ee7a0	FUN_000eec50
-ee830	ee850	FUN_000ee7a0
+ee830	ee850	Program__buildBlockArrayByKey
 eede8	eee08	FUN_000eec50
 ef038	ef058	FUN_000eee4c
 ef79c	ef7a0	FUN_000ef498
@@ -121,7 +121,7 @@ fa144	fa160	FUN_000f9a58
 fa27c	fa298	FUN_000f9a58
 fa45c	fa460	FUN_000f9a58
 fa544	fa564	FUN_000f9a58
-faeb4	faed4	FUN_000fadc4
+faeb4	faed4	Program__createIfBlock
 fb584	fb588	FUN_000fb3d4
 fb690	fb694	FUN_000fb3d4
 fb77c	fb780	FUN_000fb3d4
@@ -526,7 +526,7 @@ ffd5c	ffd60	FUN_000fd5c8
 182010	18202c	Block__flattenAndRebuildAddMulTree
 182040	182060	Block__flattenAndRebuildAddMulTree
 183a98	183a9c	Block__flattenAndRebuildAddMulTree
-1840ac	1840cc	FUN_0018401c
+1840ac	1840cc	pass_height_reduction
 18421c	184238	FUN_0018413c
 184250	18426c	FUN_0018413c
 184290	1842b0	FUN_0018413c

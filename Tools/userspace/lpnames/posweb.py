@@ -11,6 +11,8 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'
 import find_webs as F
 d, out, lo, hi = sys.argv[1], sys.argv[2], int(sys.argv[3]), int(sys.argv[4])
 dry = '--dry' in sys.argv
+MAPPED = '--mapped' in sys.argv
+CONSTRHS = re.compile(r'^(?:\([\w ]+\*?\))?\s*(?:0x[0-9a-f]+|-?\d+)$')
 only = [a for a in sys.argv[5:] if not a.startswith('--')]
 PHV = re.compile(r'^(?:[A-Za-z]{0,4}Var\d+|p+_?[A-Za-z]*Var\d+|local_[0-9a-f]+|param_\d+|in_\w+|fparam_\d+|extraout_\w+|unaff_\w+|\w*Stack_[0-9a-f]+|iVarS\w*|FUN_[0-9a-f]+|DAT_\w+|PTR_\w+)$')
 VAR = re.compile(r'^(?:[A-Za-z]{0,4}Var\d+|p+_?[A-Za-z]*Var\d+|local_[0-9a-f]+)$')
@@ -77,7 +79,7 @@ for fn, addr in funcs.items():
         try: ws, er = F.webs(nodes, entry, var)
         except BaseException: stat['refused'] += 1; continue
         for k, ls in enumerate(ws):
-            ks = set(); ok = True; nload = 0
+            ks = set(); ok = True; nload = 0; firstkey = None; extra = 0
             for x in ls:
                 if x < first: continue
                 l = cur[x]
@@ -86,12 +88,17 @@ for fn, addr in funcs.items():
                 rhs = m.group(1)
                 if re.search(r'(?<![\w])%s(?![\w])' % re.escape(var), rhs): continue   # self-update
                 kk = key(rhs, var, decl)
+                if MAPPED and (kk is None or PHV.match(kk[0]) or POSN.search(kk[0])):
+                    if firstkey is not None and (CONSTRHS.match(rhs.strip()) or key(rhs, var, decl) is not None or re.match(r'^[\w\[\]\* ]+$', rhs.strip())): extra += 1; continue
+                    ok = False; break
                 if kk is None or PHV.match(kk[0]) or POSN.search(kk[0]): ok = False; break
+                if firstkey is None: firstkey = kk
+                elif kk != firstkey and MAPPED: extra += 1; continue
                 ks.add(kk); nload += 1
             if not ok or len(ks) != 1 or not nload: continue
             b, o, kd = next(iter(ks))
             if any(re.search(r'\(%s \+ |\(int\)%s\)|\(unsigned char \*\)\w+\)?\[%s\]|\b%s\[' % ((re.escape(var),)*4), cur[x]) for x in ls): kd = 'Ptr'   # used as an address
-            nm = '%s%s%s' % (b, kd, o)
+            nm = '%s%s%s' % (b, kd, o) + ('Mapped' if extra else '')
             if owner.get(nm, var) != var or nm in idents - {var}:
                 b0 = nm; used[b0] += 1; nm = '%s_%d' % (b0, used[b0] + 1)
                 while nm in idents or owner.get(nm, var) != var: used[b0] += 1; nm = '%s_%d' % (b0, used[b0] + 1)

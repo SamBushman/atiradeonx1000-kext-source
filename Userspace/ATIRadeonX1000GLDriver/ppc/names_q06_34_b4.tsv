@@ -1,0 +1,65 @@
+local	FUN_00127850	auStack_38	iteratorState	INFERRED	iterator state for FUN_00194a94 / FUN_00194938 (5 words, merged buffer)
+local	FUN_00127850	local_28	iteratorCurrent	INFERRED	current element word of the iterator (iteratorState + 0x10)
+use	FUN_00127850	iVar1	elementQuery18	INFERRED	element vtable slot 0x18 test	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*local_28\ \+\ 0x18\)\)\(local_28\);$	+2
+use	FUN_00127850	iVar2	matchCount	INFERRED	number of elements passing the test (returned)	^\s*iVar2\ =\ 0;$	+1
+use	FUN_00127850	iVar2	matchCount	INFERRED	number of elements passing the test (returned)	^\s*iVar2\ =\ iVar2\ \+\ 1;$	+1
+use	FUN_00127850	iVar2	matchCount	INFERRED	number of elements passing the test (returned)	^\s*return\ iVar2;$	+1
+local	FUN_00127850	param_1	owner	INFERRED	object whose +4 collection is iterated
+local	FUN_0012306c	param_1	vreg	INFERRED	virtual register whose +0x18 list receives the user
+local	FUN_0012306c	param_2	user	INFERRED	instruction appended to the register's definition list
+use	FUN_0012306c	puVar1	listSlotRef	INFERRED	new element reference at the end of the list	^\s*puVar1\ =\ \(undefined4\ \*\)\(uVar2\ \*\ 4\ \+\ puVar3\[2\]\);$	+1
+use	FUN_0012306c	puVar1	listSlotRef	INFERRED	new element reference at the end of the list	^\s*puVar1\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar3,uVar2\);$	+1
+use	FUN_0012306c	puVar1	listSlotRef	INFERRED	new element reference at the end of the list	^\s*\*puVar1\ =\ param_2;$	+1
+use	FUN_0012306c	uVar2	listCount	INFERRED	filled count of the list	^\s*uVar2\ =\ puVar3\[1\];$	+5
+use	FUN_0012306c	uVar2	listCount	INFERRED	filled count of the list	^\s*puVar1\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar3,uVar2\);$	+1
+use	FUN_0012306c	puVar3	listVector	INFERRED	list vector header (vreg +0x18)	^\s*puVar3\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 0x18\);$	+6
+use	FUN_0012306c	puVar3	listVector	INFERRED	list vector header (vreg +0x18)	^\s*puVar1\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar3,uVar2\);$	+1
+local	FUN_00134ab8	param_1	neighbourList	INFERRED	node's neighbour list head (+4 total count, +8 first block)
+local	FUN_00134ab8	param_2	slotOut	INFERRED	out: slot number of the end of the list inside its block
+local	FUN_00134ab8	param_3	blockOut	INFERRED	out: neighbour block holding the end of the list
+use	FUN_00134ab8	iVar1	nextBlockStart	INFERRED	index of the first entry of the next block (current start + 7)	^\s*iVar1\ =\ \*param_2\ \+\ 7;$	+3
+local	FUN_001311cc	param_1	destRegister	INFERRED	destination register number of the new load
+local	FUN_001311cc	param_4	offsetSource	INFERRED	operand 2 of the load (offset source)
+use	FUN_001311cc	uVar3	writeMaskConstant	INFERRED	constant UNK_001affe4 stored as the load's write mask	^\s*uVar3\ =\ UNK_001affe4;$	+1
+use	FUN_001311cc	uVar3	writeMaskConstant	INFERRED	constant UNK_001affe4 stored as the load's write mask	^\s*puVar1\[0x28\]\ =\ uVar3;$	+1
+use	FUN_001311cc	uVar3	baseSwizzleConstant	INFERRED	constant UNK_001affe0 swizzle word for operand 1	^\s*uVar3\ =\ UNK_001affe0;$	+1
+use	FUN_001311cc	uVar3	baseSwizzleConstant	INFERRED	constant UNK_001affe0 swizzle word for operand 1	^\s*\*\(undefined4\ \*\)\(iVar2\ \+\ 0x10\)\ =\ uVar3;$	+1
+use	FUN_001311cc	uVar3	offsetSwizzleConstant	INFERRED	constant UNK_001affdc swizzle word for operand 2	^\s*uVar3\ =\ UNK_001affdc;$	+1
+use	FUN_001311cc	uVar3	offsetSwizzleConstant	INFERRED	constant UNK_001affdc swizzle word for operand 2	^\s*\*\(undefined4\ \*\)\(iVar2\ \+\ 0x10\)\ =\ uVar3;$@2	+1
+use	FUN_001311cc	puVar4	loadInst	INFERRED	new IRMemLoad (allocation + 1)	^\s*puVar4\ =\ puVar1\ \+\ 1;$	+1
+use	FUN_001311cc	puVar4	loadInst	INFERRED	new IRMemLoad (allocation + 1)	^\s*FUN_00107980\(puVar4,0xfb,param_6\);$	+1
+use	FUN_001311cc	puVar4	loadInst	INFERRED	new IRMemLoad (allocation + 1)	^\s*FUN_00106004\(puVar4,1,param_3,0,param_6\);$	+1
+use	FUN_001311cc	puVar4	loadInst	INFERRED	new IRMemLoad (allocation + 1)	^\s*iVar2\ =\ FUN_001054ec\(puVar4,1\);$	+1
+use	FUN_001311cc	puVar4	loadInst	INFERRED	new IRMemLoad (allocation + 1)	^\s*FUN_00106004\(puVar4,2,param_4,0,param_6\);$	+1
+use	FUN_001311cc	puVar4	loadInst	INFERRED	new IRMemLoad (allocation + 1)	^\s*iVar2\ =\ FUN_001054ec\(puVar4,2\);$	+1
+use	FUN_001311cc	puVar4	loadInst	INFERRED	new IRMemLoad (allocation + 1)	^\s*FUN_000e7738\(\*\(undefined4\ \*\)\(param_5\ \+\ 0x158\),param_5,puVar4\);$	+1
+use	FUN_001311cc	puVar4	loadInst	INFERRED	new IRMemLoad (allocation + 1)	^\s*return\ puVar4;$	+1
+use	FUN_0012afe8	iVar1	blockQuery24	INFERRED	block vtable slot 0x24 test (if header)	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*param_3\ \+\ 0x24\)\)\(param_3\);$	+2
+use	FUN_0012afe8	iVar1	blockQuery2c	INFERRED	block vtable slot 0x2c test (loop header)	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*param_3\ \+\ 0x2c\)\)\(param_3\);$	+2
+use	FUN_0012afe8	iVar1	blockQuery28	INFERRED	block vtable slot 0x28 test (if footer)	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*param_3\ \+\ 0x28\)\)\(param_3\);$	+2
+use	FUN_0012afe8	iVar1	blockQuery30	INFERRED	block vtable slot 0x30 test	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*param_3\ \+\ 0x30\)\)\(param_3\);$	+2
+use	FUN_0012afe8	iVar1	enclosingLoopInfo	INFERRED	block vtable slot 0x10 result: the enclosing loop record	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*param_3\ \+\ 0x10\)\)\(param_3\);$	+3
+local	FUN_0012afe8	param_1	acceptFooterOnly	INFERRED	0: stop at the first footer or matching loop; non-zero: only at the given stop block
+local	FUN_0012afe8	param_2	targetLoop	INFERRED	loop record compared with the block's enclosing loop (+300)
+local	FUN_0012afe8	param_4	stopBlock	INFERRED	footer block accepted when acceptFooterOnly is set
+use	FUN_00122f28	iVar1	valueQuery18	INFERRED	value vtable slot 0x18 test (has a register)	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0x18\)\)\(param_1\);$	+2
+use	FUN_00122f28	iVar1	valueRegister	INFERRED	register number of the value (word 4)	^\s*iVar1\ =\ param_1\[4\];$	+1
+use	FUN_00122f28	iVar1	valueRegister	INFERRED	register number of the value (word 4)	^\s*\*\(int\ \*\)\(param_2\ \+\ 0x94\)\ =\ iVar1;$	+1
+use	FUN_00122f28	iVar2	valueKind	INFERRED	register kind of the value (word 1)	^\s*iVar2\ =\ param_1\[1\];$	+1
+use	FUN_00122f28	iVar2	valueKind	INFERRED	register kind of the value (word 1)	^\s*\*\(int\ \*\)\(param_2\ \+\ 0x98\)\ =\ iVar2;$	+1
+local	FUN_00122f28	param_1	value	INFERRED	fixed value whose register is copied to the instruction
+local	FUN_00122f28	param_2	inst	INFERRED	instruction whose destination register (+0x94) and kind (+0x98) are set
+use	KhanVs__createSchedModels	puVar2	schedModel	INFERRED	vertex scheduling model object (0x3c bytes) stored at this +0x60	^\s*puVar2\ =\ \(undefined4\ \*\)FUN_000e1564\(param_2,0x3c\);$	+1
+use	KhanVs__createSchedModels	puVar2	schedModel	INFERRED	vertex scheduling model object (0x3c bytes) stored at this +0x60	^\s*puVar2\[2\]\ =\ param_2;$	+8
+use	KhanVs__createSchedModels	puVar2	packModel	INFERRED	pack/resource model object (0xc bytes) stored at this +100	^\s*puVar2\ =\ \(undefined4\ \*\)FUN_000e1564\(param_2,0xc\);$	+1
+use	KhanVs__createSchedModels	puVar2	packModel	INFERRED	pack/resource model object (0xc bytes) stored at this +100	^\s*puVar2\[1\]\ =\ 1;$	+4
+use	KhanVs__createSchedModels	puVar3	baseModelVtable	INFERRED	base class vtable (PTR_DAT_001e90fc + 8) installed before the derived one	^\s*puVar3\ =\ PTR_DAT_001e90fc\ \+\ 8;$	+1
+use	KhanVs__createSchedModels	puVar3	baseModelVtable	INFERRED	base class vtable (PTR_DAT_001e90fc + 8) installed before the derived one	^\s*\*puVar2\ =\ puVar3;$	+1
+local	KhanVs__createSchedModels	param_2	compiler	INFERRED	compiler passed to Compiler__allocateOrFail
+use	KhanPs__createSchedModels	puVar2	schedModel	INFERRED	pixel scheduling model object (0x6c bytes) stored at this +0x60	^\s*puVar2\ =\ \(undefined4\ \*\)FUN_000e1564\(param_2,0x6c\);$	+1
+use	KhanPs__createSchedModels	puVar2	schedModel	INFERRED	pixel scheduling model object (0x6c bytes) stored at this +0x60	^\s*puVar2\[2\]\ =\ param_2;$	+8
+use	KhanPs__createSchedModels	puVar2	packModel	INFERRED	pack/resource model object (0xc bytes) stored at this +100	^\s*puVar2\ =\ \(undefined4\ \*\)FUN_000e1564\(param_2,0xc\);$	+1
+use	KhanPs__createSchedModels	puVar2	packModel	INFERRED	pack/resource model object (0xc bytes) stored at this +100	^\s*puVar2\[1\]\ =\ 1;$	+4
+use	KhanPs__createSchedModels	puVar3	baseModelVtable	INFERRED	base class vtable (PTR_DAT_001e90fc + 8) installed before the derived one	^\s*puVar3\ =\ PTR_DAT_001e90fc\ \+\ 8;$	+1
+use	KhanPs__createSchedModels	puVar3	baseModelVtable	INFERRED	base class vtable (PTR_DAT_001e90fc + 8) installed before the derived one	^\s*\*puVar2\ =\ puVar3;$	+1
+local	KhanPs__createSchedModels	param_2	compiler	INFERRED	compiler passed to Compiler__allocateOrFail

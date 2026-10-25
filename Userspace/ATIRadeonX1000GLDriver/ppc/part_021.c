@@ -196,62 +196,62 @@ int Compiler__resetState(compiler)
   *(undefined4 *)(compiler + 0x3a0) = allocation;
   *(undefined4 *)(compiler + 0x3a8) = 0;
   *(undefined4 *)(compiler + 0x3a4) = 0;
-  return FUN_000e0850(compiler);
+  return Compiler__setDefaultOptions(compiler);
 }
 
-/* FUN_000e1920 @ 0xe1920 (232 bytes) */
-int FUN_000e1920(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12)
-  undefined4 *param_1;
-  undefined4 param_2;
-  code *param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
-  undefined4 param_9;
-  undefined4 param_10;
-  undefined4 param_11;
-  undefined4 param_12;
+/* Compiler__init_e1920 @ 0xe1920 (232 bytes) */
+int Compiler__init_e1920(compiler, allocatorUserData, allocateFn, freeFn, callbackField0, callbackField328, callbackField358, callbackField35c, callbackField360, callbackField364, callbackField368, callbackField36c)
+  undefined4 *compiler;
+  undefined4 allocatorUserData;
+  code *allocateFn;
+  undefined4 freeFn;
+  undefined4 callbackField0;
+  undefined4 callbackField328;
+  undefined4 callbackField358;
+  undefined4 callbackField35c;
+  undefined4 callbackField360;
+  undefined4 callbackField364;
+  undefined4 callbackField368;
+  undefined4 callbackField36c;
 {
-  int iVar1;
+  int hwObject;
   undefined4 *puStack00000018;
   
-  param_1[0x162] = 1;
-  param_1[0xca] = param_6;
-  param_1[0x11e] = 0x400;
-  param_1[0xd7] = param_8;
-  param_1[0xd8] = param_9;
-  param_1[0xd9] = param_10;
-  param_1[0xd6] = param_7;
-  param_1[0xda] = param_11;
-  param_1[0xd3] = param_4;
-  *param_1 = param_5;
-  param_1[199] = 1;
-  param_1[0xd5] = param_2;
-  param_1[0xdb] = param_12;
-  param_1[1] = (int)(param_1 + 2) + (-(int)(param_1 + 2) & 7U);
-  param_1[0xc3] = 0;
-  param_1[0xc4] = 0;
-  param_1[0x11f] = 0;
-  param_1[0x120] = 0;
-  param_1[0x1b1] = 0;
-  param_1[0xd4] = param_3;
-  param_1[200] = 0;
-  param_1[0xdc] = 0;
-  param_1[0xdd] = 0;
-  param_1[0xde] = 0;
-  puStack00000018 = param_1;
-  iVar1 = (*param_3)(param_2,0x1744,param_3,param_4,param_5,param_6,param_7,param_1);
+  compiler[0x162] = 1;
+  compiler[0xca] = callbackField328;
+  compiler[0x11e] = 0x400;
+  compiler[0xd7] = callbackField35c;
+  compiler[0xd8] = callbackField360;
+  compiler[0xd9] = callbackField364;
+  compiler[0xd6] = callbackField358;
+  compiler[0xda] = callbackField368;
+  compiler[0xd3] = freeFn;
+  *compiler = callbackField0;
+  compiler[199] = 1;
+  compiler[0xd5] = allocatorUserData;
+  compiler[0xdb] = callbackField36c;
+  compiler[1] = (int)(compiler + 2) + (-(int)(compiler + 2) & 7U);
+  compiler[0xc3] = 0;
+  compiler[0xc4] = 0;
+  compiler[0x11f] = 0;
+  compiler[0x120] = 0;
+  compiler[0x1b1] = 0;
+  compiler[0xd4] = allocateFn;
+  compiler[200] = 0;
+  compiler[0xdc] = 0;
+  compiler[0xdd] = 0;
+  compiler[0xde] = 0;
+  puStack00000018 = compiler;
+  hwObject = (*allocateFn)(allocatorUserData,0x1744,allocateFn,freeFn,callbackField0,callbackField328,callbackField358,compiler);
   *(undefined1 *)(puStack00000018 + 0xfe) = 0;
-  if (iVar1 == 0) {
+  if (hwObject == 0) {
     puStack00000018[0xc5] = 2;
   }
   else {
-    KhanPs__ctor_129130(iVar1,puStack00000018,0);
-    puStack00000018[0xc3] = iVar1;
-    iVar1 = _setjmp(puStack00000018[1]);
-    if (iVar1 == 0) {
+    KhanPs__ctor_129130(hwObject,puStack00000018,0);
+    puStack00000018[0xc3] = hwObject;
+    hwObject = _setjmp(puStack00000018[1]);
+    if (hwObject == 0) {
       ((int (*)())Compiler__resetState)(puStack00000018);
       FUN_000e13b4(puStack00000018);
     }
@@ -259,59 +259,59 @@ int FUN_000e1920(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   return;
 }
 
-/* FUN_000e1a48 @ 0xe1a48 (232 bytes) */
-int FUN_000e1a48(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12)
-  undefined4 *param_1;
-  undefined4 param_2;
-  code *param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
-  undefined4 param_9;
-  undefined4 param_10;
-  undefined4 param_11;
-  undefined4 param_12;
+/* Compiler__init_e1a48 @ 0xe1a48 (232 bytes) */
+int Compiler__init_e1a48(compiler, allocatorUserData, allocateFn, freeFn, callbackField0, callbackField328, callbackField358, callbackField35c, callbackField360, callbackField364, callbackField368, callbackField36c)
+  undefined4 *compiler;
+  undefined4 allocatorUserData;
+  code *allocateFn;
+  undefined4 freeFn;
+  undefined4 callbackField0;
+  undefined4 callbackField328;
+  undefined4 callbackField358;
+  undefined4 callbackField35c;
+  undefined4 callbackField360;
+  undefined4 callbackField364;
+  undefined4 callbackField368;
+  undefined4 callbackField36c;
 {
-  int iVar1;
+  int hwObject;
   undefined4 *puStack00000018;
   
-  param_1[0x162] = 1;
-  param_1[0xca] = param_6;
-  param_1[0x11e] = 0x400;
-  param_1[0xd7] = param_8;
-  param_1[0xd8] = param_9;
-  param_1[0xd9] = param_10;
-  param_1[0xd6] = param_7;
-  param_1[0xda] = param_11;
-  param_1[0xd3] = param_4;
-  *param_1 = param_5;
-  param_1[199] = 1;
-  param_1[0xd5] = param_2;
-  param_1[0xdb] = param_12;
-  param_1[1] = (int)(param_1 + 2) + (-(int)(param_1 + 2) & 7U);
-  param_1[0xc3] = 0;
-  param_1[0xc4] = 0;
-  param_1[0x11f] = 0;
-  param_1[0x120] = 0;
-  param_1[0x1b1] = 0;
-  param_1[0xd4] = param_3;
-  param_1[200] = 0;
-  param_1[0xdc] = 0;
-  param_1[0xdd] = 0;
-  param_1[0xde] = 0;
-  puStack00000018 = param_1;
-  iVar1 = (*param_3)(param_2,0x1744,param_3,param_4,param_5,param_6,param_7,param_1);
+  compiler[0x162] = 1;
+  compiler[0xca] = callbackField328;
+  compiler[0x11e] = 0x400;
+  compiler[0xd7] = callbackField35c;
+  compiler[0xd8] = callbackField360;
+  compiler[0xd9] = callbackField364;
+  compiler[0xd6] = callbackField358;
+  compiler[0xda] = callbackField368;
+  compiler[0xd3] = freeFn;
+  *compiler = callbackField0;
+  compiler[199] = 1;
+  compiler[0xd5] = allocatorUserData;
+  compiler[0xdb] = callbackField36c;
+  compiler[1] = (int)(compiler + 2) + (-(int)(compiler + 2) & 7U);
+  compiler[0xc3] = 0;
+  compiler[0xc4] = 0;
+  compiler[0x11f] = 0;
+  compiler[0x120] = 0;
+  compiler[0x1b1] = 0;
+  compiler[0xd4] = allocateFn;
+  compiler[200] = 0;
+  compiler[0xdc] = 0;
+  compiler[0xdd] = 0;
+  compiler[0xde] = 0;
+  puStack00000018 = compiler;
+  hwObject = (*allocateFn)(allocatorUserData,0x1744,allocateFn,freeFn,callbackField0,callbackField328,callbackField358,compiler);
   *(undefined1 *)(puStack00000018 + 0xfe) = 0;
-  if (iVar1 == 0) {
+  if (hwObject == 0) {
     puStack00000018[0xc5] = 2;
   }
   else {
-    KhanPs__ctor_129130(iVar1,puStack00000018,0);
-    puStack00000018[0xc3] = iVar1;
-    iVar1 = _setjmp(puStack00000018[1]);
-    if (iVar1 == 0) {
+    KhanPs__ctor_129130(hwObject,puStack00000018,0);
+    puStack00000018[0xc3] = hwObject;
+    hwObject = _setjmp(puStack00000018[1]);
+    if (hwObject == 0) {
       ((int (*)())Compiler__resetState)(puStack00000018);
       FUN_000e13b4(puStack00000018);
     }
@@ -525,11 +525,17 @@ int Compiler__releaseChipAndPools(compiler, releaseChip)
   return;
 }
 
-/* FUN_000e2094 @ 0xe2094 (292 bytes) */
-int FUN_000e2094(compiler, param_2)
+/* Compiler__compileStages @ 0xe2094 (292 bytes) */
+int Compiler__compileStages(compiler, compileRequest)
   int compiler;
-  int param_2;
+  int compileRequest;
 {
+  undefined4 secondSource;
+  undefined4 *readerAlloc;
+  int currentProgramValue;
+  int stageByteOffset;
+  int compilerArg;
+  int stageIndexCopy;
   int pairInstructionsEnabled;
   int mapChannelsEnabled;
   int reduceDepEnabled;
@@ -539,16 +545,16 @@ int FUN_000e2094(compiler, param_2)
   int peepholeEnabled;
   int deadCodeEnabled;
   undefined4 arenaAt378;
-  int iVar1;
-  int iVar2;
-  undefined4 *puVar3;
+  int stageIndex;
+  int nextStageIndex;
+  undefined4 *programAlloc;
   int argR6;
   undefined4 staleArgR7;
   undefined4 staleArgR8;
-  char *pcVar4;
-  undefined4 uVar5;
+  char *sourceTable;
+  undefined4 stageSource;
   undefined4 arenaAt374;
-  undefined4 *puVar7;
+  undefined4 *ilReader;
   undefined8 deleteComputationsThatCouldBeVsEnabled;
   
   ((int (*)())Compiler__propagateFlag5a1Bit1)(compiler);
@@ -558,49 +564,49 @@ int FUN_000e2094(compiler, param_2)
   *(char **)(compiler + 0x5e4) = "PEEPHOLE";
   *(char **)(compiler + 0x5f8) = "SCHED";
   *(char **)(compiler + 0x60c) = "REPLACE_PHI";
-  pcVar4 = "ASSEMBLY";
+  sourceTable = "ASSEMBLY";
   *(char **)(compiler + 0x620) = "GLOBAL_ALLOC";
   *(char **)(compiler + 0x634) = "ASSEMBLY";
   FUN_00115fa0(compiler);
-  iVar1 = *(int *)(param_2 + 8) + -1;
-  *(int *)(compiler + 0x52c) = iVar1;
-  while (-1 < iVar1) {
+  stageIndex = *(int *)(compileRequest + 8) + -1;
+  *(int *)(compiler + 0x52c) = stageIndex;
+  while (-1 < stageIndex) {
     FUN_000e13b4(compiler);
-    iVar1 = *(int *)(compiler + 0x52c);
-    if (iVar1 < 2) {
-      uVar5 = *(undefined4 *)(iVar1 * 4 + param_2 + 0xc);
+    stageIndexCopy = *(int *)(compiler + 0x52c);
+    if (stageIndexCopy < 2) {
+      stageSource = *(undefined4 *)(stageIndexCopy * 4 + compileRequest + 0xc);
     }
     else {
-      pcVar4 = *(char **)(param_2 + 0x14);
-      uVar5 = *(undefined4 *)(pcVar4 + iVar1 * 4);
+      sourceTable = *(char **)(compileRequest + 0x14);
+      stageSource = *(undefined4 *)(sourceTable + stageIndexCopy * 4);
     }
     arenaAt374 = *(undefined4 *)(compiler + COMP_arenaA);
-    puVar3 = (undefined4 *)Arena__alloc(arenaAt374,0x484);
-    *puVar3 = arenaAt374;
-    Program__ctor_ee29c(puVar3 + 1,compiler);
+    programAlloc = (undefined4 *)Arena__alloc(arenaAt374,0x484);
+    *programAlloc = arenaAt374;
+    Program__ctor_ee29c(programAlloc + 1,compiler);
     arenaAt378 = *(undefined4 *)(compiler + COMP_arenaB);
-    *(undefined4 **)(compiler + COMP_currentProgram) = puVar3 + 1;
-    puVar3 = (undefined4 *)Arena__alloc(arenaAt378,0x290);
-    puVar7 = puVar3 + 1;
-    *puVar3 = arenaAt378;
-    iVar1 = compiler;
-    ILReader__ctor_e5570(puVar7,uVar5,compiler);
-    if ((*(uint *)(param_2 + 4) & 0x20) != 0) {
-      iVar2 = *(int *)(compiler + 0x52c) + 1;
-      if (iVar2 < 2) {
-        uVar5 = *(undefined4 *)(iVar2 * 4 + param_2 + 0xc);
+    *(undefined4 **)(compiler + COMP_currentProgram) = programAlloc + 1;
+    readerAlloc = (undefined4 *)Arena__alloc(arenaAt378,0x290);
+    ilReader = readerAlloc + 1;
+    *readerAlloc = arenaAt378;
+    compilerArg = compiler;
+    ILReader__ctor_e5570(ilReader,stageSource,compiler);
+    if ((*(uint *)(compileRequest + 4) & 0x20) != 0) {
+      nextStageIndex = *(int *)(compiler + 0x52c) + 1;
+      if (nextStageIndex < 2) {
+        secondSource = *(undefined4 *)(nextStageIndex * 4 + compileRequest + 0xc);
       }
       else {
-        pcVar4 = *(char **)(param_2 + 0x14);
-        uVar5 = *(undefined4 *)(pcVar4 + iVar2 * 4);
+        sourceTable = *(char **)(compileRequest + 0x14);
+        secondSource = *(undefined4 *)(sourceTable + nextStageIndex * 4);
       }
-      ((int (*)())setWord30)(puVar7,uVar5);
+      ((int (*)())setWord30)(ilReader,secondSource);
     }
     (**(code **)(**(int **)(compiler + COMP_target) + 0x60))(*(int **)(compiler + COMP_target));
-    FUN_000ef498(*(undefined4 *)(compiler + COMP_currentProgram),puVar7);
-    if (puVar7 != (undefined4 *)0x0) {
-      ((int (*)())ILReader__dtor_e4934)(puVar7);
-      Arena__free(*puVar3,puVar3);
+    FUN_000ef498(*(undefined4 *)(compiler + COMP_currentProgram),ilReader);
+    if (ilReader != (undefined4 *)0x0) {
+      ((int (*)())ILReader__dtor_e4934)(ilReader);
+      Arena__free(*readerAlloc,readerAlloc);
     }
     List__freeAllNodes(*(undefined4 *)(compiler + COMP_arenaB));
     FUN_00122de8(*(undefined4 *)(compiler + COMP_currentProgram));
@@ -620,7 +626,7 @@ int FUN_000e2094(compiler, param_2)
     }
     deleteComputationsThatCouldBeVsEnabled = Compiler__isOptionEnabled(compiler,0x10);
     if ((int)((ulonglong)deleteComputationsThatCouldBeVsEnabled >> 0x20) != 0) {
-      ((int (*)())Program__forwardMulOperandToUsers)(*(undefined4 *)(compiler + COMP_currentProgram),(int)deleteComputationsThatCouldBeVsEnabled,iVar1,argR6,staleArgR7,staleArgR8,pcVar4);
+      ((int (*)())Program__forwardMulOperandToUsers)(*(undefined4 *)(compiler + COMP_currentProgram),(int)deleteComputationsThatCouldBeVsEnabled,compilerArg,argR6,staleArgR7,staleArgR8,sourceTable);
     }
     *(uint *)(*(int *)(compiler + COMP_currentProgram) + 0x30) = *(uint *)(*(int *)(compiler + COMP_currentProgram) + 0x30) | 0x80
     ;
@@ -657,7 +663,7 @@ int FUN_000e2094(compiler, param_2)
     if (markIgnoreUncoveredEnabled != 0) {
       FUN_00139d40(*(undefined4 *)(compiler + COMP_currentProgram));
     }
-    FUN_000f29f4(*(undefined4 *)(compiler + COMP_currentProgram));
+    pass_assign_slots(*(undefined4 *)(compiler + COMP_currentProgram));
     List__freeAllNodes(*(undefined4 *)(compiler + COMP_arenaB));
     Scheduler__run(*(undefined4 *)(compiler + COMP_currentProgram));
     List__freeAllNodes(*(undefined4 *)(compiler + COMP_arenaB));
@@ -665,7 +671,7 @@ int FUN_000e2094(compiler, param_2)
     List__freeAllNodes(*(undefined4 *)(compiler + COMP_arenaB));
     FUN_00134658(*(undefined4 *)(compiler + COMP_currentProgram));
     List__freeAllNodes(*(undefined4 *)(compiler + COMP_arenaB));
-    FUN_000f60c4(*(undefined4 *)(compiler + COMP_currentProgram),compiler);
+    Program__dumpConstantRegisters(*(undefined4 *)(compiler + COMP_currentProgram),compiler);
     *(uint *)(*(int *)(compiler + COMP_currentProgram) + 0x30) =
          *(uint *)(*(int *)(compiler + COMP_currentProgram) + 0x30) | 0x10000;
     pass_optimize_control_flow(*(undefined4 *)(compiler + COMP_currentProgram));
@@ -675,21 +681,21 @@ int FUN_000e2094(compiler, param_2)
     FUN_0013061c(*(undefined4 *)(compiler + COMP_currentProgram),0);
     (**(code **)(**(int **)(compiler + COMP_target) + 0x38))
               (*(int **)(compiler + COMP_target),*(undefined4 *)(compiler + 0x52c),compiler);
-    pcVar4 = (char *)**(undefined4 **)(compiler + COMP_target);
-    iVar1 = *(int *)(compiler + 0x52c) * 4 + compiler;
+    sourceTable = (char *)**(undefined4 **)(compiler + COMP_target);
+    stageByteOffset = *(int *)(compiler + 0x52c) * 4 + compiler;
     argR6 = compiler;
-    (**(code **)(pcVar4 + 0x8c))
-              (*(undefined4 **)(compiler + COMP_target),*(undefined4 *)(iVar1 + 0x524),
-               *(undefined4 *)(iVar1 + 0x4d4));
-    iVar1 = *(int *)(compiler + COMP_currentProgram);
-    if (iVar1 != 0) {
-      FUN_000ecfac(iVar1);
-      Arena__free(*(undefined4 *)(iVar1 + -4),iVar1 + -4);
+    (**(code **)(sourceTable + 0x8c))
+              (*(undefined4 **)(compiler + COMP_target),*(undefined4 *)(stageByteOffset + 0x524),
+               *(undefined4 *)(stageByteOffset + 0x4d4));
+    currentProgramValue = *(int *)(compiler + COMP_currentProgram);
+    if (currentProgramValue != 0) {
+      Program__dtor_ecfac(currentProgramValue);
+      Arena__free(*(undefined4 *)(currentProgramValue + -4),currentProgramValue + -4);
     }
     List__freeAllNodes(*(undefined4 *)(compiler + COMP_arenaA));
     List__freeAllNodes(*(undefined4 *)(compiler + COMP_arenaB));
-    iVar1 = *(int *)(compiler + 0x52c) + -1;
-    *(int *)(compiler + 0x52c) = iVar1;
+    stageIndex = *(int *)(compiler + 0x52c) + -1;
+    *(int *)(compiler + 0x52c) = stageIndex;
   }
   return;
 }
@@ -735,7 +741,7 @@ int FUN_000e2524(param_1, param_2, param_3, param_4, param_5)
       }
       *(undefined4 *)(iStack0000001c + 0xfc) =
            *(undefined4 *)(*(int *)(iStack00000018 + 0x398) + 0x28);
-      ((int (*)())FUN_000e2094)(iStack00000018,iVar1);
+      ((int (*)())Compiler__compileStages)(iStack00000018,iVar1);
       if (iVar1 != 0) {
         FUN_00193be8(iVar1);
         Arena__free(*(undefined4 *)(iVar1 + -4),iVar1 + -4);
@@ -752,31 +758,31 @@ int FUN_000e2524(param_1, param_2, param_3, param_4, param_5)
   return iVar1;
 }
 
-/* FUN_000e2668 @ 0xe2668 (280 bytes) */
-int FUN_000e2668(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  int param_1;
-  int param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+/* Compiler__compile @ 0xe2668 (280 bytes) */
+int Compiler__compile(compiler, shader, sourceA, sourceB, optionsArg, unusedArg6, emitContext)
+  int compiler;
+  int shader;
+  undefined4 sourceA;
+  undefined4 sourceB;
+  undefined4 optionsArg;
+  undefined4 unusedArg6;
+  undefined4 emitContext;
 {
   int iVar1;
-  int iVar2;
+  int retryHandled;
   int iStack00000018;
   int iStack0000001c;
   undefined4 uStack00000020;
   undefined4 uStack00000024;
   undefined4 uStack00000028;
   
-  *(undefined4 *)(param_1 + 0x398) = param_7;
-  iStack00000018 = param_1;
-  iStack0000001c = param_2;
-  uStack00000020 = param_3;
-  uStack00000024 = param_4;
-  uStack00000028 = param_5;
-  FUN_000e0ca8(param_1);
+  *(undefined4 *)(compiler + 0x398) = emitContext;
+  iStack00000018 = compiler;
+  iStack0000001c = shader;
+  uStack00000020 = sourceA;
+  uStack00000024 = sourceB;
+  uStack00000028 = optionsArg;
+  FUN_000e0ca8(compiler);
   do {
     iVar1 = _setjmp(*(undefined4 *)(iStack00000018 + 4));
     if (iVar1 == 0) {
@@ -787,7 +793,7 @@ int FUN_000e2668(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
       *(undefined4 *)(iStack0000001c + 0xf8) = 0;
       *(undefined4 *)(iStack0000001c + 0xfc) =
            *(undefined4 *)(*(int *)(iStack00000018 + 0x398) + 0x28);
-      ((int (*)())FUN_000e2094)(iStack00000018,iVar1);
+      ((int (*)())Compiler__compileStages)(iStack00000018,iVar1);
       if (iVar1 != 0) {
         FUN_00193be8(iVar1);
         Arena__free(*(undefined4 *)(iVar1 + -4),iVar1 + -4);
@@ -800,7 +806,7 @@ int FUN_000e2668(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
     iVar1 = *(int *)(iStack00000018 + 0x314);
     FUN_000e0e28(iStack00000018);
     ((int (*)())Compiler__releaseChipAndPools)(iStack00000018,0);
-  } while ((iVar1 != 0) && (iVar2 = ((int (*)())FUN_000e161c)(iStack00000018,iVar1), iVar2 != 0));
+  } while ((iVar1 != 0) && (retryHandled = ((int (*)())FUN_000e161c)(iStack00000018,iVar1), retryHandled != 0));
   return iVar1;
 }
 
@@ -1069,7 +1075,7 @@ int ConstRecord__emitStores(constRecord, hwDescription, program)
         destRegisterId = *(undefined4 *)(constRecord + 0x94);
         emitContext = *(undefined4 *)(program + 0x398);
         targetBlock = ((int (*)())Compiler__selectBlockByProgramFlags)(program);
-        FUN_000d9d74(emitContext,destRegisterId,(uint)(laneRecord == 1),loopCounter,targetBlock,0);
+        ConstBank__storeBoolLane(emitContext,destRegisterId,(uint)(laneRecord == 1),loopCounter,targetBlock,0);
       }
       notLastLane = loopCounter != 3;
       laneRecord0 = laneRecord0 + 0x18;
@@ -1095,7 +1101,7 @@ int ConstRecord__emitStores(constRecord, hwDescription, program)
             laneValueInt = *(undefined4 *)(laneRecord + 0x20);
             emitContext2 = *(undefined4 *)(program + 0x398);
             targetBlock = ((int (*)())Compiler__selectBlockByProgramFlags)(program);
-            FUN_000d9c90(emitContext2,destRegisterId3,laneValueInt,loopCounter,targetBlock,0);
+            ConstBank__storeIntLane(emitContext2,destRegisterId3,laneValueInt,loopCounter,targetBlock,0);
           }
           else {
             destRegisterId2 = *(undefined4 *)(laneRecordB + 0x94);
@@ -1106,7 +1112,7 @@ int ConstRecord__emitStores(constRecord, hwDescription, program)
             emitContext3 = *(undefined4 *)(program + 0x398);
             laneValue4 = *(undefined4 *)(laneRecord + 0x30);
             targetBlock = ((int (*)())Compiler__selectBlockByProgramFlags)(program);
-            FUN_000d9e98(emitContext3,destRegisterId2,loopCounter,laneKind,laneValue0,laneValue1,laneValue2,laneValue3,laneValue4,targetBlock);
+            ConstBank__addMappedEntry(emitContext3,destRegisterId2,loopCounter,laneKind,laneValue0,laneValue1,laneValue2,laneValue3,laneValue4,targetBlock);
           }
         }
         notLastLane = loopCounter != 3;
@@ -1489,7 +1495,7 @@ int MachineCodeWriter__encodeProgram(writer, outBuffer, outSize)
    * callee's own body - so auStack_74's real required size is 0x38 bytes, not the 0x20 the auStack_74..
    * local_54 gap alone would suggest (an earlier version of this fix under-sized it at 0x28 total, which
    * still let FUN_000e3544's tail writes (words 9-0xd, past local_54) overflow past this whole buffer -
-   * confirmed live: that overflow was clobbering a saved register in the CALLER's (FUN_000e2094's) frame,
+   * confirmed live: that overflow was clobbering a saved register in the CALLER's (Compiler__compileStages's) frame,
    * corrupting its r30 and causing a second crash further into gldCreateContext). Those extra words are
    * never read back by any other statement in this function (no name exists for them, hence no overflow
    * was visible from local C code alone) - only sized correctly by checking the callee's real write range

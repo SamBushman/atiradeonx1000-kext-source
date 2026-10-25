@@ -1,0 +1,44 @@
+local	FUN_0004def0	uVar4	activeUnitMask	INFERRED	glContext+0x32 ORed with glContext+0x34: texture units whose state is being revalidated
+local	FUN_0004def0	uVar20	pendingUnitBits	INFERRED	activeUnitMask shifted right once per loop iteration: bit 0 is the unit being processed
+local	FUN_0004def0	iVar22	texObjCursor	INFERRED	glContext advanced by 4 per unit: indexes the per-unit texture object pointers at +0x13f8
+local	FUN_0004def0	iVar27	texRegCursor	INFERRED	glContext advanced by 4 per unit: indexes the per-unit texture register shadows at +0x1cdc / +0x1d1c / +0x1d5c / +0x1d9c / +0x1ddc
+local	FUN_0004def0	iVar24	unitInfoCursor	INFERRED	glContext advanced by 4 per unit: indexes the per-unit ushort at +0x46e
+local	FUN_0004def0	iVar23	unitRectCursor	INFERRED	glContext advanced by 0x10 per unit: indexes the per-unit rectangle words at +0x2854 / +0x2858 / +0x285c
+local	FUN_0004def0	iVar17	unitFlagCursor	INFERRED	glContext advanced by 4 per unit: indexes the per-unit flag words at +0x21 / +0x4c
+local	FUN_0004def0	iVar25	unitEnableCursor	INFERRED	glContext + 0x20 advanced by 1 per unit: indexes the per-unit enable bytes
+local	FUN_0004def0	iVar10	unitScaleBase	INFERRED	glContext + 0x28b4: per-unit 4-float texture scale constants (0x10 bytes per unit)
+local	FUN_0004def0	iVar18	texObj	INFERRED	texture object bound to the unit (ctx+0x13f8 table, or the object at glContext+0x2768 for the unit in glContext+0x276c)
+local	FUN_0004def0	uVar11	unitBit	INFERRED	1 << unit: bit of the unit in the dirty and enable masks
+use	FUN_0004def0	iVar16	unitWordOffset	INFERRED	unit << 2: byte offset of the unit in the per-unit word tables	^\s*iVar16\ =\ uVar26\ <<\ 2;$	+1
+use	FUN_0004def0	iVar16	unitWordOffset	INFERRED	unit << 2: byte offset of the unit in the per-unit word tables	^\s*iVar16\ =\ uVar26\ <<\ 2;$@2	+1
+use	FUN_0004def0	iVar16	unitWordOffset	INFERRED	unit << 2: byte offset of the unit in the per-unit word tables	^\s*iVar16\ =\ uVar26\ \*\ 4;$	+1
+use	FUN_0004def0	iVar16	unitWordOffset	INFERRED	unit << 2: byte offset of the unit in the per-unit word tables	^\s*\*\(uint\ \*\)\(iVar16\ \+\ \*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001144\)\ \+\ param_1\)\ \+\ 0x2c\)\ =$	+1
+use	FUN_0004def0	iVar16	unitWordOffset	INFERRED	unit << 2: byte offset of the unit in the per-unit word tables	^\s*if\ \(\(uVar13\ !=\ \*\(uint\ \*\)\(\(\(unsigned\ char\ \*\)0x000015d0\)\ \+\ iVar16\ \+\ iVar14\)\)\ \&\&$	+2
+use	FUN_0004def0	iVar16	unitWordOffset	INFERRED	unit << 2: byte offset of the unit in the per-unit word tables	^\s*if\ \(\*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x00001620\)\ \+\ iVar16\ \+\ iVar14\)\ !=$	+2
+use	FUN_0004def0	iVar16	unitWordOffset	INFERRED	unit << 2: byte offset of the unit in the per-unit word tables	^\s*\*\(undefined4\ \*\)\(iVar16\ \+\ param_1\ \+\ 0x1e1c\)\ =\ \*\(undefined4\ \*\)\(iVar18\ \+\ 0x28\);$	+1
+use	FUN_0004def0	iVar16	unitWordOffset	INFERRED	unit << 2: byte offset of the unit in the per-unit word tables	^\s*\*\(uint\ \*\)\(iVar16\ \+\ param_1\ \+\ 0x1cdc\)\ =$	+2
+use	FUN_0004def0	iVar16	unitWordOffset	INFERRED	unit << 2: byte offset of the unit in the per-unit word tables	^\s*\*\(uint\ \*\)\(iVar16\ \+\ param_1\ \+\ 0x1cdc\)\ =$@2	+2
+use	FUN_0004def0	iVar16	unitWordOffset	INFERRED	unit << 2: byte offset of the unit in the per-unit word tables	^\s*\*\(uint\ \*\)\(iVar16\ \+\ param_1\ \+\ 0x1cdc\)\ =$@3	+2
+use	FUN_0004def0	iVar16	unitWordOffset	INFERRED	unit << 2: byte offset of the unit in the per-unit word tables	^\s*\*\(uint\ \*\)\(iVar16\ \+\ param_1\ \+\ 0x1cdc\)\ =$@4	+2
+use	FUN_0004def0	iVar16	unitWordOffset	INFERRED	unit << 2: byte offset of the unit in the per-unit word tables	^\s*\*\(uint\ \*\)\(iVar16\ \+\ param_1\ \+\ 0x1cdc\)\ =$@5	+2
+use	FUN_0004def0	iVar16	unitWordOffset	INFERRED	unit << 2: byte offset of the unit in the per-unit word tables	^\s*\*\(uint\ \*\)\(iVar16\ \+\ param_1\ \+\ 0x1cdc\)\ =$@6	+2
+use	FUN_0004def0	iVar16	unitWordOffset	INFERRED	unit << 2: byte offset of the unit in the per-unit word tables	^\s*\*\(uint\ \*\)\(iVar16\ \+\ param_1\ \+\ 0x1cdc\)\ =\ \*\(uint\ \*\)\(iVar16\ \+\ param_1\ \+\ 0x1cdc\)\ \&\ 0xfffffe3f$	+1
+use	FUN_0004def0	iVar16	unitWordOffset	INFERRED	unit << 2: byte offset of the unit in the per-unit word tables	^\s*\*\(uint\ \*\)\(iVar16\ \+\ param_1\ \+\ 0x1cdc\)\ =\ \*\(uint\ \*\)\(iVar16\ \+\ param_1\ \+\ 0x1cdc\)\ \&\ 0xffffffc7$	+1
+use	FUN_0004def0	iVar16	unitWordOffset	INFERRED	unit << 2: byte offset of the unit in the per-unit word tables	^\s*iVar16\ =\ iVar16\ \+\ param_1;$	+3
+use	FUN_0004def0	iVar16	unitWordOffset	INFERRED	unit << 2: byte offset of the unit in the per-unit word tables	^\s*\*\(uint\ \*\)\(iVar16\ \+\ 0x1d5c\)\ =$	+2
+use	FUN_0004def0	iVar16	unitWordOffset	INFERRED	unit << 2: byte offset of the unit in the per-unit word tables	^\s*\*\(uint\ \*\)\(iVar16\ \+\ 0x1d5c\)\ =$@2	+1
+use	FUN_0004def0	iVar16	unitWordOffset	INFERRED	unit << 2: byte offset of the unit in the per-unit word tables	^\s*\*\(uint\ \*\)\(iVar16\ \+\ 0x1d5c\)\ \&\ 0xffc007ff;$	+1
+use	FUN_0004def0	iVar16	unitVectorOffset	INFERRED	unit * 0x10: byte offset of the unit in the per-unit vector tables	^\s*iVar16\ =\ uVar26\ \*\ 0x10;$	+1
+use	FUN_0004def0	iVar16	unitVectorOffset	INFERRED	unit * 0x10: byte offset of the unit in the per-unit vector tables	^\s*iVar15\ =\ iVar10\ \+\ iVar16;$	+1
+use	FUN_0004def0	iVar16	unitVectorOffset	INFERRED	unit * 0x10: byte offset of the unit in the per-unit vector tables	^\s*\*\(float\ \*\)\(iVar10\ \+\ iVar16\)\ =$	+1
+use	FUN_0004def0	iVar16	unitVectorOffset	INFERRED	unit * 0x10: byte offset of the unit in the per-unit vector tables	^\s*\*\(float\ \*\)\(iVar10\ \+\ iVar16\)\ =$@2	+1
+use	FUN_0004def0	iVar15	unitScalePtr	INFERRED	unitScaleBase + unit * 0x10: the unit's 4-float scale constants being written	^\s*iVar15\ =\ iVar10\ \+\ iVar16;$	+1
+use	FUN_0004def0	iVar15	unitScalePtr	INFERRED	unitScaleBase + unit * 0x10: the unit's 4-float scale constants being written	^\s*\*\(float\ \*\)\(iVar15\ \+\ 4\)\ =\ \*\(float\ \*\)\(iVar18\ \+\ 0x44\)\ /\ fVar2;$	+1
+use	FUN_0004def0	iVar15	unitScalePtr	INFERRED	unitScaleBase + unit * 0x10: the unit's 4-float scale constants being written	^\s*\*\(float\ \*\)\(iVar15\ \+\ 8\)\ =$	+1
+use	FUN_0004def0	iVar15	unitScalePtr	INFERRED	unitScaleBase + unit * 0x10: the unit's 4-float scale constants being written	^\s*\*\(float\ \*\)\(iVar15\ \+\ 0xc\)\ =\ fVar5\ /\ \*\(float\ \*\)\(iVar18\ \+\ 0x44\);$	+1
+use	FUN_0004def0	iVar15	unitScalePtr	INFERRED	unitScaleBase + unit * 0x10: the unit's 4-float scale constants being written	^\s*\*\(float\ \*\)\(iVar15\ \+\ 4\)\ =\ \*\(float\ \*\)\(iVar18\ \+\ 0x48\)\ /\ fVar2;$	+1
+use	FUN_0004def0	iVar15	unitScalePtr	INFERRED	unitScaleBase + unit * 0x10: the unit's 4-float scale constants being written	^\s*\*\(float\ \*\)\(iVar15\ \+\ 8\)\ =$@2	+1
+use	FUN_0004def0	iVar15	unitScalePtr	INFERRED	unitScaleBase + unit * 0x10: the unit's 4-float scale constants being written	^\s*\*\(float\ \*\)\(iVar15\ \+\ 0xc\)\ =\ fVar5\ /\ \*\(float\ \*\)\(iVar18\ \+\ 0x48\);$	+1
+use	FUN_0004def0	iVar15	unitScalePtr	INFERRED	unitScaleBase + unit * 0x10: the unit's 4-float scale constants being written	^\s*fparam_1\ =\ \(double\)\(\(int\ \(\*\)\(\)\)FUN_0004de30\)\(param_1,0,uVar26\ \+\ 0x14,uVar26\ \+\ 0x14,iVar15,1\);$	+1
+local	FUN_0004def0	dVar7	intToDoubleBias	INFERRED	DOUBLE_001aa1e0: bias of the int-to-double conversion idiom
+local	FUN_0004def0	sVar3	texBaseFormat	INFERRED	short at texObj+0x38: base internal format; 0x1902 (GL_DEPTH_COMPONENT) selects the depth texture path

@@ -500,7 +500,7 @@ extern int extvsSymbolListGetSymbol();
 extern int scDestroyCompilerObject();
 extern int Compiler__fail();
 extern int FUN_000e9294();
-extern int FUN_000f4a84();
+extern int Emitter__allocateConstantSlot();
 extern int FUN_0010defc();
 extern int FUN_001135ec();
 extern int FUN_0011363c();

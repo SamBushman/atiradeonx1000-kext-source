@@ -1,0 +1,38 @@
+use	FUN_00139008	uVar1	shiftAmount	INFERRED	bit index masked 0x3f	^\s*uVar1\ =\ uVar2\ \&\ 0x3f;$	+1
+use	FUN_00139008	uVar1	shiftAmount	INFERRED	bit index masked 0x3f	^\s*iVar3\ =\ iVar3\ \+\ \(param_1\ >>\ uVar1\ \&\ 1U\);$	+1
+use	FUN_00139008	uVar2	bitIndex	INFERRED	loop counter 0..3	^\s*uVar2\ =\ 0;$	+1
+use	FUN_00139008	uVar2	bitIndex	INFERRED	loop counter 0..3	^\s*uVar1\ =\ uVar2\ \&\ 0x3f;$	+2
+use	FUN_00139008	iVar3	setBitCount	INFERRED	popcount of low 4 bits	^\s*iVar3\ =\ 0;$	+1
+use	FUN_00139008	iVar3	setBitCount	INFERRED	popcount of low 4 bits	^\s*iVar3\ =\ iVar3\ \+\ \(param_1\ >>\ uVar1\ \&\ 1U\);$	+1
+use	FUN_00139008	iVar3	setBitCount	INFERRED	popcount of low 4 bits	^\s*return\ iVar3;$	+1
+use	FUN_00139008	iVar4	remainingLanes	INFERRED	counts down from 4	^\s*iVar4\ =\ 4;$	+1
+use	FUN_00139008	iVar4	remainingLanes	INFERRED	counts down from 4	^\s*iVar4\ =\ iVar4\ \+\ \-1;$	+2
+use	FUN_0010e814	iVar1	laneSourceCount	INFERRED	result of FUN_0010e368	^\s*iVar1\ =\ \(\(int\ \(\*\)\(\)\)FUN_0010e368\)\(\*\(undefined4\ \*\)\(param_2\ \+\ 0x13c\)\);$	+1
+use	FUN_0010e814	iVar1	laneSourceCount	INFERRED	result of FUN_0010e368	^\s*param_1\[6\]\ =\ iVar1;$	+1
+use	FUN_0010e814	iVar2	remainingLanes	INFERRED	4 lane loop counter	^\s*iVar2\ =\ 4;$	+1
+use	FUN_0010e814	iVar2	remainingLanes	INFERRED	4 lane loop counter	^\s*iVar2\ =\ iVar2\ \+\ \-1;$	+2
+use	FUN_0010e7b8	iVar1	laneSourceCount	INFERRED	result of FUN_0010e368	^\s*iVar1\ =\ \(\(int\ \(\*\)\(\)\)FUN_0010e368\)\(\*\(undefined4\ \*\)\(param_2\ \+\ 0x13c\)\);$	+1
+use	FUN_0010e7b8	iVar1	laneSourceCount	INFERRED	result of FUN_0010e368	^\s*param_1\[6\]\ =\ iVar1;$	+1
+use	FUN_0010e7b8	iVar2	remainingLanes	INFERRED	4 lane loop counter	^\s*iVar2\ =\ 4;$	+1
+use	FUN_0010e7b8	iVar2	remainingLanes	INFERRED	4 lane loop counter	^\s*iVar2\ =\ iVar2\ \+\ \-1;$	+2
+use	ExportSlot__clone	puVar3	valueKey	INFERRED	ValueKey__init on arena alloc+1	^\s*puVar3\ =\ puVar1\ \+\ 1;$	+1
+use	ExportSlot__clone	puVar3	valueKey	INFERRED	ValueKey__init on arena alloc+1	^\s*FUN_00173938\(puVar3,puVar5,param_3\);$	+1
+use	ExportSlot__clone	puVar3	valueKey	INFERRED	ValueKey__init on arena alloc+1	^\s*FUN_00174e0c\(puVar3\);$	+2
+use	ExportSlot__clone	puVar3	valueKey	INFERRED	ValueKey__init on arena alloc+1	^\s*return\ puVar3;$	+1
+use	ExportSlot__clone	puVar5	loadInst	INFERRED	IRLoad opcode 0xfa	^\s*puVar5\ =\ puVar1\ \+\ 1;$	+1
+use	ExportSlot__clone	puVar5	loadInst	INFERRED	IRLoad opcode 0xfa	^\s*FUN_00109a80\(puVar5,0xfa,param_3\);$	+2
+use	ExportSlot__clone	puVar5	loadInst	INFERRED	IRLoad opcode 0xfa	^\s*FUN_00173938\(puVar3,puVar5,param_3\);$	+1
+use	ExportSlot__clone	puVar5	loadInst	INFERRED	IRLoad opcode 0xfa	^\s*\(\(int\ \(\*\)\(\)\)FUN_0012306c\)\(param_1,puVar5\);$	+3
+use	InterferenceMatrix__setPair	uVar1	bitIndex	INFERRED	pairIndex result	^\s*uVar1\ =\ \(\(int\ \(\*\)\(\)\)FUN_00134b1c\)\(param_1,param_2,param_3\);$	+3
+use	InterferenceMatrix__setPair	iVar2	bitWordAddress	INFERRED	bit-matrix word pointer	^\s*iVar2\ =\ \*param_1;$	+1
+use	InterferenceMatrix__setPair	iVar2	bitWordAddress	INFERRED	bit-matrix word pointer	^\s*iVar2\ =\ \(uVar1\ >>\ 3\ \&\ 0x1ffffffc\)\ \+\ iVar2;$	+2
+use	FUN_00131c10	iVar1	cachedObject	INFERRED	lazily built at +0x438	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x438\);$	+2
+use	FUN_00131c10	iVar1	cachedObject	INFERRED	lazily built at +0x438	^\s*iVar1\ =\ FUN_00130ec0\(uVar2,uVar3,\*\(undefined4\ \*\)\(param_1\ \+\ 8\)\);$	+2
+use	FUN_00131c10	iVar1	cachedObject	INFERRED	lazily built at +0x438	^\s*return\ iVar1;$	+1
+use	FUN_00131c10	uVar2	baseHandle	INFERRED	FUN_00131a80 result	^\s*uVar2\ =\ \(\(int\ \(\*\)\(\)\)FUN_00131a80\)\(param_1\);$	+3
+use	FUN_00131c10	uVar3	derivedHandle	INFERRED	FUN_001319d0 result	^\s*uVar3\ =\ \(\(int\ \(\*\)\(\)\)FUN_001319d0\)\(param_1,uVar2\);$	+2
+use	FUN_00130a78	puVar1	nodeFlags	INFERRED	node+0x14 flags	^\s*puVar1\ =\ \(uint\ \*\)\(param_1\ \+\ 0x14\);$	+2
+use	FUN_00130a78	puVar1	nodeFlags	INFERRED	node+0x14 flags	^\s*uVar2\ =\ \*puVar1\ \&\ 4;$	+1
+use	FUN_00130a78	uVar2	continueFlag	INFERRED	loop test	^\s*uVar2\ =\ param_1;$	+1
+use	FUN_00130a78	uVar2	continueFlag	INFERRED	loop test	^\s*if\ \(uVar2\ ==\ 0\)\ \{$	+1
+use	FUN_00130a78	uVar2	continueFlag	INFERRED	loop test	^\s*uVar2\ =\ \*puVar1\ \&\ 4;$	+1

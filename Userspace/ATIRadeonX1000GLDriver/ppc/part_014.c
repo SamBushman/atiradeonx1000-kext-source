@@ -5802,7 +5802,7 @@ int FUN_0009d3b0(ctx, arg2, param_3, param_4, param_5, param_6, param_7)
       (**(code **)((int)((unsigned char *)0x000011cc) + ctx))();
       return;
     }
-    FUN_00064f40(ctx,arg2);
+    extvsValidateProgramState(ctx,arg2);
     return;
   }
   ((int (*)())ffvpRunStateHook)(ctx);

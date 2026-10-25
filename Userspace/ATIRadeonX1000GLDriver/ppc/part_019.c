@@ -2303,126 +2303,126 @@ LAB_000d9c0c:
   return 0;
 }
 
-/* FUN_000d9c90 @ 0xd9c90 (228 bytes) */
-int FUN_000d9c90(param_1, param_2, param_3, param_4, param_5, param_6)
+/* ConstBank__storeIntLane @ 0xd9c90 (228 bytes) */
+int ConstBank__storeIntLane(param_1, registerKey, laneValue, lane, bank, useGlobalList)
   undefined4 param_1;
-  int param_2;
-  undefined4 param_3;
-  int param_4;
-  int param_5;
-  int param_6;
+  int registerKey;
+  undefined4 laneValue;
+  int lane;
+  int bank;
+  int useGlobalList;
 {
-  int iVar1;
+  int nextEntryOffset;
   uint uVar2;
-  int iVar3;
-  int *piVar4;
-  int *piVar5;
-  uint uVar6;
+  int entryOffset;
+  int *entryTable;
+  int *entryCursor;
+  uint entriesLeft;
   
-  if (param_6 == 0) {
-    piVar4 = *(int **)(param_5 + 0x88);
-    if (piVar4 != (int *)0x0) {
-      uVar2 = *(uint *)(param_5 + 0x7c);
+  if (useGlobalList == 0) {
+    entryTable = *(int **)(bank + 0x88);
+    if (entryTable != (int *)0x0) {
+      uVar2 = *(uint *)(bank + 0x7c);
       if (uVar2 == 0) {
 LAB_000d9cf0:
-        if (*(uint *)(param_5 + 0x70) <= uVar2) {
+        if (*(uint *)(bank + 0x70) <= uVar2) {
           return 0;
         }
-        iVar3 = uVar2 * 0x14;
-        *(uint *)(param_5 + 0x7c) = uVar2 + 1;
+        entryOffset = uVar2 * 0x14;
+        *(uint *)(bank + 0x7c) = uVar2 + 1;
       }
-      else if (*piVar4 == param_2) {
-        iVar3 = 0;
+      else if (*entryTable == registerKey) {
+        entryOffset = 0;
       }
       else {
-        iVar1 = 0x14;
-        uVar6 = uVar2;
-        piVar5 = piVar4;
+        nextEntryOffset = 0x14;
+        entriesLeft = uVar2;
+        entryCursor = entryTable;
         do {
-          iVar3 = iVar1;
-          piVar5 = piVar5 + 5;
-          uVar6 = uVar6 - 1;
-          if (uVar6 == 0) goto LAB_000d9cf0;
-          iVar1 = iVar3 + 0x14;
-        } while (*piVar5 != param_2);
+          entryOffset = nextEntryOffset;
+          entryCursor = entryCursor + 5;
+          entriesLeft = entriesLeft - 1;
+          if (entriesLeft == 0) goto LAB_000d9cf0;
+          nextEntryOffset = entryOffset + 0x14;
+        } while (*entryCursor != registerKey);
       }
-      *(int *)(iVar3 + (int)piVar4) = param_2;
-      *(undefined4 *)((int)piVar4 + param_4 * 4 + iVar3 + 4) = param_3;
+      *(int *)(entryOffset + (int)entryTable) = registerKey;
+      *(undefined4 *)((int)entryTable + lane * 4 + entryOffset + 4) = laneValue;
       return 1;
     }
   }
   else {
-    uVar2 = *(uint *)(param_5 + 0x58);
-    if (uVar2 < *(uint *)(param_5 + 0x4c)) {
-      *(uint *)(param_5 + 0x58) = uVar2 + 1;
-      iVar3 = uVar2 * 0x24 + *(int *)(param_5 + 100);
-      *(int *)(uVar2 * 0x24 + *(int *)(param_5 + 100)) = param_2;
-      *(undefined4 *)(iVar3 + 0x14) = param_3;
-      *(int *)(iVar3 + 4) = param_4;
-      *(undefined4 *)(iVar3 + 8) = 0;
+    uVar2 = *(uint *)(bank + 0x58);
+    if (uVar2 < *(uint *)(bank + 0x4c)) {
+      *(uint *)(bank + 0x58) = uVar2 + 1;
+      entryOffset = uVar2 * 0x24 + *(int *)(bank + 100);
+      *(int *)(uVar2 * 0x24 + *(int *)(bank + 100)) = registerKey;
+      *(undefined4 *)(entryOffset + 0x14) = laneValue;
+      *(int *)(entryOffset + 4) = lane;
+      *(undefined4 *)(entryOffset + 8) = 0;
       return 1;
     }
   }
   return 0;
 }
 
-/* FUN_000d9d74 @ 0xd9d74 (228 bytes) */
-int FUN_000d9d74(param_1, param_2, param_3, param_4, param_5, param_6)
+/* ConstBank__storeBoolLane @ 0xd9d74 (228 bytes) */
+int ConstBank__storeBoolLane(param_1, registerKey, laneValue, lane, bank, useGlobalList)
   undefined4 param_1;
-  int param_2;
-  undefined4 param_3;
-  int param_4;
-  int param_5;
-  int param_6;
+  int registerKey;
+  undefined4 laneValue;
+  int lane;
+  int bank;
+  int useGlobalList;
 {
-  int iVar1;
+  int nextEntryOffset;
   uint uVar2;
-  int iVar3;
-  int *piVar4;
-  int *piVar5;
-  uint uVar6;
+  int entryOffset;
+  int *entryTable;
+  int *entryCursor;
+  uint entriesLeft;
   
-  if (param_6 == 0) {
-    piVar4 = *(int **)(param_5 + 0x8c);
-    if (piVar4 != (int *)0x0) {
-      uVar2 = *(uint *)(param_5 + 0x80);
+  if (useGlobalList == 0) {
+    entryTable = *(int **)(bank + 0x8c);
+    if (entryTable != (int *)0x0) {
+      uVar2 = *(uint *)(bank + 0x80);
       if (uVar2 == 0) {
 LAB_000d9dd4:
-        if (*(uint *)(param_5 + 0x74) <= uVar2) {
+        if (*(uint *)(bank + 0x74) <= uVar2) {
           return 0;
         }
-        iVar3 = uVar2 * 0x14;
-        *(uint *)(param_5 + 0x80) = uVar2 + 1;
+        entryOffset = uVar2 * 0x14;
+        *(uint *)(bank + 0x80) = uVar2 + 1;
       }
-      else if (*piVar4 == param_2) {
-        iVar3 = 0;
+      else if (*entryTable == registerKey) {
+        entryOffset = 0;
       }
       else {
-        iVar1 = 0x14;
-        uVar6 = uVar2;
-        piVar5 = piVar4;
+        nextEntryOffset = 0x14;
+        entriesLeft = uVar2;
+        entryCursor = entryTable;
         do {
-          iVar3 = iVar1;
-          piVar5 = piVar5 + 5;
-          uVar6 = uVar6 - 1;
-          if (uVar6 == 0) goto LAB_000d9dd4;
-          iVar1 = iVar3 + 0x14;
-        } while (*piVar5 != param_2);
+          entryOffset = nextEntryOffset;
+          entryCursor = entryCursor + 5;
+          entriesLeft = entriesLeft - 1;
+          if (entriesLeft == 0) goto LAB_000d9dd4;
+          nextEntryOffset = entryOffset + 0x14;
+        } while (*entryCursor != registerKey);
       }
-      *(int *)(iVar3 + (int)piVar4) = param_2;
-      *(undefined4 *)((int)piVar4 + param_4 * 4 + iVar3 + 4) = param_3;
+      *(int *)(entryOffset + (int)entryTable) = registerKey;
+      *(undefined4 *)((int)entryTable + lane * 4 + entryOffset + 4) = laneValue;
       return 1;
     }
   }
   else {
-    uVar2 = *(uint *)(param_5 + 0x5c);
-    if (uVar2 < *(uint *)(param_5 + 0x50)) {
-      *(uint *)(param_5 + 0x5c) = uVar2 + 1;
-      iVar3 = uVar2 * 0x24 + *(int *)(param_5 + 0x68);
-      *(int *)(uVar2 * 0x24 + *(int *)(param_5 + 0x68)) = param_2;
-      *(undefined4 *)(iVar3 + 0x14) = param_3;
-      *(int *)(iVar3 + 4) = param_4;
-      *(undefined4 *)(iVar3 + 8) = 2;
+    uVar2 = *(uint *)(bank + 0x5c);
+    if (uVar2 < *(uint *)(bank + 0x50)) {
+      *(uint *)(bank + 0x5c) = uVar2 + 1;
+      entryOffset = uVar2 * 0x24 + *(int *)(bank + 0x68);
+      *(int *)(uVar2 * 0x24 + *(int *)(bank + 0x68)) = registerKey;
+      *(undefined4 *)(entryOffset + 0x14) = laneValue;
+      *(int *)(entryOffset + 4) = lane;
+      *(undefined4 *)(entryOffset + 8) = 2;
       return 1;
     }
   }
@@ -2454,48 +2454,48 @@ int FUN_000d9e58(param_1, param_2, param_3, param_4, param_5, param_6)
   return 1;
 }
 
-/* FUN_000d9e98 @ 0xd9e98 (156 bytes) */
-int FUN_000d9e98(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10)
+/* ConstBank__addMappedEntry @ 0xd9e98 (156 bytes) */
+int ConstBank__addMappedEntry(param_1, registerKey, param_3, param_4, valueLo, valueHi, maskByte, sourceRegister, extraWord, bank)
   undefined4 param_1;
-  undefined4 param_2;
+  undefined4 registerKey;
   undefined4 param_3;
   undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  int param_7;
-  int param_8;
-  undefined4 param_9;
-  int param_10;
+  undefined4 valueLo;
+  undefined4 valueHi;
+  int maskByte;
+  int sourceRegister;
+  undefined4 extraWord;
+  int bank;
 {
-  uint uVar1;
-  int iVar2;
+  uint entryIndex;
+  int entry;
   
-  uVar1 = *(uint *)(param_10 + 0x58);
-  if (*(uint *)(param_10 + 0x4c) <= uVar1) {
+  entryIndex = *(uint *)(bank + 0x58);
+  if (*(uint *)(bank + 0x4c) <= entryIndex) {
     return 0;
   }
-  *(uint *)(param_10 + 0x58) = uVar1 + 1;
-  iVar2 = uVar1 * 0x24 + *(int *)(param_10 + 100);
-  *(undefined4 *)(uVar1 * 0x24 + *(int *)(param_10 + 100)) = param_2;
-  *(undefined4 *)(iVar2 + 4) = 0;
-  if (param_8 == -1) {
-    if (param_7 == 0xff) {
-      *(undefined4 *)(iVar2 + 8) = 0x15;
+  *(uint *)(bank + 0x58) = entryIndex + 1;
+  entry = entryIndex * 0x24 + *(int *)(bank + 100);
+  *(undefined4 *)(entryIndex * 0x24 + *(int *)(bank + 100)) = registerKey;
+  *(undefined4 *)(entry + 4) = 0;
+  if (sourceRegister == -1) {
+    if (maskByte == 0xff) {
+      *(undefined4 *)(entry + 8) = 0x15;
     }
     else {
-      *(undefined4 *)(iVar2 + 8) = 0x16;
+      *(undefined4 *)(entry + 8) = 0x16;
     }
   }
-  else if (param_7 == 0xff) {
-    *(undefined4 *)(iVar2 + 8) = 0x17;
+  else if (maskByte == 0xff) {
+    *(undefined4 *)(entry + 8) = 0x17;
   }
   else {
-    *(undefined4 *)(iVar2 + 8) = 0x18;
+    *(undefined4 *)(entry + 8) = 0x18;
   }
-  *(int *)(iVar2 + 0x1c) = param_8;
-  *(undefined4 *)(iVar2 + 0x10) = param_5;
-  *(undefined4 *)(iVar2 + 0xc) = param_6;
-  *(undefined4 *)(iVar2 + 0x20) = param_9;
+  *(int *)(entry + 0x1c) = sourceRegister;
+  *(undefined4 *)(entry + 0x10) = valueLo;
+  *(undefined4 *)(entry + 0xc) = valueHi;
+  *(undefined4 *)(entry + 0x20) = extraWord;
   return 1;
 }
 
@@ -2667,7 +2667,7 @@ int FUN_000da0c0(param_1, param_2)
     puStack00000018[2] = 0;
     return;
   }
-  FUN_000e1a48(iVar1,uVar2,puStack0000001c[0xc],uVar3,0,0,puStack0000001c[0xf],puStack0000001c[0x10]
+  Compiler__init_e1a48(iVar1,uVar2,puStack0000001c[0xc],uVar3,0,0,puStack0000001c[0xf],puStack0000001c[0x10]
                ,puStack0000001c[0x11],puStack0000001c[0x12],puStack0000001c[0x13],
                puStack0000001c[0xe]);
   puStack00000018[2] = iVar1;
@@ -2799,10 +2799,10 @@ int scDestroyCompilerObject(param_1, param_2)
   return;
 }
 
-/* FUN_000da4b8 @ 0xda4b8 (192 bytes) */
-int FUN_000da4b8(param_1, param_2)
-  undefined4 *param_1;
-  undefined4 *param_2;
+/* Compiler__createFromRequest @ 0xda4b8 (192 bytes) */
+int Compiler__createFromRequest(state, request)
+  undefined4 *state;
+  undefined4 *request;
 {
   int iVar1;
   undefined4 uVar2;
@@ -2812,9 +2812,9 @@ int FUN_000da4b8(param_1, param_2)
   undefined4 *puStack00000018;
   undefined4 *puStack0000001c;
   
-  puStack00000018 = param_1;
-  puStack0000001c = param_2;
-  iVar1 = (*(code *)param_2[0xc])(param_2[0xb],0x6c8);
+  puStack00000018 = state;
+  puStack0000001c = request;
+  iVar1 = (*(code *)request[0xc])(request[0xb],0x6c8);
   uVar3 = puStack0000001c[0xd];
   *puStack00000018 = uVar3;
   uVar2 = puStack0000001c[0xb];
@@ -2826,7 +2826,7 @@ int FUN_000da4b8(param_1, param_2)
     puStack00000018[2] = 0;
     return;
   }
-  FUN_000e1a48(iVar1,uVar2,puStack0000001c[0xc],uVar3,0,0,puStack0000001c[0xf],puStack0000001c[0x10]
+  Compiler__init_e1a48(iVar1,uVar2,puStack0000001c[0xc],uVar3,0,0,puStack0000001c[0xf],puStack0000001c[0x10]
                ,puStack0000001c[0x11],puStack0000001c[0x12],puStack0000001c[0x13],
                puStack0000001c[0xe]);
   puStack00000018[2] = iVar1;
@@ -3552,43 +3552,43 @@ void ildisPrintFixedPoint(undefined4 disassembler,uint fieldBits,uint integerBit
 {
   uint loopCounterB;
   float integerPart;
-  uint uVar2;
-  int iVar3;
+  uint fractionBitIndex;
+  int integerBitsLeft;
   uint loopCounter;
   undefined1 *textBufferPtr;
   undefined4 staleArgR7;
   undefined4 staleArgR8;
   uint uVar6;
   undefined4 staleArgR10;
-  uint uVar7;
+  uint bitIndex;
   undefined1 textBuffer [256];
-  undefined4 local_28;
+  undefined4 intToDoubleHi;
   int fractionScale;
-  undefined4 local_20;
+  undefined4 intToDoubleHi2;
   uint integerField;
-  undefined4 local_18;
+  undefined4 intToDoubleHi3;
   uint fractionField;
   
   fractionScale = 1 << (fractionBits & 0x3f);
-  local_28 = 0x43300000;
+  intToDoubleHi = 0x43300000;
   integerField = 0;
   if (1 < integerBits) {
-    iVar3 = integerBits - 1;
+    integerBitsLeft = integerBits - 1;
     integerField = 0;
-    if (iVar3 != 0) {
+    if (integerBitsLeft != 0) {
       loopCounterB = 0;
       integerField = 0;
       do {
-        uVar7 = loopCounterB & 0x3f;
+        bitIndex = loopCounterB & 0x3f;
         loopCounterB = loopCounterB + 1;
-        integerField = integerField | 1 << uVar7;
-        iVar3 = iVar3 + -1;
-      } while (iVar3 != 0);
+        integerField = integerField | 1 << bitIndex;
+        integerBitsLeft = integerBitsLeft + -1;
+      } while (integerBitsLeft != 0);
       integerField = integerField << (fractionBits & 0x3f);
     }
     integerField = fieldBits & integerField;
   }
-  local_20 = 0x43300000;
+  intToDoubleHi2 = 0x43300000;
   integerField = integerField >> (fractionBits & 0x3f);
   integerPart = (float)((double)CONCAT44(0x43300000,integerField) - DOUBLE_001aa250);
   if ((fieldBits & 1 << ((fractionBits + integerBits) - 1 & 0x3f)) != 0) {
@@ -3599,16 +3599,16 @@ void ildisPrintFixedPoint(undefined4 disassembler,uint fieldBits,uint integerBit
   if (fractionBits != 0) {
     loopCounter = 0;
     uVar6 = 0;
-    uVar7 = fractionBits;
+    bitIndex = fractionBits;
     do {
-      uVar2 = loopCounter & 0x3f;
+      fractionBitIndex = loopCounter & 0x3f;
       loopCounter = loopCounter + 1;
-      uVar6 = uVar6 | 1 << uVar2;
-      uVar7 = uVar7 - 1;
-    } while (uVar7 != 0);
+      uVar6 = uVar6 | 1 << fractionBitIndex;
+      bitIndex = bitIndex - 1;
+    } while (bitIndex != 0);
     fractionField = uVar6 & fieldBits;
   }
-  local_18 = 0x43300000;
+  intToDoubleHi3 = 0x43300000;
   textBufferPtr = textBuffer;
   ((char * (*)())FUN_000cdc3c)(disassembler,10,textBufferPtr,
                (double)((float)(DOUBLE_001aa200 /

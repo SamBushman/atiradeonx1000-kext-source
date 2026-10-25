@@ -1,0 +1,17 @@
+func	FUN_0002fac0	gld_selectTextureHardwareFormat	INFERRED	chooses the hardware format index (texture+0x38) from the image flags, internal format, external format and data type; drawable-backed images ask the kernel for the surface format (selector 6) and map it with window_mode_to_ati_format
+local	FUN_0002fac0	param_1	ctx	CONFIRMED	GLDContext
+local	FUN_0002fac0	puVar13	texImages	CONFIRMED	texture+0x30: the image-level record array
+local	FUN_0002fac0	uVar1	imageFlags	INFERRED	texImages[0]: 0x200 = nothing to select, 0x400 = window/drawable-backed image, low nibble = target kind
+local	FUN_0002fac0	uVar2	externalFormat	INFERRED	texImages[0x2c]: GL pixel format of the uploaded data (0x1900.., 0x80e1 BGRA, 0x85b9)
+local	FUN_0002fac0	uVar3	internalFormat	INFERRED	texImages[0x2a]: GL internal format requested by the application
+local	FUN_0002fac0	uVar4	dataType	INFERRED	texImages[0x2d]: GL data type (packed types 0x8032..0x8368)
+local	FUN_0002fac0	uVar5	surfaceFormatNibble	INFERRED	ctx renderFlags & 0xf: the drawable's colour format nibble (unused)
+local	FUN_0002fac0	cVar6	typeFormatAlt	INFERRED	hardware format index chosen from the packed data type, alternative used for the 0x2a10 internal format
+local	FUN_0002fac0	cVar10	typeFormatB	INFERRED	hardware format index chosen from the data type (second candidate)
+local	FUN_0002fac0	cVar11	typeFormatA	INFERRED	hardware format index chosen from the data type / format (first candidate)
+local	FUN_0002fac0	cVar12	internalFormatCode	INFERRED	hardware format index chosen from the internal format
+local	FUN_0002fac0	cVar7	hwFormatIndex	INFERRED	final hardware format index written to texture+0x38
+local	FUN_0002fac0	local_38	scalarIn0	INFERRED	scalar 0 of kernel selector 6 get_surface_info: the drawable word
+local	FUN_0002fac0	local_34	outputCount	INFERRED	in/out count (3) of kernel selector 6
+local	FUN_0002fac0	iVar8	ioStatus	INFERRED	kernel call status; non-zero = no surface info
+local	FUN_0002fac0	local_30	surfaceInfoOut	INFERRED	output words of get_surface_info; word 0 holds the drawable's format bits passed to window_mode_to_ati_format

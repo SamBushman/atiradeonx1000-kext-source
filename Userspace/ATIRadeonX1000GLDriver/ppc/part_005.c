@@ -69,353 +69,353 @@ int FUN_0002ddf0(ctxSaved, texture)
   undefined4 ctxSaved;
   int *texture;
 {
-  byte bVar1;
-  byte bVar2;
-  byte bVar3;
-  ushort uVar4;
-  ushort uVar5;
-  ushort uVar6;
-  ushort uVar7;
-  ushort uVar8;
-  ushort uVar9;
-  short sVar10;
-  undefined2 uVar11;
-  float fVar12;
-  undefined *puVar13;
-  uint uVar14;
-  uint uVar15;
-  uint uVar16;
-  uint uVar17;
-  uint uVar18;
-  uint uVar19;
-  uint uVar20;
-  uint uVar21;
-  uint uVar22;
-  uint uVar23;
-  char cVar24;
+  byte scratchFlag1;
+  byte scratchFlag2;
+  byte scratchFlag3;
+  ushort scratchUint4;
+  ushort scratchUint5;
+  ushort scratchUint6;
+  ushort scratchUint7;
+  ushort scratchUint8;
+  ushort scratchUint9;
+  short scratchShort10;
+  undefined2 scratchUint11;
+  float scratchFloat12;
+  undefined *scratchPtr13;
+  uint scratchUint14;
+  uint scratchUint15;
+  uint scratchUint16;
+  uint scratchUint17;
+  uint scratchUint18;
+  uint scratchUint19;
+  uint scratchUint20;
+  uint scratchUint21;
+  uint scratchUint22;
+  uint scratchUint23;
+  char scratchChar24;
   byte textureTarget;
-  int iVar26;
+  int scratchInt26;
   ushort *texImages;
-  char cVar29;
-  int iVar28;
+  char scratchChar29;
+  int scratchInt28;
   int *hwState;
-  double dVar31;
-  double dVar32;
+  double scratchDouble31;
+  double scratchDouble32;
   
   hwState = texture + 0xf;
   texture[0x2e] = (int)texture;
-  dVar31 = DOUBLE_001aa240;
+  scratchDouble31 = DOUBLE_001aa240;
   texImages = (ushort *)texture[0xc];
   *(byte *)((int)texture + 0x3d) = (byte)(-(uint)texImages[0x2e] >> 0x1f);
-  uVar15 = (uint)(int)((double)*(float *)(texImages + 0x18) + dVar31);
-  uVar17 = (uint)(int)((double)*(float *)(texImages + 0x1a) + dVar31);
-  uVar14 = (uint)*(byte *)(texImages + 0x2f);
-  uVar16 = uVar15 + uVar14;
-  if ((int)uVar16 < 0) {
-    uVar16 = 0;
+  scratchUint15 = (uint)(int)((double)*(float *)(texImages + 0x18) + scratchDouble31);
+  scratchUint17 = (uint)(int)((double)*(float *)(texImages + 0x1a) + scratchDouble31);
+  scratchUint14 = (uint)*(byte *)(texImages + 0x2f);
+  scratchUint16 = scratchUint15 + scratchUint14;
+  if ((int)scratchUint16 < 0) {
+    scratchUint16 = 0;
   }
-  if ((int)uVar14 < (int)uVar16) {
-    uVar14 = uVar16;
+  if ((int)scratchUint14 < (int)scratchUint16) {
+    scratchUint14 = scratchUint16;
   }
-  uVar22 = (uint)(short)texImages[0x1e];
-  uVar16 = uVar17 + uVar22;
-  if (((int)uVar16 < (int)uVar14) && (uVar14 = uVar22, (int)uVar22 < (int)uVar16)) {
-    uVar14 = uVar16;
+  scratchUint22 = (uint)(short)texImages[0x1e];
+  scratchUint16 = scratchUint17 + scratchUint22;
+  if (((int)scratchUint16 < (int)scratchUint14) && (scratchUint14 = scratchUint22, (int)scratchUint22 < (int)scratchUint16)) {
+    scratchUint14 = scratchUint16;
   }
-  uVar16 = (uint)*(byte *)((int)texImages + 0x5f);
-  if ((int)uVar14 <= (int)(uint)*(byte *)((int)texImages + 0x5f)) {
-    uVar16 = uVar14;
+  scratchUint16 = (uint)*(byte *)((int)texImages + 0x5f);
+  if ((int)scratchUint14 <= (int)(uint)*(byte *)((int)texImages + 0x5f)) {
+    scratchUint16 = scratchUint14;
   }
-  if ((int)uVar15 < 0) {
-    uVar15 = 0;
+  if ((int)scratchUint15 < 0) {
+    scratchUint15 = 0;
   }
-  if ((int)uVar15 < (int)uVar17) {
-    uVar17 = uVar15;
+  if ((int)scratchUint15 < (int)scratchUint17) {
+    scratchUint17 = scratchUint15;
   }
-  if ((int)((int)(short)texImages[0x1f] - uVar22) < (int)uVar17) {
-    uVar17 = (int)(short)texImages[0x1f] - uVar22;
+  if ((int)((int)(short)texImages[0x1f] - scratchUint22) < (int)scratchUint17) {
+    scratchUint17 = (int)(short)texImages[0x1f] - scratchUint22;
   }
-  uVar15 = uVar17;
-  if ((int)(uint)*(byte *)(texImages + 0x32) < (int)uVar17) {
-    uVar15 = (uint)*(byte *)(texImages + 0x32);
+  scratchUint15 = scratchUint17;
+  if ((int)(uint)*(byte *)(texImages + 0x32) < (int)scratchUint17) {
+    scratchUint15 = (uint)*(byte *)(texImages + 0x32);
   }
-  if ((int)uVar15 < 0) {
-    uVar15 = 0;
+  if ((int)scratchUint15 < 0) {
+    scratchUint15 = 0;
   }
-  uVar15 = uVar15 & 0xff;
-  uVar14 = uVar17;
-  if ((int)(uint)*(byte *)((int)texImages + 0x65) < (int)uVar17) {
-    uVar14 = (uint)*(byte *)((int)texImages + 0x65);
+  scratchUint15 = scratchUint15 & 0xff;
+  scratchUint14 = scratchUint17;
+  if ((int)(uint)*(byte *)((int)texImages + 0x65) < (int)scratchUint17) {
+    scratchUint14 = (uint)*(byte *)((int)texImages + 0x65);
   }
-  if ((int)uVar14 < 0) {
-    uVar14 = 0;
+  if ((int)scratchUint14 < 0) {
+    scratchUint14 = 0;
   }
-  uVar14 = uVar14 & 0xff;
-  if ((int)(uint)*(byte *)(texImages + 0x33) < (int)uVar17) {
-    uVar17 = (uint)*(byte *)(texImages + 0x33);
+  scratchUint14 = scratchUint14 & 0xff;
+  if ((int)(uint)*(byte *)(texImages + 0x33) < (int)scratchUint17) {
+    scratchUint17 = (uint)*(byte *)(texImages + 0x33);
   }
-  if ((int)uVar17 < 0) {
-    uVar17 = 0;
+  if ((int)scratchUint17 < 0) {
+    scratchUint17 = 0;
   }
-  uVar4 = *(ushort *)(texture + 0x1d);
-  bVar1 = *(byte *)((int)texture + 0x73);
-  uVar5 = *(ushort *)((int)texture + 0x7a);
-  uVar18 = (uint)*(ushort *)((int)texture + 0x3e);
-  uVar6 = *(ushort *)(texture + 0x1f);
-  uVar7 = *(ushort *)((int)texture + 0x76);
-  uVar22 = (uint)uVar7;
-  uVar8 = *(ushort *)(texture + 0x1e);
-  uVar21 = (uint)uVar8;
+  scratchUint4 = *(ushort *)(texture + 0x1d);
+  scratchFlag1 = *(byte *)((int)texture + 0x73);
+  scratchUint5 = *(ushort *)((int)texture + 0x7a);
+  scratchUint18 = (uint)*(ushort *)((int)texture + 0x3e);
+  scratchUint6 = *(ushort *)(texture + 0x1f);
+  scratchUint7 = *(ushort *)((int)texture + 0x76);
+  scratchUint22 = (uint)scratchUint7;
+  scratchUint8 = *(ushort *)(texture + 0x1e);
+  scratchUint21 = (uint)scratchUint8;
   *(undefined1 *)((int)texture + 0x6e) = *(undefined1 *)(texImages + 0x35);
-  bVar2 = *(byte *)(texture + 0x1b);
+  scratchFlag2 = *(byte *)(texture + 0x1b);
   *(ushort *)(texture + 0x1d) = texImages[1];
-  uVar20 = (uint)*(byte *)(texture + 0xe);
+  scratchUint20 = (uint)*(byte *)(texture + 0xe);
   *(byte *)((int)texture + 0x73) = *(byte *)(texture + 0xe);
-  uVar17 = (uint)*(byte *)(texImages + 0x33) - (uVar17 & 0xff);
-  *(short *)((int)texture + 0x7a) = (short)uVar17;
-  uVar9 = texImages[1];
-  uVar19 = (uint)uVar9;
+  scratchUint17 = (uint)*(byte *)(texImages + 0x33) - (scratchUint17 & 0xff);
+  *(short *)((int)texture + 0x7a) = (short)scratchUint17;
+  scratchUint9 = texImages[1];
+  scratchUint19 = (uint)scratchUint9;
   *(ushort *)(texture + 0x1f) = *(ushort *)((int)texture + 0x3e);
-  *(ushort *)(texture + 0x1d) = uVar9;
+  *(ushort *)(texture + 0x1d) = scratchUint9;
   textureTarget = *(byte *)(texture[0xc] + 1) & 0xf;
   *(byte *)(texture + 0x1b) = textureTarget;
-  dVar31 = DOUBLE_001aa250;
+  scratchDouble31 = DOUBLE_001aa250;
   switch(textureTarget) {
   case 0:
-    uVar22 = 1 << (*(byte *)(texImages + 0x32) - uVar15 & 0x3f);
-    *(short *)((int)texture + 0x76) = (short)uVar22;
-    bVar3 = *(byte *)((int)texImages + 0x65);
+    scratchUint22 = 1 << (*(byte *)(texImages + 0x32) - scratchUint15 & 0x3f);
+    *(short *)((int)texture + 0x76) = (short)scratchUint22;
+    scratchFlag3 = *(byte *)((int)texImages + 0x65);
     *(undefined1 *)((int)texture + 0x6d) = 2;
-    uVar21 = 1 << (bVar3 - uVar14 & 0x3f);
-    *(short *)(texture + 0x1e) = (short)uVar21;
-    texture[0x20] = (int)GH_F2U((float)((double)CONCAT44(0x43300000,uVar22 & 0xffff) - dVar31));
-    texture[0x21] = (int)GH_F2U((float)((double)CONCAT44(0x43300000,uVar21 & 0xffff) - dVar31));
+    scratchUint21 = 1 << (scratchFlag3 - scratchUint14 & 0x3f);
+    *(short *)(texture + 0x1e) = (short)scratchUint21;
+    texture[0x20] = (int)GH_F2U((float)((double)CONCAT44(0x43300000,scratchUint22 & 0xffff) - scratchDouble31));
+    texture[0x21] = (int)GH_F2U((float)((double)CONCAT44(0x43300000,scratchUint21 & 0xffff) - scratchDouble31));
     break;
   case 1:
-    uVar22 = 1 << (*(byte *)(texImages + 0x32) - uVar15 & 0x3f);
-    *(short *)((int)texture + 0x76) = (short)uVar22;
-    bVar3 = *(byte *)((int)texImages + 0x65);
+    scratchUint22 = 1 << (*(byte *)(texImages + 0x32) - scratchUint15 & 0x3f);
+    *(short *)((int)texture + 0x76) = (short)scratchUint22;
+    scratchFlag3 = *(byte *)((int)texImages + 0x65);
     *(undefined1 *)((int)texture + 0x6d) = 3;
-    uVar21 = 1 << (bVar3 - uVar14 & 0x3f);
-    *(short *)(texture + 0x1e) = (short)uVar21;
-    texture[0x20] = (int)GH_F2U((float)((double)CONCAT44(0x43300000,uVar22 & 0xffff) - dVar31));
-    texture[0x21] = (int)GH_F2U((float)((double)CONCAT44(0x43300000,uVar21 & 0xffff) - dVar31));
+    scratchUint21 = 1 << (scratchFlag3 - scratchUint14 & 0x3f);
+    *(short *)(texture + 0x1e) = (short)scratchUint21;
+    texture[0x20] = (int)GH_F2U((float)((double)CONCAT44(0x43300000,scratchUint22 & 0xffff) - scratchDouble31));
+    texture[0x21] = (int)GH_F2U((float)((double)CONCAT44(0x43300000,scratchUint21 & 0xffff) - scratchDouble31));
     break;
   case 2:
-    uVar22 = (uint)texImages[uVar16 * 0xc + 0x52] +
-             (uint)*(byte *)(texImages + uVar16 * 0xc + 0x55) * -2;
-    *(short *)((int)texture + 0x76) = (short)uVar22;
-    bVar3 = *(byte *)(texImages + uVar16 * 0xc + 0x55);
-    uVar9 = texImages[uVar16 * 0xc + 0x53];
+    scratchUint22 = (uint)texImages[scratchUint16 * 0xc + 0x52] +
+             (uint)*(byte *)(texImages + scratchUint16 * 0xc + 0x55) * -2;
+    *(short *)((int)texture + 0x76) = (short)scratchUint22;
+    scratchFlag3 = *(byte *)(texImages + scratchUint16 * 0xc + 0x55);
+    scratchUint9 = texImages[scratchUint16 * 0xc + 0x53];
     *(undefined1 *)((int)texture + 0x6d) = 2;
-    uVar21 = (uint)uVar9 + (uint)bVar3 * -2;
-    *(short *)(texture + 0x1e) = (short)uVar21;
-    texture[0x20] = (int)GH_F2U((float)((double)CONCAT44(0x43300000,uVar22 & 0xffff) - dVar31));
-    texture[0x21] = (int)GH_F2U((float)((double)CONCAT44(0x43300000,uVar21 & 0xffff) - dVar31));
+    scratchUint21 = (uint)scratchUint9 + (uint)scratchFlag3 * -2;
+    *(short *)(texture + 0x1e) = (short)scratchUint21;
+    texture[0x20] = (int)GH_F2U((float)((double)CONCAT44(0x43300000,scratchUint22 & 0xffff) - scratchDouble31));
+    texture[0x21] = (int)GH_F2U((float)((double)CONCAT44(0x43300000,scratchUint21 & 0xffff) - scratchDouble31));
     break;
   case 3:
-    iVar26 = ((int (*)())gldTextureHasNonPowerOfTwoSize2)(texture,uVar18,uVar19,uVar22,uVar20,uVar21);
-    if (iVar26 == 0) {
-      *(short *)((int)texture + 0x76) = (short)(1 << (*(byte *)(texImages + 0x32) - uVar15 & 0x3f));
-      *(short *)(texture + 0x1e) = (short)(1 << (*(byte *)((int)texImages + 0x65) - uVar14 & 0x3f));
+    scratchInt26 = ((int (*)())gldTextureHasNonPowerOfTwoSize2)(texture,scratchUint18,scratchUint19,scratchUint22,scratchUint20,scratchUint21);
+    if (scratchInt26 == 0) {
+      *(short *)((int)texture + 0x76) = (short)(1 << (*(byte *)(texImages + 0x32) - scratchUint15 & 0x3f));
+      *(short *)(texture + 0x1e) = (short)(1 << (*(byte *)((int)texImages + 0x65) - scratchUint14 & 0x3f));
     }
     else {
       *(ushort *)((int)texture + 0x76) =
-           texImages[uVar16 * 0xc + 0x52] + (ushort)*(byte *)(texImages + uVar16 * 0xc + 0x55) * -2;
+           texImages[scratchUint16 * 0xc + 0x52] + (ushort)*(byte *)(texImages + scratchUint16 * 0xc + 0x55) * -2;
       *(ushort *)(texture + 0x1e) =
-           texImages[uVar16 * 0xc + 0x53] + (ushort)*(byte *)(texImages + uVar16 * 0xc + 0x55) * -2;
+           texImages[scratchUint16 * 0xc + 0x53] + (ushort)*(byte *)(texImages + scratchUint16 * 0xc + 0x55) * -2;
     }
-    dVar31 = DOUBLE_001aa250;
-    uVar22 = (uint)*(ushort *)((int)texture + 0x76);
-    uVar21 = (uint)*(ushort *)(texture + 0x1e);
+    scratchDouble31 = DOUBLE_001aa250;
+    scratchUint22 = (uint)*(ushort *)((int)texture + 0x76);
+    scratchUint21 = (uint)*(ushort *)(texture + 0x1e);
     *(undefined1 *)((int)texture + 0x6d) = 2;
-    uVar20 = (uint)*(byte *)((int)texture + 0x73);
+    scratchUint20 = (uint)*(byte *)((int)texture + 0x73);
     textureTarget = *(byte *)(texture + 0x1b);
-    uVar17 = (uint)*(ushort *)((int)texture + 0x7a);
-    uVar19 = (uint)*(ushort *)(texture + 0x1d);
-    uVar18 = (uint)*(ushort *)(texture + 0x1f);
+    scratchUint17 = (uint)*(ushort *)((int)texture + 0x7a);
+    scratchUint19 = (uint)*(ushort *)(texture + 0x1d);
+    scratchUint18 = (uint)*(ushort *)(texture + 0x1f);
     texture[0x21] =
-         (int)GH_F2U((float)((double)CONCAT44(0x43300000,(uint)*(ushort *)(texture + 0x1e)) - dVar31));
+         (int)GH_F2U((float)((double)CONCAT44(0x43300000,(uint)*(ushort *)(texture + 0x1e)) - scratchDouble31));
     texture[0x20] =
-         (int)GH_F2U((float)((double)CONCAT44(0x43300000,(uint)*(ushort *)((int)texture + 0x76)) - dVar31));
+         (int)GH_F2U((float)((double)CONCAT44(0x43300000,(uint)*(ushort *)((int)texture + 0x76)) - scratchDouble31));
     break;
   case 4:
-    iVar26 = ((int (*)())gldTextureHasNonPowerOfTwoSize2)(texture,uVar18,uVar19,uVar22,uVar20,uVar21);
-    if (iVar26 == 0) {
-      *(short *)((int)texture + 0x76) = (short)(1 << (*(byte *)(texImages + 0x32) - uVar15 & 0x3f));
+    scratchInt26 = ((int (*)())gldTextureHasNonPowerOfTwoSize2)(texture,scratchUint18,scratchUint19,scratchUint22,scratchUint20,scratchUint21);
+    if (scratchInt26 == 0) {
+      *(short *)((int)texture + 0x76) = (short)(1 << (*(byte *)(texImages + 0x32) - scratchUint15 & 0x3f));
     }
     else {
       *(ushort *)((int)texture + 0x76) =
-           texImages[uVar16 * 0xc + 0x52] + (ushort)*(byte *)(texImages + uVar16 * 0xc + 0x55) * -2;
+           texImages[scratchUint16 * 0xc + 0x52] + (ushort)*(byte *)(texImages + scratchUint16 * 0xc + 0x55) * -2;
     }
-    uVar22 = (uint)*(ushort *)((int)texture + 0x76);
-    uVar21 = 1;
+    scratchUint22 = (uint)*(ushort *)((int)texture + 0x76);
+    scratchUint21 = 1;
     *(undefined2 *)(texture + 0x1e) = 1;
     texture[0x21] = 0x3f800000;
     *(undefined1 *)((int)texture + 0x6d) = 1;
-    uVar20 = (uint)*(byte *)((int)texture + 0x73);
+    scratchUint20 = (uint)*(byte *)((int)texture + 0x73);
     textureTarget = *(byte *)(texture + 0x1b);
-    uVar17 = (uint)*(ushort *)((int)texture + 0x7a);
-    uVar19 = (uint)*(ushort *)(texture + 0x1d);
-    uVar18 = (uint)*(ushort *)(texture + 0x1f);
+    scratchUint17 = (uint)*(ushort *)((int)texture + 0x7a);
+    scratchUint19 = (uint)*(ushort *)(texture + 0x1d);
+    scratchUint18 = (uint)*(ushort *)(texture + 0x1f);
     texture[0x20] =
          (int)GH_F2U((float)((double)CONCAT44(0x43300000,(uint)*(ushort *)((int)texture + 0x76)) -
                      DOUBLE_001aa250));
   }
-  if (((((bVar1 != uVar20) || (bVar2 != textureTarget)) || ((uint)uVar7 != (uVar22 & 0xffff))) ||
-      (((uint)uVar8 != (uVar21 & 0xffff) || ((uint)uVar5 != (uVar17 & 0xffff))))) ||
-     ((uVar4 != uVar19 || (uVar6 != uVar18)))) {
+  if (((((scratchFlag1 != scratchUint20) || (scratchFlag2 != textureTarget)) || ((uint)scratchUint7 != (scratchUint22 & 0xffff))) ||
+      (((uint)scratchUint8 != (scratchUint21 & 0xffff) || ((uint)scratchUint5 != (scratchUint17 & 0xffff))))) ||
+     ((scratchUint4 != scratchUint19 || (scratchUint6 != scratchUint18)))) {
     *(undefined1 *)((int)texture + 0x71) = 0;
-    uVar14 = texture[0x17];
+    scratchUint14 = texture[0x17];
     texture[0x15] = texture[0x15] & 0xbfdfffff;
-    uVar23 = ((uVar21 & 0xffff) - 1) * 0x20 & 0x10000 |
-             ((uVar22 & 0xffff) - 1) * 0x10 & 0x8000 | uVar18 - 1 & 0x3fff;
-    texture[0x17] = uVar14 & 0xfffffe1f;
-    texture[0x18] = uVar23;
-    puVar13 = PTR_DAT_001e88c8;
+    scratchUint23 = ((scratchUint21 & 0xffff) - 1) * 0x20 & 0x10000 |
+             ((scratchUint22 & 0xffff) - 1) * 0x10 & 0x8000 | scratchUint18 - 1 & 0x3fff;
+    texture[0x17] = scratchUint14 & 0xfffffe1f;
+    texture[0x18] = scratchUint23;
+    scratchPtr13 = PTR_DAT_001e88c8;
     texture[0x16] =
-         -uVar18 & 0x80000000 |
-         (uVar17 & 0xf) << 0x16 |
-         (uVar21 - 1) * 0x800 & 0x3ff800 | uVar22 - 1 & 0x7ff | texture[0x16] & 0x40000000U;
-    uVar15 = *(uint *)(puVar13 + uVar20 * 0x24 + 0x1c) >> 7 & 0x1f;
-    texture[0x17] = uVar15 | uVar14 & 0xfffffe00;
-    if (uVar20 == 0x29) {
-      texture[0x18] = uVar23 | 0x4000;
-      texture[0x17] = uVar14 & 0xffe00000 | 6;
+         -scratchUint18 & 0x80000000 |
+         (scratchUint17 & 0xf) << 0x16 |
+         (scratchUint21 - 1) * 0x800 & 0x3ff800 | scratchUint22 - 1 & 0x7ff | texture[0x16] & 0x40000000U;
+    scratchUint15 = *(uint *)(scratchPtr13 + scratchUint20 * 0x24 + 0x1c) >> 7 & 0x1f;
+    texture[0x17] = scratchUint15 | scratchUint14 & 0xfffffe00;
+    if (scratchUint20 == 0x29) {
+      texture[0x18] = scratchUint23 | 0x4000;
+      texture[0x17] = scratchUint14 & 0xffe00000 | 6;
     }
     else {
-      uVar17 = (*(uint *)(puVar13 + uVar20 * 0x24 + 0x1c) & 0x70) << 5;
-      texture[0x17] = uVar17 | uVar15 | uVar14 & 0xfffff000;
-      uVar22 = (*(uint *)(puVar13 + uVar20 * 0x24 + 0x1c) & 0xe) << 0xb;
-      texture[0x17] = uVar22 | uVar17 | uVar15 | uVar14 & 0xffff8000;
-      uVar18 = *(uint *)(puVar13 + uVar20 * 0x24 + 0x20) >> 0xe & 0x38000;
-      texture[0x17] = uVar18 | uVar22 | uVar17 | uVar15 | uVar14 & 0xfffc0000;
+      scratchUint17 = (*(uint *)(scratchPtr13 + scratchUint20 * 0x24 + 0x1c) & 0x70) << 5;
+      texture[0x17] = scratchUint17 | scratchUint15 | scratchUint14 & 0xfffff000;
+      scratchUint22 = (*(uint *)(scratchPtr13 + scratchUint20 * 0x24 + 0x1c) & 0xe) << 0xb;
+      texture[0x17] = scratchUint22 | scratchUint17 | scratchUint15 | scratchUint14 & 0xffff8000;
+      scratchUint18 = *(uint *)(scratchPtr13 + scratchUint20 * 0x24 + 0x20) >> 0xe & 0x38000;
+      texture[0x17] = scratchUint18 | scratchUint22 | scratchUint17 | scratchUint15 | scratchUint14 & 0xfffc0000;
       texture[0x17] =
-           *(uint *)(puVar13 + uVar20 * 0x24 + 0x20) >> 8 & 0x1c0000 |
-           uVar18 | uVar22 | uVar17 | uVar15 | uVar14 & 0xffe00000;
+           *(uint *)(scratchPtr13 + scratchUint20 * 0x24 + 0x20) >> 8 & 0x1c0000 |
+           scratchUint18 | scratchUint22 | scratchUint17 | scratchUint15 | scratchUint14 & 0xffe00000;
     }
-    uVar17 = texture[0x17];
-    uVar15 = (*(uint *)(puVar13 + uVar20 * 0x24 + 0x20) >> 0x19 & 1) << 0x16;
-    texture[0x17] = uVar15 | uVar17 & 0xff3fffff;
-    *(byte *)((int)texture + 0x71) = (puVar13[uVar20 * 0x24 + 0x20] ^ 1) & 1;
+    scratchUint17 = texture[0x17];
+    scratchUint15 = (*(uint *)(scratchPtr13 + scratchUint20 * 0x24 + 0x20) >> 0x19 & 1) << 0x16;
+    texture[0x17] = scratchUint15 | scratchUint17 & 0xff3fffff;
+    *(byte *)((int)texture + 0x71) = (scratchPtr13[scratchUint20 * 0x24 + 0x20] ^ 1) & 1;
     if (textureTarget == 0) {
-      texture[0x17] = uVar15 | uVar17 & 0xf93fffff | 0x4000000;
+      texture[0x17] = scratchUint15 | scratchUint17 & 0xf93fffff | 0x4000000;
     }
     else if (*(char *)((int)texture + 0x6d) == '\x03') {
-      texture[0x17] = uVar15 | uVar17 & 0xf93fffff | 0x2000000;
+      texture[0x17] = scratchUint15 | scratchUint17 & 0xf93fffff | 0x2000000;
     }
     else {
-      texture[0x17] = uVar15 | uVar17 & 0xf93fffff;
+      texture[0x17] = scratchUint15 | scratchUint17 & 0xf93fffff;
     }
-    if (uVar19 == 0x1907) {
+    if (scratchUint19 == 0x1907) {
       texture[0x17] = texture[0x17] & 0xfffff1ffU | 0xa00;
     }
   }
-  uVar15 = (uint)texture[0x32] >> 0x16;
+  scratchUint15 = (uint)texture[0x32] >> 0x16;
   if (*texture == 0) {
     if ((*texImages & 0x400) == 0) {
-      texture[0x10] = uVar15 << 0x1e;
+      texture[0x10] = scratchUint15 << 0x1e;
     }
     else {
-      texture[0x10] = uVar15 << 0x1e | uVar16;
+      texture[0x10] = scratchUint15 << 0x1e | scratchUint16;
     }
   }
   else {
-    texture[0x10] = uVar15 << 0x1e | *(uint *)(uVar16 * 0x20 + *texture + 0x48);
+    texture[0x10] = scratchUint15 << 0x1e | *(uint *)(scratchUint16 * 0x20 + *texture + 0x48);
   }
-  iVar26 = texture[0xc];
-  cVar29 = *(char *)((int)texture + 0x72);
-  if (GH_U2F((unsigned int)(texture[0x24])) != *(float *)(iVar26 + 0x2c)) {
-    texture[0x24] = (int)GH_F2U(*(float *)(iVar26 + 0x2c));
-    dVar31 = (double)*(float *)(iVar26 + 0x2c);
-    if (DOUBLE_001aa1e8 <= dVar31) {
-      iVar28 = (int)(dVar31 - DOUBLE_001aa1e8) + -0x80000000;
+  scratchInt26 = texture[0xc];
+  scratchChar29 = *(char *)((int)texture + 0x72);
+  if (GH_U2F((unsigned int)(texture[0x24])) != *(float *)(scratchInt26 + 0x2c)) {
+    texture[0x24] = (int)GH_F2U(*(float *)(scratchInt26 + 0x2c));
+    scratchDouble31 = (double)*(float *)(scratchInt26 + 0x2c);
+    if (DOUBLE_001aa1e8 <= scratchDouble31) {
+      scratchInt28 = (int)(scratchDouble31 - DOUBLE_001aa1e8) + -0x80000000;
     }
     else {
-      iVar28 = (int)*(float *)(iVar26 + 0x2c);
+      scratchInt28 = (int)*(float *)(scratchInt26 + 0x2c);
     }
-    uVar15 = *(uint *)(&DAT_001aa510 + iVar28 * 4);
-    if (((uint)texture[0x14] >> 0x15 & 7) != uVar15) {
+    scratchUint15 = *(uint *)(&DAT_001aa510 + scratchInt28 * 4);
+    if (((uint)texture[0x14] >> 0x15 & 7) != scratchUint15) {
       *(undefined2 *)((int)texture + 0xa2) = 0xffff;
       *(undefined2 *)(texture + 0x28) = 0xffff;
-      texture[0x14] = (uVar15 & 7) << 0x15 | texture[0x14] & 0xff1fffffU;
+      texture[0x14] = (scratchUint15 & 7) << 0x15 | texture[0x14] & 0xff1fffffU;
     }
   }
-  uVar4 = *(ushort *)(iVar26 + 0x16);
-  if ((uint)*(ushort *)(texture + 0x28) == (uint)uVar4) {
-    uVar15 = (uint)*(ushort *)(iVar26 + 0x18);
-    if (*(ushort *)((int)texture + 0xa2) == uVar15) {
-      cVar24 = *(char *)((int)texture + 0x71);
-      if (cVar24 == *(char *)(texture + 0x1c)) goto LAB_0002e708;
+  scratchUint4 = *(ushort *)(scratchInt26 + 0x16);
+  if ((uint)*(ushort *)(texture + 0x28) == (uint)scratchUint4) {
+    scratchUint15 = (uint)*(ushort *)(scratchInt26 + 0x18);
+    if (*(ushort *)((int)texture + 0xa2) == scratchUint15) {
+      scratchChar24 = *(char *)((int)texture + 0x71);
+      if (scratchChar24 == *(char *)(texture + 0x1c)) goto LAB_0002e708;
       goto LAB_0002e690;
     }
     if (*(char *)((int)texture + 0x71) != *(char *)(texture + 0x1c)) goto LAB_0002e690;
 LAB_0002e6d8:
-    *(short *)((int)texture + 0xa2) = (short)uVar15;
-    FUN_0002d210(hwState,uVar15);
-    cVar24 = *(char *)((int)texture + 0x71);
+    *(short *)((int)texture + 0xa2) = (short)scratchUint15;
+    FUN_0002d210(hwState,scratchUint15);
+    scratchChar24 = *(char *)((int)texture + 0x71);
   }
   else {
 LAB_0002e690:
-    *(ushort *)(texture + 0x28) = uVar4;
-    FUN_0002d030(hwState,(uint)uVar4);
+    *(ushort *)(texture + 0x28) = scratchUint4;
+    FUN_0002d030(hwState,(uint)scratchUint4);
     *(byte *)((int)texture + 0x3d) = (byte)(-(uint)*(ushort *)(texture[0xc] + 0x5c) >> 0x1f);
-    uVar15 = (uint)*(ushort *)(iVar26 + 0x18);
-    if ((*(ushort *)((int)texture + 0xa2) != uVar15) ||
-       (cVar24 = *(char *)((int)texture + 0x71), cVar24 != *(char *)(texture + 0x1c)))
+    scratchUint15 = (uint)*(ushort *)(scratchInt26 + 0x18);
+    if ((*(ushort *)((int)texture + 0xa2) != scratchUint15) ||
+       (scratchChar24 = *(char *)((int)texture + 0x71), scratchChar24 != *(char *)(texture + 0x1c)))
     goto LAB_0002e6d8;
   }
-  if (cVar29 != *(char *)((int)texture + 0x72)) {
+  if (scratchChar29 != *(char *)((int)texture + 0x72)) {
     *(undefined2 *)((int)texture + 0x9e) = 0xffff;
     *(undefined2 *)((int)texture + 0x9a) = 0xffff;
     *(undefined2 *)(texture + 0x27) = 0xffff;
-    cVar29 = *(char *)((int)texture + 0x72);
+    scratchChar29 = *(char *)((int)texture + 0x72);
   }
 LAB_0002e708:
-  *(char *)(texture + 0x1c) = cVar24;
-  uVar15 = (uint)*(ushort *)(iVar26 + 0x10);
-  if (*(ushort *)((int)texture + 0x9a) != uVar15) {
-    *(ushort *)((int)texture + 0x9a) = *(ushort *)(iVar26 + 0x10);
-    if (cVar29 == '\0') {
+  *(char *)(texture + 0x1c) = scratchChar24;
+  scratchUint15 = (uint)*(ushort *)(scratchInt26 + 0x10);
+  if (*(ushort *)((int)texture + 0x9a) != scratchUint15) {
+    *(ushort *)((int)texture + 0x9a) = *(ushort *)(scratchInt26 + 0x10);
+    if (scratchChar29 == '\0') {
       texture[0x14] =
-           (uVar15 * 0x29 >> 0x10 & 1 | uVar15 * 0x97 >> 9 & 2 | uVar15 * 0x113 >> 7 & 4) ^ 2 |
+           (scratchUint15 * 0x29 >> 0x10 & 1 | scratchUint15 * 0x97 >> 9 & 2 | scratchUint15 * 0x113 >> 7 & 4) ^ 2 |
            texture[0x14] & 0xfffffff8U;
     }
     else {
       texture[0x14] =
-           (uVar15 * 0x29 >> 0x10 & 1 | uVar15 * 0x73 >> 5 & 2 | uVar15 * 7 >> 3 & 4) ^ 2 |
+           (scratchUint15 * 0x29 >> 0x10 & 1 | scratchUint15 * 0x73 >> 5 & 2 | scratchUint15 * 7 >> 3 & 4) ^ 2 |
            texture[0x14] & 0xfffffff8U;
     }
   }
-  uVar15 = (uint)*(ushort *)(iVar26 + 0x12);
-  if (*(ushort *)(texture + 0x27) != uVar15) {
-    *(ushort *)(texture + 0x27) = *(ushort *)(iVar26 + 0x12);
+  scratchUint15 = (uint)*(ushort *)(scratchInt26 + 0x12);
+  if (*(ushort *)(texture + 0x27) != scratchUint15) {
+    *(ushort *)(texture + 0x27) = *(ushort *)(scratchInt26 + 0x12);
     if (*(char *)((int)texture + 0x6d) == '\x01') {
       texture[0x14] = texture[0x14] & 0xffffffc7;
     }
-    else if (cVar29 == '\0') {
+    else if (scratchChar29 == '\0') {
       texture[0x14] =
-           ((uVar15 * 0x29 >> 0x10 & 1 | uVar15 * 0x97 >> 9 & 2 | uVar15 * 0x113 >> 7 & 4) ^ 2) << 3
+           ((scratchUint15 * 0x29 >> 0x10 & 1 | scratchUint15 * 0x97 >> 9 & 2 | scratchUint15 * 0x113 >> 7 & 4) ^ 2) << 3
            | texture[0x14] & 0xffffffc7U;
     }
     else {
       texture[0x14] =
-           ((uVar15 * 0x29 >> 0x10 & 1 | uVar15 * 0x73 >> 5 & 2 | uVar15 * 7 >> 3 & 4) ^ 2) << 3 |
+           ((scratchUint15 * 0x29 >> 0x10 & 1 | scratchUint15 * 0x73 >> 5 & 2 | scratchUint15 * 7 >> 3 & 4) ^ 2) << 3 |
            texture[0x14] & 0xffffffc7U;
     }
   }
-  uVar15 = (uint)*(ushort *)(iVar26 + 0x14);
-  if (*(ushort *)((int)texture + 0x9e) != uVar15) {
-    *(ushort *)((int)texture + 0x9e) = *(ushort *)(iVar26 + 0x14);
+  scratchUint15 = (uint)*(ushort *)(scratchInt26 + 0x14);
+  if (*(ushort *)((int)texture + 0x9e) != scratchUint15) {
+    *(ushort *)((int)texture + 0x9e) = *(ushort *)(scratchInt26 + 0x14);
     if (*(char *)((int)texture + 0x6d) == '\x03') {
-      if (cVar29 == '\0') {
+      if (scratchChar29 == '\0') {
         texture[0x14] =
-             ((uVar15 * 0x29 >> 0x10 & 1 | uVar15 * 0x97 >> 9 & 2 | uVar15 * 0x113 >> 7 & 4) ^ 2) <<
+             ((scratchUint15 * 0x29 >> 0x10 & 1 | scratchUint15 * 0x97 >> 9 & 2 | scratchUint15 * 0x113 >> 7 & 4) ^ 2) <<
              6 | texture[0x14] & 0xfffffe3fU;
       }
       else {
         texture[0x14] =
-             ((uVar15 * 0x29 >> 0x10 & 1 | uVar15 * 0x73 >> 5 & 2 | uVar15 * 7 >> 3 & 4) ^ 2) << 6 |
+             ((scratchUint15 * 0x29 >> 0x10 & 1 | scratchUint15 * 0x73 >> 5 & 2 | scratchUint15 * 7 >> 3 & 4) ^ 2) << 6 |
              texture[0x14] & 0xfffffe3fU;
       }
     }
@@ -423,161 +423,161 @@ LAB_0002e708:
       texture[0x14] = texture[0x14] & 0xfffffe3f;
     }
   }
-  iVar28 = texture[0xc];
-  sVar10 = *(short *)(iVar28 + 2);
-  if (sVar10 == 0x1902) {
-    if (*(short *)(iVar26 + 0x48) == -0x7fb7) {
+  scratchInt28 = texture[0xc];
+  scratchShort10 = *(short *)(scratchInt28 + 2);
+  if (scratchShort10 == 0x1902) {
+    if (*(short *)(scratchInt26 + 0x48) == -0x7fb7) {
       *(undefined1 *)((int)texture + 0x6b) = 5;
     }
-    else if (*(short *)(iVar26 + 0x48) == 0x1906) {
+    else if (*(short *)(scratchInt26 + 0x48) == 0x1906) {
       *(undefined1 *)((int)texture + 0x6b) = 0;
     }
     else {
       *(undefined1 *)((int)texture + 0x6b) = 1;
     }
-    *(undefined2 *)(texture + 0x25) = *(undefined2 *)(iVar26 + 0x48);
-    *(undefined2 *)((int)texture + 0x96) = *(undefined2 *)(iVar26 + 0x42);
-    uVar11 = *(undefined2 *)(iVar26 + 0x40);
-    *(undefined2 *)(texture + 0x26) = uVar11;
-    texture[0x23] = *(int *)(iVar26 + 0x44);
-    sVar10 = *(short *)(iVar26 + 0x42);
-    *(char *)((int)texture + 0x69) = (char)uVar11;
-    fVar12 = FLOAT_001aa0d4;
-    iVar28 = texture[0xc];
-    *(bool *)((int)texture + 0x6a) = sVar10 == -0x77b2;
-    *(bool *)(texture + 0x1a) = *(float *)(iVar26 + 0x44) != fVar12;
+    *(undefined2 *)(texture + 0x25) = *(undefined2 *)(scratchInt26 + 0x48);
+    *(undefined2 *)((int)texture + 0x96) = *(undefined2 *)(scratchInt26 + 0x42);
+    scratchUint11 = *(undefined2 *)(scratchInt26 + 0x40);
+    *(undefined2 *)(texture + 0x26) = scratchUint11;
+    texture[0x23] = *(int *)(scratchInt26 + 0x44);
+    scratchShort10 = *(short *)(scratchInt26 + 0x42);
+    *(char *)((int)texture + 0x69) = (char)scratchUint11;
+    scratchFloat12 = FLOAT_001aa0d4;
+    scratchInt28 = texture[0xc];
+    *(bool *)((int)texture + 0x6a) = scratchShort10 == -0x77b2;
+    *(bool *)(texture + 0x1a) = *(float *)(scratchInt26 + 0x44) != scratchFloat12;
   }
-  else if (sVar10 == -0x7fb7) {
+  else if (scratchShort10 == -0x7fb7) {
     *(undefined1 *)((int)texture + 0x6b) = 5;
   }
   else {
-    *(char *)((int)texture + 0x6b) = (char)sVar10 + -6;
+    *(char *)((int)texture + 0x6b) = (char)scratchShort10 + -6;
   }
   *(undefined1 *)(texture + 0x29) = 0;
-  dVar31 = DOUBLE_001aa1e8;
-  fVar12 = FLOAT_001aa10c;
-  *(char *)((int)texture + 0xa5) = *(char *)(iVar28 + 0x5f) - *(char *)(iVar28 + 0x5e);
-  texture[0x12] = (uint)*(byte *)(iVar28 + 0x5f) << 0x10 | (uint)*(byte *)(iVar28 + 0x5e);
-  fVar12 = *(float *)(iVar28 + 0x30) + fVar12;
-  dVar32 = (double)fVar12;
-  if (dVar31 <= dVar32) {
-    iVar26 = (int)(dVar32 - dVar31) + -0x80000000;
+  scratchDouble31 = DOUBLE_001aa1e8;
+  scratchFloat12 = FLOAT_001aa10c;
+  *(char *)((int)texture + 0xa5) = *(char *)(scratchInt28 + 0x5f) - *(char *)(scratchInt28 + 0x5e);
+  texture[0x12] = (uint)*(byte *)(scratchInt28 + 0x5f) << 0x10 | (uint)*(byte *)(scratchInt28 + 0x5e);
+  scratchFloat12 = *(float *)(scratchInt28 + 0x30) + scratchFloat12;
+  scratchDouble32 = (double)scratchFloat12;
+  if (scratchDouble31 <= scratchDouble32) {
+    scratchInt26 = (int)(scratchDouble32 - scratchDouble31) + -0x80000000;
   }
   else {
-    iVar26 = (int)fVar12;
+    scratchInt26 = (int)scratchFloat12;
   }
-  fVar12 = *(float *)(iVar28 + 0x34) + FLOAT_001aa10c;
-  dVar31 = (double)fVar12;
-  if (DOUBLE_001aa1e8 <= dVar31) {
-    uVar15 = (int)(dVar31 - DOUBLE_001aa1e8) + 0x80000000;
+  scratchFloat12 = *(float *)(scratchInt28 + 0x34) + FLOAT_001aa10c;
+  scratchDouble31 = (double)scratchFloat12;
+  if (DOUBLE_001aa1e8 <= scratchDouble31) {
+    scratchUint15 = (int)(scratchDouble31 - DOUBLE_001aa1e8) + 0x80000000;
   }
   else {
-    uVar15 = (uint)(int)fVar12;
+    scratchUint15 = (uint)(int)scratchFloat12;
   }
-  texture[0x13] = iVar26 << 0x10 | uVar15;
-  ((void (*)())gldPackColorForSurfaceFormat)(hwState,(double)*(float *)(iVar28 + 0x1c),(double)*(float *)(iVar28 + 0x20),
-               (double)*(float *)(iVar28 + 0x24),(double)*(float *)(iVar28 + 0x28));
-  uVar14 = (uint)*(byte *)((int)texture + 0xa5);
-  uVar15 = (uint)(int)(*(float *)(iVar28 + 0x34) + FLOAT_001aa10c);
-  uVar17 = (uint)(int)(*(float *)(iVar28 + 0x30) + FLOAT_001aa10c);
-  if ((int)uVar14 < (int)uVar15) {
-    uVar15 = uVar14;
+  texture[0x13] = scratchInt26 << 0x10 | scratchUint15;
+  ((void (*)())gldPackColorForSurfaceFormat)(hwState,(double)*(float *)(scratchInt28 + 0x1c),(double)*(float *)(scratchInt28 + 0x20),
+               (double)*(float *)(scratchInt28 + 0x24),(double)*(float *)(scratchInt28 + 0x28));
+  scratchUint14 = (uint)*(byte *)((int)texture + 0xa5);
+  scratchUint15 = (uint)(int)(*(float *)(scratchInt28 + 0x34) + FLOAT_001aa10c);
+  scratchUint17 = (uint)(int)(*(float *)(scratchInt28 + 0x30) + FLOAT_001aa10c);
+  if ((int)scratchUint14 < (int)scratchUint15) {
+    scratchUint15 = scratchUint14;
   }
-  if ((int)uVar14 < (int)uVar17) {
-    uVar17 = uVar14;
+  if ((int)scratchUint14 < (int)scratchUint17) {
+    scratchUint17 = scratchUint14;
   }
-  uVar16 = uVar14 + 1;
-  if ((uint)*(byte *)((int)texture + 0x6e) < uVar14 + 1) {
-    uVar16 = (uint)*(byte *)((int)texture + 0x6e);
+  scratchUint16 = scratchUint14 + 1;
+  if ((uint)*(byte *)((int)texture + 0x6e) < scratchUint14 + 1) {
+    scratchUint16 = (uint)*(byte *)((int)texture + 0x6e);
   }
-  uVar15 = (uVar15 - uVar17) + 1;
-  if ((int)uVar16 <= (int)uVar15) {
-    uVar15 = uVar16;
+  scratchUint15 = (scratchUint15 - scratchUint17) + 1;
+  if ((int)scratchUint16 <= (int)scratchUint15) {
+    scratchUint15 = scratchUint16;
   }
-  iVar26 = 1;
-  if (0 < (int)uVar15) {
-    iVar26 = (int)(char)uVar15;
+  scratchInt26 = 1;
+  if (0 < (int)scratchUint15) {
+    scratchInt26 = (int)(char)scratchUint15;
   }
-  texture[0x16] = (iVar26 + -1) * 0x4000000 & 0x3c000000U | texture[0x16] & 0xc3ffffffU;
+  texture[0x16] = (scratchInt26 + -1) * 0x4000000 & 0x3c000000U | texture[0x16] & 0xc3ffffffU;
   *(byte *)((int)texture + 0x39) = *(byte *)((int)texture + 0x39) & 0x7f;
   return;
 }
 
-/* FUN_0002ebc0 @ 0x2ebc0 (596 bytes) */
-int FUN_0002ebc0(ctx, loopIndex)
+/* gld_applyAnisotropyOverride @ 0x2ebc0 (596 bytes) */
+int gld_applyAnisotropyOverride(ctx, unitIndex)
   int ctx;
-  int loopIndex;
+  int unitIndex;
 {
-  bool bVar1;
-  char cVar2;
-  short sVar3;
-  uint uVar4;
-  int iVar5;
-  uint uVar6;
+  bool flag72Unset;
+  char flag72Before;
+  short filterKind;
+  uint filterWord;
+  int texture;
+  uint wrapWord;
   
   if (*(int *)(ctx + 0x2a90) != 0) {
-    iVar5 = *(int *)(loopIndex * 4 + ctx + 0x18c);
-    uVar4 = (uint)*(ushort *)(iVar5 + 0xa0);
-    if ((((*(short *)(*(int *)(iVar5 + 0x30) + 0x18) != 0x2600) &&
-         (sVar3 = *(short *)(*(int *)(iVar5 + 0x30) + 0x16), sVar3 != 0x2600)) && (sVar3 != 0x2702))
-       && (sVar3 != 0x2700)) {
-      *(uint *)(iVar5 + 0x50) =
+    texture = *(int *)(unitIndex * 4 + ctx + 0x18c);
+    filterWord = (uint)*(ushort *)(texture + 0xa0);
+    if ((((*(short *)(*(int *)(texture + 0x30) + 0x18) != 0x2600) &&
+         (filterKind = *(short *)(*(int *)(texture + 0x30) + 0x16), filterKind != 0x2600)) && (filterKind != 0x2702))
+       && (filterKind != 0x2700)) {
+      *(uint *)(texture + 0x50) =
            (*(uint *)(&DAT_001aa510 + *(int *)(ctx + 0x2a90) * 4) & 7) << 0x15 |
-           *(uint *)(iVar5 + 0x50) & 0xff1fffff;
+           *(uint *)(texture + 0x50) & 0xff1fffff;
       if (3 < *(uint *)(ctx + 0x2a8c)) {
-        if (uVar4 == 0x2703) {
-          uVar4 = 0x2701;
+        if (filterWord == 0x2703) {
+          filterWord = 0x2701;
         }
-        else if (uVar4 == 0x2702) {
-          uVar4 = 0x2700;
+        else if (filterWord == 0x2702) {
+          filterWord = 0x2700;
         }
       }
-      cVar2 = *(char *)(iVar5 + 0x72);
-      FUN_0002d030(iVar5 + 0x3c,uVar4);
-      FUN_0002d210(iVar5 + 0x3c,(uint)*(ushort *)(iVar5 + 0xa2));
-      if (cVar2 != *(char *)(iVar5 + 0x72)) {
-        bVar1 = *(char *)(iVar5 + 0x72) == '\0';
-        uVar4 = (uint)*(ushort *)(iVar5 + 0x9a);
-        if (bVar1) {
-          uVar4 = (uVar4 * 0x29 >> 0x10 & 1 | uVar4 * 0x97 >> 9 & 2 | uVar4 * 0x113 >> 7 & 4) ^ 2 |
-                  *(uint *)(iVar5 + 0x50) & 0xfffffff8;
-          *(uint *)(iVar5 + 0x50) = uVar4;
+      flag72Before = *(char *)(texture + 0x72);
+      FUN_0002d030(texture + 0x3c,filterWord);
+      FUN_0002d210(texture + 0x3c,(uint)*(ushort *)(texture + 0xa2));
+      if (flag72Before != *(char *)(texture + 0x72)) {
+        flag72Unset = *(char *)(texture + 0x72) == '\0';
+        filterWord = (uint)*(ushort *)(texture + 0x9a);
+        if (flag72Unset) {
+          filterWord = (filterWord * 0x29 >> 0x10 & 1 | filterWord * 0x97 >> 9 & 2 | filterWord * 0x113 >> 7 & 4) ^ 2 |
+                  *(uint *)(texture + 0x50) & 0xfffffff8;
+          *(uint *)(texture + 0x50) = filterWord;
         }
         else {
-          uVar4 = (uVar4 * 0x29 >> 0x10 & 1 | uVar4 * 0x73 >> 5 & 2 | uVar4 * 7 >> 3 & 4) ^ 2 |
-                  *(uint *)(iVar5 + 0x50) & 0xfffffff8;
-          *(uint *)(iVar5 + 0x50) = uVar4;
+          filterWord = (filterWord * 0x29 >> 0x10 & 1 | filterWord * 0x73 >> 5 & 2 | filterWord * 7 >> 3 & 4) ^ 2 |
+                  *(uint *)(texture + 0x50) & 0xfffffff8;
+          *(uint *)(texture + 0x50) = filterWord;
         }
-        uVar6 = (uint)*(ushort *)(iVar5 + 0x9c);
-        if (*(char *)(iVar5 + 0x6d) == '\x01') {
-          uVar4 = uVar4 & 0xffffffc7;
-          *(uint *)(iVar5 + 0x50) = uVar4;
+        wrapWord = (uint)*(ushort *)(texture + 0x9c);
+        if (*(char *)(texture + 0x6d) == '\x01') {
+          filterWord = filterWord & 0xffffffc7;
+          *(uint *)(texture + 0x50) = filterWord;
         }
-        else if (bVar1) {
-          uVar4 = ((uVar6 * 0x29 >> 0x10 & 1 | uVar6 * 0x97 >> 9 & 2 | uVar6 * 0x113 >> 7 & 4) ^ 2)
-                  << 3 | uVar4 & 0xffffffc7;
-          *(uint *)(iVar5 + 0x50) = uVar4;
+        else if (flag72Unset) {
+          filterWord = ((wrapWord * 0x29 >> 0x10 & 1 | wrapWord * 0x97 >> 9 & 2 | wrapWord * 0x113 >> 7 & 4) ^ 2)
+                  << 3 | filterWord & 0xffffffc7;
+          *(uint *)(texture + 0x50) = filterWord;
         }
         else {
-          uVar4 = ((uVar6 * 0x29 >> 0x10 & 1 | uVar6 * 0x73 >> 5 & 2 | uVar6 * 7 >> 3 & 4) ^ 2) << 3
-                  | uVar4 & 0xffffffc7;
-          *(uint *)(iVar5 + 0x50) = uVar4;
+          filterWord = ((wrapWord * 0x29 >> 0x10 & 1 | wrapWord * 0x73 >> 5 & 2 | wrapWord * 7 >> 3 & 4) ^ 2) << 3
+                  | filterWord & 0xffffffc7;
+          *(uint *)(texture + 0x50) = filterWord;
         }
-        uVar6 = (uint)*(ushort *)(iVar5 + 0x9e);
-        if (*(char *)(iVar5 + 0x6d) == '\x03') {
-          if (bVar1) {
-            *(uint *)(iVar5 + 0x50) =
-                 ((uVar6 * 0x29 >> 0x10 & 1 | uVar6 * 0x97 >> 9 & 2 | uVar6 * 0x113 >> 7 & 4) ^ 2)
-                 << 6 | uVar4 & 0xfffffe3f;
+        wrapWord = (uint)*(ushort *)(texture + 0x9e);
+        if (*(char *)(texture + 0x6d) == '\x03') {
+          if (flag72Unset) {
+            *(uint *)(texture + 0x50) =
+                 ((wrapWord * 0x29 >> 0x10 & 1 | wrapWord * 0x97 >> 9 & 2 | wrapWord * 0x113 >> 7 & 4) ^ 2)
+                 << 6 | filterWord & 0xfffffe3f;
           }
           else {
-            *(uint *)(iVar5 + 0x50) =
-                 ((uVar6 * 0x29 >> 0x10 & 1 | uVar6 * 0x73 >> 5 & 2 | uVar6 * 7 >> 3 & 4) ^ 2) << 6
-                 | uVar4 & 0xfffffe3f;
+            *(uint *)(texture + 0x50) =
+                 ((wrapWord * 0x29 >> 0x10 & 1 | wrapWord * 0x73 >> 5 & 2 | wrapWord * 7 >> 3 & 4) ^ 2) << 6
+                 | filterWord & 0xfffffe3f;
           }
         }
         else {
-          *(uint *)(iVar5 + 0x50) = uVar4 & 0xfffffe3f;
+          *(uint *)(texture + 0x50) = filterWord & 0xfffffe3f;
         }
       }
     }
@@ -585,57 +585,57 @@ int FUN_0002ebc0(ctx, loopIndex)
   return;
 }
 
-/* FUN_0002ee30 @ 0x2ee30 (1476 bytes) */
-int FUN_0002ee30(ctxSaved, texture)
+/* gld_updateTextureSamplerState @ 0x2ee30 (1476 bytes) */
+int gld_updateTextureSamplerState(ctxSaved, texture)
   undefined4 ctxSaved;
   int texture;
 {
   float fVar1;
   float fVar2;
   float fVar3;
-  ushort uVar4;
-  short sVar5;
-  undefined2 uVar6;
+  ushort minFilterField;
+  short baseFormatCode;
+  undefined2 depthCompareWord;
   uint uVar7;
   int iVar8;
-  char cVar9;
-  char cVar10;
-  int iVar11;
-  int iVar12;
-  double dVar13;
+  char flag71;
+  char flag72;
+  int texImages;
+  int hwState;
+  double doubleConst;
   
-  iVar12 = texture + 0x3c;
-  iVar11 = *(int *)(texture + 0x30);
-  fVar1 = *(float *)(iVar11 + 0x30) + FLOAT_001aa10c;
-  dVar13 = (double)fVar1;
-  if (DOUBLE_001aa1e8 <= dVar13) {
-    iVar8 = (int)(dVar13 - DOUBLE_001aa1e8) + -0x80000000;
+  hwState = texture + 0x3c;
+  texImages = *(int *)(texture + 0x30);
+  fVar1 = *(float *)(texImages + 0x30) + FLOAT_001aa10c;
+  doubleConst = (double)fVar1;
+  if (DOUBLE_001aa1e8 <= doubleConst) {
+    iVar8 = (int)(doubleConst - DOUBLE_001aa1e8) + -0x80000000;
   }
   else {
     iVar8 = (int)fVar1;
   }
-  fVar1 = *(float *)(iVar11 + 0x34) + FLOAT_001aa10c;
-  dVar13 = (double)fVar1;
-  if (DOUBLE_001aa1e8 <= dVar13) {
-    uVar7 = (int)(dVar13 - DOUBLE_001aa1e8) + 0x80000000;
+  fVar1 = *(float *)(texImages + 0x34) + FLOAT_001aa10c;
+  doubleConst = (double)fVar1;
+  if (DOUBLE_001aa1e8 <= doubleConst) {
+    uVar7 = (int)(doubleConst - DOUBLE_001aa1e8) + 0x80000000;
   }
   else {
     uVar7 = (uint)(int)fVar1;
   }
-  if ((((uint)*(byte *)(iVar11 + 0x5f) << 0x10 | (uint)*(byte *)(iVar11 + 0x5e)) !=
+  if ((((uint)*(byte *)(texImages + 0x5f) << 0x10 | (uint)*(byte *)(texImages + 0x5e)) !=
        *(uint *)(texture + 0x48)) || ((iVar8 << 0x10 | uVar7) != *(uint *)(texture + 0x4c))) {
     ((int (*)())FUN_0002ddf0)(ctxSaved,texture);
     return;
   }
-  cVar10 = *(char *)(texture + 0x72);
-  if (*(float *)(texture + 0x90) != *(float *)(iVar11 + 0x2c)) {
-    *(float *)(texture + 0x90) = *(float *)(iVar11 + 0x2c);
-    dVar13 = (double)*(float *)(iVar11 + 0x2c);
-    if (DOUBLE_001aa1e8 <= dVar13) {
-      iVar8 = (int)(dVar13 - DOUBLE_001aa1e8) + -0x80000000;
+  flag72 = *(char *)(texture + 0x72);
+  if (*(float *)(texture + 0x90) != *(float *)(texImages + 0x2c)) {
+    *(float *)(texture + 0x90) = *(float *)(texImages + 0x2c);
+    doubleConst = (double)*(float *)(texImages + 0x2c);
+    if (DOUBLE_001aa1e8 <= doubleConst) {
+      iVar8 = (int)(doubleConst - DOUBLE_001aa1e8) + -0x80000000;
     }
     else {
-      iVar8 = (int)*(float *)(iVar11 + 0x2c);
+      iVar8 = (int)*(float *)(texImages + 0x2c);
     }
     uVar7 = *(uint *)(&DAT_001aa510 + iVar8 * 4);
     if ((*(uint *)(texture + 0x50) >> 0x15 & 7) != uVar7) {
@@ -644,41 +644,41 @@ int FUN_0002ee30(ctxSaved, texture)
       *(uint *)(texture + 0x50) = (uVar7 & 7) << 0x15 | *(uint *)(texture + 0x50) & 0xff1fffff;
     }
   }
-  uVar4 = *(ushort *)(iVar11 + 0x16);
-  if ((uint)*(ushort *)(texture + 0xa0) == (uint)uVar4) {
-    uVar7 = (uint)*(ushort *)(iVar11 + 0x18);
+  minFilterField = *(ushort *)(texImages + 0x16);
+  if ((uint)*(ushort *)(texture + 0xa0) == (uint)minFilterField) {
+    uVar7 = (uint)*(ushort *)(texImages + 0x18);
     if (*(ushort *)(texture + 0xa2) != uVar7) {
       if (*(char *)(texture + 0x70) != *(char *)(texture + 0x71)) goto LAB_0002f040;
       goto LAB_0002f088;
     }
-    cVar9 = *(char *)(texture + 0x71);
-    if (cVar9 != *(char *)(texture + 0x70)) goto LAB_0002f040;
+    flag71 = *(char *)(texture + 0x71);
+    if (flag71 != *(char *)(texture + 0x70)) goto LAB_0002f040;
   }
   else {
 LAB_0002f040:
-    *(ushort *)(texture + 0xa0) = uVar4;
-    FUN_0002d030(iVar12,(uint)uVar4);
+    *(ushort *)(texture + 0xa0) = minFilterField;
+    FUN_0002d030(hwState,(uint)minFilterField);
     *(byte *)(texture + 0x3d) = (byte)(-(uint)*(ushort *)(*(int *)(texture + 0x30) + 0x5c) >> 0x1f);
-    uVar7 = (uint)*(ushort *)(iVar11 + 0x18);
+    uVar7 = (uint)*(ushort *)(texImages + 0x18);
     if ((*(ushort *)(texture + 0xa2) != uVar7) ||
-       (cVar9 = *(char *)(texture + 0x71), cVar9 != *(char *)(texture + 0x70))) {
+       (flag71 = *(char *)(texture + 0x71), flag71 != *(char *)(texture + 0x70))) {
 LAB_0002f088:
       *(short *)(texture + 0xa2) = (short)uVar7;
-      FUN_0002d210(iVar12,uVar7);
-      cVar9 = *(char *)(texture + 0x71);
+      FUN_0002d210(hwState,uVar7);
+      flag71 = *(char *)(texture + 0x71);
     }
-    if (cVar10 != *(char *)(texture + 0x72)) {
+    if (flag72 != *(char *)(texture + 0x72)) {
       *(undefined2 *)(texture + 0x9e) = 0xffff;
       *(undefined2 *)(texture + 0x9a) = 0xffff;
       *(undefined2 *)(texture + 0x9c) = 0xffff;
-      cVar10 = *(char *)(texture + 0x72);
+      flag72 = *(char *)(texture + 0x72);
     }
   }
-  *(char *)(texture + 0x70) = cVar9;
-  uVar7 = (uint)*(ushort *)(iVar11 + 0x10);
+  *(char *)(texture + 0x70) = flag71;
+  uVar7 = (uint)*(ushort *)(texImages + 0x10);
   if (*(ushort *)(texture + 0x9a) != uVar7) {
-    *(ushort *)(texture + 0x9a) = *(ushort *)(iVar11 + 0x10);
-    if (cVar10 == '\0') {
+    *(ushort *)(texture + 0x9a) = *(ushort *)(texImages + 0x10);
+    if (flag72 == '\0') {
       *(uint *)(texture + 0x50) =
            (uVar7 * 0x29 >> 0x10 & 1 | uVar7 * 0x97 >> 9 & 2 | uVar7 * 0x113 >> 7 & 4) ^ 2 |
            *(uint *)(texture + 0x50) & 0xfffffff8;
@@ -689,13 +689,13 @@ LAB_0002f088:
            *(uint *)(texture + 0x50) & 0xfffffff8;
     }
   }
-  uVar7 = (uint)*(ushort *)(iVar11 + 0x12);
+  uVar7 = (uint)*(ushort *)(texImages + 0x12);
   if (*(ushort *)(texture + 0x9c) != uVar7) {
-    *(ushort *)(texture + 0x9c) = *(ushort *)(iVar11 + 0x12);
+    *(ushort *)(texture + 0x9c) = *(ushort *)(texImages + 0x12);
     if (*(char *)(texture + 0x6d) == '\x01') {
       *(uint *)(texture + 0x50) = *(uint *)(texture + 0x50) & 0xffffffc7;
     }
-    else if (cVar10 == '\0') {
+    else if (flag72 == '\0') {
       *(uint *)(texture + 0x50) =
            ((uVar7 * 0x29 >> 0x10 & 1 | uVar7 * 0x97 >> 9 & 2 | uVar7 * 0x113 >> 7 & 4) ^ 2) << 3 |
            *(uint *)(texture + 0x50) & 0xffffffc7;
@@ -706,11 +706,11 @@ LAB_0002f088:
            *(uint *)(texture + 0x50) & 0xffffffc7;
     }
   }
-  uVar7 = (uint)*(ushort *)(iVar11 + 0x14);
+  uVar7 = (uint)*(ushort *)(texImages + 0x14);
   if (*(ushort *)(texture + 0x9e) != uVar7) {
-    *(ushort *)(texture + 0x9e) = *(ushort *)(iVar11 + 0x14);
+    *(ushort *)(texture + 0x9e) = *(ushort *)(texImages + 0x14);
     if (*(char *)(texture + 0x6d) == '\x03') {
-      if (cVar10 == '\0') {
+      if (flag72 == '\0') {
         *(uint *)(texture + 0x50) =
              ((uVar7 * 0x29 >> 0x10 & 1 | uVar7 * 0x97 >> 9 & 2 | uVar7 * 0x113 >> 7 & 4) ^ 2) << 6
              | *(uint *)(texture + 0x50) & 0xfffffe3f;
@@ -725,62 +725,62 @@ LAB_0002f088:
       *(uint *)(texture + 0x50) = *(uint *)(texture + 0x50) & 0xfffffe3f;
     }
   }
-  sVar5 = *(short *)(*(int *)(texture + 0x30) + 2);
-  if (sVar5 == 0x1902) {
-    if (*(short *)(iVar11 + 0x48) == -0x7fb7) {
+  baseFormatCode = *(short *)(*(int *)(texture + 0x30) + 2);
+  if (baseFormatCode == 0x1902) {
+    if (*(short *)(texImages + 0x48) == -0x7fb7) {
       *(undefined1 *)(texture + 0x6b) = 5;
     }
-    else if (*(short *)(iVar11 + 0x48) == 0x1906) {
+    else if (*(short *)(texImages + 0x48) == 0x1906) {
       *(undefined1 *)(texture + 0x6b) = 0;
     }
     else {
       *(undefined1 *)(texture + 0x6b) = 1;
     }
-    *(undefined2 *)(texture + 0x94) = *(undefined2 *)(iVar11 + 0x48);
-    *(undefined2 *)(texture + 0x96) = *(undefined2 *)(iVar11 + 0x42);
-    uVar6 = *(undefined2 *)(iVar11 + 0x40);
-    *(undefined2 *)(texture + 0x98) = uVar6;
-    *(undefined4 *)(texture + 0x8c) = *(undefined4 *)(iVar11 + 0x44);
-    sVar5 = *(short *)(iVar11 + 0x42);
-    *(char *)(texture + 0x69) = (char)uVar6;
+    *(undefined2 *)(texture + 0x94) = *(undefined2 *)(texImages + 0x48);
+    *(undefined2 *)(texture + 0x96) = *(undefined2 *)(texImages + 0x42);
+    depthCompareWord = *(undefined2 *)(texImages + 0x40);
+    *(undefined2 *)(texture + 0x98) = depthCompareWord;
+    *(undefined4 *)(texture + 0x8c) = *(undefined4 *)(texImages + 0x44);
+    baseFormatCode = *(short *)(texImages + 0x42);
+    *(char *)(texture + 0x69) = (char)depthCompareWord;
     fVar1 = FLOAT_001aa0d4;
-    *(bool *)(texture + 0x6a) = sVar5 == -0x77b2;
-    *(bool *)(texture + 0x68) = *(float *)(iVar11 + 0x44) != fVar1;
+    *(bool *)(texture + 0x6a) = baseFormatCode == -0x77b2;
+    *(bool *)(texture + 0x68) = *(float *)(texImages + 0x44) != fVar1;
   }
-  else if (sVar5 == -0x7fb7) {
+  else if (baseFormatCode == -0x7fb7) {
     *(undefined1 *)(texture + 0x6b) = 5;
   }
   else {
-    *(char *)(texture + 0x6b) = (char)sVar5 + -6;
+    *(char *)(texture + 0x6b) = (char)baseFormatCode + -6;
   }
-  if (*(float *)(texture + 0xa8) == *(float *)(iVar11 + 0x1c)) {
-    fVar1 = *(float *)(iVar11 + 0x20);
+  if (*(float *)(texture + 0xa8) == *(float *)(texImages + 0x1c)) {
+    fVar1 = *(float *)(texImages + 0x20);
     if (*(float *)(texture + 0xac) == fVar1) {
-      fVar2 = *(float *)(iVar11 + 0x24);
+      fVar2 = *(float *)(texImages + 0x24);
       if (*(float *)(texture + 0xb0) == fVar2) {
-        fVar3 = *(float *)(iVar11 + 0x28);
+        fVar3 = *(float *)(texImages + 0x28);
         if (*(float *)(texture + 0xb4) == fVar3) goto LAB_0002f3e8;
       }
       else {
-        fVar3 = *(float *)(iVar11 + 0x28);
+        fVar3 = *(float *)(texImages + 0x28);
       }
     }
     else {
-      fVar2 = *(float *)(iVar11 + 0x24);
-      fVar3 = *(float *)(iVar11 + 0x28);
+      fVar2 = *(float *)(texImages + 0x24);
+      fVar3 = *(float *)(texImages + 0x28);
     }
   }
   else {
-    fVar1 = *(float *)(iVar11 + 0x20);
-    fVar2 = *(float *)(iVar11 + 0x24);
-    fVar3 = *(float *)(iVar11 + 0x28);
+    fVar1 = *(float *)(texImages + 0x20);
+    fVar2 = *(float *)(texImages + 0x24);
+    fVar3 = *(float *)(texImages + 0x28);
   }
-  *(float *)(texture + 0xa8) = *(float *)(iVar11 + 0x1c);
+  *(float *)(texture + 0xa8) = *(float *)(texImages + 0x1c);
   *(float *)(texture + 0xac) = fVar1;
   *(float *)(texture + 0xb0) = fVar2;
   *(float *)(texture + 0xb4) = fVar3;
-  ((void (*)())gldPackColorForSurfaceFormat)(iVar12,(double)*(float *)(iVar11 + 0x1c),(double)*(float *)(iVar11 + 0x20),
-               (double)*(float *)(iVar11 + 0x24),(double)*(float *)(iVar11 + 0x28));
+  ((void (*)())gldPackColorForSurfaceFormat)(hwState,(double)*(float *)(texImages + 0x1c),(double)*(float *)(texImages + 0x20),
+               (double)*(float *)(texImages + 0x24),(double)*(float *)(texImages + 0x28));
 LAB_0002f3e8:
   *(byte *)(texture + 0x39) = *(byte *)(texture + 0x39) & 0x7f;
   return;
@@ -1107,465 +1107,465 @@ LAB_0002f884:
   return 0x17;
 }
 
-/* FUN_0002fac0 @ 0x2fac0 (2252 bytes) */
-int FUN_0002fac0(param_1, texture)
-  int param_1;
+/* gld_selectTextureHardwareFormat @ 0x2fac0 (2252 bytes) */
+int gld_selectTextureHardwareFormat(ctx, texture)
+  int ctx;
   int texture;
 {
-  ushort uVar1;
-  ushort uVar2;
-  ushort uVar3;
-  ushort uVar4;
-  uint uVar5;
-  char cVar6;
-  char cVar7;
-  int iVar8;
+  ushort imageFlags;
+  ushort externalFormat;
+  ushort internalFormat;
+  ushort dataType;
+  uint surfaceFormatNibble;
+  char typeFormatAlt;
+  char hwFormatIndex;
+  int ioStatus;
   undefined1 window_mode_to_ati_formatResult;
-  char cVar10;
-  char cVar11;
-  char cVar12;
-  ushort *puVar13;
-  undefined4 local_38;
-  undefined4 local_34;
-  uint local_30 [9];
+  char typeFormatB;
+  char typeFormatA;
+  char internalFormatCode;
+  ushort *texImages;
+  undefined4 scalarIn0;
+  undefined4 outputCount;
+  uint surfaceInfoOut [9];
   
-  puVar13 = *(ushort **)(texture + 0x30);
-  uVar1 = *puVar13;
-  if ((uVar1 & 0x200) != 0) {
+  texImages = *(ushort **)(texture + 0x30);
+  imageFlags = *texImages;
+  if ((imageFlags & 0x200) != 0) {
     return;
   }
-  if ((uVar1 & 0x400) != 0) {
-    local_38 = *(undefined4 *)(puVar13 + 4);
+  if ((imageFlags & 0x400) != 0) {
+    scalarIn0 = *(undefined4 *)(texImages + 4);
     *(undefined1 *)(texture + 0x38) = 0;
-    local_34 = 3;
-    iVar8 = _io_connect_method_scalarI_scalarO
-                      (*(undefined4 *)(param_1 + 4),6,&local_38,1,local_30,&local_34);
-    if (iVar8 != 0) {
+    outputCount = 3;
+    ioStatus = _io_connect_method_scalarI_scalarO
+                      (*(undefined4 *)(ctx + 4),6,&scalarIn0,1,surfaceInfoOut,&outputCount);
+    if (ioStatus != 0) {
       return;
     }
-    uVar1 = puVar13[6];
-    if (uVar1 == 0x409) {
-      if ((local_30[0] & 0x300) < 0x100) {
+    imageFlags = texImages[6];
+    if (imageFlags == 0x409) {
+      if ((surfaceInfoOut[0] & 0x300) < 0x100) {
         return;
       }
     }
-    else if (uVar1 == 0x40a) {
-      if ((local_30[0] & 0x300) < 0x200) {
+    else if (imageFlags == 0x40a) {
+      if ((surfaceInfoOut[0] & 0x300) < 0x200) {
         return;
       }
     }
-    else if ((ushort)(uVar1 - 0x40b) < 2) {
+    else if ((ushort)(imageFlags - 0x40b) < 2) {
       return;
     }
-    window_mode_to_ati_formatResult = ((int (*)())window_mode_to_ati_format)(local_30[0]);
+    window_mode_to_ati_formatResult = ((int (*)())window_mode_to_ati_format)(surfaceInfoOut[0]);
     *(undefined1 *)(texture + 0x38) = window_mode_to_ati_formatResult;
     return;
   }
-  uVar2 = puVar13[0x2c];
-  uVar3 = puVar13[0x2a];
-  uVar4 = puVar13[0x2d];
-  uVar5 = *(uint *)(param_1 + 0x154) & 0xf;
-  if (uVar2 != 0x1900) {
-    if (uVar2 != 0x85b9) {
-      if (uVar4 == 0x8362) {
+  externalFormat = texImages[0x2c];
+  internalFormat = texImages[0x2a];
+  dataType = texImages[0x2d];
+  surfaceFormatNibble = *(uint *)(ctx + 0x154) & 0xf;
+  if (externalFormat != 0x1900) {
+    if (externalFormat != 0x85b9) {
+      if (dataType == 0x8362) {
 LAB_0002fcd4:
-        cVar6 = '(';
-        cVar11 = '(';
-        cVar10 = '(';
+        typeFormatAlt = '(';
+        typeFormatA = '(';
+        typeFormatB = '(';
       }
-      else if (uVar4 < 0x8363) {
-        if (uVar4 == 0x8034) {
+      else if (dataType < 0x8363) {
+        if (dataType == 0x8034) {
 LAB_0002fcf4:
-          cVar6 = '\0';
-          cVar11 = '\a';
-          cVar10 = '\a';
+          typeFormatAlt = '\0';
+          typeFormatA = '\a';
+          typeFormatB = '\a';
         }
-        else if (uVar4 < 0x8035) {
-          if (uVar4 == 0x8032) goto LAB_0002fcd4;
-          if (uVar4 == 0x8033) goto LAB_0002fcc4;
+        else if (dataType < 0x8035) {
+          if (dataType == 0x8032) goto LAB_0002fcd4;
+          if (dataType == 0x8033) goto LAB_0002fcc4;
 LAB_0002fc40:
-          cVar6 = '\0';
-          cVar11 = '\0';
-          cVar10 = '\0';
+          typeFormatAlt = '\0';
+          typeFormatA = '\0';
+          typeFormatB = '\0';
         }
-        else if (uVar4 == 0x8035) {
-          if (uVar2 == 0x80e1) {
-            cVar6 = '\0';
-            cVar11 = '\0';
-            cVar10 = '\b';
+        else if (dataType == 0x8035) {
+          if (externalFormat == 0x80e1) {
+            typeFormatAlt = '\0';
+            typeFormatA = '\0';
+            typeFormatB = '\b';
           }
           else {
-            cVar6 = '\0';
-            cVar11 = '\0';
-            cVar10 = '\t';
+            typeFormatAlt = '\0';
+            typeFormatA = '\0';
+            typeFormatB = '\t';
           }
         }
         else {
-          if (uVar4 != 0x8036) goto LAB_0002fc40;
+          if (dataType != 0x8036) goto LAB_0002fc40;
 LAB_0002fd64:
-          if (uVar2 == 0x80e1) {
-            cVar6 = '\0';
-            cVar11 = '\0';
-            cVar10 = '$';
+          if (externalFormat == 0x80e1) {
+            typeFormatAlt = '\0';
+            typeFormatA = '\0';
+            typeFormatB = '$';
           }
           else {
-            cVar6 = '\0';
-            cVar11 = '\0';
-            cVar10 = '#';
+            typeFormatAlt = '\0';
+            typeFormatA = '\0';
+            typeFormatB = '#';
           }
         }
       }
-      else if (uVar4 == 0x8365) {
+      else if (dataType == 0x8365) {
 LAB_0002fcc4:
-        cVar6 = '\0';
-        cVar11 = '\x06';
-        cVar10 = '\x06';
+        typeFormatAlt = '\0';
+        typeFormatA = '\x06';
+        typeFormatB = '\x06';
       }
-      else if (uVar4 < 0x8365) {
-        cVar6 = '\0';
-        cVar11 = '\x05';
-        cVar10 = '\x05';
+      else if (dataType < 0x8365) {
+        typeFormatAlt = '\0';
+        typeFormatA = '\x05';
+        typeFormatB = '\x05';
       }
       else {
-        if (uVar4 != 0x8367) {
-          if (0x8366 < uVar4) {
-            if (uVar4 == 0x8368) goto LAB_0002fd64;
+        if (dataType != 0x8367) {
+          if (0x8366 < dataType) {
+            if (dataType == 0x8368) goto LAB_0002fd64;
             goto LAB_0002fc40;
           }
           goto LAB_0002fcf4;
         }
-        if (uVar2 == 0x80e1) {
-          cVar6 = '\0';
-          cVar11 = '\0';
-          cVar10 = '\v';
+        if (externalFormat == 0x80e1) {
+          typeFormatAlt = '\0';
+          typeFormatA = '\0';
+          typeFormatB = '\v';
         }
         else {
-          cVar6 = '\0';
-          cVar11 = '\0';
-          cVar10 = '\n';
+          typeFormatAlt = '\0';
+          typeFormatA = '\0';
+          typeFormatB = '\n';
         }
       }
-      if (0x8056 < uVar3) {
-        if (uVar3 == 0x84ec) {
-          cVar11 = '\0';
-          cVar7 = '\f';
-          cVar12 = '\x03';
+      if (0x8056 < internalFormat) {
+        if (internalFormat == 0x84ec) {
+          typeFormatA = '\0';
+          hwFormatIndex = '\f';
+          internalFormatCode = '\x03';
         }
-        else if (uVar3 < 0x84ed) {
-          if (uVar3 < 0x81a8) {
-            if (uVar3 < 0x81a6) {
-              if (uVar3 == 0x8059) {
-                if (uVar2 == 0x80e1) {
-                  cVar11 = '\0';
-                  cVar7 = '\0';
-                  cVar12 = '$';
+        else if (internalFormat < 0x84ed) {
+          if (internalFormat < 0x81a8) {
+            if (internalFormat < 0x81a6) {
+              if (internalFormat == 0x8059) {
+                if (externalFormat == 0x80e1) {
+                  typeFormatA = '\0';
+                  hwFormatIndex = '\0';
+                  internalFormatCode = '$';
                 }
                 else {
-                  cVar11 = '\0';
-                  cVar7 = '\0';
-                  cVar12 = '#';
+                  typeFormatA = '\0';
+                  hwFormatIndex = '\0';
+                  internalFormatCode = '#';
                 }
               }
-              else if (uVar3 < 0x805a) {
-                if (uVar3 != 0x8057) {
-                  if (uVar3 == 0x8058) goto LAB_0002fec0;
+              else if (internalFormat < 0x805a) {
+                if (internalFormat != 0x8057) {
+                  if (internalFormat == 0x8058) goto LAB_0002fec0;
                   goto LAB_0002fde8;
                 }
-                cVar7 = '\0';
-                cVar12 = '\a';
+                hwFormatIndex = '\0';
+                internalFormatCode = '\a';
               }
               else {
-                if (uVar3 < 0x805c) goto LAB_00030378;
-                if (uVar3 != 0x81a5) goto LAB_0002fde8;
+                if (internalFormat < 0x805c) goto LAB_00030378;
+                if (internalFormat != 0x81a5) goto LAB_0002fde8;
 LAB_0003034c:
-                cVar7 = '\0';
-                cVar12 = '\x10';
-                cVar11 = '\0';
+                hwFormatIndex = '\0';
+                internalFormatCode = '\x10';
+                typeFormatA = '\0';
               }
             }
             else {
 LAB_0003009c:
-              cVar11 = '\0';
-              cVar7 = '\0';
-              cVar12 = ')';
+              typeFormatA = '\0';
+              hwFormatIndex = '\0';
+              internalFormatCode = ')';
             }
           }
-          else if (uVar3 == 0x83f3) {
-            cVar7 = '\x0e';
-            cVar12 = '\x06';
+          else if (internalFormat == 0x83f3) {
+            hwFormatIndex = '\x0e';
+            internalFormatCode = '\x06';
           }
-          else if (uVar3 < 0x83f4) {
-            if (uVar3 == 0x83f1) {
-              cVar7 = '\f';
-              cVar12 = '\x06';
+          else if (internalFormat < 0x83f4) {
+            if (internalFormat == 0x83f1) {
+              hwFormatIndex = '\f';
+              internalFormatCode = '\x06';
             }
             else {
-              if (uVar3 < 0x83f2) {
-                if (uVar3 == 0x83f0) goto LAB_000301a0;
+              if (internalFormat < 0x83f2) {
+                if (internalFormat == 0x83f0) goto LAB_000301a0;
                 goto LAB_0002fde8;
               }
 LAB_0003017c:
-              cVar7 = '\r';
-              cVar12 = '\x06';
+              hwFormatIndex = '\r';
+              internalFormatCode = '\x06';
             }
           }
-          else if (uVar3 == 0x84ea) {
-            cVar11 = '\0';
-            cVar7 = '\f';
-            cVar12 = '\x01';
+          else if (internalFormat == 0x84ea) {
+            typeFormatA = '\0';
+            hwFormatIndex = '\f';
+            internalFormatCode = '\x01';
           }
-          else if (uVar3 < 0x84eb) {
-            if (uVar3 != 0x84e9) goto LAB_0002fde8;
-            if (uVar2 == 0x1908) {
+          else if (internalFormat < 0x84eb) {
+            if (internalFormat != 0x84e9) goto LAB_0002fde8;
+            if (externalFormat == 0x1908) {
 LAB_00030298:
-              if ((uVar4 == 0x8034) || (uVar4 == 0x8366)) goto LAB_00030260;
+              if ((dataType == 0x8034) || (dataType == 0x8366)) goto LAB_00030260;
             }
-            else if (uVar2 < 0x1909) {
-              if (uVar2 != 0x1906) {
+            else if (externalFormat < 0x1909) {
+              if (externalFormat != 0x1906) {
 LAB_00030260:
-                cVar11 = '\0';
-                cVar7 = '\f';
-                cVar12 = '\x02';
+                typeFormatA = '\0';
+                hwFormatIndex = '\f';
+                internalFormatCode = '\x02';
                 goto LAB_00030270;
               }
             }
-            else if (uVar2 != 0x190a) {
-              if (uVar2 == 0x80e1) goto LAB_00030298;
+            else if (externalFormat != 0x190a) {
+              if (externalFormat == 0x80e1) goto LAB_00030298;
               goto LAB_00030260;
             }
 LAB_000302b8:
-            cVar7 = '\0';
-            cVar12 = '\x02';
-            cVar11 = '\0';
+            hwFormatIndex = '\0';
+            internalFormatCode = '\x02';
+            typeFormatA = '\0';
           }
           else {
-            cVar7 = '\r';
-            cVar12 = '\x04';
+            hwFormatIndex = '\r';
+            internalFormatCode = '\x04';
           }
         }
-        else if (uVar3 == 0x8819) {
-          cVar11 = '\0';
-          cVar7 = '\0';
-          cVar12 = '\x16';
+        else if (internalFormat == 0x8819) {
+          typeFormatA = '\0';
+          hwFormatIndex = '\0';
+          internalFormatCode = '\x16';
         }
-        else if (uVar3 < 0x881a) {
-          if (uVar3 < 0x8816) {
-            if (uVar3 < 0x8814) {
-              if (uVar3 != 0x84ed) {
-                if (uVar3 == 0x84ee) goto LAB_0003017c;
+        else if (internalFormat < 0x881a) {
+          if (internalFormat < 0x8816) {
+            if (internalFormat < 0x8814) {
+              if (internalFormat != 0x84ed) {
+                if (internalFormat == 0x84ee) goto LAB_0003017c;
                 goto LAB_0002fde8;
               }
 LAB_000301a0:
-              cVar7 = '\f';
-              cVar12 = '\x05';
+              hwFormatIndex = '\f';
+              internalFormatCode = '\x05';
             }
-            else if (uVar2 == 0x80e1) {
-              cVar11 = '\0';
-              cVar7 = '\0';
-              cVar12 = '\x11';
+            else if (externalFormat == 0x80e1) {
+              typeFormatA = '\0';
+              hwFormatIndex = '\0';
+              internalFormatCode = '\x11';
             }
             else {
-              cVar11 = '\0';
-              cVar7 = '\0';
-              cVar12 = '\x12';
+              typeFormatA = '\0';
+              hwFormatIndex = '\0';
+              internalFormatCode = '\x12';
             }
           }
-          else if (uVar3 == 0x8817) {
-            cVar11 = '\0';
-            cVar7 = '\0';
-            cVar12 = '\x15';
+          else if (internalFormat == 0x8817) {
+            typeFormatA = '\0';
+            hwFormatIndex = '\0';
+            internalFormatCode = '\x15';
           }
-          else if (uVar3 < 0x8818) {
-            cVar11 = '\0';
-            cVar7 = '\0';
-            cVar12 = '\x14';
-          }
-          else {
-            cVar11 = '\0';
-            cVar7 = '\0';
-            cVar12 = '\x13';
-          }
-        }
-        else if (uVar3 == 0x881d) {
-          cVar11 = '\0';
-          cVar7 = '\0';
-          cVar12 = '!';
-        }
-        else if (uVar3 < 0x881e) {
-          if (uVar3 < 0x881c) {
-            cVar11 = '\0';
-            cVar7 = '\0';
-            cVar12 = '\x1e';
+          else if (internalFormat < 0x8818) {
+            typeFormatA = '\0';
+            hwFormatIndex = '\0';
+            internalFormatCode = '\x14';
           }
           else {
-            cVar11 = '\0';
-            cVar7 = '\0';
-            cVar12 = ' ';
+            typeFormatA = '\0';
+            hwFormatIndex = '\0';
+            internalFormatCode = '\x13';
           }
         }
-        else if (uVar3 == 0x881f) {
-          cVar11 = '\0';
-          cVar7 = '\0';
-          cVar12 = '\"';
+        else if (internalFormat == 0x881d) {
+          typeFormatA = '\0';
+          hwFormatIndex = '\0';
+          internalFormatCode = '!';
         }
-        else if (uVar3 < 0x881f) {
-          cVar11 = '\0';
-          cVar7 = '\0';
-          cVar12 = '\x1f';
+        else if (internalFormat < 0x881e) {
+          if (internalFormat < 0x881c) {
+            typeFormatA = '\0';
+            hwFormatIndex = '\0';
+            internalFormatCode = '\x1e';
+          }
+          else {
+            typeFormatA = '\0';
+            hwFormatIndex = '\0';
+            internalFormatCode = ' ';
+          }
+        }
+        else if (internalFormat == 0x881f) {
+          typeFormatA = '\0';
+          hwFormatIndex = '\0';
+          internalFormatCode = '\"';
+        }
+        else if (internalFormat < 0x881f) {
+          typeFormatA = '\0';
+          hwFormatIndex = '\0';
+          internalFormatCode = '\x1f';
         }
         else {
-          if (uVar3 != 0x8837) {
-            if (uVar3 == 0x88f0) goto LAB_0003009c;
+          if (internalFormat != 0x8837) {
+            if (internalFormat == 0x88f0) goto LAB_0003009c;
             goto LAB_0002fde8;
           }
-          cVar11 = '\0';
-          cVar7 = '\x0f';
-          cVar12 = '\x04';
+          typeFormatA = '\0';
+          hwFormatIndex = '\x0f';
+          internalFormatCode = '\x04';
         }
         goto LAB_00030270;
       }
-      if (uVar3 < 0x8055) {
-        if (uVar3 < 0x8041) {
-          if (uVar3 < 0x803f) {
-            if (uVar3 == 0x1908) {
+      if (internalFormat < 0x8055) {
+        if (internalFormat < 0x8041) {
+          if (internalFormat < 0x803f) {
+            if (internalFormat == 0x1908) {
 LAB_000302e8:
-              if (uVar2 == 0x1908) {
+              if (externalFormat == 0x1908) {
 LAB_0003031c:
-                if (uVar5 == 3) goto LAB_00030360;
+                if (surfaceFormatNibble == 3) goto LAB_00030360;
               }
               else {
-                if (uVar2 < 0x1909) {
-                  if (uVar2 == 0x1906) goto LAB_0003031c;
+                if (externalFormat < 0x1909) {
+                  if (externalFormat == 0x1906) goto LAB_0003031c;
                 }
-                else if ((uVar2 == 0x190a) || (uVar2 == 0x80e1)) goto LAB_0003031c;
+                else if ((externalFormat == 0x190a) || (externalFormat == 0x80e1)) goto LAB_0003031c;
 LAB_00030340:
-                if (uVar5 == 3) goto LAB_0003036c;
+                if (surfaceFormatNibble == 3) goto LAB_0003036c;
               }
 LAB_0002fec0:
-              cVar7 = '\0';
-              cVar12 = '\t';
-              cVar11 = cVar10;
+              hwFormatIndex = '\0';
+              internalFormatCode = '\t';
+              typeFormatA = typeFormatB;
             }
             else {
-              if (uVar3 < 0x1909) {
-                if (uVar3 == 4) goto LAB_000302e8;
-                if (4 < uVar3) {
-                  if (uVar3 == 0x1906) goto LAB_000302b8;
-                  if (0x1906 < uVar3) goto LAB_00030328;
-                  if (uVar3 == 0x1902) goto LAB_0003034c;
+              if (internalFormat < 0x1909) {
+                if (internalFormat == 4) goto LAB_000302e8;
+                if (4 < internalFormat) {
+                  if (internalFormat == 0x1906) goto LAB_000302b8;
+                  if (0x1906 < internalFormat) goto LAB_00030328;
+                  if (internalFormat == 0x1902) goto LAB_0003034c;
 LAB_0002fde8:
-                  cVar7 = '\0';
-                  cVar12 = '\0';
-                  cVar11 = '\0';
+                  hwFormatIndex = '\0';
+                  internalFormatCode = '\0';
+                  typeFormatA = '\0';
                   goto LAB_00030270;
                 }
-                if (uVar3 == 2) goto LAB_000301ec;
-                if (uVar3 < 3) {
-                  if (uVar3 == 1) goto LAB_00030218;
+                if (internalFormat == 2) goto LAB_000301ec;
+                if (internalFormat < 3) {
+                  if (internalFormat == 1) goto LAB_00030218;
                   goto LAB_0002fde8;
                 }
 LAB_00030328:
-                if (uVar2 == 0x1906) {
-                  cVar7 = '\0';
-                  cVar12 = '(';
-                  cVar11 = '\0';
+                if (externalFormat == 0x1906) {
+                  hwFormatIndex = '\0';
+                  internalFormatCode = '(';
+                  typeFormatA = '\0';
                   goto LAB_00030270;
                 }
                 goto LAB_00030340;
               }
-              if (uVar3 < 0x803d) {
-                if (0x803a < uVar3) goto LAB_000302b8;
-                if (uVar3 == 0x190a) {
+              if (internalFormat < 0x803d) {
+                if (0x803a < internalFormat) goto LAB_000302b8;
+                if (internalFormat == 0x190a) {
 LAB_000301ec:
-                  cVar7 = '\0';
-                  cVar12 = '\x04';
-                  cVar11 = '\0';
+                  hwFormatIndex = '\0';
+                  internalFormatCode = '\x04';
+                  typeFormatA = '\0';
                 }
                 else {
-                  if (uVar3 < 0x190a) goto LAB_00030218;
-                  if (uVar3 != 0x2a10) goto LAB_0002fde8;
-                  cVar7 = '\0';
-                  cVar12 = '(';
-                  cVar11 = cVar6;
+                  if (internalFormat < 0x190a) goto LAB_00030218;
+                  if (internalFormat != 0x2a10) goto LAB_0002fde8;
+                  hwFormatIndex = '\0';
+                  internalFormatCode = '(';
+                  typeFormatA = typeFormatAlt;
                 }
               }
               else {
-                cVar7 = '\0';
-                cVar12 = '\x1a';
-                cVar11 = '\0';
+                hwFormatIndex = '\0';
+                internalFormatCode = '\x1a';
+                typeFormatA = '\0';
               }
             }
           }
           else {
 LAB_00030218:
-            cVar7 = '\0';
-            cVar12 = '\x01';
-            cVar11 = '\0';
+            hwFormatIndex = '\0';
+            internalFormatCode = '\x01';
+            typeFormatA = '\0';
           }
         }
-        else if (uVar3 < 0x804c) {
-          if (uVar3 < 0x8049) {
-            if (uVar3 < 0x8047) {
-              if (0x8042 < uVar3) goto LAB_000301ec;
-              cVar7 = '\0';
-              cVar12 = '\x19';
-              cVar11 = '\0';
+        else if (internalFormat < 0x804c) {
+          if (internalFormat < 0x8049) {
+            if (internalFormat < 0x8047) {
+              if (0x8042 < internalFormat) goto LAB_000301ec;
+              hwFormatIndex = '\0';
+              internalFormatCode = '\x19';
+              typeFormatA = '\0';
             }
             else {
-              cVar7 = '\0';
-              cVar12 = '\x1c';
-              cVar11 = '\0';
+              hwFormatIndex = '\0';
+              internalFormatCode = '\x1c';
+              typeFormatA = '\0';
             }
           }
           else {
-            cVar7 = '\0';
-            cVar12 = '\x03';
-            cVar11 = '\0';
+            hwFormatIndex = '\0';
+            internalFormatCode = '\x03';
+            typeFormatA = '\0';
           }
         }
-        else if (uVar3 < 0x8051) {
-          if (uVar3 < 0x804f) {
-            if (0x804d < uVar3) goto LAB_0002fde8;
-            cVar7 = '\0';
-            cVar12 = '\x1b';
-            cVar11 = '\0';
+        else if (internalFormat < 0x8051) {
+          if (internalFormat < 0x804f) {
+            if (0x804d < internalFormat) goto LAB_0002fde8;
+            hwFormatIndex = '\0';
+            internalFormatCode = '\x1b';
+            typeFormatA = '\0';
           }
           else {
 LAB_0003036c:
-            cVar7 = '\0';
-            cVar12 = '\x05';
+            hwFormatIndex = '\0';
+            internalFormatCode = '\x05';
           }
         }
-        else if (uVar3 == 0x8052) {
-          cVar7 = '\0';
-          cVar12 = '#';
-          cVar11 = cVar10;
+        else if (internalFormat == 0x8052) {
+          hwFormatIndex = '\0';
+          internalFormatCode = '#';
+          typeFormatA = typeFormatB;
         }
         else {
-          if (uVar3 < 0x8053) goto LAB_0002fec0;
+          if (internalFormat < 0x8053) goto LAB_0002fec0;
 LAB_00030378:
-          cVar7 = '\0';
-          cVar12 = '\x18';
-          cVar11 = '\0';
+          hwFormatIndex = '\0';
+          internalFormatCode = '\x18';
+          typeFormatA = '\0';
         }
       }
       else {
 LAB_00030360:
-        cVar7 = '\0';
-        cVar12 = '\x06';
+        hwFormatIndex = '\0';
+        internalFormatCode = '\x06';
       }
 LAB_00030270:
-      if ((((uVar1 & 0xf) == 2) || (cVar7 == '\0')) && (cVar7 = cVar11, cVar11 == '\0')) {
-        cVar7 = cVar12;
+      if ((((imageFlags & 0xf) == 2) || (hwFormatIndex == '\0')) && (hwFormatIndex = typeFormatA, typeFormatA == '\0')) {
+        hwFormatIndex = internalFormatCode;
       }
       goto LAB_000303b4;
     }
-    cVar7 = '\'';
-    if ((uVar4 == 0x85ba) || (cVar7 = '&', uVar4 == 0x85bb)) goto LAB_000303b4;
+    hwFormatIndex = '\'';
+    if ((dataType == 0x85ba) || (hwFormatIndex = '&', dataType == 0x85bb)) goto LAB_000303b4;
   }
-  cVar7 = '\0';
+  hwFormatIndex = '\0';
 LAB_000303b4:
-  *(char *)(texture + 0x38) = cVar7;
+  *(char *)(texture + 0x38) = hwFormatIndex;
   return;
 }
 
@@ -2109,7 +2109,7 @@ int FUN_00030f60(ctx, texture, face, level, param_5)
   
   uVar3 = (uint)*(byte *)(texture + 0x38);
   if (uVar3 == 0) {
-    ((int (*)())FUN_0002fac0)(ctx,texture);
+    ((int (*)())gld_selectTextureHardwareFormat)(ctx,texture);
     uVar3 = (uint)*(byte *)(texture + 0x38);
   }
   iVar4 = uVar3 * 0x24;
@@ -2210,7 +2210,7 @@ int gldTextureFormatEntryForLevel(ctx, texture, faceIndex, levelIndex, modeFlag)
   
   texImages = *(ushort **)(texture + 0x30);
   if (*(char *)(texture + 0x38) == '\0') {
-    ((int (*)())FUN_0002fac0)(ctx,texture);
+    ((int (*)())gld_selectTextureHardwareFormat)(ctx,texture);
   }
   modeFlagIsZero = modeFlag == 0;
   if ((((!modeFlagIsZero) ||
@@ -2782,236 +2782,236 @@ LAB_00032098:
 }
 
 /* gldTextureMakeResident @ 0x32100 (8252 bytes) */
-int gldTextureMakeResident(ctx, texture, param_3, param_4, param_5, param_6)
+int gldTextureMakeResident(ctx, texture, scratchArg3, staleArgR6, staleArgR7, scratchArg6)
   int ctx;
   int *texture;
-  uint param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  uint param_6;
+  uint scratchArg3;
+  undefined4 staleArgR6;
+  undefined4 staleArgR7;
+  uint scratchArg6;
 {
   int gld_ensureTextureBackingSized2Result;
   int gld_setTextureNewTextureBackingResult;
   int gld_ensureTextureSurfaceBackingResult;
   int gld_setTextureAgpRefBackingResult;
   int gld_ensureTextureGlobalBackingResult;
-  bool bVar1;
-  bool bVar2;
-  byte bVar3;
-  byte bVar4;
-  short sVar5;
-  ushort uVar6;
-  uint uVar7;
-  uint uVar8;
-  uint uVar9;
-  uint uVar10;
-  int iVar11;
-  undefined4 *puVar12;
-  int *piVar13;
+  bool scratchFlag1;
+  bool scratchFlag2;
+  byte scratchFlag3;
+  byte scratchFlag4;
+  short scratchShort5;
+  ushort scratchUint6;
+  uint scratchUint7;
+  uint scratchUint8;
+  uint scratchUint9;
+  uint scratchUint10;
+  int scratchInt11;
+  undefined4 *scratchPtr12;
+  int *scratchPtr13;
   undefined4 r4AfterCall;
-  int *piVar14;
-  uint uVar15;
-  undefined4 uVar16;
-  uint *puVar17;
-  undefined1 *puVar18;
-  undefined4 uVar19;
-  uint uVar20;
-  int iVar21;
-  uint uVar22;
-  uint uVar23;
-  int *piVar24;
-  int iVar25;
-  uint *puVar26;
-  ushort uVar27;
-  uint uVar28;
-  int iVar29;
-  uint uVar30;
+  int *scratchPtr14;
+  uint scratchUint15;
+  undefined4 scratchUint16;
+  uint *scratchPtr17;
+  undefined1 *scratchPtr18;
+  undefined4 scratchUint19;
+  uint scratchUint20;
+  int scratchInt21;
+  uint scratchUint22;
+  uint scratchUint23;
+  int *scratchPtr24;
+  int scratchInt25;
+  uint *scratchPtr26;
+  ushort scratchUint27;
+  uint scratchUint28;
+  int scratchInt29;
+  uint scratchUint30;
   ushort *texImages;
-  uint uVar32;
-  int iVar33;
-  int *piVar34;
-  int iVar35;
-  uint uVar36;
+  uint scratchUint32;
+  int scratchInt33;
+  int *scratchPtr34;
+  int scratchInt35;
+  uint scratchUint36;
   undefined *formatInfo;
-  undefined1 *puVar38;
+  undefined1 *scratchPtr38;
   byte xerSummaryOverflow = 0;
-  bool bVar39;
-  bool bVar40;
+  bool scratchFlag39;
+  bool scratchFlag40;
   byte crField1;
   byte calleeSavedCrField2;
   byte calleeSavedCrField3;
   byte calleeSavedCrField4;
   byte crField5;
-  byte bVar41;
-  byte bVar42;
-  byte bVar43;
-  undefined8 uVar44;
+  byte scratchFlag41;
+  byte scratchFlag42;
+  byte scratchFlag43;
+  undefined8 scratchUint44;
   int ctxSaved;
-  uint local_218;
-  uint local_214;
-  uint local_210;
-  int local_20c;
-  int local_208;
-  int local_204;
-  int aiStack_200 [14];
-  int aiStack_1c8 [9];
-  undefined4 local_1a4;
-  uint local_158;
-  uint local_154;
-  undefined1 auStack_150 [4];
-  undefined1 auStack_14c [4];
-  uint local_148;
-  int local_144;
-  undefined4 local_138;
-  uint local_134;
-  undefined4 local_130;
-  uint local_12c;
-  uint local_128;
-  undefined4 local_124;
-  undefined4 local_120;
-  int *local_e8;
-  int local_e4;
-  int local_e0;
-  int *local_dc;
-  int local_d8;
-  int *local_d4;
-  int local_d0;
-  int local_cc;
-  int local_c8;
-  int local_c4;
-  uint local_c0;
-  int local_bc;
-  uint local_b8;
-  uint local_b4;
-  uint local_b0;
-  int local_ac;
-  uint local_a8;
-  uint local_a4;
-  uint local_a0;
-  uint local_9c;
-  uint local_98;
-  uint local_94;
-  uint local_90;
-  int *local_8c;
-  uint local_88;
-  int *local_84;
-  uint local_80;
-  uint local_7c;
-  uint local_78;
-  int local_74;
-  uint local_70;
-  uint local_6c;
-  uint local_68;
-  uint *local_64;
-  uint local_60;
-  int *local_5c;
-  uint local_58;
-  uint local_54;
+  uint scratchStack218;
+  uint scratchStack214;
+  uint scratchStack210;
+  int scratchStack20c;
+  int scratchStack208;
+  int scratchStack204;
+  int scratchStackArr200 [14];
+  int scratchStackArr1c8 [9];
+  undefined4 scratchStack1a4;
+  uint scratchStack158;
+  uint scratchStack154;
+  undefined1 scratchStackArr150 [4];
+  undefined1 scratchStackArr14c [4];
+  uint scratchStack148;
+  int scratchStack144;
+  undefined4 scratchStack138;
+  uint scratchStack134;
+  undefined4 scratchStack130;
+  uint scratchStack12c;
+  uint scratchStack128;
+  undefined4 scratchStack124;
+  undefined4 scratchStack120;
+  int *scratchStacke8;
+  int scratchStacke4;
+  int scratchStacke0;
+  int *scratchStackdc;
+  int scratchStackd8;
+  int *scratchStackd4;
+  int scratchStackd0;
+  int scratchStackcc;
+  int scratchStackc8;
+  int scratchStackc4;
+  uint scratchStackc0;
+  int scratchStackbc;
+  uint scratchStackb8;
+  uint scratchStackb4;
+  uint scratchStackb0;
+  int scratchStackac;
+  uint scratchStacka8;
+  uint scratchStacka4;
+  uint scratchStacka0;
+  uint scratchStack9c;
+  uint scratchStack98;
+  uint scratchStack94;
+  uint scratchStack90;
+  int *scratchStack8c;
+  uint scratchStack88;
+  int *scratchStack84;
+  uint scratchStack80;
+  uint scratchStack7c;
+  uint scratchStack78;
+  int scratchStack74;
+  uint scratchStack70;
+  uint scratchStack6c;
+  uint scratchStack68;
+  uint *scratchStack64;
+  uint scratchStack60;
+  int *scratchStack5c;
+  uint scratchStack58;
+  uint scratchStack54;
   
   texImages = (ushort *)texture[0xc];
   ctxSaved = ctx;
-  iVar11 = ((int (*)())gldTextureHasNonPowerOfTwoSize)(texture,texture,param_3,param_4,param_5,param_6);
-  if (iVar11 != 0) {
-    iVar25 = texture[0xc];
-    bVar41 = *(byte *)(iVar25 + 1);
-    bVar42 = bVar41 & 0xf;
-    *(byte *)(texture + 0x1b) = bVar42;
-    iVar11 = *(short *)(iVar25 + 0x3c) * 0x18 + iVar25;
-    uVar22 = (uint)*(byte *)(iVar11 + 0xaa);
-    if ((bVar41 & 0xf) == 0) {
-      uVar28 = (uint)*(ushort *)(iVar11 + 0xa4) + uVar22 * -2;
-      if ((int)uVar28 < 1) {
-        uVar28 = 1;
+  scratchInt11 = ((int (*)())gldTextureHasNonPowerOfTwoSize)(texture,texture,scratchArg3,staleArgR6,staleArgR7,scratchArg6);
+  if (scratchInt11 != 0) {
+    scratchInt25 = texture[0xc];
+    scratchFlag41 = *(byte *)(scratchInt25 + 1);
+    scratchFlag42 = scratchFlag41 & 0xf;
+    *(byte *)(texture + 0x1b) = scratchFlag42;
+    scratchInt11 = *(short *)(scratchInt25 + 0x3c) * 0x18 + scratchInt25;
+    scratchUint22 = (uint)*(byte *)(scratchInt11 + 0xaa);
+    if ((scratchFlag41 & 0xf) == 0) {
+      scratchUint28 = (uint)*(ushort *)(scratchInt11 + 0xa4) + scratchUint22 * -2;
+      if ((int)scratchUint28 < 1) {
+        scratchUint28 = 1;
       }
-      uVar22 = (uint)*(ushort *)(iVar11 + 0xa6) + uVar22 * -2;
-      if ((int)uVar22 < 1) {
-        uVar22 = 1;
+      scratchUint22 = (uint)*(ushort *)(scratchInt11 + 0xa6) + scratchUint22 * -2;
+      if ((int)scratchUint22 < 1) {
+        scratchUint22 = 1;
       }
-      if (((uVar28 & uVar28 - 1) == 0) && (param_6 = uVar22 & uVar22 - 1, param_6 == 0))
+      if (((scratchUint28 & scratchUint28 - 1) == 0) && (scratchArg6 = scratchUint22 & scratchUint22 - 1, scratchArg6 == 0))
       goto LAB_00032230;
       goto LAB_00032380;
     }
-    if (bVar42 == 1) {
-      uVar28 = (uint)*(ushort *)(iVar11 + 0xa4) + uVar22 * -2;
-      if ((int)uVar28 < 1) {
-        uVar28 = 1;
+    if (scratchFlag42 == 1) {
+      scratchUint28 = (uint)*(ushort *)(scratchInt11 + 0xa4) + scratchUint22 * -2;
+      if ((int)scratchUint28 < 1) {
+        scratchUint28 = 1;
       }
-      param_6 = (uint)*(ushort *)(iVar11 + 0xa6) + uVar22 * -2;
-      if ((int)param_6 < 1) {
-        param_6 = 1;
+      scratchArg6 = (uint)*(ushort *)(scratchInt11 + 0xa6) + scratchUint22 * -2;
+      if ((int)scratchArg6 < 1) {
+        scratchArg6 = 1;
       }
-      uVar22 = (uint)*(ushort *)(iVar11 + 0xa8) + uVar22 * -2;
-      if ((int)uVar22 < 1) {
-        uVar22 = 1;
+      scratchUint22 = (uint)*(ushort *)(scratchInt11 + 0xa8) + scratchUint22 * -2;
+      if ((int)scratchUint22 < 1) {
+        scratchUint22 = 1;
       }
-      if ((((uVar28 & uVar28 - 1) != 0) || ((param_6 & param_6 - 1) != 0)) ||
-         ((uVar22 & uVar22 - 1) != 0)) goto LAB_00032380;
+      if ((((scratchUint28 & scratchUint28 - 1) != 0) || ((scratchArg6 & scratchArg6 - 1) != 0)) ||
+         ((scratchUint22 & scratchUint22 - 1) != 0)) goto LAB_00032380;
     }
 LAB_00032230:
-    bVar41 = *(byte *)(iVar25 + 1) & 0xf;
-    *(byte *)(texture + 0x1b) = bVar41;
-    iVar11 = *(short *)(iVar25 + 0x3c) * 0x18 + iVar25;
-    uVar22 = (uint)*(byte *)(iVar11 + 0xaa);
-    if (bVar41 == 3) {
-      uVar28 = (uint)*(ushort *)(iVar11 + 0xa4) + uVar22 * -2;
-      if ((int)uVar28 < 1) {
-        uVar28 = 1;
+    scratchFlag41 = *(byte *)(scratchInt25 + 1) & 0xf;
+    *(byte *)(texture + 0x1b) = scratchFlag41;
+    scratchInt11 = *(short *)(scratchInt25 + 0x3c) * 0x18 + scratchInt25;
+    scratchUint22 = (uint)*(byte *)(scratchInt11 + 0xaa);
+    if (scratchFlag41 == 3) {
+      scratchUint28 = (uint)*(ushort *)(scratchInt11 + 0xa4) + scratchUint22 * -2;
+      if ((int)scratchUint28 < 1) {
+        scratchUint28 = 1;
       }
-      uVar22 = (uint)*(ushort *)(iVar11 + 0xa6) + uVar22 * -2;
-      if ((int)uVar22 < 1) {
-        uVar22 = 1;
+      scratchUint22 = (uint)*(ushort *)(scratchInt11 + 0xa6) + scratchUint22 * -2;
+      if ((int)scratchUint22 < 1) {
+        scratchUint22 = 1;
       }
-      if (((uVar28 & uVar28 - 1) != 0) || ((uVar22 & uVar22 - 1) != 0)) {
-        if ((ushort)(*(short *)(iVar25 + 0x16) + 0xda00U) < 2) {
-          uVar27 = *(ushort *)(iVar25 + 0x10);
-          if (uVar27 < 0x8744) {
-            if (((uVar27 < 0x8742) && (uVar27 != 0x2901)) && (uVar27 != 0x8370)) {
+      if (((scratchUint28 & scratchUint28 - 1) != 0) || ((scratchUint22 & scratchUint22 - 1) != 0)) {
+        if ((ushort)(*(short *)(scratchInt25 + 0x16) + 0xda00U) < 2) {
+          scratchUint27 = *(ushort *)(scratchInt25 + 0x10);
+          if (scratchUint27 < 0x8744) {
+            if (((scratchUint27 < 0x8742) && (scratchUint27 != 0x2901)) && (scratchUint27 != 0x8370)) {
 LAB_00032340:
-              uVar27 = *(ushort *)(iVar25 + 0x12);
-              if (0x8743 < uVar27) goto LAB_00032370;
+              scratchUint27 = *(ushort *)(scratchInt25 + 0x12);
+              if (0x8743 < scratchUint27) goto LAB_00032370;
 LAB_0003234c:
-              if (((uVar27 < 0x8742) && (uVar27 != 0x2901)) && (uVar27 != 0x8370))
+              if (((scratchUint27 < 0x8742) && (scratchUint27 != 0x2901)) && (scratchUint27 != 0x8370))
               goto LAB_00032390;
             }
           }
-          else if (uVar27 != 0x8912) goto LAB_00032340;
+          else if (scratchUint27 != 0x8912) goto LAB_00032340;
         }
 LAB_00032380:
         *(undefined1 *)(texture + 0x11) = 1;
         goto LAB_000323a0;
       }
     }
-    else if (bVar41 == 4) {
-      uVar22 = (uint)*(ushort *)(iVar11 + 0xa4) + uVar22 * -2;
-      if ((int)uVar22 < 1) {
-        uVar22 = 1;
+    else if (scratchFlag41 == 4) {
+      scratchUint22 = (uint)*(ushort *)(scratchInt11 + 0xa4) + scratchUint22 * -2;
+      if ((int)scratchUint22 < 1) {
+        scratchUint22 = 1;
       }
-      param_6 = uVar22 & uVar22 - 1;
-      if (param_6 != 0) {
-        if (1 < (ushort)(*(short *)(iVar25 + 0x16) + 0xda00U)) goto LAB_00032380;
-        uVar27 = *(ushort *)(iVar25 + 0x10);
-        if (uVar27 < 0x8744) goto LAB_0003234c;
+      scratchArg6 = scratchUint22 & scratchUint22 - 1;
+      if (scratchArg6 != 0) {
+        if (1 < (ushort)(*(short *)(scratchInt25 + 0x16) + 0xda00U)) goto LAB_00032380;
+        scratchUint27 = *(ushort *)(scratchInt25 + 0x10);
+        if (scratchUint27 < 0x8744) goto LAB_0003234c;
 LAB_00032370:
-        if (uVar27 == 0x8912) goto LAB_00032380;
+        if (scratchUint27 == 0x8912) goto LAB_00032380;
       }
     }
 LAB_00032390:
     *(undefined1 *)(texture + 0x11) = 0;
   }
 LAB_000323a0:
-  bVar41 = *(byte *)((int)texture + 0x39);
-  *(byte *)((int)texture + 0x39) = bVar41 & 0x9f;
-  if ((bVar41 & 0x1f) == 0) {
-    ((int (*)())FUN_0002ee30)(ctxSaved,texture);
+  scratchFlag41 = *(byte *)((int)texture + 0x39);
+  *(byte *)((int)texture + 0x39) = scratchFlag41 & 0x9f;
+  if ((scratchFlag41 & 0x1f) == 0) {
+    ((int (*)())gld_updateTextureSamplerState)(ctxSaved,texture);
     return 1;
   }
-  ((int (*)())FUN_0002fac0)(ctxSaved,texture);
+  ((int (*)())gld_selectTextureHardwareFormat)(ctxSaved,texture);
   if (*(char *)(texture + 0xe) == '\0') {
     return 0;
   }
-  bVar39 = *(char *)((int)texImages + 0x6f) == '\0';
-  bVar41 = (*(char *)((int)texImages + 0x6f) != '\0') << 2 | bVar39 << 1 | xerSummaryOverflow & 1;
-  if (!bVar39) {
+  scratchFlag39 = *(char *)((int)texImages + 0x6f) == '\0';
+  scratchFlag41 = (*(char *)((int)texImages + 0x6f) != '\0') << 2 | scratchFlag39 << 1 | xerSummaryOverflow & 1;
+  if (!scratchFlag39) {
     if (((unsigned char *)0x00001001) <= (undefined *)(1 << (*(byte *)(texImages + 0x32) & 0x3f))) {
       return 0;
     }
@@ -3022,152 +3022,152 @@ LAB_000323a0:
       return 0;
     }
   }
-  uVar27 = *texImages;
-  uVar22 = (uint)*(byte *)(texImages + 0x2f);
-  if ((uVar27 & 0x400) == 0) {
-    if ((uVar27 & 0x800) != 0) {
+  scratchUint27 = *texImages;
+  scratchUint22 = (uint)*(byte *)(texImages + 0x2f);
+  if ((scratchUint27 & 0x400) == 0) {
+    if ((scratchUint27 & 0x800) != 0) {
       gld_ensureTextureGlobalBackingResult = gld_ensureTextureGlobalBacking(ctxSaved,texture,*(undefined4 *)(texImages + 4));
       if (gld_ensureTextureGlobalBackingResult == 0) {
         return 0;
       }
       if (*(char *)((int)texImages + 0x6d) != '\0') {
-        uVar22 = 1 << (*(uint *)(&DAT_001d9f48 + (uint)*(byte *)(texture + 0xe) * 0x24) & 7);
+        scratchUint22 = 1 << (*(uint *)(&DAT_001d9f48 + (uint)*(byte *)(texture + 0xe) * 0x24) & 7);
         *(short *)((int)texture + 0x3e) =
-             (short)((uVar22 * ((uint)texImages[0x52] + (uint)*(byte *)(texImages + 0x55) * -2) + 0x1f &
-                     0xffffffe0) / uVar22);
+             (short)((scratchUint22 * ((uint)texImages[0x52] + (uint)*(byte *)(texImages + 0x55) * -2) + 0x1f &
+                     0xffffffe0) / scratchUint22);
       }
       goto LAB_00032600;
     }
-    if ((uVar27 & 0x2000) != 0) {
-      iVar11 = ((int (*)())gld_uploadTextureLevel)(ctxSaved,texture);
-      if (iVar11 == 0) {
+    if ((scratchUint27 & 0x2000) != 0) {
+      scratchInt11 = ((int (*)())gld_uploadTextureLevel)(ctxSaved,texture);
+      if (scratchInt11 == 0) {
         return 0;
       }
       goto LAB_00032600;
     }
-    uVar19 = 0x1a2114;
-    uVar16 = r4AfterCall;
+    scratchUint19 = 0x1a2114;
+    scratchUint16 = r4AfterCall;
     if ((((((*(float *)(texture[0xc] + 4) == 0.0) ||
-           (sVar5 = *(short *)(texture[0xc] + 0x1a), sVar5 == -0x7a41)) || (sVar5 == -0x7a42)) &&
+           (scratchShort5 = *(short *)(texture[0xc] + 0x1a), scratchShort5 == -0x7a41)) || (scratchShort5 == -0x7a42)) &&
          ((*(char *)(texImages + 0x36) == '\x01' && (*(char *)(texImages + 0x35) == '\x01')))) &&
-        (bVar39)) && (*(int *)(texImages + uVar22 * 0xc + 0x5a) != 0)) {
-      iVar11 = gldPixelUnitBytes((uint)texImages[uVar22 * 0xc + 0x58],(uint)texImages[uVar22 * 0xc + 0x59]);
-      uVar27 = texImages[uVar22 * 0xc + 0x56];
-      uVar28 = iVar11 * (int)(uint)uVar27;
-      uVar32 = *(int *)(texImages + uVar22 * 0xc + 0x5a) +
-               iVar11 * (uint)*(byte *)(texImages + uVar22 * 0xc + 0x55);
+        (scratchFlag39)) && (*(int *)(texImages + scratchUint22 * 0xc + 0x5a) != 0)) {
+      scratchInt11 = gldPixelUnitBytes((uint)texImages[scratchUint22 * 0xc + 0x58],(uint)texImages[scratchUint22 * 0xc + 0x59]);
+      scratchUint27 = texImages[scratchUint22 * 0xc + 0x56];
+      scratchUint28 = scratchInt11 * (int)(uint)scratchUint27;
+      scratchUint32 = *(int *)(texImages + scratchUint22 * 0xc + 0x5a) +
+               scratchInt11 * (uint)*(byte *)(texImages + scratchUint22 * 0xc + 0x55);
       if (*(char *)(texImages + 0x37) != '\0') {
-        uVar32 = uVar32 + uVar28 * *(byte *)(texImages + uVar22 * 0xc + 0x55);
+        scratchUint32 = scratchUint32 + scratchUint28 * *(byte *)(texImages + scratchUint22 * 0xc + 0x55);
       }
-      bVar4 = *(byte *)(texture + 0xe);
-      bVar42 = ((uVar32 & 0x1f) != 0) << 2 | ((uVar32 & 0x1f) == 0) << 1;
-      bVar41 = bVar42 | xerSummaryOverflow & 1;
-      param_3 = (uint)bVar4;
-      uVar44 = ((int (*)())gldTextureFormatCodeMatchesType)((uint)texImages[uVar22 * 0xc + 0x58],(uint)texImages[uVar22 * 0xc + 0x59],
-                            param_3);
-      uVar16 = (undefined4)uVar44;
-      iVar25 = texture[0xc];
-      if (*(short *)(iVar25 + 0x1a) == -0x7a41) {
-        bVar39 = (undefined *)(uint)uVar27 < ((unsigned char *)0x00004001);
+      scratchFlag4 = *(byte *)(texture + 0xe);
+      scratchFlag42 = ((scratchUint32 & 0x1f) != 0) << 2 | ((scratchUint32 & 0x1f) == 0) << 1;
+      scratchFlag41 = scratchFlag42 | xerSummaryOverflow & 1;
+      scratchArg3 = (uint)scratchFlag4;
+      scratchUint44 = ((int (*)())gldTextureFormatCodeMatchesType)((uint)texImages[scratchUint22 * 0xc + 0x58],(uint)texImages[scratchUint22 * 0xc + 0x59],
+                            scratchArg3);
+      scratchUint16 = (undefined4)scratchUint44;
+      scratchInt25 = texture[0xc];
+      if (*(short *)(scratchInt25 + 0x1a) == -0x7a41) {
+        scratchFlag39 = (undefined *)(uint)scratchUint27 < ((unsigned char *)0x00004001);
       }
       else {
-        bVar39 = uVar28 <= *(uint *)(ctxSaved + 0x29d8);
+        scratchFlag39 = scratchUint28 <= *(uint *)(ctxSaved + 0x29d8);
       }
-      if (((uint)bVar39 &
-          (uint)((uVar28 & 0x1f) == 0) & bVar42 >> 1 & 1 & (uint)((ulonglong)uVar44 >> 0x20)) == 0)
+      if (((uint)scratchFlag39 &
+          (uint)((scratchUint28 & 0x1f) == 0) & scratchFlag42 >> 1 & 1 & (uint)((ulonglong)scratchUint44 >> 0x20)) == 0)
       goto LAB_00034128;
-      bVar41 = *(byte *)(iVar25 + 0x5e);
-      uVar30 = (uint)bVar41;
-      local_1a4 = 0;
-      puVar17 = &local_218;
-      puVar26 = &local_214;
-      ((int (*)())gldTextureFormatLookup)((uint)bVar4,texture,aiStack_1c8,puVar17,&local_208,&local_208,&local_210,puVar26,
-                   &local_20c);
-      iVar33 = (uint)texImages[uVar22 * 0xc + 0x52] +
-               (uint)*(byte *)(texImages + uVar22 * 0xc + 0x55) * -2;
-      if (iVar33 < 1) {
-        iVar33 = 1;
+      scratchFlag41 = *(byte *)(scratchInt25 + 0x5e);
+      scratchUint30 = (uint)scratchFlag41;
+      scratchStack1a4 = 0;
+      scratchPtr17 = &scratchStack218;
+      scratchPtr26 = &scratchStack214;
+      ((int (*)())gldTextureFormatLookup)((uint)scratchFlag4,texture,scratchStackArr1c8,scratchPtr17,&scratchStack208,&scratchStack208,&scratchStack210,scratchPtr26,
+                   &scratchStack20c);
+      scratchInt33 = (uint)texImages[scratchUint22 * 0xc + 0x52] +
+               (uint)*(byte *)(texImages + scratchUint22 * 0xc + 0x55) * -2;
+      if (scratchInt33 < 1) {
+        scratchInt33 = 1;
       }
-      uVar22 = (uint)texImages[uVar22 * 0xc + 0x53] -
-               (uint)*(byte *)(texImages + uVar22 * 0xc + 0x55) * (uint)*(byte *)(iVar25 + 0x6e);
-      if ((int)uVar22 < 1) {
-        uVar22 = 1;
+      scratchUint22 = (uint)texImages[scratchUint22 * 0xc + 0x53] -
+               (uint)*(byte *)(texImages + scratchUint22 * 0xc + 0x55) * (uint)*(byte *)(scratchInt25 + 0x6e);
+      if ((int)scratchUint22 < 1) {
+        scratchUint22 = 1;
       }
-      uVar23 = *(uint *)(ctxSaved + 0x24);
-      uVar20 = uVar23 & 0x82;
-      iVar25 = uVar28 * (uVar22 - 1) + iVar11 * (iVar33 + 1U & 0xfffffffe);
-      if (uVar20 == 0) {
-        iVar29 = texture[0xc];
+      scratchUint23 = *(uint *)(ctxSaved + 0x24);
+      scratchUint20 = scratchUint23 & 0x82;
+      scratchInt25 = scratchUint28 * (scratchUint22 - 1) + scratchInt11 * (scratchInt33 + 1U & 0xfffffffe);
+      if (scratchUint20 == 0) {
+        scratchInt29 = texture[0xc];
       }
       else {
-        iVar29 = texture[0xc];
-        if (((*(uint *)(iVar29 + 0x48) & 0x40) == 0) && (uVar22 != 0)) {
-          uVar36 = 0;
-          uVar16 = 0;
-          uVar8 = uVar32;
+        scratchInt29 = texture[0xc];
+        if (((*(uint *)(scratchInt29 + 0x48) & 0x40) == 0) && (scratchUint22 != 0)) {
+          scratchUint36 = 0;
+          scratchUint16 = 0;
+          scratchUint8 = scratchUint32;
           do {
-            uVar36 = uVar36 + 1;
-            gldFlushDataCacheRange(ctxSaved,uVar8,iVar11 * iVar33,puVar17,uVar20,uVar16,uVar23,puVar26);
-            uVar8 = uVar8 + uVar28;
-          } while (uVar36 < uVar22);
-          iVar29 = texture[0xc];
+            scratchUint36 = scratchUint36 + 1;
+            gldFlushDataCacheRange(ctxSaved,scratchUint8,scratchInt11 * scratchInt33,scratchPtr17,scratchUint20,scratchUint16,scratchUint23,scratchPtr26);
+            scratchUint8 = scratchUint8 + scratchUint28;
+          } while (scratchUint36 < scratchUint22);
+          scratchInt29 = texture[0xc];
         }
       }
-      uVar23 = *(uint *)(iVar29 + 0x50);
-      uVar20 = uVar32;
-      if ((uVar23 <= uVar32) && (uVar8 = uVar23 + *(int *)(iVar29 + 0x4c), uVar32 + iVar25 <= uVar8)
+      scratchUint23 = *(uint *)(scratchInt29 + 0x50);
+      scratchUint20 = scratchUint32;
+      if ((scratchUint23 <= scratchUint32) && (scratchUint8 = scratchUint23 + *(int *)(scratchInt29 + 0x4c), scratchUint32 + scratchInt25 <= scratchUint8)
          ) {
-        iVar25 = uVar8 - uVar23;
-        uVar20 = uVar23;
+        scratchInt25 = scratchUint8 - scratchUint23;
+        scratchUint20 = scratchUint23;
       }
-      if ((*(short *)(iVar29 + 0x1a) == -0x7a41) &&
-         ((*(char *)(iVar29 + 0x6d) != '\0' || (iVar33 * iVar11 == uVar28)))) {
-        *(short *)((int)texture + 0x3e) = (short)(uVar28 >> (local_218 & 0x3f));
-        gld_setTextureAgpRefBackingResult = gld_setTextureAgpRefBacking(ctxSaved,texture,uVar32,uVar20,iVar25);
+      if ((*(short *)(scratchInt29 + 0x1a) == -0x7a41) &&
+         ((*(char *)(scratchInt29 + 0x6d) != '\0' || (scratchInt33 * scratchInt11 == scratchUint28)))) {
+        *(short *)((int)texture + 0x3e) = (short)(scratchUint28 >> (scratchStack218 & 0x3f));
+        gld_setTextureAgpRefBackingResult = gld_setTextureAgpRefBacking(ctxSaved,texture,scratchUint32,scratchUint20,scratchInt25);
         if (gld_setTextureAgpRefBackingResult == 0) {
           return 0;
         }
-        uVar27 = (ushort)(-2 << (uVar30 & 0x1f)) | (ushort)(0xfffffffe >> 0x20 - (uVar30 & 0x1f));
-        *(byte *)(texture[0xd] + 0x15) = (byte)local_20c & 3;
+        scratchUint27 = (ushort)(-2 << (scratchUint30 & 0x1f)) | (ushort)(0xfffffffe >> 0x20 - (scratchUint30 & 0x1f));
+        *(byte *)(texture[0xd] + 0x15) = (byte)scratchStack20c & 3;
       }
       else {
-        uVar23 = (iVar33 << (local_218 & 0x3f)) + 0x1fU & 0xffffffe0;
-        *(short *)((int)texture + 0x3e) = (short)(uVar23 >> (local_218 & 0x3f));
+        scratchUint23 = (scratchInt33 << (scratchStack218 & 0x3f)) + 0x1fU & 0xffffffe0;
+        *(short *)((int)texture + 0x3e) = (short)(scratchUint23 >> (scratchStack218 & 0x3f));
         if ((*(byte *)((int)texture + 0x39) & 3) != 0) {
-          if ((local_214 < 3) || ((iVar11 = 1, 4 < local_214 && (iVar11 = 2, local_214 != 6)))) {
-            iVar11 = 0;
+          if ((scratchStack214 < 3) || ((scratchInt11 = 1, 4 < scratchStack214 && (scratchInt11 = 2, scratchStack214 != 6)))) {
+            scratchInt11 = 0;
           }
-          bVar39 = (iVar33 << (local_218 & 0x3f)) >> iVar11 < 0x2000;
-          gld_setTextureNewTextureBackingResult = gld_setTextureNewTextureBacking(ctxSaved,texture,0x348,uVar23 * uVar22,uVar20,iVar25);
+          scratchFlag39 = (scratchInt33 << (scratchStack218 & 0x3f)) >> scratchInt11 < 0x2000;
+          gld_setTextureNewTextureBackingResult = gld_setTextureNewTextureBacking(ctxSaved,texture,0x348,scratchUint23 * scratchUint22,scratchUint20,scratchInt25);
           if (gld_setTextureNewTextureBackingResult == 0) {
             return 0;
           }
           *(undefined1 *)(texture[0xd] + 0x15) = 0;
-          piVar34 = (int *)*texture;
-          uVar8 = piVar34[8];
-          piVar34[2] = 0;
-          piVar14 = piVar34 + 0x280;
-          *piVar34 = 0;
-          piVar34[1] = 0x20;
-          piVar34[8] = (uint)bVar39 << 0x1f | uVar8 & 0x6fffffff | 0x40000000;
-          *(char *)((int)piVar34 + 0x1a) = (char)local_218;
-          *(undefined2 *)(piVar34 + 6) = 1;
-          *(short *)(piVar34 + 5) = (short)iVar33;
-          *(short *)((int)piVar34 + 0x16) = (short)uVar22;
-          piVar34[8] = (uint)bVar39 << 0x1f | uVar8 & 0x4fffffff | 0x40000000;
-          piVar34[3] = uVar23;
-          piVar34[4] = uVar28;
-          *(char *)((int)piVar34 + 0x1b) = (char)local_20c;
-          iVar25 = (uint)*(byte *)(texture + 0xe) * 0x24;
-          formatInfo = &DAT_001d9f34 + iVar25;
-          if ((*(uint *)(&DAT_001d9f4c + iVar25) & 0x10000) == 0) {
-            if ((*(uint *)(&DAT_001d9f48 + iVar25) & 8) == 0) {
-              uVar8 = *(uint *)(&DAT_001d9f48 + iVar25) & 7;
-              if (uVar8 == 1) {
+          scratchPtr34 = (int *)*texture;
+          scratchUint8 = scratchPtr34[8];
+          scratchPtr34[2] = 0;
+          scratchPtr14 = scratchPtr34 + 0x280;
+          *scratchPtr34 = 0;
+          scratchPtr34[1] = 0x20;
+          scratchPtr34[8] = (uint)scratchFlag39 << 0x1f | scratchUint8 & 0x6fffffff | 0x40000000;
+          *(char *)((int)scratchPtr34 + 0x1a) = (char)scratchStack218;
+          *(undefined2 *)(scratchPtr34 + 6) = 1;
+          *(short *)(scratchPtr34 + 5) = (short)scratchInt33;
+          *(short *)((int)scratchPtr34 + 0x16) = (short)scratchUint22;
+          scratchPtr34[8] = (uint)scratchFlag39 << 0x1f | scratchUint8 & 0x4fffffff | 0x40000000;
+          scratchPtr34[3] = scratchUint23;
+          scratchPtr34[4] = scratchUint28;
+          *(char *)((int)scratchPtr34 + 0x1b) = (char)scratchStack20c;
+          scratchInt25 = (uint)*(byte *)(texture + 0xe) * 0x24;
+          formatInfo = &DAT_001d9f34 + scratchInt25;
+          if ((*(uint *)(&DAT_001d9f4c + scratchInt25) & 0x10000) == 0) {
+            if ((*(uint *)(&DAT_001d9f48 + scratchInt25) & 8) == 0) {
+              scratchUint8 = *(uint *)(&DAT_001d9f48 + scratchInt25) & 7;
+              if (scratchUint8 == 1) {
                 formatInfo = &DAT_001da00c;
               }
-              else if (uVar8 < 2) {
-                if (uVar8 == 0) {
+              else if (scratchUint8 < 2) {
+                if (scratchUint8 == 0) {
                   formatInfo = &DAT_001d9fa0;
                 }
                 else {
@@ -3176,8 +3176,8 @@ LAB_00032a20:
                 }
               }
               else {
-                if (uVar8 == 2) goto LAB_00032b08;
-                if (uVar8 != 3) goto LAB_00032a20;
+                if (scratchUint8 == 2) goto LAB_00032b08;
+                if (scratchUint8 != 3) goto LAB_00032a20;
                 formatInfo = &DAT_001da36c;
               }
             }
@@ -3186,63 +3186,63 @@ LAB_00032b08:
               formatInfo = &DAT_001da054;
             }
           }
-          _memcpy(piVar34 + 0x2a0,PTR_DAT_001e899c,0x23c);
-          uVar9 = piVar34[0x306];
-          uVar10 = piVar34[0x31c];
-          piVar34[0x2ab] = 0;
-          uVar8 = *(uint *)(formatInfo + 0x18) >> 5 & 0x1f;
-          piVar34[0x306] = uVar8 | uVar9 & 0xffffffe0;
-          uVar36 = (*(uint *)(formatInfo + 0x18) & 0x18) << 5;
-          piVar34[0x306] = uVar36 | uVar8 | uVar9 & 0xfffffce0;
-          uVar15 = (*(uint *)(formatInfo + 0x18) & 6) << 9;
-          piVar34[0x306] = uVar15 | uVar36 | uVar8 | uVar9 & 0xfffff0e0;
-          uVar7 = *(uint *)(formatInfo + 0x1c) >> 0x12 & 0x3000;
-          piVar34[0x306] = uVar7 | uVar15 | uVar36 | uVar8 | uVar9 & 0xffffc0e0;
-          piVar34[0x306] =
+          _memcpy(scratchPtr34 + 0x2a0,PTR_DAT_001e899c,0x23c);
+          scratchUint9 = scratchPtr34[0x306];
+          scratchUint10 = scratchPtr34[0x31c];
+          scratchPtr34[0x2ab] = 0;
+          scratchUint8 = *(uint *)(formatInfo + 0x18) >> 5 & 0x1f;
+          scratchPtr34[0x306] = scratchUint8 | scratchUint9 & 0xffffffe0;
+          scratchUint36 = (*(uint *)(formatInfo + 0x18) & 0x18) << 5;
+          scratchPtr34[0x306] = scratchUint36 | scratchUint8 | scratchUint9 & 0xfffffce0;
+          scratchUint15 = (*(uint *)(formatInfo + 0x18) & 6) << 9;
+          scratchPtr34[0x306] = scratchUint15 | scratchUint36 | scratchUint8 | scratchUint9 & 0xfffff0e0;
+          scratchUint7 = *(uint *)(formatInfo + 0x1c) >> 0x12 & 0x3000;
+          scratchPtr34[0x306] = scratchUint7 | scratchUint15 | scratchUint36 | scratchUint8 | scratchUint9 & 0xffffc0e0;
+          scratchPtr34[0x306] =
                *(uint *)(formatInfo + 0x1c) >> 0xe & 0xc000 |
-               uVar7 | uVar15 | uVar36 | uVar8 | uVar9 & 0xfff000e0;
-          uVar8 = *(uint *)(formatInfo + 0x1c) >> 7 & 0x1f;
-          piVar34[0x31c] = uVar8 | uVar10 & 0xfffffe00;
-          uVar36 = (*(uint *)(formatInfo + 0x1c) & 0x70) << 5;
-          piVar34[0x31c] = uVar36 | uVar8 | uVar10 & 0xfffff000;
-          uVar15 = (*(uint *)(formatInfo + 0x1c) & 0xe) << 0xb;
-          piVar34[0x31c] = uVar15 | uVar36 | uVar8 | uVar10 & 0xffff8000;
-          uVar7 = *(uint *)(formatInfo + 0x20) >> 0xe & 0x38000;
-          piVar34[0x31c] = uVar7 | uVar15 | uVar36 | uVar8 | uVar10 & 0xfffc0000;
-          piVar34[0x31c] =
+               scratchUint7 | scratchUint15 | scratchUint36 | scratchUint8 | scratchUint9 & 0xfff000e0;
+          scratchUint8 = *(uint *)(formatInfo + 0x1c) >> 7 & 0x1f;
+          scratchPtr34[0x31c] = scratchUint8 | scratchUint10 & 0xfffffe00;
+          scratchUint36 = (*(uint *)(formatInfo + 0x1c) & 0x70) << 5;
+          scratchPtr34[0x31c] = scratchUint36 | scratchUint8 | scratchUint10 & 0xfffff000;
+          scratchUint15 = (*(uint *)(formatInfo + 0x1c) & 0xe) << 0xb;
+          scratchPtr34[0x31c] = scratchUint15 | scratchUint36 | scratchUint8 | scratchUint10 & 0xffff8000;
+          scratchUint7 = *(uint *)(formatInfo + 0x20) >> 0xe & 0x38000;
+          scratchPtr34[0x31c] = scratchUint7 | scratchUint15 | scratchUint36 | scratchUint8 | scratchUint10 & 0xfffc0000;
+          scratchPtr34[0x31c] =
                *(uint *)(formatInfo + 0x20) >> 8 & 0x1c0000 |
-               uVar7 | uVar15 | uVar36 | uVar8 | uVar10 & 0xf8000000;
-          piVar13 = piVar14;
-          if (bVar39) {
-            *piVar14 = (int)((unsigned char *)0x00001393U);
-            piVar34[0x281] = 10;
-            piVar34[0x282] = 0x5c8;
-            piVar34[0x283] = 0x20000;
-            piVar34[0x284] = 0x575;
-            piVar13 = piVar34 + 0x286;
-            piVar34[0x285] = local_20c;
+               scratchUint7 | scratchUint15 | scratchUint36 | scratchUint8 | scratchUint10 & 0xf8000000;
+          scratchPtr13 = scratchPtr14;
+          if (scratchFlag39) {
+            *scratchPtr14 = (int)((unsigned char *)0x00001393U);
+            scratchPtr34[0x281] = 10;
+            scratchPtr34[0x282] = 0x5c8;
+            scratchPtr34[0x283] = 0x20000;
+            scratchPtr34[0x284] = 0x575;
+            scratchPtr13 = scratchPtr34 + 0x286;
+            scratchPtr34[0x285] = scratchStack20c;
           }
-          *(short *)(piVar34 + uVar30 * 8 + 0x10) = (short)((int)piVar13 - (int)piVar14 >> 2);
-          iVar25 = piVar34[1];
-          *(undefined2 *)((int)piVar34 + uVar30 * 0x20 + 0x42) = 1;
-          piVar34[uVar30 * 8 + 0x17] = 0;
-          piVar34[uVar30 * 8 + 0x11] = uVar32 - (uVar20 & 0xfffff000);
-          piVar34[uVar30 * 8 + 0x12] = 0;
-          piVar34[uVar30 * 8 + 0x13] = 0;
-          piVar34[uVar30 * 8 + 0x14] = 0;
-          piVar34[uVar30 * 8 + 0x15] = 0;
-          *(short *)(piVar34 + uVar30 * 8 + 0x16) =
-               (short)((int)(piVar34 + 0x32f) - (int)piVar14 >> 2) - (short)iVar25;
-          iVar25 = (uint)*(byte *)(texture + 0xe) * 0x24;
-          formatInfo = &DAT_001d9f34 + iVar25;
-          if ((*(uint *)(&DAT_001d9f4c + iVar25) & 0x10000) == 0) {
-            if ((*(uint *)(&DAT_001d9f48 + iVar25) & 8) == 0) {
-              uVar32 = *(uint *)(&DAT_001d9f48 + iVar25) & 7;
-              if (uVar32 == 1) {
+          *(short *)(scratchPtr34 + scratchUint30 * 8 + 0x10) = (short)((int)scratchPtr13 - (int)scratchPtr14 >> 2);
+          scratchInt25 = scratchPtr34[1];
+          *(undefined2 *)((int)scratchPtr34 + scratchUint30 * 0x20 + 0x42) = 1;
+          scratchPtr34[scratchUint30 * 8 + 0x17] = 0;
+          scratchPtr34[scratchUint30 * 8 + 0x11] = scratchUint32 - (scratchUint20 & 0xfffff000);
+          scratchPtr34[scratchUint30 * 8 + 0x12] = 0;
+          scratchPtr34[scratchUint30 * 8 + 0x13] = 0;
+          scratchPtr34[scratchUint30 * 8 + 0x14] = 0;
+          scratchPtr34[scratchUint30 * 8 + 0x15] = 0;
+          *(short *)(scratchPtr34 + scratchUint30 * 8 + 0x16) =
+               (short)((int)(scratchPtr34 + 0x32f) - (int)scratchPtr14 >> 2) - (short)scratchInt25;
+          scratchInt25 = (uint)*(byte *)(texture + 0xe) * 0x24;
+          formatInfo = &DAT_001d9f34 + scratchInt25;
+          if ((*(uint *)(&DAT_001d9f4c + scratchInt25) & 0x10000) == 0) {
+            if ((*(uint *)(&DAT_001d9f48 + scratchInt25) & 8) == 0) {
+              scratchUint32 = *(uint *)(&DAT_001d9f48 + scratchInt25) & 7;
+              if (scratchUint32 == 1) {
                 formatInfo = &DAT_001da00c;
               }
-              else if (uVar32 < 2) {
-                if (uVar32 == 0) {
+              else if (scratchUint32 < 2) {
+                if (scratchUint32 == 0) {
                   formatInfo = &DAT_001d9fa0;
                 }
                 else {
@@ -3251,8 +3251,8 @@ LAB_00032bf4:
                 }
               }
               else {
-                if (uVar32 == 2) goto LAB_00032c54;
-                if (uVar32 != 3) goto LAB_00032bf4;
+                if (scratchUint32 == 2) goto LAB_00032c54;
+                if (scratchUint32 != 3) goto LAB_00032bf4;
                 formatInfo = &DAT_001da36c;
               }
             }
@@ -3261,295 +3261,295 @@ LAB_00032c54:
               formatInfo = &DAT_001da054;
             }
           }
-          puVar12 = (undefined4 *)
-                    ((int (*)())FUN_00030420)(piVar34 + 0x32f,formatInfo,uVar28,uVar23,0,
-                                 (iVar33 << (local_218 & 0x3f)) >> (*(uint *)(formatInfo + 0x14) & 7),
-                                 uVar22);
-          if (bVar39) {
-            piVar13 = (int *)((int (*)())FUN_00030a60)(piVar13,local_214,uVar28,uVar23,0,0,
-                                          uVar22 << 0x10 | (iVar33 << (local_218 & 0x3f)) >> iVar11)
+          scratchPtr12 = (undefined4 *)
+                    ((int (*)())FUN_00030420)(scratchPtr34 + 0x32f,formatInfo,scratchUint28,scratchUint23,0,
+                                 (scratchInt33 << (scratchStack218 & 0x3f)) >> (*(uint *)(formatInfo + 0x14) & 7),
+                                 scratchUint22);
+          if (scratchFlag39) {
+            scratchPtr13 = (int *)((int (*)())FUN_00030a60)(scratchPtr13,scratchStack214,scratchUint28,scratchUint23,0,0,
+                                          scratchUint22 << 0x10 | (scratchInt33 << (scratchStack218 & 0x3f)) >> scratchInt11)
             ;
           }
-          *puVar12 = ((unsigned char *)0x00001393U);
-          puVar12[1] = 10;
-          puVar12[2] = 0x5c8;
-          puVar12[3] = 0x20000;
-          puVar12[4] = ((unsigned char *)0x00001040U);
-          puVar12[5] = 0;
-          if (bVar39) {
-            *piVar13 = 0xd0b;
-            piVar13[1] = 5;
-            piVar13[2] = 0x5c8;
-            piVar13[3] = 0x10000;
-            piVar24 = piVar13 + 5;
-            piVar13[4] = (int)((unsigned char *)0x00001040U);
-            piVar13 = piVar13 + 6;
-            *piVar24 = 0;
+          *scratchPtr12 = ((unsigned char *)0x00001393U);
+          scratchPtr12[1] = 10;
+          scratchPtr12[2] = 0x5c8;
+          scratchPtr12[3] = 0x20000;
+          scratchPtr12[4] = ((unsigned char *)0x00001040U);
+          scratchPtr12[5] = 0;
+          if (scratchFlag39) {
+            *scratchPtr13 = 0xd0b;
+            scratchPtr13[1] = 5;
+            scratchPtr13[2] = 0x5c8;
+            scratchPtr13[3] = 0x10000;
+            scratchPtr24 = scratchPtr13 + 5;
+            scratchPtr13[4] = (int)((unsigned char *)0x00001040U);
+            scratchPtr13 = scratchPtr13 + 6;
+            *scratchPtr24 = 0;
           }
-          *(uint *)(texture[0xd] + 0x18) = uVar23 * uVar22;
+          *(uint *)(texture[0xd] + 0x18) = scratchUint23 * scratchUint22;
           *(byte *)(texture[0xd] + 0x14) = *(byte *)(texture[0xd] + 0x14) | 2;
-          *piVar34 = (int)piVar13 - (int)piVar14 >> 2;
-          piVar34[2] = ((int)puVar12 + (0x18 - (int)piVar14) >> 2) - piVar34[1];
+          *scratchPtr34 = (int)scratchPtr13 - (int)scratchPtr14 >> 2;
+          scratchPtr34[2] = ((int)scratchPtr12 + (0x18 - (int)scratchPtr14) >> 2) - scratchPtr34[1];
         }
-        uVar6 = (ushort)(1 << (uVar30 & 0x3f));
-        uVar27 = ~uVar6;
+        scratchUint6 = (ushort)(1 << (scratchUint30 & 0x3f));
+        scratchUint27 = ~scratchUint6;
         *(byte *)(texture[0xd] + 0x14) = *(byte *)(texture[0xd] + 0x14) | 1;
-        *(ushort *)(texture[0xd] + 0x1c) = uVar6 | *(ushort *)(texture[0xd] + 0x1c);
-        *(ushort *)(texture[0xd] + 0x28) = uVar27 & *(ushort *)(texture[0xd] + 0x28);
-        *(byte *)(texture[0xd] + 0x17) = bVar41;
+        *(ushort *)(texture[0xd] + 0x1c) = scratchUint6 | *(ushort *)(texture[0xd] + 0x1c);
+        *(ushort *)(texture[0xd] + 0x28) = scratchUint27 & *(ushort *)(texture[0xd] + 0x28);
+        *(byte *)(texture[0xd] + 0x17) = scratchFlag41;
         *(undefined1 *)(texture[0xd] + 0x34) = 1;
         *(undefined1 *)(texture[0xd] + 0x35) = 1;
       }
       *(byte *)((int)texture + 0x39) = *(byte *)((int)texture + 0x39) & 0xf8;
-      *(ushort *)(texture + 9) = uVar27 & *(ushort *)(texture + 9);
+      *(ushort *)(texture + 9) = scratchUint27 & *(ushort *)(texture + 9);
     }
     else {
 LAB_00034128:
       if (*(char *)((int)texImages + 0x6d) == '\0') {
-        iVar11 = ((int (*)())gldTextureHasNonPowerOfTwoSize)(texture,uVar16,param_3,param_4,uVar19,param_6);
-        if (iVar11 == 0) {
-          local_74 = texture[0xc];
-          local_78 = (uint)*(byte *)(local_74 + 0x6c);
-          local_7c = (uint)*(byte *)(local_74 + 0x69);
-          local_80 = (uint)*(byte *)(local_74 + 0x6b);
-          uVar27 = *(ushort *)(local_74 + 2);
-          local_134 = 0;
-          if (0x1908 < uVar27) {
-            local_134 = 0;
-            if (0x190a < uVar27) {
-              local_134 = 0;
-              if (uVar27 != 0x8049) goto LAB_00032e78;
-              local_134 = 0x4000;
+        scratchInt11 = ((int (*)())gldTextureHasNonPowerOfTwoSize)(texture,scratchUint16,scratchArg3,staleArgR6,scratchUint19,scratchArg6);
+        if (scratchInt11 == 0) {
+          scratchStack74 = texture[0xc];
+          scratchStack78 = (uint)*(byte *)(scratchStack74 + 0x6c);
+          scratchStack7c = (uint)*(byte *)(scratchStack74 + 0x69);
+          scratchStack80 = (uint)*(byte *)(scratchStack74 + 0x6b);
+          scratchUint27 = *(ushort *)(scratchStack74 + 2);
+          scratchStack134 = 0;
+          if (0x1908 < scratchUint27) {
+            scratchStack134 = 0;
+            if (0x190a < scratchUint27) {
+              scratchStack134 = 0;
+              if (scratchUint27 != 0x8049) goto LAB_00032e78;
+              scratchStack134 = 0x4000;
             }
-            local_134 = local_134 | 0x2000;
+            scratchStack134 = scratchStack134 | 0x2000;
           }
 LAB_00032e78:
-          local_64 = &local_158;
-          local_138 = 2;
-          ((int (*)())gldTextureFormatLookup)((uint)*(byte *)(texture + 0xe),texture,local_64,&local_214,&local_208,
-                       &local_204,&local_218,&local_210,&local_20c);
-          iVar11 = (uint)*(byte *)(texture + 0xe) * 0x24;
-          formatInfo = &DAT_001d9f34 + iVar11;
-          uVar22 = *(uint *)(&DAT_001d9f48 + iVar11) & 7;
-          if (uVar22 == 4) {
-            iVar25 = 0;
-            bVar39 = false;
-            local_a4 = 0;
-            local_c0 = 5;
-            local_60 = (uint)(xerSummaryOverflow & 1 | 2) << 0x1c | (uint)(crField1 & 0xf) << 0x18 |
+          scratchStack64 = &scratchStack158;
+          scratchStack138 = 2;
+          ((int (*)())gldTextureFormatLookup)((uint)*(byte *)(texture + 0xe),texture,scratchStack64,&scratchStack214,&scratchStack208,
+                       &scratchStack204,&scratchStack218,&scratchStack210,&scratchStack20c);
+          scratchInt11 = (uint)*(byte *)(texture + 0xe) * 0x24;
+          formatInfo = &DAT_001d9f34 + scratchInt11;
+          scratchUint22 = *(uint *)(&DAT_001d9f48 + scratchInt11) & 7;
+          if (scratchUint22 == 4) {
+            scratchInt25 = 0;
+            scratchFlag39 = false;
+            scratchStacka4 = 0;
+            scratchStackc0 = 5;
+            scratchStack60 = (uint)(xerSummaryOverflow & 1 | 2) << 0x1c | (uint)(crField1 & 0xf) << 0x18 |
                        (uint)(calleeSavedCrField2 & 0xf) << 0x14 | (uint)(calleeSavedCrField3 & 0xf) << 0x10 |
                        (uint)(calleeSavedCrField4 & 0xf) << 0xc | (uint)(crField5 & 0xf) << 8 |
-                       (uint)(bVar41 & 0xf) << 4 |
-                       (uint)(byte)((uVar22 < 4) << 3 | (4 < uVar22) << 2 | (uVar22 == 4) << 1 |
+                       (uint)(scratchFlag41 & 0xf) << 4 |
+                       (uint)(byte)((scratchUint22 < 4) << 3 | (4 < scratchUint22) << 2 | (scratchUint22 == 4) << 1 |
                                    xerSummaryOverflow & 1);
 LAB_00032f74:
-            iVar11 = 0;
+            scratchInt11 = 0;
           }
           else {
-            local_a4 = *(uint *)(&DAT_001d9f4c + iVar11) >> 0x1c & 3;
-            bVar42 = (local_a4 != 0) << 2 | (local_a4 == 0) << 1 | xerSummaryOverflow & 1;
-            bVar39 = local_a4 != 0;
-            if (bVar39) {
-              local_c0 = 5 - local_a4;
-              local_60 = (uint)(xerSummaryOverflow & 1 | 4) << 0x1c | (uint)(crField1 & 0xf) << 0x18 |
+            scratchStacka4 = *(uint *)(&DAT_001d9f4c + scratchInt11) >> 0x1c & 3;
+            scratchFlag42 = (scratchStacka4 != 0) << 2 | (scratchStacka4 == 0) << 1 | xerSummaryOverflow & 1;
+            scratchFlag39 = scratchStacka4 != 0;
+            if (scratchFlag39) {
+              scratchStackc0 = 5 - scratchStacka4;
+              scratchStack60 = (uint)(xerSummaryOverflow & 1 | 4) << 0x1c | (uint)(crField1 & 0xf) << 0x18 |
                          (uint)(calleeSavedCrField2 & 0xf) << 0x14 | (uint)(calleeSavedCrField3 & 0xf) << 0x10 |
                          (uint)(calleeSavedCrField4 & 0xf) << 0xc | (uint)(crField5 & 0xf) << 8 |
-                         (uint)(bVar41 & 0xf) << 4 | (uint)bVar42;
+                         (uint)(scratchFlag41 & 0xf) << 4 | (uint)scratchFlag42;
             }
             else {
-              local_c0 = 5;
-              local_60 = (uint)(xerSummaryOverflow & 1 | 4) << 0x1c | (uint)(crField1 & 0xf) << 0x18 |
+              scratchStackc0 = 5;
+              scratchStack60 = (uint)(xerSummaryOverflow & 1 | 4) << 0x1c | (uint)(crField1 & 0xf) << 0x18 |
                          (uint)(calleeSavedCrField2 & 0xf) << 0x14 | (uint)(calleeSavedCrField3 & 0xf) << 0x10 |
                          (uint)(calleeSavedCrField4 & 0xf) << 0xc | (uint)(crField5 & 0xf) << 8 |
-                         (uint)(bVar41 & 0xf) << 4 | (uint)bVar42;
+                         (uint)(scratchFlag41 & 0xf) << 4 | (uint)scratchFlag42;
             }
-            iVar25 = 1;
-            bVar39 = !bVar39;
-            if (((*(uint *)(&DAT_001d9f4c + iVar11) & 0x30000000) != 0x20000000) ||
-               (iVar11 = 1, uVar22 != 1)) goto LAB_00032f74;
+            scratchInt25 = 1;
+            scratchFlag39 = !scratchFlag39;
+            if (((*(uint *)(&DAT_001d9f4c + scratchInt11) & 0x30000000) != 0x20000000) ||
+               (scratchInt11 = 1, scratchUint22 != 1)) goto LAB_00032f74;
           }
-          uVar28 = *(byte *)(local_74 + 0x62) - local_7c;
-          uVar22 = uVar28;
-          if ((int)uVar28 < 0) {
-            uVar22 = 0;
+          scratchUint28 = *(byte *)(scratchStack74 + 0x62) - scratchStack7c;
+          scratchUint22 = scratchUint28;
+          if ((int)scratchUint28 < 0) {
+            scratchUint22 = 0;
           }
-          iVar33 = *(byte *)(local_74 + 0x60) - local_7c;
-          if (iVar33 < 0) {
-            iVar33 = 0;
+          scratchInt33 = *(byte *)(scratchStack74 + 0x60) - scratchStack7c;
+          if (scratchInt33 < 0) {
+            scratchInt33 = 0;
           }
-          uVar32 = iVar33 - local_208;
-          if ((int)uVar32 < 0) {
-            uVar32 = 0;
+          scratchUint32 = scratchInt33 - scratchStack208;
+          if ((int)scratchUint32 < 0) {
+            scratchUint32 = 0;
           }
-          iVar33 = *(byte *)(local_74 + 0x61) - local_7c;
-          if (iVar33 < 0) {
-            iVar33 = 0;
+          scratchInt33 = *(byte *)(scratchStack74 + 0x61) - scratchStack7c;
+          if (scratchInt33 < 0) {
+            scratchInt33 = 0;
           }
-          uVar30 = iVar33 - local_204;
-          if ((int)uVar30 < 0) {
-            uVar30 = 0;
+          scratchUint30 = scratchInt33 - scratchStack204;
+          if ((int)scratchUint30 < 0) {
+            scratchUint30 = 0;
           }
-          bVar42 = (local_80 < local_7c) << 3 | (local_7c < local_80) << 2 |
-                   (local_80 == local_7c) << 1 | xerSummaryOverflow & 1;
-          bVar40 = (uint)((1 << (uVar32 & 0x3f)) << (local_214 & 0x3f)) <=
+          scratchFlag42 = (scratchStack80 < scratchStack7c) << 3 | (scratchStack7c < scratchStack80) << 2 |
+                   (scratchStack80 == scratchStack7c) << 1 | xerSummaryOverflow & 1;
+          scratchFlag40 = (uint)((1 << (scratchUint32 & 0x3f)) << (scratchStack214 & 0x3f)) <=
                    *(uint *)(ctxSaved + 0x29d8);
-          uVar20 = local_7c;
-          local_a0 = uVar22;
-          local_9c = uVar30;
-          local_98 = uVar32;
-          if (local_80 < local_7c) {
-            iVar29 = 0;
-            iVar35 = 0;
-            iVar21 = 0;
-            iVar33 = 0;
-            local_88 = 0;
+          scratchUint20 = scratchStack7c;
+          scratchStacka0 = scratchUint22;
+          scratchStack9c = scratchUint30;
+          scratchStack98 = scratchUint32;
+          if (scratchStack80 < scratchStack7c) {
+            scratchInt29 = 0;
+            scratchInt35 = 0;
+            scratchInt21 = 0;
+            scratchInt33 = 0;
+            scratchStack88 = 0;
           }
           else {
-            iVar29 = 0;
-            iVar35 = 0;
-            iVar33 = local_a4 + 3;
-            uVar23 = local_c0 + 3;
-            piVar14 = aiStack_1c8 + local_7c;
-            piVar34 = aiStack_200 + local_7c;
-            local_88 = 0;
+            scratchInt29 = 0;
+            scratchInt35 = 0;
+            scratchInt33 = scratchStacka4 + 3;
+            scratchUint23 = scratchStackc0 + 3;
+            scratchPtr14 = scratchStackArr1c8 + scratchStack7c;
+            scratchPtr34 = scratchStackArr200 + scratchStack7c;
+            scratchStack88 = 0;
             do {
-              uVar36 = local_214 + uVar32;
-              *piVar34 = iVar35;
-              *piVar14 = iVar29;
-              iVar21 = 1 << (uVar22 & 0x3f);
-              uVar8 = uVar36;
-              if ((int)uVar36 < 5) {
-                uVar8 = 5;
+              scratchUint36 = scratchStack214 + scratchUint32;
+              *scratchPtr34 = scratchInt35;
+              *scratchPtr14 = scratchInt29;
+              scratchInt21 = 1 << (scratchUint22 & 0x3f);
+              scratchUint8 = scratchUint36;
+              if ((int)scratchUint36 < 5) {
+                scratchUint8 = 5;
               }
-              iVar35 = iVar35 + iVar21 * (1 << (uVar8 & 0x3f)) * (1 << (uVar30 & 0x3f));
-              uVar8 = local_c0;
-              if ((int)local_c0 < (int)uVar36) {
-                uVar8 = uVar36;
+              scratchInt35 = scratchInt35 + scratchInt21 * (1 << (scratchUint8 & 0x3f)) * (1 << (scratchUint30 & 0x3f));
+              scratchUint8 = scratchStackc0;
+              if ((int)scratchStackc0 < (int)scratchUint36) {
+                scratchUint8 = scratchUint36;
               }
-              uVar36 = 1 << (uVar8 & 0x3f);
-              uVar8 = uVar30;
-              if ((int)uVar30 < (int)local_a4) {
-                uVar8 = local_a4;
+              scratchUint36 = 1 << (scratchUint8 & 0x3f);
+              scratchUint8 = scratchUint30;
+              if ((int)scratchUint30 < (int)scratchStacka4) {
+                scratchUint8 = scratchStacka4;
               }
-              uVar8 = 1 << (uVar8 & 0x3f);
-              iVar29 = iVar29 + iVar21 * uVar36 * uVar8;
-              if ((uVar36 < (uint)(1 << (uVar23 & 0x3f))) || (uVar8 < (uint)(1 << iVar33))) {
-                local_88 = local_88 & ~(1 << (uVar20 & 0x3f));
+              scratchUint8 = 1 << (scratchUint8 & 0x3f);
+              scratchInt29 = scratchInt29 + scratchInt21 * scratchUint36 * scratchUint8;
+              if ((scratchUint36 < (uint)(1 << (scratchUint23 & 0x3f))) || (scratchUint8 < (uint)(1 << scratchInt33))) {
+                scratchStack88 = scratchStack88 & ~(1 << (scratchUint20 & 0x3f));
               }
               else {
-                local_88 = local_88 | 1 << (uVar20 & 0x3f);
+                scratchStack88 = scratchStack88 | 1 << (scratchUint20 & 0x3f);
               }
-              if (0 < (int)uVar32) {
-                uVar32 = uVar32 - 1;
+              if (0 < (int)scratchUint32) {
+                scratchUint32 = scratchUint32 - 1;
               }
-              if (0 < (int)uVar30) {
-                uVar30 = uVar30 - 1;
+              if (0 < (int)scratchUint30) {
+                scratchUint30 = scratchUint30 - 1;
               }
-              if (0 < (int)uVar22) {
-                uVar22 = uVar22 - 1;
+              if (0 < (int)scratchUint22) {
+                scratchUint22 = scratchUint22 - 1;
               }
-              uVar20 = uVar20 + 1;
-              piVar34 = piVar34 + 1;
-              piVar14 = piVar14 + 1;
-              bVar42 = (local_80 < uVar20) << 3 | (uVar20 < local_80) << 2 |
-                       (local_80 == uVar20) << 1 | xerSummaryOverflow & 1;
-            } while (local_80 >= uVar20);
-            iVar21 = local_78 * iVar35;
-            iVar33 = local_78 * iVar29;
+              scratchUint20 = scratchUint20 + 1;
+              scratchPtr34 = scratchPtr34 + 1;
+              scratchPtr14 = scratchPtr14 + 1;
+              scratchFlag42 = (scratchStack80 < scratchUint20) << 3 | (scratchUint20 < scratchStack80) << 2 |
+                       (scratchStack80 == scratchUint20) << 1 | xerSummaryOverflow & 1;
+            } while (scratchStack80 >= scratchUint20);
+            scratchInt21 = scratchStack78 * scratchInt35;
+            scratchInt33 = scratchStack78 * scratchInt29;
           }
-          uVar22 = 0;
-          local_6c = (uint)(byte)(bVar40 << 2 | !bVar40 << 1 | xerSummaryOverflow & 1) << 0x1c |
+          scratchUint22 = 0;
+          scratchStack6c = (uint)(byte)(scratchFlag40 << 2 | !scratchFlag40 << 1 | xerSummaryOverflow & 1) << 0x1c |
                      (uint)(crField1 & 0xf) << 0x18 | (uint)(calleeSavedCrField2 & 0xf) << 0x14 |
                      (uint)(calleeSavedCrField3 & 0xf) << 0x10 | (uint)(calleeSavedCrField4 & 0xf) << 0xc |
-                     (uint)(crField5 & 0xf) << 8 | (uint)(bVar41 & 0xf) << 4 | (uint)bVar42;
-          aiStack_1c8[uVar20] = iVar29;
-          aiStack_200[uVar20] = iVar35;
-          if (bVar40) {
-            uVar22 = 0x15;
-            if (local_7c <= local_80) {
-              iVar29 = 0;
-              uVar22 = uVar28;
-              uVar32 = local_7c;
+                     (uint)(crField5 & 0xf) << 8 | (uint)(scratchFlag41 & 0xf) << 4 | (uint)scratchFlag42;
+          scratchStackArr1c8[scratchUint20] = scratchInt29;
+          scratchStackArr200[scratchUint20] = scratchInt35;
+          if (scratchFlag40) {
+            scratchUint22 = 0x15;
+            if (scratchStack7c <= scratchStack80) {
+              scratchInt29 = 0;
+              scratchUint22 = scratchUint28;
+              scratchUint32 = scratchStack7c;
               do {
-                uVar30 = uVar22;
-                if ((int)uVar22 < 0) {
-                  uVar30 = 0;
+                scratchUint30 = scratchUint22;
+                if ((int)scratchUint22 < 0) {
+                  scratchUint30 = 0;
                 }
-                uVar32 = uVar32 + 1;
-                uVar22 = uVar22 - 1;
-                iVar29 = iVar29 + (local_78 * 0x12 << (uVar30 & 0x3f));
-              } while (uVar32 <= local_80);
-              uVar22 = iVar29 + 0x15;
+                scratchUint32 = scratchUint32 + 1;
+                scratchUint22 = scratchUint22 - 1;
+                scratchInt29 = scratchInt29 + (scratchStack78 * 0x12 << (scratchUint30 & 0x3f));
+              } while (scratchUint32 <= scratchStack80);
+              scratchUint22 = scratchInt29 + 0x15;
             }
-            uVar22 = uVar22 & 0xfffffff8;
+            scratchUint22 = scratchUint22 & 0xfffffff8;
           }
-          uVar32 = 0x98;
-          if (local_7c <= local_80) {
-            iVar29 = 0x91;
-            uVar32 = local_7c;
+          scratchUint32 = 0x98;
+          if (scratchStack7c <= scratchStack80) {
+            scratchInt29 = 0x91;
+            scratchUint32 = scratchStack7c;
             do {
-              uVar30 = uVar28;
-              if ((int)uVar28 < 0) {
-                uVar30 = 0;
+              scratchUint30 = scratchUint28;
+              if ((int)scratchUint28 < 0) {
+                scratchUint30 = 0;
               }
-              uVar32 = uVar32 + 1;
-              uVar28 = uVar28 - 1;
-              iVar29 = iVar29 + (local_78 * 0x2a << (uVar30 & 0x3f));
-            } while (uVar32 <= local_80);
-            uVar32 = iVar29 + 7;
+              scratchUint32 = scratchUint32 + 1;
+              scratchUint28 = scratchUint28 - 1;
+              scratchInt29 = scratchInt29 + (scratchStack78 * 0x2a << (scratchUint30 & 0x3f));
+            } while (scratchUint32 <= scratchStack80);
+            scratchUint32 = scratchInt29 + 7;
           }
           gld_ensureTextureBackingSized2Result = gld_ensureTextureBackingSized2(ctxSaved,texture,
-                                iVar21 + uVar22 * 4 + (uVar32 & 0xfffffff8) * 4,iVar33);
+                                scratchInt21 + scratchUint22 * 4 + (scratchUint32 & 0xfffffff8) * 4,scratchInt33);
           if (gld_ensureTextureBackingSized2Result == 0) {
             return 0;
           }
-          *(byte *)(texture[0xd] + 0x15) = (byte)((iVar25 << iVar11) << 3) & 0x18 | 4;
-          local_84 = (int *)*texture;
+          *(byte *)(texture[0xd] + 0x15) = (byte)((scratchInt25 << scratchInt11) << 3) & 0x18 | 4;
+          scratchStack84 = (int *)*texture;
           if ((*(byte *)((int)texture + 0x39) & 3) == 0) {
-            local_8c = (int *)0x0;
-            local_e8 = (int *)0x0;
+            scratchStack8c = (int *)0x0;
+            scratchStacke8 = (int *)0x0;
           }
           else {
-            *(char *)(texture[0xd] + 0x17) = (char)local_7c;
-            uVar30 = 1 << (local_98 & 0x3f);
-            *(char *)(texture[0xd] + 0x34) = (char)local_78;
-            *(char *)(texture[0xd] + 0x35) = ((char)local_80 - (char)local_7c) + '\x01';
-            uVar28 = local_84[8];
-            local_84[2] = 0;
-            local_84[1] = uVar22;
-            *local_84 = 0;
-            local_84[8] = (uint)bVar40 << 0x1f | uVar28 & 0x6fffffff | 0x40000000;
-            *(char *)((int)local_84 + 0x1a) = (char)local_214;
-            *(short *)((int)local_84 + 0x16) = (short)(1 << (local_9c & 0x3f));
-            *(short *)(local_84 + 6) = (short)(1 << (local_a0 & 0x3f));
-            *(short *)(local_84 + 5) = (short)uVar30;
-            *(char *)((int)local_84 + 0x1b) = (char)local_20c;
-            uVar30 = (uVar30 & 0xffff) << (local_214 & 0x3f);
-            local_84[3] = uVar30;
-            if (uVar30 >> (local_c0 & 0x3f) == 0) {
-              local_84[3] = 1 << (local_c0 & 0x3f);
+            *(char *)(texture[0xd] + 0x17) = (char)scratchStack7c;
+            scratchUint30 = 1 << (scratchStack98 & 0x3f);
+            *(char *)(texture[0xd] + 0x34) = (char)scratchStack78;
+            *(char *)(texture[0xd] + 0x35) = ((char)scratchStack80 - (char)scratchStack7c) + '\x01';
+            scratchUint28 = scratchStack84[8];
+            scratchStack84[2] = 0;
+            scratchStack84[1] = scratchUint22;
+            *scratchStack84 = 0;
+            scratchStack84[8] = (uint)scratchFlag40 << 0x1f | scratchUint28 & 0x6fffffff | 0x40000000;
+            *(char *)((int)scratchStack84 + 0x1a) = (char)scratchStack214;
+            *(short *)((int)scratchStack84 + 0x16) = (short)(1 << (scratchStack9c & 0x3f));
+            *(short *)(scratchStack84 + 6) = (short)(1 << (scratchStacka0 & 0x3f));
+            *(short *)(scratchStack84 + 5) = (short)scratchUint30;
+            *(char *)((int)scratchStack84 + 0x1b) = (char)scratchStack20c;
+            scratchUint30 = (scratchUint30 & 0xffff) << (scratchStack214 & 0x3f);
+            scratchStack84[3] = scratchUint30;
+            if (scratchUint30 >> (scratchStackc0 & 0x3f) == 0) {
+              scratchStack84[3] = 1 << (scratchStackc0 & 0x3f);
             }
-            uVar30 = (uint)*(ushort *)(local_84 + 5) << (local_214 & 0x3f);
-            local_84[4] = uVar30;
-            if (uVar30 >> 5 == 0) {
-              local_84[4] = 0x20;
+            scratchUint30 = (uint)*(ushort *)(scratchStack84 + 5) << (scratchStack214 & 0x3f);
+            scratchStack84[4] = scratchUint30;
+            if (scratchUint30 >> 5 == 0) {
+              scratchStack84[4] = 0x20;
             }
             formatInfo = PTR_DAT_001e899c;
-            local_84[8] = (uint)bVar40 << 0x1f | uVar28 & 0x4fffffff | 0x40000000;
-            local_8c = local_84 + 0x280;
-            piVar14 = local_8c + local_84[1];
-            local_e8 = piVar14 + 0x8f;
-            _memcpy(piVar14,formatInfo,0x23c);
-            iVar25 = (uint)*(byte *)(texture + 0xe) * 0x24;
-            formatInfo = &DAT_001d9f34 + iVar25;
-            if ((*(uint *)(&DAT_001d9f4c + iVar25) & 0x10000) == 0) {
-              if ((*(uint *)(&DAT_001d9f48 + iVar25) & 8) == 0) {
-                uVar28 = *(uint *)(&DAT_001d9f48 + iVar25) & 7;
-                if (uVar28 == 1) {
+            scratchStack84[8] = (uint)scratchFlag40 << 0x1f | scratchUint28 & 0x4fffffff | 0x40000000;
+            scratchStack8c = scratchStack84 + 0x280;
+            scratchPtr14 = scratchStack8c + scratchStack84[1];
+            scratchStacke8 = scratchPtr14 + 0x8f;
+            _memcpy(scratchPtr14,formatInfo,0x23c);
+            scratchInt25 = (uint)*(byte *)(texture + 0xe) * 0x24;
+            formatInfo = &DAT_001d9f34 + scratchInt25;
+            if ((*(uint *)(&DAT_001d9f4c + scratchInt25) & 0x10000) == 0) {
+              if ((*(uint *)(&DAT_001d9f48 + scratchInt25) & 8) == 0) {
+                scratchUint28 = *(uint *)(&DAT_001d9f48 + scratchInt25) & 7;
+                if (scratchUint28 == 1) {
                   formatInfo = &DAT_001da00c;
                 }
-                else if (uVar28 < 2) {
-                  if (uVar28 == 0) {
+                else if (scratchUint28 < 2) {
+                  if (scratchUint28 == 0) {
                     formatInfo = &DAT_001d9fa0;
                   }
                   else {
@@ -3558,8 +3558,8 @@ LAB_000333f4:
                   }
                 }
                 else {
-                  if (uVar28 == 2) goto LAB_000334dc;
-                  if (uVar28 != 3) goto LAB_000333f4;
+                  if (scratchUint28 == 2) goto LAB_000334dc;
+                  if (scratchUint28 != 3) goto LAB_000333f4;
                   formatInfo = &DAT_001da36c;
                 }
               }
@@ -3568,456 +3568,456 @@ LAB_000334dc:
                 formatInfo = &DAT_001da054;
               }
             }
-            uVar8 = piVar14[0x66];
-            uVar36 = piVar14[0x7c];
-            piVar14[0xb] = 0;
-            uVar28 = *(uint *)(formatInfo + 0x18) >> 5 & 0x1f;
-            piVar14[0x66] = uVar28 | uVar8 & 0xffffffe0;
-            uVar30 = (*(uint *)(formatInfo + 0x18) & 0x18) << 5;
-            piVar14[0x66] = uVar30 | uVar28 | uVar8 & 0xfffffce0;
-            uVar20 = (*(uint *)(formatInfo + 0x18) & 6) << 9;
-            piVar14[0x66] = uVar20 | uVar30 | uVar28 | uVar8 & 0xfffff0e0;
-            uVar23 = *(uint *)(formatInfo + 0x1c) >> 0x12 & 0x3000;
-            piVar14[0x66] = uVar23 | uVar20 | uVar30 | uVar28 | uVar8 & 0xffffc0e0;
-            piVar14[0x66] =
+            scratchUint8 = scratchPtr14[0x66];
+            scratchUint36 = scratchPtr14[0x7c];
+            scratchPtr14[0xb] = 0;
+            scratchUint28 = *(uint *)(formatInfo + 0x18) >> 5 & 0x1f;
+            scratchPtr14[0x66] = scratchUint28 | scratchUint8 & 0xffffffe0;
+            scratchUint30 = (*(uint *)(formatInfo + 0x18) & 0x18) << 5;
+            scratchPtr14[0x66] = scratchUint30 | scratchUint28 | scratchUint8 & 0xfffffce0;
+            scratchUint20 = (*(uint *)(formatInfo + 0x18) & 6) << 9;
+            scratchPtr14[0x66] = scratchUint20 | scratchUint30 | scratchUint28 | scratchUint8 & 0xfffff0e0;
+            scratchUint23 = *(uint *)(formatInfo + 0x1c) >> 0x12 & 0x3000;
+            scratchPtr14[0x66] = scratchUint23 | scratchUint20 | scratchUint30 | scratchUint28 | scratchUint8 & 0xffffc0e0;
+            scratchPtr14[0x66] =
                  *(uint *)(formatInfo + 0x1c) >> 0xe & 0xc000 |
-                 uVar23 | uVar20 | uVar30 | uVar28 | uVar8 & 0xfff000e0;
-            uVar28 = *(uint *)(formatInfo + 0x1c) >> 7 & 0x1f;
-            piVar14[0x7c] = uVar28 | uVar36 & 0xfffffe00;
-            uVar30 = (*(uint *)(formatInfo + 0x1c) & 0x70) << 5;
-            piVar14[0x7c] = uVar30 | uVar28 | uVar36 & 0xfffff000;
-            uVar20 = (*(uint *)(formatInfo + 0x1c) & 0xe) << 0xb;
-            piVar14[0x7c] = uVar20 | uVar30 | uVar28 | uVar36 & 0xffff8000;
-            uVar23 = *(uint *)(formatInfo + 0x20) >> 0xe & 0x38000;
-            piVar14[0x7c] = uVar23 | uVar20 | uVar30 | uVar28 | uVar36 & 0xfffc0000;
-            uVar8 = *(uint *)(formatInfo + 0x20) >> 8 & 0x1c0000;
-            piVar14[0x7c] = uVar8 | uVar23 | uVar20 | uVar30 | uVar28 | uVar36 & 0xffc00000;
-            piVar14[0x7c] =
+                 scratchUint23 | scratchUint20 | scratchUint30 | scratchUint28 | scratchUint8 & 0xfff000e0;
+            scratchUint28 = *(uint *)(formatInfo + 0x1c) >> 7 & 0x1f;
+            scratchPtr14[0x7c] = scratchUint28 | scratchUint36 & 0xfffffe00;
+            scratchUint30 = (*(uint *)(formatInfo + 0x1c) & 0x70) << 5;
+            scratchPtr14[0x7c] = scratchUint30 | scratchUint28 | scratchUint36 & 0xfffff000;
+            scratchUint20 = (*(uint *)(formatInfo + 0x1c) & 0xe) << 0xb;
+            scratchPtr14[0x7c] = scratchUint20 | scratchUint30 | scratchUint28 | scratchUint36 & 0xffff8000;
+            scratchUint23 = *(uint *)(formatInfo + 0x20) >> 0xe & 0x38000;
+            scratchPtr14[0x7c] = scratchUint23 | scratchUint20 | scratchUint30 | scratchUint28 | scratchUint36 & 0xfffc0000;
+            scratchUint8 = *(uint *)(formatInfo + 0x20) >> 8 & 0x1c0000;
+            scratchPtr14[0x7c] = scratchUint8 | scratchUint23 | scratchUint20 | scratchUint30 | scratchUint28 | scratchUint36 & 0xffc00000;
+            scratchPtr14[0x7c] =
                  (*(uint *)(formatInfo + 0x20) >> 0x19 & 1) << 0x16 |
-                 uVar8 | uVar23 | uVar20 | uVar30 | uVar28 | uVar36 & 0xf8000000;
-            if (!(bool)((byte)(local_6c >> 0x1d) & 1)) {
-              *local_8c = (int)((unsigned char *)0x00001393U);
-              local_8c[1] = 10;
-              local_8c[2] = 0x5c8;
-              piVar14 = local_8c + 5;
-              local_8c[3] = 0x20000;
-              local_8c[4] = 0x575;
-              local_8c = local_8c + 6;
-              *piVar14 = local_20c;
+                 scratchUint8 | scratchUint23 | scratchUint20 | scratchUint30 | scratchUint28 | scratchUint36 & 0xf8000000;
+            if (!(bool)((byte)(scratchStack6c >> 0x1d) & 1)) {
+              *scratchStack8c = (int)((unsigned char *)0x00001393U);
+              scratchStack8c[1] = 10;
+              scratchStack8c[2] = 0x5c8;
+              scratchPtr14 = scratchStack8c + 5;
+              scratchStack8c[3] = 0x20000;
+              scratchStack8c[4] = 0x575;
+              scratchStack8c = scratchStack8c + 6;
+              *scratchPtr14 = scratchStack20c;
             }
           }
-          bVar42 = ((int)local_78 < 0) << 3 | (0 < (int)local_78) << 2 | (local_78 == 0) << 1 |
+          scratchFlag42 = ((int)scratchStack78 < 0) << 3 | (0 < (int)scratchStack78) << 2 | (scratchStack78 == 0) << 1 |
                    xerSummaryOverflow & 1;
-          if (local_78 != 0) {
-            local_90 = 0;
-            local_dc = texture;
-            local_58 = iVar11 << 1;
-            local_94 = 0;
-            local_e4 = local_7c * 0x18;
-            local_54 = (uint)(byte)(bVar39 << 2 | !bVar39 << 1 | xerSummaryOverflow & 1) << 0x1c |
+          if (scratchStack78 != 0) {
+            scratchStack90 = 0;
+            scratchStackdc = texture;
+            scratchStack58 = scratchInt11 << 1;
+            scratchStack94 = 0;
+            scratchStacke4 = scratchStack7c * 0x18;
+            scratchStack54 = (uint)(byte)(scratchFlag39 << 2 | !scratchFlag39 << 1 | xerSummaryOverflow & 1) << 0x1c |
                        (uint)(crField1 & 0xf) << 0x18 | (uint)(calleeSavedCrField2 & 0xf) << 0x14 |
                        (uint)(calleeSavedCrField3 & 0xf) << 0x10 | (uint)(calleeSavedCrField4 & 0xf) << 0xc |
-                       (uint)(crField5 & 0xf) << 8 | (uint)(bVar41 & 0xf) << 4 | (uint)bVar42;
-            local_c4 = (uVar22 + (uVar32 & 0xfffffff8)) * 4;
-            local_e0 = local_7c << 5;
-            local_68 = (uint)(xerSummaryOverflow & 1 | 2) << 0x1c | (uint)(crField1 & 0xf) << 0x18 |
+                       (uint)(crField5 & 0xf) << 8 | (uint)(scratchFlag41 & 0xf) << 4 | (uint)scratchFlag42;
+            scratchStackc4 = (scratchUint22 + (scratchUint32 & 0xfffffff8)) * 4;
+            scratchStacke0 = scratchStack7c << 5;
+            scratchStack68 = (uint)(xerSummaryOverflow & 1 | 2) << 0x1c | (uint)(crField1 & 0xf) << 0x18 |
                        (uint)(calleeSavedCrField2 & 0xf) << 0x14 | (uint)(calleeSavedCrField3 & 0xf) << 0x10 |
                        (uint)(calleeSavedCrField4 & 0xf) << 0xc | (uint)(crField5 & 0xf) << 8 |
-                       (uint)(bVar41 & 0xf) << 4 | (uint)bVar42;
-            local_5c = local_84 + 0x10;
-            local_d8 = local_74;
+                       (uint)(scratchFlag41 & 0xf) << 4 | (uint)scratchFlag42;
+            scratchStack5c = scratchStack84 + 0x10;
+            scratchStackd8 = scratchStack74;
             do {
-              local_a8 = (uint)*(ushort *)(local_d8 + 0x7c);
-              if (local_7c <= local_80) {
-                piVar14 = aiStack_200 + local_7c;
-                local_c8 = local_e0;
-                local_d0 = local_e0;
-                local_d4 = aiStack_1c8 + local_7c;
-                local_70 = 0x80e1;
-                local_cc = local_e4;
-                uVar22 = local_98;
-                uVar28 = local_a0;
-                uVar32 = local_9c;
-                uVar30 = local_7c;
+              scratchStacka8 = (uint)*(ushort *)(scratchStackd8 + 0x7c);
+              if (scratchStack7c <= scratchStack80) {
+                scratchPtr14 = scratchStackArr200 + scratchStack7c;
+                scratchStackc8 = scratchStacke0;
+                scratchStackd0 = scratchStacke0;
+                scratchStackd4 = scratchStackArr1c8 + scratchStack7c;
+                scratchStack70 = 0x80e1;
+                scratchStackcc = scratchStacke4;
+                scratchUint22 = scratchStack98;
+                scratchUint28 = scratchStacka0;
+                scratchUint32 = scratchStack9c;
+                scratchUint30 = scratchStack7c;
                 do {
-                  uVar23 = uVar22 + local_214;
-                  uVar20 = uVar23;
-                  if ((int)uVar23 < 5) {
-                    uVar20 = 5;
+                  scratchUint23 = scratchUint22 + scratchStack214;
+                  scratchUint20 = scratchUint23;
+                  if ((int)scratchUint23 < 5) {
+                    scratchUint20 = 5;
                   }
-                  iVar11 = 1 << (uVar20 & 0x3f);
-                  local_b0 = 1;
-                  bVar39 = 3 < *(byte *)(texture + 0xe) - 0xc;
-                  local_ac = *piVar14 * local_78 + local_94 * (piVar14[1] - *piVar14) + local_c4 +
+                  scratchInt11 = 1 << (scratchUint20 & 0x3f);
+                  scratchStackb0 = 1;
+                  scratchFlag39 = 3 < *(byte *)(texture + 0xe) - 0xc;
+                  scratchStackac = *scratchPtr14 * scratchStack78 + scratchStack94 * (scratchPtr14[1] - *scratchPtr14) + scratchStackc4 +
                              0xa00;
-                  if (bVar39) {
-                    local_b0 = 0;
+                  if (scratchFlag39) {
+                    scratchStackb0 = 0;
                   }
-                  local_b0 = (uint)!bVar39;
+                  scratchStackb0 = (uint)!scratchFlag39;
                   if ((*(byte *)((int)texture + 0x39) & 3) == 0) {
-                    bVar42 = ((int)uVar28 < 0) << 3 | (0 < (int)uVar28) << 2 | (uVar28 == 0) << 1 |
+                    scratchFlag42 = ((int)scratchUint28 < 0) << 3 | (0 < (int)scratchUint28) << 2 | (scratchUint28 == 0) << 1 |
                              xerSummaryOverflow & 1;
-                    local_a8 = local_a8 & *(ushort *)(local_dc + 9);
+                    scratchStacka8 = scratchStacka8 & *(ushort *)(scratchStackdc + 9);
                   }
                   else {
-                    bVar42 = ((int)uVar28 < 0) << 3 | (0 < (int)uVar28) << 2 | (uVar28 == 0) << 1 |
+                    scratchFlag42 = ((int)scratchUint28 < 0) << 3 | (0 < (int)scratchUint28) << 2 | (scratchUint28 == 0) << 1 |
                              xerSummaryOverflow & 1;
-                    uVar8 = uVar28;
-                    uVar20 = uVar32;
-                    if ((((uVar32 != local_a4 + 3) && (local_a4 <= uVar32)) &&
-                        (bVar42 = ((int)uVar28 < 0) << 3 | (0 < (int)uVar28) << 2 |
-                                  (uVar28 == 0) << 1 | xerSummaryOverflow & 1, uVar28 != 0)) &&
-                       (uVar36 = uVar28, uVar32 < 0xb)) {
+                    scratchUint8 = scratchUint28;
+                    scratchUint20 = scratchUint32;
+                    if ((((scratchUint32 != scratchStacka4 + 3) && (scratchStacka4 <= scratchUint32)) &&
+                        (scratchFlag42 = ((int)scratchUint28 < 0) << 3 | (0 < (int)scratchUint28) << 2 |
+                                  (scratchUint28 == 0) << 1 | xerSummaryOverflow & 1, scratchUint28 != 0)) &&
+                       (scratchUint36 = scratchUint28, scratchUint32 < 0xb)) {
                       do {
-                        uVar8 = uVar8 - 1;
-                        uVar20 = uVar20 + 1;
-                        if (uVar36 - 1 == 0) goto LAB_00033700;
-                        uVar36 = uVar36 - 1;
-                      } while (uVar20 != 0xb);
-                      uVar20 = 0xb;
+                        scratchUint8 = scratchUint8 - 1;
+                        scratchUint20 = scratchUint20 + 1;
+                        if (scratchUint36 - 1 == 0) goto LAB_00033700;
+                        scratchUint36 = scratchUint36 - 1;
+                      } while (scratchUint20 != 0xb);
+                      scratchUint20 = 0xb;
                     }
 LAB_00033700:
-                    if ((int)uVar23 < (int)local_c0) {
-                      uVar23 = local_c0;
+                    if ((int)scratchUint23 < (int)scratchStackc0) {
+                      scratchUint23 = scratchStackc0;
                     }
-                    iVar29 = 1 << (uVar23 & 0x3f);
-                    *(short *)(local_d0 + (int)local_5c) =
-                         (short)((int)local_8c - (int)(local_84 + 0x280) >> 2);
-                    iVar25 = local_84[1];
-                    *(int *)((int)local_5c + local_d0 + 4) = local_ac;
-                    *(short *)((int)local_5c + local_d0 + 0x18) =
-                         (short)((int)local_e8 - (int)(local_84 + 0x280) >> 2) - (short)iVar25;
-                    iVar33 = *local_d4;
-                    iVar25 = local_d4[1];
-                    *(short *)((int)local_5c + local_d0 + 2) = (short)(1 << (uVar8 & 0x3f));
-                    *(int *)((int)local_5c + local_d0 + 0xc) = iVar11 << (uVar20 & 0x3f);
-                    *(uint *)((int)local_5c + local_d0 + 8) =
-                         local_78 * iVar33 + local_94 * (iVar25 - iVar33);
-                    uVar23 = uVar20;
-                    if ((int)uVar20 < (int)local_a4) {
-                      uVar23 = local_a4;
+                    scratchInt29 = 1 << (scratchUint23 & 0x3f);
+                    *(short *)(scratchStackd0 + (int)scratchStack5c) =
+                         (short)((int)scratchStack8c - (int)(scratchStack84 + 0x280) >> 2);
+                    scratchInt25 = scratchStack84[1];
+                    *(int *)((int)scratchStack5c + scratchStackd0 + 4) = scratchStackac;
+                    *(short *)((int)scratchStack5c + scratchStackd0 + 0x18) =
+                         (short)((int)scratchStacke8 - (int)(scratchStack84 + 0x280) >> 2) - (short)scratchInt25;
+                    scratchInt33 = *scratchStackd4;
+                    scratchInt25 = scratchStackd4[1];
+                    *(short *)((int)scratchStack5c + scratchStackd0 + 2) = (short)(1 << (scratchUint8 & 0x3f));
+                    *(int *)((int)scratchStack5c + scratchStackd0 + 0xc) = scratchInt11 << (scratchUint20 & 0x3f);
+                    *(uint *)((int)scratchStack5c + scratchStackd0 + 8) =
+                         scratchStack78 * scratchInt33 + scratchStack94 * (scratchInt25 - scratchInt33);
+                    scratchUint23 = scratchUint20;
+                    if ((int)scratchUint20 < (int)scratchStacka4) {
+                      scratchUint23 = scratchStacka4;
                     }
-                    *(int *)((int)local_5c + local_d0 + 0x10) = (1 << (uVar23 & 0x3f)) * iVar29;
-                    uVar23 = uVar32;
-                    if ((int)uVar32 < (int)local_a4) {
-                      uVar23 = local_a4;
+                    *(int *)((int)scratchStack5c + scratchStackd0 + 0x10) = (1 << (scratchUint23 & 0x3f)) * scratchInt29;
+                    scratchUint23 = scratchUint32;
+                    if ((int)scratchUint32 < (int)scratchStacka4) {
+                      scratchUint23 = scratchStacka4;
                     }
-                    *(int *)((int)local_5c + local_d0 + 0x14) = iVar29 << (uVar23 & 0x3f);
-                    *(int *)((int)local_5c + local_d0 + 0x1c) = (int)local_84 + local_ac;
-                    if ((local_210 < 3) ||
-                       ((iVar25 = 1, 4 < local_210 && (iVar25 = 2, local_210 != 6)))) {
-                      iVar25 = 0;
+                    *(int *)((int)scratchStack5c + scratchStackd0 + 0x14) = scratchInt29 << (scratchUint23 & 0x3f);
+                    *(int *)((int)scratchStack5c + scratchStackd0 + 0x1c) = (int)scratchStack84 + scratchStackac;
+                    if ((scratchStack210 < 3) ||
+                       ((scratchInt25 = 1, 4 < scratchStack210 && (scratchInt25 = 2, scratchStack210 != 6)))) {
+                      scratchInt25 = 0;
                     }
-                    uVar23 = 1 << (uVar8 & 0x3f);
-                    if (uVar23 != 0) {
-                      iVar33 = 1 << (uVar20 & 0x3f);
-                      iVar35 = 1 << (uVar22 & 0x3f);
-                      uVar8 = 0;
-                      uVar20 = local_88 >> (uVar30 & 0x3f);
+                    scratchUint23 = 1 << (scratchUint8 & 0x3f);
+                    if (scratchUint23 != 0) {
+                      scratchInt33 = 1 << (scratchUint20 & 0x3f);
+                      scratchInt35 = 1 << (scratchUint22 & 0x3f);
+                      scratchUint8 = 0;
+                      scratchUint20 = scratchStack88 >> (scratchUint30 & 0x3f);
                       do {
-                        if (((bool)((byte)(local_60 >> 0x1d) & 1)) ||
-                           (!(bool)((byte)(local_54 >> 0x1d) & 1))) {
-                          uVar36 = 0;
+                        if (((bool)((byte)(scratchStack60 >> 0x1d) & 1)) ||
+                           (!(bool)((byte)(scratchStack54 >> 0x1d) & 1))) {
+                          scratchUint36 = 0;
                         }
                         else {
-                          uVar36 = 1;
+                          scratchUint36 = 1;
                         }
-                        uVar36 = (uVar36 | local_58) << 1 | uVar20 & 1;
-                        local_e8 = (int *)((int (*)())FUN_00030420)(local_e8,formatInfo,iVar11,iVar29,uVar36,
-                                                       (iVar35 << (local_214 & 0x3f)) >>
-                                                       (*(uint *)(formatInfo + 0x14) & 7),iVar33);
-                        if (!(bool)((byte)(local_6c >> 0x1d) & 1)) {
-                          local_8c = (int *)((int (*)())FUN_00030a60)(local_8c,local_210,iVar11,iVar29,uVar36,0,
-                                                         iVar33 << 0x10 |
-                                                         (iVar35 << (local_214 & 0x3f)) >> iVar25);
+                        scratchUint36 = (scratchUint36 | scratchStack58) << 1 | scratchUint20 & 1;
+                        scratchStacke8 = (int *)((int (*)())FUN_00030420)(scratchStacke8,formatInfo,scratchInt11,scratchInt29,scratchUint36,
+                                                       (scratchInt35 << (scratchStack214 & 0x3f)) >>
+                                                       (*(uint *)(formatInfo + 0x14) & 7),scratchInt33);
+                        if (!(bool)((byte)(scratchStack6c >> 0x1d) & 1)) {
+                          scratchStack8c = (int *)((int (*)())FUN_00030a60)(scratchStack8c,scratchStack210,scratchInt11,scratchInt29,scratchUint36,0,
+                                                         scratchInt33 << 0x10 |
+                                                         (scratchInt35 << (scratchStack214 & 0x3f)) >> scratchInt25);
                         }
-                        uVar8 = uVar8 + 1;
-                      } while (uVar8 < uVar23);
+                        scratchUint8 = scratchUint8 + 1;
+                      } while (scratchUint8 < scratchUint23);
                     }
                   }
-                  if ((local_a8 >> (uVar30 & 0x3f) & 1) != 0) {
-                    iVar33 = local_cc + local_74 + 0xa0;
-                    uVar20 = (uint)*(ushort *)(iVar33 + 0x12);
-                    iVar25 = gldPixelUnitBytes((uint)*(ushort *)(iVar33 + 0x10),uVar20);
-                    uVar23 = (uint)*(ushort *)(iVar33 + 0xc);
-                    bVar39 = uVar20 != 0;
-                    bVar4 = xerSummaryOverflow & 1;
-                    local_158 = *(uint *)(iVar33 + 0x14);
-                    uVar8 = iVar25 * uVar23;
-                    if ((*(char *)(iVar33 + 10) != '\0') && (bVar39)) {
-                      iVar29 = 1;
-                      if ((*(char *)(local_74 + 0x6e) != '\0') &&
-                         (iVar29 = uVar23 + 1, *(char *)(local_74 + 0x6f) != '\0')) {
-                        iVar29 = iVar29 + uVar23 * *(ushort *)(iVar33 + 0xe);
+                  if ((scratchStacka8 >> (scratchUint30 & 0x3f) & 1) != 0) {
+                    scratchInt33 = scratchStackcc + scratchStack74 + 0xa0;
+                    scratchUint20 = (uint)*(ushort *)(scratchInt33 + 0x12);
+                    scratchInt25 = gldPixelUnitBytes((uint)*(ushort *)(scratchInt33 + 0x10),scratchUint20);
+                    scratchUint23 = (uint)*(ushort *)(scratchInt33 + 0xc);
+                    scratchFlag39 = scratchUint20 != 0;
+                    scratchFlag4 = xerSummaryOverflow & 1;
+                    scratchStack158 = *(uint *)(scratchInt33 + 0x14);
+                    scratchUint8 = scratchInt25 * scratchUint23;
+                    if ((*(char *)(scratchInt33 + 10) != '\0') && (scratchFlag39)) {
+                      scratchInt29 = 1;
+                      if ((*(char *)(scratchStack74 + 0x6e) != '\0') &&
+                         (scratchInt29 = scratchUint23 + 1, *(char *)(scratchStack74 + 0x6f) != '\0')) {
+                        scratchInt29 = scratchInt29 + scratchUint23 * *(ushort *)(scratchInt33 + 0xe);
                       }
-                      local_158 = local_158 + iVar25 * iVar29;
+                      scratchStack158 = scratchStack158 + scratchInt25 * scratchInt29;
                     }
-                    uVar23 = *(byte *)(local_74 + 0x60) - uVar30;
-                    if ((int)uVar23 < 0) {
-                      uVar23 = 0;
+                    scratchUint23 = *(byte *)(scratchStack74 + 0x60) - scratchUint30;
+                    if ((int)scratchUint23 < 0) {
+                      scratchUint23 = 0;
                     }
-                    local_12c = 1 << (uVar23 & 0x3f);
-                    iVar25 = *(byte *)(local_74 + 0x61) - uVar30;
-                    if (iVar25 < 0) {
-                      iVar25 = 0;
+                    scratchStack12c = 1 << (scratchUint23 & 0x3f);
+                    scratchInt25 = *(byte *)(scratchStack74 + 0x61) - scratchUint30;
+                    if (scratchInt25 < 0) {
+                      scratchInt25 = 0;
                     }
-                    iVar29 = *(byte *)(local_74 + 0x62) - uVar30;
-                    if (iVar29 < 0) {
-                      iVar29 = 0;
+                    scratchInt29 = *(byte *)(scratchStack74 + 0x62) - scratchUint30;
+                    if (scratchInt29 < 0) {
+                      scratchInt29 = 0;
                     }
-                    local_128 = 1 << (iVar25 + iVar29 & 0x3fU);
-                    puVar18 = auStack_14c;
-                    bVar40 = (int)local_b0 < 0;
-                    bVar1 = 0 < (int)local_b0;
-                    bVar2 = local_b0 == 0;
-                    bVar3 = xerSummaryOverflow & 1;
-                    uVar23 = local_b0;
-                    local_154 = uVar8;
-                    _glgConvertType((uint)*(ushort *)(iVar33 + 0x10),
-                                    (uint)*(ushort *)(iVar33 + 0x12),auStack_150,puVar18,local_74,
-                                    local_b0,local_158,uVar8);
-                    local_144 = iVar11;
-                    if (!bVar2) {
-                      local_144 = local_12c << 2;
+                    scratchStack128 = 1 << (scratchInt25 + scratchInt29 & 0x3fU);
+                    scratchPtr18 = scratchStackArr14c;
+                    scratchFlag40 = (int)scratchStackb0 < 0;
+                    scratchFlag1 = 0 < (int)scratchStackb0;
+                    scratchFlag2 = scratchStackb0 == 0;
+                    scratchFlag3 = xerSummaryOverflow & 1;
+                    scratchUint23 = scratchStackb0;
+                    scratchStack154 = scratchUint8;
+                    _glgConvertType((uint)*(ushort *)(scratchInt33 + 0x10),
+                                    (uint)*(ushort *)(scratchInt33 + 0x12),scratchStackArr150,scratchPtr18,scratchStack74,
+                                    scratchStackb0,scratchStack158,scratchUint8);
+                    scratchStack144 = scratchInt11;
+                    if (!scratchFlag2) {
+                      scratchStack144 = scratchStack12c << 2;
                     }
-                    local_148 = local_ac + *texture;
-                    local_130 = 0x7ffff;
-                    uVar27 = *(short *)(iVar33 + 0x10) + 0xe6fa;
-                    bVar43 = (uVar27 < 4) << 3 | (4 < uVar27) << 2 | (uVar27 == 4) << 1 |
+                    scratchStack148 = scratchStackac + *texture;
+                    scratchStack130 = 0x7ffff;
+                    scratchUint27 = *(short *)(scratchInt33 + 0x10) + 0xe6fa;
+                    scratchFlag43 = (scratchUint27 < 4) << 3 | (4 < scratchUint27) << 2 | (scratchUint27 == 4) << 1 |
                              xerSummaryOverflow & 1;
-                    if ((4 >= uVar27) &&
-                       (uVar23 = 1 << ((int)(short)uVar27 & 0x3fU) & 0x19, uVar23 != 0)) {
-                      local_130 = 0x7dfff;
+                    if ((4 >= scratchUint27) &&
+                       (scratchUint23 = 1 << ((int)(short)scratchUint27 & 0x3fU) & 0x19, scratchUint23 != 0)) {
+                      scratchStack130 = 0x7dfff;
                     }
-                    local_120 = 0;
-                    local_124 = 0;
-                    uVar36 = local_148;
-                    if (((bVar39) && (!bVar2)) &&
-                       (uVar36 = local_68, (bool)((byte)(local_68 >> 0x1d) & 1))) {
-                      uVar23 = 1;
-                      local_90 = _valloc(((1 << (*(byte *)(local_74 + 100) + 2 & 0x3f)) + 0x1fU &
+                    scratchStack120 = 0;
+                    scratchStack124 = 0;
+                    scratchUint36 = scratchStack148;
+                    if (((scratchFlag39) && (!scratchFlag2)) &&
+                       (scratchUint36 = scratchStack68, (bool)((byte)(scratchStack68 >> 0x1d) & 1))) {
+                      scratchUint23 = 1;
+                      scratchStack90 = _valloc(((1 << (*(byte *)(scratchStack74 + 100) + 2 & 0x3f)) + 0x1fU &
                                          0xffffffe0) <<
-                                         ((uint)*(byte *)(local_74 + 0x66) +
-                                          (uint)*(byte *)(local_74 + 0x65) & 0x3f));
-                      uVar36 = local_68;
-                      local_68 = (uint)(byte)(((int)local_90 < 0) << 3 | (0 < (int)local_90) << 2 |
-                                              (local_90 == 0) << 1 | xerSummaryOverflow & 1) << 0x1c |
-                                 (uint)(crField1 & 0xf) << 0x18 | (uint)bVar42 << 0x14 |
-                                 (uint)(byte)((uVar20 == 0) << 2 | bVar39 << 1 | bVar4) << 0x10 |
-                                 (uint)(byte)(bVar40 << 3 | bVar1 << 2 | bVar2 << 1 | bVar3) << 0xc
-                                 | (uint)(crField5 & 0xf) << 8 | (uint)(bVar41 & 0xf) << 4 |
-                                 (uint)(bVar43 & 0xf);
+                                         ((uint)*(byte *)(scratchStack74 + 0x66) +
+                                          (uint)*(byte *)(scratchStack74 + 0x65) & 0x3f));
+                      scratchUint36 = scratchStack68;
+                      scratchStack68 = (uint)(byte)(((int)scratchStack90 < 0) << 3 | (0 < (int)scratchStack90) << 2 |
+                                              (scratchStack90 == 0) << 1 | xerSummaryOverflow & 1) << 0x1c |
+                                 (uint)(crField1 & 0xf) << 0x18 | (uint)scratchFlag42 << 0x14 |
+                                 (uint)(byte)((scratchUint20 == 0) << 2 | scratchFlag39 << 1 | scratchFlag4) << 0x10 |
+                                 (uint)(byte)(scratchFlag40 << 3 | scratchFlag1 << 2 | scratchFlag2 << 1 | scratchFlag3) << 0xc
+                                 | (uint)(crField5 & 0xf) << 8 | (uint)(scratchFlag41 & 0xf) << 4 |
+                                 (uint)(scratchFlag43 & 0xf);
                     }
-                    uVar27 = *(ushort *)(iVar33 + 0x10);
-                    uVar6 = *(ushort *)(iVar33 + 0x12);
-                    uVar15 = (uint)*(byte *)(texture + 0xe);
-                    iVar25 = 1 << (uVar28 + uVar22 + uVar32 + local_214 & 0x3f);
-                    uVar20 = ((int (*)())gldTextureFormatCodeMatchesType)((uint)uVar27,(uint)uVar6,uVar15);
-                    iVar11 = gldPixelUnitBytes((uint)uVar27,(uint)uVar6);
-                    uVar20 = local_154 == iVar11 * local_12c & uVar20;
-                    if (((uVar20 == 0) || (uVar23 = local_158 & 0x1f, uVar23 != 0)) ||
-                       (uVar36 = local_154 & 0x1f, uVar36 != 0)) {
-                      if (bVar39) {
-                        if (bVar2) {
-                          _glgProcessPixels(0,local_64,uVar15,puVar18,uVar20,uVar23,uVar36,uVar8);
+                    scratchUint27 = *(ushort *)(scratchInt33 + 0x10);
+                    scratchUint6 = *(ushort *)(scratchInt33 + 0x12);
+                    scratchUint15 = (uint)*(byte *)(texture + 0xe);
+                    scratchInt25 = 1 << (scratchUint28 + scratchUint22 + scratchUint32 + scratchStack214 & 0x3f);
+                    scratchUint20 = ((int (*)())gldTextureFormatCodeMatchesType)((uint)scratchUint27,(uint)scratchUint6,scratchUint15);
+                    scratchInt11 = gldPixelUnitBytes((uint)scratchUint27,(uint)scratchUint6);
+                    scratchUint20 = scratchStack154 == scratchInt11 * scratchStack12c & scratchUint20;
+                    if (((scratchUint20 == 0) || (scratchUint23 = scratchStack158 & 0x1f, scratchUint23 != 0)) ||
+                       (scratchUint36 = scratchStack154 & 0x1f, scratchUint36 != 0)) {
+                      if (scratchFlag39) {
+                        if (scratchFlag2) {
+                          _glgProcessPixels(0,scratchStack64,scratchUint15,scratchPtr18,scratchUint20,scratchUint23,scratchUint36,scratchUint8);
                         }
                         else {
-                          uVar23 = (uint)*(ushort *)(iVar33 + 0x10);
-                          local_b4 = local_148;
-                          if (((local_12c != *(ushort *)(iVar33 + 0xc)) ||
-                              ((*(short *)(iVar33 + 0x12) != 0x1401 &&
-                               (*(short *)(iVar33 + 0x12) != -0x7fcb)))) ||
-                             ((uVar15 = local_158, 1 < uVar23 - 0x1907 &&
-                              ((uVar23 != local_70 && (uVar20 = local_70, uVar23 != 0x80e0)))))) {
-                            local_148 = local_90;
-                            _glgProcessPixels(0,local_64,uVar23,puVar18,uVar20,local_90,uVar36,uVar8
+                          scratchUint23 = (uint)*(ushort *)(scratchInt33 + 0x10);
+                          scratchStackb4 = scratchStack148;
+                          if (((scratchStack12c != *(ushort *)(scratchInt33 + 0xc)) ||
+                              ((*(short *)(scratchInt33 + 0x12) != 0x1401 &&
+                               (*(short *)(scratchInt33 + 0x12) != -0x7fcb)))) ||
+                             ((scratchUint15 = scratchStack158, 1 < scratchUint23 - 0x1907 &&
+                              ((scratchUint23 != scratchStack70 && (scratchUint20 = scratchStack70, scratchUint23 != 0x80e0)))))) {
+                            scratchStack148 = scratchStack90;
+                            _glgProcessPixels(0,scratchStack64,scratchUint23,scratchPtr18,scratchUint20,scratchStack90,scratchUint36,scratchUint8
                                              );
-                            uVar23 = 0x1908;
-                            local_148 = local_b4;
-                            uVar15 = local_90;
+                            scratchUint23 = 0x1908;
+                            scratchStack148 = scratchStackb4;
+                            scratchUint15 = scratchStack90;
                           }
-                          uVar20 = local_12c;
-                          puVar18 = (undefined1 *)(uint)*(byte *)(texture + 0xe);
-                          local_148 = local_b4;
-                          if (puVar18 == (undefined1 *)((int)((unsigned char *)0xc) + 3)) {
-                            bVar39 = uVar23 == 0x1908;
-                            bVar41 = (uVar23 < 0x1908) << 3 | (0x1908 < uVar23) << 2 | bVar39 << 1 |
+                          scratchUint20 = scratchStack12c;
+                          scratchPtr18 = (undefined1 *)(uint)*(byte *)(texture + 0xe);
+                          scratchStack148 = scratchStackb4;
+                          if (scratchPtr18 == (undefined1 *)((int)((unsigned char *)0xc) + 3)) {
+                            scratchFlag39 = scratchUint23 == 0x1908;
+                            scratchFlag41 = (scratchUint23 < 0x1908) << 3 | (0x1908 < scratchUint23) << 2 | scratchFlag39 << 1 |
                                      xerSummaryOverflow & 1;
-                            local_b8 = local_128;
-                            if ((bVar39) || (iVar11 = 3, uVar23 == local_70)) {
-                              iVar11 = 4;
+                            scratchStackb8 = scratchStack128;
+                            if ((scratchFlag39) || (scratchInt11 = 3, scratchUint23 == scratchStack70)) {
+                              scratchInt11 = 4;
                             }
-                            puVar38 = (undefined1 *)(iVar11 * local_12c);
-                            if ((bVar39) || (local_bc = 0, uVar23 == local_70)) {
-                              local_bc = 3;
+                            scratchPtr38 = (undefined1 *)(scratchInt11 * scratchStack12c);
+                            if ((scratchFlag39) || (scratchStackbc = 0, scratchUint23 == scratchStack70)) {
+                              scratchStackbc = 3;
                             }
-                            if (0 < (int)local_128) {
-                              bVar39 = 0 < (int)local_12c;
-                              iVar25 = 0;
+                            if (0 < (int)scratchStack128) {
+                              scratchFlag39 = 0 < (int)scratchStack12c;
+                              scratchInt25 = 0;
                               do {
-                                if (bVar39) {
-                                  iVar33 = 0;
-                                  iVar29 = local_b4 + iVar25 * uVar20;
+                                if (scratchFlag39) {
+                                  scratchInt33 = 0;
+                                  scratchInt29 = scratchStackb4 + scratchInt25 * scratchUint20;
                                   do {
-                                    iVar35 = iVar11 * iVar33;
-                                    iVar33 = iVar33 + 4;
-                                    iVar21 = uVar15 + iVar35 + iVar25 * (int)puVar38;
-                                    ((int (*)())FUN_000305b0)(iVar29,iVar21 + local_bc,iVar11,puVar38);
-                                    iVar35 = iVar29 + 8;
-                                    iVar29 = iVar29 + 0x10;
-                                    puVar18 = puVar38;
-                                    ((int (*)())FUN_000305b0)(iVar35,iVar21 + (uint)(1 < uVar23 - 0x1907) * 2,
-                                                 iVar11,puVar38);
-                                  } while (iVar33 < (int)uVar20);
+                                    scratchInt35 = scratchInt11 * scratchInt33;
+                                    scratchInt33 = scratchInt33 + 4;
+                                    scratchInt21 = scratchUint15 + scratchInt35 + scratchInt25 * (int)scratchPtr38;
+                                    ((int (*)())FUN_000305b0)(scratchInt29,scratchInt21 + scratchStackbc,scratchInt11,scratchPtr38);
+                                    scratchInt35 = scratchInt29 + 8;
+                                    scratchInt29 = scratchInt29 + 0x10;
+                                    scratchPtr18 = scratchPtr38;
+                                    ((int (*)())FUN_000305b0)(scratchInt35,scratchInt21 + (uint)(1 < scratchUint23 - 0x1907) * 2,
+                                                 scratchInt11,scratchPtr38);
+                                  } while (scratchInt33 < (int)scratchUint20);
                                 }
-                                iVar25 = iVar25 + 4;
-                              } while (iVar25 < (int)local_b8);
+                                scratchInt25 = scratchInt25 + 4;
+                              } while (scratchInt25 < (int)scratchStackb8);
                             }
                           }
                           else {
-                            FUN_0001c380(local_12c,local_128,uVar23,puVar18,uVar15,local_b4);
+                            dxtCompressImage(scratchStack12c,scratchStack128,scratchUint23,scratchPtr18,scratchUint15,scratchStackb4);
                           }
                         }
                       }
-                      else if (!bVar2) {
-                        puVar18 = (undefined1 *)((int)((unsigned char *)0x0) + 1);
-                        uVar20 = ((int (*)())gldCompressedImageBytes)((uint)*(byte *)(texture + 0xe),local_12c,1,1);
-                        if (uVar20 < 0x20) {
-                          if (local_128 != 0) {
-                            uVar15 = 0;
-                            uVar23 = local_158;
-                            uVar36 = local_148;
+                      else if (!scratchFlag2) {
+                        scratchPtr18 = (undefined1 *)((int)((unsigned char *)0x0) + 1);
+                        scratchUint20 = ((int (*)())gldCompressedImageBytes)((uint)*(byte *)(texture + 0xe),scratchStack12c,1,1);
+                        if (scratchUint20 < 0x20) {
+                          if (scratchStack128 != 0) {
+                            scratchUint15 = 0;
+                            scratchUint23 = scratchStack158;
+                            scratchUint36 = scratchStack148;
                             do {
-                              uVar15 = uVar15 + 4;
-                              uVar7 = uVar36 + 0x1f & 0xffffffe0;
-                              uVar36 = uVar7 + uVar20;
-                              _memcpy(uVar7,uVar23,uVar20);
-                              uVar23 = uVar23 + uVar20;
-                            } while (uVar15 < local_128);
+                              scratchUint15 = scratchUint15 + 4;
+                              scratchUint7 = scratchUint36 + 0x1f & 0xffffffe0;
+                              scratchUint36 = scratchUint7 + scratchUint20;
+                              _memcpy(scratchUint7,scratchUint23,scratchUint20);
+                              scratchUint23 = scratchUint23 + scratchUint20;
+                            } while (scratchUint15 < scratchStack128);
                           }
                         }
                         else {
-                          _memcpy(local_148,local_158,iVar25);
+                          _memcpy(scratchStack148,scratchStack158,scratchInt25);
                         }
                       }
                     }
                     else {
-                      _memcpy(local_148,local_158,iVar25);
+                      _memcpy(scratchStack148,scratchStack158,scratchInt25);
                     }
-                    uVar20 = *(uint *)(ctxSaved + 0x24) & 0x82;
-                    if (uVar20 != 0) {
-                      gldFlushDataCacheRange(ctxSaved,local_ac + *texture,
-                                   (uint)*(ushort *)((int)local_5c + local_c8 + 2) *
-                                   *(int *)((int)local_5c + local_c8 + 0xc),puVar18,local_c8,
-                                   local_5c,uVar20,uVar8);
+                    scratchUint20 = *(uint *)(ctxSaved + 0x24) & 0x82;
+                    if (scratchUint20 != 0) {
+                      gldFlushDataCacheRange(ctxSaved,scratchStackac + *texture,
+                                   (uint)*(ushort *)((int)scratchStack5c + scratchStackc8 + 2) *
+                                   *(int *)((int)scratchStack5c + scratchStackc8 + 0xc),scratchPtr18,scratchStackc8,
+                                   scratchStack5c,scratchUint20,scratchUint8);
                     }
                   }
-                  if (0 < (int)uVar22) {
-                    uVar22 = uVar22 - 1;
+                  if (0 < (int)scratchUint22) {
+                    scratchUint22 = scratchUint22 - 1;
                   }
-                  if (0 < (int)uVar32) {
-                    uVar32 = uVar32 - 1;
+                  if (0 < (int)scratchUint32) {
+                    scratchUint32 = scratchUint32 - 1;
                   }
-                  if ((bool)(bVar42 >> 2 & 1)) {
-                    uVar28 = uVar28 - 1;
+                  if ((bool)(scratchFlag42 >> 2 & 1)) {
+                    scratchUint28 = scratchUint28 - 1;
                   }
-                  uVar30 = uVar30 + 1;
-                  piVar14 = piVar14 + 1;
-                  local_c8 = local_c8 + 0x20;
-                  local_cc = local_cc + 0x18;
-                  local_d0 = local_d0 + 0x20;
-                  local_d4 = local_d4 + 1;
-                } while (uVar30 <= local_80);
+                  scratchUint30 = scratchUint30 + 1;
+                  scratchPtr14 = scratchPtr14 + 1;
+                  scratchStackc8 = scratchStackc8 + 0x20;
+                  scratchStackcc = scratchStackcc + 0x18;
+                  scratchStackd0 = scratchStackd0 + 0x20;
+                  scratchStackd4 = scratchStackd4 + 1;
+                } while (scratchUint30 <= scratchStack80);
               }
-              iVar11 = local_94 * 2;
-              local_94 = local_94 + 1;
-              uVar27 = ~(ushort)local_a8;
-              iVar25 = iVar11 + texture[0xd];
-              local_d8 = local_d8 + 2;
-              local_e0 = local_e0 + 0x1a0;
-              local_e4 = local_e4 + 0x168;
-              *(ushort *)(iVar25 + 0x1c) = (ushort)local_a8 | *(ushort *)(iVar25 + 0x1c);
-              iVar11 = iVar11 + texture[0xd];
-              *(ushort *)(iVar11 + 0x28) = uVar27 & *(ushort *)(iVar11 + 0x28);
-              *(ushort *)(local_dc + 9) = uVar27 & *(ushort *)(local_dc + 9);
-              local_dc = (int *)((int)local_dc + 2);
-            } while (local_94 < local_78);
-            if (!(bool)((byte)(local_68 >> 0x1d) & 1)) {
-              _free(local_90);
+              scratchInt11 = scratchStack94 * 2;
+              scratchStack94 = scratchStack94 + 1;
+              scratchUint27 = ~(ushort)scratchStacka8;
+              scratchInt25 = scratchInt11 + texture[0xd];
+              scratchStackd8 = scratchStackd8 + 2;
+              scratchStacke0 = scratchStacke0 + 0x1a0;
+              scratchStacke4 = scratchStacke4 + 0x168;
+              *(ushort *)(scratchInt25 + 0x1c) = (ushort)scratchStacka8 | *(ushort *)(scratchInt25 + 0x1c);
+              scratchInt11 = scratchInt11 + texture[0xd];
+              *(ushort *)(scratchInt11 + 0x28) = scratchUint27 & *(ushort *)(scratchInt11 + 0x28);
+              *(ushort *)(scratchStackdc + 9) = scratchUint27 & *(ushort *)(scratchStackdc + 9);
+              scratchStackdc = (int *)((int)scratchStackdc + 2);
+            } while (scratchStack94 < scratchStack78);
+            if (!(bool)((byte)(scratchStack68 >> 0x1d) & 1)) {
+              _free(scratchStack90);
             }
           }
-          bVar41 = *(byte *)((int)texture + 0x39);
-          if ((bVar41 & 3) != 0) {
-            *local_e8 = (int)((unsigned char *)0x00001393U);
-            local_e8[1] = 10;
-            local_e8[2] = 0x5c8;
-            local_e8[3] = 0x20000;
-            local_e8[4] = (int)((unsigned char *)0x00001040U);
-            local_e8[5] = 0;
-            if (!(bool)((byte)(local_6c >> 0x1d) & 1)) {
-              *local_8c = 0xd0b;
-              local_8c[1] = 5;
-              local_8c[2] = 0x5c8;
-              local_8c[3] = 0x10000;
-              piVar14 = local_8c + 5;
-              local_8c[4] = (int)((unsigned char *)0x00001040U);
-              local_8c = local_8c + 6;
-              *piVar14 = 0;
+          scratchFlag41 = *(byte *)((int)texture + 0x39);
+          if ((scratchFlag41 & 3) != 0) {
+            *scratchStacke8 = (int)((unsigned char *)0x00001393U);
+            scratchStacke8[1] = 10;
+            scratchStacke8[2] = 0x5c8;
+            scratchStacke8[3] = 0x20000;
+            scratchStacke8[4] = (int)((unsigned char *)0x00001040U);
+            scratchStacke8[5] = 0;
+            if (!(bool)((byte)(scratchStack6c >> 0x1d) & 1)) {
+              *scratchStack8c = 0xd0b;
+              scratchStack8c[1] = 5;
+              scratchStack8c[2] = 0x5c8;
+              scratchStack8c[3] = 0x10000;
+              scratchPtr14 = scratchStack8c + 5;
+              scratchStack8c[4] = (int)((unsigned char *)0x00001040U);
+              scratchStack8c = scratchStack8c + 6;
+              *scratchPtr14 = 0;
             }
-            *local_84 = (int)local_8c - (int)(local_84 + 0x280) >> 2;
-            local_84[2] = ((int)local_e8 + (0x18 - (int)(local_84 + 0x280)) >> 2) - local_84[1];
-            bVar41 = *(byte *)((int)texture + 0x39);
+            *scratchStack84 = (int)scratchStack8c - (int)(scratchStack84 + 0x280) >> 2;
+            scratchStack84[2] = ((int)scratchStacke8 + (0x18 - (int)(scratchStack84 + 0x280)) >> 2) - scratchStack84[1];
+            scratchFlag41 = *(byte *)((int)texture + 0x39);
           }
-          *(byte *)((int)texture + 0x39) = bVar41 & 0xf8;
+          *(byte *)((int)texture + 0x39) = scratchFlag41 & 0xf8;
           goto LAB_00033ff0;
         }
         if (*(char *)(texture + 0x11) != '\0') {
           return 0;
         }
       }
-      iVar11 = ((int (*)())gld_uploadTextureLevel)(ctxSaved,texture);
-      if (iVar11 == 0) {
+      scratchInt11 = ((int (*)())gld_uploadTextureLevel)(ctxSaved,texture);
+      if (scratchInt11 == 0) {
         return 0;
       }
     }
   }
   else {
-    uVar27 = texImages[6];
-    if (uVar27 == 0x405) {
+    scratchUint27 = texImages[6];
+    if (scratchUint27 == 0x405) {
 LAB_000324ac:
-      uVar16 = 0;
+      scratchUint16 = 0;
     }
-    else if (uVar27 < 0x406) {
-      if (uVar27 == 0x402) goto LAB_000324ac;
-      uVar16 = 2;
-      if ((uVar27 != 0x403) && (uVar16 = 3, uVar27 != 0x401)) {
+    else if (scratchUint27 < 0x406) {
+      if (scratchUint27 == 0x402) goto LAB_000324ac;
+      scratchUint16 = 2;
+      if ((scratchUint27 != 0x403) && (scratchUint16 = 3, scratchUint27 != 0x401)) {
 LAB_00032480:
-        uVar16 = 1;
+        scratchUint16 = 1;
       }
     }
     else {
-      uVar16 = 8;
-      if ((uVar27 != 0x40a) && (uVar16 = 0x11, uVar27 != 0x1100)) {
-        if (uVar27 != 0x409) goto LAB_00032480;
-        uVar16 = 7;
+      scratchUint16 = 8;
+      if ((scratchUint27 != 0x40a) && (scratchUint16 = 0x11, scratchUint27 != 0x1100)) {
+        if (scratchUint27 != 0x409) goto LAB_00032480;
+        scratchUint16 = 7;
       }
     }
-    gld_ensureTextureSurfaceBackingResult = gld_ensureTextureSurfaceBacking(ctxSaved,texture,*(undefined4 *)(texImages + 4),uVar16,
+    gld_ensureTextureSurfaceBackingResult = gld_ensureTextureSurfaceBacking(ctxSaved,texture,*(undefined4 *)(texImages + 4),scratchUint16,
                           (uint)*(byte *)(texImages + 0x36));
     if (gld_ensureTextureSurfaceBackingResult == 0) {
       return 0;
     }
     if (*(char *)((int)texImages + 0x6d) == '\0') {
-      uVar22 = (uint)texImages[0x52];
-      if ((0x20 < uVar22) || (0x20 < texImages[0x53])) goto LAB_00032600;
+      scratchUint22 = (uint)texImages[0x52];
+      if ((0x20 < scratchUint22) || (0x20 < texImages[0x53])) goto LAB_00032600;
     }
     else {
-      uVar22 = (uint)texImages[0x52];
+      scratchUint22 = (uint)texImages[0x52];
     }
-    uVar28 = 1 << (*(uint *)(&DAT_001d9f48 + (uint)*(byte *)(texture + 0xe) * 0x24) & 7);
+    scratchUint28 = 1 << (*(uint *)(&DAT_001d9f48 + (uint)*(byte *)(texture + 0xe) * 0x24) & 7);
     *(short *)((int)texture + 0x3e) =
-         (short)((uVar28 * (uVar22 + (uint)*(byte *)(texImages + 0x55) * -2) + 0xff & 0xffffff00) /
-                uVar28);
+         (short)((scratchUint28 * (scratchUint22 + (uint)*(byte *)(texImages + 0x55) * -2) + 0xff & 0xffffff00) /
+                scratchUint28);
 LAB_00032600:
     *(byte *)((int)texture + 0x39) = *(byte *)((int)texture + 0x39) & 0xf8;
   }
@@ -4028,31 +4028,31 @@ LAB_00033ff0:
         return 0;
       }
       texture[0x32] = texture[0x32] & 0xff3fffffU | 0x400000;
-      uVar27 = texImages[0x52];
-      uVar22 = uVar27 >> 1 & 0x7e00;
-      sVar5 = (short)uVar22;
-      *(short *)(texture + 0x35) = sVar5;
-      *(ushort *)((int)texture + 0xd2) = uVar27 - sVar5;
-      *(short *)(texture + 0x34) = sVar5 + 2;
-      texture[0x33] = uVar22 << 2 | texture[0x33] & 3U;
+      scratchUint27 = texImages[0x52];
+      scratchUint22 = scratchUint27 >> 1 & 0x7e00;
+      scratchShort5 = (short)scratchUint22;
+      *(short *)(texture + 0x35) = scratchShort5;
+      *(ushort *)((int)texture + 0xd2) = scratchUint27 - scratchShort5;
+      *(short *)(texture + 0x34) = scratchShort5 + 2;
+      texture[0x33] = scratchUint22 << 2 | texture[0x33] & 3U;
       goto LAB_00034100;
     }
     if (0x1000 < texImages[0x53]) {
       texture[0x32] = texture[0x32] & 0xff3fffffU | 0x800000;
-      uVar27 = texImages[0x53];
-      uVar22 = uVar27 >> 1 & 0x7fc0;
-      sVar5 = (short)uVar22;
-      *(short *)(texture + 0x35) = sVar5;
-      *(ushort *)((int)texture + 0xd2) = uVar27 - sVar5;
-      *(short *)(texture + 0x34) = sVar5 + 1;
+      scratchUint27 = texImages[0x53];
+      scratchUint22 = scratchUint27 >> 1 & 0x7fc0;
+      scratchShort5 = (short)scratchUint22;
+      *(short *)(texture + 0x35) = scratchShort5;
+      *(ushort *)((int)texture + 0xd2) = scratchUint27 - scratchShort5;
+      *(short *)(texture + 0x34) = scratchShort5 + 1;
       if ((*(ushort *)texture[0xc] & 0x400) == 0) {
         texture[0x33] =
-             ((*(ushort *)((int)texture + 0x3e) * uVar22 <<
+             ((*(ushort *)((int)texture + 0x3e) * scratchUint22 <<
               (*(uint *)(&DAT_001d9f48 + (uint)*(byte *)(texture + 0xe) * 0x24) & 7)) >> 5) << 2 |
              texture[0x33] & 3U;
       }
       else {
-        texture[0x33] = uVar22 << 2 | texture[0x33] & 3U;
+        texture[0x33] = scratchUint22 << 2 | texture[0x33] & 3U;
       }
       goto LAB_00034100;
     }
@@ -4779,19 +4779,19 @@ LAB_00035340:
   return 1;
 }
 
-/* FUN_000353a0 @ 0x353a0 (5656 bytes) */
-int FUN_000353a0(ctx, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11)
+/* glCopyTexSubImage_impl @ 0x353a0 (5656 bytes) */
+int glCopyTexSubImage_impl(ctx, texture, face, level, xOffset, yOffset, zOffset, srcX, srcY, copyWidth, copyHeight)
   int ctx;
-  int *param_2;
-  int param_3;
-  uint param_4;
-  uint param_5;
-  uint param_6;
-  int param_7;
-  uint param_8;
-  uint param_9;
-  int param_10;
-  int param_11;
+  int *texture;
+  int face;
+  uint level;
+  uint xOffset;
+  uint yOffset;
+  int zOffset;
+  uint srcX;
+  uint srcY;
+  int copyWidth;
+  int copyHeight;
 {
   uint sc_scissor1;
   uint ga_point_size;
@@ -4830,807 +4830,807 @@ int FUN_000353a0(ctx, param_2, param_3, param_4, param_5, param_6, param_7, para
   uint sc_screendoor;
   uint sc_edgerule;
   int boundFramebuffer;
-  float fVar1;
-  float fVar2;
-  float fVar3;
-  float fVar4;
-  float fVar5;
-  float fVar6;
-  float fVar7;
-  float fVar8;
-  ushort uVar9;
-  ushort uVar10;
-  short sVar11;
-  bool bVar12;
-  float fVar13;
-  float fVar14;
-  float fVar15;
-  float fVar16;
-  float fVar17;
-  float fVar18;
-  float fVar19;
-  float fVar20;
-  float fVar21;
-  float fVar22;
-  float fVar23;
-  float fVar24;
-  double dVar25;
-  undefined *puVar26;
-  uint uVar27;
-  uint uVar28;
-  uint uVar29;
-  uint *puVar30;
-  uint *puVar31;
-  int iVar32;
-  int iVar33;
-  int iVar34;
-  int iVar35;
-  undefined4 uVar36;
-  int iVar37;
-  uint uVar38;
-  undefined4 uVar39;
-  uint uVar40;
-  undefined4 uVar41;
-  undefined4 uVar42;
-  undefined4 uVar43;
-  uint uVar44;
-  uint uVar45;
-  uint uVar46;
-  int iVar47;
-  uint uVar48;
-  uint uVar49;
-  uint uVar50;
-  int iVar51;
-  uint uVar52;
-  int iVar53;
-  uint uStack_dc;
-  uint uStack_d8;
-  uint uStack_d4;
-  uint uStack_d0;
+  float scratchFloat1;
+  float scratchFloat2;
+  float scratchFloat3;
+  float scratchFloat4;
+  float scratchFloat5;
+  float scratchFloat6;
+  float scratchFloat7;
+  float scratchFloat8;
+  ushort scratchUint9;
+  ushort scratchUint10;
+  short scratchShort11;
+  bool scratchFlag12;
+  float scratchFloat13;
+  float scratchFloat14;
+  float scratchFloat15;
+  float scratchFloat16;
+  float scratchFloat17;
+  float scratchFloat18;
+  float scratchFloat19;
+  float scratchFloat20;
+  float scratchFloat21;
+  float scratchFloat22;
+  float scratchFloat23;
+  float scratchFloat24;
+  double scratchDouble25;
+  undefined *scratchPtr26;
+  uint scratchUint27;
+  uint scratchUint28;
+  uint scratchUint29;
+  uint *scratchPtr30;
+  uint *scratchPtr31;
+  int scratchInt32;
+  int scratchInt33;
+  int scratchInt34;
+  int scratchInt35;
+  undefined4 scratchUint36;
+  int scratchInt37;
+  uint scratchUint38;
+  undefined4 scratchUint39;
+  uint scratchUint40;
+  undefined4 scratchUint41;
+  undefined4 scratchUint42;
+  undefined4 scratchUint43;
+  uint scratchUint44;
+  uint scratchUint45;
+  uint scratchUint46;
+  int scratchInt47;
+  uint scratchUint48;
+  uint scratchUint49;
+  uint scratchUint50;
+  int scratchInt51;
+  uint scratchUint52;
+  int scratchInt53;
+  uint scratchStackdc;
+  uint scratchStackd8;
+  uint scratchStackd4;
+  uint scratchStackd0;
   
-  uVar50 = param_6;
-  iVar34 = param_7;
+  scratchUint50 = yOffset;
+  scratchInt34 = zOffset;
   _pthread_mutex_lock(*(undefined4 *)(ctx + 0xc));
-  iVar47 = param_2[0xc];
-  uVar39 = 0;
-  iVar35 = param_3;
-  uVar49 = param_4;
-  iVar32 = ((int (*)())gldTextureFormatEntryForLevel)(ctx,param_2,param_3,param_4,0);
-  iVar53 = ctx + 0x240;
-  if ((iVar32 == 0) || ((*(uint *)(iVar32 + 0x18) & 0x10000) == 0)) {
+  scratchInt47 = texture[0xc];
+  scratchUint39 = 0;
+  scratchInt35 = face;
+  scratchUint49 = level;
+  scratchInt32 = ((int (*)())gldTextureFormatEntryForLevel)(ctx,texture,face,level,0);
+  scratchInt53 = ctx + 0x240;
+  if ((scratchInt32 == 0) || ((*(uint *)(scratchInt32 + 0x18) & 0x10000) == 0)) {
 LAB_00035740:
     _pthread_mutex_unlock(*(undefined4 *)(ctx + 0xc));
     return 0;
   }
-  iVar33 = gld_textureVariantClass((uint)*(ushort *)(((unsigned char *)0x00002db8) + *(int *)(ctx + 0x10)),
+  scratchInt33 = gld_textureVariantClass((uint)*(ushort *)(((unsigned char *)0x00002db8) + *(int *)(ctx + 0x10)),
                         *(undefined4 *)(ctx + 0x154));
-  bVar12 = *(short *)(iVar47 + 2) != 0x1902;
-  if ((!bVar12) &&
+  scratchFlag12 = *(short *)(scratchInt47 + 2) != 0x1902;
+  if ((!scratchFlag12) &&
      (((*(int *)(ctx + 0x150) == 0 &&
-       (iVar34 = FUN_0001a010(ctx,iVar33,iVar35,uVar49,uVar39,uVar50,iVar34), iVar34 != 0)) ||
+       (scratchInt34 = FUN_0001a010(ctx,scratchInt33,scratchInt35,scratchUint49,scratchUint39,scratchUint50,scratchInt34), scratchInt34 != 0)) ||
       ((*(uint *)(ctx + 0x154) & 0x30000) == 0)))) goto LAB_00035740;
-  iVar34 = param_4 * 0x18 + param_3 * 0x168 + param_2[0xc];
-  uVar48 = (uint)*(ushort *)(iVar34 + 0xa4);
-  uVar46 = (uint)*(ushort *)(iVar34 + 0xa6);
-  if (uVar48 == 0) {
-    uVar48 = 1;
-    fVar1 = FLOAT_001aa0e8;
+  scratchInt34 = level * 0x18 + face * 0x168 + texture[0xc];
+  scratchUint48 = (uint)*(ushort *)(scratchInt34 + 0xa4);
+  scratchUint46 = (uint)*(ushort *)(scratchInt34 + 0xa6);
+  if (scratchUint48 == 0) {
+    scratchUint48 = 1;
+    scratchFloat1 = FLOAT_001aa0e8;
   }
   else {
-    fVar1 = (float)((double)CONCAT44(0x43300000,uVar48 ^ 0x80000000) - DOUBLE_001aa1e0);
+    scratchFloat1 = (float)((double)CONCAT44(0x43300000,scratchUint48 ^ 0x80000000) - DOUBLE_001aa1e0);
   }
-  if (uVar46 == 0) {
-    uVar46 = 1;
-    fVar8 = FLOAT_001aa0e8;
+  if (scratchUint46 == 0) {
+    scratchUint46 = 1;
+    scratchFloat8 = FLOAT_001aa0e8;
   }
   else {
-    fVar8 = (float)((double)CONCAT44(0x43300000,uVar46 ^ 0x80000000) - DOUBLE_001aa1e0);
+    scratchFloat8 = (float)((double)CONCAT44(0x43300000,scratchUint46 ^ 0x80000000) - DOUBLE_001aa1e0);
   }
-  fVar2 = (float)((double)CONCAT44(0x43300000,*(uint *)(ctx + 0x15c) ^ 0x80000000) -
+  scratchFloat2 = (float)((double)CONCAT44(0x43300000,*(uint *)(ctx + 0x15c) ^ 0x80000000) -
                  DOUBLE_001aa1e0);
-  fVar3 = (float)((double)CONCAT44(0x43300000,param_8 + param_10 ^ 0x80000000) - DOUBLE_001aa1e0);
-  fVar13 = fVar3 - fVar2;
-  fVar7 = fVar2;
-  if (fVar13 < 0.0) {
-    fVar7 = fVar3;
+  scratchFloat3 = (float)((double)CONCAT44(0x43300000,srcX + copyWidth ^ 0x80000000) - DOUBLE_001aa1e0);
+  scratchFloat13 = scratchFloat3 - scratchFloat2;
+  scratchFloat7 = scratchFloat2;
+  if (scratchFloat13 < 0.0) {
+    scratchFloat7 = scratchFloat3;
   }
-  fVar3 = (float)((double)CONCAT44(0x43300000,param_9 + param_11 ^ 0x80000000) - DOUBLE_001aa1e0);
-  fVar4 = (float)((double)CONCAT44(0x43300000,param_8 ^ 0x80000000) - DOUBLE_001aa1e0);
-  if (-fVar13 < 0.0) {
-    fVar7 = fVar2;
+  scratchFloat3 = (float)((double)CONCAT44(0x43300000,srcY + copyHeight ^ 0x80000000) - DOUBLE_001aa1e0);
+  scratchFloat4 = (float)((double)CONCAT44(0x43300000,srcX ^ 0x80000000) - DOUBLE_001aa1e0);
+  if (-scratchFloat13 < 0.0) {
+    scratchFloat7 = scratchFloat2;
   }
-  fVar2 = (float)((double)CONCAT44(0x43300000,*(uint *)(ctx + 0x160) ^ 0x80000000) -
+  scratchFloat2 = (float)((double)CONCAT44(0x43300000,*(uint *)(ctx + 0x160) ^ 0x80000000) -
                  DOUBLE_001aa1e0);
-  fVar13 = fVar4;
-  if (fVar4 < 0.0) {
-    fVar13 = FLOAT_001aa0d4;
+  scratchFloat13 = scratchFloat4;
+  if (scratchFloat4 < 0.0) {
+    scratchFloat13 = FLOAT_001aa0d4;
   }
-  fVar5 = (float)((double)CONCAT44(0x43300000,param_5 ^ 0x80000000) - DOUBLE_001aa1e0);
-  fVar15 = fVar3 - fVar2;
-  fVar6 = (float)((double)CONCAT44(0x43300000,param_9 ^ 0x80000000) - DOUBLE_001aa1e0);
-  fVar14 = FLOAT_001aa0d4;
-  if (-fVar4 < 0.0) {
-    fVar14 = fVar13;
+  scratchFloat5 = (float)((double)CONCAT44(0x43300000,xOffset ^ 0x80000000) - DOUBLE_001aa1e0);
+  scratchFloat15 = scratchFloat3 - scratchFloat2;
+  scratchFloat6 = (float)((double)CONCAT44(0x43300000,srcY ^ 0x80000000) - DOUBLE_001aa1e0);
+  scratchFloat14 = FLOAT_001aa0d4;
+  if (-scratchFloat4 < 0.0) {
+    scratchFloat14 = scratchFloat13;
   }
-  fVar13 = fVar5 + (fVar7 - fVar4);
-  fVar7 = (float)((double)CONCAT44(0x43300000,param_6 ^ 0x80000000) - DOUBLE_001aa1e0);
-  fVar17 = fVar2;
-  if (fVar15 < 0.0) {
-    fVar17 = fVar3;
+  scratchFloat13 = scratchFloat5 + (scratchFloat7 - scratchFloat4);
+  scratchFloat7 = (float)((double)CONCAT44(0x43300000,yOffset ^ 0x80000000) - DOUBLE_001aa1e0);
+  scratchFloat17 = scratchFloat2;
+  if (scratchFloat15 < 0.0) {
+    scratchFloat17 = scratchFloat3;
   }
-  fVar3 = fVar6;
-  if (fVar6 < 0.0) {
-    fVar3 = FLOAT_001aa0d4;
+  scratchFloat3 = scratchFloat6;
+  if (scratchFloat6 < 0.0) {
+    scratchFloat3 = FLOAT_001aa0d4;
   }
-  if (-fVar15 < 0.0) {
-    fVar17 = fVar2;
+  if (-scratchFloat15 < 0.0) {
+    scratchFloat17 = scratchFloat2;
   }
-  fVar2 = fVar13 - fVar1;
-  fVar15 = FLOAT_001aa0d4;
-  if (-fVar6 < 0.0) {
-    fVar15 = fVar3;
+  scratchFloat2 = scratchFloat13 - scratchFloat1;
+  scratchFloat15 = FLOAT_001aa0d4;
+  if (-scratchFloat6 < 0.0) {
+    scratchFloat15 = scratchFloat3;
   }
-  fVar5 = (fVar14 - fVar4) + fVar5;
-  fVar3 = fVar1;
-  if (fVar2 < 0.0) {
-    fVar3 = fVar13;
+  scratchFloat5 = (scratchFloat14 - scratchFloat4) + scratchFloat5;
+  scratchFloat3 = scratchFloat1;
+  if (scratchFloat2 < 0.0) {
+    scratchFloat3 = scratchFloat13;
   }
-  fVar13 = fVar5;
-  if (fVar5 < 0.0) {
-    fVar13 = FLOAT_001aa0d4;
+  scratchFloat13 = scratchFloat5;
+  if (scratchFloat5 < 0.0) {
+    scratchFloat13 = FLOAT_001aa0d4;
   }
-  fVar4 = (float)((double)CONCAT44(0x43300000,param_8 - param_5 ^ 0x80000000) - DOUBLE_001aa1e0);
-  fVar14 = fVar7 + (fVar17 - fVar6);
-  fVar7 = (fVar15 - fVar6) + fVar7;
-  if (-fVar2 < 0.0) {
-    fVar3 = fVar1;
+  scratchFloat4 = (float)((double)CONCAT44(0x43300000,srcX - xOffset ^ 0x80000000) - DOUBLE_001aa1e0);
+  scratchFloat14 = scratchFloat7 + (scratchFloat17 - scratchFloat6);
+  scratchFloat7 = (scratchFloat15 - scratchFloat6) + scratchFloat7;
+  if (-scratchFloat2 < 0.0) {
+    scratchFloat3 = scratchFloat1;
   }
-  fVar1 = FLOAT_001aa0d4;
-  if (-fVar5 < 0.0) {
-    fVar1 = fVar13;
+  scratchFloat1 = FLOAT_001aa0d4;
+  if (-scratchFloat5 < 0.0) {
+    scratchFloat1 = scratchFloat13;
   }
-  fVar2 = fVar8 - fVar14;
-  fVar13 = fVar7;
-  if (fVar7 < 0.0) {
-    fVar13 = FLOAT_001aa0d4;
+  scratchFloat2 = scratchFloat8 - scratchFloat14;
+  scratchFloat13 = scratchFloat7;
+  if (scratchFloat7 < 0.0) {
+    scratchFloat13 = FLOAT_001aa0d4;
   }
-  fVar5 = (float)((double)CONCAT44(0x43300000,param_9 - param_6 ^ 0x80000000) - DOUBLE_001aa1e0);
-  fVar15 = fVar1 + fVar4;
-  fVar6 = fVar3 + fVar4;
-  if (fVar2 < 0.0) {
-    fVar14 = fVar8;
+  scratchFloat5 = (float)((double)CONCAT44(0x43300000,srcY - yOffset ^ 0x80000000) - DOUBLE_001aa1e0);
+  scratchFloat15 = scratchFloat1 + scratchFloat4;
+  scratchFloat6 = scratchFloat3 + scratchFloat4;
+  if (scratchFloat2 < 0.0) {
+    scratchFloat14 = scratchFloat8;
   }
-  fVar17 = FLOAT_001aa0d4;
-  if (-fVar7 < 0.0) {
-    fVar17 = fVar13;
+  scratchFloat17 = FLOAT_001aa0d4;
+  if (-scratchFloat7 < 0.0) {
+    scratchFloat17 = scratchFloat13;
   }
-  if (-fVar2 < 0.0) {
-    fVar8 = fVar14;
+  if (-scratchFloat2 < 0.0) {
+    scratchFloat8 = scratchFloat14;
   }
-  if ((fVar3 <= fVar1) || (fVar8 <= fVar17)) {
+  if ((scratchFloat3 <= scratchFloat1) || (scratchFloat8 <= scratchFloat17)) {
     _pthread_mutex_unlock(*(undefined4 *)(ctx + 0xc));
     return 1;
   }
-  if (((*(byte *)((int)param_2 + 0x39) & 7) != 0) &&
-     (iVar34 = ((int (*)())gldTextureMakeResident)(ctx,param_2,iVar35,uVar49,uVar39,uVar50), iVar34 == 0))
+  if (((*(byte *)((int)texture + 0x39) & 7) != 0) &&
+     (scratchInt34 = ((int (*)())gldTextureMakeResident)(ctx,texture,scratchInt35,scratchUint49,scratchUint39,scratchUint50), scratchInt34 == 0))
   goto LAB_00035740;
   boundFramebuffer = *(int *)(ctx + 0x150);
   if (boundFramebuffer == 0) {
-    iVar35 = FUN_0001a010(ctx,iVar33,iVar35,uVar49,uVar39,uVar50,0);
-    if (iVar35 == 0) {
+    scratchInt35 = FUN_0001a010(ctx,scratchInt33,scratchInt35,scratchUint49,scratchUint39,scratchUint50,0);
+    if (scratchInt35 == 0) {
       boundFramebuffer = *(int *)(ctx + 0x150);
     }
     else {
-      gld_emitSurfaceCopyPacket(ctx,0,iVar33,0,(int)fVar15,(int)(fVar17 + fVar5),(int)(fVar6 - fVar15),
-                   (int)((fVar8 + fVar5) - (fVar17 + fVar5)));
+      gld_emitSurfaceCopyPacket(ctx,0,scratchInt33,0,(int)scratchFloat15,(int)(scratchFloat17 + scratchFloat5),(int)(scratchFloat6 - scratchFloat15),
+                   (int)((scratchFloat8 + scratchFloat5) - (scratchFloat17 + scratchFloat5)));
       boundFramebuffer = *(int *)(ctx + 0x150);
     }
   }
-  if (bVar12) {
-    iVar35 = 0;
-    iVar51 = 0;
+  if (scratchFlag12) {
+    scratchInt35 = 0;
+    scratchInt51 = 0;
   }
   else {
-    iVar35 = 1000;
-    iVar51 = 4000;
+    scratchInt35 = 1000;
+    scratchInt51 = 4000;
   }
-  fVar2 = FLOAT_001aa0e8;
+  scratchFloat2 = FLOAT_001aa0e8;
   if (((unsigned char *)0x00002b7c)[ctx] != '\0') {
-    fVar5 = (float)((double)CONCAT44(0x43300000,*(uint *)(ctx + 0x160) ^ 0x80000000) -
-                   DOUBLE_001aa1e0) - fVar5;
-    fVar2 = FLOAT_001aa114;
+    scratchFloat5 = (float)((double)CONCAT44(0x43300000,*(uint *)(ctx + 0x160) ^ 0x80000000) -
+                   DOUBLE_001aa1e0) - scratchFloat5;
+    scratchFloat2 = FLOAT_001aa114;
   }
   if (boundFramebuffer == 0) {
-    uVar9 = *(ushort *)(ctx + 0x11e);
-    uVar10 = *(ushort *)(ctx + 0x122);
+    scratchUint9 = *(ushort *)(ctx + 0x11e);
+    scratchUint10 = *(ushort *)(ctx + 0x122);
   }
   else {
-    uVar9 = *(ushort *)(ctx + 0x15e);
-    uVar10 = *(ushort *)(ctx + 0x162);
+    scratchUint9 = *(ushort *)(ctx + 0x15e);
+    scratchUint10 = *(ushort *)(ctx + 0x162);
   }
-  uVar50 = (uint)uVar9;
-  uVar49 = (uint)uVar10;
-  if ((uVar50 < 0x1001) && (uVar49 < 0x1001)) {
-    uVar52 = 0;
-    iVar34 = 0xc;
-    uStack_d0 = 0;
-    uStack_d4 = 0;
-    uStack_d8 = 0;
-    uStack_dc = 0;
-    fVar14 = FLOAT_001aa0d4;
-    fVar23 = FLOAT_001aa0d4;
-    fVar7 = FLOAT_001aa0d4;
-    fVar13 = FLOAT_001aa0d4;
-  }
-  else {
-    fVar7 = fVar17 * fVar2 + fVar5;
-    fVar14 = fVar8 * fVar2 + fVar5;
-    fVar13 = fVar14;
-    if (fVar14 < fVar7) {
-      fVar13 = fVar7;
-      fVar7 = fVar14;
-    }
-    fVar14 = fVar15;
-    fVar23 = fVar6;
-    if (fVar6 < fVar15) {
-      fVar14 = fVar6;
-      fVar23 = fVar15;
-    }
-    uStack_d8 = 0;
-    uVar52 = (int)fVar14 - 1;
-    uVar52 = (((int)uVar52 >> 9) + (uint)((int)uVar52 < 0 && (uVar52 & 0x1ff) != 0)) * 0x200;
-    if ((-1 < (int)uVar52) && (uStack_d8 = uVar9 & 0xfe00, (int)uVar52 <= (int)(uVar9 & 0xfe00))) {
-      uStack_d8 = uVar52 & 0xfe00;
-    }
-    uVar52 = 0x40;
-    if ((0x40 < uVar49) && (uVar52 = uVar10 & 0xffc0, (int)(uVar49 - uVar52) < 0x40)) {
-      uVar52 = uVar52 - 0x40;
-    }
-    uStack_dc = 0;
-    uVar38 = (int)fVar7 - 1;
-    uVar38 = (((int)uVar38 >> 6) + (uint)((int)uVar38 < 0 && (uVar38 & 0x3f) != 0)) * 0x40;
-    if ((-1 < (int)uVar38) && (uStack_dc = uVar52 & 0xffff, (int)uVar38 <= (int)uVar52)) {
-      uStack_dc = uVar38 & 0xffc0;
-    }
-    uVar52 = 0x200;
-    if (0x1ff < uStack_d8) {
-      uVar52 = uStack_d8;
-    }
-    uVar38 = uVar50 - 1;
-    uVar28 = (((int)uVar38 >> 9) + (uint)((int)uVar38 < 0 && (uVar38 & 0x1ff) != 0)) * 0x200;
-    uVar38 = (uint)(int)fVar23;
-    if ((FLOAT_001aa0d4 < fVar23) &&
-       ((float)((double)CONCAT44(0x43300000,uVar38 ^ 0x80000000) - DOUBLE_001aa1e0) < fVar23)) {
-      uVar38 = uVar38 + 1;
-    }
-    if ((int)uVar38 <= (int)uVar28) {
-      uVar28 = uVar38;
-    }
-    uStack_d0 = 1;
-    if ((int)uVar52 < (int)uVar28) {
-      uStack_d0 = (int)((uVar28 - uVar52) + 0xbff) / 0xc00 & 0xff;
-    }
-    uVar52 = 0x40;
-    if (0x3f < uStack_dc) {
-      uVar52 = uStack_dc;
-    }
-    uVar38 = uVar49 - 1;
-    uVar28 = (((int)uVar38 >> 6) + (uint)((int)uVar38 < 0 && (uVar38 & 0x3f) != 0)) * 0x40;
-    uVar38 = (uint)(int)fVar13;
-    if ((FLOAT_001aa0d4 < fVar13) &&
-       ((float)((double)CONCAT44(0x43300000,uVar38 ^ 0x80000000) - DOUBLE_001aa1e0) < fVar13)) {
-      uVar38 = uVar38 + 1;
-    }
-    if ((int)uVar38 <= (int)uVar28) {
-      uVar28 = uVar38;
-    }
-    uStack_d4 = 1;
-    if ((int)uVar52 < (int)uVar28) {
-      uStack_d4 = (int)((uVar28 - uVar52) + 0xf7f) / 0xf80 & 0xff;
-    }
-    uVar52 = uStack_d4 * uStack_d0 & 0xff;
-    iVar34 = uVar52 << 4;
-  }
-  if (bVar12) {
-    iVar37 = 0x343;
+  scratchUint50 = (uint)scratchUint9;
+  scratchUint49 = (uint)scratchUint10;
+  if ((scratchUint50 < 0x1001) && (scratchUint49 < 0x1001)) {
+    scratchUint52 = 0;
+    scratchInt34 = 0xc;
+    scratchStackd0 = 0;
+    scratchStackd4 = 0;
+    scratchStackd8 = 0;
+    scratchStackdc = 0;
+    scratchFloat14 = FLOAT_001aa0d4;
+    scratchFloat23 = FLOAT_001aa0d4;
+    scratchFloat7 = FLOAT_001aa0d4;
+    scratchFloat13 = FLOAT_001aa0d4;
   }
   else {
-    iVar37 = 0x34e;
+    scratchFloat7 = scratchFloat17 * scratchFloat2 + scratchFloat5;
+    scratchFloat14 = scratchFloat8 * scratchFloat2 + scratchFloat5;
+    scratchFloat13 = scratchFloat14;
+    if (scratchFloat14 < scratchFloat7) {
+      scratchFloat13 = scratchFloat7;
+      scratchFloat7 = scratchFloat14;
+    }
+    scratchFloat14 = scratchFloat15;
+    scratchFloat23 = scratchFloat6;
+    if (scratchFloat6 < scratchFloat15) {
+      scratchFloat14 = scratchFloat6;
+      scratchFloat23 = scratchFloat15;
+    }
+    scratchStackd8 = 0;
+    scratchUint52 = (int)scratchFloat14 - 1;
+    scratchUint52 = (((int)scratchUint52 >> 9) + (uint)((int)scratchUint52 < 0 && (scratchUint52 & 0x1ff) != 0)) * 0x200;
+    if ((-1 < (int)scratchUint52) && (scratchStackd8 = scratchUint9 & 0xfe00, (int)scratchUint52 <= (int)(scratchUint9 & 0xfe00))) {
+      scratchStackd8 = scratchUint52 & 0xfe00;
+    }
+    scratchUint52 = 0x40;
+    if ((0x40 < scratchUint49) && (scratchUint52 = scratchUint10 & 0xffc0, (int)(scratchUint49 - scratchUint52) < 0x40)) {
+      scratchUint52 = scratchUint52 - 0x40;
+    }
+    scratchStackdc = 0;
+    scratchUint38 = (int)scratchFloat7 - 1;
+    scratchUint38 = (((int)scratchUint38 >> 6) + (uint)((int)scratchUint38 < 0 && (scratchUint38 & 0x3f) != 0)) * 0x40;
+    if ((-1 < (int)scratchUint38) && (scratchStackdc = scratchUint52 & 0xffff, (int)scratchUint38 <= (int)scratchUint52)) {
+      scratchStackdc = scratchUint38 & 0xffc0;
+    }
+    scratchUint52 = 0x200;
+    if (0x1ff < scratchStackd8) {
+      scratchUint52 = scratchStackd8;
+    }
+    scratchUint38 = scratchUint50 - 1;
+    scratchUint28 = (((int)scratchUint38 >> 9) + (uint)((int)scratchUint38 < 0 && (scratchUint38 & 0x1ff) != 0)) * 0x200;
+    scratchUint38 = (uint)(int)scratchFloat23;
+    if ((FLOAT_001aa0d4 < scratchFloat23) &&
+       ((float)((double)CONCAT44(0x43300000,scratchUint38 ^ 0x80000000) - DOUBLE_001aa1e0) < scratchFloat23)) {
+      scratchUint38 = scratchUint38 + 1;
+    }
+    if ((int)scratchUint38 <= (int)scratchUint28) {
+      scratchUint28 = scratchUint38;
+    }
+    scratchStackd0 = 1;
+    if ((int)scratchUint52 < (int)scratchUint28) {
+      scratchStackd0 = (int)((scratchUint28 - scratchUint52) + 0xbff) / 0xc00 & 0xff;
+    }
+    scratchUint52 = 0x40;
+    if (0x3f < scratchStackdc) {
+      scratchUint52 = scratchStackdc;
+    }
+    scratchUint38 = scratchUint49 - 1;
+    scratchUint28 = (((int)scratchUint38 >> 6) + (uint)((int)scratchUint38 < 0 && (scratchUint38 & 0x3f) != 0)) * 0x40;
+    scratchUint38 = (uint)(int)scratchFloat13;
+    if ((FLOAT_001aa0d4 < scratchFloat13) &&
+       ((float)((double)CONCAT44(0x43300000,scratchUint38 ^ 0x80000000) - DOUBLE_001aa1e0) < scratchFloat13)) {
+      scratchUint38 = scratchUint38 + 1;
+    }
+    if ((int)scratchUint38 <= (int)scratchUint28) {
+      scratchUint28 = scratchUint38;
+    }
+    scratchStackd4 = 1;
+    if ((int)scratchUint52 < (int)scratchUint28) {
+      scratchStackd4 = (int)((scratchUint28 - scratchUint52) + 0xf7f) / 0xf80 & 0xff;
+    }
+    scratchUint52 = scratchStackd4 * scratchStackd0 & 0xff;
+    scratchInt34 = scratchUint52 << 4;
   }
-  uVar39 = (**(code **)(ctx + 0x2998))(iVar53,iVar35 + iVar37 + iVar34);
-  *(undefined4 *)(ctx + 0x298c) = uVar39;
-  iVar34 = ((int (*)())FUN_00030840)(ctx,uVar39,param_2);
-  puVar30 = *(uint **)(ctx + 0x1d8);
-  iVar37 = iVar34 + iVar51;
-  *puVar30 = iVar37 - (int)puVar30 >> 2 | *puVar30;
-  *(int *)(ctx + 0x1d8) = iVar37;
-  *(undefined4 *)(iVar34 + iVar51) = 0x32000000;
-  *(int *)(iVar37 + 8) = iVar35;
-  if (bVar12) {
-    *(int *)(iVar37 + 0xc) = iVar33;
+  if (scratchFlag12) {
+    scratchInt37 = 0x343;
+  }
+  else {
+    scratchInt37 = 0x34e;
+  }
+  scratchUint39 = (**(code **)(ctx + 0x2998))(scratchInt53,scratchInt35 + scratchInt37 + scratchInt34);
+  *(undefined4 *)(ctx + 0x298c) = scratchUint39;
+  scratchInt34 = ((int (*)())FUN_00030840)(ctx,scratchUint39,texture);
+  scratchPtr30 = *(uint **)(ctx + 0x1d8);
+  scratchInt37 = scratchInt34 + scratchInt51;
+  *scratchPtr30 = scratchInt37 - (int)scratchPtr30 >> 2 | *scratchPtr30;
+  *(int *)(ctx + 0x1d8) = scratchInt37;
+  *(undefined4 *)(scratchInt34 + scratchInt51) = 0x32000000;
+  *(int *)(scratchInt37 + 8) = scratchInt35;
+  if (scratchFlag12) {
+    *(int *)(scratchInt37 + 0xc) = scratchInt33;
   }
   else {
     if (((*(uint *)(ctx + 0x154) & 0x2000) == 0) ||
-       ((uVar39 = 10, iVar33 != 7 && (uVar39 = 0xb, iVar33 != 8)))) {
-      uVar39 = 4;
+       ((scratchUint39 = 10, scratchInt33 != 7 && (scratchUint39 = 0xb, scratchInt33 != 8)))) {
+      scratchUint39 = 4;
     }
-    *(undefined4 *)(iVar37 + 0xc) = uVar39;
+    *(undefined4 *)(scratchInt37 + 0xc) = scratchUint39;
   }
-  *(uint *)(iVar37 + 0x14) = uVar52;
-  puVar26 = PTR_DAT_001e88d0;
-  *(uint *)(iVar37 + 0x10) = param_4 | param_3 << 0x10;
-  *(uint *)(iVar37 + 0x18) = CONCAT22(uVar10,uVar9);
-  puVar30 = (uint *)(iVar37 + 0x310);
-  _memcpy(iVar37 + 0x1c,puVar26,0x2f4);
-  uVar27 = *(uint *)(iVar37 + 0x244);
-  uVar38 = (*(uint *)(iVar32 + 0x18) & 0x18) << 5;
-  *(uint *)(iVar37 + 0x244) = uVar38 | uVar27 & 0xfffffcff;
-  uVar28 = (*(uint *)(iVar32 + 0x18) & 6) << 9;
-  *(uint *)(iVar37 + 0x244) = uVar28 | uVar38 | uVar27 & 0xfffff0ff;
-  uVar40 = *(uint *)(iVar32 + 0x1c) >> 0x12 & 0x3000;
-  *(uint *)(iVar37 + 0x244) = uVar40 | uVar28 | uVar38 | uVar27 & 0xffffc0ff;
-  uVar44 = *(uint *)(iVar32 + 0x1c) >> 0xe & 0xc000;
-  *(uint *)(iVar37 + 0x244) = uVar44 | uVar40 | uVar28 | uVar38 | uVar27 & 0xffff00ff;
-  *(uint *)(iVar37 + 0x244) =
-       *(uint *)(iVar32 + 0x18) >> 5 & 0x1f |
-       uVar44 | uVar40 | uVar28 | uVar38 | uVar27 & 0xffff00e0;
-  sVar11 = *(short *)(iVar47 + 2);
-  if ((((sVar11 != 0x1908) && (sVar11 != 0x1906)) && (sVar11 != 0x190a)) && (sVar11 != 0x1902)) {
-    *(uint *)(iVar37 + 0x174) = *(uint *)(iVar37 + 0x174) & 0xfffe3fff | 0x18000;
+  *(uint *)(scratchInt37 + 0x14) = scratchUint52;
+  scratchPtr26 = PTR_DAT_001e88d0;
+  *(uint *)(scratchInt37 + 0x10) = level | face << 0x10;
+  *(uint *)(scratchInt37 + 0x18) = CONCAT22(scratchUint10,scratchUint9);
+  scratchPtr30 = (uint *)(scratchInt37 + 0x310);
+  _memcpy(scratchInt37 + 0x1c,scratchPtr26,0x2f4);
+  scratchUint27 = *(uint *)(scratchInt37 + 0x244);
+  scratchUint38 = (*(uint *)(scratchInt32 + 0x18) & 0x18) << 5;
+  *(uint *)(scratchInt37 + 0x244) = scratchUint38 | scratchUint27 & 0xfffffcff;
+  scratchUint28 = (*(uint *)(scratchInt32 + 0x18) & 6) << 9;
+  *(uint *)(scratchInt37 + 0x244) = scratchUint28 | scratchUint38 | scratchUint27 & 0xfffff0ff;
+  scratchUint40 = *(uint *)(scratchInt32 + 0x1c) >> 0x12 & 0x3000;
+  *(uint *)(scratchInt37 + 0x244) = scratchUint40 | scratchUint28 | scratchUint38 | scratchUint27 & 0xffffc0ff;
+  scratchUint44 = *(uint *)(scratchInt32 + 0x1c) >> 0xe & 0xc000;
+  *(uint *)(scratchInt37 + 0x244) = scratchUint44 | scratchUint40 | scratchUint28 | scratchUint38 | scratchUint27 & 0xffff00ff;
+  *(uint *)(scratchInt37 + 0x244) =
+       *(uint *)(scratchInt32 + 0x18) >> 5 & 0x1f |
+       scratchUint44 | scratchUint40 | scratchUint28 | scratchUint38 | scratchUint27 & 0xffff00e0;
+  scratchShort11 = *(short *)(scratchInt47 + 2);
+  if ((((scratchShort11 != 0x1908) && (scratchShort11 != 0x1906)) && (scratchShort11 != 0x190a)) && (scratchShort11 != 0x1902)) {
+    *(uint *)(scratchInt37 + 0x174) = *(uint *)(scratchInt37 + 0x174) & 0xfffe3fff | 0x18000;
   }
-  iVar35 = param_2[0xd];
-  if ((iVar35 == 0) || ((*(byte *)(iVar35 + 0x15) & 0x18) == 0)) {
-    iVar34 = 0x20;
+  scratchInt35 = texture[0xd];
+  if ((scratchInt35 == 0) || ((*(byte *)(scratchInt35 + 0x15) & 0x18) == 0)) {
+    scratchInt34 = 0x20;
   }
   else {
-    iVar34 = 0x20 / (1 << (*(uint *)(&DAT_001d9f4c + (uint)*(byte *)(param_2 + 0xe) * 0x24) >> 0x1c
+    scratchInt34 = 0x20 / (1 << (*(uint *)(&DAT_001d9f4c + (uint)*(byte *)(texture + 0xe) * 0x24) >> 0x1c
                           & 3));
   }
-  iVar34 = iVar34 >> (*(uint *)(iVar32 + 0x14) & 7);
-  if ((iVar35 == 0) || (*(char *)(iVar35 + 0x16) != '\x06')) {
-    uVar38 = 0;
-    iVar35 = *param_2 + 0x40 + (param_3 * 0xd + param_4) * 0x20;
-    iVar35 = param_7 * *(int *)(iVar35 + 0x14) + *(int *)(iVar35 + 8);
+  scratchInt34 = scratchInt34 >> (*(uint *)(scratchInt32 + 0x14) & 7);
+  if ((scratchInt35 == 0) || (*(char *)(scratchInt35 + 0x16) != '\x06')) {
+    scratchUint38 = 0;
+    scratchInt35 = *texture + 0x40 + (face * 0xd + level) * 0x20;
+    scratchInt35 = zOffset * *(int *)(scratchInt35 + 0x14) + *(int *)(scratchInt35 + 8);
   }
   else {
-    iVar35 = 0;
-    uVar38 = *(uint *)(iVar32 + 0x18) >> 0xb & 0x180000;
+    scratchInt35 = 0;
+    scratchUint38 = *(uint *)(scratchInt32 + 0x18) >> 0xb & 0x180000;
   }
-  if (*(char *)(param_2[0xc] + 0x6d) == '\0') {
-    uVar28 = (uVar48 + iVar34) - 1 & -iVar34;
+  if (*(char *)(texture[0xc] + 0x6d) == '\0') {
+    scratchUint28 = (scratchUint48 + scratchInt34) - 1 & -scratchInt34;
   }
   else {
-    uVar28 = (uint)*(ushort *)((int)param_2 + 0x3e);
+    scratchUint28 = (uint)*(ushort *)((int)texture + 0x3e);
   }
-  *(int *)(iVar37 + 0x284) = iVar35;
-  iVar35 = param_2[0xd];
-  if ((iVar35 != 0) && ((*(byte *)(iVar35 + 0x15) & 4) != 0)) {
-    uVar40 = param_4 - *(byte *)(param_2[0xc] + 0x69);
-    if ((*(byte *)(iVar35 + 0x15) & 0x18) == 0) {
-      iVar33 = 1;
-      iVar34 = 0x100;
+  *(int *)(scratchInt37 + 0x284) = scratchInt35;
+  scratchInt35 = texture[0xd];
+  if ((scratchInt35 != 0) && ((*(byte *)(scratchInt35 + 0x15) & 4) != 0)) {
+    scratchUint40 = level - *(byte *)(texture[0xc] + 0x69);
+    if ((*(byte *)(scratchInt35 + 0x15) & 0x18) == 0) {
+      scratchInt33 = 1;
+      scratchInt34 = 0x100;
     }
     else {
-      iVar33 = 1 << (*(uint *)(&DAT_001d9f4c + (uint)*(byte *)(param_2 + 0xe) * 0x24) >> 0x1c & 3);
-      iVar34 = 0x20 / iVar33 << 3;
+      scratchInt33 = 1 << (*(uint *)(&DAT_001d9f4c + (uint)*(byte *)(texture + 0xe) * 0x24) >> 0x1c & 3);
+      scratchInt34 = 0x20 / scratchInt33 << 3;
     }
-    if ((iVar34 <= *(int *)(*param_2 + 0xc) >> (uVar40 & 0x3f)) &&
-       (iVar34 = 1, iVar33 << 3 <= (int)(uint)*(ushort *)(*param_2 + 0x16) >> (uVar40 & 0x3f)))
+    if ((scratchInt34 <= *(int *)(*texture + 0xc) >> (scratchUint40 & 0x3f)) &&
+       (scratchInt34 = 1, scratchInt33 << 3 <= (int)(uint)*(ushort *)(*texture + 0x16) >> (scratchUint40 & 0x3f)))
     goto LAB_00035dd8;
   }
-  iVar34 = 0;
+  scratchInt34 = 0;
 LAB_00035dd8:
-  if (iVar35 != 0) {
-    uVar40 = (*(byte *)(iVar35 + 0x15) & 0x18) << 0xe;
+  if (scratchInt35 != 0) {
+    scratchUint40 = (*(byte *)(scratchInt35 + 0x15) & 0x18) << 0xe;
   }
   else {
-    uVar40 = 0;
+    scratchUint40 = 0;
   }
-  uVar44 = *(uint *)(iVar32 + 0x18);
-  *(uint *)(iVar37 + 0x2e8) = uVar48 - 1 & 0x1fff | (uVar46 - 1) * 0x2000 & 0x3ffe000;
-  *(uint *)(iVar37 + 0x28c) =
-       uVar40 | uVar28 & 0x3ffe | iVar34 << 0x10 | uVar38 | (uVar44 & 0x3c00) << 0xb;
-  if ((*(uint *)(iVar32 + 0x20) & 0x400000) != 0) {
-    *(undefined4 *)(iVar37 + 0x94) = 0;
+  scratchUint44 = *(uint *)(scratchInt32 + 0x18);
+  *(uint *)(scratchInt37 + 0x2e8) = scratchUint48 - 1 & 0x1fff | (scratchUint46 - 1) * 0x2000 & 0x3ffe000;
+  *(uint *)(scratchInt37 + 0x28c) =
+       scratchUint40 | scratchUint28 & 0x3ffe | scratchInt34 << 0x10 | scratchUint38 | (scratchUint44 & 0x3c00) << 0xb;
+  if ((*(uint *)(scratchInt32 + 0x20) & 0x400000) != 0) {
+    *(undefined4 *)(scratchInt37 + 0x94) = 0;
   }
-  fVar16 = FLOAT_001aa12c;
-  if (uVar52 == 0) {
-    fVar7 = FLOAT_001aa0d4;
-    if (uVar50 != 0) {
-      fVar7 = FLOAT_001aa0e8 /
-              (float)((double)CONCAT44(0x43300000,uVar50 ^ 0x80000000) - DOUBLE_001aa1e0);
+  scratchFloat16 = FLOAT_001aa12c;
+  if (scratchUint52 == 0) {
+    scratchFloat7 = FLOAT_001aa0d4;
+    if (scratchUint50 != 0) {
+      scratchFloat7 = FLOAT_001aa0e8 /
+              (float)((double)CONCAT44(0x43300000,scratchUint50 ^ 0x80000000) - DOUBLE_001aa1e0);
     }
-    fVar13 = FLOAT_001aa0d4;
-    if (uVar49 != 0) {
-      fVar13 = FLOAT_001aa0e8 /
-               (float)((double)CONCAT44(0x43300000,uVar49 ^ 0x80000000) - DOUBLE_001aa1e0);
+    scratchFloat13 = FLOAT_001aa0d4;
+    if (scratchUint49 != 0) {
+      scratchFloat13 = FLOAT_001aa0e8 /
+               (float)((double)CONCAT44(0x43300000,scratchUint49 ^ 0x80000000) - DOUBLE_001aa1e0);
     }
-    *puVar30 = 0x31080;
-    *(undefined **)(iVar37 + 0x324) = ((unsigned char *)0x00001087U);
-    *(float *)(iVar37 + 0x31c) = fVar7 * fVar6;
-    *(float *)(iVar37 + 0x318) = fVar13 * (fVar8 * fVar2 + fVar5);
-    *(float *)(iVar37 + 800) = fVar13 * (fVar17 * fVar2 + fVar5);
-    *(float *)(iVar37 + 0x314) = fVar7 * fVar15;
-    fVar2 = (fVar1 + fVar3) * FLOAT_001aa10c;
-    fVar7 = (fVar17 + fVar8) * FLOAT_001aa10c;
-    *(undefined4 *)(iVar37 + 0x32c) = 0xc0033500;
-    *(undefined4 *)(iVar37 + 0x330) = 0x10031;
-    *(float *)(iVar37 + 0x334) = fVar2;
-    *(float *)(iVar37 + 0x338) = fVar7;
-    *(int *)(iVar37 + 0x328) =
-         (int)((fVar3 - fVar1) * fVar16) << 0x10 | (int)((fVar8 - fVar17) * fVar16);
-    *(undefined4 *)(iVar37 + 0x33c) = 0;
-    puVar30 = (uint *)(iVar37 + 0x340);
+    *scratchPtr30 = 0x31080;
+    *(undefined **)(scratchInt37 + 0x324) = ((unsigned char *)0x00001087U);
+    *(float *)(scratchInt37 + 0x31c) = scratchFloat7 * scratchFloat6;
+    *(float *)(scratchInt37 + 0x318) = scratchFloat13 * (scratchFloat8 * scratchFloat2 + scratchFloat5);
+    *(float *)(scratchInt37 + 800) = scratchFloat13 * (scratchFloat17 * scratchFloat2 + scratchFloat5);
+    *(float *)(scratchInt37 + 0x314) = scratchFloat7 * scratchFloat15;
+    scratchFloat2 = (scratchFloat1 + scratchFloat3) * FLOAT_001aa10c;
+    scratchFloat7 = (scratchFloat17 + scratchFloat8) * FLOAT_001aa10c;
+    *(undefined4 *)(scratchInt37 + 0x32c) = 0xc0033500;
+    *(undefined4 *)(scratchInt37 + 0x330) = 0x10031;
+    *(float *)(scratchInt37 + 0x334) = scratchFloat2;
+    *(float *)(scratchInt37 + 0x338) = scratchFloat7;
+    *(int *)(scratchInt37 + 0x328) =
+         (int)((scratchFloat3 - scratchFloat1) * scratchFloat16) << 0x10 | (int)((scratchFloat8 - scratchFloat17) * scratchFloat16);
+    *(undefined4 *)(scratchInt37 + 0x33c) = 0;
+    scratchPtr30 = (uint *)(scratchInt37 + 0x340);
   }
   else {
-    fVar1 = FLOAT_001aa0d4;
-    if (fVar2 != FLOAT_001aa0d4) {
-      fVar1 = FLOAT_001aa0e8 / fVar2;
+    scratchFloat1 = FLOAT_001aa0d4;
+    if (scratchFloat2 != FLOAT_001aa0d4) {
+      scratchFloat1 = FLOAT_001aa0e8 / scratchFloat2;
     }
-    if (uStack_d4 != 0) {
-      uVar38 = 0;
-      iVar35 = 0;
-      uVar52 = uVar49 - uStack_dc;
-      uVar48 = uStack_dc;
+    if (scratchStackd4 != 0) {
+      scratchUint38 = 0;
+      scratchInt35 = 0;
+      scratchUint52 = scratchUint49 - scratchStackdc;
+      scratchUint48 = scratchStackdc;
       do {
-        if (uStack_d0 != 0) {
-          iVar34 = 0;
-          uVar44 = iVar35 + uStack_dc;
-          uVar27 = uVar50 - uStack_d8;
-          fVar8 = (float)((double)CONCAT44(0x43300000,uVar44 ^ 0x80000000) - DOUBLE_001aa1e0);
-          uVar28 = uStack_d8;
-          uVar40 = uStack_d0;
+        if (scratchStackd0 != 0) {
+          scratchInt34 = 0;
+          scratchUint44 = scratchInt35 + scratchStackdc;
+          scratchUint27 = scratchUint50 - scratchStackd8;
+          scratchFloat8 = (float)((double)CONCAT44(0x43300000,scratchUint44 ^ 0x80000000) - DOUBLE_001aa1e0);
+          scratchUint28 = scratchStackd8;
+          scratchUint40 = scratchStackd0;
           do {
-            *puVar30 = uVar28;
-            puVar30[1] = uVar48;
-            uVar29 = uVar27;
-            if ((int)(uVar28 + 0x1000) <= (int)uVar50) {
-              uVar29 = 0x1000;
+            *scratchPtr30 = scratchUint28;
+            scratchPtr30[1] = scratchUint48;
+            scratchUint29 = scratchUint27;
+            if ((int)(scratchUint28 + 0x1000) <= (int)scratchUint50) {
+              scratchUint29 = 0x1000;
             }
-            uVar45 = uVar52;
-            if ((int)(uVar44 + 0x1000) <= (int)uVar49) {
-              uVar45 = 0x1000;
+            scratchUint45 = scratchUint52;
+            if ((int)(scratchUint44 + 0x1000) <= (int)scratchUint49) {
+              scratchUint45 = 0x1000;
             }
-            puVar30[2] = uVar29;
-            puVar30[3] = uVar45;
-            dVar25 = DOUBLE_001aa1e0;
-            fVar2 = fVar14;
-            if (iVar34 != 0) {
-              fVar2 = (float)((double)CONCAT44(0x43300000,uVar28 + 0x200 ^ 0x80000000) -
+            scratchPtr30[2] = scratchUint29;
+            scratchPtr30[3] = scratchUint45;
+            scratchDouble25 = DOUBLE_001aa1e0;
+            scratchFloat2 = scratchFloat14;
+            if (scratchInt34 != 0) {
+              scratchFloat2 = (float)((double)CONCAT44(0x43300000,scratchUint28 + 0x200 ^ 0x80000000) -
                              DOUBLE_001aa1e0);
             }
-            fVar3 = fVar7;
-            if (uVar38 != 0) {
-              fVar3 = (float)((double)CONCAT44(0x43300000,uVar44 + 0x40 ^ 0x80000000) -
+            scratchFloat3 = scratchFloat7;
+            if (scratchUint38 != 0) {
+              scratchFloat3 = (float)((double)CONCAT44(0x43300000,scratchUint44 + 0x40 ^ 0x80000000) -
                              DOUBLE_001aa1e0);
             }
-            fVar6 = fVar23;
-            if (iVar34 != uStack_d0 - 1) {
-              fVar6 = (float)((double)CONCAT44(0x43300000,uVar28 + 0xe00 ^ 0x80000000) -
+            scratchFloat6 = scratchFloat23;
+            if (scratchInt34 != scratchStackd0 - 1) {
+              scratchFloat6 = (float)((double)CONCAT44(0x43300000,scratchUint28 + 0xe00 ^ 0x80000000) -
                              DOUBLE_001aa1e0);
             }
-            fVar15 = fVar13;
-            if (uVar38 != uStack_d4 - 1) {
-              fVar15 = (float)((double)CONCAT44(0x43300000,uVar44 + 0xfc0 ^ 0x80000000) -
+            scratchFloat15 = scratchFloat13;
+            if (scratchUint38 != scratchStackd4 - 1) {
+              scratchFloat15 = (float)((double)CONCAT44(0x43300000,scratchUint44 + 0xfc0 ^ 0x80000000) -
                               DOUBLE_001aa1e0);
             }
-            fVar17 = fVar7;
-            if (fVar7 - fVar3 < 0.0) {
-              fVar17 = fVar3;
+            scratchFloat17 = scratchFloat7;
+            if (scratchFloat7 - scratchFloat3 < 0.0) {
+              scratchFloat17 = scratchFloat3;
             }
-            fVar16 = fVar15;
-            if (fVar13 - fVar15 < 0.0) {
-              fVar16 = fVar13;
+            scratchFloat16 = scratchFloat15;
+            if (scratchFloat13 - scratchFloat15 < 0.0) {
+              scratchFloat16 = scratchFloat13;
             }
-            fVar18 = fVar6;
-            if (fVar23 - fVar6 < 0.0) {
-              fVar18 = fVar23;
+            scratchFloat18 = scratchFloat6;
+            if (scratchFloat23 - scratchFloat6 < 0.0) {
+              scratchFloat18 = scratchFloat23;
             }
-            fVar19 = fVar14;
-            if (fVar14 - fVar2 < 0.0) {
-              fVar19 = fVar2;
+            scratchFloat19 = scratchFloat14;
+            if (scratchFloat14 - scratchFloat2 < 0.0) {
+              scratchFloat19 = scratchFloat2;
             }
-            if (-(fVar7 - fVar3) < 0.0) {
-              fVar3 = fVar17;
+            if (-(scratchFloat7 - scratchFloat3) < 0.0) {
+              scratchFloat3 = scratchFloat17;
             }
-            if (-(fVar13 - fVar15) < 0.0) {
-              fVar16 = fVar15;
+            if (-(scratchFloat13 - scratchFloat15) < 0.0) {
+              scratchFloat16 = scratchFloat15;
             }
-            if (-(fVar14 - fVar2) < 0.0) {
-              fVar2 = fVar19;
+            if (-(scratchFloat14 - scratchFloat2) < 0.0) {
+              scratchFloat2 = scratchFloat19;
             }
-            if (-(fVar23 - fVar6) < 0.0) {
-              fVar18 = fVar6;
+            if (-(scratchFloat23 - scratchFloat6) < 0.0) {
+              scratchFloat18 = scratchFloat6;
             }
-            fVar22 = fVar1 * fVar16 + fVar1 * -fVar5;
-            fVar15 = fVar1 * fVar3 + fVar1 * -fVar5;
-            fVar19 = fVar2 + -fVar4;
-            fVar17 = fVar18 + -fVar4;
-            fVar6 = fVar22;
-            fVar24 = fVar16;
-            if (fVar22 < fVar15) {
-              fVar6 = fVar15;
-              fVar15 = fVar22;
-              fVar24 = fVar3;
-              fVar3 = fVar16;
+            scratchFloat22 = scratchFloat1 * scratchFloat16 + scratchFloat1 * -scratchFloat5;
+            scratchFloat15 = scratchFloat1 * scratchFloat3 + scratchFloat1 * -scratchFloat5;
+            scratchFloat19 = scratchFloat2 + -scratchFloat4;
+            scratchFloat17 = scratchFloat18 + -scratchFloat4;
+            scratchFloat6 = scratchFloat22;
+            scratchFloat24 = scratchFloat16;
+            if (scratchFloat22 < scratchFloat15) {
+              scratchFloat6 = scratchFloat15;
+              scratchFloat15 = scratchFloat22;
+              scratchFloat24 = scratchFloat3;
+              scratchFloat3 = scratchFloat16;
             }
-            fVar16 = fVar19;
-            fVar22 = fVar18;
-            if (fVar17 < fVar19) {
-              fVar16 = fVar17;
-              fVar17 = fVar19;
-              fVar22 = fVar2;
-              fVar2 = fVar18;
+            scratchFloat16 = scratchFloat19;
+            scratchFloat22 = scratchFloat18;
+            if (scratchFloat17 < scratchFloat19) {
+              scratchFloat16 = scratchFloat17;
+              scratchFloat17 = scratchFloat19;
+              scratchFloat22 = scratchFloat2;
+              scratchFloat2 = scratchFloat18;
             }
-            fVar18 = FLOAT_001aa0d4;
-            if (uVar29 != 0) {
-              fVar18 = FLOAT_001aa0e8 /
-                       (float)((double)CONCAT44(0x43300000,uVar29 ^ 0x80000000) - DOUBLE_001aa1e0);
+            scratchFloat18 = FLOAT_001aa0d4;
+            if (scratchUint29 != 0) {
+              scratchFloat18 = FLOAT_001aa0e8 /
+                       (float)((double)CONCAT44(0x43300000,scratchUint29 ^ 0x80000000) - DOUBLE_001aa1e0);
             }
-            fVar19 = FLOAT_001aa0d4;
-            if (uVar45 != 0) {
-              fVar19 = FLOAT_001aa0e8 /
-                       (float)((double)CONCAT44(0x43300000,uVar45 ^ 0x80000000) - DOUBLE_001aa1e0);
+            scratchFloat19 = FLOAT_001aa0d4;
+            if (scratchUint45 != 0) {
+              scratchFloat19 = FLOAT_001aa0e8 /
+                       (float)((double)CONCAT44(0x43300000,scratchUint45 ^ 0x80000000) - DOUBLE_001aa1e0);
             }
-            uVar29 = uVar28 ^ 0x80000000;
-            iVar34 = iVar34 + 1;
-            uVar28 = uVar28 + 0xc00;
-            uVar27 = uVar27 - 0xc00;
-            fVar20 = (fVar17 - fVar16) * FLOAT_001aa12c;
-            fVar21 = (fVar6 - fVar15) * FLOAT_001aa12c;
-            fVar17 = (fVar17 + fVar16) * FLOAT_001aa10c;
-            fVar6 = (fVar6 + fVar15) * FLOAT_001aa10c;
-            puVar30[4] = 0x31080;
-            puVar30[6] = (uint)GH_F2U((float)((fVar19 * (fVar24 - fVar8))));
-            puVar30[8] = (uint)GH_F2U((float)((fVar19 * (fVar3 - fVar8))));
-            puVar30[9] = (uint)((unsigned char *)0x00001087U);
-            fVar3 = (float)((double)CONCAT44(0x43300000,uVar29) - dVar25);
-            puVar30[7] = (uint)GH_F2U((float)((fVar18 * (fVar22 - fVar3))));
-            puVar30[5] = (uint)GH_F2U((float)((fVar18 * (fVar2 - fVar3))));
-            puVar30[0xb] = 0xc0033500;
-            puVar30[0xc] = 0x10031;
-            puVar30[0xd] = (uint)GH_F2U((float)(fVar17));
-            puVar30[0xe] = (uint)GH_F2U((float)(fVar6));
-            puVar30[10] = (int)fVar20 << 0x10 | (int)fVar21;
-            puVar30[0xf] = 0;
-            puVar30 = puVar30 + 0x10;
-            uVar40 = uVar40 - 1;
-          } while (uVar40 != 0);
+            scratchUint29 = scratchUint28 ^ 0x80000000;
+            scratchInt34 = scratchInt34 + 1;
+            scratchUint28 = scratchUint28 + 0xc00;
+            scratchUint27 = scratchUint27 - 0xc00;
+            scratchFloat20 = (scratchFloat17 - scratchFloat16) * FLOAT_001aa12c;
+            scratchFloat21 = (scratchFloat6 - scratchFloat15) * FLOAT_001aa12c;
+            scratchFloat17 = (scratchFloat17 + scratchFloat16) * FLOAT_001aa10c;
+            scratchFloat6 = (scratchFloat6 + scratchFloat15) * FLOAT_001aa10c;
+            scratchPtr30[4] = 0x31080;
+            scratchPtr30[6] = (uint)GH_F2U((float)((scratchFloat19 * (scratchFloat24 - scratchFloat8))));
+            scratchPtr30[8] = (uint)GH_F2U((float)((scratchFloat19 * (scratchFloat3 - scratchFloat8))));
+            scratchPtr30[9] = (uint)((unsigned char *)0x00001087U);
+            scratchFloat3 = (float)((double)CONCAT44(0x43300000,scratchUint29) - scratchDouble25);
+            scratchPtr30[7] = (uint)GH_F2U((float)((scratchFloat18 * (scratchFloat22 - scratchFloat3))));
+            scratchPtr30[5] = (uint)GH_F2U((float)((scratchFloat18 * (scratchFloat2 - scratchFloat3))));
+            scratchPtr30[0xb] = 0xc0033500;
+            scratchPtr30[0xc] = 0x10031;
+            scratchPtr30[0xd] = (uint)GH_F2U((float)(scratchFloat17));
+            scratchPtr30[0xe] = (uint)GH_F2U((float)(scratchFloat6));
+            scratchPtr30[10] = (int)scratchFloat20 << 0x10 | (int)scratchFloat21;
+            scratchPtr30[0xf] = 0;
+            scratchPtr30 = scratchPtr30 + 0x10;
+            scratchUint40 = scratchUint40 - 1;
+          } while (scratchUint40 != 0);
         }
-        uVar38 = uVar38 + 1;
-        iVar35 = iVar35 + 0xf80;
-        uVar52 = uVar52 - 0xf80;
-        uVar48 = uVar48 + 0xf80;
-      } while (uVar38 != uStack_d4);
+        scratchUint38 = scratchUint38 + 1;
+        scratchInt35 = scratchInt35 + 0xf80;
+        scratchUint52 = scratchUint52 - 0xf80;
+        scratchUint48 = scratchUint48 + 0xf80;
+      } while (scratchUint38 != scratchStackd4);
     }
   }
-  *(int *)(iVar37 + 4) = (int)puVar30 - iVar37 >> 2;
-  puVar31 = *(uint **)(ctx + 0x1d8);
-  *puVar31 = (int)puVar30 - (int)puVar31 >> 2 | *puVar31;
-  *(uint **)(ctx + 0x1d8) = puVar30;
-  *puVar30 = 0x33000000;
-  if (bVar12) {
-    uVar49 = 0;
+  *(int *)(scratchInt37 + 4) = (int)scratchPtr30 - scratchInt37 >> 2;
+  scratchPtr31 = *(uint **)(ctx + 0x1d8);
+  *scratchPtr31 = (int)scratchPtr30 - (int)scratchPtr31 >> 2 | *scratchPtr31;
+  *(uint **)(ctx + 0x1d8) = scratchPtr30;
+  *scratchPtr30 = 0x33000000;
+  if (scratchFlag12) {
+    scratchUint49 = 0;
   }
   else {
-    uVar49 = 2;
+    scratchUint49 = 2;
   }
-  puVar30[1] = uVar49;
-  puVar30[2] = (uint)((unsigned char *)0x00001393U);
-  puVar30[3] = 10;
-  puVar30[4] = (uint)((unsigned char *)0x000013c6U);
-  puVar30[5] = 3;
-  puVar30[6] = 0x5c8;
-  puVar30[7] = 0x20000;
-  puVar30[8] = (uint)((unsigned char *)0x000010eaU);
+  scratchPtr30[1] = scratchUint49;
+  scratchPtr30[2] = (uint)((unsigned char *)0x00001393U);
+  scratchPtr30[3] = 10;
+  scratchPtr30[4] = (uint)((unsigned char *)0x000013c6U);
+  scratchPtr30[5] = 3;
+  scratchPtr30[6] = 0x5c8;
+  scratchPtr30[7] = 0x20000;
+  scratchPtr30[8] = (uint)((unsigned char *)0x000010eaU);
   sc_edgerule = *(uint *)(ctx + 0x1cfc);
-  puVar30[10] = (uint)((unsigned char *)0x000010faU);
-  puVar30[9] = sc_edgerule;
+  scratchPtr30[10] = (uint)((unsigned char *)0x000010faU);
+  scratchPtr30[9] = sc_edgerule;
   sc_screendoor = *(uint *)(ctx + 0x1da0);
-  puVar30[0xc] = 0xc0001000;
-  puVar30[0xe] = 0x11004;
-  puVar30[0xb] = sc_screendoor;
-  puVar30[0xf] = *(uint *)(ctx + 0x1ca8);
+  scratchPtr30[0xc] = 0xc0001000;
+  scratchPtr30[0xe] = 0x11004;
+  scratchPtr30[0xb] = sc_screendoor;
+  scratchPtr30[0xf] = *(uint *)(ctx + 0x1ca8);
   gb_mspos1 = *(uint *)(ctx + 0x1cac);
-  puVar30[0x11] = (uint)((unsigned char *)0x00001008U);
-  puVar30[0x10] = gb_mspos1;
+  scratchPtr30[0x11] = (uint)((unsigned char *)0x00001008U);
+  scratchPtr30[0x10] = gb_mspos1;
   gb_aa_config = *(uint *)(ctx + 0x1ca0);
-  puVar30[0x13] = (uint)((unsigned char *)0x000010e9U);
-  puVar30[0x12] = gb_aa_config;
+  scratchPtr30[0x13] = (uint)((unsigned char *)0x000010e9U);
+  scratchPtr30[0x12] = gb_aa_config;
   sc_hyperz_en = *(uint *)(ctx + 0x1d20);
-  puVar30[0x15] = (uint)((unsigned char *)0x000013c7U);
-  puVar30[0x14] = sc_hyperz_en;
+  scratchPtr30[0x15] = (uint)((unsigned char *)0x000013c7U);
+  scratchPtr30[0x14] = sc_hyperz_en;
   zb_bw_cntl = *(uint *)(ctx + 0x1cf0);
-  puVar30[0x17] = (uint)((unsigned char *)0x000013c1U);
-  puVar30[0x16] = zb_bw_cntl;
+  scratchPtr30[0x17] = (uint)((unsigned char *)0x000013c1U);
+  scratchPtr30[0x16] = zb_bw_cntl;
   zb_zstencilcntl = *(uint *)(ctx + 0x1ce4);
-  puVar30[0x19] = 0x850;
-  puVar30[0x18] = zb_zstencilcntl;
-  puVar30[0x1a] = *(uint *)(ctx + 0x1dc0);
-  puVar30[0x1b] = 0x887;
+  scratchPtr30[0x19] = 0x850;
+  scratchPtr30[0x18] = zb_zstencilcntl;
+  scratchPtr30[0x1a] = *(uint *)(ctx + 0x1dc0);
+  scratchPtr30[0x1b] = 0x887;
   vap_clip_cntl = *(uint *)(ctx + 0x1db4);
-  puVar30[0xbd] = 0x82c;
-  puVar30[0x1c] = vap_clip_cntl;
+  scratchPtr30[0xbd] = 0x82c;
+  scratchPtr30[0x1c] = vap_clip_cntl;
   vap_vte_cntl = *(uint *)(0x00001dc4 + ctx);
-  puVar30[0x1d] = (uint)((unsigned char *)0x000010aeU);
-  puVar30[0xbe] = vap_vte_cntl;
+  scratchPtr30[0x1d] = (uint)((unsigned char *)0x000010aeU);
+  scratchPtr30[0xbe] = vap_vte_cntl;
   su_cull_mode = *(uint *)(ctx + 0x1d70);
-  puVar30[0x1f] = (uint)((unsigned char *)0x00001394U);
-  puVar30[0x1e] = su_cull_mode;
+  scratchPtr30[0x1f] = (uint)((unsigned char *)0x00001394U);
+  scratchPtr30[0x1e] = su_cull_mode;
   rb3d_dither_ctl = *(uint *)(ctx + 0x1d30);
-  puVar30[0x21] = (uint)((unsigned char *)0x00001380U);
-  puVar30[0x23] = (uint)((unsigned char *)0x00001002U);
-  puVar30[0x22] = 0;
-  puVar30[0x20] = rb3d_dither_ctl;
-  puVar30[0x24] = *(uint *)(ctx + 0x1d90);
+  scratchPtr30[0x21] = (uint)((unsigned char *)0x00001380U);
+  scratchPtr30[0x23] = (uint)((unsigned char *)0x00001002U);
+  scratchPtr30[0x22] = 0;
+  scratchPtr30[0x20] = rb3d_dither_ctl;
+  scratchPtr30[0x24] = *(uint *)(ctx + 0x1d90);
   gb_enable = *(uint *)(ctx + 0x1d90);
-  puVar30[0x25] = 0x824;
-  puVar30[0x24] = gb_enable;
+  scratchPtr30[0x25] = 0x824;
+  scratchPtr30[0x24] = gb_enable;
   vap_out_vtx_fmt_0 = *(uint *)(ctx + 0x1ddc);
-  puVar30[0x27] = 0x825;
-  puVar30[0x26] = vap_out_vtx_fmt_0;
+  scratchPtr30[0x27] = 0x825;
+  scratchPtr30[0x26] = vap_out_vtx_fmt_0;
   vap_out_vtx_fmt_1 = *(uint *)(ctx + 0x1de0);
-  puVar30[0x29] = 0x82d;
-  puVar30[0x28] = vap_out_vtx_fmt_1;
-  uVar49 = *(uint *)(0x000026c8 + ctx + 4);
-  puVar30[0x2b] = 0x854;
-  puVar30[0x2a] = uVar49;
-  uVar49 = **(uint **)(ctx + 0x2680);
-  puVar30[0x2d] = 0x878;
-  puVar30[0x2c] = uVar49;
-  uVar49 = **(uint **)(ctx + 0x2684);
-  puVar30[0x2f] = (uint)((unsigned char *)0x000013c0U);
-  puVar30[0x2e] = uVar49;
+  scratchPtr30[0x29] = 0x82d;
+  scratchPtr30[0x28] = vap_out_vtx_fmt_1;
+  scratchUint49 = *(uint *)(0x000026c8 + ctx + 4);
+  scratchPtr30[0x2b] = 0x854;
+  scratchPtr30[0x2a] = scratchUint49;
+  scratchUint49 = **(uint **)(ctx + 0x2680);
+  scratchPtr30[0x2d] = 0x878;
+  scratchPtr30[0x2c] = scratchUint49;
+  scratchUint49 = **(uint **)(ctx + 0x2684);
+  scratchPtr30[0x2f] = (uint)((unsigned char *)0x000013c0U);
+  scratchPtr30[0x2e] = scratchUint49;
   zb_cntl = *(uint *)(ctx + 0x1ce0);
-  puVar30[0x31] = (uint)((unsigned char *)0x000012f0U);
-  puVar30[0x30] = zb_cntl;
+  scratchPtr30[0x31] = (uint)((unsigned char *)0x000012f0U);
+  scratchPtr30[0x30] = zb_cntl;
   fg_fog_blend = *(uint *)(ctx + 0x1d2c);
-  puVar30[0x32] = fg_fog_blend;
+  scratchPtr30[0x32] = fg_fog_blend;
   if ((*(uint *)(&DAT_001d9f4c + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24) & 0x8000) == 0) {
-    puVar30[0x32] = fg_fog_blend & 0xfffffffe;
+    scratchPtr30[0x32] = fg_fog_blend & 0xfffffffe;
   }
-  puVar30[0x33] = (uint)((unsigned char *)0x000012f5U);
+  scratchPtr30[0x33] = (uint)((unsigned char *)0x000012f5U);
   fg_alpha_func = *(uint *)(ctx + 0x1c8c);
-  puVar30[0x34] = fg_alpha_func;
+  scratchPtr30[0x34] = fg_alpha_func;
   if ((*(uint *)(&DAT_001d9f4c + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24) & 0x8000) == 0) {
-    puVar30[0x34] = fg_alpha_func & 0xfffff7ff;
+    scratchPtr30[0x34] = fg_alpha_func & 0xfffff7ff;
   }
-  puVar30[0x35] = (uint)((unsigned char *)0x000010a2U);
+  scratchPtr30[0x35] = (uint)((unsigned char *)0x000010a2U);
   ga_poly_mode = *(uint *)(ctx + 0x1d7c);
-  puVar30[0x37] = (uint)((unsigned char *)0x00001381U);
-  puVar30[0x36] = ga_poly_mode;
+  scratchPtr30[0x37] = (uint)((unsigned char *)0x00001381U);
+  scratchPtr30[0x36] = ga_poly_mode;
   rb3d_blendcntl = *(uint *)(ctx + 0x1cc0);
-  puVar30[0x38] = rb3d_blendcntl;
+  scratchPtr30[0x38] = rb3d_blendcntl;
   if ((*(uint *)(&DAT_001d9f4c + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24) & 0x4000) == 0) {
-    puVar30[0x38] = rb3d_blendcntl & 0xfffffffc;
+    scratchPtr30[0x38] = rb3d_blendcntl & 0xfffffffc;
   }
-  puVar30[0x39] = (uint)((unsigned char *)0x0000109eU);
-  uVar43 = 0xc0221000;
-  uVar42 = 0xaaaa;
-  uVar41 = 0x110f8;
-  uVar39 = 0x31080;
-  uVar49 = *(uint *)(ctx + 0x1d6c);
-  puVar30[0x3b] = (uint)((unsigned char *)0x00001096U);
-  puVar30[0x3a] = uVar49;
+  scratchPtr30[0x39] = (uint)((unsigned char *)0x0000109eU);
+  scratchUint43 = 0xc0221000;
+  scratchUint42 = 0xaaaa;
+  scratchUint41 = 0x110f8;
+  scratchUint39 = 0x31080;
+  scratchUint49 = *(uint *)(ctx + 0x1d6c);
+  scratchPtr30[0x3b] = (uint)((unsigned char *)0x00001096U);
+  scratchPtr30[0x3a] = scratchUint49;
   ga_color_control = *(uint *)(ctx + 0x1df8);
-  puVar30[0x3d] = (uint)((unsigned char *)0x00001041U);
-  puVar30[0x3a] = ga_color_control;
+  scratchPtr30[0x3d] = (uint)((unsigned char *)0x00001041U);
+  scratchPtr30[0x3a] = ga_color_control;
   tx_enable = *(uint *)(ctx + 0x29f0);
-  puVar30[0x3f] = (uint)((unsigned char *)0x00001046U);
-  puVar30[0x3e] = tx_enable;
+  scratchPtr30[0x3f] = (uint)((unsigned char *)0x00001046U);
+  scratchPtr30[0x3e] = tx_enable;
   gb_ps3_enable = *(uint *)(ctx + 0x1dfc);
-  puVar30[0x41] = (uint)((unsigned char *)0x00001094U);
-  puVar30[0x59] = (uint)((unsigned char *)0x00001095U);
-  puVar30[0x43] = (uint)((unsigned char *)0x00001095U);
-  puVar30[0x7f] = (uint)((unsigned char *)0x00001180U);
-  puVar30[0x45] = (uint)((unsigned char *)0x00001095U);
-  puVar30[0x47] = (uint)((unsigned char *)0x00001095U);
-  puVar30[0x49] = (uint)((unsigned char *)0x00001095U);
-  puVar30[0x40] = gb_ps3_enable;
-  puVar30[0x4b] = (uint)((unsigned char *)0x00001095U);
-  puVar30[0x4d] = (uint)((unsigned char *)0x00001095U);
-  puVar30[0x4f] = (uint)((unsigned char *)0x00001095U);
-  puVar30[0x51] = (uint)((unsigned char *)0x00001095U);
-  puVar30[0x53] = (uint)((unsigned char *)0x00001095U);
-  puVar30[0x55] = (uint)((unsigned char *)0x00001095U);
-  puVar30[0x57] = (uint)((unsigned char *)0x00001095U);
-  puVar30[0x5b] = 0xc0221000;
-  puVar30[0x42] = 0;
-  puVar30[0x80] = 2;
-  puVar30[0x81] = (uint)((unsigned char *)0x00001189U);
-  puVar30[0x83] = (uint)((unsigned char *)0x00001181U);
-  puVar30[0x85] = (uint)((unsigned char *)0x0000118dU);
-  puVar30[0x87] = (uint)((unsigned char *)0x0000118eU);
-  puVar30[0x89] = (uint)((unsigned char *)0x0000118cU);
-  puVar30[0x8b] = (uint)((unsigned char *)0x000011a9U);
+  scratchPtr30[0x41] = (uint)((unsigned char *)0x00001094U);
+  scratchPtr30[0x59] = (uint)((unsigned char *)0x00001095U);
+  scratchPtr30[0x43] = (uint)((unsigned char *)0x00001095U);
+  scratchPtr30[0x7f] = (uint)((unsigned char *)0x00001180U);
+  scratchPtr30[0x45] = (uint)((unsigned char *)0x00001095U);
+  scratchPtr30[0x47] = (uint)((unsigned char *)0x00001095U);
+  scratchPtr30[0x49] = (uint)((unsigned char *)0x00001095U);
+  scratchPtr30[0x40] = gb_ps3_enable;
+  scratchPtr30[0x4b] = (uint)((unsigned char *)0x00001095U);
+  scratchPtr30[0x4d] = (uint)((unsigned char *)0x00001095U);
+  scratchPtr30[0x4f] = (uint)((unsigned char *)0x00001095U);
+  scratchPtr30[0x51] = (uint)((unsigned char *)0x00001095U);
+  scratchPtr30[0x53] = (uint)((unsigned char *)0x00001095U);
+  scratchPtr30[0x55] = (uint)((unsigned char *)0x00001095U);
+  scratchPtr30[0x57] = (uint)((unsigned char *)0x00001095U);
+  scratchPtr30[0x5b] = 0xc0221000;
+  scratchPtr30[0x42] = 0;
+  scratchPtr30[0x80] = 2;
+  scratchPtr30[0x81] = (uint)((unsigned char *)0x00001189U);
+  scratchPtr30[0x83] = (uint)((unsigned char *)0x00001181U);
+  scratchPtr30[0x85] = (uint)((unsigned char *)0x0000118dU);
+  scratchPtr30[0x87] = (uint)((unsigned char *)0x0000118eU);
+  scratchPtr30[0x89] = (uint)((unsigned char *)0x0000118cU);
+  scratchPtr30[0x8b] = (uint)((unsigned char *)0x000011a9U);
   us_out_fmt_0 = *(uint *)(ctx + 0x257c);
-  puVar30[0x8d] = (uint)((unsigned char *)0x000011aaU);
-  puVar30[0x8c] = us_out_fmt_0;
+  scratchPtr30[0x8d] = (uint)((unsigned char *)0x000011aaU);
+  scratchPtr30[0x8c] = us_out_fmt_0;
   us_out_fmt_1 = *(uint *)(ctx + 0x2580);
-  puVar30[0x8f] = (uint)((unsigned char *)0x000011abU);
-  puVar30[0x8e] = us_out_fmt_1;
+  scratchPtr30[0x8f] = (uint)((unsigned char *)0x000011abU);
+  scratchPtr30[0x8e] = us_out_fmt_1;
   us_out_fmt_2 = *(uint *)(ctx + 0x2584);
-  puVar30[0x91] = (uint)((unsigned char *)0x000011acU);
-  puVar30[0x90] = us_out_fmt_2;
+  scratchPtr30[0x91] = (uint)((unsigned char *)0x000011acU);
+  scratchPtr30[0x90] = us_out_fmt_2;
   us_out_fmt_3 = *(uint *)(ctx + 0x2588);
-  puVar30[0x93] = (uint)((unsigned char *)0x000010c0U);
-  puVar30[0x92] = us_out_fmt_3;
+  scratchPtr30[0x93] = (uint)((unsigned char *)0x000010c0U);
+  scratchPtr30[0x92] = us_out_fmt_3;
   rs_count = *(uint *)(ctx + 0x216c);
-  puVar30[0x95] = (uint)((unsigned char *)0x000010c1U);
-  puVar30[0x97] = (uint)((unsigned char *)0x000010c8U);
-  puVar30[0x99] = (uint)((unsigned char *)0x0000101dU);
-  puVar30[0x94] = rs_count;
+  scratchPtr30[0x95] = (uint)((unsigned char *)0x000010c1U);
+  scratchPtr30[0x97] = (uint)((unsigned char *)0x000010c8U);
+  scratchPtr30[0x99] = (uint)((unsigned char *)0x0000101dU);
+  scratchPtr30[0x94] = rs_count;
   rs_ip_0 = *(uint *)(ctx + 0x2128);
-  puVar30[0x9b] = (uint)((unsigned char *)0x0000138aU);
-  puVar30[0x9d] = (uint)((unsigned char *)0x0000138eU);
-  puVar30[0xa2] = 0;
-  puVar30[0x9f] = (uint)((unsigned char *)0x00001040U);
-  puVar30[0x9c] = 0;
-  puVar30[0x9e] = 0;
-  puVar30[0xa0] = 0;
-  puVar30[0x9a] = rs_ip_0;
-  puVar30[0xa1] = (uint)((unsigned char *)0x00001150U);
-  puVar30[0xa3] = (uint)((unsigned char *)0x00001100U);
+  scratchPtr30[0x9b] = (uint)((unsigned char *)0x0000138aU);
+  scratchPtr30[0x9d] = (uint)((unsigned char *)0x0000138eU);
+  scratchPtr30[0xa2] = 0;
+  scratchPtr30[0x9f] = (uint)((unsigned char *)0x00001040U);
+  scratchPtr30[0x9c] = 0;
+  scratchPtr30[0x9e] = 0;
+  scratchPtr30[0xa0] = 0;
+  scratchPtr30[0x9a] = rs_ip_0;
+  scratchPtr30[0xa1] = (uint)((unsigned char *)0x00001150U);
+  scratchPtr30[0xa3] = (uint)((unsigned char *)0x00001100U);
   tx_filter0 = *(uint *)(ctx + 0x1f1c);
-  puVar30[0xa5] = (uint)((unsigned char *)0x00001110U);
-  puVar30[0xa4] = tx_filter0;
-  puVar30[0xa6] = *(uint *)(ctx + 0x1f5c);
-  puVar30[0xa7] = (uint)((unsigned char *)0x00001120U);
+  scratchPtr30[0xa5] = (uint)((unsigned char *)0x00001110U);
+  scratchPtr30[0xa4] = tx_filter0;
+  scratchPtr30[0xa6] = *(uint *)(ctx + 0x1f5c);
+  scratchPtr30[0xa7] = (uint)((unsigned char *)0x00001120U);
   tx_format0 = *(uint *)(ctx + 0x1f9c);
-  puVar30[0xa9] = (uint)((unsigned char *)0x00001130U);
-  puVar30[0xa8] = tx_format0;
+  scratchPtr30[0xa9] = (uint)((unsigned char *)0x00001130U);
+  scratchPtr30[0xa8] = tx_format0;
   tx_format1 = *(uint *)(ctx + 0x1fdc);
-  puVar30[0xab] = (uint)((unsigned char *)0x00001140U);
-  puVar30[0xaa] = tx_format1;
+  scratchPtr30[0xab] = (uint)((unsigned char *)0x00001140U);
+  scratchPtr30[0xaa] = tx_format1;
   tx_format2 = *(uint *)(ctx + 0x201c);
-  puVar30[0xad] = (uint)((unsigned char *)0x000010f4U);
-  puVar30[0xae] = 0xaaaa;
-  puVar30[0xaf] = (uint)((unsigned char *)0x00001383U);
-  puVar30[0xac] = tx_format2;
+  scratchPtr30[0xad] = (uint)((unsigned char *)0x000010f4U);
+  scratchPtr30[0xae] = 0xaaaa;
+  scratchPtr30[0xaf] = (uint)((unsigned char *)0x00001383U);
+  scratchPtr30[0xac] = tx_format2;
   rb3d_color_channel_mask = *(uint *)(ctx + 0x1d34);
-  puVar30[0xb1] = (uint)((unsigned char *)0x00001386U);
-  puVar30[0xb0] = rb3d_color_channel_mask;
+  scratchPtr30[0xb1] = (uint)((unsigned char *)0x00001386U);
+  scratchPtr30[0xb0] = rb3d_color_channel_mask;
   rb3d_ropcntl = *(uint *)(ctx + 0x1d38);
-  puVar30[0xb3] = 0x110f8;
-  puVar30[0xb2] = rb3d_ropcntl;
-  puVar30[0xb4] = *(uint *)(ctx + 0x1d98);
+  scratchPtr30[0xb3] = 0x110f8;
+  scratchPtr30[0xb2] = rb3d_ropcntl;
+  scratchPtr30[0xb4] = *(uint *)(ctx + 0x1d98);
   sc_scissor1 = *(uint *)(ctx + 0x1d50);
-  puVar30[0xb6] = (uint)((unsigned char *)0x00001087U);
-  puVar30[0xb5] = sc_scissor1;
+  scratchPtr30[0xb6] = (uint)((unsigned char *)0x00001087U);
+  scratchPtr30[0xb5] = sc_scissor1;
   ga_point_size = *(uint *)(ctx + 0x1f0c);
-  puVar30[0xb8] = 0x31080;
-  puVar30[0xb7] = ga_point_size;
-  puVar30[0xb9] = *(uint *)(ctx + 0x1efc);
-  puVar30[0xba] = *(uint *)(ctx + 0x1f04);
-  puVar30[0xbb] = *(uint *)(ctx + 0x1f00);
-  puVar30[0xbc] = *(uint *)(ctx + 0x1f08);
-  FUN_0004c100(puVar30 + 2,iVar53);
-  puVar31 = puVar30 + 0xbf;
-  if (!bVar12) {
-    puVar30[0xbf] = (uint)((unsigned char *)0x000013c4U);
-    puVar30[0xc1] = 0x113c8;
-    puVar30[200] = (uint)((unsigned char *)0x000013caU);
-    puVar30[0xc4] = (uint)((unsigned char *)0x000013cdU);
-    puVar30[0xc6] = (uint)((unsigned char *)0x000013ccU);
-    puVar31 = puVar30 + 0xca;
+  scratchPtr30[0xb8] = 0x31080;
+  scratchPtr30[0xb7] = ga_point_size;
+  scratchPtr30[0xb9] = *(uint *)(ctx + 0x1efc);
+  scratchPtr30[0xba] = *(uint *)(ctx + 0x1f04);
+  scratchPtr30[0xbb] = *(uint *)(ctx + 0x1f00);
+  scratchPtr30[0xbc] = *(uint *)(ctx + 0x1f08);
+  FUN_0004c100(scratchPtr30 + 2,scratchInt53);
+  scratchPtr31 = scratchPtr30 + 0xbf;
+  if (!scratchFlag12) {
+    scratchPtr30[0xbf] = (uint)((unsigned char *)0x000013c4U);
+    scratchPtr30[0xc1] = 0x113c8;
+    scratchPtr30[200] = (uint)((unsigned char *)0x000013caU);
+    scratchPtr30[0xc4] = (uint)((unsigned char *)0x000013cdU);
+    scratchPtr30[0xc6] = (uint)((unsigned char *)0x000013ccU);
+    scratchPtr31 = scratchPtr30 + 0xca;
   }
-  uVar36 = ((int (*)())FUN_000308c0)(ctx,puVar31);
-  *(undefined4 *)(ctx + 0x298c) = uVar36;
-  (**(code **)(ctx + 0x299c))(iVar53,uVar36);
+  scratchUint36 = ((int (*)())FUN_000308c0)(ctx,scratchPtr31);
+  *(undefined4 *)(ctx + 0x298c) = scratchUint36;
+  (**(code **)(ctx + 0x299c))(scratchInt53,scratchUint36);
   _pthread_mutex_unlock(*(undefined4 *)(ctx + 0xc));
-  if ((((*(uint *)(ctx + 0x24) & 0x82) != 0) && (param_2[0xd] != 0)) &&
-     (*(char *)(param_2[0xd] + 0x16) == '\x06')) {
-    iVar34 = iVar47 + 0xa0 + (uint)*(byte *)(iVar47 + 0x5e) * 0x18;
-    uVar9 = *(ushort *)(iVar34 + 0xc);
-    iVar35 = gldPixelUnitBytes((uint)*(ushort *)(iVar34 + 0x10),(uint)*(ushort *)(iVar34 + 0x12));
-    if (*(int *)(iVar34 + 0x14) != 0) {
-      gldFlushDataCacheRangeSync(ctx,*(int *)(iVar34 + 0x14),(uint)uVar9 * iVar35 * uVar46,uVar39,uVar41,
-                   uVar42,sc_scissor1,uVar43);
+  if ((((*(uint *)(ctx + 0x24) & 0x82) != 0) && (texture[0xd] != 0)) &&
+     (*(char *)(texture[0xd] + 0x16) == '\x06')) {
+    scratchInt34 = scratchInt47 + 0xa0 + (uint)*(byte *)(scratchInt47 + 0x5e) * 0x18;
+    scratchUint9 = *(ushort *)(scratchInt34 + 0xc);
+    scratchInt35 = gldPixelUnitBytes((uint)*(ushort *)(scratchInt34 + 0x10),(uint)*(ushort *)(scratchInt34 + 0x12));
+    if (*(int *)(scratchInt34 + 0x14) != 0) {
+      gldFlushDataCacheRangeSync(ctx,*(int *)(scratchInt34 + 0x14),(uint)scratchUint9 * scratchInt35 * scratchUint46,scratchUint39,scratchUint41,
+                   scratchUint42,sc_scissor1,scratchUint43);
     }
   }
-  if (((*(uint *)(param_2[0xc] + 0x48) & 0x8000) != 0) &&
-     (param_4 == *(byte *)(param_2[0xc] + 0x5e))) {
-    ((int (*)())glGenerateMipmap_impl)(ctx,param_2,param_3,uVar39,uVar41);
+  if (((*(uint *)(texture[0xc] + 0x48) & 0x8000) != 0) &&
+     (level == *(byte *)(texture[0xc] + 0x5e))) {
+    ((int (*)())glGenerateMipmap_impl)(ctx,texture,face,scratchUint39,scratchUint41);
     return 1;
   }
   return 1;
@@ -5755,74 +5755,74 @@ int glTexSubImage_impl(ctx, texture, face, level, xOffset, yOffset, zOffset, wid
   bool lastChunk;
   float yEndF;
   float yBeginF;
-  float fVar4;
-  float fVar5;
-  float fVar6;
-  float fVar7;
-  short sVar8;
-  ushort uVar9;
+  float scratchFloat4;
+  float scratchFloat5;
+  float scratchFloat6;
+  float scratchFloat7;
+  short scratchShort8;
+  ushort scratchUint9;
   ushort levelWidthB;
-  short sVar11;
-  float fVar12;
-  float fVar13;
-  float fVar14;
-  float fVar15;
-  float fVar16;
-  float fVar17;
-  float fVar18;
-  byte bVar19;
-  int iVar20;
-  uint uVar21;
-  int iVar22;
+  short scratchShort11;
+  float scratchFloat12;
+  float scratchFloat13;
+  float scratchFloat14;
+  float scratchFloat15;
+  float scratchFloat16;
+  float scratchFloat17;
+  float scratchFloat18;
+  byte scratchFlag19;
+  int scratchInt20;
+  uint scratchUint21;
+  int scratchInt22;
   uint *srcRow;
-  uint uVar24;
+  uint scratchUint24;
   undefined *unpackState;
-  uint uVar26;
+  uint scratchUint26;
   int alignPixels;
-  undefined4 uVar28;
-  uint *puVar29;
+  undefined4 scratchUint28;
+  uint *scratchPtr29;
   undefined4 *texPacket;
   undefined *a2;
-  undefined4 uVar31;
-  int iVar32;
-  uint *puVar33;
-  int iVar34;
-  uint uVar35;
-  int *piVar36;
-  uint *puVar37;
-  uint *puVar38;
+  undefined4 scratchUint31;
+  int scratchInt32;
+  uint *scratchPtr33;
+  int scratchInt34;
+  uint scratchUint35;
+  int *scratchPtr36;
+  uint *scratchPtr37;
+  uint *scratchPtr38;
   int levelRecord;
   undefined4 *packetEndA;
   undefined *bytesLeft;
-  uint uVar42;
-  int iVar43;
-  uint uVar44;
-  int iVar45;
+  uint scratchUint42;
+  int scratchInt43;
+  uint scratchUint44;
+  int scratchInt45;
   char reservation;
-  byte bVar46;
-  uint uStack_248;
+  byte scratchFlag46;
+  uint scratchStack248;
   int srcSkipBytes;
   uint srcBytesPerPixel;
-  uint *puStack_23c;
+  uint *scratchStack23c;
   uint srcRowBytes;
-  uint uStack_234;
-  uint uStack_230;
-  uint *puStack_22c;
+  uint scratchStack234;
+  uint scratchStack230;
+  uint *scratchStack22c;
   uint procPitch;
   uint procChannelFormat;
   uint procChannelSize;
-  undefined4 uStack_21c;
+  undefined4 scratchStack21c;
   uint procFlags;
-  undefined *puStack_214;
+  undefined *scratchStack214;
   uint procWidth;
   uint procHeight;
-  undefined4 uStack_208;
-  undefined4 uStack_204;
-  undefined1 uStack_1d0;
-  undefined4 uStack_1c8;
-  uint uStack_1c4;
-  undefined4 uStack_1c0;
-  uint uStack_1bc;
+  undefined4 scratchStack208;
+  undefined4 scratchStack204;
+  undefined1 scratchStack1d0;
+  undefined4 scratchStack1c8;
+  uint scratchStack1c4;
+  undefined4 scratchStack1c0;
+  uint scratchStack1bc;
   undefined4 xoffsetI2dHiB;
   uint xoffsetI2dLoB;
   undefined4 yoffsetI2dHiB;
@@ -5854,11 +5854,11 @@ int glTexSubImage_impl(ctx, texture, face, level, xOffset, yOffset, zOffset, wid
   uint chunkRowsHw;
   int rowEnd;
   int rowEndB;
-  uint *puStack_10c;
-  uint uStack_108;
+  uint *scratchStack10c;
+  uint scratchStack108;
   uint widthMask;
   uint levelFaceWord;
-  int *piStack_fc;
+  int *scratchStackfc;
   uint levelHeight;
   int mappingOffsetB;
   uint dstPitchCopy;
@@ -5868,47 +5868,47 @@ int glTexSubImage_impl(ctx, texture, face, level, xOffset, yOffset, zOffset, wid
   uint chunkRows;
   int mappingOffset;
   int chunkBytes;
-  code *pcStack_d4;
-  code *pcStack_d0;
+  code *scratchStackd4;
+  code *scratchStackd0;
   int faceByteOffset;
-  int *piStack_c8;
-  uint *puStack_c4;
-  uint **ppuStack_c0;
-  uint *puStack_bc;
-  uint *puStack_b8;
-  uint *puStack_b4;
-  code *pcStack_b0;
+  int *scratchStackc8;
+  uint *scratchStackc4;
+  uint **scratchStackc0;
+  uint *scratchStackbc;
+  uint *scratchStackb8;
+  uint *scratchStackb4;
+  code *scratchStackb0;
   uint levelId;
-  code *pcStack_a8;
+  code *scratchStacka8;
   int levelByteOffset;
   uint faceId;
-  int iStack_9c;
+  int scratchStack9c;
   
   if (sourceSurface == (undefined4 *)0x0) {
     yoffsetArg = yOffset;
     _pthread_mutex_lock(*(undefined4 *)(ctx + GLD_mutex));
-    uVar44 = 0;
+    scratchUint44 = 0;
     faceArg = face;
     levelArg = level;
     levelRecord = ((int (*)())gldTextureFormatEntryForLevel)(ctx,texture,face,level,0);
     if ((levelRecord != 0) &&
-       ((iVar22 = texture[0xd], iVar22 == 0 || (*(char *)(iVar22 + 0x16) != '\x06')))) {
+       ((scratchInt22 = texture[0xd], scratchInt22 == 0 || (*(char *)(scratchInt22 + 0x16) != '\x06')))) {
       if ((*(byte *)((int)texture + 0x39) & 7) != 0) {
-        faceArg = ((int (*)())gldTextureMakeResident)(ctx,texture,faceArg,levelArg,uVar44,yoffsetArg);
+        faceArg = ((int (*)())gldTextureMakeResident)(ctx,texture,faceArg,levelArg,scratchUint44,yoffsetArg);
         if (faceArg == 0) goto LAB_00037930;
-        iVar22 = texture[0xd];
+        scratchInt22 = texture[0xd];
       }
-      if (*(char *)(iVar22 + 0x16) != '\x06') {
+      if (*(char *)(scratchInt22 + 0x16) != '\x06') {
         bppShiftB = *(uint *)(levelRecord + 0x14) & 7;
         rowPitch = (width << bppShiftB) + 0x23 & 0xffffffe0;
         if ((((depth == 1) && ((int)width < 0x1001)) &&
             ((0x800 >= (int)width || (bppShiftB < 4)))) && ((*(uint *)(levelRecord + 0x14) & 8) == 0)) {
           commandStream = ctx + GLD_commandStream;
-          uVar28 = (**(code **)(ctx + GLD_streamAllocate))(commandStream,0xe0);
-          *(undefined4 *)(ctx + GLD_streamCurrent) = uVar28;
-          uVar28 = ((int (*)())FUN_00030840)(ctx,uVar28,texture);
-          *(undefined4 *)(ctx + GLD_streamCurrent) = uVar28;
-          (**(code **)(ctx + GLD_streamSetCurrent))(commandStream,uVar28);
+          scratchUint28 = (**(code **)(ctx + GLD_streamAllocate))(commandStream,0xe0);
+          *(undefined4 *)(ctx + GLD_streamCurrent) = scratchUint28;
+          scratchUint28 = ((int (*)())FUN_00030840)(ctx,scratchUint28,texture);
+          *(undefined4 *)(ctx + GLD_streamCurrent) = scratchUint28;
+          (**(code **)(ctx + GLD_streamSetCurrent))(commandStream,scratchUint28);
           chunkRows = 0x1e000 / rowPitch;
           srcHwFormatB = ((int (*)())gldTextureFormatCodeFromFormatType)(pixelFormat,pixelType);
           if ((srcHwFormatB == *(byte *)(texture + 0xe)) && ((*(uint *)(levelRecord + 0x14) & 7) < 3)) {
@@ -5918,11 +5918,11 @@ int glTexSubImage_impl(ctx, texture, face, level, xOffset, yOffset, zOffset, wid
               faceByteOffset = face * 0x168;
               levelId = level & 0xffff;
               mappingOffset = (face * 0xd + level) * 0x20;
-              puStack_c4 = &srcBytesPerPixel;
-              piStack_c8 = &srcSkipBytes;
+              scratchStackc4 = &srcBytesPerPixel;
+              scratchStackc8 = &srcSkipBytes;
               faceId = face << 0x10;
               rowsDone = 0;
-              puStack_bc = &srcRowBytes;
+              scratchStackbc = &srcRowBytes;
               do {
                 rowEnd = rowsDone + chunkRowsHw;
                 lastChunk = (int)height <= rowEnd;
@@ -5938,9 +5938,9 @@ int glTexSubImage_impl(ctx, texture, face, level, xOffset, yOffset, zOffset, wid
                 if (*(undefined1 **)(ctx + GLD_dataLimit) <=
                     (undefined1 *)((int)dataCursorPtr + chunkBytes + 0x80)) {
                   srcSkipBytes = 2;
-                  uVar44 = *(int *)(ctx + GLD_dataRefillCount) + 1;
-                  *(uint *)(ctx + GLD_dataRefillCount) = uVar44;
-                  if (2 < uVar44) {
+                  scratchUint44 = *(int *)(ctx + GLD_dataRefillCount) + 1;
+                  *(uint *)(ctx + GLD_dataRefillCount) = scratchUint44;
+                  if (2 < scratchUint44) {
                     if (*(int *)(ctx + GLD_ringMap) + 0x28U < *(uint *)(ctx + GLD_writeCursor)) {
                       gld_submitRing(ctx,0x1000000);
                       dataCursorPtr = *(uint **)(ctx + GLD_dataCursor);
@@ -5950,28 +5950,28 @@ int glTexSubImage_impl(ctx, texture, face, level, xOffset, yOffset, zOffset, wid
                   *(int *)(*(int *)(ctx + GLD_contextBufferMap) + 0xc) =
                        (int)dataCursorPtr - *(int *)(ctx + GLD_dataBase) >> 2;
                   _io_connect_method_scalarI_scalarO
-                            (*(undefined4 *)(ctx + GLD_connect),0x12,0,0,&puStack_23c,piStack_c8);
-                  uVar44 = *(uint *)(GLD_updateFlags + ctx);
-                  *(uint **)(ctx + GLD_dataBase) = puStack_23c;
-                  *(uint **)(ctx + GLD_dataCursor) = puStack_23c;
+                            (*(undefined4 *)(ctx + GLD_connect),0x12,0,0,&scratchStack23c,scratchStackc8);
+                  scratchUint44 = *(uint *)(GLD_updateFlags + ctx);
+                  *(uint **)(ctx + GLD_dataBase) = scratchStack23c;
+                  *(uint **)(ctx + GLD_dataCursor) = scratchStack23c;
                   *(undefined1 **)(ctx + GLD_dataLimit) =
-                       (undefined1 *)((int)puStack_23c + (srcRowBytes & 0xfffffffc));
-                  uVar28 = *(undefined4 *)(*(int *)(ctx + GLD_contextBufferMap) + 8);
-                  *(uint *)(GLD_updateFlags + ctx) = uVar44 | 1;
-                  *(undefined4 *)(ctx + GLD_dataBufferId) = uVar28;
-                  dataCursorPtr = puStack_23c;
+                       (undefined1 *)((int)scratchStack23c + (srcRowBytes & 0xfffffffc));
+                  scratchUint28 = *(undefined4 *)(*(int *)(ctx + GLD_contextBufferMap) + 8);
+                  *(uint *)(GLD_updateFlags + ctx) = scratchUint44 | 1;
+                  *(undefined4 *)(ctx + GLD_dataBufferId) = scratchUint28;
+                  dataCursorPtr = scratchStack23c;
                 }
-                uStack_1d0 = 0;
-                puStack_22c = (uint *)((uint)((int)dataCursorPtr + 0x7f) & 0xffffff80);
-                *(uint **)(ctx + GLD_dataCursor) = puStack_22c;
-                uStack_21c = 2;
+                scratchStack1d0 = 0;
+                scratchStack22c = (uint *)((uint)((int)dataCursorPtr + 0x7f) & 0xffffff80);
+                *(uint **)(ctx + GLD_dataCursor) = scratchStack22c;
+                scratchStack21c = 2;
                 procHeight = chunkHeight;
-                uStack_234 = *(uint *)(levelRecord + 0x10) >> 0x1b;
-                uStack_204 = 0;
-                uStack_208 = 0;
-                puStack_214 = (undefined *)0x0;
+                scratchStack234 = *(uint *)(levelRecord + 0x10) >> 0x1b;
+                scratchStack204 = 0;
+                scratchStack208 = 0;
+                scratchStack214 = (undefined *)0x0;
                 procFlags = 0;
-                uStack_230 = *(uint *)(levelRecord + 0x10) >> 0x16 & 0x1f;
+                scratchStack230 = *(uint *)(levelRecord + 0x10) >> 0x16 & 0x1f;
                 if ((char)rawTransfer == '\0') {
                   engineState = *(int *)(ctx + GLD_engineState);
                   unpackState = ((unsigned char *)0x00002e6c) + engineState;
@@ -5991,7 +5991,7 @@ int glTexSubImage_impl(ctx, texture, face, level, xOffset, yOffset, zOffset, wid
                         goto LAB_00037c60;
                       }
 LAB_00037c68:
-                      uVar44 = 2;
+                      scratchUint44 = 2;
                     }
                     else {
                       if (pixelType < (undefined *)0x8369) {
@@ -6000,14 +6000,14 @@ LAB_00037c68:
                       }
                       else if ((undefined *)((int)((unsigned char *)0x0) + 1) < pixelType + -0x85ba) {
 LAB_00037c1c:
-                        uVar44 = 0;
+                        scratchUint44 = 0;
                         goto LAB_00037c6c;
                       }
 LAB_00037c60:
-                      uVar44 = 1;
+                      scratchUint44 = 1;
                     }
 LAB_00037c6c:
-                    swapMode = swapMode ^ uVar44;
+                    swapMode = swapMode ^ scratchUint44;
                   }
                   if (((unsigned char *)0x00002e85)[engineState] != '\0') {
                     procFlags = procFlags | 4;
@@ -6018,28 +6018,28 @@ LAB_00037c6c:
                 }
                 a2 = pixelType;
                 procPitch = rowPitch;
-                procChannelFormat = uStack_234;
-                procChannelSize = uStack_230;
+                procChannelFormat = scratchStack234;
+                procChannelSize = scratchStack230;
                 procWidth = width;
-                puStack_10c = puStack_22c;
-                gld_computePixelStoreLayout(ctx,pixelFormat,pixelType,width,height,puStack_bc,puStack_c4,
-                             piStack_c8,unpackState);
+                scratchStack10c = scratchStack22c;
+                gld_computePixelStoreLayout(ctx,pixelFormat,pixelType,width,height,scratchStackbc,scratchStackc4,
+                             scratchStackc8,unpackState);
                 srcRowBytesCopy = srcRowBytes;
-                puStack_23c = (uint *)(pixels + srcSkipBytes + rowsDone * srcRowBytes);
+                scratchStack23c = (uint *)(pixels + srcSkipBytes + rowsDone * srcRowBytes);
                 if (swapMode == 2) {
                   a2 = (undefined *)(srcBytesPerPixel * procWidth);
                   if (0 < (int)procHeight) {
-                    srcRow = puStack_23c;
-                    dstRow = puStack_22c;
+                    srcRow = scratchStack23c;
+                    dstRow = scratchStack22c;
                     rowsLeft = procHeight;
                     do {
                       rowsLeft = rowsLeft - 1;
                       if (0 < (int)a2) {
-                        iVar22 = ((uint)(a2 + -1) >> 2) + 1;
+                        scratchInt22 = ((uint)(a2 + -1) >> 2) + 1;
                         srcCursor = srcRow;
                         dstCursor = dstRow;
                         if ((int)(a2 + -4) < -3) {
-                          iVar22 = 1;
+                          scratchInt22 = 1;
                         }
                         do {
                           srcWord = *srcCursor;
@@ -6047,8 +6047,8 @@ LAB_00037c6c:
                           *dstCursor = srcWord >> 0x18 | srcWord >> 8 & 0xff00 | (srcWord & 0xff00) << 8
                                      | srcWord << 0x18;
                           dstCursor = dstCursor + 1;
-                          iVar22 = iVar22 + -1;
-                        } while (iVar22 != 0);
+                          scratchInt22 = scratchInt22 + -1;
+                        } while (scratchInt22 != 0);
                       }
                       srcRow = (uint *)((int)srcRow + srcRowBytes);
                       dstRow = (uint *)((int)dstRow + procPitch);
@@ -6056,27 +6056,27 @@ LAB_00037c6c:
                   }
                 }
                 else if (swapMode == 3) {
-                  iVar22 = srcBytesPerPixel * procWidth;
+                  scratchInt22 = srcBytesPerPixel * procWidth;
                   if (0 < (int)procHeight) {
-                    srcRow = puStack_23c;
-                    dstRow = puStack_22c;
+                    srcRow = scratchStack23c;
+                    dstRow = scratchStack22c;
                     rowsLeft = procHeight;
                     do {
                       rowsLeft = rowsLeft - 1;
-                      if (0 < iVar22) {
-                        iVar45 = (iVar22 - 1U >> 2) + 1;
+                      if (0 < scratchInt22) {
+                        scratchInt45 = (scratchInt22 - 1U >> 2) + 1;
                         srcCursor = srcRow;
                         dstCursor = dstRow;
-                        if (iVar22 + -4 < -3) {
-                          iVar45 = 1;
+                        if (scratchInt22 + -4 < -3) {
+                          scratchInt45 = 1;
                         }
                         do {
                           srcWord = *srcCursor;
                           srcCursor = srcCursor + 1;
                           *dstCursor = srcWord << 0x10 | srcWord >> 0x10;
                           dstCursor = dstCursor + 1;
-                          iVar45 = iVar45 + -1;
-                        } while (iVar45 != 0);
+                          scratchInt45 = scratchInt45 + -1;
+                        } while (scratchInt45 != 0);
                       }
                       srcRow = (uint *)((int)srcRow + srcRowBytes);
                       dstRow = (uint *)((int)dstRow + procPitch);
@@ -6084,27 +6084,27 @@ LAB_00037c6c:
                   }
                 }
                 else if (swapMode == 1) {
-                  iVar22 = srcBytesPerPixel * procWidth;
+                  scratchInt22 = srcBytesPerPixel * procWidth;
                   if (0 < (int)procHeight) {
-                    srcRow = puStack_23c;
-                    dstRow = puStack_22c;
+                    srcRow = scratchStack23c;
+                    dstRow = scratchStack22c;
                     rowsLeft = procHeight;
                     do {
                       rowsLeft = rowsLeft - 1;
-                      if (0 < iVar22) {
-                        iVar45 = (iVar22 - 1U >> 1) + 1;
+                      if (0 < scratchInt22) {
+                        scratchInt45 = (scratchInt22 - 1U >> 1) + 1;
                         srcCursor = srcRow;
                         dstCursor = dstRow;
-                        if (iVar22 + -2 < -1) {
-                          iVar45 = 1;
+                        if (scratchInt22 + -2 < -1) {
+                          scratchInt45 = 1;
                         }
                         do {
-                          uVar9 = *(ushort *)srcCursor;
+                          scratchUint9 = *(ushort *)srcCursor;
                           srcCursor = (uint *)((int)srcCursor + 2);
-                          *(ushort *)dstCursor = uVar9 >> 8 | uVar9 << 8;
+                          *(ushort *)dstCursor = scratchUint9 >> 8 | scratchUint9 << 8;
                           dstCursor = (uint *)((int)dstCursor + 2);
-                          iVar45 = iVar45 + -1;
-                        } while (iVar45 != 0);
+                          scratchInt45 = scratchInt45 + -1;
+                        } while (scratchInt45 != 0);
                       }
                       srcRow = (uint *)((int)srcRow + srcRowBytes);
                       dstRow = (uint *)((int)dstRow + procPitch);
@@ -6114,8 +6114,8 @@ LAB_00037c6c:
                 else {
                   rowBytesTotal = (undefined *)(srcBytesPerPixel * procWidth);
                   dstPitchCopy = procPitch;
-                  srcRow = puStack_23c;
-                  dstRow = puStack_22c;
+                  srcRow = scratchStack23c;
+                  dstRow = scratchStack22c;
                   rowsLeft = procHeight;
                   if ((int)rowBytesTotal < 0x11) {
                     while (0 < (int)rowsLeft) {
@@ -6129,30 +6129,30 @@ LAB_00037c6c:
                         bytesLeft = rowBytesTotal + -1;
                       }
                       if ((((uint)dstCursor & 2) != 0) && ((undefined *)0x1 < bytesLeft)) {
-                        uVar9 = *(ushort *)srcCursor;
+                        scratchUint9 = *(ushort *)srcCursor;
                         bytesLeft = bytesLeft + -2;
                         srcCursor = (uint *)((int)srcCursor + 2);
-                        *(ushort *)dstCursor = uVar9;
+                        *(ushort *)dstCursor = scratchUint9;
                         dstCursor = (uint *)((int)dstCursor + 2);
                       }
                       if ((undefined *)0x3 < bytesLeft) {
-                        iVar45 = 0;
-                        iVar22 = ((uint)(bytesLeft + -4) >> 2) + 1;
+                        scratchInt45 = 0;
+                        scratchInt22 = ((uint)(bytesLeft + -4) >> 2) + 1;
                         do {
                           bytesLeft = bytesLeft + -4;
-                          *(undefined4 *)((int)dstCursor + iVar45) =
-                               *(undefined4 *)((int)srcCursor + iVar45);
-                          iVar45 = iVar45 + 4;
-                          iVar22 = iVar22 + -1;
-                        } while (iVar22 != 0);
-                        dstCursor = (uint *)((int)dstCursor + iVar45);
-                        srcCursor = (uint *)((int)srcCursor + iVar45);
+                          *(undefined4 *)((int)dstCursor + scratchInt45) =
+                               *(undefined4 *)((int)srcCursor + scratchInt45);
+                          scratchInt45 = scratchInt45 + 4;
+                          scratchInt22 = scratchInt22 + -1;
+                        } while (scratchInt22 != 0);
+                        dstCursor = (uint *)((int)dstCursor + scratchInt45);
+                        srcCursor = (uint *)((int)srcCursor + scratchInt45);
                       }
                       if ((undefined *)0x1 < bytesLeft) {
-                        uVar9 = *(ushort *)srcCursor;
+                        scratchUint9 = *(ushort *)srcCursor;
                         bytesLeft = bytesLeft + -2;
                         srcCursor = (uint *)((int)srcCursor + 2);
-                        *(ushort *)dstCursor = uVar9;
+                        *(ushort *)dstCursor = scratchUint9;
                         dstCursor = (uint *)((int)dstCursor + 2);
                       }
                       if (bytesLeft != (undefined *)0x0) {
@@ -6172,11 +6172,11 @@ LAB_00037c6c:
                     }
                   }
                 }
-                dataOffset = (int)puStack_10c - *(int *)(ctx + GLD_dataBase);
-                *(int *)(ctx + GLD_dataCursor) = (int)puStack_10c + chunkBytes;
+                dataOffset = (int)scratchStack10c - *(int *)(ctx + GLD_dataBase);
+                *(int *)(ctx + GLD_dataCursor) = (int)scratchStack10c + chunkBytes;
                 packet = (undefined4 *)
-                          (**(code **)(ctx + GLD_streamAllocate))(commandStream,0x2a,a2,puStack_10c,chunkBytes);
-                uVar42 = 0;
+                          (**(code **)(ctx + GLD_streamAllocate))(commandStream,0x2a,a2,scratchStack10c,chunkBytes);
+                scratchUint42 = 0;
                 *(undefined4 **)(ctx + GLD_streamCurrent) = packet;
                 lastHeader = *(uint **)(ctx + GLD_lastHeader);
                 *lastHeader = (int)packet - (int)lastHeader >> 2 | *lastHeader;
@@ -6196,7 +6196,7 @@ LAB_00037c6c:
                 packet[0xc] = 0;
                 packet[10] = 0xffffffff;
                 packet[0xd] = 0x51b;
-                uVar26 = *(uint *)(levelRecord + 0x18);
+                scratchUint26 = *(uint *)(levelRecord + 0x18);
                 packet[0xf] = 0x56b;
                 packet[0x11] = 0x56c;
                 packet[0x10] = 0;
@@ -6204,7 +6204,7 @@ LAB_00037c6c:
                 packet[0x12] = rowPitch;
                 packet[0x14] = 0;
                 packet[0x15] = 0x501;
-                packet[0xe] = uVar26 >> 0xf & 0xf00 | 0x2cc30fb;
+                packet[0xe] = scratchUint26 >> 0xf & 0xf00 | 0x2cc30fb;
                 if ((texture[0xd] == 0) || (*(char *)(texture[0xd] + 0x16) != '\x06')) {
                   levelMappingRecB = *texture + 0x40 + mappingOffset;
                   packet[0x16] = zOffset * *(int *)(levelMappingRecB + 0x14) + *(int *)(levelMappingRecB + 8);
@@ -6214,66 +6214,66 @@ LAB_00037c6c:
                 }
                 levelStateRecB = levelByteOffset + faceByteOffset + texture[0xc];
                 levelHeightB = *(ushort *)(levelStateRecB + 0xa6);
-                uVar44 = (uint)levelHeightB;
+                scratchUint44 = (uint)levelHeightB;
                 levelWidthB = *(ushort *)(levelStateRecB + 0xa4);
                 if (*(char *)(texture[0xc] + 0x6d) == '\0') {
                   if ((texture[0xd] == 0) || ((*(byte *)(texture[0xd] + 0x15) & 0x18) == 0)) {
-                    iVar22 = 0x20;
+                    scratchInt22 = 0x20;
                   }
                   else {
-                    iVar22 = 0x20 / (1 << (*(uint *)(&DAT_001d9f4c +
+                    scratchInt22 = 0x20 / (1 << (*(uint *)(&DAT_001d9f4c +
                                                     (uint)*(byte *)(texture + 0xe) * 0x24) >> 0x1c &
                                           3));
                   }
                   bppShift = *(uint *)(levelRecord + 0x14) & 7;
-                  iVar22 = iVar22 >> bppShift;
-                  iVar22 = (((uint)levelWidthB + iVar22) - 1 & -iVar22) << bppShift;
+                  scratchInt22 = scratchInt22 >> bppShift;
+                  scratchInt22 = (((uint)levelWidthB + scratchInt22) - 1 & -scratchInt22) << bppShift;
                 }
                 else {
-                  iVar22 = (uint)*(ushort *)((int)texture + 0x3e) << (*(uint *)(levelRecord + 0x14) & 7);
+                  scratchInt22 = (uint)*(ushort *)((int)texture + 0x3e) << (*(uint *)(levelRecord + 0x14) & 7);
                 }
-                packet[0x18] = iVar22;
-                uVar26 = 0;
+                packet[0x18] = scratchInt22;
+                scratchUint26 = 0;
                 packet[0x17] = 0x502;
                 packet[0x19] = 0x5c0;
                 if (texture[0xd] != 0) {
-                  bVar46 = *(byte *)(texture[0xd] + 0x15);
-                  bVar19 = bVar46 >> 3;
-                  uVar26 = (bVar19 & 3) << 1;
-                  if ((bVar46 & 4) != 0) {
-                    uVar42 = level - *(byte *)(texture[0xc] + 0x69);
-                    if ((bVar19 & 3) == 0) {
-                      iVar45 = 1;
-                      iVar22 = 0x100;
+                  scratchFlag46 = *(byte *)(texture[0xd] + 0x15);
+                  scratchFlag19 = scratchFlag46 >> 3;
+                  scratchUint26 = (scratchFlag19 & 3) << 1;
+                  if ((scratchFlag46 & 4) != 0) {
+                    scratchUint42 = level - *(byte *)(texture[0xc] + 0x69);
+                    if ((scratchFlag19 & 3) == 0) {
+                      scratchInt45 = 1;
+                      scratchInt22 = 0x100;
                     }
                     else {
-                      iVar45 = 1 << (*(uint *)(&DAT_001d9f4c + (uint)*(byte *)(texture + 0xe) * 0x24
+                      scratchInt45 = 1 << (*(uint *)(&DAT_001d9f4c + (uint)*(byte *)(texture + 0xe) * 0x24
                                               ) >> 0x1c & 3);
-                      iVar22 = 0x20 / iVar45 << 3;
+                      scratchInt22 = 0x20 / scratchInt45 << 3;
                     }
-                    if ((iVar22 <= *(int *)(*texture + 0xc) >> (uVar42 & 0x3f)) &&
-                       (iVar45 << 3 <= (int)(uint)*(ushort *)(*texture + 0x16) >> (uVar42 & 0x3f)))
+                    if ((scratchInt22 <= *(int *)(*texture + 0xc) >> (scratchUint42 & 0x3f)) &&
+                       (scratchInt45 << 3 <= (int)(uint)*(ushort *)(*texture + 0x16) >> (scratchUint42 & 0x3f)))
                     {
-                      uVar26 = uVar26 | 1;
+                      scratchUint26 = scratchUint26 | 1;
                     }
                   }
                 }
-                packet[0x1a] = uVar26;
+                packet[0x1a] = scratchUint26;
                 packet[0x1b] = 0x5bb;
                 packet[0x1d] = 0x5bc;
                 packet[0x1e] = CONCAT22(levelHeightB,levelWidthB);
                 packet[0x1c] = 0;
-                uVar26 = *(uint *)(levelRecord + 0x18) >> 0x17 & 0x1f;
-                if ((uVar26 < 3) || ((iVar22 = 1, 4 < uVar26 && (iVar22 = 2, uVar26 != 6)))) {
-                  iVar22 = 0;
+                scratchUint26 = *(uint *)(levelRecord + 0x18) >> 0x17 & 0x1f;
+                if ((scratchUint26 < 3) || ((scratchInt22 = 1, 4 < scratchUint26 && (scratchInt22 = 2, scratchUint26 != 6)))) {
+                  scratchInt22 = 0;
                 }
-                uVar35 = (*(uint *)(levelRecord + 0x14) & 7) - iVar22;
+                scratchUint35 = (*(uint *)(levelRecord + 0x14) & 7) - scratchInt22;
                 levelArg = 0;
-                uVar21 = (rowsDone + yOffset) * 0x10000 | xOffset << (uVar35 & 0x3f) & 0xffff;
+                scratchUint21 = (rowsDone + yOffset) * 0x10000 | xOffset << (scratchUint35 & 0x3f) & 0xffff;
                 packet[0x24] = 0xd0b;
-                packet[0x22] = chunkHeight << 0x10 | width << (uVar35 & 0x3f) & 0xffff;
+                packet[0x22] = chunkHeight << 0x10 | width << (scratchUint35 & 0x3f) & 0xffff;
                 packet[0x1f] = 0x50e;
-                packet[0x20] = uVar21;
+                packet[0x20] = scratchUint21;
                 packet[0x21] = 0x50f;
                 packet[0x23] = 0x80000000;
                 packet[0x26] = 0x5c8;
@@ -6283,7 +6283,7 @@ LAB_00037c6c:
                 packet[0x27] = 0x10000;
                 *(undefined4 **)(ctx + GLD_streamCurrent) = packet + 0x2a;
                 (**(code **)(ctx + GLD_streamSetCurrent))
-                          (commandStream,packet + 0x2a,a2,0,uVar44,uVar42,uVar21,packet + 0x24);
+                          (commandStream,packet + 0x2a,a2,0,scratchUint44,scratchUint42,scratchUint21,packet + 0x24);
                 if (lastChunk) break;
                 rowsDone = rowEnd;
               } while( true );
@@ -6294,42 +6294,42 @@ LAB_00037c6c:
             xEndI2dLo = width + xOffset ^ 0x80000000;
             xEndI2dHi = 0x43300000;
             xoffsetI2dHi = 0x43300000;
-            pcStack_a8 = IrInt2F__dtor;
-            iStack_9c = 0x1e6a08;
+            scratchStacka8 = IrInt2F__dtor;
+            scratchStack9c = 0x1e6a08;
             levelByteOffset = level * 0x18;
             faceByteOffset = face * 0x168;
             mappingOffsetB = (face * 0xd + level) * 0x20;
             widthMask = width - 1 & 0x7ff;
             levelFaceWord = level | face << 0x10;
-            puStack_c4 = &srcBytesPerPixel;
-            puStack_b8 = &uStack_234;
-            piStack_c8 = &srcSkipBytes;
-            ppuStack_c0 = &puStack_23c;
-            puStack_bc = &srcRowBytes;
-            pcStack_d0 = IrInt2F__dtor;
-            puStack_b4 = &uStack_230;
-            pcStack_d4 = IrInt2F__dtor;
-            pcStack_b0 = IrInt2F__dtor;
+            scratchStackc4 = &srcBytesPerPixel;
+            scratchStackb8 = &scratchStack234;
+            scratchStackc8 = &srcSkipBytes;
+            scratchStackc0 = &scratchStack23c;
+            scratchStackbc = &srcRowBytes;
+            scratchStackd0 = IrInt2F__dtor;
+            scratchStackb4 = &scratchStack230;
+            scratchStackd4 = IrInt2F__dtor;
+            scratchStackb0 = IrInt2F__dtor;
             xBeginF = (float)((double)CONCAT44(0x43300000,xoffsetI2dLo) - 4503601774854144.0);
             xEndF = (float)((double)CONCAT44(0x43300000,xEndI2dLo) - 4503601774854144.0);
-            iVar22 = (int)((xEndF - xBeginF) * 6.0);
-            fctiwzSlot11 = (longlong)iVar22;
-            uStack_108 = iVar22 << 0x10;
+            scratchInt22 = (int)((xEndF - xBeginF) * 6.0);
+            fctiwzSlot11 = (longlong)scratchInt22;
+            scratchStack108 = scratchInt22 << 0x10;
             rowStart = 0;
             do {
               rowEndB = rowStart + chunkRows;
               lastChunkB = rowEndB < (int)height;
-              uVar42 = chunkRows;
+              scratchUint42 = chunkRows;
               if ((int)height < rowEndB) {
-                uVar42 = height - rowStart;
+                scratchUint42 = height - rowStart;
               }
               rowPitchB = (width << (*(uint *)(levelRecord + 0x14) & 7)) + 0x23 & 0xffffffe0;
               packet = (undefined4 *)
-                        (**(code **)(ctx + GLD_streamAllocate))(commandStream,(rowPitchB * uVar42 >> 2) + 0x193);
-              piStack_fc = packet + 1;
+                        (**(code **)(ctx + GLD_streamAllocate))(commandStream,(rowPitchB * scratchUint42 >> 2) + 0x193);
+              scratchStackfc = packet + 1;
               *(undefined4 **)(ctx + GLD_streamCurrent) = packet;
               lastHeader = *(uint **)(ctx + GLD_lastHeader);
-              uVar28 = *(undefined4 *)(iStack_9c + 0x1ec8);
+              scratchUint28 = *(undefined4 *)(scratchStack9c + 0x1ec8);
               levelStateRec = levelByteOffset + faceByteOffset + texture[0xc];
               levelHeight = (uint)*(ushort *)(levelStateRec + 0xa6);
               levelWidthC = *(ushort *)(levelStateRec + 0xa4);
@@ -6337,85 +6337,85 @@ LAB_00037c6c:
               *(undefined4 **)(ctx + GLD_lastHeader) = packet;
               *packet = 0x35000000;
               packet[2] = levelFaceWord;
-              _memcpy(packet + 3,uVar28,0x2f4);
-              uVar44 = *(uint *)(levelRecord + 0x18);
-              packet[0xa9] = (uVar42 - 1) * 0x800 & 0x3ff800 | widthMask | 0x80000000;
-              packet[0xa3] = uVar44 >> 0x1e | packet[0xa3] & 0xfffffffc;
-              uVar44 = *(uint *)(((unsigned char *)0x00003c14) +
-                                (int)(pcStack_d0 + (*(uint *)(levelRecord + 0x14) & 7) * 4));
-              packet[0xab] = uVar44 & 0x1f | 0xa600;
-              uVar24 = *(uint *)(levelRecord + 0x14);
-              if ((uVar24 & 7) == 0) {
-                packet[0xab] = uVar44 & 0x1f | 0x8600;
-                uVar24 = *(uint *)(levelRecord + 0x14);
+              _memcpy(packet + 3,scratchUint28,0x2f4);
+              scratchUint44 = *(uint *)(levelRecord + 0x18);
+              packet[0xa9] = (scratchUint42 - 1) * 0x800 & 0x3ff800 | widthMask | 0x80000000;
+              packet[0xa3] = scratchUint44 >> 0x1e | packet[0xa3] & 0xfffffffc;
+              scratchUint44 = *(uint *)(((unsigned char *)0x00003c14) +
+                                (int)(scratchStackd0 + (*(uint *)(levelRecord + 0x14) & 7) * 4));
+              packet[0xab] = scratchUint44 & 0x1f | 0xa600;
+              scratchUint24 = *(uint *)(levelRecord + 0x14);
+              if ((scratchUint24 & 7) == 0) {
+                packet[0xab] = scratchUint44 & 0x1f | 0x8600;
+                scratchUint24 = *(uint *)(levelRecord + 0x14);
               }
               packet[0xad] =
-                   (uint)(0x800 < (int)uVar42) << 0x10 |
-                   (uint)(0x800 < (int)width) << 0xf | (rowPitchB >> (uVar24 & 7)) - 1 & 0x3fff;
+                   (uint)(0x800 < (int)scratchUint42) << 0x10 |
+                   (uint)(0x800 < (int)width) << 0xf | (rowPitchB >> (scratchUint24 & 7)) - 1 & 0x3fff;
               packet[0x8d] =
-                   *(uint *)(pcStack_d4 + (*(uint *)(levelRecord + 0x14) & 7) * 4 + 0x3c00) & 0x1f |
+                   *(uint *)(scratchStackd4 + (*(uint *)(levelRecord + 0x14) & 7) * 4 + 0x3c00) & 0x1f |
                    packet[0x8d] & 0xffffffe0;
-              iVar45 = texture[0xd];
-              if ((iVar45 == 0) || ((*(byte *)(iVar45 + 0x15) & 0x18) == 0)) {
+              scratchInt45 = texture[0xd];
+              if ((scratchInt45 == 0) || ((*(byte *)(scratchInt45 + 0x15) & 0x18) == 0)) {
                 alignPixels = 0x20;
               }
               else {
                 alignPixels = 0x20 / (1 << (*(uint *)(((unsigned char *)0x00003544) +
-                                                (int)(pcStack_a8 +
+                                                (int)(scratchStacka8 +
                                                      (uint)*(byte *)(texture + 0xe) * 0x24)) >> 0x1c
                                       & 3));
               }
               alignPixels = alignPixels >> (*(uint *)(levelRecord + 0x14) & 7);
-              if ((iVar45 == 0) || (*(char *)(iVar45 + 0x16) != '\x06')) {
-                uVar44 = 0;
+              if ((scratchInt45 == 0) || (*(char *)(scratchInt45 + 0x16) != '\x06')) {
+                scratchUint44 = 0;
                 levelMappingRec = *texture + 0x40 + mappingOffsetB;
                 levelMappingRec = zOffset * *(int *)(levelMappingRec + 0x14) + *(int *)(levelMappingRec + 8);
               }
               else {
                 levelMappingRec = 0;
-                uVar44 = *(uint *)(levelRecord + 0x18) >> 0xb & 0x180000;
+                scratchUint44 = *(uint *)(levelRecord + 0x18) >> 0xb & 0x180000;
               }
               packet[0x9d] = levelMappingRec;
               if (*(char *)(texture[0xc] + 0x6d) != '\0') {
                 levelWidthC = *(ushort *)((int)texture + 0x3e);
               }
-              iVar45 = texture[0xd];
+              scratchInt45 = texture[0xd];
               alignedPitchPixels = ((uint)levelWidthC + alignPixels) - 1 & -alignPixels;
-              if ((iVar45 == 0) || ((*(byte *)(iVar45 + 0x15) & 4) == 0)) {
+              if ((scratchInt45 == 0) || ((*(byte *)(scratchInt45 + 0x15) & 4) == 0)) {
 LAB_00038698:
                 tiledFlag = 0;
               }
               else {
-                uVar35 = level - *(byte *)(texture[0xc] + 0x69);
-                if ((*(byte *)(iVar45 + 0x15) & 0x18) == 0) {
-                  iVar20 = 1;
+                scratchUint35 = level - *(byte *)(texture[0xc] + 0x69);
+                if ((*(byte *)(scratchInt45 + 0x15) & 0x18) == 0) {
+                  scratchInt20 = 1;
                   tiledFlag = 0x100;
                 }
                 else {
-                  iVar20 = 1 << (*(uint *)(((unsigned char *)0x00003544) +
-                                          (int)(pcStack_a8 + (uint)*(byte *)(texture + 0xe) * 0x24))
+                  scratchInt20 = 1 << (*(uint *)(((unsigned char *)0x00003544) +
+                                          (int)(scratchStacka8 + (uint)*(byte *)(texture + 0xe) * 0x24))
                                  >> 0x1c & 3);
-                  tiledFlag = 0x20 / iVar20 << 3;
+                  tiledFlag = 0x20 / scratchInt20 << 3;
                 }
-                if ((*(int *)(*texture + 0xc) >> (uVar35 & 0x3f) < tiledFlag) ||
+                if ((*(int *)(*texture + 0xc) >> (scratchUint35 & 0x3f) < tiledFlag) ||
                    (tiledFlag = 1,
-                   (int)(uint)*(ushort *)(*texture + 0x16) >> (uVar35 & 0x3f) < iVar20 << 3))
+                   (int)(uint)*(ushort *)(*texture + 0x16) >> (scratchUint35 & 0x3f) < scratchInt20 << 3))
                 goto LAB_00038698;
               }
-              if (((*(uint *)(levelRecord + 0x18) & 0x30000000) == 0) || (iVar45 == 0)) {
-                uVar35 = 0;
+              if (((*(uint *)(levelRecord + 0x18) & 0x30000000) == 0) || (scratchInt45 == 0)) {
+                scratchUint35 = 0;
               }
               else {
-                uVar35 = (*(byte *)(iVar45 + 0x15) & 0x18) << 0xe;
+                scratchUint35 = (*(byte *)(scratchInt45 + 0x15) & 0x18) << 0xe;
               }
-              uVar21 = *(uint *)(((unsigned char *)0x00003bec) +
-                                (int)(pcStack_b0 + (*(uint *)(levelRecord + 0x14) & 7) * 4));
+              scratchUint21 = *(uint *)(((unsigned char *)0x00003bec) +
+                                (int)(scratchStackb0 + (*(uint *)(levelRecord + 0x14) & 7) * 4));
               yStartI2dLo = rowStart + yOffset ^ 0x80000000;
-              yEndI2dLo = uVar42 + rowStart + yOffset ^ 0x80000000;
+              yEndI2dLo = scratchUint42 + rowStart + yOffset ^ 0x80000000;
               packet[0xb6] = alignedPitchPixels - 1 & 0x1fff | (levelHeight - 1) * 0x2000 & 0x3ffe000;
               packetEndA = packet + 0xcc;
               packet[0x9f] =
-                   uVar35 | alignedPitchPixels & 0x3ffe | tiledFlag << 0x10 | uVar44 | (uVar21 & 0xf) << 0x15;
+                   scratchUint35 | alignedPitchPixels & 0x3ffe | tiledFlag << 0x10 | scratchUint44 | (scratchUint21 & 0xf) << 0x15;
               yEndI2dHi = 0x43300000;
               yStartI2dHi = 0x43300000;
               packet[0xc0] = 0x31080;
@@ -6426,15 +6426,15 @@ LAB_00038698:
               packet[0xc2] = 0x3f800000;
               yEndF = (float)((double)CONCAT44(0x43300000,yEndI2dLo) - 4503601774854144.0);
               yBeginF = (float)((double)CONCAT44(0x43300000,yStartI2dLo) - 4503601774854144.0);
-              uVar44 = (uint)(int)((yEndF - yBeginF) * 6.0);
-              fctiwzSlot10 = (longlong)(int)uVar44;
+              scratchUint44 = (uint)(int)((yEndF - yBeginF) * 6.0);
+              fctiwzSlot10 = (longlong)(int)scratchUint44;
               packet[199] = 0xc0033500;
               packet[200] = 0x10031;
               packet[0xca] = (yBeginF + yEndF) * 0.5;
               packet[0xc9] = (xEndF + xBeginF) * 0.5;
               packet[0xcb] = 0;
-              packet[0xc6] = uVar44 | uStack_108;
-              *piStack_fc = (int)packetEndA - (int)packet >> 2;
+              packet[0xc6] = scratchUint44 | scratchStack108;
+              *scratchStackfc = (int)packetEndA - (int)packet >> 2;
               lastHeader = *(uint **)(ctx + GLD_lastHeader);
               *lastHeader = (int)packetEndA - (int)lastHeader >> 2 | *lastHeader;
               *(undefined4 **)(ctx + GLD_lastHeader) = packetEndA;
@@ -6512,7 +6512,7 @@ LAB_00038698:
               fg_fog_blendC = *(uint *)(ctx + GLD_fg_fog_blend);
               packet[0xfe] = fg_fog_blendC;
               if ((*(uint *)(((unsigned char *)0x0000352c) +
-                            (int)(pcStack_a8 + (uint)(byte)((unsigned char *)GLD_colorFormatIndex)[ctx] * 0x24 + 0x18))
+                            (int)(scratchStacka8 + (uint)(byte)((unsigned char *)GLD_colorFormatIndex)[ctx] * 0x24 + 0x18))
                   & 0x8000) == 0) {
                 packet[0xfe] = fg_fog_blendC & 0xfffffffe;
               }
@@ -6520,7 +6520,7 @@ LAB_00038698:
               fg_alpha_func = *(uint *)(ctx + GLD_fg_alpha_func);
               packet[0x100] = fg_alpha_func;
               if ((*(uint *)(((unsigned char *)0x0000352c) +
-                            (int)(pcStack_a8 + (uint)(byte)((unsigned char *)GLD_colorFormatIndex)[ctx] * 0x24 + 0x18))
+                            (int)(scratchStacka8 + (uint)(byte)((unsigned char *)GLD_colorFormatIndex)[ctx] * 0x24 + 0x18))
                   & 0x8000) == 0) {
                 packet[0x100] = fg_alpha_func & 0xfffff7ff;
               }
@@ -6528,17 +6528,17 @@ LAB_00038698:
               ga_poly_mode = *(undefined4 *)(ctx + GLD_ga_poly_mode);
               packet[0x103] = ((unsigned char *)0x00001381U);
               packet[0x102] = ga_poly_mode;
-              uVar44 = *(uint *)(ctx + GLD_rb3d_blendcntl);
-              packet[0x104] = uVar44;
+              scratchUint44 = *(uint *)(ctx + GLD_rb3d_blendcntl);
+              packet[0x104] = scratchUint44;
               if ((*(uint *)(((unsigned char *)0x0000352c) +
-                            (int)(pcStack_a8 + (uint)(byte)((unsigned char *)GLD_colorFormatIndex)[ctx] * 0x24 + 0x18))
+                            (int)(scratchStacka8 + (uint)(byte)((unsigned char *)GLD_colorFormatIndex)[ctx] * 0x24 + 0x18))
                   & 0x4000) == 0) {
-                packet[0x104] = uVar44 & 0xfffffffc;
+                packet[0x104] = scratchUint44 & 0xfffffffc;
               }
               packet[0x105] = ((unsigned char *)0x0000109eU);
-              uVar28 = *(undefined4 *)(ctx + 0x1d6c);
+              scratchUint28 = *(undefined4 *)(ctx + 0x1d6c);
               packet[0x107] = ((unsigned char *)0x00001096U);
-              packet[0x106] = uVar28;
+              packet[0x106] = scratchUint28;
               ga_color_control = *(undefined4 *)(ctx + GLD_ga_color_control);
               packet[0x109] = ((unsigned char *)0x00001041U);
               packet[0x106] = ga_color_control;
@@ -6635,38 +6635,38 @@ LAB_00038698:
               packetWrite = packet + 0x18b;
               for (alignedPtr = packet + 0x18c; ((uint)alignedPtr & 0x1f) != 0; alignedPtr = alignedPtr + 1) {
               }
-              uVar44 = 0x80000000;
+              scratchUint44 = 0x80000000;
               packet[0xa3] = ((int)alignedPtr - (int)packet) * 8 & 0xffffffe0U | packet[0xa3] & 0x1f
               ;
               rowWords = ((int)((width << (*(uint *)(levelRecord + 0x14) & 7)) + 3) >> 2) +
                        ((int)alignedPtr - (int)packetWrite >> 2);
               if (rowWords != 1) {
-                uVar44 = (rowWords + -2) * 0x10000 | 0xc0001000;
+                scratchUint44 = (rowWords + -2) * 0x10000 | 0xc0001000;
               }
-              *packetWrite = uVar44;
+              *packetWrite = scratchUint44;
               packetWrite = packetWrite + rowWords;
-              if (1 < (int)uVar42) {
-                uVar44 = rowPitchB >> 2;
-                headerRowsLeft = uVar42 - 1;
+              if (1 < (int)scratchUint42) {
+                scratchUint44 = rowPitchB >> 2;
+                headerRowsLeft = scratchUint42 - 1;
                 do {
-                  if (uVar44 == 1) {
-                    uVar24 = 0x80000000;
+                  if (scratchUint44 == 1) {
+                    scratchUint24 = 0x80000000;
                   }
                   else {
-                    uVar24 = (uVar44 - 2) * 0x10000 | 0xc0001000;
+                    scratchUint24 = (scratchUint44 - 2) * 0x10000 | 0xc0001000;
                   }
-                  *packetWrite = uVar24;
-                  packetWrite = packetWrite + uVar44;
+                  *packetWrite = scratchUint24;
+                  packetWrite = packetWrite + scratchUint44;
                   headerRowsLeft = headerRowsLeft + -1;
                 } while (headerRowsLeft != 0);
               }
               procChannelFormat = *(uint *)(levelRecord + 0x10) >> 0x1b;
-              sVar8 = *(short *)(texture[0xc] + 0x1a);
-              sVar11 = *(short *)(texture[0xc] + 2);
-              uStack_204 = 0;
+              scratchShort8 = *(short *)(texture[0xc] + 0x1a);
+              scratchShort11 = *(short *)(texture[0xc] + 2);
+              scratchStack204 = 0;
               procFlags = 0;
-              puStack_214 = ((unsigned char *)0x0007efffU);
-              uStack_208 = 0;
+              scratchStack214 = ((unsigned char *)0x0007efffU);
+              scratchStack208 = 0;
               procChannelSize = *(uint *)(levelRecord + 0x10) >> 0x16 & 0x1f;
               if ((char)rawTransfer == '\0') {
                 engineStateB = *(int *)(ctx + GLD_engineState);
@@ -6679,40 +6679,40 @@ LAB_00038698:
               else {
                 unpackState = (undefined *)0x0;
               }
-              uVar44 = height;
-              puVar37 = puStack_bc;
-              piVar36 = piStack_c8;
-              puVar38 = puStack_c4;
+              scratchUint44 = height;
+              scratchPtr37 = scratchStackbc;
+              scratchPtr36 = scratchStackc8;
+              scratchPtr38 = scratchStackc4;
               procPitch = rowPitchB;
-              gld_computePixelStoreLayout(ctx,pixelFormat,pixelType,width,height,puStack_bc,piStack_c8,
-                           puStack_c4,unpackState);
-              puVar33 = puStack_b8;
-              _glgConvertType(pixelFormat,pixelType,puStack_b8,puStack_b4,uVar44,puVar37,piVar36,puVar38
+              gld_computePixelStoreLayout(ctx,pixelFormat,pixelType,width,height,scratchStackbc,scratchStackc8,
+                           scratchStackc4,unpackState);
+              scratchPtr33 = scratchStackb8;
+              _glgConvertType(pixelFormat,pixelType,scratchStackb8,scratchStackb4,scratchUint44,scratchPtr37,scratchPtr36,scratchPtr38
                              );
-              if ((((sVar11 != 0x1908) && (sVar8 != -0x7a43)) && (sVar11 != 0x1906)) &&
-                 ((sVar11 != 0x190a &&
+              if ((((scratchShort11 != 0x1908) && (scratchShort8 != -0x7a43)) && (scratchShort11 != 0x1906)) &&
+                 ((scratchShort11 != 0x190a &&
                   ((0x15 < procChannelFormat || ((1 << (procChannelFormat & 0x3f) & 0x3ff707U) == 0)))))) {
                 procFlags = procFlags | 0x8000;
               }
-              uStack_21c = 2;
-              uStack_1d0 = 0;
-              puStack_23c = (uint *)(pixels + srcBytesPerPixel + rowStart * srcRowBytes);
+              scratchStack21c = 2;
+              scratchStack1d0 = 0;
+              scratchStack23c = (uint *)(pixels + srcBytesPerPixel + rowStart * srcRowBytes);
               levelArg = pixels;
-              puStack_22c = alignedPtr;
+              scratchStack22c = alignedPtr;
               procWidth = width;
-              procHeight = uVar42;
-              _glgProcessPixels(((unsigned char *)0x00002e48) + *(int *)(ctx + GLD_engineState),ppuStack_c0,puVar33,
-                                pixels,uVar44,puVar37,rowStart * srcRowBytes,puVar38);
+              procHeight = scratchUint42;
+              _glgProcessPixels(((unsigned char *)0x00002e48) + *(int *)(ctx + GLD_engineState),scratchStackc0,scratchPtr33,
+                                pixels,scratchUint44,scratchPtr37,rowStart * srcRowBytes,scratchPtr38);
               *(uint **)(ctx + GLD_streamCurrent) = packetWrite;
               (**(code **)(ctx + GLD_streamSetCurrent))(commandStream,packetWrite);
               rowStart = rowEndB;
             } while (lastChunkB);
           }
-          uVar28 = (**(code **)(ctx + GLD_streamAllocate))(commandStream,0xe0);
-          *(undefined4 *)(ctx + GLD_streamCurrent) = uVar28;
-          uVar28 = ((int (*)())FUN_000308c0)(ctx,uVar28);
-          *(undefined4 *)(ctx + GLD_streamCurrent) = uVar28;
-          (**(code **)(ctx + GLD_streamSetCurrent))(commandStream,uVar28);
+          scratchUint28 = (**(code **)(ctx + GLD_streamAllocate))(commandStream,0xe0);
+          *(undefined4 *)(ctx + GLD_streamCurrent) = scratchUint28;
+          scratchUint28 = ((int (*)())FUN_000308c0)(ctx,scratchUint28);
+          *(undefined4 *)(ctx + GLD_streamCurrent) = scratchUint28;
+          (**(code **)(ctx + GLD_streamSetCurrent))(commandStream,scratchUint28);
           _pthread_mutex_unlock(*(undefined4 *)(ctx + GLD_mutex));
           if ((*(uint *)(texture[0xc] + 0x48) & 0x8000) == 0) {
             return 1;
@@ -6720,7 +6720,7 @@ LAB_00038698:
           if (level != *(byte *)(texture[0xc] + 0x5e)) {
             return 1;
           }
-          ((int (*)())glGenerateMipmap_impl)(ctx,texture,face,levelArg,uVar44);
+          ((int (*)())glGenerateMipmap_impl)(ctx,texture,face,levelArg,scratchUint44);
           return 1;
         }
       }
@@ -6734,12 +6734,12 @@ LAB_00037930:
   if (srcHwFormat == 0) {
     return 0;
   }
-  sizeOutPtr = &uStack_248;
+  sizeOutPtr = &scratchStack248;
   gld_computePixelStoreLayout(ctx,pixelFormat,pixelType,width,height,sizeOutPtr,&srcBytesPerPixel,&srcSkipBytes,
                ((unsigned char *)0x00002e6c) + *(int *)(ctx + GLD_engineState));
   sourceBase = *(int *)*sourceSurface;
   srcData = pixels + srcSkipBytes;
-  if (0x1000 < (int)uStack_248 >> (srcBytesPerPixel & 0x3f)) {
+  if (0x1000 < (int)scratchStack248 >> (srcBytesPerPixel & 0x3f)) {
     return 0;
   }
   if (0x1000 < (int)height) {
@@ -6754,29 +6754,29 @@ LAB_00037930:
     return 0;
   }
   _pthread_mutex_lock(*(undefined4 *)(ctx + GLD_mutex));
-  iVar22 = face;
+  scratchInt22 = face;
   levelRecordB = ((int (*)())gldTextureFormatEntryForLevel)(ctx,texture,face,level,0);
   if ((levelRecordB == 0) || ((*(uint *)(levelRecordB + 0x18) & 0x10000) == 0)) goto LAB_00037930;
   levelOffset = levelOffset + texture[0xc];
   levelWidth = (uint)*(ushort *)(levelOffset + 0xa4);
-  uVar42 = (uint)*(ushort *)(levelOffset + 0xa6);
+  scratchUint42 = (uint)*(ushort *)(levelOffset + 0xa6);
   if (levelWidth == 0) {
-    fVar4 = 1.0;
+    scratchFloat4 = 1.0;
     levelWidth = 1;
   }
   else {
-    uStack_1c8 = 0x43300000;
-    uStack_1c4 = levelWidth ^ 0x80000000;
-    fVar4 = (float)((double)CONCAT44(0x43300000,uStack_1c4) - 4503601774854144.0);
+    scratchStack1c8 = 0x43300000;
+    scratchStack1c4 = levelWidth ^ 0x80000000;
+    scratchFloat4 = (float)((double)CONCAT44(0x43300000,scratchStack1c4) - 4503601774854144.0);
   }
-  if (uVar42 == 0) {
-    uVar42 = 1;
-    fVar5 = 1.0;
+  if (scratchUint42 == 0) {
+    scratchUint42 = 1;
+    scratchFloat5 = 1.0;
   }
   else {
-    uStack_1bc = uVar42 ^ 0x80000000;
-    uStack_1c0 = 0x43300000;
-    fVar5 = (float)((double)CONCAT44(0x43300000,uStack_1bc) - 4503601774854144.0);
+    scratchStack1bc = scratchUint42 ^ 0x80000000;
+    scratchStack1c0 = 0x43300000;
+    scratchFloat5 = (float)((double)CONCAT44(0x43300000,scratchStack1bc) - 4503601774854144.0);
   }
   xoffsetI2dLoB = xOffset ^ 0x80000000;
   widthI2dLoB = width ^ 0x80000000;
@@ -6786,67 +6786,67 @@ LAB_00037930:
   yoffsetI2dHiB = 0x43300000;
   widthI2dHiB = 0x43300000;
   heightI2dLoB = height ^ 0x80000000;
-  fVar6 = 0.0;
+  scratchFloat6 = 0.0;
   xoffsetF = (float)((double)CONCAT44(0x43300000,xoffsetI2dLoB) - 4503601774854144.0);
   yoffsetF = (float)((double)CONCAT44(0x43300000,yoffsetI2dLoB) - 4503601774854144.0);
-  fVar7 = xoffsetF + 0.0;
-  fVar16 = yoffsetF + 0.0;
-  fVar17 = (float)((double)CONCAT44(0x43300000,heightI2dLoB) - 4503601774854144.0) + yoffsetF;
-  fVar14 = (float)((double)CONCAT44(0x43300000,widthI2dLoB) - 4503601774854144.0) + xoffsetF;
-  fVar15 = fVar7;
-  if (0.0 < fVar7) {
-    fVar15 = xoffsetF + fVar7;
-    fVar6 = fVar7;
+  scratchFloat7 = xoffsetF + 0.0;
+  scratchFloat16 = yoffsetF + 0.0;
+  scratchFloat17 = (float)((double)CONCAT44(0x43300000,heightI2dLoB) - 4503601774854144.0) + yoffsetF;
+  scratchFloat14 = (float)((double)CONCAT44(0x43300000,widthI2dLoB) - 4503601774854144.0) + xoffsetF;
+  scratchFloat15 = scratchFloat7;
+  if (0.0 < scratchFloat7) {
+    scratchFloat15 = xoffsetF + scratchFloat7;
+    scratchFloat6 = scratchFloat7;
   }
-  fVar7 = 0.0;
-  if (0.0 < fVar16) {
-    fVar7 = fVar16;
-    fVar16 = yoffsetF + fVar16;
+  scratchFloat7 = 0.0;
+  if (0.0 < scratchFloat16) {
+    scratchFloat7 = scratchFloat16;
+    scratchFloat16 = yoffsetF + scratchFloat16;
   }
-  fVar12 = fVar14 - fVar4;
-  fVar18 = fVar17 - fVar5;
-  fVar13 = fVar4;
-  if (fVar12 < 0.0) {
-    fVar13 = fVar14;
+  scratchFloat12 = scratchFloat14 - scratchFloat4;
+  scratchFloat18 = scratchFloat17 - scratchFloat5;
+  scratchFloat13 = scratchFloat4;
+  if (scratchFloat12 < 0.0) {
+    scratchFloat13 = scratchFloat14;
   }
-  fVar14 = fVar5;
-  if (fVar18 < 0.0) {
-    fVar14 = fVar17;
+  scratchFloat14 = scratchFloat5;
+  if (scratchFloat18 < 0.0) {
+    scratchFloat14 = scratchFloat17;
   }
-  if (-fVar12 < 0.0) {
-    fVar13 = fVar4;
+  if (-scratchFloat12 < 0.0) {
+    scratchFloat13 = scratchFloat4;
   }
-  if (-fVar18 < 0.0) {
-    fVar14 = fVar5;
+  if (-scratchFloat18 < 0.0) {
+    scratchFloat14 = scratchFloat5;
   }
-  if ((fVar13 <= fVar6) || (fVar14 <= fVar7)) {
+  if ((scratchFloat13 <= scratchFloat6) || (scratchFloat14 <= scratchFloat7)) {
     _pthread_mutex_unlock(*(undefined4 *)(ctx + GLD_mutex));
     return 1;
   }
   if (((((*(byte *)((int)texture + 0x39) & 7) != 0) &&
-       (iVar22 = ((int (*)())gldTextureMakeResident)(ctx,texture,iVar22,*(byte *)((int)texture + 0x39) & 7,"",sizeOutPtr),
-       iVar22 == 0)) ||
-      ((*(int *)sourceSurface[1] != 0 && (iVar22 = gld_prepareBufferBacking(ctx,sourceSurface,1), iVar22 == 0)))) ||
-     (((int *)sourceSurface[2] == (int *)0x0 || (iVar22 = *(int *)sourceSurface[2], iVar22 == 0))))
+       (scratchInt22 = ((int (*)())gldTextureMakeResident)(ctx,texture,scratchInt22,*(byte *)((int)texture + 0x39) & 7,"",sizeOutPtr),
+       scratchInt22 == 0)) ||
+      ((*(int *)sourceSurface[1] != 0 && (scratchInt22 = gld_prepareBufferBacking(ctx,sourceSurface,1), scratchInt22 == 0)))) ||
+     (((int *)sourceSurface[2] == (int *)0x0 || (scratchInt22 = *(int *)sourceSurface[2], scratchInt22 == 0))))
   goto LAB_00037930;
-  if (*(char *)(iVar22 + 0x16) != '\x06') {
+  if (*(char *)(scratchInt22 + 0x16) != '\x06') {
     if (pixelFormat == 0x1908) {
       if (pixelType != ((unsigned char *)0x00001406)) goto LAB_00037930;
     }
     else if ((pixelFormat != 0x80e1) || (pixelType != (undefined *)0x8367)) goto LAB_00037930;
   }
-  pcStack_a8 = IrInt2F__dtor;
-  iVar22 = (srcHwFormat & 0xff) * 0x24;
-  alignedOk = ((srcData | uStack_248) & 0x1f) == 0;
-  bVar46 = alignedOk << 1;
+  scratchStacka8 = IrInt2F__dtor;
+  scratchInt22 = (srcHwFormat & 0xff) * 0x24;
+  alignedOk = ((srcData | scratchStack248) & 0x1f) == 0;
+  scratchFlag46 = alignedOk << 1;
   if (!alignedOk) goto LAB_00037930;
   commandStreamB = ctx + GLD_commandStream;
-  uVar28 = (**(code **)(ctx + GLD_streamAllocate))(commandStreamB,0x343);
-  *(undefined4 *)(ctx + GLD_streamCurrent) = uVar28;
-  puVar29 = (uint *)((int (*)())FUN_00030840)(ctx,uVar28,texture);
-  texPacket = (undefined4 *)((uint)(puVar29 + 0xb) & 0xffffffe0);
-  *puVar29 = (((int)texPacket - (int)puVar29) + -8) * 0x4000 | 0xc0001000;
-  texPacket[-1] = (int)texPacket - (int)puVar29;
+  scratchUint28 = (**(code **)(ctx + GLD_streamAllocate))(commandStreamB,0x343);
+  *(undefined4 *)(ctx + GLD_streamCurrent) = scratchUint28;
+  scratchPtr29 = (uint *)((int (*)())FUN_00030840)(ctx,scratchUint28,texture);
+  texPacket = (undefined4 *)((uint)(scratchPtr29 + 0xb) & 0xffffffe0);
+  *scratchPtr29 = (((int)texPacket - (int)scratchPtr29) + -8) * 0x4000 | 0xc0001000;
+  texPacket[-1] = (int)texPacket - (int)scratchPtr29;
   lastHeader = *(uint **)(ctx + GLD_lastHeader);
   *lastHeader = (int)texPacket - (int)lastHeader >> 2 | *lastHeader;
   *(undefined4 **)(ctx + GLD_lastHeader) = texPacket;
@@ -6855,151 +6855,151 @@ LAB_00037930:
   surfaceRefPtr = surfaceObjectRef + 4;
   do {
     if (reservation != '\0') {
-      iVar20 = storeWordConditionalIndexed(*surfaceRefPtr + 0x10000,0,surfaceRefPtr);
-      *surfaceRefPtr = iVar20;
-      bVar46 = 2;
+      scratchInt20 = storeWordConditionalIndexed(*surfaceRefPtr + 0x10000,0,surfaceRefPtr);
+      *surfaceRefPtr = scratchInt20;
+      scratchFlag46 = 2;
     }
     hwContextTemplate = PTR_DAT_001e88d0;
-  } while (!(bool)(bVar46 >> 1 & 1));
+  } while (!(bool)(scratchFlag46 >> 1 & 1));
   texPacket[2] = *surfaceObjectRef;
-  iVar20 = *(int *)*sourceSurface;
+  scratchInt20 = *(int *)*sourceSurface;
   texPacket[4] = level | face << 0x10;
-  texPacket[3] = srcData - iVar20;
+  texPacket[3] = srcData - scratchInt20;
   _memcpy(texPacket + 5,hwContextTemplate,0x2f4);
-  iVar20 = texture[0xd];
-  if ((iVar20 == 0) || ((*(byte *)(iVar20 + 0x15) & 0x18) == 0)) {
-    iVar34 = 0x20;
+  scratchInt20 = texture[0xd];
+  if ((scratchInt20 == 0) || ((*(byte *)(scratchInt20 + 0x15) & 0x18) == 0)) {
+    scratchInt34 = 0x20;
   }
   else {
-    iVar34 = 0x20 / (1 << (*(uint *)(&DAT_001d9f4c + (uint)*(byte *)(texture + 0xe) * 0x24) >> 0x1c
+    scratchInt34 = 0x20 / (1 << (*(uint *)(&DAT_001d9f4c + (uint)*(byte *)(texture + 0xe) * 0x24) >> 0x1c
                           & 3));
   }
-  iVar34 = iVar34 >> (*(uint *)(levelRecordB + 0x14) & 7);
-  if ((iVar20 == 0) || (iVar32 = 0, *(char *)(iVar20 + 0x16) != '\x06')) {
-    iVar20 = *texture + 0x40 + (face * 0xd + level) * 0x20;
-    iVar32 = zOffset * *(int *)(iVar20 + 0x14) + *(int *)(iVar20 + 8);
+  scratchInt34 = scratchInt34 >> (*(uint *)(levelRecordB + 0x14) & 7);
+  if ((scratchInt20 == 0) || (scratchInt32 = 0, *(char *)(scratchInt20 + 0x16) != '\x06')) {
+    scratchInt20 = *texture + 0x40 + (face * 0xd + level) * 0x20;
+    scratchInt32 = zOffset * *(int *)(scratchInt20 + 0x14) + *(int *)(scratchInt20 + 8);
   }
   if (*(char *)(texture[0xc] + 0x6d) == '\0') {
-    uVar26 = (levelWidth + iVar34) - 1 & -iVar34;
+    scratchUint26 = (levelWidth + scratchInt34) - 1 & -scratchInt34;
   }
   else {
-    uVar26 = (uint)*(ushort *)((int)texture + 0x3e);
+    scratchUint26 = (uint)*(ushort *)((int)texture + 0x3e);
   }
-  fVar4 = (fVar13 + xoffsetF) - fVar15;
-  fVar5 = (fVar14 + yoffsetF) - fVar16;
-  fVar17 = fVar4 - 1.0;
-  texPacket[0xa5] = *(uint *)(&DAT_001d9f4c + iVar22) >> 0x1e | texPacket[0xa5] & 0xfffffffc;
-  if (2.1474836e+09 <= fVar17) {
-    fctiwzSlot1 = (longlong)(int)(fVar17 - 2.1474836e+09);
-    uVar24 = (int)(fVar17 - 2.1474836e+09) + 0x80000000;
-  }
-  else {
-    uVar24 = (uint)(int)fVar17;
-    fctiwzSlot0 = (longlong)(int)uVar24;
-  }
-  fVar17 = fVar5 - 1.0;
-  if (2.1474836e+09 <= fVar17) {
-    fctiwzSlot3 = (longlong)(int)(fVar17 - 2.1474836e+09);
-    uVar35 = (int)(fVar17 - 2.1474836e+09) + 0x80000000;
+  scratchFloat4 = (scratchFloat13 + xoffsetF) - scratchFloat15;
+  scratchFloat5 = (scratchFloat14 + yoffsetF) - scratchFloat16;
+  scratchFloat17 = scratchFloat4 - 1.0;
+  texPacket[0xa5] = *(uint *)(&DAT_001d9f4c + scratchInt22) >> 0x1e | texPacket[0xa5] & 0xfffffffc;
+  if (2.1474836e+09 <= scratchFloat17) {
+    fctiwzSlot1 = (longlong)(int)(scratchFloat17 - 2.1474836e+09);
+    scratchUint24 = (int)(scratchFloat17 - 2.1474836e+09) + 0x80000000;
   }
   else {
-    uVar35 = (uint)(int)fVar17;
-    fctiwzSlot2 = (longlong)(int)uVar35;
+    scratchUint24 = (uint)(int)scratchFloat17;
+    fctiwzSlot0 = (longlong)(int)scratchUint24;
   }
-  texPacket[0xab] = uVar24 & 0x7ff | (uVar35 & 0x7ff) << 0xb | 0x80000000;
-  uVar24 = *(uint *)(&DAT_001d9f50 + iVar22);
-  uVar35 = *(uint *)(&DAT_001d9f54 + iVar22);
+  scratchFloat17 = scratchFloat5 - 1.0;
+  if (2.1474836e+09 <= scratchFloat17) {
+    fctiwzSlot3 = (longlong)(int)(scratchFloat17 - 2.1474836e+09);
+    scratchUint35 = (int)(scratchFloat17 - 2.1474836e+09) + 0x80000000;
+  }
+  else {
+    scratchUint35 = (uint)(int)scratchFloat17;
+    fctiwzSlot2 = (longlong)(int)scratchUint35;
+  }
+  texPacket[0xab] = scratchUint24 & 0x7ff | (scratchUint35 & 0x7ff) << 0xb | 0x80000000;
+  scratchUint24 = *(uint *)(&DAT_001d9f50 + scratchInt22);
+  scratchUint35 = *(uint *)(&DAT_001d9f54 + scratchInt22);
   texPacket[0xad] =
-       uVar24 >> 7 & 0x1f | uVar35 >> 3 & 0x400000 | (uVar24 & 0x70) << 5 | (uVar24 & 0xe) << 0xb |
-       uVar35 >> 0xe & 0x38000 | uVar35 >> 8 & 0x1c0000;
-  uVar24 = *(uint *)(&DAT_001d9f48 + iVar22);
-  if (2.1474836e+09 <= fVar4) {
-    fctiwzSlot5 = (longlong)(int)(fVar4 - 2.1474836e+09);
-    iVar22 = (int)(fVar4 - 2.1474836e+09) + -0x80000000;
+       scratchUint24 >> 7 & 0x1f | scratchUint35 >> 3 & 0x400000 | (scratchUint24 & 0x70) << 5 | (scratchUint24 & 0xe) << 0xb |
+       scratchUint35 >> 0xe & 0x38000 | scratchUint35 >> 8 & 0x1c0000;
+  scratchUint24 = *(uint *)(&DAT_001d9f48 + scratchInt22);
+  if (2.1474836e+09 <= scratchFloat4) {
+    fctiwzSlot5 = (longlong)(int)(scratchFloat4 - 2.1474836e+09);
+    scratchInt22 = (int)(scratchFloat4 - 2.1474836e+09) + -0x80000000;
   }
   else {
-    iVar22 = (int)fVar4;
-    fctiwzSlot4 = (longlong)iVar22;
+    scratchInt22 = (int)scratchFloat4;
+    fctiwzSlot4 = (longlong)scratchInt22;
   }
-  if (2.1474836e+09 <= fVar5) {
-    fctiwzSlot7 = (longlong)(int)(fVar5 - 2.1474836e+09);
-    iVar20 = (int)(fVar5 - 2.1474836e+09) + -0x80000000;
+  if (2.1474836e+09 <= scratchFloat5) {
+    fctiwzSlot7 = (longlong)(int)(scratchFloat5 - 2.1474836e+09);
+    scratchInt20 = (int)(scratchFloat5 - 2.1474836e+09) + -0x80000000;
   }
   else {
-    iVar20 = (int)fVar5;
-    fctiwzSlot6 = (longlong)iVar20;
+    scratchInt20 = (int)scratchFloat5;
+    fctiwzSlot6 = (longlong)scratchInt20;
   }
-  texPacket[0x9f] = iVar32;
+  texPacket[0x9f] = scratchInt32;
   texPacket[0xaf] =
-       ((int)uStack_248 >> (uVar24 & 7)) - 1U & 0x3fff | (iVar22 + -1) * 0x10 & 0xffff8000U |
-       (iVar20 + -1) * 0x20 & 0xffff0000U;
+       ((int)scratchStack248 >> (scratchUint24 & 7)) - 1U & 0x3fff | (scratchInt22 + -1) * 0x10 & 0xffff8000U |
+       (scratchInt20 + -1) * 0x20 & 0xffff0000U;
   texPacket[0xa5] = (srcData - sourceBase) * 0x20 | texPacket[0xa5] & 0x1f;
   storageRecord = texture[0xd];
   if ((storageRecord != 0) && ((*(byte *)(storageRecord + 0x15) & 4) != 0)) {
-    uVar44 = level - *(byte *)(texture[0xc] + 0x69);
+    scratchUint44 = level - *(byte *)(texture[0xc] + 0x69);
     if ((*(byte *)(storageRecord + 0x15) & 0x18) == 0) {
-      iVar20 = 1;
-      iVar22 = 0x100;
+      scratchInt20 = 1;
+      scratchInt22 = 0x100;
     }
     else {
-      iVar20 = 1 << (*(uint *)(((unsigned char *)0x00003544) +
-                              (int)(pcStack_a8 + (uint)*(byte *)(texture + 0xe) * 0x24)) >> 0x1c & 3
+      scratchInt20 = 1 << (*(uint *)(((unsigned char *)0x00003544) +
+                              (int)(scratchStacka8 + (uint)*(byte *)(texture + 0xe) * 0x24)) >> 0x1c & 3
                     );
-      iVar22 = 0x20 / iVar20 << 3;
+      scratchInt22 = 0x20 / scratchInt20 << 3;
     }
-    if ((iVar22 <= *(int *)(*texture + 0xc) >> (uVar44 & 0x3f)) &&
-       (iVar22 = 1, iVar20 << 3 <= (int)(uint)*(ushort *)(*texture + 0x16) >> (uVar44 & 0x3f)))
+    if ((scratchInt22 <= *(int *)(*texture + 0xc) >> (scratchUint44 & 0x3f)) &&
+       (scratchInt22 = 1, scratchInt20 << 3 <= (int)(uint)*(ushort *)(*texture + 0x16) >> (scratchUint44 & 0x3f)))
     goto LAB_000371ac;
   }
-  iVar22 = 0;
+  scratchInt22 = 0;
 LAB_000371ac:
   if (storageRecord != 0) {
-    uVar44 = (*(byte *)(storageRecord + 0x15) & 0x18) << 0xe;
+    scratchUint44 = (*(byte *)(storageRecord + 0x15) & 0x18) << 0xe;
   }
   else {
-    uVar44 = 0;
+    scratchUint44 = 0;
   }
-  uVar21 = texPacket[0x8f];
+  scratchUint21 = texPacket[0x8f];
   texPacket[0xa1] =
-       uVar44 | uVar26 & 0x3ffe | iVar22 << 0x10 | *(uint *)(levelRecordB + 0x18) >> 0xb & 0x180000 |
+       scratchUint44 | scratchUint26 & 0x3ffe | scratchInt22 << 0x10 | *(uint *)(levelRecordB + 0x18) >> 0xb & 0x180000 |
        (*(uint *)(levelRecordB + 0x18) & 0x3c00) << 0xb;
-  uVar26 = (*(uint *)(levelRecordB + 0x18) & 0x18) << 5;
-  texPacket[0x8f] = uVar26 | uVar21 & 0xfffffcff;
-  uVar44 = (*(uint *)(levelRecordB + 0x18) & 6) << 9;
-  texPacket[0x8f] = uVar44 | uVar26 | uVar21 & 0xfffff0ff;
-  uVar24 = *(uint *)(levelRecordB + 0x1c) >> 0x12 & 0x3000;
-  texPacket[0x8f] = uVar24 | uVar44 | uVar26 | uVar21 & 0xffffc0ff;
-  uVar35 = *(uint *)(levelRecordB + 0x1c) >> 0xe & 0xc000;
-  texPacket[0x8f] = uVar35 | uVar24 | uVar44 | uVar26 | uVar21 & 0xffff00ff;
+  scratchUint26 = (*(uint *)(levelRecordB + 0x18) & 0x18) << 5;
+  texPacket[0x8f] = scratchUint26 | scratchUint21 & 0xfffffcff;
+  scratchUint44 = (*(uint *)(levelRecordB + 0x18) & 6) << 9;
+  texPacket[0x8f] = scratchUint44 | scratchUint26 | scratchUint21 & 0xfffff0ff;
+  scratchUint24 = *(uint *)(levelRecordB + 0x1c) >> 0x12 & 0x3000;
+  texPacket[0x8f] = scratchUint24 | scratchUint44 | scratchUint26 | scratchUint21 & 0xffffc0ff;
+  scratchUint35 = *(uint *)(levelRecordB + 0x1c) >> 0xe & 0xc000;
+  texPacket[0x8f] = scratchUint35 | scratchUint24 | scratchUint44 | scratchUint26 | scratchUint21 & 0xffff00ff;
   texPacket[0x8f] =
        *(uint *)(levelRecordB + 0x18) >> 5 & 0x1f |
-       uVar35 | uVar24 | uVar44 | uVar26 | uVar21 & 0xffff00e0;
-  sVar8 = *(short *)(textureState + 2);
-  if (((sVar8 != 0x1908) && (sVar8 != 0x1906)) && (sVar8 != 0x190a)) {
+       scratchUint35 | scratchUint24 | scratchUint44 | scratchUint26 | scratchUint21 & 0xffff00e0;
+  scratchShort8 = *(short *)(textureState + 2);
+  if (((scratchShort8 != 0x1908) && (scratchShort8 != 0x1906)) && (scratchShort8 != 0x190a)) {
     texPacket[0x5b] = texPacket[0x5b] & 0xfffe3fff | 0x18000;
   }
-  texPacket[0xb8] = levelWidth - 1 & 0x1fff | (uVar42 - 1) * 0x2000 & 0x3ffe000;
+  texPacket[0xb8] = levelWidth - 1 & 0x1fff | (scratchUint42 - 1) * 0x2000 & 0x3ffe000;
   if ((*(uint *)(levelRecordB + 0x20) & 0x400000) != 0) {
     texPacket[0x23] = 0;
   }
   packetEndB = texPacket + 0xce;
   texPacket[199] = ((unsigned char *)0x00001087U);
   texPacket[0xc2] = 0x31080;
-  texPacket[0xc6] = (1.0 / fVar5) * fVar16;
-  iVar43 = (int)((fVar13 - fVar6) * 6.0);
-  fctiwzSlot8 = (longlong)iVar43;
-  texPacket[0xc5] = (fVar13 + xoffsetF) * (1.0 / fVar4);
-  texPacket[0xc3] = fVar15 * (1.0 / fVar4);
-  texPacket[0xc4] = (fVar14 + yoffsetF) * (1.0 / fVar5);
-  uVar26 = (uint)(int)((fVar14 - fVar7) * 6.0);
-  fctiwzSlot9 = (longlong)(int)uVar26;
+  texPacket[0xc6] = (1.0 / scratchFloat5) * scratchFloat16;
+  scratchInt43 = (int)((scratchFloat13 - scratchFloat6) * 6.0);
+  fctiwzSlot8 = (longlong)scratchInt43;
+  texPacket[0xc5] = (scratchFloat13 + xoffsetF) * (1.0 / scratchFloat4);
+  texPacket[0xc3] = scratchFloat15 * (1.0 / scratchFloat4);
+  texPacket[0xc4] = (scratchFloat14 + yoffsetF) * (1.0 / scratchFloat5);
+  scratchUint26 = (uint)(int)((scratchFloat14 - scratchFloat7) * 6.0);
+  fctiwzSlot9 = (longlong)(int)scratchUint26;
   texPacket[0xca] = 0x10031;
   texPacket[0xc9] = 0xc0033500;
-  texPacket[0xcb] = (fVar6 + fVar13) * 0.5;
-  texPacket[0xcc] = (fVar7 + fVar14) * 0.5;
+  texPacket[0xcb] = (scratchFloat6 + scratchFloat13) * 0.5;
+  texPacket[0xcc] = (scratchFloat7 + scratchFloat14) * 0.5;
   texPacket[0xcd] = 0;
-  texPacket[200] = iVar43 << 0x10 | uVar26;
-  texPacket[1] = (int)packetEndB - (int)puVar29 >> 2;
+  texPacket[200] = scratchInt43 << 0x10 | scratchUint26;
+  texPacket[1] = (int)packetEndB - (int)scratchPtr29 >> 2;
   lastHeader = *(uint **)(ctx + GLD_lastHeader);
   *lastHeader = (int)packetEndB - (int)lastHeader >> 2 | *lastHeader;
   *(undefined4 **)(ctx + GLD_lastHeader) = packetEndB;
@@ -7077,35 +7077,35 @@ LAB_000371ac:
   fg_fog_blend = *(uint *)(ctx + GLD_fg_fog_blend);
   texPacket[0x100] = fg_fog_blend;
   if ((*(uint *)(((unsigned char *)0x0000352c) +
-                (int)(pcStack_a8 + (uint)(byte)((unsigned char *)GLD_colorFormatIndex)[ctx] * 0x24 + 0x18)) & 0x8000) ==
+                (int)(scratchStacka8 + (uint)(byte)((unsigned char *)GLD_colorFormatIndex)[ctx] * 0x24 + 0x18)) & 0x8000) ==
       0) {
     texPacket[0x100] = fg_fog_blend & 0xfffffffe;
   }
   texPacket[0x101] = ((unsigned char *)0x000012f5U);
   fg_alpha_func = *(uint *)(ctx + GLD_fg_alpha_func);
   texPacket[0x102] = fg_alpha_func;
-  uVar26 = *(uint *)(((unsigned char *)0x0000352c) +
-                    (int)(pcStack_a8 + (uint)(byte)((unsigned char *)GLD_colorFormatIndex)[ctx] * 0x24 + 0x18)) & 0x8000
+  scratchUint26 = *(uint *)(((unsigned char *)0x0000352c) +
+                    (int)(scratchStacka8 + (uint)(byte)((unsigned char *)GLD_colorFormatIndex)[ctx] * 0x24 + 0x18)) & 0x8000
   ;
-  if (uVar26 == 0) {
+  if (scratchUint26 == 0) {
     texPacket[0x102] = fg_alpha_func & 0xfffff7ff;
   }
   texPacket[0x103] = ((unsigned char *)0x000010a2U);
   ga_poly_mode = *(undefined4 *)(ctx + GLD_ga_poly_mode);
   texPacket[0x105] = ((unsigned char *)0x00001381U);
   texPacket[0x104] = ga_poly_mode;
-  uVar44 = *(uint *)(ctx + GLD_rb3d_blendcntl);
-  texPacket[0x106] = uVar44;
+  scratchUint44 = *(uint *)(ctx + GLD_rb3d_blendcntl);
+  texPacket[0x106] = scratchUint44;
   if ((*(uint *)(((unsigned char *)0x0000352c) +
-                (int)(pcStack_a8 + (uint)(byte)((unsigned char *)GLD_colorFormatIndex)[ctx] * 0x24 + 0x18)) & 0x4000) ==
+                (int)(scratchStacka8 + (uint)(byte)((unsigned char *)GLD_colorFormatIndex)[ctx] * 0x24 + 0x18)) & 0x4000) ==
       0) {
-    texPacket[0x106] = uVar44 & 0xfffffffc;
+    texPacket[0x106] = scratchUint44 & 0xfffffffc;
   }
   texPacket[0x107] = ((unsigned char *)0x0000109eU);
-  uVar31 = 0x110f8;
-  uVar28 = *(undefined4 *)(ctx + 0x1d6c);
+  scratchUint31 = 0x110f8;
+  scratchUint28 = *(undefined4 *)(ctx + 0x1d6c);
   texPacket[0x109] = ((unsigned char *)0x00001096U);
-  texPacket[0x108] = uVar28;
+  texPacket[0x108] = scratchUint28;
   ga_color_control = *(undefined4 *)(ctx + GLD_ga_color_control);
   texPacket[0x10b] = ((unsigned char *)0x00001041U);
   texPacket[0x108] = ga_color_control;
@@ -7199,13 +7199,13 @@ LAB_000371ac:
   texPacket[0x189] = *(undefined4 *)(ctx + GLD_ga_point_s1);
   texPacket[0x18a] = *(undefined4 *)(ctx + GLD_ga_point_t1);
   FUN_0004c100(texPacket + 0xd0,commandStreamB);
-  uVar28 = ((int (*)())FUN_000308c0)(ctx,texPacket + 0x18d);
-  *(undefined4 *)(ctx + GLD_streamCurrent) = uVar28;
-  (**(code **)(ctx + GLD_streamSetCurrent))(commandStreamB,uVar28);
+  scratchUint28 = ((int (*)())FUN_000308c0)(ctx,texPacket + 0x18d);
+  *(undefined4 *)(ctx + GLD_streamCurrent) = scratchUint28;
+  (**(code **)(ctx + GLD_streamSetCurrent))(commandStreamB,scratchUint28);
   _pthread_mutex_unlock(*(undefined4 *)(ctx + GLD_mutex));
   if (((*(uint *)(texture[0xc] + 0x48) & 0x8000) != 0) &&
      (level == *(byte *)(texture[0xc] + 0x5e))) {
-    ((int (*)())glGenerateMipmap_impl)(ctx,texture,face,uVar26,uVar31);
+    ((int (*)())glGenerateMipmap_impl)(ctx,texture,face,scratchUint26,scratchUint31);
     return 1;
   }
   return 1;
@@ -10526,8 +10526,8 @@ int gldDeleteFragmentShaderObject(param_1, param_2)
  * large PPC links) does not silently reconcile this the way stock ld did. */
 asm(".globl glGenerateMipmap_impl");
 asm(".set glGenerateMipmap_impl, _glGenerateMipmap_impl");
-asm(".globl FUN_000353a0");
-asm(".set FUN_000353a0, _FUN_000353a0");
+asm(".globl glCopyTexSubImage_impl");
+asm(".set glCopyTexSubImage_impl, _glCopyTexSubImage_impl");
 asm(".globl glTexSubImage_impl");
 asm(".set glTexSubImage_impl, _glTexSubImage_impl");
 asm(".globl gldPrimInlineLineStrip");

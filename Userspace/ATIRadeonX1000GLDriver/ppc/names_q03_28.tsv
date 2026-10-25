@@ -1,0 +1,4 @@
+local	arbValidateProgram	local_98	hasFogOption	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbValidateProgram	local_d8	unitTarget	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbValidateProgram	param_3	sourceLength	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbValidateProgram	param_4	sourceText	INFERRED	role read off the function body (see notes_gld_q03.md)

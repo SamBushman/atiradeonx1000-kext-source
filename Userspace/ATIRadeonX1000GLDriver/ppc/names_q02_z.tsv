@@ -1,0 +1,79 @@
+local	vpUploadConstantsWithFog	param_1	glContext	INFERRED	GL context
+local	vpUploadConstantsWithFog	param_2	shader	INFERRED	EXT_vertex_shader object (byte +0x7a: program uses fog)
+local	vpUploadConstantsWithFog	param_3	programState	INFERRED	hardware program record: +0x14 constant base register, +0x5c constant count, +0x60 fog constant slot
+local	vpUploadConstantsWithFog	param_4	constantBlock	INFERRED	program constant block (16 bytes per constant) that is uploaded
+local	vpUploadConstantsWithFog	param_5	uploadAll	INFERRED	non-zero: upload every constant; zero: with fog active only the fog constant is re-uploaded
+local	vpUploadConstantsWithFog	sVar1	fogMode	INFERRED	GL fog mode enum from the GL state extension: 0x800 GL_EXP, 0x801 GL_EXP2, 0x2601 GL_LINEAR
+local	vpUploadConstantsWithFog	iVar5	fogSlot	INFERRED	programState+0x60: constant slot that receives the fog parameters
+use	vpUploadConstantsWithFog	iVar4	constantCount	INFERRED	programState+0x5c: number of constant vectors	^\s*iVar4\ =\ \*\(int\ \*\)\(param_3\ \+\ 0x5c\);$	+2
+use	vpUploadConstantsWithFog	iVar4	constantCount	INFERRED	programState+0x5c: number of constant vectors	^\s*iVar4\ =\ \*\(int\ \*\)\(0x00002748\ \+\ param_1\ \+\ 4\)\ \+\ 0x1c;$	+2
+use	vpUploadConstantsWithFog	iVar4	constantCount	INFERRED	programState+0x5c: number of constant vectors	^\s*iVar4\ =\ \*\(int\ \*\)\(param_3\ \+\ 0x5c\);$@2	+1
+use	vpUploadConstantsWithFog	iVar4	constantCount	INFERRED	programState+0x5c: number of constant vectors	^\s*puVar3\ =\ \(undefined4\ \*\)\(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x2758\)\)\(param_1,iVar4\ \*\ 4\ \+\ 3\);$	+1
+use	vpUploadConstantsWithFog	iVar4	constantCount	INFERRED	programState+0x5c: number of constant vectors	^\s*\*\(uint\ \*\)\(\*\(int\ \*\)\(0x00002748\ \+\ param_1\ \+\ 4\)\ \+\ 8\)\ =\ \(iVar4\ \*\ 4\ \+\ \-1\)\ \*\ 0x10000\ \|\ 0x8882;$	+2
+use	vpUploadConstantsWithFog	iVar4	constantCount	INFERRED	programState+0x5c: number of constant vectors	^\s*iVar4\ =\ iVar4\ \*\ 0x10\ \+\ \*\(int\ \*\)\(0x00002748\ \+\ param_1\ \+\ 4\)\ \+\ 0xc;$	+2
+use	vpUploadConstantsWithFog	iVar4	constantCount	INFERRED	programState+0x5c: number of constant vectors	^\s*\(\*UNRECOVERED_JUMPTABLE\)\(param_1,iVar4\);$	+1
+use	vpUploadConstantsWithFog	iVar4	glStateExt	INFERRED	*(*(glContext + 4) + 0x10): GL state extension block holding the fog parameters (+0x2df0 .. 0x2dfc)	^\s*iVar4\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 4\)\ \+\ 0x10\);$	+2
+use	vpUploadConstantsWithFog	iVar4	glStateExt	INFERRED	*(*(glContext + 4) + 0x10): GL state extension block holding the fog parameters (+0x2df0 .. 0x2dfc)	^\s*\-\(\*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x00002df0\)\ \+\ iVar4\)\ \*\ \*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x00002df0\)\ \+\ iVar4\)\);$	+1
+use	vpUploadConstantsWithFog	iVar4	glStateExt	INFERRED	*(*(glContext + 4) + 0x10): GL state extension block holding the fog parameters (+0x2df0 .. 0x2dfc)	^\s*\*\(float\ \*\)\(iVar2\ \+\ 4\)\ =\ \*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x00002df8\)\ \+\ iVar4\)\ \*\ \*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x00002dfc\)\ \+\ iVar4\);$	+2
+use	vpUploadConstantsWithFog	iVar4	glStateExt	INFERRED	*(*(glContext + 4) + 0x10): GL state extension block holding the fog parameters (+0x2df0 .. 0x2dfc)	^\s*\*\(float\ \*\)\(iVar2\ \+\ 8\)\ =\ \-\*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x00002df0\)\ \+\ iVar4\);$	+1
+use	vpUploadConstantsWithFog	iVar4	cmdEnd	INFERRED	command cursor after the packet; handed to the commit callback	^\s*iVar4\ =\ param_4\ \+\ iVar5\ \*\ 0x10;$	+1
+use	vpUploadConstantsWithFog	iVar4	cmdEnd	INFERRED	command cursor after the packet; handed to the commit callback	^\s*\*\(undefined4\ \*\)\(\*\(int\ \*\)\(0x00002748\ \+\ param_1\ \+\ 4\)\ \+\ 0x10\)\ =\ \*\(undefined4\ \*\)\(iVar4\ \+\ 4\);$	+3
+use	vpUploadConstantsWithFog	iVar2	fogConstant	INFERRED	constantBlock + fogSlot * 0x10: the fog constant vector being filled	^\s*iVar2\ =\ param_4\ \+\ iVar5\ \*\ 0x10;$	+3
+use	vpUploadConstantsWithFog	iVar2	fogConstant	INFERRED	constantBlock + fogSlot * 0x10: the fog constant vector being filled	^\s*iVar2\ =\ param_4\ \+\ iVar5\ \*\ 0x10;$@2	+3
+use	vpUploadConstantsWithFog	iVar2	fogConstant	INFERRED	constantBlock + fogSlot * 0x10: the fog constant vector being filled	^\s*iVar2\ =\ param_4\ \+\ iVar5\ \*\ 0x10;$@3	+3
+use	vpUploadConstantsWithFog	puVar3	cmdBuffer	INFERRED	command space returned by the glContext+0x2758 reserve callback	^\s*puVar3\ =\ \(undefined4\ \*\)\(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x2758\)\)\(param_1,7\);$	+3
+use	vpUploadConstantsWithFog	puVar3	cmdBuffer	INFERRED	command space returned by the glContext+0x2758 reserve callback	^\s*puVar3\ =\ \(undefined4\ \*\)\(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x2758\)\)\(param_1,iVar4\ \*\ 4\ \+\ 3\);$	+3
+local	vpUploadConstantsWithFog	UNRECOVERED_JUMPTABLE	commitCallback	INFERRED	glContext+0x275c: command buffer commit callback
+local	extvsBindShader	param_1	glContext	INFERRED	GL context
+local	extvsBindShader	param_2	shaderId	INFERRED	id of the EXT_vertex_shader object to bind
+local	extvsBindShader	iVar6	shaderTable	INFERRED	glContext+0x116c: shader table ([1] count, [3] array of 0x7c-byte shader objects)
+use	extvsBindShader	iVar2	refCount	INFERRED	reference count of the previously bound shader (+0xc)	^\s*iVar2\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001168\)\ \+\ param_1\)\ \+\ 0xc\);$	+3
+use	extvsBindShader	iVar2	shaderIndex	INFERRED	index of shaderId in the shader table, negative when it does not exist	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)FUN_00053a90\)\(iVar6,param_2\);$	+2
+use	extvsBindShader	iVar2	shaderIndex	INFERRED	index of shaderId in the shader table, negative when it does not exist	^\s*\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001188\)\ \+\ param_1\)\ =\ iVar2;$	+2
+use	extvsBindShader	iVar2	newShaderArray	INFERRED	grown shader array (0x7c bytes per shader) allocated through glContext+0xc	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ 0xc\)\)\(uVar1\ \*\ 0x7c\ \+\ 0x7c0\);$	+2
+use	extvsBindShader	iVar2	newShaderArray	INFERRED	grown shader array (0x7c bytes per shader) allocated through glContext+0xc	^\s*\(iVar2,\*\(undefined4\ \*\)\(iVar6\ \+\ 0xc\),\*\(int\ \*\)\(iVar6\ \+\ 4\)\ \*\ 0x7c\);$	+1
+use	extvsBindShader	iVar2	newShaderArray	INFERRED	grown shader array (0x7c bytes per shader) allocated through glContext+0xc	^\s*\*\(int\ \*\)\(iVar6\ \+\ 0xc\)\ =\ iVar2;$	+1
+use	extvsBindShader	iVar2	boundShader	INFERRED	address of the shader object that becomes current (glContext+0x1168)	^\s*iVar2\ =\ \*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001188\)\ \+\ param_1\)\ \*\ 0x7c\ \+\ \*\(int\ \*\)\(iVar6\ \+\ 0xc\);$	+3
+local	extvsBindShader	iVar3	shaderEntry	INFERRED	existing shader object at shaderIndex: cached program ids are copied from it to the context
+use	extvsBindShader	uVar1	shaderCount	INFERRED	number of shader objects in the table	^\s*uVar1\ =\ \*\(uint\ \*\)\(iVar6\ \+\ 4\);$	+3
+use	extvsBindShader	uVar1	shaderCount	INFERRED	number of shader objects in the table	^\s*uVar1\ =\ \*\(uint\ \*\)\(iVar6\ \+\ 4\);$@2	+1
+use	extvsBindShader	uVar1	shaderCount	INFERRED	number of shader objects in the table	^\s*FUN_00055b50\(param_1,uVar1\ \*\ 0x7c\ \+\ \*\(int\ \*\)\(iVar6\ \+\ 0xc\)\);$	+1
+use	extvsBindShader	uVar1	ctxFlags	INFERRED	glContext+0x44: context state flag word	^\s*uVar1\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x44\);$	+2
+use	extvsBindShader	uVar1	ctxFlags	INFERRED	glContext+0x44: context state flag word	^\s*if\ \(\(uVar1\ \&\ 0x100000\)\ ==\ 0\)\ \{$	+4
+local	extvsBindShader	uVar5	oldStateWord	INFERRED	glContext+0x18a4 before the vertex program enable bit (bit 2) is updated
+local	extvsBindShader	uVar4	vertexProgramEnable	INFERRED	new value of bit 2 of glContext+0x18a4
+local	FUN_0004fd80	param_1	glContext	INFERRED	GL context
+local	FUN_0004fd80	iVar12	shaderState	INFERRED	glContext+0x1154: shader state table ([3] is the table of 0x14-byte current vertex attribute entries)
+local	FUN_0004fd80	iVar11	currentShader	INFERRED	shaderState + 0x10, or glContext+0x1144 when glContext byte +0x1134 is zero: shader whose attribute enables are checked
+local	FUN_0004fd80	uVar14	attribIndex	INFERRED	0 .. 7: vertex attribute being compared
+local	FUN_0004fd80	iVar16	attribByteOffset	INFERRED	attribIndex * 0x14: offset of the attribute in the current attribute table
+local	FUN_0004fd80	iVar15	ctxCursor	INFERRED	glContext advanced by 0x10 per attribute: the cached copies at +0x1f38 are written through it
+local	FUN_0004fd80	puVar13	attribRegister	INFERRED	0x1300 + 4 * attribIndex: register address of the attribute constant
+local	FUN_0004fd80	iVar6	attribVectorOffset	INFERRED	attribIndex * 0x10: offset of the cached value in the per-attribute cache
+local	FUN_0004fd80	iVar10	cachedAttribPtr	INFERRED	glContext+0x1e70 state + attribVectorOffset: cache entry compared with the new value
+use	FUN_0004fd80	iVar9	cacheEntry	INFERRED	cache entry address used to store the third and fourth components	^\s*iVar9\ =\ iVar6\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x1e70\);$	+2
+use	FUN_0004fd80	iVar9	cacheEntry	INFERRED	cache entry address used to store the third and fourth components	^\s*puVar8\ =\ \(uint\ \*\)\(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x2758\)\)\(param_1,5,in_r5,in_r6,in_r7,in_r8,iVar9\);$	+1
+use	FUN_0004fd80	iVar9	cmdEnd	INFERRED	command cursor after the packet	^\s*iVar9\ =\ \*\(int\ \*\)\(0x00002748\ \+\ param_1\ \+\ 4\);$	+1
+use	FUN_0004fd80	iVar9	cmdEnd	INFERRED	command cursor after the packet	^\s*\*\(int\ \*\)\(0x00002748\ \+\ param_1\ \+\ 4\)\ =\ iVar9\ \+\ 0x14;$	+2
+local	FUN_0004fd80	uVar2	attribX	INFERRED	new value word 0 of the attribute (current attribute table + 4)
+local	FUN_0004fd80	uVar3	attribY	INFERRED	new value word 1 of the attribute
+local	FUN_0004fd80	uVar4	attribZ	INFERRED	new value word 2 of the attribute
+local	FUN_0004fd80	uVar5	attribW	INFERRED	new value word 3 of the attribute
+local	FUN_0004fd80	puVar8	cmdBuffer	INFERRED	command space returned by the glContext+0x2758 reserve callback (5 words)
+local	FUN_0004fd80	bVar1	moreAttribs	INFERRED	attribIndex != 7
+local	extvsStateCacheFreeAll	param_1	ctx	INFERRED	GL context
+local	extvsStateCacheFreeAll	param_2	slotTablePtr	INFERRED	address of the shader's slot table pointer
+local	extvsStateCacheFreeAll	param_3	freeEverything	INFERRED	non-zero: free every slot and the table entries; zero: free only the current slot's cached program record
+use	extvsStateCacheFreeAll	iVar5	slotTable	INFERRED	*slotTablePtr: table of per-slot cache entries	^\s*iVar5\ =\ \*param_2;$	+2
+use	extvsStateCacheFreeAll	iVar5	slotTable	INFERRED	*slotTablePtr: table of per-slot cache entries	^\s*piVar10\ =\ \*\(int\ \*\*\)\(iVar5\ \+\ iVar9\);$	+1
+use	extvsStateCacheFreeAll	iVar5	slotTable	INFERRED	*slotTablePtr: table of per-slot cache entries	^\s*iVar5\ =\ \*param_2;$@2	+1
+use	extvsStateCacheFreeAll	iVar5	chainIndex	INFERRED	0 .. 0x1f: hash chain being freed	^\s*iVar5\ =\ 0;$	+1
+use	extvsStateCacheFreeAll	iVar5	chainIndex	INFERRED	0 .. 0x1f: hash chain being freed	^\s*bVar2\ =\ iVar5\ !=\ 0x1f;$	+2
+local	extvsStateCacheFreeAll	uVar7	firstSlot	INFERRED	first slot to free: the current slot (ctx+0x118c) or 0
+local	extvsStateCacheFreeAll	uVar3	endSlot	INFERRED	one past the last slot to free
+local	extvsStateCacheFreeAll	iVar9	slotByteOffset	INFERRED	slot * 4: offset of the slot's entry in the slot table
+local	extvsStateCacheFreeAll	piVar10	slotEntry	INFERRED	per-slot cache entry: [0] current program record, [1..0x20] hash chain heads, [0x22] constant block
+local	extvsStateCacheFreeAll	piVar4	chainHead	INFERRED	cursor over the hash chain heads of slotEntry
+local	extvsStateCacheFreeAll	piVar1	nextChainHead	INFERRED	chainHead + 1
+local	extvsStateCacheFreeAll	iVar6	chainEntry	INFERRED	program record in the current hash chain (next link at +0x2b4)
+local	extvsStateCacheFreeAll	bVar2	moreChains	INFERRED	chainIndex != 0x1f

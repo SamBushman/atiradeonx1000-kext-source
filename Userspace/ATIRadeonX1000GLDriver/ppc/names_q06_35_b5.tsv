@@ -1,0 +1,46 @@
+use	FudoVs__createSchedModels	puVar2	vertexSchedModel	INFERRED	0x3c alloc stored at this+0x60	^\s*puVar2\ =\ \(undefined4\ \*\)FUN_000e1564\(param_2,0x3c\);$	+1
+use	FudoVs__createSchedModels	puVar2	vertexSchedModel	INFERRED	0x3c alloc stored at this+0x60	^\s*puVar2\[2\]\ =\ param_2;$	+8
+use	FudoVs__createSchedModels	puVar2	secondarySchedModel	INFERRED	0xc alloc stored at this+100	^\s*puVar2\ =\ \(undefined4\ \*\)FUN_000e1564\(param_2,0xc\);$	+1
+use	FudoVs__createSchedModels	puVar2	secondarySchedModel	INFERRED	0xc alloc stored at this+100	^\s*puVar2\[1\]\ =\ 1;$	+4
+use	FudoVs__createSchedModels	puVar3	vertexSchedVtable	INFERRED	PTR_DAT+8 vtable written to *obj	^\s*puVar3\ =\ PTR_DAT_001e90fc\ \+\ 8;$	+1
+use	FudoVs__createSchedModels	puVar3	vertexSchedVtable	INFERRED	PTR_DAT+8 vtable written to *obj	^\s*\*puVar2\ =\ puVar3;$	+1
+use	FUN_0011f7fc	uVar3	slotIndex	INFERRED	returned minus 1	^\s*uVar3\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x150\)\ \-\ iVar2;$	+1
+use	FUN_0011f7fc	uVar3	slotIndex	INFERRED	returned minus 1	^\s*uVar3\ =\ param_3\[1\];$@2	+2
+use	FUN_0011f7fc	uVar3	slotIndex	INFERRED	returned minus 1	^\s*return\ uVar3\ \-\ 1;$	+1
+use	FUN_0011f7fc	piVar1	vectorElementSlot	INFERRED	elem ptr of param_3 vector	^\s*piVar1\ =\ \(int\ \*\)\(uVar3\ \*\ 4\ \+\ param_3\[2\]\);$	+1
+use	FUN_0011f7fc	piVar1	vectorElementSlot	INFERRED	elem ptr of param_3 vector	^\s*piVar1\ =\ \(int\ \*\)FUN_0019423c\(param_3,uVar3\);$	+1
+use	FUN_0011f7fc	piVar1	vectorElementSlot	INFERRED	elem ptr of param_3 vector	^\s*\*piVar1\ =\ param_2;$	+1
+use	FUN_0011f7fc	iVar2	baseIndex	INFERRED	param_1+0x474 offset added to count	^\s*iVar2\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x474\);$	+3
+use	FUN_0011f7fc	iVar2	baseIndex	INFERRED	param_1+0x474 offset added to count	^\s*\*\(uint\ \*\)\(param_2\ \+\ 0x150\)\ =\ uVar3\ \+\ iVar2;$	+1
+use	FUN_00113734	uVar1	flagBit2	INFERRED	bit 2 of per-opcode flags	^\s*uVar1\ =\ 0;$	+1
+use	FUN_00113734	uVar1	flagBit2	INFERRED	bit 2 of per-opcode flags	^\s*uVar1\ =\ \*\(uint\ \*\)\(iVar2\ \+\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_2\ \+\ 0x88\)\ \+\ 8\)\ \*\ 0x38\)\ >>\ 2\ \&\ 1;$	+1
+use	FUN_00113734	uVar1	flagBit2	INFERRED	bit 2 of per-opcode flags	^\s*return\ uVar1;$	+1
+use	FUN_00113734	a0	targetObject	INFERRED	param_1+0x30c, vtable call 0x16c	^\s*a0\ =\ \*\(int\ \*\*\)\(param_1\ \+\ 0x30c\);$	+3
+use	FUN_00113734	iVar2	opcodeFlagTable	INFERRED	table indexed by opcode*0x38	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x16c\)\)\(a0\);$	+2
+use	ExportSlot__ctor_126378	puVar3	exportInst	INFERRED	IRExport inst at allocation+1	^\s*puVar3\ =\ puVar1\ \+\ 1;$	+1
+use	ExportSlot__ctor_126378	puVar3	exportInst	INFERRED	IRExport inst at allocation+1	^\s*FUN_00108918\(puVar3,param_5\);$	+1
+use	ExportSlot__ctor_126378	puVar3	exportInst	INFERRED	IRExport inst at allocation+1	^\s*FUN_001046c8\(puVar3,0,param_1\);$	+3
+use	ExportSlot__ctor_126378	puVar3	exportInst	INFERRED	IRExport inst at allocation+1	^\s*iVar2\ =\ FUN_001054ec\(puVar3,1\);$	+1
+use	ExportSlot__ctor_126378	puVar3	exportInst	INFERRED	IRExport inst at allocation+1	^\s*FUN_001236e4\(param_1,1,puVar3\);$	+3
+use	ExportSlot__ctor_126378	uVar4	exportStreamValue	INFERRED	DAT_001afeec stored in operand record +0x10	^\s*uVar4\ =\ DAT_001afeec;$	+1
+use	ExportSlot__ctor_126378	uVar4	exportStreamValue	INFERRED	DAT_001afeec stored in operand record +0x10	^\s*\*\(undefined4\ \*\)\(iVar2\ \+\ 0x10\)\ =\ uVar4;$	+1
+use	ExportSlot__ctor_12622c	puVar3	exportInst	INFERRED	IRExport inst at allocation+1	^\s*puVar3\ =\ puVar1\ \+\ 1;$	+1
+use	ExportSlot__ctor_12622c	puVar3	exportInst	INFERRED	IRExport inst at allocation+1	^\s*FUN_00108918\(puVar3,param_5\);$	+1
+use	ExportSlot__ctor_12622c	puVar3	exportInst	INFERRED	IRExport inst at allocation+1	^\s*FUN_001046c8\(puVar3,0,param_1\);$	+3
+use	ExportSlot__ctor_12622c	puVar3	exportInst	INFERRED	IRExport inst at allocation+1	^\s*iVar2\ =\ FUN_001054ec\(puVar3,1\);$	+1
+use	ExportSlot__ctor_12622c	puVar3	exportInst	INFERRED	IRExport inst at allocation+1	^\s*FUN_001236e4\(param_1,1,puVar3\);$	+3
+use	ExportSlot__ctor_12622c	uVar4	exportStreamValue	INFERRED	DAT_001afeec stored in operand record +0x10	^\s*uVar4\ =\ DAT_001afeec;$	+1
+use	ExportSlot__ctor_12622c	uVar4	exportStreamValue	INFERRED	DAT_001afeec stored in operand record +0x10	^\s*\*\(undefined4\ \*\)\(iVar2\ \+\ 0x10\)\ =\ uVar4;$	+1
+use	TempValue__clone	puVar2	foldedValue	INFERRED	result of FUN_00123c08 fallback	^\s*puVar2\ =\ \(undefined4\ \*\)\(\(int\ \(\*\)\(\)\)FUN_00123c08\)\(\*\(undefined4\ \*\)\(param_3\ \+\ COMP_currentProgram\),param_2,param_1\);$	+2
+use	TempValue__clone	iVar1	newInst	INFERRED	target-created inst, operand 0 set to param_1	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(param_3\ \+\ COMP_target\)\ \+\ 0x50\)\)$	+1
+use	TempValue__clone	iVar1	newInst	INFERRED	target-created inst, operand 0 set to param_1	^\s*FUN_001046c8\(iVar1,0,param_1\);$	+3
+use	TempValue__clone	iVar1	newInst	INFERRED	target-created inst, operand 0 set to param_1	^\s*FUN_00173938\(puVar4,iVar1,param_3\);$	+1
+use	TempValue__clone	iVar1	newInst	INFERRED	target-created inst, operand 0 set to param_1	^\s*\(\*\*\(code\ \*\*\)\(\*param_2\ \+\ 0xc\)\)\(param_2,iVar1\);$	+2
+use	TempValue__clone	puVar4	valueKey	INFERRED	ValueKey__init on arena alloc+1	^\s*puVar4\ =\ puVar2\ \+\ 1;$	+1
+use	TempValue__clone	puVar4	valueKey	INFERRED	ValueKey__init on arena alloc+1	^\s*FUN_00173938\(puVar4,iVar1,param_3\);$	+1
+use	TempValue__clone	puVar4	valueKey	INFERRED	ValueKey__init on arena alloc+1	^\s*FUN_00174e0c\(puVar4\);$	+2
+use	TempValue__clone	puVar4	valueKey	INFERRED	ValueKey__init on arena alloc+1	^\s*return\ puVar4;$	+1
+use	OpcodeInfo__getResultMode	iVar1	resultMode	INFERRED	param_1+0xc mode, returned	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xc\);$	+2
+use	OpcodeInfo__getResultMode	iVar1	resultMode	INFERRED	param_1+0xc mode, returned	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xc\);$@2	+1
+use	OpcodeInfo__getResultMode	iVar1	resultMode	INFERRED	param_1+0xc mode, returned	^\s*if\ \(iVar1\ !=\ 0x10\)\ \{$	+2
+use	OpcodeInfo__getResultMode	iVar1	vtableQueryResult	INFERRED	param_2 vtable +0x30 call, nonzero returns 9	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*param_2\ \+\ 0x30\)\)\(param_2\);$	+2

@@ -240,10 +240,10 @@
 25ec0	gld_bindFragmentProgramRecord	r9	PASS-no	25f18 bl 0x1a3700	; symbol stub for: _calloc
 269a0	gld_getProgramParameter	r7	PASS-no	269d4 bl 0x1a3940	; symbol stub for: _pthread_mut
 269a0	gld_getProgramParameter	r8	PASS-no	269d4 bl 0x1a3940	; symbol stub for: _pthread_mut
-2c230	FUN_0002c230	r5	PASS-indirect	2c2f8 bl 0x90990
-2c230	FUN_0002c230	r6	PASS-indirect	2c2f8 bl 0x90990
-2c230	FUN_0002c230	r7	PASS-indirect	2c2f8 bl 0x90990
-2c230	FUN_0002c230	r8	PASS-indirect	2c2f8 bl 0x90990
+2c230	gld_validateStreamState	r5	PASS-indirect	2c2f8 bl 0x90990
+2c230	gld_validateStreamState	r6	PASS-indirect	2c2f8 bl 0x90990
+2c230	gld_validateStreamState	r7	PASS-indirect	2c2f8 bl 0x90990
+2c230	gld_validateStreamState	r8	PASS-indirect	2c2f8 bl 0x90990
 2cc30	gld_prepareDrawCount	r9	PASS-no	2ccd8 bl 0x2bf30
 2ce40	FUN_0002ce40	r5	PASS-indirect	2cfb4 bctrl 
 2ce40	FUN_0002ce40	r6	PASS-indirect	2cfb4 bctrl 
@@ -260,10 +260,10 @@
 4c560	FUN_0004c560	r8	PASS-indirect	4c5d0 bl 0x4dc30
 4d100	FUN_0004d100	r5	PASS-indirect	4d314 bl 0x4ce30
 4d100	FUN_0004d100	r6	PASS-indirect	4d314 bl 0x4ce30
-4fd80	FUN_0004fd80	r5	PASS-indirect	4fef0 bctrl 
-4fd80	FUN_0004fd80	r6	PASS-indirect	4fef0 bctrl 
-4fd80	FUN_0004fd80	r7	PASS-indirect	4fef0 bctrl 
-4fd80	FUN_0004fd80	r8	PASS-indirect	4fef0 bctrl 
+4fd80	extvsUpdateVertexAttributeConstants	r5	PASS-indirect	4fef0 bctrl 
+4fd80	extvsUpdateVertexAttributeConstants	r6	PASS-indirect	4fef0 bctrl 
+4fd80	extvsUpdateVertexAttributeConstants	r7	PASS-indirect	4fef0 bctrl 
+4fd80	extvsUpdateVertexAttributeConstants	r8	PASS-indirect	4fef0 bctrl 
 50300	gldEmitHardwareState	r5	PASS-indirect	50358 bctrl 
 50300	gldEmitHardwareState	r6	PASS-indirect	50358 bctrl 
 50300	gldEmitHardwareState	r7	PASS-indirect	50358 bctrl 
@@ -284,26 +284,26 @@
 64720	FUN_00064720	r5	PASS-indirect	64830 bctrl 
 64720	FUN_00064720	r6	PASS-indirect	64830 bctrl 
 64720	FUN_00064720	r7	PASS-indirect	64830 bctrl 
-64a10	FUN_00064a10	r5	PASS-indirect	64d64 bctrl 
-64a10	FUN_00064a10	r6	PASS-indirect	64d64 bctrl 
-64a10	FUN_00064a10	r7	PASS-indirect	64d64 bctrl 
-64a10	FUN_00064a10	r8	PASS-indirect	64d64 bctrl 
-64f40	FUN_00064f40	r5	PASS-indirect	64fa0 bctrl 
-64f40	FUN_00064f40	r6	PASS-indirect	64fa0 bctrl 
-64f40	FUN_00064f40	r7	PASS-indirect	64fa0 bctrl 
-64f40	FUN_00064f40	r8	PASS-indirect	64fa0 bctrl 
-651e0	FUN_000651e0	r5	PASS-indirect	65218 bl 0x61dc0
-651e0	FUN_000651e0	r6	PASS-indirect	65218 bl 0x61dc0
-651e0	FUN_000651e0	r7	PASS-indirect	65218 bl 0x61dc0
-651e0	FUN_000651e0	r8	PASS-indirect	65218 bl 0x61dc0
-65370	FUN_00065370	r5	PASS-indirect	653a8 bctrl 
-65370	FUN_00065370	r6	PASS-indirect	653a8 bctrl 
-65370	FUN_00065370	r7	PASS-indirect	653a8 bctrl 
-65370	FUN_00065370	r8	PASS-indirect	653a8 bctrl 
-65370	FUN_00065370	r10	PASS-indirect	653a8 bctrl 
-656b0	FUN_000656b0	r7	PASS-no	656dc bl 0x1a3760	; symbol stub for: _memset
-656b0	FUN_000656b0	r8	PASS-no	656dc bl 0x1a3760	; symbol stub for: _memset
-656b0	FUN_000656b0	r9	PASS-no	656dc bl 0x1a3760	; symbol stub for: _memset
+64a10	extvsUploadProgramConstants	r5	PASS-indirect	64d64 bctrl 
+64a10	extvsUploadProgramConstants	r6	PASS-indirect	64d64 bctrl 
+64a10	extvsUploadProgramConstants	r7	PASS-indirect	64d64 bctrl 
+64a10	extvsUploadProgramConstants	r8	PASS-indirect	64d64 bctrl 
+64f40	extvsValidateProgramState	r5	PASS-indirect	64fa0 bctrl 
+64f40	extvsValidateProgramState	r6	PASS-indirect	64fa0 bctrl 
+64f40	extvsValidateProgramState	r7	PASS-indirect	64fa0 bctrl 
+64f40	extvsValidateProgramState	r8	PASS-indirect	64fa0 bctrl 
+651e0	extvsFlushConstantUploads	r5	PASS-indirect	65218 bl 0x61dc0
+651e0	extvsFlushConstantUploads	r6	PASS-indirect	65218 bl 0x61dc0
+651e0	extvsFlushConstantUploads	r7	PASS-indirect	65218 bl 0x61dc0
+651e0	extvsFlushConstantUploads	r8	PASS-indirect	65218 bl 0x61dc0
+65370	ffvpSelectLitProgramVariant	r5	PASS-indirect	653a8 bctrl 
+65370	ffvpSelectLitProgramVariant	r6	PASS-indirect	653a8 bctrl 
+65370	ffvpSelectLitProgramVariant	r7	PASS-indirect	653a8 bctrl 
+65370	ffvpSelectLitProgramVariant	r8	PASS-indirect	653a8 bctrl 
+65370	ffvpSelectLitProgramVariant	r10	PASS-indirect	653a8 bctrl 
+656b0	ffvpSelectPassThroughVariant	r7	PASS-no	656dc bl 0x1a3760	; symbol stub for: _memset
+656b0	ffvpSelectPassThroughVariant	r8	PASS-no	656dc bl 0x1a3760	; symbol stub for: _memset
+656b0	ffvpSelectPassThroughVariant	r9	PASS-no	656dc bl 0x1a3760	; symbol stub for: _memset
 71bc0	evsAssignVertexInputs	r7	PASS-no	71c48 bl 0x70cd0
 79e70	FUN_00079e70	r5	PASS-no	79f10 bl 0x79e10
 79e70	FUN_00079e70	r6	PASS-no	79f10 bl 0x79e10
@@ -324,10 +324,10 @@
 86840	FUN_00086840	r6	PASS-indirect	868a0 bctrl 
 86840	FUN_00086840	r7	PASS-indirect	868a0 bctrl 
 86840	FUN_00086840	r8	PASS-indirect	868a0 bctrl 
-872e0	FUN_000872e0	r5	PASS-indirect	87428 bctrl 
-872e0	FUN_000872e0	r6	PASS-indirect	87428 bctrl 
-872e0	FUN_000872e0	r7	PASS-indirect	87428 bctrl 
-872e0	FUN_000872e0	r8	PASS-indirect	87428 bctrl 
+872e0	gldLeaveInternalDrawState	r5	PASS-indirect	87428 bctrl 
+872e0	gldLeaveInternalDrawState	r6	PASS-indirect	87428 bctrl 
+872e0	gldLeaveInternalDrawState	r7	PASS-indirect	87428 bctrl 
+872e0	gldLeaveInternalDrawState	r8	PASS-indirect	87428 bctrl 
 8b6d0	arbParseSwizzleSuffix	r5	PASS-deep	8b6f0 bl 0x89740
 8b960	arbfpParseScalarSourceOperand	r5	PASS-deep	8b978 bl 0x89740
 8b9f0	arbParseProgramText	r5	PASS-deep	8baf4 bl 0x88e70
@@ -418,9 +418,9 @@ e0694	ildisPrintProgram	r7	PASS-no	e06b4 bl 0xda8d0
 e0694	ildisPrintProgram	r8	PASS-no	e06b4 bl 0xda8d0
 e0694	ildisPrintProgram	r9	PASS-no	e06b4 bl 0xda8d0
 e0694	ildisPrintProgram	r10	PASS-no	e06b4 bl 0xda8d0
-e2094	FUN_000e2094	r6	PASS-no	e20b4 bl 0xe15b8
-e2094	FUN_000e2094	r7	PASS-no	e20b4 bl 0xe15b8
-e2094	FUN_000e2094	r8	PASS-no	e20b4 bl 0xe15b8
+e2094	Compiler__compileStages	r6	PASS-no	e20b4 bl 0xe15b8
+e2094	Compiler__compileStages	r7	PASS-no	e20b4 bl 0xe15b8
+e2094	Compiler__compileStages	r8	PASS-no	e20b4 bl 0xe15b8
 e36bc	MachineCodeWriter__encodeProgram	r8	PASS-deep	e36ec bl 0xe3544
 e36bc	MachineCodeWriter__encodeProgram	r9	PASS-deep	e36ec bl 0xe3544
 e36bc	MachineCodeWriter__encodeProgram	r10	PASS-deep	e36ec bl 0xe3544
@@ -443,12 +443,12 @@ ea148	Block__ctor_ea148	r8	PASS-no	ea194 bl 0x1940a8
 f1d7c	FUN_000f1d7c	r6	PASS-indirect	f1dd8 bl 0x193e18
 f1d7c	FUN_000f1d7c	r7	PASS-indirect	f1dd8 bl 0x193e18
 f1d7c	FUN_000f1d7c	r8	PASS-indirect	f1dd8 bl 0x193e18
-f29f4	FUN_000f29f4	r5	PASS-indirect	f2a10 bl 0x10ea30
-f29f4	FUN_000f29f4	r6	PASS-indirect	f2a10 bl 0x10ea30
-f29f4	FUN_000f29f4	r7	PASS-indirect	f2a10 bl 0x10ea30
-f29f4	FUN_000f29f4	r8	PASS-indirect	f2a10 bl 0x10ea30
-f60c4	FUN_000f60c4	r9	PASS-indirect	f6148 bl 0x19423c
-f60c4	FUN_000f60c4	r10	PASS-indirect	f6148 bl 0x19423c
+f29f4	pass_assign_slots	r5	PASS-indirect	f2a10 bl 0x10ea30
+f29f4	pass_assign_slots	r6	PASS-indirect	f2a10 bl 0x10ea30
+f29f4	pass_assign_slots	r7	PASS-indirect	f2a10 bl 0x10ea30
+f29f4	pass_assign_slots	r8	PASS-indirect	f2a10 bl 0x10ea30
+f60c4	Program__dumpConstantRegisters	r9	PASS-indirect	f6148 bl 0x19423c
+f60c4	Program__dumpConstantRegisters	r10	PASS-indirect	f6148 bl 0x19423c
 f620	arbProgramIrToText	r6	PASS-no	f650 bl 0x1a3660	; symbol stub for: _malloc
 f620	arbProgramIrToText	r7	PASS-no	f650 bl 0x1a3660	; symbol stub for: _malloc
 f620	arbProgramIrToText	r8	PASS-no	f650 bl 0x1a3660	; symbol stub for: _malloc
