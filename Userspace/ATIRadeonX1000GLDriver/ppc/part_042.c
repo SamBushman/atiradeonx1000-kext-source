@@ -1742,6 +1742,7 @@ int Program__eliminateDeadInstsAndRecountUses(program, verifyCounts)
   int program;
   int verifyCounts;
 {
+  int statsSlot;
   int *lookaheadInst;
   int *topElementPtr;
   int liveRoot;
@@ -1763,7 +1764,7 @@ int Program__eliminateDeadInstsAndRecountUses(program, verifyCounts)
   uint topIndex;
   int compiler;
   int instScan;
-  int iVar11;
+  int epochIndex;
   uint loopIndex2;
   undefined4 consistent;
   int *inst;
@@ -1775,9 +1776,9 @@ int Program__eliminateDeadInstsAndRecountUses(program, verifyCounts)
   #define vecArena (*(undefined4 *)(local_54_buf + 0x0c))
   
   skipVerify = verifyCounts == 0;
-  iVar11 = *(int *)(program + 0x2ac);
+  epochIndex = *(int *)(program + 0x2ac);
   compiler = *(int *)(program + PROG_compiler);
-  *(int *)(program + 0x2ac) = iVar11 + 1;
+  *(int *)(program + 0x2ac) = epochIndex + 1;
   instVector = *(int *)(compiler + 0x324);
   if (skipVerify) {
     savedUseCounts = 0;
@@ -1883,7 +1884,7 @@ int Program__eliminateDeadInstsAndRecountUses(program, verifyCounts)
   }
   else {
     consistent = 1;
-    iVar11 = iVar11 * 4 + program;
+    statsSlot = epochIndex * 4 + program;
     block = *(int *)(program + PROG_blockListHead);
     do {
       nextBlock = instVector;
@@ -1908,7 +1909,7 @@ int Program__eliminateDeadInstsAndRecountUses(program, verifyCounts)
                  ((inst[5] & 0x10U) == 0)) {
                 (**(code **)(*inst + 0x10))(inst,*(undefined4 *)(program + PROG_compiler));
                 if ((inst[0x26] != 2) && (inst[0x26] != 0x33)) {
-                  *(int *)(iVar11 + 0x2b0) = *(int *)(iVar11 + 0x2b0) + 1;
+                  *(int *)(statsSlot + 0x2b0) = *(int *)(statsSlot + 0x2b0) + 1;
                   curNext = (int *)inst[2];
                   goto LAB_0013c188;
                 }
