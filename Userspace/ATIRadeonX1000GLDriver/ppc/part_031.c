@@ -202,83 +202,83 @@ int IRInst__removeDefaultSelectOperands(inst, compilerCtx)
 }
 
 /* FUN_0010c47c @ 0x10c47c (500 bytes) */
-int FUN_0010c47c(inst, param_2)
+int FUN_0010c47c(inst, pass)
   int *inst;
-  int param_2;
+  int pass;
 {
   int operandRecord;
-  bool bVar1;
-  bool bVar2;
-  int iVar3;
-  int *a0;
-  int iVar4;
-  undefined4 uVar5;
-  undefined4 in_r5;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
-  int iVar6;
+  bool moreLanes;
+  bool constantsAreZero;
+  int sourceOpcode;
+  int *sourceInst;
+  int laneCountdown;
+  undefined4 canFold;
+  undefined4 staleArg5;
+  undefined4 staleArg6;
+  undefined4 staleArg7;
+  undefined4 staleArg8;
+  int laneByteIndex;
   int operandVReg;
-  uint uVar8;
-  uint uVar9;
+  uint selectedLane;
+  uint laneNumber;
   undefined8 operandVReg2;
-  undefined4 local_38 [8];
+  undefined4 swizzleWord [8];
   
-  (**(code **)(*inst + 0x60))(inst,param_2);
+  (**(code **)(*inst + 0x60))(inst,pass);
   operandVReg2 = IRInst__getOperandSource(inst,1);
-  a0 = (int *)((ulonglong)operandVReg2 >> 0x20);
-  iVar3 = *(int *)(a0[0x22] + 8);
-  if (((((iVar3 - 0x16U < 2) || (iVar3 == 0x19)) || (iVar3 == 0x31)) ||
-      (((iVar3 == 0x13 || (iVar3 == 0x14)) || (iVar3 == 0x12)))) &&
-     (operandVReg = *(int *)(*(int *)(param_2 + 0x6c4) + 0x228),
-     iVar3 = (**(code **)(*a0 + 0x14))
-                       (a0,(int)operandVReg2,in_r5,in_r6,in_r7,in_r8,*(int *)(param_2 + 0x6c4)),
-     operandVReg + iVar3 < *(int *)(param_2 + 0x664))) {
-    bVar2 = true;
+  sourceInst = (int *)((ulonglong)operandVReg2 >> 0x20);
+  sourceOpcode = *(int *)(sourceInst[0x22] + 8);
+  if (((((sourceOpcode - 0x16U < 2) || (sourceOpcode == 0x19)) || (sourceOpcode == 0x31)) ||
+      (((sourceOpcode == 0x13 || (sourceOpcode == 0x14)) || (sourceOpcode == 0x12)))) &&
+     (operandVReg = *(int *)(*(int *)(pass + 0x6c4) + 0x228),
+     sourceOpcode = (**(code **)(*sourceInst + 0x14))
+                       (sourceInst,(int)operandVReg2,staleArg5,staleArg6,staleArg7,staleArg8,*(int *)(pass + 0x6c4)),
+     operandVReg + sourceOpcode < *(int *)(pass + 0x664))) {
+    constantsAreZero = true;
     if (1 < inst[0x21]) {
-      iVar3 = 2;
-      bVar2 = true;
+      sourceOpcode = 2;
+      constantsAreZero = true;
       do {
-        operandVReg = IRInst__getOperandSource(inst,iVar3);
+        operandVReg = IRInst__getOperandSource(inst,sourceOpcode);
         if (*(int *)(operandVReg + 0x98) == 0x33) {
-          operandRecord = IRInst__getOperandRecord(inst,iVar3);
-          iVar6 = 0;
-          local_38[0] = *(undefined4 *)(operandRecord + 0x10);
-          iVar4 = 4;
+          operandRecord = IRInst__getOperandRecord(inst,sourceOpcode);
+          laneByteIndex = 0;
+          swizzleWord[0] = *(undefined4 *)(operandRecord + 0x10);
+          laneCountdown = 4;
           do {
-            if ((*(byte *)((int)local_38 + iVar6) != 4) &&
-               (*(float *)((uint)*(byte *)((int)local_38 + iVar6) * 0x18 + operandVReg + 0x20) != 0.0)) {
-              bVar2 = false;
+            if ((*(byte *)((int)swizzleWord + laneByteIndex) != 4) &&
+               (*(float *)((uint)*(byte *)((int)swizzleWord + laneByteIndex) * 0x18 + operandVReg + 0x20) != 0.0)) {
+              constantsAreZero = false;
               break;
             }
-            iVar6 = iVar6 + 1;
-            iVar4 = iVar4 + -1;
-          } while (iVar4 != 0);
+            laneByteIndex = laneByteIndex + 1;
+            laneCountdown = laneCountdown + -1;
+          } while (laneCountdown != 0);
         }
-        iVar3 = iVar3 + 1;
-      } while (iVar3 <= inst[0x21]);
+        sourceOpcode = sourceOpcode + 1;
+      } while (sourceOpcode <= inst[0x21]);
     }
-    if ((a0[5] & 0x200U) != 0) {
-      uVar9 = 0;
+    if ((sourceInst[5] & 0x200U) != 0) {
+      laneNumber = 0;
       do {
-        iVar3 = IRInst__getOperandRecord(inst,1);
-        uVar8 = (uint)*(byte *)(uVar9 + iVar3 + 0x10);
-        if (((uVar8 != 4) && (iVar3 = IRInst__getOperandRecord(a0,0), *(char *)(uVar9 + iVar3 + 0x10) == '\x01')
-            ) && (uVar8 != uVar9)) goto LAB_0010c648;
-        bVar1 = uVar9 != 3;
-        uVar9 = uVar9 + 1;
-      } while (bVar1);
+        sourceOpcode = IRInst__getOperandRecord(inst,1);
+        selectedLane = (uint)*(byte *)(laneNumber + sourceOpcode + 0x10);
+        if (((selectedLane != 4) && (sourceOpcode = IRInst__getOperandRecord(sourceInst,0), *(char *)(laneNumber + sourceOpcode + 0x10) == '\x01')
+            ) && (selectedLane != laneNumber)) goto LAB_0010c648;
+        moreLanes = laneNumber != 3;
+        laneNumber = laneNumber + 1;
+      } while (moreLanes);
     }
-    if ((!bVar2) && (iVar3 = IRInst__compareResultIsConstant(a0), iVar3 == 0)) {
+    if ((!constantsAreZero) && (sourceOpcode = IRInst__compareResultIsConstant(sourceInst), sourceOpcode == 0)) {
       return 0;
     }
-    uVar5 = 1;
+    canFold = 1;
   }
   else {
 LAB_0010c648:
-    uVar5 = 0;
+    canFold = 0;
   }
-  return uVar5;
+  return canFold;
 }
 
 /* FUN_0010c670 @ 0x10c670 (1240 bytes) */

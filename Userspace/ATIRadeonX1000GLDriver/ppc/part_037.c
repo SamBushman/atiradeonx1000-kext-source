@@ -479,80 +479,87 @@ LAB_0011f190:
 }
 
 /* Program__tryEliminateRedundantCopy @ 0x11f2f8 (640 bytes) */
-int Program__tryEliminateRedundantCopy(param_1, inst, param_3)
-  int param_1;
+int Program__tryEliminateRedundantCopy(program, inst, block)
+  int program;
   int *inst;
-  undefined4 param_3;
+  undefined4 block;
 {
-  int iVar1;
-  int iVar2;
-  undefined4 uVar3;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
-  int *piVar4;
+  int sourceRegKindB;
+  int sourceInstB;
+  int sourceRegKindA;
+  int sourceInstA;
+  int destKindClass;
+  int laneCountdown;
+  int operandNumber;
+  int copyElimEnabled;
+  int operandCountLimit;
+  undefined4 sourceDefinition;
+  undefined4 staleArg6;
+  undefined4 staleArg7;
+  undefined4 staleArg8;
+  int *laneFlagCursor;
   
-  iVar1 = Compiler__isOptionEnabled(*(undefined4 *)(param_1 + 8),5);
-  if ((iVar1 != 0) && (iVar1 = (**(code **)(*inst + 100))(inst), iVar1 != 0)) {
-    for (iVar1 = 1; iVar2 = (**(code **)(*inst + 0x14))(inst), iVar1 <= iVar2;
-        iVar1 = iVar1 + 1) {
-      if ((inst[iVar1 * 6 + 0x28] & 1U) != 0) {
+  copyElimEnabled = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),5);
+  if ((copyElimEnabled != 0) && (copyElimEnabled = (**(code **)(*inst + 100))(inst), copyElimEnabled != 0)) {
+    for (operandNumber = 1; operandCountLimit = (**(code **)(*inst + 0x14))(inst), operandNumber <= operandCountLimit;
+        operandNumber = operandNumber + 1) {
+      if ((inst[operandNumber * 6 + 0x28] & 1U) != 0) {
         return 0;
       }
-      if ((inst[iVar1 * 6 + 0x28] & 2U) != 0) {
+      if ((inst[operandNumber * 6 + 0x28] & 2U) != 0) {
         return 0;
       }
-      iVar2 = IRInst__isSourceSelectIdentity(inst,iVar1);
-      if (iVar2 == 0) {
+      operandCountLimit = IRInst__isSourceSelectIdentity(inst,operandNumber);
+      if (operandCountLimit == 0) {
         return 0;
       }
     }
     if ((inst[0x48] == 0) && (inst[0x49] == 0)) {
       if ((inst[0x20] != 0) &&
-         (((iVar1 = RegKind__flagBit0(inst[0x26]), iVar1 != 0 && ((inst[5] & 2U) == 0)) &&
-          (iVar1 = (**(code **)(*inst + 0x50))(inst), iVar1 == 0)))) {
-        iVar1 = 4;
-        piVar4 = inst;
+         (((operandNumber = RegKind__flagBit0(inst[0x26]), operandNumber != 0 && ((inst[5] & 2U) == 0)) &&
+          (operandNumber = (**(code **)(*inst + 0x50))(inst), operandNumber == 0)))) {
+        laneCountdown = 4;
+        laneFlagCursor = inst;
         do {
-          if ((uint)(*(byte *)(piVar4 + 0x27) - 2) < 2) {
+          if ((uint)(*(byte *)(laneFlagCursor + 0x27) - 2) < 2) {
             return 0;
           }
-          piVar4 = (int *)((int)piVar4 + 1);
-          iVar1 = iVar1 + -1;
-        } while (iVar1 != 0);
+          laneFlagCursor = (int *)((int)laneFlagCursor + 1);
+          laneCountdown = laneCountdown + -1;
+        } while (laneCountdown != 0);
       }
       IRInst__getOperandRecord(inst,0);
-      iVar1 = IRInst__operandKindClass(inst,0);
-      if (((iVar1 == 0) && ((inst[5] & 2U) == 0)) &&
-         (((inst[5] & 0x200U) == 0 && (iVar1 = RegKind__flagBit0(inst[0x26]), iVar1 != 0)))) {
-        iVar1 = IRInst__getOperandSource(inst,1);
-        if (iVar1 == 0) {
-          iVar1 = inst[0x2c];
+      destKindClass = IRInst__operandKindClass(inst,0);
+      if (((destKindClass == 0) && ((inst[5] & 2U) == 0)) &&
+         (((inst[5] & 0x200U) == 0 && (destKindClass = RegKind__flagBit0(inst[0x26]), destKindClass != 0)))) {
+        sourceInstA = IRInst__getOperandSource(inst,1);
+        if (sourceInstA == 0) {
+          sourceRegKindA = inst[0x2c];
         }
         else {
-          iVar1 = IRInst__getOperandSource(inst,1);
-          iVar1 = *(int *)(iVar1 + 0x98);
+          sourceRegKindA = IRInst__getOperandSource(inst,1);
+          sourceRegKindA = *(int *)(sourceRegKindA + 0x98);
         }
-        iVar1 = RegKind__flagBit6(iVar1);
-        if (iVar1 == 0) {
-          iVar1 = IRInst__getOperandSource(inst,1);
-          if (iVar1 == 0) {
-            iVar1 = inst[0x2c];
+        sourceRegKindA = RegKind__flagBit6(sourceRegKindA);
+        if (sourceRegKindA == 0) {
+          sourceInstB = IRInst__getOperandSource(inst,1);
+          if (sourceInstB == 0) {
+            sourceRegKindB = inst[0x2c];
           }
           else {
-            iVar1 = IRInst__getOperandSource(inst,1);
-            iVar1 = *(int *)(iVar1 + 0x98);
+            sourceRegKindB = IRInst__getOperandSource(inst,1);
+            sourceRegKindB = *(int *)(sourceRegKindB + 0x98);
           }
-          if (((iVar1 != 0x31) && (iVar1 = ((int (*)())Program__isPreassignedHwReg)(param_1,inst), iVar1 == 0)) &&
-             (*(int *)(param_1 + 0xa0) < *(int *)(*(uint *)(param_1 + 8) + 0x650))) {
-            uVar3 = ((int (*)())VReg__currentDefinition)(inst[0x29],*(undefined4 *)(param_1 + 0x3a0),
-                                 *(uint *)(param_1 + 8));
-            Block__recordDefinition(param_3,inst[0x23],uVar3);
+          if (((sourceRegKindB != 0x31) && (sourceRegKindB = ((int (*)())Program__isPreassignedHwReg)(program,inst), sourceRegKindB == 0)) &&
+             (*(int *)(program + 0xa0) < *(int *)(*(uint *)(program + 8) + 0x650))) {
+            sourceDefinition = ((int (*)())VReg__currentDefinition)(inst[0x29],*(undefined4 *)(program + 0x3a0),
+                                 *(uint *)(program + 8));
+            Block__recordDefinition(block,inst[0x23],sourceDefinition);
             (**(code **)(*inst + 0xc))
-                      (inst,0,*(undefined4 *)(param_1 + 8),in_r6,in_r7,in_r8,
+                      (inst,0,*(undefined4 *)(program + 8),staleArg6,staleArg7,staleArg8,
                        *(code **)(*inst + 0xc));
             inst[5] = inst[5] | 0x400;
-            *(int *)(param_1 + 0xa0) = *(int *)(param_1 + 0xa0) + 1;
+            *(int *)(program + 0xa0) = *(int *)(program + 0xa0) + 1;
             return 1;
           }
         }

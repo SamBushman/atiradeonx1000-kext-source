@@ -2660,55 +2660,58 @@ int FUN_0013555c(param_1, param_2, param_3)
 }
 
 /* FUN_00135684 @ 0x135684 (336 bytes) */
-int FUN_00135684(param_1, param_2, param_3)
-  int param_1;
-  uint param_2;
-  uint param_3;
+int FUN_00135684(graph, nodeA, nodeB)
+  int graph;
+  uint nodeA;
+  uint nodeB;
 {
-  uint uVar1;
-  int *piVar2;
-  undefined4 *puVar3;
-  undefined4 *puVar4;
-  uint *puVar5;
-  uint *puVar6;
+  uint *nodeAList;
+  uint listCount;
+  uint nodeVectorCountB;
+  uint nodeVectorCountA;
+  int *nodeARef;
+  undefined4 *listSlotRef;
+  undefined4 *nodeBRef;
+  uint *nodeVectorHeader;
+  uint *nodeVectorAlias;
   
-  puVar5 = *(uint **)(param_1 + 4);
-  if (param_2 < *puVar5) {
-    uVar1 = puVar5[1];
-    puVar6 = puVar5;
-    if (uVar1 <= param_2) {
-      _memset(uVar1 * 4 + puVar5[2],0,(param_2 - uVar1) * 4 + 4);
-      puVar5[1] = param_2 + 1;
-      puVar6 = *(uint **)(param_1 + 4);
+  nodeVectorHeader = *(uint **)(graph + 4);
+  if (nodeA < *nodeVectorHeader) {
+    nodeVectorCountA = nodeVectorHeader[1];
+    nodeVectorAlias = nodeVectorHeader;
+    if (nodeVectorCountA <= nodeA) {
+      _memset(nodeVectorCountA * 4 + nodeVectorHeader[2],0,(nodeA - nodeVectorCountA) * 4 + 4);
+      nodeVectorHeader[1] = nodeA + 1;
+      nodeVectorAlias = *(uint **)(graph + 4);
     }
-    piVar2 = (int *)(param_2 * 4 + puVar5[2]);
+    nodeARef = (int *)(nodeA * 4 + nodeVectorHeader[2]);
   }
   else {
-    piVar2 = (int *)Vector__elementRefGrow(puVar5,param_2);
-    puVar6 = *(uint **)(param_1 + 4);
+    nodeARef = (int *)Vector__elementRefGrow(nodeVectorHeader,nodeA);
+    nodeVectorAlias = *(uint **)(graph + 4);
   }
-  puVar5 = *(uint **)(*piVar2 + 0x10);
-  if (param_3 < *puVar6) {
-    uVar1 = puVar6[1];
-    if (uVar1 <= param_3) {
-      _memset(uVar1 * 4 + puVar6[2],0,(param_3 - uVar1) * 4 + 4);
-      puVar6[1] = param_3 + 1;
+  nodeAList = *(uint **)(*nodeARef + 0x10);
+  if (nodeB < *nodeVectorAlias) {
+    nodeVectorCountB = nodeVectorAlias[1];
+    if (nodeVectorCountB <= nodeB) {
+      _memset(nodeVectorCountB * 4 + nodeVectorAlias[2],0,(nodeB - nodeVectorCountB) * 4 + 4);
+      nodeVectorAlias[1] = nodeB + 1;
     }
-    puVar4 = (undefined4 *)(param_3 * 4 + puVar6[2]);
+    nodeBRef = (undefined4 *)(nodeB * 4 + nodeVectorAlias[2]);
   }
   else {
-    puVar4 = (undefined4 *)Vector__elementRefGrow(puVar6,param_3);
+    nodeBRef = (undefined4 *)Vector__elementRefGrow(nodeVectorAlias,nodeB);
   }
-  uVar1 = puVar5[1];
-  if (uVar1 < *puVar5) {
-    _memset(uVar1 * 4 + puVar5[2],0,4);
-    puVar3 = (undefined4 *)(uVar1 * 4 + puVar5[2]);
-    puVar5[1] = uVar1 + 1;
+  listCount = nodeAList[1];
+  if (listCount < *nodeAList) {
+    _memset(listCount * 4 + nodeAList[2],0,4);
+    listSlotRef = (undefined4 *)(listCount * 4 + nodeAList[2]);
+    nodeAList[1] = listCount + 1;
   }
   else {
-    puVar3 = (undefined4 *)Vector__elementRefGrow(puVar5,uVar1);
+    listSlotRef = (undefined4 *)Vector__elementRefGrow(nodeAList,listCount);
   }
-  *puVar3 = *puVar4;
+  *listSlotRef = *nodeBRef;
   return;
 }
 
