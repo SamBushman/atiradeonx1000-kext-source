@@ -1324,14 +1324,14 @@ uint FUN_000a3560(int glContext,double fpPassThrough1)
 }
 
 /* FUN_000a3610 @ 0xa3610 (88 bytes) */
-int FUN_000a3610(glContext, param_2, param_3, param_4, param_5, param_6, param_7)
+int FUN_000a3610(glContext, param_2, unusedArgR5, unusedArgR6, unusedArgR7, unusedArgR8, unusedArgR9)
   int glContext;
   uint param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+  undefined4 unusedArgR5;
+  undefined4 unusedArgR6;
+  undefined4 unusedArgR7;
+  undefined4 unusedArgR8;
+  undefined4 unusedArgR9;
 {
   uint uVar1;
   int iVar2;
@@ -1395,7 +1395,7 @@ int FUN_000a36b0(glContext, param_2)
 }
 
 /* FUN_000a3790 @ 0xa3790 (716 bytes) */
-void FUN_000a3790(undefined4 glContext,undefined4 param_2,uint param_3,int param_4,int *param_5,double fpPassThrough1,double fpPassThrough2,double fpPassThrough3,double fpPassThrough4,double fpPassThrough5,double fpPassThrough6,double fpPassThrough7,double fpPassThrough8,double fpPassThrough9,double fpPassThrough10,double fpPassThrough11,double fpPassThrough12)
+void FUN_000a3790(undefined4 glContext,undefined4 unusedArgR4,uint param_3,int param_4,int *param_5,double fpPassThrough1,double fpPassThrough2,double fpPassThrough3,double fpPassThrough4,double fpPassThrough5,double fpPassThrough6,double fpPassThrough7,double fpPassThrough8,double fpPassThrough9,double fpPassThrough10,double fpPassThrough11,double fpPassThrough12)
 {
   uint loopIndex3;
   float fVar1;
@@ -1480,7 +1480,7 @@ LAB_000a39f0:
 }
 
 /* FUN_000a3a60 @ 0xa3a60 (372 bytes) */
-void FUN_000a3a60(undefined4 glContext,undefined4 param_2,uint param_3,int param_4,uint *param_5,double fpPassThrough1,double fpPassThrough2,double fpPassThrough3,double fpPassThrough4,double fpPassThrough5,double fpPassThrough6,double fpPassThrough7,double fpPassThrough8,double fpPassThrough9,double fpPassThrough10,double fpPassThrough11,double fpPassThrough12,double fpPassThrough13)
+void FUN_000a3a60(undefined4 glContext,undefined4 unusedArgR4,uint param_3,int param_4,uint *param_5,double fpPassThrough1,double fpPassThrough2,double fpPassThrough3,double fpPassThrough4,double fpPassThrough5,double fpPassThrough6,double fpPassThrough7,double fpPassThrough8,double fpPassThrough9,double fpPassThrough10,double fpPassThrough11,double fpPassThrough12,double fpPassThrough13)
 {
   float fVar1;
   float fVar2;
@@ -1528,11 +1528,11 @@ void FUN_000a3a60(undefined4 glContext,undefined4 param_2,uint param_3,int param
 }
 
 /* FUN_000a3be0 @ 0xa3be0 (2056 bytes) */
-int FUN_000a3be0(glContext, primitiveMode, param_3, param_4, param_5, extraArg5, staleArgR9)
+int FUN_000a3be0(glContext, primitiveMode, param_3, unusedArgR6, param_5, extraArg5, staleArgR9)
   uint glContext;
   int primitiveMode;
   uint param_3;
-  undefined4 param_4;
+  undefined4 unusedArgR6;
   uint param_5;
   undefined4 *extraArg5;
   undefined4 staleArgR9;
@@ -1996,9 +1996,9 @@ int FUN_000a4760(ctx)
 }
 
 /* FUN_000a4770 @ 0xa4770 (504 bytes) */
-int FUN_000a4770(glContext, param_2, staleArgR5, staleArgR6, staleArgR7, staleArgR8, staleArgR9)
+int FUN_000a4770(glContext, unusedArgR4, staleArgR5, staleArgR6, staleArgR7, staleArgR8, staleArgR9)
   int glContext;
-  undefined4 param_2;
+  undefined4 unusedArgR4;
   undefined4 staleArgR5;
   undefined4 staleArgR6;
   undefined4 staleArgR7;
@@ -2060,9 +2060,9 @@ int FUN_000a4770(glContext, param_2, staleArgR5, staleArgR6, staleArgR7, staleAr
 }
 
 /* FUN_000a4980 @ 0xa4980 (4768 bytes) */
-int FUN_000a4980(glContext, param_2, staleArgR5, staleArgR6, staleArgR7)
+int FUN_000a4980(glContext, unusedArgR4, staleArgR5, staleArgR6, staleArgR7)
   int glContext;
-  undefined4 param_2;
+  undefined4 unusedArgR4;
   undefined4 staleArgR5;
   undefined4 staleArgR6;
   undefined4 staleArgR7;

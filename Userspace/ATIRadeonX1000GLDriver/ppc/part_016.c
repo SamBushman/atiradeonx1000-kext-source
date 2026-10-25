@@ -1246,7 +1246,7 @@ LAB_000a99e8:
 }
 
 /* FUN_000a9ac0 @ 0xa9ac0 (7656 bytes) */
-void FUN_000a9ac0(char *stream,uint *dirtyBits,char *dirtyBitsArg,undefined *scratchR6,uint dirtyWord3,char *dirtyWord1,undefined4 param_7,uint dirtyWord4,double fpPassThrough1,double fpPassThrough2,double fpPassThrough3,double fpPassThrough4,double fpPassThrough5,double fpPassThrough6,double fpPassThrough7,double fpPassThrough8,double fpPassThrough9,double fpPassThrough10,double fpPassThrough11,double fpPassThrough12,double fpPassThrough13)
+void FUN_000a9ac0(char *stream,uint *dirtyBits,char *dirtyBitsArg,undefined *scratchR6,uint dirtyWord3,char *dirtyWord1,undefined4 unusedArgR9,uint dirtyWord4,double fpPassThrough1,double fpPassThrough2,double fpPassThrough3,double fpPassThrough4,double fpPassThrough5,double fpPassThrough6,double fpPassThrough7,double fpPassThrough8,double fpPassThrough9,double fpPassThrough10,double fpPassThrough11,double fpPassThrough12,double fpPassThrough13)
 {
   uint loopIndex3;
   uint dirtyBitsWord0;
@@ -2542,10 +2542,10 @@ int FUN_000ab900(param_1)
 }
 
 /* FUN_000ab940 @ 0xab940 (96 bytes) */
-int FUN_000ab940(param_1, param_2, param_3, param_4, param_5, param_6)
+int FUN_000ab940(param_1, param_2, unusedArgR5, param_4, param_5, param_6)
   int param_1;
   int param_2;
-  undefined4 param_3;
+  undefined4 unusedArgR5;
   int *param_4;
   undefined1 *param_5;
   int param_6;
@@ -2569,15 +2569,15 @@ int FUN_000ab940(param_1, param_2, param_3, param_4, param_5, param_6)
 }
 
 /* FUN_000ab9b0 @ 0xab9b0 (240 bytes) */
-int FUN_000ab9b0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10)
+int FUN_000ab9b0(param_1, param_2, unusedArgR5, unusedArgR6, unusedArgR7, unusedArgR8, unusedArgR9, unusedArgR10, param_9, param_10)
   int param_1;
   int param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+  undefined4 unusedArgR5;
+  undefined4 unusedArgR6;
+  undefined4 unusedArgR7;
+  undefined4 unusedArgR8;
+  undefined4 unusedArgR9;
+  undefined4 unusedArgR10;
   int param_9;
   int *param_10;
 {
@@ -5410,7 +5410,7 @@ LAB_000afb10:
 }
 
 /* FUN_000afe40 @ 0xafe40 (5932 bytes) */
-undefined4 FUN_000afe40(int glContext,int param_2,undefined4 param_3,uint *unused,double fpPassThrough1)
+undefined4 FUN_000afe40(int glContext,int param_2,undefined4 unusedArgR5,uint *unused,double fpPassThrough1)
 {
   undefined4 allocation26;
   undefined4 allocation25;
@@ -7884,7 +7884,7 @@ LAB_000b4ee0:
 }
 
 /* FUN_000b4f50 @ 0xb4f50 (180 bytes) */
-void FUN_000b4f50(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,int param_7,double fpPassThrough1,double fpPassThrough2,double fpPassThrough3,double fpPassThrough4)
+void FUN_000b4f50(int param_1,int param_2,undefined4 unusedArgR5,undefined4 unusedArgR6,undefined4 unusedArgR7,undefined4 unusedArgR8,int param_7,double fpPassThrough1,double fpPassThrough2,double fpPassThrough3,double fpPassThrough4)
 {
   int iVar1;
   undefined4 uVar2;
@@ -8542,8 +8542,8 @@ int FUN_000b5c00(glContext, param_2, param_3)
 }
 
 /* FUN_000b5f40 @ 0xb5f40 (100 bytes) */
-int FUN_000b5f40(param_1, param_2)
-  undefined4 param_1;
+int FUN_000b5f40(unusedArgR3, param_2)
+  undefined4 unusedArgR3;
   int param_2;
 {
   int iVar1;
