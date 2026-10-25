@@ -819,19 +819,19 @@
 0x912f0	FUN_000912f0	208	yes	
 0x913e0	FUN_000913e0	224	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x914c0	noop_914c0	28	yes	
-0x914e0	FUN_000914e0	492	no	indirect call (driver context / vtable / callback)
-0x916d0	FUN_000916d0	420	no	indirect call (driver context / vtable / callback)
-0x91880	FUN_00091880	248	no	indirect call (driver context / vtable / callback)
+0x914e0	ffvpEmitEyePositionMad	492	no	indirect call (driver context / vtable / callback)
+0x916d0	ffvpEmitEyePositionDp4	420	no	indirect call (driver context / vtable / callback)
+0x91880	ffvpEmitEyeDistanceSquared	248	no	indirect call (driver context / vtable / callback)
 0x91980	FUN_00091980	176	no	indirect call (driver context / vtable / callback)
-0x91a30	FUN_00091a30	352	yes	
-0x91b90	FUN_00091b90	460	yes	
-0x91d70	FUN_00091d70	300	yes	
+0x91a30	ffvpEmitEyeNormal	352	yes	
+0x91b90	ffvpEmitNormalizedNormal	460	yes	
+0x91d70	ffvpEmitRescaledNormal	300	yes	
 0x91eb0	FUN_00091eb0	648	yes	
-0x92150	FUN_00092150	200	no	indirect call (driver context / vtable / callback)
-0x92220	FUN_00092220	296	no	indirect call (driver context / vtable / callback)
-0x92350	FUN_00092350	512	no	indirect call (driver context / vtable / callback)
-0x92570	FUN_00092570	796	no	indirect call (driver context / vtable / callback)
-0x928a0	FUN_000928a0	792	no	indirect call (driver context / vtable / callback)
+0x92150	ffvpEmitInverseEyeDistance	200	no	indirect call (driver context / vtable / callback)
+0x92220	ffvpEmitEyeVector	296	no	indirect call (driver context / vtable / callback)
+0x92350	ffvpEmitReflectionVector	512	no	indirect call (driver context / vtable / callback)
+0x92570	ffvpEmitSphereMapCoord	796	no	indirect call (driver context / vtable / callback)
+0x928a0	ffvpEmitFogCoord	792	no	indirect call (driver context / vtable / callback)
 0x92bf0	FUN_00092bf0	328	no	indirect call (driver context / vtable / callback)
 0x92d40	FUN_00092d40	340	no	indirect call (driver context / vtable / callback)
 0x92ea0	FUN_00092ea0	324	no	indirect call (driver context / vtable / callback)
