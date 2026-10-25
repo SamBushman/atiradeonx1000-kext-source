@@ -2889,48 +2889,48 @@ int FUN_00135a2c(targetNode, mergedNodeIndex, graph)
 }
 
 /* FUN_00135c20 @ 0x135c20 (260 bytes) */
-int FUN_00135c20(param_1, elementIndex, param_3)
-  int param_1;
+int FUN_00135c20(graph, elementIndex, nodeB)
+  int graph;
   uint elementIndex;
-  uint param_3;
+  uint nodeB;
 {
-  undefined4 uVar1;
+  undefined4 merged;
   int callResult;
-  uint uVar3;
-  undefined4 *puVar4;
-  uint uVar5;
-  uint *puVar6;
+  uint nodeVectorCount;
+  undefined4 *lowerNodeRef;
+  uint lowerNode;
+  uint *nodeVector;
   
-  uVar1 = 1;
-  if (elementIndex != param_3) {
-    callResult = ((int (*)())InterferenceMatrix__testPair)(param_1,param_3,elementIndex);
-    uVar1 = 0;
+  merged = 1;
+  if (elementIndex != nodeB) {
+    callResult = ((int (*)())InterferenceMatrix__testPair)(graph,nodeB,elementIndex);
+    merged = 0;
     if (callResult == 0) {
-      uVar5 = elementIndex;
-      if ((int)param_3 < (int)elementIndex) {
-        uVar5 = param_3;
+      lowerNode = elementIndex;
+      if ((int)nodeB < (int)elementIndex) {
+        lowerNode = nodeB;
       }
-      if ((int)elementIndex < (int)param_3) {
-        elementIndex = param_3;
+      if ((int)elementIndex < (int)nodeB) {
+        elementIndex = nodeB;
       }
-      puVar6 = *(uint **)(param_1 + 4);
-      if (uVar5 < *puVar6) {
-        uVar3 = puVar6[1];
-        if (uVar3 <= uVar5) {
-          _memset(uVar3 * 4 + puVar6[2],0,(uVar5 - uVar3) * 4 + 4);
-          puVar6[1] = uVar5 + 1;
+      nodeVector = *(uint **)(graph + 4);
+      if (lowerNode < *nodeVector) {
+        nodeVectorCount = nodeVector[1];
+        if (nodeVectorCount <= lowerNode) {
+          _memset(nodeVectorCount * 4 + nodeVector[2],0,(lowerNode - nodeVectorCount) * 4 + 4);
+          nodeVector[1] = lowerNode + 1;
         }
-        puVar4 = (undefined4 *)(uVar5 * 4 + puVar6[2]);
+        lowerNodeRef = (undefined4 *)(lowerNode * 4 + nodeVector[2]);
       }
       else {
-        puVar4 = (undefined4 *)Vector__elementRefGrow(puVar6,uVar5);
+        lowerNodeRef = (undefined4 *)Vector__elementRefGrow(nodeVector,lowerNode);
       }
-      ((int (*)())FUN_00135a2c)(*puVar4,elementIndex,param_1);
-      ((int (*)())FUN_00134cd4)(param_1,uVar5,elementIndex);
-      uVar1 = 1;
+      ((int (*)())FUN_00135a2c)(*lowerNodeRef,elementIndex,graph);
+      ((int (*)())FUN_00134cd4)(graph,lowerNode,elementIndex);
+      merged = 1;
     }
   }
-  return uVar1;
+  return merged;
 }
 
 /* ColorGraph__removeNodeUpdateDegrees @ 0x135d24 (652 bytes) */

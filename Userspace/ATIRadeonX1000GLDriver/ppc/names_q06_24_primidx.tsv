@@ -1,0 +1,46 @@
+local	PrimitiveIndex__ctor_125db8	param_2	baseCtorArg2	INFERRED	second argument forwarded to TempValue__ctor
+local	PrimitiveIndex__ctor_125db8	param_3	baseCtorArg3	INFERRED	third argument forwarded to TempValue__ctor
+local	PrimitiveIndex__ctor_125db8	param_4	baseCtorArg4	INFERRED	fourth argument forwarded to TempValue__ctor and to the target vtable call
+use	PrimitiveIndex__ctor_125db8	uVar5	movInst	INFERRED	IRMov created to copy the loaded temporary into this register	^\s*uVar5\ =\ FUN_001084b8\(0x31,param_5\);$	+2
+use	PrimitiveIndex__ctor_125db8	uVar5	movInst	INFERRED	IRMov created to copy the loaded temporary into this register	^\s*iVar3\ =\ FUN_001054ec\(uVar5,1\);$	+1
+use	PrimitiveIndex__ctor_125db8	uVar5	movInst	INFERRED	IRMov created to copy the loaded temporary into this register	^\s*FUN_001046c8\(uVar5,0,param_1\);$	+3
+use	PrimitiveIndex__ctor_125db8	uVar1	tempVReg	INFERRED	virtual register of the temporary that the IRLoadTemp defines (created from the target's slot 0xa4 result)	^\s*uVar1\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(param_5\ \+\ COMP_target\)\ \+\ 0xa4\)\)$	+1
+use	PrimitiveIndex__ctor_125db8	uVar1	tempVReg	INFERRED	virtual register of the temporary that the IRLoadTemp defines (created from the target's slot 0xa4 result)	^\s*uVar1\ =\ FUN_00127608\(\*\(undefined4\ \*\)\(iVar4\ \+\ 0x3ac\),0x10,uVar1,0\);$	+1
+use	PrimitiveIndex__ctor_125db8	uVar1	tempVReg	INFERRED	virtual register of the temporary that the IRLoadTemp defines (created from the target's slot 0xa4 result)	^\s*FUN_001046c8\(puVar6,0,uVar1\);$	+2
+use	PrimitiveIndex__ctor_125db8	uVar1	tempVReg	INFERRED	virtual register of the temporary that the IRLoadTemp defines (created from the target's slot 0xa4 result)	^\s*FUN_001046c8\(uVar5,1,uVar1\);$	+1
+use	PrimitiveIndex__ctor_125db8	uVar1	identitySwizzle	INFERRED	swizzle word 0x10203 stored into the move's source operand	^\s*uVar1\ =\ local_38\[0\];$	+1
+use	PrimitiveIndex__ctor_125db8	uVar1	identitySwizzle	INFERRED	swizzle word 0x10203 stored into the move's source operand	^\s*\*\(undefined4\ \*\)\(iVar3\ \+\ 0x10\)\ =\ uVar1;$	+1
+use	PrimitiveIndex__ctor_125db8	iVar3	compilerCopy	INFERRED	copy of the compiler pointer passed on as a stale argument	^\s*iVar3\ =\ param_5;$	+1
+use	PrimitiveIndex__ctor_125db8	iVar3	compilerCopy	INFERRED	copy of the compiler pointer passed on as a stale argument	^\s*\(\*\(int\ \*\*\)\(param_5\ \+\ COMP_target\),local_38,param_5,param_4,iVar3,in_r8,0x10203\);$	+1
+use	PrimitiveIndex__ctor_125db8	iVar3	movSourceRecord	INFERRED	source operand record of the move	^\s*iVar3\ =\ FUN_001054ec\(uVar5,1\);$	+2
+use	PrimitiveIndex__ctor_125db8	in_r8	staleArg8	INFERRED	r8 left over, forwarded to the target vtable call	^\s*\(\*\(int\ \*\*\)\(param_5\ \+\ COMP_target\),local_38,param_5,param_4,iVar3,in_r8,0x10203\);$	+1
+use	PrimitiveIndex__ctor_125db8	iVar4	program	INFERRED	compiler->currentProgram	^\s*iVar4\ =\ \*\(int\ \*\)\(param_5\ \+\ COMP_currentProgram\);$	+1
+use	PrimitiveIndex__ctor_125db8	iVar4	program	INFERRED	compiler->currentProgram	^\s*uVar1\ =\ FUN_00127608\(\*\(undefined4\ \*\)\(iVar4\ \+\ 0x3ac\),0x10,uVar1,0\);$	+1
+use	PrimitiveIndex__ctor_125db8	iVar4	program	INFERRED	compiler->currentProgram	^\s*FUN_000e76c4\(\*\(undefined4\ \*\)\(iVar4\ \+\ 0x3a0\),puVar6\);$	+1
+use	PrimitiveIndex__ctor_125db8	iVar4	program	INFERRED	compiler->currentProgram	^\s*FUN_000e7688\(\*\(undefined4\ \*\)\(iVar4\ \+\ 0x3a0\),uVar5\);$	+1
+use	PrimitiveIndex__ctor_125db8	puVar6	loadTempInst	INFERRED	the IRLoadTemp for this index (allocation + 1)	^\s*puVar6\ =\ puVar2\ \+\ 1;$	+1
+use	PrimitiveIndex__ctor_125db8	puVar6	loadTempInst	INFERRED	the IRLoadTemp for this index (allocation + 1)	^\s*FUN_00109348\(puVar6,param_1,param_5\);$	+4
+local	PrimitiveIndex__ctor_125db8	local_38	identitySwizzleWord	INFERRED	swizzle word 0x10203 passed to the target and written to the move
+local	PrimitiveIndex__ctor_12499c	param_2	baseCtorArg2	INFERRED	second argument forwarded to TempValue__ctor
+local	PrimitiveIndex__ctor_12499c	param_3	baseCtorArg3	INFERRED	third argument forwarded to TempValue__ctor
+local	PrimitiveIndex__ctor_12499c	param_4	baseCtorArg4	INFERRED	fourth argument forwarded to TempValue__ctor and to the target vtable call
+use	PrimitiveIndex__ctor_12499c	uVar5	movInst	INFERRED	IRMov created to copy the loaded temporary into this register	^\s*uVar5\ =\ FUN_001084b8\(0x31,param_5\);$	+2
+use	PrimitiveIndex__ctor_12499c	uVar5	movInst	INFERRED	IRMov created to copy the loaded temporary into this register	^\s*iVar3\ =\ FUN_001054ec\(uVar5,1\);$	+1
+use	PrimitiveIndex__ctor_12499c	uVar5	movInst	INFERRED	IRMov created to copy the loaded temporary into this register	^\s*FUN_001046c8\(uVar5,0,param_1\);$	+3
+use	PrimitiveIndex__ctor_12499c	uVar1	tempVReg	INFERRED	virtual register of the temporary that the IRLoadTemp defines (created from the target's slot 0xa4 result)	^\s*uVar1\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(param_5\ \+\ COMP_target\)\ \+\ 0xa4\)\)$	+1
+use	PrimitiveIndex__ctor_12499c	uVar1	tempVReg	INFERRED	virtual register of the temporary that the IRLoadTemp defines (created from the target's slot 0xa4 result)	^\s*uVar1\ =\ FUN_00127608\(\*\(undefined4\ \*\)\(iVar4\ \+\ 0x3ac\),0x10,uVar1,0\);$	+1
+use	PrimitiveIndex__ctor_12499c	uVar1	tempVReg	INFERRED	virtual register of the temporary that the IRLoadTemp defines (created from the target's slot 0xa4 result)	^\s*FUN_001046c8\(puVar6,0,uVar1\);$	+2
+use	PrimitiveIndex__ctor_12499c	uVar1	tempVReg	INFERRED	virtual register of the temporary that the IRLoadTemp defines (created from the target's slot 0xa4 result)	^\s*FUN_001046c8\(uVar5,1,uVar1\);$	+1
+use	PrimitiveIndex__ctor_12499c	uVar1	identitySwizzle	INFERRED	swizzle word 0x10203 stored into the move's source operand	^\s*uVar1\ =\ local_38\[0\];$	+1
+use	PrimitiveIndex__ctor_12499c	uVar1	identitySwizzle	INFERRED	swizzle word 0x10203 stored into the move's source operand	^\s*\*\(undefined4\ \*\)\(iVar3\ \+\ 0x10\)\ =\ uVar1;$	+1
+use	PrimitiveIndex__ctor_12499c	iVar3	compilerCopy	INFERRED	copy of the compiler pointer passed on as a stale argument	^\s*iVar3\ =\ param_5;$	+1
+use	PrimitiveIndex__ctor_12499c	iVar3	compilerCopy	INFERRED	copy of the compiler pointer passed on as a stale argument	^\s*\(\*\(int\ \*\*\)\(param_5\ \+\ COMP_target\),local_38,param_5,param_4,iVar3,in_r8,0x10203\);$	+1
+use	PrimitiveIndex__ctor_12499c	iVar3	movSourceRecord	INFERRED	source operand record of the move	^\s*iVar3\ =\ FUN_001054ec\(uVar5,1\);$	+2
+use	PrimitiveIndex__ctor_12499c	in_r8	staleArg8	INFERRED	r8 left over, forwarded to the target vtable call	^\s*\(\*\(int\ \*\*\)\(param_5\ \+\ COMP_target\),local_38,param_5,param_4,iVar3,in_r8,0x10203\);$	+1
+use	PrimitiveIndex__ctor_12499c	iVar4	program	INFERRED	compiler->currentProgram	^\s*iVar4\ =\ \*\(int\ \*\)\(param_5\ \+\ COMP_currentProgram\);$	+1
+use	PrimitiveIndex__ctor_12499c	iVar4	program	INFERRED	compiler->currentProgram	^\s*uVar1\ =\ FUN_00127608\(\*\(undefined4\ \*\)\(iVar4\ \+\ 0x3ac\),0x10,uVar1,0\);$	+1
+use	PrimitiveIndex__ctor_12499c	iVar4	program	INFERRED	compiler->currentProgram	^\s*FUN_000e76c4\(\*\(undefined4\ \*\)\(iVar4\ \+\ 0x3a0\),puVar6\);$	+1
+use	PrimitiveIndex__ctor_12499c	iVar4	program	INFERRED	compiler->currentProgram	^\s*FUN_000e7688\(\*\(undefined4\ \*\)\(iVar4\ \+\ 0x3a0\),uVar5\);$	+1
+use	PrimitiveIndex__ctor_12499c	puVar6	loadTempInst	INFERRED	the IRLoadTemp for this index (allocation + 1)	^\s*puVar6\ =\ puVar2\ \+\ 1;$	+1
+use	PrimitiveIndex__ctor_12499c	puVar6	loadTempInst	INFERRED	the IRLoadTemp for this index (allocation + 1)	^\s*FUN_00109348\(puVar6,param_1,param_5\);$	+4
+local	PrimitiveIndex__ctor_12499c	local_38	identitySwizzleWord	INFERRED	swizzle word 0x10203 passed to the target and written to the move

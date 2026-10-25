@@ -209,29 +209,30 @@ LAB_0010fb28:
 }
 
 /* FUN_0010fb54 @ 0x10fb54 (308 bytes) */
-int FUN_0010fb54(vector, param_2, param_3)
+int FUN_0010fb54(vector, nextSlotRef, program)
   uint *vector;
-  int *param_2;
-  int param_3;
+  int *nextSlotRef;
+  int program;
 {
+  int exportRecordInst;
   uint vectorCount;
   undefined4 *vectorElementRef;
-  int iVar3;
-  int iVar4;
-  int iVar5;
-  int iVar6;
+  int bindingKind;
+  int slotEnd;
+  int assignedSlot;
+  int firstSlot;
   uint loopIndex;
   int *vectorElement;
-  int iVar9;
-  undefined4 auStack_f8 [51];
+  int exportInst;
+  undefined4 slotOwnerRegister [51];
   
-  iVar4 = 1;
-  iVar6 = *param_2;
-  *param_2 = iVar6 + 4;
+  slotEnd = 1;
+  firstSlot = *nextSlotRef;
+  *nextSlotRef = firstSlot + 4;
   vectorCount = vector[1];
   if (0 < (int)vectorCount) {
     loopIndex = 0;
-    iVar4 = 0;
+    slotEnd = 0;
     do {
       if (loopIndex < *vector) {
         if (vectorCount <= loopIndex) {
@@ -245,26 +246,26 @@ int FUN_0010fb54(vector, param_2, param_3)
       }
       loopIndex = loopIndex + 1;
       vectorElement = (int *)*vectorElementRef;
-      iVar9 = *vectorElement;
-      iVar3 = FUN_0010e40c(*(undefined4 *)(iVar9 + 0x13c),*(undefined4 *)(iVar9 + 0x140));
-      iVar5 = iVar6 + iVar3;
-      if (3 < iVar3) {
-        iVar5 = *param_2;
-        *param_2 = iVar5 + 1;
-        iVar9 = *vectorElement;
+      exportInst = *vectorElement;
+      bindingKind = FUN_0010e40c(*(undefined4 *)(exportInst + 0x13c),*(undefined4 *)(exportInst + 0x140));
+      assignedSlot = firstSlot + bindingKind;
+      if (3 < bindingKind) {
+        assignedSlot = *nextSlotRef;
+        *nextSlotRef = assignedSlot + 1;
+        exportInst = *vectorElement;
       }
-      auStack_f8[iVar5] = *(undefined4 *)(iVar9 + 0x94);
-      iVar3 = *vectorElement;
-      *(undefined4 *)(iVar3 + 0x98) = 5;
-      *(int *)(iVar3 + 0x94) = iVar5;
-      if (iVar4 < iVar5) {
-        iVar4 = iVar5;
+      slotOwnerRegister[assignedSlot] = *(undefined4 *)(exportInst + 0x94);
+      exportRecordInst = *vectorElement;
+      *(undefined4 *)(exportRecordInst + 0x98) = 5;
+      *(int *)(exportRecordInst + 0x94) = assignedSlot;
+      if (slotEnd < assignedSlot) {
+        slotEnd = assignedSlot;
       }
       vectorCount = vector[1];
     } while ((int)loopIndex < (int)vectorCount);
-    iVar4 = iVar4 + 1;
+    slotEnd = slotEnd + 1;
   }
-  return ((int (*)())FUN_0010fa24)(2,auStack_f8,iVar6,iVar4,*(undefined4 *)(param_3 + 0x418));
+  return ((int (*)())FUN_0010fa24)(2,slotOwnerRegister,firstSlot,slotEnd,*(undefined4 *)(program + 0x418));
 }
 
 /* FUN_0010fc88 @ 0x10fc88 (272 bytes) */
