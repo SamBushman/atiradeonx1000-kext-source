@@ -5,6 +5,11 @@ int extvsOptimizeProgram(ctx, shader)
   int ctx;
   int shader;
 {
+  undefined4 partnerOffsetWordc;
+  undefined4 partnerOffsetWord18;
+  undefined4 partnerOffsetWord10;
+  undefined4 partnerOffsetWord14;
+  undefined4 partnerOffsetWord8;
   uint mulScanStart;
   uint shiftIndex;
   uint afterAddIndex;
@@ -51,7 +56,7 @@ int extvsOptimizeProgram(ctx, shader)
   undefined4 uVar19;
   int *laterDestSlot;
   undefined4 uVar21;
-  int iVar22;
+  int shaderWord20;
   undefined4 uVar23;
   undefined4 uVar24;
   undefined4 uVar25;
@@ -185,16 +190,16 @@ LAB_000ba610:
             if (*(char *)(shader + 0x7b) == '\0') {
               if (iVar18 == 2) {
                 iVar18 = *(int *)(instEnd + -0x6c);
-                iVar22 = *(int *)(shader + 0x20);
+                shaderWord20 = *(int *)(shader + 0x20);
                 goto LAB_000ba1a0;
               }
             }
             else if (iVar18 == 2) {
               iVar18 = *(int *)(instEnd + -0x6c);
-              iVar22 = *(int *)(shader + 0x20);
-              if (*(int *)(iVar18 * 0x54 + iVar22 + 0x28) == 0x87c4) goto LAB_000ba664;
+              shaderWord20 = *(int *)(shader + 0x20);
+              if (*(int *)(iVar18 * 0x54 + shaderWord20 + 0x28) == 0x87c4) goto LAB_000ba664;
 LAB_000ba1a0:
-              if (*(int *)(iVar18 * 0x54 + iVar22 + 0x24) == 0x87c0) goto LAB_000ba664;
+              if (*(int *)(iVar18 * 0x54 + shaderWord20 + 0x24) == 0x87c0) goto LAB_000ba664;
             }
             if (uVar36 < instCount) {
               bVar10 = 0;
@@ -207,12 +212,12 @@ LAB_000ba1a0:
               while( true ) {
                 laterInstPtr = iVar18 + laterInstPtr;
                 if ((((*(int *)(laterInstPtr + 0x20) == 2) &&
-                     (iVar22 = *(int *)(instEnd + -0x6c), *(int *)(laterInstPtr + 0x24) == iVar22)) ||
+                     (shaderWord20 = *(int *)(instEnd + -0x6c), *(int *)(laterInstPtr + 0x24) == shaderWord20)) ||
                     ((*(int *)(laterInstPtr + 0x3c) == 2 &&
-                     (iVar22 = *(int *)(instEnd + -0x6c), *(int *)(laterInstPtr + 0x40) == iVar22)))) ||
+                     (shaderWord20 = *(int *)(instEnd + -0x6c), *(int *)(laterInstPtr + 0x40) == shaderWord20)))) ||
                    ((*(int *)(laterInstPtr + 0x58) == 2 &&
-                    (iVar22 = *(int *)(instEnd + -0x6c), *(int *)(laterInstPtr + 0x5c) == iVar22)))) {
-                  extvsInstReadsTempComponents(symbolTable,laterInstPtr,iVar22,&local_68,&local_67,&local_66,local_65);
+                    (shaderWord20 = *(int *)(instEnd + -0x6c), *(int *)(laterInstPtr + 0x5c) == shaderWord20)))) {
+                  extvsInstReadsTempComponents(symbolTable,laterInstPtr,shaderWord20,&local_68,&local_67,&local_66,local_65);
                   if (((((bVar1) || ((local_68 == '\0' || (bVar15 != 0)))) &&
                        ((destEnableY == '\0' || ((local_67 == '\0' || (bVar12 != 0)))))) &&
                       ((destEnableZ == '\0' || ((local_66 == '\0' || (bVar11 != 0)))))) &&
@@ -257,12 +262,12 @@ LAB_000ba1a0:
             do {
               iVar18 = laterOffset + *(int *)(shader + 0x18);
               if ((((*(int *)(iVar18 + 0x20) == 2) &&
-                   (iVar22 = *(int *)(instEnd + -0x6c), *(int *)(iVar18 + 0x24) == iVar22)) ||
+                   (shaderWord20 = *(int *)(instEnd + -0x6c), *(int *)(iVar18 + 0x24) == shaderWord20)) ||
                   ((*(int *)(iVar18 + 0x3c) == 2 &&
-                   (iVar22 = *(int *)(instEnd + -0x6c), *(int *)(iVar18 + 0x40) == iVar22)))) ||
+                   (shaderWord20 = *(int *)(instEnd + -0x6c), *(int *)(iVar18 + 0x40) == shaderWord20)))) ||
                  ((*(int *)(iVar18 + 0x58) == 2 &&
-                  (iVar22 = *(int *)(instEnd + -0x6c), *(int *)(iVar18 + 0x5c) == iVar22)))) {
-                extvsInstReadsTempComponents(symbolTable,iVar18,iVar22,&local_68,&local_67,&local_66,local_65);
+                  (shaderWord20 = *(int *)(instEnd + -0x6c), *(int *)(iVar18 + 0x5c) == shaderWord20)))) {
+                extvsInstReadsTempComponents(symbolTable,iVar18,shaderWord20,&local_68,&local_67,&local_66,local_65);
                 if ((((bVar1) || ((local_68 == '\0' || (bVar11 != 0)))) &&
                     (((destEnableY == '\0' || ((local_67 == '\0' || (bVar12 != 0)))) &&
                      ((destEnableZ == '\0' || ((local_66 == '\0' || (bVar15 != 0)))))))) &&
@@ -307,8 +312,8 @@ LAB_000ba664:
           addInst = (undefined4 *)(instArray + addInstOffset);
           if (*(int *)(instArray + addInstOffset) == 0x8787) {
             iVar18 = addInst[8];
-            if ((iVar18 != 2) || (iVar22 = mulInst[2], addInst[9] != iVar22)) {
-              if ((addInst[0xf] != 2) || (iVar22 = mulInst[2], addInst[0x10] != iVar22))
+            if ((iVar18 != 2) || (shaderWord20 = mulInst[2], addInst[9] != shaderWord20)) {
+              if ((addInst[0xf] != 2) || (shaderWord20 = mulInst[2], addInst[0x10] != shaderWord20))
               goto LAB_000ba7ec;
               iVar34 = 2;
               if (iVar18 == 2) goto LAB_000ba7dc;
@@ -325,10 +330,10 @@ LAB_000ba7dc:
               remainingLater = addSearchIndex - uVar36;
               laterSrcSlot = (int *)(instArray + uVar36 * 0x74 + 0x20);
               do {
-                if ((((*laterSrcSlot == 2) && (laterSrcSlot[1] == iVar22)) ||
-                    ((laterSrcSlot[7] == 2 && (laterSrcSlot[8] == iVar22)))) ||
-                   ((((laterSrcSlot[0xe] == 2 && (laterSrcSlot[0xf] == iVar22)) ||
-                     ((iVar26 = laterSrcSlot[-7], iVar26 == 2 && (laterSrcSlot[-6] == iVar22)))) ||
+                if ((((*laterSrcSlot == 2) && (laterSrcSlot[1] == shaderWord20)) ||
+                    ((laterSrcSlot[7] == 2 && (laterSrcSlot[8] == shaderWord20)))) ||
+                   ((((laterSrcSlot[0xe] == 2 && (laterSrcSlot[0xf] == shaderWord20)) ||
+                     ((iVar26 = laterSrcSlot[-7], iVar26 == 2 && (laterSrcSlot[-6] == shaderWord20)))) ||
                     (((iVar26 == mulInst[8] && (laterSrcSlot[-6] == mulInst[9])) ||
                      ((iVar26 == mulInst[0xf] && (laterSrcSlot[-6] == mulInst[0x10])))))))) {
                   bVar1 = false;
@@ -345,9 +350,9 @@ LAB_000ba754:
                 remainingLater = 1;
               }
               do {
-                if ((((((*laterSrcSlot == 2) && (laterSrcSlot[1] == iVar22)) ||
-                      ((laterSrcSlot[7] == 2 && (laterSrcSlot[8] == iVar22)))) ||
-                     ((laterSrcSlot[0xe] == 2 && (laterSrcSlot[0xf] == iVar22)))) ||
+                if ((((((*laterSrcSlot == 2) && (laterSrcSlot[1] == shaderWord20)) ||
+                      ((laterSrcSlot[7] == 2 && (laterSrcSlot[8] == shaderWord20)))) ||
+                     ((laterSrcSlot[0xe] == 2 && (laterSrcSlot[0xf] == shaderWord20)))) ||
                     (((*laterSrcSlot == 2 && (laterSrcSlot[1] == addInst[2])) ||
                      ((((laterSrcSlot[7] == 2 && (laterSrcSlot[8] == addInst[2])) ||
                        ((laterSrcSlot[0xe] == 2 && (laterSrcSlot[0xf] == addInst[2])))) ||
@@ -367,9 +372,9 @@ LAB_000bc018:
                   remainingLater = instCount - afterAddIndex;
                   laterSrcSlot = (int *)(instArray + afterAddIndex * 0x74 + 0x20);
                   do {
-                    if ((((*laterSrcSlot == 2) && (laterSrcSlot[1] == iVar22)) ||
-                        ((laterSrcSlot[7] == 2 && (laterSrcSlot[8] == iVar22)))) ||
-                       ((laterSrcSlot[0xe] == 2 && (laterSrcSlot[0xf] == iVar22)))) {
+                    if ((((*laterSrcSlot == 2) && (laterSrcSlot[1] == shaderWord20)) ||
+                        ((laterSrcSlot[7] == 2 && (laterSrcSlot[8] == shaderWord20)))) ||
+                       ((laterSrcSlot[0xe] == 2 && (laterSrcSlot[0xf] == shaderWord20)))) {
                       bVar1 = false;
                     }
                     laterSrcSlot = laterSrcSlot + 0x1d;
@@ -379,7 +384,7 @@ LAB_000bc018:
                 }
                 addSrcIndex = addInst[9];
                 *mulInst = 0x8788;
-                if (addSrcIndex == iVar22) {
+                if (addSrcIndex == shaderWord20) {
                   uVar21 = addInst[0x10];
                   uVar25 = addInst[0x11];
                   uVar19 = addInst[0x12];
@@ -1615,9 +1620,9 @@ LAB_000ba8a8:
                 remainingLater = instCount - afterAddIndex;
                 laterSrcSlot = (int *)(instArray + afterAddIndex * 0x74 + 0x20);
                 do {
-                  if (((*laterSrcSlot == 2) && (laterSrcSlot[1] == iVar22)) ||
-                     (((laterSrcSlot[7] == 2 && (laterSrcSlot[8] == iVar22)) ||
-                      ((laterSrcSlot[0xe] == 2 && (laterSrcSlot[0xf] == iVar22)))))) {
+                  if (((*laterSrcSlot == 2) && (laterSrcSlot[1] == shaderWord20)) ||
+                     (((laterSrcSlot[7] == 2 && (laterSrcSlot[8] == shaderWord20)) ||
+                      ((laterSrcSlot[0xe] == 2 && (laterSrcSlot[0xf] == shaderWord20)))))) {
                     bVar1 = false;
                   }
                   laterSrcSlot = laterSrcSlot + 0x1d;
@@ -1629,7 +1634,7 @@ LAB_000ba8a8:
                 }
               }
               *addInst = 0x8788;
-              if (addInst[9] == iVar22) {
+              if (addInst[9] == shaderWord20) {
                 uVar21 = addInst[10];
                 addInst[0x16] = iVar34;
                 addInst[0x17] = addInst[0x10];
@@ -2892,18 +2897,18 @@ LAB_000bd88c:
             }
             partnerOffset = partnerOffset + instArray;
             *(int *)(matMulInst + 0x24) = iVar18;
-            uVar21 = *(undefined4 *)(partnerOffset + 8);
-            uVar30 = *(undefined4 *)(partnerOffset + 0xc);
-            uVar25 = *(undefined4 *)(partnerOffset + 0x10);
+            partnerOffsetWord8 = *(undefined4 *)(partnerOffset + 8);
+            partnerOffsetWordc = *(undefined4 *)(partnerOffset + 0xc);
+            partnerOffsetWord10 = *(undefined4 *)(partnerOffset + 0x10);
             *(undefined4 *)(matMulInst + 4) = *(undefined4 *)(partnerOffset + 4);
-            *(undefined4 *)(matMulInst + 8) = uVar21;
-            *(undefined4 *)(matMulInst + 0xc) = uVar30;
-            *(undefined4 *)(matMulInst + 0x10) = uVar25;
-            uVar21 = *(undefined4 *)(partnerOffset + 0x14);
-            uVar25 = *(undefined4 *)(partnerOffset + 0x18);
+            *(undefined4 *)(matMulInst + 8) = partnerOffsetWord8;
+            *(undefined4 *)(matMulInst + 0xc) = partnerOffsetWordc;
+            *(undefined4 *)(matMulInst + 0x10) = partnerOffsetWord10;
+            partnerOffsetWord14 = *(undefined4 *)(partnerOffset + 0x14);
+            partnerOffsetWord18 = *(undefined4 *)(partnerOffset + 0x18);
             *(undefined4 *)(matMulInst + 0x1c) = *(undefined4 *)(partnerOffset + 0x1c);
-            *(undefined4 *)(matMulInst + 0x14) = uVar21;
-            *(undefined4 *)(matMulInst + 0x18) = uVar25;
+            *(undefined4 *)(matMulInst + 0x14) = partnerOffsetWord14;
+            *(undefined4 *)(matMulInst + 0x18) = partnerOffsetWord18;
             instCount = *(int *)(shader + 0x14) - 1;
             *(uint *)(shader + 0x14) = instCount;
             if (fusedPartnerIndex < instCount) {
@@ -2929,7 +2934,7 @@ LAB_000bd970:
 /* FUN_000bd9a0 @ 0xbd9a0 (160 bytes) */
 void FUN_000bd9a0(int glContext,undefined4 param_2,undefined4 param_3,undefined4 param_4,double fparam_1)
 {
-  code *pcVar1;
+  code *glContextPtr275c;
   int iVar2;
   undefined4 *puVar3;
   undefined4 extraout_r4;
@@ -2944,9 +2949,9 @@ void FUN_000bd9a0(int glContext,undefined4 param_2,undefined4 param_3,undefined4
     a6 = *(int *)(0x00002748 + glContext + 4);
     *(undefined4 *)(a6 + 4) = *(undefined4 *)(glContext + 0x1b78);
     iVar2 = *(int *)(0x00002748 + glContext + 4);
-    pcVar1 = *(code **)(glContext + 0x275c);
+    glContextPtr275c = *(code **)(glContext + 0x275c);
     *(int *)(0x00002748 + glContext + 4) = iVar2 + 8;
-    (*pcVar1)(glContext,iVar2 + 8,param_3,param_4,in_r7,in_r8,a6);
+    (*glContextPtr275c)(glContext,iVar2 + 8,param_3,param_4,in_r7,in_r8,a6);
     FUN_0009be00(glContext);
     fparam_1 = (double)FUN_0009cc30(glContext);
     param_2 = extraout_r4;
@@ -6775,6 +6780,7 @@ int psnDecEncodeHwWords(decodedProgram, rsWords, programImage)
   int rsWords;
   int programImage;
 {
+  uint decodedProgramWord8;
   int loopIndex2;
   int loopIndex;
   bool bVar1;
@@ -6799,8 +6805,8 @@ int psnDecEncodeHwWords(decodedProgram, rsWords, programImage)
   if (uVar9 != 0) {
     loopIndex3 = 0;
     do {
-      uVar7 = decodedProgram[2];
-      iVar8 = loopIndex3 * 0xa0 + uVar7;
+      decodedProgramWord8 = decodedProgram[2];
+      iVar8 = loopIndex3 * 0xa0 + decodedProgramWord8;
       iVar5 = *(int *)(iVar8 + 0x8c);
       iVar6 = *(int *)(iVar8 + 0x90);
       uVar12 = (uint)*(ushort *)(iVar8 + 4);
@@ -6886,7 +6892,7 @@ int psnDecEncodeHwWords(decodedProgram, rsWords, programImage)
         uVar9 = (*(ushort *)(iVar8 + 2) & 7) << 0x1a;
         *(uint *)(iVar10 + 0x98) = uVar9 | uVar12 & 0xe3ffffff;
         *(uint *)(iVar10 + 0x98) =
-             (*(ushort *)(loopIndex3 * 0xa0 + uVar7) & 3) << 0x1d | uVar9 | uVar12 & 0x83ffffff;
+             (*(ushort *)(loopIndex3 * 0xa0 + decodedProgramWord8) & 3) << 0x1d | uVar9 | uVar12 & 0x83ffffff;
         uVar12 = *(uint *)(iVar10 + 0x198);
         uVar9 = (*(ushort *)(iVar8 + 0x42) & 8) << 0x15;
         *(uint *)(iVar10 + 0x198) = uVar9 | uVar12 & 0xfeffffff;
@@ -8266,7 +8272,7 @@ int psnDecRangeHasConflict(decodedProgram, firstEntry, lastEntry, half, passThro
   ushort sourceSelect;
   int halfByteOffset;
   uint addressSlot;
-  int iVar9;
+  int decodedProgramWord8;
   int iVar10;
   int slotConflict;
   undefined4 conflictResult;
@@ -8276,8 +8282,8 @@ int psnDecRangeHasConflict(decodedProgram, firstEntry, lastEntry, half, passThro
   ushort *sourceSelectPtr;
   
   scanIndex = lastEntry + -1;
-  iVar9 = *(int *)(decodedProgram + 8);
-  entry = lastEntry * 0xa0 + iVar9;
+  decodedProgramWord8 = *(int *)(decodedProgram + 8);
+  entry = lastEntry * 0xa0 + decodedProgramWord8;
   rgbDestReg = *(ushort *)(entry + 4);
   rgbWriteMask = *(ushort *)(entry + 6);
   alphaDestReg = *(ushort *)(entry + 0x44);
@@ -8290,13 +8296,13 @@ LAB_000c3fb0:
     halfByteOffset = half * 0x40;
     scanOffset = scanIndex * 0xa0;
     while( true ) {
-      iVar9 = scanOffset + iVar9;
-      iVar10 = ((int (*)())psnDecReadsRegMask)(iVar9,(uint)rgbDestReg,(uint)rgbWriteMask,half);
+      decodedProgramWord8 = scanOffset + decodedProgramWord8;
+      iVar10 = ((int (*)())psnDecReadsRegMask)(decodedProgramWord8,(uint)rgbDestReg,(uint)rgbWriteMask,half);
       if ((((iVar10 != 0) ||
-           (iVar10 = ((int (*)())psnDecReadsRegMask)(iVar9,(uint)alphaDestReg,(uint)alphaWriteMask,half), iVar10 != 0)) ||
-          (iVar10 = ((int (*)())psnDecDestMatchesRegMask)(iVar9,(uint)rgbDestReg,(uint)rgbWriteMask,half,passThroughR7,passThroughR8,param_7),
+           (iVar10 = ((int (*)())psnDecReadsRegMask)(decodedProgramWord8,(uint)alphaDestReg,(uint)alphaWriteMask,half), iVar10 != 0)) ||
+          (iVar10 = ((int (*)())psnDecDestMatchesRegMask)(decodedProgramWord8,(uint)rgbDestReg,(uint)rgbWriteMask,half,passThroughR7,passThroughR8,param_7),
           iVar10 != 0)) ||
-         (iVar10 = ((int (*)())psnDecDestMatchesRegMask)(iVar9,(uint)alphaDestReg,(uint)alphaWriteMask,half,passThroughR7,passThroughR8,param_7),
+         (iVar10 = ((int (*)())psnDecDestMatchesRegMask)(decodedProgramWord8,(uint)alphaDestReg,(uint)alphaWriteMask,half,passThroughR7,passThroughR8,param_7),
          iVar10 != 0)) break;
       sourceSelectPtr = (ushort *)(entry + halfByteOffset + 8);
       loopIndex = 0;
@@ -8306,13 +8312,13 @@ LAB_000c3fb0:
         if (addressSlot == 3) goto LAB_000c3fa8;
         param_7 = sourceSelect & 0x100;
         if ((sourceSelect & 0x100) != 0) {
-          slotConflict = ((int (*)())psnDecDestMatchesRegMask)(iVar9,(uint)*(ushort *)(addressSlot * 2 + entry + 0x80),7,half,passThroughR7
+          slotConflict = ((int (*)())psnDecDestMatchesRegMask)(decodedProgramWord8,(uint)*(ushort *)(addressSlot * 2 + entry + 0x80),7,half,passThroughR7
                                 ,passThroughR8,param_7);
           if (slotConflict != 0) goto LAB_000c3fa8;
           sourceSelect = *sourceSelectPtr;
         }
         if (((sourceSelect & 0x200) != 0) &&
-           (slotConflict = ((int (*)())psnDecDestMatchesRegMask)(iVar9,(uint)*(ushort *)(addressSlot * 2 + entry + 0x86),8,half,
+           (slotConflict = ((int (*)())psnDecDestMatchesRegMask)(decodedProgramWord8,(uint)*(ushort *)(addressSlot * 2 + entry + 0x86),8,half,
                                   passThroughR7,passThroughR8,param_7), slotConflict != 0)) goto LAB_000c3fa8;
         loopContinue = loopIndex != 2;
         sourceSelectPtr = sourceSelectPtr + 2;
@@ -8321,7 +8327,7 @@ LAB_000c3fb0:
       scanIndex = scanIndex + -1;
       scanOffset = scanOffset + -0xa0;
       if (scanIndex < firstEntry) goto LAB_000c3fb0;
-      iVar9 = *(int *)(decodedProgram + 8);
+      decodedProgramWord8 = *(int *)(decodedProgram + 8);
     }
 LAB_000c3fa8:
     conflictResult = 1;
@@ -8933,13 +8939,14 @@ int psnDecodedToProgram(decodedProgram, previousRecord, outStatus)
   undefined4 *previousRecord;
   uint *outStatus;
 {
+  short entryShort3a;
   undefined1 isFirstTexRecord;
   int entryAlias;
   uint entryArray;
   int loopIndex2;
   bool loopContinue;
-  byte bVar2;
-  float fVar3;
+  byte entryByte15;
+  float entryFloat6c;
   undefined2 rgbDestReg;
   undefined2 alphaDestReg;
   ushort uVar6;
@@ -8994,10 +9001,10 @@ int psnDecodedToProgram(decodedProgram, previousRecord, outStatus)
           *(char *)((int)previousRecord + 0x62) = (char)*(undefined2 *)(entry + 0x28);
           *(char *)((int)previousRecord + 0x61) = (char)((ushort)*(undefined2 *)(entry + 0x28) >> 8);
         }
-        bVar2 = *(byte *)(entry + 0x15);
+        entryByte15 = *(byte *)(entry + 0x15);
         *(undefined1 *)(previousRecord + 0x1a) = isFirstTexRecord;
         isFirstTexRecord = 0;
-        *(byte *)((int)previousRecord + 0x67) = bVar2 ^ 0xf;
+        *(byte *)((int)previousRecord + 0x67) = entryByte15 ^ 0xf;
       }
       else if (entryMode == 0) {
         *(undefined2 *)((int)previousRecord + 0x4e) = rgbDestReg;
@@ -9008,11 +9015,11 @@ int psnDecodedToProgram(decodedProgram, previousRecord, outStatus)
           *(undefined1 *)((int)previousRecord + 0x53) = 0;
         }
         else {
-          sVar9 = *(short *)(entry + 0x3a);
-          if ((sVar9 == 2) || (sVar9 == 3)) {
-            *(char *)((int)previousRecord + 0x53) = (char)sVar9;
+          entryShort3a = *(short *)(entry + 0x3a);
+          if ((entryShort3a == 2) || (entryShort3a == 3)) {
+            *(char *)((int)previousRecord + 0x53) = (char)entryShort3a;
           }
-          else if (sVar9 == 0) {
+          else if (entryShort3a == 0) {
             *(undefined1 *)((int)previousRecord + 0x53) = 1;
           }
         }
@@ -9035,10 +9042,10 @@ int psnDecodedToProgram(decodedProgram, previousRecord, outStatus)
         }
         fVar7 = FLOAT_001aa0e8;
         *(bool *)((int)previousRecord + 0x55) = *(float *)(entry + 0x2c) != FLOAT_001aa0e8;
-        fVar3 = *(float *)(entry + 0x6c);
+        entryFloat6c = *(float *)(entry + 0x6c);
         *(undefined1 *)((int)previousRecord + 0x57) = 0;
         *(undefined1 *)((int)previousRecord + 0x56) = 0;
-        *(bool *)(previousRecord + 0x15) = fVar3 != fVar7;
+        *(bool *)(previousRecord + 0x15) = entryFloat6c != fVar7;
       }
       else if (entryMode == 2) {
         *(undefined2 *)(previousRecord + 0x15) = rgbDestReg;
@@ -10034,7 +10041,7 @@ int psnReallocateTemps(psnState, psnProgram, param_3, param_4, param_5, param_6,
   uint uVar8;
   byte bVar9;
   uint uVar10;
-  int iVar11;
+  int psnProgramWord8;
   int iVar12;
   uint *puVar13;
   uint *puVar14;
@@ -10085,12 +10092,12 @@ int psnReallocateTemps(psnState, psnProgram, param_3, param_4, param_5, param_6,
     puStack_894 = puStack_898 + *(int *)(psnState + 0x30) * 4;
     _memset(puStack_894,0,*(int *)(psnState + 0x30) * 8);
   }
-  iVar11 = *(int *)(psnProgram + 8);
-  if (iVar11 != 0) {
+  psnProgramWord8 = *(int *)(psnProgram + 8);
+  if (psnProgramWord8 != 0) {
     uVar10 = 0;
     iVar12 = 0;
     puVar13 = (uint *)0x0;
-    puVar14 = (uint *)(psnProgram + iVar11 * 0x48);
+    puVar14 = (uint *)(psnProgram + psnProgramWord8 * 0x48);
     do {
       uVar5 = *puVar14;
       if (uVar5 == 2) {
@@ -10376,7 +10383,7 @@ LAB_000c6e10:
       iVar12 = iVar12 + 1;
       puVar13 = puVar14;
       puVar14 = puVar14 + -0x12;
-    } while (iVar11 != iVar12);
+    } while (psnProgramWord8 != iVar12);
   }
   ((int (*)())FUN_000c5e60)(psnProgram);
   return;
@@ -10508,7 +10515,7 @@ int FUN_000c6ff0(ctx, param_2)
   int ctx;
   int param_2;
 {
-  undefined *puVar1;
+  undefined *ctxPtr23d4;
   undefined4 uVar2;
   undefined4 local_88;
   undefined4 local_84;
@@ -10545,19 +10552,19 @@ int FUN_000c6ff0(ctx, param_2)
     local_7c = 0x2c;
   }
   else {
-    puVar1 = *(undefined **)(ctx + 0x23d4);
-    if (((puVar1 + -0x7240 < ((unsigned char *)0x10)) || (puVar1 + -0x7100 < ((unsigned char *)0x10))) ||
-       (((((puVar1 != (undefined *)0x71c0 &&
-           ((((puVar1 != (undefined *)0x71c2 && (puVar1 != (undefined *)0x71c6)) &&
-             (puVar1 != (undefined *)0x71ce)) &&
-            ((puVar1 != (undefined *)0x71d2 && (puVar1 != (undefined *)0x71de)))))) &&
-          (puVar1 != (undefined *)0x71c4)) &&
-         (((puVar1 != (undefined *)0x71c5 && (puVar1 != (undefined *)0x7140)) &&
-          ((puVar1 != (undefined *)0x7142 &&
-           (((puVar1 != ((unsigned char *)0x00007146) && (puVar1 != ((unsigned char *)0x0000714e))) &&
-            (puVar1 != (undefined *)0x7152)))))))) &&
-        (((puVar1 != (undefined *)0x715e && (puVar1 != ((unsigned char *)0x00007144))) &&
-         ((puVar1 != ((unsigned char *)0x00007145) && ((puVar1 != ((unsigned char *)0x00007148) && (puVar1 != ((unsigned char *)0x00007149))))))))))
+    ctxPtr23d4 = *(undefined **)(ctx + 0x23d4);
+    if (((ctxPtr23d4 + -0x7240 < ((unsigned char *)0x10)) || (ctxPtr23d4 + -0x7100 < ((unsigned char *)0x10))) ||
+       (((((ctxPtr23d4 != (undefined *)0x71c0 &&
+           ((((ctxPtr23d4 != (undefined *)0x71c2 && (ctxPtr23d4 != (undefined *)0x71c6)) &&
+             (ctxPtr23d4 != (undefined *)0x71ce)) &&
+            ((ctxPtr23d4 != (undefined *)0x71d2 && (ctxPtr23d4 != (undefined *)0x71de)))))) &&
+          (ctxPtr23d4 != (undefined *)0x71c4)) &&
+         (((ctxPtr23d4 != (undefined *)0x71c5 && (ctxPtr23d4 != (undefined *)0x7140)) &&
+          ((ctxPtr23d4 != (undefined *)0x7142 &&
+           (((ctxPtr23d4 != ((unsigned char *)0x00007146) && (ctxPtr23d4 != ((unsigned char *)0x0000714e))) &&
+            (ctxPtr23d4 != (undefined *)0x7152)))))))) &&
+        (((ctxPtr23d4 != (undefined *)0x715e && (ctxPtr23d4 != ((unsigned char *)0x00007144))) &&
+         ((ctxPtr23d4 != ((unsigned char *)0x00007145) && ((ctxPtr23d4 != ((unsigned char *)0x00007148) && (ctxPtr23d4 != ((unsigned char *)0x00007149))))))))))
        ) {
       local_7c = 0x3c;
     }
@@ -10639,7 +10646,7 @@ int ilRecordDefinedConstantPrimary(programRecord, constantIndex, values)
   uint constantIndex;
   undefined4 *values;
 {
-  undefined4 uVar1;
+  undefined4 valuesWordc;
   int iVar2;
   int iVar3;
   uint uVar4;
@@ -10652,9 +10659,9 @@ int ilRecordDefinedConstantPrimary(programRecord, constantIndex, values)
   uVar4 = *(uint *)(iVar5 + 0x188);
   *(undefined4 *)(iVar3 + 0x1ac) = values[1];
   *(undefined4 *)(iVar3 + 0x1b0) = values[2];
-  uVar1 = values[3];
+  valuesWordc = values[3];
   *(uint *)(iVar5 + 0x188) = 1 << (constantIndex + iVar2 * -0x20 & 0x3f) | uVar4;
-  *(undefined4 *)(iVar3 + 0x1b4) = uVar1;
+  *(undefined4 *)(iVar3 + 0x1b4) = valuesWordc;
   return;
 }
 
@@ -10665,7 +10672,7 @@ int ilRecordDefinedConstantSecondary(programRecord, constantIndex, values)
   undefined4 *values;
 {
   int iVar1;
-  undefined4 uVar2;
+  undefined4 valuesWordc;
   uint uVar3;
   int iVar4;
   int iVar5;
@@ -10677,9 +10684,9 @@ int ilRecordDefinedConstantSecondary(programRecord, constantIndex, values)
   uVar3 = *(uint *)(((unsigned char *)0x000011a8) + iVar4);
   *(undefined4 *)((int)((unsigned char *)0x000011cc) + iVar5) = values[1];
   *(undefined4 *)(((unsigned char *)0x000011d0U) + iVar5) = values[2];
-  uVar2 = values[3];
+  valuesWordc = values[3];
   *(uint *)(((unsigned char *)0x000011a8) + iVar4) = 1 << (constantIndex + iVar1 * -0x20 & 0x3f) | uVar3;
-  *(undefined4 *)(((unsigned char *)0x000011d4) + iVar5) = uVar2;
+  *(undefined4 *)(((unsigned char *)0x000011d4) + iVar5) = valuesWordc;
   return;
 }
 

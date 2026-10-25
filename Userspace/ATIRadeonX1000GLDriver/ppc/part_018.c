@@ -110,6 +110,8 @@ int ilEmitShadowCompare(programRecord, param_2, coordinateOperand, coordinateExt
   uint *outCursor;
   undefined4 param_8;
 {
+  uint programRecordWord184;
+  uint programRecordWord180;
   ushort uVar1;
   int unitByteOffset;
   int iVar3;
@@ -121,13 +123,13 @@ int ilEmitShadowCompare(programRecord, param_2, coordinateOperand, coordinateExt
   if ((1 << (unitIndex & 0x3f) & *(uint *)(programRecord + 0x70)) != 0) {
     *outCursor = 0x5b;
     unitByteOffset = unitIndex * 4;
-    uVar7 = *(uint *)(programRecord + 0x180);
+    programRecordWord180 = *(uint *)(programRecord + 0x180);
     outCursor[2] = 0x10;
-    outCursor[1] = uVar7 & 0xffff | 0x440000;
+    outCursor[1] = programRecordWord180 & 0xffff | 0x440000;
     compareSelectWord = 0xd;
-    uVar7 = *(uint *)(programRecord + 0x184);
+    programRecordWord184 = *(uint *)(programRecord + 0x184);
     outCursor[4] = 0x2222;
-    outCursor[3] = uVar7 & 0xffff | 0x440000;
+    outCursor[3] = programRecordWord184 & 0xffff | 0x440000;
     uVar1 = *(ushort *)coordinateOperand;
     uVar7 = *coordinateOperand;
     outCursor[6] = 0x2222;
@@ -410,9 +412,13 @@ int ilEmitPrologue(outCursor, programRecord, passThroughR5, passThroughR6, passT
   undefined4 passThroughR9;
   undefined4 passThroughR10;
 {
+  uint programRecordWord74;
+  uint programRecordWord54;
+  uint programRecordWord60;
+  uint programRecordWord8;
   uint loopIndex;
   bool bVar1;
-  uint uVar2;
+  uint programRecordWord70;
   undefined4 registerNumber;
   uint *puVar4;
   int iVar5;
@@ -476,19 +482,19 @@ int ilEmitPrologue(outCursor, programRecord, passThroughR5, passThroughR6, passT
     registerNumber = ilAllocLowestFreeBit8(programRecord,(int)allocationResult,passThroughR5,passThroughR6,passThroughR7,passThroughR8,passThroughR9,passThroughR10);
     *(undefined4 *)(programRecord + 0x60) = registerNumber;
     *outCursor = 0x1ff0016;
-    uVar6 = *(uint *)(programRecord + 0x60);
+    programRecordWord60 = *(uint *)(programRecord + 0x60);
     outCursor[2] = 0x51;
-    outCursor[1] = uVar6 & 0xffff | 0x110000;
-    uVar6 = *(uint *)(programRecord + 0x54);
+    outCursor[1] = programRecordWord60 & 0xffff | 0x110000;
+    programRecordWord54 = *(uint *)(programRecord + 0x54);
     outCursor[4] = 0x40;
-    outCursor[3] = uVar6 & 0xffff | 0x440000;
+    outCursor[3] = programRecordWord54 & 0xffff | 0x440000;
     registerNumber = *(undefined4 *)(programRecord + 0x60);
     outCursor[6] = 0x49;
     operandToken0 = CONCAT22(0x11,(short)registerNumber);
     outCursor[5] = operandToken0;
-    uVar6 = *(uint *)(programRecord + 0x54);
+    programRecordWord54 = *(uint *)(programRecord + 0x54);
     outCursor[8] = 0x15;
-    outCursor[7] = uVar6 & 0xffff | 0x440000;
+    outCursor[7] = programRecordWord54 & 0xffff | 0x440000;
     registerNumber = *(undefined4 *)(programRecord + 0x54);
     outCursor[10] = (uint)((unsigned char *)0x00003333);
     operandToken0 = CONCAT22(4,(short)registerNumber);
@@ -497,9 +503,9 @@ int ilEmitPrologue(outCursor, programRecord, passThroughR5, passThroughR6, passT
     outCursor[0xc] = 0x40;
     operandToken1 = CONCAT22(0x11,(short)registerNumber);
     outCursor[0xb] = operandToken1;
-    uVar6 = *(uint *)(programRecord + 0x54);
+    programRecordWord54 = *(uint *)(programRecord + 0x54);
     outCursor[0xe] = 0x15;
-    outCursor[0xd] = uVar6 & 0xffff | 0x440000;
+    outCursor[0xd] = programRecordWord54 & 0xffff | 0x440000;
     operandToken0 = CONCAT22(4,(short)*(undefined4 *)(programRecord + 0x54));
     outCursor[0xf] = operandToken0;
     operandToken1 = CONCAT22(1,(short)*(undefined4 *)(programRecord + 0x58));
@@ -509,14 +515,14 @@ int ilEmitPrologue(outCursor, programRecord, passThroughR5, passThroughR6, passT
     outCursor = outCursor + 0x12;
   }
   if (*(int *)(programRecord + 0x2234) != 0) {
-    uVar2 = *(uint *)(programRecord + 0x70);
-    uVar6 = *(uint *)(programRecord + 0x74);
+    programRecordWord70 = *(uint *)(programRecord + 0x70);
+    programRecordWord74 = *(uint *)(programRecord + 0x74);
     uVar7 = 0;
     loopIndex2 = 0;
     iVar9 = programRecord;
     do {
       uVar10 = 1 << (loopIndex2 & 0x3f);
-      if (((uVar2 | uVar6) & uVar10) != 0) {
+      if (((programRecordWord70 | programRecordWord74) & uVar10) != 0) {
         registerNumber = ((int (*)())ilPopFreeRegister)(programRecord);
         *(undefined4 *)(iVar9 + 0xb8) = registerNumber;
         if (uVar7 == 0) {
@@ -561,12 +567,12 @@ int ilEmitPrologue(outCursor, programRecord, passThroughR5, passThroughR6, passT
     iVar9 = iVar9 + 4;
     iVar11 = iVar11 + -1;
   } while (iVar11 != 0);
-  uVar2 = *(uint *)(programRecord + 8);
+  programRecordWord8 = *(uint *)(programRecord + 8);
   puVar4 = (uint *)(programRecord + 0x232c);
   uVar6 = 0;
   iVar9 = 0x10;
   do {
-    if ((1 << (uVar6 & 0x3f) & uVar2) == 0) {
+    if ((1 << (uVar6 & 0x3f) & programRecordWord8) == 0) {
       *puVar4 = uVar6;
       puVar4 = puVar4 + 1;
     }
@@ -981,6 +987,7 @@ int ilAssembleProgram(ctx, programHeader, programBody)
   undefined4 *programHeader;
   uint *******programBody;
 {
+  uint ctxWord44;
   undefined1 *outputEntryBase;
   undefined4 *prologueDst;
   undefined4 *maskCopyDst;
@@ -1191,14 +1198,14 @@ int ilAssembleProgram(ctx, programHeader, programBody)
   } while (zeroFillCount != 0);
   scanTokenWord = programBody;
   scratchBlock = _malloc(0x400);
-  uVar21 = *(uint *)(ctx + 0x44);
+  ctxWord44 = *(uint *)(ctx + 0x44);
   local_218 = 0;
-  if ((uVar21 & 0x2000) == 0) {
-    local_1e4 = uVar21 >> 0x18 & 1;
+  if ((ctxWord44 & 0x2000) == 0) {
+    local_1e4 = ctxWord44 >> 0x18 & 1;
     local_1d8 = 0xffff;
   }
   else {
-    local_1e4 = uVar21 >> 0xb & 1;
+    local_1e4 = ctxWord44 >> 0xb & 1;
     if (local_1e4 == 0) {
       local_1d8 = 0xffff;
     }
@@ -1207,7 +1214,7 @@ int ilAssembleProgram(ctx, programHeader, programBody)
     }
   }
   ilTokens = (uint *)*programHeader;
-  local_d8 = uVar21 >> 10 & 1;
+  local_d8 = ctxWord44 >> 10 & 1;
   countdown = 8;
   local_23e4 = 0xffff;
   local_d4 = (uint)(byte)((unsigned char *)0x000011d2)[ctx];
@@ -4135,6 +4142,7 @@ int FUN_000cd1c4(param_1, param_2, param_3, param_4)
   int param_3;
   int param_4;
 {
+  int iStack00000018Word314;
   int iVar1;
   int iVar2;
   int iStack00000018;
@@ -4178,11 +4186,11 @@ int FUN_000cd1c4(param_1, param_2, param_3, param_4)
       *(undefined4 *)(iStack00000018 + 0x484) = 0;
       *(undefined4 *)(iStack00000018 + 0x4d4) = 0;
       *(undefined4 *)(iStack00000018 + 0x488) = 0;
-      iVar1 = *(int *)(iStack00000018 + 0x314);
+      iStack00000018Word314 = *(int *)(iStack00000018 + 0x314);
       FUN_000e0e28(iStack00000018);
       FUN_000e1fe4(iStack00000018,0);
-    } while ((iVar1 != 0) && (iVar2 = FUN_000e161c(iStack00000018,iVar1), iVar2 != 0));
-    return iVar1;
+    } while ((iStack00000018Word314 != 0) && (iVar2 = FUN_000e161c(iStack00000018,iStack00000018Word314), iVar2 != 0));
+    return iStack00000018Word314;
   }
   return 2;
 }

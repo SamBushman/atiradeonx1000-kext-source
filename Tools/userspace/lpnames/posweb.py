@@ -70,6 +70,7 @@ for fn, addr in funcs.items():
     names = sorted({m for i in range(brace + 1, len(cur)) for m in re.findall(r'\b([A-Za-z]{0,4}Var\d+|p+_?[A-Za-z]*Var\d+|local_[0-9a-f]+)\b', cur[i]) if VAR.match(m)})
     spec = []; used = collections.Counter(); owner = {}
     for var in names:
+        if sum(1 for i in range(brace + 1, first) if re.match(r'^\s*[\w ]+[\s\*]+%s;$' % re.escape(var), cur[i])) != 1: stat['nodecl'] += 1; continue
         try: ws, er = F.webs(nodes, entry, var)
         except BaseException: stat['refused'] += 1; continue
         for k, ls in enumerate(ws):
