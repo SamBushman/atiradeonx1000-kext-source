@@ -2873,8 +2873,8 @@ e0790	e0794	millicode	ildisDisassembleBody	1
 e0cc4	e0cc8	millicode	FUN_000e0ca8	1	
 e0e04	e0e0c	millicode	FUN_000e0cd0	2	
 e1480	e1484	millicode	Compiler__timerOutputFileName	1	
-e1a08	e1a0c	eh-pad	FUN_000e1920	1	__Unwind_Resume
-e1b30	e1b34	eh-pad	FUN_000e1a48	1	__Unwind_Resume
+e1a08	e1a0c	eh-pad	Compiler__init_e1920	1	__Unwind_Resume
+e1b30	e1b34	eh-pad	Compiler__init_e1a48	1	__Unwind_Resume
 e1bf0	e1bf4	millicode	Compiler__setHardwareFamily	1	
 e1c20	e1c24	eh-pad	Compiler__setHardwareFamily	1	__Unwind_Resume
 e2084	e2094	other	Compiler__releaseChipAndPools	4	
@@ -2958,7 +2958,7 @@ ee618	ee61c	millicode	Program__ctor_ee29c	1
 ee718	ee71c	millicode	Program__ctor_ee29c	1	
 ee748	ee764	other	Program__ctor_ee29c	7	0x193cc0
 ee780	ee7a0	eh-pad	FUN_000eec50	8	__Unwind_Resume
-ee830	ee850	eh-pad	FUN_000ee7a0	8	0x193cc0,__Unwind_Resume
+ee830	ee850	eh-pad	Program__buildBlockArrayByKey	8	0x193cc0,__Unwind_Resume
 eede8	eee08	eh-pad	FUN_000eec50	8	0x193cc0,__Unwind_Resume
 ef038	ef058	eh-pad	FUN_000eee4c	8	0x193cc0,__Unwind_Resume
 ef79c	ef7a0	millicode	FUN_000ef498	1	

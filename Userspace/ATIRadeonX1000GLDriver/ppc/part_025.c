@@ -1662,73 +1662,73 @@ int isRegKindBelow21(param_1)
   return param_1 >> 0x10 < 0x15;
 }
 
-/* FUN_000f4a84 @ 0xf4a84 (324 bytes) */
-int FUN_000f4a84(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  int *param_1;
-  int param_2;
-  int param_3;
+/* Emitter__allocateConstantSlot @ 0xf4a84 (324 bytes) */
+int Emitter__allocateConstantSlot(emitter, slotKind, allowFailure, param_4, param_5, param_6, param_7)
+  int *emitter;
+  int slotKind;
+  int allowFailure;
   undefined4 param_4;
   undefined4 param_5;
   undefined4 param_6;
   undefined4 param_7;
 {
-  int iVar1;
-  int iVar2;
+  int emitContext;
+  int slotTableBase;
   
-  if (param_2 == 2) {
-    iVar1 = *(int *)(*param_1 + 0x398);
-    if (param_1[0xb] == 0) {
-      iVar2 = *(int *)(iVar1 + 0x2c);
+  if (slotKind == 2) {
+    emitContext = *(int *)(*emitter + 0x398);
+    if (emitter[0xb] == 0) {
+      slotTableBase = *(int *)(emitContext + 0x2c);
     }
     else {
-      iVar2 = *(int *)(iVar1 + 0x30);
+      slotTableBase = *(int *)(emitContext + 0x30);
     }
-    iVar1 = FUN_000d9b58(iVar1,iVar2 + 0x58,param_1[0xe],param_4,param_5,param_6,param_7);
-    if (-1 < iVar1) {
-      param_1[0xe] = param_1[0xe] + 1;
+    emitContext = FUN_000d9b58(emitContext,slotTableBase + 0x58,emitter[0xe],param_4,param_5,param_6,param_7);
+    if (-1 < emitContext) {
+      emitter[0xe] = emitter[0xe] + 1;
     }
     goto LAB_000f4b94;
   }
-  if (param_2 < 3) {
-    if (param_2 != 1) {
+  if (slotKind < 3) {
+    if (slotKind != 1) {
 LAB_000f4ac4:
-      iVar1 = -1;
+      emitContext = -1;
       goto LAB_000f4b94;
     }
   }
-  else if (param_2 != 3) {
-    if (param_2 == 4) {
-      iVar1 = *(int *)(*param_1 + 0x398);
-      if (param_1[0xb] == 0) {
-        iVar2 = *(int *)(iVar1 + 0x2c);
+  else if (slotKind != 3) {
+    if (slotKind == 4) {
+      emitContext = *(int *)(*emitter + 0x398);
+      if (emitter[0xb] == 0) {
+        slotTableBase = *(int *)(emitContext + 0x2c);
       }
       else {
-        iVar2 = *(int *)(iVar1 + 0x30);
+        slotTableBase = *(int *)(emitContext + 0x30);
       }
-      iVar1 = FUN_000d9b58(iVar1,iVar2 + 0x98,param_1[0x10],param_4,param_5,param_6,param_7);
-      if (-1 < iVar1) {
-        param_1[0x10] = param_1[0x10] + 1;
+      emitContext = FUN_000d9b58(emitContext,slotTableBase + 0x98,emitter[0x10],param_4,param_5,param_6,param_7);
+      if (-1 < emitContext) {
+        emitter[0x10] = emitter[0x10] + 1;
       }
       goto LAB_000f4b94;
     }
     goto LAB_000f4ac4;
   }
-  iVar1 = *(int *)(*param_1 + 0x398);
-  if (param_1[0xb] == 0) {
-    iVar2 = *(int *)(iVar1 + 0x2c);
+  emitContext = *(int *)(*emitter + 0x398);
+  if (emitter[0xb] == 0) {
+    slotTableBase = *(int *)(emitContext + 0x2c);
   }
   else {
-    iVar2 = *(int *)(iVar1 + 0x30);
+    slotTableBase = *(int *)(emitContext + 0x30);
   }
-  iVar1 = FUN_000d9b58(iVar1,iVar2 + 0x78,param_1[0xf],param_4,param_5,param_6,param_7);
-  if (-1 < iVar1) {
-    param_1[0xf] = param_1[0xf] + 1;
+  emitContext = FUN_000d9b58(emitContext,slotTableBase + 0x78,emitter[0xf],param_4,param_5,param_6,param_7);
+  if (-1 < emitContext) {
+    emitter[0xf] = emitter[0xf] + 1;
   }
 LAB_000f4b94:
-  if ((param_3 == 0) && (iVar1 < 0)) {
-    Compiler__fail(*param_1,0xd);
+  if ((allowFailure == 0) && (emitContext < 0)) {
+    Compiler__fail(*emitter,0xd);
   }
-  return iVar1;
+  return emitContext;
 }
 
 /* floatLess @ 0xf4bc8 (32 bytes) */

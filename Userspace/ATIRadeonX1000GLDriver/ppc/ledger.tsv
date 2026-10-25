@@ -1238,7 +1238,7 @@
 0xe07b8	36	Compiler__clearOptionBit	part_020	converted
 0xe07dc	84	Compiler__isOptionEnabled	part_020	converted
 0xe0830	32	FUN_000e0830	part_020	converted
-0xe0850	1112	FUN_000e0850	part_020	converted
+0xe0850	1112	Compiler__setDefaultOptions	part_020	converted
 0xe0ca8	28	FUN_000e0ca8	part_020	converted
 0xe0cc8	8	testBit24	part_020	converted
 0xe0cd0	308	FUN_000e0cd0	part_020	converted
@@ -1268,8 +1268,8 @@
 0xe17b4	88	Compiler__setBitInSelectedBlock98	part_021	converted
 0xe180c	124	FUN_000e180c	part_021	converted
 0xe1888	152	Compiler__resetState	part_021	converted
-0xe1920	232	FUN_000e1920	part_021	converted
-0xe1a48	232	FUN_000e1a48	part_021	converted
+0xe1920	232	Compiler__init_e1920	part_021	converted
+0xe1a48	232	Compiler__init_e1a48	part_021	converted
 0xe1b70	172	Compiler__setHardwareFamily	part_021	converted
 0xe1c50	916	Program__forwardMulOperandToUsers	part_021	converted
 0xe1fe4	160	Compiler__releaseChipAndPools	part_021	converted
@@ -1478,12 +1478,12 @@
 0xed89c	852	FUN_000ed89c	part_024	converted
 0xedd98	1216	Program__ctor_edd98	part_024	converted
 0xee29c	1216	Program__ctor_ee29c	part_024	converted
-0xee7a0	144	FUN_000ee7a0	part_024	converted
+0xee7a0	144	Program__buildBlockArrayByKey	part_024	converted
 0xee9ac	120	Program__addInst	part_024	converted
 0xeea24	556	FUN_000eea24	part_024	converted
 0xeec50	1072	FUN_000eec50	part_024	converted
 0xeee4c	492	FUN_000eee4c	part_024	converted
-0xef204	660	FUN_000ef204	part_024	converted
+0xef204	660	Program__splitExports	part_024	converted
 0xef498	860	FUN_000ef498	part_024	converted
 0xef8f8	120	Program__appendToVector3c8	part_024	converted
 0xef970	220	Program__removeInst	part_024	converted
@@ -1494,7 +1494,7 @@
 0xf07a8	464	FUN_000f07a8	part_024	converted
 0xf14f8	132	FUN_000f14f8	part_024	converted
 0xf1d7c	3008	FUN_000f1d7c	part_024	converted
-0xf29f4	488	FUN_000f29f4	part_024	converted
+0xf29f4	488	pass_assign_slots	part_024	converted
 0xf2bdc	128	SelectWord__compose	part_024	converted
 0xf2c5c	80	SelectWord__isSplat	part_024	converted
 0xf2cac	92	FUN_000f2cac	part_024	converted
@@ -1552,7 +1552,7 @@
 0xf4a24	56	FUN_000f4a24	part_025	converted
 0xf4a5c	20	FUN_000f4a5c	part_025	converted
 0xf4a70	20	isRegKindBelow21	part_025	converted
-0xf4a84	324	FUN_000f4a84	part_025	converted
+0xf4a84	324	Emitter__allocateConstantSlot	part_025	converted
 0xf4bc8	32	floatLess	part_025	converted
 0xf4be8	92	BitSet__findFirstSet	part_025	converted
 0xf4c44	4	noop_f4c44	part_025	converted
@@ -1571,7 +1571,7 @@
 0xf5cf0	412	IRInst__getUniformSourceConstant	part_026	converted
 0xf5e8c	264	FUN_000f5e8c	part_026	converted
 0xf5f94	304	RegisterMap__findConstVectorExact	part_026	converted
-0xf60c4	388	FUN_000f60c4	part_026	converted
+0xf60c4	388	Program__dumpConstantRegisters	part_026	converted
 0xf6248	532	Compiler__getOrCreateConstVectorN	part_026	converted
 0xf645c	376	Compiler__getOrCreateConstVector4	part_026	converted
 0xf65d4	396	Compiler__getOrCreateConstVector3	part_026	converted
@@ -1605,7 +1605,7 @@
 0xf8aa0	488	Program__applySourceTokenToOperand	part_026	converted
 0xf8c88	64	FUN_000f8c88	part_026	converted
 0xf8ccc	132	FUN_000f8ccc	part_026	converted
-0xf8d50	568	FUN_000f8d50	part_026	converted
+0xf8d50	568	IRInst__applyDescriptorSelects	part_026	converted
 0xf8f88	176	IRInst__applyDescriptorSwizzle	part_026	converted
 0xf9038	264	FUN_000f9038	part_026	converted
 0xf9140	284	FUN_000f9140	part_026	converted

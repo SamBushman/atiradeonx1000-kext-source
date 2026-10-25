@@ -1222,7 +1222,7 @@ int FUN_0013323c(pass, copyState)
   vecCount = 0;
   vecCapacity = 2;
   vecData = Arena__alloc(vecArena,8);
-  blockArray = FUN_000ee7a0(pass);
+  blockArray = Program__buildBlockArrayByKey(pass);
   roundCount = *(int *)(pass + 0x248);
   secondPass = 0;
   do {
