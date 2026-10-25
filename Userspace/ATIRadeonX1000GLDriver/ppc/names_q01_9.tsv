@@ -20,3 +20,84 @@ local	FUN_0001e730	uVar9	attrBit	INFERRED	one-bit mask of the attribute (table a
 local	FUN_0001e730	bVar1	nonePending	INFERRED	pendingMask == 0
 local	FUN_0001e730	iVar3	validateResult	INFERRED	gld_validateVertexArrayStreams result
 local	FUN_0001e730	uVar2	isReady	INFERRED	1 when every attribute buffer is prepared
+local	FUN_00018120	puVar51	packetBase	INFERRED	start of the 0x31000000 draw packet allocated from the command stream (after the optional 0x5c8 wait-until pair)
+local	FUN_00018120	puVar35	packetAlloc	INFERRED	command-stream slot returned by the allocate callback (ctx+0x2998)
+local	FUN_00018120	puVar31	lastHeader	INFERRED	ctx+0x1d8: header word of the previous packet, patched with the packet length
+local	FUN_00018120	dVar23	doubleBias	INFERRED	DOUBLE_001aa1e0 (2^52+2^31 bias) kept in a register for the int-to-double conversions
+local	FUN_00018120	uVar8	bufferWidth16	INFERRED	ctx+0x11e: 16-bit width limit of the copy surface
+local	FUN_00018120	uVar9	bufferHeight16	INFERRED	ctx+0x122: 16-bit height limit of the copy surface
+use	FUN_00018120	puVar30	previousHeader	INFERRED	ctx+0x1d8: header word of the previous packet, patched with the packet length	^\s*puVar30\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 0x1d8\);$	+2
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\ =\ puVar51\ \+\ 0x4a5;$	+1
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*\*puVar30\ =\ 0x31080;$	+1
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\ =\ puVar51\ \+\ 0x4b1;$	+1
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*\*puVar30\ =\ uVar44;$	+2
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[2\]\ =\ uVar26;$	+2
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[4\]\ =\ 0x31080;$	+4
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[7\]\ =\ \(uint\)GH_F2U\(\(float\)\(\(fVar5\ \*\ \(fVar4\ \-\ fVar7\)\)\)\);$	+9
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*\*puVar31\ =\ \(int\)puVar30\ \-\ \(int\)puVar31\ >>\ 2\ \|\ \*puVar31;$	+11
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[10\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x000010faU\);$	+2
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0xc\]\ =\ 0xc0001000;$	+4
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x11\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x00001008U\);$	+2
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x13\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x000010e9U\);$	+2
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x15\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x000013c7U\);$	+4
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x19\]\ =\ 0x850;$	+2
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x1b\]\ =\ 0x887;$	+2
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0xbd\]\ =\ 0x82c;$	+2
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x1d\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x000010aeU\);$	+2
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x1f\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x00001394U\);$	+2
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x21\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x00001380U\);$	+5
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x25\]\ =\ 0x824;$	+2
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x27\]\ =\ 0x825;$	+2
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x29\]\ =\ 0x82d;$	+4
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x2d\]\ =\ 0x878;$	+2
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x2f\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x000013c0U\);$	+2
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x31\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x000012f0U\);$	+3
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x32\]\ =\ puVar30\[0x32\]\ \&\ 0xfffffffe;$	+1
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x33\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x000012f5U\);$	+1
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x34\]\ =\ uVar41;$	+1
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x34\]\ =\ uVar41\ \&\ 0xfffff7ff;$	+1
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x35\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x000010a2U\);$	+1
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x37\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x00001381U\);$	+2
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x38\]\ =\ uVar41;$	+1
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x38\]\ =\ uVar41\ \&\ 0xfffffffc;$	+1
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x39\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x0000109eU\);$	+1
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x3b\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x00001096U\);$	+2
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x3d\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x00001041U\);$	+2
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x3f\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x00001046U\);$	+2
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x41\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x00001094U\);$	+24
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x8d\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x000011aaU\);$	+2
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x8f\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x000011abU\);$	+2
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x91\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x000011acU\);$	+2
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x93\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x000010c0U\);$	+2
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x95\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x000010c1U\);$	+4
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x9b\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x0000138aU\);$	+10
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0xa5\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x00001110U\);$	+4
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0xa9\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x00001130U\);$	+2
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0xab\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x00001140U\);$	+2
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0xad\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x000010f4U\);$	+4
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0xb1\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x00001386U\);$	+2
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0xb3\]\ =\ 0x110f8;$	+3
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0xb6\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x00001087U\);$	+2
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0xb8\]\ =\ 0x31080;$	+13
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*\(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x299c\)\)\(iVar34,puVar30\ \+\ 0xca\);$	+1
+use	FUN_00018120	uVar25	writeMaskNibble	INFERRED	RB3D_ROPCNTL>>8 & 0xf (0xc without a colour mask): per-channel write mask of the copy	^\s*uVar25\ =\ 0xc;$	+1
+use	FUN_00018120	uVar25	writeMaskNibble	INFERRED	RB3D_ROPCNTL>>8 & 0xf (0xc without a colour mask): per-channel write mask of the copy	^\s*uVar25\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x1d38\)\ >>\ 8\ \&\ 0xf;$	+2
+use	FUN_00018120	uVar25	writeMaskNibble	INFERRED	RB3D_ROPCNTL>>8 & 0xf (0xc without a colour mask): per-channel write mask of the copy	^\s*FUN_00020b30\(param_1,param_3,param_4,param_5,param_6,uVar41,uVar43,uVar32,uVar25\ \|\ uVar28\);$	+1
+use	FUN_00018120	uVar28	writeMaskByte	INFERRED	writeMaskNibble << 4 (0xc0 without a colour mask): second copy of the mask	^\s*uVar28\ =\ 0xc0;$	+1
+use	FUN_00018120	uVar28	writeMaskByte	INFERRED	writeMaskNibble << 4 (0xc0 without a colour mask): second copy of the mask	^\s*uVar28\ =\ uVar25\ <<\ 4;$	+1
+use	FUN_00018120	uVar28	writeMaskByte	INFERRED	writeMaskNibble << 4 (0xc0 without a colour mask): second copy of the mask	^\s*FUN_00020b30\(param_1,param_3,param_4,param_5,param_6,uVar41,uVar43,uVar32,uVar25\ \|\ uVar28\);$	+1
+use	FUN_00018120	uVar25	surfaceWidth	INFERRED	bufferWidth16 widened: copy surface width in pixels	^\s*uVar25\ =\ \(uint\)uVar8;$	+1
+use	FUN_00018120	uVar25	surfaceWidth	INFERRED	bufferWidth16 widened: copy surface width in pixels	^\s*if\ \(\(uVar25\ <\ 0x1001\)\ \&\&\ \(uVar28\ <\ 0x1001\)\)\ \{$	+1
+use	FUN_00018120	uVar25	surfaceWidth	INFERRED	bufferWidth16 widened: copy surface width in pixels	^\s*uVar47\ =\ uVar25\ \-\ 1;$	+1
+use	FUN_00018120	uVar25	surfaceWidth	INFERRED	bufferWidth16 widened: copy surface width in pixels	^\s*if\ \(uVar25\ !=\ 0\)\ \{$	+1
+use	FUN_00018120	uVar25	surfaceWidth	INFERRED	bufferWidth16 widened: copy surface width in pixels	^\s*\(float\)\(\(double\)CONCAT44\(0x43300000,uVar25\ \^\ 0x80000000\)\ \-\ DOUBLE_001aa1e0\);$	+1
+use	FUN_00018120	uVar25	surfaceWidth	INFERRED	bufferWidth16 widened: copy surface width in pixels	^\s*uVar39\ =\ uVar25\ \-\ uVar43;$	+1
+use	FUN_00018120	uVar28	surfaceHeight	INFERRED	bufferHeight16 widened: copy surface height in pixels	^\s*uVar28\ =\ \(uint\)uVar9;$	+1
+use	FUN_00018120	uVar28	surfaceHeight	INFERRED	bufferHeight16 widened: copy surface height in pixels	^\s*if\ \(\(uVar25\ <\ 0x1001\)\ \&\&\ \(uVar28\ <\ 0x1001\)\)\ \{$	+1
+use	FUN_00018120	uVar28	surfaceHeight	INFERRED	bufferHeight16 widened: copy surface height in pixels	^\s*if\ \(\(0x40\ <\ uVar28\)\ \&\&\ \(uVar41\ =\ uVar9\ \&\ 0xffc0,\ \(int\)\(uVar28\ \-\ uVar41\)\ <\ 0x40\)\)\ \{$	+1
+use	FUN_00018120	uVar28	surfaceHeight	INFERRED	bufferHeight16 widened: copy surface height in pixels	^\s*uVar48\ =\ uVar28\ \-\ 1;$	+1
+use	FUN_00018120	uVar28	surfaceHeight	INFERRED	bufferHeight16 widened: copy surface height in pixels	^\s*if\ \(uVar28\ !=\ 0\)\ \{$	+1
+use	FUN_00018120	uVar28	surfaceHeight	INFERRED	bufferHeight16 widened: copy surface height in pixels	^\s*\(float\)\(\(double\)CONCAT44\(0x43300000,uVar28\ \^\ 0x80000000\)\ \-\ DOUBLE_001aa1e0\);$	+1
+use	FUN_00018120	uVar28	surfaceHeight	INFERRED	bufferHeight16 widened: copy surface height in pixels	^\s*uVar36\ =\ uVar28\ \-\ uVar46;$	+1
+use	FUN_00018120	uVar28	surfaceHeight	INFERRED	bufferHeight16 widened: copy surface height in pixels	^\s*if\ \(\(int\)\(uVar37\ \+\ 0x1000\)\ <=\ \(int\)uVar28\)\ \{$	+1
+use	FUN_00018120	uVar25	surfaceWidth	INFERRED	bufferWidth16 widened: copy surface width in pixels	^\s*if\ \(\(int\)\(uVar44\ \+\ 0x1000\)\ <=\ \(int\)uVar25\)\ \{$	+1
