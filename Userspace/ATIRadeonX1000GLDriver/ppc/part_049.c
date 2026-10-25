@@ -2177,75 +2177,77 @@ int FUN_00189ce0(inst, inst2)
   return 0xffffffff;
 }
 
-/* FUN_00189df4 @ 0x189df4 (480 bytes) */
-int FUN_00189df4(inst, param_2, param_3)
+/* SchedModel__classifySlotUse @ 0x189df4 (480 bytes) */
+int SchedModel__classifySlotUse(inst, vectorSlotUse, scalarSlotUse)
   int *inst;
-  int *param_2;
-  int *param_3;
+  int *vectorSlotUse;
+  int *scalarSlotUse;
 {
+  uint destSelectWord2;
+  int vectorClass;
   int operandRecord2;
   int operandRecord;
-  uint uVar1;
-  int iVar2;
-  undefined4 uVar3;
-  int iVar4;
+  uint destSelectWord;
+  int isFetch;
+  undefined4 result;
+  int opcodeOrScalarClass;
   
-  iVar2 = (**(code **)(*inst + 0x28))(inst,param_2,param_3);
-  if ((iVar2 == 0) && (*(int *)(inst[0x22] + 4) != 1)) {
-    iVar4 = *(int *)(inst[0x22] + 8);
-    iVar2 = iVar4;
-    if ((iVar4 - 0x1cU < 3) || (iVar4 == 0xa3)) {
-      if (((iVar4 == 0x1d) || (iVar4 == 0xa3)) ||
-         (iVar4 = IRInst__getOperandRecord(inst,0), *(char *)(iVar4 + 0x13) == '\0')) {
-        iVar4 = 0x97;
+  isFetch = (**(code **)(*inst + 0x28))(inst,vectorSlotUse,scalarSlotUse);
+  if ((isFetch == 0) && (*(int *)(inst[0x22] + 4) != 1)) {
+    opcodeOrScalarClass = *(int *)(inst[0x22] + 8);
+    vectorClass = opcodeOrScalarClass;
+    if ((opcodeOrScalarClass - 0x1cU < 3) || (opcodeOrScalarClass == 0xa3)) {
+      if (((opcodeOrScalarClass == 0x1d) || (opcodeOrScalarClass == 0xa3)) ||
+         (opcodeOrScalarClass = IRInst__getOperandRecord(inst,0), *(char *)(opcodeOrScalarClass + 0x13) == '\0')) {
+        opcodeOrScalarClass = 0x97;
       }
       else {
-        iVar4 = -1;
+        opcodeOrScalarClass = -1;
       }
 LAB_00189f70:
-      if (iVar2 < 0) goto LAB_00189f94;
+      if (vectorClass < 0) goto LAB_00189f94;
 LAB_00189f84:
-      if (*param_2 < 0) {
-        *param_2 = iVar2;
+      if (*vectorSlotUse < 0) {
+        *vectorSlotUse = vectorClass;
         goto LAB_00189f94;
       }
     }
     else {
-      if (((((iVar4 != 0x37) && (iVar4 != 0x3a)) &&
-           ((iVar4 != 0x3b && ((iVar4 != 0x3e && (iVar4 != 0x3f)))))) && (iVar4 != 0x40)) &&
-         ((((iVar4 != 0x41 && (iVar4 != 0x42)) && (iVar4 != 0x43)) &&
-          ((iVar4 != 0x4c && (iVar4 != 0x4d)))))) {
+      if (((((opcodeOrScalarClass != 0x37) && (opcodeOrScalarClass != 0x3a)) &&
+           ((opcodeOrScalarClass != 0x3b && ((opcodeOrScalarClass != 0x3e && (opcodeOrScalarClass != 0x3f)))))) && (opcodeOrScalarClass != 0x40)) &&
+         ((((opcodeOrScalarClass != 0x41 && (opcodeOrScalarClass != 0x42)) && (opcodeOrScalarClass != 0x43)) &&
+          ((opcodeOrScalarClass != 0x4c && (opcodeOrScalarClass != 0x4d)))))) {
         operandRecord2 = IRInst__getOperandRecord(inst,0);
-        uVar1 = *(uint *)(operandRecord2 + 0x10);
-        if ((uVar1 >> 0x18 == 0) ||
-           (((uVar1 >> 0x10 & 0xff) == 0 || (iVar2 = -1, (uVar1 >> 8 & 0xff) == 0)))) {
-          iVar2 = iVar4;
+        destSelectWord = *(uint *)(operandRecord2 + 0x10);
+        if ((destSelectWord >> 0x18 == 0) ||
+           (((destSelectWord >> 0x10 & 0xff) == 0 || (vectorClass = -1, (destSelectWord >> 8 & 0xff) == 0)))) {
+          vectorClass = opcodeOrScalarClass;
         }
-        if ((uVar1 & 0xff) != 0) {
-          iVar4 = -1;
+        if ((destSelectWord & 0xff) != 0) {
+          opcodeOrScalarClass = -1;
         }
         goto LAB_00189f70;
       }
       operandRecord = IRInst__getOperandRecord(inst,0);
-      uVar1 = *(uint *)(operandRecord + 0x10);
-      if (((uVar1 >> 0x18 == 0) || ((uVar1 >> 0x10 & 0xff) == 0)) || ((uVar1 >> 8 & 0xff) == 0)) {
-        iVar2 = 0x98;
+      destSelectWord2 = *(uint *)(operandRecord + 0x10);
+      if (((destSelectWord2 >> 0x18 == 0) || ((destSelectWord2 >> 0x10 & 0xff) == 0)) || ((destSelectWord2 >> 8 & 0xff) == 0)) {
+        vectorClass = 0x98;
         goto LAB_00189f84;
       }
 LAB_00189f94:
-      if (iVar4 < 0) goto LAB_00189fb4;
-      if (*param_3 < 0) {
-        *param_3 = iVar4;
+      if (opcodeOrScalarClass < 0) goto LAB_00189fb4;
+      if (*scalarSlotUse < 0) {
+        *scalarSlotUse = opcodeOrScalarClass;
         return 1;
       }
     }
-    uVar3 = 0;
+    result = 0;
   }
   else {
 LAB_00189fb4:
-    uVar3 = 1;
+    result = 1;
   }
-  return uVar3;
+  return result;
 }
 
 /* R300SchedModel__vslot19 @ 0x189fd4 (172 bytes) */
@@ -2268,7 +2270,7 @@ int R300SchedModel__vslot19(this, inst, param_3, param_4, param_5, param_6, para
   if ((inst[5] & 0x8000U) == 0) {
     callResult = (**(code **)(*inst + 0x28))(inst);
     if (callResult == 0) {
-      ((int (*)())FUN_00189df4)(inst,&vectorSlotUse,scalarSlotUse);
+      ((int (*)())SchedModel__classifySlotUse)(inst,&vectorSlotUse,scalarSlotUse);
       if (vectorSlotUse < 0) {
         if (-1 < scalarSlotUse[0]) {
           return 2;
@@ -2840,17 +2842,17 @@ LAB_0018b190:
 }
 
 /* FUN_0018b1bc @ 0x18b1bc (1176 bytes) */
-int FUN_0018b1bc(param_1, param_2, param_3, param_4, param_5)
+int FUN_0018b1bc(param_1, packNode, rangeLo, rangeHi, targetSlot)
   undefined4 param_1;
-  int param_2;
-  int param_3;
-  int param_4;
-  int param_5;
+  int packNode;
+  int rangeLo;
+  int rangeHi;
+  int targetSlot;
 {
   uint *vector2;
   int *inst;
-  bool bVar1;
-  bool bVar2;
+  bool rangeNonEmpty;
+  bool moreLanes;
   undefined4 *loopPtr5;
   undefined1 *loopPtr6;
   uint loopIndex8;
@@ -2858,7 +2860,7 @@ int FUN_0018b1bc(param_1, param_2, param_3, param_4, param_5)
   int loopIndex3;
   uint vectorFilledCount3;
   int *a0;
-  undefined4 in_r8;
+  undefined4 staleArg6;
   int loopIndex4;
   int loopIndex;
   uint vectorFilledCount;
@@ -2867,20 +2869,20 @@ int FUN_0018b1bc(param_1, param_2, param_3, param_4, param_5)
   int loopIndex2;
   uint *vector;
   
-  bVar1 = param_3 <= param_4;
-  if (bVar1) {
-    loopPtr5 = (undefined4 *)(param_3 * 4 + param_2 + 0x48);
-    loopIndex4 = param_3;
+  rangeNonEmpty = rangeLo <= rangeHi;
+  if (rangeNonEmpty) {
+    loopPtr5 = (undefined4 *)(rangeLo * 4 + packNode + 0x48);
+    loopIndex4 = rangeLo;
     do {
       loopIndex4 = loopIndex4 + 1;
       *loopPtr5 = 0;
       loopPtr5 = loopPtr5 + 1;
-    } while (loopIndex4 <= param_4);
+    } while (loopIndex4 <= rangeHi);
   }
-  vector = *(uint **)(param_2 + 0x40);
+  vector = *(uint **)(packNode + 0x40);
   loopIndex7 = 0;
   vectorFilledCount = vector[1];
-  loopIndex4 = param_5;
+  loopIndex4 = targetSlot;
   if (0 < (int)vectorFilledCount) {
     while( true ) {
       if (loopIndex7 < *vector) {
@@ -2897,17 +2899,17 @@ int FUN_0018b1bc(param_1, param_2, param_3, param_4, param_5)
       loopIndex7 = loopIndex7 + 1;
       loopIndex2 = *elementRef;
       if (*(int *)(loopIndex2 + 8) == 0) {
-        if (bVar1) {
-          loopPtr6 = (undefined1 *)(param_3 + loopIndex2 + 0x18);
-          loopIndex = param_3;
+        if (rangeNonEmpty) {
+          loopPtr6 = (undefined1 *)(rangeLo + loopIndex2 + 0x18);
+          loopIndex = rangeLo;
           do {
             loopIndex = loopIndex + 1;
             *loopPtr6 = 0;
             loopPtr6 = loopPtr6 + 1;
-          } while (loopIndex <= param_4);
+          } while (loopIndex <= rangeHi);
         }
-        *(undefined1 *)(param_5 + loopIndex2 + 0x18) = 1;
-        loopIndex = param_5 * 4 + param_2;
+        *(undefined1 *)(targetSlot + loopIndex2 + 0x18) = 1;
+        loopIndex = targetSlot * 4 + packNode;
         *(int *)(loopIndex + 0x48) = *(int *)(loopIndex + 0x48) + 1;
         loopIndex = *(int *)(loopIndex2 + 4);
         inst = *(int **)(loopIndex + 0x38);
@@ -2924,12 +2926,12 @@ int FUN_0018b1bc(param_1, param_2, param_3, param_4, param_5)
             do {
               loopIndex3 = IRInst__getOperandRecord(inst,*(undefined4 *)(loopIndex2 + 0x10));
               loopIndex8 = (uint)*(byte *)(loopIndex + loopIndex3 + 0x10);
-              if ((param_3 <= (int)loopIndex8) && ((int)loopIndex8 <= param_4)) {
-                (**(code **)(*inst + 0x88))(inst,*(undefined4 *)(loopIndex2 + 0x10),loopIndex,param_5);
+              if ((rangeLo <= (int)loopIndex8) && ((int)loopIndex8 <= rangeHi)) {
+                (**(code **)(*inst + 0x88))(inst,*(undefined4 *)(loopIndex2 + 0x10),loopIndex,targetSlot);
               }
-              bVar2 = loopIndex != 3;
+              moreLanes = loopIndex != 3;
               loopIndex = loopIndex + 1;
-            } while (bVar2);
+            } while (moreLanes);
           }
         }
         else {
@@ -2938,9 +2940,9 @@ int FUN_0018b1bc(param_1, param_2, param_3, param_4, param_5)
             IRInst__getOperandSource(inst,1);
             IRInst__getOperandSource(inst,2);
           }
-          if (bVar1) {
-            loopPtr6 = (undefined1 *)((int)inst + param_3 + 0xc);
-            loopIndex2 = param_3;
+          if (rangeNonEmpty) {
+            loopPtr6 = (undefined1 *)((int)inst + rangeLo + 0xc);
+            loopIndex2 = rangeLo;
             do {
               loopPtr6[0x90] = 1;
               loopIndex3 = *inst;
@@ -2952,25 +2954,25 @@ int FUN_0018b1bc(param_1, param_2, param_3, param_4, param_5)
               }
               loopIndex2 = loopIndex2 + 1;
               loopPtr6 = loopPtr6 + 1;
-            } while (loopIndex2 <= param_4);
+            } while (loopIndex2 <= rangeHi);
           }
-          loopIndex3 = param_5 + (int)inst;
+          loopIndex3 = targetSlot + (int)inst;
           *(undefined1 *)(loopIndex3 + 0x9c) = 0;
           loopIndex2 = *inst;
           *(undefined1 *)(loopIndex3 + 0xc) = 1;
-          (**(code **)(loopIndex2 + 0x88))(inst,1,param_5,param_5,loopIndex4,in_r8,loopIndex3);
+          (**(code **)(loopIndex2 + 0x88))(inst,1,targetSlot,targetSlot,loopIndex4,staleArg6,loopIndex3);
           loopIndex2 = (**(code **)(*inst + 0x14))(inst);
           if (loopIndex2 == 2) {
-            (**(code **)(*inst + 0x88))(inst,2,param_5,param_5);
+            (**(code **)(*inst + 0x88))(inst,2,targetSlot,targetSlot);
           }
-          if (bVar1) {
-            loopPtr5 = (undefined4 *)(param_3 * 4 + loopIndex + 0x48);
-            loopIndex2 = param_3;
+          if (rangeNonEmpty) {
+            loopPtr5 = (undefined4 *)(rangeLo * 4 + loopIndex + 0x48);
+            loopIndex2 = rangeLo;
             do {
               loopIndex2 = loopIndex2 + 1;
               *loopPtr5 = 0;
               loopPtr5 = loopPtr5 + 1;
-            } while (loopIndex2 <= param_4);
+            } while (loopIndex2 <= rangeHi);
           }
           vector2 = *(uint **)(loopIndex + 0x40);
           loopIndex8 = 0;
@@ -2991,17 +2993,17 @@ int FUN_0018b1bc(param_1, param_2, param_3, param_4, param_5)
               loopIndex8 = loopIndex8 + 1;
               loopIndex2 = *elementRef;
               if (*(int *)(loopIndex2 + 8) == 0) {
-                if (bVar1) {
-                  loopPtr6 = (undefined1 *)(param_3 + loopIndex2 + 0x18);
-                  loopIndex3 = param_3;
+                if (rangeNonEmpty) {
+                  loopPtr6 = (undefined1 *)(rangeLo + loopIndex2 + 0x18);
+                  loopIndex3 = rangeLo;
                   do {
                     loopIndex3 = loopIndex3 + 1;
                     *loopPtr6 = 0;
                     loopPtr6 = loopPtr6 + 1;
-                  } while (loopIndex3 <= param_4);
+                  } while (loopIndex3 <= rangeHi);
                 }
-                *(undefined1 *)(param_5 + loopIndex2 + 0x18) = 1;
-                loopIndex2 = param_5 * 4 + loopIndex;
+                *(undefined1 *)(targetSlot + loopIndex2 + 0x18) = 1;
+                loopIndex2 = targetSlot * 4 + loopIndex;
                 *(int *)(loopIndex2 + 0x48) = *(int *)(loopIndex2 + 0x48) + 1;
               }
               if (vectorFilledCount2 == loopIndex8) break;
@@ -3011,7 +3013,7 @@ int FUN_0018b1bc(param_1, param_2, param_3, param_4, param_5)
         }
       }
       if (vectorFilledCount == loopIndex7) break;
-      vector = *(uint **)(param_2 + 0x40);
+      vector = *(uint **)(packNode + 0x40);
     }
   }
   return;
@@ -4995,7 +4997,7 @@ int R520SchedModel__vslot4_addInstruction(schedModel, inst)
   if ((inst[5] & 0x8000U) == 0) {
     callResult = (**(code **)(*inst + 0x28))(inst);
     if (callResult == 0) {
-      ((int (*)())FUN_00189df4)(inst,schedModel + 0x18,schedModel + 0x20);
+      ((int (*)())SchedModel__classifySlotUse)(inst,schedModel + 0x18,schedModel + 0x20);
       ((int (*)())PackState__tryPlaceInstructionSources)(inst,schedModel + 0x1c,schedModel + 0x24,schedModel + 0x28,*(undefined4 *)(schedModel + 8)
                   );
       ((int (*)())PackState__countFreeSlots)(schedModel + 0x28,&local_38);
@@ -5054,7 +5056,7 @@ int R520SchedModel__vslot3_canAddInstruction(schedModel, inst)
     local_70 = *(undefined4 *)(schedModel + 0x20);
     local_6c = *(undefined4 *)(schedModel + 0x24);
     ((int (*)())PackState__copy)(auStack_60,schedModel + 0x28);
-    callResult = ((int (*)())FUN_00189df4)(inst,&local_78,&local_70);
+    callResult = ((int (*)())SchedModel__classifySlotUse)(inst,&local_78,&local_70);
     if ((((callResult == 0) ||
          (callResult = ((int (*)())PackState__tryPlaceInstructionSources)(inst,&local_74,&local_6c,auStack_60,*(undefined4 *)(schedModel + 8)),
          callResult == 0)) || (callResult = ((int (*)())PackState__countFreeSlots)(auStack_60,&local_68), callResult == 0)) ||

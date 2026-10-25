@@ -2965,7 +2965,7 @@
 0x189be4	64	R300SchedModel__vslot15	part_049	converted
 0x189c24	188	FUN_00189c24	part_049	converted
 0x189ce0	276	FUN_00189ce0	part_049	converted
-0x189df4	480	FUN_00189df4	part_049	converted
+0x189df4	480	SchedModel__classifySlotUse	part_049	converted
 0x189fd4	172	R300SchedModel__vslot19	part_049	converted
 0x18a080	364	R300SchedModel__vslot34	part_049	converted
 0x18a1ec	596	R300SchedModel__vslot26	part_049	converted

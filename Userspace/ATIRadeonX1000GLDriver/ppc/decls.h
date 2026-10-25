@@ -3171,7 +3171,7 @@ extern int SchedModel__assignConstantSelectors();
 extern int R300SchedModel__vslot15();
 extern int FUN_00189c24();
 extern int FUN_00189ce0();
-extern int FUN_00189df4();
+extern int SchedModel__classifySlotUse();
 extern int R300SchedModel__vslot19();
 extern int R300SchedModel__vslot34();
 extern int R300SchedModel__vslot26();
