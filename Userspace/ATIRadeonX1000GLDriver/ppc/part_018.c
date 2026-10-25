@@ -2660,7 +2660,7 @@ int ilRewriteForTextureState(ctx, param_2, compileRecord, ilSource, param_5)
   undefined4 local_9d20;
   /* Declared too small (72 bytes) vs. its own memset (0x9c88 = 40072 bytes) - this is the real
    * root cause of the shader/GLSL token-stream parser crash tracked on issue #64: this buffer is
-   * the token stream's own backing storage (its address eventually becomes the base FUN_000e4a38
+   * the token stream's own backing storage (its address eventually becomes the base ILReader__fetchToken
    * walks via ctx+0x74), and at 72 declared bytes the memset was overflowing ~40KB into
    * whatever the compiler placed after it on the stack - onto this same giant function's own many
    * other locals, corrupting them, AND leaving the "real" 40KB buffer's tail entirely unzeroed

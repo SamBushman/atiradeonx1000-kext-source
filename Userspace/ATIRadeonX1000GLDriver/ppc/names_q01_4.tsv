@@ -1,0 +1,101 @@
+func	FUN_00019c50	gld_updateSampleConfig	INFERRED	re-selects the sample count from the render flags (0x700000 / 0xc0000 AA bits, counts 1/2/4/6) through FUN_00019ad0/FUN_000199f0 and flags a change of count or raster scale in ctx+0x2a43
+local	FUN_00019c50	param_1	ctx	CONFIRMED	GLDContext: ctx+0x154 renderFlags, +0x15c/+0x160 render size, +0x2a50 sample count, +0x2a54/+0x2a58 raster scale
+local	FUN_00019c50	iVar4	savedSampleCount	INFERRED	ctx+0x2a50 before the update; compared afterwards to detect a change
+local	FUN_00019c50	fVar1	savedRasterScaleX	INFERRED	ctx+0x2a54 (rasterScaleX) before the update
+local	FUN_00019c50	fVar2	savedRasterScaleY	INFERRED	ctx+0x2a58 (rasterScaleY) before the update
+use	FUN_00019c50	uVar3	sampleModeBits	INFERRED	renderFlags & 0x700000: AA mode bits selecting 2/4/6 samples	^\s*uVar3\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x154\)\ \&\ 0x700000;$	+2
+use	FUN_00019c50	uVar3	sampleModeBits	INFERRED	renderFlags & 0x700000: AA mode bits selecting 2/4/6 samples	^\s*else\ if\ \(uVar3\ ==\ 0x200000\)\ \{$	+1
+use	FUN_00019c50	uVar3	sampleModeBits	INFERRED	renderFlags & 0x700000: AA mode bits selecting 2/4/6 samples	^\s*else\ if\ \(uVar3\ ==\ 0x400000\)\ \{$	+1
+use	FUN_00019c50	uVar3	sampleModeBits	INFERRED	renderFlags & 0x700000: AA mode bits selecting 2/4/6 samples	^\s*else\ if\ \(uVar3\ ==\ 0x100000\)\ \{$	+1
+use	FUN_00019c50	uVar3	legacySampleBits	INFERRED	renderFlags & 0xc0000: selects 2 or 4 samples when no 0x700000 bit is set	^\s*uVar3\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x154\)\ \&\ 0xc0000;$	+2
+use	FUN_00019c50	uVar3	legacySampleBits	INFERRED	renderFlags & 0xc0000: selects 2 or 4 samples when no 0x700000 bit is set	^\s*else\ if\ \(uVar3\ ==\ 0x80000\)\ \{$	+1
+local	FUN_00019db0	param_2	sampleCount	INFERRED	forwarded as the sample count to FUN_00019ad0 / FUN_000199f0
+local	FUN_00019db0	param_3	sampleModeSelector	INFERRED	0 selects the FUN_00019ad0 configuration, non-zero the FUN_000199f0 one (unless the surface format nibble is 3)
+local	FUN_00019db0	bVar1	usesPrimaryConfig	INFERRED	true when FUN_00019ad0 was used (format nibble 3 or selector 0); picks which depth/AA flag bits are set in ctx[0xf]
+local	FUN_00019db0	iVar2	pendingSampleCount	INFERRED	ctx[0xa94] (= ctx+0x2a50): the sample count tested against 2/4/6
+local	FUN_00019db0	local_28	scalarIn0	INFERRED	scalar 0 of kernel selector 0: ~(renderer index byte) or the drawable word
+local	FUN_00019db0	local_20	scalarIn2	INFERRED	scalar 2: ctx[0x3f] (drawableIdHigh)
+local	FUN_00019db0	local_1c	scalarIn3	INFERRED	scalar 3: ctx[0x40] (drawableIdLow)
+use	FUN_00019db0	local_24	newDrawableFlags	INFERRED	drawableFlags (ctx[0xf]) with the AA bits rewritten; copied to renderFlags when no framebuffer is bound	^\s*local_24\ =\ param_1\[0xf\]\ \&\ 0xff83efff;$	+2
+use	FUN_00019db0	local_24	newDrawableFlags	INFERRED	drawableFlags (ctx[0xf]) with the AA bits rewritten; copied to renderFlags when no framebuffer is bound	^\s*local_24\ =\ local_24\ \|\ 0x41000;$	+2
+use	FUN_00019db0	local_24	newDrawableFlags	INFERRED	drawableFlags (ctx[0xf]) with the AA bits rewritten; copied to renderFlags when no framebuffer is bound	^\s*local_24\ =\ local_24\ \|\ 0x81000;$	+2
+use	FUN_00019db0	local_24	newDrawableFlags	INFERRED	drawableFlags (ctx[0xf]) with the AA bits rewritten; copied to renderFlags when no framebuffer is bound	^\s*param_1\[0xf\]\ =\ local_24;$@4	+1
+use	FUN_00019db0	local_24	newDrawableFlags	INFERRED	drawableFlags (ctx[0xf]) with the AA bits rewritten; copied to renderFlags when no framebuffer is bound	^\s*local_24\ =\ local_24\ \|\ 0x401000;$	+2
+use	FUN_00019db0	local_24	newDrawableFlags	INFERRED	drawableFlags (ctx[0xf]) with the AA bits rewritten; copied to renderFlags when no framebuffer is bound	^\s*local_24\ =\ local_24\ \|\ 0x201000;$	+2
+use	FUN_00019db0	local_24	newDrawableFlags	INFERRED	drawableFlags (ctx[0xf]) with the AA bits rewritten; copied to renderFlags when no framebuffer is bound	^\s*local_24\ =\ local_24\ \|\ 0x101000;$	+2
+use	FUN_00019db0	local_24	newDrawableFlags	INFERRED	drawableFlags (ctx[0xf]) with the AA bits rewritten; copied to renderFlags when no framebuffer is bound	^\s*param_1\[0x55\]\ =\ local_24;$	+1
+use	FUN_00019db0	local_24	newDrawableFlags	INFERRED	drawableFlags (ctx[0xf]) with the AA bits rewritten; copied to renderFlags when no framebuffer is bound	^\s*if\ \(\(local_24\ \&\ 0x20\)\ ==\ 0\)\ \{$	+1
+use	FUN_00019db0	local_24	scalarIn1	INFERRED	scalar 1 of kernel selector 0: drawable flags & 0xffff3fc0 (same call as _gldAttachDrawable)	^\s*local_24\ =\ local_24\ \&\ 0xffff3fc0;$	+1	lhs	none
+use	FUN_00019db0	local_24	newDrawableFlags	INFERRED	drawableFlags with the AA bits rewritten (read side of the masked scalar)	^\s*local_24\ =\ local_24\ \&\ 0xffff3fc0;$	+1	rhs	none
+local	FUN_0001a010	param_3	staleArgR5	INFERRED	incoming register forwarded unchanged by the callers; unused
+local	FUN_0001a010	param_4	staleArgR6	INFERRED	incoming register forwarded unchanged by the callers; unused
+local	FUN_0001a010	param_5	staleArgR7	INFERRED	incoming register forwarded unchanged by the callers; unused
+local	FUN_0001a010	param_6	staleArgR8	INFERRED	incoming register forwarded unchanged by the callers; unused
+local	FUN_0001a010	param_7	staleArgR9	INFERRED	incoming register forwarded unchanged by the callers; unused
+local	FUN_0001a010	bVar1	needsResolve	INFERRED	multisample colour buffer present (AA bits set and not the 0x70000000 mode): the caller must resolve before flushing
+local	FUN_0001a280	param_2	staleArgR4	INFERRED	incoming register, unused
+local	FUN_0001a280	param_3	staleArgR5	INFERRED	incoming register forwarded to FUN_0001a010
+local	FUN_0001a280	param_4	staleArgR6	INFERRED	incoming register forwarded to FUN_0001a010
+local	FUN_0001a280	param_5	staleArgR7	INFERRED	incoming register forwarded to FUN_0001a010
+local	FUN_0001a280	param_6	staleArgR8	INFERRED	incoming register forwarded to FUN_0001a010
+local	FUN_0001a280	param_7	staleArgR9	INFERRED	incoming register forwarded to FUN_0001a010
+local	FUN_0001a280	uVar3	pendingSampleFlag	INFERRED	ctx+0x2a74: flag passed on as (flag < 2)
+local	FUN_0001a280	cVar1	pendingSwapIntervalMode	INFERRED	ctx+0x2a6c: 1 = interval 0/0, 2 = 1/1, otherwise the context's swap interval numerator/denominator
+local	FUN_0001a280	puVar5	lastHeader	INFERRED	ctx+0x1d8: header word of the previous packet, patched with the packet length
+local	FUN_0001a280	local_28	scalarIn0	INFERRED	scalar 0 of kernel selector 2 set_swap_interval (numerator)
+local	FUN_0001a280	local_24	scalarIn1	INFERRED	scalar 1 of kernel selector 2 set_swap_interval (denominator)
+use	FUN_0001a280	iVar2	needsResolve	INFERRED	FUN_0001a010 result: the multisample buffer has to be resolved before the flush	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)FUN_0001a010\)\(param_1,0,param_3,param_4,param_5,param_6,param_7\);$	+2
+use	FUN_0001a280	iVar2	pendingSampleCount	INFERRED	ctx+0x2a70: sample count requested while the flush was pending	^\s*iVar2\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x2a70\);$	+2
+use	FUN_0001a280	iVar2	pendingSampleCount	INFERRED	ctx+0x2a70: sample count requested while the flush was pending	^\s*\*\(int\ \*\)\(param_1\ \+\ 0x2a84\)\ =\ iVar2;$	+2
+use	FUN_0001a280	puVar4	drawable	INFERRED	ctx+0xf8 attachedDrawable: words 0..2 are passed to the library swap callback	^\s*puVar4\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0xf8\);$	+1
+use	FUN_0001a280	puVar4	drawable	INFERRED	ctx+0xf8 attachedDrawable: words 0..2 are passed to the library swap callback	^\s*\(\*puVar4,puVar4\[1\],puVar4\[2\],0,0,\-\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x142\)\ >>\ 0x1f\);$	+1
+use	FUN_0001a280	puVar4	drawable	INFERRED	ctx+0xf8 attachedDrawable: words 0..2 are passed to the library swap callback	^\s*\(\*puVar4,puVar4\[1\],puVar4\[2\],param_1\ \+\ 0x124,\*\(undefined4\ \*\)\(param_1\ \+\ 0x108\),$	+1
+use	FUN_0001a280	puVar4	writeCursor	INFERRED	ring write cursor (ctx+0x1dc); a 5-word packet is appended	^\s*puVar4\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0x1dc\);$	+2
+use	FUN_0001a280	puVar4	writeCursor	INFERRED	ring write cursor (ctx+0x1dc); a 5-word packet is appended	^\s*puVar4\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0x1dc\);$@2	+1
+use	FUN_0001a280	puVar4	writeCursor	INFERRED	ring write cursor (ctx+0x1dc); a 5-word packet is appended	^\s*\*\(undefined4\ \*\*\)\(param_1\ \+\ 0x1dc\)\ =\ puVar4\ \+\ 5;$	+4
+local	FUN_0001a750	param_2	staleArgR4	INFERRED	incoming register, unused
+local	FUN_0001a750	param_3	staleArgR5	INFERRED	incoming register forwarded to FUN_0001a010
+local	FUN_0001a750	param_4	staleArgR6	INFERRED	incoming register forwarded to FUN_0001a010
+local	FUN_0001a750	param_5	staleArgR7	INFERRED	incoming register forwarded to FUN_0001a010
+local	FUN_0001a750	param_6	staleArgR8	INFERRED	incoming register forwarded to FUN_0001a010
+local	FUN_0001a750	param_7	staleArgR9	INFERRED	incoming register forwarded to FUN_0001a010
+local	FUN_0001a750	uVar3	pendingSampleFlag	INFERRED	ctx+0x2a74: flag passed on as (flag < 2)
+local	FUN_0001a750	cVar1	pendingSwapIntervalMode	INFERRED	ctx+0x2a6c: 1 = interval 0/0, 2 = 1/1, otherwise the context's swap interval numerator/denominator
+local	FUN_0001a750	puVar5	lastHeader	INFERRED	ctx+0x1d8: header word of the previous packet, patched with the packet length
+local	FUN_0001a750	uStack_28	scalarIn0	INFERRED	scalar 0 of kernel selector 2 set_swap_interval (numerator)
+local	FUN_0001a750	uStack_24	scalarIn1	INFERRED	scalar 1 of kernel selector 2 set_swap_interval (denominator)
+use	FUN_0001a750	iVar2	needsResolve	INFERRED	FUN_0001a010 result: resolve the multisample buffer first	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)FUN_0001a010\)\(param_1,1,param_3,param_4,param_5,param_6,param_7\);$	+2
+use	FUN_0001a750	iVar2	finishStatus	INFERRED	status of kernel selector 8 (finish); retried while it returns -0x1ffffd2a	^\s*iVar2\ =\ _io_connect_method_scalarI_structureI\(\*\(undefined4\ \*\)\(param_1\ \+\ 4\),8,0,0,0,0\);$	+2
+use	FUN_0001a750	iVar2	pendingSampleCount	INFERRED	ctx+0x2a70: sample count requested while the finish was pending	^\s*iVar2\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x2a70\);$	+2
+use	FUN_0001a750	iVar2	pendingSampleCount	INFERRED	ctx+0x2a70: sample count requested while the finish was pending	^\s*\*\(int\ \*\)\(param_1\ \+\ 0x2a84\)\ =\ iVar2;$	+2
+use	FUN_0001a750	puVar4	drawable	INFERRED	ctx+0xf8 attachedDrawable: words 0..2 are passed to the library swap callback	^\s*puVar4\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0xf8\);$	+1
+use	FUN_0001a750	puVar4	drawable	INFERRED	ctx+0xf8 attachedDrawable: words 0..2 are passed to the library swap callback	^\s*\(\*puVar4,puVar4\[1\],puVar4\[2\],0,0,\-\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x142\)\ >>\ 0x1f\);$	+1
+use	FUN_0001a750	puVar4	drawable	INFERRED	ctx+0xf8 attachedDrawable: words 0..2 are passed to the library swap callback	^\s*\(\*puVar4,puVar4\[1\],puVar4\[2\],param_1\ \+\ 0x124,\*\(undefined4\ \*\)\(param_1\ \+\ 0x108\),$	+1
+use	FUN_0001a750	puVar4	writeCursor	INFERRED	ring write cursor (ctx+0x1dc); a 5-word packet is appended	^\s*puVar4\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0x1dc\);$	+2
+use	FUN_0001a750	puVar4	writeCursor	INFERRED	ring write cursor (ctx+0x1dc); a 5-word packet is appended	^\s*puVar4\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0x1dc\);$@2	+1
+use	FUN_0001a750	puVar4	writeCursor	INFERRED	ring write cursor (ctx+0x1dc); a 5-word packet is appended	^\s*\*\(undefined4\ \*\*\)\(param_1\ \+\ 0x1dc\)\ =\ puVar4\ \+\ 5;$	+4
+local	FUN_0001a9d0	param_6	staleArgR8	INFERRED	incoming register forwarded to FUN_0001a010
+local	FUN_0001a9d0	param_7	staleArgR9	INFERRED	incoming register forwarded to FUN_0001a010
+local	FUN_0001a9d0	uVar3	pendingSampleFlag	INFERRED	ctx+0x2a74: flag passed on as (flag < 2)
+local	FUN_0001a9d0	cVar1	pendingSwapIntervalMode	INFERRED	ctx+0x2a6c: 1 = interval 0/0, 2 = 1/1, otherwise the context's swap interval numerator/denominator
+local	FUN_0001a9d0	puVar5	lastHeader	INFERRED	ctx+0x1d8: header word of the previous packet, patched with the packet length
+local	FUN_0001a9d0	local_28	scalarIn0	INFERRED	scalar 0 of kernel selector 2 set_swap_interval (numerator)
+local	FUN_0001a9d0	local_24	scalarIn1	INFERRED	scalar 1 of kernel selector 2 set_swap_interval (denominator)
+use	FUN_0001a9d0	iVar2	needsResolve	INFERRED	FUN_0001a010 result: resolve the multisample buffer first	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)FUN_0001a010\)\(param_1,1,param_3,param_4,param_5,param_6,param_7\);$	+2
+use	FUN_0001a9d0	iVar2	pendingSampleCount	INFERRED	ctx+0x2a70: sample count requested while the finish was pending	^\s*iVar2\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x2a70\);$	+2
+use	FUN_0001a9d0	iVar2	pendingSampleCount	INFERRED	ctx+0x2a70: sample count requested while the finish was pending	^\s*\*\(int\ \*\)\(param_1\ \+\ 0x2a84\)\ =\ iVar2;$	+2
+use	FUN_0001a9d0	puVar4	drawable	INFERRED	ctx+0xf8 attachedDrawable: words 0..2 are passed to the library swap callback	^\s*puVar4\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0xf8\);$	+1
+use	FUN_0001a9d0	puVar4	drawable	INFERRED	ctx+0xf8 attachedDrawable: words 0..2 are passed to the library swap callback	^\s*\(\*puVar4,puVar4\[1\],puVar4\[2\],0,0,\-\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x142\)\ >>\ 0x1f\);$	+1
+use	FUN_0001a9d0	puVar4	drawable	INFERRED	ctx+0xf8 attachedDrawable: words 0..2 are passed to the library swap callback	^\s*\(\*puVar4,puVar4\[1\],puVar4\[2\],param_1\ \+\ 0x124,\*\(undefined4\ \*\)\(param_1\ \+\ 0x108\),$	+1
+use	FUN_0001a9d0	puVar4	writeCursor	INFERRED	ring write cursor (ctx+0x1dc); a 5-word packet is appended	^\s*puVar4\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0x1dc\);$	+2
+use	FUN_0001a9d0	puVar4	writeCursor	INFERRED	ring write cursor (ctx+0x1dc); a 5-word packet is appended	^\s*puVar4\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0x1dc\);$@2	+1
+use	FUN_0001a9d0	puVar4	writeCursor	INFERRED	ring write cursor (ctx+0x1dc); a 5-word packet is appended	^\s*\*\(undefined4\ \*\*\)\(param_1\ \+\ 0x1dc\)\ =\ puVar4\ \+\ 5;$	+4
+local	FUN_0001a670	param_2	fence	INFERRED	fence object {id, flag byte}: id is written into the packet, the status-region entry for the id is marked pending
+local	FUN_0001a670	puVar2	packet	INFERRED	6-word packet reserved at the ring write cursor: wait-until + fence-signal command carrying the fence id
+local	FUN_0001a670	puVar1	lastHeader	INFERRED	ctx+0x1d8: header word of the previous packet, patched with the packet length
+local	FUN_0001a4e0	uVar1	clearedFlags	INFERRED	drawableFlags with bit 0x800 cleared
+local	FUN_0001a4e0	extraout_r4	r4AfterIoCall	INFERRED	r4 left by the kernel call, forwarded as stale second argument of glFlush_impl
+local	FUN_0001a4e0	uStack_28	scalarIn0	INFERRED	scalar 0 of kernel selector 0 (the drawable word); address passed as the scalar block
+local	FUN_0001a4e0	uStack_20	scalarIn2	INFERRED	scalar 2: drawableIdHigh (ctx+0xfc)
+local	FUN_0001a4e0	uStack_1c	scalarIn3	INFERRED	scalar 3: drawableIdLow (ctx+0x100)
+local	FUN_0001a750	param_1	ctx	CONFIRMED	GLDContext

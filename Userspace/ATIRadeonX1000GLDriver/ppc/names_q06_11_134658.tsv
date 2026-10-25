@@ -1,0 +1,93 @@
+use	FUN_00134658	iVar9	compiler	INFERRED	program->compiler, later the total register count (physical + virtual + extra)	^\s*iVar9\ =\ \*\(int\ \*\)\(param_1\ \+\ 8\);$	+2
+use	FUN_00134658	iVar9	compiler	INFERRED	program->compiler, later the total register count (physical + virtual + extra)	^\s*piVar10\ =\ \*\(int\ \*\*\)\(iVar9\ \+\ 0x30c\);$	+5
+use	FUN_00134658	iVar9	compiler	INFERRED	program->compiler, later the total register count (physical + virtual + extra)	^\s*uVar14\ =\ iVar9\ \+\ 0x1fU\ >>\ 5;$	+1
+use	FUN_00134658	iVar9	compiler	INFERRED	program->compiler, later the total register count (physical + virtual + extra)	^\s*puVar6\[2\]\ =\ iVar9;$	+1
+use	FUN_00134658	iVar9	compiler	INFERRED	program->compiler, later the total register count (physical + virtual + extra)	^\s*puVar6\[2\]\ =\ iVar9;$@2	+1
+use	FUN_00134658	iVar9	usageBitsetBSrc	INFERRED	cursor over the second register usage bitset (program +0x430)	^\s*iVar9\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x430\);$	+1
+use	FUN_00134658	iVar9	usageBitsetBSrc	INFERRED	cursor over the second register usage bitset (program +0x430)	^\s*puVar1\ =\ \(uint\ \*\)\(iVar9\ \+\ 8\);$	+2
+use	FUN_00134658	iVar9	allocationRound	INFERRED	0 for the first allocation attempt, 1 for the retry after spilling	^\s*iVar9\ =\ 0;$	+1
+use	FUN_00134658	iVar9	allocationRound	INFERRED	0 for the first allocation attempt, 1 for the retry after spilling	^\s*\(\(int\ \(\*\)\(\)\)FUN_00131d08\)\(param_1,\*\(undefined4\ \*\)\(param_1\ \+\ 0x468\),\*\(undefined4\ \*\)\(param_1\ \+\ 0x46c\),$	+3
+use	FUN_00134658	iVar9	allocationRound	INFERRED	0 for the first allocation attempt, 1 for the retry after spilling	^\s*if\ \(iVar9\ !=\ 0\)\ \{$@2	+1
+use	FUN_00134658	iVar9	allocationRound	INFERRED	0 for the first allocation attempt, 1 for the retry after spilling	^\s*iVar9\ =\ 1;$	+1
+use	FUN_00134658	uVar14	bitsetWordCount	INFERRED	(register count + 31) >> 5	^\s*uVar14\ =\ iVar9\ \+\ 0x1fU\ >>\ 5;$	+2
+use	FUN_00134658	uVar14	bitsetWordCount	INFERRED	(register count + 31) >> 5	^\s*puVar6\[1\]\ =\ uVar14;$	+1
+use	FUN_00134658	uVar14	bitsetWordCount	INFERRED	(register count + 31) >> 5	^\s*if\ \(uVar14\ ==\ 0\)\ \{$	+1
+use	FUN_00134658	uVar14	bitsetWordCount	INFERRED	(register count + 31) >> 5	^\s*uVar12\ =\ uVar14;$	+2
+use	FUN_00134658	uVar14	bitsetWordCount	INFERRED	(register count + 31) >> 5	^\s*uVar13\ =\ uVar14;$	+1
+use	FUN_00134658	uVar14	bitsetWordCount	INFERRED	(register count + 31) >> 5	^\s*puVar6\[1\]\ =\ uVar14;$@2	+1
+use	FUN_00134658	uVar14	bitsetWordCount	INFERRED	(register count + 31) >> 5	^\s*if\ \(uVar14\ ==\ 0\)\ \{$@3	+2
+use	FUN_00134658	uVar14	bitsetWordCount	INFERRED	(register count + 31) >> 5	^\s*uVar13\ =\ uVar14;$@2	+2
+use	FUN_00134658	uVar14	bitsetWordCount	INFERRED	(register count + 31) >> 5	^\s*if\ \(uVar14\ !=\ 0\)\ \{$	+1
+use	FUN_00134658	uVar14	bitsetWordCount	INFERRED	(register count + 31) >> 5	^\s*if\ \(uVar14\ ==\ 0\)\ \{$@5	+2
+use	FUN_00134658	uVar14	bitsetWordCount	INFERRED	(register count + 31) >> 5	^\s*uVar14\ =\ uVar14\ \-\ 1;$	+2
+use	FUN_00134658	puVar1	usageBitsetBSrcWord	INFERRED	source word pointer while copying the second usage bitset	^\s*puVar1\ =\ \(uint\ \*\)\(iVar9\ \+\ 8\);$	+1
+use	FUN_00134658	puVar1	usageBitsetBSrcWord	INFERRED	source word pointer while copying the second usage bitset	^\s*puVar3\[2\]\ =\ \*puVar1;$	+1
+use	FUN_00134658	puVar1	restoreSrcWordA	INFERRED	saved word pointer while restoring the first usage bitset	^\s*puVar1\ =\ puVar3\ \+\ 2;$	+1
+use	FUN_00134658	puVar1	restoreSrcWordA	INFERRED	saved word pointer while restoring the first usage bitset	^\s*piVar10\[2\]\ =\ \*puVar1;$	+1
+use	FUN_00134658	puVar1	restoreSrcWordB	INFERRED	saved word pointer while restoring the second usage bitset	^\s*puVar1\ =\ puVar3\ \+\ 2;$@2	+1
+use	FUN_00134658	puVar1	restoreSrcWordB	INFERRED	saved word pointer while restoring the second usage bitset	^\s*piVar10\[2\]\ =\ \*puVar1;$@2	+1
+use	FUN_00134658	puVar2	savedBitsetACursor	INFERRED	cursor clearing / filling the first saved bitset	^\s*puVar2\ =\ puVar8;$	+1
+use	FUN_00134658	puVar2	savedBitsetACursor	INFERRED	cursor clearing / filling the first saved bitset	^\s*puVar2\[2\]\ =\ 0;$	+2
+use	FUN_00134658	puVar2	savedBitsetACursor	INFERRED	cursor clearing / filling the first saved bitset	^\s*puVar2\ =\ puVar8;$@2	+1
+use	FUN_00134658	puVar2	savedBitsetACursor	INFERRED	cursor clearing / filling the first saved bitset	^\s*puVar2\[2\]\ =\ \*puVar3;$	+2
+use	FUN_00134658	puVar2	savedBitsetB	INFERRED	copy of the second register usage bitset (allocation + 1)	^\s*puVar2\ =\ puVar6\ \+\ 1;$	+1
+use	FUN_00134658	puVar2	savedBitsetB	INFERRED	copy of the second register usage bitset (allocation + 1)	^\s*uVar14\ =\ \*puVar2;$	+1
+use	FUN_00134658	puVar2	savedBitsetB	INFERRED	copy of the second register usage bitset (allocation + 1)	^\s*puVar3\ =\ puVar2;$	+1
+use	FUN_00134658	puVar2	savedBitsetB	INFERRED	copy of the second register usage bitset (allocation + 1)	^\s*puVar3\ =\ puVar2;$@2	+1
+use	FUN_00134658	puVar2	savedBitsetB	INFERRED	copy of the second register usage bitset (allocation + 1)	^\s*puVar3\ =\ puVar2;$@3	+1
+use	FUN_00134658	puVar3	usageBitsetASrcWord	INFERRED	source word pointer while copying the first usage bitset	^\s*puVar3\ =\ \(uint\ \*\)\(iVar5\ \+\ 8\);$	+1
+use	FUN_00134658	puVar3	usageBitsetASrcWord	INFERRED	source word pointer while copying the first usage bitset	^\s*puVar2\[2\]\ =\ \*puVar3;$	+1
+use	FUN_00134658	puVar3	savedBitsetBCursor	INFERRED	cursor over the second saved bitset	^\s*puVar3\ =\ puVar2;$	+1
+use	FUN_00134658	puVar3	savedBitsetBCursor	INFERRED	cursor over the second saved bitset	^\s*puVar3\[2\]\ =\ 0;$	+2
+use	FUN_00134658	puVar3	savedBitsetBCursor	INFERRED	cursor over the second saved bitset	^\s*puVar3\ =\ puVar2;$@2	+1
+use	FUN_00134658	puVar3	savedBitsetBCursor	INFERRED	cursor over the second saved bitset	^\s*puVar3\[2\]\ =\ \*puVar1;$	+2
+use	FUN_00134658	puVar3	savedBitsetBCursor	INFERRED	cursor over the second saved bitset	^\s*puVar3\ =\ puVar2;$@3	+1
+use	FUN_00134658	puVar3	savedBitsetBCursor	INFERRED	cursor over the second saved bitset	^\s*puVar1\ =\ puVar3\ \+\ 2;$@2	+2
+use	FUN_00134658	puVar3	savedBitsetARestoreCursor	INFERRED	cursor over the first saved bitset while restoring	^\s*puVar3\ =\ puVar8;$	+1
+use	FUN_00134658	puVar3	savedBitsetARestoreCursor	INFERRED	cursor over the first saved bitset while restoring	^\s*puVar1\ =\ puVar3\ \+\ 2;$	+2
+use	FUN_00134658	iVar4	physicalRegCountA	INFERRED	backend vtable slot 0x138: number of physical registers	^\s*iVar4\ =\ \(\*\*\(code\ \*\*\)\(\*piVar10\ \+\ 0x138\)\)\(piVar10,iVar9\);$	+1
+use	FUN_00134658	iVar4	physicalRegCountA	INFERRED	backend vtable slot 0x138: number of physical registers	^\s*iVar9\ =\ iVar4\ \+\ iVar5\ \+\ iVar9;$	+1
+use	FUN_00134658	iVar4	bitsetByteSize	INFERRED	bitset allocation size in bytes including the 12-byte header	^\s*iVar4\ =\ uVar14\ \*\ 4\ \+\ 0xc;$	+2
+use	FUN_00134658	iVar4	bitsetByteSize	INFERRED	bitset allocation size in bytes including the 12-byte header	^\s*puVar6\ =\ \(undefined4\ \*\)FUN_00193e18\(uVar11,iVar4\);$@2	+1
+use	FUN_00134658	iVar4	spilledBitCount	INFERRED	bit count of the allocator's spilled-register set	^\s*iVar4\ =\ \*\(int\ \*\)\(iVar5\ \+\ 4\);$	+2
+use	FUN_00134658	iVar4	spilledBitCount	INFERRED	bit count of the allocator's spilled-register set	^\s*iVar4\ =\ iVar4\ \+\ \-1;$	+2
+use	FUN_00134658	iVar4	compilerB	INFERRED	program->compiler	^\s*iVar4\ =\ \*\(int\ \*\)\(param_1\ \+\ 8\);$	+1
+use	FUN_00134658	iVar4	compilerB	INFERRED	program->compiler	^\s*iVar4\ =\ \*\(int\ \*\)\(param_1\ \+\ 8\);$@2	+2
+use	FUN_00134658	iVar4	compilerB	INFERRED	program->compiler	^\s*FUN_000e1534\(iVar4,4\);$	+1
+use	FUN_00134658	iVar4	restoreWordCountA	INFERRED	word count of the first usage bitset to restore	^\s*iVar4\ =\ \*piVar10;$	+2
+use	FUN_00134658	iVar4	restoreWordCountA	INFERRED	word count of the first usage bitset to restore	^\s*if\ \(iVar4\ ==\ 0\)\ \{$@2	+2
+use	FUN_00134658	iVar4	restoreWordCountA	INFERRED	word count of the first usage bitset to restore	^\s*iVar4\ =\ iVar4\ \+\ \-1;$@2	+2
+use	FUN_00134658	iVar4	restoreWordCountB	INFERRED	word count of the second usage bitset to restore	^\s*iVar4\ =\ \*piVar10;$@2	+2
+use	FUN_00134658	iVar4	restoreWordCountB	INFERRED	word count of the second usage bitset to restore	^\s*if\ \(iVar4\ ==\ 0\)\ \{$@3	+2
+use	FUN_00134658	iVar4	restoreWordCountB	INFERRED	word count of the second usage bitset to restore	^\s*iVar4\ =\ iVar4\ \+\ \-1;$@3	+2
+use	FUN_00134658	iVar4	allocatorObj	INFERRED	register allocator object (program +0x3c0)	^\s*iVar4\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x3c0\);$	+4
+use	FUN_00134658	iVar5	physicalRegCountB	INFERRED	backend vtable slot 0x140: second register class count	^\s*iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*piVar10\ \+\ 0x140\)\)\(piVar10,iVar9\);$	+1
+use	FUN_00134658	iVar5	physicalRegCountB	INFERRED	backend vtable slot 0x140: second register class count	^\s*iVar9\ =\ iVar4\ \+\ iVar5\ \+\ iVar9;$	+1
+use	FUN_00134658	iVar5	usageBitsetACursor	INFERRED	cursor over the first register usage bitset (program +0x42c)	^\s*iVar5\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x42c\);$	+1
+use	FUN_00134658	iVar5	usageBitsetACursor	INFERRED	cursor over the first register usage bitset (program +0x42c)	^\s*puVar3\ =\ \(uint\ \*\)\(iVar5\ \+\ 8\);$	+2
+use	FUN_00134658	iVar5	spilledBitset	INFERRED	allocator spilled-register set (+0x24)	^\s*iVar5\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x3c0\)\ \+\ 0x24\);$	+2
+use	FUN_00134658	iVar5	spilledBitset	INFERRED	allocator spilled-register set (+0x24)	^\s*if\ \(\(\*\(uint\ \*\)\(\(uVar14\ >>\ 3\ \&\ 0x1ffffffc\)\ \+\ iVar5\ \+\ 8\)\ >>\ \(uVar14\ \&\ 0x1f\)\ \&\ 1\)\ !=\ 0\)\ \{$	+1
+use	FUN_00134658	piVar10	backend	INFERRED	compiler backend object (compiler + 0x30c)	^\s*piVar10\ =\ \*\(int\ \*\*\)\(iVar9\ \+\ 0x30c\);$	+4
+use	FUN_00134658	piVar10	backendB	INFERRED	compiler backend object	^\s*piVar10\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x30c\);$	+2
+use	FUN_00134658	piVar10	backendB	INFERRED	compiler backend object	^\s*piVar10\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x30c\);$@2	+2
+use	FUN_00134658	piVar10	usageBitsetAData	INFERRED	first register usage bitset being restored	^\s*piVar10\ =\ \*\(int\ \*\*\)\(param_1\ \+\ 0x42c\);$	+2
+use	FUN_00134658	piVar10	usageBitsetAData	INFERRED	first register usage bitset being restored	^\s*piVar10\[2\]\ =\ \*puVar1;$	+2
+use	FUN_00134658	piVar10	usageBitsetBData	INFERRED	second register usage bitset being restored	^\s*piVar10\ =\ \*\(int\ \*\*\)\(param_1\ \+\ 0x430\);$	+2
+use	FUN_00134658	piVar10	usageBitsetBData	INFERRED	second register usage bitset being restored	^\s*piVar10\[2\]\ =\ \*puVar1;$@2	+2
+use	FUN_00134658	uVar12	clearCountA	INFERRED	words left to clear in the first saved bitset	^\s*uVar12\ =\ uVar14;$	+1
+use	FUN_00134658	uVar12	clearCountA	INFERRED	words left to clear in the first saved bitset	^\s*uVar12\ =\ 1;$	+1
+use	FUN_00134658	uVar12	clearCountA	INFERRED	words left to clear in the first saved bitset	^\s*uVar12\ =\ uVar12\ \-\ 1;$	+1
+use	FUN_00134658	uVar12	clearCountA	INFERRED	words left to clear in the first saved bitset	^\s*\}\ while\ \(uVar12\ !=\ 0\);$	+1
+use	FUN_00134658	uVar13	copyCountA	INFERRED	words to copy into the first saved bitset	^\s*uVar13\ =\ \*puVar8;$	+1
+use	FUN_00134658	uVar13	copyCountA	INFERRED	words to copy into the first saved bitset	^\s*uVar13\ =\ uVar14;$	+1
+use	FUN_00134658	uVar13	copyCountA	INFERRED	words to copy into the first saved bitset	^\s*if\ \(uVar13\ !=\ 0\)\ \{$	+1
+use	FUN_00134658	uVar13	copyCountA	INFERRED	words to copy into the first saved bitset	^\s*if\ \(uVar13\ ==\ 0\)\ \{$	+2
+use	FUN_00134658	uVar13	copyCountA	INFERRED	words to copy into the first saved bitset	^\s*uVar13\ =\ uVar13\ \-\ 1;$	+2
+use	FUN_00134658	uVar13	copyCountB	INFERRED	words left to clear in the second saved bitset	^\s*uVar13\ =\ uVar14;$@2	+1
+use	FUN_00134658	uVar13	copyCountB	INFERRED	words left to clear in the second saved bitset	^\s*uVar13\ =\ 1;$@2	+1
+use	FUN_00134658	uVar13	copyCountB	INFERRED	words left to clear in the second saved bitset	^\s*uVar13\ =\ uVar13\ \-\ 1;$@2	+2
+use	FUN_00134658	puVar8	savedBitsetA	INFERRED	copy of the first register usage bitset (allocation + 1)	^\s*puVar8\ =\ puVar6\ \+\ 1;$	+1
+use	FUN_00134658	puVar8	savedBitsetA	INFERRED	copy of the first register usage bitset (allocation + 1)	^\s*uVar13\ =\ \*puVar8;$	+1
+use	FUN_00134658	puVar8	savedBitsetA	INFERRED	copy of the first register usage bitset (allocation + 1)	^\s*puVar2\ =\ puVar8;$	+1
+use	FUN_00134658	puVar8	savedBitsetA	INFERRED	copy of the first register usage bitset (allocation + 1)	^\s*puVar2\ =\ puVar8;$@2	+1
+use	FUN_00134658	puVar8	savedBitsetA	INFERRED	copy of the first register usage bitset (allocation + 1)	^\s*puVar3\ =\ puVar8;$	+1

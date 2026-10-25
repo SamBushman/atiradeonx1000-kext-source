@@ -1,0 +1,233 @@
+use	pass_ssa_build	puVar8	blockStackSlotRef	INFERRED	slot reference in the block stack vector (local_5c buffer)	^\s*puVar8\ =\ \(undefined4\ \*\)\(iVar3\ \+\ local_54\);$	+1
+use	pass_ssa_build	puVar8	blockStackSlotRef	INFERRED	slot reference in the block stack vector (local_5c buffer)	^\s*puVar8\ =\ \(undefined4\ \*\)FUN_0019423c\(\&local_5c,local_58\);$	+1
+use	pass_ssa_build	puVar8	blockStackSlotRef	INFERRED	slot reference in the block stack vector (local_5c buffer)	^\s*\*puVar8\ =\ uVar19;$	+1
+use	pass_ssa_build	puVar8	blockStackSlotRefB	INFERRED	slot reference in the block stack vector	^\s*puVar8\ =\ \(undefined4\ \*\)\(iVar12\ \+\ local_54\);$	+1
+use	pass_ssa_build	puVar8	blockStackSlotRefB	INFERRED	slot reference in the block stack vector	^\s*puVar8\ =\ \(undefined4\ \*\)FUN_0019423c\(\&local_5c,local_58\);$@2	+1
+use	pass_ssa_build	puVar8	blockStackSlotRefB	INFERRED	slot reference in the block stack vector	^\s*\*puVar8\ =\ uVar19;$@22	+1
+use	pass_ssa_build	puVar8	scopeExprSlotRef	INFERRED	slot reference in the scope expression table vector	^\s*puVar8\ =\ \(undefined4\ \*\)\(uVar4\ \*\ 4\ \+\ puVar16\[2\]\);$	+1
+use	pass_ssa_build	puVar8	scopeExprSlotRef	INFERRED	slot reference in the scope expression table vector	^\s*puVar8\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar16,uVar4\);$	+1
+use	pass_ssa_build	puVar8	scopeExprSlotRef	INFERRED	slot reference in the scope expression table vector	^\s*\*puVar8\ =\ puVar15;$	+1
+use	pass_ssa_build	puVar8	scopeLaneMatchSlotRef	INFERRED	slot reference in the scope lane-match table vector	^\s*puVar8\ =\ \(undefined4\ \*\)\(uVar4\ \*\ 4\ \+\ puVar17\[2\]\);$	+1
+use	pass_ssa_build	puVar8	scopeLaneMatchSlotRef	INFERRED	slot reference in the scope lane-match table vector	^\s*puVar8\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar17,uVar4\);$	+1
+use	pass_ssa_build	puVar8	scopeLaneMatchSlotRef	INFERRED	slot reference in the scope lane-match table vector	^\s*\*puVar8\ =\ puVar16;$	+1
+use	pass_ssa_build	puVar8	scopeSwizzleSlotRef	INFERRED	slot reference in the scope swizzle table vector	^\s*puVar8\ =\ \(undefined4\ \*\)\(uVar4\ \*\ 4\ \+\ puVar21\[2\]\);$	+1
+use	pass_ssa_build	puVar8	scopeSwizzleSlotRef	INFERRED	slot reference in the scope swizzle table vector	^\s*puVar8\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar21,uVar4\);$	+1
+use	pass_ssa_build	puVar8	scopeSwizzleSlotRef	INFERRED	slot reference in the scope swizzle table vector	^\s*\*puVar8\ =\ puVar17;$	+1
+use	pass_ssa_build	puVar8	scopeBlocksSlotRef	INFERRED	slot reference in the scope block vector	^\s*puVar8\ =\ \(undefined4\ \*\)\(uVar4\ \*\ 4\ \+\ puVar21\[2\]\);$@2	+1
+use	pass_ssa_build	puVar8	scopeBlocksSlotRef	INFERRED	slot reference in the scope block vector	^\s*puVar8\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar21,uVar4\);$@2	+1
+use	pass_ssa_build	puVar8	scopeBlocksSlotRef	INFERRED	slot reference in the scope block vector	^\s*\*puVar8\ =\ piVar18;$	+1
+use	pass_ssa_build	puVar8	blockTableCursor	INFERRED	cursor clearing the 0x80-entry per-block table	^\s*puVar8\ =\ puVar10\ \+\ 1;$	+1
+use	pass_ssa_build	puVar8	blockTableCursor	INFERRED	cursor clearing the 0x80-entry per-block table	^\s*puVar8\[2\]\ =\ 0;$@20	+2
+use	pass_ssa_build	puVar8	valueKeyAlloc	INFERRED	arena block (0x240 bytes) holding the ValueKey; the key is allocation + 1	^\s*puVar8\ =\ \(undefined4\ \*\)FUN_00193e18\(uVar19,0x240\);$	+4
+use	pass_ssa_build	puVar8	valueKeyAlloc	INFERRED	arena block (0x240 bytes) holding the ValueKey; the key is allocation + 1	^\s*local_68\ =\ puVar8;$	+1
+use	pass_ssa_build	puVar8	sourceDefSlotRef	INFERRED	slot reference in the source definition stack	^\s*puVar8\ =\ \(undefined4\ \*\)\(uVar4\ \*\ 4\ \+\ puVar21\[2\]\);$@3	+1
+use	pass_ssa_build	puVar8	sourceDefSlotRef	INFERRED	slot reference in the source definition stack	^\s*puVar8\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar21,uVar4\);$@3	+1
+use	pass_ssa_build	puVar8	sourceDefSlotRef	INFERRED	slot reference in the source definition stack	^\s*FUN_000e9c00\(piVar18,piVar7\[0x23\],\*puVar8\);$	+1
+use	pass_ssa_build	puVar8	stackTopRefA	INFERRED	top element of the block stack when it is not empty	^\s*puVar8\ =\ \(undefined4\ \*\)0x0;$	+1
+use	pass_ssa_build	puVar8	stackTopRefA	INFERRED	top element of the block stack when it is not empty	^\s*puVar8\ =\ \(undefined4\ \*\)\(uVar4\ \*\ 4\ \+\ local_54\);$	+1
+use	pass_ssa_build	puVar8	stackTopRefA	INFERRED	top element of the block stack when it is not empty	^\s*piVar18\ =\ \(int\ \*\)\*puVar8;$	+1
+use	pass_ssa_build	puVar8	stackTopRefB	INFERRED	first element of the dominated-children vector	^\s*puVar8\ =\ \(undefined4\ \*\)0x0;$@2	+1
+use	pass_ssa_build	puVar8	stackTopRefB	INFERRED	first element of the dominated-children vector	^\s*puVar8\ =\ \*\(undefined4\ \*\*\)\(iVar23\ \+\ 8\);$	+1
+use	pass_ssa_build	puVar8	stackTopRefB	INFERRED	first element of the dominated-children vector	^\s*piVar18\ =\ \(int\ \*\)\*puVar8;$@2	+1
+use	pass_ssa_build	uVar19	entryBlockValue	INFERRED	program entry block pushed on the work stack	^\s*uVar19\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ PROG_entryBlock\);$	+1
+use	pass_ssa_build	uVar19	entryBlockValue	INFERRED	program entry block pushed on the work stack	^\s*\*puVar8\ =\ uVar19;$	+1
+use	pass_ssa_build	uVar19	copySource	INFERRED	instruction vtable slot 0x7c result (source of the copy), may be NULL	^\s*uVar19\ =\ \(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0x7c\)\)\(piVar7\);$	+2
+use	pass_ssa_build	uVar19	pushedChild	INFERRED	dominated child block pushed on the work stack	^\s*uVar19\ =\ \*\(undefined4\ \*\)\(uVar4\ \*\ 4\ \+\ \*\(int\ \*\)\(iVar23\ \+\ 8\)\);$	+1
+use	pass_ssa_build	uVar19	pushedChild	INFERRED	dominated child block pushed on the work stack	^\s*\*puVar8\ =\ uVar19;$@22	+1
+use	pass_ssa_build	iVar23	option7Enabled	INFERRED	Compiler__isOptionEnabled(compiler, 7): value numbering	^\s*iVar23\ =\ FUN_000e07dc\(\*\(undefined4\ \*\)\(param_1\ \+\ PROG_compiler\),7\);$	+2
+use	pass_ssa_build	iVar23	option7Enabled	INFERRED	Compiler__isOptionEnabled(compiler, 7): value numbering	^\s*iVar23\ =\ FUN_000e07dc\(\*\(undefined4\ \*\)\(param_1\ \+\ PROG_compiler\),7\);$@2	+2
+use	pass_ssa_build	iVar23	option7Enabled	INFERRED	Compiler__isOptionEnabled(compiler, 7): value numbering	^\s*iVar23\ =\ FUN_000e07dc\(\*\(undefined4\ \*\)\(param_1\ \+\ PROG_compiler\),7\);$@3	+2
+use	pass_ssa_build	iVar23	option7Enabled	INFERRED	Compiler__isOptionEnabled(compiler, 7): value numbering	^\s*iVar23\ =\ FUN_000e07dc\(\*\(undefined4\ \*\)\(param_1\ \+\ PROG_compiler\),7\);$@4	+4
+use	pass_ssa_build	iVar23	option7Enabled	INFERRED	Compiler__isOptionEnabled(compiler, 7): value numbering	^\s*iVar23\ =\ FUN_000e07dc\(\*\(undefined4\ \*\)\(param_1\ \+\ PROG_compiler\),7\);$@5	+2
+use	pass_ssa_build	iVar23	instQuery34	INFERRED	instruction vtable slot 0x34 test	^\s*iVar23\ =\ \(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0x34\)\)\(piVar7\);$	+2
+use	pass_ssa_build	iVar23	defQuery18	INFERRED	definition vtable slot 0x18 test	^\s*iVar23\ =\ \(\*\*\(code\ \*\*\)\(\*piVar9\ \+\ 0x18\)\)\(piVar9\);$	+2
+use	pass_ssa_build	iVar23	defRegister	INFERRED	register number of the single definition (word 4)	^\s*iVar23\ =\ piVar9\[4\];$	+1
+use	pass_ssa_build	iVar23	defRegister	INFERRED	register number of the single definition (word 4)	^\s*piVar7\[0x25\]\ =\ iVar23;$	+1
+use	pass_ssa_build	iVar23	sameValueResult	INFERRED	FUN_0011e7ec result for the copy source	^\s*iVar23\ =\ \(\(int\ \(\*\)\(\)\)FUN_0011e7ec\)\(uVar19\);$	+2
+use	pass_ssa_build	iVar23	vnResultA	INFERRED	FUN_00175dac (Program__valueNumberInst) result, first call	^\s*iVar23\ =\ FUN_00175dac\(param_1,iVar3,iVar3,\&local_68,piVar18\);$	+2
+use	pass_ssa_build	iVar23	vnResultB	INFERRED	FUN_00175dac (Program__valueNumberInst) result, second call	^\s*iVar23\ =\ FUN_00175dac\(param_1,iVar3,0,\&local_68,piVar18\);$	+2
+use	pass_ssa_build	iVar23	operandCount	INFERRED	instruction operand count (+0x80)	^\s*iVar23\ =\ piVar7\[0x20\];$	+2
+use	pass_ssa_build	iVar23	operandCount	INFERRED	instruction operand count (+0x80)	^\s*iVar23\ =\ piVar7\[0x20\];$@2	+1
+use	pass_ssa_build	iVar23	operandCount	INFERRED	instruction operand count (+0x80)	^\s*\}\ while\ \(iVar12\ <\ iVar23\);$	+1
+use	pass_ssa_build	iVar23	operandCount	INFERRED	instruction operand count (+0x80)	^\s*if\ \(\(\(iVar23\ !=\ 0\)\ \&\&\ \(iVar23\ =\ FUN_00126760\(piVar7\[0x26\]\),\ iVar23\ !=\ 0\)\)\ \&\&$	+4
+use	pass_ssa_build	iVar23	redundantCopyResult	INFERRED	FUN_0011f2f8 (Program__tryEliminateRedundantCopy) result	^\s*iVar23\ =\ \(\(int\ \(\*\)\(\)\)FUN_0011f2f8\)\(param_1,piVar7,piVar18\);$	+2
+use	pass_ssa_build	iVar23	targetQueryC0	INFERRED	target vtable slot 0xc0 test	^\s*iVar23\ =\ \(\*\*\(code\ \*\*\)\(\*piVar9\ \+\ 0xc0\)\)\(piVar9\);$	+2
+use	pass_ssa_build	iVar23	idomBlock	INFERRED	parent block in the dominator tree (+0xf0 chain start, word 0x3c)	^\s*iVar23\ =\ piVar11\[0x3c\];$	+1
+use	pass_ssa_build	iVar23	idomBlock	INFERRED	parent block in the dominator tree (+0xf0 chain start, word 0x3c)	^\s*while\ \(\(iVar23\ !=\ 0\ \&\&\ \(iVar23\ !=\ piVar18\[0x3c\]\)\)\)\ \{$	+3
+use	pass_ssa_build	iVar12	operandIndex	INFERRED	operand number counter	^\s*iVar12\ =\ 0;$	+1
+use	pass_ssa_build	iVar12	operandIndex	INFERRED	operand number counter	^\s*iVar12\ =\ iVar12\ \+\ 1;$	+1
+use	pass_ssa_build	iVar12	operandIndex	INFERRED	operand number counter	^\s*\}\ while\ \(iVar12\ <\ iVar23\);$	+1
+use	pass_ssa_build	iVar12	destVRegValue	INFERRED	instruction word 0x53	^\s*iVar12\ =\ piVar7\[0x53\];$	+1
+use	pass_ssa_build	iVar12	destVRegValue	INFERRED	instruction word 0x53	^\s*\*\(int\ \*\)\(iVar23\ \+\ 8\)\ =\ iVar12;$	+1
+use	pass_ssa_build	iVar12	sourceIsTracked	INFERRED	source definition vtable slot 0x74 test	^\s*iVar12\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)local_68\[iVar23\ \+\ 0x84\]\ \+\ 0x74\)\)$	+1
+use	pass_ssa_build	iVar12	sourceIsTracked	INFERRED	source definition vtable slot 0x74 test	^\s*if\ \(iVar12\ !=\ 0\)\ \{$	+1
+use	pass_ssa_build	iVar12	option7Flag	INFERRED	Compiler__isOptionEnabled(compiler, 7)	^\s*iVar12\ =\ FUN_000e07dc\(\*\(undefined4\ \*\)\(param_1\ \+\ PROG_compiler\),7\);$	+2
+use	pass_ssa_build	uVar4	predecessorNumber	INFERRED	predecessor number 1..count	^\s*for\ \(uVar4\ =\ 1;\ uVar4\ <=\ \*\(uint\ \*\)\(piVar11\[0x34\]\ \+\ 4\);\ uVar4\ =\ uVar4\ \+\ 1\)\ \{$	+1
+use	pass_ssa_build	puVar21	scopeSwizzleTablesVec	INFERRED	program scope swizzle table vector	^\s*puVar21\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ PROG_scopeSwizzleTables\);$	+6
+use	pass_ssa_build	puVar21	scopeSwizzleTablesVec	INFERRED	program scope swizzle table vector	^\s*puVar8\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar21,uVar4\);$	+1
+use	pass_ssa_build	puVar21	scopeBlocksVec	INFERRED	program scope block vector	^\s*puVar21\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ PROG_scopeBlocks\);$	+6
+use	pass_ssa_build	puVar21	scopeBlocksVec	INFERRED	program scope block vector	^\s*puVar8\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar21,uVar4\);$@2	+1
+use	pass_ssa_build	piVar9	target	INFERRED	compiler target backend object	^\s*piVar9\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(param_1\ \+\ PROG_compiler\)\ \+\ COMP_target\);$	+3
+use	pass_ssa_build	piVar9	target	INFERRED	compiler target backend object	^\s*piVar9\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(param_1\ \+\ PROG_compiler\)\ \+\ COMP_target\);$@2	+2
+use	pass_ssa_build	piVar9	target	INFERRED	compiler target backend object	^\s*piVar9\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(param_1\ \+\ PROG_compiler\)\ \+\ COMP_target\);$@3	+2
+use	pass_ssa_build	piVar9	target	INFERRED	compiler target backend object	^\s*piVar9\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(param_1\ \+\ PROG_compiler\)\ \+\ COMP_target\);$@4	+2
+use	pass_ssa_build	piVar9	successorInstHead	INFERRED	instruction list head of the successor block	^\s*piVar9\ =\ \*\(int\ \*\*\)\(local_60\ \+\ 0x98\);$	+1
+use	pass_ssa_build	piVar9	successorInstHead	INFERRED	instruction list head of the successor block	^\s*if\ \(\(piVar9\[5\]\ \&\ 1U\)\ !=\ 0\)\ \{$	+2
+use	pass_ssa_build	piVar9	successorInstHead	INFERRED	instruction list head of the successor block	^\s*piVar7\ =\ \(int\ \*\)piVar9\[2\];$	+1
+use	pass_ssa_build	piVar9	successorInstHead	INFERRED	instruction list head of the successor block	^\s*piVar7\ =\ \(int\ \*\)piVar9\[2\];$@2	+1
+use	pass_ssa_build	piVar9	successorInstHead	INFERRED	instruction list head of the successor block	^\s*piVar9\ =\ piVar7;$@3	+1
+use	pass_ssa_build	piVar18	currentBlock	INFERRED	block being processed (starts at the entry block)	^\s*piVar18\ =\ \*\(int\ \*\*\)\(param_1\ \+\ PROG_entryBlock\);$	+3
+use	pass_ssa_build	piVar18	currentBlock	INFERRED	block being processed (starts at the entry block)	^\s*if\ \(piVar18\[0x3c\]\ !=\ 0\)\ \{$	+2
+use	pass_ssa_build	piVar18	currentBlock	INFERRED	block being processed (starts at the entry block)	^\s*piVar18\[0x4a\]\ =\ \(int\)\(puVar10\ \+\ 1\);$	+1
+use	pass_ssa_build	piVar18	currentBlock	INFERRED	block being processed (starts at the entry block)	^\s*\*puVar8\ =\ piVar18;$	+1
+use	pass_ssa_build	piVar18	currentBlock	INFERRED	block being processed (starts at the entry block)	^\s*piVar9\ =\ \(int\ \*\)\(\(int\ \*\)piVar18\[0x26\]\)\[2\];$	+3
+use	pass_ssa_build	piVar18	currentBlock	INFERRED	block being processed (starts at the entry block)	^\s*piVar18\[0x47\]\ =\ \(int\)puVar15;$	+3
+use	pass_ssa_build	piVar18	currentBlock	INFERRED	block being processed (starts at the entry block)	^\s*FUN_000e9c00\(piVar18,piVar7\[0x23\],\*puVar8\);$	+1
+use	pass_ssa_build	piVar18	currentBlock	INFERRED	block being processed (starts at the entry block)	^\s*iVar23\ =\ FUN_00175dac\(param_1,iVar3,iVar3,\&local_68,piVar18\);$	+1
+use	pass_ssa_build	piVar18	currentBlock	INFERRED	block being processed (starts at the entry block)	^\s*FUN_000e9c00\(piVar18,piVar9\[0x23\],local_68\);$	+1
+use	pass_ssa_build	piVar18	currentBlock	INFERRED	block being processed (starts at the entry block)	^\s*iVar23\ =\ \(\(int\ \(\*\)\(\)\)FUN_0011f2f8\)\(param_1,piVar7,piVar18\);$	+1
+use	pass_ssa_build	piVar18	currentBlock	INFERRED	block being processed (starts at the entry block)	^\s*iVar23\ =\ FUN_00175dac\(param_1,iVar3,0,\&local_68,piVar18\);$	+1
+use	pass_ssa_build	piVar18	currentBlock	INFERRED	block being processed (starts at the entry block)	^\s*if\ \(\(\(\(iVar23\ ==\ 0\)\ \|\|\ \(iVar23\ =\ FUN_000e07dc\(\*\(undefined4\ \*\)\(param_1\ \+\ PROG_compiler\),9\),\ iVar23\ ==\ 0\)\)$	+3
+use	pass_ssa_build	piVar18	currentBlock	INFERRED	block being processed (starts at the entry block)	^\s*iVar12\ =\ piVar18\[0x4f\];$	+2
+use	pass_ssa_build	piVar18	currentBlock	INFERRED	block being processed (starts at the entry block)	^\s*FUN_0012df90\(param_1,piVar18,iVar12,\&local_64,\&local_60\);$	+2
+use	pass_ssa_build	piVar18	currentBlock	INFERRED	block being processed (starts at the entry block)	^\s*piVar18\[0x48\]\ =\ 0;$	+1
+use	pass_ssa_build	piVar18	currentBlock	INFERRED	block being processed (starts at the entry block)	^\s*piVar18\[0x49\]\ =\ 0;$	+1
+use	pass_ssa_build	piVar18	currentBlock	INFERRED	block being processed (starts at the entry block)	^\s*piVar18\[0x47\]\ =\ 0;$	+1
+use	pass_ssa_build	piVar18	currentBlock	INFERRED	block being processed (starts at the entry block)	^\s*piVar18\ =\ \(int\ \*\)\*puVar8;$	+1
+use	pass_ssa_build	piVar18	currentBlock	INFERRED	block being processed (starts at the entry block)	^\s*while\ \(\(iVar23\ !=\ 0\ \&\&\ \(iVar23\ !=\ piVar18\[0x3c\]\)\)\)\ \{$	+1
+use	pass_ssa_build	piVar18	currentBlock	INFERRED	block being processed (starts at the entry block)	^\s*piVar18\ =\ \(int\ \*\)\*puVar8;$@2	+1
+use	pass_ssa_build	piVar18	dominatedList	INFERRED	vector of dominated children	^\s*piVar18\ =\ \(int\ \*\)piVar11\[0x3d\];$	+1
+use	pass_ssa_build	piVar18	dominatedList	INFERRED	vector of dominated children	^\s*if\ \(\*piVar18\ ==\ 0\)\ \{$	+2
+use	pass_ssa_build	piVar18	dominatedList	INFERRED	vector of dominated children	^\s*if\ \(piVar18\[1\]\ ==\ 0\)\ \{$	+3
+use	pass_ssa_build	piVar18	dominatedList	INFERRED	vector of dominated children	^\s*piVar18\ =\ \(int\ \*\)piVar18\[2\];$	+1
+use	pass_ssa_build	piVar18	dominatedList	INFERRED	vector of dominated children	^\s*\*piVar18\ =\ local_64;$	+1
+use	pass_ssa_build	piVar18	successorDomList	INFERRED	vector at successor block +0xf4	^\s*piVar18\ =\ \*\(int\ \*\*\)\(local_60\ \+\ 0xf4\);$	+3
+use	pass_ssa_build	piVar18	successorDomList	INFERRED	vector at successor block +0xf4	^\s*if\ \(piVar18\[1\]\ ==\ 0\)\ \{$@2	+3
+use	pass_ssa_build	piVar18	successorDomList	INFERRED	vector at successor block +0xf4	^\s*piVar18\ =\ \(int\ \*\)piVar18\[2\];$@2	+1
+use	pass_ssa_build	piVar18	successorDomList	INFERRED	vector at successor block +0xf4	^\s*\*piVar18\ =\ iVar23;$	+1
+use	pass_ssa_build	piVar18	successorInstNext	INFERRED	instruction after the head in the successor block	^\s*piVar18\ =\ \(int\ \*\)\(\*\(int\ \*\*\)\(local_60\ \+\ 0x98\)\)\[2\];$	+2
+use	pass_ssa_build	piVar18	successorInstNext	INFERRED	instruction after the head in the successor block	^\s*piVar7\ =\ piVar18;$	+1
+use	pass_ssa_build	piVar18	successorInstNext	INFERRED	instruction after the head in the successor block	^\s*piVar18\ =\ \(int\ \*\)piVar7\[2\];$	+1
+use	pass_ssa_build	piVar18	targetB	INFERRED	compiler target backend object	^\s*piVar18\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(param_1\ \+\ PROG_compiler\)\ \+\ COMP_target\);$	+2
+use	pass_ssa_build	piVar18	targetC	INFERRED	compiler target backend object	^\s*piVar18\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(param_1\ \+\ PROG_compiler\)\ \+\ COMP_target\);$@2	+2
+use	pass_ssa_build	iVar3	nextInstId	INFERRED	compiler next instruction id	^\s*iVar3\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ PROG_compiler\)\ \+\ COMP_nextInstId\);$	+1
+use	pass_ssa_build	iVar3	nextInstId	INFERRED	compiler next instruction id	^\s*\*\(int\ \*\)\(param_1\ \+\ PROG_useEpoch\)\ =\ iVar3\ \*\ 4\ \+\ \*\(int\ \*\)\(param_1\ \+\ PROG_useEpoch\);$	+1
+use	pass_ssa_build	iVar3	option7On	INFERRED	Compiler__isOptionEnabled(compiler, 7)	^\s*iVar3\ =\ FUN_000e07dc\(\*\(int\ \*\)\(param_1\ \+\ PROG_compiler\),7\);$	+2
+use	pass_ssa_build	iVar3	option7On	INFERRED	Compiler__isOptionEnabled(compiler, 7)	^\s*iVar3\ =\ FUN_000e07dc\(\*\(undefined4\ \*\)\(param_1\ \+\ PROG_compiler\),0x3f\);$	+2
+use	pass_ssa_build	iVar3	option7On	INFERRED	Compiler__isOptionEnabled(compiler, 7)	^\s*iVar3\ =\ FUN_000e07dc\(\*\(undefined4\ \*\)\(param_1\ \+\ PROG_compiler\),7\);$	+2
+use	pass_ssa_build	iVar3	compiler	INFERRED	program->compiler	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ PROG_compiler\);$	+2
+use	pass_ssa_build	iVar3	compiler	INFERRED	program->compiler	^\s*\*\(undefined4\ \*\*\)\(iVar3\ \+\ 0x3d8\)\ =\ puVar8\ \+\ 1;$	+1
+use	pass_ssa_build	iVar3	compiler	INFERRED	program->compiler	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ PROG_compiler\);$@2	+2
+use	pass_ssa_build	iVar3	compiler	INFERRED	program->compiler	^\s*\*\(undefined4\ \*\*\)\(iVar3\ \+\ 0x3dc\)\ =\ puVar8\ \+\ 1;$	+1
+use	pass_ssa_build	iVar3	compiler	INFERRED	program->compiler	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ PROG_compiler\);$@3	+2
+use	pass_ssa_build	iVar3	compiler	INFERRED	program->compiler	^\s*\*\(uint\ \*\*\)\(iVar3\ \+\ 0x3e0\)\ =\ puVar15;$	+1
+use	pass_ssa_build	iVar3	compiler	INFERRED	program->compiler	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ PROG_compiler\);$@4	+2
+use	pass_ssa_build	iVar3	compiler	INFERRED	program->compiler	^\s*\*\(uint\ \*\*\)\(iVar3\ \+\ 0x3e4\)\ =\ puVar15;$	+1
+use	pass_ssa_build	iVar3	compiler	INFERRED	program->compiler	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ PROG_compiler\);$@5	+2
+use	pass_ssa_build	iVar3	compiler	INFERRED	program->compiler	^\s*\*\(uint\ \*\*\)\(iVar3\ \+\ 1000\)\ =\ puVar15;$	+1
+use	pass_ssa_build	iVar3	compiler	INFERRED	program->compiler	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ PROG_compiler\);$@6	+2
+use	pass_ssa_build	iVar3	compiler	INFERRED	program->compiler	^\s*\*\(uint\ \*\*\)\(iVar3\ \+\ 0x3ec\)\ =\ puVar15;$	+1
+use	pass_ssa_build	iVar3	compiler	INFERRED	program->compiler	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ PROG_compiler\);$@7	+1
+use	pass_ssa_build	iVar3	compiler	INFERRED	program->compiler	^\s*\*\(undefined4\ \*\*\)\(iVar3\ \+\ 0x3f0\)\ =\ puVar8\ \+\ 1;$	+1
+use	pass_ssa_build	iVar3	compiler	INFERRED	program->compiler	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ PROG_compiler\);$@8	+1
+use	pass_ssa_build	iVar3	compiler	INFERRED	program->compiler	^\s*\*\(undefined4\ \*\*\)\(iVar3\ \+\ 0x3f4\)\ =\ puVar8\ \+\ 1;$	+1
+use	pass_ssa_build	iVar3	compiler	INFERRED	program->compiler	^\s*\(piVar9,\*\(int\ \*\)\(param_1\ \+\ PROG_compiler\),iVar23,in_r6,in_r7,in_r8,0xffffffff,iVar3\);$	+1
+use	pass_ssa_build	iVar3	targetQueryC0b	INFERRED	target vtable slot 0xc0 test	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*piVar9\ \+\ 0xc0\)\)\(piVar9\);$	+2
+use	pass_ssa_build	iVar3	targetQueryC0b	INFERRED	target vtable slot 0xc0 test	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*piVar18\ \+\ 0xc0\)\)\(piVar18\);$	+2
+use	pass_ssa_build	iVar3	targetQueryC8	INFERRED	target vtable slot 0xc8 test	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*piVar18\ \+\ 200\)\)\(piVar18\);$	+2
+use	pass_ssa_build	iVar3	tableVec	INFERRED	scope vector header being freed	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ PROG_scopeExprTables\);$	+4
+use	pass_ssa_build	iVar3	tableVec	INFERRED	scope vector header being freed	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ PROG_scopeLaneMatchTables\);$	+4
+use	pass_ssa_build	iVar3	tableVec	INFERRED	scope vector header being freed	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ PROG_scopeSwizzleTables\);$	+4
+use	pass_ssa_build	iVar3	tableVec	INFERRED	scope vector header being freed	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ PROG_scopeBlocks\);$	+4
+use	pass_ssa_build	iVar13	currentDefinition	INFERRED	VReg__currentDefinition of the phi's register	^\s*iVar13\ =\ \(\(int\ \(\*\)\(\)\)FUN_00122fa4\)\(piVar18\[0x23\],\*\(undefined4\ \*\)\(param_1\ \+\ PROG_entryBlock\),$	+4
+use	pass_ssa_build	iVar13	currentDefinition	INFERRED	VReg__currentDefinition of the phi's register	^\s*\*\(undefined4\ \*\)\(iVar14\ \+\ iVar13\ \+\ 0x20\);$	+1
+use	pass_ssa_build	iVar5	phiSlotArray	INFERRED	per-operand slot array of the phi (word 0x4e)	^\s*iVar5\ =\ piVar18\[0x4e\];$	+1
+use	pass_ssa_build	iVar5	phiSlotArray	INFERRED	per-operand slot array of the phi (word 0x4e)	^\s*\*\(undefined4\ \*\)\(iVar14\ \+\ \*\(int\ \*\)\(iVar12\ \*\ 4\ \+\ iVar5\)\)\ =$	+1
+use	pass_ssa_build	iVar5	phiSlotArray	INFERRED	per-operand slot array of the phi (word 0x4e)	^\s*if\ \(\(\(\(piVar18\[0x20\]\ !=\ 0\)\ \&\&\ \(iVar5\ =\ FUN_00126760\(piVar18\[0x26\]\),\ iVar5\ !=\ 0\)\)\ \&\&$	+4
+use	pass_ssa_build	iVar14	copyOffset	INFERRED	byte offset while copying the definition's lane words	^\s*iVar14\ =\ 0;$	+1
+use	pass_ssa_build	iVar14	copyOffset	INFERRED	byte offset while copying the definition's lane words	^\s*\*\(undefined4\ \*\)\(iVar14\ \+\ \*\(int\ \*\)\(iVar12\ \*\ 4\ \+\ iVar5\)\)\ =$	+3
+use	pass_ssa_build	puVar10	blockTableAlloc	INFERRED	arena block (0x20c bytes) of the per-block table	^\s*puVar10\ =\ \(undefined4\ \*\)FUN_00193e18\(uVar19,0x20c\);$	+2
+use	pass_ssa_build	puVar10	blockTableAlloc	INFERRED	arena block (0x20c bytes) of the per-block table	^\s*\*puVar10\ =\ uVar19;$	+3
+use	pass_ssa_build	puVar10	blockTableAlloc	INFERRED	arena block (0x20c bytes) of the per-block table	^\s*piVar18\[0x4a\]\ =\ \(int\)\(puVar10\ \+\ 1\);$	+1
+local	pass_ssa_build	in_r6	unusedArg6	INFERRED	register left over from the caller, forwarded to target slot 0x124
+local	pass_ssa_build	in_r7	unusedArg7	INFERRED	register left over from the caller, forwarded to target slot 0x124
+local	pass_ssa_build	in_r8	unusedArg8	INFERRED	register left over from the caller, forwarded to target slot 0x124
+use	pass_ssa_build	puVar15	valueNumberTable	INFERRED	global hash table keyed by value number	^\s*puVar15\ =\ puVar8\ \+\ 1;$	+1
+use	pass_ssa_build	puVar15	valueNumberTable	INFERRED	global hash table keyed by value number	^\s*\*puVar15\ =\ uVar4;$	+1
+use	pass_ssa_build	puVar15	valueNumberTable	INFERRED	global hash table keyed by value number	^\s*uVar19\ =\ FUN_00193e18\(uVar19,\*puVar15\ <<\ 2\);$	+1
+use	pass_ssa_build	puVar15	valueNumberTable	INFERRED	global hash table keyed by value number	^\s*_memset\(uVar19,0,\*puVar15\ <<\ 2\);$	+2
+use	pass_ssa_build	puVar15	exprHashTable	INFERRED	global hash table keyed by expression	^\s*puVar15\ =\ puVar8\ \+\ 1;$@2	+1
+use	pass_ssa_build	puVar15	exprHashTable	INFERRED	global hash table keyed by expression	^\s*\*puVar15\ =\ uVar4;$@2	+1
+use	pass_ssa_build	puVar15	exprHashTable	INFERRED	global hash table keyed by expression	^\s*uVar19\ =\ FUN_00193e18\(uVar19,\*puVar15\ <<\ 2\);$@2	+1
+use	pass_ssa_build	puVar15	exprHashTable	INFERRED	global hash table keyed by expression	^\s*_memset\(uVar19,0,\*puVar15\ <<\ 2\);$@2	+2
+use	pass_ssa_build	puVar15	ptrHashTable	INFERRED	global hash table keyed by pointer	^\s*puVar15\ =\ puVar8\ \+\ 1;$@3	+1
+use	pass_ssa_build	puVar15	ptrHashTable	INFERRED	global hash table keyed by pointer	^\s*\*puVar15\ =\ uVar4;$@3	+1
+use	pass_ssa_build	puVar15	ptrHashTable	INFERRED	global hash table keyed by pointer	^\s*uVar19\ =\ FUN_00193e18\(uVar19,\*puVar15\ <<\ 2\);$@3	+1
+use	pass_ssa_build	puVar15	ptrHashTable	INFERRED	global hash table keyed by pointer	^\s*_memset\(uVar19,0,\*puVar15\ <<\ 2\);$@3	+2
+use	pass_ssa_build	puVar15	keyLaneTable	INFERRED	global hash table keyed by key+lane	^\s*puVar15\ =\ puVar8\ \+\ 1;$@4	+1
+use	pass_ssa_build	puVar15	keyLaneTable	INFERRED	global hash table keyed by key+lane	^\s*\*puVar15\ =\ uVar4;$@4	+1
+use	pass_ssa_build	puVar15	keyLaneTable	INFERRED	global hash table keyed by key+lane	^\s*uVar19\ =\ FUN_00193e18\(uVar19,\*puVar15\ <<\ 2\);$@4	+1
+use	pass_ssa_build	puVar15	keyLaneTable	INFERRED	global hash table keyed by key+lane	^\s*iVar23\ =\ \*puVar15\ <<\ 2;$	+1
+use	pass_ssa_build	puVar15	keyLaneTable	INFERRED	global hash table keyed by key+lane	^\s*\*\(uint\ \*\*\)\(iVar3\ \+\ 0x3ec\)\ =\ puVar15;$	+1
+use	pass_ssa_build	puVar15	exprTable	INFERRED	per-block scoped expression hash table (block word 0x47)	^\s*puVar15\ =\ \(uint\ \*\)0x0;$	+1
+use	pass_ssa_build	puVar15	exprTable	INFERRED	per-block scoped expression hash table (block word 0x47)	^\s*puVar15\ =\ puVar8\ \+\ 1;$@5	+1
+use	pass_ssa_build	puVar15	exprTable	INFERRED	per-block scoped expression hash table (block word 0x47)	^\s*\*puVar15\ =\ uVar4;$@5	+1
+use	pass_ssa_build	puVar15	exprTable	INFERRED	per-block scoped expression hash table (block word 0x47)	^\s*uVar19\ =\ FUN_00193e18\(uVar19,\*puVar15\ <<\ 2\);$@5	+1
+use	pass_ssa_build	puVar15	exprTable	INFERRED	per-block scoped expression hash table (block word 0x47)	^\s*_memset\(uVar19,0,\*puVar15\ <<\ 2\);$@4	+1
+use	pass_ssa_build	puVar15	exprTable	INFERRED	per-block scoped expression hash table (block word 0x47)	^\s*\*puVar8\ =\ puVar15;$	+1
+use	pass_ssa_build	puVar15	exprTable	INFERRED	per-block scoped expression hash table (block word 0x47)	^\s*piVar18\[0x47\]\ =\ \(int\)puVar15;$	+1
+use	pass_ssa_build	puVar15	exprTable	INFERRED	per-block scoped expression hash table (block word 0x47)	^\s*if\ \(puVar15\ !=\ \(uint\ \*\)0x0\)\ \{$	+2
+use	pass_ssa_build	puVar15	exprTable	INFERRED	per-block scoped expression hash table (block word 0x47)	^\s*uVar20\ =\ puVar15\[2\];$	+1
+use	pass_ssa_build	puVar15	exprTable	INFERRED	per-block scoped expression hash table (block word 0x47)	^\s*uVar20\ =\ puVar15\[2\];$@2	+1
+use	pass_ssa_build	puVar15	exprTable	INFERRED	per-block scoped expression hash table (block word 0x47)	^\s*FUN_00193cc0\(puVar15\[5\],iVar12\);$	+3
+use	pass_ssa_build	puVar15	exprTable	INFERRED	per-block scoped expression hash table (block word 0x47)	^\s*FUN_00193cc0\(puVar15\[5\],uVar20\);$	+2
+use	pass_ssa_build	puVar15	exprTable	INFERRED	per-block scoped expression hash table (block word 0x47)	^\s*if\ \(puVar15\ !=\ \(uint\ \*\)0x0\)\ \{$@2	+2
+use	pass_ssa_build	puVar15	exprTable	INFERRED	per-block scoped expression hash table (block word 0x47)	^\s*uVar20\ =\ puVar15\[2\];$@4	+1
+use	pass_ssa_build	puVar15	exprTable	INFERRED	per-block scoped expression hash table (block word 0x47)	^\s*uVar20\ =\ puVar15\[2\];$@5	+1
+use	pass_ssa_build	puVar15	exprTable	INFERRED	per-block scoped expression hash table (block word 0x47)	^\s*FUN_00193cc0\(puVar15\[5\],iVar23\);$	+3
+use	pass_ssa_build	puVar15	exprTable	INFERRED	per-block scoped expression hash table (block word 0x47)	^\s*FUN_00193cc0\(puVar15\[5\],uVar20\);$@2	+2
+use	pass_ssa_build	puVar16	laneMatchTable	INFERRED	per-block lane-match hash table (block word 0x48)	^\s*puVar16\ =\ \(uint\ \*\)0x0;$	+1
+use	pass_ssa_build	puVar16	laneMatchTable	INFERRED	per-block lane-match hash table (block word 0x48)	^\s*puVar16\ =\ puVar8\ \+\ 1;$	+1
+use	pass_ssa_build	puVar16	laneMatchTable	INFERRED	per-block lane-match hash table (block word 0x48)	^\s*\*puVar16\ =\ uVar4;$	+1
+use	pass_ssa_build	puVar16	laneMatchTable	INFERRED	per-block lane-match hash table (block word 0x48)	^\s*uVar19\ =\ FUN_00193e18\(uVar19,\*puVar16\ <<\ 2\);$	+1
+use	pass_ssa_build	puVar16	laneMatchTable	INFERRED	per-block lane-match hash table (block word 0x48)	^\s*_memset\(uVar19,0,\*puVar16\ <<\ 2\);$	+1
+use	pass_ssa_build	puVar16	laneMatchTable	INFERRED	per-block lane-match hash table (block word 0x48)	^\s*\*puVar8\ =\ puVar16;$	+1
+use	pass_ssa_build	puVar16	laneMatchTable	INFERRED	per-block lane-match hash table (block word 0x48)	^\s*piVar18\[0x48\]\ =\ \(int\)puVar16;$	+1
+use	pass_ssa_build	puVar16	laneMatchTable	INFERRED	per-block lane-match hash table (block word 0x48)	^\s*if\ \(puVar16\ !=\ \(uint\ \*\)0x0\)\ \{$	+2
+use	pass_ssa_build	puVar16	laneMatchTable	INFERRED	per-block lane-match hash table (block word 0x48)	^\s*uVar20\ =\ puVar16\[2\];$	+1
+use	pass_ssa_build	puVar16	laneMatchTable	INFERRED	per-block lane-match hash table (block word 0x48)	^\s*uVar20\ =\ puVar16\[2\];$@2	+1
+use	pass_ssa_build	puVar16	laneMatchTable	INFERRED	per-block lane-match hash table (block word 0x48)	^\s*FUN_00193cc0\(puVar16\[5\],iVar12\);$	+3
+use	pass_ssa_build	puVar16	laneMatchTable	INFERRED	per-block lane-match hash table (block word 0x48)	^\s*FUN_00193cc0\(puVar16\[5\],uVar20\);$	+2
+use	pass_ssa_build	puVar16	laneMatchTable	INFERRED	per-block lane-match hash table (block word 0x48)	^\s*if\ \(puVar16\ !=\ \(uint\ \*\)0x0\)\ \{$@2	+2
+use	pass_ssa_build	puVar16	laneMatchTable	INFERRED	per-block lane-match hash table (block word 0x48)	^\s*uVar20\ =\ puVar16\[2\];$@4	+1
+use	pass_ssa_build	puVar16	laneMatchTable	INFERRED	per-block lane-match hash table (block word 0x48)	^\s*uVar20\ =\ puVar16\[2\];$@5	+1
+use	pass_ssa_build	puVar16	laneMatchTable	INFERRED	per-block lane-match hash table (block word 0x48)	^\s*FUN_00193cc0\(puVar16\[5\],iVar23\);$	+3
+use	pass_ssa_build	puVar16	laneMatchTable	INFERRED	per-block lane-match hash table (block word 0x48)	^\s*FUN_00193cc0\(puVar16\[5\],uVar20\);$@2	+2
+use	pass_ssa_build	puVar16	scopeExprTablesVec	INFERRED	program scope expression table vector	^\s*puVar16\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ PROG_scopeExprTables\);$	+6
+use	pass_ssa_build	puVar16	scopeExprTablesVec	INFERRED	program scope expression table vector	^\s*puVar8\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar16,uVar4\);$	+1
+use	pass_ssa_build	puVar17	swizzleTable	INFERRED	per-block swizzle hash table (block word 0x49)	^\s*puVar17\ =\ \(uint\ \*\)0x0;$	+1
+use	pass_ssa_build	puVar17	swizzleTable	INFERRED	per-block swizzle hash table (block word 0x49)	^\s*puVar17\ =\ puVar8\ \+\ 1;$	+1
+use	pass_ssa_build	puVar17	swizzleTable	INFERRED	per-block swizzle hash table (block word 0x49)	^\s*\*puVar17\ =\ uVar4;$	+1
+use	pass_ssa_build	puVar17	swizzleTable	INFERRED	per-block swizzle hash table (block word 0x49)	^\s*uVar19\ =\ FUN_00193e18\(uVar19,\*puVar17\ <<\ 2\);$	+1
+use	pass_ssa_build	puVar17	swizzleTable	INFERRED	per-block swizzle hash table (block word 0x49)	^\s*_memset\(uVar19,0,\*puVar17\ <<\ 2\);$	+1
+use	pass_ssa_build	puVar17	swizzleTable	INFERRED	per-block swizzle hash table (block word 0x49)	^\s*\*puVar8\ =\ puVar17;$	+1
+use	pass_ssa_build	puVar17	swizzleTable	INFERRED	per-block swizzle hash table (block word 0x49)	^\s*piVar18\[0x49\]\ =\ \(int\)puVar17;$	+1
+use	pass_ssa_build	puVar17	swizzleTable	INFERRED	per-block swizzle hash table (block word 0x49)	^\s*if\ \(puVar17\ !=\ \(uint\ \*\)0x0\)\ \{$	+2
+use	pass_ssa_build	puVar17	swizzleTable	INFERRED	per-block swizzle hash table (block word 0x49)	^\s*uVar20\ =\ puVar17\[2\];$	+1
+use	pass_ssa_build	puVar17	swizzleTable	INFERRED	per-block swizzle hash table (block word 0x49)	^\s*uVar20\ =\ puVar17\[2\];$@2	+1
+use	pass_ssa_build	puVar17	swizzleTable	INFERRED	per-block swizzle hash table (block word 0x49)	^\s*FUN_00193cc0\(puVar17\[5\],iVar12\);$	+3
+use	pass_ssa_build	puVar17	swizzleTable	INFERRED	per-block swizzle hash table (block word 0x49)	^\s*FUN_00193cc0\(puVar17\[5\],uVar20\);$	+2
+use	pass_ssa_build	puVar17	swizzleTable	INFERRED	per-block swizzle hash table (block word 0x49)	^\s*if\ \(puVar17\ !=\ \(uint\ \*\)0x0\)\ \{$@2	+2
+use	pass_ssa_build	puVar17	swizzleTable	INFERRED	per-block swizzle hash table (block word 0x49)	^\s*uVar20\ =\ puVar17\[2\];$@4	+1
+use	pass_ssa_build	puVar17	swizzleTable	INFERRED	per-block swizzle hash table (block word 0x49)	^\s*uVar20\ =\ puVar17\[2\];$@5	+1
+use	pass_ssa_build	puVar17	swizzleTable	INFERRED	per-block swizzle hash table (block word 0x49)	^\s*FUN_00193cc0\(puVar17\[5\],iVar23\);$	+3
+use	pass_ssa_build	puVar17	swizzleTable	INFERRED	per-block swizzle hash table (block word 0x49)	^\s*FUN_00193cc0\(puVar17\[5\],uVar20\);$@2	+2
+use	pass_ssa_build	puVar17	scopeLaneMatchTablesVec	INFERRED	program scope lane-match table vector	^\s*puVar17\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ PROG_scopeLaneMatchTables\);$	+6
+use	pass_ssa_build	puVar17	scopeLaneMatchTablesVec	INFERRED	program scope lane-match table vector	^\s*puVar8\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar17,uVar4\);$	+1
+local	pass_ssa_build	local_68	valueKey	INFERRED	ValueKey of the instruction being numbered
+local	pass_ssa_build	local_64	foldedHeadBlock	INFERRED	first output of Program__foldConstantIfRegion
+local	pass_ssa_build	local_60	foldedTailOrSuccessor	INFERRED	second output of Program__foldConstantIfRegion, later the successor block in the phi loop
+local	pass_ssa_build	local_5c	blockStackCapacity	INFERRED	capacity word of the block stack vector header
+local	pass_ssa_build	local_58	blockStackCount	INFERRED	count word of the block stack vector header
+local	pass_ssa_build	local_54	blockStackData	INFERRED	data word of the block stack vector header
+local	pass_ssa_build	local_50	blockStackArena	INFERRED	arena that owns the block stack storage

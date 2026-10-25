@@ -194,6 +194,7 @@ int R300MachineAssembler__setOutputDestination(this, writeRgb, writeAlpha, inst)
   int writeAlpha;
   int inst;
 {
+  int operandRecord;
   int destRegister;
   int iVar1;
   undefined1 writeMask;
@@ -217,8 +218,8 @@ int R300MachineAssembler__setOutputDestination(this, writeRgb, writeAlpha, inst)
     *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58) + 0x16) = outputIndex;
     iVar3 = *(int *)(this + 0x60);
     iVar4 = *(int *)(this + 0x58);
-    iVar1 = IRInst__getOperandRecord(inst,0);
-    writeMask = lanesToRgbMask(*(undefined4 *)(iVar1 + 0x10));
+    operandRecord = IRInst__getOperandRecord(inst,0);
+    writeMask = lanesToRgbMask(*(undefined4 *)(operandRecord + 0x10));
     *(undefined1 *)(iVar3 * 0x48 + iVar4 + 0x15) = writeMask;
   }
   if (writeAlpha != 0) {
@@ -241,6 +242,36 @@ int R300MachineAssembler__assembleAluInstruction(this, irInst)
   int *this;
   int *irInst;
 {
+  int *stagedArg4;
+  uint swizzleLowByte;
+  int *slotWordPtr;
+  int *stagedArg3;
+  int *slotIter;
+  int *stagedArg2;
+  int innerSource2;
+  int innerSource;
+  int sourceWidth;
+  int vslot5cResult;
+  int vslotDcResult;
+  int vslot48Result;
+  int vslot50Result;
+  int vslot80Result;
+  int alphaLanes;
+  int selectsWFlag;
+  int sourceKind;
+  int isForwardableMov;
+  int operandRecordTmp;
+  undefined4 allocatedRegister;
+  int *selectSrcIdx2;
+  int *slotInst;
+  int hwRegister;
+  int srcOpcode;
+  int sourceCount;
+  bool isOpcode9aAlpha;
+  bool maskByteNonZero;
+  bool isOpcode9a;
+  bool swizzleHighClear;
+  uint classifyAlphaCopy;
   undefined4 registerIndex3;
   undefined4 registerIndex2;
   undefined4 registerIndex;
@@ -253,20 +284,20 @@ int R300MachineAssembler__assembleAluInstruction(this, irInst)
   int *sourceDef;
   bool writesRgb;
   bool writesAlpha;
-  bool bVar3;
-  bool bVar4;
+  bool isThirdSource;
+  bool moreSlots;
   byte crFlagsByte;
   uint classifyRgbCopy;
   code *selectMethod;
-  int iVar8;
+  int clearOffset;
   uint usedMaskOld;
-  uint uVar10;
-  int *a0;
-  int iVar11;
-  int iVar12;
-  int iVar13;
-  undefined4 uVar14;
-  undefined4 a1;
+  uint classifyFlags;
+  int *sourceInst;
+  int hwRegister2;
+  int hwRegister3;
+  int selectsW;
+  undefined4 operandSelectWord;
+  undefined4 staleArg1;
   int *selectSrcIdx;
   int *loopPtr;
   int *loopPtr2;
@@ -274,162 +305,162 @@ int R300MachineAssembler__assembleAluInstruction(this, irInst)
   int *irInstWords;
   int picTableWord;
   int *a4;
-  uint loopIndex3;
+  uint slotIndex;
   int *srcIdx;
-  int *piVar23;
+  int *sourceDef3;
   undefined4 allocTable;
   int *piVar25;
   byte in_xer_so = 0;
-  int loopRemaining;
+  int clearCount;
   undefined8 operandVReg;
-  int local_f8;
-  int local_f4;
-  int local_f0;
+  int rgbHwOpcode;
+  int alphaHwOpcode;
+  int sourceRegister;
   int alphaSelect [4];
   int rgbMod [4];
   int alphaMod [4];
   int rgbSelect [4];
-  int local_ac;
+  int alphaLaneEnables;
   int classifyOut2b;
-  undefined4 local_9c;
+  undefined4 rgbLaneEnables;
   undefined4 srcpEnablesAlpha;
-  int *local_88;
-  uint local_84;
-  int *local_80;
-  int local_7c;
-  uint local_78;
-  uint local_74;
-  uint local_70;
-  uint local_6c;
-  int local_68;
-  int local_64;
-  undefined *local_60;
-  int *local_5c;
+  int *composedSelect;
+  uint swizzleMask;
+  int *movInst;
+  int sourceReplaced;
+  uint classifyFlagBit4;
+  uint classifyFlagBit2;
+  uint classifyWritesAlpha;
+  uint classifyWritesRgb;
+  int irOpcode;
+  int crFlagsWord;
+  undefined *picBase;
+  int *alphaModAlias;
   
-  loopPtr = &local_ac;
-  a4 = &local_f8;
-  alphaHardwareOpcodeOut = &local_f4;
-  loopPtr2 = irInst;
-  uVar10 = R300MachineAssembler__classifyAluOperation(this,&local_9c,loopPtr,irInst,a4,alphaHardwareOpcodeOut);
-  local_6c = uVar10 & 1;
-  local_70 = uVar10 >> 1 & 1;
-  local_68 = *(int *)(irInst[0x22] + 8);
-  local_5c = alphaMod;
-  loopRemaining = 4;
-  local_78 = uVar10 >> 4 & 1;
-  local_74 = uVar10 >> 2 & 1;
-  iVar8 = 0;
+  stagedArg2 = &alphaLaneEnables;
+  stagedArg4 = &rgbHwOpcode;
+  alphaHardwareOpcodeOut = &alphaHwOpcode;
+  stagedArg3 = irInst;
+  classifyFlags = R300MachineAssembler__classifyAluOperation(this,&rgbLaneEnables,stagedArg2,irInst,stagedArg4,alphaHardwareOpcodeOut);
+  classifyWritesRgb = classifyFlags & 1;
+  classifyWritesAlpha = classifyFlags >> 1 & 1;
+  irOpcode = *(int *)(irInst[0x22] + 8);
+  alphaModAlias = alphaMod;
+  clearCount = 4;
+  classifyFlagBit4 = classifyFlags >> 4 & 1;
+  classifyFlagBit2 = classifyFlags >> 2 & 1;
+  clearOffset = 0;
   do {
-    *(undefined4 *)(iVar8 + (int)rgbSelect) = 0;
-    *(undefined4 *)(iVar8 + (int)rgbMod) = 0;
-    *(undefined4 *)(iVar8 + (int)alphaSelect) = 0;
-    *(undefined4 *)(iVar8 + (int)local_5c) = 0;
-    iVar8 = iVar8 + 4;
-    loopRemaining = loopRemaining + -1;
-  } while (loopRemaining != 0);
-  iVar8 = (**(code **)(*irInst + 0x14))(irInst);
-  classifyRgbCopy = local_6c;
-  uVar10 = local_70;
-  if (local_68 == 0xb4) {
-    iVar8 = 3;
+    *(undefined4 *)(clearOffset + (int)rgbSelect) = 0;
+    *(undefined4 *)(clearOffset + (int)rgbMod) = 0;
+    *(undefined4 *)(clearOffset + (int)alphaSelect) = 0;
+    *(undefined4 *)(clearOffset + (int)alphaModAlias) = 0;
+    clearOffset = clearOffset + 4;
+    clearCount = clearCount + -1;
+  } while (clearCount != 0);
+  sourceCount = (**(code **)(*irInst + 0x14))(irInst);
+  classifyRgbCopy = classifyWritesRgb;
+  classifyAlphaCopy = classifyWritesAlpha;
+  if (irOpcode == 0xb4) {
+    sourceCount = 3;
 LAB_00198290:
     srcIdx = (int *)((int)((unsigned char *)0x0) + 1);
     irInstWords = irInst + 0x26;
-    writesRgb = local_6c != 0;
-    writesAlpha = local_70 != 0;
-    local_64 = (uint)(byte)(((int)local_78 < 0) << 3 | (0 < (int)local_78) << 2 |
-                            (local_78 == 0) << 1 | in_xer_so & 1) << 0x1c;
-    local_60 = &DAT_001b81b8;
+    writesRgb = classifyWritesRgb != 0;
+    writesAlpha = classifyWritesAlpha != 0;
+    crFlagsWord = (uint)(byte)(((int)classifyFlagBit4 < 0) << 3 | (0 < (int)classifyFlagBit4) << 2 |
+                            (classifyFlagBit4 == 0) << 1 | in_xer_so & 1) << 0x1c;
+    picBase = &DAT_001b81b8;
     do {
-      loopRemaining = IRInst__getOperandRecord(irInst,srcIdx);
-      swizzle = *(int **)(loopRemaining + 0x10);
-      local_f0 = -1;
+      operandRecordTmp = IRInst__getOperandRecord(irInst,srcIdx);
+      swizzle = *(int **)(operandRecordTmp + 0x10);
+      sourceRegister = -1;
       operandVReg = IRInst__getOperandSource(irInst,srcIdx);
-      a0 = (int *)((ulonglong)operandVReg >> 0x20);
-      picTableWord = *(int *)(local_60 + -0x56f8);
-      loopRemaining = (**(code **)(*a0 + 0x60))(a0,(int)operandVReg,loopPtr,loopPtr2,a4,alphaHardwareOpcodeOut,local_60);
-      if (loopRemaining == 0) {
-        local_7c = 0;
-        local_80 = (int *)0x0;
+      sourceInst = (int *)((ulonglong)operandVReg >> 0x20);
+      picTableWord = *(int *)(picBase + -0x56f8);
+      isForwardableMov = (**(code **)(*sourceInst + 0x60))(sourceInst,(int)operandVReg,stagedArg2,stagedArg3,stagedArg4,alphaHardwareOpcodeOut,picBase);
+      if (isForwardableMov == 0) {
+        sourceReplaced = 0;
+        movInst = (int *)0x0;
       }
       else {
-        local_80 = a0;
-        loopRemaining = IRInst__getOperandRecord(a0,1);
-        uVar14 = *(undefined4 *)(loopRemaining + 0x10);
-        loopRemaining = IRInst__getOperandRecord(irInst,srcIdx);
-        picTableWord = *(int *)(loopRemaining + 0x10);
-        SelectWord__compose(&local_88,uVar14,picTableWord);
-        swizzle = local_88;
-        a0 = (int *)IRInst__getOperandSource(local_80,1);
-        a4 = (int *)this[3];
-        loopPtr2 = (int *)0x0;
-        loopPtr = a0;
-        IRInst__setOperandSource(irInst,srcIdx,a0,0,a4);
+        movInst = sourceInst;
+        operandRecordTmp = IRInst__getOperandRecord(sourceInst,1);
+        operandSelectWord = *(undefined4 *)(operandRecordTmp + 0x10);
+        operandRecordTmp = IRInst__getOperandRecord(irInst,srcIdx);
+        picTableWord = *(int *)(operandRecordTmp + 0x10);
+        SelectWord__compose(&composedSelect,operandSelectWord,picTableWord);
+        swizzle = composedSelect;
+        sourceInst = (int *)IRInst__getOperandSource(movInst,1);
+        stagedArg4 = (int *)this[3];
+        stagedArg3 = (int *)0x0;
+        stagedArg2 = sourceInst;
+        IRInst__setOperandSource(irInst,srcIdx,sourceInst,0,stagedArg4);
         if (srcIdx == (int *)0x0) {
-          local_7c = 1;
+          sourceReplaced = 1;
           irInst[0x27] = (int)swizzle;
         }
         else {
-          loopRemaining = IRInst__getOperandRecord(irInst,srcIdx);
-          *(int **)(loopRemaining + 0x10) = swizzle;
-          local_7c = 1;
+          operandRecordTmp = IRInst__getOperandRecord(irInst,srcIdx);
+          *(int **)(operandRecordTmp + 0x10) = swizzle;
+          sourceReplaced = 1;
         }
       }
-      loopRemaining = a0[0x26];
-      if (loopRemaining != 0x2c) {
-        if (loopRemaining == 0x29) {
-          loopPtr2 = (int *)this[3];
-          loopPtr = srcIdx;
+      sourceKind = sourceInst[0x26];
+      if (sourceKind != 0x2c) {
+        if (sourceKind == 0x29) {
+          stagedArg3 = (int *)this[3];
+          stagedArg2 = srcIdx;
           /* dropped 2 args (found auditing #70 via ExtendIndirectCalls.java / ground-truth
            * disassembly): stock passes srcIdx and loopPtr2 (the value just computed above) too. */
-          local_f0 = (**(code **)(*this + 0x158))(this,irInst,srcIdx,loopPtr2);
+          sourceRegister = (**(code **)(*this + 0x158))(this,irInst,srcIdx,stagedArg3);
 LAB_0019852c:
-          bVar3 = srcIdx == (int *)((int)((unsigned char *)0x0) + 3);
-          crFlagsByte = (byte)((uint)local_64 >> 0x18);
-          if ((bVar3) && (!(bool)(crFlagsByte >> 5 & 1))) {
+          isThirdSource = srcIdx == (int *)((int)((unsigned char *)0x0) + 3);
+          crFlagsByte = (byte)((uint)crFlagsWord >> 0x18);
+          if ((isThirdSource) && (!(bool)(crFlagsByte >> 5 & 1))) {
             alphaSelect[2] = 0x11;
           }
           if (writesRgb) {
-            laneEnable = local_9c;
-            if (bVar3) {
+            laneEnable = rgbLaneEnables;
+            if (isThirdSource) {
               if (!(bool)(crFlagsByte >> 5 & 1)) goto LAB_00199cdc;
-              if (local_74 != 0) {
+              if (classifyFlagBit2 != 0) {
                 laneEnable = srcpEnablesAlpha;
               }
             }
-            loopRemaining = anyEnabledLaneSelectsW(swizzle,laneEnable);
+            selectsWFlag = anyEnabledLaneSelectsW(swizzle,laneEnable);
             anyEnabledLaneSelectsXyzResult = anyEnabledLaneSelectsXyz(swizzle,laneEnable);
             rgbSelect[(int)srcIdx] = 0x14;
             selectSrcIdx = srcIdx;
-            if (loopRemaining == 0) {
+            if (selectsWFlag == 0) {
               if (anyEnabledLaneSelectsXyzResult != 0) {
-                loopIndex3 = 1;
-                loopPtr2 = this + 0xe;
-                loopPtr = this;
+                slotIndex = 1;
+                slotWordPtr = this + 0xe;
+                slotIter = this;
                 do {
-                  piVar25 = (int *)loopPtr[7];
-                  a4 = (int *)(loopIndex3 - 1);
-                  if ((a0 == piVar25) ||
-                     ((((((((piVar25 != (int *)0x0 && (a0 != (int *)0x0)) && (piVar25[0x20] != 0))
-                          && ((loopRemaining = RegKind__flagBit0(piVar25[0x26]), loopRemaining != 0 &&
-                              ((piVar25[5] & 2U) == 0)))) &&
-                         ((loopRemaining = (**(code **)(*piVar25 + 0x50))(piVar25), loopRemaining == 0 &&
-                          ((a0[0x20] != 0 && (loopRemaining = RegKind__flagBit0(a0[0x26]), loopRemaining != 0)))))) &&
-                        ((a0[5] & 2U) == 0)) &&
-                       (((loopRemaining = (**(code **)(*a0 + 0x50))(a0), loopRemaining == 0 &&
-                         ((*(uint *)(loopPtr[7] + 0x14) & 0x40) != 0)) && ((a0[5] & 0x40U) != 0))))
-                      && (*(int *)(loopPtr[7] + 0x94) == a0[0x25])))) {
+                  slotInst = (int *)slotIter[7];
+                  stagedArg4 = (int *)(slotIndex - 1);
+                  if ((sourceInst == slotInst) ||
+                     ((((((((slotInst != (int *)0x0 && (sourceInst != (int *)0x0)) && (slotInst[0x20] != 0))
+                          && ((selectsWFlag = RegKind__flagBit0(slotInst[0x26]), selectsWFlag != 0 &&
+                              ((slotInst[5] & 2U) == 0)))) &&
+                         ((selectsWFlag = (**(code **)(*slotInst + 0x50))(slotInst), selectsWFlag == 0 &&
+                          ((sourceInst[0x20] != 0 && (selectsWFlag = RegKind__flagBit0(sourceInst[0x26]), selectsWFlag != 0)))))) &&
+                        ((sourceInst[5] & 2U) == 0)) &&
+                       (((selectsWFlag = (**(code **)(*sourceInst + 0x50))(sourceInst), selectsWFlag == 0 &&
+                         ((*(uint *)(slotIter[7] + 0x14) & 0x40) != 0)) && ((sourceInst[5] & 0x40U) != 0))))
+                      && (*(int *)(slotIter[7] + 0x94) == sourceInst[0x25])))) {
                     usedMaskOld = this[0x20];
-                    *loopPtr2 = local_f0;
-                    this[0x20] = 1 << (loopIndex3 & 0x3f) | usedMaskOld;
+                    *slotWordPtr = sourceRegister;
+                    this[0x20] = 1 << (slotIndex & 0x3f) | usedMaskOld;
                     goto LAB_00199c88;
                   }
-                  bVar4 = loopIndex3 != 3;
-                  loopPtr2 = loopPtr2 + 1;
-                  loopPtr = loopPtr + 1;
-                  loopIndex3 = loopIndex3 + 1;
-                } while (bVar4);
-                a4 = (int *)((int)((unsigned char *)0x0) + 3);
+                  moreSlots = slotIndex != 3;
+                  slotWordPtr = slotWordPtr + 1;
+                  slotIter = slotIter + 1;
+                  slotIndex = slotIndex + 1;
+                } while (moreSlots);
+                stagedArg4 = (int *)((int)((unsigned char *)0x0) + 3);
 LAB_00199c88:
                 selectMethod = *(code **)(*this + 0xf8);
                 goto joined_r0x00199c90;
@@ -437,86 +468,86 @@ LAB_00199c88:
             }
             else {
               if (anyEnabledLaneSelectsXyzResult == 0) {
-                loopIndex3 = 1;
-                loopPtr2 = this + 0x12;
-                loopPtr = this;
+                slotIndex = 1;
+                slotWordPtr = this + 0x12;
+                slotIter = this;
                 do {
-                  piVar25 = (int *)loopPtr[10];
-                  a4 = (int *)(loopIndex3 - 1);
-                  if ((a0 == piVar25) ||
-                     ((((((piVar25 != (int *)0x0 && (a0 != (int *)0x0)) &&
-                         ((piVar25[0x20] != 0 &&
-                          ((loopRemaining = RegKind__flagBit0(piVar25[0x26]), loopRemaining != 0 &&
-                           ((piVar25[5] & 2U) == 0)))))) &&
-                        (loopRemaining = (**(code **)(*piVar25 + 0x50))(piVar25), loopRemaining == 0)) &&
-                       (((a0[0x20] != 0 && (loopRemaining = RegKind__flagBit0(a0[0x26]), loopRemaining != 0)) &&
-                        ((a0[5] & 2U) == 0)))) &&
-                      (((loopRemaining = (**(code **)(*a0 + 0x50))(a0), loopRemaining == 0 &&
-                        ((*(uint *)(loopPtr[10] + 0x14) & 0x40) != 0)) &&
-                       (((a0[5] & 0x40U) != 0 && (*(int *)(loopPtr[10] + 0x94) == a0[0x25])))))))) {
+                  slotInst = (int *)slotIter[10];
+                  stagedArg4 = (int *)(slotIndex - 1);
+                  if ((sourceInst == slotInst) ||
+                     ((((((slotInst != (int *)0x0 && (sourceInst != (int *)0x0)) &&
+                         ((slotInst[0x20] != 0 &&
+                          ((selectsWFlag = RegKind__flagBit0(slotInst[0x26]), selectsWFlag != 0 &&
+                           ((slotInst[5] & 2U) == 0)))))) &&
+                        (selectsWFlag = (**(code **)(*slotInst + 0x50))(slotInst), selectsWFlag == 0)) &&
+                       (((sourceInst[0x20] != 0 && (selectsWFlag = RegKind__flagBit0(sourceInst[0x26]), selectsWFlag != 0)) &&
+                        ((sourceInst[5] & 2U) == 0)))) &&
+                      (((selectsWFlag = (**(code **)(*sourceInst + 0x50))(sourceInst), selectsWFlag == 0 &&
+                        ((*(uint *)(slotIter[10] + 0x14) & 0x40) != 0)) &&
+                       (((sourceInst[5] & 0x40U) != 0 && (*(int *)(slotIter[10] + 0x94) == sourceInst[0x25])))))))) {
                     usedMaskOld = this[0x21];
-                    *loopPtr2 = local_f0;
-                    this[0x21] = 1 << (loopIndex3 & 0x3f) | usedMaskOld;
+                    *slotWordPtr = sourceRegister;
+                    this[0x21] = 1 << (slotIndex & 0x3f) | usedMaskOld;
                     goto LAB_00199b44;
                   }
-                  bVar4 = loopIndex3 != 3;
-                  loopPtr2 = loopPtr2 + 1;
-                  loopPtr = loopPtr + 1;
-                  loopIndex3 = loopIndex3 + 1;
-                } while (bVar4);
-                a4 = (int *)((int)((unsigned char *)0x0) + 3);
+                  moreSlots = slotIndex != 3;
+                  slotWordPtr = slotWordPtr + 1;
+                  slotIter = slotIter + 1;
+                  slotIndex = slotIndex + 1;
+                } while (moreSlots);
+                stagedArg4 = (int *)((int)((unsigned char *)0x0) + 3);
 LAB_00199b44:
                 selectMethod = *(code **)(*this + 0xf4);
               }
               else {
-                loopIndex3 = 1;
-                loopPtr2 = this;
-                loopPtr = this;
+                slotIndex = 1;
+                slotWordPtr = this;
+                slotIter = this;
                 do {
-                  piVar25 = (int *)loopPtr2[7];
-                  a4 = (int *)(loopIndex3 - 1);
-                  if (((a0 == piVar25) ||
-                      ((((piVar25 != (int *)0x0 && (a0 != (int *)0x0)) &&
-                        ((piVar25[0x20] != 0 &&
-                         ((((((loopRemaining = RegKind__flagBit0(piVar25[0x26]), loopRemaining != 0 &&
-                              ((piVar25[5] & 2U) == 0)) &&
-                             (loopRemaining = (**(code **)(*piVar25 + 0x50))(piVar25), loopRemaining == 0)) &&
-                            ((a0[0x20] != 0 && (loopRemaining = RegKind__flagBit0(a0[0x26]), loopRemaining != 0)))) &&
-                           ((a0[5] & 2U) == 0)) &&
-                          ((loopRemaining = (**(code **)(*a0 + 0x50))(a0), loopRemaining == 0 &&
-                           ((*(uint *)(loopPtr2[7] + 0x14) & 0x40) != 0)))))))) &&
-                       (((a0[5] & 0x40U) != 0 && (*(int *)(loopPtr2[7] + 0x94) == a0[0x25])))))) &&
-                     ((piVar25 = (int *)loopPtr2[10], a0 == piVar25 ||
-                      ((((((piVar25 != (int *)0x0 && (a0 != (int *)0x0)) && (piVar25[0x20] != 0)) &&
-                         ((loopRemaining = RegKind__flagBit0(piVar25[0x26]), loopRemaining != 0 &&
-                          ((piVar25[5] & 2U) == 0)))) &&
-                        (((loopRemaining = (**(code **)(*piVar25 + 0x50))(piVar25), loopRemaining == 0 &&
-                          ((a0[0x20] != 0 && (loopRemaining = RegKind__flagBit0(a0[0x26]), loopRemaining != 0)))) &&
-                         ((a0[5] & 2U) == 0)))) &&
-                       ((((loopRemaining = (**(code **)(*a0 + 0x50))(a0), loopRemaining == 0 &&
-                          ((*(uint *)(loopPtr2[10] + 0x14) & 0x40) != 0)) && ((a0[5] & 0x40U) != 0))
-                        && (*(int *)(loopPtr2[10] + 0x94) == a0[0x25])))))))) {
+                  slotInst = (int *)slotWordPtr[7];
+                  stagedArg4 = (int *)(slotIndex - 1);
+                  if (((sourceInst == slotInst) ||
+                      ((((slotInst != (int *)0x0 && (sourceInst != (int *)0x0)) &&
+                        ((slotInst[0x20] != 0 &&
+                         ((((((selectsWFlag = RegKind__flagBit0(slotInst[0x26]), selectsWFlag != 0 &&
+                              ((slotInst[5] & 2U) == 0)) &&
+                             (selectsWFlag = (**(code **)(*slotInst + 0x50))(slotInst), selectsWFlag == 0)) &&
+                            ((sourceInst[0x20] != 0 && (selectsWFlag = RegKind__flagBit0(sourceInst[0x26]), selectsWFlag != 0)))) &&
+                           ((sourceInst[5] & 2U) == 0)) &&
+                          ((selectsWFlag = (**(code **)(*sourceInst + 0x50))(sourceInst), selectsWFlag == 0 &&
+                           ((*(uint *)(slotWordPtr[7] + 0x14) & 0x40) != 0)))))))) &&
+                       (((sourceInst[5] & 0x40U) != 0 && (*(int *)(slotWordPtr[7] + 0x94) == sourceInst[0x25])))))) &&
+                     ((slotInst = (int *)slotWordPtr[10], sourceInst == slotInst ||
+                      ((((((slotInst != (int *)0x0 && (sourceInst != (int *)0x0)) && (slotInst[0x20] != 0)) &&
+                         ((selectsWFlag = RegKind__flagBit0(slotInst[0x26]), selectsWFlag != 0 &&
+                          ((slotInst[5] & 2U) == 0)))) &&
+                        (((selectsWFlag = (**(code **)(*slotInst + 0x50))(slotInst), selectsWFlag == 0 &&
+                          ((sourceInst[0x20] != 0 && (selectsWFlag = RegKind__flagBit0(sourceInst[0x26]), selectsWFlag != 0)))) &&
+                         ((sourceInst[5] & 2U) == 0)))) &&
+                       ((((selectsWFlag = (**(code **)(*sourceInst + 0x50))(sourceInst), selectsWFlag == 0 &&
+                          ((*(uint *)(slotWordPtr[10] + 0x14) & 0x40) != 0)) && ((sourceInst[5] & 0x40U) != 0))
+                        && (*(int *)(slotWordPtr[10] + 0x94) == sourceInst[0x25])))))))) {
                     rgbUsedMaskOld = this[0x20];
                     usedMaskOld = this[0x21];
-                    loopIndex3 = 1 << (loopIndex3 & 0x3f);
-                    loopPtr[0x12] = local_f0;
-                    this[0x20] = loopIndex3 | rgbUsedMaskOld;
-                    this[0x21] = loopIndex3 | usedMaskOld;
-                    loopPtr[0xe] = local_f0;
+                    slotIndex = 1 << (slotIndex & 0x3f);
+                    slotIter[0x12] = sourceRegister;
+                    this[0x20] = slotIndex | rgbUsedMaskOld;
+                    this[0x21] = slotIndex | usedMaskOld;
+                    slotIter[0xe] = sourceRegister;
                     goto LAB_001999e8;
                   }
-                  bVar4 = loopIndex3 != 3;
-                  loopPtr2 = loopPtr2 + 1;
-                  loopIndex3 = loopIndex3 + 1;
-                  loopPtr = loopPtr + 1;
-                } while (bVar4);
-                a4 = (int *)((int)((unsigned char *)0x0) + 3);
+                  moreSlots = slotIndex != 3;
+                  slotWordPtr = slotWordPtr + 1;
+                  slotIndex = slotIndex + 1;
+                  slotIter = slotIter + 1;
+                } while (moreSlots);
+                stagedArg4 = (int *)((int)((unsigned char *)0x0) + 3);
 LAB_001999e8:
-                (**(code **)(*this + 0xf4))(this,srcIdx,rgbSelect,rgbMod,a4,swizzle);
+                (**(code **)(*this + 0xf4))(this,srcIdx,rgbSelect,rgbMod,stagedArg4,swizzle);
                 selectMethod = *(code **)(*this + 0xf8);
 joined_r0x00199c90:
-                if (bVar3) {
-                  if ((bool)((byte)((uint)local_64 >> 0x1d) & 1)) {
+                if (isThirdSource) {
+                  if ((bool)((byte)((uint)crFlagsWord >> 0x1d) & 1)) {
                     selectSrcIdx = (int *)((int)((unsigned char *)0x0) + 3);
                   }
                   else {
@@ -524,175 +555,175 @@ joined_r0x00199c90:
                   }
                 }
               }
-              loopPtr = rgbSelect;
-              loopPtr2 = rgbMod;
+              stagedArg2 = rgbSelect;
+              stagedArg3 = rgbMod;
               /* dropped 4 args (found auditing #70 via ExtendIndirectCalls.java / ground-truth
-               * disassembly): stock passes loopPtr, loopPtr2, r21 (== a4: the search loop's
+               * disassembly): stock passes stagedArg2, stagedArg3, r21 (== stagedArg4: the search loop's
                * `r23 - 1`, or 3 only when the loop runs out - NOT a literal 3, #80), and swizzle
                * too - swizzle's real register (r27) is set once, early in the function, and never
                * reassigned before this call, same as the already-fixed 0xec/0xf0 calls above. */
-              (*selectMethod)(this,selectSrcIdx,loopPtr,loopPtr2,a4,swizzle);
+              (*selectMethod)(this,selectSrcIdx,stagedArg2,stagedArg3,stagedArg4,swizzle);
               alphaHardwareOpcodeOut = swizzle;
             }
           }
 LAB_00199cdc:
           if (writesAlpha) {
-            loopRemaining = IRInst__getOperandRecord(irInst,srcIdx);
-            swizzle2 = *(int **)(loopRemaining + 0x10);
-            loopRemaining = local_ac;
-            if ((bVar3) && (local_74 != 0)) {
-              loopRemaining = classifyOut2b;
+            operandRecordTmp = IRInst__getOperandRecord(irInst,srcIdx);
+            swizzle2 = *(int **)(operandRecordTmp + 0x10);
+            alphaLanes = alphaLaneEnables;
+            if ((isThirdSource) && (classifyFlagBit2 != 0)) {
+              alphaLanes = classifyOut2b;
             }
-            iVar13 = anyEnabledLaneSelectsW(swizzle2,loopRemaining);
-            loopRemaining = anyEnabledLaneSelectsXyz(swizzle2,loopRemaining);
+            selectsW = anyEnabledLaneSelectsW(swizzle2,alphaLanes);
+            alphaLanes = anyEnabledLaneSelectsXyz(swizzle2,alphaLanes);
             alphaSelect[(int)srcIdx] = 0x10;
-            if (iVar13 != 0) {
-              loopIndex3 = 1;
-              loopPtr2 = this + 0x12;
-              loopPtr = this;
+            if (selectsW != 0) {
+              slotIndex = 1;
+              slotWordPtr = this + 0x12;
+              slotIter = this;
               do {
-                piVar25 = (int *)loopPtr[10];
-                a4 = (int *)(loopIndex3 - 1);
-                if ((a0 == piVar25) ||
-                   ((((piVar25 != (int *)0x0 && (a0 != (int *)0x0)) &&
-                     ((piVar25[0x20] != 0 &&
-                      ((((iVar13 = RegKind__flagBit0(piVar25[0x26]), iVar13 != 0 &&
-                         ((piVar25[5] & 2U) == 0)) &&
-                        (iVar13 = (**(code **)(*piVar25 + 0x50))(piVar25), iVar13 == 0)) &&
-                       ((a0[0x20] != 0 && (iVar13 = RegKind__flagBit0(a0[0x26]), iVar13 != 0)))))))) &&
-                    ((((a0[5] & 2U) == 0 &&
-                      ((iVar13 = (**(code **)(*a0 + 0x50))(a0), iVar13 == 0 &&
-                       ((*(uint *)(loopPtr[10] + 0x14) & 0x40) != 0)))) &&
-                     (((a0[5] & 0x40U) != 0 && (*(int *)(loopPtr[10] + 0x94) == a0[0x25])))))))) {
+                slotInst = (int *)slotIter[10];
+                stagedArg4 = (int *)(slotIndex - 1);
+                if ((sourceInst == slotInst) ||
+                   ((((slotInst != (int *)0x0 && (sourceInst != (int *)0x0)) &&
+                     ((slotInst[0x20] != 0 &&
+                      ((((selectsW = RegKind__flagBit0(slotInst[0x26]), selectsW != 0 &&
+                         ((slotInst[5] & 2U) == 0)) &&
+                        (selectsW = (**(code **)(*slotInst + 0x50))(slotInst), selectsW == 0)) &&
+                       ((sourceInst[0x20] != 0 && (selectsW = RegKind__flagBit0(sourceInst[0x26]), selectsW != 0)))))))) &&
+                    ((((sourceInst[5] & 2U) == 0 &&
+                      ((selectsW = (**(code **)(*sourceInst + 0x50))(sourceInst), selectsW == 0 &&
+                       ((*(uint *)(slotIter[10] + 0x14) & 0x40) != 0)))) &&
+                     (((sourceInst[5] & 0x40U) != 0 && (*(int *)(slotIter[10] + 0x94) == sourceInst[0x25])))))))) {
                   usedMaskOld = this[0x21];
-                  *loopPtr2 = local_f0;
-                  this[0x21] = 1 << (loopIndex3 & 0x3f) | usedMaskOld;
+                  *slotWordPtr = sourceRegister;
+                  this[0x21] = 1 << (slotIndex & 0x3f) | usedMaskOld;
                   goto LAB_00199e60;
                 }
-                bVar4 = loopIndex3 != 3;
-                loopPtr2 = loopPtr2 + 1;
-                loopPtr = loopPtr + 1;
-                loopIndex3 = loopIndex3 + 1;
-              } while (bVar4);
-              a4 = (int *)((int)((unsigned char *)0x0) + 3);
+                moreSlots = slotIndex != 3;
+                slotWordPtr = slotWordPtr + 1;
+                slotIter = slotIter + 1;
+                slotIndex = slotIndex + 1;
+              } while (moreSlots);
+              stagedArg4 = (int *)((int)((unsigned char *)0x0) + 3);
 LAB_00199e60:
               selectSrcIdx = srcIdx;
-              if (bVar3) {
-                if ((bool)((byte)((uint)local_64 >> 0x1d) & 1)) {
+              if (isThirdSource) {
+                if ((bool)((byte)((uint)crFlagsWord >> 0x1d) & 1)) {
                   selectSrcIdx = (int *)((int)((unsigned char *)0x0) + 3);
                 }
                 else {
                   selectSrcIdx = (int *)((int)((unsigned char *)0x0) + 1);
                 }
               }
-              loopPtr = alphaSelect;
-              loopPtr2 = local_5c;
+              stagedArg2 = alphaSelect;
+              stagedArg3 = alphaModAlias;
               alphaHardwareOpcodeOut = swizzle2;
               /* dropped 4 args (found auditing #70 via ExtendIndirectCalls.java / ground-truth
                * disassembly): stock passes loopPtr, loopPtr2, r21 (== a4, search-loop r23-1 / 3 on exhaustion - not a literal 3, #80), and piVar25 too. */
-              (**(code **)(*this + 0xfc))(this,selectSrcIdx,loopPtr,loopPtr2,a4,alphaHardwareOpcodeOut);
+              (**(code **)(*this + 0xfc))(this,selectSrcIdx,stagedArg2,stagedArg3,stagedArg4,alphaHardwareOpcodeOut);
             }
-            if (loopRemaining != 0) {
-              loopIndex3 = 1;
-              loopPtr2 = this + 0xe;
-              loopPtr = this;
+            if (alphaLanes != 0) {
+              slotIndex = 1;
+              slotWordPtr = this + 0xe;
+              slotIter = this;
               do {
-                piVar25 = (int *)loopPtr[7];
-                a4 = (int *)(loopIndex3 - 1);
-                if ((a0 == piVar25) ||
-                   (((((piVar25 != (int *)0x0 && (a0 != (int *)0x0)) && (piVar25[0x20] != 0)) &&
-                     ((((loopRemaining = RegKind__flagBit0(piVar25[0x26]), loopRemaining != 0 &&
-                        ((piVar25[5] & 2U) == 0)) &&
-                       ((loopRemaining = (**(code **)(*piVar25 + 0x50))(piVar25), loopRemaining == 0 &&
-                        ((a0[0x20] != 0 && (loopRemaining = RegKind__flagBit0(a0[0x26]), loopRemaining != 0)))))) &&
-                      ((a0[5] & 2U) == 0)))) &&
-                    ((((loopRemaining = (**(code **)(*a0 + 0x50))(a0), loopRemaining == 0 &&
-                       ((*(uint *)(loopPtr[7] + 0x14) & 0x40) != 0)) && ((a0[5] & 0x40U) != 0)) &&
-                     (*(int *)(loopPtr[7] + 0x94) == a0[0x25])))))) {
+                slotInst = (int *)slotIter[7];
+                stagedArg4 = (int *)(slotIndex - 1);
+                if ((sourceInst == slotInst) ||
+                   (((((slotInst != (int *)0x0 && (sourceInst != (int *)0x0)) && (slotInst[0x20] != 0)) &&
+                     ((((alphaLanes = RegKind__flagBit0(slotInst[0x26]), alphaLanes != 0 &&
+                        ((slotInst[5] & 2U) == 0)) &&
+                       ((alphaLanes = (**(code **)(*slotInst + 0x50))(slotInst), alphaLanes == 0 &&
+                        ((sourceInst[0x20] != 0 && (alphaLanes = RegKind__flagBit0(sourceInst[0x26]), alphaLanes != 0)))))) &&
+                      ((sourceInst[5] & 2U) == 0)))) &&
+                    ((((alphaLanes = (**(code **)(*sourceInst + 0x50))(sourceInst), alphaLanes == 0 &&
+                       ((*(uint *)(slotIter[7] + 0x14) & 0x40) != 0)) && ((sourceInst[5] & 0x40U) != 0)) &&
+                     (*(int *)(slotIter[7] + 0x94) == sourceInst[0x25])))))) {
                   usedMaskOld = this[0x20];
-                  *loopPtr2 = local_f0;
-                  this[0x20] = 1 << (loopIndex3 & 0x3f) | usedMaskOld;
+                  *slotWordPtr = sourceRegister;
+                  this[0x20] = 1 << (slotIndex & 0x3f) | usedMaskOld;
                   goto LAB_00199fdc;
                 }
-                bVar4 = loopIndex3 != 3;
-                loopPtr2 = loopPtr2 + 1;
-                loopPtr = loopPtr + 1;
-                loopIndex3 = loopIndex3 + 1;
-              } while (bVar4);
-              a4 = (int *)((int)((unsigned char *)0x0) + 3);
+                moreSlots = slotIndex != 3;
+                slotWordPtr = slotWordPtr + 1;
+                slotIter = slotIter + 1;
+                slotIndex = slotIndex + 1;
+              } while (moreSlots);
+              stagedArg4 = (int *)((int)((unsigned char *)0x0) + 3);
 LAB_00199fdc:
-              piVar25 = srcIdx;
-              if (bVar3) {
-                if ((bool)((byte)((uint)local_64 >> 0x1d) & 1)) {
-                  piVar25 = (int *)((int)((unsigned char *)0x0) + 3);
+              selectSrcIdx2 = srcIdx;
+              if (isThirdSource) {
+                if ((bool)((byte)((uint)crFlagsWord >> 0x1d) & 1)) {
+                  selectSrcIdx2 = (int *)((int)((unsigned char *)0x0) + 3);
                 }
                 else {
-                  piVar25 = (int *)((int)((unsigned char *)0x0) + 1);
+                  selectSrcIdx2 = (int *)((int)((unsigned char *)0x0) + 1);
                 }
               }
-              loopPtr = alphaSelect;
-              loopPtr2 = local_5c;
+              stagedArg2 = alphaSelect;
+              stagedArg3 = alphaModAlias;
               /* dropped 4 args (found auditing #70 via ExtendIndirectCalls.java / ground-truth
-               * disassembly): stock passes loopPtr, loopPtr2, r21 (== a4, not a literal 3, #80), and swizzle2 too -
-               * swizzle2 directly, not piVar25 (reassigned below, diverged from swizzle2 by here). */
-              (**(code **)(*this + 0x100))(this,piVar25,loopPtr,loopPtr2,a4,swizzle2);
+               * disassembly): stock passes stagedArg2, stagedArg3, r21 (== stagedArg4, not a literal 3, #80), and swizzle2 too -
+               * swizzle2 directly, not selectSrcIdx2 (reassigned below, diverged from swizzle2 by here). */
+              (**(code **)(*this + 0x100))(this,selectSrcIdx2,stagedArg2,stagedArg3,stagedArg4,swizzle2);
               alphaHardwareOpcodeOut = swizzle2;
             }
           }
         }
         else {
-          if ((((a0[0x20] != 0) && (loopRemaining = RegKind__flagBit0(loopRemaining), loopRemaining != 0)) &&
-              ((a0[5] & 2U) == 0)) && (loopRemaining = (**(code **)(*a0 + 0x50))(a0), loopRemaining == 0)) {
-            local_f0 = FUN_00134de8(*(undefined4 *)(this[3] + 0x6c4),a0);
-            loopRemaining = (**(code **)(*a0 + 0x80))(a0);
-            if (loopRemaining != 0) {
-              loopPtr2 = (int *)this[3];
-              loopPtr = irInst;
+          if ((((sourceInst[0x20] != 0) && (sourceKind = RegKind__flagBit0(sourceKind), sourceKind != 0)) &&
+              ((sourceInst[5] & 2U) == 0)) && (sourceKind = (**(code **)(*sourceInst + 0x50))(sourceInst), sourceKind == 0)) {
+            sourceRegister = FUN_00134de8(*(undefined4 *)(this[3] + 0x6c4),sourceInst);
+            vslot80Result = (**(code **)(*sourceInst + 0x80))(sourceInst);
+            if (vslot80Result != 0) {
+              stagedArg3 = (int *)this[3];
+              stagedArg2 = irInst;
               /* dropped 2 args (found auditing #70 via ExtendIndirectCalls.java / ground-truth
                * disassembly): stock passes irInst and loopPtr2 too. */
-              (**(code **)(*this + 0x154))(this,srcIdx,irInst,loopPtr2);
+              (**(code **)(*this + 0x154))(this,srcIdx,irInst,stagedArg3);
             }
             goto LAB_0019852c;
           }
-          loopRemaining = (**(code **)(*a0 + 0x50))(a0);
-          if (loopRemaining != 0) {
-            local_f0 = thunk_FUN_00134de8(*(undefined4 *)(this[3] + 0x6c4),a0);
+          vslot50Result = (**(code **)(*sourceInst + 0x50))(sourceInst);
+          if (vslot50Result != 0) {
+            sourceRegister = thunk_FUN_00134de8(*(undefined4 *)(this[3] + 0x6c4),sourceInst);
             goto LAB_0019852c;
           }
-          loopRemaining = (**(code **)(*a0 + 0x48))(a0);
-          if (loopRemaining != 0) {
-            if (a0[0x26] == 0x33) {
-              loopPtr = &local_f0;
+          vslot48Result = (**(code **)(*sourceInst + 0x48))(sourceInst);
+          if (vslot48Result != 0) {
+            if (sourceInst[0x26] == 0x33) {
+              stagedArg2 = &sourceRegister;
               /* dropped 1 arg (found auditing #70 via ExtendIndirectCalls.java / ground-truth
-               * disassembly): stock passes &local_f0 (loopPtr) too. */
-              loopRemaining = (**(code **)(*this + 0xdc))(this,a0,loopPtr);
-              if (loopRemaining == 0) {
+               * disassembly): stock passes &sourceRegister (loopPtr) too. */
+              vslotDcResult = (**(code **)(*this + 0xdc))(this,sourceInst,stagedArg2);
+              if (vslotDcResult == 0) {
                 if ((srcIdx != (int *)((int)((unsigned char *)0x0) + 3)) ||
-                   ((bool)((byte)((uint)local_64 >> 0x1d) & 1))) {
+                   ((bool)((byte)((uint)crFlagsWord >> 0x1d) & 1))) {
                   if (writesRgb) {
-                    loopPtr = rgbSelect;
-                    loopPtr2 = rgbMod;
-                    a4 = irInst;
+                    stagedArg2 = rgbSelect;
+                    stagedArg3 = rgbMod;
+                    stagedArg4 = irInst;
                     /* dropped 3 args (found auditing #70 via ExtendIndirectCalls.java /
                      * ground-truth disassembly): stock passes loopPtr, loopPtr2, a4 too. */
-                    (**(code **)(*this + 0xd4))(this,srcIdx,loopPtr,loopPtr2,a4);
+                    (**(code **)(*this + 0xd4))(this,srcIdx,stagedArg2,stagedArg3,stagedArg4);
                   }
                   if (writesAlpha) {
-                    loopPtr = alphaSelect;
-                    loopPtr2 = local_5c;
-                    a4 = irInst;
+                    stagedArg2 = alphaSelect;
+                    stagedArg3 = alphaModAlias;
+                    stagedArg4 = irInst;
                     /* dropped 3 args (found auditing #70 via ExtendIndirectCalls.java /
                      * ground-truth disassembly): stock passes loopPtr, loopPtr2, a4 too. */
-                    (**(code **)(*this + 0xd8))(this,srcIdx,loopPtr,loopPtr2,a4);
+                    (**(code **)(*this + 0xd8))(this,srcIdx,stagedArg2,stagedArg3,stagedArg4);
                   }
                 }
                 else {
                   alphaSelect[2] = 0x11;
-                  loopPtr = alphaSelect;
-                  loopPtr2 = local_5c;
-                  a4 = irInst;
+                  stagedArg2 = alphaSelect;
+                  stagedArg3 = alphaModAlias;
+                  stagedArg4 = irInst;
                   (**(code **)(*this + 0xd8))
-                            (this,3,alphaSelect,local_5c,irInst,alphaHardwareOpcodeOut,*(code **)(*this + 0xd8)
+                            (this,3,alphaSelect,alphaModAlias,irInst,alphaHardwareOpcodeOut,*(code **)(*this + 0xd8)
                             );
                   alphaSelect[1] = alphaSelect[3];
                 }
@@ -700,379 +731,379 @@ LAB_00199fdc:
               }
             }
             else {
-              local_f0 = a0[0x25];
-              loopPtr = a0;
-              R300MachineAssembler__trackMaxLevelAndAssemble(this,local_f0,a0);
-              local_f0 = (**(code **)(*this + 0xe0))(this,local_f0);
+              sourceRegister = sourceInst[0x25];
+              stagedArg2 = sourceInst;
+              R300MachineAssembler__trackMaxLevelAndAssemble(this,sourceRegister,sourceInst);
+              sourceRegister = (**(code **)(*this + 0xe0))(this,sourceRegister);
             }
             goto LAB_0019852c;
           }
-          loopRemaining = (**(code **)(*a0 + 0x5c))(a0);
-          if (loopRemaining == 0) goto LAB_0019852c;
+          vslot5cResult = (**(code **)(*sourceInst + 0x5c))(sourceInst);
+          if (vslot5cResult == 0) goto LAB_0019852c;
           if ((srcIdx != (int *)((int)((unsigned char *)0x0) + 3)) ||
-             ((bool)((byte)((uint)local_64 >> 0x1d) & 1))) {
+             ((bool)((byte)((uint)crFlagsWord >> 0x1d) & 1))) {
             if (writesRgb) {
-              loopPtr = rgbSelect;
-              loopPtr2 = rgbMod;
-              a4 = swizzle;
+              stagedArg2 = rgbSelect;
+              stagedArg3 = rgbMod;
+              stagedArg4 = swizzle;
               /* dropped 3 args (found auditing #70 via ExtendIndirectCalls.java /
                * ground-truth disassembly): stock passes loopPtr, loopPtr2, a4 too. */
-              (**(code **)(*this + 0xec))(this,srcIdx,loopPtr,loopPtr2,a4);
+              (**(code **)(*this + 0xec))(this,srcIdx,stagedArg2,stagedArg3,stagedArg4);
             }
             if (writesAlpha) {
-              loopPtr = alphaSelect;
-              loopPtr2 = local_5c;
-              a4 = swizzle;
+              stagedArg2 = alphaSelect;
+              stagedArg3 = alphaModAlias;
+              stagedArg4 = swizzle;
               /* dropped 3 args (found auditing #70 via ExtendIndirectCalls.java /
                * ground-truth disassembly): stock passes loopPtr, loopPtr2, a4 too. */
-              (**(code **)(*this + 0xf0))(this,srcIdx,loopPtr,loopPtr2,a4);
+              (**(code **)(*this + 0xf0))(this,srcIdx,stagedArg2,stagedArg3,stagedArg4);
             }
           }
           else {
             alphaSelect[2] = 0x11;
-            loopPtr = alphaSelect;
-            loopPtr2 = local_5c;
-            a4 = swizzle;
+            stagedArg2 = alphaSelect;
+            stagedArg3 = alphaModAlias;
+            stagedArg4 = swizzle;
             (**(code **)(*this + 0xf0))
-                      (this,1,alphaSelect,local_5c,swizzle,alphaHardwareOpcodeOut,*(code **)(*this + 0xf0));
+                      (this,1,alphaSelect,alphaModAlias,swizzle,alphaHardwareOpcodeOut,*(code **)(*this + 0xf0));
           }
-          SelectWord__readMask(&local_84,swizzle);
-          loopIndex3 = local_84 & 0xff;
-          bVar3 = (local_84 & 0xffffff00) == 0;
-          iVar13 = *(int *)(a0[0x22] + 8);
-          loopRemaining = (**(code **)(*a0 + 0x14))
-                             (a0,a1,loopPtr,loopPtr2,a4,alphaHardwareOpcodeOut,a0[0x22],*(code **)(*a0 + 0x14));
-          if (!bVar3) {
-            this[0x20] = loopRemaining * 4 - 2U | this[0x20];
+          SelectWord__readMask(&swizzleMask,swizzle);
+          swizzleLowByte = swizzleMask & 0xff;
+          swizzleHighClear = (swizzleMask & 0xffffff00) == 0;
+          srcOpcode = *(int *)(sourceInst[0x22] + 8);
+          sourceWidth = (**(code **)(*sourceInst + 0x14))
+                             (sourceInst,staleArg1,stagedArg2,stagedArg3,stagedArg4,alphaHardwareOpcodeOut,sourceInst[0x22],*(code **)(*sourceInst + 0x14));
+          if (!swizzleHighClear) {
+            this[0x20] = sourceWidth * 4 - 2U | this[0x20];
             (**(code **)(*this + 0xe4))
-                      (this,*(undefined4 *)(PTR_DAT_001e913c + iVar13 * 0x38 + 0xc),loopPtr,
-                       loopPtr2,a4,alphaHardwareOpcodeOut,PTR_DAT_001e913c + iVar13 * 0x38);
+                      (this,*(undefined4 *)(PTR_DAT_001e913c + srcOpcode * 0x38 + 0xc),stagedArg2,
+                       stagedArg3,stagedArg4,alphaHardwareOpcodeOut,PTR_DAT_001e913c + srcOpcode * 0x38);
           }
-          bVar4 = -1 < (int)-loopIndex3;
-          if (!bVar4) {
-            this[0x21] = loopRemaining * 4 - 2U | this[0x21];
+          maskByteNonZero = -1 < (int)-swizzleLowByte;
+          if (!maskByteNonZero) {
+            this[0x21] = sourceWidth * 4 - 2U | this[0x21];
             (**(code **)(*this + 0xe8))
-                      (this,*(undefined4 *)(PTR_DAT_001e913c + iVar13 * 0x38 + 0xc),loopPtr,
-                       loopPtr2,a4,alphaHardwareOpcodeOut,PTR_DAT_001e913c + iVar13 * 0x38);
+                      (this,*(undefined4 *)(PTR_DAT_001e913c + srcOpcode * 0x38 + 0xc),stagedArg2,
+                       stagedArg3,stagedArg4,alphaHardwareOpcodeOut,PTR_DAT_001e913c + srcOpcode * 0x38);
           }
-          if (loopRemaining < 2) {
-            if (loopRemaining != 1) goto LAB_0019a030;
-            piVar23 = (int *)IRInst__getOperandSource(a0,1);
-            if ((((piVar23[0x20] == 0) || (loopRemaining = RegKind__flagBit0(piVar23[0x26]), loopRemaining == 0)) ||
-                ((piVar23[5] & 2U) != 0)) ||
-               (loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining != 0)) {
-              piVar23 = (int *)IRInst__getOperandSource(a0,1);
-              loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23);
-              if (loopRemaining != 0) goto LAB_001994a8;
-              piVar23 = (int *)IRInst__getOperandSource(a0,1);
-              iVar13 = 0;
-              loopRemaining = (**(code **)(*piVar23 + 0x48))(piVar23);
-              if (loopRemaining != 0) {
-                loopRemaining = IRInst__getOperandSource(a0,1);
-                registerIndex = *(undefined4 *)(loopRemaining + 0x94);
-                loopPtr = (int *)IRInst__getOperandSource(a0,1);
-                R300MachineAssembler__trackMaxLevelAndAssemble(this,registerIndex,loopPtr);
-                iVar13 = (**(code **)(*this + 0xe0))(this,registerIndex);
+          if (sourceWidth < 2) {
+            if (sourceWidth != 1) goto LAB_0019a030;
+            sourceDef3 = (int *)IRInst__getOperandSource(sourceInst,1);
+            if ((((sourceDef3[0x20] == 0) || (sourceWidth = RegKind__flagBit0(sourceDef3[0x26]), sourceWidth == 0)) ||
+                ((sourceDef3[5] & 2U) != 0)) ||
+               (sourceWidth = (**(code **)(*sourceDef3 + 0x50))(sourceDef3), sourceWidth != 0)) {
+              sourceDef3 = (int *)IRInst__getOperandSource(sourceInst,1);
+              vslot50Result = (**(code **)(*sourceDef3 + 0x50))(sourceDef3);
+              if (vslot50Result != 0) goto LAB_001994a8;
+              sourceDef3 = (int *)IRInst__getOperandSource(sourceInst,1);
+              hwRegister = 0;
+              vslot48Result = (**(code **)(*sourceDef3 + 0x48))(sourceDef3);
+              if (vslot48Result != 0) {
+                innerSource = IRInst__getOperandSource(sourceInst,1);
+                registerIndex = *(undefined4 *)(innerSource + 0x94);
+                stagedArg2 = (int *)IRInst__getOperandSource(sourceInst,1);
+                R300MachineAssembler__trackMaxLevelAndAssemble(this,registerIndex,stagedArg2);
+                hwRegister = (**(code **)(*this + 0xe0))(this,registerIndex);
               }
             }
             else {
 LAB_001994a8:
               allocTable = *(undefined4 *)(this[3] + 0x6c4);
-              sourceDef2 = IRInst__getOperandSource(a0,1);
-              iVar13 = thunk_FUN_00134de8(allocTable,sourceDef2);
+              sourceDef2 = IRInst__getOperandSource(sourceInst,1);
+              hwRegister = thunk_FUN_00134de8(allocTable,sourceDef2);
             }
-            if (!bVar3) {
-              loopRemaining = IRInst__getOperandSource(a0,1);
-              if ((((((loopRemaining != this[7]) && (loopRemaining = IRInst__getOperandSource(a0,1), loopRemaining != 0)) &&
+            if (!swizzleHighClear) {
+              innerSource = IRInst__getOperandSource(sourceInst,1);
+              if ((((((innerSource != this[7]) && (innerSource = IRInst__getOperandSource(sourceInst,1), innerSource != 0)) &&
                     ((this[7] != 0 &&
-                     ((piVar23 = (int *)IRInst__getOperandSource(a0,1), piVar23[0x20] != 0 &&
-                      (loopRemaining = RegKind__flagBit0(piVar23[0x26]), loopRemaining != 0)))))) &&
-                   ((piVar23[5] & 2U) == 0)) &&
-                  (((loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining == 0 &&
-                    (piVar23 = (int *)this[7], piVar23[0x20] != 0)) &&
-                   (loopRemaining = RegKind__flagBit0(piVar23[0x26]), loopRemaining != 0)))) &&
-                 ((((piVar23[5] & 2U) == 0 &&
-                   (loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining == 0)) &&
-                  ((loopRemaining = IRInst__getOperandSource(a0,1), (*(uint *)(loopRemaining + 0x14) & 0x40) != 0 &&
+                     ((sourceDef3 = (int *)IRInst__getOperandSource(sourceInst,1), sourceDef3[0x20] != 0 &&
+                      (innerSource = RegKind__flagBit0(sourceDef3[0x26]), innerSource != 0)))))) &&
+                   ((sourceDef3[5] & 2U) == 0)) &&
+                  (((innerSource = (**(code **)(*sourceDef3 + 0x50))(sourceDef3), innerSource == 0 &&
+                    (sourceDef3 = (int *)this[7], sourceDef3[0x20] != 0)) &&
+                   (innerSource = RegKind__flagBit0(sourceDef3[0x26]), innerSource != 0)))) &&
+                 ((((sourceDef3[5] & 2U) == 0 &&
+                   (innerSource = (**(code **)(*sourceDef3 + 0x50))(sourceDef3), innerSource == 0)) &&
+                  ((innerSource = IRInst__getOperandSource(sourceInst,1), (*(uint *)(innerSource + 0x14) & 0x40) != 0 &&
                    ((*(uint *)(this[7] + 0x14) & 0x40) != 0)))))) {
-                IRInst__getOperandSource(a0,1);
+                IRInst__getOperandSource(sourceInst,1);
               }
-              this[0xe] = iVar13;
+              this[0xe] = hwRegister;
             }
-            if (!bVar4) {
-              loopRemaining = IRInst__getOperandSource(a0,1);
-              if (((((loopRemaining != this[10]) && (loopRemaining = IRInst__getOperandSource(a0,1), loopRemaining != 0)) &&
+            if (!maskByteNonZero) {
+              innerSource = IRInst__getOperandSource(sourceInst,1);
+              if (((((innerSource != this[10]) && (innerSource = IRInst__getOperandSource(sourceInst,1), innerSource != 0)) &&
                    ((this[10] != 0 &&
-                    (((piVar23 = (int *)IRInst__getOperandSource(a0,1), piVar23[0x20] != 0 &&
-                      (loopRemaining = RegKind__flagBit0(piVar23[0x26]), loopRemaining != 0)) &&
-                     ((piVar23[5] & 2U) == 0)))))) &&
-                  ((loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining == 0 &&
-                   (piVar23 = (int *)this[10], piVar23[0x20] != 0)))) &&
-                 ((loopRemaining = RegKind__flagBit0(piVar23[0x26]), loopRemaining != 0 &&
-                  ((((piVar23[5] & 2U) == 0 &&
-                    (loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining == 0)) &&
-                   ((loopRemaining = IRInst__getOperandSource(a0,1), (*(uint *)(loopRemaining + 0x14) & 0x40) != 0 &&
+                    (((sourceDef3 = (int *)IRInst__getOperandSource(sourceInst,1), sourceDef3[0x20] != 0 &&
+                      (innerSource = RegKind__flagBit0(sourceDef3[0x26]), innerSource != 0)) &&
+                     ((sourceDef3[5] & 2U) == 0)))))) &&
+                  ((innerSource = (**(code **)(*sourceDef3 + 0x50))(sourceDef3), innerSource == 0 &&
+                   (sourceDef3 = (int *)this[10], sourceDef3[0x20] != 0)))) &&
+                 ((innerSource = RegKind__flagBit0(sourceDef3[0x26]), innerSource != 0 &&
+                  ((((sourceDef3[5] & 2U) == 0 &&
+                    (innerSource = (**(code **)(*sourceDef3 + 0x50))(sourceDef3), innerSource == 0)) &&
+                   ((innerSource = IRInst__getOperandSource(sourceInst,1), (*(uint *)(innerSource + 0x14) & 0x40) != 0 &&
                     ((*(uint *)(this[10] + 0x14) & 0x40) != 0)))))))) {
-                IRInst__getOperandSource(a0,1);
+                IRInst__getOperandSource(sourceInst,1);
               }
-              this[0x12] = iVar13;
+              this[0x12] = hwRegister;
             }
           }
           else {
-            sourceDef = (int *)IRInst__getOperandSource(a0,1);
-            if ((((sourceDef[0x20] == 0) || (loopRemaining = RegKind__flagBit0(sourceDef[0x26]), loopRemaining == 0)) ||
+            sourceDef = (int *)IRInst__getOperandSource(sourceInst,1);
+            if ((((sourceDef[0x20] == 0) || (sourceWidth = RegKind__flagBit0(sourceDef[0x26]), sourceWidth == 0)) ||
                 ((sourceDef[5] & 2U) != 0)) ||
-               (loopRemaining = (**(code **)(*sourceDef + 0x50))(sourceDef), loopRemaining != 0)) {
-              sourceDef = (int *)IRInst__getOperandSource(a0,1);
-              loopRemaining = (**(code **)(*sourceDef + 0x50))(sourceDef);
-              if (loopRemaining != 0) goto LAB_00198950;
-              sourceDef = (int *)IRInst__getOperandSource(a0,1);
-              iVar11 = 0;
-              loopRemaining = (**(code **)(*sourceDef + 0x48))(sourceDef);
-              if (loopRemaining != 0) {
-                loopRemaining = IRInst__getOperandSource(a0,1);
-                registerIndex2 = *(undefined4 *)(loopRemaining + 0x94);
-                loopPtr = (int *)IRInst__getOperandSource(a0,1);
-                R300MachineAssembler__trackMaxLevelAndAssemble(this,registerIndex2,loopPtr);
-                iVar11 = (**(code **)(*this + 0xe0))(this,registerIndex2);
+               (sourceWidth = (**(code **)(*sourceDef + 0x50))(sourceDef), sourceWidth != 0)) {
+              sourceDef = (int *)IRInst__getOperandSource(sourceInst,1);
+              sourceWidth = (**(code **)(*sourceDef + 0x50))(sourceDef);
+              if (sourceWidth != 0) goto LAB_00198950;
+              sourceDef = (int *)IRInst__getOperandSource(sourceInst,1);
+              hwRegister2 = 0;
+              sourceWidth = (**(code **)(*sourceDef + 0x48))(sourceDef);
+              if (sourceWidth != 0) {
+                sourceWidth = IRInst__getOperandSource(sourceInst,1);
+                registerIndex2 = *(undefined4 *)(sourceWidth + 0x94);
+                stagedArg2 = (int *)IRInst__getOperandSource(sourceInst,1);
+                R300MachineAssembler__trackMaxLevelAndAssemble(this,registerIndex2,stagedArg2);
+                hwRegister2 = (**(code **)(*this + 0xe0))(this,registerIndex2);
               }
             }
             else {
 LAB_00198950:
               allocTable = *(undefined4 *)(this[3] + 0x6c4);
-              sourceDef2 = IRInst__getOperandSource(a0,1);
-              iVar11 = thunk_FUN_00134de8(allocTable,sourceDef2);
+              sourceDef2 = IRInst__getOperandSource(sourceInst,1);
+              hwRegister2 = thunk_FUN_00134de8(allocTable,sourceDef2);
             }
-            piVar23 = (int *)IRInst__getOperandSource(a0,2);
-            if (((piVar23[0x20] == 0) || (loopRemaining = RegKind__flagBit0(piVar23[0x26]), loopRemaining == 0)) ||
-               (((piVar23[5] & 2U) != 0 ||
-                (loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining != 0)))) {
-              piVar23 = (int *)IRInst__getOperandSource(a0,2);
-              loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23);
-              if (loopRemaining != 0) goto LAB_00198a1c;
-              piVar23 = (int *)IRInst__getOperandSource(a0,2);
-              iVar12 = 0;
-              loopRemaining = (**(code **)(*piVar23 + 0x48))(piVar23);
-              if (loopRemaining != 0) {
-                loopRemaining = IRInst__getOperandSource(a0,2);
-                registerIndex3 = *(undefined4 *)(loopRemaining + 0x94);
-                loopPtr = (int *)IRInst__getOperandSource(a0,2);
-                R300MachineAssembler__trackMaxLevelAndAssemble(this,registerIndex3,loopPtr);
-                iVar12 = (**(code **)(*this + 0xe0))(this,registerIndex3);
+            sourceDef3 = (int *)IRInst__getOperandSource(sourceInst,2);
+            if (((sourceDef3[0x20] == 0) || (sourceWidth = RegKind__flagBit0(sourceDef3[0x26]), sourceWidth == 0)) ||
+               (((sourceDef3[5] & 2U) != 0 ||
+                (sourceWidth = (**(code **)(*sourceDef3 + 0x50))(sourceDef3), sourceWidth != 0)))) {
+              sourceDef3 = (int *)IRInst__getOperandSource(sourceInst,2);
+              vslot50Result = (**(code **)(*sourceDef3 + 0x50))(sourceDef3);
+              if (vslot50Result != 0) goto LAB_00198a1c;
+              sourceDef3 = (int *)IRInst__getOperandSource(sourceInst,2);
+              hwRegister3 = 0;
+              vslot48Result = (**(code **)(*sourceDef3 + 0x48))(sourceDef3);
+              if (vslot48Result != 0) {
+                innerSource2 = IRInst__getOperandSource(sourceInst,2);
+                registerIndex3 = *(undefined4 *)(innerSource2 + 0x94);
+                stagedArg2 = (int *)IRInst__getOperandSource(sourceInst,2);
+                R300MachineAssembler__trackMaxLevelAndAssemble(this,registerIndex3,stagedArg2);
+                hwRegister3 = (**(code **)(*this + 0xe0))(this,registerIndex3);
               }
             }
             else {
 LAB_00198a1c:
               allocTable = *(undefined4 *)(this[3] + 0x6c4);
-              sourceDef2 = IRInst__getOperandSource(a0,2);
-              iVar12 = thunk_FUN_00134de8(allocTable,sourceDef2);
+              sourceDef2 = IRInst__getOperandSource(sourceInst,2);
+              hwRegister3 = thunk_FUN_00134de8(allocTable,sourceDef2);
             }
-            if (bVar3) {
+            if (swizzleHighClear) {
 LAB_00198f54:
-              bVar3 = false;
+              isOpcode9a = false;
             }
             else {
-              loopRemaining = IRInst__getOperandSource(a0,1);
-              if (((loopRemaining != this[8]) &&
-                  (((((loopRemaining = IRInst__getOperandSource(a0,1), loopRemaining == 0 || (this[8] == 0)) ||
-                     ((piVar23 = (int *)IRInst__getOperandSource(a0,1), piVar23[0x20] == 0 ||
-                      (((loopRemaining = RegKind__flagBit0(piVar23[0x26]), loopRemaining == 0 ||
-                        ((piVar23[5] & 2U) != 0)) ||
-                       (loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining != 0)))))) ||
-                    ((piVar23 = (int *)this[8], piVar23[0x20] == 0 ||
-                     (loopRemaining = RegKind__flagBit0(piVar23[0x26]), loopRemaining == 0)))) ||
-                   (((piVar23[5] & 2U) != 0 ||
-                    (((loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining != 0 ||
-                      (loopRemaining = IRInst__getOperandSource(a0,1), (*(uint *)(loopRemaining + 0x14) & 0x40) == 0)) ||
+              innerSource = IRInst__getOperandSource(sourceInst,1);
+              if (((innerSource != this[8]) &&
+                  (((((innerSource = IRInst__getOperandSource(sourceInst,1), innerSource == 0 || (this[8] == 0)) ||
+                     ((sourceDef3 = (int *)IRInst__getOperandSource(sourceInst,1), sourceDef3[0x20] == 0 ||
+                      (((innerSource = RegKind__flagBit0(sourceDef3[0x26]), innerSource == 0 ||
+                        ((sourceDef3[5] & 2U) != 0)) ||
+                       (innerSource = (**(code **)(*sourceDef3 + 0x50))(sourceDef3), innerSource != 0)))))) ||
+                    ((sourceDef3 = (int *)this[8], sourceDef3[0x20] == 0 ||
+                     (innerSource = RegKind__flagBit0(sourceDef3[0x26]), innerSource == 0)))) ||
+                   (((sourceDef3[5] & 2U) != 0 ||
+                    (((innerSource = (**(code **)(*sourceDef3 + 0x50))(sourceDef3), innerSource != 0 ||
+                      (innerSource = IRInst__getOperandSource(sourceInst,1), (*(uint *)(innerSource + 0x14) & 0x40) == 0)) ||
                      (((*(uint *)(this[8] + 0x14) & 0x40) == 0 ||
-                      (loopRemaining = IRInst__getOperandSource(a0,1),
-                      *(int *)(loopRemaining + 0x94) != *(int *)(this[8] + 0x94))))))))))) ||
-                 ((loopRemaining = IRInst__getOperandSource(a0,2), loopRemaining != this[7] &&
-                  ((((loopRemaining = IRInst__getOperandSource(a0,2), loopRemaining == 0 || (this[7] == 0)) ||
-                    (piVar23 = (int *)IRInst__getOperandSource(a0,2), piVar23[0x20] == 0)) ||
-                   (((loopRemaining = RegKind__flagBit0(piVar23[0x26]), loopRemaining == 0 || ((piVar23[5] & 2U) != 0))
-                    || ((((loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining != 0 ||
-                          ((piVar23 = (int *)this[7], piVar23[0x20] == 0 ||
-                           (loopRemaining = RegKind__flagBit0(piVar23[0x26]), loopRemaining == 0)))) ||
-                         ((piVar23[5] & 2U) != 0)) ||
-                        ((((loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining != 0 ||
-                           (loopRemaining = IRInst__getOperandSource(a0,2), (*(uint *)(loopRemaining + 0x14) & 0x40) == 0)) ||
+                      (innerSource = IRInst__getOperandSource(sourceInst,1),
+                      *(int *)(innerSource + 0x94) != *(int *)(this[8] + 0x94))))))))))) ||
+                 ((innerSource = IRInst__getOperandSource(sourceInst,2), innerSource != this[7] &&
+                  ((((innerSource = IRInst__getOperandSource(sourceInst,2), innerSource == 0 || (this[7] == 0)) ||
+                    (sourceDef3 = (int *)IRInst__getOperandSource(sourceInst,2), sourceDef3[0x20] == 0)) ||
+                   (((innerSource = RegKind__flagBit0(sourceDef3[0x26]), innerSource == 0 || ((sourceDef3[5] & 2U) != 0))
+                    || ((((innerSource = (**(code **)(*sourceDef3 + 0x50))(sourceDef3), innerSource != 0 ||
+                          ((sourceDef3 = (int *)this[7], sourceDef3[0x20] == 0 ||
+                           (innerSource = RegKind__flagBit0(sourceDef3[0x26]), innerSource == 0)))) ||
+                         ((sourceDef3[5] & 2U) != 0)) ||
+                        ((((innerSource = (**(code **)(*sourceDef3 + 0x50))(sourceDef3), innerSource != 0 ||
+                           (innerSource = IRInst__getOperandSource(sourceInst,2), (*(uint *)(innerSource + 0x14) & 0x40) == 0)) ||
                           ((*(uint *)(this[7] + 0x14) & 0x40) == 0)) ||
-                         (loopRemaining = IRInst__getOperandSource(a0,2),
-                         *(int *)(loopRemaining + 0x94) != *(int *)(this[7] + 0x94))))))))))))) {
-                loopRemaining = IRInst__getOperandSource(a0,1);
-                if (((loopRemaining == this[7]) ||
-                    ((((loopRemaining = IRInst__getOperandSource(a0,1), loopRemaining != 0 && (this[7] != 0)) &&
-                      ((piVar23 = (int *)IRInst__getOperandSource(a0,1), piVar23[0x20] != 0 &&
-                       ((loopRemaining = RegKind__flagBit0(piVar23[0x26]), loopRemaining != 0 &&
-                        ((piVar23[5] & 2U) == 0)))))) &&
-                     (((loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining == 0 &&
-                       ((((piVar23 = (int *)this[7], piVar23[0x20] != 0 &&
-                          (loopRemaining = RegKind__flagBit0(piVar23[0x26]), loopRemaining != 0)) &&
-                         ((piVar23[5] & 2U) == 0)) &&
-                        ((loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining == 0 &&
-                         (loopRemaining = IRInst__getOperandSource(a0,1), (*(uint *)(loopRemaining + 0x14) & 0x40) != 0))))))
+                         (innerSource = IRInst__getOperandSource(sourceInst,2),
+                         *(int *)(innerSource + 0x94) != *(int *)(this[7] + 0x94))))))))))))) {
+                innerSource = IRInst__getOperandSource(sourceInst,1);
+                if (((innerSource == this[7]) ||
+                    ((((innerSource = IRInst__getOperandSource(sourceInst,1), innerSource != 0 && (this[7] != 0)) &&
+                      ((sourceDef3 = (int *)IRInst__getOperandSource(sourceInst,1), sourceDef3[0x20] != 0 &&
+                       ((innerSource = RegKind__flagBit0(sourceDef3[0x26]), innerSource != 0 &&
+                        ((sourceDef3[5] & 2U) == 0)))))) &&
+                     (((innerSource = (**(code **)(*sourceDef3 + 0x50))(sourceDef3), innerSource == 0 &&
+                       ((((sourceDef3 = (int *)this[7], sourceDef3[0x20] != 0 &&
+                          (innerSource = RegKind__flagBit0(sourceDef3[0x26]), innerSource != 0)) &&
+                         ((sourceDef3[5] & 2U) == 0)) &&
+                        ((innerSource = (**(code **)(*sourceDef3 + 0x50))(sourceDef3), innerSource == 0 &&
+                         (innerSource = IRInst__getOperandSource(sourceInst,1), (*(uint *)(innerSource + 0x14) & 0x40) != 0))))))
                       && (((*(uint *)(this[7] + 0x14) & 0x40) != 0 &&
-                          (loopRemaining = IRInst__getOperandSource(a0,1),
-                          *(int *)(loopRemaining + 0x94) == *(int *)(this[7] + 0x94))))))))) &&
-                   ((loopRemaining = IRInst__getOperandSource(a0,2), loopRemaining == this[8] ||
-                    (((((loopRemaining = IRInst__getOperandSource(a0,2), loopRemaining != 0 && (this[8] != 0)) &&
-                       ((piVar23 = (int *)IRInst__getOperandSource(a0,2), piVar23[0x20] != 0 &&
-                        (((loopRemaining = RegKind__flagBit0(piVar23[0x26]), loopRemaining != 0 &&
-                          ((piVar23[5] & 2U) == 0)) &&
-                         (loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining == 0)))))) &&
-                      ((piVar23 = (int *)this[8], piVar23[0x20] != 0 &&
-                       (loopRemaining = RegKind__flagBit0(piVar23[0x26]), loopRemaining != 0)))) &&
-                     (((piVar23[5] & 2U) == 0 &&
-                      (((loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining == 0 &&
-                        (loopRemaining = IRInst__getOperandSource(a0,2), (*(uint *)(loopRemaining + 0x14) & 0x40) != 0)) &&
+                          (innerSource = IRInst__getOperandSource(sourceInst,1),
+                          *(int *)(innerSource + 0x94) == *(int *)(this[7] + 0x94))))))))) &&
+                   ((innerSource = IRInst__getOperandSource(sourceInst,2), innerSource == this[8] ||
+                    (((((innerSource = IRInst__getOperandSource(sourceInst,2), innerSource != 0 && (this[8] != 0)) &&
+                       ((sourceDef3 = (int *)IRInst__getOperandSource(sourceInst,2), sourceDef3[0x20] != 0 &&
+                        (((innerSource = RegKind__flagBit0(sourceDef3[0x26]), innerSource != 0 &&
+                          ((sourceDef3[5] & 2U) == 0)) &&
+                         (innerSource = (**(code **)(*sourceDef3 + 0x50))(sourceDef3), innerSource == 0)))))) &&
+                      ((sourceDef3 = (int *)this[8], sourceDef3[0x20] != 0 &&
+                       (innerSource = RegKind__flagBit0(sourceDef3[0x26]), innerSource != 0)))) &&
+                     (((sourceDef3[5] & 2U) == 0 &&
+                      (((innerSource = (**(code **)(*sourceDef3 + 0x50))(sourceDef3), innerSource == 0 &&
+                        (innerSource = IRInst__getOperandSource(sourceInst,2), (*(uint *)(innerSource + 0x14) & 0x40) != 0)) &&
                        (((*(uint *)(this[8] + 0x14) & 0x40) != 0 &&
-                        (loopRemaining = IRInst__getOperandSource(a0,2),
-                        *(int *)(loopRemaining + 0x94) == *(int *)(this[8] + 0x94))))))))))))) {
-                  this[0xe] = iVar11;
-                  this[0xf] = iVar12;
-                  if ((iVar13 == 0x9a) && (bVar3 = true, (irInstWords[8] & 2U) == 0)) goto LAB_00198f58;
+                        (innerSource = IRInst__getOperandSource(sourceInst,2),
+                        *(int *)(innerSource + 0x94) == *(int *)(this[8] + 0x94))))))))))))) {
+                  this[0xe] = hwRegister2;
+                  this[0xf] = hwRegister3;
+                  if ((srcOpcode == 0x9a) && (isOpcode9a = true, (irInstWords[8] & 2U) == 0)) goto LAB_00198f58;
                 }
                 goto LAB_00198f54;
               }
-              bVar3 = false;
-              this[0xf] = iVar11;
-              this[0xe] = iVar12;
+              isOpcode9a = false;
+              this[0xf] = hwRegister2;
+              this[0xe] = hwRegister3;
             }
 LAB_00198f58:
-            if (bVar4) {
+            if (maskByteNonZero) {
 LAB_0019941c:
-              bVar4 = false;
+              isOpcode9aAlpha = false;
             }
             else {
-              loopRemaining = IRInst__getOperandSource(a0,1);
-              if (((loopRemaining != this[0xb]) &&
-                  (((((((loopRemaining = IRInst__getOperandSource(a0,1), loopRemaining == 0 || (this[0xb] == 0)) ||
-                       (piVar23 = (int *)IRInst__getOperandSource(a0,1), piVar23[0x20] == 0)) ||
-                      ((loopRemaining = RegKind__flagBit0(piVar23[0x26]), loopRemaining == 0 ||
-                       ((piVar23[5] & 2U) != 0)))) ||
-                     (loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining != 0)) ||
-                    (((piVar23 = (int *)this[0xb], piVar23[0x20] == 0 ||
-                      (loopRemaining = RegKind__flagBit0(piVar23[0x26]), loopRemaining == 0)) ||
-                     (((piVar23[5] & 2U) != 0 ||
-                      (((loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining != 0 ||
-                        (loopRemaining = IRInst__getOperandSource(a0,1), (*(uint *)(loopRemaining + 0x14) & 0x40) == 0)) ||
+              innerSource = IRInst__getOperandSource(sourceInst,1);
+              if (((innerSource != this[0xb]) &&
+                  (((((((innerSource = IRInst__getOperandSource(sourceInst,1), innerSource == 0 || (this[0xb] == 0)) ||
+                       (sourceDef3 = (int *)IRInst__getOperandSource(sourceInst,1), sourceDef3[0x20] == 0)) ||
+                      ((innerSource = RegKind__flagBit0(sourceDef3[0x26]), innerSource == 0 ||
+                       ((sourceDef3[5] & 2U) != 0)))) ||
+                     (innerSource = (**(code **)(*sourceDef3 + 0x50))(sourceDef3), innerSource != 0)) ||
+                    (((sourceDef3 = (int *)this[0xb], sourceDef3[0x20] == 0 ||
+                      (innerSource = RegKind__flagBit0(sourceDef3[0x26]), innerSource == 0)) ||
+                     (((sourceDef3[5] & 2U) != 0 ||
+                      (((innerSource = (**(code **)(*sourceDef3 + 0x50))(sourceDef3), innerSource != 0 ||
+                        (innerSource = IRInst__getOperandSource(sourceInst,1), (*(uint *)(innerSource + 0x14) & 0x40) == 0)) ||
                        ((*(uint *)(this[0xb] + 0x14) & 0x40) == 0)))))))) ||
-                   (loopRemaining = IRInst__getOperandSource(a0,1),
-                   *(int *)(loopRemaining + 0x94) != *(int *)(this[0xb] + 0x94))))) ||
-                 ((loopRemaining = IRInst__getOperandSource(a0,2), loopRemaining != this[10] &&
-                  ((((loopRemaining = IRInst__getOperandSource(a0,2), loopRemaining == 0 || (this[10] == 0)) ||
-                    ((piVar23 = (int *)IRInst__getOperandSource(a0,2), piVar23[0x20] == 0 ||
-                     ((loopRemaining = RegKind__flagBit0(piVar23[0x26]), loopRemaining == 0 || ((piVar23[5] & 2U) != 0)
+                   (innerSource = IRInst__getOperandSource(sourceInst,1),
+                   *(int *)(innerSource + 0x94) != *(int *)(this[0xb] + 0x94))))) ||
+                 ((innerSource = IRInst__getOperandSource(sourceInst,2), innerSource != this[10] &&
+                  ((((innerSource = IRInst__getOperandSource(sourceInst,2), innerSource == 0 || (this[10] == 0)) ||
+                    ((sourceDef3 = (int *)IRInst__getOperandSource(sourceInst,2), sourceDef3[0x20] == 0 ||
+                     ((innerSource = RegKind__flagBit0(sourceDef3[0x26]), innerSource == 0 || ((sourceDef3[5] & 2U) != 0)
                       ))))) ||
-                   (((loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining != 0 ||
-                     (((piVar23 = (int *)this[10], piVar23[0x20] == 0 ||
-                       (loopRemaining = RegKind__flagBit0(piVar23[0x26]), loopRemaining == 0)) ||
-                      ((piVar23[5] & 2U) != 0)))) ||
-                    (((loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining != 0 ||
-                      (loopRemaining = IRInst__getOperandSource(a0,2), (*(uint *)(loopRemaining + 0x14) & 0x40) == 0)) ||
+                   (((innerSource = (**(code **)(*sourceDef3 + 0x50))(sourceDef3), innerSource != 0 ||
+                     (((sourceDef3 = (int *)this[10], sourceDef3[0x20] == 0 ||
+                       (innerSource = RegKind__flagBit0(sourceDef3[0x26]), innerSource == 0)) ||
+                      ((sourceDef3[5] & 2U) != 0)))) ||
+                    (((innerSource = (**(code **)(*sourceDef3 + 0x50))(sourceDef3), innerSource != 0 ||
+                      (innerSource = IRInst__getOperandSource(sourceInst,2), (*(uint *)(innerSource + 0x14) & 0x40) == 0)) ||
                      (((*(uint *)(this[10] + 0x14) & 0x40) == 0 ||
-                      (loopRemaining = IRInst__getOperandSource(a0,2),
-                      *(int *)(loopRemaining + 0x94) != *(int *)(this[10] + 0x94))))))))))))) {
-                loopRemaining = IRInst__getOperandSource(a0,1);
-                if (((loopRemaining == this[10]) ||
-                    ((((loopRemaining = IRInst__getOperandSource(a0,1), loopRemaining != 0 && (this[10] != 0)) &&
-                      (((piVar23 = (int *)IRInst__getOperandSource(a0,1), piVar23[0x20] != 0 &&
-                        ((((loopRemaining = RegKind__flagBit0(piVar23[0x26]), loopRemaining != 0 &&
-                           ((piVar23[5] & 2U) == 0)) &&
-                          (loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining == 0)) &&
-                         ((piVar23 = (int *)this[10], piVar23[0x20] != 0 &&
-                          (loopRemaining = RegKind__flagBit0(piVar23[0x26]), loopRemaining != 0)))))) &&
-                       ((piVar23[5] & 2U) == 0)))) &&
-                     (((loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining == 0 &&
-                       (loopRemaining = IRInst__getOperandSource(a0,1), (*(uint *)(loopRemaining + 0x14) & 0x40) != 0)) &&
+                      (innerSource = IRInst__getOperandSource(sourceInst,2),
+                      *(int *)(innerSource + 0x94) != *(int *)(this[10] + 0x94))))))))))))) {
+                innerSource = IRInst__getOperandSource(sourceInst,1);
+                if (((innerSource == this[10]) ||
+                    ((((innerSource = IRInst__getOperandSource(sourceInst,1), innerSource != 0 && (this[10] != 0)) &&
+                      (((sourceDef3 = (int *)IRInst__getOperandSource(sourceInst,1), sourceDef3[0x20] != 0 &&
+                        ((((innerSource = RegKind__flagBit0(sourceDef3[0x26]), innerSource != 0 &&
+                           ((sourceDef3[5] & 2U) == 0)) &&
+                          (innerSource = (**(code **)(*sourceDef3 + 0x50))(sourceDef3), innerSource == 0)) &&
+                         ((sourceDef3 = (int *)this[10], sourceDef3[0x20] != 0 &&
+                          (innerSource = RegKind__flagBit0(sourceDef3[0x26]), innerSource != 0)))))) &&
+                       ((sourceDef3[5] & 2U) == 0)))) &&
+                     (((innerSource = (**(code **)(*sourceDef3 + 0x50))(sourceDef3), innerSource == 0 &&
+                       (innerSource = IRInst__getOperandSource(sourceInst,1), (*(uint *)(innerSource + 0x14) & 0x40) != 0)) &&
                       (((*(uint *)(this[10] + 0x14) & 0x40) != 0 &&
-                       (loopRemaining = IRInst__getOperandSource(a0,1),
-                       *(int *)(loopRemaining + 0x94) == *(int *)(this[10] + 0x94))))))))) &&
-                   ((loopRemaining = IRInst__getOperandSource(a0,2), loopRemaining == this[0xb] ||
-                    (((((loopRemaining = IRInst__getOperandSource(a0,2), loopRemaining != 0 && (this[0xb] != 0)) &&
-                       (piVar23 = (int *)IRInst__getOperandSource(a0,2), piVar23[0x20] != 0)) &&
-                      (((loopRemaining = RegKind__flagBit0(piVar23[0x26]), loopRemaining != 0 &&
-                        ((piVar23[5] & 2U) == 0)) &&
-                       ((loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining == 0 &&
-                        ((piVar23 = (int *)this[0xb], piVar23[0x20] != 0 &&
-                         (loopRemaining = RegKind__flagBit0(piVar23[0x26]), loopRemaining != 0)))))))) &&
-                     (((piVar23[5] & 2U) == 0 &&
-                      ((((loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining == 0 &&
-                         (loopRemaining = IRInst__getOperandSource(a0,2), (*(uint *)(loopRemaining + 0x14) & 0x40) != 0)) &&
+                       (innerSource = IRInst__getOperandSource(sourceInst,1),
+                       *(int *)(innerSource + 0x94) == *(int *)(this[10] + 0x94))))))))) &&
+                   ((innerSource = IRInst__getOperandSource(sourceInst,2), innerSource == this[0xb] ||
+                    (((((innerSource = IRInst__getOperandSource(sourceInst,2), innerSource != 0 && (this[0xb] != 0)) &&
+                       (sourceDef3 = (int *)IRInst__getOperandSource(sourceInst,2), sourceDef3[0x20] != 0)) &&
+                      (((innerSource = RegKind__flagBit0(sourceDef3[0x26]), innerSource != 0 &&
+                        ((sourceDef3[5] & 2U) == 0)) &&
+                       ((innerSource = (**(code **)(*sourceDef3 + 0x50))(sourceDef3), innerSource == 0 &&
+                        ((sourceDef3 = (int *)this[0xb], sourceDef3[0x20] != 0 &&
+                         (innerSource = RegKind__flagBit0(sourceDef3[0x26]), innerSource != 0)))))))) &&
+                     (((sourceDef3[5] & 2U) == 0 &&
+                      ((((innerSource = (**(code **)(*sourceDef3 + 0x50))(sourceDef3), innerSource == 0 &&
+                         (innerSource = IRInst__getOperandSource(sourceInst,2), (*(uint *)(innerSource + 0x14) & 0x40) != 0)) &&
                         ((*(uint *)(this[0xb] + 0x14) & 0x40) != 0)) &&
-                       (loopRemaining = IRInst__getOperandSource(a0,2),
-                       *(int *)(loopRemaining + 0x94) == *(int *)(this[0xb] + 0x94))))))))))) {
-                  this[0x12] = iVar11;
-                  this[0x13] = iVar12;
-                  if ((iVar13 == 0x9a) && (bVar4 = true, (irInstWords[8] & 2U) == 0)) goto LAB_00199420;
+                       (innerSource = IRInst__getOperandSource(sourceInst,2),
+                       *(int *)(innerSource + 0x94) == *(int *)(this[0xb] + 0x94))))))))))) {
+                  this[0x12] = hwRegister2;
+                  this[0x13] = hwRegister3;
+                  if ((srcOpcode == 0x9a) && (isOpcode9aAlpha = true, (irInstWords[8] & 2U) == 0)) goto LAB_00199420;
                 }
                 goto LAB_0019941c;
               }
-              bVar4 = false;
-              this[0x13] = iVar11;
-              this[0x12] = iVar12;
+              isOpcode9aAlpha = false;
+              this[0x13] = hwRegister2;
+              this[0x12] = hwRegister3;
             }
 LAB_00199420:
-            if ((bVar3) || (bVar4)) {
-              loopPtr = (int *)(irInstWords[8] & 1U ^ 1);
-              IROperand__setModifierBits(irInstWords + 3,1,loopPtr);
+            if ((isOpcode9a) || (isOpcode9aAlpha)) {
+              stagedArg2 = (int *)(irInstWords[8] & 1U ^ 1);
+              IROperand__setModifierBits(irInstWords + 3,1,stagedArg2);
             }
           }
         }
 LAB_0019a030:
-        if (local_7c != 0) {
+        if (sourceReplaced != 0) {
           if (writesAlpha) {
-            (**(code **)(*this + 0x10c))(this,srcIdx,local_5c,local_80,picTableWord);
+            (**(code **)(*this + 0x10c))(this,srcIdx,alphaModAlias,movInst,picTableWord);
           }
           if (writesRgb) {
-            (**(code **)(*this + 0x108))(this,srcIdx,rgbMod,local_80,picTableWord);
+            (**(code **)(*this + 0x108))(this,srcIdx,rgbMod,movInst,picTableWord);
           }
-          a4 = (int *)this[3];
-          loopPtr2 = (int *)0x0;
-          loopPtr = local_80;
-          IRInst__setOperandSource(irInst,srcIdx,local_80,0,a4);
+          stagedArg4 = (int *)this[3];
+          stagedArg3 = (int *)0x0;
+          stagedArg2 = movInst;
+          IRInst__setOperandSource(irInst,srcIdx,movInst,0,stagedArg4);
           if (srcIdx == (int *)0x0) {
             irInst[0x27] = picTableWord;
           }
           else {
-            loopRemaining = IRInst__getOperandRecord(irInst,srcIdx);
-            *(int *)(loopRemaining + 0x10) = picTableWord;
+            operandRecordTmp = IRInst__getOperandRecord(irInst,srcIdx);
+            *(int *)(operandRecordTmp + 0x10) = picTableWord;
           }
         }
       }
       srcIdx = (int *)((int)srcIdx + 1);
       irInstWords = irInstWords + 6;
-    } while ((int)srcIdx <= iVar8);
+    } while ((int)srcIdx <= sourceCount);
   }
-  else if (0 < iVar8) goto LAB_00198290;
+  else if (0 < sourceCount) goto LAB_00198290;
   (**(code **)(*this + 0x118))(this,this[0x20],this + 0xd,this[0x21],this + 0x11);
   (**(code **)(*this + 0x11c))
-            (this,irInst,local_6c,rgbSelect,rgbMod,local_70,alphaSelect,local_5c);
+            (this,irInst,classifyWritesRgb,rgbSelect,rgbMod,classifyWritesAlpha,alphaSelect,alphaModAlias);
   if (irInst[0x26] == 0x2c) {
 LAB_0019a1f4:
     selectMethod = *(code **)(*this + 0x124);
   }
   else {
-    if ((((irInst[0x20] != 0) && (iVar8 = RegKind__flagBit0(irInst[0x26]), iVar8 != 0)) &&
-        (((irInst[5] & 2U) == 0 && (iVar8 = (**(code **)(*irInst + 0x50))(irInst), iVar8 == 0))))
-       || (iVar8 = (**(code **)(*irInst + 0x50))(irInst), iVar8 != 0)) {
+    if ((((irInst[0x20] != 0) && (sourceCount = RegKind__flagBit0(irInst[0x26]), sourceCount != 0)) &&
+        (((irInst[5] & 2U) == 0 && (sourceCount = (**(code **)(*irInst + 0x50))(irInst), sourceCount == 0))))
+       || (sourceCount = (**(code **)(*irInst + 0x50))(irInst), sourceCount != 0)) {
       selectMethod = *(code **)(*this + 0x120);
-      uVar14 = thunk_FUN_00134de8(*(undefined4 *)(this[3] + 0x6c4),irInst);
-      (*selectMethod)(this,local_6c,local_70,irInst,uVar14);
+      allocatedRegister = thunk_FUN_00134de8(*(undefined4 *)(this[3] + 0x6c4),irInst);
+      (*selectMethod)(this,classifyWritesRgb,classifyWritesAlpha,irInst,allocatedRegister);
       goto LAB_0019a230;
     }
     if ((irInst[5] & 2U) != 0) goto LAB_0019a1f4;
     if ((irInst[5] & 0x80000U) == 0) goto LAB_0019a230;
     selectMethod = *(code **)(*this + 0x128);
   }
-  (*selectMethod)(this,local_6c,local_70,irInst);
+  (*selectMethod)(this,classifyWritesRgb,classifyWritesAlpha,irInst);
 LAB_0019a230:
   if (classifyRgbCopy != 0) {
-    (**(code **)(*this + 300))(this,local_f8,local_68,irInst);
+    (**(code **)(*this + 300))(this,rgbHwOpcode,irOpcode,irInst);
   }
-  if (uVar10 != 0) {
-    (**(code **)(*this + 0x130))(this,local_f4,local_68,irInst);
+  if (classifyAlphaCopy != 0) {
+    (**(code **)(*this + 0x130))(this,alphaHwOpcode,irOpcode,irInst);
   }
   return;
 }
@@ -2810,6 +2841,9 @@ int R300VMachineAssembler__encodeDualMathOperands(this, inst, instructionWords)
   int *inst;
   uint *instructionWords;
 {
+  undefined4 sourceDef2;
+  undefined4 sourceDef;
+  int operandRecord;
   uint source1Flags;
   int *operandVReg;
   byte bVar1;
@@ -2860,8 +2894,8 @@ int R300VMachineAssembler__encodeDualMathOperands(this, inst, instructionWords)
   }
   else {
     uVar12 = *(undefined4 *)(*(int *)(this + 0xc) + 0x6c4);
-    uVar7 = IRInst__getOperandSource(operandVReg,1);
-    srcOffsetPair = thunk_FUN_00134de8(uVar12,uVar7);
+    sourceDef2 = IRInst__getOperandSource(operandVReg,1);
+    srcOffsetPair = thunk_FUN_00134de8(uVar12,sourceDef2);
   }
   iVar6 = (int)((ulonglong)srcOffsetPair >> 0x20);
   if (loopIndex == 1) {
@@ -2926,9 +2960,9 @@ int R300VMachineAssembler__encodeDualMathOperands(this, inst, instructionWords)
     *dualMathWord = (uVar10 & 1) << 0x19 | uVar2 | uVar3 & 0xfdff1fff;
     loopIndex = (**(code **)(*inst + 0x14))(inst);
     if (1 < loopIndex) {
-      uVar7 = IRInst__getOperandSource(inst,2);
+      sourceDef2 = IRInst__getOperandSource(inst,2);
       loopIndex = IRInst__getOperandRecord(inst,2);
-      uVar2 = ((int (*)())vsSourceSelectForConstant)(uVar7,(uint)*(byte *)(loopIndex + 0x10),constNegated);
+      uVar2 = ((int (*)())vsSourceSelectForConstant)(sourceDef2,(uint)*(byte *)(loopIndex + 0x10),constNegated);
       uVar3 = *dualMathWord;
       uVar2 = (uVar2 & 7) << 0x10;
       *dualMathWord = uVar2 | uVar3 & 0xfff8ffff;
@@ -2981,11 +3015,11 @@ int R300VMachineAssembler__encodeDualMathOperands(this, inst, instructionWords)
       loopIndex = 1;
       if (0 < operandVReg[0x21]) {
         do {
-          iVar6 = IRInst__getOperandRecord(operandVReg,loopIndex);
-          bVar1 = *(byte *)(iVar6 + 0x13);
+          operandRecord = IRInst__getOperandRecord(operandVReg,loopIndex);
+          bVar1 = *(byte *)(operandRecord + 0x13);
           if (bVar1 != 4) {
-            uVar12 = IRInst__getOperandSource(operandVReg,loopIndex);
-            uVar3 = ((int (*)())vsSourceSelectForConstant)(uVar12,(uint)bVar1,constNegated);
+            sourceDef = IRInst__getOperandSource(operandVReg,loopIndex);
+            uVar3 = ((int (*)())vsSourceSelectForConstant)(sourceDef,(uint)bVar1,constNegated);
             goto LAB_0019cf10;
           }
           loopIndex = loopIndex + 1;
@@ -3007,11 +3041,11 @@ LAB_0019cf10:
       loopIndex = 1;
       if (0 < operandVReg[0x21]) {
         do {
-          iVar6 = IRInst__getOperandRecord(operandVReg,loopIndex);
-          bVar1 = *(byte *)(iVar6 + 0x10);
+          operandRecord = IRInst__getOperandRecord(operandVReg,loopIndex);
+          bVar1 = *(byte *)(operandRecord + 0x10);
           if (bVar1 != 4) {
-            uVar7 = IRInst__getOperandSource(operandVReg,loopIndex);
-            uVar2 = ((int (*)())vsSourceSelectForConstant)(uVar7,(uint)bVar1,constNegated);
+            sourceDef2 = IRInst__getOperandSource(operandVReg,loopIndex);
+            uVar2 = ((int (*)())vsSourceSelectForConstant)(sourceDef2,(uint)bVar1,constNegated);
             goto LAB_0019d014;
           }
           loopIndex = loopIndex + 1;

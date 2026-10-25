@@ -748,6 +748,7 @@ int FudoPs__peepholeCombine(this, inst, consumerSrcIndex, inst2, program, passTh
   undefined4 passThroughR8;
   undefined4 passThroughR9;
 {
+  undefined4 sourceDef;
   undefined4 srcInst;
   undefined4 newSource;
   undefined4 inst21;
@@ -1109,8 +1110,8 @@ LAB_00193490:
           ((*(uint *)(loopRemaining + 0x14) & 0x200) != 0)) &&
          (loopIndex = IRInst__getOperandSource(loopRemaining,*(undefined4 *)(loopRemaining + 0x84)),
          *(int *)(*(int *)(loopIndex + 0x88) + 8) == 0x4d)) {
-        uVar21 = IRInst__getOperandSource(loopRemaining,*(undefined4 *)(loopRemaining + 0x84));
-        loopIndex = IRInst__hasSingleUse(uVar21,program);
+        sourceDef = IRInst__getOperandSource(loopRemaining,*(undefined4 *)(loopRemaining + 0x84));
+        loopIndex = IRInst__hasSingleUse(sourceDef,program);
         if ((loopIndex != 0) &&
            (loopIndex = IRInst__getOperandSource(loopRemaining,*(undefined4 *)(loopRemaining + 0x84)),
            (*(uint *)(loopIndex + 0x14) & 0x200) == 0)) {

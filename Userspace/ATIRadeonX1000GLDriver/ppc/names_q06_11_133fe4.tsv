@@ -1,0 +1,91 @@
+local	FUN_00133fe4	param_1	allocator	INFERRED	register allocator object; +0x2c -> pass object (+0x6c4 program, +0x378 arena)
+use	FUN_00133fe4	iVar10	program	INFERRED	the Program (pass +0x6c4)	^\s*iVar10\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x2c\)\ \+\ 0x6c4\);$	+2
+use	FUN_00133fe4	iVar10	program	INFERRED	the Program (pass +0x6c4)	^\s*iVar12\ =\ \*\(int\ \*\)\(iVar10\ \+\ 900\);$	+2
+use	FUN_00133fe4	iVar10	program	INFERRED	the Program (pass +0x6c4)	^\s*iVar7\ =\ \*\(int\ \*\)\(iVar10\ \+\ 0x454\);$	+1
+use	FUN_00133fe4	iVar10	program	INFERRED	the Program (pass +0x6c4)	^\s*iVar7\ =\ \*\(int\ \*\)\(iVar10\ \+\ 0x454\)\ \+\ 1;$	+2
+use	FUN_00133fe4	iVar10	program	INFERRED	the Program (pass +0x6c4)	^\s*\(\(int\ \(\*\)\(\)\)FUN_00131c74\)\(iVar10,uVar1,iVar7\ <<\ 2\);$	+1
+use	FUN_00133fe4	uVar1	spillState	INFERRED	FUN_00131c10: per-run spill state created for the program	^\s*uVar1\ =\ \(\(int\ \(\*\)\(\)\)FUN_00131c10\)\(iVar10\);$	+1
+use	FUN_00133fe4	uVar1	spillState	INFERRED	FUN_00131c10: per-run spill state created for the program	^\s*uVar5\ =\ \(\(int\ \(\*\)\(\)\)FUN_001318a4\)\(param_1,\*\(undefined4\ \*\)\(iVar12\ \+\ 0x94\),uVar1\);$	+1
+use	FUN_00133fe4	uVar1	spillState	INFERRED	FUN_00131c10: per-run spill state created for the program	^\s*FUN_001312f4\(iVar12,uVar1,uVar5,uVar6,\*\(undefined4\ \*\)\(param_1\ \+\ 0x2c\)\);$	+1
+use	FUN_00133fe4	uVar1	spillState	INFERRED	FUN_00131c10: per-run spill state created for the program	^\s*\(\(int\ \(\*\)\(\)\)FUN_00131c74\)\(iVar10,uVar1,iVar7\ <<\ 2\);$	+1
+use	FUN_00133fe4	uVar1	spillState	INFERRED	FUN_00131c10: per-run spill state created for the program	^\s*iVar3\ =\ \(\(int\ \(\*\)\(\)\)FUN_001318a4\)\(param_1,iVar15,uVar1\);$	+1
+use	FUN_00133fe4	uVar1	spillState	INFERRED	FUN_00131c10: per-run spill state created for the program	^\s*iVar15\ =\ FUN_001311cc\(uVar5,uVar13,uVar1,iVar3,uVar6,$	+2
+use	FUN_00133fe4	uVar17	insertedReload	INFERRED	set when a reload/spill was inserted in this run (returned)	^\s*uVar17\ =\ 0;$	+1
+use	FUN_00133fe4	uVar17	insertedReload	INFERRED	set when a reload/spill was inserted in this run (returned)	^\s*uVar17\ =\ 1;$	+1
+use	FUN_00133fe4	uVar17	insertedReload	INFERRED	set when a reload/spill was inserted in this run (returned)	^\s*return\ uVar17;$	+1
+use	FUN_00133fe4	uVar17	insertedReload	INFERRED	set when a reload/spill was inserted in this run (returned)	^\s*uVar17\ =\ 1;$@2	+1
+use	FUN_00133fe4	iVar7	nextBlock	INFERRED	next block in the block list	^\s*iVar7\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar10\ \+\ 900\)\ \+\ 8\);$	+1
+use	FUN_00133fe4	iVar7	nextBlock	INFERRED	next block in the block list	^\s*if\ \(iVar7\ ==\ 0\)\ \{$	+1
+use	FUN_00133fe4	iVar7	nextBlock	INFERRED	next block in the block list	^\s*iVar7\ =\ \*\(int\ \*\)\(iVar12\ \+\ 8\);$	+1
+use	FUN_00133fe4	iVar7	nextBlock	INFERRED	next block in the block list	^\s*iVar12\ =\ iVar7;$	+2
+use	FUN_00133fe4	iVar7	spillTempCount	INFERRED	program word 0x454: spill temporaries created so far	^\s*iVar7\ =\ \*\(int\ \*\)\(iVar10\ \+\ 0x454\);$	+1
+use	FUN_00133fe4	iVar7	spillTempCount	INFERRED	program word 0x454: spill temporaries created so far	^\s*iVar7\ =\ \*\(int\ \*\)\(iVar10\ \+\ 0x454\)\ \+\ 1;$	+2
+use	FUN_00133fe4	iVar7	spillTempCount	INFERRED	program word 0x454: spill temporaries created so far	^\s*\(\(int\ \(\*\)\(\)\)FUN_00131c74\)\(iVar10,uVar1,iVar7\ <<\ 2\);$	+1
+use	FUN_00133fe4	iVar7	instQuery78	INFERRED	instruction vtable slot 0x78 test	^\s*iVar7\ =\ \(\*\*\(code\ \*\*\)\(\*piVar18\ \+\ 0x78\)\)\(piVar18\);$	+2
+use	FUN_00133fe4	iVar12	block	INFERRED	block being walked	^\s*iVar12\ =\ \*\(int\ \*\)\(iVar10\ \+\ 900\);$	+1
+use	FUN_00133fe4	iVar12	block	INFERRED	block being walked	^\s*piVar16\ =\ \(int\ \*\)\(\*\(int\ \*\*\)\(iVar12\ \+\ 0x98\)\)\[2\];$	+2
+use	FUN_00133fe4	iVar12	block	INFERRED	block being walked	^\s*iVar7\ =\ \*\(int\ \*\)\(iVar12\ \+\ 8\);$	+1
+use	FUN_00133fe4	iVar12	block	INFERRED	block being walked	^\s*iVar12\ =\ iVar7;$	+1
+use	FUN_00133fe4	iVar12	pendingCount	INFERRED	filled count of the pending-spill vector	^\s*iVar12\ =\ puVar2\[2\];$	+2
+use	FUN_00133fe4	iVar12	pendingCount	INFERRED	filled count of the pending-spill vector	^\s*if\ \(iVar12\ ==\ 0\)\ \{$	+1
+use	FUN_00133fe4	iVar12	pendingCount	INFERRED	filled count of the pending-spill vector	^\s*if\ \(iVar12\ \-\ 1U\ <\ \(uint\)puVar2\[2\]\)\ \{$	+2
+use	FUN_00133fe4	iVar12	pendingCount	INFERRED	filled count of the pending-spill vector	^\s*iVar12\ =\ puVar2\[2\];$@2	+2
+use	FUN_00133fe4	iVar12	pendingInst	INFERRED	instruction popped from the pending-spill vector	^\s*iVar12\ =\ \*piVar16;$	+1
+use	FUN_00133fe4	iVar12	pendingInst	INFERRED	instruction popped from the pending-spill vector	^\s*uVar5\ =\ FUN_001308e0\(iVar12\);$	+1
+use	FUN_00133fe4	iVar12	pendingInst	INFERRED	instruction popped from the pending-spill vector	^\s*uVar5\ =\ \(\(int\ \(\*\)\(\)\)FUN_001318a4\)\(param_1,\*\(undefined4\ \*\)\(iVar12\ \+\ 0x94\),uVar1\);$	+3
+use	FUN_00133fe4	iVar15	sourceRegister	INFERRED	register number of the spilled source operand	^\s*iVar15\ =\ piVar16\[0x25\];$	+2
+use	FUN_00133fe4	iVar15	sourceRegister	INFERRED	register number of the spilled source operand	^\s*iVar3\ =\ \(\(int\ \(\*\)\(\)\)FUN_001318a4\)\(param_1,iVar15,uVar1\);$	+1
+use	FUN_00133fe4	iVar15	reloadSource	INFERRED	reload source found for this register (0 when a new one is created)	^\s*iVar15\ =\ FUN_00130a08\(piVar18,\*\(undefined4\ \*\)\(iVar3\ \+\ 0x13c\)\);$	+2
+use	FUN_00133fe4	iVar15	reloadSource	INFERRED	reload source found for this register (0 when a new one is created)	^\s*iVar15\ =\ FUN_001311cc\(uVar5,uVar13,uVar1,iVar3,uVar6,$	+2
+use	FUN_00133fe4	iVar15	reloadSource	INFERRED	reload source found for this register (0 when a new one is created)	^\s*FUN_00106004\(piVar18,iVar7,iVar15,0,\*\(undefined4\ \*\)\(param_1\ \+\ 0x2c\)\);$	+1
+use	FUN_00133fe4	piVar16	pendingElemRef	INFERRED	element reference into the pending-spill vector	^\s*piVar16\ =\ \(int\ \*\)0x0;$	+1
+use	FUN_00133fe4	piVar16	pendingElemRef	INFERRED	element reference into the pending-spill vector	^\s*piVar16\ =\ \(int\ \*\)\(\(iVar12\ \-\ 1U\)\ \*\ 4\ \+\ puVar2\[3\]\);$	+1
+use	FUN_00133fe4	piVar16	pendingElemRef	INFERRED	element reference into the pending-spill vector	^\s*iVar12\ =\ \*piVar16;$	+1
+use	FUN_00133fe4	piVar16	nextInstLink	INFERRED	link to the instruction after the cursor	^\s*piVar16\ =\ \(int\ \*\)\(\*\(int\ \*\*\)\(iVar12\ \+\ 0x98\)\)\[2\];$	+1
+use	FUN_00133fe4	piVar16	nextInstLink	INFERRED	link to the instruction after the cursor	^\s*if\ \(piVar16\ !=\ \(int\ \*\)0x0\)\ \{$	+1
+use	FUN_00133fe4	piVar16	nextInstLink	INFERRED	link to the instruction after the cursor	^\s*piVar9\ =\ piVar16;$	+1
+use	FUN_00133fe4	piVar16	nextInstLink	INFERRED	link to the instruction after the cursor	^\s*piVar16\ =\ \(int\ \*\)piVar9\[2\];$	+1
+use	FUN_00133fe4	iVar3	regKindFlag	INFERRED	RegKind flag test of the source register kind	^\s*if\ \(\(\(\(piVar16\[0x20\]\ !=\ 0\)\ \&\&\ \(iVar3\ =\ FUN_00126760\(piVar16\[0x26\]\),\ iVar3\ !=\ 0\)\)\ \&\&$	+3
+use	FUN_00133fe4	iVar3	regKindFlag	INFERRED	RegKind flag test of the source register kind	^\s*iVar3\ =\ FUN_001309bc\(param_1,iVar15\);$	+3
+use	FUN_00133fe4	iVar3	regKindFlag	INFERRED	RegKind flag test of the source register kind	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(iVar3\ \+\ 0x14\)\)\(piVar18\);$	+2
+use	FUN_00133fe4	iVar3	regKindFlag	INFERRED	RegKind flag test of the source register kind	^\s*iVar3\ =\ \(\(int\ \(\*\)\(\)\)FUN_001318a4\)\(param_1,iVar15,uVar1\);$	+2
+use	FUN_00133fe4	iVar3	regKindFlag	INFERRED	RegKind flag test of the source register kind	^\s*iVar15\ =\ FUN_001311cc\(uVar5,uVar13,uVar1,iVar3,uVar6,$	+2
+use	FUN_00133fe4	puVar4	pendingSlotRef	INFERRED	slot reference into the pending-spill vector	^\s*puVar4\ =\ \(undefined4\ \*\)\(uVar14\ \*\ 4\ \+\ puVar2\[3\]\);$	+1
+use	FUN_00133fe4	puVar4	pendingSlotRef	INFERRED	slot reference into the pending-spill vector	^\s*puVar4\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar11,uVar14\);$	+1
+use	FUN_00133fe4	puVar4	pendingSlotRef	INFERRED	slot reference into the pending-spill vector	^\s*\*puVar4\ =\ piVar16;$	+1
+use	FUN_00133fe4	uVar5	spillLocationA	INFERRED	FUN_001308e0: spill location of the pending instruction	^\s*uVar5\ =\ FUN_001308e0\(iVar12\);$	+2
+use	FUN_00133fe4	uVar5	spillSlotB	INFERRED	FUN_001318a4: spill slot for the register	^\s*uVar5\ =\ \(\(int\ \(\*\)\(\)\)FUN_001318a4\)\(param_1,\*\(undefined4\ \*\)\(iVar12\ \+\ 0x94\),uVar1\);$	+1
+use	FUN_00133fe4	uVar5	spillSlotB	INFERRED	FUN_001318a4: spill slot for the register	^\s*FUN_001312f4\(iVar12,uVar1,uVar5,uVar6,\*\(undefined4\ \*\)\(param_1\ \+\ 0x2c\)\);$	+1
+use	FUN_00133fe4	uVar5	spillAddress	INFERRED	FUN_00130424: spill address object	^\s*uVar5\ =\ FUN_00130424\(param_1\);$	+1
+use	FUN_00133fe4	uVar5	spillAddress	INFERRED	FUN_00130424: spill address object	^\s*iVar15\ =\ FUN_001311cc\(uVar5,uVar13,uVar1,iVar3,uVar6,$	+2
+use	FUN_00133fe4	uVar5	reloadModeB	INFERRED	FUN_00130904 result for the instruction	^\s*uVar5\ =\ FUN_00130904\(piVar18\);$	+2
+use	FUN_00133fe4	uVar6	spillModeA	INFERRED	thunk_FUN_001307f8 result for the pending instruction	^\s*uVar6\ =\ thunk_FUN_001307f8\(iVar12\);$	+2
+use	FUN_00133fe4	uVar6	reloadModeA	INFERRED	FUN_00130904 result for the instruction	^\s*uVar6\ =\ FUN_00130904\(piVar18\);$	+3
+use	FUN_00133fe4	piVar9	nextInstB	INFERRED	instruction after the cursor kept for the list advance	^\s*piVar9\ =\ piVar16;$	+1
+use	FUN_00133fe4	piVar9	nextInstB	INFERRED	instruction after the cursor kept for the list advance	^\s*piVar9\ =\ \(int\ \*\)piVar18\[2\];$	+1
+use	FUN_00133fe4	piVar9	nextInstB	INFERRED	instruction after the cursor kept for the list advance	^\s*piVar16\ =\ \(int\ \*\)piVar9\[2\];$	+3
+use	FUN_00133fe4	piVar9	foundPendingRef	INFERRED	element reference of the entry found in the pending vector	^\s*piVar9\ =\ \(int\ \*\)0x0;$	+1
+use	FUN_00133fe4	piVar9	foundPendingRef	INFERRED	element reference of the entry found in the pending vector	^\s*piVar9\ =\ \(int\ \*\)\(uVar8\ \*\ 4\ \+\ puVar2\[3\]\);$	+1
+use	FUN_00133fe4	piVar9	foundPendingRef	INFERRED	element reference of the entry found in the pending vector	^\s*if\ \(piVar16\ ==\ \(int\ \*\)\*piVar9\)\ goto\ code_r0x001342f8;$	+1
+use	FUN_00133fe4	uVar13	operandSwizzle	INFERRED	swizzle word of the spilled operand	^\s*uVar13\ =\ \*\(undefined4\ \*\)\(iVar15\ \+\ 0x10\);$	+1
+use	FUN_00133fe4	uVar13	operandSwizzle	INFERRED	swizzle word of the spilled operand	^\s*iVar15\ =\ FUN_001311cc\(uVar5,uVar13,uVar1,iVar3,uVar6,$	+2
+use	FUN_00133fe4	uVar14	pendingCountB	INFERRED	filled count of the pending-spill vector	^\s*uVar14\ =\ puVar2\[2\];$	+2
+use	FUN_00133fe4	uVar14	pendingCountB	INFERRED	filled count of the pending-spill vector	^\s*uVar19\ =\ uVar14;$	+1
+use	FUN_00133fe4	uVar14	pendingCountB	INFERRED	filled count of the pending-spill vector	^\s*if\ \(uVar8\ <\ uVar14\)\ \{$	+1
+use	FUN_00133fe4	uVar14	pendingCountB	INFERRED	filled count of the pending-spill vector	^\s*if\ \(uVar14\ <\ \*puVar11\)\ \{$	+4
+use	FUN_00133fe4	uVar14	pendingCountB	INFERRED	filled count of the pending-spill vector	^\s*puVar4\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar11,uVar14\);$	+1
+use	FUN_00133fe4	piVar18	inst	INFERRED	instruction whose sources are examined	^\s*piVar18\ =\ \*\(int\ \*\*\)\(iVar12\ \+\ 0x98\);$	+1
+use	FUN_00133fe4	piVar18	inst	INFERRED	instruction whose sources are examined	^\s*if\ \(\(\(piVar18\[5\]\ \&\ 1U\)\ !=\ 0\)\ \&\&\ \(\*\(int\ \*\)\(piVar18\[0x22\]\ \+\ 8\)\ !=\ 0x8e\)\)\ \{$	+3
+use	FUN_00133fe4	piVar18	inst	INFERRED	instruction whose sources are examined	^\s*piVar16\ =\ \(int\ \*\)FUN_00105594\(piVar18,iVar7\);$	+1
+use	FUN_00133fe4	piVar18	inst	INFERRED	instruction whose sources are examined	^\s*iVar3\ =\ \*piVar18;$	+1
+use	FUN_00133fe4	piVar18	inst	INFERRED	instruction whose sources are examined	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(iVar3\ \+\ 0x14\)\)\(piVar18\);$	+3
+use	FUN_00133fe4	piVar18	inst	INFERRED	instruction whose sources are examined	^\s*iVar15\ =\ FUN_00130a08\(piVar18,\*\(undefined4\ \*\)\(iVar3\ \+\ 0x13c\)\);$	+1
+use	FUN_00133fe4	piVar18	inst	INFERRED	instruction whose sources are examined	^\s*iVar15\ =\ FUN_001054ec\(piVar18,iVar7\);$	+1
+use	FUN_00133fe4	piVar18	inst	INFERRED	instruction whose sources are examined	^\s*uVar6\ =\ FUN_00130904\(piVar18\);$	+1
+use	FUN_00133fe4	piVar18	inst	INFERRED	instruction whose sources are examined	^\s*FUN_00106004\(piVar18,iVar7,iVar15,0,\*\(undefined4\ \*\)\(param_1\ \+\ 0x2c\)\);$	+1
+use	FUN_00133fe4	piVar18	inst	INFERRED	instruction whose sources are examined	^\s*uVar5\ =\ FUN_00130904\(piVar18\);$	+2
+use	FUN_00133fe4	piVar18	inst	INFERRED	instruction whose sources are examined	^\s*\}\ while\ \(iVar7\ <=\ piVar18\[0x21\]\);$	+1
+use	FUN_00133fe4	piVar18	inst	INFERRED	instruction whose sources are examined	^\s*piVar9\ =\ \(int\ \*\)piVar18\[2\];$	+1
+use	FUN_00133fe4	piVar18	inst	INFERRED	instruction whose sources are examined	^\s*piVar18\ =\ piVar9;$	+1
+use	FUN_00133fe4	uVar19	searchRemaining	INFERRED	iterations left in the linear search of the pending vector	^\s*uVar19\ =\ uVar14;$	+1
+use	FUN_00133fe4	uVar19	searchRemaining	INFERRED	iterations left in the linear search of the pending vector	^\s*uVar19\ =\ uVar19\ \-\ 1;$	+2

@@ -1,0 +1,327 @@
+local	FUN_0012f0f8	param_2	loopStack	INFERRED	vector whose last element is removed once the loop is unrolled (Vector__removeAt(param_2, count - 1))
+local	FUN_0012f0f8	param_4	lastBlockRef	INFERRED	cursor to the last block placed so far; updated as clones are inserted (Program__insertBlockAfter(*param_4, ...))
+local	FUN_0012f0f8	param_5	newBlockOut	INFERRED	receives the new trailing block (Block__ctor_ea020 result)
+local	FUN_0012f0f8	param_6	blockCounter	INFERRED	count of blocks in the program, decremented once
+use	FUN_0012f0f8	piVar19	counterRefArg	INFERRED	stale copy of param_6 (blockCounter) passed on to Block__getBranchInst	^\s*piVar19\ =\ param_6;$	+1
+use	FUN_0012f0f8	piVar19	counterRefArg	INFERRED	stale copy of param_6 (blockCounter) passed on to Block__getBranchInst	^\s*if\ \(\(\(int\)\(\(ulonglong\)uVar29\ >>\ 0x20\)\ !=\ 0\)\ \&\&$	+3
+use	FUN_0012f0f8	piVar19	bodyInst	INFERRED	instruction iterated over the dead loop blocks	^\s*piVar19\ =\ \*\(int\ \*\*\)\(iVar9\ \+\ 0x98\);$	+1
+use	FUN_0012f0f8	piVar19	bodyInst	INFERRED	instruction iterated over the dead loop blocks	^\s*if\ \(\(piVar19\[5\]\ \&\ 1U\)\ !=\ 0\)\ \{$	+3
+use	FUN_0012f0f8	piVar19	bodyInst	INFERRED	instruction iterated over the dead loop blocks	^\s*piVar27\ =\ piVar19;$	+1
+use	FUN_0012f0f8	piVar19	bodyInst	INFERRED	instruction iterated over the dead loop blocks	^\s*iVar7\ =\ \(\*\*\(code\ \*\*\)\(\*piVar19\ \+\ 0x14\)\)\(piVar19\);$	+1
+use	FUN_0012f0f8	piVar19	bodyInst	INFERRED	instruction iterated over the dead loop blocks	^\s*FUN_001234d8\(piVar27\[0x29\],piVar19\);$	+1
+use	FUN_0012f0f8	piVar19	bodyInst	INFERRED	instruction iterated over the dead loop blocks	^\s*\(\*\*\(code\ \*\*\)\(\*piVar19\ \+\ 0xc\)\)\(piVar19,0,\*\(undefined4\ \*\)\(param_1\ \+\ 8\)\);$	+2
+use	FUN_0012f0f8	piVar19	bodyInst	INFERRED	instruction iterated over the dead loop blocks	^\s*piVar27\ =\ \(int\ \*\)piVar19\[2\];$@2	+1
+use	FUN_0012f0f8	piVar19	bodyInst	INFERRED	instruction iterated over the dead loop blocks	^\s*piVar19\ =\ piVar27;$	+1
+use	FUN_0012f0f8	piVar19	exitInst	INFERRED	instruction iterated over the original loop header block	^\s*piVar19\ =\ \*\(int\ \*\*\)\(param_3\ \+\ 0x98\);$	+1
+use	FUN_0012f0f8	piVar19	exitInst	INFERRED	instruction iterated over the original loop header block	^\s*if\ \(\(piVar19\[5\]\ \&\ 1U\)\ !=\ 0\)\ \{$@2	+2
+use	FUN_0012f0f8	piVar19	exitInst	INFERRED	instruction iterated over the original loop header block	^\s*if\ \(\*\(int\ \*\)\(piVar19\[0x22\]\ \+\ 4\)\ ==\ 3\)\ \{$	+1
+use	FUN_0012f0f8	piVar19	exitInst	INFERRED	instruction iterated over the original loop header block	^\s*FUN_001234d8\(piVar19\[0x29\],piVar19\);$	+2
+use	FUN_0012f0f8	piVar19	exitInst	INFERRED	instruction iterated over the original loop header block	^\s*FUN_001046c8\(piVar19,1,\*\(undefined4\ \*\)\(\*\(int\ \*\)\(iVar5\ \+\ 0x148\)\ \+\ 0x8c\)\);$	+4
+use	FUN_0012f0f8	piVar19	exitInst	INFERRED	instruction iterated over the original loop header block	^\s*piVar27\ =\ \(int\ \*\)piVar19\[2\];$@4	+1
+use	FUN_0012f0f8	piVar19	exitInst	INFERRED	instruction iterated over the original loop header block	^\s*FUN_001234d8\(piVar19\[0x29\],piVar19\);$@2	+3
+use	FUN_0012f0f8	piVar19	exitInst	INFERRED	instruction iterated over the original loop header block	^\s*piVar19\ =\ piVar27;$@2	+1
+use	FUN_0012f0f8	uVar26	compiler	INFERRED	program->compiler (param_1 + 8)	^\s*uVar26\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 8\);$	+1
+use	FUN_0012f0f8	uVar26	compiler	INFERRED	program->compiler (param_1 + 8)	^\s*iVar9\ =\ FUN_0012aa78\(uVar26,iVar6,iVar7,iVar8,param_3\);$	+1
+use	FUN_0012f0f8	uVar26	compiler	INFERRED	program->compiler (param_1 + 8)	^\s*FUN_0012aae0\(uVar26,iVar6\);$	+1
+use	FUN_0012f0f8	uVar26	fromClone	INFERRED	clone of the block that the successor edge starts from	^\s*uVar26\ =\ \*puVar17;$	+1
+use	FUN_0012f0f8	uVar26	fromClone	INFERRED	clone of the block that the successor edge starts from	^\s*FUN_000e8e4c\(uVar26,\*puVar17\);$	+1
+use	FUN_0012f0f8	iVar3	successorBlock	INFERRED	successor block of an original block read from its successor vector	^\s*iVar3\ =\ \*\(int\ \*\)\(iVar22\ \+\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar23\ \+\ 0xd0\)\ \+\ 8\)\);$	+2
+use	FUN_0012f0f8	iVar3	successorBlock	INFERRED	successor block of an original block read from its successor vector	^\s*uVar16\ =\ \*\(uint\ \*\)\(iVar3\ \+\ 0xc0\);$	+1
+use	FUN_0012f0f8	iVar22	instQuery34	INFERRED	instruction vtable slot 0x34 test	^\s*iVar22\ =\ \(\*\*\(code\ \*\*\)\(\*piVar18\ \+\ 0x34\)\)\(piVar18\);$	+2
+use	FUN_0012f0f8	iVar22	instQuery38	INFERRED	instruction vtable slot 0x38 test	^\s*iVar22\ =\ \(\*\*\(code\ \*\*\)\(\*piVar18\ \+\ 0x38\)\)\(piVar18\);$	+2
+use	FUN_0012f0f8	iVar22	extraBranchArg	INFERRED	stale register argument passed on to Block__getBranchInst	^\s*iVar22\ =\ 0;$	+1
+use	FUN_0012f0f8	iVar22	extraBranchArg	INFERRED	stale register argument passed on to Block__getBranchInst	^\s*iVar22\ =\ param_1;$	+1
+use	FUN_0012f0f8	iVar22	extraBranchArg	INFERRED	stale register argument passed on to Block__getBranchInst	^\s*if\ \(\(\(int\)\(\(ulonglong\)uVar29\ >>\ 0x20\)\ !=\ 0\)\ \&\&$	+3
+use	FUN_0012f0f8	iVar22	successorOffset	INFERRED	byte offset into the successor pointer array	^\s*iVar22\ =\ 0;$@2	+1
+use	FUN_0012f0f8	iVar22	successorOffset	INFERRED	byte offset into the successor pointer array	^\s*iVar3\ =\ \*\(int\ \*\)\(iVar22\ \+\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar23\ \+\ 0xd0\)\ \+\ 8\)\);$	+1
+use	FUN_0012f0f8	iVar22	successorOffset	INFERRED	byte offset into the successor pointer array	^\s*iVar22\ =\ iVar22\ \+\ 4;$	+1
+use	FUN_0012f0f8	bVar1	moreBlocksA	INFERRED	loop latch: the walk has not reached the last body block	^\s*bVar1\ =\ bVar2;$	+2
+use	FUN_0012f0f8	bVar1	moreBlocksA	INFERRED	loop latch: the walk has not reached the last body block	^\s*bVar1\ =\ iVar9\ !=\ iVar25;$	+1
+use	FUN_0012f0f8	bVar1	moreBlocksB	INFERRED	loop latch: the walk has not reached the last body block	^\s*bVar1\ =\ bVar2;$@2	+2
+use	FUN_0012f0f8	bVar1	moreBlocksB	INFERRED	loop latch: the walk has not reached the last body block	^\s*bVar1\ =\ iVar9\ !=\ iVar25;$@2	+1
+use	FUN_0012f0f8	bVar2	hasBody	INFERRED	param_3 != iVar9: the loop has blocks besides its header	^\s*bVar2\ =\ param_3\ !=\ iVar9;$	+1
+use	FUN_0012f0f8	bVar2	hasBody	INFERRED	param_3 != iVar9: the loop has blocks besides its header	^\s*bVar1\ =\ bVar2;$	+1
+use	FUN_0012f0f8	bVar2	hasBody	INFERRED	param_3 != iVar9: the loop has blocks besides its header	^\s*if\ \(bVar2\)\ \{$	+1
+use	FUN_0012f0f8	bVar2	hasBody	INFERRED	param_3 != iVar9: the loop has blocks besides its header	^\s*bVar1\ =\ bVar2;$@2	+1
+use	FUN_0012f0f8	bVar2	hasBody	INFERRED	param_3 != iVar9: the loop has blocks besides its header	^\s*while\ \(bVar2\)\ \{$	+1
+use	FUN_0012f0f8	bVar2	hasBody	INFERRED	param_3 != iVar9: the loop has blocks besides its header	^\s*bVar2\ =\ iVar9\ !=\ iVar25;$	+1
+use	FUN_0012f0f8	iVar4	blockArg	INFERRED	stale copy of param_3 passed on to Block__getBranchInst	^\s*iVar4\ =\ param_3;$	+1
+use	FUN_0012f0f8	iVar4	blockArg	INFERRED	stale copy of param_3 passed on to Block__getBranchInst	^\s*if\ \(\(\(int\)\(\(ulonglong\)uVar29\ >>\ 0x20\)\ !=\ 0\)\ \&\&$	+3
+use	FUN_0012f0f8	iVar4	instQuery34b	INFERRED	instruction vtable slot 0x34 test	^\s*iVar4\ =\ \(\*\*\(code\ \*\*\)\(\*piVar19\ \+\ 0x34\)\)\(piVar19\);$	+2
+use	FUN_0012f0f8	iVar4	operandNumber	INFERRED	operand number 1..operandCount	^\s*iVar4\ =\ 1;$	+1
+use	FUN_0012f0f8	iVar4	operandNumber	INFERRED	operand number 1..operandCount	^\s*if\ \(iVar7\ <\ iVar4\)\ break;$	+2
+use	FUN_0012f0f8	iVar4	nextInst	INFERRED	next instruction of the block's instruction list	^\s*iVar4\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar25\ \+\ 0x98\)\ \+\ 8\);$	+1
+use	FUN_0012f0f8	iVar4	nextInst	INFERRED	next instruction of the block's instruction list	^\s*if\ \(iVar4\ !=\ 0\)\ \{$	+1
+use	FUN_0012f0f8	iVar4	nextInst	INFERRED	next instruction of the block's instruction list	^\s*iVar25\ =\ iVar4;$	+1
+use	FUN_0012f0f8	iVar4	nextInst	INFERRED	next instruction of the block's instruction list	^\s*iVar4\ =\ \*\(int\ \*\)\(iVar25\ \+\ 8\);$	+1
+use	FUN_0012f0f8	iVar4	needsOffsetFix	INFERRED	FUN_0012ab04: instruction needs its offset adjusted	^\s*iVar4\ =\ FUN_0012ab04\(iVar8\);$	+2
+use	FUN_0012f0f8	iVar5	unrollEnabled	INFERRED	compiler option 2 (loop unrolling) is enabled	^\s*iVar5\ =\ FUN_000e07dc\(\*\(undefined4\ \*\)\(param_1\ \+\ 8\),2\);$	+3
+use	FUN_0012f0f8	iVar5	loopStepArg	INFERRED	stale copy of iVar8 (loop step) passed on	^\s*iVar5\ =\ iVar8;$	+1
+use	FUN_0012f0f8	iVar5	loopStepArg	INFERRED	stale copy of iVar8 (loop step) passed on	^\s*if\ \(\(\(int\)\(\(ulonglong\)uVar29\ >>\ 0x20\)\ !=\ 0\)\ \&\&$	+3
+use	FUN_0012f0f8	iVar5	nextBodyBlock	INFERRED	next block pointer saved before the block is detached	^\s*iVar5\ =\ \*\(int\ \*\)\(iVar9\ \+\ 4\);$	+1
+use	FUN_0012f0f8	iVar5	nextBodyBlock	INFERRED	next block pointer saved before the block is detached	^\s*iVar9\ =\ iVar5;$	+1
+use	FUN_0012f0f8	iVar5	fixupBlock	INFERRED	block cursor during the offset fix-up walk	^\s*iVar5\ =\ param_3;$	+1
+use	FUN_0012f0f8	iVar5	fixupBlock	INFERRED	block cursor during the offset fix-up walk	^\s*iVar25\ =\ \*\(int\ \*\)\(iVar5\ \+\ 8\);$	+1
+use	FUN_0012f0f8	iVar5	fixupBlock	INFERRED	block cursor during the offset fix-up walk	^\s*iVar25\ =\ \*\(int\ \*\)\(iVar5\ \+\ 8\);$@2	+1
+use	FUN_0012f0f8	iVar5	fixupBlock	INFERRED	block cursor during the offset fix-up walk	^\s*iVar5\ =\ iVar25;$	+1
+use	FUN_0012f0f8	iVar5	instQuery3c	INFERRED	instruction vtable slot 0x3c test	^\s*iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*piVar19\ \+\ 0x3c\)\)\(piVar19\);$	+2
+use	FUN_0012f0f8	iVar5	loopFooterBlock	INFERRED	block at loop header +0x14c	^\s*iVar5\ =\ \*\(int\ \*\)\(param_3\ \+\ 0x14c\);$	+2
+use	FUN_0012f0f8	iVar5	loopFooterBlock	INFERRED	block at loop header +0x14c	^\s*FUN_000e7688\(iVar5,piVar19\);$	+1
+local	FUN_0012f0f8	iVar6	unrollCount	INFERRED	trip count of the loop (FUN_000e8c7c)
+use	FUN_0012f0f8	iVar7	loopStart	INFERRED	initial value of the loop counter (FUN_000e8c14)	^\s*iVar7\ =\ FUN_000e8c14\(param_3\);$	+1
+use	FUN_0012f0f8	iVar7	loopStart	INFERRED	initial value of the loop counter (FUN_000e8c14)	^\s*iVar9\ =\ FUN_0012aa78\(uVar26,iVar6,iVar7,iVar8,param_3\);$	+1
+use	FUN_0012f0f8	iVar7	loopStart	INFERRED	initial value of the loop counter (FUN_000e8c14)	^\s*local_64\ =\ iVar7;$	+1
+use	FUN_0012f0f8	iVar7	loopStart	INFERRED	initial value of the loop counter (FUN_000e8c14)	^\s*\(\(int\ \(\*\)\(\)\)FUN_0012c3d0\)\(iVar8,iVar7,param_1\);$	+1
+use	FUN_0012f0f8	iVar7	operandCount	INFERRED	instruction operand count (vtable slot 0x14)	^\s*iVar7\ =\ \(\*\*\(code\ \*\*\)\(\*piVar19\ \+\ 0x14\)\)\(piVar19\);$	+2
+use	FUN_0012f0f8	iVar8	loopStep	INFERRED	loop counter step (FUN_000e8bac)	^\s*iVar8\ =\ FUN_000e8bac\(param_3\);$	+1
+use	FUN_0012f0f8	iVar8	loopStep	INFERRED	loop counter step (FUN_000e8bac)	^\s*iVar5\ =\ iVar8;$	+1
+use	FUN_0012f0f8	iVar8	loopStep	INFERRED	loop counter step (FUN_000e8bac)	^\s*iVar9\ =\ FUN_0012aa78\(uVar26,iVar6,iVar7,iVar8,param_3\);$	+1
+use	FUN_0012f0f8	iVar8	loopStep	INFERRED	loop counter step (FUN_000e8bac)	^\s*local_64\ =\ local_64\ \+\ iVar8;$	+1
+use	FUN_0012f0f8	iVar8	instListHead	INFERRED	head of the block's instruction list	^\s*iVar8\ =\ \*\(int\ \*\)\(iVar25\ \+\ 0x98\);$	+1
+use	FUN_0012f0f8	iVar8	instListHead	INFERRED	head of the block's instruction list	^\s*if\ \(\(\*\(uint\ \*\)\(iVar8\ \+\ 0x14\)\ \&\ 1\)\ !=\ 0\)\ \{$	+2
+use	FUN_0012f0f8	iVar8	instListHead	INFERRED	head of the block's instruction list	^\s*iVar25\ =\ \*\(int\ \*\)\(iVar8\ \+\ 8\);$	+1
+use	FUN_0012f0f8	iVar8	instListHead	INFERRED	head of the block's instruction list	^\s*\(\(int\ \(\*\)\(\)\)FUN_0012c3d0\)\(iVar8,iVar7,param_1\);$	+2
+use	FUN_0012f0f8	iVar8	instListHead	INFERRED	head of the block's instruction list	^\s*iVar8\ =\ iVar25;$	+1
+use	FUN_0012f0f8	iVar9	cannotUnroll	INFERRED	FUN_0012aa78: the loop cannot be unrolled	^\s*iVar9\ =\ FUN_0012aa78\(uVar26,iVar6,iVar7,iVar8,param_3\);$	+2
+use	FUN_0012f0f8	iVar9	loopEndBlock	INFERRED	last block of the loop body (*param_4)	^\s*iVar9\ =\ \*param_4;$	+1
+use	FUN_0012f0f8	iVar9	loopEndBlock	INFERRED	last block of the loop body (*param_4)	^\s*while\ \(param_3\ !=\ iVar9\)\ \{$	+5
+use	FUN_0012f0f8	iVar9	loopEndBlock	INFERRED	last block of the loop body (*param_4)	^\s*FUN_000e7658\(iVar9\);$	+2
+use	FUN_0012f0f8	iVar9	loopEndBlock	INFERRED	last block of the loop body (*param_4)	^\s*if\ \(\(1\ <\ iVar6\)\ \&\&\ \(param_3\ !=\ iVar9\)\)\ \{$	+1
+use	FUN_0012f0f8	iVar9	loopEndBlock	INFERRED	last block of the loop body (*param_4)	^\s*\}\ while\ \(iVar9\ !=\ iVar25\);$	+1
+use	FUN_0012f0f8	iVar9	loopEndBlock	INFERRED	last block of the loop body (*param_4)	^\s*bVar2\ =\ param_3\ !=\ iVar9;$	+1
+use	FUN_0012f0f8	iVar9	loopEndBlock	INFERRED	last block of the loop body (*param_4)	^\s*bVar1\ =\ iVar9\ !=\ iVar25;$	+1
+use	FUN_0012f0f8	iVar9	loopEndBlock	INFERRED	last block of the loop body (*param_4)	^\s*iVar25\ =\ iVar9;$	+1
+use	FUN_0012f0f8	iVar9	loopEndBlock	INFERRED	last block of the loop body (*param_4)	^\s*\}\ while\ \(iVar9\ !=\ iVar23\);$	+1
+use	FUN_0012f0f8	iVar9	loopEndBlock	INFERRED	last block of the loop body (*param_4)	^\s*bVar1\ =\ iVar9\ !=\ iVar25;$@2	+1
+use	FUN_0012f0f8	iVar9	loopEndBlock	INFERRED	last block of the loop body (*param_4)	^\s*bVar2\ =\ iVar9\ !=\ iVar25;$	+1
+use	FUN_0012f0f8	iVar11	isLoopHeaderBlock	INFERRED	block vtable slot 0x2c: block is a loop header	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*piVar27\ \+\ 0x2c\)\)\(piVar27\);$	+2
+use	FUN_0012f0f8	iVar11	clonedBlock	INFERRED	copy of the original block (block vtable slot 8)	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*piVar27\ \+\ 8\)\)\(piVar27\);$	+1
+use	FUN_0012f0f8	iVar11	clonedBlock	INFERRED	copy of the original block (block vtable slot 8)	^\s*\*piVar18\ =\ iVar11;$	+1
+use	FUN_0012f0f8	iVar11	clonedBlock	INFERRED	copy of the original block (block vtable slot 8)	^\s*\*\(int\ \*\)\(iVar11\ \+\ 0x130\)\ =\ iVar3;$	+1
+use	FUN_0012f0f8	iVar11	clonedBlock	INFERRED	copy of the original block (block vtable slot 8)	^\s*\*\(int\ \*\)\(iVar11\ \+\ 0x148\)\ =\ iVar3;$	+1
+use	FUN_0012f0f8	iVar11	clonedBlock	INFERRED	copy of the original block (block vtable slot 8)	^\s*FUN_000f92fc\(param_1,iVar3,iVar11\);$	+1
+use	FUN_0012f0f8	iVar11	clonedBlock	INFERRED	copy of the original block (block vtable slot 8)	^\s*FUN_000ec3ac\(param_1,\*param_4,iVar11\);$	+2
+use	FUN_0012f0f8	iVar11	successorSlot	INFERRED	1-based successor slot counter	^\s*iVar11\ =\ 1;$	+1
+use	FUN_0012f0f8	iVar11	successorSlot	INFERRED	1-based successor slot counter	^\s*puVar12\[2\]\ =\ iVar11;$	+1
+use	FUN_0012f0f8	iVar11	successorSlot	INFERRED	1-based successor slot counter	^\s*puVar12\[2\]\ =\ iVar11;$@2	+1
+use	FUN_0012f0f8	iVar11	successorSlot	INFERRED	1-based successor slot counter	^\s*iVar11\ =\ iVar11\ \+\ 1;$	+1
+use	FUN_0012f0f8	iVar11	blockQuery24	INFERRED	block vtable slot 0x24 test	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*piVar27\ \+\ 0x24\)\)\(piVar27\);$	+2
+use	FUN_0012f0f8	iVar11	blockQuery28	INFERRED	block vtable slot 0x28 test	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*piVar27\ \+\ 0x28\)\)\(piVar27\);$	+2
+use	FUN_0012f0f8	iVar11	blockQuery2c	INFERRED	block vtable slot 0x2c test	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*piVar27\ \+\ 0x2c\)\)\(piVar27\);$@2	+2
+use	FUN_0012f0f8	iVar11	blockQuery30	INFERRED	block vtable slot 0x30 test	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*piVar27\ \+\ 0x30\)\)\(piVar27\);$	+5
+use	FUN_0012f0f8	iVar11	blockAt134	INFERRED	block at +0x134	^\s*iVar11\ =\ \*\(int\ \*\)\(iVar23\ \+\ 0x134\);$	+1
+use	FUN_0012f0f8	iVar11	blockAt134	INFERRED	block at +0x134	^\s*uVar24\ =\ \*\(uint\ \*\)\(iVar11\ \+\ 0xc0\);$	+1
+use	FUN_0012f0f8	iVar13	needsOffsetFixClone	INFERRED	FUN_0012ab04 on the cloned instruction	^\s*if\ \(\(\*\(int\ \*\)\(param_3\ \+\ 0x134\)\ ==\ 0\)\ \&\&$	+2
+use	FUN_0012f0f8	piVar14	nextInstRef	INFERRED	next instruction while iterating a block's instruction list	^\s*for\ \(piVar14\ =\ \(int\ \*\)\(\(int\ \*\)piVar27\[0x26\]\)\[2\];\ piVar14\ !=\ \(int\ \*\)0x0;$	+2
+use	FUN_0012f0f8	piVar14	nextInstRef	INFERRED	next instruction while iterating a block's instruction list	^\s*if\ \(\(\(int\)\(\(ulonglong\)uVar29\ >>\ 0x20\)\ !=\ 0\)\ \&\&$	+3
+use	FUN_0012f0f8	piVar14	nextInstRef	INFERRED	next instruction while iterating a block's instruction list	^\s*piVar14\ =\ \(int\ \*\)piVar18\[2\];$	+1
+use	FUN_0012f0f8	piVar14	nextInstRef	INFERRED	next instruction while iterating a block's instruction list	^\s*piVar14\ =\ \(int\ \*\)piVar18\[2\];$@2	+1
+use	FUN_0012f0f8	piVar14	nextInstRef	INFERRED	next instruction while iterating a block's instruction list	^\s*piVar18\ =\ piVar14;$	+1
+use	FUN_0012f0f8	uVar15	cloneFilledCountA	INFERRED	filled count of the clone vector	^\s*uVar15\ =\ puVar12\[2\];$	+3
+use	FUN_0012f0f8	uVar15	successorIndex	INFERRED	successor number 1..count	^\s*for\ \(uVar15\ =\ 1;\ uVar15\ <=\ \*\(uint\ \*\)\(\*\(int\ \*\)\(iVar23\ \+\ 0xd0\)\ \+\ 4\);$	+2
+use	FUN_0012f0f8	uVar16	cloneFilledCountB	INFERRED	filled count of the clone vector	^\s*uVar16\ =\ puVar12\[2\];$	+3
+use	FUN_0012f0f8	uVar16	successorCloneIndex	INFERRED	clone index of the successor block (+0xc0)	^\s*uVar16\ =\ \*\(uint\ \*\)\(iVar3\ \+\ 0xc0\);$	+2
+use	FUN_0012f0f8	uVar16	successorCloneIndex	INFERRED	clone index of the successor block (+0xc0)	^\s*if\ \(uVar20\ <=\ uVar16\)\ \{$	+3
+use	FUN_0012f0f8	uVar16	successorCloneIndex	INFERRED	clone index of the successor block (+0xc0)	^\s*puVar17\ =\ \(undefined4\ \*\)\(uVar16\ \*\ 4\ \+\ puVar12\[3\]\);$	+1
+use	FUN_0012f0f8	uVar16	successorCloneIndex	INFERRED	clone index of the successor block (+0xc0)	^\s*puVar17\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar28,uVar16\);$	+1
+use	FUN_0012f0f8	puVar17	cloneSlotRefA	INFERRED	element reference into the clone vector	^\s*puVar17\ =\ \(undefined4\ \*\)\(uVar24\ \*\ 4\ \+\ puVar12\[3\]\);$	+1
+use	FUN_0012f0f8	puVar17	cloneSlotRefA	INFERRED	element reference into the clone vector	^\s*puVar17\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar28,uVar24\);$	+1
+use	FUN_0012f0f8	puVar17	cloneSlotRefA	INFERRED	element reference into the clone vector	^\s*uVar26\ =\ \*puVar17;$	+1
+use	FUN_0012f0f8	puVar17	cloneSlotRefB	INFERRED	element reference into the clone vector	^\s*puVar17\ =\ \(undefined4\ \*\)\(uVar16\ \*\ 4\ \+\ puVar12\[3\]\);$	+1
+use	FUN_0012f0f8	puVar17	cloneSlotRefB	INFERRED	element reference into the clone vector	^\s*puVar17\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar28,uVar16\);$	+1
+use	FUN_0012f0f8	puVar17	cloneSlotRefB	INFERRED	element reference into the clone vector	^\s*FUN_000e8e4c\(uVar26,\*puVar17\);$	+1
+use	FUN_0012f0f8	puVar17	cloneSlotRefC	INFERRED	element reference at index 0	^\s*puVar17\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar28,0\);$	+1
+use	FUN_0012f0f8	puVar17	cloneSlotRefC	INFERRED	element reference at index 0	^\s*puVar17\ =\ \(undefined4\ \*\)puVar12\[3\];$	+1
+use	FUN_0012f0f8	puVar17	cloneSlotRefC	INFERRED	element reference at index 0	^\s*FUN_000e8e4c\(iVar25,\*puVar17\);$	+1
+use	FUN_0012f0f8	puVar17	cloneSlotRefD	INFERRED	element reference into the clone vector	^\s*puVar17\ =\ \(undefined4\ \*\)\(uVar24\ \*\ 4\ \+\ puVar12\[3\]\);$@2	+1
+use	FUN_0012f0f8	puVar17	cloneSlotRefD	INFERRED	element reference into the clone vector	^\s*puVar17\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar28,uVar24\);$@2	+1
+use	FUN_0012f0f8	puVar17	cloneSlotRefD	INFERRED	element reference into the clone vector	^\s*piVar27\ =\ \(int\ \*\)\*puVar17;$	+1
+use	FUN_0012f0f8	piVar18	clonedBlockRef	INFERRED	element reference into the clone vector for the block being copied	^\s*piVar18\ =\ \(int\ \*\)\(uVar21\ \*\ 4\ \+\ puVar12\[3\]\);$	+1
+use	FUN_0012f0f8	piVar18	clonedBlockRef	INFERRED	element reference into the clone vector for the block being copied	^\s*piVar18\ =\ \(int\ \*\)FUN_0019423c\(puVar28,uVar21\);$	+1
+use	FUN_0012f0f8	piVar18	clonedBlockRef	INFERRED	element reference into the clone vector for the block being copied	^\s*\*piVar18\ =\ iVar11;$	+1
+use	FUN_0012f0f8	piVar18	srcInst	INFERRED	instruction iterated over the original block	^\s*piVar18\ =\ \(int\ \*\)piVar27\[0x26\];$	+1
+use	FUN_0012f0f8	piVar18	srcInst	INFERRED	instruction iterated over the original block	^\s*uVar24\ =\ piVar18\[5\]\ \&\ 1;$	+1
+use	FUN_0012f0f8	piVar18	srcInst	INFERRED	instruction iterated over the original block	^\s*iVar22\ =\ \(\*\*\(code\ \*\*\)\(\*piVar18\ \+\ 0x34\)\)\(piVar18\);$	+1
+use	FUN_0012f0f8	piVar18	srcInst	INFERRED	instruction iterated over the original block	^\s*iVar22\ =\ \(\*\*\(code\ \*\*\)\(\*piVar18\ \+\ 0x38\)\)\(piVar18\);$	+1
+use	FUN_0012f0f8	piVar18	srcInst	INFERRED	instruction iterated over the original block	^\s*iVar3\ =\ FUN_0010445c\(piVar18,\*\(undefined4\ \*\)\(param_1\ \+\ 8\),0\);$	+1
+use	FUN_0012f0f8	piVar18	srcInst	INFERRED	instruction iterated over the original block	^\s*if\ \(\(\(int\)\(\(ulonglong\)uVar29\ >>\ 0x20\)\ !=\ 0\)\ \&\&$	+3
+use	FUN_0012f0f8	piVar18	srcInst	INFERRED	instruction iterated over the original block	^\s*if\ \(\(iVar22\ !=\ 0\)\ \&\&\ \(piVar18\ ==\ \(int\ \*\)piVar27\[0x52\]\)\)\ \{$	+1
+use	FUN_0012f0f8	piVar18	srcInst	INFERRED	instruction iterated over the original block	^\s*piVar14\ =\ \(int\ \*\)piVar18\[2\];$	+1
+use	FUN_0012f0f8	piVar18	srcInst	INFERRED	instruction iterated over the original block	^\s*piVar14\ =\ \(int\ \*\)piVar18\[2\];$@2	+1
+use	FUN_0012f0f8	piVar18	srcInst	INFERRED	instruction iterated over the original block	^\s*piVar18\ =\ piVar14;$	+1
+use	FUN_0012f0f8	piVar18	rewiredCloneRef	INFERRED	element reference to the clone that a branch/header field is redirected to	^\s*piVar18\ =\ \(int\ \*\)\(uVar24\ \*\ 4\ \+\ puVar12\[3\]\);$	+1
+use	FUN_0012f0f8	piVar18	rewiredCloneRef	INFERRED	element reference to the clone that a branch/header field is redirected to	^\s*piVar18\ =\ \(int\ \*\)FUN_0019423c\(puVar28,uVar24\);$	+1
+use	FUN_0012f0f8	piVar18	rewiredCloneRef	INFERRED	element reference to the clone that a branch/header field is redirected to	^\s*piVar27\[0x54\]\ =\ \*piVar18;$	+1
+use	FUN_0012f0f8	piVar18	rewiredCloneRef	INFERRED	element reference to the clone that a branch/header field is redirected to	^\s*piVar18\ =\ \(int\ \*\)\(uVar24\ \*\ 4\ \+\ puVar12\[3\]\);$@2	+1
+use	FUN_0012f0f8	piVar18	rewiredCloneRef	INFERRED	element reference to the clone that a branch/header field is redirected to	^\s*piVar18\ =\ \(int\ \*\)FUN_0019423c\(puVar28,uVar24\);$@2	+1
+use	FUN_0012f0f8	piVar18	rewiredCloneRef	INFERRED	element reference to the clone that a branch/header field is redirected to	^\s*piVar27\[0x55\]\ =\ \*piVar18;$	+1
+use	FUN_0012f0f8	piVar18	rewiredCloneRef	INFERRED	element reference to the clone that a branch/header field is redirected to	^\s*piVar18\ =\ \(int\ \*\)\(uVar24\ \*\ 4\ \+\ puVar12\[3\]\);$@3	+1
+use	FUN_0012f0f8	piVar18	rewiredCloneRef	INFERRED	element reference to the clone that a branch/header field is redirected to	^\s*piVar18\ =\ \(int\ \*\)FUN_0019423c\(puVar28,uVar24\);$@3	+1
+use	FUN_0012f0f8	piVar18	rewiredCloneRef	INFERRED	element reference to the clone that a branch/header field is redirected to	^\s*piVar27\[0x4b\]\ =\ \*piVar18;$	+1
+use	FUN_0012f0f8	piVar18	rewiredCloneRef	INFERRED	element reference to the clone that a branch/header field is redirected to	^\s*piVar18\ =\ \(int\ \*\)\(uVar24\ \*\ 4\ \+\ puVar12\[3\]\);$@4	+1
+use	FUN_0012f0f8	piVar18	rewiredCloneRef	INFERRED	element reference to the clone that a branch/header field is redirected to	^\s*piVar18\ =\ \(int\ \*\)FUN_0019423c\(puVar28,uVar24\);$@4	+1
+use	FUN_0012f0f8	piVar18	rewiredCloneRef	INFERRED	element reference to the clone that a branch/header field is redirected to	^\s*piVar27\[0x4f\]\ =\ \*piVar18;$	+1
+use	FUN_0012f0f8	piVar18	rewiredCloneRef	INFERRED	element reference to the clone that a branch/header field is redirected to	^\s*piVar18\ =\ \(int\ \*\)\(uVar24\ \*\ 4\ \+\ puVar12\[3\]\);$@5	+1
+use	FUN_0012f0f8	piVar18	rewiredCloneRef	INFERRED	element reference to the clone that a branch/header field is redirected to	^\s*piVar18\ =\ \(int\ \*\)FUN_0019423c\(puVar28,uVar24\);$@5	+1
+use	FUN_0012f0f8	piVar18	rewiredCloneRef	INFERRED	element reference to the clone that a branch/header field is redirected to	^\s*piVar27\[0x4d\]\ =\ \*piVar18;$	+1
+use	FUN_0012f0f8	piVar18	rewiredCloneRef	INFERRED	element reference to the clone that a branch/header field is redirected to	^\s*piVar18\ =\ \(int\ \*\)\(uVar24\ \*\ 4\ \+\ puVar12\[3\]\);$@6	+1
+use	FUN_0012f0f8	piVar18	rewiredCloneRef	INFERRED	element reference to the clone that a branch/header field is redirected to	^\s*piVar18\ =\ \(int\ \*\)FUN_0019423c\(puVar28,uVar24\);$@6	+1
+use	FUN_0012f0f8	piVar18	rewiredCloneRef	INFERRED	element reference to the clone that a branch/header field is redirected to	^\s*piVar27\[0x4e\]\ =\ \*piVar18;$	+1
+use	FUN_0012f0f8	uVar20	cloneCapacity	INFERRED	clone vector capacity word	^\s*uVar20\ =\ \*puVar28;$	+2
+use	FUN_0012f0f8	uVar20	cloneCapacity	INFERRED	clone vector capacity word	^\s*uVar20\ =\ \*puVar28;$@2	+1
+use	FUN_0012f0f8	uVar20	cloneCapacity	INFERRED	clone vector capacity word	^\s*uVar20\ =\ \*puVar28;$@3	+1
+use	FUN_0012f0f8	uVar20	cloneCapacity	INFERRED	clone vector capacity word	^\s*if\ \(uVar16\ <\ uVar20\)\ \{$	+1
+use	FUN_0012f0f8	uVar20	cloneFilledCountC	INFERRED	filled count of the clone vector	^\s*uVar20\ =\ puVar12\[2\];$	+3
+use	FUN_0012f0f8	uVar21	lastCloneIndex	INFERRED	index of the last clone created	^\s*uVar21\ =\ uVar24;$	+1
+use	FUN_0012f0f8	uVar21	lastCloneIndex	INFERRED	index of the last clone created	^\s*if\ \(uVar21\ <\ \*puVar28\)\ \{$	+1
+use	FUN_0012f0f8	uVar21	lastCloneIndex	INFERRED	index of the last clone created	^\s*if\ \(uVar24\ <=\ uVar21\)\ \{$	+3
+use	FUN_0012f0f8	uVar21	lastCloneIndex	INFERRED	index of the last clone created	^\s*piVar18\ =\ \(int\ \*\)\(uVar21\ \*\ 4\ \+\ puVar12\[3\]\);$	+1
+use	FUN_0012f0f8	uVar21	lastCloneIndex	INFERRED	index of the last clone created	^\s*piVar18\ =\ \(int\ \*\)FUN_0019423c\(puVar28,uVar21\);$	+1
+use	FUN_0012f0f8	uVar21	lastCloneIndex	INFERRED	index of the last clone created	^\s*uVar24\ =\ uVar21\ \+\ 1;$	+1
+use	FUN_0012f0f8	uVar21	lastCloneIndex	INFERRED	index of the last clone created	^\s*uVar21\ =\ 0xffffffff;$	+1
+use	FUN_0012f0f8	uVar21	lastCloneIndex	INFERRED	index of the last clone created	^\s*if\ \(0\ <\ \(int\)uVar21\)\ \{$	+1
+use	FUN_0012f0f8	uVar21	lastCloneIndex	INFERRED	index of the last clone created	^\s*\}\ while\ \(uVar21\ !=\ uVar24\);$	+1
+use	FUN_0012f0f8	uVar21	cloneFilledCountD	INFERRED	filled count of the clone vector	^\s*uVar21\ =\ puVar12\[2\];$	+3
+use	FUN_0012f0f8	uVar21	cloneFilledCountD	INFERRED	filled count of the clone vector	^\s*uVar21\ =\ puVar12\[2\];$@2	+3
+use	FUN_0012f0f8	uVar21	cloneFilledCountD	INFERRED	filled count of the clone vector	^\s*uVar21\ =\ puVar12\[2\];$@3	+3
+use	FUN_0012f0f8	uVar21	cloneFilledCountD	INFERRED	filled count of the clone vector	^\s*uVar21\ =\ puVar12\[2\];$@4	+3
+use	FUN_0012f0f8	uVar21	cloneFilledCountD	INFERRED	filled count of the clone vector	^\s*uVar21\ =\ puVar12\[2\];$@5	+3
+use	FUN_0012f0f8	uVar21	cloneFilledCountD	INFERRED	filled count of the clone vector	^\s*uVar21\ =\ puVar12\[2\];$@6	+3
+use	FUN_0012f0f8	uVar21	cloneFilledCountD	INFERRED	filled count of the clone vector	^\s*uVar21\ =\ puVar12\[2\];$@7	+3
+use	FUN_0012f0f8	iVar23	blockOrdinal	INFERRED	running ordinal stored at block +0xc0	^\s*iVar23\ =\ 0;$	+1
+use	FUN_0012f0f8	iVar23	blockOrdinal	INFERRED	running ordinal stored at block +0xc0	^\s*\*\(int\ \*\)\(iVar25\ \+\ 0xc0\)\ =\ iVar23;$	+2
+use	FUN_0012f0f8	iVar23	savedLoopFooter	INFERRED	loop header +0x14c	^\s*iVar23\ =\ \*\(int\ \*\)\(param_3\ \+\ 0x14c\);$	+1
+use	FUN_0012f0f8	iVar23	savedLoopFooter	INFERRED	loop header +0x14c	^\s*piVar27\[0x53\]\ =\ iVar23;$	+1
+use	FUN_0012f0f8	iVar23	origBlockCursor	INFERRED	cursor over the original body blocks while cloning	^\s*iVar23\ =\ param_3;$	+1
+use	FUN_0012f0f8	iVar23	origBlockCursor	INFERRED	cursor over the original body blocks while cloning	^\s*piVar27\ =\ \*\(int\ \*\*\)\(iVar23\ \+\ 8\);$	+1
+use	FUN_0012f0f8	iVar23	origBlockCursor	INFERRED	cursor over the original body blocks while cloning	^\s*iVar23\ =\ \*\(int\ \*\)\(iVar23\ \+\ 8\);$	+1
+use	FUN_0012f0f8	iVar23	origBlockCursor	INFERRED	cursor over the original body blocks while cloning	^\s*\}\ while\ \(iVar9\ !=\ iVar23\);$	+1
+use	FUN_0012f0f8	iVar23	nextOrigBlock	INFERRED	block after the loop header	^\s*iVar23\ =\ \*\(int\ \*\)\(param_3\ \+\ 8\);$	+1
+use	FUN_0012f0f8	iVar23	nextOrigBlock	INFERRED	block after the loop header	^\s*for\ \(uVar15\ =\ 1;\ uVar15\ <=\ \*\(uint\ \*\)\(\*\(int\ \*\)\(iVar23\ \+\ 0xd0\)\ \+\ 4\);$	+3
+use	FUN_0012f0f8	iVar23	nextOrigBlock	INFERRED	block after the loop header	^\s*iVar23\ =\ \*\(int\ \*\)\(iVar23\ \+\ 8\);$@2	+1
+use	FUN_0012f0f8	iVar23	rewireBlockCursor	INFERRED	block whose fields are rewired	^\s*iVar23\ =\ \*\(int\ \*\)\(iVar25\ \+\ 8\);$	+2
+use	FUN_0012f0f8	iVar23	rewireBlockCursor	INFERRED	block whose fields are rewired	^\s*uVar24\ =\ \*\(uint\ \*\)\(\*\(int\ \*\)\(iVar23\ \+\ 0x150\)\ \+\ 0xc0\);$	+1
+use	FUN_0012f0f8	iVar23	rewireBlockCursor	INFERRED	block whose fields are rewired	^\s*iVar23\ =\ \*\(int\ \*\)\(iVar23\ \+\ 0x154\);$	+1
+use	FUN_0012f0f8	iVar23	rewireBlockCursor	INFERRED	block whose fields are rewired	^\s*uVar24\ =\ \*\(uint\ \*\)\(iVar23\ \+\ 0xc0\);$@2	+1
+use	FUN_0012f0f8	iVar23	rewireBlockCursor	INFERRED	block whose fields are rewired	^\s*uVar24\ =\ \*\(uint\ \*\)\(\*\(int\ \*\)\(iVar23\ \+\ 300\)\ \+\ 0xc0\);$	+1
+use	FUN_0012f0f8	iVar23	rewireBlockCursor	INFERRED	block whose fields are rewired	^\s*uVar24\ =\ \*\(uint\ \*\)\(\*\(int\ \*\)\(iVar23\ \+\ 0x13c\)\ \+\ 0xc0\);$	+1
+use	FUN_0012f0f8	iVar23	rewireBlockCursor	INFERRED	block whose fields are rewired	^\s*iVar11\ =\ \*\(int\ \*\)\(iVar23\ \+\ 0x134\);$	+1
+use	FUN_0012f0f8	iVar23	rewireBlockCursor	INFERRED	block whose fields are rewired	^\s*iVar23\ =\ \*\(int\ \*\)\(iVar23\ \+\ 0x138\);$	+1
+use	FUN_0012f0f8	iVar23	rewireBlockCursor	INFERRED	block whose fields are rewired	^\s*uVar24\ =\ \*\(uint\ \*\)\(iVar23\ \+\ 0xc0\);$@3	+1
+use	FUN_0012f0f8	uVar24	cloneIndex	INFERRED	index of the clone being created	^\s*uVar24\ =\ 0;$	+1
+use	FUN_0012f0f8	uVar24	cloneIndex	INFERRED	index of the clone being created	^\s*uVar21\ =\ uVar24;$	+1
+use	FUN_0012f0f8	uVar24	cloneIndex	INFERRED	index of the clone being created	^\s*uVar24\ =\ uVar21\ \+\ 1;$	+1
+use	FUN_0012f0f8	uVar24	cloneIndex	INFERRED	index of the clone being created	^\s*uVar24\ =\ 0;$@2	+1
+use	FUN_0012f0f8	uVar24	cloneIndex	INFERRED	index of the clone being created	^\s*if\ \(uVar24\ <\ \*puVar28\)\ \{$	+1
+use	FUN_0012f0f8	uVar24	cloneIndex	INFERRED	index of the clone being created	^\s*if\ \(uVar15\ <=\ uVar24\)\ \{$	+2
+use	FUN_0012f0f8	uVar24	cloneIndex	INFERRED	index of the clone being created	^\s*FUN_0019423c\(puVar28,uVar24\);$	+1
+use	FUN_0012f0f8	uVar24	cloneIndex	INFERRED	index of the clone being created	^\s*if\ \(uVar24\ <\ uVar20\)\ \{$	+1
+use	FUN_0012f0f8	uVar24	cloneIndex	INFERRED	index of the clone being created	^\s*if\ \(uVar16\ <=\ uVar24\)\ \{$	+2
+use	FUN_0012f0f8	uVar24	cloneIndex	INFERRED	index of the clone being created	^\s*puVar17\ =\ \(undefined4\ \*\)\(uVar24\ \*\ 4\ \+\ puVar12\[3\]\);$	+1
+use	FUN_0012f0f8	uVar24	cloneIndex	INFERRED	index of the clone being created	^\s*puVar17\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar28,uVar24\);$	+1
+use	FUN_0012f0f8	uVar24	cloneIndex	INFERRED	index of the clone being created	^\s*uVar24\ =\ uVar24\ \+\ 1;$	+1
+use	FUN_0012f0f8	uVar24	cloneIndex	INFERRED	index of the clone being created	^\s*\}\ while\ \(uVar21\ !=\ uVar24\);$	+1
+use	FUN_0012f0f8	uVar24	cloneFilledCountE	INFERRED	filled count of the clone vector	^\s*uVar24\ =\ puVar12\[2\];$	+3
+use	FUN_0012f0f8	uVar24	instLinkedFlag	INFERRED	instruction flag bit 0	^\s*uVar24\ =\ piVar18\[5\]\ \&\ 1;$	+2
+use	FUN_0012f0f8	uVar24	instLinkedFlag	INFERRED	instruction flag bit 0	^\s*if\ \(\(\(int\)\(\(ulonglong\)uVar29\ >>\ 0x20\)\ !=\ 0\)\ \&\&$	+3
+use	FUN_0012f0f8	uVar24	targetCloneIndex	INFERRED	ordinal (+0xc0) of the block that a field is redirected to	^\s*uVar24\ =\ \*\(uint\ \*\)\(iVar23\ \+\ 0xc0\);$	+2
+use	FUN_0012f0f8	uVar24	targetCloneIndex	INFERRED	ordinal (+0xc0) of the block that a field is redirected to	^\s*if\ \(uVar21\ <=\ uVar24\)\ \{$	+3
+use	FUN_0012f0f8	uVar24	targetCloneIndex	INFERRED	ordinal (+0xc0) of the block that a field is redirected to	^\s*puVar17\ =\ \(undefined4\ \*\)\(uVar24\ \*\ 4\ \+\ puVar12\[3\]\);$@2	+1
+use	FUN_0012f0f8	uVar24	targetCloneIndex	INFERRED	ordinal (+0xc0) of the block that a field is redirected to	^\s*puVar17\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar28,uVar24\);$@2	+1
+use	FUN_0012f0f8	uVar24	targetCloneIndex	INFERRED	ordinal (+0xc0) of the block that a field is redirected to	^\s*uVar24\ =\ \*\(uint\ \*\)\(\*\(int\ \*\)\(iVar23\ \+\ 0x150\)\ \+\ 0xc0\);$	+2
+use	FUN_0012f0f8	uVar24	targetCloneIndex	INFERRED	ordinal (+0xc0) of the block that a field is redirected to	^\s*if\ \(uVar21\ <=\ uVar24\)\ \{$@2	+3
+use	FUN_0012f0f8	uVar24	targetCloneIndex	INFERRED	ordinal (+0xc0) of the block that a field is redirected to	^\s*piVar18\ =\ \(int\ \*\)\(uVar24\ \*\ 4\ \+\ puVar12\[3\]\);$	+1
+use	FUN_0012f0f8	uVar24	targetCloneIndex	INFERRED	ordinal (+0xc0) of the block that a field is redirected to	^\s*piVar18\ =\ \(int\ \*\)FUN_0019423c\(puVar28,uVar24\);$	+1
+use	FUN_0012f0f8	uVar24	targetCloneIndex	INFERRED	ordinal (+0xc0) of the block that a field is redirected to	^\s*uVar24\ =\ \*\(uint\ \*\)\(iVar23\ \+\ 0xc0\);$@2	+2
+use	FUN_0012f0f8	uVar24	targetCloneIndex	INFERRED	ordinal (+0xc0) of the block that a field is redirected to	^\s*if\ \(uVar21\ <=\ uVar24\)\ \{$@3	+3
+use	FUN_0012f0f8	uVar24	targetCloneIndex	INFERRED	ordinal (+0xc0) of the block that a field is redirected to	^\s*piVar18\ =\ \(int\ \*\)\(uVar24\ \*\ 4\ \+\ puVar12\[3\]\);$@2	+1
+use	FUN_0012f0f8	uVar24	targetCloneIndex	INFERRED	ordinal (+0xc0) of the block that a field is redirected to	^\s*piVar18\ =\ \(int\ \*\)FUN_0019423c\(puVar28,uVar24\);$@2	+1
+use	FUN_0012f0f8	uVar24	targetCloneIndex	INFERRED	ordinal (+0xc0) of the block that a field is redirected to	^\s*uVar24\ =\ \*\(uint\ \*\)\(\*\(int\ \*\)\(iVar23\ \+\ 300\)\ \+\ 0xc0\);$	+2
+use	FUN_0012f0f8	uVar24	targetCloneIndex	INFERRED	ordinal (+0xc0) of the block that a field is redirected to	^\s*if\ \(uVar21\ <=\ uVar24\)\ \{$@4	+3
+use	FUN_0012f0f8	uVar24	targetCloneIndex	INFERRED	ordinal (+0xc0) of the block that a field is redirected to	^\s*piVar18\ =\ \(int\ \*\)\(uVar24\ \*\ 4\ \+\ puVar12\[3\]\);$@3	+1
+use	FUN_0012f0f8	uVar24	targetCloneIndex	INFERRED	ordinal (+0xc0) of the block that a field is redirected to	^\s*piVar18\ =\ \(int\ \*\)FUN_0019423c\(puVar28,uVar24\);$@3	+1
+use	FUN_0012f0f8	uVar24	targetCloneIndex	INFERRED	ordinal (+0xc0) of the block that a field is redirected to	^\s*uVar24\ =\ \*\(uint\ \*\)\(\*\(int\ \*\)\(iVar23\ \+\ 0x13c\)\ \+\ 0xc0\);$	+2
+use	FUN_0012f0f8	uVar24	targetCloneIndex	INFERRED	ordinal (+0xc0) of the block that a field is redirected to	^\s*if\ \(uVar21\ <=\ uVar24\)\ \{$@5	+3
+use	FUN_0012f0f8	uVar24	targetCloneIndex	INFERRED	ordinal (+0xc0) of the block that a field is redirected to	^\s*piVar18\ =\ \(int\ \*\)\(uVar24\ \*\ 4\ \+\ puVar12\[3\]\);$@4	+1
+use	FUN_0012f0f8	uVar24	targetCloneIndex	INFERRED	ordinal (+0xc0) of the block that a field is redirected to	^\s*piVar18\ =\ \(int\ \*\)FUN_0019423c\(puVar28,uVar24\);$@4	+1
+use	FUN_0012f0f8	uVar24	targetCloneIndex	INFERRED	ordinal (+0xc0) of the block that a field is redirected to	^\s*uVar24\ =\ \*\(uint\ \*\)\(iVar11\ \+\ 0xc0\);$	+2
+use	FUN_0012f0f8	uVar24	targetCloneIndex	INFERRED	ordinal (+0xc0) of the block that a field is redirected to	^\s*if\ \(uVar21\ <=\ uVar24\)\ \{$@6	+3
+use	FUN_0012f0f8	uVar24	targetCloneIndex	INFERRED	ordinal (+0xc0) of the block that a field is redirected to	^\s*piVar18\ =\ \(int\ \*\)\(uVar24\ \*\ 4\ \+\ puVar12\[3\]\);$@5	+1
+use	FUN_0012f0f8	uVar24	targetCloneIndex	INFERRED	ordinal (+0xc0) of the block that a field is redirected to	^\s*piVar18\ =\ \(int\ \*\)FUN_0019423c\(puVar28,uVar24\);$@5	+1
+use	FUN_0012f0f8	uVar24	targetCloneIndex	INFERRED	ordinal (+0xc0) of the block that a field is redirected to	^\s*uVar24\ =\ \*\(uint\ \*\)\(iVar23\ \+\ 0xc0\);$@3	+2
+use	FUN_0012f0f8	uVar24	targetCloneIndex	INFERRED	ordinal (+0xc0) of the block that a field is redirected to	^\s*if\ \(uVar21\ <=\ uVar24\)\ \{$@7	+3
+use	FUN_0012f0f8	uVar24	targetCloneIndex	INFERRED	ordinal (+0xc0) of the block that a field is redirected to	^\s*piVar18\ =\ \(int\ \*\)\(uVar24\ \*\ 4\ \+\ puVar12\[3\]\);$@6	+1
+use	FUN_0012f0f8	uVar24	targetCloneIndex	INFERRED	ordinal (+0xc0) of the block that a field is redirected to	^\s*piVar18\ =\ \(int\ \*\)FUN_0019423c\(puVar28,uVar24\);$@6	+1
+use	FUN_0012f0f8	iVar25	bodyBlockCursor	INFERRED	cursor over the loop body blocks	^\s*iVar25\ =\ param_3;$	+1
+use	FUN_0012f0f8	iVar25	bodyBlockCursor	INFERRED	cursor over the loop body blocks	^\s*iVar25\ =\ \*\(int\ \*\)\(iVar25\ \+\ 8\);$	+2
+use	FUN_0012f0f8	iVar25	bodyBlockCursor	INFERRED	cursor over the loop body blocks	^\s*\}\ while\ \(iVar9\ !=\ iVar25\);$	+1
+use	FUN_0012f0f8	iVar25	bodyBlockCursor	INFERRED	cursor over the loop body blocks	^\s*iVar25\ =\ param_3;$@2	+1
+use	FUN_0012f0f8	iVar25	bodyBlockCursor	INFERRED	cursor over the loop body blocks	^\s*piVar27\ =\ \*\(int\ \*\*\)\(iVar25\ \+\ 8\);$	+1
+use	FUN_0012f0f8	iVar25	bodyBlockCursor	INFERRED	cursor over the loop body blocks	^\s*iVar25\ =\ \*\(int\ \*\)\(iVar25\ \+\ 8\);$@2	+2
+use	FUN_0012f0f8	iVar25	prevCopyEnd	INFERRED	end block of the previous copy that the next copy is connected to	^\s*iVar25\ =\ iVar9;$	+1
+use	FUN_0012f0f8	iVar25	prevCopyEnd	INFERRED	end block of the previous copy that the next copy is connected to	^\s*FUN_000e8e4c\(iVar25,\*puVar17\);$	+1
+use	FUN_0012f0f8	iVar25	prevCopyEnd	INFERRED	end block of the previous copy that the next copy is connected to	^\s*iVar25\ =\ \*param_4;$	+1
+use	FUN_0012f0f8	iVar25	rewireCursor	INFERRED	cursor over the original body blocks for the rewiring pass	^\s*iVar25\ =\ param_3;$@3	+1
+use	FUN_0012f0f8	iVar25	rewireCursor	INFERRED	cursor over the original body blocks for the rewiring pass	^\s*iVar23\ =\ \*\(int\ \*\)\(iVar25\ \+\ 8\);$	+1
+use	FUN_0012f0f8	iVar25	rewireCursor	INFERRED	cursor over the original body blocks for the rewiring pass	^\s*iVar25\ =\ \*\(int\ \*\)\(iVar25\ \+\ 8\);$@3	+2
+use	FUN_0012f0f8	iVar25	nextFixBlock	INFERRED	block cursor in the offset fix-up walk	^\s*iVar25\ =\ \*\(int\ \*\)\(iVar5\ \+\ 8\);$	+3
+use	FUN_0012f0f8	iVar25	nextFixBlock	INFERRED	block cursor in the offset fix-up walk	^\s*iVar25\ =\ \*\(int\ \*\)\(iVar5\ \+\ 8\);$@2	+1
+use	FUN_0012f0f8	iVar25	nextFixBlock	INFERRED	block cursor in the offset fix-up walk	^\s*bVar2\ =\ iVar9\ !=\ iVar25;$	+2
+use	FUN_0012f0f8	iVar25	instIter	INFERRED	instruction iterator in the offset fix-up walk	^\s*iVar25\ =\ iVar4;$	+1
+use	FUN_0012f0f8	iVar25	instIter	INFERRED	instruction iterator in the offset fix-up walk	^\s*iVar25\ =\ \*\(int\ \*\)\(iVar8\ \+\ 8\);$	+1
+use	FUN_0012f0f8	iVar25	instIter	INFERRED	instruction iterator in the offset fix-up walk	^\s*iVar25\ =\ \*\(int\ \*\)\(iVar8\ \+\ 8\);$@2	+1
+use	FUN_0012f0f8	iVar25	instIter	INFERRED	instruction iterator in the offset fix-up walk	^\s*iVar4\ =\ \*\(int\ \*\)\(iVar25\ \+\ 8\);$	+3
+use	FUN_0012f0f8	piVar27	instNext	INFERRED	next instruction while iterating the header's list	^\s*for\ \(piVar27\ =\ \(int\ \*\)\(\*\(int\ \*\*\)\(iVar9\ \+\ 0x98\)\)\[2\];\ piVar27\ !=\ \(int\ \*\)0x0;$	+2
+use	FUN_0012f0f8	piVar27	instNext	INFERRED	next instruction while iterating the header's list	^\s*piVar27\ =\ \(int\ \*\)piVar19\[2\];$	+1
+use	FUN_0012f0f8	piVar27	instNext	INFERRED	next instruction while iterating the header's list	^\s*piVar27\ =\ \(int\ \*\)piVar19\[2\];$@2	+1
+use	FUN_0012f0f8	piVar27	instNext	INFERRED	next instruction while iterating the header's list	^\s*piVar19\ =\ piVar27;$	+1
+use	FUN_0012f0f8	piVar27	instCursor	INFERRED	instruction cursor	^\s*piVar27\ =\ piVar19;$	+1
+use	FUN_0012f0f8	piVar27	instCursor	INFERRED	instruction cursor	^\s*FUN_001234d8\(piVar27\[0x29\],piVar19\);$	+2
+use	FUN_0012f0f8	piVar27	bodyBlock	INFERRED	loop body block	^\s*piVar27\ =\ \*\(int\ \*\*\)\(iVar25\ \+\ 8\);$	+5
+use	FUN_0012f0f8	piVar27	origBlock	INFERRED	original body block being cloned	^\s*piVar27\ =\ \*\(int\ \*\*\)\(iVar23\ \+\ 8\);$	+2
+use	FUN_0012f0f8	piVar27	origBlock	INFERRED	original body block being cloned	^\s*piVar18\ =\ \(int\ \*\)piVar27\[0x26\];$	+3
+use	FUN_0012f0f8	piVar27	origBlock	INFERRED	original body block being cloned	^\s*uVar29\ =\ \(\*\*\(code\ \*\*\)\(\*piVar27\ \+\ 0x24\)\)\(piVar27\);$	+4
+use	FUN_0012f0f8	piVar27	origBlock	INFERRED	original body block being cloned	^\s*iVar22\ =\ \(\*\*\(code\ \*\*\)\(\*piVar27\ \+\ 0x2c\)\)\(piVar27\);$	+2
+use	FUN_0012f0f8	piVar27	clonedBlockObj	INFERRED	clone whose fields are rewired	^\s*piVar27\ =\ \(int\ \*\)\*puVar17;$	+2
+use	FUN_0012f0f8	piVar27	clonedBlockObj	INFERRED	clone whose fields are rewired	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*piVar27\ \+\ 0x28\)\)\(piVar27\);$	+1
+use	FUN_0012f0f8	piVar27	clonedBlockObj	INFERRED	clone whose fields are rewired	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*piVar27\ \+\ 0x2c\)\)\(piVar27\);$@2	+1
+use	FUN_0012f0f8	piVar27	clonedBlockObj	INFERRED	clone whose fields are rewired	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*piVar27\ \+\ 0x30\)\)\(piVar27\);$	+6
+use	FUN_0012f0f8	piVar27	clonedBlockObj	INFERRED	clone whose fields are rewired	^\s*piVar27\[0x54\]\ =\ \*piVar18;$	+1
+use	FUN_0012f0f8	piVar27	clonedBlockObj	INFERRED	clone whose fields are rewired	^\s*piVar27\[0x55\]\ =\ \*piVar18;$	+1
+use	FUN_0012f0f8	piVar27	clonedBlockObj	INFERRED	clone whose fields are rewired	^\s*piVar27\[0x4b\]\ =\ \*piVar18;$	+1
+use	FUN_0012f0f8	piVar27	clonedBlockObj	INFERRED	clone whose fields are rewired	^\s*piVar27\[0x4f\]\ =\ \*piVar18;$	+1
+use	FUN_0012f0f8	piVar27	clonedBlockObj	INFERRED	clone whose fields are rewired	^\s*piVar27\[0x4d\]\ =\ \*piVar18;$	+1
+use	FUN_0012f0f8	piVar27	clonedBlockObj	INFERRED	clone whose fields are rewired	^\s*piVar27\[0x4e\]\ =\ \*piVar18;$	+1
+use	FUN_0012f0f8	piVar27	nextExitInst	INFERRED	next instruction of the header	^\s*piVar27\ =\ \(int\ \*\)\(\*\(int\ \*\*\)\(param_3\ \+\ 0x98\)\)\[2\];$	+1
+use	FUN_0012f0f8	piVar27	nextExitInst	INFERRED	next instruction of the header	^\s*if\ \(piVar27\ ==\ \(int\ \*\)0x0\)\ \{$	+1
+use	FUN_0012f0f8	piVar27	nextExitInst	INFERRED	next instruction of the header	^\s*piVar27\ =\ \(int\ \*\)piVar19\[2\];$@3	+1
+use	FUN_0012f0f8	piVar27	nextExitInst	INFERRED	next instruction of the header	^\s*piVar27\ =\ \(int\ \*\)piVar19\[2\];$@4	+1
+use	FUN_0012f0f8	piVar27	nextExitInst	INFERRED	next instruction of the header	^\s*piVar27\ =\ \(int\ \*\)piVar19\[2\];$@5	+1
+use	FUN_0012f0f8	piVar27	nextExitInst	INFERRED	next instruction of the header	^\s*piVar19\ =\ piVar27;$@2	+2
+use	FUN_0012f0f8	puVar28	cloneVector	INFERRED	vector header (allocation + 1) of the clone vector	^\s*puVar28\ =\ puVar12\ \+\ 1;$	+1
+use	FUN_0012f0f8	puVar28	cloneVector	INFERRED	vector header (allocation + 1) of the clone vector	^\s*if\ \(uVar21\ <\ \*puVar28\)\ \{$	+1
+use	FUN_0012f0f8	puVar28	cloneVector	INFERRED	vector header (allocation + 1) of the clone vector	^\s*piVar18\ =\ \(int\ \*\)FUN_0019423c\(puVar28,uVar21\);$	+1
+use	FUN_0012f0f8	puVar28	cloneVector	INFERRED	vector header (allocation + 1) of the clone vector	^\s*if\ \(uVar24\ <\ \*puVar28\)\ \{$	+1
+use	FUN_0012f0f8	puVar28	cloneVector	INFERRED	vector header (allocation + 1) of the clone vector	^\s*FUN_0019423c\(puVar28,uVar24\);$	+1
+use	FUN_0012f0f8	puVar28	cloneVector	INFERRED	vector header (allocation + 1) of the clone vector	^\s*uVar20\ =\ \*puVar28;$	+1
+use	FUN_0012f0f8	puVar28	cloneVector	INFERRED	vector header (allocation + 1) of the clone vector	^\s*uVar20\ =\ \*puVar28;$@2	+1
+use	FUN_0012f0f8	puVar28	cloneVector	INFERRED	vector header (allocation + 1) of the clone vector	^\s*puVar17\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar28,uVar24\);$	+2
+use	FUN_0012f0f8	puVar28	cloneVector	INFERRED	vector header (allocation + 1) of the clone vector	^\s*puVar17\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar28,uVar16\);$	+1
+use	FUN_0012f0f8	puVar28	cloneVector	INFERRED	vector header (allocation + 1) of the clone vector	^\s*if\ \(\*puVar28\ ==\ 0\)\ \{$	+2
+use	FUN_0012f0f8	puVar28	cloneVector	INFERRED	vector header (allocation + 1) of the clone vector	^\s*if\ \(uVar24\ <\ \*puVar28\)\ \{$@2	+1
+use	FUN_0012f0f8	puVar28	cloneVector	INFERRED	vector header (allocation + 1) of the clone vector	^\s*puVar17\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar28,uVar24\);$@2	+1
+use	FUN_0012f0f8	puVar28	cloneVector	INFERRED	vector header (allocation + 1) of the clone vector	^\s*if\ \(uVar24\ <\ \*puVar28\)\ \{$@3	+1
+use	FUN_0012f0f8	puVar28	cloneVector	INFERRED	vector header (allocation + 1) of the clone vector	^\s*piVar18\ =\ \(int\ \*\)FUN_0019423c\(puVar28,uVar24\);$	+1
+use	FUN_0012f0f8	puVar28	cloneVector	INFERRED	vector header (allocation + 1) of the clone vector	^\s*if\ \(uVar24\ <\ \*puVar28\)\ \{$@4	+1
+use	FUN_0012f0f8	puVar28	cloneVector	INFERRED	vector header (allocation + 1) of the clone vector	^\s*piVar18\ =\ \(int\ \*\)FUN_0019423c\(puVar28,uVar24\);$@2	+1
+use	FUN_0012f0f8	puVar28	cloneVector	INFERRED	vector header (allocation + 1) of the clone vector	^\s*if\ \(uVar24\ <\ \*puVar28\)\ \{$@5	+1
+use	FUN_0012f0f8	puVar28	cloneVector	INFERRED	vector header (allocation + 1) of the clone vector	^\s*piVar18\ =\ \(int\ \*\)FUN_0019423c\(puVar28,uVar24\);$@3	+1
+use	FUN_0012f0f8	puVar28	cloneVector	INFERRED	vector header (allocation + 1) of the clone vector	^\s*if\ \(uVar24\ <\ \*puVar28\)\ \{$@6	+1
+use	FUN_0012f0f8	puVar28	cloneVector	INFERRED	vector header (allocation + 1) of the clone vector	^\s*piVar18\ =\ \(int\ \*\)FUN_0019423c\(puVar28,uVar24\);$@4	+1
+use	FUN_0012f0f8	puVar28	cloneVector	INFERRED	vector header (allocation + 1) of the clone vector	^\s*if\ \(uVar24\ <\ \*puVar28\)\ \{$@7	+1
+use	FUN_0012f0f8	puVar28	cloneVector	INFERRED	vector header (allocation + 1) of the clone vector	^\s*piVar18\ =\ \(int\ \*\)FUN_0019423c\(puVar28,uVar24\);$@5	+1
+use	FUN_0012f0f8	puVar28	cloneVector	INFERRED	vector header (allocation + 1) of the clone vector	^\s*if\ \(uVar24\ <\ \*puVar28\)\ \{$@8	+1
+use	FUN_0012f0f8	puVar28	cloneVector	INFERRED	vector header (allocation + 1) of the clone vector	^\s*piVar18\ =\ \(int\ \*\)FUN_0019423c\(puVar28,uVar24\);$@6	+1
+local	FUN_0012f0f8	local_68	iteration	INFERRED	copy number 1..unrollCount-1
+local	FUN_0012f0f8	local_64	counterValue	INFERRED	loop counter value of the current copy
+local	FUN_0012f0f8	local_60	exitBlock	INFERRED	block after the loop header (param_3 + 8)

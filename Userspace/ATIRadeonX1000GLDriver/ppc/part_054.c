@@ -88,7 +88,7 @@ int R520MachineAssembler__vslot28_endLoop(this, node, block, compiler)
   int iVar7;
   int loopRemaining;
   int loopStartRecord;
-  undefined8 uVar10;
+  undefined8 optionEnabled;
   
   vector = *(int *)(this[4] + 0x24);
   loopPtr = (int *)0x0;
@@ -99,8 +99,8 @@ int R520MachineAssembler__vslot28_endLoop(this, node, block, compiler)
   loopStartRecord = *loopPtr;
   Vector__removeAt(vector,loopIndex2 - 1);
   iVar4 = this[0x18];
-  uVar10 = Compiler__isOptionEnabled(compiler,0x4b);
-  if ((int)((ulonglong)uVar10 >> 0x20) == 0) {
+  optionEnabled = Compiler__isOptionEnabled(compiler,0x4b);
+  if ((int)((ulonglong)optionEnabled >> 0x20) == 0) {
     iVar4 = this[0x2a];
   }
   else {
@@ -160,7 +160,7 @@ LAB_001a168c:
   *(undefined1 *)(this[0x18] * 0x48 + this[0x2a] + 0x14) = 1;
   *(char *)(this[0x18] * 0x48 + this[0x2a] + 0x13) = (char)iVar3;
   (**(code **)(*this + 0x15c))
-            (this,(int)uVar10,iVar3,iVar7,a4,iVar4,*(code **)(*this + 0x15c),0);
+            (this,(int)optionEnabled,iVar3,iVar7,a4,iVar4,*(code **)(*this + 0x15c),0);
   if (*(int *)(node + 0xdc) != 0) {
     *(undefined1 *)(this[0x18] * 0x48 + this[0x2a] + -0x44) = 1;
   }
@@ -286,6 +286,7 @@ int R520MachineAssembler__vslot73_setOutputDestination(this, writeRgb, writeAlph
   int writeAlpha;
   int inst;
 {
+  int operandRecord;
   int iVar1;
   byte outputFlags;
   undefined1 lanesToRgbMaskResult;
@@ -321,8 +322,8 @@ int R520MachineAssembler__vslot73_setOutputDestination(this, writeRgb, writeAlph
       *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8) + 0x16) = uVar6;
       iVar4 = *(int *)(this + 0x60);
       destinationIndex = *(int *)(this + 0xa8);
-      iVar1 = IRInst__getOperandRecord(inst,0);
-      lanesToRgbMaskResult = lanesToRgbMask(*(undefined4 *)(iVar1 + 0x10));
+      operandRecord = IRInst__getOperandRecord(inst,0);
+      lanesToRgbMaskResult = lanesToRgbMask(*(undefined4 *)(operandRecord + 0x10));
       *(undefined1 *)(iVar4 * 0x48 + destinationIndex + 0x15) = lanesToRgbMaskResult;
     }
     if (writeAlpha != 0) {
@@ -348,6 +349,9 @@ int R520MachineAssembler__vslot23_emitTexRecord(this, inst, blockArg, compiler)
   undefined4 blockArg;
   int compiler;
 {
+  undefined4 sourceDef;
+  int optionEnabled;
+  int operandRecord;
   bool bVar1;
   undefined1 uVar2;
   int *src1Inst;
@@ -438,11 +442,11 @@ LAB_001a1f84:
   bVar1 = *(int *)(inst + 0x138) == 1;
   if (loopRemaining == 0x77) {
     *(undefined1 *)(this[0x18] * 0x48 + this[0x2a] + 0x1f) = 0;
-    iVar13 = IRInst__getOperandRecord(inst,1);
-    FUN_000f32cc(&local_44,*(undefined4 *)(iVar13 + 0x10));
+    operandRecord = IRInst__getOperandRecord(inst,1);
+    FUN_000f32cc(&local_44,*(undefined4 *)(operandRecord + 0x10));
     *(undefined4 *)(inst + 0x9c) = local_44;
-    iVar13 = IRInst__getOperandRecord(inst,1);
-    *(undefined4 *)(iVar13 + 0x10) = 0x10203;
+    operandRecord = IRInst__getOperandRecord(inst,1);
+    *(undefined4 *)(operandRecord + 0x10) = 0x10203;
     goto LAB_001a20d4;
   }
   if ((loopRemaining - 0x75U < 2) || (loopRemaining == 0xae)) {
@@ -459,14 +463,14 @@ LAB_001a20cc:
     iVar13 = this[0x18] * 0x48 + this[0x2a];
     if ((*(uint *)(inst + 0x14) & 0x2000) != 0) goto LAB_001a20cc;
 LAB_001a20b4:
-    iVar5 = Compiler__isOptionEnabled(compiler,0x22);
+    optionEnabled = Compiler__isOptionEnabled(compiler,0x22);
     uVar2 = 1;
-    if (iVar5 == 0) goto LAB_001a20cc;
+    if (optionEnabled == 0) goto LAB_001a20cc;
   }
   *(undefined1 *)(iVar13 + 0x1c) = uVar2;
 LAB_001a20d4:
-  iVar13 = IRInst__getOperandRecord(inst,1);
-  FUN_000f3470(&local_40,*(undefined4 *)(iVar13 + 0x10));
+  operandRecord = IRInst__getOperandRecord(inst,1);
+  FUN_000f3470(&local_40,*(undefined4 *)(operandRecord + 0x10));
   iVar13 = this[0x18] * 0x48 + this[0x2a];
   *(uint *)(iVar13 + 0x14) = local_40 >> 2 & 0xc00000 | *(uint *)(iVar13 + 0x14) & 0xff3fffff;
   iVar13 = this[0x18] * 0x48 + this[0x2a];
@@ -488,13 +492,13 @@ LAB_001a20d4:
   *(undefined1 *)(this[0x18] * 0x48 + this[0x2a] + 0x1e) = 0;
   iVar5 = this[0x18] * 0x48 + this[0x2a];
   bVar10 = *(byte *)(iVar5 + 0x1d);
-  iVar13 = IRInst__getOperandRecord(inst,0);
-  lanesToRgbMaskResult = lanesToRgbMask(*(undefined4 *)(iVar13 + 0x10));
+  operandRecord = IRInst__getOperandRecord(inst,0);
+  lanesToRgbMaskResult = lanesToRgbMask(*(undefined4 *)(operandRecord + 0x10));
   *(byte *)(iVar5 + 0x1d) = bVar10 | lanesToRgbMaskResult;
   iVar5 = this[0x18] * 0x48 + this[0x2a];
   bVar10 = *(byte *)(iVar5 + 0x1e);
-  iVar13 = IRInst__getOperandRecord(inst,0);
-  *(byte *)(iVar5 + 0x1e) = bVar10 | *(char *)(iVar13 + 0x13) == '\0';
+  operandRecord = IRInst__getOperandRecord(inst,0);
+  *(byte *)(iVar5 + 0x1e) = bVar10 | *(char *)(operandRecord + 0x13) == '\0';
   *(undefined2 *)(this[0x18] * 0x48 + this[0x2a] + 0x10) = 0;
   *(undefined2 *)(this[0x18] * 0x48 + this[0x2a] + 0x12) = 0;
   this[0x2c] = this[0x18];
@@ -512,8 +516,8 @@ LAB_001a20d4:
     iVar13 = this[0x18];
     loopRemaining = this[0x2a];
     uVar14 = *(undefined4 *)(compiler + COMP_currentProgram);
-    uVar6 = IRInst__getOperandSource(inst,2);
-    uVar7 = thunk_FUN_00134de8(uVar14,uVar6);
+    sourceDef = IRInst__getOperandSource(inst,2);
+    uVar7 = thunk_FUN_00134de8(uVar14,sourceDef);
     *(undefined2 *)(iVar13 * 0x48 + loopRemaining + 0x10) = uVar7;
     loopRemaining = IRInst__getOperandRecord(inst,3);
     uVar9 = *(uint *)(loopRemaining + 0x10);
@@ -528,8 +532,8 @@ LAB_001a20d4:
     iVar13 = this[0x18];
     loopRemaining = this[0x2a];
     uVar14 = *(undefined4 *)(compiler + COMP_currentProgram);
-    uVar6 = IRInst__getOperandSource(inst,3);
-    uVar7 = thunk_FUN_00134de8(uVar14,uVar6);
+    sourceDef = IRInst__getOperandSource(inst,3);
+    uVar7 = thunk_FUN_00134de8(uVar14,sourceDef);
     *(undefined2 *)(iVar13 * 0x48 + loopRemaining + 0x12) = uVar7;
   }
   if (src1IsMix != 0) {
@@ -574,7 +578,7 @@ int R520MachineAssembler__emitCompareToPredicate(this, inst, blockArg, flag)
   int operandRecord1;
   int inst2;
   undefined4 uVar2;
-  int iVar3;
+  int operandRecord3;
   int operandRecord;
   uint uVar5;
   undefined4 a3;
@@ -586,11 +590,11 @@ int R520MachineAssembler__emitCompareToPredicate(this, inst, blockArg, flag)
   newSource = IRInst__getOperandSource(inst,1);
   IRInst__setOperandSource(inst2,1,newSource,0,this[3]);
   operandRecord2 = inst2 + 0xa4;
-  iVar3 = IRInst__getOperandRecord(inst,1);
-  uVar2 = *(undefined4 *)(iVar3 + 0x10);
-  iVar3 = IRInst__getOperandRecord(inst2,1);
+  operandRecord3 = IRInst__getOperandRecord(inst,1);
+  uVar2 = *(undefined4 *)(operandRecord3 + 0x10);
+  operandRecord3 = IRInst__getOperandRecord(inst2,1);
   source1Flags = *(uint *)(inst + 0xb8);
-  *(undefined4 *)(iVar3 + 0x10) = uVar2;
+  *(undefined4 *)(operandRecord3 + 0x10) = uVar2;
   IROperand__setModifierBits(operandRecord2,2,source1Flags >> 1 & 1);
   operandRecord1 = inst2 + 0xbc;
   IROperand__setModifierBits(operandRecord2,1,*(uint *)(inst + 0xb8) & 1);
@@ -655,7 +659,7 @@ int R520MachineAssembler__vslot39_appendLoopStartRecord(this, loopCount)
   undefined4 loopCount;
 {
   int iVar1;
-  int *piVar2;
+  int *elementRef;
   undefined4 in_r5;
   undefined4 in_r6;
   undefined4 in_r7;
@@ -676,13 +680,13 @@ int R520MachineAssembler__vslot39_appendLoopStartRecord(this, loopCount)
   vectorFilledCount = vector[1];
   if (vectorFilledCount < *vector) {
     _memset(vectorFilledCount * 4 + vector[2],0,4);
-    piVar2 = (int *)(vectorFilledCount * 4 + vector[2]);
+    elementRef = (int *)(vectorFilledCount * 4 + vector[2]);
     vector[1] = vectorFilledCount + 1;
   }
   else {
-    piVar2 = (int *)Vector__elementRefGrow(vector,vectorFilledCount);
+    elementRef = (int *)Vector__elementRefGrow(vector,vectorFilledCount);
   }
-  *piVar2 = iVar1 * 0x48 + iVar3 + -0x48;
+  *elementRef = iVar1 * 0x48 + iVar3 + -0x48;
   return;
 }
 
@@ -693,7 +697,7 @@ int R520MachineAssembler__appendBranchEndRecord(this, count, variant)
   int variant;
 {
   int recordIndex;
-  int *piVar2;
+  int *elementRef;
   int recordsBase;
   uint vectorFilledCount;
   uint *vector;
@@ -721,13 +725,13 @@ int R520MachineAssembler__appendBranchEndRecord(this, count, variant)
   vectorFilledCount = vector[1];
   if (vectorFilledCount < *vector) {
     _memset(vectorFilledCount * 4 + vector[2],0,4);
-    piVar2 = (int *)(vectorFilledCount * 4 + vector[2]);
+    elementRef = (int *)(vectorFilledCount * 4 + vector[2]);
     vector[1] = vectorFilledCount + 1;
   }
   else {
-    piVar2 = (int *)Vector__elementRefGrow(vector,vectorFilledCount);
+    elementRef = (int *)Vector__elementRefGrow(vector,vectorFilledCount);
   }
-  *piVar2 = recordIndex * 0x48 + recordsBase + -0x48;
+  *elementRef = recordIndex * 0x48 + recordsBase + -0x48;
   return;
 }
 
@@ -741,14 +745,14 @@ int R520MachineAssembler__emitConditionalBranch(this, branchCount, inst, variant
   undefined4 parentNode;
 {
   int callResult;
-  uint uVar2;
+  uint predecessor;
   int local_38 [7];
   
   local_38[0] = 0;
   callResult = evaluateConstantComparison(inst,local_38);
   if (local_38[0] == 0) {
-    uVar2 = Block__getPredecessor(parentNode,0);
-    ((int (*)())R520MachineAssembler__emitCompareToPredicate)(this,inst,blockFlag,uVar2);
+    predecessor = Block__getPredecessor(parentNode,0);
+    ((int (*)())R520MachineAssembler__emitCompareToPredicate)(this,inst,blockFlag,predecessor);
     ((int (*)())R520MachineAssembler__appendBranchEndRecord)(this,branchCount + -1,variant);
     *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8) + -0x36) = 0xf0;
     *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8) + -0x3d) = 1;
@@ -871,7 +875,7 @@ int R520MachineAssembler__vslot25_assembleLoop(this, node, block, extra1, extra2
   undefined4 extra4;
 {
   int *conditionNode;
-  uint uVar2;
+  uint predecessor;
   undefined4 hasCondition;
   int recordIndexBefore;
   int iVar5;
@@ -887,8 +891,8 @@ int R520MachineAssembler__vslot25_assembleLoop(this, node, block, extra1, extra2
   if ((*(int *)(node + 0xdc) == 0) || (hasCondition = 1, recordIndexBefore != this[0x18])) {
     hasCondition = 0;
   }
-  uVar2 = Block__getPredecessor(node,0);
-  ((int (*)())R520MachineAssembler__emitCompareToPredicate)(this,conditionNode,hasCondition,uVar2);
+  predecessor = Block__getPredecessor(node,0);
+  ((int (*)())R520MachineAssembler__emitCompareToPredicate)(this,conditionNode,hasCondition,predecessor);
   iVar5 = *(int *)(node + 0x138);
   recordIndexBefore = DList__count(iVar5 + 0x90);
   if ((recordIndexBefore < 3) && (recordIndexBefore = FUN_000e79e8(iVar5), recordIndexBefore != 0)) {
@@ -909,6 +913,7 @@ int R520MachineAssembler__vslot37_closeBranch(this, node)
   int *this;
   int *node;
 {
+  int *elementRef;
   uint vectorFilledCount;
   int *piVar1;
   undefined4 a1;
@@ -962,13 +967,13 @@ int R520MachineAssembler__vslot37_closeBranch(this, node)
   vectorFilledCount = vector[1];
   if (vectorFilledCount < *vector) {
     _memset(vectorFilledCount * 4 + vector[2],0,4);
-    piVar1 = (int *)(vectorFilledCount * 4 + vector[2]);
+    elementRef = (int *)(vectorFilledCount * 4 + vector[2]);
     vector[1] = vectorFilledCount + 1;
   }
   else {
-    piVar1 = (int *)Vector__elementRefGrow(vector,vectorFilledCount);
+    elementRef = (int *)Vector__elementRefGrow(vector,vectorFilledCount);
   }
-  *piVar1 = stackVector;
+  *elementRef = stackVector;
   if (*(int *)(node[0x4f] + 0xdc) != 0) {
     *(undefined1 *)(this[0x18] * 0x48 + this[0x2a] + 4) = 1;
   }

@@ -1,0 +1,59 @@
+func	FUN_0001ac30	gld_validatePixelFormat	INFERRED	checks one 0x34-byte pixel-format record (display mask +0x30, renderer id 0x19xx, colour/depth/stencil words) against the supported combinations; returns 0 when valid, 0x271e for NULL, 0x2716 for a bad display mask, 0x2712 otherwise
+func	FUN_0001ae20	gld_expandPixelFormatVariants	INFERRED	normalises a requested pixel-format row (depth/stencil/colour/sample fields) and appends the 2..5 extra 0x34-byte variants (aux buffer bits 0x800000/0x2000000/0x8000000), validating each with gld_validatePixelFormat; returns the variant count or 0
+func	FUN_0001b150	gld_fillMaxPixelFormat	INFERRED	sets every capability field of a pixel-format record to the renderer maximum (aux bits 0xa800000, stencil|depth, 2 sample buffers, 6 samples)
+func	FUN_0001b4b0	gld_updateYInvertedFlag	INFERRED	sets ctx yInverted to 1 unless renderFlags has the 0x70000000 (pbuffer) bits, and sets the byte at ctx+0x2b7d
+func	FUN_0001bac0	gld_emitFramebufferState	INFERRED	builds the 0x41000000 packet describing the bound framebuffer object (render size, up to four colour attachments, depth and stencil) in the command stream and drops the texture refcounts it held
+local	FUN_0001ae20	uVar1	sampleCountCode	INFERRED	0 or 2/4/6: sample count stored at +0x26 once +0x24 (sample buffers) is non-zero; stays 0 otherwise
+local	FUN_0001ae20	iVar2	validateResult	INFERRED	result of FUN_0001ac30 (gld_validatePixelFormat) on one variant; non-zero rejects the row
+local	FUN_0001ae20	iVar4	variantCount	INFERRED	number of 0x34-byte pixel-format variants now stored at candidateRow (2 base ones + up to 3 optional)
+local	FUN_0001ae20	iVar5	variantPtr	INFERRED	address of the variant slot being filled (candidateRow + variantCount * 0x34)
+use	FUN_0001ae20	uVar3	depthStencilPolicyBits	INFERRED	pixel-format word +0x18 before it is narrowed to a single depth choice (0x1c01 mask, bits 1/0x400/0x800)	^\s*uVar3\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x18\);$	+1
+use	FUN_0001ae20	uVar3	depthStencilPolicyBits	INFERRED	pixel-format word +0x18 before it is narrowed to a single depth choice (0x1c01 mask, bits 1/0x400/0x800)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x18\)\ =\ uVar3\ \&\ 0x1c01;$	+2
+use	FUN_0001ae20	uVar3	depthStencilPolicyBits	INFERRED	pixel-format word +0x18 before it is narrowed to a single depth choice (0x1c01 mask, bits 1/0x400/0x800)	^\s*if\ \(\(uVar3\ \&\ 1\)\ !=\ 0\)\ goto\ LAB_0001ae88;$	+3
+use	FUN_0001ae20	uVar3	colorBitsWord	INFERRED	pixel-format word +0x14: sign bit / 0x8000 / 0x800000 select the single colour layout kept	^\s*uVar3\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x14\);$	+2
+use	FUN_0001ae20	uVar3	colorBitsWord	INFERRED	pixel-format word +0x14: sign bit / 0x8000 / 0x800000 select the single colour layout kept	^\s*else\ if\ \(\(uVar3\ \&\ 0x8000\)\ ==\ 0\)\ \{$	+2
+use	FUN_0001ae20	uVar3	surfaceFlags	INFERRED	pixel-format word +8 (bit 3 cleared unless +0xc bit 3 is set; bit 0x2000 clears the sample fields)	^\s*uVar3\ =\ \*\(uint\ \*\)\(param_1\ \+\ 8\)\ \&\ 0xfffffff7;$	+2
+use	FUN_0001ae20	uVar3	surfaceFlags	INFERRED	pixel-format word +8 (bit 3 cleared unless +0xc bit 3 is set; bit 0x2000 clears the sample fields)	^\s*uVar3\ =\ \*\(uint\ \*\)\(param_1\ \+\ 8\);$	+1
+use	FUN_0001ae20	uVar3	surfaceFlags	INFERRED	pixel-format word +8 (bit 3 cleared unless +0xc bit 3 is set; bit 0x2000 clears the sample fields)	^\s*if\ \(\(uVar3\ \&\ 0x2000\)\ !=\ 0\)\ \{$	+1
+use	FUN_0001ae20	uVar3	bufferMask	INFERRED	pixel-format word +0x10 tested for the 0x800000 / 0x2000000 / 0x8000000 extra-variant bits	^\s*uVar3\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x10\);$	+1
+use	FUN_0001ae20	uVar3	bufferMask	INFERRED	pixel-format word +0x10 tested for the 0x800000 / 0x2000000 / 0x8000000 extra-variant bits	^\s*if\ \(\(uVar3\ \&\ 0x800000\)\ !=\ 0\)\ \{$	+1
+use	FUN_0001ae20	uVar3	bufferMask	INFERRED	pixel-format word +0x10 tested for the 0x800000 / 0x2000000 / 0x8000000 extra-variant bits	^\s*if\ \(\(uVar3\ \&\ 0x2000000\)\ !=\ 0\)\ \{$	+1
+use	FUN_0001ae20	uVar3	bufferMask	INFERRED	pixel-format word +0x10 tested for the 0x800000 / 0x2000000 / 0x8000000 extra-variant bits	^\s*if\ \(\(uVar3\ \&\ 0x8000000\)\ !=\ 0\)\ \{$	+1
+local	FUN_0001bac0	in_RESERVE	reservation	INFERRED	PowerPC reservation bit set by the lwarx of the compare-and-store loop (same idiom as _gldAllocVertexBuffer)
+local	FUN_0001bac0	in_cr0	crBits	INFERRED	cr0 as produced by the stwcx. of the compare-and-store loop
+local	FUN_0001bac0	puVar2	packetBody	INFERRED	32-byte aligned body of the framebuffer-state packet {0x41000000, 4, width, height, ...}
+local	FUN_0001bac0	iVar9	attachmentsLeft	INFERRED	countdown of the four colour attachments
+local	FUN_0001bac0	uVar7	attachmentEnum	INFERRED	GL colour-attachment enum stored in framebufferObj[0..] (0x8ce0 + n); 0 = unused
+local	FUN_0001bac0	iVar8	attachmentDesc	INFERRED	0x18-byte per-attachment descriptor of the framebuffer object ({?, level, layer, ...})
+local	FUN_0001bac0	piVar6	entry	INFERRED	current 6-word attachment entry of the packet {ptr, offsets..., size, format}
+use	FUN_0001bac0	puVar4	packetStart	INFERRED	command-stream slot returned by the allocate callback (ctx+0x2998); the packet header 0xc0001000 | length is written here	^\s*puVar4\ =\ \(uint\ \*\)\(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x2998\)\)\(param_1\ \+\ 0x240,0x83\);$	+1
+use	FUN_0001bac0	puVar4	packetStart	INFERRED	command-stream slot returned by the allocate callback (ctx+0x2998); the packet header 0xc0001000 | length is written here	^\s*\*\(uint\ \*\*\)\(param_1\ \+\ 0x298c\)\ =\ puVar4;$	+4
+use	FUN_0001bac0	puVar4	lastHeader	INFERRED	ctx+0x1d8: header word of the previous ring packet, patched with the packet length	^\s*puVar4\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 0x1d8\);$	+2
+use	FUN_0001bac0	iVar5	attachmentIndex	INFERRED	index 0..3 of the colour attachment being described	^\s*iVar5\ =\ 0;$	+1
+use	FUN_0001bac0	iVar5	attachmentIndex	INFERRED	index 0..3 of the colour attachment being described	^\s*uVar7\ =\ \(uint\)\*\(ushort\ \*\)\(iVar5\ \*\ 2\ \+\ \*param_2\ \+\ 0x90\);$	+1
+use	FUN_0001bac0	iVar5	attachmentIndex	INFERRED	index 0..3 of the colour attachment being described	^\s*iVar5\ =\ iVar5\ \+\ 1;$	+1
+use	FUN_0001bac0	iVar5	releaseResult	INFERRED	result of the store-conditional that drops the texture refcount	^\s*iVar5\ =\ storeWordConditionalIndexed\(\*piVar3\ \+\ 0x10000,0,piVar3\);$	+2
+use	FUN_0001bac0	iVar1	attachmentSlotOffset	INFERRED	(enum - 0x8ce0) * 4: byte offset into the attachment pointer array	^\s*iVar1\ =\ \(uVar7\ \-\ 0x8ce0\)\ \*\ 4;$	+1
+use	FUN_0001bac0	iVar1	attachmentSlotOffset	INFERRED	(enum - 0x8ce0) * 4: byte offset into the attachment pointer array	^\s*piVar6\[5\]\ =\ \(uint\)\*\(byte\ \*\)\(\*\(int\ \*\)\(iVar1\ \+\ param_2\[1\]\)\ \+\ 0x38\);$	+3
+use	FUN_0001bac0	iVar1	releaseStatus	INFERRED	result of the store-conditional that drops the texture refcount	^\s*iVar1\ =\ storeWordConditionalIndexed\(\*piVar3\ \+\ 0x10000,0,piVar3\);$	+2
+use	FUN_0001bac0	piVar3	nextEntry	INFERRED	next free entry of the packet body	^\s*piVar3\ =\ puVar2\ \+\ 6;$	+1
+use	FUN_0001bac0	piVar3	nextEntry	INFERRED	next free entry of the packet body	^\s*piVar6\ =\ piVar3;$	+1
+use	FUN_0001bac0	piVar3	nextEntry	INFERRED	next free entry of the packet body	^\s*piVar3\ =\ piVar6\ \+\ 6;$	+1
+use	FUN_0001bac0	piVar3	nextEntry	INFERRED	depth entry slot of the packet body	^\s*\*piVar3\ =\ \-1;$	+1
+use	FUN_0001bac0	piVar3	nextEntry	INFERRED	depth entry slot of the packet body	^\s*\*piVar3\ =\ param_2\[0x2f\];$	+1
+use	FUN_0001bac0	piVar3	refCountWord	INFERRED	refcount word (texture backing +0x10) decremented by the store-conditional loop	^\s*piVar3\ =\ \(int\ \*\)\(\*\(int\ \*\)\(\*\(int\ \*\)\(iVar1\ \+\ param_2\[1\]\)\ \+\ 0x34\)\ \+\ 0x10\);$	+1
+use	FUN_0001bac0	piVar3	refCountWord	INFERRED	refcount word (texture backing +0x10) decremented by the store-conditional loop	^\s*iVar1\ =\ storeWordConditionalIndexed\(\*piVar3\ \+\ 0x10000,0,piVar3\);$	+1
+use	FUN_0001bac0	piVar3	refCountWord	INFERRED	refcount word (texture backing +0x10) decremented by the store-conditional loop	^\s*piVar3\ =\ \(int\ \*\)\(\*\(int\ \*\)\(\*\(int\ \*\)\(param_2\[1\]\ \+\ 0x10\)\ \+\ 0x34\)\ \+\ 0x10\);$	+1
+use	FUN_0001bac0	piVar3	refCountWord	INFERRED	refcount word (texture backing +0x10) decremented by the store-conditional loop	^\s*iVar5\ =\ storeWordConditionalIndexed\(\*piVar3\ \+\ 0x10000,0,piVar3\);$	+1
+use	FUN_0001bac0	piVar3	refCountWord	INFERRED	refcount word (texture backing +0x10) decremented by the store-conditional loop	^\s*piVar3\ =\ \(int\ \*\)\(\*\(int\ \*\)\(\*\(int\ \*\)\(param_2\[1\]\ \+\ 0x14\)\ \+\ 0x34\)\ \+\ 0x10\);$	+1
+use	FUN_0001bac0	piVar3	refCountWord	INFERRED	refcount word (texture backing +0x10) decremented by the store-conditional loop	^\s*iVar5\ =\ storeWordConditionalIndexed\(\*piVar3\ \+\ 0x10000,0,piVar3\);$@2	+1
+use	FUN_0001bac0	iVar5	releaseResult	INFERRED	result of the store-conditional that drops the texture refcount	^\s*iVar5\ =\ storeWordConditionalIndexed\(\*piVar3\ \+\ 0x10000,0,piVar3\);$@2	+2
+use	FUN_0001ae20	uVar3	depthStencilPolicyBits	INFERRED	pixel-format word +0x18 before it is narrowed to a single depth choice (0x1c01 mask, bits 1/0x400/0x800)	^\s*else\ if\ \(\(uVar3\ \&\ 1\)\ ==\ 0\)\ \{$	+1
+use	FUN_0001bac0	piVar3	refCountWord	INFERRED	refcount word (texture backing +0x10) decremented by the store-conditional loop	^\s*\*piVar3\ =\ iVar1;$	+1
+use	FUN_0001bac0	piVar3	refCountWord	INFERRED	refcount word (texture backing +0x10) decremented by the store-conditional loop	^\s*\*piVar3\ =\ iVar5;$	+1
+use	FUN_0001bac0	piVar3	refCountWord	INFERRED	refcount word (texture backing +0x10) decremented by the store-conditional loop	^\s*\*piVar3\ =\ iVar5;$@2	+1
+local	FUN_0001c1c0	auStack_28	endpointRgb	INFERRED	the two 565 endpoints expanded to 8 bits: {r0, g0, b0, r1, g1, b1}
+local	FUN_0001c1c0	uVar1	texelBlue	INFERRED	blue byte of the looked-up endpoint (index 0 or 1)
+local	FUN_0001c1c0	iVar8	redSum	INFERRED	weighted sum of the red endpoints (1/3 or 2/3 mix numerator)
+local	FUN_0001c1c0	iVar7	greenSum	INFERRED	weighted sum of the green endpoints (1/3 or 2/3 mix numerator)
+local	FUN_0001c1c0	iVar9	blue1	INFERRED	(color1 & 0x1f) * 8: blue of endpoint 1

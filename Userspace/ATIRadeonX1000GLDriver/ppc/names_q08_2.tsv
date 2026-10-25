@@ -1,0 +1,355 @@
+use	FUN_00181f00	iVar10	entryOrdinal	INFERRED	counts 0..vectorSize1-1 over the entries in the final write-back loop	^\s*iVar10\ =\ 0;$	+1
+use	FUN_00181f00	iVar10	entryOrdinal	INFERRED	counts 0..vectorSize1-1 over the entries in the final write-back loop	^\s*uVar26\ =\ uVar22\ \-\ iVar10;$	+1
+use	FUN_00181f00	iVar10	entryOrdinal	INFERRED	counts 0..vectorSize1-1 over the entries in the final write-back loop	^\s*iVar10\ =\ iVar10\ \+\ 1;$	+1
+use	FUN_00181f00	iVar10	entryOrdinal	INFERRED	counts 0..vectorSize1-1 over the entries in the final write-back loop	^\s*\}\ while\ \(iVar10\ !=\ iVar3\);$	+1
+use	FUN_00181f00	iVar19	operandSlot	INFERRED	source operand index 1..2 of the popped instruction	^\s*iVar19\ =\ 1;$	+1
+use	FUN_00181f00	iVar19	operandSlot	INFERRED	source operand index 1..2 of the popped instruction	^\s*iVar10\ =\ FUN_00105594\(iVar15,iVar19\);$	+1
+use	FUN_00181f00	iVar19	operandSlot	INFERRED	source operand index 1..2 of the popped instruction	^\s*bVar1\ =\ iVar19\ !=\ 2;$	+1
+use	FUN_00181f00	iVar19	operandSlot	INFERRED	source operand index 1..2 of the popped instruction	^\s*iVar19\ =\ iVar19\ \+\ 1;$	+1
+use	FUN_00181f00	iVar19	elementByteOffset	INFERRED	byte offset (index*4) of the current entry in the element vectors, decremented by 8 per pair	^\s*iVar19\ =\ uVar22\ \*\ 4;$	+2
+use	FUN_00181f00	iVar19	elementByteOffset	INFERRED	byte offset (index*4) of the current entry in the element vectors, decremented by 8 per pair	^\s*piVar8\ =\ \(int\ \*\)\(iVar19\ \+\ puVar6\[3\]\);$	+1
+use	FUN_00181f00	iVar19	elementByteOffset	INFERRED	byte offset (index*4) of the current entry in the element vectors, decremented by 8 per pair	^\s*piVar8\ =\ \(int\ \*\)\(iVar19\ \+\ puVar6\[3\]\);$@2	+1
+use	FUN_00181f00	iVar19	elementByteOffset	INFERRED	byte offset (index*4) of the current entry in the element vectors, decremented by 8 per pair	^\s*puVar11\ =\ \(undefined4\ \*\)\(iVar19\ \+\ puVar6\[3\]\);$	+1
+use	FUN_00181f00	iVar19	elementByteOffset	INFERRED	byte offset (index*4) of the current entry in the element vectors, decremented by 8 per pair	^\s*puVar11\ =\ \(undefined4\ \*\)\(iVar19\ \+\ puVar7\[3\]\);$	+1
+use	FUN_00181f00	iVar19	elementByteOffset	INFERRED	byte offset (index*4) of the current entry in the element vectors, decremented by 8 per pair	^\s*puVar11\ =\ \(undefined4\ \*\)\(iVar19\ \+\ puVar6\[3\]\);$@2	+1
+use	FUN_00181f00	iVar19	elementByteOffset	INFERRED	byte offset (index*4) of the current entry in the element vectors, decremented by 8 per pair	^\s*puVar11\ =\ \(undefined4\ \*\)\(iVar19\ \+\ puVar7\[3\]\);$@2	+1
+use	FUN_00181f00	iVar19	elementByteOffset	INFERRED	byte offset (index*4) of the current entry in the element vectors, decremented by 8 per pair	^\s*piVar8\ =\ \(int\ \*\)\(iVar19\ \+\ puVar6\[3\]\);$@3	+1
+use	FUN_00181f00	iVar19	elementByteOffset	INFERRED	byte offset (index*4) of the current entry in the element vectors, decremented by 8 per pair	^\s*piVar8\ =\ \(int\ \*\)\(iVar19\ \+\ puVar7\[3\]\);$	+1
+use	FUN_00181f00	iVar19	elementByteOffset	INFERRED	byte offset (index*4) of the current entry in the element vectors, decremented by 8 per pair	^\s*piVar8\ =\ \(int\ \*\)\(iVar19\ \+\ puVar6\[3\]\);$@4	+1
+use	FUN_00181f00	iVar19	elementByteOffset	INFERRED	byte offset (index*4) of the current entry in the element vectors, decremented by 8 per pair	^\s*piVar8\ =\ \(int\ \*\)\(iVar19\ \+\ puVar7\[3\]\);$@2	+1
+use	FUN_00181f00	iVar19	elementByteOffset	INFERRED	byte offset (index*4) of the current entry in the element vectors, decremented by 8 per pair	^\s*iVar19\ =\ iVar19\ \+\ \-8;$	+1
+use	FUN_00181f00	iVar19	leftNode	INFERRED	left node of the chain walk: starts at the first list node, then takes the next node	^\s*iVar19\ =\ local_80;$	+1
+use	FUN_00181f00	iVar19	leftNode	INFERRED	left node of the chain walk: starts at the first list node, then takes the next node	^\s*FUN_00106004\(iVar10,1,iVar19,0,iVar4\);$	+1
+use	FUN_00181f00	iVar19	leftNode	INFERRED	left node of the chain walk: starts at the first list node, then takes the next node	^\s*iVar19\ =\ \*\(int\ \*\)\(iVar19\ \+\ 8\);$	+1
+use	FUN_00181f00	iVar19	leftNode	INFERRED	left node of the chain walk: starts at the first list node, then takes the next node	^\s*while\ \(iVar10\ =\ \*\(int\ \*\)\(iVar19\ \+\ 8\),\ \*\(int\ \*\)\(iVar10\ \+\ 8\)\ !=\ 0\)\ \{$	+1
+use	FUN_00181f00	iVar19	leftNode	INFERRED	left node of the chain walk: starts at the first list node, then takes the next node	^\s*FUN_00106004\(iVar4,1,iVar19,0,iVar13\);$	+1
+use	FUN_00181f00	iVar19	leftNode	INFERRED	left node of the chain walk: starts at the first list node, then takes the next node	^\s*iVar19\ =\ \*\(int\ \*\)\(iVar10\ \+\ 8\);$	+1
+use	FUN_00181f00	iVar19	operandRecord5	INFERRED	IRInst__getOperandRecord result (operand 1 / 2 of the new instruction)	^\s*iVar19\ =\ FUN_001054ec\(iVar4,1\);$	+2
+use	FUN_00181f00	iVar19	operandRecord5	INFERRED	IRInst__getOperandRecord result (operand 1 / 2 of the new instruction)	^\s*iVar19\ =\ FUN_001054ec\(iVar4,2\);$	+2
+use	FUN_00181f00	iVar19	elementByteOffset2	INFERRED	byte offset (index*4) of the entry in the write-back loop, decremented by 4	^\s*iVar19\ =\ uVar22\ \*\ 4;$@2	+1
+use	FUN_00181f00	iVar19	elementByteOffset2	INFERRED	byte offset (index*4) of the entry in the write-back loop, decremented by 4	^\s*piVar8\ =\ \(int\ \*\)\(iVar19\ \+\ puVar6\[3\]\);$@5	+1
+use	FUN_00181f00	iVar19	elementByteOffset2	INFERRED	byte offset (index*4) of the entry in the write-back loop, decremented by 4	^\s*puVar11\ =\ \(undefined4\ \*\)\(iVar19\ \+\ puVar6\[3\]\);$@3	+1
+use	FUN_00181f00	iVar19	elementByteOffset2	INFERRED	byte offset (index*4) of the entry in the write-back loop, decremented by 4	^\s*piVar12\ =\ \(int\ \*\)\(iVar19\ \+\ puVar7\[3\]\);$	+1
+use	FUN_00181f00	iVar19	elementByteOffset2	INFERRED	byte offset (index*4) of the entry in the write-back loop, decremented by 4	^\s*iVar19\ =\ iVar19\ \+\ \-4;$	+1
+use	FUN_00181f00	iVar19	lookaheadNode	INFERRED	the node after nextNode while splicing	^\s*iVar19\ =\ \*\(int\ \*\)\(local_80\ \+\ 8\);$	+1
+use	FUN_00181f00	iVar19	lookaheadNode	INFERRED	the node after nextNode while splicing	^\s*while\ \(iVar15\ =\ iVar19,\ iVar15\ !=\ 0\)\ \{$	+1
+use	FUN_00181f00	iVar19	lookaheadNode	INFERRED	the node after nextNode while splicing	^\s*iVar19\ =\ \*\(int\ \*\)\(iVar15\ \+\ 8\);$	+1
+use	FUN_00181f00	iVar19	useOperandIndex	INFERRED	operand index read from the operand-index vector for inst	^\s*iVar19\ =\ \*piVar8;$	+2
+use	FUN_00181f00	iVar19	useOperandIndex	INFERRED	operand index read from the operand-index vector for inst	^\s*iVar3\ =\ FUN_001054ec\(param_3,iVar19\);$	+1
+use	FUN_00181f00	iVar19	useOperandIndex	INFERRED	operand index read from the operand-index vector for inst	^\s*iVar3\ =\ iVar19\ \*\ 0x18\ \+\ param_3\ \+\ 0x8c;$	+1
+use	FUN_00181f00	iVar19	operandRecord7	INFERRED	IRInst__getOperandRecord result (operand 0/1/2 of inst / newInst2)	^\s*iVar19\ =\ FUN_001054ec\(param_3,0\);$	+2
+use	FUN_00181f00	iVar19	operandRecord7	INFERRED	IRInst__getOperandRecord result (operand 0/1/2 of inst / newInst2)	^\s*iVar19\ =\ FUN_001054ec\(param_3,1\);$	+2
+use	FUN_00181f00	iVar19	operandRecord7	INFERRED	IRInst__getOperandRecord result (operand 0/1/2 of inst / newInst2)	^\s*iVar19\ =\ FUN_001054ec\(iVar3,1\);$	+2
+use	FUN_00181f00	iVar19	operandRecord7	INFERRED	IRInst__getOperandRecord result (operand 0/1/2 of inst / newInst2)	^\s*iVar19\ =\ FUN_001054ec\(param_3,2\);$	+2
+use	FUN_00181f00	iVar4	modifierLoopIndex	INFERRED	loop counter 1..2 over the two source operands when adjusting modifier bits	^\s*iVar4\ =\ 1;$	+1
+use	FUN_00181f00	iVar4	modifierLoopIndex	INFERRED	loop counter 1..2 over the two source operands when adjusting modifier bits	^\s*bVar1\ =\ iVar4\ !=\ 2;$	+1
+use	FUN_00181f00	iVar4	modifierLoopIndex	INFERRED	loop counter 1..2 over the two source operands when adjusting modifier bits	^\s*iVar4\ =\ iVar4\ \+\ 1;$	+1
+use	FUN_00181f00	iVar4	modifierLoopIndex	INFERRED	loop counter 1..2 over the two source operands when adjusting modifier bits	^\s*iVar4\ =\ 1;$@2	+1
+use	FUN_00181f00	iVar4	modifierLoopIndex	INFERRED	loop counter 1..2 over the two source operands when adjusting modifier bits	^\s*bVar1\ =\ iVar4\ !=\ 2;$@2	+1
+use	FUN_00181f00	iVar4	modifierLoopIndex	INFERRED	loop counter 1..2 over the two source operands when adjusting modifier bits	^\s*iVar4\ =\ iVar4\ \+\ 1;$@2	+1
+use	FUN_00181f00	iVar4	prevByteOffset	INFERRED	elementByteOffset - 4: byte offset of the previous entry	^\s*iVar4\ =\ iVar19\ \+\ \-4;$	+1
+use	FUN_00181f00	iVar4	prevByteOffset	INFERRED	elementByteOffset - 4: byte offset of the previous entry	^\s*piVar8\ =\ \(int\ \*\)\(iVar4\ \+\ puVar6\[3\]\);$	+1
+use	FUN_00181f00	iVar4	prevByteOffset	INFERRED	elementByteOffset - 4: byte offset of the previous entry	^\s*piVar8\ =\ \(int\ \*\)\(iVar4\ \+\ puVar6\[3\]\);$@2	+1
+use	FUN_00181f00	iVar4	prevByteOffset	INFERRED	elementByteOffset - 4: byte offset of the previous entry	^\s*puVar11\ =\ \(undefined4\ \*\)\(iVar4\ \+\ puVar6\[3\]\);$	+1
+use	FUN_00181f00	iVar4	prevByteOffset	INFERRED	elementByteOffset - 4: byte offset of the previous entry	^\s*puVar11\ =\ \(undefined4\ \*\)\(iVar4\ \+\ puVar7\[3\]\);$	+1
+use	FUN_00181f00	iVar4	prevByteOffset	INFERRED	elementByteOffset - 4: byte offset of the previous entry	^\s*puVar11\ =\ \(undefined4\ \*\)\(iVar4\ \+\ puVar6\[3\]\);$@2	+1
+use	FUN_00181f00	iVar4	prevByteOffset	INFERRED	elementByteOffset - 4: byte offset of the previous entry	^\s*puVar11\ =\ \(undefined4\ \*\)\(iVar4\ \+\ puVar7\[3\]\);$@2	+1
+use	FUN_00181f00	iVar4	prevByteOffset	INFERRED	elementByteOffset - 4: byte offset of the previous entry	^\s*piVar8\ =\ \(int\ \*\)\(iVar4\ \+\ puVar6\[3\]\);$@3	+1
+use	FUN_00181f00	iVar4	prevByteOffset	INFERRED	elementByteOffset - 4: byte offset of the previous entry	^\s*piVar8\ =\ \(int\ \*\)\(iVar4\ \+\ puVar7\[3\]\);$	+1
+use	FUN_00181f00	iVar4	prevByteOffset	INFERRED	elementByteOffset - 4: byte offset of the previous entry	^\s*piVar8\ =\ \(int\ \*\)\(iVar4\ \+\ puVar6\[3\]\);$@4	+1
+use	FUN_00181f00	iVar4	prevByteOffset	INFERRED	elementByteOffset - 4: byte offset of the previous entry	^\s*piVar8\ =\ \(int\ \*\)\(iVar4\ \+\ puVar7\[3\]\);$@2	+1
+use	FUN_00181f00	iVar4	prevByteOffset	INFERRED	elementByteOffset - 4: byte offset of the previous entry	^\s*iVar4\ =\ iVar4\ \+\ \-8;$	+1
+use	FUN_00181f00	iVar4	compilerPtr	INFERRED	copy of *compiler passed as arena owner to IRInst__setOperandSource	^\s*iVar4\ =\ \*param_1;$	+1
+use	FUN_00181f00	iVar4	compilerPtr	INFERRED	copy of *compiler passed as arena owner to IRInst__setOperandSource	^\s*iVar4\ =\ \*param_1;$@2	+2
+use	FUN_00181f00	iVar4	compilerPtr	INFERRED	copy of *compiler passed as arena owner to IRInst__setOperandSource	^\s*iVar4\ =\ \*param_1;$@3	+2
+use	FUN_00181f00	iVar4	compilerPtr	INFERRED	copy of *compiler passed as arena owner to IRInst__setOperandSource	^\s*iVar4\ =\ \*param_1;$@4	+1
+use	FUN_00181f00	iVar4	compilerPtr	INFERRED	copy of *compiler passed as arena owner to IRInst__setOperandSource	^\s*FUN_00106004\(iVar10,1,iVar19,0,iVar4\);$	+1
+use	FUN_00181f00	iVar4	scaleLoPair	INFERRED	lower scale limit (compiler->+0x30c->+0x58) in the single-instruction path	^\s*iVar4\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(\*param_1\ \+\ 0x30c\)\ \+\ 0x58\);$	+3
+use	FUN_00181f00	iVar4	scaleHiPair	INFERRED	upper scale limit (compiler->+0x30c->+0x5c) in the single-instruction path	^\s*iVar4\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(\*param_1\ \+\ 0x30c\)\ \+\ 0x5c\);$	+3
+use	FUN_00181f00	iVar4	operandRecord6	INFERRED	IRInst__getOperandRecord result	^\s*iVar4\ =\ FUN_001054ec\(iVar10,1\);$	+2
+use	FUN_00181f00	iVar4	operandRecord6	INFERRED	IRInst__getOperandRecord result	^\s*iVar4\ =\ FUN_001054ec\(uVar21,\*puVar11\);$	+2
+use	FUN_00181f00	iVar4	operandRecord6	INFERRED	IRInst__getOperandRecord result	^\s*iVar4\ =\ FUN_001054ec\(iVar10,2\);$	+2
+use	FUN_00181f00	iVar4	listedInst	INFERRED	instruction read from the instruction vector (*elementRef)	^\s*iVar4\ =\ \*piVar8;$	+1
+use	FUN_00181f00	iVar4	listedInst	INFERRED	instruction read from the instruction vector (*elementRef)	^\s*FUN_00103d50\(iVar10\ \+\ 0xbc,1,\*\(uint\ \*\)\(\*piVar8\ \*\ 0x18\ \+\ iVar4\ \+\ 0xa0\)\ \&\ 1\);$	+1
+use	FUN_00181f00	iVar4	listedInst	INFERRED	instruction read from the instruction vector (*elementRef)	^\s*iVar4\ =\ \*piVar8;$@2	+1
+use	FUN_00181f00	iVar4	listedInst	INFERRED	instruction read from the instruction vector (*elementRef)	^\s*FUN_00103d50\(iVar10\ \+\ 0xbc,2,\*\(uint\ \*\)\(\*piVar8\ \*\ 0x18\ \+\ iVar4\ \+\ 0xa0\)\ >>\ 1\ \&\ 1\);$	+1
+use	FUN_00181f00	iVar4	joinInst	INFERRED	IRInst__create(opcode) in the tail loop	^\s*iVar4\ =\ FUN_001043f0\(local_5c,\*param_1\);$	+1
+use	FUN_00181f00	iVar4	joinInst	INFERRED	IRInst__create(opcode) in the tail loop	^\s*\*\(undefined4\ \*\)\(iVar4\ \+\ 0x98\)\ =\ 0;$	+3
+use	FUN_00181f00	iVar4	joinInst	INFERRED	IRInst__create(opcode) in the tail loop	^\s*\*\(int\ \*\)\(iVar4\ \+\ 0x124\)\ =\ iVar13;$	+1
+use	FUN_00181f00	iVar4	joinInst	INFERRED	IRInst__create(opcode) in the tail loop	^\s*\*\(int\ \*\)\(iVar4\ \+\ 0x124\)\ =\ iVar13;$@2	+1
+use	FUN_00181f00	iVar4	joinInst	INFERRED	IRInst__create(opcode) in the tail loop	^\s*\*\(int\ \*\)\(iVar4\ \+\ 0x124\)\ =\ iVar15;$	+1
+use	FUN_00181f00	iVar4	joinInst	INFERRED	IRInst__create(opcode) in the tail loop	^\s*FUN_00106004\(iVar4,1,iVar19,0,iVar13\);$	+2
+use	FUN_00181f00	iVar4	joinInst	INFERRED	IRInst__create(opcode) in the tail loop	^\s*iVar19\ =\ FUN_001054ec\(iVar4,1\);$	+1
+use	FUN_00181f00	iVar4	joinInst	INFERRED	IRInst__create(opcode) in the tail loop	^\s*iVar19\ =\ FUN_001054ec\(iVar4,2\);$	+1
+use	FUN_00181f00	iVar4	joinInst	INFERRED	IRInst__create(opcode) in the tail loop	^\s*FUN_00193f64\(auStack_88,iVar4\);$	+2
+use	FUN_00181f00	iVar4	otherOperand	INFERRED	index (1 or 2) of the operand other than the entry operand ((*elementRef2 == 1) + 1)	^\s*iVar4\ =\ \(\*piVar12\ ==\ 1\)\ \+\ 1;$	+1
+use	FUN_00181f00	iVar4	otherOperand	INFERRED	index (1 or 2) of the operand other than the entry operand ((*elementRef2 == 1) + 1)	^\s*uVar21\ =\ FUN_00105594\(piVar8,iVar4\);$	+1
+use	FUN_00181f00	iVar4	otherOperand	INFERRED	index (1 or 2) of the operand other than the entry operand ((*elementRef2 == 1) + 1)	^\s*iVar13\ =\ FUN_001054ec\(piVar8,iVar4\);$	+1
+use	FUN_00181f00	iVar4	otherOperand	INFERRED	index (1 or 2) of the operand other than the entry operand ((*elementRef2 == 1) + 1)	^\s*uVar2\ =\ piVar8\[iVar4\ \*\ 6\ \+\ 0x28\]\ \&\ 1;$	+1
+use	FUN_00181f00	iVar4	otherOperand	INFERRED	index (1 or 2) of the operand other than the entry operand ((*elementRef2 == 1) + 1)	^\s*uVar2\ =\ piVar8\[iVar4\ \*\ 6\ \+\ 0x28\]\ \&\ 1U\ \^\ 1;$	+1
+use	FUN_00181f00	iVar4	otherOperand	INFERRED	index (1 or 2) of the operand other than the entry operand ((*elementRef2 == 1) + 1)	^\s*FUN_00103d50\(iVar13,2,\(uint\)piVar8\[iVar4\ \*\ 6\ \+\ 0x28\]\ >>\ 1\ \&\ 1\);$	+1
+use	FUN_00181f00	iVar13	operandPtr	INFERRED	address of operand record n (+0x98 + n*0x18) while modifier bits are copied	^\s*iVar13\ =\ iVar10\ \+\ 0x98;$	+1
+use	FUN_00181f00	iVar13	operandPtr	INFERRED	address of operand record n (+0x98 + n*0x18) while modifier bits are copied	^\s*FUN_00103d50\(iVar13\ \+\ 0xc,2,1\);$	+3
+use	FUN_00181f00	iVar13	operandPtr	INFERRED	address of operand record n (+0x98 + n*0x18) while modifier bits are copied	^\s*iVar13\ =\ iVar13\ \+\ 0x18;$	+1
+use	FUN_00181f00	iVar13	operandPtr	INFERRED	address of operand record n (+0x98 + n*0x18) while modifier bits are copied	^\s*iVar13\ =\ iVar10\ \+\ 0x98;$@2	+1
+use	FUN_00181f00	iVar13	operandPtr	INFERRED	address of operand record n (+0x98 + n*0x18) while modifier bits are copied	^\s*FUN_00103d50\(iVar13\ \+\ 0xc,1,\*\(uint\ \*\)\(iVar13\ \+\ 0x20\)\ \&\ 1\ \^\ 1\);$	+1
+use	FUN_00181f00	iVar13	operandPtr	INFERRED	address of operand record n (+0x98 + n*0x18) while modifier bits are copied	^\s*iVar13\ =\ iVar13\ \+\ 0x18;$@2	+1
+use	FUN_00181f00	iVar13	scaleLoTail	INFERRED	lower scale limit in the tail loop	^\s*iVar13\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(\*param_1\ \+\ 0x30c\)\ \+\ 0x58\);$	+3
+use	FUN_00181f00	iVar13	scaleHiTail	INFERRED	upper scale limit in the tail loop	^\s*iVar13\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(\*param_1\ \+\ 0x30c\)\ \+\ 0x5c\);$	+3
+use	FUN_00181f00	iVar20	scaleLoLoop	INFERRED	lower scale limit in the pair loop	^\s*iVar20\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(\*param_1\ \+\ 0x30c\)\ \+\ 0x58\);$	+3
+use	FUN_00181f00	iVar20	scaleHiLoop	INFERRED	upper scale limit in the pair loop	^\s*iVar20\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(\*param_1\ \+\ 0x30c\)\ \+\ 0x5c\);$	+3
+use	FUN_00181f00	iVar20	entryInst	INFERRED	instruction read from the instruction vector (*elementRef)	^\s*iVar20\ =\ \*piVar8;$	+1
+use	FUN_00181f00	iVar20	entryInst	INFERRED	instruction read from the instruction vector (*elementRef)	^\s*FUN_00103d50\(iVar13\ \+\ 0xa4,1,\*\(uint\ \*\)\(\*piVar8\ \*\ 0x18\ \+\ iVar20\ \+\ 0xa0\)\ \&\ 1\);$	+1
+use	FUN_00181f00	iVar20	entryInst	INFERRED	instruction read from the instruction vector (*elementRef)	^\s*iVar20\ =\ \*piVar8;$@2	+1
+use	FUN_00181f00	iVar20	entryInst	INFERRED	instruction read from the instruction vector (*elementRef)	^\s*FUN_00103d50\(iVar13\ \+\ 0xbc,1,\*\(uint\ \*\)\(\*piVar8\ \*\ 0x18\ \+\ iVar20\ \+\ 0xa0\)\ \&\ 1\);$	+1
+use	FUN_00181f00	iVar20	entryInst	INFERRED	instruction read from the instruction vector (*elementRef)	^\s*iVar20\ =\ \*piVar8;$@3	+1
+use	FUN_00181f00	iVar20	entryInst	INFERRED	instruction read from the instruction vector (*elementRef)	^\s*FUN_00103d50\(iVar13\ \+\ 0xa4,2,\*\(uint\ \*\)\(\*piVar8\ \*\ 0x18\ \+\ iVar20\ \+\ 0xa0\)\ >>\ 1\ \&\ 1\);$	+1
+use	FUN_00181f00	iVar20	entryInst	INFERRED	instruction read from the instruction vector (*elementRef)	^\s*iVar20\ =\ \*piVar8;$@4	+1
+use	FUN_00181f00	iVar20	entryInst	INFERRED	instruction read from the instruction vector (*elementRef)	^\s*FUN_00103d50\(iVar13\ \+\ 0xbc,2,\*\(uint\ \*\)\(\*piVar8\ \*\ 0x18\ \+\ iVar20\ \+\ 0xa0\)\ >>\ 1\ \&\ 1\);$	+1
+use	FUN_00181f00	iVar3	operandByteOffset	INFERRED	operand index * 0x18 byte offset (0x18, 0x30) into the instruction	^\s*iVar3\ =\ 0x18;$	+1
+use	FUN_00181f00	iVar3	operandByteOffset	INFERRED	operand index * 0x18 byte offset (0x18, 0x30) into the instruction	^\s*FUN_00103d50\(iVar3\ \+\ iVar15\ \+\ 0x8c,2,0\);$	+1
+use	FUN_00181f00	iVar3	operandByteOffset	INFERRED	operand index * 0x18 byte offset (0x18, 0x30) into the instruction	^\s*uVar2\ =\ \*\(uint\ \*\)\(iVar3\ \+\ iVar15\ \+\ 0xa0\);$	+1
+use	FUN_00181f00	iVar3	operandByteOffset	INFERRED	operand index * 0x18 byte offset (0x18, 0x30) into the instruction	^\s*FUN_00103d50\(iVar3\ \+\ iVar15\ \+\ 0x8c,1,0\);$	+1
+use	FUN_00181f00	iVar3	operandByteOffset	INFERRED	operand index * 0x18 byte offset (0x18, 0x30) into the instruction	^\s*iVar3\ =\ iVar3\ \+\ 0x18;$	+1
+use	FUN_00181f00	iVar3	instOpcode	INFERRED	opcode of inst (inst->+0x88->+8)	^\s*iVar3\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_3\ \+\ 0x88\)\ \+\ 8\);$	+2
+use	FUN_00181f00	iVar3	instOpcode	INFERRED	opcode of inst (inst->+0x88->+8)	^\s*if\ \(iVar3\ !=\ 0x12\)\ \{$	+1
+use	FUN_00181f00	iVar3	moveNode	INFERRED	DList node being unlinked and inserted before inst	^\s*iVar3\ =\ local_80;$	+1
+use	FUN_00181f00	iVar3	moveNode	INFERRED	DList node being unlinked and inserted before inst	^\s*FUN_0019401c\(iVar3\);$	+3
+use	FUN_00181f00	iVar3	lookaheadNode3	INFERRED	node after local_80 in the splice loop	^\s*iVar3\ =\ \*\(int\ \*\)\(local_80\ \+\ 8\);$	+2
+use	FUN_00181f00	iVar3	lookaheadNode3	INFERRED	node after local_80 in the splice loop	^\s*iVar3\ =\ \*\(int\ \*\)\(iVar19\ \+\ 8\);$	+1
+use	FUN_00181f00	bVar1	moreOperands	INFERRED	loop condition: operand counter != 2	^\s*bVar1\ =\ iVar4\ !=\ 2;$	+1
+use	FUN_00181f00	bVar1	moreOperands	INFERRED	loop condition: operand counter != 2	^\s*\}\ while\ \(bVar1\);$	+1
+use	FUN_00181f00	bVar1	moreOperands	INFERRED	loop condition: operand counter != 2	^\s*bVar1\ =\ iVar4\ !=\ 2;$@2	+1
+use	FUN_00181f00	bVar1	moreOperands	INFERRED	loop condition: operand counter != 2	^\s*\}\ while\ \(bVar1\);$@2	+1
+use	FUN_00181f00	bVar1	moreOperands	INFERRED	loop condition: operand counter != 2	^\s*bVar1\ =\ iVar19\ !=\ 2;$	+1
+use	FUN_00181f00	bVar1	moreOperands	INFERRED	loop condition: operand counter != 2	^\s*\}\ while\ \(bVar1\);$@3	+1
+use	FUN_00181f00	puVar24	operandFlagsPtr	INFERRED	address of the flags word of operand n (+0xb8, step 6 words)	^\s*puVar24\ =\ \(uint\ \*\)\(iVar15\ \+\ 0xb8\);$	+1
+use	FUN_00181f00	puVar24	operandFlagsPtr	INFERRED	address of the flags word of operand n (+0xb8, step 6 words)	^\s*if\ \(\(\(\*puVar24\ \&\ 2\)\ !=\ 0\)\ \&\&\ \(\*\(int\ \*\)\(\*\(int\ \*\)\(iVar10\ \+\ 0x88\)\ \+\ 8\)\ ==\ 0x13\)\)\ \{$	+1
+use	FUN_00181f00	puVar24	operandFlagsPtr	INFERRED	address of the flags word of operand n (+0xb8, step 6 words)	^\s*puVar24\ =\ puVar24\ \+\ 6;$	+1
+use	FUN_00181f00	piVar8	lastElementRef	INFERRED	address of the last worklist entry or null	^\s*piVar8\ =\ \(int\ \*\)0x0;$	+1
+use	FUN_00181f00	piVar8	lastElementRef	INFERRED	address of the last worklist entry or null	^\s*piVar8\ =\ \(int\ \*\)\(\(uVar2\ \-\ 1\)\ \*\ 4\ \+\ puVar5\[3\]\);$	+1
+use	FUN_00181f00	piVar8	lastElementRef	INFERRED	address of the last worklist entry or null	^\s*iVar15\ =\ \*piVar8;$	+1
+use	FUN_00181f00	uVar14	prevIndex	INFERRED	uVar2 - 1: index of the entry before the pair	^\s*uVar14\ =\ uVar2\ \-\ 1;$	+1
+use	FUN_00181f00	uVar14	prevIndex	INFERRED	uVar2 - 1: index of the entry before the pair	^\s*if\ \(uVar14\ <\ uVar26\)\ \{$	+1
+use	FUN_00181f00	uVar14	prevIndex	INFERRED	uVar2 - 1: index of the entry before the pair	^\s*if\ \(uVar9\ <=\ uVar14\)\ \{$	+2
+use	FUN_00181f00	uVar14	prevIndex	INFERRED	uVar2 - 1: index of the entry before the pair	^\s*piVar8\ =\ \(int\ \*\)FUN_0019423c\(puVar18,uVar14\);$	+1
+use	FUN_00181f00	uVar14	prevIndex	INFERRED	uVar2 - 1: index of the entry before the pair	^\s*if\ \(uVar14\ <\ uVar26\)\ \{$@2	+1
+use	FUN_00181f00	uVar14	prevIndex	INFERRED	uVar2 - 1: index of the entry before the pair	^\s*if\ \(uVar9\ <=\ uVar14\)\ \{$@2	+2
+use	FUN_00181f00	uVar14	prevIndex	INFERRED	uVar2 - 1: index of the entry before the pair	^\s*piVar8\ =\ \(int\ \*\)FUN_0019423c\(puVar18,uVar14\);$@2	+1
+use	FUN_00181f00	uVar14	prevIndex	INFERRED	uVar2 - 1: index of the entry before the pair	^\s*if\ \(uVar14\ <\ \*puVar18\)\ \{$	+1
+use	FUN_00181f00	uVar14	prevIndex	INFERRED	uVar2 - 1: index of the entry before the pair	^\s*if\ \(uVar26\ <=\ uVar14\)\ \{$	+2
+use	FUN_00181f00	uVar14	prevIndex	INFERRED	uVar2 - 1: index of the entry before the pair	^\s*puVar11\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar18,uVar14\);$	+1
+use	FUN_00181f00	uVar14	prevIndex	INFERRED	uVar2 - 1: index of the entry before the pair	^\s*if\ \(uVar14\ <\ \*puVar17\)\ \{$	+1
+use	FUN_00181f00	uVar14	prevIndex	INFERRED	uVar2 - 1: index of the entry before the pair	^\s*if\ \(uVar26\ <=\ uVar14\)\ \{$@2	+2
+use	FUN_00181f00	uVar14	prevIndex	INFERRED	uVar2 - 1: index of the entry before the pair	^\s*puVar11\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar17,uVar14\);$	+1
+use	FUN_00181f00	uVar14	prevIndex	INFERRED	uVar2 - 1: index of the entry before the pair	^\s*if\ \(uVar14\ <\ \*puVar18\)\ \{$@2	+1
+use	FUN_00181f00	uVar14	prevIndex	INFERRED	uVar2 - 1: index of the entry before the pair	^\s*if\ \(uVar26\ <=\ uVar14\)\ \{$@3	+2
+use	FUN_00181f00	uVar14	prevIndex	INFERRED	uVar2 - 1: index of the entry before the pair	^\s*puVar11\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar18,uVar14\);$@2	+1
+use	FUN_00181f00	uVar14	prevIndex	INFERRED	uVar2 - 1: index of the entry before the pair	^\s*if\ \(uVar14\ <\ \*puVar17\)\ \{$@2	+1
+use	FUN_00181f00	uVar14	prevIndex	INFERRED	uVar2 - 1: index of the entry before the pair	^\s*if\ \(uVar26\ <=\ uVar14\)\ \{$@4	+2
+use	FUN_00181f00	uVar14	prevIndex	INFERRED	uVar2 - 1: index of the entry before the pair	^\s*puVar11\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar17,uVar14\);$@2	+1
+use	FUN_00181f00	uVar14	prevIndex	INFERRED	uVar2 - 1: index of the entry before the pair	^\s*if\ \(uVar14\ <\ \*puVar18\)\ \{$@3	+1
+use	FUN_00181f00	uVar14	prevIndex	INFERRED	uVar2 - 1: index of the entry before the pair	^\s*if\ \(uVar26\ <=\ uVar14\)\ \{$@5	+2
+use	FUN_00181f00	uVar14	prevIndex	INFERRED	uVar2 - 1: index of the entry before the pair	^\s*piVar8\ =\ \(int\ \*\)FUN_0019423c\(puVar18,uVar14\);$@3	+1
+use	FUN_00181f00	uVar14	prevIndex	INFERRED	uVar2 - 1: index of the entry before the pair	^\s*if\ \(uVar14\ <\ \*puVar17\)\ \{$@3	+1
+use	FUN_00181f00	uVar14	prevIndex	INFERRED	uVar2 - 1: index of the entry before the pair	^\s*if\ \(uVar26\ <=\ uVar14\)\ \{$@6	+2
+use	FUN_00181f00	uVar14	prevIndex	INFERRED	uVar2 - 1: index of the entry before the pair	^\s*piVar8\ =\ \(int\ \*\)FUN_0019423c\(puVar17,uVar14\);$	+1
+use	FUN_00181f00	uVar14	prevIndex	INFERRED	uVar2 - 1: index of the entry before the pair	^\s*if\ \(uVar14\ <\ \*puVar18\)\ \{$@4	+1
+use	FUN_00181f00	uVar14	prevIndex	INFERRED	uVar2 - 1: index of the entry before the pair	^\s*if\ \(uVar26\ <=\ uVar14\)\ \{$@7	+2
+use	FUN_00181f00	uVar14	prevIndex	INFERRED	uVar2 - 1: index of the entry before the pair	^\s*piVar8\ =\ \(int\ \*\)FUN_0019423c\(puVar18,uVar14\);$@4	+1
+use	FUN_00181f00	uVar14	prevIndex	INFERRED	uVar2 - 1: index of the entry before the pair	^\s*if\ \(uVar14\ <\ \*puVar17\)\ \{$@4	+1
+use	FUN_00181f00	uVar14	prevIndex	INFERRED	uVar2 - 1: index of the entry before the pair	^\s*if\ \(uVar26\ <=\ uVar14\)\ \{$@8	+2
+use	FUN_00181f00	uVar14	prevIndex	INFERRED	uVar2 - 1: index of the entry before the pair	^\s*piVar8\ =\ \(int\ \*\)FUN_0019423c\(puVar17,uVar14\);$@2	+1
+use	FUN_00181f00	uVar2	worklistSize	INFERRED	worklist capacity then size (vectorAlloc3[2])	^\s*uVar2\ =\ \*puVar16;$	+1
+use	FUN_00181f00	uVar2	worklistSize	INFERRED	worklist capacity then size (vectorAlloc3[2])	^\s*if\ \(uVar22\ <\ uVar2\)\ \{$	+1
+use	FUN_00181f00	uVar2	worklistSize	INFERRED	worklist capacity then size (vectorAlloc3[2])	^\s*while\ \(uVar2\ =\ puVar5\[2\],\ uVar2\ !=\ 0\)\ \{$	+1
+use	FUN_00181f00	uVar2	worklistSize	INFERRED	worklist capacity then size (vectorAlloc3[2])	^\s*if\ \(uVar2\ \-\ 1\ <\ uVar2\)\ \{$	+2
+use	FUN_00181f00	uVar2	worklistSize	INFERRED	worklist capacity then size (vectorAlloc3[2])	^\s*FUN_00194208\(puVar16,uVar2\ \-\ 1\);$	+1
+use	FUN_00181f00	uVar2	worklistSize	INFERRED	worklist capacity then size (vectorAlloc3[2])	^\s*uVar2\ =\ \*\(uint\ \*\)\(iVar10\ \+\ 0x150\);$	+2
+use	FUN_00181f00	uVar2	worklistSize	INFERRED	worklist capacity then size (vectorAlloc3[2])	^\s*if\ \(uVar22\ <=\ uVar2\)\ \{$	+3
+use	FUN_00181f00	uVar2	worklistSize	INFERRED	worklist capacity then size (vectorAlloc3[2])	^\s*piVar8\ =\ \(int\ \*\)\(uVar2\ \*\ 4\ \+\ puVar23\[2\]\);$	+1
+use	FUN_00181f00	uVar2	worklistSize	INFERRED	worklist capacity then size (vectorAlloc3[2])	^\s*piVar8\ =\ \(int\ \*\)FUN_0019423c\(puVar23,uVar2\);$	+1
+use	FUN_00181f00	uVar2	worklistSize	INFERRED	worklist capacity then size (vectorAlloc3[2])	^\s*uVar2\ =\ puVar5\[2\];$	+5
+use	FUN_00181f00	uVar2	worklistSize	INFERRED	worklist capacity then size (vectorAlloc3[2])	^\s*piVar8\ =\ \(int\ \*\)FUN_0019423c\(puVar16,uVar2\);$	+1
+use	FUN_00181f00	uVar2	worklistSize	INFERRED	worklist capacity then size (vectorAlloc3[2])	^\s*uVar2\ =\ puVar7\[2\];$	+5
+use	FUN_00181f00	uVar2	worklistSize	INFERRED	worklist capacity then size (vectorAlloc3[2])	^\s*puVar11\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar17,uVar2\);$	+1
+use	FUN_00181f00	uVar2	worklistSize	INFERRED	worklist capacity then size (vectorAlloc3[2])	^\s*uVar2\ =\ puVar7\[2\];$@2	+5
+use	FUN_00181f00	uVar2	worklistSize	INFERRED	worklist capacity then size (vectorAlloc3[2])	^\s*puVar11\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar17,uVar2\);$@2	+1
+use	FUN_00181f00	uVar2	operandFlags	INFERRED	flags word of operand n of the popped instruction	^\s*uVar2\ =\ \*\(uint\ \*\)\(iVar3\ \+\ iVar15\ \+\ 0xa0\);$	+3
+use	FUN_00181f00	uVar2	pairLoopIndex	INFERRED	index of the second element of the current pair, decremented by 2	^\s*uVar2\ =\ uVar22;$	+1
+use	FUN_00181f00	uVar2	pairLoopIndex	INFERRED	index of the second element of the current pair, decremented by 2	^\s*uVar14\ =\ uVar2\ \-\ 1;$	+1
+use	FUN_00181f00	uVar2	pairLoopIndex	INFERRED	index of the second element of the current pair, decremented by 2	^\s*puVar6\[2\]\ =\ uVar2;$	+1
+use	FUN_00181f00	uVar2	pairLoopIndex	INFERRED	index of the second element of the current pair, decremented by 2	^\s*puVar6\[2\]\ =\ uVar2;$@2	+1
+use	FUN_00181f00	uVar2	pairLoopIndex	INFERRED	index of the second element of the current pair, decremented by 2	^\s*if\ \(uVar2\ <\ uVar26\)\ \{$	+1
+use	FUN_00181f00	uVar2	pairLoopIndex	INFERRED	index of the second element of the current pair, decremented by 2	^\s*if\ \(uVar26\ <=\ uVar2\)\ \{$	+2
+use	FUN_00181f00	uVar2	pairLoopIndex	INFERRED	index of the second element of the current pair, decremented by 2	^\s*piVar8\ =\ \(int\ \*\)FUN_0019423c\(puVar18,uVar2\);$@3	+1
+use	FUN_00181f00	uVar2	pairLoopIndex	INFERRED	index of the second element of the current pair, decremented by 2	^\s*if\ \(uVar2\ <\ \*puVar18\)\ \{$@3	+1
+use	FUN_00181f00	uVar2	pairLoopIndex	INFERRED	index of the second element of the current pair, decremented by 2	^\s*if\ \(uVar26\ <=\ uVar2\)\ \{$@2	+2
+use	FUN_00181f00	uVar2	pairLoopIndex	INFERRED	index of the second element of the current pair, decremented by 2	^\s*piVar8\ =\ \(int\ \*\)FUN_0019423c\(puVar18,uVar2\);$@4	+1
+use	FUN_00181f00	uVar2	pairLoopIndex	INFERRED	index of the second element of the current pair, decremented by 2	^\s*puVar6\[2\]\ =\ uVar2;$@3	+1
+use	FUN_00181f00	uVar2	pairLoopIndex	INFERRED	index of the second element of the current pair, decremented by 2	^\s*puVar7\[2\]\ =\ uVar2;$	+1
+use	FUN_00181f00	uVar2	pairLoopIndex	INFERRED	index of the second element of the current pair, decremented by 2	^\s*if\ \(uVar2\ <\ \*puVar18\)\ \{$@4	+1
+use	FUN_00181f00	uVar2	pairLoopIndex	INFERRED	index of the second element of the current pair, decremented by 2	^\s*if\ \(uVar26\ <=\ uVar2\)\ \{$@3	+2
+use	FUN_00181f00	uVar2	pairLoopIndex	INFERRED	index of the second element of the current pair, decremented by 2	^\s*puVar11\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar18,uVar2\);$	+1
+use	FUN_00181f00	uVar2	pairLoopIndex	INFERRED	index of the second element of the current pair, decremented by 2	^\s*if\ \(uVar2\ <\ \*puVar17\)\ \{$@3	+1
+use	FUN_00181f00	uVar2	pairLoopIndex	INFERRED	index of the second element of the current pair, decremented by 2	^\s*if\ \(uVar26\ <=\ uVar2\)\ \{$@4	+2
+use	FUN_00181f00	uVar2	pairLoopIndex	INFERRED	index of the second element of the current pair, decremented by 2	^\s*puVar11\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar17,uVar2\);$@3	+1
+use	FUN_00181f00	uVar2	pairLoopIndex	INFERRED	index of the second element of the current pair, decremented by 2	^\s*puVar6\[2\]\ =\ uVar2;$@4	+1
+use	FUN_00181f00	uVar2	pairLoopIndex	INFERRED	index of the second element of the current pair, decremented by 2	^\s*puVar7\[2\]\ =\ uVar2;$@2	+1
+use	FUN_00181f00	uVar2	pairLoopIndex	INFERRED	index of the second element of the current pair, decremented by 2	^\s*if\ \(uVar2\ <\ \*puVar18\)\ \{$@5	+1
+use	FUN_00181f00	uVar2	pairLoopIndex	INFERRED	index of the second element of the current pair, decremented by 2	^\s*if\ \(uVar9\ <=\ uVar2\)\ \{$	+2
+use	FUN_00181f00	uVar2	pairLoopIndex	INFERRED	index of the second element of the current pair, decremented by 2	^\s*puVar11\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar18,uVar2\);$@2	+1
+use	FUN_00181f00	uVar2	pairLoopIndex	INFERRED	index of the second element of the current pair, decremented by 2	^\s*if\ \(uVar2\ <\ \*puVar17\)\ \{$@4	+1
+use	FUN_00181f00	uVar2	pairLoopIndex	INFERRED	index of the second element of the current pair, decremented by 2	^\s*if\ \(uVar9\ <=\ uVar2\)\ \{$@2	+2
+use	FUN_00181f00	uVar2	pairLoopIndex	INFERRED	index of the second element of the current pair, decremented by 2	^\s*puVar11\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar17,uVar2\);$@4	+1
+use	FUN_00181f00	uVar2	pairLoopIndex	INFERRED	index of the second element of the current pair, decremented by 2	^\s*puVar6\[2\]\ =\ uVar2;$@5	+1
+use	FUN_00181f00	uVar2	pairLoopIndex	INFERRED	index of the second element of the current pair, decremented by 2	^\s*puVar7\[2\]\ =\ uVar2;$@3	+1
+use	FUN_00181f00	uVar2	pairLoopIndex	INFERRED	index of the second element of the current pair, decremented by 2	^\s*if\ \(uVar2\ <\ \*puVar18\)\ \{$@6	+1
+use	FUN_00181f00	uVar2	pairLoopIndex	INFERRED	index of the second element of the current pair, decremented by 2	^\s*if\ \(uVar26\ <=\ uVar2\)\ \{$@5	+2
+use	FUN_00181f00	uVar2	pairLoopIndex	INFERRED	index of the second element of the current pair, decremented by 2	^\s*piVar8\ =\ \(int\ \*\)FUN_0019423c\(puVar18,uVar2\);$@5	+1
+use	FUN_00181f00	uVar2	pairLoopIndex	INFERRED	index of the second element of the current pair, decremented by 2	^\s*if\ \(uVar2\ <\ \*puVar17\)\ \{$@5	+1
+use	FUN_00181f00	uVar2	pairLoopIndex	INFERRED	index of the second element of the current pair, decremented by 2	^\s*if\ \(uVar26\ <=\ uVar2\)\ \{$@6	+2
+use	FUN_00181f00	uVar2	pairLoopIndex	INFERRED	index of the second element of the current pair, decremented by 2	^\s*piVar8\ =\ \(int\ \*\)FUN_0019423c\(puVar17,uVar2\);$	+1
+use	FUN_00181f00	uVar2	pairLoopIndex	INFERRED	index of the second element of the current pair, decremented by 2	^\s*puVar6\[2\]\ =\ uVar2;$@6	+1
+use	FUN_00181f00	uVar2	pairLoopIndex	INFERRED	index of the second element of the current pair, decremented by 2	^\s*puVar7\[2\]\ =\ uVar2;$@4	+1
+use	FUN_00181f00	uVar2	pairLoopIndex	INFERRED	index of the second element of the current pair, decremented by 2	^\s*if\ \(uVar2\ <\ \*puVar18\)\ \{$@7	+1
+use	FUN_00181f00	uVar2	pairLoopIndex	INFERRED	index of the second element of the current pair, decremented by 2	^\s*if\ \(uVar26\ <=\ uVar2\)\ \{$@7	+2
+use	FUN_00181f00	uVar2	pairLoopIndex	INFERRED	index of the second element of the current pair, decremented by 2	^\s*piVar8\ =\ \(int\ \*\)FUN_0019423c\(puVar18,uVar2\);$@6	+1
+use	FUN_00181f00	uVar2	pairLoopIndex	INFERRED	index of the second element of the current pair, decremented by 2	^\s*if\ \(uVar2\ <\ \*puVar17\)\ \{$@6	+1
+use	FUN_00181f00	uVar2	pairLoopIndex	INFERRED	index of the second element of the current pair, decremented by 2	^\s*if\ \(uVar26\ <=\ uVar2\)\ \{$@8	+2
+use	FUN_00181f00	uVar2	pairLoopIndex	INFERRED	index of the second element of the current pair, decremented by 2	^\s*piVar8\ =\ \(int\ \*\)FUN_0019423c\(puVar17,uVar2\);$@2	+1
+use	FUN_00181f00	uVar2	pairLoopIndex	INFERRED	index of the second element of the current pair, decremented by 2	^\s*uVar2\ =\ uVar2\ \-\ 2;$	+1
+use	FUN_00181f00	uVar2	pairLoopIndex	INFERRED	index of the second element of the current pair, decremented by 2	^\s*\}\ while\ \(0\ <\ \(int\)uVar2\);$	+1
+use	FUN_00181f00	uVar2	pairLoopIndex	INFERRED	index of the second element of the current pair, decremented by 2	^\s*if\ \(uVar2\ ==\ 0\)\ \{$	+1
+use	FUN_00181f00	uVar2	instSlotIndex	INFERRED	inst->+0x150: slot of the instruction in the compiler[7] vector	^\s*uVar2\ =\ piVar8\[0x54\];$	+2
+use	FUN_00181f00	uVar2	instSlotIndex	INFERRED	inst->+0x150: slot of the instruction in the compiler[7] vector	^\s*if\ \(uVar26\ <=\ uVar2\)\ \{$@9	+3
+use	FUN_00181f00	uVar2	instSlotIndex	INFERRED	inst->+0x150: slot of the instruction in the compiler[7] vector	^\s*piVar12\ =\ \(int\ \*\)\(uVar2\ \*\ 4\ \+\ puVar24\[2\]\);$	+1
+use	FUN_00181f00	uVar2	instSlotIndex	INFERRED	inst->+0x150: slot of the instruction in the compiler[7] vector	^\s*piVar12\ =\ \(int\ \*\)FUN_0019423c\(puVar24,uVar2\);$	+1
+use	FUN_00181f00	uVar22	lastIndex	INFERRED	vectorSize1 - 1: index of the last entry	^\s*uVar22\ =\ iVar3\ \-\ 1;$	+3
+use	FUN_00181f00	uVar22	lastIndex	INFERRED	vectorSize1 - 1: index of the last entry	^\s*iVar19\ =\ uVar22\ \*\ 4;$	+1
+use	FUN_00181f00	uVar22	lastIndex	INFERRED	vectorSize1 - 1: index of the last entry	^\s*if\ \(\-1\ <\ \(int\)uVar22\)\ \{$	+2
+use	FUN_00181f00	uVar22	lastIndex	INFERRED	vectorSize1 - 1: index of the last entry	^\s*uVar26\ =\ uVar22\ \-\ iVar10;$	+1
+use	FUN_00181f00	uVar26	lane1Select	INFERRED	low byte of the select word (local_68 & 0xff)	^\s*uVar26\ =\ local_68\ \&\ 0xff;$	+1
+use	FUN_00181f00	uVar26	lane1Select	INFERRED	low byte of the select word (local_68 & 0xff)	^\s*\*\(uint\ \*\)\(iVar20\ \+\ 0x10\)\ =\ uVar26\ \|\ 0x4040400;$	+1
+use	FUN_00181f00	uVar9	lane2Select	INFERRED	low byte of the select word (local_64 & 0xff)	^\s*uVar9\ =\ local_64\ \&\ 0xff;$	+1
+use	FUN_00181f00	uVar9	lane2Select	INFERRED	low byte of the select word (local_64 & 0xff)	^\s*\*\(uint\ \*\)\(iVar20\ \+\ 0x10\)\ =\ uVar9\ \|\ 0x4040400;$	+1
+use	FUN_00181f00	uVar26	entryIndex	INFERRED	lastIndex - ordinal: index of the entry in the write-back loop	^\s*uVar26\ =\ uVar22\ \-\ iVar10;$	+2
+use	FUN_00181f00	uVar26	entryIndex	INFERRED	lastIndex - ordinal: index of the entry in the write-back loop	^\s*if\ \(uVar14\ <=\ uVar26\)\ \{$	+2
+use	FUN_00181f00	uVar26	entryIndex	INFERRED	lastIndex - ordinal: index of the entry in the write-back loop	^\s*piVar8\ =\ \(int\ \*\)FUN_0019423c\(puVar18,uVar26\);$	+1
+use	FUN_00181f00	uVar26	entryIndex	INFERRED	lastIndex - ordinal: index of the entry in the write-back loop	^\s*if\ \(uVar26\ <\ uVar2\)\ \{$@2	+1
+use	FUN_00181f00	uVar26	entryIndex	INFERRED	lastIndex - ordinal: index of the entry in the write-back loop	^\s*if\ \(uVar2\ <=\ uVar26\)\ \{$	+2
+use	FUN_00181f00	uVar26	entryIndex	INFERRED	lastIndex - ordinal: index of the entry in the write-back loop	^\s*puVar11\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar18,uVar26\);$	+1
+use	FUN_00181f00	uVar26	entryIndex	INFERRED	lastIndex - ordinal: index of the entry in the write-back loop	^\s*if\ \(uVar26\ <\ \*puVar17\)\ \{$	+1
+use	FUN_00181f00	uVar26	entryIndex	INFERRED	lastIndex - ordinal: index of the entry in the write-back loop	^\s*if\ \(uVar2\ <=\ uVar26\)\ \{$@2	+2
+use	FUN_00181f00	uVar26	entryIndex	INFERRED	lastIndex - ordinal: index of the entry in the write-back loop	^\s*piVar12\ =\ \(int\ \*\)FUN_0019423c\(puVar17,uVar26\);$	+1
+use	FUN_00181f00	uVar21	selectConstA	INFERRED	DAT_001b0210 select word stored at +0x9c of the new instruction	^\s*uVar21\ =\ DAT_001b0210;$	+1
+use	FUN_00181f00	uVar21	selectConstA	INFERRED	DAT_001b0210 select word stored at +0x9c of the new instruction	^\s*\*\(undefined4\ \*\)\(iVar13\ \+\ 0x9c\)\ =\ uVar21;$	+1
+use	FUN_00181f00	uVar21	selectConstA	INFERRED	DAT_001b0210 select word stored at +0x9c of the new instruction	^\s*uVar21\ =\ DAT_001b0210;$@2	+1
+use	FUN_00181f00	uVar21	selectConstA	INFERRED	DAT_001b0210 select word stored at +0x9c of the new instruction	^\s*\*\(undefined4\ \*\)\(iVar10\ \+\ 0x9c\)\ =\ uVar21;$	+1
+use	FUN_00181f00	uVar21	selectConstA	INFERRED	DAT_001b0210 select word stored at +0x9c of the new instruction	^\s*uVar21\ =\ DAT_001b0210;$@3	+1
+use	FUN_00181f00	uVar21	selectConstA	INFERRED	DAT_001b0210 select word stored at +0x9c of the new instruction	^\s*\*\(undefined4\ \*\)\(iVar4\ \+\ 0x9c\)\ =\ uVar21;$	+1
+use	FUN_00181f00	uVar21	selectConstB	INFERRED	UNK_001b020c select word stored in the source operand record	^\s*uVar21\ =\ UNK_001b020c;$	+1
+use	FUN_00181f00	uVar21	selectConstB	INFERRED	UNK_001b020c select word stored in the source operand record	^\s*\*\(undefined4\ \*\)\(iVar4\ \+\ 0x10\)\ =\ uVar21;$	+1
+use	FUN_00181f00	uVar21	selectConstB	INFERRED	UNK_001b020c select word stored in the source operand record	^\s*uVar21\ =\ UNK_001b020c;$@2	+1
+use	FUN_00181f00	uVar21	selectConstB	INFERRED	UNK_001b020c select word stored in the source operand record	^\s*\*\(undefined4\ \*\)\(iVar19\ \+\ 0x10\)\ =\ uVar21;$	+1
+use	FUN_00181f00	uVar21	selectConstB	INFERRED	UNK_001b020c select word stored in the source operand record	^\s*\*\(undefined4\ \*\)\(iVar19\ \+\ 0x10\)\ =\ uVar21;$@2	+1
+use	FUN_00181f00	uVar21	selectConstB	INFERRED	UNK_001b020c select word stored in the source operand record	^\s*uVar21\ =\ UNK_001b020c;$@3	+1
+use	FUN_00181f00	uVar21	selectConstB	INFERRED	UNK_001b020c select word stored in the source operand record	^\s*\*\(undefined4\ \*\)\(iVar3\ \+\ 0x10\)\ =\ uVar21;$	+1
+use	FUN_00181f00	uVar21	selectConstB	INFERRED	UNK_001b020c select word stored in the source operand record	^\s*uVar21\ =\ UNK_001b020c;$@4	+1
+use	FUN_00181f00	uVar21	selectConstB	INFERRED	UNK_001b020c select word stored in the source operand record	^\s*\*\(undefined4\ \*\)\(iVar3\ \+\ 0x10\)\ =\ uVar21;$@3	+1
+use	FUN_00181f00	uVar21	selectConstC	INFERRED	UNK_001b0208 select word stored in operand 1 of inst	^\s*uVar21\ =\ UNK_001b0208;$	+1
+use	FUN_00181f00	uVar21	selectConstC	INFERRED	UNK_001b0208 select word stored in operand 1 of inst	^\s*\*\(undefined4\ \*\)\(iVar3\ \+\ 0x10\)\ =\ uVar21;$@2	+1
+use	FUN_00181f00	uVar21	savedSelectWord	INFERRED	select word (+0x10) copied from one operand record to another	^\s*uVar21\ =\ \*\(undefined4\ \*\)\(iVar13\ \+\ 0x10\);$	+1
+use	FUN_00181f00	uVar21	savedSelectWord	INFERRED	select word (+0x10) copied from one operand record to another	^\s*\*\(undefined4\ \*\)\(iVar13\ \+\ 0x10\)\ =\ uVar21;$	+1
+use	FUN_00181f00	uVar21	savedSelectWord	INFERRED	select word (+0x10) copied from one operand record to another	^\s*uVar21\ =\ \*\(undefined4\ \*\)\(iVar19\ \+\ 0x10\);$	+1
+use	FUN_00181f00	uVar21	savedSelectWord	INFERRED	select word (+0x10) copied from one operand record to another	^\s*\*\(undefined4\ \*\)\(iVar19\ \+\ 0x10\)\ =\ uVar21;$@3	+1
+use	FUN_00181f00	uVar21	savedSelectWord	INFERRED	select word (+0x10) copied from one operand record to another	^\s*uVar21\ =\ \*\(undefined4\ \*\)\(iVar19\ \+\ 0x10\);$@2	+1
+use	FUN_00181f00	uVar21	savedSelectWord	INFERRED	select word (+0x10) copied from one operand record to another	^\s*\*\(undefined4\ \*\)\(iVar19\ \+\ 0x10\)\ =\ uVar21;$@4	+1
+use	FUN_00181f00	local_80	listNode	INFERRED	first node of the instruction list (auStack_88 + 8), then the node being moved	^\s*iVar19\ =\ local_80;$	+1
+use	FUN_00181f00	local_80	listNode	INFERRED	first node of the instruction list (auStack_88 + 8), then the node being moved	^\s*iVar19\ =\ \*\(int\ \*\)\(local_80\ \+\ 8\);$	+2
+use	FUN_00181f00	local_80	listNode	INFERRED	first node of the instruction list (auStack_88 + 8), then the node being moved	^\s*iVar3\ =\ \*\(int\ \*\)\(local_80\ \+\ 8\);$	+1
+use	FUN_00181f00	local_80	listNode	INFERRED	first node of the instruction list (auStack_88 + 8), then the node being moved	^\s*FUN_0019401c\(local_80\);$	+3
+local	FUN_00181f00	auStack_88	chainList	INFERRED	DList header (DListNode__init) collecting the new instructions
+local	FUN_00181f00	local_60	laneSelect1	INFERRED	out-parameter of FUN_000f33f8 (select word -> lane select)
+local	FUN_00181f00	local_64	laneSelect2	INFERRED	out-parameter of FUN_000f33f8 (select word -> lane select)
+local	FUN_00181f00	local_68	laneSelect3	INFERRED	out-parameter of FUN_000f33f8 (select word -> lane select)
+use	FUN_00181f00	iVar10	sourceInst	INFERRED	source instruction of operand iVar19 of the popped instruction (IRInst__getOperandSource); its block (+0x158) is tested against block	^\s*iVar10\ =\ FUN_00105594\(iVar15,iVar19\);$	+2
+use	FUN_00181f00	iVar10	sourceInst	INFERRED	source instruction of operand iVar19 of the popped instruction (IRInst__getOperandSource); its block (+0x158) is tested against block	^\s*uVar2\ =\ \*\(uint\ \*\)\(iVar10\ \+\ 0x150\);$	+1
+use	FUN_00181f00	iVar10	sourceInst	INFERRED	source instruction of operand iVar19 of the popped instruction (IRInst__getOperandSource); its block (+0x158) is tested against block	^\s*if\ \(\(\(\*puVar24\ \&\ 2\)\ !=\ 0\)\ \&\&\ \(\*\(int\ \*\)\(\*\(int\ \*\)\(iVar10\ \+\ 0x88\)\ \+\ 8\)\ ==\ 0x13\)\)\ \{$	+1
+use	FUN_00181f00	iVar10	sourceInst	INFERRED	source instruction of operand iVar19 of the popped instruction (IRInst__getOperandSource); its block (+0x158) is tested against block	^\s*iVar13\ =\ iVar10\ \+\ 0x98;$	+1
+use	FUN_00181f00	iVar10	sourceInst	INFERRED	source instruction of operand iVar19 of the popped instruction (IRInst__getOperandSource); its block (+0x158) is tested against block	^\s*\(\*\(int\ \*\)\(\*\(int\ \*\)\(iVar10\ \+\ 0x88\)\ \+\ 8\)\ ==\ 0x12\)\)\ \{$	+1
+use	FUN_00181f00	iVar10	sourceInst	INFERRED	source instruction of operand iVar19 of the popped instruction (IRInst__getOperandSource); its block (+0x158) is tested against block	^\s*iVar13\ =\ iVar10\ \+\ 0x98;$@2	+1
+use	FUN_00181f00	iVar10	sourceInst	INFERRED	source instruction of operand iVar19 of the popped instruction (IRInst__getOperandSource); its block (+0x158) is tested against block	^\s*\*piVar8\ =\ iVar10;$	+1
+use	FUN_00181f00	iVar10	indexPlusOne	INFERRED	copy of vectorSize1 decremented by 2 per iteration: the size stored into vectorAlloc[2] when element index uVar2 is grown into (index + 1)	^\s*iVar10\ =\ iVar3;$	+1
+use	FUN_00181f00	iVar10	indexPlusOne	INFERRED	copy of vectorSize1 decremented by 2 per iteration: the size stored into vectorAlloc[2] when element index uVar2 is grown into (index + 1)	^\s*puVar6\[2\]\ =\ iVar10;$	+1
+use	FUN_00181f00	iVar10	indexPlusOne	INFERRED	copy of vectorSize1 decremented by 2 per iteration: the size stored into vectorAlloc[2] when element index uVar2 is grown into (index + 1)	^\s*puVar6\[2\]\ =\ iVar10;$@2	+1
+use	FUN_00181f00	iVar10	indexPlusOne	INFERRED	copy of vectorSize1 decremented by 2 per iteration: the size stored into vectorAlloc[2] when element index uVar2 is grown into (index + 1)	^\s*puVar6\[2\]\ =\ iVar10;$@3	+1
+use	FUN_00181f00	iVar10	indexPlusOne	INFERRED	copy of vectorSize1 decremented by 2 per iteration: the size stored into vectorAlloc[2] when element index uVar2 is grown into (index + 1)	^\s*puVar7\[2\]\ =\ iVar10;$	+1
+use	FUN_00181f00	iVar10	indexPlusOne	INFERRED	copy of vectorSize1 decremented by 2 per iteration: the size stored into vectorAlloc[2] when element index uVar2 is grown into (index + 1)	^\s*puVar6\[2\]\ =\ iVar10;$@4	+1
+use	FUN_00181f00	iVar10	indexPlusOne	INFERRED	copy of vectorSize1 decremented by 2 per iteration: the size stored into vectorAlloc[2] when element index uVar2 is grown into (index + 1)	^\s*puVar7\[2\]\ =\ iVar10;$@2	+1
+use	FUN_00181f00	iVar10	indexPlusOne	INFERRED	copy of vectorSize1 decremented by 2 per iteration: the size stored into vectorAlloc[2] when element index uVar2 is grown into (index + 1)	^\s*puVar6\[2\]\ =\ iVar10;$@5	+1
+use	FUN_00181f00	iVar10	indexPlusOne	INFERRED	copy of vectorSize1 decremented by 2 per iteration: the size stored into vectorAlloc[2] when element index uVar2 is grown into (index + 1)	^\s*puVar7\[2\]\ =\ iVar10;$@3	+1
+use	FUN_00181f00	iVar10	indexPlusOne	INFERRED	copy of vectorSize1 decremented by 2 per iteration: the size stored into vectorAlloc[2] when element index uVar2 is grown into (index + 1)	^\s*puVar6\[2\]\ =\ iVar10;$@6	+1
+use	FUN_00181f00	iVar10	indexPlusOne	INFERRED	copy of vectorSize1 decremented by 2 per iteration: the size stored into vectorAlloc[2] when element index uVar2 is grown into (index + 1)	^\s*puVar7\[2\]\ =\ iVar10;$@4	+1
+use	FUN_00181f00	iVar10	indexPlusOne	INFERRED	copy of vectorSize1 decremented by 2 per iteration: the size stored into vectorAlloc[2] when element index uVar2 is grown into (index + 1)	^\s*iVar10\ =\ iVar10\ \+\ \-2;$	+1
+use	FUN_00181f00	iVar10	firstJoinInst	INFERRED	IRInst__create(opcode): the single instruction built when the entry count is odd	^\s*iVar10\ =\ FUN_001043f0\(local_5c,\*param_1\);$	+1
+use	FUN_00181f00	iVar10	firstJoinInst	INFERRED	IRInst__create(opcode): the single instruction built when the entry count is odd	^\s*\*\(undefined4\ \*\)\(iVar10\ \+\ 0x98\)\ =\ 0;$	+3
+use	FUN_00181f00	iVar10	firstJoinInst	INFERRED	IRInst__create(opcode): the single instruction built when the entry count is odd	^\s*\*\(int\ \*\)\(iVar10\ \+\ 0x124\)\ =\ iVar4;$	+1
+use	FUN_00181f00	iVar10	firstJoinInst	INFERRED	IRInst__create(opcode): the single instruction built when the entry count is odd	^\s*\*\(int\ \*\)\(iVar10\ \+\ 0x124\)\ =\ iVar4;$@2	+1
+use	FUN_00181f00	iVar10	firstJoinInst	INFERRED	IRInst__create(opcode): the single instruction built when the entry count is odd	^\s*\*\(int\ \*\)\(iVar10\ \+\ 0x124\)\ =\ iVar15;$	+1
+use	FUN_00181f00	iVar10	firstJoinInst	INFERRED	IRInst__create(opcode): the single instruction built when the entry count is odd	^\s*FUN_00106004\(iVar10,1,iVar19,0,iVar4\);$	+1
+use	FUN_00181f00	iVar10	firstJoinInst	INFERRED	IRInst__create(opcode): the single instruction built when the entry count is odd	^\s*iVar4\ =\ FUN_001054ec\(iVar10,1\);$	+1
+use	FUN_00181f00	iVar10	firstJoinInst	INFERRED	IRInst__create(opcode): the single instruction built when the entry count is odd	^\s*FUN_00106004\(iVar10,2,uVar21,0,\*param_1\);$	+1
+use	FUN_00181f00	iVar10	firstJoinInst	INFERRED	IRInst__create(opcode): the single instruction built when the entry count is odd	^\s*iVar4\ =\ FUN_001054ec\(iVar10,2\);$	+1
+use	FUN_00181f00	iVar10	firstJoinInst	INFERRED	IRInst__create(opcode): the single instruction built when the entry count is odd	^\s*FUN_00103d50\(iVar10\ \+\ 0xbc,1,\*\(uint\ \*\)\(\*piVar8\ \*\ 0x18\ \+\ iVar4\ \+\ 0xa0\)\ \&\ 1\);$	+1
+use	FUN_00181f00	iVar10	firstJoinInst	INFERRED	IRInst__create(opcode): the single instruction built when the entry count is odd	^\s*FUN_00103d50\(iVar10\ \+\ 0xbc,2,\*\(uint\ \*\)\(\*piVar8\ \*\ 0x18\ \+\ iVar4\ \+\ 0xa0\)\ >>\ 1\ \&\ 1\);$	+3
+use	FUN_00181f00	iVar10	rightNode	INFERRED	next list node (+8) after leftNode in the chain walk; its own +8 is tested for the end	^\s*while\ \(iVar10\ =\ \*\(int\ \*\)\(iVar19\ \+\ 8\),\ \*\(int\ \*\)\(iVar10\ \+\ 8\)\ !=\ 0\)\ \{$	+1
+use	FUN_00181f00	iVar10	rightNode	INFERRED	next list node (+8) after leftNode in the chain walk; its own +8 is tested for the end	^\s*FUN_00106004\(iVar4,2,iVar10,0,\*param_1\);$	+1
+use	FUN_00181f00	iVar10	rightNode	INFERRED	next list node (+8) after leftNode in the chain walk; its own +8 is tested for the end	^\s*iVar19\ =\ \*\(int\ \*\)\(iVar10\ \+\ 8\);$	+1
+use	FUN_00181f00	iVar15	currentInst	INFERRED	instruction popped from the worklist (*elementRef)	^\s*iVar15\ =\ \*piVar8;$	+1
+use	FUN_00181f00	iVar15	currentInst	INFERRED	instruction popped from the worklist (*elementRef)	^\s*puVar24\ =\ \(uint\ \*\)\(iVar15\ \+\ 0xb8\);$	+1
+use	FUN_00181f00	iVar15	currentInst	INFERRED	instruction popped from the worklist (*elementRef)	^\s*iVar10\ =\ FUN_00105594\(iVar15,iVar19\);$	+1
+use	FUN_00181f00	iVar15	currentInst	INFERRED	instruction popped from the worklist (*elementRef)	^\s*FUN_00103d50\(iVar3\ \+\ iVar15\ \+\ 0x8c,2,0\);$	+1
+use	FUN_00181f00	iVar15	currentInst	INFERRED	instruction popped from the worklist (*elementRef)	^\s*uVar2\ =\ \*\(uint\ \*\)\(iVar3\ \+\ iVar15\ \+\ 0xa0\);$	+1
+use	FUN_00181f00	iVar15	currentInst	INFERRED	instruction popped from the worklist (*elementRef)	^\s*FUN_00103d50\(iVar3\ \+\ iVar15\ \+\ 0x8c,1,0\);$	+1
+use	FUN_00181f00	iVar15	currentInst	INFERRED	instruction popped from the worklist (*elementRef)	^\s*iVar3\ =\ FUN_001054ec\(iVar15,1\);$	+1
+use	FUN_00181f00	iVar15	currentInst	INFERRED	instruction popped from the worklist (*elementRef)	^\s*iVar3\ =\ FUN_001054ec\(iVar15,2\);$	+1
+use	FUN_00181f00	iVar15	currentInst	INFERRED	instruction popped from the worklist (*elementRef)	^\s*iVar3\ =\ FUN_001054ec\(iVar15,1\);$@2	+1
+use	FUN_00181f00	iVar15	currentInst	INFERRED	instruction popped from the worklist (*elementRef)	^\s*iVar3\ =\ FUN_001054ec\(iVar15,2\);$@2	+1
+use	FUN_00181f00	iVar15	currentInst	INFERRED	instruction popped from the worklist (*elementRef)	^\s*\*piVar8\ =\ iVar15;$	+1
+use	FUN_00181f00	iVar15	currentInst	INFERRED	instruction popped from the worklist (*elementRef)	^\s*\*piVar8\ =\ iVar15;$@2	+1
+use	FUN_00181f00	iVar15	scaleRemaining	INFERRED	accumulated result-scale (+0x124 of the entries) still to be distributed, clamped to the limits at compiler+0x30c+0x58/+0x5c	^\s*iVar15\ =\ 0;$	+1
+use	FUN_00181f00	iVar15	scaleRemaining	INFERRED	accumulated result-scale (+0x124 of the entries) still to be distributed, clamped to the limits at compiler+0x30c+0x58/+0x5c	^\s*iVar15\ =\ 0;$@2	+1
+use	FUN_00181f00	iVar15	scaleRemaining	INFERRED	accumulated result-scale (+0x124 of the entries) still to be distributed, clamped to the limits at compiler+0x30c+0x58/+0x5c	^\s*iVar15\ =\ iVar15\ \+\ \*\(int\ \*\)\(\*piVar8\ \+\ 0x124\);$	+1
+use	FUN_00181f00	iVar15	scaleRemaining	INFERRED	accumulated result-scale (+0x124 of the entries) still to be distributed, clamped to the limits at compiler+0x30c+0x58/+0x5c	^\s*iVar15\ =\ iVar15\ \+\ \*\(int\ \*\)\(\*piVar8\ \+\ 0x124\);$@2	+1
+use	FUN_00181f00	iVar15	scaleRemaining	INFERRED	accumulated result-scale (+0x124 of the entries) still to be distributed, clamped to the limits at compiler+0x30c+0x58/+0x5c	^\s*if\ \(iVar15\ !=\ 0\)\ \{$	+1
+use	FUN_00181f00	iVar15	scaleRemaining	INFERRED	accumulated result-scale (+0x124 of the entries) still to be distributed, clamped to the limits at compiler+0x30c+0x58/+0x5c	^\s*if\ \(iVar15\ <\ iVar20\)\ \{$	+1
+use	FUN_00181f00	iVar15	scaleRemaining	INFERRED	accumulated result-scale (+0x124 of the entries) still to be distributed, clamped to the limits at compiler+0x30c+0x58/+0x5c	^\s*iVar15\ =\ iVar15\ \-\ \*\(int\ \*\)\(\*\(int\ \*\)\(\*param_1\ \+\ 0x30c\)\ \+\ 0x58\);$	+1
+use	FUN_00181f00	iVar15	scaleRemaining	INFERRED	accumulated result-scale (+0x124 of the entries) still to be distributed, clamped to the limits at compiler+0x30c+0x58/+0x5c	^\s*if\ \(iVar20\ <\ iVar15\)\ \{$	+1
+use	FUN_00181f00	iVar15	scaleRemaining	INFERRED	accumulated result-scale (+0x124 of the entries) still to be distributed, clamped to the limits at compiler+0x30c+0x58/+0x5c	^\s*iVar15\ =\ iVar15\ \-\ \*\(int\ \*\)\(\*\(int\ \*\)\(\*param_1\ \+\ 0x30c\)\ \+\ 0x5c\);$	+1
+use	FUN_00181f00	iVar15	scaleRemaining	INFERRED	accumulated result-scale (+0x124 of the entries) still to be distributed, clamped to the limits at compiler+0x30c+0x58/+0x5c	^\s*\*\(int\ \*\)\(iVar13\ \+\ 0x124\)\ =\ iVar15;$	+2
+use	FUN_00181f00	iVar15	scaleRemaining	INFERRED	accumulated result-scale (+0x124 of the entries) still to be distributed, clamped to the limits at compiler+0x30c+0x58/+0x5c	^\s*iVar15\ =\ iVar15\ \+\ \*\(int\ \*\)\(\*piVar8\ \+\ 0x124\);$@3	+1
+use	FUN_00181f00	iVar15	scaleRemaining	INFERRED	accumulated result-scale (+0x124 of the entries) still to be distributed, clamped to the limits at compiler+0x30c+0x58/+0x5c	^\s*if\ \(iVar15\ ==\ 0\)\ \{$	+1
+use	FUN_00181f00	iVar15	scaleRemaining	INFERRED	accumulated result-scale (+0x124 of the entries) still to be distributed, clamped to the limits at compiler+0x30c+0x58/+0x5c	^\s*iVar15\ =\ 0;$@4	+1
+use	FUN_00181f00	iVar15	scaleRemaining	INFERRED	accumulated result-scale (+0x124 of the entries) still to be distributed, clamped to the limits at compiler+0x30c+0x58/+0x5c	^\s*if\ \(iVar15\ <\ iVar4\)\ \{$	+1
+use	FUN_00181f00	iVar15	scaleRemaining	INFERRED	accumulated result-scale (+0x124 of the entries) still to be distributed, clamped to the limits at compiler+0x30c+0x58/+0x5c	^\s*iVar15\ =\ iVar15\ \-\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar4\ \+\ 0x30c\)\ \+\ 0x58\);$	+1
+use	FUN_00181f00	iVar15	scaleRemaining	INFERRED	accumulated result-scale (+0x124 of the entries) still to be distributed, clamped to the limits at compiler+0x30c+0x58/+0x5c	^\s*if\ \(iVar4\ <\ iVar15\)\ \{$	+1
+use	FUN_00181f00	iVar15	scaleRemaining	INFERRED	accumulated result-scale (+0x124 of the entries) still to be distributed, clamped to the limits at compiler+0x30c+0x58/+0x5c	^\s*iVar15\ =\ iVar15\ \-\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar4\ \+\ 0x30c\)\ \+\ 0x5c\);$	+1
+use	FUN_00181f00	iVar15	scaleRemaining	INFERRED	accumulated result-scale (+0x124 of the entries) still to be distributed, clamped to the limits at compiler+0x30c+0x58/+0x5c	^\s*\*\(int\ \*\)\(iVar10\ \+\ 0x124\)\ =\ iVar15;$	+2
+use	FUN_00181f00	iVar15	scaleRemaining	INFERRED	accumulated result-scale (+0x124 of the entries) still to be distributed, clamped to the limits at compiler+0x30c+0x58/+0x5c	^\s*if\ \(iVar15\ ==\ 0\)\ \{$@2	+1
+use	FUN_00181f00	iVar15	scaleRemaining	INFERRED	accumulated result-scale (+0x124 of the entries) still to be distributed, clamped to the limits at compiler+0x30c+0x58/+0x5c	^\s*if\ \(iVar15\ <\ iVar13\)\ \{$	+1
+use	FUN_00181f00	iVar15	scaleRemaining	INFERRED	accumulated result-scale (+0x124 of the entries) still to be distributed, clamped to the limits at compiler+0x30c+0x58/+0x5c	^\s*iVar15\ =\ iVar15\ \-\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar13\ \+\ 0x30c\)\ \+\ 0x58\);$	+1
+use	FUN_00181f00	iVar15	scaleRemaining	INFERRED	accumulated result-scale (+0x124 of the entries) still to be distributed, clamped to the limits at compiler+0x30c+0x58/+0x5c	^\s*if\ \(iVar13\ <\ iVar15\)\ \{$	+1
+use	FUN_00181f00	iVar15	scaleRemaining	INFERRED	accumulated result-scale (+0x124 of the entries) still to be distributed, clamped to the limits at compiler+0x30c+0x58/+0x5c	^\s*iVar15\ =\ iVar15\ \-\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar13\ \+\ 0x30c\)\ \+\ 0x5c\);$	+1
+use	FUN_00181f00	iVar15	scaleRemaining	INFERRED	accumulated result-scale (+0x124 of the entries) still to be distributed, clamped to the limits at compiler+0x30c+0x58/+0x5c	^\s*\*\(int\ \*\)\(iVar4\ \+\ 0x124\)\ =\ iVar15;$	+2
+use	FUN_00181f00	iVar15	scaleRemaining	INFERRED	accumulated result-scale (+0x124 of the entries) still to be distributed, clamped to the limits at compiler+0x30c+0x58/+0x5c	^\s*iVar15\ =\ iVar3;$	+1
+use	FUN_00181f00	iVar15	scaleRemaining	INFERRED	accumulated result-scale (+0x124 of the entries) still to be distributed, clamped to the limits at compiler+0x30c+0x58/+0x5c	^\s*puVar6\[2\]\ =\ iVar15;$	+1
+use	FUN_00181f00	iVar15	scaleRemaining	INFERRED	accumulated result-scale (+0x124 of the entries) still to be distributed, clamped to the limits at compiler+0x30c+0x58/+0x5c	^\s*puVar6\[2\]\ =\ iVar15;$@2	+1
+use	FUN_00181f00	iVar15	scaleRemaining	INFERRED	accumulated result-scale (+0x124 of the entries) still to be distributed, clamped to the limits at compiler+0x30c+0x58/+0x5c	^\s*puVar7\[2\]\ =\ iVar15;$	+1
+use	FUN_00181f00	iVar15	scaleRemaining	INFERRED	accumulated result-scale (+0x124 of the entries) still to be distributed, clamped to the limits at compiler+0x30c+0x58/+0x5c	^\s*iVar15\ =\ iVar15\ \+\ \-1;$	+1
+use	FUN_00181f00	iVar15	nextNode	INFERRED	DList node following moveNode while the chain is spliced before inst	^\s*while\ \(iVar15\ =\ iVar19,\ iVar15\ !=\ 0\)\ \{$	+1
+use	FUN_00181f00	iVar15	nextNode	INFERRED	DList node following moveNode while the chain is spliced before inst	^\s*iVar3\ =\ iVar15;$	+2
+use	FUN_00181f00	iVar19	operandRecord7	INFERRED	IRInst__getOperandRecord(newInst2,2)	^\s*iVar19\ =\ FUN_001054ec\(iVar3,2\);$	+1
+use	FUN_00181f00	iVar19	operandRecord7	INFERRED	IRInst__getOperandRecord(newInst2,2)	^\s*\*\(undefined4\ \*\)\(iVar19\ \+\ 0x10\)\ =\ uVar21;$@4	+1
+use	FUN_00181f00	iVar19	lookaheadNode2	INFERRED	node after local_80 in the splice loop	^\s*while\ \(iVar19\ =\ iVar3,\ iVar19\ !=\ 0\)\ \{$	+1
+use	FUN_00181f00	iVar19	lookaheadNode2	INFERRED	node after local_80 in the splice loop	^\s*local_80\ =\ iVar19;$	+2

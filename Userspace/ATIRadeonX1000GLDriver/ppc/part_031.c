@@ -473,171 +473,185 @@ int FUN_0010c670(inst, inst2, param_3)
 }
 
 /* FUN_0010cb48 @ 0x10cb48 (1156 bytes) */
-int FUN_0010cb48(inst, param_2)
+int FUN_0010cb48(inst, pass)
   int inst;
-  int param_2;
+  int pass;
 {
+  int *copyInstFromList;
+  uint recordLaneByte;
+  int passArg;
+  bool atLastLane;
+  int operandNumberC;
+  int maskCountdown;
+  int operandNumberB;
+  int operandNumberA;
+  int laneCountdown;
+  int operandNumberD;
+  int maskLaneIndex;
+  int laneNumber;
+  int sourceBlock;
+  int laneByteIndex;
   undefined4 sourceDef;
   int operandRecord2;
   int operandRecord3;
   int operandRecord;
   int sourceDef2;
-  bool bVar1;
-  int iVar2;
+  bool moreLanes;
+  int inputBase;
   int *operandVReg;
-  int iVar4;
-  int *a0;
-  int iVar5;
-  int iVar6;
-  undefined4 extraout_r4;
-  undefined4 in_r8;
-  undefined4 uVar7;
-  undefined4 *puVar8;
-  uint uVar9;
-  int *piVar10;
+  int foundOperand;
+  int *newSource;
+  int operandCountLimit;
+  int laneStep;
+  undefined4 staleArg4;
+  undefined4 staleArg8;
+  undefined4 fallbackSourceValue;
+  undefined4 *copyListCursor;
+  uint laneSelector;
+  int *copyInst;
   int iVar11;
   double fparam_1;
-  undefined8 uVar12;
-  int local_78;
-  undefined4 local_74;
-  undefined4 local_70;
-  int local_6c;
-  undefined4 local_68;
-  int local_64 [2];
-  undefined4 local_5c [5];
-  float local_48 [4];
+  undefined8 constantSearchResult;
+  int destMaskWord;
+  undefined4 sourceDestMaskWord;
+  undefined4 swizzleWord;
+  int selectSwizzle;
+  undefined4 operandSwizzle;
+  int foundOperandSlots [2];
+  undefined4 copyInsts [5];
+  float foldedCompareResult [4];
   
   operandVReg = (int *)IRInst__getOperandSource(inst,1);
-  iVar2 = *(int *)(*(int *)(param_2 + 0x6c4) + 0x478);
-  if (iVar2 < operandVReg[0x58]) {
+  inputBase = *(int *)(*(int *)(pass + 0x6c4) + 0x478);
+  if (inputBase < operandVReg[0x58]) {
     operandVReg[0x58] = operandVReg[0x58] + 1;
   }
   else {
-    operandVReg[0x58] = iVar2 + 1;
+    operandVReg[0x58] = inputBase + 1;
   }
   operandRecord = IRInst__getOperandRecord(inst,1);
-  local_70 = *(undefined4 *)(operandRecord + 0x10);
+  swizzleWord = *(undefined4 *)(operandRecord + 0x10);
   operandRecord = IRInst__getOperandRecord(inst,0);
-  local_78 = *(int *)(operandRecord + 0x10);
+  destMaskWord = *(int *)(operandRecord + 0x10);
   operandRecord = IRInst__getOperandRecord(operandVReg,0);
-  local_74 = *(undefined4 *)(operandRecord + 0x10);
+  sourceDestMaskWord = *(undefined4 *)(operandRecord + 0x10);
   if ((operandVReg[5] & 0x200U) != 0) {
-    iVar2 = 0;
-    iVar11 = 4;
+    laneByteIndex = 0;
+    laneCountdown = 4;
     do {
-      if ((*(byte *)((int)&local_70 + iVar2) != 4) &&
-         (*(char *)((int)&local_74 + (uint)*(byte *)((int)&local_70 + iVar2)) == '\x01')) {
-        *(undefined1 *)((int)&local_78 + iVar2) = 1;
-        *(undefined1 *)((int)&local_70 + iVar2) = 4;
+      if ((*(byte *)((int)&swizzleWord + laneByteIndex) != 4) &&
+         (*(char *)((int)&sourceDestMaskWord + (uint)*(byte *)((int)&swizzleWord + laneByteIndex)) == '\x01')) {
+        *(undefined1 *)((int)&destMaskWord + laneByteIndex) = 1;
+        *(undefined1 *)((int)&swizzleWord + laneByteIndex) = 4;
       }
-      iVar2 = iVar2 + 1;
-      iVar11 = iVar11 + -1;
-    } while (iVar11 != 0);
+      laneByteIndex = laneByteIndex + 1;
+      laneCountdown = laneCountdown + -1;
+    } while (laneCountdown != 0);
   }
-  iVar2 = operandVReg[0x56];
-  puVar8 = local_5c;
-  for (iVar11 = 1; iVar5 = (**(code **)(*operandVReg + 0x14))(operandVReg), iVar11 <= iVar5;
-      iVar11 = iVar11 + 1) {
-    iVar6 = 0;
-    *(int *)(*(int *)(param_2 + 0x6c4) + 0x228) = *(int *)(*(int *)(param_2 + 0x6c4) + 0x228) + 1;
-    piVar10 = (int *)IRLoadConst__vslot73(0xa2,param_2);
-    *puVar8 = piVar10;
-    piVar10[0x26] = 0x36;
-    piVar10[0x25] = piVar10[0x53];
-    piVar10[0x21] = 1;
-    piVar10[0x4b] = 1;
-    sourceDef = IRInst__getOperandSource(operandVReg,iVar11);
-    iVar5 = param_2;
-    IRInst__setOperandSource(piVar10,1,sourceDef,0,param_2);
-    piVar10[0x27] = local_78;
-    operandRecord3 = IRInst__getOperandRecord(operandVReg,iVar11);
-    local_68 = *(undefined4 *)(operandRecord3 + 0x10);
+  sourceBlock = operandVReg[0x56];
+  copyListCursor = copyInsts;
+  for (operandNumberA = 1; operandCountLimit = (**(code **)(*operandVReg + 0x14))(operandVReg), operandNumberA <= operandCountLimit;
+      operandNumberA = operandNumberA + 1) {
+    laneStep = 0;
+    *(int *)(*(int *)(pass + 0x6c4) + 0x228) = *(int *)(*(int *)(pass + 0x6c4) + 0x228) + 1;
+    copyInst = (int *)IRLoadConst__vslot73(0xa2,pass);
+    *copyListCursor = copyInst;
+    copyInst[0x26] = 0x36;
+    copyInst[0x25] = copyInst[0x53];
+    copyInst[0x21] = 1;
+    copyInst[0x4b] = 1;
+    sourceDef = IRInst__getOperandSource(operandVReg,operandNumberA);
+    passArg = pass;
+    IRInst__setOperandSource(copyInst,1,sourceDef,0,pass);
+    copyInst[0x27] = destMaskWord;
+    operandRecord3 = IRInst__getOperandRecord(operandVReg,operandNumberA);
+    operandSwizzle = *(undefined4 *)(operandRecord3 + 0x10);
     do {
-      uVar9 = (uint)*(byte *)((int)&local_70 + iVar6);
-      if (uVar9 != 4) {
-        (**(code **)(*piVar10 + 0x88))
-                  (piVar10,1,iVar6,(uint)*(byte *)((int)local_64 + (uVar9 - 4)),iVar5,in_r8,
-                   (int)&local_78 + uVar9);
+      laneSelector = (uint)*(byte *)((int)&swizzleWord + laneStep);
+      if (laneSelector != 4) {
+        (**(code **)(*copyInst + 0x88))
+                  (copyInst,1,laneStep,(uint)*(byte *)((int)foundOperandSlots + (laneSelector - 4)),passArg,staleArg8,
+                   (int)&destMaskWord + laneSelector);
       }
-      bVar1 = iVar6 != 3;
-      iVar6 = iVar6 + 1;
-    } while (bVar1);
-    Block__insertInstBefore(iVar2,operandVReg,piVar10);
-    a0 = (int *)IRInst__getOperandSource(piVar10,1);
-    iVar5 = (**(code **)(*a0 + 0x60))(a0);
-    if (iVar5 != 0) {
-      sourceDef = IRInst__getOperandSource(piVar10,1);
-      ((int (*)())FUN_0010c670)(sourceDef,piVar10,param_2);
+      moreLanes = laneStep != 3;
+      laneStep = laneStep + 1;
+    } while (moreLanes);
+    Block__insertInstBefore(sourceBlock,operandVReg,copyInst);
+    newSource = (int *)IRInst__getOperandSource(copyInst,1);
+    operandCountLimit = (**(code **)(*newSource + 0x60))(newSource);
+    if (operandCountLimit != 0) {
+      sourceDef = IRInst__getOperandSource(copyInst,1);
+      ((int (*)())FUN_0010c670)(sourceDef,copyInst,pass);
     }
-    IRInst__setOperandSource(operandVReg,iVar11,piVar10,0,param_2);
-    puVar8 = puVar8 + 1;
-    piVar10[0x58] = *(int *)(*(int *)(param_2 + 0x6c4) + 0x478) + 1;
+    IRInst__setOperandSource(operandVReg,operandNumberA,copyInst,0,pass);
+    copyListCursor = copyListCursor + 1;
+    copyInst[0x58] = *(int *)(*(int *)(pass + 0x6c4) + 0x478) + 1;
   }
-  iVar2 = 0;
+  laneNumber = 0;
   do {
-    if ((*(char *)((int)&local_78 + iVar2) != '\x01') &&
-       (*(char *)((int)&local_70 + iVar2) == '\x04')) {
+    if ((*(char *)((int)&destMaskWord + laneNumber) != '\x01') &&
+       (*(char *)((int)&swizzleWord + laneNumber) == '\x04')) {
       if (1 < *(int *)(inst + 0x84)) {
         iVar11 = 2;
         do {
-          iVar5 = IRInst__getOperandRecord(inst,iVar11);
-          uVar9 = (uint)*(byte *)(iVar2 + iVar5 + 0x10);
-          if (uVar9 != 4) {
+          operandCountLimit = IRInst__getOperandRecord(inst,iVar11);
+          recordLaneByte = (uint)*(byte *)(laneNumber + operandCountLimit + 0x10);
+          if (recordLaneByte != 4) {
             sourceDef2 = IRInst__getOperandSource(inst,iVar11);
-            uVar7 = *(undefined4 *)(uVar9 * 0x18 + sourceDef2 + 0x20);
+            fallbackSourceValue = *(undefined4 *)(recordLaneByte * 0x18 + sourceDef2 + 0x20);
             goto LAB_0010ce20;
           }
           iVar11 = iVar11 + 1;
         } while (iVar11 <= *(int *)(inst + 0x84));
       }
-      uVar7 = 0;
+      fallbackSourceValue = 0;
 LAB_0010ce20:
-      puVar8 = local_5c;
-      for (iVar11 = 1; iVar5 = (**(code **)(*operandVReg + 0x14))(operandVReg), iVar11 <= iVar5;
-          iVar11 = iVar11 + 1) {
-        IRInst__foldCompareConstResult(local_48,operandVReg,iVar11,uVar7,param_2);
-        fparam_1 = (double)local_48[0];
-        piVar10 = (int *)*puVar8;
-        uVar12 = ((int (*)())IRInst__findConstantOperandWithValue)(piVar10,extraout_r4,local_64,fparam_1);
-        iVar5 = local_64[0];
-        iVar4 = (int)((ulonglong)uVar12 >> 0x20);
-        if (iVar4 == 0) {
-          iVar5 = piVar10[0x21];
-          ((void (*)())IRInst__setLiteralOperandAndSource)(piVar10,(int)uVar12,iVar5 + 1,param_2,fparam_1);
-          (**(code **)(*piVar10 + 0x88))(piVar10,iVar5 + 1,iVar2,iVar2);
+      copyListCursor = copyInsts;
+      for (operandNumberB = 1; operandCountLimit = (**(code **)(*operandVReg + 0x14))(operandVReg), operandNumberB <= operandCountLimit;
+          operandNumberB = operandNumberB + 1) {
+        IRInst__foldCompareConstResult(foldedCompareResult,operandVReg,operandNumberB,fallbackSourceValue,pass);
+        fparam_1 = (double)foldedCompareResult[0];
+        copyInstFromList = (int *)*copyListCursor;
+        constantSearchResult = ((int (*)())IRInst__findConstantOperandWithValue)(copyInstFromList,staleArg4,foundOperandSlots,fparam_1);
+        operandCountLimit = foundOperandSlots[0];
+        foundOperand = (int)((ulonglong)constantSearchResult >> 0x20);
+        if (foundOperand == 0) {
+          operandCountLimit = copyInstFromList[0x21];
+          ((void (*)())IRInst__setLiteralOperandAndSource)(copyInstFromList,(int)constantSearchResult,operandCountLimit + 1,pass,fparam_1);
+          (**(code **)(*copyInstFromList + 0x88))(copyInstFromList,operandCountLimit + 1,laneNumber,laneNumber);
         }
         else {
-          operandRecord2 = IRInst__getOperandRecord(piVar10,iVar4);
-          (**(code **)(*piVar10 + 0x88))(piVar10,iVar4,iVar2,*(undefined1 *)(iVar5 + operandRecord2 + 0x10));
+          operandRecord2 = IRInst__getOperandRecord(copyInstFromList,foundOperand);
+          (**(code **)(*copyInstFromList + 0x88))(copyInstFromList,foundOperand,laneNumber,*(undefined1 *)(operandCountLimit + operandRecord2 + 0x10));
         }
-        puVar8 = puVar8 + 1;
+        copyListCursor = copyListCursor + 1;
       }
     }
-    bVar1 = iVar2 == 3;
-    iVar2 = iVar2 + 1;
-    if (bVar1) {
-      iVar2 = 0;
-      operandVReg[0x27] = local_78;
-      local_6c = 0x10203;
-      iVar11 = 4;
+    atLastLane = laneNumber == 3;
+    laneNumber = laneNumber + 1;
+    if (atLastLane) {
+      maskLaneIndex = 0;
+      operandVReg[0x27] = destMaskWord;
+      selectSwizzle = 0x10203;
+      maskCountdown = 4;
       do {
-        if (*(char *)((int)&local_78 + iVar2) == '\x01') {
-          *(undefined1 *)((int)&local_6c + iVar2) = 4;
+        if (*(char *)((int)&destMaskWord + maskLaneIndex) == '\x01') {
+          *(undefined1 *)((int)&selectSwizzle + maskLaneIndex) = 4;
         }
-        iVar2 = iVar2 + 1;
-        iVar11 = iVar11 + -1;
-      } while (iVar11 != 0);
-      for (iVar2 = 1; iVar5 = (**(code **)(*operandVReg + 0x14))(operandVReg), iVar11 = local_6c,
-          iVar2 <= iVar5; iVar2 = iVar2 + 1) {
-        if (iVar2 == 0) {
-          operandVReg[0x27] = local_6c;
+        maskLaneIndex = maskLaneIndex + 1;
+        maskCountdown = maskCountdown + -1;
+      } while (maskCountdown != 0);
+      for (operandNumberD = 1; operandCountLimit = (**(code **)(*operandVReg + 0x14))(operandVReg), operandNumberC = selectSwizzle,
+          operandNumberD <= operandCountLimit; operandNumberD = operandNumberD + 1) {
+        if (operandNumberD == 0) {
+          operandVReg[0x27] = selectSwizzle;
         }
         else {
-          iVar5 = IRInst__getOperandRecord(operandVReg,iVar2);
-          *(int *)(iVar5 + 0x10) = iVar11;
+          operandCountLimit = IRInst__getOperandRecord(operandVReg,operandNumberD);
+          *(int *)(operandCountLimit + 0x10) = operandNumberC;
         }
       }
-      IRInst__dropCounterAndDeleteIfUnused(inst,param_2);
+      IRInst__dropCounterAndDeleteIfUnused(inst,pass);
       return operandVReg;
     }
   } while( true );
@@ -2070,8 +2084,8 @@ int KhanPs__vslot87_assignInterpolatorBindings(this, program)
 }
 
 /* FUN_0010ef68 @ 0x10ef68 (1052 bytes) */
-int FUN_0010ef68(param_1, program, param_3, param_4, param_5, param_6, param_7)
-  int *param_1;
+int FUN_0010ef68(psBackend, program, param_3, param_4, param_5, param_6, param_7)
+  int *psBackend;
   int program;
   undefined4 param_3;
   undefined4 param_4;
@@ -2079,156 +2093,163 @@ int FUN_0010ef68(param_1, program, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_6;
   undefined4 param_7;
 {
+  int loadInst;
+  int isInterpLoadB;
+  int laneIndexValue;
+  uint remainingLaneMask;
+  uint nextFreeRegister;
+  int laneUsedB;
+  int laneKind;
   int operandRecord;
-  bool bVar1;
-  int *piVar2;
-  int *piVar3;
-  int iVar4;
-  undefined4 uVar5;
-  int *piVar6;
-  undefined4 uVar7;
-  uint uVar8;
-  uint uVar9;
-  uint uVar10;
-  uint uVar11;
-  int iVar12;
-  uint uVar13;
-  int iVar14;
-  code *pcVar15;
-  int iVar16;
+  bool moreLanes;
+  int *nextInstLink;
+  int *inst;
+  int isInterpLoad;
+  undefined4 interpolatorCode;
+  int *cursorInst;
+  undefined4 compiler;
+  uint followingLane;
+  uint laneGroupMask;
+  uint assignedRegister;
+  uint fixedRegister;
+  int regLimitOrScratch;
+  uint savedNextFreeRegister;
+  int fixedRegBase;
+  code *bindInterpolatorFn;
+  int fixedStreamKey;
   uint loopIndex;
-  int iVar18;
-  undefined1 local_58 [20];
+  int entryBlock;
+  undefined1 laneSelects [20];
   
-  iVar18 = *(int *)(program + 0x3a4);
-  if (iVar18 == 0) {
-    iVar18 = *(int *)(program + 0x3a0);
+  entryBlock = *(int *)(program + 0x3a4);
+  if (entryBlock == 0) {
+    entryBlock = *(int *)(program + 0x3a0);
   }
-  uVar7 = *(undefined4 *)(program + 8);
-  iVar16 = *(int *)(program + 0x3f4);
-  iVar14 = *(int *)(program + 1000);
-  iVar12 = *(int *)(program + 0x3ec);
+  compiler = *(undefined4 *)(program + 8);
+  fixedStreamKey = *(int *)(program + 0x3f4);
+  fixedRegBase = *(int *)(program + 1000);
+  regLimitOrScratch = *(int *)(program + 0x3ec);
   if (*(int *)(program + 0x3e4) != 0) {
-    piVar3 = *(int **)(iVar18 + 0x98);
-    piVar2 = (int *)piVar3[2];
-    if ((int *)piVar3[2] == (int *)0x0) goto LAB_0010f084;
+    inst = *(int **)(entryBlock + 0x98);
+    nextInstLink = (int *)inst[2];
+    if ((int *)inst[2] == (int *)0x0) goto LAB_0010f084;
     do {
-      piVar6 = piVar2;
-      if ((piVar3[5] & 1U) != 0) {
-        iVar4 = (**(code **)(*piVar3 + 0x4c))(piVar3);
-        if ((((iVar4 == 0) || (iVar4 = piVar3[0x52], iVar16 != piVar3[0x51])) || (iVar4 < iVar14))
-           || (iVar12 <= iVar4)) {
-          piVar6 = (int *)piVar3[2];
+      cursorInst = nextInstLink;
+      if ((inst[5] & 1U) != 0) {
+        isInterpLoad = (**(code **)(*inst + 0x4c))(inst);
+        if ((((isInterpLoad == 0) || (isInterpLoad = inst[0x52], fixedStreamKey != inst[0x51])) || (isInterpLoad < fixedRegBase))
+           || (regLimitOrScratch <= isInterpLoad)) {
+          cursorInst = (int *)inst[2];
         }
         else {
-          uVar11 = iVar4 - iVar14;
-          Program__markHwRegUsed(program,uVar11);
-          FUN_00130bd4(program,uVar11);
-          piVar3[0x25] = uVar11;
-          piVar3[0x26] = 0;
-          piVar3[5] = piVar3[5] | 0x40;
-          if (*(int *)(program + 0x80) < (int)uVar11) {
-            *(uint *)(program + 0x80) = uVar11;
+          fixedRegister = isInterpLoad - fixedRegBase;
+          Program__markHwRegUsed(program,fixedRegister);
+          FUN_00130bd4(program,fixedRegister);
+          inst[0x25] = fixedRegister;
+          inst[0x26] = 0;
+          inst[5] = inst[5] | 0x40;
+          if (*(int *)(program + 0x80) < (int)fixedRegister) {
+            *(uint *)(program + 0x80) = fixedRegister;
           }
-          *(uint *)(program + 0x88) = 1 << (uVar11 & 0x3f) | *(uint *)(program + 0x88);
-          piVar6 = (int *)piVar3[2];
+          *(uint *)(program + 0x88) = 1 << (fixedRegister & 0x3f) | *(uint *)(program + 0x88);
+          cursorInst = (int *)inst[2];
         }
       }
-      piVar2 = (int *)piVar6[2];
-      piVar3 = piVar6;
-    } while ((int *)piVar6[2] != (int *)0x0);
+      nextInstLink = (int *)cursorInst[2];
+      inst = cursorInst;
+    } while ((int *)cursorInst[2] != (int *)0x0);
   }
-  piVar3 = *(int **)(iVar18 + 0x98);
+  inst = *(int **)(entryBlock + 0x98);
 LAB_0010f084:
-  if ((int *)piVar3[2] != (int *)0x0) {
-    piVar2 = (int *)piVar3[2];
-    uVar11 = 0;
+  if ((int *)inst[2] != (int *)0x0) {
+    nextInstLink = (int *)inst[2];
+    nextFreeRegister = 0;
     do {
-      piVar6 = piVar2;
-      uVar13 = uVar11;
-      if ((piVar3[5] & 1U) != 0) {
-        iVar18 = (**(code **)(*piVar3 + 0x4c))(piVar3);
-        if (iVar18 != 0) {
-          iVar18 = (**(code **)(*piVar3 + 0x80))(piVar3);
-          if (((*(uint *)(iVar18 + 0x14) & 0x40) == 0) || (*(int *)(iVar18 + 0x98) != 0)) {
-            for (; iVar12 = (**(code **)(*param_1 + 0x138))(param_1,*(undefined4 *)(program + 8)),
-                (int)uVar11 < iVar12; uVar11 = uVar11 + 1) {
-              iVar12 = Program__isHwRegAllowed(program,uVar11);
-              if ((iVar12 != 0) && (iVar12 = FUN_00130478(program,uVar11), iVar12 != 0)) {
-                uVar13 = uVar11 + 1;
-                uVar10 = uVar11;
+      cursorInst = nextInstLink;
+      savedNextFreeRegister = nextFreeRegister;
+      if ((inst[5] & 1U) != 0) {
+        isInterpLoadB = (**(code **)(*inst + 0x4c))(inst);
+        if (isInterpLoadB != 0) {
+          loadInst = (**(code **)(*inst + 0x80))(inst);
+          if (((*(uint *)(loadInst + 0x14) & 0x40) == 0) || (*(int *)(loadInst + 0x98) != 0)) {
+            for (; regLimitOrScratch = (**(code **)(*psBackend + 0x138))(psBackend,*(undefined4 *)(program + 8)),
+                (int)nextFreeRegister < regLimitOrScratch; nextFreeRegister = nextFreeRegister + 1) {
+              regLimitOrScratch = Program__isHwRegAllowed(program,nextFreeRegister);
+              if ((regLimitOrScratch != 0) && (regLimitOrScratch = FUN_00130478(program,nextFreeRegister), regLimitOrScratch != 0)) {
+                savedNextFreeRegister = nextFreeRegister + 1;
+                assignedRegister = nextFreeRegister;
                 goto LAB_0010f168;
               }
             }
-            uVar10 = 0xffffffff;
-            uVar13 = uVar11;
+            assignedRegister = 0xffffffff;
+            savedNextFreeRegister = nextFreeRegister;
 LAB_0010f168:
-            Program__markHwRegUsed(program,uVar10);
-            *(undefined4 *)(iVar18 + 0x98) = 0;
-            *(uint *)(iVar18 + 0x94) = uVar10;
-            if (*(int *)(program + 0x80) < (int)uVar10) {
-              *(uint *)(program + 0x80) = uVar10;
+            Program__markHwRegUsed(program,assignedRegister);
+            *(undefined4 *)(loadInst + 0x98) = 0;
+            *(uint *)(loadInst + 0x94) = assignedRegister;
+            if (*(int *)(program + 0x80) < (int)assignedRegister) {
+              *(uint *)(program + 0x80) = assignedRegister;
             }
-            *(uint *)(program + 0x88) = 1 << (uVar10 & 0x3f) | *(uint *)(program + 0x88);
-            *(uint *)(iVar18 + 0x14) = *(uint *)(iVar18 + 0x14) | 0x40;
+            *(uint *)(program + 0x88) = 1 << (assignedRegister & 0x3f) | *(uint *)(program + 0x88);
+            *(uint *)(loadInst + 0x14) = *(uint *)(loadInst + 0x14) | 0x40;
           }
           else {
-            uVar10 = *(uint *)(iVar18 + 0x94);
+            assignedRegister = *(uint *)(loadInst + 0x94);
           }
-          if (((int)uVar10 < 0) ||
-             (iVar12 = (**(code **)(*param_1 + 0x138))(param_1,*(undefined4 *)(program + 8)),
-             iVar12 <= (int)uVar10)) {
-            Compiler__fail(uVar7,4);
+          if (((int)assignedRegister < 0) ||
+             (regLimitOrScratch = (**(code **)(*psBackend + 0x138))(psBackend,*(undefined4 *)(program + 8)),
+             regLimitOrScratch <= (int)assignedRegister)) {
+            Compiler__fail(compiler,4);
           }
-          iVar12 = *(int *)(iVar18 + 0x144);
-          if ((iVar12 != 0x1b) && (iVar12 != 0x23)) {
-            if (iVar12 == 0x24) {
-              *(uint *)(iVar18 + 0x148) = uVar10;
+          regLimitOrScratch = *(int *)(loadInst + 0x144);
+          if ((regLimitOrScratch != 0x1b) && (regLimitOrScratch != 0x23)) {
+            if (regLimitOrScratch == 0x24) {
+              *(uint *)(loadInst + 0x148) = assignedRegister;
             }
-            uVar11 = 0xf;
+            remainingLaneMask = 0xf;
             loopIndex = 0;
             do {
-              iVar12 = IRLoadInterp__laneUsed(iVar18,loopIndex);
-              if ((iVar12 != 0) && (uVar9 = 1 << (loopIndex & 0x3f), (uVar9 & uVar11) != 0)) {
-                iVar14 = IRLoadInterp__laneKind(iVar18,loopIndex);
-                iVar16 = IRLoadInterp__laneIndex(iVar18,loopIndex);
-                iVar12 = 1;
-                if (iVar14 != 7) {
-                  iVar12 = iVar16;
+              regLimitOrScratch = IRLoadInterp__laneUsed(loadInst,loopIndex);
+              if ((regLimitOrScratch != 0) && (laneGroupMask = 1 << (loopIndex & 0x3f), (laneGroupMask & remainingLaneMask) != 0)) {
+                laneKind = IRLoadInterp__laneKind(loadInst,loopIndex);
+                laneIndexValue = IRLoadInterp__laneIndex(loadInst,loopIndex);
+                regLimitOrScratch = 1;
+                if (laneKind != 7) {
+                  regLimitOrScratch = laneIndexValue;
                 }
-                uVar8 = loopIndex + 1;
-                if ((int)uVar8 < 4) {
+                followingLane = loopIndex + 1;
+                if ((int)followingLane < 4) {
                   do {
-                    iVar4 = IRLoadInterp__laneUsed(iVar18,uVar8);
-                    if (((iVar4 != 0) && (iVar4 = IRLoadInterp__laneKind(iVar18,uVar8), iVar4 == iVar14)) &&
-                       (iVar4 = IRLoadInterp__laneIndex(iVar18,uVar8), iVar16 == iVar4)) {
-                      uVar9 = uVar9 | 1 << (uVar8 & 0x3f);
+                    laneUsedB = IRLoadInterp__laneUsed(loadInst,followingLane);
+                    if (((laneUsedB != 0) && (laneUsedB = IRLoadInterp__laneKind(loadInst,followingLane), laneUsedB == laneKind)) &&
+                       (laneUsedB = IRLoadInterp__laneIndex(loadInst,followingLane), laneIndexValue == laneUsedB)) {
+                      laneGroupMask = laneGroupMask | 1 << (followingLane & 0x3f);
                     }
-                    bVar1 = uVar8 != 3;
-                    uVar8 = uVar8 + 1;
-                  } while (bVar1);
+                    moreLanes = followingLane != 3;
+                    followingLane = followingLane + 1;
+                  } while (moreLanes);
                 }
-                if (uVar9 != 0) {
-                  IRLoadInterp__laneSelects(local_58,iVar18);
-                  pcVar15 = *(code **)(*param_1 + 0x54);
-                  uVar11 = uVar11 - uVar9;
-                  uVar5 = Table__interpolatorKindToCode(program,iVar14);
-                  operandRecord = IRInst__getOperandRecord(iVar18,1);
-                  uVar9 = *(uint *)(iVar18 + 0x13c);
-                  (*pcVar15)(param_1,uVar10,uVar5,iVar12,*(undefined4 *)(operandRecord + 0x10),uVar9 & 1,
-                             uVar9 >> 2 & 1,uVar9 >> 1 & 1);
+                if (laneGroupMask != 0) {
+                  IRLoadInterp__laneSelects(laneSelects,loadInst);
+                  bindInterpolatorFn = *(code **)(*psBackend + 0x54);
+                  remainingLaneMask = remainingLaneMask - laneGroupMask;
+                  interpolatorCode = Table__interpolatorKindToCode(program,laneKind);
+                  operandRecord = IRInst__getOperandRecord(loadInst,1);
+                  laneGroupMask = *(uint *)(loadInst + 0x13c);
+                  (*bindInterpolatorFn)(psBackend,assignedRegister,interpolatorCode,regLimitOrScratch,*(undefined4 *)(operandRecord + 0x10),laneGroupMask & 1,
+                             laneGroupMask >> 2 & 1,laneGroupMask >> 1 & 1);
                 }
               }
               loopIndex = loopIndex + 1;
             } while ((int)loopIndex < 4);
           }
         }
-        piVar6 = (int *)piVar3[2];
+        cursorInst = (int *)inst[2];
       }
-      piVar2 = (int *)piVar6[2];
-      uVar11 = uVar13;
-      piVar3 = piVar6;
-    } while ((int *)piVar6[2] != (int *)0x0);
+      nextInstLink = (int *)cursorInst[2];
+      nextFreeRegister = savedNextFreeRegister;
+      inst = cursorInst;
+    } while ((int *)cursorInst[2] != (int *)0x0);
   }
   return;
 }

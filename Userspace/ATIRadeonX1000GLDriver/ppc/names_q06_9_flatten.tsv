@@ -1,0 +1,126 @@
+use	pass_flatten_ifs	piVar23	nextBlock	INFERRED	block following the cursor in the block list	^\s*piVar23\ =\ \(int\ \*\)piVar20\[2\];$	+2
+use	pass_flatten_ifs	piVar23	nextBlock	INFERRED	block following the cursor in the block list	^\s*piVar23\ =\ \*\(int\ \*\*\)\(local_58\ \+\ 8\);$	+1
+use	pass_flatten_ifs	piVar23	nextBlock	INFERRED	block following the cursor in the block list	^\s*piVar20\ =\ piVar23;$	+3
+use	pass_flatten_ifs	piVar23	predecessorVector	INFERRED	predecessor vector (block word 0x34)	^\s*piVar23\ =\ \(int\ \*\)piVar20\[0x34\];$	+3
+use	pass_flatten_ifs	piVar23	predecessorVector	INFERRED	predecessor vector (block word 0x34)	^\s*if\ \(piVar23\[1\]\ ==\ 0\)\ \{$@2	+3
+use	pass_flatten_ifs	piVar23	predecessorVector	INFERRED	predecessor vector (block word 0x34)	^\s*uVar27\ =\ CONCAT44\(piVar23\[2\],\(int\)uVar27\);$@2	+1
+use	pass_flatten_ifs	piVar23	thenBlockVectorAtD4	INFERRED	vector at then-block +0xd4	^\s*piVar23\ =\ \*\(int\ \*\*\)\(iVar6\ \+\ 0xd4\);$	+3
+use	pass_flatten_ifs	piVar23	thenBlockVectorAtD4	INFERRED	vector at then-block +0xd4	^\s*if\ \(piVar23\[1\]\ ==\ 0\)\ \{$@4	+3
+use	pass_flatten_ifs	piVar23	thenBlockVectorAtD4	INFERRED	vector at then-block +0xd4	^\s*uVar27\ =\ CONCAT44\(piVar23\[2\],\(int\)uVar27\);$@4	+1
+use	pass_flatten_ifs	piVar23	branchInst	INFERRED	Block__getBranchInst of the if header	^\s*piVar23\ =\ \(int\ \*\)FUN_000e7804\(iVar16,\(int\)uVar27,iVar5,in_r6,in_r7,in_r8,iVar11\);$	+3
+use	pass_flatten_ifs	piVar23	branchInst	INFERRED	Block__getBranchInst of the if header	^\s*iVar5\ =\ FUN_0010b498\(piVar23,1\);$	+1
+use	pass_flatten_ifs	piVar23	branchInst	INFERRED	Block__getBranchInst of the if header	^\s*uVar13\ =\ FUN_001054ec\(piVar23,1\);$	+1
+use	pass_flatten_ifs	piVar23	branchInst	INFERRED	Block__getBranchInst of the if header	^\s*uVar13\ =\ FUN_001054ec\(piVar23,2\);$	+1
+use	pass_flatten_ifs	piVar23	branchInst	INFERRED	Block__getBranchInst of the if header	^\s*FUN_00103d50\(piVar8\ \+\ 0x2f,1,piVar23\[0x34\]\ \&\ 1U\ \^\ 1\);$	+1
+use	pass_flatten_ifs	piVar23	branchInst	INFERRED	Block__getBranchInst of the if header	^\s*piVar8\ =\ \(int\ \*\)FUN_00105594\(piVar23,2\);$	+2
+use	pass_flatten_ifs	piVar23	branchInst	INFERRED	Block__getBranchInst of the if header	^\s*uVar7\ =\ piVar23\[0x34\]\ \&\ 1;$	+4
+use	pass_flatten_ifs	piVar23	branchInst	INFERRED	Block__getBranchInst of the if header	^\s*piVar8\ =\ \(int\ \*\)FUN_00105594\(piVar23,1\);$	+2
+use	pass_flatten_ifs	piVar23	branchInst	INFERRED	Block__getBranchInst of the if header	^\s*uVar7\ =\ piVar23\[0x2e\]\ \&\ 1;$	+2
+use	pass_flatten_ifs	piVar23	branchInst	INFERRED	Block__getBranchInst of the if header	^\s*piVar8\ =\ \(int\ \*\)FUN_00105594\(piVar23,1\);$@2	+2
+use	pass_flatten_ifs	piVar23	branchInst	INFERRED	Block__getBranchInst of the if header	^\s*uVar7\ =\ piVar23\[0x2e\]\ \&\ 1U\ \^\ 1;$	+1
+use	pass_flatten_ifs	piVar23	branchInst	INFERRED	Block__getBranchInst of the if header	^\s*if\ \(\*\(int\ \*\)\(piVar23\[0x22\]\ \+\ 8\)\ ==\ 0x8b\)\ \{$@2	+2
+use	pass_flatten_ifs	piVar23	branchInst	INFERRED	Block__getBranchInst of the if header	^\s*FUN_000ef970\(param_1,piVar23\);$	+3
+use	pass_flatten_ifs	piVar23	branchInst	INFERRED	Block__getBranchInst of the if header	^\s*\(\*pcVar12\)\(piVar23,\*\(uint\ \*\)\(param_1\ \+\ 0x30\)\ >>\ 7\ \&\ 1\);$	+1
+use	pass_flatten_ifs	piVar23	trailingInstCursor	INFERRED	instruction cursor over the header's trailing instructions	^\s*piVar23\ =\ \(int\ \*\)local_54\[2\];$	+1
+use	pass_flatten_ifs	piVar23	trailingInstCursor	INFERRED	instruction cursor over the header's trailing instructions	^\s*iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*piVar23\ \+\ 0x34\)\)\(piVar23\);$	+1
+use	pass_flatten_ifs	piVar23	trailingInstCursor	INFERRED	instruction cursor over the header's trailing instructions	^\s*iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*piVar23\ \+\ 0x38\)\)\(piVar23\);$	+1
+use	pass_flatten_ifs	piVar23	trailingInstCursor	INFERRED	instruction cursor over the header's trailing instructions	^\s*FUN_0019401c\(piVar23\);$	+3
+use	pass_flatten_ifs	piVar23	trailingInstCursor	INFERRED	instruction cursor over the header's trailing instructions	^\s*piVar23\ =\ piVar8;$	+1
+use	pass_flatten_ifs	iVar5	blockQuery28	INFERRED	block vtable slot 0x28 test (is an if footer)	^\s*iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*piVar20\ \+\ 0x28\)\)\(piVar20\);$	+2
+use	pass_flatten_ifs	iVar5	compiler	INFERRED	pass->compiler	^\s*iVar5\ =\ \*\(int\ \*\)\(param_1\ \+\ 8\);$	+2
+use	pass_flatten_ifs	iVar5	compiler	INFERRED	pass->compiler	^\s*iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(iVar5\ \+\ 0x30c\)\ \+\ 0x114\)\)\(\*\(int\ \*\*\)\(iVar5\ \+\ 0x30c\),iVar16\);$	+1
+use	pass_flatten_ifs	iVar5	compiler	INFERRED	pass->compiler	^\s*iVar5\ =\ \(1\ \-\ uVar7\)\ \*\ 4\ \+\ 4;$	+2
+use	pass_flatten_ifs	iVar5	compiler	INFERRED	pass->compiler	^\s*piVar23\ =\ \(int\ \*\)FUN_000e7804\(iVar16,\(int\)uVar27,iVar5,in_r6,in_r7,in_r8,iVar11\);$	+1
+use	pass_flatten_ifs	iVar5	operandNumber	INFERRED	operand number 1..count	^\s*for\ \(iVar5\ =\ 1;\ iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*piVar8\ \+\ 0x14\)\)\(piVar8\),\ iVar5\ <=\ iVar6;$	+3
+use	pass_flatten_ifs	iVar5	conditionDefOpcode	INFERRED	opcode of the instruction defining the condition	^\s*iVar5\ =\ \*\(int\ \*\)\(piVar8\[0x22\]\ \+\ 8\);$	+1
+use	pass_flatten_ifs	iVar5	conditionDefOpcode	INFERRED	opcode of the instruction defining the condition	^\s*if\ \(\(\(\(iVar5\ ==\ 0x27\)\ \|\|\ \(iVar5\ ==\ 0x29\)\)\ \|\|\ \(iVar5\ ==\ 0x2a\)\)\ \|\|$	+2
+use	pass_flatten_ifs	iVar5	phiDestRecord	INFERRED	destination operand record of the phi	^\s*iVar5\ =\ FUN_001054ec\(piVar2,0\);$	+2
+use	pass_flatten_ifs	iVar5	laneByteIndex	INFERRED	lane byte counter 0..3	^\s*iVar5\ =\ 0;$	+1
+use	pass_flatten_ifs	iVar5	laneByteIndex	INFERRED	lane byte counter 0..3	^\s*if\ \(\*\(char\ \*\)\(\(int\)local_60\ \+\ iVar5\)\ ==\ '\\x01'\)\ \{$	+2
+use	pass_flatten_ifs	iVar5	laneByteIndex	INFERRED	lane byte counter 0..3	^\s*iVar5\ =\ iVar5\ \+\ 1;$	+1
+use	pass_flatten_ifs	iVar5	phiSource1Record	INFERRED	source operand 1 record of the phi	^\s*iVar5\ =\ FUN_001054ec\(piVar2,1\);$	+2
+use	pass_flatten_ifs	iVar5	phiSource2Record	INFERRED	source operand 2 record of the phi	^\s*iVar5\ =\ FUN_001054ec\(piVar2,2\);$	+2
+use	pass_flatten_ifs	iVar5	phiSlotOffset	INFERRED	phi word 0x58 minus the input base, clamped below	^\s*iVar5\ =\ piVar2\[0x58\]\ \-\ \*\(int\ \*\)\(param_1\ \+\ 0x478\);$	+3
+use	pass_flatten_ifs	iVar5	phiSlotOffset	INFERRED	phi word 0x58 minus the input base, clamped below	^\s*piVar2\[0x58\]\ =\ iVar5\ \+\ iVar6;$	+1
+use	pass_flatten_ifs	iVar5	selectSource1Record	INFERRED	source operand 1 record of the new select	^\s*iVar5\ =\ FUN_001054ec\(piVar2,1\);$@2	+2
+use	pass_flatten_ifs	iVar5	selectSource2Record	INFERRED	source operand 2 record of the new select	^\s*iVar5\ =\ FUN_001054ec\(piVar2,2\);$@2	+2
+use	pass_flatten_ifs	iVar5	selectSource3Record	INFERRED	source operand 3 record of the new select	^\s*iVar5\ =\ FUN_001054ec\(piVar2,3\);$	+2
+use	pass_flatten_ifs	iVar5	instQuery34	INFERRED	instruction vtable slot 0x34 test	^\s*iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*piVar2\ \+\ 0x34\)\)\(piVar2\);$	+2
+use	pass_flatten_ifs	iVar5	conditionHasNoUses	INFERRED	IRInst__hasNoUses of the condition source	^\s*iVar5\ =\ FUN_001049c4\(piVar8,param_1,uVar13,in_r6,in_r7,in_r8,pcVar12\);$	+2
+use	pass_flatten_ifs	iVar5	instQuery34b	INFERRED	instruction vtable slot 0x34 test	^\s*iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*piVar23\ \+\ 0x34\)\)\(piVar23\);$	+2
+use	pass_flatten_ifs	iVar5	instQuery38	INFERRED	instruction vtable slot 0x38 test	^\s*iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*piVar23\ \+\ 0x38\)\)\(piVar23\);$	+2
+use	pass_flatten_ifs	iVar5	walkBlock	INFERRED	block cursor in the clean-up walk after the merge	^\s*iVar5\ =\ local_58;$	+1
+use	pass_flatten_ifs	iVar5	walkBlock	INFERRED	block cursor in the clean-up walk after the merge	^\s*iVar6\ =\ FUN_000e7f38\(iVar5\);$	+4
+use	pass_flatten_ifs	iVar5	walkBlock	INFERRED	block cursor in the clean-up walk after the merge	^\s*\}\ while\ \(\(!bVar1\)\ \&\&\ \(iVar5\ !=\ iVar19\)\);$	+1
+use	pass_flatten_ifs	uVar13	staleArg4	INFERRED	r4 left over, forwarded to Vector__elementRefGrow/__memset	^\s*uVar13\ =\ \(undefined4\)uVar27;$	+1
+use	pass_flatten_ifs	uVar13	staleArg4	INFERRED	r4 left over, forwarded to Vector__elementRefGrow/__memset	^\s*uVar13\ =\ extraout_r4;$	+1
+use	pass_flatten_ifs	uVar13	staleArg4	INFERRED	r4 left over, forwarded to Vector__elementRefGrow/__memset	^\s*uVar27\ =\ CONCAT44\(puVar25\[2\]\ \+\ 4,uVar13\);$	+1
+use	pass_flatten_ifs	uVar13	defaultSelectSwizzle	INFERRED	default swizzle 0x10203 used when the condition is a fresh compare	^\s*uVar13\ =\ 0x10203;$	+1
+use	pass_flatten_ifs	uVar13	defaultSelectSwizzle	INFERRED	default swizzle 0x10203 used when the condition is a fresh compare	^\s*uVar13\ =\ \*\(undefined4\ \*\)\(iVar5\ \+\ 0x10\);$	+1
+use	pass_flatten_ifs	uVar13	defaultSelectSwizzle	INFERRED	default swizzle 0x10203 used when the condition is a fresh compare	^\s*uVar13\ =\ \*\(undefined4\ \*\)\(iVar5\ \+\ 0x10\);$@2	+1
+use	pass_flatten_ifs	uVar13	defaultSelectSwizzle	INFERRED	default swizzle 0x10203 used when the condition is a fresh compare	^\s*uVar13\ =\ \*\(undefined4\ \*\)\(iVar6\ \+\ 0x10\);$	+1
+use	pass_flatten_ifs	uVar13	defaultSelectSwizzle	INFERRED	default swizzle 0x10203 used when the condition is a fresh compare	^\s*local_64\ =\ uVar13;$	+1
+use	pass_flatten_ifs	uVar13	compilerArg	INFERRED	pass->compiler passed as a trailing argument	^\s*uVar13\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 8\);$	+1
+use	pass_flatten_ifs	uVar13	compilerArg	INFERRED	pass->compiler passed as a trailing argument	^\s*iVar5\ =\ FUN_001049c4\(piVar8,param_1,uVar13,in_r6,in_r7,in_r8,pcVar12\);$	+1
+use	pass_flatten_ifs	iVar6	targetCanFlatten	INFERRED	target backend vtable slot 0x114 result for the if header	^\s*iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(iVar5\ \+\ 0x30c\)\ \+\ 0x114\)\)\(\*\(int\ \*\*\)\(iVar5\ \+\ 0x30c\),iVar16\);$	+2
+use	pass_flatten_ifs	iVar6	thenBlock	INFERRED	then-arm block of the if header (+0x134)	^\s*iVar6\ =\ \*\(int\ \*\)\(iVar16\ \+\ 0x134\);$	+1
+use	pass_flatten_ifs	iVar6	thenBlock	INFERRED	then-arm block of the if header (+0x134)	^\s*\*\(int\ \*\)\(\(ulonglong\)uVar27\ >>\ 0x20\)\ =\ iVar6;$	+2
+use	pass_flatten_ifs	iVar6	thenBlock	INFERRED	then-arm block of the if header (+0x134)	^\s*\*\(int\ \*\)\(iVar6\ \+\ 0xf0\)\ =\ local_58;$	+1
+use	pass_flatten_ifs	iVar6	thenBlock	INFERRED	then-arm block of the if header (+0x134)	^\s*for\ \(iVar5\ =\ 1;\ iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*piVar8\ \+\ 0x14\)\)\(piVar8\),\ iVar5\ <=\ iVar6;$	+2
+use	pass_flatten_ifs	iVar6	thenBlock	INFERRED	then-arm block of the if header (+0x134)	^\s*iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*piVar18\ \+\ 0x5c\)\)\(piVar18\);$	+2
+use	pass_flatten_ifs	iVar6	laneCountdown	INFERRED	countdown from 4 over the lane mask bytes	^\s*iVar6\ =\ 4;$	+1
+use	pass_flatten_ifs	iVar6	laneCountdown	INFERRED	countdown from 4 over the lane mask bytes	^\s*iVar6\ =\ iVar6\ \+\ \-1;$	+2
+use	pass_flatten_ifs	iVar6	inputBase	INFERRED	pass word 0x478: first input slot number	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x478\);$	+1
+use	pass_flatten_ifs	iVar6	inputBase	INFERRED	pass word 0x478: first input slot number	^\s*piVar2\[0x58\]\ =\ iVar5\ \+\ iVar6;$	+1
+use	pass_flatten_ifs	iVar6	walkSuccessor	INFERRED	simple successor of the walk block	^\s*iVar6\ =\ FUN_000e7f38\(iVar5\);$	+3
+use	pass_flatten_ifs	uVar4	savedConditionSwizzle	INFERRED	swizzle word of the condition saved before the phi is rewritten	^\s*uVar4\ =\ local_64;$	+1
+use	pass_flatten_ifs	uVar4	savedConditionSwizzle	INFERRED	swizzle word of the condition saved before the phi is rewritten	^\s*\*\(undefined4\ \*\)\(iVar5\ \+\ 0x10\)\ =\ uVar4;$	+1
+use	pass_flatten_ifs	extraout_r4	staleArg4b	INFERRED	r4 left over from the previous call	^\s*uVar13\ =\ extraout_r4;$	+1
+use	pass_flatten_ifs	in_r6	staleArg6	INFERRED	r6 left over, forwarded to the next call	^\s*piVar23\ =\ \(int\ \*\)FUN_000e7804\(iVar16,\(int\)uVar27,iVar5,in_r6,in_r7,in_r8,iVar11\);$	+1
+use	pass_flatten_ifs	in_r6	staleArg6	INFERRED	r6 left over, forwarded to the next call	^\s*in_r6\ =\ \*\(uint\ \*\)\(param_1\ \+\ 8\);$	+2
+use	pass_flatten_ifs	in_r6	staleArg6	INFERRED	r6 left over, forwarded to the next call	^\s*in_r6\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x30\)\ >>\ 7\ \&\ 1;$	+2
+use	pass_flatten_ifs	in_r6	staleArg6	INFERRED	r6 left over, forwarded to the next call	^\s*iVar5\ =\ FUN_001049c4\(piVar8,param_1,uVar13,in_r6,in_r7,in_r8,pcVar12\);$	+1
+use	pass_flatten_ifs	in_r7	staleArg7	INFERRED	r7 left over, forwarded to the next call	^\s*piVar23\ =\ \(int\ \*\)FUN_000e7804\(iVar16,\(int\)uVar27,iVar5,in_r6,in_r7,in_r8,iVar11\);$	+1
+use	pass_flatten_ifs	in_r7	staleArg7	INFERRED	r7 left over, forwarded to the next call	^\s*in_r7\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 8\);$	+1
+use	pass_flatten_ifs	in_r7	staleArg7	INFERRED	r7 left over, forwarded to the next call	^\s*FUN_00106004\(piVar2,3,uVar10,in_r6,in_r7\);$	+1
+use	pass_flatten_ifs	in_r7	staleArg7	INFERRED	r7 left over, forwarded to the next call	^\s*iVar5\ =\ FUN_001049c4\(piVar8,param_1,uVar13,in_r6,in_r7,in_r8,pcVar12\);$	+1
+use	pass_flatten_ifs	in_r8	staleArg8	INFERRED	r8 left over, forwarded to the next call	^\s*piVar23\ =\ \(int\ \*\)FUN_000e7804\(iVar16,\(int\)uVar27,iVar5,in_r6,in_r7,in_r8,iVar11\);$	+1
+use	pass_flatten_ifs	in_r8	staleArg8	INFERRED	r8 left over, forwarded to the next call	^\s*iVar5\ =\ FUN_001049c4\(piVar8,param_1,uVar13,in_r6,in_r7,in_r8,pcVar12\);$	+1
+use	pass_flatten_ifs	pcVar12	releaseFn	INFERRED	instruction vtable slot 0xc: release/destroy	^\s*pcVar12\ =\ \*\(code\ \*\*\)\(\*piVar23\ \+\ 0xc\);$	+1
+use	pass_flatten_ifs	pcVar12	releaseFn	INFERRED	instruction vtable slot 0xc: release/destroy	^\s*\(\*pcVar12\)\(piVar23,\*\(uint\ \*\)\(param_1\ \+\ 0x30\)\ >>\ 7\ \&\ 1\);$	+2
+use	pass_flatten_ifs	uVar27	canFlattenResult	INFERRED	IfHeader__canFlatten return pair	^\s*uVar27\ =\ FUN_000e87e4\(iVar16,auStack_68\);$	+2
+use	pass_flatten_ifs	uVar27	canFlattenResult	INFERRED	IfHeader__canFlatten return pair	^\s*uVar27\ =\ FUN_0019423c\(puVar24,0\);$	+1
+use	pass_flatten_ifs	uVar27	canFlattenResult	INFERRED	IfHeader__canFlatten return pair	^\s*uVar27\ =\ CONCAT44\(puVar24\[2\],\(int\)uVar27\);$	+1
+use	pass_flatten_ifs	uVar27	canFlattenResult	INFERRED	IfHeader__canFlatten return pair	^\s*uVar13\ =\ \(undefined4\)uVar27;$	+2
+use	pass_flatten_ifs	uVar27	predElementRefPair	INFERRED	element reference pair returned by Vector__elementRefGrow / CONCAT44	^\s*uVar27\ =\ FUN_0019423c\(puVar25,1\);$	+1
+use	pass_flatten_ifs	uVar27	predElementRefPair	INFERRED	element reference pair returned by Vector__elementRefGrow / CONCAT44	^\s*uVar27\ =\ CONCAT44\(puVar25\[2\]\ \+\ 4,uVar13\);$	+1
+use	pass_flatten_ifs	uVar27	predElementRefPair	INFERRED	element reference pair returned by Vector__elementRefGrow / CONCAT44	^\s*iVar26\ =\ \*\(int\ \*\)\(\(ulonglong\)uVar27\ >>\ 0x20\);$	+1
+use	pass_flatten_ifs	uVar27	predElementRefPair	INFERRED	element reference pair returned by Vector__elementRefGrow / CONCAT44	^\s*uVar27\ =\ FUN_0019423c\(piVar23,0\);$	+1
+use	pass_flatten_ifs	uVar27	predElementRefPair	INFERRED	element reference pair returned by Vector__elementRefGrow / CONCAT44	^\s*uVar27\ =\ CONCAT44\(piVar23\[2\],\(int\)uVar27\);$	+1
+use	pass_flatten_ifs	uVar27	predElementRefPair	INFERRED	element reference pair returned by Vector__elementRefGrow / CONCAT44	^\s*local_58\ =\ \*\(int\ \*\)\(\(ulonglong\)uVar27\ >>\ 0x20\);$	+1
+use	pass_flatten_ifs	uVar27	predElementRefPair	INFERRED	element reference pair returned by Vector__elementRefGrow / CONCAT44	^\s*uVar27\ =\ FUN_0019423c\(piVar23,0\);$@2	+1
+use	pass_flatten_ifs	uVar27	predElementRefPair	INFERRED	element reference pair returned by Vector__elementRefGrow / CONCAT44	^\s*uVar27\ =\ CONCAT44\(piVar23\[2\],\(int\)uVar27\);$@2	+1
+use	pass_flatten_ifs	uVar27	predElementRefPair	INFERRED	element reference pair returned by Vector__elementRefGrow / CONCAT44	^\s*iVar19\ =\ \*\(int\ \*\)\(\(ulonglong\)uVar27\ >>\ 0x20\);$	+1
+use	pass_flatten_ifs	uVar27	predElementRefPair	INFERRED	element reference pair returned by Vector__elementRefGrow / CONCAT44	^\s*uVar27\ =\ FUN_0019423c\(piVar23,0\);$@3	+1
+use	pass_flatten_ifs	uVar27	predElementRefPair	INFERRED	element reference pair returned by Vector__elementRefGrow / CONCAT44	^\s*uVar27\ =\ CONCAT44\(piVar23\[2\],\(int\)uVar27\);$@3	+1
+use	pass_flatten_ifs	uVar27	predElementRefPair	INFERRED	element reference pair returned by Vector__elementRefGrow / CONCAT44	^\s*\*\(int\ \*\)\(\(ulonglong\)uVar27\ >>\ 0x20\)\ =\ iVar6;$	+1
+use	pass_flatten_ifs	uVar27	predElementRefPair	INFERRED	element reference pair returned by Vector__elementRefGrow / CONCAT44	^\s*uVar27\ =\ FUN_0019423c\(piVar23,0\);$@4	+1
+use	pass_flatten_ifs	uVar27	predElementRefPair	INFERRED	element reference pair returned by Vector__elementRefGrow / CONCAT44	^\s*uVar27\ =\ CONCAT44\(piVar23\[2\],\(int\)uVar27\);$@4	+1
+use	pass_flatten_ifs	uVar27	predElementRefPair	INFERRED	element reference pair returned by Vector__elementRefGrow / CONCAT44	^\s*\*\(int\ \*\)\(\(ulonglong\)uVar27\ >>\ 0x20\)\ =\ local_58;$	+1
+use	pass_flatten_ifs	uVar27	predElementRefPair	INFERRED	element reference pair returned by Vector__elementRefGrow / CONCAT44	^\s*uVar27\ =\ FUN_0019423c\(piVar23,0\);$@5	+1
+use	pass_flatten_ifs	uVar27	predElementRefPair	INFERRED	element reference pair returned by Vector__elementRefGrow / CONCAT44	^\s*uVar27\ =\ CONCAT44\(piVar23\[2\],\(int\)uVar27\);$@5	+1
+use	pass_flatten_ifs	uVar27	predElementRefPair	INFERRED	element reference pair returned by Vector__elementRefGrow / CONCAT44	^\s*\*\(int\ \*\)\(\(ulonglong\)uVar27\ >>\ 0x20\)\ =\ iVar26;$	+1
+use	pass_flatten_ifs	uVar27	predElementRefPair	INFERRED	element reference pair returned by Vector__elementRefGrow / CONCAT44	^\s*uVar27\ =\ FUN_0019423c\(piVar23,0\);$@6	+1
+use	pass_flatten_ifs	uVar27	predElementRefPair	INFERRED	element reference pair returned by Vector__elementRefGrow / CONCAT44	^\s*uVar27\ =\ CONCAT44\(piVar23\[2\],\(int\)uVar27\);$@6	+1
+use	pass_flatten_ifs	uVar27	predElementRefPair	INFERRED	element reference pair returned by Vector__elementRefGrow / CONCAT44	^\s*\*\(int\ \*\)\(\(ulonglong\)uVar27\ >>\ 0x20\)\ =\ iVar19;$	+1
+use	pass_flatten_ifs	uVar27	predElementRefPair	INFERRED	element reference pair returned by Vector__elementRefGrow / CONCAT44	^\s*uVar27\ =\ FUN_0019423c\(piVar23,0\);$@7	+1
+use	pass_flatten_ifs	uVar27	predElementRefPair	INFERRED	element reference pair returned by Vector__elementRefGrow / CONCAT44	^\s*uVar27\ =\ CONCAT44\(piVar23\[2\],\(int\)uVar27\);$@7	+1
+use	pass_flatten_ifs	uVar27	predElementRefPair	INFERRED	element reference pair returned by Vector__elementRefGrow / CONCAT44	^\s*\*\(int\ \*\)\(\(ulonglong\)uVar27\ >>\ 0x20\)\ =\ iVar21;$	+1
+use	pass_flatten_ifs	uVar27	predElementRefPair	INFERRED	element reference pair returned by Vector__elementRefGrow / CONCAT44	^\s*uVar27\ =\ FUN_0019423c\(piVar23,0\);$@8	+1
+use	pass_flatten_ifs	uVar27	predElementRefPair	INFERRED	element reference pair returned by Vector__elementRefGrow / CONCAT44	^\s*uVar27\ =\ CONCAT44\(piVar23\[2\],\(int\)uVar27\);$@8	+1
+use	pass_flatten_ifs	uVar27	predElementRefPair	INFERRED	element reference pair returned by Vector__elementRefGrow / CONCAT44	^\s*\*\(int\ \*\)\(\(ulonglong\)uVar27\ >>\ 0x20\)\ =\ iVar22;$	+1
+use	pass_flatten_ifs	uVar27	predElementRefPair	INFERRED	element reference pair returned by Vector__elementRefGrow / CONCAT44	^\s*piVar23\ =\ \(int\ \*\)FUN_000e7804\(iVar16,\(int\)uVar27,iVar5,in_r6,in_r7,in_r8,iVar11\);$	+1
+local	pass_flatten_ifs	auStack_68	canFlattenOut	INFERRED	out parameter of IfHeader__canFlatten
+local	pass_flatten_ifs	local_64	conditionSwizzle	INFERRED	swizzle word of the condition operand
+local	pass_flatten_ifs	local_60	destMaskWord	INFERRED	destination operand mask word of the phi
+local	pass_flatten_ifs	local_54	blockInstSentinel	INFERRED	address of the block's instruction list head (block + 0x24)

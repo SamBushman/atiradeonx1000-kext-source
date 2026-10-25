@@ -60,7 +60,7 @@
 0xe2998	IfFooterStatic__accept
 0xe29bc	IfFooterStatic__accept
 0xe29e0	IfFooterStatic__accept
-0xe7650	FUN_000e5e70
+0xe7650	ILReader__nextInstruction
 0xec1e4	FUN_000ec1d0
 0x10451c	IRInst__replaceExtraData
 0x10dcfc	HwLimits__vslot10_failNotSupported

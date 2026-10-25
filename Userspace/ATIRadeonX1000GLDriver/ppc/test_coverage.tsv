@@ -5,41 +5,41 @@
 0x17b8	cxa_atexit_check_1	120	not a C function of the rebuilt image	
 0x1830	check_cxa_atexit	204	not a C function of the rebuilt image	
 0x18fc	find_atexit_10_3	504	not a C function of the rebuilt image	
-0x1af4	FUN_00001af4	32	not a C function of the rebuilt image	
-0x1b14	FUN_00001b14	32	not a C function of the rebuilt image	
+0x1af4	_strcmp_stub_00001af4	32	not a C function of the rebuilt image	
+0x1b14	dyld_func_lookup_stub_00001b14	32	not a C function of the rebuilt image	
 0x1b34	get_globals	528	not a C function of the rebuilt image	
-0x1d44	FUN_00001d44	32	not a C function of the rebuilt image	
-0x1d64	FUN_00001d64	32	not a C function of the rebuilt image	
+0x1d44	__keymgr_set_and_unlock_processwide_ptr_stub_00001d44	32	not a C function of the rebuilt image	
+0x1d64	check_cxa_atexit_stub_00001d64	32	not a C function of the rebuilt image	
 0x1d84	dlsym_stub_00001d84	32	not a C function of the rebuilt image	
-0x1da4	FUN_00001da4	32	not a C function of the rebuilt image	
+0x1da4	find_atexit_10_3_stub_00001da4	32	not a C function of the rebuilt image	
 0x1dc4	dlopen_stub_00001dc4	32	not a C function of the rebuilt image	
 0x1de4	calloc_stub_00001de4	32	not a C function of the rebuilt image	
-0x1e04	FUN_00001e04	32	not a C function of the rebuilt image	
+0x1e04	__keymgr_get_and_lock_processwide_ptr_stub_00001e04	32	not a C function of the rebuilt image	
 0x1e24	add_routine	268	not a C function of the rebuilt image	
-0x1f30	FUN_00001f30	32	not a C function of the rebuilt image	
+0x1f30	__keymgr_set_and_unlock_processwide_ptr_stub_00001f30	32	not a C function of the rebuilt image	
 0x1f50	malloc_stub_00001f50	32	not a C function of the rebuilt image	
 0x1f70	run_routines	292	not a C function of the rebuilt image	
-0x2094	FUN_00002094	32	not a C function of the rebuilt image	
+0x2094	__keymgr_get_and_lock_processwide_ptr_stub_00002094	32	not a C function of the rebuilt image	
 0x20b4	free_stub_000020b4	32	not a C function of the rebuilt image	
-0x20d4	FUN_000020d4	32	not a C function of the rebuilt image	
+0x20d4	__keymgr_set_and_unlock_processwide_ptr_stub_000020d4	32	not a C function of the rebuilt image	
 0x20f4	cxa_atexit_wrapper	312	not a C function of the rebuilt image	
 0x222c	run_routines_stub_0000222c	32	not a C function of the rebuilt image	
-0x224c	FUN_0000224c	32	not a C function of the rebuilt image	
-0x226c	FUN_0000226c	32	not a C function of the rebuilt image	
+0x224c	__keymgr_set_and_unlock_processwide_ptr_stub_0000224c	32	not a C function of the rebuilt image	
+0x226c	__keymgr_get_and_lock_processwide_ptr_stub_0000226c	32	not a C function of the rebuilt image	
 0x228c	our_atexit	188	not a C function of the rebuilt image	
-0x2348	FUN_00002348	32	not a C function of the rebuilt image	
-0x2368	FUN_00002368	32	not a C function of the rebuilt image	
-0x2388	FUN_00002388	32	not a C function of the rebuilt image	
+0x2348	__keymgr_set_and_unlock_processwide_ptr_stub_00002348	32	not a C function of the rebuilt image	
+0x2368	run_routines_stub_00002368	32	not a C function of the rebuilt image	
+0x2388	__keymgr_get_and_lock_processwide_ptr_stub_00002388	32	not a C function of the rebuilt image	
 0x23a8	atexit_common	672	not a C function of the rebuilt image	
 0x2648	malloc_stub_00002648	32	not a C function of the rebuilt image	
-0x2668	FUN_00002668	32	not a C function of the rebuilt image	
-0x2688	FUN_00002688	32	not a C function of the rebuilt image	
-0x26a8	FUN_000026a8	32	not a C function of the rebuilt image	
+0x2668	__keymgr_set_and_unlock_processwide_ptr_stub_00002668	32	not a C function of the rebuilt image	
+0x2688	add_routine_stub_00002688	32	not a C function of the rebuilt image	
+0x26a8	get_globals_stub_000026a8	32	not a C function of the rebuilt image	
 0x26c8	cxa_atexit	96	not a C function of the rebuilt image	
-0x2728	FUN_00002728	32	not a C function of the rebuilt image	
+0x2728	atexit_common_stub_00002728	32	not a C function of the rebuilt image	
 0x2748	atexit	92	yes	
-0x27a4	FUN_000027a4	32	not a C function of the rebuilt image	
-0x27d0	FUN_000027d0	776	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x27a4	atexit_common_stub_000027a4	32	not a C function of the rebuilt image	
+0x27d0	gld_clearSoftwareColorBuffer	776	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x2ae0	glAccum_impl	11028	no	calls an import (malloc)
 0x5630	_gldSetInteger	1116	no	calls an import (io_connect_method_scalarI_structureI)
 0x5aa0	_gldGetInteger	616	no	calls an import (io_connect_method_scalarI_scalarO)
@@ -179,7 +179,7 @@
 0x199a0	gld_drawPixelsDispatch	68	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x199f0	FUN_000199f0	212	yes	
 0x19ad0	FUN_00019ad0	360	yes	
-0x19c50	FUN_00019c50	308	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x19c50	gld_updateSampleConfig	308	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x19db0	FUN_00019db0	544	no	calls an import (io_connect_method_scalarI_structureI)
 0x1a010	FUN_0001a010	176	yes	
 0x1a0d0	gld_isStampRetired	32	yes	
@@ -191,17 +191,17 @@
 0x1a670	gld_signalFence	216	yes	
 0x1a750	glFinish_impl	636	no	calls an import (io_connect_method_scalarI_structureI); indirect call (driver context / vtable / callback)
 0x1a9d0	FUN_0001a9d0	588	no	calls an import (io_connect_method_scalarI_structureI); indirect call (driver context / vtable / callback)
-0x1ac30	FUN_0001ac30	464	yes	
-0x1ae20	FUN_0001ae20	768	yes	
-0x1b150	FUN_0001b150	88	yes	
+0x1ac30	gld_validatePixelFormat	464	yes	
+0x1ae20	gld_expandPixelFormatVariants	768	yes	
+0x1b150	gld_fillMaxPixelFormat	88	yes	
 0x1b1b0	_gldFreeVertexBuffer	20	yes	
 0x1b1d0	_gldCompleteVertexBuffer	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x1b1e0	_gldAllocVertexBuffer	676	no	atomic / cache / barrier instruction; calls an import (io_connect_method_structureI_structureO)
-0x1b4b0	FUN_0001b4b0	44	yes	
+0x1b4b0	gld_updateYInvertedFlag	44	yes	
 0x1b4f0	noop_1b4f0	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x1b500	returnOne_1b500	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x1b510	FUN_0001b510	1304	yes	
-0x1bac0	FUN_0001bac0	904	no	atomic / cache / barrier instruction; indirect call (driver context / vtable / callback)
+0x1bac0	gld_emitFramebufferState	904	no	atomic / cache / barrier instruction; indirect call (driver context / vtable / callback)
 0x1be50	dxt5EncodeAlphaBlock	868	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x1c1c0	dxt1DecodeColorIndex	416	yes	
 0x1c380	FUN_0001c380	3664	yes	
@@ -819,19 +819,19 @@
 0x912f0	FUN_000912f0	208	yes	
 0x913e0	FUN_000913e0	224	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x914c0	noop_914c0	28	yes	
-0x914e0	FUN_000914e0	492	no	indirect call (driver context / vtable / callback)
-0x916d0	FUN_000916d0	420	no	indirect call (driver context / vtable / callback)
-0x91880	FUN_00091880	248	no	indirect call (driver context / vtable / callback)
-0x91980	FUN_00091980	176	no	indirect call (driver context / vtable / callback)
-0x91a30	FUN_00091a30	352	yes	
-0x91b90	FUN_00091b90	460	yes	
-0x91d70	FUN_00091d70	300	yes	
-0x91eb0	FUN_00091eb0	648	yes	
-0x92150	FUN_00092150	200	no	indirect call (driver context / vtable / callback)
-0x92220	FUN_00092220	296	no	indirect call (driver context / vtable / callback)
-0x92350	FUN_00092350	512	no	indirect call (driver context / vtable / callback)
-0x92570	FUN_00092570	796	no	indirect call (driver context / vtable / callback)
-0x928a0	FUN_000928a0	792	no	indirect call (driver context / vtable / callback)
+0x914e0	ffvpEmitEyePositionMad	492	no	indirect call (driver context / vtable / callback)
+0x916d0	ffvpEmitEyePositionDp4	420	no	indirect call (driver context / vtable / callback)
+0x91880	ffvpEmitEyeDistanceSquared	248	no	indirect call (driver context / vtable / callback)
+0x91980	ffvpEmitInverseW	176	no	indirect call (driver context / vtable / callback)
+0x91a30	ffvpEmitEyeNormal	352	yes	
+0x91b90	ffvpEmitNormalizedNormal	460	yes	
+0x91d70	ffvpEmitRescaledNormal	300	yes	
+0x91eb0	ffvpEmitBlendWeights	648	yes	
+0x92150	ffvpEmitInverseEyeDistance	200	no	indirect call (driver context / vtable / callback)
+0x92220	ffvpEmitEyeVector	296	no	indirect call (driver context / vtable / callback)
+0x92350	ffvpEmitReflectionVector	512	no	indirect call (driver context / vtable / callback)
+0x92570	ffvpEmitSphereMapCoord	796	no	indirect call (driver context / vtable / callback)
+0x928a0	ffvpEmitFogExp2	792	no	indirect call (driver context / vtable / callback)
 0x92bf0	FUN_00092bf0	328	no	indirect call (driver context / vtable / callback)
 0x92d40	FUN_00092d40	340	no	indirect call (driver context / vtable / callback)
 0x92ea0	FUN_00092ea0	324	no	indirect call (driver context / vtable / callback)
@@ -840,19 +840,19 @@
 0x931e0	FUN_000931e0	404	no	indirect call (driver context / vtable / callback)
 0x93390	FUN_00093390	352	no	indirect call (driver context / vtable / callback)
 0x934f0	FUN_000934f0	20	yes	
-0x93510	FUN_00093510	1220	no	indirect call (driver context / vtable / callback)
-0x939e0	FUN_000939e0	52	yes	
-0x93a20	FUN_00093a20	24	yes	
-0x93a40	FUN_00093a40	3576	no	indirect call (driver context / vtable / callback)
-0x94840	FUN_00094840	3400	no	indirect call (driver context / vtable / callback)
-0x955a0	FUN_000955a0	20	yes	
-0x955c0	FUN_000955c0	20	yes	
-0x955e0	FUN_000955e0	40	yes	
-0x95610	FUN_00095610	1840	no	indirect call (driver context / vtable / callback)
-0x95d70	FUN_00095d70	72	yes	
-0x95dd0	FUN_00095dd0	1792	no	indirect call (driver context / vtable / callback)
-0x96500	FUN_00096500	52	yes	
-0x96540	FUN_00096540	172	yes	
+0x93510	ffvpEmitBlendedEyeNormal	1220	no	indirect call (driver context / vtable / callback)
+0x939e0	ffvpPrepareRescaledNormal	52	yes	
+0x93a20	ffvpPrepareNormalizedNormal	24	yes	
+0x93a40	ffvpEmitBlendedClipPosition	3576	no	indirect call (driver context / vtable / callback)
+0x94840	ffvpEmitBlendedEyePosition	3400	no	indirect call (driver context / vtable / callback)
+0x955a0	ffvpEmitInverseEyeDistance_955a0	20	yes	
+0x955c0	ffvpEmitEyeVector_955c0	20	yes	
+0x955e0	ffvpPrepareBlendWeights	40	yes	
+0x95610	ffvpEmitProjectedPosition	1840	no	indirect call (driver context / vtable / callback)
+0x95d70	ffvpEmitEyePosition	72	yes	
+0x95dd0	ffvpEmitClipPosition	1792	no	indirect call (driver context / vtable / callback)
+0x96500	ffvpPrepareEyeNormal	52	yes	
+0x96540	ffvpPrepareFogExp2	172	yes	
 0x96600	FUN_00096600	1872	no	indirect call (driver context / vtable / callback)
 0x96d80	FUN_00096d80	1700	no	indirect call (driver context / vtable / callback)
 0x97440	FUN_00097440	4212	no	indirect call (driver context / vtable / callback)
@@ -1307,24 +1307,24 @@
 0xe3b88	FUN_000e3b88	2144	no	indirect call (driver context / vtable / callback)
 0xe43ec	FUN_000e43ec	20	yes	
 0xe4400	setWord30	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0xe4408	FUN_000e4408	8	yes	
-0xe4410	FUN_000e4410	64	yes	
-0xe4450	FUN_000e4450	116	yes	
-0xe44c4	FUN_000e44c4	456	yes	
+0xe4408	ILReader__currentOpcode	8	yes	
+0xe4410	ILReader__lookupBoolConst	64	yes	
+0xe4450	ILReader__appendIntConst	116	yes	
+0xe44c4	ILReader__readFloatConst	456	yes	
 0xe468c	FUN_000e468c	132	yes	
 0xe4710	FUN_000e4710	20	yes	
-0xe4724	FUN_000e4724	92	yes	
-0xe4780	FUN_000e4780	116	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0xe4724	ILReader__appendBoolConst	92	yes	
+0xe4780	ILReader__appendFloatConst	116	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0xe47f4	FUN_000e47f4	60	yes	
-0xe4830	FUN_000e4830	260	yes	
-0xe4934	FUN_000e4934	260	yes	
-0xe4a38	FUN_000e4a38	520	yes	
-0xe4c40	FUN_000e4c40	1764	yes	
-0xe5384	FUN_000e5384	248	yes	
-0xe547c	FUN_000e547c	244	yes	
-0xe5570	FUN_000e5570	1060	yes	
-0xe59f0	FUN_000e59f0	1060	yes	
-0xe5e70	FUN_000e5e70	5640	yes	
+0xe4830	ILReader__dtor_e4830	260	yes	
+0xe4934	ILReader__dtor_e4934	260	yes	
+0xe4a38	ILReader__fetchToken	520	yes	
+0xe4c40	ILReader__decodeInstruction	1764	yes	
+0xe5384	ILReader__beginRewrittenReplay_e5384	248	yes	
+0xe547c	ILReader__beginRewrittenReplay_e547c	244	yes	
+0xe5570	ILReader__ctor_e5570	1060	yes	
+0xe59f0	ILReader__ctor_e59f0	1060	yes	
+0xe5e70	ILReader__nextInstruction	5640	yes	
 0xe7658	Block__detach	48	yes	
 0xe7688	Block__appendInst	60	yes	
 0xe76c4	Block__prependInst	60	yes	
@@ -1476,8 +1476,8 @@
 0xed63c	FUN_000ed63c	424	no	indirect call (driver context / vtable / callback)
 0xed7e4	Program__beginPass	184	no	indirect call (driver context / vtable / callback)
 0xed89c	FUN_000ed89c	1244	no	indirect call (driver context / vtable / callback)
-0xedd98	FUN_000edd98	1216	yes	
-0xee29c	FUN_000ee29c	1216	yes	
+0xedd98	Program__ctor_edd98	1216	yes	
+0xee29c	Program__ctor_ee29c	1216	yes	
 0xee7a0	FUN_000ee7a0	492	yes	
 0xee9ac	Program__addInst	120	yes	
 0xeea24	FUN_000eea24	556	no	indirect call (driver context / vtable / callback)
@@ -1578,7 +1578,7 @@
 0xf6760	Compiler__getOrCreateConstVector2	352	yes	
 0xf68c0	Compiler__getOrCreateConstVector1	324	yes	
 0xf6a04	FUN_000f6a04	752	yes	
-0xf6d14	FUN_000f6d14	2568	yes	
+0xf6d14	IRInst__setConstantOperand	2568	yes	
 0xf771c	IRInst__makeLiteralVec4Int	340	yes	
 0xf7870	FUN_000f7870	340	yes	
 0xf79c4	IRInst__makeLiteralVec4Float	332	no	no static blocker: a test could reach it (needs arguments / state no test builds)
