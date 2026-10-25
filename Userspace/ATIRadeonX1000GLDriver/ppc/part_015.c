@@ -3149,7 +3149,7 @@ int FUN_000a6140(ring, param_2, param_3)
   undefined4 uVar2;
   undefined4 *puVar3;
   
-  FUN_00086a80(ring,param_3);
+  gldSaveRasterState(ring,param_3);
   *(undefined4 *)(ring + 0x1ba0) = 3;
   *(undefined4 *)(ring + 0x1b9c) = 3;
   *(undefined4 *)(ring + 0x1b84) = 0;
@@ -3460,7 +3460,7 @@ int FUN_000a6860(param_1, param_2)
     iVar21 = 0;
   }
   iVar16 = iVar21;
-  FUN_00086ba0(param_1,0,iVar21,iVar20,auStack_128);
+  gldEnterInternalDrawState(param_1,0,iVar21,iVar20,auStack_128);
   if ((iVar21 == 0) && (iVar20 != 0)) {
     uVar15 = 0x25;
     if (*(char *)(param_1 + 0x2802) != '\0') {
@@ -3547,7 +3547,7 @@ int FUN_000a6860(param_1, param_2)
   *(undefined4 **)(0x00002748 + param_1 + 4) = puVar18;
   (**(code **)(param_1 + 0x275c))(param_1,puVar18);
   FUN_0009d3b0(param_1,r4AfterCall,iVar16,puVar17,puVar18,uVar19,iVar20);
-  FUN_000872e0(param_1,auStack_128);
+  gldLeaveInternalDrawState(param_1,auStack_128);
   return;
 }
 

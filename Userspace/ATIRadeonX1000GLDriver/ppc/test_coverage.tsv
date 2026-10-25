@@ -750,9 +750,9 @@
 0x86840	FUN_00086840	228	no	indirect call (driver context / vtable / callback)
 0x86930	FUN_00086930	204	yes	
 0x86a10	FUN_00086a10	96	yes	
-0x86a80	FUN_00086a80	284	yes	
-0x86ba0	FUN_00086ba0	1840	no	indirect call (driver context / vtable / callback)
-0x872e0	FUN_000872e0	1296	no	indirect call (driver context / vtable / callback)
+0x86a80	gldSaveRasterState	284	yes	
+0x86ba0	gldEnterInternalDrawState	1840	no	indirect call (driver context / vtable / callback)
+0x872e0	gldLeaveInternalDrawState	1296	no	indirect call (driver context / vtable / callback)
 0x87800	arbfpUpdateConstantsFp24	344	yes	
 0x87960	arbfpInitResourceLimits	120	yes	
 0x879e0	noop_879e0	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises

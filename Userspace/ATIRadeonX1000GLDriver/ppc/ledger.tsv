@@ -749,9 +749,9 @@
 0x86840	228	FUN_00086840	part_012	converted
 0x86930	204	FUN_00086930	part_012	converted
 0x86a10	96	FUN_00086a10	part_012	converted
-0x86a80	284	FUN_00086a80	part_012	converted
-0x86ba0	1840	FUN_00086ba0	part_012	converted
-0x872e0	1296	FUN_000872e0	part_012	converted
+0x86a80	284	gldSaveRasterState	part_012	converted
+0x86ba0	1840	gldEnterInternalDrawState	part_012	converted
+0x872e0	1296	gldLeaveInternalDrawState	part_012	converted
 0x87800	344	arbfpUpdateConstantsFp24	part_012	converted
 0x87960	120	arbfpInitResourceLimits	part_012	converted
 0x879e0	4	noop_879e0	part_012	converted

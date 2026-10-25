@@ -8679,7 +8679,7 @@ LAB_00016a6c:
     gaPointSizeValue = *(undefined4 *)(ring + 0x1ccc);
     *(undefined4 *)(writeCursor + 4 + trailerOffset) = gaPointSizeValue;
     FUN_0009d3b0(ring,staleArgR4Forward,width,trailerOffset,packetStart,packetVertexCount,gaPointSizeValue);
-    FUN_000872e0(ring,puStack_ac);
+    gldLeaveInternalDrawState(ring,puStack_ac);
   }
   return;
 }
