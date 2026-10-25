@@ -2274,9 +2274,9 @@ int FUN_000e80cc(param_1, param_2)
   return iVar1;
 }
 
-/* FUN_000e8124 @ 0xe8124 (664 bytes) */
-int FUN_000e8124(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  int param_1;
+/* Program__allocateBitSetIndex @ 0xe8124 (664 bytes) */
+int Program__allocateBitSetIndex(program, param_2, param_3, param_4, param_5, param_6, param_7)
+  int program;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
@@ -2284,45 +2284,52 @@ int FUN_000e8124(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_6;
   undefined4 param_7;
 {
+  uint wordOffsetOfBit;
+  uint bitsLeft2;
+  uint bitsLeft;
+  uint bitsLeft3;
+  uint newWordCapacity;
+  uint bitInWord;
+  int wordsLeft;
   uint loopCounter;
-  uint *puVar1;
-  uint uVar2;
-  uint uVar3;
-  int *piVar4;
-  undefined4 *puVar5;
-  int *piVar6;
-  uint *puVar7;
+  uint *oldWordPtr;
+  uint newBitCount;
+  uint wordByteOffset;
+  int *newBitSetData;
+  undefined4 *newBitSetAlloc;
+  int *clearCursor;
+  uint *bitSet;
   undefined4 arenaAt374;
-  uint uVar9;
-  int iVar10;
+  uint bitCount;
+  int bitsToClear;
   
-  puVar7 = *(uint **)(param_1 + 0x3bc);
-  uVar9 = puVar7[1];
-  if (uVar9 == 0) {
+  bitSet = *(uint **)(program + 0x3bc);
+  bitCount = bitSet[1];
+  if (bitCount == 0) {
 LAB_000e8190:
-    uVar2 = uVar9 + 1;
-    if (uVar9 + 0x20 >> 5 == *puVar7) {
-      puVar7[1] = uVar2;
-      if (uVar9 < uVar2) {
-        iVar10 = uVar2 - uVar9;
+    newBitCount = bitCount + 1;
+    if (bitCount + 0x20 >> 5 == *bitSet) {
+      bitSet[1] = newBitCount;
+      if (bitCount < newBitCount) {
+        bitsToClear = newBitCount - bitCount;
         do {
-          uVar3 = uVar9 >> 3 & 0x1ffffffc;
-          uVar2 = uVar9 & 0x1f;
-          uVar9 = uVar9 + 1;
-          *(uint *)((int)puVar7 + uVar3 + 8) = *(uint *)((int)puVar7 + uVar3 + 8) & ~(1 << uVar2);
-          iVar10 = iVar10 + -1;
-        } while (iVar10 != 0);
+          wordByteOffset = bitCount >> 3 & 0x1ffffffc;
+          bitInWord = bitCount & 0x1f;
+          bitCount = bitCount + 1;
+          *(uint *)((int)bitSet + wordByteOffset + 8) = *(uint *)((int)bitSet + wordByteOffset + 8) & ~(1 << bitInWord);
+          bitsToClear = bitsToClear + -1;
+        } while (bitsToClear != 0);
       }
-      puVar7 = *(uint **)(param_1 + 0x3bc);
-      uVar9 = puVar7[1];
-      if (uVar9 != 0) {
-        if ((puVar7[2] & 1) != 0) {
+      bitSet = *(uint **)(program + 0x3bc);
+      bitsLeft = bitSet[1];
+      if (bitsLeft != 0) {
+        if ((bitSet[2] & 1) != 0) {
           loopCounter = 0;
           do {
             loopCounter = loopCounter + 1;
-            uVar9 = uVar9 - 1;
-            if (uVar9 == 0) goto LAB_000e82ec;
-          } while ((*(uint *)((int)puVar7 + (loopCounter >> 3 & 0x1ffffffc) + 8) >> (loopCounter & 0x1f) & 1) !=
+            bitsLeft = bitsLeft - 1;
+            if (bitsLeft == 0) goto LAB_000e82ec;
+          } while ((*(uint *)((int)bitSet + (loopCounter >> 3 & 0x1ffffffc) + 8) >> (loopCounter & 0x1f) & 1) !=
                    0);
           goto LAB_000e8388;
         }
@@ -2330,48 +2337,48 @@ LAB_000e8190:
       }
     }
     else {
-      uVar2 = uVar9 + 0x41f >> 5;
-      arenaAt374 = *(undefined4 *)(*(int *)(param_1 + 8) + 0x374);
-      puVar5 = (undefined4 *)Arena__alloc(arenaAt374,uVar2 * 4 + 0xc);
-      piVar4 = puVar5 + 1;
-      *puVar5 = arenaAt374;
-      puVar5[1] = uVar2;
-      puVar5[2] = uVar9 + 0x400;
-      if (uVar2 != 0) {
-        piVar6 = piVar4;
-        if (uVar2 == 0) {
-          uVar2 = 1;
+      newWordCapacity = bitCount + 0x41f >> 5;
+      arenaAt374 = *(undefined4 *)(*(int *)(program + 8) + 0x374);
+      newBitSetAlloc = (undefined4 *)Arena__alloc(arenaAt374,newWordCapacity * 4 + 0xc);
+      newBitSetData = newBitSetAlloc + 1;
+      *newBitSetAlloc = arenaAt374;
+      newBitSetAlloc[1] = newWordCapacity;
+      newBitSetAlloc[2] = bitCount + 0x400;
+      if (newWordCapacity != 0) {
+        clearCursor = newBitSetData;
+        if (newWordCapacity == 0) {
+          newWordCapacity = 1;
         }
         do {
-          piVar6[2] = 0;
-          piVar6 = piVar6 + 1;
-          uVar2 = uVar2 - 1;
-        } while (uVar2 != 0);
+          clearCursor[2] = 0;
+          clearCursor = clearCursor + 1;
+          newWordCapacity = newWordCapacity - 1;
+        } while (newWordCapacity != 0);
       }
-      *(int **)(param_1 + 0x3bc) = piVar4;
-      iVar10 = *piVar4;
-      if (iVar10 != 0) {
-        if (iVar10 == 0) {
-          iVar10 = 1;
+      *(int **)(program + 0x3bc) = newBitSetData;
+      wordsLeft = *newBitSetData;
+      if (wordsLeft != 0) {
+        if (wordsLeft == 0) {
+          wordsLeft = 1;
         }
         do {
-          puVar1 = puVar7 + 2;
-          puVar7 = puVar7 + 1;
-          piVar4[2] = piVar4[2] | *puVar1;
-          piVar4 = piVar4 + 1;
-          iVar10 = iVar10 + -1;
-        } while (iVar10 != 0);
+          oldWordPtr = bitSet + 2;
+          bitSet = bitSet + 1;
+          newBitSetData[2] = newBitSetData[2] | *oldWordPtr;
+          newBitSetData = newBitSetData + 1;
+          wordsLeft = wordsLeft + -1;
+        } while (wordsLeft != 0);
       }
-      puVar7 = *(uint **)(param_1 + 0x3bc);
-      uVar9 = puVar7[1];
-      if (uVar9 != 0) {
-        if ((puVar7[2] & 1) != 0) {
+      bitSet = *(uint **)(program + 0x3bc);
+      bitsLeft2 = bitSet[1];
+      if (bitsLeft2 != 0) {
+        if ((bitSet[2] & 1) != 0) {
           loopCounter = 0;
           do {
             loopCounter = loopCounter + 1;
-            uVar9 = uVar9 - 1;
-            if (uVar9 == 0) goto LAB_000e82ec;
-          } while ((*(uint *)((int)puVar7 + (loopCounter >> 3 & 0x1ffffffc) + 8) >> (loopCounter & 0x1f) & 1) !=
+            bitsLeft2 = bitsLeft2 - 1;
+            if (bitsLeft2 == 0) goto LAB_000e82ec;
+          } while ((*(uint *)((int)bitSet + (loopCounter >> 3 & 0x1ffffffc) + 8) >> (loopCounter & 0x1f) & 1) !=
                    0);
           goto LAB_000e8388;
         }
@@ -2382,14 +2389,14 @@ LAB_000e82ec:
     loopCounter = 0xffffffff;
   }
   else {
-    if ((puVar7[2] & 1) != 0) {
+    if ((bitSet[2] & 1) != 0) {
       loopCounter = 0;
-      uVar2 = uVar9;
+      bitsLeft3 = bitCount;
       do {
         loopCounter = loopCounter + 1;
-        uVar2 = uVar2 - 1;
-        if (uVar2 == 0) goto LAB_000e8190;
-      } while ((*(uint *)((int)puVar7 + (loopCounter >> 3 & 0x1ffffffc) + 8) >> (loopCounter & 0x1f) & 1) != 0);
+        bitsLeft3 = bitsLeft3 - 1;
+        if (bitsLeft3 == 0) goto LAB_000e8190;
+      } while ((*(uint *)((int)bitSet + (loopCounter >> 3 & 0x1ffffffc) + 8) >> (loopCounter & 0x1f) & 1) != 0);
       if (loopCounter != 0xffffffff) goto LAB_000e8388;
       goto LAB_000e8190;
     }
@@ -2397,8 +2404,8 @@ LAB_000e8324:
     loopCounter = 0;
   }
 LAB_000e8388:
-  uVar9 = loopCounter >> 3 & 0x1ffffffc;
-  *(uint *)((int)puVar7 + uVar9 + 8) = 1 << (loopCounter & 0x1f) | *(uint *)((int)puVar7 + uVar9 + 8);
+  wordOffsetOfBit = loopCounter >> 3 & 0x1ffffffc;
+  *(uint *)((int)bitSet + wordOffsetOfBit + 8) = 1 << (loopCounter & 0x1f) | *(uint *)((int)bitSet + wordOffsetOfBit + 8);
   return loopCounter;
 }
 

@@ -3762,130 +3762,134 @@ int FUN_000fadc4(param_1, inst, param_3, param_4, vector, param_6, param_7)
   return puVar6;
 }
 
-/* FUN_000fafa4 @ 0xfafa4 (652 bytes) */
-int FUN_000fafa4(program, param_2, param_3, param_4, param_5)
+/* Program__createConstantVReg @ 0xfafa4 (652 bytes) */
+int Program__createConstantVReg(program, ilRegisterType, registerIndex, valueCount, values)
   int program;
-  int param_2;
-  undefined4 param_3;
-  int param_4;
-  undefined4 *param_5;
+  int ilRegisterType;
+  undefined4 registerIndex;
+  int valueCount;
+  undefined4 *values;
 {
+  undefined4 replicatedValue;
+  undefined4 laneValue0;
+  int *registerListSlot;
+  int laneRecord;
   uint loopCounter;
   undefined4 registerFile;
   int virtualRegister;
-  uint uVar1;
-  byte bVar2;
-  undefined4 uVar3;
-  int iVar4;
-  int *piVar5;
-  int iVar6;
-  uint *puVar7;
-  undefined4 uVar8;
-  uint uVar9;
+  uint laneBit;
+  byte usedLaneMask;
+  undefined4 laneValue;
+  int registerMap;
+  int *firstRecordSlot;
+  int constRecord;
+  uint *registerList;
+  undefined4 registerMapArg;
+  uint registerListCount;
   
-  uVar8 = *(undefined4 *)(program + 0x3ac);
-  registerFile = Program__registerFileOfIlType(program,param_2);
-  virtualRegister = FUN_00127608(uVar8,registerFile,param_3,0);
-  piVar5 = *(int **)(virtualRegister + 0x18);
-  if (*piVar5 == 0) {
-    piVar5 = (int *)Vector__elementRefGrow(piVar5,0);
+  registerMapArg = *(undefined4 *)(program + 0x3ac);
+  registerFile = Program__registerFileOfIlType(program,ilRegisterType);
+  virtualRegister = FUN_00127608(registerMapArg,registerFile,registerIndex,0);
+  firstRecordSlot = *(int **)(virtualRegister + 0x18);
+  if (*firstRecordSlot == 0) {
+    firstRecordSlot = (int *)Vector__elementRefGrow(firstRecordSlot,0);
   }
   else {
-    if (piVar5[1] == 0) {
-      *(undefined4 *)piVar5[2] = 0;
-      piVar5[1] = 1;
+    if (firstRecordSlot[1] == 0) {
+      *(undefined4 *)firstRecordSlot[2] = 0;
+      firstRecordSlot[1] = 1;
     }
-    piVar5 = (int *)piVar5[2];
+    firstRecordSlot = (int *)firstRecordSlot[2];
   }
-  iVar4 = *(int *)(program + 0x3ac);
-  iVar6 = *piVar5;
-  puVar7 = *(uint **)(iVar4 + 0x20);
-  uVar9 = puVar7[1];
-  if (uVar9 < *puVar7) {
-    _memset(uVar9 * 4 + puVar7[2],0,4);
-    piVar5 = (int *)(uVar9 * 4 + puVar7[2]);
-    puVar7[1] = uVar9 + 1;
+  registerMap = *(int *)(program + 0x3ac);
+  constRecord = *firstRecordSlot;
+  registerList = *(uint **)(registerMap + 0x20);
+  registerListCount = registerList[1];
+  if (registerListCount < *registerList) {
+    _memset(registerListCount * 4 + registerList[2],0,4);
+    registerListSlot = (int *)(registerListCount * 4 + registerList[2]);
+    registerList[1] = registerListCount + 1;
   }
   else {
-    piVar5 = (int *)Vector__elementRefGrow(puVar7,uVar9);
+    registerListSlot = (int *)Vector__elementRefGrow(registerList,registerListCount);
   }
-  *piVar5 = iVar6;
-  *(int *)(iVar4 + 0x1c) = *(int *)(iVar4 + 0x1c) + 1;
-  if (param_2 == 1) {
-    if (0 < param_4) {
+  *registerListSlot = constRecord;
+  *(int *)(registerMap + 0x1c) = *(int *)(registerMap + 0x1c) + 1;
+  if (ilRegisterType == 1) {
+    if (0 < valueCount) {
       loopCounter = 0;
-      iVar4 = iVar6;
+      laneRecord = constRecord;
       do {
-        uVar3 = param_5[loopCounter];
-        *(undefined4 *)(iVar4 + 0x1c) = 2;
-        *(undefined4 *)(iVar4 + 0x20) = uVar3;
-        uVar1 = loopCounter & 0x3f;
+        laneValue = values[loopCounter];
+        *(undefined4 *)(laneRecord + 0x1c) = 2;
+        *(undefined4 *)(laneRecord + 0x20) = laneValue;
+        laneBit = loopCounter & 0x3f;
         loopCounter = loopCounter + 1;
-        iVar4 = iVar4 + 0x18;
-        *(byte *)(iVar6 + 0x15c) = (byte)(1 << uVar1) | *(byte *)(iVar6 + 0x15c);
-        param_4 = param_4 + -1;
-      } while (param_4 != 0);
+        laneRecord = laneRecord + 0x18;
+        *(byte *)(constRecord + 0x15c) = (byte)(1 << laneBit) | *(byte *)(constRecord + 0x15c);
+        valueCount = valueCount + -1;
+      } while (valueCount != 0);
     }
   }
-  else if (param_2 < 2) {
-    if (param_2 == 0) {
-      if (param_4 < 1) {
-        bVar2 = *(byte *)(iVar6 + 0x15c);
+  else if (ilRegisterType < 2) {
+    if (ilRegisterType == 0) {
+      if (valueCount < 1) {
+        usedLaneMask = *(byte *)(constRecord + 0x15c);
       }
       else {
         loopCounter = 0;
-        iVar4 = iVar6;
+        laneRecord = constRecord;
         do {
-          uVar3 = *param_5;
-          *(undefined4 *)(iVar4 + 0x1c) = 4;
-          *(undefined4 *)(iVar4 + 0x20) = uVar3;
-          uVar1 = loopCounter & 0x3f;
+          laneValue0 = *values;
+          *(undefined4 *)(laneRecord + 0x1c) = 4;
+          *(undefined4 *)(laneRecord + 0x20) = laneValue0;
+          laneBit = loopCounter & 0x3f;
           loopCounter = loopCounter + 1;
-          iVar4 = iVar4 + 0x18;
-          bVar2 = (byte)(1 << uVar1) | *(byte *)(iVar6 + 0x15c);
-          *(byte *)(iVar6 + 0x15c) = bVar2;
-          param_4 = param_4 + -1;
-        } while (param_4 != 0);
+          laneRecord = laneRecord + 0x18;
+          usedLaneMask = (byte)(1 << laneBit) | *(byte *)(constRecord + 0x15c);
+          *(byte *)(constRecord + 0x15c) = usedLaneMask;
+          valueCount = valueCount + -1;
+        } while (valueCount != 0);
       }
-      uVar3 = *(undefined4 *)(iVar6 + 0x20);
-      *(undefined4 *)(iVar6 + 100) = 4;
-      *(byte *)(iVar6 + 0x15c) = bVar2 | 0xe;
-      *(undefined4 *)(iVar6 + 0x68) = uVar3;
-      *(undefined4 *)(iVar6 + 0x38) = uVar3;
-      *(undefined4 *)(iVar6 + 0x50) = uVar3;
-      *(undefined4 *)(iVar6 + 0x34) = 4;
-      *(undefined4 *)(iVar6 + 0x4c) = 4;
+      replicatedValue = *(undefined4 *)(constRecord + 0x20);
+      *(undefined4 *)(constRecord + 100) = 4;
+      *(byte *)(constRecord + 0x15c) = usedLaneMask | 0xe;
+      *(undefined4 *)(constRecord + 0x68) = replicatedValue;
+      *(undefined4 *)(constRecord + 0x38) = replicatedValue;
+      *(undefined4 *)(constRecord + 0x50) = replicatedValue;
+      *(undefined4 *)(constRecord + 0x34) = 4;
+      *(undefined4 *)(constRecord + 0x4c) = 4;
     }
   }
-  else if (param_2 == 2) {
-    if (0 < param_4) {
+  else if (ilRegisterType == 2) {
+    if (0 < valueCount) {
       loopCounter = 0;
-      iVar4 = iVar6;
+      laneRecord = constRecord;
       do {
-        uVar3 = param_5[loopCounter];
-        *(undefined4 *)(iVar4 + 0x1c) = 3;
-        *(undefined4 *)(iVar4 + 0x20) = uVar3;
-        uVar1 = loopCounter & 0x3f;
+        laneValue = values[loopCounter];
+        *(undefined4 *)(laneRecord + 0x1c) = 3;
+        *(undefined4 *)(laneRecord + 0x20) = laneValue;
+        laneBit = loopCounter & 0x3f;
         loopCounter = loopCounter + 1;
-        iVar4 = iVar4 + 0x18;
-        *(byte *)(iVar6 + 0x15c) = (byte)(1 << uVar1) | *(byte *)(iVar6 + 0x15c);
-        param_4 = param_4 + -1;
-      } while (param_4 != 0);
+        laneRecord = laneRecord + 0x18;
+        *(byte *)(constRecord + 0x15c) = (byte)(1 << laneBit) | *(byte *)(constRecord + 0x15c);
+        valueCount = valueCount + -1;
+      } while (valueCount != 0);
     }
   }
-  else if ((param_2 == 0x1d) && (0 < param_4)) {
+  else if ((ilRegisterType == 0x1d) && (0 < valueCount)) {
     loopCounter = 0;
-    iVar4 = iVar6;
+    laneRecord = constRecord;
     do {
-      uVar3 = param_5[loopCounter];
-      *(undefined4 *)(iVar4 + 0x1c) = 3;
-      *(undefined4 *)(iVar4 + 0x20) = uVar3;
-      uVar1 = loopCounter & 0x3f;
+      laneValue = values[loopCounter];
+      *(undefined4 *)(laneRecord + 0x1c) = 3;
+      *(undefined4 *)(laneRecord + 0x20) = laneValue;
+      laneBit = loopCounter & 0x3f;
       loopCounter = loopCounter + 1;
-      iVar4 = iVar4 + 0x18;
-      *(byte *)(iVar6 + 0x15c) = (byte)(1 << uVar1) | *(byte *)(iVar6 + 0x15c);
-      param_4 = param_4 + -1;
-    } while (param_4 != 0);
+      laneRecord = laneRecord + 0x18;
+      *(byte *)(constRecord + 0x15c) = (byte)(1 << laneBit) | *(byte *)(constRecord + 0x15c);
+      valueCount = valueCount + -1;
+    } while (valueCount != 0);
   }
   return;
 }
@@ -3916,7 +3920,7 @@ int FUN_000fb230(program, ilReader)
       FUN_000da070(*(undefined4 *)(*(int *)(program + 8) + 0x398),uVar2,iVar4,1,&local_48);
       ILReader__appendBoolConst(ilReader,iVar4,(uint)(local_48 != 0));
       iVar3 = iVar4 + 1;
-      ((int (*)())FUN_000fafa4)(program,0,iVar4,1,&local_48);
+      ((int (*)())Program__createConstantVReg)(program,0,iVar4,1,&local_48);
       iVar4 = iVar3;
     } while (iVar1 != iVar3);
   }
@@ -3927,7 +3931,7 @@ int FUN_000fb230(program, ilReader)
       FUN_000da028(*(undefined4 *)(*(int *)(program + 8) + 0x398),uVar2,iVar4,4,&local_48);
       ILReader__appendIntConst(ilReader,iVar4,local_48,local_44,local_40,local_3c);
       iVar3 = iVar4 + 1;
-      ((int (*)())FUN_000fafa4)(program,2,iVar4,4,&local_48);
+      ((int (*)())Program__createConstantVReg)(program,2,iVar4,4,&local_48);
       iVar4 = iVar3;
     } while (iVar1 != iVar3);
   }
@@ -3939,7 +3943,7 @@ int FUN_000fb230(program, ilReader)
       ((void (*)())ILReader__appendFloatConst)(ilReader,iVar4,(double)local_38,(double)local_34,(double)local_30,(double)local_2c
                   );
       iVar3 = iVar4 + 1;
-      ((int (*)())FUN_000fafa4)(program,1,iVar4,4,&local_38);
+      ((int (*)())Program__createConstantVReg)(program,1,iVar4,4,&local_38);
       iVar4 = iVar3;
     } while (iVar1 != iVar3);
   }
@@ -5874,7 +5878,7 @@ code_r0x000fed00:
         } while (ppppppuVar49 != (uint ******)0x0);
       }
       argR7 = (uint ******)&local_124;
-      ((int (*)())FUN_000fafa4)(program,(uint)pppuVar42 >> 0x10 & 0x3f,(int)registerIndex2,argR6,argR7);
+      ((int (*)())Program__createConstantVReg)(program,(uint)pppuVar42 >> 0x10 & 0x3f,(int)registerIndex2,argR6,argR7);
       goto switchD_000fdaf0_caseD_2;
     case 0x42:
       compilerArenaA = *(undefined4 *)(compiler + 0x374);

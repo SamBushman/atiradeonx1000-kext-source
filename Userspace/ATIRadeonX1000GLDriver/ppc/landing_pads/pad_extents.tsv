@@ -97,9 +97,9 @@ ef79c	ef7a0	FUN_000ef498
 ef7f8	ef818	FUN_000ef498
 efaf0	efb0c	FUN_000efa4c
 efb0c	efb2c	FUN_000efa4c
-efe3c	efe40	FUN_000efde4
-efea0	efebc	FUN_000efde4
-f001c	f003c	FUN_000efde4
+efe3c	efe40	Program__insertExitMarkerAndFlagBlocks
+efea0	efebc	Program__insertExitMarkerAndFlagBlocks
+f001c	f003c	Program__insertExitMarkerAndFlagBlocks
 f02c0	f02e0	FUN_000f019c
 f0978	f0994	FUN_000f07a8
 f09bc	f09dc	FUN_000f07a8

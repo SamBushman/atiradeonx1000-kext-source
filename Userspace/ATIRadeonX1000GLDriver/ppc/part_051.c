@@ -115,7 +115,7 @@ int R300MachineAssembler__declareNodeRegistersThunk(node, unused1, unused2, comp
   undefined4 compiler;
   undefined4 this;
 {
-  return FUN_000e2c78(node,this,compiler);
+  return ConstRecord__emitStores(node,this,compiler);
 }
 
 /* R300MachineAssembler__vslot65_declareNodeRegisters @ 0x1955dc (28 bytes) */
@@ -124,7 +124,7 @@ int R300MachineAssembler__vslot65_declareNodeRegisters(this, node, compiler)
   undefined4 node;
   undefined4 compiler;
 {
-  return FUN_000e2c78(node,this,compiler);
+  return ConstRecord__emitStores(node,this,compiler);
 }
 
 /* R300MachineAssembler__vslot2_exceedsInstructionLimit @ 0x1955f8 (36 bytes) */
