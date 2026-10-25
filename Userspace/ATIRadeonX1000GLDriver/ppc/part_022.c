@@ -862,7 +862,7 @@ int ILReader__nextInstruction(ilReader)
   undefined4 *scopeStackTopEntry;
   undefined4 *scopeStackSlotEntry;
   int argR7;
-  undefined4 in_r8;
+  undefined4 staleArgR8;
   uint firstRegisterFile;
   uint waitLabel;
   int ifSkipDepth;
@@ -1041,7 +1041,7 @@ LAB_000e6ac4:
     goto switchD_000e61ac_caseD_a;
   case 7:
     local_64 = 6;
-    ((int (*)())ILReader__beginRewrittenReplay_e547c)(ilReader,0x34,local_68,6,argR7,in_r8);
+    ((int (*)())ILReader__beginRewrittenReplay_e547c)(ilReader,0x34,local_68,6,argR7,staleArgR8);
     break;
   case 8:
     replayStack = (uint *)ilReader[0x22];
@@ -1142,7 +1142,7 @@ LAB_000e6ac4:
     iVar4 = local_68 + -1;
     argR7 = ilReader[local_68 + 0x22];
     local_68 = iVar4;
-    ((int (*)())ILReader__beginRewrittenReplay_e5384)(ilReader,0x35,iVar4,8,argR7,in_r8);
+    ((int (*)())ILReader__beginRewrittenReplay_e5384)(ilReader,0x35,iVar4,8,argR7,staleArgR8);
     break;
   default:
     goto switchD_000e61ac_caseD_a;
@@ -1376,25 +1376,25 @@ LAB_000e6870:
     goto switchD_000e61ac_caseD_53;
   case 0x65:
     local_64 = 6;
-    ((int (*)())ILReader__beginRewrittenReplay_e547c)(ilReader,0x6f,local_68,6,argR7,in_r8);
+    ((int (*)())ILReader__beginRewrittenReplay_e547c)(ilReader,0x6f,local_68,6,argR7,staleArgR8);
     break;
   case 0x66:
     local_64 = 6;
-    ((int (*)())ILReader__beginRewrittenReplay_e547c)(ilReader,0x70,local_68,6,argR7,in_r8);
+    ((int (*)())ILReader__beginRewrittenReplay_e547c)(ilReader,0x70,local_68,6,argR7,staleArgR8);
     break;
   case 0x67:
     local_64 = 8;
     iVar4 = local_68 + -1;
     argR7 = ilReader[local_68 + 0x22];
     local_68 = iVar4;
-    ((int (*)())ILReader__beginRewrittenReplay_e5384)(ilReader,0x6f,iVar4,8,argR7,in_r8);
+    ((int (*)())ILReader__beginRewrittenReplay_e5384)(ilReader,0x6f,iVar4,8,argR7,staleArgR8);
     break;
   case 0x68:
     local_64 = 8;
     iVar4 = local_68 + -1;
     argR7 = ilReader[local_68 + 0x22];
     local_68 = iVar4;
-    ((int (*)())ILReader__beginRewrittenReplay_e5384)(ilReader,0x70,iVar4,8,argR7,in_r8);
+    ((int (*)())ILReader__beginRewrittenReplay_e5384)(ilReader,0x70,iVar4,8,argR7,staleArgR8);
     break;
   case 0x69:
     scopeStackTop = (int *)0x0;
@@ -1679,11 +1679,11 @@ switchD_000e61ac_caseD_53:
     break;
   case 0x74:
     local_64 = 0x73;
-    ((int (*)())ILReader__beginRewrittenReplay_e547c)(ilReader,0x6f,local_68,0x73,argR7,in_r8);
+    ((int (*)())ILReader__beginRewrittenReplay_e547c)(ilReader,0x6f,local_68,0x73,argR7,staleArgR8);
     break;
   case 0x75:
     local_64 = 0x73;
-    ((int (*)())ILReader__beginRewrittenReplay_e547c)(ilReader,0x70,local_68,0x73,argR7,in_r8);
+    ((int (*)())ILReader__beginRewrittenReplay_e547c)(ilReader,0x70,local_68,0x73,argR7,staleArgR8);
   }
   goto LAB_000e5e9c;
 LAB_000e7400:
@@ -2536,7 +2536,7 @@ int LoopHeader__verify(this, param_2, param_3, param_4, param_5, param_6, param_
 {
   int *piVar1;
   int *piVar2;
-  undefined4 extraout_r4;
+  undefined4 r4AfterCall;
   undefined8 uVar3;
   
   piVar1 = *(int **)(this + 0x98);
@@ -2553,7 +2553,7 @@ int LoopHeader__verify(this, param_2, param_3, param_4, param_5, param_6, param_
          (int)((ulonglong)uVar3 >> 0x20) == 0)) {
         (**(code **)(*piVar1 + 0x3c))(piVar1);
         piVar2 = (int *)piVar1[2];
-        param_2 = extraout_r4;
+        param_2 = r4AfterCall;
       }
       else {
         piVar2 = (int *)piVar1[2];

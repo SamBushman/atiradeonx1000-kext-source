@@ -759,8 +759,8 @@ int FUN_000f60c4(param_1, param_2)
   undefined1 *puVar6;
   uint uVar7;
   char *pcVar8;
-  undefined4 in_r9;
-  undefined4 in_r10;
+  undefined4 staleArgR9;
+  undefined4 staleArgR10;
   uint uVar9;
   uint *puVar10;
   int iVar11;
@@ -794,15 +794,15 @@ int FUN_000f60c4(param_1, param_2)
         puVar6 = *(undefined1 **)(iVar11 + 0x14c);
         uVar4 = *(undefined4 *)(iVar11 + 0x94);
         pcVar8 = "k";
-        Compiler__logf(param_2,"(%d)  %d, regnum = %s[%d]: ",puVar6,uVar7,"k",uVar4,in_r9,in_r10);
+        Compiler__logf(param_2,"(%d)  %d, regnum = %s[%d]: ",puVar6,uVar7,"k",uVar4,staleArgR9,staleArgR10);
         do {
           if (((int)*(char *)(iVar11 + 0x15c) >> (loopCounter & 0x3f) & 1U) == 0) break;
           puVar6 = auStack_b8;
-          Compiler__logf(param_2,"  %s ",puVar6,uVar7,pcVar8,uVar4,in_r9,in_r10);
+          Compiler__logf(param_2,"  %s ",puVar6,uVar7,pcVar8,uVar4,staleArgR9,staleArgR10);
           bVar1 = loopCounter != 3;
           loopCounter = loopCounter + 1;
         } while (bVar1);
-        Compiler__logf(param_2,"\n",puVar6,uVar7,pcVar8,uVar4,in_r9,in_r10);
+        Compiler__logf(param_2,"\n",puVar6,uVar7,pcVar8,uVar4,staleArgR9,staleArgR10);
       }
       uVar2 = puVar10[1];
       uVar7 = uVar9;
@@ -1757,7 +1757,7 @@ int IRInst__setIntConstantOperand4(inst, program, operandIndex, value0, value1, 
 #define FBITS(x) ({ float fbits_ = (float)(x); *(unsigned int *)&fbits_; })
 #endif
 /* IRInst__makeLiteralVec4Float @ 0xf79c4 (332 bytes) */
-void IRInst__makeLiteralVec4Float(undefined4 param_1,undefined4 param_2,undefined4 param_3,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void IRInst__makeLiteralVec4Float(undefined4 param_1,undefined4 param_2,undefined4 param_3,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4)
 {
   undefined4 local_a0;
   undefined4 local_9c;
@@ -1772,9 +1772,9 @@ void IRInst__makeLiteralVec4Float(undefined4 param_1,undefined4 param_2,undefine
   undefined4 local_68;
   undefined4 local_64;
   
-  ((int (*)())IRInst__setConstantOperand)(param_1,param_2,param_3,2,FBITS(fparam_1),local_a0,local_9c,local_98,local_94,2,
-               FBITS(fparam_2),local_88,local_84,local_80,local_7c,2,FBITS(fparam_3),local_70,
-               local_6c,local_68,local_64,2,FBITS(fparam_4));
+  ((int (*)())IRInst__setConstantOperand)(param_1,param_2,param_3,2,FBITS(staleFprArg1),local_a0,local_9c,local_98,local_94,2,
+               FBITS(staleFprArg2),local_88,local_84,local_80,local_7c,2,FBITS(staleFprArg3),local_70,
+               local_6c,local_68,local_64,2,FBITS(staleFprArg4));
   return;
 }
 
@@ -2464,7 +2464,7 @@ int Program__applySourceTokenToOperand(program, selectWordPtr, descriptor, opera
 {
   uint uVar1;
   int *a4;
-  undefined4 in_r8;
+  undefined4 staleArgR8;
   uint uVar2;
   uint uVar3;
   char local_38 [32];
@@ -2493,15 +2493,15 @@ int Program__applySourceTokenToOperand(program, selectWordPtr, descriptor, opera
     local_38[3] = psnPackedLaneSource(descriptor,3);
   }
   (**(code **)(*inst + 0x88))
-            (inst,operandIndex,0,(int)local_38[uVar3 >> 0x18],a4,in_r8,*(code **)(*inst + 0x88));
+            (inst,operandIndex,0,(int)local_38[uVar3 >> 0x18],a4,staleArgR8,*(code **)(*inst + 0x88));
   (**(code **)(*inst + 0x88))
-            (inst,operandIndex,1,(int)local_38[uVar3 >> 0x10 & 0xff],a4,in_r8,
+            (inst,operandIndex,1,(int)local_38[uVar3 >> 0x10 & 0xff],a4,staleArgR8,
              *(code **)(*inst + 0x88));
   (**(code **)(*inst + 0x88))
-            (inst,operandIndex,2,(int)local_38[uVar3 >> 8 & 0xff],a4,in_r8,*(code **)(*inst + 0x88)
+            (inst,operandIndex,2,(int)local_38[uVar3 >> 8 & 0xff],a4,staleArgR8,*(code **)(*inst + 0x88)
             );
   (**(code **)(*inst + 0x88))
-            (inst,operandIndex,3,(int)local_38[uVar3 & 0xff],a4,in_r8,*(code **)(*inst + 0x88));
+            (inst,operandIndex,3,(int)local_38[uVar3 & 0xff],a4,staleArgR8,*(code **)(*inst + 0x88));
   *selectWordPtr = 0x10203;
   return;
 }
@@ -2717,15 +2717,15 @@ int FUN_000f9140(program, ilOpcode, param_3)
   int *a0;
   int iVar1;
   undefined4 opcodeInfo;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 staleArgR6;
+  undefined4 staleArgR7;
+  undefined4 staleArgR8;
   int iVar3;
   
   iVar3 = *(int *)(*(int *)(*(int *)(program + 8) + 0x30c) + 0xc);
   iVar3 = (**(code **)(ilOpcode * 0x24 + iVar3 + 0x14))
-                    (*(undefined4 *)(ilOpcode * 0x24 + iVar3),*(int *)(program + 8),param_3,in_r6,
-                     in_r7,in_r8,iVar3);
+                    (*(undefined4 *)(ilOpcode * 0x24 + iVar3),*(int *)(program + 8),param_3,staleArgR6,
+                     staleArgR7,staleArgR8,iVar3);
   if ((param_3 != 0) &&
      (a0 = *(int **)(*(int *)(program + 8) + 0x30c), iVar1 = (**(code **)(*a0 + 0xb0))(a0),
      iVar1 != 0)) {
@@ -3057,7 +3057,7 @@ int FUN_000f9a58(pass, list, descriptor, param_4, param_5)
   undefined4 uVar19;
   int iVar20;
   undefined4 *puVar21;
-  double fparam_1;
+  double staleFprArg1;
   undefined4 local_68;
   undefined4 local_64 [7];
   
@@ -3078,9 +3078,9 @@ int FUN_000f9a58(pass, list, descriptor, param_4, param_5)
     *(int *)(operandRecord2 + 8) = laneIndex;
     operandRecord2 = IRInst__getOperandRecord(setupInst,1);
     *(undefined4 *)(operandRecord2 + 0xc) = 0;
-    fparam_1 = (double)*(float *)(&DAT_001aa9fc + uVar14 * 4);
+    staleFprArg1 = (double)*(float *)(&DAT_001aa9fc + uVar14 * 4);
     *(int *)(operandRecord2 + 8) = laneIndex;
-    ((void (*)())IRInst__makeLiteralVec4Float)(setupInst,pass,2,fparam_1,fparam_1,fparam_1,fparam_1);
+    ((void (*)())IRInst__makeLiteralVec4Float)(setupInst,pass,2,staleFprArg1,staleFprArg1,staleFprArg1,staleFprArg1);
     DList__pushBack(list,setupInst);
   }
   uVar14 = 0;
@@ -4058,10 +4058,10 @@ int FUN_000fb3d4(program, list, tokenWords, descriptor, param_5, argR8, movByReg
   code *hwVirtualSlot88;
   uint *movTableVector;
   int newTempIndexB;
-  double fparam_1;
-  double fparam_2;
-  double fparam_3;
-  double fparam_4;
+  double staleFprArg1;
+  double staleFprArg2;
+  double staleFprArg3;
+  double staleFprArg4;
   undefined8 uVar39;
   undefined4 local_98;
   dword local_94 [3];
@@ -4718,10 +4718,10 @@ LAB_000fc74c:
     *(undefined4 *)(operandRecord2 + 0xc) = registerFile4;
     *(dword **)(operandRecord2 + 8) = pdVar31;
     local_94[0] = 0x10203;
-    fparam_1 = (double)((double (*)())IRInst__literalForLane)(packedLaneSource0,0,&local_98,pdVar18);
-    fparam_2 = (double)((double (*)())IRInst__literalForLane)(psnPackedLaneSourceResult,1,&local_98,pdVar18);
-    fparam_3 = (double)((double (*)())IRInst__literalForLane)(psnPackedLaneSourceResult2,2,&local_98,pdVar18);
-    fparam_4 = (double)((double (*)())IRInst__literalForLane)(psnPackedLaneSourceResult3,3,&local_98,pdVar18);
+    staleFprArg1 = (double)((double (*)())IRInst__literalForLane)(packedLaneSource0,0,&local_98,pdVar18);
+    staleFprArg2 = (double)((double (*)())IRInst__literalForLane)(psnPackedLaneSourceResult,1,&local_98,pdVar18);
+    staleFprArg3 = (double)((double (*)())IRInst__literalForLane)(psnPackedLaneSourceResult2,2,&local_98,pdVar18);
+    staleFprArg4 = (double)((double (*)())IRInst__literalForLane)(psnPackedLaneSourceResult3,3,&local_98,pdVar18);
     dVar4 = local_94[0];
     operandRecord2 = IRInst__getOperandRecord(inst,1);
     *(dword *)(operandRecord2 + 0x10) = dVar4;
@@ -4731,7 +4731,7 @@ LAB_000fc74c:
     *(undefined4 *)(operandRecord2 + 0xc) = 0;
     *(dword **)(operandRecord2 + 8) = pdVar25;
     pdVar17 = (dword *)((int)((unsigned char *)0x0) + 1);
-    ((void (*)())IRInst__makeLiteralVec4Float)(inst,program,1,fparam_1,fparam_2,fparam_3,fparam_4);
+    ((void (*)())IRInst__makeLiteralVec4Float)(inst,program,1,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4);
     *(undefined4 *)((int)inst + 0x9c) = local_98;
     DList__pushBack(list,inst);
     descriptorWord = *descriptor;
@@ -5156,6 +5156,10 @@ int FUN_000fd5c8(program, ilReader)
   int program;
   uint ******ilReader;
 {
+  int sourceRegisterIndexB;
+  uint ***source0Token;
+  uint ***source1Token;
+  uint ***destOperandToken;
   undefined4 arenaA;
   undefined4 registerFileB;
   int loopCounterD;
@@ -5628,9 +5632,9 @@ code_r0x000fed00:
     case 0x16:
     case 0x18:
       if ((*(uint *)(*(int *)(compiler + 0x6c4) + 0x30) & 0x2000) != 0) {
-        pppuVar42 = **ilReader[0x19];
-        ilRegisterType = (uint)pppuVar42 >> 0x10 & 0x3f;
-        if (((((uint)pppuVar42 & 0x3f0000) == 0x100000) && (compiler != 0)) &&
+        destOperandToken = **ilReader[0x19];
+        ilRegisterType = (uint)destOperandToken >> 0x10 & 0x3f;
+        if (((((uint)destOperandToken & 0x3f0000) == 0x100000) && (compiler != 0)) &&
            ((hwDescription[2] & 0x80U) != 0)) {
           ppppppuVar19 = (uint ******)((int)((unsigned char *)0xc) + 3);
         }
@@ -5862,7 +5866,7 @@ code_r0x000fed00:
     case 0x1d:
     case 0x79:
       argR6 = (uint ******)ilReader[0x17];
-      pppuVar42 = **ilReader[0x19];
+      destOperandToken = **ilReader[0x19];
       registerIndex2 = *(short *)((int)*ilReader[0x19] + 2);
       if ((int)argR6 < 1) {
         argR6 = (uint ******)0x0;
@@ -5880,7 +5884,7 @@ code_r0x000fed00:
         } while (ppppppuVar49 != (uint ******)0x0);
       }
       argR7 = (uint ******)&local_124;
-      ((int (*)())Program__createConstantVReg)(program,(uint)pppuVar42 >> 0x10 & 0x3f,(int)registerIndex2,argR6,argR7);
+      ((int (*)())Program__createConstantVReg)(program,(uint)destOperandToken >> 0x10 & 0x3f,(int)registerIndex2,argR6,argR7);
       goto switchD_000fdaf0_caseD_2;
     case 0x42:
       compilerArenaA = *(undefined4 *)(compiler + 0x374);
@@ -5904,15 +5908,15 @@ code_r0x000fed00:
       ppppuVar45 = *ilReader[0x1b];
       registerIndex2 = *(short *)((int)ppppuVar45 + 2);
       registerFileB = Program__registerFileOfIlType(program,(uint)*ppppuVar45 >> 0x10 & 0x3f);
-      pppuVar42 = *ilReader[0x1b][1];
-      if (((((uint)pppuVar42 & 0x3f0000) == 0x100000) && (*(int *)(program + 8) != 0)) &&
+      source1Token = *ilReader[0x1b][1];
+      if (((((uint)source1Token & 0x3f0000) == 0x100000) && (*(int *)(program + 8) != 0)) &&
          ((*(uint *)(*(int *)(*(int *)(program + 8) + 0x30c) + 8) & 0x80) != 0)) {
         iVar34 = 0xf;
       }
       else {
         iVar34 = (int)*(short *)((int)ilReader[0x1b][1] + 2);
       }
-      registerFile27 = Program__registerFileOfIlType(program,(uint)pppuVar42 >> 0x10 & 0x3f);
+      registerFile27 = Program__registerFileOfIlType(program,(uint)source1Token >> 0x10 & 0x3f);
       virtualRegisterB = FUN_00127608(*(undefined4 *)(program + 0x3ac),0x2b,0,0);
       mulAddInst = IRInst__create(0x14,*(undefined4 *)(program + 8));
       operandRecord2 = IRInst__getOperandRecord(mulAddInst,1);
@@ -6027,15 +6031,15 @@ code_r0x000fed00:
       stagedSelectWord = (uint ******)0x10203;
       argR8 = (uint ******)&local_174;
       ((int (*)())FUN_000fb3d4)(program,local_68,tokenWords,*ilReader[0x1b],loopStackData,argR8,&movByRegister);
-      pppuVar42 = **ilReader[0x1b];
-      if (((((uint)pppuVar42 & 0x3f0000) == 0x100000) && (*(int *)(program + 8) != 0)) &&
+      source0Token = **ilReader[0x1b];
+      if (((((uint)source0Token & 0x3f0000) == 0x100000) && (*(int *)(program + 8) != 0)) &&
          ((*(uint *)(*(int *)(*(int *)(program + 8) + 0x30c) + 8) & 0x80) != 0)) {
         iVar34 = 0xf;
       }
       else {
         iVar34 = (int)*(short *)((int)*ilReader[0x1b] + 2);
       }
-      registerFile = Program__registerFileOfIlType(program,(uint)pppuVar42 >> 0x10 & 0x3f);
+      registerFile = Program__registerFileOfIlType(program,(uint)source0Token >> 0x10 & 0x3f);
       operandRecord2 = IRInst__getOperandRecord(ppppppuVar19,1);
       *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
       *(int *)(operandRecord2 + 8) = iVar34;
@@ -6486,15 +6490,15 @@ code_r0x000ff070:
       }
       argR8 = (uint ******)&local_174;
       ((int (*)())FUN_000fb3d4)(program,local_68,tokenWords,*ilReader[0x1b],loopStackData,argR8,&movByRegister);
-      pppuVar42 = **ilReader[0x1b];
-      if (((((uint)pppuVar42 & 0x3f0000) == 0x100000) && (*(int *)(program + 8) != 0)) &&
+      source0Token = **ilReader[0x1b];
+      if (((((uint)source0Token & 0x3f0000) == 0x100000) && (*(int *)(program + 8) != 0)) &&
          ((*(uint *)(*(int *)(*(int *)(program + 8) + 0x30c) + 8) & 0x80) != 0)) {
         iVar34 = 0xf;
       }
       else {
         iVar34 = (int)*(short *)((int)*ilReader[0x1b] + 2);
       }
-      ilRegisterType = (uint)pppuVar42 >> 0x10 & 0x3f;
+      ilRegisterType = (uint)source0Token >> 0x10 & 0x3f;
       iVar43 = FUN_00127534(*(undefined4 *)(program + 0x3ac),0x2c,0,0);
       if (iVar43 == 0) {
         compilerArenaA = *(undefined4 *)(*(int *)(program + 8) + 0x374);
@@ -6816,18 +6820,18 @@ code_r0x00103718:
       operandRecordLast = IRInst__getOperandRecord(ppppppuVar48,0);
       *(int *)(operandRecordLast + 8) = iVar43;
       *(undefined4 *)(operandRecordLast + 0xc) = 0;
-      pppuVar42 = **ilReader[0x1b];
-      if (((((uint)pppuVar42 & 0x3f0000) == 0x100000) && (*(int *)(program + 8) != 0)) &&
+      source0Token = **ilReader[0x1b];
+      if (((((uint)source0Token & 0x3f0000) == 0x100000) && (*(int *)(program + 8) != 0)) &&
          ((*(uint *)(*(int *)(*(int *)(program + 8) + 0x30c) + 8) & 0x80) != 0)) {
-        iVar20 = 0xf;
+        sourceRegisterIndexB = 0xf;
       }
       else {
-        iVar20 = (int)*(short *)((int)*ilReader[0x1b] + 2);
+        sourceRegisterIndexB = (int)*(short *)((int)*ilReader[0x1b] + 2);
       }
-      registerFile = Program__registerFileOfIlType(program,(uint)pppuVar42 >> 0x10 & 0x3f);
+      registerFile = Program__registerFileOfIlType(program,(uint)source0Token >> 0x10 & 0x3f);
       operandRecordB = IRInst__getOperandRecord(ppppppuVar48,1);
       *(undefined4 *)(operandRecordB + 0xc) = registerFile;
-      *(int *)(operandRecordB + 8) = iVar20;
+      *(int *)(operandRecordB + 8) = sourceRegisterIndexB;
       argR6 = ppppppuVar40;
       argR7 = ppppppuVar48;
       ((int (*)())Program__applySourceTokenToOperand)(program,&stagedSelectWord,*ilReader[0x1b],ppppppuVar40,ppppppuVar48);
@@ -7615,20 +7619,20 @@ code_r0x00101cbc:
         break;
       case 99:
         compiler = *(int *)(program + 8);
-        pppuVar42 = **ilReader[0x1b];
-        if (((((uint)pppuVar42 & 0x3f0000) == 0x100000) && (compiler != 0)) &&
+        source0Token = **ilReader[0x1b];
+        if (((((uint)source0Token & 0x3f0000) == 0x100000) && (compiler != 0)) &&
            ((*(uint *)(*(int *)(compiler + 0x30c) + 8) & 0x80) != 0)) {
-          iVar20 = 0xf;
+          sourceRegisterIndexB = 0xf;
         }
         else {
-          iVar20 = (int)*(short *)((int)*ilReader[0x1b] + 2);
+          sourceRegisterIndexB = (int)*(short *)((int)*ilReader[0x1b] + 2);
         }
         cmp1SInst = IRInst__create(0x8d,compiler);
-        registerFile = Program__registerFileOfIlType(program,(uint)pppuVar42 >> 0x10 & 0x3f);
+        registerFile = Program__registerFileOfIlType(program,(uint)source0Token >> 0x10 & 0x3f);
         operandRecord2 = IRInst__getOperandRecord(cmp1SInst,1);
         *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
         remapTable = PTR_DAT_001e8b84;
-        *(int *)(operandRecord2 + 8) = iVar20;
+        *(int *)(operandRecord2 + 8) = sourceRegisterIndexB;
         *(undefined4 *)((int)cmp1SInst + 300) = *(undefined4 *)remapTable;
         compilerArenaA = *(undefined4 *)(*(int *)(program + 8) + 0x374);
         blockAllocation4 = (undefined4 *)Arena__alloc(compilerArenaA,0x15c);
@@ -7662,12 +7666,12 @@ code_r0x00101cbc:
         if ((((uint)pppuVar42 & 0x3f0000) == 0x100000) && (compiler != 0)) {
           hwDescription = *(int **)(compiler + 0x30c);
           if ((hwDescription[2] & 0x80U) == 0) goto code_r0x00100810;
-          iVar20 = 0xf;
+          sourceRegisterIndexB = 0xf;
         }
         else {
           hwDescription = *(int **)(compiler + 0x30c);
 code_r0x00100810:
-          iVar20 = (int)*(short *)((int)ppppuVar45 + 2);
+          sourceRegisterIndexB = (int)*(short *)((int)ppppuVar45 + 2);
         }
         ppppuVar45 = ilReader[0x1b][1];
         pppuVar33 = *ppppuVar45;
@@ -7680,7 +7684,7 @@ code_r0x00100810:
         }
         argR8 = (uint ******)((uint)pppuVar33 >> 0x10 & 0x3f);
         pvVar16 = (void *)(**(code **)(*hwDescription + 0x24))
-                                    (hwDescription,(uint)*tokenWords >> 0x10 & 7,iVar20,
+                                    (hwDescription,(uint)*tokenWords >> 0x10 & 7,sourceRegisterIndexB,
                                      (uint)pppuVar42 >> 0x10 & 0x3f,registerIndex,argR8,stagedSelectWord,ilReader);
         compilerArenaA = *(undefined4 *)(*(int *)(program + 8) + 0x374);
         blockAllocation4 = (undefined4 *)Arena__alloc(compilerArenaA,0x15c);
@@ -7750,8 +7754,8 @@ code_r0x00102c90:
         goto code_r0x0010319c;
       case 0x72:
         compiler = *(int *)(program + 8);
-        pppuVar42 = **ilReader[0x1b];
-        if ((((uint)pppuVar42 & 0x3f0000) == 0x100000) && (compiler != 0)) {
+        source0Token = **ilReader[0x1b];
+        if ((((uint)source0Token & 0x3f0000) == 0x100000) && (compiler != 0)) {
           hwDescription = *(int **)(compiler + 0x30c);
           if ((hwDescription[2] & 0x80U) == 0) goto code_r0x0010082c;
           registerIndex = 0xf;
@@ -7763,7 +7767,7 @@ code_r0x0010082c:
         }
         argR8 = stagedSelectWord;
         pvVar16 = (void *)(**(code **)(*hwDescription + 0x28))
-                                    (hwDescription,ilOpcode == 0x6f,registerIndex,(uint)pppuVar42 >> 0x10 & 0x3f,0,
+                                    (hwDescription,ilOpcode == 0x6f,registerIndex,(uint)source0Token >> 0x10 & 0x3f,0,
                                      stagedSelectWord,ilReader,currentBlock);
         compilerArenaA = *(undefined4 *)(*(int *)(program + 8) + 0x374);
         blockAllocation4 = (undefined4 *)Arena__alloc(compilerArenaA,0x15c);

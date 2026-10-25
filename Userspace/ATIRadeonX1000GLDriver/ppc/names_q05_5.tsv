@@ -2040,3 +2040,234 @@ use	FUN_000e8eac	uVar9	lastEdgeIndex	INFERRED	index of the previous non-null edg
 use	FUN_000e8eac	uVar9	lastEdgeIndex	INFERRED	index of the previous non-null edge (-1 before the first)	^\s*puVar6\[1\]\ =\ uVar9\ \+\ 2;$@2	+1
 use	FUN_000e8eac	uVar9	lastEdgeIndex	INFERRED	index of the previous non-null edge (-1 before the first)	^\s*uVar9\ =\ uVar8;$@2	+1
 func	FUN_000e8eac	Block__replaceRegionEdges	INFERRED	re-links the control-flow edges of a replaced region: every predecessor of oldFirst now has newBlock as successor, every successor of oldLast has newBlock as predecessor
+local	BreakOrContinueBlock__ctor_eac08	param_2	source	INFERRED	block whose fields are copied by the copy constructor Block__ctor_e9f00
+local	BreakOrContinueBlock__ctor_eac60	param_2	source	INFERRED	block whose fields are copied by the copy constructor Block__ctor_e9f00
+local	PostLoopFooter__ctor_eacb8	param_2	source	INFERRED	block whose fields are copied by the copy constructor Block__ctor_e9f00
+local	PostLoopFooter__ctor_ead80	param_2	source	INFERRED	block whose fields are copied by the copy constructor Block__ctor_e9f00
+local	LoopFooter__ctor_eadd0	param_2	source	INFERRED	block whose fields are copied by the copy constructor Block__ctor_e9f00
+local	LoopFooter__ctor_eae98	param_2	source	INFERRED	block whose fields are copied by the copy constructor Block__ctor_e9f00
+local	LoopHeader__ctor_eaee8	param_2	source	INFERRED	block whose fields are copied by the copy constructor Block__ctor_e9f00
+local	LoopHeader__ctor_eafe4	param_2	source	INFERRED	block whose fields are copied by the copy constructor Block__ctor_e9f00
+local	IfFooter__ctor_eb068	param_2	source	INFERRED	block whose fields are copied by the copy constructor Block__ctor_e9f00
+local	IfFooter__ctor_eb124	param_2	source	INFERRED	block whose fields are copied by the copy constructor Block__ctor_e9f00
+local	IfHeader__ctor_eb168	param_2	source	INFERRED	block whose fields are copied by the copy constructor Block__ctor_e9f00
+local	IfHeader__ctor_eb248	param_2	source	INFERRED	block whose fields are copied by the copy constructor Block__ctor_e9f00
+local	FuncEndBlock__ctor_eb2b0	param_2	source	INFERRED	block whose fields are copied by the copy constructor Block__ctor_e9f00
+local	FuncEndBlock__ctor_eb378	param_2	source	INFERRED	block whose fields are copied by the copy constructor Block__ctor_e9f00
+local	IfFooterStatic__ctor_eb7e0	param_2	compiler	INFERRED	compiler passed to the base constructor IfFooter__ctor_eb124
+local	IfFooterStatic__ctor_eb824	param_2	compiler	INFERRED	compiler passed to the base constructor IfFooter__ctor_eb124
+local	IfHeaderStatic__ctor_eb8e0	param_2	compiler	INFERRED	compiler passed to the base constructor IfHeader__ctor_eb248
+local	IfHeaderStatic__ctor_eb924	param_2	compiler	INFERRED	compiler passed to the base constructor IfHeader__ctor_eb248
+local	BreakBlock__ctor_ebe70	param_2	compiler	INFERRED	compiler passed to the base constructor BreakOrContinueBlock__ctor_eac60
+local	BreakBlock__ctor_ebeb4	param_2	compiler	INFERRED	compiler passed to the base constructor BreakOrContinueBlock__ctor_eac60
+local	ContinueBlock__ctor_ebf70	param_2	compiler	INFERRED	compiler passed to the base constructor BreakOrContinueBlock__ctor_eac60
+local	ContinueBlock__ctor_ebfb4	param_2	compiler	INFERRED	compiler passed to the base constructor BreakOrContinueBlock__ctor_eac60
+local	scDumpPixelProgram	in_r10	staleArgR10	INFERRED	Ghidra pseudo-register: in_r10 (a register the function reads without having written it; no source-level role)
+local	scStoreConstantComponent	fparam_1	staleFprArg1	INFERRED	Ghidra pseudo-register: fparam_1 (a register the function reads without having written it; no source-level role)
+local	FUN_000da78c	fparam_1	staleFprArg1	INFERRED	Ghidra pseudo-register: fparam_1 (a register the function reads without having written it; no source-level role)
+local	ildisPrintFixedPoint	fparam_1	staleFprArg1	INFERRED	Ghidra pseudo-register: fparam_1 (a register the function reads without having written it; no source-level role)
+local	ildisPrintFixedPoint	fparam_2	staleFprArg2	INFERRED	Ghidra pseudo-register: fparam_2 (a register the function reads without having written it; no source-level role)
+local	ildisPrintFixedPoint	fparam_3	staleFprArg3	INFERRED	Ghidra pseudo-register: fparam_3 (a register the function reads without having written it; no source-level role)
+local	ildisPrintFixedPoint	fparam_4	staleFprArg4	INFERRED	Ghidra pseudo-register: fparam_4 (a register the function reads without having written it; no source-level role)
+local	ildisPrintFixedPoint	fparam_5	staleFprArg5	INFERRED	Ghidra pseudo-register: fparam_5 (a register the function reads without having written it; no source-level role)
+local	ildisPrintFixedPoint	fparam_6	staleFprArg6	INFERRED	Ghidra pseudo-register: fparam_6 (a register the function reads without having written it; no source-level role)
+local	ildisPrintFixedPoint	fparam_7	staleFprArg7	INFERRED	Ghidra pseudo-register: fparam_7 (a register the function reads without having written it; no source-level role)
+local	ildisPrintFixedPoint	fparam_8	staleFprArg8	INFERRED	Ghidra pseudo-register: fparam_8 (a register the function reads without having written it; no source-level role)
+local	ildisPrintFixedPoint	fparam_9	staleFprArg9	INFERRED	Ghidra pseudo-register: fparam_9 (a register the function reads without having written it; no source-level role)
+local	ildisPrintFixedPoint	fparam_10	staleFprArg10	INFERRED	Ghidra pseudo-register: fparam_10 (a register the function reads without having written it; no source-level role)
+local	ildisPrintFixedPoint	fparam_11	staleFprArg11	INFERRED	Ghidra pseudo-register: fparam_11 (a register the function reads without having written it; no source-level role)
+local	ildisPrintFixedPoint	fparam_12	staleFprArg12	INFERRED	Ghidra pseudo-register: fparam_12 (a register the function reads without having written it; no source-level role)
+local	ildisPrintFixedPoint	in_r7	staleArgR7	INFERRED	Ghidra pseudo-register: in_r7 (a register the function reads without having written it; no source-level role)
+local	ildisPrintFixedPoint	in_r8	staleArgR8	INFERRED	Ghidra pseudo-register: in_r8 (a register the function reads without having written it; no source-level role)
+local	ildisPrintFixedPoint	in_r10	staleArgR10	INFERRED	Ghidra pseudo-register: in_r10 (a register the function reads without having written it; no source-level role)
+local	ildisPrintTexelOffsets	in_f2	staleFpr2	INFERRED	Ghidra pseudo-register: in_f2 (a register the function reads without having written it; no source-level role)
+local	ildisPrintTexelOffsets	in_f3	staleFpr3	INFERRED	Ghidra pseudo-register: in_f3 (a register the function reads without having written it; no source-level role)
+local	ildisPrintTexelOffsets	in_f4	staleFpr4	INFERRED	Ghidra pseudo-register: in_f4 (a register the function reads without having written it; no source-level role)
+local	ildisPrintTexelOffsets	in_f5	staleFpr5	INFERRED	Ghidra pseudo-register: in_f5 (a register the function reads without having written it; no source-level role)
+local	ildisPrintTexelOffsets	in_f6	staleFpr6	INFERRED	Ghidra pseudo-register: in_f6 (a register the function reads without having written it; no source-level role)
+local	ildisPrintTexelOffsets	in_f7	staleFpr7	INFERRED	Ghidra pseudo-register: in_f7 (a register the function reads without having written it; no source-level role)
+local	ildisPrintTexelOffsets	in_f8	staleFpr8	INFERRED	Ghidra pseudo-register: in_f8 (a register the function reads without having written it; no source-level role)
+local	ildisPrintTexelOffsets	in_stack_ffffffa8	staleStackArg_ffffffa8	INFERRED	Ghidra pseudo-register: in_stack_ffffffa8 (a register the function reads without having written it; no source-level role)
+local	ildisPrintTexelOffsets	in_stack_ffffffb0	staleStackArg_ffffffb0	INFERRED	Ghidra pseudo-register: in_stack_ffffffb0 (a register the function reads without having written it; no source-level role)
+local	ildisPrintTexelOffsets	in_stack_ffffffb8	staleStackArg_ffffffb8	INFERRED	Ghidra pseudo-register: in_stack_ffffffb8 (a register the function reads without having written it; no source-level role)
+local	ildisPrintTexelOffsets	in_stack_ffffffc0	staleStackArg_ffffffc0	INFERRED	Ghidra pseudo-register: in_stack_ffffffc0 (a register the function reads without having written it; no source-level role)
+local	ildisPrintFilterModes	fparam_1	staleFprArg1	INFERRED	Ghidra pseudo-register: fparam_1 (a register the function reads without having written it; no source-level role)
+local	ildisPrintFilterModes	in_f2	staleFpr2	INFERRED	Ghidra pseudo-register: in_f2 (a register the function reads without having written it; no source-level role)
+local	ildisPrintFilterModes	in_f3	staleFpr3	INFERRED	Ghidra pseudo-register: in_f3 (a register the function reads without having written it; no source-level role)
+local	ildisPrintFilterModes	in_f4	staleFpr4	INFERRED	Ghidra pseudo-register: in_f4 (a register the function reads without having written it; no source-level role)
+local	ildisPrintFilterModes	in_f5	staleFpr5	INFERRED	Ghidra pseudo-register: in_f5 (a register the function reads without having written it; no source-level role)
+local	ildisPrintFilterModes	in_f6	staleFpr6	INFERRED	Ghidra pseudo-register: in_f6 (a register the function reads without having written it; no source-level role)
+local	ildisPrintFilterModes	in_f7	staleFpr7	INFERRED	Ghidra pseudo-register: in_f7 (a register the function reads without having written it; no source-level role)
+local	ildisPrintFilterModes	in_f8	staleFpr8	INFERRED	Ghidra pseudo-register: in_f8 (a register the function reads without having written it; no source-level role)
+local	ildisPrintFilterModes	in_stack_ffffffa8	staleStackArg_ffffffa8	INFERRED	Ghidra pseudo-register: in_stack_ffffffa8 (a register the function reads without having written it; no source-level role)
+local	ildisPrintFilterModes	in_stack_ffffffb0	staleStackArg_ffffffb0	INFERRED	Ghidra pseudo-register: in_stack_ffffffb0 (a register the function reads without having written it; no source-level role)
+local	ildisPrintFilterModes	in_stack_ffffffb8	staleStackArg_ffffffb8	INFERRED	Ghidra pseudo-register: in_stack_ffffffb8 (a register the function reads without having written it; no source-level role)
+local	ildisPrintFilterModes	in_stack_ffffffc0	staleStackArg_ffffffc0	INFERRED	Ghidra pseudo-register: in_stack_ffffffc0 (a register the function reads without having written it; no source-level role)
+local	ildisPrintDclptCoordMode	in_r10	staleArgR10	INFERRED	Ghidra pseudo-register: in_r10 (a register the function reads without having written it; no source-level role)
+local	ildisPrintTexldmsModifiers	in_f2	staleFpr2	INFERRED	Ghidra pseudo-register: in_f2 (a register the function reads without having written it; no source-level role)
+local	ildisPrintTexldmsModifiers	in_f3	staleFpr3	INFERRED	Ghidra pseudo-register: in_f3 (a register the function reads without having written it; no source-level role)
+local	ildisPrintTexldmsModifiers	in_f4	staleFpr4	INFERRED	Ghidra pseudo-register: in_f4 (a register the function reads without having written it; no source-level role)
+local	ildisPrintTexldmsModifiers	in_f5	staleFpr5	INFERRED	Ghidra pseudo-register: in_f5 (a register the function reads without having written it; no source-level role)
+local	ildisPrintTexldmsModifiers	in_f6	staleFpr6	INFERRED	Ghidra pseudo-register: in_f6 (a register the function reads without having written it; no source-level role)
+local	ildisPrintTexldmsModifiers	in_f7	staleFpr7	INFERRED	Ghidra pseudo-register: in_f7 (a register the function reads without having written it; no source-level role)
+local	ildisPrintTexldmsModifiers	in_f8	staleFpr8	INFERRED	Ghidra pseudo-register: in_f8 (a register the function reads without having written it; no source-level role)
+local	ildisPrintTexldmsModifiers	in_stack_ffffffa8	staleStackArg_ffffffa8	INFERRED	Ghidra pseudo-register: in_stack_ffffffa8 (a register the function reads without having written it; no source-level role)
+local	ildisPrintTexldmsModifiers	in_stack_ffffffb0	staleStackArg_ffffffb0	INFERRED	Ghidra pseudo-register: in_stack_ffffffb0 (a register the function reads without having written it; no source-level role)
+local	ildisPrintTexldmsModifiers	in_stack_ffffffb8	staleStackArg_ffffffb8	INFERRED	Ghidra pseudo-register: in_stack_ffffffb8 (a register the function reads without having written it; no source-level role)
+local	ildisPrintTexldmsModifiers	in_stack_ffffffc0	staleStackArg_ffffffc0	INFERRED	Ghidra pseudo-register: in_stack_ffffffc0 (a register the function reads without having written it; no source-level role)
+local	ildisPrintHeader	extraout_r4	r4AfterCall	INFERRED	Ghidra pseudo-register: extraout_r4 (a register the function reads without having written it; no source-level role)
+local	ildisPrintSourceOperand	extraout_r4	r4AfterCall	INFERRED	Ghidra pseudo-register: extraout_r4 (a register the function reads without having written it; no source-level role)
+local	ildisPrintSourceOperand	in_r10	staleArgR10	INFERRED	Ghidra pseudo-register: in_r10 (a register the function reads without having written it; no source-level role)
+local	ildisPrintDestinationOperand	extraout_r4	r4AfterCall	INFERRED	Ghidra pseudo-register: extraout_r4 (a register the function reads without having written it; no source-level role)
+local	ildisPrintDestAnd3Sources	extraout_r4	r4AfterCall	INFERRED	Ghidra pseudo-register: extraout_r4 (a register the function reads without having written it; no source-level role)
+local	ildisPrintDestAnd3Sources	extraout_r4_00	r4AfterCall2	INFERRED	Ghidra pseudo-register: extraout_r4_00 (a register the function reads without having written it; no source-level role)
+local	ildisPrintDestAnd3Sources	extraout_r4_01	r4AfterCall3	INFERRED	Ghidra pseudo-register: extraout_r4_01 (a register the function reads without having written it; no source-level role)
+local	ildisPrintDestAnd3Sources	extraout_r4_02	r4AfterCall4	INFERRED	Ghidra pseudo-register: extraout_r4_02 (a register the function reads without having written it; no source-level role)
+local	ildisPrintDestAnd2Sources	extraout_r4	r4AfterCall	INFERRED	Ghidra pseudo-register: extraout_r4 (a register the function reads without having written it; no source-level role)
+local	ildisPrintDestAnd2Sources	extraout_r4_00	r4AfterCall2	INFERRED	Ghidra pseudo-register: extraout_r4_00 (a register the function reads without having written it; no source-level role)
+local	ildisPrintDestAnd2Sources	extraout_r4_01	r4AfterCall3	INFERRED	Ghidra pseudo-register: extraout_r4_01 (a register the function reads without having written it; no source-level role)
+local	ildisPrintDestAnd1Source	extraout_r4	r4AfterCall	INFERRED	Ghidra pseudo-register: extraout_r4 (a register the function reads without having written it; no source-level role)
+local	ildisPrintDestAnd1Source	extraout_r4_00	r4AfterCall2	INFERRED	Ghidra pseudo-register: extraout_r4_00 (a register the function reads without having written it; no source-level role)
+local	ildisPrintProgram	extraout_r4	r4AfterCall	INFERRED	Ghidra pseudo-register: extraout_r4 (a register the function reads without having written it; no source-level role)
+local	ildisPrintProgram	extraout_r4_00	r4AfterCall2	INFERRED	Ghidra pseudo-register: extraout_r4_00 (a register the function reads without having written it; no source-level role)
+local	ildisPrintProgram	in_r6	staleArgR6	INFERRED	Ghidra pseudo-register: in_r6 (a register the function reads without having written it; no source-level role)
+local	ildisPrintProgram	in_r7	staleArgR7	INFERRED	Ghidra pseudo-register: in_r7 (a register the function reads without having written it; no source-level role)
+local	ildisPrintProgram	in_r8	staleArgR8	INFERRED	Ghidra pseudo-register: in_r8 (a register the function reads without having written it; no source-level role)
+local	ildisPrintProgram	in_r9	staleArgR9	INFERRED	Ghidra pseudo-register: in_r9 (a register the function reads without having written it; no source-level role)
+local	ildisPrintProgram	in_r10	staleArgR10	INFERRED	Ghidra pseudo-register: in_r10 (a register the function reads without having written it; no source-level role)
+local	ildisDisassembleBody	extraout_r4	r4AfterCall	INFERRED	Ghidra pseudo-register: extraout_r4 (a register the function reads without having written it; no source-level role)
+local	FUN_000e2094	in_r7	staleArgR7	INFERRED	Ghidra pseudo-register: in_r7 (a register the function reads without having written it; no source-level role)
+local	FUN_000e2094	in_r8	staleArgR8	INFERRED	Ghidra pseudo-register: in_r8 (a register the function reads without having written it; no source-level role)
+local	MachineCodeWriter__encodeProgram	in_r8	staleArgR8	INFERRED	Ghidra pseudo-register: in_r8 (a register the function reads without having written it; no source-level role)
+local	MachineCodeWriter__encodeProgram	in_r9	staleArgR9	INFERRED	Ghidra pseudo-register: in_r9 (a register the function reads without having written it; no source-level role)
+local	MachineCodeWriter__encodeProgram	in_r10	staleArgR10	INFERRED	Ghidra pseudo-register: in_r10 (a register the function reads without having written it; no source-level role)
+local	ILReader__nextInstruction	in_r8	staleArgR8	INFERRED	Ghidra pseudo-register: in_r8 (a register the function reads without having written it; no source-level role)
+local	LoopHeader__verify	extraout_r4	r4AfterCall	INFERRED	Ghidra pseudo-register: extraout_r4 (a register the function reads without having written it; no source-level role)
+local	Block__ctor_e9d68	extraout_r4	r4AfterCall	INFERRED	Ghidra pseudo-register: extraout_r4 (a register the function reads without having written it; no source-level role)
+local	Block__ctor_e9d68	in_r5	staleArgR5	INFERRED	Ghidra pseudo-register: in_r5 (a register the function reads without having written it; no source-level role)
+local	Block__ctor_e9d68	in_r6	staleArgR6	INFERRED	Ghidra pseudo-register: in_r6 (a register the function reads without having written it; no source-level role)
+local	Block__ctor_e9d68	in_r7	staleArgR7	INFERRED	Ghidra pseudo-register: in_r7 (a register the function reads without having written it; no source-level role)
+local	Block__ctor_e9f00	extraout_r4	r4AfterCall	INFERRED	Ghidra pseudo-register: extraout_r4 (a register the function reads without having written it; no source-level role)
+local	Block__ctor_e9f00	in_r5	staleArgR5	INFERRED	Ghidra pseudo-register: in_r5 (a register the function reads without having written it; no source-level role)
+local	Block__ctor_e9f00	in_r6	staleArgR6	INFERRED	Ghidra pseudo-register: in_r6 (a register the function reads without having written it; no source-level role)
+local	Block__ctor_e9f00	in_r7	staleArgR7	INFERRED	Ghidra pseudo-register: in_r7 (a register the function reads without having written it; no source-level role)
+local	Block__ctor_ea020	extraout_r4	r4AfterCall	INFERRED	Ghidra pseudo-register: extraout_r4 (a register the function reads without having written it; no source-level role)
+local	Block__ctor_ea020	in_r5	staleArgR5	INFERRED	Ghidra pseudo-register: in_r5 (a register the function reads without having written it; no source-level role)
+local	Block__ctor_ea020	in_r6	staleArgR6	INFERRED	Ghidra pseudo-register: in_r6 (a register the function reads without having written it; no source-level role)
+local	Block__ctor_ea020	in_r7	staleArgR7	INFERRED	Ghidra pseudo-register: in_r7 (a register the function reads without having written it; no source-level role)
+local	Block__ctor_ea020	in_r8	staleArgR8	INFERRED	Ghidra pseudo-register: in_r8 (a register the function reads without having written it; no source-level role)
+local	Block__ctor_ea148	extraout_r4	r4AfterCall	INFERRED	Ghidra pseudo-register: extraout_r4 (a register the function reads without having written it; no source-level role)
+local	Block__ctor_ea148	in_r5	staleArgR5	INFERRED	Ghidra pseudo-register: in_r5 (a register the function reads without having written it; no source-level role)
+local	Block__ctor_ea148	in_r6	staleArgR6	INFERRED	Ghidra pseudo-register: in_r6 (a register the function reads without having written it; no source-level role)
+local	Block__ctor_ea148	in_r7	staleArgR7	INFERRED	Ghidra pseudo-register: in_r7 (a register the function reads without having written it; no source-level role)
+local	Block__ctor_ea148	in_r8	staleArgR8	INFERRED	Ghidra pseudo-register: in_r8 (a register the function reads without having written it; no source-level role)
+local	HwLimits__vslot43_prependDefaultMov	fparam_1	staleFprArg1	INFERRED	Ghidra pseudo-register: fparam_1 (a register the function reads without having written it; no source-level role)
+local	Program__beginPass	extraout_r4	r4AfterCall	INFERRED	Ghidra pseudo-register: extraout_r4 (a register the function reads without having written it; no source-level role)
+local	FUN_000ef498	extraout_r4	r4AfterCall	INFERRED	Ghidra pseudo-register: extraout_r4 (a register the function reads without having written it; no source-level role)
+local	FUN_000ef498	extraout_r4_00	r4AfterCall2	INFERRED	Ghidra pseudo-register: extraout_r4_00 (a register the function reads without having written it; no source-level role)
+local	FUN_000f1d7c	in_r8	staleArgR8	INFERRED	Ghidra pseudo-register: in_r8 (a register the function reads without having written it; no source-level role)
+local	FUN_000f29f4	extraout_r4	r4AfterCall	INFERRED	Ghidra pseudo-register: extraout_r4 (a register the function reads without having written it; no source-level role)
+local	FUN_000f29f4	in_r5	staleArgR5	INFERRED	Ghidra pseudo-register: in_r5 (a register the function reads without having written it; no source-level role)
+local	FUN_000f29f4	in_r6	staleArgR6	INFERRED	Ghidra pseudo-register: in_r6 (a register the function reads without having written it; no source-level role)
+local	FUN_000f29f4	in_r7	staleArgR7	INFERRED	Ghidra pseudo-register: in_r7 (a register the function reads without having written it; no source-level role)
+local	FUN_000f29f4	in_r8	staleArgR8	INFERRED	Ghidra pseudo-register: in_r8 (a register the function reads without having written it; no source-level role)
+local	FUN_000f60c4	in_r9	staleArgR9	INFERRED	Ghidra pseudo-register: in_r9 (a register the function reads without having written it; no source-level role)
+local	FUN_000f60c4	in_r10	staleArgR10	INFERRED	Ghidra pseudo-register: in_r10 (a register the function reads without having written it; no source-level role)
+local	IRInst__makeLiteralVec4Float	fparam_1	staleFprArg1	INFERRED	Ghidra pseudo-register: fparam_1 (a register the function reads without having written it; no source-level role)
+local	IRInst__makeLiteralVec4Float	fparam_2	staleFprArg2	INFERRED	Ghidra pseudo-register: fparam_2 (a register the function reads without having written it; no source-level role)
+local	IRInst__makeLiteralVec4Float	fparam_3	staleFprArg3	INFERRED	Ghidra pseudo-register: fparam_3 (a register the function reads without having written it; no source-level role)
+local	IRInst__makeLiteralVec4Float	fparam_4	staleFprArg4	INFERRED	Ghidra pseudo-register: fparam_4 (a register the function reads without having written it; no source-level role)
+local	Program__applySourceTokenToOperand	in_r8	staleArgR8	INFERRED	Ghidra pseudo-register: in_r8 (a register the function reads without having written it; no source-level role)
+local	FUN_000f9140	in_r6	staleArgR6	INFERRED	Ghidra pseudo-register: in_r6 (a register the function reads without having written it; no source-level role)
+local	FUN_000f9140	in_r7	staleArgR7	INFERRED	Ghidra pseudo-register: in_r7 (a register the function reads without having written it; no source-level role)
+local	FUN_000f9140	in_r8	staleArgR8	INFERRED	Ghidra pseudo-register: in_r8 (a register the function reads without having written it; no source-level role)
+local	FUN_000f9a58	fparam_1	staleFprArg1	INFERRED	Ghidra pseudo-register: fparam_1 (a register the function reads without having written it; no source-level role)
+local	FUN_000fb3d4	fparam_1	staleFprArg1	INFERRED	Ghidra pseudo-register: fparam_1 (a register the function reads without having written it; no source-level role)
+local	FUN_000fb3d4	fparam_2	staleFprArg2	INFERRED	Ghidra pseudo-register: fparam_2 (a register the function reads without having written it; no source-level role)
+local	FUN_000fb3d4	fparam_3	staleFprArg3	INFERRED	Ghidra pseudo-register: fparam_3 (a register the function reads without having written it; no source-level role)
+local	FUN_000fb3d4	fparam_4	staleFprArg4	INFERRED	Ghidra pseudo-register: fparam_4 (a register the function reads without having written it; no source-level role)
+local	Block__dtor	iVar2	vectorHeader	INFERRED	vector header freed in turn: this[0x35], [0x34], [0x3d], [0x3e], [0x31]; the header sits at +4 of its arena block
+local	Block__dtor	puVar1	baseVtable	INFERRED	vtable of the DListNode base (PTR_DAT_001e8b48 + 8) stored back before the node members are cleared
+local	Block__dtor_ea270	iVar2	vectorHeader	INFERRED	vector header freed in turn: this[0x35], [0x34], [0x3d], [0x3e], [0x31]; the header sits at +4 of its arena block
+local	Block__dtor_ea270	puVar1	baseVtable	INFERRED	vtable of the DListNode base (PTR_DAT_001e8b48 + 8) stored back before the node members are cleared
+local	Block__deleting_dtor	iVar3	vectorHeader	INFERRED	vector header freed in turn: this[0x35], [0x34], [0x3d], [0x3e], [0x31]; the header sits at +4 of its arena block
+local	Block__deleting_dtor	puVar1	baseVtable	INFERRED	vtable of the DListNode base (PTR_DAT_001e8b48 + 8) stored back before the node members are cleared
+local	Block__deleting_dtor	puVar2	arenaBlockStart	INFERRED	start of the arena block that held the object (this - 1); the arena cursor is rolled back when it is the last allocation
+local	Block__ctor_e9d68	iVar2	compiler	INFERRED	compiler of the source block (+0xa8)
+local	Block__ctor_e9d68	iVar4	blockSerial	INFERRED	compiler block id counter (+0x32c) before the increment: unique id of the new block (this[0x2c])
+local	Block__ctor_e9f00	iVar2	compiler	INFERRED	compiler of the source block (+0xa8)
+local	Block__ctor_e9f00	iVar4	blockSerial	INFERRED	compiler block id counter (+0x32c) before the increment: unique id of the new block (this[0x2c])
+use	ffpsEmitTexEnvCombine	bVar1	notLastWord	INFERRED	loop condition while the four source arrays are cleared	^\s*bVar1\ =\ iVar6\ !=\ 8;$	+1
+use	ffpsEmitTexEnvCombine	bVar1	notLastWord	INFERRED	loop condition while the four source arrays are cleared	^\s*\}\ while\ \(bVar1\);$	+1
+use	ffpsEmitTexEnvCombine	uVar4	combineAlphaMode	INFERRED	GL_COMBINE_ALPHA function of the unit record (+0x452): 0x1e01 replace, 0x2100 modulate, 0x104 add, 0x8574 add-signed, 0x8575 interpolate, ...	^\s*uVar4\ =\ \*\(ushort\ \*\)\(iVar6\ \+\ 0x452\);$	+1
+use	ffpsEmitTexEnvCombine	uVar4	combineAlphaMode	INFERRED	GL_COMBINE_ALPHA function of the unit record (+0x452): 0x1e01 replace, 0x2100 modulate, 0x104 add, 0x8574 add-signed, 0x8575 interpolate, ...	^\s*if\ \(uVar4\ ==\ 0x8574\)\ \{$	+1
+use	ffpsEmitTexEnvCombine	uVar4	combineAlphaMode	INFERRED	GL_COMBINE_ALPHA function of the unit record (+0x452): 0x1e01 replace, 0x2100 modulate, 0x104 add, 0x8574 add-signed, 0x8575 interpolate, ...	^\s*else\ if\ \(uVar4\ <\ 0x8575\)\ \{$	+2
+use	ffpsEmitTexEnvCombine	uVar4	combineAlphaMode	INFERRED	GL_COMBINE_ALPHA function of the unit record (+0x452): 0x1e01 replace, 0x2100 modulate, 0x104 add, 0x8574 add-signed, 0x8575 interpolate, ...	^\s*if\ \(uVar4\ <\ 0x1e02\)\ \{$	+2
+use	ffpsEmitTexEnvCombine	uVar4	combineAlphaMode	INFERRED	GL_COMBINE_ALPHA function of the unit record (+0x452): 0x1e01 replace, 0x2100 modulate, 0x104 add, 0x8574 add-signed, 0x8575 interpolate, ...	^\s*else\ if\ \(uVar4\ ==\ 0x2100\)\ \{$	+1
+use	ffpsEmitTexEnvCombine	uVar4	combineAlphaMode	INFERRED	GL_COMBINE_ALPHA function of the unit record (+0x452): 0x1e01 replace, 0x2100 modulate, 0x104 add, 0x8574 add-signed, 0x8575 interpolate, ...	^\s*if\ \(uVar4\ !=\ 0x84e7\)\ goto\ LAB_000d6fbc;$	+1
+use	ffpsEmitTexEnvCombine	uVar4	combineAlphaMode	INFERRED	GL_COMBINE_ALPHA function of the unit record (+0x452): 0x1e01 replace, 0x2100 modulate, 0x104 add, 0x8574 add-signed, 0x8575 interpolate, ...	^\s*else\ if\ \(uVar4\ ==\ 0x8744\)\ \{$	+1
+use	ffpsEmitTexEnvCombine	uVar4	combineAlphaMode	INFERRED	GL_COMBINE_ALPHA function of the unit record (+0x452): 0x1e01 replace, 0x2100 modulate, 0x104 add, 0x8574 add-signed, 0x8575 interpolate, ...	^\s*else\ if\ \(uVar4\ <\ 0x8745\)\ \{$	+2
+use	ffpsEmitTexEnvCombine	uVar4	combineAlphaMode	INFERRED	GL_COMBINE_ALPHA function of the unit record (+0x452): 0x1e01 replace, 0x2100 modulate, 0x104 add, 0x8574 add-signed, 0x8575 interpolate, ...	^\s*else\ if\ \(uVar4\ ==\ 0x8745\)\ \{$	+1
+use	ffpsEmitTexEnvCombine	uVar4	combineAlphaMode	INFERRED	GL_COMBINE_ALPHA function of the unit record (+0x452): 0x1e01 replace, 0x2100 modulate, 0x104 add, 0x8574 add-signed, 0x8575 interpolate, ...	^\s*if\ \(uVar4\ !=\ 0x8746\)\ goto\ LAB_000d6fbc;$	+1
+use	ffpsEmitTexEnvCombine	uVar4	combineAlphaMode	INFERRED	GL_COMBINE_ALPHA function of the unit record (+0x452): 0x1e01 replace, 0x2100 modulate, 0x104 add, 0x8574 add-signed, 0x8575 interpolate, ...	^\s*if\ \(uVar4\ ==\ 0x86af\)\ \{$	+1
+use	ffpsEmitTexEnvCombine	uVar4	combineAlphaMode	INFERRED	GL_COMBINE_ALPHA function of the unit record (+0x452): 0x1e01 replace, 0x2100 modulate, 0x104 add, 0x8574 add-signed, 0x8575 interpolate, ...	^\s*else\ if\ \(\(fVar3\ !=\ FLOAT_001aa104\)\ \&\&\ \(uVar4\ !=\ 0x8741\)\)\ \{$	+1
+use	ffpsEmitTexEnvCombine	uVar8	combineRgbMode	INFERRED	GL_COMBINE_RGB function of the unit record (+0x454): selects the IL opcode and argument order	^\s*uVar8\ =\ \(uint\)\*\(ushort\ \*\)\(iVar6\ \+\ 0x454\);$	+1
+use	ffpsEmitTexEnvCombine	uVar8	combineRgbMode	INFERRED	GL_COMBINE_RGB function of the unit record (+0x454): selects the IL opcode and argument order	^\s*if\ \(uVar8\ <\ 0x86b0\)\ \{$	+3
+use	ffpsEmitTexEnvCombine	uVar8	combineRgbMode	INFERRED	GL_COMBINE_RGB function of the unit record (+0x454): selects the IL opcode and argument order	^\s*iVar9\ =\ uVar8\ \-\ 0x10000;$	+1
+use	ffpsEmitTexEnvCombine	uVar8	combineRgbMode	INFERRED	GL_COMBINE_RGB function of the unit record (+0x454): selects the IL opcode and argument order	^\s*else\ if\ \(uVar8\ <\ 0x2101\)\ \{$	+2
+use	ffpsEmitTexEnvCombine	uVar8	combineRgbMode	INFERRED	GL_COMBINE_RGB function of the unit record (+0x454): selects the IL opcode and argument order	^\s*if\ \(uVar8\ !=\ 0x1e01\)\ goto\ LAB_000d6534;$	+1
+use	ffpsEmitTexEnvCombine	uVar8	combineRgbMode	INFERRED	GL_COMBINE_RGB function of the unit record (+0x454): selects the IL opcode and argument order	^\s*else\ if\ \(uVar8\ ==\ 0x8574\)\ \{$	+1
+use	ffpsEmitTexEnvCombine	uVar8	combineRgbMode	INFERRED	GL_COMBINE_RGB function of the unit record (+0x454): selects the IL opcode and argument order	^\s*else\ if\ \(uVar8\ ==\ 0x8575\)\ \{$	+1
+use	ffpsEmitTexEnvCombine	uVar8	combineRgbMode	INFERRED	GL_COMBINE_RGB function of the unit record (+0x454): selects the IL opcode and argument order	^\s*if\ \(uVar8\ !=\ 0x84e7\)\ goto\ LAB_000d6534;$	+1
+use	ffpsEmitTexEnvCombine	uVar8	combineRgbMode	INFERRED	GL_COMBINE_RGB function of the unit record (+0x454): selects the IL opcode and argument order	^\s*iVar9\ =\ uVar8\ \-\ 0x10000;$@2	+1
+use	ffpsEmitTexEnvCombine	uVar8	combineRgbMode	INFERRED	GL_COMBINE_RGB function of the unit record (+0x454): selects the IL opcode and argument order	^\s*else\ if\ \(uVar8\ ==\ 0x8744\)\ \{$	+1
+use	ffpsEmitTexEnvCombine	uVar8	combineRgbMode	INFERRED	GL_COMBINE_RGB function of the unit record (+0x454): selects the IL opcode and argument order	^\s*else\ if\ \(uVar8\ <\ 0x8745\)\ \{$	+2
+use	ffpsEmitTexEnvCombine	uVar8	combineRgbMode	INFERRED	GL_COMBINE_RGB function of the unit record (+0x454): selects the IL opcode and argument order	^\s*iVar9\ =\ uVar8\ \-\ 0x10000;$@3	+1
+use	ffpsEmitTexEnvCombine	uVar8	combineRgbMode	INFERRED	GL_COMBINE_RGB function of the unit record (+0x454): selects the IL opcode and argument order	^\s*else\ if\ \(uVar8\ ==\ 0x8745\)\ \{$	+1
+use	ffpsEmitTexEnvCombine	uVar8	combineRgbMode	INFERRED	GL_COMBINE_RGB function of the unit record (+0x454): selects the IL opcode and argument order	^\s*if\ \(uVar8\ !=\ 0x8746\)\ goto\ LAB_000d6534;$	+1
+use	ffpsEmitTexEnvCombine	uVar8	combineRgbMode	INFERRED	GL_COMBINE_RGB function of the unit record (+0x454): selects the IL opcode and argument order	^\s*if\ \(\(\(fVar3\ ==\ FLOAT_001aa104\)\ \|\|\ \(uVar8\ ==\ 0x8740\)\)\ \|\|\ \(uVar8\ ==\ 0x8741\)\)\ goto\ LAB_000d6840;$	+1
+use	ffpsEmitTexEnvCombine	iVar5	argSlot	INFERRED	index of the next source taken from argOrder	^\s*iVar5\ =\ \*piVar12;$	+1
+use	ffpsEmitTexEnvCombine	iVar5	argSlot	INFERRED	index of the next source taken from argOrder	^\s*uVar14\ =\ local_98\[iVar5\];$	+1
+use	ffpsEmitTexEnvCombine	iVar5	argSlot	INFERRED	index of the next source taken from argOrder	^\s*if\ \(\(local_98\[iVar5\]\ \&\ 0x400000\)\ !=\ 0\)\ \{$	+2
+use	ffpsEmitTexEnvCombine	piVar12	argOrderCursor	INFERRED	walks the argOrder array	^\s*piVar12\ =\ local_68;$	+1
+use	ffpsEmitTexEnvCombine	piVar12	argOrderCursor	INFERRED	walks the argOrder array	^\s*iVar5\ =\ \*piVar12;$	+2
+use	ffpsEmitTexEnvCombine	piVar12	argOrderCursor	INFERRED	walks the argOrder array	^\s*piVar12\ =\ local_68;$@2	+1
+use	ffpsEmitTexEnvCombine	piVar12	argOrderCursor	INFERRED	walks the argOrder array	^\s*iVar10\ =\ \*piVar12;$	+2
+use	ffpsEmitTexEnvCombine	uVar14	rgbSourceToken	INFERRED	source token emitted for the next RGB argument	^\s*uVar14\ =\ local_98\[iVar5\];$	+1
+use	ffpsEmitTexEnvCombine	uVar14	rgbSourceToken	INFERRED	source token emitted for the next RGB argument	^\s*\*\(uint\ \*\)\(uVar8\ \*\ 4\ \+\ \*\(int\ \*\)\(param_2\ \+\ 0xc\)\)\ =\ uVar14;$	+1
+use	ffpsEmitTexEnvCombine	uVar14	rgbSourceSwizzle	INFERRED	extended swizzle word emitted after the token (bit 0x400000)	^\s*uVar14\ =\ local_8c\[iVar5\];$	+1
+use	ffpsEmitTexEnvCombine	uVar14	rgbSourceSwizzle	INFERRED	extended swizzle word emitted after the token (bit 0x400000)	^\s*\*\(uint\ \*\)\(uVar8\ \*\ 4\ \+\ \*\(int\ \*\)\(param_2\ \+\ 0xc\)\)\ =\ uVar14;$@2	+1
+use	ffpsEmitTexEnvCombine	uVar14	alphaSourceToken	INFERRED	source token emitted for the next alpha argument	^\s*uVar14\ =\ local_80\[iVar10\];$	+1
+use	ffpsEmitTexEnvCombine	uVar14	alphaSourceToken	INFERRED	source token emitted for the next alpha argument	^\s*\*\(uint\ \*\)\(uVar8\ \*\ 4\ \+\ \*\(int\ \*\)\(param_2\ \+\ 0xc\)\)\ =\ uVar14;$@3	+1
+use	ffpsEmitTexEnvCombine	uVar14	alphaSourceSwizzle	INFERRED	extended swizzle word emitted after the token (bit 0x400000)	^\s*uVar14\ =\ local_58\[iVar10\];$	+1
+use	ffpsEmitTexEnvCombine	uVar14	alphaSourceSwizzle	INFERRED	extended swizzle word emitted after the token (bit 0x400000)	^\s*\*\(uint\ \*\)\(uVar8\ \*\ 4\ \+\ \*\(int\ \*\)\(param_2\ \+\ 0xc\)\)\ =\ uVar14;$@4	+1
+local	ffpsEmitTexEnvCombine	local_80	alphaSrcTokens	INFERRED	source tokens of the three alpha arguments (the third is auStack_78)
+local	ffpsEmitTexEnvCombine	auStack_78	alphaSrcToken2	INFERRED	third alpha source token
+local	ffpsEmitTexEnvCombine	local_74	alphaSwizzle0	INFERRED	swizzle word of the first alpha argument (alphaSwizzlesPtr points here)
+local	ffpsEmitTexEnvCombine	local_70	alphaSwizzle1	INFERRED	swizzle word of the second alpha argument
+local	ffpsEmitTexEnvCombine	auStack_6c	alphaSwizzle2	INFERRED	swizzle word of the third alpha argument
+local	ffpsEmitTexEnvCombine	local_58	alphaSwizzlesPtr	INFERRED	pointer to the alpha swizzle words (local_74)
+use	FUN_000fd5c8	pppuVar42	destOperandToken	INFERRED	first token word of the destination operand array ilReader[0x19]	^\s*pppuVar42\ =\ \*\*param_2\[0x19\];$	+4
+use	FUN_000fd5c8	pppuVar42	destOperandToken	INFERRED	first token word of the destination operand array ilReader[0x19]	^\s*pppuVar42\ =\ \*\*param_2\[0x19\];$@2	+1
+use	FUN_000fd5c8	pppuVar42	destOperandToken	INFERRED	first token word of the destination operand array ilReader[0x19]	^\s*\(\(int\ \(\*\)\(\)\)FUN_000fafa4\)\(param_1,\(uint\)pppuVar42\ >>\ 0x10\ \&\ 0x3f,\(int\)sVar6,in_r6,in_r7\);$	+1
+use	FUN_000fd5c8	pppuVar42	source1Token	INFERRED	first token word of source operand 1 (ilReader[0x1b][1])	^\s*pppuVar42\ =\ \*param_2\[0x1b\]\[1\];$	+3
+use	FUN_000fd5c8	pppuVar42	source1Token	INFERRED	first token word of source operand 1 (ilReader[0x1b][1])	^\s*uVar27\ =\ FUN_000ec208\(param_1,\(uint\)pppuVar42\ >>\ 0x10\ \&\ 0x3f\);$	+1
+use	FUN_000fd5c8	pppuVar42	source0Token	INFERRED	first token word of source operand 0 (ilReader[0x1b][0])	^\s*pppuVar42\ =\ \*\*param_2\[0x1b\];$	+3
+use	FUN_000fd5c8	pppuVar42	source0Token	INFERRED	first token word of source operand 0 (ilReader[0x1b][0])	^\s*uVar46\ =\ FUN_000ec208\(param_1,\(uint\)pppuVar42\ >>\ 0x10\ \&\ 0x3f\);$	+1
+use	FUN_000fd5c8	pppuVar42	source0Token	INFERRED	first token word of source operand 0 (ilReader[0x1b][0])	^\s*pppuVar42\ =\ \*\*param_2\[0x1b\];$@2	+3
+use	FUN_000fd5c8	pppuVar42	source0Token	INFERRED	first token word of source operand 0 (ilReader[0x1b][0])	^\s*uVar10\ =\ \(uint\)pppuVar42\ >>\ 0x10\ \&\ 0x3f;$@2	+1
+use	FUN_000fd5c8	pppuVar42	source0Token	INFERRED	first token word of source operand 0 (ilReader[0x1b][0])	^\s*pppuVar42\ =\ \*\*param_2\[0x1b\];$@3	+3
+use	FUN_000fd5c8	pppuVar42	source0Token	INFERRED	first token word of source operand 0 (ilReader[0x1b][0])	^\s*uVar46\ =\ FUN_000ec208\(param_1,\(uint\)pppuVar42\ >>\ 0x10\ \&\ 0x3f\);$@2	+1
+use	FUN_000fd5c8	pppuVar42	source0Token	INFERRED	first token word of source operand 0 (ilReader[0x1b][0])	^\s*pppuVar42\ =\ \*\*param_2\[0x1b\];$@4	+3
+use	FUN_000fd5c8	pppuVar42	source0Token	INFERRED	first token word of source operand 0 (ilReader[0x1b][0])	^\s*uVar46\ =\ FUN_000ec208\(param_1,\(uint\)pppuVar42\ >>\ 0x10\ \&\ 0x3f\);$@3	+1
+use	FUN_000fd5c8	pppuVar42	source0Token	INFERRED	first token word of source operand 0 (ilReader[0x1b][0])	^\s*pppuVar42\ =\ \*\*param_2\[0x1b\];$@5	+2
+use	FUN_000fd5c8	pppuVar42	source0Token	INFERRED	first token word of source operand 0 (ilReader[0x1b][0])	^\s*\(piVar18,iVar34\ ==\ 0x6f,iVar43,\(uint\)pppuVar42\ >>\ 0x10\ \&\ 0x3f,0,$	+2
+use	FUN_000fd5c8	iVar20	sourceRegisterIndexB	INFERRED	register number of the source: 0xf for the special input type, otherwise the low 16 bits of the token's register field	^\s*iVar20\ =\ 0xf;$	+1
+use	FUN_000fd5c8	iVar20	sourceRegisterIndexB	INFERRED	register number of the source: 0xf for the special input type, otherwise the low 16 bits of the token's register field	^\s*iVar20\ =\ \(int\)\*\(short\ \*\)\(\(int\)\*param_2\[0x1b\]\ \+\ 2\);$	+1
+use	FUN_000fd5c8	iVar20	sourceRegisterIndexB	INFERRED	register number of the source: 0xf for the special input type, otherwise the low 16 bits of the token's register field	^\s*\*\(int\ \*\)\(iVar21\ \+\ 8\)\ =\ iVar20;$	+1
+use	FUN_000fd5c8	iVar20	sourceRegisterIndexB	INFERRED	register number of the source: 0xf for the special input type, otherwise the low 16 bits of the token's register field	^\s*iVar20\ =\ 0xf;$@2	+1
+use	FUN_000fd5c8	iVar20	sourceRegisterIndexB	INFERRED	register number of the source: 0xf for the special input type, otherwise the low 16 bits of the token's register field	^\s*iVar20\ =\ \(int\)\*\(short\ \*\)\(\(int\)\*param_2\[0x1b\]\ \+\ 2\);$@2	+1
+use	FUN_000fd5c8	iVar20	sourceRegisterIndexB	INFERRED	register number of the source: 0xf for the special input type, otherwise the low 16 bits of the token's register field	^\s*\*\(int\ \*\)\(iVar43\ \+\ 8\)\ =\ iVar20;$@2	+1
+use	FUN_000fd5c8	iVar20	sourceRegisterIndexB	INFERRED	register number of the source: 0xf for the special input type, otherwise the low 16 bits of the token's register field	^\s*iVar20\ =\ 0xf;$@3	+1
+use	FUN_000fd5c8	iVar20	sourceRegisterIndexB	INFERRED	register number of the source: 0xf for the special input type, otherwise the low 16 bits of the token's register field	^\s*iVar20\ =\ \(int\)\*\(short\ \*\)\(\(int\)ppppuVar45\ \+\ 2\);$	+1
+use	FUN_000fd5c8	iVar20	sourceRegisterIndexB	INFERRED	register number of the source: 0xf for the special input type, otherwise the low 16 bits of the token's register field	^\s*\(piVar18,\(uint\)\*ppppppuVar49\ >>\ 0x10\ \&\ 7,iVar20,$	+2

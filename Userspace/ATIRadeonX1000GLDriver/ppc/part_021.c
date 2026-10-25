@@ -543,8 +543,8 @@ int FUN_000e2094(compiler, param_2)
   int iVar2;
   undefined4 *puVar3;
   int argR6;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 staleArgR7;
+  undefined4 staleArgR8;
   char *pcVar4;
   undefined4 uVar5;
   undefined4 arenaAt374;
@@ -620,7 +620,7 @@ int FUN_000e2094(compiler, param_2)
     }
     deleteComputationsThatCouldBeVsEnabled = Compiler__isOptionEnabled(compiler,0x10);
     if ((int)((ulonglong)deleteComputationsThatCouldBeVsEnabled >> 0x20) != 0) {
-      ((int (*)())Program__forwardMulOperandToUsers)(*(undefined4 *)(compiler + COMP_currentProgram),(int)deleteComputationsThatCouldBeVsEnabled,iVar1,argR6,in_r7,in_r8,pcVar4);
+      ((int (*)())Program__forwardMulOperandToUsers)(*(undefined4 *)(compiler + COMP_currentProgram),(int)deleteComputationsThatCouldBeVsEnabled,iVar1,argR6,staleArgR7,staleArgR8,pcVar4);
     }
     *(uint *)(*(int *)(compiler + COMP_currentProgram) + 0x30) = *(uint *)(*(int *)(compiler + COMP_currentProgram) + 0x30) | 0x80
     ;
@@ -1478,9 +1478,9 @@ int MachineCodeWriter__encodeProgram(writer, outBuffer, outSize)
   undefined4 *predecessorSlot;
   uint sizeBeforeCompression;
   int compressEnabled;
-  undefined4 in_r8;
-  undefined4 in_r9;
-  undefined4 in_r10;
+  undefined4 staleArgR8;
+  undefined4 staleArgR9;
+  undefined4 staleArgR10;
   /* NOTE (issue #64): auStack_78/auStack_74/local_54 declared as 3 separate adjacent locals sharing one
    * real stock stack region. "local_54" is NOT a separate buffer after auStack_74 - per stock disassembly
    * (r1+0x3c=auStack_74, r1+0x5c=local_54, frame size 0xb0) it's simply the name for auStack_74's own
@@ -1550,7 +1550,7 @@ int MachineCodeWriter__encodeProgram(writer, outBuffer, outSize)
       ((int (*)())MachineCodeWriter__encodeProgram)(writer,outBuffer,outSize);
       ((int (*)())FUN_000e284c)(auStack_74);
       Compiler__logf(writer[2],"Compression : size reduced from %d to %d  (%%%d)\n",sizeBeforeCompression,
-                   writer[1],(int)((sizeBeforeCompression - writer[1]) * 100) / (int)sizeBeforeCompression,in_r8,in_r9,in_r10);
+                   writer[1],(int)((sizeBeforeCompression - writer[1]) * 100) / (int)sizeBeforeCompression,staleArgR8,staleArgR9,staleArgR10);
       goto LAB_000e392c;
     }
 LAB_000e3900:
