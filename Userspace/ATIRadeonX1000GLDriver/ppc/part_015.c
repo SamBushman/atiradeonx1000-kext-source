@@ -3670,26 +3670,26 @@ int noop_a6f80()
 }
 
 /* FUN_000a6f90 @ 0xa6f90 (168 bytes) */
-void FUN_000a6f90(float *param_1,float *param_2,double fpPassThrough1)
+void FUN_000a6f90(float *outVector,float *inVector,double fpPassThrough1)
 {
   float fVar1;
   float fVar2;
   double dVar3;
   
   fVar1 = FLOAT_001aa0d4;
-  fVar2 = *param_2;
-  dVar3 = (double)(param_2[2] * param_2[2] + fVar2 * fVar2 + param_2[1] * param_2[1]);
+  fVar2 = *inVector;
+  dVar3 = (double)(inVector[2] * inVector[2] + fVar2 * fVar2 + inVector[1] * inVector[1]);
   if (dVar3 <= (double)FLOAT_001aa0d4) {
-    param_1[2] = FLOAT_001aa0d4;
-    *param_1 = fVar1;
-    param_1[1] = fVar1;
+    outVector[2] = FLOAT_001aa0d4;
+    *outVector = fVar1;
+    outVector[1] = fVar1;
   }
   else {
     dVar3 = _sqrt(dVar3);
     fVar1 = (float)(DOUBLE_001aa200 / dVar3);
-    *param_1 = fVar2 * fVar1;
-    param_1[1] = fVar1 * param_2[1];
-    param_1[2] = fVar1 * param_2[2];
+    *outVector = fVar2 * fVar1;
+    outVector[1] = fVar1 * inVector[1];
+    outVector[2] = fVar1 * inVector[2];
   }
   return;
 }

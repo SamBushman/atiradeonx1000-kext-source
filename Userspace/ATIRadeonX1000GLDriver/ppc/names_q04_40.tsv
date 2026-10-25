@@ -1,0 +1,11 @@
+local	FUN_000a6f90	param_1	outVector	INFERRED	3 floats written: the input scaled by the reciprocal square root of its squared length (default vector when the length is 0)
+local	FUN_000a6f90	param_2	inVector	INFERRED	3 floats read (squared length = x*x+y*y+z*z) and normalised into param_1
+local	FUN_000b5010	param_1	glContext	INFERRED	same object as the glContext of the b5xxx emitters: write cursor/hook fields (+0x2454, +0x1e64), *(+4) is the GLD context, byte tables at 0x13b1
+local	FUN_000b5010	param_2	engineState	INFERRED	indexed at +0x1e2f/+0x1ea8/+0x1f1c, the range of engineState fields used by FUN_000a8630
+local	FUN_000b5010	param_3	slotRecord	INFERRED	*param_3 is passed as the first argument of FUN_000b4f50 and indexes the byte table at 0x10eb; words [0x2e]/[0x2f] are offsets
+local	FUN_000b50a0	param_1	glContext	INFERRED	same object as the glContext of the b5xxx emitters: write cursor/hook fields (+0x2454, +0x1e64), *(+4) is the GLD context, byte tables at 0x13b1
+local	FUN_000b50a0	param_2	engineState	INFERRED	indexed at +0x1e2f/+0x1ea8/+0x1f1c, the range of engineState fields used by FUN_000a8630
+local	FUN_000b50a0	param_3	slotRecord	INFERRED	*param_3 is passed as the first argument of FUN_000b4f50 and indexes the byte table at 0x10eb; words [0x2e]/[0x2f] are offsets
+local	FUN_000b51a0	param_1	glContext	INFERRED	same object as the glContext of the b5xxx emitters: write cursor/hook fields (+0x2454, +0x1e64), *(+4) is the GLD context, byte tables at 0x13b1
+local	FUN_000b51a0	param_2	engineState	INFERRED	indexed at +0x1e2f/+0x1ea8/+0x1f1c, the range of engineState fields used by FUN_000a8630
+local	FUN_000b51a0	param_3	slotRecord	INFERRED	*param_3 is passed as the first argument of FUN_000b4f50 and indexes the byte table at 0x10eb; words [0x2e]/[0x2f] are offsets
