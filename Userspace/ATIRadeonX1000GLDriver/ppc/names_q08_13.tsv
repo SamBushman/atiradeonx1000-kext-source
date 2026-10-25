@@ -1,0 +1,95 @@
+local	FUN_00186510	param_2	sourceInstRefA	INFERRED	pointer to the first source instruction (inst1 candidate)
+local	FUN_00186510	param_3	sourceInstRefB	INFERRED	pointer to the second source instruction (alternative inst1)
+use	FUN_00186510	bVar1	moreWords	INFERRED	loop continues while the word counter != 4	^\s*bVar1\ =\ iVar8\ !=\ 4;$	+1
+use	FUN_00186510	bVar1	moreWords	INFERRED	loop continues while the word counter != 4	^\s*\}\ while\ \(bVar1\);$	+1
+use	FUN_00186510	bVar1	selectsCompatible	INFERRED	true when every lane select of the extra-source operand is 4 or points at a 4 lane	^\s*bVar1\ =\ false;$	+1
+use	FUN_00186510	bVar1	selectsCompatible	INFERRED	true when every lane select of the extra-source operand is 4 or points at a 4 lane	^\s*bVar1\ =\ true;$	+1
+use	FUN_00186510	bVar1	selectsCompatible	INFERRED	true when every lane select of the extra-source operand is 4 or points at a 4 lane	^\s*if\ \(bVar1\)\ \{$	+1
+use	FUN_00186510	bVar1	moreLanes	INFERRED	lane counter != 3	^\s*bVar1\ =\ iVar12\ !=\ 3;$	+1
+use	FUN_00186510	bVar1	moreLanes	INFERRED	lane counter != 3	^\s*\}\ while\ \(bVar1\);$@2	+1
+use	FUN_00186510	bVar2	laneSelect	INFERRED	select byte of the destination lane	^\s*bVar2\ =\ \*\(byte\ \*\)\(\(int\)\&local_64\ \+\ iVar12\);$	+1
+use	FUN_00186510	bVar2	laneSelect	INFERRED	select byte of the destination lane	^\s*\*puVar11\ =\ \*\(undefined1\ \*\)\(\(uint\)bVar2\ \+\ iVar6\ \+\ 0x10\);$	+1
+local	FUN_00186510	local_3c	maskedSelect	INFERRED	result of SelectWord__maskUnused (select word with unused lanes masked)
+local	FUN_00186510	local_40	writeMaskOut	INFERRED	out-parameter of WriteMask__fromSelectWord
+local	FUN_00186510	local_44	maskedSelectOut	INFERRED	out-parameter-sized copy of the masked select word
+local	FUN_00186510	local_48	writeMaskOut2	INFERRED	out-parameter of WriteMask__fromSelectWord
+local	FUN_00186510	local_58	newSelects	INFERRED	per-operand select words collected for inst1
+local	FUN_00186510	uStack_5c	newSelectsBase	INFERRED	word before newSelects, indexed by operand number
+local	FUN_00186510	local_60	srcSelect1	INFERRED	select word of operand 1 of inst (swapped with srcSelect2 when operand 1 is the identity)
+local	FUN_00186510	local_78	srcSelect2	INFERRED	select word of operand 2 of inst
+local	FUN_00186510	local_64	destSelectBytes	INFERRED	destination select word of inst, later the select word of the other operand
+local	FUN_00186510	local_74	destSelect	INFERRED	select word of the destination operand of inst
+local	FUN_00186510	local_70	inst1DestSelect	INFERRED	select word of the destination operand of inst1
+local	FUN_00186510	local_6c	inst1ExtraSelect	INFERRED	select word of the extra operand of inst1 (default DAT_001b0224)
+local	FUN_00186510	local_68	mergedSelect	INFERRED	merged destination select word (default DAT_001b0220)
+use	FUN_00186510	puVar11	newSelectBytePtr	INFERRED	address of the byte lane within newSelects being filled	^\s*puVar11\ =\ \(undefined1\ \*\)\(\(int\)local_58\ \+\ iVar12\);$	+1
+use	FUN_00186510	puVar11	newSelectBytePtr	INFERRED	address of the byte lane within newSelects being filled	^\s*\*puVar11\ =\ \*\(undefined1\ \*\)\(\(uint\)bVar2\ \+\ iVar6\ \+\ 0x10\);$	+1
+use	FUN_00186510	puVar11	newSelectBytePtr	INFERRED	address of the byte lane within newSelects being filled	^\s*puVar11\ =\ puVar11\ \+\ 4;$	+1
+use	FUN_00186510	uVar3	defaultSelect	INFERRED	default select word DAT_001b0220	^\s*uVar3\ =\ DAT_001b0220;$	+1
+use	FUN_00186510	uVar3	defaultSelect	INFERRED	default select word DAT_001b0220	^\s*FUN_000f3340\(local_3c,uVar3,local_40\);$	+1
+use	FUN_00186510	uVar3	defaultSelect	INFERRED	default select word DAT_001b0220	^\s*for\ \(iVar5\ =\ 1;\ iVar12\ =\ \(\*\*\(code\ \*\*\)\(\*piVar9\ \+\ 0x14\)\)\(piVar9\),\ uVar3\ =\ DAT_001b0220,$	+2
+use	FUN_00186510	uVar3	defaultSelect	INFERRED	default select word DAT_001b0220	^\s*FUN_000f3340\(\&local_44,uVar3,local_48\);$	+1
+use	FUN_00186510	uVar3	result	INFERRED	return value: 1 when the select words were merged, 0 otherwise	^\s*uVar3\ =\ 1;$	+1
+use	FUN_00186510	uVar3	result	INFERRED	return value: 1 when the select words were merged, 0 otherwise	^\s*uVar3\ =\ 1;$@2	+1
+use	FUN_00186510	uVar3	result	INFERRED	return value: 1 when the select words were merged, 0 otherwise	^\s*uVar3\ =\ 0;$	+1
+use	FUN_00186510	uVar3	result	INFERRED	return value: 1 when the select words were merged, 0 otherwise	^\s*return\ uVar3;$	+1
+use	FUN_00186510	uVar7	maskProduct	INFERRED	byte-swapped AND of the two write masks	^\s*uVar7\ =\ \(local_74\ <<\ 0x18\ \|\ \(local_74\ >>\ 8\ \&\ 0xff\)\ <<\ 0x10\ \|\ \(local_74\ >>\ 0x10\ \&\ 0xff\)\ <<\ 8$	+2
+use	FUN_00186510	uVar7	maskProduct	INFERRED	byte-swapped AND of the two write masks	^\s*local_68\ =\ uVar7\ <<\ 0x18\ \|\ \(uVar7\ \&\ 0xff00\)\ <<\ 8\ \|\ uVar7\ >>\ 8\ \&\ 0xff00\ \|\ uVar7\ >>\ 0x18;$	+1
+use	FUN_00186510	uVar7	maskProduct	INFERRED	byte-swapped AND of the two write masks	^\s*uVar7\ =\ \(local_74\ <<\ 0x18\ \|\ \(local_74\ >>\ 8\ \&\ 0xff\)\ <<\ 0x10\ \|\ \(local_74\ >>\ 0x10\ \&\ 0xff\)\ <<\ 8$@2	+2
+use	FUN_00186510	uVar7	maskProduct	INFERRED	byte-swapped AND of the two write masks	^\s*local_68\ =\ uVar7\ <<\ 0x18\ \|\ \(uVar7\ \&\ 0xff00\)\ <<\ 8\ \|\ uVar7\ >>\ 8\ \&\ 0xff00\ \|\ uVar7\ >>\ 0x18;$@2	+1
+local	FUN_0018bc94	param_1	packStateRow	INFERRED	PackState (entry rows of three registers at +0x10, a row-used word at +0x30); advanced by 4 per row in the final scan
+local	FUN_0018bc94	param_2	depth	INFERRED	recursion depth 0..2: row of the PackState being placed
+local	FUN_0018bc94	param_3	slotTable	INFERRED	six register slots (two triples)
+local	FUN_0018bc94	param_4	fillCounts	INFERRED	per-slot fill counts of slotTable
+local	FUN_0018bc94	local_68	savedSlots	INFERRED	copy of slotTable[0..5] / fillCounts[0..5] restored when the placement fails
+use	FUN_0018bc94	bVar1	moreIterations	INFERRED	loop counter not yet at its last value	^\s*bVar1\ =\ iVar12\ !=\ 2;$	+1
+use	FUN_0018bc94	bVar1	moreIterations	INFERRED	loop counter not yet at its last value	^\s*\}\ while\ \(bVar1\);$	+1
+use	FUN_0018bc94	bVar1	moreIterations	INFERRED	loop counter not yet at its last value	^\s*bVar1\ =\ iVar12\ ==\ 2;$	+1
+use	FUN_0018bc94	bVar1	moreIterations	INFERRED	loop counter not yet at its last value	^\s*if\ \(bVar1\)\ \{$	+1
+use	FUN_0018bc94	bVar1	moreIterations	INFERRED	loop counter not yet at its last value	^\s*bVar1\ =\ iVar10\ !=\ 0xc;$	+1
+use	FUN_0018bc94	bVar1	moreIterations	INFERRED	loop counter not yet at its last value	^\s*\}\ while\ \(bVar1\);$@2	+1
+use	FUN_0018bc94	bVar1	moreIterations	INFERRED	loop counter not yet at its last value	^\s*bVar1\ =\ iVar7\ !=\ 2;$	+1
+use	FUN_0018bc94	bVar1	moreIterations	INFERRED	loop counter not yet at its last value	^\s*\}\ while\ \(bVar1\);$@3	+1
+use	FUN_0018bc94	iVar10	entryOffset	INFERRED	byte offset 0..0xc (step 0xc) over the three register groups	^\s*iVar10\ =\ 0;$	+1
+use	FUN_0018bc94	iVar10	entryOffset	INFERRED	byte offset 0..0xc (step 0xc) over the three register groups	^\s*bVar1\ =\ iVar10\ !=\ 0xc;$	+1
+use	FUN_0018bc94	iVar10	entryOffset	INFERRED	byte offset 0..0xc (step 0xc) over the three register groups	^\s*iVar10\ =\ iVar10\ \+\ 0xc;$	+1
+use	FUN_0018bc94	iVar3	testResult	INFERRED	RegKind__flagBit0 / virtual-call test result in the slot compatibility test	^\s*if\ \(\(\(\(piVar14\ ==\ \(int\ \*\)0x0\)\ \|\|\ \(piVar14\ ==\ \*\(int\ \*\*\)\(iVar7\ \+\ 0x18\)\)\)\ \|\|$	+24
+use	FUN_0018bc94	iVar3	testResult	INFERRED	RegKind__flagBit0 / virtual-call test result in the slot compatibility test	^\s*iVar3\ =\ \*piVar8\ \+\ \-1;$	+2
+use	FUN_0018bc94	iVar3	testResult	INFERRED	RegKind__flagBit0 / virtual-call test result in the slot compatibility test	^\s*iVar3\ =\ \*piVar8;$	+1
+use	FUN_0018bc94	iVar3	testResult	INFERRED	RegKind__flagBit0 / virtual-call test result in the slot compatibility test	^\s*if\ \(iVar3\ ==\ 0\)\ \{$	+1
+use	FUN_0018bc94	iVar3	placed	INFERRED	result of the recursive placement of the next row	^\s*iVar3\ =\ \(\(int\ \(\*\)\(\)\)FUN_0018bc94\)\(param_1,param_2\ \+\ 1,param_3,param_4\);$	+2
+use	FUN_0018bc94	iVar3	rowCursor	INFERRED	address of the current PackState row (param_1 + 0x10, step 4)	^\s*iVar3\ =\ param_1\ \+\ 0x10;$	+1
+use	FUN_0018bc94	iVar3	rowCursor	INFERRED	address of the current PackState row (param_1 + 0x10, step 4)	^\s*piVar13\ =\ \(int\ \*\)\(iVar3\ \+\ 8\);$	+1
+use	FUN_0018bc94	iVar3	rowCursor	INFERRED	address of the current PackState row (param_1 + 0x10, step 4)	^\s*iVar3\ =\ iVar3\ \+\ 4;$	+1
+use	FUN_0018bc94	iVar3	fillAfterUndo	INFERRED	fill count after the failed placement was undone	^\s*iVar3\ =\ \*piVar14;$	+2
+use	FUN_0018bc94	iVar3	fillAfterUndo	INFERRED	fill count after the failed placement was undone	^\s*if\ \(iVar3\ ==\ 0\)\ \{$@2	+1
+use	FUN_0018bc94	iVar5	testResult2	INFERRED	RegKind__flagBit0 / virtual-call test result	^\s*if\ \(\(\(int\ \*\)\*piVar2\ !=\ \(int\ \*\)0x0\)\ \&\&$	+12
+use	FUN_0018bc94	piVar13	entryPtr	INFERRED	address of the register entry of the current row (step 3 words)	^\s*piVar13\ =\ \(int\ \*\)\(iVar3\ \+\ 8\);$	+1
+use	FUN_0018bc94	piVar13	entryPtr	INFERRED	address of the register entry of the current row (step 3 words)	^\s*if\ \(\(\*\(int\ \*\)\(param_1\ \+\ 0x30\)\ ==\ 0\)\ \&\&\ \(\*piVar13\ !=\ 0\)\)\ \{$	+1
+use	FUN_0018bc94	piVar13	entryPtr	INFERRED	address of the register entry of the current row (step 3 words)	^\s*if\ \(\(\(int\ \*\)\*piVar2\ !=\ \(int\ \*\)0x0\)\ \&\&$	+12
+use	FUN_0018bc94	piVar13	entryPtr	INFERRED	address of the register entry of the current row (step 3 words)	^\s*piVar9\[iVar12\]\ =\ \*piVar13;$	+1
+use	FUN_0018bc94	piVar13	entryPtr	INFERRED	address of the register entry of the current row (step 3 words)	^\s*piVar13\ =\ piVar13\ \+\ 3;$	+1
+use	FUN_0018bc94	piVar15	candidateReg	INFERRED	register entry compared with the slot occupant	^\s*if\ \(\(\(int\ \*\)\*piVar2\ !=\ \(int\ \*\)0x0\)\ \&\&$	+12
+use	FUN_0018bc94	uVar4	placedFlag	INFERRED	return value: 1 when every row was placed	^\s*uVar4\ =\ 0;$	+1
+use	FUN_0018bc94	uVar4	placedFlag	INFERRED	return value: 1 when every row was placed	^\s*uVar4\ =\ 1;$	+1
+use	FUN_0018bc94	uVar4	placedFlag	INFERRED	return value: 1 when every row was placed	^\s*return\ uVar4;$	+1
+local	FUN_0018c980	param_1	packState	INFERRED	PackState: rows of register pairs at +0x18 / +0x24 (stride 4), row-used words at +0x30
+local	FUN_0018c980	param_2	regA	INFERRED	first register of the pair being placed
+local	FUN_0018c980	param_3	regB	INFERRED	second register of the pair being placed
+use	FUN_0018c980	bVar1	isLastRow	INFERRED	row counter reached 2	^\s*bVar1\ =\ iVar4\ ==\ 2;$	+1
+use	FUN_0018c980	bVar1	isLastRow	INFERRED	row counter reached 2	^\s*if\ \(bVar1\)\ goto\ LAB_0018cdb8;$	+1
+use	FUN_0018c980	bVar1	moreRows	INFERRED	row counter != 2	^\s*bVar1\ =\ iVar2\ !=\ 2;$	+1
+use	FUN_0018c980	bVar1	moreRows	INFERRED	row counter != 2	^\s*\}\ while\ \(bVar1\);$	+1
+use	FUN_0018c980	iVar5	displacedRegA	INFERRED	first register previously held by the chosen row	^\s*iVar5\ =\ \*\(int\ \*\)\(iVar6\ \+\ 0x18\);$	+1
+use	FUN_0018c980	iVar5	displacedRegA	INFERRED	first register previously held by the chosen row	^\s*if\ \(\(\(iVar5\ ==\ 0\)\ \|\|\ \(iVar6\ =\ \(\(int\ \(\*\)\(\)\)FUN_0018c7f4\)\(param_1,iVar5,0\),\ iVar6\ !=\ 0\)\)\ \&\&$	+2
+use	FUN_0018c980	iVar6	rowCursor	INFERRED	address of the current row of packState (step 4)	^\s*iVar6\ =\ param_1;$	+24
+use	FUN_0018c980	iVar6	rowCursor	INFERRED	address of the current row of packState (step 4)	^\s*iVar6\ =\ iVar6\ \+\ 4;$	+1
+use	FUN_0018c980	iVar6	rowPtr	INFERRED	address of the chosen row, then the flagBit0 / virtual-call test result	^\s*iVar6\ =\ iVar4\ \*\ 4\ \+\ param_1;$	+6
+use	FUN_0018c980	iVar6	rowPtr	INFERRED	address of the chosen row, then the flagBit0 / virtual-call test result	^\s*if\ \(\(piVar8\ !=\ \(int\ \*\)0x0\)\ \&\&$	+10
+use	FUN_0018c980	iVar6	rowPtr	INFERRED	address of the chosen row, then the flagBit0 / virtual-call test result	^\s*if\ \(\(piVar8\ !=\ \(int\ \*\)0x0\)\ \&\&$@2	+11
+use	FUN_0018c980	iVar6	rowPtr	INFERRED	address of the chosen row, then the flagBit0 / virtual-call test result	^\s*if\ \(\(\(iVar5\ ==\ 0\)\ \|\|\ \(iVar6\ =\ \(\(int\ \(\*\)\(\)\)FUN_0018c7f4\)\(param_1,iVar5,0\),\ iVar6\ !=\ 0\)\)\ \&\&$	+2
+use	FUN_0018c980	piVar8	slotReg	INFERRED	register held by a later row, compared with the placed pair	^\s*piVar8\ =\ \(int\ \*\)\*piVar7;$	+11
+use	FUN_0018c980	piVar8	slotReg	INFERRED	register held by a later row, compared with the placed pair	^\s*piVar8\ =\ \(int\ \*\)piVar7\[3\];$	+12
+use	FUN_0018c980	uVar3	placed	INFERRED	return value: 1 when the pair is placed or already present	^\s*uVar3\ =\ 1;$	+1
+use	FUN_0018c980	uVar3	placed	INFERRED	return value: 1 when the pair is placed or already present	^\s*uVar3\ =\ 0;$	+1
+use	FUN_0018c980	uVar3	placed	INFERRED	return value: 1 when the pair is placed or already present	^\s*return\ uVar3;$	+1
