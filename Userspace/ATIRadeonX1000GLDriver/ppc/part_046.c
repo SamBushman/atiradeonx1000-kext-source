@@ -217,7 +217,7 @@ int ValueKey__fillSourceLaneUsage(ctx)
     inst2 = *(undefined4 *)(ctx + 0xb0);
     uVar4 = *(undefined4 *)(*(int *)(ctx + 0x238) + 0x6c4);
     callResult = IRInst__getOperandRecord(inst2,0);
-    FUN_000f3c30(local_28,inst2,loopIndex,uVar4,*(undefined4 *)(callResult + 0x10));
+    IRInst__computeSourceLaneMask(local_28,inst2,loopIndex,uVar4,*(undefined4 *)(callResult + 0x10));
     a0 = *(int **)(ctx + 0xb0);
     *(undefined4 *)(iVar5 + 0x228) = local_28[0];
     loopIndex = loopIndex + 1;

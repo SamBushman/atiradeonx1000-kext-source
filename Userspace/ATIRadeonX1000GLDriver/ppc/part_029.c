@@ -867,7 +867,7 @@ int IRLoadConst__ctor_109614(this, param_2, compiler)
   this[0x25] = uVar1;
   this[0x20] = 1;
   this[0x21] = 0;
-  return FUN_000ef8f8(*(undefined4 *)(compiler + 0x6c4),this);
+  return Program__appendToVector3c8(*(undefined4 *)(compiler + 0x6c4),this);
 }
 
 /* IRLoadConst__ctor_1096bc @ 0x1096bc (112 bytes) */
@@ -886,7 +886,7 @@ int IRLoadConst__ctor_1096bc(this, param_2, compiler)
   this[0x25] = uVar1;
   this[0x20] = 1;
   this[0x21] = 0;
-  return FUN_000ef8f8(*(undefined4 *)(compiler + 0x6c4),this);
+  return Program__appendToVector3c8(*(undefined4 *)(compiler + 0x6c4),this);
 }
 
 /* IRLoadVertex__ctor_109764 @ 0x109764 (116 bytes) */
@@ -961,7 +961,7 @@ int IRLoadConst__ctor_109938(this, compiler)
   this[0x20] = 1;
   this[0x21] = 0;
   this[0x4b] = 0xffffffff;
-  return FUN_000ef8f8(*(undefined4 *)(compiler + 0x6c4),this);
+  return Program__appendToVector3c8(*(undefined4 *)(compiler + 0x6c4),this);
 }
 
 /* IRLoadConst__ctor_1099dc @ 0x1099dc (108 bytes) */
@@ -975,7 +975,7 @@ int IRLoadConst__ctor_1099dc(this, compiler)
   this[0x20] = 1;
   this[0x21] = 0;
   this[0x4b] = 0xffffffff;
-  return FUN_000ef8f8(*(undefined4 *)(compiler + 0x6c4),this);
+  return Program__appendToVector3c8(*(undefined4 *)(compiler + 0x6c4),this);
 }
 
 

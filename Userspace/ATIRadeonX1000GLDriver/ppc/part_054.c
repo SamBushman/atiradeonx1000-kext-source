@@ -895,7 +895,7 @@ int R520MachineAssembler__vslot25_assembleLoop(this, node, block, extra1, extra2
   ((int (*)())R520MachineAssembler__emitCompareToPredicate)(this,conditionNode,hasCondition,predecessor);
   iVar5 = *(int *)(node + 0x138);
   recordIndexBefore = DList__count(iVar5 + 0x90);
-  if ((recordIndexBefore < 3) && (recordIndexBefore = FUN_000e79e8(iVar5), recordIndexBefore != 0)) {
+  if ((recordIndexBefore < 3) && (recordIndexBefore = Block__hasSuccessors(iVar5), recordIndexBefore != 0)) {
     conditionNode = (int *)0x0;
     if (*(int *)(*(int *)(iVar5 + 0xd0) + 4) != 0) {
       conditionNode = *(int **)(*(int *)(iVar5 + 0xd0) + 8);
@@ -932,7 +932,7 @@ int R520MachineAssembler__vslot37_closeBranch(this, node)
   callResult = DList__count(stackVector + 0x90);
   a1 = (undefined4)callResult;
   if ((callResult < 0x300000000) &&
-     (uVar7 = FUN_000e79e8(stackVector), a1 = (undefined4)uVar7, (int)((ulonglong)uVar7 >> 0x20) != 0)) {
+     (uVar7 = Block__hasSuccessors(stackVector), a1 = (undefined4)uVar7, (int)((ulonglong)uVar7 >> 0x20) != 0)) {
     piVar1 = (int *)0x0;
     if (*(int *)(*(int *)(stackVector + 0xd0) + 4) != 0) {
       piVar1 = *(int **)(*(int *)(stackVector + 0xd0) + 8);

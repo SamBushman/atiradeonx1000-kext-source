@@ -4314,7 +4314,7 @@ int FUN_00138080(param_1)
   int iVar4;
   
   loopIndex = 1;
-  piVar1 = (int *)FUN_000ec5b8(param_1);
+  piVar1 = (int *)Program__getBlocksArray(param_1);
   while( true ) {
     piVar1 = piVar1 + 1;
     listCount = DList__count(param_1 + 0x37c);
@@ -4643,7 +4643,7 @@ int HwLimits__computeBlockLiveness(this, regCount, program, compiler)
   while( true ) {
     blockCount = DList__count(program + 0x37c);
     if (blockCount < blockIndex) {
-      puVar11 = (undefined4 *)FUN_000ec5b8(program);
+      puVar11 = (undefined4 *)Program__getBlocksArray(program);
       do {
         liveInChangedAny = false;
         blockOrdinal = 1;

@@ -4389,7 +4389,7 @@ LAB_001730b4:
         *(undefined4 *)(operandRecord + 0x10) = uVar2;
         Block__insertInstAfter(*(undefined4 *)(*(int *)(ctx + 0xb0) + 0x158),*(int *)(ctx + 0xb0),
                      inst);
-        FUN_000ed63c(*(undefined4 *)(*(int *)(ctx + 0x238) + 0x6c4),inst);
+        IRInst__bindOperandRegisters(*(undefined4 *)(*(int *)(ctx + 0x238) + 0x6c4),inst);
         return 1;
       }
     } while (loopIndex < 1);

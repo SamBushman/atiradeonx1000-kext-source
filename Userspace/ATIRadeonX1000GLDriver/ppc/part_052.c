@@ -1740,7 +1740,7 @@ int R300VMachineAssembler__vslot37_patchControlFlowTarget(this, node)
   
   conditionRegister = node[0x4e];
   callResult = DList__count(conditionRegister + 0x90);
-  if ((callResult < 3) && (callResult = FUN_000e79e8(conditionRegister), callResult != 0)) {
+  if ((callResult < 3) && (callResult = Block__hasSuccessors(conditionRegister), callResult != 0)) {
     lastEntryPtr = (int *)0x0;
     if (*(int *)(*(int *)(conditionRegister + 0xd0) + 4) != 0) {
       lastEntryPtr = *(int **)(*(int *)(conditionRegister + 0xd0) + 8);
@@ -3258,7 +3258,7 @@ int R520VMachineAssembler__vslot37_closeConditional(this, node, extra1, compiler
   
   conditionBlock = node[0x4e];
   callResult = DList__count(conditionBlock + 0x90);
-  if ((callResult < 3) && (callResult = FUN_000e79e8(conditionBlock), callResult != 0)) {
+  if ((callResult < 3) && (callResult = Block__hasSuccessors(conditionBlock), callResult != 0)) {
     firstElemSlot = (int *)0x0;
     if (*(int *)(*(int *)(conditionBlock + 0xd0) + 4) != 0) {
       firstElemSlot = *(int **)(*(int *)(conditionBlock + 0xd0) + 8);

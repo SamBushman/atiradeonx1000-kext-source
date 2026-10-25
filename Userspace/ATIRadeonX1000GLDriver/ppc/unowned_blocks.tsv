@@ -2875,9 +2875,9 @@ e0e04	e0e0c	millicode	FUN_000e0cd0	2
 e1480	e1484	millicode	Compiler__timerOutputFileName	1	
 e1a08	e1a0c	eh-pad	FUN_000e1920	1	__Unwind_Resume
 e1b30	e1b34	eh-pad	FUN_000e1a48	1	__Unwind_Resume
-e1bf0	e1bf4	millicode	FUN_000e1b70	1	
-e1c20	e1c24	eh-pad	FUN_000e1b70	1	__Unwind_Resume
-e2084	e2094	other	FUN_000e1fe4	4	
+e1bf0	e1bf4	millicode	Compiler__setHardwareFamily	1	
+e1c20	e1c24	eh-pad	Compiler__setHardwareFamily	1	__Unwind_Resume
+e2084	e2094	other	Compiler__releaseChipAndPools	4	
 e21b8	e21bc	millicode	FUN_000e2094	1	
 e21cc	e21ec	eh-pad	FUN_000e2094	8	0x193cc0,__Unwind_Resume
 e2884	e28f0	other	Block__accept	27	
@@ -2901,7 +2901,7 @@ e67b8	e67d0	table	ILReader__nextInstruction	6
 e7650	e7658	other	ILReader__nextInstruction	2	
 e86d0	e86f0	millicode	Block__verify	8	
 e87dc	e87e4	millicode	LoopHeader__verify	2	
-e89bc	e89dc	eh-pad	FUN_000e8938	8	0x193cc0,__Unwind_Resume
+e89bc	e89dc	eh-pad	Block__createEntryExitInsts	8	0x193cc0,__Unwind_Resume
 e8ad4	e8ad8	millicode	FUN_000e8a08	1	
 e8b20	e8b24	millicode	FUN_000e8a08	1	
 e8b6c	e8b70	millicode	FUN_000e8a08	1	
@@ -2975,10 +2975,10 @@ f293c	f2950	other	FUN_000f1d7c	5	0x193cc0
 f2960	f2974	other	FUN_000f1d7c	5	0x193cc0
 f2984	f2998	other	FUN_000f1d7c	5	0x193cc0
 f29b8	f29d0	eh-pad	FUN_000f1d7c	6	0x193cc0,__Unwind_Resume
-f3cf8	f3d38	table	FUN_000f3c30	16	
+f3cf8	f3d38	table	IRInst__computeSourceLaneMask	16	
 f40d4	f4114	table	FUN_000f403c	16	
 f513c	f515c	eh-pad	Compiler__getOrCreateLoadConstN	8	0x193cc0,__Unwind_Resume
-f6c50	f6c70	eh-pad	FUN_000f6a04	8	0x193cc0,__Unwind_Resume
+f6c50	f6c70	eh-pad	Program__findOrCreateConstInst	8	0x193cc0,__Unwind_Resume
 f8258	f8278	eh-pad	FUN_000f816c	8	0x193cc0,__Unwind_Resume
 f8430	f8450	eh-pad	FUN_000f83cc	8	0x193cc0,__Unwind_Resume
 f8908	f8928	eh-pad	FUN_000f88b4	8	0x193cc0,__Unwind_Resume

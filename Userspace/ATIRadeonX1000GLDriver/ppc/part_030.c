@@ -1327,14 +1327,14 @@ int IRInst__retargetOpcodeFromOperands(inst, compiler)
   opcodeInfo = Opcode__getInfo(field4);
   inst[0x22] = opcodeInfo;
   operandCount = (**(code **)(*inst + 0x14))(inst);
-  FUN_000f33f8(&operandWord0,inst[0x2d]);
+  SelectWord__fillUnusedWithFirstUsed(&operandWord0,inst[0x2d]);
   inst[0x2d] = operandWord0;
   if (1 < operandCount) {
-    FUN_000f33f8(&operandWord1,inst[0x33]);
+    SelectWord__fillUnusedWithFirstUsed(&operandWord1,inst[0x33]);
     inst[0x33] = operandWord1;
   }
   if (2 < operandCount) {
-    FUN_000f33f8(operandWord2,inst[0x39]);
+    SelectWord__fillUnusedWithFirstUsed(operandWord2,inst[0x39]);
     inst[0x39] = operandWord2[0];
   }
   if (oldOpcode == 0x35) {

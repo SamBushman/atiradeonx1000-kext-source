@@ -67,7 +67,7 @@ LAB_000e9874:
       loopCounterB = 0;
       while( true ) {
         if (*(uint *)(*(int *)(param_3 + 0xd4) + 4) < loopIndex) {
-          FUN_000e8d5c(param_3,param_1);
+          Block__appendPredecessor(param_3,param_1);
           return;
         }
         iVar3 = *(int *)(*(int *)(*(int *)(param_3 + 0xd4) + 8) + loopCounterB);
@@ -154,7 +154,7 @@ LAB_000e9a40:
       loopCounterB = 0;
       while( true ) {
         if (*(uint *)(*(int *)(param_3 + 0xd0) + 4) < loopIndex) {
-          FUN_000e8dd4(param_3,param_1);
+          Block__appendSuccessor(param_3,param_1);
           return;
         }
         iVar3 = *(int *)(*(int *)(*(int *)(param_3 + 0xd0) + 8) + loopCounterB);
@@ -217,8 +217,8 @@ int FUN_000e9adc(param_1, param_2, param_3)
     puVar3 = (undefined4 *)Vector__elementRefGrow(puVar4,predecessorIndexResult);
   }
   *puVar3 = param_3;
-  FUN_000e8d5c(param_3,param_1);
-  return FUN_000e8dd4(param_3,param_2);
+  Block__appendPredecessor(param_3,param_1);
+  return Block__appendSuccessor(param_3,param_2);
 }
 
 /* Block__recordDefinition @ 0xe9c00 (200 bytes) */
@@ -336,7 +336,7 @@ int Block__ctor_e9d68(this, param_2)
   this[0x40] = 0;
   this[0x41] = 0;
   FUN_000e8a08(this);
-  FUN_000e8938(this);
+  Block__createEntryExitInsts(this);
   uVar1 = FUN_000e8124(this[0x2b],extraout_r4,in_r5,in_r6,in_r7,uVar3,uVar5);
   this[0x2d] = uVar1;
   return;
@@ -404,7 +404,7 @@ int Block__ctor_e9f00(this, param_2)
   this[0x40] = 0;
   this[0x41] = 0;
   FUN_000e8a08(this);
-  FUN_000e8938(this);
+  Block__createEntryExitInsts(this);
   uVar1 = FUN_000e8124(this[0x2b],extraout_r4,in_r5,in_r6,in_r7,uVar3,uVar5);
   this[0x2d] = uVar1;
   return;
@@ -452,7 +452,7 @@ int Block__ctor_ea020(this, compiler)
   this[0x44] = 0;
   this[0x45] = 0;
   FUN_000e8a08(this);
-  FUN_000e8938(this);
+  Block__createEntryExitInsts(this);
   loopCounter = 0x20;
   puVar1 = this;
   do {
@@ -508,7 +508,7 @@ int Block__ctor_ea148(this, compiler)
   this[0x44] = 0;
   this[0x45] = 0;
   FUN_000e8a08(this);
-  FUN_000e8938(this);
+  Block__createEntryExitInsts(this);
   loopCounter = 0x20;
   puVar1 = this;
   do {

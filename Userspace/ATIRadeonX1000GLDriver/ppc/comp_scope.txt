@@ -15,7 +15,7 @@ PostLoopFooter__ctor_eb3c8 compiler
 IfHeader__ctor_eb688 compiler
 IfHeaderStatic__ctor_eb9e0 compiler
 IfHeaderStatic__ctor_ebac8 compiler
-FUN_000ecc1c compiler
+IRInst__isForwardable compiler
 HwLimits__vslot43_prependDefaultMov compiler
 Compiler__getOrCreateLoadConstN compiler
 IRInst__clone compiler

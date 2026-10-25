@@ -4161,7 +4161,7 @@ int FUN_000cd1c4(param_1, param_2, param_3, param_4)
     do {
       iVar1 = _setjmp(*(int **)(iStack00000018 + 4));
       if (iVar1 == 0) {
-        FUN_000e1888(iStack00000018);
+        Compiler__resetState(iStack00000018);
         FUN_000e0cd0(iStack00000018,uStack00000028);
         iVar1 = FUN_00193b3c(uStack00000020,uStack00000024,iStack00000018);
         *(int *)(iStack00000018 + 0x524) = iStack0000001c;
@@ -4180,7 +4180,7 @@ int FUN_000cd1c4(param_1, param_2, param_3, param_4)
       *(undefined4 *)(iStack00000018 + 0x488) = 0;
       iVar1 = *(int *)(iStack00000018 + 0x314);
       FUN_000e0e28(iStack00000018);
-      FUN_000e1fe4(iStack00000018,0);
+      Compiler__releaseChipAndPools(iStack00000018,0);
     } while ((iVar1 != 0) && (iVar2 = FUN_000e161c(iStack00000018,iVar1), iVar2 != 0));
     return iVar1;
   }
