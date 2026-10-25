@@ -617,7 +617,7 @@ int FUN_00159b58(node, param_2, pass)
   int pass;
 {
   uint source1Flags;
-  uint set;
+  uint negateFlag;
   int operandIndex3;
   int operandIndex2;
   int operandIndex;
@@ -836,14 +836,14 @@ int FUN_00159b58(node, param_2, pass)
           }
           IROperand__setModifierBits(node + 0xbc,2,*(uint *)(sourceDef + 0xd0) >> 1 & 1);
           uVar11 = *(uint *)(node + 0xb8) & 1;
-          set = uVar11;
+          negateFlag = uVar11;
           if ((*(uint *)(sourceDef + 0xb8) & 1) != 0) {
-            set = uVar11 ^ 1;
+            negateFlag = uVar11 ^ 1;
           }
           if ((*(uint *)(sourceDef + 0xd0) & 1) != 0) {
             uVar11 = uVar11 ^ 1;
           }
-          IROperand__setModifierBits(node + 0xa4,1,set);
+          IROperand__setModifierBits(node + 0xa4,1,negateFlag);
           IROperand__setModifierBits(node + 0xbc,1,uVar11 ^ 1);
           uVar5 = IRInst__dropCounterAndDeleteIfUnused(sourceDef,uVar12);
           return uVar5;
@@ -1038,7 +1038,7 @@ int Inst__takeOutCommonFactor(param_1, pass)
   undefined4 newSource;
   int local_74;
   int local_70;
-  uint set;
+  uint absOperand1;
   int local_68;
   int operandIndex10;
   int *local_60;
@@ -1154,13 +1154,13 @@ LAB_0015a9bc:
             if (iStack00000018 == iVar8) {
               iVar8 = IRInst__getOperandRecord(*piVar21,operandIndex9);
               local_5c = *(int *)(iVar8 + 0x10);
-              set = *(uint *)(operandIndex9 * 0x18 + *piVar21 + 0xa0) >> 1 & 1;
+              absOperand1 = *(uint *)(operandIndex9 * 0x18 + *piVar21 + 0xa0) >> 1 & 1;
               local_68 = operandIndex9;
               goto LAB_0015aa4c;
             }
           }
           local_68 = 0;
-          set = 0;
+          absOperand1 = 0;
 LAB_0015aa4c:
           local_70 = iVar17 + 1;
           iVar17 = local_70;
@@ -1189,7 +1189,7 @@ LAB_0015aa4c:
                       local_58 = *(int *)(iVar8 + 0x10);
                       piVar11 = (int *)*piVar20;
                       uVar24 = (uint)piVar11[operandIndex2 * 6 + 0x28] >> 1 & 1;
-                      if ((local_58 == local_5c) && (uVar6 = set, set == uVar24))
+                      if ((local_58 == local_5c) && (uVar6 = absOperand1, absOperand1 == uVar24))
                       goto LAB_0015abb0;
                     }
                     else {
@@ -1201,7 +1201,7 @@ LAB_0015aa4c:
                   operandIndex2 = local_74;
 LAB_0015abb0:
                   local_74 = operandIndex2;
-                  if ((local_58 == local_5c) && (set == uVar6)) {
+                  if ((local_58 == local_5c) && (absOperand1 == uVar6)) {
                     *(int *)(pass + 0x1cc) = *(int *)(pass + 0x1cc) + 1;
                     inst1 = *piVar21;
                     if (inst1 != *local_60) {
@@ -1297,7 +1297,7 @@ LAB_0015abb0:
                     IRInst__setOperandSource(piVar11,1,iStack00000018,1,*(undefined4 *)(pass + 8));
                     operandRecord = IRInst__getOperandRecord(piVar11,1);
                     *(int *)(operandRecord + 0x10) = local_5c;
-                    IROperand__setModifierBits(piVar11 + 0x29,2,set);
+                    IROperand__setModifierBits(piVar11 + 0x29,2,absOperand1);
                     piVar11[0x26] = 0;
                     piVar11[0x25] = piVar11[0x53];
                     operandRecord = IRInst__getOperandRecord(*piVar22,0);

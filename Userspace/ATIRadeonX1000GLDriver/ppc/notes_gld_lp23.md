@@ -25,7 +25,7 @@ Tools: `Tools/userspace/lpnames/autoweb_callee.py` (modes: callee parameter name
 ## Still open in this range
 
 * The other peephole giants (FUN_00152ea8, FUN_0015f44c, FUN_001541f0, FUN_00156d48, FUN_001621c8, FUN_00161748, FUN_00159b58, FUN_00184ef0, Inst__takeOutCommonFactor, R300MachineAssembler__assembleAluInstruction, FUN_00181f00's
-  non-vector webs, FUN_00160eb0, FUN_00174e0c): names need a function-by-function read; the cheap rules (callee parameter names, inline vector idiom, IRInst field loads) are exhausted by `autoweb.py`.
-* `FUN_00186a88` keeps pointer-valued `loopIndex*` names: renaming them to `loopPtr*` breaks 23 anchors of `names_I1_p049.tsv`/`names_gW_1.tsv` rows (anchors encode intermediate names) and was reverted for that function only.
-* `FUN_00161748` and `FUN_00189c24`: the autoweb rows were rejected by the gate (UNINIT / DATAFLOW) and removed; they keep their placeholders.
+  non-vector webs, FUN_00160eb0, FUN_00174e0c): names need a function-by-function read; the cheap rules (callee parameter names, inline vector idiom, IRInst field loads) are exhausted by `autoweb_callee.py`.
+* `FUN_00186a88` kept pointer-valued `loopIndex*` names: renaming them to `loopPtr*` breaks 23 anchors of `names_I1_p049.tsv`/`names_gW_1.tsv` rows (anchors encode intermediate names) and was reverted for that function only.
+* `FUN_00161748` and `FUN_00189c24`: the autoweb_callee rows were rejected by the gate (UNINIT / DATAFLOW) and removed; they keep their placeholders.
 * `FUN_000f2da8` (select-word compatibility test, 3 call sites here) is outside this range (part_025).

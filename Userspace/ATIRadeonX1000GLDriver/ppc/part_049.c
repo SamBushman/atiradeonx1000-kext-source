@@ -278,13 +278,13 @@ int FUN_00186a88(inst, operandIndex, inst2, program, param_5, param_6, param_7)
   uint otherNegate;
   int loopIndex;
   int loopIndex2;
-  int *loopIndex4;
+  int *loopPtr4;
   int loopRemaining;
   void *inst3;
   undefined4 uVar9;
   undefined4 compilerCtx;
   int *destSelectCursor;
-  int *loopIndex3;
+  int *loopPtr3;
   undefined4 destSelect;
   undefined4 valueNumberTable;
   int *local_a8;
@@ -465,7 +465,7 @@ LAB_001874d4:
         *(undefined4 *)(destRecord + 0xc) = 0x31;
         *(undefined4 *)(destRecord + 8) = newRegId;
         compiler = *(undefined4 *)(program + 8);
-        loopIndex4 = local_a8;
+        loopPtr4 = local_a8;
         goto LAB_00187498;
       }
       if ((((constantValue == 0.5) || (constantValue == -0.5)) &&
@@ -495,18 +495,18 @@ LAB_001874d4:
         laneNumber = 0;
         local_a4[0] = *(int **)(source1Record + 0x10);
         lanesRemaining = 4;
-        loopIndex3 = constLanes;
+        loopPtr3 = constLanes;
         do {
           laneSelect = (uint)*(byte *)(laneNumber + (int)local_a4);
           if (laneSelect != 4) {
-            *loopIndex3 = local_a4[1][laneSelect * 6 + 8];
+            *loopPtr3 = local_a4[1][laneSelect * 6 + 8];
           }
           laneNumber = laneNumber + 1;
-          loopIndex3 = loopIndex3 + 1;
+          loopPtr3 = loopPtr3 + 1;
           lanesRemaining = lanesRemaining + -1;
         } while (lanesRemaining != 0);
         programValueTable = *(undefined4 *)(program + 0x3ac);
-        local_a4[1] = (int *)FUN_000f5f94(programValueTable,constLanes,local_a4,constantKindPtr,compilerCtx,uVar9,loopIndex3);
+        local_a4[1] = (int *)FUN_000f5f94(programValueTable,constLanes,local_a4,constantKindPtr,compilerCtx,uVar9,loopPtr3);
         if (local_a4[1] == (int *)0x0) {
           local_a4[1] = (int *)FUN_000f57f0(programValueTable,constLanes,local_a4,constantKindPtr);
         }
@@ -635,10 +635,10 @@ LAB_0018744c:
     destRecord = IRInst__getOperandRecord(inst3,0);
     *(undefined4 *)(destRecord + 0xc) = 0x31;
     *(undefined4 *)(destRecord + 8) = newRegId;
-    loopIndex4 = (int *)IRInst__getOperandSource(inst2,1);
+    loopPtr4 = (int *)IRInst__getOperandSource(inst2,1);
     compiler = *(undefined4 *)(program + 8);
 LAB_00187498:
-    IRInst__setOperandSource(inst3,1,loopIndex4,0,compiler);
+    IRInst__setOperandSource(inst3,1,loopPtr4,0,compiler);
   }
 LAB_0018754c:
   commitResult = FUN_00185da4(operandIndex,negate,inst,inst3,inst2,program,param_5,param_6,param_7,originalInst2)

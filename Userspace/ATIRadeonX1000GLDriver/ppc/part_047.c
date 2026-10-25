@@ -2592,13 +2592,13 @@ int FUN_0017ad24(ctx, param_2, param_3)
 }
 
 /* FUN_0017ae28 @ 0x17ae28 (172 bytes) */
-int FUN_0017ae28(ctx, operandIndex, param_3, param_4, set, set2, compiler)
+int FUN_0017ae28(ctx, operandIndex, param_3, param_4, negateFlag, absFlag, compiler)
   int ctx;
   int operandIndex;
   int param_3;
   undefined4 param_4;
-  undefined4 set;
-  undefined4 set2;
+  undefined4 negateFlag;
+  undefined4 absFlag;
   int compiler;
 {
   int operandRef;
@@ -2628,8 +2628,8 @@ int FUN_0017ae28(ctx, operandIndex, param_3, param_4, set, set2, compiler)
     *(undefined4 *)(operandRecord + 0x10) = param_4;
   }
   iVar3 = operandIndex * 0x18 + 0x80;
-  IROperand__setModifierBits(iVar3 + *(int *)(ctx + 0xb0) + 0xc,1,set);
-  IROperand__setModifierBits(iVar3 + *(int *)(ctx + 0xb0) + 0xc,2,set2);
+  IROperand__setModifierBits(iVar3 + *(int *)(ctx + 0xb0) + 0xc,1,negateFlag);
+  IROperand__setModifierBits(iVar3 + *(int *)(ctx + 0xb0) + 0xc,2,absFlag);
   return param_3;
 }
 

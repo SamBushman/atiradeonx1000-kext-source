@@ -823,7 +823,7 @@ int FUN_00147f54(inst, compiler)
   undefined4 uVar12;
   int destRegister;
   int iVar14;
-  uint set;
+  uint negateFlag;
   undefined4 uVar16;
   int iVar17;
   int iVar18;
@@ -932,7 +932,7 @@ int FUN_00147f54(inst, compiler)
     program = *(int *)(compiler + COMP_currentProgram);
     *(int *)(program + 0x158) = *(int *)(program + 0x158) + 1;
     if (iVar17 == 2) {
-      set = (uint)(local_90 < FLOAT_001aa0d4) ^ inst[operandIndex * 6 + 0x28] & 1U;
+      negateFlag = (uint)(local_90 < FLOAT_001aa0d4) ^ inst[operandIndex * 6 + 0x28] & 1U;
     }
     else {
       if (iVar17 == 3) {
@@ -945,10 +945,10 @@ int FUN_00147f54(inst, compiler)
         return inst;
       }
       if (iVar17 == 1) {
-        set = inst[operandIndex * 6 + 0x28] & 1;
+        negateFlag = inst[operandIndex * 6 + 0x28] & 1;
       }
       else {
-        set = 0;
+        negateFlag = 0;
       }
     }
     afterInst = inst[1];
@@ -993,7 +993,7 @@ int FUN_00147f54(inst, compiler)
     operandRecord2 = IRInst__getOperandRecord(inst,1);
     *(undefined4 *)(operandRecord2 + 0x10) = uVar12;
     IROperand__setModifierBits(inst + 0x29,2,uVar6 >> 1 & 1);
-    IROperand__setModifierBits(inst + 0x29,1,set);
+    IROperand__setModifierBits(inst + 0x29,1,negateFlag);
     inst[0x48] = saturate;
     inst[0x49] = local_a8[0];
     if (local_58 != 0) {
@@ -1876,7 +1876,7 @@ int FUN_00149de4(inst, operandIndex8, inst2, param_4, compiler)
   undefined4 *param_4;
   int compiler;
 {
-  uint set4;
+  uint negateFlag;
   undefined4 set2;
   undefined4 set;
   int operandIndex7;
@@ -1908,7 +1908,7 @@ int FUN_00149de4(inst, operandIndex8, inst2, param_4, compiler)
   undefined4 uVar11;
   undefined4 in_r8;
   int operandIndex2;
-  uint set3;
+  uint absFlag;
   int program;
   code *pcVar15;
   uint uVar16;
@@ -1941,17 +1941,17 @@ int FUN_00149de4(inst, operandIndex8, inst2, param_4, compiler)
         program = *(int *)(compiler + COMP_currentProgram);
         iVar5 = (**(code **)(*operandVReg2 + 0x60))(operandVReg2);
         if (iVar5 == 0) {
-          set4 = inst2[0x2e] & 1;
+          negateFlag = inst2[0x2e] & 1;
           if ((inst[operandIndex8 * 6 + 0x28] & 2U) == 0) {
-            set3 = -(uint)(inst2[0x2e] & 2U) >> 0x1f;
+            absFlag = -(uint)(inst2[0x2e] & 2U) >> 0x1f;
           }
           else {
-            set3 = 1;
-            set4 = 0;
+            absFlag = 1;
+            negateFlag = 0;
           }
-          set4 = inst[operandIndex8 * 6 + 0x28] & 1U ^ set4;
+          negateFlag = inst[operandIndex8 * 6 + 0x28] & 1U ^ negateFlag;
           iVar4 = (**(code **)(**(int **)(compiler + COMP_target) + 0x11c))
-                            (*(int **)(compiler + COMP_target),inst,operandIndex8,operandVReg,set3,set4,
+                            (*(int **)(compiler + COMP_target),inst,operandIndex8,operandVReg,absFlag,negateFlag,
                              compiler);
           if (iVar4 == 0) {
             return 0;
@@ -2017,8 +2017,8 @@ int FUN_00149de4(inst, operandIndex8, inst2, param_4, compiler)
           uVar11 = local_68;
           operandRecord2 = IRInst__getOperandRecord(inst,operandIndex8);
           *(undefined4 *)(operandRecord2 + 0x10) = uVar11;
-          IROperand__setModifierBits(inst + operandIndex8 * 6 + 0x23,2,set3);
-          IROperand__setModifierBits(inst + operandIndex8 * 6 + 0x23,1,set4);
+          IROperand__setModifierBits(inst + operandIndex8 * 6 + 0x23,2,absFlag);
+          IROperand__setModifierBits(inst + operandIndex8 * 6 + 0x23,1,negateFlag);
         }
         else {
           *(int *)(program + 0x17c) = *(int *)(program + 0x17c) + 1;
@@ -4582,6 +4582,8 @@ int Inst__swapSharedTermBetweenUses(useA, useB, pass, allowRewrite, allowOperand
   int allowRewrite;
   int allowOperandSwap;
 {
+  int lane3Flag;
+  uint lane0Flag;
   int termIndexB;
   int termIndexA;
   int operandSlotAddrB;
@@ -4593,7 +4595,8 @@ int Inst__swapSharedTermBetweenUses(useA, useB, pass, allowRewrite, allowOperand
   uint useOperandIndexBCopy;
   uint savedSelectWordB;
   uint useOperandIndexB;
-  uint set;
+  uint useOperandIndexBTmp;
+  uint absOtherB;
   uint operandIndex4;
   int inst4;
   int operandIndex3;
@@ -4607,19 +4610,19 @@ int Inst__swapSharedTermBetweenUses(useA, useB, pass, allowRewrite, allowOperand
   int operandRecord;
   int sourceDef3;
   bool consumerIsMul;
-  int iVar2;
+  int lane2Flag;
   undefined4 operandVReg2;
   undefined4 uVar4;
   int selectsCompatibleA;
   int *operandVReg;
-  uint uVar7;
-  uint uVar8;
+  uint firstSourceSelect;
+  uint secondSourceSelect;
   uint termB;
   undefined4 compilerCtx;
   int nextTermSlotA;
   int nextTermSlotACopy;
   uint *puVar13;
-  int iVar14;
+  int lane1Flag;
   int termByteOffsetB;
   int iVar16;
   int nextTermIndexA;
@@ -4705,12 +4708,12 @@ int Inst__swapSharedTermBetweenUses(useA, useB, pass, allowRewrite, allowOperand
     matchFrame[8] = *(uint *)(sourceDef + 0xb8) >> 1 & 1;
     termByteOffsetB = 0;
     sourceDef = IRInst__getOperandSource(*useB,useB[1]);
-    set = useB[1];
+    useOperandIndexBTmp = useB[1];
     termByteOffsetA = 0;
     matchFrame[9] = *(uint *)(sourceDef + 0xd0) >> 1 & 1;
-    set = *(uint *)((set + (((int)set >> 1) + (uint)((int)set < 0 && (set & 1) != 0)) * -2
+    absOtherB = *(uint *)((useOperandIndexBTmp + (((int)useOperandIndexBTmp >> 1) + (uint)((int)useOperandIndexBTmp < 0 && (useOperandIndexBTmp & 1) != 0)) * -2
                       ) * 0x18 + *useB + 0xb8) >> 1 & 1;
-    matchFrame[10] = set;
+    matchFrame[10] = absOtherB;
     termIndexA = 0;
     do {
       nextTermIndexA = termIndexA + 1;
@@ -4737,7 +4740,7 @@ LAB_0014edd0:
               sourceDef = IRInst__getOperandSource(*useB,useB[1]);
               IROperand__setModifierBits(sourceDef + 0xbc,1,matchFrame[0x13]);
               sourceDef = IRInst__getOperandSource(*useB,useB[1]);
-              IROperand__setModifierBits(sourceDef + 0xbc,2,set);
+              IROperand__setModifierBits(sourceDef + 0xbc,2,absOtherB);
               operandVReg2 = IRInst__getOperandSource(*useB,useB[1]);
               savedSelectWordB = matchFrame[0x10];
               operandRecord = IRInst__getOperandRecord(operandVReg2,2);
@@ -4783,7 +4786,7 @@ LAB_0014edd0:
               sourceDef = IRInst__getOperandSource(*useB,useB[1]);
               IROperand__setModifierBits(sourceDef + 0xa4,1,matchFrame[0x13]);
               sourceDef = IRInst__getOperandSource(*useB,useB[1]);
-              IROperand__setModifierBits(sourceDef + 0xa4,2,set);
+              IROperand__setModifierBits(sourceDef + 0xa4,2,absOtherB);
               operandVReg2 = IRInst__getOperandSource(*useB,useB[1]);
               savedSelectWordB = matchFrame[0x10];
               operandRecord = IRInst__getOperandRecord(operandVReg2,1);
@@ -4825,26 +4828,26 @@ LAB_0014edd0:
             }
             operandVReg2 = IRInst__getOperandSource(*useB,useB[1]);
             operandRecord = IRInst__getOperandRecord(operandVReg2,1);
-            uVar7 = *(uint *)(operandRecord + 0x10);
+            firstSourceSelect = *(uint *)(operandRecord + 0x10);
             operandVReg2 = IRInst__getOperandSource(*useB,useB[1]);
             iVar16 = IRInst__getOperandRecord(operandVReg2,2);
-            uVar8 = *(uint *)(iVar16 + 0x10);
+            secondSourceSelect = *(uint *)(iVar16 + 0x10);
             operandVReg2 = IRInst__getOperandSource(*useB,useB[1]);
             IRInst__getOperandRecord(operandVReg2,0);
-            if ((uVar7 >> 0x18 != 4) || (iVar16 = 1, uVar8 >> 0x18 != 4)) {
-              iVar16 = 0;
+            if ((firstSourceSelect >> 0x18 != 4) || (lane3Flag = 1, secondSourceSelect >> 0x18 != 4)) {
+              lane3Flag = 0;
             }
-            if (((uVar7 >> 0x10 & 0xff) != 4) || (iVar2 = 1, (uVar8 >> 0x10 & 0xff) != 4)) {
-              iVar2 = 0;
+            if (((firstSourceSelect >> 0x10 & 0xff) != 4) || (lane2Flag = 1, (secondSourceSelect >> 0x10 & 0xff) != 4)) {
+              lane2Flag = 0;
             }
-            if (((uVar7 >> 8 & 0xff) != 4) || (iVar14 = 1, (uVar8 >> 8 & 0xff) != 4)) {
-              iVar14 = 0;
+            if (((firstSourceSelect >> 8 & 0xff) != 4) || (lane1Flag = 1, (secondSourceSelect >> 8 & 0xff) != 4)) {
+              lane1Flag = 0;
             }
-            if (((uVar7 & 0xff) != 4) || (uVar7 = 1, (uVar8 & 0xff) != 4)) {
-              uVar7 = 0;
+            if (((firstSourceSelect & 0xff) != 4) || (lane0Flag = 1, (secondSourceSelect & 0xff) != 4)) {
+              lane0Flag = 0;
             }
             sourceDef3 = IRInst__getOperandSource(*useB,useB[1]);
-            *(uint *)(sourceDef3 + 0x9c) = uVar7 | iVar14 << 8 | iVar2 << 0x10 | iVar16 << 0x18;
+            *(uint *)(sourceDef3 + 0x9c) = lane0Flag | lane1Flag << 8 | lane2Flag << 0x10 | lane3Flag << 0x18;
             operandVReg2 = IRInst__getOperandSource(*useA,useA[1]);
             ((int (*)())FUN_001474c8)(pass,operandVReg2,pass);
             if (allowOperandSwap != 0) {
@@ -4885,6 +4888,7 @@ int Inst__swapMatchedOperandsBetweenUses(useA, useB, pass, allowRewrite, allowOp
   int allowRewrite;
   int allowOperandSwap;
 {
+  uint lane0Flag;
   uint *termPtrA;
   uint *termB;
   int lane3Flag;
@@ -4941,7 +4945,7 @@ int Inst__swapMatchedOperandsBetweenUses(useA, useB, pass, allowRewrite, allowOp
   int matchCandidateByteOffsetA;
   int *updatedSourceInst;
   uint useOperandIndexA;
-  uint uVar10;
+  uint firstSourceSelect;
   int compilerCtx;
   uint *termA;
   int nextTermSlotB;
@@ -5357,48 +5361,48 @@ LAB_0014fad0:
   }
   sourceDef = IRInst__getOperandSource(*useA,useA[1]);
   operandRecord = IRInst__getOperandRecord(sourceDef,1);
-  uVar10 = *(uint *)(operandRecord + 0x10);
+  firstSourceSelect = *(uint *)(operandRecord + 0x10);
   sourceDef = IRInst__getOperandSource(*useA,useA[1]);
   iVar19 = IRInst__getOperandRecord(sourceDef,2);
   secondSourceSelect = *(uint *)(iVar19 + 0x10);
   sourceDef = IRInst__getOperandSource(*useA,useA[1]);
   IRInst__getOperandRecord(sourceDef,0);
-  if ((uVar10 >> 0x18 != 4) || (lane3Flag = 1, secondSourceSelect >> 0x18 != 4)) {
+  if ((firstSourceSelect >> 0x18 != 4) || (lane3Flag = 1, secondSourceSelect >> 0x18 != 4)) {
     lane3Flag = 0;
   }
-  if (((uVar10 >> 0x10 & 0xff) != 4) || (lane2Flag = 1, (secondSourceSelect >> 0x10 & 0xff) != 4)) {
+  if (((firstSourceSelect >> 0x10 & 0xff) != 4) || (lane2Flag = 1, (secondSourceSelect >> 0x10 & 0xff) != 4)) {
     lane2Flag = 0;
   }
-  if (((uVar10 >> 8 & 0xff) != 4) || (lane1Flag = 1, (secondSourceSelect >> 8 & 0xff) != 4)) {
+  if (((firstSourceSelect >> 8 & 0xff) != 4) || (lane1Flag = 1, (secondSourceSelect >> 8 & 0xff) != 4)) {
     lane1Flag = 0;
   }
-  if (((uVar10 & 0xff) != 4) || (uVar10 = 1, (secondSourceSelect & 0xff) != 4)) {
-    uVar10 = 0;
+  if (((firstSourceSelect & 0xff) != 4) || (lane0Flag = 1, (secondSourceSelect & 0xff) != 4)) {
+    lane0Flag = 0;
   }
   sourceDef3 = IRInst__getOperandSource(*useA,useA[1]);
-  *(uint *)(sourceDef3 + 0x9c) = uVar10 | lane1Flag << 8 | lane2Flag << 0x10 | lane3Flag << 0x18;
+  *(uint *)(sourceDef3 + 0x9c) = lane0Flag | lane1Flag << 8 | lane2Flag << 0x10 | lane3Flag << 0x18;
   sourceDef = IRInst__getOperandSource(*useB,useB[1]);
   operandRecord = IRInst__getOperandRecord(sourceDef,1);
-  uVar10 = *(uint *)(operandRecord + 0x10);
+  firstSourceSelect = *(uint *)(operandRecord + 0x10);
   sourceDef = IRInst__getOperandSource(*useB,useB[1]);
   iVar19 = IRInst__getOperandRecord(sourceDef,2);
   secondSourceSelect = *(uint *)(iVar19 + 0x10);
   sourceDef = IRInst__getOperandSource(*useB,useB[1]);
   IRInst__getOperandRecord(sourceDef,0);
-  if ((uVar10 >> 0x18 != 4) || (lane3Flag = 1, secondSourceSelect >> 0x18 != 4)) {
+  if ((firstSourceSelect >> 0x18 != 4) || (lane3Flag = 1, secondSourceSelect >> 0x18 != 4)) {
     lane3Flag = 0;
   }
-  if (((uVar10 >> 0x10 & 0xff) != 4) || (lane2Flag = 1, (secondSourceSelect >> 0x10 & 0xff) != 4)) {
+  if (((firstSourceSelect >> 0x10 & 0xff) != 4) || (lane2Flag = 1, (secondSourceSelect >> 0x10 & 0xff) != 4)) {
     lane2Flag = 0;
   }
-  if (((uVar10 >> 8 & 0xff) != 4) || (lane1Flag = 1, (secondSourceSelect >> 8 & 0xff) != 4)) {
+  if (((firstSourceSelect >> 8 & 0xff) != 4) || (lane1Flag = 1, (secondSourceSelect >> 8 & 0xff) != 4)) {
     lane1Flag = 0;
   }
-  if (((uVar10 & 0xff) != 4) || (uVar10 = 1, (secondSourceSelect & 0xff) != 4)) {
-    uVar10 = 0;
+  if (((firstSourceSelect & 0xff) != 4) || (lane0Flag = 1, (secondSourceSelect & 0xff) != 4)) {
+    lane0Flag = 0;
   }
   sourceDef3 = IRInst__getOperandSource(*useB,useB[1]);
-  *(uint *)(sourceDef3 + 0x9c) = uVar10 | lane1Flag << 8 | lane2Flag << 0x10 | lane3Flag << 0x18;
+  *(uint *)(sourceDef3 + 0x9c) = lane0Flag | lane1Flag << 8 | lane2Flag << 0x10 | lane3Flag << 0x18;
   sourceDef = IRInst__getOperandSource(*useB,useB[1]);
   ((int (*)())FUN_001474c8)(programHome,sourceDef,programHome);
   sourceDef = IRInst__getOperandSource(*useA,useA[1]);
@@ -8415,8 +8419,8 @@ int Inst__collapseAlgebraic_00155a60(inst, pass)
   void *inst;
   int pass;
 {
-  uint set4;
-  uint set3;
+  uint negateFlag;
+  uint negateOperand1;
   undefined4 block;
   int *inst3;
   int afterInst3;
@@ -8504,8 +8508,8 @@ int Inst__collapseAlgebraic_00155a60(inst, pass)
   undefined4 local_74;
   uint local_70;
   uint local_6c;
-  uint set2;
-  uint set;
+  uint negateOperand3;
+  uint absOperand3;
   undefined4 local_60;
   int local_5c;
   uint local_58;
@@ -8940,8 +8944,8 @@ code_r0x00156744:
   operandRecord4 = IRInst__getOperandRecord(inst,iVar3);
   bVar1 = (*(uint *)((int)inst + 0x14) & 0x200) != 0;
   uVar4 = *(uint *)((int)inst + operandIndex5 * 0x18 + 0xa0);
-  set2 = uVar4 & 1;
-  set = uVar4 >> 1 & 1;
+  negateOperand3 = uVar4 & 1;
+  absOperand3 = uVar4 >> 1 & 1;
   local_8c = 0;
   local_a0 = 0;
   local_9c = 0;
@@ -8959,7 +8963,7 @@ code_r0x00156744:
   uVar23 = *(undefined4 *)(operandRecord + 0x10);
   operandRecord = IRInst__getOperandRecord(inst3,1);
   uVar5 = *(uint *)((int)inst + iVar3 * 0x18 + 0xa0);
-  set3 = uVar5 & 1;
+  negateOperand1 = uVar5 & 1;
   SelectWord__compose(&local_78,*(undefined4 *)(operandRecord + 0x10),uVar17);
   SelectWord__compose(&local_74,uVar23,uVar17);
   uVar6 = *(uint *)((int)inst + 0x14);
@@ -8975,10 +8979,10 @@ code_r0x00156744:
   *(undefined4 *)((int)newInst + 0x120) = uVar11;
   *(undefined4 *)((int)newInst + 0x124) = uVar19;
   sourceDef = IRInst__getOperandSource(inst3,1);
-  iVar3 = IRInst__setOperandSourceIfLegal(newInst,1,sourceDef,1,set3,*(undefined4 *)(pass + 8));
+  iVar3 = IRInst__setOperandSourceIfLegal(newInst,1,sourceDef,1,negateOperand1,*(undefined4 *)(pass + 8));
   sourceDef = IRInst__getOperandSource(inst3,2);
   iVar21 = IRInst__setOperandSourceIfLegal(newInst,2,sourceDef,1,0,*(undefined4 *)(pass + 8));
-  iVar14 = IRInst__setOperandSourceIfLegal(newInst,3,local_60,set,set2,*(undefined4 *)(pass + 8));
+  iVar14 = IRInst__setOperandSourceIfLegal(newInst,3,local_60,absOperand3,negateOperand3,*(undefined4 *)(pass + 8));
   operandRecord2 = IRInst__getOperandRecord(newInst,1);
   *(undefined4 *)(operandRecord2 + 0x10) = local_78;
   operandRecord2 = IRInst__getOperandRecord(newInst,2);
@@ -8986,26 +8990,26 @@ code_r0x00156744:
   operandRecord2 = IRInst__getOperandRecord(newInst,3);
   *(undefined4 *)(operandRecord2 + 0x10) = uVar20;
   if ((uVar5 & 2) == 0) {
-    if (set3 == 0) {
+    if (negateOperand1 == 0) {
       IROperand__setModifierBits((int)newInst + 0xa4,2,(uint)inst3[0x2e] >> 1 & 1);
-      set4 = inst3[0x2e] & 1;
+      negateFlag = inst3[0x2e] & 1;
     }
     else {
       IROperand__setModifierBits((int)newInst + 0xa4,2,(uint)inst3[0x2e] >> 1 & 1);
-      set4 = inst3[0x2e] & 1U ^ 1;
+      negateFlag = inst3[0x2e] & 1U ^ 1;
     }
-    IROperand__setModifierBits((int)newInst + 0xa4,1,set4);
+    IROperand__setModifierBits((int)newInst + 0xa4,1,negateFlag);
     IROperand__setModifierBits((int)newInst + 0xbc,2,(uint)inst3[0x34] >> 1 & 1);
     IROperand__setModifierBits((int)newInst + 0xbc,1,inst3[0x34] & 1);
   }
   else {
     IROperand__setModifierBits((int)newInst + 0xa4,2,1);
-    IROperand__setModifierBits((int)newInst + 0xa4,1,set3);
+    IROperand__setModifierBits((int)newInst + 0xa4,1,negateOperand1);
     IROperand__setModifierBits((int)newInst + 0xbc,2,1);
     IROperand__setModifierBits((int)newInst + 0xbc,1,0);
   }
-  IROperand__setModifierBits((int)newInst + 0xd4,2,set);
-  IROperand__setModifierBits((int)newInst + 0xd4,1,set2);
+  IROperand__setModifierBits((int)newInst + 0xd4,2,absOperand3);
+  IROperand__setModifierBits((int)newInst + 0xd4,1,negateOperand3);
   if (bVar1) {
     IRInst__setLastOperandFromRecord(newInst,&local_a0,0,*(undefined4 *)(pass + 8));
   }
@@ -9614,7 +9618,7 @@ int FUN_00157b78(inst, operandIndex, param_3)
   uint operandIndex;
   int param_3;
 {
-  uint set;
+  uint negateFlag;
   uint operandIndex3;
   int afterInst;
   undefined4 cloneResult;
@@ -9625,7 +9629,7 @@ int FUN_00157b78(inst, operandIndex, param_3)
   bool bVar1;
   uint uVar2;
   uint uVar3;
-  uint set2;
+  uint negateFlag2;
   undefined4 uVar5;
   int afterInst2;
   int *piVar7;
@@ -9695,11 +9699,11 @@ LAB_00157cf8:
     cloneResult = IRInst__clone(sourceDef,*(undefined4 *)(param_3 + 8),0);
     cloneResult2 = IRInst__clone(inst,*(undefined4 *)(param_3 + 8),0);
     iVar11 = inst + operandIndex3 * 0x18 + 0x80;
-    set = *(uint *)(operandIndex2 * 0x18 + sourceDef + 0xa0) & 1;
-    set2 = *(uint *)(iVar11 + 0x20) & 1;
-    iVar10 = IRInst__setOperandSourceIfLegal(inst,operandIndex3,piVar7,1,set,*(undefined4 *)(param_3 + 8));
+    negateFlag = *(uint *)(operandIndex2 * 0x18 + sourceDef + 0xa0) & 1;
+    negateFlag2 = *(uint *)(iVar11 + 0x20) & 1;
+    iVar10 = IRInst__setOperandSourceIfLegal(inst,operandIndex3,piVar7,1,negateFlag,*(undefined4 *)(param_3 + 8));
     iVar12 = 0;
-    IROperand__setModifierBits(iVar11 + 0xc,1,set);
+    IROperand__setModifierBits(iVar11 + 0xc,1,negateFlag);
     operandRecord2 = IRInst__getOperandRecord(inst,operandIndex);
     local_64 = *(undefined4 *)(operandRecord2 + 0x10);
     local_60 = local_68;
@@ -9731,8 +9735,8 @@ LAB_00157cf8:
     uVar19 = DAT_001b0058;
     *(undefined4 *)(operandRecord2 + 0x10) = uVar5;
     *(undefined4 *)(sourceDef + 0x9c) = uVar19;
-    iVar11 = IRInst__setOperandSourceIfLegal(sourceDef,operandIndex2,operandVReg2,1,set2,*(undefined4 *)(param_3 + 8));
-    IROperand__setModifierBits(operandIndex2 * 0x18 + sourceDef + 0x8c,1,set2);
+    iVar11 = IRInst__setOperandSourceIfLegal(sourceDef,operandIndex2,operandVReg2,1,negateFlag2,*(undefined4 *)(param_3 + 8));
+    IROperand__setModifierBits(operandIndex2 * 0x18 + sourceDef + 0x8c,1,negateFlag2);
     operandRecord4 = IRInst__getOperandRecord(sourceDef,~operandIndex2 & 3);
     uVar19 = *(undefined4 *)(operandRecord4 + 0x10);
     iVar12 = FUN_000f2cac(uVar17);
@@ -9871,9 +9875,9 @@ int Inst__collapseAlgebraic_00158264(inst, operandIndex3, inst2, program)
   int local_78;
   uint local_68;
   uint local_64;
-  uint set3;
-  uint set2;
-  uint set;
+  uint negateFlag;
+  uint absFlag2;
+  uint absFlag;
   undefined4 newSource;
   
   compilerCtx = *(undefined4 *)(program + 8);
@@ -9935,9 +9939,9 @@ int Inst__collapseAlgebraic_00158264(inst, operandIndex3, inst2, program)
             uVar7 = *(uint *)(inst2 + 0xe8);
             saturate = *(undefined4 *)(inst2 + 0x120);
             resultScaleCode = *(undefined4 *)(inst2 + 0x124);
-            set3 = (uint)bVar18 ^ *(uint *)(inst2 + 0xb8) & 1;
-            set = *(uint *)(inst2 + 0xb8) >> 1 & 1;
-            set2 = uVar7 >> 1 & 1;
+            negateFlag = (uint)bVar18 ^ *(uint *)(inst2 + 0xb8) & 1;
+            absFlag = *(uint *)(inst2 + 0xb8) >> 1 & 1;
+            absFlag2 = uVar7 >> 1 & 1;
             instFlags = *(uint *)(inst2 + 0x14);
             uVar13 = *(undefined4 *)(operandRecord + 0x10);
             local_8c = iVar2;
@@ -9973,9 +9977,9 @@ int Inst__collapseAlgebraic_00158264(inst, operandIndex3, inst2, program)
             *(undefined4 *)(operandRecord + 0x10) = uVar12;
             operandRecord = IRInst__getOperandRecord(inst2,2);
             *(undefined4 *)(operandRecord + 0x10) = uVar13;
-            IROperand__setModifierBits(inst2 + 0xa4,2,set);
-            IROperand__setModifierBits(inst2 + 0xbc,2,set2);
-            IROperand__setModifierBits(inst2 + 0xa4,1,set3);
+            IROperand__setModifierBits(inst2 + 0xa4,2,absFlag);
+            IROperand__setModifierBits(inst2 + 0xbc,2,absFlag2);
+            IROperand__setModifierBits(inst2 + 0xa4,1,negateFlag);
             IROperand__setModifierBits(inst2 + 0xbc,1,uVar7 & 1);
             *(undefined4 *)(inst2 + 0x120) = saturate;
             *(undefined4 *)(inst2 + 0x124) = resultScaleCode;
