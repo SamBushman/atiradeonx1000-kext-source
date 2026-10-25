@@ -1662,73 +1662,73 @@ int isRegKindBelow21(param_1)
   return param_1 >> 0x10 < 0x15;
 }
 
-/* FUN_000f4a84 @ 0xf4a84 (324 bytes) */
-int FUN_000f4a84(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  int *param_1;
-  int param_2;
-  int param_3;
+/* Emitter__allocateConstantSlot @ 0xf4a84 (324 bytes) */
+int Emitter__allocateConstantSlot(emitter, slotKind, allowFailure, param_4, param_5, param_6, param_7)
+  int *emitter;
+  int slotKind;
+  int allowFailure;
   undefined4 param_4;
   undefined4 param_5;
   undefined4 param_6;
   undefined4 param_7;
 {
-  int iVar1;
-  int iVar2;
+  int emitContext;
+  int slotTableBase;
   
-  if (param_2 == 2) {
-    iVar1 = *(int *)(*param_1 + 0x398);
-    if (param_1[0xb] == 0) {
-      iVar2 = *(int *)(iVar1 + 0x2c);
+  if (slotKind == 2) {
+    emitContext = *(int *)(*emitter + 0x398);
+    if (emitter[0xb] == 0) {
+      slotTableBase = *(int *)(emitContext + 0x2c);
     }
     else {
-      iVar2 = *(int *)(iVar1 + 0x30);
+      slotTableBase = *(int *)(emitContext + 0x30);
     }
-    iVar1 = FUN_000d9b58(iVar1,iVar2 + 0x58,param_1[0xe],param_4,param_5,param_6,param_7);
-    if (-1 < iVar1) {
-      param_1[0xe] = param_1[0xe] + 1;
+    emitContext = FUN_000d9b58(emitContext,slotTableBase + 0x58,emitter[0xe],param_4,param_5,param_6,param_7);
+    if (-1 < emitContext) {
+      emitter[0xe] = emitter[0xe] + 1;
     }
     goto LAB_000f4b94;
   }
-  if (param_2 < 3) {
-    if (param_2 != 1) {
+  if (slotKind < 3) {
+    if (slotKind != 1) {
 LAB_000f4ac4:
-      iVar1 = -1;
+      emitContext = -1;
       goto LAB_000f4b94;
     }
   }
-  else if (param_2 != 3) {
-    if (param_2 == 4) {
-      iVar1 = *(int *)(*param_1 + 0x398);
-      if (param_1[0xb] == 0) {
-        iVar2 = *(int *)(iVar1 + 0x2c);
+  else if (slotKind != 3) {
+    if (slotKind == 4) {
+      emitContext = *(int *)(*emitter + 0x398);
+      if (emitter[0xb] == 0) {
+        slotTableBase = *(int *)(emitContext + 0x2c);
       }
       else {
-        iVar2 = *(int *)(iVar1 + 0x30);
+        slotTableBase = *(int *)(emitContext + 0x30);
       }
-      iVar1 = FUN_000d9b58(iVar1,iVar2 + 0x98,param_1[0x10],param_4,param_5,param_6,param_7);
-      if (-1 < iVar1) {
-        param_1[0x10] = param_1[0x10] + 1;
+      emitContext = FUN_000d9b58(emitContext,slotTableBase + 0x98,emitter[0x10],param_4,param_5,param_6,param_7);
+      if (-1 < emitContext) {
+        emitter[0x10] = emitter[0x10] + 1;
       }
       goto LAB_000f4b94;
     }
     goto LAB_000f4ac4;
   }
-  iVar1 = *(int *)(*param_1 + 0x398);
-  if (param_1[0xb] == 0) {
-    iVar2 = *(int *)(iVar1 + 0x2c);
+  emitContext = *(int *)(*emitter + 0x398);
+  if (emitter[0xb] == 0) {
+    slotTableBase = *(int *)(emitContext + 0x2c);
   }
   else {
-    iVar2 = *(int *)(iVar1 + 0x30);
+    slotTableBase = *(int *)(emitContext + 0x30);
   }
-  iVar1 = FUN_000d9b58(iVar1,iVar2 + 0x78,param_1[0xf],param_4,param_5,param_6,param_7);
-  if (-1 < iVar1) {
-    param_1[0xf] = param_1[0xf] + 1;
+  emitContext = FUN_000d9b58(emitContext,slotTableBase + 0x78,emitter[0xf],param_4,param_5,param_6,param_7);
+  if (-1 < emitContext) {
+    emitter[0xf] = emitter[0xf] + 1;
   }
 LAB_000f4b94:
-  if ((param_3 == 0) && (iVar1 < 0)) {
-    Compiler__fail(*param_1,0xd);
+  if ((allowFailure == 0) && (emitContext < 0)) {
+    Compiler__fail(*emitter,0xd);
   }
-  return iVar1;
+  return emitContext;
 }
 
 /* floatLess @ 0xf4bc8 (32 bytes) */
@@ -1875,45 +1875,45 @@ int ConstKey__countPresentOperands(param_1, param_2, param_3, param_4, param_5, 
   return;
 }
 
-/* FUN_000f4d80 @ 0xf4d80 (92 bytes) */
-int FUN_000f4d80(param_1, param_2)
-  int param_1;
-  int param_2;
+/* ConstRecord__findInTable @ 0xf4d80 (92 bytes) */
+int ConstRecord__findInTable(constTables, constRecord)
+  int constTables;
+  int constRecord;
 {
   uint loopCounterB;
-  undefined4 *puVar2;
+  undefined4 *selectedTable;
   int loopCounter;
   /* issue #64 live-repro (crash #4, past the case-0x28 fix): local_2c/local_28/local_24/
-   * local_20/local_1c were 5 SEPARATELY declared locals that puVar2's pointer arithmetic
-   * (`puVar2 = puVar2 + 1`, below) treats as one contiguous 5-word array - the same
+   * local_20/local_1c were 5 SEPARATELY declared locals that selectedTable's pointer arithmetic
+   * (`selectedTable = selectedTable + 1`, below) treats as one contiguous 5-word array - the same
    * Ghidra local-splitting defect class already fixed in FUN_000fd5c8 and FUN_000b6580's
    * local_68 cluster. An initial fix just gave local_2c a value (matching the +4-per-slot
-   * source pattern the other four follow: local_28=param_1+8, local_24=+0xc, local_20=+0x10,
+   * source pattern the other four follow: local_28=constTables+8, local_24=+0xc, local_20=+0x10,
    * local_1c=+0x14, so local_2c=+4) but that alone was insufficient: live-verified via a real
    * disassembly of this rebuild that gcc placed local_2c at frame offset 84 while
    * local_28/local_24/local_20/local_1c landed at offsets 68/64/60/56 - contiguous with EACH
-   * OTHer but 16 bytes away from local_2c - so puVar2's forward walk from &local_2c by separate
+   * OTHer but 16 bytes away from local_2c - so selectedTable's forward walk from &local_2c by separate
    * declared locals never actually reaches them; it walks off into unrelated stack space,
    * which happened to read back as 0 and crashed three frames down in FUN_00194720
-   * (param_1[4]() through a NULL dispatch pointer). Fixed properly this time by giving the
+   * (constTables[4]() through a NULL dispatch pointer). Fixed properly this time by giving the
    * cluster real, guaranteed-contiguous storage as an array, per this project's own
    * established fix pattern for this exact defect class. */
   undefined4 local_cluster[5];
 
   loopCounterB = 0;
-  puVar2 = local_cluster;
+  selectedTable = local_cluster;
   loopCounter = 4;
   do {
-    if (((int)*(char *)(param_2 + 0x15c) >> (loopCounterB & 0x3f) & 1U) == 0) break;
+    if (((int)*(char *)(constRecord + 0x15c) >> (loopCounterB & 0x3f) & 1U) == 0) break;
     loopCounterB = loopCounterB + 1;
-    puVar2 = puVar2 + 1;
+    selectedTable = selectedTable + 1;
     loopCounter = loopCounter + -1;
   } while (loopCounter != 0);
-  local_cluster[0] = *(undefined4 *)(param_1 + 4);
-  local_cluster[1] = *(undefined4 *)(param_1 + 8);
-  local_cluster[2] = *(undefined4 *)(param_1 + 0xc);
-  local_cluster[3] = *(undefined4 *)(param_1 + 0x10);
-  local_cluster[4] = *(undefined4 *)(param_1 + 0x14);
-  return FUN_00194720(*puVar2,param_2);
+  local_cluster[0] = *(undefined4 *)(constTables + 4);
+  local_cluster[1] = *(undefined4 *)(constTables + 8);
+  local_cluster[2] = *(undefined4 *)(constTables + 0xc);
+  local_cluster[3] = *(undefined4 *)(constTables + 0x10);
+  local_cluster[4] = *(undefined4 *)(constTables + 0x14);
+  return FUN_00194720(*selectedTable,constRecord);
 }
 

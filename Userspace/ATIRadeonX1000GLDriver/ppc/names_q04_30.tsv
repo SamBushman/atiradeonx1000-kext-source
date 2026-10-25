@@ -1,0 +1,4 @@
+local	FUN_000bf910	param_1	swizzleCode	INFERRED	read: selector code 0..0xd (bit 0x80 only clears itself); rewritten to the selector group (0, 1 or 2) the case belongs to
+local	FUN_000bf910	param_2	selectX	INFERRED	output: channel select for component 0 (case 0 gives 0, 1, 2 for the identity selector)
+local	FUN_000bf910	param_3	selectY	INFERRED	output: channel select for component 1
+local	FUN_000bf910	param_4	selectZ	INFERRED	output: channel select for component 2

@@ -1,0 +1,14 @@
+use	FUN_000a9ac0	iVar13	engineStateWord318c	INFERRED	every definition of this web is a load from engineState+0x318c (positional name; no field row)	^\s*iVar13\ =\ \*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x0000318c\)\ \+\ uVar23\);$	+1
+use	FUN_000a9ac0	iVar13	engineStateWord318c	INFERRED	every definition of this web is a load from engineState+0x318c (positional name; no field row)	^\s*\*\(int\ \*\)\(param_1\ \+\ 0x44c\)\ =\ iVar13;$	+1
+use	FUN_000a9ac0	iVar13	engineStateWord318c	INFERRED	every definition of this web is a load from engineState+0x318c (positional name; no field row)	^\s*uVar10\ =\ iVar5\ \-\ \(uVar10\ \+\ iVar13\);$	+1
+use	FUN_000a9ac0	iVar13	engineStateWord318c	INFERRED	every definition of this web is a load from engineState+0x318c (positional name; no field row)	^\s*iVar13\ =\ uVar10\ \+\ iVar13;$	+1
+use	FUN_000a9ac0	iVar13	engineStateWord318c	INFERRED	every definition of this web is a load from engineState+0x318c (positional name; no field row)	^\s*if\ \(iVar13\ <=\ iVar5\)\ \{$	+2
+use	FUN_000a9ac0	iVar13	engineStateWord318c	INFERRED	every definition of this web is a load from engineState+0x318c (positional name; no field row)	^\s*iVar13\ =\ \*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x0000318c\)\ \+\ uVar23\);$@2	+1
+use	FUN_000a9ac0	iVar13	engineStateWord318c	INFERRED	every definition of this web is a load from engineState+0x318c (positional name; no field row)	^\s*\*\(int\ \*\)\(param_1\ \+\ 0x44c\)\ =\ iVar13;$@2	+1
+use	FUN_000a9ac0	iVar13	engineStateWord318c	INFERRED	every definition of this web is a load from engineState+0x318c (positional name; no field row)	^\s*uVar10\ =\ iVar19\ \-\ \(uVar10\ \+\ iVar13\);$	+1
+use	FUN_000a9ac0	iVar13	engineStateWord318c	INFERRED	every definition of this web is a load from engineState+0x318c (positional name; no field row)	^\s*iVar13\ =\ uVar10\ \+\ iVar13;$@2	+1
+use	FUN_000a9ac0	iVar13	engineStateWord318c	INFERRED	every definition of this web is a load from engineState+0x318c (positional name; no field row)	^\s*if\ \(iVar13\ <=\ iVar19\)\ \{$	+2
+use	FUN_000a9ac0	iVar5	engineStateWord3188	INFERRED	every definition of this web is a load from engineState+0x3188 (positional name; no field row)	^\s*iVar5\ =\ \*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00003188\)\ \+\ uVar23\);$	+1
+use	FUN_000a9ac0	iVar5	engineStateWord3188	INFERRED	every definition of this web is a load from engineState+0x3188 (positional name; no field row)	^\s*\*\(int\ \*\)\(param_1\ \+\ 0x448\)\ =\ iVar5;$	+1
+use	FUN_000a9ac0	iVar5	engineStateWord3188	INFERRED	every definition of this web is a load from engineState+0x3188 (positional name; no field row)	^\s*iVar5\ =\ iVar29\ \+\ iVar5;$	+1
+use	FUN_000a9ac0	iVar5	engineStateWord3188	INFERRED	every definition of this web is a load from engineState+0x3188 (positional name; no field row)	^\s*if\ \(iVar5\ <=\ iVar26\)\ \{$	+2

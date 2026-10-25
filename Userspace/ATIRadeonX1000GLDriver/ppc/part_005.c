@@ -10526,8 +10526,8 @@ int gldDeleteFragmentShaderObject(param_1, param_2)
  * large PPC links) does not silently reconcile this the way stock ld did. */
 asm(".globl glGenerateMipmap_impl");
 asm(".set glGenerateMipmap_impl, _glGenerateMipmap_impl");
-asm(".globl FUN_000353a0");
-asm(".set FUN_000353a0, _glCopyTexSubImage_impl");
+asm(".globl glCopyTexSubImage_impl");
+asm(".set glCopyTexSubImage_impl, _glCopyTexSubImage_impl");
 asm(".globl glTexSubImage_impl");
 asm(".set glTexSubImage_impl, _glTexSubImage_impl");
 asm(".globl gldPrimInlineLineStrip");

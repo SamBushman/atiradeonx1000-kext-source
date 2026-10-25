@@ -13,31 +13,32 @@ int KhanPs__vslot76_getBindingLimit(this, outLimit)
 }
 
 /* KhanPs__createSchedModels @ 0x127f24 (180 bytes) */
-int KhanPs__createSchedModels(this, param_2)
+int KhanPs__createSchedModels(this, compiler)
   int this;
-  undefined4 param_2;
+  undefined4 compiler;
 {
+  undefined4 *packModel;
   undefined *vtable;
-  undefined4 *puVar2;
-  undefined *puVar3;
+  undefined4 *schedModel;
+  undefined *baseModelVtable;
   
-  puVar2 = (undefined4 *)Compiler__allocateOrFail(param_2,0x6c);
+  schedModel = (undefined4 *)Compiler__allocateOrFail(compiler,0x6c);
   vtable = PTR_DAT_001e90f4;
-  puVar3 = PTR_DAT_001e90fc + 8;
-  puVar2[2] = param_2;
-  *puVar2 = puVar3;
-  puVar2[1] = 0;
-  *puVar2 = vtable + 8;
-  PackState__reset(puVar2 + 10);
-  R520SchedModel__vslot2_reset(puVar2);
-  puVar2[0x1a] = 0;
-  *(undefined4 **)(this + 0x60) = puVar2;
-  puVar2 = (undefined4 *)Compiler__allocateOrFail(param_2,0xc);
+  baseModelVtable = PTR_DAT_001e90fc + 8;
+  schedModel[2] = compiler;
+  *schedModel = baseModelVtable;
+  schedModel[1] = 0;
+  *schedModel = vtable + 8;
+  PackState__reset(schedModel + 10);
+  R520SchedModel__vslot2_reset(schedModel);
+  schedModel[0x1a] = 0;
+  *(undefined4 **)(this + 0x60) = schedModel;
+  packModel = (undefined4 *)Compiler__allocateOrFail(compiler,0xc);
   vtable = PTR_DAT_001e9100;
-  puVar2[1] = 1;
-  puVar2[2] = 0;
-  *puVar2 = vtable + 8;
-  *(undefined4 **)(this + 100) = puVar2;
+  packModel[1] = 1;
+  packModel[2] = 0;
+  *packModel = vtable + 8;
+  *(undefined4 **)(this + 100) = packModel;
   return;
 }
 
@@ -785,27 +786,28 @@ int FudoVs__createSchedModels(this, param_2)
   int this;
   undefined4 param_2;
 {
+  undefined4 *secondarySchedModel;
   undefined *vtable;
-  undefined4 *puVar2;
-  undefined *puVar3;
+  undefined4 *vertexSchedModel;
+  undefined *vertexSchedVtable;
   
-  puVar2 = (undefined4 *)Compiler__allocateOrFail(param_2,0x3c);
+  vertexSchedModel = (undefined4 *)Compiler__allocateOrFail(param_2,0x3c);
   vtable = PTR_DAT_001e9110;
-  puVar3 = PTR_DAT_001e90fc + 8;
-  puVar2[2] = param_2;
-  *puVar2 = puVar3;
-  puVar2[1] = 0;
-  *puVar2 = vtable + 8;
-  R300VSchedModel__vslot2_reset(puVar2);
-  SchedModel__resetCounters(puVar2);
-  puVar2[0xe] = 0;
-  *(undefined4 **)(this + 0x60) = puVar2;
-  puVar2 = (undefined4 *)Compiler__allocateOrFail(param_2,0xc);
+  vertexSchedVtable = PTR_DAT_001e90fc + 8;
+  vertexSchedModel[2] = param_2;
+  *vertexSchedModel = vertexSchedVtable;
+  vertexSchedModel[1] = 0;
+  *vertexSchedModel = vtable + 8;
+  R300VSchedModel__vslot2_reset(vertexSchedModel);
+  SchedModel__resetCounters(vertexSchedModel);
+  vertexSchedModel[0xe] = 0;
+  *(undefined4 **)(this + 0x60) = vertexSchedModel;
+  secondarySchedModel = (undefined4 *)Compiler__allocateOrFail(param_2,0xc);
   vtable = PTR_DAT_001e9100;
-  puVar2[1] = 1;
-  puVar2[2] = 0;
-  *puVar2 = vtable + 8;
-  *(undefined4 **)(this + 100) = puVar2;
+  secondarySchedModel[1] = 1;
+  secondarySchedModel[2] = 0;
+  *secondarySchedModel = vtable + 8;
+  *(undefined4 **)(this + 100) = secondarySchedModel;
   return;
 }
 
@@ -1700,31 +1702,32 @@ int KhanVs__vslot75_registerConstantMultiples(this, constRecord, compiler, param
 }
 
 /* KhanVs__createSchedModels @ 0x12a4b8 (176 bytes) */
-int KhanVs__createSchedModels(this, param_2)
+int KhanVs__createSchedModels(this, compiler)
   int this;
-  undefined4 param_2;
+  undefined4 compiler;
 {
+  undefined4 *packModel;
   undefined *vtable;
-  undefined4 *puVar2;
-  undefined *puVar3;
+  undefined4 *schedModel;
+  undefined *baseModelVtable;
   
-  puVar2 = (undefined4 *)Compiler__allocateOrFail(param_2,0x3c);
+  schedModel = (undefined4 *)Compiler__allocateOrFail(compiler,0x3c);
   vtable = PTR_DAT_001e9110;
-  puVar3 = PTR_DAT_001e90fc + 8;
-  puVar2[2] = param_2;
-  *puVar2 = puVar3;
-  puVar2[1] = 0;
-  *puVar2 = vtable + 8;
-  R300VSchedModel__vslot2_reset(puVar2);
-  SchedModel__resetCounters(puVar2);
-  puVar2[0xe] = 0;
-  *(undefined4 **)(this + 0x60) = puVar2;
-  puVar2 = (undefined4 *)Compiler__allocateOrFail(param_2,0xc);
+  baseModelVtable = PTR_DAT_001e90fc + 8;
+  schedModel[2] = compiler;
+  *schedModel = baseModelVtable;
+  schedModel[1] = 0;
+  *schedModel = vtable + 8;
+  R300VSchedModel__vslot2_reset(schedModel);
+  SchedModel__resetCounters(schedModel);
+  schedModel[0xe] = 0;
+  *(undefined4 **)(this + 0x60) = schedModel;
+  packModel = (undefined4 *)Compiler__allocateOrFail(compiler,0xc);
   vtable = PTR_DAT_001e9100;
-  puVar2[1] = 1;
-  puVar2[2] = 0;
-  *puVar2 = vtable + 8;
-  *(undefined4 **)(this + 100) = puVar2;
+  packModel[1] = 1;
+  packModel[2] = 0;
+  *packModel = vtable + 8;
+  *(undefined4 **)(this + 100) = packModel;
   return;
 }
 
@@ -1986,46 +1989,52 @@ int IfHeader__swapArms(program, ifHeader)
 }
 
 /* FUN_0012ac58 @ 0x12ac58 (452 bytes) */
-int FUN_0012ac58(param_1, block)
-  int param_1;
+int FUN_0012ac58(targetLoop, block)
+  int targetLoop;
   int *block;
 {
+  int successorQuery20;
+  int successorQuery28;
+  int currentQuery38;
+  int successorQuery2c;
+  int successorQuery24;
+  int footerQuery2c;
   int *predecessor;
-  int *a0;
-  int iVar1;
+  int *successor;
+  int successorLoopInfo;
   int *piVar2;
   
   piVar2 = (int *)block[0x4b];
   while( true ) {
     while( true ) {
       while( true ) {
-        a0 = (int *)Block__getSuccessor(block,0);
-        iVar1 = (**(code **)(*a0 + 0x10))(a0);
-        if ((iVar1 != 0) && (*(int *)(iVar1 + 300) == param_1)) {
-          iVar1 = (**(code **)(*piVar2 + 0x2c))(piVar2);
-          predecessor = (int *)Block__getPredecessor(piVar2,(uint)(iVar1 != 0));
+        successor = (int *)Block__getSuccessor(block,0);
+        successorLoopInfo = (**(code **)(*successor + 0x10))(successor);
+        if ((successorLoopInfo != 0) && (*(int *)(successorLoopInfo + 300) == targetLoop)) {
+          footerQuery2c = (**(code **)(*piVar2 + 0x2c))(piVar2);
+          predecessor = (int *)Block__getPredecessor(piVar2,(uint)(footerQuery2c != 0));
           return predecessor;
         }
-        iVar1 = (**(code **)(*a0 + 0x24))(a0);
-        if (iVar1 == 0) break;
-        block = (int *)a0[0x4f];
+        successorQuery24 = (**(code **)(*successor + 0x24))(successor);
+        if (successorQuery24 == 0) break;
+        block = (int *)successor[0x4f];
       }
-      iVar1 = (**(code **)(*a0 + 0x2c))(a0);
-      if (iVar1 == 0) break;
-      block = (int *)a0[0x55];
+      successorQuery2c = (**(code **)(*successor + 0x2c))(successor);
+      if (successorQuery2c == 0) break;
+      block = (int *)successor[0x55];
     }
-    iVar1 = (**(code **)(*block + 0x38))(block);
-    if ((iVar1 != 0) || (iVar1 = (**(code **)(*block + 0x3c))(block), iVar1 != 0)) break;
-    iVar1 = (**(code **)(*a0 + 0x28))(a0);
-    if ((iVar1 == 0) && (iVar1 = (**(code **)(*a0 + 0x30))(a0), iVar1 == 0)) {
-      iVar1 = (**(code **)(*a0 + 0x20))(a0);
-      if (iVar1 == 0) {
+    currentQuery38 = (**(code **)(*block + 0x38))(block);
+    if ((currentQuery38 != 0) || (currentQuery38 = (**(code **)(*block + 0x3c))(block), currentQuery38 != 0)) break;
+    successorQuery28 = (**(code **)(*successor + 0x28))(successor);
+    if ((successorQuery28 == 0) && (successorQuery28 = (**(code **)(*successor + 0x30))(successor), successorQuery28 == 0)) {
+      successorQuery20 = (**(code **)(*successor + 0x20))(successor);
+      if (successorQuery20 == 0) {
         block = (int *)Block__getSuccessor(block,0);
       }
     }
     else {
-      piVar2 = (int *)a0[0x4b];
-      block = a0;
+      piVar2 = (int *)successor[0x4b];
+      block = successor;
     }
   }
   return block;
@@ -2111,37 +2120,41 @@ int FUN_0012aef0(param_1, firstBlock, block)
 }
 
 /* FUN_0012afe8 @ 0x12afe8 (344 bytes) */
-int FUN_0012afe8(param_1, param_2, block, param_4)
-  int param_1;
-  int param_2;
+int FUN_0012afe8(acceptFooterOnly, targetLoop, block, stopBlock)
+  int acceptFooterOnly;
+  int targetLoop;
   int *block;
-  int *param_4;
+  int *stopBlock;
 {
-  int iVar1;
+  int enclosingLoopInfo;
+  int blockQuery30;
+  int blockQuery28;
+  int blockQuery2c;
+  int blockQuery24;
   
   if (block != (int *)0x0) {
     do {
-      iVar1 = (**(code **)(*block + 0x24))(block);
-      if (iVar1 == 0) {
-        iVar1 = (**(code **)(*block + 0x2c))(block);
-        if (iVar1 == 0) {
-          iVar1 = (**(code **)(*block + 0x28))(block);
-          if (iVar1 != 0) {
-            if (param_1 == 0) {
+      blockQuery24 = (**(code **)(*block + 0x24))(block);
+      if (blockQuery24 == 0) {
+        blockQuery2c = (**(code **)(*block + 0x2c))(block);
+        if (blockQuery2c == 0) {
+          blockQuery28 = (**(code **)(*block + 0x28))(block);
+          if (blockQuery28 != 0) {
+            if (acceptFooterOnly == 0) {
               return block;
             }
-            if (param_4 != block) {
+            if (stopBlock != block) {
               return block;
             }
-            return param_4;
+            return stopBlock;
           }
-          iVar1 = (**(code **)(*block + 0x30))(block);
-          if (iVar1 != 0) {
+          blockQuery30 = (**(code **)(*block + 0x30))(block);
+          if (blockQuery30 != 0) {
             return block;
           }
-          iVar1 = (**(code **)(*block + 0x10))(block);
-          if (((iVar1 != 0) && (param_1 == 0)) &&
-             (iVar1 = (**(code **)(*block + 0x10))(block), *(int *)(iVar1 + 300) == param_2)) {
+          enclosingLoopInfo = (**(code **)(*block + 0x10))(block);
+          if (((enclosingLoopInfo != 0) && (acceptFooterOnly == 0)) &&
+             (enclosingLoopInfo = (**(code **)(*block + 0x10))(block), *(int *)(enclosingLoopInfo + 300) == targetLoop)) {
             return block;
           }
         }

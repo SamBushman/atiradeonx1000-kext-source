@@ -2407,35 +2407,36 @@ int FUN_00112fd4(param_1)
 }
 
 /* FUN_00112fe4 @ 0x112fe4 (172 bytes) */
-int FUN_00112fe4(param_1)
-  int param_1;
+int FUN_00112fe4(compiler)
+  int compiler;
 {
-  int iVar1;
-  int iVar2;
-  int iVar3;
-  undefined4 uVar4;
-  int *piVar5;
+  int entrySlotNumber;
+  int nextExpectedSlot;
+  int limitsTable;
+  int bindingCount;
+  undefined4 slotsAreSequential;
+  int *entryCursor;
   
-  iVar2 = (**(code **)(**(int **)(param_1 + 0x30c) + 0x16c))(*(int **)(param_1 + 0x30c));
-  iVar3 = (**(code **)(**(int **)(param_1 + 0x30c) + 0x40))(*(int **)(param_1 + 0x30c));
-  if (iVar3 < 1) {
+  limitsTable = (**(code **)(**(int **)(compiler + 0x30c) + 0x16c))(*(int **)(compiler + 0x30c));
+  bindingCount = (**(code **)(**(int **)(compiler + 0x30c) + 0x40))(*(int **)(compiler + 0x30c));
+  if (bindingCount < 1) {
 LAB_00113034:
-    uVar4 = 1;
+    slotsAreSequential = 1;
   }
   else {
-    if (*(int *)(iVar2 + 8) == 0) {
-      piVar5 = (int *)(iVar2 + 0x40);
-      iVar2 = 0;
+    if (*(int *)(limitsTable + 8) == 0) {
+      entryCursor = (int *)(limitsTable + 0x40);
+      entrySlotNumber = 0;
       do {
-        iVar1 = iVar2 + 1;
-        if (iVar3 == iVar1) goto LAB_00113034;
-        iVar2 = *piVar5;
-        piVar5 = piVar5 + 0xe;
-      } while (iVar2 == iVar1);
+        nextExpectedSlot = entrySlotNumber + 1;
+        if (bindingCount == nextExpectedSlot) goto LAB_00113034;
+        entrySlotNumber = *entryCursor;
+        entryCursor = entryCursor + 0xe;
+      } while (entrySlotNumber == nextExpectedSlot);
     }
-    uVar4 = 0;
+    slotsAreSequential = 0;
   }
-  return uVar4;
+  return slotsAreSequential;
 }
 
 /* OpcodeTraits__flagBit2 @ 0x113090 (76 bytes) */
@@ -2598,22 +2599,23 @@ int OpcodeInfo__getResultMode(param_1, param_2, param_3)
   int *param_2;
   int param_3;
 {
+  int vtableQueryResult;
   int instFlagBit2Result;
-  int iVar1;
+  int resultMode;
   
-  iVar1 = *(int *)(param_1 + 0xc);
-  if (iVar1 == 0) {
+  resultMode = *(int *)(param_1 + 0xc);
+  if (resultMode == 0) {
     instFlagBit2Result = ((int (*)())OpcodeTraits__instFlagBit2)(*(undefined4 *)(param_3 + 8),param_2);
     if (instFlagBit2Result != 0) {
       return 1;
     }
-    iVar1 = *(int *)(param_1 + 0xc);
+    resultMode = *(int *)(param_1 + 0xc);
   }
-  if (iVar1 != 0x10) {
-    return iVar1;
+  if (resultMode != 0x10) {
+    return resultMode;
   }
-  iVar1 = (**(code **)(*param_2 + 0x30))(param_2);
-  if (iVar1 != 0) {
+  vtableQueryResult = (**(code **)(*param_2 + 0x30))(param_2);
+  if (vtableQueryResult != 0) {
     return 9;
   }
   instFlagBit2Result = ((int (*)())OpcodeTraits__instFlagBit2)(*(undefined4 *)(param_3 + 8),param_2);
@@ -2749,17 +2751,17 @@ int FUN_00113734(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_6;
   undefined4 param_7;
 {
-  uint uVar1;
-  int *a0;
-  int iVar2;
+  uint flagBit2;
+  int *targetObject;
+  int opcodeFlagTable;
   
-  uVar1 = 0;
-  a0 = *(int **)(param_1 + 0x30c);
-  if ((a0[2] & 0x10U) != 0) {
-    iVar2 = (**(code **)(*a0 + 0x16c))(a0);
-    uVar1 = *(uint *)(iVar2 + *(int *)(*(int *)(param_2 + 0x88) + 8) * 0x38) >> 2 & 1;
+  flagBit2 = 0;
+  targetObject = *(int **)(param_1 + 0x30c);
+  if ((targetObject[2] & 0x10U) != 0) {
+    opcodeFlagTable = (**(code **)(*targetObject + 0x16c))(targetObject);
+    flagBit2 = *(uint *)(opcodeFlagTable + *(int *)(*(int *)(param_2 + 0x88) + 8) * 0x38) >> 2 & 1;
   }
-  return uVar1;
+  return flagBit2;
 }
 
 /* FUN_0011379c @ 0x11379c (124 bytes) */

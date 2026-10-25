@@ -3347,116 +3347,116 @@ int FUN_000e0830(param_1, param_2, param_3)
   return 0;
 }
 
-/* FUN_000e0850 @ 0xe0850 (1112 bytes) */
-int FUN_000e0850(param_1)
-  int param_1;
+/* Compiler__setDefaultOptions @ 0xe0850 (1112 bytes) */
+int Compiler__setDefaultOptions(compiler)
+  int compiler;
 {
-  ((int (*)())Compiler__clearOptionBit)(param_1,0);
-  ((int (*)())Compiler__setOptionBit)(param_1,1);
-  ((int (*)())Compiler__setOptionBit)(param_1,2);
-  ((int (*)())Compiler__setOptionBit)(param_1,3);
-  ((int (*)())Compiler__clearOptionBit)(param_1,4);
-  ((int (*)())Compiler__setOptionBit)(param_1,5);
-  ((int (*)())Compiler__setOptionBit)(param_1,6);
-  ((int (*)())Compiler__setOptionBit)(param_1,7);
-  ((int (*)())Compiler__clearOptionBit)(param_1,8);
-  ((int (*)())Compiler__setOptionBit)(param_1,9);
-  ((int (*)())Compiler__setOptionBit)(param_1,10);
-  ((int (*)())Compiler__clearOptionBit)(param_1,0xb);
-  ((int (*)())Compiler__setOptionBit)(param_1,0xc);
-  ((int (*)())Compiler__clearOptionBit)(param_1,0xd);
-  ((int (*)())Compiler__setOptionBit)(param_1,0xe);
-  ((int (*)())Compiler__setOptionBit)(param_1,0xf);
-  ((int (*)())Compiler__clearOptionBit)(param_1,0x10);
-  ((int (*)())Compiler__setOptionBit)(param_1,0x11);
-  ((int (*)())Compiler__clearOptionBit)(param_1,0x12);
-  ((int (*)())Compiler__setOptionBit)(param_1,0x13);
-  ((int (*)())Compiler__setOptionBit)(param_1,0x14);
-  ((int (*)())Compiler__setOptionBit)(param_1,0x15);
-  ((int (*)())Compiler__setOptionBit)(param_1,0x16);
-  ((int (*)())Compiler__setOptionBit)(param_1,0x17);
-  ((int (*)())Compiler__setOptionBit)(param_1,0x18);
-  ((int (*)())Compiler__setOptionBit)(param_1,0x19);
-  ((int (*)())Compiler__setOptionBit)(param_1,0x1a);
-  ((int (*)())Compiler__setOptionBit)(param_1,0x1b);
-  ((int (*)())Compiler__setOptionBit)(param_1,0x1c);
-  ((int (*)())Compiler__setOptionBit)(param_1,0x1d);
-  ((int (*)())Compiler__setOptionBit)(param_1,0x1e);
-  ((int (*)())Compiler__setOptionBit)(param_1,0x1f);
-  ((int (*)())Compiler__setOptionBit)(param_1,0x20);
-  ((int (*)())Compiler__setOptionBit)(param_1,0x21);
-  ((int (*)())Compiler__setOptionBit)(param_1,0x22);
-  ((int (*)())Compiler__setOptionBit)(param_1,0x23);
-  ((int (*)())Compiler__setOptionBit)(param_1,0x24);
-  ((int (*)())Compiler__setOptionBit)(param_1,0x25);
-  ((int (*)())Compiler__setOptionBit)(param_1,0x26);
-  ((int (*)())Compiler__setOptionBit)(param_1,0x27);
-  ((int (*)())Compiler__setOptionBit)(param_1,0x28);
-  ((int (*)())Compiler__setOptionBit)(param_1,0x29);
-  ((int (*)())Compiler__clearOptionBit)(param_1,0x2a);
-  ((int (*)())Compiler__clearOptionBit)(param_1,0x2b);
-  ((int (*)())Compiler__clearOptionBit)(param_1,0x2c);
-  ((int (*)())Compiler__setOptionBit)(param_1,0x2e);
-  ((int (*)())Compiler__setOptionBit)(param_1,0x2f);
-  ((int (*)())Compiler__clearOptionBit)(param_1,0x4e);
-  ((int (*)())Compiler__clearOptionBit)(param_1,0x4f);
-  ((int (*)())Compiler__setOptionBit)(param_1,0x30);
-  ((int (*)())Compiler__setOptionBit)(param_1,0x31);
-  ((int (*)())Compiler__setOptionBit)(param_1,0x32);
-  ((int (*)())Compiler__setOptionBit)(param_1,0x33);
-  ((int (*)())Compiler__clearOptionBit)(param_1,0x34);
-  ((int (*)())Compiler__setOptionBit)(param_1,0x35);
-  ((int (*)())Compiler__clearOptionBit)(param_1,0x36);
-  ((int (*)())Compiler__clearOptionBit)(param_1,0x37);
-  ((int (*)())Compiler__setOptionBit)(param_1,0x38);
-  ((int (*)())Compiler__setOptionBit)(param_1,0x39);
-  ((int (*)())Compiler__setOptionBit)(param_1,0x3a);
-  ((int (*)())Compiler__setOptionBit)(param_1,0x3b);
-  ((int (*)())Compiler__setOptionBit)(param_1,0x3c);
-  ((int (*)())Compiler__setOptionBit)(param_1,0x3d);
-  ((int (*)())Compiler__clearOptionBit)(param_1,0x3e);
-  ((int (*)())Compiler__setOptionBit)(param_1,0x3f);
-  ((int (*)())Compiler__clearOptionBit)(param_1,0x40);
-  ((int (*)())Compiler__setOptionBit)(param_1,0x41);
-  ((int (*)())Compiler__setOptionBit)(param_1,0x42);
-  ((int (*)())Compiler__setOptionBit)(param_1,0x43);
-  ((int (*)())Compiler__clearOptionBit)(param_1,0x44);
-  ((int (*)())Compiler__setOptionBit)(param_1,0x45);
-  ((int (*)())Compiler__clearOptionBit)(param_1,0x46);
-  ((int (*)())Compiler__setOptionBit)(param_1,0x47);
-  ((int (*)())Compiler__setOptionBit)(param_1,0x48);
-  ((int (*)())Compiler__setOptionBit)(param_1,0x49);
-  ((int (*)())Compiler__setOptionBit)(param_1,0x4a);
-  ((int (*)())Compiler__setOptionBit)(param_1,0x4b);
-  ((int (*)())Compiler__clearOptionBit)(param_1,0x4c);
-  ((int (*)())Compiler__setOptionBit)(param_1,0x4d);
-  *(undefined4 *)(param_1 + 0x64c) = 2;
-  *(undefined4 *)(param_1 + 0x6b4) = 0x7fffffff;
-  *(undefined4 *)(param_1 + 0x67c) = 100;
-  *(undefined4 *)(param_1 + 0x6ac) = 4;
-  *(undefined4 *)(param_1 + 0x650) = 0x7fffffff;
-  *(undefined4 *)(param_1 + 0x654) = 0x7fffffff;
-  *(undefined4 *)(param_1 + 0x658) = 0x7fffffff;
-  *(undefined4 *)(param_1 + 0x65c) = 0x7fffffff;
-  *(undefined4 *)(param_1 + 0x660) = 0x7fffffff;
-  *(undefined4 *)(param_1 + 0x664) = 0x7fffffff;
-  *(undefined4 *)(param_1 + 0x668) = 0x7fffffff;
-  *(undefined4 *)(param_1 + 0x670) = 0x7fffffff;
-  *(undefined4 *)(param_1 + 0x66c) = 0x7fffffff;
-  *(undefined4 *)(param_1 + 0x674) = 0x7fffffff;
-  *(undefined4 *)(param_1 + 0x678) = 0x7fffffff;
-  *(undefined4 *)(param_1 + 0x680) = 0x7fffffff;
-  *(undefined4 *)(param_1 + 0x684) = 0x7fffffff;
-  *(undefined4 *)(param_1 + 0x688) = 0x7fffffff;
-  *(undefined4 *)(param_1 + 0x68c) = 0x7fffffff;
-  *(undefined4 *)(param_1 + 0x690) = 0x7fffffff;
-  *(undefined4 *)(param_1 + 0x694) = 0x7fffffff;
-  *(undefined4 *)(param_1 + 0x698) = 0x7fffffff;
-  *(undefined4 *)(param_1 + 0x69c) = 0x7fffffff;
-  *(undefined4 *)(param_1 + 0x6a0) = 0x7fffffff;
-  *(undefined4 *)(param_1 + 0x6a4) = 0x7fffffff;
-  *(undefined4 *)(param_1 + 0x6a8) = 0x7fffffff;
-  *(undefined4 *)(param_1 + 0x6b0) = 0x7fffffff;
+  ((int (*)())Compiler__clearOptionBit)(compiler,0);
+  ((int (*)())Compiler__setOptionBit)(compiler,1);
+  ((int (*)())Compiler__setOptionBit)(compiler,2);
+  ((int (*)())Compiler__setOptionBit)(compiler,3);
+  ((int (*)())Compiler__clearOptionBit)(compiler,4);
+  ((int (*)())Compiler__setOptionBit)(compiler,5);
+  ((int (*)())Compiler__setOptionBit)(compiler,6);
+  ((int (*)())Compiler__setOptionBit)(compiler,7);
+  ((int (*)())Compiler__clearOptionBit)(compiler,8);
+  ((int (*)())Compiler__setOptionBit)(compiler,9);
+  ((int (*)())Compiler__setOptionBit)(compiler,10);
+  ((int (*)())Compiler__clearOptionBit)(compiler,0xb);
+  ((int (*)())Compiler__setOptionBit)(compiler,0xc);
+  ((int (*)())Compiler__clearOptionBit)(compiler,0xd);
+  ((int (*)())Compiler__setOptionBit)(compiler,0xe);
+  ((int (*)())Compiler__setOptionBit)(compiler,0xf);
+  ((int (*)())Compiler__clearOptionBit)(compiler,0x10);
+  ((int (*)())Compiler__setOptionBit)(compiler,0x11);
+  ((int (*)())Compiler__clearOptionBit)(compiler,0x12);
+  ((int (*)())Compiler__setOptionBit)(compiler,0x13);
+  ((int (*)())Compiler__setOptionBit)(compiler,0x14);
+  ((int (*)())Compiler__setOptionBit)(compiler,0x15);
+  ((int (*)())Compiler__setOptionBit)(compiler,0x16);
+  ((int (*)())Compiler__setOptionBit)(compiler,0x17);
+  ((int (*)())Compiler__setOptionBit)(compiler,0x18);
+  ((int (*)())Compiler__setOptionBit)(compiler,0x19);
+  ((int (*)())Compiler__setOptionBit)(compiler,0x1a);
+  ((int (*)())Compiler__setOptionBit)(compiler,0x1b);
+  ((int (*)())Compiler__setOptionBit)(compiler,0x1c);
+  ((int (*)())Compiler__setOptionBit)(compiler,0x1d);
+  ((int (*)())Compiler__setOptionBit)(compiler,0x1e);
+  ((int (*)())Compiler__setOptionBit)(compiler,0x1f);
+  ((int (*)())Compiler__setOptionBit)(compiler,0x20);
+  ((int (*)())Compiler__setOptionBit)(compiler,0x21);
+  ((int (*)())Compiler__setOptionBit)(compiler,0x22);
+  ((int (*)())Compiler__setOptionBit)(compiler,0x23);
+  ((int (*)())Compiler__setOptionBit)(compiler,0x24);
+  ((int (*)())Compiler__setOptionBit)(compiler,0x25);
+  ((int (*)())Compiler__setOptionBit)(compiler,0x26);
+  ((int (*)())Compiler__setOptionBit)(compiler,0x27);
+  ((int (*)())Compiler__setOptionBit)(compiler,0x28);
+  ((int (*)())Compiler__setOptionBit)(compiler,0x29);
+  ((int (*)())Compiler__clearOptionBit)(compiler,0x2a);
+  ((int (*)())Compiler__clearOptionBit)(compiler,0x2b);
+  ((int (*)())Compiler__clearOptionBit)(compiler,0x2c);
+  ((int (*)())Compiler__setOptionBit)(compiler,0x2e);
+  ((int (*)())Compiler__setOptionBit)(compiler,0x2f);
+  ((int (*)())Compiler__clearOptionBit)(compiler,0x4e);
+  ((int (*)())Compiler__clearOptionBit)(compiler,0x4f);
+  ((int (*)())Compiler__setOptionBit)(compiler,0x30);
+  ((int (*)())Compiler__setOptionBit)(compiler,0x31);
+  ((int (*)())Compiler__setOptionBit)(compiler,0x32);
+  ((int (*)())Compiler__setOptionBit)(compiler,0x33);
+  ((int (*)())Compiler__clearOptionBit)(compiler,0x34);
+  ((int (*)())Compiler__setOptionBit)(compiler,0x35);
+  ((int (*)())Compiler__clearOptionBit)(compiler,0x36);
+  ((int (*)())Compiler__clearOptionBit)(compiler,0x37);
+  ((int (*)())Compiler__setOptionBit)(compiler,0x38);
+  ((int (*)())Compiler__setOptionBit)(compiler,0x39);
+  ((int (*)())Compiler__setOptionBit)(compiler,0x3a);
+  ((int (*)())Compiler__setOptionBit)(compiler,0x3b);
+  ((int (*)())Compiler__setOptionBit)(compiler,0x3c);
+  ((int (*)())Compiler__setOptionBit)(compiler,0x3d);
+  ((int (*)())Compiler__clearOptionBit)(compiler,0x3e);
+  ((int (*)())Compiler__setOptionBit)(compiler,0x3f);
+  ((int (*)())Compiler__clearOptionBit)(compiler,0x40);
+  ((int (*)())Compiler__setOptionBit)(compiler,0x41);
+  ((int (*)())Compiler__setOptionBit)(compiler,0x42);
+  ((int (*)())Compiler__setOptionBit)(compiler,0x43);
+  ((int (*)())Compiler__clearOptionBit)(compiler,0x44);
+  ((int (*)())Compiler__setOptionBit)(compiler,0x45);
+  ((int (*)())Compiler__clearOptionBit)(compiler,0x46);
+  ((int (*)())Compiler__setOptionBit)(compiler,0x47);
+  ((int (*)())Compiler__setOptionBit)(compiler,0x48);
+  ((int (*)())Compiler__setOptionBit)(compiler,0x49);
+  ((int (*)())Compiler__setOptionBit)(compiler,0x4a);
+  ((int (*)())Compiler__setOptionBit)(compiler,0x4b);
+  ((int (*)())Compiler__clearOptionBit)(compiler,0x4c);
+  ((int (*)())Compiler__setOptionBit)(compiler,0x4d);
+  *(undefined4 *)(compiler + 0x64c) = 2;
+  *(undefined4 *)(compiler + 0x6b4) = 0x7fffffff;
+  *(undefined4 *)(compiler + 0x67c) = 100;
+  *(undefined4 *)(compiler + 0x6ac) = 4;
+  *(undefined4 *)(compiler + 0x650) = 0x7fffffff;
+  *(undefined4 *)(compiler + 0x654) = 0x7fffffff;
+  *(undefined4 *)(compiler + 0x658) = 0x7fffffff;
+  *(undefined4 *)(compiler + 0x65c) = 0x7fffffff;
+  *(undefined4 *)(compiler + 0x660) = 0x7fffffff;
+  *(undefined4 *)(compiler + 0x664) = 0x7fffffff;
+  *(undefined4 *)(compiler + 0x668) = 0x7fffffff;
+  *(undefined4 *)(compiler + 0x670) = 0x7fffffff;
+  *(undefined4 *)(compiler + 0x66c) = 0x7fffffff;
+  *(undefined4 *)(compiler + 0x674) = 0x7fffffff;
+  *(undefined4 *)(compiler + 0x678) = 0x7fffffff;
+  *(undefined4 *)(compiler + 0x680) = 0x7fffffff;
+  *(undefined4 *)(compiler + 0x684) = 0x7fffffff;
+  *(undefined4 *)(compiler + 0x688) = 0x7fffffff;
+  *(undefined4 *)(compiler + 0x68c) = 0x7fffffff;
+  *(undefined4 *)(compiler + 0x690) = 0x7fffffff;
+  *(undefined4 *)(compiler + 0x694) = 0x7fffffff;
+  *(undefined4 *)(compiler + 0x698) = 0x7fffffff;
+  *(undefined4 *)(compiler + 0x69c) = 0x7fffffff;
+  *(undefined4 *)(compiler + 0x6a0) = 0x7fffffff;
+  *(undefined4 *)(compiler + 0x6a4) = 0x7fffffff;
+  *(undefined4 *)(compiler + 0x6a8) = 0x7fffffff;
+  *(undefined4 *)(compiler + 0x6b0) = 0x7fffffff;
   return;
 }
 
@@ -3588,166 +3588,166 @@ int isWhitespaceChar(param_1)
 }
 
 /* Compiler__setOption @ 0xe0ee8 (1184 bytes) */
-int Compiler__setOption(param_1, param_2, param_3)
-  int param_1;
-  undefined4 param_2;
-  int param_3;
+int Compiler__setOption(compiler, optionName, value)
+  int compiler;
+  undefined4 optionName;
+  int value;
 {
   int compareResult;
-  bool bVar1;
+  bool isLastEntry;
   undefined4 length;
-  int iVar3;
+  int prefixCompare;
   int loopCounter;
-  undefined **ppuVar5;
+  undefined **optionNamePtr;
   
-  length = _strlen(param_2);
-  ppuVar5 = &PTR_s_OPT_IGNORE_DEFINED_CONSTANTS_001dc444;
+  length = _strlen(optionName);
+  optionNamePtr = &PTR_s_OPT_IGNORE_DEFINED_CONSTANTS_001dc444;
   loopCounter = 0;
-  while (iVar3 = _strncmp(*ppuVar5,param_2,length), iVar3 != 0) {
-    bVar1 = loopCounter == 0x4f;
-    ppuVar5 = ppuVar5 + 1;
+  while (prefixCompare = _strncmp(*optionNamePtr,optionName,length), prefixCompare != 0) {
+    isLastEntry = loopCounter == 0x4f;
+    optionNamePtr = optionNamePtr + 1;
     loopCounter = loopCounter + 1;
-    if (bVar1) {
-      compareResult = _strncmp("opt_flatten_if_state",param_2,length);
+    if (isLastEntry) {
+      compareResult = _strncmp("opt_flatten_if_state",optionName,length);
       if (compareResult == 0) {
-        *(int *)(param_1 + 0x64c) = param_3;
+        *(int *)(compiler + 0x64c) = value;
       }
       else {
-        compareResult = _strncmp("max_copy_folds",param_2,length);
+        compareResult = _strncmp("max_copy_folds",optionName,length);
         if (compareResult == 0) {
-          *(int *)(param_1 + 0x650) = param_3;
+          *(int *)(compiler + 0x650) = value;
         }
         else {
-          compareResult = _strncmp("max_vn_kills",param_2,length);
+          compareResult = _strncmp("max_vn_kills",optionName,length);
           if (compareResult == 0) {
-            *(int *)(param_1 + 0x654) = param_3;
+            *(int *)(compiler + 0x654) = value;
           }
           else {
-            compareResult = _strncmp("max_vn_transforms",param_2,length);
+            compareResult = _strncmp("max_vn_transforms",optionName,length);
             if (compareResult == 0) {
-              *(int *)(param_1 + 0x658) = param_3;
+              *(int *)(compiler + 0x658) = value;
             }
             else {
-              compareResult = _strncmp("max_copy_merges",param_2,length);
+              compareResult = _strncmp("max_copy_merges",optionName,length);
               if (compareResult == 0) {
-                *(int *)(param_1 + 0x65c) = param_3;
+                *(int *)(compiler + 0x65c) = value;
               }
               else {
-                compareResult = _strncmp("max_copy_props",param_2,length);
+                compareResult = _strncmp("max_copy_props",optionName,length);
                 if (compareResult == 0) {
-                  *(int *)(param_1 + 0x660) = param_3;
+                  *(int *)(compiler + 0x660) = value;
                 }
                 else {
-                  compareResult = _strncmp("max_mix_insts",param_2,length);
+                  compareResult = _strncmp("max_mix_insts",optionName,length);
                   if (compareResult == 0) {
-                    *(int *)(param_1 + 0x664) = param_3;
+                    *(int *)(compiler + 0x664) = value;
                   }
                   else {
-                    compareResult = _strncmp("max_presubs",param_2,length);
+                    compareResult = _strncmp("max_presubs",optionName,length);
                     if (compareResult == 0) {
-                      *(int *)(param_1 + 0x668) = param_3;
+                      *(int *)(compiler + 0x668) = value;
                     }
                     else {
-                      compareResult = _strncmp("max_mov_and_shift",param_2,length);
+                      compareResult = _strncmp("max_mov_and_shift",optionName,length);
                       if (compareResult == 0) {
-                        *(int *)(param_1 + 0x670) = param_3;
+                        *(int *)(compiler + 0x670) = value;
                       }
                       else {
-                        compareResult = _strncmp("max_useless_phis",param_2,length);
+                        compareResult = _strncmp("max_useless_phis",optionName,length);
                         if (compareResult == 0) {
-                          *(int *)(param_1 + 0x66c) = param_3;
+                          *(int *)(compiler + 0x66c) = value;
                         }
                         else {
-                          compareResult = _strncmp("max_balance_conversions",param_2,length);
+                          compareResult = _strncmp("max_balance_conversions",optionName,length);
                           if (compareResult == 0) {
-                            *(int *)(param_1 + 0x674) = param_3;
+                            *(int *)(compiler + 0x674) = value;
                           }
                           else {
-                            compareResult = _strncmp("max_coalesce_loops",param_2,length);
+                            compareResult = _strncmp("max_coalesce_loops",optionName,length);
                             if (compareResult == 0) {
-                              *(int *)(param_1 + 0x678) = param_3;
+                              *(int *)(compiler + 0x678) = value;
                             }
                             else {
-                              compareResult = _strncmp("max_spill_loops",param_2,length);
+                              compareResult = _strncmp("max_spill_loops",optionName,length);
                               if (compareResult == 0) {
-                                *(int *)(param_1 + 0x67c) = param_3;
+                                *(int *)(compiler + 0x67c) = value;
                               }
                               else {
-                                compareResult = _strncmp("max_inst_hoists",param_2,length);
+                                compareResult = _strncmp("max_inst_hoists",optionName,length);
                                 if (compareResult == 0) {
-                                  *(int *)(param_1 + 0x680) = param_3;
+                                  *(int *)(compiler + 0x680) = value;
                                 }
                                 else {
-                                  compareResult = _strncmp("max_mad_mul_to_d2a",param_2,length);
+                                  compareResult = _strncmp("max_mad_mul_to_d2a",optionName,length);
                                   if (compareResult == 0) {
-                                    *(int *)(param_1 + 0x684) = param_3;
+                                    *(int *)(compiler + 0x684) = value;
                                   }
                                   else {
-                                    compareResult = _strncmp("max_mad_d2a_to_dp3",param_2,length);
+                                    compareResult = _strncmp("max_mad_d2a_to_dp3",optionName,length);
                                     if (compareResult == 0) {
-                                      *(int *)(param_1 + 0x688) = param_3;
+                                      *(int *)(compiler + 0x688) = value;
                                     }
                                     else {
-                                      compareResult = _strncmp("max_add_add_to_dp3",param_2,length);
+                                      compareResult = _strncmp("max_add_add_to_dp3",optionName,length);
                                       if (compareResult == 0) {
-                                        *(int *)(param_1 + 0x68c) = param_3;
+                                        *(int *)(compiler + 0x68c) = value;
                                       }
                                       else {
-                                        compareResult = _strncmp("max_add_mul_to_mad",param_2,length);
+                                        compareResult = _strncmp("max_add_mul_to_mad",optionName,length);
                                         if (compareResult == 0) {
-                                          *(int *)(param_1 + 0x690) = param_3;
+                                          *(int *)(compiler + 0x690) = value;
                                         }
                                         else {
-                                          compareResult = _strncmp("max_add_mad_mul_to_mov_mad_mad",param_2,
+                                          compareResult = _strncmp("max_add_mad_mul_to_mov_mad_mad",optionName,
                                                            length);
                                           if (compareResult == 0) {
-                                            *(int *)(param_1 + 0x694) = param_3;
+                                            *(int *)(compiler + 0x694) = value;
                                           }
                                           else {
-                                            compareResult = _strncmp("max_reassociate",param_2,length);
+                                            compareResult = _strncmp("max_reassociate",optionName,length);
                                             if (compareResult == 0) {
-                                              *(int *)(param_1 + 0x698) = param_3;
+                                              *(int *)(compiler + 0x698) = value;
                                             }
                                             else {
-                                              compareResult = _strncmp("max_reconst_alu",param_2,length);
+                                              compareResult = _strncmp("max_reconst_alu",optionName,length);
                                               if (compareResult == 0) {
-                                                *(int *)(param_1 + 0x69c) = param_3;
+                                                *(int *)(compiler + 0x69c) = value;
                                               }
                                               else {
-                                                compareResult = _strncmp("max_remove_cnd_input",param_2,
+                                                compareResult = _strncmp("max_remove_cnd_input",optionName,
                                                                  length);
                                                 if (compareResult == 0) {
-                                                  *(int *)(param_1 + 0x6a0) = param_3;
+                                                  *(int *)(compiler + 0x6a0) = value;
                                                 }
                                                 else {
                                                   compareResult = _strncmp("max_r600_minimize_cf_attempts",
-                                                                   param_2,length);
+                                                                   optionName,length);
                                                   if (compareResult == 0) {
-                                                    *(int *)(param_1 + 0x6a4) = param_3;
+                                                    *(int *)(compiler + 0x6a4) = value;
                                                   }
                                                   else {
-                                                    compareResult = _strncmp("max_flatten_if",param_2,length)
+                                                    compareResult = _strncmp("max_flatten_if",optionName,length)
                                                     ;
                                                     if (compareResult == 0) {
-                                                      *(int *)(param_1 + 0x6a8) = param_3;
+                                                      *(int *)(compiler + 0x6a8) = value;
                                                     }
                                                     else {
                                                       compareResult = _strncmp("rearrange_tree_depth",
-                                                                       param_2,length);
+                                                                       optionName,length);
                                                       if (compareResult == 0) {
-                                                        *(int *)(param_1 + 0x6ac) = param_3;
+                                                        *(int *)(compiler + 0x6ac) = value;
                                                       }
                                                       else {
-                                                        compareResult = _strncmp("limit_registers",param_2,
+                                                        compareResult = _strncmp("limit_registers",optionName,
                                                                          length);
                                                         if (compareResult == 0) {
-                                                          *(int *)(param_1 + 0x6b0) = param_3;
+                                                          *(int *)(compiler + 0x6b0) = value;
                                                         }
                                                         else {
                                                           compareResult = _strncmp("limit_instructions",
-                                                                           param_2,length);
+                                                                           optionName,length);
                                                           if (compareResult == 0) {
-                                                            *(int *)(param_1 + 0x6b4) = param_3;
+                                                            *(int *)(compiler + 0x6b4) = value;
                                                           }
                                                         }
                                                       }
@@ -3778,11 +3778,11 @@ int Compiler__setOption(param_1, param_2, param_3)
       return;
     }
   }
-  if (param_3 != 0) {
-    ((int (*)())Compiler__setOptionBit)(param_1,loopCounter);
+  if (value != 0) {
+    ((int (*)())Compiler__setOptionBit)(compiler,loopCounter);
     return;
   }
-  ((int (*)())Compiler__clearOptionBit)(param_1,loopCounter);
+  ((int (*)())Compiler__clearOptionBit)(compiler,loopCounter);
   return;
 }
 
