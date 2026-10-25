@@ -283,6 +283,7 @@ int ValueKey__foldMovSources(ctx, param_2)
   int ctx;
   int param_2;
 {
+  int *ctxVectorAtb0;
   int flagBit7Result;
   int operandSource;
   int operandRecord;
@@ -308,9 +309,9 @@ int ValueKey__foldMovSources(ctx, param_2)
   
   constPropEnabled = Compiler__isOptionEnabled(*(undefined4 *)(param_2 + 8),6);
   if (constPropEnabled != 0) {
-    piVar4 = *(int **)(ctx + 0xb0);
+    ctxVectorAtb0 = *(int **)(ctx + 0xb0);
     iVar3 = ctx;
-    for (a2 = 1; iVar7 = (**(code **)(*piVar4 + 0x14))(piVar4), a2 <= iVar7; a2 = a2 + 1) {
+    for (a2 = 1; iVar7 = (**(code **)(*ctxVectorAtb0 + 0x14))(ctxVectorAtb0), a2 <= iVar7; a2 = a2 + 1) {
       piVar12 = (int *)(iVar3 + 0x214);
       iVar7 = (**(code **)(**(int **)(iVar3 + 0x214) + 100))(*(int **)(iVar3 + 0x214));
       if ((((iVar7 == 0) ||
@@ -319,7 +320,7 @@ int ValueKey__foldMovSources(ctx, param_2)
          ((iVar7 = *(int *)(iVar3 + 0x214), *(int *)(iVar7 + 0x120) != 0 ||
           (*(int *)(iVar7 + 0x124) != 0)))) {
 LAB_0011f2a8:
-        piVar4 = *(int **)(ctx + 0xb0);
+        ctxVectorAtb0 = *(int **)(ctx + 0xb0);
       }
       else {
         IRInst__getOperandRecord(iVar7,0);
@@ -435,15 +436,15 @@ LAB_0011f190:
           uVar5 = *(undefined4 *)(iVar7 + 0x8c);
           IRInst__setOperandRef(*(undefined4 *)(ctx + 0xb0),a2,uVar5);
           ((int (*)())VReg__addUse)(uVar5,a2,*(undefined4 *)(ctx + 0xb0));
-          piVar4 = *(int **)(ctx + 0xb0);
+          ctxVectorAtb0 = *(int **)(ctx + 0xb0);
           *piVar12 = iVar7;
         }
         else {
           iVar7 = IRInst__operandKindClass(*piVar12,1);
           if (iVar7 != 1) goto LAB_0011f2a8;
-          piVar4 = *(int **)(ctx + 0xb0);
+          ctxVectorAtb0 = *(int **)(ctx + 0xb0);
           iVar7 = *piVar12;
-          if (piVar4[0x56] == *(int *)(iVar7 + 0x158)) goto LAB_0011f054;
+          if (ctxVectorAtb0[0x56] == *(int *)(iVar7 + 0x158)) goto LAB_0011f054;
         }
       }
       iVar3 = iVar3 + 4;
@@ -652,6 +653,7 @@ int FUN_0011f7fc(param_1, param_2, vector)
   int param_2;
   uint *vector;
 {
+  uint vectorCount;
   int *piVar1;
   int iVar2;
   uint uVar3;
@@ -661,14 +663,14 @@ int FUN_0011f7fc(param_1, param_2, vector)
     uVar3 = *(int *)(param_2 + 0x150) - iVar2;
   }
   else {
-    uVar3 = vector[1];
-    if (uVar3 < *vector) {
-      _memset(uVar3 * 4 + vector[2],0,4);
-      piVar1 = (int *)(uVar3 * 4 + vector[2]);
-      vector[1] = uVar3 + 1;
+    vectorCount = vector[1];
+    if (vectorCount < *vector) {
+      _memset(vectorCount * 4 + vector[2],0,4);
+      piVar1 = (int *)(vectorCount * 4 + vector[2]);
+      vector[1] = vectorCount + 1;
     }
     else {
-      piVar1 = (int *)Vector__elementRefGrow(vector,uVar3);
+      piVar1 = (int *)Vector__elementRefGrow(vector,vectorCount);
     }
     *piVar1 = param_2;
     uVar3 = vector[1];
@@ -690,6 +692,8 @@ int FUN_0011f8a0(vector, param_2, param_3, param_4, param_5, block, compiler, pa
   uint *vector2;
   uint param_10;
 {
+  uint vectorCount;
+  undefined4 *vectorElementRef;
   bool bVar1;
   int *newInst;
   uint uVar3;
@@ -704,9 +708,9 @@ int FUN_0011f8a0(vector, param_2, param_3, param_4, param_5, block, compiler, pa
   newInst[0x25] = param_2;
   newInst[0x26] = 0;
   if (param_5 < *vector) {
-    uVar3 = vector[1];
-    if (uVar3 <= param_5) {
-      _memset(uVar3 * 4 + vector[2],0,(param_5 - uVar3) * 4 + 4);
+    vectorCount = vector[1];
+    if (vectorCount <= param_5) {
+      _memset(vectorCount * 4 + vector[2],0,(param_5 - vectorCount) * 4 + 4);
       vector[1] = param_5 + 1;
     }
   }
@@ -714,34 +718,34 @@ int FUN_0011f8a0(vector, param_2, param_3, param_4, param_5, block, compiler, pa
     Vector__elementRefGrow(vector,param_5);
   }
   if (param_5 < *vector) {
-    uVar3 = vector[1];
-    if (uVar3 <= param_5) {
-      _memset(uVar3 * 4 + vector[2],0,(param_5 - uVar3) * 4 + 4);
+    vectorCount = vector[1];
+    if (vectorCount <= param_5) {
+      _memset(vectorCount * 4 + vector[2],0,(param_5 - vectorCount) * 4 + 4);
       vector[1] = param_5 + 1;
     }
-    puVar4 = (undefined4 *)(param_5 * 4 + vector[2]);
+    vectorElementRef = (undefined4 *)(param_5 * 4 + vector[2]);
   }
   else {
-    puVar4 = (undefined4 *)Vector__elementRefGrow(vector,param_5);
+    vectorElementRef = (undefined4 *)Vector__elementRefGrow(vector,param_5);
   }
-  IRInst__setOperandSource(newInst,1,*puVar4,0,compiler);
+  IRInst__setOperandSource(newInst,1,*vectorElementRef,0,compiler);
   if (param_4 != 0) {
     newInst[5] = newInst[5] | 0x40;
   }
   piVar9 = *(int **)(*(int *)(compiler + COMP_target) + 100);
   pcVar8 = *(code **)(*piVar9 + 0x20);
   if (param_5 < *vector) {
-    uVar3 = vector[1];
-    if (uVar3 <= param_5) {
-      _memset(uVar3 * 4 + vector[2],0,(param_5 - uVar3) * 4 + 4);
+    vectorCount = vector[1];
+    if (vectorCount <= param_5) {
+      _memset(vectorCount * 4 + vector[2],0,(param_5 - vectorCount) * 4 + 4);
       vector[1] = param_5 + 1;
     }
-    puVar4 = (undefined4 *)(param_5 * 4 + vector[2]);
+    vectorElementRef = (undefined4 *)(param_5 * 4 + vector[2]);
   }
   else {
-    puVar4 = (undefined4 *)Vector__elementRefGrow(vector,param_5);
+    vectorElementRef = (undefined4 *)Vector__elementRefGrow(vector,param_5);
   }
-  iVar5 = (*pcVar8)(piVar9,*puVar4);
+  iVar5 = (*pcVar8)(piVar9,*vectorElementRef);
   if ((iVar5 != 0) && ((*(uint *)(block + 0xc) & 0x200) == 0)) {
     newInst[5] = newInst[5] | 0x1000;
     *(uint *)(block + 0xc) = *(uint *)(block + 0xc) | 0x200;
@@ -929,6 +933,9 @@ int FUN_0011ff7c(pass, block, vector, vector2, vector3, vector4, vector5, param_
   uint *vector5;
   int *param_8;
 {
+  uint vectorCount2;
+  uint vectorCount;
+  int *vectorElementRef;
   undefined4 phiOperandIndexForPredecessorResult;
   undefined4 predecessor2;
   int *successor;
@@ -1026,9 +1033,9 @@ LAB_001200cc:
           }
           *puVar7 = uVar5;
           if (uVar6 < *vector) {
-            uVar16 = vector[1];
-            if (uVar16 <= uVar6) {
-              _memset(uVar16 * 4 + vector[2],0,(uVar6 - uVar16) * 4 + 4);
+            vectorCount = vector[1];
+            if (vectorCount <= uVar6) {
+              _memset(vectorCount * 4 + vector[2],0,(uVar6 - vectorCount) * 4 + 4);
               vector[1] = uVar6 + 1;
             }
             puVar8 = (undefined4 *)(uVar6 * 4 + vector[2]);
@@ -1110,17 +1117,17 @@ LAB_00120400:
       uVar1 = *puVar8;
       uVar16 = FUN_0011e6ec(uVar1);
       if (uVar16 < *vector) {
-        uVar9 = vector[1];
-        if (uVar9 <= uVar16) {
-          _memset(uVar9 * 4 + vector[2],0,(uVar16 - uVar9) * 4 + 4);
+        vectorCount2 = vector[1];
+        if (vectorCount2 <= uVar16) {
+          _memset(vectorCount2 * 4 + vector[2],0,(uVar16 - vectorCount2) * 4 + 4);
           vector[1] = uVar16 + 1;
         }
-        piVar10 = (int *)(uVar16 * 4 + vector[2]);
+        vectorElementRef = (int *)(uVar16 * 4 + vector[2]);
       }
       else {
-        piVar10 = (int *)Vector__elementRefGrow(vector,uVar16);
+        vectorElementRef = (int *)Vector__elementRefGrow(vector,uVar16);
       }
-      if (*piVar10 == 0) {
+      if (*vectorElementRef == 0) {
         uVar16 = vector4[1];
         if (uVar16 < *vector4) {
           _memset(uVar16 * 4 + vector4[2],0,4);

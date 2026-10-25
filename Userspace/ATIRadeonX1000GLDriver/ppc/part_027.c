@@ -1187,6 +1187,8 @@ int IRInst__setOperandSourceRaw(inst, operandIndex, source, compiler)
   undefined4 source;
   int compiler;
 {
+  uint instVectorAt118Count;
+  uint *instVectorAt118;
   undefined4 *allocation;
   int *piVar2;
   uint uVar3;
@@ -1218,15 +1220,15 @@ int IRInst__setOperandSourceRaw(inst, operandIndex, source, compiler)
       allocation[1] = 0;
       allocation[2] = 0;
       allocation[6] = 0;
-      puVar6 = *(uint **)(inst + 0x118);
-      uVar5 = puVar6[1];
-      if (uVar5 < *puVar6) {
-        _memset((void *)(uVar5 * 4 + puVar6[2]),0,4);
-        piVar2 = (int *)(uVar5 * 4 + puVar6[2]);
-        puVar6[1] = uVar5 + 1;
+      instVectorAt118 = *(uint **)(inst + 0x118);
+      instVectorAt118Count = instVectorAt118[1];
+      if (instVectorAt118Count < *instVectorAt118) {
+        _memset((void *)(instVectorAt118Count * 4 + instVectorAt118[2]),0,4);
+        piVar2 = (int *)(instVectorAt118Count * 4 + instVectorAt118[2]);
+        instVectorAt118[1] = instVectorAt118Count + 1;
       }
       else {
-        piVar2 = (int *)Vector__elementRefGrow(puVar6,uVar5);
+        piVar2 = (int *)Vector__elementRefGrow(instVectorAt118,instVectorAt118Count);
       }
       *piVar2 = (int)(allocation + 1);
       ((int (*)())setSelectedConstantWord)(allocation + 1,operandIndex);
