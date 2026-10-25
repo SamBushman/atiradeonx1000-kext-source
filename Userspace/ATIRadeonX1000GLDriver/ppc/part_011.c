@@ -1458,117 +1458,130 @@ int recordGetWriteEnable(param_1, param_2)
 }
 
 /* FUN_00078f80 @ 0x78f80 (2340 bytes) */
-int FUN_00078f80(alloc, tempIndex, sourceRecords, recordsBase, unusedArg5)
-  int alloc;
-  uint tempIndex;
-  undefined4 *sourceRecords;
-  int recordsBase;
-  undefined4 unusedArg5;
+int FUN_00078f80(param_1, param_2, param_3, param_4, param_5)
+  int param_1;
+  uint param_2;
+  undefined4 *param_3;
+  int param_4;
+  undefined4 param_5;
 {
-  uint uVar16;
-  uint uVar14;
-  uint uVar8;
-  undefined4 *puVar17;
-  uint *puVar7;
-  uint *puVar6;
-  int *piVar18;
-  int iVar22;
-  int iVar12;
-  int iVar11;
-  bool bVar1;
-  uint uVar15;
+  uint componentIndexC;
+  uint loopCounterC;
+  uint componentIndexB;
   uint componentBitB;
-  int iVar9;
+  uint componentIndex;
+  uint componentBit;
+  int loopCounterB;
+  int remaining;
+  int loopCounter;
+  bool moreComponentsB;
+  bool lastComponent;
+  bool lastSource;
+  bool moreSources;
+  bool moreComponents;
+  bool bVar1;
   bool bVar2;
-  char boundMaskSigned;
-  int *seenSlot;
-  uint nodeValue;
+  char cVar3;
+  int *piVar4;
+  uint uVar5;
+  uint *puVar6;
+  uint *puVar7;
+  uint uVar8;
+  int iVar9;
   uint uVar10;
-  uint *bindingPrev;
-  uint sourceMask;
+  int iVar11;
+  int iVar12;
+  uint *puVar13;
+  uint uVar14;
+  uint uVar15;
+  uint uVar16;
+  undefined4 *puVar17;
+  int *piVar18;
+  uint uVar19;
   uint sourceIndex;
-  int *readerListHeadCursor;
-  int seenCountdown;
+  int *piVar21;
+  int iVar22;
+  int iVar23;
   int iStack00000024;
   undefined4 uStack00000028;
-  int boundValueIds [4];
-  uint bestRecordIndex [4];
-  uint *bestRecordPtr;
+  int local_78 [4];
+  uint local_68 [4];
+  uint *local_58;
   
-  readerListHeadCursor = (int *)(tempIndex * 0xc + alloc + 0x450);
+  piVar21 = (int *)(param_2 * 0xc + param_1 + 0x450);
   sourceIndex = 0;
-  sourceMask = *(uint *)(tempIndex * 4 + alloc + 0x6450);
-  puVar17 = sourceRecords;
-  iStack00000024 = recordsBase;
-  uStack00000028 = unusedArg5;
+  uVar19 = *(uint *)(param_2 * 4 + param_1 + 0x6450);
+  puVar17 = param_3;
+  iStack00000024 = param_4;
+  uStack00000028 = param_5;
   do {
-    if ((sourceMask & 1 << (sourceIndex & 0x3f)) != 0) {
-      for (iVar22 = *readerListHeadCursor; iVar22 != 0; iVar22 = *(int *)(iVar22 + 0x10)) {
+    if ((uVar19 & 1 << (sourceIndex & 0x3f)) != 0) {
+      for (iVar22 = *piVar21; iVar22 != 0; iVar22 = *(int *)(iVar22 + 0x10)) {
         iVar11 = ((int (*)())recordSourceFileIs2)(*puVar17);
         if (iVar11 == 0) {
-          uVar16 = 0;
+          componentIndexC = 0;
           do {
-            if ((1 << (uVar16 & 0x3f) & *(uint *)(iVar22 + 4)) != 0) {
+            if ((1 << (componentIndexC & 0x3f) & *(uint *)(iVar22 + 4)) != 0) {
               puVar6 = *(uint **)((((char)(DAT_001aa760)[*(uint *)*puVar17 & 0xf] * 0x100 +
-                                   (*(uint *)*puVar17 >> 5 & 0xff)) * 4 + uVar16) * 4 + alloc +
+                                   (*(uint *)*puVar17 >> 5 & 0xff)) * 4 + componentIndexC) * 4 + param_1 +
                                  0x2a87c);
               while( true ) {
                 if (puVar6 == (uint *)0x0) {
                   return 6;
                 }
-                if (tempIndex == (*puVar6 & 0xfff)) break;
+                if (param_2 == (*puVar6 & 0xfff)) break;
                 puVar6 = (uint *)puVar6[1];
               }
               *puVar6 = *puVar6 | 0x4000;
             }
-            bVar1 = uVar16 != 3;
-            uVar16 = uVar16 + 1;
-          } while (bVar1);
+            moreComponents = componentIndexC != 3;
+            componentIndexC = componentIndexC + 1;
+          } while (moreComponents);
         }
         else {
-          uVar16 = 0;
-          piVar18 = (int *)(alloc + 0x30b7c);
+          componentIndexC = 0;
+          piVar18 = (int *)(param_1 + 0x30b7c);
           do {
-            if ((1 << (uVar16 & 0x3f) & *(uint *)(iVar22 + 4)) != 0) {
+            if ((1 << (componentIndexC & 0x3f) & *(uint *)(iVar22 + 4)) != 0) {
               puVar6 = (uint *)*piVar18;
               while( true ) {
                 if (puVar6 == (uint *)0x0) {
                   return 6;
                 }
-                if (tempIndex == (*puVar6 & 0xfff)) break;
+                if (param_2 == (*puVar6 & 0xfff)) break;
                 puVar6 = (uint *)puVar6[1];
               }
               *puVar6 = *puVar6 | 0x4000;
             }
-            bVar1 = uVar16 != 3;
+            moreComponents = componentIndexC != 3;
             piVar18 = piVar18 + 1;
-            uVar16 = uVar16 + 1;
-          } while (bVar1);
+            componentIndexC = componentIndexC + 1;
+          } while (moreComponents);
         }
       }
     }
-    bVar1 = sourceIndex != 2;
-    readerListHeadCursor = readerListHeadCursor + 1;
+    moreSources = sourceIndex != 2;
+    piVar21 = piVar21 + 1;
     puVar17 = puVar17 + 1;
     sourceIndex = sourceIndex + 1;
-  } while (bVar1);
+  } while (moreSources);
   sourceIndex = 0;
-  readerListHeadCursor = (int *)(tempIndex * 0xc + alloc + 0x450);
-  bestRecordPtr = bestRecordIndex;
+  piVar21 = (int *)(param_2 * 0xc + param_1 + 0x450);
+  local_58 = local_68;
 LAB_00079150:
-  if ((sourceMask & 1 << (sourceIndex & 0x3f)) != 0) {
-    puVar6 = (uint *)*sourceRecords;
-    iVar22 = *readerListHeadCursor;
+  if ((uVar19 & 1 << (sourceIndex & 0x3f)) != 0) {
+    puVar6 = (uint *)*param_3;
+    iVar22 = *piVar21;
     iVar11 = (char)(DAT_001aa760)[*puVar6 & 0xf] * 0x100 + (*puVar6 >> 5 & 0xff);
     if (iVar22 != 0) {
       bVar1 = false;
 LAB_000791c0:
       iVar12 = ((int (*)())recordSourceFileIs2)(puVar6);
       if (iVar12 == 0) {
-        puVar6 = (uint *)(alloc + iVar11 * 0x10 + 0x2a87c);
-        uVar16 = 0;
+        puVar6 = (uint *)(param_1 + iVar11 * 0x10 + 0x2a87c);
+        componentIndexC = 0;
 LAB_000792a0:
-        componentBitB = 1 << (uVar16 & 0x3f);
+        componentBitB = 1 << (componentIndexC & 0x3f);
         if ((componentBitB & *(uint *)(iVar22 + 4)) != 0) {
           puVar7 = (uint *)*puVar6;
           uVar8 = 0;
@@ -1584,10 +1597,10 @@ LAB_000792a0:
         }
         goto LAB_00079340;
       }
-      puVar6 = (uint *)(alloc + 0x30b7c);
-      uVar16 = 0;
+      puVar6 = (uint *)(param_1 + 0x30b7c);
+      componentIndexC = 0;
 LAB_000791e0:
-      componentBitB = 1 << (uVar16 & 0x3f);
+      componentBitB = 1 << (componentIndexC & 0x3f);
       if ((componentBitB & *(uint *)(iVar22 + 4)) != 0) {
         puVar7 = (uint *)*puVar6;
         uVar8 = 0;
@@ -1608,10 +1621,10 @@ LAB_000791e0:
   }
   goto LAB_000798a8;
 LAB_00079318:
-  while (bindingPrev = puVar7, puVar7 = (uint *)bindingPrev[1], puVar7 != (uint *)0x0) {
+  while (puVar13 = puVar7, puVar7 = (uint *)puVar13[1], puVar7 != (uint *)0x0) {
     if ((*puVar7 & 0x4000) != 0) {
-      bindingPrev[1] = puVar7[1];
-      puVar7 = bindingPrev;
+      puVar13[1] = puVar7[1];
+      puVar7 = puVar13;
     }
   }
 LAB_00079324:
@@ -1619,132 +1632,132 @@ LAB_00079324:
 LAB_00079328:
   if (uVar8 == 0) {
     bVar1 = true;
-    *(byte *)(iVar11 + alloc + 0x3087c) = *(byte *)(iVar11 + alloc + 0x3087c) & ~(byte)componentBitB;
+    *(byte *)(iVar11 + param_1 + 0x3087c) = *(byte *)(iVar11 + param_1 + 0x3087c) & ~(byte)componentBitB;
   }
 LAB_00079340:
-  bVar2 = uVar16 == 3;
+  lastComponent = componentIndexC == 3;
   puVar6 = puVar6 + 1;
-  uVar16 = uVar16 + 1;
-  if (bVar2) goto LAB_00079350;
+  componentIndexC = componentIndexC + 1;
+  if (lastComponent) goto LAB_00079350;
   goto LAB_000792a0;
 LAB_00079258:
-  while (bindingPrev = puVar7, puVar7 = (uint *)bindingPrev[1], puVar7 != (uint *)0x0) {
+  while (puVar13 = puVar7, puVar7 = (uint *)puVar13[1], puVar7 != (uint *)0x0) {
     if ((*puVar7 & 0x4000) != 0) {
-      bindingPrev[1] = puVar7[1];
-      puVar7 = bindingPrev;
+      puVar13[1] = puVar7[1];
+      puVar7 = puVar13;
     }
   }
 LAB_00079264:
   uVar8 = *puVar6;
 LAB_00079268:
   if (uVar8 == 0) {
-    *(byte *)(alloc + 0x30b9c) = *(byte *)(alloc + 0x30b9c) & ~(byte)componentBitB;
+    *(byte *)(param_1 + 0x30b9c) = *(byte *)(param_1 + 0x30b9c) & ~(byte)componentBitB;
   }
 LAB_00079280:
-  bVar2 = uVar16 == 3;
+  lastComponent = componentIndexC == 3;
   puVar6 = puVar6 + 1;
-  uVar16 = uVar16 + 1;
-  if (bVar2) goto LAB_00079350;
+  componentIndexC = componentIndexC + 1;
+  if (lastComponent) goto LAB_00079350;
   goto LAB_000791e0;
 LAB_00079350:
   iVar22 = *(int *)(iVar22 + 0x10);
   if (iVar22 == 0) goto LAB_0007936c;
-  puVar6 = (uint *)*sourceRecords;
+  puVar6 = (uint *)*param_3;
   goto LAB_000791c0;
 LAB_0007936c:
-  if (*readerListHeadCursor == 0) {
+  if (*piVar21 == 0) {
 LAB_00079378:
-    uVar16 = *(uint *)*sourceRecords;
+    uVar16 = *(uint *)*param_3;
     if ((uVar16 & 0xf) == 1) {
-      puVar17 = (undefined4 *)(iVar11 * 0x10 + alloc + 0x2a87c);
-      uVar14 = 0;
+      puVar17 = (undefined4 *)(iVar11 * 0x10 + param_1 + 0x2a87c);
+      componentIndexB = 0;
       do {
-        uVar8 = 1 << (uVar14 & 0x3f);
+        componentBit = 1 << (componentIndexB & 0x3f);
         if (((1 << (uVar16 >> 0xd & 7) | 1 << (uVar16 >> 0x10 & 7) | 1 << (uVar16 >> 0x13 & 7) |
-             1 << (uVar16 >> 0x16 & 7)) & uVar8) != 0) {
+             1 << (uVar16 >> 0x16 & 7)) & componentBit) != 0) {
           puVar6 = (uint *)*puVar17;
           bVar2 = puVar6 == (uint *)0x0;
           if (!bVar2) {
-            nodeValue = *puVar6;
-            while (puVar7 = puVar6, nodeValue == tempIndex) {
+            uVar5 = *puVar6;
+            while (puVar7 = puVar6, uVar5 == param_2) {
               puVar6 = (uint *)puVar6[1];
               bVar2 = puVar6 == (uint *)0x0;
               if (bVar2) goto LAB_00079448;
-              nodeValue = *puVar6;
+              uVar5 = *puVar6;
             }
-            while (bindingPrev = puVar7, puVar7 = (uint *)bindingPrev[1], puVar7 != (uint *)0x0) {
-              if (tempIndex == *puVar7) {
-                bindingPrev[1] = puVar7[1];
-                puVar7 = bindingPrev;
+            while (puVar13 = puVar7, puVar7 = (uint *)puVar13[1], puVar7 != (uint *)0x0) {
+              if (param_2 == *puVar7) {
+                puVar13[1] = puVar7[1];
+                puVar7 = puVar13;
               }
             }
           }
 LAB_00079448:
           *puVar17 = puVar6;
           if (bVar2) {
-            *(byte *)(iVar11 + alloc + 0x3087c) =
-                 *(byte *)(iVar11 + alloc + 0x3087c) & ~(byte)uVar8;
+            *(byte *)(iVar11 + param_1 + 0x3087c) =
+                 *(byte *)(iVar11 + param_1 + 0x3087c) & ~(byte)componentBit;
           }
         }
-        bVar2 = uVar14 != 3;
+        moreComponentsB = componentIndexB != 3;
         puVar17 = puVar17 + 1;
-        uVar14 = uVar14 + 1;
-      } while (bVar2);
+        componentIndexB = componentIndexB + 1;
+      } while (moreComponentsB);
     }
   }
   if (bVar1) {
     iVar22 = 0;
-    uVar14 = 0;
+    componentIndexB = 0;
     bVar1 = false;
-    piVar18 = (int *)(iVar11 * 0x10 + alloc + 0x2d87c);
-    uVar16 = (uint)*(char *)(iVar11 + alloc + 0x3087c);
+    piVar18 = (int *)(iVar11 * 0x10 + param_1 + 0x2d87c);
+    uVar16 = (uint)*(char *)(iVar11 + param_1 + 0x3087c);
     do {
-      if ((uVar16 & 1 << (uVar14 & 0x3f)) != 0) {
+      if ((uVar16 & 1 << (componentIndexB & 0x3f)) != 0) {
         if (bVar1) {
           iVar12 = *piVar18;
-          iVar9 = 0;
-          seenCountdown = iVar22;
+          loopCounter = 0;
+          iVar23 = iVar22;
           do {
-            seenSlot = boundValueIds + iVar9;
-            seenCountdown = seenCountdown + -1;
-            if (seenCountdown == 0) {
-              if (*seenSlot != iVar12) goto LAB_00079508;
+            piVar4 = local_78 + loopCounter;
+            iVar23 = iVar23 + -1;
+            if (iVar23 == 0) {
+              if (*piVar4 != iVar12) goto LAB_00079508;
               break;
             }
-            iVar9 = iVar9 + 1;
-          } while (*seenSlot != iVar12);
+            loopCounter = loopCounter + 1;
+          } while (*piVar4 != iVar12);
         }
         else {
           iVar12 = *piVar18;
 LAB_00079508:
-          boundValueIds[iVar22] = iVar12;
+          local_78[iVar22] = iVar12;
           bVar1 = 0 < iVar22 + 1;
           iVar22 = iVar22 + 1;
         }
       }
-      bVar2 = uVar14 != 3;
+      moreComponentsB = componentIndexB != 3;
       piVar18 = piVar18 + 1;
-      uVar14 = uVar14 + 1;
-    } while (bVar2);
+      componentIndexB = componentIndexB + 1;
+    } while (moreComponentsB);
     if (bVar1) {
       iVar12 = 0;
       uVar14 = 0;
-      piVar18 = boundValueIds;
+      piVar18 = local_78;
       do {
         iVar9 = *piVar18;
         piVar18 = piVar18 + 1;
         if (iVar9 != -1) {
-          for (puVar6 = *(uint **)(iVar9 * 4 + alloc + 0xc450); puVar6 != (uint *)0x0;
+          for (puVar6 = *(uint **)(iVar9 * 4 + param_1 + 0xc450); puVar6 != (uint *)0x0;
               puVar6 = (uint *)puVar6[4]) {
             uVar8 = *puVar6;
-            if ((*(uint *)(uVar8 * 4 + alloc + 0x3348c) & 0x40000) == 0) {
-              nodeValue = puVar6[1];
-              uVar15 = 0;
-              puVar7 = bestRecordIndex;
-              iVar9 = 4;
+            if ((*(uint *)(uVar8 * 4 + param_1 + 0x3348c) & 0x40000) == 0) {
+              uVar5 = puVar6[1];
+              loopCounterC = 0;
+              puVar7 = local_68;
+              remaining = 4;
               do {
-                uVar10 = 1 << (uVar15 & 0x3f);
-                if ((nodeValue & uVar10 & ~uVar16) != 0) {
+                uVar10 = 1 << (loopCounterC & 0x3f);
+                if ((uVar5 & uVar10 & ~uVar16) != 0) {
                   if ((uVar10 & uVar14) == 0) {
                     *puVar7 = uVar8;
                     uVar14 = uVar14 | uVar10;
@@ -1753,69 +1766,69 @@ LAB_00079508:
                     *puVar7 = uVar8;
                   }
                 }
-                uVar15 = uVar15 + 1;
+                loopCounterC = loopCounterC + 1;
                 puVar7 = puVar7 + 1;
-                iVar9 = iVar9 + -1;
-              } while (iVar9 != 0);
+                remaining = remaining + -1;
+              } while (remaining != 0);
             }
           }
         }
         iVar12 = iVar12 + 1;
       } while (iVar12 != iVar22);
       if (uVar14 != 0) {
-        uVar16 = 0;
+        componentIndexC = 0;
         do {
-          if ((1 << (uVar16 & 0x3f) & uVar14) != 0) {
-            uVar8 = 0;
-            puVar6 = bestRecordPtr;
+          if ((1 << (componentIndexC & 0x3f) & uVar14) != 0) {
+            componentIndex = 0;
+            puVar6 = local_58;
             do {
-              if ((((uVar16 != uVar8) && ((1 << (uVar8 & 0x3f) & uVar14) != 0)) &&
-                  (nodeValue = bestRecordPtr[uVar16], nodeValue < *puVar6)) &&
-                 (iVar12 = ((int (*)())recordGetWriteEnable)(iStack00000024 + nodeValue * 0x10,uVar8), iVar12 != 0)) {
-                *puVar6 = nodeValue;
+              if ((((componentIndexC != componentIndex) && ((1 << (componentIndex & 0x3f) & uVar14) != 0)) &&
+                  (uVar5 = local_58[componentIndexC], uVar5 < *puVar6)) &&
+                 (iVar12 = ((int (*)())recordGetWriteEnable)(iStack00000024 + uVar5 * 0x10,componentIndex), iVar12 != 0)) {
+                *puVar6 = uVar5;
               }
-              bVar2 = uVar8 != 3;
+              moreComponentsB = componentIndex != 3;
               puVar6 = puVar6 + 1;
-              uVar8 = uVar8 + 1;
-            } while (bVar2);
+              componentIndex = componentIndex + 1;
+            } while (moreComponentsB);
           }
-          bVar2 = uVar16 != 3;
-          uVar16 = uVar16 + 1;
-        } while (bVar2);
-        uVar16 = 0;
-        puVar6 = bestRecordIndex;
+          moreComponentsB = componentIndexC != 3;
+          componentIndexC = componentIndexC + 1;
+        } while (moreComponentsB);
+        componentIndexC = 0;
+        puVar6 = local_68;
         do {
-          uVar8 = 1 << (uVar16 & 0x3f);
-          if (((uVar8 & uVar14) != 0) &&
-             (iVar12 = ((int (*)())regBindingSet)(alloc,*puVar6,iVar11,uVar8,1), iVar12 != 0)) {
+          componentBit = 1 << (componentIndexC & 0x3f);
+          if (((componentBit & uVar14) != 0) &&
+             (iVar12 = ((int (*)())regBindingSet)(param_1,*puVar6,iVar11,componentBit,1), iVar12 != 0)) {
             return iVar12;
           }
-          bVar2 = uVar16 != 3;
+          moreComponentsB = componentIndexC != 3;
           puVar6 = puVar6 + 1;
-          uVar16 = uVar16 + 1;
-        } while (bVar2);
+          componentIndexC = componentIndexC + 1;
+        } while (moreComponentsB);
       }
     }
-    boundMaskSigned = *(char *)(iVar11 + alloc + 0x3087c);
+    cVar3 = *(char *)(iVar11 + param_1 + 0x3087c);
     if (bVar1) {
-      iVar12 = 0;
+      loopCounterB = 0;
       uVar16 = 0;
-      piVar18 = boundValueIds;
+      piVar18 = local_78;
       do {
         iVar9 = *piVar18;
         piVar18 = piVar18 + 1;
         if (iVar9 != -1) {
-          for (puVar6 = *(uint **)(iVar9 * 4 + alloc + 0xe450); puVar6 != (uint *)0x0;
+          for (puVar6 = *(uint **)(iVar9 * 4 + param_1 + 0xe450); puVar6 != (uint *)0x0;
               puVar6 = (uint *)puVar6[4]) {
             uVar14 = *puVar6;
-            if ((*(uint *)(uVar14 * 4 + alloc + 0x3348c) & 0x40000) == 0) {
+            if ((*(uint *)(uVar14 * 4 + param_1 + 0x3348c) & 0x40000) == 0) {
               uVar8 = puVar6[1];
-              nodeValue = 0;
-              puVar7 = bestRecordIndex;
-              iVar9 = 4;
+              uVar5 = 0;
+              puVar7 = local_68;
+              remaining = 4;
               do {
-                uVar15 = 1 << (nodeValue & 0x3f);
-                if ((uVar8 & uVar15 & ~(int)boundMaskSigned) != 0) {
+                uVar15 = 1 << (uVar5 & 0x3f);
+                if ((uVar8 & uVar15 & ~(int)cVar3) != 0) {
                   if ((uVar15 & uVar16) == 0) {
                     *puVar7 = uVar14;
                     uVar16 = uVar16 | uVar15;
@@ -1824,56 +1837,56 @@ LAB_00079508:
                     *puVar7 = uVar14;
                   }
                 }
-                nodeValue = nodeValue + 1;
+                uVar5 = uVar5 + 1;
                 puVar7 = puVar7 + 1;
-                iVar9 = iVar9 + -1;
-              } while (iVar9 != 0);
+                remaining = remaining + -1;
+              } while (remaining != 0);
             }
           }
         }
-        iVar12 = iVar12 + 1;
-      } while (iVar12 != iVar22);
+        loopCounterB = loopCounterB + 1;
+      } while (loopCounterB != iVar22);
       if (uVar16 != 0) {
-        uVar14 = 0;
+        componentIndexB = 0;
         do {
-          if ((1 << (uVar14 & 0x3f) & uVar16) != 0) {
-            uVar8 = 0;
-            puVar6 = bestRecordIndex;
+          if ((1 << (componentIndexB & 0x3f) & uVar16) != 0) {
+            componentIndex = 0;
+            puVar6 = local_68;
             do {
-              if (((uVar14 != uVar8) && ((1 << (uVar8 & 0x3f) & uVar16) != 0)) &&
-                 ((nodeValue = bestRecordIndex[uVar14], nodeValue < *puVar6 &&
-                  (iVar22 = ((int (*)())recordGetWriteEnable)(nodeValue * 0x10 + iStack00000024,uVar8), iVar22 != 0)))) {
-                *puVar6 = nodeValue;
+              if (((componentIndexB != componentIndex) && ((1 << (componentIndex & 0x3f) & uVar16) != 0)) &&
+                 ((uVar5 = local_68[componentIndexB], uVar5 < *puVar6 &&
+                  (iVar22 = ((int (*)())recordGetWriteEnable)(uVar5 * 0x10 + iStack00000024,componentIndex), iVar22 != 0)))) {
+                *puVar6 = uVar5;
               }
-              bVar1 = uVar8 != 3;
+              moreComponents = componentIndex != 3;
               puVar6 = puVar6 + 1;
-              uVar8 = uVar8 + 1;
-            } while (bVar1);
+              componentIndex = componentIndex + 1;
+            } while (moreComponents);
           }
-          bVar1 = uVar14 != 3;
-          uVar14 = uVar14 + 1;
-        } while (bVar1);
-        uVar14 = 0;
-        puVar6 = bestRecordIndex;
+          moreComponents = componentIndexB != 3;
+          componentIndexB = componentIndexB + 1;
+        } while (moreComponents);
+        componentIndexB = 0;
+        puVar6 = local_68;
         do {
-          uVar8 = 1 << (uVar14 & 0x3f);
-          if (((uVar8 & uVar16) != 0) &&
-             (iVar22 = ((int (*)())regBindingSet)(alloc,*puVar6,iVar11,uVar8,1), iVar22 != 0)) {
+          componentBit = 1 << (componentIndexB & 0x3f);
+          if (((componentBit & uVar16) != 0) &&
+             (iVar22 = ((int (*)())regBindingSet)(param_1,*puVar6,iVar11,componentBit,1), iVar22 != 0)) {
             return iVar22;
           }
-          bVar1 = uVar14 != 3;
+          moreComponents = componentIndexB != 3;
           puVar6 = puVar6 + 1;
-          uVar14 = uVar14 + 1;
-        } while (bVar1);
+          componentIndexB = componentIndexB + 1;
+        } while (moreComponents);
       }
     }
   }
 LAB_000798a8:
-  bVar1 = sourceIndex == 2;
-  sourceRecords = sourceRecords + 1;
-  readerListHeadCursor = readerListHeadCursor + 1;
+  lastSource = sourceIndex == 2;
+  param_3 = param_3 + 1;
+  piVar21 = piVar21 + 1;
   sourceIndex = sourceIndex + 1;
-  if (bVar1) {
+  if (lastSource) {
     return 0;
   }
   goto LAB_00079150;
