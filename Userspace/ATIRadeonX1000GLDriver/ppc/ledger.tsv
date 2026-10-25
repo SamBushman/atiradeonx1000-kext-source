@@ -1301,7 +1301,7 @@
 0xe3308	196	FUN_000e3308	part_021	converted
 0xe33cc	340	FUN_000e33cc	part_021	converted
 0xe3544	340	FUN_000e3544	part_021	converted
-0xe36bc	652	FUN_000e36bc	part_021	converted
+0xe36bc	652	MachineCodeWriter__encodeProgram	part_021	converted
 0xe3968	396	IRInst__createMovForDest	part_021	converted
 0xe3af4	148	FUN_000e3af4	part_021	converted
 0xe3b88	1848	FUN_000e3b88	part_021	converted
@@ -1373,7 +1373,7 @@
 0xe8d5c	120	Block__appendPredecessor	part_022	converted
 0xe8dd4	120	Block__appendSuccessor	part_022	converted
 0xe8e4c	96	Block__connect	part_022	converted
-0xe8eac	608	FUN_000e8eac	part_022	converted
+0xe8eac	608	Block__replaceRegionEdges	part_022	converted
 0xe910c	120	FUN_000e910c	part_022	converted
 0xe9184	136	Block__getPredecessor	part_022	converted
 0xe920c	136	Block__getSuccessor	part_022	converted
@@ -1559,7 +1559,7 @@
 0xf4c48	268	ConstKey__compareOrdered	part_025	converted
 0xf4d54	44	ConstKey__countPresentOperands	part_025	converted
 0xf4d80	92	FUN_000f4d80	part_025	converted
-0xf4ddc	512	FUN_000f4ddc	part_026	converted
+0xf4ddc	512	ConstRecord__insertSwizzleVariants	part_026	converted
 0xf4fdc	352	Compiler__getOrCreateLoadConstN	part_026	converted
 0xf5248	376	FUN_000f5248	part_026	converted
 0xf53c0	396	Compiler__getOrCreateLoadConst3	part_026	converted

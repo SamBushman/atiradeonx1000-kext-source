@@ -669,7 +669,7 @@ int FUN_000e2094(compiler, param_2)
     *(uint *)(*(int *)(compiler + COMP_currentProgram) + 0x30) =
          *(uint *)(*(int *)(compiler + COMP_currentProgram) + 0x30) | 0x10000;
     pass_optimize_control_flow(*(undefined4 *)(compiler + COMP_currentProgram));
-    ((int (*)())FUN_000e36bc)(*(undefined4 *)(compiler + COMP_currentProgram),*(int *)(compiler + 0x52c) * 4 + compiler + 0x484,
+    ((int (*)())MachineCodeWriter__encodeProgram)(*(undefined4 *)(compiler + COMP_currentProgram),*(int *)(compiler + 0x52c) * 4 + compiler + 0x484,
                  *(int *)(compiler + 0x52c));
     List__freeAllNodes(*(undefined4 *)(compiler + COMP_arenaB));
     FUN_0013061c(*(undefined4 *)(compiler + COMP_currentProgram),0);
@@ -1465,18 +1465,18 @@ int FUN_000e3544(compiler, param_2, param_3)
   return;
 }
 
-/* FUN_000e36bc @ 0xe36bc (652 bytes) */
-int FUN_000e36bc(param_1, param_2, param_3)
-  uint *param_1;
-  undefined4 param_2;
-  undefined4 param_3;
+/* MachineCodeWriter__encodeProgram @ 0xe36bc (652 bytes) */
+int MachineCodeWriter__encodeProgram(writer, outBuffer, outSize)
+  uint *writer;
+  undefined4 outBuffer;
+  undefined4 outSize;
 {
-  int *piVar1;
+  int *block;
   int iVar2;
-  int *piVar3;
+  int *nextBlock;
   int *piVar4;
-  undefined4 *puVar5;
-  uint uVar6;
+  undefined4 *predecessorSlot;
+  uint sizeBeforeCompression;
   int compressEnabled;
   undefined4 in_r8;
   undefined4 in_r9;
@@ -1500,63 +1500,63 @@ int FUN_000e36bc(param_1, param_2, param_3)
 #define auStack_74 (auStack_e36bc_combined + 0x4)
 #define local_54 (*(int **)(auStack_e36bc_combined + 0x24))
   
-  ((int (*)())FUN_000e3544)(auStack_74,param_1,param_3);
-  (**(code **)(*local_54 + 0x18))(local_54,*param_1);
-  piVar1 = (int *)param_1[0xe1];
-  for (piVar3 = (int *)((int *)param_1[0xe1])[2]; piVar3 != (int *)0x0; piVar3 = (int *)piVar3[2]) {
-    iVar2 = (**(code **)(*piVar1 + 0x24))(piVar1);
-    if ((iVar2 == 0) || (iVar2 = IfHeader__canFlatten(piVar1,auStack_78), iVar2 == 0)) {
-      iVar2 = Block__predecessorCount(piVar1);
+  ((int (*)())FUN_000e3544)(auStack_74,writer,outSize);
+  (**(code **)(*local_54 + 0x18))(local_54,*writer);
+  block = (int *)writer[0xe1];
+  for (nextBlock = (int *)((int *)writer[0xe1])[2]; nextBlock != (int *)0x0; nextBlock = (int *)nextBlock[2]) {
+    iVar2 = (**(code **)(*block + 0x24))(block);
+    if ((iVar2 == 0) || (iVar2 = IfHeader__canFlatten(block,auStack_78), iVar2 == 0)) {
+      iVar2 = Block__predecessorCount(block);
       if (0 < iVar2) {
-        piVar4 = (int *)piVar1[0x35];
+        piVar4 = (int *)block[0x35];
         if (*piVar4 == 0) {
-          puVar5 = (undefined4 *)Vector__elementRefGrow(piVar4,0);
+          predecessorSlot = (undefined4 *)Vector__elementRefGrow(piVar4,0);
         }
         else {
           if (piVar4[1] == 0) {
             *(undefined4 *)piVar4[2] = 0;
             piVar4[1] = 1;
           }
-          puVar5 = (undefined4 *)piVar4[2];
+          predecessorSlot = (undefined4 *)piVar4[2];
         }
-        piVar4 = (int *)*puVar5;
+        piVar4 = (int *)*predecessorSlot;
         if (((piVar4 != (int *)0x0) && (iVar2 = (**(code **)(*piVar4 + 0x24))(piVar4), iVar2 != 0))
-           && (piVar1 == (int *)piVar4[0x4e])) {
+           && (block == (int *)piVar4[0x4e])) {
           ((int (*)())FUN_000e2ee4)(auStack_74,piVar4);
         }
       }
-      ((int (*)())FUN_000e2838)(auStack_74,(uint)piVar1,*param_1);
+      ((int (*)())FUN_000e2838)(auStack_74,(uint)block,*writer);
     }
     else {
-      ((int (*)())FUN_000e280c)(piVar1,auStack_74,auStack_78);
-      piVar3 = *(int **)(piVar1[0x4f] + 8);
+      ((int (*)())FUN_000e280c)(block,auStack_74,auStack_78);
+      nextBlock = *(int **)(block[0x4f] + 8);
     }
-    piVar1 = piVar3;
+    block = nextBlock;
   }
   (**(code **)(*local_54 + 0x10))(local_54);
-  uVar6 = (**(code **)(*local_54 + 0x20))(local_54);
-  param_1[1] = uVar6;
-  ((int (*)())FUN_000e2780)(param_1,auStack_74);
+  sizeBeforeCompression = (**(code **)(*local_54 + 0x20))(local_54);
+  writer[1] = sizeBeforeCompression;
+  ((int (*)())FUN_000e2780)(writer,auStack_74);
   iVar2 = ((int (*)())FUN_000e284c)(auStack_74);
-  compressEnabled = Compiler__isOptionEnabled(param_1[2],0x4d);
+  compressEnabled = Compiler__isOptionEnabled(writer[2],0x4d);
   if (compressEnabled == 0) {
     if (iVar2 != 0) goto LAB_000e3900;
   }
   else if (iVar2 != 0) {
-    if (*param_1 == 0) {
-      *param_1 = 1;
-      uVar6 = param_1[1];
+    if (*writer == 0) {
+      *writer = 1;
+      sizeBeforeCompression = writer[1];
       (**(code **)(*local_54 + 0xc))(local_54);
-      ((int (*)())FUN_000e36bc)(param_1,param_2,param_3);
+      ((int (*)())MachineCodeWriter__encodeProgram)(writer,outBuffer,outSize);
       ((int (*)())FUN_000e284c)(auStack_74);
-      Compiler__logf(param_1[2],"Compression : size reduced from %d to %d  (%%%d)\n",uVar6,
-                   param_1[1],(int)((uVar6 - param_1[1]) * 100) / (int)uVar6,in_r8,in_r9,in_r10);
+      Compiler__logf(writer[2],"Compression : size reduced from %d to %d  (%%%d)\n",sizeBeforeCompression,
+                   writer[1],(int)((sizeBeforeCompression - writer[1]) * 100) / (int)sizeBeforeCompression,in_r8,in_r9,in_r10);
       goto LAB_000e392c;
     }
 LAB_000e3900:
-    Compiler__fail(param_1[2],5);
+    Compiler__fail(writer[2],5);
   }
-  (**(code **)(*local_54 + 0x24))(local_54,param_2,param_3);
+  (**(code **)(*local_54 + 0x24))(local_54,outBuffer,outSize);
 LAB_000e392c:
   return ((int (*)())FUN_000e3308)(auStack_74);
 }

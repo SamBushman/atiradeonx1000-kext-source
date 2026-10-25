@@ -1,103 +1,105 @@
 #include "decls.h"
 
-/* FUN_000f4ddc @ 0xf4ddc (512 bytes) */
-int FUN_000f4ddc(param_1, param_2, param_3)
-  int param_1;
-  int param_2;
-  int param_3;
+/* ConstRecord__insertSwizzleVariants @ 0xf4ddc (512 bytes) */
+int ConstRecord__insertSwizzleVariants(constTables, variantStart, constRecord)
+  int constTables;
+  int variantStart;
+  int constRecord;
 {
-  char cVar1;
-  uint uVar2;
-  int iVar3;
+  uint savedUsedFlag;
+  int tableIndex;
+  char usedMask;
+  uint laneBit;
+  int sourceLane;
   uint loopCounterB;
-  uint *puVar5;
-  int *piVar6;
-  undefined4 uVar7;
-  undefined4 *puVar8;
-  undefined4 *puVar9;
-  int iVar10;
-  uint *puVar11;
-  int *piVar12;
+  uint *savedFlagWrite;
+  int *variantLane;
+  undefined4 laneWord;
+  undefined4 *savedLaneWrite;
+  undefined4 *savedLaneRead;
+  int laneRecord;
+  uint *savedFlagRead;
+  int *variantEntry;
   int loopCounter;
-  uint local_1d8 [4];
-  undefined4 local_1c8 [4];
-  undefined4 local_1b8 [24];
-  int aiStack_158 [75];
-  int aiStack_2c [3];
+  uint savedUsedFlags [4];
+  undefined4 hashTables [4];
+  undefined4 savedLanes [24];
+  int variantTable [75];
+  int variantTableEnd [3];
   
-  _memcpy(aiStack_158,&DAT_001aa87c,300);
-  cVar1 = *(char *)(param_3 + 0x15c);
-  puVar9 = local_1b8;
-  puVar11 = local_1d8;
+  _memcpy(variantTable,&DAT_001aa87c,300);
+  usedMask = *(char *)(constRecord + 0x15c);
+  savedLaneRead = savedLanes;
+  savedFlagRead = savedUsedFlags;
   loopCounterB = 0;
   loopCounter = 4;
-  puVar5 = puVar11;
-  puVar8 = puVar9;
-  iVar10 = param_3;
+  savedFlagWrite = savedFlagRead;
+  savedLaneWrite = savedLaneRead;
+  laneRecord = constRecord;
   do {
-    uVar2 = loopCounterB & 0x3f;
-    uVar7 = *(undefined4 *)(iVar10 + 0x20);
-    *puVar8 = *(undefined4 *)(iVar10 + 0x1c);
+    laneBit = loopCounterB & 0x3f;
+    laneWord = *(undefined4 *)(laneRecord + 0x20);
+    *savedLaneWrite = *(undefined4 *)(laneRecord + 0x1c);
     loopCounterB = loopCounterB + 1;
-    puVar8[1] = uVar7;
-    iVar10 = iVar10 + 0x18;
-    *puVar5 = (int)cVar1 >> uVar2 & 1;
-    puVar8 = puVar8 + 6;
-    puVar5 = puVar5 + 1;
+    savedLaneWrite[1] = laneWord;
+    laneRecord = laneRecord + 0x18;
+    *savedFlagWrite = (int)usedMask >> laneBit & 1;
+    savedLaneWrite = savedLaneWrite + 6;
+    savedFlagWrite = savedFlagWrite + 1;
     loopCounter = loopCounter + -1;
   } while (loopCounter != 0);
-  local_1c8[0] = *(undefined4 *)(param_1 + 8);
-  local_1c8[1] = *(undefined4 *)(param_1 + 0xc);
-  local_1c8[2] = *(undefined4 *)(param_1 + 0x10);
-  local_1c8[3] = *(undefined4 *)(param_1 + 0x14);
-  if (*(int *)(&DAT_001aa86c + (4 - param_2) * 4) < 0xf) {
-    piVar12 = aiStack_158 + *(int *)(&DAT_001aa86c + (4 - param_2) * 4) * 5;
+  hashTables[0] = *(undefined4 *)(constTables + 8);
+  hashTables[1] = *(undefined4 *)(constTables + 0xc);
+  hashTables[2] = *(undefined4 *)(constTables + 0x10);
+  hashTables[3] = *(undefined4 *)(constTables + 0x14);
+  if (*(int *)(&DAT_001aa86c + (4 - variantStart) * 4) < 0xf) {
+    variantEntry = variantTable + *(int *)(&DAT_001aa86c + (4 - variantStart) * 4) * 5;
     do {
       loopCounter = 4;
       loopCounterB = 0;
-      piVar6 = piVar12;
-      iVar10 = param_3;
+      variantLane = variantEntry;
+      laneRecord = constRecord;
       do {
-        iVar3 = piVar6[1];
-        if (iVar3 < 0) {
-          *(undefined4 *)(iVar10 + 0x1c) = 0;
-          *(undefined4 *)(iVar10 + 0x20) = 0;
-          *(byte *)(param_3 + 0x15c) = *(byte *)(param_3 + 0x15c) & ~(byte)(1 << (loopCounterB & 0x3f));
+        sourceLane = variantLane[1];
+        if (sourceLane < 0) {
+          *(undefined4 *)(laneRecord + 0x1c) = 0;
+          *(undefined4 *)(laneRecord + 0x20) = 0;
+          *(byte *)(constRecord + 0x15c) = *(byte *)(constRecord + 0x15c) & ~(byte)(1 << (loopCounterB & 0x3f));
         }
         else {
-          uVar7 = local_1b8[iVar3 * 6];
-          *(undefined4 *)(iVar10 + 0x20) = local_1b8[iVar3 * 6 + 1];
-          *(undefined4 *)(iVar10 + 0x1c) = uVar7;
-          *(byte *)(param_3 + 0x15c) = (byte)(1 << (loopCounterB & 0x3f)) | *(byte *)(param_3 + 0x15c);
+          laneWord = savedLanes[sourceLane * 6];
+          *(undefined4 *)(laneRecord + 0x20) = savedLanes[sourceLane * 6 + 1];
+          *(undefined4 *)(laneRecord + 0x1c) = laneWord;
+          *(byte *)(constRecord + 0x15c) = (byte)(1 << (loopCounterB & 0x3f)) | *(byte *)(constRecord + 0x15c);
         }
         loopCounterB = loopCounterB + 1;
-        piVar6 = piVar6 + 1;
-        iVar10 = iVar10 + 0x18;
+        variantLane = variantLane + 1;
+        laneRecord = laneRecord + 0x18;
         loopCounter = loopCounter + -1;
       } while (loopCounter != 0);
-      iVar10 = *piVar12;
-      piVar12 = piVar12 + 5;
-      HashTable__insert(local_1c8[iVar10],param_3);
-    } while (piVar12 != aiStack_2c);
+      tableIndex = *variantEntry;
+      variantEntry = variantEntry + 5;
+      HashTable__insert(hashTables[tableIndex],constRecord);
+    } while (variantEntry != variantTableEnd);
   }
   loopCounter = 4;
   loopCounterB = 0;
-  iVar10 = param_3;
+  laneRecord = constRecord;
   do {
-    uVar7 = puVar9[1];
-    *(undefined4 *)(iVar10 + 0x1c) = *puVar9;
-    *(undefined4 *)(iVar10 + 0x20) = uVar7;
-    uVar2 = *puVar11;
-    puVar11 = puVar11 + 1;
-    if (uVar2 == 0) {
-      *(byte *)(param_3 + 0x15c) = *(byte *)(param_3 + 0x15c) & ~(byte)(1 << (loopCounterB & 0x3f));
+    laneWord = savedLaneRead[1];
+    *(undefined4 *)(laneRecord + 0x1c) = *savedLaneRead;
+    *(undefined4 *)(laneRecord + 0x20) = laneWord;
+    savedUsedFlag = *savedFlagRead;
+    savedFlagRead = savedFlagRead + 1;
+    if (savedUsedFlag == 0) {
+      *(byte *)(constRecord + 0x15c) = *(byte *)(constRecord + 0x15c) & ~(byte)(1 << (loopCounterB & 0x3f));
     }
     else {
-      *(byte *)(param_3 + 0x15c) = (byte)(1 << (loopCounterB & 0x3f)) | *(byte *)(param_3 + 0x15c);
+      *(byte *)(constRecord + 0x15c) = (byte)(1 << (loopCounterB & 0x3f)) | *(byte *)(constRecord + 0x15c);
     }
     loopCounterB = loopCounterB + 1;
-    puVar9 = puVar9 + 6;
-    iVar10 = iVar10 + 0x18;
+    savedLaneRead = savedLaneRead + 6;
+    laneRecord = laneRecord + 0x18;
     loopCounter = loopCounter + -1;
   } while (loopCounter != 0);
   return;
@@ -209,7 +211,7 @@ int Compiler__getOrCreateLoadConstN(compiler, param_2, param_3, param_4, param_5
     } while (loopCounterB != 0);
     piVar5 = *(int **)(*(int *)(*compiler + 0x6c4) + 0x3a0);
     (**(code **)(*piVar5 + 0xc))(piVar5,puVar3);
-    ((int (*)())FUN_000f4ddc)(compiler,param_2,puVar3);
+    ((int (*)())ConstRecord__insertSwizzleVariants)(compiler,param_2,puVar3);
   }
   return puVar3;
 }
@@ -920,7 +922,7 @@ int Compiler__getOrCreateConstVectorN(owner, param_2, operandWord0, operandWord1
       iVar6 = iVar6 + 0x18;
       loopCounterD = loopCounterD + -1;
     } while (loopCounterD != 0);
-    ((int (*)())FUN_000f4ddc)(owner,param_2,iVar7);
+    ((int (*)())ConstRecord__insertSwizzleVariants)(owner,param_2,iVar7);
   }
   else {
     iVar4 = *(int *)(foundEntry + 0x8c);

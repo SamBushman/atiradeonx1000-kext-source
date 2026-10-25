@@ -46,10 +46,10 @@ e3544	FUN_000e3544	e3618	e361c	-	no-handler
 e3544	FUN_000e3544	e3638	e363c	e369c	cleanup
 e3544	FUN_000e3544	e3664	e369c	-	no-handler
 e3544	FUN_000e3544	e36b8	e36bc	-	no-handler
-e36bc	FUN_000e36bc	e36ec	e36f0	-	no-handler
-e36bc	FUN_000e36bc	e3708	e392c	e3948	cleanup
-e36bc	FUN_000e36bc	e3930	e3934	-	no-handler
-e36bc	FUN_000e36bc	e3958	e395c	-	no-handler
+e36bc	MachineCodeWriter__encodeProgram	e36ec	e36f0	-	no-handler
+e36bc	MachineCodeWriter__encodeProgram	e3708	e392c	e3948	cleanup
+e36bc	MachineCodeWriter__encodeProgram	e3930	e3934	-	no-handler
+e36bc	MachineCodeWriter__encodeProgram	e3958	e395c	-	no-handler
 e3b88	FUN_000e3b88	e3c20	e429c	-	no-handler
 e3b88	FUN_000e3b88	e42a8	e42ac	e42c0	cleanup
 e3b88	FUN_000e3b88	e42c0	e43c4	-	no-handler

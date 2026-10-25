@@ -377,7 +377,7 @@ int FUN_0012bb48(pass, block)
       Block__ctor_ea020(mergedBlock,*(undefined4 *)(pass + 8));
       Program__insertBlockBefore(pass,block,mergedBlock);
       mergedBlockArg = mergedBlock;
-      FUN_000e8eac(block,footerBlock,mergedBlock);
+      Block__replaceRegionEdges(block,footerBlock,mergedBlock);
       branchInst = Block__getBranchInst(block,staleArg4B,mergedBlockArg,staleArg6,staleArg7,staleArg8,a6);
       block[0x4c] = 0;
       branchInstFlags = *(uint *)(branchInst + 0x14);

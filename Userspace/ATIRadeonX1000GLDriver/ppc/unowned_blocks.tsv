@@ -2887,7 +2887,7 @@ e34c8	e34cc	millicode	FUN_000e33cc	1
 e3524	e3544	eh-pad	FUN_000e33cc	8	0x193cc0,__Unwind_Resume
 e3640	e3644	millicode	FUN_000e3544	1	
 e369c	e36bc	eh-pad	FUN_000e3544	8	0x193cc0,__Unwind_Resume
-e3948	e395c	eh-pad	FUN_000e36bc	5	0xe3308,__Unwind_Resume
+e3948	e395c	eh-pad	MachineCodeWriter__encodeProgram	5	0xe3308,__Unwind_Resume
 e42c0	e42c4	eh-pad	FUN_000e3b88	1	__Unwind_Resume
 e4d2c	e4d8c	table	ILReader__decodeInstruction	24	
 e5638	e5654	other	ILReader__ctor_e5570	7	0x193cc0

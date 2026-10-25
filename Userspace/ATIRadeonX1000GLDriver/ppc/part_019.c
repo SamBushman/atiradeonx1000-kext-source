@@ -233,69 +233,70 @@ LAB_000d52a0:
 }
 
 /* FUN_000d5390 @ 0xd5390 (548 bytes) */
-int FUN_000d5390(param_1, param_2, param_3, param_4, param_5)
-  int param_1;
-  uint *param_2;
-  int param_3;
-  int param_4;
-  uint param_5;
+int FUN_000d5390(ctx, ilBuilder, isFirstUnit, previousUnit, componentMask)
+  int ctx;
+  uint *ilBuilder;
+  int isFirstUnit;
+  int previousUnit;
+  uint componentMask;
 {
+  uint newTokenBuffer;
   bool bVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
+  uint tokenIndex;
+  uint componentToken;
+  uint sourceToken;
   uint loopCounter;
   
-  uVar3 = 0x170000;
-  if (param_3 == 0) {
-    uVar4 = param_4 + (uint)(byte)((unsigned char *)0x000013b2)[param_1] & 0xffff | 0x40000;
+  componentToken = 0x170000;
+  if (isFirstUnit == 0) {
+    sourceToken = previousUnit + (uint)(byte)((unsigned char *)0x000013b2)[ctx] & 0xffff | 0x40000;
   }
   else {
-    uVar4 = 0x120000;
+    sourceToken = 0x120000;
   }
   loopCounter = 0;
   do {
-    if ((1 << (loopCounter & 0x3f) & param_5) != 0) {
-      uVar2 = *param_2;
-      uVar3 = loopCounter & 0xffff | uVar3 & 0xffff0000;
-      if (param_2[1] <= uVar2) {
-        uVar2 = (**(code **)(param_1 + 0xc))(param_2[1] * 4 + 0x200);
-        if (param_2[2] != 0) {
-          _memcpy(uVar2,param_2[2],*param_2 << 2);
-          (**(code **)(param_1 + 0x18))(param_2[2]);
+    if ((1 << (loopCounter & 0x3f) & componentMask) != 0) {
+      tokenIndex = *ilBuilder;
+      componentToken = loopCounter & 0xffff | componentToken & 0xffff0000;
+      if (ilBuilder[1] <= tokenIndex) {
+        newTokenBuffer = (**(code **)(ctx + 0xc))(ilBuilder[1] * 4 + 0x200);
+        if (ilBuilder[2] != 0) {
+          _memcpy(newTokenBuffer,ilBuilder[2],*ilBuilder << 2);
+          (**(code **)(ctx + 0x18))(ilBuilder[2]);
         }
-        param_2[2] = uVar2;
-        uVar2 = *param_2;
-        param_2[1] = param_2[1] + 0x80;
+        ilBuilder[2] = newTokenBuffer;
+        tokenIndex = *ilBuilder;
+        ilBuilder[1] = ilBuilder[1] + 0x80;
       }
-      *(undefined4 *)(uVar2 * 4 + param_2[2]) = 0xe;
-      uVar2 = *param_2 + 1;
-      *param_2 = uVar2;
-      if (param_2[1] <= uVar2) {
-        uVar2 = (**(code **)(param_1 + 0xc))(param_2[1] * 4 + 0x200);
-        if (param_2[2] != 0) {
-          _memcpy(uVar2,param_2[2],*param_2 << 2);
-          (**(code **)(param_1 + 0x18))(param_2[2]);
+      *(undefined4 *)(tokenIndex * 4 + ilBuilder[2]) = 0xe;
+      tokenIndex = *ilBuilder + 1;
+      *ilBuilder = tokenIndex;
+      if (ilBuilder[1] <= tokenIndex) {
+        newTokenBuffer = (**(code **)(ctx + 0xc))(ilBuilder[1] * 4 + 0x200);
+        if (ilBuilder[2] != 0) {
+          _memcpy(newTokenBuffer,ilBuilder[2],*ilBuilder << 2);
+          (**(code **)(ctx + 0x18))(ilBuilder[2]);
         }
-        param_2[2] = uVar2;
-        uVar2 = *param_2;
-        param_2[1] = param_2[1] + 0x80;
+        ilBuilder[2] = newTokenBuffer;
+        tokenIndex = *ilBuilder;
+        ilBuilder[1] = ilBuilder[1] + 0x80;
       }
-      *(uint *)(uVar2 * 4 + param_2[2]) = uVar3;
-      uVar2 = *param_2 + 1;
-      *param_2 = uVar2;
-      if (param_2[1] <= uVar2) {
-        uVar2 = (**(code **)(param_1 + 0xc))(param_2[1] * 4 + 0x200);
-        if (param_2[2] != 0) {
-          _memcpy(uVar2,param_2[2],*param_2 << 2);
-          (**(code **)(param_1 + 0x18))(param_2[2]);
+      *(uint *)(tokenIndex * 4 + ilBuilder[2]) = componentToken;
+      tokenIndex = *ilBuilder + 1;
+      *ilBuilder = tokenIndex;
+      if (ilBuilder[1] <= tokenIndex) {
+        newTokenBuffer = (**(code **)(ctx + 0xc))(ilBuilder[1] * 4 + 0x200);
+        if (ilBuilder[2] != 0) {
+          _memcpy(newTokenBuffer,ilBuilder[2],*ilBuilder << 2);
+          (**(code **)(ctx + 0x18))(ilBuilder[2]);
         }
-        param_2[2] = uVar2;
-        uVar2 = *param_2;
-        param_2[1] = param_2[1] + 0x80;
+        ilBuilder[2] = newTokenBuffer;
+        tokenIndex = *ilBuilder;
+        ilBuilder[1] = ilBuilder[1] + 0x80;
       }
-      *(uint *)(uVar2 * 4 + param_2[2]) = uVar4;
-      *param_2 = *param_2 + 1;
+      *(uint *)(tokenIndex * 4 + ilBuilder[2]) = sourceToken;
+      *ilBuilder = *ilBuilder + 1;
     }
     bVar1 = loopCounter != 3;
     loopCounter = loopCounter + 1;
@@ -304,88 +305,89 @@ int FUN_000d5390(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* FUN_000d55c0 @ 0xd55c0 (832 bytes) */
-int FUN_000d55c0(param_1, param_2, param_3, param_4)
-  int param_1;
-  uint *param_2;
-  int param_3;
-  undefined4 param_4;
+int FUN_000d55c0(ctx, ilBuilder, isFirstUnit, previousUnit)
+  int ctx;
+  uint *ilBuilder;
+  int isFirstUnit;
+  undefined4 previousUnit;
 {
-  byte bVar1;
-  uint uVar2;
-  uint uVar3;
+  uint newTokenBuffer;
+  byte textureUnitCount;
+  uint tokenIndex;
+  uint sourceToken;
   
-  uVar2 = *param_2;
-  if (param_2[1] <= uVar2) {
-    uVar2 = (**(code **)(param_1 + 0xc))(param_2[1] * 4 + 0x200);
-    if (param_2[2] != 0) {
-      _memcpy(uVar2,param_2[2],*param_2 << 2);
-      (**(code **)(param_1 + 0x18))(param_2[2]);
+  tokenIndex = *ilBuilder;
+  if (ilBuilder[1] <= tokenIndex) {
+    newTokenBuffer = (**(code **)(ctx + 0xc))(ilBuilder[1] * 4 + 0x200);
+    if (ilBuilder[2] != 0) {
+      _memcpy(newTokenBuffer,ilBuilder[2],*ilBuilder << 2);
+      (**(code **)(ctx + 0x18))(ilBuilder[2]);
     }
-    param_2[2] = uVar2;
-    uVar2 = *param_2;
-    param_2[1] = param_2[1] + 0x80;
+    ilBuilder[2] = newTokenBuffer;
+    tokenIndex = *ilBuilder;
+    ilBuilder[1] = ilBuilder[1] + 0x80;
   }
-  *(undefined4 *)(uVar2 * 4 + param_2[2]) = 3;
-  uVar2 = *param_2 + 1;
-  *param_2 = uVar2;
-  bVar1 = ((unsigned char *)0x000013b2)[param_1];
-  if (param_2[1] <= uVar2) {
-    uVar2 = (**(code **)(param_1 + 0xc))(param_2[1] * 4 + 0x200);
-    if (param_2[2] != 0) {
-      _memcpy(uVar2,param_2[2],*param_2 << 2);
-      (**(code **)(param_1 + 0x18))(param_2[2]);
+  *(undefined4 *)(tokenIndex * 4 + ilBuilder[2]) = 3;
+  tokenIndex = *ilBuilder + 1;
+  *ilBuilder = tokenIndex;
+  textureUnitCount = ((unsigned char *)0x000013b2)[ctx];
+  if (ilBuilder[1] <= tokenIndex) {
+    newTokenBuffer = (**(code **)(ctx + 0xc))(ilBuilder[1] * 4 + 0x200);
+    if (ilBuilder[2] != 0) {
+      _memcpy(newTokenBuffer,ilBuilder[2],*ilBuilder << 2);
+      (**(code **)(ctx + 0x18))(ilBuilder[2]);
     }
-    param_2[2] = uVar2;
-    uVar2 = *param_2;
-    param_2[1] = param_2[1] + 0x80;
+    ilBuilder[2] = newTokenBuffer;
+    tokenIndex = *ilBuilder;
+    ilBuilder[1] = ilBuilder[1] + 0x80;
   }
-  *(uint *)(uVar2 * 4 + param_2[2]) = (int)(*(unsigned short *)((unsigned char *)&(param_4) + 2)) + (uint)bVar1 & 0xffff | 0x40000;
-  uVar2 = *param_2 + 1;
-  *param_2 = uVar2;
-  if (param_3 == 0) {
-    uVar3 = (int)(*(unsigned short *)((unsigned char *)&(param_4) + 2)) + (uint)(byte)((unsigned char *)0x000013b2)[param_1] & 0xffff | 0x40000;
+  *(uint *)(tokenIndex * 4 + ilBuilder[2]) = (int)(*(unsigned short *)((unsigned char *)&(previousUnit) + 2)) + (uint)textureUnitCount & 0xffff | 0x40000;
+  tokenIndex = *ilBuilder + 1;
+  *ilBuilder = tokenIndex;
+  if (isFirstUnit == 0) {
+    sourceToken = (int)(*(unsigned short *)((unsigned char *)&(previousUnit) + 2)) + (uint)(byte)((unsigned char *)0x000013b2)[ctx] & 0xffff | 0x40000;
   }
   else {
-    uVar3 = 0x120000;
+    sourceToken = 0x120000;
   }
-  if (param_2[1] <= uVar2) {
-    uVar2 = (**(code **)(param_1 + 0xc))(param_2[1] * 4 + 0x200);
-    if (param_2[2] != 0) {
-      _memcpy(uVar2,param_2[2],*param_2 << 2);
-      (**(code **)(param_1 + 0x18))(param_2[2]);
+  if (ilBuilder[1] <= tokenIndex) {
+    newTokenBuffer = (**(code **)(ctx + 0xc))(ilBuilder[1] * 4 + 0x200);
+    if (ilBuilder[2] != 0) {
+      _memcpy(newTokenBuffer,ilBuilder[2],*ilBuilder << 2);
+      (**(code **)(ctx + 0x18))(ilBuilder[2]);
     }
-    param_2[2] = uVar2;
-    uVar2 = *param_2;
-    param_2[1] = param_2[1] + 0x80;
+    ilBuilder[2] = newTokenBuffer;
+    tokenIndex = *ilBuilder;
+    ilBuilder[1] = ilBuilder[1] + 0x80;
   }
-  *(uint *)(uVar2 * 4 + param_2[2]) = uVar3;
-  uVar2 = *param_2 + 1;
-  *param_2 = uVar2;
-  if (param_2[1] <= uVar2) {
-    uVar2 = (**(code **)(param_1 + 0xc))(param_2[1] * 4 + 0x200);
-    if (param_2[2] != 0) {
-      _memcpy(uVar2,param_2[2],*param_2 << 2);
-      (**(code **)(param_1 + 0x18))(param_2[2]);
+  *(uint *)(tokenIndex * 4 + ilBuilder[2]) = sourceToken;
+  tokenIndex = *ilBuilder + 1;
+  *ilBuilder = tokenIndex;
+  if (ilBuilder[1] <= tokenIndex) {
+    newTokenBuffer = (**(code **)(ctx + 0xc))(ilBuilder[1] * 4 + 0x200);
+    if (ilBuilder[2] != 0) {
+      _memcpy(newTokenBuffer,ilBuilder[2],*ilBuilder << 2);
+      (**(code **)(ctx + 0x18))(ilBuilder[2]);
     }
-    param_2[2] = uVar2;
-    uVar2 = *param_2;
-    param_2[1] = param_2[1] + 0x80;
+    ilBuilder[2] = newTokenBuffer;
+    tokenIndex = *ilBuilder;
+    ilBuilder[1] = ilBuilder[1] + 0x80;
   }
-  *(undefined4 *)(uVar2 * 4 + param_2[2]) = 0x530000;
-  uVar2 = *param_2 + 1;
-  *param_2 = uVar2;
-  if (param_2[1] <= uVar2) {
-    uVar2 = (**(code **)(param_1 + 0xc))(param_2[1] * 4 + 0x200);
-    if (param_2[2] != 0) {
-      _memcpy(uVar2,param_2[2],*param_2 << 2);
-      (**(code **)(param_1 + 0x18))(param_2[2]);
+  *(undefined4 *)(tokenIndex * 4 + ilBuilder[2]) = 0x530000;
+  tokenIndex = *ilBuilder + 1;
+  *ilBuilder = tokenIndex;
+  if (ilBuilder[1] <= tokenIndex) {
+    newTokenBuffer = (**(code **)(ctx + 0xc))(ilBuilder[1] * 4 + 0x200);
+    if (ilBuilder[2] != 0) {
+      _memcpy(newTokenBuffer,ilBuilder[2],*ilBuilder << 2);
+      (**(code **)(ctx + 0x18))(ilBuilder[2]);
     }
-    param_2[2] = uVar2;
-    uVar2 = *param_2;
-    param_2[1] = param_2[1] + 0x80;
+    ilBuilder[2] = newTokenBuffer;
+    tokenIndex = *ilBuilder;
+    ilBuilder[1] = ilBuilder[1] + 0x80;
   }
-  *(undefined **)(uVar2 * 4 + param_2[2]) = ((unsigned char *)0x00004210);
-  *param_2 = *param_2 + 1;
+  *(undefined **)(tokenIndex * 4 + ilBuilder[2]) = ((unsigned char *)0x00004210);
+  *ilBuilder = *ilBuilder + 1;
   return;
 }
 

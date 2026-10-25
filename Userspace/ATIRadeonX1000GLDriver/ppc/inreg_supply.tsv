@@ -291,9 +291,9 @@ bd9a0	FUN_000bd9a0	r7	PASS-indirect	GARBAGE
 bd9a0	FUN_000bd9a0	r8	PASS-indirect	GARBAGE	
 db574	ildisPrintFixedPoint	r8	PASS-import	GARBAGE	
 db574	ildisPrintFixedPoint	r10	PASS-import	GARBAGE	
-e36bc	FUN_000e36bc	r8	PASS-deep	GARBAGE	
-e36bc	FUN_000e36bc	r9	PASS-deep	GARBAGE	
-e36bc	FUN_000e36bc	r10	PASS-deep	GARBAGE	
+e36bc	MachineCodeWriter__encodeProgram	r8	PASS-deep	GARBAGE	
+e36bc	MachineCodeWriter__encodeProgram	r9	PASS-deep	GARBAGE	
+e36bc	MachineCodeWriter__encodeProgram	r10	PASS-deep	GARBAGE	
 f1d7c	FUN_000f1d7c	r6	PASS-indirect	GARBAGE	
 f1d7c	FUN_000f1d7c	r7	PASS-indirect	GARBAGE	
 f1d7c	FUN_000f1d7c	r8	PASS-indirect	GARBAGE	

@@ -2838,101 +2838,102 @@ int Block__connect(fromBlock, toBlock)
   return;
 }
 
-/* FUN_000e8eac @ 0xe8eac (608 bytes) */
-int FUN_000e8eac(param_1, param_2, param_3)
-  int param_1;
-  int param_2;
-  undefined4 param_3;
+/* Block__replaceRegionEdges @ 0xe8eac (608 bytes) */
+int Block__replaceRegionEdges(oldFirst, oldLast, newBlock)
+  int oldFirst;
+  int oldLast;
+  undefined4 newBlock;
 {
+  uint *neighborSuccessors;
   int loopCounter;
   uint loopIndex2;
-  int iVar1;
-  undefined4 *puVar2;
-  int iVar3;
-  int iVar4;
-  uint uVar5;
-  uint *puVar6;
+  int neighborEdgeTarget;
+  undefined4 *edgeSlot;
+  int neighbor;
+  int edgeVector;
+  uint edgeCount;
+  uint *neighborPredecessors;
   int loopCounterB;
-  uint uVar8;
-  uint uVar9;
+  uint edgeIndex;
+  uint lastEdgeIndex;
   uint loopIndex;
   
   loopIndex = 1;
   loopCounterB = 0;
-  iVar4 = *(int *)(param_1 + 0xd4);
+  edgeVector = *(int *)(oldFirst + 0xd4);
   do {
-    if (*(uint *)(iVar4 + 4) < loopIndex) {
-      iVar4 = *(int *)(param_2 + 0xd0);
+    if (*(uint *)(edgeVector + 4) < loopIndex) {
+      edgeVector = *(int *)(oldLast + 0xd0);
       loopIndex = 1;
       loopCounterB = 0;
       do {
-        if (*(uint *)(iVar4 + 4) < loopIndex) {
+        if (*(uint *)(edgeVector + 4) < loopIndex) {
           return;
         }
-        iVar3 = *(int *)(loopCounterB + *(int *)(iVar4 + 8));
-        if (iVar3 != 0) {
-          ((int (*)())Block__appendSuccessor)(param_3,iVar3);
+        neighbor = *(int *)(loopCounterB + *(int *)(edgeVector + 8));
+        if (neighbor != 0) {
+          ((int (*)())Block__appendSuccessor)(newBlock,neighbor);
           loopCounter = 0;
-          uVar9 = 0xffffffff;
-          for (loopIndex2 = 1; loopIndex2 <= *(uint *)(*(int *)(iVar3 + 0xd4) + 4); loopIndex2 = loopIndex2 + 1) {
-            iVar1 = *(int *)(*(int *)(*(int *)(iVar3 + 0xd4) + 8) + loopCounter);
-            uVar8 = uVar9;
-            if ((iVar1 != 0) && (uVar8 = uVar9 + 1, param_2 == iVar1)) {
-              puVar6 = *(uint **)(iVar3 + 0xd4);
-              if (uVar8 < *puVar6) {
-                uVar5 = puVar6[1];
-                if (uVar5 <= uVar8) {
-                  _memset(uVar5 * 4 + puVar6[2],0,(uVar8 - uVar5) * 4 + 4);
-                  puVar6[1] = uVar9 + 2;
+          lastEdgeIndex = 0xffffffff;
+          for (loopIndex2 = 1; loopIndex2 <= *(uint *)(*(int *)(neighbor + 0xd4) + 4); loopIndex2 = loopIndex2 + 1) {
+            neighborEdgeTarget = *(int *)(*(int *)(*(int *)(neighbor + 0xd4) + 8) + loopCounter);
+            edgeIndex = lastEdgeIndex;
+            if ((neighborEdgeTarget != 0) && (edgeIndex = lastEdgeIndex + 1, oldLast == neighborEdgeTarget)) {
+              neighborPredecessors = *(uint **)(neighbor + 0xd4);
+              if (edgeIndex < *neighborPredecessors) {
+                edgeCount = neighborPredecessors[1];
+                if (edgeCount <= edgeIndex) {
+                  _memset(edgeCount * 4 + neighborPredecessors[2],0,(edgeIndex - edgeCount) * 4 + 4);
+                  neighborPredecessors[1] = lastEdgeIndex + 2;
                 }
-                puVar2 = (undefined4 *)(uVar8 * 4 + puVar6[2]);
+                edgeSlot = (undefined4 *)(edgeIndex * 4 + neighborPredecessors[2]);
               }
               else {
-                puVar2 = (undefined4 *)Vector__elementRefGrow(puVar6,uVar8);
+                edgeSlot = (undefined4 *)Vector__elementRefGrow(neighborPredecessors,edgeIndex);
               }
-              *puVar2 = param_3;
-              iVar4 = *(int *)(param_2 + 0xd0);
+              *edgeSlot = newBlock;
+              edgeVector = *(int *)(oldLast + 0xd0);
               goto LAB_000e9098;
             }
             loopCounter = loopCounter + 4;
-            uVar9 = uVar8;
+            lastEdgeIndex = edgeIndex;
           }
-          iVar4 = *(int *)(param_2 + 0xd0);
+          edgeVector = *(int *)(oldLast + 0xd0);
         }
 LAB_000e9098:
         loopIndex = loopIndex + 1;
         loopCounterB = loopCounterB + 4;
       } while( true );
     }
-    iVar3 = *(int *)(loopCounterB + *(int *)(iVar4 + 8));
-    if (iVar3 != 0) {
-      ((int (*)())Block__appendPredecessor)(param_3,iVar3);
+    neighbor = *(int *)(loopCounterB + *(int *)(edgeVector + 8));
+    if (neighbor != 0) {
+      ((int (*)())Block__appendPredecessor)(newBlock,neighbor);
       loopCounter = 0;
-      uVar9 = 0xffffffff;
-      for (loopIndex2 = 1; loopIndex2 <= *(uint *)(*(int *)(iVar3 + 0xd0) + 4); loopIndex2 = loopIndex2 + 1) {
-        iVar1 = *(int *)(loopCounter + *(int *)(*(int *)(iVar3 + 0xd0) + 8));
-        uVar8 = uVar9;
-        if ((iVar1 != 0) && (uVar8 = uVar9 + 1, param_1 == iVar1)) {
-          puVar6 = *(uint **)(iVar3 + 0xd0);
-          if (uVar8 < *puVar6) {
-            uVar5 = puVar6[1];
-            if (uVar5 <= uVar8) {
-              _memset(uVar5 * 4 + puVar6[2],0,(uVar8 - uVar5) * 4 + 4);
-              puVar6[1] = uVar9 + 2;
+      lastEdgeIndex = 0xffffffff;
+      for (loopIndex2 = 1; loopIndex2 <= *(uint *)(*(int *)(neighbor + 0xd0) + 4); loopIndex2 = loopIndex2 + 1) {
+        neighborEdgeTarget = *(int *)(loopCounter + *(int *)(*(int *)(neighbor + 0xd0) + 8));
+        edgeIndex = lastEdgeIndex;
+        if ((neighborEdgeTarget != 0) && (edgeIndex = lastEdgeIndex + 1, oldFirst == neighborEdgeTarget)) {
+          neighborSuccessors = *(uint **)(neighbor + 0xd0);
+          if (edgeIndex < *neighborSuccessors) {
+            edgeCount = neighborSuccessors[1];
+            if (edgeCount <= edgeIndex) {
+              _memset(edgeCount * 4 + neighborSuccessors[2],0,(edgeIndex - edgeCount) * 4 + 4);
+              neighborSuccessors[1] = lastEdgeIndex + 2;
             }
-            puVar2 = (undefined4 *)(uVar8 * 4 + puVar6[2]);
+            edgeSlot = (undefined4 *)(edgeIndex * 4 + neighborSuccessors[2]);
           }
           else {
-            puVar2 = (undefined4 *)Vector__elementRefGrow(puVar6,uVar8);
+            edgeSlot = (undefined4 *)Vector__elementRefGrow(neighborSuccessors,edgeIndex);
           }
-          *puVar2 = param_3;
-          iVar4 = *(int *)(param_1 + 0xd4);
+          *edgeSlot = newBlock;
+          edgeVector = *(int *)(oldFirst + 0xd4);
           goto LAB_000e8f80;
         }
         loopCounter = loopCounter + 4;
-        uVar9 = uVar8;
+        lastEdgeIndex = edgeIndex;
       }
-      iVar4 = *(int *)(param_1 + 0xd4);
+      edgeVector = *(int *)(oldFirst + 0xd4);
     }
 LAB_000e8f80:
     loopIndex = loopIndex + 1;
