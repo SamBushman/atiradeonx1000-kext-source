@@ -1,0 +1,29 @@
+local	FUN_00131a80	param_1	allocator	INFERRED	register allocator object (+8 compiler, +0x434 slot-used bitset, +0x8c slot vector)
+use	FUN_00131a80	puVar2	slotRef	INFERRED	element reference of the new slot in the slot vector	^\s*puVar2\ =\ \(undefined4\ \*\)\(uVar6\ \*\ 4\ \+\ puVar7\[2\]\);$	+1
+use	FUN_00131a80	puVar2	slotRef	INFERRED	element reference of the new slot in the slot vector	^\s*puVar2\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar7,uVar6\);$	+1
+use	FUN_00131a80	puVar2	slotRef	INFERRED	element reference of the new slot in the slot vector	^\s*\*puVar2\ =\ 0;$	+1
+use	FUN_00131a80	iVar1	bitsLeft	INFERRED	bits left to scan in the used-slot bitset	^\s*iVar1\ =\ \*\(int\ \*\)\(iVar4\ \+\ 4\);$	+2
+use	FUN_00131a80	iVar1	bitsLeft	INFERRED	bits left to scan in the used-slot bitset	^\s*iVar1\ =\ iVar1\ \+\ \-1;$	+2
+use	FUN_00131a80	uVar3	slotVectorCount	INFERRED	filled count of the slot vector	^\s*uVar3\ =\ puVar7\[1\];$	+3
+use	FUN_00131a80	iVar4	usedSlotBitset	INFERRED	bitset of the slots already handed out (allocator +0x434)	^\s*iVar4\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x434\);$	+2
+use	FUN_00131a80	iVar4	usedSlotBitset	INFERRED	bitset of the slots already handed out (allocator +0x434)	^\s*if\ \(\(\*\(uint\ \*\)\(iVar4\ \+\ 8\)\ \&\ 1\)\ !=\ 0\)\ \{$	+1
+use	FUN_00131a80	iVar4	usedSlotBitset	INFERRED	bitset of the slots already handed out (allocator +0x434)	^\s*\}\ while\ \(\(\*\(uint\ \*\)\(\(uVar6\ >>\ 3\ \&\ 0x1ffffffc\)\ \+\ iVar4\ \+\ 8\)\ >>\ \(uVar6\ \&\ 0x1f\)\ \&\ 1\)\ !=\ 0\);$	+1
+use	FUN_00131a80	iVar4	usedSlotBitset	INFERRED	bitset of the slots already handed out (allocator +0x434)	^\s*iVar4\ =\ \(uVar6\ >>\ 3\ \&\ 0x1ffffffc\)\ \+\ iVar4;$	+2
+use	FUN_00131a80	uVar6	freeSlot	INFERRED	lowest free slot number (-1 when the bitset is full)	^\s*uVar6\ =\ 0xffffffff;$	+1
+use	FUN_00131a80	uVar6	freeSlot	INFERRED	lowest free slot number (-1 when the bitset is full)	^\s*uVar6\ =\ 0;$	+1
+use	FUN_00131a80	uVar6	freeSlot	INFERRED	lowest free slot number (-1 when the bitset is full)	^\s*uVar6\ =\ 0;$@2	+1
+use	FUN_00131a80	uVar6	freeSlot	INFERRED	lowest free slot number (-1 when the bitset is full)	^\s*uVar6\ =\ uVar6\ \+\ 1;$	+1
+use	FUN_00131a80	uVar6	freeSlot	INFERRED	lowest free slot number (-1 when the bitset is full)	^\s*\}\ while\ \(\(\*\(uint\ \*\)\(\(uVar6\ >>\ 3\ \&\ 0x1ffffffc\)\ \+\ iVar4\ \+\ 8\)\ >>\ \(uVar6\ \&\ 0x1f\)\ \&\ 1\)\ !=\ 0\);$	+1
+use	FUN_00131a80	uVar6	freeSlot	INFERRED	lowest free slot number (-1 when the bitset is full)	^\s*iVar4\ =\ \(uVar6\ >>\ 3\ \&\ 0x1ffffffc\)\ \+\ iVar4;$	+2
+use	FUN_00131a80	uVar6	freeSlot	INFERRED	lowest free slot number (-1 when the bitset is full)	^\s*if\ \(uVar6\ <\ \*puVar7\)\ \{$	+1
+use	FUN_00131a80	uVar6	freeSlot	INFERRED	lowest free slot number (-1 when the bitset is full)	^\s*if\ \(uVar3\ <=\ uVar6\)\ \{$	+3
+use	FUN_00131a80	uVar6	freeSlot	INFERRED	lowest free slot number (-1 when the bitset is full)	^\s*puVar2\ =\ \(undefined4\ \*\)\(uVar6\ \*\ 4\ \+\ puVar7\[2\]\);$	+1
+use	FUN_00131a80	uVar6	freeSlot	INFERRED	lowest free slot number (-1 when the bitset is full)	^\s*puVar2\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar7,uVar6\);$	+1
+use	FUN_00131a80	uVar6	freeSlot	INFERRED	lowest free slot number (-1 when the bitset is full)	^\s*return\ uVar6;$	+1
+use	FUN_00131a80	puVar7	slotVector	INFERRED	slot vector header (allocator +0x8c), created on first use	^\s*puVar7\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 0x8c\);$	+2
+use	FUN_00131a80	puVar7	slotVector	INFERRED	slot vector header (allocator +0x8c), created on first use	^\s*puVar7\ =\ puVar2\ \+\ 1;$	+1
+use	FUN_00131a80	puVar7	slotVector	INFERRED	slot vector header (allocator +0x8c), created on first use	^\s*\*\(uint\ \*\*\)\(param_1\ \+\ 0x8c\)\ =\ puVar7;$	+1
+use	FUN_00131a80	puVar7	slotVector	INFERRED	slot vector header (allocator +0x8c), created on first use	^\s*if\ \(uVar6\ <\ \*puVar7\)\ \{$	+2
+use	FUN_00131a80	puVar7	slotVector	INFERRED	slot vector header (allocator +0x8c), created on first use	^\s*_memset\(\(void\ \*\)\(uVar3\ \*\ 4\ \+\ puVar7\[2\]\),0,\(uVar6\ \-\ uVar3\)\ \*\ 4\ \+\ 4\);$	+2
+use	FUN_00131a80	puVar7	slotVector	INFERRED	slot vector header (allocator +0x8c), created on first use	^\s*puVar2\ =\ \(undefined4\ \*\)\(uVar6\ \*\ 4\ \+\ puVar7\[2\]\);$	+1
+use	FUN_00131a80	puVar7	slotVector	INFERRED	slot vector header (allocator +0x8c), created on first use	^\s*puVar2\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar7,uVar6\);$	+1

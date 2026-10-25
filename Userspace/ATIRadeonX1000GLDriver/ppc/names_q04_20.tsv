@@ -1,0 +1,10 @@
+use	psnReallocateTemps	bVar9	instByte10	INFERRED	every definition of this web is a load from inst+0x10 (positional name; no field row)	^\s*bVar9\ =\ \*\(byte\ \*\)\(puVar14\ \+\ 0x10\);$	+2
+use	psnReallocateTemps	bVar9	instByte10	INFERRED	every definition of this web is a load from inst+0x10 (positional name; no field row)	^\s*bVar9\ =\ \*\(byte\ \*\)\(puVar14\ \+\ 0x10\);$@2	+1
+use	psnReallocateTemps	bVar9	instByte10	INFERRED	every definition of this web is a load from inst+0x10 (positional name; no field row)	^\s*bVar9\ =\ \*\(byte\ \*\)\(puVar14\ \+\ 0x10\);$@3	+1
+use	psnReallocateTemps	bVar9	instByte10	INFERRED	every definition of this web is a load from inst+0x10 (positional name; no field row)	^\s*bVar9\ =\ \*\(byte\ \*\)\(puVar14\ \+\ 0x10\);$@4	+1
+use	psnReallocateTemps	bVar9	instByte10	INFERRED	every definition of this web is a load from inst+0x10 (positional name; no field row)	^\s*bVar9\ =\ \*\(byte\ \*\)\(puVar14\ \+\ 0x10\);$@5	+1
+use	psnReallocateTemps	bVar9	instByte10	INFERRED	every definition of this web is a load from inst+0x10 (positional name; no field row)	^\s*if\ \(bVar9\ <\ 0xc\)\ \{$	+2
+use	psnReallocateTemps	uVar3	instShort3	INFERRED	every definition of this web is a load from inst+0x3 (positional name; no field row)	^\s*uVar3\ =\ \*\(ushort\ \*\)\(puVar14\ \+\ 3\);$	+2
+use	psnReallocateTemps	uVar3	instShort3	INFERRED	every definition of this web is a load from inst+0x3 (positional name; no field row)	^\s*if\ \(\(uVar3\ ==\ uVar8\)\ \&\&\ \(param_5\ !=\ \(uint\ \*\)\(\(int\)\(\(unsigned\ char\ \*\)0x0\)\ \+\ 2\)\)\)\ \{$	+1
+use	psnReallocateTemps	uVar4	instShort7	INFERRED	every definition of this web is a load from inst+0x7 (positional name; no field row)	^\s*uVar4\ =\ \*\(ushort\ \*\)\(puVar14\ \+\ 7\);$	+3
+use	psnReallocateTemps	uVar4	instShort7	INFERRED	every definition of this web is a load from inst+0x7 (positional name; no field row)	^\s*uStack_880\ =\ CONCAT22\(uVar4,\(\*\(unsigned\ short\ \*\)\(\(unsigned\ char\ \*\)\&\(uStack_880\)\ \+\ 2\)\)\);$	+1

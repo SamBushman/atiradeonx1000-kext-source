@@ -1,0 +1,70 @@
+local	ExportValue__ctor_1250dc	param_3	interpolatorKind	INFERRED	export kind code (8, 9, 6, 7 get extra program bookkeeping); stored at the export's word 0x50
+local	ExportValue__ctor_1250dc	param_4	baseCtorArg4	INFERRED	fourth argument forwarded unchanged to VRegInfo__ctor
+use	ExportValue__ctor_1250dc	uVar3	laneKind0	INFERRED	lane kind for lane 0 (laneKindOfInterpSlot(interpSlotOfIlType(kind)))	^\s*uVar3\ =\ FUN_000ec258\(iVar4,param_3\);$	+3
+use	ExportValue__ctor_1250dc	uVar3	laneKind1	INFERRED	lane kind for lane 1	^\s*uVar3\ =\ FUN_000ec258\(iVar4,param_3\);$@2	+3
+use	ExportValue__ctor_1250dc	uVar3	laneKind2	INFERRED	lane kind for lane 2	^\s*uVar3\ =\ FUN_000ec258\(iVar4,param_3\);$@3	+3
+use	ExportValue__ctor_1250dc	uVar3	laneKind3	INFERRED	lane kind for lane 3	^\s*uVar3\ =\ FUN_000ec258\(iVar4,param_3\);$@4	+3
+use	ExportValue__ctor_1250dc	uVar3	vregList	INFERRED	program virtual register list (+0x3ac) passed to FUN_001275a0	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(iVar4\ \+\ 0x3ac\);$	+1
+use	ExportValue__ctor_1250dc	uVar3	vregList	INFERRED	program virtual register list (+0x3ac) passed to FUN_001275a0	^\s*uVar3\ =\ FUN_001275a0\(uVar3,0,iVar2,0\);$	+3
+use	ExportValue__ctor_1250dc	uVar3	colorConstantWord	INFERRED	constant word DAT_001afeec written into the swizzle of kind 8	^\s*uVar3\ =\ DAT_001afeec;$	+1
+use	ExportValue__ctor_1250dc	uVar3	colorConstantWord	INFERRED	constant word DAT_001afeec written into the swizzle of kind 8	^\s*\*\(undefined4\ \*\)\(iVar2\ \+\ 0x10\)\ =\ uVar3;$	+1
+use	ExportValue__ctor_1250dc	iVar2	newVRegId	INFERRED	freshly allocated virtual register id (compiler counter - 1)	^\s*iVar2\ =\ \*\(int\ \*\)\(param_5\ \+\ 0x3ac\)\ \+\ \-1;$	+3
+use	ExportValue__ctor_1250dc	iVar4	program	INFERRED	compiler->currentProgram	^\s*iVar4\ =\ \*\(int\ \*\)\(param_5\ \+\ COMP_currentProgram\);$	+2
+use	ExportValue__ctor_1250dc	iVar4	program	INFERRED	compiler->currentProgram	^\s*uVar3\ =\ FUN_000ec258\(iVar4,param_3\);$	+2
+use	ExportValue__ctor_1250dc	iVar4	program	INFERRED	compiler->currentProgram	^\s*uVar3\ =\ FUN_000ec258\(iVar4,param_3\);$@2	+2
+use	ExportValue__ctor_1250dc	iVar4	program	INFERRED	compiler->currentProgram	^\s*uVar3\ =\ FUN_000ec258\(iVar4,param_3\);$@3	+2
+use	ExportValue__ctor_1250dc	iVar4	program	INFERRED	compiler->currentProgram	^\s*uVar3\ =\ FUN_000ec258\(iVar4,param_3\);$@4	+2
+use	ExportValue__ctor_1250dc	iVar4	program	INFERRED	compiler->currentProgram	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(iVar4\ \+\ 0x3ac\);$	+1
+use	ExportValue__ctor_1250dc	iVar4	program	INFERRED	compiler->currentProgram	^\s*\*\(undefined4\ \*\*\)\(iVar4\ \+\ 0x34c\)\ =\ puVar5;$	+1
+use	ExportValue__ctor_1250dc	iVar4	program	INFERRED	compiler->currentProgram	^\s*\*\(undefined4\ \*\*\)\(iVar4\ \+\ 0x348\)\ =\ puVar5;$	+1
+use	ExportValue__ctor_1250dc	iVar4	program	INFERRED	compiler->currentProgram	^\s*\*\(undefined4\ \*\*\)\(iVar4\ \+\ 0x358\)\ =\ puVar5;$	+1
+use	ExportValue__ctor_1250dc	iVar4	program	INFERRED	compiler->currentProgram	^\s*\*\(undefined4\ \*\*\)\(iVar4\ \+\ 0x35c\)\ =\ puVar5;$	+2
+use	ExportValue__ctor_1250dc	puVar5	exportInst	INFERRED	the IRExport created for this value (allocation + 1)	^\s*puVar5\ =\ puVar1\ \+\ 1;$	+1
+use	ExportValue__ctor_1250dc	puVar5	exportInst	INFERRED	the IRExport created for this value (allocation + 1)	^\s*FUN_00108918\(puVar5,param_5\);$	+1
+use	ExportValue__ctor_1250dc	puVar5	exportInst	INFERRED	the IRExport created for this value (allocation + 1)	^\s*FUN_000e76c4\(\*\(undefined4\ \*\)\(iVar4\ \+\ 0x3a8\),puVar5\);$	+4
+use	ExportValue__ctor_1250dc	puVar5	exportInst	INFERRED	the IRExport created for this value (allocation + 1)	^\s*FUN_00104104\(puVar5,0,uVar3,param_2\);$	+1
+use	ExportValue__ctor_1250dc	puVar5	exportInst	INFERRED	the IRExport created for this value (allocation + 1)	^\s*FUN_00104104\(puVar5,1,uVar3,param_2\);$	+1
+use	ExportValue__ctor_1250dc	puVar5	exportInst	INFERRED	the IRExport created for this value (allocation + 1)	^\s*FUN_00104104\(puVar5,2,uVar3,param_2\);$	+1
+use	ExportValue__ctor_1250dc	puVar5	exportInst	INFERRED	the IRExport created for this value (allocation + 1)	^\s*FUN_00104104\(puVar5,3,uVar3,param_2\);$	+1
+use	ExportValue__ctor_1250dc	puVar5	exportInst	INFERRED	the IRExport created for this value (allocation + 1)	^\s*FUN_001046c8\(puVar5,1,uVar3\);$	+2
+use	ExportValue__ctor_1250dc	puVar5	exportInst	INFERRED	the IRExport created for this value (allocation + 1)	^\s*iVar2\ =\ FUN_001054ec\(puVar5,1\);$	+1
+use	ExportValue__ctor_1250dc	puVar5	exportInst	INFERRED	the IRExport created for this value (allocation + 1)	^\s*\*\(undefined4\ \*\*\)\(iVar4\ \+\ 0x34c\)\ =\ puVar5;$	+1
+use	ExportValue__ctor_1250dc	puVar5	exportInst	INFERRED	the IRExport created for this value (allocation + 1)	^\s*\*\(undefined4\ \*\*\)\(iVar4\ \+\ 0x348\)\ =\ puVar5;$	+1
+use	ExportValue__ctor_1250dc	puVar5	exportInst	INFERRED	the IRExport created for this value (allocation + 1)	^\s*\*\(undefined4\ \*\*\)\(iVar4\ \+\ 0x358\)\ =\ puVar5;$	+1
+use	ExportValue__ctor_1250dc	puVar5	exportInst	INFERRED	the IRExport created for this value (allocation + 1)	^\s*\*\(undefined4\ \*\*\)\(iVar4\ \+\ 0x35c\)\ =\ puVar5;$	+1
+local	ExportValue__ctor_1250dc	local_28	defaultWordsOut	INFERRED	out parameter of target vtable slot 0x118: default words
+local	ExportValue__ctor_124e68	param_3	interpolatorKind	INFERRED	export kind code (8, 9, 6, 7 get extra program bookkeeping); stored at the export's word 0x50
+local	ExportValue__ctor_124e68	param_4	baseCtorArg4	INFERRED	fourth argument forwarded unchanged to VRegInfo__ctor
+use	ExportValue__ctor_124e68	uVar3	laneKind0	INFERRED	lane kind for lane 0 (laneKindOfInterpSlot(interpSlotOfIlType(kind)))	^\s*uVar3\ =\ FUN_000ec258\(iVar4,param_3\);$	+3
+use	ExportValue__ctor_124e68	uVar3	laneKind1	INFERRED	lane kind for lane 1	^\s*uVar3\ =\ FUN_000ec258\(iVar4,param_3\);$@2	+3
+use	ExportValue__ctor_124e68	uVar3	laneKind2	INFERRED	lane kind for lane 2	^\s*uVar3\ =\ FUN_000ec258\(iVar4,param_3\);$@3	+3
+use	ExportValue__ctor_124e68	uVar3	laneKind3	INFERRED	lane kind for lane 3	^\s*uVar3\ =\ FUN_000ec258\(iVar4,param_3\);$@4	+3
+use	ExportValue__ctor_124e68	uVar3	vregList	INFERRED	program virtual register list (+0x3ac) passed to FUN_001275a0	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(iVar4\ \+\ 0x3ac\);$	+1
+use	ExportValue__ctor_124e68	uVar3	vregList	INFERRED	program virtual register list (+0x3ac) passed to FUN_001275a0	^\s*uVar3\ =\ FUN_001275a0\(uVar3,0,iVar2,0\);$	+3
+use	ExportValue__ctor_124e68	uVar3	colorConstantWord	INFERRED	constant word DAT_001afeec written into the swizzle of kind 8	^\s*uVar3\ =\ DAT_001afeec;$	+1
+use	ExportValue__ctor_124e68	uVar3	colorConstantWord	INFERRED	constant word DAT_001afeec written into the swizzle of kind 8	^\s*\*\(undefined4\ \*\)\(iVar2\ \+\ 0x10\)\ =\ uVar3;$	+1
+use	ExportValue__ctor_124e68	iVar2	newVRegId	INFERRED	freshly allocated virtual register id (compiler counter - 1)	^\s*iVar2\ =\ \*\(int\ \*\)\(param_5\ \+\ 0x3ac\)\ \+\ \-1;$	+3
+use	ExportValue__ctor_124e68	iVar4	program	INFERRED	compiler->currentProgram	^\s*iVar4\ =\ \*\(int\ \*\)\(param_5\ \+\ COMP_currentProgram\);$	+2
+use	ExportValue__ctor_124e68	iVar4	program	INFERRED	compiler->currentProgram	^\s*uVar3\ =\ FUN_000ec258\(iVar4,param_3\);$	+2
+use	ExportValue__ctor_124e68	iVar4	program	INFERRED	compiler->currentProgram	^\s*uVar3\ =\ FUN_000ec258\(iVar4,param_3\);$@2	+2
+use	ExportValue__ctor_124e68	iVar4	program	INFERRED	compiler->currentProgram	^\s*uVar3\ =\ FUN_000ec258\(iVar4,param_3\);$@3	+2
+use	ExportValue__ctor_124e68	iVar4	program	INFERRED	compiler->currentProgram	^\s*uVar3\ =\ FUN_000ec258\(iVar4,param_3\);$@4	+2
+use	ExportValue__ctor_124e68	iVar4	program	INFERRED	compiler->currentProgram	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(iVar4\ \+\ 0x3ac\);$	+1
+use	ExportValue__ctor_124e68	iVar4	program	INFERRED	compiler->currentProgram	^\s*\*\(undefined4\ \*\*\)\(iVar4\ \+\ 0x34c\)\ =\ puVar5;$	+1
+use	ExportValue__ctor_124e68	iVar4	program	INFERRED	compiler->currentProgram	^\s*\*\(undefined4\ \*\*\)\(iVar4\ \+\ 0x348\)\ =\ puVar5;$	+1
+use	ExportValue__ctor_124e68	iVar4	program	INFERRED	compiler->currentProgram	^\s*\*\(undefined4\ \*\*\)\(iVar4\ \+\ 0x358\)\ =\ puVar5;$	+1
+use	ExportValue__ctor_124e68	iVar4	program	INFERRED	compiler->currentProgram	^\s*\*\(undefined4\ \*\*\)\(iVar4\ \+\ 0x35c\)\ =\ puVar5;$	+2
+use	ExportValue__ctor_124e68	puVar5	exportInst	INFERRED	the IRExport created for this value (allocation + 1)	^\s*puVar5\ =\ puVar1\ \+\ 1;$	+1
+use	ExportValue__ctor_124e68	puVar5	exportInst	INFERRED	the IRExport created for this value (allocation + 1)	^\s*FUN_00108918\(puVar5,param_5\);$	+1
+use	ExportValue__ctor_124e68	puVar5	exportInst	INFERRED	the IRExport created for this value (allocation + 1)	^\s*FUN_000e76c4\(\*\(undefined4\ \*\)\(iVar4\ \+\ 0x3a8\),puVar5\);$	+4
+use	ExportValue__ctor_124e68	puVar5	exportInst	INFERRED	the IRExport created for this value (allocation + 1)	^\s*FUN_00104104\(puVar5,0,uVar3,param_2\);$	+1
+use	ExportValue__ctor_124e68	puVar5	exportInst	INFERRED	the IRExport created for this value (allocation + 1)	^\s*FUN_00104104\(puVar5,1,uVar3,param_2\);$	+1
+use	ExportValue__ctor_124e68	puVar5	exportInst	INFERRED	the IRExport created for this value (allocation + 1)	^\s*FUN_00104104\(puVar5,2,uVar3,param_2\);$	+1
+use	ExportValue__ctor_124e68	puVar5	exportInst	INFERRED	the IRExport created for this value (allocation + 1)	^\s*FUN_00104104\(puVar5,3,uVar3,param_2\);$	+1
+use	ExportValue__ctor_124e68	puVar5	exportInst	INFERRED	the IRExport created for this value (allocation + 1)	^\s*FUN_001046c8\(puVar5,1,uVar3\);$	+2
+use	ExportValue__ctor_124e68	puVar5	exportInst	INFERRED	the IRExport created for this value (allocation + 1)	^\s*iVar2\ =\ FUN_001054ec\(puVar5,1\);$	+1
+use	ExportValue__ctor_124e68	puVar5	exportInst	INFERRED	the IRExport created for this value (allocation + 1)	^\s*\*\(undefined4\ \*\*\)\(iVar4\ \+\ 0x34c\)\ =\ puVar5;$	+1
+use	ExportValue__ctor_124e68	puVar5	exportInst	INFERRED	the IRExport created for this value (allocation + 1)	^\s*\*\(undefined4\ \*\*\)\(iVar4\ \+\ 0x348\)\ =\ puVar5;$	+1
+use	ExportValue__ctor_124e68	puVar5	exportInst	INFERRED	the IRExport created for this value (allocation + 1)	^\s*\*\(undefined4\ \*\*\)\(iVar4\ \+\ 0x358\)\ =\ puVar5;$	+1
+use	ExportValue__ctor_124e68	puVar5	exportInst	INFERRED	the IRExport created for this value (allocation + 1)	^\s*\*\(undefined4\ \*\*\)\(iVar4\ \+\ 0x35c\)\ =\ puVar5;$	+1
+local	ExportValue__ctor_124e68	local_28	defaultWordsOut	INFERRED	out parameter of target vtable slot 0x118: default words

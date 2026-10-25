@@ -733,7 +733,7 @@ int HwLimits__vslot43_prependDefaultMov(this, inst, param_3, compiler)
   int destRecord;
   int inst2;
   int destRecord2;
-  double fparam_1;
+  double staleFprArg1;
   undefined4 unwrittenLaneMask;
   undefined4 destSelectBytes [8];
   
@@ -743,8 +743,8 @@ int HwLimits__vslot43_prependDefaultMov(this, inst, param_3, compiler)
   destRecord = IRInst__getOperandRecord(inst,0);
   if (*(int *)(destRecord + 0x10) != DAT_001aa800) {
     inst2 = IRInst__create(0x31,compiler);
-    fparam_1 = (double)FLOAT_001aa0d4;
-    ((void (*)())IRInst__makeLiteralVec4Float)(inst2,*(undefined4 *)(compiler + COMP_currentProgram),1,fparam_1,fparam_1,fparam_1,
+    staleFprArg1 = (double)FLOAT_001aa0d4;
+    ((void (*)())IRInst__makeLiteralVec4Float)(inst2,*(undefined4 *)(compiler + COMP_currentProgram),1,staleFprArg1,staleFprArg1,staleFprArg1,
                  (double)FLOAT_001aa0e8);
     IRInst__setOperandRef(inst2,0,*(undefined4 *)(inst + 0xa4));
     destRecord2 = IRInst__getOperandRecord(inst,0);
@@ -834,7 +834,7 @@ int Program__beginPass(program, param_2)
 {
   int iVar1;
   int iVar2;
-  uint extraout_r4;
+  uint r4AfterCall;
   int loopCounter;
   int *a0;
   uint loopIndex;
@@ -844,7 +844,7 @@ int Program__beginPass(program, param_2)
   while (iVar1 != 0) {
     (**(code **)(*a0 + 0x48))(a0,param_2);
     a0 = (int *)a0[2];
-    param_2 = extraout_r4;
+    param_2 = r4AfterCall;
     iVar1 = a0[2];
   }
   iVar1 = *(int *)(program + PROG_instructionVector);
@@ -2181,8 +2181,8 @@ int FUN_000ef498(program, ilReader)
   int loopCounter;
   undefined4 *allocation;
   undefined4 *tableAlloc;
-  char *extraout_r4;
-  undefined4 extraout_r4_00;
+  char *r4AfterCall;
+  undefined4 r4AfterCall2;
   char *pcVar6;
   int iVar7;
   int *hwDescription;
@@ -2321,7 +2321,7 @@ int FUN_000ef498(program, ilReader)
   hwDescription = *(int **)(*(int *)(program + 8) + 0x30c);
   (**(code **)(*hwDescription + 0x14))(hwDescription,shaderKind,*(int *)(program + 8));
   if (iVar2 == 1) {
-    ((int (*)())FUN_000eec50)(program,extraout_r4_00);
+    ((int (*)())FUN_000eec50)(program,r4AfterCall2);
   }
   else if ((iVar2 == 2) || (iVar2 == 0)) {
     hwDescription = *(int **)(*(int *)(program + 8) + 0x30c);
@@ -2338,7 +2338,7 @@ int FUN_000ef498(program, ilReader)
   while (iVar2 != 0) {
     (**(code **)(*blockCursor + 0x48))(blockCursor,pcVar6);
     blockCursor = (int *)blockCursor[2];
-    pcVar6 = extraout_r4;
+    pcVar6 = r4AfterCall;
     iVar2 = blockCursor[2];
   }
   iVar2 = *(int *)(program + 0x3c4);
@@ -2567,9 +2567,9 @@ code_r0x000efce4:
   goto code_r0x000efd60;
 }
 
-/* FUN_000efde4 @ 0xefde4 (536 bytes) */
-int FUN_000efde4(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  int param_1;
+/* Program__insertExitMarkerAndFlagBlocks @ 0xefde4 (536 bytes) */
+int Program__insertExitMarkerAndFlagBlocks(program, param_2, param_3, param_4, param_5, param_6, param_7)
+  int program;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
@@ -2577,69 +2577,73 @@ int FUN_000efde4(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_6;
   undefined4 param_7;
 {
+  int *queueFront;
+  int queuedBlock;
+  int isSpecialInst;
+  int blockCursor;
   int loopCounter;
   undefined4 *allocation;
   undefined4 vectorData;
   undefined4 arena;
   uint loopIndex;
-  int *piVar1;
-  undefined4 *puVar2;
-  undefined4 *puVar3;
-  int *piVar4;
-  int iVar5;
-  uint uVar6;
-  int iVar7;
-  uint *puVar8;
-  undefined4 uVar9;
-  uint uVar10;
+  int *nextInst;
+  undefined4 *markerObject;
+  undefined4 *queueSlot;
+  int *inst;
+  int markerInstRef;
+  uint blockFlags;
+  int markerBlock;
+  uint *queue;
+  undefined4 childBlock;
+  uint queueCount;
   
-  if (((*(uint *)(param_1 + 0x30) & 1) == 0) && ((*(uint *)(param_1 + 0x30) & 0x2000) != 0)) {
-    arena = *(undefined4 *)(*(int *)(param_1 + 8) + 0x374);
-    puVar2 = (undefined4 *)Arena__alloc(arena,0x168);
-    *puVar2 = arena;
-    puVar2 = puVar2 + 1;
-    IRInst__ctor_10502c(puVar2,0x95,*(undefined4 *)(param_1 + 8));
+  if (((*(uint *)(program + 0x30) & 1) == 0) && ((*(uint *)(program + 0x30) & 0x2000) != 0)) {
+    arena = *(undefined4 *)(*(int *)(program + 8) + 0x374);
+    markerObject = (undefined4 *)Arena__alloc(arena,0x168);
+    *markerObject = arena;
+    markerObject = markerObject + 1;
+    IRInst__ctor_10502c(markerObject,0x95,*(undefined4 *)(program + 8));
   }
   else {
-    arena = *(undefined4 *)(*(int *)(param_1 + 8) + 0x374);
-    puVar2 = (undefined4 *)Arena__alloc(arena,0x168);
-    *puVar2 = arena;
-    puVar2 = puVar2 + 1;
-    IRInst__ctor_10502c(puVar2,0x96,*(undefined4 *)(param_1 + 8));
+    arena = *(undefined4 *)(*(int *)(program + 8) + 0x374);
+    markerObject = (undefined4 *)Arena__alloc(arena,0x168);
+    *markerObject = arena;
+    markerObject = markerObject + 1;
+    IRInst__ctor_10502c(markerObject,0x96,*(undefined4 *)(program + 8));
   }
-  *(undefined4 **)(param_1 + 0x33c) = puVar2;
-  iVar5 = *(int *)(param_1 + 0x33c);
-  *(undefined4 *)(iVar5 + 0x98) = 0x2d;
-  *(undefined4 *)(iVar5 + 0x94) = 0;
-  *(undefined4 *)(*(int *)(param_1 + 0x33c) + 300) = 0;
-  iVar5 = *(int *)(param_1 + 0x3a8);
-  *(uint *)(iVar5 + 0xc) = *(uint *)(iVar5 + 0xc) | 8;
+  *(undefined4 **)(program + 0x33c) = markerObject;
+  markerInstRef = *(int *)(program + 0x33c);
+  *(undefined4 *)(markerInstRef + 0x98) = 0x2d;
+  *(undefined4 *)(markerInstRef + 0x94) = 0;
+  *(undefined4 *)(*(int *)(program + 0x33c) + 300) = 0;
+  blockCursor = *(int *)(program + 0x3a8);
+  *(uint *)(blockCursor + 0xc) = *(uint *)(blockCursor + 0xc) | 8;
   do {
-    iVar7 = iVar5;
-    iVar5 = *(int *)(iVar7 + 0xf0);
-    if (iVar5 == 0) goto LAB_000eff14;
-    *(uint *)(iVar7 + 0xc) = *(uint *)(iVar7 + 0xc) | 8;
-    uVar6 = *(uint *)(iVar5 + 0xc);
-  } while ((((uVar6 & 2) == 0) && ((uVar6 & 1) == 0)) && ((uVar6 & 4) == 0));
-  if (*(int *)(*(int *)(iVar7 + 0xd4) + 4) == 1) {
-    *(uint *)(iVar5 + 0xc) = uVar6 | 8;
-    iVar7 = iVar5;
+    markerBlock = blockCursor;
+    blockCursor = *(int *)(markerBlock + 0xf0);
+    if (blockCursor == 0) goto LAB_000eff14;
+    *(uint *)(markerBlock + 0xc) = *(uint *)(markerBlock + 0xc) | 8;
+    blockFlags = *(uint *)(blockCursor + 0xc);
+  } while ((((blockFlags & 2) == 0) && ((blockFlags & 1) == 0)) && ((blockFlags & 4) == 0));
+  if (*(int *)(*(int *)(markerBlock + 0xd4) + 4) == 1) {
+    *(uint *)(blockCursor + 0xc) = blockFlags | 8;
+    markerBlock = blockCursor;
   }
 LAB_000eff14:
-  piVar4 = *(int **)(iVar7 + 0x98);
-  piVar1 = (int *)(*(int **)(iVar7 + 0x98))[2];
+  inst = *(int **)(markerBlock + 0x98);
+  nextInst = (int *)(*(int **)(markerBlock + 0x98))[2];
   do {
-    if (piVar1 == (int *)0x0) {
+    if (nextInst == (int *)0x0) {
 LAB_000eff98:
-      *(uint *)(iVar7 + 0xc) = *(uint *)(iVar7 + 0xc) | 8;
-      if (*(int *)(param_1 + 0x344) != 0) {
-        (**(code **)(**(int **)(param_1 + 0x33c) + 0x94))
-                  (*(int **)(param_1 + 0x33c),*(int *)(param_1 + 0x344),*(undefined4 *)(param_1 + 8)
+      *(uint *)(markerBlock + 0xc) = *(uint *)(markerBlock + 0xc) | 8;
+      if (*(int *)(program + 0x344) != 0) {
+        (**(code **)(**(int **)(program + 0x33c) + 0x94))
+                  (*(int **)(program + 0x33c),*(int *)(program + 0x344),*(undefined4 *)(program + 8)
                   );
       }
-      arena = *(undefined4 *)(*(int *)(param_1 + 8) + 0x378);
+      arena = *(undefined4 *)(*(int *)(program + 8) + 0x378);
       allocation = (undefined4 *)Arena__alloc(arena,0x14);
-      puVar8 = allocation + 1;
+      queue = allocation + 1;
       *allocation = arena;
       allocation[1] = 2;
       allocation[4] = arena;
@@ -2647,58 +2651,58 @@ LAB_000eff98:
       vectorData = Arena__alloc(arena,8);
       loopCounter = 0;
       allocation[3] = vectorData;
-      for (loopIndex = 1; loopIndex <= *(uint *)(*(int *)(iVar7 + 0xf4) + 4); loopIndex = loopIndex + 1) {
-        uVar9 = *(undefined4 *)(*(int *)(*(int *)(iVar7 + 0xf4) + 8) + loopCounter);
-        uVar10 = allocation[2];
-        if (uVar10 < *puVar8) {
-          _memset((void *)(uVar10 * 4 + allocation[3]),0,4);
-          puVar3 = (undefined4 *)(uVar10 * 4 + allocation[3]);
-          allocation[2] = uVar10 + 1;
+      for (loopIndex = 1; loopIndex <= *(uint *)(*(int *)(markerBlock + 0xf4) + 4); loopIndex = loopIndex + 1) {
+        childBlock = *(undefined4 *)(*(int *)(*(int *)(markerBlock + 0xf4) + 8) + loopCounter);
+        queueCount = allocation[2];
+        if (queueCount < *queue) {
+          _memset((void *)(queueCount * 4 + allocation[3]),0,4);
+          queueSlot = (undefined4 *)(queueCount * 4 + allocation[3]);
+          allocation[2] = queueCount + 1;
         }
         else {
-          puVar3 = (undefined4 *)Vector__elementRefGrow(puVar8,uVar10);
+          queueSlot = (undefined4 *)Vector__elementRefGrow(queue,queueCount);
         }
         loopCounter = loopCounter + 4;
-        *puVar3 = uVar9;
+        *queueSlot = childBlock;
       }
       while (allocation[2] != 0) {
-        if (*puVar8 == 0) {
-          piVar4 = (int *)Vector__elementRefGrow(puVar8,0);
+        if (*queue == 0) {
+          queueFront = (int *)Vector__elementRefGrow(queue,0);
         }
         else {
-          piVar4 = (int *)allocation[3];
+          queueFront = (int *)allocation[3];
         }
-        iVar7 = *piVar4;
-        Vector__removeAt(puVar8,0);
+        queuedBlock = *queueFront;
+        Vector__removeAt(queue,0);
         loopCounter = 0;
-        *(uint *)(iVar7 + 0xc) = *(uint *)(iVar7 + 0xc) | 8;
-        for (loopIndex = 1; loopIndex <= *(uint *)(*(int *)(iVar7 + 0xf4) + 4); loopIndex = loopIndex + 1) {
-          uVar9 = *(undefined4 *)(*(int *)(*(int *)(iVar7 + 0xf4) + 8) + loopCounter);
-          uVar10 = allocation[2];
-          if (uVar10 < *puVar8) {
-            _memset((void *)(uVar10 * 4 + allocation[3]),0,4);
-            puVar3 = (undefined4 *)(uVar10 * 4 + allocation[3]);
-            allocation[2] = uVar10 + 1;
+        *(uint *)(queuedBlock + 0xc) = *(uint *)(queuedBlock + 0xc) | 8;
+        for (loopIndex = 1; loopIndex <= *(uint *)(*(int *)(queuedBlock + 0xf4) + 4); loopIndex = loopIndex + 1) {
+          childBlock = *(undefined4 *)(*(int *)(*(int *)(queuedBlock + 0xf4) + 8) + loopCounter);
+          queueCount = allocation[2];
+          if (queueCount < *queue) {
+            _memset((void *)(queueCount * 4 + allocation[3]),0,4);
+            queueSlot = (undefined4 *)(queueCount * 4 + allocation[3]);
+            allocation[2] = queueCount + 1;
           }
           else {
-            puVar3 = (undefined4 *)Vector__elementRefGrow(puVar8,uVar10);
+            queueSlot = (undefined4 *)Vector__elementRefGrow(queue,queueCount);
           }
           loopCounter = loopCounter + 4;
-          *puVar3 = uVar9;
+          *queueSlot = childBlock;
         }
       }
       return;
     }
-    if ((piVar4[5] & 1U) != 0) {
-      iVar5 = (**(code **)(*piVar4 + 0x7c))(piVar4);
-      if ((iVar5 == 0) && (iVar5 = (**(code **)(*piVar4 + 0x34))(piVar4), iVar5 == 0)) {
-        Block__insertInstBefore(iVar7,piVar4,*(undefined4 *)(param_1 + 0x33c));
+    if ((inst[5] & 1U) != 0) {
+      isSpecialInst = (**(code **)(*inst + 0x7c))(inst);
+      if ((isSpecialInst == 0) && (isSpecialInst = (**(code **)(*inst + 0x34))(inst), isSpecialInst == 0)) {
+        Block__insertInstBefore(markerBlock,inst,*(undefined4 *)(program + 0x33c));
         goto LAB_000eff98;
       }
-      piVar1 = (int *)piVar4[2];
+      nextInst = (int *)inst[2];
     }
-    piVar4 = piVar1;
-    piVar1 = (int *)piVar1[2];
+    inst = nextInst;
+    nextInst = (int *)nextInst[2];
   } while( true );
 }
 
@@ -3596,7 +3600,7 @@ int FUN_000f1d7c(pass, afterInst, inst)
   uint uVar8;
   dword argR6;
   undefined4 argR7;
-  undefined4 in_r8;
+  undefined4 staleArgR8;
   uint uVar9;
   dword destRegister;
   dword *destRegisterOffset;
@@ -3768,7 +3772,7 @@ LAB_000f26a4:
         WriteMask__fromSelectWord(&local_48,*(undefined4 *)(operandRecord + 0x10));
         node[3] = local_48;
         iVar4 = (**(code **)(*node + 0x7c))
-                          (node,a1,a2,argR6,argR7,in_r8,*(code **)(*node + 0x7c));
+                          (node,a1,a2,argR6,argR7,staleArgR8,*(code **)(*node + 0x7c));
         walkInstCount = vec4Count;
         if (iVar4 == 0) {
           iVar4 = IRInst__opcodeIsInSet(node);
@@ -4077,11 +4081,11 @@ int FUN_000f29f4(param_1)
   int loopIndex;
   int *piVar1;
   int iVar2;
-  undefined4 extraout_r4;
-  undefined4 in_r5;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 r4AfterCall;
+  undefined4 staleArgR5;
+  undefined4 staleArgR6;
+  undefined4 staleArgR7;
+  undefined4 staleArgR8;
   int iVar3;
   int *piVar4;
   int *piVar5;
@@ -4113,7 +4117,7 @@ int FUN_000f29f4(param_1)
   }
   else {
     ((int (*)())FUN_000ec920)(param_1);
-    ((int (*)())FUN_000efde4)(param_1,extraout_r4,in_r5,in_r6,in_r7,in_r8,iVar3);
+    ((int (*)())Program__insertExitMarkerAndFlagBlocks)(param_1,r4AfterCall,staleArgR5,staleArgR6,staleArgR7,staleArgR8,iVar3);
     piVar9 = *(int **)(*(int *)(param_1 + 0x3a8) + 0x98);
     piVar1 = (int *)piVar9[2];
     if (piVar1 == (int *)0x0) {

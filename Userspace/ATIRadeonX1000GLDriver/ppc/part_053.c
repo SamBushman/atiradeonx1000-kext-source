@@ -1181,7 +1181,7 @@ int R520MachineAssembler__vslot65_declareNodeRegisters(this, node, compiler)
   undefined4 node;
   undefined4 compiler;
 {
-  return FUN_000e2c78(node,this,compiler);
+  return ConstRecord__emitStores(node,this,compiler);
 }
 
 /* R520MachineAssembler__vslot59_selectForSrcpSwizzle @ 0x19f1fc (48 bytes) */

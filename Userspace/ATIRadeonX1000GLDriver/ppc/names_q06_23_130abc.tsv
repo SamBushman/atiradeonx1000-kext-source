@@ -1,0 +1,36 @@
+local	FUN_00130abc	param_1	spillInfo	INFERRED	spill record from which the spilled instruction and its reload are derived (FUN_001307cc / FUN_00130728)
+local	FUN_00130abc	param_3	markFlag	INFERRED	argument register reused as the constant 1 while source operands are marked
+use	FUN_00130abc	uVar4	staleArg4	INFERRED	r4 left over, forwarded to the operand count vtable call	^\s*if\ \(\(\(iVar3\ !=\ 0\)\ \&\&\ \(\(a0\[5\]\ \&\ 0x4000000U\)\ ==\ 0\)\)\ \&\&$	+2
+use	FUN_00130abc	uVar4	staleArg4	INFERRED	r4 left over, forwarded to the operand count vtable call	^\s*for\ \(iVar3\ =\ 1;\ iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*a0_00\ \+\ 0x14\)\)\(a0_00,uVar4,param_3\),\ iVar3\ <=\ iVar5;$	+2
+use	FUN_00130abc	uVar4	staleArg4	INFERRED	r4 left over, forwarded to the operand count vtable call	^\s*uVar4\ =\ \(undefined4\)uVar7;$	+1
+use	FUN_00130abc	uVar4	staleArg4	INFERRED	r4 left over, forwarded to the operand count vtable call	^\s*uVar4\ =\ extraout_r4_00;$	+1
+use	FUN_00130abc	uVar4	staleArg4	INFERRED	r4 left over, forwarded to the operand count vtable call	^\s*uVar4\ =\ extraout_r4_01;$	+1
+use	FUN_00130abc	uVar1	instFlags	INFERRED	instruction flag word (+0x14)	^\s*uVar1\ =\ a0_00\[5\];$	+2
+use	FUN_00130abc	uVar1	instFlags	INFERRED	instruction flag word (+0x14)	^\s*uVar1\ =\ a0_00\[5\];$@2	+1
+use	FUN_00130abc	uVar1	instFlags	INFERRED	instruction flag word (+0x14)	^\s*piVar6\ =\ \(int\ \*\)\(uVar1\ \&\ 4\);$	+1
+use	FUN_00130abc	a0	spilledInst	INFERRED	instruction of the spill record (FUN_001307cc)	^\s*a0\ =\ \(int\ \*\)\(\(int\ \(\*\)\(\)\)FUN_001307cc\)\(param_1\);$	+1
+use	FUN_00130abc	a0	spilledInst	INFERRED	instruction of the spill record (FUN_001307cc)	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x24\)\)\(a0,\(int\)uVar7,param_3\);$	+3
+use	FUN_00130abc	a0	spilledInst	INFERRED	instruction of the spill record (FUN_001307cc)	^\s*uVar7\ =\ \(\(int\ \(\*\)\(\)\)FUN_00130a78\)\(a0,uVar4\);$	+1
+use	FUN_00130abc	piVar2	reloadInst	INFERRED	instruction that reloads the spilled value (FUN_00130728 high word)	^\s*piVar2\ =\ \(int\ \*\)\(\(ulonglong\)uVar7\ >>\ 0x20\);$	+1
+use	FUN_00130abc	piVar2	reloadInst	INFERRED	instruction that reloads the spilled value (FUN_00130728 high word)	^\s*if\ \(\(\(iVar3\ !=\ 0\)\ \&\&\ \(\(a0\[5\]\ \&\ 0x4000000U\)\ ==\ 0\)\)\ \&\&$	+2
+use	FUN_00130abc	piVar2	reloadInst	INFERRED	instruction that reloads the spilled value (FUN_00130728 high word)	^\s*piVar2\[5\]\ =\ piVar2\[5\]\ \|\ 0x10000000;$	+1
+use	FUN_00130abc	iVar3	instQuery24	INFERRED	spilled instruction vtable slot 0x24 test	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x24\)\)\(a0,\(int\)uVar7,param_3\);$	+3
+use	FUN_00130abc	iVar3	operandNumber	INFERRED	operand number 1..count	^\s*for\ \(iVar3\ =\ 1;\ iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*a0_00\ \+\ 0x14\)\)\(a0_00,uVar4,param_3\),\ iVar3\ <=\ iVar5;$	+3
+use	FUN_00130abc	iVar5	operandCountLimit	INFERRED	instruction operand count (vtable slot 0x14), the loop bound	^\s*for\ \(iVar3\ =\ 1;\ iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*a0_00\ \+\ 0x14\)\)\(a0_00,uVar4,param_3\),\ iVar3\ <=\ iVar5;$	+2
+use	FUN_00130abc	extraout_r4	staleArg4A	INFERRED	r4 left over from the first call	^\s*if\ \(\(\(iVar3\ !=\ 0\)\ \&\&\ \(\(a0\[5\]\ \&\ 0x4000000U\)\ ==\ 0\)\)\ \&\&$	+2
+use	FUN_00130abc	extraout_r4_00	staleArg4B	INFERRED	r4 left over after the modifier is set	^\s*uVar4\ =\ extraout_r4_00;$	+1
+use	FUN_00130abc	extraout_r4_01	staleArg4C	INFERRED	r4 left over after the operand loop	^\s*uVar4\ =\ extraout_r4_01;$	+1
+use	FUN_00130abc	a0_00	instCursor	INFERRED	instruction walked from the reload to the end of the block	^\s*if\ \(\(\(iVar3\ !=\ 0\)\ \&\&\ \(\(a0\[5\]\ \&\ 0x4000000U\)\ ==\ 0\)\)\ \&\&$	+2
+use	FUN_00130abc	a0_00	instCursor	INFERRED	instruction walked from the reload to the end of the block	^\s*uVar1\ =\ a0_00\[5\];$	+1
+use	FUN_00130abc	a0_00	instCursor	INFERRED	instruction walked from the reload to the end of the block	^\s*piVar6\ =\ a0_00\ \+\ 0x29;$	+4
+use	FUN_00130abc	a0_00	instCursor	INFERRED	instruction walked from the reload to the end of the block	^\s*uVar1\ =\ a0_00\[5\];$@2	+1
+use	FUN_00130abc	a0_00	instCursor	INFERRED	instruction walked from the reload to the end of the block	^\s*a0_00\ =\ \(int\ \*\)a0_00\[2\];$	+1
+use	FUN_00130abc	a0_00	instCursor	INFERRED	instruction walked from the reload to the end of the block	^\s*\}\ while\ \(a0_00\ !=\ \(int\ \*\)0x0\);$	+1
+use	FUN_00130abc	piVar6	cursorOrBlockFlag	INFERRED	loop condition word: the reload cursor first, later the block-continue flag (instFlags & 4)	^\s*if\ \(\(\(iVar3\ !=\ 0\)\ \&\&\ \(\(a0\[5\]\ \&\ 0x4000000U\)\ ==\ 0\)\)\ \&\&$	+2
+use	FUN_00130abc	piVar6	cursorOrBlockFlag	INFERRED	loop condition word: the reload cursor first, later the block-continue flag (instFlags & 4)	^\s*if\ \(piVar6\ ==\ \(int\ \*\)0x0\)\ \{$	+1
+use	FUN_00130abc	piVar6	cursorOrBlockFlag	INFERRED	loop condition word: the reload cursor first, later the block-continue flag (instFlags & 4)	^\s*piVar6\ =\ \(int\ \*\)\(uVar1\ \&\ 4\);$	+1
+use	FUN_00130abc	piVar6	operandModifierPtr	INFERRED	address of the operand modifier block being updated (inst + 0xa4 + 24 * n)	^\s*piVar6\ =\ a0_00\ \+\ 0x29;$	+1
+use	FUN_00130abc	piVar6	operandModifierPtr	INFERRED	address of the operand modifier block being updated (inst + 0xa4 + 24 * n)	^\s*FUN_00103d50\(piVar6,4,1\);$	+1
+use	FUN_00130abc	piVar6	operandModifierPtr	INFERRED	address of the operand modifier block being updated (inst + 0xa4 + 24 * n)	^\s*piVar6\ =\ piVar6\ \+\ 6;$	+1
+use	FUN_00130abc	uVar7	reloadPair	INFERRED	FUN_00130728 return pair (reload instruction in the high word)	^\s*uVar7\ =\ \(\(int\ \(\*\)\(\)\)FUN_00130728\)\(param_1\);$	+3
+use	FUN_00130abc	uVar7	sourceCheckResult	INFERRED	FUN_00130a78 return pair: the source depends on the spilled value	^\s*uVar7\ =\ \(\(int\ \(\*\)\(\)\)FUN_00130a78\)\(a0,uVar4\);$	+3

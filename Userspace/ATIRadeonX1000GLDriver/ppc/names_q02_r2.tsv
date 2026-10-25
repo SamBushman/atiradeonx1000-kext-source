@@ -1,0 +1,2 @@
+use	extvsEmitIndex	iVar6	hwProgramLocal	INFERRED	hardware program record, re-read for the 7-instruction indexed sequence	^\s*iVar6\ =\ \*\*\(int\ \*\*\)\(\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x0000118c\)\ \+\ param_1\)\ \*\ 4\ \+\ \*param_2\);$	^\s*iVar6\ =\ iVar3\ \*\ 0x10\ \+\ \*\(int\ \*\)\(iVar6\ \+\ 0x1c\);$	all	rhs
+use	extvsEmitIndex	iVar6	instSlotSeq	INFERRED	address of the first 16-byte hardware instruction slot of the 7-instruction sequence	^\s*iVar6\ =\ iVar3\ \*\ 0x10\ \+\ \*\(int\ \*\)\(iVar6\ \+\ 0x1c\);$	^\s*return\ 7;$	lhs	none

@@ -1,0 +1,56 @@
+func	FUN_000230d0	gld_emitSurfaceCopyPacket	INFERRED	builds the 0x30000000 surface-copy packet for a rectangle (used to resolve the multisample buffer before flush/finish) followed by the 0x33000000 packet that restores the shadowed 3D state registers
+func	FUN_0001fd00	gld_buildVertexStreamLayout	INFERRED	maps the enabled vertex-array attributes (or defaulted ones) to hardware attribute ids and fills the stream-pair format/offset/control/swizzle shadows; clears the valid byte when an attribute cannot be supported
+local	FUN_000230d0	param_2	packet	INFERRED	command-stream slot to build into; NULL = allocate 500 words from the stream and hand the end back through the callback
+local	FUN_000230d0	param_4	resolveFlag	INFERRED	copy request flag stored at packet word 3 (cleared when the context flags are negative)
+local	FUN_000230d0	param_5	srcX	INFERRED	left edge of the copied rectangle (packet word 4)
+local	FUN_000230d0	param_6	srcY	INFERRED	bottom/top edge of the rectangle (flipped against the render height when yInverted)
+local	FUN_000230d0	param_7	copyWidth	INFERRED	width of the copied rectangle (packet word 6)
+local	FUN_000230d0	param_8	copyHeight	INFERRED	height of the copied rectangle (packet word 7)
+local	FUN_000230d0	iVar7	commandStream	INFERRED	ctx+0x240, the embedded command stream
+local	FUN_000230d0	bVar1	allocatedHere	INFERRED	packet was NULL: the packet is allocated here and committed at the end
+local	FUN_000230d0	puVar5	packetBase	INFERRED	start of the 0x30000000 copy packet and the following 0x33000000 state-restore packet
+local	FUN_000230d0	puVar3	lastHeader	INFERRED	ctx+0x1d8: header word of the previous packet, patched with the packet length
+local	FUN_000230d0	puVar2	colorFormatTable	INFERRED	PTR_DAT_001e88c8: the 0x24-byte pixel-format table, indexed by ctx colorFormatIndex
+local	FUN_000230d0	uVar4	registerValue	INFERRED	scratch holding the register value being copied into the restore packet
+local	FUN_0001fd00	param_1	stream	INFERRED	the embedded command-stream object (ctx+0x240); +0x243c is the stream count, +0x1be4/+0x23f0.. the stream-control shadows
+local	FUN_0001fd00	piVar13	vertexArray	INFERRED	current vertex array (engine object +0x1d4)
+local	FUN_0001fd00	iVar6	arrayDesc	INFERRED	vertexArray[0]: masks +0x300/+0x304/+0x308/+0x30c
+local	FUN_0001fd00	iVar18	dirtyState	INFERRED	vertexArray[1]: per-attribute buffer records
+local	FUN_0001fd00	uVar24	streamCount	INFERRED	number of vertex streams (param_1+0x243c, 2..16)
+local	FUN_0001fd00	puVar19	inputDescriptor	INFERRED	program input descriptor word pair for the attribute
+local	FUN_0001fd00	iVar20	programVertexInfo	INFERRED	**(current program)+4
+local	FUN_0001fd00	iVar21	programRecord	INFERRED	per-context program record + 0x14
+local	FUN_0001fd00	piVar17	inputMap	INFERRED	program record +0x34: attribute to input-slot map
+local	FUN_0001fd00	iVar22	attrByteOffset	INFERRED	attrIndex * 4
+local	FUN_0001fd00	iVar25	attrsLeft	INFERRED	countdown of the 16 attributes
+local	FUN_0001fd00	iVar4	pairPtr	INFERRED	stream + pairIndex*4: address of the stream-pair shadow words
+local	FUN_0001fd00	uVar11	hwAttrId	INFERRED	hardware attribute id 0..0x2f (0x30 = unsupported) derived from the descriptor or the default table
+local	FUN_0001fd00	iVar9	attrFormatWord	INFERRED	vertexArray[hwAttrId+10]: fetch format shadow of the attribute
+local	FUN_0001fd00	iVar5	attrOffsetWord	INFERRED	vertexArray[hwAttrId+0x2a]: fetch offset shadow of the attribute
+local	FUN_0001fd00	uVar14	attrControlWord	INFERRED	vertexArray[hwAttrId+0x4a]: stream control shadow (3 for a defaulted attribute)
+local	FUN_0001fd00	uVar12	attrSwizzleWord	INFERRED	vertexArray[hwAttrId+0x6a]: swizzle shadow (0x688 for a defaulted attribute)
+local	FUN_0001fd00	iVar10	streamByteOffset	INFERRED	streamIndex * 4
+local	FUN_0001fd00	puVar3	bufferWord	INFERRED	first word of the attribute's buffer record, copied into the stream shadow
+use	FUN_0001fd00	iVar8	engineObjects	INFERRED	*(stream+4): engine object table (+0x1cc current program, +0x1d4 current vertex array, +0x20 flag)	^\s*iVar8\ =\ \*\(int\ \*\)\(param_1\ \+\ 4\);$	+2
+use	FUN_0001fd00	iVar8	engineObjects	INFERRED	*(stream+4): engine object table (+0x1cc current program, +0x1d4 current vertex array, +0x20 flag)	^\s*if\ \(\*\(int\ \*\)\(iVar8\ \+\ 0x1cc\)\ ==\ 0\)\ \{$	+1
+use	FUN_0001fd00	iVar8	engineObjects	INFERRED	*(stream+4): engine object table (+0x1cc current program, +0x1d4 current vertex array, +0x20 flag)	^\s*if\ \(\(\(\(\(\*\(char\ \*\)\(iVar8\ \+\ 0x20\)\ ==\ '\\0'\)\ \|\|\ \(0x10\ <\ uVar24\)\)\ \|\|\ \(uVar24\ <\ 2\)\)\ \|\|$	+1
+use	FUN_0001fd00	iVar8	engineObjects	INFERRED	*(stream+4): engine object table (+0x1cc current program, +0x1d4 current vertex array, +0x20 flag)	^\s*if\ \(\*\(int\ \*\*\)\(iVar8\ \+\ 0x1cc\)\ ==\ \(int\ \*\)0x0\)\ \{$	+1
+use	FUN_0001fd00	iVar8	engineObjects	INFERRED	*(stream+4): engine object table (+0x1cc current program, +0x1d4 current vertex array, +0x20 flag)	^\s*iVar20\ =\ \*\(int\ \*\)\(\*\*\(int\ \*\*\)\(iVar8\ \+\ 0x1cc\)\ \+\ 4\);$	+3
+use	FUN_0001fd00	iVar8	fetchBase	INFERRED	programVertexInfo+0x24: base index of the program's input table	^\s*iVar8\ =\ \*\(int\ \*\)\(iVar20\ \+\ 0x24\);$	+1
+use	FUN_0001fd00	iVar8	fetchBase	INFERRED	base index of the program's input table	^\s*puVar19\ =\ \(uint\ \*\)\(iVar20\ \+\ \(iVar8\ \+\ \*\(int\ \*\)\(\(int\)piVar17\ \+\ iVar22\)\)\ \*\ 8\);$	+1
+use	FUN_0001fd00	iVar8	fetchBase	INFERRED	base index of the program's input table	^\s*puVar19\ =\ \(uint\ \*\)\(iVar20\ \+\ \(iVar8\ \+\ \*piVar17\)\ \*\ 8\);$	+1
+local	FUN_0001fd00	bVar1	lowMaskUnset	INFERRED	arrayDesc+0x308 == 0
+local	FUN_0001fd00	bVar2	highMaskUnset	INFERRED	arrayDesc+0x30c == 0
+use	FUN_0001fd00	uVar7	controlMaskHigh	INFERRED	arrayDesc+0x304: attribute mask word (bit 0x10000 tested)	^\s*uVar7\ =\ \*\(uint\ \*\)\(iVar6\ \+\ 0x304\);$	+2
+use	FUN_0001fd00	uVar7	controlMaskHigh	INFERRED	arrayDesc+0x304: attribute mask word (bit 0x10000 tested)	^\s*uVar7\ =\ \*\(uint\ \*\)\(iVar6\ \+\ 0x304\);$@2	+2
+use	FUN_0001fd00	uVar7	controlMaskHigh	INFERRED	arrayDesc+0x304: attribute mask word (bit 0x10000 tested)	^\s*\(uVar7\ \&\ \~\*\(uint\ \*\)\(iVar6\ \+\ 0x30c\)\)\ !=\ 0\)\)\)\)\ \|\|\ \(bVar16\)\)\ \{$	+1
+use	FUN_0001fd00	uVar7	pairWordIndex	INFERRED	index of the stream-pair shadow word being filled	^\s*uVar7\ =\ 0;$	+1
+use	FUN_0001fd00	uVar7	pairWordIndex	INFERRED	index of the stream-pair shadow word being filled	^\s*iVar4\ =\ uVar7\ \*\ 4\ \+\ param_1;$	+1
+use	FUN_0001fd00	uVar7	pairWordIndex	INFERRED	index of the stream-pair shadow word being filled	^\s*iVar4\ =\ uVar7\ \*\ 4\ \+\ param_1;$@2	+1
+use	FUN_0001fd00	uVar7	pairWordIndex	INFERRED	streamIndex >> 1	^\s*uVar7\ =\ uVar15\ >>\ 1;$	+1
+use	FUN_0001fd00	bVar16	unsupportedMode	INFERRED	the current program/array combination cannot use the stream layout	^\s*bVar16\ =\ true;$	+1
+use	FUN_0001fd00	bVar16	unsupportedMode	INFERRED	the current program/array combination cannot use the stream layout	^\s*bVar16\ =\ false;$	+1
+use	FUN_0001fd00	bVar16	unsupportedMode	INFERRED	the current program/array combination cannot use the stream layout	^\s*\(uVar7\ \&\ \~\*\(uint\ \*\)\(iVar6\ \+\ 0x30c\)\)\ !=\ 0\)\)\)\)\ \|\|\ \(bVar16\)\)\ \{$	+1
+use	FUN_0001fd00	bVar16	noProgram	INFERRED	no current program: attributes come from the enable mask instead of the program inputs	^\s*bVar16\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 4\)\ \+\ 0x1cc\)\ ==\ 0;$	+2
+use	FUN_0001fd00	bVar16	noProgram	INFERRED	no current program: attributes come from the enable mask instead of the program inputs	^\s*if\ \(bVar16\)\ \{$@2	+1
+use	FUN_0001fd00	iVar8	fetchBase	INFERRED	base index of the program input table (0 without a program)	^\s*iVar8\ =\ 0;$	+1

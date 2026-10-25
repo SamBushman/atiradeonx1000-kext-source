@@ -1,0 +1,48 @@
+local	VRegInfo__new_127994	param_2	ownerArg	INFERRED	owner word stored at register map word 0xb
+use	VRegInfo__new_127994	uVar1	hashTableSize	INFERRED	hash table size: starts at 1 and doubles until it exceeds 0xf	^\s*uVar1\ =\ 1;$	+1
+use	VRegInfo__new_127994	uVar1	hashTableSize	INFERRED	hash table size: starts at 1 and doubles until it exceeds 0xf	^\s*uVar1\ =\ uVar1\ <<\ 1;$	+2
+use	VRegInfo__new_127994	uVar1	hashTableSize	INFERRED	hash table size: starts at 1 and doubles until it exceeds 0xf	^\s*\*puVar5\ =\ uVar1;$	+1
+use	VRegInfo__new_127994	uVar1	hashTableSize	INFERRED	hash table size: starts at 1 and doubles until it exceeds 0xf	^\s*uVar1\ =\ 1;$@2	+1
+use	VRegInfo__new_127994	uVar1	hashTableSize	INFERRED	hash table size: starts at 1 and doubles until it exceeds 0xf	^\s*uVar1\ =\ uVar1\ <<\ 1;$@2	+2
+use	VRegInfo__new_127994	uVar1	hashTableSize	INFERRED	hash table size: starts at 1 and doubles until it exceeds 0xf	^\s*\*puVar5\ =\ uVar1;$@2	+1
+use	VRegInfo__new_127994	uVar1	hashTableSize	INFERRED	hash table size: starts at 1 and doubles until it exceeds 0xf	^\s*uVar1\ =\ 1;$@3	+1
+use	VRegInfo__new_127994	uVar1	hashTableSize	INFERRED	hash table size: starts at 1 and doubles until it exceeds 0xf	^\s*uVar1\ =\ uVar1\ <<\ 1;$@3	+2
+use	VRegInfo__new_127994	uVar1	hashTableSize	INFERRED	hash table size: starts at 1 and doubles until it exceeds 0xf	^\s*\*puVar5\ =\ uVar1;$@3	+1
+use	VRegInfo__new_127994	uVar1	hashTableSize	INFERRED	hash table size: starts at 1 and doubles until it exceeds 0xf	^\s*uVar1\ =\ 1;$@4	+1
+use	VRegInfo__new_127994	uVar1	hashTableSize	INFERRED	hash table size: starts at 1 and doubles until it exceeds 0xf	^\s*uVar1\ =\ uVar1\ <<\ 1;$@4	+2
+use	VRegInfo__new_127994	uVar1	hashTableSize	INFERRED	hash table size: starts at 1 and doubles until it exceeds 0xf	^\s*\*puVar5\ =\ uVar1;$@4	+1
+use	VRegInfo__new_127994	uVar1	hashTableSize	INFERRED	hash table size: starts at 1 and doubles until it exceeds 0xf	^\s*uVar1\ =\ 1;$@5	+1
+use	VRegInfo__new_127994	uVar1	hashTableSize	INFERRED	hash table size: starts at 1 and doubles until it exceeds 0xf	^\s*uVar1\ =\ uVar1\ <<\ 1;$@5	+2
+use	VRegInfo__new_127994	uVar1	hashTableSize	INFERRED	hash table size: starts at 1 and doubles until it exceeds 0xf	^\s*\*puVar5\ =\ uVar1;$@5	+1
+use	VRegInfo__new_127994	iVar3	backendDefaultWord	INFERRED	backend (compiler +0x30c) word 0x30 copied into register map word 0xd	^\s*iVar3\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(\*param_1\ \+\ 0x30c\)\ \+\ 0x30\);$	+1
+use	VRegInfo__new_127994	iVar3	backendDefaultWord	INFERRED	backend (compiler +0x30c) word 0x30 copied into register map word 0xd	^\s*param_1\[0xd\]\ =\ iVar3;$	+1
+use	VRegInfo__new_127994	iVar3	sizeLoopCountdown	INFERRED	countdown from 0x20 bounding the table size doubling loop	^\s*iVar3\ =\ 0x20;$	+1
+use	VRegInfo__new_127994	iVar3	sizeLoopCountdown	INFERRED	countdown from 0x20 bounding the table size doubling loop	^\s*iVar3\ =\ iVar3\ \+\ \-1;$	+2
+use	VRegInfo__new_127994	iVar3	sizeLoopCountdown	INFERRED	countdown from 0x20 bounding the table size doubling loop	^\s*iVar3\ =\ 0x20;$@2	+1
+use	VRegInfo__new_127994	iVar3	sizeLoopCountdown	INFERRED	countdown from 0x20 bounding the table size doubling loop	^\s*iVar3\ =\ iVar3\ \+\ \-1;$@2	+2
+use	VRegInfo__new_127994	iVar3	sizeLoopCountdown	INFERRED	countdown from 0x20 bounding the table size doubling loop	^\s*iVar3\ =\ 0x20;$@3	+1
+use	VRegInfo__new_127994	iVar3	sizeLoopCountdown	INFERRED	countdown from 0x20 bounding the table size doubling loop	^\s*iVar3\ =\ iVar3\ \+\ \-1;$@3	+2
+use	VRegInfo__new_127994	iVar3	sizeLoopCountdown	INFERRED	countdown from 0x20 bounding the table size doubling loop	^\s*iVar3\ =\ 0x20;$@4	+1
+use	VRegInfo__new_127994	iVar3	sizeLoopCountdown	INFERRED	countdown from 0x20 bounding the table size doubling loop	^\s*iVar3\ =\ iVar3\ \+\ \-1;$@4	+2
+use	VRegInfo__new_127994	iVar3	sizeLoopCountdown	INFERRED	countdown from 0x20 bounding the table size doubling loop	^\s*iVar3\ =\ 0x20;$@5	+1
+use	VRegInfo__new_127994	iVar3	sizeLoopCountdown	INFERRED	countdown from 0x20 bounding the table size doubling loop	^\s*iVar3\ =\ iVar3\ \+\ \-1;$@5	+2
+use	VRegInfo__new_127994	puVar5	threeWordKeyTable	INFERRED	hash table keyed by three words (keyEqualsThreeWords)	^\s*puVar5\ =\ puVar2\ \+\ 1;$	+1
+use	VRegInfo__new_127994	puVar5	threeWordKeyTable	INFERRED	hash table keyed by three words (keyEqualsThreeWords)	^\s*\*puVar5\ =\ uVar1;$	+1
+use	VRegInfo__new_127994	puVar5	threeWordKeyTable	INFERRED	hash table keyed by three words (keyEqualsThreeWords)	^\s*uVar4\ =\ FUN_00193e18\(uVar4,\*puVar5\ <<\ 2\);$	+1
+use	VRegInfo__new_127994	puVar5	threeWordKeyTable	INFERRED	hash table keyed by three words (keyEqualsThreeWords)	^\s*_memset\(uVar4,0,\*puVar5\ <<\ 2\);$	+2
+use	VRegInfo__new_127994	puVar5	constLanes1Table	INFERRED	hash table of one-lane constants (ConstKey__compare1)	^\s*puVar5\ =\ puVar2\ \+\ 1;$@2	+1
+use	VRegInfo__new_127994	puVar5	constLanes1Table	INFERRED	hash table of one-lane constants (ConstKey__compare1)	^\s*\*puVar5\ =\ uVar1;$@2	+1
+use	VRegInfo__new_127994	puVar5	constLanes1Table	INFERRED	hash table of one-lane constants (ConstKey__compare1)	^\s*uVar4\ =\ FUN_00193e18\(uVar4,\*puVar5\ <<\ 2\);$@2	+1
+use	VRegInfo__new_127994	puVar5	constLanes1Table	INFERRED	hash table of one-lane constants (ConstKey__compare1)	^\s*_memset\(uVar4,0,\*puVar5\ <<\ 2\);$@2	+2
+use	VRegInfo__new_127994	puVar5	constLanes2Table	INFERRED	hash table of two-lane constants (ConstKey__compare2)	^\s*puVar5\ =\ puVar2\ \+\ 1;$@3	+1
+use	VRegInfo__new_127994	puVar5	constLanes2Table	INFERRED	hash table of two-lane constants (ConstKey__compare2)	^\s*\*puVar5\ =\ uVar1;$@3	+1
+use	VRegInfo__new_127994	puVar5	constLanes2Table	INFERRED	hash table of two-lane constants (ConstKey__compare2)	^\s*uVar4\ =\ FUN_00193e18\(uVar4,\*puVar5\ <<\ 2\);$@3	+1
+use	VRegInfo__new_127994	puVar5	constLanes2Table	INFERRED	hash table of two-lane constants (ConstKey__compare2)	^\s*_memset\(uVar4,0,\*puVar5\ <<\ 2\);$@3	+2
+use	VRegInfo__new_127994	puVar5	constLanes3Table	INFERRED	hash table of three-lane constants (ConstKey__compare3)	^\s*puVar5\ =\ puVar2\ \+\ 1;$@4	+1
+use	VRegInfo__new_127994	puVar5	constLanes3Table	INFERRED	hash table of three-lane constants (ConstKey__compare3)	^\s*\*puVar5\ =\ uVar1;$@4	+1
+use	VRegInfo__new_127994	puVar5	constLanes3Table	INFERRED	hash table of three-lane constants (ConstKey__compare3)	^\s*uVar4\ =\ FUN_00193e18\(uVar4,\*puVar5\ <<\ 2\);$@4	+1
+use	VRegInfo__new_127994	puVar5	constLanes3Table	INFERRED	hash table of three-lane constants (ConstKey__compare3)	^\s*_memset\(uVar4,0,\*puVar5\ <<\ 2\);$@4	+2
+use	VRegInfo__new_127994	puVar5	constLanes4Table	INFERRED	hash table of four-lane constants (ConstKey__compare4)	^\s*puVar5\ =\ puVar2\ \+\ 1;$@5	+1
+use	VRegInfo__new_127994	puVar5	constLanes4Table	INFERRED	hash table of four-lane constants (ConstKey__compare4)	^\s*\*puVar5\ =\ uVar1;$@5	+1
+use	VRegInfo__new_127994	puVar5	constLanes4Table	INFERRED	hash table of four-lane constants (ConstKey__compare4)	^\s*uVar4\ =\ FUN_00193e18\(uVar4,\*puVar5\ <<\ 2\);$@5	+1
+use	VRegInfo__new_127994	puVar5	constLanes4Table	INFERRED	hash table of four-lane constants (ConstKey__compare4)	^\s*_memset\(uVar4,0,\*puVar5\ <<\ 2\);$@5	+2

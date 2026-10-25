@@ -72,7 +72,7 @@
 0x7c70	_gldCreateFramebuffer	104	no	calls an import (calloc)
 0x7ce0	_gldReclaimFramebuffer	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x7cf0	_gldDestroyFramebuffer	96	no	calls an import (free)
-0x7d50	FUN_00007d50	368	no	atomic / cache / barrier instruction
+0x7d50	gld_bindCurrentFramebuffer	368	no	atomic / cache / barrier instruction
 0x7ec0	gldDepthBitsToFormatMask	256	yes	
 0x7fc0	gldColorBitsToFormatMask	112	yes	
 0x8030	gldAlphaBitsToFormatMask	128	yes	
@@ -95,20 +95,20 @@
 0x94e0	_gldRelatePipelineProgram	84	yes	
 0x9540	_gldGetPipelineProgramInfo	36	yes	
 0x9570	_gldDestroyPipelineProgram	104	no	calls an import (free)
-0x95e0	FUN_000095e0	192	yes	
-0x96b0	FUN_000096b0	72	yes	
-0x973c	FUN_0000973c	20	no	tiny (20 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x9750	FUN_00009750	48	no	tiny (48 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x979c	FUN_0000979c	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x97ac	FUN_000097ac	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x97bc	FUN_000097bc	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x97cc	FUN_000097cc	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x97dc	FUN_000097dc	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x97ec	FUN_000097ec	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x97fc	FUN_000097fc	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x9810	FUN_00009810	112	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0x9880	FUN_00009880	48	no	tiny (48 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x98c8	FUN_000098c8	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x95e0	gld_resolveProgramSlots	192	yes	
+0x96b0	gld_decodeProgramOperandOffset	72	yes	
+0x973c	gld_decodeProgramOperandOffset_frag_0000973c	20	no	tiny (20 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x9750	gld_decodeProgramOperandOffset_frag_00009750	48	no	tiny (48 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x979c	gld_decodeProgramOperandOffset_frag_0000979c	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97ac	gld_decodeProgramOperandOffset_frag_000097ac	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bc	gld_decodeProgramOperandOffset_frag_000097bc	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97cc	gld_decodeProgramOperandOffset_frag_000097cc	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97dc	gld_decodeProgramOperandOffset_frag_000097dc	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97ec	gld_decodeProgramOperandOffset_frag_000097ec	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97fc	gld_decodeProgramOperandOffset_frag_000097fc	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x9810	gld_decodeProgramOperandOffset_frag_00009810	112	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x9880	gld_decodeProgramOperandOffset_frag_00009880	48	no	tiny (48 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x98c8	gld_decodeProgramOperandOffset_frag_000098c8	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x9b70	gldAllocQueryRecord	88	no	calls an import (calloc)
 0x9bd0	gld_waitQueryStamp	164	yes	
 0x9c80	_gldDestroyQuery	76	no	calls an import (free)
@@ -118,7 +118,7 @@
 0xa0a0	gldFormatBitsPerPixel	68	yes	
 0xa0f0	FUN_0000a0f0	48	yes	
 0xa120	gldFormatAlphaBits	92	yes	
-0xa180	FUN_0000a180	344	yes	
+0xa180	gld_channelBitsForFormat	344	yes	
 0xa2f0	gld_textureVariantClass	184	yes	
 0xa3f0	gldPixelUnitBytes	592	yes	
 0xa670	gldPixelRowBytes	100	yes	
@@ -200,7 +200,7 @@
 0x1b4b0	gld_updateYInvertedFlag	44	yes	
 0x1b4f0	noop_1b4f0	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x1b500	returnOne_1b500	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x1b510	FUN_0001b510	1304	yes	
+0x1b510	gld_validateFramebuffer	1304	yes	
 0x1bac0	gld_emitFramebufferState	904	no	atomic / cache / barrier instruction; indirect call (driver context / vtable / callback)
 0x1be50	dxt5EncodeAlphaBlock	868	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x1c1c0	dxt1DecodeColorIndex	416	yes	
@@ -220,7 +220,7 @@
 0x1eae0	copyIndices16Swapped_dcbz_entry	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x1eaf0	copyIndices16Swapped_dcbz	468	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x1ecd0	gld_drawVertexArray	3964	no	atomic / cache / barrier instruction; indirect call (driver context / vtable / callback)
-0x1fd00	FUN_0001fd00	1208	yes	
+0x1fd00	gld_buildVertexStreamLayout	1208	yes	
 0x20210	FUN_00020210	280	yes	
 0x20330	FUN_00020330	216	yes	
 0x20420	gldDisplayNotificationCallback	1716	no	calls an import (CFDictionaryGetValue); calls an import (CFNumberGetValue); calls an import (CFRelease)
@@ -231,7 +231,7 @@
 0x22290	_gldUpdateDispatch	2632	no	calls an import (pthread_mutex_lock); calls an import (pthread_mutex_unlock)
 0x22ce0	_gldInitDispatch	456	yes	
 0x22eb0	FUN_00022eb0	536	no	indirect call (driver context / vtable / callback)
-0x230d0	FUN_000230d0	1544	no	indirect call (driver context / vtable / callback)
+0x230d0	gld_emitSurfaceCopyPacket	1544	no	indirect call (driver context / vtable / callback)
 0x236f0	returnSecondArgument	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x23700	gldEmitCurrentAttributeRegisters	360	yes	
 0x23870	gldEmitCurrentAttributeRegistersMasked	420	yes	
@@ -257,14 +257,14 @@
 0x24fe0	FUN_00024fe0	2908	yes	
 0x25bf0	FUN_00025bf0	408	no	calls an import (free); calls an import (glpFreePPShaderLinearize); calls an import (glpFreePPShaderToProgram)
 0x25da0	gld_deleteContextProgramObjects	264	no	calls an import (free); calls an import (pthread_mutex_lock)
-0x25ec0	FUN_00025ec0	1372	no	calls an import (calloc); calls an import (free); calls an import (glpFreePPShaderLinearize)
+0x25ec0	gld_bindFragmentProgramRecord	1372	no	calls an import (calloc); calls an import (free); calls an import (glpFreePPShaderLinearize)
 0x26440	gld_bindProgramRecord	500	no	calls an import (calloc); calls an import (glpFreePPShaderLinearize); calls an import (glpFreePPShaderToProgram)
-0x26650	FUN_00026650	792	no	calls an import (calloc)
+0x26650	gld_bindProgramObject	792	no	calls an import (calloc)
 0x269a0	gld_getProgramParameter	516	yes	
-0x26bf0	FUN_00026bf0	876	yes	
+0x26bf0	gld_drawArraysDirect	876	yes	
 0x26f80	FUN_00026f80	460	no	calls an import (io_connect_method_scalarI_scalarO)
-0x27150	FUN_00027150	564	yes	
-0x273a0	FUN_000273a0	1484	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x27150	gld_drawArraysStream	564	yes	
+0x273a0	gld_reserveDrawSpace	1484	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x27990	FUN_00027990	2360	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x28350	gld_readPixelsViaBlit	3820	no	atomic / cache / barrier instruction; calls an import (pthread_mutex_lock); calls an import (pthread_mutex_unlock)
 0x29290	glReadPixels_entry	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
@@ -276,7 +276,7 @@
 0x2b3c0	gld_sumQueryCounters	464	yes	
 0x2b5a0	_gldGetQueryInfo	404	no	calls an import (usleep)
 0x2b740	FUN_0002b740	172	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0x2b7f0	FUN_0002b7f0	968	no	atomic / cache / barrier instruction
+0x2b7f0	gld_emitQueryBeginPacket	968	no	atomic / cache / barrier instruction
 0x2bbc4	FUN_0002bbc4	564	no	atomic / cache / barrier instruction
 0x2be00	FUN_0002be00	88	yes	
 0x2be60	FUN_0002be60	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
@@ -325,7 +325,7 @@
 0x31220	gldTextureFormatEntryForLevel	280	yes	
 0x31340	FUN_00031340	1352	no	calls an import (glgConvertType); calls an import (glgProcessPixels); calls an import (io_connect_method_scalarI_structureI)
 0x31890	_gldGetTextureLevel	176	no	calls an import (pthread_mutex_lock); calls an import (pthread_mutex_unlock)
-0x31940	FUN_00031940	1972	no	calls an import (glgConvertType); calls an import (glgProcessPixels)
+0x31940	gld_uploadTextureLevel	1972	no	calls an import (glgConvertType); calls an import (glgProcessPixels)
 0x32100	gldTextureMakeResident	8252	yes	
 0x341a0	FUN_000341a0	92	yes	
 0x34200	glGenerateMipmap_impl	4472	no	calls an import (pthread_mutex_lock); calls an import (pthread_mutex_unlock); indirect call (driver context / vtable / callback)
@@ -1271,7 +1271,7 @@
 0xe1920	FUN_000e1920	292	no	calls an import (setjmp); indirect call (driver context / vtable / callback)
 0xe1a48	FUN_000e1a48	292	no	calls an import (setjmp); indirect call (driver context / vtable / callback)
 0xe1b70	Compiler__setHardwareFamily	216	no	indirect call (driver context / vtable / callback)
-0xe1c50	FUN_000e1c50	916	no	indirect call (driver context / vtable / callback)
+0xe1c50	Program__forwardMulOperandToUsers	916	no	indirect call (driver context / vtable / callback)
 0xe1fe4	Compiler__releaseChipAndPools	160	yes	
 0xe2094	FUN_000e2094	1132	no	indirect call (driver context / vtable / callback)
 0xe2524	FUN_000e2524	324	no	calls an import (setjmp)
@@ -1291,7 +1291,7 @@
 0xe2acc	FUN_000e2acc	156	no	indirect call (driver context / vtable / callback)
 0xe2b68	FUN_000e2b68	140	no	indirect call (driver context / vtable / callback)
 0xe2bf4	FUN_000e2bf4	132	no	indirect call (driver context / vtable / callback)
-0xe2c78	FUN_000e2c78	620	yes	
+0xe2c78	ConstRecord__emitStores	620	yes	
 0xe2ee4	FUN_000e2ee4	32	yes	
 0xe2f04	FUN_000e2f04	136	no	indirect call (driver context / vtable / callback)
 0xe2f8c	IRInst__lastSourceKeyEquals	76	yes	
@@ -1301,7 +1301,7 @@
 0xe3308	FUN_000e3308	196	no	indirect call (driver context / vtable / callback)
 0xe33cc	FUN_000e33cc	340	no	indirect call (driver context / vtable / callback)
 0xe3544	FUN_000e3544	340	no	indirect call (driver context / vtable / callback)
-0xe36bc	FUN_000e36bc	664	no	indirect call (driver context / vtable / callback)
+0xe36bc	MachineCodeWriter__encodeProgram	664	no	indirect call (driver context / vtable / callback)
 0xe3968	IRInst__createMovForDest	396	no	indirect call (driver context / vtable / callback)
 0xe3af4	FUN_000e3af4	148	yes	
 0xe3b88	FUN_000e3b88	2144	no	indirect call (driver context / vtable / callback)
@@ -1358,7 +1358,7 @@
 0xe803c	Block__predecessorIndex	92	yes	
 0xe8098	Block__phiOperandIndexForPredecessor	52	yes	
 0xe80cc	FUN_000e80cc	88	yes	
-0xe8124	FUN_000e8124	664	yes	
+0xe8124	Program__allocateBitSetIndex	664	yes	
 0xe83bc	FUN_000e83bc	104	no	indirect call (driver context / vtable / callback)
 0xe8424	FUN_000e8424	216	no	indirect call (driver context / vtable / callback)
 0xe84fc	Block__verify	468	no	indirect call (driver context / vtable / callback)
@@ -1373,7 +1373,7 @@
 0xe8d5c	Block__appendPredecessor	120	yes	
 0xe8dd4	Block__appendSuccessor	120	yes	
 0xe8e4c	Block__connect	96	yes	
-0xe8eac	FUN_000e8eac	608	yes	
+0xe8eac	Block__replaceRegionEdges	608	yes	
 0xe910c	FUN_000e910c	120	yes	
 0xe9184	Block__getPredecessor	136	yes	
 0xe920c	Block__getSuccessor	136	yes	
@@ -1488,7 +1488,7 @@
 0xef8f8	Program__appendToVector3c8	120	yes	
 0xef970	Program__removeInst	220	yes	
 0xefa4c	FUN_000efa4c	860	yes	
-0xefde4	FUN_000efde4	888	no	indirect call (driver context / vtable / callback)
+0xefde4	Program__insertExitMarkerAndFlagBlocks	888	no	indirect call (driver context / vtable / callback)
 0xf019c	FUN_000f019c	792	no	indirect call (driver context / vtable / callback)
 0xf04d4	FUN_000f04d4	724	no	indirect call (driver context / vtable / callback)
 0xf07a8	FUN_000f07a8	3348	no	indirect call (driver context / vtable / callback)
@@ -1559,7 +1559,7 @@
 0xf4c48	ConstKey__compareOrdered	268	yes	
 0xf4d54	ConstKey__countPresentOperands	44	yes	
 0xf4d80	FUN_000f4d80	92	yes	
-0xf4ddc	FUN_000f4ddc	512	yes	
+0xf4ddc	ConstRecord__insertSwizzleVariants	512	yes	
 0xf4fdc	Compiler__getOrCreateLoadConstN	588	yes	
 0xf5248	FUN_000f5248	376	yes	
 0xf53c0	Compiler__getOrCreateLoadConst3	396	yes	
@@ -1614,7 +1614,7 @@
 0xf9a58	FUN_000f9a58	3748	no	indirect call (driver context / vtable / callback)
 0xfa958	FUN_000fa958	1132	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0xfadc4	FUN_000fadc4	448	yes	
-0xfafa4	FUN_000fafa4	652	yes	
+0xfafa4	Program__createConstantVReg	652	yes	
 0xfb230	FUN_000fb230	420	yes	
 0xfb3d4	FUN_000fb3d4	8428	no	indirect call (driver context / vtable / callback)
 0xfd50c	FUN_000fd50c	188	yes	

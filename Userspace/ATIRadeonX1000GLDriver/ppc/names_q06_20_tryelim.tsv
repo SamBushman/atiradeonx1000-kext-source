@@ -1,0 +1,27 @@
+local	Program__tryEliminateRedundantCopy	param_1	program	INFERRED	the Program (+8 compiler, +0xa0 eliminated copy counter, +0x3a0 entry block)
+local	Program__tryEliminateRedundantCopy	param_3	block	INFERRED	block whose definition table is updated with the copy's source
+use	Program__tryEliminateRedundantCopy	iVar1	copyElimEnabled	INFERRED	Compiler__isOptionEnabled(compiler, 5)	^\s*iVar1\ =\ FUN_000e07dc\(\*\(undefined4\ \*\)\(param_1\ \+\ 8\),5\);$	+2
+use	Program__tryEliminateRedundantCopy	iVar1	operandNumber	INFERRED	operand number 1..count	^\s*for\ \(iVar1\ =\ 1;\ iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*param_2\ \+\ 0x14\)\)\(param_2\),\ iVar1\ <=\ iVar2;$	+3
+use	Program__tryEliminateRedundantCopy	iVar1	operandNumber	INFERRED	operand number 1..count	^\s*if\ \(\(param_2\[iVar1\ \*\ 6\ \+\ 0x28\]\ \&\ 2U\)\ !=\ 0\)\ \{$	+1
+use	Program__tryEliminateRedundantCopy	iVar1	operandNumber	INFERRED	operand number 1..count	^\s*iVar2\ =\ FUN_000f31e8\(param_2,iVar1\);$	+1
+use	Program__tryEliminateRedundantCopy	iVar1	operandNumber	INFERRED	operand number 1..count	^\s*if\ \(\(param_2\[0x20\]\ !=\ 0\)\ \&\&$	+3
+use	Program__tryEliminateRedundantCopy	iVar1	laneCountdown	INFERRED	countdown from 4 over the lane bytes	^\s*iVar1\ =\ 4;$	+1
+use	Program__tryEliminateRedundantCopy	iVar1	laneCountdown	INFERRED	countdown from 4 over the lane bytes	^\s*iVar1\ =\ iVar1\ \+\ \-1;$	+2
+use	Program__tryEliminateRedundantCopy	iVar1	destKindClass	INFERRED	IRInst__operandKindClass of the destination operand	^\s*iVar1\ =\ FUN_00105dbc\(param_2,0\);$	+3
+use	Program__tryEliminateRedundantCopy	iVar1	sourceInstA	INFERRED	instruction defining source operand 1 (0 when absent)	^\s*iVar1\ =\ FUN_00105594\(param_2,1\);$	+2
+use	Program__tryEliminateRedundantCopy	iVar1	sourceRegKindA	INFERRED	register kind of source 1 (or of the copy itself)	^\s*iVar1\ =\ param_2\[0x2c\];$	+1
+use	Program__tryEliminateRedundantCopy	iVar1	sourceRegKindA	INFERRED	register kind of source 1 (or of the copy itself)	^\s*iVar1\ =\ FUN_00105594\(param_2,1\);$@2	+2
+use	Program__tryEliminateRedundantCopy	iVar1	sourceRegKindA	INFERRED	register kind of source 1 (or of the copy itself)	^\s*iVar1\ =\ FUN_0012678c\(iVar1\);$	+2
+use	Program__tryEliminateRedundantCopy	iVar1	sourceInstB	INFERRED	instruction defining source operand 1 (0 when absent)	^\s*iVar1\ =\ FUN_00105594\(param_2,1\);$@3	+2
+use	Program__tryEliminateRedundantCopy	iVar1	sourceRegKindB	INFERRED	register kind of source 1 (or of the copy itself), compared with 0x31	^\s*iVar1\ =\ param_2\[0x2c\];$@2	+1
+use	Program__tryEliminateRedundantCopy	iVar1	sourceRegKindB	INFERRED	register kind of source 1 (or of the copy itself), compared with 0x31	^\s*iVar1\ =\ FUN_00105594\(param_2,1\);$@4	+2
+use	Program__tryEliminateRedundantCopy	iVar1	sourceRegKindB	INFERRED	register kind of source 1 (or of the copy itself), compared with 0x31	^\s*if\ \(\(\(iVar1\ !=\ 0x31\)\ \&\&\ \(iVar1\ =\ \(\(int\ \(\*\)\(\)\)FUN_0011e948\)\(param_1,param_2\),\ iVar1\ ==\ 0\)\)\ \&\&$	+2
+use	Program__tryEliminateRedundantCopy	iVar2	operandCountLimit	INFERRED	instruction operand count (vtable slot 0x14), the loop bound	^\s*for\ \(iVar1\ =\ 1;\ iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*param_2\ \+\ 0x14\)\)\(param_2\),\ iVar1\ <=\ iVar2;$	+2
+use	Program__tryEliminateRedundantCopy	iVar2	operandCountLimit	INFERRED	instruction operand count (vtable slot 0x14), the loop bound	^\s*iVar2\ =\ FUN_000f31e8\(param_2,iVar1\);$	+2
+use	Program__tryEliminateRedundantCopy	uVar3	sourceDefinition	INFERRED	VReg__currentDefinition of the copy's source register	^\s*uVar3\ =\ \(\(int\ \(\*\)\(\)\)FUN_00122fa4\)\(param_2\[0x29\],\*\(undefined4\ \*\)\(param_1\ \+\ 0x3a0\),$	+3
+use	Program__tryEliminateRedundantCopy	in_r6	staleArg6	INFERRED	r6 left over, forwarded to the release call	^\s*\(param_2,0,\*\(undefined4\ \*\)\(param_1\ \+\ 8\),in_r6,in_r7,in_r8,$	+2
+use	Program__tryEliminateRedundantCopy	in_r7	staleArg7	INFERRED	r7 left over, forwarded to the release call	^\s*\(param_2,0,\*\(undefined4\ \*\)\(param_1\ \+\ 8\),in_r6,in_r7,in_r8,$	+2
+use	Program__tryEliminateRedundantCopy	in_r8	staleArg8	INFERRED	r8 left over, forwarded to the release call	^\s*\(param_2,0,\*\(undefined4\ \*\)\(param_1\ \+\ 8\),in_r6,in_r7,in_r8,$	+2
+use	Program__tryEliminateRedundantCopy	piVar4	laneFlagCursor	INFERRED	cursor over the instruction's lane flag bytes	^\s*piVar4\ =\ param_2;$	+1
+use	Program__tryEliminateRedundantCopy	piVar4	laneFlagCursor	INFERRED	cursor over the instruction's lane flag bytes	^\s*if\ \(\(uint\)\(\*\(byte\ \*\)\(piVar4\ \+\ 0x27\)\ \-\ 2\)\ <\ 2\)\ \{$	+1
+use	Program__tryEliminateRedundantCopy	piVar4	laneFlagCursor	INFERRED	cursor over the instruction's lane flag bytes	^\s*piVar4\ =\ \(int\ \*\)\(\(int\)piVar4\ \+\ 1\);$	+1

@@ -1,0 +1,38 @@
+local	FUN_0010f38c	param_1	entry	INFERRED	pack entry (word 0 instruction, words 1..4 lane sources) whose lanes are searched in the other entries
+use	FUN_0010f38c	puVar3	entryLaneCursor	INFERRED	cursor over entry's four lane sources	^\s*puVar3\ =\ param_1;$	+1
+use	FUN_0010f38c	puVar3	entryLaneCursor	INFERRED	cursor over entry's four lane sources	^\s*if\ \(\(\*\(char\ \*\)\(iVar4\ \+\ iVar5\ \+\ 0x10\)\ !=\ '\\x01'\)\ \&\&\ \(piVar10\[1\]\ ==\ puVar3\[1\]\)\)\ \{$	+1
+use	FUN_0010f38c	puVar3	entryLaneCursor	INFERRED	cursor over entry's four lane sources	^\s*puVar3\ =\ puVar3\ \+\ 1;$	+1
+use	FUN_0010f38c	iVar5	otherLanesLeft	INFERRED	other entry's lane count (word 5) before it is decremented	^\s*iVar5\ =\ piVar8\[5\];$	+1
+use	FUN_0010f38c	iVar5	otherLanesLeft	INFERRED	other entry's lane count (word 5) before it is decremented	^\s*piVar8\[5\]\ =\ iVar5\ \+\ \-1;$	+1
+use	FUN_0010f38c	iVar4	otherLaneIndex	INFERRED	lane counter 0..3 over the other entry	^\s*iVar4\ =\ 0;$	+1
+use	FUN_0010f38c	iVar4	otherLaneIndex	INFERRED	lane counter 0..3 over the other entry	^\s*if\ \(\(\*\(char\ \*\)\(iVar4\ \+\ iVar5\ \+\ 0x10\)\ !=\ '\\x01'\)\ \&\&\ \(piVar10\[1\]\ ==\ puVar3\[1\]\)\)\ \{$	+1
+use	FUN_0010f38c	iVar4	otherLaneIndex	INFERRED	lane counter 0..3 over the other entry	^\s*\*\(undefined1\ \*\)\(iVar4\ \+\ iVar6\ \+\ 0x9c\)\ =\ 1;$	+1
+use	FUN_0010f38c	iVar4	otherLaneIndex	INFERRED	lane counter 0..3 over the other entry	^\s*bVar1\ =\ iVar4\ !=\ 3;$	+1
+use	FUN_0010f38c	iVar4	otherLaneIndex	INFERRED	lane counter 0..3 over the other entry	^\s*iVar4\ =\ iVar4\ \+\ 1;$	+1
+use	FUN_0010f38c	bVar1	moreOtherLanes	INFERRED	loop latch: other lane index is not the last (3)	^\s*bVar1\ =\ iVar4\ !=\ 3;$	+1
+use	FUN_0010f38c	bVar1	moreOtherLanes	INFERRED	loop latch: other lane index is not the last (3)	^\s*\}\ while\ \(bVar1\);$	+1
+use	FUN_0010f38c	bVar1	moreEntryLanes	INFERRED	loop latch: entry lane index is not the last (3)	^\s*bVar1\ =\ iVar7\ !=\ 3;$	+1
+use	FUN_0010f38c	bVar1	moreEntryLanes	INFERRED	loop latch: entry lane index is not the last (3)	^\s*\}\ while\ \(bVar1\);$@2	+1
+use	FUN_0010f38c	iVar6	otherInst	INFERRED	instruction of the other entry	^\s*iVar6\ =\ \*piVar8;$	+1
+use	FUN_0010f38c	iVar6	otherInst	INFERRED	instruction of the other entry	^\s*\*\(undefined1\ \*\)\(iVar4\ \+\ iVar6\ \+\ 0x9c\)\ =\ 1;$	+1
+use	FUN_0010f38c	iVar7	entryLaneIndex	INFERRED	lane counter 0..3 over entry	^\s*iVar7\ =\ 0;$	+1
+use	FUN_0010f38c	iVar7	entryLaneIndex	INFERRED	lane counter 0..3 over entry	^\s*if\ \(\*\(char\ \*\)\(iVar7\ \+\ iVar4\ \+\ 0x10\)\ !=\ '\\x01'\)\ \{$	+1
+use	FUN_0010f38c	iVar7	entryLaneIndex	INFERRED	lane counter 0..3 over entry	^\s*bVar1\ =\ iVar7\ !=\ 3;$	+1
+use	FUN_0010f38c	iVar7	entryLaneIndex	INFERRED	lane counter 0..3 over entry	^\s*iVar7\ =\ iVar7\ \+\ 1;$	+1
+use	FUN_0010f38c	piVar10	otherLaneCursor	INFERRED	cursor over the other entry's lane sources	^\s*piVar10\ =\ piVar8;$	+1
+use	FUN_0010f38c	piVar10	otherLaneCursor	INFERRED	cursor over the other entry's lane sources	^\s*if\ \(\(\*\(char\ \*\)\(iVar4\ \+\ iVar5\ \+\ 0x10\)\ !=\ '\\x01'\)\ \&\&\ \(piVar10\[1\]\ ==\ puVar3\[1\]\)\)\ \{$	+1
+use	FUN_0010f38c	piVar10	otherLaneCursor	INFERRED	cursor over the other entry's lane sources	^\s*piVar10\[1\]\ =\ 0;$	+1
+use	FUN_0010f38c	piVar10	otherLaneCursor	INFERRED	cursor over the other entry's lane sources	^\s*piVar10\ =\ piVar10\ \+\ 1;$	+1
+local	FUN_0010de6c	param_2	program	INFERRED	the Program (+8 compiler, +0x3ac virtual register list)
+local	FUN_0010de6c	param_4	vertexAttrWord	INFERRED	packed vertex attribute: register file in bits 16..21, input index in the low half
+local	FUN_0010de6c	param_6	insertRef	INFERRED	instruction or block reference after which the load is appended
+use	FUN_0010de6c	uVar1	attrWordCopy	INFERRED	vertex attribute word read from param_4	^\s*uVar1\ =\ \*param_4;$	+1
+use	FUN_0010de6c	uVar1	attrWordCopy	INFERRED	vertex attribute word read from param_4	^\s*uVar2\ =\ FUN_00127608\(uVar5,uVar2,\(int\)\(short\)uVar1,0\);$	+1
+use	FUN_0010de6c	uVar1	attrWordCopy	INFERRED	vertex attribute word read from param_4	^\s*\*\(int\ \*\)\(iVar3\ \+\ 300\)\ =\ \(int\)\(short\)uVar1;$	+1
+use	FUN_0010de6c	uVar2	loadVReg	INFERRED	virtual register defined by the vertex load	^\s*uVar2\ =\ FUN_000ec208\(param_2,\*param_4\ >>\ 0x10\ \&\ 0x3f\);$	+2
+use	FUN_0010de6c	uVar2	loadVReg	INFERRED	virtual register defined by the vertex load	^\s*FUN_001046c8\(iVar3,0,uVar2\);$	+1
+use	FUN_0010de6c	iVar3	loadVertexInst	INFERRED	new IRLoadVertex (opcode 0xa4)	^\s*iVar3\ =\ FUN_00109810\(0xa4,uVar4\);$	+4
+use	FUN_0010de6c	uVar4	compiler	INFERRED	program->compiler	^\s*uVar4\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 8\);$	+1
+use	FUN_0010de6c	uVar4	compiler	INFERRED	program->compiler	^\s*iVar3\ =\ FUN_00109810\(0xa4,uVar4\);$	+1
+use	FUN_0010de6c	uVar5	vregList	INFERRED	program virtual register list (+0x3ac)	^\s*uVar5\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x3ac\);$	+1
+use	FUN_0010de6c	uVar5	vregList	INFERRED	program virtual register list (+0x3ac)	^\s*uVar2\ =\ FUN_00127608\(uVar5,uVar2,\(int\)\(short\)uVar1,0\);$	+1

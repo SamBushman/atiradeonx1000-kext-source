@@ -1,0 +1,36 @@
+local	VReg__currentDefinition	param_1	vreg	INFERRED	the virtual register (this); word 0xb is its definition stack
+local	VReg__currentDefinition	param_2	block	INFERRED	block in which the definition is recorded when the stack is empty
+local	VReg__currentDefinition	param_3	createArg	INFERRED	argument forwarded to the vtable slot 8 that creates the initial definition
+use	VReg__currentDefinition	puVar1	topRef	INFERRED	element reference of the top of the definition stack	^\s*puVar1\ =\ \(undefined4\ \*\)\(uVar2\ \*\ 4\ \+\ puVar3\[2\]\);$	+1
+use	VReg__currentDefinition	puVar1	topRef	INFERRED	element reference of the top of the definition stack	^\s*puVar1\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar3,uVar2\);$	+1
+use	VReg__currentDefinition	puVar1	topRef	INFERRED	element reference of the top of the definition stack	^\s*uVar5\ =\ \*puVar1;$	+1
+use	VReg__currentDefinition	uVar2	lastIndex	INFERRED	index of the top element of the definition stack	^\s*uVar2\ =\ uVar4\ \-\ 1;$	+4
+use	VReg__currentDefinition	uVar2	lastIndex	INFERRED	index of the top element of the definition stack	^\s*puVar1\ =\ \(undefined4\ \*\)\(uVar2\ \*\ 4\ \+\ puVar3\[2\]\);$	+1
+use	VReg__currentDefinition	uVar2	lastIndex	INFERRED	index of the top element of the definition stack	^\s*puVar1\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar3,uVar2\);$	+1
+use	VReg__currentDefinition	puVar3	definitionStack	INFERRED	definition stack vector header (vreg +0x2c)	^\s*puVar3\ =\ \(uint\ \*\)param_1\[0xb\];$	+2
+use	VReg__currentDefinition	puVar3	definitionStack	INFERRED	definition stack vector header (vreg +0x2c)	^\s*if\ \(uVar2\ <\ \*puVar3\)\ \{$	+1
+use	VReg__currentDefinition	puVar3	definitionStack	INFERRED	definition stack vector header (vreg +0x2c)	^\s*_memset\(uVar4\ \*\ 4\ \+\ puVar3\[2\],0,\(uVar2\ \-\ uVar4\)\ \*\ 4\ \+\ 4\);$	+2
+use	VReg__currentDefinition	puVar3	definitionStack	INFERRED	definition stack vector header (vreg +0x2c)	^\s*puVar1\ =\ \(undefined4\ \*\)\(uVar2\ \*\ 4\ \+\ puVar3\[2\]\);$	+1
+use	VReg__currentDefinition	puVar3	definitionStack	INFERRED	definition stack vector header (vreg +0x2c)	^\s*puVar1\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar3,uVar2\);$	+1
+use	VReg__currentDefinition	uVar4	stackCount	INFERRED	filled count of the definition stack	^\s*uVar4\ =\ puVar3\[1\];$	+2
+use	VReg__currentDefinition	uVar4	stackCount	INFERRED	filled count of the definition stack	^\s*uVar2\ =\ uVar4\ \-\ 1;$	+1
+use	VReg__currentDefinition	uVar4	stackCount	INFERRED	filled count of the definition stack	^\s*if\ \(uVar4\ <=\ uVar2\)\ \{$	+3
+use	VReg__currentDefinition	uVar5	definition	INFERRED	current definition (top of stack, or a newly created one)	^\s*uVar5\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 8\)\)\(param_1,param_2,param_3\);$	+2
+use	VReg__currentDefinition	uVar5	definition	INFERRED	current definition (top of stack, or a newly created one)	^\s*uVar5\ =\ \*puVar1;$	+1
+use	VReg__currentDefinition	uVar5	definition	INFERRED	current definition (top of stack, or a newly created one)	^\s*return\ uVar5;$	+1
+local	VReg__addUse	param_1	vreg	INFERRED	the virtual register that is used (this); +0x14 use list
+local	VReg__addUse	param_2	operandNumber	INFERRED	operand number of the use inside the user instruction
+local	VReg__addUse	param_3	user	INFERRED	instruction that reads the register
+use	VReg__addUse	iVar1	operandCursor	INFERRED	cursor over the earlier operand records of the user (24 bytes each)	^\s*iVar1\ =\ param_3;$	+1
+use	VReg__addUse	iVar1	operandCursor	INFERRED	cursor over the earlier operand records of the user (24 bytes each)	^\s*piVar2\ =\ \(int\ \*\)\(iVar1\ \+\ 0xbc\);$	+2
+use	VReg__addUse	piVar2	useSlotRef	INFERRED	slot reference at the end of the use list	^\s*piVar2\ =\ \(int\ \*\)\(uVar4\ \*\ 4\ \+\ puVar5\[2\]\);$	+1
+use	VReg__addUse	piVar2	useSlotRef	INFERRED	slot reference at the end of the use list	^\s*piVar2\ =\ \(int\ \*\)FUN_0019423c\(puVar5,uVar4\);$	+1
+use	VReg__addUse	piVar2	useSlotRef	INFERRED	slot reference at the end of the use list	^\s*\*piVar2\ =\ param_3;$	+1
+use	VReg__addUse	piVar2	earlierOperandVReg	INFERRED	virtual register of an earlier operand of the user, compared with vreg	^\s*piVar2\ =\ \(int\ \*\)\(iVar1\ \+\ 0xbc\);$	+1
+use	VReg__addUse	piVar2	earlierOperandVReg	INFERRED	virtual register of an earlier operand of the user, compared with vreg	^\s*\}\ while\ \(param_1\ !=\ \*piVar2\);$	+1
+use	VReg__addUse	iVar3	operandCountdown	INFERRED	earlier operands still to compare	^\s*iVar3\ =\ param_2\ \+\ \-1;$	+1
+use	VReg__addUse	iVar3	operandCountdown	INFERRED	earlier operands still to compare	^\s*iVar3\ =\ iVar3\ \+\ \-1;$	+2
+use	VReg__addUse	uVar4	useCount	INFERRED	filled count of the use list	^\s*uVar4\ =\ puVar5\[1\];$	+5
+use	VReg__addUse	uVar4	useCount	INFERRED	filled count of the use list	^\s*piVar2\ =\ \(int\ \*\)FUN_0019423c\(puVar5,uVar4\);$	+1
+use	VReg__addUse	puVar5	useList	INFERRED	use list vector header (vreg +0x14)	^\s*puVar5\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 0x14\);$	+6
+use	VReg__addUse	puVar5	useList	INFERRED	use list vector header (vreg +0x14)	^\s*piVar2\ =\ \(int\ \*\)FUN_0019423c\(puVar5,uVar4\);$	+1
