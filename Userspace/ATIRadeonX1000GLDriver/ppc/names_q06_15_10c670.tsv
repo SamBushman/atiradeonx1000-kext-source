@@ -1,0 +1,95 @@
+local	FUN_0010c670	param_3	pass	INFERRED	pass object; +0x6c4 -> program (+0x478 first input slot, +0x30 flags)
+use	FUN_0010c670	uVar6	sourceSwizzleWord	INFERRED	swizzle word of the move's source operand	^\s*uVar6\ =\ \*\(undefined4\ \*\)\(iVar2\ \+\ 0x10\);$	+2
+use	FUN_0010c670	uVar6	sourceSwizzleWord	INFERRED	swizzle word of the move's source operand	^\s*\(a0,\(int\)uVar12,uVar6,in_r6,in_r7,in_r8,\*\(int\ \*\)\(param_3\ \+\ 0x6c4\)\);$	+1
+use	FUN_0010c670	uVar6	rebuiltSwizzle	INFERRED	swizzle word rebuilt from the constant operand search (local_48)	^\s*uVar6\ =\ local_48;$	+1
+use	FUN_0010c670	uVar6	rebuiltSwizzle	INFERRED	swizzle word rebuilt from the constant operand search (local_48)	^\s*\*\(undefined4\ \*\)\(iVar2\ \+\ 0x10\)\ =\ uVar6;$	+1
+use	FUN_0010c670	uVar12	allHwConstantsResult	INFERRED	IRInst__allSelectsAreHwConstants return pair	^\s*uVar12\ =\ FUN_0010453c\(a0,param_3,uVar6,in_r6,in_r7,in_r8,in_r9\);$	+2
+use	FUN_0010c670	uVar12	allHwConstantsResult	INFERRED	IRInst__allSelectsAreHwConstants return pair	^\s*\(a0,\(int\)uVar12,uVar6,in_r6,in_r7,in_r8,\*\(int\ \*\)\(param_3\ \+\ 0x6c4\)\);$	+1
+use	FUN_0010c670	iVar8	inputBase	INFERRED	program word 0x478: first input slot number	^\s*iVar8\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_3\ \+\ 0x6c4\)\ \+\ 0x478\);$	+1
+use	FUN_0010c670	iVar8	inputBase	INFERRED	program word 0x478: first input slot number	^\s*if\ \(iVar8\ <\ a0\[0x58\]\)\ \{$	+1
+use	FUN_0010c670	iVar8	inputBase	INFERRED	program word 0x478: first input slot number	^\s*a0\[0x58\]\ =\ iVar8\ \+\ 1;$	+1
+use	FUN_0010c670	iVar8	inputBase	INFERRED	program word 0x478: first input slot number	^\s*iVar7\ =\ iVar8\ \+\ 1;$	+1
+use	FUN_0010c670	iVar8	inputBase	INFERRED	program word 0x478: first input slot number	^\s*if\ \(iVar8\ <\ \*\(int\ \*\)\(iVar2\ \+\ 0x160\)\)\ \{$	+1
+use	FUN_0010c670	iVar8	inputBase	INFERRED	program word 0x478: first input slot number	^\s*if\ \(iVar8\ <\ \*\(int\ \*\)\(iVar2\ \+\ 0x160\)\)\ \{$@2	+1
+use	FUN_0010c670	iVar8	sourceOperandNumber	INFERRED	operand number 2..count of the move source	^\s*iVar8\ =\ 2;$	+1
+use	FUN_0010c670	iVar8	sourceOperandNumber	INFERRED	operand number 2..count of the move source	^\s*iVar7\ =\ FUN_001054ec\(param_1,iVar8\);$	+1
+use	FUN_0010c670	iVar8	sourceOperandNumber	INFERRED	operand number 2..count of the move source	^\s*uVar12\ =\ FUN_00105594\(param_1,iVar8\);$	+1
+use	FUN_0010c670	iVar8	sourceOperandNumber	INFERRED	operand number 2..count of the move source	^\s*iVar8\ =\ iVar8\ \+\ 1;$	+2
+use	FUN_0010c670	iVar8	foundSlotA	INFERRED	slot returned by the constant operand search	^\s*iVar8\ =\ local_44\[0\];$	+1
+use	FUN_0010c670	iVar8	foundSlotA	INFERRED	slot returned by the constant operand search	^\s*\(param_2,iVar7,iVar2,\*\(undefined1\ \*\)\(iVar8\ \+\ iVar4\ \+\ 0x10\)\);$	+1
+use	FUN_0010c670	iVar8	insertedOperandNumber	INFERRED	operand count of the target (+0x84), the new operand's number minus one	^\s*iVar8\ =\ param_2\[0x21\];$	+3
+use	FUN_0010c670	iVar8	targetOperandCount	INFERRED	operand count of the target instruction before the shift	^\s*iVar8\ =\ param_2\[0x21\];$@2	+1
+use	FUN_0010c670	iVar8	targetOperandCount	INFERRED	operand count of the target instruction before the shift	^\s*if\ \(1\ <\ iVar8\)\ \{$	+1
+use	FUN_0010c670	iVar8	targetOperandCount	INFERRED	operand count of the target instruction before the shift	^\s*\}\ while\ \(iVar7\ <=\ iVar8\);$	+1
+use	FUN_0010c670	iVar8	targetOperandCount	INFERRED	operand count of the target instruction before the shift	^\s*param_2\[0x21\]\ =\ iVar8\ \+\ \-1;$	+1
+use	FUN_0010c670	iVar8	foundSlotB	INFERRED	slot returned by the constant operand search	^\s*iVar8\ =\ local_44\[0\];$@2	+1
+use	FUN_0010c670	iVar8	foundSlotB	INFERRED	slot returned by the constant operand search	^\s*\(param_2,iVar7,iVar2,\*\(undefined1\ \*\)\(iVar8\ \+\ iVar4\ \+\ 0x10\)\);$@2	+1
+use	FUN_0010c670	iVar8	insertedOperandNumberB	INFERRED	operand count of the target, the new operand's number minus one	^\s*iVar8\ =\ param_2\[0x21\];$@3	+3
+use	FUN_0010c670	iVar7	inputBasePlusOne	INFERRED	input base + 1: the new sequence number of the cloned source	^\s*iVar7\ =\ iVar8\ \+\ 1;$	+1
+use	FUN_0010c670	iVar7	inputBasePlusOne	INFERRED	input base + 1: the new sequence number of the cloned source	^\s*piVar3\[0x58\]\ =\ iVar7;$	+1
+use	FUN_0010c670	iVar7	inputBasePlusOne	INFERRED	input base + 1: the new sequence number of the cloned source	^\s*\*\(int\ \*\)\(iVar2\ \+\ 0x160\)\ =\ iVar7;$	+1
+use	FUN_0010c670	iVar7	inputBasePlusOne	INFERRED	input base + 1: the new sequence number of the cloned source	^\s*\*\(int\ \*\)\(iVar2\ \+\ 0x160\)\ =\ iVar7;$@2	+1
+use	FUN_0010c670	iVar7	foundOperandNumberA	INFERRED	operand number found by the constant search	^\s*iVar7\ =\ \(int\)\(\(ulonglong\)uVar12\ >>\ 0x20\);$	+2
+use	FUN_0010c670	iVar7	foundOperandNumberA	INFERRED	operand number found by the constant search	^\s*iVar4\ =\ FUN_001054ec\(param_2,iVar7\);$	+1
+use	FUN_0010c670	iVar7	foundOperandNumberA	INFERRED	operand number found by the constant search	^\s*\(param_2,iVar7,iVar2,\*\(undefined1\ \*\)\(iVar8\ \+\ iVar4\ \+\ 0x10\)\);$	+1
+use	FUN_0010c670	iVar7	shiftSourceNumber	INFERRED	operand number being shifted down	^\s*iVar7\ =\ 2;$	+1
+use	FUN_0010c670	iVar7	shiftSourceNumber	INFERRED	operand number being shifted down	^\s*uVar6\ =\ FUN_00105594\(param_2,iVar7\);$	+1
+use	FUN_0010c670	iVar7	shiftSourceNumber	INFERRED	operand number being shifted down	^\s*iVar4\ =\ FUN_001054ec\(param_2,iVar7\);$@2	+1
+use	FUN_0010c670	iVar7	shiftSourceNumber	INFERRED	operand number being shifted down	^\s*iVar7\ =\ iVar7\ \+\ 1;$	+1
+use	FUN_0010c670	iVar7	shiftSourceNumber	INFERRED	operand number being shifted down	^\s*\}\ while\ \(iVar7\ <=\ iVar8\);$	+1
+use	FUN_0010c670	iVar7	foundOperandNumberB	INFERRED	operand number found by the constant search	^\s*iVar7\ =\ \(int\)\(\(ulonglong\)uVar12\ >>\ 0x20\);$@2	+2
+use	FUN_0010c670	iVar7	foundOperandNumberB	INFERRED	operand number found by the constant search	^\s*iVar4\ =\ FUN_001054ec\(param_2,iVar7\);$@3	+1
+use	FUN_0010c670	iVar7	foundOperandNumberB	INFERRED	operand number found by the constant search	^\s*\(param_2,iVar7,iVar2,\*\(undefined1\ \*\)\(iVar8\ \+\ iVar4\ \+\ 0x10\)\);$@2	+1
+use	FUN_0010c670	iVar2	sourceIsCopyBarrier	INFERRED	instruction vtable slot 0x5c test on the source	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x5c\)\)$	+1
+use	FUN_0010c670	iVar2	sourceIsCopyBarrier	INFERRED	instruction vtable slot 0x5c test on the source	^\s*if\ \(iVar2\ ==\ 0\)\ \{$	+1
+use	FUN_0010c670	iVar2	laneIndex	INFERRED	lane counter 0..3	^\s*iVar2\ =\ 0;$	+1
+use	FUN_0010c670	iVar2	laneIndex	INFERRED	lane counter 0..3	^\s*uVar10\ =\ \(uint\)\*\(byte\ \*\)\(iVar2\ \+\ iVar8\ \+\ 0x10\);$	+1
+use	FUN_0010c670	iVar2	laneIndex	INFERRED	lane counter 0..3	^\s*\(\*\*\(code\ \*\*\)\(\*param_2\ \+\ 0x88\)\)\(param_2,iVar8\ \+\ 1,iVar2,iVar2\);$	+1
+use	FUN_0010c670	iVar2	laneIndex	INFERRED	lane counter 0..3	^\s*else\ if\ \(local_44\[0\]\ !=\ iVar2\)\ \{$	+1
+use	FUN_0010c670	iVar2	laneIndex	INFERRED	lane counter 0..3	^\s*\(param_2,iVar7,iVar2,\*\(undefined1\ \*\)\(iVar8\ \+\ iVar4\ \+\ 0x10\)\);$	+1
+use	FUN_0010c670	iVar2	laneIndex	INFERRED	lane counter 0..3	^\s*\*\(undefined1\ \*\)\(\(int\)local_44\ \+\ iVar2\ \+\ \-4\)\ =\ \*\(undefined1\ \*\)\(uVar10\ \+\ iVar8\ \+\ 0x10\);$	+1
+use	FUN_0010c670	iVar2	laneIndex	INFERRED	lane counter 0..3	^\s*bVar1\ =\ iVar2\ !=\ 3;$	+2
+use	FUN_0010c670	iVar2	laneIndexB	INFERRED	lane counter 0..3	^\s*iVar2\ =\ 0;$@2	+1
+use	FUN_0010c670	iVar2	laneIndexB	INFERRED	lane counter 0..3	^\s*uVar10\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)local_44\ \+\ iVar2\ \+\ \-4\);$	+1
+use	FUN_0010c670	iVar2	laneIndexB	INFERRED	lane counter 0..3	^\s*\(\*\*\(code\ \*\*\)\(\*param_2\ \+\ 0x88\)\)\(param_2,iVar8\ \+\ 1,iVar2,iVar2\);$@2	+1
+use	FUN_0010c670	iVar2	laneIndexB	INFERRED	lane counter 0..3	^\s*else\ if\ \(local_44\[0\]\ !=\ iVar2\)\ \{$@2	+1
+use	FUN_0010c670	iVar2	laneIndexB	INFERRED	lane counter 0..3	^\s*\(param_2,iVar7,iVar2,\*\(undefined1\ \*\)\(iVar8\ \+\ iVar4\ \+\ 0x10\)\);$@2	+1
+use	FUN_0010c670	iVar2	laneIndexB	INFERRED	lane counter 0..3	^\s*bVar1\ =\ iVar2\ !=\ 3;$@2	+2
+use	FUN_0010c670	bVar1	moreLanes	INFERRED	loop latch: lane index is not the last (3)	^\s*bVar1\ =\ iVar2\ !=\ 3;$	+1
+use	FUN_0010c670	bVar1	moreLanes	INFERRED	loop latch: lane index is not the last (3)	^\s*\}\ while\ \(bVar1\);$	+1
+use	FUN_0010c670	bVar1	moreLanesB	INFERRED	loop latch: lane index is not the last (3)	^\s*bVar1\ =\ iVar2\ !=\ 3;$@2	+1
+use	FUN_0010c670	bVar1	moreLanesB	INFERRED	loop latch: lane index is not the last (3)	^\s*\}\ while\ \(bVar1\);$@2	+1
+use	FUN_0010c670	a0	sourceInst	INFERRED	instruction defining the move's source operand	^\s*a0\ =\ \(int\ \*\)FUN_00105594\(param_1,1\);$	+1
+use	FUN_0010c670	a0	sourceInst	INFERRED	instruction defining the move's source operand	^\s*uVar12\ =\ FUN_0010453c\(a0,param_3,uVar6,in_r6,in_r7,in_r8,in_r9\);$	+1
+use	FUN_0010c670	a0	sourceInst	INFERRED	instruction defining the move's source operand	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x5c\)\)$	+2
+use	FUN_0010c670	a0	sourceInst	INFERRED	instruction defining the move's source operand	^\s*if\ \(iVar8\ <\ a0\[0x58\]\)\ \{$	+2
+use	FUN_0010c670	a0	sourceInst	INFERRED	instruction defining the move's source operand	^\s*a0\[0x58\]\ =\ iVar8\ \+\ 1;$	+1
+use	FUN_0010c670	a0	sourceInst	INFERRED	instruction defining the move's source operand	^\s*piVar3\ =\ \(int\ \*\)FUN_0010445c\(a0,param_3,0\);$	+1
+use	FUN_0010c670	a0	sourceInst	INFERRED	instruction defining the move's source operand	^\s*FUN_000e7738\(a0\[0x56\],a0,piVar3\);$	+1
+use	FUN_0010c670	a0	sourceInst	INFERRED	instruction defining the move's source operand	^\s*a0\ =\ piVar3;$	+1
+use	FUN_0010c670	a0	sourceInst	INFERRED	instruction defining the move's source operand	^\s*FUN_00106004\(param_2,1,a0,0,param_3\);$	+1
+use	FUN_0010c670	piVar3	clonedSourceDef	INFERRED	copy of the source definition turned into a move	^\s*piVar3\ =\ \(int\ \*\)FUN_0010445c\(a0,param_3,0\);$	+6
+use	FUN_0010c670	piVar3	clonedSourceDef	INFERRED	copy of the source definition turned into a move	^\s*a0\ =\ piVar3;$	+3
+use	FUN_0010c670	in_r6	staleArg6	INFERRED	r6 left over, forwarded to IRInst__allSelectsAreHwConstants	^\s*uVar12\ =\ FUN_0010453c\(a0,param_3,uVar6,in_r6,in_r7,in_r8,in_r9\);$	+1
+use	FUN_0010c670	in_r6	staleArg6	INFERRED	r6 left over, forwarded to IRInst__allSelectsAreHwConstants	^\s*\(a0,\(int\)uVar12,uVar6,in_r6,in_r7,in_r8,\*\(int\ \*\)\(param_3\ \+\ 0x6c4\)\);$	+1
+use	FUN_0010c670	in_r7	staleArg7	INFERRED	r7 left over, forwarded	^\s*uVar12\ =\ FUN_0010453c\(a0,param_3,uVar6,in_r6,in_r7,in_r8,in_r9\);$	+1
+use	FUN_0010c670	in_r7	staleArg7	INFERRED	r7 left over, forwarded	^\s*\(a0,\(int\)uVar12,uVar6,in_r6,in_r7,in_r8,\*\(int\ \*\)\(param_3\ \+\ 0x6c4\)\);$	+1
+use	FUN_0010c670	in_r8	staleArg8	INFERRED	r8 left over, forwarded	^\s*uVar12\ =\ FUN_0010453c\(a0,param_3,uVar6,in_r6,in_r7,in_r8,in_r9\);$	+1
+use	FUN_0010c670	in_r8	staleArg8	INFERRED	r8 left over, forwarded	^\s*\(a0,\(int\)uVar12,uVar6,in_r6,in_r7,in_r8,\*\(int\ \*\)\(param_3\ \+\ 0x6c4\)\);$	+1
+use	FUN_0010c670	in_r9	staleArg9	INFERRED	r9 left over, forwarded	^\s*uVar12\ =\ FUN_0010453c\(a0,param_3,uVar6,in_r6,in_r7,in_r8,in_r9\);$	+1
+use	FUN_0010c670	uVar9	candidateLaneByte	INFERRED	swizzle byte of the lane in the candidate operand	^\s*uVar9\ =\ \(uint\)\*\(byte\ \*\)\(uVar10\ \+\ iVar7\ \+\ 0x10\);$	+2
+use	FUN_0010c670	uVar9	candidateLaneByte	INFERRED	swizzle byte of the lane in the candidate operand	^\s*dVar11\ =\ \(double\)\*\(float\ \*\)\(uVar9\ \*\ 0x18\ \+\ \(int\)\(\(ulonglong\)uVar12\ >>\ 0x20\)\ \+\ 0x20\);$	+1
+use	FUN_0010c670	uVar9	candidateLaneByteB	INFERRED	swizzle byte of the lane in the candidate operand	^\s*uVar9\ =\ \(uint\)\*\(byte\ \*\)\(uVar10\ \+\ iVar7\ \+\ 0x10\);$@2	+2
+use	FUN_0010c670	uVar9	candidateLaneByteB	INFERRED	swizzle byte of the lane in the candidate operand	^\s*dVar11\ =\ \(double\)\*\(float\ \*\)\(uVar9\ \*\ 0x18\ \+\ \(int\)\(\(ulonglong\)uVar12\ >>\ 0x20\)\ \+\ 0x20\);$@2	+1
+use	FUN_0010c670	uVar10	laneSelectByte	INFERRED	swizzle byte of the lane in the target's source operand	^\s*uVar10\ =\ \(uint\)\*\(byte\ \*\)\(iVar2\ \+\ iVar8\ \+\ 0x10\);$	+2
+use	FUN_0010c670	uVar10	laneSelectByte	INFERRED	swizzle byte of the lane in the target's source operand	^\s*if\ \(\*\(char\ \*\)\(uVar10\ \+\ iVar8\ \+\ 0x10\)\ ==\ '\\x04'\)\ \{$	+1
+use	FUN_0010c670	uVar10	laneSelectByte	INFERRED	swizzle byte of the lane in the target's source operand	^\s*uVar9\ =\ \(uint\)\*\(byte\ \*\)\(uVar10\ \+\ iVar7\ \+\ 0x10\);$	+1
+use	FUN_0010c670	uVar10	laneSelectByte	INFERRED	swizzle byte of the lane in the target's source operand	^\s*\*\(undefined1\ \*\)\(\(int\)local_44\ \+\ iVar2\ \+\ \-4\)\ =\ \*\(undefined1\ \*\)\(uVar10\ \+\ iVar8\ \+\ 0x10\);$	+1
+use	FUN_0010c670	uVar10	savedLaneSelectByte	INFERRED	saved swizzle byte of the lane (local_44 bytes)	^\s*uVar10\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)local_44\ \+\ iVar2\ \+\ \-4\);$	+2
+use	FUN_0010c670	uVar10	savedLaneSelectByte	INFERRED	saved swizzle byte of the lane (local_44 bytes)	^\s*uVar9\ =\ \(uint\)\*\(byte\ \*\)\(uVar10\ \+\ iVar7\ \+\ 0x10\);$@2	+1
+use	FUN_0010c670	dVar11	constantValueA	INFERRED	float constant of the selected component	^\s*dVar11\ =\ \(double\)\*\(float\ \*\)\(uVar9\ \*\ 0x18\ \+\ \(int\)\(\(ulonglong\)uVar12\ >>\ 0x20\)\ \+\ 0x20\);$	+2
+use	FUN_0010c670	dVar11	constantValueA	INFERRED	float constant of the selected component	^\s*\(\(void\ \(\*\)\(\)\)FUN_0010bd50\)\(param_2,\(int\)uVar12,iVar8\ \+\ 1,param_3,dVar11\);$	+1
+use	FUN_0010c670	dVar11	constantValueB	INFERRED	float constant of the selected component	^\s*dVar11\ =\ \(double\)\*\(float\ \*\)\(uVar9\ \*\ 0x18\ \+\ \(int\)\(\(ulonglong\)uVar12\ >>\ 0x20\)\ \+\ 0x20\);$@2	+2
+use	FUN_0010c670	dVar11	constantValueB	INFERRED	float constant of the selected component	^\s*\(\(void\ \(\*\)\(\)\)FUN_0010bd50\)\(param_2,\(int\)uVar12,iVar8\ \+\ 1,param_3,dVar11\);$@2	+1
+local	FUN_0010c670	local_48	swizzleWord	INFERRED	swizzle word being rebuilt (starts as 0x4040404)
+local	FUN_0010c670	local_44	foundSlotOut	INFERRED	out slot of the constant operand search / saved lane bytes

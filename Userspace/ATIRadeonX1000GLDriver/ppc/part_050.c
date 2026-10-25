@@ -180,7 +180,7 @@ int FudoPs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwi
     } while (loopRemaining2 != 0);
     piVar3 = laneSwizzle;
     if (iVar6 == 0) {
-      loopRemaining2 = FUN_000f6a04(program,constants,*laneSwizzle);
+      loopRemaining2 = Program__findOrCreateConstInst(program,constants,*laneSwizzle);
     }
     else {
       puVar5 = (undefined *)0x4;
@@ -200,17 +200,17 @@ int FudoPs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwi
         loopRemaining2 = loopRemaining2 + 4;
         loopRemaining = loopRemaining + -1;
       } while (loopRemaining != 0);
-      loopRemaining2 = FUN_000f6a04(program,&local_38,0x10203);
+      loopRemaining2 = Program__findOrCreateConstInst(program,&local_38,0x10203);
     }
     if (loopRemaining2 != 0) {
       return loopRemaining2;
     }
     uVar8 = *(undefined4 *)(program + 0x3ac);
-    iVar6 = FUN_000f5f94(uVar8,constants,laneSwizzle,piVar3,puVar5,iVar6,loopPtr);
+    iVar6 = RegisterMap__findConstVectorExact(uVar8,constants,laneSwizzle,piVar3,puVar5,iVar6,loopPtr);
     if (iVar6 != 0) {
       return iVar6;
     }
-    iVar6 = FUN_000f57f0(uVar8,constants,laneSwizzle,piVar3);
+    iVar6 = RegisterMap__findConstVector(uVar8,constants,laneSwizzle,piVar3);
     if (iVar6 != 0) {
       return iVar6;
     }

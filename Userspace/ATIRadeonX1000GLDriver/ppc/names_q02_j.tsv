@@ -1,0 +1,14 @@
+use	extvsEmitMmul	iVar7	hwProgram2	INFERRED	the shader's hardware program record, **(int**)(*(ctx+0x118c)*4 + *shader): +0x18 instruction count, +0x1c instruction array, +0x20 capacity in bytes	^\s*iVar7\ =\ \*\*\(int\ \*\*\)\(\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x0000118c\)\ \+\ param_1\)\ \*\ 4\ \+\ \*param_2\);$	+2
+use	extvsEmitMmul	iVar7	hwProgram2	INFERRED	the shader's hardware program record, **(int**)(*(ctx+0x118c)*4 + *shader): +0x18 instruction count, +0x1c instruction array, +0x20 capacity in bytes	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar7\ \+\ 0x18\);$@2	+3
+use	extvsEmitMmul	iVar7	hwProgram2	INFERRED	the shader's hardware program record, **(int**)(*(ctx+0x118c)*4 + *shader): +0x18 instruction count, +0x1c instruction array, +0x20 capacity in bytes	^\s*\(uVar3,\*\(undefined4\ \*\)\(iVar7\ \+\ 0x1c\),\*\(int\ \*\)\(iVar7\ \+\ 0x20\)\ <<\ 4\);$	+5
+use	extvsEmitMmul	iVar7	hwProgram2	INFERRED	the shader's hardware program record, **(int**)(*(ctx+0x118c)*4 + *shader): +0x18 instruction count, +0x1c instruction array, +0x20 capacity in bytes	^\s*iVar8\ =\ \*\(int\ \*\)\(iVar7\ \+\ 0x1c\);$	+1
+use	extvsEmitMmul	iVar7	dstOperand	INFERRED	instRecord + 4: destination operand of the instruction record	^\s*iVar7\ =\ param_3\ \+\ 4;$	+1
+use	extvsEmitMmul	iVar7	dstOperand	INFERRED	instRecord + 4: destination operand of the instruction record	^\s*FUN_00056f20\(param_1,param_2,iVar7,iVar9,1,0,0\);$	+1
+use	extvsEmitMmul	iVar7	dstOperand	INFERRED	instRecord + 4: destination operand of the instruction record	^\s*FUN_00056f20\(param_1,param_2,iVar7,iVar9\ \+\ 0x10,1,0,0\);$	+1
+use	extvsEmitMmul	iVar7	dstOperand	INFERRED	instRecord + 4: destination operand of the instruction record	^\s*FUN_00056f20\(param_1,param_2,iVar7,iVar9\ \+\ 0x20,1,0,0\);$	+1
+use	extvsEmitMmul	iVar7	dstOperand	INFERRED	instRecord + 4: destination operand of the instruction record	^\s*FUN_00056f20\(param_1,param_2,iVar7,iVar9\ \+\ 0x30,1,0,0\);$	+1
+use	extvsEmitMmul	iVar7	dstOperand	INFERRED	instRecord + 4: destination operand of the instruction record	^\s*iVar7\ =\ param_3\ \+\ 4;$@2	+1
+use	extvsEmitMmul	iVar7	dstOperand	INFERRED	instRecord + 4: destination operand of the instruction record	^\s*FUN_00056f20\(param_1,param_2,iVar7,iVar4\ \+\ 0x10,1,0,0\);$	+1
+use	extvsEmitMmul	iVar7	dstOperand	INFERRED	instRecord + 4: destination operand of the instruction record	^\s*FUN_00056f20\(param_1,param_2,iVar7,iVar4\ \+\ 0x20,1,0,0\);$	+1
+use	extvsEmitMmul	iVar7	dstOperand	INFERRED	instRecord + 4: destination operand of the instruction record	^\s*FUN_00056f20\(param_1,param_2,iVar7,iVar4\ \+\ 0x30,1,0,0\);$	+1
+use	extvsEmitMmul	iVar7	dstOperand	INFERRED	instRecord + 4: destination operand of the instruction record	^\s*FUN_00056f20\(param_1,param_2,iVar7,iVar4\ \+\ 0x40,1,0,0\);$	+1

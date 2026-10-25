@@ -1,0 +1,38 @@
+local	FUN_00135334	param_1	graph	INFERRED	register interference graph (+4 node vector, +0x2c compiler); adds the edge nodeA - nodeB
+local	FUN_00135334	param_2	nodeA	INFERRED	first node of the new edge
+local	FUN_00135334	param_3	nodeB	INFERRED	second node of the new edge
+use	FUN_00135334	iVar1	alreadyInterfere	INFERRED	InterferenceMatrix__testPair: the edge already exists	^\s*if\ \(\(param_2\ !=\ param_3\)\ \&\&\ \(iVar1\ =\ \(\(int\ \(\*\)\(\)\)FUN_00134ba4\)\(param_1,param_2,param_3\),\ iVar1\ ==\ 0\)\)\ \{$	+1
+use	FUN_00135334	uVar2	nodeVectorCount	INFERRED	filled count of the node vector	^\s*uVar2\ =\ puVar4\[1\];$	+3
+use	FUN_00135334	uVar2	nodeVectorCount	INFERRED	filled count of the node vector	^\s*uVar2\ =\ puVar4\[1\];$@2	+3
+use	FUN_00135334	uVar2	nodeVectorCount	INFERRED	filled count of the node vector	^\s*uVar2\ =\ puVar4\[1\];$@3	+3
+use	FUN_00135334	uVar2	nodeVectorCount	INFERRED	filled count of the node vector	^\s*uVar2\ =\ puVar4\[1\];$@4	+3
+use	FUN_00135334	puVar3	nodeARef	INFERRED	element reference of nodeA in the node vector	^\s*puVar3\ =\ \(undefined4\ \*\)\(param_2\ \*\ 4\ \+\ puVar4\[2\]\);$	+1
+use	FUN_00135334	puVar3	nodeARef	INFERRED	element reference of nodeA in the node vector	^\s*puVar3\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar4,param_2\);$	+1
+use	FUN_00135334	puVar3	nodeARef	INFERRED	element reference of nodeA in the node vector	^\s*\(\(int\ \(\*\)\(\)\)FUN_00134ab8\)\(\*puVar3,auStack_38,auStack_34\);$	+1
+use	FUN_00135334	puVar3	nodeARef	INFERRED	element reference of nodeA in the node vector	^\s*puVar3\ =\ \(undefined4\ \*\)\(param_2\ \*\ 4\ \+\ puVar4\[2\]\);$@2	+1
+use	FUN_00135334	puVar3	nodeARef	INFERRED	element reference of nodeA in the node vector	^\s*puVar3\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar4,param_2\);$@2	+1
+use	FUN_00135334	puVar3	nodeARef	INFERRED	element reference of nodeA in the node vector	^\s*\(\(int\ \(\*\)\(\)\)FUN_00134fc0\)\(\*puVar3,param_3,auStack_38,auStack_34,\*\(undefined4\ \*\)\(param_1\ \+\ 0x2c\)\);$	+1
+use	FUN_00135334	puVar3	nodeBRef	INFERRED	element reference of nodeB in the node vector	^\s*puVar3\ =\ \(undefined4\ \*\)\(param_3\ \*\ 4\ \+\ puVar4\[2\]\);$	+1
+use	FUN_00135334	puVar3	nodeBRef	INFERRED	element reference of nodeB in the node vector	^\s*puVar3\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar4,param_3\);$	+1
+use	FUN_00135334	puVar3	nodeBRef	INFERRED	element reference of nodeB in the node vector	^\s*\(\(int\ \(\*\)\(\)\)FUN_00134ab8\)\(\*puVar3,auStack_38,auStack_34\);$@2	+1
+use	FUN_00135334	puVar3	nodeBRef	INFERRED	element reference of nodeB in the node vector	^\s*puVar3\ =\ \(undefined4\ \*\)\(param_3\ \*\ 4\ \+\ puVar4\[2\]\);$@2	+1
+use	FUN_00135334	puVar3	nodeBRef	INFERRED	element reference of nodeB in the node vector	^\s*puVar3\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar4,param_3\);$@2	+1
+use	FUN_00135334	puVar3	nodeBRef	INFERRED	element reference of nodeB in the node vector	^\s*\(\(int\ \(\*\)\(\)\)FUN_00134fc0\)\(\*puVar3,param_2,auStack_38,auStack_34,\*\(undefined4\ \*\)\(param_1\ \+\ 0x2c\)\);$	+1
+use	FUN_00135334	puVar4	nodeVector	INFERRED	node vector header (graph +4)	^\s*puVar4\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 4\);$	+3
+use	FUN_00135334	puVar4	nodeVector	INFERRED	node vector header (graph +4)	^\s*_memset\(uVar2\ \*\ 4\ \+\ puVar4\[2\],0,\(param_2\ \-\ uVar2\)\ \*\ 4\ \+\ 4\);$	+2
+use	FUN_00135334	puVar4	nodeVector	INFERRED	node vector header (graph +4)	^\s*puVar3\ =\ \(undefined4\ \*\)\(param_2\ \*\ 4\ \+\ puVar4\[2\]\);$	+1
+use	FUN_00135334	puVar4	nodeVector	INFERRED	node vector header (graph +4)	^\s*puVar3\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar4,param_2\);$	+1
+use	FUN_00135334	puVar4	nodeVector	INFERRED	node vector header (graph +4)	^\s*puVar4\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 4\);$@2	+3
+use	FUN_00135334	puVar4	nodeVector	INFERRED	node vector header (graph +4)	^\s*_memset\(uVar2\ \*\ 4\ \+\ puVar4\[2\],0,\(param_2\ \-\ uVar2\)\ \*\ 4\ \+\ 4\);$@2	+2
+use	FUN_00135334	puVar4	nodeVector	INFERRED	node vector header (graph +4)	^\s*puVar3\ =\ \(undefined4\ \*\)\(param_2\ \*\ 4\ \+\ puVar4\[2\]\);$@2	+1
+use	FUN_00135334	puVar4	nodeVector	INFERRED	node vector header (graph +4)	^\s*puVar3\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar4,param_2\);$@2	+1
+use	FUN_00135334	puVar4	nodeVector	INFERRED	node vector header (graph +4)	^\s*puVar4\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 4\);$@3	+3
+use	FUN_00135334	puVar4	nodeVector	INFERRED	node vector header (graph +4)	^\s*_memset\(uVar2\ \*\ 4\ \+\ puVar4\[2\],0,\(param_3\ \-\ uVar2\)\ \*\ 4\ \+\ 4\);$	+2
+use	FUN_00135334	puVar4	nodeVector	INFERRED	node vector header (graph +4)	^\s*puVar3\ =\ \(undefined4\ \*\)\(param_3\ \*\ 4\ \+\ puVar4\[2\]\);$	+1
+use	FUN_00135334	puVar4	nodeVector	INFERRED	node vector header (graph +4)	^\s*puVar3\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar4,param_3\);$	+1
+use	FUN_00135334	puVar4	nodeVector	INFERRED	node vector header (graph +4)	^\s*puVar4\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 4\);$@4	+3
+use	FUN_00135334	puVar4	nodeVector	INFERRED	node vector header (graph +4)	^\s*_memset\(uVar2\ \*\ 4\ \+\ puVar4\[2\],0,\(param_3\ \-\ uVar2\)\ \*\ 4\ \+\ 4\);$@2	+2
+use	FUN_00135334	puVar4	nodeVector	INFERRED	node vector header (graph +4)	^\s*puVar3\ =\ \(undefined4\ \*\)\(param_3\ \*\ 4\ \+\ puVar4\[2\]\);$@2	+1
+use	FUN_00135334	puVar4	nodeVector	INFERRED	node vector header (graph +4)	^\s*puVar3\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar4,param_3\);$@2	+1
+local	FUN_00135334	auStack_38	neighbourLocation	INFERRED	out record of FUN_00134ab8: where in the neighbour list the other node goes (first word)
+local	FUN_00135334	auStack_34	neighbourLocationRest	INFERRED	out record of FUN_00134ab8: remaining words of the location

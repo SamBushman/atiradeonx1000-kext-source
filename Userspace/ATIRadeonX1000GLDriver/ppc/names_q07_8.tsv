@@ -55,10 +55,8 @@ local	FUN_001541f0	piVar9	newSrcB	INFERRED	role read off the web: fuse two depen
 local	FUN_001541f0	piVar10	newSrcC	INFERRED	role read off the web: fuse two dependent MUL/ADD-class instructions into one three-source instruction (sibling of FUN_00152ea8)
 use	FUN_001541f0	uVar5	savedDestSelect	INFERRED	role read off the web: fuse two dependent MUL/ADD-class instructions into one three-source instruction (sibling of FUN_00152ea8)	^\s*uVar5\ =\ local_e8;$	+1
 use	FUN_001541f0	uVar5	savedDestSelect	INFERRED	role read off the web: fuse two dependent MUL/ADD-class instructions into one three-source instruction (sibling of FUN_00152ea8)	^\s*local_e4\ =\ uVar5;$	+1
-local	FUN_001541f0	uVar12	remapComponentA	INFERRED	role read off the web: fuse two dependent MUL/ADD-class instructions into one three-source instruction (sibling of FUN_00152ea8)
 local	FUN_001541f0	uVar19	remapComponentC	INFERRED	role read off the web: fuse two dependent MUL/ADD-class instructions into one three-source instruction (sibling of FUN_00152ea8)
 local	FUN_001541f0	uVar21	compiler	INFERRED	role read off the web: fuse two dependent MUL/ADD-class instructions into one three-source instruction (sibling of FUN_00152ea8)
-local	FUN_001541f0	uVar22	remapComponentB	INFERRED	role read off the web: fuse two dependent MUL/ADD-class instructions into one three-source instruction (sibling of FUN_00152ea8)
 use	FUN_001541f0	uVar23	instFlags	INFERRED	role read off the web: fuse two dependent MUL/ADD-class instructions into one three-source instruction (sibling of FUN_00152ea8)	^\s*uVar23\ =\ param_2\[5\];$	+2
 use	FUN_001541f0	uVar23	instFlags	INFERRED	role read off the web: fuse two dependent MUL/ADD-class instructions into one three-source instruction (sibling of FUN_00152ea8)	^\s*uVar23\ =\ param_2\[5\];$@2	+1
 use	FUN_001541f0	uVar23	instFlags	INFERRED	role read off the web: fuse two dependent MUL/ADD-class instructions into one three-source instruction (sibling of FUN_00152ea8)	^\s*if\ \(\(uVar23\ \&\ 0x200\)\ !=\ 0\)\ \{$@2	+1

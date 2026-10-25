@@ -4166,8 +4166,8 @@ int FUN_00181b80(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   return;
 }
 
-/* FUN_00181f00 @ 0x181f00 (220 bytes) */
-int FUN_00181f00(compiler, block, inst)
+/* Block__flattenAndRebuildAddMulTree @ 0x181f00 (220 bytes) */
+int Block__flattenAndRebuildAddMulTree(compiler, block, inst)
   int *compiler;
   int block;
   int inst;
@@ -4629,7 +4629,7 @@ int FUN_00181f00(compiler, block, inst)
         elementRefB = (undefined4 *)Vector__elementRefGrow(vector2,prevIndex);
       }
       operandRecord2 = IRInst__getOperandRecord(inst5,*elementRefB);
-      FUN_000f33f8(&laneSelect3,*(undefined4 *)(operandRecord2 + 0x10));
+      SelectWord__fillUnusedWithFirstUsed(&laneSelect3,*(undefined4 *)(operandRecord2 + 0x10));
       lane1Select = laneSelect3 & 0xff;
       if (pairLoopIndex < *vector3) {
         vectorSize5 = vectorAlloc[2];
@@ -4655,7 +4655,7 @@ int FUN_00181f00(compiler, block, inst)
         elementRefB = (undefined4 *)Vector__elementRefGrow(vector2,pairLoopIndex);
       }
       operandRecord2 = IRInst__getOperandRecord(inst6,*elementRefB);
-      FUN_000f33f8(&laneSelect2,*(undefined4 *)(operandRecord2 + 0x10));
+      SelectWord__fillUnusedWithFirstUsed(&laneSelect2,*(undefined4 *)(operandRecord2 + 0x10));
       lane2Select = laneSelect2 & 0xff;
       operandRecord2 = IRInst__getOperandRecord(newInst,1);
       *(uint *)(operandRecord2 + 0x10) = lane1Select | 0x4040400;
@@ -4883,7 +4883,7 @@ int FUN_00181f00(compiler, block, inst)
       elementRefB = (undefined4 *)vectorAlloc2[3];
     }
     operandRecord6 = IRInst__getOperandRecord(inst8,*elementRefB);
-    FUN_000f33f8(&laneSelect1,*(undefined4 *)(operandRecord6 + 0x10));
+    SelectWord__fillUnusedWithFirstUsed(&laneSelect1,*(undefined4 *)(operandRecord6 + 0x10));
     operandRecord6 = IRInst__getOperandRecord(firstJoinInst,2);
     *(uint *)(operandRecord6 + 0x10) = laneSelect1 & 0xff | 0x4040400;
     if (*vector3 == 0) {
@@ -5226,86 +5226,89 @@ int FUN_00183ac8(param_1)
   return;
 }
 
-/* FUN_00183b9c @ 0x183b9c (1152 bytes) */
-int FUN_00183b9c(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  int param_1;
-  int param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  int param_7;
+/* Block__rebuildAddMulTreesWhereProfitable @ 0x183b9c (1152 bytes) */
+int Block__rebuildAddMulTreesWhereProfitable(rebuildState, block, staleArg3, staleArg4, staleArg5, staleArg6, opcodeInfo)
+  int rebuildState;
+  int block;
+  undefined4 staleArg3;
+  undefined4 staleArg4;
+  undefined4 staleArg5;
+  undefined4 staleArg6;
+  int opcodeInfo;
 {
+  int producerNode;
+  int opcode;
+  int nextNode;
   uint vectorFilledCount3;
   uint vectorFilledCount2;
   uint *vector3;
   uint *vector2;
   int sourceDef2;
   int sourceDef;
-  int iVar1;
+  int nodeRec;
   uint vectorFilledCount;
   int *elementRef;
-  int iVar4;
+  int curNode;
   int callResult;
-  int iVar6;
+  int opcodeKind;
   int inst;
-  uint uVar8;
+  uint nodeSlot;
   uint *vector;
-  int local_48;
-  int local_44 [8];
+  int costLow;
+  int costHigh [8];
   
-  ((int (*)())FUN_00181ab0)(param_1,param_2,param_3,param_4,param_5,param_6,param_7);
+  ((int (*)())FUN_00181ab0)(rebuildState,block,staleArg3,staleArg4,staleArg5,staleArg6,opcodeInfo);
 LAB_00183bcc:
-  ((int (*)())FUN_00181b80)(param_1,param_2,&local_48,local_44,param_5,param_6,param_7);
-  if ((local_48 < local_44[0]) &&
-     (iVar1 = *(int *)(param_1 + 8),
-     *(int *)(iVar1 + 0x14) < *(int *)(iVar1 + 0xc) - *(int *)(iVar1 + 0x10))) {
-    iVar1 = *(int *)(*(int *)(param_2 + 0x98) + 8);
-    inst = *(int *)(param_2 + 0x98);
-    if (iVar1 != 0) {
+  ((int (*)())FUN_00181b80)(rebuildState,block,&costLow,costHigh,staleArg5,staleArg6,opcodeInfo);
+  if ((costLow < costHigh[0]) &&
+     (nodeRec = *(int *)(rebuildState + 8),
+     *(int *)(nodeRec + 0x14) < *(int *)(nodeRec + 0xc) - *(int *)(nodeRec + 0x10))) {
+    nextNode = *(int *)(*(int *)(block + 0x98) + 8);
+    inst = *(int *)(block + 0x98);
+    if (nextNode != 0) {
       do {
-        iVar4 = iVar1;
+        curNode = nextNode;
         if ((*(uint *)(inst + 0x14) & 1) != 0) {
-          param_7 = *(int *)(inst + 0x88);
-          iVar1 = *(int *)(param_7 + 8);
-          if ((iVar1 == 0x13) || (iVar1 == 0x14)) {
-            iVar6 = 0x13;
+          opcodeInfo = *(int *)(inst + 0x88);
+          opcode = *(int *)(opcodeInfo + 8);
+          if ((opcode == 0x13) || (opcode == 0x14)) {
+            opcodeKind = 0x13;
           }
           else {
-            iVar6 = 0x12;
-            if (iVar1 != 0x12) goto LAB_00183fe8;
+            opcodeKind = 0x12;
+            if (opcode != 0x12) goto LAB_00183fe8;
           }
-          vector = *(uint **)(param_1 + 0x1c);
-          uVar8 = *(uint *)(inst + 0x150);
-          if (uVar8 < *vector) {
+          vector = *(uint **)(rebuildState + 0x1c);
+          nodeSlot = *(uint *)(inst + 0x150);
+          if (nodeSlot < *vector) {
             vectorFilledCount = vector[1];
-            if (vectorFilledCount <= uVar8) {
-              _memset(vectorFilledCount * 4 + vector[2],0,(uVar8 - vectorFilledCount) * 4 + 4);
-              vector[1] = uVar8 + 1;
-              param_7 = *(int *)(inst + 0x88);
+            if (vectorFilledCount <= nodeSlot) {
+              _memset(vectorFilledCount * 4 + vector[2],0,(nodeSlot - vectorFilledCount) * 4 + 4);
+              vector[1] = nodeSlot + 1;
+              opcodeInfo = *(int *)(inst + 0x88);
             }
-            elementRef = (int *)(uVar8 * 4 + vector[2]);
+            elementRef = (int *)(nodeSlot * 4 + vector[2]);
           }
           else {
-            elementRef = (int *)Vector__elementRefGrow(vector,uVar8);
-            param_7 = *(int *)(inst + 0x88);
+            elementRef = (int *)Vector__elementRefGrow(vector,nodeSlot);
+            opcodeInfo = *(int *)(inst + 0x88);
           }
-          iVar1 = *elementRef;
-          if ((((((iVar6 == *(int *)(param_7 + 8)) && (*(int *)(inst + 0x120) == 0)) &&
+          nodeRec = *elementRef;
+          if ((((((opcodeKind == *(int *)(opcodeInfo + 8)) && (*(int *)(inst + 0x120) == 0)) &&
                 ((*(uint *)(inst + 0x14) & 0x200) == 0)) &&
-               (((iVar6 != 0x12 || (*(int *)(inst + 0x124) == 0)) &&
-                ((iVar4 = IRInst__getOperandRecord(inst,0), *(int *)(iVar4 + 0x10) != DAT_001b021c &&
-                 ((iVar4 = IRInst__getOperandRecord(inst,0), *(int *)(iVar4 + 0x10) != DAT_001b0218 &&
-                  (iVar4 = IRInst__getOperandRecord(inst,0), *(int *)(iVar4 + 0x10) != DAT_001b0214)))))))) &&
-              (iVar4 = IRInst__getOperandRecord(inst,0), *(int *)(iVar4 + 0x10) != DAT_001b0210)) &&
-             ((((iVar4 = IRInst__hasSingleUse(inst,*(undefined4 *)(param_1 + 4)), iVar4 != 0 &&
-                (iVar4 = *(int *)(iVar1 + 0xc), iVar4 != 0)) &&
-               (iVar6 == *(int *)(*(int *)(iVar4 + 0x88) + 8))) &&
-              ((iVar4 = IRInst__isSourceSelectIdentity(iVar4,*(undefined4 *)(iVar1 + 0x10)), iVar4 != 0 &&
-               ((iVar6 != 0x12 ||
-                (param_7 = *(int *)(iVar1 + 0xc),
-                (*(uint *)(*(int *)(iVar1 + 0x10) * 0x18 + param_7 + 0xa0) & 2) == 0)))))))) {
-            *(undefined4 *)(iVar1 + 0x14) = 0;
+               (((opcodeKind != 0x12 || (*(int *)(inst + 0x124) == 0)) &&
+                ((curNode = IRInst__getOperandRecord(inst,0), *(int *)(curNode + 0x10) != DAT_001b021c &&
+                 ((curNode = IRInst__getOperandRecord(inst,0), *(int *)(curNode + 0x10) != DAT_001b0218 &&
+                  (curNode = IRInst__getOperandRecord(inst,0), *(int *)(curNode + 0x10) != DAT_001b0214)))))))) &&
+              (curNode = IRInst__getOperandRecord(inst,0), *(int *)(curNode + 0x10) != DAT_001b0210)) &&
+             ((((curNode = IRInst__hasSingleUse(inst,*(undefined4 *)(rebuildState + 4)), curNode != 0 &&
+                (curNode = *(int *)(nodeRec + 0xc), curNode != 0)) &&
+               (opcodeKind == *(int *)(*(int *)(curNode + 0x88) + 8))) &&
+              ((curNode = IRInst__isSourceSelectIdentity(curNode,*(undefined4 *)(nodeRec + 0x10)), curNode != 0 &&
+               ((opcodeKind != 0x12 ||
+                (opcodeInfo = *(int *)(nodeRec + 0xc),
+                (*(uint *)(*(int *)(nodeRec + 0x10) * 0x18 + opcodeInfo + 0xa0) & 2) == 0)))))))) {
+            *(undefined4 *)(nodeRec + 0x14) = 0;
           }
           sourceDef = IRInst__getOperandSource(inst,1);
           sourceDef2 = IRInst__getOperandSource(inst,2);
@@ -5326,58 +5329,58 @@ LAB_00183e40:
             callResult = SelectWord__isSplat(*(undefined4 *)(callResult + 0x10));
             if (callResult != 0) goto LAB_00183e40;
 LAB_00183e78:
-            *(int *)(iVar1 + 8) = *(int *)(iVar1 + 8) + 1;
+            *(int *)(nodeRec + 8) = *(int *)(nodeRec + 8) + 1;
           }
-          if (param_2 == *(int *)(sourceDef + 0x158)) {
-            vector2 = *(uint **)(param_1 + 0x1c);
-            uVar8 = *(uint *)(sourceDef + 0x150);
-            if (uVar8 < *vector2) {
+          if (block == *(int *)(sourceDef + 0x158)) {
+            vector2 = *(uint **)(rebuildState + 0x1c);
+            nodeSlot = *(uint *)(sourceDef + 0x150);
+            if (nodeSlot < *vector2) {
               vectorFilledCount2 = vector2[1];
-              if (vectorFilledCount2 <= uVar8) {
-                _memset(vectorFilledCount2 * 4 + vector2[2],0,(uVar8 - vectorFilledCount2) * 4 + 4);
-                vector2[1] = uVar8 + 1;
+              if (vectorFilledCount2 <= nodeSlot) {
+                _memset(vectorFilledCount2 * 4 + vector2[2],0,(nodeSlot - vectorFilledCount2) * 4 + 4);
+                vector2[1] = nodeSlot + 1;
               }
-              elementRef = (int *)(uVar8 * 4 + vector2[2]);
+              elementRef = (int *)(nodeSlot * 4 + vector2[2]);
             }
             else {
-              elementRef = (int *)Vector__elementRefGrow(vector2,uVar8);
+              elementRef = (int *)Vector__elementRefGrow(vector2,nodeSlot);
             }
-            iVar4 = *elementRef;
-            if ((iVar4 != 0) && (*(int *)(iVar4 + 0x14) == 0)) {
-              *(int *)(iVar1 + 8) = *(int *)(iVar1 + 8) + *(int *)(iVar4 + 8);
+            producerNode = *elementRef;
+            if ((producerNode != 0) && (*(int *)(producerNode + 0x14) == 0)) {
+              *(int *)(nodeRec + 8) = *(int *)(nodeRec + 8) + *(int *)(producerNode + 8);
             }
           }
-          if (param_2 == *(int *)(sourceDef2 + 0x158)) {
-            vector3 = *(uint **)(param_1 + 0x1c);
-            uVar8 = *(uint *)(sourceDef2 + 0x150);
-            if (uVar8 < *vector3) {
+          if (block == *(int *)(sourceDef2 + 0x158)) {
+            vector3 = *(uint **)(rebuildState + 0x1c);
+            nodeSlot = *(uint *)(sourceDef2 + 0x150);
+            if (nodeSlot < *vector3) {
               vectorFilledCount3 = vector3[1];
-              if (vectorFilledCount3 <= uVar8) {
-                _memset(vectorFilledCount3 * 4 + vector3[2],0,(uVar8 - vectorFilledCount3) * 4 + 4);
-                vector3[1] = uVar8 + 1;
+              if (vectorFilledCount3 <= nodeSlot) {
+                _memset(vectorFilledCount3 * 4 + vector3[2],0,(nodeSlot - vectorFilledCount3) * 4 + 4);
+                vector3[1] = nodeSlot + 1;
               }
-              elementRef = (int *)(uVar8 * 4 + vector3[2]);
+              elementRef = (int *)(nodeSlot * 4 + vector3[2]);
             }
             else {
-              elementRef = (int *)Vector__elementRefGrow(vector3,uVar8);
+              elementRef = (int *)Vector__elementRefGrow(vector3,nodeSlot);
             }
-            iVar4 = *elementRef;
-            if ((iVar4 != 0) && (*(int *)(iVar4 + 0x14) == 0)) {
-              *(int *)(iVar1 + 8) = *(int *)(iVar1 + 8) + *(int *)(iVar4 + 8);
+            producerNode = *elementRef;
+            if ((producerNode != 0) && (*(int *)(producerNode + 0x14) == 0)) {
+              *(int *)(nodeRec + 8) = *(int *)(nodeRec + 8) + *(int *)(producerNode + 8);
             }
           }
-          if (((*(int *)(iVar1 + 0x14) != 0) && (1 < *(int *)(iVar1 + 8))) &&
-             (iVar1 = ((int (*)())FUN_00181f00)(param_1,param_2,inst), iVar1 != 0)) goto LAB_00183bcc;
-          iVar4 = *(int *)(inst + 8);
+          if (((*(int *)(nodeRec + 0x14) != 0) && (1 < *(int *)(nodeRec + 8))) &&
+             (nodeRec = ((int (*)())Block__flattenAndRebuildAddMulTree)(rebuildState,block,inst), nodeRec != 0)) goto LAB_00183bcc;
+          curNode = *(int *)(inst + 8);
         }
 LAB_00183fe8:
-        iVar1 = *(int *)(iVar4 + 8);
-        inst = iVar4;
-        if (*(int *)(iVar4 + 8) == 0) break;
+        nextNode = *(int *)(curNode + 8);
+        inst = curNode;
+        if (*(int *)(curNode + 8) == 0) break;
       } while( true );
     }
   }
-  return ((int (*)())FUN_00183ac8)(param_1);
+  return ((int (*)())FUN_00183ac8)(rebuildState);
 }
 
 /* FUN_0018401c @ 0x18401c (144 bytes) */
@@ -5422,7 +5425,7 @@ int FUN_0018401c(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   while (iVar1 != 0) {
     listCount = DList__count(iVar3 + 0x90);
     if (2 < listCount) {
-      ((int (*)())FUN_00183b9c)(param_1,iVar3,param_3,param_4,param_5,param_6,param_7);
+      ((int (*)())Block__rebuildAddMulTreesWhereProfitable)(param_1,iVar3,param_3,param_4,param_5,param_6,param_7);
     }
     iVar3 = *(int *)(iVar3 + 8);
     iVar1 = *(int *)(iVar3 + 8);
@@ -6458,7 +6461,7 @@ LAB_00185afc:
       IROperand__setModifierBits(inst + 0xd4,2,addendAbs);
       callResult = IRInst__getOperandRecord(inst,3);
       *(undefined4 *)(callResult + 0x10) = addendOperandSelect;
-      FUN_000f33f8(&addendSelect3,addendSelect);
+      SelectWord__fillUnusedWithFirstUsed(&addendSelect3,addendSelect);
       callResult = IRInst__getOperandRecord(inst,3);
       *(undefined4 *)(callResult + 0x10) = addendSelect3;
                     

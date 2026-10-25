@@ -375,7 +375,7 @@ int FUN_0012bb48(pass, block)
       *allocation = arena;
       mergedBlock = allocation + 1;
       Block__ctor_ea020(mergedBlock,*(undefined4 *)(pass + 8));
-      FUN_000ec370(pass,block,mergedBlock);
+      Program__insertBlockBefore(pass,block,mergedBlock);
       mergedBlockArg = mergedBlock;
       FUN_000e8eac(block,footerBlock,mergedBlock);
       branchInst = Block__getBranchInst(block,staleArg4B,mergedBlockArg,staleArg6,staleArg7,staleArg8,a6);
@@ -862,7 +862,7 @@ int LoopInfo__matchExit(loopInfo, inst, branchHeader, outBoundOnRight)
       local_30[2] = 4;
       local_30[3] = 4;
       local_30[lane] = boundLaneSwizzle;
-      piVar6 = (int *)FUN_000f57f0(uVar4,&local_34,local_30,piVar7);
+      piVar6 = (int *)RegisterMap__findConstVector(uVar4,&local_34,local_30,piVar7);
       *(uint *)(loopInfo + 0x14) = (uint)local_30[*(int *)(loopInfo + 0x14)];
       if (piVar6 == (int *)0x0) {
         return 0;
@@ -2035,7 +2035,7 @@ int IfFooter__ctor_12e56c(param_1, param_2, compiler)
     Block__connect(puVar10,puVar15);
     Block__connect(puVar9,*(undefined4 *)(iVar7 + 0x154));
     Block__connect(puVar15,uVar13);
-    FUN_000ed63c(uVar5,puVar6);
+    IRInst__bindOperandRegisters(uVar5,puVar6);
     return;
   }
   return;
@@ -2088,7 +2088,7 @@ int FUN_0012e8c0(param_1, block, param_3)
       puVar6 = allocation + 1;
       Block__ctor_ea020(puVar6,*(undefined4 *)(param_1 + 8));
       allocation[0x2f] = block[0x2e];
-      FUN_000ec370(param_1,block,puVar6);
+      Program__insertBlockBefore(param_1,block,puVar6);
       FUN_000e9adc(predecessor,block,puVar6);
     }
   } while (block != param_3);
@@ -2184,7 +2184,7 @@ int FUN_0012eacc(program)
   operandRecord2 = IRInst__getOperandRecord(newInst,0);
   *(undefined4 *)(operandRecord2 + 0xc) = 0;
   *(int *)(operandRecord2 + 8) = newVRegB;
-  FUN_000f7870(newInst,program,1,0xffffffff,0xffffffff,0xffffffff,0xffffffff);
+  IRInst__setIntConstantOperand4(newInst,program,1,0xffffffff,0xffffffff,0xffffffff,0xffffffff);
   Program__appendInst(program,newInst,*(undefined4 *)(program + 0x3a0));
   do {
     pendingVector = *(int *)(program + 0x414);
@@ -2225,7 +2225,7 @@ int FUN_0012eacc(program)
           newSplitBlock = allocation + 1;
           Block__ctor_ea020(newSplitBlock,*(undefined4 *)(program + 8));
           allocation[0x2f] = blockCursor[0x2e];
-          FUN_000ec370(program,blockCursor,newSplitBlock);
+          Program__insertBlockBefore(program,blockCursor,newSplitBlock);
           FUN_000e9adc(predecessorBlock,blockCursor,newSplitBlock);
         }
       } while (blockCursor != lastBlock);
@@ -2292,7 +2292,7 @@ LAB_0012ed24:
     *(undefined4 *)(movDestOperand + 0xc) = 0;
     *(undefined4 *)(movDestOperand + 8) = predicateRegister;
     IRInst__setOperandRef(newInst2,1,movSource);
-    FUN_000ed63c(program,newInst2);
+    IRInst__bindOperandRegisters(program,newInst2);
     Block__insertInstAfter(containerBlock,pendingEntry,newInst2);
     DList__unlink(pendingEntry);
     while( true ) {
@@ -2349,13 +2349,13 @@ LAB_0012ed24:
       Program__insertBlockAfter(program,predecessor2,puVar9);
       ifFooterBlock = ifHeaderAlloc[0x50];
       Program__insertBlockAfter(program,puVar9,ifFooterBlock);
-      FUN_000e78c0(ifHeader,headerWordB8);
+      Block__setField0xb8AndChildren(ifHeader,headerWordB8);
       Block__connect(ifHeader,puVar9);
       FUN_000e977c(puVar8,movDestOperand,ifHeader);
       Block__connect(puVar9,ifFooterBlock);
       FUN_000e977c(predecessor2,pendingEntry,ifFooterBlock);
       Block__connect(ifFooterBlock,pendingEntry);
-      FUN_000ed63c(program,branchInst);
+      IRInst__bindOperandRegisters(program,branchInst);
       ((int (*)())IfFooter__ctor_12e56c)(predicateRegister,pendingEntry,*(undefined4 *)(program + 8));
       chainKey = FUN_0012ae1c(pendingEntry);
     }
@@ -2885,7 +2885,7 @@ LAB_0012fafc:
               DList__unlink(exitInst);
               loopFooterBlock = *(int *)(block + 0x14c);
               IRInst__setOperandRef(exitInst,1,*(undefined4 *)(*(int *)(loopFooterBlock + 0x148) + 0x8c));
-              FUN_000ed63c(pass,exitInst);
+              IRInst__bindOperandRegisters(pass,exitInst);
               Block__appendInst(loopFooterBlock,exitInst);
               nextExitInst = (int *)exitInst[2];
             }
@@ -3850,7 +3850,7 @@ int FUN_001312f4(inst, newSource, param_3, ref, compiler)
   uVar6 = *(undefined4 *)(newSource + 0x94);
   allocation[0x27] = 0x3b;
   allocation[0x26] = uVar6;
-  FUN_000f36b8(local_34,local_38);
+  WriteMask__fromUsedLanes(local_34,local_38);
   allocation[0x28] = local_34[0];
   IRInst__setOperandSource(puVar7,1,inst,0,compiler);
   operandRecord = IRInst__getOperandRecord(puVar7,1);
