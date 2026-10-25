@@ -8214,9 +8214,9 @@ int FUN_000a0f90(ctx)
   uint uVar1;
   undefined *puVar2;
   int iVar3;
-  uint uVar4;
+  uint loopCounter;
   uint uVar5;
-  int iVar6;
+  int remaining;
   
   puVar2 = PTR_FUN_001e89f0;
   *(code **)(((unsigned char *)0x00001160) + ctx) = noop_a0f80;
@@ -8224,17 +8224,17 @@ int FUN_000a0f90(ctx)
   *(undefined **)(((unsigned char *)0x00001164) + ctx) = puVar2;
   atifsResetState(ctx);
   uVar5 = *(uint *)(ctx + 0x27bc);
-  uVar4 = 0;
-  iVar6 = 0x10;
+  loopCounter = 0;
+  remaining = 0x10;
   iVar3 = ctx;
   do {
-    uVar1 = uVar4 & 0x3f;
+    uVar1 = loopCounter & 0x3f;
     *(undefined4 *)(iVar3 + 0x27c0) = 0xff;
-    uVar4 = uVar4 + 1;
+    loopCounter = loopCounter + 1;
     iVar3 = iVar3 + 4;
     uVar5 = 1 << uVar1 | uVar5;
-    iVar6 = iVar6 + -1;
-  } while (iVar6 != 0);
+    remaining = remaining + -1;
+  } while (remaining != 0);
   *(uint *)(ctx + 0x27bc) = uVar5;
   return 1;
 }
