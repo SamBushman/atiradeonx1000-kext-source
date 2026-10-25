@@ -178,7 +178,7 @@
 20f4	cxa_atexit_wrapper	r6	PASS-import	GARBAGE	
 20f4	cxa_atexit_wrapper	r7	PASS-import	GARBAGE	
 20f4	cxa_atexit_wrapper	r8	PASS-import	GARBAGE	
-23a24	FUN_00023a24	r8	PASS-indirect	GARBAGE	
+23a24	gld_emitPrimitiveVertices	r8	PASS-indirect	GARBAGE	
 23a8	atexit_common	r6	PASS-import	GARBAGE	
 23a8	atexit_common	r7	PASS-import	GARBAGE	
 23a8	atexit_common	r8	PASS-import	GARBAGE	

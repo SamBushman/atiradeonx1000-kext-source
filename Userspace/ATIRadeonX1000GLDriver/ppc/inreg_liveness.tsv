@@ -228,7 +228,7 @@
 20f4	cxa_atexit_wrapper	r6	PASS-import	__keymgr_get_and_lock_processwide_ptr	
 20f4	cxa_atexit_wrapper	r7	PASS-import	__keymgr_get_and_lock_processwide_ptr	
 20f4	cxa_atexit_wrapper	r8	PASS-import	__keymgr_get_and_lock_processwide_ptr	
-23a24	FUN_00023a24	r8	PASS-indirect	23ab4 bctrl 
+23a24	gld_emitPrimitiveVertices	r8	PASS-indirect	23ab4 bctrl 
 23a8	atexit_common	r6	PASS-import		
 23a8	atexit_common	r7	PASS-import		
 23a8	atexit_common	r8	PASS-import		
