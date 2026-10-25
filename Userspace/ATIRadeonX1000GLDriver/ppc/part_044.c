@@ -973,6 +973,15 @@ int Inst__takeOutCommonFactor(param_1, pass)
   int param_1;
   int pass;
 {
+  uint userSlotDown;
+  uint userIndex;
+  uint operandModifiers;
+  int *elementPtr;
+  int *newMul;
+  int *userInst;
+  int slotOffset;
+  int producerInst;
+  int slotByteOffsetB;
   uint vectorFilledCount2;
   uint vectorFilledCount;
   undefined4 operandIndex11;
@@ -1007,331 +1016,331 @@ int Inst__takeOutCommonFactor(param_1, pass)
   int sourceDef2;
   int *operandVReg2;
   int *operandVReg;
-  bool bVar1;
-  bool bVar2;
+  bool foundNonIdentity;
+  bool foundNonIdentityB;
   int allocation2;
   int allocation3;
   int iVar5;
   uint uVar6;
-  undefined4 *puVar7;
+  undefined4 *elementPtrB;
   int iVar8;
-  int iVar9;
-  int *piVar10;
+  int scanIndex;
+  int *operandSlotC;
   int *piVar11;
-  int iVar12;
-  int *piVar13;
+  int operandLimit;
+  int *operandModPtr;
   int operandIndex;
   int operandVReg3;
   void *inst;
-  undefined4 in_r6;
+  undefined4 staleArg4;
   undefined4 compilerCtx;
-  undefined4 in_r8;
+  undefined4 staleArg6;
   code *a7;
   int iVar17;
-  uint uVar18;
-  int iVar19;
-  int *piVar20;
-  int *piVar21;
-  int *piVar22;
-  undefined4 uVar23;
+  uint userCount;
+  int byteOffset;
+  int *chainHeadSlotC;
+  int *chainHeadSlotB;
+  int *chainEndSlotC;
+  undefined4 maskedSelect;
   uint uVar24;
-  uint *puVar25;
+  uint *modPtr;
   int *inst8;
   int operandIndex4;
   int iStack00000018;
-  undefined4 local_88;
-  undefined4 local_84;
+  undefined4 writeMaskOut;
+  undefined4 maskedSelectOut;
   int loopIndex;
   undefined4 newSource2;
   undefined4 newSource;
-  int local_74;
-  int local_70;
+  int otherOperandIdx;
+  int nextIndex;
   uint absOperand1;
-  int local_68;
+  int commonOperandIdx;
   int operandIndex10;
-  int *local_60;
-  int local_5c;
-  int local_58;
-  int local_54;
+  int *chainEndSlotA;
+  int commonSelect;
+  int otherSelect;
+  int otherOperandOffset;
   
-  uVar18 = *(uint *)(*(int *)(param_1 + 0x10) + 4);
-  iVar5 = uVar18 << 2;
+  userCount = *(uint *)(*(int *)(param_1 + 0x10) + 4);
+  iVar5 = userCount << 2;
   iStack00000018 = param_1;
   allocation2 = Arena__alloc(*(undefined4 *)(*(int *)(pass + 8) + 0x378),iVar5);
   allocation3 = Arena__alloc(*(undefined4 *)(*(int *)(pass + 8) + 0x378),iVar5);
   allocation = Arena__alloc(*(undefined4 *)(*(int *)(pass + 8) + 0x378),iVar5);
-  if (0 < (int)uVar18) {
-    uVar24 = 0;
+  if (0 < (int)userCount) {
+    userIndex = 0;
     iVar17 = 0;
-    iVar19 = 0;
+    byteOffset = 0;
     do {
       vector5 = *(uint **)(iStack00000018 + 0x10);
-      if (uVar24 < *vector5) {
+      if (userIndex < *vector5) {
         vectorFilledCount = vector5[1];
-        if (vectorFilledCount <= uVar24) {
-          _memset(vectorFilledCount * 4 + vector5[2],0,(uVar24 - vectorFilledCount) * 4 + 4);
-          vector5[1] = uVar24 + 1;
+        if (vectorFilledCount <= userIndex) {
+          _memset(vectorFilledCount * 4 + vector5[2],0,(userIndex - vectorFilledCount) * 4 + 4);
+          vector5[1] = userIndex + 1;
         }
-        puVar7 = (undefined4 *)(iVar19 + vector5[2]);
+        elementPtrB = (undefined4 *)(byteOffset + vector5[2]);
       }
       else {
-        puVar7 = (undefined4 *)Vector__elementRefGrow(vector5,uVar24);
+        elementPtrB = (undefined4 *)Vector__elementRefGrow(vector5,userIndex);
       }
-      uVar24 = uVar24 + 1;
-      inst7 = (int *)*puVar7;
-      bVar2 = false;
-      *(int **)(iVar19 + allocation2) = inst7;
-      *(undefined4 *)(iVar19 + allocation3) = 0;
-      *(undefined4 *)(iVar19 + allocation) = 0;
+      userIndex = userIndex + 1;
+      inst7 = (int *)*elementPtrB;
+      foundNonIdentityB = false;
+      *(int **)(byteOffset + allocation2) = inst7;
+      *(undefined4 *)(byteOffset + allocation3) = 0;
+      *(undefined4 *)(byteOffset + allocation) = 0;
       while ((((*(int *)(inst7[0x22] + 8) == 0x13 && ((inst7[5] & 0x200U) == 0)) &&
               (operandIndex8 = IRInst__hasSingleUse(inst7,pass), operandIndex8 != 0)) && (inst7[0x48] == 0))) {
         vector = (int *)inst7[4];
         if (*vector == 0) {
-          puVar7 = (undefined4 *)Vector__elementRefGrow(vector,0);
+          elementPtrB = (undefined4 *)Vector__elementRefGrow(vector,0);
         }
         else {
           if (vector[1] == 0) {
             *(undefined4 *)vector[2] = 0;
             vector[1] = 1;
           }
-          puVar7 = (undefined4 *)vector[2];
+          elementPtrB = (undefined4 *)vector[2];
         }
-        inst6 = (int *)*puVar7;
-        bVar1 = false;
-        puVar25 = (uint *)(inst6 + 0x2e);
+        inst6 = (int *)*elementPtrB;
+        foundNonIdentity = false;
+        modPtr = (uint *)(inst6 + 0x2e);
         for (operandIndex8 = 1; iVar8 = (**(code **)(*inst6 + 0x14))(inst6), operandIndex8 <= iVar8;
             operandIndex8 = operandIndex8 + 1) {
           operandVReg = (int *)IRInst__getOperandSource(inst6,operandIndex8);
           if (inst7 == operandVReg) {
             operandRecord2 = IRInst__getOperandRecord(inst6,operandIndex8);
             iVar8 = SelectWord__isIdentity(*(undefined4 *)(operandRecord2 + 0x10));
-            if ((iVar8 == 0) || ((*puVar25 & 2) != 0)) {
-              bVar1 = true;
+            if ((iVar8 == 0) || ((*modPtr & 2) != 0)) {
+              foundNonIdentity = true;
             }
-            *(int *)(iVar19 + allocation) = operandIndex8;
+            *(int *)(byteOffset + allocation) = operandIndex8;
           }
-          puVar25 = puVar25 + 6;
+          modPtr = modPtr + 6;
         }
-        if (bVar1) break;
-        bVar2 = true;
+        if (foundNonIdentity) break;
+        foundNonIdentityB = true;
         inst7 = inst6;
       }
-      if (bVar2) {
+      if (foundNonIdentityB) {
         if (((inst7[5] & 0x200U) != 0) ||
            ((*(int *)(inst7[0x22] + 8) != 0x12 && (*(int *)(inst7[0x22] + 8) != 0x14))))
         goto LAB_0015a760;
-        *(undefined4 *)(iVar19 + allocation3) = inst7;
+        *(undefined4 *)(byteOffset + allocation3) = inst7;
         iVar17 = iVar17 + 1;
       }
       else if (((*(int *)(inst7[0x22] + 8) == 0x14) && ((inst7[5] & 0x200U) == 0)) &&
               ((operandIndex8 = IRInst__getOperandSource(inst7,1), iStack00000018 == operandIndex8 ||
                (operandIndex8 = IRInst__getOperandSource(inst7,2), iStack00000018 == operandIndex8)))) {
-        *(undefined4 *)(iVar19 + allocation3) = inst7;
+        *(undefined4 *)(byteOffset + allocation3) = inst7;
         iVar8 = IRInst__getOperandSource(inst7,1);
         operandIndex8 = 2;
         if (iStack00000018 == iVar8) {
           operandIndex8 = 1;
         }
         iVar17 = iVar17 + 1;
-        *(int *)(iVar19 + allocation) = operandIndex8;
+        *(int *)(byteOffset + allocation) = operandIndex8;
       }
       else {
 LAB_0015a760:
-        *(undefined4 *)(iVar19 + allocation2) = 0;
+        *(undefined4 *)(byteOffset + allocation2) = 0;
       }
-      iVar19 = iVar19 + 4;
-    } while (uVar18 != uVar24);
+      byteOffset = byteOffset + 4;
+    } while (userCount != userIndex);
     if (1 < iVar17) {
       iVar17 = 0;
-      uVar23 = 0;
+      maskedSelect = 0;
       do {
-        iVar19 = iVar17 * 4;
-        piVar21 = (int *)(allocation2 + iVar19);
-        if ((*(int *)(allocation2 + iVar19) == 0) ||
-           ((*(uint *)(*(int *)(allocation2 + iVar19) + 0x14) & 1) == 0)) {
+        slotOffset = iVar17 * 4;
+        chainHeadSlotB = (int *)(allocation2 + slotOffset);
+        if ((*(int *)(allocation2 + slotOffset) == 0) ||
+           ((*(uint *)(*(int *)(allocation2 + slotOffset) + 0x14) & 1) == 0)) {
 LAB_0015a9bc:
           iVar17 = iVar17 + 1;
         }
         else {
-          local_60 = (int *)(allocation3 + iVar19);
+          chainEndSlotA = (int *)(allocation3 + slotOffset);
           operandIndex9 = 1;
-          if ((*(uint *)(*(int *)(allocation3 + iVar19) + 0x14) & 1) == 0) goto LAB_0015a9bc;
-          for (; iVar8 = (**(code **)(*(int *)*piVar21 + 0x14))((int *)*piVar21), operandIndex9 <= iVar8;
+          if ((*(uint *)(*(int *)(allocation3 + slotOffset) + 0x14) & 1) == 0) goto LAB_0015a9bc;
+          for (; iVar8 = (**(code **)(*(int *)*chainHeadSlotB + 0x14))((int *)*chainHeadSlotB), operandIndex9 <= iVar8;
               operandIndex9 = operandIndex9 + 1) {
-            iVar8 = IRInst__getOperandSource(*piVar21,operandIndex9);
+            iVar8 = IRInst__getOperandSource(*chainHeadSlotB,operandIndex9);
             if (iStack00000018 == iVar8) {
-              iVar8 = IRInst__getOperandRecord(*piVar21,operandIndex9);
-              local_5c = *(int *)(iVar8 + 0x10);
-              absOperand1 = *(uint *)(operandIndex9 * 0x18 + *piVar21 + 0xa0) >> 1 & 1;
-              local_68 = operandIndex9;
+              iVar8 = IRInst__getOperandRecord(*chainHeadSlotB,operandIndex9);
+              commonSelect = *(int *)(iVar8 + 0x10);
+              absOperand1 = *(uint *)(operandIndex9 * 0x18 + *chainHeadSlotB + 0xa0) >> 1 & 1;
+              commonOperandIdx = operandIndex9;
               goto LAB_0015aa4c;
             }
           }
-          local_68 = 0;
+          commonOperandIdx = 0;
           absOperand1 = 0;
 LAB_0015aa4c:
-          local_70 = iVar17 + 1;
-          iVar17 = local_70;
-          if (local_70 < (int)uVar18) {
-            iVar17 = local_70 * 4;
-            piVar22 = (int *)(allocation3 + iVar17);
-            piVar20 = (int *)(allocation2 + iVar17);
-            operandIndex10 = 3 - local_68;
-            piVar10 = (int *)(allocation + iVar17);
-            iVar9 = 0;
-            local_54 = operandIndex10 * 0x18 + 0x80;
+          nextIndex = iVar17 + 1;
+          iVar17 = nextIndex;
+          if (nextIndex < (int)userCount) {
+            slotByteOffsetB = nextIndex * 4;
+            chainEndSlotC = (int *)(allocation3 + slotByteOffsetB);
+            chainHeadSlotC = (int *)(allocation2 + slotByteOffsetB);
+            operandIndex10 = 3 - commonOperandIdx;
+            operandSlotC = (int *)(allocation + slotByteOffsetB);
+            scanIndex = 0;
+            otherOperandOffset = operandIndex10 * 0x18 + 0x80;
             do {
-              piVar11 = (int *)*piVar20;
+              piVar11 = (int *)*chainHeadSlotC;
               if ((((piVar11 != (int *)0x0) && ((piVar11[5] & 1U) != 0)) &&
-                  ((*(uint *)(*piVar22 + 0x14) & 1) != 0)) &&
-                 ((piVar11 != (int *)*piVar21 && (*local_60 == *piVar22)))) {
-                if ((*(int *)(allocation + iVar19) != *piVar10) &&
-                   (((*(int *)(*(int *)(*local_60 + 0x88) + 8) != 0x14 ||
-                     (*(int *)(allocation + iVar19) == 3)) || (*piVar10 == 3)))) {
+                  ((*(uint *)(*chainEndSlotC + 0x14) & 1) != 0)) &&
+                 ((piVar11 != (int *)*chainHeadSlotB && (*chainEndSlotA == *chainEndSlotC)))) {
+                if ((*(int *)(allocation + slotOffset) != *operandSlotC) &&
+                   (((*(int *)(*(int *)(*chainEndSlotA + 0x88) + 8) != 0x14 ||
+                     (*(int *)(allocation + slotOffset) == 3)) || (*operandSlotC == 3)))) {
                   uVar24 = 0;
                   for (operandIndex2 = 1; iVar8 = (**(code **)(*piVar11 + 0x14))(piVar11), operandIndex2 <= iVar8;
                       operandIndex2 = operandIndex2 + 1) {
-                    iVar8 = IRInst__getOperandSource(*piVar20,operandIndex2);
+                    iVar8 = IRInst__getOperandSource(*chainHeadSlotC,operandIndex2);
                     if (iStack00000018 == iVar8) {
-                      iVar8 = IRInst__getOperandRecord(*piVar20,operandIndex2);
-                      local_58 = *(int *)(iVar8 + 0x10);
-                      piVar11 = (int *)*piVar20;
+                      iVar8 = IRInst__getOperandRecord(*chainHeadSlotC,operandIndex2);
+                      otherSelect = *(int *)(iVar8 + 0x10);
+                      piVar11 = (int *)*chainHeadSlotC;
                       uVar24 = (uint)piVar11[operandIndex2 * 6 + 0x28] >> 1 & 1;
-                      if ((local_58 == local_5c) && (uVar6 = absOperand1, absOperand1 == uVar24))
+                      if ((otherSelect == commonSelect) && (uVar6 = absOperand1, absOperand1 == uVar24))
                       goto LAB_0015abb0;
                     }
                     else {
-                      piVar11 = (int *)*piVar20;
+                      piVar11 = (int *)*chainHeadSlotC;
                     }
                   }
-                  local_74 = 0;
+                  otherOperandIdx = 0;
                   uVar6 = uVar24;
-                  operandIndex2 = local_74;
+                  operandIndex2 = otherOperandIdx;
 LAB_0015abb0:
-                  local_74 = operandIndex2;
-                  if ((local_58 == local_5c) && (absOperand1 == uVar6)) {
+                  otherOperandIdx = operandIndex2;
+                  if ((otherSelect == commonSelect) && (absOperand1 == uVar6)) {
                     *(int *)(pass + 0x1cc) = *(int *)(pass + 0x1cc) + 1;
-                    inst1 = *piVar21;
-                    if (inst1 != *local_60) {
+                    inst1 = *chainHeadSlotB;
+                    if (inst1 != *chainEndSlotA) {
                       vector2 = *(int **)(inst1 + 0x10);
                       if (*vector2 == 0) {
-                        puVar7 = (undefined4 *)Vector__elementRefGrow(vector2,0);
-                        inst1 = *piVar21;
+                        elementPtrB = (undefined4 *)Vector__elementRefGrow(vector2,0);
+                        inst1 = *chainHeadSlotB;
                       }
                       else {
                         if (vector2[1] == 0) {
                           *(undefined4 *)vector2[2] = 0;
                           vector2[1] = 1;
-                          inst1 = *piVar21;
+                          inst1 = *chainHeadSlotB;
                         }
-                        puVar7 = (undefined4 *)vector2[2];
+                        elementPtrB = (undefined4 *)vector2[2];
                       }
-                      inst8 = (int *)*puVar7;
-                      piVar13 = inst8 + 0x26;
+                      inst8 = (int *)*elementPtrB;
+                      operandModPtr = inst8 + 0x26;
                       newSource = IRInst__getOperandSource(inst1,operandIndex10);
-                      operandRecord = IRInst__getOperandRecord(*piVar21,operandIndex10);
-                      piVar11 = (int *)*piVar21;
+                      operandRecord = IRInst__getOperandRecord(*chainHeadSlotB,operandIndex10);
+                      userInst = (int *)*chainHeadSlotB;
                       iVar17 = *(int *)(operandRecord + 0x10);
-                      uVar6 = *(uint *)((int)piVar11 + local_54 + 0x20);
-                      uVar24 = piVar11[local_68 * 6 + 0x28];
-                      (**(code **)(*piVar11 + 0xc))
-                                (piVar11,1,*(undefined4 *)(pass + 8),in_r6,compilerCtx,in_r8,uVar6,
-                                 *(code **)(*piVar11 + 0xc));
-                      for (operandIndex5 = 1; iVar12 = (**(code **)(*inst8 + 0x14))(inst8),
-                          operandIndex5 <= iVar12; operandIndex5 = operandIndex5 + 1) {
-                        iVar12 = IRInst__getOperandSource(inst8,operandIndex5);
-                        if (iVar12 == *piVar21) {
+                      operandModifiers = *(uint *)((int)userInst + otherOperandOffset + 0x20);
+                      uVar24 = userInst[commonOperandIdx * 6 + 0x28];
+                      (**(code **)(*userInst + 0xc))
+                                (userInst,1,*(undefined4 *)(pass + 8),staleArg4,compilerCtx,staleArg6,operandModifiers,
+                                 *(code **)(*userInst + 0xc));
+                      for (operandIndex5 = 1; operandLimit = (**(code **)(*inst8 + 0x14))(inst8),
+                          operandIndex5 <= operandLimit; operandIndex5 = operandIndex5 + 1) {
+                        operandLimit = IRInst__getOperandSource(inst8,operandIndex5);
+                        if (operandLimit == *chainHeadSlotB) {
                           compilerCtx = *(undefined4 *)(pass + 8);
-                          in_r6 = 1;
+                          staleArg4 = 1;
                           IRInst__setOperandSource(inst8,operandIndex5,newSource,1,compilerCtx);
                           if (operandIndex5 == 0) {
                             inst8[0x27] = iVar17;
                           }
                           else {
-                            iVar12 = IRInst__getOperandRecord(inst8,operandIndex5);
-                            *(int *)(iVar12 + 0x10) = iVar17;
+                            operandLimit = IRInst__getOperandRecord(inst8,operandIndex5);
+                            *(int *)(operandLimit + 0x10) = iVar17;
                           }
-                          IROperand__setModifierBits(piVar13 + 3,2,uVar6 >> 1 & 1);
-                          IROperand__setModifierBits(piVar13 + 3,1,(uVar24 ^ uVar6) & 1 ^ piVar13[8] & 1U);
+                          IROperand__setModifierBits(operandModPtr + 3,2,operandModifiers >> 1 & 1);
+                          IROperand__setModifierBits(operandModPtr + 3,1,(uVar24 ^ operandModifiers) & 1 ^ operandModPtr[8] & 1U);
                         }
-                        piVar13 = piVar13 + 6;
+                        operandModPtr = operandModPtr + 6;
                       }
                     }
-                    inst2 = *piVar20;
-                    if (inst2 != *piVar22) {
+                    inst2 = *chainHeadSlotC;
+                    if (inst2 != *chainEndSlotC) {
                       vector3 = *(int **)(inst2 + 0x10);
                       if (*vector3 == 0) {
-                        puVar7 = (undefined4 *)Vector__elementRefGrow(vector3,0);
-                        inst2 = *piVar20;
+                        elementPtrB = (undefined4 *)Vector__elementRefGrow(vector3,0);
+                        inst2 = *chainHeadSlotC;
                       }
                       else {
                         if (vector3[1] == 0) {
                           *(undefined4 *)vector3[2] = 0;
                           vector3[1] = 1;
-                          inst2 = *piVar20;
+                          inst2 = *chainHeadSlotC;
                         }
-                        puVar7 = (undefined4 *)vector3[2];
+                        elementPtrB = (undefined4 *)vector3[2];
                       }
-                      inst9 = (int *)*puVar7;
-                      operandIndex6 = 3 - local_74;
-                      piVar13 = inst9 + 0x26;
+                      inst9 = (int *)*elementPtrB;
+                      operandIndex6 = 3 - otherOperandIdx;
+                      operandModPtr = inst9 + 0x26;
                       newSource2 = IRInst__getOperandSource(inst2,operandIndex6);
-                      operandRecord = IRInst__getOperandRecord(*piVar20,operandIndex6);
-                      piVar11 = (int *)*piVar20;
+                      operandRecord = IRInst__getOperandRecord(*chainHeadSlotC,operandIndex6);
+                      userInst = (int *)*chainHeadSlotC;
                       iVar17 = *(int *)(operandRecord + 0x10);
-                      a7 = *(code **)(*piVar11 + 0xc);
-                      uVar6 = piVar11[operandIndex6 * 6 + 0x28];
-                      uVar24 = piVar11[local_74 * 6 + 0x28];
-                      (*a7)(piVar11,1,*(undefined4 *)(pass + 8),in_r6,compilerCtx,in_r8,*piVar11,a7);
-                      for (operandIndex7 = 1; iVar12 = (**(code **)(*inst9 + 0x14))(inst9),
-                          operandIndex7 <= iVar12; operandIndex7 = operandIndex7 + 1) {
-                        iVar12 = IRInst__getOperandSource(inst9,operandIndex7);
-                        if (iVar12 == *piVar20) {
+                      a7 = *(code **)(*userInst + 0xc);
+                      operandModifiers = userInst[operandIndex6 * 6 + 0x28];
+                      uVar24 = userInst[otherOperandIdx * 6 + 0x28];
+                      (*a7)(userInst,1,*(undefined4 *)(pass + 8),staleArg4,compilerCtx,staleArg6,*userInst,a7);
+                      for (operandIndex7 = 1; operandLimit = (**(code **)(*inst9 + 0x14))(inst9),
+                          operandIndex7 <= operandLimit; operandIndex7 = operandIndex7 + 1) {
+                        operandLimit = IRInst__getOperandSource(inst9,operandIndex7);
+                        if (operandLimit == *chainHeadSlotC) {
                           IRInst__setOperandSource(inst9,operandIndex7,newSource2,1,*(undefined4 *)(pass + 8));
                           if (operandIndex7 == 0) {
                             inst9[0x27] = iVar17;
                           }
                           else {
-                            iVar12 = IRInst__getOperandRecord(inst9,operandIndex7);
-                            *(int *)(iVar12 + 0x10) = iVar17;
+                            operandLimit = IRInst__getOperandRecord(inst9,operandIndex7);
+                            *(int *)(operandLimit + 0x10) = iVar17;
                           }
-                          IROperand__setModifierBits(piVar13 + 3,2,uVar6 >> 1 & 1);
-                          IROperand__setModifierBits(piVar13 + 3,1,(uVar24 ^ uVar6) & 1 ^ piVar13[8] & 1U);
+                          IROperand__setModifierBits(operandModPtr + 3,2,operandModifiers >> 1 & 1);
+                          IROperand__setModifierBits(operandModPtr + 3,1,(uVar24 ^ operandModifiers) & 1 ^ operandModPtr[8] & 1U);
                         }
-                        piVar13 = piVar13 + 6;
+                        operandModPtr = operandModPtr + 6;
                       }
                     }
-                    piVar11 = IRInst__create(0x13,*(undefined4 *)(pass + 8));
-                    IRInst__setOperandSource(piVar11,1,iStack00000018,1,*(undefined4 *)(pass + 8));
-                    operandRecord = IRInst__getOperandRecord(piVar11,1);
-                    *(int *)(operandRecord + 0x10) = local_5c;
-                    IROperand__setModifierBits(piVar11 + 0x29,2,absOperand1);
-                    piVar11[0x26] = 0;
-                    piVar11[0x25] = piVar11[0x53];
-                    operandRecord = IRInst__getOperandRecord(*piVar22,0);
-                    piVar11[0x27] = *(int *)(operandRecord + 0x10);
-                    piVar11[0x48] = *(int *)(*piVar22 + 0x120);
-                    piVar11[0x49] = *(int *)(*piVar22 + 0x124);
-                    iVar17 = *piVar22;
-                    iVar8 = *(int *)(*(int *)(iVar17 + 0x10) + 4);
-                    uVar24 = iVar8 - 1;
-                    if (-1 < (int)uVar24) {
-                      iVar12 = uVar24 * 4;
+                    newMul = IRInst__create(0x13,*(undefined4 *)(pass + 8));
+                    IRInst__setOperandSource(newMul,1,iStack00000018,1,*(undefined4 *)(pass + 8));
+                    operandRecord = IRInst__getOperandRecord(newMul,1);
+                    *(int *)(operandRecord + 0x10) = commonSelect;
+                    IROperand__setModifierBits(newMul + 0x29,2,absOperand1);
+                    newMul[0x26] = 0;
+                    newMul[0x25] = newMul[0x53];
+                    operandRecord = IRInst__getOperandRecord(*chainEndSlotC,0);
+                    newMul[0x27] = *(int *)(operandRecord + 0x10);
+                    newMul[0x48] = *(int *)(*chainEndSlotC + 0x120);
+                    newMul[0x49] = *(int *)(*chainEndSlotC + 0x124);
+                    producerInst = *chainEndSlotC;
+                    iVar8 = *(int *)(*(int *)(producerInst + 0x10) + 4);
+                    userSlotDown = iVar8 - 1;
+                    if (-1 < (int)userSlotDown) {
+                      operandLimit = userSlotDown * 4;
                       loopIndex = 0;
                       do {
-                        vector6 = *(uint **)(iVar17 + 0x10);
-                        if (uVar24 < *vector6) {
+                        vector6 = *(uint **)(producerInst + 0x10);
+                        if (userSlotDown < *vector6) {
                           vectorFilledCount2 = vector6[1];
-                          if (vectorFilledCount2 <= uVar24) {
-                            _memset(vectorFilledCount2 * 4 + vector6[2],0,(uVar24 - vectorFilledCount2) * 4 + 4);
-                            vector6[1] = uVar24 + 1;
+                          if (vectorFilledCount2 <= userSlotDown) {
+                            _memset(vectorFilledCount2 * 4 + vector6[2],0,(userSlotDown - vectorFilledCount2) * 4 + 4);
+                            vector6[1] = userSlotDown + 1;
                           }
-                          piVar13 = (int *)(iVar12 + vector6[2]);
+                          elementPtr = (int *)(operandLimit + vector6[2]);
                         }
                         else {
-                          piVar13 = (int *)Vector__elementRefGrow(vector6,uVar24);
+                          elementPtr = (int *)Vector__elementRefGrow(vector6,userSlotDown);
                         }
-                        inst3 = *piVar13;
+                        inst3 = *elementPtr;
                         operandIndex4 = *(int *)(inst3 + 0x84);
                         if ((*(uint *)(inst3 + 0x14) & 0x200) == 0) {
 LAB_0015b040:
@@ -1339,8 +1348,8 @@ LAB_0015b040:
                             operandIndex = 1;
                             do {
                               operandVReg3 = IRInst__getOperandSource(inst3,operandIndex);
-                              if (operandVReg3 == *piVar22) {
-                                IRInst__setOperandSource(inst3,operandIndex,piVar11,1,*(undefined4 *)(pass + 8));
+                              if (operandVReg3 == *chainEndSlotC) {
+                                IRInst__setOperandSource(inst3,operandIndex,newMul,1,*(undefined4 *)(pass + 8));
                                 break;
                               }
                               operandIndex = operandIndex + 1;
@@ -1350,139 +1359,139 @@ LAB_0015b040:
                         else {
                           sourceDef2 = IRInst__getOperandSource(inst3,operandIndex4);
                           operandIndex4 = operandIndex4 + -1;
-                          if (sourceDef2 != *piVar22) goto LAB_0015b040;
-                          IRInst__setExtraOperandSource(inst3,piVar11,1,*(undefined4 *)(pass + 8));
+                          if (sourceDef2 != *chainEndSlotC) goto LAB_0015b040;
+                          IRInst__setExtraOperandSource(inst3,newMul,1,*(undefined4 *)(pass + 8));
                         }
-                        uVar24 = uVar24 - 1;
-                        iVar12 = iVar12 + -4;
+                        userSlotDown = userSlotDown - 1;
+                        operandLimit = operandLimit + -4;
                         loopIndex = loopIndex + 1;
                         if (iVar8 == loopIndex) break;
-                        iVar17 = *piVar22;
+                        producerInst = *chainEndSlotC;
                       } while( true );
                     }
-                    operandRecord = IRInst__getOperandRecord(piVar11,0);
-                    WriteMask__fromSelectWord(&local_88,*(undefined4 *)(operandRecord + 0x10));
-                    SelectWord__maskUnused(&local_84,0x10203,local_88);
-                    uVar23 = local_84;
-                    operandRecord = IRInst__getOperandRecord(piVar11,2);
-                    *(undefined4 *)(operandRecord + 0x10) = uVar23;
-                    Block__insertInstAfter(*(undefined4 *)(*piVar22 + 0x158),*piVar22,piVar11);
-                    if (*piVar21 == *local_60) {
-                      newSource3 = (int *)*piVar22;
+                    operandRecord = IRInst__getOperandRecord(newMul,0);
+                    WriteMask__fromSelectWord(&writeMaskOut,*(undefined4 *)(operandRecord + 0x10));
+                    SelectWord__maskUnused(&maskedSelectOut,0x10203,writeMaskOut);
+                    maskedSelect = maskedSelectOut;
+                    operandRecord = IRInst__getOperandRecord(newMul,2);
+                    *(undefined4 *)(operandRecord + 0x10) = maskedSelect;
+                    Block__insertInstAfter(*(undefined4 *)(*chainEndSlotC + 0x158),*chainEndSlotC,newMul);
+                    if (*chainHeadSlotB == *chainEndSlotA) {
+                      newSource3 = (int *)*chainEndSlotC;
 LAB_0015b134:
                       (**(code **)(*newSource3 + 0xc))(newSource3,1,*(undefined4 *)(pass + 8));
                       inst = IRInst__create(0x12,*(undefined4 *)(pass + 8));
-                      sourceDef = IRInst__getOperandSource(*piVar22,3);
+                      sourceDef = IRInst__getOperandSource(*chainEndSlotC,3);
                       IRInst__setOperandSource(inst,2,sourceDef,1,*(undefined4 *)(pass + 8));
-                      operandRecord3 = IRInst__getOperandRecord(*piVar22,3);
+                      operandRecord3 = IRInst__getOperandRecord(*chainEndSlotC,3);
                       IRInst__getOrCreateOperandRecord(inst,2,operandRecord3,*(undefined4 *)(pass + 8));
-                      if ((*piVar21 == *local_60) && (local_68 == 1)) {
-                        inst4 = *piVar22;
+                      if ((*chainHeadSlotB == *chainEndSlotA) && (commonOperandIdx == 1)) {
+                        inst4 = *chainEndSlotC;
 LAB_0015b1ec:
                         sourceDef = IRInst__getOperandSource(inst4,2);
                         IRInst__setOperandSource(inst,1,sourceDef,1,*(undefined4 *)(pass + 8));
-                        inst5 = *piVar22;
+                        inst5 = *chainEndSlotC;
                         operandIndex11 = 2;
                       }
                       else {
-                        inst4 = *piVar22;
-                        if ((*piVar20 == inst4) && (local_74 == 1)) goto LAB_0015b1ec;
+                        inst4 = *chainEndSlotC;
+                        if ((*chainHeadSlotC == inst4) && (otherOperandIdx == 1)) goto LAB_0015b1ec;
                         sourceDef = IRInst__getOperandSource(inst4,1);
                         IRInst__setOperandSource(inst,1,sourceDef,1,*(undefined4 *)(pass + 8));
-                        inst5 = *piVar22;
+                        inst5 = *chainEndSlotC;
                         operandIndex11 = 1;
                       }
                       operandRecord3 = IRInst__getOperandRecord(inst5,operandIndex11);
                       IRInst__getOrCreateOperandRecord(inst,1,operandRecord3,*(undefined4 *)(pass + 8));
                       IROperand__setModifierBits((int)inst + 0xa4,1,
-                                   (*(uint *)(*piVar22 + 0xd0) ^ *(uint *)(*piVar22 + 0xb8)) & 1);
+                                   (*(uint *)(*chainEndSlotC + 0xd0) ^ *(uint *)(*chainEndSlotC + 0xb8)) & 1);
                       *(undefined4 *)((int)inst + 0x98) = 0;
                       *(undefined4 *)((int)inst + 0x94) = *(undefined4 *)((int)inst + 0x14c);
-                      operandRecord = IRInst__getOperandRecord(*piVar22,0);
-                      in_r6 = 1;
+                      operandRecord = IRInst__getOperandRecord(*chainEndSlotC,0);
+                      staleArg4 = 1;
                       *(undefined4 *)((int)inst + 0x9c) = *(undefined4 *)(operandRecord + 0x10);
                       compilerCtx = *(undefined4 *)(pass + 8);
-                      IRInst__setOperandSource(piVar11,2,inst,1,compilerCtx);
-                      Block__insertInstBefore(piVar11[0x56],piVar11,inst);
+                      IRInst__setOperandSource(newMul,2,inst,1,compilerCtx);
+                      Block__insertInstBefore(newMul[0x56],newMul,inst);
                     }
                     else {
-                      newSource3 = (int *)*piVar22;
-                      if ((int *)*piVar20 == newSource3) goto LAB_0015b134;
+                      newSource3 = (int *)*chainEndSlotC;
+                      if ((int *)*chainHeadSlotC == newSource3) goto LAB_0015b134;
                       compilerCtx = *(undefined4 *)(pass + 8);
-                      in_r6 = 1;
-                      IRInst__setOperandSource(piVar11,2,newSource3,1,compilerCtx);
-                      *(undefined4 *)(*piVar22 + 0x120) = 0;
-                      *(undefined4 *)(*piVar22 + 0x124) = 0;
+                      staleArg4 = 1;
+                      IRInst__setOperandSource(newMul,2,newSource3,1,compilerCtx);
+                      *(undefined4 *)(*chainEndSlotC + 0x120) = 0;
+                      *(undefined4 *)(*chainEndSlotC + 0x124) = 0;
                     }
-                    *piVar20 = (int)piVar11;
-                    *piVar22 = 0;
-                    *piVar10 = 0;
-                    while (newSource3 = piVar11, *(int *)(newSource3[0x22] + 8) == 0x13) {
+                    *chainHeadSlotC = (int)newMul;
+                    *chainEndSlotC = 0;
+                    *operandSlotC = 0;
+                    while (newSource3 = newMul, *(int *)(newSource3[0x22] + 8) == 0x13) {
                       uVar24 = newSource3[5];
                       if ((uVar24 & 0x200) != 0) goto LAB_0015b3f0;
                       hasSingleUse = IRInst__hasSingleUse(newSource3,pass);
                       if ((hasSingleUse == 0) || (newSource3[0x48] != 0)) break;
                       vector4 = (int *)newSource3[4];
                       if (*vector4 == 0) {
-                        puVar7 = (undefined4 *)Vector__elementRefGrow(vector4,0);
+                        elementPtrB = (undefined4 *)Vector__elementRefGrow(vector4,0);
                       }
                       else {
                         if (vector4[1] == 0) {
                           *(undefined4 *)vector4[2] = 0;
                           vector4[1] = 1;
                         }
-                        puVar7 = (undefined4 *)vector4[2];
+                        elementPtrB = (undefined4 *)vector4[2];
                       }
-                      piVar11 = (int *)*puVar7;
-                      bVar2 = false;
-                      puVar25 = (uint *)(piVar11 + 0x2e);
-                      for (operandIndex3 = 1; iVar8 = (**(code **)(*piVar11 + 0x14))(piVar11),
+                      newMul = (int *)*elementPtrB;
+                      foundNonIdentityB = false;
+                      modPtr = (uint *)(newMul + 0x2e);
+                      for (operandIndex3 = 1; iVar8 = (**(code **)(*newMul + 0x14))(newMul),
                           operandIndex3 <= iVar8; operandIndex3 = operandIndex3 + 1) {
-                        operandVReg2 = (int *)IRInst__getOperandSource(piVar11,operandIndex3);
+                        operandVReg2 = (int *)IRInst__getOperandSource(newMul,operandIndex3);
                         if (operandVReg2 == newSource3) {
-                          operandRecord2 = IRInst__getOperandRecord(piVar11,operandIndex3);
+                          operandRecord2 = IRInst__getOperandRecord(newMul,operandIndex3);
                           iVar8 = SelectWord__isIdentity(*(undefined4 *)(operandRecord2 + 0x10));
-                          if ((iVar8 == 0) || ((*puVar25 & 2) != 0)) {
-                            bVar2 = true;
+                          if ((iVar8 == 0) || ((*modPtr & 2) != 0)) {
+                            foundNonIdentityB = true;
                           }
-                          *piVar10 = operandIndex3;
+                          *operandSlotC = operandIndex3;
                         }
-                        puVar25 = puVar25 + 6;
+                        modPtr = modPtr + 6;
                       }
-                      if (bVar2) break;
+                      if (foundNonIdentityB) break;
                     }
                     uVar24 = newSource3[5];
 LAB_0015b3f0:
                     if (((uVar24 & 0x200) == 0) &&
                        ((*(int *)(newSource3[0x22] + 8) == 0x12 ||
                         (*(int *)(newSource3[0x22] + 8) == 0x14)))) {
-                      *piVar22 = (int)newSource3;
+                      *chainEndSlotC = (int)newSource3;
                     }
                     else {
-                      *piVar20 = 0;
+                      *chainHeadSlotC = 0;
                     }
-                    if ((*(uint *)(*piVar21 + 0x14) & 1) == 0) {
-                      uVar23 = 1;
-                      iVar17 = local_70;
+                    if ((*(uint *)(*chainHeadSlotB + 0x14) & 1) == 0) {
+                      maskedSelect = 1;
+                      iVar17 = nextIndex;
                       break;
                     }
-                    uVar23 = 1;
+                    maskedSelect = 1;
                   }
                 }
               }
-              iVar9 = iVar9 + 1;
-              piVar20 = piVar20 + 1;
-              piVar10 = piVar10 + 1;
-              piVar22 = piVar22 + 1;
-              iVar17 = local_70;
-            } while (uVar18 - local_70 != iVar9);
+              scanIndex = scanIndex + 1;
+              chainHeadSlotC = chainHeadSlotC + 1;
+              operandSlotC = operandSlotC + 1;
+              chainEndSlotC = chainEndSlotC + 1;
+              iVar17 = nextIndex;
+            } while (userCount - nextIndex != scanIndex);
           }
         }
-        if ((int)uVar18 <= iVar17) {
+        if ((int)userCount <= iVar17) {
           Arena__free(*(undefined4 *)(*(int *)(pass + 8) + 0x378),allocation);
           Arena__free(*(undefined4 *)(*(int *)(pass + 8) + 0x378),allocation3);
           Arena__free(*(undefined4 *)(*(int *)(pass + 8) + 0x378),allocation2);
-          return uVar23;
+          return maskedSelect;
         }
       } while( true );
     }

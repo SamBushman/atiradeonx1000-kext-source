@@ -100,15 +100,15 @@ LAB_000c7584:
 }
 
 /* ilEmitShadowCompare @ 0xc7650 (680 bytes) */
-int ilEmitShadowCompare(programRecord, param_2, coordinateOperand, coordinateExtraWordPtr, unitIndex, copyExtraWord, outCursor, param_8)
+int ilEmitShadowCompare(programRecord, unusedArgR4, coordinateOperand, coordinateExtraWordPtr, unitIndex, copyExtraWord, outCursor, unusedArgR10)
   int programRecord;
-  undefined4 param_2;
+  undefined4 unusedArgR4;
   uint *coordinateOperand;
   uint *coordinateExtraWordPtr;
   uint unitIndex;
   int copyExtraWord;
   uint *outCursor;
-  undefined4 param_8;
+  undefined4 unusedArgR10;
 {
   uint coordinateOperandWord0;
   uint programRecordWord184;
@@ -191,13 +191,13 @@ int ilEmitShadowCompare(programRecord, param_2, coordinateOperand, coordinateExt
 }
 
 /* FUN_000c7930 @ 0xc7930 (2004 bytes) */
-int FUN_000c7930(param_1, param_2, scanTokenWord, param_4, param_5, param_6, opcodeTimes4)
+int FUN_000c7930(param_1, param_2, scanTokenWord, unusedArgR6, unusedArgR7, unusedArgR8, opcodeTimes4)
   undefined4 *param_1;
   int param_2;
   undefined4 scanTokenWord;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
+  undefined4 unusedArgR6;
+  undefined4 unusedArgR7;
+  undefined4 unusedArgR8;
   uint opcodeTimes4;
 {
   uint loopIndex;

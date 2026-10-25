@@ -2667,7 +2667,7 @@ int FUN_000da0c0(param_1, param_2)
     puStack00000018[2] = 0;
     return;
   }
-  FUN_000e1a48(iVar1,uVar2,puStack0000001c[0xc],uVar3,0,0,puStack0000001c[0xf],puStack0000001c[0x10]
+  Compiler__init_e1a48(iVar1,uVar2,puStack0000001c[0xc],uVar3,0,0,puStack0000001c[0xf],puStack0000001c[0x10]
                ,puStack0000001c[0x11],puStack0000001c[0x12],puStack0000001c[0x13],
                puStack0000001c[0xe]);
   puStack00000018[2] = iVar1;
@@ -2826,7 +2826,7 @@ int FUN_000da4b8(param_1, param_2)
     puStack00000018[2] = 0;
     return;
   }
-  FUN_000e1a48(iVar1,uVar2,puStack0000001c[0xc],uVar3,0,0,puStack0000001c[0xf],puStack0000001c[0x10]
+  Compiler__init_e1a48(iVar1,uVar2,puStack0000001c[0xc],uVar3,0,0,puStack0000001c[0xf],puStack0000001c[0x10]
                ,puStack0000001c[0x11],puStack0000001c[0x12],puStack0000001c[0x13],
                puStack0000001c[0xe]);
   puStack00000018[2] = iVar1;

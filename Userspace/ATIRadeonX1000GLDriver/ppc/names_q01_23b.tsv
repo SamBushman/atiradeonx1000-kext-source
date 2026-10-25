@@ -1,0 +1,2 @@
+func	FUN_0002ee30	gld_updateTextureSamplerState	INFERRED	incremental texture hardware-state update: re-derives the size words (falling back to gld_updateTextureHardwareState when they changed), the max-anisotropy/filter bits, wrap modes, depth-texture mode and border colour from the level records
+func	FUN_0002ebc0	gld_applyAnisotropyOverride	INFERRED	applies the context-wide anisotropy override (ctx+0x2a8c/+0x2a90) to the texture bound to a unit and re-derives its filter and wrap bits

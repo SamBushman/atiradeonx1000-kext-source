@@ -4,8 +4,8 @@ d0398	d039c	vsDisassembleVertexProgram
 d4ec8	d4ecc	scDumpPixelProgram
 da180	da184	FUN_000da0c0
 da578	da57c	FUN_000da4b8
-e1a08	e1a0c	FUN_000e1920
-e1b30	e1b34	FUN_000e1a48
+e1a08	e1a0c	Compiler__init_e1920
+e1b30	e1b34	Compiler__init_e1a48
 e1bf0	e1bf4	Compiler__setHardwareFamily
 e1c20	e1c24	Compiler__setHardwareFamily
 e21b8	e21bc	FUN_000e2094
@@ -90,7 +90,7 @@ ee618	ee61c	Program__ctor_ee29c
 ee718	ee71c	Program__ctor_ee29c
 ee748	ee764	Program__ctor_ee29c
 ee780	ee7a0	FUN_000eec50
-ee830	ee850	FUN_000ee7a0
+ee830	ee850	Program__buildBlockArrayByKey
 eede8	eee08	FUN_000eec50
 ef038	ef058	FUN_000eee4c
 ef79c	ef7a0	FUN_000ef498
@@ -526,7 +526,7 @@ ffd5c	ffd60	FUN_000fd5c8
 182010	18202c	Block__flattenAndRebuildAddMulTree
 182040	182060	Block__flattenAndRebuildAddMulTree
 183a98	183a9c	Block__flattenAndRebuildAddMulTree
-1840ac	1840cc	FUN_0018401c
+1840ac	1840cc	pass_height_reduction
 18421c	184238	FUN_0018413c
 184250	18426c	FUN_0018413c
 184290	1842b0	FUN_0018413c

@@ -85,7 +85,7 @@ int KhanPs__vslot86(param_1, param_2, param_3, param_4, param_5, param_6, param_
   undefined4 param_6;
   undefined4 param_7;
 {
-  FUN_000f4a84(*(undefined4 *)(*(int *)(param_5 + 0x6c4) + 0x3ac),param_3,param_4,param_4,param_5,
+  Emitter__allocateConstantSlot(*(undefined4 *)(*(int *)(param_5 + 0x6c4) + 0x3ac),param_3,param_4,param_4,param_5,
                param_6,param_7);
   return;
 }
@@ -106,7 +106,7 @@ int KhanVs__vslot86(param_1, param_2, param_3, param_4, param_5, param_6, param_
   undefined4 param_6;
   undefined4 param_7;
 {
-  FUN_000f4a84(*(undefined4 *)(*(int *)(param_5 + 0x6c4) + 0x3ac),param_3,param_4,param_4,param_5,
+  Emitter__allocateConstantSlot(*(undefined4 *)(*(int *)(param_5 + 0x6c4) + 0x3ac),param_3,param_4,param_4,param_5,
                param_6,param_7);
   return;
 }
