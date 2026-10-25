@@ -1830,69 +1830,69 @@ int FUN_000f7b10(vector, param_2, param_3, param_4, param_5, param_6, param_7)
   return uVar2;
 }
 
-/* FUN_000f7bf4 @ 0xf7bf4 (228 bytes) */
-int FUN_000f7bf4(param_1, param_2)
-  undefined4 *param_1;
-  int param_2;
+/* DominatorTree__ctor_f7bf4 @ 0xf7bf4 (228 bytes) */
+int DominatorTree__ctor_f7bf4(domInfo, program)
+  undefined4 *domInfo;
+  int program;
 {
   int listCount;
-  int iVar1;
+  int arrayBytes;
   undefined4 allocation;
-  int iVar3;
+  int compiler;
   
-  param_1[8] = param_2;
-  listCount = DList__count(param_2 + 0x37c);
-  param_1[7] = listCount;
-  iVar3 = *(int *)(param_1[8] + 8);
-  iVar1 = listCount * 4 + 4;
-  param_1[9] = iVar3;
-  allocation = Arena__alloc(*(undefined4 *)(iVar3 + 0x378),iVar1);
-  param_1[2] = allocation;
-  allocation = Arena__alloc(*(undefined4 *)(param_1[9] + 0x378),iVar1);
-  param_1[1] = allocation;
-  allocation = Arena__alloc(*(undefined4 *)(param_1[9] + 0x378),iVar1);
-  param_1[4] = allocation;
-  allocation = Arena__alloc(*(undefined4 *)(param_1[9] + 0x378),iVar1);
-  param_1[3] = allocation;
-  allocation = Arena__alloc(*(undefined4 *)(param_1[9] + 0x378),iVar1);
-  *param_1 = allocation;
-  allocation = Arena__alloc(*(undefined4 *)(param_1[9] + 0x378),param_1[7] * 4 + 4);
-  param_1[6] = allocation;
-  allocation = Arena__alloc(*(undefined4 *)(param_1[9] + 0x378),param_1[7] * 4 + 4);
-  param_1[5] = allocation;
+  domInfo[8] = program;
+  listCount = DList__count(program + 0x37c);
+  domInfo[7] = listCount;
+  compiler = *(int *)(domInfo[8] + 8);
+  arrayBytes = listCount * 4 + 4;
+  domInfo[9] = compiler;
+  allocation = Arena__alloc(*(undefined4 *)(compiler + 0x378),arrayBytes);
+  domInfo[2] = allocation;
+  allocation = Arena__alloc(*(undefined4 *)(domInfo[9] + 0x378),arrayBytes);
+  domInfo[1] = allocation;
+  allocation = Arena__alloc(*(undefined4 *)(domInfo[9] + 0x378),arrayBytes);
+  domInfo[4] = allocation;
+  allocation = Arena__alloc(*(undefined4 *)(domInfo[9] + 0x378),arrayBytes);
+  domInfo[3] = allocation;
+  allocation = Arena__alloc(*(undefined4 *)(domInfo[9] + 0x378),arrayBytes);
+  *domInfo = allocation;
+  allocation = Arena__alloc(*(undefined4 *)(domInfo[9] + 0x378),domInfo[7] * 4 + 4);
+  domInfo[6] = allocation;
+  allocation = Arena__alloc(*(undefined4 *)(domInfo[9] + 0x378),domInfo[7] * 4 + 4);
+  domInfo[5] = allocation;
   return;
 }
 
-/* FUN_000f7cd8 @ 0xf7cd8 (228 bytes) */
-int FUN_000f7cd8(param_1, param_2)
-  undefined4 *param_1;
-  int param_2;
+/* DominatorTree__ctor_f7cd8 @ 0xf7cd8 (228 bytes) */
+int DominatorTree__ctor_f7cd8(domInfo, program)
+  undefined4 *domInfo;
+  int program;
 {
   int listCount;
-  int iVar1;
+  int arrayBytes;
   undefined4 allocation;
-  int iVar3;
+  int compiler;
   
-  param_1[8] = param_2;
-  listCount = DList__count(param_2 + 0x37c);
-  param_1[7] = listCount;
-  iVar3 = *(int *)(param_1[8] + 8);
-  iVar1 = listCount * 4 + 4;
-  param_1[9] = iVar3;
-  allocation = Arena__alloc(*(undefined4 *)(iVar3 + 0x378),iVar1);
-  param_1[2] = allocation;
-  allocation = Arena__alloc(*(undefined4 *)(param_1[9] + 0x378),iVar1);
-  param_1[1] = allocation;
-  allocation = Arena__alloc(*(undefined4 *)(param_1[9] + 0x378),iVar1);
-  param_1[4] = allocation;
-  allocation = Arena__alloc(*(undefined4 *)(param_1[9] + 0x378),iVar1);
-  param_1[3] = allocation;
-  allocation = Arena__alloc(*(undefined4 *)(param_1[9] + 0x378),iVar1);
-  *param_1 = allocation;
-  allocation = Arena__alloc(*(undefined4 *)(param_1[9] + 0x378),param_1[7] * 4 + 4);
-  param_1[6] = allocation;
-  allocation = Arena__alloc(*(undefined4 *)(param_1[9] + 0x378),param_1[7] * 4 + 4);
-  param_1[5] = allocation;
+  domInfo[8] = program;
+  listCount = DList__count(program + 0x37c);
+  domInfo[7] = listCount;
+  compiler = *(int *)(domInfo[8] + 8);
+  arrayBytes = listCount * 4 + 4;
+  domInfo[9] = compiler;
+  allocation = Arena__alloc(*(undefined4 *)(compiler + 0x378),arrayBytes);
+  domInfo[2] = allocation;
+  allocation = Arena__alloc(*(undefined4 *)(domInfo[9] + 0x378),arrayBytes);
+  domInfo[1] = allocation;
+  allocation = Arena__alloc(*(undefined4 *)(domInfo[9] + 0x378),arrayBytes);
+  domInfo[4] = allocation;
+  allocation = Arena__alloc(*(undefined4 *)(domInfo[9] + 0x378),arrayBytes);
+  domInfo[3] = allocation;
+  allocation = Arena__alloc(*(undefined4 *)(domInfo[9] + 0x378),arrayBytes);
+  *domInfo = allocation;
+  allocation = Arena__alloc(*(undefined4 *)(domInfo[9] + 0x378),domInfo[7] * 4 + 4);
+  domInfo[6] = allocation;
+  allocation = Arena__alloc(*(undefined4 *)(domInfo[9] + 0x378),domInfo[7] * 4 + 4);
+  domInfo[5] = allocation;
   return;
 }
 
@@ -1947,81 +1947,81 @@ int DominatorTree__computeDominanceFrontiers(domInfo)
   return;
 }
 
-/* FUN_000f7f1c @ 0xf7f1c (296 bytes) */
-int FUN_000f7f1c(param_1)
-  undefined4 *param_1;
+/* DominatorTree__free_f7f1c @ 0xf7f1c (296 bytes) */
+int DominatorTree__free_f7f1c(domInfo)
+  undefined4 *domInfo;
 {
   int iVar1;
-  int iVar2;
-  int iVar3;
+  int bucketNode;
+  int bucketArray;
   uint loopIndex;
-  int iVar5;
+  int nextBucketNode;
   
   loopIndex = 0;
-  iVar3 = param_1[5];
+  bucketArray = domInfo[5];
   do {
     iVar1 = loopIndex * 4;
-    iVar2 = *(int *)(iVar1 + iVar3);
-    while ((iVar2 != 0 && (iVar5 = *(int *)(iVar2 + 4), iVar5 != 0))) {
-      Arena__free(*(undefined4 *)(iVar2 + -4),iVar2 + -4);
-      *(int *)(iVar1 + param_1[5]) = iVar5;
-      iVar3 = param_1[5];
-      iVar2 = *(int *)(iVar1 + iVar3);
+    bucketNode = *(int *)(iVar1 + bucketArray);
+    while ((bucketNode != 0 && (nextBucketNode = *(int *)(bucketNode + 4), nextBucketNode != 0))) {
+      Arena__free(*(undefined4 *)(bucketNode + -4),bucketNode + -4);
+      *(int *)(iVar1 + domInfo[5]) = nextBucketNode;
+      bucketArray = domInfo[5];
+      bucketNode = *(int *)(iVar1 + bucketArray);
     }
-    iVar1 = *(int *)(iVar1 + iVar3);
+    iVar1 = *(int *)(iVar1 + bucketArray);
     if (iVar1 != 0) {
       Arena__free(*(undefined4 *)(iVar1 + -4),iVar1 + -4);
-      iVar3 = param_1[5];
+      bucketArray = domInfo[5];
     }
     loopIndex = loopIndex + 1;
-  } while (loopIndex <= (uint)param_1[7]);
-  Arena__free(*(undefined4 *)(param_1[9] + 0x378),iVar3);
-  Arena__free(*(undefined4 *)(param_1[9] + 0x378),param_1[6]);
-  Arena__free(*(undefined4 *)(param_1[9] + 0x378),*param_1);
-  Arena__free(*(undefined4 *)(param_1[9] + 0x378),param_1[3]);
-  Arena__free(*(undefined4 *)(param_1[9] + 0x378),param_1[4]);
-  Arena__free(*(undefined4 *)(param_1[9] + 0x378),param_1[1]);
-  Arena__free(*(undefined4 *)(param_1[9] + 0x378),param_1[2]);
-  param_1[6] = 0;
+  } while (loopIndex <= (uint)domInfo[7]);
+  Arena__free(*(undefined4 *)(domInfo[9] + 0x378),bucketArray);
+  Arena__free(*(undefined4 *)(domInfo[9] + 0x378),domInfo[6]);
+  Arena__free(*(undefined4 *)(domInfo[9] + 0x378),*domInfo);
+  Arena__free(*(undefined4 *)(domInfo[9] + 0x378),domInfo[3]);
+  Arena__free(*(undefined4 *)(domInfo[9] + 0x378),domInfo[4]);
+  Arena__free(*(undefined4 *)(domInfo[9] + 0x378),domInfo[1]);
+  Arena__free(*(undefined4 *)(domInfo[9] + 0x378),domInfo[2]);
+  domInfo[6] = 0;
   return;
 }
 
-/* FUN_000f8044 @ 0xf8044 (296 bytes) */
-int FUN_000f8044(param_1)
-  undefined4 *param_1;
+/* DominatorTree__free @ 0xf8044 (296 bytes) */
+int DominatorTree__free(domInfo)
+  undefined4 *domInfo;
 {
   int iVar1;
-  int iVar2;
-  int iVar3;
+  int bucketNode;
+  int bucketArray;
   uint loopIndex;
-  int iVar5;
+  int nextBucketNode;
   
   loopIndex = 0;
-  iVar3 = param_1[5];
+  bucketArray = domInfo[5];
   do {
     iVar1 = loopIndex * 4;
-    iVar2 = *(int *)(iVar1 + iVar3);
-    while ((iVar2 != 0 && (iVar5 = *(int *)(iVar2 + 4), iVar5 != 0))) {
-      Arena__free(*(undefined4 *)(iVar2 + -4),iVar2 + -4);
-      *(int *)(iVar1 + param_1[5]) = iVar5;
-      iVar3 = param_1[5];
-      iVar2 = *(int *)(iVar1 + iVar3);
+    bucketNode = *(int *)(iVar1 + bucketArray);
+    while ((bucketNode != 0 && (nextBucketNode = *(int *)(bucketNode + 4), nextBucketNode != 0))) {
+      Arena__free(*(undefined4 *)(bucketNode + -4),bucketNode + -4);
+      *(int *)(iVar1 + domInfo[5]) = nextBucketNode;
+      bucketArray = domInfo[5];
+      bucketNode = *(int *)(iVar1 + bucketArray);
     }
-    iVar1 = *(int *)(iVar1 + iVar3);
+    iVar1 = *(int *)(iVar1 + bucketArray);
     if (iVar1 != 0) {
       Arena__free(*(undefined4 *)(iVar1 + -4),iVar1 + -4);
-      iVar3 = param_1[5];
+      bucketArray = domInfo[5];
     }
     loopIndex = loopIndex + 1;
-  } while (loopIndex <= (uint)param_1[7]);
-  Arena__free(*(undefined4 *)(param_1[9] + 0x378),iVar3);
-  Arena__free(*(undefined4 *)(param_1[9] + 0x378),param_1[6]);
-  Arena__free(*(undefined4 *)(param_1[9] + 0x378),*param_1);
-  Arena__free(*(undefined4 *)(param_1[9] + 0x378),param_1[3]);
-  Arena__free(*(undefined4 *)(param_1[9] + 0x378),param_1[4]);
-  Arena__free(*(undefined4 *)(param_1[9] + 0x378),param_1[1]);
-  Arena__free(*(undefined4 *)(param_1[9] + 0x378),param_1[2]);
-  param_1[6] = 0;
+  } while (loopIndex <= (uint)domInfo[7]);
+  Arena__free(*(undefined4 *)(domInfo[9] + 0x378),bucketArray);
+  Arena__free(*(undefined4 *)(domInfo[9] + 0x378),domInfo[6]);
+  Arena__free(*(undefined4 *)(domInfo[9] + 0x378),*domInfo);
+  Arena__free(*(undefined4 *)(domInfo[9] + 0x378),domInfo[3]);
+  Arena__free(*(undefined4 *)(domInfo[9] + 0x378),domInfo[4]);
+  Arena__free(*(undefined4 *)(domInfo[9] + 0x378),domInfo[1]);
+  Arena__free(*(undefined4 *)(domInfo[9] + 0x378),domInfo[2]);
+  domInfo[6] = 0;
   return;
 }
 
@@ -2344,12 +2344,12 @@ int FUN_000f88b4(param_1)
   allocation = (int *)Arena__alloc(arena,0x2c);
   *allocation = arena;
   piVar2 = allocation + 1;
-  ((int (*)())FUN_000f7cd8)(piVar2,param_1);
+  ((int (*)())DominatorTree__ctor_f7cd8)(piVar2,param_1);
   ((int (*)())DominatorTree__compute)(piVar2);
   if (piVar2 == (int *)0x0) {
     return;
   }
-  ((int (*)())FUN_000f8044)(piVar2);
+  ((int (*)())DominatorTree__free)(piVar2);
   iVar3 = *allocation;
   if ((*(int *)(iVar3 + 0x28) != 0) && (piVar2 = *(int **)(iVar3 + 0x14), piVar2 == allocation)) {
     _memset(piVar2,0,*(int *)(iVar3 + 8) - (int)piVar2);
@@ -3696,75 +3696,77 @@ LAB_000fab1c:
   return newInst;
 }
 
-/* FUN_000fadc4 @ 0xfadc4 (240 bytes) */
-int FUN_000fadc4(param_1, inst, param_3, param_4, vector, param_6, param_7)
-  int param_1;
+/* Program__createIfBlock @ 0xfadc4 (240 bytes) */
+int Program__createIfBlock(program, inst, blockKey, elseTarget, vector, scopeStack, sourceArg)
+  int program;
   undefined4 inst;
-  undefined4 param_3;
-  undefined4 param_4;
+  undefined4 blockKey;
+  undefined4 elseTarget;
   uint *vector;
-  int param_6;
-  undefined4 param_7;
+  int scopeStack;
+  undefined4 sourceArg;
 {
+  uint scopeCount;
+  int *scopeTop;
   undefined4 arena;
   int operandRecord2;
-  undefined1 uVar1;
+  undefined1 broadcastByte;
   int loopCounter;
   undefined4 *allocation;
   int operandRecord;
-  int *piVar5;
-  undefined4 *puVar6;
-  undefined4 uVar7;
-  uint uVar8;
+  int *vectorSlot;
+  undefined4 *ifHeader;
+  undefined4 broadcastSelect;
+  uint vectorCount;
   int loopCounterB;
   undefined4 local_48 [8];
   
-  arena = *(undefined4 *)(*(int *)(param_1 + 8) + 0x374);
+  arena = *(undefined4 *)(*(int *)(program + 8) + 0x374);
   allocation = (undefined4 *)Arena__alloc(arena,0x15c);
   *allocation = arena;
-  puVar6 = allocation + 1;
-  IfHeader__ctor_ea6d0(puVar6,inst,param_4,0,*(undefined4 *)(param_1 + 8));
-  Block__setField0xb8AndChildren(puVar6,param_3);
+  ifHeader = allocation + 1;
+  IfHeader__ctor_ea6d0(ifHeader,inst,elseTarget,0,*(undefined4 *)(program + 8));
+  Block__setField0xb8AndChildren(ifHeader,blockKey);
   local_48[0] = DAT_001aa9a8;
-  ((int (*)())FUN_000fa958)(param_1,5,1,param_7,inst,1,DAT_001aa9dc,local_48,param_6,1,puVar6);
+  ((int (*)())FUN_000fa958)(program,5,1,sourceArg,inst,1,DAT_001aa9dc,local_48,scopeStack,1,ifHeader);
   operandRecord = IRInst__getOperandRecord(inst,1);
   loopCounter = 0;
   loopCounterB = 4;
   (*(unsigned char *)((unsigned char *)&(local_48[0]) + 0)) = (undefined1)((uint)*(undefined4 *)(operandRecord + 0x10) >> 0x18);
-  uVar1 = (*(unsigned char *)((unsigned char *)&(local_48[0]) + 0));
+  broadcastByte = (*(unsigned char *)((unsigned char *)&(local_48[0]) + 0));
   local_48[0] = *(undefined4 *)(operandRecord + 0x10);
   do {
-    *(undefined1 *)((int)local_48 + loopCounter) = uVar1;
-    uVar7 = local_48[0];
+    *(undefined1 *)((int)local_48 + loopCounter) = broadcastByte;
+    broadcastSelect = local_48[0];
     loopCounter = loopCounter + 1;
     loopCounterB = loopCounterB + -1;
   } while (loopCounterB != 0);
   operandRecord2 = IRInst__getOperandRecord(inst,1);
-  *(undefined4 *)(operandRecord2 + 0x10) = uVar7;
-  IRInst__bindOperandRegisters(param_1,inst);
-  uVar8 = 0;
+  *(undefined4 *)(operandRecord2 + 0x10) = broadcastSelect;
+  IRInst__bindOperandRegisters(program,inst);
+  vectorCount = 0;
   if (vector[1] != 0) {
     allocation[0x53] = 0;
-    uVar8 = vector[1];
+    vectorCount = vector[1];
   }
-  if (uVar8 < *vector) {
-    _memset((void *)(uVar8 * 4 + vector[2]),0,4);
-    piVar5 = (int *)(uVar8 * 4 + vector[2]);
-    vector[1] = uVar8 + 1;
+  if (vectorCount < *vector) {
+    _memset((void *)(vectorCount * 4 + vector[2]),0,4);
+    vectorSlot = (int *)(vectorCount * 4 + vector[2]);
+    vector[1] = vectorCount + 1;
   }
   else {
-    piVar5 = (int *)Vector__elementRefGrow(vector,uVar8);
+    vectorSlot = (int *)Vector__elementRefGrow(vector,vectorCount);
   }
-  *piVar5 = (int)puVar6;
-  uVar8 = *(uint *)(param_6 + 4);
-  if (uVar8 != 0) {
-    piVar5 = (int *)0x0;
-    if (uVar8 - 1 < uVar8) {
-      piVar5 = (int *)((uVar8 - 1) * 4 + *(int *)(param_6 + 8));
+  *vectorSlot = (int)ifHeader;
+  scopeCount = *(uint *)(scopeStack + 4);
+  if (scopeCount != 0) {
+    scopeTop = (int *)0x0;
+    if (scopeCount - 1 < scopeCount) {
+      scopeTop = (int *)((scopeCount - 1) * 4 + *(int *)(scopeStack + 8));
     }
-    *(int *)(*piVar5 + 300) = *(int *)(*piVar5 + 300) + 1;
+    *(int *)(*scopeTop + 300) = *(int *)(*scopeTop + 300) + 1;
   }
-  return puVar6;
+  return ifHeader;
 }
 
 /* Program__createConstantVReg @ 0xfafa4 (652 bytes) */
@@ -3899,15 +3901,17 @@ int Program__createConstantVReg(program, ilRegisterType, registerIndex, valueCou
   return;
 }
 
-/* FUN_000fb230 @ 0xfb230 (420 bytes) */
-int FUN_000fb230(program, ilReader)
+/* Program__loadDefaultConstants @ 0xfb230 (420 bytes) */
+int Program__loadDefaultConstants(program, ilReader)
   int program;
   undefined4 ilReader;
 {
-  int iVar1;
-  uint uVar2;
-  int iVar3;
-  int iVar4;
+  int floatConstCount;
+  int intConstCount;
+  int boolConstCount;
+  uint programKindSet;
+  int nextConstIndex;
+  int constIndex;
   int local_48;
   undefined4 local_44;
   undefined4 local_40;
@@ -3917,40 +3921,40 @@ int FUN_000fb230(program, ilReader)
   float local_30;
   float local_2c;
   
-  uVar2 = *(uint *)(program + 0x30) & 1 | *(uint *)(program + 0x30) >> 0xe & 1;
-  iVar1 = FUN_000d9fc0(*(undefined4 *)(*(int *)(program + 8) + 0x398),uVar2);
-  if (0 < iVar1) {
-    iVar4 = 0;
+  programKindSet = *(uint *)(program + 0x30) & 1 | *(uint *)(program + 0x30) >> 0xe & 1;
+  boolConstCount = FUN_000d9fc0(*(undefined4 *)(*(int *)(program + 8) + 0x398),programKindSet);
+  if (0 < boolConstCount) {
+    constIndex = 0;
     do {
-      FUN_000da070(*(undefined4 *)(*(int *)(program + 8) + 0x398),uVar2,iVar4,1,&local_48);
-      ILReader__appendBoolConst(ilReader,iVar4,(uint)(local_48 != 0));
-      iVar3 = iVar4 + 1;
-      ((int (*)())Program__createConstantVReg)(program,0,iVar4,1,&local_48);
-      iVar4 = iVar3;
-    } while (iVar1 != iVar3);
+      FUN_000da070(*(undefined4 *)(*(int *)(program + 8) + 0x398),programKindSet,constIndex,1,&local_48);
+      ILReader__appendBoolConst(ilReader,constIndex,(uint)(local_48 != 0));
+      nextConstIndex = constIndex + 1;
+      ((int (*)())Program__createConstantVReg)(program,0,constIndex,1,&local_48);
+      constIndex = nextConstIndex;
+    } while (boolConstCount != nextConstIndex);
   }
-  iVar1 = FUN_000d9fa0(*(undefined4 *)(*(int *)(program + 8) + 0x398),uVar2);
-  if (0 < iVar1) {
-    iVar4 = 0;
+  intConstCount = FUN_000d9fa0(*(undefined4 *)(*(int *)(program + 8) + 0x398),programKindSet);
+  if (0 < intConstCount) {
+    constIndex = 0;
     do {
-      FUN_000da028(*(undefined4 *)(*(int *)(program + 8) + 0x398),uVar2,iVar4,4,&local_48);
-      ILReader__appendIntConst(ilReader,iVar4,local_48,local_44,local_40,local_3c);
-      iVar3 = iVar4 + 1;
-      ((int (*)())Program__createConstantVReg)(program,2,iVar4,4,&local_48);
-      iVar4 = iVar3;
-    } while (iVar1 != iVar3);
+      FUN_000da028(*(undefined4 *)(*(int *)(program + 8) + 0x398),programKindSet,constIndex,4,&local_48);
+      ILReader__appendIntConst(ilReader,constIndex,local_48,local_44,local_40,local_3c);
+      nextConstIndex = constIndex + 1;
+      ((int (*)())Program__createConstantVReg)(program,2,constIndex,4,&local_48);
+      constIndex = nextConstIndex;
+    } while (intConstCount != nextConstIndex);
   }
-  iVar1 = FUN_000d9f80(*(undefined4 *)(*(int *)(program + 8) + 0x398),uVar2);
-  if (0 < iVar1) {
-    iVar4 = 0;
+  floatConstCount = FUN_000d9f80(*(undefined4 *)(*(int *)(program + 8) + 0x398),programKindSet);
+  if (0 < floatConstCount) {
+    constIndex = 0;
     do {
-      FUN_000d9fe0(*(undefined4 *)(*(int *)(program + 8) + 0x398),uVar2,iVar4,4,&local_38);
-      ((void (*)())ILReader__appendFloatConst)(ilReader,iVar4,(double)local_38,(double)local_34,(double)local_30,(double)local_2c
+      FUN_000d9fe0(*(undefined4 *)(*(int *)(program + 8) + 0x398),programKindSet,constIndex,4,&local_38);
+      ((void (*)())ILReader__appendFloatConst)(ilReader,constIndex,(double)local_38,(double)local_34,(double)local_30,(double)local_2c
                   );
-      iVar3 = iVar4 + 1;
-      ((int (*)())Program__createConstantVReg)(program,1,iVar4,4,&local_38);
-      iVar4 = iVar3;
-    } while (iVar1 != iVar3);
+      nextConstIndex = constIndex + 1;
+      ((int (*)())Program__createConstantVReg)(program,1,constIndex,4,&local_38);
+      constIndex = nextConstIndex;
+    } while (floatConstCount != nextConstIndex);
   }
   return;
 }
@@ -5499,14 +5503,14 @@ int FUN_000fd5c8(program, ilReader)
   DListNode__init(local_68);
   *(undefined4 *)(program + 0x3d4) = 0;
   *(undefined4 *)(program + 0x3e4) = 0;
-  ((int (*)())FUN_000fb230)(program,ilReader);
+  ((int (*)())Program__loadDefaultConstants)(program,ilReader);
   local_a4 = (uint *****)0x0;
   local_ac = 0;
 switchD_000fdaf0_caseD_2:
   iVar34 = ILReader__nextInstruction(ilReader);
   if (iVar34 == 0) {
 code_r0x00103c40:
-    FUN_000ec728(program);
+    Program__splitMixedSourceKinds(program);
     Block__connect(currentBlock,*(undefined4 *)(program + 0x3a8));
     *(uint *)(program + 0x30) = *(uint *)(program + 0x30) | 2;
     FUN_0012e8c0(program,*(undefined4 *)(program + 0x3a0),*(undefined4 *)(program + 0x3a8));
@@ -6991,13 +6995,13 @@ joined_r0x00103afc:
       pppuVar42 = ppppuVar45[0x4f];
       pppuVar42[0x2e] = (uint **)scopeLevel;
       Program__insertBlockAfter(program,previousBlock,pppuVar42);
-      piVar18 = (int *)FUN_000e7b9c(ppppuVar45);
+      piVar18 = (int *)Block__lastBlockOfChain_e7b9c(ppppuVar45);
       piVar18[0x2e] = (int)scopeLevel;
       iVar43 = (**(code **)(*piVar18 + 0x38))();
       if ((iVar43 == 0) && (iVar43 = (**(code **)(*piVar18 + 0x3c))(piVar18), iVar43 == 0)) {
         Block__connect(piVar18,pppuVar42);
       }
-      ppppuVar30 = (uint ****)FUN_000e7a9c(ppppuVar45);
+      ppppuVar30 = (uint ****)Block__lastBlockOfChain_e7a9c(ppppuVar45);
       ppppuVar30[0x2e] = (uint ***)scopeLevel;
       ppppuVar51 = ppppuVar30;
       if (ppppuVar30 == ppppuVar45) {
@@ -7717,7 +7721,7 @@ code_r0x00102c90:
         argR7 = (uint ******)ifStack;
         argR8 = loopStackData;
         pppppuVar15 = (uint *****)
-                      ((int (*)())FUN_000fadc4)(program,puVar32,scopeLevel,ppppppuVar48,ifStack,loopStackData,
+                      ((int (*)())Program__createIfBlock)(program,puVar32,scopeLevel,ppppppuVar48,ifStack,loopStackData,
                                    ilReader);
         argR6 = ppppppuVar48;
         goto code_r0x00103240;

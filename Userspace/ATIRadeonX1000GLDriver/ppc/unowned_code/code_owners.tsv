@@ -47,7 +47,7 @@
 0xce344	FUN_000ce148
 0xcec34	FUN_000cea6c
 0xcec48	FUN_000cea6c
-0xd9f34	FUN_000d9e98
+0xd9f34	ConstBank__addMappedEntry
 0xd9f78	FUN_000d9f3c
 0xda880	FUN_000da78c
 0xe2084	Compiler__releaseChipAndPools

@@ -4195,7 +4195,7 @@ int FUN_000cd1c4(param_1, param_2, param_3, param_4)
         *(undefined4 *)(iStack0000001c + 0xf8) = 0;
         *(undefined4 *)(iStack0000001c + 0xfc) =
              *(undefined4 *)(*(int *)(iStack00000018 + 0x398) + 0x28);
-        FUN_000e2094(iStack00000018,iVar1);
+        Compiler__compileStages(iStack00000018,iVar1);
         if (iVar1 != 0) {
           FUN_00193be8(iVar1);
           Arena__free(*(undefined4 *)(iVar1 + -4),iVar1 + -4);
