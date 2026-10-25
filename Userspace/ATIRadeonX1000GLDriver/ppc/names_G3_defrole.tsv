@@ -17,52 +17,52 @@ use	FUN_00030c50	puVar1	allocation	INFERRED	every definition is the result of a 
 use	FUN_0003ef50	iVar2	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#13	+12	all	all
 use	FUN_0003f660	iVar2	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#0	+20	all	all
 use	FUN_0003f660	iVar3	allocation2	INFERRED	every definition is the result of a call whose name says it returns this	#9	+4	all	all
-use	FUN_0003f850	iVar2	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#15	+5	all	all
-use	FUN_0003f850	iVar2	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#38	+0	all	all
-use	FUN_0003f9f0	iVar2	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#27	+5	all	all
-use	FUN_0003f9f0	iVar2	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#48	+0	all	all
-use	FUN_0003fbf0	iVar6	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#18	+5	all	all
-use	FUN_0003fbf0	iVar6	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#35	+0	all	all
-use	FUN_0003fd80	iVar7	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#21	+5	all	all
-use	FUN_0003fd80	iVar7	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#38	+0	all	all
-use	FUN_0003ff40	iVar2	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#51	+5	all	all
-use	FUN_0003ff40	iVar2	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#70	+0	all	all
-use	FUN_000401b0	iVar2	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#22	+5	all	all
-use	FUN_000401b0	iVar2	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#43	+0	all	all
-use	FUN_00040370	pvVar2	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#34	+204	all	all
-use	FUN_00040374	iVar3	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#34	+11	all	all
-use	FUN_00040374	iVar3	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#83	+11	all	all
-use	FUN_00040374	iVar3	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#129	+11	all	all
-use	FUN_00040374	iVar3	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#175	+11	all	all
-use	FUN_00040374	iVar3	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#226	+12	all	all
-use	FUN_00040ac4	iVar7	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#44	+11	all	all
-use	FUN_00040ac4	iVar7	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#108	+11	all	all
-use	FUN_00040ac4	iVar7	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#169	+11	all	all
-use	FUN_00040ac4	iVar7	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#231	+11	all	all
-use	FUN_00040ac4	iVar7	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#291	+12	all	all
-use	FUN_00041310	iVar4	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#26	+11	all	all
-use	FUN_00041510	iVar3	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#27	+5	all	all
-use	FUN_00041510	iVar3	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#46	+0	all	all
-use	FUN_00043df0	iVar4	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#21	+12	all	all
-use	FUN_00043f60	iVar4	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#36	+6	all	all
-use	FUN_00043f60	iVar4	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#70	+11	all	all
-use	FUN_00043f60	iVar4	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#128	+13	all	all
-use	FUN_00044360	iVar4	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#20	+5	all	all
-use	FUN_00044360	iVar4	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#37	+0	all	all
-use	FUN_00044500	iVar3	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#25	+5	all	all
-use	FUN_00044500	iVar3	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#39	+0	all	all
-use	FUN_00044500	iVar3	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#78	+5	all	all
-use	FUN_00044500	iVar3	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#92	+0	all	all
-use	FUN_00044500	iVar3	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#131	+5	all	all
-use	FUN_00044500	iVar3	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#144	+0	all	all
-use	FUN_00044500	iVar3	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#183	+12	all	all
-use	FUN_00044ac0	iVar2	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#29	+5	all	all
-use	FUN_00044ac0	iVar2	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#48	+0	all	all
-use	FUN_00046180	iVar5	allocation2	INFERRED	every definition is the result of a call whose name says it returns this	#116	+6	all	all
-use	FUN_00046180	iVar9	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#50	+6	all	all
-use	FUN_00046180	iVar9	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#162	+13	all	all
-use	FUN_000467a0	iVar2	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#35	+12	all	all
-use	FUN_00046a30	iVar2	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#107	+6	all	all
+use	FUN_0003f850	iVar2	allocation	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar2\ =\ _malloc\(uVar1\ <<\ 2\);$	+5	all	all
+use	FUN_0003f850	iVar2	allocation	INFERRED	every definition is the result of a call whose name says it returns this	^\s*\*piVar8\ =\ iVar2;$	+0	all	all
+use	FUN_0003f9f0	iVar2	allocation	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar2\ =\ _malloc\(uVar3\ <<\ 2\);$	+5	all	all
+use	FUN_0003f9f0	iVar2	allocation	INFERRED	every definition is the result of a call whose name says it returns this	^\s*\*piVar13\ =\ iVar2;$	+0	all	all
+use	FUN_0003fbf0	iVar6	allocation	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar6\ =\ _malloc\(uVar2\ <<\ 2\);$	+5	all	all
+use	FUN_0003fbf0	iVar6	allocation	INFERRED	every definition is the result of a call whose name says it returns this	^\s*\*piVar8\ =\ iVar6;$	+0	all	all
+use	FUN_0003fd80	iVar7	allocation	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar7\ =\ _malloc\(uVar2\ <<\ 2\);$	+5	all	all
+use	FUN_0003fd80	iVar7	allocation	INFERRED	every definition is the result of a call whose name says it returns this	^\s*\*piVar9\ =\ iVar7;$	+0	all	all
+use	FUN_0003ff40	iVar2	allocation	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar2\ =\ _malloc\(uVar4\ <<\ 2\);$	+5	all	all
+use	FUN_0003ff40	iVar2	allocation	INFERRED	every definition is the result of a call whose name says it returns this	^\s*\*piVar8\ =\ iVar2;$	+0	all	all
+use	FUN_000401b0	iVar2	allocation	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar2\ =\ _malloc\(uVar1\ <<\ 2\);$	+5	all	all
+use	FUN_000401b0	iVar2	allocation	INFERRED	every definition is the result of a call whose name says it returns this	^\s*\*piVar8\ =\ iVar2;$	+0	all	all
+use	FUN_00040370	pvVar2	allocation	INFERRED	every definition is the result of a call whose name says it returns this	^\s*pvVar2\ =\ _malloc\(uVar3\ <<\ 2\);$	+204	all	all
+use	FUN_00040374	iVar3	allocation	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar3\ =\ _malloc\(uVar2\ <<\ 2\);$	+11	all	all
+use	FUN_00040374	iVar3	allocation	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar3\ =\ _malloc\(uVar2\ <<\ 2\);$@2	+11	all	all
+use	FUN_00040374	iVar3	allocation	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar3\ =\ _malloc\(uVar2\ <<\ 2\);$@3	+11	all	all
+use	FUN_00040374	iVar3	allocation	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar3\ =\ _malloc\(uVar5\ <<\ 2\);$	+11	all	all
+use	FUN_00040374	iVar3	allocation	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar3\ =\ _malloc\(uVar5\ <<\ 2\);$@2	+12	all	all
+use	FUN_00040ac4	iVar7	allocation	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar7\ =\ _malloc\(uVar4\ <<\ 2\);$	+11	all	all
+use	FUN_00040ac4	iVar7	allocation	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar7\ =\ _malloc\(uVar4\ <<\ 2\);$@2	+11	all	all
+use	FUN_00040ac4	iVar7	allocation	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar7\ =\ _malloc\(uVar4\ <<\ 2\);$@3	+11	all	all
+use	FUN_00040ac4	iVar7	allocation	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar7\ =\ _malloc\(uVar11\ <<\ 2\);$	+11	all	all
+use	FUN_00040ac4	iVar7	allocation	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar7\ =\ _malloc\(uVar11\ <<\ 2\);$@2	+12	all	all
+use	FUN_00041310	iVar4	allocation	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar4\ =\ _malloc\(uVar3\ <<\ 2\);$	+11	all	all
+use	FUN_00041510	iVar3	allocation	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar3\ =\ _malloc\(uVar9\ <<\ 2\);$	+5	all	all
+use	FUN_00041510	iVar3	allocation	INFERRED	every definition is the result of a call whose name says it returns this	^\s*\*piVar8\ =\ iVar3;$	+0	all	all
+use	FUN_00043df0	iVar4	allocation	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar4\ =\ _malloc\(uVar3\ <<\ 2\);$	+12	all	all
+use	FUN_00043f60	iVar4	allocation	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar4\ =\ _malloc\(uVar3\ <<\ 2\);$	+6	all	all
+use	FUN_00043f60	iVar4	allocation	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar4\ =\ _malloc\(uVar3\ <<\ 2\);$@2	+11	all	all
+use	FUN_00043f60	iVar4	allocation	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar4\ =\ _malloc\(uVar3\ <<\ 2\);$@3	+13	all	all
+use	FUN_00044360	iVar4	allocation	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar4\ =\ _malloc\(uVar3\ <<\ 2\);$	+5	all	all
+use	FUN_00044360	iVar4	allocation	INFERRED	every definition is the result of a call whose name says it returns this	^\s*\*piVar6\ =\ iVar4;$	+0	all	all
+use	FUN_00044500	iVar3	allocation	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar3\ =\ _malloc\(uVar2\ <<\ 2\);$	+5	all	all
+use	FUN_00044500	iVar3	allocation	INFERRED	every definition is the result of a call whose name says it returns this	^\s*\*piVar7\ =\ iVar3;$	+0	all	all
+use	FUN_00044500	iVar3	allocation	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar3\ =\ _malloc\(uVar2\ <<\ 2\);$@2	+5	all	all
+use	FUN_00044500	iVar3	allocation	INFERRED	every definition is the result of a call whose name says it returns this	^\s*\*piVar7\ =\ iVar3;$@2	+0	all	all
+use	FUN_00044500	iVar3	allocation	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar3\ =\ _malloc\(uVar2\ <<\ 2\);$@3	+5	all	all
+use	FUN_00044500	iVar3	allocation	INFERRED	every definition is the result of a call whose name says it returns this	^\s*\*piVar7\ =\ iVar3;$@3	+0	all	all
+use	FUN_00044500	iVar3	allocation	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar3\ =\ _malloc\(uVar2\ <<\ 2\);$@4	+12	all	all
+use	FUN_00044ac0	iVar2	allocation	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar2\ =\ _malloc\(uVar1\ <<\ 2\);$	+5	all	all
+use	FUN_00044ac0	iVar2	allocation	INFERRED	every definition is the result of a call whose name says it returns this	^\s*\*piVar6\ =\ iVar2;$	+0	all	all
+use	FUN_00046180	iVar5	allocation2	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar5\ =\ _malloc\(uVar3\ <<\ 2\);$	+6	all	all
+use	FUN_00046180	iVar9	allocation	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar9\ =\ _malloc\(uVar3\ <<\ 2\);$	+6	all	all
+use	FUN_00046180	iVar9	allocation	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar9\ =\ _malloc\(uVar3\ <<\ 2\);$@2	+13	all	all
+use	FUN_000467a0	iVar2	allocation	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar2\ =\ _malloc\(uVar3\ <<\ 2\);$	+12	all	all
+use	FUN_00046a30	iVar2	allocation	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar2\ =\ _malloc\(uVar10\ <<\ 2\);$	+6	all	all
 use	FUN_0004b7d0	uVar3	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#3	+2	all	all
 use	FUN_0004bbf0	iVar6	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#126	+13	all	all
 use	FUN_0004bbf0	uVar9	allocation2	INFERRED	every definition is the result of a call whose name says it returns this	#102	+2	all	all

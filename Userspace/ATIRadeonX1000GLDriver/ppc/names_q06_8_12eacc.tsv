@@ -1,0 +1,129 @@
+local	FUN_0012eacc	param_1	program	INFERRED	the Program; +8 compiler, +0x3a0 first block, +0x3a8 last block, +0x414 pending vector
+use	FUN_0012eacc	uVar25	zeroMovInst	INFERRED	IRInst__create(0x31, ...) move whose literal source is the vec4 constant	^\s*uVar25\ =\ FUN_001043f0\(0x31,\*\(undefined4\ \*\)\(param_1\ \+\ 8\)\);$	+2
+use	FUN_0012eacc	uVar25	zeroMovInst	INFERRED	IRInst__create(0x31, ...) move whose literal source is the vec4 constant	^\s*\(\(void\ \(\*\)\(\)\)FUN_000f79c4\)\(uVar25,param_1,1,fparam_1,fparam_1,fparam_1,fparam_1\);$	+2
+use	FUN_0012eacc	uVar25	zeroMovInst	INFERRED	IRInst__create(0x31, ...) move whose literal source is the vec4 constant	^\s*uVar17\ =\ FUN_0012b248\(uVar25,iVar6,param_1\);$	+1
+use	FUN_0012eacc	uVar25	successorBlock	INFERRED	first successor of the block being split	^\s*uVar25\ =\ FUN_000e920c\(piVar12,0\);$	+1
+use	FUN_0012eacc	uVar25	successorBlock	INFERRED	first successor of the block being split	^\s*FUN_000e9adc\(piVar12,uVar25,puVar8\);$	+1
+use	FUN_0012eacc	uVar25	predecessorBlock	INFERRED	first predecessor of the block being split	^\s*uVar25\ =\ FUN_000e9184\(piVar12,0\);$	+1
+use	FUN_0012eacc	uVar25	predecessorBlock	INFERRED	first predecessor of the block being split	^\s*FUN_000e9adc\(uVar25,piVar12,puVar8\);$	+1
+use	FUN_0012eacc	iVar6	conditionKey	INFERRED	FUN_0012ac58 result for the pending entry (0 when absent)	^\s*iVar6\ =\ FUN_0012ac58\(uVar15,uVar20\);$	+1
+use	FUN_0012eacc	iVar6	conditionKey	INFERRED	FUN_0012ac58 result for the pending entry (0 when absent)	^\s*if\ \(iVar6\ !=\ 0\)\ \{$	+2
+use	FUN_0012eacc	iVar6	conditionKey	INFERRED	FUN_0012ac58 result for the pending entry (0 when absent)	^\s*iVar6\ =\ \*\(int\ \*\)\(iVar23\ \+\ 0x134\);$	+1
+use	FUN_0012eacc	uVar7	headerWordB8	INFERRED	block word 0xb8 passed to FUN_000e78c0	^\s*uVar7\ =\ \*\(undefined4\ \*\)\(iVar23\ \+\ 0xb8\);$	+1
+use	FUN_0012eacc	uVar7	headerWordB8	INFERRED	block word 0xb8 passed to FUN_000e78c0	^\s*FUN_000e78c0\(puVar21,uVar7\);$	+1
+use	FUN_0012eacc	uVar19	containerBlock	INFERRED	block that contains the pending instruction (+0x158)	^\s*uVar19\ =\ \*\(undefined4\ \*\)\(iVar24\ \+\ 0x158\);$	+2
+use	FUN_0012eacc	uVar19	containerBlock	INFERRED	block that contains the pending instruction (+0x158)	^\s*iVar23\ =\ FUN_000e83bc\(uVar19\);$	+1
+use	FUN_0012eacc	uVar19	containerBlock	INFERRED	block that contains the pending instruction (+0x158)	^\s*FUN_000e7738\(uVar19,iVar24,uVar7\);$	+1
+use	FUN_0012eacc	uVar19	swizzleTableWord	INFERRED	word read from the constant table PTR_DAT_001e8b8c	^\s*uVar19\ =\ \*\(undefined4\ \*\)puVar2;$	+1
+use	FUN_0012eacc	uVar19	swizzleTableWord	INFERRED	word read from the constant table PTR_DAT_001e8b8c	^\s*\*\(undefined4\ \*\)\(iVar6\ \+\ 0x10\)\ =\ uVar19;$	+1
+use	FUN_0012eacc	iVar5	splitResult	INFERRED	FUN_0012aef0 result: block needs no split	^\s*iVar5\ =\ FUN_0012aef0\(param_1,piVar12,piVar3\);$	+2
+use	FUN_0012eacc	iVar5	blockQuery28	INFERRED	block vtable slot 0x28 test	^\s*iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*piVar12\ \+\ 0x28\)\)\(piVar12\);$	+3
+use	FUN_0012eacc	iVar5	blockQuery24	INFERRED	block vtable slot 0x24 test	^\s*iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*piVar12\ \+\ 0x24\)\)\(piVar12\);$	+3
+use	FUN_0012eacc	iVar23	newVRegA	INFERRED	freshly allocated virtual register (compiler counter - 1)	^\s*iVar23\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x3ac\)\ \+\ \-1;$	+2
+use	FUN_0012eacc	iVar23	newVRegA	INFERRED	freshly allocated virtual register (compiler counter - 1)	^\s*\*\(int\ \*\)\(iVar5\ \+\ 8\)\ =\ iVar23;$	+1
+use	FUN_0012eacc	iVar23	pendingVector	INFERRED	program pending vector (+0x414)	^\s*iVar23\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x414\);$	+2
+use	FUN_0012eacc	iVar23	pendingVector	INFERRED	program pending vector (+0x414)	^\s*piVar12\ =\ \(int\ \*\)\(\(uVar11\ \-\ 1\)\ \*\ 4\ \+\ \*\(int\ \*\)\(iVar23\ \+\ 8\)\);$	+1
+use	FUN_0012eacc	iVar23	pendingVector	INFERRED	program pending vector (+0x414)	^\s*FUN_00194208\(iVar23,uVar11\ \-\ 1\);$	+1
+use	FUN_0012eacc	iVar23	chainBlock	INFERRED	FUN_0012b140: block along the chain of the pending entry	^\s*iVar23\ =\ FUN_0012b140\(uVar19\);$	+2
+use	FUN_0012eacc	iVar23	chainBlock	INFERRED	FUN_0012b140: block along the chain of the pending entry	^\s*iVar23\ =\ FUN_0012b140\(iVar23\);$	+2
+use	FUN_0012eacc	iVar23	chainBlock	INFERRED	FUN_0012b140: block along the chain of the pending entry	^\s*if\ \(\*piVar12\ ==\ iVar23\)\ \{$	+1
+use	FUN_0012eacc	iVar23	chainBlock	INFERRED	FUN_0012b140: block along the chain of the pending entry	^\s*iVar6\ =\ \*\(int\ \*\)\(iVar23\ \+\ 0x134\);$	+2
+use	FUN_0012eacc	iVar23	chainLastBlock	INFERRED	FUN_000e83bc: last block of the chain	^\s*iVar23\ =\ FUN_000e83bc\(uVar19\);$	+2
+use	FUN_0012eacc	iVar23	movDestOperand	INFERRED	destination operand record of the new move	^\s*iVar23\ =\ FUN_001054ec\(uVar7,0\);$	+1
+use	FUN_0012eacc	iVar23	movDestOperand	INFERRED	destination operand record of the new move	^\s*\*\(undefined4\ \*\)\(iVar23\ \+\ 0xc\)\ =\ 0;$@2	+2
+use	FUN_0012eacc	iVar23	movDestOperand	INFERRED	destination operand record of the new move	^\s*iVar23\ =\ FUN_000e920c\(uVar20,0\);$	+6
+use	FUN_0012eacc	iVar23	movDestOperand	INFERRED	destination operand record of the new move	^\s*puVar9\ =\ \(undefined4\ \*\)FUN_000e9184\(iVar23,0\);$	+1
+use	FUN_0012eacc	iVar23	movDestOperand	INFERRED	destination operand record of the new move	^\s*uVar7\ =\ \*\(undefined4\ \*\)\(iVar23\ \+\ 0xb8\);$	+1
+use	FUN_0012eacc	iVar23	movDestOperand	INFERRED	destination operand record of the new move	^\s*FUN_000ea6d0\(puVar21,puVar18,uVar20,iVar23,\*\(undefined4\ \*\)\(param_1\ \+\ 8\)\);$	+1
+use	FUN_0012eacc	iVar23	movDestOperand	INFERRED	destination operand record of the new move	^\s*FUN_000e977c\(puVar9,iVar23,puVar8\);$	+2
+use	FUN_0012eacc	iVar23	movDestOperand	INFERRED	destination operand record of the new move	^\s*FUN_000e977c\(puVar8,iVar23,puVar21\);$	+1
+use	FUN_0012eacc	uVar20	chainKey	INFERRED	word 0x13c of the chain block	^\s*uVar20\ =\ \*\(undefined4\ \*\)\(iVar23\ \+\ 0x13c\);$	+1
+use	FUN_0012eacc	uVar20	chainKey	INFERRED	word 0x13c of the chain block	^\s*iVar6\ =\ FUN_0012ac58\(uVar15,uVar20\);$	+1
+use	FUN_0012eacc	uVar20	chainKey	INFERRED	word 0x13c of the chain block	^\s*uVar20\ =\ \(\(int\ \(\*\)\(\)\)FUN_0012e488\)\(param_1,uVar20\);$	+2
+use	FUN_0012eacc	uVar20	chainKey	INFERRED	word 0x13c of the chain block	^\s*uVar20\ =\ FUN_0012b140\(iVar23\);$	+1
+use	FUN_0012eacc	uVar20	chainKey	INFERRED	word 0x13c of the chain block	^\s*uVar20\ =\ FUN_0012ae1c\(iVar23\);$	+1
+use	FUN_0012eacc	uVar20	chainKey	INFERRED	word 0x13c of the chain block	^\s*FUN_000ea6d0\(puVar21,puVar18,uVar20,iVar23,\*\(undefined4\ \*\)\(param_1\ \+\ 8\)\);$	+1
+use	FUN_0012eacc	uVar20	chainKey	INFERRED	word 0x13c of the chain block	^\s*uVar20\ =\ FUN_0012ae1c\(iVar24\);$	+1
+use	FUN_0012eacc	uVar20	ifFooterBlock	INFERRED	IfHeader word 0x50: the footer block	^\s*uVar20\ =\ puVar10\[0x50\];$	+2
+use	FUN_0012eacc	uVar20	ifFooterBlock	INFERRED	IfHeader word 0x50: the footer block	^\s*FUN_000e8e4c\(puVar9,uVar20\);$	+3
+use	FUN_0012eacc	uVar13	movSource	INFERRED	source operand reference taken from the zero move (+0x8c)	^\s*uVar13\ =\ \*\(undefined4\ \*\)\(iVar5\ \+\ 0x8c\);$	+1
+use	FUN_0012eacc	uVar13	movSource	INFERRED	source operand reference taken from the zero move (+0x8c)	^\s*FUN_001046c8\(uVar7,1,uVar13\);$	+1
+use	FUN_0012eacc	puVar8	newSplitBlock	INFERRED	block object created to split an edge (allocation + 1)	^\s*puVar8\ =\ puVar4\ \+\ 1;$	+2
+use	FUN_0012eacc	puVar8	newSplitBlock	INFERRED	block object created to split an edge (allocation + 1)	^\s*FUN_000ec3ac\(param_1,piVar12,puVar8\);$	+2
+use	FUN_0012eacc	puVar8	newSplitBlock	INFERRED	block object created to split an edge (allocation + 1)	^\s*puVar8\ =\ puVar4\ \+\ 1;$@2	+2
+use	FUN_0012eacc	puVar8	newSplitBlock	INFERRED	block object created to split an edge (allocation + 1)	^\s*FUN_000ec370\(param_1,piVar12,puVar8\);$	+2
+use	FUN_0012eacc	bVar1	foundInChain	INFERRED	the chain block is already in the visited vector	^\s*bVar1\ =\ true;$	+1
+use	FUN_0012eacc	bVar1	foundInChain	INFERRED	the chain block is already in the visited vector	^\s*bVar1\ =\ false;$	+1
+use	FUN_0012eacc	bVar1	foundInChain	INFERRED	the chain block is already in the visited vector	^\s*if\ \(!bVar1\)\ goto\ LAB_0012ed5c;$	+1
+use	FUN_0012eacc	puVar2	swizzleTablePtr	INFERRED	pointer to the constant table PTR_DAT_001e8b8c	^\s*puVar2\ =\ PTR_DAT_001e8b8c;$	+1
+use	FUN_0012eacc	puVar2	swizzleTablePtr	INFERRED	pointer to the constant table PTR_DAT_001e8b8c	^\s*uVar19\ =\ \*\(undefined4\ \*\)puVar2;$	+1
+use	FUN_0012eacc	piVar3	successorCursor	INFERRED	successor of the block cursor	^\s*piVar3\ =\ piVar12;$	+1
+use	FUN_0012eacc	piVar3	successorCursor	INFERRED	successor of the block cursor	^\s*if\ \(piVar3\ ==\ piVar14\)\ \{$	+1
+use	FUN_0012eacc	piVar3	successorCursor	INFERRED	successor of the block cursor	^\s*piVar3\ =\ \(int\ \*\)FUN_000e920c\(piVar12,0\);$	+2
+use	FUN_0012eacc	puVar10	ifHeaderAlloc	INFERRED	arena block (0x15c bytes) of the new IfHeader	^\s*puVar10\ =\ \(undefined4\ \*\)FUN_00193e18\(uVar13,0x15c\);$	+3
+use	FUN_0012eacc	puVar10	ifHeaderAlloc	INFERRED	arena block (0x15c bytes) of the new IfHeader	^\s*puVar10\[0x4f\]\ =\ puVar9;$	+1
+use	FUN_0012eacc	puVar10	ifHeaderAlloc	INFERRED	arena block (0x15c bytes) of the new IfHeader	^\s*uVar20\ =\ puVar10\[0x50\];$	+1
+use	FUN_0012eacc	uVar11	pendingCount	INFERRED	filled count of the pending vector	^\s*uVar11\ =\ \*\(uint\ \*\)\(iVar23\ \+\ 4\);$	+2
+use	FUN_0012eacc	uVar11	pendingCount	INFERRED	filled count of the pending vector	^\s*if\ \(uVar11\ \-\ 1\ <\ uVar11\)\ \{$	+2
+use	FUN_0012eacc	uVar11	pendingCount	INFERRED	filled count of the pending vector	^\s*FUN_00194208\(iVar23,uVar11\ \-\ 1\);$	+1
+use	FUN_0012eacc	uVar11	isOrdinaryEntry	INFERRED	entry opcode is not 0xf8	^\s*uVar11\ =\ \(uint\)\(\*\(int\ \*\)\(\*\(int\ \*\)\(iVar24\ \+\ 0x88\)\ \+\ 8\)\ !=\ 0xf8\);$	+2
+use	FUN_0012eacc	uVar11	isOrdinaryEntry	INFERRED	entry opcode is not 0xf8	^\s*iVar24\ =\ FUN_0012afe8\(uVar11,uVar15,iVar23,uVar16\);$	+1
+use	FUN_0012eacc	piVar12	blockCursor	INFERRED	block being walked from the first block to the last	^\s*piVar12\ =\ \*\(int\ \*\*\)\(param_1\ \+\ 0x3a0\);$	+1
+use	FUN_0012eacc	piVar12	blockCursor	INFERRED	block being walked from the first block to the last	^\s*piVar3\ =\ piVar12;$	+1
+use	FUN_0012eacc	piVar12	blockCursor	INFERRED	block being walked from the first block to the last	^\s*piVar3\ =\ \(int\ \*\)FUN_000e920c\(piVar12,0\);$	+2
+use	FUN_0012eacc	piVar12	blockCursor	INFERRED	block being walked from the first block to the last	^\s*piVar12\ =\ \(int\ \*\)piVar12\[2\];$	+1
+use	FUN_0012eacc	piVar12	blockCursor	INFERRED	block being walked from the first block to the last	^\s*iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*piVar12\ \+\ 0x28\)\)\(piVar12\);$	+4
+use	FUN_0012eacc	piVar12	blockCursor	INFERRED	block being walked from the first block to the last	^\s*puVar4\[0x2f\]\ =\ piVar12\[0x2e\];$	+3
+use	FUN_0012eacc	piVar12	blockCursor	INFERRED	block being walked from the first block to the last	^\s*iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*piVar12\ \+\ 0x24\)\)\(piVar12\);$	+4
+use	FUN_0012eacc	piVar12	blockCursor	INFERRED	block being walked from the first block to the last	^\s*puVar4\[0x2f\]\ =\ piVar12\[0x2e\];$@2	+3
+use	FUN_0012eacc	piVar12	blockCursor	INFERRED	block being walked from the first block to the last	^\s*\}\ while\ \(piVar12\ !=\ piVar14\);$	+1
+use	FUN_0012eacc	piVar12	pendingTopRef	INFERRED	last element reference of the pending vector	^\s*piVar12\ =\ \(int\ \*\)0x0;$	+1
+use	FUN_0012eacc	piVar12	pendingTopRef	INFERRED	last element reference of the pending vector	^\s*piVar12\ =\ \(int\ \*\)\(\(uVar11\ \-\ 1\)\ \*\ 4\ \+\ \*\(int\ \*\)\(iVar23\ \+\ 8\)\);$	+1
+use	FUN_0012eacc	piVar12	pendingTopRef	INFERRED	last element reference of the pending vector	^\s*iVar24\ =\ \*piVar12;$	+1
+use	FUN_0012eacc	piVar12	visitedElemRef	INFERRED	element reference into the visited vector	^\s*piVar12\ =\ \(int\ \*\)\(uVar26\ \*\ 4\ \+\ puVar4\[3\]\);$	+1
+use	FUN_0012eacc	piVar12	visitedElemRef	INFERRED	element reference into the visited vector	^\s*piVar12\ =\ \(int\ \*\)FUN_0019423c\(puVar4\ \+\ 1,uVar26\);$	+1
+use	FUN_0012eacc	piVar12	visitedElemRef	INFERRED	element reference into the visited vector	^\s*if\ \(\*piVar12\ ==\ iVar23\)\ \{$	+1
+use	FUN_0012eacc	piVar14	lastBlock	INFERRED	last block of the program (+0x3a8)	^\s*piVar14\ =\ \*\(int\ \*\*\)\(param_1\ \+\ 0x3a8\);$	+1
+use	FUN_0012eacc	piVar14	lastBlock	INFERRED	last block of the program (+0x3a8)	^\s*if\ \(piVar3\ ==\ piVar14\)\ \{$	+1
+use	FUN_0012eacc	piVar14	lastBlock	INFERRED	last block of the program (+0x3a8)	^\s*\}\ while\ \(piVar12\ !=\ piVar14\);$	+1
+use	FUN_0012eacc	uVar15	chainHeadKey	INFERRED	pending entry word 300	^\s*uVar15\ =\ \*\(undefined4\ \*\)\(iVar24\ \+\ 300\);$	+1
+use	FUN_0012eacc	uVar15	chainHeadKey	INFERRED	pending entry word 300	^\s*iVar6\ =\ FUN_0012ac58\(uVar15,uVar20\);$	+1
+use	FUN_0012eacc	uVar15	chainHeadKey	INFERRED	pending entry word 300	^\s*uVar15\ =\ 0xffffffff;$	+1
+use	FUN_0012eacc	uVar15	chainHeadKey	INFERRED	pending entry word 300	^\s*iVar24\ =\ FUN_0012afe8\(uVar11,uVar15,iVar23,uVar16\);$	+1
+use	FUN_0012eacc	uVar16	chainSecondKey	INFERRED	second key of the chain (0 for ordinary entries)	^\s*uVar16\ =\ 0;$	+1
+use	FUN_0012eacc	uVar16	chainSecondKey	INFERRED	second key of the chain (0 for ordinary entries)	^\s*uVar16\ =\ \*\(undefined4\ \*\)\(iVar23\ \+\ 0x13c\);$	+1
+use	FUN_0012eacc	uVar16	chainSecondKey	INFERRED	second key of the chain (0 for ordinary entries)	^\s*iVar24\ =\ FUN_0012afe8\(uVar11,uVar15,iVar23,uVar16\);$	+1
+use	FUN_0012eacc	uVar17	predicateRegister	INFERRED	register of the condition (0 when none)	^\s*uVar17\ =\ 0;$	+1
+use	FUN_0012eacc	uVar17	predicateRegister	INFERRED	register of the condition (0 when none)	^\s*uVar17\ =\ FUN_0012b248\(uVar25,iVar6,param_1\);$	+1
+use	FUN_0012eacc	uVar17	predicateRegister	INFERRED	register of the condition (0 when none)	^\s*uVar17\ =\ \*\(undefined4\ \*\)\(iVar23\ \+\ 0x94\);$	+1
+use	FUN_0012eacc	uVar17	predicateRegister	INFERRED	register of the condition (0 when none)	^\s*\*\(undefined4\ \*\)\(iVar23\ \+\ 8\)\ =\ uVar17;$	+1
+use	FUN_0012eacc	uVar17	predicateRegister	INFERRED	register of the condition (0 when none)	^\s*\(\(int\ \(\*\)\(\)\)FUN_0012e56c\)\(uVar17,iVar23,\*\(undefined4\ \*\)\(param_1\ \+\ 8\)\);$	+1
+use	FUN_0012eacc	uVar17	predicateRegister	INFERRED	register of the condition (0 when none)	^\s*\*\(undefined4\ \*\)\(iVar6\ \+\ 8\)\ =\ uVar17;$	+1
+use	FUN_0012eacc	uVar17	predicateRegister	INFERRED	register of the condition (0 when none)	^\s*\(\(int\ \(\*\)\(\)\)FUN_0012e56c\)\(uVar17,iVar24,\*\(undefined4\ \*\)\(param_1\ \+\ 8\)\);$	+1
+use	FUN_0012eacc	puVar18	branchInst	INFERRED	new branch instruction (allocation + 1)	^\s*puVar18\ =\ puVar8\ \+\ 1;$	+2
+use	FUN_0012eacc	puVar18	branchInst	INFERRED	new branch instruction (allocation + 1)	^\s*iVar6\ =\ FUN_001054ec\(puVar18,1\);$	+1
+use	FUN_0012eacc	puVar18	branchInst	INFERRED	new branch instruction (allocation + 1)	^\s*iVar6\ =\ FUN_001054ec\(puVar18,1\);$@2	+1
+use	FUN_0012eacc	puVar18	branchInst	INFERRED	new branch instruction (allocation + 1)	^\s*FUN_000ea6d0\(puVar21,puVar18,uVar20,iVar23,\*\(undefined4\ \*\)\(param_1\ \+\ 8\)\);$	+1
+use	FUN_0012eacc	puVar18	branchInst	INFERRED	new branch instruction (allocation + 1)	^\s*FUN_000ed63c\(param_1,puVar18\);$	+1
+use	FUN_0012eacc	puVar21	ifHeader	INFERRED	new IfHeader (allocation + 1)	^\s*puVar21\ =\ puVar10\ \+\ 1;$	+2
+use	FUN_0012eacc	puVar21	ifHeader	INFERRED	new IfHeader (allocation + 1)	^\s*FUN_000e9948\(puVar21,iVar23,puVar8\);$	+1
+use	FUN_0012eacc	puVar21	ifHeader	INFERRED	new IfHeader (allocation + 1)	^\s*FUN_000ec3ac\(param_1,puVar8,puVar21\);$	+1
+use	FUN_0012eacc	puVar21	ifHeader	INFERRED	new IfHeader (allocation + 1)	^\s*FUN_000e78c0\(puVar21,uVar7\);$	+3
+use	FUN_0012eacc	uVar22	visitedCount	INFERRED	filled count of the visited vector	^\s*uVar22\ =\ puVar4\[2\];$	+1
+use	FUN_0012eacc	uVar22	visitedCount	INFERRED	filled count of the visited vector	^\s*if\ \(uVar22\ !=\ 0\)\ \{$	+1
+use	FUN_0012eacc	uVar22	visitedCount	INFERRED	filled count of the visited vector	^\s*if\ \(uVar22\ <=\ uVar26\)\ \{$	+2
+use	FUN_0012eacc	uVar22	visitedCount	INFERRED	filled count of the visited vector	^\s*uVar22\ =\ puVar4\[2\];$@2	+1
+use	FUN_0012eacc	uVar22	visitedCount	INFERRED	filled count of the visited vector	^\s*\}\ while\ \(uVar26\ <\ uVar22\);$	+1
+use	FUN_0012eacc	iVar24	newVRegB	INFERRED	freshly allocated virtual register (compiler counter - 1)	^\s*iVar24\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x3ac\)\ \+\ \-1;$	+2
+use	FUN_0012eacc	iVar24	newVRegB	INFERRED	freshly allocated virtual register (compiler counter - 1)	^\s*\*\(int\ \*\)\(iVar23\ \+\ 8\)\ =\ iVar24;$	+1
+use	FUN_0012eacc	iVar24	pendingEntry	INFERRED	entry popped from the pending vector	^\s*iVar24\ =\ \*piVar12;$	+1
+use	FUN_0012eacc	iVar24	pendingEntry	INFERRED	entry popped from the pending vector	^\s*uVar19\ =\ \*\(undefined4\ \*\)\(iVar24\ \+\ 0x158\);$	+1
+use	FUN_0012eacc	iVar24	pendingEntry	INFERRED	entry popped from the pending vector	^\s*uVar11\ =\ \(uint\)\(\*\(int\ \*\)\(\*\(int\ \*\)\(iVar24\ \+\ 0x88\)\ \+\ 8\)\ !=\ 0xf8\);$	+1
+use	FUN_0012eacc	iVar24	pendingEntry	INFERRED	entry popped from the pending vector	^\s*uVar15\ =\ \*\(undefined4\ \*\)\(iVar24\ \+\ 300\);$	+1
+use	FUN_0012eacc	iVar24	pendingEntry	INFERRED	entry popped from the pending vector	^\s*FUN_000e7738\(uVar19,iVar24,uVar7\);$	+2
+use	FUN_0012eacc	iVar24	pendingEntry	INFERRED	entry popped from the pending vector	^\s*iVar24\ =\ FUN_0012afe8\(uVar11,uVar15,iVar23,uVar16\);$	+1
+use	FUN_0012eacc	iVar24	pendingEntry	INFERRED	entry popped from the pending vector	^\s*if\ \(iVar23\ !=\ iVar24\)\ break;$	+1
+use	FUN_0012eacc	iVar24	pendingEntry	INFERRED	entry popped from the pending vector	^\s*if\ \(iVar24\ ==\ 0\)\ break;$	+1
+use	FUN_0012eacc	iVar24	pendingEntry	INFERRED	entry popped from the pending vector	^\s*uVar19\ =\ FUN_000e9184\(iVar24,0\);$	+1
+use	FUN_0012eacc	iVar24	pendingEntry	INFERRED	entry popped from the pending vector	^\s*FUN_000e977c\(uVar19,iVar24,uVar20\);$	+2
+use	FUN_0012eacc	iVar24	pendingEntry	INFERRED	entry popped from the pending vector	^\s*\(\(int\ \(\*\)\(\)\)FUN_0012e56c\)\(uVar17,iVar24,\*\(undefined4\ \*\)\(param_1\ \+\ 8\)\);$	+2

@@ -1,0 +1,715 @@
+use	FUN_001102e0	iVar5	entryLanesLeft	INFERRED	pack entry word 5 = lanes still to place; read before the decrement	^\s*iVar5\ =\ piVar22\[5\];$	+1
+use	FUN_001102e0	iVar5	entryLanesLeft	INFERRED	pack entry word 5 = lanes still to place; read before the decrement	^\s*piVar22\[5\]\ =\ iVar5\ \+\ \-1;$	+1
+use	FUN_001102e0	iVar5	scanOperand	INFERRED	destination operand record of the entry instruction (getOperandRecord(inst,0)) scanned for unused lanes	^\s*iVar5\ =\ FUN_001054ec\(\*piVar24,0\);$	+2
+use	FUN_001102e0	iVar5	swappedLaneSource	INFERRED	entry lane source slot saved while two lane slots are swapped	^\s*iVar5\ =\ piVar24\[iVar8\ \+\ 1\];$	+1
+use	FUN_001102e0	iVar5	swappedLaneSource	INFERRED	entry lane source slot saved while two lane slots are swapped	^\s*piVar24\[iVar9\ \+\ 1\]\ =\ iVar5;$	+1
+use	FUN_001102e0	iVar5	srcOperand	INFERRED	source operand record (getOperandRecord(inst,1)) whose swizzle bytes are swapped with the lane slots	^\s*iVar5\ =\ FUN_001054ec\(\*piVar24,1\);$	+2
+use	FUN_001102e0	iVar5	srcOperand	INFERRED	source operand record (getOperandRecord(inst,1)) whose swizzle bytes are swapped with the lane slots	^\s*iVar5\ =\ FUN_001054ec\(\*piVar24,1\);$@2	+2
+use	FUN_001102e0	iVar5	laneIndex	INFERRED	lane counter 0..3 (latch compare against 3)	^\s*iVar5\ =\ 0;$	+1
+use	FUN_001102e0	iVar5	laneIndex	INFERRED	lane counter 0..3 (latch compare against 3)	^\s*if\ \(\*\(char\ \*\)\(iVar5\ \+\ iVar9\ \+\ 0x10\)\ !=\ '\\x01'\)\ \{$	+1
+use	FUN_001102e0	iVar5	laneIndex	INFERRED	lane counter 0..3 (latch compare against 3)	^\s*bVar1\ =\ iVar5\ ==\ 3;$	+1
+use	FUN_001102e0	iVar5	laneIndex	INFERRED	lane counter 0..3 (latch compare against 3)	^\s*iVar5\ =\ iVar5\ \+\ 1;$	+1
+use	FUN_001102e0	iVar5	laneIndex	INFERRED	lane counter 0..3 (latch compare against 3)	^\s*iVar5\ =\ 0;$@2	+1
+use	FUN_001102e0	iVar5	laneIndex	INFERRED	lane counter 0..3 (latch compare against 3)	^\s*iVar14\ =\ FUN_0010e9d0\(piVar22,iVar5\);$	+1
+use	FUN_001102e0	iVar5	laneIndex	INFERRED	lane counter 0..3 (latch compare against 3)	^\s*puVar28\[iVar5\ \+\ 1\]\ =\ iVar21;$	+1
+use	FUN_001102e0	iVar5	laneIndex	INFERRED	lane counter 0..3 (latch compare against 3)	^\s*\*\(int\ \*\)\(iVar15\ \+\ 0x18\)\ =\ iVar5;$	+1
+use	FUN_001102e0	iVar5	laneIndex	INFERRED	lane counter 0..3 (latch compare against 3)	^\s*bVar1\ =\ iVar5\ !=\ 3;$	+1
+use	FUN_001102e0	iVar5	laneIndex	INFERRED	lane counter 0..3 (latch compare against 3)	^\s*iVar5\ =\ iVar5\ \+\ 1;$@3	+1
+use	FUN_001102e0	iVar5	candidateInst	INFERRED	instruction of the candidate pack entry compared with the current entry's instruction	^\s*iVar5\ =\ \*piVar22;$	+2
+use	FUN_001102e0	iVar5	candidateInst	INFERRED	instruction of the candidate pack entry compared with the current entry's instruction	^\s*if\ \(\(\(iStack0000001c\ ==\ \*\(int\ \*\)\(iVar16\ \+\ 0x1c\)\)\ \&\&$	+3
+use	FUN_001102e0	iVar5	laneFlagCursor	INFERRED	cursor over the 4 lane flag bytes of an entry (+4)	^\s*iVar5\ =\ iVar8;$	+1
+use	FUN_001102e0	iVar5	laneFlagCursor	INFERRED	cursor over the 4 lane flag bytes of an entry (+4)	^\s*if\ \(\*\(char\ \*\)\(iVar5\ \+\ 4\)\ ==\ '\\0'\)\ \{$	+1
+use	FUN_001102e0	iVar5	laneFlagCursor	INFERRED	cursor over the 4 lane flag bytes of an entry (+4)	^\s*iVar5\ =\ iVar5\ \+\ 1;$@2	+1
+use	FUN_001102e0	iVar5	candidateLaneCount	INFERRED	lane count of a candidate group, compared with the countdown	^\s*iVar5\ =\ FUN_0010e95c\(piVar22\);$	+2
+use	FUN_001102e0	iVar15	laneInst	INFERRED	instruction of a lane list element	^\s*iVar15\ =\ \*piVar10;$	+1
+use	FUN_001102e0	iVar15	laneInst	INFERRED	instruction of a lane list element	^\s*puVar20\ =\ \(undefined1\ \*\)\(iVar15\ \+\ 0x9c\);$	+1
+use	FUN_001102e0	iVar15	laneInst	INFERRED	instruction of a lane list element	^\s*iVar16\ =\ FUN_001054ec\(iVar15,0\);$	+1
+use	FUN_001102e0	iVar15	laneInst	INFERRED	instruction of a lane list element	^\s*iVar16\ =\ FUN_001054ec\(iVar15,1\);$	+1
+use	FUN_001102e0	iVar15	laneInst	INFERRED	instruction of a lane list element	^\s*iVar21\ =\ FUN_001054ec\(iVar15,0\);$	+1
+use	FUN_001102e0	iVar15	laneInst	INFERRED	instruction of a lane list element	^\s*\*\(undefined4\ \*\)\(iVar15\ \+\ 0x9c\)\ =\ local_98;$	+3
+use	FUN_001102e0	iVar15	headDestOperand	INFERRED	destination operand record of the entry instruction	^\s*iVar15\ =\ FUN_001054ec\(\*piVar24,0\);$	+2
+use	FUN_001102e0	iVar15	headLanesLeft	INFERRED	lanes still to place of the current entry (word 5)	^\s*iVar15\ =\ piVar24\[5\];$	+1
+use	FUN_001102e0	iVar15	headLanesLeft	INFERRED	lanes still to place of the current entry (word 5)	^\s*piVar24\[5\]\ =\ iVar15\ \+\ \-1;$	+1
+use	FUN_001102e0	iVar15	clonedInst	INFERRED	IRInst__clone of the entry instruction	^\s*iVar15\ =\ FUN_0010445c\(\*piVar24,\*\(undefined4\ \*\)\(param_1\ \+\ 8\),0\);$	+1
+use	FUN_001102e0	iVar15	clonedInst	INFERRED	IRInst__clone of the entry instruction	^\s*iVar16\ =\ FUN_001054ec\(iVar15,0\);$@2	+1
+use	FUN_001102e0	iVar15	clonedInst	INFERRED	IRInst__clone of the entry instruction	^\s*\*\(undefined4\ \*\)\(iVar15\ \+\ 0x9c\)\ =\ uVar25;$	+1
+use	FUN_001102e0	iVar15	clonedInst	INFERRED	IRInst__clone of the entry instruction	^\s*iVar16\ =\ FUN_001054ec\(iVar15,1\);$@2	+1
+use	FUN_001102e0	iVar15	clonedInst	INFERRED	IRInst__clone of the entry instruction	^\s*FUN_000ee9ac\(param_1,iVar15\);$	+1
+use	FUN_001102e0	iVar15	clonedInst	INFERRED	IRInst__clone of the entry instruction	^\s*FUN_0010e814\(puVar28,iVar15\);$	+1
+use	FUN_001102e0	iVar15	clonedInst	INFERRED	IRInst__clone of the entry instruction	^\s*uVar25\ =\ \*\(undefined4\ \*\)\(iVar15\ \+\ 0x94\);$	+1
+use	FUN_001102e0	piVar24	linkRecordRef	INFERRED	element reference into the program link-record vector	^\s*piVar24\ =\ \(int\ \*\)\(uVar26\ \*\ 4\ \+\ puVar30\[2\]\);$	+1
+use	FUN_001102e0	piVar24	linkRecordRef	INFERRED	element reference into the program link-record vector	^\s*piVar24\ =\ \(int\ \*\)FUN_0019423c\(puVar30,uVar26\);$	+1
+use	FUN_001102e0	piVar24	linkRecordRef	INFERRED	element reference into the program link-record vector	^\s*piVar24\ =\ \(int\ \*\)\*piVar24;$	+2
+use	FUN_001102e0	piVar24	linkRecordRef	INFERRED	element reference into the program link-record vector	^\s*iVar8\ =\ \*piVar24;$	+1
+use	FUN_001102e0	piVar24	linkRecordRef	INFERRED	element reference into the program link-record vector	^\s*iVar8\ =\ \*piVar24;$@2	+1
+use	FUN_001102e0	piVar24	searchRef	INFERRED	element of the unique-instruction list found by the linear search (NULL when absent)	^\s*piVar24\ =\ \(int\ \*\)0x0;$	+1
+use	FUN_001102e0	piVar24	searchRef	INFERRED	element of the unique-instruction list found by the linear search (NULL when absent)	^\s*piVar24\ =\ \(int\ \*\)\(uVar32\ \*\ 4\ \+\ puVar6\[3\]\);$	+1
+use	FUN_001102e0	piVar24	searchRef	INFERRED	element of the unique-instruction list found by the linear search (NULL when absent)	^\s*if\ \(\*piVar24\ ==\ iVar8\)\ goto\ LAB_0011047c;$	+1
+use	FUN_001102e0	piVar24	newSlotRef	INFERRED	reference to the slot just appended to a vector	^\s*piVar24\ =\ \(int\ \*\)\(uVar7\ \*\ 4\ \+\ puVar6\[3\]\);$	+1
+use	FUN_001102e0	piVar24	newSlotRef	INFERRED	reference to the slot just appended to a vector	^\s*piVar24\ =\ \(int\ \*\)FUN_0019423c\(puVar6\ \+\ 1,uVar7\);$	+1
+use	FUN_001102e0	piVar24	newSlotRef	INFERRED	reference to the slot just appended to a vector	^\s*\*piVar24\ =\ iVar8;$	+1
+use	FUN_001102e0	piVar24	newSlotRef	INFERRED	reference to the slot just appended to a vector	^\s*piVar24\ =\ \(int\ \*\)\(uVar7\ \*\ 4\ \+\ puVar6\[3\]\);$@2	+1
+use	FUN_001102e0	piVar24	newSlotRef	INFERRED	reference to the slot just appended to a vector	^\s*piVar24\ =\ \(int\ \*\)FUN_0019423c\(puVar23,uVar7\);$	+1
+use	FUN_001102e0	piVar24	newSlotRef	INFERRED	reference to the slot just appended to a vector	^\s*\*piVar24\ =\ iVar9;$	+1
+use	FUN_001102e0	piVar24	laneSourceCursor	INFERRED	cursor over the four lane source words of an entry	^\s*piVar24\ =\ piVar22;$	+1
+use	FUN_001102e0	piVar24	laneSourceCursor	INFERRED	cursor over the four lane source words of an entry	^\s*piVar24\[1\]\ =\ 0;$	+1
+use	FUN_001102e0	piVar24	laneSourceCursor	INFERRED	cursor over the four lane source words of an entry	^\s*piVar24\ =\ piVar24\ \+\ 1;$	+1
+use	FUN_001102e0	piVar24	bucketCursor	INFERRED	cursor over the 12 sixteen-byte bucket records of the static table	^\s*piVar24\ =\ \&DAT_001fc1f0;$	+1
+use	FUN_001102e0	piVar24	bucketCursor	INFERRED	cursor over the 12 sixteen-byte bucket records of the static table	^\s*piVar24\[2\]\ =\ 4;$	+1
+use	FUN_001102e0	piVar24	bucketCursor	INFERRED	cursor over the 12 sixteen-byte bucket records of the static table	^\s*\*piVar24\ =\ iVar8;$@2	+2
+use	FUN_001102e0	piVar24	bucketCursor	INFERRED	cursor over the 12 sixteen-byte bucket records of the static table	^\s*piVar24\[3\]\ =\ \(int\)\(puVar12\ \+\ 1\);$	+2
+use	FUN_001102e0	piVar24	bucketCursor	INFERRED	cursor over the 12 sixteen-byte bucket records of the static table	^\s*piVar24\ =\ DAT_001fc1f8;$	+1
+use	FUN_001102e0	piVar24	bucketCursor	INFERRED	cursor over the 12 sixteen-byte bucket records of the static table	^\s*if\ \(\*piVar24\ ==\ 0\)\ \{$	+2
+use	FUN_001102e0	piVar24	bucketCursor	INFERRED	cursor over the 12 sixteen-byte bucket records of the static table	^\s*puVar30\ =\ \(uint\ \*\)piVar24\[1\];$@2	+1
+use	FUN_001102e0	piVar24	bucketCursor	INFERRED	cursor over the 12 sixteen-byte bucket records of the static table	^\s*else\ if\ \(\*piVar24\ <\ 4\)\ \{$	+1
+use	FUN_001102e0	piVar24	bucketCursor	INFERRED	cursor over the 12 sixteen-byte bucket records of the static table	^\s*piVar24\ =\ piVar24\ \+\ 4;$@2	+1
+use	FUN_001102e0	piVar24	packEntry	INFERRED	pack entry (inst, four lane sources, lanes left, flag) taken from a vector	^\s*piVar24\ =\ \(int\ \*\)\*puVar12;$	+1
+use	FUN_001102e0	piVar24	packEntry	INFERRED	pack entry (inst, four lane sources, lanes left, flag) taken from a vector	^\s*iVar9\ =\ \*piVar24;$	+1
+use	FUN_001102e0	piVar24	packEntry	INFERRED	pack entry (inst, four lane sources, lanes left, flag) taken from a vector	^\s*iVar9\ =\ \*piVar24;$@2	+1
+use	FUN_001102e0	piVar24	packEntry	INFERRED	pack entry (inst, four lane sources, lanes left, flag) taken from a vector	^\s*\*puVar12\ =\ piVar24;$	+1
+use	FUN_001102e0	piVar24	packEntry	INFERRED	pack entry (inst, four lane sources, lanes left, flag) taken from a vector	^\s*piVar24\ =\ \(int\ \*\)\*puVar12;$@2	+3
+use	FUN_001102e0	piVar24	packEntry	INFERRED	pack entry (inst, four lane sources, lanes left, flag) taken from a vector	^\s*piVar18\ =\ piVar24\ \+\ 1;$	+1
+use	FUN_001102e0	piVar24	packEntry	INFERRED	pack entry (inst, four lane sources, lanes left, flag) taken from a vector	^\s*iVar16\ =\ piVar24\[2\];$	+1
+use	FUN_001102e0	piVar24	packEntry	INFERRED	pack entry (inst, four lane sources, lanes left, flag) taken from a vector	^\s*piVar24\[2\]\ =\ iVar16\ \+\ \-1;$	+1
+use	FUN_001102e0	piVar24	packEntry	INFERRED	pack entry (inst, four lane sources, lanes left, flag) taken from a vector	^\s*puVar30\ =\ \(uint\ \*\)piVar24\[3\];$	+1
+use	FUN_001102e0	piVar24	packEntry	INFERRED	pack entry (inst, four lane sources, lanes left, flag) taken from a vector	^\s*if\ \(piVar24\[2\]\ <\ 1\)\ \{$	+2
+use	FUN_001102e0	piVar24	packEntry	INFERRED	pack entry (inst, four lane sources, lanes left, flag) taken from a vector	^\s*puVar30\ =\ \(uint\ \*\)piVar24\[3\];$@3	+1
+use	FUN_001102e0	piVar24	packEntry	INFERRED	pack entry (inst, four lane sources, lanes left, flag) taken from a vector	^\s*FUN_00194374\(puVar29,piVar24\);$	+1
+use	FUN_001102e0	piVar24	packEntry	INFERRED	pack entry (inst, four lane sources, lanes left, flag) taken from a vector	^\s*iVar8\ =\ piVar24\[2\]\ \+\ \-1;$	+1
+use	FUN_001102e0	piVar24	packEntryRef	INFERRED	element reference into the pack entry vector	^\s*piVar24\ =\ \(int\ \*\)\(uVar26\ \*\ 4\ \+\ puVar11\[3\]\);$	+1
+use	FUN_001102e0	piVar24	packEntryRef	INFERRED	element reference into the pack entry vector	^\s*piVar24\ =\ \(int\ \*\)FUN_0019423c\(puVar29,uVar26\);$	+1
+use	FUN_001102e0	piVar24	packEntryRef	INFERRED	element reference into the pack entry vector	^\s*iVar8\ =\ \*piVar24;$@3	+1
+use	FUN_001102e0	piVar24	laneInstRef	INFERRED	element reference into an entry's lane list	^\s*piVar24\ =\ \(int\ \*\)\(uVar31\ \*\ 4\ \+\ puVar30\[2\]\);$	+1
+use	FUN_001102e0	piVar24	laneInstRef	INFERRED	element reference into an entry's lane list	^\s*piVar24\ =\ \(int\ \*\)FUN_0019423c\(puVar30,uVar31\);$	+1
+use	FUN_001102e0	piVar24	laneInstRef	INFERRED	element reference into an entry's lane list	^\s*iVar9\ =\ \*piVar24;$@4	+1
+use	FUN_001102e0	piVar24	candidateEntry	INFERRED	entry found by the priority search (NULL until found)	^\s*piVar24\ =\ \(int\ \*\)0x0;$@2	+1
+use	FUN_001102e0	piVar24	candidateEntry	INFERRED	entry found by the priority search (NULL until found)	^\s*piVar24\ =\ \(int\ \*\)\*puVar12;$@3	+4
+use	FUN_001102e0	piVar24	candidateEntry	INFERRED	entry found by the priority search (NULL until found)	^\s*iVar15\ =\ FUN_001054ec\(\*piVar24,0\);$	+1
+use	FUN_001102e0	piVar24	candidateEntry	INFERRED	entry found by the priority search (NULL until found)	^\s*iVar21\ =\ piVar24\[iVar14\ \+\ 1\];$	+5
+use	FUN_001102e0	piVar24	candidateEntry	INFERRED	entry found by the priority search (NULL until found)	^\s*iVar19\ =\ \*\(int\ \*\)\(\*piVar24\ \+\ 0x94\);$	+2
+use	FUN_001102e0	piVar24	candidateEntry	INFERRED	entry found by the priority search (NULL until found)	^\s*iVar16\ =\ FUN_001054ec\(\*piVar24,1\);$	+1
+use	FUN_001102e0	piVar24	candidateEntry	INFERRED	entry found by the priority search (NULL until found)	^\s*if\ \(piVar24\[5\]\ ==\ 0\)\ \{$	+1
+use	FUN_001102e0	piVar22	linkRecord	INFERRED	link record taken from the program link-record vector	^\s*piVar22\ =\ \(int\ \*\)\(uVar31\ \*\ 4\ \+\ puVar30\[2\]\);$	+1
+use	FUN_001102e0	piVar22	linkRecord	INFERRED	link record taken from the program link-record vector	^\s*piVar22\ =\ \(int\ \*\)FUN_0019423c\(puVar30,uVar31\);$	+1
+use	FUN_001102e0	piVar22	linkRecord	INFERRED	link record taken from the program link-record vector	^\s*piVar22\ =\ \(int\ \*\)\*piVar22;$	+2
+use	FUN_001102e0	piVar22	linkRecord	INFERRED	link record taken from the program link-record vector	^\s*if\ \(\*piVar22\ ==\ piVar10\[1\]\)\ \{$	+2
+use	FUN_001102e0	piVar22	otherEntry	INFERRED	second pack entry compared with the current one	^\s*piVar22\ =\ \(int\ \*\)\*puVar12;$	+5
+use	FUN_001102e0	piVar22	otherEntry	INFERRED	second pack entry compared with the current one	^\s*puVar30\ =\ \(uint\ \*\)piVar22\[3\];$@2	+1
+use	FUN_001102e0	piVar22	candidateGroup	INFERRED	candidate pack entry taken from the working list	^\s*piVar22\ =\ \(int\ \*\)\*puVar12;$@2	+2
+use	FUN_001102e0	piVar22	candidateGroup	INFERRED	candidate pack entry taken from the working list	^\s*piVar10\ =\ piVar22;$	+1
+use	FUN_001102e0	piVar22	candidateGroup	INFERRED	candidate pack entry taken from the working list	^\s*iVar14\ =\ FUN_0010e9d0\(piVar22,iVar5\);$	+1
+use	FUN_001102e0	piVar22	candidateGroup	INFERRED	candidate pack entry taken from the working list	^\s*uVar27\ =\ \*\(undefined4\ \*\)\(\*piVar22\ \+\ 0x94\);$	+1
+use	FUN_001102e0	piVar18	groupWordCursor	INFERRED	cursor over the four words of a group record that are cleared/restored	^\s*piVar18\ =\ piVar10;$	+1
+use	FUN_001102e0	piVar18	groupWordCursor	INFERRED	cursor over the four words of a group record that are cleared/restored	^\s*piVar18\[7\]\ =\ 0;$	+2
+use	FUN_001102e0	piVar18	groupWordCursor	INFERRED	cursor over the four words of a group record that are cleared/restored	^\s*piVar18\ =\ piVar10;$@2	+1
+use	FUN_001102e0	piVar18	groupWordCursor	INFERRED	cursor over the four words of a group record that are cleared/restored	^\s*piVar18\[7\]\ =\ 1;$	+3
+use	FUN_001102e0	piVar18	entryLaneFlagCursor	INFERRED	cursor over the lane flag bytes of the current entry	^\s*piVar18\ =\ piVar24\ \+\ 1;$	+1
+use	FUN_001102e0	piVar18	entryLaneFlagCursor	INFERRED	cursor over the lane flag bytes of the current entry	^\s*if\ \(\*\(char\ \*\)piVar18\ ==\ '\\x01'\)\ \{$	+1
+use	FUN_001102e0	piVar18	entryLaneFlagCursor	INFERRED	cursor over the lane flag bytes of the current entry	^\s*\*\(char\ \*\)piVar18\ =\ '\\0';$	+1
+use	FUN_001102e0	piVar18	entryLaneFlagCursor	INFERRED	cursor over the lane flag bytes of the current entry	^\s*piVar18\ =\ \(int\ \*\)\(\(int\)piVar18\ \+\ 1\);$	+1
+use	FUN_001102e0	piVar18	newLaneSlotRef	INFERRED	slot appended to an entry's lane list	^\s*piVar18\ =\ \(int\ \*\)\(uVar7\ \*\ 4\ \+\ puVar30\[2\]\);$	+1
+use	FUN_001102e0	piVar18	newLaneSlotRef	INFERRED	slot appended to an entry's lane list	^\s*piVar18\ =\ \(int\ \*\)FUN_0019423c\(puVar30,uVar7\);$	+1
+use	FUN_001102e0	piVar18	newLaneSlotRef	INFERRED	slot appended to an entry's lane list	^\s*\*piVar18\ =\ \(int\)piVar10;$	+1
+use	FUN_001102e0	piVar18	newEntrySlotRef	INFERRED	slot appended to the new pack entry vector	^\s*piVar18\ =\ \(int\ \*\)\(uVar7\ \*\ 4\ \+\ puVar11\[3\]\);$	+1
+use	FUN_001102e0	piVar18	newEntrySlotRef	INFERRED	slot appended to the new pack entry vector	^\s*piVar18\ =\ \(int\ \*\)FUN_0019423c\(puVar30,uVar7\);$@2	+1
+use	FUN_001102e0	piVar18	newEntrySlotRef	INFERRED	slot appended to the new pack entry vector	^\s*\*piVar18\ =\ \(int\)puVar28;$	+1
+use	FUN_001102e0	piVar13	laneInstCursor	INFERRED	cursor over the lane instruction words of a group	^\s*piVar13\ =\ piVar10;$	+1
+use	FUN_001102e0	piVar13	laneInstCursor	INFERRED	cursor over the lane instruction words of a group	^\s*piVar13\ =\ piVar13\ \+\ 1;$	+1
+use	FUN_001102e0	piVar13	laneInstCursor	INFERRED	cursor over the lane instruction words of a group	^\s*\*\(int\ \*\)\(local_54\ \+\ iVar14\ \*\ 4\)\ =\ \*piVar13;$	+1
+use	FUN_001102e0	piVar10	laneSourceWalk	INFERRED	walks the lane sources from the entry start	^\s*piVar10\ =\ piVar24;$	+1
+use	FUN_001102e0	piVar10	laneSourceWalk	INFERRED	walks the lane sources from the entry start	^\s*if\ \(\*piVar22\ ==\ piVar10\[1\]\)\ \{$	+1
+use	FUN_001102e0	piVar10	laneSourceWalk	INFERRED	walks the lane sources from the entry start	^\s*piVar10\ =\ piVar10\ \+\ 1;$	+1
+use	FUN_001102e0	piVar10	laneRecord	INFERRED	lane list element (reference then element)	^\s*piVar10\ =\ \(int\ \*\)\(uVar31\ \*\ 4\ \+\ puVar30\[2\]\);$@2	+1
+use	FUN_001102e0	piVar10	laneRecord	INFERRED	lane list element (reference then element)	^\s*piVar10\ =\ \(int\ \*\)FUN_0019423c\(puVar30,uVar31\);$@2	+1
+use	FUN_001102e0	piVar10	laneRecord	INFERRED	lane list element (reference then element)	^\s*piVar10\ =\ \(int\ \*\)\*piVar10;$	+1
+use	FUN_001102e0	piVar10	laneRecord	INFERRED	lane list element (reference then element)	^\s*iVar15\ =\ \*piVar10;$	+2
+use	FUN_001102e0	piVar10	laneRecord	INFERRED	lane list element (reference then element)	^\s*piVar13\ =\ piVar10;$	+1
+use	FUN_001102e0	piVar10	laneRecord	INFERRED	lane list element (reference then element)	^\s*piVar18\ =\ piVar10;$@2	+1
+use	FUN_001102e0	piVar10	laneRecord	INFERRED	lane list element (reference then element)	^\s*\*piVar18\ =\ \(int\)piVar10;$	+1
+use	FUN_001102e0	piVar10	candidateWordCursor	INFERRED	walks the words of the candidate group (word 7 is set to 1)	^\s*piVar10\ =\ piVar22;$	+1
+use	FUN_001102e0	piVar10	candidateWordCursor	INFERRED	walks the words of the candidate group (word 7 is set to 1)	^\s*piVar10\[7\]\ =\ 1;$	+1
+use	FUN_001102e0	piVar10	candidateWordCursor	INFERRED	walks the words of the candidate group (word 7 is set to 1)	^\s*piVar10\ =\ piVar10\ \+\ 1;$@2	+1
+use	FUN_001102e0	uVar7	allocationCount	INFERRED	filled count of the arena-allocated working vector	^\s*uVar7\ =\ puVar6\[2\];$	+2
+use	FUN_001102e0	uVar7	allocationCount	INFERRED	filled count of the arena-allocated working vector	^\s*uVar31\ =\ uVar7;$	+1
+use	FUN_001102e0	uVar7	allocationCount	INFERRED	filled count of the arena-allocated working vector	^\s*if\ \(uVar32\ <\ uVar7\)\ \{$	+1
+use	FUN_001102e0	uVar7	allocationCount	INFERRED	filled count of the arena-allocated working vector	^\s*if\ \(uVar7\ <\ \(uint\)puVar6\[1\]\)\ \{$	+4
+use	FUN_001102e0	uVar7	allocationCount	INFERRED	filled count of the arena-allocated working vector	^\s*piVar24\ =\ \(int\ \*\)FUN_0019423c\(puVar6\ \+\ 1,uVar7\);$	+1
+use	FUN_001102e0	uVar7	allocationCount	INFERRED	filled count of the arena-allocated working vector	^\s*uVar7\ =\ puVar6\[2\];$@2	+4
+use	FUN_001102e0	uVar7	allocationCount	INFERRED	filled count of the arena-allocated working vector	^\s*uVar7\ =\ puVar6\[2\];$@3	+5
+use	FUN_001102e0	uVar7	allocationCount	INFERRED	filled count of the arena-allocated working vector	^\s*puVar12\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar30,uVar7\);$	+1
+use	FUN_001102e0	uVar7	allocationCount	INFERRED	filled count of the arena-allocated working vector	^\s*uVar7\ =\ puVar6\[2\];$@4	+5
+use	FUN_001102e0	uVar7	allocationCount	INFERRED	filled count of the arena-allocated working vector	^\s*puVar17\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar23,uVar7\);$	+1
+use	FUN_001102e0	uVar7	allocationCount	INFERRED	filled count of the arena-allocated working vector	^\s*uVar7\ =\ puVar6\[2\];$@5	+5
+use	FUN_001102e0	uVar7	allocationCount	INFERRED	filled count of the arena-allocated working vector	^\s*puVar17\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar23,uVar7\);$@2	+1
+use	FUN_001102e0	uVar7	allocationCount	INFERRED	filled count of the arena-allocated working vector	^\s*uVar7\ =\ puVar6\[2\];$@6	+1
+use	FUN_001102e0	uVar7	allocationCount	INFERRED	filled count of the arena-allocated working vector	^\s*if\ \(uVar7\ <\ \*puVar23\)\ \{$@3	+4
+use	FUN_001102e0	uVar7	allocationCount	INFERRED	filled count of the arena-allocated working vector	^\s*piVar24\ =\ \(int\ \*\)FUN_0019423c\(puVar23,uVar7\);$	+1
+use	FUN_001102e0	uVar7	allocationCount	INFERRED	filled count of the arena-allocated working vector	^\s*uVar7\ =\ puVar6\[2\];$@7	+2
+use	FUN_001102e0	uVar7	allocationCount	INFERRED	filled count of the arena-allocated working vector	^\s*if\ \(uVar7\ <=\ uVar26\)\ \{$@11	+2
+use	FUN_001102e0	uVar7	allocationCount	INFERRED	filled count of the arena-allocated working vector	^\s*uVar7\ =\ puVar6\[2\];$@8	+2
+use	FUN_001102e0	uVar7	allocationCount	INFERRED	filled count of the arena-allocated working vector	^\s*uVar7\ =\ puVar6\[2\];$@9	+1
+use	FUN_001102e0	uVar7	allocationCount	INFERRED	filled count of the arena-allocated working vector	^\s*uVar7\ =\ puVar6\[2\];$@10	+1
+use	FUN_001102e0	uVar7	allocationCount	INFERRED	filled count of the arena-allocated working vector	^\s*if\ \(0\ <\ \(int\)uVar7\)\ \{$@13	+1
+use	FUN_001102e0	uVar7	allocationCount	INFERRED	filled count of the arena-allocated working vector	^\s*if\ \(uVar7\ <=\ uVar26\)\ \{$@12	+2
+use	FUN_001102e0	uVar7	allocationCount	INFERRED	filled count of the arena-allocated working vector	^\s*uVar7\ =\ puVar6\[2\];$@11	+1
+use	FUN_001102e0	uVar7	allocationCount	INFERRED	filled count of the arena-allocated working vector	^\s*uVar7\ =\ puVar6\[2\];$@12	+1
+use	FUN_001102e0	uVar7	allocationCount	INFERRED	filled count of the arena-allocated working vector	^\s*\}\ while\ \(\(int\)uVar26\ <\ \(int\)uVar7\);$@8	+1
+use	FUN_001102e0	uVar7	allocationCount	INFERRED	filled count of the arena-allocated working vector	^\s*if\ \(0\ <\ \(int\)uVar7\)\ \{$@14	+1
+use	FUN_001102e0	uVar7	allocationCount	INFERRED	filled count of the arena-allocated working vector	^\s*if\ \(uVar7\ <=\ uVar26\)\ \{$@13	+2
+use	FUN_001102e0	uVar7	allocationCount	INFERRED	filled count of the arena-allocated working vector	^\s*uVar7\ =\ puVar6\[2\];$@13	+1
+use	FUN_001102e0	uVar7	allocationCount	INFERRED	filled count of the arena-allocated working vector	^\s*\}\ while\ \(\(int\)uVar26\ <\ \(int\)uVar7\);$@9	+1
+use	FUN_001102e0	uVar7	allocationCount	INFERRED	filled count of the arena-allocated working vector	^\s*uVar7\ =\ puVar6\[2\];$@14	+1
+use	FUN_001102e0	uVar7	allocationCount	INFERRED	filled count of the arena-allocated working vector	^\s*if\ \(uVar7\ !=\ 0\)\ \{$@6	+1
+use	FUN_001102e0	uVar7	allocationCount	INFERRED	filled count of the arena-allocated working vector	^\s*if\ \(uVar7\ <=\ uVar26\)\ \{$@14	+2
+use	FUN_001102e0	uVar7	allocationCount	INFERRED	filled count of the arena-allocated working vector	^\s*uVar7\ =\ puVar6\[2\];$@15	+2
+use	FUN_001102e0	uVar7	allocationCount	INFERRED	filled count of the arena-allocated working vector	^\s*uVar7\ =\ puVar6\[2\];$@16	+2
+use	FUN_001102e0	uVar7	allocationCount	INFERRED	filled count of the arena-allocated working vector	^\s*if\ \(uVar7\ <=\ uVar26\)\ \{$@15	+2
+use	FUN_001102e0	uVar7	allocationCount	INFERRED	filled count of the arena-allocated working vector	^\s*uVar7\ =\ puVar6\[2\];$@17	+2
+use	FUN_001102e0	uVar7	packEntryCount	INFERRED	filled count of the pack entry vector (parameter)	^\s*uVar7\ =\ param_3\[1\];$	+1
+use	FUN_001102e0	uVar7	packEntryCount	INFERRED	filled count of the pack entry vector (parameter)	^\s*if\ \(uVar7\ ==\ 0\)\ \{$	+2
+use	FUN_001102e0	uVar7	packEntryCount	INFERRED	filled count of the pack entry vector (parameter)	^\s*if\ \(uVar7\ <=\ uVar26\)\ \{$@2	+2
+use	FUN_001102e0	uVar7	packEntryCount	INFERRED	filled count of the pack entry vector (parameter)	^\s*uVar7\ =\ param_3\[1\];$@2	+2
+use	FUN_001102e0	uVar7	packEntryCount	INFERRED	filled count of the pack entry vector (parameter)	^\s*if\ \(uVar7\ !=\ 0\)\ \{$@2	+1
+use	FUN_001102e0	uVar7	packEntryCount	INFERRED	filled count of the pack entry vector (parameter)	^\s*if\ \(uVar7\ <=\ uVar26\)\ \{$@3	+2
+use	FUN_001102e0	uVar7	packEntryCount	INFERRED	filled count of the pack entry vector (parameter)	^\s*uVar7\ =\ param_3\[1\];$@3	+2
+use	FUN_001102e0	uVar7	packEntryCount	INFERRED	filled count of the pack entry vector (parameter)	^\s*uVar7\ =\ param_3\[1\];$@4	+1
+use	FUN_001102e0	uVar7	packEntryCount	INFERRED	filled count of the pack entry vector (parameter)	^\s*if\ \(uVar7\ ==\ 0\)\ \{$@2	+2
+use	FUN_001102e0	uVar7	packEntryCount	INFERRED	filled count of the pack entry vector (parameter)	^\s*if\ \(uVar7\ <=\ uVar26\)\ \{$@4	+2
+use	FUN_001102e0	uVar7	packEntryCount	INFERRED	filled count of the pack entry vector (parameter)	^\s*uVar7\ =\ param_3\[1\];$@5	+2
+use	FUN_001102e0	uVar7	packEntryCount	INFERRED	filled count of the pack entry vector (parameter)	^\s*if\ \(0\ <\ \(int\)uVar7\)\ \{$	+1
+use	FUN_001102e0	uVar7	packEntryCount	INFERRED	filled count of the pack entry vector (parameter)	^\s*if\ \(uVar7\ <=\ uVar26\)\ \{$@5	+2
+use	FUN_001102e0	uVar7	packEntryCount	INFERRED	filled count of the pack entry vector (parameter)	^\s*uVar7\ =\ uVar26\ \+\ 1;$	+1
+use	FUN_001102e0	uVar7	packEntryCount	INFERRED	filled count of the pack entry vector (parameter)	^\s*uVar7\ =\ param_3\[1\];$@6	+1
+use	FUN_001102e0	uVar7	packEntryCount	INFERRED	filled count of the pack entry vector (parameter)	^\s*if\ \(\(iVar8\ ==\ piVar24\[5\]\)\ \&\&\ \(uVar31\ =\ 0,\ 0\ <\ \(int\)uVar7\)\)\ \{$	+1
+use	FUN_001102e0	uVar7	packEntryCount	INFERRED	filled count of the pack entry vector (parameter)	^\s*if\ \(uVar7\ <=\ uVar31\)\ \{$@3	+2
+use	FUN_001102e0	uVar7	packEntryCount	INFERRED	filled count of the pack entry vector (parameter)	^\s*uVar7\ =\ param_3\[1\];$@7	+1
+use	FUN_001102e0	uVar7	packEntryCount	INFERRED	filled count of the pack entry vector (parameter)	^\s*\}\ while\ \(\(int\)uVar31\ <\ \(int\)uVar7\);$	+1
+use	FUN_001102e0	uVar7	packEntryCount	INFERRED	filled count of the pack entry vector (parameter)	^\s*\}\ while\ \(\(int\)uVar26\ <\ \(int\)uVar7\);$	+1
+use	FUN_001102e0	uVar7	recordCount	INFERRED	filled count of the link-record / entry vector being walked	^\s*uVar7\ =\ puVar30\[1\];$@9	+2
+use	FUN_001102e0	uVar7	recordCount	INFERRED	filled count of the link-record / entry vector being walked	^\s*if\ \(uVar7\ <=\ uVar26\)\ \{$@7	+2
+use	FUN_001102e0	uVar7	recordCount	INFERRED	filled count of the link-record / entry vector being walked	^\s*uVar7\ =\ puVar30\[1\];$@10	+2
+use	FUN_001102e0	uVar7	recordCount	INFERRED	filled count of the link-record / entry vector being walked	^\s*uVar7\ =\ puVar30\[1\];$@11	+2
+use	FUN_001102e0	uVar7	recordCount	INFERRED	filled count of the link-record / entry vector being walked	^\s*if\ \(uVar7\ <=\ uVar26\)\ \{$@8	+2
+use	FUN_001102e0	uVar7	recordCount	INFERRED	filled count of the link-record / entry vector being walked	^\s*uVar7\ =\ puVar30\[1\];$@12	+2
+use	FUN_001102e0	uVar7	recordCount	INFERRED	filled count of the link-record / entry vector being walked	^\s*uVar7\ =\ puVar30\[1\];$@13	+2
+use	FUN_001102e0	uVar7	recordCount	INFERRED	filled count of the link-record / entry vector being walked	^\s*if\ \(uVar7\ <=\ uVar31\)\ \{$@5	+2
+use	FUN_001102e0	uVar7	recordCount	INFERRED	filled count of the link-record / entry vector being walked	^\s*uVar7\ =\ puVar30\[1\];$@17	+1
+use	FUN_001102e0	uVar7	recordCount	INFERRED	filled count of the link-record / entry vector being walked	^\s*\}\ while\ \(\(int\)local_60\ <\ \(int\)uVar7\);$	+1
+use	FUN_001102e0	uVar7	recordCount	INFERRED	filled count of the link-record / entry vector being walked	^\s*uVar7\ =\ puVar30\[1\];$@16	+5
+use	FUN_001102e0	uVar7	recordCount	INFERRED	filled count of the link-record / entry vector being walked	^\s*piVar18\ =\ \(int\ \*\)FUN_0019423c\(puVar30,uVar7\);$	+1
+use	FUN_001102e0	uVar7	recordCount	INFERRED	filled count of the link-record / entry vector being walked	^\s*uVar7\ =\ puVar30\[1\];$@18	+2
+use	FUN_001102e0	uVar7	recordCount	INFERRED	filled count of the link-record / entry vector being walked	^\s*if\ \(uVar7\ <=\ uVar31\)\ \{$@7	+2
+use	FUN_001102e0	uVar7	recordCount	INFERRED	filled count of the link-record / entry vector being walked	^\s*uVar7\ =\ puVar30\[1\];$@19	+2
+use	FUN_001102e0	uVar7	recordCount	INFERRED	filled count of the link-record / entry vector being walked	^\s*uVar7\ =\ puVar30\[1\];$@20	+2
+use	FUN_001102e0	uVar7	recordCount	INFERRED	filled count of the link-record / entry vector being walked	^\s*if\ \(uVar7\ <=\ uVar31\)\ \{$@8	+2
+use	FUN_001102e0	uVar7	recordCount	INFERRED	filled count of the link-record / entry vector being walked	^\s*uVar7\ =\ puVar30\[1\];$@21	+2
+use	FUN_001102e0	uVar7	bucketVectorCount	INFERRED	filled count of a bucket's vector	^\s*uVar7\ =\ puVar33\[1\];$	+5
+use	FUN_001102e0	uVar7	bucketVectorCount	INFERRED	filled count of a bucket's vector	^\s*puVar12\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar33,uVar7\);$	+1
+use	FUN_001102e0	uVar7	groupVectorCount	INFERRED	filled count of the group vector	^\s*uVar7\ =\ puVar11\[2\];$	+5
+use	FUN_001102e0	uVar7	groupVectorCount	INFERRED	filled count of the group vector	^\s*puVar12\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar29,uVar7\);$	+1
+use	FUN_001102e0	uVar7	groupVectorCount	INFERRED	filled count of the group vector	^\s*uVar7\ =\ puVar11\[2\];$@2	+1
+use	FUN_001102e0	uVar7	groupVectorCount	INFERRED	filled count of the group vector	^\s*if\ \(0\ <\ \(int\)uVar7\)\ \{$@6	+1
+use	FUN_001102e0	uVar7	groupVectorCount	INFERRED	filled count of the group vector	^\s*if\ \(uVar7\ <=\ uVar26\)\ \{$@9	+4
+use	FUN_001102e0	uVar7	groupVectorCount	INFERRED	filled count of the group vector	^\s*uVar7\ =\ puVar11\[2\];$@3	+1
+use	FUN_001102e0	uVar7	groupVectorCount	INFERRED	filled count of the group vector	^\s*if\ \(\(iVar8\ ==\ piVar24\[2\]\)\ \&\&\ \(uVar31\ =\ 0,\ 0\ <\ \(int\)uVar7\)\)\ \{$	+1
+use	FUN_001102e0	uVar7	groupVectorCount	INFERRED	filled count of the group vector	^\s*if\ \(uVar7\ <=\ uVar31\)\ \{$@4	+2
+use	FUN_001102e0	uVar7	groupVectorCount	INFERRED	filled count of the group vector	^\s*\}\ while\ \(\(int\)uVar26\ <\ \(int\)uVar7\);$@5	+1
+use	FUN_001102e0	uVar7	groupVectorCount	INFERRED	filled count of the group vector	^\s*if\ \(0\ <\ \(int\)uVar7\)\ \{$@10	+1
+use	FUN_001102e0	uVar7	groupVectorCount	INFERRED	filled count of the group vector	^\s*if\ \(uVar7\ <=\ uVar26\)\ \{$@10	+2
+use	FUN_001102e0	uVar7	groupVectorCount	INFERRED	filled count of the group vector	^\s*uVar7\ =\ puVar11\[2\];$@6	+2
+use	FUN_001102e0	uVar7	groupVectorCount	INFERRED	filled count of the group vector	^\s*uVar7\ =\ puVar11\[2\];$@8	+1
+use	FUN_001102e0	uVar7	groupVectorCount	INFERRED	filled count of the group vector	^\s*if\ \(\(int\)uVar7\ <=\ \(int\)uVar31\)\ goto\ LAB_001116f0;$	+1
+use	FUN_001102e0	uVar7	groupVectorCount	INFERRED	filled count of the group vector	^\s*uVar7\ =\ puVar11\[2\];$@4	+1
+use	FUN_001102e0	uVar7	groupVectorCount	INFERRED	filled count of the group vector	^\s*uVar7\ =\ puVar11\[2\];$@5	+1
+use	FUN_001102e0	uVar7	groupVectorCount	INFERRED	filled count of the group vector	^\s*uVar7\ =\ puVar11\[2\];$@7	+5
+use	FUN_001102e0	uVar7	groupVectorCount	INFERRED	filled count of the group vector	^\s*piVar18\ =\ \(int\ \*\)FUN_0019423c\(puVar30,uVar7\);$@2	+1
+use	FUN_001102e0	uVar7	copyIndex	INFERRED	index while copying one vector to another	^\s*uVar7\ =\ 0;$@3	+1
+use	FUN_001102e0	uVar7	copyIndex	INFERRED	index while copying one vector to another	^\s*if\ \(uVar7\ <\ \*puVar30\)\ \{$@4	+4
+use	FUN_001102e0	uVar7	copyIndex	INFERRED	index while copying one vector to another	^\s*puVar11\ =\ \(undefined4\ \*\)\(uVar7\ \*\ 4\ \+\ puVar30\[2\]\);$	+1
+use	FUN_001102e0	uVar7	copyIndex	INFERRED	index while copying one vector to another	^\s*puVar11\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar30,uVar7\);$	+1
+use	FUN_001102e0	uVar7	copyIndex	INFERRED	index while copying one vector to another	^\s*uVar7\ =\ uVar7\ \+\ 1;$	+1
+use	FUN_001102e0	uVar7	copyIndex	INFERRED	index while copying one vector to another	^\s*\}\ while\ \(uVar7\ <\ uVar26\);$	+1
+use	FUN_001102e0	uVar7	copyIndex	INFERRED	index while copying one vector to another	^\s*uVar7\ =\ 0;$@4	+1
+use	FUN_001102e0	uVar7	copyIndex	INFERRED	index while copying one vector to another	^\s*if\ \(uVar7\ <\ \*puVar30\)\ \{$@5	+4
+use	FUN_001102e0	uVar7	copyIndex	INFERRED	index while copying one vector to another	^\s*puVar6\ =\ \(undefined4\ \*\)\(uVar7\ \*\ 4\ \+\ puVar30\[2\]\);$	+1
+use	FUN_001102e0	uVar7	copyIndex	INFERRED	index while copying one vector to another	^\s*puVar6\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar30,uVar7\);$	+1
+use	FUN_001102e0	uVar7	copyIndex	INFERRED	index while copying one vector to another	^\s*uVar7\ =\ uVar7\ \+\ 1;$@2	+1
+use	FUN_001102e0	uVar7	copyIndex	INFERRED	index while copying one vector to another	^\s*\}\ while\ \(uVar7\ <\ uVar26\);$@2	+1
+use	FUN_001102e0	uVar32	searchIndex	INFERRED	index of the linear search in the unique-instruction list	^\s*uVar32\ =\ 0;$	+1
+use	FUN_001102e0	uVar32	searchIndex	INFERRED	index of the linear search in the unique-instruction list	^\s*if\ \(uVar32\ <\ uVar7\)\ \{$	+2
+use	FUN_001102e0	uVar32	searchIndex	INFERRED	index of the linear search in the unique-instruction list	^\s*uVar32\ =\ uVar32\ \+\ 1;$	+1
+use	FUN_001102e0	uVar31	searchRemaining	INFERRED	remaining iterations of the linear search	^\s*uVar31\ =\ uVar7;$	+1
+use	FUN_001102e0	uVar31	searchRemaining	INFERRED	remaining iterations of the linear search	^\s*uVar31\ =\ uVar31\ \-\ 1;$	+2
+use	FUN_001102e0	uVar31	otherIndex	INFERRED	index of the second walk over the group vector	^\s*if\ \(\(iVar8\ ==\ piVar24\[5\]\)\ \&\&\ \(uVar31\ =\ 0,\ 0\ <\ \(int\)uVar7\)\)\ \{$	+1
+use	FUN_001102e0	uVar31	otherIndex	INFERRED	index of the second walk over the group vector	^\s*if\ \(uVar31\ <\ \*param_3\)\ \{$	+4
+use	FUN_001102e0	uVar31	otherIndex	INFERRED	index of the second walk over the group vector	^\s*puVar6\ =\ \(undefined4\ \*\)\(uVar31\ \*\ 4\ \+\ param_3\[2\]\);$	+1
+use	FUN_001102e0	uVar31	otherIndex	INFERRED	index of the second walk over the group vector	^\s*puVar6\ =\ \(undefined4\ \*\)FUN_0019423c\(param_3,uVar31\);$	+1
+use	FUN_001102e0	uVar31	otherIndex	INFERRED	index of the second walk over the group vector	^\s*uVar31\ =\ uVar31\ \-\ 1;$@2	+1
+use	FUN_001102e0	uVar31	otherIndex	INFERRED	index of the second walk over the group vector	^\s*uVar31\ =\ uVar31\ \+\ 1;$@3	+2
+use	FUN_001102e0	uVar31	otherIndex	INFERRED	index of the second walk over the group vector	^\s*if\ \(\(iVar8\ ==\ piVar24\[2\]\)\ \&\&\ \(uVar31\ =\ 0,\ 0\ <\ \(int\)uVar7\)\)\ \{$	+1
+use	FUN_001102e0	uVar31	otherIndex	INFERRED	index of the second walk over the group vector	^\s*if\ \(uVar31\ <\ \*puVar29\)\ \{$	+4
+use	FUN_001102e0	uVar31	otherIndex	INFERRED	index of the second walk over the group vector	^\s*puVar12\ =\ \(undefined4\ \*\)\(uVar31\ \*\ 4\ \+\ puVar11\[3\]\);$	+1
+use	FUN_001102e0	uVar31	otherIndex	INFERRED	index of the second walk over the group vector	^\s*puVar12\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar29,uVar31\);$	+1
+use	FUN_001102e0	uVar31	otherIndex	INFERRED	index of the second walk over the group vector	^\s*uVar31\ =\ uVar31\ \+\ 1;$@8	+2
+use	FUN_001102e0	uVar31	laneListIndex	INFERRED	index into an entry's lane list	^\s*uVar31\ =\ 0;$@3	+1
+use	FUN_001102e0	uVar31	laneListIndex	INFERRED	index into an entry's lane list	^\s*if\ \(uVar31\ <\ \*puVar30\)\ \{$@3	+4
+use	FUN_001102e0	uVar31	laneListIndex	INFERRED	index into an entry's lane list	^\s*piVar10\ =\ \(int\ \*\)\(uVar31\ \*\ 4\ \+\ puVar30\[2\]\);$@2	+1
+use	FUN_001102e0	uVar31	laneListIndex	INFERRED	index into an entry's lane list	^\s*piVar10\ =\ \(int\ \*\)FUN_0019423c\(puVar30,uVar31\);$@2	+2
+use	FUN_001102e0	uVar31	laneListIndex	INFERRED	index into an entry's lane list	^\s*uVar31\ =\ local_60;$	+1
+use	FUN_001102e0	uVar31	laneListIndex	INFERRED	index into an entry's lane list	^\s*uVar31\ =\ 0;$@5	+1
+use	FUN_001102e0	uVar31	laneListIndex	INFERRED	index into an entry's lane list	^\s*if\ \(uVar31\ <\ \*puVar30\)\ \{$@5	+4
+use	FUN_001102e0	uVar31	laneListIndex	INFERRED	index into an entry's lane list	^\s*puVar12\ =\ \(undefined4\ \*\)\(uVar31\ \*\ 4\ \+\ puVar30\[2\]\);$	+1
+use	FUN_001102e0	uVar31	laneListIndex	INFERRED	index into an entry's lane list	^\s*puVar12\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar30,uVar31\);$	+1
+use	FUN_001102e0	uVar31	laneListIndex	INFERRED	index into an entry's lane list	^\s*uVar31\ =\ uVar31\ \+\ 1;$@5	+1
+use	FUN_001102e0	uVar31	laneListIndex	INFERRED	index into an entry's lane list	^\s*\}\ while\ \(\(int\)uVar31\ <\ \(int\)uVar7\);$@3	+1
+use	FUN_001102e0	uVar31	laneListIndex	INFERRED	index into an entry's lane list	^\s*uVar31\ =\ 0;$@6	+1
+use	FUN_001102e0	uVar31	laneListIndex	INFERRED	index into an entry's lane list	^\s*if\ \(uVar31\ <\ \*puVar30\)\ \{$@6	+4
+use	FUN_001102e0	uVar31	laneListIndex	INFERRED	index into an entry's lane list	^\s*piVar24\ =\ \(int\ \*\)\(uVar31\ \*\ 4\ \+\ puVar30\[2\]\);$	+1
+use	FUN_001102e0	uVar31	laneListIndex	INFERRED	index into an entry's lane list	^\s*piVar24\ =\ \(int\ \*\)FUN_0019423c\(puVar30,uVar31\);$	+1
+use	FUN_001102e0	uVar31	laneListIndex	INFERRED	index into an entry's lane list	^\s*uVar31\ =\ uVar31\ \+\ 1;$@6	+1
+use	FUN_001102e0	uVar31	laneListIndex	INFERRED	index into an entry's lane list	^\s*\}\ while\ \(\(int\)uVar31\ <\ \(int\)uVar7\);$@4	+1
+use	FUN_001102e0	uVar26	bucketScanIndex	INFERRED	index walking the entry vector while filling buckets	^\s*uVar26\ =\ 0;$@7	+1
+use	FUN_001102e0	uVar26	bucketScanIndex	INFERRED	index walking the entry vector while filling buckets	^\s*if\ \(uVar26\ <\ \*puVar30\)\ \{$@2	+4
+use	FUN_001102e0	uVar26	bucketScanIndex	INFERRED	index walking the entry vector while filling buckets	^\s*puVar12\ =\ \(undefined4\ \*\)\(uVar26\ \*\ 4\ \+\ puVar30\[2\]\);$	+1
+use	FUN_001102e0	uVar26	bucketScanIndex	INFERRED	index walking the entry vector while filling buckets	^\s*puVar12\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar30,uVar26\);$	+1
+use	FUN_001102e0	uVar26	bucketScanIndex	INFERRED	index walking the entry vector while filling buckets	^\s*uVar26\ =\ uVar26\ \+\ 1;$@7	+1
+use	FUN_001102e0	uVar26	bucketScanIndex	INFERRED	index walking the entry vector while filling buckets	^\s*\}\ while\ \(\(int\)uVar26\ <\ \(int\)uVar7\);$@3	+1
+use	FUN_001102e0	uVar26	bucketCopyIndex	INFERRED	index walking a bucket's vector	^\s*uVar26\ =\ 0;$@8	+1
+use	FUN_001102e0	uVar26	bucketCopyIndex	INFERRED	index walking a bucket's vector	^\s*if\ \(uVar26\ <\ \*puVar30\)\ \{$@3	+4
+use	FUN_001102e0	uVar26	bucketCopyIndex	INFERRED	index walking a bucket's vector	^\s*puVar12\ =\ \(undefined4\ \*\)\(uVar26\ \*\ 4\ \+\ puVar30\[2\]\);$@2	+1
+use	FUN_001102e0	uVar26	bucketCopyIndex	INFERRED	index walking a bucket's vector	^\s*puVar12\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar30,uVar26\);$@2	+1
+use	FUN_001102e0	uVar26	bucketCopyIndex	INFERRED	index walking a bucket's vector	^\s*uVar26\ =\ uVar26\ \+\ 1;$@8	+1
+use	FUN_001102e0	uVar26	bucketCopyIndex	INFERRED	index walking a bucket's vector	^\s*\}\ while\ \(\(int\)uVar26\ <\ \(int\)uVar7\);$@4	+1
+use	FUN_001102e0	uVar26	groupIndex	INFERRED	index into the group vector	^\s*uVar26\ =\ 0;$@9	+1
+use	FUN_001102e0	uVar26	groupIndex	INFERRED	index into the group vector	^\s*if\ \(uVar26\ <\ \*puVar29\)\ \{$	+4
+use	FUN_001102e0	uVar26	groupIndex	INFERRED	index into the group vector	^\s*puVar12\ =\ \(undefined4\ \*\)\(uVar26\ \*\ 4\ \+\ puVar11\[3\]\);$	+1
+use	FUN_001102e0	uVar26	groupIndex	INFERRED	index into the group vector	^\s*puVar12\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar29,uVar26\);$	+1
+use	FUN_001102e0	uVar26	groupIndex	INFERRED	index into the group vector	^\s*uVar26\ =\ uVar26\ \+\ 1;$@9	+1
+use	FUN_001102e0	uVar26	groupIndex	INFERRED	index into the group vector	^\s*\}\ while\ \(\(int\)uVar26\ <\ \(int\)uVar7\);$@5	+1
+use	FUN_001102e0	uVar26	groupIndex	INFERRED	index into the group vector	^\s*uVar26\ =\ 1;$	+1
+use	FUN_001102e0	uVar26	groupIndex	INFERRED	index into the group vector	^\s*uVar26\ =\ 0;$@10	+1
+use	FUN_001102e0	uVar26	groupIndex	INFERRED	index into the group vector	^\s*if\ \(uVar26\ <\ \*puVar29\)\ \{$@2	+4
+use	FUN_001102e0	uVar26	groupIndex	INFERRED	index into the group vector	^\s*piVar24\ =\ \(int\ \*\)\(uVar26\ \*\ 4\ \+\ puVar11\[3\]\);$	+1
+use	FUN_001102e0	uVar26	groupIndex	INFERRED	index into the group vector	^\s*piVar24\ =\ \(int\ \*\)FUN_0019423c\(puVar29,uVar26\);$	+1
+use	FUN_001102e0	uVar26	groupIndex	INFERRED	index into the group vector	^\s*uVar26\ =\ uVar26\ \+\ 1;$@10	+1
+use	FUN_001102e0	uVar26	groupIndex	INFERRED	index into the group vector	^\s*\}\ while\ \(\(int\)uVar26\ <\ \(int\)uVar7\);$@6	+1
+use	FUN_001102e0	uVar26	groupIndex	INFERRED	index into the group vector	^\s*uVar26\ =\ 0;$@11	+1
+use	FUN_001102e0	uVar26	groupIndex	INFERRED	index into the group vector	^\s*if\ \(uVar26\ <\ \*puVar23\)\ \{$	+4
+use	FUN_001102e0	uVar26	groupIndex	INFERRED	index into the group vector	^\s*puVar11\ =\ \(undefined4\ \*\)\(uVar26\ \*\ 4\ \+\ puVar6\[3\]\);$	+1
+use	FUN_001102e0	uVar26	groupIndex	INFERRED	index into the group vector	^\s*puVar11\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar23,uVar26\);$	+1
+use	FUN_001102e0	uVar26	groupIndex	INFERRED	index into the group vector	^\s*uVar26\ =\ uVar26\ \+\ 1;$@11	+1
+use	FUN_001102e0	uVar26	groupIndex	INFERRED	index into the group vector	^\s*\}\ while\ \(\(int\)uVar26\ <\ \(int\)uVar7\);$@7	+1
+use	FUN_001102e0	uVar26	allocIndex	INFERRED	index into the working vector	^\s*uVar26\ =\ 0;$@12	+1
+use	FUN_001102e0	uVar26	allocIndex	INFERRED	index into the working vector	^\s*if\ \(uVar26\ <\ \*puVar23\)\ \{$@2	+4
+use	FUN_001102e0	uVar26	allocIndex	INFERRED	index into the working vector	^\s*puVar12\ =\ \(undefined4\ \*\)\(uVar26\ \*\ 4\ \+\ puVar6\[3\]\);$	+1
+use	FUN_001102e0	uVar26	allocIndex	INFERRED	index into the working vector	^\s*puVar12\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar23,uVar26\);$	+1
+use	FUN_001102e0	uVar26	allocIndex	INFERRED	index into the working vector	^\s*uVar26\ =\ uVar26\ \+\ 1;$@12	+2
+use	FUN_001102e0	uVar26	allocIndex	INFERRED	index into the working vector	^\s*uVar26\ =\ 0;$@13	+1
+use	FUN_001102e0	uVar26	allocIndex	INFERRED	index into the working vector	^\s*if\ \(uVar26\ <\ \*puVar23\)\ \{$@3	+4
+use	FUN_001102e0	uVar26	allocIndex	INFERRED	index into the working vector	^\s*puVar12\ =\ \(undefined4\ \*\)\(uVar26\ \*\ 4\ \+\ puVar6\[3\]\);$@2	+1
+use	FUN_001102e0	uVar26	allocIndex	INFERRED	index into the working vector	^\s*puVar12\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar23,uVar26\);$@2	+1
+use	FUN_001102e0	uVar26	allocIndex	INFERRED	index into the working vector	^\s*uVar26\ =\ uVar26\ \+\ 1;$@13	+2
+use	FUN_001102e0	uVar26	allocIndex	INFERRED	index into the working vector	^\s*uVar26\ =\ 0;$@14	+1
+use	FUN_001102e0	uVar26	allocIndex	INFERRED	index into the working vector	^\s*if\ \(uVar26\ <\ \*puVar23\)\ \{$@4	+4
+use	FUN_001102e0	uVar26	allocIndex	INFERRED	index into the working vector	^\s*puVar11\ =\ \(undefined4\ \*\)\(uVar26\ \*\ 4\ \+\ puVar6\[3\]\);$@2	+1
+use	FUN_001102e0	uVar26	allocIndex	INFERRED	index into the working vector	^\s*puVar11\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar23,uVar26\);$@2	+1
+use	FUN_001102e0	uVar26	allocIndex	INFERRED	index into the working vector	^\s*uVar26\ =\ uVar26\ \+\ 1;$@14	+1
+use	FUN_001102e0	uVar26	allocIndex	INFERRED	index into the working vector	^\s*\}\ while\ \(uVar26\ <\ uVar7\);$@5	+1
+use	FUN_001102e0	uVar26	allocIndex	INFERRED	index into the working vector	^\s*uVar26\ =\ 0;$@15	+1
+use	FUN_001102e0	uVar26	allocIndex	INFERRED	index into the working vector	^\s*if\ \(uVar26\ <\ \*puVar23\)\ \{$@5	+4
+use	FUN_001102e0	uVar26	allocIndex	INFERRED	index into the working vector	^\s*puVar11\ =\ \(undefined4\ \*\)\(uVar26\ \*\ 4\ \+\ puVar6\[3\]\);$@3	+1
+use	FUN_001102e0	uVar26	allocIndex	INFERRED	index into the working vector	^\s*puVar11\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar23,uVar26\);$@3	+1
+use	FUN_001102e0	uVar26	allocIndex	INFERRED	index into the working vector	^\s*uVar26\ =\ uVar26\ \+\ 1;$@15	+1
+use	FUN_001102e0	uVar26	allocIndex	INFERRED	index into the working vector	^\s*\}\ while\ \(uVar26\ <\ uVar7\);$@6	+1
+use	FUN_001102e0	uVar26	copyCount	INFERRED	filled count of the source vector of a copy loop	^\s*uVar26\ =\ puVar30\[1\];$	+1
+use	FUN_001102e0	uVar26	copyCount	INFERRED	filled count of the source vector of a copy loop	^\s*if\ \(uVar26\ !=\ 0\)\ \{$	+1
+use	FUN_001102e0	uVar26	copyCount	INFERRED	filled count of the source vector of a copy loop	^\s*if\ \(uVar26\ <=\ uVar7\)\ \{$	+2
+use	FUN_001102e0	uVar26	copyCount	INFERRED	filled count of the source vector of a copy loop	^\s*uVar26\ =\ puVar30\[1\];$@2	+2
+use	FUN_001102e0	uVar26	copyCount	INFERRED	filled count of the source vector of a copy loop	^\s*uVar26\ =\ puVar30\[1\];$@3	+1
+use	FUN_001102e0	uVar26	copyCount	INFERRED	filled count of the source vector of a copy loop	^\s*if\ \(uVar26\ !=\ 0\)\ \{$@2	+1
+use	FUN_001102e0	uVar26	copyCount	INFERRED	filled count of the source vector of a copy loop	^\s*if\ \(uVar26\ <=\ uVar7\)\ \{$@2	+2
+use	FUN_001102e0	uVar26	copyCount	INFERRED	filled count of the source vector of a copy loop	^\s*uVar26\ =\ puVar30\[1\];$@4	+2
+use	FUN_001102e0	uVar25	destRegister	INFERRED	destination register (+0x94) of the entry instruction	^\s*uVar25\ =\ \*\(undefined4\ \*\)\(\*piVar24\ \+\ 0x94\);$	+1
+use	FUN_001102e0	uVar25	destRegister	INFERRED	destination register (+0x94) of the entry instruction	^\s*\*\(undefined4\ \*\)\(iVar5\ \+\ 0x14\)\ =\ uVar25;$	+1
+use	FUN_001102e0	uVar25	laneKindValue	INFERRED	lane kind word stored into the cloned instruction	^\s*uVar25\ =\ \*puVar12;$	+1
+use	FUN_001102e0	uVar25	laneKindValue	INFERRED	lane kind word stored into the cloned instruction	^\s*\*\(undefined4\ \*\)\(iVar15\ \+\ 0x9c\)\ =\ uVar25;$	+1
+use	FUN_001102e0	uVar25	swizzleCode	INFERRED	swizzle code looked up in a table by the source swizzle byte	^\s*uVar25\ =\ \*\(undefined4\ \*\)$	+1
+use	FUN_001102e0	uVar25	swizzleCode	INFERRED	swizzle code looked up in a table by the source swizzle byte	^\s*\*\(undefined4\ \*\)\(iVar16\ \+\ 0x10\)\ =\ uVar25;$	+1
+use	FUN_001102e0	uVar25	cloneDestRegister	INFERRED	destination register of the cloned instruction	^\s*uVar25\ =\ \*\(undefined4\ \*\)\(iVar15\ \+\ 0x94\);$	+1
+use	FUN_001102e0	uVar25	cloneDestRegister	INFERRED	destination register of the cloned instruction	^\s*\*\(undefined4\ \*\)\(iVar15\ \+\ 0x14\)\ =\ uVar25;$	+1
+use	FUN_001102e0	uVar25	entryBlock	INFERRED	program block that receives the rebuilt instructions	^\s*uVar25\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x3a8\);$	+1
+use	FUN_001102e0	uVar25	entryBlock	INFERRED	program block that receives the rebuilt instructions	^\s*FUN_000e7688\(uVar25,\*\(undefined4\ \*\)\*puVar11\);$	+1
+use	FUN_001102e0	uVar25	entryBlock	INFERRED	program block that receives the rebuilt instructions	^\s*FUN_000e7688\(uVar25,\*\(undefined4\ \*\)\*puVar11\);$@2	+1
+use	FUN_001102e0	bVar1	notLastLane	INFERRED	loop latch: lane index is not the last (3)	^\s*bVar1\ =\ iVar8\ !=\ 3;$	+1
+use	FUN_001102e0	bVar1	notLastLane	INFERRED	loop latch: lane index is not the last (3)	^\s*\}\ while\ \(bVar1\);$	+1
+use	FUN_001102e0	bVar1	notLastLane	INFERRED	loop latch: lane index is not the last (3)	^\s*bVar1\ =\ iVar9\ !=\ 3;$	+1
+use	FUN_001102e0	bVar1	notLastLane	INFERRED	loop latch: lane index is not the last (3)	^\s*\}\ while\ \(bVar1\);$@2	+1
+use	FUN_001102e0	bVar1	notLastLane	INFERRED	loop latch: lane index is not the last (3)	^\s*bVar1\ =\ iVar14\ !=\ 3;$	+1
+use	FUN_001102e0	bVar1	notLastLane	INFERRED	loop latch: lane index is not the last (3)	^\s*\}\ while\ \(bVar1\);$@5	+1
+use	FUN_001102e0	bVar1	notLastLane	INFERRED	loop latch: lane index is not the last (3)	^\s*bVar1\ =\ iVar8\ !=\ 3;$@2	+1
+use	FUN_001102e0	bVar1	notLastLane	INFERRED	loop latch: lane index is not the last (3)	^\s*\}\ while\ \(bVar1\);$@6	+1
+use	FUN_001102e0	bVar1	notLastLane	INFERRED	loop latch: lane index is not the last (3)	^\s*bVar1\ =\ iVar14\ !=\ 3;$@2	+1
+use	FUN_001102e0	bVar1	notLastLane	INFERRED	loop latch: lane index is not the last (3)	^\s*\}\ while\ \(bVar1\);$@7	+1
+use	FUN_001102e0	bVar1	notLastLane	INFERRED	loop latch: lane index is not the last (3)	^\s*bVar1\ =\ iVar5\ !=\ 3;$	+1
+use	FUN_001102e0	bVar1	notLastLane	INFERRED	loop latch: lane index is not the last (3)	^\s*\}\ while\ \(bVar1\);$@8	+1
+use	FUN_001102e0	bVar1	notLastBucket	INFERRED	loop latch: bucket index is not the last (0xb)	^\s*bVar1\ =\ iVar8\ !=\ 0xb;$	+1
+use	FUN_001102e0	bVar1	notLastBucket	INFERRED	loop latch: bucket index is not the last (0xb)	^\s*\}\ while\ \(bVar1\);$@3	+1
+use	FUN_001102e0	bVar1	notLastBucket	INFERRED	loop latch: bucket index is not the last (0xb)	^\s*bVar1\ =\ iVar8\ !=\ 0xb;$@2	+1
+use	FUN_001102e0	bVar1	notLastBucket	INFERRED	loop latch: bucket index is not the last (0xb)	^\s*\}\ while\ \(bVar1\);$@4	+1
+use	FUN_001102e0	bVar1	isLastLane	INFERRED	loop latch: lane index equals 3	^\s*bVar1\ =\ iVar5\ ==\ 3;$	+1
+use	FUN_001102e0	bVar1	isLastLane	INFERRED	loop latch: lane index equals 3	^\s*if\ \(bVar1\)\ break;$	+1
+use	FUN_001102e0	bVar1	isLastLane	INFERRED	loop latch: lane index equals 3	^\s*bVar1\ =\ iVar21\ ==\ 3;$	+1
+use	FUN_001102e0	bVar1	isLastLane	INFERRED	loop latch: lane index equals 3	^\s*if\ \(bVar1\)\ goto\ LAB_0011151c;$	+1
+use	FUN_001102e0	uVar2	swizzleByteA	INFERRED	source swizzle byte of lane iVar8	^\s*uVar2\ =\ \*\(undefined1\ \*\)\(iVar8\ \+\ iVar5\ \+\ 0x10\);$	+1
+use	FUN_001102e0	uVar2	swizzleByteA	INFERRED	source swizzle byte of lane iVar8	^\s*\(\*\*\(code\ \*\*\)\(\*\(int\ \*\)\*piVar24\ \+\ 0x88\)\)\(\(int\ \*\)\*piVar24,1,iVar9,uVar2\);$	+1
+use	FUN_001102e0	uVar3	swizzleByteB	INFERRED	source swizzle byte of the swap partner lane	^\s*uVar3\ =\ \*\(undefined1\ \*\)\(iVar9\ \+\ iVar5\ \+\ 0x10\);$	+1
+use	FUN_001102e0	uVar3	swizzleByteB	INFERRED	source swizzle byte of the swap partner lane	^\s*\(\*\*\(code\ \*\*\)\(\*\(int\ \*\)\*piVar24\ \+\ 0x88\)\)\(\(int\ \*\)\*piVar24,1,iVar8,uVar3\);$	+1
+use	FUN_001102e0	uVar3	srcSwizzleByte	INFERRED	source swizzle byte of lane iVar21	^\s*uVar3\ =\ \*\(undefined1\ \*\)\(iVar21\ \+\ iVar16\ \+\ 0x10\);$	+1
+use	FUN_001102e0	uVar3	srcSwizzleByte	INFERRED	source swizzle byte of lane iVar21	^\s*\*\(undefined1\ \*\)\(iVar14\ \+\ \(int\)piVar4\)\ =\ uVar3;$	+1
+use	FUN_001102e0	piVar4	savedSwizzlePtr	INFERRED	pointer to the saved swizzle words	^\s*piVar4\ =\ local_5c;$	+1
+use	FUN_001102e0	piVar4	savedSwizzlePtr	INFERRED	pointer to the saved swizzle words	^\s*\*\(undefined1\ \*\)\(iVar14\ \+\ \(int\)piVar4\)\ =\ uVar3;$	+1
+use	FUN_001102e0	iVar8	recordInst	INFERRED	instruction of a link record	^\s*iVar8\ =\ \*piVar24;$	+1
+use	FUN_001102e0	iVar8	recordInst	INFERRED	instruction of a link record	^\s*iVar8\ =\ \*piVar24;$@2	+1
+use	FUN_001102e0	iVar8	recordInst	INFERRED	instruction of a link record	^\s*if\ \(\*piVar24\ ==\ iVar8\)\ goto\ LAB_0011047c;$	+1
+use	FUN_001102e0	iVar8	recordInst	INFERRED	instruction of a link record	^\s*\*piVar24\ =\ iVar8;$	+1
+use	FUN_001102e0	iVar8	groupLimit	INFERRED	FUN_0010f704: number of vec4 groups allowed	^\s*iVar8\ =\ \(\(int\ \(\*\)\(\)\)FUN_0010f704\)\(iStack0000001c,puVar30,\*\(undefined4\ \*\)\(param_1\ \+\ 8\)\);$	+2
+use	FUN_001102e0	iVar8	laneCounter	INFERRED	lane counter 0..3	^\s*iVar8\ =\ 0;$	+1
+use	FUN_001102e0	iVar8	laneCounter	INFERRED	lane counter 0..3	^\s*if\ \(\(\*\(char\ \*\)\(iVar8\ \+\ iVar9\ \+\ 0x10\)\ !=\ '\\x01'\)\ \&\&$	+2
+use	FUN_001102e0	iVar8	laneCounter	INFERRED	lane counter 0..3	^\s*if\ \(\(\(iStack0000001c\ ==\ \*\(int\ \*\)\(iVar5\ \+\ 0x1c\)\)\ \&\&\ \(\*\(int\ \*\)\(iVar5\ \+\ 0x10\)\ ==\ iVar8\)$	+2
+use	FUN_001102e0	iVar8	laneCounter	INFERRED	lane counter 0..3	^\s*\*\(undefined1\ \*\)\(iVar8\ \+\ \*piVar22\ \+\ 0x9c\)\ =\ 1;$	+1
+use	FUN_001102e0	iVar8	laneCounter	INFERRED	lane counter 0..3	^\s*bVar1\ =\ iVar8\ !=\ 3;$	+1
+use	FUN_001102e0	iVar8	laneCounter	INFERRED	lane counter 0..3	^\s*iVar8\ =\ iVar8\ \+\ 1;$	+1
+use	FUN_001102e0	iVar8	laneCounter	INFERRED	lane counter 0..3	^\s*iVar8\ =\ 0;$@2	+1
+use	FUN_001102e0	iVar8	laneCounter	INFERRED	lane counter 0..3	^\s*if\ \(\(\*\(char\ \*\)\(iVar8\ \+\ iVar9\ \+\ 0x10\)\ ==\ '\\x01'\)\ \&\&\ \(iVar9\ =\ iVar8\ \+\ 1,\ iVar9\ <\ 4\)\)\ \{$	+1
+use	FUN_001102e0	iVar8	laneCounter	INFERRED	lane counter 0..3	^\s*iVar5\ =\ piVar24\[iVar8\ \+\ 1\];$	+2
+use	FUN_001102e0	iVar8	laneCounter	INFERRED	lane counter 0..3	^\s*\*\(undefined1\ \*\)\(iVar8\ \+\ iVar14\ \+\ 0x9c\)\ =\ 0;$	+1
+use	FUN_001102e0	iVar8	laneCounter	INFERRED	lane counter 0..3	^\s*uVar2\ =\ \*\(undefined1\ \*\)\(iVar8\ \+\ iVar5\ \+\ 0x10\);$	+2
+use	FUN_001102e0	iVar8	laneCounter	INFERRED	lane counter 0..3	^\s*iVar8\ =\ iVar8\ \+\ 1;$@2	+2
+use	FUN_001102e0	iVar8	laneCounter	INFERRED	lane counter 0..3	^\s*iVar8\ =\ 0;$@3	+1
+use	FUN_001102e0	iVar8	laneCounter	INFERRED	lane counter 0..3	^\s*piVar22\[6\]\ =\ iVar8;$	+1
+use	FUN_001102e0	iVar8	laneCounter	INFERRED	lane counter 0..3	^\s*iVar8\ =\ iVar8\ \+\ 1;$@3	+1
+use	FUN_001102e0	iVar8	laneCounter	INFERRED	lane counter 0..3	^\s*iVar8\ =\ 0;$@4	+1
+use	FUN_001102e0	iVar8	laneCounter	INFERRED	lane counter 0..3	^\s*\*piVar24\ =\ iVar8;$@2	+1
+use	FUN_001102e0	iVar8	laneCounter	INFERRED	lane counter 0..3	^\s*bVar1\ =\ iVar8\ !=\ 0xb;$	+1
+use	FUN_001102e0	iVar8	laneCounter	INFERRED	lane counter 0..3	^\s*iVar8\ =\ iVar8\ \+\ 1;$@4	+1
+use	FUN_001102e0	iVar8	laneCounter	INFERRED	lane counter 0..3	^\s*iVar8\ =\ 0;$@5	+1
+use	FUN_001102e0	iVar8	laneCounter	INFERRED	lane counter 0..3	^\s*\*puVar12\ =\ \&DAT_001fc1f0\ \+\ iVar8\ \*\ 4;$	+1
+use	FUN_001102e0	iVar8	laneCounter	INFERRED	lane counter 0..3	^\s*bVar1\ =\ iVar8\ !=\ 0xb;$@2	+1
+use	FUN_001102e0	iVar8	laneCounter	INFERRED	lane counter 0..3	^\s*iVar8\ =\ iVar8\ \+\ 1;$@5	+1
+use	FUN_001102e0	iVar8	laneCounter	INFERRED	lane counter 0..3	^\s*iVar8\ =\ 0;$@6	+1
+use	FUN_001102e0	iVar8	laneCounter	INFERRED	lane counter 0..3	^\s*FUN_00104104\(\*puVar11,iVar8,0,0\);$	+3
+use	FUN_001102e0	iVar8	packingSupported	INFERRED	result of the target vtable query (+0xc4) that enables the second packing stage	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x30c\)\ \+\ 0xc4\)\)\(\);$	+2
+use	FUN_001102e0	iVar8	packingSupported	INFERRED	result of the target vtable query (+0xc4) that enables the second packing stage	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x30c\)\ \+\ 0xc4\)\)\(\);$@2	+2
+use	FUN_001102e0	iVar8	packingSupported	INFERRED	result of the target vtable query (+0xc4) that enables the second packing stage	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x30c\)\ \+\ 0xc4\)\)\(\);$@3	+2
+use	FUN_001102e0	iVar8	packingSupported	INFERRED	result of the target vtable query (+0xc4) that enables the second packing stage	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x30c\)\ \+\ 0xc4\)\)\(\);$@4	+2
+use	FUN_001102e0	iVar8	packingSupported	INFERRED	result of the target vtable query (+0xc4) that enables the second packing stage	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x30c\)\ \+\ 0xc4\)\)\(\);$@5	+2
+use	FUN_001102e0	iVar8	packingSupported	INFERRED	result of the target vtable query (+0xc4) that enables the second packing stage	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x30c\)\ \+\ 0xc4\)\)\(\);$@6	+2
+use	FUN_001102e0	iVar8	needsLaneFixup	INFERRED	FUN_0010ecb8 result for the entry instruction	^\s*iVar8\ =\ FUN_0010ecb8\(\*piVar24\);$	+2
+use	FUN_001102e0	iVar8	groupSizeRemaining	INFERRED	countdown from 4	^\s*iVar8\ =\ 4;$	+1
+use	FUN_001102e0	iVar8	groupSizeRemaining	INFERRED	countdown from 4	^\s*if\ \(\(iVar8\ ==\ piVar24\[5\]\)\ \&\&\ \(uVar31\ =\ 0,\ 0\ <\ \(int\)uVar7\)\)\ \{$	+1
+use	FUN_001102e0	iVar8	groupSizeRemaining	INFERRED	countdown from 4	^\s*iVar8\ =\ iVar8\ \+\ \-1;$	+2
+use	FUN_001102e0	iVar8	groupSizeRemaining	INFERRED	countdown from 4	^\s*iVar8\ =\ 4;$@2	+1
+use	FUN_001102e0	iVar8	groupSizeRemaining	INFERRED	countdown from 4	^\s*else\ if\ \(puVar11\[5\]\ ==\ iVar8\)\ \{$	+1
+use	FUN_001102e0	iVar8	groupSizeRemaining	INFERRED	countdown from 4	^\s*iVar8\ =\ iVar8\ \+\ \-1;$@2	+2
+use	FUN_001102e0	iVar8	bucketRegister	INFERRED	destination register used to index the bucket table	^\s*iVar8\ =\ \*\(int\ \*\)\(iVar9\ \+\ 0x94\);$	+2
+use	FUN_001102e0	iVar8	bucketRegister	INFERRED	destination register used to index the bucket table	^\s*\(DAT_001fc1f8\)\[iVar8\ \*\ 4\]\ =\ \(DAT_001fc1f8\)\[iVar8\ \*\ 4\]\ \+\ \-1;$	+1
+use	FUN_001102e0	iVar8	bucketRegister	INFERRED	destination register used to index the bucket table	^\s*puVar33\ =\ \(uint\ \*\)\(DAT_001fc1fc\)\[iVar8\ \*\ 4\];$	+1
+use	FUN_001102e0	iVar8	requiredLanes	INFERRED	lanes required, loop 1..3	^\s*iVar8\ =\ 1;$	+1
+use	FUN_001102e0	iVar8	requiredLanes	INFERRED	lanes required, loop 1..3	^\s*if\ \(\(iVar8\ ==\ piVar24\[2\]\)\ \&\&\ \(uVar31\ =\ 0,\ 0\ <\ \(int\)uVar7\)\)\ \{$	+1
+use	FUN_001102e0	iVar8	requiredLanes	INFERRED	lanes required, loop 1..3	^\s*if\ \(\(iVar5\ ==\ iVar9\)\ \|\|\ \(iVar8\ <\ 4\ \-\ piVar22\[2\]\)\)\ goto\ LAB_001116e0;$	+1
+use	FUN_001102e0	iVar8	requiredLanes	INFERRED	lanes required, loop 1..3	^\s*iVar8\ =\ iVar8\ \+\ 1;$@6	+2
+use	FUN_001102e0	iVar8	requiredLanes	INFERRED	lanes required, loop 1..3	^\s*iVar8\ =\ piVar24\[2\]\ \+\ \-1;$	+1
+use	FUN_001102e0	iVar8	entryInst	INFERRED	instruction of the entry	^\s*iVar8\ =\ \*piVar24;$@3	+2
+use	FUN_001102e0	iVar8	entryInst	INFERRED	instruction of the entry	^\s*iVar5\ =\ iVar8;$	+1
+use	FUN_001102e0	iVar8	entryInst	INFERRED	instruction of the entry	^\s*puVar30\ =\ \*\(uint\ \*\*\)\(iVar8\ \+\ 0xc\);$@2	+1
+use	FUN_001102e0	iVar8	groupCursor	INFERRED	group count cursor counting down to vec4GroupCount	^\s*iVar8\ =\ \(\(int\ \(\*\)\(\)\)FUN_0010f704\)\(iStack0000001c,\*\(undefined4\ \*\)\(param_1\ \+\ 0x418\),$	+3
+use	FUN_001102e0	iVar8	groupCursor	INFERRED	group count cursor counting down to vec4GroupCount	^\s*iVar8\ =\ iVar8\ \+\ \-1;$@3	+2
+use	FUN_001102e0	iVar9	operandOrSlot	INFERRED	operand record first, then the slot index returned by FUN_0010e3b4 (one statement uses both)	^\s*iVar9\ =\ FUN_001054ec\(\*piVar22,0\);$	+3
+use	FUN_001102e0	iVar9	operandOrSlot	INFERRED	operand record first, then the slot index returned by FUN_0010e3b4 (one statement uses both)	^\s*\*\(int\ \*\)\(iVar5\ \+\ 0x18\)\ =\ iVar9;$	+1
+use	FUN_001102e0	iVar9	entryDestOperand	INFERRED	destination operand record of the entry instruction	^\s*iVar9\ =\ FUN_001054ec\(\*piVar24,0\);$	+2
+use	FUN_001102e0	iVar9	entryDestOperand	INFERRED	destination operand record of the entry instruction	^\s*if\ \(\*\(char\ \*\)\(iVar9\ \+\ iVar5\ \+\ 0x10\)\ ==\ '\\0'\)\ \{$	+1
+use	FUN_001102e0	iVar9	entryDestOperand	INFERRED	destination operand record of the entry instruction	^\s*piVar24\[iVar8\ \+\ 1\]\ =\ piVar24\[iVar9\ \+\ 1\];$	+2
+use	FUN_001102e0	iVar9	entryDestOperand	INFERRED	destination operand record of the entry instruction	^\s*\*\(undefined1\ \*\)\(iVar9\ \+\ \*piVar24\ \+\ 0x9c\)\ =\ 1;$	+1
+use	FUN_001102e0	iVar9	entryDestOperand	INFERRED	destination operand record of the entry instruction	^\s*uVar3\ =\ \*\(undefined1\ \*\)\(iVar9\ \+\ iVar5\ \+\ 0x10\);$	+1
+use	FUN_001102e0	iVar9	entryDestOperand	INFERRED	destination operand record of the entry instruction	^\s*\(\*\*\(code\ \*\*\)\(\*\(int\ \*\)\*piVar24\ \+\ 0x88\)\)\(\(int\ \*\)\*piVar24,1,iVar9,uVar2\);$	+1
+use	FUN_001102e0	iVar9	entryDestOperand	INFERRED	destination operand record of the entry instruction	^\s*bVar1\ =\ iVar9\ !=\ 3;$	+2
+use	FUN_001102e0	iVar9	laneCountdown	INFERRED	countdown from 4	^\s*iVar9\ =\ 4;$	+1
+use	FUN_001102e0	iVar9	laneCountdown	INFERRED	countdown from 4	^\s*iVar9\ =\ iVar9\ \+\ \-1;$	+2
+use	FUN_001102e0	iVar9	matchResult	INFERRED	FUN_0010e460 result: entries can be merged	^\s*iVar9\ =\ FUN_0010e460\(piVar22,piVar24,local_94\);$	+2
+use	FUN_001102e0	iVar9	candidateDestRegister	INFERRED	destination register of the candidate instruction	^\s*iVar9\ =\ \*\(int\ \*\)\(\*piVar22\ \+\ 0x94\);$	+1
+use	FUN_001102e0	iVar9	candidateDestRegister	INFERRED	destination register of the candidate instruction	^\s*if\ \(\(\(iStack0000001c\ ==\ \*\(int\ \*\)\(iVar5\ \+\ 0x1c\)\)\ \&\&$	+3
+use	FUN_001102e0	iVar9	defaultLaneKind	INFERRED	default lane kind from the constant table	^\s*iVar9\ =\ \*\(int\ \*\)\(local_64\ \+\ \-0x8d8\);$	+1
+use	FUN_001102e0	iVar9	defaultLaneKind	INFERRED	default lane kind from the constant table	^\s*piVar24\[1\]\ =\ iVar9;$	+1
+use	FUN_001102e0	iVar9	bucketInst	INFERRED	instruction of the bucket entry	^\s*iVar9\ =\ \*piVar24;$	+2
+use	FUN_001102e0	iVar9	bucketInst	INFERRED	instruction of the bucket entry	^\s*iVar9\ =\ FUN_001054ec\(iVar9,0\);$	+2
+use	FUN_001102e0	iVar9	bucketInst	INFERRED	instruction of the bucket entry	^\s*iVar9\ =\ \*piVar24;$@2	+1
+use	FUN_001102e0	iVar9	headInst	INFERRED	instruction of the current entry	^\s*iVar9\ =\ \*piVar24;$@3	+1
+use	FUN_001102e0	iVar9	headInst	INFERRED	instruction of the current entry	^\s*if\ \(\(iVar5\ ==\ iVar9\)\ \|\|\ \(iVar8\ <\ 4\ \-\ piVar22\[2\]\)\)\ goto\ LAB_001116e0;$	+1
+use	FUN_001102e0	iVar9	headInst	INFERRED	instruction of the current entry	^\s*\*\(int\ \*\)\(iVar16\ \+\ 0x14\)\ =\ iVar9;$	+1
+use	FUN_001102e0	iVar9	headInst	INFERRED	instruction of the current entry	^\s*\*\(int\ \*\)\(iVar21\ \+\ 8\)\ =\ iVar9;$	+1
+use	FUN_001102e0	iVar9	groupInst	INFERRED	instruction of the group entry	^\s*iVar9\ =\ \*piVar24;$@4	+1
+use	FUN_001102e0	iVar9	groupInst	INFERRED	instruction of the group entry	^\s*\*piVar24\ =\ iVar9;$	+1
+use	FUN_001102e0	iVar9	groupInst	INFERRED	instruction of the group entry	^\s*\*\(undefined4\ \*\)\(iVar9\ \+\ 0x1c\)\ =\ 1;$	+1
+use	FUN_001102e0	iVar9	groupInst	INFERRED	instruction of the group entry	^\s*iVar9\ =\ iVar9\ \+\ 4;$	+1
+use	FUN_001102e0	iVar9	lanePriority	INFERRED	priority counter 1..4	^\s*iVar9\ =\ 1;$	+1
+use	FUN_001102e0	iVar9	lanePriority	INFERRED	priority counter 1..4	^\s*if\ \(piVar24\[5\]\ ==\ iVar9\)\ \{$	+1
+use	FUN_001102e0	iVar9	lanePriority	INFERRED	priority counter 1..4	^\s*iVar9\ =\ iVar9\ \+\ 1;$@2	+2
+use	FUN_001102e0	iVar9	laneCountTarget	INFERRED	lane count looked for, 3 down to 1	^\s*iVar9\ =\ 3;$	+1
+use	FUN_001102e0	iVar9	laneCountTarget	INFERRED	lane count looked for, 3 down to 1	^\s*if\ \(iVar9\ ==\ iVar5\)\ \{$	+1
+use	FUN_001102e0	iVar9	laneCountTarget	INFERRED	lane count looked for, 3 down to 1	^\s*iVar9\ =\ 0;$	+1
+use	FUN_001102e0	iVar9	laneCountTarget	INFERRED	lane count looked for, 3 down to 1	^\s*iVar9\ =\ iVar9\ \+\ \-1;$@2	+2
+use	FUN_001102e0	puVar11	packEntryElemRef	INFERRED	element reference into the pack entry vector	^\s*puVar11\ =\ \(undefined4\ \*\)\(uVar26\ \*\ 4\ \+\ param_3\[2\]\);$	+1
+use	FUN_001102e0	puVar11	packEntryElemRef	INFERRED	element reference into the pack entry vector	^\s*puVar11\ =\ \(undefined4\ \*\)FUN_0019423c\(param_3,uVar26\);$	+1
+use	FUN_001102e0	puVar11	packEntryElemRef	INFERRED	element reference into the pack entry vector	^\s*puVar11\ =\ \(undefined4\ \*\)\*puVar11;$	+3
+use	FUN_001102e0	puVar11	packEntryElemRef	INFERRED	element reference into the pack entry vector	^\s*FUN_000ef970\(param_1,\*puVar11\);$	+1
+use	FUN_001102e0	puVar11	packEntryElemRef	INFERRED	element reference into the pack entry vector	^\s*FUN_001054ec\(\*puVar11,0\);$	+1
+use	FUN_001102e0	puVar11	packEntryElemRef	INFERRED	element reference into the pack entry vector	^\s*else\ if\ \(puVar11\[5\]\ ==\ iVar8\)\ \{$	+4
+use	FUN_001102e0	puVar11	packEntryElemRef	INFERRED	element reference into the pack entry vector	^\s*\*puVar12\ =\ puVar11;$	+1
+use	FUN_001102e0	puVar11	packEntryElemRef	INFERRED	element reference into the pack entry vector	^\s*puVar11\ =\ \(undefined4\ \*\)\(uVar26\ \*\ 4\ \+\ param_3\[2\]\);$@2	+1
+use	FUN_001102e0	puVar11	packEntryElemRef	INFERRED	element reference into the pack entry vector	^\s*puVar11\ =\ \(undefined4\ \*\)FUN_0019423c\(param_3,uVar26\);$@2	+1
+use	FUN_001102e0	puVar11	packEntryElemRef	INFERRED	element reference into the pack entry vector	^\s*\*puVar11\ =\ \*puVar6;$	+1
+use	FUN_001102e0	puVar11	groupVectorAlloc	INFERRED	arena block of the group vector	^\s*puVar11\ =\ \(undefined4\ \*\)FUN_00193e18\(uVar25,0x14\);$	+6
+use	FUN_001102e0	puVar11	groupVectorAlloc	INFERRED	arena block of the group vector	^\s*puVar11\[3\]\ =\ uVar25;$	+1
+use	FUN_001102e0	puVar11	groupVectorAlloc	INFERRED	arena block of the group vector	^\s*uVar7\ =\ puVar11\[2\];$	+1
+use	FUN_001102e0	puVar11	groupVectorAlloc	INFERRED	arena block of the group vector	^\s*_memset\(\(void\ \*\)\(uVar7\ \*\ 4\ \+\ puVar11\[3\]\),0,4\);$	+3
+use	FUN_001102e0	puVar11	groupVectorAlloc	INFERRED	arena block of the group vector	^\s*uVar7\ =\ puVar11\[2\];$@2	+1
+use	FUN_001102e0	puVar11	groupVectorAlloc	INFERRED	arena block of the group vector	^\s*_memset\(\(void\ \*\)\(uVar7\ \*\ 4\ \+\ puVar11\[3\]\),0,\(uVar26\ \-\ uVar7\)\ \*\ 4\ \+\ 4\);$	+1
+use	FUN_001102e0	puVar11	groupVectorAlloc	INFERRED	arena block of the group vector	^\s*puVar11\[2\]\ =\ uVar7;$	+1
+use	FUN_001102e0	puVar11	groupVectorAlloc	INFERRED	arena block of the group vector	^\s*puVar12\ =\ \(undefined4\ \*\)\(uVar26\ \*\ 4\ \+\ puVar11\[3\]\);$	+1
+use	FUN_001102e0	puVar11	groupVectorAlloc	INFERRED	arena block of the group vector	^\s*uVar7\ =\ puVar11\[2\];$@3	+1
+use	FUN_001102e0	puVar11	groupVectorAlloc	INFERRED	arena block of the group vector	^\s*_memset\(\(void\ \*\)\(uVar7\ \*\ 4\ \+\ puVar11\[3\]\),0,\(uVar31\ \-\ uVar7\)\ \*\ 4\ \+\ 4\);$	+2
+use	FUN_001102e0	puVar11	groupVectorAlloc	INFERRED	arena block of the group vector	^\s*puVar12\ =\ \(undefined4\ \*\)\(uVar31\ \*\ 4\ \+\ puVar11\[3\]\);$	+1
+use	FUN_001102e0	puVar11	groupVectorAlloc	INFERRED	arena block of the group vector	^\s*uVar7\ =\ puVar11\[2\];$@4	+1
+use	FUN_001102e0	puVar11	groupVectorAlloc	INFERRED	arena block of the group vector	^\s*uVar7\ =\ puVar11\[2\];$@5	+1
+use	FUN_001102e0	puVar11	groupVectorAlloc	INFERRED	arena block of the group vector	^\s*_memset\(\(void\ \*\)\(uVar7\ \*\ 4\ \+\ puVar11\[3\]\),0,\(uVar26\ \-\ uVar7\)\ \*\ 4\ \+\ 4\);$@2	+2
+use	FUN_001102e0	puVar11	groupVectorAlloc	INFERRED	arena block of the group vector	^\s*piVar24\ =\ \(int\ \*\)\(uVar26\ \*\ 4\ \+\ puVar11\[3\]\);$	+1
+use	FUN_001102e0	puVar11	groupVectorAlloc	INFERRED	arena block of the group vector	^\s*uVar7\ =\ puVar11\[2\];$@6	+1
+use	FUN_001102e0	puVar11	groupVectorAlloc	INFERRED	arena block of the group vector	^\s*uVar7\ =\ puVar11\[2\];$@8	+1
+use	FUN_001102e0	puVar11	allocElemRef	INFERRED	element reference into the working vector	^\s*puVar11\ =\ \(undefined4\ \*\)\(uVar26\ \*\ 4\ \+\ puVar6\[3\]\);$	+1
+use	FUN_001102e0	puVar11	allocElemRef	INFERRED	element reference into the working vector	^\s*puVar11\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar23,uVar26\);$	+1
+use	FUN_001102e0	puVar11	allocElemRef	INFERRED	element reference into the working vector	^\s*puVar11\ =\ \(undefined4\ \*\)\*puVar11;$@2	+1
+use	FUN_001102e0	puVar11	allocElemRef	INFERRED	element reference into the working vector	^\s*FUN_00104104\(\*puVar11,iVar8,0,0\);$	+1
+use	FUN_001102e0	puVar11	allocElemRef	INFERRED	element reference into the working vector	^\s*puVar11\ =\ \(undefined4\ \*\)\(uVar26\ \*\ 4\ \+\ puVar6\[3\]\);$@2	+1
+use	FUN_001102e0	puVar11	allocElemRef	INFERRED	element reference into the working vector	^\s*puVar11\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar23,uVar26\);$@2	+1
+use	FUN_001102e0	puVar11	allocElemRef	INFERRED	element reference into the working vector	^\s*FUN_000e7688\(uVar25,\*\(undefined4\ \*\)\*puVar11\);$	+1
+use	FUN_001102e0	puVar11	allocElemRef	INFERRED	element reference into the working vector	^\s*puVar11\ =\ \(undefined4\ \*\)\(uVar26\ \*\ 4\ \+\ puVar6\[3\]\);$@3	+1
+use	FUN_001102e0	puVar11	allocElemRef	INFERRED	element reference into the working vector	^\s*puVar11\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar23,uVar26\);$@3	+1
+use	FUN_001102e0	puVar11	allocElemRef	INFERRED	element reference into the working vector	^\s*\*puVar12\ =\ \*puVar11;$	+1
+use	FUN_001102e0	puVar11	outVectorAlloc	INFERRED	arena block of the output vector	^\s*puVar11\ =\ \(undefined4\ \*\)FUN_00193e18\(uVar25,0x14\);$@2	+6
+use	FUN_001102e0	puVar11	outVectorAlloc	INFERRED	arena block of the output vector	^\s*puVar11\[3\]\ =\ uVar25;$@2	+1
+use	FUN_001102e0	puVar11	outVectorAlloc	INFERRED	arena block of the output vector	^\s*uVar7\ =\ puVar11\[2\];$@7	+1
+use	FUN_001102e0	puVar11	outVectorAlloc	INFERRED	arena block of the output vector	^\s*_memset\(\(void\ \*\)\(uVar7\ \*\ 4\ \+\ puVar11\[3\]\),0,4\);$@2	+3
+use	FUN_001102e0	puVar11	groupElemRef	INFERRED	element reference into the group vector	^\s*puVar11\ =\ \(undefined4\ \*\)\(uVar7\ \*\ 4\ \+\ puVar30\[2\]\);$	+1
+use	FUN_001102e0	puVar11	groupElemRef	INFERRED	element reference into the group vector	^\s*puVar11\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar30,uVar7\);$	+1
+use	FUN_001102e0	puVar11	groupElemRef	INFERRED	element reference into the group vector	^\s*FUN_000e7688\(uVar25,\*\(undefined4\ \*\)\*puVar11\);$@2	+1
+use	FUN_001102e0	puVar12	allocRef	INFERRED	element reference into the working vector	^\s*puVar12\ =\ \(undefined4\ \*\)\(uVar7\ \*\ 4\ \+\ puVar6\[3\]\);$	+1
+use	FUN_001102e0	puVar12	allocRef	INFERRED	element reference into the working vector	^\s*puVar12\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar30,uVar7\);$	+1
+use	FUN_001102e0	puVar12	allocRef	INFERRED	element reference into the working vector	^\s*\*puVar12\ =\ puVar11;$	+1
+use	FUN_001102e0	puVar12	allocRef	INFERRED	element reference into the working vector	^\s*puVar12\ =\ \(undefined4\ \*\)\(uVar26\ \*\ 4\ \+\ puVar6\[3\]\);$	+1
+use	FUN_001102e0	puVar12	allocRef	INFERRED	element reference into the working vector	^\s*puVar12\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar23,uVar26\);$	+1
+use	FUN_001102e0	puVar12	allocRef	INFERRED	element reference into the working vector	^\s*piVar24\ =\ \(int\ \*\)\*puVar12;$@3	+1
+use	FUN_001102e0	puVar12	allocRef	INFERRED	element reference into the working vector	^\s*puVar12\ =\ \(undefined4\ \*\)\(uVar26\ \*\ 4\ \+\ puVar6\[3\]\);$@2	+1
+use	FUN_001102e0	puVar12	allocRef	INFERRED	element reference into the working vector	^\s*puVar12\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar23,uVar26\);$@2	+1
+use	FUN_001102e0	puVar12	allocRef	INFERRED	element reference into the working vector	^\s*piVar22\ =\ \(int\ \*\)\*puVar12;$@2	+1
+use	FUN_001102e0	puVar12	bucketVectorAlloc	INFERRED	arena block of a bucket vector	^\s*puVar12\ =\ \(undefined4\ \*\)FUN_00193e18\(uVar25,0x14\);$	+5
+use	FUN_001102e0	puVar12	bucketVectorAlloc	INFERRED	arena block of a bucket vector	^\s*puVar12\[3\]\ =\ uVar25;$	+1
+use	FUN_001102e0	puVar12	bucketVectorAlloc	INFERRED	arena block of a bucket vector	^\s*piVar24\[3\]\ =\ \(int\)\(puVar12\ \+\ 1\);$	+1
+use	FUN_001102e0	puVar12	recordRef	INFERRED	element reference into the link-record vector	^\s*puVar12\ =\ \(undefined4\ \*\)\(uVar26\ \*\ 4\ \+\ puVar30\[2\]\);$	+1
+use	FUN_001102e0	puVar12	recordRef	INFERRED	element reference into the link-record vector	^\s*puVar12\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar30,uVar26\);$	+1
+use	FUN_001102e0	puVar12	recordRef	INFERRED	element reference into the link-record vector	^\s*piVar24\ =\ \(int\ \*\)\*puVar12;$	+1
+use	FUN_001102e0	puVar12	recordRef	INFERRED	element reference into the link-record vector	^\s*puVar12\ =\ \(undefined4\ \*\)\(uVar26\ \*\ 4\ \+\ puVar30\[2\]\);$@2	+1
+use	FUN_001102e0	puVar12	recordRef	INFERRED	element reference into the link-record vector	^\s*puVar12\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar30,uVar26\);$@2	+1
+use	FUN_001102e0	puVar12	recordRef	INFERRED	element reference into the link-record vector	^\s*\*puVar17\ =\ \*puVar12;$	+1
+use	FUN_001102e0	puVar12	laneFlagBytePtr	INFERRED	pointer into the bucket table lane flag bytes	^\s*puVar12\ =\ \&DAT_001fc1f4\ \+\ iVar8\ \*\ 4;$	+1
+use	FUN_001102e0	puVar12	laneFlagBytePtr	INFERRED	pointer into the bucket table lane flag bytes	^\s*\*\(undefined1\ \*\)puVar12\ =\ 0;$	+1
+use	FUN_001102e0	puVar12	laneFlagBytePtr	INFERRED	pointer into the bucket table lane flag bytes	^\s*puVar12\ =\ \(undefined4\ \*\)\(\(int\)puVar12\ \+\ 1\);$	+1
+use	FUN_001102e0	puVar12	bucketSlotRef	INFERRED	slot reference in a bucket vector	^\s*puVar12\ =\ \(undefined4\ \*\)\(uVar7\ \*\ 4\ \+\ puVar33\[2\]\);$	+1
+use	FUN_001102e0	puVar12	bucketSlotRef	INFERRED	slot reference in a bucket vector	^\s*puVar12\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar33,uVar7\);$	+1
+use	FUN_001102e0	puVar12	bucketSlotRef	INFERRED	slot reference in a bucket vector	^\s*\*puVar12\ =\ piVar24;$	+1
+use	FUN_001102e0	puVar12	bucketSlotRef	INFERRED	slot reference in a bucket vector	^\s*puVar12\ =\ \(undefined4\ \*\)\(uVar7\ \*\ 4\ \+\ puVar11\[3\]\);$	+1
+use	FUN_001102e0	puVar12	bucketSlotRef	INFERRED	slot reference in a bucket vector	^\s*puVar12\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar29,uVar7\);$	+1
+use	FUN_001102e0	puVar12	bucketSlotRef	INFERRED	slot reference in a bucket vector	^\s*\*puVar12\ =\ \&DAT_001fc1f0\ \+\ iVar8\ \*\ 4;$	+1
+use	FUN_001102e0	puVar12	groupEntryRef	INFERRED	element reference into the group vector	^\s*puVar12\ =\ \(undefined4\ \*\)\(uVar26\ \*\ 4\ \+\ puVar11\[3\]\);$	+1
+use	FUN_001102e0	puVar12	groupEntryRef	INFERRED	element reference into the group vector	^\s*puVar12\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar29,uVar26\);$	+1
+use	FUN_001102e0	puVar12	groupEntryRef	INFERRED	element reference into the group vector	^\s*piVar24\ =\ \(int\ \*\)\*puVar12;$@2	+1
+use	FUN_001102e0	puVar12	groupEntryRef	INFERRED	element reference into the group vector	^\s*puVar12\ =\ \(undefined4\ \*\)\(uVar31\ \*\ 4\ \+\ puVar11\[3\]\);$	+1
+use	FUN_001102e0	puVar12	groupEntryRef	INFERRED	element reference into the group vector	^\s*puVar12\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar29,uVar31\);$	+1
+use	FUN_001102e0	puVar12	groupEntryRef	INFERRED	element reference into the group vector	^\s*piVar22\ =\ \(int\ \*\)\*puVar12;$	+1
+use	FUN_001102e0	puVar12	laneListRef	INFERRED	element reference into a lane list	^\s*puVar12\ =\ \(undefined4\ \*\)\(uVar31\ \*\ 4\ \+\ puVar30\[2\]\);$	+1
+use	FUN_001102e0	puVar12	laneListRef	INFERRED	element reference into a lane list	^\s*puVar12\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar30,uVar31\);$	+1
+use	FUN_001102e0	puVar12	laneListRef	INFERRED	element reference into a lane list	^\s*\*puVar17\ =\ \*puVar12;$@2	+1
+use	FUN_001102e0	puVar12	vectorSlotRef	INFERRED	slot reference in the pack entry vector	^\s*puVar12\ =\ \(undefined4\ \*\)\(uVar7\ \*\ 4\ \+\ param_3\[2\]\);$	+1
+use	FUN_001102e0	puVar12	vectorSlotRef	INFERRED	slot reference in the pack entry vector	^\s*puVar12\ =\ \(undefined4\ \*\)FUN_0019423c\(param_3,uVar7\);$	+1
+use	FUN_001102e0	puVar12	vectorSlotRef	INFERRED	slot reference in the pack entry vector	^\s*\*puVar12\ =\ \*puVar11;$	+1
+use	FUN_001102e0	puVar12	laneKindTable	INFERRED	pointer into the lane kind constant table	^\s*puVar12\ =\ \(undefined4\ \*\)PTR_DAT_001e8b64;$	+1
+use	FUN_001102e0	puVar12	laneKindTable	INFERRED	pointer into the lane kind constant table	^\s*uVar25\ =\ \*puVar12;$	+1
+use	FUN_001102e0	puVar12	laneKindTable	INFERRED	pointer into the lane kind constant table	^\s*puVar12\ =\ puVar12\ \+\ 1;$	+1
+use	FUN_001102e0	iVar14	swapEntryInst	INFERRED	instruction of the entry while its lane slots are swapped	^\s*iVar14\ =\ \*piVar24;$	+1
+use	FUN_001102e0	iVar14	swapEntryInst	INFERRED	instruction of the entry while its lane slots are swapped	^\s*\*\(undefined1\ \*\)\(iVar8\ \+\ iVar14\ \+\ 0x9c\)\ =\ 0;$	+1
+use	FUN_001102e0	iVar14	laneStep	INFERRED	lane counter 0..3	^\s*iVar14\ =\ 0;$	+1
+use	FUN_001102e0	iVar14	laneStep	INFERRED	lane counter 0..3	^\s*\*\(undefined4\ \*\)\(local_54\ \+\ iVar14\)\ =\ 0;$	+2
+use	FUN_001102e0	iVar14	laneStep	INFERRED	lane counter 0..3	^\s*iVar14\ =\ 0;$@2	+1
+use	FUN_001102e0	iVar14	laneStep	INFERRED	lane counter 0..3	^\s*\*\(undefined1\ \*\)\(\(int\)local_94\ \+\ iVar14\ \+\ \-4\)\ =\ 0;$	+2
+use	FUN_001102e0	iVar14	laneStep	INFERRED	lane counter 0..3	^\s*\*\(int\ \*\)\(local_54\ \+\ iVar14\ \*\ 4\)\ =\ \*piVar13;$	+1
+use	FUN_001102e0	iVar14	laneStep	INFERRED	lane counter 0..3	^\s*\*\(int\ \*\)\(iVar16\ \+\ 0x18\)\ =\ iVar14;$	+1
+use	FUN_001102e0	iVar14	laneStep	INFERRED	lane counter 0..3	^\s*bVar1\ =\ iVar14\ !=\ 3;$	+1
+use	FUN_001102e0	iVar14	laneStep	INFERRED	lane counter 0..3	^\s*iVar14\ =\ iVar14\ \+\ 1;$	+1
+use	FUN_001102e0	iVar14	laneStep	INFERRED	lane counter 0..3	^\s*iVar14\ =\ 0;$@3	+1
+use	FUN_001102e0	iVar14	laneStep	INFERRED	lane counter 0..3	^\s*iVar16\ =\ \*\(int\ \*\)\(local_54\ \+\ iVar14\);$	+2
+use	FUN_001102e0	iVar14	laneStep	INFERRED	lane counter 0..3	^\s*iVar14\ =\ 0;$@4	+1
+use	FUN_001102e0	iVar14	laneStep	INFERRED	lane counter 0..3	^\s*if\ \(\*\(char\ \*\)\(iVar14\ \+\ iVar15\ \+\ 0x10\)\ !=\ '\\x01'\)\ \{$	+3
+use	FUN_001102e0	iVar14	laneStep	INFERRED	lane counter 0..3	^\s*piVar24\[iVar14\ \+\ 1\]\ =\ 0;$	+1
+use	FUN_001102e0	iVar14	laneStep	INFERRED	lane counter 0..3	^\s*bVar1\ =\ iVar14\ !=\ 3;$@2	+2
+use	FUN_001102e0	iVar14	laneStep	INFERRED	lane counter 0..3	^\s*iVar14\ =\ \-1;$	+1
+use	FUN_001102e0	iVar14	laneStep	INFERRED	lane counter 0..3	^\s*\(PTR_DAT_001e8b8c\ \+\ \(uint\)\*\(byte\ \*\)\(iVar14\ \+\ iVar16\ \+\ 0x10\)\ \*\ 4\);$	+1
+use	FUN_001102e0	iVar14	laneStep	INFERRED	lane counter 0..3	^\s*if\ \(\(\(iStack0000001c\ ==\ \*\(int\ \*\)\(iVar15\ \+\ 0x1c\)\)\ \&\&$	+3
+use	FUN_001102e0	iVar14	savedSwizzle	INFERRED	saved swizzle word written back into the source operand	^\s*iVar14\ =\ local_94\[0\];$	+1
+use	FUN_001102e0	iVar14	savedSwizzle	INFERRED	saved swizzle word written back into the source operand	^\s*\*\(int\ \*\)\(iVar15\ \+\ 0x10\)\ =\ iVar14;$	+1
+use	FUN_001102e0	iVar14	laneStepsLeft	INFERRED	countdown from 4	^\s*iVar14\ =\ 4;$	+1
+use	FUN_001102e0	iVar14	laneStepsLeft	INFERRED	countdown from 4	^\s*iVar14\ =\ iVar14\ \+\ \-1;$	+2
+use	FUN_001102e0	iVar14	laneSourceInst	INFERRED	FUN_0010e9d0: source instruction for lane iVar5	^\s*iVar14\ =\ FUN_0010e9d0\(piVar22,iVar5\);$	+2
+use	FUN_001102e0	iVar16	candDestOperand	INFERRED	destination operand record	^\s*iVar16\ =\ FUN_001054ec\(iVar15,0\);$	+2
+use	FUN_001102e0	iVar16	candSrcOperand	INFERRED	source operand record	^\s*iVar16\ =\ FUN_001054ec\(iVar15,1\);$	+1
+use	FUN_001102e0	iVar16	candSrcOperand	INFERRED	source operand record	^\s*uVar3\ =\ \*\(undefined1\ \*\)\(iVar21\ \+\ iVar16\ \+\ 0x10\);$	+1
+use	FUN_001102e0	iVar16	entryLaneBudget	INFERRED	entry word 2	^\s*iVar16\ =\ piVar24\[2\];$	+1
+use	FUN_001102e0	iVar16	entryLaneBudget	INFERRED	entry word 2	^\s*piVar24\[2\]\ =\ iVar16\ \+\ \-1;$	+1
+use	FUN_001102e0	iVar16	laneInstValue	INFERRED	instruction word read through the lane cursor	^\s*iVar16\ =\ \*piVar13;$	+6
+use	FUN_001102e0	iVar16	savedLaneWord	INFERRED	saved lane word restored into the group	^\s*iVar16\ =\ \*\(int\ \*\)\(local_54\ \+\ iVar14\);$	+1
+use	FUN_001102e0	iVar16	savedLaneWord	INFERRED	saved lane word restored into the group	^\s*piVar18\[1\]\ =\ iVar16;$	+1
+use	FUN_001102e0	iVar16	cloneDestOperand	INFERRED	destination operand record of the clone	^\s*iVar16\ =\ FUN_001054ec\(iVar15,0\);$@2	+1
+use	FUN_001102e0	iVar16	cloneDestOperand	INFERRED	destination operand record of the clone	^\s*\*\(undefined4\ \*\)\(iVar16\ \+\ 8\)\ =\ uVar27;$	+1
+use	FUN_001102e0	iVar16	headSrcOperand	INFERRED	source operand record of the entry instruction	^\s*iVar16\ =\ FUN_001054ec\(\*piVar24,1\);$	+1
+use	FUN_001102e0	iVar16	headSrcOperand	INFERRED	source operand record of the entry instruction	^\s*\(PTR_DAT_001e8b8c\ \+\ \(uint\)\*\(byte\ \*\)\(iVar14\ \+\ iVar16\ \+\ 0x10\)\ \*\ 4\);$	+1
+use	FUN_001102e0	iVar16	cloneSrcOperand	INFERRED	source operand record of the clone	^\s*iVar16\ =\ FUN_001054ec\(iVar15,1\);$@2	+2
+use	FUN_001102e0	puVar17	copyRef	INFERRED	slot reference in the copy target vector	^\s*puVar17\ =\ \(undefined4\ \*\)\(uVar7\ \*\ 4\ \+\ puVar6\[3\]\);$	+1
+use	FUN_001102e0	puVar17	copyRef	INFERRED	slot reference in the copy target vector	^\s*puVar17\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar23,uVar7\);$	+1
+use	FUN_001102e0	puVar17	copyRef	INFERRED	slot reference in the copy target vector	^\s*\*puVar17\ =\ \*puVar12;$	+1
+use	FUN_001102e0	puVar17	copyRef	INFERRED	slot reference in the copy target vector	^\s*puVar17\ =\ \(undefined4\ \*\)\(uVar7\ \*\ 4\ \+\ puVar6\[3\]\);$@2	+1
+use	FUN_001102e0	puVar17	copyRef	INFERRED	slot reference in the copy target vector	^\s*puVar17\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar23,uVar7\);$@2	+1
+use	FUN_001102e0	puVar17	copyRef	INFERRED	slot reference in the copy target vector	^\s*\*puVar17\ =\ \*puVar12;$@2	+1
+use	FUN_001102e0	puVar17	newEntryAlloc	INFERRED	arena block (0x30 bytes) for a new pack entry	^\s*puVar17\ =\ \(undefined4\ \*\)FUN_00193e18\(uVar25,0x30\);$	+3
+use	FUN_001102e0	puVar17	newEntryAlloc	INFERRED	arena block (0x30 bytes) for a new pack entry	^\s*puVar17\[6\]\ =\ 1;$	+1
+use	FUN_001102e0	iVar19	headDestRegister	INFERRED	destination register of the entry instruction	^\s*iVar19\ =\ \*\(int\ \*\)\(\*piVar24\ \+\ 0x94\);$	+1
+use	FUN_001102e0	iVar19	headDestRegister	INFERRED	destination register of the entry instruction	^\s*if\ \(\(\(iStack0000001c\ ==\ \*\(int\ \*\)\(iVar15\ \+\ 0x1c\)\)\ \&\&$	+3
+use	FUN_001102e0	puVar20	laneFlagPtr	INFERRED	pointer to the instruction's lane flag byte (+0x9c)	^\s*puVar20\ =\ \(undefined1\ \*\)\(iVar15\ \+\ 0x9c\);$	+1
+use	FUN_001102e0	puVar20	laneFlagPtr	INFERRED	pointer to the instruction's lane flag byte (+0x9c)	^\s*\*puVar20\ =\ 1;$	+1
+use	FUN_001102e0	puVar20	laneFlagPtr	INFERRED	pointer to the instruction's lane flag byte (+0x9c)	^\s*puVar20\ =\ puVar20\ \+\ 1;$	+1
+use	FUN_001102e0	iVar21	wordCountdown	INFERRED	countdown from 4	^\s*iVar21\ =\ 4;$	+1
+use	FUN_001102e0	iVar21	wordCountdown	INFERRED	countdown from 4	^\s*iVar21\ =\ iVar21\ \+\ \-1;$	+2
+use	FUN_001102e0	iVar21	wordCountdown	INFERRED	countdown from 4	^\s*iVar21\ =\ 4;$@2	+1
+use	FUN_001102e0	iVar21	wordCountdown	INFERRED	countdown from 4	^\s*iVar21\ =\ iVar21\ \+\ \-1;$@2	+2
+use	FUN_001102e0	iVar21	laneNumber	INFERRED	lane counter 0..3	^\s*iVar21\ =\ 0;$	+1
+use	FUN_001102e0	iVar21	laneNumber	INFERRED	lane counter 0..3	^\s*if\ \(\*\(char\ \*\)\(iVar21\ \+\ iVar16\ \+\ 0x10\)\ ==\ '\\x01'\)\ goto\ LAB_00111508;$	+1
+use	FUN_001102e0	iVar21	laneNumber	INFERRED	lane counter 0..3	^\s*uVar3\ =\ \*\(undefined1\ \*\)\(iVar21\ \+\ iVar16\ \+\ 0x10\);$	+1
+use	FUN_001102e0	iVar21	laneNumber	INFERRED	lane counter 0..3	^\s*if\ \(\(\(iStack0000001c\ ==\ \*\(int\ \*\)\(iVar16\ \+\ 0x1c\)\)\ \&\&$	+3
+use	FUN_001102e0	iVar21	laneNumber	INFERRED	lane counter 0..3	^\s*bVar1\ =\ iVar21\ ==\ 3;$	+1
+use	FUN_001102e0	iVar21	laneNumber	INFERRED	lane counter 0..3	^\s*iVar21\ =\ iVar21\ \+\ 1;$	+1
+use	FUN_001102e0	iVar21	destOperandRec	INFERRED	destination operand record of the instruction	^\s*iVar21\ =\ FUN_001054ec\(iVar15,0\);$	+1
+use	FUN_001102e0	iVar21	destOperandRec	INFERRED	destination operand record of the instruction	^\s*\*\(int\ \*\)\(iVar21\ \+\ 8\)\ =\ iVar9;$	+1
+use	FUN_001102e0	iVar21	laneSource	INFERRED	lane source word of the entry	^\s*iVar21\ =\ piVar24\[iVar14\ \+\ 1\];$	+1
+use	FUN_001102e0	iVar21	laneSource	INFERRED	lane source word of the entry	^\s*iVar21\ =\ 0;$@2	+1
+use	FUN_001102e0	iVar21	laneSource	INFERRED	lane source word of the entry	^\s*puVar28\[iVar5\ \+\ 1\]\ =\ iVar21;$	+1
+use	FUN_001102e0	puVar23	allocationVector	INFERRED	vector header (allocation + 1) of the working vector	^\s*puVar23\ =\ puVar6\ \+\ 1;$	+1
+use	FUN_001102e0	puVar23	allocationVector	INFERRED	vector header (allocation + 1) of the working vector	^\s*if\ \(uVar7\ <\ \*puVar23\)\ \{$	+1
+use	FUN_001102e0	puVar23	allocationVector	INFERRED	vector header (allocation + 1) of the working vector	^\s*puVar17\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar23,uVar7\);$	+1
+use	FUN_001102e0	puVar23	allocationVector	INFERRED	vector header (allocation + 1) of the working vector	^\s*if\ \(uVar7\ <\ \*puVar23\)\ \{$@2	+1
+use	FUN_001102e0	puVar23	allocationVector	INFERRED	vector header (allocation + 1) of the working vector	^\s*puVar17\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar23,uVar7\);$@2	+1
+use	FUN_001102e0	puVar23	allocationVector	INFERRED	vector header (allocation + 1) of the working vector	^\s*if\ \(uVar7\ <\ \*puVar23\)\ \{$@3	+1
+use	FUN_001102e0	puVar23	allocationVector	INFERRED	vector header (allocation + 1) of the working vector	^\s*piVar24\ =\ \(int\ \*\)FUN_0019423c\(puVar23,uVar7\);$	+1
+use	FUN_001102e0	puVar23	allocationVector	INFERRED	vector header (allocation + 1) of the working vector	^\s*if\ \(uVar26\ <\ \*puVar23\)\ \{$	+1
+use	FUN_001102e0	puVar23	allocationVector	INFERRED	vector header (allocation + 1) of the working vector	^\s*puVar11\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar23,uVar26\);$	+1
+use	FUN_001102e0	puVar23	allocationVector	INFERRED	vector header (allocation + 1) of the working vector	^\s*if\ \(uVar26\ <\ \*puVar23\)\ \{$@2	+1
+use	FUN_001102e0	puVar23	allocationVector	INFERRED	vector header (allocation + 1) of the working vector	^\s*puVar12\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar23,uVar26\);$	+1
+use	FUN_001102e0	puVar23	allocationVector	INFERRED	vector header (allocation + 1) of the working vector	^\s*FUN_00194374\(puVar23,piVar24\);$	+1
+use	FUN_001102e0	puVar23	allocationVector	INFERRED	vector header (allocation + 1) of the working vector	^\s*if\ \(uVar26\ <\ \*puVar23\)\ \{$@3	+1
+use	FUN_001102e0	puVar23	allocationVector	INFERRED	vector header (allocation + 1) of the working vector	^\s*puVar12\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar23,uVar26\);$@2	+1
+use	FUN_001102e0	puVar23	allocationVector	INFERRED	vector header (allocation + 1) of the working vector	^\s*if\ \(uVar26\ <\ \*puVar23\)\ \{$@4	+1
+use	FUN_001102e0	puVar23	allocationVector	INFERRED	vector header (allocation + 1) of the working vector	^\s*puVar11\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar23,uVar26\);$@2	+1
+use	FUN_001102e0	puVar23	allocationVector	INFERRED	vector header (allocation + 1) of the working vector	^\s*if\ \(uVar26\ <\ \*puVar23\)\ \{$@5	+1
+use	FUN_001102e0	puVar23	allocationVector	INFERRED	vector header (allocation + 1) of the working vector	^\s*puVar11\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar23,uVar26\);$@3	+1
+use	FUN_001102e0	uVar27	candDestRegister	INFERRED	destination register of the candidate instruction	^\s*uVar27\ =\ \*\(undefined4\ \*\)\(\*piVar22\ \+\ 0x94\);$	+1
+use	FUN_001102e0	uVar27	candDestRegister	INFERRED	destination register of the candidate instruction	^\s*\*\(undefined4\ \*\)\(iVar16\ \+\ 8\)\ =\ uVar27;$	+1
+use	FUN_001102e0	puVar28	newEntry	INFERRED	new pack entry (allocation + 1)	^\s*puVar28\ =\ puVar17\ \+\ 1;$	+1
+use	FUN_001102e0	puVar28	newEntry	INFERRED	new pack entry (allocation + 1)	^\s*FUN_0010e814\(puVar28,iVar15\);$	+1
+use	FUN_001102e0	puVar28	newEntry	INFERRED	new pack entry (allocation + 1)	^\s*puVar28\[iVar5\ \+\ 1\]\ =\ iVar21;$	+1
+use	FUN_001102e0	puVar28	newEntry	INFERRED	new pack entry (allocation + 1)	^\s*\*piVar18\ =\ \(int\)puVar28;$	+1
+use	FUN_001102e0	puVar33	bucketVector	INFERRED	vector of the bucket	^\s*puVar33\ =\ \(uint\ \*\)\(DAT_001fc1fc\)\[iVar8\ \*\ 4\];$	+6
+use	FUN_001102e0	puVar33	bucketVector	INFERRED	vector of the bucket	^\s*puVar12\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar33,uVar7\);$	+1
+use	FUN_001102e0	puVar29	groupVector	INFERRED	vector header (alloc + 1) of the group vector	^\s*puVar29\ =\ puVar11\ \+\ 1;$	+1
+use	FUN_001102e0	puVar29	groupVector	INFERRED	vector header (alloc + 1) of the group vector	^\s*if\ \(uVar7\ <\ \*puVar29\)\ \{$	+1
+use	FUN_001102e0	puVar29	groupVector	INFERRED	vector header (alloc + 1) of the group vector	^\s*puVar12\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar29,uVar7\);$	+1
+use	FUN_001102e0	puVar29	groupVector	INFERRED	vector header (alloc + 1) of the group vector	^\s*if\ \(uVar26\ <\ \*puVar29\)\ \{$	+1
+use	FUN_001102e0	puVar29	groupVector	INFERRED	vector header (alloc + 1) of the group vector	^\s*puVar12\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar29,uVar26\);$	+1
+use	FUN_001102e0	puVar29	groupVector	INFERRED	vector header (alloc + 1) of the group vector	^\s*if\ \(uVar31\ <\ \*puVar29\)\ \{$	+1
+use	FUN_001102e0	puVar29	groupVector	INFERRED	vector header (alloc + 1) of the group vector	^\s*puVar12\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar29,uVar31\);$	+1
+use	FUN_001102e0	puVar29	groupVector	INFERRED	vector header (alloc + 1) of the group vector	^\s*FUN_00194374\(puVar29,piVar22\);$	+1
+use	FUN_001102e0	puVar29	groupVector	INFERRED	vector header (alloc + 1) of the group vector	^\s*FUN_00194374\(puVar29,piVar24\);$	+1
+use	FUN_001102e0	puVar29	groupVector	INFERRED	vector header (alloc + 1) of the group vector	^\s*if\ \(uVar26\ <\ \*puVar29\)\ \{$@2	+1
+use	FUN_001102e0	puVar29	groupVector	INFERRED	vector header (alloc + 1) of the group vector	^\s*piVar24\ =\ \(int\ \*\)FUN_0019423c\(puVar29,uVar26\);$	+1
+use	FUN_001102e0	puVar30	outVector	INFERRED	output vector header or NULL	^\s*puVar30\ =\ \(uint\ \*\)0x0;$	+1
+use	FUN_001102e0	puVar30	outVector	INFERRED	output vector header or NULL	^\s*puVar30\ =\ puVar6\ \+\ 1;$	+1
+use	FUN_001102e0	puVar30	outVector	INFERRED	output vector header or NULL	^\s*if\ \(uVar7\ <\ \*puVar30\)\ \{$	+1
+use	FUN_001102e0	puVar30	outVector	INFERRED	output vector header or NULL	^\s*puVar12\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar30,uVar7\);$	+1
+use	FUN_001102e0	puVar30	outVector	INFERRED	output vector header or NULL	^\s*puVar30\ =\ param_3;$	+1
+use	FUN_001102e0	puVar30	outVector	INFERRED	output vector header or NULL	^\s*uVar7\ =\ puVar30\[1\];$@9	+1
+use	FUN_001102e0	puVar30	outVector	INFERRED	output vector header or NULL	^\s*if\ \(uVar26\ <\ \*puVar30\)\ \{$@2	+1
+use	FUN_001102e0	puVar30	outVector	INFERRED	output vector header or NULL	^\s*_memset\(\(void\ \*\)\(uVar7\ \*\ 4\ \+\ puVar30\[2\]\),0,\(uVar26\ \-\ uVar7\)\ \*\ 4\ \+\ 4\);$@2	+2
+use	FUN_001102e0	puVar30	outVector	INFERRED	output vector header or NULL	^\s*puVar12\ =\ \(undefined4\ \*\)\(uVar26\ \*\ 4\ \+\ puVar30\[2\]\);$	+1
+use	FUN_001102e0	puVar30	outVector	INFERRED	output vector header or NULL	^\s*puVar12\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar30,uVar26\);$	+1
+use	FUN_001102e0	puVar30	outVector	INFERRED	output vector header or NULL	^\s*uVar7\ =\ puVar30\[1\];$@10	+1
+use	FUN_001102e0	puVar30	outVector	INFERRED	output vector header or NULL	^\s*puVar30\ =\ \(uint\ \*\)0x0;$@2	+1
+use	FUN_001102e0	puVar30	outVector	INFERRED	output vector header or NULL	^\s*puVar30\ =\ puVar11\ \+\ 1;$	+1
+use	FUN_001102e0	puVar30	outVector	INFERRED	output vector header or NULL	^\s*if\ \(uVar7\ <\ \*puVar30\)\ \{$@3	+1
+use	FUN_001102e0	puVar30	outVector	INFERRED	output vector header or NULL	^\s*piVar18\ =\ \(int\ \*\)FUN_0019423c\(puVar30,uVar7\);$@2	+1
+use	FUN_001102e0	puVar30	outVector	INFERRED	output vector header or NULL	^\s*uVar26\ =\ puVar30\[1\];$	+1
+use	FUN_001102e0	puVar30	outVector	INFERRED	output vector header or NULL	^\s*if\ \(uVar7\ <\ \*puVar30\)\ \{$@4	+1
+use	FUN_001102e0	puVar30	outVector	INFERRED	output vector header or NULL	^\s*_memset\(\(void\ \*\)\(uVar26\ \*\ 4\ \+\ puVar30\[2\]\),0,\(uVar7\ \-\ uVar26\)\ \*\ 4\ \+\ 4\);$	+2
+use	FUN_001102e0	puVar30	outVector	INFERRED	output vector header or NULL	^\s*puVar11\ =\ \(undefined4\ \*\)\(uVar7\ \*\ 4\ \+\ puVar30\[2\]\);$	+1
+use	FUN_001102e0	puVar30	outVector	INFERRED	output vector header or NULL	^\s*puVar11\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar30,uVar7\);$	+1
+use	FUN_001102e0	puVar30	outVector	INFERRED	output vector header or NULL	^\s*uVar26\ =\ puVar30\[1\];$@2	+1
+use	FUN_001102e0	puVar30	outVector	INFERRED	output vector header or NULL	^\s*uVar26\ =\ puVar30\[1\];$@3	+1
+use	FUN_001102e0	puVar30	outVector	INFERRED	output vector header or NULL	^\s*if\ \(uVar7\ <\ \*puVar30\)\ \{$@5	+1
+use	FUN_001102e0	puVar30	outVector	INFERRED	output vector header or NULL	^\s*_memset\(\(void\ \*\)\(uVar26\ \*\ 4\ \+\ puVar30\[2\]\),0,\(uVar7\ \-\ uVar26\)\ \*\ 4\ \+\ 4\);$@2	+2
+use	FUN_001102e0	puVar30	outVector	INFERRED	output vector header or NULL	^\s*puVar6\ =\ \(undefined4\ \*\)\(uVar7\ \*\ 4\ \+\ puVar30\[2\]\);$	+1
+use	FUN_001102e0	puVar30	outVector	INFERRED	output vector header or NULL	^\s*puVar6\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar30,uVar7\);$	+1
+use	FUN_001102e0	puVar30	outVector	INFERRED	output vector header or NULL	^\s*uVar26\ =\ puVar30\[1\];$@4	+1
+use	FUN_001102e0	puVar30	bucketMembers	INFERRED	vector of the bucket's members	^\s*puVar30\ =\ \(uint\ \*\)piVar24\[1\];$	+2
+use	FUN_001102e0	puVar30	bucketMembers	INFERRED	vector of the bucket's members	^\s*if\ \(uVar26\ <\ \*puVar30\)\ \{$@3	+1
+use	FUN_001102e0	puVar30	bucketMembers	INFERRED	vector of the bucket's members	^\s*_memset\(\(void\ \*\)\(uVar7\ \*\ 4\ \+\ puVar30\[2\]\),0,\(uVar26\ \-\ uVar7\)\ \*\ 4\ \+\ 4\);$@3	+2
+use	FUN_001102e0	puVar30	bucketMembers	INFERRED	vector of the bucket's members	^\s*puVar12\ =\ \(undefined4\ \*\)\(uVar26\ \*\ 4\ \+\ puVar30\[2\]\);$@2	+1
+use	FUN_001102e0	puVar30	bucketMembers	INFERRED	vector of the bucket's members	^\s*puVar12\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar30,uVar26\);$@2	+1
+use	FUN_001102e0	puVar30	bucketMembers	INFERRED	vector of the bucket's members	^\s*puVar30\ =\ \(uint\ \*\)piVar24\[1\];$@2	+2
+use	FUN_001102e0	puVar30	candLaneVector	INFERRED	lane vector of the candidate entry	^\s*puVar30\ =\ \(uint\ \*\)piVar22\[3\];$	+2
+use	FUN_001102e0	puVar30	candLaneVector	INFERRED	lane vector of the candidate entry	^\s*if\ \(uVar31\ <\ \*puVar30\)\ \{$@3	+1
+use	FUN_001102e0	puVar30	candLaneVector	INFERRED	lane vector of the candidate entry	^\s*_memset\(\(void\ \*\)\(uVar7\ \*\ 4\ \+\ puVar30\[2\]\),0,\(uVar31\ \-\ uVar7\)\ \*\ 4\ \+\ 4\);$@3	+2
+use	FUN_001102e0	puVar30	candLaneVector	INFERRED	lane vector of the candidate entry	^\s*piVar10\ =\ \(int\ \*\)\(uVar31\ \*\ 4\ \+\ puVar30\[2\]\);$@2	+1
+use	FUN_001102e0	puVar30	candLaneVector	INFERRED	lane vector of the candidate entry	^\s*piVar10\ =\ \(int\ \*\)FUN_0019423c\(puVar30,uVar31\);$@2	+1
+use	FUN_001102e0	puVar30	candLaneVector	INFERRED	lane vector of the candidate entry	^\s*puVar30\ =\ \(uint\ \*\)piVar22\[3\];$@2	+2
+use	FUN_001102e0	puVar30	entryLaneVector	INFERRED	lane vector of the current entry	^\s*puVar30\ =\ \(uint\ \*\)piVar24\[3\];$	+6
+use	FUN_001102e0	puVar30	entryLaneVector	INFERRED	lane vector of the current entry	^\s*piVar18\ =\ \(int\ \*\)FUN_0019423c\(puVar30,uVar7\);$	+1
+use	FUN_001102e0	puVar30	entryLaneVector	INFERRED	lane vector of the current entry	^\s*puVar30\ =\ \(uint\ \*\)piVar24\[3\];$@2	+1
+use	FUN_001102e0	puVar30	entryLaneVector	INFERRED	lane vector of the current entry	^\s*uVar7\ =\ puVar30\[1\];$@18	+1
+use	FUN_001102e0	puVar30	entryLaneVector	INFERRED	lane vector of the current entry	^\s*if\ \(uVar31\ <\ \*puVar30\)\ \{$@5	+1
+use	FUN_001102e0	puVar30	entryLaneVector	INFERRED	lane vector of the current entry	^\s*_memset\(\(void\ \*\)\(uVar7\ \*\ 4\ \+\ puVar30\[2\]\),0,\(uVar31\ \-\ uVar7\)\ \*\ 4\ \+\ 4\);$@5	+2
+use	FUN_001102e0	puVar30	entryLaneVector	INFERRED	lane vector of the current entry	^\s*puVar12\ =\ \(undefined4\ \*\)\(uVar31\ \*\ 4\ \+\ puVar30\[2\]\);$	+1
+use	FUN_001102e0	puVar30	entryLaneVector	INFERRED	lane vector of the current entry	^\s*puVar12\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar30,uVar31\);$	+1
+use	FUN_001102e0	puVar30	entryLaneVector	INFERRED	lane vector of the current entry	^\s*puVar30\ =\ \(uint\ \*\)piVar24\[3\];$@3	+2
+use	FUN_001102e0	puVar30	entryMembersVector	INFERRED	vector at entry +0xc	^\s*puVar30\ =\ \*\(uint\ \*\*\)\(iVar8\ \+\ 0xc\);$	+2
+use	FUN_001102e0	puVar30	entryMembersVector	INFERRED	vector at entry +0xc	^\s*if\ \(uVar31\ <\ \*puVar30\)\ \{$@6	+1
+use	FUN_001102e0	puVar30	entryMembersVector	INFERRED	vector at entry +0xc	^\s*_memset\(\(void\ \*\)\(uVar7\ \*\ 4\ \+\ puVar30\[2\]\),0,\(uVar31\ \-\ uVar7\)\ \*\ 4\ \+\ 4\);$@6	+2
+use	FUN_001102e0	puVar30	entryMembersVector	INFERRED	vector at entry +0xc	^\s*piVar24\ =\ \(int\ \*\)\(uVar31\ \*\ 4\ \+\ puVar30\[2\]\);$	+1
+use	FUN_001102e0	puVar30	entryMembersVector	INFERRED	vector at entry +0xc	^\s*piVar24\ =\ \(int\ \*\)FUN_0019423c\(puVar30,uVar31\);$	+1
+use	FUN_001102e0	puVar30	entryMembersVector	INFERRED	vector at entry +0xc	^\s*puVar30\ =\ \*\(uint\ \*\*\)\(iVar8\ \+\ 0xc\);$@2	+2
+use	FUN_001102e0	puVar6	outRef	INFERRED	element reference into the output vector	^\s*puVar6\ =\ \(undefined4\ \*\)\(uVar7\ \*\ 4\ \+\ puVar30\[2\]\);$	+1
+use	FUN_001102e0	puVar6	outRef	INFERRED	element reference into the output vector	^\s*puVar6\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar30,uVar7\);$	+1
+use	FUN_001102e0	puVar6	outRef	INFERRED	element reference into the output vector	^\s*\*puVar11\ =\ \*puVar6;$	+1
+local	FUN_001102e0	local_98	savedLaneKind	INFERRED	lane kind word saved before the group is rewritten
+local	FUN_001102e0	local_94	savedSwizzleWords	INFERRED	four saved swizzle words
+local	FUN_001102e0	local_84	savedLaneSources	INFERRED	saved lane sources array
+local	FUN_001102e0	local_68	vec4GroupCount	INFERRED	ceil(distinct instruction count / 4)
+local	FUN_001102e0	local_64	laneKindTableBase	INFERRED	base of the constant table (DAT_001b02ec)
+local	FUN_001102e0	local_60	nextLaneListIndex	INFERRED	lane list index + 1
+local	FUN_001102e0	local_5c	savedSwizzleWordsAlias	INFERRED	alias of savedSwizzleWords
+local	FUN_001102e0	local_58	swizzleTableBase	INFERRED	base of the constant table (DAT_001b02ec)
+local	FUN_001102e0	local_54	savedLaneSourcesAlias	INFERRED	alias of savedLaneSources
+local	FUN_001102e0	param_2	scopeId	INFERRED	scope id compared with word 7 of the program link records

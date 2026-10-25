@@ -5002,10 +5002,10 @@ double arbParseFloatConstant(int parser)
  * against the real compiled C symbols (gcc adds one underscore automatically).
  * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
  * large PPC links) does not silently reconcile this the way stock ld did. */
-asm(".globl FUN_000837b0");
-asm(".set FUN_000837b0, _gldEmitVertexRoutingPackets");
-asm(".globl FUN_00083870");
-asm(".set FUN_00083870, _ffvpValidateProgram");
+asm(".globl gldEmitVertexRoutingPackets");
+asm(".set gldEmitVertexRoutingPackets, _gldEmitVertexRoutingPackets");
+asm(".globl ffvpValidateProgram");
+asm(".set ffvpValidateProgram, _ffvpValidateProgram");
 asm(".globl arbEmitRecord3Src_op44");
 asm(".set arbEmitRecord3Src_op44, _arbEmitRecord3Src_op44");
 asm(".globl arbEmitRecord2Src_op01");

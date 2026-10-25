@@ -3637,7 +3637,7 @@ const unsigned int sectTEXT___eh_frame[25852] = {
     0x04000000, /* +0x38c8 */
     0x00000000, /* +0x38cc */
     0x0000002c, /* +0x38d0 */
-    0x00001b14, /* -> FUN_00001b14 */ /* +0x38d4 */
+    0x00001b14, /* -> dyld_func_lookup_stub_00001b14 */ /* +0x38d4 */
     0x00017f24, /* +0x38d8 */
     0x00000078, /* +0x38dc */
     0x04000000, /* +0x38e0 */
@@ -7758,7 +7758,7 @@ const unsigned int sectTEXT___eh_frame[25852] = {
     0x180e5011, /* +0x792c */
     0x417e0000, /* +0x7930 */
     0x00000030, /* +0x7934 */
-    0x000026a8, /* -> FUN_000026a8 */ /* +0x7938 */
+    0x000026a8, /* -> get_globals_stub_000026a8 */ /* +0x7938 */
     0xfff4e790, /* +0x793c */
     0x0000004c, /* +0x7940 */
     0x04000000, /* +0x7944 */
@@ -12203,7 +12203,7 @@ const unsigned int sectTEXT___eh_frame[25852] = {
     0x00000034, /* +0xbea0 */
     0x00000000, /* +0xbea4 */
     0x00000010, /* +0xbea8 */
-    0x00002388, /* -> FUN_00002388 */ /* +0xbeac */
+    0x00002388, /* -> __keymgr_get_and_lock_processwide_ptr_stub_00002388 */ /* +0xbeac */
     0x000161a8, /* +0xbeb0 */
     0x00000034, /* +0xbeb4 */
     0x00000000, /* +0xbeb8 */
@@ -12403,7 +12403,7 @@ const unsigned int sectTEXT___eh_frame[25852] = {
     0x00000034, /* +0xc1c0 */
     0x00000000, /* +0xc1c4 */
     0x00000010, /* +0xc1c8 */
-    0x000026a8, /* -> FUN_000026a8 */ /* +0xc1cc */
+    0x000026a8, /* -> get_globals_stub_000026a8 */ /* +0xc1cc */
     0x000166a8, /* +0xc1d0 */
     0x00000034, /* +0xc1d4 */
     0x00000000, /* +0xc1d8 */

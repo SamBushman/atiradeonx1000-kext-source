@@ -1,0 +1,108 @@
+local	FUN_00121000	param_1	program	INFERRED	the Program; +8 compiler, +0x3a0 entry block
+use	FUN_00121000	iVar7	chainIndexByteOffset	INFERRED	byte offset of the matching entry in the operand block array	^\s*iVar7\ =\ 0;$	+1
+use	FUN_00121000	iVar7	chainIndexByteOffset	INFERRED	byte offset of the matching entry in the operand block array	^\s*iVar7\ =\ iVar10\ \*\ 4;$	+1
+use	FUN_00121000	iVar7	chainIndexByteOffset	INFERRED	byte offset of the matching entry in the operand block array	^\s*piVar11\ =\ \*\(int\ \*\*\)\(\(int\)local_58\ \+\ iVar7\);$	+1
+use	FUN_00121000	iVar7	blockQuery2c	INFERRED	block vtable slot 0x2c test (is a loop header)	^\s*iVar7\ =\ \(\*\*\(code\ \*\*\)\(\*piVar17\ \+\ 0x2c\)\)\(piVar17\);$	+2
+use	FUN_00121000	iVar7	candidateByteOffset	INFERRED	byte offset of the last slot of the candidate block vector	^\s*iVar7\ =\ local_64\ \*\ 4;$	+1
+use	FUN_00121000	iVar7	candidateByteOffset	INFERRED	byte offset of the last slot of the candidate block vector	^\s*\*\(undefined4\ \*\)\(iVar7\ \+\ local_60\)\ =\ 0;$	+2
+use	FUN_00121000	iVar7	userInst	INFERRED	instruction in the candidate block's list	^\s*for\ \(iVar7\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(\*piVar8\ \+\ 0x98\)\ \+\ 8\);\ iVar7\ !=\ 0;$	+2
+use	FUN_00121000	iVar7	userInst	INFERRED	instruction in the candidate block's list	^\s*iVar7\ =\ \*\(int\ \*\)\(iVar6\ \+\ 8\);$	+1
+use	FUN_00121000	iVar7	userInst	INFERRED	instruction in the candidate block's list	^\s*iVar6\ =\ iVar7;$	+1
+use	FUN_00121000	iVar7	workStackByteOffset	INFERRED	byte offset of the last slot of the work stack	^\s*iVar7\ =\ local_74\ \*\ 4;$	+2
+use	FUN_00121000	iVar7	workStackByteOffset	INFERRED	byte offset of the last slot of the work stack	^\s*puVar5\ =\ \(undefined4\ \*\)\(iVar7\ \+\ local_70\);$	+1
+use	FUN_00121000	piVar8	firstOperandBlock	INFERRED	block of the first source operand	^\s*piVar8\ =\ local_58\[0\];$	+1
+use	FUN_00121000	piVar8	firstOperandBlock	INFERRED	block of the first source operand	^\s*piVar4\ =\ piVar8;$	+1
+use	FUN_00121000	piVar8	candidateRef	INFERRED	element reference into the candidate block vector	^\s*piVar8\ =\ \(int\ \*\)\(uVar14\ \*\ 4\ \+\ local_60\);$	+1
+use	FUN_00121000	piVar8	candidateRef	INFERRED	element reference into the candidate block vector	^\s*piVar8\ =\ \(int\ \*\)FUN_0019423c\(\&local_68,uVar14\);$	+1
+use	FUN_00121000	piVar8	candidateRef	INFERRED	element reference into the candidate block vector	^\s*iVar6\ =\ \*\(int\ \*\)\(\*piVar8\ \+\ 0x98\);$	+3
+use	FUN_00121000	uVar14	workStackCountSnapshot	INFERRED	work stack count read before the first push	^\s*uVar14\ =\ local_74;$	+1
+use	FUN_00121000	uVar14	workStackCountSnapshot	INFERRED	work stack count read before the first push	^\s*local_74\ =\ uVar14\ \+\ 1;$	+1
+use	FUN_00121000	uVar14	lastWorkStackIndex	INFERRED	index of the last work stack element	^\s*uVar14\ =\ local_74\ \-\ 1;$	+3
+use	FUN_00121000	uVar14	lastWorkStackIndex	INFERRED	index of the last work stack element	^\s*FUN_00194208\(\&local_78,uVar14\);$	+1
+use	FUN_00121000	bVar1	chainContainsBlock	INFERRED	the dominator chain walk reached one of the operand blocks	^\s*bVar1\ =\ false;$	+1
+use	FUN_00121000	bVar1	chainContainsBlock	INFERRED	the dominator chain walk reached one of the operand blocks	^\s*bVar1\ =\ true;$	+1
+use	FUN_00121000	bVar1	chainContainsBlock	INFERRED	the dominator chain walk reached one of the operand blocks	^\s*\}\ while\ \(\(!bVar1\)\ \&\&$	+3
+use	FUN_00121000	bVar1	notUsedByPhi	INFERRED	no phi in the candidate block uses the instruction	^\s*bVar1\ =\ false;$@2	+1
+use	FUN_00121000	bVar1	notUsedByPhi	INFERRED	no phi in the candidate block uses the instruction	^\s*bVar1\ =\ true;$@2	+1
+use	FUN_00121000	bVar1	notUsedByPhi	INFERRED	no phi in the candidate block uses the instruction	^\s*if\ \(!bVar1\)\ goto\ LAB_00121390;$	+1
+use	FUN_00121000	piVar2	nextInst	INFERRED	next instruction in the block	^\s*for\ \(piVar2\ =\ \(int\ \*\)\(\*\(int\ \*\*\)\(iVar13\ \+\ 0x98\)\)\[2\];\ piVar2\ !=\ \(int\ \*\)0x0;$	+2
+use	FUN_00121000	piVar2	nextInst	INFERRED	next instruction in the block	^\s*piVar9\ =\ piVar2;$	+1
+use	FUN_00121000	uVar3	workStackCountB	INFERRED	work stack count before the child block is pushed	^\s*uVar3\ =\ local_74;$	+1
+use	FUN_00121000	uVar3	workStackCountB	INFERRED	work stack count before the child block is pushed	^\s*local_74\ =\ uVar3\ \+\ 1;$	+1
+use	FUN_00121000	piVar4	chainCursor	INFERRED	operand block compared against the chain block	^\s*piVar4\ =\ piVar8;$	+2
+use	FUN_00121000	piVar4	chainCursor	INFERRED	operand block compared against the chain block	^\s*piVar4\ =\ local_58\[iVar10\];$	+1
+use	FUN_00121000	piVar4	chainCursor	INFERRED	operand block compared against the chain block	^\s*\}\ while\ \(\(!bVar1\)\ \&\&$	+3
+use	FUN_00121000	puVar5	workStackSlotRefA	INFERRED	slot reference into the work stack	^\s*puVar5\ =\ \(undefined4\ \*\)\(iVar13\ \+\ local_70\);$	+1
+use	FUN_00121000	puVar5	workStackSlotRefA	INFERRED	slot reference into the work stack	^\s*puVar5\ =\ \(undefined4\ \*\)FUN_0019423c\(\&local_78,local_74\);$	+1
+use	FUN_00121000	puVar5	workStackSlotRefA	INFERRED	slot reference into the work stack	^\s*\*puVar5\ =\ uVar15;$	+1
+use	FUN_00121000	puVar5	candidateSlotRef	INFERRED	slot reference into the candidate block vector	^\s*puVar5\ =\ \(undefined4\ \*\)\(iVar7\ \+\ local_60\);$	+1
+use	FUN_00121000	puVar5	candidateSlotRef	INFERRED	slot reference into the candidate block vector	^\s*puVar5\ =\ \(undefined4\ \*\)FUN_0019423c\(\&local_68,local_64\);$	+1
+use	FUN_00121000	puVar5	candidateSlotRef	INFERRED	slot reference into the candidate block vector	^\s*\*puVar5\ =\ piVar17;$	+1
+use	FUN_00121000	puVar5	workStackSlotRefB	INFERRED	slot reference into the work stack	^\s*puVar5\ =\ \(undefined4\ \*\)\(iVar7\ \+\ local_70\);$	+1
+use	FUN_00121000	puVar5	workStackSlotRefB	INFERRED	slot reference into the work stack	^\s*puVar5\ =\ \(undefined4\ \*\)FUN_0019423c\(\&local_78,local_74\);$@2	+1
+use	FUN_00121000	puVar5	workStackSlotRefB	INFERRED	slot reference into the work stack	^\s*\*puVar5\ =\ uVar15;$@2	+1
+use	FUN_00121000	iVar6	instQuery68	INFERRED	instruction vtable slot 0x68 test	^\s*if\ \(\(\(\(\(\*\(int\ \*\)\(piVar9\[0x22\]\ \+\ 8\)\ !=\ 0x8e\)\ \&\&$	+5
+use	FUN_00121000	iVar6	instQuery68	INFERRED	instruction vtable slot 0x68 test	^\s*iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*piVar11\ \+\ 0x2c\)\)\(piVar11\);$	+2
+use	FUN_00121000	iVar6	instQuery68	INFERRED	instruction vtable slot 0x68 test	^\s*iVar6\ =\ \*\(int\ \*\)\(\*piVar8\ \+\ 0x98\);$	+1
+use	FUN_00121000	iVar6	instQuery68	INFERRED	instruction vtable slot 0x68 test	^\s*if\ \(\(\(\*\(uint\ \*\)\(iVar6\ \+\ 0x14\)\ \&\ 1\)\ !=\ 0\)\ \&\&$	+3
+use	FUN_00121000	iVar6	instQuery68	INFERRED	instruction vtable slot 0x68 test	^\s*iVar7\ =\ \*\(int\ \*\)\(iVar6\ \+\ 8\);$	+1
+use	FUN_00121000	iVar6	instQuery68	INFERRED	instruction vtable slot 0x68 test	^\s*iVar6\ =\ iVar7;$	+1
+use	FUN_00121000	iVar6	instQuery68	INFERRED	instruction vtable slot 0x68 test	^\s*iVar6\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x6c4\);$	+2
+use	FUN_00121000	iVar6	instQuery68	INFERRED	instruction vtable slot 0x68 test	^\s*iVar6\ =\ FUN_000e7a10\(iVar13\);$	+2
+use	FUN_00121000	iVar6	instQuery68	INFERRED	instruction vtable slot 0x68 test	^\s*iVar6\ =\ \*\(int\ \*\)\(iVar13\ \+\ 0xf4\);$	+1
+use	FUN_00121000	iVar6	instQuery68	INFERRED	instruction vtable slot 0x68 test	^\s*if\ \(\*\(uint\ \*\)\(iVar6\ \+\ 4\)\ !=\ 0\)\ \{$	+2
+use	FUN_00121000	iVar6	instQuery68	INFERRED	instruction vtable slot 0x68 test	^\s*if\ \(1\ <\ \*\(uint\ \*\)\(iVar6\ \+\ 4\)\)\ \{$	+1
+use	FUN_00121000	iVar6	instQuery68	INFERRED	instruction vtable slot 0x68 test	^\s*uVar15\ =\ \*\(undefined4\ \*\)\(uVar14\ \*\ 4\ \+\ \*\(int\ \*\)\(iVar6\ \+\ 8\)\);$	+1
+use	FUN_00121000	iVar6	instQuery68	INFERRED	instruction vtable slot 0x68 test	^\s*\}\ while\ \(uVar14\ <\ \*\(uint\ \*\)\(iVar6\ \+\ 4\)\);$	+1
+use	FUN_00121000	iVar6	operandCounter	INFERRED	operand number 1..count	^\s*iVar6\ =\ 0;$	+1
+use	FUN_00121000	iVar6	operandCounter	INFERRED	operand number 1..count	^\s*iVar6\ =\ iVar6\ \+\ 1;$	+2
+use	FUN_00121000	iVar6	operandCounter	INFERRED	operand number 1..count	^\s*\}\ while\ \(iVar6\ <\ piVar9\[0x21\]\);$	+1
+use	FUN_00121000	iVar6	operandCounter	INFERRED	operand number 1..count	^\s*if\ \(iVar6\ <\ 0\)\ \{$	+1
+use	FUN_00121000	iVar6	operandCounter	INFERRED	operand number 1..count	^\s*if\ \(iVar6\ <\ iVar10\)\ goto\ LAB_001211d0;$	+1
+use	FUN_00121000	piVar9	inst	INFERRED	instruction being considered for motion	^\s*piVar9\ =\ \*\(int\ \*\*\)\(iVar13\ \+\ 0x98\);$	+1
+use	FUN_00121000	piVar9	inst	INFERRED	instruction being considered for motion	^\s*if\ \(\(\(\(\(\*\(int\ \*\)\(piVar9\[0x22\]\ \+\ 8\)\ !=\ 0x8e\)\ \&\&$	+5
+use	FUN_00121000	piVar9	inst	INFERRED	instruction being considered for motion	^\s*piVar11\ =\ \(int\ \*\)piVar9\[0x56\];$	+2
+use	FUN_00121000	piVar9	inst	INFERRED	instruction being considered for motion	^\s*iVar7\ =\ FUN_00105594\(piVar9,iVar6\);$	+1
+use	FUN_00121000	piVar9	inst	INFERRED	instruction being considered for motion	^\s*\}\ while\ \(iVar6\ <\ piVar9\[0x21\]\);$	+1
+use	FUN_00121000	piVar9	inst	INFERRED	instruction being considered for motion	^\s*if\ \(piVar9\ ==\ piVar8\)\ \{$	+1
+use	FUN_00121000	piVar9	inst	INFERRED	instruction being considered for motion	^\s*if\ \(\(piVar11\ !=\ \(int\ \*\)piVar9\[0x56\]\)\ \&\&\ \(piVar11\[0x45\]\ <\ \(\(int\ \*\)piVar9\[0x56\]\)\[0x45\]\)\)\ \{$	+4
+use	FUN_00121000	piVar9	inst	INFERRED	instruction being considered for motion	^\s*piVar9\ =\ piVar2;$	+1
+use	FUN_00121000	piVar9	workStackTopRef	INFERRED	last element reference of the work stack	^\s*piVar9\ =\ \(int\ \*\)0x0;$	+1
+use	FUN_00121000	piVar9	workStackTopRef	INFERRED	last element reference of the work stack	^\s*piVar9\ =\ \(int\ \*\)\(uVar14\ \*\ 4\ \+\ local_70\);$	+1
+use	FUN_00121000	piVar9	workStackTopRef	INFERRED	last element reference of the work stack	^\s*iVar13\ =\ \*piVar9;$	+1
+use	FUN_00121000	piVar9	childVectorFirstRef	INFERRED	first element reference of the dominated-children vector	^\s*piVar9\ =\ \(int\ \*\)0x0;$@2	+1
+use	FUN_00121000	piVar9	childVectorFirstRef	INFERRED	first element reference of the dominated-children vector	^\s*piVar9\ =\ \*\(int\ \*\*\)\(iVar6\ \+\ 8\);$	+1
+use	FUN_00121000	piVar9	childVectorFirstRef	INFERRED	first element reference of the dominated-children vector	^\s*iVar13\ =\ \*piVar9;$@2	+1
+use	FUN_00121000	iVar10	chainIndex	INFERRED	index into the operand block array	^\s*iVar10\ =\ 0;$	+1
+use	FUN_00121000	iVar10	chainIndex	INFERRED	index into the operand block array	^\s*iVar10\ =\ iVar10\ \+\ 1;$	+4
+use	FUN_00121000	piVar11	targetBlock	INFERRED	block the instruction is moved to (starts as its own block)	^\s*piVar11\ =\ \(int\ \*\)piVar9\[0x56\];$	+1
+use	FUN_00121000	piVar11	targetBlock	INFERRED	block the instruction is moved to (starts as its own block)	^\s*if\ \(piVar11\ !=\ \(int\ \*\)0x0\)\ \{$	+3
+use	FUN_00121000	piVar11	targetBlock	INFERRED	block the instruction is moved to (starts as its own block)	^\s*piVar11\ =\ \*\(int\ \*\*\)\(\(int\)local_58\ \+\ iVar7\);$	+1
+use	FUN_00121000	piVar11	targetBlock	INFERRED	block the instruction is moved to (starts as its own block)	^\s*iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*piVar11\ \+\ 0x2c\)\)\(piVar11\);$	+1
+use	FUN_00121000	piVar11	targetBlock	INFERRED	block the instruction is moved to (starts as its own block)	^\s*piVar11\ =\ piVar12;$	+1
+use	FUN_00121000	piVar11	targetBlock	INFERRED	block the instruction is moved to (starts as its own block)	^\s*if\ \(\(piVar11\ !=\ \(int\ \*\)piVar9\[0x56\]\)\ \&\&\ \(piVar11\[0x45\]\ <\ \(\(int\ \*\)piVar9\[0x56\]\)\[0x45\]\)\)\ \{$	+1
+use	FUN_00121000	piVar11	targetBlock	INFERRED	block the instruction is moved to (starts as its own block)	^\s*FUN_000e7688\(piVar11,piVar9\);$	+1
+use	FUN_00121000	piVar12	lastChainBlock	INFERRED	last block on the dominator chain that was not an operand block	^\s*piVar12\ =\ \(int\ \*\)0x0;$	+1
+use	FUN_00121000	piVar12	lastChainBlock	INFERRED	last block on the dominator chain that was not an operand block	^\s*\}\ while\ \(\(!bVar1\)\ \&\&$	+3
+use	FUN_00121000	piVar12	lastChainBlock	INFERRED	last block on the dominator chain that was not an operand block	^\s*piVar11\ =\ piVar12;$	+1
+use	FUN_00121000	piVar12	lastChainBlock	INFERRED	last block on the dominator chain that was not an operand block	^\s*piVar12\ =\ piVar11;$	+1
+use	FUN_00121000	iVar13	workStackSlotOffset	INFERRED	byte offset of the work stack slot being filled	^\s*iVar13\ =\ local_74\ \*\ 4;$	+2
+use	FUN_00121000	iVar13	workStackSlotOffset	INFERRED	byte offset of the work stack slot being filled	^\s*puVar5\ =\ \(undefined4\ \*\)\(iVar13\ \+\ local_70\);$	+1
+use	FUN_00121000	iVar13	currentBlock	INFERRED	block being processed	^\s*iVar13\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x3a0\);$	+1
+use	FUN_00121000	iVar13	currentBlock	INFERRED	block being processed	^\s*piVar9\ =\ \*\(int\ \*\*\)\(iVar13\ \+\ 0x98\);$	+3
+use	FUN_00121000	iVar13	currentBlock	INFERRED	block being processed	^\s*iVar6\ =\ FUN_000e7a10\(iVar13\);$	+1
+use	FUN_00121000	iVar13	currentBlock	INFERRED	block being processed	^\s*iVar13\ =\ \*piVar9;$	+1
+use	FUN_00121000	iVar13	currentBlock	INFERRED	block being processed	^\s*iVar6\ =\ \*\(int\ \*\)\(iVar13\ \+\ 0xf4\);$	+1
+use	FUN_00121000	iVar13	currentBlock	INFERRED	block being processed	^\s*iVar13\ =\ \*piVar9;$@2	+1
+use	FUN_00121000	uVar15	entryBlockValue	INFERRED	program entry block pushed first	^\s*uVar15\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x3a0\);$	+1
+use	FUN_00121000	uVar15	entryBlockValue	INFERRED	program entry block pushed first	^\s*\*puVar5\ =\ uVar15;$	+1
+use	FUN_00121000	uVar15	dominatedChild	INFERRED	dominated child block pushed on the work stack	^\s*uVar15\ =\ \*\(undefined4\ \*\)\(uVar14\ \*\ 4\ \+\ \*\(int\ \*\)\(iVar6\ \+\ 8\)\);$	+1
+use	FUN_00121000	uVar15	dominatedChild	INFERRED	dominated child block pushed on the work stack	^\s*\*puVar5\ =\ uVar15;$@2	+1
+use	FUN_00121000	ppiVar16	operandBlockCursor	INFERRED	cursor filling the operand block array	^\s*ppiVar16\ =\ local_58;$	+1
+use	FUN_00121000	ppiVar16	operandBlockCursor	INFERRED	cursor filling the operand block array	^\s*\*ppiVar16\ =\ \*\(int\ \*\*\)\(iVar7\ \+\ 0x158\);$	+2
+use	FUN_00121000	piVar17	chainBlock	INFERRED	block on the dominator chain from the instruction's block upward	^\s*piVar17\ =\ piVar11;$	+1
+use	FUN_00121000	piVar17	chainBlock	INFERRED	block on the dominator chain from the instruction's block upward	^\s*while\ \(piVar17\ !=\ piVar4\)\ \{$	+1
+use	FUN_00121000	piVar17	chainBlock	INFERRED	block on the dominator chain from the instruction's block upward	^\s*iVar7\ =\ \(\*\*\(code\ \*\*\)\(\*piVar17\ \+\ 0x2c\)\)\(piVar17\);$	+1
+use	FUN_00121000	piVar17	chainBlock	INFERRED	block on the dominator chain from the instruction's block upward	^\s*\*puVar5\ =\ piVar17;$	+1
+use	FUN_00121000	piVar17	chainBlock	INFERRED	block on the dominator chain from the instruction's block upward	^\s*\}\ while\ \(\(!bVar1\)\ \&\&$	+3
+local	FUN_00121000	local_58	operandBlocks	INFERRED	blocks of the instruction's source operands

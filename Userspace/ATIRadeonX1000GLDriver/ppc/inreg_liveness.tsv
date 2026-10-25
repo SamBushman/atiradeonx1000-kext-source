@@ -424,8 +424,8 @@ e2094	FUN_000e2094	r8	PASS-no	e20b4 bl 0xe15b8
 e36bc	FUN_000e36bc	r8	PASS-deep	e36ec bl 0xe3544
 e36bc	FUN_000e36bc	r9	PASS-deep	e36ec bl 0xe3544
 e36bc	FUN_000e36bc	r10	PASS-deep	e36ec bl 0xe3544
-e5e70	FUN_000e5e70	r7	PASS-no	e5efc bl 0xe4c40
-e5e70	FUN_000e5e70	r8	PASS-no	e5efc bl 0xe4c40
+e5e70	ILReader__nextInstruction	r7	PASS-no	e5efc bl 0xe4c40
+e5e70	ILReader__nextInstruction	r8	PASS-no	e5efc bl 0xe4c40
 e9d68	Block__ctor_e9d68	r5	PASS-no	e9db8 bl 0x1940a8
 e9d68	Block__ctor_e9d68	r6	PASS-no	e9db8 bl 0x1940a8
 e9d68	Block__ctor_e9d68	r7	PASS-no	e9db8 bl 0x1940a8

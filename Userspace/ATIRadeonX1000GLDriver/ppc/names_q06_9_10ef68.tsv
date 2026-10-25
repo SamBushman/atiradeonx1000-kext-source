@@ -1,0 +1,106 @@
+local	FUN_0010ef68	param_1	psBackend	INFERRED	pixel-shader backend object (vtable slot 0x54 binds an interpolator, 0x138 returns the hardware register count)
+use	FUN_0010ef68	iVar14	fixedRegBase	INFERRED	program word 1000: first hardware register of the fixed interpolator range	^\s*iVar14\ =\ \*\(int\ \*\)\(param_2\ \+\ 1000\);$	+1
+use	FUN_0010ef68	iVar14	fixedRegBase	INFERRED	program word 1000: first hardware register of the fixed interpolator range	^\s*if\ \(\(\(\(iVar4\ ==\ 0\)\ \|\|\ \(iVar4\ =\ piVar3\[0x52\],\ iVar16\ !=\ piVar3\[0x51\]\)\)\ \|\|\ \(iVar4\ <\ iVar14\)\)$	+2
+use	FUN_0010ef68	iVar14	fixedRegBase	INFERRED	program word 1000: first hardware register of the fixed interpolator range	^\s*uVar11\ =\ iVar4\ \-\ iVar14;$	+1
+use	FUN_0010ef68	iVar14	laneKind	INFERRED	IRLoadInterp lane kind of the lane	^\s*iVar14\ =\ FUN_00104b6c\(iVar18,uVar17\);$	+1
+use	FUN_0010ef68	iVar14	laneKind	INFERRED	IRLoadInterp lane kind of the lane	^\s*if\ \(iVar14\ !=\ 7\)\ \{$	+1
+use	FUN_0010ef68	iVar14	laneKind	INFERRED	IRLoadInterp lane kind of the lane	^\s*if\ \(\(\(iVar4\ !=\ 0\)\ \&\&\ \(iVar4\ =\ FUN_00104b6c\(iVar18,uVar8\),\ iVar4\ ==\ iVar14\)\)\ \&\&$	+2
+use	FUN_0010ef68	iVar14	laneKind	INFERRED	IRLoadInterp lane kind of the lane	^\s*uVar5\ =\ FUN_000ec2c4\(param_2,iVar14\);$	+1
+use	FUN_0010ef68	bVar1	moreLanes	INFERRED	loop latch: lane index is not the last (3)	^\s*bVar1\ =\ uVar8\ !=\ 3;$	+1
+use	FUN_0010ef68	bVar1	moreLanes	INFERRED	loop latch: lane index is not the last (3)	^\s*\}\ while\ \(bVar1\);$	+1
+use	FUN_0010ef68	piVar2	nextInstLink	INFERRED	link to the instruction after the cursor	^\s*piVar2\ =\ \(int\ \*\)piVar3\[2\];$	+1
+use	FUN_0010ef68	piVar2	nextInstLink	INFERRED	link to the instruction after the cursor	^\s*piVar6\ =\ piVar2;$	+1
+use	FUN_0010ef68	piVar2	nextInstLink	INFERRED	link to the instruction after the cursor	^\s*piVar2\ =\ \(int\ \*\)piVar6\[2\];$	+1
+use	FUN_0010ef68	piVar2	nextInstLink	INFERRED	link to the instruction after the cursor	^\s*piVar2\ =\ \(int\ \*\)piVar3\[2\];$@2	+1
+use	FUN_0010ef68	piVar2	nextInstLink	INFERRED	link to the instruction after the cursor	^\s*piVar6\ =\ piVar2;$@2	+1
+use	FUN_0010ef68	piVar2	nextInstLink	INFERRED	link to the instruction after the cursor	^\s*piVar2\ =\ \(int\ \*\)piVar6\[2\];$@2	+1
+use	FUN_0010ef68	piVar3	inst	INFERRED	instruction being examined in the entry block	^\s*piVar3\ =\ \*\(int\ \*\*\)\(iVar18\ \+\ 0x98\);$	+3
+use	FUN_0010ef68	piVar3	inst	INFERRED	instruction being examined in the entry block	^\s*if\ \(\(piVar3\[5\]\ \&\ 1U\)\ !=\ 0\)\ \{$	+5
+use	FUN_0010ef68	piVar3	inst	INFERRED	instruction being examined in the entry block	^\s*piVar3\[0x25\]\ =\ uVar11;$	+3
+use	FUN_0010ef68	piVar3	inst	INFERRED	instruction being examined in the entry block	^\s*piVar6\ =\ \(int\ \*\)piVar3\[2\];$@2	+1
+use	FUN_0010ef68	piVar3	inst	INFERRED	instruction being examined in the entry block	^\s*piVar3\ =\ piVar6;$	+1
+use	FUN_0010ef68	piVar3	inst	INFERRED	instruction being examined in the entry block	^\s*piVar3\ =\ \*\(int\ \*\*\)\(iVar18\ \+\ 0x98\);$@2	+1
+use	FUN_0010ef68	piVar3	inst	INFERRED	instruction being examined in the entry block	^\s*if\ \(\(int\ \*\)piVar3\[2\]\ !=\ \(int\ \*\)0x0\)\ \{$	+2
+use	FUN_0010ef68	piVar3	inst	INFERRED	instruction being examined in the entry block	^\s*if\ \(\(piVar3\[5\]\ \&\ 1U\)\ !=\ 0\)\ \{$@2	+2
+use	FUN_0010ef68	piVar3	inst	INFERRED	instruction being examined in the entry block	^\s*iVar18\ =\ \(\*\*\(code\ \*\*\)\(\*piVar3\ \+\ 0x80\)\)\(piVar3\);$	+1
+use	FUN_0010ef68	piVar3	inst	INFERRED	instruction being examined in the entry block	^\s*piVar6\ =\ \(int\ \*\)piVar3\[2\];$@3	+1
+use	FUN_0010ef68	piVar3	inst	INFERRED	instruction being examined in the entry block	^\s*piVar3\ =\ piVar6;$@2	+1
+use	FUN_0010ef68	iVar4	isInterpLoad	INFERRED	instruction vtable slot 0x4c test (interpolant load)	^\s*iVar4\ =\ \(\*\*\(code\ \*\*\)\(\*piVar3\ \+\ 0x4c\)\)\(piVar3\);$	+3
+use	FUN_0010ef68	iVar4	isInterpLoad	INFERRED	instruction vtable slot 0x4c test (interpolant load)	^\s*uVar11\ =\ iVar4\ \-\ iVar14;$	+1
+use	FUN_0010ef68	iVar4	laneUsedB	INFERRED	lane-used flag of the following lane	^\s*iVar4\ =\ FUN_00104a94\(iVar18,uVar8\);$	+3
+use	FUN_0010ef68	uVar5	interpolatorCode	INFERRED	Table__interpolatorKindToCode(kind)	^\s*uVar5\ =\ FUN_000ec2c4\(param_2,iVar14\);$	+1
+use	FUN_0010ef68	uVar5	interpolatorCode	INFERRED	Table__interpolatorKindToCode(kind)	^\s*\(\*pcVar15\)\(param_1,uVar10,uVar5,iVar12,\*\(undefined4\ \*\)\(iVar14\ \+\ 0x10\),uVar9\ \&\ 1,$	+2
+use	FUN_0010ef68	piVar6	cursorInst	INFERRED	instruction cursor kept while the list advances	^\s*piVar6\ =\ piVar2;$	+1
+use	FUN_0010ef68	piVar6	cursorInst	INFERRED	instruction cursor kept while the list advances	^\s*piVar6\ =\ \(int\ \*\)piVar3\[2\];$	+1
+use	FUN_0010ef68	piVar6	cursorInst	INFERRED	instruction cursor kept while the list advances	^\s*piVar6\ =\ \(int\ \*\)piVar3\[2\];$@2	+1
+use	FUN_0010ef68	piVar6	cursorInst	INFERRED	instruction cursor kept while the list advances	^\s*piVar2\ =\ \(int\ \*\)piVar6\[2\];$	+3
+use	FUN_0010ef68	piVar6	cursorInst	INFERRED	instruction cursor kept while the list advances	^\s*piVar6\ =\ piVar2;$@2	+1
+use	FUN_0010ef68	piVar6	cursorInst	INFERRED	instruction cursor kept while the list advances	^\s*piVar6\ =\ \(int\ \*\)piVar3\[2\];$@3	+1
+use	FUN_0010ef68	piVar6	cursorInst	INFERRED	instruction cursor kept while the list advances	^\s*piVar2\ =\ \(int\ \*\)piVar6\[2\];$@2	+1
+use	FUN_0010ef68	piVar6	cursorInst	INFERRED	instruction cursor kept while the list advances	^\s*piVar3\ =\ piVar6;$@2	+2
+use	FUN_0010ef68	uVar7	compiler	INFERRED	program->compiler	^\s*uVar7\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 8\);$	+1
+use	FUN_0010ef68	uVar7	compiler	INFERRED	program->compiler	^\s*FUN_000e1534\(uVar7,4\);$	+1
+use	FUN_0010ef68	uVar8	followingLane	INFERRED	lane index after the current lane	^\s*uVar8\ =\ uVar17\ \+\ 1;$	+2
+use	FUN_0010ef68	uVar8	followingLane	INFERRED	lane index after the current lane	^\s*iVar4\ =\ FUN_00104a94\(iVar18,uVar8\);$	+4
+use	FUN_0010ef68	uVar8	followingLane	INFERRED	lane index after the current lane	^\s*bVar1\ =\ uVar8\ !=\ 3;$	+2
+use	FUN_0010ef68	uVar9	laneGroupMask	INFERRED	mask of the lanes that share kind and index with the current lane	^\s*if\ \(\(iVar12\ !=\ 0\)\ \&\&\ \(uVar9\ =\ 1\ <<\ \(uVar17\ \&\ 0x3f\),\ \(uVar9\ \&\ uVar11\)\ !=\ 0\)\)\ \{$	+1
+use	FUN_0010ef68	uVar9	laneGroupMask	INFERRED	mask of the lanes that share kind and index with the current lane	^\s*uVar9\ =\ uVar9\ \|\ 1\ <<\ \(uVar8\ \&\ 0x3f\);$	+1
+use	FUN_0010ef68	uVar9	laneGroupMask	INFERRED	mask of the lanes that share kind and index with the current lane	^\s*if\ \(uVar9\ !=\ 0\)\ \{$	+1
+use	FUN_0010ef68	uVar9	laneGroupMask	INFERRED	mask of the lanes that share kind and index with the current lane	^\s*uVar11\ =\ uVar11\ \-\ uVar9;$	+1
+use	FUN_0010ef68	uVar9	laneGroupMask	INFERRED	mask of the lanes that share kind and index with the current lane	^\s*uVar9\ =\ \*\(uint\ \*\)\(iVar18\ \+\ 0x13c\);$	+3
+use	FUN_0010ef68	uVar10	assignedRegister	INFERRED	hardware interpolator register given to the load	^\s*uVar10\ =\ uVar11;$	+1
+use	FUN_0010ef68	uVar10	assignedRegister	INFERRED	hardware interpolator register given to the load	^\s*uVar10\ =\ 0xffffffff;$	+1
+use	FUN_0010ef68	uVar10	assignedRegister	INFERRED	hardware interpolator register given to the load	^\s*FUN_00130444\(param_2,uVar10\);$	+1
+use	FUN_0010ef68	uVar10	assignedRegister	INFERRED	hardware interpolator register given to the load	^\s*\*\(uint\ \*\)\(iVar18\ \+\ 0x94\)\ =\ uVar10;$	+3
+use	FUN_0010ef68	uVar10	assignedRegister	INFERRED	hardware interpolator register given to the load	^\s*\*\(uint\ \*\)\(param_2\ \+\ 0x88\)\ =\ 1\ <<\ \(uVar10\ \&\ 0x3f\)\ \|\ \*\(uint\ \*\)\(param_2\ \+\ 0x88\);$	+1
+use	FUN_0010ef68	uVar10	assignedRegister	INFERRED	hardware interpolator register given to the load	^\s*uVar10\ =\ \*\(uint\ \*\)\(iVar18\ \+\ 0x94\);$	+1
+use	FUN_0010ef68	uVar10	assignedRegister	INFERRED	hardware interpolator register given to the load	^\s*if\ \(\(\(int\)uVar10\ <\ 0\)\ \|\|$	+3
+use	FUN_0010ef68	uVar10	assignedRegister	INFERRED	hardware interpolator register given to the load	^\s*\*\(uint\ \*\)\(iVar18\ \+\ 0x148\)\ =\ uVar10;$	+1
+use	FUN_0010ef68	uVar10	assignedRegister	INFERRED	hardware interpolator register given to the load	^\s*\(\*pcVar15\)\(param_1,uVar10,uVar5,iVar12,\*\(undefined4\ \*\)\(iVar14\ \+\ 0x10\),uVar9\ \&\ 1,$	+2
+use	FUN_0010ef68	uVar11	fixedRegister	INFERRED	fixed register number (pinned register minus the base)	^\s*uVar11\ =\ iVar4\ \-\ iVar14;$	+4
+use	FUN_0010ef68	uVar11	fixedRegister	INFERRED	fixed register number (pinned register minus the base)	^\s*if\ \(\*\(int\ \*\)\(param_2\ \+\ 0x80\)\ <\ \(int\)uVar11\)\ \{$	+2
+use	FUN_0010ef68	uVar11	fixedRegister	INFERRED	fixed register number (pinned register minus the base)	^\s*\*\(uint\ \*\)\(param_2\ \+\ 0x88\)\ =\ 1\ <<\ \(uVar11\ \&\ 0x3f\)\ \|\ \*\(uint\ \*\)\(param_2\ \+\ 0x88\);$	+1
+use	FUN_0010ef68	uVar11	nextFreeRegister	INFERRED	next hardware register to try for a free assignment	^\s*uVar11\ =\ 0;$	+1
+use	FUN_0010ef68	uVar11	nextFreeRegister	INFERRED	next hardware register to try for a free assignment	^\s*uVar13\ =\ uVar11;$	+1
+use	FUN_0010ef68	uVar11	nextFreeRegister	INFERRED	next hardware register to try for a free assignment	^\s*for\ \(;\ iVar12\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0x138\)\)\(param_1,\*\(undefined4\ \*\)\(param_2\ \+\ 8\)\),$	+6
+use	FUN_0010ef68	uVar11	nextFreeRegister	INFERRED	next hardware register to try for a free assignment	^\s*uVar13\ =\ uVar11;$@2	+1
+use	FUN_0010ef68	uVar11	nextFreeRegister	INFERRED	next hardware register to try for a free assignment	^\s*uVar11\ =\ uVar13;$	+1
+use	FUN_0010ef68	uVar11	remainingLaneMask	INFERRED	lanes of the load not yet bound (starts at 0xf)	^\s*uVar11\ =\ 0xf;$	+1
+use	FUN_0010ef68	uVar11	remainingLaneMask	INFERRED	lanes of the load not yet bound (starts at 0xf)	^\s*if\ \(\(iVar12\ !=\ 0\)\ \&\&\ \(uVar9\ =\ 1\ <<\ \(uVar17\ \&\ 0x3f\),\ \(uVar9\ \&\ uVar11\)\ !=\ 0\)\)\ \{$	+1
+use	FUN_0010ef68	uVar11	remainingLaneMask	INFERRED	lanes of the load not yet bound (starts at 0xf)	^\s*uVar11\ =\ uVar11\ \-\ uVar9;$	+1
+use	FUN_0010ef68	iVar12	regLimitOrScratch	INFERRED	fixed register limit (program word 0x3ec), later reused for register count and lane-used tests	^\s*iVar12\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x3ec\);$	+1
+use	FUN_0010ef68	iVar12	regLimitOrScratch	INFERRED	fixed register limit (program word 0x3ec), later reused for register count and lane-used tests	^\s*if\ \(\(\(\(iVar4\ ==\ 0\)\ \|\|\ \(iVar4\ =\ piVar3\[0x52\],\ iVar16\ !=\ piVar3\[0x51\]\)\)\ \|\|\ \(iVar4\ <\ iVar14\)\)$	+2
+use	FUN_0010ef68	iVar12	regLimitOrScratch	INFERRED	fixed register limit (program word 0x3ec), later reused for register count and lane-used tests	^\s*for\ \(;\ iVar12\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0x138\)\)\(param_1,\*\(undefined4\ \*\)\(param_2\ \+\ 8\)\),$	+4
+use	FUN_0010ef68	iVar12	regLimitOrScratch	INFERRED	fixed register limit (program word 0x3ec), later reused for register count and lane-used tests	^\s*if\ \(\(\(int\)uVar10\ <\ 0\)\ \|\|$	+3
+use	FUN_0010ef68	iVar12	regLimitOrScratch	INFERRED	fixed register limit (program word 0x3ec), later reused for register count and lane-used tests	^\s*iVar12\ =\ \*\(int\ \*\)\(iVar18\ \+\ 0x144\);$	+3
+use	FUN_0010ef68	iVar12	regLimitOrScratch	INFERRED	fixed register limit (program word 0x3ec), later reused for register count and lane-used tests	^\s*iVar12\ =\ FUN_00104a94\(iVar18,uVar17\);$	+2
+use	FUN_0010ef68	iVar12	regLimitOrScratch	INFERRED	fixed register limit (program word 0x3ec), later reused for register count and lane-used tests	^\s*iVar12\ =\ 1;$	+1
+use	FUN_0010ef68	iVar12	regLimitOrScratch	INFERRED	fixed register limit (program word 0x3ec), later reused for register count and lane-used tests	^\s*iVar12\ =\ iVar16;$	+1
+use	FUN_0010ef68	iVar12	regLimitOrScratch	INFERRED	fixed register limit (program word 0x3ec), later reused for register count and lane-used tests	^\s*\(\*pcVar15\)\(param_1,uVar10,uVar5,iVar12,\*\(undefined4\ \*\)\(iVar14\ \+\ 0x10\),uVar9\ \&\ 1,$	+2
+use	FUN_0010ef68	uVar13	savedNextFreeRegister	INFERRED	next free register carried across loop iterations	^\s*uVar13\ =\ uVar11;$	+1
+use	FUN_0010ef68	uVar13	savedNextFreeRegister	INFERRED	next free register carried across loop iterations	^\s*uVar13\ =\ uVar11\ \+\ 1;$	+1
+use	FUN_0010ef68	uVar13	savedNextFreeRegister	INFERRED	next free register carried across loop iterations	^\s*uVar13\ =\ uVar11;$@2	+1
+use	FUN_0010ef68	uVar13	savedNextFreeRegister	INFERRED	next free register carried across loop iterations	^\s*uVar11\ =\ uVar13;$	+1
+use	FUN_0010ef68	pcVar15	bindInterpolatorFn	INFERRED	backend vtable slot 0x54: bind one interpolator	^\s*pcVar15\ =\ \*\(code\ \*\*\)\(\*param_1\ \+\ 0x54\);$	+1
+use	FUN_0010ef68	pcVar15	bindInterpolatorFn	INFERRED	backend vtable slot 0x54: bind one interpolator	^\s*\(\*pcVar15\)\(param_1,uVar10,uVar5,iVar12,\*\(undefined4\ \*\)\(iVar14\ \+\ 0x10\),uVar9\ \&\ 1,$	+2
+use	FUN_0010ef68	iVar16	fixedStreamKey	INFERRED	program word 0x3f4: stream key of the fixed interpolator range	^\s*iVar16\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x3f4\);$	+1
+use	FUN_0010ef68	iVar16	fixedStreamKey	INFERRED	program word 0x3f4: stream key of the fixed interpolator range	^\s*if\ \(\(\(\(iVar4\ ==\ 0\)\ \|\|\ \(iVar4\ =\ piVar3\[0x52\],\ iVar16\ !=\ piVar3\[0x51\]\)\)\ \|\|\ \(iVar4\ <\ iVar14\)\)$	+2
+use	FUN_0010ef68	iVar16	laneIndexValue	INFERRED	IRLoadInterp lane index of the lane	^\s*iVar16\ =\ FUN_0010426c\(iVar18,uVar17\);$	+1
+use	FUN_0010ef68	iVar16	laneIndexValue	INFERRED	IRLoadInterp lane index of the lane	^\s*iVar12\ =\ iVar16;$	+1
+use	FUN_0010ef68	iVar16	laneIndexValue	INFERRED	IRLoadInterp lane index of the lane	^\s*if\ \(\(\(iVar4\ !=\ 0\)\ \&\&\ \(iVar4\ =\ FUN_00104b6c\(iVar18,uVar8\),\ iVar4\ ==\ iVar14\)\)\ \&\&$	+2
+use	FUN_0010ef68	iVar18	entryBlock	INFERRED	block holding the interpolant loads (program +0x3a4, else +0x3a0)	^\s*iVar18\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x3a4\);$	+3
+use	FUN_0010ef68	iVar18	entryBlock	INFERRED	block holding the interpolant loads (program +0x3a4, else +0x3a0)	^\s*piVar3\ =\ \*\(int\ \*\*\)\(iVar18\ \+\ 0x98\);$	+1
+use	FUN_0010ef68	iVar18	entryBlock	INFERRED	block holding the interpolant loads (program +0x3a4, else +0x3a0)	^\s*piVar3\ =\ \*\(int\ \*\*\)\(iVar18\ \+\ 0x98\);$@2	+1
+use	FUN_0010ef68	iVar18	isInterpLoadB	INFERRED	instruction vtable slot 0x4c result	^\s*iVar18\ =\ \(\*\*\(code\ \*\*\)\(\*piVar3\ \+\ 0x4c\)\)\(piVar3\);$	+2
+use	FUN_0010ef68	iVar18	loadInst	INFERRED	interpolant load instruction (vtable slot 0x80)	^\s*iVar18\ =\ \(\*\*\(code\ \*\*\)\(\*piVar3\ \+\ 0x80\)\)\(piVar3\);$	+2
+use	FUN_0010ef68	iVar18	loadInst	INFERRED	interpolant load instruction (vtable slot 0x80)	^\s*\*\(undefined4\ \*\)\(iVar18\ \+\ 0x98\)\ =\ 0;$	+2
+use	FUN_0010ef68	iVar18	loadInst	INFERRED	interpolant load instruction (vtable slot 0x80)	^\s*\*\(uint\ \*\)\(iVar18\ \+\ 0x14\)\ =\ \*\(uint\ \*\)\(iVar18\ \+\ 0x14\)\ \|\ 0x40;$	+1
+use	FUN_0010ef68	iVar18	loadInst	INFERRED	interpolant load instruction (vtable slot 0x80)	^\s*uVar10\ =\ \*\(uint\ \*\)\(iVar18\ \+\ 0x94\);$	+1
+use	FUN_0010ef68	iVar18	loadInst	INFERRED	interpolant load instruction (vtable slot 0x80)	^\s*iVar12\ =\ \*\(int\ \*\)\(iVar18\ \+\ 0x144\);$	+1
+use	FUN_0010ef68	iVar18	loadInst	INFERRED	interpolant load instruction (vtable slot 0x80)	^\s*\*\(uint\ \*\)\(iVar18\ \+\ 0x148\)\ =\ uVar10;$	+1
+use	FUN_0010ef68	iVar18	loadInst	INFERRED	interpolant load instruction (vtable slot 0x80)	^\s*iVar12\ =\ FUN_00104a94\(iVar18,uVar17\);$	+1
+use	FUN_0010ef68	iVar18	loadInst	INFERRED	interpolant load instruction (vtable slot 0x80)	^\s*iVar14\ =\ FUN_00104b6c\(iVar18,uVar17\);$	+2
+use	FUN_0010ef68	iVar18	loadInst	INFERRED	interpolant load instruction (vtable slot 0x80)	^\s*iVar4\ =\ FUN_00104a94\(iVar18,uVar8\);$	+3
+use	FUN_0010ef68	iVar18	loadInst	INFERRED	interpolant load instruction (vtable slot 0x80)	^\s*FUN_00104ae4\(local_58,iVar18\);$	+1
+use	FUN_0010ef68	iVar18	loadInst	INFERRED	interpolant load instruction (vtable slot 0x80)	^\s*iVar14\ =\ FUN_001054ec\(iVar18,1\);$	+2
+local	FUN_0010ef68	local_58	laneSelects	INFERRED	IRLoadInterp__laneSelects output record

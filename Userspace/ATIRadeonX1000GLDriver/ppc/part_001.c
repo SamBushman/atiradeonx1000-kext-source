@@ -555,7 +555,7 @@ int _gldDestroyFramebuffer(ctx, framebuffer)
   int framebuffer;
 {
   if (*(int *)(ctx + GLD_boundFramebuffer) == framebuffer) {
-    FUN_0001b4b0(ctx);
+    gld_updateYInvertedFlag(ctx);
     *(undefined4 *)(ctx + GLD_boundFramebuffer) = 0;
   }
   _free(framebuffer);
@@ -563,13 +563,13 @@ int _gldDestroyFramebuffer(ctx, framebuffer)
 }
 
 /* FUN_00007d50 @ 0x7d50 (368 bytes) */
-int FUN_00007d50(param_1, param_2, param_3, param_4, param_5, param_6)
-  int param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
+int FUN_00007d50(ctx, dispatch, dirtyBits, scratchR6, scratchR7, scratchR8)
+  int ctx;
+  undefined4 dispatch;
+  undefined4 dirtyBits;
+  undefined4 scratchR6;
+  undefined4 scratchR7;
+  undefined4 scratchR8;
 {
   bool bVar1;
   bool bVar2;
@@ -577,25 +577,25 @@ int FUN_00007d50(param_1, param_2, param_3, param_4, param_5, param_6)
   int iVar4;
   int *piVar5;
   int *piVar6;
-  char in_RESERVE;
-  byte in_cr0;
+  char reservation;
+  byte crField0;
   int iVar7;
   
-  iVar4 = *(int *)(param_1 + 0x150);
+  iVar4 = *(int *)(ctx + 0x150);
   bVar1 = iVar4 != 0;
-  piVar6 = *(int **)(*(int *)(param_1 + 0x18) + 0x1a0);
+  piVar6 = *(int **)(*(int *)(ctx + 0x18) + 0x1a0);
   if (bVar1) {
     iVar7 = 6;
     do {
       if (*(int *)(iVar4 + 0x4c) != 0) {
         piVar5 = (int *)(*(int *)(iVar4 + 0x4c) + 0x10);
         do {
-          if (in_RESERVE != '\0') {
+          if (reservation != '\0') {
             iVar3 = storeWordConditionalIndexed(*piVar5 + -0x10000,0,piVar5);
             *piVar5 = iVar3;
-            in_cr0 = 2;
+            crField0 = 2;
           }
-        } while (!(bool)(in_cr0 >> 1 & 1));
+        } while (!(bool)(crField0 >> 1 & 1));
       }
       iVar4 = iVar4 + 4;
       iVar7 = iVar7 + -1;
@@ -607,33 +607,33 @@ int FUN_00007d50(param_1, param_2, param_3, param_4, param_5, param_6)
       if (*(int *)(piVar6[1] + 0x1c) == 0) goto LAB_00007e28;
     }
     else {
-      iVar4 = FUN_0001b510(param_1,piVar6,param_3,param_4,param_5,param_6);
+      iVar4 = FUN_0001b510(ctx,piVar6,dirtyBits,scratchR6,scratchR7,scratchR8);
       if (iVar4 != 0) goto LAB_00007e28;
     }
   }
   piVar6 = (int *)0x0;
   bVar2 = true;
 LAB_00007e28:
-  *(int **)(param_1 + 0x150) = piVar6;
+  *(int **)(ctx + 0x150) = piVar6;
   if (!bVar2) {
     iVar4 = 6;
     do {
       if (piVar6[0x13] != 0) {
         piVar5 = (int *)(piVar6[0x13] + 0x10);
         do {
-          if (in_RESERVE != '\0') {
+          if (reservation != '\0') {
             iVar7 = storeWordConditionalIndexed(*piVar5 + 0x10000,0,piVar5);
             *piVar5 = iVar7;
-            in_cr0 = 2;
+            crField0 = 2;
           }
-        } while (!(bool)(in_cr0 >> 1 & 1));
+        } while (!(bool)(crField0 >> 1 & 1));
       }
       piVar6 = piVar6 + 1;
       iVar4 = iVar4 + -1;
     } while (iVar4 != 0);
   }
-  if ((*(int *)(*(int *)(param_1 + 0x18) + 0x1a0) == 0) && (bVar1)) {
-    FUN_0001b4b0(param_1);
+  if ((*(int *)(*(int *)(ctx + 0x18) + 0x1a0) == 0) && (bVar1)) {
+    gld_updateYInvertedFlag(ctx);
     return;
   }
   return;
@@ -944,7 +944,7 @@ LAB_00008798:
                 pfDisplayMask = redSize;
                 pfRendererId = FUN_00017720(depthSize);
                 pfRendererId = pfRendererId | depthSize << 0x18;
-                serviceOrNewRows = FUN_0001ae20(candidateRow,minimumPolicy,maximumPolicy);
+                serviceOrNewRows = gld_expandPixelFormatVariants(candidateRow,minimumPolicy,maximumPolicy);
                 if (serviceOrNewRows != 0) {
                   formatCount = formatCount + serviceOrNewRows;
                   newList = (int *)_malloc(formatCount * 0x34);
@@ -1324,7 +1324,7 @@ LAB_00008ad4:
         rendererInfo[5] = 0x808000;
         *(undefined1 *)((int)rendererInfo + 0x2a) = 0;
         rendererInfo[7] = 0x80;
-        FUN_0001b150(rendererInfo);
+        gld_fillMaxPixelFormat(rendererInfo);
         _IOServiceClose(connection);
         returnCode = 0;
       }
@@ -1797,8 +1797,8 @@ int _gldDestroyPipelineProgram(ctx, program)
 }
 
 /* FUN_000095e0 @ 0x95e0 (192 bytes) */
-int FUN_000095e0(param_1)
-  int param_1;
+int FUN_000095e0(ctx)
+  int ctx;
 {
   bool bVar1;
   int iVar2;
@@ -1807,12 +1807,12 @@ int FUN_000095e0(param_1)
   int *piVar5;
   
   iVar3 = 0;
-  iVar4 = param_1;
+  iVar4 = ctx;
   do {
-    iVar2 = iVar3 * 4 + *(int *)(param_1 + 0x18);
+    iVar2 = iVar3 * 4 + *(int *)(ctx + 0x18);
     piVar5 = *(int **)(iVar2 + 0x198);
     if (piVar5 == (int *)0x0) {
-      if (((unsigned char *)0x00004304)[iVar3 * 8 + *(int *)(param_1 + 0x10)] != '\0') {
+      if (((unsigned char *)0x00004304)[iVar3 * 8 + *(int *)(ctx + 0x10)] != '\0') {
         piVar5 = *(int **)(iVar2 + 0x18c);
         goto LAB_00009640;
       }
@@ -1820,7 +1820,7 @@ int FUN_000095e0(param_1)
     }
     else {
 LAB_00009640:
-      if ((*(int *)(*piVar5 + 4) == 0) || (iVar2 = FUN_00026650(param_1,piVar5), iVar2 == 0)) {
+      if ((*(int *)(*piVar5 + 4) == 0) || (iVar2 = FUN_00026650(ctx,piVar5), iVar2 == 0)) {
         *(undefined4 *)(iVar4 + 0x1cc) = 0;
       }
       else {
@@ -2100,9 +2100,9 @@ int FUN_0000979c(param_1, param_2, param_3)
   undefined4 param_2;
   int *param_3;
 {
-  int in_r11;
+  int staleArgR11;
   
-  *param_3 = in_r11 * 0x80 + 0x24c0;
+  *param_3 = staleArgR11 * 0x80 + 0x24c0;
   return;
 }
 
@@ -2112,9 +2112,9 @@ int FUN_000097ac(param_1, param_2, param_3)
   undefined4 param_2;
   int *param_3;
 {
-  int in_r11;
+  int staleArgR11;
   
-  *param_3 = in_r11 * 0x80 + 0x24d0;
+  *param_3 = staleArgR11 * 0x80 + 0x24d0;
   return;
 }
 
@@ -2124,9 +2124,9 @@ int FUN_000097bc(param_1, param_2, param_3)
   undefined4 param_2;
   int *param_3;
 {
-  int in_r11;
+  int staleArgR11;
   
-  *param_3 = in_r11 * 0x80 + 0x24e0;
+  *param_3 = staleArgR11 * 0x80 + 0x24e0;
   return;
 }
 
@@ -2136,9 +2136,9 @@ int FUN_000097cc(param_1, param_2, param_3)
   undefined4 param_2;
   int *param_3;
 {
-  int in_r11;
+  int staleArgR11;
   
-  *param_3 = in_r11 * 0x80 + 0x24f0;
+  *param_3 = staleArgR11 * 0x80 + 0x24f0;
   return;
 }
 
@@ -2148,9 +2148,9 @@ int FUN_000097dc(param_1, param_2, param_3)
   undefined4 param_2;
   int *param_3;
 {
-  int in_r11;
+  int staleArgR11;
   
-  *param_3 = in_r11 * 0x80 + 0x2500;
+  *param_3 = staleArgR11 * 0x80 + 0x2500;
   return;
 }
 
@@ -2160,9 +2160,9 @@ int FUN_000097ec(param_1, param_2, param_3)
   undefined4 param_2;
   int *param_3;
 {
-  int in_r11;
+  int staleArgR11;
   
-  *param_3 = in_r11 * 0x80 + 0x2510;
+  *param_3 = staleArgR11 * 0x80 + 0x2510;
   return;
 }
 
@@ -2172,9 +2172,9 @@ int FUN_000097fc(param_1, param_2, param_3)
   undefined4 param_2;
   int *param_3;
 {
-  int in_r11;
+  int staleArgR11;
   
-  *param_3 = in_r11 * 0x80 + 0x2520;
+  *param_3 = staleArgR11 * 0x80 + 0x2520;
   return;
 }
 
@@ -2232,9 +2232,9 @@ int FUN_000098c8(param_1, param_2, param_3)
   undefined4 param_2;
   int *param_3;
 {
-  int in_r11;
+  int staleArgR11;
   
-  *param_3 = in_r11 * 0x240 + 0x28c0;
+  *param_3 = staleArgR11 * 0x240 + 0x28c0;
   return;
 }
 
@@ -2255,20 +2255,20 @@ int gldAllocQueryRecord(ctx)
 }
 
 /* gld_waitQueryStamp @ 0x9bd0 (164 bytes) */
-int gld_waitQueryStamp(param_1)
-  int param_1;
+int gld_waitQueryStamp(ctx)
+  int ctx;
 {
   int gld_isStampRetiredResult;
   int iVar2;
   
-  iVar2 = **(int **)(param_1 + 0x234);
+  iVar2 = **(int **)(ctx + 0x234);
   if (iVar2 != 0) {
     if ((0x1ffff < (int)*(uint *)(iVar2 + 0x10)) || ((*(uint *)(iVar2 + 0x10) & 0xffff) != 0)) {
-      _gldFlush(param_1);
+      _gldFlush(ctx);
     }
-    gld_isStampRetiredResult = gld_isStampRetired(param_1,*(undefined4 *)(iVar2 + 8));
+    gld_isStampRetiredResult = gld_isStampRetired(ctx,*(undefined4 *)(iVar2 + 8));
     if (gld_isStampRetiredResult == 0) {
-      _io_connect_method_scalarI_structureI(*(undefined4 *)(param_1 + 4),9,iVar2 + 8,1,0,0);
+      _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),9,iVar2 + 8,1,0,0);
       return;
     }
   }
