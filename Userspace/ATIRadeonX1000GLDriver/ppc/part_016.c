@@ -1248,6 +1248,7 @@ LAB_000a99e8:
 /* FUN_000a9ac0 @ 0xa9ac0 (7656 bytes) */
 void FUN_000a9ac0(char *stream,uint *dirtyBits,char *dirtyBitsArg,undefined *scratchR6,uint dirtyWord3,char *dirtyWord1,undefined4 param_7,uint dirtyWord4,double fpPassThrough1,double fpPassThrough2,double fpPassThrough3,double fpPassThrough4,double fpPassThrough5,double fpPassThrough6,double fpPassThrough7,double fpPassThrough8,double fpPassThrough9,double fpPassThrough10,double fpPassThrough11,double fpPassThrough12,double fpPassThrough13)
 {
+  uint loopIndex3;
   uint dirtyBitsWord0;
   int loopIndex2;
   int remaining;
@@ -1607,17 +1608,17 @@ LAB_000a9ffc:
       }
       else {
         dirtyWord1 = (char *)0x0;
-        uVar20 = 0;
+        loopIndex3 = 0;
         dirtyWord4 = 1;
         if (uVar10 == 0) {
           uVar10 = 1;
         }
         do {
-          dirtyWord3 = (1 << ((byte)((unsigned char *)0x00004300)[iVar19] & 0x3f)) - 1U & 1 << (uVar20 & 0x3f);
+          dirtyWord3 = (1 << ((byte)((unsigned char *)0x00004300)[iVar19] & 0x3f)) - 1U & 1 << (loopIndex3 & 0x3f);
           if (dirtyWord3 != 0) {
             dirtyWord1 = dirtyWord1 + 1;
           }
-          uVar20 = uVar20 + 1;
+          loopIndex3 = loopIndex3 + 1;
           uVar10 = uVar10 - 1;
         } while (uVar10 != 0);
         cVar15 = (char)dirtyWord1;
