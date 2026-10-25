@@ -2788,3 +2788,75 @@ local	FUN_000e977c	puVar8	successorVector	INFERRED	successor vector header of bl
 local	FUN_000e977c	piVar2	successorSlot	INFERRED	slot of the replaced successor entry
 local	FUN_000e977c	iVar5	successorPredecessors	INFERRED	predecessor vector header of the successor (+0xd4)
 func	FUN_000e977c	Block__splitOutgoingEdge	INFERRED	replaces the edge block -> successor by block -> newBlock -> successor
+local	FUN_000f7cd8	param_1	domInfo	INFERRED	dominator-analysis object being constructed: [0] parent .. [6] vertex arrays, [7] vertex count, [8] Program, [9] compiler
+local	FUN_000f7cd8	param_2	program	INFERRED	Program whose block list (+0x37c) is analysed
+local	FUN_000f7cd8	iVar1	arrayBytes	INFERRED	(vertex count * 4 + 4): byte size of each per-vertex array
+local	FUN_000f7cd8	iVar3	compiler	INFERRED	program+8: its arena B (+0x378) provides the arrays
+func	FUN_000f7cd8	DominatorTree__ctor_f7cd8	INFERRED	stores the Program, counts its blocks and allocates the seven per-vertex arrays in arena B
+local	FUN_000f7bf4	param_1	domInfo	INFERRED	dominator-analysis object being constructed: [0] parent .. [6] vertex arrays, [7] vertex count, [8] Program, [9] compiler
+local	FUN_000f7bf4	param_2	program	INFERRED	Program whose block list (+0x37c) is analysed
+local	FUN_000f7bf4	iVar1	arrayBytes	INFERRED	(vertex count * 4 + 4): byte size of each per-vertex array
+local	FUN_000f7bf4	iVar3	compiler	INFERRED	program+8: its arena B (+0x378) provides the arrays
+func	FUN_000f7bf4	DominatorTree__ctor_f7bf4	INFERRED	twin of DominatorTree__ctor_f7cd8 (same body)
+local	FUN_000f4d80	param_1	constTables	INFERRED	object holding the constant hash tables at +4..+0x14
+local	FUN_000f4d80	param_2	constRecord	INFERRED	constant record: used-lane mask byte at +0x15c
+local	FUN_000f4d80	puVar2	selectedTable	INFERRED	points into local_cluster at the table for the first unused lane (lanes counted while their used bit is set)
+func	FUN_000f4d80	ConstRecord__findInTable	INFERRED	picks the constant hash table by the number of leading used lanes of the record and looks the record up in it (FUN_00194720)
+local	FUN_000e7a9c	param_1	block	INFERRED	block whose chain is followed (starts at its field +0x138 [0x4e])
+local	FUN_000e7a9c	piVar3	chainBlock	INFERRED	block reached so far along the chain of single-exit structured blocks
+local	FUN_000e7a9c	piVar1	firstSuccessorSlot	INFERRED	slot of the first entry of the block's successor vector (0 when empty)
+func	FUN_000e7a9c	Block__lastBlockOfChain_e7a9c	INFERRED	follows the chain of structured blocks (through field +0x13c / +0x154 / the first successor) from field +0x138 while each block has successors and fails the virtual-slot 0x38/0x3c tests; returns the last block reached
+local	FUN_000e7b9c	param_1	block	INFERRED	block whose chain is followed (starts at its field +0x134)
+local	FUN_000e7b9c	piVar3	chainBlock	INFERRED	block reached so far along the chain of single-exit structured blocks
+local	FUN_000e7b9c	piVar1	firstSuccessorSlot	INFERRED	slot of the first entry of the block's successor vector (0 when empty)
+func	FUN_000e7b9c	Block__lastBlockOfChain_e7b9c	INFERRED	same walk as Block__lastBlockOfChain_e7a9c but starting at the block's field +0x134
+local	FUN_000e2668	param_1	compiler	INFERRED	Compiler: +4 jump buffer, +0x398 emit context, +0x524 current shader
+local	FUN_000e2668	param_2	shader	INFERRED	shader object: +0xf8 / +0xfc are reset and set from the emit context before compiling
+local	FUN_000e2668	param_3	sourceA	INFERRED	first argument of FUN_00193b3c (builds the compile request)
+local	FUN_000e2668	param_4	sourceB	INFERRED	second argument of FUN_00193b3c
+local	FUN_000e2668	param_5	optionsArg	INFERRED	passed to FUN_000e0cd0 (option setup)
+local	FUN_000e2668	param_6	unusedArg6	INFERRED	not used
+local	FUN_000e2668	param_7	emitContext	INFERRED	stored at compiler+0x398: the context the constant stores are emitted into
+local	FUN_000e2668	iVar2	retryHandled	INFERRED	FUN_000e161c result: the failure was handled and the compile is retried
+func	FUN_000e2668	Compiler__compile	INFERRED	top-level compile with error recovery: sets the emit context, runs setjmp, resets the compiler, builds the request, compiles the stages and releases the pools; repeats while the error handler asks for a retry
+local	FUN_000d9c90	param_2	registerKey	INFERRED	register number used as the key of the constant entry
+local	FUN_000d9c90	param_3	laneValue	INFERRED	value stored in the lane slot of the entry
+local	FUN_000d9c90	param_4	lane	INFERRED	lane number (index of the value word inside the entry)
+local	FUN_000d9c90	param_5	bank	INFERRED	constant bank: first set (entries of 0x14 bytes at +0x88/+0x8c, count +0x7c/+0x80, limit +0x70/+0x74) or global list (entries of 0x24 bytes at +0x64/+0x68, count +0x58/+0x5c, limit +0x4c/+0x50)
+local	FUN_000d9c90	param_6	useGlobalList	INFERRED	non-zero: store in the global 0x24-byte entry list instead of the per-register 0x14-byte list
+local	FUN_000d9c90	iVar1	nextEntryOffset	INFERRED	byte offset of the entry after the one being compared
+local	FUN_000d9c90	iVar3	entryOffset	INFERRED	byte offset of the entry that receives the value
+local	FUN_000d9c90	piVar5	entryCursor	INFERRED	walks the 0x14-byte entries comparing their key
+local	FUN_000d9c90	uVar6	entriesLeft	INFERRED	entries still to compare
+local	FUN_000d9d74	param_2	registerKey	INFERRED	register number used as the key of the constant entry
+local	FUN_000d9d74	param_3	laneValue	INFERRED	value stored in the lane slot of the entry
+local	FUN_000d9d74	param_4	lane	INFERRED	lane number (index of the value word inside the entry)
+local	FUN_000d9d74	param_5	bank	INFERRED	constant bank: first set (entries of 0x14 bytes at +0x88/+0x8c, count +0x7c/+0x80, limit +0x70/+0x74) or global list (entries of 0x24 bytes at +0x64/+0x68, count +0x58/+0x5c, limit +0x4c/+0x50)
+local	FUN_000d9d74	param_6	useGlobalList	INFERRED	non-zero: store in the global 0x24-byte entry list instead of the per-register 0x14-byte list
+local	FUN_000d9d74	iVar1	nextEntryOffset	INFERRED	byte offset of the entry after the one being compared
+local	FUN_000d9d74	iVar3	entryOffset	INFERRED	byte offset of the entry that receives the value
+local	FUN_000d9d74	piVar5	entryCursor	INFERRED	walks the 0x14-byte entries comparing their key
+local	FUN_000d9d74	uVar6	entriesLeft	INFERRED	entries still to compare
+local	FUN_000d9c90	piVar4	entryTable	INFERRED	array of 0x14-byte entries (key + four lane words) at bank+0x88
+local	FUN_000d9d74	piVar4	entryTable	INFERRED	array of 0x14-byte entries (key + four lane words) at bank+0x8c
+func	FUN_000d9c90	ConstBank__storeIntLane	INFERRED	finds or appends the entry for a register in the bank and stores an integer lane value (kind 3 constants)
+func	FUN_000d9d74	ConstBank__storeBoolLane	INFERRED	finds or appends the entry for a register in the bank and stores a boolean lane value
+local	FUN_000da4b8	param_1	state	INFERRED	output state: [0] user data, [1] allocator data, [2] compiler, [3] hardware id, [4] option, [5] flags, [10] chip kind
+local	FUN_000da4b8	param_2	request	INFERRED	create request: [0xb] allocator data, [0xc] allocate callback, [0xd] free callback, [3]/[4] limits
+func	FUN_000da4b8	Compiler__createFromRequest	INFERRED	allocates a 0x6c8-byte Compiler through the request's allocator, initialises it (Compiler__init_e1a48), selects the hardware family from the request id and clamps the register limits
+local	FUN_000d9e98	param_2	registerKey	INFERRED	register key stored at entry+0
+local	FUN_000d9e98	param_5	valueLo	INFERRED	stored at entry+0x10
+local	FUN_000d9e98	param_6	valueHi	INFERRED	stored at entry+0xc
+local	FUN_000d9e98	param_7	maskByte	INFERRED	0xff selects the full-mask kinds (0x15 / 0x17), anything else 0x16 / 0x18
+local	FUN_000d9e98	param_8	sourceRegister	INFERRED	-1 selects kinds 0x15 / 0x16 (no source register); otherwise stored at entry+0x1c with kinds 0x17 / 0x18
+local	FUN_000d9e98	param_9	extraWord	INFERRED	stored at entry+0x20
+local	FUN_000d9e98	param_10	bank	INFERRED	constant bank whose global list of 0x24-byte entries (+0x64, count +0x58, limit +0x4c) receives the entry
+local	FUN_000d9e98	iVar2	entry	INFERRED	0x24-byte entry just appended to the global list
+local	FUN_000d9e98	uVar1	entryIndex	INFERRED	index of the new entry (count before the increment)
+func	FUN_000d9e98	ConstBank__addMappedEntry	INFERRED	appends a 0x24-byte entry (kind 0x15-0x18 chosen from the mask byte and source register) to the bank's global list; returns 0 when the list is full
+local	ildisPrintFixedPoint	iVar3	integerBitsLeft	INFERRED	loop counter while the integer-field mask is built
+local	ildisPrintFixedPoint	uVar7	bitIndex	INFERRED	shift amount of the bit being added to a mask
+local	ildisPrintFixedPoint	uVar2	fractionBitIndex	INFERRED	shift amount of the bit being added to the fraction mask
+local	ildisPrintFixedPoint	local_28	intToDoubleHi	INFERRED	0x43300000: high word of the int-to-double conversion idiom (first use)
+local	ildisPrintFixedPoint	local_20	intToDoubleHi2	INFERRED	0x43300000: high word of the int-to-double conversion idiom (second use)
+local	ildisPrintFixedPoint	local_18	intToDoubleHi3	INFERRED	0x43300000: high word of the int-to-double conversion idiom (third use)

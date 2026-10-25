@@ -1152,10 +1152,10 @@
 0xd8450	5856	FUN_000d8450	part_019	converted
 0xd9b58	84	FUN_000d9b58	part_019	converted
 0xd9bac	228	scStoreConstantComponent	part_019	converted
-0xd9c90	228	FUN_000d9c90	part_019	converted
-0xd9d74	228	FUN_000d9d74	part_019	converted
+0xd9c90	228	ConstBank__storeIntLane	part_019	converted
+0xd9d74	228	ConstBank__storeBoolLane	part_019	converted
 0xd9e58	64	FUN_000d9e58	part_019	converted
-0xd9e98	156	FUN_000d9e98	part_019	converted
+0xd9e98	156	ConstBank__addMappedEntry	part_019	converted
 0xd9f3c	60	FUN_000d9f3c	part_019	converted
 0xd9f80	32	FUN_000d9f80	part_019	converted
 0xd9fa0	32	FUN_000d9fa0	part_019	converted
@@ -1169,7 +1169,7 @@
 0xda420	24	FUN_000da420	part_019	converted
 0xda438	32	FUN_000da438	part_019	converted
 0xda458	96	scDestroyCompilerObject	part_019	converted
-0xda4b8	192	FUN_000da4b8	part_019	converted
+0xda4b8	192	Compiler__createFromRequest	part_019	converted
 0xda78c	244	FUN_000da78c	part_019	converted
 0xda8a8	40	ildisInitContext	part_019	converted
 0xda8d0	16	ildisSkipToken	part_019	converted
@@ -1275,7 +1275,7 @@
 0xe1fe4	160	Compiler__releaseChipAndPools	part_021	converted
 0xe2094	292	Compiler__compileStages	part_021	converted
 0xe2524	324	FUN_000e2524	part_021	converted
-0xe2668	280	FUN_000e2668	part_021	converted
+0xe2668	280	Compiler__compile	part_021	converted
 0xe2780	140	FUN_000e2780	part_021	converted
 0xe280c	44	FUN_000e280c	part_021	converted
 0xe2838	20	FUN_000e2838	part_021	converted
@@ -1346,8 +1346,8 @@
 0xe79fc	20	Block__vectorD4NonEmpty	part_022	converted
 0xe7a10	20	Block__hasDominatedChildren	part_022	converted
 0xe7a24	120	Block__popDefinitions	part_022	converted
-0xe7a9c	256	FUN_000e7a9c	part_022	converted
-0xe7b9c	252	FUN_000e7b9c	part_022	converted
+0xe7a9c	256	Block__lastBlockOfChain_e7a9c	part_022	converted
+0xe7b9c	252	Block__lastBlockOfChain_e7b9c	part_022	converted
 0xe7c98	88	Block__resolveRedirect	part_022	converted
 0xe7cf0	108	EntryBlock__insertInstruction	part_022	converted
 0xe7d5c	136	FUN_000e7d5c	part_022	converted
@@ -1558,7 +1558,7 @@
 0xf4c44	4	noop_f4c44	part_025	converted
 0xf4c48	268	ConstKey__compareOrdered	part_025	converted
 0xf4d54	44	ConstKey__countPresentOperands	part_025	converted
-0xf4d80	92	FUN_000f4d80	part_025	converted
+0xf4d80	92	ConstRecord__findInTable	part_025	converted
 0xf4ddc	512	ConstRecord__insertSwizzleVariants	part_026	converted
 0xf4fdc	352	Compiler__getOrCreateLoadConstN	part_026	converted
 0xf5248	376	FUN_000f5248	part_026	converted
@@ -1583,8 +1583,8 @@
 0xf7870	340	IRInst__setIntConstantOperand4	part_026	converted
 0xf79c4	332	IRInst__makeLiteralVec4Float	part_026	converted
 0xf7b10	228	FUN_000f7b10	part_026	converted
-0xf7bf4	228	FUN_000f7bf4	part_026	converted
-0xf7cd8	228	FUN_000f7cd8	part_026	converted
+0xf7bf4	228	DominatorTree__ctor_f7bf4	part_026	converted
+0xf7cd8	228	DominatorTree__ctor_f7cd8	part_026	converted
 0xf7dbc	352	DominatorTree__computeDominanceFrontiers	part_026	converted
 0xf7f1c	296	DominatorTree__free_f7f1c	part_026	converted
 0xf8044	296	DominatorTree__free	part_026	converted

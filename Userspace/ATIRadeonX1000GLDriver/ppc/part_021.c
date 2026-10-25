@@ -758,31 +758,31 @@ int FUN_000e2524(param_1, param_2, param_3, param_4, param_5)
   return iVar1;
 }
 
-/* FUN_000e2668 @ 0xe2668 (280 bytes) */
-int FUN_000e2668(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  int param_1;
-  int param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+/* Compiler__compile @ 0xe2668 (280 bytes) */
+int Compiler__compile(compiler, shader, sourceA, sourceB, optionsArg, unusedArg6, emitContext)
+  int compiler;
+  int shader;
+  undefined4 sourceA;
+  undefined4 sourceB;
+  undefined4 optionsArg;
+  undefined4 unusedArg6;
+  undefined4 emitContext;
 {
   int iVar1;
-  int iVar2;
+  int retryHandled;
   int iStack00000018;
   int iStack0000001c;
   undefined4 uStack00000020;
   undefined4 uStack00000024;
   undefined4 uStack00000028;
   
-  *(undefined4 *)(param_1 + 0x398) = param_7;
-  iStack00000018 = param_1;
-  iStack0000001c = param_2;
-  uStack00000020 = param_3;
-  uStack00000024 = param_4;
-  uStack00000028 = param_5;
-  FUN_000e0ca8(param_1);
+  *(undefined4 *)(compiler + 0x398) = emitContext;
+  iStack00000018 = compiler;
+  iStack0000001c = shader;
+  uStack00000020 = sourceA;
+  uStack00000024 = sourceB;
+  uStack00000028 = optionsArg;
+  FUN_000e0ca8(compiler);
   do {
     iVar1 = _setjmp(*(undefined4 *)(iStack00000018 + 4));
     if (iVar1 == 0) {
@@ -806,7 +806,7 @@ int FUN_000e2668(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
     iVar1 = *(int *)(iStack00000018 + 0x314);
     FUN_000e0e28(iStack00000018);
     ((int (*)())Compiler__releaseChipAndPools)(iStack00000018,0);
-  } while ((iVar1 != 0) && (iVar2 = ((int (*)())FUN_000e161c)(iStack00000018,iVar1), iVar2 != 0));
+  } while ((iVar1 != 0) && (retryHandled = ((int (*)())FUN_000e161c)(iStack00000018,iVar1), retryHandled != 0));
   return iVar1;
 }
 
@@ -1075,7 +1075,7 @@ int ConstRecord__emitStores(constRecord, hwDescription, program)
         destRegisterId = *(undefined4 *)(constRecord + 0x94);
         emitContext = *(undefined4 *)(program + 0x398);
         targetBlock = ((int (*)())Compiler__selectBlockByProgramFlags)(program);
-        FUN_000d9d74(emitContext,destRegisterId,(uint)(laneRecord == 1),loopCounter,targetBlock,0);
+        ConstBank__storeBoolLane(emitContext,destRegisterId,(uint)(laneRecord == 1),loopCounter,targetBlock,0);
       }
       notLastLane = loopCounter != 3;
       laneRecord0 = laneRecord0 + 0x18;
@@ -1101,7 +1101,7 @@ int ConstRecord__emitStores(constRecord, hwDescription, program)
             laneValueInt = *(undefined4 *)(laneRecord + 0x20);
             emitContext2 = *(undefined4 *)(program + 0x398);
             targetBlock = ((int (*)())Compiler__selectBlockByProgramFlags)(program);
-            FUN_000d9c90(emitContext2,destRegisterId3,laneValueInt,loopCounter,targetBlock,0);
+            ConstBank__storeIntLane(emitContext2,destRegisterId3,laneValueInt,loopCounter,targetBlock,0);
           }
           else {
             destRegisterId2 = *(undefined4 *)(laneRecordB + 0x94);
@@ -1112,7 +1112,7 @@ int ConstRecord__emitStores(constRecord, hwDescription, program)
             emitContext3 = *(undefined4 *)(program + 0x398);
             laneValue4 = *(undefined4 *)(laneRecord + 0x30);
             targetBlock = ((int (*)())Compiler__selectBlockByProgramFlags)(program);
-            FUN_000d9e98(emitContext3,destRegisterId2,loopCounter,laneKind,laneValue0,laneValue1,laneValue2,laneValue3,laneValue4,targetBlock);
+            ConstBank__addMappedEntry(emitContext3,destRegisterId2,loopCounter,laneKind,laneValue0,laneValue1,laneValue2,laneValue3,laneValue4,targetBlock);
           }
         }
         notLastLane = loopCounter != 3;

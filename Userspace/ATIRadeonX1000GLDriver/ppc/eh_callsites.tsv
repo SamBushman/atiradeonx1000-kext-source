@@ -11,9 +11,9 @@ d4e8c	scDumpPixelProgram	d4ec8	d4ecc	-	no-handler
 da0c0	FUN_000da0c0	da0ec	da0f0	-	no-handler
 da0c0	FUN_000da0c0	da164	da168	da180	cleanup
 da0c0	FUN_000da0c0	da180	da374	-	no-handler
-da4b8	FUN_000da4b8	da4e4	da4e8	-	no-handler
-da4b8	FUN_000da4b8	da55c	da560	da578	cleanup
-da4b8	FUN_000da4b8	da578	da76c	-	no-handler
+da4b8	Compiler__createFromRequest	da4e4	da4e8	-	no-handler
+da4b8	Compiler__createFromRequest	da55c	da560	da578	cleanup
+da4b8	Compiler__createFromRequest	da578	da76c	-	no-handler
 e1920	Compiler__init_e1920	e19d8	e19dc	-	no-handler
 e1920	Compiler__init_e1920	e1a00	e1a04	e1a08	cleanup
 e1920	Compiler__init_e1920	e1a08	e1a34	-	no-handler

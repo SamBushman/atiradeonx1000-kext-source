@@ -1830,69 +1830,69 @@ int FUN_000f7b10(vector, param_2, param_3, param_4, param_5, param_6, param_7)
   return uVar2;
 }
 
-/* FUN_000f7bf4 @ 0xf7bf4 (228 bytes) */
-int FUN_000f7bf4(param_1, param_2)
-  undefined4 *param_1;
-  int param_2;
+/* DominatorTree__ctor_f7bf4 @ 0xf7bf4 (228 bytes) */
+int DominatorTree__ctor_f7bf4(domInfo, program)
+  undefined4 *domInfo;
+  int program;
 {
   int listCount;
-  int iVar1;
+  int arrayBytes;
   undefined4 allocation;
-  int iVar3;
+  int compiler;
   
-  param_1[8] = param_2;
-  listCount = DList__count(param_2 + 0x37c);
-  param_1[7] = listCount;
-  iVar3 = *(int *)(param_1[8] + 8);
-  iVar1 = listCount * 4 + 4;
-  param_1[9] = iVar3;
-  allocation = Arena__alloc(*(undefined4 *)(iVar3 + 0x378),iVar1);
-  param_1[2] = allocation;
-  allocation = Arena__alloc(*(undefined4 *)(param_1[9] + 0x378),iVar1);
-  param_1[1] = allocation;
-  allocation = Arena__alloc(*(undefined4 *)(param_1[9] + 0x378),iVar1);
-  param_1[4] = allocation;
-  allocation = Arena__alloc(*(undefined4 *)(param_1[9] + 0x378),iVar1);
-  param_1[3] = allocation;
-  allocation = Arena__alloc(*(undefined4 *)(param_1[9] + 0x378),iVar1);
-  *param_1 = allocation;
-  allocation = Arena__alloc(*(undefined4 *)(param_1[9] + 0x378),param_1[7] * 4 + 4);
-  param_1[6] = allocation;
-  allocation = Arena__alloc(*(undefined4 *)(param_1[9] + 0x378),param_1[7] * 4 + 4);
-  param_1[5] = allocation;
+  domInfo[8] = program;
+  listCount = DList__count(program + 0x37c);
+  domInfo[7] = listCount;
+  compiler = *(int *)(domInfo[8] + 8);
+  arrayBytes = listCount * 4 + 4;
+  domInfo[9] = compiler;
+  allocation = Arena__alloc(*(undefined4 *)(compiler + 0x378),arrayBytes);
+  domInfo[2] = allocation;
+  allocation = Arena__alloc(*(undefined4 *)(domInfo[9] + 0x378),arrayBytes);
+  domInfo[1] = allocation;
+  allocation = Arena__alloc(*(undefined4 *)(domInfo[9] + 0x378),arrayBytes);
+  domInfo[4] = allocation;
+  allocation = Arena__alloc(*(undefined4 *)(domInfo[9] + 0x378),arrayBytes);
+  domInfo[3] = allocation;
+  allocation = Arena__alloc(*(undefined4 *)(domInfo[9] + 0x378),arrayBytes);
+  *domInfo = allocation;
+  allocation = Arena__alloc(*(undefined4 *)(domInfo[9] + 0x378),domInfo[7] * 4 + 4);
+  domInfo[6] = allocation;
+  allocation = Arena__alloc(*(undefined4 *)(domInfo[9] + 0x378),domInfo[7] * 4 + 4);
+  domInfo[5] = allocation;
   return;
 }
 
-/* FUN_000f7cd8 @ 0xf7cd8 (228 bytes) */
-int FUN_000f7cd8(param_1, param_2)
-  undefined4 *param_1;
-  int param_2;
+/* DominatorTree__ctor_f7cd8 @ 0xf7cd8 (228 bytes) */
+int DominatorTree__ctor_f7cd8(domInfo, program)
+  undefined4 *domInfo;
+  int program;
 {
   int listCount;
-  int iVar1;
+  int arrayBytes;
   undefined4 allocation;
-  int iVar3;
+  int compiler;
   
-  param_1[8] = param_2;
-  listCount = DList__count(param_2 + 0x37c);
-  param_1[7] = listCount;
-  iVar3 = *(int *)(param_1[8] + 8);
-  iVar1 = listCount * 4 + 4;
-  param_1[9] = iVar3;
-  allocation = Arena__alloc(*(undefined4 *)(iVar3 + 0x378),iVar1);
-  param_1[2] = allocation;
-  allocation = Arena__alloc(*(undefined4 *)(param_1[9] + 0x378),iVar1);
-  param_1[1] = allocation;
-  allocation = Arena__alloc(*(undefined4 *)(param_1[9] + 0x378),iVar1);
-  param_1[4] = allocation;
-  allocation = Arena__alloc(*(undefined4 *)(param_1[9] + 0x378),iVar1);
-  param_1[3] = allocation;
-  allocation = Arena__alloc(*(undefined4 *)(param_1[9] + 0x378),iVar1);
-  *param_1 = allocation;
-  allocation = Arena__alloc(*(undefined4 *)(param_1[9] + 0x378),param_1[7] * 4 + 4);
-  param_1[6] = allocation;
-  allocation = Arena__alloc(*(undefined4 *)(param_1[9] + 0x378),param_1[7] * 4 + 4);
-  param_1[5] = allocation;
+  domInfo[8] = program;
+  listCount = DList__count(program + 0x37c);
+  domInfo[7] = listCount;
+  compiler = *(int *)(domInfo[8] + 8);
+  arrayBytes = listCount * 4 + 4;
+  domInfo[9] = compiler;
+  allocation = Arena__alloc(*(undefined4 *)(compiler + 0x378),arrayBytes);
+  domInfo[2] = allocation;
+  allocation = Arena__alloc(*(undefined4 *)(domInfo[9] + 0x378),arrayBytes);
+  domInfo[1] = allocation;
+  allocation = Arena__alloc(*(undefined4 *)(domInfo[9] + 0x378),arrayBytes);
+  domInfo[4] = allocation;
+  allocation = Arena__alloc(*(undefined4 *)(domInfo[9] + 0x378),arrayBytes);
+  domInfo[3] = allocation;
+  allocation = Arena__alloc(*(undefined4 *)(domInfo[9] + 0x378),arrayBytes);
+  *domInfo = allocation;
+  allocation = Arena__alloc(*(undefined4 *)(domInfo[9] + 0x378),domInfo[7] * 4 + 4);
+  domInfo[6] = allocation;
+  allocation = Arena__alloc(*(undefined4 *)(domInfo[9] + 0x378),domInfo[7] * 4 + 4);
+  domInfo[5] = allocation;
   return;
 }
 
@@ -2344,7 +2344,7 @@ int FUN_000f88b4(param_1)
   allocation = (int *)Arena__alloc(arena,0x2c);
   *allocation = arena;
   piVar2 = allocation + 1;
-  ((int (*)())FUN_000f7cd8)(piVar2,param_1);
+  ((int (*)())DominatorTree__ctor_f7cd8)(piVar2,param_1);
   ((int (*)())DominatorTree__compute)(piVar2);
   if (piVar2 == (int *)0x0) {
     return;
@@ -6995,13 +6995,13 @@ joined_r0x00103afc:
       pppuVar42 = ppppuVar45[0x4f];
       pppuVar42[0x2e] = (uint **)scopeLevel;
       Program__insertBlockAfter(program,previousBlock,pppuVar42);
-      piVar18 = (int *)FUN_000e7b9c(ppppuVar45);
+      piVar18 = (int *)Block__lastBlockOfChain_e7b9c(ppppuVar45);
       piVar18[0x2e] = (int)scopeLevel;
       iVar43 = (**(code **)(*piVar18 + 0x38))();
       if ((iVar43 == 0) && (iVar43 = (**(code **)(*piVar18 + 0x3c))(piVar18), iVar43 == 0)) {
         Block__connect(piVar18,pppuVar42);
       }
-      ppppuVar30 = (uint ****)FUN_000e7a9c(ppppuVar45);
+      ppppuVar30 = (uint ****)Block__lastBlockOfChain_e7a9c(ppppuVar45);
       ppppuVar30[0x2e] = (uint ***)scopeLevel;
       ppppuVar51 = ppppuVar30;
       if (ppppuVar30 == ppppuVar45) {

@@ -1152,10 +1152,10 @@
 0xd8450	FUN_000d8450	5856	no	indirect call (driver context / vtable / callback)
 0xd9b58	FUN_000d9b58	84	yes	
 0xd9bac	scStoreConstantComponent	228	yes	
-0xd9c90	FUN_000d9c90	228	yes	
-0xd9d74	FUN_000d9d74	228	yes	
+0xd9c90	ConstBank__storeIntLane	228	yes	
+0xd9d74	ConstBank__storeBoolLane	228	yes	
 0xd9e58	FUN_000d9e58	64	yes	
-0xd9e98	FUN_000d9e98	156	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0xd9e98	ConstBank__addMappedEntry	156	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0xd9f3c	FUN_000d9f3c	60	yes	
 0xd9f80	FUN_000d9f80	32	yes	
 0xd9fa0	FUN_000d9fa0	32	yes	
@@ -1169,7 +1169,7 @@
 0xda420	FUN_000da420	24	yes	
 0xda438	FUN_000da438	32	yes	
 0xda458	scDestroyCompilerObject	96	yes	
-0xda4b8	FUN_000da4b8	720	no	calls an import (setjmp); indirect call (driver context / vtable / callback)
+0xda4b8	Compiler__createFromRequest	720	no	calls an import (setjmp); indirect call (driver context / vtable / callback)
 0xda78c	FUN_000da78c	244	yes	
 0xda8a8	ildisInitContext	40	yes	
 0xda8d0	ildisSkipToken	16	yes	
@@ -1275,7 +1275,7 @@
 0xe1fe4	Compiler__releaseChipAndPools	160	yes	
 0xe2094	Compiler__compileStages	1132	no	indirect call (driver context / vtable / callback)
 0xe2524	FUN_000e2524	324	no	calls an import (setjmp)
-0xe2668	FUN_000e2668	280	no	calls an import (setjmp)
+0xe2668	Compiler__compile	280	no	calls an import (setjmp)
 0xe2780	FUN_000e2780	140	yes	
 0xe280c	FUN_000e280c	44	yes	
 0xe2838	FUN_000e2838	20	yes	
@@ -1346,8 +1346,8 @@
 0xe79fc	Block__vectorD4NonEmpty	20	yes	
 0xe7a10	Block__hasDominatedChildren	20	yes	
 0xe7a24	Block__popDefinitions	120	yes	
-0xe7a9c	FUN_000e7a9c	256	no	indirect call (driver context / vtable / callback)
-0xe7b9c	FUN_000e7b9c	252	no	indirect call (driver context / vtable / callback)
+0xe7a9c	Block__lastBlockOfChain_e7a9c	256	no	indirect call (driver context / vtable / callback)
+0xe7b9c	Block__lastBlockOfChain_e7b9c	252	no	indirect call (driver context / vtable / callback)
 0xe7c98	Block__resolveRedirect	88	no	indirect call (driver context / vtable / callback)
 0xe7cf0	EntryBlock__insertInstruction	108	yes	
 0xe7d5c	FUN_000e7d5c	136	yes	
@@ -1558,7 +1558,7 @@
 0xf4c44	noop_f4c44	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0xf4c48	ConstKey__compareOrdered	268	yes	
 0xf4d54	ConstKey__countPresentOperands	44	yes	
-0xf4d80	FUN_000f4d80	92	yes	
+0xf4d80	ConstRecord__findInTable	92	yes	
 0xf4ddc	ConstRecord__insertSwizzleVariants	512	yes	
 0xf4fdc	Compiler__getOrCreateLoadConstN	588	yes	
 0xf5248	FUN_000f5248	376	yes	
@@ -1583,8 +1583,8 @@
 0xf7870	IRInst__setIntConstantOperand4	340	yes	
 0xf79c4	IRInst__makeLiteralVec4Float	332	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0xf7b10	FUN_000f7b10	228	yes	
-0xf7bf4	FUN_000f7bf4	228	yes	
-0xf7cd8	FUN_000f7cd8	228	yes	
+0xf7bf4	DominatorTree__ctor_f7bf4	228	yes	
+0xf7cd8	DominatorTree__ctor_f7cd8	228	yes	
 0xf7dbc	DominatorTree__computeDominanceFrontiers	352	yes	
 0xf7f1c	DominatorTree__free_f7f1c	296	yes	
 0xf8044	DominatorTree__free	296	yes	

@@ -247,7 +247,7 @@ int FUN_000ec4f0(param_1)
     allocation = (undefined4 *)Arena__alloc(arenaB,0x2c);
     *allocation = arenaB;
     puVar4 = allocation + 1;
-    FUN_000f7cd8(puVar4,param_1);
+    DominatorTree__ctor_f7cd8(puVar4,param_1);
     DominatorTree__dfsNumber(puVar4,*(undefined4 *)(param_1 + 0x3a0));
     ((int (*)())FUN_000ec468)(param_1,allocation[7],allocation[8]);
     DominatorTree__free(puVar4);
