@@ -2684,7 +2684,7 @@ int FUN_000da0c0(param_1, param_2)
   iVar4 = puStack0000001c[3];
   iVar5 = puStack0000001c[4];
   if (iVar1 == 2) {
-    FUN_000e1b70(puStack00000018[2],2);
+    Compiler__setHardwareFamily(puStack00000018[2],2);
     if (iVar5 - 1U < 0x20c) {
       *(int *)(*(int *)(*(int *)(puStack00000018[2] + 0x310) + 8) + 0x40) = iVar5;
     }
@@ -2695,7 +2695,7 @@ int FUN_000da0c0(param_1, param_2)
   }
   else {
     if (iVar1 == 3) {
-      FUN_000e1b70(puStack00000018[2],4);
+      Compiler__setHardwareFamily(puStack00000018[2],4);
       if (iVar5 - 1U < 0x200) {
         *(int *)(*(int *)(*(int *)(puStack00000018[2] + 0x310) + 8) + 0x40) = iVar5;
       }
@@ -2712,10 +2712,10 @@ code_r0x000da340:
     }
     if (iVar1 != 1) {
       *(undefined4 *)(puStack00000018[2] + 0x314) = 0xe;
-      FUN_000e1b70(puStack00000018[2],1);
+      Compiler__setHardwareFamily(puStack00000018[2],1);
       return;
     }
-    FUN_000e1b70(puStack00000018[2],1);
+    Compiler__setHardwareFamily(puStack00000018[2],1);
     if (iVar5 - 1U < 0x60) {
       *(int *)(*(int *)(*(int *)(puStack00000018[2] + 0x310) + 8) + 0x40) = iVar5;
     }
@@ -2785,7 +2785,7 @@ int scDestroyCompilerObject(param_1, param_2)
   undefined4 param_2;
 {
   if (param_1[2] != 0) {
-    FUN_000e1fe4(param_1[2],param_2);
+    Compiler__releaseChipAndPools(param_1[2],param_2);
                     
                     
     (*(code *)*param_1)(param_1[1],param_1[2]);
@@ -2843,7 +2843,7 @@ int FUN_000da4b8(param_1, param_2)
   iVar4 = puStack0000001c[3];
   iVar5 = puStack0000001c[4];
   if (iVar1 == 2) {
-    FUN_000e1b70(puStack00000018[2],2);
+    Compiler__setHardwareFamily(puStack00000018[2],2);
     if (iVar5 - 1U < 0x20c) {
       *(int *)(*(int *)(*(int *)(puStack00000018[2] + 0x310) + 8) + 0x40) = iVar5;
     }
@@ -2854,7 +2854,7 @@ int FUN_000da4b8(param_1, param_2)
   }
   else {
     if (iVar1 == 3) {
-      FUN_000e1b70(puStack00000018[2],4);
+      Compiler__setHardwareFamily(puStack00000018[2],4);
       if (iVar5 - 1U < 0x200) {
         *(int *)(*(int *)(*(int *)(puStack00000018[2] + 0x310) + 8) + 0x40) = iVar5;
       }
@@ -2871,10 +2871,10 @@ code_r0x000da738:
     }
     if (iVar1 != 1) {
       *(undefined4 *)(puStack00000018[2] + 0x314) = 0xe;
-      FUN_000e1b70(puStack00000018[2],1);
+      Compiler__setHardwareFamily(puStack00000018[2],1);
       return;
     }
-    FUN_000e1b70(puStack00000018[2],1);
+    Compiler__setHardwareFamily(puStack00000018[2],1);
     if (iVar5 - 1U < 0x60) {
       *(int *)(*(int *)(*(int *)(puStack00000018[2] + 0x310) + 8) + 0x40) = iVar5;
     }

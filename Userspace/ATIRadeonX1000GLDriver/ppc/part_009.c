@@ -323,6 +323,7 @@ int extvsEmitMmul(ctx, shader, instRecord)
   int *shader;
   int instRecord;
 {
+  int dstOperand;
   int instCount;
   int instSlot;
   int hwProgram;
@@ -333,7 +334,7 @@ int extvsEmitMmul(ctx, shader, instRecord)
   int src0Operand;
   int *symbolList;
   int src1Operand;
-  int iVar7;
+  int hwProgram2;
   int iVar8;
   int iVar9;
   undefined4 uStack_88;
@@ -358,41 +359,41 @@ int extvsEmitMmul(ctx, shader, instRecord)
     src1Operand = instRecord + 0x3c;
     iVar2 = extvsOperandsConflictInBank(symbolList,src0Operand,src1Operand);
     if (iVar2 == 0) {
-      iVar7 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
-      iVar2 = *(int *)(iVar7 + 0x18);
+      hwProgram2 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
+      iVar2 = *(int *)(hwProgram2 + 0x18);
       if (0x100 < iVar2 + 4U) {
         *(undefined1 *)(shader + 4) = 0;
-        iVar2 = *(int *)(iVar7 + 0x18);
-        if (*(uint *)(iVar7 + 0x20) < iVar2 + 4U) {
-          newInstArray = (**(code **)(ctx + 0xc))(*(uint *)(iVar7 + 0x20) * 0x10 + 0x100);
+        iVar2 = *(int *)(hwProgram2 + 0x18);
+        if (*(uint *)(hwProgram2 + 0x20) < iVar2 + 4U) {
+          newInstArray = (**(code **)(ctx + 0xc))(*(uint *)(hwProgram2 + 0x20) * 0x10 + 0x100);
           (**(code **)(((unsigned char *)0x00001344) + ctx))
-                    (newInstArray,*(undefined4 *)(iVar7 + 0x1c),*(int *)(iVar7 + 0x20) << 4);
-          (**(code **)(ctx + 0x18))(*(undefined4 *)(iVar7 + 0x1c));
-          *(undefined4 *)(iVar7 + 0x1c) = newInstArray;
-          iVar2 = *(int *)(iVar7 + 0x18);
-          *(int *)(iVar7 + 0x20) = *(int *)(iVar7 + 0x20) + 0x10;
+                    (newInstArray,*(undefined4 *)(hwProgram2 + 0x1c),*(int *)(hwProgram2 + 0x20) << 4);
+          (**(code **)(ctx + 0x18))(*(undefined4 *)(hwProgram2 + 0x1c));
+          *(undefined4 *)(hwProgram2 + 0x1c) = newInstArray;
+          iVar2 = *(int *)(hwProgram2 + 0x18);
+          *(int *)(hwProgram2 + 0x20) = *(int *)(hwProgram2 + 0x20) + 0x10;
         }
       }
-      iVar8 = *(int *)(iVar7 + 0x1c);
+      iVar8 = *(int *)(hwProgram2 + 0x1c);
       iVar2 = iVar2 * 0x10;
-      iVar7 = instRecord + 4;
+      dstOperand = instRecord + 4;
       iVar9 = iVar2 + iVar8;
-      extvsEncodeSourceOperand(ctx,shader,iVar7,iVar9,1,0,0);
+      extvsEncodeSourceOperand(ctx,shader,dstOperand,iVar9,1,0,0);
       *(uint *)(iVar2 + iVar8) = *(uint *)(iVar2 + iVar8) & 0xff1fffff;
       extvsEncodeSourceSwizzle(shader,symbolList,src0Operand,iVar9 + 4,0);
       extvsEncodeSourceSwizzle(shader,symbolList,src1Operand,iVar9 + 8,0);
       *(undefined4 *)(iVar9 + 0xc) = *(undefined4 *)(iVar9 + 8);
-      extvsEncodeSourceOperand(ctx,shader,iVar7,iVar9 + 0x10,1,0,0);
+      extvsEncodeSourceOperand(ctx,shader,dstOperand,iVar9 + 0x10,1,0,0);
       *(uint *)(iVar9 + 0x10) = *(uint *)(iVar9 + 0x10) & 0xff2fffff;
       extvsEncodeSourceSwizzle(shader,symbolList,src0Operand,iVar9 + 0x14,1);
       extvsEncodeSourceSwizzle(shader,symbolList,src1Operand,iVar9 + 0x18,0);
       *(undefined4 *)(iVar9 + 0x1c) = *(undefined4 *)(iVar9 + 0x18);
-      extvsEncodeSourceOperand(ctx,shader,iVar7,iVar9 + 0x20,1,0,0);
+      extvsEncodeSourceOperand(ctx,shader,dstOperand,iVar9 + 0x20,1,0,0);
       *(uint *)(iVar9 + 0x20) = *(uint *)(iVar9 + 0x20) & 0xff4fffff;
       extvsEncodeSourceSwizzle(shader,symbolList,src0Operand,iVar9 + 0x24,2);
       extvsEncodeSourceSwizzle(shader,symbolList,src1Operand,iVar9 + 0x28,0);
       *(undefined4 *)(iVar9 + 0x2c) = *(undefined4 *)(iVar9 + 0x28);
-      extvsEncodeSourceOperand(ctx,shader,iVar7,iVar9 + 0x30,1,0,0);
+      extvsEncodeSourceOperand(ctx,shader,dstOperand,iVar9 + 0x30,1,0,0);
       *(uint *)(iVar9 + 0x30) = *(uint *)(iVar9 + 0x30) & 0xff8fffff;
       extvsEncodeSourceSwizzle(shader,symbolList,src0Operand,iVar9 + 0x34,3);
       extvsEncodeSourceSwizzle(shader,symbolList,src1Operand,iVar9 + 0x38,0);
@@ -417,7 +418,7 @@ int extvsEmitMmul(ctx, shader, instRecord)
       *(int *)(hwProgram + 0x20) = *(int *)(hwProgram + 0x20) + 0x10;
     }
   }
-  iVar7 = instRecord + 4;
+  dstOperand = instRecord + 4;
   instSlot = instCount * 0x10 + *(int *)(hwProgram + 0x1c);
   tempIndex = extvsAllocTempSlot(ctx,shader);
   uStack_88 = 3;
@@ -432,7 +433,7 @@ int extvsEmitMmul(ctx, shader, instRecord)
   uVar1 = *(uint *)(instSlot + 4) & 0xfe001fff | 0x1248000;
   *(uint *)(instSlot + 0xc) = uVar1;
   *(uint *)(instSlot + 8) = uVar1;
-  extvsEncodeSourceOperand(ctx,shader,iVar7,instSlot + 0x10,1,0,0);
+  extvsEncodeSourceOperand(ctx,shader,dstOperand,instSlot + 0x10,1,0,0);
   *(uint *)(instSlot + 0x10) = *(uint *)(instSlot + 0x10) & 0xff1fffff;
   extvsEncodeSourceSwizzle(shader,symbolList,iVar2,instSlot + 0x14,0);
   uStack_6c = 3;
@@ -444,17 +445,17 @@ int extvsEmitMmul(ctx, shader, instRecord)
   uStack_68 = tempIndex;
   extvsEncodeSourceSwizzle(shader,symbolList,&uStack_6c,instSlot + 0x18,0);
   *(undefined4 *)(instSlot + 0x1c) = *(undefined4 *)(instSlot + 0x18);
-  extvsEncodeSourceOperand(ctx,shader,iVar7,instSlot + 0x20,1,0,0);
+  extvsEncodeSourceOperand(ctx,shader,dstOperand,instSlot + 0x20,1,0,0);
   *(uint *)(instSlot + 0x20) = *(uint *)(instSlot + 0x20) & 0xff2fffff;
   extvsEncodeSourceSwizzle(shader,symbolList,iVar2,instSlot + 0x24,1);
   extvsEncodeSourceSwizzle(shader,symbolList,&uStack_6c,instSlot + 0x28,0);
   *(undefined4 *)(instSlot + 0x2c) = *(undefined4 *)(instSlot + 0x28);
-  extvsEncodeSourceOperand(ctx,shader,iVar7,instSlot + 0x30,1,0,0);
+  extvsEncodeSourceOperand(ctx,shader,dstOperand,instSlot + 0x30,1,0,0);
   *(uint *)(instSlot + 0x30) = *(uint *)(instSlot + 0x30) & 0xff4fffff;
   extvsEncodeSourceSwizzle(shader,symbolList,iVar2,instSlot + 0x34,2);
   extvsEncodeSourceSwizzle(shader,symbolList,&uStack_6c,instSlot + 0x38,0);
   *(undefined4 *)(instSlot + 0x3c) = *(undefined4 *)(instSlot + 0x38);
-  extvsEncodeSourceOperand(ctx,shader,iVar7,instSlot + 0x40,1,0,0);
+  extvsEncodeSourceOperand(ctx,shader,dstOperand,instSlot + 0x40,1,0,0);
   *(uint *)(instSlot + 0x40) = *(uint *)(instSlot + 0x40) & 0xff8fffff;
   extvsEncodeSourceSwizzle(shader,symbolList,iVar2,instSlot + 0x44,3);
   extvsEncodeSourceSwizzle(shader,symbolList,&uStack_6c,instSlot + 0x48,0);
@@ -3988,490 +3989,496 @@ int extvsBuildStreamDescriptors(ctx, shader)
   int ctx;
   int *shader;
 {
-  bool bVar1;
-  byte bVar2;
-  bool bVar3;
-  int iVar4;
-  int iVar5;
-  uint uVar6;
-  uint uVar7;
-  int iVar8;
-  int iVar9;
+  int totalStreamCount;
+  int streamWordOffset;
+  int streamWordAddr;
+  uint fieldValue;
+  uint fieldShift;
+  uint shaderOutputMask;
+  bool streamInLowHalf;
+  byte outputFlags;
+  bool firstStreamHighHalf;
+  int componentCount;
+  int programState;
+  uint streamCount;
+  uint descriptorWordIndex;
+  int inputTable;
+  int outputsLeft;
   
-  iVar5 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
-  *(undefined4 *)(iVar5 + 0x29c) = 0;
-  *(undefined4 *)(iVar5 + 0x240) = 0;
-  *(undefined4 *)(iVar5 + 0x23c) = 1;
-  *(undefined4 *)(iVar5 + 0x2a0) = 1;
-  *(undefined4 *)(iVar5 + 0x238) = 4;
-  *(undefined4 *)(iVar5 + 0x2a8) = 1;
-  iVar8 = *(int *)(iVar5 + 0x24);
-  *(uint *)(iVar5 + 0x244) = *(uint *)(iVar5 + 0x244) & 0xffff0000 | 3;
-  *(uint *)(iVar5 + 0x270) = *(uint *)(iVar5 + 0x270) & 0xffff0000 | 0xf688;
-  bVar1 = *(char *)(iVar8 + 0x38) != '\0';
-  if (bVar1) {
-    *(undefined4 *)(iVar5 + 0x2a0) = 2;
-    *(undefined4 *)(iVar5 + 0x238) = 8;
-    *(undefined4 *)(iVar5 + 0x244) = 0x1030003;
-    *(undefined4 *)(iVar5 + 0x270) = 0xf688f688;
+  programState = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
+  *(undefined4 *)(programState + 0x29c) = 0;
+  *(undefined4 *)(programState + 0x240) = 0;
+  *(undefined4 *)(programState + 0x23c) = 1;
+  *(undefined4 *)(programState + 0x2a0) = 1;
+  *(undefined4 *)(programState + 0x238) = 4;
+  *(undefined4 *)(programState + 0x2a8) = 1;
+  inputTable = *(int *)(programState + 0x24);
+  *(uint *)(programState + 0x244) = *(uint *)(programState + 0x244) & 0xffff0000 | 3;
+  *(uint *)(programState + 0x270) = *(uint *)(programState + 0x270) & 0xffff0000 | 0xf688;
+  streamInLowHalf = *(char *)(inputTable + 0x38) != '\0';
+  if (streamInLowHalf) {
+    *(undefined4 *)(programState + 0x2a0) = 2;
+    *(undefined4 *)(programState + 0x238) = 8;
+    *(undefined4 *)(programState + 0x244) = 0x1030003;
+    *(undefined4 *)(programState + 0x270) = 0xf688f688;
   }
-  bVar3 = !bVar1;
-  uVar7 = (uint)bVar1;
-  bVar1 = bVar3;
-  if (*(char *)(iVar8 + 0x60) != '\0') {
-    bVar1 = !bVar3;
-    *(uint *)(iVar5 + 0x238) =
-         (*(uint *)(iVar5 + 0x238) & 0x7f) + 4 & 0x7f | *(uint *)(iVar5 + 0x238) & 0xffffff80;
-    if (bVar1) {
-      iVar8 = uVar7 * 4 + iVar5;
-      *(uint *)(iVar8 + 0x244) = *(uint *)(iVar8 + 0x244) & 0xffff0000 | 0x203;
-      *(uint *)(iVar8 + 0x270) = (uint)bVar3 | *(uint *)(iVar8 + 0x270) & 0xffff0000 | 0xf688;
+  firstStreamHighHalf = !streamInLowHalf;
+  descriptorWordIndex = (uint)streamInLowHalf;
+  streamInLowHalf = firstStreamHighHalf;
+  if (*(char *)(inputTable + 0x60) != '\0') {
+    streamInLowHalf = !firstStreamHighHalf;
+    *(uint *)(programState + 0x238) =
+         (*(uint *)(programState + 0x238) & 0x7f) + 4 & 0x7f | *(uint *)(programState + 0x238) & 0xffffff80;
+    if (streamInLowHalf) {
+      streamWordAddr = descriptorWordIndex * 4 + programState;
+      *(uint *)(streamWordAddr + 0x244) = *(uint *)(streamWordAddr + 0x244) & 0xffff0000 | 0x203;
+      *(uint *)(streamWordAddr + 0x270) = (uint)firstStreamHighHalf | *(uint *)(streamWordAddr + 0x270) & 0xffff0000 | 0xf688;
     }
     else {
-      iVar8 = uVar7 * 4;
-      uVar7 = uVar7 + 1;
-      iVar8 = iVar8 + iVar5;
-      *(uint *)(iVar8 + 0x244) = *(uint *)(iVar8 + 0x244) & 0xffff | 0x2030000;
-      *(uint *)(iVar8 + 0x270) = *(uint *)(iVar8 + 0x270) & 0xffff | 0xf6880000;
+      streamWordOffset = descriptorWordIndex * 4;
+      descriptorWordIndex = descriptorWordIndex + 1;
+      streamWordOffset = streamWordOffset + programState;
+      *(uint *)(streamWordOffset + 0x244) = *(uint *)(streamWordOffset + 0x244) & 0xffff | 0x2030000;
+      *(uint *)(streamWordOffset + 0x270) = *(uint *)(streamWordOffset + 0x270) & 0xffff | 0xf6880000;
     }
-    iVar8 = *(int *)(iVar5 + 0x24);
-    *(int *)(iVar5 + 0x2a0) = *(int *)(iVar5 + 0x2a0) + 1;
+    inputTable = *(int *)(programState + 0x24);
+    *(int *)(programState + 0x2a0) = *(int *)(programState + 0x2a0) + 1;
   }
-  if (*(char *)(iVar8 + 0x88) != '\0') {
-    bVar1 = !bVar1;
-    *(uint *)(iVar5 + 0x238) =
-         (*(uint *)(iVar5 + 0x238) & 0x7f) + 4 & 0x7f | *(uint *)(iVar5 + 0x238) & 0xffffff80;
-    if (bVar1) {
-      iVar8 = uVar7 * 4 + iVar5;
-      *(uint *)(iVar8 + 0x244) = *(uint *)(iVar8 + 0x244) & 0xffff0000 | 0x303;
-      *(uint *)(iVar8 + 0x270) = *(uint *)(iVar8 + 0x270) & 0xffff0000 | 0xf688;
+  if (*(char *)(inputTable + 0x88) != '\0') {
+    streamInLowHalf = !streamInLowHalf;
+    *(uint *)(programState + 0x238) =
+         (*(uint *)(programState + 0x238) & 0x7f) + 4 & 0x7f | *(uint *)(programState + 0x238) & 0xffffff80;
+    if (streamInLowHalf) {
+      streamWordAddr = descriptorWordIndex * 4 + programState;
+      *(uint *)(streamWordAddr + 0x244) = *(uint *)(streamWordAddr + 0x244) & 0xffff0000 | 0x303;
+      *(uint *)(streamWordAddr + 0x270) = *(uint *)(streamWordAddr + 0x270) & 0xffff0000 | 0xf688;
     }
     else {
-      iVar8 = uVar7 * 4;
-      uVar7 = uVar7 + 1;
-      iVar8 = iVar8 + iVar5;
-      *(uint *)(iVar8 + 0x244) = *(uint *)(iVar8 + 0x244) & 0xffff | 0x3030000;
-      *(uint *)(iVar8 + 0x270) = *(uint *)(iVar8 + 0x270) & 0xffff | 0xf6880000;
+      streamWordOffset = descriptorWordIndex * 4;
+      descriptorWordIndex = descriptorWordIndex + 1;
+      streamWordOffset = streamWordOffset + programState;
+      *(uint *)(streamWordOffset + 0x244) = *(uint *)(streamWordOffset + 0x244) & 0xffff | 0x3030000;
+      *(uint *)(streamWordOffset + 0x270) = *(uint *)(streamWordOffset + 0x270) & 0xffff | 0xf6880000;
     }
-    iVar8 = *(int *)(iVar5 + 0x24);
-    *(int *)(iVar5 + 0x2a0) = *(int *)(iVar5 + 0x2a0) + 1;
+    inputTable = *(int *)(programState + 0x24);
+    *(int *)(programState + 0x2a0) = *(int *)(programState + 0x2a0) + 1;
   }
-  if (*(char *)(iVar8 + 0xb0) != '\0') {
-    bVar1 = !bVar1;
-    *(uint *)(iVar5 + 0x238) =
-         (*(uint *)(iVar5 + 0x238) & 0x7f) + 4 & 0x7f | *(uint *)(iVar5 + 0x238) & 0xffffff80;
-    if (bVar1) {
-      iVar8 = uVar7 * 4 + iVar5;
-      *(uint *)(iVar8 + 0x244) = *(uint *)(iVar8 + 0x244) & 0xffff0000 | 0x403;
-      *(uint *)(iVar8 + 0x270) = *(uint *)(iVar8 + 0x270) & 0xffff0000 | 0xf688;
+  if (*(char *)(inputTable + 0xb0) != '\0') {
+    streamInLowHalf = !streamInLowHalf;
+    *(uint *)(programState + 0x238) =
+         (*(uint *)(programState + 0x238) & 0x7f) + 4 & 0x7f | *(uint *)(programState + 0x238) & 0xffffff80;
+    if (streamInLowHalf) {
+      streamWordAddr = descriptorWordIndex * 4 + programState;
+      *(uint *)(streamWordAddr + 0x244) = *(uint *)(streamWordAddr + 0x244) & 0xffff0000 | 0x403;
+      *(uint *)(streamWordAddr + 0x270) = *(uint *)(streamWordAddr + 0x270) & 0xffff0000 | 0xf688;
     }
     else {
-      iVar8 = uVar7 * 4;
-      uVar7 = uVar7 + 1;
-      iVar8 = iVar8 + iVar5;
-      *(uint *)(iVar8 + 0x244) = *(uint *)(iVar8 + 0x244) & 0xffff | 0x4030000;
-      *(uint *)(iVar8 + 0x270) = *(uint *)(iVar8 + 0x270) & 0xffff | 0xf6880000;
+      streamWordOffset = descriptorWordIndex * 4;
+      descriptorWordIndex = descriptorWordIndex + 1;
+      streamWordOffset = streamWordOffset + programState;
+      *(uint *)(streamWordOffset + 0x244) = *(uint *)(streamWordOffset + 0x244) & 0xffff | 0x4030000;
+      *(uint *)(streamWordOffset + 0x270) = *(uint *)(streamWordOffset + 0x270) & 0xffff | 0xf6880000;
     }
-    iVar8 = *(int *)(iVar5 + 0x24);
-    *(int *)(iVar5 + 0x2a0) = *(int *)(iVar5 + 0x2a0) + 1;
+    inputTable = *(int *)(programState + 0x24);
+    *(int *)(programState + 0x2a0) = *(int *)(programState + 0x2a0) + 1;
   }
-  if (*(char *)(iVar8 + 0xd8) != '\0') {
-    bVar1 = !bVar1;
-    *(uint *)(iVar5 + 0x238) =
-         (*(uint *)(iVar5 + 0x238) & 0x7f) + 4 & 0x7f | *(uint *)(iVar5 + 0x238) & 0xffffff80;
-    if (bVar1) {
-      iVar8 = uVar7 * 4 + iVar5;
-      *(uint *)(iVar8 + 0x244) = *(uint *)(iVar8 + 0x244) & 0xffff0000 | 0x503;
-      *(uint *)(iVar8 + 0x270) = *(uint *)(iVar8 + 0x270) & 0xffff0000 | 0xf688;
+  if (*(char *)(inputTable + 0xd8) != '\0') {
+    streamInLowHalf = !streamInLowHalf;
+    *(uint *)(programState + 0x238) =
+         (*(uint *)(programState + 0x238) & 0x7f) + 4 & 0x7f | *(uint *)(programState + 0x238) & 0xffffff80;
+    if (streamInLowHalf) {
+      streamWordAddr = descriptorWordIndex * 4 + programState;
+      *(uint *)(streamWordAddr + 0x244) = *(uint *)(streamWordAddr + 0x244) & 0xffff0000 | 0x503;
+      *(uint *)(streamWordAddr + 0x270) = *(uint *)(streamWordAddr + 0x270) & 0xffff0000 | 0xf688;
     }
     else {
-      iVar8 = uVar7 * 4;
-      uVar7 = uVar7 + 1;
-      iVar8 = iVar8 + iVar5;
-      *(uint *)(iVar8 + 0x244) = *(uint *)(iVar8 + 0x244) & 0xffff | 0x5030000;
-      *(uint *)(iVar8 + 0x270) = *(uint *)(iVar8 + 0x270) & 0xffff | 0xf6880000;
+      streamWordOffset = descriptorWordIndex * 4;
+      descriptorWordIndex = descriptorWordIndex + 1;
+      streamWordOffset = streamWordOffset + programState;
+      *(uint *)(streamWordOffset + 0x244) = *(uint *)(streamWordOffset + 0x244) & 0xffff | 0x5030000;
+      *(uint *)(streamWordOffset + 0x270) = *(uint *)(streamWordOffset + 0x270) & 0xffff | 0xf6880000;
     }
-    iVar8 = *(int *)(iVar5 + 0x24);
-    *(int *)(iVar5 + 0x2a0) = *(int *)(iVar5 + 0x2a0) + 1;
+    inputTable = *(int *)(programState + 0x24);
+    *(int *)(programState + 0x2a0) = *(int *)(programState + 0x2a0) + 1;
   }
-  if (*(char *)(iVar8 + 0x100) != '\0') {
-    bVar1 = !bVar1;
-    *(uint *)(iVar5 + 0x238) =
-         (*(uint *)(iVar5 + 0x238) & 0x7f) + 4 & 0x7f | *(uint *)(iVar5 + 0x238) & 0xffffff80;
-    if (bVar1) {
-      iVar8 = uVar7 * 4 + iVar5;
-      *(uint *)(iVar8 + 0x244) = *(uint *)(iVar8 + 0x244) & 0xffff0000 | 0x603;
-      *(uint *)(iVar8 + 0x270) = *(uint *)(iVar8 + 0x270) & 0xffff0000 | 0xf688;
+  if (*(char *)(inputTable + 0x100) != '\0') {
+    streamInLowHalf = !streamInLowHalf;
+    *(uint *)(programState + 0x238) =
+         (*(uint *)(programState + 0x238) & 0x7f) + 4 & 0x7f | *(uint *)(programState + 0x238) & 0xffffff80;
+    if (streamInLowHalf) {
+      streamWordAddr = descriptorWordIndex * 4 + programState;
+      *(uint *)(streamWordAddr + 0x244) = *(uint *)(streamWordAddr + 0x244) & 0xffff0000 | 0x603;
+      *(uint *)(streamWordAddr + 0x270) = *(uint *)(streamWordAddr + 0x270) & 0xffff0000 | 0xf688;
     }
     else {
-      iVar8 = uVar7 * 4;
-      uVar7 = uVar7 + 1;
-      iVar8 = iVar8 + iVar5;
-      *(uint *)(iVar8 + 0x244) = *(uint *)(iVar8 + 0x244) & 0xffff | 0x6030000;
-      *(uint *)(iVar8 + 0x270) = *(uint *)(iVar8 + 0x270) & 0xffff | 0xf6880000;
+      streamWordOffset = descriptorWordIndex * 4;
+      descriptorWordIndex = descriptorWordIndex + 1;
+      streamWordOffset = streamWordOffset + programState;
+      *(uint *)(streamWordOffset + 0x244) = *(uint *)(streamWordOffset + 0x244) & 0xffff | 0x6030000;
+      *(uint *)(streamWordOffset + 0x270) = *(uint *)(streamWordOffset + 0x270) & 0xffff | 0xf6880000;
     }
-    iVar8 = *(int *)(iVar5 + 0x24);
-    *(int *)(iVar5 + 0x2a0) = *(int *)(iVar5 + 0x2a0) + 1;
+    inputTable = *(int *)(programState + 0x24);
+    *(int *)(programState + 0x2a0) = *(int *)(programState + 0x2a0) + 1;
   }
-  if (*(char *)(iVar8 + 0x128) != '\0') {
-    bVar1 = !bVar1;
-    *(uint *)(iVar5 + 0x238) =
-         (*(uint *)(iVar5 + 0x238) & 0x7f) + 4 & 0x7f | *(uint *)(iVar5 + 0x238) & 0xffffff80;
-    if (bVar1) {
-      iVar8 = uVar7 * 4 + iVar5;
-      *(uint *)(iVar8 + 0x244) = *(uint *)(iVar8 + 0x244) & 0xffff0000 | 0x703;
-      *(uint *)(iVar8 + 0x270) = *(uint *)(iVar8 + 0x270) & 0xffff0000 | 0xf688;
+  if (*(char *)(inputTable + 0x128) != '\0') {
+    streamInLowHalf = !streamInLowHalf;
+    *(uint *)(programState + 0x238) =
+         (*(uint *)(programState + 0x238) & 0x7f) + 4 & 0x7f | *(uint *)(programState + 0x238) & 0xffffff80;
+    if (streamInLowHalf) {
+      streamWordAddr = descriptorWordIndex * 4 + programState;
+      *(uint *)(streamWordAddr + 0x244) = *(uint *)(streamWordAddr + 0x244) & 0xffff0000 | 0x703;
+      *(uint *)(streamWordAddr + 0x270) = *(uint *)(streamWordAddr + 0x270) & 0xffff0000 | 0xf688;
     }
     else {
-      iVar8 = uVar7 * 4;
-      uVar7 = uVar7 + 1;
-      iVar8 = iVar8 + iVar5;
-      *(uint *)(iVar8 + 0x244) = *(uint *)(iVar8 + 0x244) & 0xffff | 0x7030000;
-      *(uint *)(iVar8 + 0x270) = *(uint *)(iVar8 + 0x270) & 0xffff | 0xf6880000;
+      streamWordOffset = descriptorWordIndex * 4;
+      descriptorWordIndex = descriptorWordIndex + 1;
+      streamWordOffset = streamWordOffset + programState;
+      *(uint *)(streamWordOffset + 0x244) = *(uint *)(streamWordOffset + 0x244) & 0xffff | 0x7030000;
+      *(uint *)(streamWordOffset + 0x270) = *(uint *)(streamWordOffset + 0x270) & 0xffff | 0xf6880000;
     }
-    iVar8 = *(int *)(iVar5 + 0x24);
-    *(int *)(iVar5 + 0x2a0) = *(int *)(iVar5 + 0x2a0) + 1;
+    inputTable = *(int *)(programState + 0x24);
+    *(int *)(programState + 0x2a0) = *(int *)(programState + 0x2a0) + 1;
   }
-  if (*(char *)(iVar8 + 0x150) != '\0') {
-    bVar1 = !bVar1;
-    *(uint *)(iVar5 + 0x238) =
-         (*(uint *)(iVar5 + 0x238) & 0x7f) + 4 & 0x7f | *(uint *)(iVar5 + 0x238) & 0xffffff80;
-    if (bVar1) {
-      iVar8 = uVar7 * 4 + iVar5;
-      *(uint *)(iVar8 + 0x244) = *(uint *)(iVar8 + 0x244) & 0xffff0000 | 0x803;
-      *(uint *)(iVar8 + 0x270) = *(uint *)(iVar8 + 0x270) & 0xffff0000 | 0xf688;
+  if (*(char *)(inputTable + 0x150) != '\0') {
+    streamInLowHalf = !streamInLowHalf;
+    *(uint *)(programState + 0x238) =
+         (*(uint *)(programState + 0x238) & 0x7f) + 4 & 0x7f | *(uint *)(programState + 0x238) & 0xffffff80;
+    if (streamInLowHalf) {
+      streamWordAddr = descriptorWordIndex * 4 + programState;
+      *(uint *)(streamWordAddr + 0x244) = *(uint *)(streamWordAddr + 0x244) & 0xffff0000 | 0x803;
+      *(uint *)(streamWordAddr + 0x270) = *(uint *)(streamWordAddr + 0x270) & 0xffff0000 | 0xf688;
     }
     else {
-      iVar8 = uVar7 * 4;
-      uVar7 = uVar7 + 1;
-      iVar8 = iVar8 + iVar5;
-      *(uint *)(iVar8 + 0x244) = *(uint *)(iVar8 + 0x244) & 0xffff | 0x8030000;
-      *(uint *)(iVar8 + 0x270) = *(uint *)(iVar8 + 0x270) & 0xffff | 0xf6880000;
+      streamWordOffset = descriptorWordIndex * 4;
+      descriptorWordIndex = descriptorWordIndex + 1;
+      streamWordOffset = streamWordOffset + programState;
+      *(uint *)(streamWordOffset + 0x244) = *(uint *)(streamWordOffset + 0x244) & 0xffff | 0x8030000;
+      *(uint *)(streamWordOffset + 0x270) = *(uint *)(streamWordOffset + 0x270) & 0xffff | 0xf6880000;
     }
-    iVar8 = *(int *)(iVar5 + 0x24);
-    *(int *)(iVar5 + 0x2a0) = *(int *)(iVar5 + 0x2a0) + 1;
+    inputTable = *(int *)(programState + 0x24);
+    *(int *)(programState + 0x2a0) = *(int *)(programState + 0x2a0) + 1;
   }
-  if (*(char *)(iVar8 + 0x178) != '\0') {
-    bVar1 = !bVar1;
-    *(uint *)(iVar5 + 0x238) =
-         (*(uint *)(iVar5 + 0x238) & 0x7f) + 4 & 0x7f | *(uint *)(iVar5 + 0x238) & 0xffffff80;
-    if (bVar1) {
-      iVar8 = uVar7 * 4 + iVar5;
-      *(uint *)(iVar8 + 0x244) = *(uint *)(iVar8 + 0x244) & 0xffff0000 | 0x903;
-      *(uint *)(iVar8 + 0x270) = *(uint *)(iVar8 + 0x270) & 0xffff0000 | 0xf688;
+  if (*(char *)(inputTable + 0x178) != '\0') {
+    streamInLowHalf = !streamInLowHalf;
+    *(uint *)(programState + 0x238) =
+         (*(uint *)(programState + 0x238) & 0x7f) + 4 & 0x7f | *(uint *)(programState + 0x238) & 0xffffff80;
+    if (streamInLowHalf) {
+      streamWordAddr = descriptorWordIndex * 4 + programState;
+      *(uint *)(streamWordAddr + 0x244) = *(uint *)(streamWordAddr + 0x244) & 0xffff0000 | 0x903;
+      *(uint *)(streamWordAddr + 0x270) = *(uint *)(streamWordAddr + 0x270) & 0xffff0000 | 0xf688;
     }
     else {
-      iVar8 = uVar7 * 4;
-      uVar7 = uVar7 + 1;
-      iVar8 = iVar8 + iVar5;
-      *(uint *)(iVar8 + 0x244) = *(uint *)(iVar8 + 0x244) & 0xffff | 0x9030000;
-      *(uint *)(iVar8 + 0x270) = *(uint *)(iVar8 + 0x270) & 0xffff | 0xf6880000;
+      streamWordOffset = descriptorWordIndex * 4;
+      descriptorWordIndex = descriptorWordIndex + 1;
+      streamWordOffset = streamWordOffset + programState;
+      *(uint *)(streamWordOffset + 0x244) = *(uint *)(streamWordOffset + 0x244) & 0xffff | 0x9030000;
+      *(uint *)(streamWordOffset + 0x270) = *(uint *)(streamWordOffset + 0x270) & 0xffff | 0xf6880000;
     }
-    iVar8 = *(int *)(iVar5 + 0x24);
-    *(int *)(iVar5 + 0x2a0) = *(int *)(iVar5 + 0x2a0) + 1;
+    inputTable = *(int *)(programState + 0x24);
+    *(int *)(programState + 0x2a0) = *(int *)(programState + 0x2a0) + 1;
   }
-  if (*(char *)(iVar8 + 0x1a0) != '\0') {
-    bVar1 = !bVar1;
-    *(uint *)(iVar5 + 0x238) =
-         (*(uint *)(iVar5 + 0x238) & 0x7f) + 4 & 0x7f | *(uint *)(iVar5 + 0x238) & 0xffffff80;
-    if (bVar1) {
-      iVar8 = uVar7 * 4 + iVar5;
-      *(uint *)(iVar8 + 0x244) = *(uint *)(iVar8 + 0x244) & 0xffff0000 | 0xa03;
-      *(uint *)(iVar8 + 0x270) = *(uint *)(iVar8 + 0x270) & 0xffff0000 | 0xf688;
+  if (*(char *)(inputTable + 0x1a0) != '\0') {
+    streamInLowHalf = !streamInLowHalf;
+    *(uint *)(programState + 0x238) =
+         (*(uint *)(programState + 0x238) & 0x7f) + 4 & 0x7f | *(uint *)(programState + 0x238) & 0xffffff80;
+    if (streamInLowHalf) {
+      streamWordAddr = descriptorWordIndex * 4 + programState;
+      *(uint *)(streamWordAddr + 0x244) = *(uint *)(streamWordAddr + 0x244) & 0xffff0000 | 0xa03;
+      *(uint *)(streamWordAddr + 0x270) = *(uint *)(streamWordAddr + 0x270) & 0xffff0000 | 0xf688;
     }
     else {
-      iVar8 = uVar7 * 4;
-      uVar7 = uVar7 + 1;
-      iVar8 = iVar8 + iVar5;
-      *(uint *)(iVar8 + 0x244) = *(uint *)(iVar8 + 0x244) & 0xffff | 0xa030000;
-      *(uint *)(iVar8 + 0x270) = *(uint *)(iVar8 + 0x270) & 0xffff | 0xf6880000;
+      streamWordOffset = descriptorWordIndex * 4;
+      descriptorWordIndex = descriptorWordIndex + 1;
+      streamWordOffset = streamWordOffset + programState;
+      *(uint *)(streamWordOffset + 0x244) = *(uint *)(streamWordOffset + 0x244) & 0xffff | 0xa030000;
+      *(uint *)(streamWordOffset + 0x270) = *(uint *)(streamWordOffset + 0x270) & 0xffff | 0xf6880000;
     }
-    iVar8 = *(int *)(iVar5 + 0x24);
-    *(int *)(iVar5 + 0x2a0) = *(int *)(iVar5 + 0x2a0) + 1;
+    inputTable = *(int *)(programState + 0x24);
+    *(int *)(programState + 0x2a0) = *(int *)(programState + 0x2a0) + 1;
   }
-  if (*(char *)(iVar8 + 0x1c8) != '\0') {
-    bVar1 = !bVar1;
-    *(uint *)(iVar5 + 0x238) =
-         (*(uint *)(iVar5 + 0x238) & 0x7f) + 4 & 0x7f | *(uint *)(iVar5 + 0x238) & 0xffffff80;
-    if (bVar1) {
-      iVar8 = uVar7 * 4 + iVar5;
-      *(uint *)(iVar8 + 0x244) = *(uint *)(iVar8 + 0x244) & 0xffff0000 | 0xb03;
-      *(uint *)(iVar8 + 0x270) = *(uint *)(iVar8 + 0x270) & 0xffff0000 | 0xf688;
+  if (*(char *)(inputTable + 0x1c8) != '\0') {
+    streamInLowHalf = !streamInLowHalf;
+    *(uint *)(programState + 0x238) =
+         (*(uint *)(programState + 0x238) & 0x7f) + 4 & 0x7f | *(uint *)(programState + 0x238) & 0xffffff80;
+    if (streamInLowHalf) {
+      streamWordAddr = descriptorWordIndex * 4 + programState;
+      *(uint *)(streamWordAddr + 0x244) = *(uint *)(streamWordAddr + 0x244) & 0xffff0000 | 0xb03;
+      *(uint *)(streamWordAddr + 0x270) = *(uint *)(streamWordAddr + 0x270) & 0xffff0000 | 0xf688;
     }
     else {
-      iVar8 = uVar7 * 4;
-      uVar7 = uVar7 + 1;
-      iVar8 = iVar8 + iVar5;
-      *(uint *)(iVar8 + 0x244) = *(uint *)(iVar8 + 0x244) & 0xffff | 0xb030000;
-      *(uint *)(iVar8 + 0x270) = *(uint *)(iVar8 + 0x270) & 0xffff | 0xf6880000;
+      streamWordOffset = descriptorWordIndex * 4;
+      descriptorWordIndex = descriptorWordIndex + 1;
+      streamWordOffset = streamWordOffset + programState;
+      *(uint *)(streamWordOffset + 0x244) = *(uint *)(streamWordOffset + 0x244) & 0xffff | 0xb030000;
+      *(uint *)(streamWordOffset + 0x270) = *(uint *)(streamWordOffset + 0x270) & 0xffff | 0xf6880000;
     }
-    iVar8 = *(int *)(iVar5 + 0x24);
-    *(int *)(iVar5 + 0x2a0) = *(int *)(iVar5 + 0x2a0) + 1;
+    inputTable = *(int *)(programState + 0x24);
+    *(int *)(programState + 0x2a0) = *(int *)(programState + 0x2a0) + 1;
   }
-  if (*(char *)(iVar8 + 0x1f0) != '\0') {
-    bVar1 = !bVar1;
-    *(uint *)(iVar5 + 0x238) =
-         (*(uint *)(iVar5 + 0x238) & 0x7f) + 4 & 0x7f | *(uint *)(iVar5 + 0x238) & 0xffffff80;
-    if (bVar1) {
-      iVar8 = uVar7 * 4 + iVar5;
-      *(uint *)(iVar8 + 0x244) = *(uint *)(iVar8 + 0x244) & 0xffff0000 | 0xc03;
-      *(uint *)(iVar8 + 0x270) = *(uint *)(iVar8 + 0x270) & 0xffff0000 | 0xf688;
+  if (*(char *)(inputTable + 0x1f0) != '\0') {
+    streamInLowHalf = !streamInLowHalf;
+    *(uint *)(programState + 0x238) =
+         (*(uint *)(programState + 0x238) & 0x7f) + 4 & 0x7f | *(uint *)(programState + 0x238) & 0xffffff80;
+    if (streamInLowHalf) {
+      streamWordAddr = descriptorWordIndex * 4 + programState;
+      *(uint *)(streamWordAddr + 0x244) = *(uint *)(streamWordAddr + 0x244) & 0xffff0000 | 0xc03;
+      *(uint *)(streamWordAddr + 0x270) = *(uint *)(streamWordAddr + 0x270) & 0xffff0000 | 0xf688;
     }
     else {
-      iVar8 = uVar7 * 4;
-      uVar7 = uVar7 + 1;
-      iVar8 = iVar8 + iVar5;
-      *(uint *)(iVar8 + 0x244) = *(uint *)(iVar8 + 0x244) & 0xffff | 0xc030000;
-      *(uint *)(iVar8 + 0x270) = *(uint *)(iVar8 + 0x270) & 0xffff | 0xf6880000;
+      streamWordOffset = descriptorWordIndex * 4;
+      descriptorWordIndex = descriptorWordIndex + 1;
+      streamWordOffset = streamWordOffset + programState;
+      *(uint *)(streamWordOffset + 0x244) = *(uint *)(streamWordOffset + 0x244) & 0xffff | 0xc030000;
+      *(uint *)(streamWordOffset + 0x270) = *(uint *)(streamWordOffset + 0x270) & 0xffff | 0xf6880000;
     }
-    iVar8 = *(int *)(iVar5 + 0x24);
-    *(int *)(iVar5 + 0x2a0) = *(int *)(iVar5 + 0x2a0) + 1;
+    inputTable = *(int *)(programState + 0x24);
+    *(int *)(programState + 0x2a0) = *(int *)(programState + 0x2a0) + 1;
   }
-  if (*(char *)(iVar8 + 0x218) != '\0') {
-    bVar1 = !bVar1;
-    *(uint *)(iVar5 + 0x238) =
-         (*(uint *)(iVar5 + 0x238) & 0x7f) + 4 & 0x7f | *(uint *)(iVar5 + 0x238) & 0xffffff80;
-    if (bVar1) {
-      iVar8 = uVar7 * 4 + iVar5;
-      *(uint *)(iVar8 + 0x244) = *(uint *)(iVar8 + 0x244) & 0xffff0000 | 0xd03;
-      *(uint *)(iVar8 + 0x270) = *(uint *)(iVar8 + 0x270) & 0xffff0000 | 0xf688;
+  if (*(char *)(inputTable + 0x218) != '\0') {
+    streamInLowHalf = !streamInLowHalf;
+    *(uint *)(programState + 0x238) =
+         (*(uint *)(programState + 0x238) & 0x7f) + 4 & 0x7f | *(uint *)(programState + 0x238) & 0xffffff80;
+    if (streamInLowHalf) {
+      streamWordAddr = descriptorWordIndex * 4 + programState;
+      *(uint *)(streamWordAddr + 0x244) = *(uint *)(streamWordAddr + 0x244) & 0xffff0000 | 0xd03;
+      *(uint *)(streamWordAddr + 0x270) = *(uint *)(streamWordAddr + 0x270) & 0xffff0000 | 0xf688;
     }
     else {
-      iVar8 = uVar7 * 4;
-      uVar7 = uVar7 + 1;
-      iVar8 = iVar8 + iVar5;
-      *(uint *)(iVar8 + 0x244) = *(uint *)(iVar8 + 0x244) & 0xffff | 0xd030000;
-      *(uint *)(iVar8 + 0x270) = *(uint *)(iVar8 + 0x270) & 0xffff | 0xf6880000;
+      streamWordOffset = descriptorWordIndex * 4;
+      descriptorWordIndex = descriptorWordIndex + 1;
+      streamWordOffset = streamWordOffset + programState;
+      *(uint *)(streamWordOffset + 0x244) = *(uint *)(streamWordOffset + 0x244) & 0xffff | 0xd030000;
+      *(uint *)(streamWordOffset + 0x270) = *(uint *)(streamWordOffset + 0x270) & 0xffff | 0xf6880000;
     }
-    iVar8 = *(int *)(iVar5 + 0x24);
-    *(int *)(iVar5 + 0x2a0) = *(int *)(iVar5 + 0x2a0) + 1;
+    inputTable = *(int *)(programState + 0x24);
+    *(int *)(programState + 0x2a0) = *(int *)(programState + 0x2a0) + 1;
   }
-  if (*(char *)(iVar8 + 0x240) != '\0') {
-    bVar1 = !bVar1;
-    *(uint *)(iVar5 + 0x238) =
-         (*(uint *)(iVar5 + 0x238) & 0x7f) + 4 & 0x7f | *(uint *)(iVar5 + 0x238) & 0xffffff80;
-    if (bVar1) {
-      iVar8 = uVar7 * 4 + iVar5;
-      *(uint *)(iVar8 + 0x244) = *(uint *)(iVar8 + 0x244) & 0xffff0000 | 0xe03;
-      *(uint *)(iVar8 + 0x270) = *(uint *)(iVar8 + 0x270) & 0xffff0000 | 0xf688;
+  if (*(char *)(inputTable + 0x240) != '\0') {
+    streamInLowHalf = !streamInLowHalf;
+    *(uint *)(programState + 0x238) =
+         (*(uint *)(programState + 0x238) & 0x7f) + 4 & 0x7f | *(uint *)(programState + 0x238) & 0xffffff80;
+    if (streamInLowHalf) {
+      streamWordAddr = descriptorWordIndex * 4 + programState;
+      *(uint *)(streamWordAddr + 0x244) = *(uint *)(streamWordAddr + 0x244) & 0xffff0000 | 0xe03;
+      *(uint *)(streamWordAddr + 0x270) = *(uint *)(streamWordAddr + 0x270) & 0xffff0000 | 0xf688;
     }
     else {
-      iVar8 = uVar7 * 4;
-      uVar7 = uVar7 + 1;
-      iVar8 = iVar8 + iVar5;
-      *(uint *)(iVar8 + 0x244) = *(uint *)(iVar8 + 0x244) & 0xffff | 0xe030000;
-      *(uint *)(iVar8 + 0x270) = *(uint *)(iVar8 + 0x270) & 0xffff | 0xf6880000;
+      streamWordOffset = descriptorWordIndex * 4;
+      descriptorWordIndex = descriptorWordIndex + 1;
+      streamWordOffset = streamWordOffset + programState;
+      *(uint *)(streamWordOffset + 0x244) = *(uint *)(streamWordOffset + 0x244) & 0xffff | 0xe030000;
+      *(uint *)(streamWordOffset + 0x270) = *(uint *)(streamWordOffset + 0x270) & 0xffff | 0xf6880000;
     }
-    iVar8 = *(int *)(iVar5 + 0x24);
-    *(int *)(iVar5 + 0x2a0) = *(int *)(iVar5 + 0x2a0) + 1;
+    inputTable = *(int *)(programState + 0x24);
+    *(int *)(programState + 0x2a0) = *(int *)(programState + 0x2a0) + 1;
   }
-  if (*(char *)(iVar8 + 0x268) != '\0') {
-    bVar1 = !bVar1;
-    *(uint *)(iVar5 + 0x238) =
-         (*(uint *)(iVar5 + 0x238) & 0x7f) + 4 & 0x7f | *(uint *)(iVar5 + 0x238) & 0xffffff80;
-    if (bVar1) {
-      iVar8 = uVar7 * 4 + iVar5;
-      *(uint *)(iVar8 + 0x244) = *(uint *)(iVar8 + 0x244) & 0xffff0000 | 0xf03;
-      *(uint *)(iVar8 + 0x270) = *(uint *)(iVar8 + 0x270) & 0xffff0000 | 0xf688;
+  if (*(char *)(inputTable + 0x268) != '\0') {
+    streamInLowHalf = !streamInLowHalf;
+    *(uint *)(programState + 0x238) =
+         (*(uint *)(programState + 0x238) & 0x7f) + 4 & 0x7f | *(uint *)(programState + 0x238) & 0xffffff80;
+    if (streamInLowHalf) {
+      streamWordAddr = descriptorWordIndex * 4 + programState;
+      *(uint *)(streamWordAddr + 0x244) = *(uint *)(streamWordAddr + 0x244) & 0xffff0000 | 0xf03;
+      *(uint *)(streamWordAddr + 0x270) = *(uint *)(streamWordAddr + 0x270) & 0xffff0000 | 0xf688;
     }
     else {
-      iVar8 = uVar7 * 4;
-      uVar7 = uVar7 + 1;
-      iVar8 = iVar8 + iVar5;
-      *(uint *)(iVar8 + 0x244) = *(uint *)(iVar8 + 0x244) & 0xffff | 0xf030000;
-      *(uint *)(iVar8 + 0x270) = *(uint *)(iVar8 + 0x270) & 0xffff | 0xf6880000;
+      streamWordOffset = descriptorWordIndex * 4;
+      descriptorWordIndex = descriptorWordIndex + 1;
+      streamWordOffset = streamWordOffset + programState;
+      *(uint *)(streamWordOffset + 0x244) = *(uint *)(streamWordOffset + 0x244) & 0xffff | 0xf030000;
+      *(uint *)(streamWordOffset + 0x270) = *(uint *)(streamWordOffset + 0x270) & 0xffff | 0xf6880000;
     }
-    iVar8 = *(int *)(iVar5 + 0x24);
-    *(int *)(iVar5 + 0x2a0) = *(int *)(iVar5 + 0x2a0) + 1;
+    inputTable = *(int *)(programState + 0x24);
+    *(int *)(programState + 0x2a0) = *(int *)(programState + 0x2a0) + 1;
   }
-  if (*(char *)(iVar8 + 0x290) != '\0') {
-    bVar1 = !bVar1;
-    *(uint *)(iVar5 + 0x238) =
-         (*(uint *)(iVar5 + 0x238) & 0x7f) + 4 & 0x7f | *(uint *)(iVar5 + 0x238) & 0xffffff80;
-    if (bVar1) {
-      iVar8 = uVar7 * 4 + iVar5;
-      *(uint *)(iVar8 + 0x244) = *(uint *)(iVar8 + 0x244) & 0xffff0000 | 0x1003;
-      *(uint *)(iVar8 + 0x270) = *(uint *)(iVar8 + 0x270) & 0xffff0000 | 0xf688;
+  if (*(char *)(inputTable + 0x290) != '\0') {
+    streamInLowHalf = !streamInLowHalf;
+    *(uint *)(programState + 0x238) =
+         (*(uint *)(programState + 0x238) & 0x7f) + 4 & 0x7f | *(uint *)(programState + 0x238) & 0xffffff80;
+    if (streamInLowHalf) {
+      streamWordAddr = descriptorWordIndex * 4 + programState;
+      *(uint *)(streamWordAddr + 0x244) = *(uint *)(streamWordAddr + 0x244) & 0xffff0000 | 0x1003;
+      *(uint *)(streamWordAddr + 0x270) = *(uint *)(streamWordAddr + 0x270) & 0xffff0000 | 0xf688;
     }
     else {
-      iVar8 = uVar7 * 4;
-      uVar7 = uVar7 + 1;
-      iVar8 = iVar8 + iVar5;
-      *(uint *)(iVar8 + 0x244) = *(uint *)(iVar8 + 0x244) & 0xffff | 0x10030000;
-      *(uint *)(iVar8 + 0x270) = *(uint *)(iVar8 + 0x270) & 0xffff | 0xf6880000;
+      streamWordOffset = descriptorWordIndex * 4;
+      descriptorWordIndex = descriptorWordIndex + 1;
+      streamWordOffset = streamWordOffset + programState;
+      *(uint *)(streamWordOffset + 0x244) = *(uint *)(streamWordOffset + 0x244) & 0xffff | 0x10030000;
+      *(uint *)(streamWordOffset + 0x270) = *(uint *)(streamWordOffset + 0x270) & 0xffff | 0xf6880000;
     }
-    iVar8 = *(int *)(iVar5 + 0x24);
-    *(int *)(iVar5 + 0x2a0) = *(int *)(iVar5 + 0x2a0) + 1;
+    inputTable = *(int *)(programState + 0x24);
+    *(int *)(programState + 0x2a0) = *(int *)(programState + 0x2a0) + 1;
   }
-  if (*(char *)(iVar8 + 0x2b8) != '\0') {
-    bVar1 = !bVar1;
-    *(uint *)(iVar5 + 0x238) =
-         (*(uint *)(iVar5 + 0x238) & 0x7f) + 4 & 0x7f | *(uint *)(iVar5 + 0x238) & 0xffffff80;
-    if (bVar1) {
-      iVar8 = uVar7 * 4 + iVar5;
-      *(uint *)(iVar8 + 0x244) = *(uint *)(iVar8 + 0x244) & 0xffff0000 | 0x1103;
-      *(uint *)(iVar8 + 0x270) = *(uint *)(iVar8 + 0x270) & 0xffff0000 | 0xf688;
+  if (*(char *)(inputTable + 0x2b8) != '\0') {
+    streamInLowHalf = !streamInLowHalf;
+    *(uint *)(programState + 0x238) =
+         (*(uint *)(programState + 0x238) & 0x7f) + 4 & 0x7f | *(uint *)(programState + 0x238) & 0xffffff80;
+    if (streamInLowHalf) {
+      streamWordAddr = descriptorWordIndex * 4 + programState;
+      *(uint *)(streamWordAddr + 0x244) = *(uint *)(streamWordAddr + 0x244) & 0xffff0000 | 0x1103;
+      *(uint *)(streamWordAddr + 0x270) = *(uint *)(streamWordAddr + 0x270) & 0xffff0000 | 0xf688;
     }
     else {
-      iVar8 = uVar7 * 4;
-      uVar7 = uVar7 + 1;
-      iVar8 = iVar8 + iVar5;
-      *(uint *)(iVar8 + 0x244) = *(uint *)(iVar8 + 0x244) & 0xffff | 0x11030000;
-      *(uint *)(iVar8 + 0x270) = *(uint *)(iVar8 + 0x270) & 0xffff | 0xf6880000;
+      streamWordOffset = descriptorWordIndex * 4;
+      descriptorWordIndex = descriptorWordIndex + 1;
+      streamWordOffset = streamWordOffset + programState;
+      *(uint *)(streamWordOffset + 0x244) = *(uint *)(streamWordOffset + 0x244) & 0xffff | 0x11030000;
+      *(uint *)(streamWordOffset + 0x270) = *(uint *)(streamWordOffset + 0x270) & 0xffff | 0xf6880000;
     }
-    iVar8 = *(int *)(iVar5 + 0x24);
-    *(int *)(iVar5 + 0x2a0) = *(int *)(iVar5 + 0x2a0) + 1;
+    inputTable = *(int *)(programState + 0x24);
+    *(int *)(programState + 0x2a0) = *(int *)(programState + 0x2a0) + 1;
   }
-  if (*(char *)(iVar8 + 0x2e0) != '\0') {
-    bVar1 = !bVar1;
-    *(uint *)(iVar5 + 0x238) =
-         (*(uint *)(iVar5 + 0x238) & 0x7f) + 4 & 0x7f | *(uint *)(iVar5 + 0x238) & 0xffffff80;
-    if (bVar1) {
-      iVar8 = uVar7 * 4 + iVar5;
-      *(uint *)(iVar8 + 0x244) = *(uint *)(iVar8 + 0x244) & 0xffff0000 | 0x1203;
-      *(uint *)(iVar8 + 0x270) = *(uint *)(iVar8 + 0x270) & 0xffff0000 | 0xf688;
+  if (*(char *)(inputTable + 0x2e0) != '\0') {
+    streamInLowHalf = !streamInLowHalf;
+    *(uint *)(programState + 0x238) =
+         (*(uint *)(programState + 0x238) & 0x7f) + 4 & 0x7f | *(uint *)(programState + 0x238) & 0xffffff80;
+    if (streamInLowHalf) {
+      streamWordAddr = descriptorWordIndex * 4 + programState;
+      *(uint *)(streamWordAddr + 0x244) = *(uint *)(streamWordAddr + 0x244) & 0xffff0000 | 0x1203;
+      *(uint *)(streamWordAddr + 0x270) = *(uint *)(streamWordAddr + 0x270) & 0xffff0000 | 0xf688;
     }
     else {
-      iVar8 = uVar7 * 4;
-      uVar7 = uVar7 + 1;
-      iVar8 = iVar8 + iVar5;
-      *(uint *)(iVar8 + 0x244) = *(uint *)(iVar8 + 0x244) & 0xffff | 0x12030000;
-      *(uint *)(iVar8 + 0x270) = *(uint *)(iVar8 + 0x270) & 0xffff | 0xf6880000;
+      streamWordOffset = descriptorWordIndex * 4;
+      descriptorWordIndex = descriptorWordIndex + 1;
+      streamWordOffset = streamWordOffset + programState;
+      *(uint *)(streamWordOffset + 0x244) = *(uint *)(streamWordOffset + 0x244) & 0xffff | 0x12030000;
+      *(uint *)(streamWordOffset + 0x270) = *(uint *)(streamWordOffset + 0x270) & 0xffff | 0xf6880000;
     }
-    iVar8 = *(int *)(iVar5 + 0x24);
-    *(int *)(iVar5 + 0x2a0) = *(int *)(iVar5 + 0x2a0) + 1;
+    inputTable = *(int *)(programState + 0x24);
+    *(int *)(programState + 0x2a0) = *(int *)(programState + 0x2a0) + 1;
   }
-  if (*(char *)(iVar8 + 0x308) != '\0') {
-    bVar1 = !bVar1;
-    *(uint *)(iVar5 + 0x238) =
-         (*(uint *)(iVar5 + 0x238) & 0x7f) + 4 & 0x7f | *(uint *)(iVar5 + 0x238) & 0xffffff80;
-    if (bVar1) {
-      iVar8 = uVar7 * 4 + iVar5;
-      *(uint *)(iVar8 + 0x244) = *(uint *)(iVar8 + 0x244) & 0xffff0000 | 0x1303;
-      *(uint *)(iVar8 + 0x270) = *(uint *)(iVar8 + 0x270) & 0xffff0000 | 0xf688;
+  if (*(char *)(inputTable + 0x308) != '\0') {
+    streamInLowHalf = !streamInLowHalf;
+    *(uint *)(programState + 0x238) =
+         (*(uint *)(programState + 0x238) & 0x7f) + 4 & 0x7f | *(uint *)(programState + 0x238) & 0xffffff80;
+    if (streamInLowHalf) {
+      streamWordAddr = descriptorWordIndex * 4 + programState;
+      *(uint *)(streamWordAddr + 0x244) = *(uint *)(streamWordAddr + 0x244) & 0xffff0000 | 0x1303;
+      *(uint *)(streamWordAddr + 0x270) = *(uint *)(streamWordAddr + 0x270) & 0xffff0000 | 0xf688;
     }
     else {
-      iVar8 = uVar7 * 4;
-      uVar7 = uVar7 + 1;
-      iVar8 = iVar8 + iVar5;
-      *(uint *)(iVar8 + 0x244) = *(uint *)(iVar8 + 0x244) & 0xffff | 0x13030000;
-      *(uint *)(iVar8 + 0x270) = *(uint *)(iVar8 + 0x270) & 0xffff | 0xf6880000;
+      streamWordOffset = descriptorWordIndex * 4;
+      descriptorWordIndex = descriptorWordIndex + 1;
+      streamWordOffset = streamWordOffset + programState;
+      *(uint *)(streamWordOffset + 0x244) = *(uint *)(streamWordOffset + 0x244) & 0xffff | 0x13030000;
+      *(uint *)(streamWordOffset + 0x270) = *(uint *)(streamWordOffset + 0x270) & 0xffff | 0xf6880000;
     }
-    iVar8 = *(int *)(iVar5 + 0x24);
-    *(int *)(iVar5 + 0x2a0) = *(int *)(iVar5 + 0x2a0) + 1;
+    inputTable = *(int *)(programState + 0x24);
+    *(int *)(programState + 0x2a0) = *(int *)(programState + 0x2a0) + 1;
   }
-  if (*(char *)(iVar8 + 0x330) != '\0') {
-    bVar1 = !bVar1;
-    *(uint *)(iVar5 + 0x238) =
-         (*(uint *)(iVar5 + 0x238) & 0x7f) + 4 & 0x7f | *(uint *)(iVar5 + 0x238) & 0xffffff80;
-    if (bVar1) {
-      iVar8 = uVar7 * 4 + iVar5;
-      *(uint *)(iVar8 + 0x244) = *(uint *)(iVar8 + 0x244) & 0xffff0000 | 0x1403;
-      *(uint *)(iVar8 + 0x270) = *(uint *)(iVar8 + 0x270) & 0xffff0000 | 0xf688;
+  if (*(char *)(inputTable + 0x330) != '\0') {
+    streamInLowHalf = !streamInLowHalf;
+    *(uint *)(programState + 0x238) =
+         (*(uint *)(programState + 0x238) & 0x7f) + 4 & 0x7f | *(uint *)(programState + 0x238) & 0xffffff80;
+    if (streamInLowHalf) {
+      streamWordAddr = descriptorWordIndex * 4 + programState;
+      *(uint *)(streamWordAddr + 0x244) = *(uint *)(streamWordAddr + 0x244) & 0xffff0000 | 0x1403;
+      *(uint *)(streamWordAddr + 0x270) = *(uint *)(streamWordAddr + 0x270) & 0xffff0000 | 0xf688;
     }
     else {
-      iVar8 = uVar7 * 4;
-      uVar7 = uVar7 + 1;
-      iVar8 = iVar8 + iVar5;
-      *(uint *)(iVar8 + 0x244) = *(uint *)(iVar8 + 0x244) & 0xffff | 0x14030000;
-      *(uint *)(iVar8 + 0x270) = *(uint *)(iVar8 + 0x270) & 0xffff | 0xf6880000;
+      streamWordOffset = descriptorWordIndex * 4;
+      descriptorWordIndex = descriptorWordIndex + 1;
+      streamWordOffset = streamWordOffset + programState;
+      *(uint *)(streamWordOffset + 0x244) = *(uint *)(streamWordOffset + 0x244) & 0xffff | 0x14030000;
+      *(uint *)(streamWordOffset + 0x270) = *(uint *)(streamWordOffset + 0x270) & 0xffff | 0xf6880000;
     }
-    iVar8 = *(int *)(iVar5 + 0x24);
-    *(int *)(iVar5 + 0x2a0) = *(int *)(iVar5 + 0x2a0) + 1;
+    inputTable = *(int *)(programState + 0x24);
+    *(int *)(programState + 0x2a0) = *(int *)(programState + 0x2a0) + 1;
   }
-  if (*(char *)(iVar8 + 0x358) == '\0') {
-    uVar6 = *(uint *)(iVar5 + 0x2a0);
+  if (*(char *)(inputTable + 0x358) == '\0') {
+    streamCount = *(uint *)(programState + 0x2a0);
   }
   else {
-    bVar1 = !bVar1;
-    *(uint *)(iVar5 + 0x238) =
-         (*(uint *)(iVar5 + 0x238) & 0x7f) + 4 & 0x7f | *(uint *)(iVar5 + 0x238) & 0xffffff80;
-    if (bVar1) {
-      iVar8 = uVar7 * 4 + iVar5;
-      *(uint *)(iVar8 + 0x244) = *(uint *)(iVar8 + 0x244) & 0xffff0000 | 0x1503;
-      *(uint *)(iVar8 + 0x270) = *(uint *)(iVar8 + 0x270) & 0xffff0000 | 0xf688;
+    streamInLowHalf = !streamInLowHalf;
+    *(uint *)(programState + 0x238) =
+         (*(uint *)(programState + 0x238) & 0x7f) + 4 & 0x7f | *(uint *)(programState + 0x238) & 0xffffff80;
+    if (streamInLowHalf) {
+      streamWordAddr = descriptorWordIndex * 4 + programState;
+      *(uint *)(streamWordAddr + 0x244) = *(uint *)(streamWordAddr + 0x244) & 0xffff0000 | 0x1503;
+      *(uint *)(streamWordAddr + 0x270) = *(uint *)(streamWordAddr + 0x270) & 0xffff0000 | 0xf688;
     }
     else {
-      iVar8 = uVar7 * 4;
-      uVar7 = uVar7 + 1;
-      iVar8 = iVar8 + iVar5;
-      *(uint *)(iVar8 + 0x244) = *(uint *)(iVar8 + 0x244) & 0xffff | 0x15030000;
-      *(uint *)(iVar8 + 0x270) = *(uint *)(iVar8 + 0x270) & 0xffff | 0xf6880000;
+      streamWordOffset = descriptorWordIndex * 4;
+      descriptorWordIndex = descriptorWordIndex + 1;
+      streamWordOffset = streamWordOffset + programState;
+      *(uint *)(streamWordOffset + 0x244) = *(uint *)(streamWordOffset + 0x244) & 0xffff | 0x15030000;
+      *(uint *)(streamWordOffset + 0x270) = *(uint *)(streamWordOffset + 0x270) & 0xffff | 0xf6880000;
     }
-    uVar6 = *(int *)(iVar5 + 0x2a0) + 1;
-    *(uint *)(iVar5 + 0x2a0) = uVar6;
+    streamCount = *(int *)(programState + 0x2a0) + 1;
+    *(uint *)(programState + 0x2a0) = streamCount;
   }
-  if (uVar6 < 2) {
-    *(uint *)(iVar5 + 0x234) = *(uint *)(iVar5 + 0x234) | 2;
-    *(uint *)(iVar5 + 0x238) =
-         (*(uint *)(iVar5 + 0x238) & 0x7f) + 4 & 0x7f | *(uint *)(iVar5 + 0x238) & 0xffffff80;
-    *(uint *)(iVar5 + 0x244) = *(uint *)(iVar5 + 0x244) & 0x2000ffff | 0x21030000;
-    *(uint *)(iVar5 + 0x2a0) = uVar6 + 1;
-    *(uint *)(iVar5 + 0x270) = *(uint *)(iVar5 + 0x270) & 0xffff | 0xf6880000;
+  if (streamCount < 2) {
+    *(uint *)(programState + 0x234) = *(uint *)(programState + 0x234) | 2;
+    *(uint *)(programState + 0x238) =
+         (*(uint *)(programState + 0x238) & 0x7f) + 4 & 0x7f | *(uint *)(programState + 0x238) & 0xffffff80;
+    *(uint *)(programState + 0x244) = *(uint *)(programState + 0x244) & 0x2000ffff | 0x21030000;
+    *(uint *)(programState + 0x2a0) = streamCount + 1;
+    *(uint *)(programState + 0x270) = *(uint *)(programState + 0x270) & 0xffff | 0xf6880000;
   }
   else {
-    if (bVar1) {
-      iVar8 = uVar7 * 4 + iVar5;
-      *(uint *)(iVar8 + 0x244) = *(uint *)(iVar8 + 0x244) | 0x2000;
+    if (streamInLowHalf) {
+      streamWordAddr = descriptorWordIndex * 4 + programState;
+      *(uint *)(streamWordAddr + 0x244) = *(uint *)(streamWordAddr + 0x244) | 0x2000;
     }
     else {
-      iVar8 = uVar7 * 4 + iVar5;
-      *(uint *)(iVar8 + 0x240) = *(uint *)(iVar8 + 0x240) | 0x20000000;
+      streamWordAddr = descriptorWordIndex * 4 + programState;
+      *(uint *)(streamWordAddr + 0x240) = *(uint *)(streamWordAddr + 0x240) | 0x20000000;
     }
-    if (0x10 < *(uint *)(iVar5 + 0x2a0)) {
+    if (0x10 < *(uint *)(programState + 0x2a0)) {
       *(undefined1 *)(shader + 4) = 0;
     }
   }
-  uVar7 = shader[0x1b];
-  if ((((uVar7 & 0xffffff) == 0) && (*(char *)(shader + 0x1c) == '\0')) &&
+  shaderOutputMask = shader[0x1b];
+  if ((((shaderOutputMask & 0xffffff) == 0) && (*(char *)(shader + 0x1c) == '\0')) &&
      (*(char *)((int)shader + 0x7a) == '\0')) {
-    iVar8 = *(int *)(iVar5 + 0x2a8);
+    totalStreamCount = *(int *)(programState + 0x2a8);
   }
   else {
-    iVar8 = *(int *)(iVar5 + 0x2a8) + 1;
-    *(uint *)(iVar5 + 0x23c) = *(uint *)(iVar5 + 0x23c) | 2;
-    *(int *)(iVar5 + 0x2a8) = iVar8;
-    uVar7 = shader[0x1b];
+    totalStreamCount = *(int *)(programState + 0x2a8) + 1;
+    *(uint *)(programState + 0x23c) = *(uint *)(programState + 0x23c) | 2;
+    *(int *)(programState + 0x2a8) = totalStreamCount;
+    shaderOutputMask = shader[0x1b];
   }
-  if ((((uVar7 & 0xffff) != 0) || (*(char *)(shader + 0x1c) != '\0')) ||
+  if ((((shaderOutputMask & 0xffff) != 0) || (*(char *)(shader + 0x1c) != '\0')) ||
      (*(char *)((int)shader + 0x7a) != '\0')) {
-    iVar8 = iVar8 + 1;
-    *(int *)(iVar5 + 0x2a8) = iVar8;
-    *(uint *)(iVar5 + 0x23c) = *(uint *)(iVar5 + 0x23c) | 4;
+    totalStreamCount = totalStreamCount + 1;
+    *(int *)(programState + 0x2a8) = totalStreamCount;
+    *(uint *)(programState + 0x23c) = *(uint *)(programState + 0x23c) | 4;
   }
   if ((*(char *)((int)shader + 0x6f) != '\0') || (*(char *)(shader + 0x1c) != '\0')) {
-    iVar8 = iVar8 + 2;
-    *(int *)(iVar5 + 0x2a8) = iVar8;
-    *(uint *)(iVar5 + 0x23c) = *(uint *)(iVar5 + 0x23c) | 0x18;
+    totalStreamCount = totalStreamCount + 2;
+    *(int *)(programState + 0x2a8) = totalStreamCount;
+    *(uint *)(programState + 0x23c) = *(uint *)(programState + 0x23c) | 0x18;
   }
   if (*(char *)((int)shader + 0x79) != '\0') {
-    iVar8 = iVar8 + 1;
-    *(int *)(iVar5 + 0x2a8) = iVar8;
-    *(uint *)(iVar5 + 0x23c) = *(uint *)(iVar5 + 0x23c) | 0x10000;
+    totalStreamCount = totalStreamCount + 1;
+    *(int *)(programState + 0x2a8) = totalStreamCount;
+    *(uint *)(programState + 0x23c) = *(uint *)(programState + 0x23c) | 0x10000;
   }
-  uVar7 = 0;
-  iVar9 = 8;
+  fieldShift = 0;
+  outputsLeft = 8;
   do {
-    bVar2 = *(byte *)((int)shader + 0x71);
-    if (bVar2 != 0) {
-      iVar4 = 4;
-      if ((bVar2 & 8) == 0) {
-        iVar4 = 3 - (uint)((bVar2 & 4) == 0);
+    outputFlags = *(byte *)((int)shader + 0x71);
+    if (outputFlags != 0) {
+      componentCount = 4;
+      if ((outputFlags & 8) == 0) {
+        componentCount = 3 - (uint)((outputFlags & 4) == 0);
       }
-      uVar6 = iVar4 << (uVar7 & 0x3f);
-      iVar8 = iVar8 + 1;
-      *(int *)(iVar5 + 0x2a8) = iVar8;
-      *(uint *)(iVar5 + 0x240) = uVar6 | *(uint *)(iVar5 + 0x240);
-      *(uint *)(iVar5 + 0x29c) = uVar6 | *(uint *)(iVar5 + 0x29c);
+      fieldValue = componentCount << (fieldShift & 0x3f);
+      totalStreamCount = totalStreamCount + 1;
+      *(int *)(programState + 0x2a8) = totalStreamCount;
+      *(uint *)(programState + 0x240) = fieldValue | *(uint *)(programState + 0x240);
+      *(uint *)(programState + 0x29c) = fieldValue | *(uint *)(programState + 0x29c);
     }
     shader = (int *)((int)shader + 1);
-    uVar7 = uVar7 + 3;
-    iVar9 = iVar9 + -1;
-  } while (iVar9 != 0);
-  if (iVar8 == 1) {
-    *(undefined4 *)(iVar5 + 0x2a8) = 2;
-    *(uint *)(iVar5 + 0x240) = *(uint *)(iVar5 + 0x240) & 0xff1fffff | 0x800000;
-    *(uint *)(iVar5 + 0x29c) = *(uint *)(iVar5 + 0x29c) & 0xff1fffff | 0x800000;
+    fieldShift = fieldShift + 3;
+    outputsLeft = outputsLeft + -1;
+  } while (outputsLeft != 0);
+  if (totalStreamCount == 1) {
+    *(undefined4 *)(programState + 0x2a8) = 2;
+    *(uint *)(programState + 0x240) = *(uint *)(programState + 0x240) & 0xff1fffff | 0x800000;
+    *(uint *)(programState + 0x29c) = *(uint *)(programState + 0x29c) & 0xff1fffff | 0x800000;
     return;
   }
   return;
