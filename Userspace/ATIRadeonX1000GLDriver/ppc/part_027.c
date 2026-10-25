@@ -601,7 +601,7 @@ int Inst__isBeforeOrSame(instA, instB)
   undefined4 blockOrder;
   
   if (*(int *)(instA + 0x158) != *(int *)(instB + 0x158)) {
-    blockOrder = FUN_000e78f8(*(int *)(instA + 0x158),*(int *)(instB + 0x158));
+    blockOrder = Block__isAncestorOf(*(int *)(instA + 0x158),*(int *)(instB + 0x158));
     return blockOrder;
   }
   if (instA != instB) {

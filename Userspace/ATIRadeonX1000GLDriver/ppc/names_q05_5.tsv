@@ -1301,3 +1301,96 @@ use	FUN_000fd5c8	uVar50	arenaA	INFERRED	role read off the defining expressions o
 use	FUN_000fd5c8	uVar50	arenaA	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*puVar32\ =\ \(undefined4\ \*\)FUN_00193e18\(uVar50,0x138\);$@2	+2
 use	FUN_000fd5c8	uVar50	arenaA	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*uVar50\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x374\);$@3	+3
 use	FUN_000fd5c8	uVar50	arenaA	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*uVar50\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x374\);$@4	+3
+func	FUN_000ec258	Program__interpSlotOfIlType	INFERRED	table lookup (PTR_DAT_001e8b5c[index]): first step of the attribute -> interpolator lane kind mapping used with IRLoadInterp__setLaneKindAndIndex
+func	FUN_000ec2a0	Program__laneKindOfInterpSlot	INFERRED	table lookup (PTR_DAT_001e8b6c[index]): second step of the attribute -> interpolator lane kind mapping (always applied to the result of Program__interpSlotOfIlType)
+func	FUN_000ec27c	Program__lookupTable8b68	INFERRED	table lookup PTR_DAT_001e8b68[index] (IL type indexed)
+func	FUN_000e79e8	Block__hasSuccessors	INFERRED	the successor vector at +0xd0 has a non-zero count
+func	FUN_000ec5b8	Program__getBlocksArray	INFERRED	lazily builds, caches at program+0x398 and returns an array of the block pointers of the block list at +0x37c (first element plus the list in reverse)
+func	FUN_000e78c0	Block__setField0xb8AndChildren	INFERRED	stores a value in block+0xb8 and in the blocks referenced at +0x134/+0x138/+0x13c
+func	FUN_000f33f8	SelectWord__fillUnusedWithFirstUsed	INFERRED	replaces every unused lane (value 4) of a select word by the first used lane value; all-unused words are copied unchanged
+func	FUN_000f302c	SelectWord__markEqualLanes	INFERRED	lanes of the first select word that equal the same lane of the second (and are neither 2 nor 3) become 1
+func	FUN_000f2f28	SelectWord__markLanesWhereSecondIsOne	INFERRED	lanes of the first select word not in {2,3} become 1 where the second select word has 1
+func	FUN_000f36b8	WriteMask__fromUsedLanes	INFERRED	mask word from a select word: a lane byte stays enabled only where the select word lane is not 4 (unused)
+func	FUN_000ec370	Program__insertBlockBefore	INFERRED	inserts node before ref in the block list, stores the program in node+0xac and frees the work arrays (counterpart of Program__insertBlockAfter)
+local	Program__interpSlotOfIlType	param_1	program	INFERRED	Program (unused)
+local	Program__interpSlotOfIlType	param_2	ilType	INFERRED	IL register type / attribute number indexing the table
+local	Program__laneKindOfInterpSlot	param_1	program	INFERRED	Program (unused)
+local	Program__laneKindOfInterpSlot	param_2	interpSlot	INFERRED	result of Program__interpSlotOfIlType
+local	Program__lookupTable8b68	param_2	ilType	INFERRED	index into PTR_DAT_001e8b68
+local	Block__hasSuccessors	param_1	block	INFERRED	block whose successor vector (+0xd0) is tested
+local	Program__getBlocksArray	param_1	program	INFERRED	Program owning the block list
+local	Block__setField0xb8AndChildren	param_1	block	INFERRED	block to update
+local	Block__setField0xb8AndChildren	param_2	value	INFERRED	value stored in +0xb8
+local	SelectWord__fillUnusedWithFirstUsed	param_1	result	INFERRED	output select word
+local	SelectWord__fillUnusedWithFirstUsed	param_2	selectWord	INFERRED	input select word (lane bytes 0-3, 4 = unused)
+local	SelectWord__markEqualLanes	param_1	result	INFERRED	output select word
+local	SelectWord__markEqualLanes	param_2	selectWordA	INFERRED	first select word
+local	SelectWord__markEqualLanes	param_3	selectWordB	INFERRED	second select word
+local	SelectWord__markLanesWhereSecondIsOne	param_1	result	INFERRED	output select word
+local	SelectWord__markLanesWhereSecondIsOne	param_2	selectWordA	INFERRED	first select word
+local	SelectWord__markLanesWhereSecondIsOne	param_3	selectWordB	INFERRED	second select word
+local	WriteMask__fromUsedLanes	param_1	result	INFERRED	output mask word
+local	WriteMask__fromUsedLanes	param_2	selectWord	INFERRED	input select word
+local	Program__insertBlockBefore	param_3	node	INFERRED	block being inserted
+func	FUN_000e1b70	Compiler__setHardwareFamily	INFERRED	releases the current hardware description (+0x30c) and builds the chip object for the family: 1-3 = KhanChip (2 also patches its table at +0x1740), 4 = FudoChip; stored at +0x310
+func	FUN_000e1888	Compiler__resetState	INFERRED	zeroes the per-compiler counters and 0x14-entry tables, runs FUN_000e180c for 0..2, allocates the 0x2000-byte buffer at +0x3a0 from the pool at +0x370 and re-initialises through FUN_000e0850
+func	FUN_000e1fe4	Compiler__releaseChipAndPools	INFERRED	destroys the chip object (+0x310) when requested and frees the three pool lists at +0x370 with the free callback at +0x34c
+func	FUN_000e8d5c	Block__appendPredecessor	INFERRED	pushes a block on the predecessor vector at +0xd4
+func	FUN_000e8dd4	Block__appendSuccessor	INFERRED	pushes a block on the successor vector at +0xd0
+func	FUN_000e8938	Block__createEntryExitInsts	INFERRED	creates the IREntry (first, +0xc8) and IRExit (last, +0xcc) instructions of a block in arena A and links them into the instruction list at +0x90
+func	FUN_000e78f8	Block__isAncestorOf	INFERRED	walks the parent chain (+0xf0) of param_2 and reports whether param_1 is on it
+func	FUN_000e2f8c	IRInst__lastSourceKeyEquals	INFERRED	compares the hardware key of the instruction's last source (thunk_FUN_00134de8 on the table at compiler+0x6c4) with a value
+func	FUN_000f8a30	IRInst__literalForLane	INFERRED	constant for one lane of a packed source: select 4 = 0.0 and 5 = 1.0 (mask byte 0), else mask byte 1 and the select byte comes from the table PTR_DAT_001e8bb8
+func	FUN_000f4698	IRInst__maskUnusedLanesOfOperand	INFERRED	removes the lanes of the operand's select word that the destination does not use (FUN_000f3c30 gives the used lanes, SelectWord__maskUnused applies them); operand 0 updates inst+0x9c
+func	FUN_000ef8f8	Program__appendToVector3c8	INFERRED	pushes a value on the growable vector at program+0x3c8
+local	Compiler__setHardwareFamily	param_2	chipFamily	INFERRED	hardware family: 1-3 Khan, 4 Fudo
+local	Compiler__resetState	param_1	compiler	INFERRED	Compiler object being reset
+local	Compiler__releaseChipAndPools	param_1	compiler	INFERRED	Compiler object being torn down
+local	Compiler__releaseChipAndPools	param_2	releaseChip	INFERRED	non-zero: also destroy the chip object at +0x310
+local	Block__appendPredecessor	param_1	block	INFERRED	block that receives the predecessor
+local	Block__appendPredecessor	param_2	predecessor	INFERRED	block pushed on the vector
+local	Block__appendSuccessor	param_1	block	INFERRED	block that receives the successor
+local	Block__appendSuccessor	param_2	successor	INFERRED	block pushed on the vector
+local	Block__isAncestorOf	param_1	ancestor	INFERRED	block searched on the parent chain
+local	Block__isAncestorOf	param_2	block	INFERRED	block whose parent chain (+0xf0) is walked
+local	IRInst__lastSourceKeyEquals	param_2	key	INFERRED	value compared with the hardware key of the last source
+local	IRInst__lastSourceKeyEquals	param_3	compiler	INFERRED	compiler (+0x6c4 holds the key table)
+local	IRInst__literalForLane	param_1	sourceSelect	INFERRED	source select of the lane (4 = zero, 5 = one, 0-3 = a real lane)
+local	IRInst__literalForLane	param_2	lane	INFERRED	lane number (index into the mask / select byte arrays)
+local	IRInst__literalForLane	param_3	literalMask	INFERRED	output byte array: 1 where the lane is not a literal
+local	IRInst__literalForLane	param_4	selectBytes	INFERRED	output byte array: select value for the lane
+local	IRInst__maskUnusedLanesOfOperand	param_3	program	INFERRED	Program (passed to FUN_000f3c30)
+local	Program__appendToVector3c8	param_1	program	INFERRED	Program owning the vector at +0x3c8
+local	Program__appendToVector3c8	param_2	value	INFERRED	value pushed
+func	FUN_000f7870	IRInst__setIntConstantOperand4	INFERRED	forwards to IRInst__setConstantOperand with four constant operands of kind 3 whose value words are param_4..param_7 (the remaining record words are uninitialised stack)
+func	FUN_000ed63c	IRInst__bindOperandRegisters	INFERRED	creates / looks up the virtual registers named by the destination fields (+0x94/+0x98) and by each source slot (+0xac/+0xb0, stride 0x18) and attaches them as operand refs, with uses recorded
+func	FUN_000e3968	IRInst__createMovForDest	INFERRED	creates an IRMov (opcode 0x31) that copies source inst2 into the destination register of inst, merging the lanes written along the chain of appended sources
+local	IRInst__setIntConstantOperand4	param_1	inst	INFERRED	instruction that receives the constant operand
+local	IRInst__setIntConstantOperand4	param_2	program	INFERRED	Program
+local	IRInst__setIntConstantOperand4	param_3	operandIndex	INFERRED	operand number
+local	IRInst__setIntConstantOperand4	param_4	value0	INFERRED	value word of the first constant operand (kind 3)
+local	IRInst__setIntConstantOperand4	param_5	value1	INFERRED	value word of the second constant operand (kind 3)
+local	IRInst__setIntConstantOperand4	param_6	value2	INFERRED	value word of the third constant operand (kind 3)
+local	IRInst__setIntConstantOperand4	param_7	value3	INFERRED	value word of the fourth constant operand (kind 3)
+local	IRInst__bindOperandRegisters	param_1	program	INFERRED	Program (+0x3ac register map, +0x30 flags)
+func	FUN_000f6a04	Program__findOrCreateConstInst	INFERRED	looks the four constant words up in the constant instructions kept in the register map's list (+0x18): reuses a matching one (same key at +0x12c, equal lane words) or creates an IRLoadConst / register-map constant, remembers it and records the lane words
+func	FUN_000f57f0	RegisterMap__findConstVector	INFERRED	scans the constant instructions of the register map (count [7], vector [8]) for one that holds all four requested float values in its used lanes, rewrites the lane select bytes accordingly and returns it (0 when none fits)
+local	Program__findOrCreateConstInst	param_1	program	INFERRED	Program (+8 compiler, +0x3ac register map, +0x30 flags)
+local	Program__findOrCreateConstInst	param_2	constWords	INFERRED	four constant words to look up
+local	Program__findOrCreateConstInst	param_3	selectWord	INFERRED	lane select word; lanes with value 4 are ignored
+local	RegisterMap__findConstVector	param_1	registerMap	INFERRED	register map (*param_1 is the compiler, [7]/[8] the constant instruction list)
+local	RegisterMap__findConstVector	param_2	values	INFERRED	four float values to find
+local	RegisterMap__findConstVector	param_3	selectBytes	INFERRED	four lane select bytes (4 = unused), updated in place
+local	RegisterMap__findConstVector	param_4	unusedArg	INFERRED	not used by the function
+func	FUN_000f3c30	IRInst__computeSourceLaneMask	INFERRED	fills a 4-byte lane mask for source operandIndex of inst from the opcode's result mode (OpcodeInfo__getResultMode) and the operand kind; returns the mask pointer
+func	FUN_000f5f94	RegisterMap__findConstVectorExact	INFERRED	scans the constant instructions of a register map (count +0x1c, vector +0x20) for one whose selected lanes already hold the four requested floats; sets inst+0x9c and returns it, 0 otherwise
+func	FUN_000f5a0c	IRInst__canFoldConstantSource	INFERRED	true when source operandIndex of inst is a constant (kind 2, 0xc or 0x33) whose used lanes are all encodable as hardware constants (hardware description virtual slot 0xf0), honouring the negate flag
+func	FUN_000ecc1c	IRInst__isForwardable	INFERRED	true when inst (or, through a copy, its source) has a single use, is accepted by the hardware description (virtual slot 0x44) and sits in a block with flag 8, and the select word is the identity or foldable
+local	IRInst__computeSourceLaneMask	param_1	laneMask	INFERRED	4-byte output: lane i is 1 when lane i of the source is read
+local	IRInst__computeSourceLaneMask	param_4	program	INFERRED	Program (+0x78 register record table)
+local	IRInst__computeSourceLaneMask	param_5	destSelectWord	INFERRED	select word of the destination operand
+local	RegisterMap__findConstVectorExact	param_1	registerMap	INFERRED	register map holding the constant instruction list
+local	RegisterMap__findConstVectorExact	param_2	values	INFERRED	four float values
+local	RegisterMap__findConstVectorExact	param_3	selectBytes	INFERRED	four lane select bytes (4 = unused)
+local	IRInst__canFoldConstantSource	param_4	program	INFERRED	Program (+8 compiler)
+local	IRInst__isForwardable	param_2	selectWord	INFERRED	select word of the use

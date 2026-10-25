@@ -1786,7 +1786,7 @@ LAB_001499ec:
                  (iVar2 = IRInst__hasSingleUse(inst1,program), iVar2 != 0)) &&
                 (iVar2 = OpcodeTraits__flagBit9(*(undefined4 *)(inst1[0x22] + 8),*(undefined4 *)(program + 8)
                                      ), iVar2 == 0)))) {
-              FUN_000f36b8(local_38,local_4c);
+              WriteMask__fromUsedLanes(local_38,local_4c);
               local_64 = local_38[0];
               operandRecord2 = IRInst__getOperandRecord(inst,1);
               iVar2 = *(int *)(operandRecord2 + 0x10);
@@ -6091,10 +6091,10 @@ int FUN_00151370(inst, inst2, param_3)
         operandRecord = IRInst__getOperandRecord(inst,0);
         operandSelectC = *(undefined4 *)(operandRecord + 0x10);
         operandRecord = IRInst__getOperandRecord(inst,inst[0x21]);
-        FUN_000f36b8(&local_58,*(undefined4 *)(operandRecord + 0x10));
+        WriteMask__fromUsedLanes(&local_58,*(undefined4 *)(operandRecord + 0x10));
         local_c4 = local_58;
         operandRecord = IRInst__getOperandRecord(inst2,0);
-        FUN_000f2f28(&local_54,local_58,*(undefined4 *)(operandRecord + 0x10));
+        SelectWord__markLanesWhereSecondIsOne(&local_54,local_58,*(undefined4 *)(operandRecord + 0x10));
         iVar4 = 0;
         local_c4 = local_54;
         countdownB = 4;
@@ -6383,7 +6383,7 @@ int FUN_00151a74(inst, inst2, program)
               SelectWord__mergeWrittenLanes(&local_68,operandSelectC,operandSelectD);
               local_b8 = local_68;
               operandRecord = IRInst__getOperandRecord(inst3,0);
-              FUN_000f302c(auStack_64,*(undefined4 *)(operandRecord + 0x10),local_b8);
+              SelectWord__markEqualLanes(auStack_64,*(undefined4 *)(operandRecord + 0x10),local_b8);
               SelectWord__mergeWrittenLanes(local_60,iVar2,local_b8);
               local_b8 = local_60[0];
               sourceDef = IRInst__getOperandSource(inst2,1);
@@ -7036,10 +7036,10 @@ int FUN_00152ea8(inst, inst2, program)
       operandRecord = IRInst__getOperandRecord(inst,0);
       destSelectA = *(int *)(operandRecord + 0x10);
       operandRecord = IRInst__getOperandRecord(inst,inst[0x21]);
-      FUN_000f36b8(&readSelectOut,*(undefined4 *)(operandRecord + 0x10));
+      WriteMask__fromUsedLanes(&readSelectOut,*(undefined4 *)(operandRecord + 0x10));
       destSelectB = readSelectOut;
       operandRecord = IRInst__getOperandRecord(inst2,0);
-      FUN_000f2f28(&selectWhereOut,readSelectOut,*(undefined4 *)(operandRecord + 0x10));
+      SelectWord__markLanesWhereSecondIsOne(&selectWhereOut,readSelectOut,*(undefined4 *)(operandRecord + 0x10));
       checkIndex = 0;
       destSelectB = selectWhereOut;
       checkCountdown = 4;

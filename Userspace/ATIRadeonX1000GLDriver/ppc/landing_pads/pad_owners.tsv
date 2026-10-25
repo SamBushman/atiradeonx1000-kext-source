@@ -6,8 +6,8 @@
 0xda578	FUN_000da4b8
 0xe1a08	FUN_000e1920
 0xe1b30	FUN_000e1a48
-0xe1bf0	FUN_000e1b70
-0xe1c20	FUN_000e1b70
+0xe1bf0	Compiler__setHardwareFamily
+0xe1c20	Compiler__setHardwareFamily
 0xe21b8	FUN_000e2094
 0xe21cc	FUN_000e2094
 0xe34c8	FUN_000e33cc
@@ -24,7 +24,7 @@
 0xe5cf4	ILReader__ctor_e59f0
 0xe5df0	ILReader__ctor_e59f0
 0xe5e0c	ILReader__ctor_e59f0
-0xe89bc	FUN_000e8938
+0xe89bc	Block__createEntryExitInsts
 0xe8ad4	FUN_000e8a08
 0xe8b20	FUN_000e8a08
 0xe8b6c	FUN_000e8a08
@@ -109,7 +109,7 @@
 0xf2984	FUN_000f1d7c
 0xf29b8	FUN_000f1d7c
 0xf513c	Compiler__getOrCreateLoadConstN
-0xf6c50	FUN_000f6a04
+0xf6c50	Program__findOrCreateConstInst
 0xf8258	FUN_000f816c
 0xf8430	FUN_000f83cc
 0xf8908	FUN_000f88b4

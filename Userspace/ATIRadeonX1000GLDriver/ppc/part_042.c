@@ -205,7 +205,7 @@ int FUN_001396d0(param_1, inst, operandIndex, param_4)
     vcall14Result = (**(code **)(*inst + 0x14))(inst);
     uVar3 = 0x1010101;
     if (operandIndex <= vcall14Result) {
-      FUN_000f3c30(&local_34,inst,operandIndex,param_4,local_38);
+      IRInst__computeSourceLaneMask(&local_34,inst,operandIndex,param_4,local_38);
       uVar3 = local_34;
     }
     SelectWord__selectWhereMasked(local_30,0,uVar3);
@@ -1568,7 +1568,7 @@ code_r0x0013b658:
   if (piVar12 == (int *)piVar20[0x4e]) {
     piVar20[0x4e] = (int)piVar22;
   }
-  FUN_000ec370(param_1,piVar12,piVar22);
+  Program__insertBlockBefore(param_1,piVar12,piVar22);
   FUN_000e977c(piVar20,piVar12,piVar22);
   Block__connect(piVar22,piVar12);
   piVar19 = (int *)piVar20[0x4f];
@@ -3144,7 +3144,7 @@ LAB_0013dcf0:
                           vec2Capacity = DAT_001b0020;
                           operandLimit = (**(code **)(*inst + 0x14))(inst);
                           if (operandIndex <= operandLimit) {
-                            FUN_000f3c30(&operandSelectOutA,inst,operandIndex,program,destSelectWord);
+                            IRInst__computeSourceLaneMask(&operandSelectOutA,inst,operandIndex,program,destSelectWord);
                             identitySelectB = DAT_001b0000;
                             vec2Capacity = operandSelectOutA;
                             savedScratchWord = vec2Capacity;
@@ -3183,7 +3183,7 @@ LAB_0013dcf0:
                         sourceInst = (int *)IRInst__getOperandSource(inst,operandIndex);
                         operandLimit = (**(code **)(*inst + 0x14))(inst);
                         if (operandIndex <= operandLimit) {
-                          FUN_000f3c30(&operandSelectOutB,inst,operandIndex,program,destSelectWord);
+                          IRInst__computeSourceLaneMask(&operandSelectOutB,inst,operandIndex,program,destSelectWord);
                           operandSelectWord = operandSelectOutB;
                         }
                         hasSpecialSource = ((int (*)())FUN_001396d0)(*(undefined4 *)(program + PROG_compiler),inst,operandIndex,program);
@@ -7296,7 +7296,7 @@ LAB_00144264:
       puVar11 = *(undefined4 **)(piVar20[0x34] + 8);
     }
     piVar21 = (int *)*puVar11;
-    iVar27 = FUN_000e78f8(piVar21,piVar20[0x54]);
+    iVar27 = Block__isAncestorOf(piVar21,piVar20[0x54]);
     if (iVar27 == 0) {
       puVar11 = (undefined4 *)0x0;
       if (1 < *(uint *)(piVar20[0x34] + 4)) {

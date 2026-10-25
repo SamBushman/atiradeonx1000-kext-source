@@ -352,7 +352,7 @@ int KhanPs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwi
     } while (lanesLeft != 0);
     laneSwizzleArg = laneSwizzle;
     if (isUniform == 0) {
-      existingConstant = FUN_000f6a04(program,constants,*laneSwizzle);
+      existingConstant = Program__findOrCreateConstInst(program,constants,*laneSwizzle);
     }
     else {
       pcVar5 = "";
@@ -372,13 +372,13 @@ int KhanPs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwi
         byteOffset = byteOffset + 4;
         lanesLeft2 = lanesLeft2 + -1;
       } while (lanesLeft2 != 0);
-      existingConstant = FUN_000f6a04(program,&constVec0,0x10203);
+      existingConstant = Program__findOrCreateConstInst(program,&constVec0,0x10203);
     }
     if (existingConstant != 0) {
       return existingConstant;
     }
     constantPool = *(undefined4 *)(program + 0x3ac);
-    foundConstant = FUN_000f5f94(constantPool,constants,laneSwizzle,laneSwizzleArg,pcVar5,isUniform,pdVar7);
+    foundConstant = RegisterMap__findConstVectorExact(constantPool,constants,laneSwizzle,laneSwizzleArg,pcVar5,isUniform,pdVar7);
     if (foundConstant != 0) {
       return foundConstant;
     }
@@ -389,7 +389,7 @@ int KhanPs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwi
       foundExact = FUN_000f5248(constantPool,constVec0,constVec1,constVec2,constVec3,constVec4,constVec5,constVec6);
       return foundExact;
     }
-    candidate = FUN_000f57f0(constantPool,constants,laneSwizzle,laneSwizzleArg);
+    candidate = RegisterMap__findConstVector(constantPool,constants,laneSwizzle,laneSwizzleArg);
     if ((candidate != 0) && (acceptsSwizzle = (**(code **)(*this + 0x100))(this,laneSwizzle), acceptsSwizzle != 0)) {
       return candidate;
     }
@@ -508,7 +508,7 @@ int KhanPs__vslot9_createCompareInst(this, compareKind, srcRegA, srcSwizzleA, sr
             IROperand__setModifierBits(callResult + 0xa4,1,0);
             compareCondition = *(int *)(PTR_DAT_001e90f8 + compareCondition * 4);
           }
-          FUN_000f7870(callResult,program,2,0,0,0,0);
+          IRInst__setIntConstantOperand4(callResult,program,2,0,0,0,0);
         }
       }
     }
@@ -1452,7 +1452,7 @@ int KhanVs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwi
     } while (lanesLeft != 0);
     laneSwizzleArg = laneSwizzle;
     if (isUniform == 0) {
-      existingConstant = FUN_000f6a04(program,constants,*laneSwizzle);
+      existingConstant = Program__findOrCreateConstInst(program,constants,*laneSwizzle);
     }
     else {
       pcVar5 = "";
@@ -1472,17 +1472,17 @@ int KhanVs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwi
         byteOffset = byteOffset + 4;
         lanesLeft2 = lanesLeft2 + -1;
       } while (lanesLeft2 != 0);
-      existingConstant = FUN_000f6a04(program,&uniformVec0,0x10203);
+      existingConstant = Program__findOrCreateConstInst(program,&uniformVec0,0x10203);
     }
     if (existingConstant != 0) {
       return existingConstant;
     }
     constantPool = *(undefined4 *)(program + 0x3ac);
-    foundConstant = FUN_000f5f94(constantPool,constants,laneSwizzle,laneSwizzleArg,pcVar5,isUniform,pdVar7);
+    foundConstant = RegisterMap__findConstVectorExact(constantPool,constants,laneSwizzle,laneSwizzleArg,pcVar5,isUniform,pdVar7);
     if (foundConstant != 0) {
       return foundConstant;
     }
-    candidate = FUN_000f57f0(constantPool,constants,laneSwizzle,laneSwizzleArg);
+    candidate = RegisterMap__findConstVector(constantPool,constants,laneSwizzle,laneSwizzleArg);
     if (candidate != 0) {
       return candidate;
     }
@@ -2091,7 +2091,7 @@ int FUN_0012aef0(param_1, param_2, block)
   iVar1 = Block__isSimple(param_2);
   if ((((iVar1 == 0) || (iVar1 = Block__isSimple(block), iVar1 == 0)) ||
       (iVar1 = Block__successorCount(param_2), iVar1 != 1)) ||
-     ((iVar1 = Block__predecessorCount(block), iVar1 != 1 || (iVar1 = FUN_000e79e8(block), iVar1 == 0)))) {
+     ((iVar1 = Block__predecessorCount(block), iVar1 != 1 || (iVar1 = Block__hasSuccessors(block), iVar1 == 0)))) {
     uVar2 = 0;
   }
   else {
@@ -2213,7 +2213,7 @@ int FUN_0012b248(param_1, block, param_3)
   *(undefined4 *)(operandRecord + 0xc) = 0;
   *(int *)(operandRecord + 8) = iVar4;
   IRInst__setOperandRef(inst,1,uVar3);
-  FUN_000ed63c(param_3,inst);
+  IRInst__bindOperandRegisters(param_3,inst);
   Block__appendInst(block,inst);
   return iVar4;
 }
@@ -2235,7 +2235,7 @@ int FUN_0012b2d8(param_1, block, param_3, param_4)
   *(undefined4 *)(operandRecord + 0xc) = 0;
   *(undefined4 *)(operandRecord + 8) = param_3;
   IRInst__setOperandRef(callResult,1,uVar3);
-  FUN_000ed63c(param_4,callResult);
+  IRInst__bindOperandRegisters(param_4,callResult);
   Block__appendInst(block,callResult);
   return callResult;
 }
