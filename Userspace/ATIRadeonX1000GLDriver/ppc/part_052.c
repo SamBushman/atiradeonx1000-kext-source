@@ -194,6 +194,7 @@ int R300MachineAssembler__setOutputDestination(this, writeRgb, writeAlpha, inst)
   int writeAlpha;
   int inst;
 {
+  int operandRecord;
   int destRegister;
   int iVar1;
   undefined1 writeMask;
@@ -217,8 +218,8 @@ int R300MachineAssembler__setOutputDestination(this, writeRgb, writeAlpha, inst)
     *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58) + 0x16) = outputIndex;
     iVar3 = *(int *)(this + 0x60);
     iVar4 = *(int *)(this + 0x58);
-    iVar1 = IRInst__getOperandRecord(inst,0);
-    writeMask = lanesToRgbMask(*(undefined4 *)(iVar1 + 0x10));
+    operandRecord = IRInst__getOperandRecord(inst,0);
+    writeMask = lanesToRgbMask(*(undefined4 *)(operandRecord + 0x10));
     *(undefined1 *)(iVar3 * 0x48 + iVar4 + 0x15) = writeMask;
   }
   if (writeAlpha != 0) {
@@ -276,7 +277,7 @@ int R300MachineAssembler__assembleAluInstruction(this, irInst)
   int *a4;
   uint loopIndex3;
   int *srcIdx;
-  int *piVar23;
+  int *sourceDef3;
   undefined4 allocTable;
   int *piVar25;
   byte in_xer_so = 0;
@@ -757,16 +758,16 @@ LAB_00199fdc:
           }
           if (loopRemaining < 2) {
             if (loopRemaining != 1) goto LAB_0019a030;
-            piVar23 = (int *)IRInst__getOperandSource(a0,1);
-            if ((((piVar23[0x20] == 0) || (loopRemaining = RegKind__flagBit0(piVar23[0x26]), loopRemaining == 0)) ||
-                ((piVar23[5] & 2U) != 0)) ||
-               (loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining != 0)) {
-              piVar23 = (int *)IRInst__getOperandSource(a0,1);
-              loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23);
+            sourceDef3 = (int *)IRInst__getOperandSource(a0,1);
+            if ((((sourceDef3[0x20] == 0) || (loopRemaining = RegKind__flagBit0(sourceDef3[0x26]), loopRemaining == 0)) ||
+                ((sourceDef3[5] & 2U) != 0)) ||
+               (loopRemaining = (**(code **)(*sourceDef3 + 0x50))(sourceDef3), loopRemaining != 0)) {
+              sourceDef3 = (int *)IRInst__getOperandSource(a0,1);
+              loopRemaining = (**(code **)(*sourceDef3 + 0x50))(sourceDef3);
               if (loopRemaining != 0) goto LAB_001994a8;
-              piVar23 = (int *)IRInst__getOperandSource(a0,1);
+              sourceDef3 = (int *)IRInst__getOperandSource(a0,1);
               iVar13 = 0;
-              loopRemaining = (**(code **)(*piVar23 + 0x48))(piVar23);
+              loopRemaining = (**(code **)(*sourceDef3 + 0x48))(sourceDef3);
               if (loopRemaining != 0) {
                 loopRemaining = IRInst__getOperandSource(a0,1);
                 registerIndex = *(undefined4 *)(loopRemaining + 0x94);
@@ -785,14 +786,14 @@ LAB_001994a8:
               loopRemaining = IRInst__getOperandSource(a0,1);
               if ((((((loopRemaining != this[7]) && (loopRemaining = IRInst__getOperandSource(a0,1), loopRemaining != 0)) &&
                     ((this[7] != 0 &&
-                     ((piVar23 = (int *)IRInst__getOperandSource(a0,1), piVar23[0x20] != 0 &&
-                      (loopRemaining = RegKind__flagBit0(piVar23[0x26]), loopRemaining != 0)))))) &&
-                   ((piVar23[5] & 2U) == 0)) &&
-                  (((loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining == 0 &&
-                    (piVar23 = (int *)this[7], piVar23[0x20] != 0)) &&
-                   (loopRemaining = RegKind__flagBit0(piVar23[0x26]), loopRemaining != 0)))) &&
-                 ((((piVar23[5] & 2U) == 0 &&
-                   (loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining == 0)) &&
+                     ((sourceDef3 = (int *)IRInst__getOperandSource(a0,1), sourceDef3[0x20] != 0 &&
+                      (loopRemaining = RegKind__flagBit0(sourceDef3[0x26]), loopRemaining != 0)))))) &&
+                   ((sourceDef3[5] & 2U) == 0)) &&
+                  (((loopRemaining = (**(code **)(*sourceDef3 + 0x50))(sourceDef3), loopRemaining == 0 &&
+                    (sourceDef3 = (int *)this[7], sourceDef3[0x20] != 0)) &&
+                   (loopRemaining = RegKind__flagBit0(sourceDef3[0x26]), loopRemaining != 0)))) &&
+                 ((((sourceDef3[5] & 2U) == 0 &&
+                   (loopRemaining = (**(code **)(*sourceDef3 + 0x50))(sourceDef3), loopRemaining == 0)) &&
                   ((loopRemaining = IRInst__getOperandSource(a0,1), (*(uint *)(loopRemaining + 0x14) & 0x40) != 0 &&
                    ((*(uint *)(this[7] + 0x14) & 0x40) != 0)))))) {
                 IRInst__getOperandSource(a0,1);
@@ -803,14 +804,14 @@ LAB_001994a8:
               loopRemaining = IRInst__getOperandSource(a0,1);
               if (((((loopRemaining != this[10]) && (loopRemaining = IRInst__getOperandSource(a0,1), loopRemaining != 0)) &&
                    ((this[10] != 0 &&
-                    (((piVar23 = (int *)IRInst__getOperandSource(a0,1), piVar23[0x20] != 0 &&
-                      (loopRemaining = RegKind__flagBit0(piVar23[0x26]), loopRemaining != 0)) &&
-                     ((piVar23[5] & 2U) == 0)))))) &&
-                  ((loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining == 0 &&
-                   (piVar23 = (int *)this[10], piVar23[0x20] != 0)))) &&
-                 ((loopRemaining = RegKind__flagBit0(piVar23[0x26]), loopRemaining != 0 &&
-                  ((((piVar23[5] & 2U) == 0 &&
-                    (loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining == 0)) &&
+                    (((sourceDef3 = (int *)IRInst__getOperandSource(a0,1), sourceDef3[0x20] != 0 &&
+                      (loopRemaining = RegKind__flagBit0(sourceDef3[0x26]), loopRemaining != 0)) &&
+                     ((sourceDef3[5] & 2U) == 0)))))) &&
+                  ((loopRemaining = (**(code **)(*sourceDef3 + 0x50))(sourceDef3), loopRemaining == 0 &&
+                   (sourceDef3 = (int *)this[10], sourceDef3[0x20] != 0)))) &&
+                 ((loopRemaining = RegKind__flagBit0(sourceDef3[0x26]), loopRemaining != 0 &&
+                  ((((sourceDef3[5] & 2U) == 0 &&
+                    (loopRemaining = (**(code **)(*sourceDef3 + 0x50))(sourceDef3), loopRemaining == 0)) &&
                    ((loopRemaining = IRInst__getOperandSource(a0,1), (*(uint *)(loopRemaining + 0x14) & 0x40) != 0 &&
                     ((*(uint *)(this[10] + 0x14) & 0x40) != 0)))))))) {
                 IRInst__getOperandSource(a0,1);
@@ -843,16 +844,16 @@ LAB_00198950:
               sourceDef2 = IRInst__getOperandSource(a0,1);
               iVar11 = thunk_FUN_00134de8(allocTable,sourceDef2);
             }
-            piVar23 = (int *)IRInst__getOperandSource(a0,2);
-            if (((piVar23[0x20] == 0) || (loopRemaining = RegKind__flagBit0(piVar23[0x26]), loopRemaining == 0)) ||
-               (((piVar23[5] & 2U) != 0 ||
-                (loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining != 0)))) {
-              piVar23 = (int *)IRInst__getOperandSource(a0,2);
-              loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23);
+            sourceDef3 = (int *)IRInst__getOperandSource(a0,2);
+            if (((sourceDef3[0x20] == 0) || (loopRemaining = RegKind__flagBit0(sourceDef3[0x26]), loopRemaining == 0)) ||
+               (((sourceDef3[5] & 2U) != 0 ||
+                (loopRemaining = (**(code **)(*sourceDef3 + 0x50))(sourceDef3), loopRemaining != 0)))) {
+              sourceDef3 = (int *)IRInst__getOperandSource(a0,2);
+              loopRemaining = (**(code **)(*sourceDef3 + 0x50))(sourceDef3);
               if (loopRemaining != 0) goto LAB_00198a1c;
-              piVar23 = (int *)IRInst__getOperandSource(a0,2);
+              sourceDef3 = (int *)IRInst__getOperandSource(a0,2);
               iVar12 = 0;
-              loopRemaining = (**(code **)(*piVar23 + 0x48))(piVar23);
+              loopRemaining = (**(code **)(*sourceDef3 + 0x48))(sourceDef3);
               if (loopRemaining != 0) {
                 loopRemaining = IRInst__getOperandSource(a0,2);
                 registerIndex3 = *(undefined4 *)(loopRemaining + 0x94);
@@ -875,27 +876,27 @@ LAB_00198f54:
               loopRemaining = IRInst__getOperandSource(a0,1);
               if (((loopRemaining != this[8]) &&
                   (((((loopRemaining = IRInst__getOperandSource(a0,1), loopRemaining == 0 || (this[8] == 0)) ||
-                     ((piVar23 = (int *)IRInst__getOperandSource(a0,1), piVar23[0x20] == 0 ||
-                      (((loopRemaining = RegKind__flagBit0(piVar23[0x26]), loopRemaining == 0 ||
-                        ((piVar23[5] & 2U) != 0)) ||
-                       (loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining != 0)))))) ||
-                    ((piVar23 = (int *)this[8], piVar23[0x20] == 0 ||
-                     (loopRemaining = RegKind__flagBit0(piVar23[0x26]), loopRemaining == 0)))) ||
-                   (((piVar23[5] & 2U) != 0 ||
-                    (((loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining != 0 ||
+                     ((sourceDef3 = (int *)IRInst__getOperandSource(a0,1), sourceDef3[0x20] == 0 ||
+                      (((loopRemaining = RegKind__flagBit0(sourceDef3[0x26]), loopRemaining == 0 ||
+                        ((sourceDef3[5] & 2U) != 0)) ||
+                       (loopRemaining = (**(code **)(*sourceDef3 + 0x50))(sourceDef3), loopRemaining != 0)))))) ||
+                    ((sourceDef3 = (int *)this[8], sourceDef3[0x20] == 0 ||
+                     (loopRemaining = RegKind__flagBit0(sourceDef3[0x26]), loopRemaining == 0)))) ||
+                   (((sourceDef3[5] & 2U) != 0 ||
+                    (((loopRemaining = (**(code **)(*sourceDef3 + 0x50))(sourceDef3), loopRemaining != 0 ||
                       (loopRemaining = IRInst__getOperandSource(a0,1), (*(uint *)(loopRemaining + 0x14) & 0x40) == 0)) ||
                      (((*(uint *)(this[8] + 0x14) & 0x40) == 0 ||
                       (loopRemaining = IRInst__getOperandSource(a0,1),
                       *(int *)(loopRemaining + 0x94) != *(int *)(this[8] + 0x94))))))))))) ||
                  ((loopRemaining = IRInst__getOperandSource(a0,2), loopRemaining != this[7] &&
                   ((((loopRemaining = IRInst__getOperandSource(a0,2), loopRemaining == 0 || (this[7] == 0)) ||
-                    (piVar23 = (int *)IRInst__getOperandSource(a0,2), piVar23[0x20] == 0)) ||
-                   (((loopRemaining = RegKind__flagBit0(piVar23[0x26]), loopRemaining == 0 || ((piVar23[5] & 2U) != 0))
-                    || ((((loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining != 0 ||
-                          ((piVar23 = (int *)this[7], piVar23[0x20] == 0 ||
-                           (loopRemaining = RegKind__flagBit0(piVar23[0x26]), loopRemaining == 0)))) ||
-                         ((piVar23[5] & 2U) != 0)) ||
-                        ((((loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining != 0 ||
+                    (sourceDef3 = (int *)IRInst__getOperandSource(a0,2), sourceDef3[0x20] == 0)) ||
+                   (((loopRemaining = RegKind__flagBit0(sourceDef3[0x26]), loopRemaining == 0 || ((sourceDef3[5] & 2U) != 0))
+                    || ((((loopRemaining = (**(code **)(*sourceDef3 + 0x50))(sourceDef3), loopRemaining != 0 ||
+                          ((sourceDef3 = (int *)this[7], sourceDef3[0x20] == 0 ||
+                           (loopRemaining = RegKind__flagBit0(sourceDef3[0x26]), loopRemaining == 0)))) ||
+                         ((sourceDef3[5] & 2U) != 0)) ||
+                        ((((loopRemaining = (**(code **)(*sourceDef3 + 0x50))(sourceDef3), loopRemaining != 0 ||
                            (loopRemaining = IRInst__getOperandSource(a0,2), (*(uint *)(loopRemaining + 0x14) & 0x40) == 0)) ||
                           ((*(uint *)(this[7] + 0x14) & 0x40) == 0)) ||
                          (loopRemaining = IRInst__getOperandSource(a0,2),
@@ -903,28 +904,28 @@ LAB_00198f54:
                 loopRemaining = IRInst__getOperandSource(a0,1);
                 if (((loopRemaining == this[7]) ||
                     ((((loopRemaining = IRInst__getOperandSource(a0,1), loopRemaining != 0 && (this[7] != 0)) &&
-                      ((piVar23 = (int *)IRInst__getOperandSource(a0,1), piVar23[0x20] != 0 &&
-                       ((loopRemaining = RegKind__flagBit0(piVar23[0x26]), loopRemaining != 0 &&
-                        ((piVar23[5] & 2U) == 0)))))) &&
-                     (((loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining == 0 &&
-                       ((((piVar23 = (int *)this[7], piVar23[0x20] != 0 &&
-                          (loopRemaining = RegKind__flagBit0(piVar23[0x26]), loopRemaining != 0)) &&
-                         ((piVar23[5] & 2U) == 0)) &&
-                        ((loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining == 0 &&
+                      ((sourceDef3 = (int *)IRInst__getOperandSource(a0,1), sourceDef3[0x20] != 0 &&
+                       ((loopRemaining = RegKind__flagBit0(sourceDef3[0x26]), loopRemaining != 0 &&
+                        ((sourceDef3[5] & 2U) == 0)))))) &&
+                     (((loopRemaining = (**(code **)(*sourceDef3 + 0x50))(sourceDef3), loopRemaining == 0 &&
+                       ((((sourceDef3 = (int *)this[7], sourceDef3[0x20] != 0 &&
+                          (loopRemaining = RegKind__flagBit0(sourceDef3[0x26]), loopRemaining != 0)) &&
+                         ((sourceDef3[5] & 2U) == 0)) &&
+                        ((loopRemaining = (**(code **)(*sourceDef3 + 0x50))(sourceDef3), loopRemaining == 0 &&
                          (loopRemaining = IRInst__getOperandSource(a0,1), (*(uint *)(loopRemaining + 0x14) & 0x40) != 0))))))
                       && (((*(uint *)(this[7] + 0x14) & 0x40) != 0 &&
                           (loopRemaining = IRInst__getOperandSource(a0,1),
                           *(int *)(loopRemaining + 0x94) == *(int *)(this[7] + 0x94))))))))) &&
                    ((loopRemaining = IRInst__getOperandSource(a0,2), loopRemaining == this[8] ||
                     (((((loopRemaining = IRInst__getOperandSource(a0,2), loopRemaining != 0 && (this[8] != 0)) &&
-                       ((piVar23 = (int *)IRInst__getOperandSource(a0,2), piVar23[0x20] != 0 &&
-                        (((loopRemaining = RegKind__flagBit0(piVar23[0x26]), loopRemaining != 0 &&
-                          ((piVar23[5] & 2U) == 0)) &&
-                         (loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining == 0)))))) &&
-                      ((piVar23 = (int *)this[8], piVar23[0x20] != 0 &&
-                       (loopRemaining = RegKind__flagBit0(piVar23[0x26]), loopRemaining != 0)))) &&
-                     (((piVar23[5] & 2U) == 0 &&
-                      (((loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining == 0 &&
+                       ((sourceDef3 = (int *)IRInst__getOperandSource(a0,2), sourceDef3[0x20] != 0 &&
+                        (((loopRemaining = RegKind__flagBit0(sourceDef3[0x26]), loopRemaining != 0 &&
+                          ((sourceDef3[5] & 2U) == 0)) &&
+                         (loopRemaining = (**(code **)(*sourceDef3 + 0x50))(sourceDef3), loopRemaining == 0)))))) &&
+                      ((sourceDef3 = (int *)this[8], sourceDef3[0x20] != 0 &&
+                       (loopRemaining = RegKind__flagBit0(sourceDef3[0x26]), loopRemaining != 0)))) &&
+                     (((sourceDef3[5] & 2U) == 0 &&
+                      (((loopRemaining = (**(code **)(*sourceDef3 + 0x50))(sourceDef3), loopRemaining == 0 &&
                         (loopRemaining = IRInst__getOperandSource(a0,2), (*(uint *)(loopRemaining + 0x14) & 0x40) != 0)) &&
                        (((*(uint *)(this[8] + 0x14) & 0x40) != 0 &&
                         (loopRemaining = IRInst__getOperandSource(a0,2),
@@ -948,28 +949,28 @@ LAB_0019941c:
               loopRemaining = IRInst__getOperandSource(a0,1);
               if (((loopRemaining != this[0xb]) &&
                   (((((((loopRemaining = IRInst__getOperandSource(a0,1), loopRemaining == 0 || (this[0xb] == 0)) ||
-                       (piVar23 = (int *)IRInst__getOperandSource(a0,1), piVar23[0x20] == 0)) ||
-                      ((loopRemaining = RegKind__flagBit0(piVar23[0x26]), loopRemaining == 0 ||
-                       ((piVar23[5] & 2U) != 0)))) ||
-                     (loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining != 0)) ||
-                    (((piVar23 = (int *)this[0xb], piVar23[0x20] == 0 ||
-                      (loopRemaining = RegKind__flagBit0(piVar23[0x26]), loopRemaining == 0)) ||
-                     (((piVar23[5] & 2U) != 0 ||
-                      (((loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining != 0 ||
+                       (sourceDef3 = (int *)IRInst__getOperandSource(a0,1), sourceDef3[0x20] == 0)) ||
+                      ((loopRemaining = RegKind__flagBit0(sourceDef3[0x26]), loopRemaining == 0 ||
+                       ((sourceDef3[5] & 2U) != 0)))) ||
+                     (loopRemaining = (**(code **)(*sourceDef3 + 0x50))(sourceDef3), loopRemaining != 0)) ||
+                    (((sourceDef3 = (int *)this[0xb], sourceDef3[0x20] == 0 ||
+                      (loopRemaining = RegKind__flagBit0(sourceDef3[0x26]), loopRemaining == 0)) ||
+                     (((sourceDef3[5] & 2U) != 0 ||
+                      (((loopRemaining = (**(code **)(*sourceDef3 + 0x50))(sourceDef3), loopRemaining != 0 ||
                         (loopRemaining = IRInst__getOperandSource(a0,1), (*(uint *)(loopRemaining + 0x14) & 0x40) == 0)) ||
                        ((*(uint *)(this[0xb] + 0x14) & 0x40) == 0)))))))) ||
                    (loopRemaining = IRInst__getOperandSource(a0,1),
                    *(int *)(loopRemaining + 0x94) != *(int *)(this[0xb] + 0x94))))) ||
                  ((loopRemaining = IRInst__getOperandSource(a0,2), loopRemaining != this[10] &&
                   ((((loopRemaining = IRInst__getOperandSource(a0,2), loopRemaining == 0 || (this[10] == 0)) ||
-                    ((piVar23 = (int *)IRInst__getOperandSource(a0,2), piVar23[0x20] == 0 ||
-                     ((loopRemaining = RegKind__flagBit0(piVar23[0x26]), loopRemaining == 0 || ((piVar23[5] & 2U) != 0)
+                    ((sourceDef3 = (int *)IRInst__getOperandSource(a0,2), sourceDef3[0x20] == 0 ||
+                     ((loopRemaining = RegKind__flagBit0(sourceDef3[0x26]), loopRemaining == 0 || ((sourceDef3[5] & 2U) != 0)
                       ))))) ||
-                   (((loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining != 0 ||
-                     (((piVar23 = (int *)this[10], piVar23[0x20] == 0 ||
-                       (loopRemaining = RegKind__flagBit0(piVar23[0x26]), loopRemaining == 0)) ||
-                      ((piVar23[5] & 2U) != 0)))) ||
-                    (((loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining != 0 ||
+                   (((loopRemaining = (**(code **)(*sourceDef3 + 0x50))(sourceDef3), loopRemaining != 0 ||
+                     (((sourceDef3 = (int *)this[10], sourceDef3[0x20] == 0 ||
+                       (loopRemaining = RegKind__flagBit0(sourceDef3[0x26]), loopRemaining == 0)) ||
+                      ((sourceDef3[5] & 2U) != 0)))) ||
+                    (((loopRemaining = (**(code **)(*sourceDef3 + 0x50))(sourceDef3), loopRemaining != 0 ||
                       (loopRemaining = IRInst__getOperandSource(a0,2), (*(uint *)(loopRemaining + 0x14) & 0x40) == 0)) ||
                      (((*(uint *)(this[10] + 0x14) & 0x40) == 0 ||
                       (loopRemaining = IRInst__getOperandSource(a0,2),
@@ -977,28 +978,28 @@ LAB_0019941c:
                 loopRemaining = IRInst__getOperandSource(a0,1);
                 if (((loopRemaining == this[10]) ||
                     ((((loopRemaining = IRInst__getOperandSource(a0,1), loopRemaining != 0 && (this[10] != 0)) &&
-                      (((piVar23 = (int *)IRInst__getOperandSource(a0,1), piVar23[0x20] != 0 &&
-                        ((((loopRemaining = RegKind__flagBit0(piVar23[0x26]), loopRemaining != 0 &&
-                           ((piVar23[5] & 2U) == 0)) &&
-                          (loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining == 0)) &&
-                         ((piVar23 = (int *)this[10], piVar23[0x20] != 0 &&
-                          (loopRemaining = RegKind__flagBit0(piVar23[0x26]), loopRemaining != 0)))))) &&
-                       ((piVar23[5] & 2U) == 0)))) &&
-                     (((loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining == 0 &&
+                      (((sourceDef3 = (int *)IRInst__getOperandSource(a0,1), sourceDef3[0x20] != 0 &&
+                        ((((loopRemaining = RegKind__flagBit0(sourceDef3[0x26]), loopRemaining != 0 &&
+                           ((sourceDef3[5] & 2U) == 0)) &&
+                          (loopRemaining = (**(code **)(*sourceDef3 + 0x50))(sourceDef3), loopRemaining == 0)) &&
+                         ((sourceDef3 = (int *)this[10], sourceDef3[0x20] != 0 &&
+                          (loopRemaining = RegKind__flagBit0(sourceDef3[0x26]), loopRemaining != 0)))))) &&
+                       ((sourceDef3[5] & 2U) == 0)))) &&
+                     (((loopRemaining = (**(code **)(*sourceDef3 + 0x50))(sourceDef3), loopRemaining == 0 &&
                        (loopRemaining = IRInst__getOperandSource(a0,1), (*(uint *)(loopRemaining + 0x14) & 0x40) != 0)) &&
                       (((*(uint *)(this[10] + 0x14) & 0x40) != 0 &&
                        (loopRemaining = IRInst__getOperandSource(a0,1),
                        *(int *)(loopRemaining + 0x94) == *(int *)(this[10] + 0x94))))))))) &&
                    ((loopRemaining = IRInst__getOperandSource(a0,2), loopRemaining == this[0xb] ||
                     (((((loopRemaining = IRInst__getOperandSource(a0,2), loopRemaining != 0 && (this[0xb] != 0)) &&
-                       (piVar23 = (int *)IRInst__getOperandSource(a0,2), piVar23[0x20] != 0)) &&
-                      (((loopRemaining = RegKind__flagBit0(piVar23[0x26]), loopRemaining != 0 &&
-                        ((piVar23[5] & 2U) == 0)) &&
-                       ((loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining == 0 &&
-                        ((piVar23 = (int *)this[0xb], piVar23[0x20] != 0 &&
-                         (loopRemaining = RegKind__flagBit0(piVar23[0x26]), loopRemaining != 0)))))))) &&
-                     (((piVar23[5] & 2U) == 0 &&
-                      ((((loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining == 0 &&
+                       (sourceDef3 = (int *)IRInst__getOperandSource(a0,2), sourceDef3[0x20] != 0)) &&
+                      (((loopRemaining = RegKind__flagBit0(sourceDef3[0x26]), loopRemaining != 0 &&
+                        ((sourceDef3[5] & 2U) == 0)) &&
+                       ((loopRemaining = (**(code **)(*sourceDef3 + 0x50))(sourceDef3), loopRemaining == 0 &&
+                        ((sourceDef3 = (int *)this[0xb], sourceDef3[0x20] != 0 &&
+                         (loopRemaining = RegKind__flagBit0(sourceDef3[0x26]), loopRemaining != 0)))))))) &&
+                     (((sourceDef3[5] & 2U) == 0 &&
+                      ((((loopRemaining = (**(code **)(*sourceDef3 + 0x50))(sourceDef3), loopRemaining == 0 &&
                          (loopRemaining = IRInst__getOperandSource(a0,2), (*(uint *)(loopRemaining + 0x14) & 0x40) != 0)) &&
                         ((*(uint *)(this[0xb] + 0x14) & 0x40) != 0)) &&
                        (loopRemaining = IRInst__getOperandSource(a0,2),
@@ -2810,6 +2811,9 @@ int R300VMachineAssembler__encodeDualMathOperands(this, inst, instructionWords)
   int *inst;
   uint *instructionWords;
 {
+  undefined4 sourceDef2;
+  undefined4 sourceDef;
+  int operandRecord;
   uint source1Flags;
   int *operandVReg;
   byte bVar1;
@@ -2860,8 +2864,8 @@ int R300VMachineAssembler__encodeDualMathOperands(this, inst, instructionWords)
   }
   else {
     uVar12 = *(undefined4 *)(*(int *)(this + 0xc) + 0x6c4);
-    uVar7 = IRInst__getOperandSource(operandVReg,1);
-    srcOffsetPair = thunk_FUN_00134de8(uVar12,uVar7);
+    sourceDef2 = IRInst__getOperandSource(operandVReg,1);
+    srcOffsetPair = thunk_FUN_00134de8(uVar12,sourceDef2);
   }
   iVar6 = (int)((ulonglong)srcOffsetPair >> 0x20);
   if (loopIndex == 1) {
@@ -2926,9 +2930,9 @@ int R300VMachineAssembler__encodeDualMathOperands(this, inst, instructionWords)
     *dualMathWord = (uVar10 & 1) << 0x19 | uVar2 | uVar3 & 0xfdff1fff;
     loopIndex = (**(code **)(*inst + 0x14))(inst);
     if (1 < loopIndex) {
-      uVar7 = IRInst__getOperandSource(inst,2);
+      sourceDef2 = IRInst__getOperandSource(inst,2);
       loopIndex = IRInst__getOperandRecord(inst,2);
-      uVar2 = ((int (*)())vsSourceSelectForConstant)(uVar7,(uint)*(byte *)(loopIndex + 0x10),constNegated);
+      uVar2 = ((int (*)())vsSourceSelectForConstant)(sourceDef2,(uint)*(byte *)(loopIndex + 0x10),constNegated);
       uVar3 = *dualMathWord;
       uVar2 = (uVar2 & 7) << 0x10;
       *dualMathWord = uVar2 | uVar3 & 0xfff8ffff;
@@ -2981,11 +2985,11 @@ int R300VMachineAssembler__encodeDualMathOperands(this, inst, instructionWords)
       loopIndex = 1;
       if (0 < operandVReg[0x21]) {
         do {
-          iVar6 = IRInst__getOperandRecord(operandVReg,loopIndex);
-          bVar1 = *(byte *)(iVar6 + 0x13);
+          operandRecord = IRInst__getOperandRecord(operandVReg,loopIndex);
+          bVar1 = *(byte *)(operandRecord + 0x13);
           if (bVar1 != 4) {
-            uVar12 = IRInst__getOperandSource(operandVReg,loopIndex);
-            uVar3 = ((int (*)())vsSourceSelectForConstant)(uVar12,(uint)bVar1,constNegated);
+            sourceDef = IRInst__getOperandSource(operandVReg,loopIndex);
+            uVar3 = ((int (*)())vsSourceSelectForConstant)(sourceDef,(uint)bVar1,constNegated);
             goto LAB_0019cf10;
           }
           loopIndex = loopIndex + 1;
@@ -3007,11 +3011,11 @@ LAB_0019cf10:
       loopIndex = 1;
       if (0 < operandVReg[0x21]) {
         do {
-          iVar6 = IRInst__getOperandRecord(operandVReg,loopIndex);
-          bVar1 = *(byte *)(iVar6 + 0x10);
+          operandRecord = IRInst__getOperandRecord(operandVReg,loopIndex);
+          bVar1 = *(byte *)(operandRecord + 0x10);
           if (bVar1 != 4) {
-            uVar7 = IRInst__getOperandSource(operandVReg,loopIndex);
-            uVar2 = ((int (*)())vsSourceSelectForConstant)(uVar7,(uint)bVar1,constNegated);
+            sourceDef2 = IRInst__getOperandSource(operandVReg,loopIndex);
+            uVar2 = ((int (*)())vsSourceSelectForConstant)(sourceDef2,(uint)bVar1,constNegated);
             goto LAB_0019d014;
           }
           loopIndex = loopIndex + 1;
