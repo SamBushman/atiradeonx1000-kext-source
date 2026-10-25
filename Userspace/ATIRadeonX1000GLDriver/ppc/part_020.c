@@ -3540,17 +3540,17 @@ int Compiler__logf(param_1, param_2, param_3, param_4, param_5, param_6, param_7
 int FUN_000e0e28(param_1)
   int param_1;
 {
-  int iVar1;
+  int loopCounter;
   undefined1 auStack_b8 [128];
   undefined1 local_38;
   
   if (0 < *(int *)(param_1 + 0x3a4)) {
-    iVar1 = 0;
+    loopCounter = 0;
     do {
-      _memcpy(auStack_b8,iVar1 + *(int *)(param_1 + 0x3a0),0x80);
-      iVar1 = iVar1 + 0x80;
+      _memcpy(auStack_b8,loopCounter + *(int *)(param_1 + 0x3a0),0x80);
+      loopCounter = loopCounter + 0x80;
       local_38 = 0;
-    } while (iVar1 < *(int *)(param_1 + 0x3a4));
+    } while (loopCounter < *(int *)(param_1 + 0x3a4));
   }
   *(undefined4 *)(param_1 + 0x3a8) = 0;
   *(undefined4 *)(param_1 + 0x3a4) = 0;
@@ -3597,16 +3597,16 @@ int Compiler__setOption(param_1, param_2, param_3)
   bool bVar1;
   undefined4 length;
   int iVar3;
-  int iVar4;
+  int loopCounter;
   undefined **ppuVar5;
   
   length = _strlen(param_2);
   ppuVar5 = &PTR_s_OPT_IGNORE_DEFINED_CONSTANTS_001dc444;
-  iVar4 = 0;
+  loopCounter = 0;
   while (iVar3 = _strncmp(*ppuVar5,param_2,length), iVar3 != 0) {
-    bVar1 = iVar4 == 0x4f;
+    bVar1 = loopCounter == 0x4f;
     ppuVar5 = ppuVar5 + 1;
-    iVar4 = iVar4 + 1;
+    loopCounter = loopCounter + 1;
     if (bVar1) {
       compareResult = _strncmp("opt_flatten_if_state",param_2,length);
       if (compareResult == 0) {
@@ -3779,10 +3779,10 @@ int Compiler__setOption(param_1, param_2, param_3)
     }
   }
   if (param_3 != 0) {
-    ((int (*)())Compiler__setOptionBit)(param_1,iVar4);
+    ((int (*)())Compiler__setOptionBit)(param_1,loopCounter);
     return;
   }
-  ((int (*)())Compiler__clearOptionBit)(param_1,iVar4);
+  ((int (*)())Compiler__clearOptionBit)(param_1,loopCounter);
   return;
 }
 

@@ -4760,10 +4760,10 @@ int evsAppendInstruction(compiler, instructionArray, opcode, modifier)
 }
 
 /* evsEmitMova @ 0x74b30 (204 bytes) */
-int evsEmitMova(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
+int evsEmitMova(compiler, param_2, compileState, param_4)
+  undefined4 compiler;
   int param_2;
-  undefined4 param_3;
+  undefined4 compileState;
   int param_4;
 {
   int evsAppendInstructionResult;
@@ -4778,7 +4778,7 @@ int evsEmitMova(param_1, param_2, param_3, param_4)
   undefined4 local_30;
   
   iVar2 = param_2 + 4;
-  evsAppendInstructionResult = ((int (*)())evsAppendInstruction)(param_1,iVar2,0x48,0);
+  evsAppendInstructionResult = ((int (*)())evsAppendInstruction)(compiler,iVar2,0x48,0);
   if (evsAppendInstructionResult != 0) {
     local_48 = *(undefined4 *)(param_4 + 4);
     local_44 = *(undefined4 *)(param_4 + 8);
@@ -4787,8 +4787,8 @@ int evsEmitMova(param_1, param_2, param_3, param_4)
     local_3c = 0;
     local_38 = 0;
     local_40 = 1;
-    iVar1 = ((int (*)())evsEncodeDestination)(param_1,iVar2,param_3,&local_48,1);
-    if ((iVar1 != 0) && (iVar1 = ((int (*)())evsEncodeSource)(param_1,iVar2,param_3,param_4 + 0x20,0,0), iVar1 != 0)
+    iVar1 = ((int (*)())evsEncodeDestination)(compiler,iVar2,compileState,&local_48,1);
+    if ((iVar1 != 0) && (iVar1 = ((int (*)())evsEncodeSource)(compiler,iVar2,compileState,param_4 + 0x20,0,0), iVar1 != 0)
        ) {
       return 1;
     }
@@ -4797,10 +4797,10 @@ int evsEmitMova(param_1, param_2, param_3, param_4)
 }
 
 /* evsEmitLogp @ 0x74c00 (188 bytes) */
-int evsEmitLogp(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
+int evsEmitLogp(compiler, param_2, compileState, param_4)
+  undefined4 compiler;
   int param_2;
-  undefined4 param_3;
+  undefined4 compileState;
   int param_4;
 {
   int evsEncodeSourceResult;
@@ -4812,13 +4812,13 @@ int evsEmitLogp(param_1, param_2, param_3, param_4)
   undefined4 uStack_2c;
   
   iVar2 = param_2 + 4;
-  iVar1 = ((int (*)())evsAppendInstruction)(param_1,iVar2,0x3d,0);
-  if ((iVar1 != 0) && (iVar1 = ((int (*)())evsEncodeDestination)(param_1,iVar2,param_3,param_4 + 4,0), iVar1 != 0)) {
+  iVar1 = ((int (*)())evsAppendInstruction)(compiler,iVar2,0x3d,0);
+  if ((iVar1 != 0) && (iVar1 = ((int (*)())evsEncodeDestination)(compiler,iVar2,compileState,param_4 + 4,0), iVar1 != 0)) {
     uStack_2c = 4;
     uStack_34 = 4;
     uStack_30 = 4;
     uStack_38 = 0xc;
-    evsEncodeSourceResult = ((int (*)())evsEncodeSource)(param_1,iVar2,param_3,param_4 + 0x20,1,&uStack_38);
+    evsEncodeSourceResult = ((int (*)())evsEncodeSource)(compiler,iVar2,compileState,param_4 + 0x20,1,&uStack_38);
     if (evsEncodeSourceResult != 0) {
       return 1;
     }
@@ -4885,10 +4885,10 @@ int evsEmitLit(compiler, program, compileState, irInstruction)
 }
 
 /* evsEmitOp879d @ 0x74ed0 (392 bytes) */
-int evsEmitOp879d(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
+int evsEmitOp879d(compiler, param_2, compileState, param_4)
+  undefined4 compiler;
   int param_2;
-  int param_3;
+  int compileState;
   int param_4;
 {
   int evsEncodeDestinationResult;
@@ -4909,17 +4909,17 @@ int evsEmitOp879d(param_1, param_2, param_3, param_4)
   undefined4 uStack_34;
   undefined4 uStack_30;
   
-  extvsOperandDataTypeResult = extvsOperandDataType(param_3 + 0x1c,param_4 + 4);
+  extvsOperandDataTypeResult = extvsOperandDataType(compileState + 0x1c,param_4 + 4);
   uVar4 = *(uint *)(param_4 + 0x40);
   if (3 < uVar4) {
     return 0xffffffff;
   }
   iVar3 = param_2 + 4;
-  evsAppendInstructionResult = ((int (*)())evsAppendInstruction)(param_1,iVar3,0x47,0);
+  evsAppendInstructionResult = ((int (*)())evsAppendInstruction)(compiler,iVar3,0x47,0);
   if (evsAppendInstructionResult == 0) {
     return 0xffffffff;
   }
-  evsEncodeDestinationResult = ((int (*)())evsEncodeDestination)(param_1,iVar3,param_3,param_4 + 4,0);
+  evsEncodeDestinationResult = ((int (*)())evsEncodeDestination)(compiler,iVar3,compileState,param_4 + 4,0);
   if (evsEncodeDestinationResult == 0) {
     return 0xffffffff;
   }
@@ -4932,7 +4932,7 @@ int evsEmitOp879d(param_1, param_2, param_3, param_4)
   uStack_40 = *(undefined4 *)(param_4 + 0x28);
   if (extvsOperandDataTypeResult != 0x87be) {
     iStack_44 = uVar4 + iStack_44;
-    evsEncodeSourceResult = ((int (*)())evsEncodeSource)(param_1,iVar3,param_3,&uStack_48,1,0);
+    evsEncodeSourceResult = ((int (*)())evsEncodeSource)(compiler,iVar3,compileState,&uStack_48,1,0);
     goto LAB_00075028;
   }
   if (uVar4 == 1) {
@@ -4949,7 +4949,7 @@ LAB_00074fd4:
     uStack_50 = 0;
   }
   else if ((uVar4 == 2) || (uVar4 == 3)) goto LAB_00074fd4;
-  evsEncodeSourceResult = ((int (*)())evsEncodeSource)(param_1,iVar3,param_3,&uStack_48,1,&uStack_58);
+  evsEncodeSourceResult = ((int (*)())evsEncodeSource)(compiler,iVar3,compileState,&uStack_48,1,&uStack_58);
 LAB_00075028:
   if (evsEncodeSourceResult == 0) {
     return 0xffffffff;
@@ -4958,10 +4958,10 @@ LAB_00075028:
 }
 
 /* evsEmitOp879c @ 0x75060 (584 bytes) */
-int evsEmitOp879c(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
+int evsEmitOp879c(compiler, param_2, compileState, param_4)
+  undefined4 compiler;
   int param_2;
-  int param_3;
+  int compileState;
   int param_4;
 {
   int evsEncodeDestinationResult;
@@ -4977,13 +4977,13 @@ int evsEmitOp879c(param_1, param_2, param_3, param_4)
   undefined4 uStack_34;
   undefined4 uStack_30;
   
-  extvsOperandDataTypeResult = extvsOperandDataType(param_3 + 0x1c,param_4 + 4);
+  extvsOperandDataTypeResult = extvsOperandDataType(compileState + 0x1c,param_4 + 4);
   uVar4 = *(uint *)(param_4 + 0x40);
   if (3 < uVar4) {
     return 0xffffffff;
   }
   iVar3 = param_2 + 4;
-  evsAppendInstructionResult = ((int (*)())evsAppendInstruction)(param_1,iVar3,0x47,0);
+  evsAppendInstructionResult = ((int (*)())evsAppendInstruction)(compiler,iVar3,0x47,0);
   if (evsAppendInstructionResult == 0) {
     return 0xffffffff;
   }
@@ -5015,7 +5015,7 @@ int evsEmitOp879c(param_1, param_2, param_3, param_4)
       uStack_40 = 0;
       uStack_3c = 0;
     }
-    evsEncodeDestinationResult = ((int (*)())evsEncodeDestination)(param_1,iVar3,param_3,&uStack_48,1);
+    evsEncodeDestinationResult = ((int (*)())evsEncodeDestination)(compiler,iVar3,compileState,&uStack_48,1);
   }
   else {
     uStack_48 = *(uint *)(param_4 + 4);
@@ -5025,13 +5025,13 @@ int evsEmitOp879c(param_1, param_2, param_3, param_4)
     uStack_34 = *(undefined4 *)(param_4 + 0x18);
     uStack_30 = *(undefined4 *)(param_4 + 0x1c);
     uStack_44 = uVar4 + *(int *)(param_4 + 8);
-    evsEncodeDestinationResult = ((int (*)())evsEncodeDestination)(param_1,iVar3,param_3,&uStack_48,1);
+    evsEncodeDestinationResult = ((int (*)())evsEncodeDestination)(compiler,iVar3,compileState,&uStack_48,1);
   }
   if (evsEncodeDestinationResult == 0) {
     return 0xffffffff;
   }
   if (extvsOperandDataTypeResult != 0x87bf) {
-    ((int (*)())evsEncodeSource)(param_1,iVar3,param_3,param_4 + 0x20,1,0);
+    ((int (*)())evsEncodeSource)(compiler,iVar3,compileState,param_4 + 0x20,1,0);
     return 1;
   }
   if (uVar4 != 1) {
@@ -5049,7 +5049,7 @@ int evsEmitOp879c(param_1, param_2, param_3, param_4)
   uStack_40 = uVar4;
   uStack_3c = uVar4;
 LAB_00075258:
-  ((int (*)())evsEncodeSource)(param_1,iVar3,param_3,param_4 + 0x20,1,&uStack_48);
+  ((int (*)())evsEncodeSource)(compiler,iVar3,compileState,param_4 + 0x20,1,&uStack_48);
   return 1;
 }
 
@@ -5305,8 +5305,8 @@ int evsEmitFlr(compiler, program, compileState, irInstruction)
 }
 
 /* evsEmitClamp @ 0x75ba0 (236 bytes) */
-int evsEmitClamp(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
+int evsEmitClamp(compiler, param_2, param_3, param_4)
+  undefined4 compiler;
   int param_2;
   undefined4 param_3;
   int param_4;
@@ -5315,11 +5315,11 @@ int evsEmitClamp(param_1, param_2, param_3, param_4)
   int iVar2;
   
   iVar2 = param_2 + 4;
-  iVar1 = ((int (*)())evsAppendInstruction)(param_1,iVar2,10,0);
-  if ((((iVar1 != 0) && (iVar1 = ((int (*)())evsEncodeDestination)(param_1,iVar2,param_3,param_4 + 4,0), iVar1 != 0)) &&
-      (iVar1 = ((int (*)())evsEncodeSource)(param_1,iVar2,param_3,param_4 + 0x20,0,0), iVar1 != 0)) &&
-     ((iVar1 = ((int (*)())evsEncodeSource)(param_1,iVar2,param_3,param_4 + 0x3c,0,0), iVar1 != 0 &&
-      (iVar1 = ((int (*)())evsEncodeSource)(param_1,iVar2,param_3,param_4 + 0x58,0,0), iVar1 != 0)))) {
+  iVar1 = ((int (*)())evsAppendInstruction)(compiler,iVar2,10,0);
+  if ((((iVar1 != 0) && (iVar1 = ((int (*)())evsEncodeDestination)(compiler,iVar2,param_3,param_4 + 4,0), iVar1 != 0)) &&
+      (iVar1 = ((int (*)())evsEncodeSource)(compiler,iVar2,param_3,param_4 + 0x20,0,0), iVar1 != 0)) &&
+     ((iVar1 = ((int (*)())evsEncodeSource)(compiler,iVar2,param_3,param_4 + 0x3c,0,0), iVar1 != 0 &&
+      (iVar1 = ((int (*)())evsEncodeSource)(compiler,iVar2,param_3,param_4 + 0x58,0,0), iVar1 != 0)))) {
     return 1;
   }
   return 0xffffffff;
@@ -5425,8 +5425,8 @@ int evsEmitFrc(compiler, program, compileState, irInstruction)
 }
 
 /* evsEmitMad @ 0x76070 (236 bytes) */
-int evsEmitMad(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
+int evsEmitMad(compiler, param_2, param_3, param_4)
+  undefined4 compiler;
   int param_2;
   undefined4 param_3;
   int param_4;
@@ -5435,11 +5435,11 @@ int evsEmitMad(param_1, param_2, param_3, param_4)
   int iVar2;
   
   iVar2 = param_2 + 4;
-  iVar1 = ((int (*)())evsAppendInstruction)(param_1,iVar2,0x40,0);
-  if ((((iVar1 != 0) && (iVar1 = ((int (*)())evsEncodeDestination)(param_1,iVar2,param_3,param_4 + 4,0), iVar1 != 0)) &&
-      (iVar1 = ((int (*)())evsEncodeSource)(param_1,iVar2,param_3,param_4 + 0x20,0,0), iVar1 != 0)) &&
-     ((iVar1 = ((int (*)())evsEncodeSource)(param_1,iVar2,param_3,param_4 + 0x3c,0,0), iVar1 != 0 &&
-      (iVar1 = ((int (*)())evsEncodeSource)(param_1,iVar2,param_3,param_4 + 0x58,0,0), iVar1 != 0)))) {
+  iVar1 = ((int (*)())evsAppendInstruction)(compiler,iVar2,0x40,0);
+  if ((((iVar1 != 0) && (iVar1 = ((int (*)())evsEncodeDestination)(compiler,iVar2,param_3,param_4 + 4,0), iVar1 != 0)) &&
+      (iVar1 = ((int (*)())evsEncodeSource)(compiler,iVar2,param_3,param_4 + 0x20,0,0), iVar1 != 0)) &&
+     ((iVar1 = ((int (*)())evsEncodeSource)(compiler,iVar2,param_3,param_4 + 0x3c,0,0), iVar1 != 0 &&
+      (iVar1 = ((int (*)())evsEncodeSource)(compiler,iVar2,param_3,param_4 + 0x58,0,0), iVar1 != 0)))) {
     return 1;
   }
   return 0xffffffff;
@@ -5526,10 +5526,10 @@ int evsEmitDp3(compiler, program, compileState, irInstruction)
 }
 
 /* evsEmitMov @ 0x764a0 (188 bytes) */
-int evsEmitMov(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
+int evsEmitMov(compiler, param_2, compileState, param_4)
+  undefined4 compiler;
   int param_2;
-  undefined4 param_3;
+  undefined4 compileState;
   int param_4;
 {
   int evsEncodeSourceResult;
@@ -5541,13 +5541,13 @@ int evsEmitMov(param_1, param_2, param_3, param_4)
   undefined4 uStack_2c;
   
   iVar2 = param_2 + 4;
-  iVar1 = ((int (*)())evsAppendInstruction)(param_1,iVar2,0x47,0);
-  if ((iVar1 != 0) && (iVar1 = ((int (*)())evsEncodeDestination)(param_1,iVar2,param_3,param_4 + 4,0), iVar1 != 0)) {
+  iVar1 = ((int (*)())evsAppendInstruction)(compiler,iVar2,0x47,0);
+  if ((iVar1 != 0) && (iVar1 = ((int (*)())evsEncodeDestination)(compiler,iVar2,compileState,param_4 + 4,0), iVar1 != 0)) {
     uStack_38 = 4;
     uStack_34 = 5;
     uStack_30 = 6;
     uStack_2c = 7;
-    evsEncodeSourceResult = ((int (*)())evsEncodeSource)(param_1,iVar2,param_3,param_4 + 0x20,1,&uStack_38);
+    evsEncodeSourceResult = ((int (*)())evsEncodeSource)(compiler,iVar2,compileState,param_4 + 0x20,1,&uStack_38);
     if (evsEncodeSourceResult != 0) {
       return 1;
     }
@@ -5556,10 +5556,10 @@ int evsEmitMov(param_1, param_2, param_3, param_4)
 }
 
 /* evsEmitIndexOrMove @ 0x76560 (524 bytes) */
-int evsEmitIndexOrMove(param_1, param_2, param_3, param_4)
-  int param_1;
+int evsEmitIndexOrMove(compiler, param_2, compileState, param_4)
+  int compiler;
   int param_2;
-  undefined4 param_3;
+  undefined4 compileState;
   int param_4;
 {
   int evsEncodeDestinationResult;
@@ -5570,13 +5570,13 @@ int evsEmitIndexOrMove(param_1, param_2, param_3, param_4)
   uint *puVar4;
   
   puVar4 = (uint *)(param_2 + 4);
-  evsAppendInstructionResult = ((int (*)())evsAppendInstruction)(param_1,puVar4,0x48,0);
+  evsAppendInstructionResult = ((int (*)())evsAppendInstruction)(compiler,puVar4,0x48,0);
   if (evsAppendInstructionResult != 0) {
     if (*(uint *)(param_2 + 8) <= *(uint *)(param_2 + 4)) {
-      uVar2 = (**(code **)(param_1 + 0xc))(*(uint *)(param_2 + 8) * 4 + 0x200);
+      uVar2 = (**(code **)(compiler + 0xc))(*(uint *)(param_2 + 8) * 4 + 0x200);
       if (*(int *)(param_2 + 0xc) != 0) {
         _memcpy(uVar2,*(int *)(param_2 + 0xc),*(int *)(param_2 + 4) << 2);
-        (**(code **)(param_1 + 0x18))(*(undefined4 *)(param_2 + 0xc));
+        (**(code **)(compiler + 0x18))(*(undefined4 *)(param_2 + 0xc));
       }
       *(undefined4 *)(param_2 + 0xc) = uVar2;
       *(int *)(param_2 + 8) = *(int *)(param_2 + 8) + 0x80;
@@ -5585,10 +5585,10 @@ int evsEmitIndexOrMove(param_1, param_2, param_3, param_4)
     uVar3 = *puVar4 + 1;
     *puVar4 = uVar3;
     if (*(uint *)(param_2 + 8) <= uVar3) {
-      uVar2 = (**(code **)(param_1 + 0xc))(*(uint *)(param_2 + 8) * 4 + 0x200);
+      uVar2 = (**(code **)(compiler + 0xc))(*(uint *)(param_2 + 8) * 4 + 0x200);
       if (*(int *)(param_2 + 0xc) != 0) {
         _memcpy(uVar2,*(int *)(param_2 + 0xc),*puVar4 << 2);
-        (**(code **)(param_1 + 0x18))(*(undefined4 *)(param_2 + 0xc));
+        (**(code **)(compiler + 0x18))(*(undefined4 *)(param_2 + 0xc));
       }
       *(undefined4 *)(param_2 + 0xc) = uVar2;
       uVar3 = *puVar4;
@@ -5596,13 +5596,13 @@ int evsEmitIndexOrMove(param_1, param_2, param_3, param_4)
     }
     *(undefined4 *)(uVar3 * 4 + *(int *)(param_2 + 0xc)) = 1;
     *puVar4 = *puVar4 + 1;
-    evsEncodeSourceResult = ((int (*)())evsEncodeSource)(param_1,puVar4,param_3,param_4 + 0x20,0,0);
+    evsEncodeSourceResult = ((int (*)())evsEncodeSource)(compiler,puVar4,compileState,param_4 + 0x20,0,0);
     if (evsEncodeSourceResult != 0) {
-      ((int (*)())evsAppendInstruction)(param_1,puVar4,0x47,0);
-      evsEncodeDestinationResult = ((int (*)())evsEncodeDestination)(param_1,puVar4,param_3,param_4 + 4,0);
+      ((int (*)())evsAppendInstruction)(compiler,puVar4,0x47,0);
+      evsEncodeDestinationResult = ((int (*)())evsEncodeDestination)(compiler,puVar4,compileState,param_4 + 4,0);
       if (evsEncodeDestinationResult != 0) {
         *(undefined1 *)(param_4 + 0x54) = 1;
-        evsEncodeSourceResult = ((int (*)())evsEncodeSource)(param_1,puVar4,param_3,param_4 + 0x3c,0,0);
+        evsEncodeSourceResult = ((int (*)())evsEncodeSource)(compiler,puVar4,compileState,param_4 + 0x3c,0,0);
         if (evsEncodeSourceResult != 0) {
           return 1;
         }

@@ -312,14 +312,14 @@
 7c760	recordProgramBuildDependencies	r6	PASS-no	7c7b0 bl 0x7a060
 82900	FUN_00082900	r5	PASS-indirect	82b64 bctrl 
 82900	FUN_00082900	r6	PASS-indirect	82b64 bctrl 
-83470	FUN_00083470	r7	PASS-no	83498 bl 0x656b0
-83470	FUN_00083470	r8	PASS-no	83498 bl 0x656b0
-83470	FUN_00083470	r9	PASS-no	83498 bl 0x656b0
-837b0	FUN_000837b0	r5	PASS-no	837c4 bl 0x83470
-837b0	FUN_000837b0	r6	PASS-no	837c4 bl 0x83470
-837b0	FUN_000837b0	r7	PASS-no	837c4 bl 0x83470
-837b0	FUN_000837b0	r8	PASS-no	837c4 bl 0x83470
-83870	FUN_00083870	r10	PASS-indirect	8389c bl 0x90470
+83470	ffvpBuildPassThroughProgram	r7	PASS-no	83498 bl 0x656b0
+83470	ffvpBuildPassThroughProgram	r8	PASS-no	83498 bl 0x656b0
+83470	ffvpBuildPassThroughProgram	r9	PASS-no	83498 bl 0x656b0
+837b0	gldEmitVertexRoutingPackets	r5	PASS-no	837c4 bl 0x83470
+837b0	gldEmitVertexRoutingPackets	r6	PASS-no	837c4 bl 0x83470
+837b0	gldEmitVertexRoutingPackets	r7	PASS-no	837c4 bl 0x83470
+837b0	gldEmitVertexRoutingPackets	r8	PASS-no	837c4 bl 0x83470
+83870	ffvpValidateProgram	r10	PASS-indirect	8389c bl 0x90470
 86840	FUN_00086840	r5	PASS-indirect	868a0 bctrl 
 86840	FUN_00086840	r6	PASS-indirect	868a0 bctrl 
 86840	FUN_00086840	r7	PASS-indirect	868a0 bctrl 

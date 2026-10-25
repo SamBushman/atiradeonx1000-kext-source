@@ -5654,7 +5654,7 @@ void FUN_0002c020(int param_1,int param_2,undefined4 param_3,undefined4 param_4,
     iVar2 = 0;
   }
   if (iVar2 != *(int *)(param_1 + 0x192c)) {
-    ((void (*)())FUN_00083c80)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,staleFprArg1,staleFprArg2,staleFprArg3,
+    ((void (*)())ffvpValidateProgramForced)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,staleFprArg1,staleFprArg2,staleFprArg3,
                  staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleStackArg_ffffffb8);
     FUN_00090960(param_1);
     *(int *)(param_1 + 0x192c) = iVar2;
@@ -6771,8 +6771,8 @@ asm(".globl gldPrimWrapperLineLoop_23a24");
 asm(".set gldPrimWrapperLineLoop_23a24, _gldPrimWrapperLineLoop_23a24");
 asm(".globl gldPrimWrapperLineStrip_23a24");
 asm(".set gldPrimWrapperLineStrip_23a24, _gldPrimWrapperLineStrip_23a24");
-asm(".globl FUN_00024970");
-asm(".set FUN_00024970, _gld_drawElementsImmediate");
+asm(".globl gld_drawElementsImmediate");
+asm(".set gld_drawElementsImmediate, _gld_drawElementsImmediate");
 asm(".globl FUN_00026bf0");
 asm(".set FUN_00026bf0, _FUN_00026bf0");
 asm(".globl FUN_00026f80");
