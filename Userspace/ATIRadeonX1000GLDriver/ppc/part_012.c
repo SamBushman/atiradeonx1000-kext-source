@@ -142,7 +142,7 @@ int FUN_00083470(param_1)
     }
     iVar11 = *(int *)(param_1 + 0x14c);
     if ((iVar11 == 0) || (iVar3 = _memcmp(iVar11,local_68,0x30), iVar4 = iVar11, iVar3 != 0)) {
-      iVar4 = FUN_0009edd0(param_1,local_68);
+      iVar4 = fpVariantCacheLookup(param_1,local_68);
       if (iVar4 == 0) {
         uVar10 = *(uint *)(param_1 + 0x1804);
         puVar5 = (undefined4 *)ffvpCreateBuilder(param_1,0,0);
@@ -231,7 +231,7 @@ int FUN_00083470(param_1)
         if (iVar11 == iVar9) {
           iVar9 = iVar9 + 1;
         }
-        iVar4 = FUN_0009c800(param_1,local_68,puVar5,iVar3,iVar9,0,0,1);
+        iVar4 = fpVariantCacheInsert(param_1,local_68,puVar5,iVar3,iVar9,0,0,1);
         *(undefined4 *)(iVar4 + 0x34) = 0;
         *(int *)(iVar4 + 0x38) = *(int *)(*(int *)(iVar4 + 0x54) + 0x3cc) + -1;
         iVar11 = *(int *)(param_1 + 0x14c);
@@ -344,13 +344,13 @@ void FUN_00083870(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
     if ((*(uint *)(param_1 + 0x44) & 0x100000) != 0) {
       return;
     }
-    uVar18 = FUN_0009edd0(param_1,param_1 + 0x1874);
+    uVar18 = fpVariantCacheLookup(param_1,param_1 + 0x1874);
     iVar3 = (int)((ulonglong)uVar18 >> 0x20);
     if (iVar3 == 0) {
-      FUN_0009d080(param_1,(int)uVar18,param_3,param_4,param_5,param_6);
-      uVar8 = FUN_0009bd00(param_1);
+      ffvpUpdateLightModelFlags(param_1,(int)uVar18,param_3,param_4,param_5,param_6);
+      uVar8 = paramListCreate(param_1);
       iVar15 = ffvpBuildProgram(param_1,0,&local_38,local_34,uVar8,param_6,iVar15,in_r10);
-      iVar3 = FUN_0009c800(param_1,param_1 + 0x1874,iVar15,(uint)*(byte *)(param_1 + 0x131),local_38
+      iVar3 = fpVariantCacheInsert(param_1,param_1 + 0x1874,iVar15,(uint)*(byte *)(param_1 + 0x131),local_38
                            ,local_34[0],uVar8,(uint)*(byte *)(param_1 + 0x126));
       puVar9 = (undefined4 *)
                FUN_000774c0(*(undefined4 *)(param_1 + 0xc),*(undefined4 *)(param_1 + 0x18));
@@ -360,7 +360,7 @@ void FUN_00083870(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
       puVar9[3] = 0x20;
       uVar12 = 0x10;
       puVar11 = puVar9;
-      iVar10 = FUN_0009cb10(param_1,iVar3,puVar9,0x10);
+      iVar10 = fpVariantEntryRecomputeDependencies(param_1,iVar3,puVar9,0x10);
       FUN_0007a110(puVar9);
       if (*(uint *)(iVar15 + 0x3cc) <= *(uint *)(iVar15 + 0x3e4)) {
         *(undefined1 *)(iVar3 + 0x59) = 0;

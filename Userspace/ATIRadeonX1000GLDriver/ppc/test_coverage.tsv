@@ -868,22 +868,22 @@
 0x9b790	ffvpPrepareFogExp	172	yes	
 0x9b850	ffvpEmitFogTexCoord	892	no	indirect call (driver context / vtable / callback)
 0x9bbf0	vec4StoreAtIndex	28	yes	
-0x9bc10	FUN_0009bc10	228	yes	
-0x9bd00	FUN_0009bd00	96	no	indirect call (driver context / vtable / callback)
-0x9bd60	FUN_0009bd60	160	yes	
+0x9bc10	mat4StoreAtIndex	228	yes	
+0x9bd00	paramListCreate	96	no	indirect call (driver context / vtable / callback)
+0x9bd60	ffvpInitContextState	160	yes	
 0x9be00	ffvpAnalyzeLightState	2216	yes	
 0x9c700	fpVariantCacheFlush	248	no	indirect call (driver context / vtable / callback)
-0x9c800	FUN_0009c800	744	no	indirect call (driver context / vtable / callback)
-0x9cb10	FUN_0009cb10	280	no	indirect call (driver context / vtable / callback)
-0x9cc30	FUN_0009cc30	712	yes	
-0x9cf10	FUN_0009cf10	224	yes	
-0x9cff0	FUN_0009cff0	132	yes	
-0x9d080	FUN_0009d080	596	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0x9d2e0	FUN_0009d2e0	184	yes	
+0x9c800	fpVariantCacheInsert	744	no	indirect call (driver context / vtable / callback)
+0x9cb10	fpVariantEntryRecomputeDependencies	280	no	indirect call (driver context / vtable / callback)
+0x9cc30	ffvpBuildLightKey	712	yes	
+0x9cf10	ffvpBuildFogKey	224	yes	
+0x9cff0	ffvpBuildBlendKey	132	yes	
+0x9d080	ffvpUpdateLightModelFlags	596	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x9d2e0	ffvpRunStateHook	184	yes	
 0x9d3b0	FUN_0009d3b0	64	yes	
 0x9d410	ffvpBuildProgram	5944	no	indirect call (driver context / vtable / callback)
 0x9eb90	fpVariantCacheGrow	560	no	indirect call (driver context / vtable / callback)
-0x9edd0	FUN_0009edd0	708	yes	
+0x9edd0	fpVariantCacheLookup	708	yes	
 0x9f0b0	programFillStateConstants	4444	no	indirect call (driver context / vtable / callback)
 0xa0290	arbProgramFindIndex	96	yes	
 0xa0300	glProgramStringARB_impl	80	yes	

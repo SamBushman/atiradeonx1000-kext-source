@@ -4157,21 +4157,21 @@ int ffvpFinishProgram(param_1)
 }
 
 /* fpVariantProgramFree @ 0x9a990 (104 bytes) */
-int fpVariantProgramFree(param_1, param_2)
-  int param_1;
-  int param_2;
+int fpVariantProgramFree(ctx, program)
+  int ctx;
+  int program;
 {
-  undefined4 uVar1;
+  undefined4 status;
   
-  uVar1 = 1;
-  if (param_2 != 0) {
-    if (*(int *)(param_2 + 0x3c8) != 0) {
-      (**(code **)(param_1 + 0x18))(*(int *)(param_2 + 0x3c8));
+  status = 1;
+  if (program != 0) {
+    if (*(int *)(program + 0x3c8) != 0) {
+      (**(code **)(ctx + 0x18))(*(int *)(program + 0x3c8));
     }
-    (**(code **)(param_1 + 0x18))(param_2);
-    uVar1 = 0;
+    (**(code **)(ctx + 0x18))(program);
+    status = 0;
   }
-  return uVar1;
+  return status;
 }
 
 /* ffvpEmitFogLinear @ 0x9aa00 (1232 bytes) */
@@ -4820,136 +4820,136 @@ int vec4StoreAtIndex(param_1, param_2, param_3)
   return;
 }
 
-/* FUN_0009bc10 @ 0x9bc10 (228 bytes) */
-int FUN_0009bc10(param_1, param_2, param_3, param_4)
-  int param_1;
-  int param_2;
-  undefined4 *param_3;
-  int param_4;
+/* mat4StoreAtIndex @ 0x9bc10 (228 bytes) */
+int mat4StoreAtIndex(keepOrder, table, srcMatrix, tableIndex)
+  int keepOrder;
+  int table;
+  undefined4 *srcMatrix;
+  int tableIndex;
 {
-  int iVar1;
-  int iVar2;
-  undefined4 uVar3;
-  undefined4 uVar4;
-  undefined4 uVar5;
-  undefined4 uVar6;
-  undefined4 uVar7;
-  undefined4 uVar8;
-  undefined4 uVar9;
-  undefined4 uVar10;
-  undefined4 uVar11;
-  undefined4 uVar12;
-  undefined4 uVar13;
-  undefined4 uVar14;
-  undefined4 uVar15;
-  undefined4 uVar16;
-  undefined4 uVar17;
+  int slotOffset;
+  int slot;
+  undefined4 elem5;
+  undefined4 elem14;
+  undefined4 elem1;
+  undefined4 elem12;
+  undefined4 elem4;
+  undefined4 elem8;
+  undefined4 elem15;
+  undefined4 elem9;
+  undefined4 elem11;
+  undefined4 elem7;
+  undefined4 elem3;
+  undefined4 elem10;
+  undefined4 elem6;
+  undefined4 elem2;
+  undefined4 elem13;
   
-  iVar1 = param_4 * 0x10;
-  uVar9 = param_3[0xf];
-  uVar5 = param_3[1];
-  uVar16 = param_3[2];
-  iVar2 = iVar1 + param_2;
-  uVar13 = param_3[3];
-  uVar7 = param_3[4];
-  uVar3 = param_3[5];
-  uVar15 = param_3[6];
-  uVar12 = param_3[7];
-  uVar8 = param_3[8];
-  uVar10 = param_3[9];
-  uVar14 = param_3[10];
-  uVar11 = param_3[0xb];
-  uVar6 = param_3[0xc];
-  uVar17 = param_3[0xd];
-  uVar4 = param_3[0xe];
-  if (param_1 == 0) {
-    *(undefined4 *)(iVar1 + param_2) = *param_3;
-    *(undefined4 *)(iVar2 + 0x3c) = uVar9;
-    *(undefined4 *)(iVar2 + 4) = uVar7;
-    *(undefined4 *)(iVar2 + 8) = uVar8;
-    *(undefined4 *)(iVar2 + 0xc) = uVar6;
-    *(undefined4 *)(iVar2 + 0x10) = uVar5;
-    *(undefined4 *)(iVar2 + 0x14) = uVar3;
-    *(undefined4 *)(iVar2 + 0x18) = uVar10;
-    *(undefined4 *)(iVar2 + 0x1c) = uVar17;
-    *(undefined4 *)(iVar2 + 0x20) = uVar16;
-    *(undefined4 *)(iVar2 + 0x24) = uVar15;
-    *(undefined4 *)(iVar2 + 0x28) = uVar14;
-    *(undefined4 *)(iVar2 + 0x2c) = uVar4;
-    *(undefined4 *)(iVar2 + 0x30) = uVar13;
-    *(undefined4 *)(iVar2 + 0x34) = uVar12;
-    *(undefined4 *)(iVar2 + 0x38) = uVar11;
+  slotOffset = tableIndex * 0x10;
+  elem15 = srcMatrix[0xf];
+  elem1 = srcMatrix[1];
+  elem2 = srcMatrix[2];
+  slot = slotOffset + table;
+  elem3 = srcMatrix[3];
+  elem4 = srcMatrix[4];
+  elem5 = srcMatrix[5];
+  elem6 = srcMatrix[6];
+  elem7 = srcMatrix[7];
+  elem8 = srcMatrix[8];
+  elem9 = srcMatrix[9];
+  elem10 = srcMatrix[10];
+  elem11 = srcMatrix[0xb];
+  elem12 = srcMatrix[0xc];
+  elem13 = srcMatrix[0xd];
+  elem14 = srcMatrix[0xe];
+  if (keepOrder == 0) {
+    *(undefined4 *)(slotOffset + table) = *srcMatrix;
+    *(undefined4 *)(slot + 0x3c) = elem15;
+    *(undefined4 *)(slot + 4) = elem4;
+    *(undefined4 *)(slot + 8) = elem8;
+    *(undefined4 *)(slot + 0xc) = elem12;
+    *(undefined4 *)(slot + 0x10) = elem1;
+    *(undefined4 *)(slot + 0x14) = elem5;
+    *(undefined4 *)(slot + 0x18) = elem9;
+    *(undefined4 *)(slot + 0x1c) = elem13;
+    *(undefined4 *)(slot + 0x20) = elem2;
+    *(undefined4 *)(slot + 0x24) = elem6;
+    *(undefined4 *)(slot + 0x28) = elem10;
+    *(undefined4 *)(slot + 0x2c) = elem14;
+    *(undefined4 *)(slot + 0x30) = elem3;
+    *(undefined4 *)(slot + 0x34) = elem7;
+    *(undefined4 *)(slot + 0x38) = elem11;
   }
   else {
-    *(undefined4 *)(iVar1 + param_2) = *param_3;
-    *(undefined4 *)(iVar2 + 0x3c) = uVar9;
-    *(undefined4 *)(iVar2 + 4) = uVar5;
-    *(undefined4 *)(iVar2 + 8) = uVar16;
-    *(undefined4 *)(iVar2 + 0xc) = uVar13;
-    *(undefined4 *)(iVar2 + 0x10) = uVar7;
-    *(undefined4 *)(iVar2 + 0x14) = uVar3;
-    *(undefined4 *)(iVar2 + 0x18) = uVar15;
-    *(undefined4 *)(iVar2 + 0x1c) = uVar12;
-    *(undefined4 *)(iVar2 + 0x20) = uVar8;
-    *(undefined4 *)(iVar2 + 0x24) = uVar10;
-    *(undefined4 *)(iVar2 + 0x28) = uVar14;
-    *(undefined4 *)(iVar2 + 0x2c) = uVar11;
-    *(undefined4 *)(iVar2 + 0x30) = uVar6;
-    *(undefined4 *)(iVar2 + 0x34) = uVar17;
-    *(undefined4 *)(iVar2 + 0x38) = uVar4;
+    *(undefined4 *)(slotOffset + table) = *srcMatrix;
+    *(undefined4 *)(slot + 0x3c) = elem15;
+    *(undefined4 *)(slot + 4) = elem1;
+    *(undefined4 *)(slot + 8) = elem2;
+    *(undefined4 *)(slot + 0xc) = elem3;
+    *(undefined4 *)(slot + 0x10) = elem4;
+    *(undefined4 *)(slot + 0x14) = elem5;
+    *(undefined4 *)(slot + 0x18) = elem6;
+    *(undefined4 *)(slot + 0x1c) = elem7;
+    *(undefined4 *)(slot + 0x20) = elem8;
+    *(undefined4 *)(slot + 0x24) = elem9;
+    *(undefined4 *)(slot + 0x28) = elem10;
+    *(undefined4 *)(slot + 0x2c) = elem11;
+    *(undefined4 *)(slot + 0x30) = elem12;
+    *(undefined4 *)(slot + 0x34) = elem13;
+    *(undefined4 *)(slot + 0x38) = elem14;
   }
   return;
 }
 
-/* FUN_0009bd00 @ 0x9bd00 (96 bytes) */
-int FUN_0009bd00(param_1)
-  int param_1;
+/* paramListCreate @ 0x9bd00 (96 bytes) */
+int paramListCreate(ctx)
+  int ctx;
 {
-  ushort uVar1;
-  int *piVar2;
+  ushort slotCount;
+  int *vector;
   
-  uVar1 = *(ushort *)(((unsigned char *)0x000013be) + param_1);
-  piVar2 = (int *)(**(code **)(param_1 + 0xc))((uint)uVar1 * 8 + 0xc);
-  piVar2[2] = 0;
-  *piVar2 = (int)(piVar2 + 3);
-  piVar2[1] = (int)(piVar2 + 3 + uVar1);
-  return piVar2;
+  slotCount = *(ushort *)(((unsigned char *)0x000013be) + ctx);
+  vector = (int *)(**(code **)(ctx + 0xc))((uint)slotCount * 8 + 0xc);
+  vector[2] = 0;
+  *vector = (int)(vector + 3);
+  vector[1] = (int)(vector + 3 + slotCount);
+  return vector;
 }
 
-/* FUN_0009bd60 @ 0x9bd60 (160 bytes) */
-int FUN_0009bd60(param_1, param_2)
-  int param_1;
-  undefined4 param_2;
+/* ffvpInitContextState @ 0x9bd60 (160 bytes) */
+int ffvpInitContextState(ctx, flag131)
+  int ctx;
+  undefined4 flag131;
 {
-  int iVar1;
-  int iVar2;
+  int cursor;
+  int countdown;
   
-  *(undefined1 *)(param_1 + 0x131) = (undefined1)param_2;
-  *(undefined1 *)(param_1 + 0x12f) = 0;
-  *(undefined4 *)(param_1 + 0x14c) = 0;
-  *(undefined1 *)(param_1 + 0x125) = 0;
-  *(undefined1 *)(param_1 + 0x124) = 0;
-  *(undefined4 *)(param_1 + 0x13c) = 0;
-  *(undefined4 *)(param_1 + 0x148) = 0;
-  *(undefined1 *)(param_1 + 0x12d) = 0;
-  *(code **)(((unsigned char *)0x000012cc) + param_1) = vec4StoreAtIndex;
-  *(code **)(((unsigned char *)0x000012c8) + param_1) = FUN_0009bc10;
-  iVar2 = 8;
-  iVar1 = param_1;
+  *(undefined1 *)(ctx + 0x131) = (undefined1)flag131;
+  *(undefined1 *)(ctx + 0x12f) = 0;
+  *(undefined4 *)(ctx + 0x14c) = 0;
+  *(undefined1 *)(ctx + 0x125) = 0;
+  *(undefined1 *)(ctx + 0x124) = 0;
+  *(undefined4 *)(ctx + 0x13c) = 0;
+  *(undefined4 *)(ctx + 0x148) = 0;
+  *(undefined1 *)(ctx + 0x12d) = 0;
+  *(code **)(((unsigned char *)0x000012cc) + ctx) = vec4StoreAtIndex;
+  *(code **)(((unsigned char *)0x000012c8) + ctx) = mat4StoreAtIndex;
+  countdown = 8;
+  cursor = ctx;
   do {
-    *(undefined4 *)(iVar1 + 0x150) = 0;
-    iVar1 = iVar1 + 4;
-    iVar2 = iVar2 + -1;
-  } while (iVar2 != 0);
-  iVar1 = param_1 + 0x3a0;
-  iVar2 = 8;
+    *(undefined4 *)(cursor + 0x150) = 0;
+    cursor = cursor + 4;
+    countdown = countdown + -1;
+  } while (countdown != 0);
+  cursor = ctx + 0x3a0;
+  countdown = 8;
   do {
-    *(uint *)(iVar1 + 8) = *(uint *)(iVar1 + 8) & 0xffffff;
-    iVar1 = iVar1 + 4;
-    iVar2 = iVar2 + -1;
-  } while (iVar2 != 0);
-  *(undefined1 *)(param_1 + 299) = 0;
-  *(undefined1 *)(param_1 + 0x126) = 0;
+    *(uint *)(cursor + 8) = *(uint *)(cursor + 8) & 0xffffff;
+    cursor = cursor + 4;
+    countdown = countdown + -1;
+  } while (countdown != 0);
+  *(undefined1 *)(ctx + 299) = 0;
+  *(undefined1 *)(ctx + 0x126) = 0;
   return;
 }
 
@@ -5294,11 +5294,11 @@ LAB_0009bfa0:
 }
 
 /* fpVariantCacheFlush @ 0x9c700 (248 bytes) */
-int fpVariantCacheFlush(param_1)
-  int param_1;
+int fpVariantCacheFlush(ctx)
+  int ctx;
 {
-  int iVar1;
-  int iVar2;
+  int bucketOffset;
+  int bucketTable;
   undefined4 a1;
   undefined4 in_r5;
   undefined4 in_r6;
@@ -5308,532 +5308,544 @@ int fpVariantCacheFlush(param_1)
   int a0;
   
   loopIndex = 0;
-  if (*(int *)(((unsigned char *)0x0000111c) + param_1) != 0) {
+  if (*(int *)(((unsigned char *)0x0000111c) + ctx) != 0) {
     do {
-      iVar2 = *(int *)(((unsigned char *)0x00001118) + param_1);
-      iVar1 = loopIndex * 4;
-      a0 = *(int *)(iVar1 + iVar2);
+      bucketTable = *(int *)(((unsigned char *)0x00001118) + ctx);
+      bucketOffset = loopIndex * 4;
+      a0 = *(int *)(bucketOffset + bucketTable);
       while (a0 != 0) {
-        *(undefined4 *)(iVar1 + iVar2) = *(undefined4 *)(a0 + 0x5c);
-        ((int (*)())fpVariantProgramFree)(param_1,*(undefined4 *)(a0 + 0x54));
+        *(undefined4 *)(bucketOffset + bucketTable) = *(undefined4 *)(a0 + 0x5c);
+        ((int (*)())fpVariantProgramFree)(ctx,*(undefined4 *)(a0 + 0x54));
         if (*(int *)(a0 + 0x4c) != 0) {
-          (**(code **)(param_1 + 0x18))(*(int *)(a0 + 0x4c));
+          (**(code **)(ctx + 0x18))(*(int *)(a0 + 0x4c));
         }
-        (**(code **)(param_1 + 0x18))(*(undefined4 *)(a0 + 0x50));
-        (**(code **)(param_1 + 0x18))(a0,a1,in_r5,in_r6,in_r7,in_r8,*(code **)(param_1 + 0x18));
-        iVar2 = *(int *)(((unsigned char *)0x00001118) + param_1);
-        a0 = *(int *)(iVar1 + iVar2);
+        (**(code **)(ctx + 0x18))(*(undefined4 *)(a0 + 0x50));
+        (**(code **)(ctx + 0x18))(a0,a1,in_r5,in_r6,in_r7,in_r8,*(code **)(ctx + 0x18));
+        bucketTable = *(int *)(((unsigned char *)0x00001118) + ctx);
+        a0 = *(int *)(bucketOffset + bucketTable);
       }
       loopIndex = loopIndex + 1;
-      *(undefined4 *)(iVar1 + iVar2) = 0;
-    } while (loopIndex < *(uint *)(((unsigned char *)0x0000111c) + param_1));
+      *(undefined4 *)(bucketOffset + bucketTable) = 0;
+    } while (loopIndex < *(uint *)(((unsigned char *)0x0000111c) + ctx));
   }
-  *(undefined4 *)(((unsigned char *)0x0000148c) + param_1) = 0;
-  *(undefined4 *)(param_1 + 0x3c8) = 0;
-  *(undefined4 *)(param_1 + 0x14c) = 0;
+  *(undefined4 *)(((unsigned char *)0x0000148c) + ctx) = 0;
+  *(undefined4 *)(ctx + 0x3c8) = 0;
+  *(undefined4 *)(ctx + 0x14c) = 0;
   return;
 }
 
-/* FUN_0009c800 @ 0x9c800 (744 bytes) */
-int FUN_0009c800(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  int param_1;
-  uint *param_2;
-  int param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  int param_6;
-  undefined4 *param_7;
-  undefined4 param_8;
+/* fpVariantCacheInsert @ 0x9c800 (744 bytes) */
+int fpVariantCacheInsert(ctx, key, program, dependencyA, dependencyB, constRegCount, paramList, flag)
+  int ctx;
+  uint *key;
+  int program;
+  undefined4 dependencyA;
+  undefined4 dependencyB;
+  int constRegCount;
+  undefined4 *paramList;
+  undefined4 flag;
 {
-  uint uVar1;
-  uint *puVar2;
-  undefined4 uVar3;
-  uint uVar4;
-  uint uVar5;
-  int iVar6;
-  int iVar7;
-  uint uVar8;
-  uint *puVar9;
-  uint *puVar10;
-  int iVar11;
+  undefined4 constBytes;
+  uint rotate;
+  uint *keyCursor;
+  undefined4 programInstrCount;
+  uint hash;
+  uint rotateCounter;
+  int entry;
+  int newParamList;
+  uint entrySerial;
+  uint *keyEnd;
+  uint *keyTail;
+  int bucketIndex;
   
-  iVar6 = (**(code **)(param_1 + 0xc))(0x60,param_2,param_3,param_4,param_5,param_6,param_7,param_8)
+  entry = (**(code **)(ctx + 0xc))(0x60,key,program,dependencyA,dependencyB,constRegCount,paramList,flag)
   ;
-  uVar8 = *(uint *)(param_1 + 0x3c8);
-  if (1000000 < uVar8) {
-    ((int (*)())fpVariantCacheFlush)(param_1);
-    uVar8 = *(uint *)(param_1 + 0x3c8);
+  entrySerial = *(uint *)(ctx + 0x3c8);
+  if (1000000 < entrySerial) {
+    ((int (*)())fpVariantCacheFlush)(ctx);
+    entrySerial = *(uint *)(ctx + 0x3c8);
   }
-  if (((unsigned char *)0x00001120)[param_1] == '\0') {
-    puVar9 = param_2 + 0xc;
-    uVar4 = 0;
-    puVar2 = param_2;
-    while (puVar2 + 0xb <= puVar9) {
-      uVar4 = uVar4 ^ *puVar2 ^ (puVar2[1] << 3 | puVar2[1] >> 0x1d) ^
-              (puVar2[2] << 6 | puVar2[2] >> 0x1a) ^ (puVar2[3] << 9 | puVar2[3] >> 0x17) ^
-              (puVar2[4] << 0xc | puVar2[4] >> 0x14) ^ (puVar2[5] << 0xf | puVar2[5] >> 0x11) ^
-              (puVar2[6] << 0x12 | puVar2[6] >> 0xe) ^ (puVar2[7] << 0x15 | puVar2[7] >> 0xb) ^
-              (puVar2[8] << 0x18 | puVar2[8] >> 8) ^ (puVar2[9] << 0x1b | puVar2[9] >> 5) ^
-              (puVar2[10] << 0x1e | puVar2[10] >> 2);
-      puVar2 = puVar2 + 0xb;
+  if (((unsigned char *)0x00001120)[ctx] == '\0') {
+    keyEnd = key + 0xc;
+    hash = 0;
+    keyCursor = key;
+    while (keyCursor + 0xb <= keyEnd) {
+      hash = hash ^ *keyCursor ^ (keyCursor[1] << 3 | keyCursor[1] >> 0x1d) ^
+              (keyCursor[2] << 6 | keyCursor[2] >> 0x1a) ^ (keyCursor[3] << 9 | keyCursor[3] >> 0x17) ^
+              (keyCursor[4] << 0xc | keyCursor[4] >> 0x14) ^ (keyCursor[5] << 0xf | keyCursor[5] >> 0x11) ^
+              (keyCursor[6] << 0x12 | keyCursor[6] >> 0xe) ^ (keyCursor[7] << 0x15 | keyCursor[7] >> 0xb) ^
+              (keyCursor[8] << 0x18 | keyCursor[8] >> 8) ^ (keyCursor[9] << 0x1b | keyCursor[9] >> 5) ^
+              (keyCursor[10] << 0x1e | keyCursor[10] >> 2);
+      keyCursor = keyCursor + 0xb;
     }
-    puVar10 = puVar2 + 5;
-    if (puVar9 < puVar10) {
-      uVar5 = 0;
-      puVar10 = puVar2;
-    }
-    else {
-      uVar5 = 0xf;
-      uVar4 = uVar4 ^ *puVar2 ^ (puVar2[1] << 3 | puVar2[1] >> 0x1d) ^
-              (puVar2[2] << 6 | puVar2[2] >> 0x1a) ^ (puVar2[3] << 9 | puVar2[3] >> 0x17) ^
-              (puVar2[4] << 0xc | puVar2[4] >> 0x14);
-    }
-    for (; puVar10 < puVar9; puVar10 = puVar10 + 1) {
-      uVar1 = uVar5 & 0x1f;
-      uVar5 = uVar5 + 3;
-      uVar4 = uVar4 ^ (*puVar10 << uVar1 | *puVar10 >> 0x20 - uVar1);
-    }
-    iVar11 = uVar4 - (uVar4 / *(uint *)(((unsigned char *)0x0000111c) + param_1)) *
-                     *(uint *)(((unsigned char *)0x0000111c) + param_1);
-  }
-  else {
-    uVar4 = *param_2 + param_2[2] + param_2[3];
-    iVar11 = uVar4 - (uVar4 / *(uint *)(((unsigned char *)0x0000111c) + param_1)) *
-                     *(uint *)(((unsigned char *)0x0000111c) + param_1);
-  }
-  *(uint *)(iVar6 + 0x30) = uVar8;
-  *(int *)(param_1 + 0x3c8) = *(int *)(param_1 + 0x3c8) + 1;
-  _memcpy(iVar6,param_2,0x30);
-  *(undefined4 *)(iVar6 + 0x3c) = param_4;
-  *(undefined4 *)(iVar6 + 0x40) = param_5;
-  *(int *)(iVar6 + 0x54) = param_3;
-  uVar3 = *(undefined4 *)(param_3 + 0x3d0);
-  *(int *)(iVar6 + 0x48) = param_6;
-  *(undefined4 *)(iVar6 + 0x44) = uVar3;
-  if (param_7 == (undefined4 *)0x0) {
-    iVar7 = ((int (*)())FUN_0009bd00)(param_1);
-    *(int *)(iVar6 + 0x50) = iVar7;
-    *(undefined4 *)(iVar7 + 8) = 0;
-    *(undefined4 *)(iVar6 + 0x4c) = 0;
-    *(undefined1 *)(iVar6 + 0x58) = 0;
-  }
-  else {
-    *(undefined4 **)(iVar6 + 0x50) = param_7;
-    if (((param_7[2] == 1) && (*(int *)*param_7 == 0)) && (*(int *)param_7[1] == 0)) {
-      *(undefined1 *)(iVar6 + 0x58) = 1;
-      *(undefined4 *)(iVar6 + 0x4c) = 0;
+    keyTail = keyCursor + 5;
+    if (keyEnd < keyTail) {
+      rotateCounter = 0;
+      keyTail = keyCursor;
     }
     else {
-      *(undefined1 *)(iVar6 + 0x58) = 0;
-      uVar3 = (**(code **)(param_1 + 0xc))(param_6 << 4);
-      *(undefined4 *)(iVar6 + 0x4c) = uVar3;
+      rotateCounter = 0xf;
+      hash = hash ^ *keyCursor ^ (keyCursor[1] << 3 | keyCursor[1] >> 0x1d) ^
+              (keyCursor[2] << 6 | keyCursor[2] >> 0x1a) ^ (keyCursor[3] << 9 | keyCursor[3] >> 0x17) ^
+              (keyCursor[4] << 0xc | keyCursor[4] >> 0x14);
+    }
+    for (; keyTail < keyEnd; keyTail = keyTail + 1) {
+      rotate = rotateCounter & 0x1f;
+      rotateCounter = rotateCounter + 3;
+      hash = hash ^ (*keyTail << rotate | *keyTail >> 0x20 - rotate);
+    }
+    bucketIndex = hash - (hash / *(uint *)(((unsigned char *)0x0000111c) + ctx)) *
+                     *(uint *)(((unsigned char *)0x0000111c) + ctx);
+  }
+  else {
+    hash = *key + key[2] + key[3];
+    bucketIndex = hash - (hash / *(uint *)(((unsigned char *)0x0000111c) + ctx)) *
+                     *(uint *)(((unsigned char *)0x0000111c) + ctx);
+  }
+  *(uint *)(entry + 0x30) = entrySerial;
+  *(int *)(ctx + 0x3c8) = *(int *)(ctx + 0x3c8) + 1;
+  _memcpy(entry,key,0x30);
+  *(undefined4 *)(entry + 0x3c) = dependencyA;
+  *(undefined4 *)(entry + 0x40) = dependencyB;
+  *(int *)(entry + 0x54) = program;
+  programInstrCount = *(undefined4 *)(program + 0x3d0);
+  *(int *)(entry + 0x48) = constRegCount;
+  *(undefined4 *)(entry + 0x44) = programInstrCount;
+  if (paramList == (undefined4 *)0x0) {
+    newParamList = ((int (*)())paramListCreate)(ctx);
+    *(int *)(entry + 0x50) = newParamList;
+    *(undefined4 *)(newParamList + 8) = 0;
+    *(undefined4 *)(entry + 0x4c) = 0;
+    *(undefined1 *)(entry + 0x58) = 0;
+  }
+  else {
+    *(undefined4 **)(entry + 0x50) = paramList;
+    if (((paramList[2] == 1) && (*(int *)*paramList == 0)) && (*(int *)paramList[1] == 0)) {
+      *(undefined1 *)(entry + 0x58) = 1;
+      *(undefined4 *)(entry + 0x4c) = 0;
+    }
+    else {
+      *(undefined1 *)(entry + 0x58) = 0;
+      constBytes = (**(code **)(ctx + 0xc))(constRegCount << 4);
+      *(undefined4 *)(entry + 0x4c) = constBytes;
     }
   }
-  *(char *)(iVar6 + 0x59) = (char)param_8;
-  *(undefined4 *)(iVar6 + 0x5c) = *(undefined4 *)(*(int *)(((unsigned char *)0x00001118) + param_1) + iVar11 * 4);
-  *(int *)(iVar11 * 4 + *(int *)(((unsigned char *)0x00001118) + param_1)) = iVar6;
-  return iVar6;
+  *(char *)(entry + 0x59) = (char)flag;
+  *(undefined4 *)(entry + 0x5c) = *(undefined4 *)(*(int *)(((unsigned char *)0x00001118) + ctx) + bucketIndex * 4);
+  *(int *)(bucketIndex * 4 + *(int *)(((unsigned char *)0x00001118) + ctx)) = entry;
+  return entry;
 }
 
-/* FUN_0009cb10 @ 0x9cb10 (280 bytes) */
-int FUN_0009cb10(param_1, param_2, param_3, param_4)
-  int param_1;
-  int param_2;
-  int param_3;
-  int param_4;
+/* fpVariantEntryRecomputeDependencies @ 0x9cb10 (280 bytes) */
+int fpVariantEntryRecomputeDependencies(ctx, entry, depRecord, instrBytes)
+  int ctx;
+  int entry;
+  int depRecord;
+  int instrBytes;
 {
-  undefined4 uVar1;
-  int iVar2;
-  undefined4 uVar3;
-  int iVar4;
-  int local_38;
-  undefined4 local_34;
-  undefined4 local_30;
-  undefined4 local_2c [4];
+  undefined4 scratchCopy;
+  int depStatus;
+  undefined4 instrCount;
+  int program;
+  int newInstrCount;
+  undefined4 outDepA;
+  undefined4 outDepB;
+  undefined4 outDepC [4];
   
-  iVar4 = *(int *)(param_2 + 0x54);
-  uVar1 = (**(code **)(param_1 + 0xc))(param_4 * *(int *)(iVar4 + 0x3cc),param_2,param_3,param_4);
-  *(undefined4 *)(param_3 + 4) = *(undefined4 *)(iVar4 + 0x3c8);
-  uVar3 = *(undefined4 *)(iVar4 + 0x3cc);
-  *(int **)(param_3 + 0x1c) = &local_38;
-  *(undefined4 **)(param_3 + 0x28) = &local_34;
-  *(undefined4 *)(param_3 + 0x18) = uVar1;
-  *(undefined4 **)(param_3 + 0x2c) = &local_30;
-  *(undefined4 *)(param_3 + 8) = uVar3;
-  *(undefined4 **)(param_3 + 0x30) = local_2c;
-  iVar2 = recordProgramBuildDependencies(param_3);
-  if (iVar2 == 0) {
-    _memcpy(*(undefined4 *)(iVar4 + 0x3c8),uVar1,param_4 * local_38);
-    *(int *)(iVar4 + 0x3cc) = local_38;
-    *(undefined4 *)(param_2 + 0x38) = local_30;
-    *(undefined4 *)(param_2 + 0x44) = local_2c[0];
-    *(undefined4 *)(param_2 + 0x34) = local_34;
+  program = *(int *)(entry + 0x54);
+  scratchCopy = (**(code **)(ctx + 0xc))(instrBytes * *(int *)(program + 0x3cc),entry,depRecord,instrBytes);
+  *(undefined4 *)(depRecord + 4) = *(undefined4 *)(program + 0x3c8);
+  instrCount = *(undefined4 *)(program + 0x3cc);
+  *(int **)(depRecord + 0x1c) = &newInstrCount;
+  *(undefined4 **)(depRecord + 0x28) = &outDepA;
+  *(undefined4 *)(depRecord + 0x18) = scratchCopy;
+  *(undefined4 **)(depRecord + 0x2c) = &outDepB;
+  *(undefined4 *)(depRecord + 8) = instrCount;
+  *(undefined4 **)(depRecord + 0x30) = outDepC;
+  depStatus = recordProgramBuildDependencies(depRecord);
+  if (depStatus == 0) {
+    _memcpy(*(undefined4 *)(program + 0x3c8),scratchCopy,instrBytes * newInstrCount);
+    *(int *)(program + 0x3cc) = newInstrCount;
+    *(undefined4 *)(entry + 0x38) = outDepB;
+    *(undefined4 *)(entry + 0x44) = outDepC[0];
+    *(undefined4 *)(entry + 0x34) = outDepA;
   }
   else {
-    _memcpy(*(undefined4 *)(iVar4 + 0x3c8),uVar1,param_4 * *(int *)(iVar4 + 0x3cc));
+    _memcpy(*(undefined4 *)(program + 0x3c8),scratchCopy,instrBytes * *(int *)(program + 0x3cc));
   }
-  (**(code **)(param_1 + 0x18))(uVar1);
-  return iVar2 == 0;
+  (**(code **)(ctx + 0x18))(scratchCopy);
+  return depStatus == 0;
 }
 
-/* FUN_0009cc30 @ 0x9cc30 (712 bytes) */
-int FUN_0009cc30(param_1)
-  int param_1;
+/* ffvpBuildLightKey @ 0x9cc30 (712 bytes) */
+int ffvpBuildLightKey(ctx)
+  int ctx;
 {
-  ushort uVar1;
-  uint uVar2;
-  uint uVar3;
-  bool bVar4;
-  ushort uVar5;
-  ushort uVar6;
-  ushort uVar7;
-  ushort uVar8;
-  ushort uVar9;
-  ushort uVar10;
-  ushort uVar11;
-  ushort uVar12;
-  float fVar13;
-  float fVar14;
-  uint uVar15;
-  uint uVar16;
-  int iVar17;
-  uint uVar18;
-  int iVar19;
-  bool bVar20;
-  uint uVar21;
-  ushort *puVar22;
-  int iVar23;
-  bool bVar24;
-  int iVar25;
+  uint keyBit24;
+  uint lightMaskCursorB;
+  uint lightMaskCursor;
+  uint keyBit10;
+  int lightCountdown;
+  int lightControlBase;
+  int lightsKeyBit;
+  ushort oldLightKey;
+  uint keyBit29;
+  uint keyBit26;
+  bool anyDirectionalLight;
+  ushort lightKeyBit8;
+  ushort lightKeyBit7;
+  ushort lightKeyBit5;
+  ushort lightKeyBits13to14;
+  ushort lightKeyBits11to12;
+  ushort lightKeyBits9to10;
+  ushort lightKeyBit6;
+  ushort lightKeyBit4;
+  float zeroConst;
+  float oneConst;
+  uint oldKey;
+  uint keyPartial;
+  int lightWordOffset;
+  uint ctxFlags44;
+  int lightStateCursor;
+  bool anyPositionalLight;
+  uint colorMaterialLights;
+  ushort *lightKeyCursor;
+  int stateBlock;
+  bool lightIsDirectional;
+  int lightCountdownB;
   
-  iVar23 = *(int *)(*(int *)(param_1 + 4) + 0x10);
-  if (*(char *)(iVar23 + 0x24ad) == '\0') {
-    uVar18 = *(uint *)(param_1 + 0x44);
-    bVar20 = false;
-    bVar4 = false;
-    uVar21 = 0;
+  stateBlock = *(int *)(*(int *)(ctx + 4) + 0x10);
+  if (*(char *)(stateBlock + 0x24ad) == '\0') {
+    ctxFlags44 = *(uint *)(ctx + 0x44);
+    anyPositionalLight = false;
+    anyDirectionalLight = false;
+    colorMaterialLights = 0;
   }
   else {
-    uVar18 = *(uint *)(param_1 + 0x44);
-    if (((int)uVar18 < 0) && (uVar21 = *(uint *)(param_1 + 0x88), uVar21 != 0)) {
-      bVar20 = false;
-      bVar4 = false;
-      iVar19 = iVar23;
+    ctxFlags44 = *(uint *)(ctx + 0x44);
+    if (((int)ctxFlags44 < 0) && (lightMaskCursorB = *(uint *)(ctx + 0x88), lightMaskCursorB != 0)) {
+      anyPositionalLight = false;
+      anyDirectionalLight = false;
+      lightStateCursor = stateBlock;
       do {
-        if ((uVar21 & 1) != 0) {
-          bVar24 = *(float *)(iVar19 + 0x24fc) == FLOAT_001aa0d4;
-          bVar4 = (bool)(bVar24 | bVar4);
-          bVar20 = (bool)(!bVar24 | bVar20);
+        if ((lightMaskCursorB & 1) != 0) {
+          lightIsDirectional = *(float *)(lightStateCursor + 0x24fc) == FLOAT_001aa0d4;
+          anyDirectionalLight = (bool)(lightIsDirectional | anyDirectionalLight);
+          anyPositionalLight = (bool)(!lightIsDirectional | anyPositionalLight);
         }
-        uVar21 = uVar21 >> 1;
-        iVar19 = iVar19 + 0x80;
-      } while (uVar21 != 0);
+        lightMaskCursorB = lightMaskCursorB >> 1;
+        lightStateCursor = lightStateCursor + 0x80;
+      } while (lightMaskCursorB != 0);
     }
     else {
-      bVar20 = false;
-      bVar4 = false;
+      anyPositionalLight = false;
+      anyDirectionalLight = false;
     }
-    uVar21 = -(uint)(*(uint *)(param_1 + 0x8c) & 0xc000000) >> 0x1f;
+    colorMaterialLights = -(uint)(*(uint *)(ctx + 0x8c) & 0xc000000) >> 0x1f;
   }
-  uVar15 = *(uint *)(param_1 + 0x1874);
-  uVar2 = ((byte)((unsigned char *)0x00002d48)[iVar23 + 5] & 1) << 0x1d;
-  uVar3 = (*(byte *)(param_1 + 300) & 1) << 0x1a;
-  *(uint *)(param_1 + 0x1874) = uVar3 | uVar2 | uVar15 & 0xdbffffff;
-  if (((uVar21 != 0) || (bVar20)) || (iVar19 = 0, bVar4)) {
-    iVar19 = 1;
+  oldKey = *(uint *)(ctx + 0x1874);
+  keyBit29 = ((byte)((unsigned char *)0x00002d48)[stateBlock + 5] & 1) << 0x1d;
+  keyBit26 = (*(byte *)(ctx + 300) & 1) << 0x1a;
+  *(uint *)(ctx + 0x1874) = keyBit26 | keyBit29 | oldKey & 0xdbffffff;
+  if (((colorMaterialLights != 0) || (anyPositionalLight)) || (lightsKeyBit = 0, anyDirectionalLight)) {
+    lightsKeyBit = 1;
   }
-  uVar21 = iVar19 << 0x18;
-  uVar16 = uVar21 | uVar3 | uVar2 | uVar15 & 0xdaffffff;
-  *(uint *)(param_1 + 0x1874) = uVar16;
-  if ((int)uVar18 < 0) {
-    uVar18 = *(uint *)(param_1 + 0x88);
-    iVar25 = 8;
-    *(uint *)(param_1 + 0x1874) = uVar16 | 0x800;
-    fVar14 = FLOAT_001aa0e8;
-    fVar13 = FLOAT_001aa0d4;
-    puVar22 = (ushort *)(param_1 + 0x1894);
-    iVar17 = 0;
-    iVar19 = param_1 + 0x3a8;
-    uVar16 = (uint)(*(short *)(((unsigned char *)0x00002d48) + iVar23) == -0x7e06) << 10;
-    *(uint *)(param_1 + 0x1874) = uVar16 | uVar21 | uVar3 | uVar2 | uVar15 & 0xdafffbff | 0x800;
-    *(uint *)(param_1 + 0x1874) =
-         (*(byte *)(param_1 + 0x12d) & 1) << 8 |
-         ((byte)((unsigned char *)0x00002d48)[iVar23 + 4] & 1) << 9 |
-         uVar16 | uVar21 | uVar3 | uVar2 | uVar15 & 0xdafff8ff | 0x800;
+  keyBit24 = lightsKeyBit << 0x18;
+  keyPartial = keyBit24 | keyBit26 | keyBit29 | oldKey & 0xdaffffff;
+  *(uint *)(ctx + 0x1874) = keyPartial;
+  if ((int)ctxFlags44 < 0) {
+    lightMaskCursor = *(uint *)(ctx + 0x88);
+    lightCountdownB = 8;
+    *(uint *)(ctx + 0x1874) = keyPartial | 0x800;
+    oneConst = FLOAT_001aa0e8;
+    zeroConst = FLOAT_001aa0d4;
+    lightKeyCursor = (ushort *)(ctx + 0x1894);
+    lightWordOffset = 0;
+    lightControlBase = ctx + 0x3a8;
+    keyBit10 = (uint)(*(short *)(((unsigned char *)0x00002d48) + stateBlock) == -0x7e06) << 10;
+    *(uint *)(ctx + 0x1874) = keyBit10 | keyBit24 | keyBit26 | keyBit29 | oldKey & 0xdafffbff | 0x800;
+    *(uint *)(ctx + 0x1874) =
+         (*(byte *)(ctx + 0x12d) & 1) << 8 |
+         ((byte)((unsigned char *)0x00002d48)[stateBlock + 4] & 1) << 9 |
+         keyBit10 | keyBit24 | keyBit26 | keyBit29 | oldKey & 0xdafff8ff | 0x800;
     do {
-      if ((uVar18 & 1) == 0) {
-        *puVar22 = 0;
+      if ((lightMaskCursor & 1) == 0) {
+        *lightKeyCursor = 0;
       }
       else {
-        uVar1 = *puVar22;
-        *puVar22 = uVar1 | 0x8000;
-        uVar8 = (ushort)((uint)*(undefined4 *)(iVar19 + iVar17) >> 0x11) & 0x6000;
-        *puVar22 = uVar8 | uVar1 & 0x9fff | 0x8000;
-        uVar9 = (*(byte *)(iVar19 + iVar17) & 0x30) << 7;
-        *puVar22 = uVar8 | uVar1 & 0x87ff | 0x8000 | uVar9;
-        uVar10 = (*(byte *)(iVar19 + iVar17) & 0xc) << 7;
-        *puVar22 = uVar8 | uVar1 & 0x81ff | 0x8000 | uVar9 | uVar10;
-        uVar5 = (ushort)(*(float *)(iVar23 + 0x24fc) != fVar13) << 8;
-        *puVar22 = uVar8 | uVar1 & 0x80ff | 0x8000 | uVar9 | uVar10 | uVar5;
-        uVar6 = (ushort)(*(float *)(iVar23 + 0x24fc) == fVar14) << 7;
-        *puVar22 = uVar8 | uVar1 & 0x807f | 0x8000 | uVar9 | uVar10 | uVar5 | uVar6;
-        uVar11 = ((byte)((unsigned char *)0x0000150c)[param_1] & 1) << 6;
-        *puVar22 = uVar8 | uVar1 & 0x803f | 0x8000 | uVar9 | uVar10 | uVar5 | uVar6 | uVar11;
-        uVar7 = (ushort)(*(float *)(iVar23 + 0x251c) != fVar13) << 5;
-        *puVar22 = uVar8 | uVar1 & 0x801f | 0x8000 | uVar9 | uVar10 | uVar5 | uVar6 | uVar11 | uVar7
+        oldLightKey = *lightKeyCursor;
+        *lightKeyCursor = oldLightKey | 0x8000;
+        lightKeyBits13to14 = (ushort)((uint)*(undefined4 *)(lightControlBase + lightWordOffset) >> 0x11) & 0x6000;
+        *lightKeyCursor = lightKeyBits13to14 | oldLightKey & 0x9fff | 0x8000;
+        lightKeyBits11to12 = (*(byte *)(lightControlBase + lightWordOffset) & 0x30) << 7;
+        *lightKeyCursor = lightKeyBits13to14 | oldLightKey & 0x87ff | 0x8000 | lightKeyBits11to12;
+        lightKeyBits9to10 = (*(byte *)(lightControlBase + lightWordOffset) & 0xc) << 7;
+        *lightKeyCursor = lightKeyBits13to14 | oldLightKey & 0x81ff | 0x8000 | lightKeyBits11to12 | lightKeyBits9to10;
+        lightKeyBit8 = (ushort)(*(float *)(stateBlock + 0x24fc) != zeroConst) << 8;
+        *lightKeyCursor = lightKeyBits13to14 | oldLightKey & 0x80ff | 0x8000 | lightKeyBits11to12 | lightKeyBits9to10 | lightKeyBit8;
+        lightKeyBit7 = (ushort)(*(float *)(stateBlock + 0x24fc) == oneConst) << 7;
+        *lightKeyCursor = lightKeyBits13to14 | oldLightKey & 0x807f | 0x8000 | lightKeyBits11to12 | lightKeyBits9to10 | lightKeyBit8 | lightKeyBit7;
+        lightKeyBit6 = ((byte)((unsigned char *)0x0000150c)[ctx] & 1) << 6;
+        *lightKeyCursor = lightKeyBits13to14 | oldLightKey & 0x803f | 0x8000 | lightKeyBits11to12 | lightKeyBits9to10 | lightKeyBit8 | lightKeyBit7 | lightKeyBit6;
+        lightKeyBit5 = (ushort)(*(float *)(stateBlock + 0x251c) != zeroConst) << 5;
+        *lightKeyCursor = lightKeyBits13to14 | oldLightKey & 0x801f | 0x8000 | lightKeyBits11to12 | lightKeyBits9to10 | lightKeyBit8 | lightKeyBit7 | lightKeyBit6 | lightKeyBit5
         ;
-        uVar12 = (ushort)((uint)*(undefined4 *)(iVar19 + iVar17) >> 0x15) & 0x10;
-        *puVar22 = uVar12 | uVar8 | uVar1 & 0x800f | 0x8000 | uVar9 | uVar10 | uVar5 | uVar6 |
-                            uVar11 | uVar7;
-        *puVar22 = uVar12 | uVar8 | uVar1 & 0x8007 | 0x8000 | uVar9 | uVar10 | uVar5 | uVar6 |
-                            uVar11 | uVar7 | (*(byte *)(iVar19 + iVar17) & 1) << 3;
+        lightKeyBit4 = (ushort)((uint)*(undefined4 *)(lightControlBase + lightWordOffset) >> 0x15) & 0x10;
+        *lightKeyCursor = lightKeyBit4 | lightKeyBits13to14 | oldLightKey & 0x800f | 0x8000 | lightKeyBits11to12 | lightKeyBits9to10 | lightKeyBit8 | lightKeyBit7 |
+                            lightKeyBit6 | lightKeyBit5;
+        *lightKeyCursor = lightKeyBit4 | lightKeyBits13to14 | oldLightKey & 0x8007 | 0x8000 | lightKeyBits11to12 | lightKeyBits9to10 | lightKeyBit8 | lightKeyBit7 |
+                            lightKeyBit6 | lightKeyBit5 | (*(byte *)(lightControlBase + lightWordOffset) & 1) << 3;
       }
-      uVar18 = uVar18 >> 1;
-      puVar22 = puVar22 + 1;
-      iVar17 = iVar17 + 4;
-      iVar23 = iVar23 + 0x80;
-      param_1 = param_1 + 0x6c;
-      iVar25 = iVar25 + -1;
-    } while (iVar25 != 0);
+      lightMaskCursor = lightMaskCursor >> 1;
+      lightKeyCursor = lightKeyCursor + 1;
+      lightWordOffset = lightWordOffset + 4;
+      stateBlock = stateBlock + 0x80;
+      ctx = ctx + 0x6c;
+      lightCountdownB = lightCountdownB + -1;
+    } while (lightCountdownB != 0);
   }
   else {
-    iVar23 = 8;
-    *(uint *)(param_1 + 0x1874) =
-         -(uVar18 & 0xa10000) >> 0x18 & 0x80 | uVar21 | uVar3 | uVar2 | uVar15 & 0xdafff07f;
+    lightCountdown = 8;
+    *(uint *)(ctx + 0x1874) =
+         -(ctxFlags44 & 0xa10000) >> 0x18 & 0x80 | keyBit24 | keyBit26 | keyBit29 | oldKey & 0xdafff07f;
     do {
-      *(undefined2 *)(param_1 + 0x1894) = 0;
-      param_1 = param_1 + 2;
-      iVar23 = iVar23 + -1;
-    } while (iVar23 != 0);
+      *(undefined2 *)(ctx + 0x1894) = 0;
+      ctx = ctx + 2;
+      lightCountdown = lightCountdown + -1;
+    } while (lightCountdown != 0);
   }
   return;
 }
 
-/* FUN_0009cf10 @ 0x9cf10 (224 bytes) */
-int FUN_0009cf10(param_1, param_2, param_3, param_4, param_5, param_6)
-  int param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
+/* ffvpBuildFogKey @ 0x9cf10 (224 bytes) */
+int ffvpBuildFogKey(ctx, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unusedArg6)
+  int ctx;
+  undefined4 unusedArg2;
+  undefined4 unusedArg3;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
 {
-  short sVar1;
-  int iVar2;
-  uint uVar3;
+  short fogDistanceMode;
+  short fogMode;
+  int stateBlock;
+  uint fogCode;
   
-  iVar2 = *(int *)(*(int *)(param_1 + 4) + 0x10);
-  if (((*(uint *)(param_1 + 0x44) & 0x1000000) != 0) && (*(char *)(param_1 + 0x121) == '\0')) {
-    sVar1 = *(short *)(((unsigned char *)0x00002e04) + iVar2);
-    uVar3 = 2;
-    if ((sVar1 != 0x801) && (uVar3 = 3, sVar1 != 0x2601)) {
-      uVar3 = (uint)(sVar1 == 0x800);
+  stateBlock = *(int *)(*(int *)(ctx + 4) + 0x10);
+  if (((*(uint *)(ctx + 0x44) & 0x1000000) != 0) && (*(char *)(ctx + 0x121) == '\0')) {
+    fogMode = *(short *)(((unsigned char *)0x00002e04) + stateBlock);
+    fogCode = 2;
+    if ((fogMode != 0x801) && (fogCode = 3, fogMode != 0x2601)) {
+      fogCode = (uint)(fogMode == 0x800);
     }
-    *(uint *)(param_1 + 0x1874) =
-         (uint)(*(short *)(((unsigned char *)0x00002e06) + iVar2) == -0x7baf) << 4 |
-         uVar3 << 5 | *(uint *)(param_1 + 0x1874) & 0xffffff8f;
-    sVar1 = *(short *)(((unsigned char *)0x00002e08) + iVar2);
-    if (sVar1 == -0x7aa5) {
-      uVar3 = 2;
+    *(uint *)(ctx + 0x1874) =
+         (uint)(*(short *)(((unsigned char *)0x00002e06) + stateBlock) == -0x7baf) << 4 |
+         fogCode << 5 | *(uint *)(ctx + 0x1874) & 0xffffff8f;
+    fogDistanceMode = *(short *)(((unsigned char *)0x00002e08) + stateBlock);
+    if (fogDistanceMode == -0x7aa5) {
+      fogCode = 2;
     }
-    else if (sVar1 == -0x7aa4) {
-      uVar3 = 0;
+    else if (fogDistanceMode == -0x7aa4) {
+      fogCode = 0;
     }
-    else if (sVar1 == 0x2502) {
-      uVar3 = 1;
+    else if (fogDistanceMode == 0x2502) {
+      fogCode = 1;
     }
-    *(uint *)(param_1 + 0x1878) = uVar3 << 0x12 | *(uint *)(param_1 + 0x1878) & 0xfff3ffff;
+    *(uint *)(ctx + 0x1878) = fogCode << 0x12 | *(uint *)(ctx + 0x1878) & 0xfff3ffff;
     return;
   }
-  *(uint *)(param_1 + 0x1874) = *(uint *)(param_1 + 0x1874) & 0xffffff8f;
-  *(uint *)(param_1 + 0x1878) = *(uint *)(param_1 + 0x1878) & 0xfff3ffff;
+  *(uint *)(ctx + 0x1874) = *(uint *)(ctx + 0x1874) & 0xffffff8f;
+  *(uint *)(ctx + 0x1878) = *(uint *)(ctx + 0x1878) & 0xfff3ffff;
   return;
 }
 
-/* FUN_0009cff0 @ 0x9cff0 (132 bytes) */
-int FUN_0009cff0(param_1)
-  int param_1;
+/* ffvpBuildBlendKey @ 0x9cff0 (132 bytes) */
+int ffvpBuildBlendKey(ctx)
+  int ctx;
 {
-  byte bVar1;
-  byte bVar2;
-  uint uVar3;
-  int iVar4;
+  byte blendFlag13a9;
+  byte blendFlag13aa;
+  uint oldKey;
+  int stateBlock;
   
-  iVar4 = *(int *)(*(int *)(param_1 + 4) + 0x10);
-  if ((((unsigned char *)0x00004301)[iVar4] != '\0') && (*(byte *)(param_1 + 0x91) != 0)) {
-    uVar3 = *(uint *)(param_1 + 0x1874);
-    bVar1 = ((unsigned char *)0x000013a9)[param_1];
-    bVar2 = ((unsigned char *)0x000013aa)[param_1];
-    *(uint *)(param_1 + 0x1874) = uVar3 | 0x8000000;
-    *(uint *)(param_1 + 0x1874) =
-         (bVar2 & 1) << 0xf |
-         (bVar1 & 1) << 0x10 |
-         (*(byte *)(param_1 + 0x91) & 7) << 0x11 |
-         (uint)(*(char *)(param_1 + 0x90) == '\x02') << 0x14 |
-         (*(uint *)(param_1 + 0x8c) & 0x80000) << 2 |
-         ((byte)((unsigned char *)0x00004302)[iVar4] & 1) << 0x16 | uVar3 & 0xff807fff | 0x8000000;
+  stateBlock = *(int *)(*(int *)(ctx + 4) + 0x10);
+  if ((((unsigned char *)0x00004301)[stateBlock] != '\0') && (*(byte *)(ctx + 0x91) != 0)) {
+    oldKey = *(uint *)(ctx + 0x1874);
+    blendFlag13a9 = ((unsigned char *)0x000013a9)[ctx];
+    blendFlag13aa = ((unsigned char *)0x000013aa)[ctx];
+    *(uint *)(ctx + 0x1874) = oldKey | 0x8000000;
+    *(uint *)(ctx + 0x1874) =
+         (blendFlag13aa & 1) << 0xf |
+         (blendFlag13a9 & 1) << 0x10 |
+         (*(byte *)(ctx + 0x91) & 7) << 0x11 |
+         (uint)(*(char *)(ctx + 0x90) == '\x02') << 0x14 |
+         (*(uint *)(ctx + 0x8c) & 0x80000) << 2 |
+         ((byte)((unsigned char *)0x00004302)[stateBlock] & 1) << 0x16 | oldKey & 0xff807fff | 0x8000000;
     return;
   }
-  *(uint *)(param_1 + 0x1874) = *(uint *)(param_1 + 0x1874) & 0xf7807fff;
+  *(uint *)(ctx + 0x1874) = *(uint *)(ctx + 0x1874) & 0xf7807fff;
   return;
 }
 
-/* FUN_0009d080 @ 0x9d080 (596 bytes) */
-int FUN_0009d080(param_1, param_2, param_3, param_4, param_5, param_6)
-  int param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
+/* ffvpUpdateLightModelFlags @ 0x9d080 (596 bytes) */
+int ffvpUpdateLightModelFlags(ctx, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unusedArg6)
+  int ctx;
+  undefined4 unusedArg2;
+  undefined4 unusedArg3;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
 {
-  bool bVar1;
-  bool bVar2;
-  float fVar3;
-  uint uVar4;
-  undefined1 uVar5;
-  int iVar6;
-  byte bVar7;
-  int iVar8;
-  uint *puVar9;
-  bool bVar10;
+  uint texGenNeedsNormal;
+  uint lightMaskShifting;
+  byte secondaryColorFlag;
+  bool anyDirectionalLight;
+  bool anyPositionalLight;
+  float zeroConst;
+  uint packedMaterialSources;
+  undefined1 normalizeFlag;
+  int stateBlock;
+  byte separateSpecularLight;
+  int lightStateCursor;
+  uint *lightControlCursor;
+  bool lightIsDirectional;
   
-  iVar6 = *(int *)(*(int *)(param_1 + 4) + 0x10);
-  *(undefined1 *)(param_1 + 0x128) = 0;
-  *(undefined1 *)(param_1 + 0x129) = 0;
-  *(undefined1 *)(param_1 + 0x130) = 0;
-  *(undefined1 *)(param_1 + 0x12a) = 0;
-  if (*(int *)(param_1 + 0x44) < 0) {
-    if (*(int *)(param_1 + 0x13c) == 1) {
-      uVar4 = *(uint *)(param_1 + 0x26c);
-      *(undefined4 *)(param_1 + 0x290) = 2;
-      *(uint *)(param_1 + 0x278) = uVar4 >> 4 & 0xf;
-      *(uint *)(param_1 + 0x270) = uVar4 & 0xf;
-      *(uint *)(param_1 + 0x280) = uVar4 >> 8 & 0xf;
-      *(uint *)(param_1 + 0x28c) = uVar4 >> 0x1c;
-      *(uint *)(param_1 + 0x288) = uVar4 >> 0xc & 0xf;
-      *(uint *)(param_1 + 0x274) = uVar4 >> 0x10 & 0xf;
-      *(uint *)(param_1 + 0x27c) = uVar4 >> 0x14 & 0xf;
-      *(undefined4 *)(param_1 + 0x294) = 3;
-      *(uint *)(param_1 + 0x284) = uVar4 >> 0x18 & 0xf;
+  stateBlock = *(int *)(*(int *)(ctx + 4) + 0x10);
+  *(undefined1 *)(ctx + 0x128) = 0;
+  *(undefined1 *)(ctx + 0x129) = 0;
+  *(undefined1 *)(ctx + 0x130) = 0;
+  *(undefined1 *)(ctx + 0x12a) = 0;
+  if (*(int *)(ctx + 0x44) < 0) {
+    if (*(int *)(ctx + 0x13c) == 1) {
+      packedMaterialSources = *(uint *)(ctx + 0x26c);
+      *(undefined4 *)(ctx + 0x290) = 2;
+      *(uint *)(ctx + 0x278) = packedMaterialSources >> 4 & 0xf;
+      *(uint *)(ctx + 0x270) = packedMaterialSources & 0xf;
+      *(uint *)(ctx + 0x280) = packedMaterialSources >> 8 & 0xf;
+      *(uint *)(ctx + 0x28c) = packedMaterialSources >> 0x1c;
+      *(uint *)(ctx + 0x288) = packedMaterialSources >> 0xc & 0xf;
+      *(uint *)(ctx + 0x274) = packedMaterialSources >> 0x10 & 0xf;
+      *(uint *)(ctx + 0x27c) = packedMaterialSources >> 0x14 & 0xf;
+      *(undefined4 *)(ctx + 0x294) = 3;
+      *(uint *)(ctx + 0x284) = packedMaterialSources >> 0x18 & 0xf;
     }
     else {
-      *(undefined4 *)(param_1 + 0x280) = 2;
-      *(undefined4 *)(param_1 + 0x288) = 3;
-      *(undefined4 *)(param_1 + 0x290) = 0;
-      *(undefined4 *)(param_1 + 0x294) = 1;
-      *(undefined4 *)(param_1 + 0x274) = 4;
-      *(undefined4 *)(param_1 + 0x27c) = 5;
-      *(undefined4 *)(param_1 + 0x270) = 0;
-      *(undefined4 *)(param_1 + 0x278) = 1;
-      *(undefined4 *)(param_1 + 0x284) = 6;
-      *(undefined4 *)(param_1 + 0x28c) = 7;
+      *(undefined4 *)(ctx + 0x280) = 2;
+      *(undefined4 *)(ctx + 0x288) = 3;
+      *(undefined4 *)(ctx + 0x290) = 0;
+      *(undefined4 *)(ctx + 0x294) = 1;
+      *(undefined4 *)(ctx + 0x274) = 4;
+      *(undefined4 *)(ctx + 0x27c) = 5;
+      *(undefined4 *)(ctx + 0x270) = 0;
+      *(undefined4 *)(ctx + 0x278) = 1;
+      *(undefined4 *)(ctx + 0x284) = 6;
+      *(undefined4 *)(ctx + 0x28c) = 7;
     }
-    fVar3 = FLOAT_001aa0d4;
-    uVar4 = *(uint *)(param_1 + 0x88);
-    if (uVar4 != 0) {
-      bVar1 = false;
-      bVar2 = false;
-      puVar9 = (uint *)(param_1 + 0x3a8);
-      iVar8 = iVar6;
+    zeroConst = FLOAT_001aa0d4;
+    lightMaskShifting = *(uint *)(ctx + 0x88);
+    if (lightMaskShifting != 0) {
+      anyDirectionalLight = false;
+      anyPositionalLight = false;
+      lightControlCursor = (uint *)(ctx + 0x3a8);
+      lightStateCursor = stateBlock;
       do {
-        if ((uVar4 & 1) != 0) {
-          if ((((*puVar9 & 0xc000000) == 0) || (*(short *)(((unsigned char *)0x00002d48) + iVar6) != -0x7e06)) ||
-             (bVar7 = 1, ((unsigned char *)0x00002d48)[iVar6 + 5] == '\0')) {
-            bVar7 = 0;
+        if ((lightMaskShifting & 1) != 0) {
+          if ((((*lightControlCursor & 0xc000000) == 0) || (*(short *)(((unsigned char *)0x00002d48) + stateBlock) != -0x7e06)) ||
+             (separateSpecularLight = 1, ((unsigned char *)0x00002d48)[stateBlock + 5] == '\0')) {
+            separateSpecularLight = 0;
           }
-          *(byte *)(param_1 + 0x130) = bVar7 | *(byte *)(param_1 + 0x130);
-          bVar10 = *(float *)(iVar8 + 0x24fc) == fVar3;
-          bVar1 = (bool)(bVar10 | bVar1);
-          bVar2 = (bool)(!bVar10 | bVar2);
+          *(byte *)(ctx + 0x130) = separateSpecularLight | *(byte *)(ctx + 0x130);
+          lightIsDirectional = *(float *)(lightStateCursor + 0x24fc) == zeroConst;
+          anyDirectionalLight = (bool)(lightIsDirectional | anyDirectionalLight);
+          anyPositionalLight = (bool)(!lightIsDirectional | anyPositionalLight);
         }
-        uVar4 = uVar4 >> 1;
-        puVar9 = puVar9 + 1;
-        iVar8 = iVar8 + 0x80;
-      } while (uVar4 != 0);
+        lightMaskShifting = lightMaskShifting >> 1;
+        lightControlCursor = lightControlCursor + 1;
+        lightStateCursor = lightStateCursor + 0x80;
+      } while (lightMaskShifting != 0);
       goto LAB_0009d228;
     }
   }
-  bVar1 = false;
-  bVar2 = false;
+  anyDirectionalLight = false;
+  anyPositionalLight = false;
 LAB_0009d228:
-  uVar4 = *(uint *)(param_1 + 0x8c) >> 0x1b & 1 | *(uint *)(param_1 + 0x8c) >> 0x1a & 1;
-  if ((uVar4 == 0) || (bVar7 = 1, ((unsigned char *)0x00002d48)[iVar6 + 5] == '\0')) {
-    bVar7 = 0;
+  texGenNeedsNormal = *(uint *)(ctx + 0x8c) >> 0x1b & 1 | *(uint *)(ctx + 0x8c) >> 0x1a & 1;
+  if ((texGenNeedsNormal == 0) || (separateSpecularLight = 1, ((unsigned char *)0x00002d48)[stateBlock + 5] == '\0')) {
+    separateSpecularLight = 0;
   }
-  bVar7 = *(byte *)(param_1 + 0x130) | bVar7;
-  *(byte *)(param_1 + 0x130) = bVar7;
-  *(byte *)(param_1 + 0x129) = bVar2 | bVar7;
-  if ((((uVar4 == 0) && (!bVar2)) && (!bVar1)) || (uVar5 = 1, *(char *)(iVar6 + 0x24ad) == '\0')) {
-    uVar5 = 0;
+  separateSpecularLight = *(byte *)(ctx + 0x130) | separateSpecularLight;
+  *(byte *)(ctx + 0x130) = separateSpecularLight;
+  *(byte *)(ctx + 0x129) = anyPositionalLight | separateSpecularLight;
+  if ((((texGenNeedsNormal == 0) && (!anyPositionalLight)) && (!anyDirectionalLight)) || (normalizeFlag = 1, *(char *)(stateBlock + 0x24ad) == '\0')) {
+    normalizeFlag = 0;
   }
-  *(undefined1 *)(param_1 + 0x128) = uVar5;
-  if ((*(char *)(param_1 + 0x12f) != '\0') || (bVar7 = 1, -1 < *(int *)(param_1 + 0x44))) {
-    bVar7 = 0;
+  *(undefined1 *)(ctx + 0x128) = normalizeFlag;
+  if ((*(char *)(ctx + 0x12f) != '\0') || (secondaryColorFlag = 1, -1 < *(int *)(ctx + 0x44))) {
+    secondaryColorFlag = 0;
   }
-  *(byte *)(param_1 + 0x12a) = bVar7 | (byte)uVar4;
+  *(byte *)(ctx + 0x12a) = secondaryColorFlag | (byte)texGenNeedsNormal;
   return;
 }
 
-/* FUN_0009d2e0 @ 0x9d2e0 (184 bytes) */
-int FUN_0009d2e0(param_1)
-  int param_1;
+/* ffvpRunStateHook @ 0x9d2e0 (184 bytes) */
+int ffvpRunStateHook(ctx)
+  int ctx;
 {
   code *UNRECOVERED_JUMPTABLE;
-  int iVar1;
+  int hookArg;
   
-  if (*(char *)(param_1 + 0x3d4) != '\0') {
+  if (*(char *)(ctx + 0x3d4) != '\0') {
     return;
   }
-  if (*(char *)(param_1 + 0x124) == '\0') {
-    if ((*(uint *)(param_1 + 0x44) & 0x100000) != 0) {
+  if (*(char *)(ctx + 0x124) == '\0') {
+    if ((*(uint *)(ctx + 0x44) & 0x100000) != 0) {
       return;
     }
-    iVar1 = *(int *)(param_1 + 0x14c);
-    if (iVar1 == 0) {
+    hookArg = *(int *)(ctx + 0x14c);
+    if (hookArg == 0) {
       return;
     }
-    (**(code **)(((unsigned char *)0x000012d0) + param_1))(param_1,iVar1);
-    UNRECOVERED_JUMPTABLE = *(code **)(((unsigned char *)0x000012c4) + param_1);
+    (**(code **)(((unsigned char *)0x000012d0) + ctx))(ctx,hookArg);
+    UNRECOVERED_JUMPTABLE = *(code **)(((unsigned char *)0x000012c4) + ctx);
   }
   else {
-    iVar1 = *(int *)(param_1 + 0x14c);
-    if (iVar1 == 0) {
+    hookArg = *(int *)(ctx + 0x14c);
+    if (hookArg == 0) {
       return;
     }
-    UNRECOVERED_JUMPTABLE = *(code **)(((unsigned char *)0x000012d0) + param_1);
+    UNRECOVERED_JUMPTABLE = *(code **)(((unsigned char *)0x000012d0) + ctx);
   }
                     
                     
-  (*UNRECOVERED_JUMPTABLE)(param_1,iVar1);
+  (*UNRECOVERED_JUMPTABLE)(ctx,hookArg);
   return;
 }
 
 /* FUN_0009d3b0 @ 0x9d3b0 (64 bytes) */
-int FUN_0009d3b0(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  int param_1;
-  undefined4 param_2;
+int FUN_0009d3b0(ctx, arg2, param_3, param_4, param_5, param_6, param_7)
+  int ctx;
+  undefined4 arg2;
   undefined4 param_3;
   undefined4 param_4;
   undefined4 param_5;
   undefined4 param_6;
   undefined4 param_7;
 {
-  if (param_1 == 0) {
+  if (ctx == 0) {
     return;
   }
-  *(undefined1 *)(param_1 + 0x3d4) = 0;
-  if ((*(uint *)(param_1 + 0x44) & 0x100000) != 0) {
-    if (*(char *)(param_1 + 0x1868) != '\0') {
+  *(undefined1 *)(ctx + 0x3d4) = 0;
+  if ((*(uint *)(ctx + 0x44) & 0x100000) != 0) {
+    if (*(char *)(ctx + 0x1868) != '\0') {
                     
                     
-      (**(code **)((int)((unsigned char *)0x000011cc) + param_1))();
+      (**(code **)((int)((unsigned char *)0x000011cc) + ctx))();
       return;
     }
-    FUN_00064f40(param_1,param_2);
+    FUN_00064f40(ctx,arg2);
     return;
   }
-  ((int (*)())FUN_0009d2e0)(param_1);
+  ((int (*)())ffvpRunStateHook)(ctx);
   return;
 }
 
@@ -6565,194 +6577,197 @@ LAB_0009e8dc:
 }
 
 /* fpVariantCacheGrow @ 0x9eb90 (560 bytes) */
-int fpVariantCacheGrow(param_1, param_2)
-  int param_1;
-  int param_2;
+int fpVariantCacheGrow(ctx, growBy)
+  int ctx;
+  int growBy;
 {
-  uint uVar1;
-  uint uVar2;
-  int iVar3;
-  int iVar4;
-  uint *puVar5;
-  uint *puVar6;
-  uint uVar7;
-  uint *puVar8;
-  uint *puVar9;
-  uint *puVar10;
-  int iVar11;
+  uint *nextEntry;
+  uint *keyTail;
+  int newBucketIndex;
+  uint rotate;
+  uint rotateCounter;
+  int newBuckets;
+  int oldBuckets;
+  uint *entry;
+  uint *keyCursor;
+  uint hash;
+  uint *keyCursorB;
+  uint *keyBlockEnd;
+  uint *keyEnd;
+  int oldBucketCount;
   int loopIndex;
   
-  iVar11 = *(int *)(((unsigned char *)0x0000111c) + param_1);
-  if (iVar11 != 0xfb2f) {
-    *(int *)(((unsigned char *)0x0000111c) + param_1) = iVar11 + param_2;
-    if (0xfb2f < (uint)(iVar11 + param_2)) {
-      *(undefined4 *)(((unsigned char *)0x0000111c) + param_1) = 0xfb2f;
+  oldBucketCount = *(int *)(((unsigned char *)0x0000111c) + ctx);
+  if (oldBucketCount != 0xfb2f) {
+    *(int *)(((unsigned char *)0x0000111c) + ctx) = oldBucketCount + growBy;
+    if (0xfb2f < (uint)(oldBucketCount + growBy)) {
+      *(undefined4 *)(((unsigned char *)0x0000111c) + ctx) = 0xfb2f;
     }
-    iVar3 = (**(code **)(param_1 + 0x10))(1,*(int *)(((unsigned char *)0x0000111c) + param_1) << 2);
-    if (iVar11 == 0) {
-      iVar4 = *(int *)(((unsigned char *)0x00001118) + param_1);
+    newBuckets = (**(code **)(ctx + 0x10))(1,*(int *)(((unsigned char *)0x0000111c) + ctx) << 2);
+    if (oldBucketCount == 0) {
+      oldBuckets = *(int *)(((unsigned char *)0x00001118) + ctx);
     }
     else {
-      iVar4 = *(int *)(((unsigned char *)0x00001118) + param_1);
+      oldBuckets = *(int *)(((unsigned char *)0x00001118) + ctx);
       loopIndex = 0;
       do {
-        puVar5 = *(uint **)(loopIndex * 4 + iVar4);
-        if (puVar5 != (uint *)0x0) {
+        entry = *(uint **)(loopIndex * 4 + oldBuckets);
+        if (entry != (uint *)0x0) {
           do {
-            puVar10 = puVar5 + 0xc;
-            if (puVar10 < puVar5 + 0xb) {
-              uVar7 = 0;
-              puVar6 = puVar5;
+            keyEnd = entry + 0xc;
+            if (keyEnd < entry + 0xb) {
+              hash = 0;
+              keyCursor = entry;
             }
             else {
-              uVar7 = 0;
-              puVar9 = puVar5 + 0xb;
-              puVar8 = puVar5;
+              hash = 0;
+              keyBlockEnd = entry + 0xb;
+              keyCursorB = entry;
               do {
-                puVar6 = puVar9;
-                uVar7 = uVar7 ^ *puVar8 ^ (puVar8[1] << 3 | puVar8[1] >> 0x1d) ^
-                        (puVar8[2] << 6 | puVar8[2] >> 0x1a) ^ (puVar8[3] << 9 | puVar8[3] >> 0x17)
-                        ^ (puVar8[4] << 0xc | puVar8[4] >> 0x14) ^
-                        (puVar8[5] << 0xf | puVar8[5] >> 0x11) ^
-                        (puVar8[6] << 0x12 | puVar8[6] >> 0xe) ^
-                        (puVar8[7] << 0x15 | puVar8[7] >> 0xb) ^
-                        (puVar8[8] << 0x18 | puVar8[8] >> 8) ^ (puVar8[9] << 0x1b | puVar8[9] >> 5)
-                        ^ (puVar8[10] << 0x1e | puVar8[10] >> 2);
-                puVar9 = puVar6 + 0xb;
-                puVar8 = puVar6;
-              } while (puVar6 + 0xb <= puVar10);
+                keyCursor = keyBlockEnd;
+                hash = hash ^ *keyCursorB ^ (keyCursorB[1] << 3 | keyCursorB[1] >> 0x1d) ^
+                        (keyCursorB[2] << 6 | keyCursorB[2] >> 0x1a) ^ (keyCursorB[3] << 9 | keyCursorB[3] >> 0x17)
+                        ^ (keyCursorB[4] << 0xc | keyCursorB[4] >> 0x14) ^
+                        (keyCursorB[5] << 0xf | keyCursorB[5] >> 0x11) ^
+                        (keyCursorB[6] << 0x12 | keyCursorB[6] >> 0xe) ^
+                        (keyCursorB[7] << 0x15 | keyCursorB[7] >> 0xb) ^
+                        (keyCursorB[8] << 0x18 | keyCursorB[8] >> 8) ^ (keyCursorB[9] << 0x1b | keyCursorB[9] >> 5)
+                        ^ (keyCursorB[10] << 0x1e | keyCursorB[10] >> 2);
+                keyBlockEnd = keyCursor + 0xb;
+                keyCursorB = keyCursor;
+              } while (keyCursor + 0xb <= keyEnd);
             }
-            puVar9 = puVar6 + 5;
-            if (puVar10 < puVar9) {
-              uVar2 = 0;
-              puVar9 = puVar6;
+            keyTail = keyCursor + 5;
+            if (keyEnd < keyTail) {
+              rotateCounter = 0;
+              keyTail = keyCursor;
             }
             else {
-              uVar2 = 0xf;
-              uVar7 = uVar7 ^ *puVar6 ^ (puVar6[1] << 3 | puVar6[1] >> 0x1d) ^
-                      (puVar6[2] << 6 | puVar6[2] >> 0x1a) ^ (puVar6[3] << 9 | puVar6[3] >> 0x17) ^
-                      (puVar6[4] << 0xc | puVar6[4] >> 0x14);
+              rotateCounter = 0xf;
+              hash = hash ^ *keyCursor ^ (keyCursor[1] << 3 | keyCursor[1] >> 0x1d) ^
+                      (keyCursor[2] << 6 | keyCursor[2] >> 0x1a) ^ (keyCursor[3] << 9 | keyCursor[3] >> 0x17) ^
+                      (keyCursor[4] << 0xc | keyCursor[4] >> 0x14);
             }
-            for (; puVar9 < puVar10; puVar9 = puVar9 + 1) {
-              uVar1 = uVar2 & 0x1f;
-              uVar2 = uVar2 + 3;
-              uVar7 = uVar7 ^ (*puVar9 << uVar1 | *puVar9 >> 0x20 - uVar1);
+            for (; keyTail < keyEnd; keyTail = keyTail + 1) {
+              rotate = rotateCounter & 0x1f;
+              rotateCounter = rotateCounter + 3;
+              hash = hash ^ (*keyTail << rotate | *keyTail >> 0x20 - rotate);
             }
-            puVar10 = (uint *)puVar5[0x17];
-            iVar4 = (uVar7 - (uVar7 / *(uint *)(((unsigned char *)0x0000111c) + param_1)) *
-                             *(uint *)(((unsigned char *)0x0000111c) + param_1)) * 4;
-            puVar5[0x17] = *(uint *)(iVar3 + iVar4);
-            *(uint **)(iVar3 + iVar4) = puVar5;
-            puVar5 = puVar10;
-          } while (puVar10 != (uint *)0x0);
-          iVar4 = *(int *)(((unsigned char *)0x00001118) + param_1);
+            nextEntry = (uint *)entry[0x17];
+            newBucketIndex = (hash - (hash / *(uint *)(((unsigned char *)0x0000111c) + ctx)) *
+                             *(uint *)(((unsigned char *)0x0000111c) + ctx)) * 4;
+            entry[0x17] = *(uint *)(newBuckets + newBucketIndex);
+            *(uint **)(newBuckets + newBucketIndex) = entry;
+            entry = nextEntry;
+          } while (nextEntry != (uint *)0x0);
+          oldBuckets = *(int *)(((unsigned char *)0x00001118) + ctx);
         }
         loopIndex = loopIndex + 1;
-      } while (iVar11 != loopIndex);
+      } while (oldBucketCount != loopIndex);
     }
-    (**(code **)(param_1 + 0x18))(iVar4);
-    *(int *)(((unsigned char *)0x00001118) + param_1) = iVar3;
+    (**(code **)(ctx + 0x18))(oldBuckets);
+    *(int *)(((unsigned char *)0x00001118) + ctx) = newBuckets;
   }
   return;
 }
 
-/* FUN_0009edd0 @ 0x9edd0 (708 bytes) */
-int FUN_0009edd0(param_1, param_2)
-  int param_1;
-  uint *param_2;
+/* fpVariantCacheLookup @ 0x9edd0 (708 bytes) */
+int fpVariantCacheLookup(ctx, key)
+  int ctx;
+  uint *key;
 {
-  bool bVar1;
-  uint uVar2;
-  uint *puVar3;
-  uint uVar4;
-  int iVar5;
-  uint uVar6;
+  bool hashFullKey;
+  uint rotateAmount;
+  uint *keyCursor;
+  uint hash;
+  int bucketEntry;
+  uint rotateCounter;
   int compareResult;
-  uint *puVar8;
-  uint *puVar9;
-  uint uVar10;
+  uint *keyEnd;
+  uint *keyTail;
+  uint bucketCount;
   int loopIndex;
   
-  bVar1 = ((unsigned char *)0x00001120)[param_1] == '\0';
-  if (bVar1) {
-    puVar8 = param_2 + 0xc;
-    uVar10 = *(uint *)(((unsigned char *)0x0000111c) + param_1);
-    uVar4 = 0;
-    puVar3 = param_2;
-    while (puVar3 + 0xb <= puVar8) {
-      uVar4 = uVar4 ^ *puVar3 ^ (puVar3[1] << 3 | puVar3[1] >> 0x1d) ^
-              (puVar3[2] << 6 | puVar3[2] >> 0x1a) ^ (puVar3[3] << 9 | puVar3[3] >> 0x17) ^
-              (puVar3[4] << 0xc | puVar3[4] >> 0x14) ^ (puVar3[5] << 0xf | puVar3[5] >> 0x11) ^
-              (puVar3[6] << 0x12 | puVar3[6] >> 0xe) ^ (puVar3[7] << 0x15 | puVar3[7] >> 0xb) ^
-              (puVar3[8] << 0x18 | puVar3[8] >> 8) ^ (puVar3[9] << 0x1b | puVar3[9] >> 5) ^
-              (puVar3[10] << 0x1e | puVar3[10] >> 2);
-      puVar3 = puVar3 + 0xb;
+  hashFullKey = ((unsigned char *)0x00001120)[ctx] == '\0';
+  if (hashFullKey) {
+    keyEnd = key + 0xc;
+    bucketCount = *(uint *)(((unsigned char *)0x0000111c) + ctx);
+    hash = 0;
+    keyCursor = key;
+    while (keyCursor + 0xb <= keyEnd) {
+      hash = hash ^ *keyCursor ^ (keyCursor[1] << 3 | keyCursor[1] >> 0x1d) ^
+              (keyCursor[2] << 6 | keyCursor[2] >> 0x1a) ^ (keyCursor[3] << 9 | keyCursor[3] >> 0x17) ^
+              (keyCursor[4] << 0xc | keyCursor[4] >> 0x14) ^ (keyCursor[5] << 0xf | keyCursor[5] >> 0x11) ^
+              (keyCursor[6] << 0x12 | keyCursor[6] >> 0xe) ^ (keyCursor[7] << 0x15 | keyCursor[7] >> 0xb) ^
+              (keyCursor[8] << 0x18 | keyCursor[8] >> 8) ^ (keyCursor[9] << 0x1b | keyCursor[9] >> 5) ^
+              (keyCursor[10] << 0x1e | keyCursor[10] >> 2);
+      keyCursor = keyCursor + 0xb;
     }
-    puVar9 = puVar3 + 5;
-    if (puVar8 < puVar9) {
-      uVar6 = 0;
-      puVar9 = puVar3;
+    keyTail = keyCursor + 5;
+    if (keyEnd < keyTail) {
+      rotateCounter = 0;
+      keyTail = keyCursor;
     }
     else {
-      uVar6 = 0xf;
-      uVar4 = uVar4 ^ *puVar3 ^ (puVar3[1] << 3 | puVar3[1] >> 0x1d) ^
-              (puVar3[2] << 6 | puVar3[2] >> 0x1a) ^ (puVar3[3] << 9 | puVar3[3] >> 0x17) ^
-              (puVar3[4] << 0xc | puVar3[4] >> 0x14);
+      rotateCounter = 0xf;
+      hash = hash ^ *keyCursor ^ (keyCursor[1] << 3 | keyCursor[1] >> 0x1d) ^
+              (keyCursor[2] << 6 | keyCursor[2] >> 0x1a) ^ (keyCursor[3] << 9 | keyCursor[3] >> 0x17) ^
+              (keyCursor[4] << 0xc | keyCursor[4] >> 0x14);
     }
-    for (; puVar9 < puVar8; puVar9 = puVar9 + 1) {
-      uVar2 = uVar6 & 0x1f;
-      uVar6 = uVar6 + 3;
-      uVar4 = uVar4 ^ (*puVar9 << uVar2 | *puVar9 >> 0x20 - uVar2);
+    for (; keyTail < keyEnd; keyTail = keyTail + 1) {
+      rotateAmount = rotateCounter & 0x1f;
+      rotateCounter = rotateCounter + 3;
+      hash = hash ^ (*keyTail << rotateAmount | *keyTail >> 0x20 - rotateAmount);
     }
-    iVar5 = uVar4 - (uVar4 / uVar10) * uVar10;
+    bucketEntry = hash - (hash / bucketCount) * bucketCount;
   }
   else {
-    uVar10 = *(uint *)(((unsigned char *)0x0000111c) + param_1);
-    uVar4 = *param_2 + param_2[2] + param_2[3];
-    iVar5 = uVar4 - (uVar4 / uVar10) * uVar10;
+    bucketCount = *(uint *)(((unsigned char *)0x0000111c) + ctx);
+    hash = *key + key[2] + key[3];
+    bucketEntry = hash - (hash / bucketCount) * bucketCount;
   }
-  iVar5 = *(int *)(iVar5 * 4 + *(int *)(((unsigned char *)0x00001118) + param_1));
-  if (*(char *)(param_1 + 0x2f) == '\0') {
+  bucketEntry = *(int *)(bucketEntry * 4 + *(int *)(((unsigned char *)0x00001118) + ctx));
+  if (*(char *)(ctx + 0x2f) == '\0') {
     loopIndex = 0;
-    if (iVar5 != 0) {
+    if (bucketEntry != 0) {
       do {
-        compareResult = _memcmp(iVar5,param_2,0x30);
+        compareResult = _memcmp(bucketEntry,key,0x30);
         if (compareResult == 0) {
-          return iVar5;
+          return bucketEntry;
         }
-        iVar5 = *(int *)(iVar5 + 0x5c);
+        bucketEntry = *(int *)(bucketEntry + 0x5c);
         loopIndex = loopIndex + 1;
-      } while (iVar5 != 0);
+      } while (bucketEntry != 0);
       goto LAB_0009f014;
     }
   }
   else {
     loopIndex = 0;
-    if (iVar5 != 0) {
+    if (bucketEntry != 0) {
       do {
-        compareResult = _memcmp(iVar5,param_2,0x18);
+        compareResult = _memcmp(bucketEntry,key,0x18);
         if (compareResult == 0) {
-          return iVar5;
+          return bucketEntry;
         }
-        iVar5 = *(int *)(iVar5 + 0x5c);
+        bucketEntry = *(int *)(bucketEntry + 0x5c);
         loopIndex = loopIndex + 1;
-      } while (iVar5 != 0);
+      } while (bucketEntry != 0);
       goto LAB_0009f014;
     }
   }
   loopIndex = 0;
 LAB_0009f014:
-  if ((bVar1) || (loopIndex < 5)) {
-    if ((loopIndex < 8) || (0xfb2e < uVar10)) {
+  if ((hashFullKey) || (loopIndex < 5)) {
+    if ((loopIndex < 8) || (0xfb2e < bucketCount)) {
       return 0;
     }
-    if (bVar1) {
-      ((int (*)())fpVariantCacheGrow)(param_1,0x859);
+    if (hashFullKey) {
+      ((int (*)())fpVariantCacheGrow)(ctx,0x859);
       return 0;
     }
   }
-  ((int (*)())fpVariantCacheGrow)(param_1,0);
-  ((unsigned char *)0x00001120)[param_1] = 0;
+  ((int (*)())fpVariantCacheGrow)(ctx,0);
+  ((unsigned char *)0x00001120)[ctx] = 0;
   return 0;
 }
 

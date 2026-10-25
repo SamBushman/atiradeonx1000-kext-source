@@ -47,3 +47,14 @@ func	FUN_0009b430	ffvpEmitColorOutputs	INFERRED	final colour outputs for each si
 func	FUN_0009b850	ffvpEmitFogTexCoord	INFERRED	writes the fog distance (same sources as ffvpEmitFogDistance) to texcoord output n (builder+0x84+4n, output file +0x14)
 func	FUN_0009bbf0	vec4StoreAtIndex	INFERRED	copies the 16-byte vector *src to table[index] (16-byte stride)
 func	FUN_0009be00	ffvpAnalyzeLightState	INFERRED	derives the per-light control words (ctx+0x3a8+4*i: 2-bit ambient/diffuse/specular source codes, bits 25..23 flags) from the state block light colours (all 0 / all 1 / general / colour-material), caches the light vectors and sets ctx flags +0x12c/+0x12d/+0x12f
+func	FUN_0009edd0	fpVariantCacheLookup	INFERRED	looks up a variant key (12 words, 0x30 bytes; 0x18 when the short form is in use) in the ctx variant cache (buckets at ctx+0x1118, count at +0x111c); counts the chain length and grows the cache when chains get long
+func	FUN_0009c800	fpVariantCacheInsert	INFERRED	allocates a 0x60-byte cache entry, copies the key, records program/dependencies/parameter list and links the entry into its hash bucket; flushes the cache above 1000000 entries
+func	FUN_0009cb10	fpVariantEntryRecomputeDependencies	INFERRED	re-runs recordProgramBuildDependencies on a copy of the entry program instructions and stores the resulting instruction count and dependency words back
+func	FUN_0009bc10	mat4StoreAtIndex	INFERRED	stores a 4x4 float matrix at table[index] (64-byte stride), transposed when the first argument is zero
+func	FUN_0009bd00	paramListCreate	INFERRED	allocates a {data, end, count} parameter list sized by ctx+0x13be entries
+func	FUN_0009bd60	ffvpInitContextState	INFERRED	clears the ffvp-related ctx flag bytes/words (+0x124..+0x14c, +0x150..) and installs vec4StoreAtIndex / mat4StoreAtIndex at ctx+0x12cc/+0x12c8
+func	FUN_0009d2e0	ffvpRunStateHook	INFERRED	calls the ctx hooks at +0x12c4/+0x12d0 with the cached program (ctx+0x14c)
+func	FUN_0009d080	ffvpUpdateLightModelFlags	INFERRED	derives ctx flags +0x128 (normalize) +0x129 +0x12a (transform normals) +0x130 and decodes the colour material source ids ctx+0x270..+0x294 from the packed word at +0x26c
+func	FUN_0009cc30	ffvpBuildLightKey	INFERRED	packs the light-model state (per-light 16-bit keys at ctx+0x1894, flags in ctx+0x1874) used as the ffvp variant cache key
+func	FUN_0009cff0	ffvpBuildBlendKey	INFERRED	packs the vertex-blend state (ctx+0x91 weight count, matrix palette bits) into the variant key word ctx+0x1874
+func	FUN_0009cf10	ffvpBuildFogKey	INFERRED	packs the fog mode (0x800/0x801/0x2601), fog coordinate source and fog distance mode into the variant key words ctx+0x1874/+0x1878

@@ -3753,7 +3753,7 @@ int FUN_0008fb70(param_1)
               (param_1,iVar1 + 0x13c,*(undefined4 *)(iVar1 + 0x130),in_r6,in_r7,in_r8,
                *(int *)(((unsigned char *)0x0000118c) + param_1) * 4);
   }
-  FUN_0009d2e0(param_1);
+  ffvpRunStateHook(param_1);
   *(char *)(param_1 + 0x23ec) = '\x01' - (iVar2 == *(int *)(param_1 + 0x1b7c));
   return;
 }
@@ -4096,12 +4096,12 @@ void gldValidateState(int glContext,undefined4 param_2,undefined4 param_3,undefi
     }
     if ((dirtyMask & 0x100) != 0) {
       ((void (*)())FUN_0004f2e0)(glContext,param_2,param_3,param_4,fparam_1);
-      fparam_1 = (double)FUN_0009cf10(glContext,extraout_r4_04,param_3,param_4,param_5,param_6);
+      fparam_1 = (double)ffvpBuildFogKey(glContext,extraout_r4_04,param_3,param_4,param_5,param_6);
       dirtyMask = *(uint *)(glContext + 0x38);
       param_2 = extraout_r4_05;
     }
     if ((dirtyMask & 0x800) != 0) {
-      fparam_1 = (double)FUN_0009cff0(glContext);
+      fparam_1 = (double)ffvpBuildBlendKey(glContext);
       dirtyMask = *(uint *)(glContext + 0x38);
       param_2 = extraout_r4_06;
     }
@@ -5622,14 +5622,14 @@ int ffvpEmitColorPassThrough(programBuilder, colorKind, inputAttrib, sideIndex)
 }
 
 /* ffvpEmitTexCoordPassThrough @ 0x93000 (288 bytes) */
-int ffvpEmitTexCoordPassThrough(programBuilder, texUnit, param_3, param_4, param_5, param_6, param_7)
+int ffvpEmitTexCoordPassThrough(programBuilder, texUnit, useXyz1Select, texUnitAlias, texMatrixEnabled, texMatrixUnit, texGenModes)
   int programBuilder;
   uint texUnit;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+  undefined4 useXyz1Select;
+  undefined4 texUnitAlias;
+  undefined4 texMatrixEnabled;
+  undefined4 texMatrixUnit;
+  undefined4 texGenModes;
 {
   bool noInvW;
   int texInputReg;

@@ -3071,7 +3071,7 @@ LAB_00050920:
   }
   else {
     *(undefined1 *)(glContext + 0x23ec) = 1;
-    FUN_0009d2e0(glContext);
+    ffvpRunStateHook(glContext);
   }
   *(undefined1 *)(glContext + 0x23ec) = 1;
   return;

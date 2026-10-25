@@ -5242,16 +5242,16 @@ LAB_00065500:
   if ((*(uint *)(param_1 + 0x44) & 0x100000) != 0) {
     return;
   }
-  uVar5 = FUN_0009edd0(param_1,param_1 + 0x1874);
+  uVar5 = fpVariantCacheLookup(param_1,param_1 + 0x1874);
   iVar2 = (int)((ulonglong)uVar5 >> 0x20);
   uVar3 = (undefined4)uVar5;
   if (iVar2 == 0) {
-    FUN_0009d080(param_1,uVar3,in_r5,in_r6,in_r7,in_r8);
-    uVar3 = FUN_0009bd00(param_1);
+    ffvpUpdateLightModelFlags(param_1,uVar3,in_r5,in_r6,in_r7,in_r8);
+    uVar3 = paramListCreate(param_1);
     (**(code **)(((unsigned char *)0x000012b4) + param_1))(param_1);
     in_r5 = ffvpBuildProgram(param_1,1,&local_38,local_34,uVar3,in_r8,iVar4,in_r10);
     in_r6 = (uint)*(byte *)(param_1 + 0x131);
-    uVar5 = FUN_0009c800(param_1,param_1 + 0x1874,in_r5,in_r6,local_38,local_34[0],uVar3,
+    uVar5 = fpVariantCacheInsert(param_1,param_1 + 0x1874,in_r5,in_r6,local_38,local_34[0],uVar3,
                          (uint)*(byte *)(param_1 + 0x126));
     iVar2 = (int)((ulonglong)uVar5 >> 0x20);
     in_r7 = local_38;
@@ -5349,7 +5349,7 @@ int FUN_000656b0(param_1)
   }
   iVar11 = *(int *)(param_1 + 0x14c);
   if ((iVar11 == 0) || (iVar3 = _memcmp(iVar11,local_70,0x30), iVar4 = iVar11, iVar3 != 0)) {
-    iVar4 = FUN_0009edd0(param_1,local_70);
+    iVar4 = fpVariantCacheLookup(param_1,local_70);
     if (iVar4 == 0) {
       uVar10 = *(uint *)(param_1 + 0x1804);
       bVar1 = ((unsigned char *)0x000011d2)[param_1];
@@ -5424,7 +5424,7 @@ int FUN_000656b0(param_1)
         } while (uVar10 >> 4 != loopIndex);
       }
       ffvpFinishProgram(puVar5);
-      iVar4 = FUN_0009c800(param_1,local_70,puVar5,iVar11,local_74,0,0,1);
+      iVar4 = fpVariantCacheInsert(param_1,local_70,puVar5,iVar11,local_74,0,0,1);
       *(undefined4 *)(iVar4 + 0x34) = 0;
       *(int *)(iVar4 + 0x38) = *(int *)(*(int *)(iVar4 + 0x54) + 0x3cc) + -1;
       iVar11 = *(int *)(param_1 + 0x14c);
