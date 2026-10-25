@@ -2056,6 +2056,14 @@ int FUN_000a4980(glContext, param_2, staleArgR5, staleArgR6, staleArgR7)
   undefined4 staleArgR6;
   undefined4 staleArgR7;
 {
+  undefined4 cacheEntryWordf8;
+  uint cacheEntryWordb8;
+  uint cacheEntryWordb0;
+  undefined4 cacheEntryWordd0;
+  int cacheEntryPtrbc;
+  int cacheEntryWord18;
+  float engineState2Float2e20;
+  float engineStateFloat2e20;
   int engineState4;
   uint engineState3;
   int engineState2;
@@ -2076,11 +2084,11 @@ int FUN_000a4980(glContext, param_2, staleArgR5, staleArgR6, staleArgR7)
   undefined1 *puVar3;
   float fVar4;
   float fVar5;
-  short sVar6;
-  short sVar7;
-  short sVar8;
-  ushort uVar9;
-  ushort uVar10;
+  short engineStateShort2e0e;
+  short engineStateShort2e10;
+  short engineStateShort2e28;
+  ushort engineStateShort3172;
+  ushort engineStateShort3170;
   float fVar11;
   float fVar12;
   float fVar13;
@@ -2244,7 +2252,7 @@ LAB_000a4a50:
   uVar47 = ((int (*)())FUN_000a36b0)(glContext,(uint)(glContextPtr4_3 == 0));
   uVar21 = (undefined4)uVar47;
   glContextPtr4_4 = *(int *)(glContext + 4);
-  sVar6 = *(short *)(((unsigned char *)0x00002e0e) + engineState);
+  engineStateShort2e0e = *(short *)(((unsigned char *)0x00002e0e) + engineState);
   engineState3 = *(uint *)(glContextPtr4_4 + 0x10);
   if ((((unsigned char *)0x00002e2d)[engineState3] == '\0') || ((*(uint *)(glContext + 0x44) & 0x20000) != 0)) {
 LAB_000a4c38:
@@ -2267,23 +2275,23 @@ LAB_000a4c38:
     cVar31 = '\0';
   }
   iVar41 = ((int (*)())FUN_000a4770)(glContext,uVar21,staleArgR5,staleArgR6,pcVar22,pcVar24,engineState3);
-  fVar4 = *(float *)(((unsigned char *)0x00002e20) + engineState);
+  engineStateFloat2e20 = *(float *)(((unsigned char *)0x00002e20) + engineState);
   glContextFloat13e8_2 = *(float *)(((unsigned char *)0x000013e8) + glContext);
-  sVar7 = *(short *)(((unsigned char *)0x00002e10) + engineState);
+  engineStateShort2e10 = *(short *)(((unsigned char *)0x00002e10) + engineState);
   fVar11 = glContextFloat13e8_2;
-  if ((glContextFloat13e8_2 < fVar4) &&
-     (fVar11 = *(float *)(((unsigned char *)0x000013ec) + glContext), fVar4 < *(float *)(((unsigned char *)0x000013ec) + glContext))) {
+  if ((glContextFloat13e8_2 < engineStateFloat2e20) &&
+     (fVar11 = *(float *)(((unsigned char *)0x000013ec) + glContext), engineStateFloat2e20 < *(float *)(((unsigned char *)0x000013ec) + glContext))) {
     pcVar22 = "ram[";
     pcVar24 = "ram[";
     local_100 = 0x43300000;
-    uStack_fc = (uint)(int)((fVar4 - glContextFloat13e8_2) / *(float *)(((unsigned char *)0x000013f0) + glContext) + 0.5);
+    uStack_fc = (uint)(int)((engineStateFloat2e20 - glContextFloat13e8_2) / *(float *)(((unsigned char *)0x000013f0) + glContext) + 0.5);
     local_108 = (longlong)(int)uStack_fc;
     uStack_fc = uStack_fc ^ 0x80000000;
     fVar11 = *(float *)(((unsigned char *)0x000013f0) + glContext) *
              (float)((double)CONCAT44(0x43300000,uStack_fc) - 4503601774854144.0) + glContextFloat13e8_2;
   }
   glContextPtr4_5 = *(int *)(glContext + 4);
-  sVar8 = *(short *)(((unsigned char *)0x00002e28) + engineState);
+  engineStateShort2e28 = *(short *)(((unsigned char *)0x00002e28) + engineState);
   engineState4 = *(int *)(glContextPtr4_5 + 0x10);
   if (((((unsigned char *)0x00003178)[engineState4] == '\0') ||
       (engineState3 = *(uint *)(glContext + 0x44) & 0x20000, engineState3 != 0)) ||
@@ -2294,8 +2302,8 @@ LAB_000a4c38:
   else {
     cVar32 = '\x01';
   }
-  uVar9 = *(ushort *)(((unsigned char *)0x00003172) + engineState);
-  uVar10 = *(ushort *)(((unsigned char *)0x00003170) + engineState);
+  engineStateShort3172 = *(ushort *)(((unsigned char *)0x00003172) + engineState);
+  engineStateShort3170 = *(ushort *)(((unsigned char *)0x00003170) + engineState);
   if (glContextByte245b != '\0') {
     cVar31 = '\x01';
     cVar32 = '\x01';
@@ -2307,21 +2315,21 @@ LAB_000a4c38:
           (((uVar16 != 0 ||
             ((((uint)(byte)cacheEntry[1] == (uint)(glContextPtr4_3 == 0) &&
               ((int)((ulonglong)uVar47 >> 0x20) == *(int *)(cacheEntry + 4))) &&
-             ((sVar6 == 0x1102) == (bool)cacheEntry[8])))) &&
+             ((engineStateShort2e0e == 0x1102) == (bool)cacheEntry[8])))) &&
            ((cacheEntry[0x14] == cVar14 && (cacheEntry[0x15] == cVar31)))))) &&
          (((cVar14 == '\0' && (cVar31 == '\0')) ||
-          ((((iVar41 == *(int *)(cacheEntry + 0x18) && ((sVar7 == 0x1102) == (bool)cacheEntry[0x1c])) &&
+          ((((iVar41 == *(int *)(cacheEntry + 0x18) && ((engineStateShort2e10 == 0x1102) == (bool)cacheEntry[0x1c])) &&
             ((cVar14 == '\0' ||
              ((2.0 <= *(float *)(cacheEntry + 0x20) || (fVar11 == *(float *)(cacheEntry + 0x20))))))) &&
-           ((cVar31 == '\0' || (*(short *)(cacheEntry + 0x28) == sVar8)))))))) {
-        if ((uint)uVar10 == *(uint *)(cacheEntry + 0xb4)) {
-          uVar26 = *(uint *)(cacheEntry + 0xb8);
-          if (uVar9 != uVar26) goto LAB_000a4e54;
+           ((cVar31 == '\0' || (*(short *)(cacheEntry + 0x28) == engineStateShort2e28)))))))) {
+        if ((uint)engineStateShort3170 == *(uint *)(cacheEntry + 0xb4)) {
+          cacheEntryWordb8 = *(uint *)(cacheEntry + 0xb8);
+          if (engineStateShort3172 != cacheEntryWordb8) goto LAB_000a4e54;
         }
         else {
-          uVar26 = *(uint *)(cacheEntry + 0xb8);
+          cacheEntryWordb8 = *(uint *)(cacheEntry + 0xb8);
 LAB_000a4e54:
-          if ((uVar10 != uVar26) || ((uint)uVar9 != *(uint *)(cacheEntry + 0xb4))) goto LAB_000a4e90;
+          if ((engineStateShort3170 != cacheEntryWordb8) || ((uint)engineStateShort3172 != *(uint *)(cacheEntry + 0xb4))) goto LAB_000a4e90;
         }
         if (cacheEntry[0x2a] == cVar32) {
           if (cVar32 == '\0') goto LAB_000a5b9c;
@@ -2362,15 +2370,15 @@ LAB_000a4f50:
   }
   cacheEntry[0x14] = cVar14;
   cacheEntry[0x1c] = *(short *)(((unsigned char *)0x00002e10) + engineState2) == 0x1102;
-  fVar4 = *(float *)(((unsigned char *)0x00002e20) + engineState2);
+  engineState2Float2e20 = *(float *)(((unsigned char *)0x00002e20) + engineState2);
   glContextFloat13e8_3 = *(float *)(((unsigned char *)0x000013e8) + glContext);
   fVar11 = glContextFloat13e8_3;
-  if ((glContextFloat13e8_3 < fVar4) &&
-     (fVar11 = *(float *)(((unsigned char *)0x000013ec) + glContext), fVar4 < *(float *)(((unsigned char *)0x000013ec) + glContext))) {
+  if ((glContextFloat13e8_3 < engineState2Float2e20) &&
+     (fVar11 = *(float *)(((unsigned char *)0x000013ec) + glContext), engineState2Float2e20 < *(float *)(((unsigned char *)0x000013ec) + glContext))) {
     pcVar22 = "ram[";
     pcVar24 = "ram[";
     local_f0 = 0x43300000;
-    uStack_ec = (uint)(int)((fVar4 - glContextFloat13e8_3) / *(float *)(((unsigned char *)0x000013f0) + glContext) + 0.5);
+    uStack_ec = (uint)(int)((engineState2Float2e20 - glContextFloat13e8_3) / *(float *)(((unsigned char *)0x000013f0) + glContext) + 0.5);
     local_f8 = (longlong)(int)uStack_ec;
     uStack_ec = uStack_ec ^ 0x80000000;
     fVar11 = *(float *)(((unsigned char *)0x000013f0) + glContext) *
@@ -2626,25 +2634,25 @@ LAB_000a53ac:
       *(float *)(cacheEntry + 0x10) =
            fVar4 / (float)((double)CONCAT44(0x43300000,uStack_bc) - 4503601774854144.0);
     }
-    iVar38 = *(int *)(cacheEntry + 0xbc);
-    iVar40 = *(int *)(iVar38 + 0x80);
+    cacheEntryPtrbc = *(int *)(cacheEntry + 0xbc);
+    iVar40 = *(int *)(cacheEntryPtrbc + 0x80);
     if (1 < uVar25) {
-      iVar40 = iVar40 + *(int *)(iVar38 + 0x84);
+      iVar40 = iVar40 + *(int *)(cacheEntryPtrbc + 0x84);
     }
     entryWord14High = (int *)(*(uint *)(cacheEntry + 0x14) & 0xffff0000);
     if (entryWord14High == (int *)0x0) {
       if (1 < uVar25) {
-        _memset(iVar40,0xff,*(undefined4 *)(iVar38 + 0x84));
+        _memset(iVar40,0xff,*(undefined4 *)(cacheEntryPtrbc + 0x84));
         goto LAB_000a58ec;
       }
     }
     else {
-      uVar34 = (uint)*(ushort *)(iVar38 + 0x3a);
-      iVar18 = *(int *)(cacheEntry + 0x18);
-      iVar42 = (int)(uint)*(ushort *)(iVar38 + 0x3c) >> 4;
+      uVar34 = (uint)*(ushort *)(cacheEntryPtrbc + 0x3a);
+      cacheEntryWord18 = *(int *)(cacheEntry + 0x18);
+      iVar42 = (int)(uint)*(ushort *)(cacheEntryPtrbc + 0x3c) >> 4;
       iVar41 = *(int *)(*(int *)(glContext + 4) + 0x10);
-      uVar30 = iVar18 * 4;
-      uVar33 = iVar40 + uVar34 * (*(ushort *)(iVar38 + 0x3c) - 1);
+      uVar30 = cacheEntryWord18 * 4;
+      uVar33 = iVar40 + uVar34 * (*(ushort *)(cacheEntryPtrbc + 0x3c) - 1);
       if (cacheEntry[0x14] == '\0') {
         _memset(uVar33,0xff,uVar34);
         cacheEntry[0x24] = '?';
@@ -2707,7 +2715,7 @@ LAB_000a53ac:
           } while (iVar38 < local_118[0]);
         }
         _memset(uVar33 + local_118[0],0xff,uVar30 + local_118[0] * -2);
-        _memset((undefined1 *)(uVar33 + uVar30),0,uVar34 + iVar18 * -4);
+        _memset((undefined1 *)(uVar33 + uVar30),0,uVar34 + cacheEntryWord18 * -4);
         uStack_94 = uVar30 ^ 0x80000000;
         uStack_8c = uVar34 ^ 0x80000000;
         local_90 = 0x43300000;
@@ -2751,31 +2759,31 @@ LAB_000a53ac:
         iVar40 = iVar41;
       } while (bVar1);
 LAB_000a58ec:
-      iVar38 = *(int *)(cacheEntry + 0xbc);
+      cacheEntryPtrbc = *(int *)(cacheEntry + 0xbc);
     }
-    iVar40 = *(int *)(iVar38 + 0x80);
+    iVar40 = *(int *)(cacheEntryPtrbc + 0x80);
     if (1 < uVar25) {
-      iVar40 = iVar40 + *(int *)(iVar38 + 0x84) * 2;
+      iVar40 = iVar40 + *(int *)(cacheEntryPtrbc + 0x84) * 2;
     }
     if (cacheEntry[0x2a] == '\0') {
       if (1 < uVar25) {
-        _memset(iVar40,0xff,*(undefined4 *)(iVar38 + 0x84));
+        _memset(iVar40,0xff,*(undefined4 *)(cacheEntryPtrbc + 0x84));
         goto LAB_000a59f4;
       }
     }
     else {
-      uVar16 = (uint)*(ushort *)(iVar38 + 0x3a);
+      uVar16 = (uint)*(ushort *)(cacheEntryPtrbc + 0x3a);
       iVar41 = 0x20;
       entryWord14High = *(int **)(cacheEntry + 0xac);
-      uVar25 = *(uint *)(cacheEntry + 0xb0);
-      pcVar24 = (char *)((int)(uint)*(ushort *)(iVar38 + 0x3c) >> 5);
+      cacheEntryWordb0 = *(uint *)(cacheEntry + 0xb0);
+      pcVar24 = (char *)((int)(uint)*(ushort *)(cacheEntryPtrbc + 0x3c) >> 5);
       iVar38 = (int)uVar16 >> 5;
       do {
         iVar18 = 0;
         uVar26 = 0;
         do {
           uVar15 = 0xff;
-          if ((1 << ((uint)entryWord14High & 0x3f) & *(uint *)(cacheEntry + (0x1f - uVar25) * 4 + 0x2c)) == 0)
+          if ((1 << ((uint)entryWord14High & 0x3f) & *(uint *)(cacheEntry + (0x1f - cacheEntryWordb0) * 4 + 0x2c)) == 0)
           {
             uVar15 = 0;
           }
@@ -2803,12 +2811,12 @@ LAB_000a58ec:
         } while (bVar1);
         iVar41 = iVar41 + -1;
         iVar40 = iVar40 + uVar16 * (int)pcVar24;
-        uVar25 = uVar25 + 1 & 0x1f;
+        cacheEntryWordb0 = cacheEntryWordb0 + 1 & 0x1f;
       } while (iVar41 != 0);
 LAB_000a59f4:
-      iVar38 = *(int *)(cacheEntry + 0xbc);
+      cacheEntryPtrbc = *(int *)(cacheEntry + 0xbc);
     }
-    iVar40 = FUN_000341a0(glContext,*(undefined4 *)(iVar38 + 0x7c),*(undefined4 *)(glContext + 0x276c),
+    iVar40 = FUN_000341a0(glContext,*(undefined4 *)(cacheEntryPtrbc + 0x7c),*(undefined4 *)(glContext + 0x276c),
                           uVar26,entryWord14High,pcVar24);
     if (iVar40 != 0) {
       uVar25 = (uint)*(byte *)(*(int *)(cacheEntry + 0xbc) + 0x31);
@@ -2869,14 +2877,14 @@ LAB_000a59f4:
       }
       uVar26 = (uint)((*(uint *)(cacheEntry + 0x14) & 0xffff0000) != 0) * 0x10 |
                *(uint *)(cacheEntry + 0x114) & 0xffffffef;
-      uVar27 = *(undefined4 *)(cacheEntry + 0xf8);
+      cacheEntryWordf8 = *(undefined4 *)(cacheEntry + 0xf8);
       uVar25 = -(uint)(byte)cacheEntry[0x2a] >> 0x1b & 0x10 | *(uint *)(cacheEntry + 0x120) & 0xffffffef;
-      uVar21 = *(undefined4 *)(cacheEntry + 0xd0);
+      cacheEntryWordd0 = *(undefined4 *)(cacheEntry + 0xd0);
       *(undefined4 *)(cacheEntry + 0xcc) = *(undefined4 *)(cacheEntry + 0xc4);
       *(undefined4 *)(cacheEntry + 200) = *(undefined4 *)(cacheEntry + 0xc4);
       *(undefined4 *)(cacheEntry + 0xf4) = *(undefined4 *)(cacheEntry + 0xec);
       *(undefined4 *)(cacheEntry + 0xf0) = *(undefined4 *)(cacheEntry + 0xec);
-      *(undefined4 *)(cacheEntry + 0x10c) = uVar27;
+      *(undefined4 *)(cacheEntry + 0x10c) = cacheEntryWordf8;
       *(uint *)(cacheEntry + 0x11c) = uVar26;
       *(uint *)(cacheEntry + 0x134) = uVar25;
       *(uint *)(cacheEntry + 0x120) = uVar25;
@@ -2884,15 +2892,15 @@ LAB_000a59f4:
       *(uint *)(cacheEntry + 0x128) = uVar25;
       *(uint *)(cacheEntry + 300) = uVar25;
       *(uint *)(cacheEntry + 0x130) = uVar25;
-      *(undefined4 *)(cacheEntry + 0xe4) = uVar21;
-      *(undefined4 *)(cacheEntry + 0xd4) = uVar21;
-      *(undefined4 *)(cacheEntry + 0xfc) = uVar27;
-      *(undefined4 *)(cacheEntry + 0xd8) = uVar21;
-      *(undefined4 *)(cacheEntry + 0x100) = uVar27;
-      *(undefined4 *)(cacheEntry + 0xdc) = uVar21;
-      *(undefined4 *)(cacheEntry + 0x104) = uVar27;
-      *(undefined4 *)(cacheEntry + 0xe0) = uVar21;
-      *(undefined4 *)(cacheEntry + 0x108) = uVar27;
+      *(undefined4 *)(cacheEntry + 0xe4) = cacheEntryWordd0;
+      *(undefined4 *)(cacheEntry + 0xd4) = cacheEntryWordd0;
+      *(undefined4 *)(cacheEntry + 0xfc) = cacheEntryWordf8;
+      *(undefined4 *)(cacheEntry + 0xd8) = cacheEntryWordd0;
+      *(undefined4 *)(cacheEntry + 0x100) = cacheEntryWordf8;
+      *(undefined4 *)(cacheEntry + 0xdc) = cacheEntryWordd0;
+      *(undefined4 *)(cacheEntry + 0x104) = cacheEntryWordf8;
+      *(undefined4 *)(cacheEntry + 0xe0) = cacheEntryWordd0;
+      *(undefined4 *)(cacheEntry + 0x108) = cacheEntryWordf8;
       *(uint *)(cacheEntry + 0x114) = uVar26;
       *(uint *)(cacheEntry + 0x118) = uVar26;
       *(uint *)(cacheEntry + 0x110) = *(uint *)(cacheEntry + 0x110) & 0xffffffef;
