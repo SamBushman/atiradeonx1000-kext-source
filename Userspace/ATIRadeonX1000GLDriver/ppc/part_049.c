@@ -228,14 +228,14 @@ LAB_00186a60:
 }
 
 /* FUN_00186a88 @ 0x186a88 (2816 bytes) */
-int FUN_00186a88(inst, operandIndex, inst2, program, param_5, param_6, param_7)
+int FUN_00186a88(inst, operandIndex, inst2, program, commitChange, checkFits, replacementOut)
   int *inst;
   int operandIndex;
   int *inst2;
   int program;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+  undefined4 commitChange;
+  undefined4 checkFits;
+  undefined4 replacementOut;
 {
   int sourceRegKindIsConstant;
   int operandKindIsConstant;
@@ -284,32 +284,32 @@ int FUN_00186a88(inst, operandIndex, inst2, program, param_5, param_6, param_7)
   int *loopPtr4;
   int loopRemaining;
   void *inst3;
-  undefined4 uVar9;
+  undefined4 checkFitsCopy;
   undefined4 compilerCtx;
   int *destSelectCursor;
   int *loopPtr3;
   undefined4 destSelect;
   undefined4 valueNumberTable;
-  int *local_a8;
-  int *local_a4 [10];
+  int *scratchInst;
+  int *constTable [10];
   int constLanes [4];
   int constantKind;
   float constantValue;
   
-  local_a4[9] = (int *)0x3f800000;
-  local_a4[5] = (int *)0x3f000000;
-  local_a4[6] = (int *)0x3f800000;
-  local_a4[7] = (int *)0x3f800000;
-  local_a4[8] = (int *)0x3f800000;
-  local_a4[2] = (int *)0x3f000000;
-  local_a4[3] = (int *)0x3f000000;
-  local_a4[4] = (int *)0x3f000000;
+  constTable[9] = (int *)0x3f800000;
+  constTable[5] = (int *)0x3f000000;
+  constTable[6] = (int *)0x3f800000;
+  constTable[7] = (int *)0x3f800000;
+  constTable[8] = (int *)0x3f800000;
+  constTable[2] = (int *)0x3f000000;
+  constTable[3] = (int *)0x3f000000;
+  constTable[4] = (int *)0x3f000000;
   if (inst == (int *)0x0) {
     return 0;
   }
   programCopy = program;
-  compilerCtx = param_5;
-  uVar9 = param_6;
+  compilerCtx = commitChange;
+  checkFitsCopy = checkFits;
   IRInst__getOperandSource(inst,operandIndex);
   numSources = (**(code **)(*inst + 0x14))(inst);
   if (numSources < operandIndex) {
@@ -372,17 +372,17 @@ LAB_001874d4:
   if ((inst2Flags & 0x200) != 0) {
     loopIndex2 = inst2[1];
     DList__unlink(inst2);
-    local_a8 = (int *)IRInst__clone(inst2,*(undefined4 *)(program + 8),1);
-    loopIndex = FUN_00162dfc(&local_a8,1,program);
+    scratchInst = (int *)IRInst__clone(inst2,*(undefined4 *)(program + 8),1);
+    loopIndex = FUN_00162dfc(&scratchInst,1,program);
     if (loopIndex == 0) {
       Block__insertInstAfter(*(undefined4 *)(loopIndex2 + 0x158),loopIndex2,inst2);
       return 0;
     }
-    Block__insertInstAfter(*(undefined4 *)(loopIndex2 + 0x158),loopIndex2,local_a8);
-    Block__insertInstAfter(*(undefined4 *)(loopIndex2 + 0x158),local_a8,inst2);
-    inst2Flags = local_a8[5];
+    Block__insertInstAfter(*(undefined4 *)(loopIndex2 + 0x158),loopIndex2,scratchInst);
+    Block__insertInstAfter(*(undefined4 *)(loopIndex2 + 0x158),scratchInst,inst2);
+    inst2Flags = scratchInst[5];
     originalInst2 = inst2;
-    inst2 = local_a8;
+    inst2 = scratchInst;
   }
   if ((inst2Flags & 0x200) != 0) {
     return 0;
@@ -402,46 +402,46 @@ LAB_001874d4:
   opcodeInfo = inst2[0x22];
   destSelect = *(undefined4 *)(loopIndex2 + 0x10);
   if (*(int *)(opcodeInfo + 8) == 0x12) {
-    local_a8 = (int *)IRInst__getOperandSource(inst2,1);
-    sourceRegKindIsConstant = FUN_001267b8(local_a8[0x26]);
+    scratchInst = (int *)IRInst__getOperandSource(inst2,1);
+    sourceRegKindIsConstant = FUN_001267b8(scratchInst[0x26]);
     if (sourceRegKindIsConstant == 0) {
-      if (local_a8[0x26] == 0x33) {
+      if (scratchInst[0x26] == 0x33) {
         operandRecord = IRInst__getOperandRecord(inst2,1);
         loopIndex2 = 0;
-        local_a4[0] = *(int **)(operandRecord + 0x10);
+        constTable[0] = *(int **)(operandRecord + 0x10);
         lanesLeft = 4;
         laneCursor = constLanes;
         do {
-          laneSelect = (uint)*(byte *)(loopIndex2 + (int)local_a4);
+          laneSelect = (uint)*(byte *)(loopIndex2 + (int)constTable);
           if (laneSelect != 4) {
-            *laneCursor = local_a8[laneSelect * 6 + 8];
+            *laneCursor = scratchInst[laneSelect * 6 + 8];
           }
           loopIndex2 = loopIndex2 + 1;
           laneCursor = laneCursor + 1;
           lanesLeft = lanesLeft + -1;
         } while (lanesLeft != 0);
         valueNumberTable = *(undefined4 *)(program + 0x3ac);
-        local_a8 = (int *)RegisterMap__findConstVectorExact(valueNumberTable,constLanes,local_a4,programCopy,compilerCtx,uVar9,laneCursor);
-        if (local_a8 == (int *)0x0) {
-          local_a8 = (int *)RegisterMap__findConstVector(valueNumberTable,constLanes,local_a4,programCopy);
+        scratchInst = (int *)RegisterMap__findConstVectorExact(valueNumberTable,constLanes,constTable,programCopy,compilerCtx,checkFitsCopy,laneCursor);
+        if (scratchInst == (int *)0x0) {
+          scratchInst = (int *)RegisterMap__findConstVector(valueNumberTable,constLanes,constTable,programCopy);
         }
-        selectWord = local_a4[0];
-        if (local_a8 == (int *)0x0) {
+        selectWord = constTable[0];
+        if (scratchInst == (int *)0x0) {
           return 0;
         }
         source1Record = IRInst__getOperandRecord(inst2,1);
         *(int **)(source1Record + 0x10) = selectWord;
         compilerCtx = *(undefined4 *)(program + 8);
-        IRInst__setOperandSource(inst2,1,local_a8,0,compilerCtx);
+        IRInst__setOperandSource(inst2,1,scratchInst,0,compilerCtx);
       }
       else {
-        local_a8 = (int *)0x0;
+        scratchInst = (int *)0x0;
       }
     }
-    if (local_a8 == (int *)0x0) {
+    if (scratchInst == (int *)0x0) {
       return 0;
     }
-    firstSourceIsPresub = (**(code **)(*local_a8 + 0x5c))(local_a8);
+    firstSourceIsPresub = (**(code **)(*scratchInst + 0x5c))(scratchInst);
     if (firstSourceIsPresub != 0) {
       return 0;
     }
@@ -468,7 +468,7 @@ LAB_001874d4:
         *(undefined4 *)(destRecord + 0xc) = 0x31;
         *(undefined4 *)(destRecord + 8) = newRegId;
         compiler = *(undefined4 *)(program + 8);
-        loopPtr4 = local_a8;
+        loopPtr4 = scratchInst;
         goto LAB_00187498;
       }
       if ((((constantValue == 0.5) || (constantValue == -0.5)) &&
@@ -481,8 +481,8 @@ LAB_001874d4:
         *(undefined4 *)(destRecord + 8) = newRegId;
         sourceDef = IRInst__getOperandSource(inst2,1);
         IRInst__setOperandSource(inst3,1,sourceDef,0,*(undefined4 *)(program + 8));
-        commitResult = FUN_00185da4(operandIndex,(uint)(constantValue == -0.5),inst,inst3,inst2,program,param_5
-                             ,param_6,param_7,originalInst2);
+        commitResult = FUN_00185da4(operandIndex,(uint)(constantValue == -0.5),inst,inst3,inst2,program,commitChange
+                             ,checkFits,replacementOut,originalInst2);
         if (commitResult != 0) {
           inst[0x49] = inst[0x49] + -1;
           return commitResult;
@@ -490,44 +490,44 @@ LAB_001874d4:
         return 0;
       }
     }
-    local_a4[1] = (int *)IRInst__getOperandSource(inst2,2);
-    loopRemaining = FUN_001267b8(local_a4[1][0x26]);
+    constTable[1] = (int *)IRInst__getOperandSource(inst2,2);
+    loopRemaining = FUN_001267b8(constTable[1][0x26]);
     if (loopRemaining == 0) {
-      if (local_a4[1][0x26] == 0x33) {
+      if (constTable[1][0x26] == 0x33) {
         source1Record = IRInst__getOperandRecord(inst2,2);
         laneNumber = 0;
-        local_a4[0] = *(int **)(source1Record + 0x10);
+        constTable[0] = *(int **)(source1Record + 0x10);
         lanesRemaining = 4;
         loopPtr3 = constLanes;
         do {
-          laneSelect = (uint)*(byte *)(laneNumber + (int)local_a4);
+          laneSelect = (uint)*(byte *)(laneNumber + (int)constTable);
           if (laneSelect != 4) {
-            *loopPtr3 = local_a4[1][laneSelect * 6 + 8];
+            *loopPtr3 = constTable[1][laneSelect * 6 + 8];
           }
           laneNumber = laneNumber + 1;
           loopPtr3 = loopPtr3 + 1;
           lanesRemaining = lanesRemaining + -1;
         } while (lanesRemaining != 0);
         programValueTable = *(undefined4 *)(program + 0x3ac);
-        local_a4[1] = (int *)RegisterMap__findConstVectorExact(programValueTable,constLanes,local_a4,constantKindPtr,compilerCtx,uVar9,loopPtr3);
-        if (local_a4[1] == (int *)0x0) {
-          local_a4[1] = (int *)RegisterMap__findConstVector(programValueTable,constLanes,local_a4,constantKindPtr);
+        constTable[1] = (int *)RegisterMap__findConstVectorExact(programValueTable,constLanes,constTable,constantKindPtr,compilerCtx,checkFitsCopy,loopPtr3);
+        if (constTable[1] == (int *)0x0) {
+          constTable[1] = (int *)RegisterMap__findConstVector(programValueTable,constLanes,constTable,constantKindPtr);
         }
-        selectWord = local_a4[0];
-        if (local_a4[1] == (int *)0x0) {
+        selectWord = constTable[0];
+        if (constTable[1] == (int *)0x0) {
           return 0;
         }
         loopRemaining = IRInst__getOperandRecord(inst2,2);
         *(int **)(loopRemaining + 0x10) = selectWord;
-        IRInst__setOperandSource(inst2,2,local_a4[1],0,*(undefined4 *)(program + 8));
+        IRInst__setOperandSource(inst2,2,constTable[1],0,*(undefined4 *)(program + 8));
       }
       else {
-        local_a4[1] = (int *)0x0;
+        constTable[1] = (int *)0x0;
       }
     }
-    if (((local_a4[1] == (int *)0x0) || ((inst2[0x34] & 2U) != 0)) ||
-       ((loopRemaining = (**(code **)(*local_a4[1] + 0x5c))(local_a4[1]), loopRemaining != 0 ||
-        (loopRemaining = ((int (*)())FUN_00186510)(inst2,&local_a8,local_a4 + 1,*(undefined4 *)(program + 8)),
+    if (((constTable[1] == (int *)0x0) || ((inst2[0x34] & 2U) != 0)) ||
+       ((loopRemaining = (**(code **)(*constTable[1] + 0x5c))(constTable[1]), loopRemaining != 0 ||
+        (loopRemaining = ((int (*)())FUN_00186510)(inst2,&scratchInst,constTable + 1,*(undefined4 *)(program + 8)),
         loopRemaining == 0)))) {
       return 0;
     }
@@ -544,8 +544,8 @@ LAB_001874d4:
     destRecord = IRInst__getOperandRecord(inst3,0);
     *(undefined4 *)(destRecord + 0xc) = 0x31;
     *(undefined4 *)(destRecord + 8) = newRegId;
-    IRInst__setOperandSource(inst3,1,local_a8,0,*(undefined4 *)(program + 8));
-    IRInst__setOperandSource(inst3,2,local_a4[1],0,*(undefined4 *)(program + 8));
+    IRInst__setOperandSource(inst3,1,scratchInst,0,*(undefined4 *)(program + 8));
+    IRInst__setOperandSource(inst3,2,constTable[1],0,*(undefined4 *)(program + 8));
     negate = inst2[0x2e] & 1;
   }
   else {
@@ -608,11 +608,11 @@ LAB_001872f8:
     if (firstSourceIsPresub != 0) {
       return 0;
     }
-    constantLaneResult = IRInst__sourceMatchesConstant(inst2,2,destSelect,local_a4 + 6);
+    constantLaneResult = IRInst__sourceMatchesConstant(inst2,2,destSelect,constTable + 6);
     if (constantLaneResult == 0) {
       return 0;
     }
-    constantLaneResult = IRInst__sourceMatchesConstant(inst2,3,destSelect,local_a4 + 2);
+    constantLaneResult = IRInst__sourceMatchesConstant(inst2,3,destSelect,constTable + 2);
     if (constantLaneResult == 0) {
       return 0;
     }
@@ -644,7 +644,7 @@ LAB_00187498:
     IRInst__setOperandSource(inst3,1,loopPtr4,0,compiler);
   }
 LAB_0018754c:
-  commitResult = FUN_00185da4(operandIndex,negate,inst,inst3,inst2,program,param_5,param_6,param_7,originalInst2)
+  commitResult = FUN_00185da4(operandIndex,negate,inst,inst3,inst2,program,commitChange,checkFits,replacementOut,originalInst2)
   ;
   return commitResult;
 }

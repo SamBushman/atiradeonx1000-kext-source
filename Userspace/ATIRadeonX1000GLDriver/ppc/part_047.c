@@ -2141,32 +2141,37 @@ int FUN_0017a294(ctx, param_2, param_3)
 int FUN_0017a3d4(ctx)
   int ctx;
 {
+  int operandRecAddr;
+  int operandClass;
+  int firstOperandClass;
+  bool isLastLane;
+  bool branchTaken;
   int findInPtrSetResult;
-  bool bVar1;
-  bool bVar2;
-  float fVar3;
-  uint uVar4;
-  float fVar5;
+  bool moreOperands;
+  bool allOperandsFloatConst;
+  float foldedResult;
+  uint operandFlags;
+  float laneResult;
   float *loopPtr3;
   float *loopPtr4;
   int loopIndex2;
   float *exprRecord;
-  int iVar10;
-  int iVar11;
-  float *pfVar12;
-  int iVar13;
-  int *piVar14;
+  int compareClass;
+  int valueNumber;
+  float *laneResults;
+  int operandRecOffset;
+  int *valueNumberPtr;
   int *loopPtr5;
-  bool bVar16;
+  bool usedUniformConstant;
   int loopIndex;
   int loopRemaining;
-  int local_94 [2];
-  float local_8c [9];
-  int local_68;
+  int operandClasses [2];
+  float laneConstants [9];
+  int lanesAgree;
   
   loopIndex = 4;
-  pfVar12 = local_8c + 3;
-  loopPtr3 = pfVar12;
+  laneResults = laneConstants + 3;
+  loopPtr3 = laneResults;
   do {
     *loopPtr3 = GH_U2F(0x7fff0000U);
     loopPtr3 = loopPtr3 + 1;
@@ -2175,88 +2180,88 @@ int FUN_0017a3d4(ctx)
   loopIndex = 0;
   loopRemaining = 4;
   do {
-    *(undefined4 *)(loopIndex + (int)pfVar12) = 0;
+    *(undefined4 *)(loopIndex + (int)laneResults) = 0;
     loopIndex = loopIndex + 4;
     loopRemaining = loopRemaining + -1;
   } while (loopRemaining != 0);
-  bVar16 = false;
-  local_68 = 1;
+  usedUniformConstant = false;
+  lanesAgree = 1;
   loopIndex = 0;
   loopRemaining = ctx + 0x170;
-  loopPtr3 = pfVar12;
-  fVar3 = FLOAT_001aa114;
+  loopPtr3 = laneResults;
+  foldedResult = FLOAT_001aa114;
   do {
     loopIndex2 = IRInst__getOperandRecord(*(undefined4 *)(ctx + 0xb0),0);
-    loopPtr4 = local_8c;
+    loopPtr4 = laneConstants;
     if (*(char *)(loopIndex + loopIndex2 + 0x10) != '\x01') {
       do {
         *loopPtr4 = GH_U2F(0x7fff0000U);
         loopPtr4 = loopPtr4 + 1;
-      } while (pfVar12 != loopPtr4);
-      piVar14 = (int *)(loopRemaining + 8);
-      bVar2 = true;
+      } while (laneResults != loopPtr4);
+      valueNumberPtr = (int *)(loopRemaining + 8);
+      allOperandsFloatConst = true;
       loopIndex2 = 1;
-      loopPtr5 = local_94;
-      iVar13 = 0x98;
-      loopPtr4 = local_8c;
+      loopPtr5 = operandClasses;
+      operandRecOffset = 0x98;
+      loopPtr4 = laneConstants;
       do {
         loopPtr4 = loopPtr4 + 1;
         *loopPtr5 = 0;
-        iVar11 = *piVar14;
-        if (iVar11 < 0) {
-          exprRecord = (float *)Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),iVar11);
+        valueNumber = *valueNumberPtr;
+        if (valueNumber < 0) {
+          exprRecord = (float *)Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),valueNumber);
           *loopPtr4 = *exprRecord;
-          iVar11 = signToCompareCode(*(unsigned int *)exprRecord);
-          *loopPtr5 = iVar11;
+          operandClass = signToCompareCode(*(unsigned int *)exprRecord);
+          *loopPtr5 = operandClass;
         }
         else {
-          if (iVar11 < 1) {
+          if (valueNumber < 1) {
             return 0;
           }
-          findInPtrSetResult = Compiler__findInPtrSet(*(undefined4 *)(ctx + 0x238),iVar11);
-          iVar10 = *(int *)(findInPtrSetResult + 0xc);
-          *loopPtr5 = iVar10;
-          iVar11 = *(int *)(ctx + 0xb0) + iVar13;
-          uVar4 = *(uint *)(iVar11 + 0x20);
-          if ((uVar4 & 2) != 0) {
-            *loopPtr5 = (DAT_001e61d0)[iVar10];
-            uVar4 = *(uint *)(iVar11 + 0x20);
+          findInPtrSetResult = Compiler__findInPtrSet(*(undefined4 *)(ctx + 0x238),valueNumber);
+          compareClass = *(int *)(findInPtrSetResult + 0xc);
+          *loopPtr5 = compareClass;
+          operandRecAddr = *(int *)(ctx + 0xb0) + operandRecOffset;
+          operandFlags = *(uint *)(operandRecAddr + 0x20);
+          if ((operandFlags & 2) != 0) {
+            *loopPtr5 = (DAT_001e61d0)[compareClass];
+            operandFlags = *(uint *)(operandRecAddr + 0x20);
           }
-          if ((uVar4 & 1) == 0) {
-            iVar11 = *loopPtr5;
-            bVar16 = true;
-            bVar2 = false;
+          if ((operandFlags & 1) == 0) {
+            operandClass = *loopPtr5;
+            usedUniformConstant = true;
+            allOperandsFloatConst = false;
           }
           else {
-            bVar16 = true;
-            bVar2 = false;
-            iVar11 = *(int *)(&DAT_001e61b8 + *loopPtr5 * 4);
-            *loopPtr5 = iVar11;
+            usedUniformConstant = true;
+            allOperandsFloatConst = false;
+            operandClass = *(int *)(&DAT_001e61b8 + *loopPtr5 * 4);
+            *loopPtr5 = operandClass;
           }
         }
-        iVar10 = local_94[0];
-        if (iVar11 == 0) {
+        firstOperandClass = operandClasses[0];
+        if (operandClass == 0) {
           return 0;
         }
-        bVar1 = loopIndex2 != 2;
-        iVar13 = iVar13 + 0x18;
+        moreOperands = loopIndex2 != 2;
+        operandRecOffset = operandRecOffset + 0x18;
         loopPtr5 = loopPtr5 + 1;
-        piVar14 = piVar14 + 4;
+        valueNumberPtr = valueNumberPtr + 4;
         loopIndex2 = loopIndex2 + 1;
-      } while (bVar1);
-      if (bVar2) {
-        loopIndex2 = ((bool (*)())evaluateCompareFloats)(*(undefined4 *)(ctx + 0xb0),(double)local_8c[1],(double)local_8c[2]
+      } while (moreOperands);
+      if (allOperandsFloatConst) {
+        loopIndex2 = ((bool (*)())evaluateCompareFloats)(*(undefined4 *)(ctx + 0xb0),(double)laneConstants[1],(double)laneConstants[2]
                             );
-        fVar5 = 0.0;
+        laneResult = 0.0;
         if (loopIndex2 == 0) {
 LAB_0017a608:
-          fVar5 = 1.0;
+          laneResult = 1.0;
         }
-        *loopPtr3 = fVar5;
+        *loopPtr3 = laneResult;
       }
       else {
         loopIndex2 = IRInst__getCompareCondition(*(undefined4 *)(ctx + 0xb0));
-        loopIndex2 = *(int *)(&DAT_001e61e8 + (loopIndex2 * 6 + iVar10 * 0x30 + local_94[1]) * 4);
+        loopIndex2 = *(int *)(&DAT_001e61e8 + (loopIndex2 * 6 + firstOperandClass * 0x30 + operandClasses[1]) * 4);
         if (loopIndex2 == 1) {
           *loopPtr3 = 0.0;
         }
@@ -2267,30 +2272,30 @@ LAB_0017a608:
           }
         }
       }
-      if (fVar3 == FLOAT_001aa114) {
-        fVar3 = *loopPtr3;
+      if (foldedResult == FLOAT_001aa114) {
+        foldedResult = *loopPtr3;
       }
-      else if (*loopPtr3 != fVar3) {
-        local_68 = 0;
+      else if (*loopPtr3 != foldedResult) {
+        lanesAgree = 0;
       }
     }
-    bVar2 = loopIndex == 3;
+    isLastLane = loopIndex == 3;
     loopRemaining = loopRemaining + 4;
     loopPtr3 = loopPtr3 + 1;
     loopIndex = loopIndex + 1;
-    if (bVar2) {
-      if (bVar16) {
+    if (isLastLane) {
+      if (usedUniformConstant) {
         loopIndex = *(int *)(*(int *)(ctx + 0x238) + 0x6c4);
         *(int *)(loopIndex + 0x134) = *(int *)(loopIndex + 0x134) + 1;
       }
-      ((int (*)())FUN_0017a294)(ctx,pfVar12,*(undefined4 *)(ctx + 0x238));
+      ((int (*)())FUN_0017a294)(ctx,laneResults,*(undefined4 *)(ctx + 0x238));
       loopIndex = Compiler__isOptionEnabled(*(undefined4 *)(ctx + 0x238),0xd);
-      if ((loopIndex != 0) && (local_68 != 0)) {
+      if ((loopIndex != 0) && (lanesAgree != 0)) {
         loopPtr5 = *(int **)(*(int *)(ctx + 0xb0) + 0x158);
-        bVar16 = fVar3 != FLOAT_001aa0d4;
+        branchTaken = foldedResult != FLOAT_001aa0d4;
         loopIndex = (**(code **)(*loopPtr5 + 0x24))(loopPtr5);
         if (loopIndex != 0) {
-          if (bVar16) {
+          if (branchTaken) {
             loopIndex = loopPtr5[0x4d];
           }
           else {
@@ -2298,7 +2303,7 @@ LAB_0017a608:
           }
           FUN_0012cfa4(*(undefined4 *)(*(int *)(ctx + 0x238) + 0x6c4),loopPtr5,loopIndex,
                        loopPtr5[0x4f]);
-          if (bVar16) {
+          if (branchTaken) {
             loopIndex = 2;
           }
           else {
