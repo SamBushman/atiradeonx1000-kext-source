@@ -1,0 +1,176 @@
+local	FUN_000e4c40	param_2	tokenIndexPtr	INFERRED	in/out index of the next token to fetch in the instruction window; incremented once per fetched word
+local	FUN_000e4c40	param_3	compiler	INFERRED	compiler: +0x30c is the hardware description whose +0xc table gives per-opcode operand counts (FUN_000f8960/70/94, FUN_000e4710)
+use	FUN_000e4c40	iVar5	streamBase	INFERRED	ilReader+0x28: start of the token stream, used to turn the stream cursor into a word offset	^\s*iVar5\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x28\);$	+1
+use	FUN_000e4c40	iVar5	streamBase	INFERRED	ilReader+0x28: start of the token stream, used to turn the stream cursor into a word offset	^\s*\*\(int\ \*\)\(iVar11\ \*\ 4\ \+\ param_1\ \+\ 0x8c\)\ =\ iVar10\ \-\ iVar5\ >>\ 2;$	+1
+use	FUN_000e4c40	iVar5	extraWordCount	INFERRED	number of extra tokens an instruction carries: 1, 2 for the 0x20000000 forms, +1 for the sign bit	^\s*iVar5\ =\ 2;$	+1
+use	FUN_000e4c40	iVar5	extraWordCount	INFERRED	number of extra tokens an instruction carries: 1, 2 for the 0x20000000 forms, +1 for the sign bit	^\s*iVar5\ =\ 1;$	+1
+use	FUN_000e4c40	iVar5	extraWordCount	INFERRED	number of extra tokens an instruction carries: 1, 2 for the 0x20000000 forms, +1 for the sign bit	^\s*iVar5\ =\ iVar5\ \+\ 1;$	+1
+use	FUN_000e4c40	iVar5	extraWordCount	INFERRED	number of extra tokens an instruction carries: 1, 2 for the 0x20000000 forms, +1 for the sign bit	^\s*iVar10\ =\ iVar5\ \+\ \-1;$	+1
+use	FUN_000e4c40	iVar5	extraWordCount	INFERRED	number of extra tokens an instruction carries: 1, 2 for the 0x20000000 forms, +1 for the sign bit	^\s*iVar10\ =\ iVar5;$	+1
+use	FUN_000e4c40	iVar5	destCount	INFERRED	FUN_000f8960: number of destination operands of the opcode	^\s*iVar5\ =\ FUN_000f8960\(uVar6,\*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_3\ \+\ 0x30c\)\ \+\ 0xc\)\);$	+1
+use	FUN_000e4c40	iVar5	destCount	INFERRED	FUN_000f8960: number of destination operands of the opcode	^\s*if\ \(iVar5\ <\ 1\)\ goto\ LAB_000e50f4;$	+1
+use	FUN_000e4c40	iVar5	destCount	INFERRED	FUN_000f8960: number of destination operands of the opcode	^\s*iVar14\ =\ FUN_000e4710\(uVar6,iVar5\ \+\ iVar16,\*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_3\ \+\ 0x30c\)\ \+\ 0xc\)\);$	+1
+use	FUN_000e4c40	iVar5	tailIndex	INFERRED	token index while the trailing extra tokens are consumed	^\s*iVar5\ =\ \*param_2;$	+3
+use	FUN_000e4c40	iVar10	tokenIndex	INFERRED	index of the next token to fetch (copy of *param_2)	^\s*iVar10\ =\ \*param_2;$	+4
+use	FUN_000e4c40	iVar10	tokenIndex	INFERRED	index of the next token to fetch (copy of *param_2)	^\s*iVar10\ =\ iVar12;$	+1
+use	FUN_000e4c40	iVar10	tokenIndex	INFERRED	index of the next token to fetch (copy of *param_2)	^\s*iVar10\ =\ \*param_2;$@3	+2
+use	FUN_000e4c40	iVar10	tokenIndex	INFERRED	index of the next token to fetch (copy of *param_2)	^\s*\*param_2\ =\ iVar10\ \+\ 1;$@3	+3
+use	FUN_000e4c40	iVar10	tokenIndex	INFERRED	index of the next token to fetch (copy of *param_2)	^\s*\*param_2\ =\ iVar10\ \+\ 1;$@4	+2
+use	FUN_000e4c40	iVar10	tokenIndex	INFERRED	index of the next token to fetch (copy of *param_2)	^\s*iVar10\ =\ \*param_2;$@5	+1
+use	FUN_000e4c40	iVar10	tokenIndex	INFERRED	index of the next token to fetch (copy of *param_2)	^\s*\*param_2\ =\ iVar10\ \+\ 1;$@5	+3
+use	FUN_000e4c40	iVar10	tokenIndex	INFERRED	index of the next token to fetch (copy of *param_2)	^\s*\*param_2\ =\ iVar10\ \+\ 1;$@6	+4
+use	FUN_000e4c40	iVar10	tokenIndex	INFERRED	index of the next token to fetch (copy of *param_2)	^\s*\*param_2\ =\ iVar10\ \+\ 1;$@7	+3
+use	FUN_000e4c40	iVar10	tokenIndex	INFERRED	index of the next token to fetch (copy of *param_2)	^\s*\*param_2\ =\ iVar10\ \+\ 1;$@8	+2
+use	FUN_000e4c40	iVar10	tokenIndex	INFERRED	index of the next token to fetch (copy of *param_2)	^\s*iVar10\ =\ \*param_2;$@9	+1
+use	FUN_000e4c40	iVar10	tokenIndex	INFERRED	index of the next token to fetch (copy of *param_2)	^\s*iVar10\ =\ \*param_2;$@10	+1
+use	FUN_000e4c40	iVar10	tokenIndex	INFERRED	index of the next token to fetch (copy of *param_2)	^\s*\*param_2\ =\ iVar10\ \+\ 1;$@9	+3
+use	FUN_000e4c40	iVar10	tokenIndex	INFERRED	index of the next token to fetch (copy of *param_2)	^\s*_memcpy\(iVar17\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x68\),\*\*\(undefined4\ \*\*\)\(param_1\ \+\ 100\),$	+2
+use	FUN_000e4c40	iVar10	tokenIndex	INFERRED	index of the next token to fetch (copy of *param_2)	^\s*iVar10\ =\ \*param_2;$@12	+1
+use	FUN_000e4c40	iVar10	tokenIndex	INFERRED	index of the next token to fetch (copy of *param_2)	^\s*iVar8\ =\ iVar10;$	+1
+use	FUN_000e4c40	iVar10	tokenIndex	INFERRED	index of the next token to fetch (copy of *param_2)	^\s*iVar10\ =\ \*param_2;$@14	+1
+use	FUN_000e4c40	iVar10	tokenIndex	INFERRED	index of the next token to fetch (copy of *param_2)	^\s*iVar10\ =\ \*param_2;$@15	+1
+use	FUN_000e4c40	iVar10	tokenIndex	INFERRED	index of the next token to fetch (copy of *param_2)	^\s*iVar18\ =\ param_1\ \+\ iVar10\ \*\ 4\ \+\ 0x7c;$	+1
+use	FUN_000e4c40	iVar10	tokenIndex	INFERRED	index of the next token to fetch (copy of *param_2)	^\s*\*param_2\ =\ iVar10\ \+\ 1;$@11	+2
+use	FUN_000e4c40	iVar10	tokenIndex	INFERRED	index of the next token to fetch (copy of *param_2)	^\s*iVar10\ =\ \*param_2;$@16	+1
+use	FUN_000e4c40	iVar10	tokenIndex	INFERRED	index of the next token to fetch (copy of *param_2)	^\s*\*param_2\ =\ iVar10\ \+\ 1;$@12	+3
+use	FUN_000e4c40	iVar10	tokenIndex	INFERRED	index of the next token to fetch (copy of *param_2)	^\s*\*param_2\ =\ iVar10\ \+\ 1;$@13	+4
+use	FUN_000e4c40	iVar10	tokenIndex	INFERRED	index of the next token to fetch (copy of *param_2)	^\s*\*param_2\ =\ iVar10\ \+\ 1;$@14	+2
+use	FUN_000e4c40	iVar10	tokenIndex	INFERRED	index of the next token to fetch (copy of *param_2)	^\s*iVar10\ =\ \*param_2;$@19	+1
+use	FUN_000e4c40	iVar10	tokenIndex	INFERRED	index of the next token to fetch (copy of *param_2)	^\s*\*param_2\ =\ iVar10\ \+\ 1;$@15	+3
+use	FUN_000e4c40	iVar10	tokenIndex	INFERRED	index of the next token to fetch (copy of *param_2)	^\s*\*param_2\ =\ iVar10\ \+\ 1;$@16	+3
+use	FUN_000e4c40	iVar10	tokenIndex	INFERRED	index of the next token to fetch (copy of *param_2)	^\s*_memcpy\(iVar9,\*\(undefined4\ \*\)\(iVar13\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x6c\)\),\(iVar10\ \-\ iVar8\)\ \*\ 4\);$	+1
+use	FUN_000e4c40	iVar10	tokenIndex	INFERRED	index of the next token to fetch (copy of *param_2)	^\s*iVar10\ =\ \*param_2;$@22	+1
+use	FUN_000e4c40	iVar10	tokenIndex	INFERRED	index of the next token to fetch (copy of *param_2)	^\s*iVar8\ =\ iVar10;$@2	+1
+use	FUN_000e4c40	iVar10	tokenIndex	INFERRED	index of the next token to fetch (copy of *param_2)	^\s*\*\(int\ \*\)\(param_1\ \+\ 0x58\)\ =\ iVar10;$	+1
+use	FUN_000e4c40	iVar10	tokenIndex	INFERRED	index of the next token to fetch (copy of *param_2)	^\s*iVar10\ =\ \*param_2;$@2	+3
+use	FUN_000e4c40	iVar10	tokenIndex	INFERRED	index of the next token to fetch (copy of *param_2)	^\s*iVar10\ =\ \*param_2;$@13	+3
+use	FUN_000e4c40	iVar10	opcodeClass	INFERRED	FUN_000f89a4 class of the opcode: 6 = extended opcode (real opcode = (token >> 16 & 0x3fff) + 0xcf)	^\s*iVar10\ =\ FUN_000f89a4\(uVar6,\*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_3\ \+\ 0x30c\)\ \+\ 0xc\)\);$	+2
+use	FUN_000e4c40	iVar10	streamCursor	INFERRED	ilReader+0x74: stream cursor at the start of an opcode 0x76 record	^\s*iVar10\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x74\);$	+1
+use	FUN_000e4c40	iVar10	streamCursor	INFERRED	ilReader+0x74: stream cursor at the start of an opcode 0x76 record	^\s*\*\(int\ \*\)\(iVar11\ \*\ 4\ \+\ param_1\ \+\ 0x8c\)\ =\ iVar10\ \-\ iVar5\ >>\ 2;$	+1
+use	FUN_000e4c40	iVar10	extraTokenCount	INFERRED	number of extra words fetched before the operands	^\s*iVar10\ =\ 1;$	+1
+use	FUN_000e4c40	iVar10	extraTokenCount	INFERRED	number of extra words fetched before the operands	^\s*iVar10\ =\ iVar5\ \+\ \-1;$	+1
+use	FUN_000e4c40	iVar10	extraTokenCount	INFERRED	number of extra words fetched before the operands	^\s*iVar10\ =\ iVar5;$	+1
+use	FUN_000e4c40	iVar10	extraTokenCount	INFERRED	number of extra words fetched before the operands	^\s*if\ \(0\ <\ iVar10\)\ \{$	+1
+use	FUN_000e4c40	iVar10	extraTokenCount	INFERRED	number of extra words fetched before the operands	^\s*\}\ while\ \(iVar10\ !=\ iVar5\);$	+1
+use	FUN_000e4c40	iVar11	fetchIndex	INFERRED	index passed to ILReader__fetchToken (value of *param_2 before it is incremented)	^\s*iVar11\ =\ \*param_2;$	+1
+use	FUN_000e4c40	iVar11	fetchIndex	INFERRED	index passed to ILReader__fetchToken (value of *param_2 before it is incremented)	^\s*\*param_2\ =\ iVar11\ \+\ 1;$	+2
+use	FUN_000e4c40	iVar11	fetchIndex	INFERRED	index passed to ILReader__fetchToken (value of *param_2 before it is incremented)	^\s*iVar11\ =\ \*param_2;$@2	+1
+use	FUN_000e4c40	iVar11	fetchIndex	INFERRED	index passed to ILReader__fetchToken (value of *param_2 before it is incremented)	^\s*iVar8\ =\ \*\(int\ \*\)\(iVar11\ \*\ 4\ \+\ param_1\ \+\ 0x88\);$	+1
+use	FUN_000e4c40	iVar11	fetchIndex	INFERRED	index passed to ILReader__fetchToken (value of *param_2 before it is incremented)	^\s*FUN_000e4a38\(param_1,iVar11\);$@2	+1
+use	FUN_000e4c40	iVar11	fetchIndex	INFERRED	index passed to ILReader__fetchToken (value of *param_2 before it is incremented)	^\s*iVar11\ =\ \*param_2;$@3	+1
+use	FUN_000e4c40	iVar11	fetchIndex	INFERRED	index passed to ILReader__fetchToken (value of *param_2 before it is incremented)	^\s*iVar11\ =\ \*param_2;$@4	+1
+use	FUN_000e4c40	iVar11	fetchIndex	INFERRED	index passed to ILReader__fetchToken (value of *param_2 before it is incremented)	^\s*\*\(int\ \*\)\(iVar11\ \*\ 4\ \+\ param_1\ \+\ 0x8c\)\ =\ iVar10\ \-\ iVar5\ >>\ 2;$	+1
+use	FUN_000e4c40	iVar11	fetchIndex	INFERRED	index passed to ILReader__fetchToken (value of *param_2 before it is incremented)	^\s*iVar11\ =\ \*param_2;$@5	+1
+use	FUN_000e4c40	iVar11	fetchIndex	INFERRED	index passed to ILReader__fetchToken (value of *param_2 before it is incremented)	^\s*\*param_2\ =\ iVar11\ \+\ 1;$@2	+2
+use	FUN_000e4c40	iVar11	sourceCount	INFERRED	FUN_000f8970: number of source operands of the opcode	^\s*iVar11\ =\ FUN_000f8970\(uVar6,\*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_3\ \+\ 0x30c\)\ \+\ 0xc\)\);$	+1
+use	FUN_000e4c40	iVar11	sourceCount	INFERRED	FUN_000f8970: number of source operands of the opcode	^\s*if\ \(0\ <\ iVar11\)\ \{$	+1
+use	FUN_000e4c40	iVar11	sourceCount	INFERRED	FUN_000f8970: number of source operands of the opcode	^\s*\}\ while\ \(iVar11\ !=\ iVar16\);$	+1
+use	FUN_000e4c40	iVar12	operandStartIndex	INFERRED	token index where the operands start (first destination token)	^\s*iVar12\ =\ \*param_2;$	+2
+use	FUN_000e4c40	iVar12	operandStartIndex	INFERRED	token index where the operands start (first destination token)	^\s*\*\*\(int\ \*\*\)\(param_1\ \+\ 100\)\ =\ iVar12\ \*\ 4\ \+\ param_1\ \+\ 0x8c;$	+1
+use	FUN_000e4c40	iVar12	operandStartIndex	INFERRED	token index where the operands start (first destination token)	^\s*_memcpy\(iVar17\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x68\),\*\*\(undefined4\ \*\*\)\(param_1\ \+\ 100\),$	+2
+use	FUN_000e4c40	iVar12	sourceSlotOffset	INFERRED	byte offset of the current source in the source token pointer array ilReader[0x1b] (stride 4 / 0x14 per replica)	^\s*iVar12\ =\ 0x14;$	+1
+use	FUN_000e4c40	iVar12	sourceSlotOffset	INFERRED	byte offset of the current source in the source token pointer array ilReader[0x1b] (stride 4 / 0x14 per replica)	^\s*iVar19\ =\ iVar12\ \*\ 5;$	+1
+use	FUN_000e4c40	iVar12	sourceSlotOffset	INFERRED	byte offset of the current source in the source token pointer array ilReader[0x1b] (stride 4 / 0x14 per replica)	^\s*iVar17\ =\ iVar12;$	+1
+use	FUN_000e4c40	iVar12	sourceSlotOffset	INFERRED	byte offset of the current source in the source token pointer array ilReader[0x1b] (stride 4 / 0x14 per replica)	^\s*iVar12\ =\ iVar12\ \+\ 4;$	+1
+use	FUN_000e4c40	iVar14	destRecordOffset	INFERRED	byte offset of the current replica in the destination pointer array ilReader[0x19] (stride 0x14)	^\s*iVar14\ =\ 0x14;$	+1
+use	FUN_000e4c40	iVar14	destRecordOffset	INFERRED	byte offset of the current replica in the destination pointer array ilReader[0x19] (stride 0x14)	^\s*\*\(int\ \*\)\(iVar14\ \+\ \*\(int\ \*\)\(param_1\ \+\ 100\)\)\ =\ iVar17\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x68\);$	+1
+use	FUN_000e4c40	iVar14	destRecordOffset	INFERRED	byte offset of the current replica in the destination pointer array ilReader[0x19] (stride 0x14)	^\s*piVar1\ =\ \(int\ \*\)\(iVar14\ \+\ \*\(int\ \*\)\(param_1\ \+\ 100\)\);$	+2
+use	FUN_000e4c40	iVar14	sourceReplicaCount	INFERRED	FUN_000e4710(opcode, destCount + source): how many replicas of this source the opcode defines	^\s*iVar14\ =\ FUN_000e4710\(uVar6,iVar5\ \+\ iVar16,\*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_3\ \+\ 0x30c\)\ \+\ 0xc\)\);$	+1
+use	FUN_000e4c40	iVar14	sourceReplicaCount	INFERRED	FUN_000e4710(opcode, destCount + source): how many replicas of this source the opcode defines	^\s*if\ \(0\ <\ iVar14\)\ \{$	+1
+use	FUN_000e4c40	iVar14	sourceReplicaCount	INFERRED	FUN_000e4710(opcode, destCount + source): how many replicas of this source the opcode defines	^\s*\}\ while\ \(iVar14\ !=\ iVar18\);$	+1
+use	FUN_000e4c40	iVar17	destCopyOffset	INFERRED	byte offset of the current destination token copy (stride 100)	^\s*iVar17\ =\ 100;$	+1
+use	FUN_000e4c40	iVar17	destCopyOffset	INFERRED	byte offset of the current destination token copy (stride 100)	^\s*\*\(int\ \*\)\(iVar14\ \+\ \*\(int\ \*\)\(param_1\ \+\ 100\)\)\ =\ iVar17\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x68\);$	+4
+use	FUN_000e4c40	iVar17	sourceReplicaOffset	INFERRED	byte offset of the current replica in the source pointer array ilReader[0x1b]	^\s*iVar17\ =\ iVar12;$	+1
+use	FUN_000e4c40	iVar17	sourceReplicaOffset	INFERRED	byte offset of the current replica in the source pointer array ilReader[0x1b]	^\s*\*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x6c\)\ \+\ iVar17\)\ =\ iVar19\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x70\);$	+1
+use	FUN_000e4c40	iVar17	sourceReplicaOffset	INFERRED	byte offset of the current replica in the source pointer array ilReader[0x1b]	^\s*piVar1\ =\ \(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x6c\)\ \+\ iVar17\);$	+2
+use	FUN_000e4c40	iVar16	destTokenSlot	INFERRED	address of the destination token word in the window (ilReader + tokenIndex*4 + 0x7c); modifier flags are at +0xc	^\s*iVar16\ =\ param_1\ \+\ iVar10\ \*\ 4\ \+\ 0x7c;$	+2
+use	FUN_000e4c40	iVar16	destTokenSlot	INFERRED	address of the destination token word in the window (ilReader + tokenIndex*4 + 0x7c); modifier flags are at +0xc	^\s*uVar3\ =\ \*\(uint\ \*\)\(iVar16\ \+\ 0xc\);$@2	+1
+use	FUN_000e4c40	iVar16	destTokenSlot	INFERRED	address of the destination token word in the window (ilReader + tokenIndex*4 + 0x7c); modifier flags are at +0xc	^\s*uVar3\ =\ \*\(uint\ \*\)\(iVar16\ \+\ 0xc\);$@3	+1
+use	FUN_000e4c40	iVar16	destTokenSlot	INFERRED	address of the destination token word in the window (ilReader + tokenIndex*4 + 0x7c); modifier flags are at +0xc	^\s*if\ \(\(\*\(uint\ \*\)\(iVar16\ \+\ 0xc\)\ \&\ 0x4000000\)\ !=\ 0\)\ \{$	+1
+use	FUN_000e4c40	iVar16	destTokenSlot	INFERRED	address of the destination token word in the window (ilReader + tokenIndex*4 + 0x7c); modifier flags are at +0xc	^\s*\*\(short\ \*\)\(\*piVar1\ \+\ 2\)\ =\ sVar2\ \+\ \*\(short\ \*\)\(iVar16\ \+\ 0xe\)\ \+\ 1;$	+1
+use	FUN_000e4c40	iVar13	destModifierSlot	INFERRED	address of the destination's second token word (extended swizzle/modifier word)	^\s*iVar13\ =\ param_1\ \+\ iVar10\ \*\ 4\ \+\ 0x7c;$	+2
+use	FUN_000e4c40	iVar13	destModifierSlot	INFERRED	address of the destination's second token word (extended swizzle/modifier word)	^\s*uVar3\ =\ \*\(uint\ \*\)\(iVar13\ \+\ 0xc\);$@2	+1
+use	FUN_000e4c40	iVar13	destModifierSlot	INFERRED	address of the destination's second token word (extended swizzle/modifier word)	^\s*uVar3\ =\ \*\(uint\ \*\)\(iVar13\ \+\ 0xc\);$@3	+1
+use	FUN_000e4c40	iVar13	destModifierSlot	INFERRED	address of the destination's second token word (extended swizzle/modifier word)	^\s*uVar3\ =\ \*\(uint\ \*\)\(iVar13\ \+\ 0xc\);$@4	+1
+use	FUN_000e4c40	iVar13	sourceByteIndex	INFERRED	source number * 4: index into the source pointer array ilReader[0x1b]	^\s*iVar13\ =\ iVar16\ \*\ 4;$	+1
+use	FUN_000e4c40	iVar13	sourceByteIndex	INFERRED	source number * 4: index into the source pointer array ilReader[0x1b]	^\s*\*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x6c\)\ \+\ iVar13\)\ =\ iVar8\ \*\ 4\ \+\ param_1\ \+\ 0x8c;$	+1
+use	FUN_000e4c40	iVar13	sourceByteIndex	INFERRED	source number * 4: index into the source pointer array ilReader[0x1b]	^\s*uVar3\ =\ \*\*\(uint\ \*\*\)\(iVar13\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x6c\)\)\ >>\ 0x19\ \&\ 1;$	+1
+use	FUN_000e4c40	iVar13	sourceByteIndex	INFERRED	source number * 4: index into the source pointer array ilReader[0x1b]	^\s*_memcpy\(iVar9,\*\(undefined4\ \*\)\(iVar13\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x6c\)\),\(iVar10\ \-\ iVar8\)\ \*\ 4\);$	+1
+use	FUN_000e4c40	iVar13	sourceByteIndex	INFERRED	source number * 4: index into the source pointer array ilReader[0x1b]	^\s*sVar2\ \+\ \*\(short\ \*\)\(\*\(int\ \*\)\(iVar13\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x6c\)\)\ \+\ 2\)\ \+\ 1;$	+1
+use	FUN_000e4c40	iVar18	sourceTokenSlot	INFERRED	address of the current source token word in the window	^\s*iVar18\ =\ param_1\ \+\ iVar10\ \*\ 4\ \+\ 0x7c;$	+2
+use	FUN_000e4c40	iVar18	sourceTokenSlot	INFERRED	address of the current source token word in the window	^\s*uVar4\ =\ \*\(uint\ \*\)\(iVar18\ \+\ 0xc\);$@2	+1
+use	FUN_000e4c40	iVar18	sourceTokenSlot	INFERRED	address of the current source token word in the window	^\s*if\ \(\(\*\(uint\ \*\)\(iVar18\ \+\ 0xc\)\ \&\ 0x4000000\)\ !=\ 0\)\ \{$	+1
+use	FUN_000e4c40	iVar19	sourceModifierSlot	INFERRED	address of the source's extended modifier word	^\s*iVar19\ =\ param_1\ \+\ iVar10\ \*\ 4\ \+\ 0x7c;$	+2
+use	FUN_000e4c40	iVar19	sourceModifierSlot	INFERRED	address of the source's extended modifier word	^\s*uVar4\ =\ \*\(uint\ \*\)\(iVar19\ \+\ 0xc\);$@2	+1
+use	FUN_000e4c40	iVar19	sourceCopyOffset	INFERRED	byte offset of the current source replica copy (stride 100)	^\s*iVar19\ =\ iVar12\ \*\ 5;$	+1
+use	FUN_000e4c40	iVar19	sourceCopyOffset	INFERRED	byte offset of the current source replica copy (stride 100)	^\s*\*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x6c\)\ \+\ iVar17\)\ =\ iVar19\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x70\);$	+3
+use	FUN_000e4c40	iVar8	loopCountToken	INFERRED	count word read from the window (opcode 0x76 loop/call record)	^\s*iVar8\ =\ \*\(int\ \*\)\(iVar11\ \*\ 4\ \+\ param_1\ \+\ 0x88\);$	+2
+use	FUN_000e4c40	iVar8	loopCountToken	INFERRED	count word read from the window (opcode 0x76 loop/call record)	^\s*if\ \(iVar8\ ==\ iVar12\)\ break;$	+1
+use	FUN_000e4c40	iVar8	destReplicaCount	INFERRED	FUN_000e4710(opcode, 0): number of replicas of the destination operand	^\s*iVar8\ =\ FUN_000e4710\(uVar6,0,\*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_3\ \+\ 0x30c\)\ \+\ 0xc\)\);$	+1
+use	FUN_000e4c40	iVar8	destReplicaCount	INFERRED	FUN_000e4710(opcode, 0): number of replicas of the destination operand	^\s*if\ \(0\ <\ iVar8\)\ \{$@2	+1
+use	FUN_000e4c40	iVar8	destReplicaCount	INFERRED	FUN_000e4710(opcode, 0): number of replicas of the destination operand	^\s*\}\ while\ \(iVar8\ !=\ iVar13\);$	+1
+use	FUN_000e4c40	iVar8	sourceStartIndex	INFERRED	token index where the source operands start	^\s*iVar8\ =\ iVar10;$	+1
+use	FUN_000e4c40	iVar8	sourceStartIndex	INFERRED	token index where the source operands start	^\s*\*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x6c\)\ \+\ iVar13\)\ =\ iVar8\ \*\ 4\ \+\ param_1\ \+\ 0x8c;$	+1
+use	FUN_000e4c40	iVar8	sourceStartIndex	INFERRED	token index where the source operands start	^\s*_memcpy\(iVar9,\*\(undefined4\ \*\)\(iVar13\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x6c\)\),\(iVar10\ \-\ iVar8\)\ \*\ 4\);$	+1
+use	FUN_000e4c40	iVar8	sourceStartIndex	INFERRED	token index where the source operands start	^\s*iVar8\ =\ iVar10;$@2	+1
+local	FUN_000e4c40	iVar9	sourceCopyAddress	INFERRED	destination address of the copied source window (ilReader[0x1c] area + offset)
+use	FUN_000e4c40	uVar3	tokenWord	INFERRED	first token word after the opcode (flag bits 0x20000000/0x40000000/sign select the extra words)	^\s*uVar3\ =\ \*puVar15;$	+1
+use	FUN_000e4c40	uVar3	tokenWord	INFERRED	first token word after the opcode (flag bits 0x20000000/0x40000000/sign select the extra words)	^\s*uVar3\ =\ \*puVar15;$@2	+2
+use	FUN_000e4c40	uVar3	tokenWord	INFERRED	first token word after the opcode (flag bits 0x20000000/0x40000000/sign select the extra words)	^\s*uVar3\ =\ \*puVar15;$@3	+1
+use	FUN_000e4c40	uVar3	tokenWord	INFERRED	first token word after the opcode (flag bits 0x20000000/0x40000000/sign select the extra words)	^\s*uVar3\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x8c\);$	+1
+use	FUN_000e4c40	uVar3	tokenWord	INFERRED	first token word after the opcode (flag bits 0x20000000/0x40000000/sign select the extra words)	^\s*if\ \(\(int\)uVar3\ <\ 0\)\ \{$	+1
+use	FUN_000e4c40	uVar3	tokenWord	INFERRED	first token word after the opcode (flag bits 0x20000000/0x40000000/sign select the extra words)	^\s*if\ \(\(uVar3\ \&\ 0x40000000\)\ !=\ 0\)\ \{$	+1
+use	FUN_000e4c40	uVar3	destFlags	INFERRED	flags of the destination token word: 0x400000 extended word follows, 0x23f0000 field, 0x1800000 relative addressing kind	^\s*uVar3\ =\ \*\(uint\ \*\)\(iVar16\ \+\ 0xc\);$	+2
+use	FUN_000e4c40	uVar3	destFlags	INFERRED	flags of the destination token word: 0x400000 extended word follows, 0x23f0000 field, 0x1800000 relative addressing kind	^\s*uVar3\ =\ \*\(uint\ \*\)\(iVar16\ \+\ 0xc\);$@2	+1
+use	FUN_000e4c40	uVar3	destFlags	INFERRED	flags of the destination token word: 0x400000 extended word follows, 0x23f0000 field, 0x1800000 relative addressing kind	^\s*if\ \(\(uVar3\ \&\ 0x23f0000\)\ ==\ 0x21e0000\)\ \{$	+1
+use	FUN_000e4c40	uVar3	destFlags	INFERRED	flags of the destination token word: 0x400000 extended word follows, 0x23f0000 field, 0x1800000 relative addressing kind	^\s*uVar3\ =\ \*\(uint\ \*\)\(iVar16\ \+\ 0xc\);$@3	+1
+use	FUN_000e4c40	uVar3	destFlags	INFERRED	flags of the destination token word: 0x400000 extended word follows, 0x23f0000 field, 0x1800000 relative addressing kind	^\s*if\ \(\(uVar3\ \&\ 0x1800000\)\ ==\ 0x800000\)\ \{$	+1
+use	FUN_000e4c40	uVar3	destFlags	INFERRED	flags of the destination token word: 0x400000 extended word follows, 0x23f0000 field, 0x1800000 relative addressing kind	^\s*else\ if\ \(\(uVar3\ \&\ 0x1800000\)\ ==\ 0x1000000\)\ \{$	+1
+use	FUN_000e4c40	uVar3	destModifierFlags	INFERRED	flags of the destination's modifier word (0x1800000 / 0x2000000 / 0x4000000 follow-on words)	^\s*uVar3\ =\ \*\(uint\ \*\)\(iVar13\ \+\ 0xc\);$	+2
+use	FUN_000e4c40	uVar3	destModifierFlags	INFERRED	flags of the destination's modifier word (0x1800000 / 0x2000000 / 0x4000000 follow-on words)	^\s*uVar3\ =\ \*\(uint\ \*\)\(iVar13\ \+\ 0xc\);$@2	+1
+use	FUN_000e4c40	uVar3	destModifierFlags	INFERRED	flags of the destination's modifier word (0x1800000 / 0x2000000 / 0x4000000 follow-on words)	^\s*if\ \(\(\(uVar3\ \&\ 0x1800000\)\ ==\ 0\)\ \&\&\ \(uVar4\ =\ 0,\ \(uVar3\ \&\ 0x2000000\)\ !=\ 0\)\)\ \{$	+1
+use	FUN_000e4c40	uVar3	destModifierFlags	INFERRED	flags of the destination's modifier word (0x1800000 / 0x2000000 / 0x4000000 follow-on words)	^\s*uVar3\ =\ \*\(uint\ \*\)\(iVar13\ \+\ 0xc\);$@3	+1
+use	FUN_000e4c40	uVar3	destModifierFlags	INFERRED	flags of the destination's modifier word (0x1800000 / 0x2000000 / 0x4000000 follow-on words)	^\s*if\ \(\(uVar3\ >>\ 0x19\ \&\ 1\)\ <=\ uVar4\)\ break;$	+1
+use	FUN_000e4c40	uVar3	destModifierFlags	INFERRED	flags of the destination's modifier word (0x1800000 / 0x2000000 / 0x4000000 follow-on words)	^\s*uVar3\ =\ \*\(uint\ \*\)\(iVar13\ \+\ 0xc\);$@4	+1
+use	FUN_000e4c40	uVar3	destModifierFlags	INFERRED	flags of the destination's modifier word (0x1800000 / 0x2000000 / 0x4000000 follow-on words)	^\s*if\ \(\(uVar3\ \&\ 0x4000000\)\ !=\ 0\)\ goto\ LAB_000e5044;$	+1
+use	FUN_000e4c40	uVar3	extraWordFlag	INFERRED	bit 25 of the source token word: one more modifier word follows	^\s*uVar3\ =\ \*\*\(uint\ \*\*\)\(iVar13\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x6c\)\)\ >>\ 0x19\ \&\ 1;$	+2
+use	FUN_000e4c40	uVar3	extraWordFlag	INFERRED	bit 25 of the source token word: one more modifier word follows	^\s*if\ \(iVar17\ !=\ uVar3\ \+\ 1\)\ \{$	+1
+use	FUN_000e4c40	uVar4	repeatIndex	INFERRED	loop counter over the repeat words of the destination modifier	^\s*if\ \(\(\(uVar3\ \&\ 0x1800000\)\ ==\ 0\)\ \&\&\ \(uVar4\ =\ 0,\ \(uVar3\ \&\ 0x2000000\)\ !=\ 0\)\)\ \{$	+1
+use	FUN_000e4c40	uVar4	repeatIndex	INFERRED	loop counter over the repeat words of the destination modifier	^\s*uVar4\ =\ uVar4\ \+\ 1;$	+2
+use	FUN_000e4c40	uVar4	sourceFlags	INFERRED	flags of the source token word (0x400000, 0x1800000, 0x4000000)	^\s*uVar4\ =\ \*\(uint\ \*\)\(iVar18\ \+\ 0xc\);$	+2
+use	FUN_000e4c40	uVar4	sourceFlags	INFERRED	flags of the source token word (0x400000, 0x1800000, 0x4000000)	^\s*uVar4\ =\ \*\(uint\ \*\)\(iVar18\ \+\ 0xc\);$@2	+1
+use	FUN_000e4c40	uVar4	sourceFlags	INFERRED	flags of the source token word (0x400000, 0x1800000, 0x4000000)	^\s*uVar4\ =\ uVar4\ \&\ 0x1800000;$	+3
+use	FUN_000e4c40	uVar4	sourceFlags	INFERRED	flags of the source token word (0x400000, 0x1800000, 0x4000000)	^\s*else\ if\ \(uVar4\ ==\ 0x1000000\)\ \{$	+1
+use	FUN_000e4c40	uVar4	sourceModifierFlags	INFERRED	flags of the source's modifier word	^\s*uVar4\ =\ \*\(uint\ \*\)\(iVar19\ \+\ 0xc\);$	+2
+use	FUN_000e4c40	uVar4	sourceModifierFlags	INFERRED	flags of the source's modifier word	^\s*uVar4\ =\ \*\(uint\ \*\)\(iVar19\ \+\ 0xc\);$@2	+1
+use	FUN_000e4c40	uVar4	sourceModifierFlags	INFERRED	flags of the source's modifier word	^\s*if\ \(\(uVar4\ \&\ 0x4000000\)\ !=\ 0\)\ goto\ LAB_000e523c;$	+1
+local	FUN_000e4c40	uVar6	opcode	INFERRED	current opcode from ILReader__currentOpcode (replaced by the extended opcode for class 6)
+local	FUN_000e4c40	uVar7	trailingTokenCount	INFERRED	FUN_000f8994: number of trailing tokens after the sources, stored in ilReader+0x5c
+local	FUN_000e4c40	puVar15	tokenWindow	INFERRED	ilReader+0x8c: first word of the instruction token window
+use	FUN_000e4c40	piVar1	destRecord	INFERRED	pointer slot written for the current destination replica	^\s*piVar1\ =\ \(int\ \*\)\(iVar14\ \+\ \*\(int\ \*\)\(param_1\ \+\ 100\)\);$	+1
+use	FUN_000e4c40	piVar1	destRecord	INFERRED	pointer slot written for the current destination replica	^\s*\*\(short\ \*\)\(\*piVar1\ \+\ 2\)\ =\ sVar2\ \+\ \*\(short\ \*\)\(iVar16\ \+\ 0xe\)\ \+\ 1;$	+1
+use	FUN_000e4c40	piVar1	sourceRecord	INFERRED	pointer slot written for the current source replica	^\s*piVar1\ =\ \(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x6c\)\ \+\ iVar17\);$	+1
+use	FUN_000e4c40	piVar1	sourceRecord	INFERRED	pointer slot written for the current source replica	^\s*\*\(short\ \*\)\(\*piVar1\ \+\ 2\)\ =$	+1
+local	FUN_000e4c40	sVar2	replicaNumber	INFERRED	replica index stored into the copied operand's register field
+local	ILReader__currentOpcode	uVar1	opcode	INFERRED	current opcode word at ilReader+0x8e before the range clamp
+local	ILReader__lookupBoolConst	piVar1	boolRecord	INFERRED	current record of the boolean-constant list
+local	ILReader__lookupBoolConst	param_2	registerIndex	INFERRED	boolean register looked up
+local	ILReader__appendIntConst	puVar1	record	INFERRED	new 0x18-byte integer-constant record
+local	ILReader__appendIntConst	param_2	registerIndex	INFERRED	stored in record[0]
+local	ILReader__appendIntConst	param_3	constX	INFERRED	stored in record[1]
+local	ILReader__appendIntConst	param_4	constY	INFERRED	stored in record[2]
+local	ILReader__appendIntConst	param_5	constZ	INFERRED	stored in record[3]
+local	ILReader__appendIntConst	param_6	constW	INFERRED	stored in record[4]
+local	ILReader__appendBoolConst	puVar1	record	INFERRED	new 0xc-byte boolean-constant record
+local	ILReader__appendBoolConst	param_2	registerIndex	INFERRED	stored in record[0]
+local	ILReader__appendBoolConst	param_3	value	INFERRED	stored in record[1]
+local	ILReader__appendFloatConst	puVar1	record	INFERRED	new 0x18-byte float-constant record
+local	ILReader__appendFloatConst	param_1	ilReader	INFERRED	IL reader object
+local	ILReader__appendFloatConst	param_2	registerIndex	INFERRED	stored in record[0]
+local	ILReader__appendFloatConst	fparam_1	constX	INFERRED	stored in record[1]
+local	ILReader__appendFloatConst	fparam_2	constY	INFERRED	stored in record[2]
+local	ILReader__appendFloatConst	fparam_3	constZ	INFERRED	stored in record[3]
+local	ILReader__appendFloatConst	fparam_4	constW	INFERRED	stored in record[4]
+local	ILReader__fetchToken	uVar7	opcode	INFERRED	current opcode word at ilReader+0x8e (clamped to 0 above 0xbe)
+local	ILReader__beginRewrittenReplay_e5384	param_6	unusedR8	INFERRED	passed through unused (register r8 of the caller)
+local	ILReader__beginRewrittenReplay_e547c	param_6	unusedR8	INFERRED	passed through unused (register r8 of the caller)

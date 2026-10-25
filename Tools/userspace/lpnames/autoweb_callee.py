@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
+<<<<<<< HEAD
 """autoweb.py DIR OUT.tsv [PARTLO PARTHI] [--dry] : name placeholder webs from the parameter names of the named callees they are passed to.
+=======
+"""autoweb_callee.py DIR OUT.tsv [PARTLO PARTHI] [--dry] : name placeholder webs from the parameter names of the named callees they are passed to.
+>>>>>>> wt-q05
 
 For every function of DIR/part_LO..HI.c and every placeholder variable still present in its current text, find the def-use webs (find_webs.py);
 a web whose uses pass the variable ALONE as an argument to a function whose header has real parameter names votes for that name; a web whose votes
