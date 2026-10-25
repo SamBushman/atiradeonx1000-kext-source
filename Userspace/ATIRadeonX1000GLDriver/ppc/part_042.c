@@ -6277,97 +6277,98 @@ LAB_00142f88:
 #undef vecArena
 
 /* FUN_00142fdc @ 0x142fdc (1672 bytes) */
-int FUN_00142fdc(param_1, inst, inst2, param_4, param_5)
-  undefined4 param_1;
+int FUN_00142fdc(packCtx, inst, inst2, laneMapA, laneMapB)
+  undefined4 packCtx;
   int inst;
   int inst2;
-  byte *param_4;
-  byte *param_5;
+  byte *laneMapA;
+  byte *laneMapB;
 {
+  int extraSrcOfInst2;
   int loopIndexB;
   int countdown;
   int loopIndex;
   bool isLast;
   bool moreComponents;
-  undefined4 uVar2;
-  int iVar3;
+  undefined4 identityLaneMap;
+  int extraSrcOfInst;
   int iVar4;
-  int *piVar5;
-  uint uVar6;
-  byte *pbVar7;
-  byte bVar8;
+  int *laneOwnerPtr;
+  uint invertedNeeded;
+  byte *laneMapPtr;
+  byte laneComponent;
   int iVar9;
   byte local_b8 [4];
-  uint local_b4;
-  uint local_b0;
-  uint local_ac;
-  uint local_a8;
-  undefined4 local_a4;
-  uint local_a0;
-  undefined4 local_9c;
-  undefined4 local_98;
-  undefined4 local_94;
-  uint local_90;
+  uint freeComponentsA;
+  uint invertedNeededSwappedB;
+  uint invertedNeededSwappedA;
+  uint neededMaskA;
+  undefined4 usedLanesA;
+  uint neededMaskB;
+  undefined4 usedLanesB;
+  undefined4 laneWritten;
+  undefined4 laneOccupied;
+  uint freeComponentsB;
   int local_8c [5];
-  uint local_78;
+  uint writeMaskA;
   undefined1 auStack_74 [4];
-  uint local_70;
-  undefined4 local_6c;
-  uint local_68;
+  uint neededMaskAOut;
+  undefined4 usedLanesAOut;
+  uint writeMaskB;
   undefined1 auStack_64 [4];
-  uint local_60;
+  uint neededMaskBOut;
   undefined4 local_5c [4];
   
-  ((int (*)())FUN_00141044)(&local_78,param_1,inst);
-  ((int (*)())FUN_00140e70)(auStack_74,param_1,inst);
-  ((int (*)())FUN_001427a4)(&local_70,param_1,inst);
-  local_a8 = local_70;
-  ((int (*)())FUN_00141090)(&local_6c,param_1,inst);
-  local_a4 = local_6c;
-  ((int (*)())FUN_00141044)(&local_68,param_1,inst2);
-  ((int (*)())FUN_00140e70)(auStack_64,param_1,inst2);
-  ((int (*)())FUN_001427a4)(&local_60,param_1,inst2);
-  local_a0 = local_60;
-  ((int (*)())FUN_00141090)(local_5c,param_1,inst2);
-  uVar2 = DAT_001b003c;
-  iVar3 = 0;
-  *(undefined4 *)param_4 = DAT_001b003c;
-  *(undefined4 *)param_5 = uVar2;
-  local_94 = DAT_001b0040;
-  local_9c = local_5c[0];
-  local_98 = DAT_001b0040;
+  ((int (*)())FUN_00141044)(&writeMaskA,packCtx,inst);
+  ((int (*)())FUN_00140e70)(auStack_74,packCtx,inst);
+  ((int (*)())FUN_001427a4)(&neededMaskAOut,packCtx,inst);
+  neededMaskA = neededMaskAOut;
+  ((int (*)())FUN_00141090)(&usedLanesAOut,packCtx,inst);
+  usedLanesA = usedLanesAOut;
+  ((int (*)())FUN_00141044)(&writeMaskB,packCtx,inst2);
+  ((int (*)())FUN_00140e70)(auStack_64,packCtx,inst2);
+  ((int (*)())FUN_001427a4)(&neededMaskBOut,packCtx,inst2);
+  neededMaskB = neededMaskBOut;
+  ((int (*)())FUN_00141090)(local_5c,packCtx,inst2);
+  identityLaneMap = DAT_001b003c;
+  extraSrcOfInst = 0;
+  *(undefined4 *)laneMapA = DAT_001b003c;
+  *(undefined4 *)laneMapB = identityLaneMap;
+  laneOccupied = DAT_001b0040;
+  usedLanesB = local_5c[0];
+  laneWritten = DAT_001b0040;
   if ((*(uint *)(inst + 0x14) & 0x200) != 0) {
-    iVar3 = IRInst__getOperandSource(inst,*(undefined4 *)(inst + 0x84));
+    extraSrcOfInst = IRInst__getOperandSource(inst,*(undefined4 *)(inst + 0x84));
   }
-  if (iVar3 != inst2) {
+  if (extraSrcOfInst != inst2) {
     loopIndex = 0;
     iVar9 = 4;
-    piVar5 = local_8c;
+    laneOwnerPtr = local_8c;
     do {
-      if (*(char *)((int)&local_a4 + loopIndex) != '\0') {
-        *(undefined1 *)((int)&local_98 + loopIndex) = 0;
-        *(undefined1 *)((int)&local_94 + loopIndex) = 1;
-        *piVar5 = inst;
+      if (*(char *)((int)&usedLanesA + loopIndex) != '\0') {
+        *(undefined1 *)((int)&laneWritten + loopIndex) = 0;
+        *(undefined1 *)((int)&laneOccupied + loopIndex) = 1;
+        *laneOwnerPtr = inst;
         local_b8[loopIndex] = (byte)loopIndex;
       }
       loopIndex = loopIndex + 1;
-      piVar5 = piVar5 + 1;
+      laneOwnerPtr = laneOwnerPtr + 1;
       iVar9 = iVar9 + -1;
     } while (iVar9 != 0);
   }
-  iVar3 = 0;
+  extraSrcOfInst2 = 0;
   if ((*(uint *)(inst2 + 0x14) & 0x200) != 0) {
-    iVar3 = IRInst__getOperandSource(inst2,*(undefined4 *)(inst2 + 0x84));
+    extraSrcOfInst2 = IRInst__getOperandSource(inst2,*(undefined4 *)(inst2 + 0x84));
   }
-  if (iVar3 != inst) {
+  if (extraSrcOfInst2 != inst) {
     loopIndex = 0;
-    piVar5 = local_8c;
+    laneOwnerPtr = local_8c;
     do {
-      if (*(char *)((int)&local_9c + loopIndex) != '\0') {
-        if (*(char *)((int)&local_94 + loopIndex) == '\0') {
-          *(undefined1 *)((int)&local_98 + loopIndex) = 0;
-          *(undefined1 *)((int)&local_94 + loopIndex) = 1;
-          *piVar5 = inst2;
+      if (*(char *)((int)&usedLanesB + loopIndex) != '\0') {
+        if (*(char *)((int)&laneOccupied + loopIndex) == '\0') {
+          *(undefined1 *)((int)&laneWritten + loopIndex) = 0;
+          *(undefined1 *)((int)&laneOccupied + loopIndex) = 1;
+          *laneOwnerPtr = inst2;
           local_b8[loopIndex] = (byte)loopIndex;
         }
         else {
@@ -6385,128 +6386,128 @@ int FUN_00142fdc(param_1, inst, inst2, param_4, param_5)
         }
       }
       moreComponents = loopIndex != 3;
-      piVar5 = piVar5 + 1;
+      laneOwnerPtr = laneOwnerPtr + 1;
       loopIndex = loopIndex + 1;
     } while (moreComponents);
   }
   loopIndex = 0;
-  piVar5 = local_8c;
-  pbVar7 = param_4;
+  laneOwnerPtr = local_8c;
+  laneMapPtr = laneMapA;
   do {
-    if (*(char *)((int)&local_a8 + loopIndex) != '\0') {
+    if (*(char *)((int)&neededMaskA + loopIndex) != '\0') {
       iVar9 = 0;
-      bVar8 = (byte)loopIndex;
-      if (*(char *)((int)&local_94 + loopIndex) == '\0') {
-        *piVar5 = inst;
-        *pbVar7 = bVar8;
-        *(undefined1 *)((int)&local_98 + loopIndex) = 1;
-        *(undefined1 *)((int)&local_94 + loopIndex) = 1;
-        local_b8[loopIndex] = bVar8;
+      laneComponent = (byte)loopIndex;
+      if (*(char *)((int)&laneOccupied + loopIndex) == '\0') {
+        *laneOwnerPtr = inst;
+        *laneMapPtr = laneComponent;
+        *(undefined1 *)((int)&laneWritten + loopIndex) = 1;
+        *(undefined1 *)((int)&laneOccupied + loopIndex) = 1;
+        local_b8[loopIndex] = laneComponent;
       }
       else {
-        while ((*(char *)((int)&local_94 + iVar9) != '\0' ||
-               (iVar4 = ((int (*)())FUN_00142974)(param_1,inst,loopIndex,iVar9), iVar4 == 0))) {
+        while ((*(char *)((int)&laneOccupied + iVar9) != '\0' ||
+               (iVar4 = ((int (*)())FUN_00142974)(packCtx,inst,loopIndex,iVar9), iVar4 == 0))) {
           isLast = iVar9 == 3;
           iVar9 = iVar9 + 1;
           if (isLast) {
             return 0;
           }
         }
-        *(undefined1 *)((int)&local_94 + iVar9) = 1;
+        *(undefined1 *)((int)&laneOccupied + iVar9) = 1;
         local_8c[iVar9] = inst;
-        *(undefined1 *)((int)&local_98 + iVar9) = 1;
-        *pbVar7 = (byte)iVar9;
-        local_b8[iVar9] = bVar8;
+        *(undefined1 *)((int)&laneWritten + iVar9) = 1;
+        *laneMapPtr = (byte)iVar9;
+        local_b8[iVar9] = laneComponent;
       }
     }
     moreComponents = loopIndex != 3;
-    piVar5 = piVar5 + 1;
-    pbVar7 = pbVar7 + 1;
+    laneOwnerPtr = laneOwnerPtr + 1;
+    laneMapPtr = laneMapPtr + 1;
     loopIndex = loopIndex + 1;
   } while (moreComponents);
-  iVar3 = 0;
+  extraSrcOfInst2 = 0;
   if ((*(uint *)(inst2 + 0x14) & 0x200) != 0) {
-    iVar3 = IRInst__getOperandSource(inst2,*(undefined4 *)(inst2 + 0x84));
+    extraSrcOfInst2 = IRInst__getOperandSource(inst2,*(undefined4 *)(inst2 + 0x84));
   }
-  if (iVar3 == inst) {
+  if (extraSrcOfInst2 == inst) {
     iVar9 = 4;
     loopIndex = 0;
-    pbVar7 = param_5;
+    laneMapPtr = laneMapB;
     do {
-      if (*(char *)((int)&local_9c + loopIndex) != '\0') {
-        *pbVar7 = param_4[loopIndex];
+      if (*(char *)((int)&usedLanesB + loopIndex) != '\0') {
+        *laneMapPtr = laneMapA[loopIndex];
       }
       loopIndex = loopIndex + 1;
-      pbVar7 = pbVar7 + 1;
+      laneMapPtr = laneMapPtr + 1;
       iVar9 = iVar9 + -1;
     } while (iVar9 != 0);
   }
   loopIndex = 0;
-  piVar5 = local_8c;
-  pbVar7 = param_5;
+  laneOwnerPtr = local_8c;
+  laneMapPtr = laneMapB;
   do {
-    if (*(char *)((int)&local_a0 + loopIndex) != '\0') {
-      bVar8 = (byte)loopIndex;
-      if (*(char *)((int)&local_94 + loopIndex) == '\0') {
-        *(undefined1 *)((int)&local_98 + loopIndex) = 1;
-        *piVar5 = inst2;
-        *pbVar7 = bVar8;
-        *(undefined1 *)((int)&local_94 + loopIndex) = 1;
-        local_b8[loopIndex] = bVar8;
+    if (*(char *)((int)&neededMaskB + loopIndex) != '\0') {
+      laneComponent = (byte)loopIndex;
+      if (*(char *)((int)&laneOccupied + loopIndex) == '\0') {
+        *(undefined1 *)((int)&laneWritten + loopIndex) = 1;
+        *laneOwnerPtr = inst2;
+        *laneMapPtr = laneComponent;
+        *(undefined1 *)((int)&laneOccupied + loopIndex) = 1;
+        local_b8[loopIndex] = laneComponent;
       }
-      else if ((*(char *)((int)&local_98 + loopIndex) == '\0') ||
-              (iVar9 = ((int (*)())FUN_00141100)(param_1,*piVar5,(uint)local_b8[loopIndex],inst2,loopIndex), iVar9 == 0
+      else if ((*(char *)((int)&laneWritten + loopIndex) == '\0') ||
+              (iVar9 = ((int (*)())FUN_00141100)(packCtx,*laneOwnerPtr,(uint)local_b8[loopIndex],inst2,loopIndex), iVar9 == 0
               )) {
         iVar9 = 0;
-        while ((*(char *)((int)&local_94 + iVar9) != '\0' ||
-               (iVar4 = ((int (*)())FUN_00142974)(param_1,inst2,loopIndex,iVar9), iVar4 == 0))) {
+        while ((*(char *)((int)&laneOccupied + iVar9) != '\0' ||
+               (iVar4 = ((int (*)())FUN_00142974)(packCtx,inst2,loopIndex,iVar9), iVar4 == 0))) {
           isLast = iVar9 == 3;
           iVar9 = iVar9 + 1;
           if (isLast) {
             return 0;
           }
         }
-        *(undefined1 *)((int)&local_94 + iVar9) = 1;
+        *(undefined1 *)((int)&laneOccupied + iVar9) = 1;
         local_8c[iVar9] = inst2;
-        *(undefined1 *)((int)&local_98 + iVar9) = 1;
-        *pbVar7 = (byte)iVar9;
-        local_b8[iVar9] = bVar8;
+        *(undefined1 *)((int)&laneWritten + iVar9) = 1;
+        *laneMapPtr = (byte)iVar9;
+        local_b8[iVar9] = laneComponent;
       }
     }
     moreComponents = loopIndex != 3;
-    piVar5 = piVar5 + 1;
-    pbVar7 = pbVar7 + 1;
+    laneOwnerPtr = laneOwnerPtr + 1;
+    laneMapPtr = laneMapPtr + 1;
     loopIndex = loopIndex + 1;
   } while (moreComponents);
-  iVar3 = 0;
+  extraSrcOfInst = 0;
   if ((*(uint *)(inst + 0x14) & 0x200) != 0) {
-    iVar3 = IRInst__getOperandSource(inst,*(undefined4 *)(inst + 0x84));
+    extraSrcOfInst = IRInst__getOperandSource(inst,*(undefined4 *)(inst + 0x84));
   }
-  if (iVar3 == inst2) {
+  if (extraSrcOfInst == inst2) {
     countdown = 4;
     loopIndex = 0;
-    pbVar7 = param_4;
+    laneMapPtr = laneMapA;
     do {
-      if (*(char *)((int)&local_a4 + loopIndex) != '\0') {
-        *pbVar7 = param_5[loopIndex];
+      if (*(char *)((int)&usedLanesA + loopIndex) != '\0') {
+        *laneMapPtr = laneMapB[loopIndex];
       }
       loopIndex = loopIndex + 1;
-      pbVar7 = pbVar7 + 1;
+      laneMapPtr = laneMapPtr + 1;
       countdown = countdown + -1;
     } while (countdown != 0);
   }
   loopIndex = 0;
-  uVar6 = ~local_a8;
+  invertedNeeded = ~neededMaskA;
   do {
-    local_ac = uVar6 << 0x18 | (uVar6 & 0xff00) << 8 | uVar6 >> 8 & 0xff00 | uVar6 >> 0x18;
-    local_b4 = local_78 & local_ac;
-    if (*(char *)((int)&local_b4 + loopIndex) != '\0') {
+    invertedNeededSwappedA = invertedNeeded << 0x18 | (invertedNeeded & 0xff00) << 8 | invertedNeeded >> 8 & 0xff00 | invertedNeeded >> 0x18;
+    freeComponentsA = writeMaskA & invertedNeededSwappedA;
+    if (*(char *)((int)&freeComponentsA + loopIndex) != '\0') {
       loopIndexB = 0;
       do {
-        if ((*(char *)((int)&local_98 + loopIndexB) != '\0') &&
-           (iVar4 = ((int (*)())FUN_00141100)(param_1,local_8c[loopIndexB],(uint)local_b8[loopIndexB],inst,loopIndex),
+        if ((*(char *)((int)&laneWritten + loopIndexB) != '\0') &&
+           (iVar4 = ((int (*)())FUN_00141100)(packCtx,local_8c[loopIndexB],(uint)local_b8[loopIndexB],inst,loopIndex),
            iVar4 != 0)) {
-          *param_4 = (byte)loopIndexB;
+          *laneMapA = (byte)loopIndexB;
           goto LAB_001434fc;
         }
         moreComponents = loopIndexB != 3;
@@ -6514,36 +6515,36 @@ int FUN_00142fdc(param_1, inst, inst2, param_4, param_5)
       } while (moreComponents);
       loopIndexB = 0;
       iVar4 = 4;
-      while (*(char *)((int)&local_94 + loopIndexB) != '\0') {
+      while (*(char *)((int)&laneOccupied + loopIndexB) != '\0') {
         loopIndexB = loopIndexB + 1;
         iVar4 = iVar4 + -1;
         if (iVar4 == 0) {
           return 0;
         }
       }
-      *(undefined1 *)((int)&local_94 + loopIndexB) = 1;
+      *(undefined1 *)((int)&laneOccupied + loopIndexB) = 1;
       local_8c[loopIndexB] = inst;
-      *(undefined1 *)((int)&local_98 + loopIndexB) = 1;
-      *param_4 = (byte)loopIndexB;
+      *(undefined1 *)((int)&laneWritten + loopIndexB) = 1;
+      *laneMapA = (byte)loopIndexB;
       local_b8[loopIndexB] = (byte)loopIndex;
     }
 LAB_001434fc:
     moreComponents = loopIndex != 3;
-    param_4 = param_4 + 1;
+    laneMapA = laneMapA + 1;
     loopIndex = loopIndex + 1;
   } while (moreComponents);
   loopIndex = 0;
-  uVar6 = ~local_a0;
+  invertedNeeded = ~neededMaskB;
   do {
-    local_b0 = uVar6 << 0x18 | (uVar6 & 0xff00) << 8 | uVar6 >> 8 & 0xff00 | uVar6 >> 0x18;
-    local_90 = local_68 & local_b0;
+    invertedNeededSwappedB = invertedNeeded << 0x18 | (invertedNeeded & 0xff00) << 8 | invertedNeeded >> 8 & 0xff00 | invertedNeeded >> 0x18;
+    freeComponentsB = writeMaskB & invertedNeededSwappedB;
     if (*(char *)((int)local_8c + loopIndex + -4) != '\0') {
       loopIndexB = 0;
       do {
-        if ((*(char *)((int)&local_98 + loopIndexB) != '\0') &&
-           (iVar4 = ((int (*)())FUN_00141100)(param_1,local_8c[loopIndexB],(uint)local_b8[loopIndexB],inst2,loopIndex),
+        if ((*(char *)((int)&laneWritten + loopIndexB) != '\0') &&
+           (iVar4 = ((int (*)())FUN_00141100)(packCtx,local_8c[loopIndexB],(uint)local_b8[loopIndexB],inst2,loopIndex),
            iVar4 != 0)) {
-          *param_5 = (byte)loopIndexB;
+          *laneMapB = (byte)loopIndexB;
           goto LAB_001435e4;
         }
         moreComponents = loopIndexB != 3;
@@ -6551,22 +6552,22 @@ LAB_001434fc:
       } while (moreComponents);
       loopIndexB = 0;
       iVar4 = 4;
-      while (*(char *)((int)&local_94 + loopIndexB) != '\0') {
+      while (*(char *)((int)&laneOccupied + loopIndexB) != '\0') {
         loopIndexB = loopIndexB + 1;
         iVar4 = iVar4 + -1;
         if (iVar4 == 0) {
           return 0;
         }
       }
-      *(undefined1 *)((int)&local_94 + loopIndexB) = 1;
+      *(undefined1 *)((int)&laneOccupied + loopIndexB) = 1;
       local_8c[loopIndexB] = inst2;
-      *(undefined1 *)((int)&local_98 + loopIndexB) = 1;
-      *param_5 = (byte)loopIndexB;
+      *(undefined1 *)((int)&laneWritten + loopIndexB) = 1;
+      *laneMapB = (byte)loopIndexB;
       local_b8[loopIndexB] = (byte)loopIndex;
     }
 LAB_001435e4:
     isLast = loopIndex == 3;
-    param_5 = param_5 + 1;
+    laneMapB = laneMapB + 1;
     loopIndex = loopIndex + 1;
     if (isLast) {
       return 1;
