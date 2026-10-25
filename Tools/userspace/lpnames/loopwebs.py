@@ -29,7 +29,7 @@ for fn, addr in funcs.items():
     spec = []
     for var in names:
         dl = [i for i in range(brace + 1, first) if re.match(r'^\s*[\w ]+[\s\*]+%s;$' % re.escape(var), cur[i])]
-        if len(dl) != 1 or any(re.search(r'&\s*%s\b' % re.escape(var), c) for c in cur): continue   # address-taken variables cannot be split
+        if len(dl) != 1 or any(re.search(r'(?<![&\w])&%s\b' % re.escape(var), c) for c in cur): continue   # address-taken variables cannot be split
         isptr = '*' in cur[dl[0]].split(var)[0]
         try: ws, er = F.webs(nodes, entry, var)
         except BaseException: continue
