@@ -8629,7 +8629,7 @@ int FUN_0003b280(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
     iVar15 = 0;
     iVar17 = param_2;
     do {
-      uVar7 = FUN_00054460(param_1,0x87bf,0x87c2,0x87e1,1);
+      uVar7 = glGenSymbolsEXT_impl5(param_1,0x87bf,0x87c2,0x87e1,1);
       bVar1 = iVar15 != 3;
       iVar15 = iVar15 + 1;
       *(undefined4 *)(iVar17 + 0x68) = uVar7;
@@ -8725,7 +8725,7 @@ int FUN_0003b5b0(param_1, param_2)
   
   iVar1 = *param_2;
   if (iVar1 == 0) {
-    iVar1 = FUN_00053dc0(param_1,1);
+    iVar1 = extvsReserveSymbolIds(param_1,1);
     *param_2 = iVar1;
     if (iVar1 == 0) {
       return 0;
@@ -9390,24 +9390,24 @@ int FUN_0003c400(ctx, shaderObject, hwProgram)
     iVar5 = 0;
     puVar19 = hwProgram;
     do {
-      uVar7 = FUN_00054460(ctx,0x87bf,0x87c4,0x87e1,1);
+      uVar7 = glGenSymbolsEXT_impl5(ctx,0x87bf,0x87c4,0x87e1,1);
       puVar19[0xd] = uVar7;
-      uVar7 = FUN_00054460(ctx,0x87be,0x87c4,0x87e1,1);
+      uVar7 = glGenSymbolsEXT_impl5(ctx,0x87be,0x87c4,0x87e1,1);
       puVar19[0x10] = uVar7;
-      uVar7 = FUN_00054460(ctx,0x87bf,0x87c4,0x87e1,1);
+      uVar7 = glGenSymbolsEXT_impl5(ctx,0x87bf,0x87c4,0x87e1,1);
       bVar1 = iVar5 != 2;
       iVar5 = iVar5 + 1;
       puVar19[0x13] = uVar7;
       puVar19 = puVar19 + 1;
     } while (bVar1);
     iVar5 = 0;
-    uVar7 = FUN_00054460(ctx,0x87bf,0x87c4,0x87e1,1);
+    uVar7 = glGenSymbolsEXT_impl5(ctx,0x87bf,0x87c4,0x87e1,1);
     hwProgram[0x16] = uVar7;
-    uVar7 = FUN_00054460(ctx,0x87be,0x87c4,0x87e1,1);
+    uVar7 = glGenSymbolsEXT_impl5(ctx,0x87be,0x87c4,0x87e1,1);
     hwProgram[0x17] = uVar7;
     puVar19 = hwProgram;
     do {
-      uVar7 = FUN_00054460(ctx,0x87bf,0x87c4,0x87e1,1);
+      uVar7 = glGenSymbolsEXT_impl5(ctx,0x87bf,0x87c4,0x87e1,1);
       bVar1 = iVar5 != 1;
       iVar5 = iVar5 + 1;
       puVar19[0x18] = uVar7;
@@ -9426,7 +9426,7 @@ int FUN_0003c400(ctx, shaderObject, hwProgram)
     }
     hwProgram[1] = iVar5;
     if (iVar5 != 0) {
-      iVar12 = FUN_00054460(ctx,0x87bf,0x87c4,0x87e1,iVar5);
+      iVar12 = glGenSymbolsEXT_impl5(ctx,0x87bf,0x87c4,0x87e1,iVar5);
       loopIndex = 0;
       do {
         iVar17 = loopIndex * 4;
@@ -9460,7 +9460,7 @@ int FUN_0003c400(ctx, shaderObject, hwProgram)
             *puVar19 = uVar7;
           }
           else {
-            uVar7 = FUN_00054460(ctx,0x87bf,0x87c1,0x87e1,1);
+            uVar7 = glGenSymbolsEXT_impl5(ctx,0x87bf,0x87c1,0x87e1,1);
             puVar19[uVar15 & 0xffff] = uVar7;
           }
         }
@@ -9732,10 +9732,10 @@ LAB_0003d254:
     }
     extvsEndShader(ctx);
     if (!bVar2) {
-      FUN_000530a0(ctx);
+      extvsClearConstantsDirty(ctx);
       return 0;
     }
-    iVar5 = FUN_00053070(ctx);
+    iVar5 = extvsConstantsDirty(ctx);
     if (iVar5 != 0) {
       uVar15 = hwProgram[3];
       if (uVar15 != hwProgram[5]) {

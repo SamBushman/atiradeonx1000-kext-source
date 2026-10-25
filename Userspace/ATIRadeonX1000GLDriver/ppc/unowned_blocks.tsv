@@ -804,7 +804,7 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 3f458	3f460	padding	fpilTranslateSource	2	
 3f4d4	3f4e0	padding	fpilTranslateSource	3	
 3f528	3f530	padding	fpilTranslateSourceWithSwizzle	2	
-3f5dc	3f5e0	padding	FUN_0003f5d0	1	
+3f5dc	3f5e0	padding	freeIfNonNull	1	
 3f63c	3f640	padding	fpilDestroyTranslator	1	
 3f654	3f660	padding	fpilDestroyTranslator	3	
 3f718	3f720	padding	fpilCreateTranslator	2	
@@ -1005,8 +1005,8 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 4dbdc	4dbe0	padding	gldValidateDepthTest	1	
 4dc2c	4dc30	padding	FUN_0004dbe0	1	
 4dd0c	4dd10	padding	gldValidateTexEnvColor	1	
-4dd38	4dd40	padding	FUN_0004dd10	2	
-4ddb4	4ddc0	padding	FUN_0004dd40	3	
+4dd38	4dd40	padding	gldEmitScissorRegs	2	
+4ddb4	4ddc0	padding	gldEmitViewportAndGuardBand	3	
 4de28	4de30	padding	FUN_0004ddc0	2	
 4de58	4de60	padding	FUN_0004de30	2	
 4deec	4def0	padding	FUN_0004de30	1	
@@ -1046,9 +1046,9 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 4f54c	4f550	padding	FUN_0004f2e0	1	
 4f688	4f690	padding	gldValidateScissor	2	
 4f71c	4f720	padding	gldValidateScissor	1	
-4f97c	4f980	padding	FUN_0004f720	1	
-4f994	4f9a0	padding	FUN_0004f720	3	
-4f9b4	4f9c0	padding	FUN_0004f720	3	
+4f97c	4f980	padding	gldInitStateDefaults	1	
+4f994	4f9a0	padding	gldInitStateDefaults	3	
+4f9b4	4f9c0	padding	gldInitStateDefaults	3	
 4fd1c	4fd20	padding	FUN_0004fc80	1	
 4ff6c	4ff70	padding	FUN_0004fd80	1	
 4ffcc	4ffe8	table	gldValidateAlphaTest	7	
@@ -1076,8 +1076,8 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 53034	53040	padding	FUN_00053000	3	
 53054	53060	padding	FUN_00053040	3	
 53064	53070	padding	noop_53060	3	
-53094	530a0	padding	FUN_00053070	3	
-530b8	530c0	padding	FUN_000530a0	2	
+53094	530a0	padding	extvsConstantsDirty	3	
+530b8	530c0	padding	extvsClearConstantsDirty	2	
 53114	53120	padding	FUN_000530c0	3	
 5316c	53170	padding	FUN_000530c0	1	
 53188	53190	padding	FUN_000530c0	2	
@@ -1098,7 +1098,7 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 53b54	53b60	padding	extvsGetShaderById	3	
 53c84	53c90	padding	extvsBindShader	3	
 53da4	53dc0	millicode	extvsBindShader	7	
-53dd4	53de0	padding	FUN_00053dc0	3	
+53dd4	53de0	padding	extvsReserveSymbolIds	3	
 53e2c	53e30	padding	extvsDeleteShaderObject	1	
 53efc	53f00	padding	glDeleteVertexShaderEXT_impl	1	
 53f7c	53f80	padding	glShaderOp1EXT_impl	1	
@@ -1107,7 +1107,7 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 54264	54270	padding	glWriteMaskEXT_impl	3	
 543a4	543b0	padding	glInsertComponentEXT_impl	3	
 54454	54460	padding	glExtractComponentEXT_impl	3	
-54468	54470	padding	FUN_00054460	2	
+54468	54470	padding	glGenSymbolsEXT_impl5	2	
 544f8	54500	padding	FUN_00054470	2	
 54588	54590	padding	FUN_00054470	2	
 545bc	545c0	padding	FUN_00054590	1	

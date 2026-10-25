@@ -1955,8 +1955,8 @@ use	FUN_00052280	uVar4	registerDirty	INFERRED	register-dirty word: every gldVali
 use	FUN_00052280	uVar4	registerDirty	INFERRED	register-dirty word: every gldValidate* ORs a bit into it (notes_gld_functions.md section 3)	^\s*if\ \(\(uVar4\ \&\ 0x200000\)\ !=\ 0\)\ \{$	+1
 use	FUN_00052280	uVar4	registerDirty	INFERRED	register-dirty word: every gldValidate* ORs a bit into it (notes_gld_functions.md section 3)	^\s*uVar4\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x1930\);$@3	+1
 use	FUN_00052280	uVar4	registerDirty	INFERRED	register-dirty word: every gldValidate* ORs a bit into it (notes_gld_functions.md section 3)	^\s*if\ \(\(uVar4\ \&\ 0x1000000\)\ !=\ 0\)\ \{$	+1
-use	FUN_00052280	iVar9	glContextWord1938	INFERRED	load of glContext+0x1938 (no field row, no register pairing): positional name	^\s*iVar9\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x1938\);$@2	+1
-use	FUN_00052280	iVar9	glContextWord1938	INFERRED	load of glContext+0x1938 (no field row, no register pairing): positional name	^\s*puVar6\[2\]\ =\ \(\(unsigned\ char\ \*\)0x00001100\)\ \+\ iVar9;$	+1
+use	FUN_00052280	iVar9	unitIndex	INFERRED	load of glContext+0x1938 (no field row, no register pairing): positional name	^\s*iVar9\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x1938\);$@2	+1
+use	FUN_00052280	iVar9	unitIndex	INFERRED	load of glContext+0x1938 (no field row, no register pairing): positional name	^\s*puVar6\[2\]\ =\ \(\(unsigned\ char\ \*\)0x00001100\)\ \+\ iVar9;$	+1
 use	FUN_00052280	iVar9	glState	INFERRED	*(glContext + 4): the GL state object; (glState)->+0x10 is the GL state block read by the gldValidate* translators	^\s*iVar9\ =\ \*\(int\ \*\)\(param_1\ \+\ 4\);$	+2
 use	FUN_00052280	iVar9	glState	INFERRED	*(glContext + 4): the GL state object; (glState)->+0x10 is the GL state block read by the gldValidate* translators	^\s*\*\(undefined4\ \*\*\)\(iVar9\ \+\ 0x1d8\)\ =\ puVar7;$	+1
 local	FUN_00052cc0	param_1	glContext	INFERRED	the GL context state object embedded at GLDContext+0x240 (the object gldValidate* call glContext): shadow registers at +0x1c8c.., dirty words +0x38/+0x3c, register-dirty word +0x1930, stream callbacks +0x2758/+0x275c
@@ -2778,3 +2778,99 @@ use	fragmentTranslateSel	puVar14	tokenWritePtr3	INFERRED	(bufferCount * 4 + *buf
 use	fragmentTranslateSel	puVar14	tokenWritePtr3	INFERRED	(bufferCount * 4 + *bufferDataPtr): write cursor into the emitter's token buffer, advanced two words per record entry	^\s*puVar14\[3\]\ =\ \(uint\)\*ppuVar11;$	+1
 use	fragmentTranslateSel	puVar14	tokenWritePtr3	INFERRED	(bufferCount * 4 + *bufferDataPtr): write cursor into the emitter's token buffer, advanced two words per record entry	^\s*puVar14\[4\]\ =\ \(uint\)\*ppuVar10;$	+2
 use	fragmentTranslateTrig	puVar1	tokenWritePtr	INFERRED	(bufferCount * 4 + *bufferDataPtr): write cursor into the emitter's token buffer, advanced two words per record entry	^\s*puVar1\ =\ \(undefined4\ \*\)\(iVar4\ \*\ 4\ \+\ \*piVar6\);$	+6
+local	extvsPrepareHardwareProgram	bVar2	searching	INFERRED	true while the inlined constant-register search (extvsAllocConstantRegisters expanded in place) has not found a free slot; cleared when slot[+0x10] is 0
+local	extvsPrepareHardwareProgram	uVar22	slotIndex	INFERRED	index of the register slot being examined in programState[0x54] (0x28-byte slots, count at +0x58)
+local	extvsPrepareHardwareProgram	iVar24	rowsRemaining	INFERRED	countdown over the 4 consecutive slots a MATRIX_EXT symbol occupies
+local	extvsPrepareHardwareProgram	uVar9	slotByteOffset	INFERRED	slotIndex * 0x28: byte offset of the slot being examined
+use	extvsPrepareHardwareProgram	iVar3	oldSlotCount	INFERRED	programState +0x58 before growth: the index of the first newly added slot	^\s*iVar3\ =\ \*\(int\ \*\)\(uVar23\ \+\ 0x58\);$	+1
+use	extvsPrepareHardwareProgram	iVar3	oldSlotCount	INFERRED	programState +0x58 before growth: the index of the first newly added slot	^\s*\(iVar3\ \+\ 0x10,0x28,in_r5,in_r6,in_r7,in_r8,0\);$	+1
+use	extvsPrepareHardwareProgram	iVar3	oldSlotCount	INFERRED	programState +0x58 before growth: the index of the first newly added slot	^\s*iVar12\ =\ iVar3\ \*\ 0x28;$	+1
+use	extvsPrepareHardwareProgram	iVar3	oldSlotCount	INFERRED	programState +0x58 before growth: the index of the first newly added slot	^\s*iVar4\ =\ iVar19\ \+\ iVar3;$	+1
+use	extvsPrepareHardwareProgram	iVar3	oldSlotCount	INFERRED	programState +0x58 before growth: the index of the first newly added slot	^\s*iVar3\ =\ \*\(int\ \*\)\(uVar23\ \+\ 0x58\);$@2	+1
+use	extvsPrepareHardwareProgram	iVar3	oldSlotCount	INFERRED	programState +0x58 before growth: the index of the first newly added slot	^\s*\(iVar3\ \+\ 0x10,0x28,in_r5,in_r6,in_r7,in_r8,0\);$@2	+1
+use	extvsPrepareHardwareProgram	iVar3	oldSlotCount	INFERRED	programState +0x58 before growth: the index of the first newly added slot	^\s*iVar12\ =\ iVar3\ \*\ 0x28;$@2	+1
+use	extvsPrepareHardwareProgram	iVar3	oldSlotCount	INFERRED	programState +0x58 before growth: the index of the first newly added slot	^\s*iVar4\ =\ iVar19\ \+\ iVar3;$@2	+1
+use	extvsPrepareHardwareProgram	iVar3	oldSlotCount	INFERRED	programState +0x58 before growth: the index of the first newly added slot	^\s*iVar3\ =\ \*\(int\ \*\)\(uVar23\ \+\ 0x58\);$@3	+1
+use	extvsPrepareHardwareProgram	iVar3	oldSlotCount	INFERRED	programState +0x58 before growth: the index of the first newly added slot	^\s*\(iVar3\ \+\ 0x10,0x28,in_r5,in_r6,in_r7,in_r8,0\);$@3	+1
+use	extvsPrepareHardwareProgram	iVar3	oldSlotCount	INFERRED	programState +0x58 before growth: the index of the first newly added slot	^\s*iVar12\ =\ iVar3\ \*\ 0x28;$@3	+1
+use	extvsPrepareHardwareProgram	iVar3	oldSlotCount	INFERRED	programState +0x58 before growth: the index of the first newly added slot	^\s*iVar4\ =\ iVar3\ \+\ iVar18;$	+1
+use	extvsPrepareHardwareProgram	iVar3	oldSlotCount	INFERRED	programState +0x58 before growth: the index of the first newly added slot	^\s*iVar3\ =\ \*\(int\ \*\)\(uVar23\ \+\ 0x58\);$@4	+1
+use	extvsPrepareHardwareProgram	iVar3	oldSlotCount	INFERRED	programState +0x58 before growth: the index of the first newly added slot	^\s*\(iVar3\ \+\ 0x10,0x28,in_r5,in_r6,in_r7,in_r8,0\);$@4	+1
+use	extvsPrepareHardwareProgram	iVar3	oldSlotCount	INFERRED	programState +0x58 before growth: the index of the first newly added slot	^\s*iVar12\ =\ iVar3\ \*\ 0x28;$@4	+1
+use	extvsPrepareHardwareProgram	iVar3	oldSlotCount	INFERRED	programState +0x58 before growth: the index of the first newly added slot	^\s*iVar4\ =\ iVar3\ \+\ iVar18;$@2	+1
+use	extvsPrepareHardwareProgram	iVar12	newSlotOffset	INFERRED	oldSlotCount * 0x28: byte offset of the first newly added slot	^\s*iVar12\ =\ iVar3\ \*\ 0x28;$	+1
+use	extvsPrepareHardwareProgram	iVar12	newSlotOffset	INFERRED	oldSlotCount * 0x28: byte offset of the first newly added slot	^\s*iVar4\ =\ \*\(int\ \*\)\(uVar23\ \+\ 0x54\)\ \+\ iVar12;$	+2
+use	extvsPrepareHardwareProgram	iVar12	newSlotOffset	INFERRED	oldSlotCount * 0x28: byte offset of the first newly added slot	^\s*iVar12\ =\ iVar3\ \*\ 0x28;$@2	+1
+use	extvsPrepareHardwareProgram	iVar12	newSlotOffset	INFERRED	oldSlotCount * 0x28: byte offset of the first newly added slot	^\s*iVar4\ =\ \*\(int\ \*\)\(uVar23\ \+\ 0x54\)\ \+\ iVar12;$@2	+2
+use	extvsPrepareHardwareProgram	iVar12	newSlotOffset	INFERRED	oldSlotCount * 0x28: byte offset of the first newly added slot	^\s*iVar12\ =\ iVar3\ \*\ 0x28;$@3	+1
+use	extvsPrepareHardwareProgram	iVar12	newSlotOffset	INFERRED	oldSlotCount * 0x28: byte offset of the first newly added slot	^\s*iVar4\ =\ iVar12\ \+\ \*\(int\ \*\)\(uVar23\ \+\ 0x54\);$	+2
+use	extvsPrepareHardwareProgram	iVar12	newSlotOffset	INFERRED	oldSlotCount * 0x28: byte offset of the first newly added slot	^\s*iVar12\ =\ iVar3\ \*\ 0x28;$@4	+1
+use	extvsPrepareHardwareProgram	iVar12	newSlotOffset	INFERRED	oldSlotCount * 0x28: byte offset of the first newly added slot	^\s*iVar4\ =\ \*\(int\ \*\)\(uVar23\ \+\ 0x54\)\ \+\ iVar12;$@3	+2
+use	extvsPrepareHardwareProgram	uVar14	newSlotArray	INFERRED	zeroing-allocated replacement of the programState slot array (+0x54), grown by 0x10 slots	^\s*uVar14\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x10\)\)\(iVar16\ \+\ 0x10,0x28\);$	+1
+use	extvsPrepareHardwareProgram	uVar14	newSlotArray	INFERRED	zeroing-allocated replacement of the programState slot array (+0x54), grown by 0x10 slots	^\s*\(\*\*\(code\ \*\*\)\(\(\(unsigned\ char\ \*\)0x00001344\)\ \+\ param_1\)\)\(uVar14,\*\(undefined4\ \*\)\(uVar23\ \+\ 0x54\),in_r5\);$	+1
+use	extvsPrepareHardwareProgram	uVar14	newSlotArray	INFERRED	zeroing-allocated replacement of the programState slot array (+0x54), grown by 0x10 slots	^\s*\*\(undefined4\ \*\)\(uVar23\ \+\ 0x54\)\ =\ uVar14;$	+1
+use	extvsPrepareHardwareProgram	uVar14	newSlotArray	INFERRED	zeroing-allocated replacement of the programState slot array (+0x54), grown by 0x10 slots	^\s*uVar14\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x10\)\)\(iVar19\ \+\ 0x10,0x28\);$	+1
+use	extvsPrepareHardwareProgram	uVar14	newSlotArray	INFERRED	zeroing-allocated replacement of the programState slot array (+0x54), grown by 0x10 slots	^\s*\(\*\*\(code\ \*\*\)\(\(\(unsigned\ char\ \*\)0x00001344\)\ \+\ param_1\)\)\(uVar14,\*\(undefined4\ \*\)\(uVar23\ \+\ 0x54\),in_r5\);$@2	+1
+use	extvsPrepareHardwareProgram	uVar14	newSlotArray	INFERRED	zeroing-allocated replacement of the programState slot array (+0x54), grown by 0x10 slots	^\s*\*\(undefined4\ \*\)\(uVar23\ \+\ 0x54\)\ =\ uVar14;$@2	+1
+use	extvsPrepareHardwareProgram	uVar14	newSlotArray	INFERRED	zeroing-allocated replacement of the programState slot array (+0x54), grown by 0x10 slots	^\s*uVar14\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x10\)\)$	+1
+use	extvsPrepareHardwareProgram	uVar14	newSlotArray	INFERRED	zeroing-allocated replacement of the programState slot array (+0x54), grown by 0x10 slots	^\s*\(uVar14,\*\(undefined4\ \*\)\(uVar23\ \+\ 0x54\),in_r5\);$	+1
+use	extvsPrepareHardwareProgram	uVar14	newSlotArray	INFERRED	zeroing-allocated replacement of the programState slot array (+0x54), grown by 0x10 slots	^\s*\*\(undefined4\ \*\)\(uVar23\ \+\ 0x54\)\ =\ uVar14;$@3	+1
+use	extvsPrepareHardwareProgram	uVar14	newSlotArray	INFERRED	zeroing-allocated replacement of the programState slot array (+0x54), grown by 0x10 slots	^\s*uVar14\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x10\)\)\(iVar19\ \+\ 0x10,0x28\);$@2	+1
+use	extvsPrepareHardwareProgram	uVar14	newSlotArray	INFERRED	zeroing-allocated replacement of the programState slot array (+0x54), grown by 0x10 slots	^\s*\(\*\*\(code\ \*\*\)\(\(\(unsigned\ char\ \*\)0x00001344\)\ \+\ param_1\)\)\(uVar14,\*\(undefined4\ \*\)\(uVar23\ \+\ 0x54\),in_r5\);$@3	+1
+use	extvsPrepareHardwareProgram	uVar14	newSlotArray	INFERRED	zeroing-allocated replacement of the programState slot array (+0x54), grown by 0x10 slots	^\s*\*\(undefined4\ \*\)\(uVar23\ \+\ 0x54\)\ =\ uVar14;$@4	+1
+use	extvsPrepareHardwareProgram	uVar14	newSlotArray	INFERRED	zeroing-allocated replacement of the programState slot array (+0x54), grown by 0x10 slots	^\s*uVar14\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x10\)\)$@2	+1
+use	extvsPrepareHardwareProgram	uVar14	newSlotArray	INFERRED	zeroing-allocated replacement of the programState slot array (+0x54), grown by 0x10 slots	^\s*\(\*\*\(code\ \*\*\)\(\(\(unsigned\ char\ \*\)0x00001344\)\ \+\ param_1\)\)\(uVar14,\*\(undefined4\ \*\)\(uVar23\ \+\ 0x54\),in_r5\);$@4	+1
+use	extvsPrepareHardwareProgram	uVar14	newSlotArray	INFERRED	zeroing-allocated replacement of the programState slot array (+0x54), grown by 0x10 slots	^\s*\*\(undefined4\ \*\)\(uVar23\ \+\ 0x54\)\ =\ uVar14;$@5	+1
+use	extvsPrepareHardwareProgram	uVar14	newSlotArray	INFERRED	zeroing-allocated replacement of the programState slot array (+0x54), grown by 0x10 slots	^\s*uVar14\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x10\)\)\(iVar16\ \+\ 0x10,0x28\);$@2	+1
+use	extvsPrepareHardwareProgram	uVar14	newSlotArray	INFERRED	zeroing-allocated replacement of the programState slot array (+0x54), grown by 0x10 slots	^\s*\(\*\*\(code\ \*\*\)\(\(\(unsigned\ char\ \*\)0x00001344\)\ \+\ param_1\)\)\(uVar14,\*\(undefined4\ \*\)\(uVar23\ \+\ 0x54\),in_r5\);$@5	+1
+use	extvsPrepareHardwareProgram	uVar14	newSlotArray	INFERRED	zeroing-allocated replacement of the programState slot array (+0x54), grown by 0x10 slots	^\s*\*\(undefined4\ \*\)\(uVar23\ \+\ 0x54\)\ =\ uVar14;$@6	+1
+use	extvsPrepareHardwareProgram	uVar14	newSlotArray	INFERRED	zeroing-allocated replacement of the programState slot array (+0x54), grown by 0x10 slots	^\s*uVar14\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x10\)\)\(iVar19\ \+\ 0x10,0x28\);$@3	+1
+use	extvsPrepareHardwareProgram	uVar14	newSlotArray	INFERRED	zeroing-allocated replacement of the programState slot array (+0x54), grown by 0x10 slots	^\s*\(\*\*\(code\ \*\*\)\(\(\(unsigned\ char\ \*\)0x00001344\)\ \+\ param_1\)\)\(uVar14,\*\(undefined4\ \*\)\(uVar23\ \+\ 0x54\),in_r5\);$@6	+1
+use	extvsPrepareHardwareProgram	uVar14	newSlotArray	INFERRED	zeroing-allocated replacement of the programState slot array (+0x54), grown by 0x10 slots	^\s*\*\(undefined4\ \*\)\(uVar23\ \+\ 0x54\)\ =\ uVar14;$@7	+1
+use	extvsPrepareHardwareProgram	uVar14	newSlotArray	INFERRED	zeroing-allocated replacement of the programState slot array (+0x54), grown by 0x10 slots	^\s*uVar14\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x10\)\)$@3	+1
+use	extvsPrepareHardwareProgram	uVar14	newSlotArray	INFERRED	zeroing-allocated replacement of the programState slot array (+0x54), grown by 0x10 slots	^\s*\(\*\*\(code\ \*\*\)\(\(\(unsigned\ char\ \*\)0x00001344\)\ \+\ param_1\)\)\(uVar14,\*\(undefined4\ \*\)\(uVar23\ \+\ 0x54\),in_r5\);$@7	+1
+use	extvsPrepareHardwareProgram	uVar14	newSlotArray	INFERRED	zeroing-allocated replacement of the programState slot array (+0x54), grown by 0x10 slots	^\s*\*\(undefined4\ \*\)\(uVar23\ \+\ 0x54\)\ =\ uVar14;$@8	+1
+use	extvsPrepareHardwareProgram	uVar14	newSlotArray	INFERRED	zeroing-allocated replacement of the programState slot array (+0x54), grown by 0x10 slots	^\s*uVar14\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x10\)\)\(iVar18\ \+\ 0x10,0x28\);$	+1
+use	extvsPrepareHardwareProgram	uVar14	newSlotArray	INFERRED	zeroing-allocated replacement of the programState slot array (+0x54), grown by 0x10 slots	^\s*\(\*\*\(code\ \*\*\)\(\(\(unsigned\ char\ \*\)0x00001344\)\ \+\ param_1\)\)\(uVar14,\*\(undefined4\ \*\)\(uVar23\ \+\ 0x54\),in_r5\);$@8	+1
+use	extvsPrepareHardwareProgram	uVar14	newSlotArray	INFERRED	zeroing-allocated replacement of the programState slot array (+0x54), grown by 0x10 slots	^\s*\*\(undefined4\ \*\)\(uVar23\ \+\ 0x54\)\ =\ uVar14;$@9	+1
+use	extvsPrepareHardwareProgram	uVar14	newSlotArray	INFERRED	zeroing-allocated replacement of the programState slot array (+0x54), grown by 0x10 slots	^\s*uVar14\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x10\)\)$@4	+1
+use	extvsPrepareHardwareProgram	uVar14	newSlotArray	INFERRED	zeroing-allocated replacement of the programState slot array (+0x54), grown by 0x10 slots	^\s*\(\*\*\(code\ \*\*\)\(\(\(unsigned\ char\ \*\)0x00001344\)\ \+\ param_1\)\)\(uVar14,\*\(undefined4\ \*\)\(uVar23\ \+\ 0x54\),in_r5\);$@9	+1
+use	extvsPrepareHardwareProgram	uVar14	newSlotArray	INFERRED	zeroing-allocated replacement of the programState slot array (+0x54), grown by 0x10 slots	^\s*\*\(undefined4\ \*\)\(uVar23\ \+\ 0x54\)\ =\ uVar14;$@10	+1
+use	extvsPrepareHardwareProgram	uVar15	newSlotArray2	INFERRED	zeroing-allocated replacement of the programState slot array (+0x54), grown by 0x10 slots	^\s*uVar15\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x10\)\)\(iVar16\ \+\ 0x10,0x28\);$	+1
+use	extvsPrepareHardwareProgram	uVar15	newSlotArray2	INFERRED	zeroing-allocated replacement of the programState slot array (+0x54), grown by 0x10 slots	^\s*\(\*\*\(code\ \*\*\)\(\(\(unsigned\ char\ \*\)0x00001344\)\ \+\ param_1\)\)\(uVar15,\*\(undefined4\ \*\)\(uVar23\ \+\ 0x54\),in_r5\);$	+1
+use	extvsPrepareHardwareProgram	uVar15	newSlotArray2	INFERRED	zeroing-allocated replacement of the programState slot array (+0x54), grown by 0x10 slots	^\s*\*\(undefined4\ \*\)\(uVar23\ \+\ 0x54\)\ =\ uVar15;$	+1
+use	extvsPrepareHardwareProgram	uVar15	newSlotArray2	INFERRED	zeroing-allocated replacement of the programState slot array (+0x54), grown by 0x10 slots	^\s*uVar15\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x10\)\)\(iVar19\ \+\ 0x10,0x28\);$	+1
+use	extvsPrepareHardwareProgram	uVar15	newSlotArray2	INFERRED	zeroing-allocated replacement of the programState slot array (+0x54), grown by 0x10 slots	^\s*\(uVar15,\*\(undefined4\ \*\)\(uVar23\ \+\ 0x54\),in_r5\);$	+1
+use	extvsPrepareHardwareProgram	uVar15	newSlotArray2	INFERRED	zeroing-allocated replacement of the programState slot array (+0x54), grown by 0x10 slots	^\s*\*\(undefined4\ \*\)\(uVar23\ \+\ 0x54\)\ =\ uVar15;$@2	+1
+use	extvsPrepareHardwareProgram	uVar15	newSlotArray2	INFERRED	zeroing-allocated replacement of the programState slot array (+0x54), grown by 0x10 slots	^\s*uVar15\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x10\)\)\(iVar16\ \+\ 0x10,0x28\);$@2	+1
+use	extvsPrepareHardwareProgram	uVar15	newSlotArray2	INFERRED	zeroing-allocated replacement of the programState slot array (+0x54), grown by 0x10 slots	^\s*\(\*\*\(code\ \*\*\)\(\(\(unsigned\ char\ \*\)0x00001344\)\ \+\ param_1\)\)\(uVar15,\*\(undefined4\ \*\)\(uVar23\ \+\ 0x54\),in_r5\);$@2	+1
+use	extvsPrepareHardwareProgram	uVar15	newSlotArray2	INFERRED	zeroing-allocated replacement of the programState slot array (+0x54), grown by 0x10 slots	^\s*\*\(undefined4\ \*\)\(uVar23\ \+\ 0x54\)\ =\ uVar15;$@3	+1
+use	extvsPrepareHardwareProgram	uVar15	newSlotArray2	INFERRED	zeroing-allocated replacement of the programState slot array (+0x54), grown by 0x10 slots	^\s*uVar15\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x10\)\)\(iVar18\ \+\ 0x10,0x28\);$	+1
+use	extvsPrepareHardwareProgram	uVar15	newSlotArray2	INFERRED	zeroing-allocated replacement of the programState slot array (+0x54), grown by 0x10 slots	^\s*\(\*\*\(code\ \*\*\)\(\(\(unsigned\ char\ \*\)0x00001344\)\ \+\ param_1\)\)\(uVar15,\*\(undefined4\ \*\)\(uVar23\ \+\ 0x54\),in_r5\);$@3	+1
+use	extvsPrepareHardwareProgram	uVar15	newSlotArray2	INFERRED	zeroing-allocated replacement of the programState slot array (+0x54), grown by 0x10 slots	^\s*\*\(undefined4\ \*\)\(uVar23\ \+\ 0x54\)\ =\ uVar15;$@4	+1
+local	extvsPrepareHardwareProgram	in_r5	symbolIndex	INFERRED	index of the symbol record being scanned in the first loop (shader[6], stride 0x74)
+local	extvsPrepareHardwareProgram	in_r6	symbolOffset	INFERRED	symbolIndex * 0x74: byte offset of the symbol record in shader[6]
+local	extvsPrepareHardwareProgram	puVar21	hwProgramSlot	INFERRED	the shader's entry in the program table: *(ctx+0x118c)*4 + *shader; *entry is the hardware program record (programState)
+func	FUN_0004f720	gldInitStateDefaults	INFERRED	stores the reset value of every shadow register / state word of the glContext (0x3f800000 = 1.0 colours and scales, masks 0xffffff / 0xffff, filter and format words, memset of the per-unit arrays at +0x1cdc) and the dirty words +0x38/+0x3c/+0x40; called with the freshly allocated context from FUN_000a7050 right after the per-context tables are set up
+func	FUN_0004dd10	gldEmitScissorRegs	INFERRED	writes the register pair header 0x110f8 (SC_SCISSOR0/SC_SCISSOR1, 0x43e0/0x43e4) with the two scissor shadows glContext+7000 and +0x1b10 that gldValidateScissor maintains; returns the advanced packet pointer
+local	gldEmitScissorRegs	param_1	glContext	INFERRED	GL context state object (embedded at GLDContext+0x240); +7000/+0x1b10 are the scissor shadows
+local	gldEmitScissorRegs	param_2	packet	INFERRED	packet write pointer; returns packet + 3
+func	FUN_0004dd40	gldEmitViewportAndGuardBand	INFERRED	writes 6 consecutive viewport transform words (header 0x50766, SE_VPORT_XSCALE.. 0x1d98) from the shadows glContext+0x1c88..0x1c9c and 4 guard-band adjust words (header 0x30888, VAP_GB_VERT_CLIP_ADJ 0x2220) from +0x1ca8..0x1cb4; returns the advanced packet pointer
+local	gldEmitViewportAndGuardBand	param_2	packet	INFERRED	packet write pointer; returns packet + 0xc
+func	FUN_00053070	extvsConstantsDirty	INFERRED	returns 1 when the shader array at ctx+0x1168 exists and its first shader's byte +0x10 (set by extvsAllocConstantRegisters when it had to grow the constant slot array) is non-zero
+local	extvsConstantsDirty	param_1	ctx	INFERRED	GL context: +0x1168 is the shared shader array (see extvsAttachSharedState)
+func	FUN_000530a0	extvsClearConstantsDirty	INFERRED	clears byte +0x10 of the first shader at ctx+0x1168, the flag extvsConstantsDirty tests
+local	extvsClearConstantsDirty	param_1	ctx	INFERRED	GL context: +0x1168 is the shared shader array
+func	FUN_00053dc0	extvsReserveSymbolIds	INFERRED	fetch-and-add on the shared state counter at (*(ctx+0x116c))[+8]: returns the old value after adding count (reserves a range of symbol ids)
+local	extvsReserveSymbolIds	param_1	ctx	INFERRED	GL context: +0x116c is the shared shader state
+local	extvsReserveSymbolIds	param_2	count	INFERRED	number of ids to reserve
+func	FUN_0003f5d0	freeIfNonNull	INFERRED	_free(pointer) when pointer is non-null
+local	freeIfNonNull	param_1	pointer	INFERRED	block to free (may be NULL)
+func	FUN_000623e0	extvsInitLimits	INFERRED	stores the EXT_vertex_shader implementation limits into ctx+0x11b8..0x11c8: 0x100, 0x100, 0x10, 0x20, 0x100
+local	extvsInitLimits	param_1	ctx	INFERRED	GL context
+func	FUN_00054460	glGenSymbolsEXT_impl5	INFERRED	five-argument entry of glGenSymbolsEXT_impl: tail-calls it with a trailing 0
+local	glGenSymbolsEXT_impl5	param_1	ctx	INFERRED	GL context
+local	glGenSymbolsEXT_impl5	param_2	dataType	INFERRED	glGenSymbolsEXT datatype: SCALAR_EXT 0x87be / VECTOR_EXT 0x87bf / MATRIX_EXT 0x87c0
+local	glGenSymbolsEXT_impl5	param_3	storageType	INFERRED	glGenSymbolsEXT storagetype: 0x87c2 INVARIANT_EXT / 0x87c4 LOCAL_EXT
+local	glGenSymbolsEXT_impl5	param_4	range	INFERRED	glGenSymbolsEXT range (0x87e1 in the built-in callers)
+local	glGenSymbolsEXT_impl5	param_5	components	INFERRED	glGenSymbolsEXT components

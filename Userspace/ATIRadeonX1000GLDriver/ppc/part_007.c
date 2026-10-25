@@ -1143,38 +1143,38 @@ int gldValidateTexEnvColor(glContext)
   return;
 }
 
-/* FUN_0004dd10 @ 0x4dd10 (40 bytes) */
-int FUN_0004dd10(param_1, param_2)
-  int param_1;
-  undefined4 *param_2;
+/* gldEmitScissorRegs @ 0x4dd10 (40 bytes) */
+int gldEmitScissorRegs(glContext, packet)
+  int glContext;
+  undefined4 *packet;
 {
-  *param_2 = 0x110f8;
-  param_2[1] = *(undefined4 *)(param_1 + 7000);
-  param_2[2] = *(undefined4 *)(param_1 + 0x1b10);
-  return param_2 + 3;
+  *packet = 0x110f8;
+  packet[1] = *(undefined4 *)(glContext + 7000);
+  packet[2] = *(undefined4 *)(glContext + 0x1b10);
+  return packet + 3;
 }
 
-/* FUN_0004dd40 @ 0x4dd40 (116 bytes) */
-int FUN_0004dd40(glContext, param_2)
+/* gldEmitViewportAndGuardBand @ 0x4dd40 (116 bytes) */
+int gldEmitViewportAndGuardBand(glContext, packet)
   int glContext;
-  undefined4 *param_2;
+  undefined4 *packet;
 {
   undefined4 glContextWord1c98;
   
-  *param_2 = 0x50766;
-  param_2[1] = *(undefined4 *)(glContext + 0x1c8c);
-  param_2[2] = *(undefined4 *)(glContext + 0x1c88);
-  param_2[3] = *(undefined4 *)(glContext + 0x1c94);
-  param_2[4] = *(undefined4 *)(glContext + 0x1c90);
-  param_2[5] = *(undefined4 *)(glContext + 0x1c9c);
+  *packet = 0x50766;
+  packet[1] = *(undefined4 *)(glContext + 0x1c8c);
+  packet[2] = *(undefined4 *)(glContext + 0x1c88);
+  packet[3] = *(undefined4 *)(glContext + 0x1c94);
+  packet[4] = *(undefined4 *)(glContext + 0x1c90);
+  packet[5] = *(undefined4 *)(glContext + 0x1c9c);
   glContextWord1c98 = *(undefined4 *)(glContext + 0x1c98);
-  param_2[7] = 0x30888;
-  param_2[6] = glContextWord1c98;
-  param_2[8] = *(undefined4 *)(glContext + 0x1ca8);
-  param_2[9] = *(undefined4 *)(glContext + 0x1cac);
-  param_2[10] = *(undefined4 *)(glContext + 0x1cb0);
-  param_2[0xb] = *(undefined4 *)(glContext + 0x1cb4);
-  return param_2 + 0xc;
+  packet[7] = 0x30888;
+  packet[6] = glContextWord1c98;
+  packet[8] = *(undefined4 *)(glContext + 0x1ca8);
+  packet[9] = *(undefined4 *)(glContext + 0x1cac);
+  packet[10] = *(undefined4 *)(glContext + 0x1cb0);
+  packet[0xb] = *(undefined4 *)(glContext + 0x1cb4);
+  return packet + 0xc;
 }
 
 /* FUN_0004ddc0 @ 0x4ddc0 (104 bytes) */
@@ -2104,8 +2104,8 @@ int gldValidateScissor(glContext)
   return;
 }
 
-/* FUN_0004f720 @ 0x4f720 (1348 bytes) */
-int FUN_0004f720(glContext)
+/* gldInitStateDefaults @ 0x4f720 (1348 bytes) */
+int gldInitStateDefaults(glContext)
   int glContext;
 {
   uint glContextWord2454;
@@ -2876,7 +2876,7 @@ LAB_00050920:
   (*streamSetCurrent)(glContext,packetEnd);
   allocatedPacket = (**(code **)(glContext + 0x2758))(glContext,0x90);
   *(undefined4 *)(0x00002748 + glContext + 4) = allocatedPacket;
-  packet = (undefined4 *)((int (*)())FUN_0004dd40)(glContext,allocatedPacket);
+  packet = (undefined4 *)((int (*)())gldEmitViewportAndGuardBand)(glContext,allocatedPacket);
   packetCursor = packet + 9;
   *packet = ((unsigned char *)0x0000108cU);
   gaPointMinmax = *(undefined4 *)(glContext + 0x1cd0);
@@ -2908,7 +2908,7 @@ LAB_00050920:
     packetCursor[7] = *(undefined4 *)(glContext + 0x1b24);
     packetCursor[8] = *(undefined4 *)(glContext + 0x1b20);
   }
-  packet = (undefined4 *)((int (*)())FUN_0004dd10)(glContext,packet);
+  packet = (undefined4 *)((int (*)())gldEmitScissorRegs)(glContext,packet);
   engineCapsEntry = PTR_DAT_001e88c8;
   *packet = 0x112f5;
   fgAlphaFunc = *(uint *)(glContext + 0x1a4c);
@@ -3877,7 +3877,7 @@ int FUN_00052280(glContext)
   undefined4 unitShadowValue2;
   undefined4 unitShadowValue1;
   int glState;
-  int glContextWord1938;
+  int unitIndex;
   uint registerDirty;
   uint fgAlphaFunc;
   uint rb3dBlendcntl;
@@ -3981,9 +3981,9 @@ int FUN_00052280(glContext)
     nextPacket = packet + 4;
     *packet = ((unsigned char *)0x00001041U);
     packet[1] = (*(uint *)(glContext + 0x27b0) | 1) << (*(uint *)(glContext + 0x1938) & 0x3f);
-    glContextWord1938 = *(int *)(glContext + 0x1938);
+    unitIndex = *(int *)(glContext + 0x1938);
     packet[3] = 0;
-    packet[2] = ((unsigned char *)0x00001100) + glContextWord1938;
+    packet[2] = ((unsigned char *)0x00001100) + unitIndex;
   }
   streamSetCurrent = *(code **)(glContext + 0x275c);
   *(undefined4 **)(0x00002748 + glContext + 4) = nextPacket;
@@ -4195,10 +4195,10 @@ int FUN_00052280(glContext)
       nextPacket = nextPacket + 7;
     }
     if ((dirtyBits & 2) != 0) {
-      nextPacket = (undefined4 *)((int (*)())FUN_0004dd10)(glContext,nextPacket);
+      nextPacket = (undefined4 *)((int (*)())gldEmitScissorRegs)(glContext,nextPacket);
     }
     if ((dirtyBits & 0x80) != 0) {
-      nextPacket = (undefined4 *)((int (*)())FUN_0004dd40)(glContext,nextPacket);
+      nextPacket = (undefined4 *)((int (*)())gldEmitViewportAndGuardBand)(glContext,nextPacket);
     }
     packet = nextPacket;
     if ((dirtyBits & 0x40000) != 0) {
@@ -4472,25 +4472,25 @@ int noop_53060(param_1)
   return param_1;
 }
 
-/* FUN_00053070 @ 0x53070 (36 bytes) */
-int FUN_00053070(param_1)
-  int param_1;
+/* extvsConstantsDirty @ 0x53070 (36 bytes) */
+int extvsConstantsDirty(ctx)
+  int ctx;
 {
-  if ((*(int *)(((unsigned char *)0x00001168) + param_1) != 0) &&
-     (*(char *)(*(int *)(((unsigned char *)0x00001168) + param_1) + 0x10) != '\0')) {
+  if ((*(int *)(((unsigned char *)0x00001168) + ctx) != 0) &&
+     (*(char *)(*(int *)(((unsigned char *)0x00001168) + ctx) + 0x10) != '\0')) {
     return 1;
   }
   return 0;
 }
 
-/* FUN_000530a0 @ 0x530a0 (24 bytes) */
-int FUN_000530a0(param_1)
-  int param_1;
+/* extvsClearConstantsDirty @ 0x530a0 (24 bytes) */
+int extvsClearConstantsDirty(ctx)
+  int ctx;
 {
-  if (*(int *)(((unsigned char *)0x00001168) + param_1) == 0) {
+  if (*(int *)(((unsigned char *)0x00001168) + ctx) == 0) {
     return;
   }
-  *(undefined1 *)(*(int *)(((unsigned char *)0x00001168) + param_1) + 0x10) = 0;
+  *(undefined1 *)(*(int *)(((unsigned char *)0x00001168) + ctx) + 0x10) = 0;
   return;
 }
 

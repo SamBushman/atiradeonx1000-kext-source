@@ -3623,7 +3623,7 @@ LAB_00087474:
     puVar5 = puVar8 + 0x36;
     puVar8[0x35] = *(undefined4 *)(param_1 + 0x1ab8);
   }
-  puVar8 = (undefined4 *)FUN_0004dd10(param_1,puVar5);
+  puVar8 = (undefined4 *)gldEmitScissorRegs(param_1,puVar5);
   *puVar8 = 0x766;
   uVar6 = *(undefined4 *)(param_1 + 0x1c8c);
   puVar8[2] = 0x768;

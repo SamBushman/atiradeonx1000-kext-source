@@ -1,14 +1,14 @@
 #include "decls.h"
 
-/* FUN_00053dc0 @ 0x53dc0 (20 bytes) */
-int FUN_00053dc0(param_1, param_2)
-  int param_1;
-  int param_2;
+/* extvsReserveSymbolIds @ 0x53dc0 (20 bytes) */
+int extvsReserveSymbolIds(ctx, count)
+  int ctx;
+  int count;
 {
   int iVar1;
   
-  iVar1 = *(int *)(*(int *)(((unsigned char *)0x0000116c) + param_1) + 8);
-  *(int *)(*(int *)(((unsigned char *)0x0000116c) + param_1) + 8) = iVar1 + param_2;
+  iVar1 = *(int *)(*(int *)(((unsigned char *)0x0000116c) + ctx) + 8);
+  *(int *)(*(int *)(((unsigned char *)0x0000116c) + ctx) + 8) = iVar1 + count;
   return iVar1;
 }
 
@@ -241,17 +241,17 @@ int glExtractComponentEXT_impl(ctx, resultId, sourceId, componentIndex)
   return;
 }
 
-/* FUN_00054460 @ 0x54460 (8 bytes) */
-int FUN_00054460(param_1, param_2, param_3, param_4, param_5)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
+/* glGenSymbolsEXT_impl5 @ 0x54460 (8 bytes) */
+int glGenSymbolsEXT_impl5(ctx, dataType, storageType, range, components)
+  undefined4 ctx;
+  undefined4 dataType;
+  undefined4 storageType;
+  undefined4 range;
+  undefined4 components;
 {
   undefined4 uVar1;
   
-  uVar1 = glGenSymbolsEXT_impl(param_1,param_2,param_3,param_4,param_5,0);
+  uVar1 = glGenSymbolsEXT_impl(ctx,dataType,storageType,range,components,0);
   return uVar1;
 }
 
