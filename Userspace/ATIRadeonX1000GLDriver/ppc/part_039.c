@@ -786,27 +786,28 @@ int FudoVs__createSchedModels(this, param_2)
   int this;
   undefined4 param_2;
 {
+  undefined4 *secondarySchedModel;
   undefined *vtable;
-  undefined4 *puVar2;
-  undefined *puVar3;
+  undefined4 *vertexSchedModel;
+  undefined *vertexSchedVtable;
   
-  puVar2 = (undefined4 *)Compiler__allocateOrFail(param_2,0x3c);
+  vertexSchedModel = (undefined4 *)Compiler__allocateOrFail(param_2,0x3c);
   vtable = PTR_DAT_001e9110;
-  puVar3 = PTR_DAT_001e90fc + 8;
-  puVar2[2] = param_2;
-  *puVar2 = puVar3;
-  puVar2[1] = 0;
-  *puVar2 = vtable + 8;
-  R300VSchedModel__vslot2_reset(puVar2);
-  SchedModel__resetCounters(puVar2);
-  puVar2[0xe] = 0;
-  *(undefined4 **)(this + 0x60) = puVar2;
-  puVar2 = (undefined4 *)Compiler__allocateOrFail(param_2,0xc);
+  vertexSchedVtable = PTR_DAT_001e90fc + 8;
+  vertexSchedModel[2] = param_2;
+  *vertexSchedModel = vertexSchedVtable;
+  vertexSchedModel[1] = 0;
+  *vertexSchedModel = vtable + 8;
+  R300VSchedModel__vslot2_reset(vertexSchedModel);
+  SchedModel__resetCounters(vertexSchedModel);
+  vertexSchedModel[0xe] = 0;
+  *(undefined4 **)(this + 0x60) = vertexSchedModel;
+  secondarySchedModel = (undefined4 *)Compiler__allocateOrFail(param_2,0xc);
   vtable = PTR_DAT_001e9100;
-  puVar2[1] = 1;
-  puVar2[2] = 0;
-  *puVar2 = vtable + 8;
-  *(undefined4 **)(this + 100) = puVar2;
+  secondarySchedModel[1] = 1;
+  secondarySchedModel[2] = 0;
+  *secondarySchedModel = vtable + 8;
+  *(undefined4 **)(this + 100) = secondarySchedModel;
   return;
 }
 

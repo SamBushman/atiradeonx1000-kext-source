@@ -73,8 +73,8 @@ int ExportSlot__ctor_12622c(this, param_2, param_3, param_4, compiler)
   undefined4 arena;
   undefined4 *allocation;
   int operandRecord;
-  undefined4 *puVar3;
-  undefined4 uVar4;
+  undefined4 *exportInst;
+  undefined4 exportStreamValue;
   
   VRegInfo__ctor_12379c(this,param_2,param_3,param_4,compiler);
   this[4] = param_2;
@@ -83,19 +83,19 @@ int ExportSlot__ctor_12622c(this, param_2, param_3, param_4, compiler)
   if ((*(uint *)(*(int *)(compiler + COMP_currentProgram) + 0x30) & 0x4000) != 0) {
     arena = *(undefined4 *)(compiler + COMP_arenaA);
     allocation = (undefined4 *)Arena__alloc(arena,0x168);
-    puVar3 = allocation + 1;
+    exportInst = allocation + 1;
     *allocation = arena;
-    IRExport__ctor_108918(puVar3,compiler);
+    IRExport__ctor_108918(exportInst,compiler);
     allocation[0x28] = DAT_001afef0;
-    IRInst__setOperandRef(puVar3,0,this);
-    FUN_0012306c(this,puVar3);
-    IRInst__setOperandRef(puVar3,1,this);
-    uVar4 = DAT_001afeec;
-    operandRecord = IRInst__getOperandRecord(puVar3,1);
-    *(undefined4 *)(operandRecord + 0x10) = uVar4;
-    VReg__addUse(this,1,puVar3);
-    Program__addInst(*(undefined4 *)(compiler + COMP_currentProgram),puVar3);
-    Block__appendInst(*(undefined4 *)(*(int *)(compiler + COMP_currentProgram) + 0x3a8),puVar3);
+    IRInst__setOperandRef(exportInst,0,this);
+    FUN_0012306c(this,exportInst);
+    IRInst__setOperandRef(exportInst,1,this);
+    exportStreamValue = DAT_001afeec;
+    operandRecord = IRInst__getOperandRecord(exportInst,1);
+    *(undefined4 *)(operandRecord + 0x10) = exportStreamValue;
+    VReg__addUse(this,1,exportInst);
+    Program__addInst(*(undefined4 *)(compiler + COMP_currentProgram),exportInst);
+    Block__appendInst(*(undefined4 *)(*(int *)(compiler + COMP_currentProgram) + 0x3a8),exportInst);
   }
   return;
 }
@@ -111,8 +111,8 @@ int ExportSlot__ctor_126378(this, param_2, param_3, param_4, compiler)
   undefined4 arena;
   undefined4 *allocation;
   int operandRecord;
-  undefined4 *puVar3;
-  undefined4 uVar4;
+  undefined4 *exportInst;
+  undefined4 exportStreamValue;
   
   VRegInfo__ctor_12379c(this,param_2,param_3,param_4,compiler);
   this[4] = param_2;
@@ -121,19 +121,19 @@ int ExportSlot__ctor_126378(this, param_2, param_3, param_4, compiler)
   if ((*(uint *)(*(int *)(compiler + COMP_currentProgram) + 0x30) & 0x4000) != 0) {
     arena = *(undefined4 *)(compiler + COMP_arenaA);
     allocation = (undefined4 *)Arena__alloc(arena,0x168);
-    puVar3 = allocation + 1;
+    exportInst = allocation + 1;
     *allocation = arena;
-    IRExport__ctor_108918(puVar3,compiler);
+    IRExport__ctor_108918(exportInst,compiler);
     allocation[0x28] = DAT_001afef0;
-    IRInst__setOperandRef(puVar3,0,this);
-    FUN_0012306c(this,puVar3);
-    IRInst__setOperandRef(puVar3,1,this);
-    uVar4 = DAT_001afeec;
-    operandRecord = IRInst__getOperandRecord(puVar3,1);
-    *(undefined4 *)(operandRecord + 0x10) = uVar4;
-    VReg__addUse(this,1,puVar3);
-    Program__addInst(*(undefined4 *)(compiler + COMP_currentProgram),puVar3);
-    Block__appendInst(*(undefined4 *)(*(int *)(compiler + COMP_currentProgram) + 0x3a8),puVar3);
+    IRInst__setOperandRef(exportInst,0,this);
+    FUN_0012306c(this,exportInst);
+    IRInst__setOperandRef(exportInst,1,this);
+    exportStreamValue = DAT_001afeec;
+    operandRecord = IRInst__getOperandRecord(exportInst,1);
+    *(undefined4 *)(operandRecord + 0x10) = exportStreamValue;
+    VReg__addUse(this,1,exportInst);
+    Program__addInst(*(undefined4 *)(compiler + COMP_currentProgram),exportInst);
+    Block__appendInst(*(undefined4 *)(*(int *)(compiler + COMP_currentProgram) + 0x3a8),exportInst);
   }
   return;
 }

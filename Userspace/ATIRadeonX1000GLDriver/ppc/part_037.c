@@ -696,29 +696,29 @@ int FUN_0011f7fc(param_1, param_2, vector)
   uint *vector;
 {
   uint vectorCount;
-  int *piVar1;
-  int iVar2;
-  uint uVar3;
+  int *vectorElementSlot;
+  int baseIndex;
+  uint slotIndex;
   
-  iVar2 = *(int *)(param_1 + 0x474);
-  if (iVar2 < *(int *)(param_2 + 0x150)) {
-    uVar3 = *(int *)(param_2 + 0x150) - iVar2;
+  baseIndex = *(int *)(param_1 + 0x474);
+  if (baseIndex < *(int *)(param_2 + 0x150)) {
+    slotIndex = *(int *)(param_2 + 0x150) - baseIndex;
   }
   else {
     vectorCount = vector[1];
     if (vectorCount < *vector) {
       _memset(vectorCount * 4 + vector[2],0,4);
-      piVar1 = (int *)(vectorCount * 4 + vector[2]);
+      vectorElementSlot = (int *)(vectorCount * 4 + vector[2]);
       vector[1] = vectorCount + 1;
     }
     else {
-      piVar1 = (int *)Vector__elementRefGrow(vector,vectorCount);
+      vectorElementSlot = (int *)Vector__elementRefGrow(vector,vectorCount);
     }
-    *piVar1 = param_2;
-    uVar3 = vector[1];
-    *(uint *)(param_2 + 0x150) = uVar3 + iVar2;
+    *vectorElementSlot = param_2;
+    slotIndex = vector[1];
+    *(uint *)(param_2 + 0x150) = slotIndex + baseIndex;
   }
-  return uVar3 - 1;
+  return slotIndex - 1;
 }
 
 /* FUN_0011f8a0 @ 0x11f8a0 (756 bytes) */
@@ -3653,35 +3653,35 @@ int TempValue__clone(this, param_2, compiler)
   int compiler;
 {
   undefined4 *allocation;
-  int iVar1;
-  undefined4 *puVar2;
+  int newInst;
+  undefined4 *foldedValue;
   int callResult;
-  undefined4 *puVar4;
+  undefined4 *valueKey;
   undefined4 arena;
   
   if (*(int *)(this + 4) == 0x1a) {
-    iVar1 = (**(code **)(**(int **)(compiler + COMP_target) + 0x50))
+    newInst = (**(code **)(**(int **)(compiler + COMP_target) + 0x50))
                       (*(int **)(compiler + COMP_target),*(undefined4 *)(this + 8));
-    IRInst__setOperandRef(iVar1,0,this);
-    *(undefined4 *)(iVar1 + 0x9c) = DAT_001afee8;
-    ((int (*)())FUN_0012306c)(this,iVar1);
+    IRInst__setOperandRef(newInst,0,this);
+    *(undefined4 *)(newInst + 0x9c) = DAT_001afee8;
+    ((int (*)())FUN_0012306c)(this,newInst);
     arena = *(undefined4 *)(compiler + COMP_arenaB);
     allocation = (undefined4 *)Arena__alloc(arena,0x240);
-    puVar4 = allocation + 1;
+    valueKey = allocation + 1;
     *allocation = arena;
-    ValueKey__init(puVar4,iVar1,compiler);
+    ValueKey__init(valueKey,newInst,compiler);
     callResult = Compiler__isOptionEnabled(compiler,7);
     if (callResult != 0) {
-      FUN_00174e0c(puVar4);
-      ValueKey__propagateLaneValues(puVar4);
+      FUN_00174e0c(valueKey);
+      ValueKey__propagateLaneValues(valueKey);
     }
     *(uint *)(*(int *)(compiler + COMP_target) + 8) = *(uint *)(*(int *)(compiler + COMP_target) + 8) | 0x20;
-    (**(code **)(*param_2 + 0xc))(param_2,iVar1);
-    ((int (*)())FUN_00122f28)(this,iVar1);
-    return puVar4;
+    (**(code **)(*param_2 + 0xc))(param_2,newInst);
+    ((int (*)())FUN_00122f28)(this,newInst);
+    return valueKey;
   }
-  puVar2 = (undefined4 *)((int (*)())FUN_00123c08)(*(undefined4 *)(compiler + COMP_currentProgram),param_2,this);
-  return puVar2;
+  foldedValue = (undefined4 *)((int (*)())FUN_00123c08)(*(undefined4 *)(compiler + COMP_currentProgram),param_2,this);
+  return foldedValue;
 }
 
 /* ExportSlot__clone @ 0x1241fc (184 bytes) */
