@@ -5275,6 +5275,19 @@ int FUN_00141930(packState, inst, inst2, resultList)
   int *inst2;
   int *resultList;
 {
+  int *newEntry;
+  int *scanEntry2;
+  byte *entryComponentPtr;
+  byte *componentCmpPtr;
+  byte *componentSortPtr;
+  byte *sourceScanPtrB;
+  byte *sourceScanPtr;
+  byte *sourceSlotPtr;
+  int resultCount;
+  int entryData;
+  int operandCursor;
+  int firstResult;
+  int resultCountB;
   uint grownCapacity;
   uint newSize;
   uint otherComponentB;
@@ -5312,21 +5325,21 @@ int FUN_00141930(packState, inst, inst2, resultList)
   bool sourceBPlaced;
   byte candidateComponent;
   int *piVar4;
-  int *piVar5;
-  int iVar6;
+  int *scanEntry;
+  int entryDataB;
   uint uVar7;
   undefined4 allocation;
   int iVar9;
   int *piVar10;
   int iVar11;
   int iVar12;
-  byte *pbVar13;
+  byte *componentPtr;
   int *tableSource;
-  byte *pbVar15;
+  byte *componentScanPtr;
   int *piVar16;
-  byte *pbVar17;
+  byte *sourceSortPtr;
   byte entryComponent;
-  byte *pbVar18;
+  byte *sourceCmpPtr;
   uint newSizeB;
   uint component2;
   uint otherComponent;
@@ -5364,11 +5377,11 @@ int FUN_00141930(packState, inst, inst2, resultList)
       }
       countdown = 4;
       loopIndex = 0;
-      pbVar13 = local_64;
+      componentPtr = local_64;
       laneEntryPtrB = local_84;
       do {
-        *pbVar13 = loopIndex;
-        pbVar13 = pbVar13 + 1;
+        *componentPtr = loopIndex;
+        componentPtr = componentPtr + 1;
         *laneEntryPtrB = 0;
         loopIndex = loopIndex + 1;
         laneEntryPtrB[4] = 0;
@@ -5379,12 +5392,12 @@ int FUN_00141930(packState, inst, inst2, resultList)
       laneIndex = 0;
       operandSelect = *(undefined4 *)(operandRecord + 0x10);
       laneEntryPtrB = local_84;
-      pbVar13 = local_64;
+      componentPtr = local_64;
       do {
         if (*(char *)((int)local_84 + (laneIndex - 4)) != '\x04') {
           piVar16 = (int *)laneEntryPtrB[4];
           if (operandVReg2 == piVar16) {
-            if (laneIndex == *pbVar13) {
+            if (laneIndex == *componentPtr) {
               *laneEntryPtrB = 1;
             }
             else {
@@ -5394,36 +5407,36 @@ LAB_00141b90:
                 sourceAPlaced = false;
                 goto LAB_00141b94;
               }
-              pbVar17 = local_74;
+              sourceSortPtr = local_74;
               laneEntryPtrB[4] = (int)operandVReg2;
-              component2 = (uint)*pbVar13;
+              component2 = (uint)*componentPtr;
               *laneEntryPtrB = 1;
-              *pbVar13 = (byte)laneIndex;
-              pbVar18 = pbVar17;
-              pbVar15 = local_64;
+              *componentPtr = (byte)laneIndex;
+              sourceCmpPtr = sourceSortPtr;
+              componentScanPtr = local_64;
               do {
-                if ((piVar16 == *(int **)pbVar18) && (component2 == *pbVar15)) goto LAB_00141a9c;
-                pbVar18 = pbVar18 + 4;
-                pbVar15 = pbVar15 + 1;
-              } while (local_64 != pbVar18);
+                if ((piVar16 == *(int **)sourceCmpPtr) && (component2 == *componentScanPtr)) goto LAB_00141a9c;
+                sourceCmpPtr = sourceCmpPtr + 4;
+                componentScanPtr = componentScanPtr + 1;
+              } while (local_64 != sourceCmpPtr);
               countdown = 4;
               loopIndexE = 0;
-              pbVar18 = local_64;
+              componentCmpPtr = local_64;
               while( true ) {
-                tableSource = *(int **)pbVar17;
+                tableSource = *(int **)sourceSortPtr;
                 if (tableSource == (int *)0x0) break;
-                otherComponent = (uint)*pbVar18;
+                otherComponent = (uint)*componentCmpPtr;
                 if ((loopIndexE != otherComponent) &&
                    ((piVar16[0x53] < tableSource[0x53] ||
                     ((tableSource[0x53] == piVar16[0x53] && (component2 < otherComponent)))))) {
-                  *(int **)pbVar17 = piVar16;
-                  *pbVar18 = (byte)component2;
+                  *(int **)sourceSortPtr = piVar16;
+                  *componentCmpPtr = (byte)component2;
                   component2 = otherComponent;
                   piVar16 = tableSource;
                 }
                 loopIndexE = loopIndexE + 1;
-                pbVar17 = pbVar17 + 4;
-                pbVar18 = pbVar18 + 1;
+                sourceSortPtr = sourceSortPtr + 4;
+                componentCmpPtr = componentCmpPtr + 1;
                 countdown = countdown + -1;
                 if (countdown == 0) goto LAB_00141b90;
               }
@@ -5435,13 +5448,13 @@ LAB_00141b90:
             if (piVar16 != (int *)0x0) goto LAB_00141ae0;
             laneEntryPtrB[4] = (int)operandVReg2;
             *laneEntryPtrB = 1;
-            *pbVar13 = (byte)laneIndex;
+            *componentPtr = (byte)laneIndex;
           }
         }
 LAB_00141a9c:
         moreComponents = laneIndex != 3;
         laneEntryPtrB = laneEntryPtrB + 1;
-        pbVar13 = pbVar13 + 1;
+        componentPtr = componentPtr + 1;
         laneIndex = laneIndex + 1;
       } while (moreComponents);
       sourceAPlaced = true;
@@ -5450,12 +5463,12 @@ LAB_00141b94:
       laneIndex = 0;
       operandSelect = *(undefined4 *)(operandRecord + 0x10);
       laneEntryPtr = local_84;
-      pbVar13 = local_64;
+      componentPtr = local_64;
       do {
         if (*(char *)((int)local_84 + (laneIndex - 4)) != '\x04') {
           piVar10 = (int *)laneEntryPtr[4];
           if (operandVReg == piVar10) {
-            if (*pbVar13 == laneIndex) {
+            if (*componentPtr == laneIndex) {
               local_84[laneIndex] = 1;
             }
             else {
@@ -5465,36 +5478,36 @@ LAB_00141d00:
                 sourceBPlaced = false;
                 goto LAB_00141d04;
               }
-              component2 = (uint)*pbVar13;
-              pbVar17 = local_74;
+              component2 = (uint)*componentPtr;
+              sourceSortPtr = local_74;
               *laneEntryPtr = 1;
               laneEntryPtr[4] = (int)operandVReg;
-              *pbVar13 = (byte)laneIndex;
-              pbVar18 = pbVar17;
-              pbVar15 = local_64;
+              *componentPtr = (byte)laneIndex;
+              sourceCmpPtr = sourceSortPtr;
+              componentScanPtr = local_64;
               do {
-                if ((piVar10 == *(int **)pbVar18) && (component2 == *pbVar15)) goto LAB_00141c78;
-                pbVar18 = pbVar18 + 4;
-                pbVar15 = pbVar15 + 1;
-              } while (local_64 != pbVar18);
+                if ((piVar10 == *(int **)sourceCmpPtr) && (component2 == *componentScanPtr)) goto LAB_00141c78;
+                sourceCmpPtr = sourceCmpPtr + 4;
+                componentScanPtr = componentScanPtr + 1;
+              } while (local_64 != sourceCmpPtr);
               countdown = 4;
               loopIndexE = 0;
-              pbVar18 = local_64;
+              componentCmpPtr = local_64;
               while( true ) {
-                piVar16 = *(int **)pbVar17;
+                piVar16 = *(int **)sourceSortPtr;
                 if (piVar16 == (int *)0x0) break;
-                otherComponent = (uint)*pbVar18;
+                otherComponent = (uint)*componentCmpPtr;
                 if ((loopIndexE != otherComponent) &&
                    ((piVar10[0x53] < piVar16[0x53] ||
                     ((piVar16[0x53] == piVar10[0x53] && (component2 < otherComponent)))))) {
-                  *(int **)pbVar17 = piVar10;
-                  *pbVar18 = (byte)component2;
+                  *(int **)sourceSortPtr = piVar10;
+                  *componentCmpPtr = (byte)component2;
                   component2 = otherComponent;
                   piVar10 = piVar16;
                 }
                 loopIndexE = loopIndexE + 1;
-                pbVar17 = pbVar17 + 4;
-                pbVar18 = pbVar18 + 1;
+                sourceSortPtr = sourceSortPtr + 4;
+                componentCmpPtr = componentCmpPtr + 1;
                 countdown = countdown + -1;
                 if (countdown == 0) goto LAB_00141d00;
               }
@@ -5506,13 +5519,13 @@ LAB_00141d00:
             if (piVar10 != (int *)0x0) goto LAB_00141bd8;
             laneEntryPtr[4] = (int)operandVReg;
             *laneEntryPtr = 1;
-            *pbVar13 = (byte)laneIndex;
+            *componentPtr = (byte)laneIndex;
           }
         }
 LAB_00141c78:
         moreComponentsB = laneIndex != 3;
         laneEntryPtr = laneEntryPtr + 1;
-        pbVar13 = pbVar13 + 1;
+        componentPtr = componentPtr + 1;
         laneIndex = laneIndex + 1;
       } while (moreComponentsB);
       sourceBPlaced = true;
@@ -5526,7 +5539,7 @@ LAB_00141d04:
       arenaPtr = (undefined4 *)(packState + 0xc);
       entryCount = *(uint *)(packState + 0x10);
       if (entryCount != 0) {
-        iVar6 = *(int *)(packState + 0x18);
+        entryDataB = *(int *)(packState + 0x18);
         loopIndexE = 0;
         newSize = entryCount;
         do {
@@ -5544,40 +5557,40 @@ LAB_00141d04:
                 loopIndexG = 0;
                 iVar23 = 0;
                 do {
-                  iVar11 = iVar23 + iVar6;
+                  iVar11 = iVar23 + entryDataB;
                   loopIndexG = loopIndexG + 1;
                   iVar9 = iVar23 + *(int *)(packState + 0x18);
                   iVar23 = iVar23 + 0x2c;
                   _memcpy(iVar9,iVar11,0x2c);
                 } while (loopIndexG < *(uint *)(packState + 0x10));
               }
-              Arena__free(*arenaPtr,iVar6);
-              iVar6 = *(int *)(packState + 0x18);
+              Arena__free(*arenaPtr,entryDataB);
+              entryDataB = *(int *)(packState + 0x18);
             }
             *(uint *)(packState + 0x10) = newSize;
           }
-          piVar4 = (int *)(loopIndexE * 0x2c + iVar6);
+          piVar4 = (int *)(loopIndexE * 0x2c + entryDataB);
           if (piVar4[9] != 0) {
             loopIndexD = 0;
-            pbVar13 = local_74;
+            sourceSlotPtr = local_74;
             do {
-              if (*(int *)pbVar13 != 0) {
+              if (*(int *)sourceSlotPtr != 0) {
                 countdownC = 4;
                 loopIndexB = 0;
-                piVar5 = piVar4;
-                while ((*(int *)pbVar13 != piVar5[4] ||
+                scanEntry = piVar4;
+                while ((*(int *)sourceSlotPtr != scanEntry[4] ||
                        (local_64[loopIndexD] != *(byte *)((int)piVar4 + loopIndexB + 0x20)))) {
                   loopIndexB = loopIndexB + 1;
-                  piVar5 = piVar5 + 1;
+                  scanEntry = scanEntry + 1;
                   countdownC = countdownC + -1;
                   if (countdownC == 0) goto LAB_00142744;
                 }
                 if ((loopIndexB == -1) ||
-                   ((*(int *)(pbVar13 + -0x10) != 0 && ((loopIndexB != loopIndexD || (piVar4[loopIndexB] == 0)))))
+                   ((*(int *)(sourceSlotPtr + -0x10) != 0 && ((loopIndexB != loopIndexD || (piVar4[loopIndexB] == 0)))))
                    ) break;
               }
               isLast = loopIndexD == 3;
-              pbVar13 = pbVar13 + 4;
+              sourceSlotPtr = sourceSlotPtr + 4;
               loopIndexD = loopIndexD + 1;
               if (isLast) goto LAB_00142098;
             } while( true );
@@ -5588,7 +5601,7 @@ LAB_00142744:
           newSize = *(uint *)(packState + 0x10);
         } while( true );
       }
-      iVar6 = *(int *)(packState + 0x18);
+      entryDataB = *(int *)(packState + 0x18);
       goto LAB_00141fd8;
     }
   }
@@ -5612,28 +5625,28 @@ LAB_00141e9c:
           copyOffset = 0;
           do {
             loopIndexG = loopIndexG + 1;
-            _memcpy(copyOffset + *(int *)(packState + 0x18),copyOffset + iVar6,0x2c);
+            _memcpy(copyOffset + *(int *)(packState + 0x18),copyOffset + entryDataB,0x2c);
             copyOffset = copyOffset + 0x2c;
           } while (loopIndexG < *(uint *)(packState + 0x10));
         }
-        Arena__free(*arenaPtr,iVar6);
-        iVar6 = *(int *)(packState + 0x18);
+        Arena__free(*arenaPtr,entryDataB);
+        entryDataB = *(int *)(packState + 0x18);
       }
       *(uint *)(packState + 0x10) = newSizeB;
     }
-    piVar4 = (int *)(iVar23 + iVar6);
+    piVar4 = (int *)(iVar23 + entryDataB);
     countdownB = 4;
-    pbVar13 = local_64;
-    pbVar18 = (byte *)(piVar4 + 8);
-    piVar5 = piVar4;
+    componentPtr = local_64;
+    entryComponentPtr = (byte *)(piVar4 + 8);
+    scanEntry = piVar4;
     laneEntryPtrB = local_84;
-    while ((*piVar5 == *laneEntryPtrB && (piVar5[4] == laneEntryPtrB[4]))) {
-      entryComponent = *pbVar18;
-      pbVar18 = pbVar18 + 1;
-      candidateComponent = *pbVar13;
-      pbVar13 = pbVar13 + 1;
+    while ((*scanEntry == *laneEntryPtrB && (scanEntry[4] == laneEntryPtrB[4]))) {
+      entryComponent = *entryComponentPtr;
+      entryComponentPtr = entryComponentPtr + 1;
+      candidateComponent = *componentPtr;
+      componentPtr = componentPtr + 1;
       if (entryComponent != candidateComponent) break;
-      piVar5 = piVar5 + 1;
+      scanEntry = scanEntry + 1;
       laneEntryPtrB = laneEntryPtrB + 1;
       countdownB = countdownB + -1;
       if (countdownB == 0) goto LAB_00142098;
@@ -5657,23 +5670,23 @@ LAB_00141fd8:
         iVar23 = 0;
         do {
           loopIndexE = loopIndexE + 1;
-          _memcpy(iVar23 + *(int *)(packState + 0x18),iVar23 + iVar6,0x2c);
+          _memcpy(iVar23 + *(int *)(packState + 0x18),iVar23 + entryDataB,0x2c);
           iVar23 = iVar23 + 0x2c;
         } while (loopIndexE < *(uint *)(packState + 0x10));
       }
-      Arena__free(*arenaPtr,iVar6);
-      iVar6 = *(int *)(packState + 0x18);
+      Arena__free(*arenaPtr,entryDataB);
+      entryDataB = *(int *)(packState + 0x18);
     }
     *(uint *)(packState + 0x10) = newSize;
   }
-  piVar4 = (int *)(entryCount * 0x2c + iVar6);
+  piVar4 = (int *)(entryCount * 0x2c + entryDataB);
   entryPad1 = 0;
   entryPad2 = 0;
   _memcpy(piVar4,local_84,0x2c);
 LAB_00142098:
-  iVar6 = *resultList;
+  resultCountB = *resultList;
   resultList[operandIdx + 1] = (int)piVar4;
-  *resultList = iVar6 + 1;
+  *resultList = resultCountB + 1;
 LAB_001420b0:
   operandIdx = operandIdx + -1;
 LAB_001420b4:
@@ -5681,20 +5694,20 @@ LAB_001420b4:
 LAB_001426c8:
     countdownE = 5;
     do {
-      iVar6 = resultList[1];
-      if (iVar6 != 0) {
-        *(int *)(iVar6 + 0x28) = *(int *)(iVar6 + 0x28) + 1;
+      firstResult = resultList[1];
+      if (firstResult != 0) {
+        *(int *)(firstResult + 0x28) = *(int *)(firstResult + 0x28) + 1;
       }
       resultList = resultList + 1;
       countdownE = countdownE + -1;
     } while (countdownE != 0);
     return 1;
   }
-  iVar6 = 1;
+  operandCursor = 1;
   resultPtr = resultList;
 LAB_001420c4:
-  operandVReg = (int *)IRInst__getOperandSource(inst,iVar6);
-  operandVReg3 = (int *)IRInst__getOperandSource(inst2,iVar6);
+  operandVReg = (int *)IRInst__getOperandSource(inst,operandCursor);
+  operandVReg3 = (int *)IRInst__getOperandSource(inst2,operandCursor);
   if (operandVReg != operandVReg3) {
     vcall60ResultB = (**(code **)(*operandVReg + 0x60))(operandVReg);
     if (vcall60ResultB != 0) {
@@ -5706,52 +5719,52 @@ LAB_001420c4:
     }
     countdownD = 4;
     loopIndex = 0;
-    pbVar13 = local_64;
+    componentPtr = local_64;
     piVar16 = local_84;
     do {
-      *pbVar13 = loopIndex;
-      pbVar13 = pbVar13 + 1;
+      *componentPtr = loopIndex;
+      componentPtr = componentPtr + 1;
       *piVar16 = 0;
       loopIndex = loopIndex + 1;
       piVar16[4] = 0;
       piVar16 = piVar16 + 1;
       countdownD = countdownD + -1;
     } while (countdownD != 0);
-    operandRecord2 = IRInst__getOperandRecord(inst,iVar6);
+    operandRecord2 = IRInst__getOperandRecord(inst,operandCursor);
     loopIndexB = 0;
     operandSelect = *(undefined4 *)(operandRecord2 + 0x10);
     do {
       uVar7 = (uint)*(byte *)((int)local_84 + loopIndexB + -4);
       if (uVar7 != 4) {
-        pbVar15 = local_74;
-        pbVar17 = local_64;
+        sourceScanPtrB = local_74;
+        componentSortPtr = local_64;
         countdownD = 4;
-        pbVar13 = pbVar15;
-        pbVar18 = pbVar17;
+        sourceScanPtr = sourceScanPtrB;
+        sourceCmpPtr = componentSortPtr;
         do {
-          if ((operandVReg == *(int **)pbVar13) && (uVar7 == *pbVar18)) goto LAB_001421bc;
-          pbVar13 = pbVar13 + 4;
-          pbVar18 = pbVar18 + 1;
+          if ((operandVReg == *(int **)sourceScanPtr) && (uVar7 == *sourceCmpPtr)) goto LAB_001421bc;
+          sourceScanPtr = sourceScanPtr + 4;
+          sourceCmpPtr = sourceCmpPtr + 1;
           countdownD = countdownD + -1;
         } while (countdownD != 0);
         countdownD = 4;
         loopIndexF = 0;
         piVar16 = operandVReg;
         while( true ) {
-          tableSource = *(int **)pbVar15;
+          tableSource = *(int **)sourceScanPtrB;
           if (tableSource == (int *)0x0) break;
-          otherComponentB = (uint)*pbVar17;
+          otherComponentB = (uint)*componentSortPtr;
           if ((loopIndexF != otherComponentB) &&
              ((piVar16[0x53] < tableSource[0x53] ||
               ((tableSource[0x53] == piVar16[0x53] && (uVar7 < otherComponentB)))))) {
-            *(int **)pbVar15 = piVar16;
-            *pbVar17 = (byte)uVar7;
+            *(int **)sourceScanPtrB = piVar16;
+            *componentSortPtr = (byte)uVar7;
             uVar7 = otherComponentB;
             piVar16 = tableSource;
           }
           loopIndexF = loopIndexF + 1;
-          pbVar15 = pbVar15 + 4;
-          pbVar17 = pbVar17 + 1;
+          sourceScanPtrB = sourceScanPtrB + 4;
+          componentSortPtr = componentSortPtr + 1;
           countdownD = countdownD + -1;
           if (countdownD == 0) {
             sourceAPlaced = false;
@@ -5767,41 +5780,41 @@ LAB_001421bc:
     } while (moreComponents);
     sourceAPlaced = true;
 LAB_0014225c:
-    operandRecord2 = IRInst__getOperandRecord(inst2,iVar6);
+    operandRecord2 = IRInst__getOperandRecord(inst2,operandCursor);
     loopIndexB = 0;
     operandSelect = *(undefined4 *)(operandRecord2 + 0x10);
     do {
       uVar7 = (uint)*(byte *)((int)local_84 + loopIndexB + -4);
       if (uVar7 != 4) {
-        pbVar15 = local_74;
-        pbVar17 = local_64;
+        sourceScanPtrB = local_74;
+        componentSortPtr = local_64;
         countdownD = 4;
-        pbVar13 = pbVar15;
-        pbVar18 = pbVar17;
+        sourceScanPtr = sourceScanPtrB;
+        sourceCmpPtr = componentSortPtr;
         do {
-          if ((operandVReg3 == *(int **)pbVar13) && (uVar7 == *pbVar18)) goto LAB_001422b0;
-          pbVar13 = pbVar13 + 4;
-          pbVar18 = pbVar18 + 1;
+          if ((operandVReg3 == *(int **)sourceScanPtr) && (uVar7 == *sourceCmpPtr)) goto LAB_001422b0;
+          sourceScanPtr = sourceScanPtr + 4;
+          sourceCmpPtr = sourceCmpPtr + 1;
           countdownD = countdownD + -1;
         } while (countdownD != 0);
         countdownD = 4;
         loopIndexF = 0;
-        piVar5 = operandVReg3;
+        scanEntry2 = operandVReg3;
         while( true ) {
-          piVar16 = *(int **)pbVar15;
+          piVar16 = *(int **)sourceScanPtrB;
           if (piVar16 == (int *)0x0) break;
-          otherComponentB = (uint)*pbVar17;
+          otherComponentB = (uint)*componentSortPtr;
           if ((loopIndexF != otherComponentB) &&
-             ((piVar5[0x53] < piVar16[0x53] || ((piVar16[0x53] == piVar5[0x53] && (uVar7 < otherComponentB)))
+             ((scanEntry2[0x53] < piVar16[0x53] || ((piVar16[0x53] == scanEntry2[0x53] && (uVar7 < otherComponentB)))
               ))) {
-            *(int **)pbVar15 = piVar5;
-            *pbVar17 = (byte)uVar7;
+            *(int **)sourceScanPtrB = scanEntry2;
+            *componentSortPtr = (byte)uVar7;
             uVar7 = otherComponentB;
-            piVar5 = piVar16;
+            scanEntry2 = piVar16;
           }
           loopIndexF = loopIndexF + 1;
-          pbVar15 = pbVar15 + 4;
-          pbVar17 = pbVar17 + 1;
+          sourceScanPtrB = sourceScanPtrB + 4;
+          componentSortPtr = componentSortPtr + 1;
           countdownD = countdownD + -1;
           if (countdownD == 0) {
             sourceBPlaced = false;
@@ -5809,7 +5822,7 @@ LAB_0014225c:
           }
         }
         local_64[loopIndexF] = (byte)uVar7;
-        *(int **)(local_74 + loopIndexF * 4) = piVar5;
+        *(int **)(local_74 + loopIndexF * 4) = scanEntry2;
       }
 LAB_001422b0:
       moreComponentsB = loopIndexB != 3;
@@ -5826,7 +5839,7 @@ LAB_00142338:
     arenaPtr = (undefined4 *)(packState + 0xc);
     entryCount = *(uint *)(packState + 0x10);
     if (entryCount != 0) {
-      iVar23 = *(int *)(packState + 0x18);
+      entryData = *(int *)(packState + 0x18);
       loopIndexE = 0;
       newSize = entryCount;
       do {
@@ -5845,37 +5858,37 @@ LAB_00142338:
               copyOffset = 0;
               do {
                 loopIndexG = loopIndexG + 1;
-                _memcpy(*(int *)(packState + 0x18) + copyOffset,iVar23 + copyOffset,0x2c);
+                _memcpy(*(int *)(packState + 0x18) + copyOffset,entryData + copyOffset,0x2c);
                 copyOffset = copyOffset + 0x2c;
               } while (loopIndexG < *(uint *)(packState + 0x10));
             }
-            Arena__free(*arenaPtr,iVar23);
-            iVar23 = *(int *)(packState + 0x18);
+            Arena__free(*arenaPtr,entryData);
+            entryData = *(int *)(packState + 0x18);
           }
           *(uint *)(packState + 0x10) = newSize;
         }
-        piVar5 = (int *)(loopIndexE * 0x2c + iVar23);
-        if (piVar5[9] != 0) {
+        newEntry = (int *)(loopIndexE * 0x2c + entryData);
+        if (newEntry[9] != 0) {
           loopIndexB = 0;
-          pbVar13 = local_74;
+          sourceSlotPtr = local_74;
           do {
-            if (*(int *)pbVar13 != 0) {
+            if (*(int *)sourceSlotPtr != 0) {
               countdownF = 4;
               loopIndexC = 0;
-              piVar10 = piVar5;
-              while ((*(int *)pbVar13 != piVar10[4] ||
-                     (local_64[loopIndexB] != *(byte *)((int)piVar5 + loopIndexC + 0x20)))) {
+              piVar10 = newEntry;
+              while ((*(int *)sourceSlotPtr != piVar10[4] ||
+                     (local_64[loopIndexB] != *(byte *)((int)newEntry + loopIndexC + 0x20)))) {
                 loopIndexC = loopIndexC + 1;
                 piVar10 = piVar10 + 1;
                 countdownF = countdownF + -1;
                 if (countdownF == 0) goto LAB_00142780;
               }
               if ((loopIndexC == -1) ||
-                 ((*(int *)(pbVar13 + -0x10) != 0 && ((loopIndexC != loopIndexB || (piVar5[loopIndexC] == 0))))))
+                 ((*(int *)(sourceSlotPtr + -0x10) != 0 && ((loopIndexC != loopIndexB || (newEntry[loopIndexC] == 0))))))
               break;
             }
             isLast = loopIndexB == 3;
-            pbVar13 = pbVar13 + 4;
+            sourceSlotPtr = sourceSlotPtr + 4;
             loopIndexB = loopIndexB + 1;
             if (isLast) goto LAB_001426a8;
           } while( true );
@@ -5886,7 +5899,7 @@ LAB_00142780:
         newSize = *(uint *)(packState + 0x10);
       } while( true );
     }
-    iVar23 = *(int *)(packState + 0x18);
+    entryData = *(int *)(packState + 0x18);
     goto LAB_001425e8;
   }
   goto LAB_001426b8;
@@ -5908,29 +5921,29 @@ LAB_001424ac:
           loopIndexG = 0;
           iVar11 = 0;
           do {
-            iVar12 = iVar11 + iVar23;
+            iVar12 = iVar11 + entryData;
             loopIndexG = loopIndexG + 1;
             iVar26 = iVar11 + *(int *)(packState + 0x18);
             iVar11 = iVar11 + 0x2c;
             _memcpy(iVar26,iVar12,0x2c);
           } while (loopIndexG < *(uint *)(packState + 0x10));
         }
-        Arena__free(*arenaPtr,iVar23);
-        iVar23 = *(int *)(packState + 0x18);
+        Arena__free(*arenaPtr,entryData);
+        entryData = *(int *)(packState + 0x18);
       }
       *(uint *)(packState + 0x10) = newSizeB;
     }
-    piVar5 = (int *)(iVar9 + iVar23);
+    newEntry = (int *)(iVar9 + entryData);
     countdownC = 4;
-    pbVar13 = local_64;
-    pbVar18 = (byte *)(piVar5 + 8);
-    piVar10 = piVar5;
+    componentPtr = local_64;
+    entryComponentPtr = (byte *)(newEntry + 8);
+    piVar10 = newEntry;
     piVar16 = local_84;
     while ((*piVar10 == *piVar16 && (piVar10[4] == piVar16[4]))) {
-      entryComponent = *pbVar18;
-      pbVar18 = pbVar18 + 1;
-      candidateComponent = *pbVar13;
-      pbVar13 = pbVar13 + 1;
+      entryComponent = *entryComponentPtr;
+      entryComponentPtr = entryComponentPtr + 1;
+      candidateComponent = *componentPtr;
+      componentPtr = componentPtr + 1;
       if (entryComponent != candidateComponent) break;
       piVar10 = piVar10 + 1;
       piVar16 = piVar16 + 1;
@@ -5955,30 +5968,30 @@ LAB_001425e8:
         loopIndexE = 0;
         copyOffset = 0;
         do {
-          iVar26 = iVar23 + copyOffset;
+          iVar26 = entryData + copyOffset;
           loopIndexE = loopIndexE + 1;
           iVar11 = *(int *)(packState + 0x18) + copyOffset;
           copyOffset = copyOffset + 0x2c;
           _memcpy(iVar11,iVar26,0x2c);
         } while (loopIndexE < *(uint *)(packState + 0x10));
       }
-      Arena__free(*arenaPtr,iVar23);
-      iVar23 = *(int *)(packState + 0x18);
+      Arena__free(*arenaPtr,entryData);
+      entryData = *(int *)(packState + 0x18);
     }
     *(uint *)(packState + 0x10) = newSize;
   }
   entryPad1 = 0;
-  piVar5 = (int *)(entryCount * 0x2c + iVar23);
+  newEntry = (int *)(entryCount * 0x2c + entryData);
   entryPad2 = 0;
-  _memcpy(piVar5,local_84,0x2c);
+  _memcpy(newEntry,local_84,0x2c);
 LAB_001426a8:
-  iVar23 = *resultList;
-  resultPtr[2] = (int)piVar5;
-  *resultList = iVar23 + 1;
+  resultCount = *resultList;
+  resultPtr[2] = (int)newEntry;
+  *resultList = resultCount + 1;
 LAB_001426b8:
-  iVar6 = iVar6 + 1;
+  operandCursor = operandCursor + 1;
   resultPtr = resultPtr + 1;
-  if (operandIdx < iVar6) goto LAB_001426c8;
+  if (operandIdx < operandCursor) goto LAB_001426c8;
   goto LAB_001420c4;
 }
 
