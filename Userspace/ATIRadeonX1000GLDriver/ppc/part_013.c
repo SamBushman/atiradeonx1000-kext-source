@@ -4865,8 +4865,8 @@ int ffvpEmitEyeDistanceSquared(programBuilder)
   return status;
 }
 
-/* FUN_00091980 @ 0x91980 (176 bytes) */
-int FUN_00091980(programBuilder, src0File, src0Index)
+/* ffvpEmitInverseW @ 0x91980 (176 bytes) */
+int ffvpEmitInverseW(programBuilder, src0File, src0Index)
   int programBuilder;
   undefined4 src0File;
   undefined4 src0Index;
@@ -5019,18 +5019,18 @@ int ffvpEmitRescaledNormal(programBuilder)
   return 0;
 }
 
-/* FUN_00091eb0 @ 0x91eb0 (648 bytes) */
-int FUN_00091eb0(programBuilder, componentCount, fillMissingComponents)
+/* ffvpEmitBlendWeights @ 0x91eb0 (648 bytes) */
+int ffvpEmitBlendWeights(programBuilder, weightCount, implicitLastWeight)
   int programBuilder;
-  uint componentCount;
-  int fillMissingComponents;
+  uint weightCount;
+  int implicitLastWeight;
 {
   undefined4 inputFile;
   undefined4 status;
   int allocStatus;
-  undefined4 texCoordInputReg;
+  undefined4 weightInputReg;
   undefined4 dstTempFile;
-  undefined4 texCoordReg;
+  undefined4 blendWeightsReg;
   int glCtx;
   undefined4 fillMask0;
   undefined4 fillMask1;
@@ -5053,14 +5053,14 @@ int FUN_00091eb0(programBuilder, componentCount, fillMissingComponents)
     allocStatus = ((int (*)())ffvpAllocTempRegister)(programBuilder,0,programBuilder + 0x55c);
     status = 7;
     if (allocStatus == 0) {
-      texCoordReg = *(undefined4 *)(programBuilder + 0x560);
-      texCoordInputReg = *(undefined4 *)(programBuilder + 0x5c);
+      blendWeightsReg = *(undefined4 *)(programBuilder + 0x560);
+      weightInputReg = *(undefined4 *)(programBuilder + 0x5c);
       dstTempFile = **(undefined4 **)(programBuilder + 0x3f0);
       inputFile = *(undefined4 *)(*(int *)(programBuilder + 0x3ec) + 4);
-      if (componentCount < 4) {
-        if (fillMissingComponents == 0) {
+      if (weightCount < 4) {
+        if (implicitLastWeight == 0) {
           (**(code **)(((unsigned char *)0x000012e8) + glCtx))
-                    (programBuilder,dstTempFile,texCoordReg,&DAT_001dbd24,inputFile,texCoordInputReg,&DAT_001dbd74,&DAT_001fa5e8);
+                    (programBuilder,dstTempFile,blendWeightsReg,&DAT_001dbd24,inputFile,weightInputReg,&DAT_001dbd74,&DAT_001fa5e8);
           status = 0;
         }
         else {
@@ -5072,22 +5072,22 @@ int FUN_00091eb0(programBuilder, componentCount, fillMissingComponents)
           fillSelect3 = DAT_001dbd80;
           fillSelect1 = DAT_001dbd78;
           fillSelect2 = DAT_001dbd7c;
-          if (componentCount == 1) {
+          if (weightCount == 1) {
             fillSelect2 = 4;
             fillSelect1 = 4;
             fillMask1 = 1;
           }
-          else if (componentCount == 0) {
+          else if (weightCount == 0) {
             fillSelect2 = 4;
             fillMask0 = 1;
             fillSelect0 = 4;
             fillSelect1 = 4;
           }
-          else if (componentCount == 2) {
+          else if (weightCount == 2) {
             fillMask2 = 1;
             fillSelect2 = 4;
           }
-          else if (componentCount == 3) {
+          else if (weightCount == 3) {
             fillMask3 = 1;
           }
           fillNegate2 = 1;
@@ -5095,18 +5095,18 @@ int FUN_00091eb0(programBuilder, componentCount, fillMissingComponents)
           fillNegate1 = 1;
           fillNegate3 = 0;
           (**(code **)(((unsigned char *)0x000012e8) + glCtx))
-                    (programBuilder,dstTempFile,texCoordReg,&DAT_001dbd24,inputFile,texCoordInputReg,&fillSelect0,&DAT_001fa5e8);
+                    (programBuilder,dstTempFile,blendWeightsReg,&DAT_001dbd24,inputFile,weightInputReg,&fillSelect0,&DAT_001fa5e8);
           emit3Src1Select = ((unsigned char *)&DAT_001dbdc0 + 4);
           emit3Src1Negate = &DAT_001fa5e8;
           (**(code **)(((unsigned char *)0x000012e4) + glCtx))
-                    (programBuilder,dstTempFile,texCoordReg,&fillMask0,**(undefined4 **)(programBuilder + 0x3ec),texCoordReg,
-                     &DAT_001dbdb4,&fillNegate0,**(undefined4 **)(programBuilder + 0x3ec),texCoordReg,emit3Src1Select,emit3Src1Negate);
+                    (programBuilder,dstTempFile,blendWeightsReg,&fillMask0,**(undefined4 **)(programBuilder + 0x3ec),blendWeightsReg,
+                     &DAT_001dbdb4,&fillNegate0,**(undefined4 **)(programBuilder + 0x3ec),blendWeightsReg,emit3Src1Select,emit3Src1Negate);
           status = 0;
         }
       }
       else {
         (**(code **)(((unsigned char *)0x000012e8) + glCtx))
-                  (programBuilder,dstTempFile,texCoordReg,&DAT_001dbd24,inputFile,texCoordInputReg,&DAT_001dbd14,&DAT_001fa5e8);
+                  (programBuilder,dstTempFile,blendWeightsReg,&DAT_001dbd24,inputFile,weightInputReg,&DAT_001dbd14,&DAT_001fa5e8);
         status = 0;
       }
     }
@@ -5371,8 +5371,8 @@ int ffvpEmitSphereMapCoord(programBuilder)
   return status;
 }
 
-/* ffvpEmitFogCoord @ 0x928a0 (792 bytes) */
-int ffvpEmitFogCoord(programBuilder)
+/* ffvpEmitFogExp2 @ 0x928a0 (792 bytes) */
+int ffvpEmitFogExp2(programBuilder)
   int programBuilder;
 {
   undefined4 srcTempFile;
@@ -5552,7 +5552,7 @@ int FUN_00092d40(param_1, param_2, param_3)
               (param_1,*(undefined4 *)(param_1[0xfc] + 8),param_1[0x1a],&DAT_001dbd24,uVar2,iVar3,
                &DAT_001dbd14,&DAT_001fa5e8);
     if (((*(char *)(param_1 + 0x1d1) == '\0') || (param_1[0x1a8] != -1)) ||
-       (((int (*)())FUN_00091980)(param_1,uVar2,iVar3), param_1[0x1a8] != -1)) {
+       (((int (*)())ffvpEmitInverseW)(param_1,uVar2,iVar3), param_1[0x1a8] != -1)) {
       if (param_2 != 0) {
         (**(code **)(((unsigned char *)0x000012e8) + iVar1))
                   (param_1,*(undefined4 *)(param_1[0xfc] + 0x14),param_1[param_3 + 0x21],

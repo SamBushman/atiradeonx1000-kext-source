@@ -822,16 +822,16 @@
 0x914e0	ffvpEmitEyePositionMad	492	no	indirect call (driver context / vtable / callback)
 0x916d0	ffvpEmitEyePositionDp4	420	no	indirect call (driver context / vtable / callback)
 0x91880	ffvpEmitEyeDistanceSquared	248	no	indirect call (driver context / vtable / callback)
-0x91980	FUN_00091980	176	no	indirect call (driver context / vtable / callback)
+0x91980	ffvpEmitInverseW	176	no	indirect call (driver context / vtable / callback)
 0x91a30	ffvpEmitEyeNormal	352	yes	
 0x91b90	ffvpEmitNormalizedNormal	460	yes	
 0x91d70	ffvpEmitRescaledNormal	300	yes	
-0x91eb0	FUN_00091eb0	648	yes	
+0x91eb0	ffvpEmitBlendWeights	648	yes	
 0x92150	ffvpEmitInverseEyeDistance	200	no	indirect call (driver context / vtable / callback)
 0x92220	ffvpEmitEyeVector	296	no	indirect call (driver context / vtable / callback)
 0x92350	ffvpEmitReflectionVector	512	no	indirect call (driver context / vtable / callback)
 0x92570	ffvpEmitSphereMapCoord	796	no	indirect call (driver context / vtable / callback)
-0x928a0	ffvpEmitFogCoord	792	no	indirect call (driver context / vtable / callback)
+0x928a0	ffvpEmitFogExp2	792	no	indirect call (driver context / vtable / callback)
 0x92bf0	FUN_00092bf0	328	no	indirect call (driver context / vtable / callback)
 0x92d40	FUN_00092d40	340	no	indirect call (driver context / vtable / callback)
 0x92ea0	FUN_00092ea0	324	no	indirect call (driver context / vtable / callback)
@@ -840,19 +840,19 @@
 0x931e0	FUN_000931e0	404	no	indirect call (driver context / vtable / callback)
 0x93390	FUN_00093390	352	no	indirect call (driver context / vtable / callback)
 0x934f0	FUN_000934f0	20	yes	
-0x93510	FUN_00093510	1220	no	indirect call (driver context / vtable / callback)
-0x939e0	FUN_000939e0	52	yes	
-0x93a20	FUN_00093a20	24	yes	
-0x93a40	FUN_00093a40	3576	no	indirect call (driver context / vtable / callback)
-0x94840	FUN_00094840	3400	no	indirect call (driver context / vtable / callback)
-0x955a0	FUN_000955a0	20	yes	
-0x955c0	FUN_000955c0	20	yes	
-0x955e0	FUN_000955e0	40	yes	
-0x95610	FUN_00095610	1840	no	indirect call (driver context / vtable / callback)
-0x95d70	FUN_00095d70	72	yes	
-0x95dd0	FUN_00095dd0	1792	no	indirect call (driver context / vtable / callback)
-0x96500	FUN_00096500	52	yes	
-0x96540	FUN_00096540	172	yes	
+0x93510	ffvpEmitBlendedEyeNormal	1220	no	indirect call (driver context / vtable / callback)
+0x939e0	ffvpPrepareRescaledNormal	52	yes	
+0x93a20	ffvpPrepareNormalizedNormal	24	yes	
+0x93a40	ffvpEmitBlendedClipPosition	3576	no	indirect call (driver context / vtable / callback)
+0x94840	ffvpEmitBlendedEyePosition	3400	no	indirect call (driver context / vtable / callback)
+0x955a0	ffvpEmitInverseEyeDistance_955a0	20	yes	
+0x955c0	ffvpEmitEyeVector_955c0	20	yes	
+0x955e0	ffvpPrepareBlendWeights	40	yes	
+0x95610	ffvpEmitProjectedPosition	1840	no	indirect call (driver context / vtable / callback)
+0x95d70	ffvpEmitEyePosition	72	yes	
+0x95dd0	ffvpEmitClipPosition	1792	no	indirect call (driver context / vtable / callback)
+0x96500	ffvpPrepareEyeNormal	52	yes	
+0x96540	ffvpPrepareFogExp2	172	yes	
 0x96600	FUN_00096600	1872	no	indirect call (driver context / vtable / callback)
 0x96d80	FUN_00096d80	1700	no	indirect call (driver context / vtable / callback)
 0x97440	FUN_00097440	4212	no	indirect call (driver context / vtable / callback)
