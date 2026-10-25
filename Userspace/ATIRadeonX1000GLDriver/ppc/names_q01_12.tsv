@@ -1,0 +1,14 @@
+func	FUN_0002cc30	gld_prepareDrawCount	INFERRED	trims a draw call to whole primitives (triangles: multiples of 3, quads: 4, lines: 2), applies the software-fallback hook and the pending program revalidation, marks the context as drawing and returns the trimmed vertex count (0 = nothing to draw)
+func	FUN_0002c020	gld_revalidateStreamProgram	INFERRED	recomputes the program mode bit in ctx+0x1874 from ctx+0x1928 and re-runs ffvpValidateProgramForced / FUN_00090960 when it changed
+func	FUN_0002c0c0	gld_emitVapStreamControl	INFERRED	writes the VAP_PROG_STREAM_CNTL_0 (0x854), VAP_PROG_STREAM_CNTL_EXT_0 (0x878) and VAP_VTX_SIZE (0x82d) register runs from the arrays at ctx+0x2680/0x2684
+func	FUN_0002c180	gld_emitStreamAddressRegisters	INFERRED	writes the 0x831 run (three words per stream pair taken from ctx+0x26d4/0x26d8) and the closing 0x830 register from ctx+0x26d0
+func	FUN_0002cd50	gld_emitUnitObjectPacket	INFERRED	emits the packet that references a bound unit object (0x16000000 header when none, otherwise a 0x6000000 packet with the object address and format words) and drops the object refcount
+local	FUN_0002cc30	param_2	closeFlag	INFERRED	0 for the plain draw calls, the line-loop/strip close selector for FUN_0003ae80/FUN_00039330
+local	FUN_0002cc30	param_4	vertexCount	CONFIRMED	vertices requested by the caller; trimmed below
+local	FUN_0002cc30	param_5	extraArg4	INFERRED	forwarded unchanged to FUN_000a3be0 / FUN_0002c020
+local	FUN_0002cc30	iVar1	primitiveClassBits	INFERRED	popcount of the low four bits of the mode: classifies the mode as points/lines/triangles/quads
+local	FUN_0002cc30	uVar2	modeForward	INFERRED	primitiveMode (or the vertex count for tiny counts) forwarded as a stale argument
+local	FUN_0002cc30	uVar3	vertexCountForward	INFERRED	copy of the requested count forwarded as a stale argument
+local	FUN_0002cc30	uVar4	trimmedCount	CONFIRMED	vertex count rounded down to whole primitives (3 for triangles, 4 for quads, 2 for lines); 0 = nothing to draw
+local	FUN_0002cd50	param_3	opcodeCount	INFERRED	packet opcode count byte (shifted into bits 24..31 of the header)
+local	FUN_0002cd50	param_4	packetCursor	INFERRED	command-stream cursor where the unit-object packet is written

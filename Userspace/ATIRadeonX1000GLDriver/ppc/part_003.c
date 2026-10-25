@@ -3741,11 +3741,11 @@ LAB_0001ef30:
   }
 LAB_0001ef50:
   uStack00000030 = drawFlags;
-  /* hidden-argument defect (found auditing #70/FUN_0002cc30): this is the one real caller (of
+  /* hidden-argument defect (found auditing #70/gld_prepareDrawCount): this is the one real caller (of
    * 25) that supplies a genuine 7th argument - verified via real stock disassembly
    * (`lwz r9,0xa8(r10)`, matching this stack store just above). */
   puVar19 = (undefined *)
-            ((uint (*)())FUN_0002cc30)(ctx,1,primitiveMode,count,count,puVar19,drawFlags,staleFpr1,staleFpr2,staleFpr3,staleFpr4,staleFpr5,
+            ((uint (*)())gld_prepareDrawCount)(ctx,1,primitiveMode,count,count,puVar19,drawFlags,staleFpr1,staleFpr2,staleFpr3,staleFpr4,staleFpr5,
                          staleFpr6,staleFpr7,staleFpr8,staleStackArg_ffffff68);
   bVar2 = 0 < (int)puVar19;
   hasElements = puVar19 != (undefined *)0x0;
@@ -3858,7 +3858,7 @@ code_r0x0001f1ac:
       if (*(int *)(ctx + GLD_vap_prog_stream_cntl_0_ptr) != ctx + 0x2630) {
         *(int *)(ctx + GLD_vap_prog_stream_cntl_0_ptr) = ctx + 0x2630;
         *(int *)(ctx + GLD_vap_prog_stream_cntl_ext_0_ptr) = ctx + 0x2650;
-        packetPtr = (uint *)FUN_0002c0c0(ctx,packetPtr);
+        packetPtr = (uint *)gld_emitVapStreamControl(ctx,packetPtr);
       }
       if (needStatePacket) {
         uVar17 = *(undefined4 *)(((unsigned char *)0x000027c8) + ctx);
@@ -3975,7 +3975,7 @@ code_r0x0001f1ac:
           *(undefined4 *)(ctx + 0x26d4) = 0;
         }
         else {
-          packetPtr = (uint *)FUN_0002c180(ctx,packetPtr);
+          packetPtr = (uint *)gld_emitStreamAddressRegisters(ctx,packetPtr);
         }
         ringHeaderZero = drawPacket + 7;
         drawPacket[6] = (int)packetPtr + (4 - (int)drawPacket) >> 2;
@@ -6193,85 +6193,85 @@ int gldEmitCurrentAttributeRegisters(ctx, param_2, param_3)
   return puVar5 + 7;
 }
 
-/* FUN_00023870 @ 0x23870 (420 bytes) */
-int FUN_00023870(ctx, gb_aa_config, param_3, param_4)
+/* gldEmitCurrentAttributeRegistersMasked @ 0x23870 (420 bytes) */
+int gldEmitCurrentAttributeRegistersMasked(ctx, attributeMask, vertexAttribs, packetCursor)
   undefined4 ctx;
-  uint gb_aa_config;
-  int param_3;
-  uint *param_4;
+  uint attributeMask;
+  int vertexAttribs;
+  uint *packetCursor;
 {
-  byte bVar1;
-  uint uVar2;
-  int iVar3;
-  uint uVar4;
-  uint uVar5;
-  int iVar6;
+  byte flagByte;
+  uint attrBit;
+  int unitBlock;
+  uint registerId;
+  uint unitIndex;
+  int unitsLeft;
   
-  if ((gb_aa_config & 2) != 0) {
-    *param_4 = 0x208c4;
-    param_4[1] = *(uint *)(param_3 + 0x40);
-    param_4[2] = *(uint *)(param_3 + 0x44);
-    param_4[3] = *(uint *)(param_3 + 0x48);
-    param_4 = param_4 + 4;
+  if ((attributeMask & 2) != 0) {
+    *packetCursor = 0x208c4;
+    packetCursor[1] = *(uint *)(vertexAttribs + 0x40);
+    packetCursor[2] = *(uint *)(vertexAttribs + 0x44);
+    packetCursor[3] = *(uint *)(vertexAttribs + 0x48);
+    packetCursor = packetCursor + 4;
   }
-  if ((gb_aa_config & 4) != 0) {
-    *param_4 = 0x308c8;
-    param_4[1] = *(uint *)(param_3 + 0x30);
-    param_4[2] = *(uint *)(param_3 + 0x34);
-    param_4[3] = *(uint *)(param_3 + 0x38);
-    param_4[4] = *(uint *)(param_3 + 0x3c);
-    param_4 = param_4 + 5;
+  if ((attributeMask & 4) != 0) {
+    *packetCursor = 0x308c8;
+    packetCursor[1] = *(uint *)(vertexAttribs + 0x30);
+    packetCursor[2] = *(uint *)(vertexAttribs + 0x34);
+    packetCursor[3] = *(uint *)(vertexAttribs + 0x38);
+    packetCursor[4] = *(uint *)(vertexAttribs + 0x3c);
+    packetCursor = packetCursor + 5;
   }
-  if ((gb_aa_config & 8) != 0) {
-    *param_4 = 0x208cc;
-    param_4[1] = *(uint *)(param_3 + 0x50);
-    param_4[2] = *(uint *)(param_3 + 0x54);
-    param_4[3] = *(uint *)(param_3 + 0x58);
-    param_4 = param_4 + 4;
+  if ((attributeMask & 8) != 0) {
+    *packetCursor = 0x208cc;
+    packetCursor[1] = *(uint *)(vertexAttribs + 0x50);
+    packetCursor[2] = *(uint *)(vertexAttribs + 0x54);
+    packetCursor[3] = *(uint *)(vertexAttribs + 0x58);
+    packetCursor = packetCursor + 4;
   }
-  uVar5 = 0;
-  uVar4 = 0x8e8;
-  iVar6 = 8;
-  iVar3 = param_3;
+  unitIndex = 0;
+  registerId = 0x8e8;
+  unitsLeft = 8;
+  unitBlock = vertexAttribs;
   do {
-    uVar2 = 0x400 << (uVar5 & 0x3f);
-    if ((uVar2 & gb_aa_config) != 0) {
-      gb_aa_config = gb_aa_config & ~uVar2;
-      *param_4 = uVar4 | 0x30000;
-      param_4[1] = *(uint *)(iVar3 + 0x80);
-      param_4[2] = *(uint *)(iVar3 + 0x84);
-      param_4[3] = *(uint *)(iVar3 + 0x88);
-      param_4[4] = *(uint *)(iVar3 + 0x8c);
-      param_4 = param_4 + 5;
+    attrBit = 0x400 << (unitIndex & 0x3f);
+    if ((attrBit & attributeMask) != 0) {
+      attributeMask = attributeMask & ~attrBit;
+      *packetCursor = registerId | 0x30000;
+      packetCursor[1] = *(uint *)(unitBlock + 0x80);
+      packetCursor[2] = *(uint *)(unitBlock + 0x84);
+      packetCursor[3] = *(uint *)(unitBlock + 0x88);
+      packetCursor[4] = *(uint *)(unitBlock + 0x8c);
+      packetCursor = packetCursor + 5;
     }
-    if ((gb_aa_config & 0x3fc00) == 0) break;
-    uVar5 = uVar5 + 1;
-    uVar4 = uVar4 + 4;
-    iVar3 = iVar3 + 0x10;
-    iVar6 = iVar6 + -1;
-  } while (iVar6 != 0);
-  if ((gb_aa_config & 0x40000) != 0) {
-    *param_4 = 0x908;
-    param_4[1] = *(uint *)(param_3 + 0x5c);
-    param_4 = param_4 + 2;
+    if ((attributeMask & 0x3fc00) == 0) break;
+    unitIndex = unitIndex + 1;
+    registerId = registerId + 4;
+    unitBlock = unitBlock + 0x10;
+    unitsLeft = unitsLeft + -1;
+  } while (unitsLeft != 0);
+  if ((attributeMask & 0x40000) != 0) {
+    *packetCursor = 0x908;
+    packetCursor[1] = *(uint *)(vertexAttribs + 0x5c);
+    packetCursor = packetCursor + 2;
   }
-  if ((gb_aa_config & 0x80000) != 0) {
-    *param_4 = 0x3090c;
-    param_4[1] = *(uint *)(param_3 + 0x60);
-    param_4[2] = *(uint *)(param_3 + 100);
-    param_4[3] = *(uint *)(param_3 + 0x68);
-    param_4[4] = *(uint *)(param_3 + 0x6c);
-    param_4 = param_4 + 5;
+  if ((attributeMask & 0x80000) != 0) {
+    *packetCursor = 0x3090c;
+    packetCursor[1] = *(uint *)(vertexAttribs + 0x60);
+    packetCursor[2] = *(uint *)(vertexAttribs + 100);
+    packetCursor[3] = *(uint *)(vertexAttribs + 0x68);
+    packetCursor[4] = *(uint *)(vertexAttribs + 0x6c);
+    packetCursor = packetCursor + 5;
   }
-  *param_4 = 0x917;
-  bVar1 = *(byte *)(param_3 + 0x7c);
-  param_4[2] = (uint)0x000308c0;
-  param_4[1] = -(uint)bVar1 >> 0x1f;
-  param_4[3] = *(uint *)(param_3 + 0x20);
-  param_4[4] = *(uint *)(param_3 + 0x24);
-  param_4[5] = *(uint *)(param_3 + 0x28);
-  param_4[6] = *(uint *)(param_3 + 0x2c);
-  return param_4 + 7;
+  *packetCursor = 0x917;
+  flagByte = *(byte *)(vertexAttribs + 0x7c);
+  packetCursor[2] = (uint)0x000308c0;
+  packetCursor[1] = -(uint)flagByte >> 0x1f;
+  packetCursor[3] = *(uint *)(vertexAttribs + 0x20);
+  packetCursor[4] = *(uint *)(vertexAttribs + 0x24);
+  packetCursor[5] = *(uint *)(vertexAttribs + 0x28);
+  packetCursor[6] = *(uint *)(vertexAttribs + 0x2c);
+  return packetCursor + 7;
 }
 
 /* hidden-argument defect of gld_emitPrimitiveVertices (found auditing #70/#77): real callers (the
@@ -6315,7 +6315,7 @@ int gld_emitPrimitiveVertices(ctx, hwPrimType, extraVertexAttribs, vertexAttribs
     *(int *)(ctx + 0x2440) = ctx + 0x1be4;
     *(int *)(ctx + 0x2444) = ctx + 0x1c04;
     *(undefined4 *)(ctx + 0x248c) = *(undefined4 *)(ctx + 0x1ca4);
-    packetStart = (undefined4 *)FUN_0002c0c0(connection,packetStart);
+    packetStart = (undefined4 *)gld_emitVapStreamControl(connection,packetStart);
   }
   if (*(char *)(ctx + 0x2802) == '\0') {
     *packetStart = 0x5c8;
@@ -6382,51 +6382,51 @@ int gld_emitPrimitiveVertices(ctx, hwPrimType, extraVertexAttribs, vertexAttribs
   }
   else {
     if (emitsExtraVertex) {
-      packetCursor = (undefined4 *)((int (*)())FUN_00023870)(ctx,gb_aa_config,extraVertexAttribs,packetCursor);
+      packetCursor = (undefined4 *)((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,extraVertexAttribs,packetCursor);
     }
     if (vertexCount == 0x24) {
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs,packetCursor);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x100,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x200,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x300,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x400,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x500,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x600,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x700,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x800,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x900,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0xa00,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0xb00,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0xc00,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0xd00,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0xe00,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0xf00,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x1000,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,((unsigned char *)0x00001100) + vertexAttribs,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,((unsigned char *)0x00001200) + vertexAttribs,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,((unsigned char *)0x00001300) + vertexAttribs,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,((unsigned char *)0x00001400) + vertexAttribs,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,((unsigned char *)0x00001500) + vertexAttribs,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,((unsigned char *)0x00001600) + vertexAttribs,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,((unsigned char *)0x00001700) + vertexAttribs,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x1800,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x1900,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x1a00,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x1b00,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x1c00,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x1d00,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x1e00,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x1f00,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x2000,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x2100,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x2200,cursorChain);
-      packetCursor = (undefined4 *)((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x2300,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs,packetCursor);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs + 0x100,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs + 0x200,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs + 0x300,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs + 0x400,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs + 0x500,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs + 0x600,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs + 0x700,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs + 0x800,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs + 0x900,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs + 0xa00,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs + 0xb00,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs + 0xc00,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs + 0xd00,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs + 0xe00,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs + 0xf00,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs + 0x1000,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,((unsigned char *)0x00001100) + vertexAttribs,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,((unsigned char *)0x00001200) + vertexAttribs,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,((unsigned char *)0x00001300) + vertexAttribs,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,((unsigned char *)0x00001400) + vertexAttribs,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,((unsigned char *)0x00001500) + vertexAttribs,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,((unsigned char *)0x00001600) + vertexAttribs,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,((unsigned char *)0x00001700) + vertexAttribs,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs + 0x1800,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs + 0x1900,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs + 0x1a00,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs + 0x1b00,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs + 0x1c00,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs + 0x1d00,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs + 0x1e00,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs + 0x1f00,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs + 0x2000,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs + 0x2100,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs + 0x2200,cursorChain);
+      packetCursor = (undefined4 *)((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs + 0x2300,cursorChain);
     }
     else if (0 < vertexCount) {
       vertexIndex = 0;
       do {
         vertexIndex = vertexIndex + 1;
-        packetCursor = (undefined4 *)((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs,packetCursor);
+        packetCursor = (undefined4 *)((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs,packetCursor);
         vertexAttribs = vertexAttribs + 0x100;
       } while (vertexCount != vertexIndex);
     }
@@ -6473,7 +6473,7 @@ int FUN_00024190(param_1, param_2, param_3, param_4, param_5)
     *(int *)(param_1 + 0x2440) = param_1 + 0x1be4;
     *(int *)(param_1 + 0x2444) = param_1 + 0x1c04;
     *(undefined4 *)(param_1 + 0x248c) = *(undefined4 *)(param_1 + 0x1ca4);
-    puVar2 = (undefined4 *)FUN_0002c0c0(uVar5,puVar2);
+    puVar2 = (undefined4 *)gld_emitVapStreamControl(uVar5,puVar2);
   }
   if (*(char *)(param_1 + 0x2802) == '\0') {
     *puVar2 = 0x5c8;
@@ -6507,35 +6507,35 @@ int FUN_00024190(param_1, param_2, param_3, param_4, param_5)
   return;
 }
 
-/* FUN_000242f0: same duplicated-body defect as #77: the real 116-byte wrapper had been overwritten with
- * unrelated FUN_00039330-family content. Rewritten from real stock disassembly. Also corrects an earlier
- * misreading of this function's own real 7th argument (see FUN_0002cc30): no real caller here sets r9
+/* gldPrimWrapperTriangles_23a24: same duplicated-body defect as #77: the real 116-byte wrapper had been overwritten with
+ * unrelated gldPrimInlineLineStrip-family content. Rewritten from real stock disassembly. Also corrects an earlier
+ * misreading of this function's own real 7th argument (see gld_prepareDrawCount): no real caller here sets r9
  * either, it just forwards garbage like the rest of the dispatch-wrapper family. */
-/* FUN_000242f0 @ 0x242f0 (116 bytes) */
-void FUN_000242f0(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8)
+/* gldPrimWrapperTriangles_23a24 @ 0x242f0 (116 bytes) */
+void gldPrimWrapperTriangles_23a24(int ctx,int vertexAttribs,undefined4 elementCount,undefined4 extraArg,undefined4 extraArg4,undefined4 staleArgR8,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8)
 {
-  uint uVar1;
+  uint vertexCount;
   undefined4 staleArgR9;
 
-  uVar1 = ((uint (*)())FUN_0002cc30)(param_1,0,4,param_3,param_5,param_6,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8);
-  if (uVar1 != 0) {
-    return gld_emitPrimitiveVertices(param_1 + 0x240,4,0,param_2,uVar1,param_4);
+  vertexCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,4,elementCount,extraArg4,staleArgR8,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8);
+  if (vertexCount != 0) {
+    return gld_emitPrimitiveVertices(ctx + 0x240,4,0,vertexAttribs,vertexCount,extraArg);
   }
   return;
 }
 
-/* FUN_00024370: same duplicated-body defect as #77 (this file's copy of the bug: the real 112-byte wrapper
- * had been overwritten with unrelated FUN_00039330-family content). Rewritten from real stock disassembly,
+/* gldPrimWrapperTriangleStrip_23a24: same duplicated-body defect as #77 (this file's copy of the bug: the real 112-byte wrapper
+ * had been overwritten with unrelated gldPrimInlineLineStrip-family content). Rewritten from real stock disassembly,
  * same as the part_004.c siblings. */
-/* FUN_00024370 @ 0x24370 (112 bytes) */
-void FUN_00024370(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+/* gldPrimWrapperTriangleStrip_23a24 @ 0x24370 (112 bytes) */
+void gldPrimWrapperTriangleStrip_23a24(int ctx,int vertexAttribs,undefined4 elementCount,undefined4 extraArg,undefined4 extraArg4,undefined4 staleArgR8,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
 {
-  uint uVar1;
+  uint vertexCount;
   undefined4 staleArgR9;
 
-  uVar1 = ((uint (*)())FUN_0002cc30)(param_1,0,5,param_3,param_5,param_6,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleFprArg9);
-  if (uVar1 != 0) {
-    return gld_emitPrimitiveVertices(param_1 + 0x240,6,0,param_2,uVar1,param_4);
+  vertexCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,5,elementCount,extraArg4,staleArgR8,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleFprArg9);
+  if (vertexCount != 0) {
+    return gld_emitPrimitiveVertices(ctx + 0x240,6,0,vertexAttribs,vertexCount,extraArg);
   }
   return;
 }
@@ -6564,7 +6564,7 @@ asm(".globl FUN_00020330");
 asm(".set FUN_00020330, _FUN_00020330");
 asm(".globl gldDisplayNotificationCallback");
 asm(".set gldDisplayNotificationCallback, _gldDisplayNotificationCallback");
-asm(".globl FUN_000242f0");
-asm(".set FUN_000242f0, _FUN_000242f0");
-asm(".globl FUN_00024370");
-asm(".set FUN_00024370, _FUN_00024370");
+asm(".globl gldPrimWrapperTriangles_23a24");
+asm(".set gldPrimWrapperTriangles_23a24, _gldPrimWrapperTriangles_23a24");
+asm(".globl gldPrimWrapperTriangleStrip_23a24");
+asm(".set gldPrimWrapperTriangleStrip_23a24, _gldPrimWrapperTriangleStrip_23a24");

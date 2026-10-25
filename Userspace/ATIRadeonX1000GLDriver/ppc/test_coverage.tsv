@@ -234,11 +234,11 @@
 0x230d0	FUN_000230d0	1544	no	indirect call (driver context / vtable / callback)
 0x236f0	returnSecondArgument	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x23700	gldEmitCurrentAttributeRegisters	360	yes	
-0x23870	FUN_00023870	420	yes	
+0x23870	gldEmitCurrentAttributeRegistersMasked	420	yes	
 0x23a24	gld_emitPrimitiveVertices	1860	no	indirect call (driver context / vtable / callback)
 0x24190	FUN_00024190	344	no	indirect call (driver context / vtable / callback)
-0x242f0	FUN_000242f0	116	yes	
-0x24370	FUN_00024370	112	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x242f0	gldPrimWrapperTriangles_23a24	116	yes	
+0x24370	gldPrimWrapperTriangleStrip_23a24	112	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x243f0	gldPrimWrapperTriangleFan_23a24	112	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x24470	gldPrimWrapperQuads_23a24	112	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x244f0	gldPrimWrapperQuadStrip_23a24	112	no	no static blocker: a test could reach it (needs arguments / state no test builds)
@@ -256,11 +256,11 @@
 0x24fd0	noop_24fd0	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x24fe0	FUN_00024fe0	2908	yes	
 0x25bf0	FUN_00025bf0	408	no	calls an import (free); calls an import (glpFreePPShaderLinearize); calls an import (glpFreePPShaderToProgram)
-0x25da0	FUN_00025da0	264	no	calls an import (free); calls an import (pthread_mutex_lock)
+0x25da0	gld_deleteContextProgramObjects	264	no	calls an import (free); calls an import (pthread_mutex_lock)
 0x25ec0	FUN_00025ec0	1372	no	calls an import (calloc); calls an import (free); calls an import (glpFreePPShaderLinearize)
-0x26440	FUN_00026440	500	no	calls an import (calloc); calls an import (glpFreePPShaderLinearize); calls an import (glpFreePPShaderToProgram)
+0x26440	gld_bindProgramRecord	500	no	calls an import (calloc); calls an import (glpFreePPShaderLinearize); calls an import (glpFreePPShaderToProgram)
 0x26650	FUN_00026650	792	no	calls an import (calloc)
-0x269a0	FUN_000269a0	516	yes	
+0x269a0	gld_getProgramParameter	516	yes	
 0x26bf0	FUN_00026bf0	876	yes	
 0x26f80	FUN_00026f80	460	no	calls an import (io_connect_method_scalarI_scalarO)
 0x27150	FUN_00027150	564	yes	
@@ -285,16 +285,16 @@
 0x2be90	FUN_0002be90	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x2bea0	gldTrimVertexCountToPrimitive	116	yes	
 0x2bf30	gldTrimVertexCountToPrimitiveMin	180	yes	
-0x2c020	FUN_0002c020	148	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0x2c0c0	FUN_0002c0c0	180	yes	
-0x2c180	FUN_0002c180	164	yes	
+0x2c020	gld_revalidateStreamProgram	148	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x2c0c0	gld_emitVapStreamControl	180	yes	
+0x2c180	gld_emitStreamAddressRegisters	164	yes	
 0x2c230	FUN_0002c230	1144	no	calls an import (io_connect_method_scalarI_structureI); indirect call (driver context / vtable / callback)
 0x2c6c0	FUN_0002c6c0	184	no	calls an import (exit)
 0x2c790	gld_initContextHardwareState	932	no	calls an import (io_connect_method_scalarI_scalarO); calls an import (malloc)
 0x2cb40	gldContextFreeResources	200	no	calls an import (free); calls an import (vfree)
 0x2cc10	FUN_0002cc10	28	yes	
-0x2cc30	FUN_0002cc30	276	yes	
-0x2cd50	FUN_0002cd50	236	yes	
+0x2cc30	gld_prepareDrawCount	276	yes	
+0x2cd50	gld_emitUnitObjectPacket	236	yes	
 0x2ce40	FUN_0002ce40	492	no	indirect call (driver context / vtable / callback)
 0x2d030	FUN_0002d030	456	yes	
 0x2d210	FUN_0002d210	140	yes	
@@ -335,16 +335,16 @@
 0x391d0	gldRendererFamilyString	28	yes	
 0x391f0	_gldGetVersion	84	yes	
 0x39250	_gldGetString	204	yes	
-0x39330	FUN_00039330	724	no	indirect call (driver context / vtable / callback)
-0x39610	FUN_00039610	1092	no	indirect call (driver context / vtable / callback)
-0x39a60	FUN_00039a60	724	no	indirect call (driver context / vtable / callback)
-0x39d40	FUN_00039d40	724	no	indirect call (driver context / vtable / callback)
-0x3a020	FUN_0003a020	724	no	indirect call (driver context / vtable / callback)
-0x3a300	FUN_0003a300	724	no	indirect call (driver context / vtable / callback)
-0x3a5e0	FUN_0003a5e0	724	no	indirect call (driver context / vtable / callback)
-0x3a8c0	FUN_0003a8c0	724	no	indirect call (driver context / vtable / callback)
-0x3aba0	FUN_0003aba0	724	no	indirect call (driver context / vtable / callback)
-0x3ae80	FUN_0003ae80	724	no	indirect call (driver context / vtable / callback)
+0x39330	gldPrimInlineLineStrip	724	no	indirect call (driver context / vtable / callback)
+0x39610	gldPrimInlineTriangleFan	1092	no	indirect call (driver context / vtable / callback)
+0x39a60	gldPrimInlineTriangles	724	no	indirect call (driver context / vtable / callback)
+0x39d40	gldPrimInlineTriangleStrip	724	no	indirect call (driver context / vtable / callback)
+0x3a020	gldPrimInlineQuads	724	no	indirect call (driver context / vtable / callback)
+0x3a300	gldPrimInlineQuadStrip	724	no	indirect call (driver context / vtable / callback)
+0x3a5e0	gldPrimInlinePolygon	724	no	indirect call (driver context / vtable / callback)
+0x3a8c0	gldPrimInlinePoints	724	no	indirect call (driver context / vtable / callback)
+0x3aba0	gldPrimInlineLines	724	no	indirect call (driver context / vtable / callback)
+0x3ae80	gldPrimInlineLineLoop	724	no	indirect call (driver context / vtable / callback)
 0x3b160	FUN_0003b160	284	yes	
 0x3b280	FUN_0003b280	772	no	indirect call (driver context / vtable / callback)
 0x3b5b0	FUN_0003b5b0	100	yes	
