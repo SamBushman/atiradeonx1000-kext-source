@@ -227,7 +227,7 @@ int FUN_00083470(param_1)
             ffvpEmitTexCoordPassThrough(puVar5,iVar13,uVar6,uVar7,in_r7,in_r8,in_r9);
           } while (uVar10 >> 4 != loopIndex);
         }
-        FUN_0009a910(puVar5);
+        ffvpFinishProgram(puVar5);
         if (iVar11 == iVar9) {
           iVar9 = iVar9 + 1;
         }

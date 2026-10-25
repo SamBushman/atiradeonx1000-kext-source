@@ -5423,7 +5423,7 @@ int FUN_000656b0(param_1)
           ffvpEmitTexCoordPassThrough(puVar5,iVar3,uVar6,uVar7,in_r7,in_r8,in_r9);
         } while (uVar10 >> 4 != loopIndex);
       }
-      FUN_0009a910(puVar5);
+      ffvpFinishProgram(puVar5);
       iVar4 = FUN_0009c800(param_1,local_70,puVar5,iVar11,local_74,0,0,1);
       *(undefined4 *)(iVar4 + 0x34) = 0;
       *(int *)(iVar4 + 0x38) = *(int *)(*(int *)(iVar4 + 0x54) + 0x3cc) + -1;

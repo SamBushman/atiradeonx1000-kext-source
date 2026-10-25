@@ -857,21 +857,21 @@
 0x96d80	ffvpEmitSceneColor	1700	no	indirect call (driver context / vtable / callback)
 0x97440	ffvpEmitDirectionalLight	4212	no	indirect call (driver context / vtable / callback)
 0x98500	ffvpEmitLight	6432	no	indirect call (driver context / vtable / callback)
-0x99e50	FUN_00099e50	1796	no	indirect call (driver context / vtable / callback)
-0x9a590	FUN_0009a590	848	no	indirect call (driver context / vtable / callback)
-0x9a910	FUN_0009a910	120	no	indirect call (driver context / vtable / callback)
+0x99e50	ffvpEmitPointSizeAttenuation	1796	no	indirect call (driver context / vtable / callback)
+0x9a590	ffvpEmitFogDistance	848	no	indirect call (driver context / vtable / callback)
+0x9a910	ffvpFinishProgram	120	no	indirect call (driver context / vtable / callback)
 0x9a990	fpVariantProgramFree	104	no	indirect call (driver context / vtable / callback)
-0x9aa00	FUN_0009aa00	1232	no	indirect call (driver context / vtable / callback)
-0x9af00	FUN_0009af00	172	yes	
-0x9afc0	FUN_0009afc0	1084	no	indirect call (driver context / vtable / callback)
-0x9b430	FUN_0009b430	848	no	indirect call (driver context / vtable / callback)
-0x9b790	FUN_0009b790	172	yes	
-0x9b850	FUN_0009b850	892	no	indirect call (driver context / vtable / callback)
-0x9bbf0	FUN_0009bbf0	28	yes	
+0x9aa00	ffvpEmitFogLinear	1232	no	indirect call (driver context / vtable / callback)
+0x9af00	ffvpPrepareFogLinear	172	yes	
+0x9afc0	ffvpEmitFogExp	1084	no	indirect call (driver context / vtable / callback)
+0x9b430	ffvpEmitColorOutputs	848	no	indirect call (driver context / vtable / callback)
+0x9b790	ffvpPrepareFogExp	172	yes	
+0x9b850	ffvpEmitFogTexCoord	892	no	indirect call (driver context / vtable / callback)
+0x9bbf0	vec4StoreAtIndex	28	yes	
 0x9bc10	FUN_0009bc10	228	yes	
 0x9bd00	FUN_0009bd00	96	no	indirect call (driver context / vtable / callback)
 0x9bd60	FUN_0009bd60	160	yes	
-0x9be00	FUN_0009be00	2216	yes	
+0x9be00	ffvpAnalyzeLightState	2216	yes	
 0x9c700	fpVariantCacheFlush	248	no	indirect call (driver context / vtable / callback)
 0x9c800	FUN_0009c800	744	no	indirect call (driver context / vtable / callback)
 0x9cb10	FUN_0009cb10	280	no	indirect call (driver context / vtable / callback)

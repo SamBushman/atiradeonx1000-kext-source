@@ -3746,387 +3746,392 @@ LAB_0009966c:
   return 7;
 }
 
-/* FUN_00099e50 @ 0x99e50 (1796 bytes) */
-int FUN_00099e50(param_1, param_2, param_3)
-  int param_1;
-  uint param_2;
-  int param_3;
+/* ffvpEmitPointSizeAttenuation @ 0x99e50 (1796 bytes) */
+int ffvpEmitPointSizeAttenuation(programBuilder, sizeSource, useDistanceSquared)
+  int programBuilder;
+  uint sizeSource;
+  int useDistanceSquared;
 {
-  bool bVar1;
-  bool bVar2;
-  int iVar3;
-  undefined4 *puVar4;
-  undefined4 uVar5;
-  undefined4 uVar6;
-  undefined4 a1;
-  undefined4 a4;
+  undefined4 attenParamReg;
+  undefined4 srcTempFile;
+  int invEyeDistReg;
+  int allocStatus;
+  bool usesEyeDistance;
+  bool clampMinMax;
+  int attenParamRegCheck;
+  undefined4 *fileTable;
+  undefined4 status;
+  undefined4 sizeParamReg;
+  undefined4 dstTempFile;
+  undefined4 constFile;
   undefined4 a4_00;
-  int iVar7;
-  undefined4 uVar8;
-  undefined4 local_f8;
-  undefined4 local_f4;
-  undefined4 local_f0;
-  undefined4 local_ec;
-  undefined4 local_e8;
-  int local_e4;
-  undefined4 local_e0;
-  undefined4 local_dc;
-  undefined4 local_d8;
-  undefined4 local_d4;
-  int local_d0;
-  int local_cc;
-  undefined4 local_c8;
-  undefined4 local_c4;
-  undefined4 local_c0;
-  undefined4 local_bc;
-  undefined4 local_b8;
-  undefined4 local_b4;
-  undefined4 local_b0;
-  undefined4 local_ac;
-  undefined1 auStack_a8 [4];
-  undefined4 local_a4;
-  undefined1 auStack_a0 [32];
-  undefined1 auStack_80 [4];
-  undefined4 local_7c;
-  undefined1 auStack_78 [16];
-  undefined4 local_68;
-  undefined4 local_64;
-  undefined4 local_60;
-  undefined4 local_5c;
-  undefined4 local_58;
-  int iVarS1;
-  int iVarS2;
-  int iVarS3;
-  int iVarS4;
-  int iVarS5;
+  int glCtx;
+  undefined4 sizeSrcReg;
+  undefined4 selectArrA0;
+  undefined4 selectArrA1;
+  undefined4 selectArrA2;
+  undefined4 selectArrA3;
+  undefined4 selectArrB0;
+  int selectArrB1;
+  undefined4 selectArrB2;
+  undefined4 selectArrB3;
+  undefined4 selectArrC0;
+  undefined4 selectArrC1;
+  int selectArrC2;
+  int selectArrC3;
+  undefined4 selectArrD0;
+  undefined4 selectArrD1;
+  undefined4 selectArrD2;
+  undefined4 selectArrD3;
+  undefined4 selectArrE0;
+  undefined4 selectArrE1;
+  undefined4 selectArrE2;
+  undefined4 selectArrE3;
+  undefined1 tempB [4];
+  undefined4 tempBReg;
+  undefined1 tempBMask [32];
+  undefined1 tempA [4];
+  undefined4 tempAReg;
+  undefined1 tempAMask [16];
+  undefined4 tempASelect0;
+  undefined4 tempASelect1;
+  undefined4 tempASelect2;
+  undefined4 tempASelect3;
+  undefined4 pointSizeOutFile;
+  int deadSrcTempFile;
+  int deadEmitFnSlot;
+  int deadSrcTempFileB;
+  int deadEmitFnSlotB;
+  int deadSelectPtr;
   int iVarS6;
-  int iVarS7;
-  int iVarS8;
-  int iVarS9;
+  int deadEmitFn12ec;
+  int deadSelectConst;
+  int deadSelectPtrB;
   int iVarS10;
   int iVarS11;
   int iVarS12;
   int iVarS13;
   int iVarS14;
-  int iVarS15;
-  int iVarS16;
-  int iVarS17;
-  int iVarS18;
-  int iVarS19;
-  int iVarS20;
-  int iVarS21;
-  int iVarS22;
-  int iVarS23;
-  int iVarS24;
-  int iVarS25;
+  int emit1Src1File;
+  int emit1Src1Index;
+  int emit1Src1Select;
+  int emit2Src1Index;
+  int emit2Src1Select;
+  int emit3Src1File;
+  int emit3Src1Index;
+  int emit3Src1Select;
+  int emit4Src1File;
+  int emit4Src1Index;
+  int emit4Src1Select;
   
-  if (param_1 == 0) {
+  if (programBuilder == 0) {
     return 1;
   }
-  uVar5 = 4;
-  switch(param_2) {
+  status = 4;
+  switch(sizeSource) {
   case 0:
-    if (*(int *)(param_1 + 0x4c) == -1) {
+    if (*(int *)(programBuilder + 0x4c) == -1) {
       return 2;
     }
   case 2:
-    iVar3 = *(int *)(param_1 + 0x334);
+    attenParamRegCheck = *(int *)(programBuilder + 0x334);
     break;
   case 1:
-    iVar3 = *(int *)(param_1 + 0x4c);
+    attenParamRegCheck = *(int *)(programBuilder + 0x4c);
     break;
   case 3:
-    if (*(int *)(param_1 + 0x4c) == -1) {
+    if (*(int *)(programBuilder + 0x4c) == -1) {
       return 2;
     }
   case 4:
-    iVar3 = *(int *)(param_1 + 0x334);
+    attenParamRegCheck = *(int *)(programBuilder + 0x334);
     goto joined_r0x00099f10;
   default:
     goto switchD_00099ea8_default;
   }
-  if (iVar3 == -1) {
+  if (attenParamRegCheck == -1) {
     return 2;
   }
-  iVar3 = *(int *)(param_1 + 0x338);
+  attenParamRegCheck = *(int *)(programBuilder + 0x338);
 joined_r0x00099f10:
-  if (iVar3 == -1) {
+  if (attenParamRegCheck == -1) {
     return 2;
   }
-  if (*(int *)(param_1 + 0x340) == -1) {
+  if (*(int *)(programBuilder + 0x340) == -1) {
     return 2;
   }
-  if (*(int *)(param_1 + 0x6c) == -1) {
+  if (*(int *)(programBuilder + 0x6c) == -1) {
     return 2;
   }
-  iVar7 = *(int *)(param_1 + 0x3d4);
-  iVar3 = ffvpAllocTempRegister(param_1,2,auStack_80);
-  bVar1 = param_2 < 3;
-  if (iVar3 != 0) {
+  glCtx = *(int *)(programBuilder + 0x3d4);
+  allocStatus = ffvpAllocTempRegister(programBuilder,2,tempA);
+  usesEyeDistance = sizeSource < 3;
+  if (allocStatus != 0) {
     return 7;
   }
-  if ((bVar1) && (iVar3 = ffvpAllocTempRegister(param_1,1,auStack_a8), iVar3 != 0)) {
+  if ((usesEyeDistance) && (allocStatus = ffvpAllocTempRegister(programBuilder,1,tempB), allocStatus != 0)) {
     return 7;
   }
-  puVar4 = *(undefined4 **)(param_1 + 0x3ec);
-  local_58 = (*(undefined4 **)(param_1 + 0x3f0))[7];
-  a4 = puVar4[2];
-  a1 = **(undefined4 **)(param_1 + 0x3f0);
-  uVar5 = *puVar4;
-  a4_00 = puVar4[1];
-  if (param_2 == 0) {
-    iVarS6 = *(int *)((int)*(int *)((int)param_1 + 1004) + 8);
-    iVarS7 = *(int *)((int)*(int *)((int)param_1 + 980) + 4844);
-    iVarS8 = &DAT_001dbcf4;
-    iVarS15 = *(int *)((int)*(int *)((int)param_1 + 1004) + 8);
-    iVarS16 = *(int *)((int)param_1 + 820);
-    iVarS17 = &DAT_001dbcf4;
-    (**(code **)(((unsigned char *)0x000012ec) + iVar7))
-              (param_1,a1,local_a4,&DAT_001dbd54,a4_00,*(undefined4 *)(param_1 + 0x4c),&DAT_001fa5f8,&DAT_001fa5e8,iVarS15,iVarS16,iVarS17,&DAT_001fa5e8);
+  fileTable = *(undefined4 **)(programBuilder + 0x3ec);
+  pointSizeOutFile = (*(undefined4 **)(programBuilder + 0x3f0))[7];
+  constFile = fileTable[2];
+  dstTempFile = **(undefined4 **)(programBuilder + 0x3f0);
+  srcTempFile = *fileTable;
+  a4_00 = fileTable[1];
+  if (sizeSource == 0) {
+    iVarS6 = *(int *)((int)*(int *)((int)programBuilder + 1004) + 8);
+    deadEmitFn12ec = *(int *)((int)*(int *)((int)programBuilder + 980) + 4844);
+    deadSelectConst = &DAT_001dbcf4;
+    emit1Src1File = *(int *)((int)*(int *)((int)programBuilder + 1004) + 8);
+    emit1Src1Index = *(int *)((int)programBuilder + 820);
+    emit1Src1Select = &DAT_001dbcf4;
+    (**(code **)(((unsigned char *)0x000012ec) + glCtx))
+              (programBuilder,dstTempFile,tempBReg,&DAT_001dbd54,a4_00,*(undefined4 *)(programBuilder + 0x4c),&DAT_001fa5f8,&DAT_001fa5e8,emit1Src1File,emit1Src1Index,emit1Src1Select,&DAT_001fa5e8);
   }
-  if (bVar1) {
-    if ((*(int *)(param_1 + 0x510) == -1) &&
-       (ffvpEmitEyeDistanceSquared(param_1), *(int *)(param_1 + 0x510) == -1)) {
+  if (usesEyeDistance) {
+    if ((*(int *)(programBuilder + 0x510) == -1) &&
+       (ffvpEmitEyeDistanceSquared(programBuilder), *(int *)(programBuilder + 0x510) == -1)) {
       return 2;
     }
-    uVar6 = *(undefined4 *)(param_1 + 0x338);
-    if (param_3 == 0) {
-      iVar3 = *(int *)(param_1 + 0x538);
-      if (iVar3 == -1) {
-        ffvpEmitInverseEyeDistance(param_1);
-        iVar3 = *(int *)(param_1 + 0x538);
-        if (iVar3 == -1) {
+    sizeParamReg = *(undefined4 *)(programBuilder + 0x338);
+    if (useDistanceSquared == 0) {
+      invEyeDistReg = *(int *)(programBuilder + 0x538);
+      if (invEyeDistReg == -1) {
+        ffvpEmitInverseEyeDistance(programBuilder);
+        invEyeDistReg = *(int *)(programBuilder + 0x538);
+        if (invEyeDistReg == -1) {
           return 2;
         }
       }
-      local_d8 = 1;
-      local_d4 = 1;
-      local_e0 = 4;
-      local_dc = 4;
-      local_e4 = 5;
-      local_e8 = *(undefined4 *)(param_1 + 0x54c);
-      local_d0 = param_3;
-      local_cc = param_3;
-      iVarS9 = &auStack_78;
-      iVarS10 = (int)param_1 + 1316;
-      iVarS18 = *(int *)((int)param_1 + 1296);
-      iVarS19 = (int)param_1 + 1316;
-      (**(code **)(((unsigned char *)0x000012ec) + iVar7))
-                (param_1,a1,local_a4,&local_d8,uVar5,iVar3,&local_e8,&DAT_001fa5e8,uVar5,iVarS18,iVarS19,&DAT_001fa5e8);
-      local_e8 = 1;
-      local_e0 = 5;
-      local_dc = 4;
-      local_e4 = param_3;
-      iVarS1 = *(int *)((int)*(int *)((int)param_1 + 1004) + 0);
-      iVarS2 = *(int *)((int)*(int *)((int)param_1 + 980) + 4836);
-      iVarS20 = *(int *)((int)*(int *)((int)param_1 + 1004) + 0);
-      iVarS21 = local_a4;
-      iVarS22 = &local_e8;
-      (**(code **)(((unsigned char *)0x000012e4) + iVar7))
-                (param_1,a1,local_7c,auStack_78,a4,uVar6,&DAT_001dbd74,&DAT_001fa5e8,iVarS20,iVarS21,iVarS22,&DAT_001fa5e8);
+      selectArrC0 = 1;
+      selectArrC1 = 1;
+      selectArrB2 = 4;
+      selectArrB3 = 4;
+      selectArrB1 = 5;
+      selectArrB0 = *(undefined4 *)(programBuilder + 0x54c);
+      selectArrC2 = useDistanceSquared;
+      selectArrC3 = useDistanceSquared;
+      deadSelectPtrB = &tempAMask;
+      iVarS10 = (int)programBuilder + 1316;
+      emit2Src1Index = *(int *)((int)programBuilder + 1296);
+      emit2Src1Select = (int)programBuilder + 1316;
+      (**(code **)(((unsigned char *)0x000012ec) + glCtx))
+                (programBuilder,dstTempFile,tempBReg,&selectArrC0,srcTempFile,invEyeDistReg,&selectArrB0,&DAT_001fa5e8,srcTempFile,emit2Src1Index,emit2Src1Select,&DAT_001fa5e8);
+      selectArrB0 = 1;
+      selectArrB2 = 5;
+      selectArrB3 = 4;
+      selectArrB1 = useDistanceSquared;
+      deadSrcTempFile = *(int *)((int)*(int *)((int)programBuilder + 1004) + 0);
+      deadEmitFnSlot = *(int *)((int)*(int *)((int)programBuilder + 980) + 4836);
+      emit3Src1File = *(int *)((int)*(int *)((int)programBuilder + 1004) + 0);
+      emit3Src1Index = tempBReg;
+      emit3Src1Select = &selectArrB0;
+      (**(code **)(((unsigned char *)0x000012e4) + glCtx))
+                (programBuilder,dstTempFile,tempAReg,tempAMask,constFile,sizeParamReg,&DAT_001dbd74,&DAT_001fa5e8,emit3Src1File,emit3Src1Index,emit3Src1Select,&DAT_001fa5e8);
     }
     else {
-      local_e8 = *(undefined4 *)(param_1 + 0x524);
-      local_e0 = 5;
-      local_dc = 4;
-      local_e4 = 4;
-      iVarS3 = *(int *)((int)*(int *)((int)param_1 + 1004) + 0);
-      iVarS4 = *(int *)((int)*(int *)((int)param_1 + 980) + 4836);
-      iVarS5 = &local_e8;
-      iVarS23 = *(int *)((int)*(int *)((int)param_1 + 1004) + 0);
-      iVarS24 = *(int *)((int)param_1 + 1296);
-      iVarS25 = &local_e8;
-      (**(code **)(((unsigned char *)0x000012e4) + iVar7))
-                (param_1,a1,local_7c,auStack_78,a4,uVar6,&DAT_001dbd74,&DAT_001fa5e8,iVarS23,iVarS24,iVarS25,&DAT_001fa5e8);
+      selectArrB0 = *(undefined4 *)(programBuilder + 0x524);
+      selectArrB2 = 5;
+      selectArrB3 = 4;
+      selectArrB1 = 4;
+      deadSrcTempFileB = *(int *)((int)*(int *)((int)programBuilder + 1004) + 0);
+      deadEmitFnSlotB = *(int *)((int)*(int *)((int)programBuilder + 980) + 4836);
+      deadSelectPtr = &selectArrB0;
+      emit4Src1File = *(int *)((int)*(int *)((int)programBuilder + 1004) + 0);
+      emit4Src1Index = *(int *)((int)programBuilder + 1296);
+      emit4Src1Select = &selectArrB0;
+      (**(code **)(((unsigned char *)0x000012e4) + glCtx))
+                (programBuilder,dstTempFile,tempAReg,tempAMask,constFile,sizeParamReg,&DAT_001dbd74,&DAT_001fa5e8,emit4Src1File,emit4Src1Index,emit4Src1Select,&DAT_001fa5e8);
     }
-    (**(code **)(((unsigned char *)0x00001318) + iVar7))
-              (param_1,a1,local_7c,auStack_78,uVar5,local_7c,&local_68,&DAT_001fa5e8);
+    (**(code **)(((unsigned char *)0x00001318) + glCtx))
+              (programBuilder,dstTempFile,tempAReg,tempAMask,srcTempFile,tempAReg,&tempASelect0,&DAT_001fa5e8);
   }
-  uVar6 = local_7c;
-  switch(param_2) {
+  attenParamReg = tempAReg;
+  switch(sizeSource) {
   case 0:
-    bVar2 = false;
-    local_c8 = DAT_001dbcf4;
-    local_c4 = DAT_001dbcf8;
-    local_f4 = local_64;
-    local_c0 = DAT_001dbcfc;
-    local_bc = DAT_001dbd00;
-    local_f8 = local_68;
-    local_ec = local_5c;
-    local_f0 = local_60;
-    a4_00 = uVar5;
-    uVar8 = local_a4;
+    clampMinMax = false;
+    selectArrD0 = DAT_001dbcf4;
+    selectArrD1 = DAT_001dbcf8;
+    selectArrA1 = tempASelect1;
+    selectArrD2 = DAT_001dbcfc;
+    selectArrD3 = DAT_001dbd00;
+    selectArrA0 = tempASelect0;
+    selectArrA3 = tempASelect3;
+    selectArrA2 = tempASelect2;
+    a4_00 = srcTempFile;
+    sizeSrcReg = tempBReg;
     break;
   case 1:
-    uVar8 = *(undefined4 *)(param_1 + 0x4c);
-    bVar2 = false;
-    local_c8 = DAT_001fa5f8;
-    local_c4 = DAT_001fa5fc;
-    local_f4 = local_64;
-    local_c0 = DAT_001fa600;
-    local_bc = DAT_001fa604;
-    local_f8 = local_68;
-    local_ec = local_5c;
-    local_f0 = local_60;
+    sizeSrcReg = *(undefined4 *)(programBuilder + 0x4c);
+    clampMinMax = false;
+    selectArrD0 = DAT_001fa5f8;
+    selectArrD1 = DAT_001fa5fc;
+    selectArrA1 = tempASelect1;
+    selectArrD2 = DAT_001fa600;
+    selectArrD3 = DAT_001fa604;
+    selectArrA0 = tempASelect0;
+    selectArrA3 = tempASelect3;
+    selectArrA2 = tempASelect2;
     break;
   case 2:
-    local_c4 = local_64;
-    local_c8 = local_68;
-    local_bc = local_5c;
-    local_c0 = local_60;
+    selectArrD1 = tempASelect1;
+    selectArrD0 = tempASelect0;
+    selectArrD3 = tempASelect3;
+    selectArrD2 = tempASelect2;
     goto LAB_0009a3bc;
   case 3:
-    local_7c = *(undefined4 *)(param_1 + 0x4c);
-    local_c8 = DAT_001fa5f8;
-    local_bc = DAT_001fa604;
-    local_c4 = DAT_001fa5fc;
-    local_c0 = DAT_001fa600;
-    uVar5 = a4_00;
+    tempAReg = *(undefined4 *)(programBuilder + 0x4c);
+    selectArrD0 = DAT_001fa5f8;
+    selectArrD3 = DAT_001fa604;
+    selectArrD1 = DAT_001fa5fc;
+    selectArrD2 = DAT_001fa600;
+    srcTempFile = a4_00;
     goto LAB_0009a3bc;
   case 4:
-    local_7c = *(undefined4 *)(param_1 + 0x340);
-    local_c8 = DAT_001dbdb4;
-    local_bc = DAT_001dbdc0;
-    local_c4 = DAT_001dbdb8;
-    local_c0 = DAT_001dbdbc;
-    uVar5 = a4;
+    tempAReg = *(undefined4 *)(programBuilder + 0x340);
+    selectArrD0 = DAT_001dbdb4;
+    selectArrD3 = DAT_001dbdc0;
+    selectArrD1 = DAT_001dbdb8;
+    selectArrD2 = DAT_001dbdbc;
+    srcTempFile = constFile;
 LAB_0009a3bc:
-    bVar2 = true;
-    local_f8 = DAT_001dbcf4;
-    local_f4 = DAT_001dbcf8;
-    local_f0 = DAT_001dbcfc;
-    local_ec = DAT_001dbd00;
-    a4_00 = uVar5;
-    uVar8 = local_7c;
-    uVar5 = a4;
-    uVar6 = *(undefined4 *)(param_1 + 0x334);
+    clampMinMax = true;
+    selectArrA0 = DAT_001dbcf4;
+    selectArrA1 = DAT_001dbcf8;
+    selectArrA2 = DAT_001dbcfc;
+    selectArrA3 = DAT_001dbd00;
+    a4_00 = srcTempFile;
+    sizeSrcReg = tempAReg;
+    srcTempFile = constFile;
+    attenParamReg = *(undefined4 *)(programBuilder + 0x334);
     break;
   default:
-    bVar2 = false;
+    clampMinMax = false;
     a4_00 = 0;
-    uVar8 = 0;
-    uVar5 = 0;
-    uVar6 = 0;
+    sizeSrcReg = 0;
+    srcTempFile = 0;
+    attenParamReg = 0;
   }
-  if (bVar1) {
-    ffvpFreeTempRegister(param_1,auStack_a8);
+  if (usesEyeDistance) {
+    ffvpFreeTempRegister(programBuilder,tempB);
   }
-  local_b8 = 0;
-  local_b0 = 4;
-  local_b4 = 4;
-  local_ac = 1;
-  if (bVar2) {
-    iVar3 = ffvpAllocTempRegister(param_1,2,auStack_a8);
-    if (iVar3 != 0) {
+  selectArrE0 = 0;
+  selectArrE2 = 4;
+  selectArrE1 = 4;
+  selectArrE3 = 1;
+  if (clampMinMax) {
+    allocStatus = ffvpAllocTempRegister(programBuilder,2,tempB);
+    if (allocStatus != 0) {
       return 7;
     }
-    (**(code **)(((unsigned char *)0x000012e8) + iVar7))
-              (param_1,a1,local_a4,auStack_a0,uVar5,uVar6,&local_f8,&DAT_001fa5e8);
-    /* stack words, stock 0x9a468-0x9a4a8: r20 = rec[0], local_a4, &local_90 (= auStack_a0 + 16), &DAT_001fa5e8, r17 = rec[2] (a4), *(param_1 + 0x340), &local_b8, &DAT_001fa5e8 */
-    (**(code **)(((unsigned char *)0x000012fc) + iVar7))
-              (param_1,local_58,*(undefined4 *)(param_1 + 0x6c),&DAT_001dbd24,a4_00,uVar8,&local_c8,
-               &DAT_001fa5e8,**(int **)(param_1 + 0x3ec),local_a4,auStack_a0 + 16,&DAT_001fa5e8,a4,*(int *)(param_1 + 0x340),&local_b8,&DAT_001fa5e8);
-    ffvpFreeTempRegister(param_1,auStack_a8);
+    (**(code **)(((unsigned char *)0x000012e8) + glCtx))
+              (programBuilder,dstTempFile,tempBReg,tempBMask,srcTempFile,attenParamReg,&selectArrA0,&DAT_001fa5e8);
+    /* stack words, stock 0x9a468-0x9a4a8: r20 = rec[0], tempBReg, &local_90 (= tempBMask + 16), &DAT_001fa5e8, r17 = rec[2] (constFile), *(programBuilder + 0x340), &selectArrE0, &DAT_001fa5e8 */
+    (**(code **)(((unsigned char *)0x000012fc) + glCtx))
+              (programBuilder,pointSizeOutFile,*(undefined4 *)(programBuilder + 0x6c),&DAT_001dbd24,a4_00,sizeSrcReg,&selectArrD0,
+               &DAT_001fa5e8,**(int **)(programBuilder + 0x3ec),tempBReg,tempBMask + 16,&DAT_001fa5e8,constFile,*(int *)(programBuilder + 0x340),&selectArrE0,&DAT_001fa5e8);
+    ffvpFreeTempRegister(programBuilder,tempB);
   }
   else {
-    /* stack words, stock 0x9a4d8-0x9a520: uVar5, uVar6 (the stock's r27/r28), &local_f8, &DAT_001fa5e8, r17 = rec[2] (a4), *(param_1 + 0x340), &local_b8, &DAT_001fa5e8 */
-    (**(code **)(((unsigned char *)0x000012fc) + iVar7))
-              (param_1,local_58,*(undefined4 *)(param_1 + 0x6c),&DAT_001dbd24,a4_00,uVar8,&local_c8,
-               &DAT_001fa5e8,uVar5,uVar6,&local_f8,&DAT_001fa5e8,a4,*(int *)(param_1 + 0x340),&local_b8,&DAT_001fa5e8);
+    /* stack words, stock 0x9a4d8-0x9a520: uVar5, uVar6 (the stock's r27/r28), &selectArrA0, &DAT_001fa5e8, r17 = rec[2] (constFile), *(programBuilder + 0x340), &selectArrE0, &DAT_001fa5e8 */
+    (**(code **)(((unsigned char *)0x000012fc) + glCtx))
+              (programBuilder,pointSizeOutFile,*(undefined4 *)(programBuilder + 0x6c),&DAT_001dbd24,a4_00,sizeSrcReg,&selectArrD0,
+               &DAT_001fa5e8,srcTempFile,attenParamReg,&selectArrA0,&DAT_001fa5e8,constFile,*(int *)(programBuilder + 0x340),&selectArrE0,&DAT_001fa5e8);
   }
-  ffvpFreeTempRegister(param_1,auStack_80);
-  uVar5 = 0;
+  ffvpFreeTempRegister(programBuilder,tempA);
+  status = 0;
 switchD_00099ea8_default:
-  return uVar5;
+  return status;
 }
 
-/* FUN_0009a590 @ 0x9a590 (848 bytes) */
-int FUN_0009a590(param_1)
-  int param_1;
+/* ffvpEmitFogDistance @ 0x9a590 (848 bytes) */
+int ffvpEmitFogDistance(programBuilder)
+  int programBuilder;
 {
-  uint uVar1;
-  undefined4 *puVar2;
-  int iVar3;
-  undefined4 uVar4;
-  undefined4 uVar5;
-  undefined4 uVar6;
-  int iVar7;
-  int iVar8;
-  int iVar9;
-  undefined1 auStack_68 [4];
-  undefined4 local_64;
-  int iVarS1;
-  int iVarS2;
+  int allocStatus;
+  uint fogCoordComponents;
+  undefined4 *src0Select;
+  int stateBlock;
+  undefined4 dstTempFile;
+  undefined4 srcTempFile;
+  undefined4 outputFile;
+  int fogOutReg;
+  int glCtx;
+  int eyePositionReg;
+  undefined1 tempA [4];
+  undefined4 tempAReg;
+  int emit5Src1Select;
+  int emit1Src1Negate;
   
-  if (param_1 == 0) {
+  if (programBuilder == 0) {
     return 1;
   }
-  iVar7 = *(int *)(param_1 + 0x70);
-  if (iVar7 != -1) {
-    iVar8 = *(int *)(param_1 + 0x3d4);
-    uVar6 = *(undefined4 *)(*(int *)(param_1 + 0x3f0) + 0x18);
-    if (*(short *)(((unsigned char *)0x00002e06) + *(int *)(*(int *)(iVar8 + 4) + 0x10)) == -0x7bae) {
-      iVar9 = *(int *)(param_1 + 0x3f8);
-      if (iVar9 == -1) {
-        if ((*(uint *)(((unsigned char *)0x000013c0) + iVar8) & 4) == 0) {
-          ffvpEmitEyePositionDp4(param_1);
+  fogOutReg = *(int *)(programBuilder + 0x70);
+  if (fogOutReg != -1) {
+    glCtx = *(int *)(programBuilder + 0x3d4);
+    outputFile = *(undefined4 *)(*(int *)(programBuilder + 0x3f0) + 0x18);
+    if (*(short *)(((unsigned char *)0x00002e06) + *(int *)(*(int *)(glCtx + 4) + 0x10)) == -0x7bae) {
+      eyePositionReg = *(int *)(programBuilder + 0x3f8);
+      if (eyePositionReg == -1) {
+        if ((*(uint *)(((unsigned char *)0x000013c0) + glCtx) & 4) == 0) {
+          ffvpEmitEyePositionDp4(programBuilder);
         }
         else {
-          ffvpEmitEyePositionMad(param_1);
+          ffvpEmitEyePositionMad(programBuilder);
         }
-        iVar9 = *(int *)(param_1 + 0x3f8);
-        if (iVar9 == -1) {
+        eyePositionReg = *(int *)(programBuilder + 0x3f8);
+        if (eyePositionReg == -1) {
           return 2;
         }
-        iVar8 = *(int *)(param_1 + 0x3d4);
+        glCtx = *(int *)(programBuilder + 0x3d4);
       }
-      iVar3 = *(int *)(*(int *)(iVar8 + 4) + 0x10);
-      uVar5 = **(undefined4 **)(param_1 + 0x3ec);
-      if ((*(short *)(((unsigned char *)0x00002e06) + iVar3) != -0x7bae) ||
-         (*(short *)(((unsigned char *)0x00002e08) + iVar3) == -0x7aa4)) {
-        iVarS2 = &DAT_001dbd94;
-        (**(code **)(((unsigned char *)0x00001304) + iVar8))
-                  (param_1,uVar6,iVar7,&DAT_001dbd04,uVar5,iVar9,&DAT_001dbcf4,&DAT_001fa5e8,uVar5,iVar9,&DAT_001dbcf4,iVarS2);
+      stateBlock = *(int *)(*(int *)(glCtx + 4) + 0x10);
+      srcTempFile = **(undefined4 **)(programBuilder + 0x3ec);
+      if ((*(short *)(((unsigned char *)0x00002e06) + stateBlock) != -0x7bae) ||
+         (*(short *)(((unsigned char *)0x00002e08) + stateBlock) == -0x7aa4)) {
+        emit1Src1Negate = &DAT_001dbd94;
+        (**(code **)(((unsigned char *)0x00001304) + glCtx))
+                  (programBuilder,outputFile,fogOutReg,&DAT_001dbd04,srcTempFile,eyePositionReg,&DAT_001dbcf4,&DAT_001fa5e8,srcTempFile,eyePositionReg,&DAT_001dbcf4,emit1Src1Negate);
         return 0;
       }
-      if (*(short *)(((unsigned char *)0x00002e08) + iVar3) != -0x7aa5) {
-        (**(code **)(((unsigned char *)0x000012e8) + iVar8))
-                  (param_1,uVar6,iVar7,&DAT_001dbd04,uVar5,iVar9,&DAT_001dbcf4,&DAT_001dbd94);
+      if (*(short *)(((unsigned char *)0x00002e08) + stateBlock) != -0x7aa5) {
+        (**(code **)(((unsigned char *)0x000012e8) + glCtx))
+                  (programBuilder,outputFile,fogOutReg,&DAT_001dbd04,srcTempFile,eyePositionReg,&DAT_001dbcf4,&DAT_001dbd94);
         return 0;
       }
-      uVar4 = **(undefined4 **)(param_1 + 0x3f0);
-      iVar3 = ffvpAllocTempRegister(param_1,1,auStack_68);
-      if (iVar3 == 0) {
-        (**(code **)(((unsigned char *)0x000012e4) + iVar8))
-                  (param_1,uVar4,local_64,&DAT_001dbd04,uVar5,iVar9,&DAT_001dbd74,&DAT_001fa5e8,uVar5,iVar9,&DAT_001dbd74,&DAT_001fa5e8);
-        (**(code **)(((unsigned char *)0x00001318) + iVar8))
-                  (param_1,uVar4,local_64,&DAT_001dbd64,uVar5,local_64,&DAT_001fa5f8,&DAT_001fa5e8);
-        iVarS1 = ((unsigned char *)&DAT_001dbdc0 + 244);
-        (**(code **)(((unsigned char *)0x000012e4) + iVar8))
-                  (param_1,uVar6,iVar7,&DAT_001dbd04,uVar5,local_64,&DAT_001dbec4,&DAT_001fa5e8,uVar5,local_64,iVarS1,&DAT_001fa5e8);
-        ffvpFreeTempRegister(param_1,auStack_68);
+      dstTempFile = **(undefined4 **)(programBuilder + 0x3f0);
+      allocStatus = ffvpAllocTempRegister(programBuilder,1,tempA);
+      if (allocStatus == 0) {
+        (**(code **)(((unsigned char *)0x000012e4) + glCtx))
+                  (programBuilder,dstTempFile,tempAReg,&DAT_001dbd04,srcTempFile,eyePositionReg,&DAT_001dbd74,&DAT_001fa5e8,srcTempFile,eyePositionReg,&DAT_001dbd74,&DAT_001fa5e8);
+        (**(code **)(((unsigned char *)0x00001318) + glCtx))
+                  (programBuilder,dstTempFile,tempAReg,&DAT_001dbd64,srcTempFile,tempAReg,&DAT_001fa5f8,&DAT_001fa5e8);
+        emit5Src1Select = ((unsigned char *)&DAT_001dbdc0 + 244);
+        (**(code **)(((unsigned char *)0x000012e4) + glCtx))
+                  (programBuilder,outputFile,fogOutReg,&DAT_001dbd04,srcTempFile,tempAReg,&DAT_001dbec4,&DAT_001fa5e8,srcTempFile,tempAReg,emit5Src1Select,&DAT_001fa5e8);
+        ffvpFreeTempRegister(programBuilder,tempA);
         return 0;
       }
       return 7;
     }
-    if (*(int *)(param_1 + 0x50) != -1) {
-      uVar1 = *(uint *)(param_1 + 0x54);
-      if (uVar1 < 4) {
-        if (uVar1 == 2) {
-          puVar2 = &DAT_001dbcf4;
+    if (*(int *)(programBuilder + 0x50) != -1) {
+      fogCoordComponents = *(uint *)(programBuilder + 0x54);
+      if (fogCoordComponents < 4) {
+        if (fogCoordComponents == 2) {
+          src0Select = &DAT_001dbcf4;
         }
-        else if (uVar1 == 3) {
-          puVar2 = &DAT_001dbcd4;
+        else if (fogCoordComponents == 3) {
+          src0Select = &DAT_001dbcd4;
         }
-        else if (uVar1 == 1) {
-          puVar2 = &DAT_001dbce4;
+        else if (fogCoordComponents == 1) {
+          src0Select = &DAT_001dbce4;
         }
         else {
-          puVar2 = &DAT_001fa5f8;
+          src0Select = &DAT_001fa5f8;
         }
-        (**(code **)(((unsigned char *)0x000012e8) + iVar8))
-                  (param_1,uVar6,iVar7,&DAT_001dbd04,*(undefined4 *)(*(int *)(param_1 + 0x3ec) + 4),
-                   *(int *)(param_1 + 0x50),puVar2,&DAT_001fa5e8);
+        (**(code **)(((unsigned char *)0x000012e8) + glCtx))
+                  (programBuilder,outputFile,fogOutReg,&DAT_001dbd04,*(undefined4 *)(*(int *)(programBuilder + 0x3ec) + 4),
+                   *(int *)(programBuilder + 0x50),src0Select,&DAT_001fa5e8);
         return 0;
       }
       return 3;
@@ -4135,8 +4140,8 @@ int FUN_0009a590(param_1)
   return 2;
 }
 
-/* FUN_0009a910 @ 0x9a910 (120 bytes) */
-int FUN_0009a910(param_1)
+/* ffvpFinishProgram @ 0x9a910 (120 bytes) */
+int ffvpFinishProgram(param_1)
   int param_1;
 {
   undefined4 uVar1;
@@ -4169,181 +4174,186 @@ int fpVariantProgramFree(param_1, param_2)
   return uVar1;
 }
 
-/* FUN_0009aa00 @ 0x9aa00 (1232 bytes) */
-int FUN_0009aa00(param_1)
-  int param_1;
+/* ffvpEmitFogLinear @ 0x9aa00 (1232 bytes) */
+int ffvpEmitFogLinear(programBuilder)
+  int programBuilder;
 {
-  int iVar1;
-  undefined4 *puVar2;
-  int iVar3;
-  undefined4 uVar4;
-  undefined4 a4;
-  undefined4 uVar5;
-  undefined4 uVar6;
-  undefined4 a1;
-  undefined4 a2;
-  int iVar7;
-  int iVar8;
-  undefined4 uVar9;
-  undefined4 local_c8;
-  undefined4 local_c4;
-  undefined4 local_c0;
-  undefined4 local_bc;
-  undefined4 local_b8;
-  undefined4 local_b4;
-  undefined4 local_b0;
-  undefined4 local_ac;
-  undefined1 auStack_a8 [4];
-  undefined4 local_a4;
-  undefined1 auStack_a0 [24];
-  undefined4 local_88;
-  undefined1 auStack_80 [4];
-  undefined4 local_7c;
-  int iVarS1;
-  int iVarS2;
-  int iVarS3;
-  int iVarS4;
-  int iVarS5;
-  int iVarS6;
-  int iVarS7;
-  int iVarS8;
-  int iVarS9;
-  int iVarS10;
-  int iVarS11;
-  int iVarS12;
-  int iVarS13;
-  int iVarS14;
-  int iVarS15;
+  undefined4 fogDstReg;
+  undefined4 *fogMask;
+  undefined4 *fogCoordSelect;
+  int stateBlock;
+  int allocStatus;
+  int fogCoordComponents;
+  undefined4 *fileTable;
+  int fogCoordReg;
+  undefined4 fogParamConstReg;
+  undefined4 constFile;
+  undefined4 dstTempFile;
+  undefined4 srcTempFile;
+  undefined4 dstFile;
+  undefined4 fogFactorReg;
+  int glCtx;
+  int glCtxB;
+  undefined4 fogCoordFile;
+  undefined4 selectArrA0;
+  undefined4 selectArrA1;
+  undefined4 selectArrA2;
+  undefined4 selectArrA3;
+  undefined4 selectArrB0;
+  undefined4 selectArrB1;
+  undefined4 selectArrB2;
+  undefined4 selectArrB3;
+  undefined1 tempA [4];
+  undefined4 tempAReg;
+  undefined1 tempAMask [24];
+  undefined4 tempASelect2;
+  undefined1 tempB [4];
+  undefined4 tempBReg;
+  int emit3Src1Select;
+  int deadSrcTempFile;
+  int deadEmitFnSlot;
+  int deadSelectPtr;
+  int deadSrcTempFileB;
+  int deadEmitFnSlotB;
+  int deadSelectPtrB;
+  int emit5Src1Negate;
+  int emit8Src1Select;
+  int emit6Src1File;
+  int emit6Src1Index;
+  int emit6Src1Select;
+  int emit7Src1File;
+  int emit7Src1Index;
+  int emit7Src1Select;
   
-  iVar8 = *(int *)(param_1 + 0x3d4);
-  if (*(int *)(param_1 + 0x588) != -1) {
+  glCtxB = *(int *)(programBuilder + 0x3d4);
+  if (*(int *)(programBuilder + 0x588) != -1) {
     return 0;
   }
-  puVar2 = *(undefined4 **)(param_1 + 0x3ec);
-  uVar4 = *(undefined4 *)(param_1 + 0x330);
-  a1 = **(undefined4 **)(param_1 + 0x3f0);
-  a4 = puVar2[2];
-  if (*(short *)(((unsigned char *)0x00002e06) + *(int *)(*(int *)(iVar8 + 4) + 0x10)) == -0x7bae) {
-    iVar3 = *(int *)(param_1 + 0x3f8);
-    if (iVar3 == -1) {
-      if ((*(uint *)(((unsigned char *)0x000013c0) + iVar8) & 4) == 0) {
-        ffvpEmitEyePositionDp4(param_1);
+  fileTable = *(undefined4 **)(programBuilder + 0x3ec);
+  fogParamConstReg = *(undefined4 *)(programBuilder + 0x330);
+  dstFile = **(undefined4 **)(programBuilder + 0x3f0);
+  constFile = fileTable[2];
+  if (*(short *)(((unsigned char *)0x00002e06) + *(int *)(*(int *)(glCtxB + 4) + 0x10)) == -0x7bae) {
+    fogCoordReg = *(int *)(programBuilder + 0x3f8);
+    if (fogCoordReg == -1) {
+      if ((*(uint *)(((unsigned char *)0x000013c0) + glCtxB) & 4) == 0) {
+        ffvpEmitEyePositionDp4(programBuilder);
       }
       else {
-        ffvpEmitEyePositionMad(param_1);
+        ffvpEmitEyePositionMad(programBuilder);
       }
-      iVar3 = *(int *)(param_1 + 0x3f8);
-      if (iVar3 == -1) {
+      fogCoordReg = *(int *)(programBuilder + 0x3f8);
+      if (fogCoordReg == -1) {
         return 2;
       }
-      puVar2 = *(undefined4 **)(param_1 + 0x3ec);
+      fileTable = *(undefined4 **)(programBuilder + 0x3ec);
     }
-    uVar9 = *puVar2;
-    puVar2 = &DAT_001dbcf4;
+    fogCoordFile = *fileTable;
+    fogCoordSelect = &DAT_001dbcf4;
   }
   else {
-    iVar1 = *(int *)(param_1 + 0x54);
-    uVar9 = puVar2[1];
-    iVar3 = *(int *)(param_1 + 0x50);
-    if (iVar1 == 1) {
-      puVar2 = &DAT_001dbce4;
+    fogCoordComponents = *(int *)(programBuilder + 0x54);
+    fogCoordFile = fileTable[1];
+    fogCoordReg = *(int *)(programBuilder + 0x50);
+    if (fogCoordComponents == 1) {
+      fogCoordSelect = &DAT_001dbce4;
     }
-    else if (iVar1 == 0) {
-      puVar2 = &DAT_001fa5f8;
+    else if (fogCoordComponents == 0) {
+      fogCoordSelect = &DAT_001fa5f8;
     }
-    else if (iVar1 == 2) {
-      puVar2 = &DAT_001dbcf4;
+    else if (fogCoordComponents == 2) {
+      fogCoordSelect = &DAT_001dbcf4;
     }
-    else if (iVar1 == 3) {
-      puVar2 = &DAT_001dbcd4;
+    else if (fogCoordComponents == 3) {
+      fogCoordSelect = &DAT_001dbcd4;
     }
     else {
-      puVar2 = &DAT_001dbd14;
+      fogCoordSelect = &DAT_001dbd14;
     }
   }
-  iVar1 = ffvpAllocTempRegister(param_1,2,param_1 + 0x584);
-  if (iVar1 == 0) {
-    a2 = *(undefined4 *)(param_1 + 0x588);
-    iVar1 = ffvpAllocTempRegister(param_1,2,auStack_a8);
-    if (iVar1 == 0) {
-      iVar7 = *(int *)(param_1 + 0x3d4);
-      iVar1 = *(int *)(*(int *)(iVar7 + 4) + 0x10);
-      if ((*(short *)(((unsigned char *)0x00002e06) + iVar1) == -0x7bae) &&
-         (*(short *)(((unsigned char *)0x00002e08) + iVar1) != -0x7aa4)) {
-        if (*(short *)(((unsigned char *)0x00002e08) + iVar1) == -0x7aa5) {
-          uVar5 = **(undefined4 **)(param_1 + 0x3f0);
-          uVar6 = **(undefined4 **)(param_1 + 0x3ec);
-          iVar1 = ffvpAllocTempRegister(param_1,1,auStack_80);
-          if (iVar1 != 0) {
+  allocStatus = ffvpAllocTempRegister(programBuilder,2,programBuilder + 0x584);
+  if (allocStatus == 0) {
+    fogFactorReg = *(undefined4 *)(programBuilder + 0x588);
+    allocStatus = ffvpAllocTempRegister(programBuilder,2,tempA);
+    if (allocStatus == 0) {
+      glCtx = *(int *)(programBuilder + 0x3d4);
+      stateBlock = *(int *)(*(int *)(glCtx + 4) + 0x10);
+      if ((*(short *)(((unsigned char *)0x00002e06) + stateBlock) == -0x7bae) &&
+         (*(short *)(((unsigned char *)0x00002e08) + stateBlock) != -0x7aa4)) {
+        if (*(short *)(((unsigned char *)0x00002e08) + stateBlock) == -0x7aa5) {
+          dstTempFile = **(undefined4 **)(programBuilder + 0x3f0);
+          srcTempFile = **(undefined4 **)(programBuilder + 0x3ec);
+          allocStatus = ffvpAllocTempRegister(programBuilder,1,tempB);
+          if (allocStatus != 0) {
             return 7;
           }
-          (**(code **)(((unsigned char *)0x000012e4) + iVar7))
-                    (param_1,uVar5,local_7c,&DAT_001dbd04,uVar9,iVar3,&DAT_001dbd74,&DAT_001fa5e8,uVar9,iVar3,&DAT_001dbd74,&DAT_001fa5e8);
-          (**(code **)(((unsigned char *)0x00001318) + iVar7))
-                    (param_1,uVar5,local_7c,&DAT_001dbd64,uVar6,local_7c,&DAT_001fa5f8,&DAT_001fa5e8
+          (**(code **)(((unsigned char *)0x000012e4) + glCtx))
+                    (programBuilder,dstTempFile,tempBReg,&DAT_001dbd04,fogCoordFile,fogCoordReg,&DAT_001dbd74,&DAT_001fa5e8,fogCoordFile,fogCoordReg,&DAT_001dbd74,&DAT_001fa5e8);
+          (**(code **)(((unsigned char *)0x00001318) + glCtx))
+                    (programBuilder,dstTempFile,tempBReg,&DAT_001dbd64,srcTempFile,tempBReg,&DAT_001fa5f8,&DAT_001fa5e8
                     );
-          iVarS1 = ((unsigned char *)&DAT_001dbdc0 + 244);
-          (**(code **)(((unsigned char *)0x000012e4) + iVar7))
-                    (param_1,a1,local_a4,auStack_a0,uVar6,local_7c,&DAT_001dbec4,&DAT_001fa5e8,uVar6,local_7c,iVarS1,&DAT_001fa5e8);
-          ffvpFreeTempRegister(param_1,auStack_80);
+          emit3Src1Select = ((unsigned char *)&DAT_001dbdc0 + 244);
+          (**(code **)(((unsigned char *)0x000012e4) + glCtx))
+                    (programBuilder,dstFile,tempAReg,tempAMask,srcTempFile,tempBReg,&DAT_001dbec4,&DAT_001fa5e8,srcTempFile,tempBReg,emit3Src1Select,&DAT_001fa5e8);
+          ffvpFreeTempRegister(programBuilder,tempB);
         }
         else {
-          (**(code **)(((unsigned char *)0x000012e8) + iVar7))
-                    (param_1,a1,local_a4,auStack_a0,uVar9,iVar3,puVar2,&DAT_001dbd94);
+          (**(code **)(((unsigned char *)0x000012e8) + glCtx))
+                    (programBuilder,dstFile,tempAReg,tempAMask,fogCoordFile,fogCoordReg,fogCoordSelect,&DAT_001dbd94);
         }
       }
       else {
-        iVarS8 = &DAT_001dbd94;
-        (**(code **)(((unsigned char *)0x00001304) + iVar7))
-                  (param_1,a1,local_a4,auStack_a0,uVar9,iVar3,puVar2,&DAT_001fa5e8,uVar9,iVar3,puVar2,iVarS8);
+        emit5Src1Negate = &DAT_001dbd94;
+        (**(code **)(((unsigned char *)0x00001304) + glCtx))
+                  (programBuilder,dstFile,tempAReg,tempAMask,fogCoordFile,fogCoordReg,fogCoordSelect,&DAT_001fa5e8,fogCoordFile,fogCoordReg,fogCoordSelect,emit5Src1Negate);
       }
-      uVar9 = **(undefined4 **)(param_1 + 0x3ec);
-      local_ac = 4;
-      local_c8 = 4;
-      local_c0 = 2;
-      local_c4 = 1;
-      local_bc = 4;
-      local_b8 = 4;
-      local_b4 = 5;
-      local_b0 = local_88;
-      if (*(int *)(param_1 + 0x3d8) != 0) {
-        iVarS2 = *(int *)((int)*(int *)((int)param_1 + 1004) + 0);
-        iVarS3 = *(int *)((int)*(int *)((int)param_1 + 980) + 4836);
-        iVarS4 = &local_b8;
-        iVarS10 = *(int *)((int)*(int *)((int)param_1 + 1004) + 0);
-        iVarS11 = local_a4;
-        iVarS12 = &local_b8;
-        (**(code **)(((unsigned char *)0x000012e4) + iVar8))
-                  (param_1,*(undefined4 *)(*(int *)(param_1 + 0x3f0) + 0x18),*(undefined4 *)(param_1 + 0x70),&DAT_001dbd04,a4,uVar4,&local_c8,&DAT_001fa5e8,iVarS10,iVarS11,iVarS12,&DAT_001fa5e8);
-        ffvpFreeTempRegister(param_1,auStack_a8);
+      fogCoordFile = **(undefined4 **)(programBuilder + 0x3ec);
+      selectArrB3 = 4;
+      selectArrA0 = 4;
+      selectArrA2 = 2;
+      selectArrA1 = 1;
+      selectArrA3 = 4;
+      selectArrB0 = 4;
+      selectArrB1 = 5;
+      selectArrB2 = tempASelect2;
+      if (*(int *)(programBuilder + 0x3d8) != 0) {
+        deadSrcTempFile = *(int *)((int)*(int *)((int)programBuilder + 1004) + 0);
+        deadEmitFnSlot = *(int *)((int)*(int *)((int)programBuilder + 980) + 4836);
+        deadSelectPtr = &selectArrB0;
+        emit6Src1File = *(int *)((int)*(int *)((int)programBuilder + 1004) + 0);
+        emit6Src1Index = tempAReg;
+        emit6Src1Select = &selectArrB0;
+        (**(code **)(((unsigned char *)0x000012e4) + glCtxB))
+                  (programBuilder,*(undefined4 *)(*(int *)(programBuilder + 0x3f0) + 0x18),*(undefined4 *)(programBuilder + 0x70),&DAT_001dbd04,constFile,fogParamConstReg,&selectArrA0,&DAT_001fa5e8,emit6Src1File,emit6Src1Index,emit6Src1Select,&DAT_001fa5e8);
+        ffvpFreeTempRegister(programBuilder,tempA);
         return 0;
       }
-      puVar2 = (undefined4 *)(param_1 + 0x58c);
-      iVarS5 = *(int *)((int)*(int *)((int)param_1 + 1004) + 0);
-      iVarS6 = *(int *)((int)*(int *)((int)param_1 + 980) + 4836);
-      iVarS7 = &local_b8;
-      iVarS13 = *(int *)((int)*(int *)((int)param_1 + 1004) + 0);
-      iVarS14 = local_a4;
-      iVarS15 = &local_b8;
-      (**(code **)(((unsigned char *)0x000012e4) + iVar8))(param_1,a1,a2,puVar2,a4,uVar4,&local_c8,&DAT_001fa5e8,iVarS13,iVarS14,iVarS15,&DAT_001fa5e8);
-      ffvpFreeTempRegister(param_1,auStack_a8);
-      uVar4 = a2;
-      if (-1 < *(int *)(iVar8 + 0x44)) {
-        uVar4 = *(undefined4 *)(param_1 + 0x70);
-        puVar2 = &DAT_001dbd44;
-        a1 = *(undefined4 *)(*(int *)(param_1 + 0x3f0) + 0x18);
+      fogMask = (undefined4 *)(programBuilder + 0x58c);
+      deadSrcTempFileB = *(int *)((int)*(int *)((int)programBuilder + 1004) + 0);
+      deadEmitFnSlotB = *(int *)((int)*(int *)((int)programBuilder + 980) + 4836);
+      deadSelectPtrB = &selectArrB0;
+      emit7Src1File = *(int *)((int)*(int *)((int)programBuilder + 1004) + 0);
+      emit7Src1Index = tempAReg;
+      emit7Src1Select = &selectArrB0;
+      (**(code **)(((unsigned char *)0x000012e4) + glCtxB))(programBuilder,dstFile,fogFactorReg,fogMask,constFile,fogParamConstReg,&selectArrA0,&DAT_001fa5e8,emit7Src1File,emit7Src1Index,emit7Src1Select,&DAT_001fa5e8);
+      ffvpFreeTempRegister(programBuilder,tempA);
+      fogDstReg = fogFactorReg;
+      if (-1 < *(int *)(glCtxB + 0x44)) {
+        fogDstReg = *(undefined4 *)(programBuilder + 0x70);
+        fogMask = &DAT_001dbd44;
+        dstFile = *(undefined4 *)(*(int *)(programBuilder + 0x3f0) + 0x18);
       }
-      iVarS9 = &DAT_001dbdb4;
-      (**(code **)(((unsigned char *)0x00001328) + iVar8))
-                (param_1,a1,uVar4,puVar2,uVar9,a2,param_1 + 0x59c,&DAT_001fa5e8,uVar9,a2,iVarS9,&DAT_001fa5e8);
+      emit8Src1Select = &DAT_001dbdb4;
+      (**(code **)(((unsigned char *)0x00001328) + glCtxB))
+                (programBuilder,dstFile,fogDstReg,fogMask,fogCoordFile,fogFactorReg,programBuilder + 0x59c,&DAT_001fa5e8,fogCoordFile,fogFactorReg,emit8Src1Select,&DAT_001fa5e8);
       return 0;
     }
   }
   return 7;
 }
 
-/* FUN_0009af00 @ 0x9af00 (172 bytes) */
-int FUN_0009af00(param_1)
+/* ffvpPrepareFogLinear @ 0x9af00 (172 bytes) */
+int ffvpPrepareFogLinear(param_1)
   int param_1;
 {
   undefined4 uVar1;
@@ -4367,289 +4377,296 @@ int FUN_0009af00(param_1)
     return 3;
   }
   *(undefined1 *)(*(int *)(param_1 + 0x3d4) + 0x12e) = 0;
-  uVar1 = ((int (*)())FUN_0009aa00)(param_1);
+  uVar1 = ((int (*)())ffvpEmitFogLinear)(param_1);
   return uVar1;
 }
 
-/* FUN_0009afc0 @ 0x9afc0 (1084 bytes) */
-int FUN_0009afc0(param_1)
-  int param_1;
+/* ffvpEmitFogExp @ 0x9afc0 (1084 bytes) */
+int ffvpEmitFogExp(programBuilder)
+  int programBuilder;
 {
-  undefined4 uVar1;
-  int iVar2;
-  undefined4 *puVar3;
-  int iVar4;
-  undefined4 a4;
-  undefined4 a5;
-  undefined4 uVar5;
-  undefined4 uVar6;
-  undefined4 uVar7;
-  int iVar8;
-  undefined4 a1;
-  undefined4 uVar9;
-  int iVar10;
-  undefined1 auStack_a8 [4];
-  undefined4 local_a4;
-  undefined1 auStack_a0 [16];
-  undefined1 auStack_90 [16];
-  undefined1 auStack_80 [4];
-  undefined4 local_7c;
-  int iVarS1;
-  int iVarS2;
-  int iVarS3;
-  int iVarS4;
+  undefined4 *fogMask;
+  undefined4 *fogCoordSelect;
+  int stateBlock;
+  int allocStatus;
+  undefined4 fogTempRegCopy;
+  int fogCoordComponents;
+  undefined4 *fileTable;
+  int fogCoordReg;
+  undefined4 constFile;
+  undefined4 fogParamConstReg;
+  undefined4 dstTempFile;
+  undefined4 srcTempFile;
+  undefined4 fogDstReg;
+  int glCtx;
+  undefined4 dstFile;
+  undefined4 fogCoordFile;
+  int glCtxB;
+  undefined1 tempA [4];
+  undefined4 tempAReg;
+  undefined1 tempAMask [16];
+  undefined1 tempASelect0 [16];
+  undefined1 tempB [4];
+  undefined4 tempBReg;
+  int emit3Src1Select;
+  int emit6Src1File;
+  int emit6Src1Select;
+  int emit5Src1Negate;
   
-  iVar10 = *(int *)(param_1 + 0x3d4);
-  if (*(int *)(param_1 + 0x588) != -1) {
+  glCtxB = *(int *)(programBuilder + 0x3d4);
+  if (*(int *)(programBuilder + 0x588) != -1) {
     return 0;
   }
-  puVar3 = *(undefined4 **)(param_1 + 0x3ec);
-  a5 = *(undefined4 *)(param_1 + 0x330);
-  a1 = **(undefined4 **)(param_1 + 0x3f0);
-  a4 = puVar3[2];
-  if (*(short *)(((unsigned char *)0x00002e06) + *(int *)(*(int *)(iVar10 + 4) + 0x10)) == -0x7bae) {
-    iVar4 = *(int *)(param_1 + 0x3f8);
-    if (iVar4 == -1) {
-      if ((*(uint *)(((unsigned char *)0x000013c0) + iVar10) & 4) == 0) {
-        ffvpEmitEyePositionDp4(param_1);
+  fileTable = *(undefined4 **)(programBuilder + 0x3ec);
+  fogParamConstReg = *(undefined4 *)(programBuilder + 0x330);
+  dstFile = **(undefined4 **)(programBuilder + 0x3f0);
+  constFile = fileTable[2];
+  if (*(short *)(((unsigned char *)0x00002e06) + *(int *)(*(int *)(glCtxB + 4) + 0x10)) == -0x7bae) {
+    fogCoordReg = *(int *)(programBuilder + 0x3f8);
+    if (fogCoordReg == -1) {
+      if ((*(uint *)(((unsigned char *)0x000013c0) + glCtxB) & 4) == 0) {
+        ffvpEmitEyePositionDp4(programBuilder);
       }
       else {
-        ffvpEmitEyePositionMad(param_1);
+        ffvpEmitEyePositionMad(programBuilder);
       }
-      iVar4 = *(int *)(param_1 + 0x3f8);
-      if (iVar4 == -1) {
+      fogCoordReg = *(int *)(programBuilder + 0x3f8);
+      if (fogCoordReg == -1) {
         return 2;
       }
-      puVar3 = *(undefined4 **)(param_1 + 0x3ec);
+      fileTable = *(undefined4 **)(programBuilder + 0x3ec);
     }
-    uVar9 = *puVar3;
-    puVar3 = &DAT_001dbcf4;
+    fogCoordFile = *fileTable;
+    fogCoordSelect = &DAT_001dbcf4;
   }
   else {
-    iVar2 = *(int *)(param_1 + 0x54);
-    uVar9 = puVar3[1];
-    iVar4 = *(int *)(param_1 + 0x50);
-    if (iVar2 == 1) {
-      puVar3 = &DAT_001dbce4;
+    fogCoordComponents = *(int *)(programBuilder + 0x54);
+    fogCoordFile = fileTable[1];
+    fogCoordReg = *(int *)(programBuilder + 0x50);
+    if (fogCoordComponents == 1) {
+      fogCoordSelect = &DAT_001dbce4;
     }
-    else if (iVar2 == 0) {
-      puVar3 = &DAT_001fa5f8;
+    else if (fogCoordComponents == 0) {
+      fogCoordSelect = &DAT_001fa5f8;
     }
-    else if (iVar2 == 2) {
-      puVar3 = &DAT_001dbcf4;
+    else if (fogCoordComponents == 2) {
+      fogCoordSelect = &DAT_001dbcf4;
     }
-    else if (iVar2 == 3) {
-      puVar3 = &DAT_001dbcd4;
+    else if (fogCoordComponents == 3) {
+      fogCoordSelect = &DAT_001dbcd4;
     }
     else {
-      puVar3 = &DAT_001dbd14;
+      fogCoordSelect = &DAT_001dbd14;
     }
   }
-  iVar2 = ffvpAllocTempRegister(param_1,2,param_1 + 0x584);
-  if (iVar2 == 0) {
-    uVar7 = *(undefined4 *)(param_1 + 0x588);
-    iVar2 = ffvpAllocTempRegister(param_1,2,auStack_a8);
-    uVar1 = local_a4;
-    if (iVar2 == 0) {
-      iVar8 = *(int *)(param_1 + 0x3d4);
-      iVar2 = *(int *)(*(int *)(iVar8 + 4) + 0x10);
-      if ((*(short *)(((unsigned char *)0x00002e06) + iVar2) == -0x7bae) &&
-         (*(short *)(((unsigned char *)0x00002e08) + iVar2) != -0x7aa4)) {
-        if (*(short *)(((unsigned char *)0x00002e08) + iVar2) == -0x7aa5) {
-          uVar5 = **(undefined4 **)(param_1 + 0x3f0);
-          uVar6 = **(undefined4 **)(param_1 + 0x3ec);
-          iVar2 = ffvpAllocTempRegister(param_1,1,auStack_80);
-          if (iVar2 != 0) {
+  allocStatus = ffvpAllocTempRegister(programBuilder,2,programBuilder + 0x584);
+  if (allocStatus == 0) {
+    fogDstReg = *(undefined4 *)(programBuilder + 0x588);
+    allocStatus = ffvpAllocTempRegister(programBuilder,2,tempA);
+    fogTempRegCopy = tempAReg;
+    if (allocStatus == 0) {
+      glCtx = *(int *)(programBuilder + 0x3d4);
+      stateBlock = *(int *)(*(int *)(glCtx + 4) + 0x10);
+      if ((*(short *)(((unsigned char *)0x00002e06) + stateBlock) == -0x7bae) &&
+         (*(short *)(((unsigned char *)0x00002e08) + stateBlock) != -0x7aa4)) {
+        if (*(short *)(((unsigned char *)0x00002e08) + stateBlock) == -0x7aa5) {
+          dstTempFile = **(undefined4 **)(programBuilder + 0x3f0);
+          srcTempFile = **(undefined4 **)(programBuilder + 0x3ec);
+          allocStatus = ffvpAllocTempRegister(programBuilder,1,tempB);
+          if (allocStatus != 0) {
             return 7;
           }
-          (**(code **)(((unsigned char *)0x000012e4) + iVar8))
-                    (param_1,uVar5,local_7c,&DAT_001dbd04,uVar9,iVar4,&DAT_001dbd74,&DAT_001fa5e8,uVar9,iVar4,&DAT_001dbd74,&DAT_001fa5e8);
-          (**(code **)(((unsigned char *)0x00001318) + iVar8))
-                    (param_1,uVar5,local_7c,&DAT_001dbd64,uVar6,local_7c,&DAT_001fa5f8,&DAT_001fa5e8
+          (**(code **)(((unsigned char *)0x000012e4) + glCtx))
+                    (programBuilder,dstTempFile,tempBReg,&DAT_001dbd04,fogCoordFile,fogCoordReg,&DAT_001dbd74,&DAT_001fa5e8,fogCoordFile,fogCoordReg,&DAT_001dbd74,&DAT_001fa5e8);
+          (**(code **)(((unsigned char *)0x00001318) + glCtx))
+                    (programBuilder,dstTempFile,tempBReg,&DAT_001dbd64,srcTempFile,tempBReg,&DAT_001fa5f8,&DAT_001fa5e8
                     );
-          iVarS1 = ((unsigned char *)&DAT_001dbdc0 + 244);
-          (**(code **)(((unsigned char *)0x000012e4) + iVar8))
-                    (param_1,a1,uVar1,auStack_a0,uVar6,local_7c,&DAT_001dbec4,&DAT_001fa5e8,uVar6,local_7c,iVarS1,&DAT_001fa5e8);
-          ffvpFreeTempRegister(param_1,auStack_80);
+          emit3Src1Select = ((unsigned char *)&DAT_001dbdc0 + 244);
+          (**(code **)(((unsigned char *)0x000012e4) + glCtx))
+                    (programBuilder,dstFile,fogTempRegCopy,tempAMask,srcTempFile,tempBReg,&DAT_001dbec4,&DAT_001fa5e8,srcTempFile,tempBReg,emit3Src1Select,&DAT_001fa5e8);
+          ffvpFreeTempRegister(programBuilder,tempB);
         }
         else {
-          (**(code **)(((unsigned char *)0x000012e8) + iVar8))
-                    (param_1,a1,local_a4,auStack_a0,uVar9,iVar4,puVar3,&DAT_001dbd94);
+          (**(code **)(((unsigned char *)0x000012e8) + glCtx))
+                    (programBuilder,dstFile,tempAReg,tempAMask,fogCoordFile,fogCoordReg,fogCoordSelect,&DAT_001dbd94);
         }
       }
       else {
-        iVarS4 = &DAT_001dbd94;
-        (**(code **)(((unsigned char *)0x00001304) + iVar8))
-                  (param_1,a1,local_a4,auStack_a0,uVar9,iVar4,puVar3,&DAT_001fa5e8,uVar9,iVar4,puVar3,iVarS4);
+        emit5Src1Negate = &DAT_001dbd94;
+        (**(code **)(((unsigned char *)0x00001304) + glCtx))
+                  (programBuilder,dstFile,tempAReg,tempAMask,fogCoordFile,fogCoordReg,fogCoordSelect,&DAT_001fa5e8,fogCoordFile,fogCoordReg,fogCoordSelect,emit5Src1Negate);
       }
-      uVar9 = **(undefined4 **)(param_1 + 0x3ec);
-      iVarS2 = *(int *)((int)*(int *)((int)param_1 + 1004) + 0);
-      iVarS3 = &auStack_90;
-      (**(code **)(((unsigned char *)0x000012ec) + iVar10))
-                (param_1,a1,local_a4,auStack_a0,a4,a5,&DAT_001dbcf4,&DAT_001fa5e8,iVarS2,local_a4,iVarS3,&DAT_001fa5e8);
-      if (*(int *)(param_1 + 0x3d8) == 0) {
-        puVar3 = (undefined4 *)(param_1 + 0x58c);
-        if (-1 < *(int *)(iVar10 + 0x44)) {
-          uVar7 = *(undefined4 *)(param_1 + 0x70);
-          puVar3 = &DAT_001dbd44;
-          a1 = *(undefined4 *)(*(int *)(param_1 + 0x3f0) + 0x18);
+      fogCoordFile = **(undefined4 **)(programBuilder + 0x3ec);
+      emit6Src1File = *(int *)((int)*(int *)((int)programBuilder + 1004) + 0);
+      emit6Src1Select = &tempASelect0;
+      (**(code **)(((unsigned char *)0x000012ec) + glCtxB))
+                (programBuilder,dstFile,tempAReg,tempAMask,constFile,fogParamConstReg,&DAT_001dbcf4,&DAT_001fa5e8,emit6Src1File,tempAReg,emit6Src1Select,&DAT_001fa5e8);
+      if (*(int *)(programBuilder + 0x3d8) == 0) {
+        fogMask = (undefined4 *)(programBuilder + 0x58c);
+        if (-1 < *(int *)(glCtxB + 0x44)) {
+          fogDstReg = *(undefined4 *)(programBuilder + 0x70);
+          fogMask = &DAT_001dbd44;
+          dstFile = *(undefined4 *)(*(int *)(programBuilder + 0x3f0) + 0x18);
         }
       }
       else {
-        uVar7 = *(undefined4 *)(param_1 + 0x70);
-        puVar3 = &DAT_001dbd04;
-        a1 = *(undefined4 *)(*(int *)(param_1 + 0x3f0) + 0x18);
+        fogDstReg = *(undefined4 *)(programBuilder + 0x70);
+        fogMask = &DAT_001dbd04;
+        dstFile = *(undefined4 *)(*(int *)(programBuilder + 0x3f0) + 0x18);
       }
-      (**(code **)(((unsigned char *)0x00001320) + iVar10))
-                (param_1,a1,uVar7,puVar3,uVar9,local_a4,auStack_90,&DAT_001fa5e8);
-      ffvpFreeTempRegister(param_1,auStack_a8);
+      (**(code **)(((unsigned char *)0x00001320) + glCtxB))
+                (programBuilder,dstFile,fogDstReg,fogMask,fogCoordFile,tempAReg,tempASelect0,&DAT_001fa5e8);
+      ffvpFreeTempRegister(programBuilder,tempA);
       return 0;
     }
   }
   return 7;
 }
 
-/* FUN_0009b430 @ 0x9b430 (848 bytes) */
-int FUN_0009b430(param_1, param_2)
-  int param_1;
-  int param_2;
+/* ffvpEmitColorOutputs @ 0x9b430 (848 bytes) */
+int ffvpEmitColorOutputs(programBuilder, noLights)
+  int programBuilder;
+  int noLights;
 {
-  short sVar1;
-  int iVar2;
-  undefined4 uVar3;
-  int iVar4;
+  undefined4 secondarySrcFile;
+  undefined4 secondaryOutFile;
+  undefined4 srcTempFile;
+  short fogMode;
+  int fogFactorReg;
+  undefined4 status;
+  int secondaryOutReg;
   uint loopIndex;
-  int iVar6;
-  undefined4 uVar7;
-  int iVar8;
-  int iVar9;
-  int iVar10;
-  int iVar11;
-  undefined4 uVar12;
-  undefined *puVar13;
-  undefined4 uVar14;
-  undefined4 local_88;
-  undefined4 local_84;
-  undefined4 local_80;
-  undefined4 local_7c;
-  undefined4 local_78;
-  int local_74;
-  undefined *local_68;
-  undefined *local_64;
-  undefined4 *local_60;
-  undefined *local_5c;
-  int iVarS1;
-  int iVarS2;
-  int iVarS3;
-  int iVarS4;
-  int iVarS5;
+  int stateBlock;
+  undefined4 secondaryColorReg;
+  int builderRegCursor;
+  int ctxWordCursor;
+  int colorSlotCursor;
+  int glCtx;
+  undefined4 primaryColorReg;
+  undefined *selectPtr;
+  undefined4 primaryOutReg;
+  undefined4 materialFile;
+  undefined4 materialReg;
+  undefined4 materialSelect0;
+  undefined4 materialSelect1;
+  undefined4 materialSelect2;
+  int materialSelect3;
+  undefined *constBase68;
+  undefined *constBase64;
+  undefined4 *materialSelectPtr;
+  undefined *constBase5c;
+  int emit1Src1File;
+  int emit1Src1Index;
+  int emit1Src1Select;
+  int emit2Src1File;
+  int emit2Src1Index;
   
-  uVar3 = 1;
-  if (param_1 != 0) {
-    iVar11 = *(int *)(param_1 + 0x3d4);
-    local_60 = &local_80;
+  status = 1;
+  if (programBuilder != 0) {
+    glCtx = *(int *)(programBuilder + 0x3d4);
+    materialSelectPtr = &materialSelect0;
     loopIndex = 0;
-    uVar3 = **(undefined4 **)(param_1 + 0x3ec);
-    iVar6 = *(int *)(*(int *)(iVar11 + 4) + 0x10);
-    local_68 = &DAT_001db440;
-    local_64 = &DAT_001db440;
-    local_5c = &DAT_001db440;
-    iVar8 = param_1;
-    iVar9 = iVar11;
-    iVar10 = param_1;
+    srcTempFile = **(undefined4 **)(programBuilder + 0x3ec);
+    stateBlock = *(int *)(*(int *)(glCtx + 4) + 0x10);
+    constBase68 = &DAT_001db440;
+    constBase64 = &DAT_001db440;
+    constBase5c = &DAT_001db440;
+    builderRegCursor = programBuilder;
+    ctxWordCursor = glCtx;
+    colorSlotCursor = programBuilder;
     do {
-      uVar12 = *(undefined4 *)(iVar10 + 0x5b0);
-      uVar7 = *(undefined4 *)(iVar10 + 0x600);
-      uVar14 = *(undefined4 *)(iVar8 + 0x74);
-      ffvpResolveMaterialSource(param_1,*(undefined4 *)(iVar9 + 0x280),2,&local_88,&local_84);
-      local_80 = 5;
-      local_7c = 5;
-      local_78 = 5;
-      local_74 = 3;
-      if (param_2 == 0) {
-        iVarS1 = local_88;
-        iVarS2 = local_84;
-        iVarS3 = local_60;
-        (**(code **)(((unsigned char *)0x000012ec) + iVar11))
-                  (param_1,*(undefined4 *)(*(int *)(param_1 + 0x3f0) + 0xc),uVar14,local_68 + 0x8e4,
-                   uVar3,uVar12,local_64 + 0x984,&DAT_001fa5e8,iVarS1,iVarS2,iVarS3,&DAT_001fa5e8);
+      primaryColorReg = *(undefined4 *)(colorSlotCursor + 0x5b0);
+      secondaryColorReg = *(undefined4 *)(colorSlotCursor + 0x600);
+      primaryOutReg = *(undefined4 *)(builderRegCursor + 0x74);
+      ffvpResolveMaterialSource(programBuilder,*(undefined4 *)(ctxWordCursor + 0x280),2,&materialFile,&materialReg);
+      materialSelect0 = 5;
+      materialSelect1 = 5;
+      materialSelect2 = 5;
+      materialSelect3 = 3;
+      if (noLights == 0) {
+        emit1Src1File = materialFile;
+        emit1Src1Index = materialReg;
+        emit1Src1Select = materialSelectPtr;
+        (**(code **)(((unsigned char *)0x000012ec) + glCtx))
+                  (programBuilder,*(undefined4 *)(*(int *)(programBuilder + 0x3f0) + 0xc),primaryOutReg,constBase68 + 0x8e4,
+                   srcTempFile,primaryColorReg,constBase64 + 0x984,&DAT_001fa5e8,emit1Src1File,emit1Src1Index,emit1Src1Select,&DAT_001fa5e8);
       }
-      if ((((*(short *)(((unsigned char *)0x00002d48) + iVar6) == -0x7e06) && (*(char *)(iVar11 + 0x12d) != '\0')
-           ) || (((*(uint *)(iVar11 + 0x44) & 0x1000000) != 0 && (*(char *)(iVar11 + 0x121) == '\0')
-                 ))) || ((*(uint *)(iVar11 + 0x44) & 0xa10000) != 0)) {
-        iVar4 = *(int *)(iVar8 + 0x7c);
-        uVar12 = *(undefined4 *)(*(int *)(param_1 + 0x3f0) + 0x10);
-        ffvpResolveMaterialSource(param_1,*(undefined4 *)(iVar9 + 0x288),3,&local_88,&local_84);
-        if (((*(short *)(((unsigned char *)0x00002d48) + iVar6) != -0x7e06) ||
-            (*(char *)(iVar11 + 0x12d) == '\0')) || (param_2 == 0)) {
-          puVar13 = local_5c + 0x964;
-          uVar7 = local_84;
-          uVar14 = local_88;
+      if ((((*(short *)(((unsigned char *)0x00002d48) + stateBlock) == -0x7e06) && (*(char *)(glCtx + 0x12d) != '\0')
+           ) || (((*(uint *)(glCtx + 0x44) & 0x1000000) != 0 && (*(char *)(glCtx + 0x121) == '\0')
+                 ))) || ((*(uint *)(glCtx + 0x44) & 0xa10000) != 0)) {
+        secondaryOutReg = *(int *)(builderRegCursor + 0x7c);
+        secondaryOutFile = *(undefined4 *)(*(int *)(programBuilder + 0x3f0) + 0x10);
+        ffvpResolveMaterialSource(programBuilder,*(undefined4 *)(ctxWordCursor + 0x288),3,&materialFile,&materialReg);
+        if (((*(short *)(((unsigned char *)0x00002d48) + stateBlock) != -0x7e06) ||
+            (*(char *)(glCtx + 0x12d) == '\0')) || (noLights == 0)) {
+          selectPtr = constBase5c + 0x964;
+          secondaryColorReg = materialReg;
+          secondarySrcFile = materialFile;
         }
         else {
-          puVar13 = local_64 + 0x984;
-          uVar14 = uVar3;
+          selectPtr = constBase64 + 0x984;
+          secondarySrcFile = srcTempFile;
         }
-        /* stack words 9/10 of the last call: the stock (0x9b6fc/0x9b708) passes (local_88, local_84) unless the two arms below replace them */
-        iVarS4 = local_88;
-        iVarS5 = local_84;
-        if ((((*(uint *)(iVar11 + 0x44) & 0x1000000) != 0) && (*(char *)(iVar11 + 0x121) == '\0'))
-           && ((*(int *)(param_1 + 0x3d8) == 0 && (iVar4 == *(int *)(param_1 + 0x70))))) {
-          if (*(char *)(iVar11 + 0x12e) == '\0') {
-            if (*(int *)(param_1 + 0x588) == -1) {
-              sVar1 = *(short *)(((unsigned char *)0x00002e04) + iVar6);
-              if (sVar1 == 0x801) {
-                ffvpEmitFogExp2(param_1);
-                iVar2 = *(int *)(param_1 + 0x588);
+        /* stack words 9/10 of the last call: the stock (0x9b6fc/0x9b708) passes (materialFile, materialReg) unless the two arms below replace them */
+        emit2Src1File = materialFile;
+        emit2Src1Index = materialReg;
+        if ((((*(uint *)(glCtx + 0x44) & 0x1000000) != 0) && (*(char *)(glCtx + 0x121) == '\0'))
+           && ((*(int *)(programBuilder + 0x3d8) == 0 && (secondaryOutReg == *(int *)(programBuilder + 0x70))))) {
+          if (*(char *)(glCtx + 0x12e) == '\0') {
+            if (*(int *)(programBuilder + 0x588) == -1) {
+              fogMode = *(short *)(((unsigned char *)0x00002e04) + stateBlock);
+              if (fogMode == 0x801) {
+                ffvpEmitFogExp2(programBuilder);
+                fogFactorReg = *(int *)(programBuilder + 0x588);
               }
-              else if (sVar1 == 0x2601) {
-                ((int (*)())FUN_0009aa00)(param_1);
-                iVar2 = *(int *)(param_1 + 0x588);
+              else if (fogMode == 0x2601) {
+                ((int (*)())ffvpEmitFogLinear)(programBuilder);
+                fogFactorReg = *(int *)(programBuilder + 0x588);
               }
               else {
-                if (sVar1 != 0x800) {
+                if (fogMode != 0x800) {
                   return 2;
                 }
-                ((int (*)())FUN_0009afc0)(param_1);
-                iVar2 = *(int *)(param_1 + 0x588);
+                ((int (*)())ffvpEmitFogExp)(programBuilder);
+                fogFactorReg = *(int *)(programBuilder + 0x588);
               }
-              if (iVar2 == -1) {
+              if (fogFactorReg == -1) {
                 return 2;
               }
             }
-            local_74 = *(int *)(param_1 + 0x5a8);
-            iVarS4 = uVar3;
-            iVarS5 = *(int *)(param_1 + 0x588);
+            materialSelect3 = *(int *)(programBuilder + 0x5a8);
+            emit2Src1File = srcTempFile;
+            emit2Src1Index = *(int *)(programBuilder + 0x588);
           }
           else {
-            iVarS4 = (*(int **)(param_1 + 0x3ec))[1];
-            iVarS5 = *(int *)(param_1 + 0x50);
-            local_74 = *(int *)(param_1 + 0x54);
-            if (local_74 != 1) {
-              if (local_74 == 0) {
-                local_74 = 0;
+            emit2Src1File = (*(int **)(programBuilder + 0x3ec))[1];
+            emit2Src1Index = *(int *)(programBuilder + 0x50);
+            materialSelect3 = *(int *)(programBuilder + 0x54);
+            if (materialSelect3 != 1) {
+              if (materialSelect3 == 0) {
+                materialSelect3 = 0;
               }
-              else if ((local_74 != 2) && (local_74 != 3)) {
-                local_74 = 3;
+              else if ((materialSelect3 != 2) && (materialSelect3 != 3)) {
+                materialSelect3 = 3;
               }
             }
           }
         }
-        (**(code **)(((unsigned char *)0x000012ec) + iVar11))
-                  (param_1,uVar12,iVar4,local_68 + 0x8e4,uVar14,uVar7,puVar13,&DAT_001fa5e8,iVarS4,iVarS5,local_60,&DAT_001fa5e8);
+        (**(code **)(((unsigned char *)0x000012ec) + glCtx))
+                  (programBuilder,secondaryOutFile,secondaryOutReg,constBase68 + 0x8e4,secondarySrcFile,secondaryColorReg,selectPtr,&DAT_001fa5e8,emit2Src1File,emit2Src1Index,materialSelectPtr,&DAT_001fa5e8);
       }
       loopIndex = loopIndex + 1;
-      iVar10 = iVar10 + 0x28;
-      iVar8 = iVar8 + 4;
-      iVar9 = iVar9 + 4;
-    } while (loopIndex <= (byte)((unsigned char *)0x00002d48)[iVar6 + 4]);
-    uVar3 = 0;
+      colorSlotCursor = colorSlotCursor + 0x28;
+      builderRegCursor = builderRegCursor + 4;
+      ctxWordCursor = ctxWordCursor + 4;
+    } while (loopIndex <= (byte)((unsigned char *)0x00002d48)[stateBlock + 4]);
+    status = 0;
   }
-  return uVar3;
+  return status;
 }
 
-/* FUN_0009b790 @ 0x9b790 (172 bytes) */
-int FUN_0009b790(param_1)
+/* ffvpPrepareFogExp @ 0x9b790 (172 bytes) */
+int ffvpPrepareFogExp(param_1)
   int param_1;
 {
   undefined4 uVar1;
@@ -4673,95 +4690,95 @@ int FUN_0009b790(param_1)
     return 3;
   }
   *(undefined1 *)(*(int *)(param_1 + 0x3d4) + 0x12e) = 0;
-  uVar1 = ((int (*)())FUN_0009afc0)(param_1);
+  uVar1 = ((int (*)())ffvpEmitFogExp)(param_1);
   return uVar1;
 }
 
-/* FUN_0009b850 @ 0x9b850 (892 bytes) */
-int FUN_0009b850(param_1, param_2)
-  int param_1;
-  uint param_2;
+/* ffvpEmitFogTexCoord @ 0x9b850 (892 bytes) */
+int ffvpEmitFogTexCoord(programBuilder, texUnit)
+  int programBuilder;
+  uint texUnit;
 {
-  int iVar1;
-  undefined4 uVar2;
-  undefined4 uVar3;
-  undefined4 uVar4;
-  int iVar5;
-  undefined4 uVar6;
-  int iVar7;
-  int iVar8;
+  int stateBlock;
+  undefined4 dstTempFile;
+  undefined4 srcTempFile;
+  undefined4 srcTempFileB;
+  int eyePositionReg;
+  undefined4 texOutFile;
+  int texOutReg;
+  int glCtx;
   uint local_78;
   undefined4 local_74;
   undefined4 local_70;
   undefined4 local_6c;
-  undefined1 auStack_68 [4];
-  undefined4 local_64;
-  int iVarS1;
-  int iVarS2;
+  undefined1 tempA [4];
+  undefined4 tempAReg;
+  int emit4Src1Select;
+  int emit1Src1Negate;
   
-  if (param_1 == 0) {
+  if (programBuilder == 0) {
     return 1;
   }
-  if (param_2 < 8) {
-    iVar7 = *(int *)(param_2 * 4 + param_1 + 0x84);
-    if (iVar7 != -1) {
-      iVar8 = *(int *)(param_1 + 0x3d4);
-      uVar6 = *(undefined4 *)(*(int *)(param_1 + 0x3f0) + 0x14);
+  if (texUnit < 8) {
+    texOutReg = *(int *)(texUnit * 4 + programBuilder + 0x84);
+    if (texOutReg != -1) {
+      glCtx = *(int *)(programBuilder + 0x3d4);
+      texOutFile = *(undefined4 *)(*(int *)(programBuilder + 0x3f0) + 0x14);
       local_74 = DAT_001dbda8;
       local_78 = DAT_001dbda4;
       local_70 = DAT_001dbdac;
       local_6c = DAT_001dbdb0;
-      if (*(short *)(((unsigned char *)0x00002e06) + *(int *)(*(int *)(iVar8 + 4) + 0x10)) == -0x7bae) {
-        iVar5 = *(int *)(param_1 + 0x3f8);
-        if (iVar5 != -1) {
+      if (*(short *)(((unsigned char *)0x00002e06) + *(int *)(*(int *)(glCtx + 4) + 0x10)) == -0x7bae) {
+        eyePositionReg = *(int *)(programBuilder + 0x3f8);
+        if (eyePositionReg != -1) {
 LAB_0009b914:
-          uVar4 = **(undefined4 **)(param_1 + 0x3ec);
+          srcTempFileB = **(undefined4 **)(programBuilder + 0x3ec);
           local_78 = 2;
-          iVar1 = *(int *)(*(int *)(iVar8 + 4) + 0x10);
-          if (*(short *)(((unsigned char *)0x00002e06) + iVar1) != -0x7bae) {
-            iVarS2 = &DAT_001dbd94;
-            (**(code **)(((unsigned char *)0x00001304) + iVar8))
-                      (param_1,uVar6,iVar7,&DAT_001dbd24,uVar4,iVar5,&local_78,&DAT_001fa5e8,uVar4,iVar5,&local_78,iVarS2);
+          stateBlock = *(int *)(*(int *)(glCtx + 4) + 0x10);
+          if (*(short *)(((unsigned char *)0x00002e06) + stateBlock) != -0x7bae) {
+            emit1Src1Negate = &DAT_001dbd94;
+            (**(code **)(((unsigned char *)0x00001304) + glCtx))
+                      (programBuilder,texOutFile,texOutReg,&DAT_001dbd24,srcTempFileB,eyePositionReg,&local_78,&DAT_001fa5e8,srcTempFileB,eyePositionReg,&local_78,emit1Src1Negate);
             return 0;
           }
-          if (*(short *)(((unsigned char *)0x00002e08) + iVar1) == -0x7aa5) {
-            uVar3 = **(undefined4 **)(param_1 + 0x3ec);
-            uVar2 = **(undefined4 **)(param_1 + 0x3f0);
-            iVar1 = ffvpAllocTempRegister(param_1,1,auStack_68);
-            if (iVar1 != 0) {
+          if (*(short *)(((unsigned char *)0x00002e08) + stateBlock) == -0x7aa5) {
+            srcTempFile = **(undefined4 **)(programBuilder + 0x3ec);
+            dstTempFile = **(undefined4 **)(programBuilder + 0x3f0);
+            stateBlock = ffvpAllocTempRegister(programBuilder,1,tempA);
+            if (stateBlock != 0) {
               return 7;
             }
-            (**(code **)(((unsigned char *)0x000012e4) + iVar8))
-                      (param_1,uVar2,local_64,&DAT_001dbd04,uVar4,iVar5,&DAT_001dbd74,&DAT_001fa5e8,uVar4,iVar5,&DAT_001dbd74,&DAT_001fa5e8)
+            (**(code **)(((unsigned char *)0x000012e4) + glCtx))
+                      (programBuilder,dstTempFile,tempAReg,&DAT_001dbd04,srcTempFileB,eyePositionReg,&DAT_001dbd74,&DAT_001fa5e8,srcTempFileB,eyePositionReg,&DAT_001dbd74,&DAT_001fa5e8)
             ;
-            (**(code **)(((unsigned char *)0x00001318) + iVar8))
-                      (param_1,uVar2,local_64,&DAT_001dbd64,uVar3,local_64,&DAT_001fa5f8,
+            (**(code **)(((unsigned char *)0x00001318) + glCtx))
+                      (programBuilder,dstTempFile,tempAReg,&DAT_001dbd64,srcTempFile,tempAReg,&DAT_001fa5f8,
                        &DAT_001fa5e8);
-            iVarS1 = ((unsigned char *)&DAT_001dbdc0 + 244);
-            (**(code **)(((unsigned char *)0x000012e4) + iVar8))
-                      (param_1,uVar6,iVar7,&DAT_001dbd24,uVar3,local_64,&DAT_001dbec4,&DAT_001fa5e8,uVar3,local_64,iVarS1,&DAT_001fa5e8)
+            emit4Src1Select = ((unsigned char *)&DAT_001dbdc0 + 244);
+            (**(code **)(((unsigned char *)0x000012e4) + glCtx))
+                      (programBuilder,texOutFile,texOutReg,&DAT_001dbd24,srcTempFile,tempAReg,&DAT_001dbec4,&DAT_001fa5e8,srcTempFile,tempAReg,emit4Src1Select,&DAT_001fa5e8)
             ;
-            ffvpFreeTempRegister(param_1,auStack_68);
+            ffvpFreeTempRegister(programBuilder,tempA);
             return 0;
           }
-          (**(code **)(((unsigned char *)0x000012e8) + iVar8))
-                    (param_1,uVar6,iVar7,&DAT_001dbd24,uVar4,iVar5,&local_78,&DAT_001dbd94);
+          (**(code **)(((unsigned char *)0x000012e8) + glCtx))
+                    (programBuilder,texOutFile,texOutReg,&DAT_001dbd24,srcTempFileB,eyePositionReg,&local_78,&DAT_001dbd94);
           return 0;
         }
-        if ((*(uint *)(((unsigned char *)0x000013c0) + iVar8) & 4) == 0) {
-          ffvpEmitEyePositionDp4(param_1);
+        if ((*(uint *)(((unsigned char *)0x000013c0) + glCtx) & 4) == 0) {
+          ffvpEmitEyePositionDp4(programBuilder);
         }
         else {
-          ffvpEmitEyePositionMad(param_1);
+          ffvpEmitEyePositionMad(programBuilder);
         }
-        iVar5 = *(int *)(param_1 + 0x3f8);
-        if (iVar5 != -1) {
-          iVar8 = *(int *)(param_1 + 0x3d4);
+        eyePositionReg = *(int *)(programBuilder + 0x3f8);
+        if (eyePositionReg != -1) {
+          glCtx = *(int *)(programBuilder + 0x3d4);
           goto LAB_0009b914;
         }
       }
-      else if (*(int *)(param_1 + 0x50) != -1) {
-        local_78 = *(uint *)(param_1 + 0x54);
+      else if (*(int *)(programBuilder + 0x50) != -1) {
+        local_78 = *(uint *)(programBuilder + 0x54);
         if (local_78 < 4) {
           if (local_78 != 1) {
             if (local_78 == 0) {
@@ -4771,26 +4788,26 @@ LAB_0009b914:
               local_78 = 4;
             }
           }
-          (**(code **)(((unsigned char *)0x000012e8) + iVar8))
-                    (param_1,uVar6,iVar7,&DAT_001dbd24,
-                     *(undefined4 *)(*(int *)(param_1 + 0x3ec) + 4),*(int *)(param_1 + 0x50),
+          (**(code **)(((unsigned char *)0x000012e8) + glCtx))
+                    (programBuilder,texOutFile,texOutReg,&DAT_001dbd24,
+                     *(undefined4 *)(*(int *)(programBuilder + 0x3ec) + 4),*(int *)(programBuilder + 0x50),
                      &local_78,&DAT_001fa5e8);
           return 0;
         }
         goto LAB_0009bbb0;
       }
     }
-    uVar6 = 2;
+    texOutFile = 2;
   }
   else {
 LAB_0009bbb0:
-    uVar6 = 3;
+    texOutFile = 3;
   }
-  return uVar6;
+  return texOutFile;
 }
 
-/* FUN_0009bbf0 @ 0x9bbf0 (28 bytes) */
-int FUN_0009bbf0(param_1, param_2, param_3)
+/* vec4StoreAtIndex @ 0x9bbf0 (28 bytes) */
+int vec4StoreAtIndex(param_1, param_2, param_3)
   int param_1;
   undefined8 *param_2;
   int param_3;
@@ -4915,7 +4932,7 @@ int FUN_0009bd60(param_1, param_2)
   *(undefined4 *)(param_1 + 0x13c) = 0;
   *(undefined4 *)(param_1 + 0x148) = 0;
   *(undefined1 *)(param_1 + 0x12d) = 0;
-  *(code **)(((unsigned char *)0x000012cc) + param_1) = FUN_0009bbf0;
+  *(code **)(((unsigned char *)0x000012cc) + param_1) = vec4StoreAtIndex;
   *(code **)(((unsigned char *)0x000012c8) + param_1) = FUN_0009bc10;
   iVar2 = 8;
   iVar1 = param_1;
@@ -4936,334 +4953,343 @@ int FUN_0009bd60(param_1, param_2)
   return;
 }
 
-/* FUN_0009be00 @ 0x9be00 (2216 bytes) */
-int FUN_0009be00(param_1)
-  int param_1;
+/* ffvpAnalyzeLightState @ 0x9be00 (2216 bytes) */
+int ffvpAnalyzeLightState(ctx)
+  int ctx;
 {
-  char cVar1;
-  char cVar2;
-  char cVar3;
-  float fVar4;
-  float fVar5;
-  bool bVar6;
-  float fVar7;
-  undefined4 uVar8;
-  char cVar9;
-  undefined1 uVar11;
-  int iVar10;
-  byte bVar12;
-  int iVar13;
-  undefined4 *puVar14;
-  int iVar15;
-  int iVar16;
-  uint *puVar17;
-  undefined4 uVar18;
-  int iVar19;
-  undefined4 uVar20;
-  uint uVar21;
-  uint *puVar22;
-  uint uVar23;
-  bool bVar24;
-  int iVar25;
-  byte *pbVar26;
-  int iVar27;
-  int iVar28;
+  uint lightMaskCursor;
+  uint lightMaskShifting;
+  undefined4 copyWord0;
+  uint *lightControlCursor;
+  int lightStateOffset;
+  int lightDirtyCursor;
+  int wordOffset;
+  float normalXTemp;
+  char newColorSumFlag;
+  char oldColorSumFlag;
+  char stateFlag24ae;
+  char stateFlag2d4d;
+  float normalYTemp;
+  float lightAmbientX;
+  bool needsLightModelSum;
+  float oneConst;
+  undefined4 colorMaterialLookup;
+  char stateFlag24ad;
+  undefined1 newFlag12c;
+  int controlWordOffset;
+  byte dirtyBits;
+  int lightState;
+  undefined4 *lightCache;
+  int dirtyCursor;
+  int ctxBase124;
+  uint *lightFlagCursor;
+  undefined4 copyWord1;
+  int lightCopyCursor;
+  undefined4 copyWord2;
+  uint dirtyCount;
+  uint *ctxFlags1874Ptr;
+  uint secondaryColorBits;
+  bool secondaryColorNeeded;
+  int lightCacheOffset;
+  byte *lightDirtyPtr;
+  int lightIndex;
+  int stateBlock;
   
-  iVar16 = param_1 + 0x124;
-  cVar1 = *(char *)(param_1 + 0x12f);
-  iVar28 = *(int *)(*(int *)(param_1 + 4) + 0x10);
-  cVar9 = *(char *)(iVar28 + 0x24ad);
-  cVar2 = *(char *)(iVar28 + 0x24ae);
-  if (-1 < *(int *)(param_1 + 0x44)) {
-    if ((*(uint *)(param_1 + 0x8c) & 0xc000000) != 0) {
-      *(char *)(param_1 + 300) = cVar2;
+  ctxBase124 = ctx + 0x124;
+  oldColorSumFlag = *(char *)(ctx + 0x12f);
+  stateBlock = *(int *)(*(int *)(ctx + 4) + 0x10);
+  stateFlag24ad = *(char *)(stateBlock + 0x24ad);
+  stateFlag24ae = *(char *)(stateBlock + 0x24ae);
+  if (-1 < *(int *)(ctx + 0x44)) {
+    if ((*(uint *)(ctx + 0x8c) & 0xc000000) != 0) {
+      *(char *)(ctx + 300) = stateFlag24ae;
       return;
     }
-    *(undefined1 *)(param_1 + 300) = 0;
+    *(undefined1 *)(ctx + 300) = 0;
     return;
   }
-  puVar22 = (uint *)(param_1 + 0x1874);
-  cVar3 = ((unsigned char *)0x00002d48)[iVar28 + 5];
-  bVar24 = *(short *)(((unsigned char *)0x00002d48) + iVar28) == -0x7e06;
-  uVar23 = (uint)bVar24;
-  uVar8 = *(undefined4 *)
+  ctxFlags1874Ptr = (uint *)(ctx + 0x1874);
+  stateFlag2d4d = ((unsigned char *)0x00002d48)[stateBlock + 5];
+  secondaryColorNeeded = *(short *)(((unsigned char *)0x00002d48) + stateBlock) == -0x7e06;
+  secondaryColorBits = (uint)secondaryColorNeeded;
+  colorMaterialLookup = *(undefined4 *)
            (&DAT_001dbed4 +
-           (uint)(byte)((unsigned char *)0x00002d48)[iVar28 + 3] *
-           ((*(ushort *)(((unsigned char *)0x00002d44) + iVar28) & 1 | *(ushort *)(((unsigned char *)0x00002d44) + iVar28) >> 2 & 2)
-           + ((*(ushort *)(((unsigned char *)0x00002d46) + iVar28) >> 8 & 4) +
-             (*(ushort *)(((unsigned char *)0x00002d46) + iVar28) & 0xf)) * 3 + 1) * 4);
-  *(undefined4 *)(param_1 + 0x26c) = uVar8;
-  if (*(int *)(param_1 + 0x13c) != 1) {
-    uVar8 = 0;
+           (uint)(byte)((unsigned char *)0x00002d48)[stateBlock + 3] *
+           ((*(ushort *)(((unsigned char *)0x00002d44) + stateBlock) & 1 | *(ushort *)(((unsigned char *)0x00002d44) + stateBlock) >> 2 & 2)
+           + ((*(ushort *)(((unsigned char *)0x00002d46) + stateBlock) >> 8 & 4) +
+             (*(ushort *)(((unsigned char *)0x00002d46) + stateBlock) & 0xf)) * 3 + 1) * 4);
+  *(undefined4 *)(ctx + 0x26c) = colorMaterialLookup;
+  if (*(int *)(ctx + 0x13c) != 1) {
+    colorMaterialLookup = 0;
   }
-  *(undefined4 *)(param_1 + 0x1890) = uVar8;
-  *(undefined1 *)(param_1 + 0x12f) = 0;
-  if ((cVar3 != '\0') && (cVar2 == '\0')) {
-    *(undefined1 *)(param_1 + 300) = 0;
-    if ((*(uint *)(param_1 + 0x40) & 0x10000) != 0) {
-      uVar21 = (uint)(byte)((unsigned char *)0x000013b5)[param_1];
-      if (uVar21 != 0) {
-        iVar15 = param_1;
-        if ((uVar21 == 0) || (uVar21 == 0x80000000)) {
-          uVar21 = 1;
+  *(undefined4 *)(ctx + 0x1890) = colorMaterialLookup;
+  *(undefined1 *)(ctx + 0x12f) = 0;
+  if ((stateFlag2d4d != '\0') && (stateFlag24ae == '\0')) {
+    *(undefined1 *)(ctx + 300) = 0;
+    if ((*(uint *)(ctx + 0x40) & 0x10000) != 0) {
+      dirtyCount = (uint)(byte)((unsigned char *)0x000013b5)[ctx];
+      if (dirtyCount != 0) {
+        dirtyCursor = ctx;
+        if ((dirtyCount == 0) || (dirtyCount == 0x80000000)) {
+          dirtyCount = 1;
         }
         do {
-          *(byte *)(iVar15 + 0x1814) = *(byte *)(iVar15 + 0x1814) | 0x18;
-          iVar15 = iVar15 + 1;
-          uVar21 = uVar21 - 1;
-        } while (uVar21 != 0);
+          *(byte *)(dirtyCursor + 0x1814) = *(byte *)(dirtyCursor + 0x1814) | 0x18;
+          dirtyCursor = dirtyCursor + 1;
+          dirtyCount = dirtyCount - 1;
+        } while (dirtyCount != 0);
       }
     }
     goto LAB_0009bfa0;
   }
-  if (((*(uint *)(param_1 + 0x8c) >> 0x1a & 1) != 0 || (*(uint *)(param_1 + 0x8c) >> 0x1b & 1) != 0)
-     && ((*(uint *)(param_1 + 0x40) & 0x10000) != 0)) {
-    uVar21 = (uint)(byte)((unsigned char *)0x000013b5)[param_1];
-    if (uVar21 != 0) {
-      iVar15 = param_1;
-      if ((uVar21 == 0) || (uVar21 == 0x80000000)) {
-        uVar21 = 1;
+  if (((*(uint *)(ctx + 0x8c) >> 0x1a & 1) != 0 || (*(uint *)(ctx + 0x8c) >> 0x1b & 1) != 0)
+     && ((*(uint *)(ctx + 0x40) & 0x10000) != 0)) {
+    dirtyCount = (uint)(byte)((unsigned char *)0x000013b5)[ctx];
+    if (dirtyCount != 0) {
+      dirtyCursor = ctx;
+      if ((dirtyCount == 0) || (dirtyCount == 0x80000000)) {
+        dirtyCount = 1;
       }
       do {
-        *(byte *)(iVar15 + 0x1814) = *(byte *)(iVar15 + 0x1814) | 0x18;
-        iVar15 = iVar15 + 1;
-        uVar21 = uVar21 - 1;
-      } while (uVar21 != 0);
+        *(byte *)(dirtyCursor + 0x1814) = *(byte *)(dirtyCursor + 0x1814) | 0x18;
+        dirtyCursor = dirtyCursor + 1;
+        dirtyCount = dirtyCount - 1;
+      } while (dirtyCount != 0);
     }
   }
-  if ((cVar2 == '\0') || (cVar9 != '\0')) {
-    cVar9 = *(char *)(param_1 + 0x12f);
+  if ((stateFlag24ae == '\0') || (stateFlag24ad != '\0')) {
+    newColorSumFlag = *(char *)(ctx + 0x12f);
 LAB_0009bf34:
-    uVar11 = 0;
+    newFlag12c = 0;
   }
   else {
-    cVar9 = *(char *)(param_1 + 0x12f);
-    uVar11 = 1;
-    if (cVar9 != '\0') goto LAB_0009bf34;
+    newColorSumFlag = *(char *)(ctx + 0x12f);
+    newFlag12c = 1;
+    if (newColorSumFlag != '\0') goto LAB_0009bf34;
   }
-  *(undefined1 *)(param_1 + 300) = uVar11;
-  if (cVar1 != cVar9) {
-    uVar21 = (uint)(byte)((unsigned char *)0x000013b5)[param_1];
-    if (uVar21 != 0) {
-      iVar15 = param_1;
-      if ((uVar21 == 0) || (uVar21 == 0x80000000)) {
-        uVar21 = 1;
+  *(undefined1 *)(ctx + 300) = newFlag12c;
+  if (oldColorSumFlag != newColorSumFlag) {
+    dirtyCount = (uint)(byte)((unsigned char *)0x000013b5)[ctx];
+    if (dirtyCount != 0) {
+      dirtyCursor = ctx;
+      if ((dirtyCount == 0) || (dirtyCount == 0x80000000)) {
+        dirtyCount = 1;
       }
       do {
-        *(byte *)(iVar15 + 0x1814) = *(byte *)(iVar15 + 0x1814) | 0x18;
-        iVar15 = iVar15 + 1;
-        uVar21 = uVar21 - 1;
-      } while (uVar21 != 0);
+        *(byte *)(dirtyCursor + 0x1814) = *(byte *)(dirtyCursor + 0x1814) | 0x18;
+        dirtyCursor = dirtyCursor + 1;
+        dirtyCount = dirtyCount - 1;
+      } while (dirtyCount != 0);
     }
   }
 LAB_0009bfa0:
-  if ((*(uint *)(param_1 + 0x180c) & 1) != 0) {
-    *(uint *)(param_1 + 0x180c) = *(uint *)(param_1 + 0x180c) & 0xfffffffe;
+  if ((*(uint *)(ctx + 0x180c) & 1) != 0) {
+    *(uint *)(ctx + 0x180c) = *(uint *)(ctx + 0x180c) & 0xfffffffe;
   }
-  fVar7 = FLOAT_001aa0e8;
-  uVar21 = *(uint *)(param_1 + 0x88);
-  if (uVar21 != 0) {
-    iVar27 = 0;
-    bVar6 = false;
-    iVar25 = 0;
-    iVar15 = param_1;
-    puVar17 = puVar22;
-    iVar19 = iVar16;
+  oneConst = FLOAT_001aa0e8;
+  lightMaskShifting = *(uint *)(ctx + 0x88);
+  if (lightMaskShifting != 0) {
+    lightIndex = 0;
+    needsLightModelSum = false;
+    lightCacheOffset = 0;
+    lightDirtyCursor = ctx;
+    lightFlagCursor = ctxFlags1874Ptr;
+    lightCopyCursor = ctxBase124;
     do {
-      if ((uVar21 & 1) != 0) {
-        pbVar26 = (byte *)(iVar15 + 0x1814);
-        iVar13 = iVar27 * 0x80 + iVar28 + 0x24c0;
-        puVar14 = (undefined4 *)(((unsigned char *)0x000014a4) + iVar25 + param_1);
-        if (*(byte *)(iVar15 + 0x1814) != 0) {
-          if ((*(byte *)(iVar15 + 0x1814) & 1) != 0) {
-            fVar5 = *(float *)(iVar27 * 0x80 + iVar28 + 0x24c0);
-            if (((fVar5 == FLOAT_001aa0d4) && (*(float *)(iVar13 + 4) == FLOAT_001aa0d4)) &&
-               (*(float *)(iVar13 + 8) == FLOAT_001aa0d4)) {
-              iVar10 = iVar27 * 4 + iVar16;
-              *(uint *)(iVar10 + 0x284) = *(uint *)(iVar10 + 0x284) & 0x3fffffff;
-              *(ushort *)(puVar17 + 8) = *(ushort *)(puVar17 + 8) & 0x9fff;
+      if ((lightMaskShifting & 1) != 0) {
+        lightDirtyPtr = (byte *)(lightDirtyCursor + 0x1814);
+        lightState = lightIndex * 0x80 + stateBlock + 0x24c0;
+        lightCache = (undefined4 *)(((unsigned char *)0x000014a4) + lightCacheOffset + ctx);
+        if (*(byte *)(lightDirtyCursor + 0x1814) != 0) {
+          if ((*(byte *)(lightDirtyCursor + 0x1814) & 1) != 0) {
+            lightAmbientX = *(float *)(lightIndex * 0x80 + stateBlock + 0x24c0);
+            if (((lightAmbientX == FLOAT_001aa0d4) && (*(float *)(lightState + 4) == FLOAT_001aa0d4)) &&
+               (*(float *)(lightState + 8) == FLOAT_001aa0d4)) {
+              controlWordOffset = lightIndex * 4 + ctxBase124;
+              *(uint *)(controlWordOffset + 0x284) = *(uint *)(controlWordOffset + 0x284) & 0x3fffffff;
+              *(ushort *)(lightFlagCursor + 8) = *(ushort *)(lightFlagCursor + 8) & 0x9fff;
             }
-            else if (((fVar5 == FLOAT_001aa0e8) && (*(float *)(iVar13 + 4) == FLOAT_001aa0e8)) &&
-                    (*(float *)(iVar13 + 8) == FLOAT_001aa0e8)) {
-              iVar10 = iVar27 * 4 + iVar16;
-              *(uint *)(iVar10 + 0x284) = *(uint *)(iVar10 + 0x284) & 0x3fffffff | 0x40000000;
-              *(ushort *)(puVar17 + 8) = *(ushort *)(puVar17 + 8) & 0x9fff | 0x2000;
+            else if (((lightAmbientX == FLOAT_001aa0e8) && (*(float *)(lightState + 4) == FLOAT_001aa0e8)) &&
+                    (*(float *)(lightState + 8) == FLOAT_001aa0e8)) {
+              controlWordOffset = lightIndex * 4 + ctxBase124;
+              *(uint *)(controlWordOffset + 0x284) = *(uint *)(controlWordOffset + 0x284) & 0x3fffffff | 0x40000000;
+              *(ushort *)(lightFlagCursor + 8) = *(ushort *)(lightFlagCursor + 8) & 0x9fff | 0x2000;
             }
-            else if (((*(float *)(iVar13 + 0x50) == fVar7) &&
-                     (*(float *)(iVar13 + 0x54) == FLOAT_001aa0d4)) &&
-                    ((*(float *)(iVar13 + 0x58) == FLOAT_001aa0d4 &&
-                     (*(char *)(puVar14 + 0x1a) == '\0')))) {
-              bVar6 = true;
-              iVar10 = iVar27 * 4 + iVar16;
-              *(uint *)(iVar10 + 0x284) = *(uint *)(iVar10 + 0x284) & 0x3fffffff | 0xc0000000;
-              *(ushort *)(puVar17 + 8) = *(ushort *)(puVar17 + 8) | 0x6000;
-            }
-            else {
-              iVar10 = iVar27 * 4 + iVar16;
-              *(uint *)(iVar10 + 0x284) = *(uint *)(iVar10 + 0x284) & 0x3fffffff | 0x80000000;
-              *(ushort *)(puVar17 + 8) = *(ushort *)(puVar17 + 8) & 0x9fff | 0x4000;
-            }
-          }
-          iVar10 = iVar27 * 4;
-          bVar12 = *pbVar26;
-          if ((bVar12 & 2) != 0) {
-            if (((*(float *)(iVar13 + 0x10) == FLOAT_001aa0d4) &&
-                (*(float *)(iVar13 + 0x14) == FLOAT_001aa0d4)) &&
-               (*(float *)(iVar13 + 0x18) == FLOAT_001aa0d4)) {
-              *(uint *)(iVar10 + iVar16 + 0x284) = *(uint *)(iVar10 + iVar16 + 0x284) & 0xcfffffff;
-              *(ushort *)(puVar17 + 8) = *(ushort *)(puVar17 + 8) & 0xe7ff;
-              bVar12 = *pbVar26;
-            }
-            else if (((*(float *)(iVar13 + 0x10) == FLOAT_001aa0e8) &&
-                     (*(float *)(iVar13 + 0x14) == FLOAT_001aa0e8)) &&
-                    (*(float *)(iVar13 + 0x18) == FLOAT_001aa0e8)) {
-              *(uint *)(iVar10 + iVar16 + 0x284) =
-                   *(uint *)(iVar10 + iVar16 + 0x284) & 0xcfffffff | 0x10000000;
-              *(ushort *)(puVar17 + 8) = *(ushort *)(puVar17 + 8) & 0xe7ff | 0x800;
-              bVar12 = *pbVar26;
+            else if (((*(float *)(lightState + 0x50) == oneConst) &&
+                     (*(float *)(lightState + 0x54) == FLOAT_001aa0d4)) &&
+                    ((*(float *)(lightState + 0x58) == FLOAT_001aa0d4 &&
+                     (*(char *)(lightCache + 0x1a) == '\0')))) {
+              needsLightModelSum = true;
+              controlWordOffset = lightIndex * 4 + ctxBase124;
+              *(uint *)(controlWordOffset + 0x284) = *(uint *)(controlWordOffset + 0x284) & 0x3fffffff | 0xc0000000;
+              *(ushort *)(lightFlagCursor + 8) = *(ushort *)(lightFlagCursor + 8) | 0x6000;
             }
             else {
-              *(uint *)(iVar10 + iVar16 + 0x284) =
-                   *(uint *)(iVar10 + iVar16 + 0x284) & 0xcfffffff | 0x20000000;
-              *(ushort *)(puVar17 + 8) = *(ushort *)(puVar17 + 8) & 0xe7ff | 0x1000;
-              bVar12 = *pbVar26;
+              controlWordOffset = lightIndex * 4 + ctxBase124;
+              *(uint *)(controlWordOffset + 0x284) = *(uint *)(controlWordOffset + 0x284) & 0x3fffffff | 0x80000000;
+              *(ushort *)(lightFlagCursor + 8) = *(ushort *)(lightFlagCursor + 8) & 0x9fff | 0x4000;
             }
           }
-          if ((bVar12 & 4) != 0) {
-            if (((*(float *)(iVar13 + 0x20) == FLOAT_001aa0d4) &&
-                (*(float *)(iVar13 + 0x24) == FLOAT_001aa0d4)) &&
-               (*(float *)(iVar13 + 0x28) == FLOAT_001aa0d4)) {
-              *(uint *)(iVar10 + iVar16 + 0x284) = *(uint *)(iVar10 + iVar16 + 0x284) & 0xf3ffffff;
-              *(ushort *)(puVar17 + 8) = *(ushort *)(puVar17 + 8) & 63999;
-              bVar12 = *pbVar26;
+          wordOffset = lightIndex * 4;
+          dirtyBits = *lightDirtyPtr;
+          if ((dirtyBits & 2) != 0) {
+            if (((*(float *)(lightState + 0x10) == FLOAT_001aa0d4) &&
+                (*(float *)(lightState + 0x14) == FLOAT_001aa0d4)) &&
+               (*(float *)(lightState + 0x18) == FLOAT_001aa0d4)) {
+              *(uint *)(wordOffset + ctxBase124 + 0x284) = *(uint *)(wordOffset + ctxBase124 + 0x284) & 0xcfffffff;
+              *(ushort *)(lightFlagCursor + 8) = *(ushort *)(lightFlagCursor + 8) & 0xe7ff;
+              dirtyBits = *lightDirtyPtr;
             }
-            else if (((*(float *)(iVar13 + 0x20) == FLOAT_001aa0e8) &&
-                     (*(float *)(iVar13 + 0x24) == FLOAT_001aa0e8)) &&
-                    (*(float *)(iVar13 + 0x28) == FLOAT_001aa0e8)) {
-              *(uint *)(iVar10 + iVar16 + 0x284) =
-                   *(uint *)(iVar10 + iVar16 + 0x284) & 0xf3ffffff | 0x4000000;
-              *(ushort *)(puVar17 + 8) = *(ushort *)(puVar17 + 8) & 63999 | 0x200;
-              bVar12 = *pbVar26;
+            else if (((*(float *)(lightState + 0x10) == FLOAT_001aa0e8) &&
+                     (*(float *)(lightState + 0x14) == FLOAT_001aa0e8)) &&
+                    (*(float *)(lightState + 0x18) == FLOAT_001aa0e8)) {
+              *(uint *)(wordOffset + ctxBase124 + 0x284) =
+                   *(uint *)(wordOffset + ctxBase124 + 0x284) & 0xcfffffff | 0x10000000;
+              *(ushort *)(lightFlagCursor + 8) = *(ushort *)(lightFlagCursor + 8) & 0xe7ff | 0x800;
+              dirtyBits = *lightDirtyPtr;
             }
             else {
-              *(uint *)(iVar10 + iVar16 + 0x284) =
-                   *(uint *)(iVar10 + iVar16 + 0x284) & 0xf3ffffff | 0x8000000;
-              *(ushort *)(puVar17 + 8) = *(ushort *)(puVar17 + 8) & 63999 | 0x400;
-              bVar12 = *pbVar26;
+              *(uint *)(wordOffset + ctxBase124 + 0x284) =
+                   *(uint *)(wordOffset + ctxBase124 + 0x284) & 0xcfffffff | 0x20000000;
+              *(ushort *)(lightFlagCursor + 8) = *(ushort *)(lightFlagCursor + 8) & 0xe7ff | 0x1000;
+              dirtyBits = *lightDirtyPtr;
             }
           }
-          if ((bVar12 & 0x20) != 0) {
-            if ((*(float *)(iVar13 + 0x54) == FLOAT_001aa0d4) &&
-               (*(float *)(iVar13 + 0x58) == FLOAT_001aa0d4)) {
-              if ((*(float *)(iVar13 + 0x50) == fVar7) ||
-                 (*(float *)(iVar13 + 0x50) == FLOAT_001aa0d4)) {
-                *(uint *)(iVar10 + iVar16 + 0x284) = *(uint *)(iVar10 + iVar16 + 0x284) & 0xfcffffff
+          if ((dirtyBits & 4) != 0) {
+            if (((*(float *)(lightState + 0x20) == FLOAT_001aa0d4) &&
+                (*(float *)(lightState + 0x24) == FLOAT_001aa0d4)) &&
+               (*(float *)(lightState + 0x28) == FLOAT_001aa0d4)) {
+              *(uint *)(wordOffset + ctxBase124 + 0x284) = *(uint *)(wordOffset + ctxBase124 + 0x284) & 0xf3ffffff;
+              *(ushort *)(lightFlagCursor + 8) = *(ushort *)(lightFlagCursor + 8) & 63999;
+              dirtyBits = *lightDirtyPtr;
+            }
+            else if (((*(float *)(lightState + 0x20) == FLOAT_001aa0e8) &&
+                     (*(float *)(lightState + 0x24) == FLOAT_001aa0e8)) &&
+                    (*(float *)(lightState + 0x28) == FLOAT_001aa0e8)) {
+              *(uint *)(wordOffset + ctxBase124 + 0x284) =
+                   *(uint *)(wordOffset + ctxBase124 + 0x284) & 0xf3ffffff | 0x4000000;
+              *(ushort *)(lightFlagCursor + 8) = *(ushort *)(lightFlagCursor + 8) & 63999 | 0x200;
+              dirtyBits = *lightDirtyPtr;
+            }
+            else {
+              *(uint *)(wordOffset + ctxBase124 + 0x284) =
+                   *(uint *)(wordOffset + ctxBase124 + 0x284) & 0xf3ffffff | 0x8000000;
+              *(ushort *)(lightFlagCursor + 8) = *(ushort *)(lightFlagCursor + 8) & 63999 | 0x400;
+              dirtyBits = *lightDirtyPtr;
+            }
+          }
+          if ((dirtyBits & 0x20) != 0) {
+            if ((*(float *)(lightState + 0x54) == FLOAT_001aa0d4) &&
+               (*(float *)(lightState + 0x58) == FLOAT_001aa0d4)) {
+              if ((*(float *)(lightState + 0x50) == oneConst) ||
+                 (*(float *)(lightState + 0x50) == FLOAT_001aa0d4)) {
+                *(uint *)(wordOffset + ctxBase124 + 0x284) = *(uint *)(wordOffset + ctxBase124 + 0x284) & 0xfcffffff
                 ;
-                *(ushort *)(puVar17 + 8) = *(ushort *)(puVar17 + 8) & 0xffe7;
+                *(ushort *)(lightFlagCursor + 8) = *(ushort *)(lightFlagCursor + 8) & 0xffe7;
               }
               else {
-                *(uint *)(iVar10 + iVar16 + 0x284) = *(uint *)(iVar10 + iVar16 + 0x284) | 0x3000000;
-                *(ushort *)(puVar17 + 8) = *(ushort *)(puVar17 + 8) | 0x18;
-                *(byte *)(iVar15 + 0x181c) = *(byte *)(iVar15 + 0x181c) | 4;
+                *(uint *)(wordOffset + ctxBase124 + 0x284) = *(uint *)(wordOffset + ctxBase124 + 0x284) | 0x3000000;
+                *(ushort *)(lightFlagCursor + 8) = *(ushort *)(lightFlagCursor + 8) | 0x18;
+                *(byte *)(lightDirtyCursor + 0x181c) = *(byte *)(lightDirtyCursor + 0x181c) | 4;
               }
             }
             else {
-              *(uint *)(iVar10 + iVar16 + 0x284) =
-                   *(uint *)(iVar10 + iVar16 + 0x284) & 0xfeffffff | 0x2000000;
-              *(ushort *)(puVar17 + 8) = *(ushort *)(puVar17 + 8) & 0xfff7 | 0x10;
+              *(uint *)(wordOffset + ctxBase124 + 0x284) =
+                   *(uint *)(wordOffset + ctxBase124 + 0x284) & 0xfeffffff | 0x2000000;
+              *(ushort *)(lightFlagCursor + 8) = *(ushort *)(lightFlagCursor + 8) & 0xfff7 | 0x10;
             }
           }
-          if (*(float *)(iVar13 + 0x3c) == FLOAT_001aa0d4) {
-            if (*(char *)(param_1 + 0x12f) == '\0') {
-              uVar8 = puVar14[0x15];
-              uVar18 = puVar14[0x16];
-              uVar20 = puVar14[0x17];
-              *(undefined4 *)(iVar19 + 0x174) = puVar14[0x14];
-              *(undefined4 *)(iVar19 + 0x178) = uVar8;
-              *(undefined4 *)(iVar19 + 0x17c) = uVar18;
-              *(undefined4 *)(iVar19 + 0x180) = uVar20;
-              uVar8 = puVar14[0x10];
-              uVar18 = puVar14[0x11];
-              uVar20 = puVar14[0x12];
-              *(undefined4 *)(iVar19 + 0x200) = puVar14[0x13];
-              *(undefined4 *)(iVar19 + 500) = uVar8;
-              *(undefined4 *)(iVar19 + 0x1f8) = uVar18;
-              *(undefined4 *)(iVar19 + 0x1fc) = uVar20;
+          if (*(float *)(lightState + 0x3c) == FLOAT_001aa0d4) {
+            if (*(char *)(ctx + 0x12f) == '\0') {
+              copyWord0 = lightCache[0x15];
+              copyWord1 = lightCache[0x16];
+              copyWord2 = lightCache[0x17];
+              *(undefined4 *)(lightCopyCursor + 0x174) = lightCache[0x14];
+              *(undefined4 *)(lightCopyCursor + 0x178) = copyWord0;
+              *(undefined4 *)(lightCopyCursor + 0x17c) = copyWord1;
+              *(undefined4 *)(lightCopyCursor + 0x180) = copyWord2;
+              copyWord0 = lightCache[0x10];
+              copyWord1 = lightCache[0x11];
+              copyWord2 = lightCache[0x12];
+              *(undefined4 *)(lightCopyCursor + 0x200) = lightCache[0x13];
+              *(undefined4 *)(lightCopyCursor + 500) = copyWord0;
+              *(undefined4 *)(lightCopyCursor + 0x1f8) = copyWord1;
+              *(undefined4 *)(lightCopyCursor + 0x1fc) = copyWord2;
             }
             else {
-              uVar8 = puVar14[0xd];
-              uVar18 = puVar14[0xe];
-              uVar20 = puVar14[0xf];
-              *(undefined4 *)(iVar19 + 0x174) = puVar14[0xc];
-              *(undefined4 *)(iVar19 + 0x178) = uVar8;
-              *(undefined4 *)(iVar19 + 0x17c) = uVar18;
-              *(undefined4 *)(iVar19 + 0x180) = uVar20;
-              uVar8 = puVar14[8];
-              uVar18 = puVar14[9];
-              uVar20 = puVar14[10];
-              *(undefined4 *)(iVar19 + 0x200) = puVar14[0xb];
-              *(undefined4 *)(iVar19 + 500) = uVar8;
-              *(undefined4 *)(iVar19 + 0x1f8) = uVar18;
-              *(undefined4 *)(iVar19 + 0x1fc) = uVar20;
+              copyWord0 = lightCache[0xd];
+              copyWord1 = lightCache[0xe];
+              copyWord2 = lightCache[0xf];
+              *(undefined4 *)(lightCopyCursor + 0x174) = lightCache[0xc];
+              *(undefined4 *)(lightCopyCursor + 0x178) = copyWord0;
+              *(undefined4 *)(lightCopyCursor + 0x17c) = copyWord1;
+              *(undefined4 *)(lightCopyCursor + 0x180) = copyWord2;
+              copyWord0 = lightCache[8];
+              copyWord1 = lightCache[9];
+              copyWord2 = lightCache[10];
+              *(undefined4 *)(lightCopyCursor + 0x200) = lightCache[0xb];
+              *(undefined4 *)(lightCopyCursor + 500) = copyWord0;
+              *(undefined4 *)(lightCopyCursor + 0x1f8) = copyWord1;
+              *(undefined4 *)(lightCopyCursor + 0x1fc) = copyWord2;
             }
           }
           else {
-            uVar8 = *puVar14;
-            uVar18 = puVar14[2];
-            uVar20 = puVar14[3];
-            *(undefined4 *)(iVar19 + 0x178) = puVar14[1];
-            *(undefined4 *)(iVar19 + 0x174) = uVar8;
-            *(undefined4 *)(iVar19 + 0x17c) = uVar18;
-            *(undefined4 *)(iVar19 + 0x180) = uVar20;
-            fVar5 = GH_U2F((unsigned int)(puVar14[4]));
-            fVar4 = GH_U2F((unsigned int)(puVar14[5]));
-            *(float *)(iVar19 + 0x1fc) = -GH_U2F((unsigned int)(puVar14[6]));
-            *(float *)(iVar19 + 500) = -fVar5;
-            *(float *)(iVar19 + 0x1f8) = -fVar4;
-            *(uint *)(iVar10 + iVar16 + 0x284) =
-                 (uint)(*(float *)(iVar13 + 0x3c) == fVar7) << 0x17 |
-                 *(uint *)(iVar10 + iVar16 + 0x284) & 0xff7fffff;
+            copyWord0 = *lightCache;
+            copyWord1 = lightCache[2];
+            copyWord2 = lightCache[3];
+            *(undefined4 *)(lightCopyCursor + 0x178) = lightCache[1];
+            *(undefined4 *)(lightCopyCursor + 0x174) = copyWord0;
+            *(undefined4 *)(lightCopyCursor + 0x17c) = copyWord1;
+            *(undefined4 *)(lightCopyCursor + 0x180) = copyWord2;
+            normalXTemp = GH_U2F((unsigned int)(lightCache[4]));
+            normalYTemp = GH_U2F((unsigned int)(lightCache[5]));
+            *(float *)(lightCopyCursor + 0x1fc) = -GH_U2F((unsigned int)(lightCache[6]));
+            *(float *)(lightCopyCursor + 500) = -normalXTemp;
+            *(float *)(lightCopyCursor + 0x1f8) = -normalYTemp;
+            *(uint *)(wordOffset + ctxBase124 + 0x284) =
+                 (uint)(*(float *)(lightState + 0x3c) == oneConst) << 0x17 |
+                 *(uint *)(wordOffset + ctxBase124 + 0x284) & 0xff7fffff;
           }
-          *pbVar26 = 0;
+          *lightDirtyPtr = 0;
         }
-        if (*(char *)(iVar15 + 0x181c) != '\0') {
-          *(undefined1 *)(iVar15 + 0x181c) = 0;
+        if (*(char *)(lightDirtyCursor + 0x181c) != '\0') {
+          *(undefined1 *)(lightDirtyCursor + 0x181c) = 0;
         }
-        uVar23 = uVar23 | -(uint)(*(uint *)(iVar27 * 4 + iVar16 + 0x284) >> 0x1a & 3) >> 0x1f;
+        secondaryColorBits = secondaryColorBits | -(uint)(*(uint *)(lightIndex * 4 + ctxBase124 + 0x284) >> 0x1a & 3) >> 0x1f;
       }
-      bVar24 = SUB41(uVar23,0);
-      uVar21 = uVar21 >> 1;
-      iVar27 = iVar27 + 1;
-      iVar25 = iVar25 + 0x6c;
-      puVar17 = (uint *)((int)puVar17 + 2);
-      iVar15 = iVar15 + 1;
-      iVar19 = iVar19 + 0x10;
-    } while (uVar21 != 0);
-    if (bVar6) {
-      *(undefined4 *)(param_1 + 0x3a0) = 0;
-      *(undefined4 *)(param_1 + 0x398) = 0;
-      *(undefined4 *)(param_1 + 0x39c) = 0;
-      *puVar22 = *puVar22 | 4;
-      uVar23 = *(uint *)(param_1 + 0x88);
-      if (uVar23 != 0) {
-        iVar16 = 0x24c0;
-        puVar22 = (uint *)(param_1 + 0x3a8);
+      secondaryColorNeeded = SUB41(secondaryColorBits,0);
+      lightMaskShifting = lightMaskShifting >> 1;
+      lightIndex = lightIndex + 1;
+      lightCacheOffset = lightCacheOffset + 0x6c;
+      lightFlagCursor = (uint *)((int)lightFlagCursor + 2);
+      lightDirtyCursor = lightDirtyCursor + 1;
+      lightCopyCursor = lightCopyCursor + 0x10;
+    } while (lightMaskShifting != 0);
+    if (needsLightModelSum) {
+      *(undefined4 *)(ctx + 0x3a0) = 0;
+      *(undefined4 *)(ctx + 0x398) = 0;
+      *(undefined4 *)(ctx + 0x39c) = 0;
+      *ctxFlags1874Ptr = *ctxFlags1874Ptr | 4;
+      lightMaskCursor = *(uint *)(ctx + 0x88);
+      if (lightMaskCursor != 0) {
+        lightStateOffset = 0x24c0;
+        lightControlCursor = (uint *)(ctx + 0x3a8);
         do {
-          if (((uVar23 & 1) != 0) && (*puVar22 >> 0x1e == 3)) {
-            *(float *)(param_1 + 0x398) = *(float *)(param_1 + 0x398) + *(float *)(iVar28 + iVar16);
-            *(float *)(param_1 + 0x39c) =
-                 *(float *)(param_1 + 0x39c) + *(float *)(iVar28 + iVar16 + 4);
-            *(float *)(param_1 + 0x3a0) =
-                 *(float *)(param_1 + 0x3a0) + *(float *)(iVar28 + iVar16 + 8);
+          if (((lightMaskCursor & 1) != 0) && (*lightControlCursor >> 0x1e == 3)) {
+            *(float *)(ctx + 0x398) = *(float *)(ctx + 0x398) + *(float *)(stateBlock + lightStateOffset);
+            *(float *)(ctx + 0x39c) =
+                 *(float *)(ctx + 0x39c) + *(float *)(stateBlock + lightStateOffset + 4);
+            *(float *)(ctx + 0x3a0) =
+                 *(float *)(ctx + 0x3a0) + *(float *)(stateBlock + lightStateOffset + 8);
           }
-          uVar23 = uVar23 >> 1;
-          puVar22 = puVar22 + 1;
-          iVar16 = iVar16 + 0x80;
-        } while (uVar23 != 0);
+          lightMaskCursor = lightMaskCursor >> 1;
+          lightControlCursor = lightControlCursor + 1;
+          lightStateOffset = lightStateOffset + 0x80;
+        } while (lightMaskCursor != 0);
       }
     }
   }
-  *(bool *)(param_1 + 0x12d) = bVar24;
+  *(bool *)(ctx + 0x12d) = secondaryColorNeeded;
   return;
 }
 
@@ -6414,11 +6440,11 @@ LAB_0009d4b8:
       ctxFlags44B = *(uint *)(ctx + 0x44);
     }
     else if (fogMode == 0x2601) {
-      ((int (*)())FUN_0009af00)(programRecord);
+      ((int (*)())ffvpPrepareFogLinear)(programRecord);
       ctxFlags44B = *(uint *)(ctx + 0x44);
     }
     else if (fogMode == 0x800) {
-      ((int (*)())FUN_0009b790)(programRecord);
+      ((int (*)())ffvpPrepareFogExp)(programRecord);
       ctxFlags44B = *(uint *)(ctx + 0x44);
     }
   }
@@ -6509,7 +6535,7 @@ LAB_0009e8dc:
         stateBlock = stateBlock + 0x80;
       } while (lightMaskLoop != 0);
     }
-    ((int (*)())FUN_0009b430)(programRecord,activeLightCount);
+    ((int (*)())ffvpEmitColorOutputs)(programRecord,activeLightCount);
   }
   else {
     ffvpEmitColorPassThrough(programRecord,3,0,0);
@@ -6518,20 +6544,20 @@ LAB_0009e8dc:
     }
   }
   if ((*(uint *)(ctx + 0x1874) & 0xc0000000) == 0x80000000) {
-    ((int (*)())FUN_00099e50)(programRecord,2,(uint)(*(float *)(ctx + 0x114) == FLOAT_001aa0d4));
+    ((int (*)())ffvpEmitPointSizeAttenuation)(programRecord,2,(uint)(*(float *)(ctx + 0x114) == FLOAT_001aa0d4));
   }
   if ((*(uint *)(ctx + 0x44) & 0x800) == 0) {
     if (*(char *)(ctx + 0x121) != '\0') {
-      ((int (*)())FUN_0009b850)(programRecord,(uint)*(byte *)(ctx + 0x120));
+      ((int (*)())ffvpEmitFogTexCoord)(programRecord,(uint)*(byte *)(ctx + 0x120));
     }
   }
   else if (*(int *)(programRecord + 0x3d8) == 0) {
-    ((int (*)())FUN_0009b850)(programRecord,(uint)(byte)((unsigned char *)0x000011d1)[ctx]);
+    ((int (*)())ffvpEmitFogTexCoord)(programRecord,(uint)(byte)((unsigned char *)0x000011d1)[ctx]);
   }
   else {
-    ((int (*)())FUN_0009a590)(programRecord);
+    ((int (*)())ffvpEmitFogDistance)(programRecord);
   }
-  programTypeResult = ((int (*)())FUN_0009a910)(programRecord);
+  programTypeResult = ((int (*)())ffvpFinishProgram)(programRecord);
   if (programTypeResult == 6) {
     *(undefined1 *)(ctx + 0x126) = 1;
   }
