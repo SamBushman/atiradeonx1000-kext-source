@@ -3385,7 +3385,7 @@ int _gldCreateContext(contextOut, pixelFormat, contextArg3, shareContext, stateB
     return 0x271e;
   }
   *contextOut = 0;
-  status = FUN_0001ac30(pixelFormat);
+  status = gld_validatePixelFormat(pixelFormat);
   libraryOrTaskPtr = PTR_DAT_001e88ac;
   if (status != 0) {
     return status;

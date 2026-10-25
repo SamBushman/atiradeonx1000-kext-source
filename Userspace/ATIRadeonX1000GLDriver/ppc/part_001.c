@@ -555,7 +555,7 @@ int _gldDestroyFramebuffer(ctx, framebuffer)
   int framebuffer;
 {
   if (*(int *)(ctx + GLD_boundFramebuffer) == framebuffer) {
-    FUN_0001b4b0(ctx);
+    gld_updateYInvertedFlag(ctx);
     *(undefined4 *)(ctx + GLD_boundFramebuffer) = 0;
   }
   _free(framebuffer);
@@ -633,7 +633,7 @@ LAB_00007e28:
     } while (iVar4 != 0);
   }
   if ((*(int *)(*(int *)(ctx + 0x18) + 0x1a0) == 0) && (bVar1)) {
-    FUN_0001b4b0(ctx);
+    gld_updateYInvertedFlag(ctx);
     return;
   }
   return;
@@ -944,7 +944,7 @@ LAB_00008798:
                 pfDisplayMask = redSize;
                 pfRendererId = FUN_00017720(depthSize);
                 pfRendererId = pfRendererId | depthSize << 0x18;
-                serviceOrNewRows = FUN_0001ae20(candidateRow,minimumPolicy,maximumPolicy);
+                serviceOrNewRows = gld_expandPixelFormatVariants(candidateRow,minimumPolicy,maximumPolicy);
                 if (serviceOrNewRows != 0) {
                   formatCount = formatCount + serviceOrNewRows;
                   newList = (int *)_malloc(formatCount * 0x34);
@@ -1324,7 +1324,7 @@ LAB_00008ad4:
         rendererInfo[5] = 0x808000;
         *(undefined1 *)((int)rendererInfo + 0x2a) = 0;
         rendererInfo[7] = 0x80;
-        FUN_0001b150(rendererInfo);
+        gld_fillMaxPixelFormat(rendererInfo);
         _IOServiceClose(connection);
         returnCode = 0;
       }

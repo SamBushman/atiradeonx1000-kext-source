@@ -18,7 +18,7 @@ FUN_00017260
 glDrawPixels_impl
 gld_isStampRetired
 gld_submitRing
-FUN_0001b4b0
+gld_updateYInvertedFlag
 gld_startPacket
 gld_drawVertexArray
 FUN_00024fe0
