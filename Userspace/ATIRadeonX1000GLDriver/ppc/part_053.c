@@ -2384,7 +2384,7 @@ int R520MachineAssembler__vslot26_assembleThenAppendRecord(this, node, block, co
   int iVar2;
   int iVar3;
   undefined4 uVar4;
-  undefined4 *puVar5;
+  undefined4 *elementRef;
   int a3;
   uint vectorFilledCount;
   undefined4 uVar7;
@@ -2411,13 +2411,13 @@ int R520MachineAssembler__vslot26_assembleThenAppendRecord(this, node, block, co
   vectorFilledCount = vector[1];
   if (vectorFilledCount < *vector) {
     _memset(vectorFilledCount * 4 + vector[2],0,4);
-    puVar5 = (undefined4 *)(vectorFilledCount * 4 + vector[2]);
+    elementRef = (undefined4 *)(vectorFilledCount * 4 + vector[2]);
     vector[1] = vectorFilledCount + 1;
   }
   else {
-    puVar5 = (undefined4 *)Vector__elementRefGrow(vector,vectorFilledCount);
+    elementRef = (undefined4 *)Vector__elementRefGrow(vector,vectorFilledCount);
   }
-  *puVar5 = uVar4;
+  *elementRef = uVar4;
   return;
 }
 

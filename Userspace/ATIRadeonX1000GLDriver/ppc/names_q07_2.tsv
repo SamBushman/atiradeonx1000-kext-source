@@ -1,0 +1,191 @@
+use	FUN_0013a8a4	iVar6	blockCursor	INFERRED	block walked in the program's block list (+8 = next block)	^\s*iVar6\ =\ \*\(int\ \*\)\(local_a0\ \+\ 8\);$	+1
+use	FUN_0013a8a4	iVar6	blockCursor	INFERRED	block walked in the program's block list (+8 = next block)	^\s*iVar15\ =\ \*\(int\ \*\)\(iVar6\ \+\ 8\);$	+3
+use	FUN_0013a8a4	iVar6	blockCursor	INFERRED	block walked in the program's block list (+8 = next block)	^\s*iVar6\ =\ iVar15;$	+1
+use	FUN_0013a8a4	iVar6	blockCursor	INFERRED	block walked in the program's block list (+8 = next block)	^\s*iVar6\ =\ \*\(int\ \*\)\(local_a4\ \+\ 8\);$	+1
+use	FUN_0013a8a4	iVar6	blockCursor	INFERRED	block walked in the program's block list (+8 = next block)	^\s*iVar15\ =\ \*\(int\ \*\)\(iVar6\ \+\ 8\);$@2	+4
+use	FUN_0013a8a4	iVar6	blockCursor	INFERRED	block walked in the program's block list (+8 = next block)	^\s*iVar15\ =\ \*\(int\ \*\)\(iVar6\ \+\ 8\);$@3	+1
+use	FUN_0013a8a4	iVar6	blockCursor	INFERRED	block walked in the program's block list (+8 = next block)	^\s*piVar20\ =\ \*\(int\ \*\*\)\(iVar6\ \+\ 0x98\);$	+1
+use	FUN_0013a8a4	iVar6	blockCursor	INFERRED	block walked in the program's block list (+8 = next block)	^\s*iVar10\ =\ \*\(int\ \*\)\(iVar6\ \+\ 8\);$	+1
+use	FUN_0013a8a4	iVar6	blockCursor	INFERRED	block walked in the program's block list (+8 = next block)	^\s*iVar6\ =\ iVar10;$	+1
+use	FUN_0013a8a4	iVar6	opcodeKind	INFERRED	opcode kind id of the instruction (descriptor +8); 0x8e is the pass-through kind	^\s*iVar6\ =\ \*\(int\ \*\)\(piVar20\[0x22\]\ \+\ 8\);$	+1
+use	FUN_0013a8a4	iVar6	opcodeKind	INFERRED	opcode kind id of the instruction (descriptor +8); 0x8e is the pass-through kind	^\s*if\ \(iVar6\ ==\ 0x8e\)\ \{$	+1
+use	FUN_0013a8a4	iVar15	nextBlock	INFERRED	block after the current one	^\s*iVar15\ =\ \*\(int\ \*\)\(iVar6\ \+\ 8\);$	+1
+use	FUN_0013a8a4	iVar15	nextBlock	INFERRED	block after the current one	^\s*iVar6\ =\ iVar15;$	+1
+use	FUN_0013a8a4	iVar15	nextBlock	INFERRED	block after the current one	^\s*iVar15\ =\ \*\(int\ \*\)\(iVar6\ \+\ 8\);$@2	+1
+use	FUN_0013a8a4	iVar15	nextBlock	INFERRED	block after the current one	^\s*iVar15\ =\ \*\(int\ \*\)\(iVar6\ \+\ 8\);$@3	+2
+use	FUN_0013a8a4	iVar15	nextBlock	INFERRED	block after the current one	^\s*iVar15\ =\ \*\(int\ \*\)\(iVar10\ \+\ 8\);$	+1
+use	FUN_0013a8a4	iVar15	operandIndex	INFERRED	1-based operand index of the instruction	^\s*for\ \(iVar15\ =\ 1;\ iVar10\ =\ \(\*\*\(code\ \*\*\)\(\*piVar20\ \+\ 0x14\)\)\(piVar20\),\ iVar15\ <=\ iVar10;$	+3
+use	FUN_0013a8a4	iVar15	operandIndex	INFERRED	1-based operand index of the instruction	^\s*iVar10\ =\ FUN_001054ec\(piVar20,iVar15\);$	+1
+use	FUN_0013a8a4	iVar15	operandIndex	INFERRED	1-based operand index of the instruction	^\s*for\ \(iVar15\ =\ 1;\ iVar10\ =\ \(\*\*\(code\ \*\*\)\(\*piVar20\ \+\ 0x14\)\)\(piVar20\),$	+4
+use	FUN_0013a8a4	iVar15	operandIndex	INFERRED	1-based operand index of the instruction	^\s*FUN_001054ec\(piVar20,iVar15\);$	+2
+use	FUN_0013a8a4	iVar15	operandIndex	INFERRED	1-based operand index of the instruction	^\s*iVar19\ =\ FUN_001054ec\(piVar20,iVar15\);$@2	+2
+use	FUN_0013a8a4	iVar15	operandIndex	INFERRED	1-based operand index of the instruction	^\s*\(piVar20,iVar15,3,4,in_r7,in_r8,\*\(code\ \*\*\)\(\*piVar20\ \+\ 0x88\)\);$	+1
+use	FUN_0013a8a4	iVar15	operandIndex	INFERRED	1-based operand index of the instruction	^\s*\(\*\*\(code\ \*\*\)\(\*piVar20\ \+\ 0x88\)\)\(piVar20,iVar15,uVar5,uVar5\);$	+1
+use	FUN_0013a8a4	iVar15	operandIndex	INFERRED	1-based operand index of the instruction	^\s*for\ \(iVar15\ =\ 1;\ iVar10\ =\ \(\*\*\(code\ \*\*\)\(\*piVar20\ \+\ 0x14\)\)\(piVar20\),\ iVar15\ <=\ iVar10;$@2	+3
+use	FUN_0013a8a4	iVar15	operandIndex	INFERRED	1-based operand index of the instruction	^\s*iVar11\ =\ FUN_001054ec\(piVar20,iVar15\);$	+1
+use	FUN_0013a8a4	iVar15	operandIndex	INFERRED	1-based operand index of the instruction	^\s*\(piVar20,iVar15,iVar19,uVar5\ \&\ 0x3f,in_r7,in_r8,$	+1
+use	FUN_0013a8a4	iVar15	flagResult	INFERRED	immediate result of an opcode-trait or virtual predicate	^\s*iVar15\ =\ \(\*\*\(code\ \*\*\)\(\*piVar20\ \+\ 0x24\)\)\(piVar20\);$	+3
+use	FUN_0013a8a4	iVar15	flagResult	INFERRED	immediate result of an opcode-trait or virtual predicate	^\s*if\ \(iVar15\ ==\ 0\)\ \{$	+1
+use	FUN_0013a8a4	iVar15	flagResult	INFERRED	immediate result of an opcode-trait or virtual predicate	^\s*iVar15\ =\ \(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0x7c\)\)\(piVar7,piVar20\);$	+2
+use	FUN_0013a8a4	iVar15	destRecord	INFERRED	operand 0 record of the instruction	^\s*iVar15\ =\ FUN_001054ec\(piVar20,0\);$	+2
+use	FUN_0013a8a4	iVar15	opcodeDesc	INFERRED	opcode descriptor (inst+0x88) passed to OpcodeTraits__flagBit7	^\s*iVar15\ =\ piVar20\[0x22\];$	+1
+use	FUN_0013a8a4	iVar15	opcodeDesc	INFERRED	opcode descriptor (inst+0x88) passed to OpcodeTraits__flagBit7	^\s*iVar15\ =\ FUN_00113174\(\*\(undefined4\ \*\)\(iVar15\ \+\ 8\),\*\(undefined4\ \*\)\(param_1\ \+\ 8\)\);$	+1	rhs	none
+use	FUN_0013a8a4	iVar15	flagResult	INFERRED	immediate result of an opcode-trait or virtual predicate	^\s*iVar15\ =\ FUN_00113174\(\*\(undefined4\ \*\)\(iVar15\ \+\ 8\),\*\(undefined4\ \*\)\(param_1\ \+\ 8\)\);$	+1	lhs	none
+use	FUN_0013a8a4	iVar10	operandLimit	INFERRED	number of operands the instruction can read (virtual slot 0x14)	^\s*for\ \(iVar15\ =\ 1;\ iVar10\ =\ \(\*\*\(code\ \*\*\)\(\*piVar20\ \+\ 0x14\)\)\(piVar20\),\ iVar15\ <=\ iVar10;$	+1
+use	FUN_0013a8a4	iVar10	operandLimit	INFERRED	number of operands the instruction can read (virtual slot 0x14)	^\s*for\ \(iVar15\ =\ 1;\ iVar10\ =\ \(\*\*\(code\ \*\*\)\(\*piVar20\ \+\ 0x14\)\)\(piVar20\),$	+2
+use	FUN_0013a8a4	iVar10	operandLimit	INFERRED	number of operands the instruction can read (virtual slot 0x14)	^\s*for\ \(iVar15\ =\ 1;\ iVar10\ =\ \(\*\*\(code\ \*\*\)\(\*piVar20\ \+\ 0x14\)\)\(piVar20\),\ iVar15\ <=\ iVar10;$@2	+1
+use	FUN_0013a8a4	iVar10	laneFillIndex	INFERRED	index of the lane byte being initialised	^\s*iVar10\ =\ 0;$	+1
+use	FUN_0013a8a4	iVar10	laneFillIndex	INFERRED	index of the lane byte being initialised	^\s*\*\(byte\ \*\)\(\(int\)\&local_b8\ \+\ iVar10\)\ =$	+3
+use	FUN_0013a8a4	iVar10	predicateResult	INFERRED	immediate result of a virtual predicate or opcode-trait test	^\s*iVar10\ =\ \(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0x24\)\)\(piVar7\);$	+2
+use	FUN_0013a8a4	iVar10	predicateResult	INFERRED	immediate result of a virtual predicate or opcode-trait test	^\s*iVar10\ =\ \(\*\*\(code\ \*\*\)\(\*piVar8\ \+\ 0x24\)\)\(piVar8\);$	+4
+use	FUN_0013a8a4	iVar10	predicateResult	INFERRED	immediate result of a virtual predicate or opcode-trait test	^\s*iVar10\ =\ \(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0x24\)\)\(piVar7\);$@2	+2
+use	FUN_0013a8a4	iVar10	operandRecordA	INFERRED	operand record of the instruction for the current operand	^\s*iVar10\ =\ FUN_001054ec\(piVar20,iVar15\);$	+2
+use	FUN_0013a8a4	iVar10	srcDestRecord	INFERRED	operand 0 record of the source instruction	^\s*iVar10\ =\ FUN_001054ec\(piVar7,0\);$	+2
+use	FUN_0013a8a4	iVar10	destOperandRecord	INFERRED	operand 0 record (component 3 flag at +0x13)	^\s*iVar10\ =\ FUN_001054ec\(piVar7,0\);$@2	+2
+use	FUN_0013a8a4	iVar10	destOperandRecord	INFERRED	operand 0 record (component 3 flag at +0x13)	^\s*iVar10\ =\ FUN_001054ec\(piVar8,0\);$	+2
+use	FUN_0013a8a4	iVar10	laneIndex	INFERRED	lane byte slot (0, 1 or 2) chosen from the fold mask	^\s*iVar10\ =\ 2;$	+1
+use	FUN_0013a8a4	iVar10	laneIndex	INFERRED	lane byte slot (0, 1 or 2) chosen from the fold mask	^\s*iVar10\ =\ 1;$	+1
+use	FUN_0013a8a4	iVar10	laneIndex	INFERRED	lane byte slot (0, 1 or 2) chosen from the fold mask	^\s*iVar10\ =\ 0;$@2	+1
+use	FUN_0013a8a4	iVar10	laneIndex	INFERRED	lane byte slot (0, 1 or 2) chosen from the fold mask	^\s*local_70\ =\ \(uint\)\*\(byte\ \*\)\(iVar12\ \+\ iVar10\)\ <<\ 0x18\ \|\ local_70\ \&\ 0xffffff\ \|$	+1
+use	FUN_0013a8a4	iVar10	laneIndex	INFERRED	lane byte slot (0, 1 or 2) chosen from the fold mask	^\s*\*\(char\ \*\)\(iVar12\ \+\ iVar10\)\ =\ \(char\)\(local_70\ >>\ 0x18\);$	+1
+use	FUN_0013a8a4	iVar10	sourceInstB	INFERRED	operand source instruction of the current operand	^\s*iVar10\ =\ FUN_00105594\(piVar20,iVar15\);$	+1
+use	FUN_0013a8a4	iVar10	sourceInstB	INFERRED	operand source instruction of the current operand	^\s*if\ \(\*\(int\ \*\)\(iVar10\ \+\ 0x98\)\ ==\ 0x33\)\ \{$	+1
+use	FUN_0013a8a4	iVar10	sourceInstB	INFERRED	operand source instruction of the current operand	^\s*\*\(undefined1\ \*\)\(iVar10\ \+\ uVar5\ \+\ 0x9c\)\ =\ 0;$	+2
+use	FUN_0013a8a4	iVar10	laneEntryPtr	INFERRED	address of the source's 4-byte lane-table entry	^\s*iVar10\ =\ iVar9\ \+\ iVar19\ \*\ 4;$	+2
+use	FUN_0013a8a4	iVar10	laneEntryPtr	INFERRED	address of the source's 4-byte lane-table entry	^\s*uVar5\ =\ \(uint\)\*\(byte\ \*\)\(iVar10\ \+\ 3\);$	+1
+use	FUN_0013a8a4	iVar10	nextBlockB	INFERRED	next block in the second walk	^\s*while\ \(iVar10\ =\ iVar15,\ iVar10\ !=\ 0\)\ \{$	+1
+use	FUN_0013a8a4	iVar10	nextBlockB	INFERRED	next block in the second walk	^\s*iVar10\ =\ \*\(int\ \*\)\(iVar6\ \+\ 8\);$	+1
+use	FUN_0013a8a4	iVar10	nextBlockB	INFERRED	next block in the second walk	^\s*iVar6\ =\ iVar10;$	+2
+use	FUN_0013a8a4	iVar19	laneCountdown	INFERRED	countdown of the lane-initialisation loop	^\s*iVar19\ =\ 4;$	+1
+use	FUN_0013a8a4	iVar19	laneCountdown	INFERRED	countdown of the lane-initialisation loop	^\s*iVar19\ =\ iVar19\ \+\ \-1;$	+2
+use	FUN_0013a8a4	iVar19	laneTagValue	INFERRED	lane tag (0, 1 or 2) stored into the lane table	^\s*iVar19\ =\ 2;$	+1
+use	FUN_0013a8a4	iVar19	laneTagValue	INFERRED	lane tag (0, 1 or 2) stored into the lane table	^\s*iVar19\ =\ 1;$	+1
+use	FUN_0013a8a4	iVar19	laneTagValue	INFERRED	lane tag (0, 1 or 2) stored into the lane table	^\s*iVar19\ =\ 0;$	+1
+use	FUN_0013a8a4	iVar19	laneTagValue	INFERRED	lane tag (0, 1 or 2) stored into the lane table	^\s*local_78\ =\ iVar19\ <<\ 0x18\ \|$	+1
+use	FUN_0013a8a4	iVar19	laneTagValue	INFERRED	lane tag (0, 1 or 2) stored into the lane table	^\s*local_6c\ =\ iVar19\ <<\ 0x18\ \|\ \(local_b8\ \&\ 0xc0\)\ <<\ 0x18\ \|\ local_6c\ \&\ 0xffffff;$	+1
+use	FUN_0013a8a4	iVar19	operandRecordB	INFERRED	operand record of the current operand	^\s*iVar19\ =\ FUN_001054ec\(piVar20,iVar15\);$	+2
+use	FUN_0013a8a4	iVar19	operandRecordB	INFERRED	operand record of the current operand	^\s*iVar19\ =\ FUN_001054ec\(piVar20,iVar15\);$@2	+2
+use	FUN_0013a8a4	iVar19	sourceId	INFERRED	vreg id (inst+0x14c) of the operand source	^\s*iVar19\ =\ piVar7\[0x53\];$	+1
+use	FUN_0013a8a4	iVar19	sourceId	INFERRED	vreg id (inst+0x14c) of the operand source	^\s*iVar10\ =\ iVar9\ \+\ iVar19\ \*\ 4;$	+1
+use	FUN_0013a8a4	iVar19	componentIdxB	INFERRED	component index 0..3	^\s*iVar19\ =\ 0;$@2	+1
+use	FUN_0013a8a4	iVar19	componentIdxB	INFERRED	component index 0..3	^\s*if\ \(\*\(char\ \*\)\(iVar19\ \+\ iVar11\ \+\ 0x10\)\ ==\ '\\x03'\)\ \{$	+1
+use	FUN_0013a8a4	iVar19	componentIdxB	INFERRED	component index 0..3	^\s*\(piVar20,iVar15,iVar19,uVar5\ \&\ 0x3f,in_r7,in_r8,$	+1
+use	FUN_0013a8a4	iVar19	componentIdxB	INFERRED	component index 0..3	^\s*bVar2\ =\ iVar19\ !=\ 3;$	+2
+use	FUN_0013a8a4	iVar12	laneEntryAddr	INFERRED	address of the lane-table entry of the chain instruction	^\s*iVar12\ =\ iVar9\ \+\ \*\(int\ \*\)\(iVar11\ \+\ 0x14c\)\ \*\ 4;$	+1
+use	FUN_0013a8a4	iVar12	laneEntryAddr	INFERRED	address of the lane-table entry of the chain instruction	^\s*\(\*\(byte\ \*\)\(iVar12\ \+\ 3\)\ \&\ 0xc0\)\ <<\ 0x18\ \|\ local_78\ \&\ 0xffffff;$	+4
+use	FUN_0013a8a4	iVar12	laneEntryAddr	INFERRED	address of the lane-table entry of the chain instruction	^\s*\*\(char\ \*\)\(iVar12\ \+\ 3\)\ =\ \(char\)\(local_74\ >>\ 0x18\);$	+3
+use	FUN_0013a8a4	iVar12	laneEntryAddr	INFERRED	address of the lane-table entry of the chain instruction	^\s*\*\(char\ \*\)\(iVar12\ \+\ iVar10\)\ =\ \(char\)\(local_70\ >>\ 0x18\);$	+1
+use	FUN_0013a8a4	iVar12	chainDestRecord	INFERRED	operand 0 record of the chain instruction	^\s*iVar12\ =\ FUN_001054ec\(iVar11,0\);$	+2
+use	FUN_0013a8a4	uVar16	compiler	INFERRED	pass->compiler (+8)	^\s*uVar16\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 8\);$	+1
+use	FUN_0013a8a4	uVar16	compiler	INFERRED	pass->compiler (+8)	^\s*if\ \(\(\(iVar10\ ==\ 0\)\ \|\|\ \(iVar10\ =\ FUN_0011346c\(uVar16,piVar7\),\ iVar10\ !=\ 0\)\)\ \|\|$	+1
+use	FUN_0013a8a4	uVar17	operandComponent	INFERRED	component select byte of the operand (4 = unused)	^\s*uVar17\ =\ \(uint\)\*\(byte\ \*\)\(uVar14\ \+\ iVar10\ \+\ 0x10\);$	+1
+use	FUN_0013a8a4	uVar17	operandComponent	INFERRED	component select byte of the operand (4 = unused)	^\s*if\ \(uVar17\ !=\ 4\)\ \{$	+2
+use	FUN_0013a8a4	uVar17	operandComponent	INFERRED	component select byte of the operand (4 = unused)	^\s*uVar17\ ==\ \(local_b8\ \&\ 0x3f\)\)\)\ \{$	+1
+use	FUN_0013a8a4	uVar17	operandComponent	INFERRED	component select byte of the operand (4 = unused)	^\s*local_80\ =\ \(uVar17\ \&\ 0x3f\)\ <<\ 0x18\ \|$	+2
+use	FUN_0013a8a4	uVar17	operandComponent	INFERRED	component select byte of the operand (4 = unused)	^\s*\*\(char\ \*\)\(\(int\)\&local_b8\ \+\ uVar17\)\ =\ \(char\)\(local_80\ >>\ 0x18\);$	+1
+use	FUN_0013a8a4	uVar17	operandComponent	INFERRED	component select byte of the operand (4 = unused)	^\s*uVar5\ =\ uVar5\ \&\ \~\(1\ <<\ \(uVar17\ \&\ 0x3f\)\);$	+1
+use	FUN_0013a8a4	uVar17	operandComponent	INFERRED	component select byte of the operand (4 = unused)	^\s*local_7c\ =\ \(uVar17\ \&\ 0x3f\)\ <<\ 0x18\ \|$	+2
+use	FUN_0013a8a4	uVar17	operandComponent	INFERRED	component select byte of the operand (4 = unused)	^\s*\*\(char\ \*\)\(\(int\)\&local_b8\ \+\ uVar17\)\ =\ \(char\)\(local_7c\ >>\ 0x18\);$	+1
+use	FUN_0013a8a4	uVar17	operandComponent	INFERRED	component select byte of the operand (4 = unused)	^\s*\*\(byte\ \*\)\(\(int\)\&local_b8\ \+\ uVar17\)\ =\ \*\(byte\ \*\)\(\(int\)\&local_b8\ \+\ uVar17\)\ \|\ 0x80;$	+1
+use	FUN_0013a8a4	pcVar18	setComponentFn	INFERRED	virtual slot 0x88 of the instruction (set operand component)	^\s*pcVar18\ =\ \*\(code\ \*\*\)\(\*piVar20\ \+\ 0x88\);$	+1
+use	FUN_0013a8a4	pcVar18	setComponentFn	INFERRED	virtual slot 0x88 of the instruction (set operand component)	^\s*\(\*pcVar18\)\(piVar20,iVar15,uVar5,\*\(undefined1\ \*\)\(iVar19\ \+\ 0x13\)\);$	+1
+local	FUN_0013a8a4	piVar20	inst	INFERRED	instruction walked in the block's list
+use	FUN_0013a8a4	piVar7	lookaheadInst	INFERRED	instruction after the next one, fetched before processing	^\s*piVar7\ =\ \(int\ \*\)\(\*\(int\ \*\*\)\(local_a4\ \+\ 0x98\)\)\[2\];$	+1
+use	FUN_0013a8a4	piVar7	lookaheadInst	INFERRED	instruction after the next one, fetched before processing	^\s*if\ \(piVar7\ !=\ \(int\ \*\)0x0\)\ \{$	+1
+use	FUN_0013a8a4	piVar7	lookaheadInst	INFERRED	instruction after the next one, fetched before processing	^\s*piVar8\ =\ piVar7;$	+1
+use	FUN_0013a8a4	piVar7	lookaheadInst	INFERRED	instruction after the next one, fetched before processing	^\s*piVar7\ =\ \(int\ \*\)piVar8\[2\];$	+1
+use	FUN_0013a8a4	piVar7	lookaheadInst	INFERRED	instruction after the next one, fetched before processing	^\s*piVar7\ =\ \(int\ \*\)piVar20\[2\];$	+1
+use	FUN_0013a8a4	piVar7	lookaheadInst	INFERRED	instruction after the next one, fetched before processing	^\s*piVar8\ =\ piVar7;$@2	+1
+use	FUN_0013a8a4	piVar7	lookaheadInst	INFERRED	instruction after the next one, fetched before processing	^\s*piVar7\ =\ \(int\ \*\)piVar8\[2\];$@2	+1
+use	FUN_0013a8a4	piVar7	sourceInst	INFERRED	operand source instruction	^\s*piVar7\ =\ \(int\ \*\)FUN_00105594\(piVar20,iVar15\);$	+2
+use	FUN_0013a8a4	piVar7	sourceInst	INFERRED	operand source instruction	^\s*\*\(uint\ \*\)\(iVar9\ \+\ piVar7\[0x53\]\ \*\ 4\)\ =\ local_b8;$	+1
+use	FUN_0013a8a4	piVar7	sourceInst	INFERRED	operand source instruction	^\s*iVar10\ =\ \(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0x24\)\)\(piVar7\);$	+3
+use	FUN_0013a8a4	piVar7	sourceInst	INFERRED	operand source instruction	^\s*iVar10\ =\ FUN_001054ec\(piVar7,0\);$	+1
+use	FUN_0013a8a4	piVar7	sourceInst	INFERRED	operand source instruction	^\s*\(uVar5\ =\ \(\(int\ \(\*\)\(\)\)FUN_0013a774\)\(piVar7,uVar14,param_1\),\ uVar5\ !=\ 0\)\)\ \{$	+2
+use	FUN_0013a8a4	piVar7	sourceInst	INFERRED	operand source instruction	^\s*if\ \(\(piVar7\[5\]\ \&\ 0x200U\)\ !=\ 0\)\ \{$	+2
+use	FUN_0013a8a4	piVar7	sourceInst	INFERRED	operand source instruction	^\s*iVar11\ =\ FUN_001054ec\(piVar7,0\);$	+3
+use	FUN_0013a8a4	piVar7	sourceInst	INFERRED	operand source instruction	^\s*piVar7\ =\ \(int\ \*\)FUN_00105594\(piVar20,iVar15\);$@2	+3
+use	FUN_0013a8a4	piVar7	targetInfo	INFERRED	target description (compiler +0x30c) queried for the instruction	^\s*piVar7\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x30c\);$	+2
+use	FUN_0013a8a4	piVar8	chainInst	INFERRED	instruction along the operand-source chain	^\s*piVar8\ =\ \(int\ \*\)FUN_00105594\(piVar7,piVar7\[0x21\]\);$	+1
+use	FUN_0013a8a4	piVar8	chainInst	INFERRED	instruction along the operand-source chain	^\s*for\ \(;\ piVar8\ !=\ \(int\ \*\)0x0;\ piVar8\ =\ \(int\ \*\)FUN_00105594\(piVar8,piVar8\[0x21\]\)$	+1
+use	FUN_0013a8a4	piVar8	chainInst	INFERRED	instruction along the operand-source chain	^\s*iVar10\ =\ FUN_001054ec\(piVar8,0\);$	+1
+use	FUN_0013a8a4	piVar8	chainInst	INFERRED	instruction along the operand-source chain	^\s*uVar5\ =\ \(\(int\ \(\*\)\(\)\)FUN_0013a774\)\(piVar8,uVar5,param_1\);$	+1
+use	FUN_0013a8a4	piVar8	chainInst	INFERRED	instruction along the operand-source chain	^\s*iVar10\ =\ \(\*\*\(code\ \*\*\)\(\*piVar8\ \+\ 0x24\)\)\(piVar8\);$	+1
+use	FUN_0013a8a4	piVar8	chainInst	INFERRED	instruction along the operand-source chain	^\s*\(iVar10\ =\ FUN_0011346c\(\*\(undefined4\ \*\)\(param_1\ \+\ 8\),piVar8\),$	+1
+use	FUN_0013a8a4	piVar8	chainInst	INFERRED	instruction along the operand-source chain	^\s*if\ \(\(piVar8\[5\]\ \&\ 0x200U\)\ ==\ 0\)\ break;$	+1
+use	FUN_0013a8a4	piVar8	nextInst	INFERRED	next instruction in the block list	^\s*piVar8\ =\ piVar7;$	+1
+use	FUN_0013a8a4	piVar8	nextInst	INFERRED	next instruction in the block list	^\s*piVar8\ =\ \(int\ \*\)piVar20\[2\];$	+1
+use	FUN_0013a8a4	piVar8	nextInst	INFERRED	next instruction in the block list	^\s*piVar7\ =\ \(int\ \*\)piVar8\[2\];$	+3
+use	FUN_0013a8a4	piVar8	nextInst	INFERRED	next instruction in the block list	^\s*piVar8\ =\ piVar7;$@2	+1
+use	FUN_0013a8a4	piVar8	nextInst	INFERRED	next instruction in the block list	^\s*piVar8\ =\ \(int\ \*\)piVar20\[2\];$@2	+1
+use	FUN_0013a8a4	piVar8	nextInst	INFERRED	next instruction in the block list	^\s*piVar7\ =\ \(int\ \*\)piVar8\[2\];$@2	+3
+local	FUN_0013a8a4	iVar9	laneTable	INFERRED	per-vreg 4-byte lane table (one tag byte per component), freed at the end
+local	FUN_0013a8a4	local_b8	laneWord	INFERRED	lane-table entry (four tag bytes) of the operand source
+local	FUN_0013a8a4	local_a8	maskedSelectWord	INFERRED	out-parameter of SelectWord__selectWhereMasked
+local	FUN_0013a8a4	local_a0	blockListObject	INFERRED	block list at pass+0x37c
+local	FUN_0013a8a4	local_a4	currentBlock	INFERRED	block whose instruction list is walked
+use	FUN_0013a8a4	uVar5	usableMask	INFERRED	component mask still usable for the fold (starts at 0xf)	^\s*uVar5\ =\ 0xf;$	+1
+use	FUN_0013a8a4	uVar5	usableMask	INFERRED	component mask still usable for the fold (starts at 0xf)	^\s*uVar5\ =\ uVar5\ \&\ \~\(1\ <<\ \(uVar14\ \&\ 0x3f\)\);$	+1
+use	FUN_0013a8a4	uVar5	usableMask	INFERRED	component mask still usable for the fold (starts at 0xf)	^\s*uVar5\ =\ uVar5\ \&\ 0xfffffff7;$	+1
+use	FUN_0013a8a4	uVar5	usableMask	INFERRED	component mask still usable for the fold (starts at 0xf)	^\s*uVar5\ =\ uVar5\ \&\ 0xfffffff7;$@2	+1
+use	FUN_0013a8a4	uVar5	usableMask	INFERRED	component mask still usable for the fold (starts at 0xf)	^\s*uVar5\ =\ 0;$	+1
+use	FUN_0013a8a4	uVar5	usableMask	INFERRED	component mask still usable for the fold (starts at 0xf)	^\s*uVar5\ =\ uVar5\ \&\ \~\(1\ <<\ \(uVar17\ \&\ 0x3f\)\);$	+1
+use	FUN_0013a8a4	uVar5	usableMask	INFERRED	component mask still usable for the fold (starts at 0xf)	^\s*if\ \(\(\(\(\(uVar5\ !=\ 0\)\ \&\&\ \(bVar2\)\)\ \&\&\ \(bVar4\)\)\ \&\&$	+2
+use	FUN_0013a8a4	uVar5	foldMask	INFERRED	component mask FUN_0013a774 accepted for the fold	^\s*\(uVar5\ =\ \(\(int\ \(\*\)\(\)\)FUN_0013a774\)\(piVar7,uVar14,param_1\),\ uVar5\ !=\ 0\)\)\ \{$	+1
+use	FUN_0013a8a4	uVar5	foldMask	INFERRED	component mask FUN_0013a774 accepted for the fold	^\s*uVar5\ =\ \(\(int\ \(\*\)\(\)\)FUN_0013a774\)\(piVar8,uVar5,param_1\);$	+2
+use	FUN_0013a8a4	uVar5	foldMask	INFERRED	component mask FUN_0013a774 accepted for the fold	^\s*if\ \(\(uVar5\ \&\ 1\)\ ==\ 0\)\ \{$	+2
+use	FUN_0013a8a4	uVar5	laneTag	INFERRED	lane tag byte of the instruction's lane-table entry	^\s*uVar5\ =\ \(uint\)\*\(byte\ \*\)\(piVar20\[0x53\]\ \*\ 4\ \+\ iVar9\ \+\ 3\);$	+2
+use	FUN_0013a8a4	uVar5	laneTag	INFERRED	lane tag byte of the instruction's lane-table entry	^\s*local_64\ =\ uVar5\ <<\ 0x18\ \|\ local_64\ \&\ 0xffffff;$	+2
+use	FUN_0013a8a4	uVar5	laneTag	INFERRED	lane tag byte of the instruction's lane-table entry	^\s*if\ \(uVar5\ !=\ 3\)\ \{$	+1
+use	FUN_0013a8a4	uVar5	laneTag	INFERRED	lane tag byte of the instruction's lane-table entry	^\s*\*\(undefined1\ \*\)\(\(int\)\&local_b8\ \+\ uVar5\)\ =\ 0;$	+1
+use	FUN_0013a8a4	uVar5	laneTag	INFERRED	lane tag byte of the instruction's lane-table entry	^\s*\*\(undefined1\ \*\)\(\(int\)piVar20\ \+\ uVar5\ \+\ 0xc\)\ =\ 1;$	+1
+use	FUN_0013a8a4	uVar5	laneTag	INFERRED	lane tag byte of the instruction's lane-table entry	^\s*if\ \(\*\(char\ \*\)\(uVar5\ \+\ iVar19\ \+\ 0x10\)\ !=\ '\\x04'\)\ \{$	+1
+use	FUN_0013a8a4	uVar5	laneTag	INFERRED	lane tag byte of the instruction's lane-table entry	^\s*\(\*pcVar18\)\(piVar20,iVar15,uVar5,\*\(undefined1\ \*\)\(iVar19\ \+\ 0x13\)\);$	+1
+use	FUN_0013a8a4	uVar5	laneTag	INFERRED	lane tag byte of the instruction's lane-table entry	^\s*\(\*\*\(code\ \*\*\)\(\*piVar20\ \+\ 0x88\)\)\(piVar20,iVar15,uVar5,uVar5\);$	+3
+use	FUN_0013a8a4	uVar5	laneTagB	INFERRED	lane tag byte of the operand source's entry	^\s*uVar5\ =\ \(uint\)\*\(byte\ \*\)\(iVar10\ \+\ 3\);$	+2
+use	FUN_0013a8a4	uVar5	laneTagB	INFERRED	lane tag byte of the operand source's entry	^\s*\(piVar20,iVar15,iVar19,uVar5\ \&\ 0x3f,in_r7,in_r8,$	+1
+use	FUN_0013a8a4	uVar13	requiredLaneMask	INFERRED	lanes that must stay mapped (component 3 uses)	^\s*uVar13\ =\ 0;$	+1
+use	FUN_0013a8a4	uVar13	requiredLaneMask	INFERRED	lanes that must stay mapped (component 3 uses)	^\s*uVar13\ =\ uVar13\ \|\ 1\ <<\ \(local_b8\ \&\ 0x3f\);$	+1
+use	FUN_0013a8a4	uVar13	requiredLaneMask	INFERRED	lanes that must stay mapped (component 3 uses)	^\s*\(\(uVar14\ =\ uVar5,\ uVar13\ ==\ 0\ \|\|\ \(uVar14\ =\ uVar13,\ \(uVar5\ \&\ uVar13\)\ !=\ 0\)\)\)\)\ \&\&$	+1
+use	FUN_0013a8a4	uVar13	savedLaneWord	INFERRED	copy of the lane word saved around the byte test	^\s*uVar13\ =\ local_b8;$	+1
+use	FUN_0013a8a4	uVar13	savedLaneWord	INFERRED	copy of the lane word saved around the byte test	^\s*local_b8\ =\ uVar13;$	+1
+use	FUN_0013a8a4	uVar14	componentIndex	INFERRED	component index 0..3	^\s*uVar14\ =\ 0;$	+1
+use	FUN_0013a8a4	uVar14	componentIndex	INFERRED	component index 0..3	^\s*uVar17\ =\ \(uint\)\*\(byte\ \*\)\(uVar14\ \+\ iVar10\ \+\ 0x10\);$	+1
+use	FUN_0013a8a4	uVar14	componentIndex	INFERRED	component index 0..3	^\s*if\ \(\*\(char\ \*\)\(uVar14\ \+\ iVar10\ \+\ 0x10\)\ !=\ '\\x01'\)\ \{$	+2
+use	FUN_0013a8a4	uVar14	componentIndex	INFERRED	component index 0..3	^\s*bVar1\ =\ uVar14\ !=\ 3;$	+2
+use	FUN_0013a8a4	uVar14	candidateMask	INFERRED	fold mask handed to FUN_0013a774	^\s*\(\(uVar14\ =\ uVar5,\ uVar13\ ==\ 0\ \|\|\ \(uVar14\ =\ uVar13,\ \(uVar5\ \&\ uVar13\)\ !=\ 0\)\)\)\)\ \&\&$	+2
+use	FUN_0013a8a4	bVar1	moreComponents	INFERRED	loop flag: component index has not reached 3	^\s*bVar1\ =\ uVar14\ !=\ 3;$	+1
+use	FUN_0013a8a4	bVar1	moreComponents	INFERRED	loop flag: component index has not reached 3	^\s*\}\ while\ \(bVar1\);$	+1
+use	FUN_0013a8a4	bVar2	sawRemappedComponent	INFERRED	true once a component maps onto another lane	^\s*bVar2\ =\ false;$	+1
+use	FUN_0013a8a4	bVar2	sawRemappedComponent	INFERRED	true once a component maps onto another lane	^\s*bVar2\ =\ true;$	+1
+use	FUN_0013a8a4	bVar2	sawRemappedComponent	INFERRED	true once a component maps onto another lane	^\s*if\ \(\(\(\(\(uVar5\ !=\ 0\)\ \&\&\ \(bVar2\)\)\ \&\&\ \(bVar4\)\)\ \&\&$	+1
+use	FUN_0013a8a4	bVar2	chainFailed	INFERRED	true when the chain walk found an instruction that cannot take the fold	^\s*bVar2\ =\ false;$@2	+1
+use	FUN_0013a8a4	bVar2	chainFailed	INFERRED	true when the chain walk found an instruction that cannot take the fold	^\s*bVar2\ =\ uVar5\ ==\ 0;$	+1
+use	FUN_0013a8a4	bVar2	chainFailed	INFERRED	true when the chain walk found an instruction that cannot take the fold	^\s*if\ \(bVar2\)\ goto\ LAB_0013ae10;$	+1
+use	FUN_0013a8a4	bVar2	laneByteZero	INFERRED	low byte of the masked select word is zero	^\s*bVar2\ =\ \(char\)local_b8\ ==\ '\\0';$	+1
+use	FUN_0013a8a4	bVar2	laneByteZero	INFERRED	low byte of the masked select word is zero	^\s*if\ \(bVar2\)\ \{$	+1
+use	FUN_0013a8a4	bVar2	moreComponentsB	INFERRED	loop flag: component index has not reached 3	^\s*bVar2\ =\ iVar19\ !=\ 3;$	+1
+use	FUN_0013a8a4	bVar2	moreComponentsB	INFERRED	loop flag: component index has not reached 3	^\s*\}\ while\ \(bVar2\);$	+1
+use	FUN_0013a8a4	bVar3	laneTagByte	INFERRED	tag byte (+3) of the lane-table entry	^\s*bVar3\ =\ \*\(byte\ \*\)\(iVar10\ \+\ 3\);$	+2
+use	FUN_0013a8a4	bVar4	sawComponent3	INFERRED	true once component 3 is read	^\s*bVar4\ =\ false;$	+1
+use	FUN_0013a8a4	bVar4	sawComponent3	INFERRED	true once component 3 is read	^\s*bVar4\ =\ true;$	+1
+use	FUN_0013a8a4	bVar4	sawComponent3	INFERRED	true once component 3 is read	^\s*bVar4\ =\ true;$@2	+1
+use	FUN_0013a8a4	bVar4	sawComponent3	INFERRED	true once component 3 is read	^\s*if\ \(\(\(\(\(uVar5\ !=\ 0\)\ \&\&\ \(bVar2\)\)\ \&\&\ \(bVar4\)\)\ \&\&$	+1
+local	FUN_0013a8a4	in_r7	staleArg5	INFERRED	stale register argument forwarded to the virtual call
+local	FUN_0013a8a4	in_r8	staleArg6	INFERRED	stale register argument forwarded to the virtual call
+local	FUN_0013a8a4	local_9c	laneWordInsert1	INFERRED	partial-word (byte) insert temporary of a lane-table store
+local	FUN_0013a8a4	local_98	laneWordInsert2	INFERRED	partial-word (byte) insert temporary of a lane-table store
+local	FUN_0013a8a4	local_94	laneWordInsert3	INFERRED	partial-word (byte) insert temporary of a lane-table store
+local	FUN_0013a8a4	local_90	laneWordInsert4	INFERRED	partial-word (byte) insert temporary of a lane-table store
+local	FUN_0013a8a4	local_8c	laneWordInsert5	INFERRED	partial-word (byte) insert temporary of a lane-table store
+local	FUN_0013a8a4	local_88	laneWordInsert6	INFERRED	partial-word (byte) insert temporary of a lane-table store
+local	FUN_0013a8a4	local_84	laneWordInsert7	INFERRED	partial-word (byte) insert temporary of a lane-table store
+local	FUN_0013a8a4	local_80	laneWordInsert8	INFERRED	partial-word (byte) insert temporary of a lane-table store
+local	FUN_0013a8a4	local_7c	laneWordInsert9	INFERRED	partial-word (byte) insert temporary of a lane-table store
+local	FUN_0013a8a4	local_78	laneWordInsert10	INFERRED	partial-word (byte) insert temporary of a lane-table store
+local	FUN_0013a8a4	local_74	laneWordInsert11	INFERRED	partial-word (byte) insert temporary of a lane-table store
+local	FUN_0013a8a4	local_70	laneWordInsert12	INFERRED	partial-word (byte) insert temporary of a lane-table store
+local	FUN_0013a8a4	local_6c	laneWordInsert13	INFERRED	partial-word (byte) insert temporary of a lane-table store
+local	FUN_0013a8a4	local_68	laneWordInsert14	INFERRED	partial-word (byte) insert temporary of a lane-table store
+local	FUN_0013a8a4	local_64	laneWordInsert15	INFERRED	partial-word (byte) insert temporary of a lane-table store
+local	FUN_0013a8a4	local_60	laneWordInsert16	INFERRED	partial-word (byte) insert temporary of a lane-table store

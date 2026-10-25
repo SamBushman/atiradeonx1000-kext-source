@@ -1,0 +1,26 @@
+func	FUN_000914e0	ffvpEmitEyePositionMad	INFERRED	eye-space vertex position as one MUL + three MAD of the modelview rows (builder+0xb4, constant file) by the position input; used when GL ctx flag 0x13c0 & 4 is set; result operand at builder+0x3f4
+func	FUN_000916d0	ffvpEmitEyePositionDp4	INFERRED	eye-space vertex position as four DP4 (x,y,z,w write masks) of the modelview rows (builder+0xb4) with the position input; used when GL ctx flag 0x13c0 & 4 is clear; result operand at builder+0x3f4
+func	FUN_00091880	ffvpEmitEyeDistanceSquared	INFERRED	dot product of the eye position with itself into the scalar operand at builder+0x50c (eyeDistSqReg +0x510)
+func	FUN_00092150	ffvpEmitInverseEyeDistance	INFERRED	reciprocal square root (slot 0x1318) of the eye distance squared into the scalar operand at builder+0x534 (invEyeDistReg +0x538)
+func	FUN_00092220	ffvpEmitEyeVector	INFERRED	eye position times the inverse eye distance: unit vector from the eye to the vertex, operand at builder+0x41c (eyeVectorReg +0x420)
+func	FUN_00091a30	ffvpEmitEyeNormal	INFERRED	normal input transformed by the inverse modelview rows (builder+0xc4) with three DP4/DP3: eye-space normal, operand at builder+0x444 (eyeNormalReg +0x448)
+func	FUN_00091b90	ffvpEmitNormalizedNormal	INFERRED	normalises the eye normal (GL_NORMALIZE, ctx+0x128): dot with itself, reciprocal square root, multiply; operand at builder+0x494 (unitNormalReg +0x498)
+func	FUN_00091d70	ffvpEmitRescaledNormal	INFERRED	multiplies the normal by the rescale constant (builder+0x344, GL_RESCALE_NORMAL, ctx+0x12c); operand at builder+0x46c (rescaledNormalReg +0x470)
+func	FUN_00092350	ffvpEmitReflectionVector	INFERRED	reflection of the eye vector about the (normalised/rescaled/eye) normal: dot product, then a three-source op; operand at builder+0x4bc (reflectionReg +0x4c0)
+func	FUN_00092570	ffvpEmitSphereMapCoord	INFERRED	sphere-map texgen intermediate from the reflection vector (reflection +1 on z, reciprocal root, scale/bias); operand at builder+0x4e4 (sphereMapReg +0x4e8)
+func	FUN_000928a0	ffvpEmitFogExp2	INFERRED	EXP2 fog factor: fog coordinate from GL_FOG_COORDINATE_SOURCE (state block +0x2e06: 0x8451 coordinate input / 0x8452 fragment depth from the eye position) scaled by the fog parameter constant (builder+0x330); operand at builder+0x584 (fogFactorReg +0x588)
+func	FUN_00093510	ffvpEmitBlendedEyeNormal	INFERRED	vertex blending: accumulates the normal input of each blend matrix through its inverse modelview rows (builder+0xc4+4*i) weighted by builder+0x55c; result slot builder+0x444 (eyeNormalReg +0x448)
+func	FUN_00093a40	ffvpEmitBlendedClipPosition	INFERRED	vertex blending: position through each blend matrix MVP rows (builder+0xa4+4*i) weighted; writes the clip position output (builder+0x68) and the optional clip copy
+func	FUN_00094840	ffvpEmitBlendedEyePosition	INFERRED	vertex blending: position through each blend matrix modelview rows (builder+0xb4+4*i) weighted; result slot builder+0x3f4 (eyePositionReg +0x3f8)
+func	FUN_00095610	ffvpEmitProjectedPosition	INFERRED	clip position = projection constants (builder+0xd4) times the already computed eye position (builder+0x3f4); writes position output builder+0x68 and the optional output copy builder+0x84+4*n
+func	FUN_00095dd0	ffvpEmitClipPosition	INFERRED	clip position = MVP constants (builder+0xa4) times the position input; writes position output builder+0x68 and the optional output copy builder+0x84+4*n
+func	FUN_00091eb0	ffvpEmitBlendWeights	INFERRED	builds the vec4 of blend weights at builder+0x55c from the weight input (builder+0x5c); a missing last weight is filled with the implicit remainder
+func	FUN_00091980	ffvpEmitInverseW	INFERRED	one-source op in emit slot 0x1314 (reciprocal) into the scalar operand at builder+0x69c (invWReg +0x6a0)
+func	FUN_00096500	ffvpPrepareEyeNormal	INFERRED	stage wrapper: needs builder+0xc4 (inverse modelview) and builder+4 (normal input), then ffvpEmitEyeNormal
+func	FUN_000939e0	ffvpPrepareRescaledNormal	INFERRED	stage wrapper: needs builder+4 (normal input) and builder+0x344 (rescale constant), then ffvpEmitRescaledNormal
+func	FUN_00093a20	ffvpPrepareNormalizedNormal	INFERRED	stage wrapper: needs builder+4 (normal input), then ffvpEmitNormalizedNormal
+func	FUN_00096540	ffvpPrepareFogExp2	INFERRED	fog stage for GL_EXP2 (state block fog mode 0x801): checks fog coordinate source and fog registers, clears builder ctx byte +0x12e, then ffvpEmitFogExp2
+func	FUN_000955e0	ffvpPrepareBlendWeights	INFERRED	stage wrapper: needs builder+0x5c (weight input), then ffvpEmitBlendWeights
+func	FUN_000955a0	ffvpEmitInverseEyeDistance_955a0	INFERRED	second copy of ffvpEmitInverseEyeDistance (lazy slot builder+0x534)
+func	FUN_000955c0	ffvpEmitEyeVector_955c0	INFERRED	second copy of ffvpEmitEyeVector (lazy slot builder+0x41c)
+func	FUN_00095d70	ffvpEmitEyePosition	INFERRED	eye position (modelview builder+0xb4 times position input) emitted in either form selected by GL ctx flag 0x13c0 & 4 (MUL+3 MAD vs 4 DP4); result operand builder+0x3f4

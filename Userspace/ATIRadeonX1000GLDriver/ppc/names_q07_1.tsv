@@ -1,0 +1,586 @@
+use	FUN_0013da3c	uVar6	option4eEnabled	INFERRED	result of Compiler__isOptionEnabled(compiler, 0x4e); selects which instruction kind (+0x98 == 6 or != 6) the first cleanup loop collects	^\s*uVar6\ =\ FUN_000e07dc\(\*\(undefined4\ \*\)\(param_1\ \+\ PROG_compiler\),0x4e\);$	+2
+use	FUN_0013da3c	uVar6	option4eEnabled	INFERRED	result of Compiler__isOptionEnabled(compiler, 0x4e); selects which instruction kind (+0x98 == 6 or != 6) the first cleanup loop collects	^\s*local_a0\ =\ uVar6;$	+1
+use	FUN_0013da3c	uVar6	instOrdinal	INFERRED	1-based ordinal of the for-loop over the program's instruction vector (count at +4, data at +8)	^\s*for\ \(uVar6\ =\ 1;\ uVar22\ =\ local_a0,\ uVar6\ <=\ \*\(uint\ \*\)\(iVar14\ \+\ 4\);\ uVar6\ =\ uVar6\ \+\ 1\)\ \{$	+1
+use	FUN_0013da3c	uVar6	instOrdinal	INFERRED	1-based ordinal of the for-loop over the program's instruction vector (count at +4, data at +8)	^\s*for\ \(uVar6\ =\ 1;\ uVar22\ =\ local_a0,\ uVar6\ <=\ \*\(uint\ \*\)\(iVar14\ \+\ 4\);\ uVar6\ =\ uVar6\ \+\ 1\)\ \{$@2	+1
+use	FUN_0013da3c	uVar6	instOrdinal	INFERRED	1-based ordinal of the for-loop over the program's instruction vector (count at +4, data at +8)	^\s*for\ \(uVar6\ =\ 1;\ uVar6\ <=\ \*\(uint\ \*\)\(iVar14\ \+\ 4\);\ uVar6\ =\ uVar6\ \+\ 1\)\ \{$	+1
+use	FUN_0013da3c	uVar6	instOrdinal	INFERRED	1-based ordinal of the for-loop over the program's instruction vector (count at +4, data at +8)	^\s*for\ \(uVar6\ =\ 1;\ uVar22\ =\ local_b0,\ uVar6\ <=\ \*\(uint\ \*\)\(iVar14\ \+\ 4\);\ uVar6\ =\ uVar6\ \+\ 1\)\ \{$	+1
+use	FUN_0013da3c	uVar6	topIndex	INFERRED	index of the top element (count - 1) of the work vector being drained from the back	^\s*uVar6\ =\ local_a0\ \-\ 1;$	+1
+use	FUN_0013da3c	uVar6	topIndex	INFERRED	index of the top element (count - 1) of the work vector being drained from the back	^\s*if\ \(uVar6\ <\ local_a0\)\ \{$	+2
+use	FUN_0013da3c	uVar6	topIndex	INFERRED	index of the top element (count - 1) of the work vector being drained from the back	^\s*FUN_00194208\(\&local_a4,uVar6\);$	+1
+use	FUN_0013da3c	uVar6	topIndex	INFERRED	index of the top element (count - 1) of the work vector being drained from the back	^\s*uVar6\ =\ local_a0\ \-\ 1;$@2	+1
+use	FUN_0013da3c	uVar6	topIndex	INFERRED	index of the top element (count - 1) of the work vector being drained from the back	^\s*if\ \(uVar6\ <\ local_a0\)\ \{$@2	+2
+use	FUN_0013da3c	uVar6	topIndex	INFERRED	index of the top element (count - 1) of the work vector being drained from the back	^\s*FUN_00194208\(\&local_a4,uVar6\);$@2	+1
+use	FUN_0013da3c	uVar6	topIndex	INFERRED	index of the top element (count - 1) of the work vector being drained from the back	^\s*uVar6\ =\ local_b0\ \-\ 1;$	+1
+use	FUN_0013da3c	uVar6	topIndex	INFERRED	index of the top element (count - 1) of the work vector being drained from the back	^\s*if\ \(uVar6\ <\ local_b0\)\ \{$	+2
+use	FUN_0013da3c	uVar6	topIndex	INFERRED	index of the top element (count - 1) of the work vector being drained from the back	^\s*FUN_00194208\(\&local_b4,uVar6\);$	+1
+use	FUN_0013da3c	uVar6	topIndex	INFERRED	index of the top element (count - 1) of the work vector being drained from the back	^\s*uVar6\ =\ local_b0\ \-\ 1;$@2	+1
+use	FUN_0013da3c	uVar6	topIndex	INFERRED	index of the top element (count - 1) of the work vector being drained from the back	^\s*if\ \(uVar6\ <\ local_b0\)\ \{$@2	+2
+use	FUN_0013da3c	uVar6	topIndex	INFERRED	index of the top element (count - 1) of the work vector being drained from the back	^\s*FUN_00194208\(\&local_b4,uVar6\);$@2	+1
+use	FUN_0013da3c	uVar6	vecCountBefore	INFERRED	work-vector element count read before the inline push (also copied to the saved count)	^\s*uVar6\ =\ local_b0;$	+1
+use	FUN_0013da3c	uVar6	vecCountBefore	INFERRED	work-vector element count read before the inline push (also copied to the saved count)	^\s*local_b0\ =\ uVar6\ \+\ 1;$	+1
+use	FUN_0013da3c	uVar6	vecCountBefore	INFERRED	work-vector element count read before the inline push (also copied to the saved count)	^\s*uVar6\ =\ local_b0;$@2	+1
+use	FUN_0013da3c	uVar6	vecCountBefore	INFERRED	work-vector element count read before the inline push (also copied to the saved count)	^\s*local_b0\ =\ uVar6\ \+\ 1;$@2	+1
+use	FUN_0013da3c	uVar6	savedScratchWord	INFERRED	saves the scratch word that the inlined byte test overwrites and is restored afterwards	^\s*uVar6\ =\ local_a4;$	+1
+use	FUN_0013da3c	uVar6	savedScratchWord	INFERRED	saves the scratch word that the inlined byte test overwrites and is restored afterwards	^\s*local_a4\ =\ uVar6;$	+1
+use	FUN_0013da3c	uVar6	operandSelectWord	INFERRED	select word FUN_000f3c30 computes for operand iVar11 (defaults to the constant select word)	^\s*uVar6\ =\ DAT_001b0020;$	+1
+use	FUN_0013da3c	uVar6	operandSelectWord	INFERRED	select word FUN_000f3c30 computes for operand iVar11 (defaults to the constant select word)	^\s*uVar6\ =\ local_6c;$	+1
+use	FUN_0013da3c	uVar6	operandSelectWord	INFERRED	select word FUN_000f3c30 computes for operand iVar11 (defaults to the constant select word)	^\s*FUN_000f3340\(\&local_60,\*\(undefined4\ \*\)\(iVar12\ \+\ 0x10\),uVar6\);$	+1
+use	FUN_0013da3c	uVar6	operandSelectWord	INFERRED	select word FUN_000f3c30 computes for operand iVar11 (defaults to the constant select word)	^\s*FUN_000f3340\(\&local_68,uVar19,uVar6\);$	+1
+use	FUN_0013da3c	uVar6	userCount	INFERRED	element count (+4) of an instruction's user vector (inst+0x10) read before an inline push or scan	^\s*uVar6\ =\ puVar21\[1\];$	+5
+use	FUN_0013da3c	uVar6	userCount	INFERRED	element count (+4) of an instruction's user vector (inst+0x10) read before an inline push or scan	^\s*puVar9\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar21,uVar6\);$	+1
+use	FUN_0013da3c	uVar6	userCount	INFERRED	element count (+4) of an instruction's user vector (inst+0x10) read before an inline push or scan	^\s*uVar6\ =\ puVar21\[1\];$@2	+5
+use	FUN_0013da3c	uVar6	userCount	INFERRED	element count (+4) of an instruction's user vector (inst+0x10) read before an inline push or scan	^\s*puVar9\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar21,uVar6\);$@2	+1
+use	FUN_0013da3c	uVar6	userCount	INFERRED	element count (+4) of an instruction's user vector (inst+0x10) read before an inline push or scan	^\s*uVar6\ =\ puVar21\[1\];$@3	+5
+use	FUN_0013da3c	uVar6	userCount	INFERRED	element count (+4) of an instruction's user vector (inst+0x10) read before an inline push or scan	^\s*puVar9\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar21,uVar6\);$@3	+1
+use	FUN_0013da3c	uVar6	userCount	INFERRED	element count (+4) of an instruction's user vector (inst+0x10) read before an inline push or scan	^\s*uVar6\ =\ puVar21\[1\];$@4	+5
+use	FUN_0013da3c	uVar6	userCount	INFERRED	element count (+4) of an instruction's user vector (inst+0x10) read before an inline push or scan	^\s*puVar9\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar21,uVar6\);$@4	+1
+use	FUN_0013da3c	uVar6	userCount	INFERRED	element count (+4) of an instruction's user vector (inst+0x10) read before an inline push or scan	^\s*uVar6\ =\ puVar21\[1\];$@5	+5
+use	FUN_0013da3c	uVar6	userCount	INFERRED	element count (+4) of an instruction's user vector (inst+0x10) read before an inline push or scan	^\s*puVar9\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar21,uVar6\);$@5	+1
+use	FUN_0013da3c	uVar6	userCount	INFERRED	element count (+4) of an instruction's user vector (inst+0x10) read before an inline push or scan	^\s*uVar6\ =\ \(\*\(uint\ \*\*\)\(iVar23\ \+\ 0x10\)\)\[1\];$	+2
+use	FUN_0013da3c	uVar6	userCount	INFERRED	element count (+4) of an instruction's user vector (inst+0x10) read before an inline push or scan	^\s*if\ \(uVar6\ <=\ uVar22\)\ \{$	+2
+use	FUN_0013da3c	uVar6	userCount	INFERRED	element count (+4) of an instruction's user vector (inst+0x10) read before an inline push or scan	^\s*uVar6\ =\ puVar24\[1\];$	+1
+use	FUN_0013da3c	uVar6	userCount	INFERRED	element count (+4) of an instruction's user vector (inst+0x10) read before an inline push or scan	^\s*\}\ while\ \(uVar22\ <\ uVar6\);$	+1
+use	FUN_0013da3c	uVar6	userCount	INFERRED	element count (+4) of an instruction's user vector (inst+0x10) read before an inline push or scan	^\s*uVar6\ =\ puVar21\[1\];$@6	+5
+use	FUN_0013da3c	uVar6	userCount	INFERRED	element count (+4) of an instruction's user vector (inst+0x10) read before an inline push or scan	^\s*piVar7\ =\ \(int\ \*\)FUN_0019423c\(puVar21,uVar6\);$	+1
+use	FUN_0013da3c	uVar6	mergedMask	INFERRED	component mask accumulated over the chain of instructions merged into one (OR of the write masks)	^\s*uVar6\ =\ local_a4;$@2	+1
+use	FUN_0013da3c	uVar6	mergedMask	INFERRED	component mask accumulated over the chain of instructions merged into one (OR of the write masks)	^\s*if\ \(\(iVar13\ ==\ iVar10\)\ \|\|$	+3
+use	FUN_0013da3c	uVar6	mergedMask	INFERRED	component mask accumulated over the chain of instructions merged into one (OR of the write masks)	^\s*if\ \(\*\(uint\ \*\)\(iVar12\ \+\ 0xc\)\ !=\ uVar6\)\ \{$	+1
+use	FUN_0013da3c	uVar6	mergedMask	INFERRED	component mask accumulated over the chain of instructions merged into one (OR of the write masks)	^\s*\*\(uint\ \*\)\(iVar12\ \+\ 0xc\)\ =\ uVar6;$	+2
+use	FUN_0013da3c	uVar6	defWriteMask	INFERRED	write mask (inst+0xc source) of the instruction defining the operand being walked	^\s*uVar6\ =\ local_78;$	+1
+use	FUN_0013da3c	uVar6	defWriteMask	INFERRED	write mask (inst+0xc source) of the instruction defining the operand being walked	^\s*piVar20\[3\]\ =\ uVar6;$	+1
+use	FUN_0013da3c	uVar6	defWriteMask	INFERRED	write mask (inst+0xc source) of the instruction defining the operand being walked	^\s*piVar20\[3\]\ =\ uVar6\ \&\ local_a4\ \|\ uVar5;$	+1
+use	FUN_0013da3c	uVar6	defWriteMask	INFERRED	write mask (inst+0xc source) of the instruction defining the operand being walked	^\s*local_c4\ =\ uVar6\ \&\ local_a4;$	+1
+use	FUN_0013da3c	uVar6	uncoveredMask	INFERRED	byte-swapped remaining mask minus the components the definition covers	^\s*uVar6\ =\ \(local_a4\ <<\ 0x18\ \|\ \(local_a4\ >>\ 8\ \&\ 0xff\)\ <<\ 0x10\ \|$	+2
+use	FUN_0013da3c	uVar6	uncoveredMask	INFERRED	byte-swapped remaining mask minus the components the definition covers	^\s*local_a4\ =\ uVar6\ \*\ 0x1000000\ \|\ \(uVar6\ \&\ 0xff00\)\ <<\ 8\ \|\ uVar6\ >>\ 8\ \&\ 0xff00\ \|$	+2
+use	FUN_0013da3c	uVar22	queuedCount	INFERRED	work-vector element count captured before the inline push	^\s*for\ \(uVar6\ =\ 1;\ uVar22\ =\ local_a0,\ uVar6\ <=\ \*\(uint\ \*\)\(iVar14\ \+\ 4\);\ uVar6\ =\ uVar6\ \+\ 1\)\ \{$	+1
+use	FUN_0013da3c	uVar22	queuedCount	INFERRED	work-vector element count captured before the inline push	^\s*local_a0\ =\ uVar22\ \+\ 1;$	+1
+use	FUN_0013da3c	uVar22	queuedCount	INFERRED	work-vector element count captured before the inline push	^\s*for\ \(uVar6\ =\ 1;\ uVar22\ =\ local_a0,\ uVar6\ <=\ \*\(uint\ \*\)\(iVar14\ \+\ 4\);\ uVar6\ =\ uVar6\ \+\ 1\)\ \{$@2	+1
+use	FUN_0013da3c	uVar22	queuedCount	INFERRED	work-vector element count captured before the inline push	^\s*local_a0\ =\ uVar22\ \+\ 1;$@2	+1
+use	FUN_0013da3c	uVar22	queuedCount	INFERRED	work-vector element count captured before the inline push	^\s*uVar22\ =\ local_b0;$	+1
+use	FUN_0013da3c	uVar22	queuedCount	INFERRED	work-vector element count captured before the inline push	^\s*local_b0\ =\ uVar22\ \+\ 1;$	+1
+use	FUN_0013da3c	uVar22	queuedCount	INFERRED	work-vector element count captured before the inline push	^\s*for\ \(uVar6\ =\ 1;\ uVar22\ =\ local_b0,\ uVar6\ <=\ \*\(uint\ \*\)\(iVar14\ \+\ 4\);\ uVar6\ =\ uVar6\ \+\ 1\)\ \{$	+1
+use	FUN_0013da3c	uVar22	queuedCount	INFERRED	work-vector element count captured before the inline push	^\s*local_b0\ =\ uVar22\ \+\ 1;$@2	+1
+use	FUN_0013da3c	uVar22	queuedCount	INFERRED	work-vector element count captured before the inline push	^\s*uVar22\ =\ local_b0;$@2	+1
+use	FUN_0013da3c	uVar22	queuedCount	INFERRED	work-vector element count captured before the inline push	^\s*local_b0\ =\ uVar22\ \+\ 1;$@3	+1
+use	FUN_0013da3c	uVar22	queuedCount	INFERRED	work-vector element count captured before the inline push	^\s*uVar22\ =\ local_b0;$@3	+1
+use	FUN_0013da3c	uVar22	queuedCount	INFERRED	work-vector element count captured before the inline push	^\s*local_b0\ =\ uVar22\ \+\ 1;$@4	+1
+use	FUN_0013da3c	uVar22	operandReadMask	INFERRED	read mask FUN_000f403c computes for the operand (defaults to the constant select word)	^\s*uVar22\ =\ DAT_001b0020;$	+1
+use	FUN_0013da3c	uVar22	operandReadMask	INFERRED	read mask FUN_000f403c computes for the operand (defaults to the constant select word)	^\s*uVar22\ =\ local_64;$	+1
+use	FUN_0013da3c	uVar22	operandReadMask	INFERRED	read mask FUN_000f403c computes for the operand (defaults to the constant select word)	^\s*uVar5\ =\ uVar22\ \&\ piVar7\[3\];$	+1
+use	FUN_0013da3c	uVar22	userIndex	INFERRED	index into the user vector while searching for the removed instruction	^\s*uVar22\ =\ 0;$	+1
+use	FUN_0013da3c	uVar22	userIndex	INFERRED	index into the user vector while searching for the removed instruction	^\s*if\ \(uVar22\ <\ \*puVar21\)\ \{$	+1
+use	FUN_0013da3c	uVar22	userIndex	INFERRED	index into the user vector while searching for the removed instruction	^\s*if\ \(uVar6\ <=\ uVar22\)\ \{$	+3
+use	FUN_0013da3c	uVar22	userIndex	INFERRED	index into the user vector while searching for the removed instruction	^\s*piVar7\ =\ \(int\ \*\)\(uVar22\ \*\ 4\ \+\ puVar21\[2\]\);$	+1
+use	FUN_0013da3c	uVar22	userIndex	INFERRED	index into the user vector while searching for the removed instruction	^\s*piVar7\ =\ \(int\ \*\)FUN_0019423c\(puVar21,uVar22\);$	+1
+use	FUN_0013da3c	uVar22	userIndex	INFERRED	index into the user vector while searching for the removed instruction	^\s*FUN_00194208\(puVar24,uVar22\);$	+1
+use	FUN_0013da3c	uVar22	userIndex	INFERRED	index into the user vector while searching for the removed instruction	^\s*uVar22\ =\ uVar22\ \+\ 1;$	+1
+use	FUN_0013da3c	uVar22	userIndex	INFERRED	index into the user vector while searching for the removed instruction	^\s*\}\ while\ \(uVar22\ <\ uVar6\);$	+1
+use	FUN_0013da3c	uVar5	maskedWriteMask	INFERRED	read mask of the operand ANDed with the defining instruction's write mask	^\s*uVar5\ =\ uVar22\ \&\ piVar7\[3\];$	+6
+use	FUN_0013da3c	uVar5	oldWriteMask	INFERRED	write mask (inst+0xc) before it is replaced or widened	^\s*uVar5\ =\ piVar20\[3\];$	+1
+use	FUN_0013da3c	uVar5	oldWriteMask	INFERRED	write mask (inst+0xc) before it is replaced or widened	^\s*piVar20\[3\]\ =\ uVar6\ \&\ local_a4\ \|\ uVar5;$	+1
+use	FUN_0013da3c	uVar5	oldWriteMask	INFERRED	write mask (inst+0xc) before it is replaced or widened	^\s*if\ \(uVar5\ !=\ piVar20\[3\]\)\ \{$	+1
+use	FUN_0013da3c	puVar9	topSlot	INFERRED	pointer to the last element of the work vector (0 when the vector is empty)	^\s*puVar9\ =\ \(undefined4\ \*\)0x0;$	+1
+use	FUN_0013da3c	puVar9	topSlot	INFERRED	pointer to the last element of the work vector (0 when the vector is empty)	^\s*puVar9\ =\ \(undefined4\ \*\)\(uVar6\ \*\ 4\ \+\ local_9c\);$	+1
+use	FUN_0013da3c	puVar9	topSlot	INFERRED	pointer to the last element of the work vector (0 when the vector is empty)	^\s*uVar19\ =\ \*puVar9;$	+1
+use	FUN_0013da3c	puVar9	topSlot	INFERRED	pointer to the last element of the work vector (0 when the vector is empty)	^\s*puVar9\ =\ \(undefined4\ \*\)0x0;$@2	+1
+use	FUN_0013da3c	puVar9	topSlot	INFERRED	pointer to the last element of the work vector (0 when the vector is empty)	^\s*puVar9\ =\ \(undefined4\ \*\)\(uVar6\ \*\ 4\ \+\ local_9c\);$@2	+1
+use	FUN_0013da3c	puVar9	topSlot	INFERRED	pointer to the last element of the work vector (0 when the vector is empty)	^\s*uVar19\ =\ \*puVar9;$@2	+1
+use	FUN_0013da3c	puVar9	topSlot	INFERRED	pointer to the last element of the work vector (0 when the vector is empty)	^\s*puVar9\ =\ \(undefined4\ \*\)0x0;$@3	+1
+use	FUN_0013da3c	puVar9	topSlot	INFERRED	pointer to the last element of the work vector (0 when the vector is empty)	^\s*puVar9\ =\ \(undefined4\ \*\)\(uVar6\ \*\ 4\ \+\ local_ac\);$	+1
+use	FUN_0013da3c	puVar9	topSlot	INFERRED	pointer to the last element of the work vector (0 when the vector is empty)	^\s*piVar7\ =\ \(int\ \*\)\*puVar9;$	+1
+use	FUN_0013da3c	puVar9	pushSlot	INFERRED	slot pointer an element is stored through after the inline vector push (grow path or in-place)	^\s*puVar9\ =\ \(undefined4\ \*\)\(uVar6\ \*\ 4\ \+\ puVar21\[2\]\);$	+1
+use	FUN_0013da3c	puVar9	pushSlot	INFERRED	slot pointer an element is stored through after the inline vector push (grow path or in-place)	^\s*puVar9\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar21,uVar6\);$	+1
+use	FUN_0013da3c	puVar9	pushSlot	INFERRED	slot pointer an element is stored through after the inline vector push (grow path or in-place)	^\s*\*puVar9\ =\ piVar20;$	+1
+use	FUN_0013da3c	puVar9	pushSlot	INFERRED	slot pointer an element is stored through after the inline vector push (grow path or in-place)	^\s*puVar9\ =\ \(undefined4\ \*\)\(uVar6\ \*\ 4\ \+\ puVar21\[2\]\);$@2	+1
+use	FUN_0013da3c	puVar9	pushSlot	INFERRED	slot pointer an element is stored through after the inline vector push (grow path or in-place)	^\s*puVar9\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar21,uVar6\);$@2	+1
+use	FUN_0013da3c	puVar9	pushSlot	INFERRED	slot pointer an element is stored through after the inline vector push (grow path or in-place)	^\s*\*puVar9\ =\ piVar20;$@2	+1
+use	FUN_0013da3c	puVar9	pushSlot	INFERRED	slot pointer an element is stored through after the inline vector push (grow path or in-place)	^\s*puVar9\ =\ \(undefined4\ \*\)\(uVar6\ \*\ 4\ \+\ puVar21\[2\]\);$@3	+1
+use	FUN_0013da3c	puVar9	pushSlot	INFERRED	slot pointer an element is stored through after the inline vector push (grow path or in-place)	^\s*puVar9\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar21,uVar6\);$@3	+1
+use	FUN_0013da3c	puVar9	pushSlot	INFERRED	slot pointer an element is stored through after the inline vector push (grow path or in-place)	^\s*\*puVar9\ =\ piVar20;$@3	+1
+use	FUN_0013da3c	puVar9	pushSlot	INFERRED	slot pointer an element is stored through after the inline vector push (grow path or in-place)	^\s*puVar9\ =\ \(undefined4\ \*\)\(uVar6\ \*\ 4\ \+\ puVar21\[2\]\);$@4	+1
+use	FUN_0013da3c	puVar9	pushSlot	INFERRED	slot pointer an element is stored through after the inline vector push (grow path or in-place)	^\s*puVar9\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar21,uVar6\);$@4	+1
+use	FUN_0013da3c	puVar9	pushSlot	INFERRED	slot pointer an element is stored through after the inline vector push (grow path or in-place)	^\s*\*puVar9\ =\ piVar20;$@4	+1
+use	FUN_0013da3c	puVar9	pushSlot	INFERRED	slot pointer an element is stored through after the inline vector push (grow path or in-place)	^\s*puVar9\ =\ \(undefined4\ \*\)\(uVar6\ \*\ 4\ \+\ puVar21\[2\]\);$@5	+1
+use	FUN_0013da3c	puVar9	pushSlot	INFERRED	slot pointer an element is stored through after the inline vector push (grow path or in-place)	^\s*puVar9\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar21,uVar6\);$@5	+1
+use	FUN_0013da3c	puVar9	pushSlot	INFERRED	slot pointer an element is stored through after the inline vector push (grow path or in-place)	^\s*\*puVar9\ =\ piVar20;$@5	+1
+use	FUN_0013da3c	puVar9	pushSlot	INFERRED	slot pointer an element is stored through after the inline vector push (grow path or in-place)	^\s*puVar9\ =\ \(undefined4\ \*\)\(iVar8\ \+\ local_ac\);$	+1
+use	FUN_0013da3c	puVar9	pushSlot	INFERRED	slot pointer an element is stored through after the inline vector push (grow path or in-place)	^\s*puVar9\ =\ \(undefined4\ \*\)FUN_0019423c\(\&local_b4,local_b0\);$	+1
+use	FUN_0013da3c	puVar9	pushSlot	INFERRED	slot pointer an element is stored through after the inline vector push (grow path or in-place)	^\s*\*puVar9\ =\ piVar7;$	+1
+use	FUN_0013da3c	puVar9	pushSlot	INFERRED	slot pointer an element is stored through after the inline vector push (grow path or in-place)	^\s*puVar9\ =\ \(undefined4\ \*\)\(iVar23\ \+\ local_ac\);$	+1
+use	FUN_0013da3c	puVar9	pushSlot	INFERRED	slot pointer an element is stored through after the inline vector push (grow path or in-place)	^\s*puVar9\ =\ \(undefined4\ \*\)FUN_0019423c\(\&local_b4,local_b0\);$@2	+1
+use	FUN_0013da3c	puVar9	pushSlot	INFERRED	slot pointer an element is stored through after the inline vector push (grow path or in-place)	^\s*\*puVar9\ =\ piVar20;$@6	+1
+use	FUN_0013da3c	puVar9	pushSlot	INFERRED	slot pointer an element is stored through after the inline vector push (grow path or in-place)	^\s*puVar9\ =\ \(undefined4\ \*\)\(iVar23\ \+\ local_ac\);$@2	+1
+use	FUN_0013da3c	puVar9	pushSlot	INFERRED	slot pointer an element is stored through after the inline vector push (grow path or in-place)	^\s*puVar9\ =\ \(undefined4\ \*\)FUN_0019423c\(\&local_b4,local_b0\);$@3	+1
+use	FUN_0013da3c	puVar9	pushSlot	INFERRED	slot pointer an element is stored through after the inline vector push (grow path or in-place)	^\s*\*puVar9\ =\ piVar20;$@7	+1
+use	FUN_0013da3c	puVar9	selectConstPtr	INFERRED	address of the constant select word chosen by operand index	^\s*puVar9\ =\ \&UNK_001b0018;$	+1
+use	FUN_0013da3c	puVar9	selectConstPtr	INFERRED	address of the constant select word chosen by operand index	^\s*puVar9\ =\ \&DAT_001b001c;$	+1
+use	FUN_0013da3c	puVar9	selectConstPtr	INFERRED	address of the constant select word chosen by operand index	^\s*uVar19\ =\ \*puVar9;$@3	+1
+use	FUN_0013da3c	uVar19	poppedInst	INFERRED	instruction popped from the back of the cleanup vector	^\s*uVar19\ =\ \*puVar9;$	+1
+use	FUN_0013da3c	uVar19	poppedInst	INFERRED	instruction popped from the back of the cleanup vector	^\s*FUN_000ef970\(param_1,uVar19\);$	+1
+use	FUN_0013da3c	uVar19	poppedInst	INFERRED	instruction popped from the back of the cleanup vector	^\s*uVar19\ =\ \*puVar9;$@2	+1
+use	FUN_0013da3c	uVar19	poppedInst	INFERRED	instruction popped from the back of the cleanup vector	^\s*FUN_000ef970\(param_1,uVar19\);$@2	+1
+use	FUN_0013da3c	uVar19	selectWordConst	INFERRED	constant select word chosen from the instruction class	^\s*uVar19\ =\ DAT_001b0004;$	+1
+use	FUN_0013da3c	uVar19	selectWordConst	INFERRED	constant select word chosen from the instruction class	^\s*uVar19\ =\ DAT_001b001c;$	+1
+use	FUN_0013da3c	uVar19	selectWordConst	INFERRED	constant select word chosen from the instruction class	^\s*uVar19\ =\ \*puVar9;$@3	+1
+use	FUN_0013da3c	uVar19	selectWordConst	INFERRED	constant select word chosen from the instruction class	^\s*FUN_000f3340\(\&local_68,uVar19,uVar6\);$	+1
+use	FUN_0013da3c	uVar19	lastOperandSource	INFERRED	source instruction of the clone's last operand	^\s*uVar19\ =\ FUN_00105594\(iVar18,\*\(undefined4\ \*\)\(iVar18\ \+\ 0x84\)\);$	+2
+use	FUN_0013da3c	uVar19	firstOperandSource	INFERRED	source instruction of operand 1 of the popped instruction	^\s*uVar19\ =\ FUN_00105594\(piVar7,1\);$	+2
+use	FUN_0013da3c	piVar20	inst	INFERRED	instruction walked in the block's instruction list	^\s*piVar20\ =\ \*\(int\ \*\*\)\(iVar14\ \+\ 0x98\);$	+3
+use	FUN_0013da3c	piVar20	inst	INFERRED	instruction walked in the block's instruction list	^\s*if\ \(\(piVar20\[5\]\ \&\ 1U\)\ !=\ 0\)\ \{$	+4
+use	FUN_0013da3c	piVar20	inst	INFERRED	instruction walked in the block's instruction list	^\s*piVar20\[0x27\]\ =\ DAT_001b0008;$	+1
+use	FUN_0013da3c	piVar20	inst	INFERRED	instruction walked in the block's instruction list	^\s*piVar20\[3\]\ =\ 0;$	+2
+use	FUN_0013da3c	piVar20	inst	INFERRED	instruction walked in the block's instruction list	^\s*piVar15\ =\ \(int\ \*\)piVar20\[2\];$	+2
+use	FUN_0013da3c	piVar20	inst	INFERRED	instruction walked in the block's instruction list	^\s*piVar20\ =\ piVar15;$	+1
+use	FUN_0013da3c	piVar20	inst	INFERRED	instruction walked in the block's instruction list	^\s*piVar20\ =\ \*\(int\ \*\*\)\(iVar14\ \+\ 0x98\);$@2	+1
+use	FUN_0013da3c	piVar20	inst	INFERRED	instruction walked in the block's instruction list	^\s*if\ \(\(piVar20\[5\]\ \&\ 1U\)\ !=\ 0\)\ \{$@2	+3
+use	FUN_0013da3c	piVar20	inst	INFERRED	instruction walked in the block's instruction list	^\s*if\ \(\(\(\(\(piVar20\[0x20\]\ !=\ 0\)\ \&\&\ \(iVar23\ =\ FUN_00126760\(piVar20\[0x26\]\),\ iVar23\ !=\ 0\)$	+9
+use	FUN_0013da3c	piVar20	inst	INFERRED	instruction walked in the block's instruction list	^\s*if\ \(piVar20\[3\]\ !=\ 0\)\ \{$	+3
+use	FUN_0013da3c	piVar20	inst	INFERRED	instruction walked in the block's instruction list	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*piVar20\ \+\ 0x60\)\)\(piVar20\);$	+1
+use	FUN_0013da3c	piVar20	inst	INFERRED	instruction walked in the block's instruction list	^\s*iVar12\ =\ \(\*\*\(code\ \*\*\)\(\*piVar20\ \+\ 0x14\)\)\(piVar20\);$	+1
+use	FUN_0013da3c	piVar20	inst	INFERRED	instruction walked in the block's instruction list	^\s*FUN_000f3c30\(\&local_70,piVar20,iVar11,param_1,iVar17\);$	+1
+use	FUN_0013da3c	piVar20	inst	INFERRED	instruction walked in the block's instruction list	^\s*piVar20\[0x27\]\ =\ DAT_001b0000;$	+1
+use	FUN_0013da3c	piVar20	inst	INFERRED	instruction walked in the block's instruction list	^\s*iVar13\ =\ FUN_001054ec\(piVar20,iVar11\);$	+1
+use	FUN_0013da3c	piVar20	inst	INFERRED	instruction walked in the block's instruction list	^\s*FUN_0010c37c\(piVar20,\*\(undefined4\ \*\)\(param_1\ \+\ PROG_compiler\)\);$	+3
+use	FUN_0013da3c	piVar20	inst	INFERRED	instruction walked in the block's instruction list	^\s*piVar7\ =\ \(int\ \*\)FUN_00105594\(piVar20,iVar11\);$	+2
+use	FUN_0013da3c	piVar20	inst	INFERRED	instruction walked in the block's instruction list	^\s*FUN_000f3c30\(\&local_6c,piVar20,iVar11,param_1,iVar17\);$	+1
+use	FUN_0013da3c	piVar20	inst	INFERRED	instruction walked in the block's instruction list	^\s*iVar12\ =\ \(\(int\ \(\*\)\(\)\)FUN_001396d0\)\(\*\(undefined4\ \*\)\(param_1\ \+\ PROG_compiler\),piVar20,iVar11,param_1\);$	+1
+use	FUN_0013da3c	piVar20	inst	INFERRED	instruction walked in the block's instruction list	^\s*iVar12\ =\ \(\*\*\(code\ \*\*\)\(\*piVar20\ \+\ 0x14\)\)\(piVar20\);$@3	+1
+use	FUN_0013da3c	piVar20	inst	INFERRED	instruction walked in the block's instruction list	^\s*FUN_000f403c\(\&local_64,piVar20,iVar11,piVar20\[3\],param_1\);$	+1
+use	FUN_0013da3c	piVar20	inst	INFERRED	instruction walked in the block's instruction list	^\s*FUN_00106004\(piVar20,iVar11,piVar7,0,\*\(undefined4\ \*\)\(param_1\ \+\ PROG_compiler\)\);$	+2
+use	FUN_0013da3c	piVar20	inst	INFERRED	instruction walked in the block's instruction list	^\s*iVar13\ =\ FUN_001054ec\(piVar20,iVar11\);$@2	+1
+use	FUN_0013da3c	piVar20	inst	INFERRED	instruction walked in the block's instruction list	^\s*\*puVar9\ =\ piVar20;$	+1
+use	FUN_0013da3c	piVar20	inst	INFERRED	instruction walked in the block's instruction list	^\s*\(\(int\ \(\*\)\(\)\)FUN_001396a0\)\(piVar7,piVar20\);$	+1
+use	FUN_0013da3c	piVar20	inst	INFERRED	instruction walked in the block's instruction list	^\s*\*puVar9\ =\ piVar20;$@2	+1
+use	FUN_0013da3c	piVar20	inst	INFERRED	instruction walked in the block's instruction list	^\s*iVar12\ =\ FUN_001045e4\(piVar20\);$	+1
+use	FUN_0013da3c	piVar20	inst	INFERRED	instruction walked in the block's instruction list	^\s*iVar12\ =\ FUN_0011346c\(\*\(undefined4\ \*\)\(param_1\ \+\ PROG_compiler\),piVar20\);$	+1
+use	FUN_0013da3c	piVar20	inst	INFERRED	instruction walked in the block's instruction list	^\s*iVar13\ =\ FUN_00105594\(piVar20,iVar11\);$	+1
+use	FUN_0013da3c	piVar20	inst	INFERRED	instruction walked in the block's instruction list	^\s*\*puVar9\ =\ piVar20;$@3	+1
+use	FUN_0013da3c	piVar20	inst	INFERRED	instruction walked in the block's instruction list	^\s*iVar13\ =\ FUN_001054ec\(piVar20,iVar11\);$@3	+1
+use	FUN_0013da3c	piVar20	inst	INFERRED	instruction walked in the block's instruction list	^\s*piVar20\[0x27\]\ =\ iVar12;$	+1
+use	FUN_0013da3c	piVar20	inst	INFERRED	instruction walked in the block's instruction list	^\s*iVar13\ =\ FUN_001054ec\(piVar20,iVar11\);$@4	+1
+use	FUN_0013da3c	piVar20	inst	INFERRED	instruction walked in the block's instruction list	^\s*if\ \(\(\(\(piVar20\[0x20\]\ ==\ 0\)\ \|\|\ \(iVar17\ =\ FUN_00126760\(piVar20\[0x26\]\),\ iVar17\ ==\ 0\)\)$	+6
+use	FUN_0013da3c	piVar20	inst	INFERRED	instruction walked in the block's instruction list	^\s*if\ \(piVar20\[3\]\ !=\ 0\)\ \{$@2	+2
+use	FUN_0013da3c	piVar20	inst	INFERRED	instruction walked in the block's instruction list	^\s*iVar23\ =\ FUN_001952d8\(piVar20\[0x53\],iVar18\);$	+5
+use	FUN_0013da3c	piVar20	inst	INFERRED	instruction walked in the block's instruction list	^\s*\*\(int\ \*\)\(iVar8\ \+\ piVar20\[0x53\]\ \*\ 4\)\ =\ iVar17;$	+2
+use	FUN_0013da3c	piVar20	inst	INFERRED	instruction walked in the block's instruction list	^\s*piVar20\ =\ piVar15;$@2	+1
+use	FUN_0013da3c	piVar20	inst	INFERRED	instruction walked in the block's instruction list	^\s*piVar20\ =\ \*\(int\ \*\*\)\(iVar14\ \+\ 0x98\);$@3	+1
+use	FUN_0013da3c	piVar20	inst	INFERRED	instruction walked in the block's instruction list	^\s*if\ \(\(piVar20\[5\]\ \&\ 1U\)\ !=\ 0\)\ \{$@3	+7
+use	FUN_0013da3c	piVar20	inst	INFERRED	instruction walked in the block's instruction list	^\s*FUN_0010d358\(piVar20,\*\(undefined4\ \*\)\(param_1\ \+\ PROG_compiler\)\);$	+1
+use	FUN_0013da3c	piVar20	inst	INFERRED	instruction walked in the block's instruction list	^\s*if\ \(\(piVar20\[5\]\ \&\ 0x200U\)\ !=\ 0\)\ \{$@3	+2
+use	FUN_0013da3c	piVar20	inst	INFERRED	instruction walked in the block's instruction list	^\s*FUN_00106004\(piVar20,piVar20\[0x21\],0,0,\*\(undefined4\ \*\)\(param_1\ \+\ PROG_compiler\)\);$	+3
+use	FUN_0013da3c	piVar20	inst	INFERRED	instruction walked in the block's instruction list	^\s*FUN_00106804\(piVar20,iVar17,0,\*\(undefined4\ \*\)\(param_1\ \+\ PROG_compiler\)\);$	+1
+use	FUN_0013da3c	piVar20	inst	INFERRED	instruction walked in the block's instruction list	^\s*if\ \(piVar20\[0x21\]\ ==\ 0\)\ \{$	+2
+use	FUN_0013da3c	piVar20	inst	INFERRED	instruction walked in the block's instruction list	^\s*iVar23\ =\ FUN_001054ec\(piVar20,piVar20\[0x21\]\);$	+1
+use	FUN_0013da3c	piVar20	inst	INFERRED	instruction walked in the block's instruction list	^\s*\*puVar9\ =\ piVar20;$@4	+1
+use	FUN_0013da3c	piVar20	inst	INFERRED	instruction walked in the block's instruction list	^\s*if\ \(\(\(piVar20\[0x48\]\ !=\ 0\)\ \|\|\ \(piVar20\[0x49\]\ !=\ 0\)\)\ \&\&$	+5
+use	FUN_0013da3c	piVar20	inst	INFERRED	instruction walked in the block's instruction list	^\s*FUN_000e7700\(iVar14,piVar20,iVar18\);$	+8
+use	FUN_0013da3c	piVar20	inst	INFERRED	instruction walked in the block's instruction list	^\s*FUN_00106804\(piVar20,uVar19,0,\*\(undefined4\ \*\)\(param_1\ \+\ PROG_compiler\)\);$	+1
+use	FUN_0013da3c	piVar20	inst	INFERRED	instruction walked in the block's instruction list	^\s*if\ \(piVar20\[0x21\]\ ==\ 0\)\ \{$@2	+2
+use	FUN_0013da3c	piVar20	inst	INFERRED	instruction walked in the block's instruction list	^\s*iVar23\ =\ FUN_001054ec\(piVar20,piVar20\[0x21\]\);$@2	+1
+use	FUN_0013da3c	piVar20	inst	INFERRED	instruction walked in the block's instruction list	^\s*\*puVar9\ =\ piVar20;$@5	+1
+use	FUN_0013da3c	piVar20	inst	INFERRED	instruction walked in the block's instruction list	^\s*if\ \(piVar20\ ==\ \(int\ \*\)\*piVar7\)\ \{$	+1
+use	FUN_0013da3c	piVar20	inst	INFERRED	instruction walked in the block's instruction list	^\s*FUN_000e7738\(iVar14,iVar18,piVar20\);$	+1
+use	FUN_0013da3c	piVar20	inst	INFERRED	instruction walked in the block's instruction list	^\s*piVar15\ =\ \(int\ \*\)piVar20\[2\];$@4	+1
+use	FUN_0013da3c	piVar20	inst	INFERRED	instruction walked in the block's instruction list	^\s*piVar20\ =\ piVar15;$@3	+1
+use	FUN_0013da3c	piVar20	defInst	INFERRED	defining instruction followed along the operand source chain	^\s*piVar20\ =\ piVar7;$	+1
+use	FUN_0013da3c	piVar20	defInst	INFERRED	defining instruction followed along the operand source chain	^\s*iVar23\ =\ FUN_0012678c\(piVar20\[0x26\]\);$	+1
+use	FUN_0013da3c	piVar20	defInst	INFERRED	defining instruction followed along the operand source chain	^\s*if\ \(\*\(int\ \*\)\(param_1\ \+\ PROG_visitStamp\)\ !=\ piVar20\[0x54\]\)\ \{$	+1
+use	FUN_0013da3c	piVar20	defInst	INFERRED	defining instruction followed along the operand source chain	^\s*\*puVar9\ =\ piVar20;$@6	+1
+use	FUN_0013da3c	piVar20	defInst	INFERRED	defining instruction followed along the operand source chain	^\s*local_a4\ =\ piVar20\[3\];$	+1
+use	FUN_0013da3c	piVar20	defInst	INFERRED	defining instruction followed along the operand source chain	^\s*iVar11\ =\ piVar20\[0x21\];$	+2
+use	FUN_0013da3c	piVar20	defInst	INFERRED	defining instruction followed along the operand source chain	^\s*piVar20\[0x27\]\ =\ local_c8;$	+1
+use	FUN_0013da3c	piVar20	defInst	INFERRED	defining instruction followed along the operand source chain	^\s*iVar11\ =\ FUN_001054ec\(piVar20,iVar11\);$	+1
+use	FUN_0013da3c	piVar20	defInst	INFERRED	defining instruction followed along the operand source chain	^\s*piVar20\ =\ \(int\ \*\)FUN_00105594\(piVar20,piVar20\[0x21\]\);$	+2
+use	FUN_0013da3c	piVar20	defInst	INFERRED	defining instruction followed along the operand source chain	^\s*piVar20\ =\ piVar7;$@2	+1
+use	FUN_0013da3c	piVar20	producerInst	INFERRED	producer instruction returned by FUN_001382b8 for operand 1	^\s*piVar20\ =\ \(int\ \*\)FUN_001382b8\(uVar19,3,\&local_b8\);$	+2
+use	FUN_0013da3c	piVar7	elementPtr	INFERRED	pointer to the element slot being appended in the instruction work vector	^\s*piVar7\ =\ \(int\ \*\)\(iVar14\ \+\ local_9c\);$	+1
+use	FUN_0013da3c	piVar7	elementPtr	INFERRED	pointer to the element slot being appended in the instruction work vector	^\s*piVar7\ =\ \(int\ \*\)FUN_0019423c\(\&local_a4,local_a0\);$	+1
+use	FUN_0013da3c	piVar7	elementPtr	INFERRED	pointer to the element slot being appended in the instruction work vector	^\s*\*piVar7\ =\ iVar18;$	+1
+use	FUN_0013da3c	piVar7	elementPtr	INFERRED	pointer to the element slot being appended in the instruction work vector	^\s*piVar7\ =\ \(int\ \*\)\(iVar14\ \+\ local_9c\);$@2	+1
+use	FUN_0013da3c	piVar7	elementPtr	INFERRED	pointer to the element slot being appended in the instruction work vector	^\s*piVar7\ =\ \(int\ \*\)FUN_0019423c\(\&local_a4,local_a0\);$@2	+1
+use	FUN_0013da3c	piVar7	elementPtr	INFERRED	pointer to the element slot being appended in the instruction work vector	^\s*\*piVar7\ =\ iVar18;$@2	+1
+use	FUN_0013da3c	piVar7	elementPtr	INFERRED	pointer to the element slot being appended in the instruction work vector	^\s*piVar7\ =\ \(int\ \*\)\(iVar23\ \+\ local_ac\);$	+1
+use	FUN_0013da3c	piVar7	elementPtr	INFERRED	pointer to the element slot being appended in the instruction work vector	^\s*piVar7\ =\ \(int\ \*\)FUN_0019423c\(\&local_b4,local_b0\);$	+1
+use	FUN_0013da3c	piVar7	elementPtr	INFERRED	pointer to the element slot being appended in the instruction work vector	^\s*\*piVar7\ =\ iVar14;$	+1
+use	FUN_0013da3c	piVar7	elementPtr	INFERRED	pointer to the element slot being appended in the instruction work vector	^\s*piVar7\ =\ \(int\ \*\)\(iVar14\ \+\ local_ac\);$	+1
+use	FUN_0013da3c	piVar7	elementPtr	INFERRED	pointer to the element slot being appended in the instruction work vector	^\s*piVar7\ =\ \(int\ \*\)FUN_0019423c\(\&local_b4,local_b0\);$@2	+1
+use	FUN_0013da3c	piVar7	elementPtr	INFERRED	pointer to the element slot being appended in the instruction work vector	^\s*\*piVar7\ =\ iVar18;$@4	+1
+use	FUN_0013da3c	piVar7	userElementPtr	INFERRED	pointer to an element of a user vector	^\s*piVar7\ =\ \(int\ \*\)\(uVar22\ \*\ 4\ \+\ puVar21\[2\]\);$	+1
+use	FUN_0013da3c	piVar7	userElementPtr	INFERRED	pointer to an element of a user vector	^\s*piVar7\ =\ \(int\ \*\)FUN_0019423c\(puVar21,uVar22\);$	+1
+use	FUN_0013da3c	piVar7	userElementPtr	INFERRED	pointer to an element of a user vector	^\s*if\ \(piVar20\ ==\ \(int\ \*\)\*piVar7\)\ \{$	+1
+use	FUN_0013da3c	piVar7	userElementPtr	INFERRED	pointer to an element of a user vector	^\s*piVar7\ =\ \(int\ \*\)\(uVar6\ \*\ 4\ \+\ puVar21\[2\]\);$	+1
+use	FUN_0013da3c	piVar7	userElementPtr	INFERRED	pointer to an element of a user vector	^\s*piVar7\ =\ \(int\ \*\)FUN_0019423c\(puVar21,uVar6\);$	+1
+use	FUN_0013da3c	piVar7	userElementPtr	INFERRED	pointer to an element of a user vector	^\s*\*piVar7\ =\ iVar18;$@3	+1
+use	FUN_0013da3c	piVar7	topElementPtr	INFERRED	pointer to the last element of the work vector (0 if empty)	^\s*piVar7\ =\ \(int\ \*\)0x0;$	+1
+use	FUN_0013da3c	piVar7	topElementPtr	INFERRED	pointer to the last element of the work vector (0 if empty)	^\s*piVar7\ =\ \(int\ \*\)\(uVar6\ \*\ 4\ \+\ local_ac\);$	+1
+use	FUN_0013da3c	piVar7	topElementPtr	INFERRED	pointer to the last element of the work vector (0 if empty)	^\s*iVar17\ =\ \*piVar7;$	+1
+use	FUN_0013da3c	piVar7	lookaheadInst	INFERRED	successor of the next instruction, fetched before the current one is processed	^\s*piVar7\ =\ \(int\ \*\)piVar20\[2\];$	+1
+use	FUN_0013da3c	piVar7	lookaheadInst	INFERRED	successor of the next instruction, fetched before the current one is processed	^\s*piVar15\ =\ piVar7;$	+1
+use	FUN_0013da3c	piVar7	lookaheadInst	INFERRED	successor of the next instruction, fetched before the current one is processed	^\s*piVar7\ =\ \(int\ \*\)piVar15\[2\];$	+1
+use	FUN_0013da3c	piVar7	lookaheadInst	INFERRED	successor of the next instruction, fetched before the current one is processed	^\s*piVar7\ =\ \(int\ \*\)\(\*\(int\ \*\*\)\(iVar14\ \+\ 0x98\)\)\[2\];$	+1
+use	FUN_0013da3c	piVar7	lookaheadInst	INFERRED	successor of the next instruction, fetched before the current one is processed	^\s*if\ \(piVar7\ !=\ \(int\ \*\)0x0\)\ \{$	+1
+use	FUN_0013da3c	piVar7	lookaheadInst	INFERRED	successor of the next instruction, fetched before the current one is processed	^\s*piVar15\ =\ piVar7;$@2	+1
+use	FUN_0013da3c	piVar7	lookaheadInst	INFERRED	successor of the next instruction, fetched before the current one is processed	^\s*if\ \(\(\(\(\(piVar20\[0x20\]\ !=\ 0\)\ \&\&\ \(iVar23\ =\ FUN_00126760\(piVar20\[0x26\]\),\ iVar23\ !=\ 0\)$	+8
+use	FUN_0013da3c	piVar7	lookaheadInst	INFERRED	successor of the next instruction, fetched before the current one is processed	^\s*piVar7\ =\ \(int\ \*\)piVar15\[2\];$@2	+1
+use	FUN_0013da3c	piVar7	lookaheadInst	INFERRED	successor of the next instruction, fetched before the current one is processed	^\s*piVar7\ =\ \(int\ \*\)\(\*\(int\ \*\*\)\(iVar14\ \+\ 0x98\)\)\[2\];$@2	+1
+use	FUN_0013da3c	piVar7	lookaheadInst	INFERRED	successor of the next instruction, fetched before the current one is processed	^\s*if\ \(piVar7\ !=\ \(int\ \*\)0x0\)\ \{$@3	+1
+use	FUN_0013da3c	piVar7	lookaheadInst	INFERRED	successor of the next instruction, fetched before the current one is processed	^\s*piVar15\ =\ piVar7;$@3	+1
+use	FUN_0013da3c	piVar7	lookaheadInst	INFERRED	successor of the next instruction, fetched before the current one is processed	^\s*if\ \(\(\(piVar20\[0x48\]\ !=\ 0\)\ \|\|\ \(piVar20\[0x49\]\ !=\ 0\)\)\ \&\&$	+4
+use	FUN_0013da3c	piVar7	lookaheadInst	INFERRED	successor of the next instruction, fetched before the current one is processed	^\s*piVar7\ =\ \(int\ \*\)piVar15\[2\];$@3	+1
+use	FUN_0013da3c	piVar7	sourceInst	INFERRED	operand source instruction of operand iVar11	^\s*piVar7\ =\ \(int\ \*\)FUN_00105594\(piVar20,iVar11\);$	+1
+use	FUN_0013da3c	piVar7	sourceInst	INFERRED	operand source instruction of operand iVar11	^\s*if\ \(piVar7\ !=\ \(int\ \*\)0x0\)\ \{$@2	+7
+use	FUN_0013da3c	piVar7	sourceInst	INFERRED	operand source instruction of operand iVar11	^\s*uVar5\ =\ uVar22\ \&\ piVar7\[3\];$	+1
+use	FUN_0013da3c	piVar7	sourceInst	INFERRED	operand source instruction of operand iVar11	^\s*piVar7\ =\ \(int\ \*\)\(\(int\ \(\*\)\(\)\)FUN_0013ca84\)\(piVar7\);$	+1
+use	FUN_0013da3c	piVar7	sourceInst	INFERRED	operand source instruction of operand iVar11	^\s*FUN_00106004\(piVar20,iVar11,piVar7,0,\*\(undefined4\ \*\)\(param_1\ \+\ PROG_compiler\)\);$	+1
+use	FUN_0013da3c	piVar7	sourceInst	INFERRED	operand source instruction of operand iVar11	^\s*puVar21\ =\ \(uint\ \*\)piVar7\[4\];$	+1
+use	FUN_0013da3c	piVar7	sourceInst	INFERRED	operand source instruction of operand iVar11	^\s*\(\(int\ \(\*\)\(\)\)FUN_001396a0\)\(piVar7,piVar20\);$	+1
+use	FUN_0013da3c	piVar7	sourceInst	INFERRED	operand source instruction of operand iVar11	^\s*puVar21\ =\ \(uint\ \*\)piVar7\[4\];$@2	+1
+use	FUN_0013da3c	piVar7	operandSourceInst	INFERRED	operand source instruction of the popped instruction	^\s*piVar7\ =\ \(int\ \*\)FUN_00105594\(iVar17,iVar18\);$	+1
+use	FUN_0013da3c	piVar7	operandSourceInst	INFERRED	operand source instruction of the popped instruction	^\s*if\ \(piVar7\ !=\ \(int\ \*\)0x0\)\ \{$@4	+2
+use	FUN_0013da3c	piVar7	operandSourceInst	INFERRED	operand source instruction of the popped instruction	^\s*\*puVar9\ =\ piVar7;$	+1
+use	FUN_0013da3c	piVar7	operandSourceInst	INFERRED	operand source instruction of the popped instruction	^\s*if\ \(\(\(\(\(piVar7\[0x20\]\ !=\ 0\)\ \&\&\ \(iVar8\ =\ FUN_00126760\(piVar7\[0x26\]\),\ iVar8\ !=\ 0\)\)\ \&\&$	+5
+use	FUN_0013da3c	piVar7	operandSourceInst	INFERRED	operand source instruction of the popped instruction	^\s*piVar20\ =\ piVar7;$	+1
+use	FUN_0013da3c	piVar7	operandSourceInst	INFERRED	operand source instruction of the popped instruction	^\s*piVar20\ =\ piVar7;$@2	+1
+use	FUN_0013da3c	piVar7	workInst	INFERRED	instruction popped from the work vector	^\s*piVar7\ =\ \(int\ \*\)\*puVar9;$	+1
+use	FUN_0013da3c	piVar7	workInst	INFERRED	instruction popped from the work vector	^\s*iVar14\ =\ \(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0x30\)\)\(piVar7\);$	+4
+use	FUN_0013da3c	piVar7	workInst	INFERRED	instruction popped from the work vector	^\s*\(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0x88\)\)\(piVar7,1,3,4\);$	+1
+use	FUN_0013da3c	piVar7	workInst	INFERRED	instruction popped from the work vector	^\s*if\ \(\(piVar7\[5\]\ \&\ 0x200U\)\ ==\ 0\)\ \{$	+2
+use	FUN_0013da3c	piVar7	workInst	INFERRED	instruction popped from the work vector	^\s*iVar14\ =\ piVar7\[0x21\]\ \+\ \-1;$	+1
+use	FUN_0013da3c	piVar7	workInst	INFERRED	instruction popped from the work vector	^\s*piVar20\ =\ \(int\ \*\)FUN_00105594\(piVar7,iVar17\);$	+1
+use	FUN_0013da3c	piVar7	workInst	INFERRED	instruction popped from the work vector	^\s*iVar23\ =\ \(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0x14\)\)\(piVar7\);$	+1
+use	FUN_0013da3c	piVar7	workInst	INFERRED	instruction popped from the work vector	^\s*FUN_000f403c\(\&local_84,piVar7,iVar17,piVar7\[3\],param_1\);$	+1
+use	FUN_0013da3c	piVar7	workInst	INFERRED	instruction popped from the work vector	^\s*piVar7\[0x27\]\ =\ DAT_001b0000;$	+1
+use	FUN_0013da3c	piVar7	workInst	INFERRED	instruction popped from the work vector	^\s*iVar11\ =\ FUN_001054ec\(piVar7,iVar17\);$	+1
+use	FUN_0013da3c	piVar15	nextInst	INFERRED	next instruction in the block list; becomes the current instruction at the loop end	^\s*piVar15\ =\ piVar7;$	+1
+use	FUN_0013da3c	piVar15	nextInst	INFERRED	next instruction in the block list; becomes the current instruction at the loop end	^\s*piVar15\ =\ \(int\ \*\)piVar20\[2\];$	+1
+use	FUN_0013da3c	piVar15	nextInst	INFERRED	next instruction in the block list; becomes the current instruction at the loop end	^\s*piVar7\ =\ \(int\ \*\)piVar15\[2\];$	+3
+use	FUN_0013da3c	piVar15	nextInst	INFERRED	next instruction in the block list; becomes the current instruction at the loop end	^\s*piVar15\ =\ piVar7;$@2	+1
+use	FUN_0013da3c	piVar15	nextInst	INFERRED	next instruction in the block list; becomes the current instruction at the loop end	^\s*piVar15\ =\ \(int\ \*\)piVar20\[2\];$@2	+1
+use	FUN_0013da3c	piVar15	nextInst	INFERRED	next instruction in the block list; becomes the current instruction at the loop end	^\s*piVar15\ =\ \(int\ \*\)piVar20\[2\];$@3	+1
+use	FUN_0013da3c	piVar15	nextInst	INFERRED	next instruction in the block list; becomes the current instruction at the loop end	^\s*piVar7\ =\ \(int\ \*\)piVar15\[2\];$@2	+3
+use	FUN_0013da3c	piVar15	nextInst	INFERRED	next instruction in the block list; becomes the current instruction at the loop end	^\s*piVar15\ =\ piVar7;$@3	+1
+use	FUN_0013da3c	piVar15	nextInst	INFERRED	next instruction in the block list; becomes the current instruction at the loop end	^\s*piVar15\ =\ \(int\ \*\)piVar20\[2\];$@4	+1
+use	FUN_0013da3c	piVar15	nextInst	INFERRED	next instruction in the block list; becomes the current instruction at the loop end	^\s*piVar7\ =\ \(int\ \*\)piVar15\[2\];$@3	+3
+use	FUN_0013da3c	piVar15	growSlotPtr	INFERRED	slot pointer of the inline vector push	^\s*piVar15\ =\ \(int\ \*\)\(iVar11\ \+\ local_ac\);$	+1
+use	FUN_0013da3c	piVar15	growSlotPtr	INFERRED	slot pointer of the inline vector push	^\s*piVar15\ =\ \(int\ \*\)FUN_0019423c\(\&local_b4,local_b0\);$	+1
+use	FUN_0013da3c	piVar15	growSlotPtr	INFERRED	slot pointer of the inline vector push	^\s*\*piVar15\ =\ iVar12;$	+1
+use	FUN_0013da3c	puVar21	userList	INFERRED	user vector header of an instruction (+0x10): capacity, count, data	^\s*puVar21\ =\ \(uint\ \*\)piVar7\[4\];$	+6
+use	FUN_0013da3c	puVar21	userList	INFERRED	user vector header of an instruction (+0x10): capacity, count, data	^\s*puVar9\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar21,uVar6\);$	+1
+use	FUN_0013da3c	puVar21	userList	INFERRED	user vector header of an instruction (+0x10): capacity, count, data	^\s*puVar21\ =\ \(uint\ \*\)piVar7\[4\];$@2	+6
+use	FUN_0013da3c	puVar21	userList	INFERRED	user vector header of an instruction (+0x10): capacity, count, data	^\s*puVar9\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar21,uVar6\);$@2	+1
+use	FUN_0013da3c	puVar21	userList	INFERRED	user vector header of an instruction (+0x10): capacity, count, data	^\s*puVar21\ =\ \*\(uint\ \*\*\)\(iVar13\ \+\ 0x10\);$	+2
+use	FUN_0013da3c	puVar21	userList	INFERRED	user vector header of an instruction (+0x10): capacity, count, data	^\s*puVar21\ =\ puVar9\ \+\ 1;$	+1
+use	FUN_0013da3c	puVar21	userList	INFERRED	user vector header of an instruction (+0x10): capacity, count, data	^\s*\*\(uint\ \*\*\)\(iVar13\ \+\ 0x10\)\ =\ puVar21;$	+1
+use	FUN_0013da3c	puVar21	userList	INFERRED	user vector header of an instruction (+0x10): capacity, count, data	^\s*uVar6\ =\ puVar21\[1\];$@3	+5
+use	FUN_0013da3c	puVar21	userList	INFERRED	user vector header of an instruction (+0x10): capacity, count, data	^\s*puVar9\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar21,uVar6\);$@3	+1
+use	FUN_0013da3c	puVar21	userList	INFERRED	user vector header of an instruction (+0x10): capacity, count, data	^\s*puVar21\ =\ \*\(uint\ \*\*\)\(iVar17\ \+\ 0x10\);$	+6
+use	FUN_0013da3c	puVar21	userList	INFERRED	user vector header of an instruction (+0x10): capacity, count, data	^\s*puVar9\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar21,uVar6\);$@4	+1
+use	FUN_0013da3c	puVar21	userList	INFERRED	user vector header of an instruction (+0x10): capacity, count, data	^\s*puVar21\ =\ \*\(uint\ \*\*\)\(iVar18\ \+\ 0x10\);$	+6
+use	FUN_0013da3c	puVar21	userList	INFERRED	user vector header of an instruction (+0x10): capacity, count, data	^\s*puVar9\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar21,uVar6\);$@5	+1
+use	FUN_0013da3c	puVar21	userList	INFERRED	user vector header of an instruction (+0x10): capacity, count, data	^\s*puVar21\ =\ \*\(uint\ \*\*\)\(iVar23\ \+\ 0x10\);$	+1
+use	FUN_0013da3c	puVar21	userList	INFERRED	user vector header of an instruction (+0x10): capacity, count, data	^\s*if\ \(uVar22\ <\ \*puVar21\)\ \{$	+2
+use	FUN_0013da3c	puVar21	userList	INFERRED	user vector header of an instruction (+0x10): capacity, count, data	^\s*_memset\(uVar6\ \*\ 4\ \+\ puVar21\[2\],0,\(uVar22\ \-\ uVar6\)\ \*\ 4\ \+\ 4\);$	+2
+use	FUN_0013da3c	puVar21	userList	INFERRED	user vector header of an instruction (+0x10): capacity, count, data	^\s*piVar7\ =\ \(int\ \*\)\(uVar22\ \*\ 4\ \+\ puVar21\[2\]\);$	+1
+use	FUN_0013da3c	puVar21	userList	INFERRED	user vector header of an instruction (+0x10): capacity, count, data	^\s*piVar7\ =\ \(int\ \*\)FUN_0019423c\(puVar21,uVar22\);$	+1
+use	FUN_0013da3c	puVar21	userList	INFERRED	user vector header of an instruction (+0x10): capacity, count, data	^\s*puVar21\ =\ puVar24;$	+1
+use	FUN_0013da3c	puVar21	userList	INFERRED	user vector header of an instruction (+0x10): capacity, count, data	^\s*puVar21\ =\ \*\(uint\ \*\*\)\(iVar23\ \+\ 0x10\);$@2	+6
+use	FUN_0013da3c	puVar21	userList	INFERRED	user vector header of an instruction (+0x10): capacity, count, data	^\s*piVar7\ =\ \(int\ \*\)FUN_0019423c\(puVar21,uVar6\);$	+1
+use	FUN_0013da3c	puVar24	userListRef	INFERRED	user vector header passed to Vector__removeAt	^\s*puVar24\ =\ puVar21;$	+1
+use	FUN_0013da3c	puVar24	userListRef	INFERRED	user vector header passed to Vector__removeAt	^\s*puVar24\ =\ \*\(uint\ \*\*\)\(iVar23\ \+\ 0x10\);$	+1
+use	FUN_0013da3c	puVar24	userListRef	INFERRED	user vector header passed to Vector__removeAt	^\s*puVar24\ =\ \*\(uint\ \*\*\)\(iVar23\ \+\ 0x10\);$@2	+1
+use	FUN_0013da3c	puVar24	userListRef	INFERRED	user vector header passed to Vector__removeAt	^\s*FUN_00194208\(puVar24,uVar22\);$	+1
+use	FUN_0013da3c	puVar24	userListRef	INFERRED	user vector header passed to Vector__removeAt	^\s*uVar6\ =\ puVar24\[1\];$	+1
+use	FUN_0013da3c	puVar24	userListRef	INFERRED	user vector header passed to Vector__removeAt	^\s*puVar21\ =\ puVar24;$	+1
+use	FUN_0013da3c	iVar14	instVector	INFERRED	program->instructionVector (count at +4, data at +8)	^\s*iVar14\ =\ \*\(int\ \*\)\(param_1\ \+\ PROG_instructionVector\);$	+1
+use	FUN_0013da3c	iVar14	instVector	INFERRED	program->instructionVector (count at +4, data at +8)	^\s*for\ \(uVar6\ =\ 1;\ uVar22\ =\ local_a0,\ uVar6\ <=\ \*\(uint\ \*\)\(iVar14\ \+\ 4\);\ uVar6\ =\ uVar6\ \+\ 1\)\ \{$	+2
+use	FUN_0013da3c	iVar14	instVector	INFERRED	program->instructionVector (count at +4, data at +8)	^\s*iVar14\ =\ \*\(int\ \*\)\(param_1\ \+\ PROG_instructionVector\);$@2	+1
+use	FUN_0013da3c	iVar14	instVector	INFERRED	program->instructionVector (count at +4, data at +8)	^\s*iVar14\ =\ \*\(int\ \*\)\(param_1\ \+\ PROG_instructionVector\);$@3	+1
+use	FUN_0013da3c	iVar14	instVector	INFERRED	program->instructionVector (count at +4, data at +8)	^\s*for\ \(uVar6\ =\ 1;\ uVar22\ =\ local_a0,\ uVar6\ <=\ \*\(uint\ \*\)\(iVar14\ \+\ 4\);\ uVar6\ =\ uVar6\ \+\ 1\)\ \{$@2	+2
+use	FUN_0013da3c	iVar14	instVector	INFERRED	program->instructionVector (count at +4, data at +8)	^\s*iVar14\ =\ \*\(int\ \*\)\(param_1\ \+\ PROG_instructionVector\);$@4	+1
+use	FUN_0013da3c	iVar14	instVector	INFERRED	program->instructionVector (count at +4, data at +8)	^\s*iVar14\ =\ \*\(int\ \*\)\(param_1\ \+\ PROG_instructionVector\);$@5	+1
+use	FUN_0013da3c	iVar14	instVector	INFERRED	program->instructionVector (count at +4, data at +8)	^\s*for\ \(uVar6\ =\ 1;\ uVar6\ <=\ \*\(uint\ \*\)\(iVar14\ \+\ 4\);\ uVar6\ =\ uVar6\ \+\ 1\)\ \{$	+2
+use	FUN_0013da3c	iVar14	instVector	INFERRED	program->instructionVector (count at +4, data at +8)	^\s*iVar14\ =\ \*\(int\ \*\)\(param_1\ \+\ PROG_instructionVector\);$@6	+1
+use	FUN_0013da3c	iVar14	instVector	INFERRED	program->instructionVector (count at +4, data at +8)	^\s*iVar14\ =\ \*\(int\ \*\)\(param_1\ \+\ PROG_instructionVector\);$@7	+1
+use	FUN_0013da3c	iVar14	instVector	INFERRED	program->instructionVector (count at +4, data at +8)	^\s*for\ \(uVar6\ =\ 1;\ uVar22\ =\ local_b0,\ uVar6\ <=\ \*\(uint\ \*\)\(iVar14\ \+\ 4\);\ uVar6\ =\ uVar6\ \+\ 1\)\ \{$	+2
+use	FUN_0013da3c	iVar14	instVector	INFERRED	program->instructionVector (count at +4, data at +8)	^\s*iVar14\ =\ \*\(int\ \*\)\(param_1\ \+\ PROG_instructionVector\);$@8	+1
+use	FUN_0013da3c	iVar14	byteOffset	INFERRED	byte offset of the next work-vector slot (count * 4)	^\s*iVar14\ =\ local_a0\ \*\ 4;$	+2
+use	FUN_0013da3c	iVar14	byteOffset	INFERRED	byte offset of the next work-vector slot (count * 4)	^\s*piVar7\ =\ \(int\ \*\)\(iVar14\ \+\ local_9c\);$	+1
+use	FUN_0013da3c	iVar14	byteOffset	INFERRED	byte offset of the next work-vector slot (count * 4)	^\s*iVar14\ =\ local_a0\ \*\ 4;$@2	+2
+use	FUN_0013da3c	iVar14	byteOffset	INFERRED	byte offset of the next work-vector slot (count * 4)	^\s*piVar7\ =\ \(int\ \*\)\(iVar14\ \+\ local_9c\);$@2	+1
+use	FUN_0013da3c	iVar14	byteOffset	INFERRED	byte offset of the next work-vector slot (count * 4)	^\s*iVar14\ =\ local_b0\ \*\ 4;$	+2
+use	FUN_0013da3c	iVar14	byteOffset	INFERRED	byte offset of the next work-vector slot (count * 4)	^\s*piVar7\ =\ \(int\ \*\)\(iVar14\ \+\ local_ac\);$	+1
+use	FUN_0013da3c	iVar14	idArrayBytes	INFERRED	byte size of the per-instruction-id arrays (nextInstId * 4)	^\s*iVar14\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ PROG_compiler\)\ \+\ COMP_nextInstId\)\ <<\ 2;$	+3
+use	FUN_0013da3c	iVar14	block	INFERRED	basic block whose instruction list is walked	^\s*iVar14\ =\ \*\(int\ \*\)\(param_1\ \+\ PROG_blockListHead\);$	+1
+use	FUN_0013da3c	iVar14	block	INFERRED	basic block whose instruction list is walked	^\s*piVar20\ =\ \*\(int\ \*\*\)\(iVar14\ \+\ 0x98\);$	+1
+use	FUN_0013da3c	iVar14	block	INFERRED	basic block whose instruction list is walked	^\s*iVar17\ =\ \*\(int\ \*\)\(iVar14\ \+\ 8\);$	+1
+use	FUN_0013da3c	iVar14	block	INFERRED	basic block whose instruction list is walked	^\s*iVar14\ =\ iVar17;$	+1
+use	FUN_0013da3c	iVar14	block	INFERRED	basic block whose instruction list is walked	^\s*iVar14\ =\ \*\(int\ \*\)\(local_58\ \+\ 8\);$	+3
+use	FUN_0013da3c	iVar14	block	INFERRED	basic block whose instruction list is walked	^\s*piVar7\ =\ \(int\ \*\)\(\*\(int\ \*\*\)\(iVar14\ \+\ 0x98\)\)\[2\];$	+2
+use	FUN_0013da3c	iVar14	block	INFERRED	basic block whose instruction list is walked	^\s*iVar23\ =\ \*\(int\ \*\)\(iVar14\ \+\ 8\);$	+1
+use	FUN_0013da3c	iVar14	block	INFERRED	basic block whose instruction list is walked	^\s*iVar14\ =\ iVar23;$	+1
+use	FUN_0013da3c	iVar14	block	INFERRED	basic block whose instruction list is walked	^\s*iVar14\ =\ \*\(int\ \*\)\(local_58\ \+\ 8\);$@2	+1
+use	FUN_0013da3c	iVar14	block	INFERRED	basic block whose instruction list is walked	^\s*iVar17\ =\ \*\(int\ \*\)\(iVar14\ \+\ 8\);$@3	+1
+use	FUN_0013da3c	iVar14	block	INFERRED	basic block whose instruction list is walked	^\s*piVar7\ =\ \(int\ \*\)\(\*\(int\ \*\*\)\(iVar14\ \+\ 0x98\)\)\[2\];$@2	+2
+use	FUN_0013da3c	iVar14	block	INFERRED	basic block whose instruction list is walked	^\s*FUN_000e7700\(iVar14,piVar20,iVar18\);$	+1
+use	FUN_0013da3c	iVar14	block	INFERRED	basic block whose instruction list is walked	^\s*FUN_000e7738\(iVar14,iVar18,piVar20\);$	+1
+use	FUN_0013da3c	iVar14	block	INFERRED	basic block whose instruction list is walked	^\s*iVar18\ =\ \*\(int\ \*\)\(iVar14\ \+\ 8\);$	+1
+use	FUN_0013da3c	iVar14	block	INFERRED	basic block whose instruction list is walked	^\s*iVar14\ =\ iVar18;$	+1
+use	FUN_0013da3c	iVar14	pushedInst	INFERRED	instruction just pushed	^\s*iVar14\ =\ local_b8;$	+1
+use	FUN_0013da3c	iVar14	pushedInst	INFERRED	instruction just pushed	^\s*\*piVar7\ =\ iVar14;$	+1
+use	FUN_0013da3c	iVar14	operandCount	INFERRED	operand count (+0x84), one less when flag 0x200 is set	^\s*iVar14\ =\ \*\(int\ \*\)\(iVar17\ \+\ 0x84\);$	+1
+use	FUN_0013da3c	iVar14	operandCount	INFERRED	operand count (+0x84), one less when flag 0x200 is set	^\s*iVar14\ =\ iVar14\ \+\ \-1;$	+1
+use	FUN_0013da3c	iVar14	operandCount	INFERRED	operand count (+0x84), one less when flag 0x200 is set	^\s*\}\ while\ \(iVar14\ <\ 1\);$	+1
+use	FUN_0013da3c	iVar14	operandCount	INFERRED	operand count (+0x84), one less when flag 0x200 is set	^\s*\}\ while\ \(iVar18\ <=\ iVar14\);$	+1
+use	FUN_0013da3c	iVar14	operandCount	INFERRED	operand count (+0x84), one less when flag 0x200 is set	^\s*iVar14\ =\ piVar7\[0x21\];$	+1
+use	FUN_0013da3c	iVar14	operandCount	INFERRED	operand count (+0x84), one less when flag 0x200 is set	^\s*iVar14\ =\ piVar7\[0x21\]\ \+\ \-1;$	+1
+use	FUN_0013da3c	iVar14	operandCount	INFERRED	operand count (+0x84), one less when flag 0x200 is set	^\s*\}\ while\ \(iVar14\ <\ 1\);$@2	+1
+use	FUN_0013da3c	iVar14	operandCount	INFERRED	operand count (+0x84), one less when flag 0x200 is set	^\s*\}\ while\ \(iVar17\ <=\ iVar14\);$	+1
+use	FUN_0013da3c	iVar14	vcall30Result	INFERRED	result of the instruction's virtual slot 0x30 test	^\s*iVar14\ =\ \(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0x30\)\)\(piVar7\);$	+3
+use	FUN_0013da3c	iVar14	vcall30Result	INFERRED	result of the instruction's virtual slot 0x30 test	^\s*if\ \(\(piVar20\ !=\ \(int\ \*\)0x0\)\ \&\&\ \(iVar14\ =\ \(\*\*\(code\ \*\*\)\(\*piVar20\ \+\ 0x50\)\)\(\),\ iVar14\ !=\ 0\)\)\ \{$	+1
+use	FUN_0013da3c	iVar18	candidateInst	INFERRED	instruction read from the instruction vector	^\s*iVar18\ =\ \*\(int\ \*\)\(iVar17\ \+\ \*\(int\ \*\)\(iVar14\ \+\ 8\)\);$	+3
+use	FUN_0013da3c	iVar18	candidateInst	INFERRED	instruction read from the instruction vector	^\s*\*piVar7\ =\ iVar18;$	+1
+use	FUN_0013da3c	iVar18	candidateInst	INFERRED	instruction read from the instruction vector	^\s*iVar18\ =\ \*\(int\ \*\)\(iVar17\ \+\ \*\(int\ \*\)\(iVar14\ \+\ 8\)\);$@2	+3
+use	FUN_0013da3c	iVar18	candidateInst	INFERRED	instruction read from the instruction vector	^\s*\*piVar7\ =\ iVar18;$@2	+1
+use	FUN_0013da3c	iVar18	candidateInst	INFERRED	instruction read from the instruction vector	^\s*iVar18\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar14\ \+\ 8\)\ \+\ iVar17\);$	+3
+use	FUN_0013da3c	iVar18	candidateInst	INFERRED	instruction read from the instruction vector	^\s*\*piVar7\ =\ iVar18;$@4	+1
+use	FUN_0013da3c	iVar18	unionFindParents	INFERRED	per-instruction-id parent array of the disjoint-set structure (disjointSetFindRoot / storeIndexedWord)	^\s*iVar18\ =\ FUN_00193e18\(\*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ PROG_compiler\)\ \+\ COMP_arenaB\),iVar14\);$	+1
+use	FUN_0013da3c	iVar18	unionFindParents	INFERRED	per-instruction-id parent array of the disjoint-set structure (disjointSetFindRoot / storeIndexedWord)	^\s*\*\(int\ \*\)\(piVar20\[0x53\]\ \*\ 4\ \+\ iVar18\)\ =\ piVar20\[0x53\];$	+1
+use	FUN_0013da3c	iVar18	unionFindParents	INFERRED	per-instruction-id parent array of the disjoint-set structure (disjointSetFindRoot / storeIndexedWord)	^\s*iVar23\ =\ FUN_001952d8\(piVar20\[0x53\],iVar18\);$	+1
+use	FUN_0013da3c	iVar18	unionFindParents	INFERRED	per-instruction-id parent array of the disjoint-set structure (disjointSetFindRoot / storeIndexedWord)	^\s*\(\(iVar11\ =\ FUN_001952d8\(\*\(undefined4\ \*\)\(iVar17\ \+\ 0x14c\),iVar18\),$	+1
+use	FUN_0013da3c	iVar18	unionFindParents	INFERRED	per-instruction-id parent array of the disjoint-set structure (disjointSetFindRoot / storeIndexedWord)	^\s*iVar10\ =\ FUN_001952d8\(\*\(undefined4\ \*\)\(iVar11\ \+\ 0x14c\),iVar18\);$	+1
+use	FUN_0013da3c	iVar18	unionFindParents	INFERRED	per-instruction-id parent array of the disjoint-set structure (disjointSetFindRoot / storeIndexedWord)	^\s*FUN_00195330\(iVar13,iVar10,iVar18\);$	+1
+use	FUN_0013da3c	iVar18	unionFindParents	INFERRED	per-instruction-id parent array of the disjoint-set structure (disjointSetFindRoot / storeIndexedWord)	^\s*\(iVar11\ =\ FUN_001952d8\(piVar20\[0x53\],iVar18\),\ \-1\ <\ iVar23\)\)\ \{$	+2
+use	FUN_0013da3c	iVar18	successorBlock	INFERRED	block after the next one while walking the block list	^\s*while\ \(iVar18\ =\ iVar17,\ iVar18\ !=\ 0\)\ \{$	+1
+use	FUN_0013da3c	iVar18	successorBlock	INFERRED	block after the next one while walking the block list	^\s*iVar18\ =\ \*\(int\ \*\)\(iVar14\ \+\ 8\);$	+1
+use	FUN_0013da3c	iVar18	successorBlock	INFERRED	block after the next one while walking the block list	^\s*iVar14\ =\ iVar18;$	+2
+use	FUN_0013da3c	iVar18	identitySelect	INFERRED	constant identity select word stored into the operand record	^\s*iVar18\ =\ DAT_001b0000;$	+1
+use	FUN_0013da3c	iVar18	identitySelect	INFERRED	constant identity select word stored into the operand record	^\s*\*\(int\ \*\)\(iVar23\ \+\ 0x10\)\ =\ iVar18;$	+1
+use	FUN_0013da3c	iVar18	sourceIndex	INFERRED	1-based operand index of the popped instruction	^\s*iVar18\ =\ 1;$	+1
+use	FUN_0013da3c	iVar18	sourceIndex	INFERRED	1-based operand index of the popped instruction	^\s*piVar7\ =\ \(int\ \*\)FUN_00105594\(iVar17,iVar18\);$	+1
+use	FUN_0013da3c	iVar18	sourceIndex	INFERRED	1-based operand index of the popped instruction	^\s*iVar8\ =\ FUN_001054ec\(iVar17,iVar18\);$	+1
+use	FUN_0013da3c	iVar18	sourceIndex	INFERRED	1-based operand index of the popped instruction	^\s*iVar18\ =\ iVar18\ \+\ 1;$	+2
+use	FUN_0013da3c	iVar8	matchingDefMap	INFERRED	per-instruction-id array: matching earlier definition of the instruction	^\s*iVar8\ =\ FUN_00193e18\(\*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ PROG_compiler\)\ \+\ COMP_arenaB\),iVar14\);$	+1
+use	FUN_0013da3c	iVar8	matchingDefMap	INFERRED	per-instruction-id array: matching earlier definition of the instruction	^\s*\*\(undefined4\ \*\)\(iVar8\ \+\ piVar20\[0x53\]\ \*\ 4\)\ =\ 0;$	+1
+use	FUN_0013da3c	iVar8	matchingDefMap	INFERRED	per-instruction-id array: matching earlier definition of the instruction	^\s*\*\(int\ \*\)\(iVar8\ \+\ piVar20\[0x53\]\ \*\ 4\)\ =\ iVar17;$	+1
+use	FUN_0013da3c	iVar8	matchingDefMap	INFERRED	per-instruction-id array: matching earlier definition of the instruction	^\s*iVar17\ =\ \*\(int\ \*\)\(iVar8\ \+\ piVar20\[0x53\]\ \*\ 4\);$	+1
+use	FUN_0013da3c	iVar8	byteOffsetB	INFERRED	byte offset of the next work-vector slot (count * 4)	^\s*iVar8\ =\ local_b0\ \*\ 4;$	+2
+use	FUN_0013da3c	iVar8	byteOffsetB	INFERRED	byte offset of the next work-vector slot (count * 4)	^\s*puVar9\ =\ \(undefined4\ \*\)\(iVar8\ \+\ local_ac\);$	+1
+use	FUN_0013da3c	iVar8	predicateResult	INFERRED	immediate result of a RegKind flag test or virtual predicate	^\s*if\ \(\(\(\(\(piVar7\[0x20\]\ !=\ 0\)\ \&\&\ \(iVar8\ =\ FUN_00126760\(piVar7\[0x26\]\),\ iVar8\ !=\ 0\)\)\ \&\&$	+1
+use	FUN_0013da3c	iVar8	predicateResult	INFERRED	immediate result of a RegKind flag test or virtual predicate	^\s*\(iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0x50\)\)\(piVar7\),\ iVar8\ ==\ 0\)\)\ \|\|$	+3
+use	FUN_0013da3c	iVar8	componentIndex	INFERRED	component (byte) index 0..3 of the select word being rewritten	^\s*iVar8\ =\ 0;$	+1
+use	FUN_0013da3c	iVar8	componentIndex	INFERRED	component (byte) index 0..3 of the select word being rewritten	^\s*if\ \(\(\*\(char\ \*\)\(\(int\)\&local_c0\ \+\ iVar8\)\ !=\ '\\0'\)\ \&\&$	+2
+use	FUN_0013da3c	iVar8	componentIndex	INFERRED	component (byte) index 0..3 of the select word being rewritten	^\s*if\ \(\*\(char\ \*\)\(\(int\)\&local_c8\ \+\ iVar8\)\ ==\ '\\x04'\)\ \{$	+2
+use	FUN_0013da3c	iVar8	componentIndex	INFERRED	component (byte) index 0..3 of the select word being rewritten	^\s*bVar1\ =\ iVar8\ !=\ 3;$	+2
+use	FUN_0013da3c	iVar16	prevMergeTarget	INFERRED	merge target kept from the previous chain element	^\s*iVar16\ =\ 0;$	+1
+use	FUN_0013da3c	iVar16	prevMergeTarget	INFERRED	merge target kept from the previous chain element	^\s*\(iVar23\ =\ iVar13,\ iVar12\ =\ iVar16,\ \(local_80\ \&\ uVar6\)\ !=\ 0\)\)\ \{$	+1
+use	FUN_0013da3c	iVar16	prevMergeTarget	INFERRED	merge target kept from the previous chain element	^\s*if\ \(iVar16\ !=\ 0\)\ \{$	+1
+use	FUN_0013da3c	iVar16	prevMergeTarget	INFERRED	merge target kept from the previous chain element	^\s*iVar12\ =\ iVar16;$	+1
+use	FUN_0013da3c	iVar16	prevMergeTarget	INFERRED	merge target kept from the previous chain element	^\s*iVar16\ =\ iVar12;$	+1
+use	FUN_0013da3c	iVar13	prevRoot	INFERRED	disjoint-set root of the previous chain element	^\s*iVar13\ =\ iVar23;$	+1
+use	FUN_0013da3c	iVar13	prevRoot	INFERRED	disjoint-set root of the previous chain element	^\s*if\ \(\(iVar13\ ==\ iVar10\)\ \|\|$	+2
+use	FUN_0013da3c	iVar13	prevRoot	INFERRED	disjoint-set root of the previous chain element	^\s*if\ \(\(\-1\ <\ iVar13\)\ \&\&\ \(iVar23\ =\ iVar13,\ iVar13\ !=\ iVar10\)\)\ \{$	+2
+use	FUN_0013da3c	iVar13	prevRoot	INFERRED	disjoint-set root of the previous chain element	^\s*iVar13\ =\ iVar23;$@2	+1
+use	FUN_0013da3c	iVar12	operandLimit	INFERRED	result of the instruction's virtual slot 0x14 (number of operands the inst can read)	^\s*iVar12\ =\ \(\*\*\(code\ \*\*\)\(\*piVar20\ \+\ 0x14\)\)\(piVar20\);$	+2
+use	FUN_0013da3c	iVar12	operandLimit	INFERRED	result of the instruction's virtual slot 0x14 (number of operands the inst can read)	^\s*iVar12\ =\ \(\*\*\(code\ \*\*\)\(\*piVar20\ \+\ 0x14\)\)\(piVar20\);$@2	+2
+use	FUN_0013da3c	iVar12	operandLimit	INFERRED	result of the instruction's virtual slot 0x14 (number of operands the inst can read)	^\s*iVar12\ =\ \(\*\*\(code\ \*\*\)\(\*piVar20\ \+\ 0x14\)\)\(piVar20\);$@3	+2
+use	FUN_0013da3c	iVar12	identitySelectB	INFERRED	constant identity select word stored into the operand record	^\s*iVar12\ =\ DAT_001b0000;$	+1
+use	FUN_0013da3c	iVar12	identitySelectB	INFERRED	constant identity select word stored into the operand record	^\s*\*\(int\ \*\)\(iVar13\ \+\ 0x10\)\ =\ iVar12;$	+1
+use	FUN_0013da3c	iVar12	hasSpecialSource	INFERRED	result of FUN_001396d0 for operand iVar11	^\s*iVar12\ =\ \(\(int\ \(\*\)\(\)\)FUN_001396d0\)\(\*\(undefined4\ \*\)\(param_1\ \+\ PROG_compiler\),piVar20,iVar11,param_1\);$	+1
+use	FUN_0013da3c	iVar12	hasSpecialSource	INFERRED	result of FUN_001396d0 for operand iVar11	^\s*if\ \(iVar12\ ==\ 0\)\ \{$	+1
+use	FUN_0013da3c	iVar12	predicateResultB	INFERRED	immediate result of a RegKind flag test or virtual predicate	^\s*\(iVar12\ =\ FUN_00126760\(piVar7\[0x26\]\),\ iVar12\ !=\ 0\)\)\ \&\&$	+1
+use	FUN_0013da3c	iVar12	predicateResultB	INFERRED	immediate result of a RegKind flag test or virtual predicate	^\s*\(iVar12\ =\ \(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0x50\)\)\(piVar7\),\ iVar12\ ==\ 0\)\)\ \|\|$	+3
+use	FUN_0013da3c	iVar12	maskedSelectWord	INFERRED	select word with unused components masked (SelectWord__maskUnused result)	^\s*iVar12\ =\ local_60;$	+1
+use	FUN_0013da3c	iVar12	maskedSelectWord	INFERRED	select word with unused components masked (SelectWord__maskUnused result)	^\s*iVar12\ =\ local_68;$	+1
+use	FUN_0013da3c	iVar12	maskedSelectWord	INFERRED	select word with unused components masked (SelectWord__maskUnused result)	^\s*if\ \(iVar12\ !=\ \*\(int\ \*\)\(iVar13\ \+\ 0x10\)\)\ \{$	+1
+use	FUN_0013da3c	iVar12	maskedSelectWord	INFERRED	select word with unused components masked (SelectWord__maskUnused result)	^\s*piVar20\[0x27\]\ =\ iVar12;$	+1
+use	FUN_0013da3c	iVar12	maskedSelectWord	INFERRED	select word with unused components masked (SelectWord__maskUnused result)	^\s*\*\(int\ \*\)\(iVar13\ \+\ 0x10\)\ =\ iVar12;$@2	+1
+use	FUN_0013da3c	iVar12	mergeTarget	INFERRED	chain element the masks are merged into	^\s*iVar12\ =\ 0;$	+1
+use	FUN_0013da3c	iVar12	mergeTarget	INFERRED	chain element the masks are merged into	^\s*\(iVar23\ =\ iVar13,\ iVar12\ =\ iVar16,\ \(local_80\ \&\ uVar6\)\ !=\ 0\)\)\ \{$	+1
+use	FUN_0013da3c	iVar12	mergeTarget	INFERRED	chain element the masks are merged into	^\s*iVar12\ =\ iVar11;$	+1
+use	FUN_0013da3c	iVar12	mergeTarget	INFERRED	chain element the masks are merged into	^\s*iVar12\ =\ iVar16;$	+1
+use	FUN_0013da3c	iVar12	mergeTarget	INFERRED	chain element the masks are merged into	^\s*iVar16\ =\ iVar12;$	+1
+use	FUN_0013da3c	iVar12	mergeTarget	INFERRED	chain element the masks are merged into	^\s*if\ \(\*\(uint\ \*\)\(iVar12\ \+\ 0xc\)\ !=\ uVar6\)\ \{$	+1
+use	FUN_0013da3c	iVar12	mergeTarget	INFERRED	chain element the masks are merged into	^\s*\*piVar15\ =\ iVar12;$	+2
+use	FUN_0013da3c	iVar12	mergeTarget	INFERRED	chain element the masks are merged into	^\s*\*\(undefined4\ \*\)\(iVar12\ \+\ 0x9c\)\ =\ local_7c;$	+1
+use	FUN_0013da3c	iVar11	hasDefaultSelects	INFERRED	result of the instruction's virtual slot 0x60 (it carries default select operands)	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*piVar20\ \+\ 0x60\)\)\(piVar20\);$	+2
+use	FUN_0013da3c	iVar11	operandIndex	INFERRED	1-based operand index	^\s*iVar11\ =\ 1;$	+1
+use	FUN_0013da3c	iVar11	operandIndex	INFERRED	1-based operand index	^\s*if\ \(iVar11\ <=\ iVar12\)\ \{$	+2
+use	FUN_0013da3c	iVar11	operandIndex	INFERRED	1-based operand index	^\s*if\ \(iVar11\ ==\ 0\)\ \{$	+1
+use	FUN_0013da3c	iVar11	operandIndex	INFERRED	1-based operand index	^\s*iVar13\ =\ FUN_001054ec\(piVar20,iVar11\);$	+1
+use	FUN_0013da3c	iVar11	operandIndex	INFERRED	1-based operand index	^\s*iVar11\ =\ iVar11\ \+\ 1;$	+2
+use	FUN_0013da3c	iVar11	operandIndex	INFERRED	1-based operand index	^\s*iVar11\ =\ 1;$@2	+1
+use	FUN_0013da3c	iVar11	operandIndex	INFERRED	1-based operand index	^\s*piVar7\ =\ \(int\ \*\)FUN_00105594\(piVar20,iVar11\);$	+1
+use	FUN_0013da3c	iVar11	operandIndex	INFERRED	1-based operand index	^\s*if\ \(iVar11\ <=\ iVar12\)\ \{$@2	+2
+use	FUN_0013da3c	iVar11	operandIndex	INFERRED	1-based operand index	^\s*iVar12\ =\ \(\(int\ \(\*\)\(\)\)FUN_001396d0\)\(\*\(undefined4\ \*\)\(param_1\ \+\ PROG_compiler\),piVar20,iVar11,param_1\);$	+1
+use	FUN_0013da3c	iVar11	operandIndex	INFERRED	1-based operand index	^\s*if\ \(iVar11\ <=\ iVar12\)\ \{$@3	+2
+use	FUN_0013da3c	iVar11	operandIndex	INFERRED	1-based operand index	^\s*FUN_00106004\(piVar20,iVar11,piVar7,0,\*\(undefined4\ \*\)\(param_1\ \+\ PROG_compiler\)\);$	+2
+use	FUN_0013da3c	iVar11	operandIndex	INFERRED	1-based operand index	^\s*iVar13\ =\ FUN_001054ec\(piVar20,iVar11\);$@2	+1
+use	FUN_0013da3c	iVar11	operandIndex	INFERRED	1-based operand index	^\s*if\ \(iVar11\ ==\ 1\)\ \{$	+1
+use	FUN_0013da3c	iVar11	operandIndex	INFERRED	1-based operand index	^\s*iVar13\ =\ FUN_00105594\(piVar20,iVar11\);$	+1
+use	FUN_0013da3c	iVar11	operandIndex	INFERRED	1-based operand index	^\s*iVar13\ =\ FUN_001054ec\(piVar20,iVar11\);$@3	+1
+use	FUN_0013da3c	iVar11	operandIndex	INFERRED	1-based operand index	^\s*if\ \(iVar11\ ==\ 0\)\ \{$@2	+1
+use	FUN_0013da3c	iVar11	operandIndex	INFERRED	1-based operand index	^\s*iVar13\ =\ FUN_001054ec\(piVar20,iVar11\);$@4	+1
+use	FUN_0013da3c	iVar11	operandIndex	INFERRED	1-based operand index	^\s*iVar11\ =\ iVar11\ \+\ 1;$@2	+2
+use	FUN_0013da3c	iVar11	candidateRoot	INFERRED	disjoint-set root / match result of the candidate definition	^\s*\(\(iVar11\ =\ FUN_001952d8\(\*\(undefined4\ \*\)\(iVar17\ \+\ 0x14c\),iVar18\),$	+2
+use	FUN_0013da3c	iVar11	lastOperandIndex	INFERRED	index of the instruction's last operand (+0x84)	^\s*iVar11\ =\ piVar20\[0x21\];$	+2
+use	FUN_0013da3c	iVar11	lastOperandIndex	INFERRED	index of the instruction's last operand (+0x84)	^\s*if\ \(iVar11\ ==\ 0\)\ \{$@3	+1
+use	FUN_0013da3c	iVar11	lastOperandIndex	INFERRED	index of the instruction's last operand (+0x84)	^\s*iVar11\ =\ FUN_001054ec\(piVar20,iVar11\);$	+1	rhs	none
+use	FUN_0013da3c	iVar11	lastOperandRecord	INFERRED	operand record of the last operand	^\s*iVar11\ =\ FUN_001054ec\(piVar20,iVar11\);$	+1	lhs	none
+use	FUN_0013da3c	iVar11	lastOperandRecord	INFERRED	operand record of the last operand	^\s*\*\(int\ \*\)\(iVar11\ \+\ 0x10\)\ =\ iVar23;$	+1
+use	FUN_0013da3c	iVar11	selectRecord	INFERRED	operand record whose select word is reset	^\s*iVar11\ =\ FUN_001054ec\(piVar7,iVar17\);$	+2
+use	FUN_0013da3c	iVar11	chainInst	INFERRED	instruction along the +300 chain whose write masks are merged	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*piVar20\ \+\ 0x7c\)\)\(piVar20\);$	+1
+use	FUN_0013da3c	iVar11	chainInst	INFERRED	instruction along the +300 chain whose write masks are merged	^\s*if\ \(iVar11\ ==\ 0\)\ \{$@4	+1
+use	FUN_0013da3c	iVar11	chainInst	INFERRED	instruction along the +300 chain whose write masks are merged	^\s*iVar10\ =\ FUN_001952d8\(\*\(undefined4\ \*\)\(iVar11\ \+\ 0x14c\),iVar18\);$	+2
+use	FUN_0013da3c	iVar11	chainInst	INFERRED	instruction along the +300 chain whose write masks are merged	^\s*iVar12\ =\ iVar11;$	+1
+use	FUN_0013da3c	iVar11	chainInst	INFERRED	instruction along the +300 chain whose write masks are merged	^\s*\*\(undefined4\ \*\)\(iVar11\ \+\ 0xc\)\ =\ 0;$	+2
+use	FUN_0013da3c	iVar11	chainInst	INFERRED	instruction along the +300 chain whose write masks are merged	^\s*iVar11\ =\ \*\(int\ \*\)\(iVar11\ \+\ 300\);$	+1
+use	FUN_0013da3c	iVar11	chainInst	INFERRED	instruction along the +300 chain whose write masks are merged	^\s*\}\ while\ \(iVar11\ !=\ 0\);$	+1
+use	FUN_0013da3c	iVar11	byteOffsetC	INFERRED	byte offset of the next work-vector slot (count * 4)	^\s*iVar11\ =\ local_b0\ \*\ 4;$	+2
+use	FUN_0013da3c	iVar11	byteOffsetC	INFERRED	byte offset of the next work-vector slot (count * 4)	^\s*piVar15\ =\ \(int\ \*\)\(iVar11\ \+\ local_ac\);$	+1
+use	FUN_0013da3c	iVar11	destOperandRecord	INFERRED	operand 0 record of the walked instruction	^\s*iVar11\ =\ FUN_001054ec\(piVar20,0\);$	+2
+use	FUN_0013da3c	iVar11	resolvedRoot	INFERRED	disjoint-set root the walked instruction is joined to	^\s*if\ \(\(\(bVar1\)\ \|\|\ \(iVar11\ =\ iVar23,\ \(local_78\ \&\ local_a4\)\ !=\ 0\)\)\ \&\&$	+4
+use	FUN_0013da3c	iVar11	resolvedRoot	INFERRED	disjoint-set root the walked instruction is joined to	^\s*iVar23\ =\ iVar11;$	+1
+use	FUN_0013da3c	iVar23	scanInst	INFERRED	instruction read from the instruction vector	^\s*iVar23\ =\ \*\(int\ \*\)\(iVar17\ \+\ \*\(int\ \*\)\(iVar14\ \+\ 8\)\);$	+4
+use	FUN_0013da3c	iVar23	scanInst	INFERRED	instruction read from the instruction vector	^\s*\*\(undefined4\ \*\)\(iVar23\ \+\ 0xc\)\ =\ local_88;$	+1
+use	FUN_0013da3c	iVar23	byteOffsetD	INFERRED	byte offset of the next work-vector slot (count * 4)	^\s*iVar23\ =\ local_b0\ \*\ 4;$	+2
+use	FUN_0013da3c	iVar23	byteOffsetD	INFERRED	byte offset of the next work-vector slot (count * 4)	^\s*piVar7\ =\ \(int\ \*\)\(iVar23\ \+\ local_ac\);$	+1
+use	FUN_0013da3c	iVar23	byteOffsetD	INFERRED	byte offset of the next work-vector slot (count * 4)	^\s*iVar23\ =\ local_b0\ \*\ 4;$@2	+3
+use	FUN_0013da3c	iVar23	byteOffsetD	INFERRED	byte offset of the next work-vector slot (count * 4)	^\s*iVar23\ =\ local_b0\ \*\ 4;$@3	+2
+use	FUN_0013da3c	iVar23	byteOffsetD	INFERRED	byte offset of the next work-vector slot (count * 4)	^\s*puVar9\ =\ \(undefined4\ \*\)\(iVar23\ \+\ local_ac\);$@2	+1
+use	FUN_0013da3c	iVar23	nextBlock	INFERRED	block after the current one	^\s*iVar23\ =\ iVar17;$	+1
+use	FUN_0013da3c	iVar23	nextBlock	INFERRED	block after the current one	^\s*iVar23\ =\ \*\(int\ \*\)\(iVar14\ \+\ 8\);$	+1
+use	FUN_0013da3c	iVar23	nextBlock	INFERRED	block after the current one	^\s*iVar17\ =\ \*\(int\ \*\)\(iVar23\ \+\ 8\);$	+3
+use	FUN_0013da3c	iVar23	predicateResultC	INFERRED	immediate result of a RegKind flag test or virtual predicate	^\s*if\ \(\(\(\(\(piVar20\[0x20\]\ !=\ 0\)\ \&\&\ \(iVar23\ =\ FUN_00126760\(piVar20\[0x26\]\),\ iVar23\ !=\ 0\)$	+1
+use	FUN_0013da3c	iVar23	predicateResultC	INFERRED	immediate result of a RegKind flag test or virtual predicate	^\s*\(iVar23\ =\ \(\*\*\(code\ \*\*\)\(\*piVar20\ \+\ 0x50\)\)\(piVar20\),\ iVar23\ ==\ 0\)\)\)\)\ \|\|$	+3
+use	FUN_0013da3c	iVar23	predicateResultC	INFERRED	immediate result of a RegKind flag test or virtual predicate	^\s*iVar23\ =\ \(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0x7c\)\)\(piVar7,piVar20\),\ iVar23\ !=\ 0\ \&\&$	+1
+use	FUN_0013da3c	iVar23	predicateResultC	INFERRED	immediate result of a RegKind flag test or virtual predicate	^\s*iVar23\ =\ FUN_0012678c\(piVar20\[0x26\]\);$	+1
+use	FUN_0013da3c	iVar23	predicateResultC	INFERRED	immediate result of a RegKind flag test or virtual predicate	^\s*if\ \(iVar23\ ==\ 0\)\ \{$	+1
+use	FUN_0013da3c	iVar23	predicateResultC	INFERRED	immediate result of a RegKind flag test or virtual predicate	^\s*if\ \(\(\(\(piVar20\[0x20\]\ ==\ 0\)\ \|\|\ \(iVar23\ =\ FUN_00126760\(piVar20\[0x26\]\),\ iVar23\ ==\ 0\)\)\ \|\|$	+1
+use	FUN_0013da3c	iVar23	predicateResultC	INFERRED	immediate result of a RegKind flag test or virtual predicate	^\s*\(iVar23\ =\ \(\*\*\(code\ \*\*\)\(\*piVar20\ \+\ 0x50\)\)\(piVar20\),\ iVar23\ !=\ 0\)\)\)\)\ \&\&$	+2
+use	FUN_0013da3c	iVar23	destOperandRecordB	INFERRED	operand record read for the select-word compare	^\s*\(iVar23\ =\ FUN_001054ec\(piVar20,0\),\ iVar17\ !=\ \*\(int\ \*\)\(iVar23\ \+\ 0x10\)\)\)\)\)\ \{$	+1
+use	FUN_0013da3c	iVar23	destOperandRecordB	INFERRED	operand record read for the select-word compare	^\s*iVar23\ =\ FUN_001054ec\(piVar20,iVar11\);$	+2
+use	FUN_0013da3c	iVar23	lastOperandIndexB	INFERRED	operand count (+0x84), one less when flag 0x200 is set	^\s*iVar23\ =\ piVar20\[0x21\];$	+1
+use	FUN_0013da3c	iVar23	lastOperandIndexB	INFERRED	operand count (+0x84), one less when flag 0x200 is set	^\s*iVar23\ =\ iVar23\ \+\ \-1;$	+1
+use	FUN_0013da3c	iVar23	lastOperandIndexB	INFERRED	operand count (+0x84), one less when flag 0x200 is set	^\s*if\ \(0\ <\ iVar23\)\ \{$	+1
+use	FUN_0013da3c	iVar23	lastOperandIndexB	INFERRED	operand count (+0x84), one less when flag 0x200 is set	^\s*\}\ while\ \(iVar11\ <=\ iVar23\);$	+1
+use	FUN_0013da3c	iVar23	lastOperandIndexB	INFERRED	operand count (+0x84), one less when flag 0x200 is set	^\s*iVar23\ =\ piVar20\[0x21\];$@2	+1
+use	FUN_0013da3c	iVar23	lastOperandIndexB	INFERRED	operand count (+0x84), one less when flag 0x200 is set	^\s*iVar23\ =\ iVar23\ \+\ \-1;$@2	+1
+use	FUN_0013da3c	iVar23	lastOperandIndexB	INFERRED	operand count (+0x84), one less when flag 0x200 is set	^\s*if\ \(0\ <\ iVar23\)\ \{$@2	+1
+use	FUN_0013da3c	iVar23	lastOperandIndexB	INFERRED	operand count (+0x84), one less when flag 0x200 is set	^\s*\}\ while\ \(iVar11\ <=\ iVar23\);$@2	+1
+use	FUN_0013da3c	iVar23	defRoot	INFERRED	disjoint-set root of the instruction's id	^\s*iVar23\ =\ FUN_001952d8\(piVar20\[0x53\],iVar18\);$	+1
+use	FUN_0013da3c	iVar23	defRoot	INFERRED	disjoint-set root of the instruction's id	^\s*iVar23\ !=\ iVar11\ \|\|\ \(iVar11\ =\ FUN_000f497c\(iVar17,piVar20\),\ iVar11\ ==\ 0\)$	+1
+use	FUN_0013da3c	iVar23	lastOperandRecordB	INFERRED	operand record of the instruction's last operand	^\s*iVar23\ =\ FUN_001054ec\(piVar20,piVar20\[0x21\]\);$	+2
+use	FUN_0013da3c	iVar23	lastOperandRecordB	INFERRED	operand record of the instruction's last operand	^\s*iVar23\ =\ FUN_001054ec\(piVar20,piVar20\[0x21\]\);$@2	+2
+use	FUN_0013da3c	iVar23	cloneSource	INFERRED	source operand of the cloned instruction	^\s*iVar23\ =\ FUN_00105594\(iVar18,iVar17\);$	+2
+use	FUN_0013da3c	iVar23	cloneSource	INFERRED	source operand of the cloned instruction	^\s*puVar21\ =\ \*\(uint\ \*\*\)\(iVar23\ \+\ 0x10\);$	+1
+use	FUN_0013da3c	iVar23	cloneSource	INFERRED	source operand of the cloned instruction	^\s*puVar24\ =\ \*\(uint\ \*\*\)\(iVar23\ \+\ 0x10\);$	+1
+use	FUN_0013da3c	iVar23	cloneSource	INFERRED	source operand of the cloned instruction	^\s*puVar24\ =\ \*\(uint\ \*\*\)\(iVar23\ \+\ 0x10\);$@2	+1
+use	FUN_0013da3c	iVar23	cloneSource	INFERRED	source operand of the cloned instruction	^\s*puVar21\ =\ \*\(uint\ \*\*\)\(iVar23\ \+\ 0x10\);$@2	+1
+use	FUN_0013da3c	iVar23	fixedSelectWord	INFERRED	operand select word with the fixed byte	^\s*iVar23\ =\ local_c8;$	+1
+use	FUN_0013da3c	iVar23	fixedSelectWord	INFERRED	operand select word with the fixed byte	^\s*\*\(int\ \*\)\(iVar11\ \+\ 0x10\)\ =\ iVar23;$	+1
+use	FUN_0013da3c	iVar23	operandLimitB	INFERRED	result of the instruction's virtual slot 0x14	^\s*iVar23\ =\ \(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0x14\)\)\(piVar7\);$	+2
+use	FUN_0013da3c	iVar23	identitySelectC	INFERRED	constant identity select word	^\s*iVar23\ =\ DAT_001b0000;$	+1
+use	FUN_0013da3c	iVar23	identitySelectC	INFERRED	constant identity select word	^\s*\*\(int\ \*\)\(iVar11\ \+\ 0x10\)\ =\ iVar23;$@2	+1
+use	FUN_0013da3c	iVar23	rootCursor	INFERRED	disjoint-set root carried along the walked definition chain (-1 = none yet)	^\s*iVar23\ =\ \-1;$	+1
+use	FUN_0013da3c	iVar23	rootCursor	INFERRED	disjoint-set root carried along the walked definition chain (-1 = none yet)	^\s*iVar13\ =\ iVar23;$	+1
+use	FUN_0013da3c	iVar23	rootCursor	INFERRED	disjoint-set root carried along the walked definition chain (-1 = none yet)	^\s*\(iVar23\ =\ iVar13,\ iVar12\ =\ iVar16,\ \(local_80\ \&\ uVar6\)\ !=\ 0\)\)\ \{$	+1
+use	FUN_0013da3c	iVar23	rootCursor	INFERRED	disjoint-set root carried along the walked definition chain (-1 = none yet)	^\s*iVar23\ =\ iVar10;$	+2
+use	FUN_0013da3c	iVar23	rootCursor	INFERRED	disjoint-set root carried along the walked definition chain (-1 = none yet)	^\s*iVar13\ =\ iVar23;$@2	+1
+use	FUN_0013da3c	iVar23	rootCursor	INFERRED	disjoint-set root carried along the walked definition chain (-1 = none yet)	^\s*if\ \(\(\(bVar1\)\ \|\|\ \(iVar11\ =\ iVar23,\ \(local_78\ \&\ local_a4\)\ !=\ 0\)\)\ \&\&$	+4
+use	FUN_0013da3c	iVar23	rootCursor	INFERRED	disjoint-set root carried along the walked definition chain (-1 = none yet)	^\s*iVar23\ =\ iVar11;$	+1
+use	FUN_0013da3c	iVar23	destOperandRecordB	INFERRED	operand 0 record of the chain element	^\s*iVar23\ =\ FUN_001054ec\(iVar11,0\);$	+2
+use	FUN_0013da3c	iVar23	isProjectionOf2a	INFERRED	IRInst__isProjectionOfOpcode2a result	^\s*iVar23\ =\ FUN_001055cc\(piVar20\);$	+2
+use	FUN_0013da3c	iVar17	instByteOffset	INFERRED	byte offset (stepped by 4) into the instruction vector data	^\s*iVar17\ =\ 0;$	+1
+use	FUN_0013da3c	iVar17	instByteOffset	INFERRED	byte offset (stepped by 4) into the instruction vector data	^\s*iVar18\ =\ \*\(int\ \*\)\(iVar17\ \+\ \*\(int\ \*\)\(iVar14\ \+\ 8\)\);$	+1
+use	FUN_0013da3c	iVar17	instByteOffset	INFERRED	byte offset (stepped by 4) into the instruction vector data	^\s*iVar17\ =\ iVar17\ \+\ 4;$	+1
+use	FUN_0013da3c	iVar17	instByteOffset	INFERRED	byte offset (stepped by 4) into the instruction vector data	^\s*iVar17\ =\ 0;$@2	+1
+use	FUN_0013da3c	iVar17	instByteOffset	INFERRED	byte offset (stepped by 4) into the instruction vector data	^\s*iVar18\ =\ \*\(int\ \*\)\(iVar17\ \+\ \*\(int\ \*\)\(iVar14\ \+\ 8\)\);$@2	+1
+use	FUN_0013da3c	iVar17	instByteOffset	INFERRED	byte offset (stepped by 4) into the instruction vector data	^\s*iVar17\ =\ iVar17\ \+\ 4;$@2	+1
+use	FUN_0013da3c	iVar17	instByteOffset	INFERRED	byte offset (stepped by 4) into the instruction vector data	^\s*iVar17\ =\ 0;$@3	+1
+use	FUN_0013da3c	iVar17	instByteOffset	INFERRED	byte offset (stepped by 4) into the instruction vector data	^\s*iVar23\ =\ \*\(int\ \*\)\(iVar17\ \+\ \*\(int\ \*\)\(iVar14\ \+\ 8\)\);$	+1
+use	FUN_0013da3c	iVar17	instByteOffset	INFERRED	byte offset (stepped by 4) into the instruction vector data	^\s*iVar17\ =\ iVar17\ \+\ 4;$@3	+1
+use	FUN_0013da3c	iVar17	instByteOffset	INFERRED	byte offset (stepped by 4) into the instruction vector data	^\s*iVar17\ =\ 0;$@5	+1
+use	FUN_0013da3c	iVar17	instByteOffset	INFERRED	byte offset (stepped by 4) into the instruction vector data	^\s*iVar18\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar14\ \+\ 8\)\ \+\ iVar17\);$	+1
+use	FUN_0013da3c	iVar17	instByteOffset	INFERRED	byte offset (stepped by 4) into the instruction vector data	^\s*iVar17\ =\ iVar17\ \+\ 4;$@4	+1
+use	FUN_0013da3c	iVar17	blockCursor	INFERRED	block cursor of the for loop over the program's block list (+8 = next block)	^\s*for\ \(iVar17\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ PROG_blockListHead\)\ \+\ 8\);\ iVar17\ !=\ 0;\ iVar17\ =\ \*\(int\ \*\)\(iVar17\ \+\ 8\)\)\ \{$	+1
+use	FUN_0013da3c	iVar17	blockCursor	INFERRED	block cursor of the for loop over the program's block list (+8 = next block)	^\s*iVar17\ =\ \*\(int\ \*\)\(iVar14\ \+\ 8\);$	+1
+use	FUN_0013da3c	iVar17	blockCursor	INFERRED	block cursor of the for loop over the program's block list (+8 = next block)	^\s*iVar14\ =\ iVar17;$	+1
+use	FUN_0013da3c	iVar17	vcall48Result	INFERRED	result of the instruction's virtual slot 0x48	^\s*iVar17\ =\ \(\*\*\(code\ \*\*\)\(\*piVar20\ \+\ 0x48\)\)\(piVar20\);$	+2
+use	FUN_0013da3c	iVar17	nextBlockB	INFERRED	block after the current one	^\s*iVar17\ =\ \*\(int\ \*\)\(iVar14\ \+\ 8\);$@2	+1
+use	FUN_0013da3c	iVar17	nextBlockB	INFERRED	block after the current one	^\s*iVar23\ =\ iVar17;$	+1
+use	FUN_0013da3c	iVar17	nextBlockB	INFERRED	block after the current one	^\s*iVar17\ =\ \*\(int\ \*\)\(iVar23\ \+\ 8\);$	+1
+use	FUN_0013da3c	iVar17	destSelectWord	INFERRED	select word of operand 0 masked by the instruction's write mask (SelectWord__selectWhereMasked)	^\s*iVar17\ =\ local_74;$	+1
+use	FUN_0013da3c	iVar17	destSelectWord	INFERRED	select word of operand 0 masked by the instruction's write mask (SelectWord__selectWhereMasked)	^\s*\(iVar23\ =\ FUN_001054ec\(piVar20,0\),\ iVar17\ !=\ \*\(int\ \*\)\(iVar23\ \+\ 0x10\)\)\)\)\)\ \{$	+2
+use	FUN_0013da3c	iVar17	destSelectWord	INFERRED	select word of operand 0 masked by the instruction's write mask (SelectWord__selectWhereMasked)	^\s*FUN_000f3c30\(\&local_70,piVar20,iVar11,param_1,iVar17\);$	+1
+use	FUN_0013da3c	iVar17	destSelectWord	INFERRED	select word of operand 0 masked by the instruction's write mask (SelectWord__selectWhereMasked)	^\s*FUN_000f3c30\(\&local_6c,piVar20,iVar11,param_1,iVar17\);$	+1
+use	FUN_0013da3c	iVar17	predicateResultD	INFERRED	immediate result of a RegKind flag test or virtual predicate	^\s*if\ \(\(\(\(piVar20\[0x20\]\ ==\ 0\)\ \|\|\ \(iVar17\ =\ FUN_00126760\(piVar20\[0x26\]\),\ iVar17\ ==\ 0\)\)$	+1
+use	FUN_0013da3c	iVar17	predicateResultD	INFERRED	immediate result of a RegKind flag test or virtual predicate	^\s*\(iVar17\ =\ \(\*\*\(code\ \*\*\)\(\*piVar20\ \+\ 0x50\)\)\(piVar20\),\ iVar17\ !=\ 0\)\)\)\)\ \&\&$	+3
+use	FUN_0013da3c	iVar17	predicateResultD	INFERRED	immediate result of a RegKind flag test or virtual predicate	^\s*if\ \(\(\(\(\(piVar20\[0x20\]\ !=\ 0\)\ \&\&\ \(iVar17\ =\ FUN_00126760\(piVar20\[0x26\]\),\ iVar17\ !=\ 0\)\)$	+1
+use	FUN_0013da3c	iVar17	predicateResultD	INFERRED	immediate result of a RegKind flag test or virtual predicate	^\s*\(iVar17\ =\ \(\*\*\(code\ \*\*\)\(\*piVar20\ \+\ 0x50\)\)\(piVar20\),\ iVar17\ ==\ 0\)\)\ \|\|$	+3
+use	FUN_0013da3c	iVar17	predicateResultD	INFERRED	immediate result of a RegKind flag test or virtual predicate	^\s*iVar17\ =\ \(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0x7c\)\)\(piVar7,piVar20\),\ iVar17\ ==\ 0\)\)\)\)\ \{$	+1
+use	FUN_0013da3c	iVar17	candidateDef	INFERRED	earlier definition matching the instruction (stored into the matching-definition map)	^\s*iVar17\ =\ 0;$@4	+1
+use	FUN_0013da3c	iVar17	candidateDef	INFERRED	earlier definition matching the instruction (stored into the matching-definition map)	^\s*iVar17\ =\ \(\(int\ \(\*\)\(\)\)FUN_0013ca84\)\(piVar20\);$	+1
+use	FUN_0013da3c	iVar17	candidateDef	INFERRED	earlier definition matching the instruction (stored into the matching-definition map)	^\s*while\ \(\(iVar17\ !=\ 0\ \&\&$	+3
+use	FUN_0013da3c	iVar17	candidateDef	INFERRED	earlier definition matching the instruction (stored into the matching-definition map)	^\s*iVar17\ =\ \(\(int\ \(\*\)\(\)\)FUN_0013ca84\)\(iVar17\);$	+1
+use	FUN_0013da3c	iVar17	candidateDef	INFERRED	earlier definition matching the instruction (stored into the matching-definition map)	^\s*\*\(int\ \*\)\(iVar8\ \+\ piVar20\[0x53\]\ \*\ 4\)\ =\ iVar17;$	+1
+use	FUN_0013da3c	iVar17	nextBlockB	INFERRED	block after the current one	^\s*iVar17\ =\ \*\(int\ \*\)\(iVar14\ \+\ 8\);$@3	+2
+use	FUN_0013da3c	iVar17	nextBlockB	INFERRED	block after the current one	^\s*iVar17\ =\ \*\(int\ \*\)\(iVar18\ \+\ 8\);$	+1
+use	FUN_0013da3c	iVar17	destOperandRecordC	INFERRED	operand 0 record of the instruction	^\s*iVar17\ =\ FUN_001054ec\(piVar20,0\);$@2	+2
+use	FUN_0013da3c	iVar17	matchedDef	INFERRED	matching definition looked up in the per-instruction-id map	^\s*iVar17\ =\ \*\(int\ \*\)\(iVar8\ \+\ piVar20\[0x53\]\ \*\ 4\);$	+2
+use	FUN_0013da3c	iVar17	matchedDef	INFERRED	matching definition looked up in the per-instruction-id map	^\s*FUN_00106804\(piVar20,iVar17,0,\*\(undefined4\ \*\)\(param_1\ \+\ PROG_compiler\)\);$	+1
+use	FUN_0013da3c	iVar17	matchedDef	INFERRED	matching definition looked up in the per-instruction-id map	^\s*puVar21\ =\ \*\(uint\ \*\*\)\(iVar17\ \+\ 0x10\);$	+1
+use	FUN_0013da3c	iVar17	matchedDef	INFERRED	matching definition looked up in the per-instruction-id map	^\s*\*\(uint\ \*\)\(iVar17\ \+\ 0x14\)\ =\ \*\(uint\ \*\)\(iVar17\ \+\ 0x14\)\ \|\ 0x400000;$	+1
+use	FUN_0013da3c	iVar17	savedUsers	INFERRED	user vector of the instruction, saved across reinitialisation as a mov	^\s*iVar17\ =\ piVar20\[4\];$	+1
+use	FUN_0013da3c	iVar17	savedUsers	INFERRED	user vector of the instruction, saved across reinitialisation as a mov	^\s*piVar20\[4\]\ =\ iVar17;$	+1
+use	FUN_0013da3c	iVar17	identitySelectD	INFERRED	constant identity select word	^\s*iVar17\ =\ DAT_001b0000;$	+1
+use	FUN_0013da3c	iVar17	identitySelectD	INFERRED	constant identity select word	^\s*\*\(int\ \*\)\(iVar23\ \+\ 0x10\)\ =\ iVar17;$	+1
+use	FUN_0013da3c	iVar17	cloneOperandCount	INFERRED	operand count of the clone after dropping the extra operand	^\s*iVar17\ =\ \*\(int\ \*\)\(iVar18\ \+\ 0x84\)\ \+\ \-1;$	+2
+use	FUN_0013da3c	iVar17	cloneOperandCount	INFERRED	operand count of the clone after dropping the extra operand	^\s*if\ \(0\ <\ iVar17\)\ \{$	+1
+use	FUN_0013da3c	iVar17	operandIndexB	INFERRED	1-based operand index of the clone	^\s*iVar17\ =\ 1;$	+1
+use	FUN_0013da3c	iVar17	operandIndexB	INFERRED	1-based operand index of the clone	^\s*iVar23\ =\ FUN_00105594\(iVar18,iVar17\);$	+1
+use	FUN_0013da3c	iVar17	operandIndexB	INFERRED	1-based operand index of the clone	^\s*iVar17\ =\ iVar17\ \+\ 1;$	+2
+use	FUN_0013da3c	iVar17	poppedInstB	INFERRED	instruction popped from the work vector	^\s*iVar17\ =\ \*piVar7;$	+1
+use	FUN_0013da3c	iVar17	poppedInstB	INFERRED	instruction popped from the work vector	^\s*iVar14\ =\ \*\(int\ \*\)\(iVar17\ \+\ 0x84\);$	+3
+use	FUN_0013da3c	iVar17	poppedInstB	INFERRED	instruction popped from the work vector	^\s*piVar7\ =\ \(int\ \*\)FUN_00105594\(iVar17,iVar18\);$	+1
+use	FUN_0013da3c	iVar17	poppedInstB	INFERRED	instruction popped from the work vector	^\s*iVar8\ =\ FUN_001054ec\(iVar17,iVar18\);$	+1
+use	FUN_0013da3c	iVar17	operandIndexB	INFERRED	1-based operand index	^\s*iVar17\ =\ 1;$@2	+1
+use	FUN_0013da3c	iVar17	operandIndexB	INFERRED	1-based operand index	^\s*piVar20\ =\ \(int\ \*\)FUN_00105594\(piVar7,iVar17\);$	+1
+use	FUN_0013da3c	iVar17	operandIndexB	INFERRED	1-based operand index	^\s*if\ \(iVar17\ <=\ iVar23\)\ \{$	+2
+use	FUN_0013da3c	iVar17	operandIndexB	INFERRED	1-based operand index	^\s*if\ \(iVar17\ ==\ 0\)\ \{$@2	+1
+use	FUN_0013da3c	iVar17	operandIndexB	INFERRED	1-based operand index	^\s*iVar11\ =\ FUN_001054ec\(piVar7,iVar17\);$	+1
+use	FUN_0013da3c	iVar17	operandIndexB	INFERRED	1-based operand index	^\s*iVar17\ =\ iVar17\ \+\ 1;$@2	+2
+use	FUN_0013da3c	bVar3	lowByteIsZero	INFERRED	low byte of the operand select word equals zero	^\s*bVar3\ =\ \(char\)local_a4\ ==\ '\\0';$	+1
+use	FUN_0013da3c	bVar4	byte2IsZero	INFERRED	byte 2 of the operand select word equals zero	^\s*bVar4\ =\ \(\*\(unsigned\ char\ \*\)\(\(unsigned\ char\ \*\)\&\(local_a4\)\ \+\ 2\)\)\ ==\ '\\0';$	+1
+use	FUN_0013da3c	bVar2	byte1IsZero	INFERRED	byte 1 of the operand select word equals zero	^\s*bVar2\ =\ \(\*\(unsigned\ char\ \*\)\(\(unsigned\ char\ \*\)\&\(local_a4\)\ \+\ 1\)\)\ ==\ '\\0';$	+1
+use	FUN_0013da3c	bVar1	highByteIsZero	INFERRED	high byte of the operand select word equals zero	^\s*bVar1\ =\ \(\*\(unsigned\ char\ \*\)\(\(unsigned\ char\ \*\)\&\(local_a4\)\ \+\ 0\)\)\ ==\ '\\0';$	+1
+use	FUN_0013da3c	bVar1	highByteIsZero	INFERRED	high byte of the operand select word equals zero	^\s*if\ \(\(\(bVar3\ \&\&\ bVar4\)\ \&\&\ bVar2\)\ \&\&\ bVar1\)\ \{$	+1
+use	FUN_0013da3c	bVar1	moreComponents	INFERRED	loop flag: component index has not reached 3	^\s*bVar1\ =\ iVar8\ !=\ 3;$	+1
+use	FUN_0013da3c	bVar1	moreComponents	INFERRED	loop flag: component index has not reached 3	^\s*\}\ while\ \(bVar1\);$	+1
+use	FUN_0013da3c	bVar1	replacesWriteMask	INFERRED	true when the defining operand replaces the write mask instead of widening it	^\s*bVar1\ =\ false;$	+1
+use	FUN_0013da3c	bVar1	replacesWriteMask	INFERRED	true when the defining operand replaces the write mask instead of widening it	^\s*bVar1\ =\ true;$	+1
+use	FUN_0013da3c	bVar1	replacesWriteMask	INFERRED	true when the defining operand replaces the write mask instead of widening it	^\s*bVar1\ =\ !bVar1;$	+2
+use	FUN_0013da3c	bVar1	replacesWriteMask	INFERRED	true when the defining operand replaces the write mask instead of widening it	^\s*if\ \(\(\(bVar1\)\ \|\|\ \(iVar11\ =\ iVar23,\ \(local_78\ \&\ local_a4\)\ !=\ 0\)\)\ \&\&$	+1
+use	FUN_0013da3c	bVar1	replacesWriteMask	INFERRED	true when the defining operand replaces the write mask instead of widening it	^\s*if\ \(bVar1\)\ \{$@2	+1
+use	FUN_0013da3c	bVar1	replacesWriteMask	INFERRED	true when the defining operand replaces the write mask instead of widening it	^\s*if\ \(bVar1\)\ break;$	+1
+local	FUN_0013da3c	local_88	destWriteMask	INFERRED	write mask derived from operand 0's select word (WriteMask__fromSelectWord); stored into inst+0xc
+local	FUN_0013da3c	local_84	operandReadMaskOutA	INFERRED	out-parameter of FUN_000f403c: read mask of the operand
+local	FUN_0013da3c	local_80	chainedWriteMask	INFERRED	out-parameter of WriteMask__fromSelectWord for the chain element
+local	FUN_0013da3c	local_7c	mergedSelectWord	INFERRED	out-parameter of SelectWord__selectWhereMasked: select word of the merged mask, stored at +0x9c
+local	FUN_0013da3c	local_78	operandWriteMask	INFERRED	out-parameter of WriteMask__fromSelectWord for operand 0 of the walked instruction
+local	FUN_0013da3c	local_74	destSelectWordB	INFERRED	out-parameter of SelectWord__selectWhereMasked: operand 0 select word restricted to the write mask
+local	FUN_0013da3c	local_70	operandSelectOutA	INFERRED	out-parameter of FUN_000f3c30: select word of operand iVar11
+local	FUN_0013da3c	local_6c	operandSelectOutB	INFERRED	out-parameter of FUN_000f3c30: select word of operand iVar11
+local	FUN_0013da3c	local_68	projSelectWord	INFERRED	out-parameter of SelectWord__maskUnused for the projection-class path
+local	FUN_0013da3c	local_64	operandReadMaskOutB	INFERRED	out-parameter of FUN_000f403c: read mask of the operand
+local	FUN_0013da3c	local_60	maskedSelectOut	INFERRED	out-parameter of SelectWord__maskUnused
+local	FUN_0013da3c	local_5c	selectReadMask	INFERRED	out-parameter of SelectWord__readMask
+local	FUN_0013da3c	local_c0	selectReadMaskBytes	INFERRED	copy of the read mask indexed byte-wise by component
+local	FUN_0013da3c	local_c4	coveredMask	INFERRED	remaining mask ANDed with the defining write mask
+local	FUN_0013da3c	local_bc	maskedWriteMaskBytes	INFERRED	masked write mask tested byte-wise
+local	FUN_0013da3c	local_c8	operandSelectBytes	INFERRED	operand select word edited byte-wise
+local	FUN_0013da3c	local_b8	currentInst	INFERRED	instruction being processed (also passed by address to FUN_001382b8)
+local	FUN_0013da3c	local_58	blockListObject	INFERRED	block list at program+0x37c; +8 is the first block
+local	FUN_0013da3c	local_54	globalsBase	INFERRED	base of the read-only globals the select-word constant is read from
+use	FUN_0013da3c	bVar3	lowByteIsZero	INFERRED	low byte of the operand select word equals zero	^\s*if\ \(\(\(bVar3\ \&\&\ bVar4\)\ \&\&\ bVar2\)\ \&\&\ bVar1\)\ \{$	+1
+use	FUN_0013da3c	bVar4	byte2IsZero	INFERRED	byte 2 of the operand select word equals zero	^\s*if\ \(\(\(bVar3\ \&\&\ bVar4\)\ \&\&\ bVar2\)\ \&\&\ bVar1\)\ \{$	+1
+use	FUN_0013da3c	bVar2	byte1IsZero	INFERRED	byte 1 of the operand select word equals zero	^\s*if\ \(\(\(bVar3\ \&\&\ bVar4\)\ \&\&\ bVar2\)\ \&\&\ bVar1\)\ \{$	+1

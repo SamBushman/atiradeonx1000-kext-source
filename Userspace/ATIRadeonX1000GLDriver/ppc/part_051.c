@@ -1215,6 +1215,7 @@ int R300MachineAssembler__placeInstructionConstants(this, inst, constantAllocato
   int *inst;
   undefined4 constantAllocator;
 {
+  int operandRecord;
   int operandIndex;
   uint sourceLaneWord;
   int iVar2;
@@ -1229,18 +1230,18 @@ int R300MachineAssembler__placeInstructionConstants(this, inst, constantAllocato
   
   iVar2 = *(int *)(inst[0x22] + 8);
   if ((((iVar2 == 0x9e) || (iVar2 == 0xa0)) || (iVar2 == 0x9f)) || (operandIndex2 = 1, iVar2 == 0xa1)) {
-    iVar2 = IRInst__getOperandRecord(inst,0);
-    if (((*(char *)(iVar2 + 0x10) == '\0') ||
-        (iVar2 = IRInst__getOperandRecord(inst,0), *(char *)(iVar2 + 0x11) == '\0')) ||
-       (iVar2 = IRInst__getOperandRecord(inst,0), *(char *)(iVar2 + 0x12) == '\0')) {
+    operandRecord = IRInst__getOperandRecord(inst,0);
+    if (((*(char *)(operandRecord + 0x10) == '\0') ||
+        (operandRecord = IRInst__getOperandRecord(inst,0), *(char *)(operandRecord + 0x11) == '\0')) ||
+       (operandRecord = IRInst__getOperandRecord(inst,0), *(char *)(operandRecord + 0x12) == '\0')) {
       operandVReg = IRInst__getOperandSource(inst,1);
       iVar2 = FUN_0018d388(constantAllocator,operandVReg,0);
       if (iVar2 == 0) {
         return 0;
       }
     }
-    iVar2 = IRInst__getOperandRecord(inst,0);
-    if (*(char *)(iVar2 + 0x13) == '\0') {
+    operandRecord = IRInst__getOperandRecord(inst,0);
+    if (*(char *)(operandRecord + 0x13) == '\0') {
       operandVReg = IRInst__getOperandSource(inst,1);
       iVar2 = FUN_0018d388(constantAllocator,operandVReg,1);
       if (iVar2 == 0) {

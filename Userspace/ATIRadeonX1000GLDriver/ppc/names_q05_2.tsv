@@ -1,0 +1,165 @@
+local	FUN_000e5570	param_1	ilReader	INFERRED	IL reader object (FUN_000e5e70 state machine, FUN_000e4c40 operand decoder): this initialiser sets up its fields
+local	FUN_000e5570	param_2	tokenStream	INFERRED	start of the IL token stream: stored as cursor [0x1d]/[9]/[10]
+local	FUN_000e5570	param_3	compiler	INFERRED	stored in ilReader[0]; +0x378 is arena B, used for every allocation here
+use	FUN_000e5570	iVar3	boolConstList	INFERRED	param_1[3]: head/tail of the boolean-constant list (records of 0xc bytes {register, value, next}; FUN_000e4724 appends, FUN_000e4410 looks up)	^\s*iVar3\ =\ param_1\[3\];$	+3
+use	FUN_000e5570	iVar3	floatConstList	INFERRED	param_1[7]: head of the float-constant list (0x18-byte records {register, x, y, z, w, next}; FUN_000e4780 appends, FUN_000e44c4 reads)	^\s*iVar3\ =\ param_1\[7\];$	+3
+use	FUN_000e5570	iVar3	intConstList	INFERRED	param_1[5]: head of the integer-constant list (0x18-byte records {register, x, y, z, w, next}; FUN_000e4450 appends)	^\s*iVar3\ =\ param_1\[5\];$	+3
+use	FUN_000e5570	iVar3	tokenCursor	INFERRED	param_1[9]: write cursor of the token stream	^\s*iVar3\ =\ param_1\[9\];$	+4
+use	FUN_000e5570	iVar3	tokenCursor	INFERRED	param_1[9]: write cursor of the token stream	^\s*iVar3\ =\ iVar3\ \+\ 4;$	+2
+use	FUN_000e5570	iVar3	tokenCursor	INFERRED	param_1[9]: write cursor of the token stream	^\s*param_1\[2\]\ =\ iVar3;$	+1
+use	FUN_000e5570	iVar3	tokenCursor	INFERRED	param_1[9]: write cursor of the token stream	^\s*if\ \(iVar3\ !=\ 0\)\ \{$	+2
+local	FUN_000e5570	iVar4	tokenStart	INFERRED	cursor after the optional header word: becomes ilReader[0x1d] and [0xb]
+use	FUN_000e5570	puVar1	replayStackSlot	INFERRED	slot of the pushed word on the replay stack ilReader[0x22]	^\s*puVar1\ =\ \(undefined4\ \*\)\(uVar6\ \*\ 4\ \+\ puVar7\[2\]\);$	+1
+use	FUN_000e5570	puVar1	replayStackSlot	INFERRED	slot of the pushed word on the replay stack ilReader[0x22]	^\s*puVar1\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar7,uVar6\);$	+1
+use	FUN_000e5570	puVar1	replayStackSlot	INFERRED	slot of the pushed word on the replay stack ilReader[0x22]	^\s*\*puVar1\ =\ 2;$	+1
+use	FUN_000e5570	puVar1	replayStackSlot	INFERRED	slot of the pushed word on the replay stack ilReader[0x22]	^\s*puVar1\ =\ \(undefined4\ \*\)\(uVar6\ \*\ 4\ \+\ puVar7\[2\]\);$@2	+1
+use	FUN_000e5570	puVar1	replayStackSlot	INFERRED	slot of the pushed word on the replay stack ilReader[0x22]	^\s*puVar1\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar7,uVar6\);$@2	+1
+use	FUN_000e5570	puVar1	replayStackSlot	INFERRED	slot of the pushed word on the replay stack ilReader[0x22]	^\s*\*puVar1\ =\ 0;$	+1
+use	FUN_000e5570	puVar1	replayStackSlot	INFERRED	slot of the pushed word on the replay stack ilReader[0x22]	^\s*puVar1\ =\ \(undefined4\ \*\)\(uVar6\ \*\ 4\ \+\ puVar7\[2\]\);$@3	+1
+use	FUN_000e5570	puVar1	replayStackSlot	INFERRED	slot of the pushed word on the replay stack ilReader[0x22]	^\s*puVar1\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar7,uVar6\);$@3	+1
+use	FUN_000e5570	puVar1	replayStackSlot	INFERRED	slot of the pushed word on the replay stack ilReader[0x22]	^\s*\*puVar1\ =\ 0xffffffff;$	+1
+use	FUN_000e5570	puVar1	boolConstSentinel	INFERRED	0xc-byte sentinel record of the boolean-constant list (id 0xffffffff)	^\s*puVar1\ =\ \(undefined4\ \*\)FUN_00193e18\(\*\(undefined4\ \*\)\(\*param_1\ \+\ 0x378\),0xc\);$	+3
+use	FUN_000e5570	puVar1	floatConstSentinel	INFERRED	0x18-byte sentinel record of the float-constant list	^\s*puVar1\ =\ \(undefined4\ \*\)FUN_00193e18\(\*\(undefined4\ \*\)\(\*param_1\ \+\ 0x378\),0x18\);$	+3
+use	FUN_000e5570	puVar1	intConstSentinel	INFERRED	0x18-byte sentinel record of the integer-constant list	^\s*puVar1\ =\ \(undefined4\ \*\)FUN_00193e18\(\*\(undefined4\ \*\)\(\*param_1\ \+\ 0x378\),0x18\);$@2	+3
+local	FUN_000e5570	puVar2	firstReplaySlot	INFERRED	slot of the first word pushed on the replay stack
+local	FUN_000e5570	uVar6	replayStackCount	INFERRED	count of the replay stack before the push (vector header word)
+local	FUN_000e5570	puVar7	replayStack	INFERRED	ilReader[0x22] replay stack vector header
+local	FUN_000e44c4	fVar1	laneValue	INFERRED	one source component after swizzle select (0..3 = stored lane, 4 = 0.0, 5 = 1.0), before modifiers
+local	FUN_000e44c4	fVar2	modifiedComponent	INFERRED	component after the invert/bias/x2/clamp modifier bits
+use	FUN_000e44c4	fVar3	zeroConst	INFERRED	FLOAT_001aa0d4 = 0.0	^\s*fVar3\ =\ FLOAT_001aa0d4;$	+1
+use	FUN_000e44c4	fVar3	zeroConst	INFERRED	FLOAT_001aa0d4 = 0.0	^\s*if\ \(\(\(\(param_4\ \&\ 0x80000\)\ !=\ 0\)\ \&\&\ \(fVar2\ =\ FLOAT_001aa114,\ fVar3\ <=\ fVar1\)\)\ \&\&$	+2
+use	FUN_000e44c4	fVar3	divisor	INFERRED	divide-by-component factor: 1.0 or the selected lane (bits 0xe00000)	^\s*fVar3\ =\ FLOAT_001aa0e8;$	+1
+use	FUN_000e44c4	fVar3	divisor	INFERRED	divide-by-component factor: 1.0 or the selected lane (bits 0xe00000)	^\s*fVar3\ =\ \*\(float\ \*\)\(param_3\ \+\ uVar8\ \*\ 4\);$	+1
+use	FUN_000e44c4	fVar3	divisor	INFERRED	divide-by-component factor: 1.0 or the selected lane (bits 0xe00000)	^\s*fVar4\ =\ \*\(float\ \*\)\(uVar8\ \+\ param_3\)\ /\ fVar3;$	+1
+use	FUN_000e44c4	fVar4	oneConst	INFERRED	FLOAT_001aa0e8 = 1.0 (complement 1 - x)	^\s*fVar4\ =\ FLOAT_001aa0e8;$	+1
+use	FUN_000e44c4	fVar4	oneConst	INFERRED	FLOAT_001aa0e8 = 1.0 (complement 1 - x)	^\s*fVar1\ =\ fVar4\ \-\ fVar1;$	+1
+use	FUN_000e44c4	fVar4	dividedComponent	INFERRED	lane divided by the divisor, then abs/negate applied	^\s*fVar4\ =\ \*\(float\ \*\)\(uVar8\ \+\ param_3\)\ /\ fVar3;$	+1
+use	FUN_000e44c4	fVar4	dividedComponent	INFERRED	lane divided by the divisor, then abs/negate applied	^\s*fVar4\ =\ ABS\(fVar4\);$	+1
+use	FUN_000e44c4	fVar4	dividedComponent	INFERRED	lane divided by the divisor, then abs/negate applied	^\s*fVar4\ =\ \-fVar4;$	+1
+use	FUN_000e44c4	fVar4	dividedComponent	INFERRED	lane divided by the divisor, then abs/negate applied	^\s*\*\(float\ \*\)\(uVar8\ \+\ param_3\)\ =\ fVar4;$	+1
+local	FUN_000e44c4	uVar5	laneSelect	INFERRED	3-bit lane selector at bit 0/4/8/12 of the source token (lane i)
+local	FUN_000e44c4	fVar6	biasConst	INFERRED	FLOAT_001aa10c = 0.5, subtracted by the bias modifier (bit 0x20000)
+local	FUN_000e44c4	piVar7	constRecord	INFERRED	float-constant record of ilReader+0x1c (register id, x, y, z, w, next at +0x14)
+use	FUN_000e44c4	uVar8	divideSelect	INFERRED	bits 21..23 of the source token: lane used as divisor (1..3) or 4 = unsupported	^\s*uVar8\ =\ param_4\ >>\ 0x15\ \&\ 7;$	+1
+use	FUN_000e44c4	uVar8	divideSelect	INFERRED	bits 21..23 of the source token: lane used as divisor (1..3) or 4 = unsupported	^\s*if\ \(\(\(param_4\ \&\ 0xe00000\)\ !=\ 0\)\ \&\&\ \(uVar8\ !=\ 0\)\)\ \{$	+3
+use	FUN_000e44c4	uVar8	divideSelect	INFERRED	bits 21..23 of the source token: lane used as divisor (1..3) or 4 = unsupported	^\s*else\ if\ \(uVar8\ ==\ 4\)\ \{$	+1
+use	FUN_000e44c4	uVar8	laneOffset	INFERRED	byte offset of the lane being normalised	^\s*uVar8\ =\ 0;$	+1
+use	FUN_000e44c4	uVar8	laneOffset	INFERRED	byte offset of the lane being normalised	^\s*fVar4\ =\ \*\(float\ \*\)\(uVar8\ \+\ param_3\)\ /\ fVar3;$	+1
+use	FUN_000e44c4	uVar8	laneOffset	INFERRED	byte offset of the lane being normalised	^\s*if\ \(\(8\ <<\ \(uVar8\ \&\ 0x3f\)\ \&\ param_4\)\ !=\ 0\)\ \{$	+1
+use	FUN_000e44c4	uVar8	laneOffset	INFERRED	byte offset of the lane being normalised	^\s*\*\(float\ \*\)\(uVar8\ \+\ param_3\)\ =\ fVar4;$	+2
+local	FUN_000e44c4	uVar9	byteOffset	INFERRED	byte offset of the output lane (stride 4)
+local	FUN_000e44c4	iVar10	lanesLeft	INFERRED	loop counter over the four lanes
+local	FUN_000e44c4	param_2	registerIndex	INFERRED	float-constant register looked up in the list
+local	FUN_000e44c4	param_3	outValues	INFERRED	float[4] result
+local	FUN_000e44c4	param_4	sourceToken	INFERRED	source modifier token: lane selects, invert 0x10000, bias 0x20000, x2 0x40000, saturate 0x80000, abs 0x100000, divide select, negate masks
+local	FUN_000e4a38	bVar1	isFirstToken	INFERRED	param_2 == 0: fetching the first token of an instruction
+local	FUN_000e4a38	bVar2	replayFinished	INFERRED	the end-of-replay marker (-1) was consumed and the saved reader state restored: loop again
+local	FUN_000e4a38	uVar3	replayStackCount	INFERRED	count of the replay stack before the pop
+use	FUN_000e4a38	iVar4	readState	INFERRED	ilReader+0x7c: 0 = read from the stream, 1 = replay stack, 2 = ended	^\s*iVar4\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x7c\);$	+2
+use	FUN_000e4a38	iVar4	readState	INFERRED	ilReader+0x7c: 0 = read from the stream, 1 = replay stack, 2 = ended	^\s*iVar4\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x7c\);$@2	+1
+use	FUN_000e4a38	iVar4	readState	INFERRED	ilReader+0x7c: 0 = read from the stream, 1 = replay stack, 2 = ended	^\s*if\ \(iVar4\ ==\ 2\)\ \{$	+1
+use	FUN_000e4a38	iVar4	readState	INFERRED	ilReader+0x7c: 0 = read from the stream, 1 = replay stack, 2 = ended	^\s*if\ \(iVar4\ ==\ 0\)\ \{$	+1
+use	FUN_000e4a38	iVar4	readState	INFERRED	ilReader+0x7c: 0 = read from the stream, 1 = replay stack, 2 = ended	^\s*if\ \(\(\(iVar4\ ==\ 1\)\ \&\&\ \(bVar1\)\)\ \&\&\ \(\*\(int\ \*\)\(param_1\ \+\ 0x8c\)\ ==\ \-1\)\)\ \{$	+1
+use	FUN_000e4a38	iVar4	replayStack	INFERRED	ilReader+0x88 replay stack vector header	^\s*iVar4\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x88\);$	+1
+use	FUN_000e4a38	iVar4	replayStack	INFERRED	ilReader+0x88 replay stack vector header	^\s*uVar3\ =\ \*\(uint\ \*\)\(iVar4\ \+\ 4\);$	+1
+use	FUN_000e4a38	iVar4	replayStack	INFERRED	ilReader+0x88 replay stack vector header	^\s*puVar8\ =\ \(undefined4\ \*\)\(\(uVar3\ \-\ 1\)\ \*\ 4\ \+\ \*\(int\ \*\)\(iVar4\ \+\ 8\)\);$	+1
+use	FUN_000e4a38	iVar4	replayStack	INFERRED	ilReader+0x88 replay stack vector header	^\s*FUN_00194208\(iVar4,uVar3\ \-\ 1\);$	+1
+use	FUN_000e4a38	iVar4	replayStack	INFERRED	ilReader+0x88 replay stack vector header	^\s*iVar4\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x88\);$@2	+1
+use	FUN_000e4a38	iVar4	replayStack	INFERRED	ilReader+0x88 replay stack vector header	^\s*uVar3\ =\ \*\(uint\ \*\)\(iVar4\ \+\ 4\);$@2	+1
+use	FUN_000e4a38	iVar4	replayStack	INFERRED	ilReader+0x88 replay stack vector header	^\s*puVar8\ =\ \(undefined4\ \*\)\(\(uVar3\ \-\ 1\)\ \*\ 4\ \+\ \*\(int\ \*\)\(iVar4\ \+\ 8\)\);$@2	+1
+use	FUN_000e4a38	iVar4	replayStack	INFERRED	ilReader+0x88 replay stack vector header	^\s*FUN_00194208\(iVar4,uVar3\ \-\ 1\);$@2	+1
+use	FUN_000e4a38	iVar4	replayStack	INFERRED	ilReader+0x88 replay stack vector header	^\s*iVar4\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x88\);$@3	+1
+use	FUN_000e4a38	iVar4	replayStack	INFERRED	ilReader+0x88 replay stack vector header	^\s*uVar3\ =\ \*\(uint\ \*\)\(iVar4\ \+\ 4\);$@3	+1
+use	FUN_000e4a38	iVar4	replayStack	INFERRED	ilReader+0x88 replay stack vector header	^\s*puVar8\ =\ \(undefined4\ \*\)\(\(uVar3\ \-\ 1\)\ \*\ 4\ \+\ \*\(int\ \*\)\(iVar4\ \+\ 8\)\);$@3	+1
+use	FUN_000e4a38	iVar4	replayStack	INFERRED	ilReader+0x88 replay stack vector header	^\s*FUN_00194208\(iVar4,uVar3\ \-\ 1\);$@3	+1
+use	FUN_000e4a38	iVar4	replayStack	INFERRED	ilReader+0x88 replay stack vector header	^\s*iVar4\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x88\);$@4	+1
+use	FUN_000e4a38	iVar4	replayStack	INFERRED	ilReader+0x88 replay stack vector header	^\s*uVar3\ =\ \*\(uint\ \*\)\(iVar4\ \+\ 4\);$@4	+1
+use	FUN_000e4a38	iVar4	replayStack	INFERRED	ilReader+0x88 replay stack vector header	^\s*piVar10\ =\ \(int\ \*\)\(\(uVar3\ \-\ 1\)\ \*\ 4\ \+\ \*\(int\ \*\)\(iVar4\ \+\ 8\)\);$	+1
+use	FUN_000e4a38	iVar4	replayStack	INFERRED	ilReader+0x88 replay stack vector header	^\s*FUN_00194208\(iVar4,uVar3\ \-\ 1\);$@4	+1
+local	FUN_000e4a38	iVar5	streamBase	INFERRED	ilReader+0x2c start of the token stream (cursor restored as base + offset*4)
+local	FUN_000e4a38	iVar6	tokenSlot	INFERRED	address of the token window entry param_2 (ilReader + index*4)
+local	FUN_000e4a38	puVar8	replayStackTop	INFERRED	pointer to the top element of the replay stack (0 when empty)
+use	FUN_000e4a38	uVar9	streamToken	INFERRED	token word read from the stream at ilReader+0x74 (cursor advanced)	^\s*uVar9\ =\ \*\*\(undefined4\ \*\*\)\(param_1\ \+\ 0x74\);$	+1
+use	FUN_000e4a38	uVar9	streamToken	INFERRED	token word read from the stream at ilReader+0x74 (cursor advanced)	^\s*\*\(undefined4\ \*\)\(iVar6\ \+\ 0x8c\)\ =\ uVar9;$@2	+1
+use	FUN_000e4a38	uVar9	poppedWord	INFERRED	word popped from the replay stack (token, then restored skip mode, read state)	^\s*uVar9\ =\ \*puVar8;$	+1
+use	FUN_000e4a38	uVar9	poppedWord	INFERRED	word popped from the replay stack (token, then restored skip mode, read state)	^\s*\*\(undefined4\ \*\)\(iVar6\ \+\ 0x8c\)\ =\ uVar9;$	+1
+use	FUN_000e4a38	uVar9	poppedWord	INFERRED	word popped from the replay stack (token, then restored skip mode, read state)	^\s*uVar9\ =\ \*puVar8;$@2	+1
+use	FUN_000e4a38	uVar9	poppedWord	INFERRED	word popped from the replay stack (token, then restored skip mode, read state)	^\s*\*\(undefined4\ \*\)\(param_1\ \+\ 0x80\)\ =\ uVar9;$	+1
+use	FUN_000e4a38	uVar9	poppedWord	INFERRED	word popped from the replay stack (token, then restored skip mode, read state)	^\s*uVar9\ =\ \*puVar8;$@3	+1
+use	FUN_000e4a38	uVar9	poppedWord	INFERRED	word popped from the replay stack (token, then restored skip mode, read state)	^\s*\*\(undefined4\ \*\)\(param_1\ \+\ 0x7c\)\ =\ uVar9;$	+1
+local	FUN_000e4a38	piVar10	replayStackLast	INFERRED	pointer to the top element of the replay stack (0 when empty)
+local	FUN_000e4a38	iVar11	poppedOffset	INFERRED	stream offset popped from the replay stack; cursor = streamBase + offset*4
+local	FUN_000e4a38	param_2	tokenIndex	INFERRED	index in the token window (0 = first token of the instruction)
+use	FUN_000e5384	iVar1	tokenSlot	INFERRED	address of window entry param_3 (ilReader + tokenIndex*4)	^\s*iVar1\ =\ param_3\ \*\ 4\ \+\ param_1;$	+1
+use	FUN_000e5384	iVar1	tokenSlot	INFERRED	address of window entry param_3 (ilReader + tokenIndex*4)	^\s*\*\(int\ \*\)\(iVar1\ \+\ 0xa4\)\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x74\)\ \-\ \*\(int\ \*\)\(param_1\ \+\ 0x2c\)\ >>\ 2;$	+7
+local	FUN_000e5384	puVar2	firstReplaySlot	INFERRED	slot of the word pushed onto the replay stack
+use	FUN_000e5384	uVar3	savedReadState	INFERRED	ilReader+0x7c before the replay is started	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x7c\);$	+1
+use	FUN_000e5384	uVar3	savedReadState	INFERRED	ilReader+0x7c before the replay is started	^\s*\*\(undefined4\ \*\)\(iVar1\ \+\ 0xa0\)\ =\ uVar3;$	+1
+use	FUN_000e5384	uVar3	windowToken	INFERRED	token word pushed onto the replay stack (walking the window downwards)	^\s*uVar3\ =\ \*puVar5;$	+1
+use	FUN_000e5384	uVar3	windowToken	INFERRED	token word pushed onto the replay stack (walking the window downwards)	^\s*\*puVar2\ =\ uVar3;$	+1
+local	FUN_000e5384	uVar4	savedSkipMode	INFERRED	ilReader+0x80 before the replay is started
+local	FUN_000e5384	puVar5	windowCursor	INFERRED	walks the token window from entry tokenIndex+6 down to entry 0
+local	FUN_000e5384	uVar6	replayStackCount	INFERRED	count of the replay stack before the push
+local	FUN_000e5384	puVar7	replayStack	INFERRED	ilReader+0x88 replay stack vector header
+local	FUN_000e5384	param_2	opcodeToken	INFERRED	instruction token whose opcode half becomes the current opcode (ilReader+0x8e)
+local	FUN_000e5384	param_3	tokenIndex	INFERRED	index of the last token read by FUN_000e4c40 (minus one)
+local	FUN_000e5384	param_4	replacementToken	INFERRED	token stored at window entry tokenIndex
+use	FUN_000e547c	iVar1	tokenSlot	INFERRED	address of window entry param_3 (ilReader + tokenIndex*4)	^\s*iVar1\ =\ param_3\ \*\ 4\ \+\ param_1;$	+1
+use	FUN_000e547c	iVar1	tokenSlot	INFERRED	address of window entry param_3 (ilReader + tokenIndex*4)	^\s*\*\(int\ \*\)\(iVar1\ \+\ 0xa0\)\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x74\)\ \-\ \*\(int\ \*\)\(param_1\ \+\ 0x2c\)\ >>\ 2;$	+6
+local	FUN_000e547c	puVar2	firstReplaySlot	INFERRED	slot of the word pushed onto the replay stack
+use	FUN_000e547c	uVar3	savedReadState	INFERRED	ilReader+0x7c before the replay is started	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x7c\);$	+1
+use	FUN_000e547c	uVar3	savedReadState	INFERRED	ilReader+0x7c before the replay is started	^\s*\*\(undefined4\ \*\)\(iVar1\ \+\ 0x9c\)\ =\ uVar3;$	+1
+use	FUN_000e547c	uVar3	windowToken	INFERRED	token word pushed onto the replay stack (walking the window downwards)	^\s*uVar3\ =\ \*puVar5;$	+1
+use	FUN_000e547c	uVar3	windowToken	INFERRED	token word pushed onto the replay stack (walking the window downwards)	^\s*\*puVar2\ =\ uVar3;$	+1
+local	FUN_000e547c	uVar4	savedSkipMode	INFERRED	ilReader+0x80 before the replay is started
+local	FUN_000e547c	puVar5	windowCursor	INFERRED	walks the token window from entry tokenIndex+5 down to entry 0
+local	FUN_000e547c	uVar6	replayStackCount	INFERRED	count of the replay stack before the push
+local	FUN_000e547c	puVar7	replayStack	INFERRED	ilReader+0x88 replay stack vector header
+local	FUN_000e547c	param_2	opcodeToken	INFERRED	instruction token whose opcode half becomes the current opcode (ilReader+0x8e)
+local	FUN_000e547c	param_3	tokenIndex	INFERRED	index of the last token read by FUN_000e4c40
+local	FUN_000e547c	param_4	replacementToken	INFERRED	token stored at window entry tokenIndex
+local	FUN_000e4830	iVar1	vectorHeader	INFERRED	vector header freed in turn: ilReader[0xf], [0x10], [0x22], [0x11]; the header sits at +4 of its arena block
+local	FUN_000e4830	param_1	ilReader	INFERRED	IL reader object being torn down
+local	FUN_000e4934	iVar1	vectorHeader	INFERRED	vector header freed in turn: ilReader[0xf], [0x10], [0x22], [0x11]; the header sits at +4 of its arena block
+local	FUN_000e4934	param_1	ilReader	INFERRED	IL reader object being torn down
+local	FUN_000e59f0	param_1	ilReader	INFERRED	IL reader object (FUN_000e5e70 state machine, FUN_000e4c40 operand decoder): this initialiser sets up its fields
+local	FUN_000e59f0	param_2	tokenStream	INFERRED	start of the IL token stream: stored as cursor [0x1d]/[9]/[10]
+local	FUN_000e59f0	param_3	compiler	INFERRED	stored in ilReader[0]; +0x378 is arena B, used for every allocation here
+use	FUN_000e59f0	iVar3	boolConstList	INFERRED	param_1[3]: head/tail of the boolean-constant list (records of 0xc bytes {register, value, next}; FUN_000e4724 appends, FUN_000e4410 looks up)	^\s*iVar3\ =\ param_1\[3\];$	+3
+use	FUN_000e59f0	iVar3	floatConstList	INFERRED	param_1[7]: head of the float-constant list (0x18-byte records {register, x, y, z, w, next}; FUN_000e4780 appends, FUN_000e44c4 reads)	^\s*iVar3\ =\ param_1\[7\];$	+3
+use	FUN_000e59f0	iVar3	intConstList	INFERRED	param_1[5]: head of the integer-constant list (0x18-byte records {register, x, y, z, w, next}; FUN_000e4450 appends)	^\s*iVar3\ =\ param_1\[5\];$	+3
+use	FUN_000e59f0	iVar3	tokenCursor	INFERRED	param_1[9]: write cursor of the token stream	^\s*iVar3\ =\ param_1\[9\];$	+4
+use	FUN_000e59f0	iVar3	tokenCursor	INFERRED	param_1[9]: write cursor of the token stream	^\s*iVar3\ =\ iVar3\ \+\ 4;$	+2
+use	FUN_000e59f0	iVar3	tokenCursor	INFERRED	param_1[9]: write cursor of the token stream	^\s*param_1\[2\]\ =\ iVar3;$	+1
+use	FUN_000e59f0	iVar3	tokenCursor	INFERRED	param_1[9]: write cursor of the token stream	^\s*if\ \(iVar3\ !=\ 0\)\ \{$	+2
+local	FUN_000e59f0	iVar4	tokenStart	INFERRED	cursor after the optional header word: becomes ilReader[0x1d] and [0xb]
+use	FUN_000e59f0	puVar1	replayStackSlot	INFERRED	slot of the pushed word on the replay stack ilReader[0x22]	^\s*puVar1\ =\ \(undefined4\ \*\)\(uVar6\ \*\ 4\ \+\ puVar7\[2\]\);$	+1
+use	FUN_000e59f0	puVar1	replayStackSlot	INFERRED	slot of the pushed word on the replay stack ilReader[0x22]	^\s*puVar1\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar7,uVar6\);$	+1
+use	FUN_000e59f0	puVar1	replayStackSlot	INFERRED	slot of the pushed word on the replay stack ilReader[0x22]	^\s*\*puVar1\ =\ 2;$	+1
+use	FUN_000e59f0	puVar1	replayStackSlot	INFERRED	slot of the pushed word on the replay stack ilReader[0x22]	^\s*puVar1\ =\ \(undefined4\ \*\)\(uVar6\ \*\ 4\ \+\ puVar7\[2\]\);$@2	+1
+use	FUN_000e59f0	puVar1	replayStackSlot	INFERRED	slot of the pushed word on the replay stack ilReader[0x22]	^\s*puVar1\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar7,uVar6\);$@2	+1
+use	FUN_000e59f0	puVar1	replayStackSlot	INFERRED	slot of the pushed word on the replay stack ilReader[0x22]	^\s*\*puVar1\ =\ 0;$	+1
+use	FUN_000e59f0	puVar1	replayStackSlot	INFERRED	slot of the pushed word on the replay stack ilReader[0x22]	^\s*puVar1\ =\ \(undefined4\ \*\)\(uVar6\ \*\ 4\ \+\ puVar7\[2\]\);$@3	+1
+use	FUN_000e59f0	puVar1	replayStackSlot	INFERRED	slot of the pushed word on the replay stack ilReader[0x22]	^\s*puVar1\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar7,uVar6\);$@3	+1
+use	FUN_000e59f0	puVar1	replayStackSlot	INFERRED	slot of the pushed word on the replay stack ilReader[0x22]	^\s*\*puVar1\ =\ 0xffffffff;$	+1
+use	FUN_000e59f0	puVar1	boolConstSentinel	INFERRED	0xc-byte sentinel record of the boolean-constant list (id 0xffffffff)	^\s*puVar1\ =\ \(undefined4\ \*\)FUN_00193e18\(\*\(undefined4\ \*\)\(\*param_1\ \+\ 0x378\),0xc\);$	+3
+use	FUN_000e59f0	puVar1	floatConstSentinel	INFERRED	0x18-byte sentinel record of the float-constant list	^\s*puVar1\ =\ \(undefined4\ \*\)FUN_00193e18\(\*\(undefined4\ \*\)\(\*param_1\ \+\ 0x378\),0x18\);$	+3
+use	FUN_000e59f0	puVar1	intConstSentinel	INFERRED	0x18-byte sentinel record of the integer-constant list	^\s*puVar1\ =\ \(undefined4\ \*\)FUN_00193e18\(\*\(undefined4\ \*\)\(\*param_1\ \+\ 0x378\),0x18\);$@2	+3
+local	FUN_000e59f0	puVar2	firstReplaySlot	INFERRED	slot of the first word pushed on the replay stack
+local	FUN_000e59f0	uVar6	replayStackCount	INFERRED	count of the replay stack before the push (vector header word)
+local	FUN_000e59f0	puVar7	replayStack	INFERRED	ilReader[0x22] replay stack vector header
+func	FUN_000e4408	ILReader__currentOpcode	INFERRED	returns the current opcode word at ilReader+0x8e, 0 when it is out of range (>= 0xbf)
+func	FUN_000e4410	ILReader__lookupBoolConst	INFERRED	walks the boolean-constant list (ilReader[3]/[4]) for a register; returns its value or -1
+func	FUN_000e4450	ILReader__appendIntConst	INFERRED	appends a 0x18-byte {register, x, y, z, w, next} record to the integer-constant list tail ilReader[6]
+func	FUN_000e44c4	ILReader__readFloatConst	INFERRED	looks a register up in the float-constant list and applies the source token modifiers (swizzle, invert, bias, x2, saturate, abs, negate, divide) into float[4]
+func	FUN_000e4724	ILReader__appendBoolConst	INFERRED	appends a 0xc-byte {register, value, next} record to the boolean-constant list tail ilReader[4]
+func	FUN_000e4780	ILReader__appendFloatConst	INFERRED	appends a 0x18-byte {register, x, y, z, w, next} record (floats) to the float-constant list tail ilReader[8]
+func	FUN_000e4830	ILReader__dtor_e4830	INFERRED	frees the vector headers ilReader[0xf]/[0x10]/[0x22]/[0x11] and the four token buffers [0x19]-[0x1c]
+func	FUN_000e4934	ILReader__dtor_e4934	INFERRED	twin of ILReader__dtor_e4830 (same body)
+func	FUN_000e4a38	ILReader__fetchToken	INFERRED	reads token words into the window entry param_2 from the stream (ilReader+0x74) or, in replay mode, from the replay stack; restores the saved reader state at the end-of-replay marker
+func	FUN_000e4c40	ILReader__decodeInstruction	INFERRED	fetches the opcode token and all operand tokens (destination, sources, extended words) of one IL instruction through ILReader__fetchToken, filling the window and constant operand tables
+func	FUN_000e5384	ILReader__beginRewrittenReplay_e5384	INFERRED	rewrites the token window (entry param_3 = param_4, next = argR7, then 0x29, -1, saved skip mode and read state) and pushes it on the replay stack, switching to replay mode (ilReader+0x7c = 1)
+func	FUN_000e547c	ILReader__beginRewrittenReplay_e547c	INFERRED	same as ILReader__beginRewrittenReplay_e5384 with one token less
+func	FUN_000e5570	ILReader__ctor_e5570	INFERRED	initialises the reader: clears counters, allocates the replay stack and the three stack vectors, the four token buffers and the three constant lists in arena B
+func	FUN_000e59f0	ILReader__ctor_e59f0	INFERRED	twin of ILReader__ctor_e5570 (same body)
+func	FUN_000e5e70	ILReader__nextInstruction	INFERRED	reader state machine: decodes the next IL instruction, tracks if/else/endif/loop nesting with constant-folded conditions (skip mode), and handles replay; returns 1 when an instruction is ready, 0 at end of stream

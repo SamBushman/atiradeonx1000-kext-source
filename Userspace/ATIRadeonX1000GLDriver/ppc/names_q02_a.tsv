@@ -1,0 +1,33 @@
+use	fpilEmitInstruction	iVar6	usedWords	INFERRED	token vector count (translator+0x2c) before the reservation; becomes the write offset of the new record	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x2c\);$	+1
+use	fpilEmitInstruction	iVar6	usedWords	INFERRED	token vector count (translator+0x2c) before the reservation; becomes the write offset of the new record	^\s*uVar3\ =\ iVar7\ \+\ iVar6;$	+1
+use	fpilEmitInstruction	iVar6	usedWords	INFERRED	token vector count (translator+0x2c) before the reservation; becomes the write offset of the new record	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x2c\);$@2	+1
+use	fpilEmitInstruction	iVar6	usedWords	INFERRED	token vector count (translator+0x2c) before the reservation; becomes the write offset of the new record	^\s*\*\(int\ \*\)\(param_1\ \+\ 0x2c\)\ =\ iVar7\ \+\ iVar6;$	+2
+use	fpilEmitInstruction	iVar6	errorCode	INFERRED	translator error word (+0x24) re-read after a failed malloc/realloc	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x24\);$	+3
+use	fpilEmitInstruction	iVar6	errorCode	INFERRED	translator error word (+0x24) re-read after a failed malloc/realloc	^\s*if\ \(iVar6\ !=\ 0\)\ \{$	+2
+use	fpilEmitInstruction	iVar6	headerWords	INFERRED	1 token (opcode only) or 3 tokens (opcode + destination pair) written before the sources	^\s*iVar6\ =\ 1;$@2	+1
+use	fpilEmitInstruction	iVar6	headerWords	INFERRED	1 token (opcode only) or 3 tokens (opcode + destination pair) written before the sources	^\s*iVar6\ =\ 3;$	+1
+use	fpilEmitInstruction	iVar6	headerWords	INFERRED	1 token (opcode only) or 3 tokens (opcode + destination pair) written before the sources	^\s*puVar4\ =\ puVar4\ \+\ iVar6;$	+1
+local	fpilEmitInstruction	puVar1	srcAuxWordPtr	INFERRED	ilInstr + 6: the second word of the current source pair (source k = {ilInstr[3+k], ilInstr[6+k]})
+local	fpilEmitInstruction	uVar2	capacityWords	INFERRED	token vector capacity (translator+0x30), doubled until the record fits
+local	fpilEmitInstruction	uVar3	requiredWords	INFERRED	usedWords + record size: the capacity the vector needs
+local	fpilEmitInstruction	puVar4	recordPtr	INFERRED	write cursor into the token vector; starts at the new record (NULL when allocation failed and the error is returned)
+local	fpilEmitInstruction	puVar5	sourceOutPtr	INFERRED	running pointer to the next source pair slot of the record
+local	fpilEmitInstruction	iVar7	recordWords	INFERRED	(nDst + nSrc) * 2 + 1 words: opcode + one {word,word} pair per operand
+local	fpilEmitInstruction	piVar8	dataPtrAddr	INFERRED	address of the token vector data pointer (translator+0x28); *dataPtrAddr is the buffer
+local	FUN_0003f050	param_1	translator	INFERRED	same translator state as fpilReserveTokens (see names_E4_ilpipeline.tsv)
+local	FUN_0003f050	param_2	instIndex	INFERRED	index of the current ATI fragment-shader instruction relative to the instruction block (record at program+instBase+index*8)
+local	FUN_0003f050	param_3	outRegister	INFERRED	receives the register word looked up in the translator table at translator[3]
+local	FUN_0003f050	pbVar1	nextPairByte	INFERRED	first byte of the next cached pair, compared with the wanted index
+local	FUN_0003f050	pbVar4	pairCache	INFERRED	translator[0xd] cache of {index,register} byte pairs; count in the top 5 bits of word +0x20
+local	FUN_0003f050	pbVar6	scanPtr	INFERRED	cursor over the cached pairs
+local	FUN_0003f050	uVar2	wantedIndex	INFERRED	ushort at entry+2: the key looked up in the pair cache
+use	FUN_0003f050	uVar7	entryWord	INFERRED	first word of the constant entry (checked for kind 1 and 0xc)	^\s*uVar7\ =\ \*\(uint\ \*\)\(iVar5\ \+\ iVar3\);$	+1
+use	FUN_0003f050	uVar7	entryWord	INFERRED	first word of the constant entry (checked for kind 1 and 0xc)	^\s*if\ \(\(\(uVar7\ \&\ 0x1f0000\)\ ==\ 0x10000\)\ \&\&\ \(\(uVar7\ \&\ 0x1c000000\)\ ==\ 0xc000000\)\)\ \{$	+1
+use	FUN_0003f050	uVar7	cachedPairCount	INFERRED	translator[0xd]+0x20 >> 0x1b: pairs already stored	^\s*uVar7\ =\ \*\(uint\ \*\)\(pbVar4\ \+\ 0x20\)\ >>\ 0x1b;$	+2
+use	FUN_0003f050	uVar7	cachedPairCount	INFERRED	translator[0xd]+0x20 >> 0x1b: pairs already stored	^\s*pbVar4\[uVar7\ \*\ 2\]\ =\ \(byte\)uVar2;$	+2
+use	FUN_0003f050	uVar7	cachedPairCount	INFERRED	translator[0xd]+0x20 >> 0x1b: pairs already stored	^\s*uVar8\ =\ uVar7;$	+1
+local	FUN_0003f050	uVar8	pairsLeft	INFERRED	cachedPairCount counted down while scanning
+use	FUN_0003f050	iVar5	program	INFERRED	*translator: the program object	^\s*iVar5\ =\ \*param_1;$	^\s*iVar5\ =\ iVar5\ \+\ iVar3;$	all	rhs
+use	FUN_0003f050	iVar5	constEntry	INFERRED	program + constant-table offset: the entry the instruction's source field points at	^\s*iVar5\ =\ iVar5\ \+\ iVar3;$	^\s*if\ \(\*pbVar4\ !=\ uVar2\)\ \{$	lhs	none
+use	FUN_0003f050	iVar3	instRecord	INFERRED	address of the instruction's 8-byte record (program + base + index*8)	^\s*iVar3\ =\ iVar5\ \+\ \*\(int\ \*\)\(iVar5\ \+\ 0x54\)\ \*\ 8\ \+\ param_2\ \*\ 8;$	^\s*iVar3\ =\ \(\(uint\)\*\(ushort\ \*\)\(iVar3\ \+\ 0x1e\)\ \+\ \*\(int\ \*\)\(iVar5\ \+\ 0x2c\)\)\ \*\ 8;$	all	rhs
+use	FUN_0003f050	iVar3	constEntryOffset	INFERRED	(ushort(inst+0x1e) + program[0x2c]) * 8: byte offset of the entry in the program image	^\s*iVar3\ =\ \(\(uint\)\*\(ushort\ \*\)\(iVar3\ \+\ 0x1e\)\ \+\ \*\(int\ \*\)\(iVar5\ \+\ 0x2c\)\)\ \*\ 8;$	^\s*if\ \(\(\(uVar7\ \&\ 0x1f0000\)\ ==\ 0x10000\)\ \&\&\ \(\(uVar7\ \&\ 0x1c000000\)\ ==\ 0xc000000\)\)\ \{$	lhs	none

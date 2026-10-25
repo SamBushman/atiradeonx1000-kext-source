@@ -1321,6 +1321,7 @@ int Inst__movAndShiftUseVector(inst, program)
   int *inst;
   int program;
 {
+  int *elementRef;
   uint vectorFilledCount2;
   undefined4 compilerCtx;
   uint *vector2;
@@ -1337,7 +1338,7 @@ int Inst__movAndShiftUseVector(inst, program)
   undefined4 uVar2;
   int *piVar3;
   uint vectorFilledCount;
-  undefined4 *puVar5;
+  undefined4 *elementRef2;
   int *operandVReg;
   int operandRecord;
   int iVar8;
@@ -1409,12 +1410,12 @@ LAB_00188a5c:
             _memset(vectorFilledCount * 4 + vector[2],0,(uVar9 - vectorFilledCount) * 4 + 4);
             vector[1] = uVar9 + 1;
           }
-          puVar5 = (undefined4 *)(uVar9 * 4 + vector[2]);
+          elementRef2 = (undefined4 *)(uVar9 * 4 + vector[2]);
         }
         else {
-          puVar5 = (undefined4 *)Vector__elementRefGrow(vector,uVar9);
+          elementRef2 = (undefined4 *)Vector__elementRefGrow(vector,uVar9);
         }
-        inst1 = (int *)*puVar5;
+        inst1 = (int *)*elementRef2;
         piVar3 = inst1 + 0x20;
         for (operandIndex = 0; iVar8 = (**(code **)(*inst1 + 0x14))(inst1), operandIndex <= iVar8;
             operandIndex = operandIndex + 1) {
@@ -1465,12 +1466,12 @@ LAB_00188a5c:
                     _memset(vectorFilledCount2 * 4 + vector2[2],0,(loopIndex - vectorFilledCount2) * 4 + 4);
                     vector2[1] = loopIndex + 1;
                   }
-                  piVar3 = (int *)(loopIndex * 4 + vector2[2]);
+                  elementRef = (int *)(loopIndex * 4 + vector2[2]);
                 }
                 else {
-                  piVar3 = (int *)Vector__elementRefGrow(vector2,loopIndex);
+                  elementRef = (int *)Vector__elementRefGrow(vector2,loopIndex);
                 }
-                if (inst1 == (int *)*piVar3) {
+                if (inst1 == (int *)*elementRef) {
                   Vector__removeAt(vector2,loopIndex);
                   sourceDef = IRInst__getOperandSource(inst1,inst1[0x21]);
                   *(int *)(sourceDef + 0x160) = *(int *)(sourceDef + 0x160) + -1;
@@ -2179,6 +2180,7 @@ int FUN_00189df4(inst, param_2, param_3)
   int *param_2;
   int *param_3;
 {
+  int operandRecord2;
   int operandRecord;
   uint uVar1;
   int iVar2;
@@ -2210,8 +2212,8 @@ LAB_00189f84:
            ((iVar4 != 0x3b && ((iVar4 != 0x3e && (iVar4 != 0x3f)))))) && (iVar4 != 0x40)) &&
          ((((iVar4 != 0x41 && (iVar4 != 0x42)) && (iVar4 != 0x43)) &&
           ((iVar4 != 0x4c && (iVar4 != 0x4d)))))) {
-        iVar2 = IRInst__getOperandRecord(inst,0);
-        uVar1 = *(uint *)(iVar2 + 0x10);
+        operandRecord2 = IRInst__getOperandRecord(inst,0);
+        uVar1 = *(uint *)(operandRecord2 + 0x10);
         if ((uVar1 >> 0x18 == 0) ||
            (((uVar1 >> 0x10 & 0xff) == 0 || (iVar2 = -1, (uVar1 >> 8 & 0xff) == 0)))) {
           iVar2 = iVar4;
@@ -2849,7 +2851,7 @@ int FUN_0018b1bc(param_1, param_2, param_3, param_4, param_5)
   undefined4 *loopPtr5;
   undefined1 *loopPtr6;
   uint loopIndex8;
-  int *piVar6;
+  int *elementRef;
   int loopIndex3;
   uint vectorFilledCount3;
   int *a0;
@@ -2884,13 +2886,13 @@ int FUN_0018b1bc(param_1, param_2, param_3, param_4, param_5)
           _memset(loopIndex8 * 4 + vector[2],0,(loopIndex7 - loopIndex8) * 4 + 4);
           vector[1] = loopIndex7 + 1;
         }
-        piVar6 = (int *)(loopIndex7 * 4 + vector[2]);
+        elementRef = (int *)(loopIndex7 * 4 + vector[2]);
       }
       else {
-        piVar6 = (int *)Vector__elementRefGrow(vector,loopIndex7);
+        elementRef = (int *)Vector__elementRefGrow(vector,loopIndex7);
       }
       loopIndex7 = loopIndex7 + 1;
-      loopIndex2 = *piVar6;
+      loopIndex2 = *elementRef;
       if (*(int *)(loopIndex2 + 8) == 0) {
         if (bVar1) {
           loopPtr6 = (undefined1 *)(param_3 + loopIndex2 + 0x18);
@@ -2978,13 +2980,13 @@ int FUN_0018b1bc(param_1, param_2, param_3, param_4, param_5)
                   _memset(vectorFilledCount3 * 4 + vector2[2],0,(loopIndex8 - vectorFilledCount3) * 4 + 4);
                   vector2[1] = loopIndex8 + 1;
                 }
-                piVar6 = (int *)(loopIndex8 * 4 + vector2[2]);
+                elementRef = (int *)(loopIndex8 * 4 + vector2[2]);
               }
               else {
-                piVar6 = (int *)Vector__elementRefGrow(vector2,loopIndex8);
+                elementRef = (int *)Vector__elementRefGrow(vector2,loopIndex8);
               }
               loopIndex8 = loopIndex8 + 1;
-              loopIndex2 = *piVar6;
+              loopIndex2 = *elementRef;
               if (*(int *)(loopIndex2 + 8) == 0) {
                 if (bVar1) {
                   loopPtr6 = (undefined1 *)(param_3 + loopIndex2 + 0x18);
@@ -3877,12 +3879,15 @@ int FUN_0018d4b4(inst, param_2, param_3, param_4, compiler)
   int *param_4;
   int compiler;
 {
+  int hasSingleUse;
+  int operandRecord2;
+  int operandRecord;
   int *laneMask;
   int operandIndex2;
   int operandIndex;
   bool bVar1;
   int iVar2;
-  int *piVar3;
+  int *sourceDef;
   undefined4 operandVReg;
   int *operandVReg2;
   int iVar6;
@@ -3903,23 +3908,23 @@ int FUN_0018d4b4(inst, param_2, param_3, param_4, compiler)
   iVar2 = *(int *)(inst[0x22] + 8);
   if ((((iVar2 == 0x9e) || (iVar2 == 0xa0)) || (iVar2 == 0x9f)) ||
      (operandIndex2 = 1, laneMask = param_3, a3 = param_4, a4 = compiler, iVar2 == 0xa1)) {
-    piVar3 = (int *)IRInst__getOperandSource(inst,1);
-    iVar2 = (**(code **)(*piVar3 + 0x5c))(piVar3);
+    sourceDef = (int *)IRInst__getOperandSource(inst,1);
+    iVar2 = (**(code **)(*sourceDef + 0x5c))(sourceDef);
     if (iVar2 != 0) {
       return 0;
     }
-    iVar2 = IRInst__getOperandRecord(inst,0);
-    if (((*(char *)(iVar2 + 0x10) == '\0') ||
-        (iVar2 = IRInst__getOperandRecord(inst,0), *(char *)(iVar2 + 0x11) == '\0')) ||
-       (iVar2 = IRInst__getOperandRecord(inst,0), *(char *)(iVar2 + 0x12) == '\0')) {
+    operandRecord = IRInst__getOperandRecord(inst,0);
+    if (((*(char *)(operandRecord + 0x10) == '\0') ||
+        (operandRecord = IRInst__getOperandRecord(inst,0), *(char *)(operandRecord + 0x11) == '\0')) ||
+       (operandRecord = IRInst__getOperandRecord(inst,0), *(char *)(operandRecord + 0x12) == '\0')) {
       operandVReg = IRInst__getOperandSource(inst,1);
       iVar2 = ((int (*)())FUN_0018d388)(param_4,operandVReg,0);
       if (iVar2 == 0) {
         return 0;
       }
     }
-    iVar2 = IRInst__getOperandRecord(inst,0);
-    if (*(char *)(iVar2 + 0x13) == '\0') {
+    operandRecord = IRInst__getOperandRecord(inst,0);
+    if (*(char *)(operandRecord + 0x13) == '\0') {
       operandVReg = IRInst__getOperandSource(inst,1);
       iVar2 = ((int (*)())FUN_0018d388)(param_4,operandVReg,1);
       if (iVar2 == 0) {
@@ -4041,15 +4046,15 @@ LAB_0018d93c:
           operandIndex2 = 1;
           goto LAB_0018d948;
         }
-        iVar7 = IRInst__getOperandRecord(operandVReg2,0);
-        laneMask = *(int **)(iVar7 + 0x10);
+        operandRecord2 = IRInst__getOperandRecord(operandVReg2,0);
+        laneMask = *(int **)(operandRecord2 + 0x10);
         a3 = &local_68;
         operandIndex2 = IRInst__getUniformSourceConstant(operandVReg2,1,laneMask,a3);
         if (((operandIndex2 == 0) || (local_68 != 2)) ||
            (operandIndex2 = (**(code **)(**(int **)(compiler + COMP_target) + 0xf0))((double)local_64), operandIndex2 == 0)
            ) {
-          iVar7 = IRInst__hasSingleUse(operandVReg2,*(undefined4 *)(compiler + COMP_currentProgram));
-          if (iVar7 == 0) {
+          hasSingleUse = IRInst__hasSingleUse(operandVReg2,*(undefined4 *)(compiler + COMP_currentProgram));
+          if (hasSingleUse == 0) {
             bVar1 = true;
             operandIndex2 = 1;
             goto LAB_0018d948;
@@ -6031,7 +6036,7 @@ int R300VSchedModel__vslot19(this, inst)
   int numSources;
   int flagBit2Result;
   int schedulerAllocRegEnabled;
-  int iVar1;
+  int writtenComponentCount;
   int numSources2;
   int *callResult;
   int *callResult2;
@@ -6048,10 +6053,10 @@ int R300VSchedModel__vslot19(this, inst)
     }
   }
   else {
-    iVar1 = IRInst__countWrittenComponents(inst);
-    if (((iVar1 < 2) && (iVar1 = *(int *)(inst[0x22] + 8), iVar1 != 0xa5)) &&
+    writtenComponentCount = IRInst__countWrittenComponents(inst);
+    if (((writtenComponentCount < 2) && (writtenComponentCount = *(int *)(inst[0x22] + 8), writtenComponentCount != 0xa5)) &&
        (((*(uint *)(*(int *)(*(int *)(this + 8) + 0x30c) + 8) & 0x10000) != 0 ||
-        ((iVar1 != 0x4c && (iVar1 != 0x4d)))))) {
+        ((writtenComponentCount != 0x4c && (writtenComponentCount != 0x4d)))))) {
       for (operandNumber = 0; numSources2 = (**(code **)(*inst + 0x14))(inst), operandNumber <= numSources2;
           operandNumber = operandNumber + 1) {
         numSources2 = IRInst__operandKindClass(inst,operandNumber);

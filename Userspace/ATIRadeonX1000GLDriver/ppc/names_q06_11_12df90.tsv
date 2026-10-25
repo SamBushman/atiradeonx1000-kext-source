@@ -1,0 +1,91 @@
+use	Program__foldConstantIfRegion	puVar1	workStackTopRef	INFERRED	last element reference of the dead-block work stack	^\s*puVar1\ =\ \(undefined4\ \*\)0x0;$	+1
+use	Program__foldConstantIfRegion	puVar1	workStackTopRef	INFERRED	last element reference of the dead-block work stack	^\s*puVar1\ =\ \(undefined4\ \*\)\(uVar8\ \*\ 4\ \+\ local_5c\);$	+1
+use	Program__foldConstantIfRegion	puVar1	workStackTopRef	INFERRED	last element reference of the dead-block work stack	^\s*piVar15\ =\ \(int\ \*\)\*puVar1;$	+1
+use	Program__foldConstantIfRegion	puVar1	predSlotRef	INFERRED	slot reference in the predecessor vector of the surviving block	^\s*puVar1\ =\ \(undefined4\ \*\)\(uVar3\ \*\ 4\ \+\ puVar14\[2\]\);$	+1
+use	Program__foldConstantIfRegion	puVar1	predSlotRef	INFERRED	slot reference in the predecessor vector of the surviving block	^\s*puVar1\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar14,uVar3\);$	+1
+use	Program__foldConstantIfRegion	puVar1	predSlotRef	INFERRED	slot reference in the predecessor vector of the surviving block	^\s*\*puVar1\ =\ 0;$	+1
+use	Program__foldConstantIfRegion	puVar1	workStackSlotRef	INFERRED	slot reference in the dead-block work stack	^\s*puVar1\ =\ \(undefined4\ \*\)\(iVar6\ \+\ local_5c\);$	+1
+use	Program__foldConstantIfRegion	puVar1	workStackSlotRef	INFERRED	slot reference in the dead-block work stack	^\s*puVar1\ =\ \(undefined4\ \*\)FUN_0019423c\(\&local_64,local_60\);$	+1
+use	Program__foldConstantIfRegion	puVar1	workStackSlotRef	INFERRED	slot reference in the dead-block work stack	^\s*\*puVar1\ =\ a0;$	+1
+use	Program__foldConstantIfRegion	piVar2	deadSuccPredVector	INFERRED	predecessor vector of a successor of a dead block	^\s*piVar2\ =\ \(int\ \*\)a0\[0x34\];$	+3
+use	Program__foldConstantIfRegion	piVar2	deadSuccPredVector	INFERRED	predecessor vector of a successor of a dead block	^\s*if\ \(piVar2\[1\]\ ==\ 0\)\ \{$	+3
+use	Program__foldConstantIfRegion	piVar2	deadSuccPredVector	INFERRED	predecessor vector of a successor of a dead block	^\s*piVar2\ =\ \(int\ \*\)piVar2\[2\];$	+1
+use	Program__foldConstantIfRegion	piVar2	deadSuccPredVector	INFERRED	predecessor vector of a successor of a dead block	^\s*iVar6\ =\ \*piVar2;$	+1
+use	Program__foldConstantIfRegion	uVar3	predecessorIndex	INFERRED	index of the dead block in the successor's predecessor list	^\s*uVar3\ =\ FUN_000e803c\(iVar6,a0\);$	+1
+use	Program__foldConstantIfRegion	uVar3	predecessorIndex	INFERRED	index of the dead block in the successor's predecessor list	^\s*if\ \(uVar3\ <\ \*puVar14\)\ \{$	+1
+use	Program__foldConstantIfRegion	uVar3	predecessorIndex	INFERRED	index of the dead block in the successor's predecessor list	^\s*if\ \(uVar4\ <=\ uVar3\)\ \{$	+2
+use	Program__foldConstantIfRegion	uVar3	predecessorIndex	INFERRED	index of the dead block in the successor's predecessor list	^\s*puVar14\[1\]\ =\ uVar3\ \+\ 1;$	+1
+use	Program__foldConstantIfRegion	uVar3	predecessorIndex	INFERRED	index of the dead block in the successor's predecessor list	^\s*puVar1\ =\ \(undefined4\ \*\)\(uVar3\ \*\ 4\ \+\ puVar14\[2\]\);$	+1
+use	Program__foldConstantIfRegion	uVar3	predecessorIndex	INFERRED	index of the dead block in the successor's predecessor list	^\s*puVar1\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar14,uVar3\);$	+1
+use	Program__foldConstantIfRegion	uVar3	workStackCountB	INFERRED	work stack count before the push	^\s*uVar3\ =\ local_60;$	+1
+use	Program__foldConstantIfRegion	uVar3	workStackCountB	INFERRED	work stack count before the push	^\s*local_60\ =\ uVar3\ \+\ 1;$	+1
+use	Program__foldConstantIfRegion	uVar4	predVectorCount	INFERRED	filled count of the predecessor vector	^\s*uVar4\ =\ puVar14\[1\];$	+4
+use	Program__foldConstantIfRegion	piVar5	staleOutEntry	INFERRED	stale copy of param_4, forwarded to Block__getBranchInst	^\s*piVar5\ =\ param_4;$	+1
+use	Program__foldConstantIfRegion	piVar5	staleOutEntry	INFERRED	stale copy of param_4, forwarded to Block__getBranchInst	^\s*piVar5\ =\ \(int\ \*\)FUN_000e7804\(param_2,uVar9,pdVar10,piVar5,piVar11,in_r8,iVar12\);$	+1
+use	Program__foldConstantIfRegion	piVar5	staleOutEntry	INFERRED	stale copy of param_4, forwarded to Block__getBranchInst	^\s*FUN_000ef970\(param_1,piVar5\);$	+2
+use	Program__foldConstantIfRegion	piVar5	entrySuccPredVector	INFERRED	predecessor vector of the surviving entry block	^\s*piVar5\ =\ \*\(int\ \*\*\)\(iVar7\ \+\ 0xd4\);$	+3
+use	Program__foldConstantIfRegion	piVar5	entrySuccPredVector	INFERRED	predecessor vector of the surviving entry block	^\s*if\ \(piVar5\[1\]\ ==\ 0\)\ \{$	+3
+use	Program__foldConstantIfRegion	piVar5	entrySuccPredVector	INFERRED	predecessor vector of the surviving entry block	^\s*piVar5\ =\ \(int\ \*\)piVar5\[2\];$	+1
+use	Program__foldConstantIfRegion	piVar5	entrySuccPredVector	INFERRED	predecessor vector of the surviving entry block	^\s*\*piVar5\ =\ iVar12;$	+1
+use	Program__foldConstantIfRegion	piVar5	headerPredSuccVector	INFERRED	successor vector of the header's simple predecessor	^\s*piVar5\ =\ \*\(int\ \*\*\)\(iVar12\ \+\ 0xd0\);$	+3
+use	Program__foldConstantIfRegion	piVar5	headerPredSuccVector	INFERRED	successor vector of the header's simple predecessor	^\s*if\ \(piVar5\[1\]\ ==\ 0\)\ \{$@2	+3
+use	Program__foldConstantIfRegion	piVar5	headerPredSuccVector	INFERRED	successor vector of the header's simple predecessor	^\s*piVar5\ =\ \(int\ \*\)piVar5\[2\];$@2	+1
+use	Program__foldConstantIfRegion	piVar5	headerPredSuccVector	INFERRED	successor vector of the header's simple predecessor	^\s*\*piVar5\ =\ \*param_4;$	+1
+use	Program__foldConstantIfRegion	piVar5	exitSuccVector	INFERRED	successor vector of the surviving exit block	^\s*piVar5\ =\ \*\(int\ \*\*\)\(iVar13\ \+\ 0xd0\);$	+3
+use	Program__foldConstantIfRegion	piVar5	exitSuccVector	INFERRED	successor vector of the surviving exit block	^\s*if\ \(piVar5\[1\]\ ==\ 0\)\ \{$@3	+3
+use	Program__foldConstantIfRegion	piVar5	exitSuccVector	INFERRED	successor vector of the surviving exit block	^\s*piVar5\ =\ \(int\ \*\)piVar5\[2\];$@3	+1
+use	Program__foldConstantIfRegion	piVar5	exitSuccVector	INFERRED	successor vector of the surviving exit block	^\s*\*piVar5\ =\ iVar6;$	+1
+use	Program__foldConstantIfRegion	piVar5	footerSuccPredVector	INFERRED	predecessor vector of the footer's simple successor	^\s*piVar5\ =\ \*\(int\ \*\*\)\(iVar6\ \+\ 0xd4\);$	+3
+use	Program__foldConstantIfRegion	piVar5	footerSuccPredVector	INFERRED	predecessor vector of the footer's simple successor	^\s*if\ \(piVar5\[1\]\ ==\ 0\)\ \{$@4	+3
+use	Program__foldConstantIfRegion	piVar5	footerSuccPredVector	INFERRED	predecessor vector of the footer's simple successor	^\s*piVar5\ =\ \(int\ \*\)piVar5\[2\];$@4	+1
+use	Program__foldConstantIfRegion	piVar5	footerSuccPredVector	INFERRED	predecessor vector of the footer's simple successor	^\s*\*piVar5\ =\ \*param_5;$	+1
+use	Program__foldConstantIfRegion	iVar6	workStackByteOffset	INFERRED	byte offset of the new work stack slot	^\s*iVar6\ =\ local_60\ \*\ 4;$	+1
+use	Program__foldConstantIfRegion	iVar6	workStackByteOffset	INFERRED	byte offset of the new work stack slot	^\s*_memset\(local_5c\ \+\ iVar6,0,4\);$	+1
+use	Program__foldConstantIfRegion	iVar6	workStackByteOffset	INFERRED	byte offset of the new work stack slot	^\s*uVar16\ =\ CONCAT44\(iVar6\ \+\ local_5c,extraout_r4\);$	+1
+use	Program__foldConstantIfRegion	iVar6	blockQuery38	INFERRED	block vtable slot 0x38 test	^\s*iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x38\)\)\(a0\);$	+2
+use	Program__foldConstantIfRegion	iVar6	firstPredOfSuccessor	INFERRED	first predecessor of a dead block's successor	^\s*iVar6\ =\ \*piVar2;$	+3
+use	Program__foldConstantIfRegion	iVar6	workStackByteOffsetB	INFERRED	byte offset of the new work stack slot	^\s*iVar6\ =\ local_60\ \*\ 4;$@2	+1
+use	Program__foldConstantIfRegion	iVar6	workStackByteOffsetB	INFERRED	byte offset of the new work stack slot	^\s*_memset\(iVar6\ \+\ local_5c,0,4\);$	+1
+use	Program__foldConstantIfRegion	iVar6	workStackByteOffsetB	INFERRED	byte offset of the new work stack slot	^\s*puVar1\ =\ \(undefined4\ \*\)\(iVar6\ \+\ local_5c\);$	+1
+use	Program__foldConstantIfRegion	iVar6	footerSuccessor	INFERRED	simple successor of the footer block	^\s*iVar6\ =\ FUN_000e7f38\(param_3\);$	+1
+use	Program__foldConstantIfRegion	iVar6	footerSuccessor	INFERRED	simple successor of the footer block	^\s*\*piVar5\ =\ iVar6;$	+2
+use	Program__foldConstantIfRegion	extraout_r4	staleArg4	INFERRED	r4 left over from the allocation call	^\s*uVar16\ =\ CONCAT44\(iVar6\ \+\ local_5c,extraout_r4\);$	+1
+use	Program__foldConstantIfRegion	extraout_r4_00	staleArg4b	INFERRED	r4 left over from the detach call	^\s*uVar9\ =\ extraout_r4_00;$	+1
+use	Program__foldConstantIfRegion	uVar8	workStackCountSnapshot	INFERRED	work stack count before the first push	^\s*uVar8\ =\ local_60;$	+1
+use	Program__foldConstantIfRegion	uVar8	workStackCountSnapshot	INFERRED	work stack count before the first push	^\s*local_60\ =\ uVar8\ \+\ 1;$	+1
+use	Program__foldConstantIfRegion	uVar8	lastWorkIndex	INFERRED	index of the last work stack element	^\s*uVar8\ =\ local_60\ \-\ 1;$	+1
+use	Program__foldConstantIfRegion	uVar8	lastWorkIndex	INFERRED	index of the last work stack element	^\s*if\ \(uVar8\ <\ local_60\)\ \{$	+2
+use	Program__foldConstantIfRegion	uVar8	lastWorkIndex	INFERRED	index of the last work stack element	^\s*FUN_00194208\(\&local_64,uVar8\);$	+1
+use	Program__foldConstantIfRegion	uVar8	successorNumber	INFERRED	successor number 1..count	^\s*for\ \(uVar8\ =\ 1;\ uVar8\ <=\ \*\(uint\ \*\)\(piVar15\[0x34\]\ \+\ 4\);\ uVar8\ =\ uVar8\ \+\ 1\)\ \{$	+1
+use	Program__foldConstantIfRegion	uVar9	staleArg4c	INFERRED	r4 forwarded to Block__getBranchInst	^\s*uVar9\ =\ \(undefined4\)uVar16;$	+1
+use	Program__foldConstantIfRegion	uVar9	staleArg4c	INFERRED	r4 forwarded to Block__getBranchInst	^\s*uVar9\ =\ extraout_r4_00;$	+1
+use	Program__foldConstantIfRegion	uVar9	staleArg4c	INFERRED	r4 forwarded to Block__getBranchInst	^\s*piVar5\ =\ \(int\ \*\)FUN_000e7804\(param_2,uVar9,pdVar10,piVar5,piVar11,in_r8,iVar12\);$	+1
+use	Program__foldConstantIfRegion	pdVar10	staleArg5	INFERRED	copy of param_3 / small constant kept in r5	^\s*pdVar10\ =\ param_3;$	+1
+use	Program__foldConstantIfRegion	pdVar10	staleArg5	INFERRED	copy of param_3 / small constant kept in r5	^\s*pdVar10\ =\ \(\(unsigned\ char\ \*\)0x4\);$	+1
+use	Program__foldConstantIfRegion	pdVar10	staleArg5	INFERRED	copy of param_3 / small constant kept in r5	^\s*pdVar10\ =\ \(dword\ \*\)\(\(uVar3\ \-\ uVar4\)\ \*\ 4\ \+\ 4\);$	+2
+use	Program__foldConstantIfRegion	pdVar10	staleArg5	INFERRED	copy of param_3 / small constant kept in r5	^\s*pdVar10\ =\ \(\(unsigned\ char\ \*\)0x4\);$@2	+1
+use	Program__foldConstantIfRegion	pdVar10	staleArg5	INFERRED	copy of param_3 / small constant kept in r5	^\s*piVar5\ =\ \(int\ \*\)FUN_000e7804\(param_2,uVar9,pdVar10,piVar5,piVar11,in_r8,iVar12\);$	+1
+use	Program__foldConstantIfRegion	piVar11	staleArg7	INFERRED	copy of param_5 kept in r7	^\s*piVar11\ =\ param_5;$	+1
+use	Program__foldConstantIfRegion	piVar11	staleArg7	INFERRED	copy of param_5 kept in r7	^\s*piVar5\ =\ \(int\ \*\)FUN_000e7804\(param_2,uVar9,pdVar10,piVar5,piVar11,in_r8,iVar12\);$	+1
+use	Program__foldConstantIfRegion	in_r8	staleArg8	INFERRED	r8 left over from the caller	^\s*piVar5\ =\ \(int\ \*\)FUN_000e7804\(param_2,uVar9,pdVar10,piVar5,piVar11,in_r8,iVar12\);$	+1
+use	Program__foldConstantIfRegion	iVar12	compiler	INFERRED	program->compiler	^\s*iVar12\ =\ \*\(int\ \*\)\(param_1\ \+\ PROG_compiler\);$	+1
+use	Program__foldConstantIfRegion	iVar12	compiler	INFERRED	program->compiler	^\s*local_58\ =\ \*\(undefined4\ \*\)\(iVar12\ \+\ 0x378\);$	+1
+use	Program__foldConstantIfRegion	iVar12	compiler	INFERRED	program->compiler	^\s*piVar5\ =\ \(int\ \*\)FUN_000e7804\(param_2,uVar9,pdVar10,piVar5,piVar11,in_r8,iVar12\);$	+1
+use	Program__foldConstantIfRegion	iVar12	headerPredecessor	INFERRED	simple predecessor of the if header	^\s*iVar12\ =\ FUN_000e7e90\(param_2\);$	+1
+use	Program__foldConstantIfRegion	iVar12	headerPredecessor	INFERRED	simple predecessor of the if header	^\s*\*piVar5\ =\ iVar12;$	+2
+use	Program__foldConstantIfRegion	iVar13	deadArmEntry	INFERRED	entry block of the arm that is removed	^\s*iVar13\ =\ param_2\[0x4e\];$	+1
+use	Program__foldConstantIfRegion	iVar13	deadArmEntry	INFERRED	entry block of the arm that is removed	^\s*iVar13\ =\ param_2\[0x4d\];$	+1
+use	Program__foldConstantIfRegion	iVar13	deadArmEntry	INFERRED	entry block of the arm that is removed	^\s*\*\(int\ \*\)\(\(ulonglong\)uVar16\ >>\ 0x20\)\ =\ iVar13;$	+2
+use	Program__foldConstantIfRegion	iVar13	blockQuery38b	INFERRED	block vtable slot 0x38 test	^\s*iVar13\ =\ \(\*\*\(code\ \*\*\)\(\*piVar15\ \+\ 0x38\)\)\(piVar15\);$	+2
+use	Program__foldConstantIfRegion	iVar13	successorByteOffset	INFERRED	byte offset into the dead block's successor array	^\s*iVar13\ =\ 0;$	+1
+use	Program__foldConstantIfRegion	iVar13	successorByteOffset	INFERRED	byte offset into the dead block's successor array	^\s*a0\ =\ \*\(int\ \*\*\)\(iVar13\ \+\ \*\(int\ \*\)\(piVar15\[0x34\]\ \+\ 8\)\);$	+1
+use	Program__foldConstantIfRegion	iVar13	successorByteOffset	INFERRED	byte offset into the dead block's successor array	^\s*iVar13\ =\ iVar13\ \+\ 4;$	+1
+use	Program__foldConstantIfRegion	iVar13	conditionValue	INFERRED	if header word 0x53: constant value of the condition (1 keeps the then arm)	^\s*iVar13\ =\ param_2\[0x53\];$	+2
+use	Program__foldConstantIfRegion	iVar13	conditionValue	INFERRED	if header word 0x53: constant value of the condition (1 keeps the then arm)	^\s*iVar13\ =\ FUN_000e9184\(param_3,\(uint\)\(iVar13\ !=\ 1\)\);$	+3
+use	Program__foldConstantIfRegion	puVar14	predVectorOfSurvivor	INFERRED	predecessor vector of the surviving block	^\s*puVar14\ =\ \*\(uint\ \*\*\)\(iVar6\ \+\ 0xd4\);$	+3
+use	Program__foldConstantIfRegion	puVar14	predVectorOfSurvivor	INFERRED	predecessor vector of the surviving block	^\s*_memset\(uVar4\ \*\ 4\ \+\ puVar14\[2\],0,pdVar10\);$	+2
+use	Program__foldConstantIfRegion	puVar14	predVectorOfSurvivor	INFERRED	predecessor vector of the surviving block	^\s*puVar1\ =\ \(undefined4\ \*\)\(uVar3\ \*\ 4\ \+\ puVar14\[2\]\);$	+1
+use	Program__foldConstantIfRegion	puVar14	predVectorOfSurvivor	INFERRED	predecessor vector of the surviving block	^\s*puVar1\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar14,uVar3\);$	+1
+use	Program__foldConstantIfRegion	uVar16	slotRefPair	INFERRED	element reference pair (CONCAT44) of the work stack push	^\s*uVar16\ =\ CONCAT44\(iVar6\ \+\ local_5c,extraout_r4\);$	+1
+use	Program__foldConstantIfRegion	uVar16	slotRefPair	INFERRED	element reference pair (CONCAT44) of the work stack push	^\s*uVar16\ =\ FUN_0019423c\(\&local_64,local_60\);$	+1
+use	Program__foldConstantIfRegion	uVar16	slotRefPair	INFERRED	element reference pair (CONCAT44) of the work stack push	^\s*uVar9\ =\ \(undefined4\)uVar16;$	+2
