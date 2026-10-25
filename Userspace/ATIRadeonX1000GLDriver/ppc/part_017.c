@@ -5,6 +5,12 @@ int extvsOptimizeProgram(ctx, shader)
   int ctx;
   int shader;
 {
+  undefined4 addInstWord50Mapped;
+  undefined4 addInstWord48Mapped;
+  undefined4 addInstWord34Mapped;
+  undefined4 addInstWord4cMapped;
+  undefined4 addInstWord30Mapped;
+  undefined4 addInstWord28Mapped;
   undefined4 addInstWord50_3;
   undefined4 addInstWord10;
   undefined4 addInstWord50_2;
@@ -76,7 +82,7 @@ int extvsOptimizeProgram(ctx, shader)
   int shaderWord20;
   undefined4 addInstWord50;
   undefined4 addInstWord38;
-  undefined4 uVar25;
+  undefined4 addInstWord2cMapped;
   int iVar26;
   undefined4 addInstWord4c_2;
   undefined4 addInstWord34;
@@ -451,140 +457,140 @@ LAB_000bc018:
                 mulInst[6] = addInst[6];
                 mulInst[7] = addInstWord1c;
                 mulInst[5] = addInstWord14;
-                uVar21 = addInst[10];
-                switch(uVar21) {
+                addInstWord28Mapped = addInst[10];
+                switch(addInstWord28Mapped) {
                 case 0x87d9:
-                  uVar21 = 0x87d5;
+                  addInstWord28Mapped = 0x87d5;
                   break;
                 case 0x87da:
-                  uVar21 = 0x87d6;
+                  addInstWord28Mapped = 0x87d6;
                   break;
                 case 0x87db:
-                  uVar21 = 0x87d7;
+                  addInstWord28Mapped = 0x87d7;
                   break;
                 case 0x87dc:
-                  uVar21 = 0x87d8;
+                  addInstWord28Mapped = 0x87d8;
                   break;
                 case 0x87df:
-                  uVar21 = 0x87de;
+                  addInstWord28Mapped = 0x87de;
                 }
-                uVar25 = addInst[0xb];
-                *puVar14 = uVar21;
-                switch(uVar25) {
+                addInstWord2cMapped = addInst[0xb];
+                *puVar14 = addInstWord28Mapped;
+                switch(addInstWord2cMapped) {
                 case 0x87d9:
-                  uVar25 = 0x87d5;
+                  addInstWord2cMapped = 0x87d5;
                   break;
                 case 0x87da:
-                  uVar25 = 0x87d6;
+                  addInstWord2cMapped = 0x87d6;
                   break;
                 case 0x87db:
-                  uVar25 = 0x87d7;
+                  addInstWord2cMapped = 0x87d7;
                   break;
                 case 0x87dc:
-                  uVar25 = 0x87d8;
+                  addInstWord2cMapped = 0x87d8;
                   break;
                 case 0x87df:
-                  uVar25 = 0x87de;
+                  addInstWord2cMapped = 0x87de;
                 }
-                uVar21 = addInst[0xc];
-                addInst[0x12] = uVar25;
-                switch(uVar21) {
+                addInstWord30Mapped = addInst[0xc];
+                addInst[0x12] = addInstWord2cMapped;
+                switch(addInstWord30Mapped) {
                 case 0x87d9:
-                  uVar21 = 0x87d5;
+                  addInstWord30Mapped = 0x87d5;
                   break;
                 case 0x87da:
-                  uVar21 = 0x87d6;
+                  addInstWord30Mapped = 0x87d6;
                   break;
                 case 0x87db:
-                  uVar21 = 0x87d7;
+                  addInstWord30Mapped = 0x87d7;
                   break;
                 case 0x87dc:
-                  uVar21 = 0x87d8;
+                  addInstWord30Mapped = 0x87d8;
                   break;
                 case 0x87df:
-                  uVar21 = 0x87de;
+                  addInstWord30Mapped = 0x87de;
                 }
-                uVar25 = addInst[0xd];
-                addInst[0x13] = uVar21;
-                switch(uVar25) {
+                addInstWord34Mapped = addInst[0xd];
+                addInst[0x13] = addInstWord30Mapped;
+                switch(addInstWord34Mapped) {
                 case 0x87d9:
-                  uVar25 = 0x87d5;
+                  addInstWord34Mapped = 0x87d5;
                   break;
                 case 0x87da:
-                  uVar25 = 0x87d6;
+                  addInstWord34Mapped = 0x87d6;
                   break;
                 case 0x87db:
-                  uVar25 = 0x87d7;
+                  addInstWord34Mapped = 0x87d7;
                   break;
                 case 0x87dc:
-                  uVar25 = 0x87d8;
+                  addInstWord34Mapped = 0x87d8;
                   break;
                 case 0x87df:
-                  uVar25 = 0x87de;
+                  addInstWord34Mapped = 0x87de;
                 }
-                uVar21 = addInst[10];
-                addInst[0x14] = uVar25;
+                addInstWord28Mapped = addInst[10];
+                addInst[0x14] = addInstWord34Mapped;
                 puVar17 = mulInst + 10;
-                switch(uVar21) {
+                switch(addInstWord28Mapped) {
                 case 0x87d5:
-                  uVar21 = *puVar17;
+                  addInstWord28Mapped = *puVar17;
                   break;
                 case 0x87d6:
-                  uVar21 = mulInst[0xb];
+                  addInstWord28Mapped = mulInst[0xb];
                   break;
                 case 0x87d7:
-                  uVar21 = mulInst[0xc];
+                  addInstWord28Mapped = mulInst[0xc];
                   break;
                 case 0x87d8:
-                  uVar21 = mulInst[0xd];
+                  addInstWord28Mapped = mulInst[0xd];
                   break;
                 case 0x87d9:
-                  uVar21 = *puVar17;
-                  switch(uVar21) {
+                  addInstWord28Mapped = *puVar17;
+                  switch(addInstWord28Mapped) {
                   case 0x87d5:
 switchD_000bc544_caseD_87d5:
-                    uVar21 = 0x87d9;
+                    addInstWord28Mapped = 0x87d9;
                     break;
                   case 0x87d6:
 switchD_000bc544_caseD_87d6:
-                    uVar21 = 0x87da;
+                    addInstWord28Mapped = 0x87da;
                     break;
                   case 0x87d7:
 switchD_000bc544_caseD_87d7:
-                    uVar21 = 0x87db;
+                    addInstWord28Mapped = 0x87db;
                     break;
                   case 0x87d8:
 switchD_000bc544_caseD_87d8:
-                    uVar21 = 0x87dc;
+                    addInstWord28Mapped = 0x87dc;
                     break;
                   case 0x87d9:
 switchD_000bc544_caseD_87d9:
-                    uVar21 = 0x87d5;
+                    addInstWord28Mapped = 0x87d5;
                     break;
                   case 0x87da:
 switchD_000bc544_caseD_87da:
-                    uVar21 = 0x87d6;
+                    addInstWord28Mapped = 0x87d6;
                     break;
                   case 0x87db:
 switchD_000bc544_caseD_87db:
-                    uVar21 = 0x87d7;
+                    addInstWord28Mapped = 0x87d7;
                     break;
                   case 0x87dc:
 switchD_000bc544_caseD_87dc:
-                    uVar21 = 0x87d8;
+                    addInstWord28Mapped = 0x87d8;
                     break;
                   case 0x87de:
 switchD_000bc544_caseD_87de:
-                    uVar21 = 0x87df;
+                    addInstWord28Mapped = 0x87df;
                     break;
                   case 0x87df:
 switchD_000bc544_caseD_87df:
-                    uVar21 = 0x87de;
+                    addInstWord28Mapped = 0x87de;
                   }
                   break;
                 case 0x87da:
-                  uVar21 = mulInst[0xb];
-                  switch(uVar21) {
+                  addInstWord28Mapped = mulInst[0xb];
+                  switch(addInstWord28Mapped) {
                   case 0x87d5:
                     goto switchD_000bc544_caseD_87d5;
                   case 0x87d6:
@@ -608,8 +614,8 @@ switchD_000bc544_caseD_87df:
                   }
                   break;
                 case 0x87db:
-                  uVar21 = mulInst[0xc];
-                  switch(uVar21) {
+                  addInstWord28Mapped = mulInst[0xc];
+                  switch(addInstWord28Mapped) {
                   case 0x87d5:
                     goto switchD_000bc544_caseD_87d5;
                   case 0x87d6:
@@ -633,8 +639,8 @@ switchD_000bc544_caseD_87df:
                   }
                   break;
                 case 0x87dc:
-                  uVar21 = mulInst[0xd];
-                  switch(uVar21) {
+                  addInstWord28Mapped = mulInst[0xd];
+                  switch(addInstWord28Mapped) {
                   case 0x87d5:
                     goto switchD_000bc544_caseD_87d5;
                   case 0x87d6:
@@ -657,68 +663,68 @@ switchD_000bc544_caseD_87df:
                     goto switchD_000bc544_caseD_87df;
                   }
                 }
-                uVar25 = addInst[0xb];
-                addInst[10] = uVar21;
-                switch(uVar25) {
+                addInstWord2cMapped = addInst[0xb];
+                addInst[10] = addInstWord28Mapped;
+                switch(addInstWord2cMapped) {
                 case 0x87d5:
-                  uVar25 = *puVar17;
+                  addInstWord2cMapped = *puVar17;
                   break;
                 case 0x87d6:
-                  uVar25 = mulInst[0xb];
+                  addInstWord2cMapped = mulInst[0xb];
                   break;
                 case 0x87d7:
-                  uVar25 = mulInst[0xc];
+                  addInstWord2cMapped = mulInst[0xc];
                   break;
                 case 0x87d8:
-                  uVar25 = mulInst[0xd];
+                  addInstWord2cMapped = mulInst[0xd];
                   break;
                 case 0x87d9:
-                  uVar25 = *puVar17;
-                  switch(uVar25) {
+                  addInstWord2cMapped = *puVar17;
+                  switch(addInstWord2cMapped) {
                   case 0x87d5:
 switchD_000bc79c_caseD_87d5:
-                    uVar25 = 0x87d9;
+                    addInstWord2cMapped = 0x87d9;
                     break;
                   case 0x87d6:
 switchD_000bc79c_caseD_87d6:
-                    uVar25 = 0x87da;
+                    addInstWord2cMapped = 0x87da;
                     break;
                   case 0x87d7:
 switchD_000bc79c_caseD_87d7:
-                    uVar25 = 0x87db;
+                    addInstWord2cMapped = 0x87db;
                     break;
                   case 0x87d8:
 switchD_000bc79c_caseD_87d8:
-                    uVar25 = 0x87dc;
+                    addInstWord2cMapped = 0x87dc;
                     break;
                   case 0x87d9:
 switchD_000bc79c_caseD_87d9:
-                    uVar25 = 0x87d5;
+                    addInstWord2cMapped = 0x87d5;
                     break;
                   case 0x87da:
 switchD_000bc79c_caseD_87da:
-                    uVar25 = 0x87d6;
+                    addInstWord2cMapped = 0x87d6;
                     break;
                   case 0x87db:
 switchD_000bc79c_caseD_87db:
-                    uVar25 = 0x87d7;
+                    addInstWord2cMapped = 0x87d7;
                     break;
                   case 0x87dc:
 switchD_000bc79c_caseD_87dc:
-                    uVar25 = 0x87d8;
+                    addInstWord2cMapped = 0x87d8;
                     break;
                   case 0x87de:
 switchD_000bc79c_caseD_87de:
-                    uVar25 = 0x87df;
+                    addInstWord2cMapped = 0x87df;
                     break;
                   case 0x87df:
 switchD_000bc79c_caseD_87df:
-                    uVar25 = 0x87de;
+                    addInstWord2cMapped = 0x87de;
                   }
                   break;
                 case 0x87da:
-                  uVar25 = mulInst[0xb];
-                  switch(uVar25) {
+                  addInstWord2cMapped = mulInst[0xb];
+                  switch(addInstWord2cMapped) {
                   case 0x87d5:
                     goto switchD_000bc79c_caseD_87d5;
                   case 0x87d6:
@@ -742,8 +748,8 @@ switchD_000bc79c_caseD_87df:
                   }
                   break;
                 case 0x87db:
-                  uVar25 = mulInst[0xc];
-                  switch(uVar25) {
+                  addInstWord2cMapped = mulInst[0xc];
+                  switch(addInstWord2cMapped) {
                   case 0x87d5:
                     goto switchD_000bc79c_caseD_87d5;
                   case 0x87d6:
@@ -767,8 +773,8 @@ switchD_000bc79c_caseD_87df:
                   }
                   break;
                 case 0x87dc:
-                  uVar25 = mulInst[0xd];
-                  switch(uVar25) {
+                  addInstWord2cMapped = mulInst[0xd];
+                  switch(addInstWord2cMapped) {
                   case 0x87d5:
                     goto switchD_000bc79c_caseD_87d5;
                   case 0x87d6:
@@ -791,68 +797,68 @@ switchD_000bc79c_caseD_87df:
                     goto switchD_000bc79c_caseD_87df;
                   }
                 }
-                uVar21 = addInst[0xc];
-                addInst[0xb] = uVar25;
-                switch(uVar21) {
+                addInstWord30Mapped = addInst[0xc];
+                addInst[0xb] = addInstWord2cMapped;
+                switch(addInstWord30Mapped) {
                 case 0x87d5:
-                  uVar21 = *puVar17;
+                  addInstWord30Mapped = *puVar17;
                   break;
                 case 0x87d6:
-                  uVar21 = mulInst[0xb];
+                  addInstWord30Mapped = mulInst[0xb];
                   break;
                 case 0x87d7:
-                  uVar21 = mulInst[0xc];
+                  addInstWord30Mapped = mulInst[0xc];
                   break;
                 case 0x87d8:
-                  uVar21 = mulInst[0xd];
+                  addInstWord30Mapped = mulInst[0xd];
                   break;
                 case 0x87d9:
-                  uVar21 = *puVar17;
-                  switch(uVar21) {
+                  addInstWord30Mapped = *puVar17;
+                  switch(addInstWord30Mapped) {
                   case 0x87d5:
 switchD_000bc9f4_caseD_87d5:
-                    uVar21 = 0x87d9;
+                    addInstWord30Mapped = 0x87d9;
                     break;
                   case 0x87d6:
 switchD_000bc9f4_caseD_87d6:
-                    uVar21 = 0x87da;
+                    addInstWord30Mapped = 0x87da;
                     break;
                   case 0x87d7:
 switchD_000bc9f4_caseD_87d7:
-                    uVar21 = 0x87db;
+                    addInstWord30Mapped = 0x87db;
                     break;
                   case 0x87d8:
 switchD_000bc9f4_caseD_87d8:
-                    uVar21 = 0x87dc;
+                    addInstWord30Mapped = 0x87dc;
                     break;
                   case 0x87d9:
 switchD_000bc9f4_caseD_87d9:
-                    uVar21 = 0x87d5;
+                    addInstWord30Mapped = 0x87d5;
                     break;
                   case 0x87da:
 switchD_000bc9f4_caseD_87da:
-                    uVar21 = 0x87d6;
+                    addInstWord30Mapped = 0x87d6;
                     break;
                   case 0x87db:
 switchD_000bc9f4_caseD_87db:
-                    uVar21 = 0x87d7;
+                    addInstWord30Mapped = 0x87d7;
                     break;
                   case 0x87dc:
 switchD_000bc9f4_caseD_87dc:
-                    uVar21 = 0x87d8;
+                    addInstWord30Mapped = 0x87d8;
                     break;
                   case 0x87de:
 switchD_000bc9f4_caseD_87de:
-                    uVar21 = 0x87df;
+                    addInstWord30Mapped = 0x87df;
                     break;
                   case 0x87df:
 switchD_000bc9f4_caseD_87df:
-                    uVar21 = 0x87de;
+                    addInstWord30Mapped = 0x87de;
                   }
                   break;
                 case 0x87da:
-                  uVar21 = mulInst[0xb];
-                  switch(uVar21) {
+                  addInstWord30Mapped = mulInst[0xb];
+                  switch(addInstWord30Mapped) {
                   case 0x87d5:
                     goto switchD_000bc9f4_caseD_87d5;
                   case 0x87d6:
@@ -876,8 +882,8 @@ switchD_000bc9f4_caseD_87df:
                   }
                   break;
                 case 0x87db:
-                  uVar21 = mulInst[0xc];
-                  switch(uVar21) {
+                  addInstWord30Mapped = mulInst[0xc];
+                  switch(addInstWord30Mapped) {
                   case 0x87d5:
                     goto switchD_000bc9f4_caseD_87d5;
                   case 0x87d6:
@@ -901,8 +907,8 @@ switchD_000bc9f4_caseD_87df:
                   }
                   break;
                 case 0x87dc:
-                  uVar21 = mulInst[0xd];
-                  switch(uVar21) {
+                  addInstWord30Mapped = mulInst[0xd];
+                  switch(addInstWord30Mapped) {
                   case 0x87d5:
                     goto switchD_000bc9f4_caseD_87d5;
                   case 0x87d6:
@@ -925,68 +931,68 @@ switchD_000bc9f4_caseD_87df:
                     goto switchD_000bc9f4_caseD_87df;
                   }
                 }
-                uVar25 = addInst[0xd];
-                addInst[0xc] = uVar21;
-                switch(uVar25) {
+                addInstWord34Mapped = addInst[0xd];
+                addInst[0xc] = addInstWord30Mapped;
+                switch(addInstWord34Mapped) {
                 case 0x87d5:
-                  uVar25 = *puVar17;
+                  addInstWord34Mapped = *puVar17;
                   break;
                 case 0x87d6:
-                  uVar25 = mulInst[0xb];
+                  addInstWord34Mapped = mulInst[0xb];
                   break;
                 case 0x87d7:
-                  uVar25 = mulInst[0xc];
+                  addInstWord34Mapped = mulInst[0xc];
                   break;
                 case 0x87d8:
-                  uVar25 = mulInst[0xd];
+                  addInstWord34Mapped = mulInst[0xd];
                   break;
                 case 0x87d9:
-                  uVar25 = *puVar17;
-                  switch(uVar25) {
+                  addInstWord34Mapped = *puVar17;
+                  switch(addInstWord34Mapped) {
                   case 0x87d5:
 switchD_000bcc4c_caseD_87d5:
-                    uVar25 = 0x87d9;
+                    addInstWord34Mapped = 0x87d9;
                     break;
                   case 0x87d6:
 switchD_000bcc4c_caseD_87d6:
-                    uVar25 = 0x87da;
+                    addInstWord34Mapped = 0x87da;
                     break;
                   case 0x87d7:
 switchD_000bcc4c_caseD_87d7:
-                    uVar25 = 0x87db;
+                    addInstWord34Mapped = 0x87db;
                     break;
                   case 0x87d8:
 switchD_000bcc4c_caseD_87d8:
-                    uVar25 = 0x87dc;
+                    addInstWord34Mapped = 0x87dc;
                     break;
                   case 0x87d9:
 switchD_000bcc4c_caseD_87d9:
-                    uVar25 = 0x87d5;
+                    addInstWord34Mapped = 0x87d5;
                     break;
                   case 0x87da:
 switchD_000bcc4c_caseD_87da:
-                    uVar25 = 0x87d6;
+                    addInstWord34Mapped = 0x87d6;
                     break;
                   case 0x87db:
 switchD_000bcc4c_caseD_87db:
-                    uVar25 = 0x87d7;
+                    addInstWord34Mapped = 0x87d7;
                     break;
                   case 0x87dc:
 switchD_000bcc4c_caseD_87dc:
-                    uVar25 = 0x87d8;
+                    addInstWord34Mapped = 0x87d8;
                     break;
                   case 0x87de:
 switchD_000bcc4c_caseD_87de:
-                    uVar25 = 0x87df;
+                    addInstWord34Mapped = 0x87df;
                     break;
                   case 0x87df:
 switchD_000bcc4c_caseD_87df:
-                    uVar25 = 0x87de;
+                    addInstWord34Mapped = 0x87de;
                   }
                   break;
                 case 0x87da:
-                  uVar25 = mulInst[0xb];
-                  switch(uVar25) {
+                  addInstWord34Mapped = mulInst[0xb];
+                  switch(addInstWord34Mapped) {
                   case 0x87d5:
                     goto switchD_000bcc4c_caseD_87d5;
                   case 0x87d6:
@@ -1010,8 +1016,8 @@ switchD_000bcc4c_caseD_87df:
                   }
                   break;
                 case 0x87db:
-                  uVar25 = mulInst[0xc];
-                  switch(uVar25) {
+                  addInstWord34Mapped = mulInst[0xc];
+                  switch(addInstWord34Mapped) {
                   case 0x87d5:
                     goto switchD_000bcc4c_caseD_87d5;
                   case 0x87d6:
@@ -1035,8 +1041,8 @@ switchD_000bcc4c_caseD_87df:
                   }
                   break;
                 case 0x87dc:
-                  uVar25 = mulInst[0xd];
-                  switch(uVar25) {
+                  addInstWord34Mapped = mulInst[0xd];
+                  switch(addInstWord34Mapped) {
                   case 0x87d5:
                     goto switchD_000bcc4c_caseD_87d5;
                   case 0x87d6:
@@ -1060,7 +1066,7 @@ switchD_000bcc4c_caseD_87df:
                   }
                 }
                 uVar21 = *puVar14;
-                addInst[0xd] = uVar25;
+                addInst[0xd] = addInstWord34Mapped;
                 puVar17 = mulInst + 0x11;
                 switch(uVar21) {
                 case 0x87d5:
@@ -1194,68 +1200,68 @@ switchD_000bcea8_caseD_87df:
                     goto switchD_000bcea8_caseD_87df;
                   }
                 }
-                uVar25 = addInst[0x12];
+                addInstWord48Mapped = addInst[0x12];
                 *puVar14 = uVar21;
-                switch(uVar25) {
+                switch(addInstWord48Mapped) {
                 case 0x87d5:
-                  uVar25 = *puVar17;
+                  addInstWord48Mapped = *puVar17;
                   break;
                 case 0x87d6:
-                  uVar25 = mulInst[0x12];
+                  addInstWord48Mapped = mulInst[0x12];
                   break;
                 case 0x87d7:
-                  uVar25 = mulInst[0x13];
+                  addInstWord48Mapped = mulInst[0x13];
                   break;
                 case 0x87d8:
-                  uVar25 = mulInst[0x14];
+                  addInstWord48Mapped = mulInst[0x14];
                   break;
                 case 0x87d9:
-                  uVar25 = *puVar17;
-                  switch(uVar25) {
+                  addInstWord48Mapped = *puVar17;
+                  switch(addInstWord48Mapped) {
                   case 0x87d5:
 switchD_000bd100_caseD_87d5:
-                    uVar25 = 0x87d9;
+                    addInstWord48Mapped = 0x87d9;
                     break;
                   case 0x87d6:
 switchD_000bd100_caseD_87d6:
-                    uVar25 = 0x87da;
+                    addInstWord48Mapped = 0x87da;
                     break;
                   case 0x87d7:
 switchD_000bd100_caseD_87d7:
-                    uVar25 = 0x87db;
+                    addInstWord48Mapped = 0x87db;
                     break;
                   case 0x87d8:
 switchD_000bd100_caseD_87d8:
-                    uVar25 = 0x87dc;
+                    addInstWord48Mapped = 0x87dc;
                     break;
                   case 0x87d9:
 switchD_000bd100_caseD_87d9:
-                    uVar25 = 0x87d5;
+                    addInstWord48Mapped = 0x87d5;
                     break;
                   case 0x87da:
 switchD_000bd100_caseD_87da:
-                    uVar25 = 0x87d6;
+                    addInstWord48Mapped = 0x87d6;
                     break;
                   case 0x87db:
 switchD_000bd100_caseD_87db:
-                    uVar25 = 0x87d7;
+                    addInstWord48Mapped = 0x87d7;
                     break;
                   case 0x87dc:
 switchD_000bd100_caseD_87dc:
-                    uVar25 = 0x87d8;
+                    addInstWord48Mapped = 0x87d8;
                     break;
                   case 0x87de:
 switchD_000bd100_caseD_87de:
-                    uVar25 = 0x87df;
+                    addInstWord48Mapped = 0x87df;
                     break;
                   case 0x87df:
 switchD_000bd100_caseD_87df:
-                    uVar25 = 0x87de;
+                    addInstWord48Mapped = 0x87de;
                   }
                   break;
                 case 0x87da:
-                  uVar25 = mulInst[0x12];
-                  switch(uVar25) {
+                  addInstWord48Mapped = mulInst[0x12];
+                  switch(addInstWord48Mapped) {
                   case 0x87d5:
                     goto switchD_000bd100_caseD_87d5;
                   case 0x87d6:
@@ -1279,8 +1285,8 @@ switchD_000bd100_caseD_87df:
                   }
                   break;
                 case 0x87db:
-                  uVar25 = mulInst[0x13];
-                  switch(uVar25) {
+                  addInstWord48Mapped = mulInst[0x13];
+                  switch(addInstWord48Mapped) {
                   case 0x87d5:
                     goto switchD_000bd100_caseD_87d5;
                   case 0x87d6:
@@ -1304,8 +1310,8 @@ switchD_000bd100_caseD_87df:
                   }
                   break;
                 case 0x87dc:
-                  uVar25 = mulInst[0x14];
-                  switch(uVar25) {
+                  addInstWord48Mapped = mulInst[0x14];
+                  switch(addInstWord48Mapped) {
                   case 0x87d5:
                     goto switchD_000bd100_caseD_87d5;
                   case 0x87d6:
@@ -1328,68 +1334,68 @@ switchD_000bd100_caseD_87df:
                     goto switchD_000bd100_caseD_87df;
                   }
                 }
-                uVar21 = addInst[0x13];
-                addInst[0x12] = uVar25;
-                switch(uVar21) {
+                addInstWord4cMapped = addInst[0x13];
+                addInst[0x12] = addInstWord48Mapped;
+                switch(addInstWord4cMapped) {
                 case 0x87d5:
-                  uVar21 = *puVar17;
+                  addInstWord4cMapped = *puVar17;
                   break;
                 case 0x87d6:
-                  uVar21 = mulInst[0x12];
+                  addInstWord4cMapped = mulInst[0x12];
                   break;
                 case 0x87d7:
-                  uVar21 = mulInst[0x13];
+                  addInstWord4cMapped = mulInst[0x13];
                   break;
                 case 0x87d8:
-                  uVar21 = mulInst[0x14];
+                  addInstWord4cMapped = mulInst[0x14];
                   break;
                 case 0x87d9:
-                  uVar21 = *puVar17;
-                  switch(uVar21) {
+                  addInstWord4cMapped = *puVar17;
+                  switch(addInstWord4cMapped) {
                   case 0x87d5:
 switchD_000bd358_caseD_87d5:
-                    uVar21 = 0x87d9;
+                    addInstWord4cMapped = 0x87d9;
                     break;
                   case 0x87d6:
 switchD_000bd358_caseD_87d6:
-                    uVar21 = 0x87da;
+                    addInstWord4cMapped = 0x87da;
                     break;
                   case 0x87d7:
 switchD_000bd358_caseD_87d7:
-                    uVar21 = 0x87db;
+                    addInstWord4cMapped = 0x87db;
                     break;
                   case 0x87d8:
 switchD_000bd358_caseD_87d8:
-                    uVar21 = 0x87dc;
+                    addInstWord4cMapped = 0x87dc;
                     break;
                   case 0x87d9:
 switchD_000bd358_caseD_87d9:
-                    uVar21 = 0x87d5;
+                    addInstWord4cMapped = 0x87d5;
                     break;
                   case 0x87da:
 switchD_000bd358_caseD_87da:
-                    uVar21 = 0x87d6;
+                    addInstWord4cMapped = 0x87d6;
                     break;
                   case 0x87db:
 switchD_000bd358_caseD_87db:
-                    uVar21 = 0x87d7;
+                    addInstWord4cMapped = 0x87d7;
                     break;
                   case 0x87dc:
 switchD_000bd358_caseD_87dc:
-                    uVar21 = 0x87d8;
+                    addInstWord4cMapped = 0x87d8;
                     break;
                   case 0x87de:
 switchD_000bd358_caseD_87de:
-                    uVar21 = 0x87df;
+                    addInstWord4cMapped = 0x87df;
                     break;
                   case 0x87df:
 switchD_000bd358_caseD_87df:
-                    uVar21 = 0x87de;
+                    addInstWord4cMapped = 0x87de;
                   }
                   break;
                 case 0x87da:
-                  uVar21 = mulInst[0x12];
-                  switch(uVar21) {
+                  addInstWord4cMapped = mulInst[0x12];
+                  switch(addInstWord4cMapped) {
                   case 0x87d5:
                     goto switchD_000bd358_caseD_87d5;
                   case 0x87d6:
@@ -1413,8 +1419,8 @@ switchD_000bd358_caseD_87df:
                   }
                   break;
                 case 0x87db:
-                  uVar21 = mulInst[0x13];
-                  switch(uVar21) {
+                  addInstWord4cMapped = mulInst[0x13];
+                  switch(addInstWord4cMapped) {
                   case 0x87d5:
                     goto switchD_000bd358_caseD_87d5;
                   case 0x87d6:
@@ -1438,8 +1444,8 @@ switchD_000bd358_caseD_87df:
                   }
                   break;
                 case 0x87dc:
-                  uVar21 = mulInst[0x14];
-                  switch(uVar21) {
+                  addInstWord4cMapped = mulInst[0x14];
+                  switch(addInstWord4cMapped) {
                   case 0x87d5:
                     goto switchD_000bd358_caseD_87d5;
                   case 0x87d6:
@@ -1462,68 +1468,68 @@ switchD_000bd358_caseD_87df:
                     goto switchD_000bd358_caseD_87df;
                   }
                 }
-                uVar25 = addInst[0x14];
-                addInst[0x13] = uVar21;
-                switch(uVar25) {
+                addInstWord50Mapped = addInst[0x14];
+                addInst[0x13] = addInstWord4cMapped;
+                switch(addInstWord50Mapped) {
                 case 0x87d5:
-                  uVar25 = *puVar17;
+                  addInstWord50Mapped = *puVar17;
                   break;
                 case 0x87d6:
-                  uVar25 = mulInst[0x12];
+                  addInstWord50Mapped = mulInst[0x12];
                   break;
                 case 0x87d7:
-                  uVar25 = mulInst[0x13];
+                  addInstWord50Mapped = mulInst[0x13];
                   break;
                 case 0x87d8:
-                  uVar25 = mulInst[0x14];
+                  addInstWord50Mapped = mulInst[0x14];
                   break;
                 case 0x87d9:
-                  uVar25 = *puVar17;
-                  switch(uVar25) {
+                  addInstWord50Mapped = *puVar17;
+                  switch(addInstWord50Mapped) {
                   case 0x87d5:
 switchD_000bd5b0_caseD_87d5:
-                    uVar25 = 0x87d9;
+                    addInstWord50Mapped = 0x87d9;
                     break;
                   case 0x87d6:
 switchD_000bd5b0_caseD_87d6:
-                    uVar25 = 0x87da;
+                    addInstWord50Mapped = 0x87da;
                     break;
                   case 0x87d7:
 switchD_000bd5b0_caseD_87d7:
-                    uVar25 = 0x87db;
+                    addInstWord50Mapped = 0x87db;
                     break;
                   case 0x87d8:
 switchD_000bd5b0_caseD_87d8:
-                    uVar25 = 0x87dc;
+                    addInstWord50Mapped = 0x87dc;
                     break;
                   case 0x87d9:
 switchD_000bd5b0_caseD_87d9:
-                    uVar25 = 0x87d5;
+                    addInstWord50Mapped = 0x87d5;
                     break;
                   case 0x87da:
 switchD_000bd5b0_caseD_87da:
-                    uVar25 = 0x87d6;
+                    addInstWord50Mapped = 0x87d6;
                     break;
                   case 0x87db:
 switchD_000bd5b0_caseD_87db:
-                    uVar25 = 0x87d7;
+                    addInstWord50Mapped = 0x87d7;
                     break;
                   case 0x87dc:
 switchD_000bd5b0_caseD_87dc:
-                    uVar25 = 0x87d8;
+                    addInstWord50Mapped = 0x87d8;
                     break;
                   case 0x87de:
 switchD_000bd5b0_caseD_87de:
-                    uVar25 = 0x87df;
+                    addInstWord50Mapped = 0x87df;
                     break;
                   case 0x87df:
 switchD_000bd5b0_caseD_87df:
-                    uVar25 = 0x87de;
+                    addInstWord50Mapped = 0x87de;
                   }
                   break;
                 case 0x87da:
-                  uVar25 = mulInst[0x12];
-                  switch(uVar25) {
+                  addInstWord50Mapped = mulInst[0x12];
+                  switch(addInstWord50Mapped) {
                   case 0x87d5:
                     goto switchD_000bd5b0_caseD_87d5;
                   case 0x87d6:
@@ -1547,8 +1553,8 @@ switchD_000bd5b0_caseD_87df:
                   }
                   break;
                 case 0x87db:
-                  uVar25 = mulInst[0x13];
-                  switch(uVar25) {
+                  addInstWord50Mapped = mulInst[0x13];
+                  switch(addInstWord50Mapped) {
                   case 0x87d5:
                     goto switchD_000bd5b0_caseD_87d5;
                   case 0x87d6:
@@ -1572,8 +1578,8 @@ switchD_000bd5b0_caseD_87df:
                   }
                   break;
                 case 0x87dc:
-                  uVar25 = mulInst[0x14];
-                  switch(uVar25) {
+                  addInstWord50Mapped = mulInst[0x14];
+                  switch(addInstWord50Mapped) {
                   case 0x87d5:
                     goto switchD_000bd5b0_caseD_87d5;
                   case 0x87d6:
@@ -1596,7 +1602,7 @@ switchD_000bd5b0_caseD_87df:
                     goto switchD_000bd5b0_caseD_87df;
                   }
                 }
-                addInst[0x14] = uVar25;
+                addInst[0x14] = addInstWord50Mapped;
                 addInstWord50_3 = addInst[0x14];
                 addInstWord28 = addInst[10];
                 addInstWord2c = addInst[0xb];
@@ -1652,7 +1658,7 @@ LAB_000ba8a8:
               }
               *addInst = 0x8788;
               if (addInst[9] == shaderWord20) {
-                uVar21 = addInst[10];
+                addInstWord28Mapped = addInst[10];
                 addInst[0x16] = iVar34;
                 addInst[0x17] = addInst[0x10];
                 addInst[0x18] = addInst[0x11];
@@ -1663,7 +1669,7 @@ LAB_000ba8a8:
               }
               else {
                 addInst[0x18] = addInst[10];
-                uVar21 = addInst[0x11];
+                addInstWord28Mapped = addInst[0x11];
                 addInst[0x16] = iVar18;
                 addInst[0x17] = addInst[9];
                 addInst[0x19] = addInst[0xb];
@@ -1673,143 +1679,143 @@ LAB_000ba8a8:
                 addInst[0xb] = addInst[0x12];
                 addInst[0xc] = addInst[0x13];
                 addInst[0xd] = addInst[0x14];
-                addInst[10] = uVar21;
+                addInst[10] = addInstWord28Mapped;
               }
               puVar14 = addInst + 0x11;
-              switch(uVar21) {
+              switch(addInstWord28Mapped) {
               case 0x87d9:
-                uVar21 = 0x87d5;
+                addInstWord28Mapped = 0x87d5;
                 break;
               case 0x87da:
-                uVar21 = 0x87d6;
+                addInstWord28Mapped = 0x87d6;
                 break;
               case 0x87db:
-                uVar21 = 0x87d7;
+                addInstWord28Mapped = 0x87d7;
                 break;
               case 0x87dc:
-                uVar21 = 0x87d8;
+                addInstWord28Mapped = 0x87d8;
                 break;
               case 0x87df:
-                uVar21 = 0x87de;
+                addInstWord28Mapped = 0x87de;
               }
-              uVar25 = addInst[0xb];
-              *puVar14 = uVar21;
-              switch(uVar25) {
+              addInstWord2cMapped = addInst[0xb];
+              *puVar14 = addInstWord28Mapped;
+              switch(addInstWord2cMapped) {
               case 0x87d9:
-                uVar25 = 0x87d5;
+                addInstWord2cMapped = 0x87d5;
                 break;
               case 0x87da:
-                uVar25 = 0x87d6;
+                addInstWord2cMapped = 0x87d6;
                 break;
               case 0x87db:
-                uVar25 = 0x87d7;
+                addInstWord2cMapped = 0x87d7;
                 break;
               case 0x87dc:
-                uVar25 = 0x87d8;
+                addInstWord2cMapped = 0x87d8;
                 break;
               case 0x87df:
-                uVar25 = 0x87de;
+                addInstWord2cMapped = 0x87de;
               }
-              uVar21 = addInst[0xc];
-              addInst[0x12] = uVar25;
-              switch(uVar21) {
+              addInstWord30Mapped = addInst[0xc];
+              addInst[0x12] = addInstWord2cMapped;
+              switch(addInstWord30Mapped) {
               case 0x87d9:
-                uVar21 = 0x87d5;
+                addInstWord30Mapped = 0x87d5;
                 break;
               case 0x87da:
-                uVar21 = 0x87d6;
+                addInstWord30Mapped = 0x87d6;
                 break;
               case 0x87db:
-                uVar21 = 0x87d7;
+                addInstWord30Mapped = 0x87d7;
                 break;
               case 0x87dc:
-                uVar21 = 0x87d8;
+                addInstWord30Mapped = 0x87d8;
                 break;
               case 0x87df:
-                uVar21 = 0x87de;
+                addInstWord30Mapped = 0x87de;
               }
-              uVar25 = addInst[0xd];
-              addInst[0x13] = uVar21;
-              switch(uVar25) {
+              addInstWord34Mapped = addInst[0xd];
+              addInst[0x13] = addInstWord30Mapped;
+              switch(addInstWord34Mapped) {
               case 0x87d9:
-                uVar25 = 0x87d5;
+                addInstWord34Mapped = 0x87d5;
                 break;
               case 0x87da:
-                uVar25 = 0x87d6;
+                addInstWord34Mapped = 0x87d6;
                 break;
               case 0x87db:
-                uVar25 = 0x87d7;
+                addInstWord34Mapped = 0x87d7;
                 break;
               case 0x87dc:
-                uVar25 = 0x87d8;
+                addInstWord34Mapped = 0x87d8;
                 break;
               case 0x87df:
-                uVar25 = 0x87de;
+                addInstWord34Mapped = 0x87de;
               }
-              addInst[0x14] = uVar25;
+              addInst[0x14] = addInstWord34Mapped;
               puVar17 = mulInst + 10;
               addInst[9] = mulInst[9];
-              uVar21 = addInst[10];
-              switch(uVar21) {
+              addInstWord28Mapped = addInst[10];
+              switch(addInstWord28Mapped) {
               case 0x87d5:
-                uVar21 = *puVar17;
+                addInstWord28Mapped = *puVar17;
                 break;
               case 0x87d6:
-                uVar21 = mulInst[0xb];
+                addInstWord28Mapped = mulInst[0xb];
                 break;
               case 0x87d7:
-                uVar21 = mulInst[0xc];
+                addInstWord28Mapped = mulInst[0xc];
                 break;
               case 0x87d8:
-                uVar21 = mulInst[0xd];
+                addInstWord28Mapped = mulInst[0xd];
                 break;
               case 0x87d9:
-                uVar21 = *puVar17;
-                switch(uVar21) {
+                addInstWord28Mapped = *puVar17;
+                switch(addInstWord28Mapped) {
                 case 0x87d5:
 switchD_000badac_caseD_87d5:
-                  uVar21 = 0x87d9;
+                  addInstWord28Mapped = 0x87d9;
                   break;
                 case 0x87d6:
 switchD_000badac_caseD_87d6:
-                  uVar21 = 0x87da;
+                  addInstWord28Mapped = 0x87da;
                   break;
                 case 0x87d7:
 switchD_000badac_caseD_87d7:
-                  uVar21 = 0x87db;
+                  addInstWord28Mapped = 0x87db;
                   break;
                 case 0x87d8:
 switchD_000badac_caseD_87d8:
-                  uVar21 = 0x87dc;
+                  addInstWord28Mapped = 0x87dc;
                   break;
                 case 0x87d9:
 switchD_000badac_caseD_87d9:
-                  uVar21 = 0x87d5;
+                  addInstWord28Mapped = 0x87d5;
                   break;
                 case 0x87da:
 switchD_000badac_caseD_87da:
-                  uVar21 = 0x87d6;
+                  addInstWord28Mapped = 0x87d6;
                   break;
                 case 0x87db:
 switchD_000badac_caseD_87db:
-                  uVar21 = 0x87d7;
+                  addInstWord28Mapped = 0x87d7;
                   break;
                 case 0x87dc:
 switchD_000badac_caseD_87dc:
-                  uVar21 = 0x87d8;
+                  addInstWord28Mapped = 0x87d8;
                   break;
                 case 0x87de:
 switchD_000badac_caseD_87de:
-                  uVar21 = 0x87df;
+                  addInstWord28Mapped = 0x87df;
                   break;
                 case 0x87df:
 switchD_000badac_caseD_87df:
-                  uVar21 = 0x87de;
+                  addInstWord28Mapped = 0x87de;
                 }
                 break;
               case 0x87da:
-                uVar21 = mulInst[0xb];
-                switch(uVar21) {
+                addInstWord28Mapped = mulInst[0xb];
+                switch(addInstWord28Mapped) {
                 case 0x87d5:
                   goto switchD_000badac_caseD_87d5;
                 case 0x87d6:
@@ -1833,8 +1839,8 @@ switchD_000badac_caseD_87df:
                 }
                 break;
               case 0x87db:
-                uVar21 = mulInst[0xc];
-                switch(uVar21) {
+                addInstWord28Mapped = mulInst[0xc];
+                switch(addInstWord28Mapped) {
                 case 0x87d5:
                   goto switchD_000badac_caseD_87d5;
                 case 0x87d6:
@@ -1858,8 +1864,8 @@ switchD_000badac_caseD_87df:
                 }
                 break;
               case 0x87dc:
-                uVar21 = mulInst[0xd];
-                switch(uVar21) {
+                addInstWord28Mapped = mulInst[0xd];
+                switch(addInstWord28Mapped) {
                 case 0x87d5:
                   goto switchD_000badac_caseD_87d5;
                 case 0x87d6:
@@ -1882,68 +1888,68 @@ switchD_000badac_caseD_87df:
                   goto switchD_000badac_caseD_87df;
                 }
               }
-              uVar25 = addInst[0xb];
-              addInst[10] = uVar21;
-              switch(uVar25) {
+              addInstWord2cMapped = addInst[0xb];
+              addInst[10] = addInstWord28Mapped;
+              switch(addInstWord2cMapped) {
               case 0x87d5:
-                uVar25 = *puVar17;
+                addInstWord2cMapped = *puVar17;
                 break;
               case 0x87d6:
-                uVar25 = mulInst[0xb];
+                addInstWord2cMapped = mulInst[0xb];
                 break;
               case 0x87d7:
-                uVar25 = mulInst[0xc];
+                addInstWord2cMapped = mulInst[0xc];
                 break;
               case 0x87d8:
-                uVar25 = mulInst[0xd];
+                addInstWord2cMapped = mulInst[0xd];
                 break;
               case 0x87d9:
-                uVar25 = *puVar17;
-                switch(uVar25) {
+                addInstWord2cMapped = *puVar17;
+                switch(addInstWord2cMapped) {
                 case 0x87d5:
 switchD_000bb004_caseD_87d5:
-                  uVar25 = 0x87d9;
+                  addInstWord2cMapped = 0x87d9;
                   break;
                 case 0x87d6:
 switchD_000bb004_caseD_87d6:
-                  uVar25 = 0x87da;
+                  addInstWord2cMapped = 0x87da;
                   break;
                 case 0x87d7:
 switchD_000bb004_caseD_87d7:
-                  uVar25 = 0x87db;
+                  addInstWord2cMapped = 0x87db;
                   break;
                 case 0x87d8:
 switchD_000bb004_caseD_87d8:
-                  uVar25 = 0x87dc;
+                  addInstWord2cMapped = 0x87dc;
                   break;
                 case 0x87d9:
 switchD_000bb004_caseD_87d9:
-                  uVar25 = 0x87d5;
+                  addInstWord2cMapped = 0x87d5;
                   break;
                 case 0x87da:
 switchD_000bb004_caseD_87da:
-                  uVar25 = 0x87d6;
+                  addInstWord2cMapped = 0x87d6;
                   break;
                 case 0x87db:
 switchD_000bb004_caseD_87db:
-                  uVar25 = 0x87d7;
+                  addInstWord2cMapped = 0x87d7;
                   break;
                 case 0x87dc:
 switchD_000bb004_caseD_87dc:
-                  uVar25 = 0x87d8;
+                  addInstWord2cMapped = 0x87d8;
                   break;
                 case 0x87de:
 switchD_000bb004_caseD_87de:
-                  uVar25 = 0x87df;
+                  addInstWord2cMapped = 0x87df;
                   break;
                 case 0x87df:
 switchD_000bb004_caseD_87df:
-                  uVar25 = 0x87de;
+                  addInstWord2cMapped = 0x87de;
                 }
                 break;
               case 0x87da:
-                uVar25 = mulInst[0xb];
-                switch(uVar25) {
+                addInstWord2cMapped = mulInst[0xb];
+                switch(addInstWord2cMapped) {
                 case 0x87d5:
                   goto switchD_000bb004_caseD_87d5;
                 case 0x87d6:
@@ -1967,8 +1973,8 @@ switchD_000bb004_caseD_87df:
                 }
                 break;
               case 0x87db:
-                uVar25 = mulInst[0xc];
-                switch(uVar25) {
+                addInstWord2cMapped = mulInst[0xc];
+                switch(addInstWord2cMapped) {
                 case 0x87d5:
                   goto switchD_000bb004_caseD_87d5;
                 case 0x87d6:
@@ -1992,8 +1998,8 @@ switchD_000bb004_caseD_87df:
                 }
                 break;
               case 0x87dc:
-                uVar25 = mulInst[0xd];
-                switch(uVar25) {
+                addInstWord2cMapped = mulInst[0xd];
+                switch(addInstWord2cMapped) {
                 case 0x87d5:
                   goto switchD_000bb004_caseD_87d5;
                 case 0x87d6:
@@ -2016,68 +2022,68 @@ switchD_000bb004_caseD_87df:
                   goto switchD_000bb004_caseD_87df;
                 }
               }
-              uVar21 = addInst[0xc];
-              addInst[0xb] = uVar25;
-              switch(uVar21) {
+              addInstWord30Mapped = addInst[0xc];
+              addInst[0xb] = addInstWord2cMapped;
+              switch(addInstWord30Mapped) {
               case 0x87d5:
-                uVar21 = *puVar17;
+                addInstWord30Mapped = *puVar17;
                 break;
               case 0x87d6:
-                uVar21 = mulInst[0xb];
+                addInstWord30Mapped = mulInst[0xb];
                 break;
               case 0x87d7:
-                uVar21 = mulInst[0xc];
+                addInstWord30Mapped = mulInst[0xc];
                 break;
               case 0x87d8:
-                uVar21 = mulInst[0xd];
+                addInstWord30Mapped = mulInst[0xd];
                 break;
               case 0x87d9:
-                uVar21 = *puVar17;
-                switch(uVar21) {
+                addInstWord30Mapped = *puVar17;
+                switch(addInstWord30Mapped) {
                 case 0x87d5:
 switchD_000bb25c_caseD_87d5:
-                  uVar21 = 0x87d9;
+                  addInstWord30Mapped = 0x87d9;
                   break;
                 case 0x87d6:
 switchD_000bb25c_caseD_87d6:
-                  uVar21 = 0x87da;
+                  addInstWord30Mapped = 0x87da;
                   break;
                 case 0x87d7:
 switchD_000bb25c_caseD_87d7:
-                  uVar21 = 0x87db;
+                  addInstWord30Mapped = 0x87db;
                   break;
                 case 0x87d8:
 switchD_000bb25c_caseD_87d8:
-                  uVar21 = 0x87dc;
+                  addInstWord30Mapped = 0x87dc;
                   break;
                 case 0x87d9:
 switchD_000bb25c_caseD_87d9:
-                  uVar21 = 0x87d5;
+                  addInstWord30Mapped = 0x87d5;
                   break;
                 case 0x87da:
 switchD_000bb25c_caseD_87da:
-                  uVar21 = 0x87d6;
+                  addInstWord30Mapped = 0x87d6;
                   break;
                 case 0x87db:
 switchD_000bb25c_caseD_87db:
-                  uVar21 = 0x87d7;
+                  addInstWord30Mapped = 0x87d7;
                   break;
                 case 0x87dc:
 switchD_000bb25c_caseD_87dc:
-                  uVar21 = 0x87d8;
+                  addInstWord30Mapped = 0x87d8;
                   break;
                 case 0x87de:
 switchD_000bb25c_caseD_87de:
-                  uVar21 = 0x87df;
+                  addInstWord30Mapped = 0x87df;
                   break;
                 case 0x87df:
 switchD_000bb25c_caseD_87df:
-                  uVar21 = 0x87de;
+                  addInstWord30Mapped = 0x87de;
                 }
                 break;
               case 0x87da:
-                uVar21 = mulInst[0xb];
-                switch(uVar21) {
+                addInstWord30Mapped = mulInst[0xb];
+                switch(addInstWord30Mapped) {
                 case 0x87d5:
                   goto switchD_000bb25c_caseD_87d5;
                 case 0x87d6:
@@ -2101,8 +2107,8 @@ switchD_000bb25c_caseD_87df:
                 }
                 break;
               case 0x87db:
-                uVar21 = mulInst[0xc];
-                switch(uVar21) {
+                addInstWord30Mapped = mulInst[0xc];
+                switch(addInstWord30Mapped) {
                 case 0x87d5:
                   goto switchD_000bb25c_caseD_87d5;
                 case 0x87d6:
@@ -2126,8 +2132,8 @@ switchD_000bb25c_caseD_87df:
                 }
                 break;
               case 0x87dc:
-                uVar21 = mulInst[0xd];
-                switch(uVar21) {
+                addInstWord30Mapped = mulInst[0xd];
+                switch(addInstWord30Mapped) {
                 case 0x87d5:
                   goto switchD_000bb25c_caseD_87d5;
                 case 0x87d6:
@@ -2150,68 +2156,68 @@ switchD_000bb25c_caseD_87df:
                   goto switchD_000bb25c_caseD_87df;
                 }
               }
-              uVar25 = addInst[0xd];
-              addInst[0xc] = uVar21;
-              switch(uVar25) {
+              addInstWord34Mapped = addInst[0xd];
+              addInst[0xc] = addInstWord30Mapped;
+              switch(addInstWord34Mapped) {
               case 0x87d5:
-                uVar25 = *puVar17;
+                addInstWord34Mapped = *puVar17;
                 break;
               case 0x87d6:
-                uVar25 = mulInst[0xb];
+                addInstWord34Mapped = mulInst[0xb];
                 break;
               case 0x87d7:
-                uVar25 = mulInst[0xc];
+                addInstWord34Mapped = mulInst[0xc];
                 break;
               case 0x87d8:
-                uVar25 = mulInst[0xd];
+                addInstWord34Mapped = mulInst[0xd];
                 break;
               case 0x87d9:
-                uVar25 = *puVar17;
-                switch(uVar25) {
+                addInstWord34Mapped = *puVar17;
+                switch(addInstWord34Mapped) {
                 case 0x87d5:
 switchD_000bb4b4_caseD_87d5:
-                  uVar25 = 0x87d9;
+                  addInstWord34Mapped = 0x87d9;
                   break;
                 case 0x87d6:
 switchD_000bb4b4_caseD_87d6:
-                  uVar25 = 0x87da;
+                  addInstWord34Mapped = 0x87da;
                   break;
                 case 0x87d7:
 switchD_000bb4b4_caseD_87d7:
-                  uVar25 = 0x87db;
+                  addInstWord34Mapped = 0x87db;
                   break;
                 case 0x87d8:
 switchD_000bb4b4_caseD_87d8:
-                  uVar25 = 0x87dc;
+                  addInstWord34Mapped = 0x87dc;
                   break;
                 case 0x87d9:
 switchD_000bb4b4_caseD_87d9:
-                  uVar25 = 0x87d5;
+                  addInstWord34Mapped = 0x87d5;
                   break;
                 case 0x87da:
 switchD_000bb4b4_caseD_87da:
-                  uVar25 = 0x87d6;
+                  addInstWord34Mapped = 0x87d6;
                   break;
                 case 0x87db:
 switchD_000bb4b4_caseD_87db:
-                  uVar25 = 0x87d7;
+                  addInstWord34Mapped = 0x87d7;
                   break;
                 case 0x87dc:
 switchD_000bb4b4_caseD_87dc:
-                  uVar25 = 0x87d8;
+                  addInstWord34Mapped = 0x87d8;
                   break;
                 case 0x87de:
 switchD_000bb4b4_caseD_87de:
-                  uVar25 = 0x87df;
+                  addInstWord34Mapped = 0x87df;
                   break;
                 case 0x87df:
 switchD_000bb4b4_caseD_87df:
-                  uVar25 = 0x87de;
+                  addInstWord34Mapped = 0x87de;
                 }
                 break;
               case 0x87da:
-                uVar25 = mulInst[0xb];
-                switch(uVar25) {
+                addInstWord34Mapped = mulInst[0xb];
+                switch(addInstWord34Mapped) {
                 case 0x87d5:
                   goto switchD_000bb4b4_caseD_87d5;
                 case 0x87d6:
@@ -2235,8 +2241,8 @@ switchD_000bb4b4_caseD_87df:
                 }
                 break;
               case 0x87db:
-                uVar25 = mulInst[0xc];
-                switch(uVar25) {
+                addInstWord34Mapped = mulInst[0xc];
+                switch(addInstWord34Mapped) {
                 case 0x87d5:
                   goto switchD_000bb4b4_caseD_87d5;
                 case 0x87d6:
@@ -2260,8 +2266,8 @@ switchD_000bb4b4_caseD_87df:
                 }
                 break;
               case 0x87dc:
-                uVar25 = mulInst[0xd];
-                switch(uVar25) {
+                addInstWord34Mapped = mulInst[0xd];
+                switch(addInstWord34Mapped) {
                 case 0x87d5:
                   goto switchD_000bb4b4_caseD_87d5;
                 case 0x87d6:
@@ -2284,7 +2290,7 @@ switchD_000bb4b4_caseD_87df:
                   goto switchD_000bb4b4_caseD_87df;
                 }
               }
-              addInst[0xd] = uVar25;
+              addInst[0xd] = addInstWord34Mapped;
               puVar17 = mulInst + 0x11;
               addInst[0x10] = mulInst[0x10];
               uVar21 = *puVar14;
@@ -2420,68 +2426,68 @@ switchD_000bb718_caseD_87df:
                   goto switchD_000bb718_caseD_87df;
                 }
               }
-              uVar25 = addInst[0x12];
+              addInstWord48Mapped = addInst[0x12];
               *puVar14 = uVar21;
-              switch(uVar25) {
+              switch(addInstWord48Mapped) {
               case 0x87d5:
-                uVar25 = *puVar17;
+                addInstWord48Mapped = *puVar17;
                 break;
               case 0x87d6:
-                uVar25 = mulInst[0x12];
+                addInstWord48Mapped = mulInst[0x12];
                 break;
               case 0x87d7:
-                uVar25 = mulInst[0x13];
+                addInstWord48Mapped = mulInst[0x13];
                 break;
               case 0x87d8:
-                uVar25 = mulInst[0x14];
+                addInstWord48Mapped = mulInst[0x14];
                 break;
               case 0x87d9:
-                uVar25 = *puVar17;
-                switch(uVar25) {
+                addInstWord48Mapped = *puVar17;
+                switch(addInstWord48Mapped) {
                 case 0x87d5:
 switchD_000bb970_caseD_87d5:
-                  uVar25 = 0x87d9;
+                  addInstWord48Mapped = 0x87d9;
                   break;
                 case 0x87d6:
 switchD_000bb970_caseD_87d6:
-                  uVar25 = 0x87da;
+                  addInstWord48Mapped = 0x87da;
                   break;
                 case 0x87d7:
 switchD_000bb970_caseD_87d7:
-                  uVar25 = 0x87db;
+                  addInstWord48Mapped = 0x87db;
                   break;
                 case 0x87d8:
 switchD_000bb970_caseD_87d8:
-                  uVar25 = 0x87dc;
+                  addInstWord48Mapped = 0x87dc;
                   break;
                 case 0x87d9:
 switchD_000bb970_caseD_87d9:
-                  uVar25 = 0x87d5;
+                  addInstWord48Mapped = 0x87d5;
                   break;
                 case 0x87da:
 switchD_000bb970_caseD_87da:
-                  uVar25 = 0x87d6;
+                  addInstWord48Mapped = 0x87d6;
                   break;
                 case 0x87db:
 switchD_000bb970_caseD_87db:
-                  uVar25 = 0x87d7;
+                  addInstWord48Mapped = 0x87d7;
                   break;
                 case 0x87dc:
 switchD_000bb970_caseD_87dc:
-                  uVar25 = 0x87d8;
+                  addInstWord48Mapped = 0x87d8;
                   break;
                 case 0x87de:
 switchD_000bb970_caseD_87de:
-                  uVar25 = 0x87df;
+                  addInstWord48Mapped = 0x87df;
                   break;
                 case 0x87df:
 switchD_000bb970_caseD_87df:
-                  uVar25 = 0x87de;
+                  addInstWord48Mapped = 0x87de;
                 }
                 break;
               case 0x87da:
-                uVar25 = mulInst[0x12];
-                switch(uVar25) {
+                addInstWord48Mapped = mulInst[0x12];
+                switch(addInstWord48Mapped) {
                 case 0x87d5:
                   goto switchD_000bb970_caseD_87d5;
                 case 0x87d6:
@@ -2505,8 +2511,8 @@ switchD_000bb970_caseD_87df:
                 }
                 break;
               case 0x87db:
-                uVar25 = mulInst[0x13];
-                switch(uVar25) {
+                addInstWord48Mapped = mulInst[0x13];
+                switch(addInstWord48Mapped) {
                 case 0x87d5:
                   goto switchD_000bb970_caseD_87d5;
                 case 0x87d6:
@@ -2530,8 +2536,8 @@ switchD_000bb970_caseD_87df:
                 }
                 break;
               case 0x87dc:
-                uVar25 = mulInst[0x14];
-                switch(uVar25) {
+                addInstWord48Mapped = mulInst[0x14];
+                switch(addInstWord48Mapped) {
                 case 0x87d5:
                   goto switchD_000bb970_caseD_87d5;
                 case 0x87d6:
@@ -2554,68 +2560,68 @@ switchD_000bb970_caseD_87df:
                   goto switchD_000bb970_caseD_87df;
                 }
               }
-              uVar21 = addInst[0x13];
-              addInst[0x12] = uVar25;
-              switch(uVar21) {
+              addInstWord4cMapped = addInst[0x13];
+              addInst[0x12] = addInstWord48Mapped;
+              switch(addInstWord4cMapped) {
               case 0x87d5:
-                uVar21 = *puVar17;
+                addInstWord4cMapped = *puVar17;
                 break;
               case 0x87d6:
-                uVar21 = mulInst[0x12];
+                addInstWord4cMapped = mulInst[0x12];
                 break;
               case 0x87d7:
-                uVar21 = mulInst[0x13];
+                addInstWord4cMapped = mulInst[0x13];
                 break;
               case 0x87d8:
-                uVar21 = mulInst[0x14];
+                addInstWord4cMapped = mulInst[0x14];
                 break;
               case 0x87d9:
-                uVar21 = *puVar17;
-                switch(uVar21) {
+                addInstWord4cMapped = *puVar17;
+                switch(addInstWord4cMapped) {
                 case 0x87d5:
 switchD_000bbbc8_caseD_87d5:
-                  uVar21 = 0x87d9;
+                  addInstWord4cMapped = 0x87d9;
                   break;
                 case 0x87d6:
 switchD_000bbbc8_caseD_87d6:
-                  uVar21 = 0x87da;
+                  addInstWord4cMapped = 0x87da;
                   break;
                 case 0x87d7:
 switchD_000bbbc8_caseD_87d7:
-                  uVar21 = 0x87db;
+                  addInstWord4cMapped = 0x87db;
                   break;
                 case 0x87d8:
 switchD_000bbbc8_caseD_87d8:
-                  uVar21 = 0x87dc;
+                  addInstWord4cMapped = 0x87dc;
                   break;
                 case 0x87d9:
 switchD_000bbbc8_caseD_87d9:
-                  uVar21 = 0x87d5;
+                  addInstWord4cMapped = 0x87d5;
                   break;
                 case 0x87da:
 switchD_000bbbc8_caseD_87da:
-                  uVar21 = 0x87d6;
+                  addInstWord4cMapped = 0x87d6;
                   break;
                 case 0x87db:
 switchD_000bbbc8_caseD_87db:
-                  uVar21 = 0x87d7;
+                  addInstWord4cMapped = 0x87d7;
                   break;
                 case 0x87dc:
 switchD_000bbbc8_caseD_87dc:
-                  uVar21 = 0x87d8;
+                  addInstWord4cMapped = 0x87d8;
                   break;
                 case 0x87de:
 switchD_000bbbc8_caseD_87de:
-                  uVar21 = 0x87df;
+                  addInstWord4cMapped = 0x87df;
                   break;
                 case 0x87df:
 switchD_000bbbc8_caseD_87df:
-                  uVar21 = 0x87de;
+                  addInstWord4cMapped = 0x87de;
                 }
                 break;
               case 0x87da:
-                uVar21 = mulInst[0x12];
-                switch(uVar21) {
+                addInstWord4cMapped = mulInst[0x12];
+                switch(addInstWord4cMapped) {
                 case 0x87d5:
                   goto switchD_000bbbc8_caseD_87d5;
                 case 0x87d6:
@@ -2639,8 +2645,8 @@ switchD_000bbbc8_caseD_87df:
                 }
                 break;
               case 0x87db:
-                uVar21 = mulInst[0x13];
-                switch(uVar21) {
+                addInstWord4cMapped = mulInst[0x13];
+                switch(addInstWord4cMapped) {
                 case 0x87d5:
                   goto switchD_000bbbc8_caseD_87d5;
                 case 0x87d6:
@@ -2664,8 +2670,8 @@ switchD_000bbbc8_caseD_87df:
                 }
                 break;
               case 0x87dc:
-                uVar21 = mulInst[0x14];
-                switch(uVar21) {
+                addInstWord4cMapped = mulInst[0x14];
+                switch(addInstWord4cMapped) {
                 case 0x87d5:
                   goto switchD_000bbbc8_caseD_87d5;
                 case 0x87d6:
@@ -2688,68 +2694,68 @@ switchD_000bbbc8_caseD_87df:
                   goto switchD_000bbbc8_caseD_87df;
                 }
               }
-              uVar25 = addInst[0x14];
-              addInst[0x13] = uVar21;
-              switch(uVar25) {
+              addInstWord50Mapped = addInst[0x14];
+              addInst[0x13] = addInstWord4cMapped;
+              switch(addInstWord50Mapped) {
               case 0x87d5:
-                uVar25 = *puVar17;
+                addInstWord50Mapped = *puVar17;
                 break;
               case 0x87d6:
-                uVar25 = mulInst[0x12];
+                addInstWord50Mapped = mulInst[0x12];
                 break;
               case 0x87d7:
-                uVar25 = mulInst[0x13];
+                addInstWord50Mapped = mulInst[0x13];
                 break;
               case 0x87d8:
-                uVar25 = mulInst[0x14];
+                addInstWord50Mapped = mulInst[0x14];
                 break;
               case 0x87d9:
-                uVar25 = *puVar17;
-                switch(uVar25) {
+                addInstWord50Mapped = *puVar17;
+                switch(addInstWord50Mapped) {
                 case 0x87d5:
 switchD_000bbe20_caseD_87d5:
-                  uVar25 = 0x87d9;
+                  addInstWord50Mapped = 0x87d9;
                   break;
                 case 0x87d6:
 switchD_000bbe20_caseD_87d6:
-                  uVar25 = 0x87da;
+                  addInstWord50Mapped = 0x87da;
                   break;
                 case 0x87d7:
 switchD_000bbe20_caseD_87d7:
-                  uVar25 = 0x87db;
+                  addInstWord50Mapped = 0x87db;
                   break;
                 case 0x87d8:
 switchD_000bbe20_caseD_87d8:
-                  uVar25 = 0x87dc;
+                  addInstWord50Mapped = 0x87dc;
                   break;
                 case 0x87d9:
 switchD_000bbe20_caseD_87d9:
-                  uVar25 = 0x87d5;
+                  addInstWord50Mapped = 0x87d5;
                   break;
                 case 0x87da:
 switchD_000bbe20_caseD_87da:
-                  uVar25 = 0x87d6;
+                  addInstWord50Mapped = 0x87d6;
                   break;
                 case 0x87db:
 switchD_000bbe20_caseD_87db:
-                  uVar25 = 0x87d7;
+                  addInstWord50Mapped = 0x87d7;
                   break;
                 case 0x87dc:
 switchD_000bbe20_caseD_87dc:
-                  uVar25 = 0x87d8;
+                  addInstWord50Mapped = 0x87d8;
                   break;
                 case 0x87de:
 switchD_000bbe20_caseD_87de:
-                  uVar25 = 0x87df;
+                  addInstWord50Mapped = 0x87df;
                   break;
                 case 0x87df:
 switchD_000bbe20_caseD_87df:
-                  uVar25 = 0x87de;
+                  addInstWord50Mapped = 0x87de;
                 }
                 break;
               case 0x87da:
-                uVar25 = mulInst[0x12];
-                switch(uVar25) {
+                addInstWord50Mapped = mulInst[0x12];
+                switch(addInstWord50Mapped) {
                 case 0x87d5:
                   goto switchD_000bbe20_caseD_87d5;
                 case 0x87d6:
@@ -2773,8 +2779,8 @@ switchD_000bbe20_caseD_87df:
                 }
                 break;
               case 0x87db:
-                uVar25 = mulInst[0x13];
-                switch(uVar25) {
+                addInstWord50Mapped = mulInst[0x13];
+                switch(addInstWord50Mapped) {
                 case 0x87d5:
                   goto switchD_000bbe20_caseD_87d5;
                 case 0x87d6:
@@ -2798,8 +2804,8 @@ switchD_000bbe20_caseD_87df:
                 }
                 break;
               case 0x87dc:
-                uVar25 = mulInst[0x14];
-                switch(uVar25) {
+                addInstWord50Mapped = mulInst[0x14];
+                switch(addInstWord50Mapped) {
                 case 0x87d5:
                   goto switchD_000bbe20_caseD_87d5;
                 case 0x87d6:
@@ -2822,7 +2828,7 @@ switchD_000bbe20_caseD_87df:
                   goto switchD_000bbe20_caseD_87df;
                 }
               }
-              addInst[0x14] = uVar25;
+              addInst[0x14] = addInstWord50Mapped;
               instCount = *(int *)(shader + 0x14) - 1;
               *(uint *)(shader + 0x14) = instCount;
               shiftOffset = mulOffset;
