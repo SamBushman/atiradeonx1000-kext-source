@@ -1,0 +1,110 @@
+local	FUN_00112fe4	param_1	compiler	INFERRED	compiler object (+0x30c backend)
+use	FUN_00112fe4	iVar1	nextExpectedSlot	INFERRED	slot number the next table entry is expected to hold	^\s*iVar1\ =\ iVar2\ \+\ 1;$	+2
+use	FUN_00112fe4	iVar1	nextExpectedSlot	INFERRED	slot number the next table entry is expected to hold	^\s*\}\ while\ \(iVar2\ ==\ iVar1\);$	+1
+use	FUN_00112fe4	iVar2	limitsTable	INFERRED	backend slot 0x16c result: table of 14-word binding entries	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(param_1\ \+\ 0x30c\)\ \+\ 0x16c\)\)\(\*\(int\ \*\*\)\(param_1\ \+\ 0x30c\)\);$	+1
+use	FUN_00112fe4	iVar2	limitsTable	INFERRED	backend slot 0x16c result: table of 14-word binding entries	^\s*if\ \(\*\(int\ \*\)\(iVar2\ \+\ 8\)\ ==\ 0\)\ \{$	+2
+use	FUN_00112fe4	iVar2	entrySlotNumber	INFERRED	slot number read from the current entry	^\s*iVar2\ =\ 0;$	+1
+use	FUN_00112fe4	iVar2	entrySlotNumber	INFERRED	slot number read from the current entry	^\s*iVar1\ =\ iVar2\ \+\ 1;$	+1
+use	FUN_00112fe4	iVar2	entrySlotNumber	INFERRED	slot number read from the current entry	^\s*iVar2\ =\ \*piVar5;$	+1
+use	FUN_00112fe4	iVar2	entrySlotNumber	INFERRED	slot number read from the current entry	^\s*\}\ while\ \(iVar2\ ==\ iVar1\);$	+1
+use	FUN_00112fe4	iVar3	bindingCount	INFERRED	backend slot 0x40 result: number of bindings	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(param_1\ \+\ 0x30c\)\ \+\ 0x40\)\)\(\*\(int\ \*\*\)\(param_1\ \+\ 0x30c\)\);$	+2
+use	FUN_00112fe4	iVar3	bindingCount	INFERRED	backend slot 0x40 result: number of bindings	^\s*if\ \(iVar3\ ==\ iVar1\)\ goto\ LAB_00113034;$	+1
+use	FUN_00112fe4	uVar4	slotsAreSequential	INFERRED	return value: 1 when the entries are numbered 1, 2, 3 ...	^\s*uVar4\ =\ 1;$	+1
+use	FUN_00112fe4	uVar4	slotsAreSequential	INFERRED	return value: 1 when the entries are numbered 1, 2, 3 ...	^\s*uVar4\ =\ 0;$	+1
+use	FUN_00112fe4	uVar4	slotsAreSequential	INFERRED	return value: 1 when the entries are numbered 1, 2, 3 ...	^\s*return\ uVar4;$	+1
+use	FUN_00112fe4	piVar5	entryCursor	INFERRED	cursor over the table entries (14 words each)	^\s*piVar5\ =\ \(int\ \*\)\(iVar2\ \+\ 0x40\);$	+1
+use	FUN_00112fe4	piVar5	entryCursor	INFERRED	cursor over the table entries (14 words each)	^\s*iVar2\ =\ \*piVar5;$	+2
+use	FUN_00138080	piVar1	blockArrayCursor	INFERRED	cursor over the block array from Program__getBlocksArray	^\s*piVar1\ =\ \(int\ \*\)FUN_000ec5b8\(param_1\);$	+1
+use	FUN_00138080	piVar1	blockArrayCursor	INFERRED	cursor over the block array from Program__getBlocksArray	^\s*piVar1\ =\ piVar1\ \+\ 1;$	+1
+use	FUN_00138080	piVar1	blockArrayCursor	INFERRED	cursor over the block array from Program__getBlocksArray	^\s*iVar4\ =\ \*piVar1;$	+1
+use	FUN_00138080	iVar2	bitsetAt108	INFERRED	per-block bitset at block +0x108, freed and cleared	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar4\ \+\ 0x108\);$	+3
+use	FUN_00138080	iVar2	bitsetAt100	INFERRED	per-block bitset at block +0x100, freed and cleared	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar4\ \+\ 0x100\);$	+1
+use	FUN_00138080	iVar2	bitsetAt100	INFERRED	per-block bitset at block +0x100, freed and cleared	^\s*if\ \(iVar2\ !=\ 0\)\ \{$@2	+2
+use	FUN_00138080	iVar2	bitsetAt104	INFERRED	per-block bitset at block +0x104, freed and cleared	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar4\ \+\ 0x104\);$	+1
+use	FUN_00138080	iVar2	bitsetAt104	INFERRED	per-block bitset at block +0x104, freed and cleared	^\s*if\ \(iVar2\ !=\ 0\)\ \{$@3	+2
+use	FUN_00138080	iVar4	block	INFERRED	block whose three bitsets are released	^\s*iVar4\ =\ \*piVar1;$	+2
+use	FUN_00138080	iVar4	block	INFERRED	block whose three bitsets are released	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar4\ \+\ 0x100\);$	+2
+use	FUN_00138080	iVar4	block	INFERRED	block whose three bitsets are released	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar4\ \+\ 0x104\);$	+2
+use	FUN_00138080	iVar4	block	INFERRED	block whose three bitsets are released	^\s*\*\(undefined4\ \*\)\(iVar4\ \+\ 0x104\)\ =\ 0;$	+1
+use	IRInst__ctor_1051b0	puVar3	operandRecordCursor	INFERRED	cursor over the five operand records (24 bytes each) being cleared	^\s*puVar3\ =\ param_1\ \+\ 0x23;$	+1
+use	IRInst__ctor_1051b0	puVar3	operandRecordCursor	INFERRED	cursor over the five operand records (24 bytes each) being cleared	^\s*\*puVar3\ =\ 0;$	+4
+use	IRInst__ctor_1051b0	puVar3	flagWordCursor	INFERRED	cursor over the two per-instruction flag words	^\s*puVar3\ =\ param_1;$	+1
+use	IRInst__ctor_1051b0	puVar3	flagWordCursor	INFERRED	cursor over the two per-instruction flag words	^\s*puVar3\[5\]\ =\ 0;$@2	+1
+use	IRInst__ctor_1051b0	puVar3	flagWordCursor	INFERRED	cursor over the two per-instruction flag words	^\s*puVar3\ =\ puVar3\ \+\ 1;$	+1
+use	IRInst__ctor_1051b0	uVar2	opcodeInfo	INFERRED	opcode record from Opcode__getInfo	^\s*uVar2\ =\ FUN_00112f54\(param_2\);$	+2
+use	IRInst__ctor_1051b0	bVar1	moreFlagWords	INFERRED	loop latch: flag word index is not the last	^\s*bVar1\ =\ iVar4\ !=\ 1;$	+1
+use	IRInst__ctor_1051b0	bVar1	moreFlagWords	INFERRED	loop latch: flag word index is not the last	^\s*\}\ while\ \(bVar1\);$	+1
+use	IRInst__ctor_1051b0	iVar4	operandCountdown	INFERRED	countdown from 5 over the operand records	^\s*iVar4\ =\ 5;$	+1
+use	IRInst__ctor_1051b0	iVar4	operandCountdown	INFERRED	countdown from 5 over the operand records	^\s*iVar4\ =\ iVar4\ \+\ \-1;$	+2
+use	IRInst__ctor_1051b0	iVar4	instructionId	INFERRED	compiler next instruction id, stored at inst +0x14c	^\s*iVar4\ =\ \*\(int\ \*\)\(param_3\ \+\ COMP_nextInstId\);$	+3
+use	IRInst__ctor_1051b0	iVar4	flagWordIndex	INFERRED	index of the flag word being cleared	^\s*iVar4\ =\ 0;$	+1
+use	IRInst__ctor_1051b0	iVar4	flagWordIndex	INFERRED	index of the flag word being cleared	^\s*bVar1\ =\ iVar4\ !=\ 1;$	+1
+use	IRInst__ctor_1051b0	iVar4	flagWordIndex	INFERRED	index of the flag word being cleared	^\s*iVar4\ =\ iVar4\ \+\ 1;$	+1
+use	IRInst__ctor_10502c	puVar3	operandRecordCursor	INFERRED	cursor over the five operand records (24 bytes each) being cleared	^\s*puVar3\ =\ param_1\ \+\ 0x23;$	+1
+use	IRInst__ctor_10502c	puVar3	operandRecordCursor	INFERRED	cursor over the five operand records (24 bytes each) being cleared	^\s*\*puVar3\ =\ 0;$	+4
+use	IRInst__ctor_10502c	puVar3	flagWordCursor	INFERRED	cursor over the two per-instruction flag words	^\s*puVar3\ =\ param_1;$	+1
+use	IRInst__ctor_10502c	puVar3	flagWordCursor	INFERRED	cursor over the two per-instruction flag words	^\s*puVar3\[5\]\ =\ 0;$@2	+1
+use	IRInst__ctor_10502c	puVar3	flagWordCursor	INFERRED	cursor over the two per-instruction flag words	^\s*puVar3\ =\ puVar3\ \+\ 1;$	+1
+use	IRInst__ctor_10502c	uVar2	opcodeInfo	INFERRED	opcode record from Opcode__getInfo	^\s*uVar2\ =\ FUN_00112f54\(param_2\);$	+2
+use	IRInst__ctor_10502c	bVar1	moreFlagWords	INFERRED	loop latch: flag word index is not the last	^\s*bVar1\ =\ iVar4\ !=\ 1;$	+1
+use	IRInst__ctor_10502c	bVar1	moreFlagWords	INFERRED	loop latch: flag word index is not the last	^\s*\}\ while\ \(bVar1\);$	+1
+use	IRInst__ctor_10502c	iVar4	operandCountdown	INFERRED	countdown from 5 over the operand records	^\s*iVar4\ =\ 5;$	+1
+use	IRInst__ctor_10502c	iVar4	operandCountdown	INFERRED	countdown from 5 over the operand records	^\s*iVar4\ =\ iVar4\ \+\ \-1;$	+2
+use	IRInst__ctor_10502c	iVar4	instructionId	INFERRED	compiler next instruction id, stored at inst +0x14c	^\s*iVar4\ =\ \*\(int\ \*\)\(param_3\ \+\ COMP_nextInstId\);$	+3
+use	IRInst__ctor_10502c	iVar4	flagWordIndex	INFERRED	index of the flag word being cleared	^\s*iVar4\ =\ 0;$	+1
+use	IRInst__ctor_10502c	iVar4	flagWordIndex	INFERRED	index of the flag word being cleared	^\s*bVar1\ =\ iVar4\ !=\ 1;$	+1
+use	IRInst__ctor_10502c	iVar4	flagWordIndex	INFERRED	index of the flag word being cleared	^\s*iVar4\ =\ iVar4\ \+\ 1;$	+1
+local	FUN_0012ac58	param_1	targetLoop	INFERRED	loop (or record) the successor chain is matched against (successor loop word 0x12c)
+use	FUN_0012ac58	a0	successor	INFERRED	first successor of the current block	^\s*a0\ =\ \(int\ \*\)FUN_000e920c\(param_2,0\);$	+2
+use	FUN_0012ac58	a0	successor	INFERRED	first successor of the current block	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x24\)\)\(a0\);$	+1
+use	FUN_0012ac58	a0	successor	INFERRED	first successor of the current block	^\s*param_2\ =\ \(int\ \*\)a0\[0x4f\];$	+1
+use	FUN_0012ac58	a0	successor	INFERRED	first successor of the current block	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x2c\)\)\(a0\);$	+1
+use	FUN_0012ac58	a0	successor	INFERRED	first successor of the current block	^\s*param_2\ =\ \(int\ \*\)a0\[0x55\];$	+1
+use	FUN_0012ac58	a0	successor	INFERRED	first successor of the current block	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x28\)\)\(a0\);$	+3
+use	FUN_0012ac58	a0	successor	INFERRED	first successor of the current block	^\s*piVar2\ =\ \(int\ \*\)a0\[0x4b\];$	+2
+use	FUN_0012ac58	iVar1	successorLoopInfo	INFERRED	successor vtable slot 0x10 result: its enclosing loop record	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x10\)\)\(a0\);$	+2
+use	FUN_0012ac58	iVar1	footerQuery2c	INFERRED	vtable slot 0x2c test of the if/loop header	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*piVar2\ \+\ 0x2c\)\)\(piVar2\);$	+2
+use	FUN_0012ac58	iVar1	successorQuery24	INFERRED	successor vtable slot 0x24 test	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x24\)\)\(a0\);$	+2
+use	FUN_0012ac58	iVar1	successorQuery2c	INFERRED	successor vtable slot 0x2c test	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x2c\)\)\(a0\);$	+2
+use	FUN_0012ac58	iVar1	currentQuery38	INFERRED	current block vtable slot 0x38 test	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*param_2\ \+\ 0x38\)\)\(param_2\);$	+2
+use	FUN_0012ac58	iVar1	successorQuery28	INFERRED	successor vtable slot 0x28 test	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x28\)\)\(a0\);$	+2
+use	FUN_0012ac58	iVar1	successorQuery20	INFERRED	successor vtable slot 0x20 test	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x20\)\)\(a0\);$	+2
+use	IRPhiNode__ctor_10a398	bVar1	moreRows	INFERRED	loop latch: row byte offset is not the last (0x80)	^\s*bVar1\ =\ iVar5\ !=\ 0x80;$	+1
+use	IRPhiNode__ctor_10a398	bVar1	moreRows	INFERRED	loop latch: row byte offset is not the last (0x80)	^\s*\}\ while\ \(bVar1\);$	+1
+use	IRPhiNode__ctor_10a398	iVar2	rowTable	INFERRED	table of 33 row pointers (0x84 bytes)	^\s*iVar2\ =\ FUN_00193e18\(\*\(undefined4\ \*\)\(param_2\ \+\ COMP_arenaB\),0x84\);$	+1
+use	IRPhiNode__ctor_10a398	iVar2	rowTable	INFERRED	table of 33 row pointers (0x84 bytes)	^\s*\*\(undefined4\ \*\)\(iVar5\ \+\ iVar2\)\ =\ uVar3;$	+1
+use	IRPhiNode__ctor_10a398	iVar2	rowTable	INFERRED	table of 33 row pointers (0x84 bytes)	^\s*\*\(undefined4\ \*\)\(iVar4\ \+\ \*\(int\ \*\)\(iVar5\ \+\ iVar2\)\)\ =\ 1;$	+1
+use	IRPhiNode__ctor_10a398	iVar2	rowTable	INFERRED	table of 33 row pointers (0x84 bytes)	^\s*param_1\[0x4e\]\ =\ iVar2;$	+1
+use	IRPhiNode__ctor_10a398	uVar3	rowAlloc	INFERRED	four-word row allocated for each table entry	^\s*uVar3\ =\ FUN_00193e18\(\*\(undefined4\ \*\)\(param_2\ \+\ COMP_arenaB\),0x10\);$	+2
+use	IRPhiNode__ctor_10a398	iVar4	columnByteOffset	INFERRED	byte offset of the word being set to 1	^\s*iVar4\ =\ 0;$	+1
+use	IRPhiNode__ctor_10a398	iVar4	columnByteOffset	INFERRED	byte offset of the word being set to 1	^\s*\*\(undefined4\ \*\)\(iVar4\ \+\ \*\(int\ \*\)\(iVar5\ \+\ iVar2\)\)\ =\ 1;$	+2
+use	IRPhiNode__ctor_10a398	iVar5	rowByteOffset	INFERRED	byte offset of the row in the table	^\s*iVar5\ =\ 0;$	+1
+use	IRPhiNode__ctor_10a398	iVar5	rowByteOffset	INFERRED	byte offset of the row in the table	^\s*\*\(undefined4\ \*\)\(iVar5\ \+\ iVar2\)\ =\ uVar3;$	+1
+use	IRPhiNode__ctor_10a398	iVar5	rowByteOffset	INFERRED	byte offset of the row in the table	^\s*\*\(undefined4\ \*\)\(iVar4\ \+\ \*\(int\ \*\)\(iVar5\ \+\ iVar2\)\)\ =\ 1;$	+1
+use	IRPhiNode__ctor_10a398	iVar5	rowByteOffset	INFERRED	byte offset of the row in the table	^\s*bVar1\ =\ iVar5\ !=\ 0x80;$	+2
+use	IRPhiNode__ctor_10a398	iVar6	columnCountdown	INFERRED	countdown from 4 over the row's words	^\s*iVar6\ =\ 4;$	+1
+use	IRPhiNode__ctor_10a398	iVar6	columnCountdown	INFERRED	countdown from 4 over the row's words	^\s*iVar6\ =\ iVar6\ \+\ \-1;$	+2
+use	IRPhiNode__ctor_10a2bc	bVar1	moreRows	INFERRED	loop latch: row byte offset is not the last (0x80)	^\s*bVar1\ =\ iVar5\ !=\ 0x80;$	+1
+use	IRPhiNode__ctor_10a2bc	bVar1	moreRows	INFERRED	loop latch: row byte offset is not the last (0x80)	^\s*\}\ while\ \(bVar1\);$	+1
+use	IRPhiNode__ctor_10a2bc	iVar2	rowTable	INFERRED	table of 33 row pointers (0x84 bytes)	^\s*iVar2\ =\ FUN_00193e18\(\*\(undefined4\ \*\)\(param_2\ \+\ COMP_arenaB\),0x84\);$	+1
+use	IRPhiNode__ctor_10a2bc	iVar2	rowTable	INFERRED	table of 33 row pointers (0x84 bytes)	^\s*\*\(undefined4\ \*\)\(iVar5\ \+\ iVar2\)\ =\ uVar3;$	+1
+use	IRPhiNode__ctor_10a2bc	iVar2	rowTable	INFERRED	table of 33 row pointers (0x84 bytes)	^\s*\*\(undefined4\ \*\)\(iVar4\ \+\ \*\(int\ \*\)\(iVar5\ \+\ iVar2\)\)\ =\ 1;$	+1
+use	IRPhiNode__ctor_10a2bc	iVar2	rowTable	INFERRED	table of 33 row pointers (0x84 bytes)	^\s*param_1\[0x4e\]\ =\ iVar2;$	+1
+use	IRPhiNode__ctor_10a2bc	uVar3	rowAlloc	INFERRED	four-word row allocated for each table entry	^\s*uVar3\ =\ FUN_00193e18\(\*\(undefined4\ \*\)\(param_2\ \+\ COMP_arenaB\),0x10\);$	+2
+use	IRPhiNode__ctor_10a2bc	iVar4	columnByteOffset	INFERRED	byte offset of the word being set to 1	^\s*iVar4\ =\ 0;$	+1
+use	IRPhiNode__ctor_10a2bc	iVar4	columnByteOffset	INFERRED	byte offset of the word being set to 1	^\s*\*\(undefined4\ \*\)\(iVar4\ \+\ \*\(int\ \*\)\(iVar5\ \+\ iVar2\)\)\ =\ 1;$	+2
+use	IRPhiNode__ctor_10a2bc	iVar5	rowByteOffset	INFERRED	byte offset of the row in the table	^\s*iVar5\ =\ 0;$	+1
+use	IRPhiNode__ctor_10a2bc	iVar5	rowByteOffset	INFERRED	byte offset of the row in the table	^\s*\*\(undefined4\ \*\)\(iVar5\ \+\ iVar2\)\ =\ uVar3;$	+1
+use	IRPhiNode__ctor_10a2bc	iVar5	rowByteOffset	INFERRED	byte offset of the row in the table	^\s*\*\(undefined4\ \*\)\(iVar4\ \+\ \*\(int\ \*\)\(iVar5\ \+\ iVar2\)\)\ =\ 1;$	+1
+use	IRPhiNode__ctor_10a2bc	iVar5	rowByteOffset	INFERRED	byte offset of the row in the table	^\s*bVar1\ =\ iVar5\ !=\ 0x80;$	+2
+use	IRPhiNode__ctor_10a2bc	iVar6	columnCountdown	INFERRED	countdown from 4 over the row's words	^\s*iVar6\ =\ 4;$	+1
+use	IRPhiNode__ctor_10a2bc	iVar6	columnCountdown	INFERRED	countdown from 4 over the row's words	^\s*iVar6\ =\ iVar6\ \+\ \-1;$	+2
+local	FUN_00134ef4	param_1	neighbourList	INFERRED	node's neighbour list head (+4 total count, +8 first block)
+local	FUN_00134ef4	param_2	slotInBlockRef	INFERRED	in/out: slot number inside the current block; wraps after seven
+local	FUN_00134ef4	param_3	currentBlockRef	INFERRED	in/out: current neighbour block (seven slots, next block at +0x1c)
+use	FUN_00134ef4	iVar2	slotInBlock	INFERRED	slot number before the increment	^\s*iVar2\ =\ \*param_2;$	+3
+use	FUN_00134ef4	iVar2	currentBlock	INFERRED	current neighbour block	^\s*iVar2\ =\ \*param_3;$	+2
+use	FUN_00134ef4	iVar2	currentBlock	INFERRED	current neighbour block	^\s*if\ \(\*\(int\ \*\)\(iVar2\ \+\ 0x1c\)\ ==\ 0\)\ \{$	+1
+use	FUN_00134ef4	iVar2	currentBlock	INFERRED	current neighbour block	^\s*\*\(undefined4\ \*\*\)\(iVar2\ \+\ 0x1c\)\ =\ puVar1\ \+\ 1;$	+1
+use	FUN_00134ef4	iVar2	currentBlock	INFERRED	current neighbour block	^\s*iVar2\ =\ \*param_3;$@2	+1
+use	FUN_00134ef4	iVar2	currentBlock	INFERRED	current neighbour block	^\s*\*param_3\ =\ \*\(int\ \*\)\(iVar2\ \+\ 0x1c\);$	+1

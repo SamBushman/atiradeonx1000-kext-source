@@ -3150,7 +3150,7 @@ int FUN_000a6140(ring, param_2, param_3)
   undefined4 uVar2;
   undefined4 *puVar3;
   
-  FUN_00086a80(ring,param_3);
+  gldSaveRasterState(ring,param_3);
   *(undefined4 *)(ring + 0x1ba0) = 3;
   *(undefined4 *)(ring + 0x1b9c) = 3;
   *(undefined4 *)(ring + 0x1b84) = 0;
@@ -3463,7 +3463,7 @@ int FUN_000a6860(glContext, dirtyMask)
     iVar21 = 0;
   }
   iVar16 = iVar21;
-  FUN_00086ba0(glContext,0,iVar21,iVar20,auStack_128);
+  gldEnterInternalDrawState(glContext,0,iVar21,iVar20,auStack_128);
   if ((iVar21 == 0) && (iVar20 != 0)) {
     uVar15 = 0x25;
     if (*(char *)(glContext + 0x2802) != '\0') {
@@ -3550,7 +3550,7 @@ int FUN_000a6860(glContext, dirtyMask)
   *(undefined4 **)(0x00002748 + glContext + 4) = puVar18;
   (**(code **)(glContext + 0x275c))(glContext,puVar18);
   FUN_0009d3b0(glContext,r4AfterCall,iVar16,puVar17,puVar18,uVar19,iVar20);
-  FUN_000872e0(glContext,auStack_128);
+  gldLeaveInternalDrawState(glContext,auStack_128);
   return;
 }
 

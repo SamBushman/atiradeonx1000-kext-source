@@ -200,7 +200,7 @@ int FUN_000a7ee0(ctx, unitMask)
             *(undefined1 *)(ctx + 0x269) = 1;
             *(uint *)(ctx + 0x27c) = *(uint *)(ctx + 0x27c) | 0x400;
           }
-          FUN_0002ebc0(ctx,loopIndex);
+          gld_applyAnisotropyOverride(ctx,loopIndex);
           *(undefined4 *)(iVar10 + 0x88) = *(undefined4 *)(*(int *)(iVar10 + 0x30) + 0x38);
           *(uint *)(iVar6 + 0x18ac) =
                (bVar4 & 1) << 0x14 |

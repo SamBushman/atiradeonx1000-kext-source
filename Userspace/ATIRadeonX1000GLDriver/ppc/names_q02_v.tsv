@@ -1,0 +1,90 @@
+local	FUN_000659d0	param_1	glContext	INFERRED	GL context
+local	FUN_000659d0	param_2	variant	INFERRED	cached program variant: +0x48 constant count, +0x4c constants, +0x54 program data block, +0x58 flag selecting fixed-function material/light constants
+local	FUN_000659d0	iVar2	programData	INFERRED	variant+0x54: program data block holding the constant bank at +0x750 and its dirty masks
+local	FUN_000659d0	iVar6	constantBank	INFERRED	programData + 0x750: constant bank whose dirty mask words (+0x1018 ..) are cleared and set here
+local	FUN_000659d0	puVar8	constantOut	INFERRED	programData + 0x768: first constant vector of the bank
+use	FUN_000659d0	iVar4	glStateExt	INFERRED	*(*(glContext + 4) + 0x10): GL state extension block (material and light state at +0x2460..)	^\s*iVar4\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 4\)\ \+\ 0x10\);$	+1
+use	FUN_000659d0	iVar4	glStateExt	INFERRED	*(*(glContext + 4) + 0x10): GL state extension block (material and light state at +0x2460..)	^\s*\(\(void\ \(\*\)\(\)\)FUN_0009f0b0\)\(param_1,param_2,param_3,param_4,param_5,param_6,iVar4,param_8,fparam_1,fparam_2,$	+3
+use	FUN_000659d0	iVar4	glStateExt	INFERRED	*(*(glContext + 4) + 0x10): GL state extension block (material and light state at +0x2460..)	^\s*\*puVar8\ =\ \*\(undefined4\ \*\)\(iVar4\ \+\ 0x2460\);$	+16
+use	FUN_000659d0	iVar4	glStateExt	INFERRED	*(*(glContext + 4) + 0x10): GL state extension block (material and light state at +0x2460..)	^\s*\*puVar8\ =\ \*\(undefined4\ \*\)\(iVar4\ \+\ 0x2460\);$@2	+16
+local	FUN_000659d0	iVar9	clearWordsLeft	INFERRED	8 .. 0: dirty mask words still to clear
+use	FUN_000659d0	iVar3	clearPtr	INFERRED	cursor over the 8 dirty mask words of the constant bank	^\s*iVar3\ =\ iVar6;$	+1
+use	FUN_000659d0	iVar3	clearPtr	INFERRED	cursor over the 8 dirty mask words of the constant bank	^\s*\*\(undefined4\ \*\)\(\(\(unsigned\ char\ \*\)0x00001018\)\ \+\ iVar3\)\ =\ 0;$	+2
+use	FUN_000659d0	iVar3	constantCount	INFERRED	variant+0x48: number of constant vectors	^\s*iVar3\ =\ 0;$	+1
+use	FUN_000659d0	iVar3	constantCount	INFERRED	variant+0x48: number of constant vectors	^\s*iVar3\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x48\);$	+2
+use	FUN_000659d0	iVar3	constantCount	INFERRED	variant+0x48: number of constant vectors	^\s*iVar3\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x48\);$@2	+2
+use	FUN_000659d0	iVar3	constantCount	INFERRED	variant+0x48: number of constant vectors	^\s*\*\(int\ \*\)\(iVar2\ \+\ 0x1788\)\ =\ iVar3;$	+1
+use	FUN_000659d0	iVar3	maskWordIndex	INFERRED	constant index >> 5: index of its dirty mask word	^\s*iVar3\ =\ \(\(int\)uVar5\ >>\ 5\)\ \+\ \(uint\)\(\(int\)uVar5\ <\ 0\ \&\&\ \(uVar5\ \&\ 0x1f\)\ !=\ 0\);$	+3
+use	FUN_000659d0	iVar4	maskWordPtr	INFERRED	constantBank + maskWordIndex * 4: dirty mask word of the constant	^\s*iVar4\ =\ iVar3\ \*\ 4\ \+\ iVar6;$	+1
+use	FUN_000659d0	iVar4	maskWordPtr	INFERRED	constantBank + maskWordIndex * 4: dirty mask word of the constant	^\s*\*\(uint\ \*\)\(\(\(unsigned\ char\ \*\)0x00001018\)\ \+\ iVar4\)\ =\ 1\ <<\ \(uVar1\ \&\ 0x3f\)\ \|\ \*\(uint\ \*\)\(\(\(unsigned\ char\ \*\)0x00001018\)\ \+\ iVar4\);$	+1
+local	FUN_000659d0	uVar1	maskBit	INFERRED	constant index & 0x1f: bit of the constant in its dirty mask word
+local	FUN_000659d0	uVar7	constantData	INFERRED	variant+0x4c: constant vector data copied into the bank
+local	FUN_00064f40	param_1	glContext	INFERRED	GL context
+local	FUN_00064f40	piVar9	shader	INFERRED	current EXT_vertex_shader object (glContext+0x1168)
+use	FUN_00064f40	iVar11	slotTableIndex	INFERRED	glContext+0x118c: index into the shader's hardware program slot table	^\s*iVar11\ =\ \*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x0000118c\)\ \+\ param_1\);$	+2
+use	FUN_00064f40	iVar11	slotTableIndex	INFERRED	glContext+0x118c: index into the shader's hardware program slot table	^\s*if\ \(\(\*\(char\ \*\)\(param_1\ \+\ 0x31\)\ ==\ '\\0'\)\ \|\|$	+2
+local	FUN_00064f40	piVar8	variantTable	INFERRED	shader slot entry: [0] current variant, [1 + (key & 0x1f)] hash chain heads, [0x22] constant block
+use	FUN_00064f40	iVar6	currentVariant	INFERRED	*variantTable: variant currently selected for this shader	^\s*iVar6\ =\ \*piVar8;$	+2
+use	FUN_00064f40	iVar6	currentVariant	INFERRED	*variantTable: variant currently selected for this shader	^\s*if\ \(\(\(uVar5\ !=\ \*\(uint\ \*\)\(iVar6\ \+\ 0x48\)\)\ \|\|\ \(\*\(int\ \*\)\(iVar6\ \+\ 0x18\)\ !=\ piVar9\[0x15\]\)\)\ \|\|$	+2
+use	FUN_00064f40	iVar6	currentVariant	INFERRED	*variantTable: variant currently selected for this shader	^\s*\(\(int\ \(\*\)\(\)\)FUN_00061eb0\)\(param_1,piVar9,iVar6,piVar8\[0x22\],0\);$	+1
+use	FUN_00064f40	iVar6	chainEntry	INFERRED	cursor over the hash chain of variants with the same low key bits (next link at +0x2b4)	^\s*for\ \(iVar6\ =\ piVar8\[\(uVar5\ \&\ 0x1f\)\ \+\ 1\];\ iVar6\ !=\ 0;\ iVar6\ =\ \*\(int\ \*\)\(iVar6\ \+\ 0x2b4\)\)\ \{$	+2
+use	FUN_00064f40	iVar6	chainEntry	INFERRED	cursor over the hash chain of variants with the same low key bits (next link at +0x2b4)	^\s*\*piVar8\ =\ iVar6;$	+3
+local	FUN_00064f40	uVar5	stateKey	INFERRED	extvsComputeStateKey(glContext, shader, variant): hash of the state the program depends on
+local	FUN_00064f40	bVar7	forceRebuild	INFERRED	set when the shader's per-slot dirty flag is set and glContext+0x31 is set: forces a lookup of a fresh variant
+local	FUN_00064f40	puVar10	constantAlloc	INFERRED	glContext+0x11b4: two-word constant memory allocation cursor, reset after the cache flush
+local	FUN_00064f40	puVar4	cmdBuffer	INFERRED	command space returned by the glContext+0x2758 reserve callback
+local	FUN_00064f40	pcVar3	commitCallback	INFERRED	glContext+0x275c: command buffer commit callback
+local	FUN_00064f40	bVar2	ctxDirtyBits	INFERRED	byte glContext+0x2d: bit 2 = shader update forced, bits 0..1 = program/constants dirty
+use	FUN_00064f40	iVar6	outputFlagCursor	INFERRED	cursor over the 16 per-output enable words at glContext+0x18a0 (stride 8)	^\s*iVar6\ =\ param_1\ \+\ 0x18a0;$	+1
+use	FUN_00064f40	iVar6	outputFlagCursor	INFERRED	cursor over the 16 per-output enable words at glContext+0x18a0 (stride 8)	^\s*\*\(uint\ \*\)\(iVar6\ \+\ 8\)\ =\ \*\(uint\ \*\)\(iVar6\ \+\ 8\)\ \&\ 0xfffffffe;$	+2
+use	FUN_00064f40	iVar6	outputFlagCursor	INFERRED	cursor over the 16 per-output enable words at glContext+0x18a0 (stride 8)	^\s*iVar6\ =\ param_1\ \+\ 0x18a0;$@2	+1
+use	FUN_00064f40	iVar6	outputFlagCursor	INFERRED	cursor over the 16 per-output enable words at glContext+0x18a0 (stride 8)	^\s*\*\(uint\ \*\)\(iVar6\ \+\ 8\)\ =\ \-\(uint\)\*pbVar1\ >>\ 0x1f\ \|\ \*\(uint\ \*\)\(iVar6\ \+\ 8\)\ \&\ 0xfffffffe;$	+2
+local	FUN_00064f40	pbVar1	outputFlagByte	INFERRED	shader byte +0x71+n: usage flags of output n, copied into bit 0 of the output enable word
+use	FUN_00064f40	iVar11	outputsLeft	INFERRED	16 .. 0: output enable words left to update	^\s*iVar11\ =\ 0x10;$	+1
+use	FUN_00064f40	iVar11	outputsLeft	INFERRED	16 .. 0: output enable words left to update	^\s*iVar11\ =\ iVar11\ \+\ \-1;$	+2
+use	FUN_00064f40	iVar11	outputsLeft	INFERRED	16 .. 0: output enable words left to update	^\s*iVar11\ =\ 0x10;$@2	+1
+use	FUN_00064f40	iVar11	outputsLeft	INFERRED	16 .. 0: output enable words left to update	^\s*iVar11\ =\ iVar11\ \+\ \-1;$@2	+2
+use	FUN_00064f40	iVar11	cmdEnd	INFERRED	command cursor after the 8-byte packet	^\s*iVar11\ =\ \*\(int\ \*\)\(0x00002748\ \+\ param_1\ \+\ 4\);$	+1
+use	FUN_00064f40	iVar11	cmdEnd	INFERRED	command cursor after the 8-byte packet	^\s*\*\(int\ \*\)\(0x00002748\ \+\ param_1\ \+\ 4\)\ =\ iVar11\ \+\ 8;$	+2
+use	FUN_00064f40	iVar6	cmdEndSaved	INFERRED	command cursor after the 8-byte flush packet	^\s*iVar6\ =\ \*\(int\ \*\)\(0x00002748\ \+\ param_1\ \+\ 4\)\ \+\ 8;$	+3
+local	FUN_00065370	param_1	glContext	INFERRED	GL context
+local	FUN_00065370	cVar1	stateDirty	INFERRED	byte glContext+0x29: program state needs revalidation
+local	FUN_00065370	iVar4	lightKeyA	INFERRED	glContext+0x13c, compared with the cached copy at +0x140: first word of the state tuple the fixed-function program depends on
+use	FUN_00065370	iVar2	lightKeyB	INFERRED	glContext+0x148, compared with the cached copy at +0x144: second word of the state tuple	^\s*iVar2\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x148\);$	+2
+use	FUN_00065370	iVar2	lightKeyB	INFERRED	glContext+0x148, compared with the cached copy at +0x144: second word of the state tuple	^\s*iVar2\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x148\);$@2	+1
+use	FUN_00065370	iVar2	lightKeyB	INFERRED	glContext+0x148, compared with the cached copy at +0x144: second word of the state tuple	^\s*iVar2\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x148\);$@3	+1
+use	FUN_00065370	iVar2	lightKeyB	INFERRED	glContext+0x148, compared with the cached copy at +0x144: second word of the state tuple	^\s*\*\(int\ \*\)\(param_1\ \+\ 0x144\)\ =\ iVar2;$	+1
+use	FUN_00065370	iVar2	variant	INFERRED	program variant found in or inserted into the variant cache (key at glContext+0x1874)	^\s*iVar2\ =\ \(int\)\(\(ulonglong\)uVar5\ >>\ 0x20\);$	+1
+use	FUN_00065370	iVar2	variant	INFERRED	program variant found in or inserted into the variant cache (key at glContext+0x1874)	^\s*if\ \(iVar2\ ==\ 0\)\ \{$	+1
+use	FUN_00065370	iVar2	variant	INFERRED	program variant found in or inserted into the variant cache (key at glContext+0x1874)	^\s*iVar2\ =\ \(int\)\(\(ulonglong\)uVar5\ >>\ 0x20\);$@2	+1
+use	FUN_00065370	iVar2	variant	INFERRED	program variant found in or inserted into the variant cache (key at glContext+0x1874)	^\s*else\ if\ \(\*\(char\ \*\)\(iVar2\ \+\ 0x59\)\ !=\ '\\0'\)\ goto\ LAB_0006559c;$	+4
+use	FUN_00065370	iVar2	variant	INFERRED	program variant found in or inserted into the variant cache (key at glContext+0x1874)	^\s*in_r5\ =\ \*\(undefined4\ \*\)\(iVar2\ \+\ 0x3c\);$	+2
+use	FUN_00065370	iVar2	variant	INFERRED	program variant found in or inserted into the variant cache (key at glContext+0x1874)	^\s*if\ \(\*\(char\ \*\)\(\*\(int\ \*\)\(iVar2\ \+\ 0x54\)\ \+\ 0x752\)\ ==\ '\\0'\)\ \{$	+1
+use	FUN_00065370	uVar3	paramList	INFERRED	parameter list created by paramListCreate for the newly built fixed-function program	^\s*uVar3\ =\ FUN_0009bd00\(param_1\);$	+1
+use	FUN_00065370	uVar3	paramList	INFERRED	parameter list created by paramListCreate for the newly built fixed-function program	^\s*in_r5\ =\ FUN_0009d410\(param_1,1,\&local_38,local_34,uVar3,in_r8,iVar4,in_r10\);$	+1
+use	FUN_00065370	uVar3	paramList	INFERRED	parameter list created by paramListCreate for the newly built fixed-function program	^\s*uVar5\ =\ FUN_0009c800\(param_1,param_1\ \+\ 0x1874,in_r5,in_r6,local_38,local_34\[0\],uVar3,$	+2
+local	FUN_00065370	uVar5	lookupResult	INFERRED	64-bit result of the variant cache lookup/insert: high word is the variant pointer
+local	FUN_00064850	param_1	glContext	INFERRED	GL context
+local	FUN_00064850	piVar5	shader	INFERRED	current EXT_vertex_shader object (glContext+0x1168)
+local	FUN_00064850	puVar6	streamBlock	INFERRED	stream descriptor block cached at programState+0x1384 (see FUN_00064230)
+local	FUN_00064850	bVar4	streamFormatChanged	INFERRED	the vertex format words glContext+0x1b9c/0x1ba0 differ from streamBlock[2]/[3]
+use	FUN_00064850	iVar2	streamCount	INFERRED	streamBlock[0x1b]: number of streams; descriptor words are copied (streamCount + 1) / 2 at a time	^\s*iVar2\ =\ puVar6\[0x1b\];$	+2
+use	FUN_00064850	iVar2	streamCount	INFERRED	streamBlock[0x1b]: number of streams; descriptor words are copied (streamCount + 1) / 2 at a time	^\s*iVar2\ =\ puVar6\[0x1b\];$@2	+2
+use	FUN_00064850	iVar2	streamCount	INFERRED	streamBlock[0x1b]: number of streams; descriptor words are copied (streamCount + 1) / 2 at a time	^\s*\*\(int\ \*\)\(param_1\ \+\ 0x2438\)\ =\ iVar2;$	+1
+use	FUN_00064850	iVar2	boundProgram	INFERRED	glContext+0x148c: currently bound hardware program (non-null: its renderer data at +0x14 is updated)	^\s*iVar2\ =\ \*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x0000148c\)\ \+\ param_1\);$	+1
+use	FUN_00064850	iVar2	boundProgram	INFERRED	glContext+0x148c: currently bound hardware program (non-null: its renderer data at +0x14 is updated)	^\s*if\ \(iVar2\ !=\ 0\)\ \{$	+4
+use	FUN_00064850	iVar2	boundProgram	INFERRED	glContext+0x148c: currently bound hardware program (non-null: its renderer data at +0x14 is updated)	^\s*\*\(undefined4\ \*\)\(iVar2\ \+\ 0x5650\)\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1ba4\);$	+2
+use	FUN_00064850	iVar2	boundProgram	INFERRED	glContext+0x148c: currently bound hardware program (non-null: its renderer data at +0x14 is updated)	^\s*\*\(int\ \*\)\(iVar2\ \+\ 0x5650\)\ =\ iVar7;$	+2
+local	FUN_00064850	uVar3	streamCountCopy	INFERRED	streamBlock[0x1b] stored at glContext+0x243c
+local	FUN_00064850	iVar7	ctxCursor	INFERRED	glContext advanced by 4 per copied descriptor word (stream words at +0x1be4 and +0x1c04)
+local	FUN_00064850	puVar9	streamBlockCursor	INFERRED	streamBlock advanced per copied descriptor word pair
+local	FUN_00064850	puVar1	streamWord16Ptr	INFERRED	streamBlock + 0x10 + n: second descriptor word of the pair
+local	FUN_000651e0	param_1	glContext	INFERRED	GL context
+use	FUN_000651e0	puVar5	uploadNode	INFERRED	node of the pending constant upload list at *(glContext+0x11b4)+8 ([0] constant array, [1] next node)	^\s*for\ \(puVar5\ =\ \*\(undefined4\ \*\*\)\(\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x000011b4\)\ \+\ param_1\)\ \+\ 8\);\ puVar5\ !=\ \(undefined4\ \*\)0x0$	+3
+use	FUN_000651e0	puVar5	hwProgramSlot	INFERRED	hardware program slot entry of the current EXT_vertex_shader; word 0x22 is the constant block	^\s*puVar5\ =\ \*\(undefined4\ \*\*\)\(\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x0000118c\)\ \+\ param_1\)\ \*\ 4\ \+\ \*piVar6\);$	+2
+use	FUN_000651e0	puVar5	hwProgramSlot	INFERRED	hardware program slot entry of the current EXT_vertex_shader; word 0x22 is the constant block	^\s*\(\(int\ \(\*\)\(\)\)FUN_00061eb0\)\(param_1,piVar6,pcVar4,puVar5\[0x22\],1\);$	+1
+local	FUN_000651e0	pcVar4	programState	INFERRED	hardware program record *hwProgramSlot (stream descriptors in the context are written from it)
+local	FUN_000651e0	piVar6	shader	INFERRED	current EXT_vertex_shader object (glContext+0x1168)
+local	FUN_000651e0	puVar2	cmdBuffer	INFERRED	command space returned by the glContext+0x2758 reserve callback
+local	FUN_000651e0	iVar1	cmdEnd	INFERRED	command cursor after the packet; handed to the commit callback
+local	FUN_000651e0	pcVar3	commitCallback	INFERRED	glContext+0x275c: command buffer commit callback

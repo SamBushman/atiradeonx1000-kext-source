@@ -8679,7 +8679,7 @@ LAB_00016a6c:
     gaPointSizeValue = *(undefined4 *)(ring + 0x1ccc);
     *(undefined4 *)(writeCursor + 4 + trailerOffset) = gaPointSizeValue;
     FUN_0009d3b0(ring,staleArgR4Forward,width,trailerOffset,packetStart,packetVertexCount,gaPointSizeValue);
-    FUN_000872e0(ring,puStack_ac);
+    gldLeaveInternalDrawState(ring,puStack_ac);
   }
   return;
 }
@@ -10174,7 +10174,7 @@ LAB_00018700:
         (**(code **)(ctx + 0x299c))(iVar34,packetCursor + 0xca);
         return;
       }
-      FUN_00021c70(ctx,srcX,srcY,width,height,uVar41,uVar43,destEndY,uVar32);
+      gld_emitCopyBlitPacket(ctx,srcX,srcY,width,height,uVar41,uVar43,destEndY,uVar32);
     }
   }
   else {
