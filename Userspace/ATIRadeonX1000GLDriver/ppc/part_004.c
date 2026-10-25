@@ -5644,7 +5644,7 @@ void FUN_0002c020(int param_1,int param_2,undefined4 param_3,undefined4 param_4,
     iVar2 = 0;
   }
   if (iVar2 != *(int *)(param_1 + 0x192c)) {
-    ((void (*)())FUN_00083c80)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,fparam_1,fparam_2,fparam_3,
+    ((void (*)())ffvpValidateProgramForced)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,fparam_1,fparam_2,fparam_3,
                  fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,in_stack_ffffffb8);
     FUN_00090960(param_1);
     *(int *)(param_1 + 0x192c) = iVar2;

@@ -1087,7 +1087,7 @@ int FUN_0004dbe0(glContext)
   int glContext;
 {
   if (*(char *)(glContext + 0x124) != '\0') {
-    FUN_00083110(glContext);
+    ffvpSetupVertexOutputRouting(glContext);
   }
   *(uint *)(glContext + 0x1930) = *(uint *)(glContext + 0x1930) | 0x40000;
   return;

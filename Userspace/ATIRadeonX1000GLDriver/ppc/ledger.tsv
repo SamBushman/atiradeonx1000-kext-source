@@ -719,11 +719,11 @@
 0x82c50	760	FUN_00082c50	part_011	converted
 0x82f60	416	interpolatorMapInit	part_011	converted
 0x83100	4	noop_83100	part_012	converted
-0x83110	856	FUN_00083110	part_012	converted
-0x83470	828	FUN_00083470	part_012	converted
-0x837b0	188	FUN_000837b0	part_012	converted
-0x83870	1012	FUN_00083870	part_012	converted
-0x83c80	12	FUN_00083c80	part_012	converted
+0x83110	856	ffvpSetupVertexOutputRouting	part_012	converted
+0x83470	828	ffvpBuildPassThroughProgram	part_012	converted
+0x837b0	188	gldEmitVertexRoutingPackets	part_012	converted
+0x83870	1012	ffvpValidateProgram	part_012	converted
+0x83c80	12	ffvpValidateProgramForced	part_012	converted
 0x83c90	372	FUN_00083c90	part_012	converted
 0x83e10	692	arbEmitRecord3Src_op44	part_012	converted
 0x840d0	548	arbEmitRecord2Src_op01	part_012	converted

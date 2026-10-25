@@ -720,11 +720,11 @@
 0x82c50	FUN_00082c50	760	no	indirect call (driver context / vtable / callback)
 0x82f60	interpolatorMapInit	416	no	indirect call (driver context / vtable / callback)
 0x83100	noop_83100	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x83110	FUN_00083110	856	yes	
-0x83470	FUN_00083470	828	no	indirect call (driver context / vtable / callback)
-0x837b0	FUN_000837b0	188	no	indirect call (driver context / vtable / callback)
-0x83870	FUN_00083870	1012	no	indirect call (driver context / vtable / callback)
-0x83c80	FUN_00083c80	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x83110	ffvpSetupVertexOutputRouting	856	yes	
+0x83470	ffvpBuildPassThroughProgram	828	no	indirect call (driver context / vtable / callback)
+0x837b0	gldEmitVertexRoutingPackets	188	no	indirect call (driver context / vtable / callback)
+0x83870	ffvpValidateProgram	1012	no	indirect call (driver context / vtable / callback)
+0x83c80	ffvpValidateProgramForced	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x83c90	FUN_00083c90	372	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x83e10	arbEmitRecord3Src_op44	692	no	calls an import (calloc); calls an import (free)
 0x840d0	arbEmitRecord2Src_op01	548	no	calls an import (calloc); calls an import (free)
