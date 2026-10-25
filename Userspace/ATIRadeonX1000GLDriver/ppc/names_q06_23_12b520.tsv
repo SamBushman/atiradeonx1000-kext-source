@@ -1,0 +1,24 @@
+local	FUN_0012b520	param_1	program	INFERRED	the Program (+900 block list, +0x3a0 entry block)
+use	FUN_0012b520	piVar1	nextBlockLink	INFERRED	link to the block after the cursor	^\s*piVar1\ =\ \(int\ \*\)\(iVar9\ \+\ 8\);$	+1
+use	FUN_0012b520	piVar1	nextBlockLink	INFERRED	link to the block after the cursor	^\s*iVar9\ =\ \*piVar1;$	+2
+use	FUN_0012b520	bVar2	removedAny	INFERRED	a removal left a successor without predecessors, so another sweep is needed	^\s*bVar2\ =\ false;$	+1
+use	FUN_0012b520	bVar2	removedAny	INFERRED	a removal left a successor without predecessors, so another sweep is needed	^\s*bVar2\ =\ true;$	+1
+use	FUN_0012b520	bVar2	removedAny	INFERRED	a removal left a successor without predecessors, so another sweep is needed	^\s*\}\ while\ \(bVar2\);$	+1
+use	FUN_0012b520	puVar3	successorPredVector	INFERRED	predecessor vector header of a successor of the unreachable block	^\s*puVar3\ =\ \*\(undefined4\ \*\*\)\(iVar4\ \+\ 0xd4\);$	+5
+use	FUN_0012b520	iVar5	blockPredecessorTotal	INFERRED	Block__predecessorCount of the block (zero: unreachable)	^\s*if\ \(\(iVar6\ !=\ iVar8\)\ \&\&\ \(iVar5\ =\ FUN_000e79dc\(iVar8\),\ iVar5\ ==\ 0\)\)\ \{$	+2
+use	FUN_0012b520	iVar5	blockPredecessorTotal	INFERRED	Block__predecessorCount of the block (zero: unreachable)	^\s*iVar4\ =\ \*\(int\ \*\)\(iVar5\ \+\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar8\ \+\ 0xd0\)\ \+\ 8\)\);$	+1
+use	FUN_0012b520	iVar5	blockPredecessorTotal	INFERRED	Block__predecessorCount of the block (zero: unreachable)	^\s*iVar5\ =\ iVar5\ \+\ 4;$	+1
+use	FUN_0012b520	iVar6	entryBlock	INFERRED	program entry block (never removed)	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x3a0\);$	+1
+use	FUN_0012b520	iVar6	entryBlock	INFERRED	program entry block (never removed)	^\s*if\ \(\(iVar6\ !=\ iVar8\)\ \&\&\ \(iVar5\ =\ FUN_000e79dc\(iVar8\),\ iVar5\ ==\ 0\)\)\ \{$	+1
+use	FUN_0012b520	iVar8	block	INFERRED	block being checked for reachability	^\s*iVar8\ =\ \*\(int\ \*\)\(param_1\ \+\ 900\);$	+1
+use	FUN_0012b520	iVar8	block	INFERRED	block being checked for reachability	^\s*if\ \(\(iVar6\ !=\ iVar8\)\ \&\&\ \(iVar5\ =\ FUN_000e79dc\(iVar8\),\ iVar5\ ==\ 0\)\)\ \{$	+1
+use	FUN_0012b520	iVar8	block	INFERRED	block being checked for reachability	^\s*for\ \(uVar7\ =\ 1;\ uVar7\ <=\ \*\(uint\ \*\)\(\*\(int\ \*\)\(iVar8\ \+\ 0xd0\)\ \+\ 4\);\ uVar7\ =\ uVar7\ \+\ 1\)\ \{$	+2
+use	FUN_0012b520	iVar8	block	INFERRED	block being checked for reachability	^\s*FUN_00194374\(\&local_44,iVar8\);$	+1
+use	FUN_0012b520	iVar8	block	INFERRED	block being checked for reachability	^\s*FUN_000e7658\(iVar8\);$	+1
+use	FUN_0012b520	iVar8	block	INFERRED	block being checked for reachability	^\s*iVar8\ =\ iVar9;$	+1
+use	FUN_0012b520	iVar9	nextBlock	INFERRED	block after the cursor in the block list	^\s*iVar9\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 900\)\ \+\ 8\);$	+2
+use	FUN_0012b520	iVar9	nextBlock	INFERRED	block after the cursor in the block list	^\s*piVar1\ =\ \(int\ \*\)\(iVar9\ \+\ 8\);$	+3
+local	FUN_0012b520	local_44	predVectorCopyCapacity	INFERRED	copy of the successor's predecessor vector header: capacity
+local	FUN_0012b520	local_40	predVectorCopyCount	INFERRED	copy of the successor's predecessor vector header: count
+local	FUN_0012b520	local_3c	predVectorCopyData	INFERRED	copy of the successor's predecessor vector header: data pointer
+local	FUN_0012b520	local_38	predVectorCopyArena	INFERRED	copy of the successor's predecessor vector header: arena (freed after the removal)

@@ -68,59 +68,59 @@ LAB_0012b4b0:
 }
 
 /* FUN_0012b520 @ 0x12b520 (192 bytes) */
-int FUN_0012b520(param_1)
-  int param_1;
+int FUN_0012b520(program)
+  int program;
 {
   int predecessorCount;
-  int *piVar1;
-  bool bVar2;
-  undefined4 *puVar3;
+  int *nextBlockLink;
+  bool removedAny;
+  undefined4 *successorPredVector;
   int iVar4;
-  int iVar5;
-  int iVar6;
+  int blockPredecessorTotal;
+  int entryBlock;
   uint loopIndex;
-  int iVar8;
-  int iVar9;
-  undefined4 local_44;
-  undefined4 local_40;
-  undefined4 local_3c;
-  undefined4 local_38;
+  int block;
+  int nextBlock;
+  undefined4 predVectorCopyCapacity;
+  undefined4 predVectorCopyCount;
+  undefined4 predVectorCopyData;
+  undefined4 predVectorCopyArena;
   
-  iVar6 = *(int *)(param_1 + 0x3a0);
+  entryBlock = *(int *)(program + 0x3a0);
   do {
-    iVar9 = *(int *)(*(int *)(param_1 + 900) + 8);
-    if (iVar9 == 0) {
+    nextBlock = *(int *)(*(int *)(program + 900) + 8);
+    if (nextBlock == 0) {
       return;
     }
-    bVar2 = false;
-    iVar8 = *(int *)(param_1 + 900);
+    removedAny = false;
+    block = *(int *)(program + 900);
     do {
-      if ((iVar6 != iVar8) && (iVar5 = Block__predecessorCount(iVar8), iVar5 == 0)) {
-        iVar5 = 0;
-        for (loopIndex = 1; loopIndex <= *(uint *)(*(int *)(iVar8 + 0xd0) + 4); loopIndex = loopIndex + 1) {
-          iVar4 = *(int *)(iVar5 + *(int *)(*(int *)(iVar8 + 0xd0) + 8));
+      if ((entryBlock != block) && (blockPredecessorTotal = Block__predecessorCount(block), blockPredecessorTotal == 0)) {
+        blockPredecessorTotal = 0;
+        for (loopIndex = 1; loopIndex <= *(uint *)(*(int *)(block + 0xd0) + 4); loopIndex = loopIndex + 1) {
+          iVar4 = *(int *)(blockPredecessorTotal + *(int *)(*(int *)(block + 0xd0) + 8));
           if (iVar4 != 0) {
-            puVar3 = *(undefined4 **)(iVar4 + 0xd4);
-            local_38 = puVar3[3];
-            local_44 = *puVar3;
-            local_40 = puVar3[1];
-            local_3c = puVar3[2];
-            Vector__removeValue(&local_44,iVar8);
+            successorPredVector = *(undefined4 **)(iVar4 + 0xd4);
+            predVectorCopyArena = successorPredVector[3];
+            predVectorCopyCapacity = *successorPredVector;
+            predVectorCopyCount = successorPredVector[1];
+            predVectorCopyData = successorPredVector[2];
+            Vector__removeValue(&predVectorCopyCapacity,block);
             predecessorCount = Block__predecessorCount(iVar4);
             if (predecessorCount == 0) {
-              bVar2 = true;
+              removedAny = true;
             }
-            Arena__free(local_38,local_3c);
+            Arena__free(predVectorCopyArena,predVectorCopyData);
           }
-          iVar5 = iVar5 + 4;
+          blockPredecessorTotal = blockPredecessorTotal + 4;
         }
-        Block__detach(iVar8);
+        Block__detach(block);
       }
-      piVar1 = (int *)(iVar9 + 8);
-      iVar8 = iVar9;
-      iVar9 = *piVar1;
-    } while (*piVar1 != 0);
-  } while (bVar2);
+      nextBlockLink = (int *)(nextBlock + 8);
+      block = nextBlock;
+      nextBlock = *nextBlockLink;
+    } while (*nextBlockLink != 0);
+  } while (removedAny);
   return;
 }
 
@@ -3519,57 +3519,60 @@ int FUN_00130a78(param_1, param_2)
 }
 
 /* FUN_00130abc @ 0x130abc (280 bytes) */
-int FUN_00130abc(param_1, param_2, param_3)
-  undefined4 param_1;
+int FUN_00130abc(spillInfo, param_2, markFlag)
+  undefined4 spillInfo;
   uint param_2;
-  uint param_3;
+  uint markFlag;
 {
+  undefined8 sourceCheckResult;
+  int *operandModifierPtr;
+  int operandNumber;
   undefined4 sourceDef;
-  uint uVar1;
-  int *a0;
-  int *piVar2;
-  int iVar3;
-  undefined4 uVar4;
-  int iVar5;
-  undefined4 extraout_r4;
-  undefined4 extraout_r4_00;
-  undefined4 extraout_r4_01;
-  int *a0_00;
-  int *piVar6;
-  undefined8 uVar7;
+  uint instFlags;
+  int *spilledInst;
+  int *reloadInst;
+  int instQuery24;
+  undefined4 staleArg4;
+  int operandCountLimit;
+  undefined4 staleArg4A;
+  undefined4 staleArg4B;
+  undefined4 staleArg4C;
+  int *instCursor;
+  int *cursorOrBlockFlag;
+  undefined8 reloadPair;
   
-  a0 = (int *)((int (*)())FUN_001307cc)(param_1);
-  uVar7 = ((int (*)())FUN_00130728)(param_1);
-  piVar2 = (int *)((ulonglong)uVar7 >> 0x20);
-  iVar3 = (**(code **)(*a0 + 0x24))(a0,(int)uVar7,param_3);
-  if (((iVar3 != 0) && ((a0[5] & 0x4000000U) == 0)) &&
-     (a0_00 = piVar2, uVar4 = extraout_r4, piVar6 = piVar2, (piVar2[5] & 0x1000U) == 0)) {
+  spilledInst = (int *)((int (*)())FUN_001307cc)(spillInfo);
+  reloadPair = ((int (*)())FUN_00130728)(spillInfo);
+  reloadInst = (int *)((ulonglong)reloadPair >> 0x20);
+  instQuery24 = (**(code **)(*spilledInst + 0x24))(spilledInst,(int)reloadPair,markFlag);
+  if (((instQuery24 != 0) && ((spilledInst[5] & 0x4000000U) == 0)) &&
+     (instCursor = reloadInst, staleArg4 = staleArg4A, cursorOrBlockFlag = reloadInst, (reloadInst[5] & 0x1000U) == 0)) {
     do {
-      if (piVar6 == (int *)0x0) {
+      if (cursorOrBlockFlag == (int *)0x0) {
         return;
       }
-      uVar1 = a0_00[5];
-      if ((uVar1 & 1) != 0) {
-        piVar6 = a0_00 + 0x29;
-        for (iVar3 = 1; iVar5 = (**(code **)(*a0_00 + 0x14))(a0_00,uVar4,param_3), iVar3 <= iVar5;
-            iVar3 = iVar3 + 1) {
-          sourceDef = IRInst__getOperandSource(a0_00,iVar3);
-          uVar7 = ((int (*)())FUN_00130a78)(a0,sourceDef);
-          uVar4 = (undefined4)uVar7;
-          if ((int)((ulonglong)uVar7 >> 0x20) != 0) {
-            param_3 = 1;
-            piVar2[5] = piVar2[5] | 0x10000000;
-            IROperand__setModifierBits(piVar6,4,1);
-            uVar4 = extraout_r4_00;
+      instFlags = instCursor[5];
+      if ((instFlags & 1) != 0) {
+        operandModifierPtr = instCursor + 0x29;
+        for (operandNumber = 1; operandCountLimit = (**(code **)(*instCursor + 0x14))(instCursor,staleArg4,markFlag), operandNumber <= operandCountLimit;
+            operandNumber = operandNumber + 1) {
+          sourceDef = IRInst__getOperandSource(instCursor,operandNumber);
+          sourceCheckResult = ((int (*)())FUN_00130a78)(spilledInst,sourceDef);
+          staleArg4 = (undefined4)sourceCheckResult;
+          if ((int)((ulonglong)sourceCheckResult >> 0x20) != 0) {
+            markFlag = 1;
+            reloadInst[5] = reloadInst[5] | 0x10000000;
+            IROperand__setModifierBits(operandModifierPtr,4,1);
+            staleArg4 = staleArg4B;
           }
-          piVar6 = piVar6 + 6;
+          operandModifierPtr = operandModifierPtr + 6;
         }
-        uVar1 = a0_00[5];
-        uVar4 = extraout_r4_01;
+        instFlags = instCursor[5];
+        staleArg4 = staleArg4C;
       }
-      a0_00 = (int *)a0_00[2];
-      piVar6 = (int *)(uVar1 & 4);
-    } while (a0_00 != (int *)0x0);
+      instCursor = (int *)instCursor[2];
+      cursorOrBlockFlag = (int *)(instFlags & 4);
+    } while (instCursor != (int *)0x0);
   }
   return;
 }

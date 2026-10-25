@@ -2997,61 +2997,63 @@ int FUN_0012306c(param_1, param_2)
 }
 
 /* ImmedConstBuffer__clone @ 0x1230e4 (268 bytes) */
-int ImmedConstBuffer__clone(this, param_2, compiler)
+int ImmedConstBuffer__clone(this, targetBlock, compiler)
   int this;
-  int *param_2;
+  int *targetBlock;
   int compiler;
 {
+  int valueNumberEnabled;
+  undefined4 *keyAlloc;
   undefined4 *allocation;
-  int iVar1;
-  undefined4 *puVar2;
-  undefined4 *puVar3;
-  int iVar4;
-  uint uVar5;
-  int *piVar6;
+  int constantIndex;
+  undefined4 *valueKey;
+  undefined4 *laneRecordCursor;
+  int bufferWordCount;
+  uint laneIndex;
+  int *constantBuffer;
   undefined4 arena;
-  undefined4 *puVar8;
-  int iVar9;
+  undefined4 *constLoad;
+  int laneCountdown;
   
   arena = *(undefined4 *)(compiler + COMP_arenaA);
-  piVar6 = *(int **)(*(int *)(*(int *)(compiler + COMP_currentProgram) + 0x354) + 300);
+  constantBuffer = *(int **)(*(int *)(*(int *)(compiler + COMP_currentProgram) + 0x354) + 300);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
-  puVar8 = allocation + 1;
+  constLoad = allocation + 1;
   *allocation = arena;
-  IRLoadConst__ctor_109938(puVar8,compiler);
-  iVar4 = *piVar6;
-  iVar9 = 4;
-  uVar5 = 0;
-  puVar3 = puVar8;
+  IRLoadConst__ctor_109938(constLoad,compiler);
+  bufferWordCount = *constantBuffer;
+  laneCountdown = 4;
+  laneIndex = 0;
+  laneRecordCursor = constLoad;
   do {
-    *(byte *)(allocation + 0x58) = (byte)(1 << (uVar5 & 0x3f)) | *(byte *)(allocation + 0x58);
-    puVar3[7] = 3;
-    iVar1 = *(int *)(this + 8) * 4 + uVar5;
-    if (iVar4 < iVar1) {
-      puVar3[8] = 0;
+    *(byte *)(allocation + 0x58) = (byte)(1 << (laneIndex & 0x3f)) | *(byte *)(allocation + 0x58);
+    laneRecordCursor[7] = 3;
+    constantIndex = *(int *)(this + 8) * 4 + laneIndex;
+    if (bufferWordCount < constantIndex) {
+      laneRecordCursor[8] = 0;
     }
     else {
-      puVar3[8] = piVar6[iVar1 + 1];
+      laneRecordCursor[8] = constantBuffer[constantIndex + 1];
     }
-    uVar5 = uVar5 + 1;
-    puVar3 = puVar3 + 6;
-    iVar9 = iVar9 + -1;
-  } while (iVar9 != 0);
-  IRInst__setOperandRef(puVar8,0,this);
+    laneIndex = laneIndex + 1;
+    laneRecordCursor = laneRecordCursor + 6;
+    laneCountdown = laneCountdown + -1;
+  } while (laneCountdown != 0);
+  IRInst__setOperandRef(constLoad,0,this);
   arena = *(undefined4 *)(compiler + COMP_arenaB);
-  puVar3 = (undefined4 *)Arena__alloc(arena,0x240);
-  puVar2 = puVar3 + 1;
-  *puVar3 = arena;
-  ValueKey__init(puVar2,puVar8,compiler);
-  iVar4 = Compiler__isOptionEnabled(compiler,7);
-  if (iVar4 != 0) {
-    FUN_00174e0c(puVar2);
-    ValueKey__propagateLaneValues(puVar2);
+  keyAlloc = (undefined4 *)Arena__alloc(arena,0x240);
+  valueKey = keyAlloc + 1;
+  *keyAlloc = arena;
+  ValueKey__init(valueKey,constLoad,compiler);
+  valueNumberEnabled = Compiler__isOptionEnabled(compiler,7);
+  if (valueNumberEnabled != 0) {
+    FUN_00174e0c(valueKey);
+    ValueKey__propagateLaneValues(valueKey);
   }
-  ((int (*)())FUN_0012306c)(this,puVar8);
-  (**(code **)(*param_2 + 0xc))(param_2,puVar8);
-  ((int (*)())FUN_00122f28)(this,puVar8);
-  return puVar2;
+  ((int (*)())FUN_0012306c)(this,constLoad);
+  (**(code **)(*targetBlock + 0xc))(targetBlock,constLoad);
+  ((int (*)())FUN_00122f28)(this,constLoad);
+  return valueKey;
 }
 
 /* VertexRegister__clone @ 0x123288 (148 bytes) */
@@ -3184,55 +3186,56 @@ int FUN_001234d8(param_1, param_2)
 }
 
 /* FUN_001235b8 @ 0x1235b8 (300 bytes) */
-int FUN_001235b8(param_1, param_2, param_3)
-  int param_1;
-  int param_2;
-  undefined4 param_3;
+int FUN_001235b8(owner, oldEntry, newEntry)
+  int owner;
+  int oldEntry;
+  undefined4 newEntry;
 {
-  uint uVar1;
-  int *piVar2;
-  undefined4 *puVar3;
+  uint vectorCountB;
+  uint vectorCount;
+  int *entryRef;
+  undefined4 *matchRef;
   uint loopIndex;
-  uint *puVar5;
-  uint *puVar6;
+  uint *entryVector;
+  uint *entryVectorAlias;
   
-  uVar1 = (*(uint **)(param_1 + 0x14))[1];
-  if (uVar1 != 0) {
+  vectorCount = (*(uint **)(owner + 0x14))[1];
+  if (vectorCount != 0) {
     loopIndex = 0;
-    puVar5 = *(uint **)(param_1 + 0x14);
+    entryVector = *(uint **)(owner + 0x14);
     do {
-      if (loopIndex < *puVar5) {
-        puVar6 = puVar5;
-        if (uVar1 <= loopIndex) {
-          _memset(uVar1 * 4 + puVar5[2],0,(loopIndex - uVar1) * 4 + 4);
-          puVar5[1] = loopIndex + 1;
-          puVar6 = *(uint **)(param_1 + 0x14);
+      if (loopIndex < *entryVector) {
+        entryVectorAlias = entryVector;
+        if (vectorCount <= loopIndex) {
+          _memset(vectorCount * 4 + entryVector[2],0,(loopIndex - vectorCount) * 4 + 4);
+          entryVector[1] = loopIndex + 1;
+          entryVectorAlias = *(uint **)(owner + 0x14);
         }
-        piVar2 = (int *)(loopIndex * 4 + puVar5[2]);
+        entryRef = (int *)(loopIndex * 4 + entryVector[2]);
       }
       else {
-        piVar2 = (int *)Vector__elementRefGrow(puVar5,loopIndex);
-        puVar6 = *(uint **)(param_1 + 0x14);
+        entryRef = (int *)Vector__elementRefGrow(entryVector,loopIndex);
+        entryVectorAlias = *(uint **)(owner + 0x14);
       }
-      if (*piVar2 == param_2) {
-        if (loopIndex < *puVar6) {
-          uVar1 = puVar6[1];
-          if (uVar1 <= loopIndex) {
-            _memset(uVar1 * 4 + puVar6[2],0,(loopIndex - uVar1) * 4 + 4);
-            puVar6[1] = loopIndex + 1;
+      if (*entryRef == oldEntry) {
+        if (loopIndex < *entryVectorAlias) {
+          vectorCountB = entryVectorAlias[1];
+          if (vectorCountB <= loopIndex) {
+            _memset(vectorCountB * 4 + entryVectorAlias[2],0,(loopIndex - vectorCountB) * 4 + 4);
+            entryVectorAlias[1] = loopIndex + 1;
           }
-          puVar3 = (undefined4 *)(loopIndex * 4 + puVar6[2]);
+          matchRef = (undefined4 *)(loopIndex * 4 + entryVectorAlias[2]);
         }
         else {
-          puVar3 = (undefined4 *)Vector__elementRefGrow(puVar6,loopIndex);
+          matchRef = (undefined4 *)Vector__elementRefGrow(entryVectorAlias,loopIndex);
         }
-        *puVar3 = param_3;
+        *matchRef = newEntry;
         return;
       }
-      uVar1 = puVar6[1];
+      vectorCount = entryVectorAlias[1];
       loopIndex = loopIndex + 1;
-      puVar5 = puVar6;
-    } while (loopIndex < uVar1);
+      entryVector = entryVectorAlias;
+    } while (loopIndex < vectorCount);
   }
   return;
 }

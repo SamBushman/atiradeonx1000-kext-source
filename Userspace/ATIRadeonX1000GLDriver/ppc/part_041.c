@@ -205,63 +205,63 @@ int FUN_001319d0(param_1, param_2)
 }
 
 /* FUN_00131a80 @ 0x131a80 (232 bytes) */
-int FUN_00131a80(param_1)
-  int param_1;
+int FUN_00131a80(allocator)
+  int allocator;
 {
   undefined4 *allocation;
-  int iVar1;
-  undefined4 *puVar2;
-  uint uVar3;
-  int iVar4;
+  int bitsLeft;
+  undefined4 *slotRef;
+  uint slotVectorCount;
+  int usedSlotBitset;
   undefined4 arena;
-  uint uVar6;
-  uint *puVar7;
+  uint freeSlot;
+  uint *slotVector;
   
-  iVar4 = *(int *)(param_1 + 0x434);
-  iVar1 = *(int *)(iVar4 + 4);
-  if (iVar1 == 0) {
+  usedSlotBitset = *(int *)(allocator + 0x434);
+  bitsLeft = *(int *)(usedSlotBitset + 4);
+  if (bitsLeft == 0) {
 LAB_00131ae0:
-    uVar6 = 0xffffffff;
+    freeSlot = 0xffffffff;
   }
   else {
-    uVar6 = 0;
-    if ((*(uint *)(iVar4 + 8) & 1) != 0) {
-      uVar6 = 0;
+    freeSlot = 0;
+    if ((*(uint *)(usedSlotBitset + 8) & 1) != 0) {
+      freeSlot = 0;
       do {
-        uVar6 = uVar6 + 1;
-        iVar1 = iVar1 + -1;
-        if (iVar1 == 0) goto LAB_00131ae0;
-      } while ((*(uint *)((uVar6 >> 3 & 0x1ffffffc) + iVar4 + 8) >> (uVar6 & 0x1f) & 1) != 0);
+        freeSlot = freeSlot + 1;
+        bitsLeft = bitsLeft + -1;
+        if (bitsLeft == 0) goto LAB_00131ae0;
+      } while ((*(uint *)((freeSlot >> 3 & 0x1ffffffc) + usedSlotBitset + 8) >> (freeSlot & 0x1f) & 1) != 0);
     }
   }
-  iVar4 = (uVar6 >> 3 & 0x1ffffffc) + iVar4;
-  *(uint *)(iVar4 + 8) = 1 << (uVar6 & 0x1f) | *(uint *)(iVar4 + 8);
-  puVar7 = *(uint **)(param_1 + 0x8c);
-  if (puVar7 == (uint *)0x0) {
-    arena = *(undefined4 *)(*(int *)(param_1 + 8) + 0x374);
+  usedSlotBitset = (freeSlot >> 3 & 0x1ffffffc) + usedSlotBitset;
+  *(uint *)(usedSlotBitset + 8) = 1 << (freeSlot & 0x1f) | *(uint *)(usedSlotBitset + 8);
+  slotVector = *(uint **)(allocator + 0x8c);
+  if (slotVector == (uint *)0x0) {
+    arena = *(undefined4 *)(*(int *)(allocator + 8) + 0x374);
     allocation = (undefined4 *)Arena__alloc(arena,0x14);
-    puVar7 = allocation + 1;
+    slotVector = allocation + 1;
     *allocation = arena;
     allocation[1] = 2;
     allocation[2] = 0;
     allocation[4] = arena;
     arena = Arena__alloc(arena,8);
     allocation[3] = arena;
-    *(uint **)(param_1 + 0x8c) = puVar7;
+    *(uint **)(allocator + 0x8c) = slotVector;
   }
-  if (uVar6 < *puVar7) {
-    uVar3 = puVar7[1];
-    if (uVar3 <= uVar6) {
-      _memset((void *)(uVar3 * 4 + puVar7[2]),0,(uVar6 - uVar3) * 4 + 4);
-      puVar7[1] = uVar6 + 1;
+  if (freeSlot < *slotVector) {
+    slotVectorCount = slotVector[1];
+    if (slotVectorCount <= freeSlot) {
+      _memset((void *)(slotVectorCount * 4 + slotVector[2]),0,(freeSlot - slotVectorCount) * 4 + 4);
+      slotVector[1] = freeSlot + 1;
     }
-    puVar2 = (undefined4 *)(uVar6 * 4 + puVar7[2]);
+    slotRef = (undefined4 *)(freeSlot * 4 + slotVector[2]);
   }
   else {
-    puVar2 = (undefined4 *)Vector__elementRefGrow(puVar7,uVar6);
+    slotRef = (undefined4 *)Vector__elementRefGrow(slotVector,freeSlot);
   }
-  *puVar2 = 0;
-  return uVar6;
+  *slotRef = 0;
+  return freeSlot;
 }
 
 /* FUN_00131c10 @ 0x131c10 (100 bytes) */
@@ -4403,56 +4403,58 @@ int FUN_00138080(param_1)
 }
 
 /* FUN_00138130 @ 0x138130 (272 bytes) */
-int FUN_00138130(param_1)
-  int param_1;
+int FUN_00138130(liveness)
+  int liveness;
 {
-  int *piVar1;
-  int iVar2;
+  int block;
+  int inst;
+  int *tableWordCursor;
+  int nextInstLink;
   undefined4 *allocation;
-  int iVar4;
-  int *piVar5;
+  int clearCountdown;
+  int *liveTable;
   undefined4 arena;
-  int iVar7;
+  int initCountdown;
   
-  arena = *(undefined4 *)(*(int *)(param_1 + 8) + 0x378);
+  arena = *(undefined4 *)(*(int *)(liveness + 8) + 0x378);
   allocation = (undefined4 *)Arena__alloc(arena,0x20c);
-  piVar5 = allocation + 1;
+  liveTable = allocation + 1;
   allocation[1] = 0x80;
-  iVar7 = 0x80;
+  initCountdown = 0x80;
   *allocation = arena;
   allocation[2] = 0x1000;
-  iVar4 = 0x80;
-  piVar1 = piVar5;
+  clearCountdown = 0x80;
+  tableWordCursor = liveTable;
   do {
-    piVar1[2] = 0;
-    piVar1 = piVar1 + 1;
-    iVar7 = iVar7 + -1;
-  } while (iVar7 != 0);
-  iVar7 = *(int *)(param_1 + 900);
-  if (*(int *)(iVar7 + 8) != 0) {
+    tableWordCursor[2] = 0;
+    tableWordCursor = tableWordCursor + 1;
+    initCountdown = initCountdown + -1;
+  } while (initCountdown != 0);
+  block = *(int *)(liveness + 900);
+  if (*(int *)(block + 8) != 0) {
     while( true ) {
-      if (iVar4 != 0) {
-        piVar1 = piVar5;
-        if (iVar4 == 0) {
-          iVar4 = 1;
+      if (clearCountdown != 0) {
+        tableWordCursor = liveTable;
+        if (clearCountdown == 0) {
+          clearCountdown = 1;
         }
         do {
-          piVar1[2] = 0;
-          piVar1 = piVar1 + 1;
-          iVar4 = iVar4 + -1;
-        } while (iVar4 != 0);
+          tableWordCursor[2] = 0;
+          tableWordCursor = tableWordCursor + 1;
+          clearCountdown = clearCountdown + -1;
+        } while (clearCountdown != 0);
       }
-      iVar4 = *(int *)(iVar7 + 0x98);
-      for (iVar2 = *(int *)(*(int *)(iVar7 + 0x98) + 8); iVar2 != 0; iVar2 = *(int *)(iVar2 + 8)) {
-        if ((*(uint *)(iVar4 + 0x14) & 1) != 0) {
-          ((int (*)())FUN_00137f14)(param_1,iVar4,piVar5);
-          iVar2 = *(int *)(iVar4 + 8);
+      inst = *(int *)(block + 0x98);
+      for (nextInstLink = *(int *)(*(int *)(block + 0x98) + 8); nextInstLink != 0; nextInstLink = *(int *)(nextInstLink + 8)) {
+        if ((*(uint *)(inst + 0x14) & 1) != 0) {
+          ((int (*)())FUN_00137f14)(liveness,inst,liveTable);
+          nextInstLink = *(int *)(inst + 8);
         }
-        iVar4 = iVar2;
+        inst = nextInstLink;
       }
-      iVar7 = *(int *)(iVar7 + 8);
-      if (*(int *)(iVar7 + 8) == 0) break;
-      iVar4 = *piVar5;
+      block = *(int *)(block + 8);
+      if (*(int *)(block + 8) == 0) break;
+      clearCountdown = *liveTable;
     }
   }
   return;
