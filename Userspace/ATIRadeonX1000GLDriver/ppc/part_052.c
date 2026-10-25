@@ -1340,7 +1340,7 @@ int R300VMachineAssembler__vslot48_declareAndAssemble(this, node)
   int *this;
   undefined4 node;
 {
-  FUN_000e2c78(node,this,this[3]);
+  ConstRecord__emitStores(node,this,this[3]);
                     
                     
   (**(code **)(*this + 0x88))(this,node);

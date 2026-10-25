@@ -1,0 +1,15 @@
+local	FUN_00139190	param_1	stack	INFERRED	vector of packed lane words; the last element is examined
+local	FUN_00139190	param_2	laneCount	INFERRED	number of lanes wanted (clamped to 4)
+use	FUN_00139190	uVar1	lastIndex	INFERRED	index of the last element of the vector	^\s*uVar1\ =\ \*\(uint\ \*\)\(param_1\ \+\ 4\)\ \-\ 1;$	+1
+use	FUN_00139190	uVar1	lastIndex	INFERRED	index of the last element of the vector	^\s*if\ \(uVar1\ <\ \*\(uint\ \*\)\(param_1\ \+\ 4\)\)\ \{$	+2
+use	FUN_00139190	piVar2	lastRef	INFERRED	element reference of the last element (NULL when the vector is empty)	^\s*piVar2\ =\ \(int\ \*\)0x0;$	+1
+use	FUN_00139190	piVar2	lastRef	INFERRED	element reference of the last element (NULL when the vector is empty)	^\s*piVar2\ =\ \(int\ \*\)\(uVar1\ \*\ 4\ \+\ \*\(int\ \*\)\(param_1\ \+\ 8\)\);$	+1
+use	FUN_00139190	piVar2	lastRef	INFERRED	element reference of the last element (NULL when the vector is empty)	^\s*local_28\ =\ \*piVar2;$	+1
+use	FUN_00139190	iVar3	laneByteIndex	INFERRED	byte index into the packed lane word	^\s*iVar3\ =\ 0;$	+1
+use	FUN_00139190	iVar3	laneByteIndex	INFERRED	byte index into the packed lane word	^\s*if\ \(\*\(char\ \*\)\(\(int\)\&local_28\ \+\ iVar3\)\ !=\ \-1\)\ \{$	+1
+use	FUN_00139190	iVar3	laneByteIndex	INFERRED	byte index into the packed lane word	^\s*iVar3\ =\ iVar3\ \+\ 1;$	+1
+use	FUN_00139190	iVar4	usedLaneCount	INFERRED	number of lanes of the word that are not 0xff	^\s*iVar4\ =\ 0;$	+1
+use	FUN_00139190	iVar4	usedLaneCount	INFERRED	number of lanes of the word that are not 0xff	^\s*iVar4\ =\ 0;$@2	+1
+use	FUN_00139190	iVar4	usedLaneCount	INFERRED	number of lanes of the word that are not 0xff	^\s*iVar4\ =\ iVar4\ \+\ 1;$	+1
+use	FUN_00139190	iVar4	usedLaneCount	INFERRED	number of lanes of the word that are not 0xff	^\s*return\ iVar4\ <\ 2;$	+1
+local	FUN_00139190	local_28	packedLaneWord	INFERRED	last element of the vector: four lane bytes (0xff = unused)

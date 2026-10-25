@@ -1,0 +1,31 @@
+local	ImmedConstBuffer__clone	param_2	targetBlock	INFERRED	block that receives the new constant load (vtable slot 0xc inserts it)
+use	ImmedConstBuffer__clone	puVar2	valueKey	INFERRED	ValueKey of the new load (allocation + 1), the return value	^\s*puVar2\ =\ puVar3\ \+\ 1;$	+1
+use	ImmedConstBuffer__clone	puVar2	valueKey	INFERRED	ValueKey of the new load (allocation + 1), the return value	^\s*FUN_00173938\(puVar2,puVar8,param_3\);$	+1
+use	ImmedConstBuffer__clone	puVar2	valueKey	INFERRED	ValueKey of the new load (allocation + 1), the return value	^\s*FUN_00174e0c\(puVar2\);$	+2
+use	ImmedConstBuffer__clone	puVar2	valueKey	INFERRED	ValueKey of the new load (allocation + 1), the return value	^\s*return\ puVar2;$	+1
+use	ImmedConstBuffer__clone	iVar1	constantIndex	INFERRED	index into the immediate constant buffer: this +8 (vec4 number) * 4 + lane	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 8\)\ \*\ 4\ \+\ uVar5;$	+2
+use	ImmedConstBuffer__clone	iVar1	constantIndex	INFERRED	index into the immediate constant buffer: this +8 (vec4 number) * 4 + lane	^\s*puVar3\[8\]\ =\ piVar6\[iVar1\ \+\ 1\];$	+1
+use	ImmedConstBuffer__clone	puVar3	laneRecordCursor	INFERRED	cursor over the four lane records of the new load	^\s*puVar3\ =\ puVar8;$	+1
+use	ImmedConstBuffer__clone	puVar3	laneRecordCursor	INFERRED	cursor over the four lane records of the new load	^\s*puVar3\[7\]\ =\ 3;$	+1
+use	ImmedConstBuffer__clone	puVar3	laneRecordCursor	INFERRED	cursor over the four lane records of the new load	^\s*puVar3\[8\]\ =\ 0;$	+1
+use	ImmedConstBuffer__clone	puVar3	laneRecordCursor	INFERRED	cursor over the four lane records of the new load	^\s*puVar3\[8\]\ =\ piVar6\[iVar1\ \+\ 1\];$	+1
+use	ImmedConstBuffer__clone	puVar3	laneRecordCursor	INFERRED	cursor over the four lane records of the new load	^\s*puVar3\ =\ puVar3\ \+\ 6;$	+1
+use	ImmedConstBuffer__clone	puVar3	keyAlloc	INFERRED	arena block (0x240 bytes) of the ValueKey	^\s*puVar3\ =\ \(undefined4\ \*\)FUN_00193e18\(uVar7,0x240\);$	+3
+use	ImmedConstBuffer__clone	iVar4	bufferWordCount	INFERRED	constant buffer length in words (first word)	^\s*iVar4\ =\ \*piVar6;$	+1
+use	ImmedConstBuffer__clone	iVar4	bufferWordCount	INFERRED	constant buffer length in words (first word)	^\s*if\ \(iVar4\ <\ iVar1\)\ \{$	+1
+use	ImmedConstBuffer__clone	iVar4	valueNumberEnabled	INFERRED	Compiler__isOptionEnabled(compiler, 7)	^\s*iVar4\ =\ FUN_000e07dc\(param_3,7\);$	+2
+use	ImmedConstBuffer__clone	uVar5	laneIndex	INFERRED	lane counter 0..3	^\s*uVar5\ =\ 0;$	+1
+use	ImmedConstBuffer__clone	uVar5	laneIndex	INFERRED	lane counter 0..3	^\s*\*\(byte\ \*\)\(puVar2\ \+\ 0x58\)\ =\ \(byte\)\(1\ <<\ \(uVar5\ \&\ 0x3f\)\)\ \|\ \*\(byte\ \*\)\(puVar2\ \+\ 0x58\);$	+1
+use	ImmedConstBuffer__clone	uVar5	laneIndex	INFERRED	lane counter 0..3	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 8\)\ \*\ 4\ \+\ uVar5;$	+1
+use	ImmedConstBuffer__clone	uVar5	laneIndex	INFERRED	lane counter 0..3	^\s*uVar5\ =\ uVar5\ \+\ 1;$	+1
+use	ImmedConstBuffer__clone	piVar6	constantBuffer	INFERRED	immediate constant buffer of the program (length word, then the words)	^\s*piVar6\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(\*\(int\ \*\)\(param_3\ \+\ COMP_currentProgram\)\ \+\ 0x354\)\ \+\ 300\);$	+1
+use	ImmedConstBuffer__clone	piVar6	constantBuffer	INFERRED	immediate constant buffer of the program (length word, then the words)	^\s*iVar4\ =\ \*piVar6;$	+1
+use	ImmedConstBuffer__clone	piVar6	constantBuffer	INFERRED	immediate constant buffer of the program (length word, then the words)	^\s*puVar3\[8\]\ =\ piVar6\[iVar1\ \+\ 1\];$	+1
+use	ImmedConstBuffer__clone	puVar8	constLoad	INFERRED	new IRLoadConst loading this vec4 (allocation + 1)	^\s*puVar8\ =\ puVar2\ \+\ 1;$	+1
+use	ImmedConstBuffer__clone	puVar8	constLoad	INFERRED	new IRLoadConst loading this vec4 (allocation + 1)	^\s*FUN_00109938\(puVar8,param_3\);$	+1
+use	ImmedConstBuffer__clone	puVar8	constLoad	INFERRED	new IRLoadConst loading this vec4 (allocation + 1)	^\s*puVar3\ =\ puVar8;$	+1
+use	ImmedConstBuffer__clone	puVar8	constLoad	INFERRED	new IRLoadConst loading this vec4 (allocation + 1)	^\s*FUN_001046c8\(puVar8,0,param_1\);$	+1
+use	ImmedConstBuffer__clone	puVar8	constLoad	INFERRED	new IRLoadConst loading this vec4 (allocation + 1)	^\s*FUN_00173938\(puVar2,puVar8,param_3\);$	+1
+use	ImmedConstBuffer__clone	puVar8	constLoad	INFERRED	new IRLoadConst loading this vec4 (allocation + 1)	^\s*\(\(int\ \(\*\)\(\)\)FUN_0012306c\)\(param_1,puVar8\);$	+3
+use	ImmedConstBuffer__clone	iVar9	laneCountdown	INFERRED	countdown from 4 over the lanes	^\s*iVar9\ =\ 4;$	+1
+use	ImmedConstBuffer__clone	iVar9	laneCountdown	INFERRED	countdown from 4 over the lanes	^\s*iVar9\ =\ iVar9\ \+\ \-1;$	+2

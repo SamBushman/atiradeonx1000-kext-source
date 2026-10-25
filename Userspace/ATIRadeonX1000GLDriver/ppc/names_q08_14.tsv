@@ -1,0 +1,205 @@
+local	HashTable__grow	param_1	table	INFERRED	HashTable: [0] bucket count, [2] bucket array, [4] hash function, [5] arena
+use	HashTable__grow	iVar12	elementByteOffset	INFERRED	byte offset of the current element in the old bucket (size*4, minus 4 per step)	^\s*iVar12\ =\ uVar10\ <<\ 2;$	+1
+use	HashTable__grow	iVar12	elementByteOffset	INFERRED	byte offset of the current element in the old bucket (size*4, minus 4 per step)	^\s*iVar12\ =\ iVar12\ \+\ \-4;$	+1
+use	HashTable__grow	iVar12	elementByteOffset	INFERRED	byte offset of the current element in the old bucket (size*4, minus 4 per step)	^\s*puVar4\ =\ \(undefined4\ \*\)\(iVar12\ \+\ puVar13\[2\]\);$	+1
+use	HashTable__grow	iVar6	bucketByteOffset	INFERRED	byte offset of the bucket in the bucket array (4 per bucket)	^\s*iVar6\ =\ 0;$	+1
+use	HashTable__grow	iVar6	bucketByteOffset	INFERRED	byte offset of the bucket in the bucket array (4 per bucket)	^\s*puVar13\ =\ \*\(uint\ \*\*\)\(param_1\[2\]\ \+\ iVar6\);$	+1
+use	HashTable__grow	iVar6	bucketByteOffset	INFERRED	byte offset of the bucket in the bucket array (4 per bucket)	^\s*\*\(uint\ \*\*\)\(uVar1\ \+\ iVar6\)\ =\ puVar2\ \+\ 1;$	+1
+use	HashTable__grow	iVar6	bucketByteOffset	INFERRED	byte offset of the bucket in the bucket array (4 per bucket)	^\s*puVar9\ =\ \*\(uint\ \*\*\)\(uVar1\ \+\ iVar6\);$	+1
+use	HashTable__grow	iVar6	bucketByteOffset	INFERRED	byte offset of the bucket in the bucket array (4 per bucket)	^\s*iVar6\ =\ iVar6\ \+\ 4;$	+1
+use	HashTable__grow	puVar13	oldBucket	INFERRED	Vector object of the old bucket being redistributed	^\s*puVar13\ =\ \*\(uint\ \*\*\)\(param_1\[2\]\ \+\ iVar6\);$	+2
+use	HashTable__grow	puVar13	oldBucket	INFERRED	Vector object of the old bucket being redistributed	^\s*uVar10\ =\ puVar13\[1\];$	+1
+use	HashTable__grow	puVar13	oldBucket	INFERRED	Vector object of the old bucket being redistributed	^\s*if\ \(uVar16\ <\ \*puVar13\)\ \{$	+2
+use	HashTable__grow	puVar13	oldBucket	INFERRED	Vector object of the old bucket being redistributed	^\s*_memset\(uVar3\ \*\ 4\ \+\ puVar13\[2\],0,\(uVar16\ \-\ uVar3\)\ \*\ 4\ \+\ 4\);$	+2
+use	HashTable__grow	puVar13	oldBucket	INFERRED	Vector object of the old bucket being redistributed	^\s*puVar4\ =\ \(undefined4\ \*\)\(iVar12\ \+\ puVar13\[2\]\);$	+1
+use	HashTable__grow	puVar13	oldBucket	INFERRED	Vector object of the old bucket being redistributed	^\s*puVar4\ =\ \(undefined4\ \*\)\(\(int\ \(\*\)\(\)\)FUN_0019423c\)\(puVar13,uVar16\);$	+1
+use	HashTable__grow	puVar14	highBucketVector	INFERRED	Vector object of the new upper-half bucket	^\s*puVar14\ =\ puVar2\ \+\ 1;$	+1
+use	HashTable__grow	puVar14	highBucketVector	INFERRED	Vector object of the new upper-half bucket	^\s*\*puVar7\ =\ puVar14;$	+1
+use	HashTable__grow	puVar14	highBucketVector	INFERRED	Vector object of the new upper-half bucket	^\s*if\ \(uVar17\ <\ \*puVar14\)\ \{$	+1
+use	HashTable__grow	puVar14	highBucketVector	INFERRED	Vector object of the new upper-half bucket	^\s*puVar4\ =\ \(undefined4\ \*\)\(\(int\ \(\*\)\(\)\)FUN_0019423c\)\(puVar14,uVar17\);$	+1
+use	HashTable__grow	puVar4	elementRef	INFERRED	address of the element slot (inline vector access)	^\s*puVar4\ =\ \(undefined4\ \*\)\(iVar12\ \+\ puVar13\[2\]\);$	+1
+use	HashTable__grow	puVar4	elementRef	INFERRED	address of the element slot (inline vector access)	^\s*puVar4\ =\ \(undefined4\ \*\)\(\(int\ \(\*\)\(\)\)FUN_0019423c\)\(puVar13,uVar16\);$	+1
+use	HashTable__grow	puVar4	elementRef	INFERRED	address of the element slot (inline vector access)	^\s*uVar15\ =\ \*puVar4;$	+1
+use	HashTable__grow	puVar4	elementRef	INFERRED	address of the element slot (inline vector access)	^\s*puVar4\ =\ \(undefined4\ \*\)\(uVar17\ \*\ 4\ \+\ puVar9\[2\]\);$	+1
+use	HashTable__grow	puVar4	elementRef	INFERRED	address of the element slot (inline vector access)	^\s*puVar4\ =\ \(undefined4\ \*\)\(\(int\ \(\*\)\(\)\)FUN_0019423c\)\(puVar9,uVar17\);$	+1
+use	HashTable__grow	puVar4	elementRef	INFERRED	address of the element slot (inline vector access)	^\s*puVar4\ =\ \(undefined4\ \*\)\(uVar17\ \*\ 4\ \+\ puVar2\[3\]\);$	+1
+use	HashTable__grow	puVar4	elementRef	INFERRED	address of the element slot (inline vector access)	^\s*puVar4\ =\ \(undefined4\ \*\)\(\(int\ \(\*\)\(\)\)FUN_0019423c\)\(puVar14,uVar17\);$	+1
+use	HashTable__grow	puVar4	elementRef	INFERRED	address of the element slot (inline vector access)	^\s*\*puVar4\ =\ uVar15;$	+1
+use	HashTable__grow	puVar9	lowBucketVector	INFERRED	Vector object of the new lower-half bucket (same index)	^\s*puVar9\ =\ \*\(uint\ \*\*\)\(uVar1\ \+\ iVar6\);$	+1
+use	HashTable__grow	puVar9	lowBucketVector	INFERRED	Vector object of the new lower-half bucket (same index)	^\s*uVar17\ =\ puVar9\[1\];$	+5
+use	HashTable__grow	puVar9	lowBucketVector	INFERRED	Vector object of the new lower-half bucket (same index)	^\s*puVar4\ =\ \(undefined4\ \*\)\(\(int\ \(\*\)\(\)\)FUN_0019423c\)\(puVar9,uVar17\);$	+1
+use	HashTable__grow	uVar10	oldBucketSize	INFERRED	number of entries of the old bucket	^\s*uVar10\ =\ puVar13\[1\];$	+1
+use	HashTable__grow	uVar10	oldBucketSize	INFERRED	number of entries of the old bucket	^\s*iVar12\ =\ uVar10\ <<\ 2;$	+2
+use	HashTable__grow	uVar10	oldBucketSize	INFERRED	number of entries of the old bucket	^\s*if\ \(uVar10\ ==\ uVar11\)\ break;$	+1
+use	HashTable__grow	uVar15	entry	INFERRED	entry read from the old bucket	^\s*uVar15\ =\ \*puVar4;$	+2
+use	HashTable__grow	uVar15	entry	INFERRED	entry read from the old bucket	^\s*\*puVar4\ =\ uVar15;$	+1
+use	HashTable__grow	uVar16	prevIndex	INFERRED	index of the entry being moved (remaining count - 1)	^\s*uVar16\ =\ uVar17\ \-\ 1;$	+1
+use	HashTable__grow	uVar16	prevIndex	INFERRED	index of the entry being moved (remaining count - 1)	^\s*if\ \(uVar16\ <\ \*puVar13\)\ \{$	+1
+use	HashTable__grow	uVar16	prevIndex	INFERRED	index of the entry being moved (remaining count - 1)	^\s*if\ \(uVar3\ <=\ uVar16\)\ \{$	+2
+use	HashTable__grow	uVar16	prevIndex	INFERRED	index of the entry being moved (remaining count - 1)	^\s*puVar4\ =\ \(undefined4\ \*\)\(\(int\ \(\*\)\(\)\)FUN_0019423c\)\(puVar13,uVar16\);$	+1
+use	HashTable__grow	uVar16	prevIndex	INFERRED	index of the entry being moved (remaining count - 1)	^\s*uVar17\ =\ uVar16;$	+1
+use	HashTable__grow	uVar17	arena	INFERRED	table arena (table[5])	^\s*uVar17\ =\ param_1\[5\];$	+3
+use	HashTable__grow	uVar17	arena	INFERRED	table arena (table[5])	^\s*uVar17\ =\ param_1\[5\];$@2	+1
+use	HashTable__grow	uVar17	arena	INFERRED	table arena (table[5])	^\s*puVar2\[4\]\ =\ uVar17;$	+1
+use	HashTable__grow	uVar17	arena	INFERRED	table arena (table[5])	^\s*uVar17\ =\ \(\(int\ \(\*\)\(\)\)FUN_00193e18\)\(uVar17,8\);$	+2
+use	HashTable__grow	uVar17	arena	INFERRED	table arena (table[5])	^\s*uVar17\ =\ param_1\[5\];$@3	+3
+use	HashTable__grow	uVar17	arena	INFERRED	table arena (table[5])	^\s*uVar17\ =\ param_1\[5\];$@4	+1
+use	HashTable__grow	uVar17	arena	INFERRED	table arena (table[5])	^\s*puVar2\[4\]\ =\ uVar17;$@2	+3
+use	HashTable__grow	uVar17	remainingCount	INFERRED	entries of the old bucket still to move	^\s*uVar17\ =\ uVar10;$	+1
+use	HashTable__grow	uVar17	remainingCount	INFERRED	entries of the old bucket still to move	^\s*uVar16\ =\ uVar17\ \-\ 1;$	+1
+use	HashTable__grow	uVar17	remainingCount	INFERRED	entries of the old bucket still to move	^\s*puVar13\[1\]\ =\ uVar17;$	+1
+use	HashTable__grow	uVar17	remainingCount	INFERRED	entries of the old bucket still to move	^\s*uVar17\ =\ uVar16;$	+1
+use	HashTable__grow	uVar17	hashValue	INFERRED	hash of the entry (table[4] function)	^\s*uVar17\ =\ \(\*\(code\ \*\)param_1\[4\]\)\(uVar15\);$	+2
+use	HashTable__grow	uVar17	lowBucketSize	INFERRED	filled count of the lower-half bucket	^\s*uVar17\ =\ puVar9\[1\];$	+5
+use	HashTable__grow	uVar17	lowBucketSize	INFERRED	filled count of the lower-half bucket	^\s*puVar4\ =\ \(undefined4\ \*\)\(\(int\ \(\*\)\(\)\)FUN_0019423c\)\(puVar9,uVar17\);$	+1
+use	HashTable__grow	uVar17	highBucketSize	INFERRED	filled count of the upper-half bucket	^\s*uVar17\ =\ puVar2\[2\];$	+5
+use	HashTable__grow	uVar17	highBucketSize	INFERRED	filled count of the upper-half bucket	^\s*puVar4\ =\ \(undefined4\ \*\)\(\(int\ \(\*\)\(\)\)FUN_0019423c\)\(puVar14,uVar17\);$	+1
+use	HashTable__grow	uVar3	vectorFilledCount	INFERRED	filled count of the old bucket	^\s*uVar3\ =\ puVar13\[1\];$	+3
+use	HashTable__grow	uVar5	oldBucketCount	INFERRED	bucket count before doubling	^\s*uVar5\ =\ \*param_1;$	+3
+use	HashTable__grow	uVar5	oldBucketCount	INFERRED	bucket count before doubling	^\s*if\ \(0\ <\ \(int\)uVar5\)\ \{$	+1
+use	HashTable__grow	uVar5	oldBucketCount	INFERRED	bucket count before doubling	^\s*puVar7\ =\ \(undefined4\ \*\)\(uVar1\ \+\ uVar5\ \*\ 4\);$	+1
+use	HashTable__grow	uVar5	oldBucketCount	INFERRED	bucket count before doubling	^\s*\}\ while\ \(uVar5\ !=\ uVar8\);$	+1
+local	HashTable__grow_194e44	param_1	table	INFERRED	HashTable: [0] bucket count, [2] bucket array, [4] hash function, [5] arena
+use	HashTable__grow_194e44	iVar13	elementByteOffset	INFERRED	byte offset of the current element in the old bucket (size*4, minus 4 per step)	^\s*iVar13\ =\ uVar11\ <<\ 2;$	+1
+use	HashTable__grow_194e44	iVar13	elementByteOffset	INFERRED	byte offset of the current element in the old bucket (size*4, minus 4 per step)	^\s*iVar13\ =\ iVar13\ \+\ \-4;$	+1
+use	HashTable__grow_194e44	iVar13	elementByteOffset	INFERRED	byte offset of the current element in the old bucket (size*4, minus 4 per step)	^\s*puVar4\ =\ \(undefined4\ \*\)\(iVar13\ \+\ puVar14\[2\]\);$	+1
+use	HashTable__grow_194e44	iVar7	bucketByteOffset	INFERRED	byte offset of the bucket in the bucket array (4 per bucket)	^\s*iVar7\ =\ 0;$	+1
+use	HashTable__grow_194e44	iVar7	bucketByteOffset	INFERRED	byte offset of the bucket in the bucket array (4 per bucket)	^\s*puVar14\ =\ \*\(uint\ \*\*\)\(param_1\[2\]\ \+\ iVar7\);$	+1
+use	HashTable__grow_194e44	iVar7	bucketByteOffset	INFERRED	byte offset of the bucket in the bucket array (4 per bucket)	^\s*\*\(uint\ \*\*\)\(uVar1\ \+\ iVar7\)\ =\ puVar2\ \+\ 1;$	+1
+use	HashTable__grow_194e44	iVar7	bucketByteOffset	INFERRED	byte offset of the bucket in the bucket array (4 per bucket)	^\s*puVar10\ =\ \*\(uint\ \*\*\)\(uVar1\ \+\ iVar7\);$	+1
+use	HashTable__grow_194e44	iVar7	bucketByteOffset	INFERRED	byte offset of the bucket in the bucket array (4 per bucket)	^\s*iVar7\ =\ iVar7\ \+\ 4;$	+1
+use	HashTable__grow_194e44	puVar14	oldBucket	INFERRED	Vector object of the old bucket being redistributed	^\s*puVar14\ =\ \*\(uint\ \*\*\)\(param_1\[2\]\ \+\ iVar7\);$	+2
+use	HashTable__grow_194e44	puVar14	oldBucket	INFERRED	Vector object of the old bucket being redistributed	^\s*uVar11\ =\ puVar14\[1\];$	+1
+use	HashTable__grow_194e44	puVar14	oldBucket	INFERRED	Vector object of the old bucket being redistributed	^\s*if\ \(uVar16\ <\ \*puVar14\)\ \{$	+2
+use	HashTable__grow_194e44	puVar14	oldBucket	INFERRED	Vector object of the old bucket being redistributed	^\s*_memset\(uVar3\ \*\ 4\ \+\ puVar14\[2\],0,\(uVar16\ \-\ uVar3\)\ \*\ 4\ \+\ 4\);$	+2
+use	HashTable__grow_194e44	puVar14	oldBucket	INFERRED	Vector object of the old bucket being redistributed	^\s*puVar4\ =\ \(undefined4\ \*\)\(iVar13\ \+\ puVar14\[2\]\);$	+1
+use	HashTable__grow_194e44	puVar14	oldBucket	INFERRED	Vector object of the old bucket being redistributed	^\s*puVar4\ =\ \(undefined4\ \*\)\(\(int\ \(\*\)\(\)\)FUN_0019423c\)\(puVar14,uVar16\);$	+1
+use	HashTable__grow_194e44	puVar15	highBucketVector	INFERRED	Vector object of the new upper-half bucket	^\s*puVar15\ =\ puVar2\ \+\ 1;$	+1
+use	HashTable__grow_194e44	puVar15	highBucketVector	INFERRED	Vector object of the new upper-half bucket	^\s*\*puVar8\ =\ puVar15;$	+1
+use	HashTable__grow_194e44	puVar15	highBucketVector	INFERRED	Vector object of the new upper-half bucket	^\s*if\ \(uVar17\ <\ \*puVar15\)\ \{$	+1
+use	HashTable__grow_194e44	puVar15	highBucketVector	INFERRED	Vector object of the new upper-half bucket	^\s*puVar5\ =\ \(undefined4\ \*\)\(\(int\ \(\*\)\(\)\)FUN_0019423c\)\(puVar15,uVar17\);$	+1
+use	HashTable__grow_194e44	puVar4	elementRef	INFERRED	address of the element slot in the old bucket (inline vector access)	^\s*puVar4\ =\ \(undefined4\ \*\)\(iVar13\ \+\ puVar14\[2\]\);$	+1
+use	HashTable__grow_194e44	puVar4	elementRef	INFERRED	address of the element slot in the old bucket (inline vector access)	^\s*puVar4\ =\ \(undefined4\ \*\)\(\(int\ \(\*\)\(\)\)FUN_0019423c\)\(puVar14,uVar16\);$	+1
+use	HashTable__grow_194e44	puVar4	elementRef	INFERRED	address of the element slot in the old bucket (inline vector access)	^\s*puVar4\ =\ \(undefined4\ \*\)\*puVar4;$	+2
+use	HashTable__grow_194e44	puVar4	elementRef	INFERRED	address of the element slot in the old bucket (inline vector access)	^\s*\*puVar5\ =\ puVar4;$	+1
+use	HashTable__grow_194e44	puVar5	destElementRef	INFERRED	address of the slot appended to the destination bucket	^\s*puVar5\ =\ \(undefined4\ \*\)\(uVar17\ \*\ 4\ \+\ puVar10\[2\]\);$	+1
+use	HashTable__grow_194e44	puVar5	destElementRef	INFERRED	address of the slot appended to the destination bucket	^\s*puVar5\ =\ \(undefined4\ \*\)\(\(int\ \(\*\)\(\)\)FUN_0019423c\)\(puVar10,uVar17\);$	+1
+use	HashTable__grow_194e44	puVar5	destElementRef	INFERRED	address of the slot appended to the destination bucket	^\s*puVar5\ =\ \(undefined4\ \*\)\(uVar17\ \*\ 4\ \+\ puVar2\[3\]\);$	+1
+use	HashTable__grow_194e44	puVar5	destElementRef	INFERRED	address of the slot appended to the destination bucket	^\s*puVar5\ =\ \(undefined4\ \*\)\(\(int\ \(\*\)\(\)\)FUN_0019423c\)\(puVar15,uVar17\);$	+1
+use	HashTable__grow_194e44	puVar5	destElementRef	INFERRED	address of the slot appended to the destination bucket	^\s*\*puVar5\ =\ puVar4;$	+1
+use	HashTable__grow_194e44	puVar10	lowBucketVector	INFERRED	Vector object of the new lower-half bucket (same index)	^\s*puVar10\ =\ \*\(uint\ \*\*\)\(uVar1\ \+\ iVar7\);$	+1
+use	HashTable__grow_194e44	puVar10	lowBucketVector	INFERRED	Vector object of the new lower-half bucket (same index)	^\s*uVar17\ =\ puVar10\[1\];$	+5
+use	HashTable__grow_194e44	puVar10	lowBucketVector	INFERRED	Vector object of the new lower-half bucket (same index)	^\s*puVar5\ =\ \(undefined4\ \*\)\(\(int\ \(\*\)\(\)\)FUN_0019423c\)\(puVar10,uVar17\);$	+1
+use	HashTable__grow_194e44	uVar11	oldBucketSize	INFERRED	number of entries of the old bucket	^\s*uVar11\ =\ puVar14\[1\];$	+1
+use	HashTable__grow_194e44	uVar11	oldBucketSize	INFERRED	number of entries of the old bucket	^\s*iVar13\ =\ uVar11\ <<\ 2;$	+2
+use	HashTable__grow_194e44	uVar11	oldBucketSize	INFERRED	number of entries of the old bucket	^\s*if\ \(uVar11\ ==\ uVar12\)\ break;$	+1
+use	HashTable__grow_194e44	uVar16	prevIndex	INFERRED	index of the entry being moved (remaining count - 1)	^\s*uVar16\ =\ uVar17\ \-\ 1;$	+1
+use	HashTable__grow_194e44	uVar16	prevIndex	INFERRED	index of the entry being moved (remaining count - 1)	^\s*if\ \(uVar16\ <\ \*puVar14\)\ \{$	+1
+use	HashTable__grow_194e44	uVar16	prevIndex	INFERRED	index of the entry being moved (remaining count - 1)	^\s*if\ \(uVar3\ <=\ uVar16\)\ \{$	+2
+use	HashTable__grow_194e44	uVar16	prevIndex	INFERRED	index of the entry being moved (remaining count - 1)	^\s*puVar4\ =\ \(undefined4\ \*\)\(\(int\ \(\*\)\(\)\)FUN_0019423c\)\(puVar14,uVar16\);$	+1
+use	HashTable__grow_194e44	uVar16	prevIndex	INFERRED	index of the entry being moved (remaining count - 1)	^\s*uVar17\ =\ uVar16;$	+1
+use	HashTable__grow_194e44	uVar17	arena	INFERRED	table arena (table[5])	^\s*uVar17\ =\ param_1\[5\];$	+3
+use	HashTable__grow_194e44	uVar17	arena	INFERRED	table arena (table[5])	^\s*uVar17\ =\ param_1\[5\];$@2	+1
+use	HashTable__grow_194e44	uVar17	arena	INFERRED	table arena (table[5])	^\s*puVar2\[4\]\ =\ uVar17;$	+1
+use	HashTable__grow_194e44	uVar17	arena	INFERRED	table arena (table[5])	^\s*uVar17\ =\ \(\(int\ \(\*\)\(\)\)FUN_00193e18\)\(uVar17,8\);$	+2
+use	HashTable__grow_194e44	uVar17	arena	INFERRED	table arena (table[5])	^\s*uVar17\ =\ param_1\[5\];$@3	+3
+use	HashTable__grow_194e44	uVar17	arena	INFERRED	table arena (table[5])	^\s*uVar17\ =\ param_1\[5\];$@4	+1
+use	HashTable__grow_194e44	uVar17	arena	INFERRED	table arena (table[5])	^\s*puVar2\[4\]\ =\ uVar17;$@2	+3
+use	HashTable__grow_194e44	uVar17	remainingCount	INFERRED	entries of the old bucket still to move	^\s*uVar17\ =\ uVar11;$	+1
+use	HashTable__grow_194e44	uVar17	remainingCount	INFERRED	entries of the old bucket still to move	^\s*uVar16\ =\ uVar17\ \-\ 1;$	+1
+use	HashTable__grow_194e44	uVar17	remainingCount	INFERRED	entries of the old bucket still to move	^\s*puVar14\[1\]\ =\ uVar17;$	+1
+use	HashTable__grow_194e44	uVar17	remainingCount	INFERRED	entries of the old bucket still to move	^\s*uVar17\ =\ uVar16;$	+1
+use	HashTable__grow_194e44	uVar17	hashValue	INFERRED	hash of the entry (table[4] function)	^\s*uVar17\ =\ \(\*\(code\ \*\)param_1\[4\]\)\(\*puVar4\);$	+2
+use	HashTable__grow_194e44	uVar17	lowBucketSize	INFERRED	filled count of the lower-half bucket	^\s*uVar17\ =\ puVar10\[1\];$	+5
+use	HashTable__grow_194e44	uVar17	lowBucketSize	INFERRED	filled count of the lower-half bucket	^\s*puVar5\ =\ \(undefined4\ \*\)\(\(int\ \(\*\)\(\)\)FUN_0019423c\)\(puVar10,uVar17\);$	+1
+use	HashTable__grow_194e44	uVar17	highBucketSize	INFERRED	filled count of the upper-half bucket	^\s*uVar17\ =\ puVar2\[2\];$	+5
+use	HashTable__grow_194e44	uVar17	highBucketSize	INFERRED	filled count of the upper-half bucket	^\s*puVar5\ =\ \(undefined4\ \*\)\(\(int\ \(\*\)\(\)\)FUN_0019423c\)\(puVar15,uVar17\);$	+1
+use	HashTable__grow_194e44	uVar3	vectorFilledCount	INFERRED	filled count of the old bucket	^\s*uVar3\ =\ puVar14\[1\];$	+3
+use	HashTable__grow_194e44	uVar6	oldBucketCount	INFERRED	bucket count before doubling	^\s*uVar6\ =\ \*param_1;$	+3
+use	HashTable__grow_194e44	uVar6	oldBucketCount	INFERRED	bucket count before doubling	^\s*if\ \(uVar6\ !=\ 0\)\ \{$	+1
+use	HashTable__grow_194e44	uVar6	oldBucketCount	INFERRED	bucket count before doubling	^\s*puVar8\ =\ \(undefined4\ \*\)\(uVar1\ \+\ uVar6\ \*\ 4\);$	+1
+use	HashTable__grow_194e44	uVar6	oldBucketCount	INFERRED	bucket count before doubling	^\s*\}\ while\ \(uVar6\ !=\ uVar9\);$	+1
+local	FUN_00181b80	param_1	rebuildState	INFERRED	object with +8 scheduling model, +0x1c per-instruction node vector
+local	FUN_00181b80	param_2	block	INFERRED	basic block whose instruction list (block+0x98 forward, +0xa0 backward) is walked
+local	FUN_00181b80	param_3	maxLevelOut	INFERRED	out: highest level reached in the backward pass
+local	FUN_00181b80	param_4	schedCostOut	INFERRED	out: result of the scheduling model query (vtable +0x5c)
+local	FUN_00181b80	param_5	staleArg5	INFERRED	unused stale argument register
+local	FUN_00181b80	param_6	staleArg6	INFERRED	unused stale argument register
+local	FUN_00181b80	param_7	staleArg7	INFERRED	unused stale argument register
+use	FUN_00181b80	iVar2	sourceLevelPlusOne	INFERRED	level (node+4) of the source node plus one	^\s*iVar2\ =\ \*\(int\ \*\)\(\*piVar6\ \+\ 4\)\ \+\ 1;$	+1
+use	FUN_00181b80	iVar2	sourceLevelPlusOne	INFERRED	level (node+4) of the source node plus one	^\s*if\ \(\(int\)puVar4\[1\]\ <\ iVar2\)\ \{$	+2
+use	FUN_00181b80	iVar5	nodeDepth	INFERRED	node depth (node[1]) raised to sourceLevelPlusOne	^\s*iVar5\ =\ puVar4\[1\];$	+1
+use	FUN_00181b80	iVar5	nodeDepth	INFERRED	node depth (node[1]) raised to sourceLevelPlusOne	^\s*iVar5\ =\ iVar2;$	+1
+use	FUN_00181b80	iVar5	nodeDepth	INFERRED	node depth (node[1]) raised to sourceLevelPlusOne	^\s*puVar4\[1\]\ =\ iVar5;$	+1
+use	FUN_00181b80	iVar5	newLevel	INFERRED	maximum of the source node level and consumer level + 1	^\s*iVar5\ =\ \*piVar7;$	+1
+use	FUN_00181b80	iVar5	newLevel	INFERRED	maximum of the source node level and consumer level + 1	^\s*iVar5\ =\ \*piVar6\ \+\ 1;$	+1
+use	FUN_00181b80	iVar5	newLevel	INFERRED	maximum of the source node level and consumer level + 1	^\s*\*piVar7\ =\ iVar5;$	+1
+use	FUN_00181b80	iVar5	newLevel	INFERRED	maximum of the source node level and consumer level + 1	^\s*if\ \(iVar5\ <\ \*param_3\)\ \{$	+2
+use	FUN_00181b80	iVar5	newLevel	INFERRED	maximum of the source node level and consumer level + 1	^\s*\*param_3\ =\ iVar5;$	+1
+use	FUN_00181b80	piVar6	consumerNode	INFERRED	node record of the instruction visited in the backward pass	^\s*piVar6\ =\ \(int\ \*\)\*puVar4;$	+1
+use	FUN_00181b80	piVar6	consumerNode	INFERRED	node record of the instruction visited in the backward pass	^\s*if\ \(\*piVar7\ <\ \*piVar6\ \+\ 1\)\ \{$	+2
+use	FUN_00181b80	piVar7	sourceNode	INFERRED	node record of the source instruction	^\s*piVar7\ =\ \(int\ \*\)\*puVar4;$	+3
+use	FUN_00181b80	piVar7	sourceNode	INFERRED	node record of the source instruction	^\s*piVar7\[4\]\ =\ iVar10;$	+3
+use	FUN_00181b80	puVar4	nodeRec	INFERRED	node record of the instruction in the forward pass (initialised to 1,1,0,0,0,1)	^\s*puVar4\ =\ \(undefined4\ \*\)\(uVar9\ \*\ 4\ \+\ puVar11\[2\]\);$	+1
+use	FUN_00181b80	puVar4	nodeRec	INFERRED	node record of the instruction in the forward pass (initialised to 1,1,0,0,0,1)	^\s*puVar4\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar11,uVar9\);$	+1
+use	FUN_00181b80	puVar4	nodeRec	INFERRED	node record of the instruction in the forward pass (initialised to 1,1,0,0,0,1)	^\s*puVar4\ =\ \(undefined4\ \*\)\*puVar4;$	+7
+use	FUN_00181b80	puVar4	nodeRec	INFERRED	node record of the instruction in the forward pass (initialised to 1,1,0,0,0,1)	^\s*iVar5\ =\ puVar4\[1\];$	+2
+use	FUN_00181b80	puVar4	nodeRec	INFERRED	node record of the instruction in the forward pass (initialised to 1,1,0,0,0,1)	^\s*puVar4\[1\]\ =\ iVar5;$	+1
+use	FUN_00181b80	uVar8	schedCost	INFERRED	scheduling model result (vtable +0x5c)	^\s*uVar8\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(param_1\ \+\ 8\)\ \+\ 0x5c\)\)\(\*\(int\ \*\*\)\(param_1\ \+\ 8\)\);$	+2
+use	FUN_00181b80	uVar9	nodeSlot	INFERRED	instruction slot (+0x150) used as index into the node vector	^\s*uVar9\ =\ \*\(uint\ \*\)\(iVar1\ \+\ 0x150\);$	+2
+use	FUN_00181b80	uVar9	nodeSlot	INFERRED	instruction slot (+0x150) used as index into the node vector	^\s*if\ \(uVar3\ <=\ uVar9\)\ \{$	+3
+use	FUN_00181b80	uVar9	nodeSlot	INFERRED	instruction slot (+0x150) used as index into the node vector	^\s*puVar4\ =\ \(undefined4\ \*\)\(uVar9\ \*\ 4\ \+\ puVar11\[2\]\);$	+1
+use	FUN_00181b80	uVar9	nodeSlot	INFERRED	instruction slot (+0x150) used as index into the node vector	^\s*puVar4\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar11,uVar9\);$	+1
+use	FUN_00181b80	uVar9	nodeSlot	INFERRED	instruction slot (+0x150) used as index into the node vector	^\s*uVar9\ =\ \*\(uint\ \*\)\(iVar5\ \+\ 0x150\);$	+2
+use	FUN_00181b80	uVar9	nodeSlot	INFERRED	instruction slot (+0x150) used as index into the node vector	^\s*if\ \(uVar3\ <=\ uVar9\)\ \{$@2	+3
+use	FUN_00181b80	uVar9	nodeSlot	INFERRED	instruction slot (+0x150) used as index into the node vector	^\s*piVar6\ =\ \(int\ \*\)\(uVar9\ \*\ 4\ \+\ puVar11\[2\]\);$	+1
+use	FUN_00181b80	uVar9	nodeSlot	INFERRED	instruction slot (+0x150) used as index into the node vector	^\s*piVar6\ =\ \(int\ \*\)FUN_0019423c\(puVar11,uVar9\);$	+1
+use	FUN_00181b80	uVar9	nodeSlot	INFERRED	instruction slot (+0x150) used as index into the node vector	^\s*uVar9\ =\ \*\(uint\ \*\)\(iVar1\ \+\ 0x150\);$@2	+2
+use	FUN_00181b80	uVar9	nodeSlot	INFERRED	instruction slot (+0x150) used as index into the node vector	^\s*if\ \(uVar3\ <=\ uVar9\)\ \{$@3	+3
+use	FUN_00181b80	uVar9	nodeSlot	INFERRED	instruction slot (+0x150) used as index into the node vector	^\s*puVar4\ =\ \(undefined4\ \*\)\(uVar9\ \*\ 4\ \+\ puVar11\[2\]\);$@2	+1
+use	FUN_00181b80	uVar9	nodeSlot	INFERRED	instruction slot (+0x150) used as index into the node vector	^\s*puVar4\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar11,uVar9\);$@2	+1
+use	FUN_00181b80	uVar9	nodeSlot	INFERRED	instruction slot (+0x150) used as index into the node vector	^\s*uVar9\ =\ \*\(uint\ \*\)\(iVar5\ \+\ 0x150\);$@2	+2
+use	FUN_00181b80	uVar9	nodeSlot	INFERRED	instruction slot (+0x150) used as index into the node vector	^\s*if\ \(uVar3\ <=\ uVar9\)\ \{$@4	+3
+use	FUN_00181b80	uVar9	nodeSlot	INFERRED	instruction slot (+0x150) used as index into the node vector	^\s*puVar4\ =\ \(undefined4\ \*\)\(uVar9\ \*\ 4\ \+\ puVar11\[2\]\);$@3	+1
+use	FUN_00181b80	uVar9	nodeSlot	INFERRED	instruction slot (+0x150) used as index into the node vector	^\s*puVar4\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar11,uVar9\);$@3	+1
+local	FUN_0018d4b4	param_2	highLanesKind	INFERRED	opcode of the producer writing the upper lanes of a source (-1 if none yet)
+local	FUN_0018d4b4	param_3	lowLaneKind	INFERRED	opcode of the producer writing the low lane of a source (-1 if none yet)
+local	FUN_0018d4b4	param_4	packState	INFERRED	PackState that receives the source registers (FUN_0018d388 / FUN_0018cdd8 / FUN_0018c7f4 / FUN_0018c980 place them)
+local	FUN_0018d4b4	in_r8	staleArg6	INFERRED	stale argument register r8 forwarded to the indirect call
+local	FUN_0018d4b4	local_40	readMaskScratch	INFERRED	out-parameter of SelectWord__readMask (5-word area)
+local	FUN_0018d4b4	local_44	readMaskOut	INFERRED	out-parameter of SelectWord__readMask (operand select)
+local	FUN_0018d4b4	local_48	readMaskOut2	INFERRED	out-parameter of SelectWord__readMask (select of the source's operand 1)
+local	FUN_0018d4b4	local_64	uniformValue	INFERRED	float written by IRInst__getUniformSourceConstant
+local	FUN_0018d4b4	local_68	uniformKind	INFERRED	kind word written by IRInst__getUniformSourceConstant (2 = uniform constant)
+use	FUN_0018d4b4	bVar1	isMovOfNonConstant	INFERRED	true when the source is a move of something that is not a representable uniform constant	^\s*bVar1\ =\ false;$	+1
+use	FUN_0018d4b4	bVar1	isMovOfNonConstant	INFERRED	true when the source is a move of something that is not a representable uniform constant	^\s*if\ \(\(iVar6\ ==\ 0\)\ \&\&\ \(\(bVar1\ \|\|\ \(a0\[0x26\]\ !=\ 0x33\)\)\)\)\ \{$	+1
+use	FUN_0018d4b4	bVar1	isMovOfNonConstant	INFERRED	true when the source is a move of something that is not a representable uniform constant	^\s*bVar1\ =\ false;$@2	+1
+use	FUN_0018d4b4	bVar1	isMovOfNonConstant	INFERRED	true when the source is a move of something that is not a representable uniform constant	^\s*bVar1\ =\ true;$	+1
+use	FUN_0018d4b4	iVar2	opcodeOrOperandCount	INFERRED	opcode of inst, later reused for virtual-call results and the operand count in the loop header	^\s*iVar2\ =\ \*\(int\ \*\)\(param_1\[0x22\]\ \+\ 8\);$	+3
+use	FUN_0018d4b4	iVar2	opcodeOrOperandCount	INFERRED	opcode of inst, later reused for virtual-call results and the operand count in the loop header	^\s*for\ \(;\ iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0x14\)\)\(param_1\),\ iVar7\ <=\ iVar2;\ iVar7\ =\ iVar7\ \+\ 1\)\ \{$	+1
+use	FUN_0018d4b4	iVar2	opcodeOrOperandCount	INFERRED	opcode of inst, later reused for virtual-call results and the operand count in the loop header	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*piVar5\ \+\ 0x60\)\)\(piVar5\);$	+2
+use	FUN_0018d4b4	iVar2	opcodeOrOperandCount	INFERRED	opcode of inst, later reused for virtual-call results and the operand count in the loop header	^\s*if\ \(iVar2\ ==\ 0\)\ \{$@3	+3
+use	FUN_0018d4b4	iVar2	opcodeOrOperandCount	INFERRED	opcode of inst, later reused for virtual-call results and the operand count in the loop header	^\s*iVar2\ =\ FUN_001054ec\(uVar4,1\);$	+2
+use	FUN_0018d4b4	iVar2	opcodeOrOperandCount	INFERRED	opcode of inst, later reused for virtual-call results and the operand count in the loop header	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)FUN_0018d388\)\(param_4,uVar4,0\);$@2	+1
+use	FUN_0018d4b4	iVar2	opcodeOrOperandCount	INFERRED	opcode of inst, later reused for virtual-call results and the operand count in the loop header	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)FUN_0018cdd8\)\(param_4,uVar4,piVar3,0\);$	+1
+use	FUN_0018d4b4	iVar2	opcodeOrOperandCount	INFERRED	opcode of inst, later reused for virtual-call results and the operand count in the loop header	^\s*if\ \(iVar2\ ==\ 0\)\ \{$@4	+1
+use	FUN_0018d4b4	iVar2	opcodeOrOperandCount	INFERRED	opcode of inst, later reused for virtual-call results and the operand count in the loop header	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)FUN_0018d388\)\(param_4,uVar4,1\);$@2	+1
+use	FUN_0018d4b4	iVar2	opcodeOrOperandCount	INFERRED	opcode of inst, later reused for virtual-call results and the operand count in the loop header	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)FUN_0018cdd8\)\(param_4,uVar4,piVar3,1\);$	+1
+use	FUN_0018d4b4	iVar2	opcodeOrOperandCount	INFERRED	opcode of inst, later reused for virtual-call results and the operand count in the loop header	^\s*if\ \(iVar2\ ==\ 0\)\ \{$@5	+1
+use	FUN_0018d4b4	iVar2	vslot5cResult	INFERRED	result of the virtual call at vtable +0x5c on the source	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*piVar3\ \+\ 0x5c\)\)\(piVar3\);$	+2
+use	FUN_0018d4b4	iVar2	placeResult	INFERRED	result of the PackState placement (FUN_0018d388)	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)FUN_0018d388\)\(param_4,uVar4,0\);$	+2
+use	FUN_0018d4b4	iVar2	placeResult	INFERRED	result of the PackState placement (FUN_0018d388)	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)FUN_0018d388\)\(param_4,uVar4,1\);$	+2
+use	FUN_0018d4b4	iVar2	operandCount	INFERRED	operand count of the source (vtable +0x14)	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*piVar5\ \+\ 0x14\)\)\(piVar5\);$	+2
+use	FUN_0018d4b4	iVar2	operandCount	INFERRED	operand count of the source (vtable +0x14)	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*piVar5\ \+\ 0x14\)\)\(piVar5\);$@2	+2
+use	FUN_0018d4b4	iVar6	vslot5cResult2	INFERRED	result of the virtual call at vtable +0x5c	^\s*iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*piVar5\ \+\ 0x5c\)\)\(piVar5\);$	+2
+use	FUN_0018d4b4	iVar6	vslot5cResult2	INFERRED	result of the virtual call at vtable +0x5c	^\s*iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x5c\)\)\(a0\);$	+2
+use	FUN_0018d4b4	iVar6	producerOpcode	INFERRED	opcode of the producing instruction (+0x88->+8)	^\s*iVar6\ =\ \*\(int\ \*\)\(piVar5\[0x22\]\ \+\ 8\);$	+1
+use	FUN_0018d4b4	iVar6	producerOpcode	INFERRED	opcode of the producing instruction (+0x88->+8)	^\s*if\ \(\(\-1\ <\ \*param_2\)\ \&\&\ \(iVar6\ !=\ \*param_2\)\)\ \{$	+1
+use	FUN_0018d4b4	iVar6	producerOpcode	INFERRED	opcode of the producing instruction (+0x88->+8)	^\s*\*param_2\ =\ iVar6;$	+1
+use	FUN_0018d4b4	iVar6	producerOpcode	INFERRED	opcode of the producing instruction (+0x88->+8)	^\s*if\ \(\(\-1\ <\ \*param_3\)\ \&\&\ \(iVar6\ !=\ \*param_3\)\)\ \{$	+1
+use	FUN_0018d4b4	iVar6	producerOpcode	INFERRED	opcode of the producing instruction (+0x88->+8)	^\s*\*param_3\ =\ iVar6;$	+1
+use	FUN_0018d4b4	iVar7	srcIsMov	INFERRED	result of the virtual call at vtable +0x60 on the source	^\s*iVar7\ =\ \(\*\*\(code\ \*\*\)\(\*piVar5\ \+\ 0x60\)\)\(piVar5\);$	+2
+use	FUN_0018d4b4	uVar8	laneMaskBits	INFERRED	read mask of the operand: upper-lane bits 0xffffff00, low lane 0xff	^\s*uVar8\ =\ local_44;$	+1
+use	FUN_0018d4b4	uVar8	laneMaskBits	INFERRED	read mask of the operand: upper-lane bits 0xffffff00, low lane 0xff	^\s*uVar8\ =\ local_48;$	+1
+use	FUN_0018d4b4	uVar8	laneMaskBits	INFERRED	read mask of the operand: upper-lane bits 0xffffff00, low lane 0xff	^\s*if\ \(\(uVar8\ \&\ 0xffffff00\)\ !=\ 0\)\ \{$	+1
+use	FUN_0018d4b4	uVar8	laneMaskBits	INFERRED	read mask of the operand: upper-lane bits 0xffffff00, low lane 0xff	^\s*if\ \(\(uVar8\ \&\ 0xff\)\ !=\ 0\)\ \{$	+1

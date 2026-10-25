@@ -15,13 +15,18 @@ for pf in sorted(glob.glob(os.path.join(d, 'part_*.c'))):
         if m and m.group(1) == fn: first = i + 1
     if first: break
 P = re.compile(r'\b([A-Za-z]{0,4}Var\d+|p+_?[A-Za-z]*Var\d+|local_[0-9a-f]+|param_\d+|in_[a-z]+\d*|extraout_\w+|\w*Stack_[0-9a-f]+|fparam_\w+|in_stack_\w+)\b')
+alias = {}
+for w in want:
+    if '=' in w: v, n = w.split('=', 1); alias[v] = n
+want = [w.split('=', 1)[0] for w in want]
 names = want or sorted({m for l in cur[brace + 1:] if not re.match(r'\s*(/\*|\*|//)', l) for m in P.findall(l)})
 for var in names:
     try: ws, er = F.webs(nodes, entry, var)
     except BaseException as e: print('%s: refused (%s)' % (var, str(e)[:70])); continue
-    rx = re.compile(r'(?<![\w])%s(?![\w])' % re.escape(var))
+    cn = alias.get(var, var)
+    rx = re.compile(r'(?<![\w])%s(?![\w])' % re.escape(cn))
     for k, ls in enumerate(ws):
         if not any(rx.search(cur[x]) for x in ls): continue
-        defs = [x for x in ls if re.search(r'(?<![\w.>*])%s\s*=(?!=)' % re.escape(var), cur[x]) and rx.search(cur[x])]
+        defs = [x for x in ls if re.search(r'(?<![\w.>*])%s\s*=(?!=)' % re.escape(cn), cur[x]) and rx.search(cur[x])]
         sh = defs[:2] if defs else sorted(ls)[:1]
         print('%-9s w%-2d L%d-%d n=%d | %s' % (var, k, first + min(ls), first + max(ls), len(ls), ' || '.join(cur[x].strip()[:70] for x in sh)))

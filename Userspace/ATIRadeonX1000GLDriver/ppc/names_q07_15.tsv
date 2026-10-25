@@ -1,0 +1,11 @@
+use	FUN_0013d3b8	iVar6	cloneResult3	INFERRED	third per-component clone of the instruction	^\s*iVar6\ =\ FUN_0010445c\(piVar3,\*\(undefined4\ \*\)\(param_1\ \+\ 8\),0\);$	+4
+use	FUN_0013d3b8	iVar6	cloneResult3	INFERRED	third per-component clone of the instruction	^\s*\*\(int\ \*\)\(iVar6\ \+\ 300\)\ =\ iVar5;$	+2
+use	FUN_0013d3b8	iVar6	cloneDestRecord	INFERRED	operand 0 record of the clone (vreg id stored at +8)	^\s*iVar6\ =\ FUN_001054ec\(iVar5,0\);$	+2
+use	FUN_0013d3b8	iVar6	operandLimit	INFERRED	number of operands the instruction can read (virtual slot 0x14)	^\s*for\ \(iVar5\ =\ 1;\ iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*piVar10\ \+\ 0x14\)\)\(piVar10\),\ iVar5\ <=\ iVar6;$	+1
+use	FUN_0013d3b8	iVar6	vcall5cResult	INFERRED	result of the source instruction virtual slot 0x5c	^\s*iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*piVar3\ \+\ 0x5c\)\)\(piVar3\);$	+2
+use	FUN_0013d3b8	iVar6	operandClone	INFERRED	clone of the operand source instruction that replaces the operand	^\s*iVar6\ =\ FUN_0010445c\(piVar3,\*\(undefined4\ \*\)\(param_1\ \+\ 8\),0\);$@2	+3
+use	FUN_0013d3b8	iVar6	operandClone	INFERRED	clone of the operand source instruction that replaces the operand	^\s*FUN_000e7738\(piVar3\[0x56\],piVar3,iVar6\);$	+2
+use	FUN_0013d3b8	iVar6	loopIndex	INFERRED	component index 0..3	^\s*iVar6\ =\ 0;$	+1
+use	FUN_0013d3b8	iVar6	loopIndex	INFERRED	component index 0..3	^\s*if\ \(\*\(char\ \*\)\(iVar6\ \+\ iVar7\ \+\ 0x10\)\ !=\ '\\x01'\)\ \{$	+1
+use	FUN_0013d3b8	iVar6	loopIndex	INFERRED	component index 0..3	^\s*bVar1\ =\ iVar6\ !=\ 3;$	+1
+use	FUN_0013d3b8	iVar6	loopIndex	INFERRED	component index 0..3	^\s*iVar6\ =\ iVar6\ \+\ 1;$	+1

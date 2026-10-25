@@ -1,0 +1,20 @@
+local	FUN_0010fb54	param_2	nextSlotRef	INFERRED	in/out: next free output slot; each group first reserves four slots
+local	FUN_0010fb54	param_3	program	INFERRED	the Program; +0x418 lane record vector
+use	FUN_0010fb54	iVar3	bindingKind	INFERRED	FUN_0010e40c: kind of the export's binding (4 and above need an extra slot)	^\s*iVar3\ =\ FUN_0010e40c\(\*\(undefined4\ \*\)\(iVar9\ \+\ 0x13c\),\*\(undefined4\ \*\)\(iVar9\ \+\ 0x140\)\);$	+3
+use	FUN_0010fb54	iVar3	exportRecordInst	INFERRED	instruction of the export record whose register is rewritten	^\s*iVar3\ =\ \*piVar8;$	+3
+use	FUN_0010fb54	iVar4	slotEnd	INFERRED	highest slot used + 1, passed to FUN_0010fa24	^\s*iVar4\ =\ 1;$	+1
+use	FUN_0010fb54	iVar4	slotEnd	INFERRED	highest slot used + 1, passed to FUN_0010fa24	^\s*iVar4\ =\ 0;$	+1
+use	FUN_0010fb54	iVar4	slotEnd	INFERRED	highest slot used + 1, passed to FUN_0010fa24	^\s*if\ \(iVar4\ <\ iVar5\)\ \{$	+2
+use	FUN_0010fb54	iVar4	slotEnd	INFERRED	highest slot used + 1, passed to FUN_0010fa24	^\s*iVar4\ =\ iVar4\ \+\ 1;$	+1
+use	FUN_0010fb54	iVar4	slotEnd	INFERRED	highest slot used + 1, passed to FUN_0010fa24	^\s*return\ \(\(int\ \(\*\)\(\)\)FUN_0010fa24\)\(2,auStack_f8,iVar6,iVar4,\*\(undefined4\ \*\)\(param_3\ \+\ 0x418\)\);$	+1
+use	FUN_0010fb54	iVar5	assignedSlot	INFERRED	slot given to the export	^\s*iVar5\ =\ iVar6\ \+\ iVar3;$	+1
+use	FUN_0010fb54	iVar5	assignedSlot	INFERRED	slot given to the export	^\s*iVar5\ =\ \*param_2;$	+2
+use	FUN_0010fb54	iVar5	assignedSlot	INFERRED	slot given to the export	^\s*auStack_f8\[iVar5\]\ =\ \*\(undefined4\ \*\)\(iVar9\ \+\ 0x94\);$	+1
+use	FUN_0010fb54	iVar5	assignedSlot	INFERRED	slot given to the export	^\s*\*\(int\ \*\)\(iVar3\ \+\ 0x94\)\ =\ iVar5;$	+3
+use	FUN_0010fb54	iVar6	firstSlot	INFERRED	first output slot of this group (*nextSlotRef on entry)	^\s*iVar6\ =\ \*param_2;$	+2
+use	FUN_0010fb54	iVar6	firstSlot	INFERRED	first output slot of this group (*nextSlotRef on entry)	^\s*iVar5\ =\ iVar6\ \+\ iVar3;$	+1
+use	FUN_0010fb54	iVar6	firstSlot	INFERRED	first output slot of this group (*nextSlotRef on entry)	^\s*return\ \(\(int\ \(\*\)\(\)\)FUN_0010fa24\)\(2,auStack_f8,iVar6,iVar4,\*\(undefined4\ \*\)\(param_3\ \+\ 0x418\)\);$	+1
+use	FUN_0010fb54	iVar9	exportInst	INFERRED	instruction of the export record	^\s*iVar9\ =\ \*piVar8;$	+2
+use	FUN_0010fb54	iVar9	exportInst	INFERRED	instruction of the export record	^\s*iVar9\ =\ \*piVar8;$@2	+1
+use	FUN_0010fb54	iVar9	exportInst	INFERRED	instruction of the export record	^\s*auStack_f8\[iVar5\]\ =\ \*\(undefined4\ \*\)\(iVar9\ \+\ 0x94\);$	+1
+local	FUN_0010fb54	auStack_f8	slotOwnerRegister	INFERRED	for each slot, the register the export had before renumbering

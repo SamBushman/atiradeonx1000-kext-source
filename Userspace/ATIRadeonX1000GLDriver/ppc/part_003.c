@@ -209,7 +209,7 @@ int gld_submitRing(ctx, terminatorWord)
   writeCursor[3] = 0x20000;
   writeCursor = writeCursor + 4;
   if (hasPreamble != '\0') {
-    writeCursor = (undefined4 *)FUN_0002b7f0(ctx,writeCursor);
+    writeCursor = (undefined4 *)gld_emitQueryBeginPacket(ctx,writeCursor);
   }
   headerWord = *(uint **)(ctx + GLD_lastHeader);
   *(int *)(*(int *)(ctx + GLD_ringMap) + 0x10) =
@@ -263,7 +263,7 @@ int glFlush_impl(ctx, staleArgR4, staleArgR5, staleArgR6, staleArgR7, staleArgR8
   
   needsResolve = ((int (*)())FUN_0001a010)(ctx,0,staleArgR5,staleArgR6,staleArgR7,staleArgR8,staleArgR9);
   if (needsResolve != 0) {
-    ((int (*)())FUN_000230d0)(ctx,0,0,1,0,0,*(undefined4 *)(ctx + 0x15c),*(undefined4 *)(ctx + 0x160)
+    ((int (*)())gld_emitSurfaceCopyPacket)(ctx,0,0,1,0,0,*(undefined4 *)(ctx + 0x15c),*(undefined4 *)(ctx + 0x160)
                 );
   }
   ((int (*)())gld_submitRing)(ctx,0x2000000);
@@ -446,7 +446,7 @@ int glFinish_impl(ctx, staleArgR4, staleArgR5, staleArgR6, staleArgR7, staleArgR
   
   needsResolve = ((int (*)())FUN_0001a010)(ctx,1,staleArgR5,staleArgR6,staleArgR7,staleArgR8,staleArgR9);
   if (needsResolve != 0) {
-    ((int (*)())FUN_000230d0)(ctx,0,1,0,0,0,*(undefined4 *)(ctx + 0x15c),*(undefined4 *)(ctx + 0x160)
+    ((int (*)())gld_emitSurfaceCopyPacket)(ctx,0,1,0,0,0,*(undefined4 *)(ctx + 0x15c),*(undefined4 *)(ctx + 0x160)
                 );
   }
   ((int (*)())gld_submitRing)(ctx,0x3000000);
@@ -536,7 +536,7 @@ int FUN_0001a9d0(ctx, framebufferObj, dirtyBitsArg, scratchR6, dirtyWord3, stale
   
   needsResolve = ((int (*)())FUN_0001a010)(ctx,1,dirtyBitsArg,scratchR6,dirtyWord3,staleArgR8,staleArgR9);
   if (needsResolve != 0) {
-    ((int (*)())FUN_000230d0)(ctx,0,1,0,0,0,*(undefined4 *)(ctx + 0x15c),*(undefined4 *)(ctx + 0x160)
+    ((int (*)())gld_emitSurfaceCopyPacket)(ctx,0,1,0,0,0,*(undefined4 *)(ctx + 0x15c),*(undefined4 *)(ctx + 0x160)
                 );
   }
   ((int (*)())gld_submitRing)(ctx,0x3000000);
@@ -1010,155 +1010,166 @@ int returnOne_1b500()
   return 1;
 }
 
-/* FUN_0001b510 @ 0x1b510 (1304 bytes) */
-int FUN_0001b510(param_1, param_2, param_3, param_4, param_5, param_6)
-  int param_1;
-  int *param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
+/* gld_validateFramebuffer @ 0x1b510 (1304 bytes) */
+int gld_validateFramebuffer(ctx, framebufferObj, staleArgR5, staleArgR6, staleArgR7, staleArgR8)
+  int ctx;
+  int *framebufferObj;
+  undefined4 staleArgR5;
+  undefined4 staleArgR6;
+  undefined4 staleArgR7;
+  undefined4 staleArgR8;
 {
+  uint texelsPerRow;
+  uint colorModeBits;
+  uint formatBits;
+  int slotIndex;
+  int attachmentTexture;
+  int surfaceOffset;
+  int descOffset;
+  int scanLeft;
+  int attachLeft;
+  int depthTexture;
+  int colorTexture;
+  int clearLeft;
+  int *attachments;
   int gldTextureMakeResidentResult;
   int loopIndex;
-  bool bVar1;
-  byte bVar2;
-  char cVar3;
-  undefined *puVar4;
-  uint uVar5;
-  int iVar6;
-  int *piVar7;
-  uint uVar8;
-  int iVar9;
-  int iVar10;
-  int iVar11;
-  int *piVar12;
-  int *piVar13;
-  int *piVar14;
-  uint uVar15;
-  int iVar16;
-  int iVar17;
+  bool moreSlots;
+  byte formatIndex;
+  char depthFormat;
+  undefined *colorFormatTable;
+  int levelIndex;
+  int *attachCursor;
+  uint modeBitsTmp;
+  int levelDesc;
+  int attachment;
+  int descBlock;
+  int *fbWordCursor;
+  int *attachmentTexture2;
+  int *clearCursor;
+  uint modeBitsHigh;
+  int stencilTexture;
   
-  *(undefined4 *)(param_2[1] + 0x18) = 0;
-  iVar17 = 6;
-  piVar14 = param_2;
+  *(undefined4 *)(framebufferObj[1] + 0x18) = 0;
+  clearLeft = 6;
+  clearCursor = framebufferObj;
   do {
-    piVar14[0x13] = 0;
-    piVar14 = piVar14 + 1;
-    iVar17 = iVar17 + -1;
-  } while (iVar17 != 0);
-  *(undefined1 *)((int)param_2 + 0x11) = 0;
-  *(undefined1 *)((int)param_2 + 0x12) = 0;
-  param_2[0x12] = 0;
-  param_2[5] = 0;
-  *(undefined1 *)(param_2 + 4) = 1;
-  param_2[0xc] = 0;
-  param_2[0xd] = 0;
-  param_2[0xe] = 0;
-  param_2[0xf] = 0;
-  param_2[0x10] = 0;
-  param_2[0x11] = 0;
-  piVar14 = (int *)param_2[1];
-  if ((piVar14[4] != 0) && (piVar14[5] != 0)) goto LAB_0001b730;
-  if ((*(int *)(*(int *)(param_1 + 0x14) + 0xc) < (int)(uint)*(ushort *)(*param_2 + 0x9a)) ||
-     (*(int *)(*(int *)(param_1 + 0x14) + 0x10) < (int)(uint)*(ushort *)(*param_2 + 0x9c)))
+    clearCursor[0x13] = 0;
+    clearCursor = clearCursor + 1;
+    clearLeft = clearLeft + -1;
+  } while (clearLeft != 0);
+  *(undefined1 *)((int)framebufferObj + 0x11) = 0;
+  *(undefined1 *)((int)framebufferObj + 0x12) = 0;
+  framebufferObj[0x12] = 0;
+  framebufferObj[5] = 0;
+  *(undefined1 *)(framebufferObj + 4) = 1;
+  framebufferObj[0xc] = 0;
+  framebufferObj[0xd] = 0;
+  framebufferObj[0xe] = 0;
+  framebufferObj[0xf] = 0;
+  framebufferObj[0x10] = 0;
+  framebufferObj[0x11] = 0;
+  attachments = (int *)framebufferObj[1];
+  if ((attachments[4] != 0) && (attachments[5] != 0)) goto LAB_0001b730;
+  if ((*(int *)(*(int *)(ctx + 0x14) + 0xc) < (int)(uint)*(ushort *)(*framebufferObj + 0x9a)) ||
+     (*(int *)(*(int *)(ctx + 0x14) + 0x10) < (int)(uint)*(ushort *)(*framebufferObj + 0x9c)))
   goto LAB_0001b730;
-  iVar17 = 0;
+  colorTexture = 0;
   loopIndex = 0;
   do {
-    iVar10 = piVar14[loopIndex];
-    if (iVar10 != 0) {
+    attachment = attachments[loopIndex];
+    if (attachment != 0) {
       if (loopIndex < 4) {
-        iVar17 = iVar10;
+        colorTexture = attachment;
       }
-      gldTextureMakeResidentResult = gldTextureMakeResident(param_1,iVar10,param_3,param_4,param_5,param_6);
+      gldTextureMakeResidentResult = gldTextureMakeResident(ctx,attachment,staleArgR5,staleArgR6,staleArgR7,staleArgR8);
       if (gldTextureMakeResidentResult == 0) {
-        piVar14 = (int *)param_2[1];
+        attachments = (int *)framebufferObj[1];
         goto LAB_0001b730;
       }
-      piVar14 = (int *)param_2[1];
+      attachments = (int *)framebufferObj[1];
     }
-    puVar4 = PTR_DAT_001e88c8;
-    bVar1 = loopIndex != 5;
+    colorFormatTable = PTR_DAT_001e88c8;
+    moreSlots = loopIndex != 5;
     loopIndex = loopIndex + 1;
-  } while (bVar1);
-  if (iVar17 == 0) {
-    param_2[9] = 0;
-    *(undefined1 *)((int)param_2 + 0x13) = 0;
-    param_2[6] = 0;
-    param_2[7] = 0;
-    param_2[8] = 0;
+  } while (moreSlots);
+  if (colorTexture == 0) {
+    framebufferObj[9] = 0;
+    *(undefined1 *)((int)framebufferObj + 0x13) = 0;
+    framebufferObj[6] = 0;
+    framebufferObj[7] = 0;
+    framebufferObj[8] = 0;
   }
   else {
-    bVar2 = *(byte *)(iVar17 + 0x38);
-    param_2[6] = *(ushort *)(PTR_DAT_001e88c8 + (uint)bVar2 * 0x24 + 0x10) & 0x3f;
-    param_2[7] = *(uint *)(puVar4 + (uint)bVar2 * 0x24 + 0x10) >> 10 & 0x3f;
-    param_2[8] = *(uint *)(puVar4 + (uint)bVar2 * 0x24 + 0x10) >> 4 & 0x3f;
-    uVar5 = *(uint *)(puVar4 + (uint)bVar2 * 0x24 + 0x10);
-    if ((((uVar5 & 0x3f0000) == 0) || ((uVar5 & 0xfc00) == 0)) || ((uVar5 & 0x3f0) == 0)) {
-      uVar5 = *(uint *)(puVar4 + (uint)bVar2 * 0x24 + 0x14);
+    formatIndex = *(byte *)(colorTexture + 0x38);
+    framebufferObj[6] = *(ushort *)(PTR_DAT_001e88c8 + (uint)formatIndex * 0x24 + 0x10) & 0x3f;
+    framebufferObj[7] = *(uint *)(colorFormatTable + (uint)formatIndex * 0x24 + 0x10) >> 10 & 0x3f;
+    framebufferObj[8] = *(uint *)(colorFormatTable + (uint)formatIndex * 0x24 + 0x10) >> 4 & 0x3f;
+    formatBits = *(uint *)(colorFormatTable + (uint)formatIndex * 0x24 + 0x10);
+    if ((((formatBits & 0x3f0000) == 0) || ((formatBits & 0xfc00) == 0)) || ((formatBits & 0x3f0) == 0)) {
+      formatBits = *(uint *)(colorFormatTable + (uint)formatIndex * 0x24 + 0x14);
 LAB_0001b6ac:
-      param_2[9] = uVar5 >> 0x1a;
+      framebufferObj[9] = formatBits >> 0x1a;
     }
     else {
-      uVar5 = *(uint *)(puVar4 + (uint)bVar2 * 0x24 + 0x14);
-      if ((uVar5 >> 0x1a == 0) || (*(short *)(*(int *)(iVar17 + 0x30) + 2) != 0x1907))
+      formatBits = *(uint *)(colorFormatTable + (uint)formatIndex * 0x24 + 0x14);
+      if ((formatBits >> 0x1a == 0) || (*(short *)(*(int *)(colorTexture + 0x30) + 2) != 0x1907))
       goto LAB_0001b6ac;
-      param_2[9] = 0;
+      framebufferObj[9] = 0;
     }
-    *(byte *)((int)param_2 + 0x13) =
-         (byte)(*(uint *)(puVar4 + (uint)bVar2 * 0x24 + 0x20) >> 0x17) & 1;
-    if ((*(uint *)(puVar4 + (uint)bVar2 * 0x24 + 0x18) & 0x10000) == 0) goto LAB_0001b730;
+    *(byte *)((int)framebufferObj + 0x13) =
+         (byte)(*(uint *)(colorFormatTable + (uint)formatIndex * 0x24 + 0x20) >> 0x17) & 1;
+    if ((*(uint *)(colorFormatTable + (uint)formatIndex * 0x24 + 0x18) & 0x10000) == 0) goto LAB_0001b730;
   }
-  iVar17 = piVar14[4];
-  if (iVar17 == 0) {
-    param_2[10] = 0;
+  depthTexture = attachments[4];
+  if (depthTexture == 0) {
+    framebufferObj[10] = 0;
   }
   else {
-    param_2[10] = *(uint *)(PTR_DAT_001e88c8 + (uint)*(byte *)(iVar17 + 0x38) * 0x24 + 0x14) >> 8 &
+    framebufferObj[10] = *(uint *)(PTR_DAT_001e88c8 + (uint)*(byte *)(depthTexture + 0x38) * 0x24 + 0x14) >> 8 &
                   0x3f;
-    if ((*(char *)(iVar17 + 0x38) != '\x10') && (*(char *)(iVar17 + 0x38) != ')'))
+    if ((*(char *)(depthTexture + 0x38) != '\x10') && (*(char *)(depthTexture + 0x38) != ')'))
     goto LAB_0001b730;
   }
-  iVar16 = piVar14[5];
-  if (iVar16 == 0) {
-    param_2[0xb] = 0;
+  stencilTexture = attachments[5];
+  if (stencilTexture == 0) {
+    framebufferObj[0xb] = 0;
   }
   else {
-    param_2[0xb] = *(uint *)(PTR_DAT_001e88c8 + (uint)*(byte *)(iVar16 + 0x38) * 0x24 + 0x14) >> 4 &
+    framebufferObj[0xb] = *(uint *)(PTR_DAT_001e88c8 + (uint)*(byte *)(stencilTexture + 0x38) * 0x24 + 0x14) >> 4 &
                    0xf;
-    if ((*(char *)(iVar16 + 0x38) != ')') || ((iVar17 != 0 && (iVar17 != iVar16)))) {
+    if ((*(char *)(stencilTexture + 0x38) != ')') || ((depthTexture != 0 && (depthTexture != stencilTexture)))) {
 LAB_0001b730:
-      piVar14[7] = 1;
+      attachments[7] = 1;
       return 0;
     }
   }
-  iVar17 = 6;
-  piVar7 = piVar14;
-  piVar12 = param_2;
+  attachLeft = 6;
+  attachCursor = attachments;
+  fbWordCursor = framebufferObj;
   do {
-    iVar16 = *piVar7;
-    piVar7 = piVar7 + 1;
-    if (iVar16 != 0) {
-      piVar12[0x13] = *(int *)(iVar16 + 0x34);
+    attachmentTexture = *attachCursor;
+    attachCursor = attachCursor + 1;
+    if (attachmentTexture != 0) {
+      fbWordCursor[0x13] = *(int *)(attachmentTexture + 0x34);
     }
-    puVar4 = PTR_DAT_001e88c8;
-    piVar12 = piVar12 + 1;
-    iVar17 = iVar17 + -1;
-  } while (iVar17 != 0);
-  iVar17 = 4;
-  piVar7 = piVar14;
+    colorFormatTable = PTR_DAT_001e88c8;
+    fbWordCursor = fbWordCursor + 1;
+    attachLeft = attachLeft + -1;
+  } while (attachLeft != 0);
+  scanLeft = 4;
+  attachCursor = attachments;
   do {
-    if (*piVar7 != 0) {
-      switch(*(undefined1 *)(*piVar7 + 0x38)) {
+    if (*attachCursor != 0) {
+      switch(*(undefined1 *)(*attachCursor + 0x38)) {
       case 5:
-        uVar15 = 0x4000;
-        uVar5 = 5;
+        modeBitsHigh = 0x4000;
+        colorModeBits = 5;
         break;
       case 6:
       case 7:
-        uVar15 = 0x4000;
-        uVar5 = 3;
+        modeBitsHigh = 0x4000;
+        colorModeBits = 3;
         break;
       case 8:
       case 9:
@@ -1166,107 +1177,107 @@ LAB_0001b730:
       case 0xb:
       case 0x23:
       case 0x24:
-        uVar15 = 0x4000;
-        uVar5 = 4;
+        modeBitsHigh = 0x4000;
+        colorModeBits = 4;
         break;
       default:
-        uVar15 = 0x4000;
-        uVar5 = 0;
+        modeBitsHigh = 0x4000;
+        colorModeBits = 0;
         break;
       case 0x11:
       case 0x12:
-        uVar15 = 0x4000;
-        uVar5 = 0xd;
+        modeBitsHigh = 0x4000;
+        colorModeBits = 0xd;
         break;
       case 0x17:
       case 0x18:
-        uVar15 = 0x4000;
-        uVar5 = 0xb;
+        modeBitsHigh = 0x4000;
+        colorModeBits = 0xb;
         break;
       case 0x1d:
       case 0x1e:
-        uVar15 = 0x4000;
-        uVar5 = 0xc;
+        modeBitsHigh = 0x4000;
+        colorModeBits = 0xc;
       }
       goto LAB_0001b8f4;
     }
-    piVar7 = piVar7 + 1;
-    iVar17 = iVar17 + -1;
-  } while (iVar17 != 0);
-  uVar15 = 0;
-  uVar5 = 0;
+    attachCursor = attachCursor + 1;
+    scanLeft = scanLeft + -1;
+  } while (scanLeft != 0);
+  modeBitsHigh = 0;
+  colorModeBits = 0;
 LAB_0001b8f4:
-  uVar8 = uVar5;
-  if (piVar14[4] != 0) {
-    cVar3 = *(char *)(piVar14[4] + 0x38);
-    uVar15 = uVar15 | 0x100;
-    uVar8 = uVar5 | 0x40;
-    if (cVar3 == '\x10') {
-      uVar8 = uVar5 | 0x10040;
+  modeBitsTmp = colorModeBits;
+  if (attachments[4] != 0) {
+    depthFormat = *(char *)(attachments[4] + 0x38);
+    modeBitsHigh = modeBitsHigh | 0x100;
+    modeBitsTmp = colorModeBits | 0x40;
+    if (depthFormat == '\x10') {
+      modeBitsTmp = colorModeBits | 0x10040;
     }
-    else if (cVar3 == ')') {
-      uVar8 = uVar5 | 0x20040;
-    }
-  }
-  uVar5 = uVar8;
-  if (piVar14[5] != 0) {
-    uVar15 = uVar15 | 0x400;
-    uVar5 = uVar8 | 0x80;
-    if (*(char *)(piVar14[5] + 0x38) == ')') {
-      uVar5 = uVar8 | 0x30080;
+    else if (depthFormat == ')') {
+      modeBitsTmp = colorModeBits | 0x20040;
     }
   }
-  iVar16 = 0;
-  iVar17 = 0;
-  piVar7 = piVar14;
-  piVar12 = param_2;
+  colorModeBits = modeBitsTmp;
+  if (attachments[5] != 0) {
+    modeBitsHigh = modeBitsHigh | 0x400;
+    colorModeBits = modeBitsTmp | 0x80;
+    if (*(char *)(attachments[5] + 0x38) == ')') {
+      colorModeBits = modeBitsTmp | 0x30080;
+    }
+  }
+  slotIndex = 0;
+  descOffset = 0;
+  attachCursor = attachments;
+  fbWordCursor = framebufferObj;
   do {
-    piVar13 = (int *)*piVar7;
-    piVar7 = piVar7 + 1;
-    if (piVar13 == (int *)0x0) {
-      piVar12[0x25] = 0;
-      piVar12[0x2b] = -1;
-      piVar12[0x19] = 0;
-      piVar12[0x1f] = 0;
+    attachmentTexture2 = (int *)*attachCursor;
+    attachCursor = attachCursor + 1;
+    if (attachmentTexture2 == (int *)0x0) {
+      fbWordCursor[0x25] = 0;
+      fbWordCursor[0x2b] = -1;
+      fbWordCursor[0x19] = 0;
+      fbWordCursor[0x1f] = 0;
     }
     else {
-      iVar11 = *param_2;
-      iVar9 = iVar17 + iVar11;
-      iVar10 = *(int *)(iVar9 + 8);
-      if (*(char *)(piVar13[0xd] + 0x16) == '\x06') {
-        uVar8 = (uint)*(ushort *)((int)piVar13 + 0x3e) <<
-                (*(uint *)(puVar4 + (uint)*(byte *)(piVar13 + 0xe) * 0x24 + 0x14) & 7);
-        for (; iVar10 != 0; iVar10 = iVar10 + -1) {
-          uVar8 = ((int)uVar8 >> 1) + (uint)((int)uVar8 < 0 && (uVar8 & 1) != 0);
+      descBlock = *framebufferObj;
+      levelDesc = descOffset + descBlock;
+      surfaceOffset = *(int *)(levelDesc + 8);
+      if (*(char *)(attachmentTexture2[0xd] + 0x16) == '\x06') {
+        texelsPerRow = (uint)*(ushort *)((int)attachmentTexture2 + 0x3e) <<
+                (*(uint *)(colorFormatTable + (uint)*(byte *)(attachmentTexture2 + 0xe) * 0x24 + 0x14) & 7);
+        for (; surfaceOffset != 0; surfaceOffset = surfaceOffset + -1) {
+          texelsPerRow = ((int)texelsPerRow >> 1) + (uint)((int)texelsPerRow < 0 && (texelsPerRow & 1) != 0);
         }
-        iVar10 = 0;
+        surfaceOffset = 0;
       }
       else {
-        iVar6 = *(int *)(iVar9 + 4) * 0xd + iVar10;
-        uVar8 = *(uint *)(*piVar13 + 0xc);
-        for (; iVar10 != 0; iVar10 = iVar10 + -1) {
-          uVar8 = ((int)uVar8 >> 1) + (uint)((int)uVar8 < 0 && (uVar8 & 1) != 0);
+        levelIndex = *(int *)(levelDesc + 4) * 0xd + surfaceOffset;
+        texelsPerRow = *(uint *)(*attachmentTexture2 + 0xc);
+        for (; surfaceOffset != 0; surfaceOffset = surfaceOffset + -1) {
+          texelsPerRow = ((int)texelsPerRow >> 1) + (uint)((int)texelsPerRow < 0 && (texelsPerRow & 1) != 0);
         }
-        iVar10 = *(int *)(iVar9 + 0xc) * uVar8 * (uint)*(ushort *)(iVar11 + 0x9c) +
-                 *(int *)(*piVar13 + iVar6 * 0x20 + 0x48);
+        surfaceOffset = *(int *)(levelDesc + 0xc) * texelsPerRow * (uint)*(ushort *)(descBlock + 0x9c) +
+                 *(int *)(*attachmentTexture2 + levelIndex * 0x20 + 0x48);
       }
-      iVar9 = *(int *)piVar13[0xd];
-      piVar12[0x19] = iVar10;
-      piVar12[0x1f] = uVar8;
-      piVar12[0x2b] = iVar9;
-      piVar12[0x25] = (uint)*(ushort *)(iVar11 + 0x9a);
+      levelDesc = *(int *)attachmentTexture2[0xd];
+      fbWordCursor[0x19] = surfaceOffset;
+      fbWordCursor[0x1f] = texelsPerRow;
+      fbWordCursor[0x2b] = levelDesc;
+      fbWordCursor[0x25] = (uint)*(ushort *)(descBlock + 0x9a);
     }
-    bVar1 = iVar16 != 5;
-    iVar17 = iVar17 + 0x18;
-    piVar12 = piVar12 + 1;
-    iVar16 = iVar16 + 1;
-  } while (bVar1);
-  param_2[3] = uVar5;
-  param_2[2] = uVar15;
-  piVar14[7] = 0;
-  *(undefined1 *)((int)param_2 + 0xc6) = 0;
-  *(undefined1 *)((int)param_2 + 0xc5) = 1;
-  *(undefined1 *)(param_2 + 0x31) = 0;
+    moreSlots = slotIndex != 5;
+    descOffset = descOffset + 0x18;
+    fbWordCursor = fbWordCursor + 1;
+    slotIndex = slotIndex + 1;
+  } while (moreSlots);
+  framebufferObj[3] = colorModeBits;
+  framebufferObj[2] = modeBitsHigh;
+  attachments[7] = 0;
+  *(undefined1 *)((int)framebufferObj + 0xc6) = 0;
+  *(undefined1 *)((int)framebufferObj + 0xc5) = 1;
+  *(undefined1 *)(framebufferObj + 0x31) = 0;
   return 1;
 }
 
@@ -3741,11 +3752,11 @@ LAB_0001ef30:
   }
 LAB_0001ef50:
   uStack00000030 = drawFlags;
-  /* hidden-argument defect (found auditing #70/FUN_0002cc30): this is the one real caller (of
+  /* hidden-argument defect (found auditing #70/gld_prepareDrawCount): this is the one real caller (of
    * 25) that supplies a genuine 7th argument - verified via real stock disassembly
    * (`lwz r9,0xa8(r10)`, matching this stack store just above). */
   puVar19 = (undefined *)
-            ((uint (*)())FUN_0002cc30)(ctx,1,primitiveMode,count,count,puVar19,drawFlags,staleFpr1,staleFpr2,staleFpr3,staleFpr4,staleFpr5,
+            ((uint (*)())gld_prepareDrawCount)(ctx,1,primitiveMode,count,count,puVar19,drawFlags,staleFpr1,staleFpr2,staleFpr3,staleFpr4,staleFpr5,
                          staleFpr6,staleFpr7,staleFpr8,staleStackArg_ffffff68);
   bVar2 = 0 < (int)puVar19;
   hasElements = puVar19 != (undefined *)0x0;
@@ -3858,7 +3869,7 @@ code_r0x0001f1ac:
       if (*(int *)(ctx + GLD_vap_prog_stream_cntl_0_ptr) != ctx + 0x2630) {
         *(int *)(ctx + GLD_vap_prog_stream_cntl_0_ptr) = ctx + 0x2630;
         *(int *)(ctx + GLD_vap_prog_stream_cntl_ext_0_ptr) = ctx + 0x2650;
-        packetPtr = (uint *)FUN_0002c0c0(ctx,packetPtr);
+        packetPtr = (uint *)gld_emitVapStreamControl(ctx,packetPtr);
       }
       if (needStatePacket) {
         uVar17 = *(undefined4 *)(((unsigned char *)0x000027c8) + ctx);
@@ -3975,7 +3986,7 @@ code_r0x0001f1ac:
           *(undefined4 *)(ctx + 0x26d4) = 0;
         }
         else {
-          packetPtr = (uint *)FUN_0002c180(ctx,packetPtr);
+          packetPtr = (uint *)gld_emitStreamAddressRegisters(ctx,packetPtr);
         }
         ringHeaderZero = drawPacket + 7;
         drawPacket[6] = (int)packetPtr + (4 - (int)drawPacket) >> 2;
@@ -4265,217 +4276,220 @@ LAB_0001f7f0:
   return uVar17;
 }
 
-/* FUN_0001fd00 @ 0x1fd00 (1208 bytes) */
-int FUN_0001fd00(param_1)
-  int param_1;
+/* gld_buildVertexStreamLayout @ 0x1fd00 (1208 bytes) */
+int gld_buildVertexStreamLayout(stream)
+  int stream;
 {
-  bool bVar1;
-  bool bVar2;
-  undefined4 *puVar3;
-  int iVar4;
-  int iVar5;
-  int iVar6;
-  uint uVar7;
-  int iVar8;
-  int iVar9;
-  int iVar10;
-  uint uVar11;
-  uint uVar12;
-  int *piVar13;
-  uint uVar14;
-  bool bVar16;
+  bool noProgram;
+  uint controlMaskHigh;
+  int fetchBase;
+  bool lowMaskUnset;
+  bool highMaskUnset;
+  undefined4 *bufferWord;
+  int pairPtr;
+  int attrOffsetWord;
+  int arrayDesc;
+  uint pairWordIndex;
+  int engineObjects;
+  int attrFormatWord;
+  int streamByteOffset;
+  uint hwAttrId;
+  uint attrSwizzleWord;
+  int *vertexArray;
+  uint attrControlWord;
+  bool unsupportedMode;
   uint loopIndex;
-  int *piVar17;
-  int iVar18;
-  uint *puVar19;
-  int iVar20;
-  int iVar21;
-  int iVar22;
+  int *inputMap;
+  int dirtyState;
+  uint *inputDescriptor;
+  int programVertexInfo;
+  int programRecord;
+  int attrByteOffset;
   uint loopIndex2;
-  uint uVar24;
-  int iVar25;
+  uint streamCount;
+  int attrsLeft;
   
-  *(int *)(param_1 + 0x2440) = param_1 + 0x249c;
-  *(int *)(param_1 + 0x2444) = param_1 + 0x24bc;
-  *(undefined4 *)(param_1 + 0x2494) = 0;
-  iVar8 = *(int *)(param_1 + 4);
-  piVar13 = *(int **)(iVar8 + 0x1d4);
-  if (piVar13 == (int *)0x0) {
+  *(int *)(stream + 0x2440) = stream + 0x249c;
+  *(int *)(stream + 0x2444) = stream + 0x24bc;
+  *(undefined4 *)(stream + 0x2494) = 0;
+  engineObjects = *(int *)(stream + 4);
+  vertexArray = *(int **)(engineObjects + 0x1d4);
+  if (vertexArray == (int *)0x0) {
     return;
   }
-  iVar6 = *piVar13;
-  iVar18 = piVar13[1];
-  uVar24 = *(uint *)(param_1 + 0x243c);
-  bVar1 = *(uint *)(iVar6 + 0x308) == 0;
-  bVar2 = *(uint *)(iVar6 + 0x30c) == 0;
-  if (*(int *)(iVar8 + 0x1cc) == 0) {
-    uVar7 = *(uint *)(iVar6 + 0x304);
-    if ((uVar7 & 0x10000) == 0) goto LAB_0001fdc0;
+  arrayDesc = *vertexArray;
+  dirtyState = vertexArray[1];
+  streamCount = *(uint *)(stream + 0x243c);
+  lowMaskUnset = *(uint *)(arrayDesc + 0x308) == 0;
+  highMaskUnset = *(uint *)(arrayDesc + 0x30c) == 0;
+  if (*(int *)(engineObjects + 0x1cc) == 0) {
+    controlMaskHigh = *(uint *)(arrayDesc + 0x304);
+    if ((controlMaskHigh & 0x10000) == 0) goto LAB_0001fdc0;
   }
   else {
-    uVar7 = *(uint *)(iVar6 + 0x304);
-    if ((*(uint *)(iVar6 + 0x300) & 1) == 0 && (uVar7 & 0x10000) == 0) {
+    controlMaskHigh = *(uint *)(arrayDesc + 0x304);
+    if ((*(uint *)(arrayDesc + 0x300) & 1) == 0 && (controlMaskHigh & 0x10000) == 0) {
 LAB_0001fdc0:
-      bVar16 = true;
+      unsupportedMode = true;
       goto LAB_0001fd8c;
     }
   }
-  bVar16 = false;
+  unsupportedMode = false;
 LAB_0001fd8c:
-  if (((((*(char *)(iVar8 + 0x20) == '\0') || (0x10 < uVar24)) || (uVar24 < 2)) ||
-      ((!bVar1 || !bVar2 &&
-       ((*(uint *)(iVar6 + 0x300) & ~*(uint *)(iVar6 + 0x308)) != 0 ||
-        (uVar7 & ~*(uint *)(iVar6 + 0x30c)) != 0)))) || (bVar16)) {
+  if (((((*(char *)(engineObjects + 0x20) == '\0') || (0x10 < streamCount)) || (streamCount < 2)) ||
+      ((!lowMaskUnset || !highMaskUnset &&
+       ((*(uint *)(arrayDesc + 0x300) & ~*(uint *)(arrayDesc + 0x308)) != 0 ||
+        (controlMaskHigh & ~*(uint *)(arrayDesc + 0x30c)) != 0)))) || (unsupportedMode)) {
 switchD_0001ffbc_default:
-    *(undefined1 *)(param_1 + 0x24e4) = 0;
+    *(undefined1 *)(stream + 0x24e4) = 0;
   }
   else {
-    *(undefined4 *)(param_1 + 0x24dc) = 0;
-    *(undefined4 *)(param_1 + 0x24e0) = 0;
-    *(undefined1 *)(param_1 + 0x24e4) = 1;
-    if (*(int **)(iVar8 + 0x1cc) == (int *)0x0) {
-      iVar21 = 0;
-      piVar17 = (int *)0x0;
-      iVar20 = 0;
-      iVar8 = 0;
+    *(undefined4 *)(stream + 0x24dc) = 0;
+    *(undefined4 *)(stream + 0x24e0) = 0;
+    *(undefined1 *)(stream + 0x24e4) = 1;
+    if (*(int **)(engineObjects + 0x1cc) == (int *)0x0) {
+      programRecord = 0;
+      inputMap = (int *)0x0;
+      programVertexInfo = 0;
+      fetchBase = 0;
     }
     else {
-      iVar20 = *(int *)(**(int **)(iVar8 + 0x1cc) + 4);
-      iVar21 = *(int *)(iVar8 + 0x29e8) + 0x14;
-      piVar17 = *(int **)(*(int *)(iVar8 + 0x29e8) + 0x34);
-      iVar8 = *(int *)(iVar20 + 0x24);
+      programVertexInfo = *(int *)(**(int **)(engineObjects + 0x1cc) + 4);
+      programRecord = *(int *)(engineObjects + 0x29e8) + 0x14;
+      inputMap = *(int **)(*(int *)(engineObjects + 0x29e8) + 0x34);
+      fetchBase = *(int *)(programVertexInfo + 0x24);
     }
-    puVar19 = (uint *)0x0;
+    inputDescriptor = (uint *)0x0;
     loopIndex = 0;
     loopIndex2 = 0;
-    uVar7 = 0;
-    iVar22 = 0;
-    *(uint *)(param_1 + 0x2588) = uVar24 & 0x1f | 0x20;
-    iVar25 = 0x16;
+    pairWordIndex = 0;
+    attrByteOffset = 0;
+    *(uint *)(stream + 0x2588) = streamCount & 0x1f | 0x20;
+    attrsLeft = 0x16;
     do {
-      bVar16 = *(int *)(*(int *)(param_1 + 4) + 0x1cc) == 0;
-      if (bVar16) {
-        if ((1 << (loopIndex2 & 0x3f) & *(uint *)(param_1 + 0x1ca0)) != 0) goto LAB_0001ff00;
+      noProgram = *(int *)(*(int *)(stream + 4) + 0x1cc) == 0;
+      if (noProgram) {
+        if ((1 << (loopIndex2 & 0x3f) & *(uint *)(stream + 0x1ca0)) != 0) goto LAB_0001ff00;
       }
-      else if ((*(int *)(iVar22 + *(int *)(iVar21 + 0x20)) != 0x80) ||
-              (*(uint *)(iVar21 + 0x1c) <= loopIndex2)) {
+      else if ((*(int *)(attrByteOffset + *(int *)(programRecord + 0x20)) != 0x80) ||
+              (*(uint *)(programRecord + 0x1c) <= loopIndex2)) {
 LAB_0001ff00:
-        if (iVar20 != 0) {
-          if (loopIndex2 < *(uint *)(iVar21 + 0x1c)) {
-            puVar19 = (uint *)(iVar20 + (iVar8 + *(int *)((int)piVar17 + iVar22)) * 8);
+        if (programVertexInfo != 0) {
+          if (loopIndex2 < *(uint *)(programRecord + 0x1c)) {
+            inputDescriptor = (uint *)(programVertexInfo + (fetchBase + *(int *)((int)inputMap + attrByteOffset)) * 8);
           }
           else {
-            puVar19 = (uint *)(iVar20 + (iVar8 + *piVar17) * 8);
+            inputDescriptor = (uint *)(programVertexInfo + (fetchBase + *inputMap) * 8);
           }
         }
-        if (bVar16) {
-          uVar11 = *(uint *)(iVar22 + 0x1d9720);
+        if (noProgram) {
+          hwAttrId = *(uint *)(attrByteOffset + 0x1d9720);
         }
         else {
-          uVar14 = *puVar19;
-          uVar11 = *(uint *)(&DAT_001d9778 + (uVar14 >> 0xe & 0x3c));
-          if (uVar11 == 8) {
-            uVar11 = (uVar14 & 0x1f) + 8;
+          attrControlWord = *inputDescriptor;
+          hwAttrId = *(uint *)(&DAT_001d9778 + (attrControlWord >> 0xe & 0x3c));
+          if (hwAttrId == 8) {
+            hwAttrId = (attrControlWord & 0x1f) + 8;
           }
-          else if (uVar11 == 0x10) {
-            uVar11 = (uVar14 & 0x1f) + 0x10;
+          else if (hwAttrId == 0x10) {
+            hwAttrId = (attrControlWord & 0x1f) + 0x10;
           }
-          else if (uVar11 == 0x2f) {
-            switch(uVar14 >> 0xc & 0xf) {
+          else if (hwAttrId == 0x2f) {
+            switch(attrControlWord >> 0xc & 0xf) {
             case 0:
-              uVar11 = (uVar14 & 1) + 0x20;
+              hwAttrId = (attrControlWord & 1) + 0x20;
               break;
             case 1:
-              uVar11 = (uVar14 & 1) + 0x22;
+              hwAttrId = (attrControlWord & 1) + 0x22;
               break;
             case 2:
-              uVar11 = (uVar14 & 1) + 0x24;
+              hwAttrId = (attrControlWord & 1) + 0x24;
               break;
             case 3:
-              uVar11 = (uVar14 & 1) + 0x26;
+              hwAttrId = (attrControlWord & 1) + 0x26;
               break;
             case 4:
-              uVar11 = (uVar14 & 1) + 0x28;
+              hwAttrId = (attrControlWord & 1) + 0x28;
               break;
             default:
               goto switchD_0001ffbc_default;
             }
           }
         }
-        if (uVar11 == 0x30) goto switchD_0001ffbc_default;
-        if (uVar11 < 0x10) {
-          uVar14 = *(uint *)(iVar6 + 0x304);
+        if (hwAttrId == 0x30) goto switchD_0001ffbc_default;
+        if (hwAttrId < 0x10) {
+          attrControlWord = *(uint *)(arrayDesc + 0x304);
         }
         else {
-          uVar14 = *(uint *)(iVar6 + 0x300);
+          attrControlWord = *(uint *)(arrayDesc + 0x300);
         }
-        if ((uVar14 & *(uint *)(&DAT_001d91f0 + uVar11 * 4)) == 0) {
-          *(int *)(param_1 + 0x24e0) = *(int *)(param_1 + 0x24e0) + 4;
-          *(uint *)(param_1 + 0x24dc) = 1 << (loopIndex2 & 0x3f) | *(uint *)(param_1 + 0x24dc);
-          if (bVar1 && bVar2) {
-            iVar9 = 4;
-            iVar5 = -1;
-            uVar14 = 3;
-            uVar12 = 0x688;
-            iVar10 = loopIndex << 2;
+        if ((attrControlWord & *(uint *)(&DAT_001d91f0 + hwAttrId * 4)) == 0) {
+          *(int *)(stream + 0x24e0) = *(int *)(stream + 0x24e0) + 4;
+          *(uint *)(stream + 0x24dc) = 1 << (loopIndex2 & 0x3f) | *(uint *)(stream + 0x24dc);
+          if (lowMaskUnset && highMaskUnset) {
+            attrFormatWord = 4;
+            attrOffsetWord = -1;
+            attrControlWord = 3;
+            attrSwizzleWord = 0x688;
+            streamByteOffset = loopIndex << 2;
           }
           else {
-            iVar10 = loopIndex * 4;
-            iVar9 = 4;
-            iVar5 = -1;
-            uVar14 = 3;
-            uVar12 = 0x688;
-            *(undefined4 *)(iVar10 + param_1 + 0x24e8) = *(undefined4 *)(iVar10 + param_1 + 0x24e4);
+            streamByteOffset = loopIndex * 4;
+            attrFormatWord = 4;
+            attrOffsetWord = -1;
+            attrControlWord = 3;
+            attrSwizzleWord = 0x688;
+            *(undefined4 *)(streamByteOffset + stream + 0x24e8) = *(undefined4 *)(streamByteOffset + stream + 0x24e4);
           }
         }
         else {
-          if (*(char *)((int)piVar13 + uVar11 + 8) == '\0') {
-            *(undefined1 *)(param_1 + 0x24e4) = 0;
+          if (*(char *)((int)vertexArray + hwAttrId + 8) == '\0') {
+            *(undefined1 *)(stream + 0x24e4) = 0;
             return;
           }
-          iVar9 = piVar13[uVar11 + 10];
-          iVar5 = piVar13[uVar11 + 0x2a];
-          uVar14 = piVar13[uVar11 + 0x4a];
-          uVar12 = piVar13[uVar11 + 0x6a];
-          if (bVar1 && bVar2) {
-            iVar10 = loopIndex << 2;
+          attrFormatWord = vertexArray[hwAttrId + 10];
+          attrOffsetWord = vertexArray[hwAttrId + 0x2a];
+          attrControlWord = vertexArray[hwAttrId + 0x4a];
+          attrSwizzleWord = vertexArray[hwAttrId + 0x6a];
+          if (lowMaskUnset && highMaskUnset) {
+            streamByteOffset = loopIndex << 2;
           }
           else {
-            iVar10 = loopIndex * 4;
-            puVar3 = *(undefined4 **)(*(int *)(iVar18 + uVar11 * 4) + 8);
-            if (puVar3 != (undefined4 *)0x0) {
-              *(undefined4 *)(iVar10 + param_1 + 0x24e8) = *puVar3;
+            streamByteOffset = loopIndex * 4;
+            bufferWord = *(undefined4 **)(*(int *)(dirtyState + hwAttrId * 4) + 8);
+            if (bufferWord != (undefined4 *)0x0) {
+              *(undefined4 *)(streamByteOffset + stream + 0x24e8) = *bufferWord;
             }
           }
         }
         if ((loopIndex & 1) == 0) {
-          iVar4 = uVar7 * 4 + param_1;
-          *(int *)(iVar4 + 0x2528) = iVar9;
-          *(int *)(iVar10 + param_1 + 0x2548) = iVar5;
-          *(uint *)(iVar4 + 0x2410) = uVar12 | *(uint *)(iVar4 + 0x1c04) & 0xf000;
-          *(uint *)(iVar4 + 0x23f0) =
-               uVar14 | *(uint *)(iVar4 + 0x1be4) & 0x1f00 | *(uint *)(iVar4 + 0x1be4) & 0x2000;
+          pairPtr = pairWordIndex * 4 + stream;
+          *(int *)(pairPtr + 0x2528) = attrFormatWord;
+          *(int *)(streamByteOffset + stream + 0x2548) = attrOffsetWord;
+          *(uint *)(pairPtr + 0x2410) = attrSwizzleWord | *(uint *)(pairPtr + 0x1c04) & 0xf000;
+          *(uint *)(pairPtr + 0x23f0) =
+               attrControlWord | *(uint *)(pairPtr + 0x1be4) & 0x1f00 | *(uint *)(pairPtr + 0x1be4) & 0x2000;
         }
         else {
-          iVar4 = uVar7 * 4 + param_1;
-          *(uint *)(iVar4 + 0x2528) = iVar9 << 0x10 | *(uint *)(iVar4 + 0x2528);
-          *(int *)(iVar10 + param_1 + 0x2548) = iVar5;
-          *(uint *)(iVar4 + 0x2410) =
-               uVar12 << 0x10 | *(uint *)(iVar4 + 0x1c04) & 0xf0000000 | *(uint *)(iVar4 + 0x2410);
-          *(uint *)(iVar4 + 0x23f0) =
-               uVar14 << 0x10 | *(uint *)(iVar4 + 0x1be4) & 0x1f000000 |
-               *(uint *)(iVar4 + 0x1be4) & 0x20000000 | *(uint *)(iVar4 + 0x23f0);
+          pairPtr = pairWordIndex * 4 + stream;
+          *(uint *)(pairPtr + 0x2528) = attrFormatWord << 0x10 | *(uint *)(pairPtr + 0x2528);
+          *(int *)(streamByteOffset + stream + 0x2548) = attrOffsetWord;
+          *(uint *)(pairPtr + 0x2410) =
+               attrSwizzleWord << 0x10 | *(uint *)(pairPtr + 0x1c04) & 0xf0000000 | *(uint *)(pairPtr + 0x2410);
+          *(uint *)(pairPtr + 0x23f0) =
+               attrControlWord << 0x10 | *(uint *)(pairPtr + 0x1be4) & 0x1f000000 |
+               *(uint *)(pairPtr + 0x1be4) & 0x20000000 | *(uint *)(pairPtr + 0x23f0);
         }
         loopIndex = loopIndex + 1;
-        uVar7 = loopIndex >> 1;
+        pairWordIndex = loopIndex >> 1;
       }
-      if (loopIndex == uVar24) {
+      if (loopIndex == streamCount) {
         return;
       }
       loopIndex2 = loopIndex2 + 1;
-      iVar22 = iVar22 + 4;
-      iVar25 = iVar25 + -1;
-    } while (iVar25 != 0);
+      attrByteOffset = attrByteOffset + 4;
+      attrsLeft = attrsLeft + -1;
+    } while (attrsLeft != 0);
   }
   return;
 }
@@ -5303,7 +5317,7 @@ uint _gldUpdateDispatch(int ctx,int dispatch,uint *dirtyBits,undefined4 scratchR
   }
   dirtyBitsArg = dirtyBits;
   if ((int)*dirtyBits < 0) {
-    fpPassThrough1 = (double)FUN_00007d50(ctx,dispatch,dirtyBits,scratchR6,scratchR7,scratchR8);
+    fpPassThrough1 = (double)gld_bindCurrentFramebuffer(ctx,dispatch,dirtyBits,scratchR6,scratchR7,scratchR8);
   }
   framebufferObj = *(int **)(ctx + GLD_boundFramebuffer);
   if (((framebufferObj == (int *)0x0) || (*(ushort *)(*framebufferObj + 0x90) == 0)) ||
@@ -5483,7 +5497,7 @@ LAB_000225e8:
         _pthread_mutex_lock(*(undefined4 *)(ctx + GLD_mutex));
       }
       mutexHeld = mutexHeld && !noUnitUpdate;
-      fpPassThrough1 = (double)FUN_000095e0(ctx);
+      fpPassThrough1 = (double)gld_resolveProgramSlots(ctx);
       iVar8 = *(int *)(ctx + GLD_currentProgram);
       if (bVar27 != (iVar8 != 0)) {
         *(undefined1 *)(ctx + 0x26bd) = 1;
@@ -5840,16 +5854,16 @@ int FUN_00022eb0(param_1, param_2)
   return param_2;
 }
 
-/* FUN_000230d0 @ 0x230d0 (1544 bytes) */
-int FUN_000230d0(ctx, param_2, readSurfaceCode, param_4, param_5, param_6, param_7, param_8)
+/* gld_emitSurfaceCopyPacket @ 0x230d0 (1544 bytes) */
+int gld_emitSurfaceCopyPacket(ctx, packet, readSurfaceCode, resolveFlag, srcX, srcY, copyWidth, copyHeight)
   int ctx;
-  undefined4 *param_2;
+  undefined4 *packet;
   undefined4 readSurfaceCode;
-  int param_4;
-  undefined4 param_5;
-  int param_6;
-  undefined4 param_7;
-  int param_8;
+  int resolveFlag;
+  undefined4 srcX;
+  int srcY;
+  undefined4 copyWidth;
+  int copyHeight;
 {
   uint rb3d_blendcntl;
   uint fg_alpha_func;
@@ -5885,239 +5899,239 @@ int FUN_000230d0(ctx, param_2, readSurfaceCode, param_4, param_5, param_6, param
   undefined4 gb_mspos1;
   undefined4 sc_screendoor;
   undefined4 sc_edgerule;
-  bool bVar1;
-  undefined *puVar2;
-  uint *puVar3;
-  undefined4 uVar4;
-  undefined4 *puVar5;
+  bool allocatedHere;
+  undefined *colorFormatTable;
+  uint *lastHeader;
+  undefined4 registerValue;
+  undefined4 *packetBase;
   uint fg_fog_blend;
-  int iVar7;
+  int commandStream;
   
-  iVar7 = ctx + 0x240;
+  commandStream = ctx + 0x240;
   if (*(char *)(ctx + 0x2a5e) != '\0') {
-    if ((*(int *)(ctx + 0x154) < 0) || (param_4 == 0)) {
-      param_4 = 0;
+    if ((*(int *)(ctx + 0x154) < 0) || (resolveFlag == 0)) {
+      resolveFlag = 0;
     }
     else {
       *(undefined1 *)(ctx + 0x2a5e) = 0;
     }
-    bVar1 = param_2 == (undefined4 *)0x0;
-    puVar5 = param_2;
-    if (bVar1) {
-      puVar5 = (undefined4 *)(**(code **)(ctx + 0x2998))(iVar7,500);
-      *(undefined4 **)(ctx + 0x298c) = puVar5;
+    allocatedHere = packet == (undefined4 *)0x0;
+    packetBase = packet;
+    if (allocatedHere) {
+      packetBase = (undefined4 *)(**(code **)(ctx + 0x2998))(commandStream,500);
+      *(undefined4 **)(ctx + 0x298c) = packetBase;
     }
-    puVar3 = *(uint **)(ctx + 0x1d8);
-    *puVar3 = (int)puVar5 - (int)puVar3 >> 2 | *puVar3;
-    *(undefined4 **)(ctx + 0x1d8) = puVar5;
-    puVar5[2] = readSurfaceCode;
-    *puVar5 = 0x30000000;
-    puVar5[1] = 0xfa;
-    puVar5[3] = param_4;
-    puVar5[4] = param_5;
+    lastHeader = *(uint **)(ctx + 0x1d8);
+    *lastHeader = (int)packetBase - (int)lastHeader >> 2 | *lastHeader;
+    *(undefined4 **)(ctx + 0x1d8) = packetBase;
+    packetBase[2] = readSurfaceCode;
+    *packetBase = 0x30000000;
+    packetBase[1] = 0xfa;
+    packetBase[3] = resolveFlag;
+    packetBase[4] = srcX;
     if (((unsigned char *)0x00002b7c)[ctx] != '\0') {
-      param_6 = (*(int *)(ctx + 0x160) - param_8) - param_6;
+      srcY = (*(int *)(ctx + 0x160) - copyHeight) - srcY;
     }
-    puVar5[5] = param_6;
-    puVar5[6] = param_7;
-    puVar5[7] = param_8;
-    puVar3 = *(uint **)(ctx + 0x1d8);
-    *puVar3 = (int)(puVar5 + 0xfa) - (int)puVar3 >> 2 | *puVar3;
-    *(undefined4 **)(ctx + 0x1d8) = puVar5 + 0xfa;
-    puVar5[0xfb] = 0;
-    puVar5[0xfa] = 0x33000000;
-    puVar5[0xfc] = ((unsigned char *)0x00001393U);
-    puVar5[0xfd] = 10;
-    puVar5[0xfe] = ((unsigned char *)0x000013c6U);
-    puVar5[0xff] = 3;
-    puVar5[0x100] = 0x5c8;
-    puVar5[0x101] = 0x20000;
-    puVar5[0x102] = ((unsigned char *)0x000010eaU);
+    packetBase[5] = srcY;
+    packetBase[6] = copyWidth;
+    packetBase[7] = copyHeight;
+    lastHeader = *(uint **)(ctx + 0x1d8);
+    *lastHeader = (int)(packetBase + 0xfa) - (int)lastHeader >> 2 | *lastHeader;
+    *(undefined4 **)(ctx + 0x1d8) = packetBase + 0xfa;
+    packetBase[0xfb] = 0;
+    packetBase[0xfa] = 0x33000000;
+    packetBase[0xfc] = ((unsigned char *)0x00001393U);
+    packetBase[0xfd] = 10;
+    packetBase[0xfe] = ((unsigned char *)0x000013c6U);
+    packetBase[0xff] = 3;
+    packetBase[0x100] = 0x5c8;
+    packetBase[0x101] = 0x20000;
+    packetBase[0x102] = ((unsigned char *)0x000010eaU);
     sc_edgerule = *(undefined4 *)(ctx + 0x1cfc);
-    puVar5[0x104] = ((unsigned char *)0x000010faU);
-    puVar5[0x103] = sc_edgerule;
+    packetBase[0x104] = ((unsigned char *)0x000010faU);
+    packetBase[0x103] = sc_edgerule;
     sc_screendoor = *(undefined4 *)(ctx + 0x1da0);
-    puVar5[0x106] = 0xc0001000;
-    puVar5[0x108] = 0x11004;
-    puVar5[0x105] = sc_screendoor;
-    puVar5[0x109] = *(undefined4 *)(ctx + 0x1ca8);
+    packetBase[0x106] = 0xc0001000;
+    packetBase[0x108] = 0x11004;
+    packetBase[0x105] = sc_screendoor;
+    packetBase[0x109] = *(undefined4 *)(ctx + 0x1ca8);
     gb_mspos1 = *(undefined4 *)(ctx + 0x1cac);
-    puVar5[0x10b] = ((unsigned char *)0x00001008U);
-    puVar5[0x10a] = gb_mspos1;
+    packetBase[0x10b] = ((unsigned char *)0x00001008U);
+    packetBase[0x10a] = gb_mspos1;
     gb_aa_config = *(undefined4 *)(ctx + 0x1ca0);
-    puVar5[0x10d] = ((unsigned char *)0x000010e9U);
-    puVar5[0x10c] = gb_aa_config;
-    puVar5[0x10e] = *(undefined4 *)(ctx + 0x1d20);
-    puVar5[0x10f] = ((unsigned char *)0x000013c7U);
+    packetBase[0x10d] = ((unsigned char *)0x000010e9U);
+    packetBase[0x10c] = gb_aa_config;
+    packetBase[0x10e] = *(undefined4 *)(ctx + 0x1d20);
+    packetBase[0x10f] = ((unsigned char *)0x000013c7U);
     zb_bw_cntl = *(undefined4 *)(ctx + 0x1cf0);
-    puVar5[0x111] = ((unsigned char *)0x000013c1U);
-    puVar5[0x110] = zb_bw_cntl;
+    packetBase[0x111] = ((unsigned char *)0x000013c1U);
+    packetBase[0x110] = zb_bw_cntl;
     zb_zstencilcntl = *(undefined4 *)(ctx + 0x1ce4);
-    puVar5[0x113] = 0x850;
-    puVar5[0x112] = zb_zstencilcntl;
+    packetBase[0x113] = 0x850;
+    packetBase[0x112] = zb_zstencilcntl;
     vap_cntl_status = *(undefined4 *)(ctx + 0x1dc0);
-    puVar5[0x115] = 0x887;
-    puVar5[0x114] = vap_cntl_status;
+    packetBase[0x115] = 0x887;
+    packetBase[0x114] = vap_cntl_status;
     vap_clip_cntl = *(undefined4 *)(ctx + 0x1db4);
-    puVar5[0x1b7] = 0x82c;
-    puVar5[0x116] = vap_clip_cntl;
+    packetBase[0x1b7] = 0x82c;
+    packetBase[0x116] = vap_clip_cntl;
     vap_vte_cntl = *(undefined4 *)(0x00001dc4 + ctx);
-    puVar5[0x117] = ((unsigned char *)0x000010aeU);
-    puVar5[0x1b8] = vap_vte_cntl;
+    packetBase[0x117] = ((unsigned char *)0x000010aeU);
+    packetBase[0x1b8] = vap_vte_cntl;
     su_cull_mode = *(undefined4 *)(ctx + 0x1d70);
-    puVar5[0x119] = ((unsigned char *)0x00001394U);
-    puVar5[0x118] = su_cull_mode;
+    packetBase[0x119] = ((unsigned char *)0x00001394U);
+    packetBase[0x118] = su_cull_mode;
     rb3d_dither_ctl = *(undefined4 *)(ctx + 0x1d30);
-    puVar5[0x11b] = ((unsigned char *)0x00001380U);
-    puVar5[0x11d] = ((unsigned char *)0x00001002U);
-    puVar5[0x11c] = 0;
-    puVar5[0x11a] = rb3d_dither_ctl;
-    puVar5[0x11e] = *(undefined4 *)(ctx + 0x1d90);
+    packetBase[0x11b] = ((unsigned char *)0x00001380U);
+    packetBase[0x11d] = ((unsigned char *)0x00001002U);
+    packetBase[0x11c] = 0;
+    packetBase[0x11a] = rb3d_dither_ctl;
+    packetBase[0x11e] = *(undefined4 *)(ctx + 0x1d90);
     gb_enable = *(undefined4 *)(ctx + 0x1d90);
-    puVar5[0x11f] = 0x824;
-    puVar5[0x11e] = gb_enable;
+    packetBase[0x11f] = 0x824;
+    packetBase[0x11e] = gb_enable;
     vap_out_vtx_fmt_0 = *(undefined4 *)(ctx + 0x1ddc);
-    puVar5[0x121] = 0x825;
-    puVar5[0x120] = vap_out_vtx_fmt_0;
-    puVar5[0x122] = *(undefined4 *)(ctx + 0x1de0);
-    puVar5[0x123] = 0x82d;
-    puVar2 = PTR_DAT_001e88c8;
-    uVar4 = *(undefined4 *)(0x000026c8 + ctx + 4);
-    puVar5[0x125] = 0x854;
-    puVar5[0x124] = uVar4;
-    uVar4 = **(undefined4 **)(ctx + 0x2680);
-    puVar5[0x127] = 0x878;
-    puVar5[0x126] = uVar4;
-    uVar4 = **(undefined4 **)(ctx + 0x2684);
-    puVar5[0x129] = ((unsigned char *)0x000013c0U);
-    puVar5[0x128] = uVar4;
+    packetBase[0x121] = 0x825;
+    packetBase[0x120] = vap_out_vtx_fmt_0;
+    packetBase[0x122] = *(undefined4 *)(ctx + 0x1de0);
+    packetBase[0x123] = 0x82d;
+    colorFormatTable = PTR_DAT_001e88c8;
+    registerValue = *(undefined4 *)(0x000026c8 + ctx + 4);
+    packetBase[0x125] = 0x854;
+    packetBase[0x124] = registerValue;
+    registerValue = **(undefined4 **)(ctx + 0x2680);
+    packetBase[0x127] = 0x878;
+    packetBase[0x126] = registerValue;
+    registerValue = **(undefined4 **)(ctx + 0x2684);
+    packetBase[0x129] = ((unsigned char *)0x000013c0U);
+    packetBase[0x128] = registerValue;
     zb_cntl = *(undefined4 *)(ctx + 0x1ce0);
-    puVar5[299] = ((unsigned char *)0x000012f0U);
-    puVar5[0x12a] = zb_cntl;
+    packetBase[299] = ((unsigned char *)0x000012f0U);
+    packetBase[0x12a] = zb_cntl;
     fg_fog_blend = *(uint *)(ctx + 0x1d2c);
-    puVar5[300] = fg_fog_blend;
-    if ((*(uint *)(puVar2 + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24 + 0x18) & 0x8000) == 0) {
-      puVar5[300] = fg_fog_blend & 0xfffffffe;
+    packetBase[300] = fg_fog_blend;
+    if ((*(uint *)(colorFormatTable + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24 + 0x18) & 0x8000) == 0) {
+      packetBase[300] = fg_fog_blend & 0xfffffffe;
     }
-    puVar5[0x12d] = ((unsigned char *)0x000012f5U);
+    packetBase[0x12d] = ((unsigned char *)0x000012f5U);
     fg_alpha_func = *(uint *)(ctx + 0x1c8c);
-    puVar5[0x12e] = fg_alpha_func;
-    if ((*(uint *)(puVar2 + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24 + 0x18) & 0x8000) == 0) {
-      puVar5[0x12e] = fg_alpha_func & 0xfffff7ff;
+    packetBase[0x12e] = fg_alpha_func;
+    if ((*(uint *)(colorFormatTable + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24 + 0x18) & 0x8000) == 0) {
+      packetBase[0x12e] = fg_alpha_func & 0xfffff7ff;
     }
-    puVar5[0x12f] = ((unsigned char *)0x000010a2U);
+    packetBase[0x12f] = ((unsigned char *)0x000010a2U);
     ga_poly_mode = *(undefined4 *)(ctx + 0x1d7c);
-    puVar5[0x131] = ((unsigned char *)0x00001381U);
-    puVar5[0x130] = ga_poly_mode;
+    packetBase[0x131] = ((unsigned char *)0x00001381U);
+    packetBase[0x130] = ga_poly_mode;
     rb3d_blendcntl = *(uint *)(ctx + 0x1cc0);
-    puVar5[0x132] = rb3d_blendcntl;
-    if ((*(uint *)(puVar2 + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24 + 0x18) & 0x4000) == 0) {
-      puVar5[0x132] = rb3d_blendcntl & 0xfffffffc;
+    packetBase[0x132] = rb3d_blendcntl;
+    if ((*(uint *)(colorFormatTable + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24 + 0x18) & 0x4000) == 0) {
+      packetBase[0x132] = rb3d_blendcntl & 0xfffffffc;
     }
-    puVar5[0x133] = ((unsigned char *)0x0000109eU);
-    param_2 = puVar5 + 0x1b9;
-    uVar4 = *(undefined4 *)(ctx + 0x1d6c);
-    puVar5[0x135] = ((unsigned char *)0x00001096U);
-    puVar5[0x134] = uVar4;
+    packetBase[0x133] = ((unsigned char *)0x0000109eU);
+    packet = packetBase + 0x1b9;
+    registerValue = *(undefined4 *)(ctx + 0x1d6c);
+    packetBase[0x135] = ((unsigned char *)0x00001096U);
+    packetBase[0x134] = registerValue;
     ga_color_control = *(undefined4 *)(ctx + 0x1df8);
-    puVar5[0x137] = ((unsigned char *)0x00001041U);
-    puVar5[0x134] = ga_color_control;
+    packetBase[0x137] = ((unsigned char *)0x00001041U);
+    packetBase[0x134] = ga_color_control;
     tx_enable = *(undefined4 *)(ctx + 0x29f0);
-    puVar5[0x139] = ((unsigned char *)0x00001046U);
-    puVar5[0x138] = tx_enable;
+    packetBase[0x139] = ((unsigned char *)0x00001046U);
+    packetBase[0x138] = tx_enable;
     gb_ps3_enable = *(undefined4 *)(ctx + 0x1dfc);
-    puVar5[0x13b] = ((unsigned char *)0x00001094U);
-    puVar5[0x153] = ((unsigned char *)0x00001095U);
-    puVar5[0x13d] = ((unsigned char *)0x00001095U);
-    puVar5[0x179] = ((unsigned char *)0x00001180U);
-    puVar5[0x13f] = ((unsigned char *)0x00001095U);
-    puVar5[0x141] = ((unsigned char *)0x00001095U);
-    puVar5[0x143] = ((unsigned char *)0x00001095U);
-    puVar5[0x13a] = gb_ps3_enable;
-    puVar5[0x145] = ((unsigned char *)0x00001095U);
-    puVar5[0x147] = ((unsigned char *)0x00001095U);
-    puVar5[0x149] = ((unsigned char *)0x00001095U);
-    puVar5[0x14b] = ((unsigned char *)0x00001095U);
-    puVar5[0x14d] = ((unsigned char *)0x00001095U);
-    puVar5[0x14f] = ((unsigned char *)0x00001095U);
-    puVar5[0x151] = ((unsigned char *)0x00001095U);
-    puVar5[0x155] = 0xc0221000;
-    puVar5[0x13c] = 0;
-    puVar5[0x17a] = 2;
-    puVar5[0x17b] = ((unsigned char *)0x00001189U);
-    puVar5[0x17d] = ((unsigned char *)0x00001181U);
-    puVar5[0x17f] = ((unsigned char *)0x0000118dU);
-    puVar5[0x181] = ((unsigned char *)0x0000118eU);
-    puVar5[0x183] = ((unsigned char *)0x0000118cU);
-    puVar5[0x185] = ((unsigned char *)0x000011a9U);
+    packetBase[0x13b] = ((unsigned char *)0x00001094U);
+    packetBase[0x153] = ((unsigned char *)0x00001095U);
+    packetBase[0x13d] = ((unsigned char *)0x00001095U);
+    packetBase[0x179] = ((unsigned char *)0x00001180U);
+    packetBase[0x13f] = ((unsigned char *)0x00001095U);
+    packetBase[0x141] = ((unsigned char *)0x00001095U);
+    packetBase[0x143] = ((unsigned char *)0x00001095U);
+    packetBase[0x13a] = gb_ps3_enable;
+    packetBase[0x145] = ((unsigned char *)0x00001095U);
+    packetBase[0x147] = ((unsigned char *)0x00001095U);
+    packetBase[0x149] = ((unsigned char *)0x00001095U);
+    packetBase[0x14b] = ((unsigned char *)0x00001095U);
+    packetBase[0x14d] = ((unsigned char *)0x00001095U);
+    packetBase[0x14f] = ((unsigned char *)0x00001095U);
+    packetBase[0x151] = ((unsigned char *)0x00001095U);
+    packetBase[0x155] = 0xc0221000;
+    packetBase[0x13c] = 0;
+    packetBase[0x17a] = 2;
+    packetBase[0x17b] = ((unsigned char *)0x00001189U);
+    packetBase[0x17d] = ((unsigned char *)0x00001181U);
+    packetBase[0x17f] = ((unsigned char *)0x0000118dU);
+    packetBase[0x181] = ((unsigned char *)0x0000118eU);
+    packetBase[0x183] = ((unsigned char *)0x0000118cU);
+    packetBase[0x185] = ((unsigned char *)0x000011a9U);
     us_out_fmt_0 = *(undefined4 *)(ctx + 0x257c);
-    puVar5[0x187] = ((unsigned char *)0x000011aaU);
-    puVar5[0x186] = us_out_fmt_0;
+    packetBase[0x187] = ((unsigned char *)0x000011aaU);
+    packetBase[0x186] = us_out_fmt_0;
     us_out_fmt_1 = *(undefined4 *)(ctx + 0x2580);
-    puVar5[0x189] = ((unsigned char *)0x000011abU);
-    puVar5[0x188] = us_out_fmt_1;
+    packetBase[0x189] = ((unsigned char *)0x000011abU);
+    packetBase[0x188] = us_out_fmt_1;
     us_out_fmt_2 = *(undefined4 *)(ctx + 0x2584);
-    puVar5[0x18b] = ((unsigned char *)0x000011acU);
-    puVar5[0x18a] = us_out_fmt_2;
+    packetBase[0x18b] = ((unsigned char *)0x000011acU);
+    packetBase[0x18a] = us_out_fmt_2;
     us_out_fmt_3 = *(undefined4 *)(ctx + 0x2588);
-    puVar5[0x18d] = ((unsigned char *)0x000010c0U);
-    puVar5[0x18c] = us_out_fmt_3;
+    packetBase[0x18d] = ((unsigned char *)0x000010c0U);
+    packetBase[0x18c] = us_out_fmt_3;
     rs_count = *(undefined4 *)(ctx + 0x216c);
-    puVar5[399] = ((unsigned char *)0x000010c1U);
-    puVar5[0x191] = ((unsigned char *)0x000010c8U);
-    puVar5[0x193] = ((unsigned char *)0x0000101dU);
-    puVar5[0x18e] = rs_count;
+    packetBase[399] = ((unsigned char *)0x000010c1U);
+    packetBase[0x191] = ((unsigned char *)0x000010c8U);
+    packetBase[0x193] = ((unsigned char *)0x0000101dU);
+    packetBase[0x18e] = rs_count;
     rs_ip_0 = *(undefined4 *)(ctx + 0x2128);
-    puVar5[0x195] = ((unsigned char *)0x0000138aU);
-    puVar5[0x197] = ((unsigned char *)0x0000138eU);
-    puVar5[0x19c] = 0;
-    puVar5[0x199] = ((unsigned char *)0x00001040U);
-    puVar5[0x196] = 0;
-    puVar5[0x198] = 0;
-    puVar5[0x19a] = 0;
-    puVar5[0x194] = rs_ip_0;
-    puVar5[0x19b] = ((unsigned char *)0x00001150U);
-    puVar5[0x19d] = ((unsigned char *)0x00001100U);
+    packetBase[0x195] = ((unsigned char *)0x0000138aU);
+    packetBase[0x197] = ((unsigned char *)0x0000138eU);
+    packetBase[0x19c] = 0;
+    packetBase[0x199] = ((unsigned char *)0x00001040U);
+    packetBase[0x196] = 0;
+    packetBase[0x198] = 0;
+    packetBase[0x19a] = 0;
+    packetBase[0x194] = rs_ip_0;
+    packetBase[0x19b] = ((unsigned char *)0x00001150U);
+    packetBase[0x19d] = ((unsigned char *)0x00001100U);
     tx_filter0 = *(undefined4 *)(ctx + 0x1f1c);
-    puVar5[0x19f] = ((unsigned char *)0x00001110U);
-    puVar5[0x19e] = tx_filter0;
-    puVar5[0x1a0] = *(undefined4 *)(ctx + 0x1f5c);
-    puVar5[0x1a1] = ((unsigned char *)0x00001120U);
+    packetBase[0x19f] = ((unsigned char *)0x00001110U);
+    packetBase[0x19e] = tx_filter0;
+    packetBase[0x1a0] = *(undefined4 *)(ctx + 0x1f5c);
+    packetBase[0x1a1] = ((unsigned char *)0x00001120U);
     tx_format0 = *(undefined4 *)(ctx + 0x1f9c);
-    puVar5[0x1a3] = ((unsigned char *)0x00001130U);
-    puVar5[0x1a2] = tx_format0;
+    packetBase[0x1a3] = ((unsigned char *)0x00001130U);
+    packetBase[0x1a2] = tx_format0;
     tx_format1 = *(undefined4 *)(ctx + 0x1fdc);
-    puVar5[0x1a5] = ((unsigned char *)0x00001140U);
-    puVar5[0x1a4] = tx_format1;
+    packetBase[0x1a5] = ((unsigned char *)0x00001140U);
+    packetBase[0x1a4] = tx_format1;
     tx_format2 = *(undefined4 *)(ctx + 0x201c);
-    puVar5[0x1a7] = ((unsigned char *)0x000010f4U);
-    puVar5[0x1a8] = 0xaaaa;
-    puVar5[0x1a9] = ((unsigned char *)0x00001383U);
-    puVar5[0x1a6] = tx_format2;
+    packetBase[0x1a7] = ((unsigned char *)0x000010f4U);
+    packetBase[0x1a8] = 0xaaaa;
+    packetBase[0x1a9] = ((unsigned char *)0x00001383U);
+    packetBase[0x1a6] = tx_format2;
     rb3d_color_channel_mask = *(undefined4 *)(ctx + 0x1d34);
-    puVar5[0x1ab] = ((unsigned char *)0x00001386U);
-    puVar5[0x1aa] = rb3d_color_channel_mask;
+    packetBase[0x1ab] = ((unsigned char *)0x00001386U);
+    packetBase[0x1aa] = rb3d_color_channel_mask;
     rb3d_ropcntl = *(undefined4 *)(ctx + 0x1d38);
-    puVar5[0x1ad] = 0x110f8;
-    puVar5[0x1ac] = rb3d_ropcntl;
-    puVar5[0x1ae] = *(undefined4 *)(ctx + 0x1d98);
+    packetBase[0x1ad] = 0x110f8;
+    packetBase[0x1ac] = rb3d_ropcntl;
+    packetBase[0x1ae] = *(undefined4 *)(ctx + 0x1d98);
     sc_scissor1 = *(undefined4 *)(ctx + 0x1d50);
-    puVar5[0x1b0] = ((unsigned char *)0x00001087U);
-    puVar5[0x1af] = sc_scissor1;
+    packetBase[0x1b0] = ((unsigned char *)0x00001087U);
+    packetBase[0x1af] = sc_scissor1;
     ga_point_size = *(undefined4 *)(ctx + 0x1f0c);
-    puVar5[0x1b2] = 0x31080;
-    puVar5[0x1b1] = ga_point_size;
-    puVar5[0x1b3] = *(undefined4 *)(ctx + 0x1efc);
-    puVar5[0x1b4] = *(undefined4 *)(ctx + 0x1f04);
-    puVar5[0x1b5] = *(undefined4 *)(ctx + 0x1f00);
-    puVar5[0x1b6] = *(undefined4 *)(ctx + 0x1f08);
-    FUN_0004c100(puVar5 + 0xfc,iVar7);
-    if (bVar1) {
-      *(undefined4 **)(ctx + 0x298c) = param_2;
-      (**(code **)(ctx + 0x299c))(iVar7,param_2);
+    packetBase[0x1b2] = 0x31080;
+    packetBase[0x1b1] = ga_point_size;
+    packetBase[0x1b3] = *(undefined4 *)(ctx + 0x1efc);
+    packetBase[0x1b4] = *(undefined4 *)(ctx + 0x1f04);
+    packetBase[0x1b5] = *(undefined4 *)(ctx + 0x1f00);
+    packetBase[0x1b6] = *(undefined4 *)(ctx + 0x1f08);
+    FUN_0004c100(packetBase + 0xfc,commandStream);
+    if (allocatedHere) {
+      *(undefined4 **)(ctx + 0x298c) = packet;
+      (**(code **)(ctx + 0x299c))(commandStream,packet);
     }
   }
-  return param_2;
+  return packet;
 }
 
 /* returnSecondArgument @ 0x236f0 (8 bytes) */
@@ -6193,85 +6207,85 @@ int gldEmitCurrentAttributeRegisters(ctx, param_2, param_3)
   return puVar5 + 7;
 }
 
-/* FUN_00023870 @ 0x23870 (420 bytes) */
-int FUN_00023870(ctx, gb_aa_config, param_3, param_4)
+/* gldEmitCurrentAttributeRegistersMasked @ 0x23870 (420 bytes) */
+int gldEmitCurrentAttributeRegistersMasked(ctx, attributeMask, vertexAttribs, packetCursor)
   undefined4 ctx;
-  uint gb_aa_config;
-  int param_3;
-  uint *param_4;
+  uint attributeMask;
+  int vertexAttribs;
+  uint *packetCursor;
 {
-  byte bVar1;
-  uint uVar2;
-  int iVar3;
-  uint uVar4;
-  uint uVar5;
-  int iVar6;
+  byte flagByte;
+  uint attrBit;
+  int unitBlock;
+  uint registerId;
+  uint unitIndex;
+  int unitsLeft;
   
-  if ((gb_aa_config & 2) != 0) {
-    *param_4 = 0x208c4;
-    param_4[1] = *(uint *)(param_3 + 0x40);
-    param_4[2] = *(uint *)(param_3 + 0x44);
-    param_4[3] = *(uint *)(param_3 + 0x48);
-    param_4 = param_4 + 4;
+  if ((attributeMask & 2) != 0) {
+    *packetCursor = 0x208c4;
+    packetCursor[1] = *(uint *)(vertexAttribs + 0x40);
+    packetCursor[2] = *(uint *)(vertexAttribs + 0x44);
+    packetCursor[3] = *(uint *)(vertexAttribs + 0x48);
+    packetCursor = packetCursor + 4;
   }
-  if ((gb_aa_config & 4) != 0) {
-    *param_4 = 0x308c8;
-    param_4[1] = *(uint *)(param_3 + 0x30);
-    param_4[2] = *(uint *)(param_3 + 0x34);
-    param_4[3] = *(uint *)(param_3 + 0x38);
-    param_4[4] = *(uint *)(param_3 + 0x3c);
-    param_4 = param_4 + 5;
+  if ((attributeMask & 4) != 0) {
+    *packetCursor = 0x308c8;
+    packetCursor[1] = *(uint *)(vertexAttribs + 0x30);
+    packetCursor[2] = *(uint *)(vertexAttribs + 0x34);
+    packetCursor[3] = *(uint *)(vertexAttribs + 0x38);
+    packetCursor[4] = *(uint *)(vertexAttribs + 0x3c);
+    packetCursor = packetCursor + 5;
   }
-  if ((gb_aa_config & 8) != 0) {
-    *param_4 = 0x208cc;
-    param_4[1] = *(uint *)(param_3 + 0x50);
-    param_4[2] = *(uint *)(param_3 + 0x54);
-    param_4[3] = *(uint *)(param_3 + 0x58);
-    param_4 = param_4 + 4;
+  if ((attributeMask & 8) != 0) {
+    *packetCursor = 0x208cc;
+    packetCursor[1] = *(uint *)(vertexAttribs + 0x50);
+    packetCursor[2] = *(uint *)(vertexAttribs + 0x54);
+    packetCursor[3] = *(uint *)(vertexAttribs + 0x58);
+    packetCursor = packetCursor + 4;
   }
-  uVar5 = 0;
-  uVar4 = 0x8e8;
-  iVar6 = 8;
-  iVar3 = param_3;
+  unitIndex = 0;
+  registerId = 0x8e8;
+  unitsLeft = 8;
+  unitBlock = vertexAttribs;
   do {
-    uVar2 = 0x400 << (uVar5 & 0x3f);
-    if ((uVar2 & gb_aa_config) != 0) {
-      gb_aa_config = gb_aa_config & ~uVar2;
-      *param_4 = uVar4 | 0x30000;
-      param_4[1] = *(uint *)(iVar3 + 0x80);
-      param_4[2] = *(uint *)(iVar3 + 0x84);
-      param_4[3] = *(uint *)(iVar3 + 0x88);
-      param_4[4] = *(uint *)(iVar3 + 0x8c);
-      param_4 = param_4 + 5;
+    attrBit = 0x400 << (unitIndex & 0x3f);
+    if ((attrBit & attributeMask) != 0) {
+      attributeMask = attributeMask & ~attrBit;
+      *packetCursor = registerId | 0x30000;
+      packetCursor[1] = *(uint *)(unitBlock + 0x80);
+      packetCursor[2] = *(uint *)(unitBlock + 0x84);
+      packetCursor[3] = *(uint *)(unitBlock + 0x88);
+      packetCursor[4] = *(uint *)(unitBlock + 0x8c);
+      packetCursor = packetCursor + 5;
     }
-    if ((gb_aa_config & 0x3fc00) == 0) break;
-    uVar5 = uVar5 + 1;
-    uVar4 = uVar4 + 4;
-    iVar3 = iVar3 + 0x10;
-    iVar6 = iVar6 + -1;
-  } while (iVar6 != 0);
-  if ((gb_aa_config & 0x40000) != 0) {
-    *param_4 = 0x908;
-    param_4[1] = *(uint *)(param_3 + 0x5c);
-    param_4 = param_4 + 2;
+    if ((attributeMask & 0x3fc00) == 0) break;
+    unitIndex = unitIndex + 1;
+    registerId = registerId + 4;
+    unitBlock = unitBlock + 0x10;
+    unitsLeft = unitsLeft + -1;
+  } while (unitsLeft != 0);
+  if ((attributeMask & 0x40000) != 0) {
+    *packetCursor = 0x908;
+    packetCursor[1] = *(uint *)(vertexAttribs + 0x5c);
+    packetCursor = packetCursor + 2;
   }
-  if ((gb_aa_config & 0x80000) != 0) {
-    *param_4 = 0x3090c;
-    param_4[1] = *(uint *)(param_3 + 0x60);
-    param_4[2] = *(uint *)(param_3 + 100);
-    param_4[3] = *(uint *)(param_3 + 0x68);
-    param_4[4] = *(uint *)(param_3 + 0x6c);
-    param_4 = param_4 + 5;
+  if ((attributeMask & 0x80000) != 0) {
+    *packetCursor = 0x3090c;
+    packetCursor[1] = *(uint *)(vertexAttribs + 0x60);
+    packetCursor[2] = *(uint *)(vertexAttribs + 100);
+    packetCursor[3] = *(uint *)(vertexAttribs + 0x68);
+    packetCursor[4] = *(uint *)(vertexAttribs + 0x6c);
+    packetCursor = packetCursor + 5;
   }
-  *param_4 = 0x917;
-  bVar1 = *(byte *)(param_3 + 0x7c);
-  param_4[2] = (uint)0x000308c0;
-  param_4[1] = -(uint)bVar1 >> 0x1f;
-  param_4[3] = *(uint *)(param_3 + 0x20);
-  param_4[4] = *(uint *)(param_3 + 0x24);
-  param_4[5] = *(uint *)(param_3 + 0x28);
-  param_4[6] = *(uint *)(param_3 + 0x2c);
-  return param_4 + 7;
+  *packetCursor = 0x917;
+  flagByte = *(byte *)(vertexAttribs + 0x7c);
+  packetCursor[2] = (uint)0x000308c0;
+  packetCursor[1] = -(uint)flagByte >> 0x1f;
+  packetCursor[3] = *(uint *)(vertexAttribs + 0x20);
+  packetCursor[4] = *(uint *)(vertexAttribs + 0x24);
+  packetCursor[5] = *(uint *)(vertexAttribs + 0x28);
+  packetCursor[6] = *(uint *)(vertexAttribs + 0x2c);
+  return packetCursor + 7;
 }
 
 /* hidden-argument defect of gld_emitPrimitiveVertices (found auditing #70/#77): real callers (the
@@ -6315,7 +6329,7 @@ int gld_emitPrimitiveVertices(ctx, hwPrimType, extraVertexAttribs, vertexAttribs
     *(int *)(ctx + 0x2440) = ctx + 0x1be4;
     *(int *)(ctx + 0x2444) = ctx + 0x1c04;
     *(undefined4 *)(ctx + 0x248c) = *(undefined4 *)(ctx + 0x1ca4);
-    packetStart = (undefined4 *)FUN_0002c0c0(connection,packetStart);
+    packetStart = (undefined4 *)gld_emitVapStreamControl(connection,packetStart);
   }
   if (*(char *)(ctx + 0x2802) == '\0') {
     *packetStart = 0x5c8;
@@ -6382,51 +6396,51 @@ int gld_emitPrimitiveVertices(ctx, hwPrimType, extraVertexAttribs, vertexAttribs
   }
   else {
     if (emitsExtraVertex) {
-      packetCursor = (undefined4 *)((int (*)())FUN_00023870)(ctx,gb_aa_config,extraVertexAttribs,packetCursor);
+      packetCursor = (undefined4 *)((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,extraVertexAttribs,packetCursor);
     }
     if (vertexCount == 0x24) {
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs,packetCursor);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x100,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x200,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x300,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x400,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x500,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x600,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x700,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x800,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x900,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0xa00,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0xb00,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0xc00,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0xd00,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0xe00,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0xf00,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x1000,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,((unsigned char *)0x00001100) + vertexAttribs,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,((unsigned char *)0x00001200) + vertexAttribs,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,((unsigned char *)0x00001300) + vertexAttribs,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,((unsigned char *)0x00001400) + vertexAttribs,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,((unsigned char *)0x00001500) + vertexAttribs,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,((unsigned char *)0x00001600) + vertexAttribs,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,((unsigned char *)0x00001700) + vertexAttribs,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x1800,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x1900,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x1a00,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x1b00,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x1c00,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x1d00,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x1e00,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x1f00,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x2000,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x2100,cursorChain);
-      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x2200,cursorChain);
-      packetCursor = (undefined4 *)((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x2300,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs,packetCursor);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs + 0x100,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs + 0x200,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs + 0x300,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs + 0x400,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs + 0x500,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs + 0x600,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs + 0x700,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs + 0x800,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs + 0x900,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs + 0xa00,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs + 0xb00,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs + 0xc00,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs + 0xd00,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs + 0xe00,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs + 0xf00,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs + 0x1000,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,((unsigned char *)0x00001100) + vertexAttribs,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,((unsigned char *)0x00001200) + vertexAttribs,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,((unsigned char *)0x00001300) + vertexAttribs,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,((unsigned char *)0x00001400) + vertexAttribs,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,((unsigned char *)0x00001500) + vertexAttribs,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,((unsigned char *)0x00001600) + vertexAttribs,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,((unsigned char *)0x00001700) + vertexAttribs,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs + 0x1800,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs + 0x1900,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs + 0x1a00,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs + 0x1b00,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs + 0x1c00,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs + 0x1d00,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs + 0x1e00,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs + 0x1f00,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs + 0x2000,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs + 0x2100,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs + 0x2200,cursorChain);
+      packetCursor = (undefined4 *)((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs + 0x2300,cursorChain);
     }
     else if (0 < vertexCount) {
       vertexIndex = 0;
       do {
         vertexIndex = vertexIndex + 1;
-        packetCursor = (undefined4 *)((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs,packetCursor);
+        packetCursor = (undefined4 *)((int (*)())gldEmitCurrentAttributeRegistersMasked)(ctx,gb_aa_config,vertexAttribs,packetCursor);
         vertexAttribs = vertexAttribs + 0x100;
       } while (vertexCount != vertexIndex);
     }
@@ -6473,7 +6487,7 @@ int FUN_00024190(param_1, param_2, param_3, param_4, param_5)
     *(int *)(param_1 + 0x2440) = param_1 + 0x1be4;
     *(int *)(param_1 + 0x2444) = param_1 + 0x1c04;
     *(undefined4 *)(param_1 + 0x248c) = *(undefined4 *)(param_1 + 0x1ca4);
-    puVar2 = (undefined4 *)FUN_0002c0c0(uVar5,puVar2);
+    puVar2 = (undefined4 *)gld_emitVapStreamControl(uVar5,puVar2);
   }
   if (*(char *)(param_1 + 0x2802) == '\0') {
     *puVar2 = 0x5c8;
@@ -6507,35 +6521,35 @@ int FUN_00024190(param_1, param_2, param_3, param_4, param_5)
   return;
 }
 
-/* FUN_000242f0: same duplicated-body defect as #77: the real 116-byte wrapper had been overwritten with
+/* gldPrimWrapperTriangles_23a24: same duplicated-body defect as #77: the real 116-byte wrapper had been overwritten with
  * unrelated gldPrimInlineLineStrip-family content. Rewritten from real stock disassembly. Also corrects an earlier
- * misreading of this function's own real 7th argument (see FUN_0002cc30): no real caller here sets r9
+ * misreading of this function's own real 7th argument (see gld_prepareDrawCount): no real caller here sets r9
  * either, it just forwards garbage like the rest of the dispatch-wrapper family. */
-/* FUN_000242f0 @ 0x242f0 (116 bytes) */
-void FUN_000242f0(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8)
+/* gldPrimWrapperTriangles_23a24 @ 0x242f0 (116 bytes) */
+void gldPrimWrapperTriangles_23a24(int ctx,int vertexAttribs,undefined4 elementCount,undefined4 extraArg,undefined4 extraArg4,undefined4 staleArgR8,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8)
 {
-  uint uVar1;
+  uint vertexCount;
   undefined4 staleArgR9;
 
-  uVar1 = ((uint (*)())FUN_0002cc30)(param_1,0,4,param_3,param_5,param_6,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8);
-  if (uVar1 != 0) {
-    return gld_emitPrimitiveVertices(param_1 + 0x240,4,0,param_2,uVar1,param_4);
+  vertexCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,4,elementCount,extraArg4,staleArgR8,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8);
+  if (vertexCount != 0) {
+    return gld_emitPrimitiveVertices(ctx + 0x240,4,0,vertexAttribs,vertexCount,extraArg);
   }
   return;
 }
 
-/* FUN_00024370: same duplicated-body defect as #77 (this file's copy of the bug: the real 112-byte wrapper
+/* gldPrimWrapperTriangleStrip_23a24: same duplicated-body defect as #77 (this file's copy of the bug: the real 112-byte wrapper
  * had been overwritten with unrelated gldPrimInlineLineStrip-family content). Rewritten from real stock disassembly,
  * same as the part_004.c siblings. */
-/* FUN_00024370 @ 0x24370 (112 bytes) */
-void FUN_00024370(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+/* gldPrimWrapperTriangleStrip_23a24 @ 0x24370 (112 bytes) */
+void gldPrimWrapperTriangleStrip_23a24(int ctx,int vertexAttribs,undefined4 elementCount,undefined4 extraArg,undefined4 extraArg4,undefined4 staleArgR8,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
 {
-  uint uVar1;
+  uint vertexCount;
   undefined4 staleArgR9;
 
-  uVar1 = ((uint (*)())FUN_0002cc30)(param_1,0,5,param_3,param_5,param_6,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleFprArg9);
-  if (uVar1 != 0) {
-    return gld_emitPrimitiveVertices(param_1 + 0x240,6,0,param_2,uVar1,param_4);
+  vertexCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,5,elementCount,extraArg4,staleArgR8,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleFprArg9);
+  if (vertexCount != 0) {
+    return gld_emitPrimitiveVertices(ctx + 0x240,6,0,vertexAttribs,vertexCount,extraArg);
   }
   return;
 }
@@ -6564,7 +6578,7 @@ asm(".globl FUN_00020330");
 asm(".set FUN_00020330, _FUN_00020330");
 asm(".globl gldDisplayNotificationCallback");
 asm(".set gldDisplayNotificationCallback, _gldDisplayNotificationCallback");
-asm(".globl FUN_000242f0");
-asm(".set FUN_000242f0, _FUN_000242f0");
-asm(".globl FUN_00024370");
-asm(".set FUN_00024370, _FUN_00024370");
+asm(".globl gldPrimWrapperTriangles_23a24");
+asm(".set gldPrimWrapperTriangles_23a24, _gldPrimWrapperTriangles_23a24");
+asm(".globl gldPrimWrapperTriangleStrip_23a24");
+asm(".set gldPrimWrapperTriangleStrip_23a24, _gldPrimWrapperTriangleStrip_23a24");

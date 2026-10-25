@@ -1,0 +1,5 @@
+local	FUN_000bfed0	param_2	rsWords	INFERRED	same role as psnDecEncodeHwWords's rsWords: output word array filled by the encoder (param_2[0] header, param_2[1..] packed words)
+local	FUN_000bfed0	param_3	programImage	INFERRED	same role as psnDecEncodeHwWords's programImage: param_3[4] is the base the encoded instruction words are written to
+local	FUN_000be460	param_1	psnProgram	INFERRED	instruction records at psnProgram + 0x48 + n*0x48 (same walk as FUN_000bfed0, whose first parameter is psnProgram); the caller passes psnProgram
+local	FUN_000be460	param_2	rsWords	INFERRED	output word array filled with packed fields (param_2[n+1]), as in FUN_000bfed0
+local	FUN_000be460	param_3	programImage	INFERRED	encoded instruction words are written at param_3[4] + offsets, as in FUN_000bfed0

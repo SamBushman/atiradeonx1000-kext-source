@@ -1,0 +1,103 @@
+func	FUN_0001b510	gld_validateFramebuffer	INFERRED	checks the attachments of a framebuffer object (size limits, resident textures, compatible colour/depth/stencil formats), derives the hardware surface words and mode bits; returns 1 when complete, otherwise sets attachments[7] = 1 and returns 0
+local	FUN_0001b510	param_1	ctx	CONFIRMED	GLDContext
+local	FUN_0001b510	param_2	framebufferObj	CONFIRMED	framebuffer object: [0] attachment descriptor block (0x18 bytes per attachment, size shorts at +0x9a/+0x9c), [1] attachment table (4 colour, depth, stencil), words 2..0x31 are the derived hardware state
+local	FUN_0001b510	param_3	staleArgR5	INFERRED	forwarded to gldTextureMakeResident; unused
+local	FUN_0001b510	param_4	staleArgR6	INFERRED	forwarded to gldTextureMakeResident; unused
+local	FUN_0001b510	param_5	staleArgR7	INFERRED	forwarded to gldTextureMakeResident; unused
+local	FUN_0001b510	param_6	staleArgR8	INFERRED	forwarded to gldTextureMakeResident; unused
+local	FUN_0001b510	puVar4	colorFormatTable	INFERRED	PTR_DAT_001e88c8: the 0x24-byte pixel-format table
+local	FUN_0001b510	bVar2	formatIndex	INFERRED	byte +0x38 of the attachment texture: index into the format table
+local	FUN_0001b510	bVar1	moreSlots	INFERRED	loop continues (index != 5)
+local	FUN_0001b510	cVar3	depthFormat	INFERRED	format index byte of the depth attachment (0x10 or 0x29 = 24-bit depth variants)
+use	FUN_0001b510	piVar14	clearCursor	INFERRED	walks framebufferObj words 0x13..0x18 while they are zeroed	^\s*piVar14\ =\ param_2;$	+1
+use	FUN_0001b510	piVar14	clearCursor	INFERRED	walks framebufferObj words 0x13..0x18 while they are zeroed	^\s*piVar14\[0x13\]\ =\ 0;$	+2
+use	FUN_0001b510	piVar14	attachments	CONFIRMED	framebufferObj[1]: the attachment table (4 colour, depth, stencil texture pointers); word 7 is set to 1 when the framebuffer is incomplete	^\s*piVar14\ =\ \(int\ \*\)param_2\[1\];$	+2
+use	FUN_0001b510	piVar14	attachments	CONFIRMED	framebufferObj[1]: the attachment table (4 colour, depth, stencil texture pointers); word 7 is set to 1 when the framebuffer is incomplete	^\s*iVar10\ =\ piVar14\[iVar16\];$	+1
+use	FUN_0001b510	piVar14	attachments	CONFIRMED	framebufferObj[1]: the attachment table (4 colour, depth, stencil texture pointers); word 7 is set to 1 when the framebuffer is incomplete	^\s*piVar14\ =\ \(int\ \*\)param_2\[1\];$@2	+1
+use	FUN_0001b510	piVar14	attachments	CONFIRMED	framebufferObj[1]: the attachment table (4 colour, depth, stencil texture pointers); word 7 is set to 1 when the framebuffer is incomplete	^\s*piVar14\ =\ \(int\ \*\)param_2\[1\];$@3	+1
+use	FUN_0001b510	piVar14	attachments	CONFIRMED	framebufferObj[1]: the attachment table (4 colour, depth, stencil texture pointers); word 7 is set to 1 when the framebuffer is incomplete	^\s*iVar17\ =\ piVar14\[4\];$	+1
+use	FUN_0001b510	piVar14	attachments	CONFIRMED	framebufferObj[1]: the attachment table (4 colour, depth, stencil texture pointers); word 7 is set to 1 when the framebuffer is incomplete	^\s*iVar16\ =\ piVar14\[5\];$	+1
+use	FUN_0001b510	piVar14	attachments	CONFIRMED	framebufferObj[1]: the attachment table (4 colour, depth, stencil texture pointers); word 7 is set to 1 when the framebuffer is incomplete	^\s*piVar14\[7\]\ =\ 1;$	+1
+use	FUN_0001b510	piVar14	attachments	CONFIRMED	framebufferObj[1]: the attachment table (4 colour, depth, stencil texture pointers); word 7 is set to 1 when the framebuffer is incomplete	^\s*piVar7\ =\ piVar14;$	+1
+use	FUN_0001b510	piVar14	attachments	CONFIRMED	framebufferObj[1]: the attachment table (4 colour, depth, stencil texture pointers); word 7 is set to 1 when the framebuffer is incomplete	^\s*piVar7\ =\ piVar14;$@2	+1
+use	FUN_0001b510	piVar14	attachments	CONFIRMED	framebufferObj[1]: the attachment table (4 colour, depth, stencil texture pointers); word 7 is set to 1 when the framebuffer is incomplete	^\s*if\ \(piVar14\[4\]\ !=\ 0\)\ \{$	+2
+use	FUN_0001b510	piVar14	attachments	CONFIRMED	framebufferObj[1]: the attachment table (4 colour, depth, stencil texture pointers); word 7 is set to 1 when the framebuffer is incomplete	^\s*if\ \(piVar14\[5\]\ !=\ 0\)\ \{$	+1
+use	FUN_0001b510	piVar14	attachments	CONFIRMED	framebufferObj[1]: the attachment table (4 colour, depth, stencil texture pointers); word 7 is set to 1 when the framebuffer is incomplete	^\s*if\ \(\*\(char\ \*\)\(piVar14\[5\]\ \+\ 0x38\)\ ==\ '\)'\)\ \{$	+1
+use	FUN_0001b510	piVar14	attachments	CONFIRMED	framebufferObj[1]: the attachment table (4 colour, depth, stencil texture pointers); word 7 is set to 1 when the framebuffer is incomplete	^\s*piVar7\ =\ piVar14;$@3	+1
+use	FUN_0001b510	piVar14	attachments	CONFIRMED	framebufferObj[1]: the attachment table (4 colour, depth, stencil texture pointers); word 7 is set to 1 when the framebuffer is incomplete	^\s*piVar14\[7\]\ =\ 0;$	+1
+use	FUN_0001b510	iVar17	clearLeft	INFERRED	countdown while the six attachment words are cleared	^\s*iVar17\ =\ 6;$	+1
+use	FUN_0001b510	iVar17	clearLeft	INFERRED	countdown while the six attachment words are cleared	^\s*iVar17\ =\ iVar17\ \+\ \-1;$	+2
+use	FUN_0001b510	iVar17	colorTexture	INFERRED	last non-NULL colour attachment: its format defines the colour bits	^\s*iVar17\ =\ 0;$	+1
+use	FUN_0001b510	iVar17	colorTexture	INFERRED	last non-NULL colour attachment: its format defines the colour bits	^\s*iVar17\ =\ iVar10;$	+1
+use	FUN_0001b510	iVar17	colorTexture	INFERRED	last non-NULL colour attachment: its format defines the colour bits	^\s*if\ \(iVar17\ ==\ 0\)\ \{$	+1
+use	FUN_0001b510	iVar17	colorTexture	INFERRED	last non-NULL colour attachment: its format defines the colour bits	^\s*bVar2\ =\ \*\(byte\ \*\)\(iVar17\ \+\ 0x38\);$	+1
+use	FUN_0001b510	iVar17	colorTexture	INFERRED	last non-NULL colour attachment: its format defines the colour bits	^\s*if\ \(\(uVar5\ >>\ 0x1a\ ==\ 0\)\ \|\|\ \(\*\(short\ \*\)\(\*\(int\ \*\)\(iVar17\ \+\ 0x30\)\ \+\ 2\)\ !=\ 0x1907\)\)$	+1
+use	FUN_0001b510	iVar17	depthTexture	INFERRED	attachment table entry 4: depth texture	^\s*iVar17\ =\ piVar14\[4\];$	+2
+use	FUN_0001b510	iVar17	depthTexture	INFERRED	attachment table entry 4: depth texture	^\s*param_2\[10\]\ =\ \*\(uint\ \*\)\(PTR_DAT_001e88c8\ \+\ \(uint\)\*\(byte\ \*\)\(iVar17\ \+\ 0x38\)\ \*\ 0x24\ \+\ 0x14\)\ >>\ 8\ \&$	+1
+use	FUN_0001b510	iVar17	depthTexture	INFERRED	attachment table entry 4: depth texture	^\s*if\ \(\(\*\(char\ \*\)\(iVar17\ \+\ 0x38\)\ !=\ '\\x10'\)\ \&\&\ \(\*\(char\ \*\)\(iVar17\ \+\ 0x38\)\ !=\ '\)'\)\)$	+1
+use	FUN_0001b510	iVar17	depthTexture	INFERRED	attachment table entry 4: depth texture	^\s*if\ \(\(\*\(char\ \*\)\(iVar16\ \+\ 0x38\)\ !=\ '\)'\)\ \|\|\ \(\(iVar17\ !=\ 0\ \&\&\ \(iVar17\ !=\ iVar16\)\)\)\)\ \{$	+1
+use	FUN_0001b510	iVar17	attachLeft	INFERRED	countdown over the six attachments	^\s*iVar17\ =\ 6;$@2	+1
+use	FUN_0001b510	iVar17	attachLeft	INFERRED	countdown over the six attachments	^\s*iVar17\ =\ iVar17\ \+\ \-1;$@2	+2
+use	FUN_0001b510	iVar17	scanLeft	INFERRED	countdown over the four colour attachments	^\s*iVar17\ =\ 4;$	+1
+use	FUN_0001b510	iVar17	scanLeft	INFERRED	countdown over the four colour attachments	^\s*iVar17\ =\ iVar17\ \+\ \-1;$@3	+1
+use	FUN_0001b510	iVar17	descOffset	INFERRED	attachment index * 0x18: offset into the attachment descriptor block	^\s*iVar17\ =\ 0;$@2	+1
+use	FUN_0001b510	iVar17	descOffset	INFERRED	attachment index * 0x18: offset into the attachment descriptor block	^\s*iVar9\ =\ iVar17\ \+\ iVar11;$	+1
+use	FUN_0001b510	iVar17	descOffset	INFERRED	attachment index * 0x18: offset into the attachment descriptor block	^\s*iVar17\ =\ iVar17\ \+\ 0x18;$	+1
+use	FUN_0001b510	iVar10	attachment	INFERRED	attachment table entry being made resident	^\s*iVar10\ =\ piVar14\[iVar16\];$	+2
+use	FUN_0001b510	iVar10	attachment	INFERRED	attachment table entry being made resident	^\s*iVar17\ =\ iVar10;$	+1
+use	FUN_0001b510	iVar10	attachment	INFERRED	attachment table entry being made resident	^\s*iVar10\ =\ FUN_00032100\(param_1,iVar10,param_3,param_4,param_5,param_6\);$	+1
+use	FUN_0001b510	iVar10	surfaceOffset	INFERRED	byte offset of the attachment's selected mip level in its image block	^\s*iVar10\ =\ \*\(int\ \*\)\(iVar9\ \+\ 8\);$	+1
+use	FUN_0001b510	iVar10	surfaceOffset	INFERRED	byte offset of the attachment's selected mip level in its image block	^\s*for\ \(;\ iVar10\ !=\ 0;\ iVar10\ =\ iVar10\ \+\ \-1\)\ \{$	+1
+use	FUN_0001b510	iVar10	surfaceOffset	INFERRED	byte offset of the attachment's selected mip level in its image block	^\s*iVar10\ =\ 0;$	+1
+use	FUN_0001b510	iVar10	surfaceOffset	INFERRED	byte offset of the attachment's selected mip level in its image block	^\s*iVar6\ =\ \*\(int\ \*\)\(iVar9\ \+\ 4\)\ \*\ 0xd\ \+\ iVar10;$	+1
+use	FUN_0001b510	iVar10	surfaceOffset	INFERRED	byte offset of the attachment's selected mip level in its image block	^\s*for\ \(;\ iVar10\ !=\ 0;\ iVar10\ =\ iVar10\ \+\ \-1\)\ \{$@2	+1
+use	FUN_0001b510	iVar10	surfaceOffset	INFERRED	byte offset of the attachment's selected mip level in its image block	^\s*iVar10\ =\ \*\(int\ \*\)\(iVar9\ \+\ 0xc\)\ \*\ uVar8\ \*\ \(uint\)\*\(ushort\ \*\)\(iVar11\ \+\ 0x9c\)\ \+$	+1
+use	FUN_0001b510	iVar10	surfaceOffset	INFERRED	byte offset of the attachment's selected mip level in its image block	^\s*piVar12\[0x19\]\ =\ iVar10;$	+1
+use	FUN_0001b510	iVar16	stencilTexture	INFERRED	attachment table entry 5: stencil texture	^\s*iVar16\ =\ piVar14\[5\];$	+2
+use	FUN_0001b510	iVar16	stencilTexture	INFERRED	attachment table entry 5: stencil texture	^\s*param_2\[0xb\]\ =\ \*\(uint\ \*\)\(PTR_DAT_001e88c8\ \+\ \(uint\)\*\(byte\ \*\)\(iVar16\ \+\ 0x38\)\ \*\ 0x24\ \+\ 0x14\)\ >>\ 4\ \&$	+1
+use	FUN_0001b510	iVar16	stencilTexture	INFERRED	attachment table entry 5: stencil texture	^\s*if\ \(\(\*\(char\ \*\)\(iVar16\ \+\ 0x38\)\ !=\ '\)'\)\ \|\|\ \(\(iVar17\ !=\ 0\ \&\&\ \(iVar17\ !=\ iVar16\)\)\)\)\ \{$	+1
+use	FUN_0001b510	iVar16	attachmentTexture	INFERRED	attachment texture whose backing word (+0x34) is copied	^\s*iVar16\ =\ \*piVar7;$	+1
+use	FUN_0001b510	iVar16	attachmentTexture	INFERRED	attachment texture whose backing word (+0x34) is copied	^\s*if\ \(iVar16\ !=\ 0\)\ \{$	+2
+use	FUN_0001b510	iVar16	slotIndex	INFERRED	attachment slot 0..5	^\s*iVar16\ =\ 0;$@2	+1
+use	FUN_0001b510	iVar16	slotIndex	INFERRED	attachment slot 0..5	^\s*bVar1\ =\ iVar16\ !=\ 5;$@2	+1
+use	FUN_0001b510	iVar16	slotIndex	INFERRED	attachment slot 0..5	^\s*iVar16\ =\ iVar16\ \+\ 1;$@2	+1
+local	FUN_0001b510	piVar7	attachCursor	INFERRED	walks the attachment table
+local	FUN_0001b510	piVar12	fbWordCursor	INFERRED	walks the per-attachment derived words of framebufferObj
+local	FUN_0001b510	piVar13	attachmentTexture2	INFERRED	attachment texture of the current slot
+use	FUN_0001b510	uVar5	formatBits	INFERRED	format-table word +0x10 / +0x14 of the colour format	^\s*uVar5\ =\ \*\(uint\ \*\)\(puVar4\ \+\ \(uint\)bVar2\ \*\ 0x24\ \+\ 0x10\);$	+3
+use	FUN_0001b510	uVar5	formatBits	INFERRED	format-table word +0x10 / +0x14 of the colour format	^\s*param_2\[9\]\ =\ uVar5\ >>\ 0x1a;$	+1
+use	FUN_0001b510	uVar5	formatBits	INFERRED	format-table word +0x10 / +0x14 of the colour format	^\s*uVar5\ =\ \*\(uint\ \*\)\(puVar4\ \+\ \(uint\)bVar2\ \*\ 0x24\ \+\ 0x14\);$@2	+2
+use	FUN_0001b510	uVar5	colorModeBits	INFERRED	hardware colour/depth/stencil mode bits accumulated for the framebuffer (stored at word 3)	^\s*uVar5\ =\ 5;$	+1
+use	FUN_0001b510	uVar5	colorModeBits	INFERRED	hardware colour/depth/stencil mode bits accumulated for the framebuffer (stored at word 3)	^\s*uVar5\ =\ 3;$	+1
+use	FUN_0001b510	uVar5	colorModeBits	INFERRED	hardware colour/depth/stencil mode bits accumulated for the framebuffer (stored at word 3)	^\s*uVar5\ =\ 4;$	+1
+use	FUN_0001b510	uVar5	colorModeBits	INFERRED	hardware colour/depth/stencil mode bits accumulated for the framebuffer (stored at word 3)	^\s*uVar5\ =\ 0;$	+1
+use	FUN_0001b510	uVar5	colorModeBits	INFERRED	hardware colour/depth/stencil mode bits accumulated for the framebuffer (stored at word 3)	^\s*uVar5\ =\ 0xd;$	+1
+use	FUN_0001b510	uVar5	colorModeBits	INFERRED	hardware colour/depth/stencil mode bits accumulated for the framebuffer (stored at word 3)	^\s*uVar5\ =\ 0xb;$	+1
+use	FUN_0001b510	uVar5	colorModeBits	INFERRED	hardware colour/depth/stencil mode bits accumulated for the framebuffer (stored at word 3)	^\s*uVar5\ =\ 0xc;$	+1
+use	FUN_0001b510	uVar5	colorModeBits	INFERRED	hardware colour/depth/stencil mode bits accumulated for the framebuffer (stored at word 3)	^\s*uVar5\ =\ 0;$@2	+1
+use	FUN_0001b510	uVar5	colorModeBits	INFERRED	hardware colour/depth/stencil mode bits accumulated for the framebuffer (stored at word 3)	^\s*uVar8\ =\ uVar5;$	+1
+use	FUN_0001b510	uVar5	colorModeBits	INFERRED	hardware colour/depth/stencil mode bits accumulated for the framebuffer (stored at word 3)	^\s*uVar8\ =\ uVar5\ \|\ 0x40;$	+1
+use	FUN_0001b510	uVar5	colorModeBits	INFERRED	hardware colour/depth/stencil mode bits accumulated for the framebuffer (stored at word 3)	^\s*uVar8\ =\ uVar5\ \|\ 0x10040;$	+1
+use	FUN_0001b510	uVar5	colorModeBits	INFERRED	hardware colour/depth/stencil mode bits accumulated for the framebuffer (stored at word 3)	^\s*uVar8\ =\ uVar5\ \|\ 0x20040;$	+1
+use	FUN_0001b510	uVar5	colorModeBits	INFERRED	hardware colour/depth/stencil mode bits accumulated for the framebuffer (stored at word 3)	^\s*uVar5\ =\ uVar8;$	+1
+use	FUN_0001b510	uVar5	colorModeBits	INFERRED	hardware colour/depth/stencil mode bits accumulated for the framebuffer (stored at word 3)	^\s*uVar5\ =\ uVar8\ \|\ 0x80;$	+1
+use	FUN_0001b510	uVar5	colorModeBits	INFERRED	hardware colour/depth/stencil mode bits accumulated for the framebuffer (stored at word 3)	^\s*uVar5\ =\ uVar8\ \|\ 0x30080;$	+1
+use	FUN_0001b510	uVar8	modeBitsTmp	INFERRED	colorModeBits with the depth/stencil bits added	^\s*uVar8\ =\ uVar5;$	+1
+use	FUN_0001b510	uVar8	modeBitsTmp	INFERRED	colorModeBits with the depth/stencil bits added	^\s*uVar8\ =\ uVar5\ \|\ 0x40;$	+1
+use	FUN_0001b510	uVar8	modeBitsTmp	INFERRED	colorModeBits with the depth/stencil bits added	^\s*uVar8\ =\ uVar5\ \|\ 0x10040;$	+1
+use	FUN_0001b510	uVar8	modeBitsTmp	INFERRED	colorModeBits with the depth/stencil bits added	^\s*uVar8\ =\ uVar5\ \|\ 0x20040;$	+1
+use	FUN_0001b510	uVar8	modeBitsTmp	INFERRED	colorModeBits with the depth/stencil bits added	^\s*uVar5\ =\ uVar8;$	+1
+use	FUN_0001b510	uVar8	modeBitsTmp	INFERRED	colorModeBits with the depth/stencil bits added	^\s*uVar5\ =\ uVar8\ \|\ 0x80;$	+1
+use	FUN_0001b510	uVar8	modeBitsTmp	INFERRED	colorModeBits with the depth/stencil bits added	^\s*uVar5\ =\ uVar8\ \|\ 0x30080;$	+1
+use	FUN_0001b510	uVar8	texelsPerRow	INFERRED	width of the attachment's mip level in texels (halved per level)	^\s*uVar8\ =\ \(uint\)\*\(ushort\ \*\)\(\(int\)piVar13\ \+\ 0x3e\)\ <<$	+1
+use	FUN_0001b510	uVar8	texelsPerRow	INFERRED	width of the attachment's mip level in texels (halved per level)	^\s*uVar8\ =\ \(\(int\)uVar8\ >>\ 1\)\ \+\ \(uint\)\(\(int\)uVar8\ <\ 0\ \&\&\ \(uVar8\ \&\ 1\)\ !=\ 0\);$	+1
+use	FUN_0001b510	uVar8	texelsPerRow	INFERRED	width of the attachment's mip level in texels (halved per level)	^\s*uVar8\ =\ \*\(uint\ \*\)\(\*piVar13\ \+\ 0xc\);$	+1
+use	FUN_0001b510	uVar8	texelsPerRow	INFERRED	width of the attachment's mip level in texels (halved per level)	^\s*uVar8\ =\ \(\(int\)uVar8\ >>\ 1\)\ \+\ \(uint\)\(\(int\)uVar8\ <\ 0\ \&\&\ \(uVar8\ \&\ 1\)\ !=\ 0\);$@2	+1
+use	FUN_0001b510	uVar8	texelsPerRow	INFERRED	width of the attachment's mip level in texels (halved per level)	^\s*iVar10\ =\ \*\(int\ \*\)\(iVar9\ \+\ 0xc\)\ \*\ uVar8\ \*\ \(uint\)\*\(ushort\ \*\)\(iVar11\ \+\ 0x9c\)\ \+$	+1
+use	FUN_0001b510	uVar8	texelsPerRow	INFERRED	width of the attachment's mip level in texels (halved per level)	^\s*piVar12\[0x1f\]\ =\ uVar8;$	+1
+local	FUN_0001b510	uVar15	modeBitsHigh	INFERRED	0x4000 | 0x100 | 0x400: buffer-presence bits stored at word 2
+local	FUN_0001b510	iVar6	levelIndex	INFERRED	index of the mip level descriptor
+local	FUN_0001b510	iVar9	levelDesc	INFERRED	descriptor of the attachment's level inside the descriptor block
+local	FUN_0001b510	iVar11	descBlock	INFERRED	*framebufferObj: the attachment descriptor block
+use	FUN_0001b510	iVar17	scanLeft	INFERRED	countdown over the four colour attachments	^\s*\}\ while\ \(iVar17\ !=\ 0\);$@3	+1
+use	FUN_0001b510	uVar5	colorModeBits	INFERRED	hardware colour/depth/stencil mode bits accumulated for the framebuffer (stored at word 3)	^\s*param_2\[3\]\ =\ uVar5;$	+1

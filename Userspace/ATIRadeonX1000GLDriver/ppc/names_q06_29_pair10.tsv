@@ -1,0 +1,31 @@
+local	FUN_0010f704	param_1	scopeId	INFERRED	scope id compared with record word 7 (+0x1c)
+use	FUN_0010f704	iVar1	bitCountdown	INFERRED	bits of the used-slot bitset still to count	^\s*iVar1\ =\ puVar3\[2\];$	+1
+use	FUN_0010f704	iVar1	bitCountdown	INFERRED	bits of the used-slot bitset still to count	^\s*if\ \(iVar1\ !=\ 0\)\ \{$	+1
+use	FUN_0010f704	iVar1	bitCountdown	INFERRED	bits of the used-slot bitset still to count	^\s*iVar1\ =\ iVar1\ \+\ \-1;$	+2
+use	FUN_0010f704	puVar2	bitsetClearCursor	INFERRED	cursor clearing the used-slot bitset words	^\s*puVar2\ =\ puVar8;$	+1
+use	FUN_0010f704	puVar2	bitsetClearCursor	INFERRED	cursor clearing the used-slot bitset words	^\s*puVar2\[2\]\ =\ 0;$	+2
+use	FUN_0010f704	iVar5	usedSlotCount	INFERRED	number of distinct slots used by the scope's records (returned)	^\s*iVar5\ =\ 0;$	+1
+use	FUN_0010f704	iVar5	usedSlotCount	INFERRED	number of distinct slots used by the scope's records (returned)	^\s*iVar5\ =\ iVar5\ \+\ 1;$	+1
+use	FUN_0010f704	iVar5	usedSlotCount	INFERRED	number of distinct slots used by the scope's records (returned)	^\s*return\ iVar5;$	+1
+use	FUN_0010f704	uVar6	recordSlot	INFERRED	slot number of the record (+0x14)	^\s*uVar6\ =\ \*\(uint\ \*\)\(\*piVar4\ \+\ 0x14\);$	+2
+use	FUN_0010f704	uVar6	recordSlot	INFERRED	slot number of the record (+0x14)	^\s*1\ <<\ \(uVar6\ \&\ 0x1f\)\ \|\ \*\(uint\ \*\)\(\(int\)puVar8\ \+\ uVar7\ \+\ 8\);$	+1
+use	FUN_0010f704	uVar7	slotWordOffset	INFERRED	bitset word offset of the slot	^\s*uVar7\ =\ uVar6\ >>\ 3\ \&\ 0x1ffffffc;$	+3
+use	FUN_0010f704	puVar8	usedSlotBitset	INFERRED	bitset of the slots used (allocation + 1, 0x30 bits)	^\s*puVar8\ =\ puVar3\ \+\ 1;$	+1
+use	FUN_0010f704	puVar8	usedSlotBitset	INFERRED	bitset of the slots used (allocation + 1, 0x30 bits)	^\s*puVar2\ =\ puVar8;$	+1
+use	FUN_0010f704	puVar8	usedSlotBitset	INFERRED	bitset of the slots used (allocation + 1, 0x30 bits)	^\s*\*\(uint\ \*\)\(\(int\)puVar8\ \+\ uVar7\ \+\ 8\)\ =$	+2
+use	FUN_0010f704	puVar8	usedSlotBitset	INFERRED	bitset of the slots used (allocation + 1, 0x30 bits)	^\s*if\ \(\(\*\(uint\ \*\)\(\(int\)puVar8\ \+\ \(uVar6\ >>\ 3\ \&\ 0x1ffffffc\)\ \+\ 8\)\ >>\ \(uVar6\ \&\ 0x1f\)\ \&\ 1\)\ !=\ 0\)\ \{$	+1
+local	VReg__setTopDefinition	param_1	vreg	INFERRED	the virtual register (this); +0x2c definition stack
+local	VReg__setTopDefinition	param_2	definition	INFERRED	definition that replaces the top of the stack
+use	VReg__setTopDefinition	puVar1	topRef	INFERRED	element reference of the top of the definition stack	^\s*puVar1\ =\ \(undefined4\ \*\)\(uVar3\ \*\ 4\ \+\ puVar4\[2\]\);$	+1
+use	VReg__setTopDefinition	puVar1	topRef	INFERRED	element reference of the top of the definition stack	^\s*puVar1\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar4,uVar3\);$	+1
+use	VReg__setTopDefinition	puVar1	topRef	INFERRED	element reference of the top of the definition stack	^\s*\*puVar1\ =\ param_2;$	+1
+use	VReg__setTopDefinition	uVar2	stackCount	INFERRED	filled count of the definition stack	^\s*uVar2\ =\ puVar4\[1\];$	+2
+use	VReg__setTopDefinition	uVar2	stackCount	INFERRED	filled count of the definition stack	^\s*if\ \(uVar2\ <=\ uVar3\)\ \{$	+3
+use	VReg__setTopDefinition	uVar3	lastIndex	INFERRED	index of the top element	^\s*uVar3\ =\ uVar2\ \-\ 1;$	+4
+use	VReg__setTopDefinition	uVar3	lastIndex	INFERRED	index of the top element	^\s*puVar1\ =\ \(undefined4\ \*\)\(uVar3\ \*\ 4\ \+\ puVar4\[2\]\);$	+1
+use	VReg__setTopDefinition	uVar3	lastIndex	INFERRED	index of the top element	^\s*puVar1\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar4,uVar3\);$	+1
+use	VReg__setTopDefinition	puVar4	definitionStack	INFERRED	definition stack vector header (vreg +0x2c)	^\s*puVar4\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 0x2c\);$	+2
+use	VReg__setTopDefinition	puVar4	definitionStack	INFERRED	definition stack vector header (vreg +0x2c)	^\s*if\ \(uVar3\ <\ \*puVar4\)\ \{$	+1
+use	VReg__setTopDefinition	puVar4	definitionStack	INFERRED	definition stack vector header (vreg +0x2c)	^\s*_memset\(uVar2\ \*\ 4\ \+\ puVar4\[2\],0,\(uVar3\ \-\ uVar2\)\ \*\ 4\ \+\ 4\);$	+2
+use	VReg__setTopDefinition	puVar4	definitionStack	INFERRED	definition stack vector header (vreg +0x2c)	^\s*puVar1\ =\ \(undefined4\ \*\)\(uVar3\ \*\ 4\ \+\ puVar4\[2\]\);$	+1
+use	VReg__setTopDefinition	puVar4	definitionStack	INFERRED	definition stack vector header (vreg +0x2c)	^\s*puVar1\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar4,uVar3\);$	+1

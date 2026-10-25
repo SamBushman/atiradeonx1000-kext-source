@@ -19,6 +19,7 @@ for i in range(lo,hi+1):
     if cur and c: print(cur)
 PY
 ); do
+  [ "$fn" = FUN_000e3b88 ] && continue
   S=$Q/bg_spec.tsv; rm -f $S
   python3 Tools/userspace/lpnames/autoweb.py $P $fn $R $S >/dev/null 2>&1 || continue
   [ -s $S ] || continue

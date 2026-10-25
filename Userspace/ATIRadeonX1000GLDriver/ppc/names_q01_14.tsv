@@ -1,0 +1,36 @@
+func	FUN_00007d50	gld_bindCurrentFramebuffer	INFERRED	releases the attachments of the previously bound framebuffer, makes engineObjects+0x1a0 the bound framebuffer when FUN_0001b510 accepts it, retains its attachments and refreshes the y-inverted flag
+func	FUN_000095e0	gld_resolveProgramSlots	INFERRED	for program slots 0 and 1 picks the object by the engine-state enable byte and FUN_00026650 validation and stores it at ctx+0x1cc/+0x1d0
+func	FUN_000096b0	gld_decodeProgramOperandOffset	INFERRED	decodes a program operand word (register file in bits 16..20) into the byte offset of that register inside the engine-state block, plus its size
+func	FUN_0000a180	gld_channelBitsForFormat	INFERRED	derives red/green/blue/alpha bit counts of a pixel format word (5/6/8/10/12/16/32-bit groups); returns 0 when no group matches
+local	FUN_00007d50	piVar6	newFramebuffer	INFERRED	engineObjects+0x1a0: the framebuffer object that is now current; cleared when it is not complete
+local	FUN_00007d50	piVar5	refCountWord	INFERRED	refcount word of an attachment's backing (+0x10), decremented/incremented by the store-conditional loops
+local	FUN_00007d50	bVar1	hadFramebuffer	INFERRED	ctx+0x150 boundFramebuffer was non-NULL on entry
+local	FUN_00007d50	bVar2	noNewFramebuffer	INFERRED	no (valid) new framebuffer: the bound framebuffer is cleared
+local	FUN_00007d50	iVar3	casResult	INFERRED	result of the store-conditional that updates a refcount
+use	FUN_00007d50	iVar4	oldAttachmentCursor	INFERRED	walks the six attachment pointers of the previously bound framebuffer	^\s*iVar4\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x150\);$	+2
+use	FUN_00007d50	iVar4	oldAttachmentCursor	INFERRED	walks the six attachment pointers of the previously bound framebuffer	^\s*if\ \(\*\(int\ \*\)\(iVar4\ \+\ 0x4c\)\ !=\ 0\)\ \{$	+2
+use	FUN_00007d50	iVar4	oldAttachmentCursor	INFERRED	walks the six attachment pointers of the previously bound framebuffer	^\s*iVar4\ =\ iVar4\ \+\ 4;$	+1
+use	FUN_00007d50	iVar4	validateResult	INFERRED	FUN_0001b510 (framebuffer completeness check) result	^\s*iVar4\ =\ FUN_0001b510\(param_1,piVar6,param_3,param_4,param_5,param_6\);$	+2
+use	FUN_00007d50	iVar4	attachmentsLeft	INFERRED	countdown of the six attachments of the new framebuffer	^\s*iVar4\ =\ 6;$	+1
+use	FUN_00007d50	iVar4	attachmentsLeft	INFERRED	countdown of the six attachments of the new framebuffer	^\s*iVar4\ =\ iVar4\ \+\ \-1;$	+2
+use	FUN_00007d50	iVar7	oldAttachmentsLeft	INFERRED	countdown of the six attachments of the old framebuffer	^\s*iVar7\ =\ 6;$	+1
+use	FUN_00007d50	iVar7	oldAttachmentsLeft	INFERRED	countdown of the six attachments of the old framebuffer	^\s*iVar7\ =\ iVar7\ \+\ \-1;$	+1
+use	FUN_00007d50	iVar7	casResult2	INFERRED	result of the store-conditional that updates a refcount	^\s*iVar7\ =\ storeWordConditionalIndexed\(\*piVar5\ \+\ 0x10000,0,piVar5\);$	+2
+local	FUN_000095e0	iVar3	programIndex	INFERRED	0 or 1: which of the two program slots (ctx+0x1cc, +0x1d0) is being resolved
+local	FUN_000095e0	iVar4	programSlotPtr	INFERRED	address of ctx + 4*programIndex: the slot at +0x1cc
+local	FUN_000095e0	iVar2	engineObjectSlot	INFERRED	engineObjects + 4*programIndex: candidate program slot (+0x198 / +0x18c)
+local	FUN_000095e0	piVar5	programObject	INFERRED	candidate program object for the slot
+local	FUN_000095e0	bVar1	isLastSlot	INFERRED	programIndex == 1
+local	FUN_000096b0	param_1	operandWord	INFERRED	program operand word: bits 16..20 select the register file, the low bits the register index
+local	FUN_000096b0	param_2	staleArgR4	INFERRED	incoming register, unused
+local	FUN_000096b0	param_3	offsetOut	CONFIRMED	receives the byte offset of the operand's register in the engine-state block
+local	FUN_000096b0	param_4	byteSizeOut	CONFIRMED	receives 4 (one component) or 0x10 (a whole vector) for file 0x10
+local	FUN_0000a180	param_1	formatWord	INFERRED	pixel-format colour word; the bit groups 0x3c / 0x1c0 / 0xe00 ... select 5/6/8/10/12/16-bit channels
+local	FUN_0000a180	param_2	bitsOut	CONFIRMED	array of five 16-bit values: red, green, blue bits, alpha bits (gldFormatAlphaBits) and a zero
+local	FUN_0000a180	param_3	staleArgR5	INFERRED	forwarded to gldFormatAlphaBits; unused
+local	FUN_0000a180	param_4	staleArgR6	INFERRED	forwarded to gldFormatAlphaBits; unused
+local	FUN_0000a180	param_5	staleArgR7	INFERRED	forwarded to gldFormatAlphaBits; unused
+local	FUN_0000a180	param_6	staleArgR8	INFERRED	forwarded to gldFormatAlphaBits; unused
+local	FUN_0000a180	param_7	staleArgR9	INFERRED	forwarded to gldFormatAlphaBits; unused
+local	FUN_0000a180	uVar1	alphaBits	CONFIRMED	gldFormatAlphaBits result stored at bitsOut[3]
+use	FUN_00007d50	iVar7	oldAttachmentsLeft	INFERRED	countdown of the six attachments of the old framebuffer	^\s*\}\ while\ \(iVar7\ !=\ 0\);$	+1
