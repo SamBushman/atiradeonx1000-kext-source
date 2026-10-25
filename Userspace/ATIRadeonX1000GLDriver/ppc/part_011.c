@@ -4947,25 +4947,25 @@ int evsFoldConstantMoves(compiler, shaderProgram)
   int instructions;
   byte bVar12;
   byte bVar14;
-  int iVar13;
+  int laterRecord;
   uint instructionIndex;
   uint instructionCount;
   undefined4 *selectorBase;
   uint uVar18;
   undefined4 uVar19;
   undefined4 uVar20;
-  int *piVar21;
+  int *laterSlotCursor;
   undefined4 uVar22;
   int symbol;
   undefined4 selectorEnumerant;
-  uint uVar25;
-  uint uVar26;
-  uint uVar27;
+  uint writeEnableX;
+  uint writeEnableY;
+  uint writeEnableZ;
   byte bVar29;
-  uint uVar28;
+  uint writeEnableW;
   uint uVar30;
   int currentInstruction;
-  int iVar32;
+  int movRecord;
   byte in_xer_so = 0;
   bool bVar33;
   bool bVar34;
@@ -4974,9 +4974,9 @@ int evsFoldConstantMoves(compiler, shaderProgram)
   bool bVar37;
   bool yIsZero;
   bool wIsZero;
-  char cStack_88;
-  char cStack_87;
-  char cStack_86;
+  char readsX;
+  char readsY;
+  char readsZ;
   char acStack_85 [13];
   int iStack_78;
   undefined4 uStack_70;
@@ -5015,86 +5015,86 @@ LAB_0007de3c:
            (((yIsOne || (constantY == -1.0)) || (bVar37)))) ||
           (((bVar36 || (constantZ == -1.0)) || ((wIsZero || ((wIsOne || (constantW == -1.0)))))))) &&
          (uVar30 = instructionIndex + 1, uVar30 < instructionCount)) {
-        iVar32 = uVar30 * 0x74;
+        movRecord = uVar30 * 0x74;
         bVar6 = false;
         uVar18 = uVar30;
-        symbol = iVar32;
+        symbol = movRecord;
         do {
-          iVar13 = symbol + instructions;
-          if (((*(int *)(symbol + instructions) == 0x879b) && (*(int *)(iVar13 + 4) == 2)) &&
-             (*(int *)(iVar13 + 8) == *(int *)(currentInstruction + 8))) {
-            bVar1 = *(int *)(iVar13 + 0xc) != 0;
+          laterRecord = symbol + instructions;
+          if (((*(int *)(symbol + instructions) == 0x879b) && (*(int *)(laterRecord + 4) == 2)) &&
+             (*(int *)(laterRecord + 8) == *(int *)(currentInstruction + 8))) {
+            bVar1 = *(int *)(laterRecord + 0xc) != 0;
             bVar10 = (byte)((uint)iStack_78 >> 0x18);
             if (((bVar1) || (!(bool)(bVar10 >> 5 & 1))) || ((xIsOne || (bVar12 = 0, constantX == -1.0)))
                ) {
               bVar12 = 1;
             }
-            if (((*(int *)(iVar13 + 0x10) != 0) || (yIsZero)) ||
+            if (((*(int *)(laterRecord + 0x10) != 0) || (yIsZero)) ||
                ((yIsOne || (bVar14 = 0, constantY == -1.0)))) {
               bVar14 = 1;
             }
-            if ((((*(int *)(iVar13 + 0x14) != 0) || (bVar37)) || (bVar36)) ||
+            if ((((*(int *)(laterRecord + 0x14) != 0) || (bVar37)) || (bVar36)) ||
                (bVar29 = 0, constantZ == -1.0)) {
               bVar29 = 1;
             }
-            if (((*(int *)(iVar13 + 0x18) != 0) || (wIsZero)) ||
+            if (((*(int *)(laterRecord + 0x18) != 0) || (wIsZero)) ||
                ((wIsOne || (bVar7 = 0, constantW == -1.0)))) {
               bVar7 = 1;
             }
             bVar6 = (bool)(bVar7 & bVar29 & bVar14 & bVar12);
             if (bVar6) {
               if (!bVar1) {
-                *(undefined4 *)(iVar13 + 0xc) = 1;
+                *(undefined4 *)(laterRecord + 0xc) = 1;
                 if ((bool)(bVar10 >> 5 & 1)) {
                   if (xIsOne) {
-                    *(undefined4 *)(iVar13 + 0x28) = 0x87de;
+                    *(undefined4 *)(laterRecord + 0x28) = 0x87de;
                   }
                   else {
-                    *(undefined4 *)(iVar13 + 0x28) = selectorEnumerant;
+                    *(undefined4 *)(laterRecord + 0x28) = selectorEnumerant;
                   }
                 }
                 else {
-                  *(undefined4 *)(iVar13 + 0x28) = 0x87dd;
+                  *(undefined4 *)(laterRecord + 0x28) = 0x87dd;
                 }
               }
-              if (*(int *)(iVar13 + 0x10) == 0) {
-                *(undefined4 *)(iVar13 + 0x10) = 1;
+              if (*(int *)(laterRecord + 0x10) == 0) {
+                *(undefined4 *)(laterRecord + 0x10) = 1;
                 if (yIsZero) {
-                  *(undefined4 *)(iVar13 + 0x2c) = 0x87dd;
+                  *(undefined4 *)(laterRecord + 0x2c) = 0x87dd;
                 }
                 else if (yIsOne) {
-                  *(undefined4 *)(iVar13 + 0x2c) = 0x87de;
+                  *(undefined4 *)(laterRecord + 0x2c) = 0x87de;
                 }
                 else {
-                  *(undefined4 *)(iVar13 + 0x2c) = selectorEnumerant;
+                  *(undefined4 *)(laterRecord + 0x2c) = selectorEnumerant;
                 }
               }
-              if (*(int *)(iVar13 + 0x14) == 0) {
-                *(undefined4 *)(iVar13 + 0x14) = 1;
+              if (*(int *)(laterRecord + 0x14) == 0) {
+                *(undefined4 *)(laterRecord + 0x14) = 1;
                 if (bVar37) {
-                  *(undefined4 *)(iVar13 + 0x30) = 0x87dd;
+                  *(undefined4 *)(laterRecord + 0x30) = 0x87dd;
                 }
                 else if (bVar36) {
-                  *(undefined4 *)(iVar13 + 0x30) = 0x87de;
+                  *(undefined4 *)(laterRecord + 0x30) = 0x87de;
                 }
                 else {
-                  *(undefined4 *)(iVar13 + 0x30) = selectorEnumerant;
+                  *(undefined4 *)(laterRecord + 0x30) = selectorEnumerant;
                 }
               }
-              if (*(int *)(iVar13 + 0x18) == 0) {
-                *(undefined4 *)(iVar13 + 0x18) = 1;
+              if (*(int *)(laterRecord + 0x18) == 0) {
+                *(undefined4 *)(laterRecord + 0x18) = 1;
                 if (wIsZero) {
-                  *(undefined4 *)(iVar13 + 0x34) = 0x87dd;
+                  *(undefined4 *)(laterRecord + 0x34) = 0x87dd;
                   bVar1 = true;
                   instructionCount = *(uint *)(shaderProgram + 0x14);
                 }
                 else if (wIsOne) {
-                  *(undefined4 *)(iVar13 + 0x34) = 0x87de;
+                  *(undefined4 *)(laterRecord + 0x34) = 0x87de;
                   bVar1 = true;
                   instructionCount = *(uint *)(shaderProgram + 0x14);
                 }
                 else {
-                  *(undefined4 *)(iVar13 + 0x34) = selectorEnumerant;
+                  *(undefined4 *)(laterRecord + 0x34) = selectorEnumerant;
                   bVar1 = true;
                   instructionCount = *(uint *)(shaderProgram + 0x14);
                 }
@@ -5133,25 +5133,25 @@ LAB_0007e330:
                      && (*(int *)(instructions + -0x40) == 0x87d8)))))) {
         if (uVar30 < instructionCount) {
           symbol = instructionCount - uVar30;
-          piVar21 = (int *)(instructions + 0x20);
+          laterSlotCursor = (int *)(instructions + 0x20);
           bVar29 = 0;
           bVar10 = 0;
           bVar12 = 0;
           bVar14 = 0;
           bVar34 = true;
           do {
-            if (((*piVar21 == 2) && (piVar21[1] == *(int *)(instructions + -0x50))) ||
-               (((piVar21[7] == 2 && (piVar21[8] == *(int *)(instructions + -0x50))) ||
-                ((piVar21[0xe] == 2 && (piVar21[0xf] == *(int *)(instructions + -0x50))))))) {
+            if (((*laterSlotCursor == 2) && (laterSlotCursor[1] == *(int *)(instructions + -0x50))) ||
+               (((laterSlotCursor[7] == 2 && (laterSlotCursor[8] == *(int *)(instructions + -0x50))) ||
+                ((laterSlotCursor[0xe] == 2 && (laterSlotCursor[0xf] == *(int *)(instructions + -0x50))))))) {
               bVar35 = true;
               bVar34 = false;
             }
             else {
-              if ((piVar21[-7] == 2) && (piVar21[-6] == *(int *)(instructions + -0x50))) {
-                bVar29 = bVar29 | *(byte *)((int)piVar21 + -0x11);
-                bVar10 = bVar10 | *(byte *)((int)piVar21 + -0xd);
-                bVar12 = bVar12 | *(byte *)((int)piVar21 + -9);
-                bVar14 = bVar14 | *(byte *)((int)piVar21 + -5);
+              if ((laterSlotCursor[-7] == 2) && (laterSlotCursor[-6] == *(int *)(instructions + -0x50))) {
+                bVar29 = bVar29 | *(byte *)((int)laterSlotCursor + -0x11);
+                bVar10 = bVar10 | *(byte *)((int)laterSlotCursor + -0xd);
+                bVar12 = bVar12 | *(byte *)((int)laterSlotCursor + -9);
+                bVar14 = bVar14 | *(byte *)((int)laterSlotCursor + -5);
                 if ((bVar29 != 0) && ((bVar10 != 0 && (bVar12 != 0)))) {
                   bVar35 = bVar14 != 0;
                   goto LAB_0007e530;
@@ -5161,15 +5161,15 @@ LAB_0007e330:
             }
 LAB_0007e530:
             symbol = symbol + -1;
-          } while ((symbol != 0) && (piVar21 = piVar21 + 0x1d, !bVar35));
+          } while ((symbol != 0) && (laterSlotCursor = laterSlotCursor + 0x1d, !bVar35));
           if (!bVar34) goto LAB_0007e760;
         }
         uVar18 = uVar30 - 1;
         if (uVar18 != 0) {
-          uVar28 = 0;
-          uVar27 = 0;
-          uVar26 = 0;
-          uVar25 = 0;
+          writeEnableW = 0;
+          writeEnableZ = 0;
+          writeEnableY = 0;
+          writeEnableX = 0;
           bVar34 = false;
           do {
             symbol = *(int *)(shaderProgram + 0x18) + uVar18 * 0x74;
@@ -5195,12 +5195,12 @@ LAB_0007e530:
             uVar18 = uVar18 - 1;
             if (((*(int *)(symbol + -0x74) != 0x879c) && (*(int *)(symbol + -0x70) == 2)) &&
                (*(int *)(symbol + -0x6c) == *(int *)(instructions + -0x50))) {
-              uVar25 = uVar25 | *(byte *)(symbol + -0x65);
-              uVar26 = uVar26 | *(byte *)(symbol + -0x61);
-              uVar28 = uVar28 | *(byte *)(symbol + -0x59);
-              uVar27 = uVar27 | *(byte *)(symbol + -0x5d);
-              if (((*(uint *)(instructions + -0x68) <= uVar25) && (*(uint *)(instructions + -100) <= uVar26)) &&
-                 ((*(uint *)(instructions + -0x60) <= uVar27 && (*(uint *)(instructions + -0x5c) <= uVar28)))) {
+              writeEnableX = writeEnableX | *(byte *)(symbol + -0x65);
+              writeEnableY = writeEnableY | *(byte *)(symbol + -0x61);
+              writeEnableW = writeEnableW | *(byte *)(symbol + -0x59);
+              writeEnableZ = writeEnableZ | *(byte *)(symbol + -0x5d);
+              if (((*(uint *)(instructions + -0x68) <= writeEnableX) && (*(uint *)(instructions + -100) <= writeEnableY)) &&
+                 ((*(uint *)(instructions + -0x60) <= writeEnableZ && (*(uint *)(instructions + -0x5c) <= writeEnableW)))) {
                 bVar35 = true;
                 bVar34 = true;
                 instructionIndex = uVar18;
@@ -5208,31 +5208,31 @@ LAB_0007e530:
             }
           } while ((uVar18 != 0) && (!bVar35));
           if (bVar34) {
-            extvsInstReadsTempComponents(shaderProgram + 0x1c,instructions + -0x74,*(undefined4 *)(instructions + -0x50),&cStack_88,
-                         &cStack_87,&cStack_86,acStack_85);
-            if (((((cStack_88 == '\0') || (uVar25 != 0)) && ((cStack_87 == '\0' || (uVar26 != 0))))
-                && ((cStack_86 == '\0' || (uVar27 != 0)))) &&
-               ((acStack_85[0] == '\0' || (uVar28 != 0)))) {
+            extvsInstReadsTempComponents(shaderProgram + 0x1c,instructions + -0x74,*(undefined4 *)(instructions + -0x50),&readsX,
+                         &readsY,&readsZ,acStack_85);
+            if (((((readsX == '\0') || (writeEnableX != 0)) && ((readsY == '\0' || (writeEnableY != 0))))
+                && ((readsZ == '\0' || (writeEnableZ != 0)))) &&
+               ((acStack_85[0] == '\0' || (writeEnableW != 0)))) {
               if (instructionIndex < uVar30) {
                 symbol = uVar30 - instructionIndex;
-                iVar32 = instructionIndex * 0x74;
+                movRecord = instructionIndex * 0x74;
                 do {
-                  iVar13 = iVar32 + *(int *)(shaderProgram + 0x18);
-                  if (((*(int *)(iVar32 + *(int *)(shaderProgram + 0x18)) != 0x879c) &&
-                      (*(int *)(iVar13 + 4) == 2)) &&
-                     (*(int *)(iVar13 + 8) == *(int *)(instructions + -0x50))) {
+                  laterRecord = movRecord + *(int *)(shaderProgram + 0x18);
+                  if (((*(int *)(movRecord + *(int *)(shaderProgram + 0x18)) != 0x879c) &&
+                      (*(int *)(laterRecord + 4) == 2)) &&
+                     (*(int *)(laterRecord + 8) == *(int *)(instructions + -0x50))) {
                     selectorEnumerant = *(undefined4 *)(instructions + -0x6c);
-                    *(undefined4 *)(iVar13 + 4) = *(undefined4 *)(instructions + -0x70);
-                    *(undefined4 *)(iVar13 + 8) = selectorEnumerant;
+                    *(undefined4 *)(laterRecord + 4) = *(undefined4 *)(instructions + -0x70);
+                    *(undefined4 *)(laterRecord + 8) = selectorEnumerant;
                     instructionCount = *(uint *)(instructions + -0x5c);
-                    uVar25 = *(uint *)(instructions + -100);
+                    writeEnableX = *(uint *)(instructions + -100);
                     uVar18 = *(uint *)(instructions + -0x60);
-                    *(uint *)(iVar13 + 0xc) = *(uint *)(iVar13 + 0xc) & *(uint *)(instructions + -0x68);
-                    *(uint *)(iVar13 + 0x10) = *(uint *)(iVar13 + 0x10) & uVar25;
-                    *(uint *)(iVar13 + 0x14) = *(uint *)(iVar13 + 0x14) & uVar18;
-                    *(uint *)(iVar13 + 0x18) = *(uint *)(iVar13 + 0x18) & instructionCount;
+                    *(uint *)(laterRecord + 0xc) = *(uint *)(laterRecord + 0xc) & *(uint *)(instructions + -0x68);
+                    *(uint *)(laterRecord + 0x10) = *(uint *)(laterRecord + 0x10) & writeEnableX;
+                    *(uint *)(laterRecord + 0x14) = *(uint *)(laterRecord + 0x14) & uVar18;
+                    *(uint *)(laterRecord + 0x18) = *(uint *)(laterRecord + 0x18) & instructionCount;
                   }
-                  iVar32 = iVar32 + 0x74;
+                  movRecord = movRecord + 0x74;
                   symbol = symbol + -1;
                 } while (symbol != 0);
               }
@@ -5265,27 +5265,27 @@ LAB_0007e760: ;
         currentInstruction = *(int *)(shaderProgram + 0x18);
         symbol = uVar30 * 0x74;
         instructions = *(int *)(currentInstruction + symbol);
-        iVar32 = currentInstruction + symbol;
+        movRecord = currentInstruction + symbol;
         if ((((instructions == 0x879b) || (instructions == 0x8799)) || (instructions == 0x879a)) &&
-           ((((*(char *)(iVar32 + 0x38) == '\0' && (*(int *)(iVar32 + 4) == 2)) &&
+           ((((*(char *)(movRecord + 0x38) == '\0' && (*(int *)(movRecord + 4) == 2)) &&
              ((*(char *)(shaderProgram + 0x7b) == '\0' ||
-              (*(int *)(*(int *)(iVar32 + 8) * 0x54 + *(int *)(shaderProgram + 0x20) + 0x28) != 0x87c4))))
-            && ((((*(int *)(iVar32 + 0xc) != 0 && (*(int *)(iVar32 + 0x10) != 0)) &&
-                 (*(int *)(iVar32 + 0x14) != 0)) && (*(int *)(iVar32 + 0x18) != 0)))))) {
-          uVar25 = uVar30 + 1;
-          uVar18 = uVar25;
+              (*(int *)(*(int *)(movRecord + 8) * 0x54 + *(int *)(shaderProgram + 0x20) + 0x28) != 0x87c4))))
+            && ((((*(int *)(movRecord + 0xc) != 0 && (*(int *)(movRecord + 0x10) != 0)) &&
+                 (*(int *)(movRecord + 0x14) != 0)) && (*(int *)(movRecord + 0x18) != 0)))))) {
+          writeEnableX = uVar30 + 1;
+          uVar18 = writeEnableX;
           instructionIndex = instructionCount;
-          if (uVar25 < instructionCount) {
+          if (writeEnableX < instructionCount) {
             bVar34 = true;
             do {
               instructions = currentInstruction + uVar18 * 0x74;
               if (*(int *)(instructions + 4) == 2) {
                 instructions = *(int *)(instructions + 8);
-                bVar35 = instructions == *(int *)(iVar32 + 8);
+                bVar35 = instructions == *(int *)(movRecord + 8);
                 if (bVar35) {
                   instructionIndex = uVar18 + 1;
                 }
-                if (*(int *)(iVar32 + 0x24) == instructions) {
+                if (*(int *)(movRecord + 0x24) == instructions) {
                   bVar35 = true;
                   bVar34 = false;
                 }
@@ -5309,15 +5309,15 @@ LAB_0007e760: ;
             while( true ) {
               currentInstruction = instructions + currentInstruction;
               if ((((*(int *)(currentInstruction + 0x20) == 2) &&
-                   (iVar13 = *(int *)(iVar32 + 8), *(int *)(currentInstruction + 0x24) == iVar13)) ||
+                   (laterRecord = *(int *)(movRecord + 8), *(int *)(currentInstruction + 0x24) == laterRecord)) ||
                   ((*(int *)(currentInstruction + 0x3c) == 2 &&
-                   (iVar13 = *(int *)(iVar32 + 8), *(int *)(currentInstruction + 0x40) == iVar13)))) ||
+                   (laterRecord = *(int *)(movRecord + 8), *(int *)(currentInstruction + 0x40) == laterRecord)))) ||
                  ((*(int *)(currentInstruction + 0x58) == 2 &&
-                  (iVar13 = *(int *)(iVar32 + 8), *(int *)(currentInstruction + 0x5c) == iVar13)))) {
-                extvsInstReadsTempComponents(shaderProgram + 0x1c,currentInstruction,iVar13,&cStack_88,&cStack_87,&cStack_86,
+                  (laterRecord = *(int *)(movRecord + 8), *(int *)(currentInstruction + 0x5c) == laterRecord)))) {
+                extvsInstReadsTempComponents(shaderProgram + 0x1c,currentInstruction,laterRecord,&readsX,&readsY,&readsZ,
                              acStack_85);
-                if (((cStack_88 == '\0') || (bVar12 != 0)) &&
-                   ((((cStack_87 == '\0' || (bVar14 != 0)) && ((cStack_86 == '\0' || (bVar29 != 0)))
+                if (((readsX == '\0') || (bVar12 != 0)) &&
+                   ((((readsY == '\0' || (bVar14 != 0)) && ((readsZ == '\0' || (bVar29 != 0)))
                      ) && ((acStack_85[0] == '\0' || (bVar10 != 0)))))) {
                   instructionCount = *(uint *)(shaderProgram + 0x14);
                 }
@@ -5326,7 +5326,7 @@ LAB_0007e760: ;
                   bVar34 = false;
                 }
               }
-              if ((*(int *)(currentInstruction + 4) == 2) && (*(int *)(currentInstruction + 8) == *(int *)(iVar32 + 8))) {
+              if ((*(int *)(currentInstruction + 4) == 2) && (*(int *)(currentInstruction + 8) == *(int *)(movRecord + 8))) {
                 bVar10 = bVar10 | *(byte *)(currentInstruction + 0x1b);
                 bVar12 = bVar12 | *(byte *)(currentInstruction + 0xf);
                 bVar14 = bVar14 | *(byte *)(currentInstruction + 0x13);
@@ -5339,28 +5339,28 @@ LAB_0007e760: ;
             }
             if (!bVar34) goto LAB_00080860;
           }
-          if (uVar25 < instructionIndex) {
-            currentInstruction = uVar25 * 0x74;
-            instructions = instructionIndex - uVar25;
+          if (writeEnableX < instructionIndex) {
+            currentInstruction = writeEnableX * 0x74;
+            instructions = instructionIndex - writeEnableX;
             do {
-              iVar13 = currentInstruction + *(int *)(shaderProgram + 0x18);
-              if ((*(int *)(iVar13 + 0x20) == 2) &&
-                 (*(int *)(iVar13 + 0x24) == *(int *)(iVar32 + 8))) {
-                selectorEnumerant = *(undefined4 *)(iVar13 + 0x28);
-                selectorBase = (undefined4 *)(iVar32 + 0x28);
-                *(undefined4 *)(iVar13 + 0x24) = *(undefined4 *)(iVar32 + 0x24);
+              laterRecord = currentInstruction + *(int *)(shaderProgram + 0x18);
+              if ((*(int *)(laterRecord + 0x20) == 2) &&
+                 (*(int *)(laterRecord + 0x24) == *(int *)(movRecord + 8))) {
+                selectorEnumerant = *(undefined4 *)(laterRecord + 0x28);
+                selectorBase = (undefined4 *)(movRecord + 0x28);
+                *(undefined4 *)(laterRecord + 0x24) = *(undefined4 *)(movRecord + 0x24);
                 switch(selectorEnumerant) {
                 case 0x87d5:
                   selectorEnumerant = *selectorBase;
                   break;
                 case 0x87d6:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x2c);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x2c);
                   break;
                 case 0x87d7:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x30);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x30);
                   break;
                 case 0x87d8:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x34);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x34);
                   break;
                 case 0x87d9:
                   selectorEnumerant = *selectorBase;
@@ -5407,7 +5407,7 @@ code_r0x0007ed88:
                   }
                   break;
                 case 0x87da:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x2c);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x2c);
                   switch(selectorEnumerant) {
                   case 0x87d5:
                     goto code_r0x0007ed7c;
@@ -5432,7 +5432,7 @@ code_r0x0007ed88:
                   }
                   break;
                 case 0x87db:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x30);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x30);
                   switch(selectorEnumerant) {
                   case 0x87d5:
                     goto code_r0x0007ed7c;
@@ -5457,7 +5457,7 @@ code_r0x0007ed88:
                   }
                   break;
                 case 0x87dc:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x34);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x34);
                   switch(selectorEnumerant) {
                   case 0x87d5:
                     goto code_r0x0007ed7c;
@@ -5481,20 +5481,20 @@ code_r0x0007ed88:
                     goto code_r0x0007ed88;
                   }
                 }
-                writerSrc0SelectorY = *(undefined4 *)(iVar13 + 0x2c);
-                *(undefined4 *)(iVar13 + 0x28) = selectorEnumerant;
+                writerSrc0SelectorY = *(undefined4 *)(laterRecord + 0x2c);
+                *(undefined4 *)(laterRecord + 0x28) = selectorEnumerant;
                 switch(writerSrc0SelectorY) {
                 case 0x87d5:
                   writerSrc0SelectorY = *selectorBase;
                   break;
                 case 0x87d6:
-                  writerSrc0SelectorY = *(undefined4 *)(iVar32 + 0x2c);
+                  writerSrc0SelectorY = *(undefined4 *)(movRecord + 0x2c);
                   break;
                 case 0x87d7:
-                  writerSrc0SelectorY = *(undefined4 *)(iVar32 + 0x30);
+                  writerSrc0SelectorY = *(undefined4 *)(movRecord + 0x30);
                   break;
                 case 0x87d8:
-                  writerSrc0SelectorY = *(undefined4 *)(iVar32 + 0x34);
+                  writerSrc0SelectorY = *(undefined4 *)(movRecord + 0x34);
                   break;
                 case 0x87d9:
                   writerSrc0SelectorY = *selectorBase;
@@ -5541,7 +5541,7 @@ code_r0x0007efe0:
                   }
                   break;
                 case 0x87da:
-                  writerSrc0SelectorY = *(undefined4 *)(iVar32 + 0x2c);
+                  writerSrc0SelectorY = *(undefined4 *)(movRecord + 0x2c);
                   switch(writerSrc0SelectorY) {
                   case 0x87d5:
                     goto code_r0x0007efd4;
@@ -5566,7 +5566,7 @@ code_r0x0007efe0:
                   }
                   break;
                 case 0x87db:
-                  writerSrc0SelectorY = *(undefined4 *)(iVar32 + 0x30);
+                  writerSrc0SelectorY = *(undefined4 *)(movRecord + 0x30);
                   switch(writerSrc0SelectorY) {
                   case 0x87d5:
                     goto code_r0x0007efd4;
@@ -5591,7 +5591,7 @@ code_r0x0007efe0:
                   }
                   break;
                 case 0x87dc:
-                  writerSrc0SelectorY = *(undefined4 *)(iVar32 + 0x34);
+                  writerSrc0SelectorY = *(undefined4 *)(movRecord + 0x34);
                   switch(writerSrc0SelectorY) {
                   case 0x87d5:
                     goto code_r0x0007efd4;
@@ -5615,20 +5615,20 @@ code_r0x0007efe0:
                     goto code_r0x0007efe0;
                   }
                 }
-                selectorEnumerant = *(undefined4 *)(iVar13 + 0x30);
-                *(undefined4 *)(iVar13 + 0x2c) = writerSrc0SelectorY;
+                selectorEnumerant = *(undefined4 *)(laterRecord + 0x30);
+                *(undefined4 *)(laterRecord + 0x2c) = writerSrc0SelectorY;
                 switch(selectorEnumerant) {
                 case 0x87d5:
                   selectorEnumerant = *selectorBase;
                   break;
                 case 0x87d6:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x2c);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x2c);
                   break;
                 case 0x87d7:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x30);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x30);
                   break;
                 case 0x87d8:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x34);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x34);
                   break;
                 case 0x87d9:
                   selectorEnumerant = *selectorBase;
@@ -5675,7 +5675,7 @@ code_r0x0007f238:
                   }
                   break;
                 case 0x87da:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x2c);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x2c);
                   switch(selectorEnumerant) {
                   case 0x87d5:
                     goto code_r0x0007f22c;
@@ -5700,7 +5700,7 @@ code_r0x0007f238:
                   }
                   break;
                 case 0x87db:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x30);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x30);
                   switch(selectorEnumerant) {
                   case 0x87d5:
                     goto code_r0x0007f22c;
@@ -5725,7 +5725,7 @@ code_r0x0007f238:
                   }
                   break;
                 case 0x87dc:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x34);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x34);
                   switch(selectorEnumerant) {
                   case 0x87d5:
                     goto code_r0x0007f22c;
@@ -5749,20 +5749,20 @@ code_r0x0007f238:
                     goto code_r0x0007f238;
                   }
                 }
-                writerSrc0SelectorW = *(undefined4 *)(iVar13 + 0x34);
-                *(undefined4 *)(iVar13 + 0x30) = selectorEnumerant;
+                writerSrc0SelectorW = *(undefined4 *)(laterRecord + 0x34);
+                *(undefined4 *)(laterRecord + 0x30) = selectorEnumerant;
                 switch(writerSrc0SelectorW) {
                 case 0x87d5:
                   writerSrc0SelectorW = *selectorBase;
                   break;
                 case 0x87d6:
-                  writerSrc0SelectorW = *(undefined4 *)(iVar32 + 0x2c);
+                  writerSrc0SelectorW = *(undefined4 *)(movRecord + 0x2c);
                   break;
                 case 0x87d7:
-                  writerSrc0SelectorW = *(undefined4 *)(iVar32 + 0x30);
+                  writerSrc0SelectorW = *(undefined4 *)(movRecord + 0x30);
                   break;
                 case 0x87d8:
-                  writerSrc0SelectorW = *(undefined4 *)(iVar32 + 0x34);
+                  writerSrc0SelectorW = *(undefined4 *)(movRecord + 0x34);
                   break;
                 case 0x87d9:
                   writerSrc0SelectorW = *selectorBase;
@@ -5809,7 +5809,7 @@ code_r0x0007f490:
                   }
                   break;
                 case 0x87da:
-                  writerSrc0SelectorW = *(undefined4 *)(iVar32 + 0x2c);
+                  writerSrc0SelectorW = *(undefined4 *)(movRecord + 0x2c);
                   switch(writerSrc0SelectorW) {
                   case 0x87d5:
                     goto code_r0x0007f484;
@@ -5834,7 +5834,7 @@ code_r0x0007f490:
                   }
                   break;
                 case 0x87db:
-                  writerSrc0SelectorW = *(undefined4 *)(iVar32 + 0x30);
+                  writerSrc0SelectorW = *(undefined4 *)(movRecord + 0x30);
                   switch(writerSrc0SelectorW) {
                   case 0x87d5:
                     goto code_r0x0007f484;
@@ -5859,7 +5859,7 @@ code_r0x0007f490:
                   }
                   break;
                 case 0x87dc:
-                  writerSrc0SelectorW = *(undefined4 *)(iVar32 + 0x34);
+                  writerSrc0SelectorW = *(undefined4 *)(movRecord + 0x34);
                   switch(writerSrc0SelectorW) {
                   case 0x87d5:
                     goto code_r0x0007f484;
@@ -5883,25 +5883,25 @@ code_r0x0007f490:
                     goto code_r0x0007f490;
                   }
                 }
-                *(undefined4 *)(iVar13 + 0x34) = writerSrc0SelectorW;
+                *(undefined4 *)(laterRecord + 0x34) = writerSrc0SelectorW;
               }
-              if ((*(int *)(iVar13 + 0x3c) == 2) &&
-                 (*(int *)(iVar13 + 0x40) == *(int *)(iVar32 + 8))) {
-                selectorEnumerant = *(undefined4 *)(iVar13 + 0x44);
-                selectorBase = (undefined4 *)(iVar32 + 0x28);
-                *(undefined4 *)(iVar13 + 0x40) = *(undefined4 *)(iVar32 + 0x24);
+              if ((*(int *)(laterRecord + 0x3c) == 2) &&
+                 (*(int *)(laterRecord + 0x40) == *(int *)(movRecord + 8))) {
+                selectorEnumerant = *(undefined4 *)(laterRecord + 0x44);
+                selectorBase = (undefined4 *)(movRecord + 0x28);
+                *(undefined4 *)(laterRecord + 0x40) = *(undefined4 *)(movRecord + 0x24);
                 switch(selectorEnumerant) {
                 case 0x87d5:
                   selectorEnumerant = *selectorBase;
                   break;
                 case 0x87d6:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x2c);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x2c);
                   break;
                 case 0x87d7:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x30);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x30);
                   break;
                 case 0x87d8:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x34);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x34);
                   break;
                 case 0x87d9:
                   selectorEnumerant = *selectorBase;
@@ -5948,7 +5948,7 @@ code_r0x0007f714:
                   }
                   break;
                 case 0x87da:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x2c);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x2c);
                   switch(selectorEnumerant) {
                   case 0x87d5:
                     goto code_r0x0007f708;
@@ -5973,7 +5973,7 @@ code_r0x0007f714:
                   }
                   break;
                 case 0x87db:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x30);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x30);
                   switch(selectorEnumerant) {
                   case 0x87d5:
                     goto code_r0x0007f708;
@@ -5998,7 +5998,7 @@ code_r0x0007f714:
                   }
                   break;
                 case 0x87dc:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x34);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x34);
                   switch(selectorEnumerant) {
                   case 0x87d5:
                     goto code_r0x0007f708;
@@ -6022,20 +6022,20 @@ code_r0x0007f714:
                     goto code_r0x0007f714;
                   }
                 }
-                writerSrc1SelectorY = *(undefined4 *)(iVar13 + 0x48);
-                *(undefined4 *)(iVar13 + 0x44) = selectorEnumerant;
+                writerSrc1SelectorY = *(undefined4 *)(laterRecord + 0x48);
+                *(undefined4 *)(laterRecord + 0x44) = selectorEnumerant;
                 switch(writerSrc1SelectorY) {
                 case 0x87d5:
                   writerSrc1SelectorY = *selectorBase;
                   break;
                 case 0x87d6:
-                  writerSrc1SelectorY = *(undefined4 *)(iVar32 + 0x2c);
+                  writerSrc1SelectorY = *(undefined4 *)(movRecord + 0x2c);
                   break;
                 case 0x87d7:
-                  writerSrc1SelectorY = *(undefined4 *)(iVar32 + 0x30);
+                  writerSrc1SelectorY = *(undefined4 *)(movRecord + 0x30);
                   break;
                 case 0x87d8:
-                  writerSrc1SelectorY = *(undefined4 *)(iVar32 + 0x34);
+                  writerSrc1SelectorY = *(undefined4 *)(movRecord + 0x34);
                   break;
                 case 0x87d9:
                   writerSrc1SelectorY = *selectorBase;
@@ -6082,7 +6082,7 @@ code_r0x0007f96c:
                   }
                   break;
                 case 0x87da:
-                  writerSrc1SelectorY = *(undefined4 *)(iVar32 + 0x2c);
+                  writerSrc1SelectorY = *(undefined4 *)(movRecord + 0x2c);
                   switch(writerSrc1SelectorY) {
                   case 0x87d5:
                     goto code_r0x0007f960;
@@ -6107,7 +6107,7 @@ code_r0x0007f96c:
                   }
                   break;
                 case 0x87db:
-                  writerSrc1SelectorY = *(undefined4 *)(iVar32 + 0x30);
+                  writerSrc1SelectorY = *(undefined4 *)(movRecord + 0x30);
                   switch(writerSrc1SelectorY) {
                   case 0x87d5:
                     goto code_r0x0007f960;
@@ -6132,7 +6132,7 @@ code_r0x0007f96c:
                   }
                   break;
                 case 0x87dc:
-                  writerSrc1SelectorY = *(undefined4 *)(iVar32 + 0x34);
+                  writerSrc1SelectorY = *(undefined4 *)(movRecord + 0x34);
                   switch(writerSrc1SelectorY) {
                   case 0x87d5:
                     goto code_r0x0007f960;
@@ -6156,20 +6156,20 @@ code_r0x0007f96c:
                     goto code_r0x0007f96c;
                   }
                 }
-                selectorEnumerant = *(undefined4 *)(iVar13 + 0x4c);
-                *(undefined4 *)(iVar13 + 0x48) = writerSrc1SelectorY;
+                selectorEnumerant = *(undefined4 *)(laterRecord + 0x4c);
+                *(undefined4 *)(laterRecord + 0x48) = writerSrc1SelectorY;
                 switch(selectorEnumerant) {
                 case 0x87d5:
                   selectorEnumerant = *selectorBase;
                   break;
                 case 0x87d6:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x2c);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x2c);
                   break;
                 case 0x87d7:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x30);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x30);
                   break;
                 case 0x87d8:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x34);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x34);
                   break;
                 case 0x87d9:
                   selectorEnumerant = *selectorBase;
@@ -6216,7 +6216,7 @@ code_r0x0007fbc4:
                   }
                   break;
                 case 0x87da:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x2c);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x2c);
                   switch(selectorEnumerant) {
                   case 0x87d5:
                     goto code_r0x0007fbb8;
@@ -6241,7 +6241,7 @@ code_r0x0007fbc4:
                   }
                   break;
                 case 0x87db:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x30);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x30);
                   switch(selectorEnumerant) {
                   case 0x87d5:
                     goto code_r0x0007fbb8;
@@ -6266,7 +6266,7 @@ code_r0x0007fbc4:
                   }
                   break;
                 case 0x87dc:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x34);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x34);
                   switch(selectorEnumerant) {
                   case 0x87d5:
                     goto code_r0x0007fbb8;
@@ -6290,20 +6290,20 @@ code_r0x0007fbc4:
                     goto code_r0x0007fbc4;
                   }
                 }
-                writerSrc1SelectorW = *(undefined4 *)(iVar13 + 0x50);
-                *(undefined4 *)(iVar13 + 0x4c) = selectorEnumerant;
+                writerSrc1SelectorW = *(undefined4 *)(laterRecord + 0x50);
+                *(undefined4 *)(laterRecord + 0x4c) = selectorEnumerant;
                 switch(writerSrc1SelectorW) {
                 case 0x87d5:
                   writerSrc1SelectorW = *selectorBase;
                   break;
                 case 0x87d6:
-                  writerSrc1SelectorW = *(undefined4 *)(iVar32 + 0x2c);
+                  writerSrc1SelectorW = *(undefined4 *)(movRecord + 0x2c);
                   break;
                 case 0x87d7:
-                  writerSrc1SelectorW = *(undefined4 *)(iVar32 + 0x30);
+                  writerSrc1SelectorW = *(undefined4 *)(movRecord + 0x30);
                   break;
                 case 0x87d8:
-                  writerSrc1SelectorW = *(undefined4 *)(iVar32 + 0x34);
+                  writerSrc1SelectorW = *(undefined4 *)(movRecord + 0x34);
                   break;
                 case 0x87d9:
                   writerSrc1SelectorW = *selectorBase;
@@ -6350,7 +6350,7 @@ code_r0x0007fe1c:
                   }
                   break;
                 case 0x87da:
-                  writerSrc1SelectorW = *(undefined4 *)(iVar32 + 0x2c);
+                  writerSrc1SelectorW = *(undefined4 *)(movRecord + 0x2c);
                   switch(writerSrc1SelectorW) {
                   case 0x87d5:
                     goto code_r0x0007fe10;
@@ -6375,7 +6375,7 @@ code_r0x0007fe1c:
                   }
                   break;
                 case 0x87db:
-                  writerSrc1SelectorW = *(undefined4 *)(iVar32 + 0x30);
+                  writerSrc1SelectorW = *(undefined4 *)(movRecord + 0x30);
                   switch(writerSrc1SelectorW) {
                   case 0x87d5:
                     goto code_r0x0007fe10;
@@ -6400,7 +6400,7 @@ code_r0x0007fe1c:
                   }
                   break;
                 case 0x87dc:
-                  writerSrc1SelectorW = *(undefined4 *)(iVar32 + 0x34);
+                  writerSrc1SelectorW = *(undefined4 *)(movRecord + 0x34);
                   switch(writerSrc1SelectorW) {
                   case 0x87d5:
                     goto code_r0x0007fe10;
@@ -6424,25 +6424,25 @@ code_r0x0007fe1c:
                     goto code_r0x0007fe1c;
                   }
                 }
-                *(undefined4 *)(iVar13 + 0x50) = writerSrc1SelectorW;
+                *(undefined4 *)(laterRecord + 0x50) = writerSrc1SelectorW;
               }
-              if ((*(int *)(iVar13 + 0x58) == 2) &&
-                 (*(int *)(iVar13 + 0x5c) == *(int *)(iVar32 + 8))) {
-                selectorEnumerant = *(undefined4 *)(iVar13 + 0x60);
-                selectorBase = (undefined4 *)(iVar32 + 0x28);
-                *(undefined4 *)(iVar13 + 0x5c) = *(undefined4 *)(iVar32 + 0x24);
+              if ((*(int *)(laterRecord + 0x58) == 2) &&
+                 (*(int *)(laterRecord + 0x5c) == *(int *)(movRecord + 8))) {
+                selectorEnumerant = *(undefined4 *)(laterRecord + 0x60);
+                selectorBase = (undefined4 *)(movRecord + 0x28);
+                *(undefined4 *)(laterRecord + 0x5c) = *(undefined4 *)(movRecord + 0x24);
                 switch(selectorEnumerant) {
                 case 0x87d5:
                   selectorEnumerant = *selectorBase;
                   break;
                 case 0x87d6:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x2c);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x2c);
                   break;
                 case 0x87d7:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x30);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x30);
                   break;
                 case 0x87d8:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x34);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x34);
                   break;
                 case 0x87d9:
                   selectorEnumerant = *selectorBase;
@@ -6489,7 +6489,7 @@ code_r0x000800a0:
                   }
                   break;
                 case 0x87da:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x2c);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x2c);
                   switch(selectorEnumerant) {
                   case 0x87d5:
                     goto code_r0x00080094;
@@ -6514,7 +6514,7 @@ code_r0x000800a0:
                   }
                   break;
                 case 0x87db:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x30);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x30);
                   switch(selectorEnumerant) {
                   case 0x87d5:
                     goto code_r0x00080094;
@@ -6539,7 +6539,7 @@ code_r0x000800a0:
                   }
                   break;
                 case 0x87dc:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x34);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x34);
                   switch(selectorEnumerant) {
                   case 0x87d5:
                     goto code_r0x00080094;
@@ -6563,20 +6563,20 @@ code_r0x000800a0:
                     goto code_r0x000800a0;
                   }
                 }
-                writerSrc2SelectorY = *(undefined4 *)(iVar13 + 100);
-                *(undefined4 *)(iVar13 + 0x60) = selectorEnumerant;
+                writerSrc2SelectorY = *(undefined4 *)(laterRecord + 100);
+                *(undefined4 *)(laterRecord + 0x60) = selectorEnumerant;
                 switch(writerSrc2SelectorY) {
                 case 0x87d5:
                   writerSrc2SelectorY = *selectorBase;
                   break;
                 case 0x87d6:
-                  writerSrc2SelectorY = *(undefined4 *)(iVar32 + 0x2c);
+                  writerSrc2SelectorY = *(undefined4 *)(movRecord + 0x2c);
                   break;
                 case 0x87d7:
-                  writerSrc2SelectorY = *(undefined4 *)(iVar32 + 0x30);
+                  writerSrc2SelectorY = *(undefined4 *)(movRecord + 0x30);
                   break;
                 case 0x87d8:
-                  writerSrc2SelectorY = *(undefined4 *)(iVar32 + 0x34);
+                  writerSrc2SelectorY = *(undefined4 *)(movRecord + 0x34);
                   break;
                 case 0x87d9:
                   writerSrc2SelectorY = *selectorBase;
@@ -6623,7 +6623,7 @@ code_r0x000802f8:
                   }
                   break;
                 case 0x87da:
-                  writerSrc2SelectorY = *(undefined4 *)(iVar32 + 0x2c);
+                  writerSrc2SelectorY = *(undefined4 *)(movRecord + 0x2c);
                   switch(writerSrc2SelectorY) {
                   case 0x87d5:
                     goto code_r0x000802ec;
@@ -6648,7 +6648,7 @@ code_r0x000802f8:
                   }
                   break;
                 case 0x87db:
-                  writerSrc2SelectorY = *(undefined4 *)(iVar32 + 0x30);
+                  writerSrc2SelectorY = *(undefined4 *)(movRecord + 0x30);
                   switch(writerSrc2SelectorY) {
                   case 0x87d5:
                     goto code_r0x000802ec;
@@ -6673,7 +6673,7 @@ code_r0x000802f8:
                   }
                   break;
                 case 0x87dc:
-                  writerSrc2SelectorY = *(undefined4 *)(iVar32 + 0x34);
+                  writerSrc2SelectorY = *(undefined4 *)(movRecord + 0x34);
                   switch(writerSrc2SelectorY) {
                   case 0x87d5:
                     goto code_r0x000802ec;
@@ -6697,20 +6697,20 @@ code_r0x000802f8:
                     goto code_r0x000802f8;
                   }
                 }
-                selectorEnumerant = *(undefined4 *)(iVar13 + 0x68);
-                *(undefined4 *)(iVar13 + 100) = writerSrc2SelectorY;
+                selectorEnumerant = *(undefined4 *)(laterRecord + 0x68);
+                *(undefined4 *)(laterRecord + 100) = writerSrc2SelectorY;
                 switch(selectorEnumerant) {
                 case 0x87d5:
                   selectorEnumerant = *selectorBase;
                   break;
                 case 0x87d6:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x2c);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x2c);
                   break;
                 case 0x87d7:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x30);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x30);
                   break;
                 case 0x87d8:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x34);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x34);
                   break;
                 case 0x87d9:
                   selectorEnumerant = *selectorBase;
@@ -6757,7 +6757,7 @@ code_r0x00080550:
                   }
                   break;
                 case 0x87da:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x2c);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x2c);
                   switch(selectorEnumerant) {
                   case 0x87d5:
                     goto code_r0x00080544;
@@ -6782,7 +6782,7 @@ code_r0x00080550:
                   }
                   break;
                 case 0x87db:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x30);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x30);
                   switch(selectorEnumerant) {
                   case 0x87d5:
                     goto code_r0x00080544;
@@ -6807,7 +6807,7 @@ code_r0x00080550:
                   }
                   break;
                 case 0x87dc:
-                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x34);
+                  selectorEnumerant = *(undefined4 *)(movRecord + 0x34);
                   switch(selectorEnumerant) {
                   case 0x87d5:
                     goto code_r0x00080544;
@@ -6831,20 +6831,20 @@ code_r0x00080550:
                     goto code_r0x00080550;
                   }
                 }
-                writerSrc2SelectorW = *(undefined4 *)(iVar13 + 0x6c);
-                *(undefined4 *)(iVar13 + 0x68) = selectorEnumerant;
+                writerSrc2SelectorW = *(undefined4 *)(laterRecord + 0x6c);
+                *(undefined4 *)(laterRecord + 0x68) = selectorEnumerant;
                 switch(writerSrc2SelectorW) {
                 case 0x87d5:
                   writerSrc2SelectorW = *selectorBase;
                   break;
                 case 0x87d6:
-                  writerSrc2SelectorW = *(undefined4 *)(iVar32 + 0x2c);
+                  writerSrc2SelectorW = *(undefined4 *)(movRecord + 0x2c);
                   break;
                 case 0x87d7:
-                  writerSrc2SelectorW = *(undefined4 *)(iVar32 + 0x30);
+                  writerSrc2SelectorW = *(undefined4 *)(movRecord + 0x30);
                   break;
                 case 0x87d8:
-                  writerSrc2SelectorW = *(undefined4 *)(iVar32 + 0x34);
+                  writerSrc2SelectorW = *(undefined4 *)(movRecord + 0x34);
                   break;
                 case 0x87d9:
                   writerSrc2SelectorW = *selectorBase;
@@ -6891,7 +6891,7 @@ code_r0x000807a8:
                   }
                   break;
                 case 0x87da:
-                  writerSrc2SelectorW = *(undefined4 *)(iVar32 + 0x2c);
+                  writerSrc2SelectorW = *(undefined4 *)(movRecord + 0x2c);
                   switch(writerSrc2SelectorW) {
                   case 0x87d5:
                     goto code_r0x0008079c;
@@ -6916,7 +6916,7 @@ code_r0x000807a8:
                   }
                   break;
                 case 0x87db:
-                  writerSrc2SelectorW = *(undefined4 *)(iVar32 + 0x30);
+                  writerSrc2SelectorW = *(undefined4 *)(movRecord + 0x30);
                   switch(writerSrc2SelectorW) {
                   case 0x87d5:
                     goto code_r0x0008079c;
@@ -6941,7 +6941,7 @@ code_r0x000807a8:
                   }
                   break;
                 case 0x87dc:
-                  writerSrc2SelectorW = *(undefined4 *)(iVar32 + 0x34);
+                  writerSrc2SelectorW = *(undefined4 *)(movRecord + 0x34);
                   switch(writerSrc2SelectorW) {
                   case 0x87d5:
                     goto code_r0x0008079c;
@@ -6965,7 +6965,7 @@ code_r0x000807a8:
                     goto code_r0x000807a8;
                   }
                 }
-                *(undefined4 *)(iVar13 + 0x6c) = writerSrc2SelectorW;
+                *(undefined4 *)(laterRecord + 0x6c) = writerSrc2SelectorW;
               }
               instructions = instructions + -1;
               currentInstruction = currentInstruction + 0x74;
@@ -7005,34 +7005,34 @@ LAB_00080860:
           symbol = uVar18 - uVar30;
           bVar34 = true;
           bVar33 = false;
-          piVar21 = (int *)(instructions + *(int *)(shaderProgram + 0x18) + 4);
+          laterSlotCursor = (int *)(instructions + *(int *)(shaderProgram + 0x18) + 4);
           do {
-            if ((*piVar21 != 2) || (piVar21[1] != *(int *)(currentInstruction + -0x6c))) {
+            if ((*laterSlotCursor != 2) || (laterSlotCursor[1] != *(int *)(currentInstruction + -0x6c))) {
               if (bVar33) {
-                if ((((piVar21[7] == 2) && (piVar21[8] == *(int *)(currentInstruction + -0x6c))) ||
-                    ((piVar21[0xe] == 2 && (piVar21[0xf] == *(int *)(currentInstruction + -0x6c))))) ||
-                   ((piVar21[0x15] == 2 && (piVar21[0x16] == *(int *)(currentInstruction + -0x6c)))))
+                if ((((laterSlotCursor[7] == 2) && (laterSlotCursor[8] == *(int *)(currentInstruction + -0x6c))) ||
+                    ((laterSlotCursor[0xe] == 2 && (laterSlotCursor[0xf] == *(int *)(currentInstruction + -0x6c))))) ||
+                   ((laterSlotCursor[0x15] == 2 && (laterSlotCursor[0x16] == *(int *)(currentInstruction + -0x6c)))))
                 goto code_r0x00080a40;
                 bVar35 = false;
               }
               else {
-                if (((*piVar21 == 2) && (*(int *)(currentInstruction + -0x54) == 2)) &&
-                   (piVar21[1] == *(int *)(currentInstruction + -0x50))) {
-                  iVar32 = *(int *)(currentInstruction + -0x34);
-                  if (iVar32 == 0) {
-                    iVar32 = piVar21[2];
+                if (((*laterSlotCursor == 2) && (*(int *)(currentInstruction + -0x54) == 2)) &&
+                   (laterSlotCursor[1] == *(int *)(currentInstruction + -0x50))) {
+                  movRecord = *(int *)(currentInstruction + -0x34);
+                  if (movRecord == 0) {
+                    movRecord = laterSlotCursor[2];
                   }
-                  else if (iVar32 == 1) {
-                    iVar32 = piVar21[3];
+                  else if (movRecord == 1) {
+                    movRecord = laterSlotCursor[3];
                   }
-                  else if (iVar32 == 2) {
-                    iVar32 = piVar21[4];
+                  else if (movRecord == 2) {
+                    movRecord = laterSlotCursor[4];
                   }
                   else {
-                    if (iVar32 != 3) goto code_r0x000809ec;
-                    iVar32 = piVar21[5];
+                    if (movRecord != 3) goto code_r0x000809ec;
+                    movRecord = laterSlotCursor[5];
                   }
-                  if (iVar32 != 0) {
+                  if (movRecord != 0) {
                     bVar35 = false;
                     bVar33 = true;
                     goto code_r0x00080a54;
@@ -7043,15 +7043,15 @@ code_r0x000809ec:
                 bVar33 = false;
               }
             }
-            else if (((piVar21[2] == 0) || (piVar21[3] == 0)) ||
-                    ((piVar21[4] == 0 || (bVar35 = true, piVar21[5] == 0)))) {
+            else if (((laterSlotCursor[2] == 0) || (laterSlotCursor[3] == 0)) ||
+                    ((laterSlotCursor[4] == 0 || (bVar35 = true, laterSlotCursor[5] == 0)))) {
 code_r0x00080a40:
               bVar35 = true;
               bVar34 = false;
             }
 code_r0x00080a54:
             symbol = symbol + -1;
-          } while ((symbol != 0) && (piVar21 = piVar21 + 0x1d, !bVar35));
+          } while ((symbol != 0) && (laterSlotCursor = laterSlotCursor + 0x1d, !bVar35));
           if (!bVar34) goto code_r0x00082600;
         }
         symbol = *(int *)(currentInstruction + -0x34);
@@ -7068,15 +7068,15 @@ code_r0x00080a54:
           selectorEnumerant = *(undefined4 *)(currentInstruction + -0x40);
         }
         symbol = instructions;
-        uVar25 = uVar30;
+        writeEnableX = uVar30;
         if (uVar30 < uVar18) {
           do {
-            iVar32 = symbol + *(int *)(shaderProgram + 0x18);
-            if ((*(int *)(iVar32 + 0x20) != 2) ||
-               (*(int *)(iVar32 + 0x24) != *(int *)(currentInstruction + -0x6c))) goto code_r0x000813a8;
-            *(undefined4 *)(iVar32 + 0x24) = *(undefined4 *)(currentInstruction + -0x50);
-            candidateSrc0SelectorX = *(undefined4 *)(iVar32 + 0x28);
-            switch(*(undefined4 *)(iVar32 + 0x28)) {
+            movRecord = symbol + *(int *)(shaderProgram + 0x18);
+            if ((*(int *)(movRecord + 0x20) != 2) ||
+               (*(int *)(movRecord + 0x24) != *(int *)(currentInstruction + -0x6c))) goto code_r0x000813a8;
+            *(undefined4 *)(movRecord + 0x24) = *(undefined4 *)(currentInstruction + -0x50);
+            candidateSrc0SelectorX = *(undefined4 *)(movRecord + 0x28);
+            switch(*(undefined4 *)(movRecord + 0x28)) {
             case 0x87d5:
             case 0x87d6:
             case 0x87d7:
@@ -7205,9 +7205,9 @@ code_r0x00080cb8:
 code_r0x00080c98:
             candidateSrc0SelectorX = selectorEnumerant;
 code_r0x00080d14:
-            *(undefined4 *)(iVar32 + 0x28) = candidateSrc0SelectorX;
-            candidateSrc0SelectorY = *(undefined4 *)(iVar32 + 0x2c);
-            switch(*(undefined4 *)(iVar32 + 0x2c)) {
+            *(undefined4 *)(movRecord + 0x28) = candidateSrc0SelectorX;
+            candidateSrc0SelectorY = *(undefined4 *)(movRecord + 0x2c);
+            switch(*(undefined4 *)(movRecord + 0x2c)) {
             case 0x87d5:
             case 0x87d6:
             case 0x87d7:
@@ -7336,9 +7336,9 @@ code_r0x00080ee8:
 code_r0x00080ec8:
             candidateSrc0SelectorY = selectorEnumerant;
 code_r0x00080f44:
-            *(undefined4 *)(iVar32 + 0x2c) = candidateSrc0SelectorY;
-            candidateSrc0SelectorZ = *(undefined4 *)(iVar32 + 0x30);
-            switch(*(undefined4 *)(iVar32 + 0x30)) {
+            *(undefined4 *)(movRecord + 0x2c) = candidateSrc0SelectorY;
+            candidateSrc0SelectorZ = *(undefined4 *)(movRecord + 0x30);
+            switch(*(undefined4 *)(movRecord + 0x30)) {
             case 0x87d5:
             case 0x87d6:
             case 0x87d7:
@@ -7467,9 +7467,9 @@ code_r0x00081118:
 code_r0x000810f8:
             candidateSrc0SelectorZ = selectorEnumerant;
 code_r0x00081174:
-            *(undefined4 *)(iVar32 + 0x30) = candidateSrc0SelectorZ;
-            candidateSrc0SelectorW = *(undefined4 *)(iVar32 + 0x34);
-            switch(*(undefined4 *)(iVar32 + 0x34)) {
+            *(undefined4 *)(movRecord + 0x30) = candidateSrc0SelectorZ;
+            candidateSrc0SelectorW = *(undefined4 *)(movRecord + 0x34);
+            switch(*(undefined4 *)(movRecord + 0x34)) {
             case 0x87d5:
             case 0x87d6:
             case 0x87d7:
@@ -7598,13 +7598,13 @@ code_r0x00081348:
 code_r0x00081328:
             candidateSrc0SelectorW = selectorEnumerant;
 code_r0x000813a4:
-            *(undefined4 *)(iVar32 + 0x34) = candidateSrc0SelectorW;
+            *(undefined4 *)(movRecord + 0x34) = candidateSrc0SelectorW;
 code_r0x000813a8:
-            if ((*(int *)(iVar32 + 0x3c) != 2) ||
-               (*(int *)(iVar32 + 0x40) != *(int *)(currentInstruction + -0x6c))) goto code_r0x00081c90;
-            *(undefined4 *)(iVar32 + 0x40) = *(undefined4 *)(currentInstruction + -0x50);
-            candidateSrc1SelectorX = *(undefined4 *)(iVar32 + 0x44);
-            switch(*(undefined4 *)(iVar32 + 0x44)) {
+            if ((*(int *)(movRecord + 0x3c) != 2) ||
+               (*(int *)(movRecord + 0x40) != *(int *)(currentInstruction + -0x6c))) goto code_r0x00081c90;
+            *(undefined4 *)(movRecord + 0x40) = *(undefined4 *)(currentInstruction + -0x50);
+            candidateSrc1SelectorX = *(undefined4 *)(movRecord + 0x44);
+            switch(*(undefined4 *)(movRecord + 0x44)) {
             case 0x87d5:
             case 0x87d6:
             case 0x87d7:
@@ -7733,9 +7733,9 @@ code_r0x000815a0:
 code_r0x00081580:
             candidateSrc1SelectorX = selectorEnumerant;
 code_r0x000815fc:
-            *(undefined4 *)(iVar32 + 0x44) = candidateSrc1SelectorX;
-            candidateSrc1SelectorY = *(undefined4 *)(iVar32 + 0x48);
-            switch(*(undefined4 *)(iVar32 + 0x48)) {
+            *(undefined4 *)(movRecord + 0x44) = candidateSrc1SelectorX;
+            candidateSrc1SelectorY = *(undefined4 *)(movRecord + 0x48);
+            switch(*(undefined4 *)(movRecord + 0x48)) {
             case 0x87d5:
             case 0x87d6:
             case 0x87d7:
@@ -7864,9 +7864,9 @@ code_r0x000817d0:
 code_r0x000817b0:
             candidateSrc1SelectorY = selectorEnumerant;
 code_r0x0008182c:
-            *(undefined4 *)(iVar32 + 0x48) = candidateSrc1SelectorY;
-            candidateSrc1SelectorZ = *(undefined4 *)(iVar32 + 0x4c);
-            switch(*(undefined4 *)(iVar32 + 0x4c)) {
+            *(undefined4 *)(movRecord + 0x48) = candidateSrc1SelectorY;
+            candidateSrc1SelectorZ = *(undefined4 *)(movRecord + 0x4c);
+            switch(*(undefined4 *)(movRecord + 0x4c)) {
             case 0x87d5:
             case 0x87d6:
             case 0x87d7:
@@ -7995,9 +7995,9 @@ code_r0x00081a00:
 code_r0x000819e0:
             candidateSrc1SelectorZ = selectorEnumerant;
 code_r0x00081a5c:
-            *(undefined4 *)(iVar32 + 0x4c) = candidateSrc1SelectorZ;
-            candidateSrc1SelectorW = *(undefined4 *)(iVar32 + 0x50);
-            switch(*(undefined4 *)(iVar32 + 0x50)) {
+            *(undefined4 *)(movRecord + 0x4c) = candidateSrc1SelectorZ;
+            candidateSrc1SelectorW = *(undefined4 *)(movRecord + 0x50);
+            switch(*(undefined4 *)(movRecord + 0x50)) {
             case 0x87d5:
             case 0x87d6:
             case 0x87d7:
@@ -8126,13 +8126,13 @@ code_r0x00081c30:
 code_r0x00081c10:
             candidateSrc1SelectorW = selectorEnumerant;
 code_r0x00081c8c:
-            *(undefined4 *)(iVar32 + 0x50) = candidateSrc1SelectorW;
+            *(undefined4 *)(movRecord + 0x50) = candidateSrc1SelectorW;
 code_r0x00081c90:
-            if ((*(int *)(iVar32 + 0x58) != 2) ||
-               (*(int *)(iVar32 + 0x5c) != *(int *)(currentInstruction + -0x6c))) goto code_r0x00082578;
-            *(undefined4 *)(iVar32 + 0x5c) = *(undefined4 *)(currentInstruction + -0x50);
-            candidateSrc2SelectorX = *(undefined4 *)(iVar32 + 0x60);
-            switch(*(undefined4 *)(iVar32 + 0x60)) {
+            if ((*(int *)(movRecord + 0x58) != 2) ||
+               (*(int *)(movRecord + 0x5c) != *(int *)(currentInstruction + -0x6c))) goto code_r0x00082578;
+            *(undefined4 *)(movRecord + 0x5c) = *(undefined4 *)(currentInstruction + -0x50);
+            candidateSrc2SelectorX = *(undefined4 *)(movRecord + 0x60);
+            switch(*(undefined4 *)(movRecord + 0x60)) {
             case 0x87d5:
             case 0x87d6:
             case 0x87d7:
@@ -8261,9 +8261,9 @@ code_r0x00081e88:
 code_r0x00081e68:
             candidateSrc2SelectorX = selectorEnumerant;
 code_r0x00081ee4:
-            *(undefined4 *)(iVar32 + 0x60) = candidateSrc2SelectorX;
-            candidateSrc2SelectorY = *(undefined4 *)(iVar32 + 100);
-            switch(*(undefined4 *)(iVar32 + 100)) {
+            *(undefined4 *)(movRecord + 0x60) = candidateSrc2SelectorX;
+            candidateSrc2SelectorY = *(undefined4 *)(movRecord + 100);
+            switch(*(undefined4 *)(movRecord + 100)) {
             case 0x87d5:
             case 0x87d6:
             case 0x87d7:
@@ -8392,9 +8392,9 @@ code_r0x000820b8:
 code_r0x00082098:
             candidateSrc2SelectorY = selectorEnumerant;
 code_r0x00082114:
-            *(undefined4 *)(iVar32 + 100) = candidateSrc2SelectorY;
-            candidateSrc2SelectorZ = *(undefined4 *)(iVar32 + 0x68);
-            switch(*(undefined4 *)(iVar32 + 0x68)) {
+            *(undefined4 *)(movRecord + 100) = candidateSrc2SelectorY;
+            candidateSrc2SelectorZ = *(undefined4 *)(movRecord + 0x68);
+            switch(*(undefined4 *)(movRecord + 0x68)) {
             case 0x87d5:
             case 0x87d6:
             case 0x87d7:
@@ -8523,9 +8523,9 @@ code_r0x000822e8:
 code_r0x000822c8:
             candidateSrc2SelectorZ = selectorEnumerant;
 code_r0x00082344:
-            *(undefined4 *)(iVar32 + 0x68) = candidateSrc2SelectorZ;
-            candidateSrc2SelectorW = *(undefined4 *)(iVar32 + 0x6c);
-            switch(*(undefined4 *)(iVar32 + 0x6c)) {
+            *(undefined4 *)(movRecord + 0x68) = candidateSrc2SelectorZ;
+            candidateSrc2SelectorW = *(undefined4 *)(movRecord + 0x6c);
+            switch(*(undefined4 *)(movRecord + 0x6c)) {
             case 0x87d5:
             case 0x87d6:
             case 0x87d7:
@@ -8654,14 +8654,14 @@ code_r0x00082518:
 code_r0x000824f8:
             candidateSrc2SelectorW = selectorEnumerant;
 code_r0x00082574:
-            *(undefined4 *)(iVar32 + 0x6c) = candidateSrc2SelectorW;
+            *(undefined4 *)(movRecord + 0x6c) = candidateSrc2SelectorW;
 code_r0x00082578:
-            if ((*(int *)(iVar32 + 4) != 2) ||
-               (bVar33 = true, *(int *)(iVar32 + 8) != *(int *)(currentInstruction + -0x6c))) {
+            if ((*(int *)(movRecord + 4) != 2) ||
+               (bVar33 = true, *(int *)(movRecord + 8) != *(int *)(currentInstruction + -0x6c))) {
               bVar33 = false;
             }
             uVar18 = *(uint *)(shaderProgram + 0x14);
-          } while ((uVar25 + 1 < uVar18) && (symbol = symbol + 0x74, uVar25 = uVar25 + 1, !bVar33));
+          } while ((writeEnableX + 1 < uVar18) && (symbol = symbol + 0x74, writeEnableX = writeEnableX + 1, !bVar33));
           currentInstruction = instructions;
           if (uVar30 < uVar18) {
             do {
@@ -8697,19 +8697,19 @@ code_r0x00082770:
     if (instructionCount < *(uint *)(shaderProgram + 0x14)) {
       symbol = *(uint *)(shaderProgram + 0x14) - instructionCount;
       bVar33 = true;
-      piVar21 = (int *)(currentInstruction + *(int *)(shaderProgram + 0x18) + 0x20);
+      laterSlotCursor = (int *)(currentInstruction + *(int *)(shaderProgram + 0x18) + 0x20);
       do {
-        if ((((*piVar21 == 2) && (piVar21[1] == *(int *)(instructions + -0x50))) ||
-            ((piVar21[7] == 2 && (piVar21[8] == *(int *)(instructions + -0x50))))) ||
-           ((piVar21[0xe] == 2 && (piVar21[0xf] == *(int *)(instructions + -0x50))))) {
+        if ((((*laterSlotCursor == 2) && (laterSlotCursor[1] == *(int *)(instructions + -0x50))) ||
+            ((laterSlotCursor[7] == 2 && (laterSlotCursor[8] == *(int *)(instructions + -0x50))))) ||
+           ((laterSlotCursor[0xe] == 2 && (laterSlotCursor[0xf] == *(int *)(instructions + -0x50))))) {
           bVar34 = true;
           bVar33 = false;
         }
-        else if ((piVar21[-7] != 2) || (bVar34 = true, piVar21[-6] != *(int *)(instructions + -0x50))) {
+        else if ((laterSlotCursor[-7] != 2) || (bVar34 = true, laterSlotCursor[-6] != *(int *)(instructions + -0x50))) {
           bVar34 = false;
         }
         symbol = symbol + -1;
-      } while ((symbol != 0) && (piVar21 = piVar21 + 0x1d, !bVar34));
+      } while ((symbol != 0) && (laterSlotCursor = laterSlotCursor + 0x1d, !bVar34));
       if (!bVar33) goto code_r0x00082770;
     }
     instructionIndex = instructionCount - 1;
@@ -8718,10 +8718,10 @@ code_r0x00082770:
       bVar33 = false;
       uVar30 = instructionIndex;
       do {
-        iVar32 = symbol + *(int *)(shaderProgram + 0x18);
-        if ((*(int *)(iVar32 + -0x70) == 2) &&
-           (*(int *)(iVar32 + -0x6c) == *(int *)(instructions + -0x50))) {
-          if (*(int *)(iVar32 + -0x74) - 0x879bU < 2) {
+        movRecord = symbol + *(int *)(shaderProgram + 0x18);
+        if ((*(int *)(movRecord + -0x70) == 2) &&
+           (*(int *)(movRecord + -0x6c) == *(int *)(instructions + -0x50))) {
+          if (*(int *)(movRecord + -0x74) - 0x879bU < 2) {
 code_r0x0008286c:
             bVar34 = true;
           }
@@ -8733,21 +8733,21 @@ code_r0x0008286c:
             selectorEnumerant = *(undefined4 *)(instructions + -0x5c);
             uVar9 = *(undefined4 *)(instructions + -0x70);
             uVar20 = *(undefined4 *)(instructions + -0x6c);
-            *(undefined4 *)(iVar32 + -0x68) = *(undefined4 *)(instructions + -0x68);
-            *(undefined4 *)(iVar32 + -100) = uVar22;
-            *(undefined4 *)(iVar32 + -0x5c) = selectorEnumerant;
-            *(undefined4 *)(iVar32 + -0x60) = uVar19;
-            *(undefined4 *)(iVar32 + -0x70) = uVar9;
-            *(undefined4 *)(iVar32 + -0x6c) = uVar20;
+            *(undefined4 *)(movRecord + -0x68) = *(undefined4 *)(instructions + -0x68);
+            *(undefined4 *)(movRecord + -100) = uVar22;
+            *(undefined4 *)(movRecord + -0x5c) = selectorEnumerant;
+            *(undefined4 *)(movRecord + -0x60) = uVar19;
+            *(undefined4 *)(movRecord + -0x70) = uVar9;
+            *(undefined4 *)(movRecord + -0x6c) = uVar20;
           }
         }
         else {
-          if ((((*(int *)(iVar32 + -0x54) == 2) &&
-               (*(int *)(iVar32 + -0x50) == *(int *)(instructions + -0x50))) ||
-              ((*(int *)(iVar32 + -0x38) == 2 &&
-               (*(int *)(iVar32 + -0x34) == *(int *)(instructions + -0x50))))) ||
-             ((*(int *)(iVar32 + -0x1c) == 2 &&
-              (*(int *)(iVar32 + -0x18) == *(int *)(instructions + -0x50))))) goto code_r0x0008286c;
+          if ((((*(int *)(movRecord + -0x54) == 2) &&
+               (*(int *)(movRecord + -0x50) == *(int *)(instructions + -0x50))) ||
+              ((*(int *)(movRecord + -0x38) == 2 &&
+               (*(int *)(movRecord + -0x34) == *(int *)(instructions + -0x50))))) ||
+             ((*(int *)(movRecord + -0x1c) == 2 &&
+              (*(int *)(movRecord + -0x18) == *(int *)(instructions + -0x50))))) goto code_r0x0008286c;
           bVar34 = false;
         }
         uVar30 = uVar30 - 1;
@@ -8772,8 +8772,8 @@ LAB_0007e2d4:
     if (uVar30 < instructionCount) {
       do {
         uVar30 = uVar30 + 1;
-        instructions = iVar32 + *(int *)(shaderProgram + 0x18);
-        iVar32 = iVar32 + 0x74;
+        instructions = movRecord + *(int *)(shaderProgram + 0x18);
+        movRecord = movRecord + 0x74;
         uStack_70 = selectorEnumerant;
         _memcpy(instructions + -0x74,instructions,0x74);
         instructionCount = *(uint *)(shaderProgram + 0x14);

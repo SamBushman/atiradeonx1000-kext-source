@@ -240,10 +240,10 @@
 86840	FUN_00086840	r6	PASS-indirect	GARBAGE	
 86840	FUN_00086840	r7	PASS-indirect	GARBAGE	
 86840	FUN_00086840	r8	PASS-indirect	GARBAGE	
-872e0	FUN_000872e0	r5	PASS-indirect	GARBAGE	
-872e0	FUN_000872e0	r6	PASS-indirect	GARBAGE	
-872e0	FUN_000872e0	r7	PASS-indirect	GARBAGE	
-872e0	FUN_000872e0	r8	PASS-indirect	GARBAGE	
+872e0	gldLeaveInternalDrawState	r5	PASS-indirect	GARBAGE	
+872e0	gldLeaveInternalDrawState	r6	PASS-indirect	GARBAGE	
+872e0	gldLeaveInternalDrawState	r7	PASS-indirect	GARBAGE	
+872e0	gldLeaveInternalDrawState	r8	PASS-indirect	GARBAGE	
 8b6d0	arbParseSwizzleSuffix	r5	PASS-deep	GARBAGE	
 8b960	arbfpParseScalarSourceOperand	r5	PASS-deep	GARBAGE	
 8b9f0	arbParseProgramText	r5	PASS-deep	GARBAGE	
