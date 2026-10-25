@@ -369,8 +369,8 @@ int fpilEmitAngleConstants(param_1, param_2, param_3, param_4, param_5, param_6,
   return param_1[9];
 }
 
-/* FUN_0003ed50 @ 0x3ed50 (60 bytes) */
-int FUN_0003ed50(param_1, param_2)
+/* fpilClassifyDestination @ 0x3ed50 (60 bytes) */
+int fpilClassifyDestination(param_1, param_2)
   int *param_1;
   int param_2;
 {
@@ -521,8 +521,8 @@ int fpilReserveTokens(translator, nWords, outPtr)
   return 0;
 }
 
-/* FUN_0003f050 @ 0x3f050 (336 bytes) */
-int FUN_0003f050(translator, instIndex, outRegister)
+/* fpilMapConstantRegister @ 0x3f050 (336 bytes) */
+int fpilMapConstantRegister(translator, instIndex, outRegister)
   int *translator;
   int instIndex;
   undefined4 *outRegister;
@@ -5625,7 +5625,7 @@ int fragmentTranslateArithmetic(param_1, param_2)
         if (iVar11 == 0) {
 LAB_00046cd4:
           if ((((param_1[5] & 0x20000000U) == 0) || (uVar9 != 0x3a)) ||
-             (iVar11 = ((int (*)())FUN_0003ed50)(param_1,iVar12 + 8), iVar11 != 1)) {
+             (iVar11 = ((int (*)())fpilClassifyDestination)(param_1,iVar12 + 8), iVar11 != 1)) {
             return 0;
           }
           local_68 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_68) + 0)),99);
@@ -5738,275 +5738,313 @@ LAB_00046e28:
 }
 
 /* fragmentInstructionToIL @ 0x46e90 (7800 bytes) */
-int fragmentInstructionToIL(translator, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int fragmentInstructionToIL(translator, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7, unusedArg8)
   int *translator;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+  undefined4 unusedArg2;
+  undefined4 unusedArg3;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
+  undefined4 unusedArg8;
 {
+  int maxRegSpan;
+  int regSpan;
+  int programPtr;
+  int instructionBlock2;
+  int instBlockOffset;
+  int newTempBase;
+  int arraySourceCount;
+  int tempRegBase;
+  int srcWordOffset;
+  int srcSwizzleStatus;
+  int tokenWordCount;
+  int instructionBlock;
+  int instructionBlock4;
+  bool advanceSrc0;
+  bool moreTemps;
+  bool moreSources;
+  short tempRegisterBase;
+  undefined2 ilSelectOpcode;
+  undefined4 emittedSourceCount;
+  uint *src1OperandPtr;
+  uint *src0OperandPtr;
+  uint *dstOutPair;
+  uint opcodeInfoWord1;
+  int srcStatus3;
+  int emitStatus3;
+  int srcStatus2;
+  int emitStatus2;
+  int emitStatus;
+  int reserveStatus;
+  int callStatus;
+  int srcStatus;
+  int dstStatus;
+  int constStatus;
+  uint opcode;
+  int opcodeInfoOffset;
+  int instructionBlockOffset;
+  int recordByteOffset;
+  uint operandCount;
   bool bVar1;
-  bool bVar2;
-  short sVar3;
+  bool advanceSrc1;
+  short tempRegisterIndex;
   uint uVar4;
-  int iVar5;
+  int program;
   int iVar6;
-  uint uVar7;
-  int iVar8;
-  undefined4 uVar9;
-  undefined2 uVar10;
+  uint opcodeInfoWord0;
+  int returnCode;
+  undefined4 saturate;
+  undefined2 tempRegisterHalf;
   uint uVar11;
-  undefined *puVar12;
+  undefined *adjustedSwizzle;
   uint uVar13;
-  int iVar14;
-  int iVar15;
-  int iVar16;
-  int iVar17;
-  int iVar18;
-  uint *puVar19;
-  uint *puVar20;
-  uint *puVar21;
+  int tempRegister;
+  int recordSpan;
+  int instructionCount;
+  int instructionIndex;
+  int recordIndex;
+  uint *currentRecord;
+  uint *instructionRecords;
+  uint *sourceRecordCursor;
   uint uVar22;
   int iVar23;
   int iVar24;
-  undefined4 *puVar25;
-  uint *puVar26;
-  uint local_108;
-  uint local_104;
-  uint local_100;
-  uint local_fc;
-  uint local_f8;
-  uint local_f4;
-  uint *local_f0;
+  undefined4 *srcOutCursor;
+  uint *src0Operand;
+  uint dstToken;
+  uint dstMask;
+  uint srcToken;
+  uint srcSwizzle;
+  uint dstToken2;
+  uint dstMask2;
+  uint *reservedTokens;
   undefined4 local_ec;
   uint local_e8;
   uint local_e4;
   uint local_e0;
   uint local_dc;
   uint local_d8;
-  undefined4 local_d4;
-  undefined4 local_d0;
-  uint local_cc;
-  undefined4 local_c8;
-  undefined4 local_c4;
-  undefined *local_bc;
-  undefined *local_b8 [2];
-  undefined4 local_b0;
-  undefined4 local_ac;
-  uint local_a8;
-  undefined4 local_a4;
-  undefined4 local_a0;
-  undefined4 local_9c;
-  undefined *local_98;
-  undefined *local_94;
-  undefined *local_90;
-  int local_88;
-  int local_84;
-  int local_80;
-  uint local_7c;
-  uint local_78;
-  uint *local_74;
+  undefined4 ilInstBOpcode;
+  undefined4 ilInstBDst;
+  uint ilInstBDstMask;
+  undefined4 ilInstBSrc0;
+  undefined4 ilInstBSrc1;
+  undefined *ilInstBSwz0;
+  undefined *ilInstBSwz12 [2];
+  undefined4 ilInstAOpcode;
+  undefined4 ilInstADst;
+  uint ilInstADstMask;
+  undefined4 ilInstASrc0;
+  undefined4 ilInstASrc1;
+  undefined4 ilInstASrc2;
+  undefined *ilInstASwz0;
+  undefined *ilInstASwz1;
+  undefined *ilInstASwz2;
+  int src1RegSpan;
+  int src0RegSpan;
+  int dstRegSpan;
+  uint src1Advances;
+  uint src0Advances;
+  uint *instHeader;
   uint local_70;
   uint local_6c;
-  uint local_68;
-  uint local_64;
-  undefined4 *local_60;
-  undefined4 *local_5c;
+  uint savedDstToken;
+  uint savedDstMask;
+  undefined4 *ilInstBPtr;
+  undefined4 *ilInstAPtr;
   
-  iVar5 = *translator;
-  iVar16 = *(int *)(iVar5 + 0x50);
-  iVar8 = *(int *)(iVar5 + 0x54) * 8;
-  puVar20 = (uint *)(iVar5 + iVar8);
-  if (iVar16 < 1) {
+  program = *translator;
+  instructionCount = *(int *)(program + 0x50);
+  instructionBlockOffset = *(int *)(program + 0x54) * 8;
+  instructionRecords = (uint *)(program + instructionBlockOffset);
+  if (instructionCount < 1) {
 LAB_00048d20:
-    iVar8 = 0;
+    returnCode = 0;
   }
   else {
-    uVar22 = *(uint *)(iVar5 + iVar8) >> 0x12 & 0xff;
-    iVar8 = uVar22 * 0x10;
-    uVar13 = *(uint *)(&DAT_001dac34 + iVar8) >> 0x11 & 0xf;
-    if ((uVar13 != 0) && ((*(uint *)(&DAT_001dac40 + iVar8) >> 0x1c & DAT_001db344) == 0)) {
-      iVar17 = 0;
-      iVar18 = 0;
-      iVar5 = 0;
-      puVar19 = puVar20;
+    opcode = *(uint *)(program + instructionBlockOffset) >> 0x12 & 0xff;
+    opcodeInfoOffset = opcode * 0x10;
+    uVar13 = *(uint *)(&DAT_001dac34 + opcodeInfoOffset) >> 0x11 & 0xf;
+    if ((uVar13 != 0) && ((*(uint *)(&DAT_001dac40 + opcodeInfoOffset) >> 0x1c & DAT_001db344) == 0)) {
+      instructionIndex = 0;
+      recordIndex = 0;
+      recordByteOffset = 0;
+      currentRecord = instructionRecords;
       do {
-        uVar11 = *puVar19 >> 0x1d;
-        iVar15 = uVar11 + 2;
+        operandCount = *currentRecord >> 0x1d;
+        recordSpan = operandCount + 2;
         if (uVar13 == 2) {
-          iVar6 = *translator + *(int *)(*translator + 0x54) * 8;
-          uVar13 = *(uint *)(iVar5 + iVar6) >> 0x12 & 0xff;
+          instructionBlock = *translator + *(int *)(*translator + 0x54) * 8;
+          uVar13 = *(uint *)(recordByteOffset + instructionBlock) >> 0x12 & 0xff;
           if ((uVar13 - 0x44 < 2) || (iVar23 = 0, uVar13 == 0x47)) {
             iVar23 = 1;
           }
           if (((uVar13 == 0x43) || (uVar13 == 0x45)) || (bVar1 = false, uVar13 == 0x47)) {
             bVar1 = true;
           }
-          local_5c = &local_b0;
-          iVar24 = iVar6 + iVar5;
-          _memset(local_5c,0,0x24);
-          local_b0 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_b0) + 0)),(short)(*(uint *)(&DAT_001dac34 + uVar13 * 0x10) >> 1))
+          ilInstAPtr = &ilInstAOpcode;
+          iVar24 = instructionBlock + recordByteOffset;
+          _memset(ilInstAPtr,0,0x24);
+          ilInstAOpcode = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstAOpcode) + 0)),(short)(*(uint *)(&DAT_001dac34 + uVar13 * 0x10) >> 1))
           ;
-          ((int (*)())fpilTranslateDestination)(translator,iVar24 + 8,&local_ac,&local_a8,
-                       *(uint *)(iVar5 + iVar6 + 4) >> 0x14 & 1);
-          ((int (*)())fpilTranslateSource)(translator,iVar24 + 0x10,&local_a4,&local_98);
+          ((int (*)())fpilTranslateDestination)(translator,iVar24 + 8,&ilInstADst,&ilInstADstMask,
+                       *(uint *)(recordByteOffset + instructionBlock + 4) >> 0x14 & 1);
+          ((int (*)())fpilTranslateSource)(translator,iVar24 + 0x10,&ilInstASrc0,&ilInstASwz0);
           if ((translator[5] & 0x20000000U) == 0) {
-            local_b0 = (*(uint *)(iVar24 + 0x18) & 0x1f) << 0x10 | local_b0 & 0xc000ffff;
+            ilInstAOpcode = (*(uint *)(iVar24 + 0x18) & 0x1f) << 0x10 | ilInstAOpcode & 0xc000ffff;
             uVar13 = *(uint *)(iVar24 + 0x18) >> 5 & 7;
             if (iVar23 != 0) {
-              local_a0 = local_a4;
-              local_94 = local_98;
+              ilInstASrc1 = ilInstASrc0;
+              ilInstASwz1 = ilInstASwz0;
             }
           }
           else {
-            local_f0 = (uint *)0x0;
-            iVar6 = ((int (*)())FUN_0003f050)(translator,iVar18,&local_f0);
-            if (iVar6 != 0) goto LAB_00048a2c;
-            local_b0 = ((uint)local_f0 & 0x3fff) << 0x10 | local_b0 & 0xc000ffff;
+            reservedTokens = (uint *)0x0;
+            constStatus = ((int (*)())fpilMapConstantRegister)(translator,recordIndex,&reservedTokens);
+            if (constStatus != 0) goto LAB_00048a2c;
+            ilInstAOpcode = ((uint)reservedTokens & 0x3fff) << 0x10 | ilInstAOpcode & 0xc000ffff;
             uVar13 = *(uint *)(iVar24 + 0x20) >> 5 & 7;
             if (iVar23 != 0) {
-              ((int (*)())fpilTranslateSource)(translator,iVar24 + 0x28,&local_a0,&local_94);
-              uVar11 = (uint)local_94 >> 3 & 1;
-              local_94 = (undefined *)
+              ((int (*)())fpilTranslateSource)(translator,iVar24 + 0x28,&ilInstASrc1,&ilInstASwz1);
+              uVar11 = (uint)ilInstASwz1 >> 3 & 1;
+              ilInstASwz1 = (undefined *)
                          (uVar11 << 0xf |
-                         ((uint)local_94 & 7) << 0xc |
+                         ((uint)ilInstASwz1 & 7) << 0xc |
                          uVar11 << 0xb |
-                         ((uint)local_94 & 7) << 8 |
-                         uVar11 << 7 | ((uint)local_94 & 7) << 4 | (uint)local_94 & 0xffff000f);
+                         ((uint)ilInstASwz1 & 7) << 8 |
+                         uVar11 << 7 | ((uint)ilInstASwz1 & 7) << 4 | (uint)ilInstASwz1 & 0xffff000f);
             }
           }
           if (uVar13 - 5 < 3) {
-            local_b0 = local_b0 & 0xf3ffffff | 0x4000000;
+            ilInstAOpcode = ilInstAOpcode & 0xf3ffffff | 0x4000000;
           }
-          puVar12 = local_98;
+          adjustedSwizzle = ilInstASwz0;
           if ((bVar1) &&
-             (puVar12 = (undefined *)((uint)local_98 & 0xff1fffff | 0x600000),
-             ((uint)local_98 & 0x8000) != 0)) {
-            puVar12 = (undefined *)
-                      (((uint)local_98 & 0xff1ff777 ^ 0x8000) & 0x8000 |
-                      ((uint)local_98 & 0xff1fff77 ^ 0x800) & 0x800 |
-                      ((uint)local_98 & 0xff1ffff7 ^ 0x80) & 0x80 |
-                      ((uint)puVar12 ^ 8) & 8 | (uint)local_98 & 0xff1f7777 | 0x600000);
+             (adjustedSwizzle = (undefined *)((uint)ilInstASwz0 & 0xff1fffff | 0x600000),
+             ((uint)ilInstASwz0 & 0x8000) != 0)) {
+            adjustedSwizzle = (undefined *)
+                      (((uint)ilInstASwz0 & 0xff1ff777 ^ 0x8000) & 0x8000 |
+                      ((uint)ilInstASwz0 & 0xff1fff77 ^ 0x800) & 0x800 |
+                      ((uint)ilInstASwz0 & 0xff1ffff7 ^ 0x80) & 0x80 |
+                      ((uint)adjustedSwizzle ^ 8) & 8 | (uint)ilInstASwz0 & 0xff1f7777 | 0x600000);
           }
-          local_98 = puVar12;
-          ((int (*)())fpilEmitInstruction)(translator,local_5c,1,iVar23 + 1);
+          ilInstASwz0 = adjustedSwizzle;
+          ((int (*)())fpilEmitInstruction)(translator,ilInstAPtr,1,iVar23 + 1);
 LAB_00048c70:
-          if (uVar22 != 0x4d) {
+          if (opcode != 0x4d) {
 LAB_00048c78:
-            if ((((*(uint *)(&DAT_001dac34 + iVar8) >> 0x11 & 0xf) != 3) &&
+            if ((((*(uint *)(&DAT_001dac34 + opcodeInfoOffset) >> 0x11 & 0xf) != 3) &&
                 ((translator[5] & 0x20000000U) != 0)) &&
-               (((((uVar13 = *(uint *)((int)puVar20 + iVar5 + 8), (uVar13 & 0x2000) != 0 &&
+               (((((uVar13 = *(uint *)((int)instructionRecords + recordByteOffset + 8), (uVar13 & 0x2000) != 0 &&
                    ((uVar13 & 0x300) != 0)) ||
                   (((uVar13 & 0x4000) != 0 && ((uVar13 & 0xc0) != 0x40)))) ||
                  (((uVar13 & 0x8000) != 0 && ((uVar13 & 0x30) != 0x20)))) ||
                 (((uVar13 & 0x10000) != 0 && ((uVar13 & 0xc) != 0xc)))))) {
-              ((int (*)())fpilEmitMoveFromTemp)(translator,(int)puVar20 + iVar5 + 8,puVar19[1] >> 0x14 & 1);
+              ((int (*)())fpilEmitMoveFromTemp)(translator,(int)instructionRecords + recordByteOffset + 8,currentRecord[1] >> 0x14 & 1);
             }
           }
         }
         else {
           if (uVar13 != 7) {
             if (uVar13 == 5) {
-              local_60 = &local_d4;
-              _memset(local_60,0,0x24);
-              local_d4 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_d4) + 0)),(short)(*(uint *)(&DAT_001dac34 + iVar8) >> 1));
-              local_d4 = (*(uint *)(&DAT_001dac38 + iVar8) >> 0x13) << 0x10 | local_d4 & 0xc000ffff;
-              if ((*(uint *)(&DAT_001dac40 + iVar8) >> 0x1c & 2) == 0) {
-                if (((puVar19[1] & 0x100000) != 0) ||
-                   (uVar9 = 0, (*(uint *)(&DAT_001dac40 + iVar8) >> 0x1c & 1) != 0)) {
-                  uVar9 = 1;
+              ilInstBPtr = &ilInstBOpcode;
+              _memset(ilInstBPtr,0,0x24);
+              ilInstBOpcode = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstBOpcode) + 0)),(short)(*(uint *)(&DAT_001dac34 + opcodeInfoOffset) >> 1));
+              ilInstBOpcode = (*(uint *)(&DAT_001dac38 + opcodeInfoOffset) >> 0x13) << 0x10 | ilInstBOpcode & 0xc000ffff;
+              if ((*(uint *)(&DAT_001dac40 + opcodeInfoOffset) >> 0x1c & 2) == 0) {
+                if (((currentRecord[1] & 0x100000) != 0) ||
+                   (saturate = 0, (*(uint *)(&DAT_001dac40 + opcodeInfoOffset) >> 0x1c & 1) != 0)) {
+                  saturate = 1;
                 }
-                ((int (*)())fpilTranslateDestination)(translator,(int)puVar20 + iVar5 + 8,&local_d0,&local_cc,uVar9);
+                ((int (*)())fpilTranslateDestination)(translator,(int)instructionRecords + recordByteOffset + 8,&ilInstBDst,&ilInstBDstMask,saturate);
               }
-              if (uVar11 != 0) {
+              if (operandCount != 0) {
                 uVar13 = 0;
-                puVar25 = &local_c8;
-                puVar21 = puVar20 + iVar18 * 2 + 4;
+                srcOutCursor = &ilInstBSrc0;
+                sourceRecordCursor = instructionRecords + recordIndex * 2 + 4;
                 do {
                   uVar13 = uVar13 + 1;
-                  ((int (*)())fpilTranslateSource)(translator,puVar21,puVar25,puVar25 + 3);
-                  puVar25 = puVar25 + 1;
-                  puVar21 = puVar21 + 2;
-                } while (uVar11 != uVar13);
+                  ((int (*)())fpilTranslateSource)(translator,sourceRecordCursor,srcOutCursor,srcOutCursor + 3);
+                  srcOutCursor = srcOutCursor + 1;
+                  sourceRecordCursor = sourceRecordCursor + 2;
+                } while (operandCount != uVar13);
               }
-              (**(code **)(&DAT_001dac3c + iVar8))(translator,iVar18,local_60);
+              (**(code **)(&DAT_001dac3c + opcodeInfoOffset))(translator,recordIndex,ilInstBPtr);
 LAB_00048a2c:
               if (translator[9] != 0) {
                 return translator[9];
               }
             }
             else {
-              uVar7 = *(uint *)(&DAT_001dac34 + iVar8);
-              uVar4 = *(uint *)(&DAT_001dac38 + iVar8);
+              opcodeInfoWord0 = *(uint *)(&DAT_001dac34 + opcodeInfoOffset);
+              opcodeInfoWord1 = *(uint *)(&DAT_001dac38 + opcodeInfoOffset);
               if (uVar13 == 4) {
-                uVar11 = uVar11 - 1;
+                operandCount = operandCount - 1;
               }
-              iVar6 = uVar11 * 2 + 1;
+              tokenWordCount = operandCount * 2 + 1;
               if (uVar13 != 3) {
-                iVar6 = uVar11 * 2 + 3;
+                tokenWordCount = operandCount * 2 + 3;
               }
-              iVar6 = ((int (*)())fpilReserveTokens)(translator,iVar6,&local_f0);
-              if (iVar6 != 0) goto LAB_00048d74;
-              *local_f0 = (uVar4 >> 0x13) << 0x10 | uVar7 >> 1 & 0xffff;
-              if ((*(uint *)(&DAT_001dac34 + iVar8) >> 0x11 & 0xf) != 3) {
-                if (((puVar19[1] & 0x100000) != 0) ||
-                   (uVar9 = 0, (*(uint *)(&DAT_001dac40 + iVar8) & 0x10000000) != 0)) {
-                  uVar9 = 1;
+              tokenWordCount = ((int (*)())fpilReserveTokens)(translator,tokenWordCount,&reservedTokens);
+              if (tokenWordCount != 0) goto LAB_00048d74;
+              *reservedTokens = (opcodeInfoWord1 >> 0x13) << 0x10 | opcodeInfoWord0 >> 1 & 0xffff;
+              if ((*(uint *)(&DAT_001dac34 + opcodeInfoOffset) >> 0x11 & 0xf) != 3) {
+                if (((currentRecord[1] & 0x100000) != 0) ||
+                   (saturate = 0, (*(uint *)(&DAT_001dac40 + opcodeInfoOffset) & 0x10000000) != 0)) {
+                  saturate = 1;
                 }
-                iVar6 = ((int (*)())fpilTranslateDestination)(translator,(int)puVar20 + iVar5 + 8,&local_108,&local_104,uVar9);
-                if (iVar6 != 0) goto LAB_00048d74;
-                local_f0[1] = local_108;
-                local_f0[2] = local_104;
+                dstStatus = ((int (*)())fpilTranslateDestination)(translator,(int)instructionRecords + recordByteOffset + 8,&dstToken,&dstMask,saturate);
+                if (dstStatus != 0) goto LAB_00048d74;
+                reservedTokens[1] = dstToken;
+                reservedTokens[2] = dstMask;
               }
-              if ((*(uint *)(&DAT_001dac34 + iVar8) >> 0x11 & 0xf) == 4) {
-                iVar6 = ((int (*)())fpilTranslateSourceWithSwizzle)(translator,(int)puVar20 + iVar5 + 0x10,&local_100,&local_fc,
-                                     (int)puVar20 + iVar5 + 0x18);
+              if ((*(uint *)(&DAT_001dac34 + opcodeInfoOffset) >> 0x11 & 0xf) == 4) {
+                srcSwizzleStatus = ((int (*)())fpilTranslateSourceWithSwizzle)(translator,(int)instructionRecords + recordByteOffset + 0x10,&srcToken,&srcSwizzle,
+                                     (int)instructionRecords + recordByteOffset + 0x18);
               }
               else {
-                iVar6 = ((int (*)())fpilTranslateSource)(translator,(int)puVar20 + iVar5 + 0x10,&local_100,&local_fc);
+                srcSwizzleStatus = ((int (*)())fpilTranslateSource)(translator,(int)instructionRecords + recordByteOffset + 0x10,&srcToken,&srcSwizzle);
               }
-              if (iVar6 != 0) goto LAB_00048d74;
-              uVar13 = *(uint *)(&DAT_001dac34 + iVar8) >> 0x11 & 0xf;
+              if (srcSwizzleStatus != 0) goto LAB_00048d74;
+              uVar13 = *(uint *)(&DAT_001dac34 + opcodeInfoOffset) >> 0x11 & 0xf;
               if (uVar13 == 6) {
-                local_fc = local_fc & 0xffff0fff | 0x5000;
+                srcSwizzle = srcSwizzle & 0xffff0fff | 0x5000;
               }
               if (uVar13 == 3) {
-                local_f0[1] = local_100;
-                local_f0[2] = local_fc;
+                reservedTokens[1] = srcToken;
+                reservedTokens[2] = srcSwizzle;
               }
               else {
-                local_f0[3] = local_100;
-                local_f0[4] = local_fc;
+                reservedTokens[3] = srcToken;
+                reservedTokens[4] = srcSwizzle;
               }
-              if (1 < (int)uVar11) {
-                iVar6 = ((int (*)())fpilTranslateSource)(translator,(int)puVar20 + iVar5 + 0x18,&local_100,&local_fc);
-                if (iVar6 != 0) goto LAB_00048d74;
-                local_f0[5] = local_100;
-                local_f0[6] = local_fc;
-                if (2 < (int)uVar11) {
-                  iVar6 = ((int (*)())fpilTranslateSource)(translator,(int)puVar20 + iVar5 + 0x20,&local_100,&local_fc);
-                  if (iVar6 != 0) goto LAB_00048d74;
-                  local_f0[7] = local_100;
-                  local_f0[8] = local_fc;
+              if (1 < (int)operandCount) {
+                srcStatus = ((int (*)())fpilTranslateSource)(translator,(int)instructionRecords + recordByteOffset + 0x18,&srcToken,&srcSwizzle);
+                if (srcStatus != 0) goto LAB_00048d74;
+                reservedTokens[5] = srcToken;
+                reservedTokens[6] = srcSwizzle;
+                if (2 < (int)operandCount) {
+                  srcStatus = ((int (*)())fpilTranslateSource)(translator,(int)instructionRecords + recordByteOffset + 0x20,&srcToken,&srcSwizzle);
+                  if (srcStatus != 0) goto LAB_00048d74;
+                  reservedTokens[7] = srcToken;
+                  reservedTokens[8] = srcSwizzle;
                 }
               }
             }
             goto LAB_00048c70;
           }
-          if (uVar22 == 0) {
-            local_5c = &local_b0;
+          if (opcode == 0) {
+            ilInstAPtr = &ilInstAOpcode;
             iVar24 = *translator + *(int *)(*translator + 0x54) * 8;
-            _memset(local_5c,0,0x24);
-            iVar23 = iVar5 + iVar24;
-            iVar24 = iVar24 + iVar5;
-            local_b0 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_b0) + 0)),0x47);
-            iVar6 = ((int (*)())fpilTranslateDestination)(translator,iVar24 + 8,&local_ac,&local_a8,
+            _memset(ilInstAPtr,0,0x24);
+            iVar23 = recordByteOffset + iVar24;
+            iVar24 = iVar24 + recordByteOffset;
+            ilInstAOpcode = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstAOpcode) + 0)),0x47);
+            callStatus = ((int (*)())fpilTranslateDestination)(translator,iVar24 + 8,&ilInstADst,&ilInstADstMask,
                                  *(uint *)(iVar23 + 4) >> 0x14 & 1);
-            if ((iVar6 == 0) &&
-               (iVar6 = ((int (*)())fpilTranslateSource)(translator,iVar24 + 0x10,&local_a4,&local_98), iVar6 == 0)) {
+            if ((callStatus == 0) &&
+               (callStatus = ((int (*)())fpilTranslateSource)(translator,iVar24 + 0x10,&ilInstASrc0,&ilInstASwz0), callStatus == 0)) {
               if (((translator[5] & 0x20000000U) == 0) ||
                  (uVar13 = *(uint *)(iVar23 + 4), (uVar13 & 0x10000000) == 0)) {
                 iVar6 = 1;
@@ -6017,11 +6055,11 @@ LAB_00048a2c:
               }
               iVar23 = 0;
               do {
-                iVar24 = ((int (*)())fpilEmitInstruction)(translator,local_5c,1,1);
-                if (iVar24 != 0) goto LAB_00048418;
+                emitStatus3 = ((int (*)())fpilEmitInstruction)(translator,ilInstAPtr,1,1);
+                if (emitStatus3 != 0) goto LAB_00048418;
                 iVar23 = iVar23 + 1;
-                local_ac = CONCAT22((*(unsigned short *)((unsigned char *)&(local_ac) + 0)),(*(unsigned short *)((unsigned char *)&(local_ac) + 2)) + 1);
-                local_a4 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_a4) + 0)),(*(unsigned short *)((unsigned char *)&(local_a4) + 2)) + 1);
+                ilInstADst = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstADst) + 0)),(*(unsigned short *)((unsigned char *)&(ilInstADst) + 2)) + 1);
+                ilInstASrc0 = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstASrc0) + 0)),(*(unsigned short *)((unsigned char *)&(ilInstASrc0) + 2)) + 1);
               } while (iVar6 != iVar23);
               goto LAB_00048c78;
             }
@@ -6031,112 +6069,112 @@ LAB_00048418:
             }
             goto LAB_00048c78;
           }
-          if (uVar22 == 0x40) {
-            iVar23 = *translator + *(int *)(*translator + 0x54) * 8;
-            iVar6 = ((int (*)())fpilTranslateDestination)(translator,iVar23 + iVar5 + 8,&local_f8,&local_f4,
-                                 *(uint *)(iVar5 + iVar23 + 4) >> 0x14 & 1);
-            if (iVar6 == 0) {
-              local_5c = &local_b0;
-              iVar6 = 0;
-              iVar23 = iVar18 * 8 + iVar23 + 0x10;
+          if (opcode == 0x40) {
+            instructionBlock2 = *translator + *(int *)(*translator + 0x54) * 8;
+            dstStatus = ((int (*)())fpilTranslateDestination)(translator,instructionBlock2 + recordByteOffset + 8,&dstToken2,&dstMask2,
+                                 *(uint *)(recordByteOffset + instructionBlock2 + 4) >> 0x14 & 1);
+            if (dstStatus == 0) {
+              ilInstAPtr = &ilInstAOpcode;
+              srcWordOffset = 0;
+              instructionBlock2 = recordIndex * 8 + instructionBlock2 + 0x10;
               do {
-                iVar24 = ((int (*)())fpilTranslateSource)(translator,iVar23,iVar6 + (int)local_5c,(int)&local_e0 + iVar6);
-                if (iVar24 != 0) goto LAB_00048418;
-                bVar1 = iVar6 != 8;
-                iVar23 = iVar23 + 8;
-                iVar6 = iVar6 + 4;
-              } while (bVar1);
-              iVar6 = translator[8];
+                srcStatus3 = ((int (*)())fpilTranslateSource)(translator,instructionBlock2,srcWordOffset + (int)ilInstAPtr,(int)&local_e0 + srcWordOffset);
+                if (srcStatus3 != 0) goto LAB_00048418;
+                moreSources = srcWordOffset != 8;
+                instructionBlock2 = instructionBlock2 + 8;
+                srcWordOffset = srcWordOffset + 4;
+              } while (moreSources);
+              tempRegBase = translator[8];
               iVar24 = 0;
               iVar23 = 0;
-              local_60 = &local_d4;
-              puVar21 = &local_108;
+              ilInstBPtr = &ilInstBOpcode;
+              dstOutPair = &dstToken;
               do {
-                sVar3 = (short)iVar6 + (short)iVar24;
-                bVar1 = iVar24 != 2;
+                tempRegisterIndex = (short)tempRegBase + (short)iVar24;
+                moreTemps = iVar24 != 2;
                 iVar24 = iVar24 + 1;
-                *(undefined4 *)(iVar23 + (int)local_60) = 0;
-                puVar21[0xd] = puVar21[0xd] & 0xffc0ffff | 0x40000;
-                *(short *)((int)puVar21 + 0x36) = sVar3;
+                *(undefined4 *)(iVar23 + (int)ilInstBPtr) = 0;
+                dstOutPair[0xd] = dstOutPair[0xd] & 0xffc0ffff | 0x40000;
+                *(short *)((int)dstOutPair + 0x36) = tempRegisterIndex;
                 *(undefined4 *)((int)&local_ec + iVar23) = 0;
                 iVar23 = iVar23 + 4;
-                puVar21[7] = puVar21[7] & 0xffc0ffff | 0x40000;
-                *(short *)((int)puVar21 + 0x1e) = sVar3;
-                puVar21[7] = puVar21[7] | 0x400000;
-                puVar21 = puVar21 + 1;
-              } while (bVar1);
-              iVar6 = ((int (*)())fpilReserveTokens)(translator,7,&local_f0);
+                dstOutPair[7] = dstOutPair[7] & 0xffc0ffff | 0x40000;
+                *(short *)((int)dstOutPair + 0x1e) = tempRegisterIndex;
+                dstOutPair[7] = dstOutPair[7] | 0x400000;
+                dstOutPair = dstOutPair + 1;
+              } while (moreTemps);
+              reserveStatus = ((int (*)())fpilReserveTokens)(translator,7,&reservedTokens);
               uVar13 = local_ec;
-              if (iVar6 == 0) {
-                *local_f0 = 0x5b;
-                local_f0[1] = local_ec;
-                local_f0[2] = local_f4;
-                local_f0[3] = local_a8;
-                local_f0[4] = local_d8;
-                local_f0[5] = local_b0;
-                local_f0[6] = local_e0;
-                iVar6 = ((int (*)())fpilReserveTokens)(translator,7,&local_f0);
-                if (iVar6 == 0) {
-                  *local_f0 = 0x5b;
+              if (reserveStatus == 0) {
+                *reservedTokens = 0x5b;
+                reservedTokens[1] = local_ec;
+                reservedTokens[2] = dstMask2;
+                reservedTokens[3] = ilInstADstMask;
+                reservedTokens[4] = local_d8;
+                reservedTokens[5] = ilInstAOpcode;
+                reservedTokens[6] = local_e0;
+                reserveStatus = ((int (*)())fpilReserveTokens)(translator,7,&reservedTokens);
+                if (reserveStatus == 0) {
+                  *reservedTokens = 0x5b;
                   local_6c = local_e8;
-                  local_f0[1] = local_e8;
-                  local_f0[2] = local_f4;
-                  local_f0[3] = local_ac;
-                  local_f0[4] = local_dc;
-                  local_f0[5] = local_b0;
-                  local_f0[6] = local_e0;
-                  local_f4 = local_f4 | 0x100;
-                  iVar6 = ((int (*)())fpilReserveTokens)(translator,5,&local_f0);
-                  uVar22 = local_d4;
-                  if (iVar6 == 0) {
-                    *local_f0 = 0x20;
-                    local_f0[1] = uVar13;
-                    local_f0[2] = local_f4;
-                    local_f0[3] = local_d4;
-                    local_70 = local_d0;
-                    local_f0[4] = local_d0;
-                    local_f4 = local_f4 & 0xfffffeff;
-                    iVar6 = ((int (*)())fpilReserveTokens)(translator,5,&local_f0);
-                    if (iVar6 == 0) {
-                      *local_f0 = 3;
-                      local_f0[1] = local_6c;
-                      local_f0[2] = local_f4;
-                      local_f0[3] = uVar22;
-                      local_f0[4] = uVar22;
-                      iVar6 = ((int (*)())fpilReserveTokens)(translator,5,&local_f0);
-                      if (iVar6 == 0) {
-                        *local_f0 = 0x49;
-                        local_f0[1] = uVar13;
-                        local_f0[2] = local_f4;
-                        local_f0[3] = uVar22;
-                        local_f0[4] = uVar22;
-                        iVar6 = ((int (*)())fpilReserveTokens)(translator,5,&local_f0);
-                        uVar13 = local_d4;
-                        if (iVar6 == 0) {
-                          *local_f0 = 0x49;
-                          local_f0[1] = local_6c;
-                          local_f0[2] = local_f4;
-                          local_f0[3] = uVar22;
-                          local_f0[4] = local_70;
-                          iVar6 = ((int (*)())fpilReserveTokens)(translator,7,&local_f0);
-                          if (iVar6 == 0) {
-                            *local_f0 = 0x23;
-                            local_f0[1] = local_e4;
-                            local_f0[2] = local_f4;
-                            local_f0[3] = uVar13 | 0x400000;
-                            local_f0[4] = (uint)((unsigned char *)0x00004555);
-                            local_f0[5] = uVar13 | 0x400000;
-                            local_f0[6] = (uint)((unsigned char *)0x00004555);
-                            local_d0 = local_d0 | 0x400000;
-                            iVar6 = ((int (*)())fpilReserveTokens)(translator,7,&local_f0);
-                            if (iVar6 == 0) {
-                              *local_f0 = 0x40;
-                              local_f0[1] = local_f8;
-                              local_f0[2] = local_f4;
-                              local_f0[3] = local_d4;
-                              local_f0[4] = local_cc;
-                              local_f0[5] = local_d0;
-                              local_f0[6] = 0xba98;
+                  reservedTokens[1] = local_e8;
+                  reservedTokens[2] = dstMask2;
+                  reservedTokens[3] = ilInstADst;
+                  reservedTokens[4] = local_dc;
+                  reservedTokens[5] = ilInstAOpcode;
+                  reservedTokens[6] = local_e0;
+                  dstMask2 = dstMask2 | 0x100;
+                  reserveStatus = ((int (*)())fpilReserveTokens)(translator,5,&reservedTokens);
+                  uVar22 = ilInstBOpcode;
+                  if (reserveStatus == 0) {
+                    *reservedTokens = 0x20;
+                    reservedTokens[1] = uVar13;
+                    reservedTokens[2] = dstMask2;
+                    reservedTokens[3] = ilInstBOpcode;
+                    local_70 = ilInstBDst;
+                    reservedTokens[4] = ilInstBDst;
+                    dstMask2 = dstMask2 & 0xfffffeff;
+                    reserveStatus = ((int (*)())fpilReserveTokens)(translator,5,&reservedTokens);
+                    if (reserveStatus == 0) {
+                      *reservedTokens = 3;
+                      reservedTokens[1] = local_6c;
+                      reservedTokens[2] = dstMask2;
+                      reservedTokens[3] = uVar22;
+                      reservedTokens[4] = uVar22;
+                      reserveStatus = ((int (*)())fpilReserveTokens)(translator,5,&reservedTokens);
+                      if (reserveStatus == 0) {
+                        *reservedTokens = 0x49;
+                        reservedTokens[1] = uVar13;
+                        reservedTokens[2] = dstMask2;
+                        reservedTokens[3] = uVar22;
+                        reservedTokens[4] = uVar22;
+                        reserveStatus = ((int (*)())fpilReserveTokens)(translator,5,&reservedTokens);
+                        uVar13 = ilInstBOpcode;
+                        if (reserveStatus == 0) {
+                          *reservedTokens = 0x49;
+                          reservedTokens[1] = local_6c;
+                          reservedTokens[2] = dstMask2;
+                          reservedTokens[3] = uVar22;
+                          reservedTokens[4] = local_70;
+                          reserveStatus = ((int (*)())fpilReserveTokens)(translator,7,&reservedTokens);
+                          if (reserveStatus == 0) {
+                            *reservedTokens = 0x23;
+                            reservedTokens[1] = local_e4;
+                            reservedTokens[2] = dstMask2;
+                            reservedTokens[3] = uVar13 | 0x400000;
+                            reservedTokens[4] = (uint)((unsigned char *)0x00004555);
+                            reservedTokens[5] = uVar13 | 0x400000;
+                            reservedTokens[6] = (uint)((unsigned char *)0x00004555);
+                            ilInstBDst = ilInstBDst | 0x400000;
+                            reserveStatus = ((int (*)())fpilReserveTokens)(translator,7,&reservedTokens);
+                            if (reserveStatus == 0) {
+                              *reservedTokens = 0x40;
+                              reservedTokens[1] = dstToken2;
+                              reservedTokens[2] = dstMask2;
+                              reservedTokens[3] = ilInstBOpcode;
+                              reservedTokens[4] = ilInstBDstMask;
+                              reservedTokens[5] = ilInstBDst;
+                              reservedTokens[6] = 0xba98;
                               goto LAB_00048c78;
                             }
                           }
@@ -6149,180 +6187,180 @@ LAB_00048418:
             }
             goto LAB_00048418;
           }
-          if (uVar22 == 0x22) {
-            iVar23 = *translator + *(int *)(*translator + 0x54) * 8;
-            iVar24 = iVar23 + iVar5;
-            puVar21 = (uint *)(iVar24 + 0x10);
-            iVar6 = (*(uint *)(iVar24 + 0x10) >> 0xe & 1) + (*(uint *)(iVar24 + 0x18) >> 0xe & 1);
-            if ((iVar6 == 1) &&
+          if (opcode == 0x22) {
+            instructionBlock2 = *translator + *(int *)(*translator + 0x54) * 8;
+            iVar24 = instructionBlock2 + recordByteOffset;
+            src0OperandPtr = (uint *)(iVar24 + 0x10);
+            arraySourceCount = (*(uint *)(iVar24 + 0x10) >> 0xe & 1) + (*(uint *)(iVar24 + 0x18) >> 0xe & 1);
+            if ((arraySourceCount == 1) &&
                (((*(uint *)(iVar24 + 0x10) & 0x3000) == 0 ||
                 ((*(uint *)(iVar24 + 0x18) & 0x3000) == 0)))) {
-              iVar6 = ((int (*)())fragmentTranslateArithmetic)(translator,iVar18);
+              iVar6 = ((int (*)())fragmentTranslateArithmetic)(translator,recordIndex);
               goto joined_r0x00048448;
             }
-            local_60 = &local_d4;
-            _memset(local_60,0,0x24);
-            local_d4 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_d4) + 0)),0x49);
-            iVar23 = ((int (*)())fpilTranslateDestination)(translator,iVar24 + 8,&local_d0,&local_cc,
-                                  *(uint *)(iVar5 + iVar23 + 4) >> 0x14 & 1);
-            if (((iVar23 != 0) ||
-                (iVar23 = ((int (*)())fpilTranslateSource)(translator,puVar21,&local_c8,&local_bc), iVar23 != 0)) ||
-               (iVar23 = ((int (*)())fpilTranslateSource)(translator,(uint *)(iVar24 + 0x18),&local_c4,local_b8),
-               uVar22 = local_cc, uVar13 = local_d0, iVar23 != 0)) {
+            ilInstBPtr = &ilInstBOpcode;
+            _memset(ilInstBPtr,0,0x24);
+            ilInstBOpcode = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstBOpcode) + 0)),0x49);
+            instructionBlock2 = ((int (*)())fpilTranslateDestination)(translator,iVar24 + 8,&ilInstBDst,&ilInstBDstMask,
+                                  *(uint *)(recordByteOffset + instructionBlock2 + 4) >> 0x14 & 1);
+            if (((instructionBlock2 != 0) ||
+                (instructionBlock2 = ((int (*)())fpilTranslateSource)(translator,src0OperandPtr,&ilInstBSrc0,&ilInstBSwz0), instructionBlock2 != 0)) ||
+               (instructionBlock2 = ((int (*)())fpilTranslateSource)(translator,(uint *)(iVar24 + 0x18),&ilInstBSrc1,ilInstBSwz12),
+               uVar22 = ilInstBDstMask, uVar13 = ilInstBDst, instructionBlock2 != 0)) {
 LAB_000479ec:
               iVar6 = translator[9];
               goto joined_r0x00048448;
             }
-            if (iVar6 == 0) {
-              iVar6 = ((int (*)())fpilEmitInstruction)(translator,local_60,1,2);
+            if (arraySourceCount == 0) {
+              emitStatus = ((int (*)())fpilEmitInstruction)(translator,ilInstBPtr,1,2);
 joined_r0x000479e8:
-              if (iVar6 != 0) goto LAB_000479ec;
+              if (emitStatus != 0) goto LAB_000479ec;
             }
-            else if (iVar6 != 1) {
-              uVar10 = (undefined2)translator[8];
-              local_d0 = CONCAT22(4,uVar10);
-              local_68 = uVar13;
-              iVar23 = (*puVar21 >> 0xc & 3) + 1;
-              iVar6 = iVar23 + translator[8];
-              local_64 = local_cc;
-              translator[8] = iVar6;
-              local_cc = 0x55;
-              local_d0 = local_d0 | 0x400000;
-              if (iVar23 != 0) {
-                local_5c = &local_b0;
+            else if (arraySourceCount != 1) {
+              tempRegisterHalf = (undefined2)translator[8];
+              ilInstBDst = CONCAT22(4,tempRegisterHalf);
+              savedDstToken = uVar13;
+              regSpan = (*src0OperandPtr >> 0xc & 3) + 1;
+              newTempBase = regSpan + translator[8];
+              savedDstMask = ilInstBDstMask;
+              translator[8] = newTempBase;
+              ilInstBDstMask = 0x55;
+              ilInstBDst = ilInstBDst | 0x400000;
+              if (regSpan != 0) {
+                ilInstAPtr = &ilInstAOpcode;
                 iVar6 = 0;
                 do {
-                  uVar22 = *puVar21 >> 0xc & 3;
-                  _memcpy(local_5c,local_60,0x24);
-                  iVar14 = translator[8];
-                  uVar13 = (uint)local_b8[0] >> 3 & 1;
-                  local_ac = CONCAT22(4,(short)iVar14);
-                  local_a8 = 0x55;
-                  local_94 = (undefined *)
+                  uVar22 = *src0OperandPtr >> 0xc & 3;
+                  _memcpy(ilInstAPtr,ilInstBPtr,0x24);
+                  tempRegister = translator[8];
+                  uVar13 = (uint)ilInstBSwz12[0] >> 3 & 1;
+                  ilInstADst = CONCAT22(4,(short)tempRegister);
+                  ilInstADstMask = 0x55;
+                  ilInstASwz1 = (undefined *)
                              (uVar13 << 0xf |
-                             ((uint)local_b8[0] & 7) << 0xc |
+                             ((uint)ilInstBSwz12[0] & 7) << 0xc |
                              uVar13 << 0xb |
-                             ((uint)local_b8[0] & 7) << 8 |
+                             ((uint)ilInstBSwz12[0] & 7) << 8 |
                              uVar13 << 7 |
-                             ((uint)local_b8[0] & 7) << 4 |
-                             uVar13 << 3 | (uint)local_b8[0] & 7 | (uint)local_94 & 0xffff0000);
-                  local_ac = local_ac | 0x400000;
-                  iVar24 = ((int (*)())fpilEmitInstruction)(translator,local_5c,1,2);
-                  if (iVar24 == 0) {
-                    local_9c = CONCAT22(4,(short)iVar14);
-                    local_a4 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_a4) + 0)),(*(unsigned short *)((unsigned char *)&(local_a4) + 2)) + 1);
-                    local_b0 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_b0) + 0)),0x40);
-                    local_90 = ((unsigned char *)0x00003210);
-                    local_9c = local_9c | 0x400000;
+                             ((uint)ilInstBSwz12[0] & 7) << 4 |
+                             uVar13 << 3 | (uint)ilInstBSwz12[0] & 7 | (uint)ilInstASwz1 & 0xffff0000);
+                  ilInstADst = ilInstADst | 0x400000;
+                  emitStatus3 = ((int (*)())fpilEmitInstruction)(translator,ilInstAPtr,1,2);
+                  if (emitStatus3 == 0) {
+                    ilInstASrc2 = CONCAT22(4,(short)tempRegister);
+                    ilInstASrc0 = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstASrc0) + 0)),(*(unsigned short *)((unsigned char *)&(ilInstASrc0) + 2)) + 1);
+                    ilInstAOpcode = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstAOpcode) + 0)),0x40);
+                    ilInstASwz2 = ((unsigned char *)0x00003210);
+                    ilInstASrc2 = ilInstASrc2 | 0x400000;
                     if (uVar22 == 1) {
-                      local_ac = local_d0;
-                      local_a8 = local_cc;
+                      ilInstADst = ilInstBDst;
+                      ilInstADstMask = ilInstBDstMask;
                     }
-                    uVar11 = (uint)local_b8[0] >> 4 & 7;
-                    uVar13 = (uint)local_b8[0] >> 7 & 1;
-                    local_94 = (undefined *)
+                    uVar11 = (uint)ilInstBSwz12[0] >> 4 & 7;
+                    uVar13 = (uint)ilInstBSwz12[0] >> 7 & 1;
+                    ilInstASwz1 = (undefined *)
                                (uVar13 << 0xf |
                                uVar11 << 0xc |
                                uVar13 << 0xb |
                                uVar11 << 8 |
                                uVar13 << 7 |
-                               uVar11 << 4 | uVar13 << 3 | uVar11 | (uint)local_94 & 0xffff0000);
-                    iVar24 = ((int (*)())fpilEmitInstruction)(translator,local_5c,1,3);
-                    if ((iVar24 == 0) && (1 < uVar22)) {
-                      local_a4 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_a4) + 0)),(*(unsigned short *)((unsigned char *)&(local_a4) + 2)) + 1);
+                               uVar11 << 4 | uVar13 << 3 | uVar11 | (uint)ilInstASwz1 & 0xffff0000);
+                    emitStatus3 = ((int (*)())fpilEmitInstruction)(translator,ilInstAPtr,1,3);
+                    if ((emitStatus3 == 0) && (1 < uVar22)) {
+                      ilInstASrc0 = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstASrc0) + 0)),(*(unsigned short *)((unsigned char *)&(ilInstASrc0) + 2)) + 1);
                       if (uVar22 == 2) {
-                        local_ac = local_d0;
-                        local_a8 = local_cc;
+                        ilInstADst = ilInstBDst;
+                        ilInstADstMask = ilInstBDstMask;
                       }
-                      uVar11 = (uint)local_b8[0] >> 8 & 7;
-                      uVar13 = (uint)local_b8[0] >> 0xb & 1;
-                      local_94 = (undefined *)
+                      uVar11 = (uint)ilInstBSwz12[0] >> 8 & 7;
+                      uVar13 = (uint)ilInstBSwz12[0] >> 0xb & 1;
+                      ilInstASwz1 = (undefined *)
                                  (uVar13 << 0xf |
                                  uVar11 << 0xc |
                                  uVar13 << 0xb |
                                  uVar11 << 8 |
                                  uVar13 << 7 |
-                                 uVar11 << 4 | uVar13 << 3 | uVar11 | (uint)local_94 & 0xffff0000);
-                      iVar24 = ((int (*)())fpilEmitInstruction)(translator,local_5c,1,3);
-                      if ((iVar24 == 0) && (uVar22 == 3)) {
-                        uVar22 = (uint)local_b8[0] >> 0xc & 7;
-                        uVar13 = (uint)local_b8[0] >> 0xf & 1;
-                        local_ac = local_d0;
-                        local_a8 = local_cc;
-                        local_a4 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_a4) + 0)),(*(unsigned short *)((unsigned char *)&(local_a4) + 2)) + 1);
-                        local_94 = (undefined *)
+                                 uVar11 << 4 | uVar13 << 3 | uVar11 | (uint)ilInstASwz1 & 0xffff0000);
+                      emitStatus3 = ((int (*)())fpilEmitInstruction)(translator,ilInstAPtr,1,3);
+                      if ((emitStatus3 == 0) && (uVar22 == 3)) {
+                        uVar22 = (uint)ilInstBSwz12[0] >> 0xc & 7;
+                        uVar13 = (uint)ilInstBSwz12[0] >> 0xf & 1;
+                        ilInstADst = ilInstBDst;
+                        ilInstADstMask = ilInstBDstMask;
+                        ilInstASrc0 = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstASrc0) + 0)),(*(unsigned short *)((unsigned char *)&(ilInstASrc0) + 2)) + 1);
+                        ilInstASwz1 = (undefined *)
                                    (uVar13 << 0xf |
                                    uVar22 << 0xc |
                                    uVar13 << 0xb |
                                    uVar22 << 8 |
                                    uVar13 << 7 |
-                                   uVar22 << 4 | uVar13 << 3 | uVar22 | (uint)local_94 & 0xffff0000)
+                                   uVar22 << 4 | uVar13 << 3 | uVar22 | (uint)ilInstASwz1 & 0xffff0000)
                         ;
-                        ((int (*)())fpilEmitInstruction)(translator,local_5c,1,3);
+                        ((int (*)())fpilEmitInstruction)(translator,ilInstAPtr,1,3);
                       }
                     }
                   }
                   iVar6 = iVar6 + 1;
-                  local_d0 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_d0) + 0)),(*(unsigned short *)((unsigned char *)&(local_d0) + 2)) + 1);
-                  local_c4 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_c4) + 0)),(*(unsigned short *)((unsigned char *)&(local_c4) + 2)) + 1);
-                } while (iVar23 != iVar6);
-                iVar6 = translator[8];
+                  ilInstBDst = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstBDst) + 0)),(*(unsigned short *)((unsigned char *)&(ilInstBDst) + 2)) + 1);
+                  ilInstBSrc1 = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstBSrc1) + 0)),(*(unsigned short *)((unsigned char *)&(ilInstBSrc1) + 2)) + 1);
+                } while (regSpan != iVar6);
+                newTempBase = translator[8];
               }
-              local_c8 = CONCAT22(4,uVar10);
-              translator[8] = iVar6 - iVar23;
-              local_d4 = 0x47;
-              local_bc = ((unsigned char *)0x00003210);
-              local_d0 = local_68;
-              local_cc = local_64;
-              local_c8 = local_c8 | 0x400000;
-              if (iVar23 != 0) {
+              ilInstBSrc0 = CONCAT22(4,tempRegisterHalf);
+              translator[8] = newTempBase - regSpan;
+              ilInstBOpcode = 0x47;
+              ilInstBSwz0 = ((unsigned char *)0x00003210);
+              ilInstBDst = savedDstToken;
+              ilInstBDstMask = savedDstMask;
+              ilInstBSrc0 = ilInstBSrc0 | 0x400000;
+              if (regSpan != 0) {
                 iVar6 = 0;
                 do {
                   iVar6 = iVar6 + 1;
-                  ((int (*)())fpilEmitInstruction)(translator,local_60,1,1);
-                  local_d0 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_d0) + 0)),(*(unsigned short *)((unsigned char *)&(local_d0) + 2)) + 1);
-                  local_c8 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_c8) + 0)),(*(unsigned short *)((unsigned char *)&(local_c8) + 2)) + 1);
-                } while (iVar23 != iVar6);
+                  ((int (*)())fpilEmitInstruction)(translator,ilInstBPtr,1,1);
+                  ilInstBDst = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstBDst) + 0)),(*(unsigned short *)((unsigned char *)&(ilInstBDst) + 2)) + 1);
+                  ilInstBSrc0 = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstBSrc0) + 0)),(*(unsigned short *)((unsigned char *)&(ilInstBSrc0) + 2)) + 1);
+                } while (regSpan != iVar6);
               }
             }
             else {
-              if ((*puVar21 & 0x4000) == 0) {
-                uVar11 = local_cc & 3;
-                local_d0 = CONCAT22(4,(short)translator[8]);
-                local_cc = 0;
-                local_d4 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_d4) + 0)),0x23);
-                local_d0 = local_d0 | 0x400000;
+              if ((*src0OperandPtr & 0x4000) == 0) {
+                uVar11 = ilInstBDstMask & 3;
+                ilInstBDst = CONCAT22(4,(short)translator[8]);
+                ilInstBDstMask = 0;
+                ilInstBOpcode = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstBOpcode) + 0)),0x23);
+                ilInstBDst = ilInstBDst | 0x400000;
                 do {
                   iVar6 = 0;
                   bVar1 = uVar11 == 1;
                   while( true ) {
                     if (bVar1) {
-                      uVar4 = local_cc & 0xffffff00;
+                      uVar4 = ilInstBDstMask & 0xffffff00;
                       if (iVar6 == 0) {
-                        local_cc = uVar4 | 1;
+                        ilInstBDstMask = uVar4 | 1;
                       }
                       else if (iVar6 == 1) {
-                        local_cc = uVar4 | 4;
+                        ilInstBDstMask = uVar4 | 4;
                       }
                       else if (iVar6 == 2) {
-                        local_cc = uVar4 | 0x10;
+                        ilInstBDstMask = uVar4 | 0x10;
                       }
                       else {
-                        local_cc = local_cc & 0xffffff00 | 0x40;
+                        ilInstBDstMask = ilInstBDstMask & 0xffffff00 | 0x40;
                       }
-                      iVar23 = ((int (*)())fpilEmitInstruction)(translator,local_60,1,2);
-                      if (iVar23 != 0) goto LAB_000479ec;
+                      emitStatus2 = ((int (*)())fpilEmitInstruction)(translator,ilInstBPtr,1,2);
+                      if (emitStatus2 != 0) goto LAB_000479ec;
                     }
                     iVar6 = iVar6 + 1;
-                    local_c4 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_c4) + 0)),(*(unsigned short *)((unsigned char *)&(local_c4) + 2)) + 1);
+                    ilInstBSrc1 = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstBSrc1) + 0)),(*(unsigned short *)((unsigned char *)&(ilInstBSrc1) + 2)) + 1);
                     if ((int)(*(uint *)(iVar24 + 0x18) >> 0xc & 3) < iVar6) {
-                      local_c8 = CONCAT22(4,(short)translator[8]);
-                      local_d4 = 0x47;
-                      local_bc = ((unsigned char *)0x00003210);
-                      local_c8 = local_c8 | 0x400000;
-                      local_d0 = uVar13;
-                      local_cc = uVar22;
-                      iVar6 = ((int (*)())fpilEmitInstruction)(translator,local_60,1,1);
+                      ilInstBSrc0 = CONCAT22(4,(short)translator[8]);
+                      ilInstBOpcode = 0x47;
+                      ilInstBSwz0 = ((unsigned char *)0x00003210);
+                      ilInstBSrc0 = ilInstBSrc0 | 0x400000;
+                      ilInstBDst = uVar13;
+                      ilInstBDstMask = uVar22;
+                      emitStatus = ((int (*)())fpilEmitInstruction)(translator,ilInstBPtr,1,1);
                       goto joined_r0x000479e8;
                     }
                     if (iVar6 == 0) break;
@@ -6338,118 +6376,118 @@ joined_r0x000479e8:
                   }
                 } while( true );
               }
-              local_5c = &local_b0;
-              uVar22 = *puVar21 >> 0xc & 3;
-              _memcpy(local_5c,local_60,0x24);
-              iVar6 = translator[8];
-              uVar13 = (uint)local_b8[0] >> 3 & 1;
-              local_ac = CONCAT22(4,(short)iVar6);
-              local_a8 = 0x55;
-              local_94 = (undefined *)
+              ilInstAPtr = &ilInstAOpcode;
+              uVar22 = *src0OperandPtr >> 0xc & 3;
+              _memcpy(ilInstAPtr,ilInstBPtr,0x24);
+              tempRegBase = translator[8];
+              uVar13 = (uint)ilInstBSwz12[0] >> 3 & 1;
+              ilInstADst = CONCAT22(4,(short)tempRegBase);
+              ilInstADstMask = 0x55;
+              ilInstASwz1 = (undefined *)
                          (uVar13 << 0xf |
-                         ((uint)local_b8[0] & 7) << 0xc |
+                         ((uint)ilInstBSwz12[0] & 7) << 0xc |
                          uVar13 << 0xb |
-                         ((uint)local_b8[0] & 7) << 8 |
+                         ((uint)ilInstBSwz12[0] & 7) << 8 |
                          uVar13 << 7 |
-                         ((uint)local_b8[0] & 7) << 4 |
-                         uVar13 << 3 | (uint)local_b8[0] & 7 | (uint)local_94 & 0xffff0000);
-              local_ac = local_ac | 0x400000;
-              iVar23 = ((int (*)())fpilEmitInstruction)(translator,local_5c,1,2);
-              if (iVar23 == 0) {
-                local_9c = CONCAT22(4,(short)iVar6);
-                local_a4 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_a4) + 0)),(*(unsigned short *)((unsigned char *)&(local_a4) + 2)) + 1);
-                local_90 = ((unsigned char *)0x00003210);
-                local_b0 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_b0) + 0)),0x40);
-                local_9c = local_9c | 0x400000;
+                         ((uint)ilInstBSwz12[0] & 7) << 4 |
+                         uVar13 << 3 | (uint)ilInstBSwz12[0] & 7 | (uint)ilInstASwz1 & 0xffff0000);
+              ilInstADst = ilInstADst | 0x400000;
+              emitStatus2 = ((int (*)())fpilEmitInstruction)(translator,ilInstAPtr,1,2);
+              if (emitStatus2 == 0) {
+                ilInstASrc2 = CONCAT22(4,(short)tempRegBase);
+                ilInstASrc0 = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstASrc0) + 0)),(*(unsigned short *)((unsigned char *)&(ilInstASrc0) + 2)) + 1);
+                ilInstASwz2 = ((unsigned char *)0x00003210);
+                ilInstAOpcode = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstAOpcode) + 0)),0x40);
+                ilInstASrc2 = ilInstASrc2 | 0x400000;
                 if (uVar22 == 1) {
-                  local_ac = local_d0;
-                  local_a8 = local_cc;
+                  ilInstADst = ilInstBDst;
+                  ilInstADstMask = ilInstBDstMask;
                 }
-                uVar11 = (uint)local_b8[0] >> 4 & 7;
-                uVar13 = (uint)local_b8[0] >> 7 & 1;
-                local_94 = (undefined *)
+                uVar11 = (uint)ilInstBSwz12[0] >> 4 & 7;
+                uVar13 = (uint)ilInstBSwz12[0] >> 7 & 1;
+                ilInstASwz1 = (undefined *)
                            (uVar13 << 0xf |
                            uVar11 << 0xc |
                            uVar13 << 0xb |
                            uVar11 << 8 |
                            uVar13 << 7 |
-                           uVar11 << 4 | uVar13 << 3 | uVar11 | (uint)local_94 & 0xffff0000);
-                iVar6 = ((int (*)())fpilEmitInstruction)(translator,local_5c,1,3);
-                if ((iVar6 == 0) && (1 < uVar22)) {
-                  local_a4 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_a4) + 0)),(*(unsigned short *)((unsigned char *)&(local_a4) + 2)) + 1);
+                           uVar11 << 4 | uVar13 << 3 | uVar11 | (uint)ilInstASwz1 & 0xffff0000);
+                emitStatus = ((int (*)())fpilEmitInstruction)(translator,ilInstAPtr,1,3);
+                if ((emitStatus == 0) && (1 < uVar22)) {
+                  ilInstASrc0 = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstASrc0) + 0)),(*(unsigned short *)((unsigned char *)&(ilInstASrc0) + 2)) + 1);
                   if (uVar22 == 2) {
-                    local_ac = local_d0;
-                    local_a8 = local_cc;
+                    ilInstADst = ilInstBDst;
+                    ilInstADstMask = ilInstBDstMask;
                   }
-                  uVar11 = (uint)local_b8[0] >> 8 & 7;
-                  uVar13 = (uint)local_b8[0] >> 0xb & 1;
-                  local_94 = (undefined *)
+                  uVar11 = (uint)ilInstBSwz12[0] >> 8 & 7;
+                  uVar13 = (uint)ilInstBSwz12[0] >> 0xb & 1;
+                  ilInstASwz1 = (undefined *)
                              (uVar13 << 0xf |
                              uVar11 << 0xc |
                              uVar13 << 0xb |
                              uVar11 << 8 |
                              uVar13 << 7 |
-                             uVar11 << 4 | uVar13 << 3 | uVar11 | (uint)local_94 & 0xffff0000);
-                  iVar6 = ((int (*)())fpilEmitInstruction)(translator,local_5c,1,3);
-                  if ((iVar6 == 0) && (uVar22 == 3)) {
-                    uVar22 = (uint)local_b8[0] >> 0xc & 7;
-                    uVar13 = (uint)local_b8[0] >> 0xf & 1;
-                    local_ac = local_d0;
-                    local_a8 = local_cc;
-                    local_a4 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_a4) + 0)),(*(unsigned short *)((unsigned char *)&(local_a4) + 2)) + 1);
-                    local_94 = (undefined *)
+                             uVar11 << 4 | uVar13 << 3 | uVar11 | (uint)ilInstASwz1 & 0xffff0000);
+                  emitStatus = ((int (*)())fpilEmitInstruction)(translator,ilInstAPtr,1,3);
+                  if ((emitStatus == 0) && (uVar22 == 3)) {
+                    uVar22 = (uint)ilInstBSwz12[0] >> 0xc & 7;
+                    uVar13 = (uint)ilInstBSwz12[0] >> 0xf & 1;
+                    ilInstADst = ilInstBDst;
+                    ilInstADstMask = ilInstBDstMask;
+                    ilInstASrc0 = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstASrc0) + 0)),(*(unsigned short *)((unsigned char *)&(ilInstASrc0) + 2)) + 1);
+                    ilInstASwz1 = (undefined *)
                                (uVar13 << 0xf |
                                uVar22 << 0xc |
                                uVar13 << 0xb |
                                uVar22 << 8 |
                                uVar13 << 7 |
-                               uVar22 << 4 | uVar13 << 3 | uVar22 | (uint)local_94 & 0xffff0000);
-                    ((int (*)())fpilEmitInstruction)(translator,local_5c,1,3);
+                               uVar22 << 4 | uVar13 << 3 | uVar22 | (uint)ilInstASwz1 & 0xffff0000);
+                    ((int (*)())fpilEmitInstruction)(translator,ilInstAPtr,1,3);
                   }
                 }
               }
             }
             goto LAB_00048c78;
           }
-          if (((uVar22 - 0x1f < 2) || (uVar22 == 0x23)) || (uVar22 == 0x3a)) {
-            iVar6 = ((int (*)())fragmentTranslateArithmetic)(translator,iVar18);
+          if (((opcode - 0x1f < 2) || (opcode == 0x23)) || (opcode == 0x3a)) {
+            iVar6 = ((int (*)())fragmentTranslateArithmetic)(translator,recordIndex);
             goto joined_r0x0004802c;
           }
-          if (uVar22 == 0x6c) {
-            local_5c = &local_b0;
-            iVar14 = *translator + *(int *)(*translator + 0x54) * 8;
-            _memset(local_5c,0,0x24);
-            iVar23 = iVar14 + iVar5;
+          if (opcode == 0x6c) {
+            ilInstAPtr = &ilInstAOpcode;
+            instructionBlock4 = *translator + *(int *)(*translator + 0x54) * 8;
+            _memset(ilInstAPtr,0,0x24);
+            iVar23 = instructionBlock4 + recordByteOffset;
             iVar24 = iVar23 + 8;
-            iVar6 = ((int (*)())FUN_0003ed50)(translator,iVar24);
+            iVar6 = ((int (*)())fpilClassifyDestination)(translator,iVar24);
             if (iVar6 == 1) {
-              local_b0 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_b0) + 0)),99);
+              ilInstAOpcode = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstAOpcode) + 0)),99);
             }
             else if (iVar6 == 2) {
-              local_b0 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_b0) + 0)),0x56);
-              local_b0 = local_b0 & 0xc000ffff;
+              ilInstAOpcode = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstAOpcode) + 0)),0x56);
+              ilInstAOpcode = ilInstAOpcode & 0xc000ffff;
             }
             else {
-              local_b0 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_b0) + 0)),0x47);
+              ilInstAOpcode = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstAOpcode) + 0)),0x47);
             }
-            iVar24 = ((int (*)())fpilTranslateDestination)(translator,iVar24,&local_ac,&local_a8,
-                                  *(uint *)(iVar5 + iVar14 + 4) >> 0x14 & 1);
+            iVar24 = ((int (*)())fpilTranslateDestination)(translator,iVar24,&ilInstADst,&ilInstADstMask,
+                                  *(uint *)(recordByteOffset + instructionBlock4 + 4) >> 0x14 & 1);
             if ((iVar24 == 0) &&
-               (iVar23 = ((int (*)())fpilTranslateSource)(translator,iVar23 + 0x10,&local_a4,&local_98), iVar23 == 0)) {
-              uVar9 = 1;
+               (iVar23 = ((int (*)())fpilTranslateSource)(translator,iVar23 + 0x10,&ilInstASrc0,&ilInstASwz0), iVar23 == 0)) {
+              emittedSourceCount = 1;
               if (iVar6 == 2) {
-                uVar9 = 2;
-                local_94 = (undefined *)((uint)local_94 & 0xffff0000 | 0x4444);
-                local_a0 = CONCAT22((short)(local_a0 >> 0x10),(short)translator[8]) & 0xffc0ffff |
+                emittedSourceCount = 2;
+                ilInstASwz1 = (undefined *)((uint)ilInstASwz1 & 0xffff0000 | 0x4444);
+                ilInstASrc1 = CONCAT22((short)(ilInstASrc1 >> 0x10),(short)translator[8]) & 0xffc0ffff |
                            0x440000;
               }
-              iVar6 = ((int (*)())fpilEmitInstruction)(translator,local_5c,1,uVar9);
+              emitStatus = ((int (*)())fpilEmitInstruction)(translator,ilInstAPtr,1,emittedSourceCount);
               goto joined_r0x00048414;
             }
             goto LAB_00048418;
           }
-          if (uVar22 == 8) {
-            iVar6 = ((int (*)())fragmentTranslateAny)(translator,iVar18,0);
+          if (opcode == 8) {
+            iVar6 = ((int (*)())fragmentTranslateAny)(translator,recordIndex,0);
 joined_r0x00048448:
             if (iVar6 != 0) {
 LAB_00048d74:
@@ -6457,161 +6495,161 @@ LAB_00048d74:
             }
             goto LAB_00048c78;
           }
-          if (uVar22 == 9) {
-            iVar6 = ((int (*)())fragmentTranslateAll)(translator,iVar18,0);
+          if (opcode == 9) {
+            iVar6 = ((int (*)())fragmentTranslateAll)(translator,recordIndex,0);
             goto joined_r0x00048448;
           }
-          if (uVar22 == 10) {
-            local_5c = &local_b0;
-            iVar23 = *translator;
-            iVar6 = *(int *)(iVar23 + 0x54);
-            _memset(local_5c,0,0x24);
-            iVar23 = iVar23 + iVar6 * 8 + iVar5;
-            local_b0 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_b0) + 0)),0x5b);
-            iVar6 = ((int (*)())fpilTranslateDestination)(translator,iVar23 + 8,&local_ac,&local_a8,1);
-            if (iVar6 == 0) {
-              local_98 = (undefined *)((uint)local_98 & 0xffff0000 | 0x5555);
-              local_a4 = CONCAT22((short)(local_a4 >> 0x10),(short)translator[8]) & 0xffc0ffff |
+          if (opcode == 10) {
+            ilInstAPtr = &ilInstAOpcode;
+            programPtr = *translator;
+            instBlockOffset = *(int *)(programPtr + 0x54);
+            _memset(ilInstAPtr,0,0x24);
+            programPtr = programPtr + instBlockOffset * 8 + recordByteOffset;
+            ilInstAOpcode = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstAOpcode) + 0)),0x5b);
+            dstStatus = ((int (*)())fpilTranslateDestination)(translator,programPtr + 8,&ilInstADst,&ilInstADstMask,1);
+            if (dstStatus == 0) {
+              ilInstASwz0 = (undefined *)((uint)ilInstASwz0 & 0xffff0000 | 0x5555);
+              ilInstASrc0 = CONCAT22((short)(ilInstASrc0 >> 0x10),(short)translator[8]) & 0xffc0ffff |
                          0x440000;
-              iVar6 = ((int (*)())fpilTranslateSource)(translator,iVar23 + 0x10,&local_a0,&local_94);
-              if (iVar6 == 0) {
-                iVar6 = ((int (*)())fpilEmitInstruction)(translator,local_5c,1,2);
+              srcStatus = ((int (*)())fpilTranslateSource)(translator,programPtr + 0x10,&ilInstASrc1,&ilInstASwz1);
+              if (srcStatus == 0) {
+                emitStatus = ((int (*)())fpilEmitInstruction)(translator,ilInstAPtr,1,2);
 joined_r0x00048414:
-                if (iVar6 == 0) goto LAB_00048c78;
+                if (emitStatus == 0) goto LAB_00048c78;
               }
             }
             goto LAB_00048418;
           }
-          if (uVar22 == 0x26) {
-            local_5c = &local_b0;
-            iVar23 = *translator;
-            iVar6 = *(int *)(iVar23 + 0x54);
-            _memset(local_5c,0,0x24);
-            iVar23 = iVar23 + iVar6 * 8 + iVar5;
-            local_b0 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_b0) + 0)),0x5b);
-            local_a8 = local_a8 & 0xffffff00 | 0x55;
-            local_ac = CONCAT22((short)(local_ac >> 0x10),(short)translator[8]) & 0xffc0ffff | 0x440000
+          if (opcode == 0x26) {
+            ilInstAPtr = &ilInstAOpcode;
+            programPtr = *translator;
+            instBlockOffset = *(int *)(programPtr + 0x54);
+            _memset(ilInstAPtr,0,0x24);
+            programPtr = programPtr + instBlockOffset * 8 + recordByteOffset;
+            ilInstAOpcode = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstAOpcode) + 0)),0x5b);
+            ilInstADstMask = ilInstADstMask & 0xffffff00 | 0x55;
+            ilInstADst = CONCAT22((short)(ilInstADst >> 0x10),(short)translator[8]) & 0xffc0ffff | 0x440000
             ;
-            iVar6 = ((int (*)())fpilTranslateSource)(translator,iVar23 + 0x10,&local_a4,&local_98);
-            if (((iVar6 == 0) &&
-                (iVar6 = ((int (*)())fpilTranslateSource)(translator,iVar23 + 0x18,&local_a0,&local_94), iVar6 == 0)) &&
-               (iVar6 = ((int (*)())fpilEmitInstruction)(translator,local_5c,1,2), iVar6 == 0)) {
-              local_b0 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_b0) + 0)),1);
-              iVar6 = ((int (*)())fpilTranslateDestination)(translator,iVar23 + 8,&local_ac,&local_a8,1);
-              if (iVar6 == 0) {
-                local_a4 = CONCAT22(4,(short)translator[8]);
-                local_98 = ((unsigned char *)0x00003210);
-                local_a4 = local_a4 | 0x400000;
-                iVar6 = ((int (*)())fpilEmitInstruction)(translator,local_5c,1,1);
+            callStatus = ((int (*)())fpilTranslateSource)(translator,programPtr + 0x10,&ilInstASrc0,&ilInstASwz0);
+            if (((callStatus == 0) &&
+                (callStatus = ((int (*)())fpilTranslateSource)(translator,programPtr + 0x18,&ilInstASrc1,&ilInstASwz1), callStatus == 0)) &&
+               (callStatus = ((int (*)())fpilEmitInstruction)(translator,ilInstAPtr,1,2), callStatus == 0)) {
+              ilInstAOpcode = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstAOpcode) + 0)),1);
+              dstStatus = ((int (*)())fpilTranslateDestination)(translator,programPtr + 8,&ilInstADst,&ilInstADstMask,1);
+              if (dstStatus == 0) {
+                ilInstASrc0 = CONCAT22(4,(short)translator[8]);
+                ilInstASwz0 = ((unsigned char *)0x00003210);
+                ilInstASrc0 = ilInstASrc0 | 0x400000;
+                emitStatus = ((int (*)())fpilEmitInstruction)(translator,ilInstAPtr,1,1);
                 goto joined_r0x00048414;
               }
             }
             goto LAB_00048418;
           }
-          if (uVar22 == 0x39) {
-            iVar6 = ((int (*)())fragmentTranslateSel)(translator,iVar18);
+          if (opcode == 0x39) {
+            iVar6 = ((int (*)())fragmentTranslateSel)(translator,recordIndex);
             goto joined_r0x00048448;
           }
-          if (uVar22 == 0x6d) {
-            iVar6 = ((int (*)())fragmentTranslateDsl)(translator,iVar18);
+          if (opcode == 0x6d) {
+            iVar6 = ((int (*)())fragmentTranslateDsl)(translator,recordIndex);
             goto joined_r0x00048448;
           }
-          if ((uVar22 == 0x31) || (uVar22 == 0x36)) {
-            iVar6 = *translator + *(int *)(*translator + 0x54) * 8;
+          if ((opcode == 0x31) || (opcode == 0x36)) {
+            instructionBlock = *translator + *(int *)(*translator + 0x54) * 8;
             if ((translator[5] & 0x20000000U) == 0) {
-              local_7c = 0;
-              local_78 = 0;
+              src1Advances = 0;
+              src0Advances = 0;
             }
             else {
-              local_78 = *(uint *)(iVar6 + iVar5 + 0x10) >> 0xe & 1;
-              local_7c = *(uint *)(iVar6 + iVar5 + 0x18) >> 0xe & 1;
+              src0Advances = *(uint *)(instructionBlock + recordByteOffset + 0x10) >> 0xe & 1;
+              src1Advances = *(uint *)(instructionBlock + recordByteOffset + 0x18) >> 0xe & 1;
             }
-            puVar26 = (uint *)(iVar5 + iVar6 + 0x10);
-            puVar21 = (uint *)(iVar5 + iVar6 + 0x18);
-            local_74 = (uint *)(iVar5 + iVar6);
-            local_5c = &local_b0;
-            local_80 = (local_74[1] >> 0x1a & 3) + 1;
-            local_84 = (*puVar26 >> 0xc & 3) + 1;
-            local_88 = (*puVar21 >> 0xc & 3) + 1;
-            _memset(local_5c,0,0x24);
-            local_b0 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_b0) + 0)),0x56);
-            local_b0 = (uint)((*(uint *)(iVar5 + iVar6) & 0x3fc0000) == 0xc40000) << 0x10 |
-                       local_b0 & 0xc000ffff;
-            iVar23 = ((int (*)())fpilTranslateSource)(translator,puVar26,&local_a4,&local_98);
-            if ((iVar23 == 0) &&
-               (iVar23 = ((int (*)())fpilTranslateSource)(translator,puVar21,&local_a0,&local_94), iVar23 == 0)) {
-              if (local_80 < 2) {
-                local_ac = CONCAT22(4,(short)translator[8]);
-                local_a8 = 0x55;
-                local_ac = local_ac | 0x400000;
-                iVar23 = ((int (*)())fpilEmitInstruction)(translator,local_5c,1,2);
-                if (iVar23 == 0) {
-                  iVar23 = local_84;
-                  if (local_84 < local_88) {
-                    iVar23 = local_88;
+            src0Operand = (uint *)(recordByteOffset + instructionBlock + 0x10);
+            src1OperandPtr = (uint *)(recordByteOffset + instructionBlock + 0x18);
+            instHeader = (uint *)(recordByteOffset + instructionBlock);
+            ilInstAPtr = &ilInstAOpcode;
+            dstRegSpan = (instHeader[1] >> 0x1a & 3) + 1;
+            src0RegSpan = (*src0Operand >> 0xc & 3) + 1;
+            src1RegSpan = (*src1OperandPtr >> 0xc & 3) + 1;
+            _memset(ilInstAPtr,0,0x24);
+            ilInstAOpcode = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstAOpcode) + 0)),0x56);
+            ilInstAOpcode = (uint)((*(uint *)(recordByteOffset + instructionBlock) & 0x3fc0000) == 0xc40000) << 0x10 |
+                       ilInstAOpcode & 0xc000ffff;
+            srcStatus2 = ((int (*)())fpilTranslateSource)(translator,src0Operand,&ilInstASrc0,&ilInstASwz0);
+            if ((srcStatus2 == 0) &&
+               (srcStatus2 = ((int (*)())fpilTranslateSource)(translator,src1OperandPtr,&ilInstASrc1,&ilInstASwz1), srcStatus2 == 0)) {
+              if (dstRegSpan < 2) {
+                ilInstADst = CONCAT22(4,(short)translator[8]);
+                ilInstADstMask = 0x55;
+                ilInstADst = ilInstADst | 0x400000;
+                emitStatus2 = ((int (*)())fpilEmitInstruction)(translator,ilInstAPtr,1,2);
+                if (emitStatus2 == 0) {
+                  maxRegSpan = src0RegSpan;
+                  if (src0RegSpan < src1RegSpan) {
+                    maxRegSpan = src1RegSpan;
                   }
-                  bVar1 = local_78 != 0;
-                  if (((bVar1) || (local_7c != 0)) && (1 < iVar23)) {
-                    local_60 = &local_d4;
-                    local_ac = CONCAT22((*(unsigned short *)((unsigned char *)&(local_ac) + 0)),(short)translator[8] + 1);
-                    _memset(local_60,0,0x24);
-                    uVar10 = 0x49;
-                    if ((*(uint *)(iVar5 + iVar6) & 0x3fc0000) != 0xc40000) {
-                      uVar10 = 3;
+                  advanceSrc0 = src0Advances != 0;
+                  if (((advanceSrc0) || (src1Advances != 0)) && (1 < maxRegSpan)) {
+                    ilInstBPtr = &ilInstBOpcode;
+                    ilInstADst = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstADst) + 0)),(short)translator[8] + 1);
+                    _memset(ilInstBPtr,0,0x24);
+                    ilSelectOpcode = 0x49;
+                    if ((*(uint *)(recordByteOffset + instructionBlock) & 0x3fc0000) != 0xc40000) {
+                      ilSelectOpcode = 3;
                     }
-                    local_d4 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_d4) + 0)),uVar10);
-                    sVar3 = (short)translator[8];
-                    local_d0 = CONCAT22(4,sVar3);
+                    ilInstBOpcode = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstBOpcode) + 0)),ilSelectOpcode);
+                    tempRegisterBase = (short)translator[8];
+                    ilInstBDst = CONCAT22(4,tempRegisterBase);
                     iVar6 = 1;
-                    local_c4 = CONCAT22(4,sVar3 + 1);
-                    local_c8 = CONCAT22(4,sVar3);
-                    local_cc = 0x55;
-                    bVar2 = local_7c != 0;
-                    local_b8[0] = ((unsigned char *)0x00003210);
-                    local_bc = ((unsigned char *)0x00003210);
-                    local_d0 = local_d0 | 0x400000;
-                    local_c4 = local_c4 | 0x400000;
-                    local_c8 = local_c8 | 0x400000;
+                    ilInstBSrc1 = CONCAT22(4,tempRegisterBase + 1);
+                    ilInstBSrc0 = CONCAT22(4,tempRegisterBase);
+                    ilInstBDstMask = 0x55;
+                    advanceSrc1 = src1Advances != 0;
+                    ilInstBSwz12[0] = ((unsigned char *)0x00003210);
+                    ilInstBSwz0 = ((unsigned char *)0x00003210);
+                    ilInstBDst = ilInstBDst | 0x400000;
+                    ilInstBSrc1 = ilInstBSrc1 | 0x400000;
+                    ilInstBSrc0 = ilInstBSrc0 | 0x400000;
                     do {
-                      if (bVar1) {
-                        local_a4 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_a4) + 0)),(*(unsigned short *)((unsigned char *)&(local_a4) + 2)) + 1);
+                      if (advanceSrc0) {
+                        ilInstASrc0 = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstASrc0) + 0)),(*(unsigned short *)((unsigned char *)&(ilInstASrc0) + 2)) + 1);
                       }
-                      if (bVar2) {
-                        local_a0 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_a0) + 0)),(*(unsigned short *)((unsigned char *)&(local_a0) + 2)) + 1);
+                      if (advanceSrc1) {
+                        ilInstASrc1 = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstASrc1) + 0)),(*(unsigned short *)((unsigned char *)&(ilInstASrc1) + 2)) + 1);
                       }
-                      iVar24 = ((int (*)())fpilEmitInstruction)(translator,local_5c,1,2);
-                      if ((iVar24 != 0) ||
-                         (iVar24 = ((int (*)())fpilEmitInstruction)(translator,local_60,1,2), iVar24 != 0))
+                      emitStatus3 = ((int (*)())fpilEmitInstruction)(translator,ilInstAPtr,1,2);
+                      if ((emitStatus3 != 0) ||
+                         (emitStatus3 = ((int (*)())fpilEmitInstruction)(translator,ilInstBPtr,1,2), emitStatus3 != 0))
                       goto LAB_000488e8;
                       iVar6 = iVar6 + 1;
-                    } while (iVar23 != iVar6);
+                    } while (maxRegSpan != iVar6);
                   }
-                  if ((*local_74 & 0x3fc0000) == 0xc40000) {
-                    iVar6 = ((int (*)())fragmentTranslateAll)(translator,iVar18,iVar23);
+                  if ((*instHeader & 0x3fc0000) == 0xc40000) {
+                    iVar6 = ((int (*)())fragmentTranslateAll)(translator,recordIndex,maxRegSpan);
                     goto joined_r0x0004802c;
                   }
-                  local_60 = &local_d4;
-                  iVar23 = *translator;
-                  iVar6 = *(int *)(iVar23 + 0x54);
-                  _memset(local_60,0,0x24);
-                  local_d4 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_d4) + 0)),0x23);
-                  iVar6 = ((int (*)())fpilTranslateDestination)(translator,iVar23 + iVar6 * 8 + iVar5 + 8,&local_d0,&local_cc,1)
+                  ilInstBPtr = &ilInstBOpcode;
+                  programPtr = *translator;
+                  instBlockOffset = *(int *)(programPtr + 0x54);
+                  _memset(ilInstBPtr,0,0x24);
+                  ilInstBOpcode = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstBOpcode) + 0)),0x23);
+                  instBlockOffset = ((int (*)())fpilTranslateDestination)(translator,programPtr + instBlockOffset * 8 + recordByteOffset + 8,&ilInstBDst,&ilInstBDstMask,1)
                   ;
-                  if (iVar6 == 0) {
-                    local_c8 = CONCAT22(4,(short)translator[8]);
-                    local_bc = ((unsigned char *)0x00003210);
-                    local_b8[0] = (undefined *)((uint)local_b8[0] & 0xffff0000 | 0x5555);
-                    local_c8 = local_c8 | 0x400000;
-                    local_c4 = CONCAT22((short)(local_c4 >> 0x10),(short)translator[8]) & 0xffc0ffff |
+                  if (instBlockOffset == 0) {
+                    ilInstBSrc0 = CONCAT22(4,(short)translator[8]);
+                    ilInstBSwz0 = ((unsigned char *)0x00003210);
+                    ilInstBSwz12[0] = (undefined *)((uint)ilInstBSwz12[0] & 0xffff0000 | 0x5555);
+                    ilInstBSrc0 = ilInstBSrc0 | 0x400000;
+                    ilInstBSrc1 = CONCAT22((short)(ilInstBSrc1 >> 0x10),(short)translator[8]) & 0xffc0ffff |
                                0x440000;
-                    iVar6 = ((int (*)())fpilEmitInstruction)(translator,local_60,1,2);
-                    if (iVar6 == 0) goto LAB_00048c70;
+                    emitStatus = ((int (*)())fpilEmitInstruction)(translator,ilInstBPtr,1,2);
+                    if (emitStatus == 0) goto LAB_00048c70;
                   }
                 }
                 goto LAB_000488e8;
               }
-              ((int (*)())fpilTranslateDestination)(translator,iVar5 + iVar6 + 8,&local_ac,&local_a8,0);
-              ((int (*)())fpilEmitInstruction)(translator,local_5c,1,2);
+              ((int (*)())fpilTranslateDestination)(translator,recordByteOffset + instructionBlock + 8,&ilInstADst,&ilInstADstMask,0);
+              ((int (*)())fpilEmitInstruction)(translator,ilInstAPtr,1,2);
               iVar6 = translator[9];
             }
             else {
@@ -6622,33 +6660,53 @@ joined_r0x0004802c:
             if (iVar6 != 0) goto LAB_00048d74;
             goto LAB_00048c70;
           }
-          if (uVar22 != 0x4d) break;
+          if (opcode != 0x4d) break;
         }
-        iVar17 = iVar17 + 1;
-        iVar18 = iVar18 + iVar15;
-        if (iVar16 == iVar17) goto LAB_00048d20;
-        iVar5 = iVar18 * 8;
-        puVar19 = puVar20 + iVar18 * 2;
-        uVar22 = puVar20[iVar18 * 2] >> 0x12 & 0xff;
-        iVar8 = uVar22 * 0x10;
-        uVar13 = *(uint *)(&DAT_001dac34 + iVar8) >> 0x11 & 0xf;
-        if ((uVar13 == 0) || ((*(uint *)(&DAT_001dac40 + iVar8) >> 0x1c & DAT_001db344) != 0))
+        instructionIndex = instructionIndex + 1;
+        recordIndex = recordIndex + recordSpan;
+        if (instructionCount == instructionIndex) goto LAB_00048d20;
+        recordByteOffset = recordIndex * 8;
+        currentRecord = instructionRecords + recordIndex * 2;
+        opcode = instructionRecords[recordIndex * 2] >> 0x12 & 0xff;
+        opcodeInfoOffset = opcode * 0x10;
+        uVar13 = *(uint *)(&DAT_001dac34 + opcodeInfoOffset) >> 0x11 & 0xf;
+        if ((uVar13 == 0) || ((*(uint *)(&DAT_001dac40 + opcodeInfoOffset) >> 0x1c & DAT_001db344) != 0))
         break;
       } while( true );
     }
-    iVar8 = translator[9];
-    if (iVar8 == 0) {
-      iVar8 = 3;
+    returnCode = translator[9];
+    if (returnCode == 0) {
+      returnCode = 3;
       translator[9] = 3;
     }
   }
-  return iVar8;
+  return returnCode;
 }
 
 /* fragmentProgramToIL @ 0x48da0 (6552 bytes) */
 int fragmentProgramToIL(translator)
   int *translator;
 {
+  bool moreChannels;
+  uint channelIndex;
+  uint translatorFlags;
+  uint fogMode;
+  uint outputIndex;
+  uint *outputEntry;
+  uint outputCount;
+  uint constantIndex;
+  uint paramTypeBits;
+  uint paramIndex;
+  uint *paramEntry;
+  uint paramCount;
+  uint requiredTokenWords;
+  uint *attribEntry;
+  int attribRemaining;
+  int outputRemaining;
+  int optionEntry;
+  int optionCount;
+  int allocation2;
+  int allocation;
   uint tokenCapacity4;
   uint tokenCapacity3;
   uint tokenCapacity;
@@ -6663,13 +6721,13 @@ int fragmentProgramToIL(translator)
   undefined **ppuVar1;
   undefined4 *puVar2;
   bool bVar3;
-  ushort uVar4;
+  ushort attribBinding;
   short sVar5;
   undefined2 uVar6;
   short sVar7;
-  double dVar8;
+  double intToDoubleBias;
   uint uVar9;
-  uint *puVar10;
+  uint *outputScanEntry;
   uint tokenCapacity2;
   int iVar12;
   int iVar13;
@@ -6692,10 +6750,10 @@ int fragmentProgramToIL(translator)
   undefined4 *tokenWritePtr;
   dword *pdVar16;
   int iVar17;
-  uint uVar18;
+  uint paramKind;
   undefined4 *puVar19;
   undefined **ppuVar20;
-  int *piVar21;
+  int *program;
   undefined *puVar22;
   uint uVar23;
   undefined4 uVar24;
@@ -6709,25 +6767,25 @@ int fragmentProgramToIL(translator)
   undefined4 local_a8;
   undefined4 local_a4;
   undefined *local_a0 [10];
-  undefined4 local_78;
-  uint uStack_74;
-  undefined4 local_70;
-  uint uStack_6c;
-  undefined4 local_68;
-  uint uStack_64;
-  undefined4 local_60;
-  uint uStack_5c;
+  undefined4 intToDoubleHiA;
+  uint intToDoubleLoA;
+  undefined4 intToDoubleHiB;
+  uint intToDoubleLoB;
+  undefined4 intToDoubleHiC;
+  uint intToDoubleLoC;
+  undefined4 intToDoubleHiD;
+  uint intToDoubleLoD;
   
-  piVar21 = (int *)*translator;
-  if (piVar21 == (int *)0x0) {
+  program = (int *)*translator;
+  if (program == (int *)0x0) {
     if (translator[9] != 0) {
       return translator[9];
     }
     translator[9] = 2;
     return 2;
   }
-  translator[8] = piVar21[4] + piVar21[0xc] + 1;
-  iVar12 = *piVar21;
+  translator[8] = program[4] + program[0xc] + 1;
+  iVar12 = *program;
   if ((iVar12 != 0x8804) && (iVar12 != 0x8b30)) {
 switchD_00049180_caseD_0:
     if (translator[9] != 0) {
@@ -6751,15 +6809,15 @@ LAB_0004a4ec:
     for (; tokenCapacity < tokenCount + 2U; tokenCapacity = tokenCapacity << 1) {
     }
     if (*tokenDataPtrAddr == 0) {
-      iVar12 = _malloc(tokenCapacity << 2);
+      allocation = _malloc(tokenCapacity << 2);
       in_r4 = extraout_r4;
     }
     else {
-      iVar12 = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
+      allocation = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
       in_r4 = extraout_r4_00;
     }
-    if (iVar12 != 0) {
-      *tokenDataPtrAddr = iVar12;
+    if (allocation != 0) {
+      *tokenDataPtrAddr = allocation;
       translator[0xc] = tokenCapacity;
       tokenCount = translator[0xb];
       goto LAB_00048eb4;
@@ -6784,24 +6842,24 @@ LAB_00048eb4:
   *tokenWritePtr3 = 1;
   *pdVar16 = 0x10200;
   iVar27 = *translator;
-  iVar12 = *(int *)(iVar27 + 0x30);
-  puVar10 = (uint *)(iVar27 + *(int *)(iVar27 + 0x34) * 8);
-  if (0 < iVar12) {
+  outputRemaining = *(int *)(iVar27 + 0x30);
+  outputScanEntry = (uint *)(iVar27 + *(int *)(iVar27 + 0x34) * 8);
+  if (0 < outputRemaining) {
     do {
-      if (((*puVar10 >> 0x10 & 0xf) == 4) && ((*puVar10 & 0xe) != 0)) {
+      if (((*outputScanEntry >> 0x10 & 0xf) == 4) && ((*outputScanEntry & 0xe) != 0)) {
         *(uint *)(translator[0xd] + 0x20) = *(uint *)(translator[0xd] + 0x20) | 0x400000;
         iVar27 = *translator;
         break;
       }
-      puVar10 = puVar10 + 2;
-      iVar12 = iVar12 + -1;
-    } while (iVar12 != 0);
+      outputScanEntry = outputScanEntry + 2;
+      outputRemaining = outputRemaining + -1;
+    } while (outputRemaining != 0);
   }
-  iVar13 = *(int *)(iVar27 + 0x48);
-  iVar12 = iVar27 + *(int *)(iVar27 + 0x4c) * 8;
-  if (0 < iVar13) {
+  optionCount = *(int *)(iVar27 + 0x48);
+  optionEntry = iVar27 + *(int *)(iVar27 + 0x4c) * 8;
+  if (0 < optionCount) {
     do {
-      switch(*(undefined1 *)(iVar12 + 3)) {
+      switch(*(undefined1 *)(optionEntry + 3)) {
       case 0:
       case 8:
       case 10:
@@ -6820,41 +6878,41 @@ LAB_00048eb4:
       case 3:
         translator[5] = translator[5] & 0xe7ffffffU | 0x8000000;
       }
-      iVar13 = iVar13 + -1;
-      iVar12 = iVar12 + 8;
-    } while (iVar13 != 0);
+      optionCount = optionCount + -1;
+      optionEntry = optionEntry + 8;
+    } while (optionCount != 0);
   }
 LAB_00049048:
-  iVar12 = *(int *)(iVar27 + 0x20);
+  attribRemaining = *(int *)(iVar27 + 0x20);
   tokenCount2 = translator[0xb];
   tokenCapacity = translator[0xc];
-  uVar14 = iVar12 * 2 + tokenCount2;
-  puVar10 = (uint *)(iVar27 + *(int *)(iVar27 + 0x24) * 8);
-  if (tokenCapacity < uVar14) {
+  requiredTokenWords = attribRemaining * 2 + tokenCount2;
+  attribEntry = (uint *)(iVar27 + *(int *)(iVar27 + 0x24) * 8);
+  if (tokenCapacity < requiredTokenWords) {
     if (tokenCapacity == 0) {
       tokenCapacity = 0x10;
     }
     else {
       tokenCapacity = tokenCapacity << 1;
     }
-    for (; tokenCapacity < uVar14; tokenCapacity = tokenCapacity << 1) {
+    for (; tokenCapacity < requiredTokenWords; tokenCapacity = tokenCapacity << 1) {
     }
     if (*tokenDataPtrAddr == 0) {
-      iVar27 = _malloc(tokenCapacity << 2);
+      allocation2 = _malloc(tokenCapacity << 2);
       in_r4 = extraout_r4_01;
     }
     else {
-      iVar27 = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
+      allocation2 = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
       in_r4 = extraout_r4_02;
     }
-    if (iVar27 == 0) goto LAB_0004a55c;
-    *tokenDataPtrAddr = iVar27;
+    if (allocation2 == 0) goto LAB_0004a55c;
+    *tokenDataPtrAddr = allocation2;
     translator[0xc] = tokenCapacity;
     tokenCount2 = translator[0xb];
   }
-  translator[0xb] = iVar12 * 2 + tokenCount2;
+  translator[0xb] = attribRemaining * 2 + tokenCount2;
   tokenWritePtr = (undefined4 *)(tokenCount2 * 4 + *tokenDataPtrAddr);
-  if (iVar12 < 1) {
+  if (attribRemaining < 1) {
 LAB_0004921c:
     if ((translator[5] & 0x18000000U) != 0) {
       tokenCount = translator[0xb];
@@ -6869,15 +6927,15 @@ LAB_0004921c:
         for (; tokenCapacity < tokenCount + 2U; tokenCapacity = tokenCapacity << 1) {
         }
         if (*tokenDataPtrAddr == 0) {
-          iVar12 = _malloc(tokenCapacity << 2);
+          allocation = _malloc(tokenCapacity << 2);
           in_r4 = extraout_r4_03;
         }
         else {
-          iVar12 = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
+          allocation = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
           in_r4 = extraout_r4_04;
         }
-        if (iVar12 == 0) goto LAB_0004a55c;
-        *tokenDataPtrAddr = iVar12;
+        if (allocation == 0) goto LAB_0004a55c;
+        *tokenDataPtrAddr = allocation;
         translator[0xc] = tokenCapacity;
         tokenCount = translator[0xb];
       }
@@ -6890,15 +6948,15 @@ LAB_0004921c:
   else {
     in_r5 = 0;
     do {
-      uVar4 = *(ushort *)puVar10;
-      if ((uVar4 & 0xf) == 1) {
+      attribBinding = *(ushort *)attribEntry;
+      if ((attribBinding & 0xf) == 1) {
         *tokenWritePtr = 0x3ff0016;
 switchD_00049180_caseD_1:
         puVar22 = ((unsigned char *)0x00160000);
       }
       else {
         *tokenWritePtr = 0x1ff0016;
-        switch(uVar4 & 0xf) {
+        switch(attribBinding & 0xf) {
         default:
           goto switchD_00049180_caseD_0;
         case 1:
@@ -6914,14 +6972,14 @@ switchD_00049180_caseD_1:
           puVar22 = (undefined *)0x100000;
           break;
         case 7:
-          puVar22 = (undefined *)(*puVar10 & 0x1f | 0x110000);
+          puVar22 = (undefined *)(*attribEntry & 0x1f | 0x110000);
         }
       }
-      iVar12 = iVar12 + -1;
+      attribRemaining = attribRemaining + -1;
       tokenWritePtr[1] = puVar22;
       tokenWritePtr = tokenWritePtr + 2;
-      puVar10 = puVar10 + 2;
-    } while (iVar12 != 0);
+      attribEntry = attribEntry + 2;
+    } while (attribRemaining != 0);
     in_r6 = 0;
     if (in_r5 == 0) goto LAB_0004921c;
   }
@@ -6977,15 +7035,15 @@ switchD_00049180_caseD_1:
     for (; tokenCapacity < (uint)(iVar13 + tokenCount); tokenCapacity = tokenCapacity << 1) {
     }
     if (*tokenDataPtrAddr == 0) {
-      iVar27 = _malloc(tokenCapacity << 2);
+      allocation2 = _malloc(tokenCapacity << 2);
       in_r4 = extraout_r4_05;
     }
     else {
-      iVar27 = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
+      allocation2 = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
       in_r4 = extraout_r4_06;
     }
-    if (iVar27 != 0) {
-      *tokenDataPtrAddr = iVar27;
+    if (allocation2 != 0) {
+      *tokenDataPtrAddr = allocation2;
       translator[0xc] = tokenCapacity;
       tokenCount = translator[0xb];
       goto LAB_00049448;
@@ -7016,23 +7074,23 @@ LAB_00049448:
       iVar13 = iVar13 + -1;
     } while (iVar13 != 0);
   }
-  dVar8 = DOUBLE_001aa1e0;
+  intToDoubleBias = DOUBLE_001aa1e0;
   iVar27 = *translator;
-  uVar9 = *(uint *)(iVar27 + 0x28);
-  puVar10 = (uint *)(iVar27 + *(int *)(iVar27 + 0x2c) * 8);
+  paramCount = *(uint *)(iVar27 + 0x28);
+  paramEntry = (uint *)(iVar27 + *(int *)(iVar27 + 0x2c) * 8);
   iVar27 = iVar27 + *(int *)(iVar27 + 0x6c) * 8;
-  if (0 < (int)uVar9) {
-    uVar14 = 0;
+  if (0 < (int)paramCount) {
+    paramIndex = 0;
     do {
-      uVar23 = *puVar10 & 0x1c000000;
-      uVar18 = *puVar10 >> 0x10 & 0x1f;
-      if ((((uVar23 != 0xc000000) && (uVar23 != 0x4000000)) && (uVar23 != 0x10000000)) &&
-         (uVar23 != 0)) {
+      paramTypeBits = *paramEntry & 0x1c000000;
+      paramKind = *paramEntry >> 0x10 & 0x1f;
+      if ((((paramTypeBits != 0xc000000) && (paramTypeBits != 0x4000000)) && (paramTypeBits != 0x10000000)) &&
+         (paramTypeBits != 0)) {
         translatorError3 = translator[9];
         if (translatorError3 == 0) goto LAB_0004a4ec;
         goto LAB_0004980c;
       }
-      if (uVar18 == 0x11) {
+      if (paramKind == 0x11) {
         tokenCount2 = translator[0xb];
         tokenCapacity4 = translator[0xc];
         if (tokenCapacity4 < tokenCount2 + 6U) {
@@ -7045,15 +7103,15 @@ LAB_00049448:
           for (; tokenCapacity4 < tokenCount2 + 6U; tokenCapacity4 = tokenCapacity4 << 1) {
           }
           if (*tokenDataPtrAddr == 0) {
-            iVar12 = _malloc(tokenCapacity4 << 2);
+            allocation = _malloc(tokenCapacity4 << 2);
             in_r4 = extraout_r4_07;
           }
           else {
-            iVar12 = _realloc(*tokenDataPtrAddr,tokenCapacity4 << 2);
+            allocation = _realloc(*tokenDataPtrAddr,tokenCapacity4 << 2);
             in_r4 = extraout_r4_08;
           }
-          if (iVar12 == 0) goto LAB_0004a55c;
-          *tokenDataPtrAddr = iVar12;
+          if (allocation == 0) goto LAB_0004a55c;
+          *tokenDataPtrAddr = allocation;
           translator[0xc] = tokenCapacity4;
           tokenCount2 = translator[0xb];
         }
@@ -7061,41 +7119,41 @@ LAB_00049448:
         translator[0xb] = tokenCount;
         tokenWritePtr2 = (undefined4 *)(tokenCount2 * 4 + *tokenDataPtrAddr);
         *tokenWritePtr2 = 0x1c;
-        tokenWritePtr2[1] = uVar14 & 0xffff | 0x10000;
-        uVar23 = (uint)(ushort)*puVar10;
-        if ((*puVar10 & 0x1c000000) == 0xc000000) {
-          local_78 = 0x43300000;
-          iVar13 = iVar27 + uVar23 * 0x10;
-          uStack_74 = *(uint *)(uVar23 * 0x10 + iVar27) ^ 0x80000000;
-          tokenWritePtr2[2] = (float)((double)CONCAT44(0x43300000,uStack_74) - dVar8);
-          local_70 = 0x43300000;
-          uStack_6c = *(uint *)(iVar13 + 4) ^ 0x80000000;
-          tokenWritePtr2[3] = (float)((double)CONCAT44(0x43300000,uStack_6c) - dVar8);
-          local_68 = 0x43300000;
-          uStack_64 = *(uint *)(iVar13 + 8) ^ 0x80000000;
-          tokenWritePtr2[4] = (float)((double)CONCAT44(0x43300000,uStack_64) - dVar8);
-          local_60 = 0x43300000;
-          uStack_5c = *(uint *)(iVar13 + 0xc) ^ 0x80000000;
-          tokenWritePtr2[5] = (float)((double)CONCAT44(0x43300000,uStack_5c) - dVar8);
+        tokenWritePtr2[1] = paramIndex & 0xffff | 0x10000;
+        constantIndex = (uint)(ushort)*paramEntry;
+        if ((*paramEntry & 0x1c000000) == 0xc000000) {
+          intToDoubleHiA = 0x43300000;
+          iVar13 = iVar27 + constantIndex * 0x10;
+          intToDoubleLoA = *(uint *)(constantIndex * 0x10 + iVar27) ^ 0x80000000;
+          tokenWritePtr2[2] = (float)((double)CONCAT44(0x43300000,intToDoubleLoA) - intToDoubleBias);
+          intToDoubleHiB = 0x43300000;
+          intToDoubleLoB = *(uint *)(iVar13 + 4) ^ 0x80000000;
+          tokenWritePtr2[3] = (float)((double)CONCAT44(0x43300000,intToDoubleLoB) - intToDoubleBias);
+          intToDoubleHiC = 0x43300000;
+          intToDoubleLoC = *(uint *)(iVar13 + 8) ^ 0x80000000;
+          tokenWritePtr2[4] = (float)((double)CONCAT44(0x43300000,intToDoubleLoC) - intToDoubleBias);
+          intToDoubleHiD = 0x43300000;
+          intToDoubleLoD = *(uint *)(iVar13 + 0xc) ^ 0x80000000;
+          tokenWritePtr2[5] = (float)((double)CONCAT44(0x43300000,intToDoubleLoD) - intToDoubleBias);
         }
-        else if ((*puVar10 & 0x1c000000) == 0x10000000) {
-          iVar13 = iVar27 + uVar23 * 0x10;
-          tokenWritePtr2[2] = (uint)(*(int *)(iVar27 + uVar23 * 0x10) != 0);
+        else if ((*paramEntry & 0x1c000000) == 0x10000000) {
+          iVar13 = iVar27 + constantIndex * 0x10;
+          tokenWritePtr2[2] = (uint)(*(int *)(iVar27 + constantIndex * 0x10) != 0);
           tokenWritePtr2[3] = (uint)(*(int *)(iVar13 + 4) != 0);
           tokenWritePtr2[4] = (uint)(*(int *)(iVar13 + 8) != 0);
           tokenWritePtr2[5] = (uint)(*(int *)(iVar13 + 0xc) != 0);
         }
         else {
-          iVar13 = iVar27 + uVar23 * 0x10;
-          tokenWritePtr2[2] = *(undefined4 *)(iVar27 + uVar23 * 0x10);
+          iVar13 = iVar27 + constantIndex * 0x10;
+          tokenWritePtr2[2] = *(undefined4 *)(iVar27 + constantIndex * 0x10);
           tokenWritePtr2[3] = *(undefined4 *)(iVar13 + 4);
           tokenWritePtr2[4] = *(undefined4 *)(iVar13 + 8);
           tokenWritePtr2[5] = *(undefined4 *)(iVar13 + 0xc);
         }
       }
-      uVar14 = uVar14 + 1;
-      puVar10 = puVar10 + 2;
-    } while (uVar9 != uVar14);
+      paramIndex = paramIndex + 1;
+      paramEntry = paramEntry + 2;
+    } while (paramCount != paramIndex);
   }
   translator[6] = translator[0xb];
   tokenCount3 = translator[0xb];
@@ -7110,14 +7168,14 @@ LAB_00049448:
     for (; tokenCapacity < tokenCount3 + 0xc6U; tokenCapacity = tokenCapacity << 1) {
     }
     if (*tokenDataPtrAddr == 0) {
-      iVar12 = _malloc(tokenCapacity << 2);
+      allocation = _malloc(tokenCapacity << 2);
       in_r4 = extraout_r4_09;
     }
     else {
-      iVar12 = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
+      allocation = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
       in_r4 = extraout_r4_10;
     }
-    if (iVar12 == 0) {
+    if (allocation == 0) {
 LAB_0004a55c:
       if (translator[9] != 0) {
         return translator[9];
@@ -7125,17 +7183,17 @@ LAB_0004a55c:
       translator[9] = 1;
       return 1;
     }
-    *tokenDataPtrAddr = iVar12;
+    *tokenDataPtrAddr = allocation;
     translator[0xc] = tokenCapacity;
     tokenCount3 = translator[0xb];
   }
   tokenCount = tokenCount3 + 0xc6;
   translator[0xb] = tokenCount;
-  uVar18 = tokenCount3 * 4 + *tokenDataPtrAddr;
+  paramKind = tokenCount3 * 4 + *tokenDataPtrAddr;
   iVar27 = 0;
   iVar13 = 0xc6;
   do {
-    *(undefined4 *)(iVar27 + uVar18) = 0x4b;
+    *(undefined4 *)(iVar27 + paramKind) = 0x4b;
     iVar27 = iVar27 + 4;
     iVar13 = iVar13 + -1;
   } while (iVar13 != 0);
@@ -7145,41 +7203,41 @@ LAB_0004980c:
   if (translatorError3 != 0) {
     return translatorError3;
   }
-  tokenCount = ((int (*)())fragmentInstructionToIL)(translator,in_r4,in_r5,in_r6,tokenWritePtr,tokenCount,uVar18,tokenWritePtr2);
+  tokenCount = ((int (*)())fragmentInstructionToIL)(translator,in_r4,in_r5,in_r6,tokenWritePtr,tokenCount,paramKind,tokenWritePtr2);
   if (tokenCount != 0) goto LAB_0004a7b4;
   iVar12 = *translator;
-  uVar9 = *(uint *)(iVar12 + 0x30);
-  puVar10 = (uint *)(iVar12 + *(int *)(iVar12 + 0x34) * 8);
-  if (0 < (int)uVar9) {
-    uVar14 = 0;
+  outputCount = *(uint *)(iVar12 + 0x30);
+  outputEntry = (uint *)(iVar12 + *(int *)(iVar12 + 0x34) * 8);
+  if (0 < (int)outputCount) {
+    outputIndex = 0;
     do {
-      if ((1 << (uVar14 & 0x3f) & translator[4]) != 0) {
+      if ((1 << (outputIndex & 0x3f) & translator[4]) != 0) {
         uVar24 = 0x55;
         puVar22 = ((unsigned char *)0x00003210);
-        uVar23 = uVar14 + *(int *)(*translator + 0x10) + 1 & 0xffff | 0x440000;
-        if ((*(ushort *)puVar10 & 0xf) == 4) {
+        uVar23 = outputIndex + *(int *)(*translator + 0x10) + 1 & 0xffff | 0x440000;
+        if ((*(ushort *)outputEntry & 0xf) == 4) {
           iVar12 = translator[0xd];
           if (((*(uint *)(iVar12 + 0x20) & 0x400000) != 0) ||
              (bVar3 = true, (*(uint *)(iVar12 + 0x20) >> 0x12 & 0xf) < 2)) {
             bVar3 = false;
           }
-          uVar18 = translator[5];
-          translator[5] = uVar18 | 0x80000000;
-          uVar25 = *puVar10 >> 1 & 7 | 0x570000;
-          if ((uVar18 & 0x18000000) != 0) {
+          translatorFlags = translator[5];
+          translator[5] = translatorFlags | 0x80000000;
+          uVar25 = *outputEntry >> 1 & 7 | 0x570000;
+          if ((translatorFlags & 0x18000000) != 0) {
             *(uint *)(iVar12 + 0x20) = *(uint *)(iVar12 + 0x20) | 0x2000000;
             uVar6 = (undefined2)translator[8];
             sVar7 = ((ushort)((uint)*(undefined4 *)(translator[0xd] + 0x20) >> 0x1a) & 1) +
                     (short)*(undefined4 *)(*translator + 0x28);
             _memset(&local_b8,0,0x24);
             sVar5 = sVar7 + 1;
-            uVar18 = (uint)translator[5] >> 0x1b & 3;
+            fogMode = (uint)translator[5] >> 0x1b & 3;
             local_b4 = CONCAT22(4,uVar6);
             local_b0 = 0x55;
             local_a0[0] = (undefined *)((uint)local_a0[0] & 0xffff0000);
             local_ac = (undefined *)((uint)local_ac & 0xffc0ffff | 0x500000);
             local_b4 = local_b4 | 0x400000;
-            if (uVar18 == 1) {
+            if (fogMode == 1) {
               translatorError = translator[9];
               local_b8 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_b8) + 0)),0x40);
               local_b0 = 0x155;
@@ -7200,12 +7258,12 @@ LAB_0004980c:
                   for (; tokenCapacity3 < tokenCount + 9U; tokenCapacity3 = tokenCapacity3 << 1) {
                   }
                   if (*tokenDataPtrAddr == 0) {
-                    iVar12 = _malloc(tokenCapacity3 << 2);
+                    allocation = _malloc(tokenCapacity3 << 2);
                   }
                   else {
-                    iVar12 = _realloc(*tokenDataPtrAddr,tokenCapacity3 << 2);
+                    allocation = _realloc(*tokenDataPtrAddr,tokenCapacity3 << 2);
                   }
-                  if (iVar12 == 0) {
+                  if (allocation == 0) {
 LAB_0004a188:
                     translatorError = translator[9];
                     if (translatorError == 0) {
@@ -7214,7 +7272,7 @@ LAB_0004a188:
                     }
                     goto LAB_0004a0d8;
                   }
-                  *tokenDataPtrAddr = iVar12;
+                  *tokenDataPtrAddr = allocation;
                   translator[0xc] = tokenCapacity3;
                   tokenCount = translator[0xb];
                 }
@@ -7235,7 +7293,7 @@ LAB_0004a188:
               }
             }
             else {
-              if ((uVar18 == 0) || (3 < uVar18)) goto LAB_0004a474;
+              if ((fogMode == 0) || (3 < fogMode)) goto LAB_0004a474;
               local_b8 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_b8) + 0)),0x49);
               if ((translator[5] & 0x18000000U) == 0x10000000) {
                 local_a8 = CONCAT22(1,sVar5);
@@ -7255,12 +7313,12 @@ LAB_0004a188:
                     for (; tokenCapacity3 < tokenCount + 7U; tokenCapacity3 = tokenCapacity3 << 1) {
                     }
                     if (*tokenDataPtrAddr == 0) {
-                      iVar12 = _malloc(tokenCapacity3 << 2);
+                      allocation = _malloc(tokenCapacity3 << 2);
                     }
                     else {
-                      iVar12 = _realloc(*tokenDataPtrAddr,tokenCapacity3 << 2);
+                      allocation = _realloc(*tokenDataPtrAddr,tokenCapacity3 << 2);
                     }
-                    if (iVar12 == 0) {
+                    if (allocation == 0) {
 LAB_00049f94:
                       translatorError = translator[9];
                       if (translatorError == 0) {
@@ -7269,7 +7327,7 @@ LAB_00049f94:
                       }
                       goto LAB_00049fa8;
                     }
-                    *tokenDataPtrAddr = iVar12;
+                    *tokenDataPtrAddr = allocation;
                     translator[0xc] = tokenCapacity3;
                     tokenCount = translator[0xb];
                   }
@@ -7308,12 +7366,12 @@ LAB_00049f80:
                     for (; tokenCapacity3 < tokenCount + 7U; tokenCapacity3 = tokenCapacity3 << 1) {
                     }
                     if (*tokenDataPtrAddr == 0) {
-                      iVar12 = _malloc(tokenCapacity3 << 2);
+                      allocation = _malloc(tokenCapacity3 << 2);
                     }
                     else {
-                      iVar12 = _realloc(*tokenDataPtrAddr,tokenCapacity3 << 2);
+                      allocation = _realloc(*tokenDataPtrAddr,tokenCapacity3 << 2);
                     }
-                    if (iVar12 == 0) {
+                    if (allocation == 0) {
                       translatorError = translator[9];
                       if (translatorError == 0) {
                         translatorError = 1;
@@ -7321,7 +7379,7 @@ LAB_00049f80:
                       }
                       goto LAB_00049e2c;
                     }
-                    *tokenDataPtrAddr = iVar12;
+                    *tokenDataPtrAddr = allocation;
                     translator[0xc] = tokenCapacity3;
                     tokenCount = translator[0xb];
                   }
@@ -7361,13 +7419,13 @@ LAB_00049e2c:
                     for (; tokenCapacity3 < tokenCount + 7U; tokenCapacity3 = tokenCapacity3 << 1) {
                     }
                     if (*tokenDataPtrAddr == 0) {
-                      iVar12 = _malloc(tokenCapacity3 << 2);
+                      allocation = _malloc(tokenCapacity3 << 2);
                     }
                     else {
-                      iVar12 = _realloc(*tokenDataPtrAddr,tokenCapacity3 << 2);
+                      allocation = _realloc(*tokenDataPtrAddr,tokenCapacity3 << 2);
                     }
-                    if (iVar12 == 0) goto LAB_00049f94;
-                    *tokenDataPtrAddr = iVar12;
+                    if (allocation == 0) goto LAB_00049f94;
+                    *tokenDataPtrAddr = allocation;
                     translator[0xc] = tokenCapacity3;
                     tokenCount = translator[0xb];
                   }
@@ -7406,13 +7464,13 @@ LAB_00049fa8:
                 for (; tokenCapacity3 < tokenCount + 5U; tokenCapacity3 = tokenCapacity3 << 1) {
                 }
                 if (*tokenDataPtrAddr == 0) {
-                  iVar12 = _malloc(tokenCapacity3 << 2);
+                  allocation = _malloc(tokenCapacity3 << 2);
                 }
                 else {
-                  iVar12 = _realloc(*tokenDataPtrAddr,tokenCapacity3 << 2);
+                  allocation = _realloc(*tokenDataPtrAddr,tokenCapacity3 << 2);
                 }
-                if (iVar12 == 0) goto LAB_0004a188;
-                *tokenDataPtrAddr = iVar12;
+                if (allocation == 0) goto LAB_0004a188;
+                *tokenDataPtrAddr = allocation;
                 translator[0xc] = tokenCapacity3;
                 tokenCount = translator[0xb];
               }
@@ -7430,7 +7488,7 @@ LAB_0004a0d8:
             iVar27 = *translator;
             local_b8 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_b8) + 0)),0x47);
             local_b0 = 0x155;
-            sVar5 = (short)uVar14;
+            sVar5 = (short)outputIndex;
             local_b4 = CONCAT22(4,sVar5 + (short)*(undefined4 *)(iVar27 + 0x10) + 1);
             local_b4 = local_b4 | 0x400000;
             local_a0[0] = ((unsigned char *)0x00003210);
@@ -7449,12 +7507,12 @@ LAB_0004a0d8:
                 for (; tokenCapacity3 < tokenCount + 5U; tokenCapacity3 = tokenCapacity3 << 1) {
                 }
                 if (*tokenDataPtrAddr == 0) {
-                  iVar12 = _malloc(tokenCapacity3 << 2);
+                  allocation = _malloc(tokenCapacity3 << 2);
                 }
                 else {
-                  iVar12 = _realloc(*tokenDataPtrAddr,tokenCapacity3 << 2);
+                  allocation = _realloc(*tokenDataPtrAddr,tokenCapacity3 << 2);
                 }
-                if (iVar12 == 0) {
+                if (allocation == 0) {
                   translatorError = translator[9];
                   if (translatorError == 0) {
                     translatorError = 1;
@@ -7463,7 +7521,7 @@ LAB_0004a0d8:
                   iVar27 = *translator;
                   goto LAB_0004a25c;
                 }
-                *tokenDataPtrAddr = iVar12;
+                *tokenDataPtrAddr = allocation;
                 translator[0xc] = tokenCapacity3;
                 tokenCount = translator[0xb];
               }
@@ -7504,18 +7562,18 @@ LAB_0004a25c:
                 for (; tokenCapacity3 < tokenCount + 9U; tokenCapacity3 = tokenCapacity3 << 1) {
                 }
                 if (*tokenDataPtrAddr == 0) {
-                  iVar12 = _malloc(tokenCapacity3 << 2);
+                  allocation = _malloc(tokenCapacity3 << 2);
                 }
                 else {
-                  iVar12 = _realloc(*tokenDataPtrAddr,tokenCapacity3 << 2);
+                  allocation = _realloc(*tokenDataPtrAddr,tokenCapacity3 << 2);
                 }
-                if (iVar12 == 0) {
+                if (allocation == 0) {
                   if (translator[9] == 0) {
                     translator[9] = 1;
                   }
                   goto LAB_0004a474;
                 }
-                *tokenDataPtrAddr = iVar12;
+                *tokenDataPtrAddr = allocation;
                 translator[0xc] = tokenCapacity3;
                 tokenCount = translator[0xb];
               }
@@ -7535,10 +7593,10 @@ LAB_0004a25c:
             }
           }
 LAB_0004a474:
-          uVar18 = 0;
+          channelIndex = 0;
           if (bVar3) {
             do {
-              if (((int)(*(uint *)(translator[0xd] + 0x20) >> 0x12 & 0xf) >> (uVar18 & 0x3f) & 1U) != 0
+              if (((int)(*(uint *)(translator[0xd] + 0x20) >> 0x12 & 0xf) >> (channelIndex & 0x3f) & 1U) != 0
                  ) {
                 tokenCount = translator[0xb];
                 tokenCapacity2 = translator[0xc];
@@ -7552,17 +7610,17 @@ LAB_0004a474:
                   for (; tokenCapacity2 < tokenCount + 5U; tokenCapacity2 = tokenCapacity2 << 1) {
                   }
                   if (*tokenDataPtrAddr == 0) {
-                    iVar12 = _malloc(tokenCapacity2 << 2);
+                    allocation = _malloc(tokenCapacity2 << 2);
                   }
                   else {
-                    iVar12 = _realloc(*tokenDataPtrAddr,tokenCapacity2 << 2);
+                    allocation = _realloc(*tokenDataPtrAddr,tokenCapacity2 << 2);
                   }
-                  if (iVar12 == 0) goto LAB_0004a55c;
-                  *tokenDataPtrAddr = iVar12;
+                  if (allocation == 0) goto LAB_0004a55c;
+                  *tokenDataPtrAddr = allocation;
                   translator[0xc] = tokenCapacity2;
                   tokenCount = translator[0xb];
                 }
-                uVar25 = uVar18 & 0xffff | uVar25 & 0xffff0000;
+                uVar25 = channelIndex & 0xffff | uVar25 & 0xffff0000;
                 translator[0xb] = tokenCount + 5;
                 iVar27 = tokenCount * 4 + *tokenDataPtrAddr;
                 *(undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr) = 0x47;
@@ -7571,19 +7629,19 @@ LAB_0004a474:
                 *(undefined4 *)(iVar27 + 8) = 0x55;
                 *(uint *)(iVar27 + 0xc) = uVar23;
               }
-              bVar3 = uVar18 != 3;
-              uVar18 = uVar18 + 1;
-            } while (bVar3);
+              moreChannels = channelIndex != 3;
+              channelIndex = channelIndex + 1;
+            } while (moreChannels);
             goto LAB_0004a680;
           }
         }
         else {
-          if ((*(ushort *)puVar10 & 0xf) != 7) goto switchD_00049180_caseD_0;
-          uVar18 = translator[5];
+          if ((*(ushort *)outputEntry & 0xf) != 7) goto switchD_00049180_caseD_0;
+          translatorFlags = translator[5];
           uVar24 = 0x155;
-          translator[5] = uVar18 | 0x40000000;
+          translator[5] = translatorFlags | 0x40000000;
           uVar25 = 0x580000;
-          if ((uVar18 & 0x20000000) == 0) {
+          if ((translatorFlags & 0x20000000) == 0) {
             puVar22 = ((unsigned char *)0x00003212);
           }
         }
@@ -7599,13 +7657,13 @@ LAB_0004a474:
           for (; tokenCapacity3 < tokenCount + 5U; tokenCapacity3 = tokenCapacity3 << 1) {
           }
           if (*tokenDataPtrAddr == 0) {
-            iVar12 = _malloc(tokenCapacity3 << 2);
+            allocation = _malloc(tokenCapacity3 << 2);
           }
           else {
-            iVar12 = _realloc(*tokenDataPtrAddr,tokenCapacity3 << 2);
+            allocation = _realloc(*tokenDataPtrAddr,tokenCapacity3 << 2);
           }
-          if (iVar12 == 0) goto LAB_0004a55c;
-          *tokenDataPtrAddr = iVar12;
+          if (allocation == 0) goto LAB_0004a55c;
+          *tokenDataPtrAddr = allocation;
           translator[0xc] = tokenCapacity3;
           tokenCount = translator[0xb];
         }
@@ -7618,9 +7676,9 @@ LAB_0004a474:
         tokenWritePtr[3] = uVar23;
       }
 LAB_0004a680:
-      uVar14 = uVar14 + 1;
-      puVar10 = puVar10 + 2;
-    } while (uVar9 != uVar14);
+      outputIndex = outputIndex + 1;
+      outputEntry = outputEntry + 2;
+    } while (outputCount != outputIndex);
   }
   tokenCount = translator[0xb];
   tokenCapacity = translator[0xc];
@@ -7634,13 +7692,13 @@ LAB_0004a680:
     for (; tokenCapacity < tokenCount + 1U; tokenCapacity = tokenCapacity << 1) {
     }
     if (*tokenDataPtrAddr == 0) {
-      iVar12 = _malloc(tokenCapacity << 2);
+      allocation = _malloc(tokenCapacity << 2);
     }
     else {
-      iVar12 = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
+      allocation = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
     }
-    if (iVar12 != 0) {
-      *tokenDataPtrAddr = iVar12;
+    if (allocation != 0) {
+      *tokenDataPtrAddr = allocation;
       translator[0xc] = tokenCapacity;
       tokenCount = translator[0xb];
       goto LAB_0004a708;

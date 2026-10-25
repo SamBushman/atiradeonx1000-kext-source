@@ -5242,16 +5242,16 @@ LAB_00065500:
   if ((*(uint *)(param_1 + 0x44) & 0x100000) != 0) {
     return;
   }
-  uVar5 = FUN_0009edd0(param_1,param_1 + 0x1874);
+  uVar5 = fpVariantCacheLookup(param_1,param_1 + 0x1874);
   iVar2 = (int)((ulonglong)uVar5 >> 0x20);
   uVar3 = (undefined4)uVar5;
   if (iVar2 == 0) {
-    FUN_0009d080(param_1,uVar3,in_r5,in_r6,in_r7,in_r8);
-    uVar3 = FUN_0009bd00(param_1);
+    ffvpUpdateLightModelFlags(param_1,uVar3,in_r5,in_r6,in_r7,in_r8);
+    uVar3 = paramListCreate(param_1);
     (**(code **)(((unsigned char *)0x000012b4) + param_1))(param_1);
     in_r5 = ffvpBuildProgram(param_1,1,&local_38,local_34,uVar3,in_r8,iVar4,in_r10);
     in_r6 = (uint)*(byte *)(param_1 + 0x131);
-    uVar5 = FUN_0009c800(param_1,param_1 + 0x1874,in_r5,in_r6,local_38,local_34[0],uVar3,
+    uVar5 = fpVariantCacheInsert(param_1,param_1 + 0x1874,in_r5,in_r6,local_38,local_34[0],uVar3,
                          (uint)*(byte *)(param_1 + 0x126));
     iVar2 = (int)((ulonglong)uVar5 >> 0x20);
     in_r7 = local_38;
@@ -5349,12 +5349,12 @@ int FUN_000656b0(param_1)
   }
   iVar11 = *(int *)(param_1 + 0x14c);
   if ((iVar11 == 0) || (iVar3 = _memcmp(iVar11,local_70,0x30), iVar4 = iVar11, iVar3 != 0)) {
-    iVar4 = FUN_0009edd0(param_1,local_70);
+    iVar4 = fpVariantCacheLookup(param_1,local_70);
     if (iVar4 == 0) {
       uVar10 = *(uint *)(param_1 + 0x1804);
       bVar1 = ((unsigned char *)0x000011d2)[param_1];
       uVar8 = *(uint *)(param_1 + 0x44) >> 10 & 1;
-      puVar5 = (undefined4 *)FUN_00092bf0(param_1,1,0);
+      puVar5 = (undefined4 *)ffvpCreateBuilder(param_1,1,0);
       *puVar5 = 0;
       ((int (*)())FUN_00065610)(param_1,puVar5);
       if (uVar8 == 0) {
@@ -5368,7 +5368,7 @@ int FUN_000656b0(param_1)
         in_r9 = (uVar10 & 1) + uVar12;
         uVar9 = (uint)bVar1 + uVar2 * 2 + in_r9 + 2;
       }
-      FUN_00092d40(puVar5,uVar8,(uint)bVar1);
+      ffvpEmitPositionPassThrough(puVar5,uVar8,(uint)bVar1);
       if (uVar12 == 0) {
         iVar4 = 1;
         iVar11 = 2;
@@ -5377,33 +5377,33 @@ int FUN_000656b0(param_1)
         iVar4 = 2;
         iVar11 = 3;
         puVar5[0x13] = 1;
-        FUN_00093130(puVar5);
+        ffvpEmitPointSizePassThrough(puVar5);
       }
       puVar5[3] = iVar4;
       uVar6 = 0;
       uVar7 = 0;
-      FUN_00092ea0(puVar5,3,0,0);
+      ffvpEmitColorPassThrough(puVar5,3,0,0);
       if ((uVar10 & 1) != 0) {
         puVar5[4] = iVar11;
         uVar6 = 1;
         uVar7 = 0;
-        FUN_00092ea0(puVar5,4,1,0);
+        ffvpEmitColorPassThrough(puVar5,4,1,0);
         if ((uVar10 & 4) != 0) {
           puVar5[0x14] = iVar11;
           puVar5[0x15] = 3;
-          FUN_000931e0(puVar5);
+          ffvpEmitFogPassThrough(puVar5);
         }
         iVar11 = iVar4 + 2;
       }
       if (uVar2 != 0) {
         puVar5[5] = iVar11;
-        FUN_00092ea0(puVar5,3,2,1);
+        ffvpEmitColorPassThrough(puVar5,3,2,1);
         puVar5[6] = iVar11 + 1;
         puVar5[0x20] = 0;
         uVar6 = 3;
         uVar7 = 1;
         iVar11 = iVar11 + 2;
-        FUN_00092ea0(puVar5,4,3,1);
+        ffvpEmitColorPassThrough(puVar5,4,3,1);
       }
       uVar8 = (uint)(uVar2 != 0);
       if (uVar10 >> 4 != 0) {
@@ -5420,11 +5420,11 @@ int FUN_000656b0(param_1)
           loopIndex = loopIndex + 1;
           uVar8 = uVar8 + 1;
           iVar4 = iVar4 + 4;
-          FUN_00093000(puVar5,iVar3,uVar6,uVar7,in_r7,in_r8,in_r9);
+          ffvpEmitTexCoordPassThrough(puVar5,iVar3,uVar6,uVar7,in_r7,in_r8,in_r9);
         } while (uVar10 >> 4 != loopIndex);
       }
-      FUN_0009a910(puVar5);
-      iVar4 = FUN_0009c800(param_1,local_70,puVar5,iVar11,local_74,0,0,1);
+      ffvpFinishProgram(puVar5);
+      iVar4 = fpVariantCacheInsert(param_1,local_70,puVar5,iVar11,local_74,0,0,1);
       *(undefined4 *)(iVar4 + 0x34) = 0;
       *(int *)(iVar4 + 0x38) = *(int *)(*(int *)(iVar4 + 0x54) + 0x3cc) + -1;
       iVar11 = *(int *)(param_1 + 0x14c);

@@ -57,6 +57,7 @@ for pf, L in parts.items():
             args = split_args(buf)
             for pos, a in enumerate(args):
                 a2 = re.sub(r'^\((?:[\w \*]+)\)', '', a).strip()
+                a2 = re.sub(r'(?<=[0-9a-f])_\d+$', '', a2) if re.search(r'(?:Word|Ptr|Float|Byte|Short)(?:Neg)?[0-9a-f]+_\d+$', a2) else a2   # uniqueness suffix of a positional name is the caller's business
                 if re.match(r'^[A-Za-z_]\w*$', a2) and not PH.match(a2) and a2 not in GEN:
                     votes[fn][pos].append((a2, cur))
 rows = []; stat = collections.Counter()

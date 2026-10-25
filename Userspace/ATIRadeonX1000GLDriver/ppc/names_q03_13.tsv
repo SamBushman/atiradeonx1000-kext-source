@@ -1,0 +1,21 @@
+local	fpVariantProgramFree	param_1	ctx	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	fpVariantProgramFree	param_2	program	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	fpVariantProgramFree	uVar1	status	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	mat4StoreAtIndex	param_1	keepOrder	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	mat4StoreAtIndex	param_2	table	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	ffvpBuildFogKey	param_1	ctx	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	ffvpBuildFogKey	param_2	unusedArg2	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	ffvpBuildFogKey	param_3	unusedArg3	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	ffvpBuildFogKey	param_4	unusedArg4	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	ffvpBuildFogKey	param_5	unusedArg5	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	ffvpBuildFogKey	param_6	unusedArg6	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	ffvpUpdateLightModelFlags	param_1	ctx	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	ffvpUpdateLightModelFlags	param_2	unusedArg2	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	ffvpUpdateLightModelFlags	param_3	unusedArg3	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	ffvpUpdateLightModelFlags	param_4	unusedArg4	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	ffvpUpdateLightModelFlags	param_5	unusedArg5	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	ffvpUpdateLightModelFlags	param_6	unusedArg6	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	ffvpEmitTexCoordPassThrough	bVar1	noInvW	INFERRED	role read off the fixed-function vertex program generator (ffvp): builder layout from ffvpBuildProgram / ffvpAllocTempRegister, emit slots of the GL context table at +0x12e4.. (arbEmitRecord{1,2,3}Src_op*), see notes_gld_q03.md
+local	ffvpEmitTexCoordPassThrough	iVar2	texInputReg	INFERRED	role read off the fixed-function vertex program generator (ffvp): builder layout from ffvpBuildProgram / ffvpAllocTempRegister, emit slots of the GL context table at +0x12e4.. (arbEmitRecord{1,2,3}Src_op*), see notes_gld_q03.md
+local	ffvpEmitTexCoordPassThrough	param_1	programBuilder	INFERRED	role read off the fixed-function vertex program generator (ffvp): builder layout from ffvpBuildProgram / ffvpAllocTempRegister, emit slots of the GL context table at +0x12e4.. (arbEmitRecord{1,2,3}Src_op*), see notes_gld_q03.md
+local	ffvpEmitTexCoordPassThrough	param_2	texUnit	INFERRED	role read off the fixed-function vertex program generator (ffvp): builder layout from ffvpBuildProgram / ffvpAllocTempRegister, emit slots of the GL context table at +0x12e4.. (arbEmitRecord{1,2,3}Src_op*), see notes_gld_q03.md

@@ -1,0 +1,2 @@
+func	FUN_0003f050	fpilMapConstantRegister	INFERRED	resolves a constant-file source of instruction instIndex to its register word through the table at translator[3] and records the {constant index, register} pair in the translator cache at translator[0xd] (up to 16 pairs, then error 4; error 2 for any other source kind)
+func	FUN_0003ed50	fpilClassifyDestination	INFERRED	reads the destination register-file kind (entry word >> 0x1a & 7) of an IR destination: kind 3 -> 1, kind 4 -> 2, otherwise 0; fragmentInstructionToIL selects the IL opcode of opcode 0x6c from it

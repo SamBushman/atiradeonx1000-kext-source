@@ -1,0 +1,7 @@
+local	FUN_00123c08	param_2	block	INFERRED	entry block that receives the definition of the shared default constant
+local	FUN_00123c08	local_58	valueKeyOut	INFERRED	ValueKey result of Program__valueNumberInst, also the return value
+local	FUN_00123c08	local_54	undefLaneMask	INFERRED	per-lane bytes marking the undefined lanes
+local	FUN_00123c08	local_50	laneConstant0	INFERRED	lane 0 constant (float bits)
+local	FUN_00123c08	fStack_4c	laneConstant1	INFERRED	lane 1 constant (float bits)
+local	FUN_00123c08	fStack_48	laneConstant2	INFERRED	lane 2 constant (float bits)
+local	FUN_00123c08	fStack_44	laneConstant3	INFERRED	lane 3 constant (float bits)

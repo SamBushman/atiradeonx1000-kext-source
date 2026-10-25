@@ -1,0 +1,7 @@
+local	FUN_0009bc10	param_3	srcMatrix	INFERRED	16-float source matrix
+local	FUN_0009bc10	param_4	tableIndex	INFERRED	destination slot index (64-byte stride)
+local	FUN_00093000	param_3	useXyz1Select	INFERRED	passed through, unused here (same signature as ffvpEmitTexCoordGen)
+local	FUN_00093000	param_4	texUnitAlias	INFERRED	passed through, unused here
+local	FUN_00093000	param_5	texMatrixEnabled	INFERRED	passed through, unused here
+local	FUN_00093000	param_6	texMatrixUnit	INFERRED	passed through, unused here
+local	FUN_00093000	param_7	texGenModes	INFERRED	passed through, unused here

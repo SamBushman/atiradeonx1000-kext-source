@@ -1,0 +1,54 @@
+local	FUN_0012cfa4	param_1	program	INFERRED	the Program (+8 compiler)
+local	FUN_0012cfa4	param_2	headerBlock	INFERRED	block the dead region hangs off; never queued for deletion
+local	FUN_0012cfa4	param_3	deadRegionEntry	INFERRED	first block of the dead region, pushed first on the work stack
+local	FUN_0012cfa4	param_4	footerBlock	INFERRED	join block that ends the dead region; its phis are removed at the end
+use	FUN_0012cfa4	uVar1	workCountAfterCheck	INFERRED	work stack count read after the instruction count test	^\s*if\ \(\(\(\(piVar2\ !=\ \(int\ \*\)0x0\)\ \&\&\ \(piVar2\ !=\ param_4\)\)\ \&\&\ \(piVar2\ !=\ param_2\)\)\ \&\&$	+4
+use	FUN_0012cfa4	uVar1	workCountAfterCheck	INFERRED	work stack count read after the instruction count test	^\s*local_50\ =\ uVar1\ \+\ 1;$	+1
+use	FUN_0012cfa4	piVar2	workTopRef	INFERRED	last element reference of the work stack	^\s*piVar2\ =\ \(int\ \*\)0x0;$	+1
+use	FUN_0012cfa4	piVar2	workTopRef	INFERRED	last element reference of the work stack	^\s*piVar2\ =\ \(int\ \*\)\(uVar7\ \*\ 4\ \+\ local_4c\);$	+1
+use	FUN_0012cfa4	piVar2	workTopRef	INFERRED	last element reference of the work stack	^\s*iVar8\ =\ \*piVar2;$	+1
+use	FUN_0012cfa4	piVar2	deadInst	INFERRED	instruction of the dead block being released	^\s*piVar2\ =\ \*\(int\ \*\*\)\(iVar8\ \+\ 0x98\);$	+10
+use	FUN_0012cfa4	piVar2	deadInst	INFERRED	instruction of the dead block being released	^\s*\(\*\*\(code\ \*\*\)\(\*piVar2\ \+\ 0xc\)\)\(piVar2,0,\*\(undefined4\ \*\)\(param_1\ \+\ 8\)\);$	+1
+use	FUN_0012cfa4	piVar2	deadInst	INFERRED	instruction of the dead block being released	^\s*piVar3\ =\ \(int\ \*\)piVar2\[2\];$	+1
+use	FUN_0012cfa4	piVar2	deadInst	INFERRED	instruction of the dead block being released	^\s*piVar2\ =\ piVar3;$	+1
+use	FUN_0012cfa4	piVar2	successorBlock	INFERRED	successor of the dead block that is queued next	^\s*piVar2\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(iVar6\ \+\ 8\)\ \+\ iVar5\);$	+5
+use	FUN_0012cfa4	piVar2	successorBlock	INFERRED	successor of the dead block that is queued next	^\s*\*puVar4\ =\ piVar2;$	+1
+use	FUN_0012cfa4	piVar2	footerInst	INFERRED	instruction of the footer block	^\s*piVar2\ =\ \(int\ \*\)param_4\[0x26\];$	+1
+use	FUN_0012cfa4	piVar2	footerInst	INFERRED	instruction of the footer block	^\s*if\ \(\(piVar2\[5\]\ \&\ 1U\)\ !=\ 0\)\ \{$@2	+2
+use	FUN_0012cfa4	piVar2	footerInst	INFERRED	instruction of the footer block	^\s*piVar3\ =\ \(int\ \*\)piVar2\[2\];$@2	+1
+use	FUN_0012cfa4	piVar2	footerInst	INFERRED	instruction of the footer block	^\s*piVar2\ =\ piVar3;$@2	+1
+use	FUN_0012cfa4	piVar3	nextInstLinkA	INFERRED	link to the instruction after the cursor	^\s*for\ \(piVar3\ =\ \(int\ \*\)piVar2\[2\];\ piVar3\ !=\ \(int\ \*\)0x0;\ piVar3\ =\ \(int\ \*\)piVar3\[2\]\)\ \{$	+1
+use	FUN_0012cfa4	piVar3	nextInstLinkA	INFERRED	link to the instruction after the cursor	^\s*piVar3\ =\ \(int\ \*\)piVar2\[2\];$	+1
+use	FUN_0012cfa4	piVar3	nextInstLinkA	INFERRED	link to the instruction after the cursor	^\s*piVar2\ =\ piVar3;$	+1
+use	FUN_0012cfa4	piVar3	operandSlotCursor	INFERRED	cursor over the instruction's operand slots	^\s*piVar3\ =\ piVar2;$	+1
+use	FUN_0012cfa4	piVar3	operandSlotCursor	INFERRED	cursor over the instruction's operand slots	^\s*FUN_001234d8\(piVar3\[0x29\],piVar2\);$	+2
+use	FUN_0012cfa4	piVar3	nextInstLinkB	INFERRED	link to the instruction after the footer cursor	^\s*for\ \(piVar3\ =\ \(int\ \*\)\(\(int\ \*\)param_4\[0x26\]\)\[2\];\ piVar3\ !=\ \(int\ \*\)0x0;\ piVar3\ =\ \(int\ \*\)piVar3\[2\]\)\ \{$	+1
+use	FUN_0012cfa4	piVar3	nextInstLinkB	INFERRED	link to the instruction after the footer cursor	^\s*piVar3\ =\ \(int\ \*\)piVar2\[2\];$@2	+1
+use	FUN_0012cfa4	piVar3	nextInstLinkB	INFERRED	link to the instruction after the footer cursor	^\s*piVar2\ =\ piVar3;$@2	+1
+use	FUN_0012cfa4	piVar3	footerPhi	INFERRED	phi defined by the footer instruction (vtable slot 0x7c)	^\s*piVar3\ =\ \(int\ \*\)\(\*\*\(code\ \*\*\)\(\*piVar2\ \+\ 0x7c\)\)\(piVar2\);$	+3
+use	FUN_0012cfa4	puVar4	workSlotRefA	INFERRED	slot reference in the work stack	^\s*puVar4\ =\ \(undefined4\ \*\)\(iVar8\ \+\ local_4c\);$	+1
+use	FUN_0012cfa4	puVar4	workSlotRefA	INFERRED	slot reference in the work stack	^\s*puVar4\ =\ \(undefined4\ \*\)FUN_0019423c\(\&local_54,local_50\);$	+1
+use	FUN_0012cfa4	puVar4	workSlotRefA	INFERRED	slot reference in the work stack	^\s*\*puVar4\ =\ param_3;$	+1
+use	FUN_0012cfa4	puVar4	workSlotRefB	INFERRED	slot reference in the work stack	^\s*puVar4\ =\ \(undefined4\ \*\)\(iVar6\ \+\ local_4c\);$	+1
+use	FUN_0012cfa4	puVar4	workSlotRefB	INFERRED	slot reference in the work stack	^\s*puVar4\ =\ \(undefined4\ \*\)FUN_0019423c\(\&local_54,local_50\);$@2	+1
+use	FUN_0012cfa4	puVar4	workSlotRefB	INFERRED	slot reference in the work stack	^\s*\*puVar4\ =\ piVar2;$	+1
+use	FUN_0012cfa4	iVar5	instQuery34	INFERRED	instruction vtable slot 0x34 test	^\s*iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*piVar2\ \+\ 0x34\)\)\(piVar2\);$	+2
+use	FUN_0012cfa4	iVar5	operandNumber	INFERRED	operand number 1..count	^\s*for\ \(iVar5\ =\ 1;\ iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*piVar2\ \+\ 0x14\)\)\(piVar2\),\ iVar5\ <=\ iVar6;$	+2
+use	FUN_0012cfa4	iVar5	successorByteOffset	INFERRED	byte offset into the dead block's successor array	^\s*iVar5\ =\ 0;$	+1
+use	FUN_0012cfa4	iVar5	successorByteOffset	INFERRED	byte offset into the dead block's successor array	^\s*piVar2\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(iVar6\ \+\ 8\)\ \+\ iVar5\);$	+1
+use	FUN_0012cfa4	iVar5	successorByteOffset	INFERRED	byte offset into the dead block's successor array	^\s*iVar5\ =\ iVar5\ \+\ 4;$	+1
+use	FUN_0012cfa4	iVar6	operandCountOrSuccessors	INFERRED	operand count (vtable slot 0x14), later the successor vector of the dead block	^\s*for\ \(iVar5\ =\ 1;\ iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*piVar2\ \+\ 0x14\)\)\(piVar2\),\ iVar5\ <=\ iVar6;$	+2
+use	FUN_0012cfa4	iVar6	operandCountOrSuccessors	INFERRED	operand count (vtable slot 0x14), later the successor vector of the dead block	^\s*for\ \(uVar7\ =\ 1;\ iVar6\ =\ \*\(int\ \*\)\(iVar8\ \+\ 0xd0\),\ uVar7\ <=\ \*\(uint\ \*\)\(iVar6\ \+\ 4\);\ uVar7\ =\ uVar7\ \+\ 1$	+7
+use	FUN_0012cfa4	iVar6	operandCountOrSuccessors	INFERRED	operand count (vtable slot 0x14), later the successor vector of the dead block	^\s*iVar6\ =\ local_50\ \*\ 4;$	+2
+use	FUN_0012cfa4	iVar6	operandCountOrSuccessors	INFERRED	operand count (vtable slot 0x14), later the successor vector of the dead block	^\s*puVar4\ =\ \(undefined4\ \*\)\(iVar6\ \+\ local_4c\);$	+1
+use	FUN_0012cfa4	uVar7	workCountSnapshot	INFERRED	work stack count before the first push	^\s*uVar7\ =\ local_50;$	+1
+use	FUN_0012cfa4	uVar7	workCountSnapshot	INFERRED	work stack count before the first push	^\s*local_50\ =\ uVar7\ \+\ 1;$	+1
+use	FUN_0012cfa4	uVar7	lastWorkIndex	INFERRED	index of the last work stack element	^\s*uVar7\ =\ local_50\ \-\ 1;$	+1
+use	FUN_0012cfa4	uVar7	lastWorkIndex	INFERRED	index of the last work stack element	^\s*if\ \(uVar7\ <\ local_50\)\ \{$	+2
+use	FUN_0012cfa4	uVar7	lastWorkIndex	INFERRED	index of the last work stack element	^\s*FUN_00194208\(\&local_54,uVar7\);$	+1
+use	FUN_0012cfa4	uVar7	successorNumber	INFERRED	successor number 1..count	^\s*for\ \(uVar7\ =\ 1;\ iVar6\ =\ \*\(int\ \*\)\(iVar8\ \+\ 0xd0\),\ uVar7\ <=\ \*\(uint\ \*\)\(iVar6\ \+\ 4\);\ uVar7\ =\ uVar7\ \+\ 1$	+2
+use	FUN_0012cfa4	iVar8	workByteOffset	INFERRED	byte offset of the new work stack slot	^\s*iVar8\ =\ local_50\ \*\ 4;$	+2
+use	FUN_0012cfa4	iVar8	workByteOffset	INFERRED	byte offset of the new work stack slot	^\s*puVar4\ =\ \(undefined4\ \*\)\(iVar8\ \+\ local_4c\);$	+1
+use	FUN_0012cfa4	iVar8	deadBlock	INFERRED	block popped from the work stack	^\s*iVar8\ =\ \*piVar2;$	+1
+use	FUN_0012cfa4	iVar8	deadBlock	INFERRED	block popped from the work stack	^\s*piVar2\ =\ \*\(int\ \*\*\)\(iVar8\ \+\ 0x98\);$	+1
+use	FUN_0012cfa4	iVar8	deadBlock	INFERRED	block popped from the work stack	^\s*for\ \(uVar7\ =\ 1;\ iVar6\ =\ \*\(int\ \*\)\(iVar8\ \+\ 0xd0\),\ uVar7\ <=\ \*\(uint\ \*\)\(iVar6\ \+\ 4\);\ uVar7\ =\ uVar7\ \+\ 1$	+2

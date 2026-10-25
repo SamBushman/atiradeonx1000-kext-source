@@ -1,0 +1,91 @@
+local	ValueKey__foldMovSources	param_2	program	INFERRED	the Program (+8 compiler, +0xa4 fold counter)
+local	ValueKey__foldMovSources	a2	operandNumber	INFERRED	source operand number 1..count of the key's instruction
+use	ValueKey__foldMovSources	piVar4	backend	INFERRED	target backend object (compiler + 0x30c); slot 0x11c asks whether the source may be folded	^\s*piVar4\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x238\)\ \+\ 0x30c\);$	+4
+use	ValueKey__foldMovSources	iVar7	operandCount	INFERRED	instruction operand count (vtable slot 0x14), the loop bound	^\s*for\ \(a2\ =\ 1;\ iVar7\ =\ \(\*\*\(code\ \*\*\)\(\*piVar4\ \+\ 0x14\)\)\(piVar4\),\ a2\ <=\ iVar7;\ a2\ =\ a2\ \+\ 1\)\ \{$	+1
+use	ValueKey__foldMovSources	iVar7	operandCount	INFERRED	instruction operand count (vtable slot 0x14), the loop bound	^\s*iVar7\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(iVar3\ \+\ 0x214\)\ \+\ 100\)\)\(\*\(int\ \*\*\)\(iVar3\ \+\ 0x214\)\);$	+6
+use	ValueKey__foldMovSources	iVar7	operandCount	INFERRED	instruction operand count (vtable slot 0x14), the loop bound	^\s*FUN_001054ec\(iVar7,0\);$	+3
+use	ValueKey__foldMovSources	iVar7	operandCount	INFERRED	instruction operand count (vtable slot 0x14), the loop bound	^\s*iVar7\ =\ FUN_00126734\(uVar5\);$	+2
+use	ValueKey__foldMovSources	iVar7	operandCount	INFERRED	instruction operand count (vtable slot 0x14), the loop bound	^\s*iVar7\ =\ \*piVar12;$@2	+1
+use	ValueKey__foldMovSources	iVar7	operandCount	INFERRED	instruction operand count (vtable slot 0x14), the loop bound	^\s*iVar7\ =\ FUN_00105594\(iVar7,1\);$	+1
+use	ValueKey__foldMovSources	iVar7	operandCount	INFERRED	instruction operand count (vtable slot 0x14), the loop bound	^\s*\(piVar4,\*\(int\ \*\)\(param_1\ \+\ 0xb0\),a2,iVar7,uVar8,uVar9,$	+2
+use	ValueKey__foldMovSources	iVar7	operandCount	INFERRED	instruction operand count (vtable slot 0x14), the loop bound	^\s*uVar5\ =\ \*\(undefined4\ \*\)\(iVar7\ \+\ 0x8c\);$	+1
+use	ValueKey__foldMovSources	iVar7	operandCount	INFERRED	instruction operand count (vtable slot 0x14), the loop bound	^\s*\*piVar12\ =\ iVar7;$	+1
+use	ValueKey__foldMovSources	iVar7	operandCount	INFERRED	instruction operand count (vtable slot 0x14), the loop bound	^\s*iVar7\ =\ FUN_00105dbc\(\*piVar12,1\);$	+2
+use	ValueKey__foldMovSources	iVar7	operandCount	INFERRED	instruction operand count (vtable slot 0x14), the loop bound	^\s*iVar7\ =\ \*piVar12;$@3	+2
+use	ValueKey__foldMovSources	iVar7	movInst	INFERRED	the move instruction that defines the operand (slot value)	^\s*iVar7\ =\ \*piVar12;$	+4
+use	ValueKey__foldMovSources	iVar13	movCandidateA	INFERRED	move instruction in the source slot, first test	^\s*iVar13\ =\ \*\(int\ \*\)\(iVar3\ \+\ 0x214\);$	+2
+use	ValueKey__foldMovSources	iVar13	movCandidateA	INFERRED	move instruction in the source slot, first test	^\s*uVar5\ =\ \*\(undefined4\ \*\)\(iVar13\ \+\ 0xb0\);$	+1
+use	ValueKey__foldMovSources	iVar13	movCandidateA	INFERRED	move instruction in the source slot, first test	^\s*iVar7\ =\ FUN_00105594\(iVar13,1\);$@2	+1
+use	ValueKey__foldMovSources	iVar13	movCandidateB	INFERRED	move instruction in the source slot, second test	^\s*iVar13\ =\ \*piVar12;$	+2
+use	ValueKey__foldMovSources	iVar13	movCandidateB	INFERRED	move instruction in the source slot, second test	^\s*uVar5\ =\ \*\(undefined4\ \*\)\(iVar13\ \+\ 0xb0\);$@2	+1
+use	ValueKey__foldMovSources	iVar13	movCandidateB	INFERRED	move instruction in the source slot, second test	^\s*iVar7\ =\ FUN_00105594\(iVar13,1\);$@4	+1
+use	ValueKey__foldMovSources	iVar13	operandRecordOffset	INFERRED	operand number * 0x18: offset of the operand record	^\s*iVar13\ =\ a2\ \*\ 0x18;$	+2
+use	ValueKey__foldMovSources	iVar13	operandRecordOffset	INFERRED	operand number * 0x18: offset of the operand record	^\s*iVar10\ =\ iVar6\ \+\ iVar13\ \+\ 0x80;$	+1
+use	ValueKey__foldMovSources	iVar13	operandRecordOffset	INFERRED	operand number * 0x18: offset of the operand record	^\s*if\ \(\(\*\(uint\ \*\)\(iVar6\ \+\ iVar13\ \+\ 0x80\ \+\ 0x20\)\ \&\ 1\)\ ==\ 0\)\ \{$	+1
+use	ValueKey__foldMovSources	iVar13	operandRecordOffset	INFERRED	operand number * 0x18: offset of the operand record	^\s*FUN_00103d50\(iVar13\ \+\ iVar6\ \+\ 0x8c,1,uVar5\);$	+1
+use	ValueKey__foldMovSources	iVar13	opcodeTraitResult	INFERRED	OpcodeTraits__flagBit2 of the instruction opcode	^\s*iVar13\ =\ FUN_00113090\(\*\(undefined4\ \*\)\(\*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xb0\)\ \+\ 0x88\)\ \+\ 8\),$	+3
+use	ValueKey__foldMovSources	iVar13	laneIndex	INFERRED	lane counter 0..3	^\s*iVar13\ =\ 0;$	+1
+use	ValueKey__foldMovSources	iVar13	laneIndex	INFERRED	lane counter 0..3	^\s*\*\(undefined1\ \*\)\(\(int\)local_40\ \+\ iVar13\)\ =$	+2
+use	ValueKey__foldMovSources	iVar13	laneIndex	INFERRED	lane counter 0..3	^\s*iVar13\ =\ iVar13\ \+\ 1;$	+1
+use	ValueKey__foldMovSources	iVar13	operandRecordNow	INFERRED	operand record being rewritten	^\s*iVar13\ =\ FUN_001054ec\(\*\(int\ \*\)\(param_1\ \+\ 0xb0\),a2\);$	+2
+use	ValueKey__foldMovSources	iVar3	slotCursor	INFERRED	cursor over the source slot array (key + 4 * index)	^\s*iVar3\ =\ param_1;$	+1
+use	ValueKey__foldMovSources	iVar3	slotCursor	INFERRED	cursor over the source slot array (key + 4 * index)	^\s*piVar12\ =\ \(int\ \*\)\(iVar3\ \+\ 0x214\);$	+7
+use	ValueKey__foldMovSources	iVar3	slotCursor	INFERRED	cursor over the source slot array (key + 4 * index)	^\s*iVar13\ =\ \*\(int\ \*\)\(iVar3\ \+\ 0x214\);$	+1
+use	ValueKey__foldMovSources	iVar3	slotCursor	INFERRED	cursor over the source slot array (key + 4 * index)	^\s*FUN_000f3340\(local_38,local_48,\*\(undefined4\ \*\)\(iVar3\ \+\ 0x228\)\);$	+1
+use	ValueKey__foldMovSources	iVar3	slotCursor	INFERRED	cursor over the source slot array (key + 4 * index)	^\s*iVar3\ =\ iVar3\ \+\ 4;$	+1
+use	ValueKey__foldMovSources	uVar1	movNegateBit	INFERRED	bit 0 of the move's modifier word (0xb8)	^\s*uVar1\ =\ \*\(uint\ \*\)\(\*piVar12\ \+\ 0xb8\)\ \&\ 1;$	+1
+use	ValueKey__foldMovSources	uVar1	movNegateBit	INFERRED	bit 0 of the move's modifier word (0xb8)	^\s*if\ \(uVar1\ !=\ 0\)\ goto\ LAB_0011f0bc;$	+1
+use	ValueKey__foldMovSources	uVar1	movNegateBit	INFERRED	bit 0 of the move's modifier word (0xb8)	^\s*else\ if\ \(uVar1\ ==\ 0\)\ \{$	+1
+use	ValueKey__foldMovSources	uVar2	operandModifierWord	INFERRED	modifier word of the operand being replaced	^\s*uVar2\ =\ \*\(uint\ \*\)\(iVar13\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0xb0\)\ \+\ 0xa0\);$	+2
+use	ValueKey__foldMovSources	uVar2	operandModifierWord	INFERRED	modifier word of the operand being replaced	^\s*if\ \(\(uVar2\ \&\ 1\)\ ==\ 0\)\ \{$	+1
+use	ValueKey__foldMovSources	uVar5	movSourceKind	INFERRED	register kind of the move's source (or of the move itself)	^\s*uVar5\ =\ \*\(undefined4\ \*\)\(iVar13\ \+\ 0xb0\);$	+1
+use	ValueKey__foldMovSources	uVar5	movSourceKind	INFERRED	register kind of the move's source (or of the move itself)	^\s*uVar5\ =\ \*\(undefined4\ \*\)\(iVar7\ \+\ 0x98\);$	+1
+use	ValueKey__foldMovSources	uVar5	movSourceKind	INFERRED	register kind of the move's source (or of the move itself)	^\s*iVar7\ =\ FUN_00126708\(uVar5\);$	+1
+use	ValueKey__foldMovSources	uVar5	movSourceKind	INFERRED	register kind of the move's source (or of the move itself)	^\s*uVar5\ =\ \*\(undefined4\ \*\)\(iVar13\ \+\ 0xb0\);$@2	+1
+use	ValueKey__foldMovSources	uVar5	movSourceKind	INFERRED	register kind of the move's source (or of the move itself)	^\s*uVar5\ =\ \*\(undefined4\ \*\)\(iVar7\ \+\ 0x98\);$@2	+1
+use	ValueKey__foldMovSources	uVar5	movSourceKind	INFERRED	register kind of the move's source (or of the move itself)	^\s*iVar7\ =\ FUN_00126734\(uVar5\);$	+1
+use	ValueKey__foldMovSources	uVar5	toggleValue	INFERRED	1 when exactly one of the two negate bits is set	^\s*uVar5\ =\ 1;$	+1
+use	ValueKey__foldMovSources	uVar5	toggleValue	INFERRED	1 when exactly one of the two negate bits is set	^\s*uVar5\ =\ 0;$	+1
+use	ValueKey__foldMovSources	uVar5	toggleValue	INFERRED	1 when exactly one of the two negate bits is set	^\s*FUN_00103d50\(iVar13\ \+\ iVar6\ \+\ 0x8c,1,uVar5\);$	+1
+use	ValueKey__foldMovSources	uVar5	foldedSwizzle	INFERRED	rebuilt swizzle word (local_40) written to the operand	^\s*uVar5\ =\ local_40\[0\];$	+1
+use	ValueKey__foldMovSources	uVar5	foldedSwizzle	INFERRED	rebuilt swizzle word (local_40) written to the operand	^\s*\*\(undefined4\ \*\)\(iVar13\ \+\ 0x10\)\ =\ uVar5;$	+1
+use	ValueKey__foldMovSources	uVar5	movSourceVReg	INFERRED	virtual register of the move's source (+0x8c)	^\s*uVar5\ =\ \*\(undefined4\ \*\)\(iVar7\ \+\ 0x8c\);$	+3
+use	ValueKey__foldMovSources	iVar6	backendAllows	INFERRED	backend vtable slot 0x11c result	^\s*iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*piVar4\ \+\ 0x11c\)\)$	+1
+use	ValueKey__foldMovSources	iVar6	backendAllows	INFERRED	backend vtable slot 0x11c result	^\s*if\ \(\(iVar6\ ==\ 0\)\ \|\|$	+3
+use	ValueKey__foldMovSources	iVar6	keyInst	INFERRED	instruction of the key (ctx + 0xb0)	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xb0\);$	+2
+use	ValueKey__foldMovSources	iVar6	keyInst	INFERRED	instruction of the key (ctx + 0xb0)	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xb0\);$@2	+1
+use	ValueKey__foldMovSources	iVar6	keyInst	INFERRED	instruction of the key (ctx + 0xb0)	^\s*if\ \(\(\*\(uint\ \*\)\(iVar6\ \+\ iVar13\ \+\ 0x80\ \+\ 0x20\)\ \&\ 1\)\ ==\ 0\)\ \{$	+1
+use	ValueKey__foldMovSources	iVar6	keyInst	INFERRED	instruction of the key (ctx + 0xb0)	^\s*FUN_00103d50\(iVar13\ \+\ iVar6\ \+\ 0x8c,1,uVar5\);$	+2
+use	ValueKey__foldMovSources	iVar6	keyInst	INFERRED	instruction of the key (ctx + 0xb0)	^\s*iVar13\ =\ FUN_001054ec\(iVar6,a2\);$	+1
+use	ValueKey__foldMovSources	iVar6	laneCountdown	INFERRED	countdown from 4 over the lane bytes	^\s*iVar6\ =\ 4;$	+1
+use	ValueKey__foldMovSources	iVar6	laneCountdown	INFERRED	countdown from 4 over the lane bytes	^\s*iVar6\ =\ iVar6\ \+\ \-1;$	+2
+use	ValueKey__foldMovSources	uVar8	absModifier	INFERRED	abs modifier bit passed to the backend query	^\s*uVar8\ =\ uVar2\ >>\ 1\ \&\ 1;$	+1
+use	ValueKey__foldMovSources	uVar8	absModifier	INFERRED	abs modifier bit passed to the backend query	^\s*if\ \(uVar8\ ==\ 0\)\ \{$	+2
+use	ValueKey__foldMovSources	uVar8	absModifier	INFERRED	abs modifier bit passed to the backend query	^\s*\(piVar4,\*\(int\ \*\)\(param_1\ \+\ 0xb0\),a2,iVar7,uVar8,uVar9,$	+2
+use	ValueKey__foldMovSources	uVar9	negModifier	INFERRED	negate modifier bit passed to the backend query	^\s*uVar9\ =\ \*\(uint\ \*\)\(\*piVar12\ \+\ 0xb8\)\ >>\ 1\ \&\ 1;$	+1
+use	ValueKey__foldMovSources	uVar9	negModifier	INFERRED	negate modifier bit passed to the backend query	^\s*uVar8\ =\ uVar9;$	+1
+use	ValueKey__foldMovSources	uVar9	negModifier	INFERRED	negate modifier bit passed to the backend query	^\s*uVar9\ =\ 1;$	+1
+use	ValueKey__foldMovSources	uVar9	negModifier	INFERRED	negate modifier bit passed to the backend query	^\s*uVar9\ =\ 0;$	+1
+use	ValueKey__foldMovSources	uVar9	negModifier	INFERRED	negate modifier bit passed to the backend query	^\s*\(piVar4,\*\(int\ \*\)\(param_1\ \+\ 0xb0\),a2,iVar7,uVar8,uVar9,$	+2
+use	ValueKey__foldMovSources	iVar10	operandModifierPtr	INFERRED	address of the operand record's modifier block	^\s*iVar10\ =\ iVar6\ \+\ iVar13\ \+\ 0x80;$	+2
+use	ValueKey__foldMovSources	iVar10	operandModifierPtr	INFERRED	address of the operand record's modifier block	^\s*FUN_00103d50\(iVar10\ \+\ 0xc,2,1\);$	+1
+use	ValueKey__foldMovSources	pcVar11	lanePresentBytes	INFERRED	cursor over the per-lane present bytes of the key	^\s*pcVar11\ =\ \(char\ \*\)\(a2\ \*\ 4\ \+\ param_1\ \+\ 0x224\);$	+1
+use	ValueKey__foldMovSources	pcVar11	lanePresentBytes	INFERRED	cursor over the per-lane present bytes of the key	^\s*if\ \(\*pcVar11\ !=\ '\\0'\)\ \{$	+1
+use	ValueKey__foldMovSources	pcVar11	lanePresentBytes	INFERRED	cursor over the per-lane present bytes of the key	^\s*pcVar11\ =\ pcVar11\ \+\ 1;$	+1
+use	ValueKey__foldMovSources	piVar12	sourceSlotPtr	INFERRED	address of the current source slot (key + 0x214 + 4 * index)	^\s*piVar12\ =\ \(int\ \*\)\(iVar3\ \+\ 0x214\);$	+1
+use	ValueKey__foldMovSources	piVar12	sourceSlotPtr	INFERRED	address of the current source slot (key + 0x214 + 4 * index)	^\s*iVar13\ =\ \*piVar12;$	+1
+use	ValueKey__foldMovSources	piVar12	sourceSlotPtr	INFERRED	address of the current source slot (key + 0x214 + 4 * index)	^\s*iVar7\ =\ \*piVar12;$	+1
+use	ValueKey__foldMovSources	piVar12	sourceSlotPtr	INFERRED	address of the current source slot (key + 0x214 + 4 * index)	^\s*iVar7\ =\ \*piVar12;$@2	+1
+use	ValueKey__foldMovSources	piVar12	sourceSlotPtr	INFERRED	address of the current source slot (key + 0x214 + 4 * index)	^\s*uVar1\ =\ \*\(uint\ \*\)\(\*piVar12\ \+\ 0xb8\)\ \&\ 1;$	+2
+use	ValueKey__foldMovSources	piVar12	sourceSlotPtr	INFERRED	address of the current source slot (key + 0x214 + 4 * index)	^\s*if\ \(\(iVar6\ ==\ 0\)\ \|\|$	+3
+use	ValueKey__foldMovSources	piVar12	sourceSlotPtr	INFERRED	address of the current source slot (key + 0x214 + 4 * index)	^\s*if\ \(\(\*\(uint\ \*\)\(\*piVar12\ \+\ 0xb8\)\ \&\ 2\)\ !=\ 0\)\ \{$	+1
+use	ValueKey__foldMovSources	piVar12	sourceSlotPtr	INFERRED	address of the current source slot (key + 0x214 + 4 * index)	^\s*if\ \(\(\*\(uint\ \*\)\(\*piVar12\ \+\ 0xb8\)\ \&\ 1\)\ ==\ 0\)\ goto\ LAB_0011f190;$	+1
+use	ValueKey__foldMovSources	piVar12	sourceSlotPtr	INFERRED	address of the current source slot (key + 0x214 + 4 * index)	^\s*if\ \(\(\*\(uint\ \*\)\(\*piVar12\ \+\ 0xb8\)\ \&\ 1\)\ ==\ 0\)\ goto\ LAB_0011f188;$	+1
+use	ValueKey__foldMovSources	piVar12	sourceSlotPtr	INFERRED	address of the current source slot (key + 0x214 + 4 * index)	^\s*iVar13\ =\ FUN_001054ec\(\*piVar12,1\);$	+1
+use	ValueKey__foldMovSources	piVar12	sourceSlotPtr	INFERRED	address of the current source slot (key + 0x214 + 4 * index)	^\s*\*piVar12\ =\ iVar7;$	+1
+use	ValueKey__foldMovSources	piVar12	sourceSlotPtr	INFERRED	address of the current source slot (key + 0x214 + 4 * index)	^\s*iVar7\ =\ FUN_00105dbc\(\*piVar12,1\);$	+1
+use	ValueKey__foldMovSources	piVar12	sourceSlotPtr	INFERRED	address of the current source slot (key + 0x214 + 4 * index)	^\s*iVar7\ =\ \*piVar12;$@3	+1
+local	ValueKey__foldMovSources	local_48	destSwizzleWord	INFERRED	swizzle word of the operand being replaced (per-lane bytes)
+local	ValueKey__foldMovSources	local_44	movSwizzleWord	INFERRED	swizzle word of the move's source operand
+local	ValueKey__foldMovSources	local_40	foldedSwizzleWord	INFERRED	combined swizzle word (starts as 0x4040404)
+local	ValueKey__foldMovSources	local_38	maskedSwizzleOut	INFERRED	SelectWord__maskUnused output buffer

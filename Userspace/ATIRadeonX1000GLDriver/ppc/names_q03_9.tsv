@@ -1,0 +1,10 @@
+local	ffvpEmitLight	local_228	sourceFile	INFERRED	file out-parameter of ffvpResolveFixedSource / ffvpResolveMaterialSource (first output)
+local	ffvpEmitLight	local_21c	sourceReg	INFERRED	register out-parameter of ffvpResolveFixedSource / ffvpResolveMaterialSource (second output)
+local	ffvpEmitLight	local_208	sourceSelect0	INFERRED	select vector out-parameter (word 0) of ffvpResolveFixedSource; also built by hand for the colour-material multiply
+local	ffvpEmitLight	local_204	sourceSelect1	INFERRED	select vector (word 1)
+local	ffvpEmitLight	local_200	sourceSelect2	INFERRED	select vector (word 2)
+local	ffvpEmitLight	local_1fc	sourceSelect3	INFERRED	select vector (word 3)
+local	ffvpEmitLight	local_1f8	swizzleSelect0	INFERRED	hand-built select vector passed as src1Select (word 0)
+local	ffvpEmitLight	local_1f4	swizzleSelect1	INFERRED	hand-built select vector (word 1)
+local	ffvpEmitLight	local_1f0	swizzleSelect2	INFERRED	hand-built select vector (word 2)
+local	ffvpEmitLight	local_1ec	swizzleSelect3	INFERRED	hand-built select vector (word 3)

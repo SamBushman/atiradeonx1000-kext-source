@@ -110,6 +110,8 @@ int ilEmitShadowCompare(programRecord, param_2, coordinateOperand, coordinateExt
   uint *outCursor;
   undefined4 param_8;
 {
+  uint programRecordWord184;
+  uint programRecordWord180;
   ushort uVar1;
   int unitByteOffset;
   int iVar3;
@@ -121,13 +123,13 @@ int ilEmitShadowCompare(programRecord, param_2, coordinateOperand, coordinateExt
   if ((1 << (unitIndex & 0x3f) & *(uint *)(programRecord + 0x70)) != 0) {
     *outCursor = 0x5b;
     unitByteOffset = unitIndex * 4;
-    uVar7 = *(uint *)(programRecord + 0x180);
+    programRecordWord180 = *(uint *)(programRecord + 0x180);
     outCursor[2] = 0x10;
-    outCursor[1] = uVar7 & 0xffff | 0x440000;
+    outCursor[1] = programRecordWord180 & 0xffff | 0x440000;
     compareSelectWord = 0xd;
-    uVar7 = *(uint *)(programRecord + 0x184);
+    programRecordWord184 = *(uint *)(programRecord + 0x184);
     outCursor[4] = 0x2222;
-    outCursor[3] = uVar7 & 0xffff | 0x440000;
+    outCursor[3] = programRecordWord184 & 0xffff | 0x440000;
     uVar1 = *(ushort *)coordinateOperand;
     uVar7 = *coordinateOperand;
     outCursor[6] = 0x2222;
@@ -410,9 +412,13 @@ int ilEmitPrologue(outCursor, programRecord, passThroughR5, passThroughR6, passT
   undefined4 passThroughR9;
   undefined4 passThroughR10;
 {
+  uint programRecordWord74;
+  uint programRecordWord54;
+  uint programRecordWord60;
+  uint programRecordWord8;
   uint loopIndex;
   bool bVar1;
-  uint uVar2;
+  uint programRecordWord70;
   undefined4 registerNumber;
   uint *puVar4;
   int iVar5;
@@ -476,19 +482,19 @@ int ilEmitPrologue(outCursor, programRecord, passThroughR5, passThroughR6, passT
     registerNumber = ilAllocLowestFreeBit8(programRecord,(int)allocationResult,passThroughR5,passThroughR6,passThroughR7,passThroughR8,passThroughR9,passThroughR10);
     *(undefined4 *)(programRecord + 0x60) = registerNumber;
     *outCursor = 0x1ff0016;
-    uVar6 = *(uint *)(programRecord + 0x60);
+    programRecordWord60 = *(uint *)(programRecord + 0x60);
     outCursor[2] = 0x51;
-    outCursor[1] = uVar6 & 0xffff | 0x110000;
-    uVar6 = *(uint *)(programRecord + 0x54);
+    outCursor[1] = programRecordWord60 & 0xffff | 0x110000;
+    programRecordWord54 = *(uint *)(programRecord + 0x54);
     outCursor[4] = 0x40;
-    outCursor[3] = uVar6 & 0xffff | 0x440000;
+    outCursor[3] = programRecordWord54 & 0xffff | 0x440000;
     registerNumber = *(undefined4 *)(programRecord + 0x60);
     outCursor[6] = 0x49;
     operandToken0 = CONCAT22(0x11,(short)registerNumber);
     outCursor[5] = operandToken0;
-    uVar6 = *(uint *)(programRecord + 0x54);
+    programRecordWord54 = *(uint *)(programRecord + 0x54);
     outCursor[8] = 0x15;
-    outCursor[7] = uVar6 & 0xffff | 0x440000;
+    outCursor[7] = programRecordWord54 & 0xffff | 0x440000;
     registerNumber = *(undefined4 *)(programRecord + 0x54);
     outCursor[10] = (uint)((unsigned char *)0x00003333);
     operandToken0 = CONCAT22(4,(short)registerNumber);
@@ -497,9 +503,9 @@ int ilEmitPrologue(outCursor, programRecord, passThroughR5, passThroughR6, passT
     outCursor[0xc] = 0x40;
     operandToken1 = CONCAT22(0x11,(short)registerNumber);
     outCursor[0xb] = operandToken1;
-    uVar6 = *(uint *)(programRecord + 0x54);
+    programRecordWord54 = *(uint *)(programRecord + 0x54);
     outCursor[0xe] = 0x15;
-    outCursor[0xd] = uVar6 & 0xffff | 0x440000;
+    outCursor[0xd] = programRecordWord54 & 0xffff | 0x440000;
     operandToken0 = CONCAT22(4,(short)*(undefined4 *)(programRecord + 0x54));
     outCursor[0xf] = operandToken0;
     operandToken1 = CONCAT22(1,(short)*(undefined4 *)(programRecord + 0x58));
@@ -509,14 +515,14 @@ int ilEmitPrologue(outCursor, programRecord, passThroughR5, passThroughR6, passT
     outCursor = outCursor + 0x12;
   }
   if (*(int *)(programRecord + 0x2234) != 0) {
-    uVar2 = *(uint *)(programRecord + 0x70);
-    uVar6 = *(uint *)(programRecord + 0x74);
+    programRecordWord70 = *(uint *)(programRecord + 0x70);
+    programRecordWord74 = *(uint *)(programRecord + 0x74);
     uVar7 = 0;
     loopIndex2 = 0;
     iVar9 = programRecord;
     do {
       uVar10 = 1 << (loopIndex2 & 0x3f);
-      if (((uVar2 | uVar6) & uVar10) != 0) {
+      if (((programRecordWord70 | programRecordWord74) & uVar10) != 0) {
         registerNumber = ((int (*)())ilPopFreeRegister)(programRecord);
         *(undefined4 *)(iVar9 + 0xb8) = registerNumber;
         if (uVar7 == 0) {
@@ -561,12 +567,12 @@ int ilEmitPrologue(outCursor, programRecord, passThroughR5, passThroughR6, passT
     iVar9 = iVar9 + 4;
     iVar11 = iVar11 + -1;
   } while (iVar11 != 0);
-  uVar2 = *(uint *)(programRecord + 8);
+  programRecordWord8 = *(uint *)(programRecord + 8);
   puVar4 = (uint *)(programRecord + 0x232c);
   uVar6 = 0;
   iVar9 = 0x10;
   do {
-    if ((1 << (uVar6 & 0x3f) & uVar2) == 0) {
+    if ((1 << (uVar6 & 0x3f) & programRecordWord8) == 0) {
       *puVar4 = uVar6;
       puVar4 = puVar4 + 1;
     }
@@ -963,15 +969,15 @@ int ilPushDclRecord(listHeadPtr, record)
 }
 
 /* ilStoreFloat4Constant @ 0xc8e30 (28 bytes) */
-void ilStoreFloat4Constant(int programRecord,int constantIndex,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void ilStoreFloat4Constant(int programRecord,int constantIndex,double fpPassThrough1,double fpPassThrough2,double fpPassThrough3,double fpPassThrough4)
 {
   int iVar1;
   
   iVar1 = constantIndex * 0x10 + programRecord;
-  *(float *)(iVar1 + 0x98) = (float)fparam_4;
-  *(float *)(iVar1 + 0x8c) = (float)fparam_1;
-  *(float *)(iVar1 + 0x90) = (float)fparam_2;
-  *(float *)(iVar1 + 0x94) = (float)fparam_3;
+  *(float *)(iVar1 + 0x98) = (float)fpPassThrough4;
+  *(float *)(iVar1 + 0x8c) = (float)fpPassThrough1;
+  *(float *)(iVar1 + 0x90) = (float)fpPassThrough2;
+  *(float *)(iVar1 + 0x94) = (float)fpPassThrough3;
   return;
 }
 
@@ -981,6 +987,7 @@ int ilAssembleProgram(ctx, programHeader, programBody)
   undefined4 *programHeader;
   uint *******programBody;
 {
+  uint ctxWord44;
   undefined1 *outputEntryBase;
   undefined4 *prologueDst;
   undefined4 *maskCopyDst;
@@ -1055,12 +1062,12 @@ int ilAssembleProgram(ctx, programHeader, programBody)
   uint *puVar26;
   undefined4 *puVar27;
   uint ******copyWord3;
-  uint ******unaff_r14;
-  uint ******unaff_r15;
+  uint ******calleeSavedR14;
+  uint ******calleeSavedR15;
   uint *puVar29;
-  uint unaff_r20;
+  uint calleeSavedR20;
   uint *******dstCursorCarry;
-  uint unaff_r21;
+  uint calleeSavedR21;
   uint *ilTokens;
   uint scanTokenCopy;
   uint uVar33;
@@ -1191,14 +1198,14 @@ int ilAssembleProgram(ctx, programHeader, programBody)
   } while (zeroFillCount != 0);
   scanTokenWord = programBody;
   scratchBlock = _malloc(0x400);
-  uVar21 = *(uint *)(ctx + 0x44);
+  ctxWord44 = *(uint *)(ctx + 0x44);
   local_218 = 0;
-  if ((uVar21 & 0x2000) == 0) {
-    local_1e4 = uVar21 >> 0x18 & 1;
+  if ((ctxWord44 & 0x2000) == 0) {
+    local_1e4 = ctxWord44 >> 0x18 & 1;
     local_1d8 = 0xffff;
   }
   else {
-    local_1e4 = uVar21 >> 0xb & 1;
+    local_1e4 = ctxWord44 >> 0xb & 1;
     if (local_1e4 == 0) {
       local_1d8 = 0xffff;
     }
@@ -1207,7 +1214,7 @@ int ilAssembleProgram(ctx, programHeader, programBody)
     }
   }
   ilTokens = (uint *)*programHeader;
-  local_d8 = uVar21 >> 10 & 1;
+  local_d8 = ctxWord44 >> 10 & 1;
   countdown = 8;
   local_23e4 = 0xffff;
   local_d4 = (uint)(byte)((unsigned char *)0x000011d2)[ctx];
@@ -1580,11 +1587,11 @@ LAB_000c9564:
       srcCursor = srcCursor + 1;
     }
     if ((uVar33 & 0x400000) != 0) {
-      unaff_r21 = *srcCursor;
+      calleeSavedR21 = *srcCursor;
       srcCursor = srcCursor + 1;
     }
     scanTokenWord = &scanState;
-    ((int (*)())FUN_000c8600)(uVar33 & 0xffff,uVar33 >> 0x10 & 0x3f,scanTokenWord,unaff_r21,uVar33 >> 0x16 & 1);
+    ((int (*)())FUN_000c8600)(uVar33 & 0xffff,uVar33 >> 0x10 & 0x3f,scanTokenWord,calleeSavedR21,uVar33 >> 0x16 & 1);
     if ((1 << (*(byte *)((int)puVar29 + 1) & 0x3f) & local_2378) != 0) {
       texExtraWords = texExtraWords + 4;
     }
@@ -1619,11 +1626,11 @@ LAB_000c9564:
       srcCursor = srcCursor + 1;
     }
     if ((uVar33 & 0x400000) != 0) {
-      unaff_r20 = *srcCursor;
+      calleeSavedR20 = *srcCursor;
       srcCursor = srcCursor + 1;
     }
     scanTokenWord = &scanState;
-    ((int (*)())FUN_000c8600)(uVar33 & 0xffff,uVar33 >> 0x10 & 0x3f,scanTokenWord,unaff_r20,uVar33 >> 0x16 & 1);
+    ((int (*)())FUN_000c8600)(uVar33 & 0xffff,uVar33 >> 0x10 & 0x3f,scanTokenWord,calleeSavedR20,uVar33 >> 0x16 & 1);
     if ((1 << (*(byte *)((int)puVar29 + 1) & 0x3f) & local_2378) != 0) {
       texExtraWords = texExtraWords + 4;
     }
@@ -2225,7 +2232,7 @@ switchD_000c90cc_caseD_0:
     puVar19 = puVar26 + 1;
     if (((uint)local_2ba4 & 0x400000) != 0) {
       puVar19 = puVar26 + 2;
-      unaff_r15 = (uint ******)puVar26[1];
+      calleeSavedR15 = (uint ******)puVar26[1];
     }
     local_2b74 = (uint ******)*puVar19;
     srcCursor = puVar19 + 1;
@@ -2255,7 +2262,7 @@ LAB_000ca0e4:
           local_2ba4 = (uint *******)((uint)local_2ba4 & 0xffbfffff);
           projectiveFlag = (uint *******)((int)((unsigned char *)0x0) + 1);
           unitBit = 1 << (tokenUpper & 0x3f);
-          local_2bb0 = unaff_r15;
+          local_2bb0 = calleeSavedR15;
         }
       }
     }
@@ -2288,7 +2295,7 @@ LAB_000ca0e4:
     *dstCursor = (uint ******)local_2ba4;
     nextDstCursorB = dstCursor + 1;
     if (((uint)local_2ba4 & 0x400000) != 0) {
-      dstCursor[1] = unaff_r15;
+      dstCursor[1] = calleeSavedR15;
       nextDstCursorB = dstCursor + 2;
     }
     dstCursor = nextDstCursorB;
@@ -2309,7 +2316,7 @@ LAB_000ca0e4:
       pppppppuVar20 = projectiveFlag;
     }
     unitBit = unitBit & local_2378;
-    texExtraWord = unaff_r15;
+    texExtraWord = calleeSavedR15;
     goto joined_r0x000ca538;
   case 0x5e:
     if (prologuePending) {
@@ -2343,7 +2350,7 @@ LAB_000ca0e4:
     puVar19 = puVar26 + 1;
     if (((uint)local_2ba4 & 0x400000) != 0) {
       puVar19 = puVar26 + 2;
-      unaff_r14 = (uint ******)puVar26[1];
+      calleeSavedR14 = (uint ******)puVar26[1];
     }
     local_2b98 = (uint ******)*puVar19;
     puVar26 = puVar19 + 1;
@@ -2368,7 +2375,7 @@ LAB_000ca3b8:
           local_2ba4 = (uint *******)((uint)local_2ba4 & 0xffbfffff);
           pppppppuVar20 = (uint *******)((int)((unsigned char *)0x0) + 1);
           unitBit = 1 << (tokenUpper & 0x3f);
-          local_2bb0 = unaff_r14;
+          local_2bb0 = calleeSavedR14;
           goto LAB_000ca414;
         }
       }
@@ -2397,7 +2404,7 @@ LAB_000ca414:
     *dstCursor = (uint ******)local_2ba4;
     nextDstCursorB = dstCursor + 1;
     if (((uint)local_2ba4 & 0x400000) != 0) {
-      dstCursor[1] = unaff_r14;
+      dstCursor[1] = calleeSavedR14;
       nextDstCursorB = dstCursor + 2;
     }
     dstCursor = nextDstCursorB;
@@ -2425,7 +2432,7 @@ LAB_000ca414:
                                 pppppppuVar20,dstCursor,pppppppuVar25);
     }
     unitBit = unitBit & local_2378;
-    texExtraWord = unaff_r14;
+    texExtraWord = calleeSavedR14;
 joined_r0x000ca538:
     puVar26 = srcCursor;
     dstCursorCarry = dstCursor;
@@ -2496,7 +2503,7 @@ int ilRewriteForTextureState(ctx, param_2, compileRecord, ilSource, param_5)
   uint *puVar22;
   uint *puVar23;
   int iVar24;
-  uint *******in_r8;
+  uint *******staleArgR8;
   byte *pbVar25;
   int shadowExtraWords;
   uint uVar27;
@@ -2506,14 +2513,14 @@ int ilRewriteForTextureState(ctx, param_2, compileRecord, ilSource, param_5)
   char *pcVar31;
   int *piVar32;
   undefined4 uVar33;
-  uint ******unaff_r14;
-  uint ******unaff_r15;
+  uint ******calleeSavedR14;
+  uint ******calleeSavedR15;
   uint *puVar34;
   uint uVar35;
-  uint unaff_r19;
+  uint calleeSavedR19;
   uint *******pppppppuVar36;
   undefined1 *puVar37;
-  uint unaff_r20;
+  uint calleeSavedR20;
   undefined1 *puVar38;
   uint ******ppppppuVar39;
   uint *ilTokens;
@@ -2701,7 +2708,7 @@ int ilRewriteForTextureState(ctx, param_2, compileRecord, ilSource, param_5)
     depthTextureUnitMask = 0;
   }
   else {
-    in_r8 = (uint *******)0x0;
+    staleArgR8 = (uint *******)0x0;
     extraOutputWords = 0x10;
     shadowCompareUnitMask = 0;
     depthTextureUnitMask = 0;
@@ -2711,7 +2718,7 @@ int ilRewriteForTextureState(ctx, param_2, compileRecord, ilSource, param_5)
     do {
       shadowExtraWords = *(int *)(((unsigned char *)0x000013f8) + ilWordCount);
       if ((shadowExtraWords != 0) && (*(short *)(shadowExtraWords + 0x38) == 0x1902)) {
-        uVar21 = 1 << ((uint)in_r8 & 0x3f);
+        uVar21 = 1 << ((uint)staleArgR8 & 0x3f);
         depthTextureUnitMask = uVar21 | depthTextureUnitMask;
         *puVar34 = (uint)*(ushort *)(shadowExtraWords + 0x58);
         puVar34[0x10] = (uint)*(ushort *)(shadowExtraWords + 0x5c);
@@ -2719,7 +2726,7 @@ int ilRewriteForTextureState(ctx, param_2, compileRecord, ilSource, param_5)
           shadowCompareUnitMask = uVar21 | shadowCompareUnitMask;
         }
       }
-      in_r8 = (uint *******)((int)in_r8 + 1);
+      staleArgR8 = (uint *******)((int)staleArgR8 + 1);
       ilWordCount = ilWordCount + 4;
       puVar34 = puVar34 + 1;
       extraOutputWords = extraOutputWords + -1;
@@ -3148,11 +3155,11 @@ LAB_000cb6d4:
       readCursor = readCursor + 1;
     }
     if ((uVar35 & 0x400000) != 0) {
-      unaff_r20 = *readCursor;
+      calleeSavedR20 = *readCursor;
       readCursor = readCursor + 1;
     }
     local_88 = &local_c08c;
-    ((int (*)())FUN_000c8600)(uVar35 & 0xffff,uVar35 >> 0x10 & 0x3f,local_88,unaff_r20,uVar35 >> 0x16 & 1);
+    ((int (*)())FUN_000c8600)(uVar35 & 0xffff,uVar35 >> 0x10 & 0x3f,local_88,calleeSavedR20,uVar35 >> 0x16 & 1);
     if ((1 << (*(byte *)((int)puVar34 + 1) & 0x3f) & depthTextureUnitMask) != 0) {
       shadowExtraWords = shadowExtraWords + 4;
     }
@@ -3188,11 +3195,11 @@ LAB_000cb6d4:
       readCursor = readCursor + 1;
     }
     if ((uVar35 & 0x400000) != 0) {
-      unaff_r19 = *readCursor;
+      calleeSavedR19 = *readCursor;
       readCursor = readCursor + 1;
     }
     local_88 = &local_c08c;
-    ((int (*)())FUN_000c8600)(uVar35 & 0xffff,uVar35 >> 0x10 & 0x3f,local_88,unaff_r19,uVar35 >> 0x16 & 1);
+    ((int (*)())FUN_000c8600)(uVar35 & 0xffff,uVar35 >> 0x10 & 0x3f,local_88,calleeSavedR19,uVar35 >> 0x16 & 1);
     if ((1 << (*(byte *)((int)puVar34 + 1) & 0x3f) & depthTextureUnitMask) != 0) {
       shadowExtraWords = shadowExtraWords + 4;
     }
@@ -3593,7 +3600,7 @@ switchD_000cb23c_caseD_0:
     if (bVar5) {
       bVar5 = false;
       writeCursor = (uint *******)
-                   ((int (*)())ilEmitPrologue)(writeCursor,local_88,pppppppuVar19,puVar22,puVar22,in_r8,local_88,
+                   ((int (*)())ilEmitPrologue)(writeCursor,local_88,pppppppuVar19,puVar22,puVar22,staleArgR8,local_88,
                                 pppppppuVar28);
     }
     pppppppuVar19 = (uint *******)((int)((unsigned char *)0x0) + 1);
@@ -3622,7 +3629,7 @@ switchD_000cb23c_caseD_0:
     if (bVar5) {
       bVar5 = false;
       writeCursor = (uint *******)
-                   ((int (*)())ilEmitPrologue)(writeCursor,local_88,pppppppuVar19,puVar22,puVar22,in_r8,local_88,
+                   ((int (*)())ilEmitPrologue)(writeCursor,local_88,pppppppuVar19,puVar22,puVar22,staleArgR8,local_88,
                                 pppppppuVar28);
     }
     pppppppuVar19 = (uint *******)((int)((unsigned char *)0x0) + 1);
@@ -3683,7 +3690,7 @@ switchD_000cb23c_caseD_0:
     if (bVar5) {
       bVar5 = false;
       writeCursor = (uint *******)
-                   ((int (*)())ilEmitPrologue)(writeCursor,local_88,pppppppuVar19,puVar22,puVar22,in_r8,local_88,
+                   ((int (*)())ilEmitPrologue)(writeCursor,local_88,pppppppuVar19,puVar22,puVar22,staleArgR8,local_88,
                                 pppppppuVar28);
     }
     pppppppuVar19 = (uint *******)((int)((unsigned char *)0x0) + 1);
@@ -3744,7 +3751,7 @@ switchD_000cb23c_caseD_0:
     pppppppuVar36 = pppppppuVar19;
     if ((puVar22[1] >> 0x10 & 0x3f) - 1 < 2) {
       writeCursor[1] = (uint ******)puVar22[1];
-      in_r8 = writeCursor + 6;
+      staleArgR8 = writeCursor + 6;
       writeCursor[2] = (uint ******)puVar22[2];
       writeCursor[3] = (uint ******)puVar22[3];
       writeCursor[4] = (uint ******)puVar22[4];
@@ -3752,13 +3759,13 @@ switchD_000cb23c_caseD_0:
       writeCursor[5] = (uint ******)puVar22[5];
       puVar23 = readCursor;
       pppppppuVar28 = writeCursor + 5;
-      pppppppuVar36 = in_r8;
+      pppppppuVar36 = staleArgR8;
     }
     goto switchD_000cbc48_caseD_18;
   case 0x28:
     readCursor = puVar22 + 1;
     puVar45 = (undefined4 *)
-              ((int (*)())FUN_000c7930)(writeCursor,&local_c08c,pppppppuVar19,puVar22,readCursor,in_r8,uVar12 * 4)
+              ((int (*)())FUN_000c7930)(writeCursor,&local_c08c,pppppppuVar19,puVar22,readCursor,staleArgR8,uVar12 * 4)
     ;
     *puVar45 = ppppppuVar15;
     puVar23 = readCursor;
@@ -3787,7 +3794,7 @@ switchD_000cb23c_caseD_0:
     if (bVar5) {
       bVar5 = false;
       writeCursor = (uint *******)
-                   ((int (*)())ilEmitPrologue)(writeCursor,local_88,pppppppuVar19,puVar22,puVar22,in_r8,local_88,
+                   ((int (*)())ilEmitPrologue)(writeCursor,local_88,pppppppuVar19,puVar22,puVar22,staleArgR8,local_88,
                                 pppppppuVar28);
       puVar22 = readCursor;
     }
@@ -3815,7 +3822,7 @@ switchD_000cb23c_caseD_0:
     puVar22 = puVar23 + 1;
     if (((uint)local_c1f0 & 0x400000) != 0) {
       puVar22 = puVar23 + 2;
-      unaff_r15 = (uint ******)puVar23[1];
+      calleeSavedR15 = (uint ******)puVar23[1];
     }
     local_c1cc = (uint ******)*puVar22;
     readCursor = puVar22 + 1;
@@ -3845,7 +3852,7 @@ LAB_000cc2a4:
           local_c1f0 = (uint *******)((uint)local_c1f0 & 0xffbfffff);
           pppppppuVar36 = (uint *******)((int)((unsigned char *)0x0) + 1);
           uVar42 = 1 << (uVar12 & 0x3f);
-          local_c1e4 = unaff_r15;
+          local_c1e4 = calleeSavedR15;
         }
       }
     }
@@ -3878,7 +3885,7 @@ LAB_000cc2a4:
     *writeCursor = (uint ******)local_c1f0;
     pppppppuVar28 = writeCursor + 1;
     if (((uint)local_c1f0 & 0x400000) != 0) {
-      writeCursor[1] = unaff_r15;
+      writeCursor[1] = calleeSavedR15;
       pppppppuVar28 = writeCursor + 2;
     }
     writeCursor = pppppppuVar28;
@@ -3896,16 +3903,16 @@ LAB_000cc2a4:
       writeCursor = (uint *******)
                    ((int (*)())ilEmitShadowCompare)(local_88,local_84,pppppppuVar19,&local_c1e4,uVar27,pppppppuVar36,
                                 writeCursor,pppppppuVar28);
-      in_r8 = pppppppuVar36;
+      staleArgR8 = pppppppuVar36;
     }
     uVar42 = uVar42 & depthTextureUnitMask;
-    ppppppuVar15 = unaff_r15;
+    ppppppuVar15 = calleeSavedR15;
     goto joined_r0x000cc708;
   case 0x5e:
     if (bVar5) {
       bVar5 = false;
       writeCursor = (uint *******)
-                   ((int (*)())ilEmitPrologue)(writeCursor,&local_c08c,pppppppuVar19,puVar22,puVar22,in_r8,
+                   ((int (*)())ilEmitPrologue)(writeCursor,&local_c08c,pppppppuVar19,puVar22,puVar22,staleArgR8,
                                 uVar12 * 4,pppppppuVar28);
       puVar22 = readCursor;
     }
@@ -3933,7 +3940,7 @@ LAB_000cc2a4:
     puVar22 = puVar23 + 1;
     if (((uint)local_c1f0 & 0x400000) != 0) {
       puVar22 = puVar23 + 2;
-      unaff_r14 = (uint ******)puVar23[1];
+      calleeSavedR14 = (uint ******)puVar23[1];
     }
     local_c1d8 = (uint ******)*puVar22;
     puVar23 = puVar22 + 1;
@@ -3956,19 +3963,19 @@ LAB_000cc588:
                      ((int (*)())ilEmitProjectiveDivide)(&local_c08c,&local_c1d8,pppppppuVar19,uVar27,writeCursor);
         if (((uint)local_c1f0 & 0x400000) != 0) {
           local_c1f0 = (uint *******)((uint)local_c1f0 & 0xffbfffff);
-          in_r8 = (uint *******)((int)((unsigned char *)0x0) + 1);
+          staleArgR8 = (uint *******)((int)((unsigned char *)0x0) + 1);
           uVar42 = 1 << (uVar12 & 0x3f);
-          local_c1e4 = unaff_r14;
+          local_c1e4 = calleeSavedR14;
           goto LAB_000cc5e4;
         }
       }
 LAB_000cc5bc:
-      in_r8 = (uint *******)0x0;
+      staleArgR8 = (uint *******)0x0;
       uVar42 = 1 << (uVar12 & 0x3f);
     }
     else {
       if (uVar9 != 0x8000000) goto LAB_000cc5bc;
-      in_r8 = (uint *******)0x0;
+      staleArgR8 = (uint *******)0x0;
       uVar42 = 1 << (uVar12 & 0x3f);
       if ((uVar42 & shadowCompareUnitMask) != 0) goto LAB_000cc588;
     }
@@ -3987,7 +3994,7 @@ LAB_000cc5e4:
     *writeCursor = (uint ******)local_c1f0;
     pppppppuVar28 = writeCursor + 1;
     if (((uint)local_c1f0 & 0x400000) != 0) {
-      writeCursor[1] = unaff_r14;
+      writeCursor[1] = calleeSavedR14;
       pppppppuVar28 = writeCursor + 2;
     }
     writeCursor = pppppppuVar28;
@@ -4010,16 +4017,16 @@ LAB_000cc5e4:
        (depthTextureUnitMask << (uVar12 & 0x3f) != 0)) {
       pppppppuVar19 = (uint *******)&local_c1f0;
       writeCursor = (uint *******)
-                   ((int (*)())ilEmitShadowCompare)(&local_c08c,&local_c1d8,pppppppuVar19,&local_c1e4,uVar27,in_r8,
+                   ((int (*)())ilEmitShadowCompare)(&local_c08c,&local_c1d8,pppppppuVar19,&local_c1e4,uVar27,staleArgR8,
                                 writeCursor,pppppppuVar28);
     }
     uVar42 = uVar42 & depthTextureUnitMask;
-    ppppppuVar15 = unaff_r14;
+    ppppppuVar15 = calleeSavedR14;
 joined_r0x000cc708:
     puVar23 = readCursor;
     pppppppuVar36 = writeCursor;
     if (uVar42 != 0) {
-      in_r8 = writeCursor + 1;
+      staleArgR8 = writeCursor + 1;
       *writeCursor = (uint ******)0x47;
       pppppppuVar28 = local_c1f0;
       if (((uint)local_c1f0 & 0x400000) == 0) {
@@ -4040,7 +4047,7 @@ joined_r0x000cc708:
       else if ((depthTextureMode[uVar27] == 0x1909) && (((uint)ppppppuVar15 & 0xc0) == 0x40)) {
         ppppppuVar15 = (uint ******)((uint)ppppppuVar15 & 0xffffff3f | 0xc0);
       }
-      *in_r8 = (uint ******)pppppppuVar28;
+      *staleArgR8 = (uint ******)pppppppuVar28;
       writeCursor[2] = ppppppuVar15;
       writeCursor[3] = (uint ******)((uint)pppppppuVar28 & 0x3fffff);
       pppppppuVar36 = writeCursor + 4;
@@ -4135,6 +4142,7 @@ int FUN_000cd1c4(param_1, param_2, param_3, param_4)
   int param_3;
   int param_4;
 {
+  int iStack00000018Word314;
   int iVar1;
   int iVar2;
   int iStack00000018;
@@ -4178,11 +4186,11 @@ int FUN_000cd1c4(param_1, param_2, param_3, param_4)
       *(undefined4 *)(iStack00000018 + 0x484) = 0;
       *(undefined4 *)(iStack00000018 + 0x4d4) = 0;
       *(undefined4 *)(iStack00000018 + 0x488) = 0;
-      iVar1 = *(int *)(iStack00000018 + 0x314);
+      iStack00000018Word314 = *(int *)(iStack00000018 + 0x314);
       FUN_000e0e28(iStack00000018);
       FUN_000e1fe4(iStack00000018,0);
-    } while ((iVar1 != 0) && (iVar2 = FUN_000e161c(iStack00000018,iVar1), iVar2 != 0));
-    return iVar1;
+    } while ((iStack00000018Word314 != 0) && (iVar2 = FUN_000e161c(iStack00000018,iStack00000018Word314), iVar2 != 0));
+    return iStack00000018Word314;
   }
   return 2;
 }
@@ -4198,16 +4206,16 @@ int scCheckHandle(param_1)
 }
 
 /* scDisassembleIL @ 0xcd1ec (40 bytes) */
-int scDisassembleIL(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
+int scDisassembleIL(sinkArg, tokenStart, tokenCount, param_4)
+  undefined4 sinkArg;
+  undefined4 tokenStart;
+  undefined4 tokenCount;
   undefined4 param_4;
 {
-  unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[8] = { sinkArg, tokenStart, tokenCount, param_4, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   
   (*(unsigned int *)((unsigned char *)ghidra_home + 12)) = param_4;
-  return ((int (*)())scDisassembleILImpl)(param_1,param_2,param_3,&(*(unsigned int *)((unsigned char *)ghidra_home + 12)));
+  return ((int (*)())scDisassembleILImpl)(sinkArg,tokenStart,tokenCount,&(*(unsigned int *)((unsigned char *)ghidra_home + 12)));
 }
 
 /* scDumpSrcShader @ 0xcd214 (40 bytes) */
@@ -4292,22 +4300,22 @@ int FUN_000cd290(param_1)
 }
 
 /* scDisassembleILImpl @ 0xcd388 (28 bytes) */
-int scDisassembleILImpl(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
-  int param_2;
-  int param_3;
-  int param_4;
+int scDisassembleILImpl(sinkArg, tokenStart, tokenCount, sinkRecord)
+  undefined4 sinkArg;
+  int tokenStart;
+  int tokenCount;
+  int sinkRecord;
 {
-  if (param_4 == 0) {
+  if (sinkRecord == 0) {
     return;
   }
-  if (param_2 == 0) {
+  if (tokenStart == 0) {
     return;
   }
-  if (param_3 == 0) {
+  if (tokenCount == 0) {
     return;
   }
-  return ildisDisassembleTokens(param_1,param_2,param_3,param_4);
+  return ildisDisassembleTokens(sinkArg,tokenStart,tokenCount,sinkRecord);
 }
 
 /* scLogToSink @ 0xcd3a4 (96 bytes) */
@@ -7432,7 +7440,7 @@ int FUN_000d183c(pixelShader, dumpLabel, dumpId, argR6, argR7, argR8, argR9, arg
   uint dumpLabelSlot;
   uint *dumpIdSlot;
   undefined2 operandAuxHigh;
-  uint *in_stack_fffffd2c;
+  uint *staleStackArg_fffffd2c;
   undefined4 predicateText;
   uint semWaitText;
   char semWaitText4 [4];
@@ -8554,7 +8562,7 @@ LAB_000d1afc:
               }
               printf_LDBLStub_1a32d0(operandText0,"%s%s%s%s",dySwizzleTextX,dySwizzleTextY,dySwizzleTextZ,dySwizzleTextW,dySwizzleWOffset,argR10);
               argR9 = (char *)(uint)*(ushort *)((int)instructionRecord2 + 0x12);
-              in_stack_fffffd2c = &semWaitText;
+              staleStackArg_fffffd2c = &semWaitText;
               ((int (*)())psnReportError)(0,"lookup_dxdy(%s.%s, r%02d.%s, r%02d.%s,  tex%02d)%s%s%s%s",registerTextPtr,
                            srcSwizzleTextPtr,srcSwizzleTextZ,argR8,argR9,operandText0);
               neutralLineArg0 = registerTextPtr;
@@ -8652,7 +8660,7 @@ LAB_000d1afc:
           recordKind2 = *instructionRecord2;
           texIndex = texIndex + 1;
         }
-        operandAuxHigh = (undefined2)((uint)in_stack_fffffd2c >> 0x10);
+        operandAuxHigh = (undefined2)((uint)staleStackArg_fffffd2c >> 0x10);
         if ((recordKind2 == 3) || (recordKind2 == 4)) {
           rgbOpcodePtr = (byte *)((int)instructionRecord2 + 0x31);
           cfPrevAluDest = (uint)*(byte *)((int)instructionRecord2 + 0x43);
@@ -8962,7 +8970,7 @@ LAB_000d2b24:
                        alphaAuxC,(uint)*(byte *)alphaOpcodePtr);
           operandText2Ptr = operandText2;
           alphaSelectCBaseArg = alphaSelectCBase;
-          in_stack_fffffd2c = alphaAuxD;
+          staleStackArg_fffffd2c = alphaAuxD;
           ((int (*)())FUN_000d1624)(operandText2Ptr,rgbAddrA,rgbAddrB,rgbAddrC,alphaAddrA,argR8,argR9,alphaSelectCBase,alphaModC2,
                        alphaAuxD,(uint)*(byte *)alphaOpcodePtr);
           rgbOpcodeByte2 = *rgbOpcodePtr;
@@ -9336,7 +9344,7 @@ switchD_000d324c_caseD_4:
           }
           argR6 = (char *)cfWordText;
           ((int (*)())psnReportError)(0,"  %d cf  %02d    :  ",instructionNumber,cfIndex,cfCompareCode,argR8,argR9,argR10);
-          in_stack_fffffd2c = (uint *)0x0;
+          staleStackArg_fffffd2c = (uint *)0x0;
           argR10 = (byte *)((uint)*(byte *)((int)instructionRecord2 + 0x15) * 10 + 0x1dc1bc);
           argR9 = (char *)((uint)*(byte *)(instructionRecord2 + 5) * 10 + 0x1dc1bc);
           printf_LDBLStub_1a32d0(argR6,"0x%02x %1d %s %s %s %s %1d %1d %d",
