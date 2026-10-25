@@ -4608,8 +4608,8 @@ LAB_00091090:
   return 7;
 }
 
-/* FUN_000911a0 @ 0x911a0 (316 bytes) */
-int FUN_000911a0(param_1, param_2)
+/* ffvpFreeTempRegister @ 0x911a0 (316 bytes) */
+int ffvpFreeTempRegister(param_1, param_2)
   int param_1;
   int *param_2;
 {
@@ -4939,10 +4939,10 @@ int ffvpEmitNormalizedNormal(programBuilder)
   undefined4 srcTempFile;
   undefined4 unitNormalReg;
   undefined4 dstTempFile;
-  undefined1 auStack_68 [4];
+  undefined1 invLengthTemp [4];
   undefined4 invLengthTempReg;
-  undefined1 auStack_60 [16];
-  undefined1 auStack_50 [32];
+  undefined1 invLengthTempMask [16];
+  undefined1 invLengthTempSelect [32];
   int emit3Src1Select;
   
   glCtx = *(int *)(programBuilder + 0x3d4);
@@ -4969,7 +4969,7 @@ int ffvpEmitNormalizedNormal(programBuilder)
     normalFile = **(undefined4 **)(programBuilder + 0x3ec);
     _memcpy(programBuilder + 0x494,programBuilder + 0x444,0x28);
   }
-  allocStatus = ((int (*)())ffvpAllocTempRegister)(programBuilder,2,auStack_68);
+  allocStatus = ((int (*)())ffvpAllocTempRegister)(programBuilder,2,invLengthTemp);
   if (allocStatus != 0) {
     return 7;
   }
@@ -4977,13 +4977,13 @@ int ffvpEmitNormalizedNormal(programBuilder)
   srcTempFile = **(undefined4 **)(programBuilder + 0x3ec);
   unitNormalReg = *(undefined4 *)(programBuilder + 0x498);
   (**(code **)(((unsigned char *)0x000012e4) + glCtx))
-            (programBuilder,dstTempFile,invLengthTempReg,auStack_60,normalFile,normalReg,&DAT_001dbd74,&DAT_001fa5e8,normalFile,normalReg,&DAT_001dbd74,&DAT_001fa5e8);
+            (programBuilder,dstTempFile,invLengthTempReg,invLengthTempMask,normalFile,normalReg,&DAT_001dbd74,&DAT_001fa5e8,normalFile,normalReg,&DAT_001dbd74,&DAT_001fa5e8);
   (**(code **)(((unsigned char *)0x00001318) + glCtx))
-            (programBuilder,dstTempFile,invLengthTempReg,auStack_60,srcTempFile,invLengthTempReg,auStack_50,&DAT_001fa5e8);
+            (programBuilder,dstTempFile,invLengthTempReg,invLengthTempMask,srcTempFile,invLengthTempReg,invLengthTempSelect,&DAT_001fa5e8);
   emit3Src1Select = &DAT_001dbd74;
   (**(code **)(((unsigned char *)0x000012ec) + glCtx))
-            (programBuilder,dstTempFile,unitNormalReg,&DAT_001dbd84,srcTempFile,invLengthTempReg,auStack_50,&DAT_001fa5e8,normalFile,normalReg,emit3Src1Select,&DAT_001fa5e8);
-  ((int (*)())FUN_000911a0)(programBuilder,auStack_68);
+            (programBuilder,dstTempFile,unitNormalReg,&DAT_001dbd84,srcTempFile,invLengthTempReg,invLengthTempSelect,&DAT_001fa5e8,normalFile,normalReg,emit3Src1Select,&DAT_001fa5e8);
+  ((int (*)())ffvpFreeTempRegister)(programBuilder,invLengthTemp);
   return 0;
 }
 
@@ -5205,10 +5205,10 @@ int ffvpEmitReflectionVector(programBuilder)
   int normalReg;
   undefined4 dstTempFile;
   undefined4 srcTempFile;
-  undefined1 auStack_68 [4];
+  undefined1 dotTemp [4];
   undefined4 dotTempReg;
-  undefined1 auStack_60 [16];
-  undefined1 auStack_50 [40];
+  undefined1 dotTempMask [16];
+  undefined1 dotTempSelect [40];
   int emit2Src1Select;
   int emit2Src1Negate;
   int emit2Src2Index;
@@ -5249,18 +5249,18 @@ LAB_00092420:
   normalReg = ((int (*)())ffvpAllocTempRegister)(programBuilder,1,programBuilder + 0x4bc);
   if (normalReg == 0) {
     reflectionReg = *(undefined4 *)(programBuilder + 0x4c0);
-    normalReg = ((int (*)())ffvpAllocTempRegister)(programBuilder,2,auStack_68);
+    normalReg = ((int (*)())ffvpAllocTempRegister)(programBuilder,2,dotTemp);
     if (normalReg == 0) {
       srcTempFile = **(undefined4 **)(programBuilder + 0x3ec);
       dstTempFile = **(undefined4 **)(programBuilder + 0x3f0);
       (**(code **)(((unsigned char *)0x000012e4) + glCtx))
-                (programBuilder,dstTempFile,dotTempReg,auStack_60,srcTempFile,eyeVectorReg,&DAT_001dbd74,&DAT_001fa5e8,srcTempFile,(*(char *)(glCtx + 0x128) == '\0' ? (*(char *)(glCtx + 300) == '\0' ? *(int *)(programBuilder + 0x448) : *(int *)(programBuilder + 0x470)) : *(int *)(programBuilder + 0x498)),&DAT_001dbd74,&DAT_001fa5e8);
+                (programBuilder,dstTempFile,dotTempReg,dotTempMask,srcTempFile,eyeVectorReg,&DAT_001dbd74,&DAT_001fa5e8,srcTempFile,(*(char *)(glCtx + 0x128) == '\0' ? (*(char *)(glCtx + 300) == '\0' ? *(int *)(programBuilder + 0x448) : *(int *)(programBuilder + 0x470)) : *(int *)(programBuilder + 0x498)),&DAT_001dbd74,&DAT_001fa5e8);
       emit2Src1Select = &DAT_001dbd74;
       emit2Src1Negate = &DAT_001dbd94;
       emit2Src2Index = *(int *)((int)programBuilder + 1056);
       (**(code **)(((unsigned char *)0x000012f8) + glCtx))
-                (programBuilder,dstTempFile,reflectionReg,&DAT_001dbd84,srcTempFile,dotTempReg,auStack_50,&DAT_001fa5e8,srcTempFile,(*(char *)(glCtx + 0x128) == '\0' ? (*(char *)(glCtx + 300) == '\0' ? *(int *)(programBuilder + 0x448) : *(int *)(programBuilder + 0x470)) : *(int *)(programBuilder + 0x498)),emit2Src1Select,emit2Src1Negate,srcTempFile,emit2Src2Index,emit2Src1Select,&DAT_001fa5e8);
-      ((int (*)())FUN_000911a0)(programBuilder,auStack_68);
+                (programBuilder,dstTempFile,reflectionReg,&DAT_001dbd84,srcTempFile,dotTempReg,dotTempSelect,&DAT_001fa5e8,srcTempFile,(*(char *)(glCtx + 0x128) == '\0' ? (*(char *)(glCtx + 300) == '\0' ? *(int *)(programBuilder + 0x448) : *(int *)(programBuilder + 0x470)) : *(int *)(programBuilder + 0x498)),emit2Src1Select,emit2Src1Negate,srcTempFile,emit2Src2Index,emit2Src1Select,&DAT_001fa5e8);
+      ((int (*)())ffvpFreeTempRegister)(programBuilder,dotTemp);
       return 0;
     }
   }
@@ -5289,15 +5289,15 @@ int ffvpEmitSphereMapCoord(programBuilder)
   undefined4 selectRowB1;
   undefined4 selectRowB2;
   undefined4 selectRowB3;
-  undefined1 auStack_a8 [4];
+  undefined1 tempA [4];
   undefined4 tempAReg;
-  undefined1 auStack_a0 [16];
+  undefined1 tempAMask [16];
   undefined4 tempASelect0;
   undefined4 tempASelect1;
   undefined4 tempASelect2;
-  undefined1 auStack_80 [4];
+  undefined1 tempB [4];
   undefined4 tempBReg;
-  undefined1 auStack_78 [16];
+  undefined1 tempBMask [16];
   undefined4 tempBSelect0;
   undefined4 tempBSelect1;
   undefined4 tempBSelect3;
@@ -5319,14 +5319,14 @@ int ffvpEmitSphereMapCoord(programBuilder)
     allocStatus = ((int (*)())ffvpAllocTempRegister)(programBuilder,1,programBuilder + 0x4e4);
     if (allocStatus == 0) {
       sphereMapReg = *(undefined4 *)(programBuilder + 0x4e8);
-      allocStatus = ((int (*)())ffvpAllocTempRegister)(programBuilder,2,auStack_a8);
+      allocStatus = ((int (*)())ffvpAllocTempRegister)(programBuilder,2,tempA);
       if (allocStatus == 0) {
-        allocStatus = ((int (*)())ffvpAllocTempRegister)(programBuilder,2,auStack_80);
+        allocStatus = ((int (*)())ffvpAllocTempRegister)(programBuilder,2,tempB);
         if (allocStatus == 0) {
           srcTempFile = **(undefined4 **)(programBuilder + 0x3ec);
           dstTempFile = **(undefined4 **)(programBuilder + 0x3f0);
           (**(code **)(((unsigned char *)0x000012f0) + glCtx))
-                    (programBuilder,dstTempFile,tempAReg,auStack_a0,srcTempFile,tempAReg,&DAT_001dbdb4,&DAT_001fa5e8,srcTempFile,tempAReg,&DAT_001dbdb4,&DAT_001fa5e8);
+                    (programBuilder,dstTempFile,tempAReg,tempAMask,srcTempFile,tempAReg,&DAT_001dbdb4,&DAT_001fa5e8,srcTempFile,tempAReg,&DAT_001dbdb4,&DAT_001fa5e8);
           selectRowA0 = 4;
           selectRowA1 = 4;
           selectRowA3 = 4;
@@ -5337,11 +5337,11 @@ int ffvpEmitSphereMapCoord(programBuilder)
           (**(code **)(((unsigned char *)0x000012f4) + glCtx))
                     (programBuilder,dstTempFile,sphereMapReg,&DAT_001dbd84,srcTempFile,tempAReg,&tempASelect0,&DAT_001fa5e8,srcTempFile,emit2Src1Index,emit2Src1Select,&DAT_001fa5e8,srcTempFile,tempAReg,emit2Src2Select,&DAT_001fa5e8);
           (**(code **)(((unsigned char *)0x000012e4) + glCtx))
-                    (programBuilder,dstTempFile,tempAReg,auStack_a0,srcTempFile,sphereMapReg,&DAT_001dbd74,&DAT_001fa5e8,srcTempFile,sphereMapReg,&DAT_001dbd74,&DAT_001fa5e8);
+                    (programBuilder,dstTempFile,tempAReg,tempAMask,srcTempFile,sphereMapReg,&DAT_001dbd74,&DAT_001fa5e8,srcTempFile,sphereMapReg,&DAT_001dbd74,&DAT_001fa5e8);
           (**(code **)(((unsigned char *)0x00001318) + glCtx))
-                    (programBuilder,dstTempFile,tempAReg,auStack_a0,srcTempFile,tempAReg,&tempASelect0,&DAT_001fa5e8);
+                    (programBuilder,dstTempFile,tempAReg,tempAMask,srcTempFile,tempAReg,&tempASelect0,&DAT_001fa5e8);
           (**(code **)(((unsigned char *)0x0000131c) + glCtx))
-                    (programBuilder,dstTempFile,tempBReg,auStack_78,srcTempFile,tempBReg,&DAT_001dbdb4,&DAT_001dbd94);
+                    (programBuilder,dstTempFile,tempBReg,tempBMask,srcTempFile,tempBReg,&DAT_001dbdb4,&DAT_001dbd94);
           selectRowC0 = *(undefined4 *)(programBuilder + 0x4d4);
           selectRowC1 = *(undefined4 *)(programBuilder + 0x4d8);
           selectRowB2 = 4;
@@ -5360,8 +5360,8 @@ int ffvpEmitSphereMapCoord(programBuilder)
           emit6Src2Select = &selectRowB0;
           (**(code **)(((unsigned char *)0x000012f4) + glCtx))
                     (programBuilder,dstTempFile,sphereMapReg,&DAT_001dbd84,srcTempFile,tempAReg,&selectRowA0,&DAT_001fa5e8,srcTempFile,emit6Src1Index,emit6Src1Select,&DAT_001fa5e8,srcTempFile,emit6Src2Index,emit6Src2Select,&DAT_001fa5e8);
-          ((int (*)())FUN_000911a0)(programBuilder,auStack_a8);
-          ((int (*)())FUN_000911a0)(programBuilder,auStack_80);
+          ((int (*)())ffvpFreeTempRegister)(programBuilder,tempA);
+          ((int (*)())ffvpFreeTempRegister)(programBuilder,tempB);
           return 0;
         }
       }
@@ -5391,10 +5391,10 @@ int ffvpEmitFogExp2(programBuilder)
   undefined4 dstFile;
   undefined4 fogCoordFile;
   int glCtx;
-  undefined1 auStack_68 [4];
+  undefined1 fogTemp [4];
   undefined4 fogTempReg;
-  undefined1 auStack_60 [16];
-  undefined1 auStack_50 [32];
+  undefined1 fogTempMask [16];
+  undefined1 fogTempSelect [32];
   int emit3Src1File;
   int emit3Src1Select;
   
@@ -5446,24 +5446,24 @@ int ffvpEmitFogExp2(programBuilder)
     allocStatus = ((int (*)())ffvpAllocTempRegister)(programBuilder,2,programBuilder + 0x584);
     if (allocStatus == 0) {
       fogDstReg = *(undefined4 *)(programBuilder + 0x588);
-      allocStatus = ((int (*)())ffvpAllocTempRegister)(programBuilder,2,auStack_68);
+      allocStatus = ((int (*)())ffvpAllocTempRegister)(programBuilder,2,fogTemp);
       if (allocStatus == 0) {
         glCtxCopy = *(int *)(programBuilder + 0x3d4);
         stateBlock = *(int *)(*(int *)(glCtxCopy + 4) + 0x10);
         if ((*(short *)(((unsigned char *)0x00002e06) + stateBlock) == -0x7bae) &&
            (*(short *)(((unsigned char *)0x00002e08) + stateBlock) == -0x7aa5)) {
           (**(code **)(((unsigned char *)0x000012e4) + glCtxCopy))
-                    (programBuilder,dstFile,fogTempReg,auStack_60,fogCoordFile,fogCoordReg,&DAT_001dbd74,&DAT_001fa5e8,fogCoordFile,fogCoordReg,&DAT_001dbd74,&DAT_001fa5e8);
+                    (programBuilder,dstFile,fogTempReg,fogTempMask,fogCoordFile,fogCoordReg,&DAT_001dbd74,&DAT_001fa5e8,fogCoordFile,fogCoordReg,&DAT_001dbd74,&DAT_001fa5e8);
         }
         else {
           (**(code **)(((unsigned char *)0x000012ec) + glCtxCopy))
-                    (programBuilder,dstFile,fogTempReg,auStack_60,fogCoordFile,fogCoordReg,fogCoordSelect,&DAT_001fa5e8,fogCoordFile,fogCoordReg,fogCoordSelect,&DAT_001fa5e8);
+                    (programBuilder,dstFile,fogTempReg,fogTempMask,fogCoordFile,fogCoordReg,fogCoordSelect,&DAT_001fa5e8,fogCoordFile,fogCoordReg,fogCoordSelect,&DAT_001fa5e8);
         }
         srcTempFile = **(undefined4 **)(programBuilder + 0x3ec);
         emit3Src1File = *(int *)((int)*(int *)((int)programBuilder + 1004) + 0);
-        emit3Src1Select = &auStack_50;
+        emit3Src1Select = &fogTempSelect;
         (**(code **)(((unsigned char *)0x000012ec) + glCtx))
-                  (programBuilder,dstFile,fogTempReg,auStack_60,constFile,fogParamConstReg,&DAT_001dbcf4,&DAT_001fa5e8,emit3Src1File,fogTempReg,emit3Src1Select,&DAT_001fa5e8);
+                  (programBuilder,dstFile,fogTempReg,fogTempMask,constFile,fogParamConstReg,&DAT_001dbcf4,&DAT_001fa5e8,emit3Src1File,fogTempReg,emit3Src1Select,&DAT_001fa5e8);
         if (*(int *)(programBuilder + 0x3d8) == 0) {
           outputMask = (undefined4 *)(programBuilder + 0x58c);
           if (-1 < *(int *)(glCtx + 0x44)) {
@@ -5478,8 +5478,8 @@ int ffvpEmitFogExp2(programBuilder)
           dstFile = *(undefined4 *)(*(int *)(programBuilder + 0x3f0) + 0x18);
         }
         (**(code **)(((unsigned char *)0x00001320) + glCtx))
-                  (programBuilder,dstFile,fogDstReg,outputMask,srcTempFile,fogTempReg,auStack_50,&DAT_001fa5e8);
-        ((int (*)())FUN_000911a0)(programBuilder,auStack_68);
+                  (programBuilder,dstFile,fogDstReg,outputMask,srcTempFile,fogTempReg,fogTempSelect,&DAT_001fa5e8);
+        ((int (*)())ffvpFreeTempRegister)(programBuilder,fogTemp);
         return 0;
       }
     }
@@ -5516,7 +5516,7 @@ int ffvpCreateBuilder(glCtx, programMode, needsInvW)
     _memset(builder + 0x6c4,0,0x80);
     *(undefined1 *)(builder + 0x744) = (undefined1)needsInvW;
     *(code **)(builder + 0x748) = ffvpAllocTempRegister;
-    *(code **)(builder + 0x74c) = FUN_000911a0;
+    *(code **)(builder + 0x74c) = ffvpFreeTempRegister;
     if (*(code **)(((unsigned char *)0x000012d4) + glCtx) != (code *)0x0) {
       (**(code **)(((unsigned char *)0x000012d4) + glCtx))(glCtx,builder);
     }
@@ -5778,7 +5778,7 @@ int FUN_00093390(programBuilder)
       (**(code **)(((unsigned char *)0x00001310) + glCtx))
                 (programBuilder,*(undefined4 *)(*(int *)(programBuilder + 0x3f0) + 4),0,&DAT_001dbd24,srcTempFile,
                  lenTempReg,&DAT_001dbd14,&DAT_001fa5e8);
-      ((int (*)())FUN_000911a0)(programBuilder,lenTemp);
+      ((int (*)())ffvpFreeTempRegister)(programBuilder,lenTemp);
       status = 0;
     }
   }

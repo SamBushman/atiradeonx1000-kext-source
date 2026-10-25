@@ -815,7 +815,7 @@
 0x90960	FUN_00090960	48	yes	
 0x90990	FUN_00090990	772	yes	
 0x90ca0	ffvpAllocTempRegister	1240	yes	
-0x911a0	FUN_000911a0	316	yes	
+0x911a0	ffvpFreeTempRegister	316	yes	
 0x912f0	ffvpResolveMaterialSource	208	yes	
 0x913e0	ffvpResolveFixedSource	224	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x914c0	noop_914c0	28	yes	
@@ -855,7 +855,7 @@
 0x96540	ffvpPrepareFogExp2	172	yes	
 0x96600	ffvpEmitTexCoordGen	1872	no	indirect call (driver context / vtable / callback)
 0x96d80	ffvpEmitSceneColor	1700	no	indirect call (driver context / vtable / callback)
-0x97440	FUN_00097440	4212	no	indirect call (driver context / vtable / callback)
+0x97440	ffvpEmitDirectionalLight	4212	no	indirect call (driver context / vtable / callback)
 0x98500	ffvpEmitLight	6432	no	indirect call (driver context / vtable / callback)
 0x99e50	FUN_00099e50	1796	no	indirect call (driver context / vtable / callback)
 0x9a590	FUN_0009a590	848	no	indirect call (driver context / vtable / callback)

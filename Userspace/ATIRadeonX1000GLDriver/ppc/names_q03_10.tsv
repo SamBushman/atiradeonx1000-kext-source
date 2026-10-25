@@ -1,0 +1,2 @@
+local	ffvpEmitLight	iVar6	deadSourceFile	INFERRED	assigned from the resolved material source file and never read again
+local	ffvpEmitLight	iVar8	deadSourceReg	INFERRED	assigned from the resolved material source register and never read again

@@ -814,7 +814,7 @@
 0x90960	48	FUN_00090960	part_013	converted
 0x90990	772	FUN_00090990	part_013	converted
 0x90ca0	1240	ffvpAllocTempRegister	part_013	converted
-0x911a0	316	FUN_000911a0	part_013	converted
+0x911a0	316	ffvpFreeTempRegister	part_013	converted
 0x912f0	208	ffvpResolveMaterialSource	part_013	converted
 0x913e0	224	ffvpResolveFixedSource	part_013	converted
 0x914c0	28	noop_914c0	part_013	converted
@@ -854,7 +854,7 @@
 0x96540	172	ffvpPrepareFogExp2	part_014	converted
 0x96600	1872	ffvpEmitTexCoordGen	part_014	converted
 0x96d80	1700	ffvpEmitSceneColor	part_014	converted
-0x97440	4212	FUN_00097440	part_014	converted
+0x97440	4212	ffvpEmitDirectionalLight	part_014	converted
 0x98500	6432	ffvpEmitLight	part_014	converted
 0x99e50	1796	FUN_00099e50	part_014	converted
 0x9a590	848	FUN_0009a590	part_014	converted
