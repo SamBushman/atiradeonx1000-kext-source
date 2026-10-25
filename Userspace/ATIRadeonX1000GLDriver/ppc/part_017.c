@@ -2978,14 +2978,14 @@ void FUN_000bd9a0(int glContext,undefined4 param_2,undefined4 param_3,undefined4
 }
 
 /* FUN_000bda40 @ 0xbda40 (1016 bytes) */
-int FUN_000bda40(stream, param_2, dirtyBitsArg, scratchR6, dirtyWord3, dirtyWord1, param_7, dirtyWord4)
+int FUN_000bda40(stream, unusedArgR4, dirtyBitsArg, scratchR6, dirtyWord3, dirtyWord1, unusedArgR9, dirtyWord4)
   int stream;
-  undefined4 param_2;
+  undefined4 unusedArgR4;
   undefined4 dirtyBitsArg;
   undefined4 scratchR6;
   undefined4 dirtyWord3;
   undefined4 dirtyWord1;
-  undefined4 param_7;
+  undefined4 unusedArgR9;
   undefined4 dirtyWord4;
 {
   uint streamWord44;
@@ -3360,14 +3360,14 @@ LAB_000bdeec:
 }
 
 /* FUN_000be460 @ 0xbe460 (2472 bytes) */
-int FUN_000be460(psnProgram, rsWords, programImage, param_4, param_5, param_6, param_7)
+int FUN_000be460(psnProgram, rsWords, programImage, unusedArgR6, unusedArgR7, unusedArgR8, unusedArgR9)
   int psnProgram;
   uint *rsWords;
   uint *programImage;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+  undefined4 unusedArgR6;
+  undefined4 unusedArgR7;
+  undefined4 unusedArgR8;
+  undefined4 unusedArgR9;
 {
   ushort psnProgramShort16;
   uint loopIndex;
@@ -3717,11 +3717,11 @@ LAB_000be580:
 }
 
 /* FUN_000bee40 @ 0xbee40 (244 bytes) */
-int FUN_000bee40(psnProgram, param_2, param_3, param_4, param_5, param_6, param_7)
+int FUN_000bee40(psnProgram, param_2, param_3, unusedArgR6, param_5, param_6, param_7)
   int psnProgram;
   undefined4 param_2;
   undefined4 param_3;
-  undefined4 param_4;
+  undefined4 unusedArgR6;
   undefined4 param_5;
   undefined4 param_6;
   undefined4 param_7;
@@ -3770,11 +3770,11 @@ int FUN_000bee40(psnProgram, param_2, param_3, param_4, param_5, param_6, param_
 }
 
 /* FUN_000bef40 @ 0xbef40 (1192 bytes) */
-int FUN_000bef40(psnProgram, param_2, param_3, param_4, param_5)
+int FUN_000bef40(psnProgram, param_2, param_3, unusedArgR6, param_5)
   int psnProgram;
   undefined4 param_2;
   undefined4 param_3;
-  undefined4 param_4;
+  undefined4 unusedArgR6;
   dword *param_5;
 {
   bool bVar1;
@@ -4020,14 +4020,14 @@ LAB_000bf33c:
 }
 
 /* FUN_000bf400 @ 0xbf400 (1260 bytes) */
-int FUN_000bf400(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+int FUN_000bf400(param_1, param_2, unusedArgR5, unusedArgR6, unusedArgR7, unusedArgR8, unusedArgR9)
   int param_1;
   uint param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+  undefined4 unusedArgR5;
+  undefined4 unusedArgR6;
+  undefined4 unusedArgR7;
+  undefined4 unusedArgR8;
+  undefined4 unusedArgR9;
 {
   uint loopIndex3;
   uint loopIndex2;
@@ -4233,32 +4233,32 @@ LAB_000bf860:
 }
 
 /* FUN_000bf910 @ 0xbf910 (796 bytes) */
-int FUN_000bf910(param_1, param_2, param_3, param_4)
-  uint *param_1;
-  undefined4 *param_2;
-  undefined4 *param_3;
-  undefined4 *param_4;
+int FUN_000bf910(swizzleCode, selectX, selectY, selectZ)
+  uint *swizzleCode;
+  undefined4 *selectX;
+  undefined4 *selectY;
+  undefined4 *selectZ;
 {
-  uint uVar1;
+  uint swizzleCodeWord0;
   undefined4 uVar2;
   
-  uVar1 = *param_1;
-  if ((uVar1 & 0x80) != 0) {
-    *param_1 = uVar1 & 0xffffff7f;
+  swizzleCodeWord0 = *swizzleCode;
+  if ((swizzleCodeWord0 & 0x80) != 0) {
+    *swizzleCode = swizzleCodeWord0 & 0xffffff7f;
     return;
   }
-  switch(uVar1) {
+  switch(swizzleCodeWord0) {
   case 0:
-    *param_1 = 0;
-    *param_2 = 0;
-    *param_3 = 1;
-    *param_4 = 2;
+    *swizzleCode = 0;
+    *selectX = 0;
+    *selectY = 1;
+    *selectZ = 2;
     return;
   case 1:
-    *param_1 = 0;
-    *param_2 = 0;
-    *param_3 = 0;
-    *param_4 = 0;
+    *swizzleCode = 0;
+    *selectX = 0;
+    *selectY = 0;
+    *selectZ = 0;
     return;
   case 2:
     uVar2 = 1;
@@ -4267,28 +4267,28 @@ int FUN_000bf910(param_1, param_2, param_3, param_4)
     uVar2 = 2;
     break;
   case 4:
-    *param_1 = 1;
-    *param_2 = 0;
-    *param_3 = 1;
-    *param_4 = 2;
+    *swizzleCode = 1;
+    *selectX = 0;
+    *selectY = 1;
+    *selectZ = 2;
     return;
   case 5:
     uVar2 = 0;
     goto LAB_000bfac8;
   case 6:
-    *param_1 = 1;
-    *param_2 = 1;
-    *param_3 = 1;
-    *param_4 = 1;
+    *swizzleCode = 1;
+    *selectX = 1;
+    *selectY = 1;
+    *selectZ = 1;
     return;
   case 7:
     uVar2 = 2;
     goto LAB_000bfac8;
   case 8:
-    *param_1 = 2;
-    *param_2 = 0;
-    *param_3 = 1;
-    *param_4 = 2;
+    *swizzleCode = 2;
+    *selectX = 0;
+    *selectY = 1;
+    *selectZ = 2;
     return;
   case 9:
     uVar2 = 0;
@@ -4297,10 +4297,10 @@ int FUN_000bf910(param_1, param_2, param_3, param_4)
     uVar2 = 1;
     goto LAB_000bfae4;
   case 0xb:
-    *param_1 = 2;
-    *param_2 = 2;
-    *param_3 = 2;
-    *param_4 = 2;
+    *swizzleCode = 2;
+    *selectX = 2;
+    *selectY = 2;
+    *selectZ = 2;
     return;
   case 0xc:
     uVar2 = 3;
@@ -4308,24 +4308,24 @@ int FUN_000bf910(param_1, param_2, param_3, param_4)
   case 0xd:
     uVar2 = 3;
 LAB_000bfac8:
-    *param_1 = 1;
-    *param_2 = uVar2;
-    *param_3 = uVar2;
-    *param_4 = uVar2;
+    *swizzleCode = 1;
+    *selectX = uVar2;
+    *selectY = uVar2;
+    *selectZ = uVar2;
     return;
   case 0xe:
     uVar2 = 3;
 LAB_000bfae4:
-    *param_1 = 2;
-    *param_2 = uVar2;
-    *param_3 = uVar2;
-    *param_4 = uVar2;
+    *swizzleCode = 2;
+    *selectX = uVar2;
+    *selectY = uVar2;
+    *selectZ = uVar2;
     return;
   case 0xf:
-    *param_1 = 3;
-    *param_2 = 0;
-    *param_3 = 1;
-    *param_4 = 2;
+    *swizzleCode = 3;
+    *selectX = 0;
+    *selectY = 1;
+    *selectZ = 2;
     return;
   case 0x10:
     uVar2 = 0;
@@ -4336,16 +4336,16 @@ LAB_000bfae4:
   case 0x12:
     uVar2 = 2;
 LAB_000bfb34:
-    *param_1 = 3;
-    *param_2 = uVar2;
-    *param_3 = uVar2;
-    *param_4 = uVar2;
+    *swizzleCode = 3;
+    *selectX = uVar2;
+    *selectY = uVar2;
+    *selectZ = uVar2;
     return;
   case 0x13:
-    *param_1 = 3;
-    *param_2 = 3;
-    *param_3 = 3;
-    *param_4 = 3;
+    *swizzleCode = 3;
+    *selectX = 3;
+    *selectY = 3;
+    *selectZ = 3;
     return;
   case 0x14:
     uVar2 = 4;
@@ -4357,66 +4357,66 @@ LAB_000bfb34:
     uVar2 = 5;
     break;
   case 0x17:
-    *param_1 = 0;
-    *param_2 = 1;
-    *param_3 = 2;
-    *param_4 = 0;
+    *swizzleCode = 0;
+    *selectX = 1;
+    *selectY = 2;
+    *selectZ = 0;
     return;
   case 0x18:
-    *param_1 = 1;
-    *param_2 = 1;
-    *param_3 = 2;
-    *param_4 = 0;
+    *swizzleCode = 1;
+    *selectX = 1;
+    *selectY = 2;
+    *selectZ = 0;
     return;
   case 0x19:
-    *param_1 = 2;
-    *param_2 = 1;
-    *param_3 = 2;
-    *param_4 = 0;
+    *swizzleCode = 2;
+    *selectX = 1;
+    *selectY = 2;
+    *selectZ = 0;
     return;
   case 0x1a:
-    *param_1 = 0;
-    *param_2 = 2;
-    *param_3 = 0;
-    *param_4 = 1;
+    *swizzleCode = 0;
+    *selectX = 2;
+    *selectY = 0;
+    *selectZ = 1;
     return;
   case 0x1b:
-    *param_1 = 1;
-    *param_2 = 2;
-    *param_3 = 0;
-    *param_4 = 1;
+    *swizzleCode = 1;
+    *selectX = 2;
+    *selectY = 0;
+    *selectZ = 1;
     return;
   case 0x1c:
-    *param_1 = 2;
-    *param_2 = 2;
-    *param_3 = 0;
-    *param_4 = 1;
+    *swizzleCode = 2;
+    *selectX = 2;
+    *selectY = 0;
+    *selectZ = 1;
     return;
   case 0x1d:
-    *param_1 = 0;
-    *param_2 = 3;
-    *param_3 = 2;
-    *param_4 = 1;
+    *swizzleCode = 0;
+    *selectX = 3;
+    *selectY = 2;
+    *selectZ = 1;
     return;
   case 0x1e:
-    *param_1 = 1;
-    *param_2 = 3;
-    *param_3 = 2;
-    *param_4 = 1;
+    *swizzleCode = 1;
+    *selectX = 3;
+    *selectY = 2;
+    *selectZ = 1;
     return;
   case 0x1f:
-    *param_1 = 2;
-    *param_2 = 3;
-    *param_3 = 2;
-    *param_4 = 1;
+    *swizzleCode = 2;
+    *selectX = 3;
+    *selectY = 2;
+    *selectZ = 1;
     return;
   default:
     return;
   }
-  *param_1 = 0;
-  *param_2 = uVar2;
-  *param_3 = uVar2;
-  *param_4 = uVar2;
+  *swizzleCode = 0;
+  *selectX = uVar2;
+  *selectY = uVar2;
+  *selectZ = uVar2;
   return;
 }
 
@@ -5267,15 +5267,15 @@ int psnDecRecomputeSourceUsage(entry)
 }
 
 /* psnDecCanonicalizeEntry @ 0xc0fd0 (1936 bytes) */
-int psnDecCanonicalizeEntry(entry, param_2, param_3, param_4, oldAddressOffset, param_6, sourceSwizzlePtr, param_8)
+int psnDecCanonicalizeEntry(entry, unusedArgR4, unusedArgR5, unusedArgR6, oldAddressOffset, unusedArgR8, sourceSwizzlePtr, unusedArgR10)
   int entry;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
+  undefined4 unusedArgR4;
+  undefined4 unusedArgR5;
+  undefined4 unusedArgR6;
   undefined4 oldAddressOffset;
-  undefined4 param_6;
+  undefined4 unusedArgR8;
   undefined4 sourceSwizzlePtr;
-  undefined4 param_8;
+  undefined4 unusedArgR10;
 {
   ushort maskWord;
   ushort componentMode;
@@ -8393,12 +8393,12 @@ LAB_000c3fa8:
 }
 
 /* psnDecTryMergeAddressSlots @ 0xc3fd0 (784 bytes) */
-int psnDecTryMergeAddressSlots(entry, otherEntry, reverseRoles, param_4, param_5)
+int psnDecTryMergeAddressSlots(entry, otherEntry, reverseRoles, param_4, unusedArgR7)
   int entry;
   int otherEntry;
   int reverseRoles;
   undefined4 param_4;
-  undefined4 param_5;
+  undefined4 unusedArgR7;
 {
   int clearCounter;
   int destHalf;
@@ -9636,15 +9636,15 @@ int psnRaReleaseUse(param_1, param_2, param_3)
 }
 
 /* psnRaAssignDefinition @ 0xc5c50 (476 bytes) */
-int psnRaAssignDefinition(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int psnRaAssignDefinition(param_1, param_2, param_3, unusedArgR6, unusedArgR7, unusedArgR8, unusedArgR9, unusedArgR10)
   ushort *param_1;
   int *param_2;
   int *param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+  undefined4 unusedArgR6;
+  undefined4 unusedArgR7;
+  undefined4 unusedArgR8;
+  undefined4 unusedArgR9;
+  undefined4 unusedArgR10;
 {
   ushort uVar1;
   ushort uVar2;
@@ -10080,14 +10080,14 @@ LAB_000c6350:
 }
 
 /* psnReallocateTemps @ 0xc6470 (1284 bytes) */
-int psnReallocateTemps(psnState, psnProgram, param_3, passThroughR6, sourceUsage, passThroughR8, param_7, param_8)
+int psnReallocateTemps(psnState, psnProgram, param_3, passThroughR6, sourceUsage, passThroughR8, unusedArgR9, param_8)
   int psnState;
   int psnProgram;
   undefined2 *param_3;
   uint *passThroughR6;
   uint *sourceUsage;
   undefined4 *passThroughR8;
-  undefined4 param_7;
+  undefined4 unusedArgR9;
   uint param_8;
 {
   ushort instShort7;
@@ -10470,8 +10470,8 @@ int FUN_000c6e40(psnState, psnProgram)
 }
 
 /* scCallbackFree @ 0xc6e50 (40 bytes) */
-int scCallbackFree(param_1, param_2)
-  undefined4 param_1;
+int scCallbackFree(unusedArgR3, param_2)
+  undefined4 unusedArgR3;
   undefined4 param_2;
 {
   _free(param_2);
@@ -10479,9 +10479,9 @@ int scCallbackFree(param_1, param_2)
 }
 
 /* scCallbackGetFlagZero @ 0xc6e80 (16 bytes) */
-int scCallbackGetFlagZero(param_1, param_2, param_3)
-  undefined4 param_1;
-  undefined4 param_2;
+int scCallbackGetFlagZero(unusedArgR3, unusedArgR4, param_3)
+  undefined4 unusedArgR3;
+  undefined4 unusedArgR4;
   undefined4 *param_3;
 {
   *param_3 = 0;
@@ -10489,8 +10489,8 @@ int scCallbackGetFlagZero(param_1, param_2, param_3)
 }
 
 /* scCallbackAppendFormatted @ 0xc6e90 (88 bytes) */
-int scCallbackAppendFormatted(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  undefined4 param_1;
+int scCallbackAppendFormatted(unusedArgR3, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+  undefined4 unusedArgR3;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
@@ -10508,8 +10508,8 @@ int scCallbackAppendFormatted(param_1, param_2, param_3, param_4, param_5, param
 }
 
 /* scCallbackFopen @ 0xc6ef0 (88 bytes) */
-int scCallbackFopen(param_1, param_2, param_3)
-  undefined4 param_1;
+int scCallbackFopen(unusedArgR3, param_2, param_3)
+  undefined4 unusedArgR3;
   undefined4 param_2;
   int param_3;
 {
@@ -10531,8 +10531,8 @@ int scCallbackFopen(param_1, param_2, param_3)
 }
 
 /* scCallbackFclose @ 0xc6f60 (44 bytes) */
-int scCallbackFclose(param_1, param_2)
-  undefined4 param_1;
+int scCallbackFclose(unusedArgR3, param_2)
+  undefined4 unusedArgR3;
   undefined4 param_2;
 {
   int iVar1;
@@ -10542,8 +10542,8 @@ int scCallbackFclose(param_1, param_2)
 }
 
 /* scCallbackFwrite @ 0xc6f90 (40 bytes) */
-int scCallbackFwrite(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
+int scCallbackFwrite(unusedArgR3, param_2, param_3, param_4)
+  undefined4 unusedArgR3;
   int param_2;
   int param_3;
   undefined4 param_4;
@@ -10558,8 +10558,8 @@ int scCallbackFwrite(param_1, param_2, param_3, param_4)
 }
 
 /* scCallbackFread @ 0xc6fc0 (40 bytes) */
-int scCallbackFread(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
+int scCallbackFread(unusedArgR3, param_2, param_3, param_4)
+  undefined4 unusedArgR3;
   int param_2;
   int param_3;
   undefined4 param_4;

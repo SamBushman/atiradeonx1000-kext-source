@@ -1,0 +1,5 @@
+local	FUN_000a5c40	param_1	glContext	INFERRED	used as the GL context of the command-stream idiom: reserve hook at +0x2758, commit hook at +0x275c, write cursor at +0x2748+4
+local	FUN_000a6500	param_1	glContext	INFERRED	used as the GL context of the command-stream idiom: reserve hook at +0x2758, commit hook at +0x275c, write cursor at +0x2748+4
+local	FUN_000a6860	param_1	glContext	INFERRED	used as the GL context of the command-stream idiom: reserve hook at +0x2758, commit hook at +0x275c, write cursor at +0x2748+4
+local	FUN_000b5400	param_1	glContext	INFERRED	used as the GL context of the command-stream idiom: reserve hook at +0x2758, commit hook at +0x275c, write cursor at +0x2748+4
+local	FUN_000b5a60	param_1	glContext	INFERRED	used as the GL context of the command-stream idiom: reserve hook at +0x2758, commit hook at +0x275c, write cursor at +0x2748+4
