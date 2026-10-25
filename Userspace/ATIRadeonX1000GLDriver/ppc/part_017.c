@@ -2981,7 +2981,7 @@ int FUN_000bda40(stream, param_2, dirtyBitsArg, scratchR6, dirtyWord3, dirtyWord
   uint uVar6;
   ushort uVar7;
   int iVar8;
-  uint uVar9;
+  uint loopIndex2;
   int iVar10;
   uint streamWord8c;
   uint uVar12;
@@ -2990,7 +2990,7 @@ int FUN_000bda40(stream, param_2, dirtyBitsArg, scratchR6, dirtyWord3, dirtyWord
   int iVar15;
   int iVar16;
   uint uVar17;
-  int iVar18;
+  int loopIndex;
   uint uVar19;
   uint uVar20;
   uint uVar21;
@@ -3023,9 +3023,9 @@ int FUN_000bda40(stream, param_2, dirtyBitsArg, scratchR6, dirtyWord3, dirtyWord
       uVar21 = (uint)bVar1;
       *(byte *)(stream + 0x1878) = bVar1;
     }
-    iVar18 = 0;
+    loopIndex = 0;
     if (uVar24 != 0) {
-      uVar9 = 0;
+      loopIndex2 = 0;
       iVar8 = stream;
       iVar22 = stream;
       iVar23 = stream;
@@ -3035,11 +3035,11 @@ int FUN_000bda40(stream, param_2, dirtyBitsArg, scratchR6, dirtyWord3, dirtyWord
           uVar14 = *(uint *)(iVar16 + 4) & 0x1f;
         }
         else {
-          uVar14 = uVar21 & 1 << (uVar9 & 0x3f);
+          uVar14 = uVar21 & 1 << (loopIndex2 & 0x3f);
         }
-        iVar10 = stream + 0x450 + uVar9 * 0xcc;
+        iVar10 = stream + 0x450 + loopIndex2 * 0xcc;
         if ((int)-uVar14 < 0) {
-          iVar15 = uVar9 * 2 + stream;
+          iVar15 = loopIndex2 * 2 + stream;
           bVar5 = *(char *)(iVar23 + 0x2784) == '\0';
           *(uint *)(iVar8 + 0x150) = (uint)bVar5;
           uVar7 = (ushort)bVar5 << 0xe;
@@ -3078,7 +3078,7 @@ int FUN_000bda40(stream, param_2, dirtyBitsArg, scratchR6, dirtyWord3, dirtyWord
                                         (*(ushort *)(iVar22 + 0x4f8) >> 2 & 4 |
                                         *(ushort *)(iVar22 + 0x4f8) & 3) * 4) << 9;
             }
-            iVar15 = uVar9 * 2 + stream;
+            iVar15 = loopIndex2 * 2 + stream;
             uVar17 = (((ushort)(*(short *)(iVar10 + 0x3c) + 0x7aefU) < 2 || sVar3 == -0x7aee) ||
                      sVar3 == -0x7aef) | uVar17;
             uVar4 = (uint)(*(short *)(iVar10 + 0x3c) == 0x2402 || sVar3 == 0x2402);
@@ -3101,18 +3101,18 @@ int FUN_000bda40(stream, param_2, dirtyBitsArg, scratchR6, dirtyWord3, dirtyWord
             *(uint *)(stream + 0x8c) = uVar14;
           }
           *(uint *)(stream + 0x8c) = uVar14 | 0x800000;
-          iVar10 = iVar18 * 4;
-          iVar18 = iVar18 + 1;
+          iVar10 = loopIndex * 4;
+          loopIndex = loopIndex + 1;
           *(uint *)(stream + 0x8c) =
-               (uint)(0 < (int)uVar9) << 0x18 | uVar14 & 0xfeffffff | 0x800000;
-          *(uint *)(iVar10 + stream + 0x98) = uVar9;
+               (uint)(0 < (int)loopIndex2) << 0x18 | uVar14 & 0xfeffffff | 0x800000;
+          *(uint *)(iVar10 + stream + 0x98) = loopIndex2;
         }
         else {
           *(undefined4 *)(iVar8 + 0x150) = 0;
-          iVar10 = uVar9 * 2 + stream;
+          iVar10 = loopIndex2 * 2 + stream;
           *(ushort *)(iVar10 + 0x187c) = *(ushort *)(iVar10 + 0x187c) & 0x8003;
         }
-        uVar9 = uVar9 + 1;
+        loopIndex2 = loopIndex2 + 1;
         iVar16 = iVar16 + 4;
         iVar8 = iVar8 + 4;
         iVar22 = iVar22 + 0xcc;
@@ -3122,7 +3122,7 @@ int FUN_000bda40(stream, param_2, dirtyBitsArg, scratchR6, dirtyWord3, dirtyWord
         streamWord44 = *(uint *)(stream + 0x44);
       }
     }
-    *(int *)(stream + 0x94) = iVar18;
+    *(int *)(stream + 0x94) = loopIndex;
   }
   return;
 }
@@ -3134,6 +3134,9 @@ int FUN_000bde70(param_1, param_2, param_3, param_4)
   undefined4 *param_3;
   undefined4 *param_4;
 {
+  uint *cursor5;
+  int *cursor3;
+  int *cursor2;
   uint *puVar1;
   undefined4 *puVar2;
   bool bVar3;
@@ -3145,10 +3148,10 @@ int FUN_000bde70(param_1, param_2, param_3, param_4)
   int iVar9;
   uint uVar10;
   uint uVar11;
-  int *piVar12;
+  int *cursor;
   uint uVar13;
   int iVar14;
-  uint *puVar15;
+  uint *cursor4;
   int *piVar16;
   uint uVar17;
   uint uVar18;
@@ -3188,142 +3191,142 @@ LAB_000bdeec:
     piVar16[2] = 0;
     *(byte *)((int)piVar16 + 0xd) = (byte)(*param_1 >> 5) & 7;
     uVar13 = 0;
-    puVar15 = param_1;
-    piVar12 = piVar16;
+    cursor4 = param_1;
+    cursor = piVar16;
     do {
       uVar4 = uVar13;
-      piVar12[0x12] = 1;
+      cursor[0x12] = 1;
       uVar13 = uVar4 + 1;
-      *(byte *)(piVar12 + 0x14) = (byte)puVar15[1] & 0xf;
-      *(byte *)((int)piVar12 + 0x51) = (byte)(puVar15[1] >> 4) & 1;
-      *(byte *)((int)piVar12 + 0x52) = (byte)(puVar15[1] >> 0xc) & 0xf;
-      *(byte *)((int)piVar12 + 0x53) = (byte)*(undefined2 *)(puVar15 + 1) & 3;
-      *(byte *)(piVar12 + 0x15) = (byte)(puVar15[1] >> 0x19) & 1;
-      *(byte *)((int)piVar12 + 0x55) = (byte)(puVar15[1] >> 0x1b);
-      *(ushort *)((int)piVar12 + 0x4e) = (ushort)(puVar15[1] >> 0x12) & 0x7f;
-      puVar15 = puVar15 + 1;
-      uVar6 = *puVar15;
-      *(undefined1 *)((int)piVar12 + 0x57) = 0;
-      *(undefined1 *)((int)piVar12 + 0x56) = 0;
-      *(ushort *)(piVar12 + 0x13) = (ushort)(uVar6 >> 5) & 0x7f;
-      piVar12 = piVar12 + 0x12;
+      *(byte *)(cursor + 0x14) = (byte)cursor4[1] & 0xf;
+      *(byte *)((int)cursor + 0x51) = (byte)(cursor4[1] >> 4) & 1;
+      *(byte *)((int)cursor + 0x52) = (byte)(cursor4[1] >> 0xc) & 0xf;
+      *(byte *)((int)cursor + 0x53) = (byte)*(undefined2 *)(cursor4 + 1) & 3;
+      *(byte *)(cursor + 0x15) = (byte)(cursor4[1] >> 0x19) & 1;
+      *(byte *)((int)cursor + 0x55) = (byte)(cursor4[1] >> 0x1b);
+      *(ushort *)((int)cursor + 0x4e) = (ushort)(cursor4[1] >> 0x12) & 0x7f;
+      cursor4 = cursor4 + 1;
+      uVar6 = *cursor4;
+      *(undefined1 *)((int)cursor + 0x57) = 0;
+      *(undefined1 *)((int)cursor + 0x56) = 0;
+      *(ushort *)(cursor + 0x13) = (ushort)(uVar6 >> 5) & 0x7f;
+      cursor = cursor + 0x12;
     } while (uVar13 <= (*param_1 & 0xf));
     iVar9 = uVar4 + 2;
     uVar13 = *param_2 >> 3 & 1;
     if (uVar18 < 4) {
-      puVar15 = param_2 + iVar14 + 5;
+      cursor5 = param_2 + iVar14 + 5;
       do {
-        uVar4 = *puVar15;
-        puVar15 = puVar15 + 1;
+        uVar4 = *cursor5;
+        cursor5 = cursor5 + 1;
         uVar6 = uVar4 & 0x3f;
         uVar10 = uVar4 >> 0xc & 0x1f;
         if ((uVar13 != 0) && (uVar13 = uVar10 + (uVar4 >> 0x11 & 0x1f), uVar10 <= uVar13)) {
           iVar14 = uVar10 << 2;
-          piVar12 = piVar16 + iVar9 * 0x12;
+          cursor2 = piVar16 + iVar9 * 0x12;
           uVar11 = uVar10;
           do {
-            *piVar12 = 2;
+            *cursor2 = 2;
             bVar3 = uVar11 == uVar10;
             uVar11 = uVar11 + 1;
             iVar9 = iVar9 + 1;
-            *(byte *)((int)piVar12 + 0x19) = (byte)(*(uint *)(iVar14 + param_2[7]) >> 0xb) & 0xf;
+            *(byte *)((int)cursor2 + 0x19) = (byte)(*(uint *)(iVar14 + param_2[7]) >> 0xb) & 0xf;
             uVar5 = *(uint *)(iVar14 + param_2[7]);
-            *(bool *)(piVar12 + 8) = bVar3;
-            *(undefined1 *)((int)piVar12 + 0x1f) = 0;
-            *(byte *)((int)piVar12 + 0x1a) = (byte)(uVar5 >> 0xf) & 7;
-            *(ushort *)((int)piVar12 + 0xe) = (ushort)*(undefined4 *)(iVar14 + param_2[7]) & 0x1f;
+            *(bool *)(cursor2 + 8) = bVar3;
+            *(undefined1 *)((int)cursor2 + 0x1f) = 0;
+            *(byte *)((int)cursor2 + 0x1a) = (byte)(uVar5 >> 0xf) & 7;
+            *(ushort *)((int)cursor2 + 0xe) = (ushort)*(undefined4 *)(iVar14 + param_2[7]) & 0x1f;
             puVar1 = (uint *)(iVar14 + param_2[7]);
             iVar14 = iVar14 + 4;
-            *(ushort *)(piVar12 + 3) = (ushort)(*puVar1 >> 6) & 0x1f;
-            piVar12 = piVar12 + 0x12;
+            *(ushort *)(cursor2 + 3) = (ushort)(*puVar1 >> 6) & 0x1f;
+            cursor2 = cursor2 + 0x12;
           } while (uVar11 <= uVar13);
         }
         uVar13 = uVar6 + (uVar4 >> 6 & 0x3f);
         if (uVar6 <= uVar13) {
           iVar14 = uVar6 << 2;
-          piVar12 = piVar16 + iVar9 * 0x12;
+          cursor3 = piVar16 + iVar9 * 0x12;
           do {
-            *piVar12 = 3;
-            *(byte *)(piVar12 + 5) = (byte)(*(uint *)(param_2[8] + iVar14) >> 0x17) & 7;
-            *(byte *)((int)piVar12 + 0x15) =
+            *cursor3 = 3;
+            *(byte *)(cursor3 + 5) = (byte)(*(uint *)(param_2[8] + iVar14) >> 0x17) & 7;
+            *(byte *)((int)cursor3 + 0x15) =
                  (byte)((uint)*(undefined4 *)(param_2[8] + iVar14) >> 0x1a) & 7;
-            *(byte *)((int)piVar12 + 0x16) =
+            *(byte *)((int)cursor3 + 0x16) =
                  (byte)((uint)*(undefined4 *)(param_2[8] + iVar14) >> 0x1d) & 3;
             uVar4 = *(uint *)(param_2[8] + iVar14) & 0x3f;
             uVar7 = (ushort)uVar4;
             if (0x1f < uVar4) {
               uVar7 = uVar7 - 0x20 | 0x8000;
             }
-            *(ushort *)((int)piVar12 + 0xe) = uVar7;
+            *(ushort *)((int)cursor3 + 0xe) = uVar7;
             uVar4 = *(uint *)(param_2[8] + iVar14) >> 6 & 0x3f;
             uVar7 = (ushort)uVar4;
             if (0x1f < uVar4) {
               uVar7 = uVar7 - 0x20 | 0x8000;
             }
-            *(ushort *)(piVar12 + 4) = uVar7;
+            *(ushort *)(cursor3 + 4) = uVar7;
             uVar4 = *(uint *)(param_2[8] + iVar14) >> 0xc & 0x3f;
             uVar7 = (ushort)uVar4;
             if (0x1f < uVar4) {
               uVar7 = uVar7 - 0x20 | 0x8000;
             }
-            *(ushort *)((int)piVar12 + 0x12) = uVar7;
-            *(ushort *)(piVar12 + 3) =
+            *(ushort *)((int)cursor3 + 0x12) = uVar7;
+            *(ushort *)(cursor3 + 3) =
                  (ushort)((uint)*(undefined4 *)(param_2[8] + iVar14) >> 0x12) & 0x1f;
-            *(byte *)(piVar12 + 8) = (byte)(*(uint *)(param_2[9] + iVar14) >> 0x17) & 1;
-            *(byte *)((int)piVar12 + 0x21) = *(byte *)(param_2[9] + iVar14) & 1;
-            *(byte *)((int)piVar12 + 0x22) =
+            *(byte *)(cursor3 + 8) = (byte)(*(uint *)(param_2[9] + iVar14) >> 0x17) & 1;
+            *(byte *)((int)cursor3 + 0x21) = *(byte *)(param_2[9] + iVar14) & 1;
+            *(byte *)((int)cursor3 + 0x22) =
                  (byte)((uint)*(undefined4 *)(param_2[9] + iVar14) >> 0x19) & 3;
-            *(byte *)((int)piVar12 + 0x23) =
+            *(byte *)((int)cursor3 + 0x23) =
                  (byte)((uint)*(undefined4 *)(param_2[9] + iVar14) >> 0x1b) & 1;
             uVar4 = *(uint *)(param_2[9] + iVar14) & 0x3f;
             uVar7 = (ushort)uVar4;
             if (0x1f < uVar4) {
               uVar7 = uVar7 - 0x20 | 0x8000;
             }
-            *(ushort *)((int)piVar12 + 0x1a) = uVar7;
+            *(ushort *)((int)cursor3 + 0x1a) = uVar7;
             uVar4 = *(uint *)(param_2[9] + iVar14) >> 6 & 0x3f;
             uVar7 = (ushort)uVar4;
             if (0x1f < uVar4) {
               uVar7 = uVar7 - 0x20 | 0x8000;
             }
-            *(ushort *)(piVar12 + 7) = uVar7;
+            *(ushort *)(cursor3 + 7) = uVar7;
             uVar4 = *(uint *)(param_2[9] + iVar14) >> 0xc & 0x3f;
             uVar7 = (ushort)uVar4;
             if (0x1f < uVar4) {
               uVar7 = uVar7 - 0x20 | 0x8000;
             }
-            *(ushort *)((int)piVar12 + 0x1e) = uVar7;
+            *(ushort *)((int)cursor3 + 0x1e) = uVar7;
             uVar6 = uVar6 + 1;
             iVar9 = iVar9 + 1;
-            *(ushort *)(piVar12 + 6) =
+            *(ushort *)(cursor3 + 6) =
                  (ushort)((uint)*(undefined4 *)(param_2[9] + iVar14) >> 0x12) & 0x1f;
-            *(byte *)((int)piVar12 + 0x2a) = (byte)*(undefined4 *)(param_2[0xb] + iVar14) & 0x1f;
-            *(byte *)((int)piVar12 + 0x2d) = (byte)(*(uint *)(param_2[0xb] + iVar14) >> 5) & 3;
-            *(byte *)((int)piVar12 + 0x2b) = (byte)(*(uint *)(param_2[0xb] + iVar14) >> 7) & 0x1f;
-            *(byte *)((int)piVar12 + 0x2e) = (byte)(*(uint *)(param_2[0xb] + iVar14) >> 0xc) & 3;
-            *(byte *)(piVar12 + 0xb) = (byte)(*(uint *)(param_2[0xb] + iVar14) >> 0xe) & 0x1f;
-            *(byte *)((int)piVar12 + 0x2f) = (byte)(*(uint *)(param_2[0xb] + iVar14) >> 0x13) & 3;
-            *(byte *)(piVar12 + 0xc) = (byte)(*(uint *)(param_2[0xb] + iVar14) >> 0x15) & 3;
-            *(byte *)((int)piVar12 + 0x31) = (byte)(*(uint *)(param_2[0xb] + iVar14) >> 0x17) & 0xf;
-            *(byte *)((int)piVar12 + 0x32) =
+            *(byte *)((int)cursor3 + 0x2a) = (byte)*(undefined4 *)(param_2[0xb] + iVar14) & 0x1f;
+            *(byte *)((int)cursor3 + 0x2d) = (byte)(*(uint *)(param_2[0xb] + iVar14) >> 5) & 3;
+            *(byte *)((int)cursor3 + 0x2b) = (byte)(*(uint *)(param_2[0xb] + iVar14) >> 7) & 0x1f;
+            *(byte *)((int)cursor3 + 0x2e) = (byte)(*(uint *)(param_2[0xb] + iVar14) >> 0xc) & 3;
+            *(byte *)(cursor3 + 0xb) = (byte)(*(uint *)(param_2[0xb] + iVar14) >> 0xe) & 0x1f;
+            *(byte *)((int)cursor3 + 0x2f) = (byte)(*(uint *)(param_2[0xb] + iVar14) >> 0x13) & 3;
+            *(byte *)(cursor3 + 0xc) = (byte)(*(uint *)(param_2[0xb] + iVar14) >> 0x15) & 3;
+            *(byte *)((int)cursor3 + 0x31) = (byte)(*(uint *)(param_2[0xb] + iVar14) >> 0x17) & 0xf;
+            *(byte *)((int)cursor3 + 0x32) =
                  (byte)((uint)*(undefined4 *)(param_2[0xb] + iVar14) >> 0x1b) & 7;
-            *(byte *)((int)piVar12 + 0x33) =
+            *(byte *)((int)cursor3 + 0x33) =
                  (byte)((uint)*(undefined4 *)(param_2[0xb] + iVar14) >> 0x1e) & 1;
-            *(byte *)(piVar12 + 0xd) = (byte)((uint)*(undefined4 *)(param_2[0xb] + iVar14) >> 0x1f);
-            *(byte *)((int)piVar12 + 0x39) = (byte)*(undefined4 *)(iVar14 + param_2[0xc]) & 0x1f;
-            *(byte *)(piVar12 + 0xf) = (byte)(*(uint *)(iVar14 + param_2[0xc]) >> 5) & 3;
-            *(byte *)((int)piVar12 + 0x3a) = (byte)(*(uint *)(iVar14 + param_2[0xc]) >> 7) & 0x1f;
-            *(byte *)((int)piVar12 + 0x3d) = (byte)(*(uint *)(iVar14 + param_2[0xc]) >> 0xc) & 3;
-            *(byte *)((int)piVar12 + 0x3b) = (byte)(*(uint *)(iVar14 + param_2[0xc]) >> 0xe) & 0x1f;
-            *(byte *)((int)piVar12 + 0x3e) = (byte)(*(uint *)(iVar14 + param_2[0xc]) >> 0x13) & 3;
-            *(byte *)((int)piVar12 + 0x3f) = (byte)(*(uint *)(iVar14 + param_2[0xc]) >> 0x15) & 3;
-            *(byte *)(piVar12 + 0x10) = (byte)(*(uint *)(iVar14 + param_2[0xc]) >> 0x17) & 0xf;
-            *(byte *)((int)piVar12 + 0x41) =
+            *(byte *)(cursor3 + 0xd) = (byte)((uint)*(undefined4 *)(param_2[0xb] + iVar14) >> 0x1f);
+            *(byte *)((int)cursor3 + 0x39) = (byte)*(undefined4 *)(iVar14 + param_2[0xc]) & 0x1f;
+            *(byte *)(cursor3 + 0xf) = (byte)(*(uint *)(iVar14 + param_2[0xc]) >> 5) & 3;
+            *(byte *)((int)cursor3 + 0x3a) = (byte)(*(uint *)(iVar14 + param_2[0xc]) >> 7) & 0x1f;
+            *(byte *)((int)cursor3 + 0x3d) = (byte)(*(uint *)(iVar14 + param_2[0xc]) >> 0xc) & 3;
+            *(byte *)((int)cursor3 + 0x3b) = (byte)(*(uint *)(iVar14 + param_2[0xc]) >> 0xe) & 0x1f;
+            *(byte *)((int)cursor3 + 0x3e) = (byte)(*(uint *)(iVar14 + param_2[0xc]) >> 0x13) & 3;
+            *(byte *)((int)cursor3 + 0x3f) = (byte)(*(uint *)(iVar14 + param_2[0xc]) >> 0x15) & 3;
+            *(byte *)(cursor3 + 0x10) = (byte)(*(uint *)(iVar14 + param_2[0xc]) >> 0x17) & 0xf;
+            *(byte *)((int)cursor3 + 0x41) =
                  (byte)((uint)*(undefined4 *)(iVar14 + param_2[0xc]) >> 0x1b) & 7;
             puVar2 = (undefined4 *)(iVar14 + param_2[0xc]);
             iVar14 = iVar14 + 4;
-            *(byte *)((int)piVar12 + 0x42) = (byte)((uint)*puVar2 >> 0x1e) & 1;
-            piVar12 = piVar12 + 0x12;
+            *(byte *)((int)cursor3 + 0x42) = (byte)((uint)*puVar2 >> 0x1e) & 1;
+            cursor3 = cursor3 + 0x12;
           } while (uVar6 <= uVar13);
         }
         bVar3 = uVar18 != 3;
@@ -3365,7 +3368,7 @@ int FUN_000be460(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   int *piVar15;
   int *piVar16;
   uint uVar17;
-  uint *puVar18;
+  uint *cursor;
   byte bVar19;
   byte bVar20;
   uint uVar21;
@@ -3442,7 +3445,7 @@ LAB_000be580:
     bVar20 = 0;
     bVar19 = 0;
     bVar5 = false;
-    puVar18 = puVar10 + 0x1a;
+    cursor = puVar10 + 0x1a;
     do {
       uVar8 = *puVar10;
       iVar13 = uVar7 + loopIndex;
@@ -3623,7 +3626,7 @@ LAB_000be580:
         bVar20 = bVar20 | *(byte *)((int)puVar10 + 0x23);
         bVar19 = bVar19 | *(byte *)((int)puVar10 + 0x15) | *(byte *)((int)puVar10 + 0x21);
       }
-      if ((loopIndex2 == uVar21) || ((puVar18[-8] == 2 && ((bVar4 || (*(char *)puVar18 != '\0')))))) {
+      if ((loopIndex2 == uVar21) || ((cursor[-8] == 2 && ((bVar4 || (*(char *)cursor != '\0')))))) {
         if (loopIndex3 == 0) {
           loopIndex3 = 1;
           uVar8 = 1;
@@ -3687,7 +3690,7 @@ LAB_000be580:
       }
       loopIndex2 = loopIndex2 + 1;
       puVar10 = puVar10 + 0x12;
-      puVar18 = puVar18 + 0x12;
+      cursor = cursor + 0x12;
     } while (loopIndex2 <= uVar21);
   }
   return;
@@ -4006,6 +4009,7 @@ int FUN_000bf400(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_6;
   undefined4 param_7;
 {
+  uint loopIndex3;
   uint loopIndex2;
   bool bVar1;
   byte bVar2;
@@ -4052,7 +4056,7 @@ LAB_000bf474:
     bVar3 = true;
     puVar14 = (uint *)(param_1 + loopIndex * 0x48);
     uVar17 = 0;
-    uVar13 = 0;
+    loopIndex3 = 0;
     bVar1 = false;
     uVar18 = 0;
     uVar15 = loopIndex;
@@ -4076,7 +4080,7 @@ LAB_000bf474:
         }
         uVar4 = puVar14[4] & 0xff00ff00;
         if ((uVar4 != 0) &&
-           ((*(ushort *)(puVar14 + 3) < uVar13 || (*(char *)((int)puVar14 + 0x19) != '\0')))) {
+           ((*(ushort *)(puVar14 + 3) < loopIndex3 || (*(char *)((int)puVar14 + 0x19) != '\0')))) {
           bVar1 = true;
         }
         cVar5 = *(char *)(puVar14 + 5);
@@ -4103,15 +4107,15 @@ LAB_000bf5b4:
         }
       }
       uVar15 = uVar15 + 1;
-      uVar13 = uVar13 + 1;
+      loopIndex3 = loopIndex3 + 1;
       puVar14 = puVar14 + 0x12;
     } while (uVar15 <= uVar12);
-    if (uVar13 != 0) goto LAB_000bf45c;
+    if (loopIndex3 != 0) goto LAB_000bf45c;
   }
-  uVar13 = 1;
+  loopIndex3 = 1;
 LAB_000bf45c:
   if ((*(short *)(param_1 + 0x20) == 0) && (*(short *)(param_1 + 0x12) == 0)) {
-    *(short *)(param_1 + 0x12) = (short)uVar13 + -1;
+    *(short *)(param_1 + 0x12) = (short)loopIndex3 + -1;
   }
   if (!bVar3) {
     *(undefined2 *)(param_1 + 0x28) = 1;
@@ -4496,6 +4500,7 @@ int FUN_000bfed0(psnProgram, param_2, param_3)
   uint *param_2;
   uint *param_3;
 {
+  int loopIndex;
   uint psnProgramWord8;
   ushort psnProgramShort22;
   ushort psnProgramShort28;
@@ -4561,7 +4566,7 @@ int FUN_000bfed0(psnProgram, param_2, param_3)
   int iVar56;
   int iVar57;
   byte bVar58;
-  uint uVar59;
+  uint loopIndex2;
   uint *puVar60;
   uint local_78;
   uint local_74;
@@ -4590,7 +4595,7 @@ int FUN_000bfed0(psnProgram, param_2, param_3)
   psnProgramWord8 = *(uint *)(psnProgram + 8);
   if ((*(int *)(psnProgram + 0x48) == 1) && (psnProgramWord8 != 0)) {
     piVar46 = (int *)(psnProgram + 0x90);
-    uVar59 = 1;
+    loopIndex2 = 1;
     piVar39 = piVar46;
     uVar43 = 0;
     piVar52 = (int *)(psnProgram + 0x48);
@@ -4614,18 +4619,18 @@ int FUN_000bfed0(psnProgram, param_2, param_3)
         param_2[uVar43 + 1] = uVar40;
         param_2[uVar43 + 1] = (*(ushort *)((int)piVar52 + 6) & 0x7f) << 0x12 | uVar40;
       }
-      uVar59 = uVar59 + 1;
+      loopIndex2 = loopIndex2 + 1;
       if (*piVar46 != 1) break;
       piVar46 = piVar46 + 0x12;
       piVar39 = piVar45 + 0x12;
       uVar43 = uVar48;
       piVar52 = piVar45;
-    } while (uVar59 <= psnProgramWord8);
+    } while (loopIndex2 <= psnProgramWord8);
     uVar43 = uVar48 & 0xff;
     if (uVar48 == 0) goto LAB_000c004c;
   }
   else {
-    uVar59 = 1;
+    loopIndex2 = 1;
 LAB_000c004c:
     uVar43 = 1;
     param_2[1] = 0;
@@ -4633,7 +4638,7 @@ LAB_000c004c:
   uVar43 = uVar43 - 1 & 0xf;
   *param_2 = uVar43;
   *param_2 = (*(byte *)(psnProgram + 0xd) & 7) << 5 | uVar43;
-  if (psnProgramWord8 < uVar59) {
+  if (psnProgramWord8 < loopIndex2) {
     iVar56 = 0;
     bVar58 = 0;
     iVar53 = 0;
@@ -4643,10 +4648,10 @@ LAB_000c004c:
     local_68 = &local_6c;
     local_60 = &local_70;
     bVar58 = 0;
-    puVar60 = (uint *)(uVar59 * 0x48 + psnProgram);
+    puVar60 = (uint *)(loopIndex2 * 0x48 + psnProgram);
     local_64 = &local_74;
     bVar25 = true;
-    iVar49 = 0;
+    loopIndex = 0;
     iVar56 = 0;
     do {
       iVar57 = iVar56;
@@ -4670,13 +4675,13 @@ LAB_000c004c:
             uVar19 = *(ushort *)((int)puVar60 + 0x12);
             bVar8 = *(byte *)(puVar60 + 1);
             bVar9 = *(byte *)((int)puVar60 + 5);
-            *(uint *)(iVar49 + param_3[4] + 4) =
+            *(uint *)(loopIndex + param_3[4] + 4) =
                  (*(byte *)((int)puVar60 + 0x1b) & 1) << 0x19 |
                  (*(byte *)(puVar60 + 7) & 1) << 0x1a |
                  (*(byte *)(puVar60 + 6) & 1) << 0x1b |
                  (*(byte *)((int)puVar60 + 0x1a) & 7) << 0x16 |
                  (*(byte *)((int)puVar60 + 0x19) & 0xf) << 0x10;
-            *(uint *)(iVar49 + param_3[4] + 8) =
+            *(uint *)(loopIndex + param_3[4] + 8) =
                  (uVar43 & 0x3000000) << 6 |
                  (uVar43 & 0xc000000) << 2 |
                  uVar43 >> 2 & 0xc000000 |
@@ -4694,7 +4699,7 @@ LAB_000c004c:
                      (bVar3 & 1) << 0x16 |
                      (bVar2 & 7) << 0x19 |
                      (bVar1 & 1) << 6 | (bVar9 & 7) << 3 | (bVar8 & 1) << 2 | 3;
-            *(uint *)(iVar49 + param_3[4] + 0xc) =
+            *(uint *)(loopIndex + param_3[4] + 0xc) =
                  uVar43 << 0x1e |
                  (uVar43 & 0xc) << 0x1a |
                  (uVar43 & 0x30) << 0x16 |
@@ -4705,8 +4710,8 @@ LAB_000c004c:
                  uVar43 >> 6 & 0x300 |
                  (uVar19 & 0x4000) << 9 |
                  (uVar19 & 0x7f) << 0x10 | uVar18 >> 7 & 0x80 | uVar18 & 0x7f;
-            *(undefined4 *)(iVar49 + param_3[4] + 0x10) = 0;
-            *(undefined4 *)(iVar49 + param_3[4] + 0x14) = 0;
+            *(undefined4 *)(loopIndex + param_3[4] + 0x10) = 0;
+            *(undefined4 *)(loopIndex + param_3[4] + 0x14) = 0;
           }
         }
         else {
@@ -4818,7 +4823,7 @@ LAB_000c004c:
           bVar25 = false;
           bVar15 = *(byte *)((int)puVar60 + 0x2f);
           bVar16 = *(byte *)((int)puVar60 + 0x3e);
-          *(uint *)(iVar49 + param_3[4] + 4) =
+          *(uint *)(loopIndex + param_3[4] + 4) =
                (uint)bVar1 << 0x1e |
                (uVar18 & 0x4000) << 0xf |
                (uVar18 & 0x8000) << 0xd |
@@ -4827,7 +4832,7 @@ LAB_000c004c:
                (uVar17 & 0x8000) << 3 |
                (uVar43 & 0xff | uVar17 & 0x7f) << 10 |
                uVar24 >> 5 & 0x200 | uVar24 >> 7 & 0x100 | uVar40 & 0xff | uVar24 & 0x7f;
-          *(uint *)(iVar49 + param_3[4] + 8) =
+          *(uint *)(loopIndex + param_3[4] + 8) =
                (uint)bVar2 << 0x1e |
                (uVar21 & 0x4000) << 0xf |
                (uVar21 & 0x8000) << 0xd |
@@ -4836,7 +4841,7 @@ LAB_000c004c:
                (uVar20 & 0x8000) << 3 |
                (uVar54 & 0xff | uVar20 & 0x7f) << 10 |
                uVar19 >> 5 & 0x200 | uVar19 >> 7 & 0x100 | uVar50 & 0xff | uVar19 & 0x7f;
-          *(uint *)(iVar49 + param_3[4] + 0xc) =
+          *(uint *)(loopIndex + param_3[4] + 0xc) =
                (uint)bVar7 << 0x1f |
                (bVar6 & 3) << 0x1d |
                (bVar5 & 7) << 0x1a |
@@ -4845,7 +4850,7 @@ LAB_000c004c:
                uVar31 << 0x15 |
                uVar30 << 0x12 |
                uVar29 << 0xf | uVar44 << 0xd | uVar28 << 8 | uVar27 << 5 | uVar26 << 2 | uVar41;
-          *(uint *)(iVar49 + param_3[4] + 0x10) =
+          *(uint *)(loopIndex + param_3[4] + 0x10) =
                uVar23 >> 3 & 0x800 |
                (uVar23 & 0x7f) << 4 |
                bVar13 & 0xf |
@@ -4855,7 +4860,7 @@ LAB_000c004c:
                (bVar9 & 3) << 0x18 |
                (bVar8 & 3) << 0x11 | uVar35 << 0x15 | uVar34 << 0x13 | uVar33 << 0xe | uVar32 << 0xc
           ;
-          *(uint *)(iVar49 + param_3[4] + 0x14) =
+          *(uint *)(loopIndex + param_3[4] + 0x14) =
                (uint)bVar16 << 0x1e |
                (bVar15 & 3) << 0x17 |
                (local_78 & 7) << 0x1b |
@@ -4888,25 +4893,25 @@ LAB_000c004c:
         bVar14 = *(byte *)(puVar60 + 5);
         bVar15 = *(byte *)(puVar60 + 6);
         bVar16 = *(byte *)((int)puVar60 + 0x15);
-        *(undefined4 *)(param_3[4] + iVar49 + 4) = 0;
+        *(undefined4 *)(param_3[4] + loopIndex + 4) = 0;
         uVar48 = (bVar10 & 1) << 10 | (bVar9 & 1) << 6 | (bVar8 & 7) << 3 | (bVar7 & 1) << 2 | 2;
-        *(uint *)(param_3[4] + iVar49 + 8) =
+        *(uint *)(param_3[4] + loopIndex + 8) =
              (bVar13 & 1) << 0x1c |
              (bVar16 & 3) << 0x1a |
              (bVar14 & 3) << 0x18 |
              (bVar6 & 0x1f) << 0x10 |
              (uint)bVar5 << 8 | (bVar4 & 3) << 6 | (bVar3 & 1) << 5 | (bVar2 & 1) << 4 | bVar1 & 7;
-        *(uint *)(param_3[4] + iVar49 + 0xc) =
+        *(uint *)(param_3[4] + loopIndex + 0xc) =
              (uint)bVar12 << 0x1f | (uVar24 & 0x1ff) << 0x10 | (bVar15 & 0x1f) << 8 | bVar11 & 0x1f;
-        *(undefined4 *)(param_3[4] + iVar49 + 0x10) = 0;
-        *(undefined4 *)(param_3[4] + iVar49 + 0x14) = 0;
+        *(undefined4 *)(param_3[4] + loopIndex + 0x10) = 0;
+        *(undefined4 *)(param_3[4] + loopIndex + 0x14) = 0;
       }
-      uVar59 = uVar59 + 1;
+      loopIndex2 = loopIndex2 + 1;
       iVar56 = iVar57 + 1;
       puVar60 = puVar60 + 0x12;
-      *(uint *)(param_3[4] + iVar49) = uVar48;
-      iVar49 = iVar49 + 0x18;
-    } while (uVar59 <= psnProgramWord8);
+      *(uint *)(param_3[4] + loopIndex) = uVar48;
+      loopIndex = loopIndex + 0x18;
+    } while (loopIndex2 <= psnProgramWord8);
     iVar49 = iVar56;
     if (!bVar25) goto LAB_000c07dc;
     iVar53 = iVar56 * 0x18;
@@ -7643,6 +7648,12 @@ int psnDecReplaceSourceAddress(entry, param_2, param_3, param_4, oldAddressOffse
   undefined4 sourceSwizzlePtr;
   int param_8;
 {
+  int loopIndex9;
+  int loopIndex8;
+  int loopIndex7;
+  int loopIndex5;
+  int loopIndex4;
+  int loopIndex3;
   bool bVar1;
   bool bVar2;
   bool bVar3;
@@ -7659,7 +7670,7 @@ int psnDecReplaceSourceAddress(entry, param_2, param_3, param_4, oldAddressOffse
   uint loopIndex2;
   uint uVar14;
   int iVar15;
-  int iVar16;
+  int loopIndex6;
   undefined2 *puVar17;
   int iVar18;
   ushort *puVar19;
@@ -7680,12 +7691,12 @@ int psnDecReplaceSourceAddress(entry, param_2, param_3, param_4, oldAddressOffse
   uVar5 = (ushort)oldAddressOffset;
   if ((oldAddressOffset == 0x10) || (oldAddressOffset == 0x12)) {
     oldAddressOffset = oldAddressOffset & 0xffff;
-    iVar15 = 0;
+    loopIndex5 = 0;
     puVar6 = (ushort *)(entry + uVar11 * 0x40 + 8);
     do {
-      bVar1 = iVar15 != 2;
+      bVar1 = loopIndex5 != 2;
       puVar6[1] = uVar5;
-      iVar15 = iVar15 + 1;
+      loopIndex5 = loopIndex5 + 1;
       *puVar6 = *puVar6 & 0xfcff;
       puVar6 = puVar6 + 2;
     } while (bVar1);
@@ -7702,20 +7713,20 @@ int psnDecReplaceSourceAddress(entry, param_2, param_3, param_4, oldAddressOffse
       if (((uVar10 < 3) && ((puVar6[1] & 0x1f) == param_6)) &&
          (iVar15 = ((*puVar6 & 0x300) == 0x100 ^ 1) * 3,
          *(ushort *)((iVar15 + uVar10) * 2 + entry + 0x80) == param_2)) {
-        iVar12 = 0;
-        iVar18 = 0;
+        loopIndex3 = 0;
+        loopIndex8 = 0;
         do {
-          puVar7 = (undefined4 *)((int)aiStack_58 + iVar18);
-          iVar16 = 0;
+          puVar7 = (undefined4 *)((int)aiStack_58 + loopIndex8);
+          loopIndex6 = 0;
           do {
-            bVar3 = iVar16 != 2;
+            bVar3 = loopIndex6 != 2;
             *puVar7 = 0;
-            iVar16 = iVar16 + 1;
+            loopIndex6 = loopIndex6 + 1;
             puVar7 = puVar7 + 1;
           } while (bVar3);
-          bVar3 = iVar12 != 1;
-          iVar18 = iVar18 + 0xc;
-          iVar12 = iVar12 + 1;
+          bVar3 = loopIndex3 != 1;
+          loopIndex8 = loopIndex8 + 0xc;
+          loopIndex3 = loopIndex3 + 1;
         } while (bVar3);
         loopIndex = 0;
         iVar12 = entry;
@@ -7755,26 +7766,26 @@ int psnDecReplaceSourceAddress(entry, param_2, param_3, param_4, oldAddressOffse
           iVar12 = iVar12 + 0x40;
           loopIndex = loopIndex + 1;
         } while (bVar3);
-        iVar18 = 0;
-        iVar12 = 0x80;
+        loopIndex9 = 0;
+        loopIndex4 = 0x80;
         param_4 = 0;
         do {
           piVar9 = (int *)((int)aiStack_58 + param_4);
-          puVar17 = (undefined2 *)(entry + iVar12);
-          iVar16 = 0;
+          puVar17 = (undefined2 *)(entry + loopIndex4);
+          loopIndex7 = 0;
           do {
             if (*piVar9 == 0) {
               *puVar17 = 0xffff;
             }
-            bVar3 = iVar16 != 2;
+            bVar3 = loopIndex7 != 2;
             piVar9 = piVar9 + 1;
             puVar17 = puVar17 + 1;
-            iVar16 = iVar16 + 1;
+            loopIndex7 = loopIndex7 + 1;
           } while (bVar3);
-          bVar3 = iVar18 != 1;
+          bVar3 = loopIndex9 != 1;
           param_4 = param_4 + 0xc;
-          iVar12 = iVar12 + 6;
-          iVar18 = iVar18 + 1;
+          loopIndex4 = loopIndex4 + 6;
+          loopIndex9 = loopIndex9 + 1;
         } while (bVar3);
         param_8 = 0;
         sourceSwizzlePtr = 0xffff;
@@ -7906,14 +7917,14 @@ int psnDecDestMatchesRegMask(entry, registerNumber, componentMask, passThroughR6
   undefined4 passThroughR9;
 {
   bool bVar1;
-  int iVar2;
+  int loopIndex;
   
-  iVar2 = 0;
+  loopIndex = 0;
   while ((*(ushort *)(entry + 4) != registerNumber || ((*(ushort *)(entry + 6) & (*(unsigned short *)((unsigned char *)&(componentMask) + 2))) == 0)))
   {
-    bVar1 = iVar2 == 1;
+    bVar1 = loopIndex == 1;
     entry = entry + 0x40;
-    iVar2 = iVar2 + 1;
+    loopIndex = loopIndex + 1;
     if (bVar1) {
       return 0;
     }
@@ -9598,7 +9609,7 @@ int psnRaAssignDefinition(param_1, param_2, param_3, param_4, param_5, param_6, 
   ushort uVar1;
   ushort uVar2;
   uint uVar3;
-  ushort *puVar4;
+  ushort *cursor;
   int iVar5;
   uint uVar6;
   ushort *puVar7;
@@ -9640,13 +9651,13 @@ int psnRaAssignDefinition(param_1, param_2, param_3, param_4, param_5, param_6, 
           uVar6 = 1;
         }
         else {
-          puVar4 = puVar10 + 3;
+          cursor = puVar10 + 3;
           uVar3 = 0;
           do {
             uVar6 = uVar3;
-            uVar9 = *puVar4;
+            uVar9 = *cursor;
             uVar3 = uVar6 + 1;
-            puVar4 = puVar4 + 2;
+            cursor = cursor + 2;
           } while ((uVar2 & ~uVar9) != 0);
           iVar5 = uVar3 * 4;
           uVar6 = uVar6 + 2;
@@ -9702,6 +9713,8 @@ int psnRaAssignDefinition(param_1, param_2, param_3, param_4, param_5, param_6, 
 int FUN_000c5e60(psnProgram)
   undefined4 *psnProgram;
 {
+  undefined4 *cursor7;
+  int loopIndex2;
   uint loopIndex;
   uint uVar1;
   ushort uVar2;
@@ -9721,18 +9734,18 @@ int FUN_000c5e60(psnProgram)
   char *pcVar16;
   ushort *puVar17;
   ushort *puVar18;
-  ushort *puVar19;
-  ushort *puVar20;
+  ushort *cursor2;
+  ushort *cursor3;
   ushort *puVar21;
-  ushort *puVar22;
+  ushort *cursor4;
   char *pcVar23;
   ushort *puVar24;
-  ushort *puVar25;
-  ushort *puVar26;
+  ushort *cursor5;
+  ushort *cursor6;
   char *pcVar27;
-  char *pcVar28;
+  char *cursor;
   uint uVar29;
-  int iVar30;
+  int remaining;
   /* issue #64 live-repro (crash #8, past the ilRewriteForTextureState fixes): local_98/local_94/local_90/
    * local_8c/local_88/local_84/local_80/local_7c were 8 separately-declared 4-byte locals,
    * each initialized to the same value below, that a later loop (`*(short*)((int)&local_98 +
@@ -9813,16 +9826,16 @@ int FUN_000c5e60(psnProgram)
     pcVar9 = (char *)((int)psnProgram + 0x53);
     loopIndex = 1;
     uVar11 = 0;
-    puVar19 = puVar5;
-    puVar20 = puVar4;
-    puVar22 = puVar21;
-    puVar25 = puVar24;
-    puVar26 = puVar15;
-    pcVar28 = pcVar23;
-    puVar3 = psnProgram;
+    cursor2 = puVar5;
+    cursor3 = puVar4;
+    cursor4 = puVar21;
+    cursor5 = puVar24;
+    cursor6 = puVar15;
+    cursor = pcVar23;
+    cursor7 = psnProgram;
     do {
-      puVar3 = puVar3 + 0x12;
-      switch(*puVar3) {
+      cursor7 = cursor7 + 0x12;
+      switch(*cursor7) {
       case 1:
         if ((*pcVar9 != '\0') && (uVar11 < *puVar6)) {
           uVar11 = *puVar6;
@@ -9834,7 +9847,7 @@ int FUN_000c5e60(psnProgram)
         break;
       case 2:
         if (local_70 == 0) {
-          if (*pcVar28 != '\0') {
+          if (*cursor != '\0') {
             local_5c = local_5c + 1 & 0xffff;
             local_78 = local_78 + 1 & 0xffff;
           }
@@ -9847,8 +9860,8 @@ int FUN_000c5e60(psnProgram)
           if ((uVar1 & 0xba) == 0) {
             if ((uVar1 & 4) == 0) {
               if ((uVar1 & 0x40) != 0) {
-                uVar2 = *puVar20;
-                if (*puVar20 <= uVar11) {
+                uVar2 = *cursor3;
+                if (*cursor3 <= uVar11) {
                   uVar2 = uVar11;
                 }
                 uVar11 = *puVar24;
@@ -9858,14 +9871,14 @@ int FUN_000c5e60(psnProgram)
                 goto LAB_000c60a8;
               }
             }
-            else if (uVar11 < *puVar19) {
-              uVar11 = *puVar19;
+            else if (uVar11 < *cursor2) {
+              uVar11 = *cursor2;
             }
           }
           else {
 LAB_000c60a8:
-            if (uVar11 < *puVar19) {
-              uVar11 = *puVar19;
+            if (uVar11 < *cursor2) {
+              uVar11 = *cursor2;
             }
             if (uVar11 < *puVar15) {
               uVar11 = *puVar15;
@@ -9884,8 +9897,8 @@ LAB_000c60a8:
         if (local_5c == 0) {
           local_5c = 1;
         }
-        if ((*pcVar27 != '\0') && (uVar11 < *puVar26)) {
-          uVar11 = *puVar26;
+        if ((*pcVar27 != '\0') && (uVar11 < *cursor6)) {
+          uVar11 = *cursor6;
         }
         uVar2 = *puVar5;
         if ((uVar2 & 0x8000) == 0) {
@@ -9905,7 +9918,7 @@ LAB_000c60a8:
         else if (local_60 < (uVar2 & 0x7fff)) {
           local_60 = uVar2 & 0x7fff;
         }
-        uVar2 = *puVar25;
+        uVar2 = *cursor5;
         if ((uVar2 & 0x8000) == 0) {
           if (uVar11 < uVar2) {
             uVar11 = uVar2;
@@ -9917,7 +9930,7 @@ LAB_000c60a8:
         if ((*pcVar23 != '\0') && (uVar11 < *puVar13)) {
           uVar11 = *puVar13;
         }
-        uVar2 = *puVar22;
+        uVar2 = *cursor4;
         if ((uVar2 & 0x8000) == 0) {
           if (uVar11 < uVar2) {
             uVar11 = uVar2;
@@ -9957,21 +9970,21 @@ LAB_000c60a8:
       pcVar16 = pcVar16 + 0x48;
       puVar17 = puVar17 + 0x24;
       puVar18 = puVar18 + 0x24;
-      puVar22 = puVar22 + 0x24;
+      cursor4 = cursor4 + 0x24;
       puVar13 = puVar13 + 0x24;
       pcVar23 = pcVar23 + 0x48;
-      puVar25 = puVar25 + 0x24;
+      cursor5 = cursor5 + 0x24;
       puVar4 = puVar4 + 0x24;
       puVar5 = puVar5 + 0x24;
-      puVar26 = puVar26 + 0x24;
+      cursor6 = cursor6 + 0x24;
       pcVar27 = pcVar27 + 0x48;
       pbVar14 = pbVar14 + 0x48;
       puVar15 = puVar15 + 0x24;
-      puVar19 = puVar19 + 0x24;
+      cursor2 = cursor2 + 0x24;
       puVar24 = puVar24 + 0x24;
-      puVar20 = puVar20 + 0x24;
+      cursor3 = cursor3 + 0x24;
       puVar21 = puVar21 + 0x24;
-      pcVar28 = pcVar28 + 0x48;
+      cursor = cursor + 0x48;
       puVar10 = puVar10 + 0x24;
       pcVar7 = pcVar7 + 0x48;
       puVar6 = puVar6 + 0x24;
@@ -10005,23 +10018,23 @@ LAB_000c6350:
   *(short *)((int)psnProgram + 0x16) = (short)local_5c;
   *(undefined2 *)(psnProgram + 10) = 0;
   *(short *)(psnProgram + 8) = (short)local_6c;
-  iVar8 = 0;
-  iVar30 = 0x10;
+  loopIndex2 = 0;
+  remaining = 0x10;
   *(short *)(psnProgram + 7) = (short)local_68;
   *(short *)((int)psnProgram + 0x1a) = (short)local_64;
   *(undefined2 *)(psnProgram + 9) = (*(unsigned short *)((unsigned char *)&(local_60) + 2));
   puVar3 = psnProgram;
   do {
-    uVar11 = *(ushort *)((int)local_98_arr + iVar8);
+    uVar11 = *(ushort *)((int)local_98_arr + loopIndex2);
     if (0xff < uVar11) {
       uVar11 = 0xff;
-      *(undefined2 *)((int)local_98_arr + iVar8) = 0xff;
+      *(undefined2 *)((int)local_98_arr + loopIndex2) = 0xff;
     }
     *(char *)((int)puVar3 + 0x2a) = (char)uVar11;
-    iVar8 = iVar8 + 2;
+    loopIndex2 = loopIndex2 + 2;
     puVar3 = (undefined4 *)((int)puVar3 + 1);
-    iVar30 = iVar30 + -1;
-  } while (iVar30 != 0);
+    remaining = remaining + -1;
+  } while (remaining != 0);
   *(undefined2 *)(psnProgram + 5) = 1;
   return;
 }
@@ -10048,7 +10061,7 @@ int psnReallocateTemps(psnState, psnProgram, param_3, passThroughR6, sourceUsage
   byte bVar9;
   uint uVar10;
   int psnProgramWord8;
-  int iVar12;
+  int loopIndex2;
   uint *puVar13;
   uint *puVar14;
   ushort auStack_8b8 [4];
@@ -10101,7 +10114,7 @@ int psnReallocateTemps(psnState, psnProgram, param_3, passThroughR6, sourceUsage
   psnProgramWord8 = *(int *)(psnProgram + 8);
   if (psnProgramWord8 != 0) {
     uVar10 = 0;
-    iVar12 = 0;
+    loopIndex2 = 0;
     puVar13 = (uint *)0x0;
     puVar14 = (uint *)(psnProgram + psnProgramWord8 * 0x48);
     do {
@@ -10386,10 +10399,10 @@ code_r0x000c6c50:
       auStack_8b8[2] = (*(unsigned short *)((unsigned char *)&(uStack_884) + 2));
       auStack_8b8[3] = (*(unsigned short *)((unsigned char *)&(uStack_880) + 2));
 LAB_000c6e10:
-      iVar12 = iVar12 + 1;
+      loopIndex2 = loopIndex2 + 1;
       puVar13 = puVar14;
       puVar14 = puVar14 + -0x12;
-    } while (psnProgramWord8 != iVar12);
+    } while (psnProgramWord8 != loopIndex2);
   }
   ((int (*)())FUN_000c5e60)(psnProgram);
   return;
@@ -10708,20 +10721,20 @@ int ilAllocLowestFreeBit8(programRecord, passThroughR4, passThroughR5, passThrou
   undefined4 passThroughR10;
 {
   uint uVar1;
-  uint uVar2;
-  int iVar3;
+  uint loopIndex;
+  int remaining;
   
-  uVar2 = 0;
-  iVar3 = 8;
+  loopIndex = 0;
+  remaining = 8;
   do {
-    uVar1 = 1 << (uVar2 & 0x3f);
+    uVar1 = 1 << (loopIndex & 0x3f);
     if ((uVar1 & *(uint *)(programRecord + 8)) == 0) {
       *(uint *)(programRecord + 8) = uVar1 | *(uint *)(programRecord + 8);
-      return uVar2;
+      return loopIndex;
     }
-    uVar2 = uVar2 + 1;
-    iVar3 = iVar3 + -1;
-  } while (iVar3 != 0);
+    loopIndex = loopIndex + 1;
+    remaining = remaining + -1;
+  } while (remaining != 0);
   return 0x11;
 }
 
