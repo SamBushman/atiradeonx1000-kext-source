@@ -2305,22 +2305,22 @@ int ColorGraph__countSameClassNeighbors(nodeRecord, node, classArray, graph)
 int FUN_00134db0(param_1)
   undefined4 *param_1;
 {
-  int iVar1;
-  int *piVar2;
+  int remainingWords;
+  int *bitSet;
   
-  piVar2 = (int *)*param_1;
-  iVar1 = *piVar2;
-  if (iVar1 == 0) {
+  bitSet = (int *)*param_1;
+  remainingWords = *bitSet;
+  if (remainingWords == 0) {
     return;
   }
-  if (iVar1 == 0) {
-    iVar1 = 1;
+  if (remainingWords == 0) {
+    remainingWords = 1;
   }
   do {
-    piVar2[2] = 0;
-    piVar2 = piVar2 + 1;
-    iVar1 = iVar1 + -1;
-  } while (iVar1 != 0);
+    bitSet[2] = 0;
+    bitSet = bitSet + 1;
+    remainingWords = remainingWords + -1;
+  } while (remainingWords != 0);
   return;
 }
 
@@ -2404,16 +2404,17 @@ int storeAfterLocate(param_1, param_2, param_3, param_4, compiler)
 int FUN_00135010(param_1)
   int param_1;
 {
-  int iVar1;
+  int sideTable;
+  int chunk;
   
-  while (iVar1 = *(int *)(param_1 + 8), iVar1 != 0) {
-    *(undefined4 *)(param_1 + 8) = *(undefined4 *)(iVar1 + 0x1c);
-    Arena__free(*(undefined4 *)(iVar1 + -4),iVar1 + -4);
+  while (chunk = *(int *)(param_1 + 8), chunk != 0) {
+    *(undefined4 *)(param_1 + 8) = *(undefined4 *)(chunk + 0x1c);
+    Arena__free(*(undefined4 *)(chunk + -4),chunk + -4);
   }
-  iVar1 = *(int *)(param_1 + 0x10);
-  if (iVar1 != 0) {
-    Arena__free(*(undefined4 *)(iVar1 + 0xc),*(undefined4 *)(iVar1 + 8));
-    Arena__free(*(undefined4 *)(iVar1 + -4),iVar1 + -4);
+  sideTable = *(int *)(param_1 + 0x10);
+  if (sideTable != 0) {
+    Arena__free(*(undefined4 *)(sideTable + 0xc),*(undefined4 *)(sideTable + 8));
+    Arena__free(*(undefined4 *)(sideTable + -4),sideTable + -4);
     return;
   }
   return;
@@ -2423,16 +2424,17 @@ int FUN_00135010(param_1)
 int FUN_00135090(param_1)
   int param_1;
 {
-  int iVar1;
+  int sideTable;
+  int chunk;
   
-  while (iVar1 = *(int *)(param_1 + 8), iVar1 != 0) {
-    *(undefined4 *)(param_1 + 8) = *(undefined4 *)(iVar1 + 0x1c);
-    Arena__free(*(undefined4 *)(iVar1 + -4),iVar1 + -4);
+  while (chunk = *(int *)(param_1 + 8), chunk != 0) {
+    *(undefined4 *)(param_1 + 8) = *(undefined4 *)(chunk + 0x1c);
+    Arena__free(*(undefined4 *)(chunk + -4),chunk + -4);
   }
-  iVar1 = *(int *)(param_1 + 0x10);
-  if (iVar1 != 0) {
-    Arena__free(*(undefined4 *)(iVar1 + 0xc),*(undefined4 *)(iVar1 + 8));
-    Arena__free(*(undefined4 *)(iVar1 + -4),iVar1 + -4);
+  sideTable = *(int *)(param_1 + 0x10);
+  if (sideTable != 0) {
+    Arena__free(*(undefined4 *)(sideTable + 0xc),*(undefined4 *)(sideTable + 8));
+    Arena__free(*(undefined4 *)(sideTable + -4),sideTable + -4);
     return;
   }
   return;
@@ -4488,24 +4490,25 @@ int FUN_001382b8(inst, param_2, param_3)
   uint param_2;
   uint *param_3;
 {
+  uint laneIndexAfter;
   int operandRecord;
-  int iVar1;
-  uint uVar2;
+  int vtableQueryResult;
+  uint laneIndexBefore;
   
   *param_3 = param_2;
 LAB_001382d4:
   do {
-    uVar2 = *param_3;
+    laneIndexBefore = *param_3;
     operandRecord = IRInst__getOperandRecord(inst,0);
-    if (*(char *)(uVar2 + operandRecord + 0x10) == '\0') {
+    if (*(char *)(laneIndexBefore + operandRecord + 0x10) == '\0') {
       if ((inst[5] & 1U) != 0) {
         return inst;
       }
-      iVar1 = (**(code **)(*inst + 100))(inst);
-      if (iVar1 == 0) goto LAB_001382d4;
-      uVar2 = *param_3;
+      vtableQueryResult = (**(code **)(*inst + 100))(inst);
+      if (vtableQueryResult == 0) goto LAB_001382d4;
+      laneIndexAfter = *param_3;
       operandRecord = IRInst__getOperandRecord(inst,1);
-      *param_3 = (uint)*(byte *)(uVar2 + operandRecord + 0x10);
+      *param_3 = (uint)*(byte *)(laneIndexAfter + operandRecord + 0x10);
       inst = (int *)IRInst__getOperandSource(inst,1);
     }
     else {
@@ -5071,10 +5074,10 @@ int FUN_00139034(param_1, param_2, param_3, param_4)
   int param_3;
   int param_4;
 {
-  int iVar1;
+  int currentValue;
   
-  iVar1 = *(int *)(param_1 + 0x158);
-  if (((iVar1 != param_3) && (iVar1 != param_4)) && (iVar1 != param_2)) {
+  currentValue = *(int *)(param_1 + 0x158);
+  if (((currentValue != param_3) && (currentValue != param_4)) && (currentValue != param_2)) {
     return 1;
   }
   return 0;
