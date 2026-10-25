@@ -1069,7 +1069,7 @@ int FUN_0000b750(ctx)
     if ((((unsigned char *)0x000042fc)[*(int *)(ctx + GLD_engineState)] != '\0') ||
        (*(short *)(arrayState + 0x312) != -0x7a4c)) {
       if (*(int *)(vertexArray[1] + 0x84) == 0 && *(int *)(vertexArray[1] + 0x88) == 0) goto LAB_0000b830;
-      arrayState = FUN_0001dc10(ctx,vertexArray);
+      arrayState = gld_prepareVertexArrayBacking(ctx,vertexArray);
       goto joined_r0x0000b814;
     }
   }

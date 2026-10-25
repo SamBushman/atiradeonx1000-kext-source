@@ -206,9 +206,9 @@
 0x1c380	3664	FUN_0001c380	part_003	converted
 0x1d1e0	808	dxtDecompressImage	part_003	converted
 0x1d7c0	148	floatToHalfBits	part_003	converted
-0x1d880	704	FUN_0001d880	part_003	converted
+0x1d880	704	gld_validateVertexArrayStreams	part_003	converted
 0x1db50	180	gldComputeVertexChunking	part_003	converted
-0x1dc10	976	FUN_0001dc10	part_003	converted
+0x1dc10	976	gld_prepareVertexArrayBacking	part_003	converted
 0x1dff0	140	gld_startPacket	part_003	converted
 0x1e080	480	_gldPageoffBuffer	part_003	converted
 0x1e270	8	returnZero_1e270	part_003	converted

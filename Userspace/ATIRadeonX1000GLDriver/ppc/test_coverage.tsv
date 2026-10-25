@@ -207,9 +207,9 @@
 0x1c380	FUN_0001c380	3664	yes	
 0x1d1e0	dxtDecompressImage	1376	yes	
 0x1d7c0	floatToHalfBits	148	yes	
-0x1d880	FUN_0001d880	704	yes	
+0x1d880	gld_validateVertexArrayStreams	704	yes	
 0x1db50	gldComputeVertexChunking	180	yes	
-0x1dc10	FUN_0001dc10	976	yes	
+0x1dc10	gld_prepareVertexArrayBacking	976	yes	
 0x1dff0	gld_startPacket	140	no	indirect call (driver context / vtable / callback)
 0x1e080	_gldPageoffBuffer	480	no	calls an import (io_connect_method_scalarI_structureI); calls an import (pthread_mutex_lock); calls an import (pthread_mutex_unlock)
 0x1e270	returnZero_1e270	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises

@@ -370,11 +370,11 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 1d814	1d820	padding	floatToHalfBits	3	
 1d834	1d840	padding	floatToHalfBits	3	
 1d874	1d880	padding	glCopyPixels_impl	3	
-1d948	1d950	padding	FUN_0001d880	2	
+1d948	1d950	padding	gld_validateVertexArrayStreams	2	
 1db48	1db50	padding	glCopyPixels_impl	2	
 1dbac	1dbb0	padding	gldComputeVertexChunking	1	
 1dc08	1dc10	padding	glCopyPixels_impl	2	
-1df88	1df90	padding	FUN_0001dc10	2	
+1df88	1df90	padding	gld_prepareVertexArrayBacking	2	
 1dfe8	1dff0	padding	glCopyPixels_impl	2	
 1e07c	1e080	padding	glCopyPixels_impl	1	
 1e194	1e1a0	padding	_gldPageoffBuffer	3	
