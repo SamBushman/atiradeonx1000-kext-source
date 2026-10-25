@@ -1086,30 +1086,30 @@ code_r0x00132990:
 }
 
 /* FUN_001330f4 @ 0x1330f4 (328 bytes) */
-int FUN_001330f4(param_1, inst)
-  undefined4 param_1;
+int FUN_001330f4(graph, inst)
+  undefined4 graph;
   int *inst;
 {
   int *operandVReg;
-  int iVar2;
-  undefined4 uVar3;
-  int iVar4;
-  int *piVar5;
+  int sourceRoot;
+  undefined4 instRoot;
+  int edgesAdded;
+  int *extraSource;
   
   do {
     operandVReg = (int *)IRInst__getOperandSource(inst,inst[0x21]);
-    if (((operandVReg[0x20] != 0) && (iVar2 = RegKind__flagBit0(operandVReg[0x26]), iVar2 != 0)) &&
+    if (((operandVReg[0x20] != 0) && (sourceRoot = RegKind__flagBit0(operandVReg[0x26]), sourceRoot != 0)) &&
        ((operandVReg[5] & 2U) == 0)) {
       (**(code **)(*operandVReg + 0x50))(operandVReg);
     }
-    uVar3 = ((int (*)())FUN_00134bf0)(param_1,inst[0x25],0);
-    iVar2 = ((int (*)())FUN_00134bf0)(param_1,operandVReg[0x25],0);
-    iVar4 = ((int (*)())FUN_0013555c)(param_1,iVar2,uVar3);
-  } while (((((iVar4 != 0) && ((operandVReg[5] & 0x200U) != 0)) &&
-            ((piVar5 = (int *)IRInst__getOperandSource(operandVReg,operandVReg[0x21]), piVar5[0x20] != 0 &&
-             ((iVar4 = RegKind__flagBit0(piVar5[0x26]), iVar4 != 0 && ((piVar5[5] & 2U) == 0)))))) &&
-           (iVar4 = (**(code **)(*piVar5 + 0x50))(piVar5), iVar4 == 0)) &&
-          ((iVar4 = ((int (*)())FUN_00134bf0)(param_1,piVar5[0x25],0), iVar2 != iVar4 &&
+    instRoot = ((int (*)())FUN_00134bf0)(graph,inst[0x25],0);
+    sourceRoot = ((int (*)())FUN_00134bf0)(graph,operandVReg[0x25],0);
+    edgesAdded = ((int (*)())FUN_0013555c)(graph,sourceRoot,instRoot);
+  } while (((((edgesAdded != 0) && ((operandVReg[5] & 0x200U) != 0)) &&
+            ((extraSource = (int *)IRInst__getOperandSource(operandVReg,operandVReg[0x21]), extraSource[0x20] != 0 &&
+             ((edgesAdded = RegKind__flagBit0(extraSource[0x26]), edgesAdded != 0 && ((extraSource[5] & 2U) == 0)))))) &&
+           (edgesAdded = (**(code **)(*extraSource + 0x50))(extraSource), edgesAdded == 0)) &&
+          ((edgesAdded = ((int (*)())FUN_00134bf0)(graph,extraSource[0x25],0), sourceRoot != edgesAdded &&
            (inst = operandVReg, operandVReg != (int *)0x0))));
   return;
 }

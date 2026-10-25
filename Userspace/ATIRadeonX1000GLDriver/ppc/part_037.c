@@ -3092,29 +3092,29 @@ int VertexRegister__clone(this, param_2, compiler)
 }
 
 /* VReg__setTopDefinition @ 0x123398 (140 bytes) */
-int VReg__setTopDefinition(param_1, param_2)
-  int param_1;
-  undefined4 param_2;
+int VReg__setTopDefinition(vreg, definition)
+  int vreg;
+  undefined4 definition;
 {
-  undefined4 *puVar1;
-  uint uVar2;
-  uint uVar3;
-  uint *puVar4;
+  undefined4 *topRef;
+  uint stackCount;
+  uint lastIndex;
+  uint *definitionStack;
   
-  puVar4 = *(uint **)(param_1 + 0x2c);
-  uVar2 = puVar4[1];
-  uVar3 = uVar2 - 1;
-  if (uVar3 < *puVar4) {
-    if (uVar2 <= uVar3) {
-      _memset(uVar2 * 4 + puVar4[2],0,(uVar3 - uVar2) * 4 + 4);
-      puVar4[1] = uVar2;
+  definitionStack = *(uint **)(vreg + 0x2c);
+  stackCount = definitionStack[1];
+  lastIndex = stackCount - 1;
+  if (lastIndex < *definitionStack) {
+    if (stackCount <= lastIndex) {
+      _memset(stackCount * 4 + definitionStack[2],0,(lastIndex - stackCount) * 4 + 4);
+      definitionStack[1] = stackCount;
     }
-    puVar1 = (undefined4 *)(uVar3 * 4 + puVar4[2]);
+    topRef = (undefined4 *)(lastIndex * 4 + definitionStack[2]);
   }
   else {
-    puVar1 = (undefined4 *)Vector__elementRefGrow(puVar4,uVar3);
+    topRef = (undefined4 *)Vector__elementRefGrow(definitionStack,lastIndex);
   }
-  *puVar1 = param_2;
+  *topRef = definition;
   return;
 }
 

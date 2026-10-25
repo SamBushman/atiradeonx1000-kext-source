@@ -1630,29 +1630,29 @@ int FUN_0010e55c(param_1, param_2, param_3, param_4)
 }
 
 /* FUN_0010e56c @ 0x10e56c (200 bytes) */
-int FUN_0010e56c(param_1, program)
-  int *param_1;
+int FUN_0010e56c(backend, program)
+  int *backend;
   int program;
 {
-  int iVar1;
-  int iVar2;
-  int iVar3;
+  int nextHwRegister;
+  int nextInstLink;
+  int inst;
   
   if (*(int *)(program + 0x3d4) == 0) {
-    iVar3 = *(int *)(program + 0x3a0);
-    iVar1 = (**(code **)(*param_1 + 0xe4))(param_1);
-    iVar3 = *(int *)(iVar3 + 0x98);
-    for (iVar2 = *(int *)(iVar3 + 8); iVar2 != 0; iVar2 = *(int *)(iVar2 + 8)) {
-      if (((*(uint *)(iVar3 + 0x14) & 1) != 0) && (*(int *)(*(int *)(iVar3 + 0x88) + 8) == 0xa4)) {
-        while (iVar2 = FUN_00130478(program,iVar1), iVar2 == 0) {
-          iVar1 = iVar1 + 1;
+    inst = *(int *)(program + 0x3a0);
+    nextHwRegister = (**(code **)(*backend + 0xe4))(backend);
+    inst = *(int *)(inst + 0x98);
+    for (nextInstLink = *(int *)(inst + 8); nextInstLink != 0; nextInstLink = *(int *)(nextInstLink + 8)) {
+      if (((*(uint *)(inst + 0x14) & 1) != 0) && (*(int *)(*(int *)(inst + 0x88) + 8) == 0xa4)) {
+        while (nextInstLink = FUN_00130478(program,nextHwRegister), nextInstLink == 0) {
+          nextHwRegister = nextHwRegister + 1;
         }
-        Program__markHwRegUsed(program,iVar1);
-        iVar2 = *(int *)(iVar3 + 8);
-        *(int *)(iVar3 + 0x94) = iVar1;
-        *(uint *)(iVar3 + 0x14) = *(uint *)(iVar3 + 0x14) | 0x40;
+        Program__markHwRegUsed(program,nextHwRegister);
+        nextInstLink = *(int *)(inst + 8);
+        *(int *)(inst + 0x94) = nextHwRegister;
+        *(uint *)(inst + 0x14) = *(uint *)(inst + 0x14) | 0x40;
       }
-      iVar3 = iVar2;
+      inst = nextInstLink;
     }
   }
   return;
