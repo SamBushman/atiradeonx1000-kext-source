@@ -178,7 +178,7 @@ def apply_uses(lines, s, e, name, uses, allrows, declset):
     DECL2 = r'\s+(?!return\b)[\w ]+?[ *]+([A-Za-z_]\w*)( ?\[\w+\])?(\s*=\s*[^;]+)?;$'    # the whole declaration block, incl. `T **p;` and `T x [N];` (declblock above is what the #L anchors of the machine-written rows count from: keep it)
     def declblock2():
         i = brace + 1
-        while i < len(lines) and (re.match(DECL2, lines[i]) or not lines[i].strip() or re.match(r'\s*(/\*|\*)', lines[i]) or re.match(r'\s*unsigned int ghidra_home\[8\] = \{', lines[i])): i += 1
+        while i < len(lines) and (re.match(DECL2, lines[i]) or not lines[i].strip() or re.match(r'\s*(/\*|\*)', lines[i]) or re.match(r'\s*unsigned int ghidra_home\[8\] = \{', lines[i]) or re.match(r'\s*unsigned char \w+ ?\[0x[0-9a-f]+\];', lines[i]) or re.match(r'#define \w+ \(\*\(', lines[i])): i += 1
         return brace + 1, i
     Ncache = None; created = {}
     for (f, n, fn, old, new, tier, frm, to, first, last) in uses:

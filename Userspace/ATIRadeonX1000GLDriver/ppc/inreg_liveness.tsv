@@ -453,7 +453,7 @@ f620	arbProgramIrToText	r6	PASS-no	f650 bl 0x1a3660	; symbol stub for: _malloc
 f620	arbProgramIrToText	r7	PASS-no	f650 bl 0x1a3660	; symbol stub for: _malloc
 f620	arbProgramIrToText	r8	PASS-no	f650 bl 0x1a3660	; symbol stub for: _malloc
 f620	arbProgramIrToText	r10	PASS-no	f650 bl 0x1a3660	; symbol stub for: _malloc
-f8aa0	FUN_000f8aa0	r8	PASS-indirect	f8b7c bl 0x19e9fc
+f8aa0	Program__applySourceTokenToOperand	r8	PASS-indirect	f8b7c bl 0x19e9fc
 f9140	FUN_000f9140	r6	PASS-indirect	f918c bctrl 
 f9140	FUN_000f9140	r7	PASS-indirect	f918c bctrl 
 f9140	FUN_000f9140	r8	PASS-indirect	f918c bctrl 

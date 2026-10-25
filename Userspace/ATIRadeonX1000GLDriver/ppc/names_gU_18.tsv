@@ -1,0 +1,10 @@
+func	FUN_000da9fc	ildisAppendIndentedf	CONFIRMED	appends param_2 groups of four spaces (via ildisAppendf) and then the printf-formatted string (format param_3 and the register arguments) to the disassembler line buffer at +0x10 when it fits (strlen guard against 0x200)
+func	FUN_000e1564	Compiler__allocateOrFail	INFERRED	calls the allocator callback at compiler+0x350 with its context (compiler+0x354) and the size param_2 and fails the compile with code 2 when it returns 0
+func	FUN_000f2da8	SelectWord__matches	INFERRED	true when for each of the 4 bytes of param_2 the byte is 4 (wildcard) or equals the same byte of param_1: pattern match of a select word
+func	FUN_000f8f88	IRInst__applyDescriptorSwizzle	INFERRED	writes the 4 component selects of the source descriptor (psnPackedLaneSource mapped through the table at PTR_DAT_001e8bb8) into operand 1 of the instruction via virtual slot 0x88, then resets the descriptor selects to identity (0x3210)
+local	FUN_000da9fc	param_2	indentLevel	CONFIRMED	number of "    " groups appended before the text
+local	FUN_000da9fc	param_3	format	CONFIRMED	printf format string passed to ildisAppendf and printf
+local	FUN_000e1564	param_2	size	INFERRED	passed with the context to the allocator callback
+local	FUN_000f2da8	param_1	selectWord	INFERRED	the select word being tested; each byte is compared with the pattern byte
+local	FUN_000f2da8	param_2	pattern	INFERRED	pattern select word; byte value 4 matches anything
+local	FUN_000f8f88	param_2	inst	INFERRED	virtual slot 0x88 called on it to set operand 1 component selects

@@ -1,0 +1,7 @@
+local	FUN_000fd5c8	local_a0	usedRegisterBitmap	INFERRED	bit set allocated in arena B at the start (header word, word count, bit count, then bits): bit (IL register byte) is set when a register declaration (cases 0x19, 0x80) is seen
+local	FUN_000fd5c8	local_13c	movByRegister	INFERRED	growable vector indexed by register number holding the IrMovFloat created for each flagged program instruction (program+0x3c4 loop at the start)
+local	FUN_000fd5c8	local_17c	templateCursor	INFERRED	index into the opcode template stream: `*(stream + cursor*4)` is read, incremented by every template token, passed by address to FUN_000fd50c
+local	FUN_000fd5c8	local_178	stagedSelectWord	INFERRED	4 x 8-bit component select word (0x10203, 0x10101, 0x2020202 ...) staged for the next FUN_000fa958/FUN_000f8aa0 call that receives its address
+local	FUN_000fd5c8	local_70	selectWordPtr	INFERRED	= &stagedSelectWord, passed to the operand translators
+local	FUN_000fd5c8	local_188	scopeLevel	INFERRED	nesting level stored in each created block at +0xbc and compared with the if-stack top block (+0xb8); stays 0 in this translator
+local	FUN_000fd5c8	local_c0	destOperandCount	INFERRED	FUN_000f8960(opcode, table): number of destination operands of the template record; loop bound of the destination translation loop

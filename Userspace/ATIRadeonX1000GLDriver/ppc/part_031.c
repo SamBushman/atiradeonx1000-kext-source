@@ -1284,12 +1284,12 @@ int FUN_0010de6c(param_1, param_2, param_3, param_4, param_5, param_6)
   uVar1 = *param_4;
   uVar5 = *(undefined4 *)(param_2 + 0x3ac);
   uVar4 = *(undefined4 *)(param_2 + 8);
-  uVar2 = FUN_000ec208(param_2,*param_4 >> 0x10 & 0x3f);
+  uVar2 = Program__registerFileOfIlType(param_2,*param_4 >> 0x10 & 0x3f);
   uVar2 = FUN_00127608(uVar5,uVar2,(int)(short)uVar1,0);
   iVar3 = IRLoadVertex__new_109810(0xa4,uVar4);
   IRInst__setOperandRef(iVar3,0,uVar2);
   *(int *)(iVar3 + 300) = (int)(short)uVar1;
-  return FUN_000f92fc(param_2,iVar3,param_6);
+  return Program__appendInst(param_2,iVar3,param_6);
 }
 
 /* FUN_0010defc @ 0x10defc (340 bytes) */
@@ -1351,12 +1351,12 @@ int KhanChip__ctor_10e050(this, allocContext)
   this[1] = 0;
   *this = vtable + 8;
   *this = PTR_DAT_001e8c74 + 8;
-  limitsObject = FUN_000e1564(allocContext,0x1740);
+  limitsObject = Compiler__allocateOrFail(allocContext,0x1740);
   if (limitsObject != 0) {
     KhanVs__ctor_12a578(limitsObject,allocContext,1);
   }
   this[1] = limitsObject;
-  limitsObject = FUN_000e1564(allocContext,0x1744);
+  limitsObject = Compiler__allocateOrFail(allocContext,0x1744);
   if (limitsObject != 0) {
     KhanPs__ctor_129130(limitsObject,allocContext,1);
   }
@@ -1377,12 +1377,12 @@ int KhanChip__ctor_10e114(this, allocContext)
   this[1] = 0;
   *this = vtable + 8;
   *this = PTR_DAT_001e8c74 + 8;
-  limitsObject = FUN_000e1564(allocContext,0x1740);
+  limitsObject = Compiler__allocateOrFail(allocContext,0x1740);
   if (limitsObject != 0) {
     KhanVs__ctor_12a578(limitsObject,allocContext,1);
   }
   this[1] = limitsObject;
-  limitsObject = FUN_000e1564(allocContext,0x1744);
+  limitsObject = Compiler__allocateOrFail(allocContext,0x1744);
   if (limitsObject != 0) {
     KhanPs__ctor_129130(limitsObject,allocContext,1);
   }
@@ -1405,12 +1405,12 @@ int FudoChip__ctor_10e1d8(this, allocContext)
   *this = puVar3;
   this[1] = 0;
   *this = vtable + 8;
-  iVar2 = FUN_000e1564(allocContext,0x1740);
+  iVar2 = Compiler__allocateOrFail(allocContext,0x1740);
   if (iVar2 != 0) {
     FudoVs__ctor_12a8bc(iVar2,allocContext,1);
   }
   this[1] = iVar2;
-  iVar2 = FUN_000e1564(allocContext,0x1944);
+  iVar2 = Compiler__allocateOrFail(allocContext,0x1944);
   if (iVar2 != 0) {
     FudoPs__ctor_1920e0(iVar2,allocContext,1);
   }
@@ -1433,12 +1433,12 @@ int FudoChip__ctor_10e2a0(this, allocContext)
   *this = puVar3;
   this[1] = 0;
   *this = vtable + 8;
-  iVar2 = FUN_000e1564(allocContext,0x1740);
+  iVar2 = Compiler__allocateOrFail(allocContext,0x1740);
   if (iVar2 != 0) {
     FudoVs__ctor_12a8bc(iVar2,allocContext,1);
   }
   this[1] = iVar2;
-  iVar2 = FUN_000e1564(allocContext,0x1944);
+  iVar2 = Compiler__allocateOrFail(allocContext,0x1944);
   if (iVar2 != 0) {
     FudoPs__ctor_1920e0(iVar2,allocContext,1);
   }

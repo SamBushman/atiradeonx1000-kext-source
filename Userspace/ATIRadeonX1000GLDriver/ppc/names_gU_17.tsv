@@ -1,0 +1,11 @@
+func	FUN_000ec208	Program__registerFileOfIlType	INFERRED	maps an IL register type number to a register file number through the hardware description table (+0x30c, +4; 8-byte entries, file at +4) and fails the compile (Compiler__fail 0xf) when the entry is -1
+func	FUN_000ec3ac	Program__insertBlockAfter	INFERRED	DList__insertAfter(node, ref), stores the program at node+0xac and frees the program work arrays: links a new block into the program block list after ref
+func	FUN_000f92fc	Program__appendInst	INFERRED	virtual slot 12 of the instruction decides whether it is added to the block; on hardware that needs it (hardware description slot 0x168) it also emits the fix-up IrMulFloat + IrMovFloat pair and recurses for them
+func	FUN_000f8aa0	Program__applySourceTokenToOperand	INFERRED	applies the abs/negate modifier bits and the 4 component selects (psnPackedLaneSource of the source operand token, virtual slot 0x88 of the instruction) to operand param_4 of param_5
+local	FUN_000ec208	param_1	program	INFERRED	*(param_1+8) is the Compiler whose hardware description holds the table
+local	FUN_000ec208	param_2	ilRegisterType	INFERRED	IL register type number (token bits 16..21) used as the table index
+local	FUN_000f92fc	param_1	program	INFERRED	*(param_1+8) is the Compiler; passed on to the recursive calls
+local	FUN_000f8aa0	param_1	program	INFERRED	first argument of every call site (the program)
+local	FUN_000f8aa0	param_2	selectWordPtr	INFERRED	callers pass &stagedSelectWord (the staged 4 x 8-bit select word); its first word is read as the lane order
+local	FUN_000f8aa0	param_4	operandIndex	INFERRED	operand number of param_5 that receives the modifiers and selects (param_5 + param_4*6 + 0x23 is that operand record)
+local	FUN_000f8aa0	param_5	inst	INFERRED	the IRInst whose operand is updated (virtual slot 0x88 called on it)

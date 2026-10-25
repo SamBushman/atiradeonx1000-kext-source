@@ -1178,7 +1178,7 @@
 0xda8fc	returnZero_da8fc	8	yes	
 0xda904	ildisAppendf	128	yes	
 0xda984	ildisFlushLine	120	yes	
-0xda9fc	FUN_000da9fc	180	yes	
+0xda9fc	ildisAppendIndentedf	180	yes	
 0xdaab0	ildisPrintNegateComponents	412	yes	
 0xdac4c	ildisComponentSelectChar	204	yes	
 0xdad30	ildisPrintSwizzle	300	yes	
@@ -1258,7 +1258,7 @@
 0xe14d4	Compiler__setTableEntry534	16	yes	
 0xe14e4	FUN_000e14e4	80	no	indirect call (driver context / vtable / callback)
 0xe1534	Compiler__fail	48	yes	
-0xe1564	FUN_000e1564	84	yes	
+0xe1564	Compiler__allocateOrFail	84	yes	
 0xe15b8	Compiler__propagateFlag5a1Bit1	36	yes	
 0xe15dc	Compiler__selectEntry534ByProgramFlags	64	yes	
 0xe161c	FUN_000e161c	156	yes	
@@ -1446,14 +1446,14 @@
 0xec178	ContinueBlock__ctor_ec178	88	yes	
 0xec1d0	FUN_000ec1d0	20	yes	
 0xec1ec	callTargetSlot25	28	yes	
-0xec208	FUN_000ec208	80	yes	
+0xec208	Program__registerFileOfIlType	80	yes	
 0xec258	FUN_000ec258	36	yes	
 0xec27c	FUN_000ec27c	36	yes	
 0xec2a0	FUN_000ec2a0	36	yes	
 0xec2c4	Table__interpolatorKindToCode	36	yes	
 0xec2e8	Program__freeWorkArrays	136	yes	
 0xec370	FUN_000ec370	60	yes	
-0xec3ac	FUN_000ec3ac	60	yes	
+0xec3ac	Program__insertBlockAfter	60	yes	
 0xec3e8	FUN_000ec3e8	68	yes	
 0xec42c	FUN_000ec42c	60	yes	
 0xec468	FUN_000ec468	136	yes	
@@ -1500,7 +1500,7 @@
 0xf2cac	FUN_000f2cac	92	yes	
 0xf2d08	FUN_000f2d08	16	yes	
 0xf2d18	SelectWord__areCompatible	144	yes	
-0xf2da8	FUN_000f2da8	112	yes	
+0xf2da8	SelectWord__matches	112	yes	
 0xf2e18	FUN_000f2e18	56	yes	
 0xf2e50	laneBytes__mapTwoThreeToOne	72	yes	
 0xf2e98	laneBytes__mergeOneAndTwo	144	yes	
@@ -1602,14 +1602,14 @@
 0xf89e8	remapSelect1To0	36	yes	
 0xf8a0c	remapSelectSmall	36	yes	
 0xf8a30	FUN_000f8a30	112	yes	
-0xf8aa0	FUN_000f8aa0	488	no	indirect call (driver context / vtable / callback)
+0xf8aa0	Program__applySourceTokenToOperand	488	no	indirect call (driver context / vtable / callback)
 0xf8c88	FUN_000f8c88	64	yes	
 0xf8ccc	FUN_000f8ccc	132	no	indirect call (driver context / vtable / callback)
 0xf8d50	FUN_000f8d50	568	no	indirect call (driver context / vtable / callback)
-0xf8f88	FUN_000f8f88	176	no	indirect call (driver context / vtable / callback)
+0xf8f88	IRInst__applyDescriptorSwizzle	176	no	indirect call (driver context / vtable / callback)
 0xf9038	FUN_000f9038	264	yes	
 0xf9140	FUN_000f9140	284	no	indirect call (driver context / vtable / callback)
-0xf92fc	FUN_000f92fc	480	no	indirect call (driver context / vtable / callback)
+0xf92fc	Program__appendInst	480	no	indirect call (driver context / vtable / callback)
 0xf94dc	FUN_000f94dc	1268	no	indirect call (driver context / vtable / callback)
 0xf9a58	FUN_000f9a58	3748	no	indirect call (driver context / vtable / callback)
 0xfa958	FUN_000fa958	1132	no	no static blocker: a test could reach it (needs arguments / state no test builds)

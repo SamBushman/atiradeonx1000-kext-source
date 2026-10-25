@@ -20,17 +20,17 @@ int SelectWord__areCompatible(param_1, param_2)
   return 0;
 }
 
-/* FUN_000f2da8 @ 0xf2da8 (112 bytes) */
-int FUN_000f2da8(param_1, param_2)
-  uint param_1;
-  uint param_2;
+/* SelectWord__matches @ 0xf2da8 (112 bytes) */
+int SelectWord__matches(selectWord, pattern)
+  uint selectWord;
+  uint pattern;
 {
   uint uVar1;
   
-  if (((((param_2 >> 0x18 == 4) || (param_2 >> 0x18 == param_1 >> 0x18)) &&
-       ((uVar1 = param_2 >> 0x10 & 0xff, uVar1 == 4 || (uVar1 == (param_1 >> 0x10 & 0xff))))) &&
-      ((uVar1 = param_2 >> 8 & 0xff, uVar1 == 4 || (uVar1 == (param_1 >> 8 & 0xff))))) &&
-     (((param_2 & 0xff) == 4 || ((param_2 & 0xff) == (param_1 & 0xff))))) {
+  if (((((pattern >> 0x18 == 4) || (pattern >> 0x18 == selectWord >> 0x18)) &&
+       ((uVar1 = pattern >> 0x10 & 0xff, uVar1 == 4 || (uVar1 == (selectWord >> 0x10 & 0xff))))) &&
+      ((uVar1 = pattern >> 8 & 0xff, uVar1 == 4 || (uVar1 == (selectWord >> 8 & 0xff))))) &&
+     (((pattern & 0xff) == 4 || ((pattern & 0xff) == (selectWord & 0xff))))) {
     return 1;
   }
   return 0;

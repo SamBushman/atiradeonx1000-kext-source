@@ -4727,9 +4727,9 @@ LAB_0014edd0:
               (*(int *)((int)matchFrame + termByteOffsetA + 8) == *(int *)((int)matchFrame + termByteOffsetB + 0x44))) &&
              (matchFrame[termIndexB + 2] == matchFrame[nextTermSlotA + 0x11])))) &&
            ((nextTermSlotACopy = nextTermSlotA,
-            selectsCompatibleA = FUN_000f2da8(*(undefined4 *)((int)matchFrame + termByteOffsetA),
+            selectsCompatibleA = SelectWord__matches(*(undefined4 *)((int)matchFrame + termByteOffsetA),
                                  *(undefined4 *)((int)matchFrame + termByteOffsetB + 0x38)), selectsCompatibleA != 0 &&
-            (nextTermSlotA = FUN_000f2da8(matchFrame[termIndexB],matchFrame[nextTermSlotA + 0xe]), nextTermSlotA != 0)))) {
+            (nextTermSlotA = SelectWord__matches(matchFrame[termIndexB],matchFrame[nextTermSlotA + 0xe]), nextTermSlotA != 0)))) {
           if (allowRewrite != 0) {
             if (termIndexA == 2) {
               sourceDef2 = IRInst__getOperandSource(*useB,useB[1]);
@@ -5127,13 +5127,13 @@ LAB_0014f980:
       else {
         matchCandidateByteOffsetA = matchCandidateIndexA << 2;
       }
-      selectsCompatibleA = FUN_000f2da8(*(undefined4 *)((int)matchFrame + matchCandidateByteOffsetA + 0xc),
+      selectsCompatibleA = SelectWord__matches(*(undefined4 *)((int)matchFrame + matchCandidateByteOffsetA + 0xc),
                            *(undefined4 *)(termByteOffsetB + (int)selectWordsPtrB));
       if (((selectsCompatibleA != 0) &&
-          (selectsCompatibleA = FUN_000f2da8(matchFrame[nextTermSlotA + 3],matchFrame[nextTermSlotB + 0xf]), selectsCompatibleA != 0)) ||
-         ((matchCandidateByteOffsetA = FUN_000f2da8(*(undefined4 *)(termByteOffsetB + (int)selectWordsPtrB),
+          (selectsCompatibleA = SelectWord__matches(matchFrame[nextTermSlotA + 3],matchFrame[nextTermSlotB + 0xf]), selectsCompatibleA != 0)) ||
+         ((matchCandidateByteOffsetA = SelectWord__matches(*(undefined4 *)(termByteOffsetB + (int)selectWordsPtrB),
                                 *(undefined4 *)((int)matchFrame + matchCandidateByteOffsetA + 0xc)), matchCandidateByteOffsetA != 0 &&
-          (matchCandidateByteOffsetA = FUN_000f2da8(matchFrame[nextTermSlotB + 0xf],matchFrame[nextTermSlotA + 3]), matchCandidateByteOffsetA != 0)))) {
+          (matchCandidateByteOffsetA = SelectWord__matches(matchFrame[nextTermSlotB + 0xf],matchFrame[nextTermSlotA + 3]), matchCandidateByteOffsetA != 0)))) {
         if (crossedMatch != 0) {
           matchedIndexA = nextTermSlotA;
           nextTermSlotA = matchCandidateIndexA;
@@ -5414,13 +5414,13 @@ LAB_0014fad0:
     return 1;
   }
   puVar16 = termIndexB;
-  selectsCompatible = FUN_000f2da8(matchFrame[iVar3 + 3],matchFrame[(int)((int)termIndexB + 0xf)]);
+  selectsCompatible = SelectWord__matches(matchFrame[iVar3 + 3],matchFrame[(int)((int)termIndexB + 0xf)]);
   if (selectsCompatible == 0) {
 LAB_00150568:
-    iVar3 = FUN_000f2da8(matchFrame[(int)((int)puVar17 + 0xf)],matchFrame[iVar3 + 3]);
+    iVar3 = SelectWord__matches(matchFrame[(int)((int)puVar17 + 0xf)],matchFrame[iVar3 + 3]);
     if (iVar3 != 0) {
       puVar16 = matchFrame + nextTermSlotA;
-      selectsCompatible2 = FUN_000f2da8(matchFrame[nextTermSlotB + 0xf],matchFrame[nextTermSlotA + 3]);
+      selectsCompatible2 = SelectWord__matches(matchFrame[nextTermSlotB + 0xf],matchFrame[nextTermSlotA + 3]);
       if (selectsCompatible2 != 0) {
         updatedSourceInst = (int *)IRInst__getOperandSource(*useA,useA[1]);
         inst = *useA;
@@ -5440,7 +5440,7 @@ LAB_00150568:
   }
   else {
     puVar16 = matchFrame + nextTermSlotB;
-    selectsCompatible = FUN_000f2da8(matchFrame[nextTermSlotA + 3],matchFrame[nextTermSlotB + 0xf]);
+    selectsCompatible = SelectWord__matches(matchFrame[nextTermSlotA + 3],matchFrame[nextTermSlotB + 0xf]);
     if (selectsCompatible == 0) goto LAB_00150568;
     updatedSourceInst = (int *)IRInst__getOperandSource(*useB,useB[1]);
     inst2 = *useB;

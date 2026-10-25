@@ -21,7 +21,7 @@ int KhanPs__createSchedModels(this, param_2)
   undefined4 *puVar2;
   undefined *puVar3;
   
-  puVar2 = (undefined4 *)FUN_000e1564(param_2,0x6c);
+  puVar2 = (undefined4 *)Compiler__allocateOrFail(param_2,0x6c);
   vtable = PTR_DAT_001e90f4;
   puVar3 = PTR_DAT_001e90fc + 8;
   puVar2[2] = param_2;
@@ -32,7 +32,7 @@ int KhanPs__createSchedModels(this, param_2)
   R520SchedModel__vslot2_reset(puVar2);
   puVar2[0x1a] = 0;
   *(undefined4 **)(this + 0x60) = puVar2;
-  puVar2 = (undefined4 *)FUN_000e1564(param_2,0xc);
+  puVar2 = (undefined4 *)Compiler__allocateOrFail(param_2,0xc);
   vtable = PTR_DAT_001e9100;
   puVar2[1] = 1;
   puVar2[2] = 0;
@@ -487,16 +487,16 @@ int KhanPs__vslot9_createCompareInst(this, compareKind, srcRegA, srcSwizzleA, sr
   compareCondition = *(int *)(PTR_DAT_001e8b84 + compareKind * 4);
   (*(unsigned int *)((unsigned char *)ghidra_home + 24)) = param_7;
   callResult = IRInst__create(0x8b,compiler);
-  swizzleHandle = FUN_000ec208(program,srcSwizzleA);
+  swizzleHandle = Program__registerFileOfIlType(program,srcSwizzleA);
   operandRecord = IRInst__getOperandRecord(callResult,1);
   *(undefined4 *)(operandRecord + 0xc) = swizzleHandle;
   *(int *)(operandRecord + 8) = srcRegA;
-  swizzleHandle = FUN_000ec208(program,srcSwizzleB);
+  swizzleHandle = Program__registerFileOfIlType(program,srcSwizzleB);
   operandRecord = IRInst__getOperandRecord(callResult,2);
   *(undefined4 *)(operandRecord + 0xc) = swizzleHandle;
   *(int *)(operandRecord + 8) = srcRegB;
-  FUN_000f8aa0(program,&(*(unsigned int *)((unsigned char *)ghidra_home + 24)),**(undefined4 **)(param_8 + 0x6c),1,callResult);
-  FUN_000f8aa0(program,&(*(unsigned int *)((unsigned char *)ghidra_home + 24)),*(undefined4 *)(*(int *)(param_8 + 0x6c) + 4),2,callResult);
+  Program__applySourceTokenToOperand(program,&(*(unsigned int *)((unsigned char *)ghidra_home + 24)),**(undefined4 **)(param_8 + 0x6c),1,callResult);
+  Program__applySourceTokenToOperand(program,&(*(unsigned int *)((unsigned char *)ghidra_home + 24)),*(undefined4 *)(*(int *)(param_8 + 0x6c) + 4),2,callResult);
   if ((srcRegA == srcRegB) && (srcSwizzleA == srcSwizzleB)) {
     if ((*(uint *)(callResult + 0xb8) & 1) != (*(uint *)(callResult + 0xd0) & 1)) {
       if (((*(uint *)(callResult + 0xb8) & 2) == 0) && ((*(uint *)(callResult + 0xd0) & 2) == 0)) {
@@ -789,7 +789,7 @@ int FudoVs__createSchedModels(this, param_2)
   undefined4 *puVar2;
   undefined *puVar3;
   
-  puVar2 = (undefined4 *)FUN_000e1564(param_2,0x3c);
+  puVar2 = (undefined4 *)Compiler__allocateOrFail(param_2,0x3c);
   vtable = PTR_DAT_001e9110;
   puVar3 = PTR_DAT_001e90fc + 8;
   puVar2[2] = param_2;
@@ -800,7 +800,7 @@ int FudoVs__createSchedModels(this, param_2)
   SchedModel__resetCounters(puVar2);
   puVar2[0xe] = 0;
   *(undefined4 **)(this + 0x60) = puVar2;
-  puVar2 = (undefined4 *)FUN_000e1564(param_2,0xc);
+  puVar2 = (undefined4 *)Compiler__allocateOrFail(param_2,0xc);
   vtable = PTR_DAT_001e9100;
   puVar2[1] = 1;
   puVar2[2] = 0;
@@ -1555,7 +1555,7 @@ int KhanVs__vslot9_createCompareInst(this, compareKind, src1Register, param_4, s
   sourcesInOrder = !swapRequested;
   (*(unsigned int *)((unsigned char *)ghidra_home + 24)) = param_7;
   compareInst = IRInst__create(opcode,compiler);
-  aux1 = FUN_000ec208(arena,param_4);
+  aux1 = Program__registerFileOfIlType(arena,param_4);
   operandRecord = IRInst__getOperandRecord(compareInst,2 - (uint)sourcesInOrder);
   *(undefined4 *)(operandRecord + 0xc) = aux1;
   *(undefined4 *)(operandRecord + 8) = src1Register;
@@ -1565,7 +1565,7 @@ int KhanVs__vslot9_createCompareInst(this, compareKind, src1Register, param_4, s
   else {
     operandIndexA = 1;
   }
-  aux2 = FUN_000ec208(arena,param_6);
+  aux2 = Program__registerFileOfIlType(arena,param_6);
   operandRecord = IRInst__getOperandRecord(compareInst,operandIndexA);
   *(undefined4 *)(operandRecord + 0xc) = aux2;
   *(undefined4 *)(operandRecord + 8) = src2Register;
@@ -1575,20 +1575,20 @@ int KhanVs__vslot9_createCompareInst(this, compareKind, src1Register, param_4, s
   else {
     operandIndexB = 2;
   }
-  FUN_000f8aa0(arena,&(*(unsigned int *)((unsigned char *)ghidra_home + 24)),**(undefined4 **)(param_8 + 0x6c),operandIndexB,compareInst);
+  Program__applySourceTokenToOperand(arena,&(*(unsigned int *)((unsigned char *)ghidra_home + 24)),**(undefined4 **)(param_8 + 0x6c),operandIndexB,compareInst);
   if (sourcesInOrder) {
     operandIndexC = 2;
   }
   else {
     operandIndexC = 1;
   }
-  FUN_000f8aa0(arena,&(*(unsigned int *)((unsigned char *)ghidra_home + 24)),*(undefined4 *)(*(int *)(param_8 + 0x6c) + 4),operandIndexC,compareInst);
+  Program__applySourceTokenToOperand(arena,&(*(unsigned int *)((unsigned char *)ghidra_home + 24)),*(undefined4 *)(*(int *)(param_8 + 0x6c) + 4),operandIndexC,compareInst);
   newRegNumber = *(int *)(compilerCopy + 0x3ac) + -1;
   *(int *)(compilerCopy + 0x3ac) = newRegNumber;
   operandRecord = IRInst__getOperandRecord(compareInst,0);
   *(undefined4 *)(operandRecord + 0xc) = 0;
   *(int *)(operandRecord + 8) = newRegNumber;
-  FUN_000f92fc(arena,compareInst,param_9);
+  Program__appendInst(arena,compareInst,param_9);
   arena = *(undefined4 *)(compilerCopy + 0x374);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   loadInst = allocation + 1;
@@ -1707,7 +1707,7 @@ int KhanVs__createSchedModels(this, param_2)
   undefined4 *puVar2;
   undefined *puVar3;
   
-  puVar2 = (undefined4 *)FUN_000e1564(param_2,0x3c);
+  puVar2 = (undefined4 *)Compiler__allocateOrFail(param_2,0x3c);
   vtable = PTR_DAT_001e9110;
   puVar3 = PTR_DAT_001e90fc + 8;
   puVar2[2] = param_2;
@@ -1718,7 +1718,7 @@ int KhanVs__createSchedModels(this, param_2)
   SchedModel__resetCounters(puVar2);
   puVar2[0xe] = 0;
   *(undefined4 **)(this + 0x60) = puVar2;
-  puVar2 = (undefined4 *)FUN_000e1564(param_2,0xc);
+  puVar2 = (undefined4 *)Compiler__allocateOrFail(param_2,0xc);
   vtable = PTR_DAT_001e9100;
   puVar2[1] = 1;
   puVar2[2] = 0;

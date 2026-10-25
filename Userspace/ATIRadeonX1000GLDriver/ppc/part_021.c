@@ -144,7 +144,7 @@ int FUN_000e180c(compiler, param_2)
   
   iVar2 = param_2 * 4 + compiler;
   if (*(int *)(iVar2 + 0x370) == 0) {
-    piVar1 = (int *)FUN_000e1564(compiler,0x2c);
+    piVar1 = (int *)Compiler__allocateOrFail(compiler,0x2c);
     if (piVar1 != (int *)0x0) {
       piVar1[10] = 0;
       *piVar1 = compiler;
@@ -331,7 +331,7 @@ int FUN_000e1b70(compiler, param_2)
   }
   if (0 < param_2) {
     if (param_2 < 4) {
-      iVar1 = FUN_000e1564(compiler,0x10);
+      iVar1 = Compiler__allocateOrFail(compiler,0x10);
       if (iVar1 != 0) {
         KhanChip__ctor_10e114(iVar1,compiler);
       }
@@ -342,7 +342,7 @@ int FUN_000e1b70(compiler, param_2)
       }
     }
     else if (param_2 == 4) {
-      iVar1 = FUN_000e1564(compiler,0x10);
+      iVar1 = Compiler__allocateOrFail(compiler,0x10);
       if (iVar1 != 0) {
         FudoChip__ctor_10e1d8(iVar1,compiler);
       }
@@ -353,11 +353,11 @@ int FUN_000e1b70(compiler, param_2)
 }
 
 /* FUN_000e1c50 @ 0xe1c50 (916 bytes) */
-int FUN_000e1c50(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+int FUN_000e1c50(param_1, deleteComputationsThatCouldBeVsEnabled, param_3, argR6, param_5, param_6, param_7)
   int param_1;
-  undefined4 param_2;
+  undefined4 deleteComputationsThatCouldBeVsEnabled;
   undefined4 param_3;
-  undefined4 param_4;
+  undefined4 argR6;
   undefined4 param_5;
   undefined4 param_6;
   undefined4 param_7;
@@ -1640,9 +1640,9 @@ int FUN_000e3af4(inst, compilerCtx)
 }
 
 /* FUN_000e3b88 @ 0xe3b88 (1848 bytes) */
-int FUN_000e3b88(param_1, param_2, beforeInst, param_4)
+int FUN_000e3b88(param_1, block, beforeInst, param_4)
   int *param_1;
-  int param_2;
+  int block;
   int *beforeInst;
   undefined4 *param_4;
 {
@@ -1671,7 +1671,7 @@ int FUN_000e3b88(param_1, param_2, beforeInst, param_4)
   undefined4 local_44 [3];
   
   *param_4 = 0;
-  if ((beforeInst == *(int **)(param_2 + 8)) || ((*(uint *)(beforeInst[1] + 0x14) & 4) == 0)) {
+  if ((beforeInst == *(int **)(block + 8)) || ((*(uint *)(beforeInst[1] + 0x14) & 4) == 0)) {
     if (beforeInst != (int *)0x0) {
       iVar14 = 0;
       piVar13 = beforeInst;
@@ -1926,10 +1926,10 @@ LAB_000e413c:
 }
 
 /* FUN_000e43ec @ 0xe43ec (20 bytes) */
-int FUN_000e43ec(param_1)
-  int param_1;
+int FUN_000e43ec(ilReader)
+  int ilReader;
 {
-  return *(int *)(param_1 + 0x7c) == 3;
+  return *(int *)(ilReader + 0x7c) == 3;
 }
 
 /* setWord30 @ 0xe4400 (8 bytes) */
@@ -1942,10 +1942,10 @@ int setWord30(param_1, param_2)
 }
 
 /* FUN_000e4408 @ 0xe4408 (8 bytes) */
-int FUN_000e4408(param_1)
-  int param_1;
+int FUN_000e4408(ilReader)
+  int ilReader;
 {
-  /* issue #64 live-repro (2nd crash, past the calloc(44) fix): *(param_1+0x8e) is a "current
+  /* issue #64 live-repro (2nd crash, past the calloc(44) fix): *(ilReader+0x8e) is a "current
    * token subtype" cache that can transiently hold an out-of-range value (confirmed: every other
    * reader in this file - FUN_000e4a38:2265, and part_022.c:840/842/852/854/858 - checks
    * `< 0xbf` before trusting it, resetting to 0 otherwise). This function, this field's only
@@ -1954,7 +1954,7 @@ int FUN_000e4408(param_1)
    * index, crashing in FUN_000e4710's table lookup three calls later. Added the same clamp every
    * other consumer already has. */
   undefined2 uVar1;
-  uVar1 = *(undefined2 *)(param_1 + 0x8e);
+  uVar1 = *(undefined2 *)(ilReader + 0x8e);
   if (0xbe < (ushort)uVar1) {
     uVar1 = 0;
   }
@@ -1962,25 +1962,25 @@ int FUN_000e4408(param_1)
 }
 
 /* FUN_000e4410 @ 0xe4410 (64 bytes) */
-int FUN_000e4410(param_1, param_2)
-  int param_1;
+int FUN_000e4410(ilReader, param_2)
+  int ilReader;
   int param_2;
 {
   int *piVar1;
   
-  piVar1 = *(int **)(*(int *)(param_1 + 0xc) + 8);
+  piVar1 = *(int **)(*(int *)(ilReader + 0xc) + 8);
   do {
     if (*piVar1 == param_2) {
       return piVar1[1];
     }
-  } while ((*(int **)(param_1 + 0x10) != piVar1) &&
+  } while ((*(int **)(ilReader + 0x10) != piVar1) &&
           (piVar1 = (int *)piVar1[2], piVar1 != (int *)0x0));
   return -1;
 }
 
 /* FUN_000e4450 @ 0xe4450 (116 bytes) */
-int FUN_000e4450(param_1, param_2, param_3, param_4, param_5, param_6)
-  int *param_1;
+int FUN_000e4450(ilReader, param_2, param_3, param_4, param_5, param_6)
+  int *ilReader;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
@@ -1989,21 +1989,21 @@ int FUN_000e4450(param_1, param_2, param_3, param_4, param_5, param_6)
 {
   undefined4 *puVar1;
   
-  puVar1 = (undefined4 *)Arena__alloc(*(undefined4 *)(*param_1 + 0x378),0x18);
+  puVar1 = (undefined4 *)Arena__alloc(*(undefined4 *)(*ilReader + 0x378),0x18);
   puVar1[5] = 0;
   *puVar1 = param_2;
   puVar1[1] = param_3;
   puVar1[2] = param_4;
   puVar1[3] = param_5;
   puVar1[4] = param_6;
-  *(undefined4 **)(param_1[6] + 0x14) = puVar1;
-  param_1[6] = (int)puVar1;
+  *(undefined4 **)(ilReader[6] + 0x14) = puVar1;
+  ilReader[6] = (int)puVar1;
   return;
 }
 
 /* FUN_000e44c4 @ 0xe44c4 (456 bytes) */
-int FUN_000e44c4(param_1, param_2, param_3, param_4)
-  int param_1;
+int FUN_000e44c4(ilReader, param_2, param_3, param_4)
+  int ilReader;
   int param_2;
   int param_3;
   uint param_4;
@@ -2023,7 +2023,7 @@ int FUN_000e44c4(param_1, param_2, param_3, param_4)
   fVar4 = FLOAT_001aa0e8;
   fVar3 = FLOAT_001aa0d4;
   uVar8 = param_4 >> 0x15 & 7;
-  piVar7 = *(int **)(*(int *)(param_1 + 0x1c) + 0x14);
+  piVar7 = *(int **)(*(int *)(ilReader + 0x1c) + 0x14);
   do {
     if (*piVar7 == param_2) {
       iVar10 = 4;
@@ -2082,7 +2082,7 @@ int FUN_000e44c4(param_1, param_2, param_3, param_4)
       } while (iVar10 != 0);
       return 1;
     }
-  } while ((piVar7 != *(int **)(param_1 + 0x20)) &&
+  } while ((piVar7 != *(int **)(ilReader + 0x20)) &&
           (piVar7 = (int *)piVar7[5], piVar7 != (int *)0x0));
   return 0;
 }
@@ -2131,19 +2131,19 @@ int FUN_000e4710(param_1, param_2, param_3)
 }
 
 /* FUN_000e4724 @ 0xe4724 (92 bytes) */
-int FUN_000e4724(param_1, param_2, param_3)
-  int *param_1;
+int FUN_000e4724(ilReader, param_2, param_3)
+  int *ilReader;
   undefined4 param_2;
   undefined4 param_3;
 {
   undefined4 *puVar1;
   
-  puVar1 = (undefined4 *)Arena__alloc(*(undefined4 *)(*param_1 + 0x378),0xc);
+  puVar1 = (undefined4 *)Arena__alloc(*(undefined4 *)(*ilReader + 0x378),0xc);
   puVar1[2] = 0;
   *puVar1 = param_2;
   puVar1[1] = param_3;
-  *(undefined4 **)(param_1[4] + 8) = puVar1;
-  param_1[4] = (int)puVar1;
+  *(undefined4 **)(ilReader[4] + 8) = puVar1;
+  ilReader[4] = (int)puVar1;
   return;
 }
 
@@ -2165,19 +2165,19 @@ void FUN_000e4780(int *param_1,undefined4 param_2,double fparam_1,double fparam_
 }
 
 /* FUN_000e47f4 @ 0xe47f4 (60 bytes) */
-int FUN_000e47f4(param_1)
-  int param_1;
+int FUN_000e47f4(ilReader)
+  int ilReader;
 {
   undefined4 *puVar1;
   uint uVar2;
   
-  uVar2 = *(uint *)(*(int *)(param_1 + 0x40) + 4);
+  uVar2 = *(uint *)(*(int *)(ilReader + 0x40) + 4);
   if (uVar2 == 0) {
     return 0xbf;
   }
   puVar1 = (undefined4 *)0x0;
   if (uVar2 - 1 < uVar2) {
-    puVar1 = (undefined4 *)((uVar2 - 1) * 4 + *(int *)(*(int *)(param_1 + 0x40) + 8));
+    puVar1 = (undefined4 *)((uVar2 - 1) * 4 + *(int *)(*(int *)(ilReader + 0x40) + 8));
   }
   return *(undefined4 *)*puVar1;
 }
@@ -2253,8 +2253,8 @@ int FUN_000e4934(param_1)
 }
 
 /* FUN_000e4a38 @ 0xe4a38 (520 bytes) */
-int FUN_000e4a38(param_1, param_2)
-  int param_1;
+int FUN_000e4a38(ilReader, param_2)
+  int ilReader;
   int param_2;
 {
   bool bVar1;
@@ -2270,11 +2270,11 @@ int FUN_000e4a38(param_1, param_2)
   int iVar11;
   
   bVar1 = param_2 == 0;
-  iVar6 = param_2 * 4 + param_1;
+  iVar6 = param_2 * 4 + ilReader;
   do {
-    iVar4 = *(int *)(param_1 + 0x7c);
+    iVar4 = *(int *)(ilReader + 0x7c);
     if (iVar4 == 1) {
-      iVar4 = *(int *)(param_1 + 0x88);
+      iVar4 = *(int *)(ilReader + 0x88);
       puVar8 = (undefined4 *)0x0;
       uVar3 = *(uint *)(iVar4 + 4);
       if (uVar3 - 1 < uVar3) {
@@ -2282,7 +2282,7 @@ int FUN_000e4a38(param_1, param_2)
       }
       uVar9 = *puVar8;
       Vector__removeAt(iVar4,uVar3 - 1);
-      iVar4 = *(int *)(param_1 + 0x7c);
+      iVar4 = *(int *)(ilReader + 0x7c);
       *(undefined4 *)(iVar6 + 0x8c) = uVar9;
     }
     else {
@@ -2291,17 +2291,17 @@ int FUN_000e4a38(param_1, param_2)
         return 0;
       }
       if (iVar4 == 0) {
-        uVar9 = **(undefined4 **)(param_1 + 0x74);
-        *(undefined4 **)(param_1 + 0x74) = *(undefined4 **)(param_1 + 0x74) + 1;
+        uVar9 = **(undefined4 **)(ilReader + 0x74);
+        *(undefined4 **)(ilReader + 0x74) = *(undefined4 **)(ilReader + 0x74) + 1;
         *(undefined4 *)(iVar6 + 0x8c) = uVar9;
       }
     }
-    uVar7 = *(ushort *)(param_1 + 0x8e);
+    uVar7 = *(ushort *)(ilReader + 0x8e);
     if (0xbe < uVar7) {
       uVar7 = 0;
     }
-    if (((iVar4 == 1) && (bVar1)) && (*(int *)(param_1 + 0x8c) == -1)) {
-      iVar4 = *(int *)(param_1 + 0x88);
+    if (((iVar4 == 1) && (bVar1)) && (*(int *)(ilReader + 0x8c) == -1)) {
+      iVar4 = *(int *)(ilReader + 0x88);
       puVar8 = (undefined4 *)0x0;
       uVar3 = *(uint *)(iVar4 + 4);
       if (uVar3 - 1 < uVar3) {
@@ -2309,8 +2309,8 @@ int FUN_000e4a38(param_1, param_2)
       }
       uVar9 = *puVar8;
       Vector__removeAt(iVar4,uVar3 - 1);
-      iVar4 = *(int *)(param_1 + 0x88);
-      *(undefined4 *)(param_1 + 0x80) = uVar9;
+      iVar4 = *(int *)(ilReader + 0x88);
+      *(undefined4 *)(ilReader + 0x80) = uVar9;
       puVar8 = (undefined4 *)0x0;
       uVar3 = *(uint *)(iVar4 + 4);
       if (uVar3 - 1 < uVar3) {
@@ -2318,29 +2318,29 @@ int FUN_000e4a38(param_1, param_2)
       }
       uVar9 = *puVar8;
       Vector__removeAt(iVar4,uVar3 - 1);
-      iVar4 = *(int *)(param_1 + 0x88);
-      *(undefined4 *)(param_1 + 0x7c) = uVar9;
+      iVar4 = *(int *)(ilReader + 0x88);
+      *(undefined4 *)(ilReader + 0x7c) = uVar9;
       piVar10 = (int *)0x0;
       uVar3 = *(uint *)(iVar4 + 4);
-      iVar5 = *(int *)(param_1 + 0x2c);
+      iVar5 = *(int *)(ilReader + 0x2c);
       if (uVar3 - 1 < uVar3) {
         piVar10 = (int *)((uVar3 - 1) * 4 + *(int *)(iVar4 + 8));
       }
       iVar11 = *piVar10;
       Vector__removeAt(iVar4,uVar3 - 1);
       bVar2 = true;
-      *(int *)(param_1 + 0x74) = iVar5 + iVar11 * 4;
+      *(int *)(ilReader + 0x74) = iVar5 + iVar11 * 4;
     }
     else {
       bVar2 = false;
     }
-    if (*(int *)(param_1 + 0x80) == 0) {
+    if (*(int *)(ilReader + 0x80) == 0) {
       if (bVar1 && uVar7 == 0x2b) {
-        *(undefined4 *)(param_1 + 0x7c) = 2;
+        *(undefined4 *)(ilReader + 0x7c) = 2;
         return 0;
       }
       if (bVar1 && uVar7 == 0x28) {
-        *(undefined4 *)(param_1 + 0x7c) = 2;
+        *(undefined4 *)(ilReader + 0x7c) = 2;
         return 0;
       }
     }

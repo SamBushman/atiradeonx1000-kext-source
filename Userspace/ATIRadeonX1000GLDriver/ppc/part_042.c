@@ -1559,7 +1559,7 @@ code_r0x0013b8e4:
   puVar1 = PTR_DAT_001e9134;
   puVar9[0x4c] = piVar22;
   puVar9[1] = puVar1 + 8;
-  FUN_000ec3ac(param_1,piVar2,puVar10);
+  Program__insertBlockAfter(param_1,piVar2,puVar10);
   FUN_000e9948(piVar12,piVar2,puVar10);
   Block__connect(piVar2,puVar10);
 code_r0x0013ba08:
