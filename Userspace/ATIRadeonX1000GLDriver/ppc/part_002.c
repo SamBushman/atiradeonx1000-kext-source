@@ -9056,13 +9056,13 @@ int gld_fillCapsBlock(ctx, stateBlock, pixelFormat)
   *(char *)((int)stateBlock + 0x26) = (char)pixelFormatFlag1;
   *(byte *)((int)stateBlock + 0x27) = (byte)(-(uint)(*(uint *)(pixelFormat + 0x10) & 0x3f000000) >> 0x1f);
   pixelFormatHome = pixelFormat;
-  FUN_0000a180(*(undefined4 *)(pixelFormat + 0x10),&channelBits0,pixelFormat,staleArgR6,staleArgR7,staleArgR8,pixelFormatFlag1);
+  gld_channelBitsForFormat(*(undefined4 *)(pixelFormat + 0x10),&channelBits0,pixelFormat,staleArgR6,staleArgR7,staleArgR8,pixelFormatFlag1);
   stateBlock[10] = (int)channelBits4;
   stateBlock[0xb] = (int)channelBits0;
   stateBlock[0xc] = (int)channelBits1;
   stateBlock[0xd] = (int)channelBits2;
   stateBlock[0xe] = (int)channelBits3;
-  FUN_0000a180(*(undefined4 *)(pixelFormat + 0x14),&channelBits0,pixelFormatHome,staleArgR6,staleArgR7,staleArgR8,(int)channelBits2);
+  gld_channelBitsForFormat(*(undefined4 *)(pixelFormat + 0x14),&channelBits0,pixelFormatHome,staleArgR6,staleArgR7,staleArgR8,(int)channelBits2);
   stateBlock[0x11] = (int)channelBits0;
   stateBlock[0x12] = (int)channelBits1;
   stateBlock[0x13] = (int)channelBits2;

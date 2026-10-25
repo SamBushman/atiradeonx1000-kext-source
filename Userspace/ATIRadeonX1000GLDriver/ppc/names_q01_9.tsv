@@ -169,3 +169,55 @@ use	FUN_00024970	iVar3	blockCount	INFERRED	number of 16-index blocks copied by t
 use	FUN_00024970	iVar3	blockCount	INFERRED	number of 16-index blocks copied by the unrolled loop	^\s*iVar3\ =\ iVar3\ \+\ \-1;$@2	+2
 use	FUN_00024970	puVar4	packetAlloc	INFERRED	command-stream slot returned by the allocate callback (ctx+0x2998)	^\s*dataCacheBlockClearToZero\(\(int\)puVar4\ \+\ uVar10\);$	+1
 use	FUN_00024970	puVar4	packetAlloc	INFERRED	command-stream slot returned by the allocate callback (ctx+0x2998)	^\s*puVar2\ =\ \(undefined4\ \*\)\(\(uint\)\(puVar4\ \+\ 0xb\)\ \&\ 0xffffffe0\);$	+3
+func	FUN_00025da0	gld_deleteContextProgramObjects	INFERRED	walks the shared object list and deletes every vertex shader, program and fragment shader record owned by ctx
+func	FUN_00026440	gld_bindProgramRecord	INFERRED	finds or creates the per-context record of a shared program object, revalidates it (and rebuilds the linearised/translated program caches when the generation changed) and installs it at ctx+0x29e8
+func	FUN_000269a0	gld_getProgramParameter	INFERRED	glGetProgram-style query under the shared mutex: native-limit values (0x88a2..0x88b2) for ARB programs, otherwise forwards to glGetProgramivARB_impl
+local	FUN_00025da0	iVar1	objectKind	INFERRED	kind of the shared object list: 1 = vertex shader, 2 = program, 3 = fragment shader
+local	FUN_00025da0	iVar2	sharedState	INFERRED	ctx+0xc: the shared-object state (mutex, list head at +0x2c)
+local	FUN_00025da0	iVar4	objectEntry	INFERRED	shared object list entry; +0x10 holds objectKind, +0x14 the list of per-context records
+local	FUN_00025da0	piVar5	contextRecord	INFERRED	per-context record of the object; deleted here when it belongs to ctx
+use	FUN_00025da0	iVar3	recordOwner	INFERRED	context that owns the record (record word 2)	^\s*iVar3\ =\ piVar5\[2\];$	+2
+use	FUN_00025da0	iVar3	recordOwner	INFERRED	context that owns the record (record word 2)	^\s*FUN_000a0d70\(iVar3\ \+\ 0x240,1,piVar5\ \+\ 5\);$	+1
+use	FUN_00025da0	iVar3	recordOwner	INFERRED	context that owns the record (record word 2)	^\s*FUN_0003e4c0\(iVar3\ \+\ 0x240,piVar5\ \+\ 5\);$	+1
+use	FUN_00025da0	iVar3	recordOwner	INFERRED	context that owns the record (record word 2)	^\s*FUN_0003c310\(iVar3\ \+\ 0x240,piVar5\ \+\ 5\);$	+1
+use	FUN_00025da0	iVar3	recordPrev	INFERRED	previous link of the record's list node	^\s*iVar3\ =\ \*piVar5;$	+1
+use	FUN_00025da0	iVar3	recordPrev	INFERRED	previous link of the record's list node	^\s*\*\(int\ \*\)\(iVar3\ \+\ 4\)\ =\ piVar5\[1\];$	+2
+local	FUN_00026440	param_1	ctx	CONFIRMED	GLDContext
+local	FUN_00026440	param_2	programObject	INFERRED	shared program object: [0] source description, [5..7] generation/size words, +0x20 record list, [0xb]..[0xe] linearised/translated program caches
+local	FUN_00026440	piVar1	contextRecord	INFERRED	per-context record of the program (created on first use, linked into the object's list)
+local	FUN_00026440	iVar3	commandStream	INFERRED	ctx+0x240, the embedded command stream
+local	FUN_000269a0	uVar3	pnameCopy	INFERRED	copy of pname forwarded as a stale argument
+local	FUN_000269a0	psVar2	programHeader	INFERRED	*programObject: two shorts {kind, subkind}
+local	FUN_000269a0	iVar4	programField6	INFERRED	programObject[6], stored (minus 1) in the new record
+use	FUN_000269a0	piVar1	paramsCopy	INFERRED	copy of params forwarded as a stale argument	^\s*piVar1\ =\ param_4;$	+1
+use	FUN_000269a0	piVar1	paramsCopy	INFERRED	copy of params forwarded as a stale argument	^\s*FUN_0000a820\(param_1,0xffff,uVar3,piVar1,in_r7,in_r8\);$	+1
+use	FUN_000269a0	piVar1	contextRecord	INFERRED	per-context record of the program for this context	^\s*for\ \(piVar1\ =\ \(int\ \*\)param_2\[9\];\ piVar1\ !=\ param_2\ \+\ 8;\ piVar1\ =\ \(int\ \*\)piVar1\[1\]\)\ \{$	+2
+use	FUN_000269a0	piVar1	contextRecord	INFERRED	per-context record of the program for this context	^\s*piVar1\ =\ \(int\ \*\)_calloc\(1,\*\(int\ \*\)\(\&DAT_001aa4c4\ \+\ param_2\[7\]\ \*\ 4\)\ \+\ 0x14\);$	+2
+use	FUN_000269a0	piVar1	contextRecord	INFERRED	per-context record of the program for this context	^\s*piVar1\[2\]\ =\ param_1;$	+6
+use	FUN_000269a0	piVar1	contextRecord	INFERRED	per-context record of the program for this context	^\s*\*param_4\ =\ piVar1\[0x23\];$	+1
+use	FUN_000269a0	piVar1	contextRecord	INFERRED	per-context record of the program for this context	^\s*\*param_4\ =\ piVar1\[0x25\];$	+1
+use	FUN_000269a0	piVar1	contextRecord	INFERRED	per-context record of the program for this context	^\s*\*param_4\ =\ piVar1\[0x24\];$	+1
+use	FUN_000269a0	piVar1	contextRecord	INFERRED	per-context record of the program for this context	^\s*\*param_4\ =\ piVar1\[0x26\];$	+1
+local	FUN_00026f80	bVar1	vertexStrideWords	INFERRED	words per vertex taken from the current vertex-array record (+2)
+local	FUN_00026f80	iVar6	dataCursor	INFERRED	ctx+0x1f4: write cursor in the staging data buffer
+local	FUN_00026f80	uStack_38	outputCount	CONFIRMED	in/out count (2) of kernel selector 18 get_data_buffer
+local	FUN_00026f80	iStack_34	bufferBase	CONFIRMED	first output word of get_data_buffer
+local	FUN_00026f80	uStack_30	bufferSize	CONFIRMED	second output word of get_data_buffer
+use	FUN_00026f80	uVar5	dataLimit	INFERRED	ctx+0x1f8: end of the staging data buffer	^\s*uVar5\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x1f8\);$	+2
+use	FUN_00026f80	uVar5	refillCount	INFERRED	ctx+0x204 incremented per refill	^\s*uVar5\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x204\)\ \+\ 1;$	+3
+use	FUN_00026f80	uVar5	dataLimit	INFERRED	new staging buffer end	^\s*uVar5\ =\ iStack_34\ \+\ \(uStack_30\ \&\ 0xfffffffc\);$	+1
+use	FUN_00026f80	uVar5	dataLimit	INFERRED	new staging buffer end	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x1f8\)\ =\ uVar5;$	+1
+use	FUN_00026f80	uVar5	vertexCapacity	INFERRED	vertices that fit, clamped to 0xfffc	^\s*uVar5\ =\ 0xfffc;$	+1
+use	FUN_00026f80	uVar5	vertexCapacity	INFERRED	vertices that fit, clamped to 0xfffc	^\s*uVar5\ =\ uVar3;$	+1
+use	FUN_00026f80	uVar5	vertexCapacity	INFERRED	vertices that fit, clamped to 0xfffc	^\s*\*param_3\ =\ uVar5;$	+1
+use	FUN_00026f80	uVar3	alignedCursor	INFERRED	dataCursor rounded up to 128 bytes	^\s*uVar3\ =\ iVar6\ \+\ 0x7fU\ \&\ 0xffffff80;$	+2
+use	FUN_00026f80	uVar3	fittingVertices	INFERRED	remaining dwords / vertexStrideWords rounded down to a multiple of 12	^\s*uVar3\ =\ \(\(\(uint\)\(\(int\)\(uVar5\ \-\ uVar3\)\ >>\ 2\)\ /\ \(uint\)bVar1\)\ /\ 0xc\)\ \*\ 0xc;$	+1	lhs	none
+use	FUN_00026f80	uVar3	alignedCursor	INFERRED	dataCursor rounded up to 128 bytes	^\s*uVar3\ =\ \(\(\(uint\)\(\(int\)\(uVar5\ \-\ uVar3\)\ >>\ 2\)\ /\ \(uint\)bVar1\)\ /\ 0xc\)\ \*\ 0xc;$	+1	rhs	none
+use	FUN_00026f80	uVar3	fittingVertices	INFERRED	remaining dwords / vertexStrideWords rounded down to a multiple of 12	^\s*if\ \(uVar3\ <\ 0x10000\)\ \{$	+2
+use	FUN_000269a0	piVar1	contextRecord	INFERRED	per-context record of the program for this context	^\s*\*param_4\ =\ piVar1\[0x27\];$	+1
+use	FUN_00026f80	puVar4	activeCountPtr	INFERRED	param_3, or param_2 when the software-fallback byte at ctx+0x2b80 is set: the count word passed on to FUN_0002c020	^\s*puVar4\ =\ param_3;$	+1
+use	FUN_00026f80	puVar4	activeCountPtr	INFERRED	param_3, or param_2 when the software-fallback byte at ctx+0x2b80 is set: the count word passed on to FUN_0002c020	^\s*puVar4\ =\ param_2;$	+1
+use	FUN_00026f80	puVar4	activeCountPtr	INFERRED	param_3, or param_2 when the software-fallback byte at ctx+0x2b80 is set: the count word passed on to FUN_0002c020	^\s*\(\(void\ \(\*\)\(\)\)FUN_0002c020\)\(param_1\ \+\ 0x240,param_2,puVar4,param_4,param_5,param_6,param_7,fparam_1,fparam_2,$	+1
+use	FUN_00026f80	uVar2	dataBufferId	INFERRED	contextBufferMap+8 after a get_data_buffer refill, stored at ctx+0x200	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x208\)\ \+\ 8\);$	+1
+use	FUN_00026f80	uVar2	dataBufferId	INFERRED	contextBufferMap+8 after a get_data_buffer refill, stored at ctx+0x200	^\s*\*\(undefined4\ \*\)\(param_1\ \+\ 0x200\)\ =\ uVar2;$	+1
+use	FUN_00026f80	uVar5	dataLimit	INFERRED	ctx+0x1f8: end of the staging data buffer	^\s*uVar3\ =\ \(\(\(uint\)\(\(int\)\(uVar5\ \-\ uVar3\)\ >>\ 2\)\ /\ \(uint\)bVar1\)\ /\ 0xc\)\ \*\ 0xc;$	+1
