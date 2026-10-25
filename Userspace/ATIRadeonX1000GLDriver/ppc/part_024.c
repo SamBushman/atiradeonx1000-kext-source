@@ -3539,13 +3539,38 @@ int FUN_000f1d7c(pass, afterInst, inst)
   undefined4 afterInst;
   dword *inst;
 {
+  uint fixupIndexCountB;
+  uint fixupInstCount;
+  uint unusedMask;
+  uint fixupIndexCount;
+  uint walkIndexTopIndex;
+  uint maskedUse;
+  uint readMask;
+  uint fixupIndexTopIndex;
+  uint fixupInstTopIndex;
+  uint walkIndexCount;
+  uint walkInstCount;
+  undefined4 *fixupIndexSlotB;
+  undefined4 *fixupInstSlot;
+  undefined4 *walkInstTop;
+  undefined4 *fixupInstTop;
+  undefined4 *walkIndexSlotB;
+  int *fixupIndexSlot;
+  int *walkIndexTop;
+  int *walkIndexSlot;
+  int *fixupIndexTop;
+  int fixupIndexByteOffset;
+  int fixupInstByteOffset;
+  int walkIndexByteOffset;
+  int walkInstByteOffset;
+  bool hasNode;
   int sourceDef;
   int operandRecord;
   int *operandVReg;
   int loopIndex;
-  bool bVar1;
-  undefined4 *puVar2;
-  int *piVar3;
+  bool walking;
+  undefined4 *walkInstSlot;
+  int *node;
   int iVar4;
   int iVar5;
   int iVar6;
@@ -3557,9 +3582,9 @@ int FUN_000f1d7c(pass, afterInst, inst)
   undefined4 argR7;
   undefined4 in_r8;
   uint uVar9;
-  dword dVar10;
-  dword *pdVar11;
-  int *piVar12;
+  dword destRegister;
+  dword *destRegisterOffset;
+  int *fixupConsumer;
   char local_8c;
   char cStack_8b;
   char cStack_8a;
@@ -3598,8 +3623,8 @@ int FUN_000f1d7c(pass, afterInst, inst)
   vec4Arena = *(undefined4 *)(*(int *)(pass + 8) + 0x378);
   vec4Count = 0;
   vec4Capacity = 2;
-  pdVar11 = (dword *)inst[0x26];
-  dVar10 = inst[0x25];
+  destRegisterOffset = (dword *)inst[0x26];
+  destRegister = inst[0x25];
   a2 = inst;
   vec4Data = Arena__alloc(vec4Arena,8);
   vecArena = *(undefined4 *)(*(int *)(pass + 8) + 0x378);
@@ -3614,92 +3639,92 @@ int FUN_000f1d7c(pass, afterInst, inst)
   vec3Count = 0;
   vec3Capacity = 2;
   vec3Data = Arena__alloc(vec3Arena,8);
-  uVar8 = vec4Count;
+  walkInstCount = vec4Count;
   if (vec4Count < vec4Capacity) {
-    iVar4 = vec4Count * 4;
+    walkInstByteOffset = vec4Count * 4;
     a2 = ((unsigned char *)0x4);
-    _memset(iVar4 + vec4Data,0,4);
-    vec4Count = uVar8 + 1;
-    puVar2 = (undefined4 *)(iVar4 + vec4Data);
+    _memset(walkInstByteOffset + vec4Data,0,4);
+    vec4Count = walkInstCount + 1;
+    walkInstSlot = (undefined4 *)(walkInstByteOffset + vec4Data);
   }
   else {
-    puVar2 = (undefined4 *)Vector__elementRefGrow(&vec4Capacity,vec4Count);
+    walkInstSlot = (undefined4 *)Vector__elementRefGrow(&vec4Capacity,vec4Count);
   }
-  uVar8 = vecCount;
-  *puVar2 = inst;
+  walkIndexCount = vecCount;
+  *walkInstSlot = inst;
   if (vecCount < vecCapacity) {
-    iVar4 = vecCount * 4;
+    walkIndexByteOffset = vecCount * 4;
     a2 = ((unsigned char *)0x4);
-    _memset(iVar4 + vecData,0,4);
-    vecCount = uVar8 + 1;
-    puVar2 = (undefined4 *)(iVar4 + vecData);
+    _memset(walkIndexByteOffset + vecData,0,4);
+    vecCount = walkIndexCount + 1;
+    walkIndexSlotB = (undefined4 *)(walkIndexByteOffset + vecData);
   }
   else {
-    puVar2 = (undefined4 *)Vector__elementRefGrow(&vecCapacity,vecCount);
+    walkIndexSlotB = (undefined4 *)Vector__elementRefGrow(&vecCapacity,vecCount);
   }
-  *puVar2 = 1;
-  piVar3 = (int *)IRInst__getOperandSource(inst,1);
-  bVar1 = true;
-  uVar8 = vec4Count;
+  *walkIndexSlotB = 1;
+  node = (int *)IRInst__getOperandSource(inst,1);
+  walking = true;
+  walkInstCount = vec4Count;
 LAB_000f26b0:
   do {
     while( true ) {
-      if (uVar8 == 0) {
+      if (walkInstCount == 0) {
         operandRecord = IRInst__getOperandRecord(inst,0);
         WriteMask__fromSelectWord(&local_40,*(undefined4 *)(operandRecord + 0x10));
         while (vec2Count != 0) {
-          uVar8 = vec2Count - 1;
-          puVar2 = (undefined4 *)0x0;
-          if (uVar8 < vec2Count) {
-            puVar2 = (undefined4 *)(uVar8 * 4 + vec2Data);
+          fixupInstTopIndex = vec2Count - 1;
+          fixupInstTop = (undefined4 *)0x0;
+          if (fixupInstTopIndex < vec2Count) {
+            fixupInstTop = (undefined4 *)(fixupInstTopIndex * 4 + vec2Data);
           }
-          piVar12 = (int *)*puVar2;
-          Vector__removeAt(&vec2Capacity,uVar8);
-          piVar3 = (int *)0x0;
-          uVar8 = vec3Count - 1;
-          if (uVar8 < vec3Count) {
-            piVar3 = (int *)(uVar8 * 4 + vec3Data);
+          fixupConsumer = (int *)*fixupInstTop;
+          Vector__removeAt(&vec2Capacity,fixupInstTopIndex);
+          fixupIndexTop = (int *)0x0;
+          fixupIndexTopIndex = vec3Count - 1;
+          if (fixupIndexTopIndex < vec3Count) {
+            fixupIndexTop = (int *)(fixupIndexTopIndex * 4 + vec3Data);
           }
-          iVar4 = *piVar3;
-          Vector__removeAt(&vec3Capacity,uVar8);
-          operandVReg = (int *)IRInst__getOperandSource(piVar12,iVar4);
-          if (((dword *)operandVReg[0x26] != pdVar11) &&
+          iVar4 = *fixupIndexTop;
+          Vector__removeAt(&vec3Capacity,fixupIndexTopIndex);
+          operandVReg = (int *)IRInst__getOperandSource(fixupConsumer,iVar4);
+          if (((dword *)operandVReg[0x26] != destRegisterOffset) &&
              (iVar5 = (**(code **)(*operandVReg + 0x50))(operandVReg), iVar5 == 0)) {
-            uVar8 = operandVReg[3];
+            readMask = operandVReg[3];
             iVar5 = IRMov__new_1084b8(0x31,*(undefined4 *)(pass + 8));
             IRInst__setOperandSource(iVar5,1,operandVReg,0,*(undefined4 *)(pass + 8));
-            IRInst__setHardwareRegisterAndAdd(iVar5,pass,pdVar11,dVar10);
-            SelectWord__selectWhereMasked(&local_3c,0,local_40 & uVar8);
+            IRInst__setHardwareRegisterAndAdd(iVar5,pass,destRegisterOffset,destRegister);
+            SelectWord__selectWhereMasked(&local_3c,0,local_40 & readMask);
             *(undefined4 *)(iVar5 + 0x9c) = local_3c;
             FUN_000f4698(iVar5,1,pass);
-            iVar6 = IRInst__isProjectionOfOpcode2a(piVar12);
+            iVar6 = IRInst__isProjectionOfOpcode2a(fixupConsumer);
             if (iVar6 == 0) {
-              iVar6 = (**(code **)(*piVar12 + 0x7c))(piVar12);
+              iVar6 = (**(code **)(*fixupConsumer + 0x7c))(fixupConsumer);
               if (iVar6 == 0) {
-                IRInst__setOperandSource(piVar12,iVar4,iVar5,0,*(undefined4 *)(pass + 8));
-                Block__insertInstBefore(piVar12[0x56],piVar12,iVar5);
+                IRInst__setOperandSource(fixupConsumer,iVar4,iVar5,0,*(undefined4 *)(pass + 8));
+                Block__insertInstBefore(fixupConsumer[0x56],fixupConsumer,iVar5);
               }
               else {
-                IRInst__setOperandSource(piVar12,iVar4,iVar5,0,*(undefined4 *)(pass + 8));
-                predecessor = Block__getPredecessor(piVar12[0x56],iVar4 + -1);
+                IRInst__setOperandSource(fixupConsumer,iVar4,iVar5,0,*(undefined4 *)(pass + 8));
+                predecessor = Block__getPredecessor(fixupConsumer[0x56],iVar4 + -1);
                 Block__appendInst(predecessor,iVar5);
               }
             }
             else {
-              IRInst__setExtraOperandSource(piVar12,iVar5,0,*(undefined4 *)(pass + 8));
+              IRInst__setExtraOperandSource(fixupConsumer,iVar5,0,*(undefined4 *)(pass + 8));
               Block__insertInstAfter(operandVReg[0x56],operandVReg,iVar5);
             }
           }
         }
         sourceDef = IRInst__getOperandSource(inst,1);
-        uVar8 = local_40 & *(uint *)(sourceDef + 0xc);
-        SelectWord__selectWhereMasked(local_38,0,uVar8);
+        maskedUse = local_40 & *(uint *)(sourceDef + 0xc);
+        SelectWord__selectWhereMasked(local_38,0,maskedUse);
         inst[0x27] = local_38[0];
         FUN_000f4698(inst,1,pass);
-        cStack_89 = (char)uVar8;
-        cStack_8a = (char)(uVar8 >> 8);
-        cStack_8b = (char)(uVar8 >> 0x10);
-        local_8c = (char)(uVar8 >> 0x18);
+        cStack_89 = (char)maskedUse;
+        cStack_8a = (char)(maskedUse >> 8);
+        cStack_8b = (char)(maskedUse >> 0x10);
+        local_8c = (char)(maskedUse >> 0x18);
         if (((cStack_89 == '\0' && cStack_8a == '\0') && cStack_8b == '\0') && local_8c == '\0') {
           (**(code **)(*inst + 0xc))(inst,0,*(undefined4 *)(pass + 8));
         }
@@ -3712,304 +3737,304 @@ LAB_000f26b0:
         Arena__free(vec4Arena,vec4Data);
         return;
       }
-      if (!bVar1) break;
-      if (piVar3 == (int *)0x0) {
-        piVar3 = (int *)0x0;
-        bVar1 = false;
+      if (!walking) break;
+      if (node == (int *)0x0) {
+        node = (int *)0x0;
+        walking = false;
       }
-      else if (*(int *)(pass + 0x474) == piVar3[0x54]) {
+      else if (*(int *)(pass + 0x474) == node[0x54]) {
 LAB_000f26a4:
-        bVar1 = false;
+        walking = false;
       }
       else {
-        piVar3[0x54] = *(int *)(pass + 0x474);
-        operandRecord = IRInst__getOperandRecord(piVar3,0);
+        node[0x54] = *(int *)(pass + 0x474);
+        operandRecord = IRInst__getOperandRecord(node,0);
         WriteMask__fromSelectWord(&local_48,*(undefined4 *)(operandRecord + 0x10));
-        piVar3[3] = local_48;
-        iVar4 = (**(code **)(*piVar3 + 0x7c))
-                          (piVar3,a1,a2,argR6,argR7,in_r8,*(code **)(*piVar3 + 0x7c));
-        uVar8 = vec4Count;
+        node[3] = local_48;
+        iVar4 = (**(code **)(*node + 0x7c))
+                          (node,a1,a2,argR6,argR7,in_r8,*(code **)(*node + 0x7c));
+        walkInstCount = vec4Count;
         if (iVar4 == 0) {
-          iVar4 = IRInst__opcodeIsInSet(piVar3);
-          uVar8 = vec4Count;
+          iVar4 = IRInst__opcodeIsInSet(node);
+          walkInstCount = vec4Count;
           if (iVar4 == 0) {
-            if ((piVar3[5] & 0x200U) == 0) goto LAB_000f26a4;
+            if ((node[5] & 0x200U) == 0) goto LAB_000f26a4;
             if (vec4Count < vec4Capacity) {
-              iVar4 = vec4Count * 4;
+              walkInstByteOffset = vec4Count * 4;
               a2 = ((unsigned char *)0x4);
-              _memset(iVar4 + vec4Data,0,4);
-              vec4Count = uVar8 + 1;
-              puVar2 = (undefined4 *)(iVar4 + vec4Data);
+              _memset(walkInstByteOffset + vec4Data,0,4);
+              vec4Count = walkInstCount + 1;
+              walkInstSlot = (undefined4 *)(walkInstByteOffset + vec4Data);
             }
             else {
-              puVar2 = (undefined4 *)Vector__elementRefGrow(&vec4Capacity,vec4Count);
+              walkInstSlot = (undefined4 *)Vector__elementRefGrow(&vec4Capacity,vec4Count);
             }
-            uVar8 = vecCount;
-            *puVar2 = piVar3;
-            iVar4 = piVar3[0x21];
+            walkIndexCount = vecCount;
+            *walkInstSlot = node;
+            iVar4 = node[0x21];
             if (vecCount < vecCapacity) {
               iVar5 = vecCount * 4;
               a2 = ((unsigned char *)0x4);
               _memset(iVar5 + vecData,0,4);
-              vecCount = uVar8 + 1;
-              piVar12 = (int *)(iVar5 + vecData);
+              vecCount = walkIndexCount + 1;
+              walkIndexSlot = (int *)(iVar5 + vecData);
             }
             else {
-              piVar12 = (int *)Vector__elementRefGrow(&vecCapacity,vecCount);
+              walkIndexSlot = (int *)Vector__elementRefGrow(&vecCapacity,vecCount);
             }
-            *piVar12 = iVar4;
-            piVar3 = (int *)IRInst__getOperandSource(piVar3,piVar3[0x21]);
+            *walkIndexSlot = iVar4;
+            node = (int *)IRInst__getOperandSource(node,node[0x21]);
           }
           else {
             if (vec4Count < vec4Capacity) {
-              iVar4 = vec4Count * 4;
+              walkInstByteOffset = vec4Count * 4;
               a2 = ((unsigned char *)0x4);
-              _memset(iVar4 + vec4Data,0,4);
-              vec4Count = uVar8 + 1;
-              puVar2 = (undefined4 *)(iVar4 + vec4Data);
+              _memset(walkInstByteOffset + vec4Data,0,4);
+              vec4Count = walkInstCount + 1;
+              walkInstSlot = (undefined4 *)(walkInstByteOffset + vec4Data);
             }
             else {
-              puVar2 = (undefined4 *)Vector__elementRefGrow(&vec4Capacity,vec4Count);
+              walkInstSlot = (undefined4 *)Vector__elementRefGrow(&vec4Capacity,vec4Count);
             }
-            uVar8 = vecCount;
-            *puVar2 = piVar3;
+            walkIndexCount = vecCount;
+            *walkInstSlot = node;
             if (vecCount < vecCapacity) {
-              iVar4 = vecCount * 4;
+              walkIndexByteOffset = vecCount * 4;
               a2 = ((unsigned char *)0x4);
-              _memset(iVar4 + vecData,0,4);
-              vecCount = uVar8 + 1;
-              puVar2 = (undefined4 *)(iVar4 + vecData);
+              _memset(walkIndexByteOffset + vecData,0,4);
+              vecCount = walkIndexCount + 1;
+              walkIndexSlotB = (undefined4 *)(walkIndexByteOffset + vecData);
             }
             else {
-              puVar2 = (undefined4 *)Vector__elementRefGrow(&vecCapacity,vecCount);
+              walkIndexSlotB = (undefined4 *)Vector__elementRefGrow(&vecCapacity,vecCount);
             }
-            *puVar2 = 2;
-            piVar3 = (int *)IRInst__getOperandSource(piVar3,2);
+            *walkIndexSlotB = 2;
+            node = (int *)IRInst__getOperandSource(node,2);
           }
         }
         else {
           if (vec4Count < vec4Capacity) {
-            iVar4 = vec4Count * 4;
+            walkInstByteOffset = vec4Count * 4;
             a2 = ((unsigned char *)0x4);
-            _memset(iVar4 + vec4Data,0,4);
-            vec4Count = uVar8 + 1;
-            puVar2 = (undefined4 *)(iVar4 + vec4Data);
+            _memset(walkInstByteOffset + vec4Data,0,4);
+            vec4Count = walkInstCount + 1;
+            walkInstSlot = (undefined4 *)(walkInstByteOffset + vec4Data);
           }
           else {
-            puVar2 = (undefined4 *)Vector__elementRefGrow(&vec4Capacity,vec4Count);
+            walkInstSlot = (undefined4 *)Vector__elementRefGrow(&vec4Capacity,vec4Count);
           }
-          uVar8 = vecCount;
-          *puVar2 = piVar3;
+          walkIndexCount = vecCount;
+          *walkInstSlot = node;
           if (vecCount < vecCapacity) {
-            iVar4 = vecCount * 4;
+            walkIndexByteOffset = vecCount * 4;
             a2 = ((unsigned char *)0x4);
-            _memset(iVar4 + vecData,0,4);
-            vecCount = uVar8 + 1;
-            puVar2 = (undefined4 *)(iVar4 + vecData);
+            _memset(walkIndexByteOffset + vecData,0,4);
+            vecCount = walkIndexCount + 1;
+            walkIndexSlotB = (undefined4 *)(walkIndexByteOffset + vecData);
           }
           else {
-            puVar2 = (undefined4 *)Vector__elementRefGrow(&vecCapacity,vecCount);
+            walkIndexSlotB = (undefined4 *)Vector__elementRefGrow(&vecCapacity,vecCount);
           }
-          *puVar2 = 1;
-          piVar3 = (int *)IRInst__getOperandSource(piVar3,1);
+          *walkIndexSlotB = 1;
+          node = (int *)IRInst__getOperandSource(node,1);
         }
 LAB_000f2690:
-        bVar1 = true;
-        uVar8 = vec4Count;
+        walking = true;
+        walkInstCount = vec4Count;
       }
     }
-    uVar9 = uVar8 - 1;
-    puVar2 = (undefined4 *)0x0;
-    if (uVar9 < uVar8) {
-      puVar2 = (undefined4 *)(uVar9 * 4 + vec4Data);
+    uVar9 = walkInstCount - 1;
+    walkInstTop = (undefined4 *)0x0;
+    if (uVar9 < walkInstCount) {
+      walkInstTop = (undefined4 *)(uVar9 * 4 + vec4Data);
     }
-    bVar1 = piVar3 != (int *)0x0;
-    piVar3 = (int *)*puVar2;
-    if (bVar1) {
-      piVar12 = (int *)0x0;
-      uVar8 = vecCount - 1;
-      if (uVar8 < vecCount) {
-        piVar12 = (int *)(uVar8 * 4 + vecData);
+    hasNode = node != (int *)0x0;
+    node = (int *)*walkInstTop;
+    if (hasNode) {
+      walkIndexTop = (int *)0x0;
+      walkIndexTopIndex = vecCount - 1;
+      if (walkIndexTopIndex < vecCount) {
+        walkIndexTop = (int *)(walkIndexTopIndex * 4 + vecData);
       }
-      if (*piVar12 != piVar3[0x21]) {
-        piVar12 = (int *)0x0;
-        if (uVar8 < vecCount) {
-          piVar12 = (int *)(uVar8 * 4 + vecData);
+      if (*walkIndexTop != node[0x21]) {
+        walkIndexTop = (int *)0x0;
+        if (walkIndexTopIndex < vecCount) {
+          walkIndexTop = (int *)(walkIndexTopIndex * 4 + vecData);
         }
-        iVar4 = *piVar12;
-        Vector__removeAt(&vecCapacity,uVar8);
-        uVar8 = vecCount;
+        iVar4 = *walkIndexTop;
+        Vector__removeAt(&vecCapacity,walkIndexTopIndex);
+        walkIndexCount = vecCount;
         if (vecCount < vecCapacity) {
           iVar5 = vecCount * 4;
           a2 = ((unsigned char *)0x4);
           _memset(iVar5 + vecData,0,4);
-          vecCount = uVar8 + 1;
-          piVar12 = (int *)(iVar5 + vecData);
+          vecCount = walkIndexCount + 1;
+          walkIndexSlot = (int *)(iVar5 + vecData);
         }
         else {
-          piVar12 = (int *)Vector__elementRefGrow(&vecCapacity,vecCount);
+          walkIndexSlot = (int *)Vector__elementRefGrow(&vecCapacity,vecCount);
         }
-        *piVar12 = iVar4 + 1;
-        piVar3 = (int *)IRInst__getOperandSource(piVar3,iVar4 + 1);
+        *walkIndexSlot = iVar4 + 1;
+        node = (int *)IRInst__getOperandSource(node,iVar4 + 1);
         goto LAB_000f2690;
       }
     }
     Vector__removeAt(&vec4Capacity,uVar9);
     Vector__removeAt(&vecCapacity,vecCount - 1);
-    operandRecord = IRInst__getOperandRecord(piVar3,0);
+    operandRecord = IRInst__getOperandRecord(node,0);
     WriteMask__fromSelectWord(&local_44,*(undefined4 *)(operandRecord + 0x10));
     uVar8 = local_44;
-    iVar4 = IRInst__isProjectionOfOpcode2a(piVar3);
+    iVar4 = IRInst__isProjectionOfOpcode2a(node);
     if (iVar4 == 0) {
-      iVar4 = (**(code **)(*piVar3 + 0x7c))(piVar3);
+      iVar4 = (**(code **)(*node + 0x7c))(node);
       if (iVar4 == 0) {
-        iVar4 = IRInst__opcodeIsInSet(piVar3);
+        iVar4 = IRInst__opcodeIsInSet(node);
         if (iVar4 != 0) {
-          sourceDef = IRInst__getOperandSource(piVar3,2);
-          iVar5 = IRInst__getOperandSource(piVar3,3);
-          uVar9 = ~*(uint *)(sourceDef + 0xc);
-          if ((uVar8 & (uVar9 << 0x18 | (uVar9 & 0xff00) << 8 | uVar9 >> 8 & 0xff00 | uVar9 >> 0x18)
+          sourceDef = IRInst__getOperandSource(node,2);
+          iVar5 = IRInst__getOperandSource(node,3);
+          unusedMask = ~*(uint *)(sourceDef + 0xc);
+          if ((uVar8 & (unusedMask << 0x18 | (unusedMask & 0xff00) << 8 | unusedMask >> 8 & 0xff00 | unusedMask >> 0x18)
               ) == 0) {
-            uVar9 = ~*(uint *)(iVar5 + 0xc);
-            if ((uVar8 & (uVar9 << 0x18 | (uVar9 & 0xff00) << 8 | uVar9 >> 8 & 0xff00 |
-                         uVar9 >> 0x18)) == 0) goto LAB_000f25ac;
-            IRInst__reduceTernaryToBinary(piVar3,3,*(undefined4 *)(pass + 8));
+            unusedMask = ~*(uint *)(iVar5 + 0xc);
+            if ((uVar8 & (unusedMask << 0x18 | (unusedMask & 0xff00) << 8 | unusedMask >> 8 & 0xff00 |
+                         unusedMask >> 0x18)) == 0) goto LAB_000f25ac;
+            IRInst__reduceTernaryToBinary(node,3,*(undefined4 *)(pass + 8));
           }
           else {
-            IRInst__reduceTernaryToBinary(piVar3,2,*(undefined4 *)(pass + 8));
+            IRInst__reduceTernaryToBinary(node,2,*(undefined4 *)(pass + 8));
           }
-          a2 = pdVar11;
-          argR6 = dVar10;
-          IRInst__setHardwareRegisterAndAdd(piVar3,pass,pdVar11,dVar10);
-          uVar9 = vec2Count;
+          a2 = destRegisterOffset;
+          argR6 = destRegister;
+          IRInst__setHardwareRegisterAndAdd(node,pass,destRegisterOffset,destRegister);
+          fixupInstCount = vec2Count;
           if (vec2Count < vec2Capacity) {
-            iVar4 = vec2Count * 4;
+            fixupInstByteOffset = vec2Count * 4;
             a2 = ((unsigned char *)0x4);
-            _memset(iVar4 + vec2Data,0,4);
-            vec2Count = uVar9 + 1;
-            puVar2 = (undefined4 *)(iVar4 + vec2Data);
+            _memset(fixupInstByteOffset + vec2Data,0,4);
+            vec2Count = fixupInstCount + 1;
+            fixupInstSlot = (undefined4 *)(fixupInstByteOffset + vec2Data);
           }
           else {
-            puVar2 = (undefined4 *)Vector__elementRefGrow(&vec2Capacity,vec2Count);
+            fixupInstSlot = (undefined4 *)Vector__elementRefGrow(&vec2Capacity,vec2Count);
           }
-          uVar9 = vec3Count;
-          *puVar2 = piVar3;
+          fixupIndexCountB = vec3Count;
+          *fixupInstSlot = node;
           if (vec3Count < vec3Capacity) {
-            iVar4 = vec3Count * 4;
+            fixupIndexByteOffset = vec3Count * 4;
             a2 = ((unsigned char *)0x4);
-            _memset(iVar4 + vec3Data,0,4);
-            vec3Count = uVar9 + 1;
-            puVar2 = (undefined4 *)(iVar4 + vec3Data);
+            _memset(fixupIndexByteOffset + vec3Data,0,4);
+            vec3Count = fixupIndexCountB + 1;
+            fixupIndexSlotB = (undefined4 *)(fixupIndexByteOffset + vec3Data);
           }
           else {
-            puVar2 = (undefined4 *)Vector__elementRefGrow(&vec3Capacity,vec3Count);
+            fixupIndexSlotB = (undefined4 *)Vector__elementRefGrow(&vec3Capacity,vec3Count);
           }
-          *puVar2 = 3;
-          piVar3[3] = 0;
+          *fixupIndexSlotB = 3;
+          node[3] = 0;
         }
 LAB_000f25ac:
-        if ((piVar3[5] & 0x200U) != 0) {
-          sourceDef = IRInst__getOperandSource(piVar3,piVar3[0x21]);
-          piVar3[3] = uVar8 | *(uint *)(sourceDef + 0xc);
-          if ((dword *)*(undefined1 **)(sourceDef + 0x98) == pdVar11) {
+        if ((node[5] & 0x200U) != 0) {
+          sourceDef = IRInst__getOperandSource(node,node[0x21]);
+          node[3] = uVar8 | *(uint *)(sourceDef + 0xc);
+          if ((dword *)*(undefined1 **)(sourceDef + 0x98) == destRegisterOffset) {
             a2 = (dword *)0x0;
             argR6 = 0;
             argR7 = *(undefined4 *)(pass + 8);
-            IRInst__setOperandSource(piVar3,piVar3[0x21],0,0,argR7);
-            piVar3[0x21] = piVar3[0x21] + -1;
-            piVar3[5] = piVar3[5] & 0xfffffdff;
+            IRInst__setOperandSource(node,node[0x21],0,0,argR7);
+            node[0x21] = node[0x21] + -1;
+            node[5] = node[5] & 0xfffffdff;
           }
         }
       }
       else {
         loopIndex = 1;
-        if (0 < piVar3[0x21]) {
+        if (0 < node[0x21]) {
           do {
-            iVar5 = IRInst__getOperandSource(piVar3,loopIndex);
-            uVar9 = ~*(uint *)(iVar5 + 0xc);
-            if ((uVar8 & (uVar9 << 0x18 | (uVar9 & 0xff00) << 8 | uVar9 >> 8 & 0xff00 |
-                         uVar9 >> 0x18)) != 0) {
-              a2 = pdVar11;
-              argR6 = dVar10;
-              IRInst__setHardwareRegisterAndAdd(piVar3,pass,pdVar11,dVar10);
-              piVar3[3] = 0;
-              if (0 < piVar3[0x21]) {
+            iVar5 = IRInst__getOperandSource(node,loopIndex);
+            unusedMask = ~*(uint *)(iVar5 + 0xc);
+            if ((uVar8 & (unusedMask << 0x18 | (unusedMask & 0xff00) << 8 | unusedMask >> 8 & 0xff00 |
+                         unusedMask >> 0x18)) != 0) {
+              a2 = destRegisterOffset;
+              argR6 = destRegister;
+              IRInst__setHardwareRegisterAndAdd(node,pass,destRegisterOffset,destRegister);
+              node[3] = 0;
+              if (0 < node[0x21]) {
                 loopIndex = 1;
                 do {
-                  iVar5 = IRInst__getOperandSource(piVar3,loopIndex);
-                  uVar9 = vec2Count;
+                  iVar5 = IRInst__getOperandSource(node,loopIndex);
+                  fixupInstCount = vec2Count;
                   if ((uVar8 & *(uint *)(iVar5 + 0xc)) != 0) {
                     if (vec2Count < vec2Capacity) {
                       iVar5 = vec2Count * 4;
                       a2 = ((unsigned char *)0x4);
                       _memset(iVar5 + vec2Data,0,4);
-                      vec2Count = uVar9 + 1;
-                      puVar2 = (undefined4 *)(iVar5 + vec2Data);
+                      vec2Count = fixupInstCount + 1;
+                      fixupInstSlot = (undefined4 *)(iVar5 + vec2Data);
                     }
                     else {
-                      puVar2 = (undefined4 *)Vector__elementRefGrow(&vec2Capacity,vec2Count);
+                      fixupInstSlot = (undefined4 *)Vector__elementRefGrow(&vec2Capacity,vec2Count);
                     }
-                    uVar9 = vec3Count;
-                    *puVar2 = piVar3;
+                    fixupIndexCountB = vec3Count;
+                    *fixupInstSlot = node;
                     if (vec3Count < vec3Capacity) {
                       iVar5 = vec3Count * 4;
                       a2 = ((unsigned char *)0x4);
                       _memset(iVar5 + vec3Data,0,4);
-                      vec3Count = uVar9 + 1;
-                      piVar12 = (int *)(iVar5 + vec3Data);
+                      vec3Count = fixupIndexCountB + 1;
+                      fixupIndexSlot = (int *)(iVar5 + vec3Data);
                     }
                     else {
-                      piVar12 = (int *)Vector__elementRefGrow(&vec3Capacity,vec3Count);
+                      fixupIndexSlot = (int *)Vector__elementRefGrow(&vec3Capacity,vec3Count);
                     }
-                    *piVar12 = loopIndex;
+                    *fixupIndexSlot = loopIndex;
                   }
                   loopIndex = loopIndex + 1;
-                } while (loopIndex <= piVar3[0x21]);
+                } while (loopIndex <= node[0x21]);
               }
               break;
             }
             loopIndex = loopIndex + 1;
-          } while (loopIndex <= piVar3[0x21]);
+          } while (loopIndex <= node[0x21]);
         }
       }
 LAB_000f260c:
-      bVar1 = false;
-      uVar8 = vec4Count;
+      walking = false;
+      walkInstCount = vec4Count;
       goto LAB_000f26b0;
     }
-    a2 = pdVar11;
-    argR6 = dVar10;
-    IRInst__setHardwareRegisterAndAdd(piVar3,pass,pdVar11,dVar10);
-    sourceDef = IRInst__getOperandSource(piVar3,piVar3[0x21]);
-    uVar9 = vec2Count;
-    piVar3[3] = 0;
+    a2 = destRegisterOffset;
+    argR6 = destRegister;
+    IRInst__setHardwareRegisterAndAdd(node,pass,destRegisterOffset,destRegister);
+    sourceDef = IRInst__getOperandSource(node,node[0x21]);
+    fixupInstCount = vec2Count;
+    node[3] = 0;
     if ((uVar8 & *(uint *)(sourceDef + 0xc)) == 0) goto LAB_000f260c;
     if (vec2Count < vec2Capacity) {
-      iVar4 = vec2Count * 4;
+      fixupInstByteOffset = vec2Count * 4;
       a2 = ((unsigned char *)0x4);
-      _memset(iVar4 + vec2Data,0,4);
-      vec2Count = uVar9 + 1;
-      puVar2 = (undefined4 *)(iVar4 + vec2Data);
+      _memset(fixupInstByteOffset + vec2Data,0,4);
+      vec2Count = fixupInstCount + 1;
+      fixupInstSlot = (undefined4 *)(fixupInstByteOffset + vec2Data);
     }
     else {
-      puVar2 = (undefined4 *)Vector__elementRefGrow(&vec2Capacity,vec2Count);
+      fixupInstSlot = (undefined4 *)Vector__elementRefGrow(&vec2Capacity,vec2Count);
     }
-    uVar8 = vec3Count;
-    *puVar2 = piVar3;
-    iVar4 = piVar3[0x21];
+    fixupIndexCount = vec3Count;
+    *fixupInstSlot = node;
+    iVar4 = node[0x21];
     if (vec3Count < vec3Capacity) {
       iVar5 = vec3Count * 4;
       a2 = ((unsigned char *)0x4);
       _memset(iVar5 + vec3Data,0,4);
-      vec3Count = uVar8 + 1;
-      piVar12 = (int *)(iVar5 + vec3Data);
+      vec3Count = fixupIndexCount + 1;
+      fixupIndexSlot = (int *)(iVar5 + vec3Data);
     }
     else {
-      piVar12 = (int *)Vector__elementRefGrow(&vec3Capacity,vec3Count);
+      fixupIndexSlot = (int *)Vector__elementRefGrow(&vec3Capacity,vec3Count);
     }
-    *piVar12 = iVar4;
-    bVar1 = false;
-    uVar8 = vec4Count;
+    *fixupIndexSlot = iVar4;
+    walking = false;
+    walkInstCount = vec4Count;
   } while( true );
 }
 #undef vec4Capacity

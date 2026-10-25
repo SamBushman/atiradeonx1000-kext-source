@@ -1578,7 +1578,7 @@
 0xf6760	352	Compiler__getOrCreateConstVector2	part_026	converted
 0xf68c0	324	Compiler__getOrCreateConstVector1	part_026	converted
 0xf6a04	588	FUN_000f6a04	part_026	converted
-0xf6d14	2568	FUN_000f6d14	part_026	converted
+0xf6d14	2568	IRInst__setConstantOperand	part_026	converted
 0xf771c	340	IRInst__makeLiteralVec4Int	part_026	converted
 0xf7870	340	FUN_000f7870	part_026	converted
 0xf79c4	332	IRInst__makeLiteralVec4Float	part_026	converted

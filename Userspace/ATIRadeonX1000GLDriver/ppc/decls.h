@@ -1784,7 +1784,7 @@ extern int Compiler__getOrCreateConstVector3();
 extern int Compiler__getOrCreateConstVector2();
 extern int Compiler__getOrCreateConstVector1();
 extern int FUN_000f6a04();
-extern int FUN_000f6d14();
+extern int IRInst__setConstantOperand();
 extern int IRInst__makeLiteralVec4Int();
 extern int FUN_000f7870();
 extern void IRInst__makeLiteralVec4Float(undefined4 param_1,undefined4 param_2,undefined4 param_3,double fparam_1,double fparam_2,double fparam_3,double fparam_4);

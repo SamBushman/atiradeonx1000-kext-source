@@ -1172,33 +1172,41 @@ LAB_000f6b68:
   return puVar10;
 }
 
-/* FUN_000f6d14 @ 0xf6d14 (2568 bytes) */
-int FUN_000f6d14(inst, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12, param_13, param_14, param_15, param_16, param_17, param_18, param_19, param_20, param_21, param_22, param_23)
+/* IRInst__setConstantOperand @ 0xf6d14 (2568 bytes) */
+int IRInst__setConstantOperand(inst, program, operandIndex, constOperand0Kind, constOperand0Value, constOperand0Word2, constOperand0Word3, constOperand0Word4, constOperand0Word5, constOperand1Kind, constOperand1Value, constOperand1Word2, constOperand1Word3, constOperand1Word4, constOperand1Word5, constOperand2Kind, constOperand2Value, constOperand2Word2, constOperand2Word3, constOperand2Word4, constOperand2Word5, constOperand3Kind, constOperand3Value)
   undefined4 inst;
-  int param_2;
-  undefined4 param_3;
-  int param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
-  undefined4 param_9;
-  int param_10;
-  undefined4 param_11;
-  undefined4 param_12;
-  undefined4 param_13;
-  undefined4 param_14;
-  undefined4 param_15;
-  int param_16;
-  undefined4 param_17;
-  undefined4 param_18;
-  undefined4 param_19;
-  undefined4 param_20;
-  undefined4 param_21;
-  int param_22;
-  undefined4 param_23;
+  int program;
+  undefined4 operandIndex;
+  int constOperand0Kind;
+  undefined4 constOperand0Value;
+  undefined4 constOperand0Word2;
+  undefined4 constOperand0Word3;
+  undefined4 constOperand0Word4;
+  undefined4 constOperand0Word5;
+  int constOperand1Kind;
+  undefined4 constOperand1Value;
+  undefined4 constOperand1Word2;
+  undefined4 constOperand1Word3;
+  undefined4 constOperand1Word4;
+  undefined4 constOperand1Word5;
+  int constOperand2Kind;
+  undefined4 constOperand2Value;
+  undefined4 constOperand2Word2;
+  undefined4 constOperand2Word3;
+  undefined4 constOperand2Word4;
+  undefined4 constOperand2Word5;
+  int constOperand3Kind;
+  undefined4 constOperand3Value;
 {
-  unsigned int ghidra_home[8] = { inst, param_2, param_3, param_4, param_5, param_6, param_7, param_8 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  uint programFlags;
+  uint operandKindA;
+  int existingConstInst;
+  int uniqueCount;
+  int existingInstRecord;
+  bool moreToSort;
+  bool operandLess;
+  undefined4 constantHandle;
+  unsigned int ghidra_home[8] = { inst, program, operandIndex, constOperand0Kind, constOperand0Value, constOperand0Word2, constOperand0Word3, constOperand0Word4 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   undefined1 uVar1;
   undefined1 uVar2;
   uint uVar3;
@@ -1206,13 +1214,13 @@ int FUN_000f6d14(inst, param_2, param_3, param_4, param_5, param_6, param_7, par
   int **ppiVar5;
   int iVar6;
   int iVar7;
-  undefined4 uVar8;
+  undefined4 loadConstSource;
   int *piVar9;
-  uint *puVar10;
+  uint *operandB;
   int iVar11;
-  uint *puVar12;
-  undefined4 uVar13;
-  bool bVar14;
+  uint *operandA;
+  undefined4 compiler;
+  bool notLastWord;
   int iVar15;
   int local_288;
   undefined1 auStack_284 [4];
@@ -1220,157 +1228,157 @@ int FUN_000f6d14(inst, param_2, param_3, param_4, param_5, param_6, param_7, par
   undefined4 local_27c;
   undefined4 local_278;
   int *local_274;
-  int *local_270 [11];
-  undefined4 local_244;
-  undefined4 local_240;
-  undefined4 local_23c;
-  undefined4 local_238;
-  undefined4 local_234;
-  undefined4 local_230;
-  undefined4 local_22c;
-  undefined4 local_228;
-  undefined4 local_224;
-  undefined4 local_220;
-  undefined4 local_21c;
-  undefined4 local_218;
-  undefined4 local_214;
-  undefined4 local_210;
-  undefined4 local_20c;
-  undefined4 local_208;
-  undefined4 local_204;
-  undefined4 local_200;
-  undefined4 local_1fc;
-  undefined4 local_1f8;
-  undefined4 local_1f4;
-  undefined4 local_1f0;
-  undefined4 local_1ec;
-  undefined4 local_1e8;
-  undefined4 local_1e4;
-  undefined4 local_1e0;
-  undefined4 local_1dc;
-  undefined4 local_1d8;
-  undefined4 local_1d4;
-  undefined4 local_1d0;
-  undefined4 local_1cc;
-  undefined4 local_1c8;
-  undefined4 local_1c4;
-  undefined4 local_1c0;
-  undefined4 local_1bc;
-  undefined4 local_1b8;
-  undefined4 local_1b4;
-  undefined4 local_1b0;
-  undefined4 local_1ac;
-  undefined4 local_1a8;
-  undefined4 local_1a4;
-  undefined4 local_1a0;
-  undefined4 local_19c;
-  undefined4 local_198;
-  undefined4 local_194;
-  undefined4 local_190;
-  undefined4 local_18c;
-  undefined4 local_188;
-  undefined4 local_184;
-  undefined4 local_180;
-  undefined4 local_17c;
-  undefined4 local_178;
-  undefined4 local_174;
-  undefined4 local_170;
-  undefined4 local_16c;
-  undefined4 local_168;
-  undefined4 local_164;
-  undefined4 local_160;
-  undefined4 local_15c;
-  undefined4 local_158;
-  undefined4 local_154;
-  undefined4 local_150;
-  undefined4 local_14c;
-  undefined4 local_148;
-  undefined4 local_144;
-  undefined4 local_140;
-  undefined4 local_13c;
-  undefined4 local_138;
-  undefined4 local_134;
-  undefined4 local_130;
-  undefined4 local_12c;
-  undefined4 local_128;
-  undefined4 local_124;
-  undefined4 local_120;
-  undefined4 local_11c;
-  undefined4 local_118;
-  undefined4 local_114;
-  undefined4 local_110;
-  undefined4 local_10c;
-  undefined4 local_108;
-  undefined4 local_104;
-  undefined4 local_100;
-  undefined4 local_fc;
-  undefined4 local_f8;
-  undefined4 local_f4;
-  undefined4 local_f0;
-  undefined4 local_ec;
-  undefined4 local_e8;
-  undefined4 local_e4;
-  undefined4 local_e0;
-  undefined4 local_dc;
-  undefined4 local_d8;
-  undefined4 local_d4;
-  undefined4 local_d0;
-  undefined4 local_cc;
-  undefined4 local_c8;
-  undefined4 local_c4;
-  undefined4 local_c0;
-  undefined4 local_bc;
-  undefined4 local_b8;
-  undefined4 local_b4;
-  undefined4 local_b0;
-  undefined4 local_ac;
-  undefined4 local_a8;
-  undefined4 local_a4;
-  undefined4 local_a0;
-  undefined4 local_9c;
-  undefined4 local_98;
-  undefined4 local_94;
-  undefined4 local_90;
-  undefined4 local_8c;
-  undefined4 local_88;
-  undefined4 local_84;
-  undefined4 local_80;
-  undefined4 local_7c;
-  undefined4 local_78;
-  undefined4 local_74;
-  undefined4 local_70;
-  undefined4 local_6c;
-  undefined4 local_68;
+  int *operandPtrTable [11];
+  undefined4 constVec2Op0Kind;
+  undefined4 constVec2Op0Value;
+  undefined4 constVec2Op0Word2;
+  undefined4 constVec2Op0Word3;
+  undefined4 constVec2Op0Word4;
+  undefined4 constVec2Op0Word5;
+  undefined4 constVec1Op0Kind;
+  undefined4 constVec1Op0Value;
+  undefined4 constVec1Op0Word2;
+  undefined4 constVec1Op0Word3;
+  undefined4 constVec1Op0Word4;
+  undefined4 constVec1Op0Word5;
+  undefined4 loadConst4Op3Kind;
+  undefined4 loadConst4Op3Value;
+  undefined4 loadConst4Op3Word2;
+  undefined4 loadConst4Op3Word3;
+  undefined4 loadConst4Op3Word4;
+  undefined4 loadConst4Op3Word5;
+  undefined4 loadConst4Op2Kind;
+  undefined4 loadConst4Op2Value;
+  undefined4 loadConst4Op2Word2;
+  undefined4 loadConst4Op2Word3;
+  undefined4 loadConst4Op2Word4;
+  undefined4 loadConst4Op2Word5;
+  undefined4 loadConst4Op1Kind;
+  undefined4 loadConst4Op1Value;
+  undefined4 loadConst4Op1Word2;
+  undefined4 loadConst4Op1Word3;
+  undefined4 loadConst4Op1Word4;
+  undefined4 loadConst4Op1Word5;
+  undefined4 loadConst4Op0Kind;
+  undefined4 loadConst4Op0Value;
+  undefined4 loadConst4Op0Word2;
+  undefined4 loadConst4Op0Word3;
+  undefined4 loadConst4Op0Word4;
+  undefined4 loadConst4Op0Word5;
+  undefined4 constVec4Op3Kind;
+  undefined4 constVec4Op3Value;
+  undefined4 constVec4Op3Word2;
+  undefined4 constVec4Op3Word3;
+  undefined4 constVec4Op3Word4;
+  undefined4 constVec4Op3Word5;
+  undefined4 loadConst3Op1Kind;
+  undefined4 loadConst3Op1Value;
+  undefined4 loadConst3Op1Word2;
+  undefined4 loadConst3Op1Word3;
+  undefined4 loadConst3Op1Word4;
+  undefined4 loadConst3Op1Word5;
+  undefined4 loadConst3Op0Kind;
+  undefined4 loadConst3Op0Value;
+  undefined4 loadConst3Op0Word2;
+  undefined4 loadConst3Op0Word3;
+  undefined4 loadConst3Op0Word4;
+  undefined4 loadConst3Op0Word5;
+  undefined4 loadConst2Op1Kind;
+  undefined4 loadConst2Op1Value;
+  undefined4 loadConst2Op1Word2;
+  undefined4 loadConst2Op1Word3;
+  undefined4 loadConst2Op1Word4;
+  undefined4 loadConst2Op1Word5;
+  undefined4 loadConst2Op0Kind;
+  undefined4 loadConst2Op0Value;
+  undefined4 loadConst2Op0Word2;
+  undefined4 loadConst2Op0Word3;
+  undefined4 loadConst2Op0Word4;
+  undefined4 loadConst2Op0Word5;
+  undefined4 loadConst1Op0Kind;
+  undefined4 loadConst1Op0Value;
+  undefined4 loadConst1Op0Word2;
+  undefined4 loadConst1Op0Word3;
+  undefined4 loadConst1Op0Word4;
+  undefined4 loadConst1Op0Word5;
+  undefined4 loadConst3Op2Kind;
+  undefined4 loadConst3Op2Value;
+  undefined4 loadConst3Op2Word2;
+  undefined4 loadConst3Op2Word3;
+  undefined4 loadConst3Op2Word4;
+  undefined4 loadConst3Op2Word5;
+  undefined4 constVec4Op2Kind;
+  undefined4 constVec4Op2Value;
+  undefined4 constVec4Op2Word2;
+  undefined4 constVec4Op2Word3;
+  undefined4 constVec4Op2Word4;
+  undefined4 constVec4Op2Word5;
+  undefined4 constVec4Op1Kind;
+  undefined4 constVec4Op1Value;
+  undefined4 constVec4Op1Word2;
+  undefined4 constVec4Op1Word3;
+  undefined4 constVec4Op1Word4;
+  undefined4 constVec4Op1Word5;
+  undefined4 constVec4Op0Kind;
+  undefined4 constVec4Op0Value;
+  undefined4 constVec4Op0Word2;
+  undefined4 constVec4Op0Word3;
+  undefined4 constVec4Op0Word4;
+  undefined4 constVec4Op0Word5;
+  undefined4 constVec3Op2Kind;
+  undefined4 constVec3Op2Value;
+  undefined4 constVec3Op2Word2;
+  undefined4 constVec3Op2Word3;
+  undefined4 constVec3Op2Word4;
+  undefined4 constVec3Op2Word5;
+  undefined4 constVec3Op1Kind;
+  undefined4 constVec3Op1Value;
+  undefined4 constVec3Op1Word2;
+  undefined4 constVec3Op1Word3;
+  undefined4 constVec3Op1Word4;
+  undefined4 constVec3Op1Word5;
+  undefined4 constVec3Op0Kind;
+  undefined4 constVec3Op0Value;
+  undefined4 constVec3Op0Word2;
+  undefined4 constVec3Op0Word3;
+  undefined4 constVec3Op0Word4;
+  undefined4 constVec3Op0Word5;
+  undefined4 constVec2Op1Kind;
+  undefined4 constVec2Op1Value;
+  undefined4 constVec2Op1Word2;
+  undefined4 constVec2Op1Word3;
+  undefined4 constVec2Op1Word4;
+  undefined4 constVec2Op1Word5;
   
-  uVar13 = *(undefined4 *)(param_2 + 8);
-  (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = param_3;
-  (*(int *)((unsigned char *)ghidra_home + 12)) = param_4;
-  (*(unsigned int *)((unsigned char *)ghidra_home + 16)) = param_5;
-  (*(unsigned int *)((unsigned char *)ghidra_home + 20)) = param_6;
-  (*(unsigned int *)((unsigned char *)ghidra_home + 24)) = param_7;
-  (*(unsigned int *)((unsigned char *)ghidra_home + 28)) = param_8;
-  if ((((param_4 == 2) && (param_10 == 2)) && (param_16 == 2)) && (param_22 == 2)) {
+  compiler = *(undefined4 *)(program + 8);
+  (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = operandIndex;
+  (*(int *)((unsigned char *)ghidra_home + 12)) = constOperand0Kind;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 16)) = constOperand0Value;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 20)) = constOperand0Word2;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 24)) = constOperand0Word3;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 28)) = constOperand0Word4;
+  if ((((constOperand0Kind == 2) && (constOperand1Kind == 2)) && (constOperand2Kind == 2)) && (constOperand3Kind == 2)) {
     iVar15 = 4;
-    ppiVar5 = local_270 + 7;
+    ppiVar5 = operandPtrTable + 7;
     do {
       *ppiVar5 = (int *)0x7ffffffe;
       ppiVar5 = ppiVar5 + 1;
       iVar15 = iVar15 + -1;
     } while (iVar15 != 0);
-    local_270[8] = (int *)param_11;
-    local_270[9] = (int *)param_17;
-    local_270[10] = (int *)param_23;
-    local_270[7] = (int *)param_5;
-    iVar15 = ((int (*)())FUN_000f6a04)(param_2,local_270 + 7,DAT_001aa868);
-    if (iVar15 != 0) {
-      if ((*(uint *)(param_2 + 0x30) & 8) == 0) {
-        IRInst__setOperandRef(inst,(*(unsigned int *)((unsigned char *)ghidra_home + 8)),*(undefined4 *)(iVar15 + 0x8c));
+    operandPtrTable[8] = (int *)constOperand1Value;
+    operandPtrTable[9] = (int *)constOperand2Value;
+    operandPtrTable[10] = (int *)constOperand3Value;
+    operandPtrTable[7] = (int *)constOperand0Value;
+    existingConstInst = ((int (*)())FUN_000f6a04)(program,operandPtrTable + 7,DAT_001aa868);
+    if (existingConstInst != 0) {
+      if ((*(uint *)(program + 0x30) & 8) == 0) {
+        IRInst__setOperandRef(inst,(*(unsigned int *)((unsigned char *)ghidra_home + 8)),*(undefined4 *)(existingConstInst + 0x8c));
       }
       else {
-        IRInst__setOperandSource(inst,(*(unsigned int *)((unsigned char *)ghidra_home + 8)),iVar15,*(uint *)(param_2 + 0x30) >> 7 & 1,uVar13);
+        IRInst__setOperandSource(inst,(*(unsigned int *)((unsigned char *)ghidra_home + 8)),existingConstInst,*(uint *)(program + 0x30) >> 7 & 1,compiler);
       }
-      iVar6 = IRInst__getOperandRecord(iVar15,0);
-      local_288 = *(int *)(iVar6 + 0x10);
+      existingInstRecord = IRInst__getOperandRecord(existingConstInst,0);
+      local_288 = *(int *)(existingInstRecord + 0x10);
       if (local_288 != DAT_001aa860) {
         iVar6 = 0;
         do {
@@ -1379,36 +1387,36 @@ int FUN_000f6d14(inst, param_2, param_3, param_4, param_5, param_6, param_7, par
             iVar7 = IRInst__getOperandRecord(inst,(*(unsigned int *)((unsigned char *)ghidra_home + 8)));
             uVar3 = (uint)*(byte *)(iVar6 + iVar7 + 0x10);
             auStack_284[uVar3 - 4] = 0;
-            *(byte *)(iVar15 + uVar3 + 0xc) =
-                 (byte)(1 << (uVar3 & 0x3f)) | *(byte *)(iVar15 + uVar3 + 0xc);
+            *(byte *)(existingConstInst + uVar3 + 0xc) =
+                 (byte)(1 << (uVar3 & 0x3f)) | *(byte *)(existingConstInst + uVar3 + 0xc);
           }
-          bVar14 = iVar6 != 3;
+          notLastWord = iVar6 != 3;
           iVar6 = iVar6 + 1;
-        } while (bVar14);
-        *(int *)(iVar15 + 0x9c) = local_288;
+        } while (notLastWord);
+        *(int *)(existingConstInst + 0x9c) = local_288;
       }
       return;
     }
   }
   piVar9 = &(*(unsigned int *)((unsigned char *)ghidra_home + 12));
   local_27c = DAT_001aa868;
-  local_270[0] = &param_10;
+  operandPtrTable[0] = &constOperand1Kind;
   ppiVar5 = &local_274;
   iVar15 = 0;
-  local_270[1] = &param_16;
-  local_270[2] = &param_22;
-  local_270[6] = (int *)PTR_DAT_001e8b70;
+  operandPtrTable[1] = &constOperand2Kind;
+  operandPtrTable[2] = &constOperand3Kind;
+  operandPtrTable[6] = (int *)PTR_DAT_001e8b70;
   local_274 = piVar9;
-  local_270[3] = (int *)PTR_DAT_001e8b70;
-  local_270[4] = (int *)PTR_DAT_001e8b70;
-  local_270[5] = (int *)PTR_DAT_001e8b70;
-  iVar6 = 0;
+  operandPtrTable[3] = (int *)PTR_DAT_001e8b70;
+  operandPtrTable[4] = (int *)PTR_DAT_001e8b70;
+  operandPtrTable[5] = (int *)PTR_DAT_001e8b70;
+  uniqueCount = 0;
 LAB_000f6f18:
   do {
-    iVar7 = iVar6;
+    iVar7 = uniqueCount;
     *(char *)((int)&local_27c + iVar15) = (char)iVar7;
-    iVar6 = iVar7 + 1;
-    local_270[iVar7 + 3] = piVar9;
+    uniqueCount = iVar7 + 1;
+    operandPtrTable[iVar7 + 3] = piVar9;
 LAB_000f6f58:
     iVar4 = 4 - iVar15;
     do {
@@ -1418,47 +1426,47 @@ LAB_000f6f58:
       iVar4 = iVar4 + -1;
       if (iVar4 == 0) {
         local_278 = DAT_001aa868;
-        if (0 < iVar6) {
+        if (0 < uniqueCount) {
           do {
             iVar11 = iVar7 + 1;
             iVar4 = 0;
             iVar15 = 0;
-            ppiVar5 = local_270 + 4;
+            ppiVar5 = operandPtrTable + 4;
             if (iVar7 < 0) {
               iVar11 = 1;
             }
             while (iVar11 = iVar11 + -1, iVar11 != 0) {
-              puVar12 = (uint *)ppiVar5[-1];
-              puVar10 = (uint *)*ppiVar5;
-              uVar3 = *puVar12;
-              if (uVar3 == *puVar10) {
-                if (uVar3 == 2) {
-                  bVar14 = GH_U2F((unsigned int)(puVar12[1])) < GH_U2F((unsigned int)(puVar10[1]));
+              operandA = (uint *)ppiVar5[-1];
+              operandB = (uint *)*ppiVar5;
+              operandKindA = *operandA;
+              if (operandKindA == *operandB) {
+                if (operandKindA == 2) {
+                  operandLess = GH_U2F((unsigned int)(operandA[1])) < GH_U2F((unsigned int)(operandB[1]));
                 }
                 else {
-                  bVar14 = puVar12[1] < puVar10[1];
+                  operandLess = operandA[1] < operandB[1];
                 }
               }
               else {
-                bVar14 = uVar3 < *puVar10;
+                operandLess = operandKindA < *operandB;
               }
-              if (bVar14) {
+              if (operandLess) {
                 uVar2 = *(undefined1 *)((int)&local_278 + iVar4);
                 uVar1 = *(undefined1 *)((int)&local_278 + iVar15 + 1);
-                *ppiVar5 = (int *)puVar12;
+                *ppiVar5 = (int *)operandA;
                 *(undefined1 *)((int)&local_278 + iVar15 + 1) = uVar2;
-                ppiVar5[-1] = (int *)puVar10;
+                ppiVar5[-1] = (int *)operandB;
                 *(undefined1 *)((int)&local_278 + iVar4) = uVar1;
               }
               iVar4 = iVar4 + 1;
               ppiVar5 = ppiVar5 + 1;
               iVar15 = iVar15 + 1;
             }
-            bVar14 = 0 < iVar7;
+            moreToSort = 0 < iVar7;
             iVar7 = iVar7 + -1;
-          } while (bVar14);
+          } while (moreToSort);
           iVar7 = 0;
-          iVar15 = iVar6;
+          iVar15 = uniqueCount;
           do {
             auStack_284[*(byte *)((int)&local_278 + iVar7)] = (char)iVar7;
             iVar7 = iVar7 + 1;
@@ -1473,195 +1481,195 @@ LAB_000f6f58:
           iVar15 = iVar15 + 1;
           iVar7 = iVar7 + -1;
         } while (iVar7 != 0);
-        uVar3 = *(uint *)(param_2 + 0x30);
-        if ((uVar3 & 8) == 0) {
-          if (iVar6 == 2) {
-            local_244 = *local_270[3];
-            local_240 = local_270[3][1];
-            local_23c = local_270[3][2];
-            local_238 = local_270[3][3];
-            local_230 = local_270[3][5];
-            local_234 = local_270[3][4];
-            local_7c = *local_270[4];
-            local_78 = local_270[4][1];
-            local_74 = local_270[4][2];
-            local_70 = local_270[4][3];
-            local_68 = local_270[4][5];
-            local_6c = local_270[4][4];
-            uVar13 = ((int (*)())Compiler__getOrCreateConstVector2)(*(undefined4 *)(param_2 + 0x3ac),local_244,local_240,local_23c,
-                                  local_238,local_234,local_230,local_7c);
+        programFlags = *(uint *)(program + 0x30);
+        if ((programFlags & 8) == 0) {
+          if (uniqueCount == 2) {
+            constVec2Op0Kind = *operandPtrTable[3];
+            constVec2Op0Value = operandPtrTable[3][1];
+            constVec2Op0Word2 = operandPtrTable[3][2];
+            constVec2Op0Word3 = operandPtrTable[3][3];
+            constVec2Op0Word5 = operandPtrTable[3][5];
+            constVec2Op0Word4 = operandPtrTable[3][4];
+            constVec2Op1Kind = *operandPtrTable[4];
+            constVec2Op1Value = operandPtrTable[4][1];
+            constVec2Op1Word2 = operandPtrTable[4][2];
+            constVec2Op1Word3 = operandPtrTable[4][3];
+            constVec2Op1Word5 = operandPtrTable[4][5];
+            constVec2Op1Word4 = operandPtrTable[4][4];
+            constantHandle = ((int (*)())Compiler__getOrCreateConstVector2)(*(undefined4 *)(program + 0x3ac),constVec2Op0Kind,constVec2Op0Value,constVec2Op0Word2,
+                                  constVec2Op0Word3,constVec2Op0Word4,constVec2Op0Word5,constVec2Op1Kind);
           }
-          else if (iVar6 < 3) {
-            if (iVar6 == 1) {
-              local_22c = *local_270[3];
-              local_228 = local_270[3][1];
-              local_224 = local_270[3][2];
-              local_220 = local_270[3][3];
-              local_218 = local_270[3][5];
-              local_21c = local_270[3][4];
-              uVar13 = ((int (*)())Compiler__getOrCreateConstVector1)(*(undefined4 *)(param_2 + 0x3ac),local_22c,local_228,local_224,
-                                    local_220,local_21c,local_218);
+          else if (uniqueCount < 3) {
+            if (uniqueCount == 1) {
+              constVec1Op0Kind = *operandPtrTable[3];
+              constVec1Op0Value = operandPtrTable[3][1];
+              constVec1Op0Word2 = operandPtrTable[3][2];
+              constVec1Op0Word3 = operandPtrTable[3][3];
+              constVec1Op0Word5 = operandPtrTable[3][5];
+              constVec1Op0Word4 = operandPtrTable[3][4];
+              constantHandle = ((int (*)())Compiler__getOrCreateConstVector1)(*(undefined4 *)(program + 0x3ac),constVec1Op0Kind,constVec1Op0Value,constVec1Op0Word2,
+                                    constVec1Op0Word3,constVec1Op0Word4,constVec1Op0Word5);
             }
             else {
 LAB_000f73f0:
-              uVar13 = 0;
+              constantHandle = 0;
             }
           }
-          else if (iVar6 == 3) {
-            local_94 = *local_270[3];
-            local_90 = local_270[3][1];
-            local_8c = local_270[3][2];
-            local_88 = local_270[3][3];
-            local_80 = local_270[3][5];
-            local_84 = local_270[3][4];
-            local_a8 = local_270[4][1];
-            local_a4 = local_270[4][2];
-            local_a0 = local_270[4][3];
-            local_ac = *local_270[4];
-            local_98 = local_270[4][5];
-            local_9c = local_270[4][4];
-            local_bc = local_270[5][2];
-            local_b8 = local_270[5][3];
-            local_c4 = *local_270[5];
-            local_c0 = local_270[5][1];
-            local_b0 = local_270[5][5];
-            local_b4 = local_270[5][4];
-            uVar13 = ((int (*)())Compiler__getOrCreateConstVector3)(*(undefined4 *)(param_2 + 0x3ac),local_94,local_90,local_8c,
-                                  local_88,local_84,local_80,local_ac);
+          else if (uniqueCount == 3) {
+            constVec3Op0Kind = *operandPtrTable[3];
+            constVec3Op0Value = operandPtrTable[3][1];
+            constVec3Op0Word2 = operandPtrTable[3][2];
+            constVec3Op0Word3 = operandPtrTable[3][3];
+            constVec3Op0Word5 = operandPtrTable[3][5];
+            constVec3Op0Word4 = operandPtrTable[3][4];
+            constVec3Op1Value = operandPtrTable[4][1];
+            constVec3Op1Word2 = operandPtrTable[4][2];
+            constVec3Op1Word3 = operandPtrTable[4][3];
+            constVec3Op1Kind = *operandPtrTable[4];
+            constVec3Op1Word5 = operandPtrTable[4][5];
+            constVec3Op1Word4 = operandPtrTable[4][4];
+            constVec3Op2Word2 = operandPtrTable[5][2];
+            constVec3Op2Word3 = operandPtrTable[5][3];
+            constVec3Op2Kind = *operandPtrTable[5];
+            constVec3Op2Value = operandPtrTable[5][1];
+            constVec3Op2Word5 = operandPtrTable[5][5];
+            constVec3Op2Word4 = operandPtrTable[5][4];
+            constantHandle = ((int (*)())Compiler__getOrCreateConstVector3)(*(undefined4 *)(program + 0x3ac),constVec3Op0Kind,constVec3Op0Value,constVec3Op0Word2,
+                                  constVec3Op0Word3,constVec3Op0Word4,constVec3Op0Word5,constVec3Op1Kind);
           }
           else {
-            if (iVar6 != 4) goto LAB_000f73f0;
-            local_dc = *local_270[3];
-            local_d8 = local_270[3][1];
-            local_d4 = local_270[3][2];
-            local_d0 = local_270[3][3];
-            local_c8 = local_270[3][5];
-            local_cc = local_270[3][4];
-            local_f0 = local_270[4][1];
-            local_ec = local_270[4][2];
-            local_e8 = local_270[4][3];
-            local_f4 = *local_270[4];
-            local_e0 = local_270[4][5];
-            local_e4 = local_270[4][4];
-            local_104 = local_270[5][2];
-            local_100 = local_270[5][3];
-            local_10c = *local_270[5];
-            local_108 = local_270[5][1];
-            local_f8 = local_270[5][5];
-            local_fc = local_270[5][4];
-            local_1b4 = *local_270[6];
-            local_1b0 = local_270[6][1];
-            local_1ac = local_270[6][2];
-            local_1a8 = local_270[6][3];
-            local_1a0 = local_270[6][5];
-            local_1a4 = local_270[6][4];
-            uVar13 = ((int (*)())Compiler__getOrCreateConstVector4)(*(undefined4 *)(param_2 + 0x3ac),local_dc,local_d8,local_d4,
-                                  local_d0,local_cc,local_c8,local_f4);
+            if (uniqueCount != 4) goto LAB_000f73f0;
+            constVec4Op0Kind = *operandPtrTable[3];
+            constVec4Op0Value = operandPtrTable[3][1];
+            constVec4Op0Word2 = operandPtrTable[3][2];
+            constVec4Op0Word3 = operandPtrTable[3][3];
+            constVec4Op0Word5 = operandPtrTable[3][5];
+            constVec4Op0Word4 = operandPtrTable[3][4];
+            constVec4Op1Value = operandPtrTable[4][1];
+            constVec4Op1Word2 = operandPtrTable[4][2];
+            constVec4Op1Word3 = operandPtrTable[4][3];
+            constVec4Op1Kind = *operandPtrTable[4];
+            constVec4Op1Word5 = operandPtrTable[4][5];
+            constVec4Op1Word4 = operandPtrTable[4][4];
+            constVec4Op2Word2 = operandPtrTable[5][2];
+            constVec4Op2Word3 = operandPtrTable[5][3];
+            constVec4Op2Kind = *operandPtrTable[5];
+            constVec4Op2Value = operandPtrTable[5][1];
+            constVec4Op2Word5 = operandPtrTable[5][5];
+            constVec4Op2Word4 = operandPtrTable[5][4];
+            constVec4Op3Kind = *operandPtrTable[6];
+            constVec4Op3Value = operandPtrTable[6][1];
+            constVec4Op3Word2 = operandPtrTable[6][2];
+            constVec4Op3Word3 = operandPtrTable[6][3];
+            constVec4Op3Word5 = operandPtrTable[6][5];
+            constVec4Op3Word4 = operandPtrTable[6][4];
+            constantHandle = ((int (*)())Compiler__getOrCreateConstVector4)(*(undefined4 *)(program + 0x3ac),constVec4Op0Kind,constVec4Op0Value,constVec4Op0Word2,
+                                  constVec4Op0Word3,constVec4Op0Word4,constVec4Op0Word5,constVec4Op1Kind);
           }
-          IRInst__setOperandRef(inst,(*(unsigned int *)((unsigned char *)ghidra_home + 8)),uVar13);
+          IRInst__setOperandRef(inst,(*(unsigned int *)((unsigned char *)ghidra_home + 8)),constantHandle);
           goto LAB_000f76c8;
         }
-        if (iVar6 == 2) {
-          local_14c = local_270[3][2];
-          local_154 = *local_270[3];
-          local_150 = local_270[3][1];
-          local_148 = local_270[3][3];
-          local_140 = local_270[3][5];
-          local_144 = local_270[3][4];
-          local_16c = *local_270[4];
-          local_168 = local_270[4][1];
-          local_164 = local_270[4][2];
-          local_160 = local_270[4][3];
-          local_158 = local_270[4][5];
-          local_15c = local_270[4][4];
-          uVar8 = ((int (*)())Compiler__getOrCreateLoadConst2)(*(undefined4 *)(param_2 + 0x3ac),local_154,local_150,local_14c,
-                               local_148,local_144,local_140,local_16c);
-          uVar3 = *(uint *)(param_2 + 0x30);
+        if (uniqueCount == 2) {
+          loadConst2Op0Word2 = operandPtrTable[3][2];
+          loadConst2Op0Kind = *operandPtrTable[3];
+          loadConst2Op0Value = operandPtrTable[3][1];
+          loadConst2Op0Word3 = operandPtrTable[3][3];
+          loadConst2Op0Word5 = operandPtrTable[3][5];
+          loadConst2Op0Word4 = operandPtrTable[3][4];
+          loadConst2Op1Kind = *operandPtrTable[4];
+          loadConst2Op1Value = operandPtrTable[4][1];
+          loadConst2Op1Word2 = operandPtrTable[4][2];
+          loadConst2Op1Word3 = operandPtrTable[4][3];
+          loadConst2Op1Word5 = operandPtrTable[4][5];
+          loadConst2Op1Word4 = operandPtrTable[4][4];
+          loadConstSource = ((int (*)())Compiler__getOrCreateLoadConst2)(*(undefined4 *)(program + 0x3ac),loadConst2Op0Kind,loadConst2Op0Value,loadConst2Op0Word2,
+                               loadConst2Op0Word3,loadConst2Op0Word4,loadConst2Op0Word5,loadConst2Op1Kind);
+          programFlags = *(uint *)(program + 0x30);
         }
-        else if (iVar6 < 3) {
-          if (iVar6 == 1) {
-            local_134 = local_270[3][2];
-            local_13c = *local_270[3];
-            local_138 = local_270[3][1];
-            local_130 = local_270[3][3];
-            local_128 = local_270[3][5];
-            local_12c = local_270[3][4];
-            uVar8 = ((int (*)())Compiler__getOrCreateLoadConst1)(*(undefined4 *)(param_2 + 0x3ac),local_13c,local_138,local_134,
-                                 local_130,local_12c,local_128);
-            uVar3 = *(uint *)(param_2 + 0x30);
+        else if (uniqueCount < 3) {
+          if (uniqueCount == 1) {
+            loadConst1Op0Word2 = operandPtrTable[3][2];
+            loadConst1Op0Kind = *operandPtrTable[3];
+            loadConst1Op0Value = operandPtrTable[3][1];
+            loadConst1Op0Word3 = operandPtrTable[3][3];
+            loadConst1Op0Word5 = operandPtrTable[3][5];
+            loadConst1Op0Word4 = operandPtrTable[3][4];
+            loadConstSource = ((int (*)())Compiler__getOrCreateLoadConst1)(*(undefined4 *)(program + 0x3ac),loadConst1Op0Kind,loadConst1Op0Value,loadConst1Op0Word2,
+                                 loadConst1Op0Word3,loadConst1Op0Word4,loadConst1Op0Word5);
+            programFlags = *(uint *)(program + 0x30);
           }
           else {
 LAB_000f70d4:
-            uVar8 = 0;
+            loadConstSource = 0;
           }
         }
-        else if (iVar6 == 3) {
-          local_17c = local_270[3][2];
-          local_184 = *local_270[3];
-          local_180 = local_270[3][1];
-          local_178 = local_270[3][3];
-          local_170 = local_270[3][5];
-          local_174 = local_270[3][4];
-          local_198 = local_270[4][1];
-          local_19c = *local_270[4];
-          local_194 = local_270[4][2];
-          local_190 = local_270[4][3];
-          local_188 = local_270[4][5];
-          local_18c = local_270[4][4];
-          local_124 = *local_270[5];
-          local_11c = local_270[5][2];
-          local_118 = local_270[5][3];
-          local_120 = local_270[5][1];
-          local_110 = local_270[5][5];
-          local_114 = local_270[5][4];
-          uVar8 = ((int (*)())Compiler__getOrCreateLoadConst3)(*(undefined4 *)(param_2 + 0x3ac),local_184,local_180,local_17c,
-                               local_178,local_174,local_170,local_19c);
-          uVar3 = *(uint *)(param_2 + 0x30);
+        else if (uniqueCount == 3) {
+          loadConst3Op0Word2 = operandPtrTable[3][2];
+          loadConst3Op0Kind = *operandPtrTable[3];
+          loadConst3Op0Value = operandPtrTable[3][1];
+          loadConst3Op0Word3 = operandPtrTable[3][3];
+          loadConst3Op0Word5 = operandPtrTable[3][5];
+          loadConst3Op0Word4 = operandPtrTable[3][4];
+          loadConst3Op1Value = operandPtrTable[4][1];
+          loadConst3Op1Kind = *operandPtrTable[4];
+          loadConst3Op1Word2 = operandPtrTable[4][2];
+          loadConst3Op1Word3 = operandPtrTable[4][3];
+          loadConst3Op1Word5 = operandPtrTable[4][5];
+          loadConst3Op1Word4 = operandPtrTable[4][4];
+          loadConst3Op2Kind = *operandPtrTable[5];
+          loadConst3Op2Word2 = operandPtrTable[5][2];
+          loadConst3Op2Word3 = operandPtrTable[5][3];
+          loadConst3Op2Value = operandPtrTable[5][1];
+          loadConst3Op2Word5 = operandPtrTable[5][5];
+          loadConst3Op2Word4 = operandPtrTable[5][4];
+          loadConstSource = ((int (*)())Compiler__getOrCreateLoadConst3)(*(undefined4 *)(program + 0x3ac),loadConst3Op0Kind,loadConst3Op0Value,loadConst3Op0Word2,
+                               loadConst3Op0Word3,loadConst3Op0Word4,loadConst3Op0Word5,loadConst3Op1Kind);
+          programFlags = *(uint *)(program + 0x30);
         }
         else {
-          if (iVar6 != 4) goto LAB_000f70d4;
-          local_1c4 = local_270[3][2];
-          local_1cc = *local_270[3];
-          local_1c8 = local_270[3][1];
-          local_1c0 = local_270[3][3];
-          local_1b8 = local_270[3][5];
-          local_1bc = local_270[3][4];
-          local_1e0 = local_270[4][1];
-          local_1e4 = *local_270[4];
-          local_1dc = local_270[4][2];
-          local_1d8 = local_270[4][3];
-          local_1d0 = local_270[4][5];
-          local_1d4 = local_270[4][4];
-          local_1fc = *local_270[5];
-          local_1f4 = local_270[5][2];
-          local_1f0 = local_270[5][3];
-          local_1f8 = local_270[5][1];
-          local_1e8 = local_270[5][5];
-          local_1ec = local_270[5][4];
-          local_214 = *local_270[6];
-          local_210 = local_270[6][1];
-          local_20c = local_270[6][2];
-          local_208 = local_270[6][3];
-          local_200 = local_270[6][5];
-          local_204 = local_270[6][4];
-          uVar8 = ((int (*)())FUN_000f5248)(*(undefined4 *)(param_2 + 0x3ac),local_1cc,local_1c8,local_1c4,
-                               local_1c0,local_1bc,local_1b8,local_1e4);
-          uVar3 = *(uint *)(param_2 + 0x30);
+          if (uniqueCount != 4) goto LAB_000f70d4;
+          loadConst4Op0Word2 = operandPtrTable[3][2];
+          loadConst4Op0Kind = *operandPtrTable[3];
+          loadConst4Op0Value = operandPtrTable[3][1];
+          loadConst4Op0Word3 = operandPtrTable[3][3];
+          loadConst4Op0Word5 = operandPtrTable[3][5];
+          loadConst4Op0Word4 = operandPtrTable[3][4];
+          loadConst4Op1Value = operandPtrTable[4][1];
+          loadConst4Op1Kind = *operandPtrTable[4];
+          loadConst4Op1Word2 = operandPtrTable[4][2];
+          loadConst4Op1Word3 = operandPtrTable[4][3];
+          loadConst4Op1Word5 = operandPtrTable[4][5];
+          loadConst4Op1Word4 = operandPtrTable[4][4];
+          loadConst4Op2Kind = *operandPtrTable[5];
+          loadConst4Op2Word2 = operandPtrTable[5][2];
+          loadConst4Op2Word3 = operandPtrTable[5][3];
+          loadConst4Op2Value = operandPtrTable[5][1];
+          loadConst4Op2Word5 = operandPtrTable[5][5];
+          loadConst4Op2Word4 = operandPtrTable[5][4];
+          loadConst4Op3Kind = *operandPtrTable[6];
+          loadConst4Op3Value = operandPtrTable[6][1];
+          loadConst4Op3Word2 = operandPtrTable[6][2];
+          loadConst4Op3Word3 = operandPtrTable[6][3];
+          loadConst4Op3Word5 = operandPtrTable[6][5];
+          loadConst4Op3Word4 = operandPtrTable[6][4];
+          loadConstSource = ((int (*)())FUN_000f5248)(*(undefined4 *)(program + 0x3ac),loadConst4Op0Kind,loadConst4Op0Value,loadConst4Op0Word2,
+                               loadConst4Op0Word3,loadConst4Op0Word4,loadConst4Op0Word5,loadConst4Op1Kind);
+          programFlags = *(uint *)(program + 0x30);
         }
-        IRInst__setOperandSource(inst,(*(unsigned int *)((unsigned char *)ghidra_home + 8)),uVar8,uVar3 >> 7 & 1,uVar13);
+        IRInst__setOperandSource(inst,(*(unsigned int *)((unsigned char *)ghidra_home + 8)),loadConstSource,programFlags >> 7 & 1,compiler);
 LAB_000f76c8:
         iVar15 = IRInst__getOperandRecord(inst,(*(unsigned int *)((unsigned char *)ghidra_home + 8)));
         *(undefined4 *)(iVar15 + 0x10) = local_280;
         return;
       }
-    } while (iVar6 < 0);
-    if (iVar6 != 0) {
+    } while (uniqueCount < 0);
+    if (uniqueCount != 0) {
       piVar9 = *ppiVar5;
       iVar4 = 0;
-      while ((*local_270[iVar4 + 3] != *piVar9 || (local_270[iVar4 + 3][1] != piVar9[1]))) {
+      while ((*operandPtrTable[iVar4 + 3] != *piVar9 || (operandPtrTable[iVar4 + 3][1] != piVar9[1]))) {
         iVar4 = iVar4 + 1;
-        if (iVar6 < iVar4) goto LAB_000f6f58;
-        if (iVar4 == iVar6) goto LAB_000f6f18;
+        if (uniqueCount < iVar4) goto LAB_000f6f58;
+        if (iVar4 == uniqueCount) goto LAB_000f6f18;
       }
       *(char *)((int)&local_27c + iVar11 + 1) = (char)iVar4;
       goto LAB_000f6f58;
@@ -1693,7 +1701,7 @@ int IRInst__makeLiteralVec4Int(param_1, program, param_3, param_4, param_5, para
   undefined4 local_78;
   undefined4 local_74;
   
-  return ((int (*)())FUN_000f6d14)(param_1,program,param_3,1,param_4,local_b0,local_ac,local_a8,local_a4,1,param_5,
+  return ((int (*)())IRInst__setConstantOperand)(param_1,program,param_3,1,param_4,local_b0,local_ac,local_a8,local_a4,1,param_5,
                local_98,local_94,local_90,local_8c,1,param_6,local_80,local_7c,local_78,local_74,1,param_7);
 }
 
@@ -1720,7 +1728,7 @@ int FUN_000f7870(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 local_78;
   undefined4 local_74;
   
-  return ((int (*)())FUN_000f6d14)(param_1,param_2,param_3,3,param_4,local_b0,local_ac,local_a8,local_a4,3,param_5,
+  return ((int (*)())IRInst__setConstantOperand)(param_1,param_2,param_3,3,param_4,local_b0,local_ac,local_a8,local_a4,3,param_5,
                local_98,local_94,local_90,local_8c,3,param_6,local_80,local_7c,local_78,local_74,3,param_7);
 }
 
@@ -1744,7 +1752,7 @@ void IRInst__makeLiteralVec4Float(undefined4 param_1,undefined4 param_2,undefine
   undefined4 local_68;
   undefined4 local_64;
   
-  ((int (*)())FUN_000f6d14)(param_1,param_2,param_3,2,FBITS(fparam_1),local_a0,local_9c,local_98,local_94,2,
+  ((int (*)())IRInst__setConstantOperand)(param_1,param_2,param_3,2,FBITS(fparam_1),local_a0,local_9c,local_98,local_94,2,
                FBITS(fparam_2),local_88,local_84,local_80,local_7c,2,FBITS(fparam_3),local_70,
                local_6c,local_68,local_64,2,FBITS(fparam_4));
   return;
