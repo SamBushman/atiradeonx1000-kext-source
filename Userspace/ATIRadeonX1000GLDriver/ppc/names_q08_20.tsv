@@ -6,3 +6,7 @@ local	FUN_0017cb14	iVar8	prevLaneOrProgram	INFERRED	previous lane result (-1 = n
 local	FUN_0017cb14	iVar9	laneResult	INFERRED	result class of the current lane / table result
 func	FUN_00189df4	SchedModel__classifySlotUse	INFERRED	classifies the ALU unit use of inst: returns 1 when both the vector and scalar slot use classes were assigned (-1 = none), 0 otherwise; fetch instructions are rejected
 func	FUN_001793d8	ValueKey__findLaneWithSameValue	INFERRED	returns the lane index (0..3) of operand n whose value number (after abs / negate modifiers) equals the common value number of the enabled lanes, or 4 when the enabled lanes disagree or none matches
+func	FUN_00194938	HashTableIterator__advance	INFERRED	advances the hash table iterator to the next non-empty bucket element (walks each bucket vector from its end) and stores the element at iter[4]; sets iter[4] to 0 at the end of the table
+func	FUN_00194a94	HashTableIterator__begin	INFERRED	initialises the iterator for the table (bucket and element index -1) and advances to the first element
+func	FUN_00190100	R300VSchedModel__classifySourceBank	INFERRED	classifies the source register of operand n of inst into a bank (bankOut) and an encoded register index (sourceIndexOut); returns 0 for kinds that are not register sources
+func	FUN_0017f1f8	ValueKey__foldMulOfConstants	INFERRED	evaluates the lane products of the two constant operands, checks them against the hardware limits (also negated) and rebuilds the instruction as a move of the product vector

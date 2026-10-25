@@ -3440,7 +3440,7 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 18e878	18e890	eh-pad	R300SchedModel__legalizeInstruction	6	0x193cc0,__Unwind_Resume
 18f21c	18f220	millicode	R300SchedModel__legalizeInstruction	1	
 18f280	18f284	eh-pad	R300SchedModel__legalizeInstruction	1	__Unwind_Resume
-19018c	19026c	table	FUN_00190100	56	
+19018c	19026c	table	R300VSchedModel__classifySourceBank	56	
 190e78	190e7c	eh-pad	R300VSchedModel__vslot27	1	__Unwind_Resume
 191708	191710	other	R300VSchedModel__vslot12	2	
 191eec	191efc	eh-pad	FudoPs__ctor_1920e0	4	__Unwind_Resume

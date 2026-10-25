@@ -2349,43 +2349,44 @@ int FUN_0017ee68(ctx)
   return 1;
 }
 
-/* FUN_0017f1f8 @ 0x17f1f8 (512 bytes) */
-int FUN_0017f1f8(ctx)
+/* ValueKey__foldMulOfConstants @ 0x17f1f8 (512 bytes) */
+int ValueKey__foldMulOfConstants(ctx)
   int ctx;
 {
+  int *hwLimits;
   int operandRecord;
-  bool bVar1;
+  bool moreLanes;
   float *loopPtr2;
-  int iVar3;
+  int valueNumber;
   float *exprRecord;
-  undefined4 uVar5;
-  undefined4 in_r7;
-  undefined4 in_r8;
-  int *piVar6;
+  undefined4 productNegated;
+  undefined4 staleArg5;
+  undefined4 staleArg6;
+  int *valueNumberPtr;
   int loopIndex;
   int loopRemaining;
-  undefined4 local_68;
-  uint local_64;
-  float local_54 [7];
-  undefined4 local_38;
-  undefined4 local_34 [4];
+  undefined4 destMask;
+  uint laneProducts;
+  float operandConsts [7];
+  undefined4 writeMaskOut;
+  undefined4 maskedSelect [4];
   
   loopIndex = 5;
-  loopPtr2 = local_54;
+  loopPtr2 = operandConsts;
   do {
     *loopPtr2 = GH_U2F(0x7fff0000U);
     loopPtr2 = loopPtr2 + 1;
     loopIndex = loopIndex + -1;
   } while (loopIndex != 0);
-  loopPtr2 = (float *)&local_64;
+  loopPtr2 = (float *)&laneProducts;
   do {
     *loopPtr2 = GH_U2F(0x7fff0000U);
     loopPtr2 = loopPtr2 + 1;
-  } while (loopPtr2 != local_54);
+  } while (loopPtr2 != operandConsts);
   loopIndex = 0;
   loopRemaining = 4;
   do {
-    *(undefined4 *)(loopIndex + (int)&local_64) = 0x7ffffffe;
+    *(undefined4 *)(loopIndex + (int)&laneProducts) = 0x7ffffffe;
     loopIndex = loopIndex + 4;
     loopRemaining = loopRemaining + -1;
   } while (loopRemaining != 0);
@@ -2394,57 +2395,57 @@ int FUN_0017f1f8(ctx)
   do {
     operandRecord = IRInst__getOperandRecord(*(undefined4 *)(ctx + 0xb0),0);
     if (*(char *)(loopIndex + operandRecord + 0x10) != '\x01') {
-      piVar6 = (int *)(loopRemaining + 8);
-      loopPtr2 = local_54 + 1;
+      valueNumberPtr = (int *)(loopRemaining + 8);
+      loopPtr2 = operandConsts + 1;
       do {
-        iVar3 = *piVar6;
-        if (-1 < iVar3) {
+        valueNumber = *valueNumberPtr;
+        if (-1 < valueNumber) {
           return 0;
         }
-        piVar6 = piVar6 + 4;
-        exprRecord = (float *)Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),iVar3);
+        valueNumberPtr = valueNumberPtr + 4;
+        exprRecord = (float *)Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),valueNumber);
         *loopPtr2 = *exprRecord;
         loopPtr2 = loopPtr2 + 1;
-      } while (loopPtr2 != local_54 + 3);
-      (&local_64)[loopIndex] = (uint)GH_F2U((float)((local_54[1] * local_54[2])));
+      } while (loopPtr2 != operandConsts + 3);
+      (&laneProducts)[loopIndex] = (uint)GH_F2U((float)((operandConsts[1] * operandConsts[2])));
     }
-    bVar1 = loopIndex != 3;
+    moreLanes = loopIndex != 3;
     loopRemaining = loopRemaining + 4;
     loopIndex = loopIndex + 1;
-  } while (bVar1);
+  } while (moreLanes);
   loopIndex = IRInst__getOperandRecord(*(undefined4 *)(ctx + 0xb0),0);
-  WriteMask__fromSelectWord(&local_38,*(undefined4 *)(loopIndex + 0x10));
-  SelectWord__maskUnused(local_34,0x10203,local_38);
+  WriteMask__fromSelectWord(&writeMaskOut,*(undefined4 *)(loopIndex + 0x10));
+  SelectWord__maskUnused(maskedSelect,0x10203,writeMaskOut);
   loopIndex = *(int *)(ctx + 0x238);
-  local_68 = local_34[0];
+  destMask = maskedSelect[0];
   loopIndex = (**(code **)(**(int **)(loopIndex + 0x30c) + 0x154))
-                    (*(int **)(loopIndex + 0x30c),*(undefined4 *)(loopIndex + 0x6c4),&local_64,&local_68,
-                     in_r7,in_r8,loopIndex);
+                    (*(int **)(loopIndex + 0x30c),*(undefined4 *)(loopIndex + 0x6c4),&laneProducts,&destMask,
+                     staleArg5,staleArg6,loopIndex);
   if (loopIndex == 0) {
     loopIndex = 0;
-    loopPtr2 = (float *)&local_64;
+    loopPtr2 = (float *)&laneProducts;
     do {
       loopRemaining = IRInst__getOperandRecord(*(undefined4 *)(ctx + 0xb0),0);
       if (*(char *)(loopIndex + loopRemaining + 0x10) != '\x01') {
         *loopPtr2 = -*loopPtr2;
       }
-      bVar1 = loopIndex != 3;
+      moreLanes = loopIndex != 3;
       loopPtr2 = loopPtr2 + 1;
       loopIndex = loopIndex + 1;
-    } while (bVar1);
-    piVar6 = *(int **)(*(int *)(ctx + 0x238) + 0x30c);
-    loopIndex = (**(code **)(*piVar6 + 0x154))
-                      (piVar6,*(undefined4 *)(*(int *)(ctx + 0x238) + 0x6c4),&local_64,&local_68
+    } while (moreLanes);
+    hwLimits = *(int **)(*(int *)(ctx + 0x238) + 0x30c);
+    loopIndex = (**(code **)(*hwLimits + 0x154))
+                      (hwLimits,*(undefined4 *)(*(int *)(ctx + 0x238) + 0x6c4),&laneProducts,&destMask
                       );
     if (loopIndex == 0) {
       return 0;
     }
-    uVar5 = 1;
+    productNegated = 1;
   }
   else {
-    uVar5 = 0;
+    productNegated = 0;
   }
-  ((int (*)())FUN_0017ebb0)(ctx,loopIndex,local_68,uVar5);
+  ((int (*)())FUN_0017ebb0)(ctx,loopIndex,destMask,productNegated);
   return 1;
 }
 
@@ -2744,7 +2745,7 @@ joined_r0x0017f980:
         if (loopIndex != 0) {
           return 1;
         }
-        loopIndex = ((int (*)())FUN_0017f1f8)(ctx);
+        loopIndex = ((int (*)())ValueKey__foldMulOfConstants)(ctx);
         if (loopIndex != 0) {
           return 1;
         }

@@ -2912,7 +2912,7 @@
 0x17e7e0	FUN_0017e7e0	972	no	indirect call (driver context / vtable / callback)
 0x17ebb0	FUN_0017ebb0	660	yes	
 0x17ee68	FUN_0017ee68	908	yes	
-0x17f1f8	FUN_0017f1f8	512	no	indirect call (driver context / vtable / callback)
+0x17f1f8	ValueKey__foldMulOfConstants	512	no	indirect call (driver context / vtable / callback)
 0x17f3f8	ValueKey__foldMinMaxOfNegatedPair	412	no	indirect call (driver context / vtable / callback)
 0x17f594	ValueKey__foldMaxOfNegatedPair	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x17f59c	ValueKey__foldMinOfNegatedPair	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
@@ -2994,7 +2994,7 @@
 0x18f984	R300VSchedModel__vslot28	596	no	indirect call (driver context / vtable / callback)
 0x18fbd8	R300VSchedModel__vslot14	348	no	indirect call (driver context / vtable / callback)
 0x18fd34	R300VSchedModel__vslot17	972	no	indirect call (driver context / vtable / callback)
-0x190100	FUN_00190100	728	no	indirect call (driver context / vtable / callback)
+0x190100	R300VSchedModel__classifySourceBank	728	no	indirect call (driver context / vtable / callback)
 0x1904b8	R300VSchedModel__vslot4_addInstruction	528	no	indirect call (driver context / vtable / callback)
 0x1906c8	R300VSchedModel__vslot3_canAddInstruction	712	no	indirect call (driver context / vtable / callback)
 0x190990	R300VSchedModel__vslot27	2308	no	indirect call (driver context / vtable / callback)
@@ -3048,8 +3048,8 @@
 0x194618	HashTable__findEntry	264	no	indirect call (driver context / vtable / callback)
 0x194720	FUN_00194720	276	no	indirect call (driver context / vtable / callback)
 0x194834	HashTable__find	260	yes	
-0x194938	FUN_00194938	348	yes	
-0x194a94	FUN_00194a94	20	yes	
+0x194938	HashTableIterator__advance	348	yes	
+0x194a94	HashTableIterator__begin	20	yes	
 0x194aa8	HashTable__grow	608	no	indirect call (driver context / vtable / callback)
 0x194d44	HashTable__insert	224	no	indirect call (driver context / vtable / callback)
 0x194e44	HashTable__grow_194e44	608	no	indirect call (driver context / vtable / callback)

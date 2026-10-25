@@ -129,8 +129,8 @@
 17e338	FUN_0017e338	r6	PASS-deep	GARBAGE	
 17e338	FUN_0017e338	r7	PASS-deep	GARBAGE	
 17e338	FUN_0017e338	r8	PASS-deep	GARBAGE	
-17f1f8	FUN_0017f1f8	r7	PASS-deep	GARBAGE	
-17f1f8	FUN_0017f1f8	r8	PASS-deep	GARBAGE	
+17f1f8	ValueKey__foldMulOfConstants	r7	PASS-deep	GARBAGE	
+17f1f8	ValueKey__foldMulOfConstants	r8	PASS-deep	GARBAGE	
 18ad08	R300SchedModel__vslot16	r7	PASS-indirect	GARBAGE	
 18ad08	R300SchedModel__vslot16	r8	PASS-indirect	GARBAGE	
 18b1bc	FUN_0018b1bc	r8	PASS-indirect	GARBAGE	

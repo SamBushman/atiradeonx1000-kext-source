@@ -1670,49 +1670,49 @@ int DListNode__init(param_1)
 }
 
 /* Vector__shellSort @ 0x1940f0 (280 bytes) */
-int Vector__shellSort(param_1, param_2)
-  int param_1;
-  code *param_2;
+int Vector__shellSort(vector, compare)
+  int vector;
+  code *compare;
 {
-  uint uVar1;
-  int iVar2;
-  uint uVar3;
+  uint gap;
+  int compareResult;
+  uint count;
   undefined4 *loopPtr2;
   uint loopIndex3;
-  undefined4 uVar6;
+  undefined4 current;
   int loopIndex;
-  int iVar8;
-  int iVar9;
+  int data;
+  int insertIndex;
   
-  uVar1 = 1;
-  iVar8 = *(int *)(param_1 + 8);
-  uVar3 = *(uint *)(param_1 + 4);
+  gap = 1;
+  data = *(int *)(vector + 8);
+  count = *(uint *)(vector + 4);
   do {
-    uVar1 = uVar1 * 3 + 1;
-  } while (uVar1 < uVar3);
+    gap = gap * 3 + 1;
+  } while (gap < count);
   do {
     do {
-      uVar1 = uVar1 / 3;
-      if (uVar1 == 0) {
+      gap = gap / 3;
+      if (gap == 0) {
         return;
       }
-    } while (uVar3 <= uVar1);
-    loopPtr2 = (undefined4 *)(iVar8 + uVar1 * 4);
+    } while (count <= gap);
+    loopPtr2 = (undefined4 *)(data + gap * 4);
     loopIndex = 0;
-    loopIndex3 = uVar1;
+    loopIndex3 = gap;
     do {
-      uVar6 = *loopPtr2;
-      for (iVar9 = loopIndex; -1 < iVar9; iVar9 = iVar9 - uVar1) {
-        iVar2 = (*param_2)(*(undefined4 *)(iVar8 + iVar9 * 4),uVar6);
-        if (iVar2 < 1) break;
-        *(undefined4 *)((uVar1 + iVar9) * 4 + iVar8) = *(undefined4 *)(iVar8 + iVar9 * 4);
+      current = *loopPtr2;
+      for (insertIndex = loopIndex; -1 < insertIndex; insertIndex = insertIndex - gap) {
+        compareResult = (*compare)(*(undefined4 *)(data + insertIndex * 4),current);
+        if (compareResult < 1) break;
+        *(undefined4 *)((gap + insertIndex) * 4 + data) = *(undefined4 *)(data + insertIndex * 4);
       }
       loopIndex3 = loopIndex3 + 1;
       loopIndex = loopIndex + 1;
-      *(undefined4 *)(iVar8 + (uVar1 + iVar9) * 4) = uVar6;
+      *(undefined4 *)(data + (gap + insertIndex) * 4) = current;
       loopPtr2 = loopPtr2 + 1;
-      uVar3 = *(uint *)(param_1 + 4);
-    } while (loopIndex3 < uVar3);
+      count = *(uint *)(vector + 4);
+    } while (loopIndex3 < count);
   } while( true );
 }
 
@@ -2050,71 +2050,71 @@ int HashTable__find(param_1, param_2)
   return 0;
 }
 
-/* FUN_00194938 @ 0x194938 (348 bytes) */
-int FUN_00194938(param_1)
-  undefined4 *param_1;
+/* HashTableIterator__advance @ 0x194938 (348 bytes) */
+int HashTableIterator__advance(iter)
+  undefined4 *iter;
 {
-  uint uVar1;
-  undefined4 *puVar2;
-  uint uVar3;
-  uint *puVar4;
+  uint bucketSize;
+  undefined4 *elementRef;
+  uint vectorFilledCount;
+  uint *bucketVector;
   uint loopIndex;
   
-  loopIndex = param_1[3];
+  loopIndex = iter[3];
   if ((int)loopIndex < 0) {
-    loopIndex = param_1[1];
+    loopIndex = iter[1];
     do {
       loopIndex = loopIndex + 1;
-      param_1[1] = loopIndex;
-      if (*(uint *)*param_1 <= loopIndex) {
-        param_1[4] = 0;
+      iter[1] = loopIndex;
+      if (*(uint *)*iter <= loopIndex) {
+        iter[4] = 0;
         return;
       }
-      puVar4 = *(uint **)(loopIndex * 4 + ((uint *)*param_1)[2]);
-      param_1[2] = puVar4;
-    } while ((puVar4 == (uint *)0x0) || (uVar1 = puVar4[1], uVar1 == 0));
-    loopIndex = uVar1 - 1;
-    param_1[3] = uVar1 - 2;
-    if (loopIndex < *puVar4) {
-      uVar3 = puVar4[1];
-      if (uVar3 <= loopIndex) {
-        _memset(uVar3 * 4 + puVar4[2],0,(loopIndex - uVar3) * 4 + 4);
-        puVar4[1] = uVar1;
+      bucketVector = *(uint **)(loopIndex * 4 + ((uint *)*iter)[2]);
+      iter[2] = bucketVector;
+    } while ((bucketVector == (uint *)0x0) || (bucketSize = bucketVector[1], bucketSize == 0));
+    loopIndex = bucketSize - 1;
+    iter[3] = bucketSize - 2;
+    if (loopIndex < *bucketVector) {
+      vectorFilledCount = bucketVector[1];
+      if (vectorFilledCount <= loopIndex) {
+        _memset(vectorFilledCount * 4 + bucketVector[2],0,(loopIndex - vectorFilledCount) * 4 + 4);
+        bucketVector[1] = bucketSize;
       }
-      puVar2 = (undefined4 *)(loopIndex * 4 + puVar4[2]);
+      elementRef = (undefined4 *)(loopIndex * 4 + bucketVector[2]);
     }
     else {
-      puVar2 = (undefined4 *)((int (*)())Vector__elementRefGrow)(puVar4,loopIndex);
+      elementRef = (undefined4 *)((int (*)())Vector__elementRefGrow)(bucketVector,loopIndex);
     }
   }
   else {
-    puVar4 = (uint *)param_1[2];
-    param_1[3] = loopIndex - 1;
-    if (loopIndex < *puVar4) {
-      uVar1 = puVar4[1];
-      if (uVar1 <= loopIndex) {
-        _memset(uVar1 * 4 + puVar4[2],0,(loopIndex - uVar1) * 4 + 4);
-        puVar4[1] = loopIndex + 1;
+    bucketVector = (uint *)iter[2];
+    iter[3] = loopIndex - 1;
+    if (loopIndex < *bucketVector) {
+      bucketSize = bucketVector[1];
+      if (bucketSize <= loopIndex) {
+        _memset(bucketSize * 4 + bucketVector[2],0,(loopIndex - bucketSize) * 4 + 4);
+        bucketVector[1] = loopIndex + 1;
       }
-      puVar2 = (undefined4 *)(loopIndex * 4 + puVar4[2]);
+      elementRef = (undefined4 *)(loopIndex * 4 + bucketVector[2]);
     }
     else {
-      puVar2 = (undefined4 *)((int (*)())Vector__elementRefGrow)(puVar4,loopIndex);
+      elementRef = (undefined4 *)((int (*)())Vector__elementRefGrow)(bucketVector,loopIndex);
     }
   }
-  param_1[4] = *puVar2;
+  iter[4] = *elementRef;
   return;
 }
 
-/* FUN_00194a94 @ 0x194a94 (20 bytes) */
-int FUN_00194a94(param_1, param_2)
+/* HashTableIterator__begin @ 0x194a94 (20 bytes) */
+int HashTableIterator__begin(param_1, param_2)
   undefined4 *param_1;
   undefined4 param_2;
 {
   *param_1 = param_2;
   param_1[3] = 0xffffffff;
   param_1[1] = 0xffffffff;
-  return ((int (*)())FUN_00194938)(param_1);
+  return ((int (*)())HashTableIterator__advance)(param_1);
 }
 
 /* HashTable__grow @ 0x194aa8 (260 bytes) */
