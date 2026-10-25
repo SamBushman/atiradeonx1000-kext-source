@@ -2138,48 +2138,48 @@ int FUN_00134ab0(param_1)
 }
 
 /* FUN_00134ab8 @ 0x134ab8 (100 bytes) */
-int FUN_00134ab8(param_1, param_2, param_3)
-  int param_1;
-  int *param_2;
-  int *param_3;
+int FUN_00134ab8(neighbourList, slotOut, blockOut)
+  int neighbourList;
+  int *slotOut;
+  int *blockOut;
 {
-  int iVar1;
+  int nextBlockStart;
   
-  if (*(int *)(param_1 + 8) == 0) {
-    *param_3 = 0;
-    *param_2 = 6;
+  if (*(int *)(neighbourList + 8) == 0) {
+    *blockOut = 0;
+    *slotOut = 6;
     return;
   }
-  *param_2 = 0;
-  *param_3 = *(int *)(param_1 + 8);
+  *slotOut = 0;
+  *blockOut = *(int *)(neighbourList + 8);
   while( true ) {
-    iVar1 = *param_2 + 7;
-    if (*(int *)(param_1 + 4) <= iVar1) break;
-    *param_2 = iVar1;
-    *param_3 = *(int *)(*param_3 + 0x1c);
+    nextBlockStart = *slotOut + 7;
+    if (*(int *)(neighbourList + 4) <= nextBlockStart) break;
+    *slotOut = nextBlockStart;
+    *blockOut = *(int *)(*blockOut + 0x1c);
   }
-  *param_2 = (*(int *)(param_1 + 4) - *param_2) + -1;
+  *slotOut = (*(int *)(neighbourList + 4) - *slotOut) + -1;
   return;
 }
 
 /* pairIndex @ 0x134b1c (60 bytes) */
-int pairIndex(param_1, param_2, param_3)
+int pairIndex(param_1, nodeA, nodeBThenMax)
   undefined4 param_1;
-  int param_2;
-  int param_3;
+  int nodeA;
+  int nodeBThenMax;
 {
-  int iVar1;
-  uint uVar2;
+  int smallerNode;
+  uint largerTimesPrev;
   
-  iVar1 = param_3;
-  if (param_2 < param_3) {
-    iVar1 = param_2;
+  smallerNode = nodeBThenMax;
+  if (nodeA < nodeBThenMax) {
+    smallerNode = nodeA;
   }
-  if (param_3 < param_2) {
-    param_3 = param_2;
+  if (nodeBThenMax < nodeA) {
+    nodeBThenMax = nodeA;
   }
-  uVar2 = param_3 * (param_3 + -1);
-  return iVar1 + ((int)uVar2 >> 1) + (uint)((int)uVar2 < 0 && (uVar2 & 1) != 0);
+  largerTimesPrev = nodeBThenMax * (nodeBThenMax + -1);
+  return smallerNode + ((int)largerTimesPrev >> 1) + (uint)((int)largerTimesPrev < 0 && (largerTimesPrev & 1) != 0);
 }
 
 /* InterferenceMatrix__setPair @ 0x134b58 (76 bytes) */
@@ -2226,31 +2226,31 @@ int FUN_00134bf0(param_1, element, param_3)
 }
 
 /* FUN_00134c18 @ 0x134c18 (188 bytes) */
-int FUN_00134c18(param_1, param_2, param_3)
-  int param_1;
-  int param_2;
-  undefined4 param_3;
+int FUN_00134c18(neighbourList, removedRoot, graph)
+  int neighbourList;
+  int removedRoot;
+  undefined4 graph;
 {
-  bool bVar1;
+  bool moreSlots;
   int callResult;
   int loopIndex;
-  int iVar4;
+  int neighbourBlock;
   
   loopIndex = 0;
-  iVar4 = *(int *)(param_1 + 8);
+  neighbourBlock = *(int *)(neighbourList + 8);
   do {
-    callResult = ((int (*)())FUN_00134bf0)(param_3,*(undefined4 *)(loopIndex * 4 + iVar4),1);
-    if (callResult == param_2) {
-      *(undefined4 *)(loopIndex * 4 + iVar4) = *(undefined4 *)(iVar4 + *(int *)(param_1 + 4) * 4);
-      *(int *)(param_1 + 4) = *(int *)(param_1 + 4) + -1;
+    callResult = ((int (*)())FUN_00134bf0)(graph,*(undefined4 *)(loopIndex * 4 + neighbourBlock),1);
+    if (callResult == removedRoot) {
+      *(undefined4 *)(loopIndex * 4 + neighbourBlock) = *(undefined4 *)(neighbourBlock + *(int *)(neighbourList + 4) * 4);
+      *(int *)(neighbourList + 4) = *(int *)(neighbourList + 4) + -1;
     }
-    else if ((*(int *)(param_1 + 4) == (*(int *)(param_1 + 4) / 7) * 7) &&
-            (*(int *)(iVar4 + 0x1c) != 0)) {
-      iVar4 = *(int *)(iVar4 + 0x1c);
+    else if ((*(int *)(neighbourList + 4) == (*(int *)(neighbourList + 4) / 7) * 7) &&
+            (*(int *)(neighbourBlock + 0x1c) != 0)) {
+      neighbourBlock = *(int *)(neighbourBlock + 0x1c);
     }
-    bVar1 = loopIndex != 6;
+    moreSlots = loopIndex != 6;
     loopIndex = loopIndex + 1;
-  } while (bVar1);
+  } while (moreSlots);
   return;
 }
 

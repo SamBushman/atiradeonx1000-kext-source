@@ -1,0 +1,68 @@
+local	FUN_0013061c	param_1	allocator	INFERRED	register allocator object (+0x43c class start table, +0x448 class end table)
+local	FUN_0013061c	param_2	classNumber	INFERRED	register class whose unassigned registers are counted
+use	FUN_0013061c	iVar1	classEnd	INFERRED	one past the last register of the class	^\s*iVar1\ =\ \*\(int\ \*\)\(iVar3\ \+\ 0x448\);$	+1
+use	FUN_0013061c	iVar1	classEnd	INFERRED	one past the last register of the class	^\s*if\ \(iVar3\ <\ iVar1\)\ \{$	+1
+use	FUN_0013061c	iVar1	classEnd	INFERRED	one past the last register of the class	^\s*\}\ while\ \(iVar3\ !=\ iVar1\);$	+1
+use	FUN_0013061c	iVar3	classTableAddrThenReg	INFERRED	address of the class table entries (allocator + 4 * class), then the register number being tested	^\s*iVar3\ =\ param_2\ \*\ 4\ \+\ param_1;$	+1
+use	FUN_0013061c	iVar3	classTableAddrThenReg	INFERRED	address of the class table entries (allocator + 4 * class), then the register number being tested	^\s*iVar1\ =\ \*\(int\ \*\)\(iVar3\ \+\ 0x448\);$	+3
+use	FUN_0013061c	iVar3	classTableAddrThenReg	INFERRED	address of the class table entries (allocator + 4 * class), then the register number being tested	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)FUN_00130478\)\(param_1,iVar3\);$	+1
+use	FUN_0013061c	iVar3	classTableAddrThenReg	INFERRED	address of the class table entries (allocator + 4 * class), then the register number being tested	^\s*iVar3\ =\ iVar3\ \+\ 1;$	+2
+use	FUN_0013061c	iVar4	unassignedCount	INFERRED	registers of the class without a fixed assignment (returned)	^\s*iVar4\ =\ 0;$	+1
+use	FUN_0013061c	iVar4	unassignedCount	INFERRED	registers of the class without a fixed assignment (returned)	^\s*iVar4\ =\ iVar4\ \+\ 1;$	+1
+use	FUN_0013061c	iVar4	unassignedCount	INFERRED	registers of the class without a fixed assignment (returned)	^\s*return\ iVar4;$	+1
+local	FUN_0010e95c	param_1	packEntry	INFERRED	pack entry (word 0 instruction, words 1..4 lane sources)
+use	FUN_0010e95c	bVar1	moreLanes	INFERRED	loop latch: lane index is not the last (3)	^\s*bVar1\ =\ iVar4\ !=\ 3;$	+1
+use	FUN_0010e95c	bVar1	moreLanes	INFERRED	loop latch: lane index is not the last (3)	^\s*\}\ while\ \(bVar1\);$	+1
+use	FUN_0010e95c	iVar2	destOperandRecord	INFERRED	destination operand record of the entry's instruction	^\s*if\ \(\(puVar5\[7\]\ !=\ 0\)\ \|\|$	+2
+use	FUN_0010e95c	iVar3	activeLaneCount	INFERRED	lanes that still hold a source or are written by the instruction (returned)	^\s*iVar3\ =\ 0;$	+1
+use	FUN_0010e95c	iVar3	activeLaneCount	INFERRED	lanes that still hold a source or are written by the instruction (returned)	^\s*iVar3\ =\ iVar3\ \+\ 1;$	+1
+use	FUN_0010e95c	iVar3	activeLaneCount	INFERRED	lanes that still hold a source or are written by the instruction (returned)	^\s*return\ iVar3;$	+1
+use	FUN_0010e95c	iVar4	laneIndex	INFERRED	lane counter 0..3	^\s*iVar4\ =\ 0;$	+1
+use	FUN_0010e95c	iVar4	laneIndex	INFERRED	lane counter 0..3	^\s*if\ \(\(puVar5\[7\]\ !=\ 0\)\ \|\|$	+2
+use	FUN_0010e95c	iVar4	laneIndex	INFERRED	lane counter 0..3	^\s*bVar1\ =\ iVar4\ !=\ 3;$	+1
+use	FUN_0010e95c	iVar4	laneIndex	INFERRED	lane counter 0..3	^\s*iVar4\ =\ iVar4\ \+\ 1;$	+1
+use	FUN_0010e95c	puVar5	laneSlotCursor	INFERRED	cursor over the entry's lane source slots	^\s*puVar5\ =\ param_1;$	+1
+use	FUN_0010e95c	puVar5	laneSlotCursor	INFERRED	cursor over the entry's lane source slots	^\s*if\ \(\(puVar5\[7\]\ !=\ 0\)\ \|\|$	+2
+use	FUN_0010e95c	puVar5	laneSlotCursor	INFERRED	cursor over the entry's lane source slots	^\s*puVar5\ =\ puVar5\ \+\ 1;$	+1
+local	ConstKey__compare4	param_1	keyA	INFERRED	first constant key
+local	ConstKey__compare4	param_2	keyB	INFERRED	second constant key
+use	ConstKey__compare4	uVar1	keyBFlags	INFERRED	key B's lane-present flag byte (+0x15c)	^\s*uVar1\ =\ \(uint\)\*\(char\ \*\)\(param_2\ \+\ 0x15c\);$	+8
+use	ConstKey__compare4	uVar2	keyAFlags	INFERRED	key A's lane-present flag byte (+0x15c)	^\s*uVar2\ =\ \(uint\)\*\(char\ \*\)\(param_1\ \+\ 0x15c\);$	+1
+use	ConstKey__compare4	uVar2	keyAFlags	INFERRED	key A's lane-present flag byte (+0x15c)	^\s*if\ \(\(\(\(\(\(uVar2\ \&\ 1\)\ ==\ \(uVar1\ \&\ 1\)\)\ \&\&\ \(\*\(int\ \*\)\(param_1\ \+\ 0x20\)\ ==\ \*\(int\ \*\)\(param_2\ \+\ 0x20\)\)\)\ \&\&$	+7
+local	pairIndex	param_2	nodeA	INFERRED	first node of the pair
+local	pairIndex	param_3	nodeBThenMax	INFERRED	second node, then the larger of the two
+use	pairIndex	iVar1	smallerNode	INFERRED	the smaller node number of the pair	^\s*iVar1\ =\ param_3;$	+1
+use	pairIndex	iVar1	smallerNode	INFERRED	the smaller node number of the pair	^\s*iVar1\ =\ param_2;$	+1
+use	pairIndex	iVar1	smallerNode	INFERRED	the smaller node number of the pair	^\s*return\ iVar1\ \+\ \(\(int\)uVar2\ >>\ 1\)\ \+\ \(uint\)\(\(int\)uVar2\ <\ 0\ \&\&\ \(uVar2\ \&\ 1\)\ !=\ 0\);$	+1
+use	pairIndex	uVar2	largerTimesPrev	INFERRED	larger * (larger - 1): twice the triangular offset of the larger node	^\s*uVar2\ =\ param_3\ \*\ \(param_3\ \+\ \-1\);$	+2
+local	FUN_00134c18	param_1	neighbourList	INFERRED	node's neighbour list head (+4 total count, +8 first block)
+local	FUN_00134c18	param_2	removedRoot	INFERRED	root register whose entries are removed from the list
+local	FUN_00134c18	param_3	graph	INFERRED	register graph passed to FUN_00134bf0
+use	FUN_00134c18	bVar1	moreSlots	INFERRED	loop latch: slot number is not the last (6)	^\s*bVar1\ =\ iVar3\ !=\ 6;$	+1
+use	FUN_00134c18	bVar1	moreSlots	INFERRED	loop latch: slot number is not the last (6)	^\s*\}\ while\ \(bVar1\);$	+1
+use	FUN_00134c18	iVar4	neighbourBlock	INFERRED	neighbour block being scanned (seven slots, next block at +0x1c)	^\s*iVar4\ =\ \*\(int\ \*\)\(param_1\ \+\ 8\);$	+1
+use	FUN_00134c18	iVar4	neighbourBlock	INFERRED	neighbour block being scanned (seven slots, next block at +0x1c)	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)FUN_00134bf0\)\(param_3,\*\(undefined4\ \*\)\(iVar3\ \*\ 4\ \+\ iVar4\),1\);$	+1
+use	FUN_00134c18	iVar4	neighbourBlock	INFERRED	neighbour block being scanned (seven slots, next block at +0x1c)	^\s*\*\(undefined4\ \*\)\(iVar3\ \*\ 4\ \+\ iVar4\)\ =\ \*\(undefined4\ \*\)\(iVar4\ \+\ \*\(int\ \*\)\(param_1\ \+\ 4\)\ \*\ 4\);$	+1
+use	FUN_00134c18	iVar4	neighbourBlock	INFERRED	neighbour block being scanned (seven slots, next block at +0x1c)	^\s*else\ if\ \(\(\*\(int\ \*\)\(param_1\ \+\ 4\)\ ==\ \(\*\(int\ \*\)\(param_1\ \+\ 4\)\ /\ 7\)\ \*\ 7\)\ \&\&$	+3
+use	FUN_00130bfc	iVar1	classCount	INFERRED	backend word 0x14: number of register classes	^\s*iVar1\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x30c\)\ \+\ 0x14\);$	+1
+use	FUN_00130bfc	iVar1	classCount	INFERRED	backend word 0x14: number of register classes	^\s*if\ \(0\ <\ iVar1\)\ \{$	+1
+use	FUN_00130bfc	iVar1	classCount	INFERRED	backend word 0x14: number of register classes	^\s*iVar1\ =\ iVar1\ \+\ \-1;$	+2
+use	FUN_00130bfc	iVar2	classNumber	INFERRED	class number being tested	^\s*iVar2\ =\ 0;$	+1
+use	FUN_00130bfc	iVar2	classNumber	INFERRED	class number being tested	^\s*return\ iVar2;$	+1
+use	FUN_00130bfc	iVar2	classNumber	INFERRED	class number being tested	^\s*iVar2\ =\ iVar2\ \+\ 1;$	+1
+local	FUN_00130bfc	param_1	allocator	INFERRED	register allocator object (+0x43c class start table, +0x448 class end table)
+local	FUN_00130bfc	param_2	inst	INFERRED	instruction whose destination register class is looked up
+local	FixedValue__ctor_124724	param_2	registerIndex	INFERRED	index of the fixed register inside its register file
+local	FixedValue__ctor_124724	param_3	registerFile	INFERRED	register file kind (2, 3 or 4 are range checked against the target limits)
+local	FixedValue__ctor_124724	param_4	baseCtorArg4	INFERRED	fourth argument forwarded to VRegInfo__ctor
+use	FixedValue__ctor_124724	piVar2	entryBlock	INFERRED	program entry block that receives the load	^\s*piVar2\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(param_5\ \+\ COMP_currentProgram\)\ \+\ 0x3a0\);$	+2
+use	FixedValue__ctor_124724	puVar3	loadConstInst	INFERRED	new IRLoadConst defining this register (allocation + 1)	^\s*puVar3\ =\ puVar1\ \+\ 1;$	+1
+use	FixedValue__ctor_124724	puVar3	loadConstInst	INFERRED	new IRLoadConst defining this register (allocation + 1)	^\s*FUN_00109614\(puVar3,param_1,param_5\);$	+1
+use	FixedValue__ctor_124724	puVar3	loadConstInst	INFERRED	new IRLoadConst defining this register (allocation + 1)	^\s*\(\*\*\(code\ \*\*\)\(\*piVar2\ \+\ 0xc\)\)\(piVar2,puVar3\);$	+3
+local	FixedValue__ctor_1245a8	param_2	registerIndex	INFERRED	index of the fixed register inside its register file
+local	FixedValue__ctor_1245a8	param_3	registerFile	INFERRED	register file kind (2, 3 or 4 are range checked against the target limits)
+local	FixedValue__ctor_1245a8	param_4	baseCtorArg4	INFERRED	fourth argument forwarded to VRegInfo__ctor
+use	FixedValue__ctor_1245a8	piVar2	entryBlock	INFERRED	program entry block that receives the load	^\s*piVar2\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(param_5\ \+\ COMP_currentProgram\)\ \+\ 0x3a0\);$	+2
+use	FixedValue__ctor_1245a8	puVar3	loadConstInst	INFERRED	new IRLoadConst defining this register (allocation + 1)	^\s*puVar3\ =\ puVar1\ \+\ 1;$	+1
+use	FixedValue__ctor_1245a8	puVar3	loadConstInst	INFERRED	new IRLoadConst defining this register (allocation + 1)	^\s*FUN_00109614\(puVar3,param_1,param_5\);$	+1
+use	FixedValue__ctor_1245a8	puVar3	loadConstInst	INFERRED	new IRLoadConst defining this register (allocation + 1)	^\s*\(\*\*\(code\ \*\*\)\(\*piVar2\ \+\ 0xc\)\)\(piVar2,puVar3\);$	+3
