@@ -2657,6 +2657,7 @@ int fragmentTranslateAtn(emitter, slot, instr)
   int slot;
   int instr;
 {
+  uint tokenCapacity;
   uint *tokenWritePtr;
   uint *recordPtr4;
   undefined **recordPtr3;
@@ -2674,25 +2675,25 @@ int fragmentTranslateAtn(emitter, slot, instr)
   undefined4 extraout_r4_03;
   undefined4 extraout_r4_04;
   undefined4 uVar7;
-  uint uVar8;
+  uint srcRegWord1;
   undefined *puVar9;
   char *pcVar10;
   undefined **ppuVar11;
   undefined4 uVar12;
   uint *puVar13;
-  short sVar17;
+  short tempRegisterHalf;
   undefined4 *recordPtr2;
   undefined **recordWordNext4;
   uint *puVar16;
   undefined4 *tokenWritePtr2;
-  int iVar19;
+  int tempRegister;
   int *bufferDataPtr;
   undefined4 entryHeader;
-  undefined4 uStack_64;
-  uint uStack_60;
-  undefined4 uStack_5c;
-  undefined4 uStack_58;
-  undefined4 uStack_54;
+  undefined4 ilInstADst;
+  uint ilInstADstMask;
+  undefined4 ilInstASrc0;
+  undefined4 ilInstASrc1;
+  undefined4 ilInstASrc2;
   undefined *apuStack_50 [11];
   
   if ((*(uint *)((slot + *(int *)(*emitter + 0x54)) * 8 + *emitter) & 0xe0000000) == 0x20000000)
@@ -2703,17 +2704,17 @@ int fragmentTranslateAtn(emitter, slot, instr)
     *(uint *)(instr + 0x10) = *(uint *)(instr + 0x10) | 0x400000;
   }
   _memset(&entryHeader,0,0x24);
-  iVar19 = emitter[8];
+  tempRegister = emitter[8];
   bufferCount = emitter[9];
-  uStack_64 = CONCAT22(4,(short)iVar19);
+  ilInstADst = CONCAT22(4,(short)tempRegister);
   entryHeader = CONCAT22((*(unsigned short *)((unsigned char *)&(entryHeader) + 0)),0x5b);
-  uVar8 = *(uint *)(instr + 0x10);
-  uStack_60 = 0x55;
+  srcRegWord1 = *(uint *)(instr + 0x10);
+  ilInstADstMask = 0x55;
   apuStack_50[0] = (undefined *)(*(uint *)(instr + 0x18) & 0xffff7777 | 0x100000);
   apuStack_50[1] = (undefined *)(*(uint *)(instr + 0x1c) & 0xffff7777 | 0x100000);
-  uStack_5c = *(undefined **)(instr + 0xc);
-  uStack_58 = (undefined *)uVar8;
-  uStack_64 = uStack_64 | 0x400000;
+  ilInstASrc0 = *(undefined **)(instr + 0xc);
+  ilInstASrc1 = (undefined *)srcRegWord1;
+  ilInstADst = ilInstADst | 0x400000;
   if (bufferCount == 0) {
     bufferDataPtr = emitter + 10;
     bufferCount = emitter[0xb];
@@ -2739,44 +2740,44 @@ int fragmentTranslateAtn(emitter, slot, instr)
           bufferCount = 1;
           emitter[9] = 1;
         }
-        iVar19 = emitter[8];
+        tempRegister = emitter[8];
         goto LAB_00041e30;
       }
       *bufferDataPtr = bufferCount;
       emitter[0xc] = capacity;
       bufferCount = emitter[0xb];
     }
-    recordPtr2 = &uStack_5c;
+    recordPtr2 = &ilInstASrc0;
     emitter[0xb] = bufferCount + 7;
     tokenWritePtr2 = (undefined4 *)(bufferCount * 4 + *bufferDataPtr);
     *tokenWritePtr2 = entryHeader;
-    tokenWritePtr2[1] = uStack_64;
-    tokenWritePtr2[2] = uStack_60;
+    tokenWritePtr2[1] = ilInstADst;
+    tokenWritePtr2[2] = ilInstADstMask;
     do {
       tokenWritePtr2[3] = *recordPtr2;
       recordWordNext = recordPtr2 + 3;
       recordPtr2 = recordPtr2 + 1;
       tokenWritePtr2[4] = *recordWordNext;
       tokenWritePtr2 = tokenWritePtr2 + 2;
-    } while (&uStack_54 != recordPtr2);
-    iVar19 = emitter[8];
+    } while (&ilInstASrc2 != recordPtr2);
+    tempRegister = emitter[8];
     bufferCount = emitter[9];
   }
 LAB_00041e30:
   puVar4 = apuStack_50[0];
-  uStack_54 = (uint *)uStack_58;
-  puVar9 = uStack_5c;
+  ilInstASrc2 = (uint *)ilInstASrc1;
+  puVar9 = ilInstASrc0;
   entryHeader = CONCAT22((*(unsigned short *)((unsigned char *)&(entryHeader) + 0)),0xd);
-  uStack_64 = CONCAT22(4,(short)iVar19 + 1);
-  uStack_5c = (undefined *)CONCAT22(4,(short)iVar19);
-  uStack_58 = puVar9;
-  uStack_60 = 0x55;
+  ilInstADst = CONCAT22(4,(short)tempRegister + 1);
+  ilInstASrc0 = (undefined *)CONCAT22(4,(short)tempRegister);
+  ilInstASrc1 = puVar9;
+  ilInstADstMask = 0x55;
   apuStack_50[2] = apuStack_50[1];
   apuStack_50[0] = ((unsigned char *)0x00003210);
   apuStack_50[1] = puVar4;
   entryHeader = entryHeader & 0xc000ffff | 0x30000;
-  uStack_64 = uStack_64 | 0x400000;
-  uStack_5c = (undefined *)((uint)uStack_5c | 0x400000);
+  ilInstADst = ilInstADst | 0x400000;
+  ilInstASrc0 = (undefined *)((uint)ilInstASrc0 | 0x400000);
   if (bufferCount == 0) {
     bufferDataPtr = emitter + 10;
     bufferCount = emitter[0xb];
@@ -2802,19 +2803,19 @@ LAB_00041e30:
           bufferCount = 1;
           emitter[9] = 1;
         }
-        iVar19 = emitter[8];
+        tempRegister = emitter[8];
         goto LAB_00042000;
       }
       *bufferDataPtr = bufferCount;
       emitter[0xc] = capacity;
       bufferCount = emitter[0xb];
     }
-    recordPtr = (undefined **)&uStack_5c;
+    recordPtr = (undefined **)&ilInstASrc0;
     emitter[0xb] = bufferCount + 9;
     tokenWritePtr = (uint *)(bufferCount * 4 + *bufferDataPtr);
     *tokenWritePtr = entryHeader;
-    tokenWritePtr[1] = uStack_64;
-    tokenWritePtr[2] = uStack_60;
+    tokenWritePtr[1] = ilInstADst;
+    tokenWritePtr[2] = ilInstADstMask;
     do {
       tokenWritePtr[3] = (uint)*recordPtr;
       recordWordNext4 = recordPtr + 3;
@@ -2822,17 +2823,17 @@ LAB_00041e30:
       tokenWritePtr[4] = (uint)*recordWordNext4;
       tokenWritePtr = tokenWritePtr + 2;
     } while (apuStack_50 != recordPtr);
-    iVar19 = emitter[8];
+    tempRegister = emitter[8];
     bufferCount = emitter[9];
   }
 LAB_00042000:
-  uStack_5c = (undefined *)CONCAT22(4,(short)iVar19);
-  uStack_64 = CONCAT22(4,(short)iVar19 + 2);
+  ilInstASrc0 = (undefined *)CONCAT22(4,(short)tempRegister);
+  ilInstADst = CONCAT22(4,(short)tempRegister + 2);
   entryHeader = entryHeader & 0xc000ffff | 0x40000;
-  uStack_60 = 0x55;
+  ilInstADstMask = 0x55;
   apuStack_50[0] = ((unsigned char *)0x00003210);
-  uStack_64 = uStack_64 | 0x400000;
-  uStack_5c = (undefined *)((uint)uStack_5c | 0x400000);
+  ilInstADst = ilInstADst | 0x400000;
+  ilInstASrc0 = (undefined *)((uint)ilInstASrc0 | 0x400000);
   if (bufferCount == 0) {
     bufferDataPtr = emitter + 10;
     bufferCount = emitter[0xb];
@@ -2858,19 +2859,19 @@ LAB_00042000:
           bufferCount = 1;
           emitter[9] = 1;
         }
-        iVar19 = emitter[8];
+        tempRegister = emitter[8];
         goto LAB_000421a0;
       }
       *bufferDataPtr = bufferCount;
       emitter[0xc] = capacity;
       bufferCount = emitter[0xb];
     }
-    recordPtr = (undefined **)&uStack_5c;
+    recordPtr = (undefined **)&ilInstASrc0;
     emitter[0xb] = bufferCount + 9;
     tokenWritePtr = (uint *)(bufferCount * 4 + *bufferDataPtr);
     *tokenWritePtr = entryHeader;
-    tokenWritePtr[1] = uStack_64;
-    tokenWritePtr[2] = uStack_60;
+    tokenWritePtr[1] = ilInstADst;
+    tokenWritePtr[2] = ilInstADstMask;
     do {
       tokenWritePtr[3] = (uint)*recordPtr;
       recordWordNext4 = recordPtr + 3;
@@ -2878,23 +2879,23 @@ LAB_00042000:
       tokenWritePtr[4] = (uint)*recordWordNext4;
       tokenWritePtr = tokenWritePtr + 2;
     } while (apuStack_50 != recordPtr);
-    iVar19 = emitter[8];
+    tempRegister = emitter[8];
     bufferCount = emitter[9];
   }
 LAB_000421a0:
-  sVar17 = (short)iVar19 + 1;
+  tempRegisterHalf = (short)tempRegister + 1;
   entryHeader = CONCAT22((*(unsigned short *)((unsigned char *)&(entryHeader) + 0)),0x20);
-  uStack_5c = (undefined *)CONCAT22(4,(short)iVar19 + 2);
-  uStack_64 = CONCAT22(4,sVar17);
-  uStack_58 = (undefined *)CONCAT22(4,sVar17);
+  ilInstASrc0 = (undefined *)CONCAT22(4,(short)tempRegister + 2);
+  ilInstADst = CONCAT22(4,tempRegisterHalf);
+  ilInstASrc1 = (undefined *)CONCAT22(4,tempRegisterHalf);
   pcVar10 = (*(GhidraMachOSection *)0x00000054).sectname + 1;
-  uStack_60 = 0x55;
+  ilInstADstMask = 0x55;
   apuStack_50[0] = ((unsigned char *)0x00003210);
   apuStack_50[1] = ((unsigned char *)0x00003210);
   entryHeader = entryHeader & 0xc000ffff;
-  uStack_64 = uStack_64 | 0x400000;
-  uStack_5c = (undefined *)((uint)uStack_5c | 0x400000);
-  uStack_58 = (undefined *)((uint)uStack_58 | 0x400000);
+  ilInstADst = ilInstADst | 0x400000;
+  ilInstASrc0 = (undefined *)((uint)ilInstASrc0 | 0x400000);
+  ilInstASrc1 = (undefined *)((uint)ilInstASrc1 | 0x400000);
   if (bufferCount == 0) {
     bufferDataPtr = emitter + 10;
     bufferCount = emitter[0xb];
@@ -2926,13 +2927,13 @@ LAB_000421a0:
     }
     else {
 LAB_000422f0:
-      recordPtr4 = &uStack_5c;
-      pcVar10 = (char *)&uStack_54;
+      recordPtr4 = &ilInstASrc0;
+      pcVar10 = (char *)&ilInstASrc2;
       emitter[0xb] = bufferCount + 7;
       tokenWritePtr = (uint *)(bufferCount * 4 + *bufferDataPtr);
       *tokenWritePtr = entryHeader;
-      tokenWritePtr[1] = uStack_64;
-      tokenWritePtr[2] = uStack_60;
+      tokenWritePtr[1] = ilInstADst;
+      tokenWritePtr[2] = ilInstADstMask;
       do {
         tokenWritePtr[3] = *recordPtr4;
         recordWordNext2 = recordPtr4 + 3;
@@ -2941,51 +2942,51 @@ LAB_000422f0:
         tokenWritePtr = tokenWritePtr + 2;
       } while ((uint *)pcVar10 != recordPtr4);
     }
-    iVar19 = emitter[8];
+    tempRegister = emitter[8];
   }
-  uStack_5c = (undefined *)CONCAT22(4,(short)iVar19 + 1);
-  emitter[8] = iVar19 + 3;
+  ilInstASrc0 = (undefined *)CONCAT22(4,(short)tempRegister + 1);
+  emitter[8] = tempRegister + 3;
   (*(unsigned short *)((unsigned char *)&(entryHeader) + 2)) = 5;
   uVar12 = 0xffff7777;
   apuStack_50[0] = ((unsigned char *)0x00003210);
-  uStack_5c = (undefined *)((uint)uStack_5c | 0x400000);
+  ilInstASrc0 = (undefined *)((uint)ilInstASrc0 | 0x400000);
   ((int (*)())fragmentTranslateScalarMath)(emitter,slot,&entryHeader);
   uVar7 = 0x24;
   emitter[8] = emitter[8] + -3;
   _memset(&entryHeader,0,0x24);
   entryHeader = CONCAT22((*(unsigned short *)((unsigned char *)&(entryHeader) + 0)),0x5b);
-  ((int (*)())fpilEmitAngleConstants)(emitter,extraout_r4,uVar7,uVar8,puVar9,pcVar10,uVar12);
-  sVar17 = (short)emitter[8];
-  uStack_58 = (undefined *)CONCAT22(4,sVar17 + 1);
-  uStack_64 = CONCAT22(4,sVar17 + 2);
-  uStack_5c = (undefined *)CONCAT22(1,(short)*(undefined4 *)(*emitter + 0x28));
+  ((int (*)())fpilEmitAngleConstants)(emitter,extraout_r4,uVar7,srcRegWord1,puVar9,pcVar10,uVar12);
+  tempRegisterHalf = (short)emitter[8];
+  ilInstASrc1 = (undefined *)CONCAT22(4,tempRegisterHalf + 1);
+  ilInstADst = CONCAT22(4,tempRegisterHalf + 2);
+  ilInstASrc0 = (undefined *)CONCAT22(1,(short)*(undefined4 *)(*emitter + 0x28));
   bufferCount = emitter[9];
   apuStack_50[1] = ((unsigned char *)0x00003210);
-  uStack_60 = 0x55;
-  uStack_64 = uStack_64 | 0x400000;
-  uStack_58 = (undefined *)((uint)uStack_58 | 0x400000);
-  uStack_5c = (undefined *)((uint)uStack_5c | 0x400000);
+  ilInstADstMask = 0x55;
+  ilInstADst = ilInstADst | 0x400000;
+  ilInstASrc1 = (undefined *)((uint)ilInstASrc1 | 0x400000);
+  ilInstASrc0 = (undefined *)((uint)ilInstASrc0 | 0x400000);
   apuStack_50[0] = ((unsigned char *)0x00001111);
   uVar7 = extraout_r4_00;
   if (bufferCount == 0) {
     bufferDataPtr = emitter + 10;
     bufferCount = emitter[0xb];
-    uVar8 = emitter[0xc];
-    if (uVar8 < bufferCount + 7U) {
-      if (uVar8 == 0) {
-        uVar8 = 0x10;
+    tokenCapacity = emitter[0xc];
+    if (tokenCapacity < bufferCount + 7U) {
+      if (tokenCapacity == 0) {
+        tokenCapacity = 0x10;
       }
       else {
-        uVar8 = uVar8 << 1;
+        tokenCapacity = tokenCapacity << 1;
       }
-      for (; uVar8 < bufferCount + 7U; uVar8 = uVar8 << 1) {
+      for (; tokenCapacity < bufferCount + 7U; tokenCapacity = tokenCapacity << 1) {
       }
       if (*bufferDataPtr == 0) {
-        bufferCount = _malloc(uVar8 << 2);
+        bufferCount = _malloc(tokenCapacity << 2);
         uVar7 = extraout_r4_01;
       }
       else {
-        bufferCount = _realloc(*bufferDataPtr,uVar8 << 2);
+        bufferCount = _realloc(*bufferDataPtr,tokenCapacity << 2);
         uVar7 = extraout_r4_02;
       }
       if (bufferCount == 0) {
@@ -2994,67 +2995,67 @@ LAB_000422f0:
           bufferCount = 1;
           emitter[9] = 1;
         }
-        sVar17 = (short)emitter[8];
+        tempRegisterHalf = (short)emitter[8];
         goto LAB_00042600;
       }
       *bufferDataPtr = bufferCount;
-      emitter[0xc] = uVar8;
+      emitter[0xc] = tokenCapacity;
       bufferCount = emitter[0xb];
     }
-    recordPtr2 = &uStack_5c;
+    recordPtr2 = &ilInstASrc0;
     emitter[0xb] = bufferCount + 7;
     tokenWritePtr2 = (undefined4 *)(bufferCount * 4 + *bufferDataPtr);
     *tokenWritePtr2 = entryHeader;
-    tokenWritePtr2[1] = uStack_64;
-    tokenWritePtr2[2] = uStack_60;
+    tokenWritePtr2[1] = ilInstADst;
+    tokenWritePtr2[2] = ilInstADstMask;
     do {
       tokenWritePtr2[3] = *recordPtr2;
       recordWordNext = recordPtr2 + 3;
       recordPtr2 = recordPtr2 + 1;
       tokenWritePtr2[4] = *recordWordNext;
       tokenWritePtr2 = tokenWritePtr2 + 2;
-    } while (&uStack_54 != recordPtr2);
-    sVar17 = (short)emitter[8];
+    } while (&ilInstASrc2 != recordPtr2);
+    tempRegisterHalf = (short)emitter[8];
     bufferCount = emitter[9];
   }
 LAB_00042600:
   entryHeader = CONCAT22((*(unsigned short *)((unsigned char *)&(entryHeader) + 0)),0xd);
-  uStack_5c = (undefined *)CONCAT22(4,sVar17);
-  uStack_58 = (undefined *)CONCAT22(4,sVar17 + 2);
-  uStack_64 = CONCAT22(4,sVar17 + 1);
-  uStack_54 = (uint *)CONCAT22(4,sVar17 + 1);
+  ilInstASrc0 = (undefined *)CONCAT22(4,tempRegisterHalf);
+  ilInstASrc1 = (undefined *)CONCAT22(4,tempRegisterHalf + 2);
+  ilInstADst = CONCAT22(4,tempRegisterHalf + 1);
+  ilInstASrc2 = (uint *)CONCAT22(4,tempRegisterHalf + 1);
   uVar12 = 0x55;
   puVar9 = ((unsigned char *)0x00003210);
   ppuVar11 = (undefined **)((unsigned char *)0x00003210);
-  uStack_60 = 0x55;
+  ilInstADstMask = 0x55;
   apuStack_50[2] = ((unsigned char *)0x00003210);
   apuStack_50[1] = ((unsigned char *)0x00003210);
   apuStack_50[0] = ((unsigned char *)0x00003210);
   entryHeader = entryHeader & 0xc000ffff | 0x30000;
-  uStack_64 = uStack_64 | 0x400000;
-  uStack_5c = (undefined *)((uint)uStack_5c | 0x400000);
-  uStack_58 = (undefined *)((uint)uStack_58 | 0x400000);
-  puVar13 = (uint *)((uint)uStack_54 | 0x400000);
-  uStack_54 = puVar13;
+  ilInstADst = ilInstADst | 0x400000;
+  ilInstASrc0 = (undefined *)((uint)ilInstASrc0 | 0x400000);
+  ilInstASrc1 = (undefined *)((uint)ilInstASrc1 | 0x400000);
+  puVar13 = (uint *)((uint)ilInstASrc2 | 0x400000);
+  ilInstASrc2 = puVar13;
   if (bufferCount == 0) {
     bufferDataPtr = emitter + 10;
     puVar13 = (uint *)emitter[0xb];
-    uVar8 = emitter[0xc];
-    if (uVar8 < (int)puVar13 + 9U) {
-      if (uVar8 == 0) {
-        uVar8 = 0x10;
+    tokenCapacity = emitter[0xc];
+    if (tokenCapacity < (int)puVar13 + 9U) {
+      if (tokenCapacity == 0) {
+        tokenCapacity = 0x10;
       }
       else {
-        uVar8 = uVar8 << 1;
+        tokenCapacity = tokenCapacity << 1;
       }
-      for (; uVar8 < (int)puVar13 + 9U; uVar8 = uVar8 << 1) {
+      for (; tokenCapacity < (int)puVar13 + 9U; tokenCapacity = tokenCapacity << 1) {
       }
       if (*bufferDataPtr == 0) {
-        bufferCount = _malloc(uVar8 << 2);
+        bufferCount = _malloc(tokenCapacity << 2);
         uVar7 = extraout_r4_03;
       }
       else {
-        bufferCount = _realloc(*bufferDataPtr,uVar8 << 2);
+        bufferCount = _realloc(*bufferDataPtr,tokenCapacity << 2);
         uVar7 = extraout_r4_04;
       }
       if (bufferCount == 0) {
@@ -3064,16 +3065,16 @@ LAB_00042600:
         goto LAB_00042800;
       }
       *bufferDataPtr = bufferCount;
-      emitter[0xc] = uVar8;
+      emitter[0xc] = tokenCapacity;
       puVar13 = (uint *)emitter[0xb];
     }
-    recordPtr3 = (undefined **)&uStack_5c;
+    recordPtr3 = (undefined **)&ilInstASrc0;
     ppuVar11 = apuStack_50;
     emitter[0xb] = (int)puVar13 + 9;
     puVar13 = (uint *)((int)puVar13 * 4 + *bufferDataPtr);
     *puVar13 = entryHeader;
-    puVar13[1] = uStack_64;
-    puVar13[2] = uStack_60;
+    puVar13[1] = ilInstADst;
+    puVar13[2] = ilInstADstMask;
     puVar16 = puVar13;
     do {
       puVar16[3] = (uint)*recordPtr3;
@@ -3087,35 +3088,35 @@ LAB_00042800:
   entryHeader = CONCAT22((*(unsigned short *)((unsigned char *)&(entryHeader) + 0)),0x5b);
   entryHeader = entryHeader & 0xc000ffff;
   ((int (*)())fpilEmitAngleConstants)(emitter,uVar7,entryHeader,uVar12,puVar9,ppuVar11,puVar13);
-  sVar17 = (short)emitter[8];
-  uStack_5c = (undefined *)CONCAT22(1,(short)*(undefined4 *)(*emitter + 0x28));
-  uStack_64 = CONCAT22(4,sVar17 + 2);
-  uStack_58 = (undefined *)CONCAT22(4,sVar17 + 1);
+  tempRegisterHalf = (short)emitter[8];
+  ilInstASrc0 = (undefined *)CONCAT22(1,(short)*(undefined4 *)(*emitter + 0x28));
+  ilInstADst = CONCAT22(4,tempRegisterHalf + 2);
+  ilInstASrc1 = (undefined *)CONCAT22(4,tempRegisterHalf + 1);
   bufferCount = emitter[9];
   apuStack_50[0] = (undefined *)0x0;
   apuStack_50[1] = ((unsigned char *)0x00003210);
-  uStack_60 = 0x55;
-  uStack_5c = (undefined *)((uint)uStack_5c | 0x400000);
-  uStack_64 = uStack_64 | 0x400000;
-  uStack_58 = (undefined *)((uint)uStack_58 | 0x400000);
+  ilInstADstMask = 0x55;
+  ilInstASrc0 = (undefined *)((uint)ilInstASrc0 | 0x400000);
+  ilInstADst = ilInstADst | 0x400000;
+  ilInstASrc1 = (undefined *)((uint)ilInstASrc1 | 0x400000);
   if (bufferCount == 0) {
     bufferDataPtr = emitter + 10;
     bufferCount = emitter[0xb];
-    uVar8 = emitter[0xc];
-    if (uVar8 < bufferCount + 7U) {
-      if (uVar8 == 0) {
-        uVar8 = 0x10;
+    tokenCapacity = emitter[0xc];
+    if (tokenCapacity < bufferCount + 7U) {
+      if (tokenCapacity == 0) {
+        tokenCapacity = 0x10;
       }
       else {
-        uVar8 = uVar8 << 1;
+        tokenCapacity = tokenCapacity << 1;
       }
-      for (; uVar8 < bufferCount + 7U; uVar8 = uVar8 << 1) {
+      for (; tokenCapacity < bufferCount + 7U; tokenCapacity = tokenCapacity << 1) {
       }
       if (*bufferDataPtr == 0) {
-        bufferCount = _malloc(uVar8 << 2);
+        bufferCount = _malloc(tokenCapacity << 2);
       }
       else {
-        bufferCount = _realloc(*bufferDataPtr,uVar8 << 2);
+        bufferCount = _realloc(*bufferDataPtr,tokenCapacity << 2);
       }
       if (bufferCount == 0) {
         bufferCount = emitter[9];
@@ -3123,61 +3124,61 @@ LAB_00042800:
           bufferCount = 1;
           emitter[9] = 1;
         }
-        sVar17 = (short)emitter[8];
+        tempRegisterHalf = (short)emitter[8];
         goto LAB_000429f0;
       }
       *bufferDataPtr = bufferCount;
-      emitter[0xc] = uVar8;
+      emitter[0xc] = tokenCapacity;
       bufferCount = emitter[0xb];
     }
-    recordPtr4 = &uStack_5c;
+    recordPtr4 = &ilInstASrc0;
     emitter[0xb] = bufferCount + 7;
     tokenWritePtr = (uint *)(bufferCount * 4 + *bufferDataPtr);
     *tokenWritePtr = entryHeader;
-    tokenWritePtr[1] = uStack_64;
-    tokenWritePtr[2] = uStack_60;
+    tokenWritePtr[1] = ilInstADst;
+    tokenWritePtr[2] = ilInstADstMask;
     do {
       tokenWritePtr[3] = *recordPtr4;
       recordWordNext2 = recordPtr4 + 3;
       recordPtr4 = recordPtr4 + 1;
       tokenWritePtr[4] = *recordWordNext2;
       tokenWritePtr = tokenWritePtr + 2;
-    } while (recordPtr4 != &uStack_54);
-    sVar17 = (short)emitter[8];
+    } while (recordPtr4 != &ilInstASrc2);
+    tempRegisterHalf = (short)emitter[8];
     bufferCount = emitter[9];
   }
 LAB_000429f0:
   entryHeader = CONCAT22((*(unsigned short *)((unsigned char *)&(entryHeader) + 0)),0xd);
-  uStack_58 = (undefined *)CONCAT22(4,sVar17 + 2);
-  uStack_54 = (uint *)CONCAT22(4,sVar17 + 1);
-  uStack_64 = CONCAT22(4,sVar17 + 1);
+  ilInstASrc1 = (undefined *)CONCAT22(4,tempRegisterHalf + 2);
+  ilInstASrc2 = (uint *)CONCAT22(4,tempRegisterHalf + 1);
+  ilInstADst = CONCAT22(4,tempRegisterHalf + 1);
   entryHeader = entryHeader & 0xc000ffff | 0x50000;
-  uStack_60 = 0x55;
+  ilInstADstMask = 0x55;
   apuStack_50[1] = ((unsigned char *)0x00003210);
   apuStack_50[2] = ((unsigned char *)0x00003210);
-  uStack_5c = *(undefined **)(instr + 0x10);
+  ilInstASrc0 = *(undefined **)(instr + 0x10);
   apuStack_50[0] = *(undefined **)(instr + 0x1c);
-  uStack_64 = uStack_64 | 0x400000;
-  uStack_58 = (undefined *)((uint)uStack_58 | 0x400000);
-  uStack_54 = (uint *)((uint)uStack_54 | 0x400000);
+  ilInstADst = ilInstADst | 0x400000;
+  ilInstASrc1 = (undefined *)((uint)ilInstASrc1 | 0x400000);
+  ilInstASrc2 = (uint *)((uint)ilInstASrc2 | 0x400000);
   if (bufferCount == 0) {
     bufferDataPtr = emitter + 10;
     bufferCount = emitter[0xb];
-    uVar8 = emitter[0xc];
-    if (uVar8 < bufferCount + 9U) {
-      if (uVar8 == 0) {
-        uVar8 = 0x10;
+    tokenCapacity = emitter[0xc];
+    if (tokenCapacity < bufferCount + 9U) {
+      if (tokenCapacity == 0) {
+        tokenCapacity = 0x10;
       }
       else {
-        uVar8 = uVar8 << 1;
+        tokenCapacity = tokenCapacity << 1;
       }
-      for (; uVar8 < bufferCount + 9U; uVar8 = uVar8 << 1) {
+      for (; tokenCapacity < bufferCount + 9U; tokenCapacity = tokenCapacity << 1) {
       }
       if (*bufferDataPtr == 0) {
-        bufferCount = _malloc(uVar8 << 2);
+        bufferCount = _malloc(tokenCapacity << 2);
       }
       else {
-        bufferCount = _realloc(*bufferDataPtr,uVar8 << 2);
+        bufferCount = _realloc(*bufferDataPtr,tokenCapacity << 2);
       }
       if (bufferCount == 0) {
         bufferCount = emitter[9];
@@ -3185,19 +3186,19 @@ LAB_000429f0:
           bufferCount = 1;
           emitter[9] = 1;
         }
-        sVar17 = (short)emitter[8];
+        tempRegisterHalf = (short)emitter[8];
         goto LAB_00042bf0;
       }
       *bufferDataPtr = bufferCount;
-      emitter[0xc] = uVar8;
+      emitter[0xc] = tokenCapacity;
       bufferCount = emitter[0xb];
     }
-    recordPtr = (undefined **)&uStack_5c;
+    recordPtr = (undefined **)&ilInstASrc0;
     emitter[0xb] = bufferCount + 9;
     tokenWritePtr = (uint *)(bufferCount * 4 + *bufferDataPtr);
     *tokenWritePtr = entryHeader;
-    tokenWritePtr[1] = uStack_64;
-    tokenWritePtr[2] = uStack_60;
+    tokenWritePtr[1] = ilInstADst;
+    tokenWritePtr[2] = ilInstADstMask;
     do {
       tokenWritePtr[3] = (uint)*recordPtr;
       recordWordNext4 = recordPtr + 3;
@@ -3205,40 +3206,40 @@ LAB_000429f0:
       tokenWritePtr[4] = (uint)*recordWordNext4;
       tokenWritePtr = tokenWritePtr + 2;
     } while (apuStack_50 != recordPtr);
-    sVar17 = (short)emitter[8];
+    tempRegisterHalf = (short)emitter[8];
     bufferCount = emitter[9];
   }
 LAB_00042bf0:
   entryHeader = CONCAT22((*(unsigned short *)((unsigned char *)&(entryHeader) + 0)),0xd);
-  uStack_54 = (uint *)CONCAT22(4,sVar17 + 1);
-  uStack_58 = (undefined *)CONCAT22(4,sVar17 + 1);
+  ilInstASrc2 = (uint *)CONCAT22(4,tempRegisterHalf + 1);
+  ilInstASrc1 = (undefined *)CONCAT22(4,tempRegisterHalf + 1);
   entryHeader = entryHeader & 0xc000ffff | 0x50000;
-  uStack_60 = *(uint *)(instr + 8);
-  uStack_64 = *(uint *)(instr + 4);
+  ilInstADstMask = *(uint *)(instr + 8);
+  ilInstADst = *(uint *)(instr + 4);
   apuStack_50[2] = ((unsigned char *)0x00003210);
-  uStack_5c = *(undefined **)(instr + 0xc);
+  ilInstASrc0 = *(undefined **)(instr + 0xc);
   apuStack_50[0] = *(undefined **)(instr + 0x18);
-  uStack_58 = (undefined *)((uint)uStack_58 | 0x400000);
-  uStack_54 = (uint *)((uint)uStack_54 | 0x400000);
+  ilInstASrc1 = (undefined *)((uint)ilInstASrc1 | 0x400000);
+  ilInstASrc2 = (uint *)((uint)ilInstASrc2 | 0x400000);
   apuStack_50[1] = (undefined *)0xba98;
   if (bufferCount == 0) {
     bufferDataPtr = emitter + 10;
     bufferCount = emitter[0xb];
-    uVar8 = emitter[0xc];
-    if (uVar8 < bufferCount + 9U) {
-      if (uVar8 == 0) {
-        uVar8 = 0x10;
+    tokenCapacity = emitter[0xc];
+    if (tokenCapacity < bufferCount + 9U) {
+      if (tokenCapacity == 0) {
+        tokenCapacity = 0x10;
       }
       else {
-        uVar8 = uVar8 << 1;
+        tokenCapacity = tokenCapacity << 1;
       }
-      for (; uVar8 < bufferCount + 9U; uVar8 = uVar8 << 1) {
+      for (; tokenCapacity < bufferCount + 9U; tokenCapacity = tokenCapacity << 1) {
       }
       if (*bufferDataPtr == 0) {
-        bufferCount = _malloc(uVar8 << 2);
+        bufferCount = _malloc(tokenCapacity << 2);
       }
       else {
-        bufferCount = _realloc(*bufferDataPtr,uVar8 << 2);
+        bufferCount = _realloc(*bufferDataPtr,tokenCapacity << 2);
       }
       if (bufferCount == 0) {
         if (emitter[9] != 0) {
@@ -3248,15 +3249,15 @@ LAB_00042bf0:
         return 1;
       }
       *bufferDataPtr = bufferCount;
-      emitter[0xc] = uVar8;
+      emitter[0xc] = tokenCapacity;
       bufferCount = emitter[0xb];
     }
-    recordPtr = (undefined **)&uStack_5c;
+    recordPtr = (undefined **)&ilInstASrc0;
     emitter[0xb] = bufferCount + 9;
     tokenWritePtr = (uint *)(bufferCount * 4 + *bufferDataPtr);
     *tokenWritePtr = entryHeader;
-    tokenWritePtr[1] = uStack_64;
-    tokenWritePtr[2] = uStack_60;
+    tokenWritePtr[1] = ilInstADst;
+    tokenWritePtr[2] = ilInstADstMask;
     do {
       tokenWritePtr[3] = (uint)*recordPtr;
       recordWordNext4 = recordPtr + 3;
@@ -3286,24 +3287,24 @@ int fragmentTranslateRfr(emitter, slot, instr)
   int *bufferDataPtr;
   short sVar10;
   undefined4 entryHeader;
-  undefined4 uStack_54;
-  uint uStack_50;
-  undefined4 uStack_4c;
-  undefined4 uStack_48;
-  undefined4 uStack_44;
+  undefined4 ilInstADst;
+  uint ilInstADstMask;
+  undefined4 ilInstASrc0;
+  undefined4 ilInstASrc1;
+  undefined4 ilInstASrc2;
   undefined *apuStack_40 [11];
   
   _memset(&entryHeader,0,0x24);
   bufferCount = *(int *)(emitter + 0x24);
   sVar10 = (short)*(undefined4 *)(emitter + 0x20);
-  uStack_54 = CONCAT22(4,sVar10);
+  ilInstADst = CONCAT22(4,sVar10);
   entryHeader = CONCAT22((*(unsigned short *)((unsigned char *)&(entryHeader) + 0)),0x23);
-  uStack_50 = 0x55;
-  uStack_4c = *(undefined **)(instr + 0xc);
+  ilInstADstMask = 0x55;
+  ilInstASrc0 = *(undefined **)(instr + 0xc);
   apuStack_40[0] = *(undefined **)(instr + 0x18);
-  uStack_48 = (undefined *)*(undefined4 *)(instr + 0x10);
+  ilInstASrc1 = (undefined *)*(undefined4 *)(instr + 0x10);
   apuStack_40[1] = (undefined *)*(undefined4 *)(instr + 0x1c);
-  uStack_54 = uStack_54 | 0x400000;
+  ilInstADst = ilInstADst | 0x400000;
   if (bufferCount == 0) {
     bufferDataPtr = (int *)(emitter + 0x28);
     bufferCount = *(int *)(emitter + 0x2c);
@@ -3336,35 +3337,35 @@ int fragmentTranslateRfr(emitter, slot, instr)
       *(uint *)(emitter + 0x30) = capacity;
       bufferCount = *(int *)(emitter + 0x2c);
     }
-    recordPtr = &uStack_4c;
+    recordPtr = &ilInstASrc0;
     *(int *)(emitter + 0x2c) = bufferCount + 7;
     tokenWritePtr = (undefined4 *)(bufferCount * 4 + *bufferDataPtr);
     *tokenWritePtr = entryHeader;
-    tokenWritePtr[1] = uStack_54;
-    tokenWritePtr[2] = uStack_50;
+    tokenWritePtr[1] = ilInstADst;
+    tokenWritePtr[2] = ilInstADstMask;
     do {
       tokenWritePtr[3] = *recordPtr;
       recordWordNext = recordPtr + 3;
       recordPtr = recordPtr + 1;
       tokenWritePtr[4] = *recordWordNext;
       tokenWritePtr = tokenWritePtr + 2;
-    } while (&uStack_44 != recordPtr);
+    } while (&ilInstASrc2 != recordPtr);
     sVar10 = (short)*(undefined4 *)(emitter + 0x20);
     bufferCount = *(int *)(emitter + 0x24);
   }
 LAB_00042fa0:
-  uStack_54 = CONCAT22(4,sVar10 + 1);
-  uStack_4c = (undefined *)CONCAT22(4,sVar10);
-  uStack_48 = (undefined *)CONCAT22(4,sVar10);
-  uStack_50 = 0x55;
+  ilInstADst = CONCAT22(4,sVar10 + 1);
+  ilInstASrc0 = (undefined *)CONCAT22(4,sVar10);
+  ilInstASrc1 = (undefined *)CONCAT22(4,sVar10);
+  ilInstADstMask = 0x55;
   apuStack_40[0] = ((unsigned char *)0x00003210);
   entryHeader = CONCAT22((*(unsigned short *)((unsigned char *)&(entryHeader) + 0)),0x40);
   apuStack_40[1] = ((unsigned char *)0x00003210);
   apuStack_40[2] = (undefined *)0xdddd;
-  uStack_54 = uStack_54 | 0x400000;
-  uStack_4c = (undefined *)((uint)uStack_4c | 0x400000);
-  uStack_44 = 0x440000;
-  uStack_48 = (undefined *)((uint)uStack_48 | 0x400000);
+  ilInstADst = ilInstADst | 0x400000;
+  ilInstASrc0 = (undefined *)((uint)ilInstASrc0 | 0x400000);
+  ilInstASrc2 = 0x440000;
+  ilInstASrc1 = (undefined *)((uint)ilInstASrc1 | 0x400000);
   if (bufferCount == 0) {
     bufferDataPtr = (int *)(emitter + 0x28);
     bufferCount = *(int *)(emitter + 0x2c);
@@ -3397,12 +3398,12 @@ LAB_00042fa0:
       *(uint *)(emitter + 0x30) = capacity;
       bufferCount = *(int *)(emitter + 0x2c);
     }
-    recordPtr2 = (undefined **)&uStack_4c;
+    recordPtr2 = (undefined **)&ilInstASrc0;
     *(int *)(emitter + 0x2c) = bufferCount + 9;
     tokenWritePtr = (undefined4 *)(bufferCount * 4 + *bufferDataPtr);
     *tokenWritePtr = entryHeader;
-    tokenWritePtr[1] = uStack_54;
-    tokenWritePtr[2] = uStack_50;
+    tokenWritePtr[1] = ilInstADst;
+    tokenWritePtr[2] = ilInstADstMask;
     do {
       tokenWritePtr[3] = *recordPtr2;
       recordWordNext2 = recordPtr2 + 3;
@@ -3414,14 +3415,14 @@ LAB_00042fa0:
     bufferCount = *(int *)(emitter + 0x24);
   }
 LAB_000431b0:
-  uStack_54 = CONCAT22(4,sVar10 + 2);
+  ilInstADst = CONCAT22(4,sVar10 + 2);
   entryHeader = CONCAT22((*(unsigned short *)((unsigned char *)&(entryHeader) + 0)),0x49);
-  uStack_50 = 0x55;
-  uStack_48 = *(undefined **)(instr + 0x14);
+  ilInstADstMask = 0x55;
+  ilInstASrc1 = *(undefined **)(instr + 0x14);
   apuStack_40[1] = *(undefined **)(instr + 0x20);
-  uStack_4c = *(undefined **)(instr + 0x14);
+  ilInstASrc0 = *(undefined **)(instr + 0x14);
   apuStack_40[0] = *(undefined **)(instr + 0x20);
-  uStack_54 = uStack_54 | 0x400000;
+  ilInstADst = ilInstADst | 0x400000;
   if (bufferCount == 0) {
     bufferDataPtr = (int *)(emitter + 0x28);
     bufferCount = *(int *)(emitter + 0x2c);
@@ -3454,35 +3455,35 @@ LAB_000431b0:
       *(uint *)(emitter + 0x30) = capacity;
       bufferCount = *(int *)(emitter + 0x2c);
     }
-    recordPtr = &uStack_4c;
+    recordPtr = &ilInstASrc0;
     *(int *)(emitter + 0x2c) = bufferCount + 7;
     tokenWritePtr = (undefined4 *)(bufferCount * 4 + *bufferDataPtr);
     *tokenWritePtr = entryHeader;
-    tokenWritePtr[1] = uStack_54;
-    tokenWritePtr[2] = uStack_50;
+    tokenWritePtr[1] = ilInstADst;
+    tokenWritePtr[2] = ilInstADstMask;
     do {
       tokenWritePtr[3] = *recordPtr;
       recordWordNext = recordPtr + 3;
       recordPtr = recordPtr + 1;
       tokenWritePtr[4] = *recordWordNext;
       tokenWritePtr = tokenWritePtr + 2;
-    } while (&uStack_44 != recordPtr);
+    } while (&ilInstASrc2 != recordPtr);
     sVar10 = (short)*(undefined4 *)(emitter + 0x20);
     bufferCount = *(int *)(emitter + 0x24);
   }
 LAB_00043320:
-  uStack_54 = CONCAT22(4,sVar10 + 1);
-  uStack_4c = (undefined *)CONCAT22(4,sVar10 + 2);
-  uStack_48 = (undefined *)CONCAT22(4,sVar10 + 1);
-  uStack_50 = 0x55;
+  ilInstADst = CONCAT22(4,sVar10 + 1);
+  ilInstASrc0 = (undefined *)CONCAT22(4,sVar10 + 2);
+  ilInstASrc1 = (undefined *)CONCAT22(4,sVar10 + 1);
+  ilInstADstMask = 0x55;
   entryHeader = CONCAT22((*(unsigned short *)((unsigned char *)&(entryHeader) + 0)),0x40);
   apuStack_40[1] = ((unsigned char *)0x00003210);
   apuStack_40[0] = ((unsigned char *)0x00003210);
-  uStack_54 = uStack_54 | 0x400000;
-  uStack_4c = (undefined *)((uint)uStack_4c | 0x400000);
-  uStack_48 = (undefined *)((uint)uStack_48 | 0x400000);
+  ilInstADst = ilInstADst | 0x400000;
+  ilInstASrc0 = (undefined *)((uint)ilInstASrc0 | 0x400000);
+  ilInstASrc1 = (undefined *)((uint)ilInstASrc1 | 0x400000);
   apuStack_40[2] = ((unsigned char *)0x00005555U);
-  uStack_44 = 0x440000;
+  ilInstASrc2 = 0x440000;
   if (bufferCount == 0) {
     bufferDataPtr = (int *)(emitter + 0x28);
     bufferCount = *(int *)(emitter + 0x2c);
@@ -3515,12 +3516,12 @@ LAB_00043320:
       *(uint *)(emitter + 0x30) = capacity;
       bufferCount = *(int *)(emitter + 0x2c);
     }
-    recordPtr2 = (undefined **)&uStack_4c;
+    recordPtr2 = (undefined **)&ilInstASrc0;
     *(int *)(emitter + 0x2c) = bufferCount + 9;
     tokenWritePtr = (undefined4 *)(bufferCount * 4 + *bufferDataPtr);
     *tokenWritePtr = entryHeader;
-    tokenWritePtr[1] = uStack_54;
-    tokenWritePtr[2] = uStack_50;
+    tokenWritePtr[1] = ilInstADst;
+    tokenWritePtr[2] = ilInstADstMask;
     do {
       tokenWritePtr[3] = *recordPtr2;
       recordWordNext2 = recordPtr2 + 3;
@@ -3532,13 +3533,13 @@ LAB_00043320:
     bufferCount = *(int *)(emitter + 0x24);
   }
 LAB_00043510:
-  uStack_54 = CONCAT22(4,sVar10 + 2);
-  uStack_4c = (undefined *)CONCAT22(4,sVar10 + 1);
-  uStack_50 = 0x55;
+  ilInstADst = CONCAT22(4,sVar10 + 2);
+  ilInstASrc0 = (undefined *)CONCAT22(4,sVar10 + 1);
+  ilInstADstMask = 0x55;
   entryHeader = CONCAT22((*(unsigned short *)((unsigned char *)&(entryHeader) + 0)),0x5a);
   apuStack_40[0] = ((unsigned char *)0x00003210);
-  uStack_54 = uStack_54 | 0x400000;
-  uStack_4c = (undefined *)((uint)uStack_4c | 0x400000);
+  ilInstADst = ilInstADst | 0x400000;
+  ilInstASrc0 = (undefined *)((uint)ilInstASrc0 | 0x400000);
   if (bufferCount == 0) {
     bufferDataPtr = (int *)(emitter + 0x28);
     bufferCount = *(int *)(emitter + 0x2c);
@@ -3574,26 +3575,26 @@ LAB_00043510:
     *(int *)(emitter + 0x2c) = bufferCount + 5;
     tokenWritePtr = (undefined4 *)(bufferCount * 4 + *bufferDataPtr);
     *tokenWritePtr = entryHeader;
-    tokenWritePtr[1] = uStack_54;
-    tokenWritePtr[2] = uStack_50;
-    tokenWritePtr[3] = uStack_4c;
+    tokenWritePtr[1] = ilInstADst;
+    tokenWritePtr[2] = ilInstADstMask;
+    tokenWritePtr[3] = ilInstASrc0;
     tokenWritePtr[4] = apuStack_40[0];
     sVar10 = (short)*(undefined4 *)(emitter + 0x20);
     bufferCount = *(int *)(emitter + 0x24);
   }
 LAB_00043670:
-  uStack_54 = CONCAT22(4,sVar10 + 2);
-  uStack_44 = CONCAT22(4,sVar10 + 2);
-  uStack_48 = (undefined *)CONCAT22(4,sVar10);
+  ilInstADst = CONCAT22(4,sVar10 + 2);
+  ilInstASrc2 = CONCAT22(4,sVar10 + 2);
+  ilInstASrc1 = (undefined *)CONCAT22(4,sVar10);
   entryHeader = CONCAT22((*(unsigned short *)((unsigned char *)&(entryHeader) + 0)),0x40);
-  uStack_54 = uStack_54 | 0x400000;
-  uStack_50 = 0x55;
+  ilInstADst = ilInstADst | 0x400000;
+  ilInstADstMask = 0x55;
   apuStack_40[1] = ((unsigned char *)0x00003210);
   apuStack_40[2] = ((unsigned char *)0x00003210);
-  uStack_4c = *(undefined **)(instr + 0x14);
+  ilInstASrc0 = *(undefined **)(instr + 0x14);
   apuStack_40[0] = *(undefined **)(instr + 0x20);
-  uStack_44 = uStack_44 | 0x400000;
-  uStack_48 = (undefined *)((uint)uStack_48 | 0x400000);
+  ilInstASrc2 = ilInstASrc2 | 0x400000;
+  ilInstASrc1 = (undefined *)((uint)ilInstASrc1 | 0x400000);
   if (bufferCount == 0) {
     bufferDataPtr = (int *)(emitter + 0x28);
     bufferCount = *(int *)(emitter + 0x2c);
@@ -3626,12 +3627,12 @@ LAB_00043670:
       *(uint *)(emitter + 0x30) = capacity;
       bufferCount = *(int *)(emitter + 0x2c);
     }
-    recordPtr2 = (undefined **)&uStack_4c;
+    recordPtr2 = (undefined **)&ilInstASrc0;
     *(int *)(emitter + 0x2c) = bufferCount + 9;
     tokenWritePtr = (undefined4 *)(bufferCount * 4 + *bufferDataPtr);
     *tokenWritePtr = entryHeader;
-    tokenWritePtr[1] = uStack_54;
-    tokenWritePtr[2] = uStack_50;
+    tokenWritePtr[1] = ilInstADst;
+    tokenWritePtr[2] = ilInstADstMask;
     do {
       tokenWritePtr[3] = *recordPtr2;
       recordWordNext2 = recordPtr2 + 3;
@@ -3643,15 +3644,15 @@ LAB_00043670:
     bufferCount = *(int *)(emitter + 0x24);
   }
 LAB_00043870:
-  uStack_54 = CONCAT22(4,sVar10 + 2);
-  uStack_4c = (undefined *)CONCAT22(4,sVar10 + 2);
+  ilInstADst = CONCAT22(4,sVar10 + 2);
+  ilInstASrc0 = (undefined *)CONCAT22(4,sVar10 + 2);
   entryHeader = CONCAT22((*(unsigned short *)((unsigned char *)&(entryHeader) + 0)),0x49);
   apuStack_40[0] = ((unsigned char *)0x00003210);
-  uStack_50 = 0x55;
-  uStack_54 = uStack_54 | 0x400000;
-  uStack_48 = (undefined *)*(undefined4 *)(instr + 0x10);
+  ilInstADstMask = 0x55;
+  ilInstADst = ilInstADst | 0x400000;
+  ilInstASrc1 = (undefined *)*(undefined4 *)(instr + 0x10);
   apuStack_40[1] = (undefined *)*(undefined4 *)(instr + 0x1c);
-  uStack_4c = (undefined *)((uint)uStack_4c | 0x400000);
+  ilInstASrc0 = (undefined *)((uint)ilInstASrc0 | 0x400000);
   if (bufferCount == 0) {
     bufferDataPtr = (int *)(emitter + 0x28);
     bufferCount = *(int *)(emitter + 0x2c);
@@ -3684,34 +3685,34 @@ LAB_00043870:
       *(uint *)(emitter + 0x30) = capacity;
       bufferCount = *(int *)(emitter + 0x2c);
     }
-    recordPtr = &uStack_4c;
+    recordPtr = &ilInstASrc0;
     *(int *)(emitter + 0x2c) = bufferCount + 7;
     tokenWritePtr = (undefined4 *)(bufferCount * 4 + *bufferDataPtr);
     *tokenWritePtr = entryHeader;
-    tokenWritePtr[1] = uStack_54;
-    tokenWritePtr[2] = uStack_50;
+    tokenWritePtr[1] = ilInstADst;
+    tokenWritePtr[2] = ilInstADstMask;
     do {
       tokenWritePtr[3] = *recordPtr;
       recordWordNext = recordPtr + 3;
       recordPtr = recordPtr + 1;
       tokenWritePtr[4] = *recordWordNext;
       tokenWritePtr = tokenWritePtr + 2;
-    } while (recordPtr != &uStack_44);
+    } while (recordPtr != &ilInstASrc2);
     sVar10 = (short)*(undefined4 *)(emitter + 0x20);
     bufferCount = *(int *)(emitter + 0x24);
   }
 LAB_00043a10:
-  uStack_54 = CONCAT22(4,sVar10 + 2);
-  uStack_44 = CONCAT22(4,sVar10 + 2);
+  ilInstADst = CONCAT22(4,sVar10 + 2);
+  ilInstASrc2 = CONCAT22(4,sVar10 + 2);
   entryHeader = CONCAT22((*(unsigned short *)((unsigned char *)&(entryHeader) + 0)),0x40);
-  uStack_50 = 0x55;
-  uStack_54 = uStack_54 | 0x400000;
+  ilInstADstMask = 0x55;
+  ilInstADst = ilInstADst | 0x400000;
   apuStack_40[2] = (undefined *)0xba98;
-  uStack_4c = *(undefined **)(instr + 0x14);
+  ilInstASrc0 = *(undefined **)(instr + 0x14);
   apuStack_40[0] = *(undefined **)(instr + 0x20);
-  uStack_48 = (undefined *)*(undefined4 *)(instr + 0xc);
+  ilInstASrc1 = (undefined *)*(undefined4 *)(instr + 0xc);
   apuStack_40[1] = (undefined *)*(undefined4 *)(instr + 0x18);
-  uStack_44 = uStack_44 | 0x400000;
+  ilInstASrc2 = ilInstASrc2 | 0x400000;
   if (bufferCount == 0) {
     bufferDataPtr = (int *)(emitter + 0x28);
     bufferCount = *(int *)(emitter + 0x2c);
@@ -3744,12 +3745,12 @@ LAB_00043a10:
       *(uint *)(emitter + 0x30) = capacity;
       bufferCount = *(int *)(emitter + 0x2c);
     }
-    recordPtr2 = (undefined **)&uStack_4c;
+    recordPtr2 = (undefined **)&ilInstASrc0;
     *(int *)(emitter + 0x2c) = bufferCount + 9;
     tokenWritePtr = (undefined4 *)(bufferCount * 4 + *bufferDataPtr);
     *tokenWritePtr = entryHeader;
-    tokenWritePtr[1] = uStack_54;
-    tokenWritePtr[2] = uStack_50;
+    tokenWritePtr[1] = ilInstADst;
+    tokenWritePtr[2] = ilInstADstMask;
     do {
       tokenWritePtr[3] = *recordPtr2;
       recordWordNext2 = recordPtr2 + 3;
@@ -3762,17 +3763,17 @@ LAB_00043a10:
   }
 LAB_00043be0:
   entryHeader = CONCAT22((*(unsigned short *)((unsigned char *)&(entryHeader) + 0)),0xd);
-  uStack_4c = (undefined *)CONCAT22(4,sVar10 + 1);
-  uStack_44 = CONCAT22(4,sVar10 + 2);
+  ilInstASrc0 = (undefined *)CONCAT22(4,sVar10 + 1);
+  ilInstASrc2 = CONCAT22(4,sVar10 + 2);
   entryHeader = entryHeader & 0xc000ffff | 0x50000;
-  uStack_50 = *(uint *)(instr + 8);
-  uStack_54 = *(uint *)(instr + 4);
+  ilInstADstMask = *(uint *)(instr + 8);
+  ilInstADst = *(uint *)(instr + 4);
   apuStack_40[1] = ((unsigned char *)0x00004444);
   apuStack_40[0] = ((unsigned char *)0x00003210);
   apuStack_40[2] = ((unsigned char *)0x00003210);
-  uStack_4c = (undefined *)((uint)uStack_4c | 0x400000);
-  uStack_48 = (undefined *)0x440000;
-  uStack_44 = uStack_44 | 0x400000;
+  ilInstASrc0 = (undefined *)((uint)ilInstASrc0 | 0x400000);
+  ilInstASrc1 = (undefined *)0x440000;
+  ilInstASrc2 = ilInstASrc2 | 0x400000;
   if (bufferCount == 0) {
     bufferDataPtr = (int *)(emitter + 0x28);
     bufferCount = *(int *)(emitter + 0x2c);
@@ -3803,12 +3804,12 @@ LAB_00043be0:
       *(uint *)(emitter + 0x30) = capacity;
       bufferCount = *(int *)(emitter + 0x2c);
     }
-    recordPtr2 = (undefined **)&uStack_4c;
+    recordPtr2 = (undefined **)&ilInstASrc0;
     *(int *)(emitter + 0x2c) = bufferCount + 9;
     tokenWritePtr2 = (uint *)(bufferCount * 4 + *bufferDataPtr);
     *tokenWritePtr2 = entryHeader;
-    tokenWritePtr2[1] = uStack_54;
-    tokenWritePtr2[2] = uStack_50;
+    tokenWritePtr2[1] = ilInstADst;
+    tokenWritePtr2[2] = ilInstADstMask;
     do {
       tokenWritePtr2[3] = (uint)*recordPtr2;
       recordWordNext2 = recordPtr2 + 3;
