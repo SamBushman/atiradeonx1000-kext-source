@@ -965,7 +965,7 @@ PTR_FUN_001e8b08	0x1e8b08	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char 
 PTR_FUN_001e8b0c	0x1e8b0c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b0c asm("PTR_FUN_001e8b0c");	pointer -> ffvpValidateProgram	data.s
 PTR_FUN_001e8b10	0x1e8b10	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b10 asm("PTR_FUN_001e8b10");	pointer -> arbEmitIlSetCompare2	data.s
 PTR_001e8b14	0x1e8b14	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_001e8b14 asm("PTR_001e8b14");	pointer -> _calloc	data.s
-PTR_FUN_001e8b18	0x1e8b18	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b18 asm("PTR_FUN_001e8b18");	pointer -> FUN_000900a0	data.s
+PTR_FUN_001e8b18	0x1e8b18	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b18 asm("PTR_FUN_001e8b18");	pointer -> ffvpComputeOutputMasks	data.s
 PTR_FUN_001e8b1c	0x1e8b1c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b1c asm("PTR_FUN_001e8b1c");	pointer -> arbEmitIlMovMadMov	data.s
 PTR_FUN_001e8b20	0x1e8b20	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b20 asm("PTR_FUN_001e8b20");	pointer -> FUN_00082900	data.s
 PTR_FUN_001e8b24	0x1e8b24	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b24 asm("PTR_FUN_001e8b24");	pointer -> arbEmitRecord2Src_op45	data.s

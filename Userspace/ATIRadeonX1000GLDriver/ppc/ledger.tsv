@@ -807,8 +807,8 @@
 0x8f760	144	arbfpLoadDefaultProgram	part_013	converted
 0x8f7f0	884	FUN_0008f7f0	part_013	converted
 0x8fb70	248	FUN_0008fb70	part_013	converted
-0x8fc70	1028	FUN_0008fc70	part_013	converted
-0x900a0	944	FUN_000900a0	part_013	converted
+0x8fc70	1028	ffvpAssignOutputSlots	part_013	converted
+0x900a0	944	ffvpComputeOutputMasks	part_013	converted
 0x90470	952	gldValidateState	part_013	converted
 0x90840	264	FUN_00090840	part_013	converted
 0x90960	48	FUN_00090960	part_013	converted

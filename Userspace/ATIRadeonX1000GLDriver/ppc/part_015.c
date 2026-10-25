@@ -1602,7 +1602,7 @@ int FUN_000a3be0(glContext, primitiveMode, param_3, param_4, param_5, extraArg5,
   *(undefined4 *)(glContext + 0x1ba8) = *(undefined4 *)(glContext + 0x1ba0);
   if (!bVar1) goto LAB_000a41d0;
   if ((*(uint *)(glContext + 0x44) & 0x100000) == 0) {
-    FUN_000900a0(glContext);
+    ffvpComputeOutputMasks(glContext);
   }
   else {
     FUN_00064720(glContext);
