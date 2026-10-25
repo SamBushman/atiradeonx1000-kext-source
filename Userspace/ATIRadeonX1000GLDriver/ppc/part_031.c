@@ -2346,93 +2346,95 @@ int FUN_0010f38c(param_1, vector)
 }
 
 /* FUN_0010f4d4 @ 0x10f4d4 (560 bytes) */
-int FUN_0010f4d4(param_1)
-  int param_1;
+int FUN_0010f4d4(program)
+  int program;
 {
-  uint uVar1;
-  undefined4 *puVar2;
-  int iVar3;
-  uint *puVar4;
-  undefined4 uVar5;
+  uint *exportList424;
+  uint *exportList420;
+  uint listCount;
+  undefined4 *listSlotRef;
+  int destKindClass;
+  uint *exportList41c;
+  undefined4 exportInst;
   uint loopIndex;
   
-  puVar4 = *(uint **)(param_1 + 0x41c);
-  uVar1 = puVar4[1];
-  if (uVar1 != 0) {
+  exportList41c = *(uint **)(program + 0x41c);
+  listCount = exportList41c[1];
+  if (listCount != 0) {
     loopIndex = 0;
     do {
-      if (loopIndex < *puVar4) {
-        if (uVar1 <= loopIndex) {
-          _memset(uVar1 * 4 + puVar4[2],0,(loopIndex - uVar1) * 4 + 4);
-          puVar4[1] = loopIndex + 1;
+      if (loopIndex < *exportList41c) {
+        if (listCount <= loopIndex) {
+          _memset(listCount * 4 + exportList41c[2],0,(loopIndex - listCount) * 4 + 4);
+          exportList41c[1] = loopIndex + 1;
         }
-        puVar2 = (undefined4 *)(loopIndex * 4 + puVar4[2]);
+        listSlotRef = (undefined4 *)(loopIndex * 4 + exportList41c[2]);
       }
       else {
-        puVar2 = (undefined4 *)Vector__elementRefGrow(puVar4,loopIndex);
+        listSlotRef = (undefined4 *)Vector__elementRefGrow(exportList41c,loopIndex);
       }
-      uVar5 = *(undefined4 *)*puVar2;
-      IRInst__getOperandRecord(uVar5,0);
-      iVar3 = IRInst__operandKindClass(uVar5,0);
-      if (iVar3 != 0) {
+      exportInst = *(undefined4 *)*listSlotRef;
+      IRInst__getOperandRecord(exportInst,0);
+      destKindClass = IRInst__operandKindClass(exportInst,0);
+      if (destKindClass != 0) {
         return 1;
       }
-      puVar4 = *(uint **)(param_1 + 0x41c);
+      exportList41c = *(uint **)(program + 0x41c);
       loopIndex = loopIndex + 1;
-      uVar1 = puVar4[1];
-    } while (loopIndex < uVar1);
+      listCount = exportList41c[1];
+    } while (loopIndex < listCount);
   }
-  puVar4 = *(uint **)(param_1 + 0x420);
-  uVar1 = puVar4[1];
-  if (uVar1 != 0) {
+  exportList420 = *(uint **)(program + 0x420);
+  listCount = exportList420[1];
+  if (listCount != 0) {
     loopIndex = 0;
     do {
-      if (loopIndex < *puVar4) {
-        if (uVar1 <= loopIndex) {
-          _memset(uVar1 * 4 + puVar4[2],0,(loopIndex - uVar1) * 4 + 4);
-          puVar4[1] = loopIndex + 1;
+      if (loopIndex < *exportList420) {
+        if (listCount <= loopIndex) {
+          _memset(listCount * 4 + exportList420[2],0,(loopIndex - listCount) * 4 + 4);
+          exportList420[1] = loopIndex + 1;
         }
-        puVar2 = (undefined4 *)(loopIndex * 4 + puVar4[2]);
+        listSlotRef = (undefined4 *)(loopIndex * 4 + exportList420[2]);
       }
       else {
-        puVar2 = (undefined4 *)Vector__elementRefGrow(puVar4,loopIndex);
+        listSlotRef = (undefined4 *)Vector__elementRefGrow(exportList420,loopIndex);
       }
-      uVar5 = *(undefined4 *)*puVar2;
-      IRInst__getOperandRecord(uVar5,0);
-      iVar3 = IRInst__operandKindClass(uVar5,0);
-      if (iVar3 != 0) {
+      exportInst = *(undefined4 *)*listSlotRef;
+      IRInst__getOperandRecord(exportInst,0);
+      destKindClass = IRInst__operandKindClass(exportInst,0);
+      if (destKindClass != 0) {
         return 1;
       }
-      puVar4 = *(uint **)(param_1 + 0x420);
+      exportList420 = *(uint **)(program + 0x420);
       loopIndex = loopIndex + 1;
-      uVar1 = puVar4[1];
-    } while (loopIndex < uVar1);
+      listCount = exportList420[1];
+    } while (loopIndex < listCount);
   }
-  puVar4 = *(uint **)(param_1 + 0x424);
-  uVar1 = puVar4[1];
-  if (uVar1 != 0) {
+  exportList424 = *(uint **)(program + 0x424);
+  listCount = exportList424[1];
+  if (listCount != 0) {
     loopIndex = 0;
     do {
-      if (loopIndex < *puVar4) {
-        if (uVar1 <= loopIndex) {
-          _memset(uVar1 * 4 + puVar4[2],0,(loopIndex - uVar1) * 4 + 4);
-          puVar4[1] = loopIndex + 1;
+      if (loopIndex < *exportList424) {
+        if (listCount <= loopIndex) {
+          _memset(listCount * 4 + exportList424[2],0,(loopIndex - listCount) * 4 + 4);
+          exportList424[1] = loopIndex + 1;
         }
-        puVar2 = (undefined4 *)(loopIndex * 4 + puVar4[2]);
+        listSlotRef = (undefined4 *)(loopIndex * 4 + exportList424[2]);
       }
       else {
-        puVar2 = (undefined4 *)Vector__elementRefGrow(puVar4,loopIndex);
+        listSlotRef = (undefined4 *)Vector__elementRefGrow(exportList424,loopIndex);
       }
-      uVar5 = *(undefined4 *)*puVar2;
-      IRInst__getOperandRecord(uVar5,0);
-      iVar3 = IRInst__operandKindClass(uVar5,0);
-      if (iVar3 != 0) {
+      exportInst = *(undefined4 *)*listSlotRef;
+      IRInst__getOperandRecord(exportInst,0);
+      destKindClass = IRInst__operandKindClass(exportInst,0);
+      if (destKindClass != 0) {
         return 1;
       }
-      puVar4 = *(uint **)(param_1 + 0x424);
+      exportList424 = *(uint **)(program + 0x424);
       loopIndex = loopIndex + 1;
-      uVar1 = puVar4[1];
-    } while (loopIndex < uVar1);
+      listCount = exportList424[1];
+    } while (loopIndex < listCount);
   }
   return 0;
 }

@@ -1,0 +1,59 @@
+local	IfFooter__ctor_12e56c	param_1	conditionRegister	INFERRED	register number written into the new branch instruction's source operand
+local	IfFooter__ctor_12e56c	param_2	loopBlock	INFERRED	loop block whose body is wrapped in a new if/break structure (word 0x4b is the loop header)
+use	IfFooter__ctor_12e56c	uVar13	swizzleTableWord	INFERRED	word read from the constant table PTR_DAT_001e8b8c	^\s*uVar13\ =\ \*\(undefined4\ \*\)puVar1;$	+1
+use	IfFooter__ctor_12e56c	uVar13	swizzleTableWord	INFERRED	word read from the constant table PTR_DAT_001e8b8c	^\s*\*\(undefined4\ \*\)\(iVar2\ \+\ 0x10\)\ =\ uVar13;$	+1
+use	IfFooter__ctor_12e56c	uVar13	loopExitTarget	INFERRED	first successor of the loop header, reconnected after the new footer	^\s*uVar13\ =\ FUN_000e920c\(iVar7,0\);$	+1
+use	IfFooter__ctor_12e56c	uVar13	loopExitTarget	INFERRED	first successor of the loop header, reconnected after the new footer	^\s*FUN_000e977c\(iVar7,uVar13,puVar8\);$	+1
+use	IfFooter__ctor_12e56c	uVar13	loopExitTarget	INFERRED	first successor of the loop header, reconnected after the new footer	^\s*FUN_000e8e4c\(puVar15,uVar13\);$	+1
+use	IfFooter__ctor_12e56c	iVar2	blockQuery30	INFERRED	block vtable slot 0x30 test (is a loop block)	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*param_2\ \+\ 0x30\)\)\(param_2,param_2,param_3\);$	+2
+use	IfFooter__ctor_12e56c	uVar11	headerWordB8	INFERRED	loop header word 0xb8 copied to the new pre-header block	^\s*uVar11\ =\ \*\(undefined4\ \*\)\(iVar7\ \+\ 0xb8\);$	+1
+use	IfFooter__ctor_12e56c	uVar11	headerWordB8	INFERRED	loop header word 0xb8 copied to the new pre-header block	^\s*puVar3\[0x2f\]\ =\ uVar11;$	+1
+use	IfFooter__ctor_12e56c	uVar11	headerChainBlock	INFERRED	FUN_0012b140 result: chain block of the loop header	^\s*uVar11\ =\ FUN_0012b140\(iVar7\);$	+1
+use	IfFooter__ctor_12e56c	uVar11	headerChainBlock	INFERRED	FUN_0012b140 result: chain block of the loop header	^\s*FUN_000ea6d0\(puVar12,puVar6,uVar11,puVar10,param_3\);$	+1
+use	IfFooter__ctor_12e56c	puVar4	ifFooterAlloc	INFERRED	arena block (0x134 bytes) of the new IfFooter	^\s*puVar4\ =\ \(undefined4\ \*\)FUN_00193e18\(uVar11,0x134\);$	+3
+use	IfFooter__ctor_12e56c	puVar4	ifFooterAlloc	INFERRED	arena block (0x134 bytes) of the new IfFooter	^\s*puVar4\[0x4c\]\ =\ puVar12;$	+1
+use	IfFooter__ctor_12e56c	uVar5	program	INFERRED	compiler->currentProgram	^\s*uVar5\ =\ \*\(undefined4\ \*\)\(param_3\ \+\ COMP_currentProgram\);$	+1
+use	IfFooter__ctor_12e56c	uVar5	program	INFERRED	compiler->currentProgram	^\s*FUN_000ec3ac\(uVar5,iVar7,puVar8\);$	+1
+use	IfFooter__ctor_12e56c	uVar5	program	INFERRED	compiler->currentProgram	^\s*FUN_000ec3ac\(uVar5,puVar8,puVar12\);$	+4
+use	IfFooter__ctor_12e56c	uVar5	program	INFERRED	compiler->currentProgram	^\s*FUN_000ed63c\(uVar5,puVar6\);$	+1
+use	IfFooter__ctor_12e56c	puVar6	branchInst	INFERRED	new branch instruction (opcode 0x8c) in the if header	^\s*puVar6\ =\ puVar3\ \+\ 1;$	+1
+use	IfFooter__ctor_12e56c	puVar6	branchInst	INFERRED	new branch instruction (opcode 0x8c) in the if header	^\s*FUN_0010502c\(puVar6,0x8c,param_3\);$	+1
+use	IfFooter__ctor_12e56c	puVar6	branchInst	INFERRED	new branch instruction (opcode 0x8c) in the if header	^\s*iVar2\ =\ FUN_001054ec\(puVar6,1\);$	+1
+use	IfFooter__ctor_12e56c	puVar6	branchInst	INFERRED	new branch instruction (opcode 0x8c) in the if header	^\s*iVar2\ =\ FUN_001054ec\(puVar6,1\);$@2	+1
+use	IfFooter__ctor_12e56c	puVar6	branchInst	INFERRED	new branch instruction (opcode 0x8c) in the if header	^\s*FUN_000ea6d0\(puVar12,puVar6,uVar11,puVar10,param_3\);$	+1
+use	IfFooter__ctor_12e56c	puVar6	branchInst	INFERRED	new branch instruction (opcode 0x8c) in the if header	^\s*FUN_000ed63c\(uVar5,puVar6\);$	+1
+use	IfFooter__ctor_12e56c	iVar7	loopHeader	INFERRED	loop header block (loop word 0x4b)	^\s*iVar7\ =\ param_2\[0x4b\];$	+1
+use	IfFooter__ctor_12e56c	iVar7	loopHeader	INFERRED	loop header block (loop word 0x4b)	^\s*uVar11\ =\ \*\(undefined4\ \*\)\(iVar7\ \+\ 0xb8\);$	+2
+use	IfFooter__ctor_12e56c	iVar7	loopHeader	INFERRED	loop header block (loop word 0x4b)	^\s*FUN_000ec3ac\(uVar5,iVar7,puVar8\);$	+3
+use	IfFooter__ctor_12e56c	iVar7	loopHeader	INFERRED	loop header block (loop word 0x4b)	^\s*FUN_000ec0c8\(puVar9,iVar7,1,param_3\);$	+1
+use	IfFooter__ctor_12e56c	iVar7	loopHeader	INFERRED	loop header block (loop word 0x4b)	^\s*FUN_000e8e4c\(puVar9,\*\(undefined4\ \*\)\(iVar7\ \+\ 0x154\)\);$	+1
+use	IfFooter__ctor_12e56c	puVar8	preHeaderBlock	INFERRED	new block placed after the loop header	^\s*puVar8\ =\ puVar3\ \+\ 1;$	+1
+use	IfFooter__ctor_12e56c	puVar8	preHeaderBlock	INFERRED	new block placed after the loop header	^\s*FUN_000ea020\(puVar8,param_3\);$	+1
+use	IfFooter__ctor_12e56c	puVar8	preHeaderBlock	INFERRED	new block placed after the loop header	^\s*FUN_000ec3ac\(uVar5,iVar7,puVar8\);$	+2
+use	IfFooter__ctor_12e56c	puVar8	preHeaderBlock	INFERRED	new block placed after the loop header	^\s*FUN_000ec3ac\(uVar5,puVar8,puVar12\);$	+1
+use	IfFooter__ctor_12e56c	puVar8	preHeaderBlock	INFERRED	new block placed after the loop header	^\s*FUN_000e8e4c\(puVar8,puVar12\);$	+1
+use	IfFooter__ctor_12e56c	puVar9	breakBlock	INFERRED	new BreakBlock	^\s*puVar9\ =\ puVar3\ \+\ 1;$	+1
+use	IfFooter__ctor_12e56c	puVar9	breakBlock	INFERRED	new BreakBlock	^\s*FUN_000ec0c8\(puVar9,iVar7,1,param_3\);$	+1
+use	IfFooter__ctor_12e56c	puVar9	breakBlock	INFERRED	new BreakBlock	^\s*puVar3\[0x4f\]\ =\ puVar9;$	+1
+use	IfFooter__ctor_12e56c	puVar9	breakBlock	INFERRED	new BreakBlock	^\s*FUN_000ec3ac\(uVar5,puVar10,puVar9\);$	+2
+use	IfFooter__ctor_12e56c	puVar9	breakBlock	INFERRED	new BreakBlock	^\s*FUN_000e8e4c\(puVar12,puVar9\);$	+1
+use	IfFooter__ctor_12e56c	puVar9	breakBlock	INFERRED	new BreakBlock	^\s*FUN_000e8e4c\(puVar9,\*\(undefined4\ \*\)\(iVar7\ \+\ 0x154\)\);$	+1
+use	IfFooter__ctor_12e56c	puVar10	thenBlock	INFERRED	new then-arm block	^\s*puVar10\ =\ puVar3\ \+\ 1;$	+1
+use	IfFooter__ctor_12e56c	puVar10	thenBlock	INFERRED	new then-arm block	^\s*FUN_000ea020\(puVar10,param_3\);$	+1
+use	IfFooter__ctor_12e56c	puVar10	thenBlock	INFERRED	new then-arm block	^\s*FUN_000ea6d0\(puVar12,puVar6,uVar11,puVar10,param_3\);$	+1
+use	IfFooter__ctor_12e56c	puVar10	thenBlock	INFERRED	new then-arm block	^\s*puVar3\[0x4e\]\ =\ puVar10;$	+1
+use	IfFooter__ctor_12e56c	puVar10	thenBlock	INFERRED	new then-arm block	^\s*FUN_000ec3ac\(uVar5,puVar12,puVar10\);$	+2
+use	IfFooter__ctor_12e56c	puVar10	thenBlock	INFERRED	new then-arm block	^\s*FUN_000e8e4c\(puVar12,puVar10\);$	+1
+use	IfFooter__ctor_12e56c	puVar10	thenBlock	INFERRED	new then-arm block	^\s*FUN_000e8e4c\(puVar10,puVar15\);$	+1
+use	IfFooter__ctor_12e56c	puVar12	ifHeader	INFERRED	new IfHeader	^\s*puVar12\ =\ puVar3\ \+\ 1;$	+1
+use	IfFooter__ctor_12e56c	puVar12	ifHeader	INFERRED	new IfHeader	^\s*FUN_000ea6d0\(puVar12,puVar6,uVar11,puVar10,param_3\);$	+1
+use	IfFooter__ctor_12e56c	puVar12	ifHeader	INFERRED	new IfHeader	^\s*puVar4\[0x4c\]\ =\ puVar12;$	+1
+use	IfFooter__ctor_12e56c	puVar12	ifHeader	INFERRED	new IfHeader	^\s*FUN_000ec3ac\(uVar5,puVar8,puVar12\);$	+2
+use	IfFooter__ctor_12e56c	puVar12	ifHeader	INFERRED	new IfHeader	^\s*FUN_000e8e4c\(puVar8,puVar12\);$	+3
+use	IfFooter__ctor_12e56c	puVar15	ifFooter	INFERRED	new IfFooter (allocation + 1)	^\s*puVar15\ =\ puVar4\ \+\ 1;$	+1
+use	IfFooter__ctor_12e56c	puVar15	ifFooter	INFERRED	new IfFooter (allocation + 1)	^\s*FUN_000ea148\(puVar15,param_3\);$	+1
+use	IfFooter__ctor_12e56c	puVar15	ifFooter	INFERRED	new IfFooter (allocation + 1)	^\s*\*puVar15\ =\ PTR_DAT_001e9130\ \+\ 8;$	+1
+use	IfFooter__ctor_12e56c	puVar15	ifFooter	INFERRED	new IfFooter (allocation + 1)	^\s*puVar3\[0x50\]\ =\ puVar15;$	+1
+use	IfFooter__ctor_12e56c	puVar15	ifFooter	INFERRED	new IfFooter (allocation + 1)	^\s*FUN_000ec3ac\(uVar5,puVar9,puVar15\);$	+1
+use	IfFooter__ctor_12e56c	puVar15	ifFooter	INFERRED	new IfFooter (allocation + 1)	^\s*FUN_000e8e4c\(puVar10,puVar15\);$	+1
+use	IfFooter__ctor_12e56c	puVar15	ifFooter	INFERRED	new IfFooter (allocation + 1)	^\s*FUN_000e8e4c\(puVar15,uVar13\);$	+1
