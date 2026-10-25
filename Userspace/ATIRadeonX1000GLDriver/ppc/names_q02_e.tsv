@@ -1,0 +1,19 @@
+local	fragmentInstructionToIL	uVar7	opcodeInfoWord0	INFERRED	word 0 of the 16-byte opcode info entry (DAT_001dac34 + opcode*0x10); (word >> 1) & 0xffff is stored as the low half of the IL opcode token
+use	fragmentInstructionToIL	uVar4	opcodeInfoWord1	INFERRED	word 1 of the opcode info entry (DAT_001dac38 + opcode*0x10); >> 0x13 becomes the high half of the IL opcode token	^\s*uVar4\ =\ \*\(uint\ \*\)\(\&DAT_001dac38\ \+\ iVar8\);$	+1
+use	fragmentInstructionToIL	uVar4	opcodeInfoWord1	INFERRED	word 1 of the opcode info entry (DAT_001dac38 + opcode*0x10); >> 0x13 becomes the high half of the IL opcode token	^\s*\*local_f0\ =\ \(uVar4\ >>\ 0x13\)\ <<\ 0x10\ \|\ uVar7\ >>\ 1\ \&\ 0xffff;$	+1
+local	fragmentInstructionToIL	local_f0	reservedTokens	INFERRED	out pointer filled by fpilReserveTokens: the freshly reserved IL token words that the case then fills in
+local	fragmentInstructionToIL	local_108	dstToken	INFERRED	first output of fpilTranslateDestination in the generic path (destination register token)
+local	fragmentInstructionToIL	local_104	dstMask	INFERRED	second output of fpilTranslateDestination in the generic path (destination mask token)
+local	fragmentInstructionToIL	local_100	srcToken	INFERRED	first output of fpilTranslateSource/fpilTranslateSourceWithSwizzle in the generic path (source register token)
+local	fragmentInstructionToIL	local_fc	srcSwizzle	INFERRED	second output of fpilTranslateSource in the generic path (source swizzle/modifier word)
+local	fragmentInstructionToIL	local_f8	dstToken2	INFERRED	first output of fpilTranslateDestination in the opcode 0x40 path
+local	fragmentInstructionToIL	local_f4	dstMask2	INFERRED	second output of fpilTranslateDestination in the opcode 0x40 path (ORed with 0x100 and cleared again around the emitted tokens)
+local	fragmentInstructionToIL	local_88	src1RegSpan	INFERRED	(src1 operand >> 0xc & 3) + 1: number of consecutive registers the second source covers
+local	fragmentInstructionToIL	local_84	src0RegSpan	INFERRED	(src0 operand >> 0xc & 3) + 1: number of consecutive registers the first source covers
+local	fragmentInstructionToIL	local_80	dstRegSpan	INFERRED	(instruction word 1 >> 0x1a & 3) + 1: number of consecutive destination registers written
+local	fragmentInstructionToIL	local_7c	src1Advances	INFERRED	bit 0xe of the second source operand (only with translator flag 0x20000000): the source register index steps per repeated emission
+local	fragmentInstructionToIL	local_78	src0Advances	INFERRED	bit 0xe of the first source operand: the source register index steps per repeated emission
+local	fragmentInstructionToIL	local_74	instHeader	INFERRED	pointer to the current instruction's header record (opcode in bits 0x12..0x19, repeat count in word 1)
+local	fragmentInstructionToIL	puVar26	src0Operand	INFERRED	instruction record + 0x10: first source operand record
+local	fragmentInstructionToIL	local_68	savedDstToken	INFERRED	copy of the destination register token taken before the temporary register is substituted (opcode 0x22)
+local	fragmentInstructionToIL	local_64	savedDstMask	INFERRED	copy of the destination mask token taken before the temporary register is substituted (opcode 0x22)

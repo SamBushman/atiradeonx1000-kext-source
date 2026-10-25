@@ -363,12 +363,12 @@
 0x3e600	atifsReplayColorAlphaOps	1352	yes	
 0x3eb70	atifsReplayProgram	296	yes	
 0x3eca0	fpilEmitAngleConstants	164	yes	
-0x3ed50	FUN_0003ed50	60	yes	
+0x3ed50	fpilClassifyDestination	60	yes	
 0x3ed90	fpilBuildDestinationToken	160	yes	
 0x3ee30	fpilSetComponentSelect	88	yes	
 0x3eea0	fpilEmitScalarConstant	168	yes	
 0x3ef50	fpilReserveTokens	240	no	calls an import (malloc); calls an import (realloc)
-0x3f050	FUN_0003f050	336	yes	
+0x3f050	fpilMapConstantRegister	336	yes	
 0x3f1c0	fpilTranslateSource	700	yes	
 0x3f4e0	fpilTranslateSourceWithSwizzle	232	yes	
 0x3f5d0	freeIfNonNull	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises

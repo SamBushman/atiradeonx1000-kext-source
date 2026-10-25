@@ -362,12 +362,12 @@
 0x3e600	1352	atifsReplayColorAlphaOps	part_006	converted
 0x3eb70	296	atifsReplayProgram	part_006	converted
 0x3eca0	164	fpilEmitAngleConstants	part_006	converted
-0x3ed50	60	FUN_0003ed50	part_006	converted
+0x3ed50	60	fpilClassifyDestination	part_006	converted
 0x3ed90	160	fpilBuildDestinationToken	part_006	converted
 0x3ee30	88	fpilSetComponentSelect	part_006	converted
 0x3eea0	168	fpilEmitScalarConstant	part_006	converted
 0x3ef50	240	fpilReserveTokens	part_006	converted
-0x3f050	336	FUN_0003f050	part_006	converted
+0x3f050	336	fpilMapConstantRegister	part_006	converted
 0x3f1c0	700	fpilTranslateSource	part_006	converted
 0x3f4e0	232	fpilTranslateSourceWithSwizzle	part_006	converted
 0x3f5d0	12	freeIfNonNull	part_006	converted
