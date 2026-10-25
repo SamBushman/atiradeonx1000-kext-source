@@ -129,7 +129,7 @@ LAB_00019f40:
   scalarIn3 = ctx[0x40];
   _io_connect_method_scalarI_structureI(ctx[1],0,&scalarIn0,4,0,0);
   ((int (*)())gld_updateSampleConfig)(ctx);
-  ((int (*)())FUN_00022eb0)(ctx,0);
+  ((int (*)())gld_emitDirtyStatePackets)(ctx,0);
   *(undefined1 *)(ctx + 0xa91) = 1;
   return 0;
 }
@@ -4929,17 +4929,17 @@ int FUN_00020b30(ctx, srcX, srcY, width, height, param_6, param_7, param_8, para
   return;
 }
 
-/* FUN_00021c70 @ 0x21c70 (1540 bytes) */
-int FUN_00021c70(ctx, srcX, srcY, width, height, param_6, param_7, param_8, param_9)
+/* gld_emitCopyBlitPacket @ 0x21c70 (1540 bytes) */
+int gld_emitCopyBlitPacket(ctx, srcX, srcY, width, height, destX, destY, destEndY, sourceClass)
   int ctx;
   undefined4 srcX;
   undefined4 srcY;
   undefined4 width;
   undefined4 height;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
-  undefined4 param_9;
+  undefined4 destX;
+  undefined4 destY;
+  undefined4 destEndY;
+  undefined4 sourceClass;
 {
   uint rb3d_blendcntl;
   uint fg_alpha_func;
@@ -4976,248 +4976,248 @@ int FUN_00021c70(ctx, srcX, srcY, width, height, param_6, param_7, param_8, para
   undefined4 gb_mspos1;
   undefined4 sc_screendoor;
   undefined4 sc_edgerule;
-  undefined *puVar1;
-  uint *puVar2;
+  undefined *colorFormatTable;
+  uint *lastHeader;
   undefined4 uVar3;
-  undefined4 *puVar4;
-  int iVar5;
-  undefined4 a3;
-  undefined4 a4;
-  undefined4 a5;
-  uint uVar6;
-  undefined4 *puVar7;
-  int a0;
+  undefined4 *packetAlloc;
+  int restorePacket;
+  undefined4 widthForward;
+  undefined4 heightForward;
+  undefined4 destXForward;
+  uint lastHeaderWord;
+  undefined4 *packetBody;
+  int commandStream;
   
-  a0 = ctx + 0x240;
+  commandStream = ctx + 0x240;
   *(undefined1 *)(ctx + 0x2a5e) = 1;
   uVar3 = srcY;
-  a3 = width;
-  a4 = height;
-  a5 = param_6;
-  puVar4 = (undefined4 *)
-           (**(code **)(ctx + 0x2998))(a0,0x406,srcY,width,height,param_6,param_7,param_8)
+  widthForward = width;
+  heightForward = height;
+  destXForward = destX;
+  packetAlloc = (undefined4 *)
+           (**(code **)(ctx + 0x2998))(commandStream,0x406,srcY,width,height,destX,destY,destEndY)
   ;
-  *(undefined4 **)(ctx + 0x298c) = puVar4;
-  puVar7 = puVar4;
+  *(undefined4 **)(ctx + 0x298c) = packetAlloc;
+  packetBody = packetAlloc;
   if (*(char *)(ctx + 0x2a42) == '\0') {
-    puVar7 = puVar4 + 2;
-    *puVar4 = 0x5c8;
-    puVar4[1] = 0x10000000;
+    packetBody = packetAlloc + 2;
+    *packetAlloc = 0x5c8;
+    packetAlloc[1] = 0x10000000;
     *(undefined1 *)(ctx + 0x2a42) = 1;
   }
-  puVar2 = *(uint **)(ctx + 0x1d8);
-  uVar6 = *puVar2;
-  *puVar2 = (int)puVar7 - (int)puVar2 >> 2 | uVar6;
-  *(undefined4 **)(ctx + 0x1d8) = puVar7;
-  puVar7[2] = param_9;
-  puVar7[1] = 0x404;
-  *puVar7 = 0x2d000000;
-  puVar7[3] = srcX;
-  puVar7[4] = srcY;
-  puVar7[5] = width;
-  puVar7[6] = height;
-  puVar7[7] = param_6;
-  puVar7[8] = param_7;
-  *(undefined4 **)(ctx + 0x298c) = puVar7 + 0x404;
-  (**(code **)(ctx + 0x299c))(a0,puVar7 + 0x404,uVar3,a3,a4,a5,uVar6);
-  iVar5 = (**(code **)(ctx + 0x2998))(a0,0xbf);
-  *(int *)(ctx + 0x298c) = iVar5;
-  puVar2 = *(uint **)(ctx + 0x1d8);
-  *puVar2 = iVar5 - (int)puVar2 >> 2 | *puVar2;
+  lastHeader = *(uint **)(ctx + 0x1d8);
+  lastHeaderWord = *lastHeader;
+  *lastHeader = (int)packetBody - (int)lastHeader >> 2 | lastHeaderWord;
+  *(undefined4 **)(ctx + 0x1d8) = packetBody;
+  packetBody[2] = sourceClass;
+  packetBody[1] = 0x404;
+  *packetBody = 0x2d000000;
+  packetBody[3] = srcX;
+  packetBody[4] = srcY;
+  packetBody[5] = width;
+  packetBody[6] = height;
+  packetBody[7] = destX;
+  packetBody[8] = destY;
+  *(undefined4 **)(ctx + 0x298c) = packetBody + 0x404;
+  (**(code **)(ctx + 0x299c))(commandStream,packetBody + 0x404,uVar3,widthForward,heightForward,destXForward,lastHeaderWord);
+  restorePacket = (**(code **)(ctx + 0x2998))(commandStream,0xbf);
+  *(int *)(ctx + 0x298c) = restorePacket;
+  lastHeader = *(uint **)(ctx + 0x1d8);
+  *lastHeader = restorePacket - (int)lastHeader >> 2 | *lastHeader;
   *(undefined4 *)(ctx + 0x1d8) = *(undefined4 *)(ctx + 0x298c);
-  puVar7 = *(undefined4 **)(ctx + 0x298c);
-  *puVar7 = 0x33000000;
-  puVar7[1] = 0;
-  *(undefined4 **)(ctx + 0x298c) = puVar7 + 2;
-  puVar7[2] = ((unsigned char *)0x00001393U);
-  puVar7[3] = 10;
-  puVar7[4] = ((unsigned char *)0x000013c6U);
-  puVar7[5] = 3;
-  puVar7[6] = 0x5c8;
-  puVar7[7] = 0x20000;
-  puVar7[8] = ((unsigned char *)0x000010eaU);
+  packetBody = *(undefined4 **)(ctx + 0x298c);
+  *packetBody = 0x33000000;
+  packetBody[1] = 0;
+  *(undefined4 **)(ctx + 0x298c) = packetBody + 2;
+  packetBody[2] = ((unsigned char *)0x00001393U);
+  packetBody[3] = 10;
+  packetBody[4] = ((unsigned char *)0x000013c6U);
+  packetBody[5] = 3;
+  packetBody[6] = 0x5c8;
+  packetBody[7] = 0x20000;
+  packetBody[8] = ((unsigned char *)0x000010eaU);
   sc_edgerule = *(undefined4 *)(ctx + 0x1cfc);
-  puVar7[10] = ((unsigned char *)0x000010faU);
-  puVar7[9] = sc_edgerule;
+  packetBody[10] = ((unsigned char *)0x000010faU);
+  packetBody[9] = sc_edgerule;
   sc_screendoor = *(undefined4 *)(ctx + 0x1da0);
-  puVar7[0xc] = 0xc0001000;
-  puVar7[0xe] = 0x11004;
-  puVar7[0xb] = sc_screendoor;
-  puVar7[0xf] = *(undefined4 *)(ctx + 0x1ca8);
+  packetBody[0xc] = 0xc0001000;
+  packetBody[0xe] = 0x11004;
+  packetBody[0xb] = sc_screendoor;
+  packetBody[0xf] = *(undefined4 *)(ctx + 0x1ca8);
   gb_mspos1 = *(undefined4 *)(ctx + 0x1cac);
-  puVar7[0x11] = ((unsigned char *)0x00001008U);
-  puVar7[0x10] = gb_mspos1;
+  packetBody[0x11] = ((unsigned char *)0x00001008U);
+  packetBody[0x10] = gb_mspos1;
   gb_aa_config = *(undefined4 *)(ctx + 0x1ca0);
-  puVar7[0x13] = ((unsigned char *)0x000010e9U);
-  puVar7[0x12] = gb_aa_config;
-  puVar7[0x14] = *(undefined4 *)(ctx + 0x1d20);
-  puVar7[0x15] = ((unsigned char *)0x000013c7U);
+  packetBody[0x13] = ((unsigned char *)0x000010e9U);
+  packetBody[0x12] = gb_aa_config;
+  packetBody[0x14] = *(undefined4 *)(ctx + 0x1d20);
+  packetBody[0x15] = ((unsigned char *)0x000013c7U);
   zb_bw_cntl = *(undefined4 *)(ctx + 0x1cf0);
-  puVar7[0x17] = ((unsigned char *)0x000013c1U);
-  puVar7[0x16] = zb_bw_cntl;
+  packetBody[0x17] = ((unsigned char *)0x000013c1U);
+  packetBody[0x16] = zb_bw_cntl;
   zb_zstencilcntl = *(undefined4 *)(ctx + 0x1ce4);
-  puVar7[0x19] = 0x850;
-  puVar7[0x18] = zb_zstencilcntl;
+  packetBody[0x19] = 0x850;
+  packetBody[0x18] = zb_zstencilcntl;
   vap_cntl_status = *(undefined4 *)(ctx + 0x1dc0);
-  puVar7[0x1b] = 0x887;
-  puVar7[0x1a] = vap_cntl_status;
+  packetBody[0x1b] = 0x887;
+  packetBody[0x1a] = vap_cntl_status;
   vap_clip_cntl = *(undefined4 *)(ctx + 0x1db4);
-  puVar7[0xbd] = 0x82c;
-  puVar7[0x1c] = vap_clip_cntl;
+  packetBody[0xbd] = 0x82c;
+  packetBody[0x1c] = vap_clip_cntl;
   vap_vte_cntl = *(undefined4 *)(0x00001dc4 + ctx);
-  puVar7[0x1d] = ((unsigned char *)0x000010aeU);
-  puVar7[0xbe] = vap_vte_cntl;
+  packetBody[0x1d] = ((unsigned char *)0x000010aeU);
+  packetBody[0xbe] = vap_vte_cntl;
   su_cull_mode = *(undefined4 *)(ctx + 0x1d70);
-  puVar7[0x1f] = ((unsigned char *)0x00001394U);
-  puVar7[0x1e] = su_cull_mode;
+  packetBody[0x1f] = ((unsigned char *)0x00001394U);
+  packetBody[0x1e] = su_cull_mode;
   rb3d_dither_ctl = *(undefined4 *)(ctx + 0x1d30);
-  puVar7[0x21] = ((unsigned char *)0x00001380U);
-  puVar7[0x23] = ((unsigned char *)0x00001002U);
-  puVar7[0x22] = 0;
-  puVar7[0x20] = rb3d_dither_ctl;
-  puVar7[0x24] = *(undefined4 *)(ctx + 0x1d90);
+  packetBody[0x21] = ((unsigned char *)0x00001380U);
+  packetBody[0x23] = ((unsigned char *)0x00001002U);
+  packetBody[0x22] = 0;
+  packetBody[0x20] = rb3d_dither_ctl;
+  packetBody[0x24] = *(undefined4 *)(ctx + 0x1d90);
   gb_enable = *(undefined4 *)(ctx + 0x1d90);
-  puVar7[0x25] = 0x824;
-  puVar7[0x24] = gb_enable;
+  packetBody[0x25] = 0x824;
+  packetBody[0x24] = gb_enable;
   vap_out_vtx_fmt_0 = *(undefined4 *)(ctx + 0x1ddc);
-  puVar7[0x27] = 0x825;
-  puVar7[0x26] = vap_out_vtx_fmt_0;
-  puVar7[0x28] = *(undefined4 *)(ctx + 0x1de0);
-  puVar7[0x29] = 0x82d;
-  puVar1 = PTR_DAT_001e88c8;
+  packetBody[0x27] = 0x825;
+  packetBody[0x26] = vap_out_vtx_fmt_0;
+  packetBody[0x28] = *(undefined4 *)(ctx + 0x1de0);
+  packetBody[0x29] = 0x82d;
+  colorFormatTable = PTR_DAT_001e88c8;
   uVar3 = *(undefined4 *)(0x000026c8 + ctx + 4);
-  puVar7[0x2b] = 0x854;
-  puVar7[0x2a] = uVar3;
+  packetBody[0x2b] = 0x854;
+  packetBody[0x2a] = uVar3;
   uVar3 = **(undefined4 **)(ctx + 0x2680);
-  puVar7[0x2d] = 0x878;
-  puVar7[0x2c] = uVar3;
+  packetBody[0x2d] = 0x878;
+  packetBody[0x2c] = uVar3;
   uVar3 = **(undefined4 **)(ctx + 0x2684);
-  puVar7[0x2f] = ((unsigned char *)0x000013c0U);
-  puVar7[0x2e] = uVar3;
+  packetBody[0x2f] = ((unsigned char *)0x000013c0U);
+  packetBody[0x2e] = uVar3;
   zb_cntl = *(undefined4 *)(ctx + 0x1ce0);
-  puVar7[0x31] = ((unsigned char *)0x000012f0U);
-  puVar7[0x30] = zb_cntl;
+  packetBody[0x31] = ((unsigned char *)0x000012f0U);
+  packetBody[0x30] = zb_cntl;
   fg_fog_blend = *(uint *)(ctx + 0x1d2c);
-  puVar7[0x32] = fg_fog_blend;
-  if ((*(uint *)(puVar1 + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24 + 0x18) & 0x8000) == 0) {
-    puVar7[0x32] = fg_fog_blend & 0xfffffffe;
+  packetBody[0x32] = fg_fog_blend;
+  if ((*(uint *)(colorFormatTable + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24 + 0x18) & 0x8000) == 0) {
+    packetBody[0x32] = fg_fog_blend & 0xfffffffe;
   }
-  puVar7[0x33] = ((unsigned char *)0x000012f5U);
+  packetBody[0x33] = ((unsigned char *)0x000012f5U);
   fg_alpha_func = *(uint *)(ctx + 0x1c8c);
-  puVar7[0x34] = fg_alpha_func;
-  if ((*(uint *)(puVar1 + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24 + 0x18) & 0x8000) == 0) {
-    puVar7[0x34] = fg_alpha_func & 0xfffff7ff;
+  packetBody[0x34] = fg_alpha_func;
+  if ((*(uint *)(colorFormatTable + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24 + 0x18) & 0x8000) == 0) {
+    packetBody[0x34] = fg_alpha_func & 0xfffff7ff;
   }
-  puVar7[0x35] = ((unsigned char *)0x000010a2U);
+  packetBody[0x35] = ((unsigned char *)0x000010a2U);
   ga_poly_mode = *(undefined4 *)(ctx + 0x1d7c);
-  puVar7[0x37] = ((unsigned char *)0x00001381U);
-  puVar7[0x36] = ga_poly_mode;
+  packetBody[0x37] = ((unsigned char *)0x00001381U);
+  packetBody[0x36] = ga_poly_mode;
   rb3d_blendcntl = *(uint *)(ctx + 0x1cc0);
-  puVar7[0x38] = rb3d_blendcntl;
-  if ((*(uint *)(puVar1 + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24 + 0x18) & 0x4000) == 0) {
-    puVar7[0x38] = rb3d_blendcntl & 0xfffffffc;
+  packetBody[0x38] = rb3d_blendcntl;
+  if ((*(uint *)(colorFormatTable + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24 + 0x18) & 0x4000) == 0) {
+    packetBody[0x38] = rb3d_blendcntl & 0xfffffffc;
   }
-  puVar7[0x39] = ((unsigned char *)0x0000109eU);
+  packetBody[0x39] = ((unsigned char *)0x0000109eU);
   uVar3 = *(undefined4 *)(ctx + 0x1d6c);
-  puVar7[0x3b] = ((unsigned char *)0x00001096U);
-  puVar7[0x3a] = uVar3;
+  packetBody[0x3b] = ((unsigned char *)0x00001096U);
+  packetBody[0x3a] = uVar3;
   ga_color_control = *(undefined4 *)(ctx + 0x1df8);
-  puVar7[0x3d] = ((unsigned char *)0x00001041U);
-  puVar7[0x3a] = ga_color_control;
+  packetBody[0x3d] = ((unsigned char *)0x00001041U);
+  packetBody[0x3a] = ga_color_control;
   tx_enable = *(undefined4 *)(ctx + 0x29f0);
-  puVar7[0x3f] = ((unsigned char *)0x00001046U);
-  puVar7[0x3e] = tx_enable;
+  packetBody[0x3f] = ((unsigned char *)0x00001046U);
+  packetBody[0x3e] = tx_enable;
   gb_ps3_enable = *(undefined4 *)(ctx + 0x1dfc);
-  puVar7[0x41] = ((unsigned char *)0x00001094U);
-  puVar7[0x59] = ((unsigned char *)0x00001095U);
-  puVar7[0x42] = 0;
-  puVar7[0x7f] = ((unsigned char *)0x00001180U);
-  puVar7[0x43] = ((unsigned char *)0x00001095U);
-  puVar7[0x45] = ((unsigned char *)0x00001095U);
-  puVar7[0x47] = ((unsigned char *)0x00001095U);
-  puVar7[0x40] = gb_ps3_enable;
-  puVar7[0x49] = ((unsigned char *)0x00001095U);
-  puVar7[0x4b] = ((unsigned char *)0x00001095U);
-  puVar7[0x4d] = ((unsigned char *)0x00001095U);
-  puVar7[0x4f] = ((unsigned char *)0x00001095U);
-  puVar7[0x51] = ((unsigned char *)0x00001095U);
-  puVar7[0x53] = ((unsigned char *)0x00001095U);
-  puVar7[0x55] = ((unsigned char *)0x00001095U);
-  puVar7[0x57] = ((unsigned char *)0x00001095U);
-  puVar7[0x5b] = 0xc0221000;
-  puVar7[0x80] = 2;
-  puVar7[0x81] = ((unsigned char *)0x00001189U);
-  puVar7[0x83] = ((unsigned char *)0x00001181U);
-  puVar7[0x85] = ((unsigned char *)0x0000118dU);
-  puVar7[0x87] = ((unsigned char *)0x0000118eU);
-  puVar7[0x89] = ((unsigned char *)0x0000118cU);
-  puVar7[0x8b] = ((unsigned char *)0x000011a9U);
+  packetBody[0x41] = ((unsigned char *)0x00001094U);
+  packetBody[0x59] = ((unsigned char *)0x00001095U);
+  packetBody[0x42] = 0;
+  packetBody[0x7f] = ((unsigned char *)0x00001180U);
+  packetBody[0x43] = ((unsigned char *)0x00001095U);
+  packetBody[0x45] = ((unsigned char *)0x00001095U);
+  packetBody[0x47] = ((unsigned char *)0x00001095U);
+  packetBody[0x40] = gb_ps3_enable;
+  packetBody[0x49] = ((unsigned char *)0x00001095U);
+  packetBody[0x4b] = ((unsigned char *)0x00001095U);
+  packetBody[0x4d] = ((unsigned char *)0x00001095U);
+  packetBody[0x4f] = ((unsigned char *)0x00001095U);
+  packetBody[0x51] = ((unsigned char *)0x00001095U);
+  packetBody[0x53] = ((unsigned char *)0x00001095U);
+  packetBody[0x55] = ((unsigned char *)0x00001095U);
+  packetBody[0x57] = ((unsigned char *)0x00001095U);
+  packetBody[0x5b] = 0xc0221000;
+  packetBody[0x80] = 2;
+  packetBody[0x81] = ((unsigned char *)0x00001189U);
+  packetBody[0x83] = ((unsigned char *)0x00001181U);
+  packetBody[0x85] = ((unsigned char *)0x0000118dU);
+  packetBody[0x87] = ((unsigned char *)0x0000118eU);
+  packetBody[0x89] = ((unsigned char *)0x0000118cU);
+  packetBody[0x8b] = ((unsigned char *)0x000011a9U);
   us_out_fmt_0 = *(undefined4 *)(ctx + 0x257c);
-  puVar7[0x8d] = ((unsigned char *)0x000011aaU);
-  puVar7[0x8c] = us_out_fmt_0;
+  packetBody[0x8d] = ((unsigned char *)0x000011aaU);
+  packetBody[0x8c] = us_out_fmt_0;
   us_out_fmt_1 = *(undefined4 *)(ctx + 0x2580);
-  puVar7[0x8f] = ((unsigned char *)0x000011abU);
-  puVar7[0x8e] = us_out_fmt_1;
+  packetBody[0x8f] = ((unsigned char *)0x000011abU);
+  packetBody[0x8e] = us_out_fmt_1;
   us_out_fmt_2 = *(undefined4 *)(ctx + 0x2584);
-  puVar7[0x91] = ((unsigned char *)0x000011acU);
-  puVar7[0x90] = us_out_fmt_2;
+  packetBody[0x91] = ((unsigned char *)0x000011acU);
+  packetBody[0x90] = us_out_fmt_2;
   us_out_fmt_3 = *(undefined4 *)(ctx + 0x2588);
-  puVar7[0x93] = ((unsigned char *)0x000010c0U);
-  puVar7[0x92] = us_out_fmt_3;
+  packetBody[0x93] = ((unsigned char *)0x000010c0U);
+  packetBody[0x92] = us_out_fmt_3;
   rs_count = *(undefined4 *)(ctx + 0x216c);
-  puVar7[0x95] = ((unsigned char *)0x000010c1U);
-  puVar7[0x97] = ((unsigned char *)0x000010c8U);
-  puVar7[0x99] = ((unsigned char *)0x0000101dU);
-  puVar7[0x94] = rs_count;
+  packetBody[0x95] = ((unsigned char *)0x000010c1U);
+  packetBody[0x97] = ((unsigned char *)0x000010c8U);
+  packetBody[0x99] = ((unsigned char *)0x0000101dU);
+  packetBody[0x94] = rs_count;
   rs_ip_0 = *(undefined4 *)(ctx + 0x2128);
-  puVar7[0x9b] = ((unsigned char *)0x0000138aU);
-  puVar7[0xa2] = 0;
-  puVar7[0x9c] = 0;
-  puVar7[0x9f] = ((unsigned char *)0x00001040U);
-  puVar7[0x9e] = 0;
-  puVar7[0xa0] = 0;
-  puVar7[0x9d] = ((unsigned char *)0x0000138eU);
-  puVar7[0x9a] = rs_ip_0;
-  puVar7[0xa1] = ((unsigned char *)0x00001150U);
-  puVar7[0xa3] = ((unsigned char *)0x00001100U);
+  packetBody[0x9b] = ((unsigned char *)0x0000138aU);
+  packetBody[0xa2] = 0;
+  packetBody[0x9c] = 0;
+  packetBody[0x9f] = ((unsigned char *)0x00001040U);
+  packetBody[0x9e] = 0;
+  packetBody[0xa0] = 0;
+  packetBody[0x9d] = ((unsigned char *)0x0000138eU);
+  packetBody[0x9a] = rs_ip_0;
+  packetBody[0xa1] = ((unsigned char *)0x00001150U);
+  packetBody[0xa3] = ((unsigned char *)0x00001100U);
   tx_filter0 = *(undefined4 *)(ctx + 0x1f1c);
-  puVar7[0xa5] = ((unsigned char *)0x00001110U);
-  puVar7[0xa4] = tx_filter0;
-  puVar7[0xa6] = *(undefined4 *)(ctx + 0x1f5c);
-  puVar7[0xa7] = ((unsigned char *)0x00001120U);
+  packetBody[0xa5] = ((unsigned char *)0x00001110U);
+  packetBody[0xa4] = tx_filter0;
+  packetBody[0xa6] = *(undefined4 *)(ctx + 0x1f5c);
+  packetBody[0xa7] = ((unsigned char *)0x00001120U);
   tx_format0 = *(undefined4 *)(ctx + 0x1f9c);
-  puVar7[0xa9] = ((unsigned char *)0x00001130U);
-  puVar7[0xa8] = tx_format0;
+  packetBody[0xa9] = ((unsigned char *)0x00001130U);
+  packetBody[0xa8] = tx_format0;
   tx_format1 = *(undefined4 *)(ctx + 0x1fdc);
-  puVar7[0xab] = ((unsigned char *)0x00001140U);
-  puVar7[0xaa] = tx_format1;
+  packetBody[0xab] = ((unsigned char *)0x00001140U);
+  packetBody[0xaa] = tx_format1;
   tx_format2 = *(undefined4 *)(ctx + 0x201c);
-  puVar7[0xad] = ((unsigned char *)0x000010f4U);
-  puVar7[0xae] = 0xaaaa;
-  puVar7[0xaf] = ((unsigned char *)0x00001383U);
-  puVar7[0xac] = tx_format2;
+  packetBody[0xad] = ((unsigned char *)0x000010f4U);
+  packetBody[0xae] = 0xaaaa;
+  packetBody[0xaf] = ((unsigned char *)0x00001383U);
+  packetBody[0xac] = tx_format2;
   rb3d_color_channel_mask = *(undefined4 *)(ctx + 0x1d34);
-  puVar7[0xb1] = ((unsigned char *)0x00001386U);
-  puVar7[0xb0] = rb3d_color_channel_mask;
+  packetBody[0xb1] = ((unsigned char *)0x00001386U);
+  packetBody[0xb0] = rb3d_color_channel_mask;
   rb3d_ropcntl = *(undefined4 *)(ctx + 0x1d38);
-  puVar7[0xb3] = 0x110f8;
-  puVar7[0xb2] = rb3d_ropcntl;
-  puVar7[0xb4] = *(undefined4 *)(ctx + 0x1d98);
+  packetBody[0xb3] = 0x110f8;
+  packetBody[0xb2] = rb3d_ropcntl;
+  packetBody[0xb4] = *(undefined4 *)(ctx + 0x1d98);
   sc_scissor1 = *(undefined4 *)(ctx + 0x1d50);
-  puVar7[0xb6] = ((unsigned char *)0x00001087U);
-  puVar7[0xb5] = sc_scissor1;
+  packetBody[0xb6] = ((unsigned char *)0x00001087U);
+  packetBody[0xb5] = sc_scissor1;
   ga_point_size = *(undefined4 *)(ctx + 0x1f0c);
-  puVar7[0xb8] = 0x31080;
-  puVar7[0xb7] = ga_point_size;
-  puVar7[0xb9] = *(undefined4 *)(ctx + 0x1efc);
-  puVar7[0xba] = *(undefined4 *)(ctx + 0x1f04);
-  puVar7[0xbb] = *(undefined4 *)(ctx + 0x1f00);
-  puVar7[0xbc] = *(undefined4 *)(ctx + 0x1f08);
-  FUN_0004c100(puVar7 + 2,a0);
-  *(undefined4 **)(ctx + 0x298c) = puVar7 + 0xbf;
+  packetBody[0xb8] = 0x31080;
+  packetBody[0xb7] = ga_point_size;
+  packetBody[0xb9] = *(undefined4 *)(ctx + 0x1efc);
+  packetBody[0xba] = *(undefined4 *)(ctx + 0x1f04);
+  packetBody[0xbb] = *(undefined4 *)(ctx + 0x1f00);
+  packetBody[0xbc] = *(undefined4 *)(ctx + 0x1f08);
+  FUN_0004c100(packetBody + 2,commandStream);
+  *(undefined4 **)(ctx + 0x298c) = packetBody + 0xbf;
                     
                     
-  (**(code **)(ctx + 0x299c))(a0,puVar7 + 0xbf);
+  (**(code **)(ctx + 0x299c))(commandStream,packetBody + 0xbf);
   return;
 }
 
@@ -5767,91 +5767,91 @@ int _gldInitDispatch(ctx, dispatch, savedState, updateArg3, updateArg4)
                      staleStackArg_ffffffb0,staleStackArg_ffffffb8);
 }
 
-/* FUN_00022eb0 @ 0x22eb0 (536 bytes) */
-int FUN_00022eb0(param_1, param_2)
-  int param_1;
-  undefined4 *param_2;
+/* gld_emitDirtyStatePackets @ 0x22eb0 (536 bytes) */
+int gld_emitDirtyStatePackets(ctx, packet)
+  int ctx;
+  undefined4 *packet;
 {
-  bool bVar1;
-  uint uVar2;
-  undefined4 uVar3;
-  int iVar4;
+  bool allocatedHere;
+  uint dirtyBits;
+  undefined4 registerValue;
+  int commandStream;
   
-  iVar4 = param_1 + 0x240;
-  FUN_000a5ec0(iVar4);
-  bVar1 = param_2 == (undefined4 *)0x0;
-  if (bVar1) {
-    param_2 = (undefined4 *)(**(code **)(param_1 + 0x2998))(iVar4,0x23);
-    *(undefined4 **)(param_1 + 0x298c) = param_2;
+  commandStream = ctx + 0x240;
+  FUN_000a5ec0(commandStream);
+  allocatedHere = packet == (undefined4 *)0x0;
+  if (allocatedHere) {
+    packet = (undefined4 *)(**(code **)(ctx + 0x2998))(commandStream,0x23);
+    *(undefined4 **)(ctx + 0x298c) = packet;
   }
-  uVar2 = *(uint *)(param_1 + 0x1b70);
-  if ((uVar2 & 0x100) != 0) {
-    *param_2 = ((unsigned char *)0x00001393U);
-    param_2[1] = 10;
-    param_2 = param_2 + 2;
-    uVar2 = *(uint *)(param_1 + 0x1b70);
+  dirtyBits = *(uint *)(ctx + 0x1b70);
+  if ((dirtyBits & 0x100) != 0) {
+    *packet = ((unsigned char *)0x00001393U);
+    packet[1] = 10;
+    packet = packet + 2;
+    dirtyBits = *(uint *)(ctx + 0x1b70);
   }
-  if ((uVar2 & 0x2000000) != 0) {
-    *param_2 = ((unsigned char *)0x000013c6U);
-    param_2[1] = 3;
-    param_2 = param_2 + 2;
-    uVar2 = *(uint *)(param_1 + 0x1b70);
+  if ((dirtyBits & 0x2000000) != 0) {
+    *packet = ((unsigned char *)0x000013c6U);
+    packet[1] = 3;
+    packet = packet + 2;
+    dirtyBits = *(uint *)(ctx + 0x1b70);
   }
-  if ((uVar2 & 0x200) != 0) {
-    *param_2 = ((unsigned char *)0x000012f5U);
-    param_2[1] = *(undefined4 *)(param_1 + 0x1c8c);
-    param_2 = param_2 + 2;
-    uVar2 = *(uint *)(param_1 + 0x1b70);
+  if ((dirtyBits & 0x200) != 0) {
+    *packet = ((unsigned char *)0x000012f5U);
+    packet[1] = *(undefined4 *)(ctx + 0x1c8c);
+    packet = packet + 2;
+    dirtyBits = *(uint *)(ctx + 0x1b70);
   }
-  if ((uVar2 & 0x80000) != 0) {
-    *param_2 = ((unsigned char *)0x00001008U);
-    uVar3 = *(undefined4 *)(param_1 + 0x1ca0);
-    param_2[2] = ((unsigned char *)0x00001004U);
-    param_2[1] = uVar3;
-    uVar3 = *(undefined4 *)(param_1 + 0x1ca8);
-    param_2[4] = ((unsigned char *)0x00001005U);
-    param_2[3] = uVar3;
-    uVar3 = *(undefined4 *)(param_1 + 0x1cac);
-    param_2[6] = ((unsigned char *)0x000010faU);
-    param_2[5] = uVar3;
-    param_2[7] = *(undefined4 *)(param_1 + 0x1da0);
-    param_2 = param_2 + 8;
-    uVar2 = *(uint *)(param_1 + 0x1b70);
+  if ((dirtyBits & 0x80000) != 0) {
+    *packet = ((unsigned char *)0x00001008U);
+    registerValue = *(undefined4 *)(ctx + 0x1ca0);
+    packet[2] = ((unsigned char *)0x00001004U);
+    packet[1] = registerValue;
+    registerValue = *(undefined4 *)(ctx + 0x1ca8);
+    packet[4] = ((unsigned char *)0x00001005U);
+    packet[3] = registerValue;
+    registerValue = *(undefined4 *)(ctx + 0x1cac);
+    packet[6] = ((unsigned char *)0x000010faU);
+    packet[5] = registerValue;
+    packet[7] = *(undefined4 *)(ctx + 0x1da0);
+    packet = packet + 8;
+    dirtyBits = *(uint *)(ctx + 0x1b70);
   }
-  if ((uVar2 & 0x10000000) != 0) {
-    *param_2 = 0x413de;
-    param_2[1] = *(undefined4 *)(param_1 + 0x25a0);
-    param_2[2] = *(undefined4 *)(param_1 + 0x25a4);
-    param_2[3] = *(undefined4 *)(param_1 + 0x25a8);
-    param_2[4] = *(undefined4 *)(param_1 + 0x25ac);
-    uVar3 = *(undefined4 *)(param_1 + 0x25b0);
-    param_2[6] = 0x313e9;
-    param_2[5] = uVar3;
-    param_2[7] = *(undefined4 *)(param_1 + 0x25b4);
-    param_2[8] = *(undefined4 *)(param_1 + 0x25b8);
-    param_2[9] = *(undefined4 *)(param_1 + 0x25bc);
-    param_2[10] = *(undefined4 *)(param_1 + 0x25c0);
-    param_2 = param_2 + 0xb;
-    uVar2 = *(uint *)(param_1 + 0x1b70);
+  if ((dirtyBits & 0x10000000) != 0) {
+    *packet = 0x413de;
+    packet[1] = *(undefined4 *)(ctx + 0x25a0);
+    packet[2] = *(undefined4 *)(ctx + 0x25a4);
+    packet[3] = *(undefined4 *)(ctx + 0x25a8);
+    packet[4] = *(undefined4 *)(ctx + 0x25ac);
+    registerValue = *(undefined4 *)(ctx + 0x25b0);
+    packet[6] = 0x313e9;
+    packet[5] = registerValue;
+    packet[7] = *(undefined4 *)(ctx + 0x25b4);
+    packet[8] = *(undefined4 *)(ctx + 0x25b8);
+    packet[9] = *(undefined4 *)(ctx + 0x25bc);
+    packet[10] = *(undefined4 *)(ctx + 0x25c0);
+    packet = packet + 0xb;
+    dirtyBits = *(uint *)(ctx + 0x1b70);
   }
-  if ((uVar2 & 0x20000000) != 0) {
-    *param_2 = ((unsigned char *)0x000813adU);
-    param_2[1] = *(undefined4 *)(param_1 + 0x25c4);
-    param_2[2] = *(undefined4 *)(param_1 + 0x25c8);
-    param_2[3] = *(undefined4 *)(param_1 + 0x25cc);
-    param_2[4] = *(undefined4 *)(param_1 + 0x25d0);
-    param_2[5] = *(undefined4 *)(param_1 + 0x25d4);
-    param_2[6] = *(undefined4 *)(param_1 + 0x25d8);
-    param_2[7] = *(undefined4 *)(param_1 + 0x25dc);
-    param_2[8] = *(undefined4 *)(param_1 + 0x25e0);
-    param_2[9] = *(undefined4 *)(param_1 + 0x25e4);
-    param_2 = param_2 + 10;
+  if ((dirtyBits & 0x20000000) != 0) {
+    *packet = ((unsigned char *)0x000813adU);
+    packet[1] = *(undefined4 *)(ctx + 0x25c4);
+    packet[2] = *(undefined4 *)(ctx + 0x25c8);
+    packet[3] = *(undefined4 *)(ctx + 0x25cc);
+    packet[4] = *(undefined4 *)(ctx + 0x25d0);
+    packet[5] = *(undefined4 *)(ctx + 0x25d4);
+    packet[6] = *(undefined4 *)(ctx + 0x25d8);
+    packet[7] = *(undefined4 *)(ctx + 0x25dc);
+    packet[8] = *(undefined4 *)(ctx + 0x25e0);
+    packet[9] = *(undefined4 *)(ctx + 0x25e4);
+    packet = packet + 10;
   }
-  if (bVar1) {
-    *(undefined4 **)(param_1 + 0x298c) = param_2;
-    (**(code **)(param_1 + 0x299c))(iVar4,param_2);
+  if (allocatedHere) {
+    *(undefined4 **)(ctx + 0x298c) = packet;
+    (**(code **)(ctx + 0x299c))(commandStream,packet);
   }
-  return param_2;
+  return packet;
 }
 
 /* gld_emitSurfaceCopyPacket @ 0x230d0 (1544 bytes) */

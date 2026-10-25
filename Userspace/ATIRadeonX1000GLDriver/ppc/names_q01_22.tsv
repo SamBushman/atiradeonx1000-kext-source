@@ -1,0 +1,22 @@
+func	FUN_00021c70	gld_emitCopyBlitPacket	INFERRED	emits the 0x2d000000 copy packet for a rectangle (source and destination coordinates, source class) followed by the 0x33000000 packet that restores the shadowed 3D state; used by glCopyPixels for the texture-copy path
+func	FUN_00022eb0	gld_emitDirtyStatePackets	INFERRED	appends the register runs for the state groups flagged in ctx+0x1b70 (aa config, alpha func, multisample positions, z-buffer, vertex program constants) and clears nothing; commits the packet when it allocated it
+local	FUN_00021c70	param_6	destX	INFERRED	destination x of the copied rectangle (packet word 7)
+local	FUN_00021c70	param_7	destY	INFERRED	destination y of the copied rectangle (packet word 8)
+local	FUN_00021c70	param_8	destEndY	INFERRED	end row of the destination rectangle; forwarded to the stream allocator, unused here
+local	FUN_00021c70	param_9	sourceClass	INFERRED	source class from gld_textureVariantClass (packet word 2)
+local	FUN_00021c70	a0	commandStream	INFERRED	ctx+0x240, the embedded command stream
+local	FUN_00021c70	a3	widthForward	INFERRED	copy of width forwarded as a stale argument of the set-current callback
+local	FUN_00021c70	a4	heightForward	INFERRED	copy of height forwarded as a stale argument of the set-current callback
+local	FUN_00021c70	a5	destXForward	INFERRED	copy of destX forwarded as a stale argument of the set-current callback
+local	FUN_00021c70	puVar4	packetAlloc	INFERRED	command-stream slot returned by the allocate callback (0x406 words)
+local	FUN_00021c70	puVar7	packetBody	INFERRED	copy packet (0x2d000000) followed by the 0x33000000 state-restore packet
+local	FUN_00021c70	puVar2	lastHeader	INFERRED	ctx+0x1d8: header word of the previous packet, patched with the packet length
+local	FUN_00021c70	uVar6	lastHeaderWord	INFERRED	value of the previous packet's header word before it is patched (forwarded as a stale argument)
+local	FUN_00021c70	iVar5	restorePacket	INFERRED	command-stream slot allocated for the state-restore packet (0xbf words)
+local	FUN_00021c70	puVar1	colorFormatTable	INFERRED	PTR_DAT_001e88c8: the 0x24-byte pixel-format table
+local	FUN_00022eb0	param_1	ctx	CONFIRMED	GLDContext
+local	FUN_00022eb0	param_2	packet	INFERRED	command-stream slot to append to; NULL = allocate 0x23 words and commit at the end
+local	FUN_00022eb0	iVar4	commandStream	INFERRED	ctx+0x240, the embedded command stream
+local	FUN_00022eb0	bVar1	allocatedHere	INFERRED	packet was NULL: the packet is allocated here and committed at the end
+local	FUN_00022eb0	uVar2	dirtyBits	INFERRED	ctx+0x1b70: register groups that changed since the last emit (0x100 aa, 0x200 alpha func, 0x80000 mspos, 0x2000000 zb, 0x10000000 / 0x20000000 vertex programs)
+local	FUN_00022eb0	uVar3	registerValue	INFERRED	scratch holding the register value being copied into the packet
