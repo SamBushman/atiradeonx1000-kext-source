@@ -1541,7 +1541,7 @@
 0xf3b68	FUN_000f3b68	88	yes	
 0xf3bc0	FUN_000f3bc0	112	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0xf3c30	IRInst__computeSourceLaneMask	972	no	indirect call (driver context / vtable / callback)
-0xf403c	FUN_000f403c	1404	yes	
+0xf403c	IRInst__computeSourceReadMask	1404	yes	
 0xf45f8	FUN_000f45f8	160	yes	
 0xf4698	IRInst__maskUnusedLanesOfOperand	148	yes	
 0xf472c	FUN_000f472c	124	yes	
@@ -1585,13 +1585,13 @@
 0xf7b10	FUN_000f7b10	228	yes	
 0xf7bf4	FUN_000f7bf4	228	yes	
 0xf7cd8	FUN_000f7cd8	228	yes	
-0xf7dbc	FUN_000f7dbc	352	yes	
+0xf7dbc	DominatorTree__computeDominanceFrontiers	352	yes	
 0xf7f1c	FUN_000f7f1c	296	yes	
 0xf8044	FUN_000f8044	296	yes	
-0xf816c	FUN_000f816c	576	yes	
-0xf83cc	FUN_000f83cc	412	yes	
-0xf8588	lazyEntryGet	72	yes	
-0xf85d0	FUN_000f85d0	740	yes	
+0xf816c	DominatorTree__dfsNumber	576	yes	
+0xf83cc	DominatorTree__compress	412	yes	
+0xf8588	DominatorTree__eval	72	yes	
+0xf85d0	DominatorTree__compute	740	yes	
 0xf88b4	FUN_000f88b4	140	yes	
 0xf8960	FUN_000f8960	16	yes	
 0xf8970	FUN_000f8970	16	yes	

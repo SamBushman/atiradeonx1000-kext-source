@@ -3191,7 +3191,7 @@ LAB_0013dcf0:
                         if (hasSpecialSource == 0) {
                           operandLimit = (**(code **)(*inst + 0x14))(inst);
                           if (operandIndex <= operandLimit) {
-                            FUN_000f403c(&operandReadMaskOutB,inst,operandIndex,inst[3],program);
+                            IRInst__computeSourceReadMask(&operandReadMaskOutB,inst,operandIndex,inst[3],program);
                             operandReadMask = operandReadMaskOutB;
                           }
                           if (sourceInst != (int *)0x0) {
@@ -3655,7 +3655,7 @@ code_r0x0013e0ac:
         vec2Capacity = *(uint *)(globalsBase + 0x25d8);
         operandLimitB = (**(code **)(*workInst + 0x14))(workInst);
         if (operandIndexB <= operandLimitB) {
-          FUN_000f403c(&operandReadMaskOutA,workInst,operandIndexB,workInst[3],program);
+          IRInst__computeSourceReadMask(&operandReadMaskOutA,workInst,operandIndexB,workInst[3],program);
           vec2Capacity = operandReadMaskOutA;
         }
         identitySelectC = DAT_001b0000;

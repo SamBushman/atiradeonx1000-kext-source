@@ -1541,7 +1541,7 @@
 0xf3b68	88	FUN_000f3b68	part_025	converted
 0xf3bc0	112	FUN_000f3bc0	part_025	converted
 0xf3c30	972	IRInst__computeSourceLaneMask	part_025	converted
-0xf403c	1404	FUN_000f403c	part_025	converted
+0xf403c	1404	IRInst__computeSourceReadMask	part_025	converted
 0xf45f8	160	FUN_000f45f8	part_025	converted
 0xf4698	148	IRInst__maskUnusedLanesOfOperand	part_025	converted
 0xf472c	124	FUN_000f472c	part_025	converted
@@ -1585,13 +1585,13 @@
 0xf7b10	228	FUN_000f7b10	part_026	converted
 0xf7bf4	228	FUN_000f7bf4	part_026	converted
 0xf7cd8	228	FUN_000f7cd8	part_026	converted
-0xf7dbc	352	FUN_000f7dbc	part_026	converted
+0xf7dbc	352	DominatorTree__computeDominanceFrontiers	part_026	converted
 0xf7f1c	296	FUN_000f7f1c	part_026	converted
 0xf8044	296	FUN_000f8044	part_026	converted
-0xf816c	236	FUN_000f816c	part_026	converted
-0xf83cc	100	FUN_000f83cc	part_026	converted
-0xf8588	72	lazyEntryGet	part_026	converted
-0xf85d0	740	FUN_000f85d0	part_026	converted
+0xf816c	236	DominatorTree__dfsNumber	part_026	converted
+0xf83cc	100	DominatorTree__compress	part_026	converted
+0xf8588	72	DominatorTree__eval	part_026	converted
+0xf85d0	740	DominatorTree__compute	part_026	converted
 0xf88b4	104	FUN_000f88b4	part_026	converted
 0xf8960	16	FUN_000f8960	part_026	converted
 0xf8970	16	FUN_000f8970	part_026	converted
