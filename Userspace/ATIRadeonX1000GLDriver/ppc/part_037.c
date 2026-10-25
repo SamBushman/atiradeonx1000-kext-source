@@ -3693,33 +3693,33 @@ int ExportSlot__clone(this, param_2, compiler)
   undefined4 arena;
   undefined4 *allocation;
   int callResult;
-  undefined4 *puVar3;
+  undefined4 *valueKey;
   undefined4 uVar4;
-  undefined4 *puVar5;
+  undefined4 *loadInst;
   
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
-  puVar5 = allocation + 1;
+  loadInst = allocation + 1;
   *allocation = arena;
-  IRLoad__ctor_109a80(puVar5,0xfa,compiler);
-  IRInst__setOperandRef(puVar5,0,this);
+  IRLoad__ctor_109a80(loadInst,0xfa,compiler);
+  IRInst__setOperandRef(loadInst,0,this);
   uVar4 = DAT_001afee8;
   allocation[6] = allocation[6] & 0xffff7fff;
   allocation[0x28] = uVar4;
   arena = *(undefined4 *)(compiler + COMP_arenaB);
   allocation = (undefined4 *)Arena__alloc(arena,0x240);
-  puVar3 = allocation + 1;
+  valueKey = allocation + 1;
   *allocation = arena;
-  ValueKey__init(puVar3,puVar5,compiler);
+  ValueKey__init(valueKey,loadInst,compiler);
   callResult = Compiler__isOptionEnabled(compiler,7);
   if (callResult != 0) {
-    FUN_00174e0c(puVar3);
-    ValueKey__propagateLaneValues(puVar3);
+    FUN_00174e0c(valueKey);
+    ValueKey__propagateLaneValues(valueKey);
   }
-  ((int (*)())FUN_0012306c)(this,puVar5);
-  (**(code **)(*param_2 + 0xc))(param_2,puVar5);
-  ((int (*)())FUN_00122f28)(this,puVar5);
-  return puVar3;
+  ((int (*)())FUN_0012306c)(this,loadInst);
+  (**(code **)(*param_2 + 0xc))(param_2,loadInst);
+  ((int (*)())FUN_00122f28)(this,loadInst);
+  return valueKey;
 }
 
 /* Resource__clone @ 0x12434c (152 bytes) */

@@ -865,15 +865,15 @@ int ConstKey__compare3(param_1, param_2)
   int param_1;
   int param_2;
 {
-  uint uVar1;
-  uint uVar2;
+  uint flagsB;
+  uint flagsA;
   
-  uVar2 = (uint)*(char *)(param_1 + 0x15c);
-  uVar1 = (uint)*(char *)(param_2 + 0x15c);
-  if (((((uVar2 & 1) == (uVar1 & 1)) && (*(int *)(param_1 + 0x20) == *(int *)(param_2 + 0x20))) &&
-      ((uVar2 >> 1 & 1) == (uVar1 >> 1 & 1))) &&
+  flagsA = (uint)*(char *)(param_1 + 0x15c);
+  flagsB = (uint)*(char *)(param_2 + 0x15c);
+  if (((((flagsA & 1) == (flagsB & 1)) && (*(int *)(param_1 + 0x20) == *(int *)(param_2 + 0x20))) &&
+      ((flagsA >> 1 & 1) == (flagsB >> 1 & 1))) &&
      (((*(int *)(param_1 + 0x38) == *(int *)(param_2 + 0x38) &&
-       ((uVar2 >> 2 & 1) == (uVar1 >> 2 & 1))) &&
+       ((flagsA >> 2 & 1) == (flagsB >> 2 & 1))) &&
       (*(int *)(param_1 + 0x50) == *(int *)(param_2 + 0x50))))) {
     return 0;
   }

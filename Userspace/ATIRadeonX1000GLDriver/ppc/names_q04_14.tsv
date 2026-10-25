@@ -190,6 +190,9 @@ use	FUN_000a9ac0	iVar5	loopIndex2	INFERRED	only ever set to a start value and st
 use	FUN_000a9ac0	iVar5	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x000014f0\)\ \+\ \(int\)\(param_1\ \+\ iVar5\ \+\ 4\)\)\ =\ fVar4\ \*\ fVar3;$	+5
 use	FUN_000a9ac0	iVar5	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x000014f0\)\ \+\ \(int\)\(param_1\ \+\ iVar5\ \+\ 4\)\)\ =\ 0\.0;$	+3
 use	FUN_000a9ac0	iVar5	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar5\ =\ iVar5\ \+\ 0x6c;$	+1
+use	psnRaAssignDefinition	puVar4	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar4\ =\ puVar10\ \+\ 3;$	+1
+use	psnRaAssignDefinition	puVar4	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*uVar9\ =\ \*puVar4;$	+1
+use	psnRaAssignDefinition	puVar4	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar4\ =\ puVar4\ \+\ 2;$	+1
 use	FUN_000abd10	pfVar4	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*pfVar4\ =\ pfVar10\ \+\ 1;$@3	+1
 use	FUN_000abd10	pfVar4	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*pfVar4\ =\ pfVar10\ \+\ 2;$	+1
 use	FUN_000abd10	pfVar4	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*pfVar4\ =\ pfVar4\ \+\ 1;$	+1
@@ -417,9 +420,6 @@ use	psnDecReplaceSourceAddress	iVar18	loopIndex9	INFERRED	only ever set to a sta
 use	psnDecDestMatchesRegMask	iVar2	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar2\ =\ 0;$	+1
 use	psnDecDestMatchesRegMask	iVar2	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*bVar1\ =\ iVar2\ ==\ 1;$	+1
 use	psnDecDestMatchesRegMask	iVar2	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar2\ =\ iVar2\ \+\ 1;$	+1
-use	psnRaAssignDefinition	puVar4	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar4\ =\ puVar10\ \+\ 3;$	+1
-use	psnRaAssignDefinition	puVar4	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*uVar9\ =\ \*puVar4;$	+1
-use	psnRaAssignDefinition	puVar4	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar4\ =\ puVar4\ \+\ 2;$	+1
 use	FUN_000c5e60	iVar30	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar30\ =\ 0x10;$	+1
 use	FUN_000c5e60	iVar30	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar30\ =\ iVar30\ \+\ \-1;$	+2
 use	FUN_000c5e60	iVar8	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar8\ =\ 0;$	+1

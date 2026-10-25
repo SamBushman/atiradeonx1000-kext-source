@@ -587,11 +587,12 @@ int FUN_0012c2dc(param_1, block)
   int param_1;
   int block;
 {
+  int vtableQueryResult;
   int branchInst;
   int listCount;
   int successor;
-  int iVar1;
-  int iVar2;
+  int successorBlock;
+  int successorInstCount;
   int *successor2;
   undefined4 in_r5;
   undefined4 in_r6;
@@ -605,16 +606,16 @@ int FUN_0012c2dc(param_1, block)
     listCount = DList__count(successor + 0x90);
     if (listCount < 3) {
       successor2 = (int *)Block__getSuccessor(successor,0);
-      iVar2 = (**(code **)(*successor2 + 0x24))(successor2);
-      if (iVar2 != 0) {
+      successorInstCount = (**(code **)(*successor2 + 0x24))(successor2);
+      if (successorInstCount != 0) {
         successor3 = Block__getSuccessor(successor,0);
-        iVar1 = (int)((ulonglong)successor3 >> 0x20);
-        branchInst = Block__getBranchInst(iVar1,(int)successor3,in_r5,in_r6,in_r7,in_r8,in_r9);
+        successorBlock = (int)((ulonglong)successor3 >> 0x20);
+        branchInst = Block__getBranchInst(successorBlock,(int)successor3,in_r5,in_r6,in_r7,in_r8,in_r9);
         if ((((*(uint *)(param_1 + 0x30) & 8) == 0) && (*(int *)(branchInst + 0x84) == 2)) &&
            (*(int *)(branchInst + 0xa4) == *(int *)(branchInst + 0xbc))) {
-          successor2 = (int *)Block__getSuccessor(*(undefined4 *)(iVar1 + 0x134),0);
-          iVar1 = (**(code **)(*successor2 + 0x38))(successor2);
-          if (iVar1 != 0) {
+          successor2 = (int *)Block__getSuccessor(*(undefined4 *)(successorBlock + 0x134),0);
+          vtableQueryResult = (**(code **)(*successor2 + 0x38))(successor2);
+          if (vtableQueryResult != 0) {
             return 1;
           }
         }
@@ -3513,18 +3514,18 @@ int FUN_00130a78(param_1, param_2)
   uint param_1;
   int param_2;
 {
-  uint *puVar1;
-  uint uVar2;
+  uint *nodeFlags;
+  uint continueFlag;
   
-  uVar2 = param_1;
+  continueFlag = param_1;
   while( true ) {
-    if (uVar2 == 0) {
+    if (continueFlag == 0) {
       return 0;
     }
-    puVar1 = (uint *)(param_1 + 0x14);
-    if (((*puVar1 & 1) != 0) && (*(int *)(param_1 + 0x14c) == *(int *)(param_2 + 0x14c))) break;
+    nodeFlags = (uint *)(param_1 + 0x14);
+    if (((*nodeFlags & 1) != 0) && (*(int *)(param_1 + 0x14c) == *(int *)(param_2 + 0x14c))) break;
     param_1 = *(uint *)(param_1 + 8);
-    uVar2 = *puVar1 & 4;
+    continueFlag = *nodeFlags & 4;
     if (param_1 == 0) {
       return 0;
     }
