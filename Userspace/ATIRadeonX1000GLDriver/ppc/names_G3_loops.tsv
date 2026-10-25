@@ -30,7 +30,7 @@ use	FUN_0003e420	iVar4	loopIndex	INFERRED	initialised to a literal, stepped by o
 use	FUN_0003e4d0	iVar6	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#1	+40	all	all
 use	FUN_0003e600	iVar7	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#2	+193	all	all
 use	FUN_0003eb70	uVar5	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#5	+9	all	all
-use	FUN_0003f050	iVar3	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#20	+7	all	all
+use	FUN_0003f050	iVar3	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	^\s*iVar3\ =\ 0;$	+7	all	all
 use	FUN_0004aa90	iVar3	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#1	+8	all	all
 use	FUN_0004ab60	iVar1	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#11	+6	all	all
 use	FUN_0004ac90	uVar10	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#8	+32	all	all

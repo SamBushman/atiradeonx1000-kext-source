@@ -522,68 +522,71 @@ int fpilReserveTokens(translator, nWords, outPtr)
 }
 
 /* FUN_0003f050 @ 0x3f050 (336 bytes) */
-int FUN_0003f050(param_1, param_2, param_3)
-  int *param_1;
-  int param_2;
-  undefined4 *param_3;
+int FUN_0003f050(translator, instIndex, outRegister)
+  int *translator;
+  int instIndex;
+  undefined4 *outRegister;
 {
+  int constEntryOffset;
+  int constEntry;
+  uint cachedPairCount;
   int loopIndex;
-  byte *pbVar1;
-  ushort uVar2;
-  int iVar3;
-  byte *pbVar4;
-  int iVar5;
-  byte *pbVar6;
-  uint uVar7;
-  uint uVar8;
+  byte *nextPairByte;
+  ushort wantedIndex;
+  int instRecord;
+  byte *pairCache;
+  int program;
+  byte *scanPtr;
+  uint entryWord;
+  uint pairsLeft;
   
-  iVar5 = *param_1;
-  iVar3 = iVar5 + *(int *)(iVar5 + 0x54) * 8 + param_2 * 8;
-  if ((*(uint *)(iVar3 + 0x18) & 0x3800000) == 0x1000000) {
-    iVar3 = ((uint)*(ushort *)(iVar3 + 0x1e) + *(int *)(iVar5 + 0x2c)) * 8;
-    uVar7 = *(uint *)(iVar5 + iVar3);
-    iVar5 = iVar5 + iVar3;
-    if (((uVar7 & 0x1f0000) == 0x10000) && ((uVar7 & 0x1c000000) == 0xc000000)) {
-      *param_3 = *(undefined4 *)((uint)*(ushort *)(iVar5 + 2) * 0x10 + param_1[3]);
-      pbVar4 = (byte *)param_1[0xd];
-      uVar7 = *(uint *)(pbVar4 + 0x20) >> 0x1b;
-      if (uVar7 == 0) {
-        uVar2 = *(ushort *)(iVar5 + 2);
+  program = *translator;
+  instRecord = program + *(int *)(program + 0x54) * 8 + instIndex * 8;
+  if ((*(uint *)(instRecord + 0x18) & 0x3800000) == 0x1000000) {
+    constEntryOffset = ((uint)*(ushort *)(instRecord + 0x1e) + *(int *)(program + 0x2c)) * 8;
+    entryWord = *(uint *)(program + constEntryOffset);
+    constEntry = program + constEntryOffset;
+    if (((entryWord & 0x1f0000) == 0x10000) && ((entryWord & 0x1c000000) == 0xc000000)) {
+      *outRegister = *(undefined4 *)((uint)*(ushort *)(constEntry + 2) * 0x10 + translator[3]);
+      pairCache = (byte *)translator[0xd];
+      cachedPairCount = *(uint *)(pairCache + 0x20) >> 0x1b;
+      if (cachedPairCount == 0) {
+        wantedIndex = *(ushort *)(constEntry + 2);
 LAB_0003f164:
-        pbVar4[uVar7 * 2] = (byte)uVar2;
-        *(char *)(uVar7 * 2 + param_1[0xd] + 1) = (char)*param_3;
-        *(int *)(param_1[0xd] + 0x20) = *(int *)(param_1[0xd] + 0x20) + 0x8000000;
+        pairCache[cachedPairCount * 2] = (byte)wantedIndex;
+        *(char *)(cachedPairCount * 2 + translator[0xd] + 1) = (char)*outRegister;
+        *(int *)(translator[0xd] + 0x20) = *(int *)(translator[0xd] + 0x20) + 0x8000000;
         return 0;
       }
-      uVar2 = *(ushort *)(iVar5 + 2);
-      if (*pbVar4 != uVar2) {
+      wantedIndex = *(ushort *)(constEntry + 2);
+      if (*pairCache != wantedIndex) {
         loopIndex = 0;
-        pbVar6 = pbVar4;
-        uVar8 = uVar7;
+        scanPtr = pairCache;
+        pairsLeft = cachedPairCount;
         do {
           loopIndex = loopIndex + 1;
-          uVar8 = uVar8 - 1;
-          if (uVar8 == 0) {
+          pairsLeft = pairsLeft - 1;
+          if (pairsLeft == 0) {
             if (0xf < loopIndex) {
-              if (param_1[9] != 0) {
-                return param_1[9];
+              if (translator[9] != 0) {
+                return translator[9];
               }
-              param_1[9] = 4;
+              translator[9] = 4;
               return 4;
             }
             goto LAB_0003f164;
           }
-          pbVar1 = pbVar6 + 2;
-          pbVar6 = pbVar6 + 2;
-        } while (*pbVar1 != uVar2);
+          nextPairByte = scanPtr + 2;
+          scanPtr = scanPtr + 2;
+        } while (*nextPairByte != wantedIndex);
       }
       return 0;
     }
   }
-  if (param_1[9] != 0) {
-    return param_1[9];
+  if (translator[9] != 0) {
+    return translator[9];
   }
-  param_1[9] = 2;
+  translator[9] = 2;
   return 2;
 }
 
@@ -834,48 +837,49 @@ int fpilTranslateDestination(translator, irDest, outToken, outMask, flag)
 int fpilEmitEmptyProgram(param_1)
   int param_1;
 {
+  int translatorError;
   int allocation;
-  uint uVar1;
-  int iVar2;
+  uint tokenCapacity;
+  int tokenCount;
   dword *pdVar3;
   dword *pdVar4;
   dword *pdVar5;
-  undefined4 *puVar6;
+  undefined4 *tokenWritePtr;
   dword *pdVar7;
-  int *piVar8;
+  int *tokenDataPtrAddr;
   dword *pdVar9;
   dword *pdVar10;
   
-  piVar8 = (int *)(param_1 + 0x28);
+  tokenDataPtrAddr = (int *)(param_1 + 0x28);
   *(undefined4 *)(param_1 + 0x2c) = 0;
   *(undefined4 *)(param_1 + 0x24) = 0;
-  iVar2 = *(int *)(param_1 + 0x2c);
-  uVar1 = *(uint *)(param_1 + 0x30);
-  if (uVar1 < iVar2 + 7U) {
-    if (uVar1 == 0) {
-      uVar1 = 0x10;
+  tokenCount = *(int *)(param_1 + 0x2c);
+  tokenCapacity = *(uint *)(param_1 + 0x30);
+  if (tokenCapacity < tokenCount + 7U) {
+    if (tokenCapacity == 0) {
+      tokenCapacity = 0x10;
     }
     else {
-      uVar1 = uVar1 << 1;
+      tokenCapacity = tokenCapacity << 1;
     }
-    for (; uVar1 < iVar2 + 7U; uVar1 = uVar1 << 1) {
+    for (; tokenCapacity < tokenCount + 7U; tokenCapacity = tokenCapacity << 1) {
     }
-    if (*piVar8 == 0) {
-      allocation = _malloc(uVar1 << 2);
+    if (*tokenDataPtrAddr == 0) {
+      allocation = _malloc(tokenCapacity << 2);
     }
     else {
-      allocation = _realloc(*piVar8,uVar1 << 2);
+      allocation = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
     }
     if (allocation == 0) {
-      iVar2 = *(int *)(param_1 + 0x24);
-      if (iVar2 == 0) {
-        iVar2 = 1;
+      translatorError = *(int *)(param_1 + 0x24);
+      if (translatorError == 0) {
+        translatorError = 1;
         *(undefined4 *)(param_1 + 0x24) = 1;
       }
-      if (iVar2 != 0) {
-        return iVar2;
+      if (translatorError != 0) {
+        return translatorError;
       }
-      puVar6 = (undefined4 *)0x0;
+      tokenWritePtr = (undefined4 *)0x0;
       pdVar7 = ((unsigned char *)0x4);
       pdVar9 = ((unsigned char *)0x8);
       pdVar10 = ((unsigned char *)0xc);
@@ -884,20 +888,20 @@ int fpilEmitEmptyProgram(param_1)
       pdVar5 = ((unsigned char *)0x18);
       goto LAB_0003f918;
     }
-    *piVar8 = allocation;
-    *(uint *)(param_1 + 0x30) = uVar1;
-    iVar2 = *(int *)(param_1 + 0x2c);
+    *tokenDataPtrAddr = allocation;
+    *(uint *)(param_1 + 0x30) = tokenCapacity;
+    tokenCount = *(int *)(param_1 + 0x2c);
   }
-  *(int *)(param_1 + 0x2c) = iVar2 + 7;
-  puVar6 = (undefined4 *)(iVar2 * 4 + *piVar8);
-  pdVar7 = puVar6 + 1;
-  pdVar9 = puVar6 + 2;
-  pdVar10 = puVar6 + 3;
-  pdVar3 = puVar6 + 4;
-  pdVar4 = puVar6 + 5;
-  pdVar5 = puVar6 + 6;
+  *(int *)(param_1 + 0x2c) = tokenCount + 7;
+  tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
+  pdVar7 = tokenWritePtr + 1;
+  pdVar9 = tokenWritePtr + 2;
+  pdVar10 = tokenWritePtr + 3;
+  pdVar3 = tokenWritePtr + 4;
+  pdVar4 = tokenWritePtr + 5;
+  pdVar5 = tokenWritePtr + 6;
 LAB_0003f918:
-  *puVar6 = 1;
+  *tokenWritePtr = 1;
   *pdVar7 = 0x10200;
   *pdVar9 = 0x47;
   *pdVar10 = 0x170000;
@@ -913,10 +917,12 @@ int fpilEmitMoveFromTemp(param_1, param_2, param_3)
   uint *param_2;
   undefined4 param_3;
 {
+  int translatorError;
+  int tokenCount;
   int allocation;
-  undefined4 *puVar1;
+  undefined4 *tokenWritePtr;
   int iVar2;
-  uint uVar3;
+  uint tokenCapacity;
   uint uVar4;
   uint uVar5;
   dword *pdVar6;
@@ -926,7 +932,7 @@ int fpilEmitMoveFromTemp(param_1, param_2, param_3)
   dword *pdVar10;
   uint uVar11;
   dword *pdVar12;
-  int *piVar13;
+  int *tokenDataPtrAddr;
   dword local_38;
   dword local_34 [6];
   
@@ -937,57 +943,57 @@ int fpilEmitMoveFromTemp(param_1, param_2, param_3)
     return param_1[9];
   }
   uVar11 = *param_2;
-  piVar13 = param_1 + 10;
-  iVar2 = param_1[0xb];
-  uVar3 = param_1[0xc];
+  tokenDataPtrAddr = param_1 + 10;
+  tokenCount = param_1[0xb];
+  tokenCapacity = param_1[0xc];
   uVar8 = *(uint *)(&DAT_001dac08 + (uVar11 >> 6 & 0xc));
   uVar5 = *(uint *)(&DAT_001dac08 + (uVar11 >> 4 & 0xc));
   uVar4 = *(uint *)(&DAT_001dac08 + (uVar11 >> 2 & 0xc));
   uVar9 = *(uint *)(&DAT_001dac08 + (uVar11 & 0xc));
   uVar11 = *(uint *)(*param_1 + 0x10);
-  if (uVar3 < iVar2 + 5U) {
-    if (uVar3 == 0) {
-      uVar3 = 0x10;
+  if (tokenCapacity < tokenCount + 5U) {
+    if (tokenCapacity == 0) {
+      tokenCapacity = 0x10;
     }
     else {
-      uVar3 = uVar3 << 1;
+      tokenCapacity = tokenCapacity << 1;
     }
-    for (; uVar3 < iVar2 + 5U; uVar3 = uVar3 << 1) {
+    for (; tokenCapacity < tokenCount + 5U; tokenCapacity = tokenCapacity << 1) {
     }
-    if (*piVar13 == 0) {
-      allocation = _malloc(uVar3 << 2);
+    if (*tokenDataPtrAddr == 0) {
+      allocation = _malloc(tokenCapacity << 2);
     }
     else {
-      allocation = _realloc(*piVar13,uVar3 << 2);
+      allocation = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
     }
     if (allocation == 0) {
-      iVar2 = param_1[9];
-      if (iVar2 == 0) {
-        iVar2 = 1;
+      translatorError = param_1[9];
+      if (translatorError == 0) {
+        translatorError = 1;
         param_1[9] = 1;
       }
-      if (iVar2 != 0) {
-        return iVar2;
+      if (translatorError != 0) {
+        return translatorError;
       }
-      puVar1 = (undefined4 *)0x0;
+      tokenWritePtr = (undefined4 *)0x0;
       pdVar6 = ((unsigned char *)0x4);
       pdVar10 = ((unsigned char *)0x8);
       pdVar12 = ((unsigned char *)0xc);
       pdVar7 = ((unsigned char *)0x10);
       goto LAB_0003fb50;
     }
-    *piVar13 = allocation;
-    param_1[0xc] = uVar3;
-    iVar2 = param_1[0xb];
+    *tokenDataPtrAddr = allocation;
+    param_1[0xc] = tokenCapacity;
+    tokenCount = param_1[0xb];
   }
-  param_1[0xb] = iVar2 + 5;
-  puVar1 = (undefined4 *)(iVar2 * 4 + *piVar13);
-  pdVar6 = puVar1 + 1;
-  pdVar10 = puVar1 + 2;
-  pdVar12 = puVar1 + 3;
-  pdVar7 = puVar1 + 4;
+  param_1[0xb] = tokenCount + 5;
+  tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
+  pdVar6 = tokenWritePtr + 1;
+  pdVar10 = tokenWritePtr + 2;
+  pdVar12 = tokenWritePtr + 3;
+  pdVar7 = tokenWritePtr + 4;
 LAB_0003fb50:
-  *puVar1 = 0x47;
+  *tokenWritePtr = 0x47;
   *pdVar6 = local_38;
   *pdVar10 = local_34[0];
   *pdVar12 = uVar11 & 0xffff | 0x440000;
@@ -1006,77 +1012,79 @@ int fpilEmitInstruction(translator, ilInstr, nDst, nSrc)
   int nDst;
   int nSrc;
 {
+  int headerWords;
+  int errorCode;
   int allocation;
-  undefined4 *puVar1;
-  uint uVar2;
-  uint uVar3;
-  undefined4 *puVar4;
-  undefined4 *puVar5;
-  int iVar6;
-  int iVar7;
-  int *piVar8;
+  undefined4 *srcAuxWordPtr;
+  uint capacityWords;
+  uint requiredWords;
+  undefined4 *recordPtr;
+  undefined4 *sourceOutPtr;
+  int usedWords;
+  int recordWords;
+  int *dataPtrAddr;
   
   if (*(int *)(translator + 0x24) != 0) {
     return *(int *)(translator + 0x24);
   }
-  piVar8 = (int *)(translator + 0x28);
-  iVar6 = *(int *)(translator + 0x2c);
-  uVar2 = *(uint *)(translator + 0x30);
-  iVar7 = (nDst + nSrc) * 2 + 1;
-  uVar3 = iVar7 + iVar6;
-  if (uVar2 < uVar3) {
-    if (uVar2 == 0) {
-      uVar2 = 0x10;
+  dataPtrAddr = (int *)(translator + 0x28);
+  usedWords = *(int *)(translator + 0x2c);
+  capacityWords = *(uint *)(translator + 0x30);
+  recordWords = (nDst + nSrc) * 2 + 1;
+  requiredWords = recordWords + usedWords;
+  if (capacityWords < requiredWords) {
+    if (capacityWords == 0) {
+      capacityWords = 0x10;
     }
     else {
-      uVar2 = uVar2 << 1;
+      capacityWords = capacityWords << 1;
     }
-    for (; uVar2 < uVar3; uVar2 = uVar2 << 1) {
+    for (; capacityWords < requiredWords; capacityWords = capacityWords << 1) {
     }
-    if (*piVar8 == 0) {
-      allocation = _malloc(uVar2 << 2);
+    if (*dataPtrAddr == 0) {
+      allocation = _malloc(capacityWords << 2);
     }
     else {
-      allocation = _realloc(*piVar8,uVar2 << 2);
+      allocation = _realloc(*dataPtrAddr,capacityWords << 2);
     }
     if (allocation == 0) {
-      iVar6 = *(int *)(translator + 0x24);
-      if (iVar6 == 0) {
-        iVar6 = 1;
+      errorCode = *(int *)(translator + 0x24);
+      if (errorCode == 0) {
+        errorCode = 1;
         *(undefined4 *)(translator + 0x24) = 1;
       }
-      puVar4 = (undefined4 *)0x0;
-      if (iVar6 != 0) {
-        return iVar6;
+      recordPtr = (undefined4 *)0x0;
+      if (errorCode != 0) {
+        return errorCode;
       }
       goto LAB_0003fcc0;
     }
-    *piVar8 = allocation;
-    *(uint *)(translator + 0x30) = uVar2;
-    iVar6 = *(int *)(translator + 0x2c);
+    *dataPtrAddr = allocation;
+    *(uint *)(translator + 0x30) = capacityWords;
+    usedWords = *(int *)(translator + 0x2c);
   }
-  *(int *)(translator + 0x2c) = iVar7 + iVar6;
-  puVar4 = (undefined4 *)(iVar6 * 4 + *piVar8);
+  *(int *)(translator + 0x2c) = recordWords + usedWords;
+  recordPtr = (undefined4 *)(usedWords * 4 + *dataPtrAddr);
 LAB_0003fcc0:
-  *puVar4 = *ilInstr;
+  *recordPtr = *ilInstr;
   if (nDst == 0) {
-    iVar6 = 1;
+    headerWords = 1;
   }
   else {
-    iVar6 = 3;
-    puVar4[1] = ilInstr[1];
-    puVar4[2] = ilInstr[2];
+    headerWords = 3;
+    recordPtr[1] = ilInstr[1];
+    recordPtr[2] = ilInstr[2];
   }
   if (0 < nSrc) {
-    puVar4 = puVar4 + iVar6;
-    puVar5 = puVar4;
+    recordPtr = recordPtr + headerWords;
+    sourceOutPtr = recordPtr;
     do {
-      *puVar5 = ilInstr[3];
-      puVar5 = puVar5 + 2;
-      puVar1 = ilInstr + 6;
+      *sourceOutPtr = ilInstr[3];
+      sourceOutPtr = sourceOutPtr + 2;
+      srcAuxWordPtr = ilInstr + 6;
       ilInstr = ilInstr + 1;
-      puVar4[1] = *puVar1;
-      puVar4 = puVar4 + 2;
+      recordPtr[1] = *srcAuxWordPtr;
+      recordPtr = recordPtr + 2;
       nSrc = nSrc + -1;
     } while (nSrc != 0);
   }
@@ -1089,16 +1097,18 @@ int fragmentTranslateSimpleOp(translator, slot, ilInstr)
   int slot;
   undefined4 *ilInstr;
 {
+  int translatorError;
+  int tokenCount;
   int allocation;
   undefined4 *puVar1;
-  uint uVar2;
+  uint tokenCapacity;
   uint uVar3;
-  undefined4 *puVar4;
+  undefined4 *tokenWritePtr;
   undefined4 *puVar5;
   uint uVar6;
   int iVar7;
   int iVar8;
-  int *piVar9;
+  int *tokenDataPtrAddr;
   uint uVar10;
   
   uVar6 = *(uint *)(*translator + *(int *)(*translator + 0x54) * 8 + slot * 8);
@@ -1107,64 +1117,64 @@ int fragmentTranslateSimpleOp(translator, slot, ilInstr)
   if (translator[9] != 0) {
     return translator[9];
   }
-  piVar9 = translator + 10;
-  iVar7 = translator[0xb];
-  uVar2 = translator[0xc];
+  tokenDataPtrAddr = translator + 10;
+  tokenCount = translator[0xb];
+  tokenCapacity = translator[0xc];
   iVar8 = (uVar6 + uVar10) * 2 + 1;
-  uVar3 = iVar8 + iVar7;
-  if (uVar2 < uVar3) {
-    if (uVar2 == 0) {
-      uVar2 = 0x10;
+  uVar3 = iVar8 + tokenCount;
+  if (tokenCapacity < uVar3) {
+    if (tokenCapacity == 0) {
+      tokenCapacity = 0x10;
     }
     else {
-      uVar2 = uVar2 << 1;
+      tokenCapacity = tokenCapacity << 1;
     }
-    for (; uVar2 < uVar3; uVar2 = uVar2 << 1) {
+    for (; tokenCapacity < uVar3; tokenCapacity = tokenCapacity << 1) {
     }
-    if (*piVar9 == 0) {
-      allocation = _malloc(uVar2 << 2);
+    if (*tokenDataPtrAddr == 0) {
+      allocation = _malloc(tokenCapacity << 2);
     }
     else {
-      allocation = _realloc(*piVar9,uVar2 << 2);
+      allocation = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
     }
     if (allocation == 0) {
-      iVar7 = translator[9];
-      if (iVar7 == 0) {
-        iVar7 = 1;
+      translatorError = translator[9];
+      if (translatorError == 0) {
+        translatorError = 1;
         translator[9] = 1;
       }
-      puVar4 = (undefined4 *)0x0;
-      if (iVar7 != 0) {
-        return iVar7;
+      tokenWritePtr = (undefined4 *)0x0;
+      if (translatorError != 0) {
+        return translatorError;
       }
       goto LAB_0003fe80;
     }
-    *piVar9 = allocation;
-    translator[0xc] = uVar2;
-    iVar7 = translator[0xb];
+    *tokenDataPtrAddr = allocation;
+    translator[0xc] = tokenCapacity;
+    tokenCount = translator[0xb];
   }
-  translator[0xb] = iVar8 + iVar7;
-  puVar4 = (undefined4 *)(iVar7 * 4 + *piVar9);
+  translator[0xb] = iVar8 + tokenCount;
+  tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
 LAB_0003fe80:
-  *puVar4 = *ilInstr;
+  *tokenWritePtr = *ilInstr;
   if (uVar6 == 0) {
     iVar7 = 1;
   }
   else {
     iVar7 = 3;
-    puVar4[1] = ilInstr[1];
-    puVar4[2] = ilInstr[2];
+    tokenWritePtr[1] = ilInstr[1];
+    tokenWritePtr[2] = ilInstr[2];
   }
   if (uVar10 != 0) {
-    puVar4 = puVar4 + iVar7;
-    puVar5 = puVar4;
+    tokenWritePtr = tokenWritePtr + iVar7;
+    puVar5 = tokenWritePtr;
     do {
       *puVar5 = ilInstr[3];
       puVar5 = puVar5 + 2;
       puVar1 = ilInstr + 6;
       ilInstr = ilInstr + 1;
-      puVar4[1] = *puVar1;
-      puVar4 = puVar4 + 2;
+      tokenWritePtr[1] = *puVar1;
+      tokenWritePtr = tokenWritePtr + 2;
       uVar10 = uVar10 - 1;
     } while (uVar10 != 0);
   }
@@ -1177,15 +1187,18 @@ int fragmentTranslateRep(translator, slot, ilInstr)
   undefined4 slot;
   undefined4 *ilInstr;
 {
+  uint tokenCapacity;
+  int translatorError;
+  int tokenCount;
   int allocation;
   int iVar1;
   int iVar2;
-  undefined4 *puVar3;
+  undefined4 *tokenWritePtr;
   uint uVar4;
   int iVar5;
   dword *pdVar6;
   dword *pdVar7;
-  int *piVar8;
+  int *tokenDataPtrAddr;
   int aiStack_48 [4];
   longlong lStack_38;
   float fStack_30;
@@ -1224,48 +1237,48 @@ int fragmentTranslateRep(translator, slot, ilInstr)
   if (translator[9] != 0) {
     return translator[9];
   }
-  piVar8 = translator + 10;
-  iVar2 = translator[0xb];
-  uVar4 = translator[0xc];
-  if (uVar4 < iVar2 + 3U) {
-    if (uVar4 == 0) {
-      uVar4 = 0x10;
+  tokenDataPtrAddr = translator + 10;
+  tokenCount = translator[0xb];
+  tokenCapacity = translator[0xc];
+  if (tokenCapacity < tokenCount + 3U) {
+    if (tokenCapacity == 0) {
+      tokenCapacity = 0x10;
     }
     else {
-      uVar4 = uVar4 << 1;
+      tokenCapacity = tokenCapacity << 1;
     }
-    for (; uVar4 < iVar2 + 3U; uVar4 = uVar4 << 1) {
+    for (; tokenCapacity < tokenCount + 3U; tokenCapacity = tokenCapacity << 1) {
     }
-    if (*piVar8 == 0) {
-      allocation = _malloc(uVar4 << 2);
+    if (*tokenDataPtrAddr == 0) {
+      allocation = _malloc(tokenCapacity << 2);
     }
     else {
-      allocation = _realloc(*piVar8,uVar4 << 2);
+      allocation = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
     }
     if (allocation == 0) {
-      iVar2 = translator[9];
-      if (iVar2 == 0) {
-        iVar2 = 1;
+      translatorError = translator[9];
+      if (translatorError == 0) {
+        translatorError = 1;
         translator[9] = 1;
       }
-      if (iVar2 != 0) {
-        return iVar2;
+      if (translatorError != 0) {
+        return translatorError;
       }
-      puVar3 = (undefined4 *)0x0;
+      tokenWritePtr = (undefined4 *)0x0;
       pdVar7 = ((unsigned char *)0x4);
       pdVar6 = ((unsigned char *)0x8);
       goto LAB_00040128;
     }
-    *piVar8 = allocation;
-    translator[0xc] = uVar4;
-    iVar2 = translator[0xb];
+    *tokenDataPtrAddr = allocation;
+    translator[0xc] = tokenCapacity;
+    tokenCount = translator[0xb];
   }
-  translator[0xb] = iVar2 + 3;
-  puVar3 = (undefined4 *)(iVar2 * 4 + *piVar8);
-  pdVar7 = puVar3 + 1;
-  pdVar6 = puVar3 + 2;
+  translator[0xb] = tokenCount + 3;
+  tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
+  pdVar7 = tokenWritePtr + 1;
+  pdVar6 = tokenWritePtr + 2;
 LAB_00040128:
-  *puVar3 = *ilInstr;
+  *tokenWritePtr = *ilInstr;
   *pdVar7 = ilInstr[3];
   *pdVar6 = ilInstr[6];
   return 0;
@@ -1277,15 +1290,17 @@ int fragmentTranslateDdy(translator, slot, ilInstr)
   undefined4 slot;
   undefined4 *ilInstr;
 {
+  uint tokenCapacity;
+  int translatorError;
   int allocation;
   uint uVar1;
-  int iVar2;
+  int tokenCount;
   dword *pdVar3;
   dword *pdVar4;
-  undefined4 *puVar5;
+  undefined4 *tokenWritePtr;
   dword *pdVar6;
   dword *pdVar7;
-  int *piVar8;
+  int *tokenDataPtrAddr;
   
   *(uint *)(*(int *)(translator + 0x34) + 0x20) =
        *(uint *)(*(int *)(translator + 0x34) + 0x20) | 0x1000000;
@@ -1298,52 +1313,52 @@ int fragmentTranslateDdy(translator, slot, ilInstr)
   if (*(int *)(translator + 0x24) != 0) {
     return *(int *)(translator + 0x24);
   }
-  piVar8 = (int *)(translator + 0x28);
-  iVar2 = *(int *)(translator + 0x2c);
-  uVar1 = *(uint *)(translator + 0x30);
-  if (uVar1 < iVar2 + 5U) {
-    if (uVar1 == 0) {
-      uVar1 = 0x10;
+  tokenDataPtrAddr = (int *)(translator + 0x28);
+  tokenCount = *(int *)(translator + 0x2c);
+  tokenCapacity = *(uint *)(translator + 0x30);
+  if (tokenCapacity < tokenCount + 5U) {
+    if (tokenCapacity == 0) {
+      tokenCapacity = 0x10;
     }
     else {
-      uVar1 = uVar1 << 1;
+      tokenCapacity = tokenCapacity << 1;
     }
-    for (; uVar1 < iVar2 + 5U; uVar1 = uVar1 << 1) {
+    for (; tokenCapacity < tokenCount + 5U; tokenCapacity = tokenCapacity << 1) {
     }
-    if (*piVar8 == 0) {
-      allocation = _malloc(uVar1 << 2);
+    if (*tokenDataPtrAddr == 0) {
+      allocation = _malloc(tokenCapacity << 2);
     }
     else {
-      allocation = _realloc(*piVar8,uVar1 << 2);
+      allocation = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
     }
     if (allocation == 0) {
-      iVar2 = *(int *)(translator + 0x24);
-      if (iVar2 == 0) {
-        iVar2 = 1;
+      translatorError = *(int *)(translator + 0x24);
+      if (translatorError == 0) {
+        translatorError = 1;
         *(undefined4 *)(translator + 0x24) = 1;
       }
-      if (iVar2 != 0) {
-        return iVar2;
+      if (translatorError != 0) {
+        return translatorError;
       }
-      puVar5 = (undefined4 *)0x0;
+      tokenWritePtr = (undefined4 *)0x0;
       pdVar3 = ((unsigned char *)0x4);
       pdVar4 = ((unsigned char *)0x8);
       pdVar6 = ((unsigned char *)0xc);
       pdVar7 = ((unsigned char *)0x10);
       goto LAB_000402d0;
     }
-    *piVar8 = allocation;
-    *(uint *)(translator + 0x30) = uVar1;
-    iVar2 = *(int *)(translator + 0x2c);
+    *tokenDataPtrAddr = allocation;
+    *(uint *)(translator + 0x30) = tokenCapacity;
+    tokenCount = *(int *)(translator + 0x2c);
   }
-  *(int *)(translator + 0x2c) = iVar2 + 5;
-  puVar5 = (undefined4 *)(iVar2 * 4 + *piVar8);
-  pdVar3 = puVar5 + 1;
-  pdVar4 = puVar5 + 2;
-  pdVar6 = puVar5 + 3;
-  pdVar7 = puVar5 + 4;
+  *(int *)(translator + 0x2c) = tokenCount + 5;
+  tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
+  pdVar3 = tokenWritePtr + 1;
+  pdVar4 = tokenWritePtr + 2;
+  pdVar6 = tokenWritePtr + 3;
+  pdVar7 = tokenWritePtr + 4;
 LAB_000402d0:
-  *puVar5 = *ilInstr;
+  *tokenWritePtr = *ilInstr;
   *pdVar3 = ilInstr[1];
   *pdVar4 = ilInstr[2];
   *pdVar6 = ilInstr[3];
@@ -1357,6 +1372,10 @@ int fragmentTranslateScalarMath(translator, slot, ilInstr)
   int slot;
   undefined4 *ilInstr;
 {
+  uint tokenCapacity2;
+  uint tokenCapacity;
+  int translatorError;
+  int tokenCount;
   undefined4 *tokenWritePtr;
   void *allocation;
   uint uVar3;
@@ -1368,7 +1387,7 @@ int fragmentTranslateScalarMath(translator, slot, ilInstr)
   uint *puVar7;
   uint *puVar8;
   uint uVar9;
-  int *piVar10;
+  int *tokenDataPtrAddr;
   
   uVar6 = 1;
   if ((translator[5] & 0x20000000U) != 0) {
@@ -1391,23 +1410,23 @@ int fragmentTranslateScalarMath(translator, slot, ilInstr)
                uVar3 << 0xb |
                (uVar9 & 7) << 8 | uVar3 << 7 | (uVar9 & 7) << 4 | uVar3 << 3 | uVar9 & 0xffff0007;
   if (translator[9] == 0) {
-    piVar10 = translator + 10;
-    iVar4 = translator[0xb];
-    uVar3 = translator[0xc];
-    if (uVar3 < iVar4 + 5U) {
-      if (uVar3 == 0) {
-        uVar3 = 0x10;
+    tokenDataPtrAddr = translator + 10;
+    tokenCount = translator[0xb];
+    tokenCapacity = translator[0xc];
+    if (tokenCapacity < tokenCount + 5U) {
+      if (tokenCapacity == 0) {
+        tokenCapacity = 0x10;
       }
       else {
-        uVar3 = uVar3 << 1;
+        tokenCapacity = tokenCapacity << 1;
       }
-      for (; uVar3 < iVar4 + 5U; uVar3 = uVar3 << 1) {
+      for (; tokenCapacity < tokenCount + 5U; tokenCapacity = tokenCapacity << 1) {
       }
-      if ((void *)*piVar10 == (void *)0x0) {
-        allocation = _malloc(uVar3 << 2);
+      if ((void *)*tokenDataPtrAddr == (void *)0x0) {
+        allocation = _malloc(tokenCapacity << 2);
       }
       else {
-        allocation = _realloc((void *)*piVar10,uVar3 << 2);
+        allocation = _realloc((void *)*tokenDataPtrAddr,tokenCapacity << 2);
       }
       if (allocation == (void *)0x0) {
         if (translator[9] == 0) {
@@ -1415,12 +1434,12 @@ int fragmentTranslateScalarMath(translator, slot, ilInstr)
         }
         goto LAB_00040524;
       }
-      *piVar10 = (int)allocation;
-      translator[0xc] = uVar3;
-      iVar4 = translator[0xb];
+      *tokenDataPtrAddr = (int)allocation;
+      translator[0xc] = tokenCapacity;
+      tokenCount = translator[0xb];
     }
-    translator[0xb] = iVar4 + 5;
-    tokenWritePtr = (undefined4 *)(iVar4 * 4 + *piVar10);
+    translator[0xb] = tokenCount + 5;
+    tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
     *tokenWritePtr = *ilInstr;
     tokenWritePtr[1] = ilInstr[1];
     tokenWritePtr[2] = ilInstr[2];
@@ -1440,23 +1459,23 @@ LAB_00040524:
             uVar5 << 0xb |
             uVar3 << 8 | uVar5 << 7 | uVar3 << 4 | uVar5 << 3 | uVar3 | *puVar8 & 0xffff0000;
   if (translator[9] == 0) {
-    piVar10 = translator + 10;
-    iVar4 = translator[0xb];
-    uVar3 = translator[0xc];
-    if (uVar3 < iVar4 + 5U) {
-      if (uVar3 == 0) {
-        uVar3 = 0x10;
+    tokenDataPtrAddr = translator + 10;
+    tokenCount = translator[0xb];
+    tokenCapacity = translator[0xc];
+    if (tokenCapacity < tokenCount + 5U) {
+      if (tokenCapacity == 0) {
+        tokenCapacity = 0x10;
       }
       else {
-        uVar3 = uVar3 << 1;
+        tokenCapacity = tokenCapacity << 1;
       }
-      for (; uVar3 < iVar4 + 5U; uVar3 = uVar3 << 1) {
+      for (; tokenCapacity < tokenCount + 5U; tokenCapacity = tokenCapacity << 1) {
       }
-      if ((void *)*piVar10 == (void *)0x0) {
-        allocation = _malloc(uVar3 << 2);
+      if ((void *)*tokenDataPtrAddr == (void *)0x0) {
+        allocation = _malloc(tokenCapacity << 2);
       }
       else {
-        allocation = _realloc((void *)*piVar10,uVar3 << 2);
+        allocation = _realloc((void *)*tokenDataPtrAddr,tokenCapacity << 2);
       }
       if (allocation == (void *)0x0) {
         if (translator[9] == 0) {
@@ -1464,12 +1483,12 @@ LAB_00040524:
         }
         goto LAB_00040664;
       }
-      *piVar10 = (int)allocation;
-      translator[0xc] = uVar3;
-      iVar4 = translator[0xb];
+      *tokenDataPtrAddr = (int)allocation;
+      translator[0xc] = tokenCapacity;
+      tokenCount = translator[0xb];
     }
-    translator[0xb] = iVar4 + 5;
-    tokenWritePtr = (undefined4 *)(iVar4 * 4 + *piVar10);
+    translator[0xb] = tokenCount + 5;
+    tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
     *tokenWritePtr = *ilInstr;
     tokenWritePtr[1] = ilInstr[1];
     tokenWritePtr[2] = ilInstr[2];
@@ -1486,23 +1505,23 @@ LAB_00040664:
             uVar5 << 0xb |
             uVar3 << 8 | uVar5 << 7 | uVar3 << 4 | uVar5 << 3 | uVar3 | *puVar8 & 0xffff0000;
   if (translator[9] == 0) {
-    piVar10 = translator + 10;
-    iVar4 = translator[0xb];
-    uVar3 = translator[0xc];
-    if (uVar3 < iVar4 + 5U) {
-      if (uVar3 == 0) {
-        uVar3 = 0x10;
+    tokenDataPtrAddr = translator + 10;
+    tokenCount = translator[0xb];
+    tokenCapacity = translator[0xc];
+    if (tokenCapacity < tokenCount + 5U) {
+      if (tokenCapacity == 0) {
+        tokenCapacity = 0x10;
       }
       else {
-        uVar3 = uVar3 << 1;
+        tokenCapacity = tokenCapacity << 1;
       }
-      for (; uVar3 < iVar4 + 5U; uVar3 = uVar3 << 1) {
+      for (; tokenCapacity < tokenCount + 5U; tokenCapacity = tokenCapacity << 1) {
       }
-      if ((void *)*piVar10 == (void *)0x0) {
-        allocation = _malloc(uVar3 << 2);
+      if ((void *)*tokenDataPtrAddr == (void *)0x0) {
+        allocation = _malloc(tokenCapacity << 2);
       }
       else {
-        allocation = _realloc((void *)*piVar10,uVar3 << 2);
+        allocation = _realloc((void *)*tokenDataPtrAddr,tokenCapacity << 2);
       }
       if (allocation == (void *)0x0) {
         if (translator[9] == 0) {
@@ -1510,12 +1529,12 @@ LAB_00040664:
         }
         goto LAB_00040794;
       }
-      *piVar10 = (int)allocation;
-      translator[0xc] = uVar3;
-      iVar4 = translator[0xb];
+      *tokenDataPtrAddr = (int)allocation;
+      translator[0xc] = tokenCapacity;
+      tokenCount = translator[0xb];
     }
-    translator[0xb] = iVar4 + 5;
-    tokenWritePtr = (undefined4 *)(iVar4 * 4 + *piVar10);
+    translator[0xb] = tokenCount + 5;
+    tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
     *tokenWritePtr = *ilInstr;
     tokenWritePtr[1] = ilInstr[1];
     tokenWritePtr[2] = ilInstr[2];
@@ -1532,23 +1551,23 @@ LAB_00040794:
               uVar9 << 0xb |
               uVar6 << 8 | uVar9 << 7 | uVar6 << 4 | uVar9 << 3 | uVar6 | *puVar8 & 0xffff0000;
     if (translator[9] == 0) {
-      piVar10 = translator + 10;
-      iVar4 = translator[0xb];
-      uVar6 = translator[0xc];
-      if (uVar6 < iVar4 + 5U) {
-        if (uVar6 == 0) {
-          uVar6 = 0x10;
+      tokenDataPtrAddr = translator + 10;
+      tokenCount = translator[0xb];
+      tokenCapacity2 = translator[0xc];
+      if (tokenCapacity2 < tokenCount + 5U) {
+        if (tokenCapacity2 == 0) {
+          tokenCapacity2 = 0x10;
         }
         else {
-          uVar6 = uVar6 << 1;
+          tokenCapacity2 = tokenCapacity2 << 1;
         }
-        for (; uVar6 < iVar4 + 5U; uVar6 = uVar6 << 1) {
+        for (; tokenCapacity2 < tokenCount + 5U; tokenCapacity2 = tokenCapacity2 << 1) {
         }
-        if ((void *)*piVar10 == (void *)0x0) {
-          allocation = _malloc(uVar6 << 2);
+        if ((void *)*tokenDataPtrAddr == (void *)0x0) {
+          allocation = _malloc(tokenCapacity2 << 2);
         }
         else {
-          allocation = _realloc((void *)*piVar10,uVar6 << 2);
+          allocation = _realloc((void *)*tokenDataPtrAddr,tokenCapacity2 << 2);
         }
         if (allocation == (void *)0x0) {
           if (translator[9] == 0) {
@@ -1556,12 +1575,12 @@ LAB_00040794:
           }
           goto LAB_000408d0;
         }
-        *piVar10 = (int)allocation;
-        translator[0xc] = uVar6;
-        iVar4 = translator[0xb];
+        *tokenDataPtrAddr = (int)allocation;
+        translator[0xc] = tokenCapacity2;
+        tokenCount = translator[0xb];
       }
-      translator[0xb] = iVar4 + 5;
-      tokenWritePtr = (undefined4 *)(iVar4 * 4 + *piVar10);
+      translator[0xb] = tokenCount + 5;
+      tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
       *tokenWritePtr = *ilInstr;
       tokenWritePtr[1] = ilInstr[1];
       tokenWritePtr[2] = ilInstr[2];
@@ -1581,25 +1600,25 @@ LAB_000408d0:
   ilInstr[1] = unaff_r22;
   ilInstr[2] = unaff_r21;
   *(undefined2 *)((int)ilInstr + 2) = 0x47;
-  iVar4 = translator[9];
-  if (iVar4 == 0) {
-    piVar10 = translator + 10;
-    iVar4 = translator[0xb];
-    uVar6 = translator[0xc];
-    if (uVar6 < iVar4 + 5U) {
-      if (uVar6 == 0) {
-        uVar6 = 0x10;
+  translatorError = translator[9];
+  if (translatorError == 0) {
+    tokenDataPtrAddr = translator + 10;
+    tokenCount = translator[0xb];
+    tokenCapacity2 = translator[0xc];
+    if (tokenCapacity2 < tokenCount + 5U) {
+      if (tokenCapacity2 == 0) {
+        tokenCapacity2 = 0x10;
       }
       else {
-        uVar6 = uVar6 << 1;
+        tokenCapacity2 = tokenCapacity2 << 1;
       }
-      for (; uVar6 < iVar4 + 5U; uVar6 = uVar6 << 1) {
+      for (; tokenCapacity2 < tokenCount + 5U; tokenCapacity2 = tokenCapacity2 << 1) {
       }
-      if ((void *)*piVar10 == (void *)0x0) {
-        allocation = _malloc(uVar6 << 2);
+      if ((void *)*tokenDataPtrAddr == (void *)0x0) {
+        allocation = _malloc(tokenCapacity2 << 2);
       }
       else {
-        allocation = _realloc((void *)*piVar10,uVar6 << 2);
+        allocation = _realloc((void *)*tokenDataPtrAddr,tokenCapacity2 << 2);
       }
       if (allocation == (void *)0x0) {
         if (translator[9] != 0) {
@@ -1608,20 +1627,20 @@ LAB_000408d0:
         translator[9] = 1;
         return 1;
       }
-      *piVar10 = (int)allocation;
-      translator[0xc] = uVar6;
-      iVar4 = translator[0xb];
+      *tokenDataPtrAddr = (int)allocation;
+      translator[0xc] = tokenCapacity2;
+      tokenCount = translator[0xb];
     }
-    translator[0xb] = iVar4 + 5;
-    tokenWritePtr = (undefined4 *)(iVar4 * 4 + *piVar10);
+    translator[0xb] = tokenCount + 5;
+    tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
     *tokenWritePtr = *ilInstr;
     tokenWritePtr[1] = ilInstr[1];
     tokenWritePtr[2] = ilInstr[2];
     tokenWritePtr[3] = ilInstr[3];
     tokenWritePtr[4] = ilInstr[6];
-    iVar4 = translator[9];
+    translatorError = translator[9];
   }
-  return iVar4;
+  return translatorError;
 }
 
 /* fragmentTranslateScalarMathBody @ 0x40374 (1800 bytes) */
@@ -1635,6 +1654,10 @@ int fragmentTranslateScalarMathBody(translator, slot, ilInstr, param_4, param_5,
   undefined4 param_7;
   undefined4 param_8;
 {
+  uint tokenCapacity2;
+  uint tokenCapacity;
+  int translatorError;
+  int tokenCount;
   int allocation;
   undefined4 *tokenWritePtr;
   uint uVar2;
@@ -1646,7 +1669,7 @@ int fragmentTranslateScalarMathBody(translator, slot, ilInstr, param_4, param_5,
   uint *puVar6;
   uint *puVar7;
   uint uVar8;
-  int *piVar9;
+  int *tokenDataPtrAddr;
   
   uVar5 = 1;
   if ((translator[5] & 0x20000000U) != 0) {
@@ -1669,23 +1692,23 @@ int fragmentTranslateScalarMathBody(translator, slot, ilInstr, param_4, param_5,
                uVar2 << 0xb |
                (uVar8 & 7) << 8 | uVar2 << 7 | (uVar8 & 7) << 4 | uVar2 << 3 | uVar8 & 0xffff0007;
   if (translator[9] == 0) {
-    piVar9 = translator + 10;
-    iVar3 = translator[0xb];
-    uVar2 = translator[0xc];
-    if (uVar2 < iVar3 + 5U) {
-      if (uVar2 == 0) {
-        uVar2 = 0x10;
+    tokenDataPtrAddr = translator + 10;
+    tokenCount = translator[0xb];
+    tokenCapacity = translator[0xc];
+    if (tokenCapacity < tokenCount + 5U) {
+      if (tokenCapacity == 0) {
+        tokenCapacity = 0x10;
       }
       else {
-        uVar2 = uVar2 << 1;
+        tokenCapacity = tokenCapacity << 1;
       }
-      for (; uVar2 < iVar3 + 5U; uVar2 = uVar2 << 1) {
+      for (; tokenCapacity < tokenCount + 5U; tokenCapacity = tokenCapacity << 1) {
       }
-      if (*piVar9 == 0) {
-        allocation = _malloc(uVar2 << 2);
+      if (*tokenDataPtrAddr == 0) {
+        allocation = _malloc(tokenCapacity << 2);
       }
       else {
-        allocation = _realloc(*piVar9,uVar2 << 2);
+        allocation = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
       }
       if (allocation == 0) {
         if (translator[9] == 0) {
@@ -1693,12 +1716,12 @@ int fragmentTranslateScalarMathBody(translator, slot, ilInstr, param_4, param_5,
         }
         goto LAB_00040524;
       }
-      *piVar9 = allocation;
-      translator[0xc] = uVar2;
-      iVar3 = translator[0xb];
+      *tokenDataPtrAddr = allocation;
+      translator[0xc] = tokenCapacity;
+      tokenCount = translator[0xb];
     }
-    translator[0xb] = iVar3 + 5;
-    tokenWritePtr = (undefined4 *)(iVar3 * 4 + *piVar9);
+    translator[0xb] = tokenCount + 5;
+    tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
     *tokenWritePtr = *ilInstr;
     tokenWritePtr[1] = ilInstr[1];
     tokenWritePtr[2] = ilInstr[2];
@@ -1718,23 +1741,23 @@ LAB_00040524:
             uVar4 << 0xb |
             uVar2 << 8 | uVar4 << 7 | uVar2 << 4 | uVar4 << 3 | uVar2 | *puVar7 & 0xffff0000;
   if (translator[9] == 0) {
-    piVar9 = translator + 10;
-    iVar3 = translator[0xb];
-    uVar2 = translator[0xc];
-    if (uVar2 < iVar3 + 5U) {
-      if (uVar2 == 0) {
-        uVar2 = 0x10;
+    tokenDataPtrAddr = translator + 10;
+    tokenCount = translator[0xb];
+    tokenCapacity = translator[0xc];
+    if (tokenCapacity < tokenCount + 5U) {
+      if (tokenCapacity == 0) {
+        tokenCapacity = 0x10;
       }
       else {
-        uVar2 = uVar2 << 1;
+        tokenCapacity = tokenCapacity << 1;
       }
-      for (; uVar2 < iVar3 + 5U; uVar2 = uVar2 << 1) {
+      for (; tokenCapacity < tokenCount + 5U; tokenCapacity = tokenCapacity << 1) {
       }
-      if (*piVar9 == 0) {
-        allocation = _malloc(uVar2 << 2);
+      if (*tokenDataPtrAddr == 0) {
+        allocation = _malloc(tokenCapacity << 2);
       }
       else {
-        allocation = _realloc(*piVar9,uVar2 << 2);
+        allocation = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
       }
       if (allocation == 0) {
         if (translator[9] == 0) {
@@ -1742,12 +1765,12 @@ LAB_00040524:
         }
         goto LAB_00040664;
       }
-      *piVar9 = allocation;
-      translator[0xc] = uVar2;
-      iVar3 = translator[0xb];
+      *tokenDataPtrAddr = allocation;
+      translator[0xc] = tokenCapacity;
+      tokenCount = translator[0xb];
     }
-    translator[0xb] = iVar3 + 5;
-    tokenWritePtr = (undefined4 *)(iVar3 * 4 + *piVar9);
+    translator[0xb] = tokenCount + 5;
+    tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
     *tokenWritePtr = *ilInstr;
     tokenWritePtr[1] = ilInstr[1];
     tokenWritePtr[2] = ilInstr[2];
@@ -1764,23 +1787,23 @@ LAB_00040664:
             uVar4 << 0xb |
             uVar2 << 8 | uVar4 << 7 | uVar2 << 4 | uVar4 << 3 | uVar2 | *puVar7 & 0xffff0000;
   if (translator[9] == 0) {
-    piVar9 = translator + 10;
-    iVar3 = translator[0xb];
-    uVar2 = translator[0xc];
-    if (uVar2 < iVar3 + 5U) {
-      if (uVar2 == 0) {
-        uVar2 = 0x10;
+    tokenDataPtrAddr = translator + 10;
+    tokenCount = translator[0xb];
+    tokenCapacity = translator[0xc];
+    if (tokenCapacity < tokenCount + 5U) {
+      if (tokenCapacity == 0) {
+        tokenCapacity = 0x10;
       }
       else {
-        uVar2 = uVar2 << 1;
+        tokenCapacity = tokenCapacity << 1;
       }
-      for (; uVar2 < iVar3 + 5U; uVar2 = uVar2 << 1) {
+      for (; tokenCapacity < tokenCount + 5U; tokenCapacity = tokenCapacity << 1) {
       }
-      if (*piVar9 == 0) {
-        allocation = _malloc(uVar2 << 2);
+      if (*tokenDataPtrAddr == 0) {
+        allocation = _malloc(tokenCapacity << 2);
       }
       else {
-        allocation = _realloc(*piVar9,uVar2 << 2);
+        allocation = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
       }
       if (allocation == 0) {
         if (translator[9] == 0) {
@@ -1788,12 +1811,12 @@ LAB_00040664:
         }
         goto LAB_00040794;
       }
-      *piVar9 = allocation;
-      translator[0xc] = uVar2;
-      iVar3 = translator[0xb];
+      *tokenDataPtrAddr = allocation;
+      translator[0xc] = tokenCapacity;
+      tokenCount = translator[0xb];
     }
-    translator[0xb] = iVar3 + 5;
-    tokenWritePtr = (undefined4 *)(iVar3 * 4 + *piVar9);
+    translator[0xb] = tokenCount + 5;
+    tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
     *tokenWritePtr = *ilInstr;
     tokenWritePtr[1] = ilInstr[1];
     tokenWritePtr[2] = ilInstr[2];
@@ -1810,23 +1833,23 @@ LAB_00040794:
               uVar8 << 0xb |
               uVar5 << 8 | uVar8 << 7 | uVar5 << 4 | uVar8 << 3 | uVar5 | *puVar7 & 0xffff0000;
     if (translator[9] == 0) {
-      piVar9 = translator + 10;
-      iVar3 = translator[0xb];
-      uVar5 = translator[0xc];
-      if (uVar5 < iVar3 + 5U) {
-        if (uVar5 == 0) {
-          uVar5 = 0x10;
+      tokenDataPtrAddr = translator + 10;
+      tokenCount = translator[0xb];
+      tokenCapacity2 = translator[0xc];
+      if (tokenCapacity2 < tokenCount + 5U) {
+        if (tokenCapacity2 == 0) {
+          tokenCapacity2 = 0x10;
         }
         else {
-          uVar5 = uVar5 << 1;
+          tokenCapacity2 = tokenCapacity2 << 1;
         }
-        for (; uVar5 < iVar3 + 5U; uVar5 = uVar5 << 1) {
+        for (; tokenCapacity2 < tokenCount + 5U; tokenCapacity2 = tokenCapacity2 << 1) {
         }
-        if (*piVar9 == 0) {
-          allocation = _malloc(uVar5 << 2);
+        if (*tokenDataPtrAddr == 0) {
+          allocation = _malloc(tokenCapacity2 << 2);
         }
         else {
-          allocation = _realloc(*piVar9,uVar5 << 2);
+          allocation = _realloc(*tokenDataPtrAddr,tokenCapacity2 << 2);
         }
         if (allocation == 0) {
           if (translator[9] == 0) {
@@ -1834,12 +1857,12 @@ LAB_00040794:
           }
           goto LAB_000408d0;
         }
-        *piVar9 = allocation;
-        translator[0xc] = uVar5;
-        iVar3 = translator[0xb];
+        *tokenDataPtrAddr = allocation;
+        translator[0xc] = tokenCapacity2;
+        tokenCount = translator[0xb];
       }
-      translator[0xb] = iVar3 + 5;
-      tokenWritePtr = (undefined4 *)(iVar3 * 4 + *piVar9);
+      translator[0xb] = tokenCount + 5;
+      tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
       *tokenWritePtr = *ilInstr;
       tokenWritePtr[1] = ilInstr[1];
       tokenWritePtr[2] = ilInstr[2];
@@ -1859,25 +1882,25 @@ LAB_000408d0:
   ilInstr[1] = unaff_r22;
   ilInstr[2] = unaff_r21;
   *(undefined2 *)((int)ilInstr + 2) = 0x47;
-  iVar3 = translator[9];
-  if (iVar3 == 0) {
-    piVar9 = translator + 10;
-    iVar3 = translator[0xb];
-    uVar5 = translator[0xc];
-    if (uVar5 < iVar3 + 5U) {
-      if (uVar5 == 0) {
-        uVar5 = 0x10;
+  translatorError = translator[9];
+  if (translatorError == 0) {
+    tokenDataPtrAddr = translator + 10;
+    tokenCount = translator[0xb];
+    tokenCapacity2 = translator[0xc];
+    if (tokenCapacity2 < tokenCount + 5U) {
+      if (tokenCapacity2 == 0) {
+        tokenCapacity2 = 0x10;
       }
       else {
-        uVar5 = uVar5 << 1;
+        tokenCapacity2 = tokenCapacity2 << 1;
       }
-      for (; uVar5 < iVar3 + 5U; uVar5 = uVar5 << 1) {
+      for (; tokenCapacity2 < tokenCount + 5U; tokenCapacity2 = tokenCapacity2 << 1) {
       }
-      if (*piVar9 == 0) {
-        allocation = _malloc(uVar5 << 2);
+      if (*tokenDataPtrAddr == 0) {
+        allocation = _malloc(tokenCapacity2 << 2);
       }
       else {
-        allocation = _realloc(*piVar9,uVar5 << 2);
+        allocation = _realloc(*tokenDataPtrAddr,tokenCapacity2 << 2);
       }
       if (allocation == 0) {
         if (translator[9] != 0) {
@@ -1886,20 +1909,20 @@ LAB_000408d0:
         translator[9] = 1;
         return 1;
       }
-      *piVar9 = allocation;
-      translator[0xc] = uVar5;
-      iVar3 = translator[0xb];
+      *tokenDataPtrAddr = allocation;
+      translator[0xc] = tokenCapacity2;
+      tokenCount = translator[0xb];
     }
-    translator[0xb] = iVar3 + 5;
-    tokenWritePtr = (undefined4 *)(iVar3 * 4 + *piVar9);
+    translator[0xb] = tokenCount + 5;
+    tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
     *tokenWritePtr = *ilInstr;
     tokenWritePtr[1] = ilInstr[1];
     tokenWritePtr[2] = ilInstr[2];
     tokenWritePtr[3] = ilInstr[3];
     tokenWritePtr[4] = ilInstr[6];
-    iVar3 = translator[9];
+    translatorError = translator[9];
   }
-  return iVar3;
+  return translatorError;
 }
 
 /* FUN_00040ac4 @ 0x40ac4 (2096 bytes) */
@@ -1913,6 +1936,10 @@ int FUN_00040ac4(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   undefined4 param_7;
   undefined4 param_8;
 {
+  uint tokenCapacity2;
+  uint tokenCapacity;
+  int translatorError;
+  int tokenCount;
   int allocation;
   undefined4 *puVar1;
   bool bVar2;
@@ -1923,7 +1950,7 @@ int FUN_00040ac4(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   int iVar7;
   uint uVar8;
   uint uVar9;
-  undefined4 *puVar10;
+  undefined4 *tokenWritePtr;
   undefined4 unaff_r19;
   undefined4 unaff_r20;
   uint uVar11;
@@ -1932,7 +1959,7 @@ int FUN_00040ac4(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uint *puVar14;
   uint uVar15;
   uint uVar16;
-  int *piVar17;
+  int *tokenDataPtrAddr;
   
   uVar11 = 1;
   if ((param_1[5] & 0x20000000U) != 0) {
@@ -1965,23 +1992,23 @@ int FUN_00040ac4(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
                (uVar15 & 7) << 8 | uVar8 << 7 | (uVar15 & 7) << 4 | uVar8 << 3 | uVar15 & 0xffff0007
   ;
   if (param_1[9] == 0) {
-    piVar17 = param_1 + 10;
-    iVar7 = param_1[0xb];
-    uVar4 = param_1[0xc];
-    if (uVar4 < iVar7 + 7U) {
-      if (uVar4 == 0) {
-        uVar4 = 0x10;
+    tokenDataPtrAddr = param_1 + 10;
+    tokenCount = param_1[0xb];
+    tokenCapacity = param_1[0xc];
+    if (tokenCapacity < tokenCount + 7U) {
+      if (tokenCapacity == 0) {
+        tokenCapacity = 0x10;
       }
       else {
-        uVar4 = uVar4 << 1;
+        tokenCapacity = tokenCapacity << 1;
       }
-      for (; uVar4 < iVar7 + 7U; uVar4 = uVar4 << 1) {
+      for (; tokenCapacity < tokenCount + 7U; tokenCapacity = tokenCapacity << 1) {
       }
-      if (*piVar17 == 0) {
-        allocation = _malloc(uVar4 << 2);
+      if (*tokenDataPtrAddr == 0) {
+        allocation = _malloc(tokenCapacity << 2);
       }
       else {
-        allocation = _realloc(*piVar17,uVar4 << 2);
+        allocation = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
       }
       if (allocation == 0) {
         if (param_1[9] == 0) {
@@ -1989,25 +2016,25 @@ int FUN_00040ac4(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
         }
         goto LAB_00040cf0;
       }
-      *piVar17 = allocation;
-      param_1[0xc] = uVar4;
-      iVar7 = param_1[0xb];
+      *tokenDataPtrAddr = allocation;
+      param_1[0xc] = tokenCapacity;
+      tokenCount = param_1[0xb];
     }
     iVar3 = 0;
-    param_1[0xb] = iVar7 + 7;
-    puVar10 = (undefined4 *)(iVar7 * 4 + *piVar17);
-    *puVar10 = *param_3;
-    puVar10[1] = param_3[1];
-    puVar10[2] = param_3[2];
+    param_1[0xb] = tokenCount + 7;
+    tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
+    *tokenWritePtr = *param_3;
+    tokenWritePtr[1] = param_3[1];
+    tokenWritePtr[2] = param_3[2];
     puVar6 = param_3;
     do {
       bVar2 = iVar3 != 1;
       iVar3 = iVar3 + 1;
-      puVar10[3] = puVar6[3];
+      tokenWritePtr[3] = puVar6[3];
       puVar1 = puVar6 + 6;
       puVar6 = puVar6 + 1;
-      puVar10[4] = *puVar1;
-      puVar10 = puVar10 + 2;
+      tokenWritePtr[4] = *puVar1;
+      tokenWritePtr = tokenWritePtr + 2;
     } while (bVar2);
   }
 LAB_00040cf0:
@@ -2029,23 +2056,23 @@ LAB_00040cf0:
              uVar4 << 0xb |
              uVar5 << 8 | uVar4 << 7 | uVar5 << 4 | uVar4 << 3 | uVar5 | *puVar13 & 0xffff0000;
   if (param_1[9] == 0) {
-    piVar17 = param_1 + 10;
-    iVar7 = param_1[0xb];
-    uVar4 = param_1[0xc];
-    if (uVar4 < iVar7 + 7U) {
-      if (uVar4 == 0) {
-        uVar4 = 0x10;
+    tokenDataPtrAddr = param_1 + 10;
+    tokenCount = param_1[0xb];
+    tokenCapacity = param_1[0xc];
+    if (tokenCapacity < tokenCount + 7U) {
+      if (tokenCapacity == 0) {
+        tokenCapacity = 0x10;
       }
       else {
-        uVar4 = uVar4 << 1;
+        tokenCapacity = tokenCapacity << 1;
       }
-      for (; uVar4 < iVar7 + 7U; uVar4 = uVar4 << 1) {
+      for (; tokenCapacity < tokenCount + 7U; tokenCapacity = tokenCapacity << 1) {
       }
-      if (*piVar17 == 0) {
-        allocation = _malloc(uVar4 << 2);
+      if (*tokenDataPtrAddr == 0) {
+        allocation = _malloc(tokenCapacity << 2);
       }
       else {
-        allocation = _realloc(*piVar17,uVar4 << 2);
+        allocation = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
       }
       if (allocation == 0) {
         if (param_1[9] == 0) {
@@ -2053,25 +2080,25 @@ LAB_00040cf0:
         }
         goto LAB_00040e70;
       }
-      *piVar17 = allocation;
-      param_1[0xc] = uVar4;
-      iVar7 = param_1[0xb];
+      *tokenDataPtrAddr = allocation;
+      param_1[0xc] = tokenCapacity;
+      tokenCount = param_1[0xb];
     }
     iVar3 = 0;
-    param_1[0xb] = iVar7 + 7;
-    puVar10 = (undefined4 *)(iVar7 * 4 + *piVar17);
-    *puVar10 = *param_3;
-    puVar10[1] = param_3[1];
-    puVar10[2] = param_3[2];
+    param_1[0xb] = tokenCount + 7;
+    tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
+    *tokenWritePtr = *param_3;
+    tokenWritePtr[1] = param_3[1];
+    tokenWritePtr[2] = param_3[2];
     puVar6 = param_3;
     do {
       bVar2 = iVar3 != 1;
       iVar3 = iVar3 + 1;
-      puVar10[3] = puVar6[3];
+      tokenWritePtr[3] = puVar6[3];
       puVar1 = puVar6 + 6;
       puVar6 = puVar6 + 1;
-      puVar10[4] = *puVar1;
-      puVar10 = puVar10 + 2;
+      tokenWritePtr[4] = *puVar1;
+      tokenWritePtr = tokenWritePtr + 2;
     } while (bVar2);
   }
 LAB_00040e70:
@@ -2090,23 +2117,23 @@ LAB_00040e70:
              uVar4 << 0xb |
              uVar5 << 8 | uVar4 << 7 | uVar5 << 4 | uVar4 << 3 | uVar5 | *puVar13 & 0xffff0000;
   if (param_1[9] == 0) {
-    piVar17 = param_1 + 10;
-    iVar7 = param_1[0xb];
-    uVar4 = param_1[0xc];
-    if (uVar4 < iVar7 + 7U) {
-      if (uVar4 == 0) {
-        uVar4 = 0x10;
+    tokenDataPtrAddr = param_1 + 10;
+    tokenCount = param_1[0xb];
+    tokenCapacity = param_1[0xc];
+    if (tokenCapacity < tokenCount + 7U) {
+      if (tokenCapacity == 0) {
+        tokenCapacity = 0x10;
       }
       else {
-        uVar4 = uVar4 << 1;
+        tokenCapacity = tokenCapacity << 1;
       }
-      for (; uVar4 < iVar7 + 7U; uVar4 = uVar4 << 1) {
+      for (; tokenCapacity < tokenCount + 7U; tokenCapacity = tokenCapacity << 1) {
       }
-      if (*piVar17 == 0) {
-        allocation = _malloc(uVar4 << 2);
+      if (*tokenDataPtrAddr == 0) {
+        allocation = _malloc(tokenCapacity << 2);
       }
       else {
-        allocation = _realloc(*piVar17,uVar4 << 2);
+        allocation = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
       }
       if (allocation == 0) {
         if (param_1[9] == 0) {
@@ -2114,25 +2141,25 @@ LAB_00040e70:
         }
         goto LAB_00040ff0;
       }
-      *piVar17 = allocation;
-      param_1[0xc] = uVar4;
-      iVar7 = param_1[0xb];
+      *tokenDataPtrAddr = allocation;
+      param_1[0xc] = tokenCapacity;
+      tokenCount = param_1[0xb];
     }
     iVar3 = 0;
-    param_1[0xb] = iVar7 + 7;
-    puVar10 = (undefined4 *)(iVar7 * 4 + *piVar17);
-    *puVar10 = *param_3;
-    puVar10[1] = param_3[1];
-    puVar10[2] = param_3[2];
+    param_1[0xb] = tokenCount + 7;
+    tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
+    *tokenWritePtr = *param_3;
+    tokenWritePtr[1] = param_3[1];
+    tokenWritePtr[2] = param_3[2];
     puVar6 = param_3;
     do {
       bVar2 = iVar3 != 1;
       iVar3 = iVar3 + 1;
-      puVar10[3] = puVar6[3];
+      tokenWritePtr[3] = puVar6[3];
       puVar1 = puVar6 + 6;
       puVar6 = puVar6 + 1;
-      puVar10[4] = *puVar1;
-      puVar10 = puVar10 + 2;
+      tokenWritePtr[4] = *puVar1;
+      tokenWritePtr = tokenWritePtr + 2;
     } while (bVar2);
   }
 LAB_00040ff0:
@@ -2152,23 +2179,23 @@ LAB_00040ff0:
                uVar16 << 8 |
                uVar11 << 7 | uVar16 << 4 | uVar11 << 3 | uVar16 | *puVar13 & 0xffff0000;
     if (param_1[9] == 0) {
-      piVar17 = param_1 + 10;
-      iVar7 = param_1[0xb];
-      uVar11 = param_1[0xc];
-      if (uVar11 < iVar7 + 7U) {
-        if (uVar11 == 0) {
-          uVar11 = 0x10;
+      tokenDataPtrAddr = param_1 + 10;
+      tokenCount = param_1[0xb];
+      tokenCapacity2 = param_1[0xc];
+      if (tokenCapacity2 < tokenCount + 7U) {
+        if (tokenCapacity2 == 0) {
+          tokenCapacity2 = 0x10;
         }
         else {
-          uVar11 = uVar11 << 1;
+          tokenCapacity2 = tokenCapacity2 << 1;
         }
-        for (; uVar11 < iVar7 + 7U; uVar11 = uVar11 << 1) {
+        for (; tokenCapacity2 < tokenCount + 7U; tokenCapacity2 = tokenCapacity2 << 1) {
         }
-        if (*piVar17 == 0) {
-          allocation = _malloc(uVar11 << 2);
+        if (*tokenDataPtrAddr == 0) {
+          allocation = _malloc(tokenCapacity2 << 2);
         }
         else {
-          allocation = _realloc(*piVar17,uVar11 << 2);
+          allocation = _realloc(*tokenDataPtrAddr,tokenCapacity2 << 2);
         }
         if (allocation == 0) {
           if (param_1[9] == 0) {
@@ -2176,25 +2203,25 @@ LAB_00040ff0:
           }
           goto LAB_00041170;
         }
-        *piVar17 = allocation;
-        param_1[0xc] = uVar11;
-        iVar7 = param_1[0xb];
+        *tokenDataPtrAddr = allocation;
+        param_1[0xc] = tokenCapacity2;
+        tokenCount = param_1[0xb];
       }
       iVar3 = 0;
-      param_1[0xb] = iVar7 + 7;
-      puVar10 = (undefined4 *)(iVar7 * 4 + *piVar17);
-      *puVar10 = *param_3;
-      puVar10[1] = param_3[1];
-      puVar10[2] = param_3[2];
+      param_1[0xb] = tokenCount + 7;
+      tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
+      *tokenWritePtr = *param_3;
+      tokenWritePtr[1] = param_3[1];
+      tokenWritePtr[2] = param_3[2];
       puVar6 = param_3;
       do {
         bVar2 = iVar3 != 1;
         iVar3 = iVar3 + 1;
-        puVar10[3] = puVar6[3];
+        tokenWritePtr[3] = puVar6[3];
         puVar1 = puVar6 + 6;
         puVar6 = puVar6 + 1;
-        puVar10[4] = *puVar1;
-        puVar10 = puVar10 + 2;
+        tokenWritePtr[4] = *puVar1;
+        tokenWritePtr = tokenWritePtr + 2;
       } while (bVar2);
     }
   }
@@ -2210,25 +2237,25 @@ LAB_00041170:
   param_3[1] = unaff_r20;
   param_3[2] = unaff_r19;
   *(undefined2 *)((int)param_3 + 2) = 0x47;
-  iVar7 = param_1[9];
-  if (iVar7 == 0) {
-    piVar17 = param_1 + 10;
-    iVar7 = param_1[0xb];
-    uVar11 = param_1[0xc];
-    if (uVar11 < iVar7 + 5U) {
-      if (uVar11 == 0) {
-        uVar11 = 0x10;
+  translatorError = param_1[9];
+  if (translatorError == 0) {
+    tokenDataPtrAddr = param_1 + 10;
+    tokenCount = param_1[0xb];
+    tokenCapacity2 = param_1[0xc];
+    if (tokenCapacity2 < tokenCount + 5U) {
+      if (tokenCapacity2 == 0) {
+        tokenCapacity2 = 0x10;
       }
       else {
-        uVar11 = uVar11 << 1;
+        tokenCapacity2 = tokenCapacity2 << 1;
       }
-      for (; uVar11 < iVar7 + 5U; uVar11 = uVar11 << 1) {
+      for (; tokenCapacity2 < tokenCount + 5U; tokenCapacity2 = tokenCapacity2 << 1) {
       }
-      if (*piVar17 == 0) {
-        allocation = _malloc(uVar11 << 2);
+      if (*tokenDataPtrAddr == 0) {
+        allocation = _malloc(tokenCapacity2 << 2);
       }
       else {
-        allocation = _realloc(*piVar17,uVar11 << 2);
+        allocation = _realloc(*tokenDataPtrAddr,tokenCapacity2 << 2);
       }
       if (allocation == 0) {
         if (param_1[9] != 0) {
@@ -2237,20 +2264,20 @@ LAB_00041170:
         param_1[9] = 1;
         return 1;
       }
-      *piVar17 = allocation;
-      param_1[0xc] = uVar11;
-      iVar7 = param_1[0xb];
+      *tokenDataPtrAddr = allocation;
+      param_1[0xc] = tokenCapacity2;
+      tokenCount = param_1[0xb];
     }
-    param_1[0xb] = iVar7 + 5;
-    puVar10 = (undefined4 *)(iVar7 * 4 + *piVar17);
-    *puVar10 = *param_3;
-    puVar10[1] = param_3[1];
-    puVar10[2] = param_3[2];
-    puVar10[3] = param_3[3];
-    puVar10[4] = param_3[6];
-    iVar7 = param_1[9];
+    param_1[0xb] = tokenCount + 5;
+    tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
+    *tokenWritePtr = *param_3;
+    tokenWritePtr[1] = param_3[1];
+    tokenWritePtr[2] = param_3[2];
+    tokenWritePtr[3] = param_3[3];
+    tokenWritePtr[4] = param_3[6];
+    translatorError = param_1[9];
   }
-  return iVar7;
+  return translatorError;
 }
 
 /* fragmentTranslateTrig @ 0x41310 (488 bytes) */
@@ -2262,10 +2289,10 @@ int fragmentTranslateTrig(translator, slot, ilInstr)
   int allocation;
   undefined4 *tokenWritePtr;
   undefined2 uVar2;
-  uint uVar3;
-  int iVar4;
+  uint tokenCapacity;
+  int tokenCount;
   undefined4 uVar5;
-  int *piVar6;
+  int *tokenDataPtrAddr;
   undefined4 uStack_58;
   undefined4 uStack_54;
   undefined4 uStack_50;
@@ -2285,23 +2312,23 @@ int fragmentTranslateTrig(translator, slot, ilInstr)
   *(uint *)(ilInstr + 0xc) = *(uint *)(ilInstr + 0xc) | 0x400000;
   uStack_54 = uStack_54 | 0x400000;
   if (*(int *)(translator + 0x24) == 0) {
-    piVar6 = (int *)(translator + 0x28);
-    iVar4 = *(int *)(translator + 0x2c);
-    uVar3 = *(uint *)(translator + 0x30);
-    if (uVar3 < iVar4 + 5U) {
-      if (uVar3 == 0) {
-        uVar3 = 0x10;
+    tokenDataPtrAddr = (int *)(translator + 0x28);
+    tokenCount = *(int *)(translator + 0x2c);
+    tokenCapacity = *(uint *)(translator + 0x30);
+    if (tokenCapacity < tokenCount + 5U) {
+      if (tokenCapacity == 0) {
+        tokenCapacity = 0x10;
       }
       else {
-        uVar3 = uVar3 << 1;
+        tokenCapacity = tokenCapacity << 1;
       }
-      for (; uVar3 < iVar4 + 5U; uVar3 = uVar3 << 1) {
+      for (; tokenCapacity < tokenCount + 5U; tokenCapacity = tokenCapacity << 1) {
       }
-      if (*piVar6 == 0) {
-        allocation = _malloc(uVar3 << 2);
+      if (*tokenDataPtrAddr == 0) {
+        allocation = _malloc(tokenCapacity << 2);
       }
       else {
-        allocation = _realloc(*piVar6,uVar3 << 2);
+        allocation = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
       }
       if (allocation == 0) {
         if (*(int *)(translator + 0x24) == 0) {
@@ -2309,12 +2336,12 @@ int fragmentTranslateTrig(translator, slot, ilInstr)
         }
         goto LAB_000414c0;
       }
-      *piVar6 = allocation;
-      *(uint *)(translator + 0x30) = uVar3;
-      iVar4 = *(int *)(translator + 0x2c);
+      *tokenDataPtrAddr = allocation;
+      *(uint *)(translator + 0x30) = tokenCapacity;
+      tokenCount = *(int *)(translator + 0x2c);
     }
-    *(int *)(translator + 0x2c) = iVar4 + 5;
-    tokenWritePtr = (undefined4 *)(iVar4 * 4 + *piVar6);
+    *(int *)(translator + 0x2c) = tokenCount + 5;
+    tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
     *tokenWritePtr = uStack_58;
     tokenWritePtr[1] = uStack_54;
     tokenWritePtr[2] = uStack_50;
@@ -2338,15 +2365,18 @@ int fragmentTranslateAngleConvert(param_1, param_2, param_3, param_4, param_5, p
   undefined4 param_6;
   undefined4 param_7;
 {
+  uint tokenCapacity;
+  int translatorError;
+  int tokenCount;
   int allocation;
   undefined4 *puVar1;
   bool bVar2;
   int iVar3;
-  undefined4 *puVar4;
+  undefined4 *tokenWritePtr;
   dword *pdVar5;
   dword *pdVar6;
   undefined4 uVar7;
-  int *piVar8;
+  int *tokenDataPtrAddr;
   uint uVar9;
   
   iVar3 = (param_2 + *(int *)(*param_1 + 0x54)) * 8;
@@ -2363,59 +2393,59 @@ int fragmentTranslateAngleConvert(param_1, param_2, param_3, param_4, param_5, p
   if (param_1[9] != 0) {
     return param_1[9];
   }
-  piVar8 = param_1 + 10;
-  iVar3 = param_1[0xb];
-  uVar9 = param_1[0xc];
-  if (uVar9 < iVar3 + 7U) {
-    if (uVar9 == 0) {
-      uVar9 = 0x10;
+  tokenDataPtrAddr = param_1 + 10;
+  tokenCount = param_1[0xb];
+  tokenCapacity = param_1[0xc];
+  if (tokenCapacity < tokenCount + 7U) {
+    if (tokenCapacity == 0) {
+      tokenCapacity = 0x10;
     }
     else {
-      uVar9 = uVar9 << 1;
+      tokenCapacity = tokenCapacity << 1;
     }
-    for (; uVar9 < iVar3 + 7U; uVar9 = uVar9 << 1) {
+    for (; tokenCapacity < tokenCount + 7U; tokenCapacity = tokenCapacity << 1) {
     }
-    if (*piVar8 == 0) {
-      allocation = _malloc(uVar9 << 2);
+    if (*tokenDataPtrAddr == 0) {
+      allocation = _malloc(tokenCapacity << 2);
     }
     else {
-      allocation = _realloc(*piVar8,uVar9 << 2);
+      allocation = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
     }
     if (allocation == 0) {
-      iVar3 = param_1[9];
-      if (iVar3 == 0) {
-        iVar3 = 1;
+      translatorError = param_1[9];
+      if (translatorError == 0) {
+        translatorError = 1;
         param_1[9] = 1;
       }
-      if (iVar3 != 0) {
-        return iVar3;
+      if (translatorError != 0) {
+        return translatorError;
       }
-      puVar4 = (undefined4 *)0x0;
+      tokenWritePtr = (undefined4 *)0x0;
       pdVar5 = ((unsigned char *)0x4);
       pdVar6 = ((unsigned char *)0x8);
       goto LAB_00041698;
     }
-    *piVar8 = allocation;
-    param_1[0xc] = uVar9;
-    iVar3 = param_1[0xb];
+    *tokenDataPtrAddr = allocation;
+    param_1[0xc] = tokenCapacity;
+    tokenCount = param_1[0xb];
   }
-  param_1[0xb] = iVar3 + 7;
-  puVar4 = (undefined4 *)(iVar3 * 4 + *piVar8);
-  pdVar5 = puVar4 + 1;
-  pdVar6 = puVar4 + 2;
+  param_1[0xb] = tokenCount + 7;
+  tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
+  pdVar5 = tokenWritePtr + 1;
+  pdVar6 = tokenWritePtr + 2;
 LAB_00041698:
   iVar3 = 0;
-  *puVar4 = *param_3;
+  *tokenWritePtr = *param_3;
   *pdVar5 = param_3[1];
   *pdVar6 = param_3[2];
   do {
     bVar2 = iVar3 != 1;
     iVar3 = iVar3 + 1;
-    puVar4[3] = param_3[3];
+    tokenWritePtr[3] = param_3[3];
     puVar1 = param_3 + 6;
     param_3 = param_3 + 1;
-    puVar4[4] = *puVar1;
-    puVar4 = puVar4 + 2;
+    tokenWritePtr[4] = *puVar1;
+    tokenWritePtr = tokenWritePtr + 2;
   } while (bVar2);
   return 0;
 }
@@ -3797,16 +3827,17 @@ int fragmentTranslateFfw(translator, slot, ilInstr)
   undefined4 slot;
   undefined4 *ilInstr;
 {
+  int tokenCount;
   int allocation;
   undefined4 *puVar1;
   bool bVar2;
-  uint uVar3;
-  int iVar4;
+  uint tokenCapacity;
+  int translatorError;
   int iVar5;
   undefined4 uVar6;
   undefined4 uVar7;
   undefined4 *tokenWritePtr;
-  int *piVar9;
+  int *tokenDataPtrAddr;
   
   uVar6 = ilInstr[5];
   uVar7 = ilInstr[8];
@@ -3814,25 +3845,25 @@ int fragmentTranslateFfw(translator, slot, ilInstr)
   ilInstr[8] = ilInstr[6];
   ilInstr[3] = uVar6;
   ilInstr[6] = uVar7;
-  iVar4 = *(int *)(translator + 0x24);
-  if (iVar4 == 0) {
-    piVar9 = (int *)(translator + 0x28);
-    iVar4 = *(int *)(translator + 0x2c);
-    uVar3 = *(uint *)(translator + 0x30);
-    if (uVar3 < iVar4 + 9U) {
-      if (uVar3 == 0) {
-        uVar3 = 0x10;
+  translatorError = *(int *)(translator + 0x24);
+  if (translatorError == 0) {
+    tokenDataPtrAddr = (int *)(translator + 0x28);
+    tokenCount = *(int *)(translator + 0x2c);
+    tokenCapacity = *(uint *)(translator + 0x30);
+    if (tokenCapacity < tokenCount + 9U) {
+      if (tokenCapacity == 0) {
+        tokenCapacity = 0x10;
       }
       else {
-        uVar3 = uVar3 << 1;
+        tokenCapacity = tokenCapacity << 1;
       }
-      for (; uVar3 < iVar4 + 9U; uVar3 = uVar3 << 1) {
+      for (; tokenCapacity < tokenCount + 9U; tokenCapacity = tokenCapacity << 1) {
       }
-      if (*piVar9 == 0) {
-        allocation = _malloc(uVar3 << 2);
+      if (*tokenDataPtrAddr == 0) {
+        allocation = _malloc(tokenCapacity << 2);
       }
       else {
-        allocation = _realloc(*piVar9,uVar3 << 2);
+        allocation = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
       }
       if (allocation == 0) {
         if (*(int *)(translator + 0x24) != 0) {
@@ -3841,13 +3872,13 @@ int fragmentTranslateFfw(translator, slot, ilInstr)
         *(undefined4 *)(translator + 0x24) = 1;
         return 1;
       }
-      *piVar9 = allocation;
-      *(uint *)(translator + 0x30) = uVar3;
-      iVar4 = *(int *)(translator + 0x2c);
+      *tokenDataPtrAddr = allocation;
+      *(uint *)(translator + 0x30) = tokenCapacity;
+      tokenCount = *(int *)(translator + 0x2c);
     }
     iVar5 = 0;
-    *(int *)(translator + 0x2c) = iVar4 + 9;
-    tokenWritePtr = (undefined4 *)(iVar4 * 4 + *piVar9);
+    *(int *)(translator + 0x2c) = tokenCount + 9;
+    tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
     *tokenWritePtr = *ilInstr;
     tokenWritePtr[1] = ilInstr[1];
     tokenWritePtr[2] = ilInstr[2];
@@ -3860,9 +3891,9 @@ int fragmentTranslateFfw(translator, slot, ilInstr)
       tokenWritePtr[4] = *puVar1;
       tokenWritePtr = tokenWritePtr + 2;
     } while (bVar2);
-    iVar4 = *(int *)(translator + 0x24);
+    translatorError = *(int *)(translator + 0x24);
   }
-  return iVar4;
+  return translatorError;
 }
 
 /* fragmentTranslateDst @ 0x43f60 (996 bytes) */
@@ -3874,29 +3905,29 @@ int fragmentTranslateDst(translator, slot, ilInstr)
   int allocation;
   undefined4 *puVar1;
   bool bVar2;
-  uint uVar3;
-  int iVar4;
+  uint tokenCapacity;
+  int tokenCount;
   int iVar5;
   undefined4 *puVar6;
   undefined4 uVar7;
   undefined4 *tokenWritePtr;
   undefined4 uVar9;
   undefined4 uVar10;
-  int *piVar11;
+  int *tokenDataPtrAddr;
   
   if ((*(uint *)(translator + 0x14) & 0x20000000) == 0) {
     *(undefined2 *)((int)ilInstr + 2) = 0x24;
     if (*(int *)(translator + 0x24) != 0) {
       return *(int *)(translator + 0x24);
     }
-    piVar11 = (int *)(translator + 0x28);
-    iVar4 = *(int *)(translator + 0x2c);
-    uVar3 = *(uint *)(translator + 0x30);
-    if (iVar4 + 7U <= uVar3) {
+    tokenDataPtrAddr = (int *)(translator + 0x28);
+    tokenCount = *(int *)(translator + 0x2c);
+    tokenCapacity = *(uint *)(translator + 0x30);
+    if (tokenCount + 7U <= tokenCapacity) {
 LAB_000442bc:
       iVar5 = 0;
-      *(int *)(translator + 0x2c) = iVar4 + 7;
-      tokenWritePtr = (undefined4 *)(iVar4 * 4 + *piVar11);
+      *(int *)(translator + 0x2c) = tokenCount + 7;
+      tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
       *tokenWritePtr = *ilInstr;
       tokenWritePtr[1] = ilInstr[1];
       tokenWritePtr[2] = ilInstr[2];
@@ -3911,24 +3942,24 @@ LAB_000442bc:
       } while (bVar2);
       return *(int *)(translator + 0x24);
     }
-    if (uVar3 == 0) {
-      uVar3 = 0x10;
+    if (tokenCapacity == 0) {
+      tokenCapacity = 0x10;
     }
     else {
-      uVar3 = uVar3 << 1;
+      tokenCapacity = tokenCapacity << 1;
     }
-    for (; uVar3 < iVar4 + 7U; uVar3 = uVar3 << 1) {
+    for (; tokenCapacity < tokenCount + 7U; tokenCapacity = tokenCapacity << 1) {
     }
-    if (*piVar11 == 0) {
-      allocation = _malloc(uVar3 << 2);
+    if (*tokenDataPtrAddr == 0) {
+      allocation = _malloc(tokenCapacity << 2);
     }
     else {
-      allocation = _realloc(*piVar11,uVar3 << 2);
+      allocation = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
     }
     if (allocation != 0) {
-      *piVar11 = allocation;
-      *(uint *)(translator + 0x30) = uVar3;
-      iVar4 = *(int *)(translator + 0x2c);
+      *tokenDataPtrAddr = allocation;
+      *(uint *)(translator + 0x30) = tokenCapacity;
+      tokenCount = *(int *)(translator + 0x2c);
       goto LAB_000442bc;
     }
     goto LAB_0004432c;
@@ -3941,23 +3972,23 @@ LAB_000442bc:
   ilInstr[2] = 0x55;
   ilInstr[1] = ilInstr[1] | 0x400000;
   if (*(int *)(translator + 0x24) == 0) {
-    piVar11 = (int *)(translator + 0x28);
-    iVar4 = *(int *)(translator + 0x2c);
-    uVar3 = *(uint *)(translator + 0x30);
-    if (uVar3 < iVar4 + 7U) {
-      if (uVar3 == 0) {
-        uVar3 = 0x10;
+    tokenDataPtrAddr = (int *)(translator + 0x28);
+    tokenCount = *(int *)(translator + 0x2c);
+    tokenCapacity = *(uint *)(translator + 0x30);
+    if (tokenCapacity < tokenCount + 7U) {
+      if (tokenCapacity == 0) {
+        tokenCapacity = 0x10;
       }
       else {
-        uVar3 = uVar3 << 1;
+        tokenCapacity = tokenCapacity << 1;
       }
-      for (; uVar3 < iVar4 + 7U; uVar3 = uVar3 << 1) {
+      for (; tokenCapacity < tokenCount + 7U; tokenCapacity = tokenCapacity << 1) {
       }
-      if (*piVar11 == 0) {
-        allocation = _malloc(uVar3 << 2);
+      if (*tokenDataPtrAddr == 0) {
+        allocation = _malloc(tokenCapacity << 2);
       }
       else {
-        allocation = _realloc(*piVar11,uVar3 << 2);
+        allocation = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
       }
       if (allocation == 0) {
         if (*(int *)(translator + 0x24) == 0) {
@@ -3965,13 +3996,13 @@ LAB_000442bc:
         }
         goto LAB_000440e0;
       }
-      *piVar11 = allocation;
-      *(uint *)(translator + 0x30) = uVar3;
-      iVar4 = *(int *)(translator + 0x2c);
+      *tokenDataPtrAddr = allocation;
+      *(uint *)(translator + 0x30) = tokenCapacity;
+      tokenCount = *(int *)(translator + 0x2c);
     }
     iVar5 = 0;
-    *(int *)(translator + 0x2c) = iVar4 + 7;
-    tokenWritePtr = (undefined4 *)(iVar4 * 4 + *piVar11);
+    *(int *)(translator + 0x2c) = tokenCount + 7;
+    tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
     *tokenWritePtr = *ilInstr;
     tokenWritePtr[1] = ilInstr[1];
     tokenWritePtr[2] = ilInstr[2];
@@ -3999,23 +4030,23 @@ LAB_000440e0:
   if (*(int *)(translator + 0x24) != 0) {
     return *(int *)(translator + 0x24);
   }
-  piVar11 = (int *)(translator + 0x28);
-  iVar4 = *(int *)(translator + 0x2c);
-  uVar3 = *(uint *)(translator + 0x30);
-  if (uVar3 < iVar4 + 5U) {
-    if (uVar3 == 0) {
-      uVar3 = 0x10;
+  tokenDataPtrAddr = (int *)(translator + 0x28);
+  tokenCount = *(int *)(translator + 0x2c);
+  tokenCapacity = *(uint *)(translator + 0x30);
+  if (tokenCapacity < tokenCount + 5U) {
+    if (tokenCapacity == 0) {
+      tokenCapacity = 0x10;
     }
     else {
-      uVar3 = uVar3 << 1;
+      tokenCapacity = tokenCapacity << 1;
     }
-    for (; uVar3 < iVar4 + 5U; uVar3 = uVar3 << 1) {
+    for (; tokenCapacity < tokenCount + 5U; tokenCapacity = tokenCapacity << 1) {
     }
-    if (*piVar11 == 0) {
-      allocation = _malloc(uVar3 << 2);
+    if (*tokenDataPtrAddr == 0) {
+      allocation = _malloc(tokenCapacity << 2);
     }
     else {
-      allocation = _realloc(*piVar11,uVar3 << 2);
+      allocation = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
     }
     if (allocation == 0) {
 LAB_0004432c:
@@ -4025,12 +4056,12 @@ LAB_0004432c:
       }
       return *(int *)(translator + 0x24);
     }
-    *piVar11 = allocation;
-    *(uint *)(translator + 0x30) = uVar3;
-    iVar4 = *(int *)(translator + 0x2c);
+    *tokenDataPtrAddr = allocation;
+    *(uint *)(translator + 0x30) = tokenCapacity;
+    tokenCount = *(int *)(translator + 0x2c);
   }
-  *(int *)(translator + 0x2c) = iVar4 + 5;
-  tokenWritePtr = (undefined4 *)(iVar4 * 4 + *piVar11);
+  *(int *)(translator + 0x2c) = tokenCount + 5;
+  tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
   *tokenWritePtr = *ilInstr;
   tokenWritePtr[1] = ilInstr[1];
   tokenWritePtr[2] = ilInstr[2];
@@ -4045,13 +4076,15 @@ int fragmentTranslateIf(translator, slot, ilInstr)
   undefined4 slot;
   undefined4 *ilInstr;
 {
+  int translatorError;
+  int tokenCount;
   int allocation;
   undefined4 *puVar1;
   bool bVar2;
-  uint uVar3;
+  uint tokenCapacity;
   int iVar4;
-  undefined4 *puVar5;
-  int *piVar6;
+  undefined4 *tokenWritePtr;
+  int *tokenDataPtrAddr;
   
   ilInstr[4] = 0x40000;
   *(undefined2 *)((int)ilInstr + 0x12) = 0;
@@ -4060,53 +4093,53 @@ int fragmentTranslateIf(translator, slot, ilInstr)
   if (*(int *)(translator + 0x24) != 0) {
     return *(int *)(translator + 0x24);
   }
-  piVar6 = (int *)(translator + 0x28);
-  iVar4 = *(int *)(translator + 0x2c);
-  uVar3 = *(uint *)(translator + 0x30);
-  if (uVar3 < iVar4 + 5U) {
-    if (uVar3 == 0) {
-      uVar3 = 0x10;
+  tokenDataPtrAddr = (int *)(translator + 0x28);
+  tokenCount = *(int *)(translator + 0x2c);
+  tokenCapacity = *(uint *)(translator + 0x30);
+  if (tokenCapacity < tokenCount + 5U) {
+    if (tokenCapacity == 0) {
+      tokenCapacity = 0x10;
     }
     else {
-      uVar3 = uVar3 << 1;
+      tokenCapacity = tokenCapacity << 1;
     }
-    for (; uVar3 < iVar4 + 5U; uVar3 = uVar3 << 1) {
+    for (; tokenCapacity < tokenCount + 5U; tokenCapacity = tokenCapacity << 1) {
     }
-    if (*piVar6 == 0) {
-      allocation = _malloc(uVar3 << 2);
+    if (*tokenDataPtrAddr == 0) {
+      allocation = _malloc(tokenCapacity << 2);
     }
     else {
-      allocation = _realloc(*piVar6,uVar3 << 2);
+      allocation = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
     }
     if (allocation == 0) {
-      iVar4 = *(int *)(translator + 0x24);
-      if (iVar4 == 0) {
-        iVar4 = 1;
+      translatorError = *(int *)(translator + 0x24);
+      if (translatorError == 0) {
+        translatorError = 1;
         *(undefined4 *)(translator + 0x24) = 1;
       }
-      puVar5 = (undefined4 *)0x0;
-      if (iVar4 != 0) {
-        return iVar4;
+      tokenWritePtr = (undefined4 *)0x0;
+      if (translatorError != 0) {
+        return translatorError;
       }
       goto LAB_00044460;
     }
-    *piVar6 = allocation;
-    *(uint *)(translator + 0x30) = uVar3;
-    iVar4 = *(int *)(translator + 0x2c);
+    *tokenDataPtrAddr = allocation;
+    *(uint *)(translator + 0x30) = tokenCapacity;
+    tokenCount = *(int *)(translator + 0x2c);
   }
-  *(int *)(translator + 0x2c) = iVar4 + 5;
-  puVar5 = (undefined4 *)(iVar4 * 4 + *piVar6);
+  *(int *)(translator + 0x2c) = tokenCount + 5;
+  tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
 LAB_00044460:
   iVar4 = 0;
-  *puVar5 = *ilInstr;
+  *tokenWritePtr = *ilInstr;
   do {
     bVar2 = iVar4 != 1;
     iVar4 = iVar4 + 1;
-    puVar5[1] = ilInstr[3];
+    tokenWritePtr[1] = ilInstr[3];
     puVar1 = ilInstr + 6;
     ilInstr = ilInstr + 1;
-    puVar5[2] = *puVar1;
-    puVar5 = puVar5 + 2;
+    tokenWritePtr[2] = *puVar1;
+    tokenWritePtr = tokenWritePtr + 2;
   } while (bVar2);
   return 0;
 }
@@ -4117,14 +4150,15 @@ int fragmentTranslateRfl(translator, slot, ilInstr)
   undefined4 slot;
   int ilInstr;
 {
+  int tokenCount;
   int allocation;
   undefined4 *recordWordNext;
-  uint uVar2;
-  int iVar3;
+  uint tokenCapacity;
+  int translatorError;
   undefined2 uVar4;
   undefined4 *recordPtr;
   undefined4 *tokenWritePtr;
-  int *piVar7;
+  int *tokenDataPtrAddr;
   undefined4 uStack_58;
   undefined4 uStack_54;
   undefined4 uStack_50;
@@ -4135,7 +4169,7 @@ int fragmentTranslateRfl(translator, slot, ilInstr)
   undefined *puStack_3c;
   
   _memset(&uStack_58,0,0x24);
-  iVar3 = *(int *)(translator + 0x24);
+  translatorError = *(int *)(translator + 0x24);
   uVar4 = (undefined2)*(undefined4 *)(translator + 0x20);
   uStack_54 = CONCAT22(4,uVar4);
   uStack_58 = CONCAT22((*(unsigned short *)((unsigned char *)&(uStack_58) + 0)),0x23);
@@ -4145,41 +4179,41 @@ int fragmentTranslateRfl(translator, slot, ilInstr)
   uStack_48 = *(undefined4 *)(ilInstr + 0x10);
   puStack_3c = (undefined *)*(undefined4 *)(ilInstr + 0x1c);
   uStack_54 = uStack_54 | 0x400000;
-  if (iVar3 == 0) {
-    piVar7 = (int *)(translator + 0x28);
-    iVar3 = *(int *)(translator + 0x2c);
-    uVar2 = *(uint *)(translator + 0x30);
-    if (uVar2 < iVar3 + 7U) {
-      if (uVar2 == 0) {
-        uVar2 = 0x10;
+  if (translatorError == 0) {
+    tokenDataPtrAddr = (int *)(translator + 0x28);
+    tokenCount = *(int *)(translator + 0x2c);
+    tokenCapacity = *(uint *)(translator + 0x30);
+    if (tokenCapacity < tokenCount + 7U) {
+      if (tokenCapacity == 0) {
+        tokenCapacity = 0x10;
       }
       else {
-        uVar2 = uVar2 << 1;
+        tokenCapacity = tokenCapacity << 1;
       }
-      for (; uVar2 < iVar3 + 7U; uVar2 = uVar2 << 1) {
+      for (; tokenCapacity < tokenCount + 7U; tokenCapacity = tokenCapacity << 1) {
       }
-      if (*piVar7 == 0) {
-        allocation = _malloc(uVar2 << 2);
+      if (*tokenDataPtrAddr == 0) {
+        allocation = _malloc(tokenCapacity << 2);
       }
       else {
-        allocation = _realloc(*piVar7,uVar2 << 2);
+        allocation = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
       }
       if (allocation == 0) {
-        iVar3 = *(int *)(translator + 0x24);
-        if (iVar3 == 0) {
-          iVar3 = 1;
+        translatorError = *(int *)(translator + 0x24);
+        if (translatorError == 0) {
+          translatorError = 1;
           *(undefined4 *)(translator + 0x24) = 1;
         }
         uVar4 = (undefined2)*(undefined4 *)(translator + 0x20);
         goto LAB_000446a0;
       }
-      *piVar7 = allocation;
-      *(uint *)(translator + 0x30) = uVar2;
-      iVar3 = *(int *)(translator + 0x2c);
+      *tokenDataPtrAddr = allocation;
+      *(uint *)(translator + 0x30) = tokenCapacity;
+      tokenCount = *(int *)(translator + 0x2c);
     }
     recordPtr = &uStack_4c;
-    *(int *)(translator + 0x2c) = iVar3 + 7;
-    tokenWritePtr = (undefined4 *)(iVar3 * 4 + *piVar7);
+    *(int *)(translator + 0x2c) = tokenCount + 7;
+    tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
     *tokenWritePtr = uStack_58;
     tokenWritePtr[1] = uStack_54;
     tokenWritePtr[2] = uStack_50;
@@ -4191,48 +4225,48 @@ int fragmentTranslateRfl(translator, slot, ilInstr)
       tokenWritePtr = tokenWritePtr + 2;
     } while (&uStack_44 != recordPtr);
     uVar4 = (undefined2)*(undefined4 *)(translator + 0x20);
-    iVar3 = *(int *)(translator + 0x24);
+    translatorError = *(int *)(translator + 0x24);
   }
 LAB_000446a0:
   uStack_4c = CONCAT22(4,uVar4);
   uStack_58 = CONCAT22((*(unsigned short *)((unsigned char *)&(uStack_58) + 0)),0x49);
   puStack_40 = ((unsigned char *)0x00003210);
   uStack_4c = uStack_4c | 0x400000;
-  if (iVar3 == 0) {
-    piVar7 = (int *)(translator + 0x28);
-    iVar3 = *(int *)(translator + 0x2c);
-    uVar2 = *(uint *)(translator + 0x30);
-    if (uVar2 < iVar3 + 7U) {
-      if (uVar2 == 0) {
-        uVar2 = 0x10;
+  if (translatorError == 0) {
+    tokenDataPtrAddr = (int *)(translator + 0x28);
+    tokenCount = *(int *)(translator + 0x2c);
+    tokenCapacity = *(uint *)(translator + 0x30);
+    if (tokenCapacity < tokenCount + 7U) {
+      if (tokenCapacity == 0) {
+        tokenCapacity = 0x10;
       }
       else {
-        uVar2 = uVar2 << 1;
+        tokenCapacity = tokenCapacity << 1;
       }
-      for (; uVar2 < iVar3 + 7U; uVar2 = uVar2 << 1) {
+      for (; tokenCapacity < tokenCount + 7U; tokenCapacity = tokenCapacity << 1) {
       }
-      if (*piVar7 == 0) {
-        allocation = _malloc(uVar2 << 2);
+      if (*tokenDataPtrAddr == 0) {
+        allocation = _malloc(tokenCapacity << 2);
       }
       else {
-        allocation = _realloc(*piVar7,uVar2 << 2);
+        allocation = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
       }
       if (allocation == 0) {
-        iVar3 = *(int *)(translator + 0x24);
-        if (iVar3 == 0) {
-          iVar3 = 1;
+        translatorError = *(int *)(translator + 0x24);
+        if (translatorError == 0) {
+          translatorError = 1;
           *(undefined4 *)(translator + 0x24) = 1;
         }
         uVar4 = (undefined2)*(undefined4 *)(translator + 0x20);
         goto LAB_00044810;
       }
-      *piVar7 = allocation;
-      *(uint *)(translator + 0x30) = uVar2;
-      iVar3 = *(int *)(translator + 0x2c);
+      *tokenDataPtrAddr = allocation;
+      *(uint *)(translator + 0x30) = tokenCapacity;
+      tokenCount = *(int *)(translator + 0x2c);
     }
     recordPtr = &uStack_4c;
-    *(int *)(translator + 0x2c) = iVar3 + 7;
-    tokenWritePtr = (undefined4 *)(iVar3 * 4 + *piVar7);
+    *(int *)(translator + 0x2c) = tokenCount + 7;
+    tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
     *tokenWritePtr = uStack_58;
     tokenWritePtr[1] = uStack_54;
     tokenWritePtr[2] = uStack_50;
@@ -4244,47 +4278,47 @@ LAB_000446a0:
       tokenWritePtr = tokenWritePtr + 2;
     } while (&uStack_44 != recordPtr);
     uVar4 = (undefined2)*(undefined4 *)(translator + 0x20);
-    iVar3 = *(int *)(translator + 0x24);
+    translatorError = *(int *)(translator + 0x24);
   }
 LAB_00044810:
   uStack_48 = CONCAT22(4,uVar4);
   uStack_58 = CONCAT22((*(unsigned short *)((unsigned char *)&(uStack_58) + 0)),3);
   puStack_3c = ((unsigned char *)0x00003210);
   uStack_48 = uStack_48 | 0x400000;
-  if (iVar3 == 0) {
-    piVar7 = (int *)(translator + 0x28);
-    iVar3 = *(int *)(translator + 0x2c);
-    uVar2 = *(uint *)(translator + 0x30);
-    if (uVar2 < iVar3 + 7U) {
-      if (uVar2 == 0) {
-        uVar2 = 0x10;
+  if (translatorError == 0) {
+    tokenDataPtrAddr = (int *)(translator + 0x28);
+    tokenCount = *(int *)(translator + 0x2c);
+    tokenCapacity = *(uint *)(translator + 0x30);
+    if (tokenCapacity < tokenCount + 7U) {
+      if (tokenCapacity == 0) {
+        tokenCapacity = 0x10;
       }
       else {
-        uVar2 = uVar2 << 1;
+        tokenCapacity = tokenCapacity << 1;
       }
-      for (; uVar2 < iVar3 + 7U; uVar2 = uVar2 << 1) {
+      for (; tokenCapacity < tokenCount + 7U; tokenCapacity = tokenCapacity << 1) {
       }
-      if (*piVar7 == 0) {
-        allocation = _malloc(uVar2 << 2);
+      if (*tokenDataPtrAddr == 0) {
+        allocation = _malloc(tokenCapacity << 2);
       }
       else {
-        allocation = _realloc(*piVar7,uVar2 << 2);
+        allocation = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
       }
       if (allocation == 0) {
-        iVar3 = *(int *)(translator + 0x24);
-        if (iVar3 == 0) {
-          iVar3 = 1;
+        translatorError = *(int *)(translator + 0x24);
+        if (translatorError == 0) {
+          translatorError = 1;
           *(undefined4 *)(translator + 0x24) = 1;
         }
         goto LAB_00044970;
       }
-      *piVar7 = allocation;
-      *(uint *)(translator + 0x30) = uVar2;
-      iVar3 = *(int *)(translator + 0x2c);
+      *tokenDataPtrAddr = allocation;
+      *(uint *)(translator + 0x30) = tokenCapacity;
+      tokenCount = *(int *)(translator + 0x2c);
     }
     recordPtr = &uStack_4c;
-    *(int *)(translator + 0x2c) = iVar3 + 7;
-    tokenWritePtr = (undefined4 *)(iVar3 * 4 + *piVar7);
+    *(int *)(translator + 0x2c) = tokenCount + 7;
+    tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
     *tokenWritePtr = uStack_58;
     tokenWritePtr[1] = uStack_54;
     tokenWritePtr[2] = uStack_50;
@@ -4295,7 +4329,7 @@ LAB_00044810:
       tokenWritePtr[4] = *recordWordNext;
       tokenWritePtr = tokenWritePtr + 2;
     } while (recordPtr != &uStack_44);
-    iVar3 = *(int *)(translator + 0x24);
+    translatorError = *(int *)(translator + 0x24);
   }
 LAB_00044970:
   uStack_54 = *(undefined4 *)(ilInstr + 4);
@@ -4303,24 +4337,24 @@ LAB_00044970:
   uStack_58 = CONCAT22((*(unsigned short *)((unsigned char *)&(uStack_58) + 0)),0x5b);
   puStack_40 = (undefined *)*(undefined4 *)(ilInstr + 0x18);
   uStack_4c = *(undefined4 *)(ilInstr + 0xc);
-  if (iVar3 == 0) {
-    piVar7 = (int *)(translator + 0x28);
-    iVar3 = *(int *)(translator + 0x2c);
-    uVar2 = *(uint *)(translator + 0x30);
-    if (uVar2 < iVar3 + 7U) {
-      if (uVar2 == 0) {
-        uVar2 = 0x10;
+  if (translatorError == 0) {
+    tokenDataPtrAddr = (int *)(translator + 0x28);
+    tokenCount = *(int *)(translator + 0x2c);
+    tokenCapacity = *(uint *)(translator + 0x30);
+    if (tokenCapacity < tokenCount + 7U) {
+      if (tokenCapacity == 0) {
+        tokenCapacity = 0x10;
       }
       else {
-        uVar2 = uVar2 << 1;
+        tokenCapacity = tokenCapacity << 1;
       }
-      for (; uVar2 < iVar3 + 7U; uVar2 = uVar2 << 1) {
+      for (; tokenCapacity < tokenCount + 7U; tokenCapacity = tokenCapacity << 1) {
       }
-      if (*piVar7 == 0) {
-        allocation = _malloc(uVar2 << 2);
+      if (*tokenDataPtrAddr == 0) {
+        allocation = _malloc(tokenCapacity << 2);
       }
       else {
-        allocation = _realloc(*piVar7,uVar2 << 2);
+        allocation = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
       }
       if (allocation == 0) {
         if (*(int *)(translator + 0x24) != 0) {
@@ -4329,13 +4363,13 @@ LAB_00044970:
         *(undefined4 *)(translator + 0x24) = 1;
         return 1;
       }
-      *piVar7 = allocation;
-      *(uint *)(translator + 0x30) = uVar2;
-      iVar3 = *(int *)(translator + 0x2c);
+      *tokenDataPtrAddr = allocation;
+      *(uint *)(translator + 0x30) = tokenCapacity;
+      tokenCount = *(int *)(translator + 0x2c);
     }
     recordPtr = &uStack_4c;
-    *(int *)(translator + 0x2c) = iVar3 + 7;
-    tokenWritePtr = (undefined4 *)(iVar3 * 4 + *piVar7);
+    *(int *)(translator + 0x2c) = tokenCount + 7;
+    tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
     *tokenWritePtr = uStack_58;
     tokenWritePtr[1] = uStack_54;
     tokenWritePtr[2] = uStack_50;
@@ -4346,9 +4380,9 @@ LAB_00044970:
       tokenWritePtr[4] = *recordWordNext;
       tokenWritePtr = tokenWritePtr + 2;
     } while (recordPtr != &uStack_44);
-    iVar3 = *(int *)(translator + 0x24);
+    translatorError = *(int *)(translator + 0x24);
   }
-  return iVar3;
+  return translatorError;
 }
 
 /* fragmentTranslateWhile @ 0x44ac0 (440 bytes) */
@@ -4357,13 +4391,15 @@ int fragmentTranslateWhile(translator, slot, ilInstr)
   undefined4 slot;
   undefined4 *ilInstr;
 {
+  uint tokenCapacity;
+  int translatorError;
   int allocation;
   uint uVar1;
-  int iVar2;
-  undefined4 *puVar3;
+  int tokenCount;
+  undefined4 *tokenWritePtr;
   dword *pdVar4;
   dword *pdVar5;
-  int *piVar6;
+  int *tokenDataPtrAddr;
   uint auStack_38 [9];
   
   uVar1 = *(uint *)(translator + 0x14);
@@ -4380,48 +4416,48 @@ int fragmentTranslateWhile(translator, slot, ilInstr)
   if (*(int *)(translator + 0x24) != 0) {
     return *(int *)(translator + 0x24);
   }
-  piVar6 = (int *)(translator + 0x28);
-  iVar2 = *(int *)(translator + 0x2c);
-  uVar1 = *(uint *)(translator + 0x30);
-  if (uVar1 < iVar2 + 3U) {
-    if (uVar1 == 0) {
-      uVar1 = 0x10;
+  tokenDataPtrAddr = (int *)(translator + 0x28);
+  tokenCount = *(int *)(translator + 0x2c);
+  tokenCapacity = *(uint *)(translator + 0x30);
+  if (tokenCapacity < tokenCount + 3U) {
+    if (tokenCapacity == 0) {
+      tokenCapacity = 0x10;
     }
     else {
-      uVar1 = uVar1 << 1;
+      tokenCapacity = tokenCapacity << 1;
     }
-    for (; uVar1 < iVar2 + 3U; uVar1 = uVar1 << 1) {
+    for (; tokenCapacity < tokenCount + 3U; tokenCapacity = tokenCapacity << 1) {
     }
-    if (*piVar6 == 0) {
-      allocation = _malloc(uVar1 << 2);
+    if (*tokenDataPtrAddr == 0) {
+      allocation = _malloc(tokenCapacity << 2);
     }
     else {
-      allocation = _realloc(*piVar6,uVar1 << 2);
+      allocation = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
     }
     if (allocation == 0) {
-      iVar2 = *(int *)(translator + 0x24);
-      if (iVar2 == 0) {
-        iVar2 = 1;
+      translatorError = *(int *)(translator + 0x24);
+      if (translatorError == 0) {
+        translatorError = 1;
         *(undefined4 *)(translator + 0x24) = 1;
       }
-      if (iVar2 != 0) {
-        return iVar2;
+      if (translatorError != 0) {
+        return translatorError;
       }
-      puVar3 = (undefined4 *)0x0;
+      tokenWritePtr = (undefined4 *)0x0;
       pdVar5 = ((unsigned char *)0x4);
       pdVar4 = ((unsigned char *)0x8);
       goto LAB_00044c08;
     }
-    *piVar6 = allocation;
-    *(uint *)(translator + 0x30) = uVar1;
-    iVar2 = *(int *)(translator + 0x2c);
+    *tokenDataPtrAddr = allocation;
+    *(uint *)(translator + 0x30) = tokenCapacity;
+    tokenCount = *(int *)(translator + 0x2c);
   }
-  *(int *)(translator + 0x2c) = iVar2 + 3;
-  puVar3 = (undefined4 *)(iVar2 * 4 + *piVar6);
-  pdVar5 = puVar3 + 1;
-  pdVar4 = puVar3 + 2;
+  *(int *)(translator + 0x2c) = tokenCount + 3;
+  tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
+  pdVar5 = tokenWritePtr + 1;
+  pdVar4 = tokenWritePtr + 2;
 LAB_00044c08:
-  *puVar3 = *ilInstr;
+  *tokenWritePtr = *ilInstr;
   *pdVar5 = ilInstr[3];
   *pdVar4 = ilInstr[6];
   return 0;
@@ -5203,6 +5239,9 @@ int fragmentTranslateAll(param_1, param_2, param_3)
   int param_2;
   int param_3;
 {
+  uint tokenCapacity;
+  int tokenCount2;
+  int tokenCount;
   undefined4 *recordPtr2;
   undefined4 *recordPtr;
   undefined4 *recordWordNext2;
@@ -5217,7 +5256,7 @@ int fragmentTranslateAll(param_1, param_2, param_3)
   undefined4 *puVar7;
   undefined4 *recordWordNext3;
   int iVar9;
-  int *piVar10;
+  int *tokenDataPtrAddr;
   undefined4 local_58;
   uint local_54;
   uint local_50;
@@ -5262,33 +5301,33 @@ LAB_00046640:
     if (param_1[9] != 0) {
       return param_1[9];
     }
-    piVar10 = param_1 + 10;
-    iVar9 = param_1[0xb];
+    tokenDataPtrAddr = param_1 + 10;
+    tokenCount2 = param_1[0xb];
     iVar5 = param_3 * 2 + 3;
-    uVar3 = param_1[0xc];
-    uVar4 = iVar5 + iVar9;
-    if (uVar3 < uVar4) {
-      if (uVar3 == 0) {
-        uVar3 = 0x10;
+    tokenCapacity = param_1[0xc];
+    uVar4 = iVar5 + tokenCount2;
+    if (tokenCapacity < uVar4) {
+      if (tokenCapacity == 0) {
+        tokenCapacity = 0x10;
       }
       else {
-        uVar3 = uVar3 << 1;
+        tokenCapacity = tokenCapacity << 1;
       }
-      for (; uVar3 < uVar4; uVar3 = uVar3 << 1) {
+      for (; tokenCapacity < uVar4; tokenCapacity = tokenCapacity << 1) {
       }
-      if (*piVar10 == 0) {
-        allocation = _malloc(uVar3 << 2);
+      if (*tokenDataPtrAddr == 0) {
+        allocation = _malloc(tokenCapacity << 2);
       }
       else {
-        allocation = _realloc(*piVar10,uVar3 << 2);
+        allocation = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
       }
       if (allocation == 0) goto LAB_0004676c;
-      *piVar10 = allocation;
-      param_1[0xc] = uVar3;
-      iVar9 = param_1[0xb];
+      *tokenDataPtrAddr = allocation;
+      param_1[0xc] = tokenCapacity;
+      tokenCount2 = param_1[0xb];
     }
-    param_1[0xb] = iVar5 + iVar9;
-    tokenWritePtr = (undefined4 *)(iVar9 * 4 + *piVar10);
+    param_1[0xb] = iVar5 + tokenCount2;
+    tokenWritePtr = (undefined4 *)(tokenCount2 * 4 + *tokenDataPtrAddr);
     *tokenWritePtr = local_58;
     tokenWritePtr[1] = local_54;
     tokenWritePtr[2] = local_50;
@@ -5330,32 +5369,32 @@ LAB_00046640:
     if (param_1[9] != 0) {
       return param_1[9];
     }
-    piVar10 = param_1 + 10;
-    iVar5 = param_1[0xb];
-    uVar3 = param_1[0xc];
-    if (uVar3 < iVar5 + 7U) {
-      if (uVar3 == 0) {
-        uVar3 = 0x10;
+    tokenDataPtrAddr = param_1 + 10;
+    tokenCount = param_1[0xb];
+    tokenCapacity = param_1[0xc];
+    if (tokenCapacity < tokenCount + 7U) {
+      if (tokenCapacity == 0) {
+        tokenCapacity = 0x10;
       }
       else {
-        uVar3 = uVar3 << 1;
+        tokenCapacity = tokenCapacity << 1;
       }
-      for (; uVar3 < iVar5 + 7U; uVar3 = uVar3 << 1) {
+      for (; tokenCapacity < tokenCount + 7U; tokenCapacity = tokenCapacity << 1) {
       }
-      if (*piVar10 == 0) {
-        allocation2 = _malloc(uVar3 << 2);
+      if (*tokenDataPtrAddr == 0) {
+        allocation2 = _malloc(tokenCapacity << 2);
       }
       else {
-        allocation2 = _realloc(*piVar10,uVar3 << 2);
+        allocation2 = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
       }
       if (allocation2 == 0) goto LAB_0004676c;
-      *piVar10 = allocation2;
-      param_1[0xc] = uVar3;
-      iVar5 = param_1[0xb];
+      *tokenDataPtrAddr = allocation2;
+      param_1[0xc] = tokenCapacity;
+      tokenCount = param_1[0xb];
     }
     recordPtr2 = &local_4c;
-    param_1[0xb] = iVar5 + 7;
-    tokenWritePtr = (undefined4 *)(iVar5 * 4 + *piVar10);
+    param_1[0xb] = tokenCount + 7;
+    tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
     *tokenWritePtr = local_58;
     tokenWritePtr[1] = local_54;
     tokenWritePtr[2] = local_50;
@@ -5377,22 +5416,22 @@ LAB_00046640:
     if (param_1[9] != 0) {
       return param_1[9];
     }
-    iVar9 = param_1[0xb];
-    uVar3 = param_1[0xc];
-    if (uVar3 < iVar9 + 7U) {
-      if (uVar3 == 0) {
-        uVar3 = 0x10;
+    tokenCount2 = param_1[0xb];
+    tokenCapacity = param_1[0xc];
+    if (tokenCapacity < tokenCount2 + 7U) {
+      if (tokenCapacity == 0) {
+        tokenCapacity = 0x10;
       }
       else {
-        uVar3 = uVar3 << 1;
+        tokenCapacity = tokenCapacity << 1;
       }
-      for (; uVar3 < iVar9 + 7U; uVar3 = uVar3 << 1) {
+      for (; tokenCapacity < tokenCount2 + 7U; tokenCapacity = tokenCapacity << 1) {
       }
-      if (*piVar10 == 0) {
-        allocation = _malloc(uVar3 << 2);
+      if (*tokenDataPtrAddr == 0) {
+        allocation = _malloc(tokenCapacity << 2);
       }
       else {
-        allocation = _realloc(*piVar10,uVar3 << 2);
+        allocation = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
       }
       if (allocation == 0) {
 LAB_0004676c:
@@ -5402,12 +5441,12 @@ LAB_0004676c:
         param_1[9] = 1;
         return 1;
       }
-      *piVar10 = allocation;
-      param_1[0xc] = uVar3;
-      iVar9 = param_1[0xb];
+      *tokenDataPtrAddr = allocation;
+      param_1[0xc] = tokenCapacity;
+      tokenCount2 = param_1[0xb];
     }
-    param_1[0xb] = iVar9 + 7;
-    tokenWritePtr = (undefined4 *)(iVar9 * 4 + *piVar10);
+    param_1[0xb] = tokenCount2 + 7;
+    tokenWritePtr = (undefined4 *)(tokenCount2 * 4 + *tokenDataPtrAddr);
     *tokenWritePtr = local_58;
     tokenWritePtr[1] = local_54;
     tokenWritePtr[2] = local_50;
@@ -5428,14 +5467,16 @@ int fragmentTranslateAny(param_1, param_2, param_3)
   int param_2;
   int param_3;
 {
+  int tokenCount;
+  int translatorError;
   int allocation;
   undefined4 *recordWordNext;
   int iVar2;
-  uint uVar3;
+  uint tokenCapacity;
   undefined2 uVar5;
   undefined4 *recordPtr;
   undefined4 *tokenWritePtr;
-  int *piVar7;
+  int *tokenDataPtrAddr;
   int iVar8;
   undefined4 local_58;
   undefined4 local_54;
@@ -5464,27 +5505,27 @@ int fragmentTranslateAny(param_1, param_2, param_3)
       local_40 = ((unsigned char *)0x00003210);
       local_4c = local_4c | 0x400000;
     }
-    iVar2 = param_1[9];
+    translatorError = param_1[9];
     local_3c = local_3c & 0xffff0000 | 0x5555;
     local_48 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_48) + 0)),uVar5) & 0xffc0ffff | 0x440000;
-    if (iVar2 == 0) {
-      piVar7 = param_1 + 10;
-      iVar2 = param_1[0xb];
-      uVar3 = param_1[0xc];
-      if (uVar3 < iVar2 + 7U) {
-        if (uVar3 == 0) {
-          uVar3 = 0x10;
+    if (translatorError == 0) {
+      tokenDataPtrAddr = param_1 + 10;
+      tokenCount = param_1[0xb];
+      tokenCapacity = param_1[0xc];
+      if (tokenCapacity < tokenCount + 7U) {
+        if (tokenCapacity == 0) {
+          tokenCapacity = 0x10;
         }
         else {
-          uVar3 = uVar3 << 1;
+          tokenCapacity = tokenCapacity << 1;
         }
-        for (; uVar3 < iVar2 + 7U; uVar3 = uVar3 << 1) {
+        for (; tokenCapacity < tokenCount + 7U; tokenCapacity = tokenCapacity << 1) {
         }
-        if (*piVar7 == 0) {
-          allocation = _malloc(uVar3 << 2);
+        if (*tokenDataPtrAddr == 0) {
+          allocation = _malloc(tokenCapacity << 2);
         }
         else {
-          allocation = _realloc(*piVar7,uVar3 << 2);
+          allocation = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
         }
         if (allocation == 0) {
           if (param_1[9] != 0) {
@@ -5493,13 +5534,13 @@ int fragmentTranslateAny(param_1, param_2, param_3)
           param_1[9] = 1;
           return 1;
         }
-        *piVar7 = allocation;
-        param_1[0xc] = uVar3;
-        iVar2 = param_1[0xb];
+        *tokenDataPtrAddr = allocation;
+        param_1[0xc] = tokenCapacity;
+        tokenCount = param_1[0xb];
       }
       recordPtr = &local_4c;
-      param_1[0xb] = iVar2 + 7;
-      tokenWritePtr = (undefined4 *)(iVar2 * 4 + *piVar7);
+      param_1[0xb] = tokenCount + 7;
+      tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
       *tokenWritePtr = local_58;
       tokenWritePtr[1] = local_54;
       tokenWritePtr[2] = local_50;
@@ -5510,14 +5551,14 @@ int fragmentTranslateAny(param_1, param_2, param_3)
         tokenWritePtr[4] = *recordWordNext;
         tokenWritePtr = tokenWritePtr + 2;
       } while (&uStack_44 != recordPtr);
-      iVar2 = 0;
+      translatorError = 0;
     }
   }
   else {
 LAB_000468f0:
-    iVar2 = param_1[9];
+    translatorError = param_1[9];
   }
-  return iVar2;
+  return translatorError;
 }
 
 /* fragmentTranslateArithmetic @ 0x46a30 (1080 bytes) */
@@ -5525,9 +5566,12 @@ int fragmentTranslateArithmetic(param_1, param_2)
   int *param_1;
   int param_2;
 {
+  uint tokenCapacity2;
+  uint tokenCapacity;
+  int tokenCount2;
   int allocation;
   uint *recordWordNext;
-  int iVar2;
+  int tokenCount;
   uint *recordPtr;
   uint *tokenWritePtr;
   uint uVar5;
@@ -5538,7 +5582,7 @@ int fragmentTranslateArithmetic(param_1, param_2)
   uint uVar10;
   int iVar11;
   int iVar12;
-  int *piVar13;
+  int *tokenDataPtrAddr;
   undefined4 local_68;
   undefined4 local_64;
   uint local_60;
@@ -5592,23 +5636,23 @@ LAB_00046cd4:
           if (param_1[9] != 0) {
             return param_1[9];
           }
-          piVar13 = param_1 + 10;
-          iVar11 = param_1[0xb];
-          uVar9 = param_1[0xc];
-          if (uVar9 < iVar11 + 5U) {
-            if (uVar9 == 0) {
-              uVar9 = 0x10;
+          tokenDataPtrAddr = param_1 + 10;
+          tokenCount2 = param_1[0xb];
+          tokenCapacity = param_1[0xc];
+          if (tokenCapacity < tokenCount2 + 5U) {
+            if (tokenCapacity == 0) {
+              tokenCapacity = 0x10;
             }
             else {
-              uVar9 = uVar9 << 1;
+              tokenCapacity = tokenCapacity << 1;
             }
-            for (; uVar9 < iVar11 + 5U; uVar9 = uVar9 << 1) {
+            for (; tokenCapacity < tokenCount2 + 5U; tokenCapacity = tokenCapacity << 1) {
             }
-            if (*piVar13 == 0) {
-              iVar11 = _malloc(uVar9 << 2);
+            if (*tokenDataPtrAddr == 0) {
+              iVar11 = _malloc(tokenCapacity << 2);
             }
             else {
-              iVar11 = _realloc(*piVar13,uVar9 << 2);
+              iVar11 = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
             }
             if (iVar11 == 0) {
 LAB_00046e28:
@@ -5618,12 +5662,12 @@ LAB_00046e28:
               param_1[9] = 1;
               return 1;
             }
-            *piVar13 = iVar11;
-            param_1[0xc] = uVar9;
-            iVar11 = param_1[0xb];
+            *tokenDataPtrAddr = iVar11;
+            param_1[0xc] = tokenCapacity;
+            tokenCount2 = param_1[0xb];
           }
-          param_1[0xb] = iVar11 + 5;
-          tokenWritePtr = (uint *)(iVar11 * 4 + *piVar13);
+          param_1[0xb] = tokenCount2 + 5;
+          tokenWritePtr = (uint *)(tokenCount2 * 4 + *tokenDataPtrAddr);
           *tokenWritePtr = local_68;
           tokenWritePtr[1] = local_64;
           tokenWritePtr[2] = local_60;
@@ -5636,32 +5680,32 @@ LAB_00046e28:
         return param_1[9];
       }
       iVar8 = 0;
-      piVar13 = param_1 + 10;
+      tokenDataPtrAddr = param_1 + 10;
       do {
-        iVar2 = param_1[0xb];
-        uVar10 = param_1[0xc];
-        if (uVar10 < iVar2 + 7U) {
-          if (uVar10 == 0) {
-            uVar10 = 0x10;
+        tokenCount = param_1[0xb];
+        tokenCapacity2 = param_1[0xc];
+        if (tokenCapacity2 < tokenCount + 7U) {
+          if (tokenCapacity2 == 0) {
+            tokenCapacity2 = 0x10;
           }
           else {
-            uVar10 = uVar10 << 1;
+            tokenCapacity2 = tokenCapacity2 << 1;
           }
-          for (; uVar10 < iVar2 + 7U; uVar10 = uVar10 << 1) {
+          for (; tokenCapacity2 < tokenCount + 7U; tokenCapacity2 = tokenCapacity2 << 1) {
           }
-          if (*piVar13 == 0) {
-            allocation = _malloc(uVar10 << 2);
+          if (*tokenDataPtrAddr == 0) {
+            allocation = _malloc(tokenCapacity2 << 2);
           }
           else {
-            allocation = _realloc(*piVar13,uVar10 << 2);
+            allocation = _realloc(*tokenDataPtrAddr,tokenCapacity2 << 2);
           }
           if (allocation == 0) goto LAB_00046e28;
-          *piVar13 = allocation;
-          param_1[0xc] = uVar10;
-          iVar2 = param_1[0xb];
+          *tokenDataPtrAddr = allocation;
+          param_1[0xc] = tokenCapacity2;
+          tokenCount = param_1[0xb];
         }
-        param_1[0xb] = iVar2 + 7;
-        tokenWritePtr = (uint *)(iVar2 * 4 + *piVar13);
+        param_1[0xb] = tokenCount + 7;
+        tokenWritePtr = (uint *)(tokenCount * 4 + *tokenDataPtrAddr);
         *tokenWritePtr = local_68;
         tokenWritePtr[1] = local_64;
         tokenWritePtr[2] = local_60;
@@ -6605,6 +6649,17 @@ joined_r0x0004802c:
 int fragmentProgramToIL(translator)
   int *translator;
 {
+  uint tokenCapacity4;
+  uint tokenCapacity3;
+  uint tokenCapacity;
+  undefined4 *tokenWritePtr2;
+  int *tokenDataPtrAddr;
+  int tokenCount3;
+  int translatorError3;
+  int translatorError2;
+  int tokenCount2;
+  int translatorError;
+  int tokenCount;
   undefined **ppuVar1;
   undefined4 *puVar2;
   bool bVar3;
@@ -6615,7 +6670,7 @@ int fragmentProgramToIL(translator)
   double dVar8;
   uint uVar9;
   uint *puVar10;
-  uint uVar11;
+  uint tokenCapacity2;
   int iVar12;
   int iVar13;
   uint uVar14;
@@ -6634,7 +6689,7 @@ int fragmentProgramToIL(translator)
   undefined4 extraout_r4_10;
   int in_r5;
   undefined4 in_r6;
-  undefined4 *puVar15;
+  undefined4 *tokenWritePtr;
   dword *pdVar16;
   int iVar17;
   uint uVar18;
@@ -6645,7 +6700,7 @@ int fragmentProgramToIL(translator)
   uint uVar23;
   undefined4 uVar24;
   uint uVar25;
-  undefined4 *puVar26;
+  undefined4 *tokenWritePtr3;
   int iVar27;
   undefined4 local_b8;
   undefined4 local_b4;
@@ -6682,51 +6737,51 @@ LAB_0004a4ec:
     translator[9] = 3;
     return 3;
   }
-  piVar21 = translator + 10;
+  tokenDataPtrAddr = translator + 10;
   translator[5] = (uint)(iVar12 - 0x8b30U < 2) << 0x1d | translator[5] & 0xdfffffffU;
-  iVar12 = translator[0xb];
-  uVar9 = translator[0xc];
-  if (uVar9 < iVar12 + 2U) {
-    if (uVar9 == 0) {
-      uVar9 = 0x10;
+  tokenCount = translator[0xb];
+  tokenCapacity = translator[0xc];
+  if (tokenCapacity < tokenCount + 2U) {
+    if (tokenCapacity == 0) {
+      tokenCapacity = 0x10;
     }
     else {
-      uVar9 = uVar9 << 1;
+      tokenCapacity = tokenCapacity << 1;
     }
-    for (; uVar9 < iVar12 + 2U; uVar9 = uVar9 << 1) {
+    for (; tokenCapacity < tokenCount + 2U; tokenCapacity = tokenCapacity << 1) {
     }
-    if (*piVar21 == 0) {
-      iVar12 = _malloc(uVar9 << 2);
+    if (*tokenDataPtrAddr == 0) {
+      iVar12 = _malloc(tokenCapacity << 2);
       in_r4 = extraout_r4;
     }
     else {
-      iVar12 = _realloc(*piVar21,uVar9 << 2);
+      iVar12 = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
       in_r4 = extraout_r4_00;
     }
     if (iVar12 != 0) {
-      *piVar21 = iVar12;
-      translator[0xc] = uVar9;
-      iVar12 = translator[0xb];
+      *tokenDataPtrAddr = iVar12;
+      translator[0xc] = tokenCapacity;
+      tokenCount = translator[0xb];
       goto LAB_00048eb4;
     }
-    iVar12 = translator[9];
-    if (iVar12 == 0) {
-      iVar12 = 1;
+    translatorError = translator[9];
+    if (translatorError == 0) {
+      translatorError = 1;
       translator[9] = 1;
     }
-    if (iVar12 != 0) {
-      return iVar12;
+    if (translatorError != 0) {
+      return translatorError;
     }
-    puVar26 = (undefined4 *)0x0;
+    tokenWritePtr3 = (undefined4 *)0x0;
     pdVar16 = ((unsigned char *)0x4);
   }
   else {
 LAB_00048eb4:
-    translator[0xb] = iVar12 + 2;
-    puVar26 = (undefined4 *)(iVar12 * 4 + *piVar21);
-    pdVar16 = puVar26 + 1;
+    translator[0xb] = tokenCount + 2;
+    tokenWritePtr3 = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
+    pdVar16 = tokenWritePtr3 + 1;
   }
-  *puVar26 = 1;
+  *tokenWritePtr3 = 1;
   *pdVar16 = 0x10200;
   iVar27 = *translator;
   iVar12 = *(int *)(iVar27 + 0x30);
@@ -6750,10 +6805,10 @@ LAB_00048eb4:
       case 0:
       case 8:
       case 10:
-        iVar12 = translator[9];
-        if (iVar12 == 0) goto LAB_0004a4ec;
-        if (iVar12 != 0) {
-          return iVar12;
+        translatorError = translator[9];
+        if (translatorError == 0) goto LAB_0004a4ec;
+        if (translatorError != 0) {
+          return translatorError;
         }
         goto LAB_00049048;
       case 1:
@@ -6771,65 +6826,65 @@ LAB_00048eb4:
   }
 LAB_00049048:
   iVar12 = *(int *)(iVar27 + 0x20);
-  iVar13 = translator[0xb];
-  uVar9 = translator[0xc];
-  uVar14 = iVar12 * 2 + iVar13;
+  tokenCount2 = translator[0xb];
+  tokenCapacity = translator[0xc];
+  uVar14 = iVar12 * 2 + tokenCount2;
   puVar10 = (uint *)(iVar27 + *(int *)(iVar27 + 0x24) * 8);
-  if (uVar9 < uVar14) {
-    if (uVar9 == 0) {
-      uVar9 = 0x10;
+  if (tokenCapacity < uVar14) {
+    if (tokenCapacity == 0) {
+      tokenCapacity = 0x10;
     }
     else {
-      uVar9 = uVar9 << 1;
+      tokenCapacity = tokenCapacity << 1;
     }
-    for (; uVar9 < uVar14; uVar9 = uVar9 << 1) {
+    for (; tokenCapacity < uVar14; tokenCapacity = tokenCapacity << 1) {
     }
-    if (*piVar21 == 0) {
-      iVar27 = _malloc(uVar9 << 2);
+    if (*tokenDataPtrAddr == 0) {
+      iVar27 = _malloc(tokenCapacity << 2);
       in_r4 = extraout_r4_01;
     }
     else {
-      iVar27 = _realloc(*piVar21,uVar9 << 2);
+      iVar27 = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
       in_r4 = extraout_r4_02;
     }
     if (iVar27 == 0) goto LAB_0004a55c;
-    *piVar21 = iVar27;
-    translator[0xc] = uVar9;
-    iVar13 = translator[0xb];
+    *tokenDataPtrAddr = iVar27;
+    translator[0xc] = tokenCapacity;
+    tokenCount2 = translator[0xb];
   }
-  translator[0xb] = iVar12 * 2 + iVar13;
-  puVar15 = (undefined4 *)(iVar13 * 4 + *piVar21);
+  translator[0xb] = iVar12 * 2 + tokenCount2;
+  tokenWritePtr = (undefined4 *)(tokenCount2 * 4 + *tokenDataPtrAddr);
   if (iVar12 < 1) {
 LAB_0004921c:
     if ((translator[5] & 0x18000000U) != 0) {
-      iVar12 = translator[0xb];
-      uVar9 = translator[0xc];
-      if (uVar9 < iVar12 + 2U) {
-        if (uVar9 == 0) {
-          uVar9 = 0x10;
+      tokenCount = translator[0xb];
+      tokenCapacity = translator[0xc];
+      if (tokenCapacity < tokenCount + 2U) {
+        if (tokenCapacity == 0) {
+          tokenCapacity = 0x10;
         }
         else {
-          uVar9 = uVar9 << 1;
+          tokenCapacity = tokenCapacity << 1;
         }
-        for (; uVar9 < iVar12 + 2U; uVar9 = uVar9 << 1) {
+        for (; tokenCapacity < tokenCount + 2U; tokenCapacity = tokenCapacity << 1) {
         }
-        if (*piVar21 == 0) {
-          iVar12 = _malloc(uVar9 << 2);
+        if (*tokenDataPtrAddr == 0) {
+          iVar12 = _malloc(tokenCapacity << 2);
           in_r4 = extraout_r4_03;
         }
         else {
-          iVar12 = _realloc(*piVar21,uVar9 << 2);
+          iVar12 = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
           in_r4 = extraout_r4_04;
         }
         if (iVar12 == 0) goto LAB_0004a55c;
-        *piVar21 = iVar12;
-        translator[0xc] = uVar9;
-        iVar12 = translator[0xb];
+        *tokenDataPtrAddr = iVar12;
+        translator[0xc] = tokenCapacity;
+        tokenCount = translator[0xb];
       }
-      translator[0xb] = iVar12 + 2;
-      puVar15 = (undefined4 *)(iVar12 * 4 + *piVar21);
-      *puVar15 = 0x1ff0016;
-      puVar15[1] = 0x100000;
+      translator[0xb] = tokenCount + 2;
+      tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
+      *tokenWritePtr = 0x1ff0016;
+      tokenWritePtr[1] = 0x100000;
     }
   }
   else {
@@ -6837,12 +6892,12 @@ LAB_0004921c:
     do {
       uVar4 = *(ushort *)puVar10;
       if ((uVar4 & 0xf) == 1) {
-        *puVar15 = 0x3ff0016;
+        *tokenWritePtr = 0x3ff0016;
 switchD_00049180_caseD_1:
         puVar22 = ((unsigned char *)0x00160000);
       }
       else {
-        *puVar15 = 0x1ff0016;
+        *tokenWritePtr = 0x1ff0016;
         switch(uVar4 & 0xf) {
         default:
           goto switchD_00049180_caseD_0;
@@ -6863,8 +6918,8 @@ switchD_00049180_caseD_1:
         }
       }
       iVar12 = iVar12 + -1;
-      puVar15[1] = puVar22;
-      puVar15 = puVar15 + 2;
+      tokenWritePtr[1] = puVar22;
+      tokenWritePtr = tokenWritePtr + 2;
       puVar10 = puVar10 + 2;
     } while (iVar12 != 0);
     in_r6 = 0;
@@ -6872,91 +6927,91 @@ switchD_00049180_caseD_1:
   }
   uVar9 = translator[1];
   uVar14 = translator[2];
-  puVar19 = (undefined4 *)0x0;
+  tokenWritePtr2 = (undefined4 *)0x0;
   iVar27 = 0x10;
   iVar12 = 0;
   do {
     iVar13 = iVar12;
     switch(uVar14 & 0xf) {
     case 0:
-      puVar15 = &local_b8;
+      tokenWritePtr = &local_b8;
       iVar13 = iVar12 + 1;
-      puVar15[iVar12] = (int)puVar19 << 0x10 | 0xc000019;
+      tokenWritePtr[iVar12] = (int)tokenWritePtr2 << 0x10 | 0xc000019;
       break;
     case 1:
-      puVar15 = &local_b8;
+      tokenWritePtr = &local_b8;
       iVar13 = iVar12 + 1;
-      puVar15[iVar12] = (int)puVar19 << 0x10 | 0xb000019;
+      tokenWritePtr[iVar12] = (int)tokenWritePtr2 << 0x10 | 0xb000019;
       break;
     case 2:
-      puVar15 = &local_b8;
+      tokenWritePtr = &local_b8;
       iVar13 = iVar12 + 1;
-      puVar15[iVar12] = (int)puVar19 << 0x10 | 0x12000019;
+      tokenWritePtr[iVar12] = (int)tokenWritePtr2 << 0x10 | 0x12000019;
       break;
     case 3:
-      puVar15 = &local_b8;
+      tokenWritePtr = &local_b8;
       iVar13 = iVar12 + 1;
-      puVar15[iVar12] = (int)puVar19 << 0x10 | 0xa000019;
+      tokenWritePtr[iVar12] = (int)tokenWritePtr2 << 0x10 | 0xa000019;
       break;
     case 4:
-      puVar15 = &local_b8;
+      tokenWritePtr = &local_b8;
       iVar13 = iVar12 + 1;
-      puVar15[iVar12] = (int)puVar19 << 0x10 | 0x9000019;
+      tokenWritePtr[iVar12] = (int)tokenWritePtr2 << 0x10 | 0x9000019;
     }
     iVar27 = iVar27 + -1;
     uVar23 = uVar9 << 0x1c;
     uVar9 = uVar9 >> 4;
-    puVar19 = (undefined4 *)((int)puVar19 + 1);
+    tokenWritePtr2 = (undefined4 *)((int)tokenWritePtr2 + 1);
     uVar14 = uVar23 | uVar14 >> 4;
     iVar12 = iVar13;
   } while (iVar27 != 0);
-  iVar12 = translator[0xb];
-  uVar9 = translator[0xc];
-  if (uVar9 < (uint)(iVar13 + iVar12)) {
-    if (uVar9 == 0) {
-      uVar9 = 0x10;
+  tokenCount = translator[0xb];
+  tokenCapacity = translator[0xc];
+  if (tokenCapacity < (uint)(iVar13 + tokenCount)) {
+    if (tokenCapacity == 0) {
+      tokenCapacity = 0x10;
     }
     else {
-      uVar9 = uVar9 << 1;
+      tokenCapacity = tokenCapacity << 1;
     }
-    for (; uVar9 < (uint)(iVar13 + iVar12); uVar9 = uVar9 << 1) {
+    for (; tokenCapacity < (uint)(iVar13 + tokenCount); tokenCapacity = tokenCapacity << 1) {
     }
-    if (*piVar21 == 0) {
-      iVar27 = _malloc(uVar9 << 2);
+    if (*tokenDataPtrAddr == 0) {
+      iVar27 = _malloc(tokenCapacity << 2);
       in_r4 = extraout_r4_05;
     }
     else {
-      iVar27 = _realloc(*piVar21,uVar9 << 2);
+      iVar27 = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
       in_r4 = extraout_r4_06;
     }
     if (iVar27 != 0) {
-      *piVar21 = iVar27;
-      translator[0xc] = uVar9;
-      iVar12 = translator[0xb];
+      *tokenDataPtrAddr = iVar27;
+      translator[0xc] = tokenCapacity;
+      tokenCount = translator[0xb];
       goto LAB_00049448;
     }
-    iVar17 = translator[9];
-    if (iVar17 == 0) {
-      iVar17 = 1;
+    translatorError2 = translator[9];
+    if (translatorError2 == 0) {
+      translatorError2 = 1;
       translator[9] = 1;
     }
     iVar27 = 0;
-    if (iVar17 != 0) {
-      return iVar17;
+    if (translatorError2 != 0) {
+      return translatorError2;
     }
   }
   else {
 LAB_00049448:
-    iVar27 = iVar12 * 4;
-    iVar12 = iVar13 + iVar12;
-    translator[0xb] = iVar12;
-    iVar27 = iVar27 + *piVar21;
+    iVar27 = tokenCount * 4;
+    tokenCount = iVar13 + tokenCount;
+    translator[0xb] = tokenCount;
+    iVar27 = iVar27 + *tokenDataPtrAddr;
   }
   if (0 < iVar13) {
     iVar17 = 0;
-    puVar15 = &local_b8;
+    tokenWritePtr = &local_b8;
     do {
-      *(undefined4 *)(iVar17 + iVar27) = *(undefined4 *)(iVar17 + (int)puVar15);
+      *(undefined4 *)(iVar17 + iVar27) = *(undefined4 *)(iVar17 + (int)tokenWritePtr);
       iVar17 = iVar17 + 4;
       iVar13 = iVar13 + -1;
     } while (iVar13 != 0);
@@ -6973,69 +7028,69 @@ LAB_00049448:
       uVar18 = *puVar10 >> 0x10 & 0x1f;
       if ((((uVar23 != 0xc000000) && (uVar23 != 0x4000000)) && (uVar23 != 0x10000000)) &&
          (uVar23 != 0)) {
-        iVar27 = translator[9];
-        if (iVar27 == 0) goto LAB_0004a4ec;
+        translatorError3 = translator[9];
+        if (translatorError3 == 0) goto LAB_0004a4ec;
         goto LAB_0004980c;
       }
       if (uVar18 == 0x11) {
-        iVar13 = translator[0xb];
-        uVar23 = translator[0xc];
-        if (uVar23 < iVar13 + 6U) {
-          if (uVar23 == 0) {
-            uVar23 = 0x10;
+        tokenCount2 = translator[0xb];
+        tokenCapacity4 = translator[0xc];
+        if (tokenCapacity4 < tokenCount2 + 6U) {
+          if (tokenCapacity4 == 0) {
+            tokenCapacity4 = 0x10;
           }
           else {
-            uVar23 = uVar23 << 1;
+            tokenCapacity4 = tokenCapacity4 << 1;
           }
-          for (; uVar23 < iVar13 + 6U; uVar23 = uVar23 << 1) {
+          for (; tokenCapacity4 < tokenCount2 + 6U; tokenCapacity4 = tokenCapacity4 << 1) {
           }
-          if (*piVar21 == 0) {
-            iVar12 = _malloc(uVar23 << 2);
+          if (*tokenDataPtrAddr == 0) {
+            iVar12 = _malloc(tokenCapacity4 << 2);
             in_r4 = extraout_r4_07;
           }
           else {
-            iVar12 = _realloc(*piVar21,uVar23 << 2);
+            iVar12 = _realloc(*tokenDataPtrAddr,tokenCapacity4 << 2);
             in_r4 = extraout_r4_08;
           }
           if (iVar12 == 0) goto LAB_0004a55c;
-          *piVar21 = iVar12;
-          translator[0xc] = uVar23;
-          iVar13 = translator[0xb];
+          *tokenDataPtrAddr = iVar12;
+          translator[0xc] = tokenCapacity4;
+          tokenCount2 = translator[0xb];
         }
-        iVar12 = iVar13 + 6;
-        translator[0xb] = iVar12;
-        puVar19 = (undefined4 *)(iVar13 * 4 + *piVar21);
-        *puVar19 = 0x1c;
-        puVar19[1] = uVar14 & 0xffff | 0x10000;
+        tokenCount = tokenCount2 + 6;
+        translator[0xb] = tokenCount;
+        tokenWritePtr2 = (undefined4 *)(tokenCount2 * 4 + *tokenDataPtrAddr);
+        *tokenWritePtr2 = 0x1c;
+        tokenWritePtr2[1] = uVar14 & 0xffff | 0x10000;
         uVar23 = (uint)(ushort)*puVar10;
         if ((*puVar10 & 0x1c000000) == 0xc000000) {
           local_78 = 0x43300000;
           iVar13 = iVar27 + uVar23 * 0x10;
           uStack_74 = *(uint *)(uVar23 * 0x10 + iVar27) ^ 0x80000000;
-          puVar19[2] = (float)((double)CONCAT44(0x43300000,uStack_74) - dVar8);
+          tokenWritePtr2[2] = (float)((double)CONCAT44(0x43300000,uStack_74) - dVar8);
           local_70 = 0x43300000;
           uStack_6c = *(uint *)(iVar13 + 4) ^ 0x80000000;
-          puVar19[3] = (float)((double)CONCAT44(0x43300000,uStack_6c) - dVar8);
+          tokenWritePtr2[3] = (float)((double)CONCAT44(0x43300000,uStack_6c) - dVar8);
           local_68 = 0x43300000;
           uStack_64 = *(uint *)(iVar13 + 8) ^ 0x80000000;
-          puVar19[4] = (float)((double)CONCAT44(0x43300000,uStack_64) - dVar8);
+          tokenWritePtr2[4] = (float)((double)CONCAT44(0x43300000,uStack_64) - dVar8);
           local_60 = 0x43300000;
           uStack_5c = *(uint *)(iVar13 + 0xc) ^ 0x80000000;
-          puVar19[5] = (float)((double)CONCAT44(0x43300000,uStack_5c) - dVar8);
+          tokenWritePtr2[5] = (float)((double)CONCAT44(0x43300000,uStack_5c) - dVar8);
         }
         else if ((*puVar10 & 0x1c000000) == 0x10000000) {
           iVar13 = iVar27 + uVar23 * 0x10;
-          puVar19[2] = (uint)(*(int *)(iVar27 + uVar23 * 0x10) != 0);
-          puVar19[3] = (uint)(*(int *)(iVar13 + 4) != 0);
-          puVar19[4] = (uint)(*(int *)(iVar13 + 8) != 0);
-          puVar19[5] = (uint)(*(int *)(iVar13 + 0xc) != 0);
+          tokenWritePtr2[2] = (uint)(*(int *)(iVar27 + uVar23 * 0x10) != 0);
+          tokenWritePtr2[3] = (uint)(*(int *)(iVar13 + 4) != 0);
+          tokenWritePtr2[4] = (uint)(*(int *)(iVar13 + 8) != 0);
+          tokenWritePtr2[5] = (uint)(*(int *)(iVar13 + 0xc) != 0);
         }
         else {
           iVar13 = iVar27 + uVar23 * 0x10;
-          puVar19[2] = *(undefined4 *)(iVar27 + uVar23 * 0x10);
-          puVar19[3] = *(undefined4 *)(iVar13 + 4);
-          puVar19[4] = *(undefined4 *)(iVar13 + 8);
-          puVar19[5] = *(undefined4 *)(iVar13 + 0xc);
+          tokenWritePtr2[2] = *(undefined4 *)(iVar27 + uVar23 * 0x10);
+          tokenWritePtr2[3] = *(undefined4 *)(iVar13 + 4);
+          tokenWritePtr2[4] = *(undefined4 *)(iVar13 + 8);
+          tokenWritePtr2[5] = *(undefined4 *)(iVar13 + 0xc);
         }
       }
       uVar14 = uVar14 + 1;
@@ -7043,23 +7098,23 @@ LAB_00049448:
     } while (uVar9 != uVar14);
   }
   translator[6] = translator[0xb];
-  iVar27 = translator[0xb];
-  uVar9 = translator[0xc];
-  if (uVar9 < iVar27 + 0xc6U) {
-    if (uVar9 == 0) {
-      uVar9 = 0x10;
+  tokenCount3 = translator[0xb];
+  tokenCapacity = translator[0xc];
+  if (tokenCapacity < tokenCount3 + 0xc6U) {
+    if (tokenCapacity == 0) {
+      tokenCapacity = 0x10;
     }
     else {
-      uVar9 = uVar9 << 1;
+      tokenCapacity = tokenCapacity << 1;
     }
-    for (; uVar9 < iVar27 + 0xc6U; uVar9 = uVar9 << 1) {
+    for (; tokenCapacity < tokenCount3 + 0xc6U; tokenCapacity = tokenCapacity << 1) {
     }
-    if (*piVar21 == 0) {
-      iVar12 = _malloc(uVar9 << 2);
+    if (*tokenDataPtrAddr == 0) {
+      iVar12 = _malloc(tokenCapacity << 2);
       in_r4 = extraout_r4_09;
     }
     else {
-      iVar12 = _realloc(*piVar21,uVar9 << 2);
+      iVar12 = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
       in_r4 = extraout_r4_10;
     }
     if (iVar12 == 0) {
@@ -7070,13 +7125,13 @@ LAB_0004a55c:
       translator[9] = 1;
       return 1;
     }
-    *piVar21 = iVar12;
-    translator[0xc] = uVar9;
-    iVar27 = translator[0xb];
+    *tokenDataPtrAddr = iVar12;
+    translator[0xc] = tokenCapacity;
+    tokenCount3 = translator[0xb];
   }
-  iVar12 = iVar27 + 0xc6;
-  translator[0xb] = iVar12;
-  uVar18 = iVar27 * 4 + *piVar21;
+  tokenCount = tokenCount3 + 0xc6;
+  translator[0xb] = tokenCount;
+  uVar18 = tokenCount3 * 4 + *tokenDataPtrAddr;
   iVar27 = 0;
   iVar13 = 0xc6;
   do {
@@ -7084,14 +7139,14 @@ LAB_0004a55c:
     iVar27 = iVar27 + 4;
     iVar13 = iVar13 + -1;
   } while (iVar13 != 0);
-  iVar27 = translator[9];
+  translatorError3 = translator[9];
   translator[7] = translator[0xb];
 LAB_0004980c:
-  if (iVar27 != 0) {
-    return iVar27;
+  if (translatorError3 != 0) {
+    return translatorError3;
   }
-  iVar12 = ((int (*)())fragmentInstructionToIL)(translator,in_r4,in_r5,in_r6,puVar15,iVar12,uVar18,puVar19);
-  if (iVar12 != 0) goto LAB_0004a7b4;
+  tokenCount = ((int (*)())fragmentInstructionToIL)(translator,in_r4,in_r5,in_r6,tokenWritePtr,tokenCount,uVar18,tokenWritePtr2);
+  if (tokenCount != 0) goto LAB_0004a7b4;
   iVar12 = *translator;
   uVar9 = *(uint *)(iVar12 + 0x30);
   puVar10 = (uint *)(iVar12 + *(int *)(iVar12 + 0x34) * 8);
@@ -7125,56 +7180,56 @@ LAB_0004980c:
             local_ac = (undefined *)((uint)local_ac & 0xffc0ffff | 0x500000);
             local_b4 = local_b4 | 0x400000;
             if (uVar18 == 1) {
-              iVar12 = translator[9];
+              translatorError = translator[9];
               local_b8 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_b8) + 0)),0x40);
               local_b0 = 0x155;
               local_a0[1] = (undefined *)0x0;
               local_a8 = CONCAT22(1,sVar5) | 0x400000;
               local_a0[2] = ((unsigned char *)0x00001111);
               local_a4 = CONCAT22(1,sVar5) | 0x400000;
-              if (iVar12 == 0) {
-                iVar12 = translator[0xb];
-                uVar18 = translator[0xc];
-                if (uVar18 < iVar12 + 9U) {
-                  if (uVar18 == 0) {
-                    uVar18 = 0x10;
+              if (translatorError == 0) {
+                tokenCount = translator[0xb];
+                tokenCapacity3 = translator[0xc];
+                if (tokenCapacity3 < tokenCount + 9U) {
+                  if (tokenCapacity3 == 0) {
+                    tokenCapacity3 = 0x10;
                   }
                   else {
-                    uVar18 = uVar18 << 1;
+                    tokenCapacity3 = tokenCapacity3 << 1;
                   }
-                  for (; uVar18 < iVar12 + 9U; uVar18 = uVar18 << 1) {
+                  for (; tokenCapacity3 < tokenCount + 9U; tokenCapacity3 = tokenCapacity3 << 1) {
                   }
-                  if (*piVar21 == 0) {
-                    iVar12 = _malloc(uVar18 << 2);
+                  if (*tokenDataPtrAddr == 0) {
+                    iVar12 = _malloc(tokenCapacity3 << 2);
                   }
                   else {
-                    iVar12 = _realloc(*piVar21,uVar18 << 2);
+                    iVar12 = _realloc(*tokenDataPtrAddr,tokenCapacity3 << 2);
                   }
                   if (iVar12 == 0) {
 LAB_0004a188:
-                    iVar12 = translator[9];
-                    if (iVar12 == 0) {
-                      iVar12 = 1;
+                    translatorError = translator[9];
+                    if (translatorError == 0) {
+                      translatorError = 1;
                       translator[9] = 1;
                     }
                     goto LAB_0004a0d8;
                   }
-                  *piVar21 = iVar12;
-                  translator[0xc] = uVar18;
-                  iVar12 = translator[0xb];
+                  *tokenDataPtrAddr = iVar12;
+                  translator[0xc] = tokenCapacity3;
+                  tokenCount = translator[0xb];
                 }
                 ppuVar20 = (undefined **)&local_ac;
-                translator[0xb] = iVar12 + 9;
-                puVar15 = (undefined4 *)(iVar12 * 4 + *piVar21);
-                *puVar15 = local_b8;
-                puVar15[1] = local_b4;
-                puVar15[2] = local_b0;
+                translator[0xb] = tokenCount + 9;
+                tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
+                *tokenWritePtr = local_b8;
+                tokenWritePtr[1] = local_b4;
+                tokenWritePtr[2] = local_b0;
                 do {
-                  puVar15[3] = *ppuVar20;
+                  tokenWritePtr[3] = *ppuVar20;
                   ppuVar1 = ppuVar20 + 3;
                   ppuVar20 = ppuVar20 + 1;
-                  puVar15[4] = *ppuVar1;
-                  puVar15 = puVar15 + 2;
+                  tokenWritePtr[4] = *ppuVar1;
+                  tokenWritePtr = tokenWritePtr + 2;
                 } while (local_a0 != ppuVar20);
                 goto LAB_0004a0d4;
               }
@@ -7184,106 +7239,106 @@ LAB_0004a188:
               local_b8 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_b8) + 0)),0x49);
               if ((translator[5] & 0x18000000U) == 0x10000000) {
                 local_a8 = CONCAT22(1,sVar5);
-                iVar12 = translator[9];
+                translatorError = translator[9];
                 local_a0[1] = (undefined *)0x2222;
                 local_a8 = local_a8 | 0x400000;
-                if (iVar12 == 0) {
-                  iVar12 = translator[0xb];
-                  uVar18 = translator[0xc];
-                  if (uVar18 < iVar12 + 7U) {
-                    if (uVar18 == 0) {
-                      uVar18 = 0x10;
+                if (translatorError == 0) {
+                  tokenCount = translator[0xb];
+                  tokenCapacity3 = translator[0xc];
+                  if (tokenCapacity3 < tokenCount + 7U) {
+                    if (tokenCapacity3 == 0) {
+                      tokenCapacity3 = 0x10;
                     }
                     else {
-                      uVar18 = uVar18 << 1;
+                      tokenCapacity3 = tokenCapacity3 << 1;
                     }
-                    for (; uVar18 < iVar12 + 7U; uVar18 = uVar18 << 1) {
+                    for (; tokenCapacity3 < tokenCount + 7U; tokenCapacity3 = tokenCapacity3 << 1) {
                     }
-                    if (*piVar21 == 0) {
-                      iVar12 = _malloc(uVar18 << 2);
+                    if (*tokenDataPtrAddr == 0) {
+                      iVar12 = _malloc(tokenCapacity3 << 2);
                     }
                     else {
-                      iVar12 = _realloc(*piVar21,uVar18 << 2);
+                      iVar12 = _realloc(*tokenDataPtrAddr,tokenCapacity3 << 2);
                     }
                     if (iVar12 == 0) {
 LAB_00049f94:
-                      iVar12 = translator[9];
-                      if (iVar12 == 0) {
-                        iVar12 = 1;
+                      translatorError = translator[9];
+                      if (translatorError == 0) {
+                        translatorError = 1;
                         translator[9] = 1;
                       }
                       goto LAB_00049fa8;
                     }
-                    *piVar21 = iVar12;
-                    translator[0xc] = uVar18;
-                    iVar12 = translator[0xb];
+                    *tokenDataPtrAddr = iVar12;
+                    translator[0xc] = tokenCapacity3;
+                    tokenCount = translator[0xb];
                   }
                   puVar19 = &local_ac;
-                  translator[0xb] = iVar12 + 7;
-                  puVar15 = (undefined4 *)(iVar12 * 4 + *piVar21);
-                  *puVar15 = local_b8;
-                  puVar15[1] = local_b4;
-                  puVar15[2] = local_b0;
+                  translator[0xb] = tokenCount + 7;
+                  tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
+                  *tokenWritePtr = local_b8;
+                  tokenWritePtr[1] = local_b4;
+                  tokenWritePtr[2] = local_b0;
                   do {
-                    puVar15[3] = *puVar19;
+                    tokenWritePtr[3] = *puVar19;
                     puVar2 = puVar19 + 3;
                     puVar19 = puVar19 + 1;
-                    puVar15[4] = *puVar2;
-                    puVar15 = puVar15 + 2;
+                    tokenWritePtr[4] = *puVar2;
+                    tokenWritePtr = tokenWritePtr + 2;
                   } while (&local_a4 != puVar19);
 LAB_00049f80:
-                  iVar12 = translator[9];
+                  translatorError = translator[9];
                 }
               }
               else {
                 local_a8 = CONCAT22(1,sVar5);
-                iVar12 = translator[9];
+                translatorError = translator[9];
                 local_a8 = local_a8 | 0x400000;
                 local_a0[1] = ((unsigned char *)0x00003333);
-                if (iVar12 == 0) {
-                  iVar12 = translator[0xb];
-                  uVar18 = translator[0xc];
-                  if (uVar18 < iVar12 + 7U) {
-                    if (uVar18 == 0) {
-                      uVar18 = 0x10;
+                if (translatorError == 0) {
+                  tokenCount = translator[0xb];
+                  tokenCapacity3 = translator[0xc];
+                  if (tokenCapacity3 < tokenCount + 7U) {
+                    if (tokenCapacity3 == 0) {
+                      tokenCapacity3 = 0x10;
                     }
                     else {
-                      uVar18 = uVar18 << 1;
+                      tokenCapacity3 = tokenCapacity3 << 1;
                     }
-                    for (; uVar18 < iVar12 + 7U; uVar18 = uVar18 << 1) {
+                    for (; tokenCapacity3 < tokenCount + 7U; tokenCapacity3 = tokenCapacity3 << 1) {
                     }
-                    if (*piVar21 == 0) {
-                      iVar12 = _malloc(uVar18 << 2);
+                    if (*tokenDataPtrAddr == 0) {
+                      iVar12 = _malloc(tokenCapacity3 << 2);
                     }
                     else {
-                      iVar12 = _realloc(*piVar21,uVar18 << 2);
+                      iVar12 = _realloc(*tokenDataPtrAddr,tokenCapacity3 << 2);
                     }
                     if (iVar12 == 0) {
-                      iVar12 = translator[9];
-                      if (iVar12 == 0) {
-                        iVar12 = 1;
+                      translatorError = translator[9];
+                      if (translatorError == 0) {
+                        translatorError = 1;
                         translator[9] = 1;
                       }
                       goto LAB_00049e2c;
                     }
-                    *piVar21 = iVar12;
-                    translator[0xc] = uVar18;
-                    iVar12 = translator[0xb];
+                    *tokenDataPtrAddr = iVar12;
+                    translator[0xc] = tokenCapacity3;
+                    tokenCount = translator[0xb];
                   }
                   puVar19 = &local_ac;
-                  translator[0xb] = iVar12 + 7;
-                  puVar15 = (undefined4 *)(iVar12 * 4 + *piVar21);
-                  *puVar15 = local_b8;
-                  puVar15[1] = local_b4;
-                  puVar15[2] = local_b0;
+                  translator[0xb] = tokenCount + 7;
+                  tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
+                  *tokenWritePtr = local_b8;
+                  tokenWritePtr[1] = local_b4;
+                  tokenWritePtr[2] = local_b0;
                   do {
-                    puVar15[3] = *puVar19;
+                    tokenWritePtr[3] = *puVar19;
                     puVar2 = puVar19 + 3;
                     puVar19 = puVar19 + 1;
-                    puVar15[4] = *puVar2;
-                    puVar15 = puVar15 + 2;
+                    tokenWritePtr[4] = *puVar2;
+                    tokenWritePtr = tokenWritePtr + 2;
                   } while (&local_a4 != puVar19);
-                  iVar12 = translator[9];
+                  translatorError = translator[9];
                 }
 LAB_00049e2c:
                 local_ac = (undefined *)CONCAT22(4,uVar6);
@@ -7293,41 +7348,41 @@ LAB_00049e2c:
                 local_b8 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_b8) + 0)),0x49);
                 local_ac = (undefined *)((uint)local_ac | 0x400000);
                 local_a8 = local_a8 | 0x400000;
-                if (iVar12 == 0) {
-                  iVar12 = translator[0xb];
-                  uVar18 = translator[0xc];
-                  if (uVar18 < iVar12 + 7U) {
-                    if (uVar18 == 0) {
-                      uVar18 = 0x10;
+                if (translatorError == 0) {
+                  tokenCount = translator[0xb];
+                  tokenCapacity3 = translator[0xc];
+                  if (tokenCapacity3 < tokenCount + 7U) {
+                    if (tokenCapacity3 == 0) {
+                      tokenCapacity3 = 0x10;
                     }
                     else {
-                      uVar18 = uVar18 << 1;
+                      tokenCapacity3 = tokenCapacity3 << 1;
                     }
-                    for (; uVar18 < iVar12 + 7U; uVar18 = uVar18 << 1) {
+                    for (; tokenCapacity3 < tokenCount + 7U; tokenCapacity3 = tokenCapacity3 << 1) {
                     }
-                    if (*piVar21 == 0) {
-                      iVar12 = _malloc(uVar18 << 2);
+                    if (*tokenDataPtrAddr == 0) {
+                      iVar12 = _malloc(tokenCapacity3 << 2);
                     }
                     else {
-                      iVar12 = _realloc(*piVar21,uVar18 << 2);
+                      iVar12 = _realloc(*tokenDataPtrAddr,tokenCapacity3 << 2);
                     }
                     if (iVar12 == 0) goto LAB_00049f94;
-                    *piVar21 = iVar12;
-                    translator[0xc] = uVar18;
-                    iVar12 = translator[0xb];
+                    *tokenDataPtrAddr = iVar12;
+                    translator[0xc] = tokenCapacity3;
+                    tokenCount = translator[0xb];
                   }
                   puVar19 = &local_ac;
-                  translator[0xb] = iVar12 + 7;
-                  puVar15 = (undefined4 *)(iVar12 * 4 + *piVar21);
-                  *puVar15 = local_b8;
-                  puVar15[1] = local_b4;
-                  puVar15[2] = local_b0;
+                  translator[0xb] = tokenCount + 7;
+                  tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
+                  *tokenWritePtr = local_b8;
+                  tokenWritePtr[1] = local_b4;
+                  tokenWritePtr[2] = local_b0;
                   do {
-                    puVar15[3] = *puVar19;
+                    tokenWritePtr[3] = *puVar19;
                     puVar2 = puVar19 + 3;
                     puVar19 = puVar19 + 1;
-                    puVar15[4] = *puVar2;
-                    puVar15 = puVar15 + 2;
+                    tokenWritePtr[4] = *puVar2;
+                    tokenWritePtr = tokenWritePtr + 2;
                   } while (&local_a4 != puVar19);
                   goto LAB_00049f80;
                 }
@@ -7338,38 +7393,38 @@ LAB_00049fa8:
               local_b8 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_b8) + 0)),0x2d);
               local_ac = (undefined *)((uint)local_ac | 0x400000);
               local_a0[0] = (undefined *)0xba98;
-              if (iVar12 != 0) goto LAB_0004a0d8;
-              iVar12 = translator[0xb];
-              uVar18 = translator[0xc];
-              if (uVar18 < iVar12 + 5U) {
-                if (uVar18 == 0) {
-                  uVar18 = 0x10;
+              if (translatorError != 0) goto LAB_0004a0d8;
+              tokenCount = translator[0xb];
+              tokenCapacity3 = translator[0xc];
+              if (tokenCapacity3 < tokenCount + 5U) {
+                if (tokenCapacity3 == 0) {
+                  tokenCapacity3 = 0x10;
                 }
                 else {
-                  uVar18 = uVar18 << 1;
+                  tokenCapacity3 = tokenCapacity3 << 1;
                 }
-                for (; uVar18 < iVar12 + 5U; uVar18 = uVar18 << 1) {
+                for (; tokenCapacity3 < tokenCount + 5U; tokenCapacity3 = tokenCapacity3 << 1) {
                 }
-                if (*piVar21 == 0) {
-                  iVar12 = _malloc(uVar18 << 2);
+                if (*tokenDataPtrAddr == 0) {
+                  iVar12 = _malloc(tokenCapacity3 << 2);
                 }
                 else {
-                  iVar12 = _realloc(*piVar21,uVar18 << 2);
+                  iVar12 = _realloc(*tokenDataPtrAddr,tokenCapacity3 << 2);
                 }
                 if (iVar12 == 0) goto LAB_0004a188;
-                *piVar21 = iVar12;
-                translator[0xc] = uVar18;
-                iVar12 = translator[0xb];
+                *tokenDataPtrAddr = iVar12;
+                translator[0xc] = tokenCapacity3;
+                tokenCount = translator[0xb];
               }
-              translator[0xb] = iVar12 + 5;
-              puVar15 = (undefined4 *)(iVar12 * 4 + *piVar21);
-              *puVar15 = local_b8;
-              puVar15[1] = local_b4;
-              puVar15[2] = local_b0;
-              puVar15[3] = local_ac;
-              puVar15[4] = local_a0[0];
+              translator[0xb] = tokenCount + 5;
+              tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
+              *tokenWritePtr = local_b8;
+              tokenWritePtr[1] = local_b4;
+              tokenWritePtr[2] = local_b0;
+              tokenWritePtr[3] = local_ac;
+              tokenWritePtr[4] = local_a0[0];
 LAB_0004a0d4:
-              iVar12 = translator[9];
+              translatorError = translator[9];
             }
 LAB_0004a0d8:
             iVar27 = *translator;
@@ -7381,46 +7436,46 @@ LAB_0004a0d8:
             local_a0[0] = ((unsigned char *)0x00003210);
             local_ac = (undefined *)CONCAT22(4,sVar5 + (short)*(undefined4 *)(iVar27 + 0x10) + 1);
             local_ac = (undefined *)((uint)local_ac | 0x400000);
-            if (iVar12 == 0) {
-              iVar12 = translator[0xb];
-              uVar18 = translator[0xc];
-              if (uVar18 < iVar12 + 5U) {
-                if (uVar18 == 0) {
-                  uVar18 = 0x10;
+            if (translatorError == 0) {
+              tokenCount = translator[0xb];
+              tokenCapacity3 = translator[0xc];
+              if (tokenCapacity3 < tokenCount + 5U) {
+                if (tokenCapacity3 == 0) {
+                  tokenCapacity3 = 0x10;
                 }
                 else {
-                  uVar18 = uVar18 << 1;
+                  tokenCapacity3 = tokenCapacity3 << 1;
                 }
-                for (; uVar18 < iVar12 + 5U; uVar18 = uVar18 << 1) {
+                for (; tokenCapacity3 < tokenCount + 5U; tokenCapacity3 = tokenCapacity3 << 1) {
                 }
-                if (*piVar21 == 0) {
-                  iVar12 = _malloc(uVar18 << 2);
+                if (*tokenDataPtrAddr == 0) {
+                  iVar12 = _malloc(tokenCapacity3 << 2);
                 }
                 else {
-                  iVar12 = _realloc(*piVar21,uVar18 << 2);
+                  iVar12 = _realloc(*tokenDataPtrAddr,tokenCapacity3 << 2);
                 }
                 if (iVar12 == 0) {
-                  iVar12 = translator[9];
-                  if (iVar12 == 0) {
-                    iVar12 = 1;
+                  translatorError = translator[9];
+                  if (translatorError == 0) {
+                    translatorError = 1;
                     translator[9] = 1;
                   }
                   iVar27 = *translator;
                   goto LAB_0004a25c;
                 }
-                *piVar21 = iVar12;
-                translator[0xc] = uVar18;
-                iVar12 = translator[0xb];
+                *tokenDataPtrAddr = iVar12;
+                translator[0xc] = tokenCapacity3;
+                tokenCount = translator[0xb];
               }
-              translator[0xb] = iVar12 + 5;
-              puVar15 = (undefined4 *)(iVar12 * 4 + *piVar21);
-              *puVar15 = local_b8;
-              puVar15[1] = local_b4;
-              puVar15[2] = local_b0;
-              puVar15[3] = local_ac;
-              puVar15[4] = local_a0[0];
+              translator[0xb] = tokenCount + 5;
+              tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
+              *tokenWritePtr = local_b8;
+              tokenWritePtr[1] = local_b4;
+              tokenWritePtr[2] = local_b0;
+              tokenWritePtr[3] = local_ac;
+              tokenWritePtr[4] = local_a0[0];
               iVar27 = *translator;
-              iVar12 = translator[9];
+              translatorError = translator[9];
             }
 LAB_0004a25c:
             local_b8 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_b8) + 0)),0x3f);
@@ -7436,23 +7491,23 @@ LAB_0004a25c:
             local_a8 = CONCAT22(4,sVar5 + (short)*(undefined4 *)(iVar27 + 0x10) + 1);
             local_a4 = local_a4 | 0x400000;
             local_a8 = local_a8 | 0x400000;
-            if (iVar12 == 0) {
-              iVar12 = translator[0xb];
-              uVar18 = translator[0xc];
-              if (uVar18 < iVar12 + 9U) {
-                if (uVar18 == 0) {
-                  uVar18 = 0x10;
+            if (translatorError == 0) {
+              tokenCount = translator[0xb];
+              tokenCapacity3 = translator[0xc];
+              if (tokenCapacity3 < tokenCount + 9U) {
+                if (tokenCapacity3 == 0) {
+                  tokenCapacity3 = 0x10;
                 }
                 else {
-                  uVar18 = uVar18 << 1;
+                  tokenCapacity3 = tokenCapacity3 << 1;
                 }
-                for (; uVar18 < iVar12 + 9U; uVar18 = uVar18 << 1) {
+                for (; tokenCapacity3 < tokenCount + 9U; tokenCapacity3 = tokenCapacity3 << 1) {
                 }
-                if (*piVar21 == 0) {
-                  iVar12 = _malloc(uVar18 << 2);
+                if (*tokenDataPtrAddr == 0) {
+                  iVar12 = _malloc(tokenCapacity3 << 2);
                 }
                 else {
-                  iVar12 = _realloc(*piVar21,uVar18 << 2);
+                  iVar12 = _realloc(*tokenDataPtrAddr,tokenCapacity3 << 2);
                 }
                 if (iVar12 == 0) {
                   if (translator[9] == 0) {
@@ -7460,22 +7515,22 @@ LAB_0004a25c:
                   }
                   goto LAB_0004a474;
                 }
-                *piVar21 = iVar12;
-                translator[0xc] = uVar18;
-                iVar12 = translator[0xb];
+                *tokenDataPtrAddr = iVar12;
+                translator[0xc] = tokenCapacity3;
+                tokenCount = translator[0xb];
               }
               ppuVar20 = (undefined **)&local_ac;
-              translator[0xb] = iVar12 + 9;
-              puVar15 = (undefined4 *)(iVar12 * 4 + *piVar21);
-              *puVar15 = local_b8;
-              puVar15[1] = local_b4;
-              puVar15[2] = local_b0;
+              translator[0xb] = tokenCount + 9;
+              tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
+              *tokenWritePtr = local_b8;
+              tokenWritePtr[1] = local_b4;
+              tokenWritePtr[2] = local_b0;
               do {
-                puVar15[3] = *ppuVar20;
+                tokenWritePtr[3] = *ppuVar20;
                 ppuVar1 = ppuVar20 + 3;
                 ppuVar20 = ppuVar20 + 1;
-                puVar15[4] = *ppuVar1;
-                puVar15 = puVar15 + 2;
+                tokenWritePtr[4] = *ppuVar1;
+                tokenWritePtr = tokenWritePtr + 2;
               } while (local_a0 != ppuVar20);
             }
           }
@@ -7485,32 +7540,32 @@ LAB_0004a474:
             do {
               if (((int)(*(uint *)(translator[0xd] + 0x20) >> 0x12 & 0xf) >> (uVar18 & 0x3f) & 1U) != 0
                  ) {
-                iVar12 = translator[0xb];
-                uVar11 = translator[0xc];
-                if (uVar11 < iVar12 + 5U) {
-                  if (uVar11 == 0) {
-                    uVar11 = 0x10;
+                tokenCount = translator[0xb];
+                tokenCapacity2 = translator[0xc];
+                if (tokenCapacity2 < tokenCount + 5U) {
+                  if (tokenCapacity2 == 0) {
+                    tokenCapacity2 = 0x10;
                   }
                   else {
-                    uVar11 = uVar11 << 1;
+                    tokenCapacity2 = tokenCapacity2 << 1;
                   }
-                  for (; uVar11 < iVar12 + 5U; uVar11 = uVar11 << 1) {
+                  for (; tokenCapacity2 < tokenCount + 5U; tokenCapacity2 = tokenCapacity2 << 1) {
                   }
-                  if (*piVar21 == 0) {
-                    iVar12 = _malloc(uVar11 << 2);
+                  if (*tokenDataPtrAddr == 0) {
+                    iVar12 = _malloc(tokenCapacity2 << 2);
                   }
                   else {
-                    iVar12 = _realloc(*piVar21,uVar11 << 2);
+                    iVar12 = _realloc(*tokenDataPtrAddr,tokenCapacity2 << 2);
                   }
                   if (iVar12 == 0) goto LAB_0004a55c;
-                  *piVar21 = iVar12;
-                  translator[0xc] = uVar11;
-                  iVar12 = translator[0xb];
+                  *tokenDataPtrAddr = iVar12;
+                  translator[0xc] = tokenCapacity2;
+                  tokenCount = translator[0xb];
                 }
                 uVar25 = uVar18 & 0xffff | uVar25 & 0xffff0000;
-                translator[0xb] = iVar12 + 5;
-                iVar27 = iVar12 * 4 + *piVar21;
-                *(undefined4 *)(iVar12 * 4 + *piVar21) = 0x47;
+                translator[0xb] = tokenCount + 5;
+                iVar27 = tokenCount * 4 + *tokenDataPtrAddr;
+                *(undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr) = 0x47;
                 *(undefined **)(iVar27 + 0x10) = ((unsigned char *)0x00003210);
                 *(uint *)(iVar27 + 4) = uVar25;
                 *(undefined4 *)(iVar27 + 8) = 0x55;
@@ -7532,79 +7587,79 @@ LAB_0004a474:
             puVar22 = ((unsigned char *)0x00003212);
           }
         }
-        iVar12 = translator[0xb];
-        uVar18 = translator[0xc];
-        if (uVar18 < iVar12 + 5U) {
-          if (uVar18 == 0) {
-            uVar18 = 0x10;
+        tokenCount = translator[0xb];
+        tokenCapacity3 = translator[0xc];
+        if (tokenCapacity3 < tokenCount + 5U) {
+          if (tokenCapacity3 == 0) {
+            tokenCapacity3 = 0x10;
           }
           else {
-            uVar18 = uVar18 << 1;
+            tokenCapacity3 = tokenCapacity3 << 1;
           }
-          for (; uVar18 < iVar12 + 5U; uVar18 = uVar18 << 1) {
+          for (; tokenCapacity3 < tokenCount + 5U; tokenCapacity3 = tokenCapacity3 << 1) {
           }
-          if (*piVar21 == 0) {
-            iVar12 = _malloc(uVar18 << 2);
+          if (*tokenDataPtrAddr == 0) {
+            iVar12 = _malloc(tokenCapacity3 << 2);
           }
           else {
-            iVar12 = _realloc(*piVar21,uVar18 << 2);
+            iVar12 = _realloc(*tokenDataPtrAddr,tokenCapacity3 << 2);
           }
           if (iVar12 == 0) goto LAB_0004a55c;
-          *piVar21 = iVar12;
-          translator[0xc] = uVar18;
-          iVar12 = translator[0xb];
+          *tokenDataPtrAddr = iVar12;
+          translator[0xc] = tokenCapacity3;
+          tokenCount = translator[0xb];
         }
-        translator[0xb] = iVar12 + 5;
-        puVar15 = (undefined4 *)(iVar12 * 4 + *piVar21);
-        *puVar15 = 0x47;
-        puVar15[4] = puVar22;
-        puVar15[1] = uVar25;
-        puVar15[2] = uVar24;
-        puVar15[3] = uVar23;
+        translator[0xb] = tokenCount + 5;
+        tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
+        *tokenWritePtr = 0x47;
+        tokenWritePtr[4] = puVar22;
+        tokenWritePtr[1] = uVar25;
+        tokenWritePtr[2] = uVar24;
+        tokenWritePtr[3] = uVar23;
       }
 LAB_0004a680:
       uVar14 = uVar14 + 1;
       puVar10 = puVar10 + 2;
     } while (uVar9 != uVar14);
   }
-  iVar12 = translator[0xb];
-  uVar9 = translator[0xc];
-  if (uVar9 < iVar12 + 1U) {
-    if (uVar9 == 0) {
-      uVar9 = 0x10;
+  tokenCount = translator[0xb];
+  tokenCapacity = translator[0xc];
+  if (tokenCapacity < tokenCount + 1U) {
+    if (tokenCapacity == 0) {
+      tokenCapacity = 0x10;
     }
     else {
-      uVar9 = uVar9 << 1;
+      tokenCapacity = tokenCapacity << 1;
     }
-    for (; uVar9 < iVar12 + 1U; uVar9 = uVar9 << 1) {
+    for (; tokenCapacity < tokenCount + 1U; tokenCapacity = tokenCapacity << 1) {
     }
-    if (*piVar21 == 0) {
-      iVar12 = _malloc(uVar9 << 2);
+    if (*tokenDataPtrAddr == 0) {
+      iVar12 = _malloc(tokenCapacity << 2);
     }
     else {
-      iVar12 = _realloc(*piVar21,uVar9 << 2);
+      iVar12 = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
     }
     if (iVar12 != 0) {
-      *piVar21 = iVar12;
-      translator[0xc] = uVar9;
-      iVar12 = translator[0xb];
+      *tokenDataPtrAddr = iVar12;
+      translator[0xc] = tokenCapacity;
+      tokenCount = translator[0xb];
       goto LAB_0004a708;
     }
-    iVar12 = translator[9];
-    if (iVar12 == 0) {
-      iVar12 = 1;
+    translatorError = translator[9];
+    if (translatorError == 0) {
+      translatorError = 1;
       translator[9] = 1;
     }
-    if (iVar12 != 0) {
-      return iVar12;
+    if (translatorError != 0) {
+      return translatorError;
     }
   }
   else {
 LAB_0004a708:
-    translator[0xb] = iVar12 + 1;
-    puVar26 = (undefined4 *)(iVar12 * 4 + *piVar21);
+    translator[0xb] = tokenCount + 1;
+    tokenWritePtr3 = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
   }
-  *puVar26 = 0x28;
+  *tokenWritePtr3 = 0x28;
   iVar12 = translator[7];
   iVar27 = iVar12 - translator[6];
   if (iVar27 != 0) {
