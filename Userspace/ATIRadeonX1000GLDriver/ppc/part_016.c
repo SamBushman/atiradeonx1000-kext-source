@@ -1248,6 +1248,11 @@ LAB_000a99e8:
 /* FUN_000a9ac0 @ 0xa9ac0 (7656 bytes) */
 void FUN_000a9ac0(char *stream,uint *dirtyBits,char *dirtyBitsArg,undefined *scratchR6,uint dirtyWord3,char *dirtyWord1,undefined4 unusedArgR9,uint dirtyWord4,double fpPassThrough1,double fpPassThrough2,double fpPassThrough3,double fpPassThrough4,double fpPassThrough5,double fpPassThrough6,double fpPassThrough7,double fpPassThrough8,double fpPassThrough9,double fpPassThrough10,double fpPassThrough11,double fpPassThrough12,double fpPassThrough13)
 {
+  int engineStateWord3188;
+  int engineStateWord318c;
+  float newtonTerm;
+  float rsqrtGuess;
+  float lengthSq;
   uint loopIndex3;
   uint dirtyBitsWord0;
   int loopIndex2;
@@ -1272,7 +1277,7 @@ void FUN_000a9ac0(char *stream,uint *dirtyBits,char *dirtyBitsArg,undefined *scr
   int iVar5;
   uint uVar6;
   float fVar7;
-  float fVar8;
+  float rsqrtGuessB;
   int iVar9;
   uint uVar10;
   code *streamPtr12b0;
@@ -1299,28 +1304,28 @@ void FUN_000a9ac0(char *stream,uint *dirtyBits,char *dirtyBitsArg,undefined *scr
   uint *r4AfterCall16;
   uint *r4AfterCall17;
   char *pcVar17;
-  char *pcVar18;
+  char *stateWord44Copy;
   int iVar19;
   uint uVar20;
   char cVar22;
   undefined *puVar21;
   uint calleeSavedR20;
   uint calleeSavedR21;
-  uint uVar23;
+  uint engineState;
   uint uVar24;
   char *pcVar25;
   int iVar26;
   uint uVar27;
   byte bVar28;
   int iVar29;
-  double dVar30;
+  double vecXYSq;
   double f1AfterCall;
   double f1AfterCall2;
   double f1AfterCall3;
-  double dVar31;
-  double dVar32;
-  double dVar33;
-  double dVar34;
+  double vecX;
+  double vecY;
+  double vecZ;
+  double invLength;
   double staleStackArg_ffffff68;
   double staleStackArg_ffffff70;
   double staleStackArg_ffffff78;
@@ -1369,9 +1374,9 @@ void FUN_000a9ac0(char *stream,uint *dirtyBits,char *dirtyBitsArg,undefined *scr
     dirtyWord4 = *(uint *)(stream + 0x38) | 0x4000;
     *(uint *)(stream + 0x38) = dirtyWord4;
   }
-  uVar23 = *(uint *)(streamPtr4_2 + 0x10);
+  engineState = *(uint *)(streamPtr4_2 + 0x10);
   uVar24 = dirtyBits[3];
-  uVar10 = *(uint *)(((unsigned char *)0x00003e28) + uVar23);
+  uVar10 = *(uint *)(((unsigned char *)0x00003e28) + engineState);
   if (*(int *)(streamPtr4_2 + 0x1cc) == 0) {
     *(undefined4 *)(streamPtr4_2 + 0x26c4) = 0;
     *(undefined4 *)(streamPtr4_2 + 0x26c0) = 0;
@@ -1384,16 +1389,16 @@ void FUN_000a9ac0(char *stream,uint *dirtyBits,char *dirtyBitsArg,undefined *scr
       iVar19 = dirtyWord4 + (streamWordNeg74 == 0);
       if (streamWordNeg74 - iVar19 == ((uint)dirtyWord1 >> 0x14 & 1)) {
         if (((streamWordNeg74 != iVar19) ||
-            ((uint)dirtyWord1 >> 0x1f == (uint)(byte)((unsigned char *)0x00002d48)[uVar23 + 2])) ||
-           (((unsigned char *)0x00004304)[uVar23] != '\0')) goto LAB_000a9de4;
+            ((uint)dirtyWord1 >> 0x1f == (uint)(byte)((unsigned char *)0x00002d48)[engineState + 2])) ||
+           (((unsigned char *)0x00004304)[engineState] != '\0')) goto LAB_000a9de4;
 LAB_000a9c74:
         uVar20 = *(uint *)(stream + 0x1874) >> 0x17 & 1;
         *(uint *)(stream + 0x1928) =
              *(uint *)(stream + 0x1928) & 0xfffffffd |
              *(uint *)(stream + 0x1928) >> 1 & 1 ^ uVar20 | uVar20 << 1;
-        if (((unsigned char *)0x00004304)[uVar23] == '\0') {
+        if (((unsigned char *)0x00004304)[engineState] == '\0') {
           stream[0x2475] = '\x01';
-          dirtyWord1 = (char *)((uint)(byte)((unsigned char *)0x00002d48)[uVar23 + 2] << 0x1f |
+          dirtyWord1 = (char *)((uint)(byte)((unsigned char *)0x00002d48)[engineState + 2] << 0x1f |
                             (uint)dirtyWord1 & 0x7fffffff);
           *(char **)(stream + 0x44) = dirtyWord1;
         }
@@ -1425,14 +1430,14 @@ LAB_000a9c74:
         *(uint *)(stream + 0x1928) =
              *(uint *)(stream + 0x1928) & 0xfffffffd | *(uint *)(stream + 0x1928) >> 1 & 1;
       }
-      if (((unsigned char *)0x00004304)[uVar23] == '\0') {
+      if (((unsigned char *)0x00004304)[engineState] == '\0') {
         if ((int)*(uint *)(stream + 0x44) < 0) {
           streamWord18a4 = *(uint *)(stream + 0x18a4);
-          dirtyWord1 = (char *)-(*(ushort *)(((unsigned char *)0x00002d48) + uVar23) ^ 0x81fa);
-          uVar6 = (uint)((*(ushort *)(((unsigned char *)0x00002d48) + uVar23) ^ 0x81fa) == 0) << 2;
+          dirtyWord1 = (char *)-(*(ushort *)(((unsigned char *)0x00002d48) + engineState) ^ 0x81fa);
+          uVar6 = (uint)((*(ushort *)(((unsigned char *)0x00002d48) + engineState) ^ 0x81fa) == 0) << 2;
           *(uint *)(stream + 0x18a4) = uVar6 | streamWord18a4 & 0xfffffffb;
           *(uint *)(stream + 0x18a4) =
-               ((byte)((unsigned char *)0x00002d48)[uVar23 + 4] & 1) << 1 | uVar6 | streamWord18a4 & 0xfffffff9;
+               ((byte)((unsigned char *)0x00002d48)[engineState + 4] & 1) << 1 | uVar6 | streamWord18a4 & 0xfffffff9;
         }
         else {
           *(uint *)(stream + 0x18a4) =
@@ -1516,22 +1521,22 @@ LAB_000a9de4:
         else if (uVar6 == 0) {
           if (uVar12 == 0) {
             uVar6 = *(uint *)(stream + 0x1874);
-            pcVar18 = pcVar17;
+            stateWord44Copy = pcVar17;
           }
           else {
             uVar6 = *(uint *)(stream + 0x1874) & 0xffffbfff;
             *(char **)(stream + 0x44) = (char *)((uint)pcVar17 & 0xfffd7fff);
             *(uint *)(stream + 0x1874) = uVar6;
-            pcVar18 = (char *)((uint)pcVar17 & 0xfffd7fff);
+            stateWord44Copy = (char *)((uint)pcVar17 & 0xfffd7fff);
             if (((uint)pcVar17 & 0x4000) != 0) {
-              pcVar18 = (char *)((uint)pcVar17 & 0xfffc3fff);
+              stateWord44Copy = (char *)((uint)pcVar17 & 0xfffc3fff);
               stream[0x29] = '\x01';
-              *(char **)(stream + 0x44) = pcVar18;
+              *(char **)(stream + 0x44) = stateWord44Copy;
               pcVar17 = (char *)(*(uint *)(stream + 0x38) | 0x20);
               *(char **)(stream + 0x38) = pcVar17;
             }
           }
-          dirtyWord1 = (char *)((uint)pcVar18 | 0x22000);
+          dirtyWord1 = (char *)((uint)stateWord44Copy | 0x22000);
           *(uint *)(stream + 0x1874) = uVar6 | 0x4000;
           *(char **)(stream + 0x44) = dirtyWord1;
           *(uint *)(stream + 0x8c) = *(uint *)(stream + 0x8c) | 0x80000000;
@@ -1597,7 +1602,7 @@ LAB_000a9ffc:
     }
     uVar10 = 0;
     if ((uVar24 & 0x200000) != 0) {
-      if (((unsigned char *)0x00004301)[uVar23] != '\0') {
+      if (((unsigned char *)0x00004301)[engineState] != '\0') {
         dirtyBitsWord8 = (char *)((uint)dirtyBitsWord8 | 0xf0);
       }
       iVar19 = *(int *)(streamPtr4_2 + 0x10);
@@ -1682,21 +1687,21 @@ LAB_000a9ffc:
         *(undefined1 *)(streamPtr4_2 + 0x26b5) = 1;
       }
 LAB_000aa35c:
-      if ((((uint)dirtyBitsWord8 & 0x40000000) != 0) && (((unsigned char *)0x00002d48)[uVar23 + 2] != '\0')) {
+      if ((((uint)dirtyBitsWord8 & 0x40000000) != 0) && (((unsigned char *)0x00002d48)[engineState + 2] != '\0')) {
         stream[0x29] = '\x01';
         dirtyWord4 = *(uint *)(stream + 0x38) | 0x20;
         *(uint *)(stream + 0x38) = dirtyWord4;
       }
       if (((uint)dirtyBitsWord8 & 0x3f0000f8) != 0) {
         dirtyBitsArg = dirtyBitsWord8;
-        fpPassThrough1 = (double)((double (*)())FUN_000a8630)(stream,uVar23,dirtyBitsWord8,fpPassThrough1,fpPassThrough2,fpPassThrough3,fpPassThrough4,
+        fpPassThrough1 = (double)((double (*)())FUN_000a8630)(stream,engineState,dirtyBitsWord8,fpPassThrough1,fpPassThrough2,fpPassThrough3,fpPassThrough4,
                                         fpPassThrough5,fpPassThrough6,fpPassThrough7,fpPassThrough8,staleStackArg_ffffff68,
                                         staleStackArg_ffffff70,staleStackArg_ffffff78,staleStackArg_ffffff80,
                                         staleStackArg_ffffff88);
         puVar16 = r4AfterCall7;
       }
       if ((((uint)dirtyBitsWord8 & 0x800000f0) != 0) &&
-         (((*(char *)(uVar23 + 0x24ae) != '\0' || (bVar1)) && (((unsigned char *)0x00002d48)[uVar23 + 2] != '\0')
+         (((*(char *)(engineState + 0x24ae) != '\0' || (bVar1)) && (((unsigned char *)0x00002d48)[engineState + 2] != '\0')
           ))) {
         stream[0x29] = '\x01';
         dirtyWord4 = *(uint *)(stream + 0x38) | 0x20;
@@ -1711,8 +1716,8 @@ LAB_000aa35c:
     if ((uVar24 & 0x1007ffff) != 0) {
       dirtyWord3 = 0;
       if ((uVar24 & 0x7ffff) != 0) {
-        if ((((unsigned char *)0x00004304)[uVar23] == '\0') || (*(int *)(stream + -0x74) != 0)) {
-          uVar10 = (uint)(byte)((unsigned char *)0x00002d48)[uVar23 + 2] << 0x1f |
+        if ((((unsigned char *)0x00004304)[engineState] == '\0') || (*(int *)(stream + -0x74) != 0)) {
+          uVar10 = (uint)(byte)((unsigned char *)0x00002d48)[engineState + 2] << 0x1f |
                    *(uint *)(stream + 0x44) & 0x7fffffff;
           *(uint *)(stream + 0x44) = uVar10;
         }
@@ -1720,12 +1725,12 @@ LAB_000aa35c:
           uVar10 = *(uint *)(stream + 0x44) & 0x7fffffff;
           *(uint *)(stream + 0x44) = uVar10;
         }
-        if (((unsigned char *)0x00004304)[uVar23] == '\0') {
+        if (((unsigned char *)0x00004304)[engineState] == '\0') {
           if ((int)uVar10 < 0) {
             streamWord18a4_3 = *(uint *)(stream + 0x18a4);
-            uVar20 = (uint)(*(short *)(((unsigned char *)0x00002d48) + uVar23) == -0x7e06) << 2;
+            uVar20 = (uint)(*(short *)(((unsigned char *)0x00002d48) + engineState) == -0x7e06) << 2;
             *(uint *)(stream + 0x18a4) = uVar20 | streamWord18a4_3 & 0xfffffffb;
-            uVar20 = ((byte)((unsigned char *)0x00002d48)[uVar23 + 4] & 1) << 1 | uVar20 | streamWord18a4_3 & 0xfffffff9;
+            uVar20 = ((byte)((unsigned char *)0x00002d48)[engineState + 4] & 1) << 1 | uVar20 | streamWord18a4_3 & 0xfffffff9;
             *(uint *)(stream + 0x18a4) = uVar20;
           }
           else {
@@ -1750,15 +1755,15 @@ LAB_000aa35c:
           *(uint *)(stream + 0x38) = *(uint *)(stream + 0x38) | 0x10000;
           *(uint *)(stream + 0x180c) = *(uint *)(stream + 0x180c) | 7;
           stream[0x29] = '\x01';
-          if (((unsigned char *)0x00004304)[uVar23] == '\0') {
+          if (((unsigned char *)0x00004304)[engineState] == '\0') {
             if (bVar1) {
               *(uint *)(stream + 0x18a4) = uVar10 >> 0x15 & 4 | uVar20 & 0xfffffff9;
             }
             else {
-              uVar10 = (uint)(*(short *)(((unsigned char *)0x00002d48) + uVar23) == -0x7e06) << 2;
+              uVar10 = (uint)(*(short *)(((unsigned char *)0x00002d48) + engineState) == -0x7e06) << 2;
               *(uint *)(stream + 0x18a4) = uVar10 | uVar20 & 0xfffffffb;
               *(uint *)(stream + 0x18a4) =
-                   ((byte)((unsigned char *)0x00002d48)[uVar23 + 4] & 1) << 1 | uVar10 | uVar20 & 0xfffffff9;
+                   ((byte)((unsigned char *)0x00002d48)[engineState + 4] & 1) << 1 | uVar10 | uVar20 & 0xfffffff9;
             }
           }
           else {
@@ -1782,19 +1787,19 @@ LAB_000aa35c:
         scratchR6 = ((unsigned char *)0x000014b0) + (int)stream;
         loopIndex2 = 0;
         dirtyBitsArg = stream;
-        dirtyWord3 = uVar23;
+        dirtyWord3 = engineState;
         dirtyWord1 = stream;
         do {
           uVar10 = *(uint *)(stream + 0x88);
           *(uint *)(stream + 0x88) =
-               1 << ((uint)puVar16 & 0x3f) & *(uint *)(((unsigned char *)0x00002d40) + uVar23) | uVar10;
+               1 << ((uint)puVar16 & 0x3f) & *(uint *)(((unsigned char *)0x00002d40) + engineState) | uVar10;
           if ((uVar24 & (0xc << (((uint)puVar16 & 0x1f) << 1) | 1U)) != 0) {
-            iVar13 = uVar23 + loopIndex;
+            iVar13 = engineState + loopIndex;
             *(undefined4 *)(((unsigned char *)0x000014a4) + (int)dirtyWord1) = *(undefined4 *)(dirtyWord3 + 0x24f0);
             *(undefined4 *)(((unsigned char *)0x000014a8) + (int)dirtyWord1) = *(undefined4 *)(dirtyWord3 + 0x24f4);
             *(undefined4 *)(((unsigned char *)0x000014ac) + (int)dirtyWord1) = *(undefined4 *)(dirtyWord3 + 0x24f8);
             *(undefined4 *)(((unsigned char *)0x000014b0) + (int)dirtyWord1) = *(undefined4 *)(dirtyWord3 + 0x24fc);
-            fVar4 = *(float *)(uVar23 + loopIndex);
+            fVar4 = *(float *)(engineState + loopIndex);
             fVar3 = *(float *)(iVar13 + 8) * *(float *)(iVar13 + 8) +
                     fVar4 * fVar4 + *(float *)(iVar13 + 4) * *(float *)(iVar13 + 4);
             if (0.0 < fVar3) {
@@ -1804,10 +1809,10 @@ LAB_000aa35c:
                 *(undefined4 *)(scratchR6 + 0xc) = *(undefined4 *)(iVar13 + 8);
               }
               else {
-                fVar8 = (float)(0x5f375a00 - ((uint)GH_F2U(fVar3) >> 1));
-                fVar3 = fVar8 * fVar3 * fVar8;
+                rsqrtGuessB = (float)(0x5f375a00 - ((uint)GH_F2U(fVar3) >> 1));
+                fVar3 = rsqrtGuessB * fVar3 * rsqrtGuessB;
                 fVar7 = 3.0 - fVar3;
-                fVar3 = fVar7 * fVar8 * 0.0625 * -(fVar7 * fVar3 * fVar7 - 12.0);
+                fVar3 = fVar7 * rsqrtGuessB * 0.0625 * -(fVar7 * fVar3 * fVar7 - 12.0);
                 *(float *)(scratchR6 + 4) = fVar4 * fVar3;
                 *(float *)(scratchR6 + 8) = fVar3 * *(float *)(iVar13 + 4);
                 *(float *)(scratchR6 + 0xc) = fVar3 * *(float *)(iVar13 + 8);
@@ -1818,63 +1823,63 @@ LAB_000aa35c:
               *(float *)(scratchR6 + 4) = 0.0;
               *(float *)(scratchR6 + 8) = 0.0;
             }
-            dVar34 = 0.0;
+            invLength = 0.0;
             ((unsigned char *)0x0000150c)[(int)dirtyWord1] = *(float *)(dirtyWord3 + 0x250c) != -1.0;
             *(undefined4 *)(((unsigned char *)0x00001504) + (int)dirtyWord1) = *(undefined4 *)(dirtyWord3 + 0x250c);
             if (*(float *)(dirtyWord3 + 0x2510) != 0.0) {
               *(float *)(((unsigned char *)0x00001508) + (int)dirtyWord1) = 1.0 / *(float *)(dirtyWord3 + 0x2510);
             }
-            if ((((unsigned char *)0x00002d48)[uVar23 + 5] == '\0') && (((unsigned char *)0x0000150c)[(int)dirtyWord1] == '\0')) {
+            if ((((unsigned char *)0x00002d48)[engineState + 5] == '\0') && (((unsigned char *)0x0000150c)[(int)dirtyWord1] == '\0')) {
               if (*(float *)(((unsigned char *)0x000014b0) + (int)dirtyWord1) == 0.0) {
-                dVar31 = (double)*(float *)(((unsigned char *)0x000014a0) + (int)(stream + loopIndex2 + 4));
-                dVar32 = (double)*(float *)(((unsigned char *)0x000014a0) + (int)(stream + loopIndex2 + 8));
-                dVar33 = (double)*(float *)(((unsigned char *)0x000014a0) + (int)(stream + loopIndex2 + 0xc));
-                dVar30 = (double)(float)(dVar31 * dVar31 + (double)(float)(dVar32 * dVar32));
-                fVar4 = (float)(dVar33 * dVar33 + dVar30);
-                if (0.0 < fVar4) {
-                  if (fVar4 == 1.0) {
-                    fpPassThrough8 = (double)(float)(dVar33 + 1.0);
+                vecX = (double)*(float *)(((unsigned char *)0x000014a0) + (int)(stream + loopIndex2 + 4));
+                vecY = (double)*(float *)(((unsigned char *)0x000014a0) + (int)(stream + loopIndex2 + 8));
+                vecZ = (double)*(float *)(((unsigned char *)0x000014a0) + (int)(stream + loopIndex2 + 0xc));
+                vecXYSq = (double)(float)(vecX * vecX + (double)(float)(vecY * vecY));
+                lengthSq = (float)(vecZ * vecZ + vecXYSq);
+                if (0.0 < lengthSq) {
+                  if (lengthSq == 1.0) {
+                    fpPassThrough8 = (double)(float)(vecZ + 1.0);
                   }
                   else {
-                    fVar7 = (float)(0x5f375a00 - ((uint)GH_F2U(fVar4) >> 1));
-                    fVar4 = fVar7 * fVar4 * fVar7;
-                    fVar3 = 3.0 - fVar4;
-                    dVar34 = (double)(fVar3 * fVar7 * 0.0625 * -(fVar3 * fVar4 * fVar3 - 12.0));
-                    dVar32 = (double)(float)(dVar32 * dVar34);
-                    dVar33 = (double)(float)(dVar33 * dVar34);
-                    dVar31 = (double)(float)(dVar31 * dVar34);
-                    fpPassThrough8 = (double)(float)(dVar33 + 1.0);
-                    dVar30 = (double)(float)(dVar31 * dVar31 + (double)(float)(dVar32 * dVar32));
+                    rsqrtGuess = (float)(0x5f375a00 - ((uint)GH_F2U(lengthSq) >> 1));
+                    lengthSq = rsqrtGuess * lengthSq * rsqrtGuess;
+                    newtonTerm = 3.0 - lengthSq;
+                    invLength = (double)(newtonTerm * rsqrtGuess * 0.0625 * -(newtonTerm * lengthSq * newtonTerm - 12.0));
+                    vecY = (double)(float)(vecY * invLength);
+                    vecZ = (double)(float)(vecZ * invLength);
+                    vecX = (double)(float)(vecX * invLength);
+                    fpPassThrough8 = (double)(float)(vecZ + 1.0);
+                    vecXYSq = (double)(float)(vecX * vecX + (double)(float)(vecY * vecY));
                   }
                 }
                 else {
                   fpPassThrough8 = 1.0;
-                  dVar30 = dVar34;
-                  dVar31 = dVar34;
-                  dVar32 = dVar34;
-                  dVar33 = dVar34;
+                  vecXYSq = invLength;
+                  vecX = invLength;
+                  vecY = invLength;
+                  vecZ = invLength;
                 }
-                fVar4 = (float)(fpPassThrough8 * fpPassThrough8 + dVar30);
-                *(float *)(((unsigned char *)0x000014fc) + (int)dirtyWord1) = (float)dVar33;
-                *(float *)(((unsigned char *)0x000014f4) + (int)dirtyWord1) = (float)dVar31;
-                *(float *)(((unsigned char *)0x000014f8) + (int)dirtyWord1) = (float)dVar32;
-                if (0.0 < fVar4) {
-                  if (fVar4 == 1.0) {
-                    *(float *)(((unsigned char *)0x000014e0) + (int)(stream + loopIndex2 + 4)) = (float)dVar31;
+                lengthSq = (float)(fpPassThrough8 * fpPassThrough8 + vecXYSq);
+                *(float *)(((unsigned char *)0x000014fc) + (int)dirtyWord1) = (float)vecZ;
+                *(float *)(((unsigned char *)0x000014f4) + (int)dirtyWord1) = (float)vecX;
+                *(float *)(((unsigned char *)0x000014f8) + (int)dirtyWord1) = (float)vecY;
+                if (0.0 < lengthSq) {
+                  if (lengthSq == 1.0) {
+                    *(float *)(((unsigned char *)0x000014e0) + (int)(stream + loopIndex2 + 4)) = (float)vecX;
                     *(float *)(((unsigned char *)0x000014e0) + (int)(stream + loopIndex2 + 0xc)) = (float)fpPassThrough8;
-                    *(float *)(((unsigned char *)0x000014e0) + (int)(stream + loopIndex2 + 8)) = (float)dVar32;
+                    *(float *)(((unsigned char *)0x000014e0) + (int)(stream + loopIndex2 + 8)) = (float)vecY;
                   }
                   else {
-                    fVar7 = (float)(0x5f375a00 - ((uint)GH_F2U(fVar4) >> 1));
-                    fVar4 = fVar7 * fVar4 * fVar7;
-                    fVar3 = 3.0 - fVar4;
-                    dVar34 = (double)(fVar3 * fVar7 * 0.0625 * -(fVar3 * fVar4 * fVar3 - 12.0));
+                    rsqrtGuess = (float)(0x5f375a00 - ((uint)GH_F2U(lengthSq) >> 1));
+                    lengthSq = rsqrtGuess * lengthSq * rsqrtGuess;
+                    newtonTerm = 3.0 - lengthSq;
+                    invLength = (double)(newtonTerm * rsqrtGuess * 0.0625 * -(newtonTerm * lengthSq * newtonTerm - 12.0));
                     *(float *)(((unsigned char *)0x000014e0) + (int)(stream + loopIndex2 + 4)) =
-                         (float)(dVar34 * dVar31);
+                         (float)(invLength * vecX);
                     *(float *)(((unsigned char *)0x000014e0) + (int)(stream + loopIndex2 + 0xc)) =
-                         (float)(fpPassThrough8 * dVar34);
+                         (float)(fpPassThrough8 * invLength);
                     *(float *)(((unsigned char *)0x000014e0) + (int)(stream + loopIndex2 + 8)) =
-                         (float)(dVar34 * dVar32);
+                         (float)(invLength * vecY);
                   }
                 }
                 else {
@@ -1898,10 +1903,10 @@ LAB_000aa35c:
                        *(undefined4 *)(((unsigned char *)0x000014a0) + (int)(stream + loopIndex2 + 0xc));
                 }
                 else {
-                  fVar8 = (float)(0x5f375a00 - ((uint)GH_F2U(fVar3) >> 1));
-                  fVar3 = fVar8 * fVar3 * fVar8;
+                  rsqrtGuessB = (float)(0x5f375a00 - ((uint)GH_F2U(fVar3) >> 1));
+                  fVar3 = rsqrtGuessB * fVar3 * rsqrtGuessB;
                   fVar7 = 3.0 - fVar3;
-                  fVar3 = fVar7 * fVar8 * 0.0625 * -(fVar7 * fVar3 * fVar7 - 12.0);
+                  fVar3 = fVar7 * rsqrtGuessB * 0.0625 * -(fVar7 * fVar3 * fVar7 - 12.0);
                   *(float *)(((unsigned char *)0x000014f0) + (int)(stream + loopIndex2 + 4)) = fVar4 * fVar3;
                   *(float *)(((unsigned char *)0x000014f0) + (int)(stream + loopIndex2 + 8)) =
                        fVar3 * *(float *)(((unsigned char *)0x000014a0) + (int)(stream + loopIndex2 + 8));
@@ -1976,17 +1981,17 @@ LAB_000aaa50:
       }
       dirtyWord4 = 0;
       if ((dirtyBitsWord0 & 0x4000000) != 0) {
-        iVar29 = *(int *)(((unsigned char *)0x00003180) + uVar23);
-        uVar10 = *(uint *)(((unsigned char *)0x00003184) + uVar23);
-        dirtyWord3 = *(uint *)(((unsigned char *)0x00003188) + uVar23);
-        iVar13 = *(int *)(((unsigned char *)0x0000318c) + uVar23);
+        iVar29 = *(int *)(((unsigned char *)0x00003180) + engineState);
+        uVar10 = *(uint *)(((unsigned char *)0x00003184) + engineState);
+        dirtyWord3 = *(uint *)(((unsigned char *)0x00003188) + engineState);
+        engineStateWord318c = *(int *)(((unsigned char *)0x0000318c) + engineState);
         iVar5 = *(int *)(stream + -0xe0);
         iVar19 = *(int *)(stream + -0xe4);
         *(int *)(stream + 0x440) = iVar29;
         *(uint *)(stream + 0x444) = uVar10;
         *(uint *)(stream + 0x448) = dirtyWord3;
-        *(int *)(stream + 0x44c) = iVar13;
-        if (((unsigned char *)0x00003190)[uVar23] == '\0') {
+        *(int *)(stream + 0x44c) = engineStateWord318c;
+        if (((unsigned char *)0x00003190)[engineState] == '\0') {
           *(undefined4 *)(((unsigned char *)0x0000135c) + (int)stream) = 0;
           *(int *)(((unsigned char *)0x00001360) + (int)stream) = iVar19;
           *(int *)(((unsigned char *)0x00001364) + (int)stream) = iVar5;
@@ -1994,10 +1999,10 @@ LAB_000aaa50:
         }
         else {
           if (stream[0x293c] != '\0') {
-            uVar10 = iVar5 - (uVar10 + iVar13);
+            uVar10 = iVar5 - (uVar10 + engineStateWord318c);
           }
           iVar9 = iVar29 + dirtyWord3;
-          iVar13 = uVar10 + iVar13;
+          engineStateWord318c = uVar10 + engineStateWord318c;
           if (iVar29 < 0) {
             iVar29 = 0;
           }
@@ -2007,8 +2012,8 @@ LAB_000aaa50:
           if (iVar9 <= iVar19) {
             iVar19 = iVar9;
           }
-          if (iVar13 <= iVar5) {
-            iVar5 = iVar13;
+          if (engineStateWord318c <= iVar5) {
+            iVar5 = engineStateWord318c;
           }
           *(int *)(((unsigned char *)0x00001358) + (int)stream) = iVar29;
           *(uint *)(((unsigned char *)0x0000135c) + (int)stream) = uVar10;
@@ -2057,11 +2062,11 @@ LAB_000aaa50:
       if (pcVar17 != (char *)0x0) {
         if ((dirtyBitsWord0 & 0x1800) != 0) {
           dirtyBitsArg = pcVar17;
-          fpPassThrough1 = (double)((int (*)())FUN_000a8e20)(stream,uVar23,pcVar17);
+          fpPassThrough1 = (double)((int (*)())FUN_000a8e20)(stream,engineState,pcVar17);
           puVar16 = r4AfterCall11;
         }
         if ((dirtyBitsWord0 & 0x3000000) != 0) {
-          fpPassThrough1 = (double)((int (*)())FUN_000a8d70)(stream,uVar23);
+          fpPassThrough1 = (double)((int (*)())FUN_000a8d70)(stream,engineState);
           puVar16 = r4AfterCall12;
           dirtyBitsArg = pcVar17;
         }
@@ -2081,7 +2086,7 @@ LAB_000aaa50:
         }
         dirtyWord3 = dirtyBitsWord0 & 0x1c000;
         if (dirtyWord3 != 0) {
-          fpPassThrough1 = (double)((int (*)())FUN_000a8c00)(stream,uVar23,dirtyBitsArg,scratchR6,dirtyWord3,dirtyWord1,uVar10);
+          fpPassThrough1 = (double)((int (*)())FUN_000a8c00)(stream,engineState,dirtyBitsArg,scratchR6,dirtyWord3,dirtyWord1,uVar10);
           puVar16 = r4AfterCall14;
         }
         if ((dirtyBitsWord0 & 0x20000) != 0) {
@@ -2089,7 +2094,7 @@ LAB_000aaa50:
           *(uint *)(stream + 0x3c) = *(uint *)(stream + 0x3c) | 8;
         }
         if ((dirtyBitsWord0 & 0x400000) != 0) {
-          ((double (*)())FUN_000a9640)(stream,uVar23,fpPassThrough1,fpPassThrough2,fpPassThrough3,fpPassThrough4,fpPassThrough5,fpPassThrough6,fpPassThrough7
+          ((double (*)())FUN_000a9640)(stream,engineState,fpPassThrough1,fpPassThrough2,fpPassThrough3,fpPassThrough4,fpPassThrough5,fpPassThrough6,fpPassThrough7
                        ,fpPassThrough8,staleStackArg_ffffff68,staleStackArg_ffffff70,staleStackArg_ffffff78,
                        staleStackArg_ffffff80);
           puVar16 = r4AfterCall15;
@@ -2169,16 +2174,16 @@ LAB_000aaa50:
       uVar10 = *(uint *)(stream + 0x44);
       iVar19 = -(uint)(*(int *)(stream + -0x74) == 0);
       if (iVar19 + 1U == (uVar10 >> 0x14 & 1)) {
-        if (((iVar19 != -1) || (uVar10 >> 0x1f == (uint)(byte)((unsigned char *)0x00002d48)[uVar23 + 2])) ||
-           (((unsigned char *)0x00004304)[uVar23] != '\0')) goto LAB_000ab18c;
+        if (((iVar19 != -1) || (uVar10 >> 0x1f == (uint)(byte)((unsigned char *)0x00002d48)[engineState + 2])) ||
+           (((unsigned char *)0x00004304)[engineState] != '\0')) goto LAB_000ab18c;
 LAB_000ab014:
         uVar6 = *(uint *)(stream + 0x1874) >> 0x17 & 1;
         *(uint *)(stream + 0x1928) =
              *(uint *)(stream + 0x1928) & 0xfffffffd | *(uint *)(stream + 0x1928) >> 1 & 1 ^ uVar6
              | uVar6 << 1;
-        if (((unsigned char *)0x00004304)[uVar23] == '\0') {
+        if (((unsigned char *)0x00004304)[engineState] == '\0') {
           stream[0x2475] = '\x01';
-          uVar10 = (uint)(byte)((unsigned char *)0x00002d48)[uVar23 + 2] << 0x1f | uVar10 & 0x7fffffff;
+          uVar10 = (uint)(byte)((unsigned char *)0x00002d48)[engineState + 2] << 0x1f | uVar10 & 0x7fffffff;
           *(uint *)(stream + 0x44) = uVar10;
         }
         else if ((int)uVar10 < 0) {
@@ -2208,14 +2213,14 @@ LAB_000ab014:
         puVar21 = (undefined *)(*(uint *)(stream + 0x1928) >> 1 & 1);
         *(uint *)(stream + 0x1928) = *(uint *)(stream + 0x1928) & 0xfffffffd | (uint)puVar21;
       }
-      if (((unsigned char *)0x00004304)[uVar23] == '\0') {
+      if (((unsigned char *)0x00004304)[engineState] == '\0') {
         if ((int)*(uint *)(stream + 0x44) < 0) {
           streamWord18a4_2 = *(uint *)(stream + 0x18a4);
-          uVar10 = -(*(ushort *)(((unsigned char *)0x00002d48) + uVar23) ^ 0x81fa);
-          uVar12 = (uint)((*(ushort *)(((unsigned char *)0x00002d48) + uVar23) ^ 0x81fa) == 0) << 2;
+          uVar10 = -(*(ushort *)(((unsigned char *)0x00002d48) + engineState) ^ 0x81fa);
+          uVar12 = (uint)((*(ushort *)(((unsigned char *)0x00002d48) + engineState) ^ 0x81fa) == 0) << 2;
           *(uint *)(stream + 0x18a4) = uVar12 | streamWord18a4_2 & 0xfffffffb;
           *(uint *)(stream + 0x18a4) =
-               ((byte)((unsigned char *)0x00002d48)[uVar23 + 4] & 1) << 1 | uVar12 | streamWord18a4_2 & 0xfffffff9;
+               ((byte)((unsigned char *)0x00002d48)[engineState + 4] & 1) << 1 | uVar12 | streamWord18a4_2 & 0xfffffff9;
         }
         else {
           *(uint *)(stream + 0x18a4) =
@@ -2375,7 +2380,7 @@ LAB_000ab460:
     }
     if (((uint)pcVar17 & 0x3f000008) != 0) {
       dirtyBitsArg = pcVar17;
-      ((double (*)())FUN_000a8630)(stream,uVar23,pcVar17,fpPassThrough1,fpPassThrough2,fpPassThrough3,fpPassThrough4,fpPassThrough5,fpPassThrough6,
+      ((double (*)())FUN_000a8630)(stream,engineState,pcVar17,fpPassThrough1,fpPassThrough2,fpPassThrough3,fpPassThrough4,fpPassThrough5,fpPassThrough6,
                    fpPassThrough7,fpPassThrough8,staleStackArg_ffffff68,staleStackArg_ffffff70,staleStackArg_ffffff78,
                    staleStackArg_ffffff80,staleStackArg_ffffff88);
       fpPassThrough1 = (double)((int (*)())FUN_000a8a00)(streamPtr4_2,pcVar17);
@@ -2412,17 +2417,17 @@ LAB_000ab460:
       *(uint *)(stream + 0x3c) = *(uint *)(stream + 0x3c) | 0x40;
     }
     if ((dirtyBitsWord0 & 0x4000000) != 0) {
-      iVar29 = *(int *)(((unsigned char *)0x00003180) + uVar23);
-      uVar10 = *(uint *)(((unsigned char *)0x00003184) + uVar23);
-      iVar5 = *(int *)(((unsigned char *)0x00003188) + uVar23);
-      iVar13 = *(int *)(((unsigned char *)0x0000318c) + uVar23);
+      iVar29 = *(int *)(((unsigned char *)0x00003180) + engineState);
+      uVar10 = *(uint *)(((unsigned char *)0x00003184) + engineState);
+      engineStateWord3188 = *(int *)(((unsigned char *)0x00003188) + engineState);
+      engineStateWord318c = *(int *)(((unsigned char *)0x0000318c) + engineState);
       iVar19 = *(int *)(stream + -0xe0);
       iVar26 = *(int *)(stream + -0xe4);
       *(int *)(stream + 0x440) = iVar29;
       *(uint *)(stream + 0x444) = uVar10;
-      *(int *)(stream + 0x448) = iVar5;
-      *(int *)(stream + 0x44c) = iVar13;
-      if (((unsigned char *)0x00003190)[uVar23] == '\0') {
+      *(int *)(stream + 0x448) = engineStateWord3188;
+      *(int *)(stream + 0x44c) = engineStateWord318c;
+      if (((unsigned char *)0x00003190)[engineState] == '\0') {
         *(undefined4 *)(((unsigned char *)0x0000135c) + (int)stream) = 0;
         *(int *)(((unsigned char *)0x00001360) + (int)stream) = iVar26;
         *(int *)(((unsigned char *)0x00001364) + (int)stream) = iVar19;
@@ -2430,21 +2435,21 @@ LAB_000ab460:
       }
       else {
         if (stream[0x293c] != '\0') {
-          uVar10 = iVar19 - (uVar10 + iVar13);
+          uVar10 = iVar19 - (uVar10 + engineStateWord318c);
         }
-        iVar5 = iVar29 + iVar5;
-        iVar13 = uVar10 + iVar13;
+        engineStateWord3188 = iVar29 + engineStateWord3188;
+        engineStateWord318c = uVar10 + engineStateWord318c;
         if (iVar29 < 0) {
           iVar29 = 0;
         }
         if ((int)uVar10 < 0) {
           uVar10 = 0;
         }
-        if (iVar5 <= iVar26) {
-          iVar26 = iVar5;
+        if (engineStateWord3188 <= iVar26) {
+          iVar26 = engineStateWord3188;
         }
-        if (iVar13 <= iVar19) {
-          iVar19 = iVar13;
+        if (engineStateWord318c <= iVar19) {
+          iVar19 = engineStateWord318c;
         }
         *(int *)(((unsigned char *)0x00001358) + (int)stream) = iVar29;
         *(uint *)(((unsigned char *)0x0000135c) + (int)stream) = uVar10;
@@ -2489,10 +2494,10 @@ LAB_000ab460:
     if (pcVar25 != (char *)0x0) {
       if ((dirtyBitsWord0 & 0x1800) != 0) {
         dirtyBitsArg = pcVar25;
-        fpPassThrough1 = (double)((int (*)())FUN_000a8e20)(stream,uVar23,pcVar25);
+        fpPassThrough1 = (double)((int (*)())FUN_000a8e20)(stream,engineState,pcVar25);
       }
       if ((dirtyBitsWord0 & 0x3000000) != 0) {
-        fpPassThrough1 = (double)((int (*)())FUN_000a8d70)(stream,uVar23);
+        fpPassThrough1 = (double)((int (*)())FUN_000a8d70)(stream,engineState);
         dirtyBitsArg = pcVar25;
       }
       if ((dirtyBitsWord0 & 0x38) != 0) {
@@ -2509,7 +2514,7 @@ LAB_000ab460:
         stream[0x29] = '\x01';
       }
       if ((dirtyBitsWord0 & 0x1c000) != 0) {
-        fpPassThrough1 = (double)((int (*)())FUN_000a8c00)(stream,uVar23,dirtyBitsArg,scratchR6,dirtyBitsWord0 & 0x1c000,uVar24,
+        fpPassThrough1 = (double)((int (*)())FUN_000a8c00)(stream,engineState,dirtyBitsArg,scratchR6,dirtyBitsWord0 & 0x1c000,uVar24,
                                         uVar10);
       }
       if ((dirtyBitsWord0 & 0x20000) != 0) {
@@ -2517,7 +2522,7 @@ LAB_000ab460:
         *(uint *)(stream + 0x3c) = *(uint *)(stream + 0x3c) | 8;
       }
       if ((dirtyBitsWord0 & 0x400000) != 0) {
-        ((double (*)())FUN_000a9640)(stream,uVar23,fpPassThrough1,fpPassThrough2,fpPassThrough3,fpPassThrough4,fpPassThrough5,fpPassThrough6,fpPassThrough7,
+        ((double (*)())FUN_000a9640)(stream,engineState,fpPassThrough1,fpPassThrough2,fpPassThrough3,fpPassThrough4,fpPassThrough5,fpPassThrough6,fpPassThrough7,
                      fpPassThrough8,staleStackArg_ffffff68,staleStackArg_ffffff70,staleStackArg_ffffff78,
                      staleStackArg_ffffff80);
       }
