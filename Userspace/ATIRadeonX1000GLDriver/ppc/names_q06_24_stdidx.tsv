@@ -1,0 +1,34 @@
+local	StandardIndex__ctor_124c94	param_2	tempIndex	INFERRED	index of the standard temporary in the program's load-temp table (program + 0x38 + 4 * index)
+local	StandardIndex__ctor_124c94	param_3	baseCtorArg3	INFERRED	third argument forwarded to TempValue__ctor
+local	StandardIndex__ctor_124c94	param_4	baseCtorArg4	INFERRED	fourth argument forwarded to TempValue__ctor
+use	StandardIndex__ctor_124c94	uVar4	movInst	INFERRED	IRMov created to copy the temporary into this register	^\s*uVar4\ =\ FUN_001084b8\(0x31,param_5\);$	+5
+use	StandardIndex__ctor_124c94	iVar1	cachedLoadInst	INFERRED	IRLoadTemp already created for this index (0 when none)	^\s*iVar1\ =\ \*\(int\ \*\)\(param_2\ \*\ 4\ \+\ iVar5\ \+\ 0x38\);$	+2
+use	StandardIndex__ctor_124c94	iVar1	cachedLoadInst	INFERRED	IRLoadTemp already created for this index (0 when none)	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(iVar1\ \+\ 0x8c\);$	+1
+use	StandardIndex__ctor_124c94	uVar2	tempVReg	INFERRED	virtual register defined by the temporary's IRLoadTemp	^\s*uVar2\ =\ FUN_00127608\(\*\(undefined4\ \*\)\(iVar5\ \+\ 0x3ac\),0x10,param_2,0\);$	+1
+use	StandardIndex__ctor_124c94	uVar2	tempVReg	INFERRED	virtual register defined by the temporary's IRLoadTemp	^\s*FUN_001046c8\(puVar6,0,uVar2\);$	+2
+use	StandardIndex__ctor_124c94	uVar2	tempVReg	INFERRED	virtual register defined by the temporary's IRLoadTemp	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(iVar1\ \+\ 0x8c\);$	+1
+use	StandardIndex__ctor_124c94	uVar2	tempVReg	INFERRED	virtual register defined by the temporary's IRLoadTemp	^\s*FUN_001046c8\(uVar4,1,uVar2\);$	+1
+use	StandardIndex__ctor_124c94	iVar5	program	INFERRED	compiler->currentProgram	^\s*iVar5\ =\ \*\(int\ \*\)\(param_5\ \+\ COMP_currentProgram\);$	+2
+use	StandardIndex__ctor_124c94	iVar5	program	INFERRED	compiler->currentProgram	^\s*uVar2\ =\ FUN_00127608\(\*\(undefined4\ \*\)\(iVar5\ \+\ 0x3ac\),0x10,param_2,0\);$	+1
+use	StandardIndex__ctor_124c94	iVar5	program	INFERRED	compiler->currentProgram	^\s*FUN_000e76c4\(\*\(undefined4\ \*\)\(iVar5\ \+\ 0x3a0\),puVar6\);$	+1
+use	StandardIndex__ctor_124c94	iVar5	program	INFERRED	compiler->currentProgram	^\s*\*\(undefined4\ \*\*\)\(param_2\ \*\ 4\ \+\ iVar5\ \+\ 0x38\)\ =\ puVar6;$	+1
+use	StandardIndex__ctor_124c94	iVar5	program	INFERRED	compiler->currentProgram	^\s*FUN_000e7688\(\*\(undefined4\ \*\)\(iVar5\ \+\ 0x3a0\),uVar4\);$	+1
+use	StandardIndex__ctor_124c94	puVar6	loadTempInst	INFERRED	new IRLoadTemp (allocation + 1)	^\s*puVar6\ =\ puVar3\ \+\ 1;$	+1
+use	StandardIndex__ctor_124c94	puVar6	loadTempInst	INFERRED	new IRLoadTemp (allocation + 1)	^\s*FUN_00109348\(puVar6,param_1,param_5\);$	+5
+local	StandardIndex__ctor_124b24	param_2	tempIndex	INFERRED	index of the standard temporary in the program's load-temp table (program + 0x38 + 4 * index)
+local	StandardIndex__ctor_124b24	param_3	baseCtorArg3	INFERRED	third argument forwarded to TempValue__ctor
+local	StandardIndex__ctor_124b24	param_4	baseCtorArg4	INFERRED	fourth argument forwarded to TempValue__ctor
+use	StandardIndex__ctor_124b24	uVar4	movInst	INFERRED	IRMov created to copy the temporary into this register	^\s*uVar4\ =\ FUN_001084b8\(0x31,param_5\);$	+5
+use	StandardIndex__ctor_124b24	iVar1	cachedLoadInst	INFERRED	IRLoadTemp already created for this index (0 when none)	^\s*iVar1\ =\ \*\(int\ \*\)\(param_2\ \*\ 4\ \+\ iVar5\ \+\ 0x38\);$	+2
+use	StandardIndex__ctor_124b24	iVar1	cachedLoadInst	INFERRED	IRLoadTemp already created for this index (0 when none)	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(iVar1\ \+\ 0x8c\);$	+1
+use	StandardIndex__ctor_124b24	uVar2	tempVReg	INFERRED	virtual register defined by the temporary's IRLoadTemp	^\s*uVar2\ =\ FUN_00127608\(\*\(undefined4\ \*\)\(iVar5\ \+\ 0x3ac\),0x10,param_2,0\);$	+1
+use	StandardIndex__ctor_124b24	uVar2	tempVReg	INFERRED	virtual register defined by the temporary's IRLoadTemp	^\s*FUN_001046c8\(puVar6,0,uVar2\);$	+2
+use	StandardIndex__ctor_124b24	uVar2	tempVReg	INFERRED	virtual register defined by the temporary's IRLoadTemp	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(iVar1\ \+\ 0x8c\);$	+1
+use	StandardIndex__ctor_124b24	uVar2	tempVReg	INFERRED	virtual register defined by the temporary's IRLoadTemp	^\s*FUN_001046c8\(uVar4,1,uVar2\);$	+1
+use	StandardIndex__ctor_124b24	iVar5	program	INFERRED	compiler->currentProgram	^\s*iVar5\ =\ \*\(int\ \*\)\(param_5\ \+\ COMP_currentProgram\);$	+2
+use	StandardIndex__ctor_124b24	iVar5	program	INFERRED	compiler->currentProgram	^\s*uVar2\ =\ FUN_00127608\(\*\(undefined4\ \*\)\(iVar5\ \+\ 0x3ac\),0x10,param_2,0\);$	+1
+use	StandardIndex__ctor_124b24	iVar5	program	INFERRED	compiler->currentProgram	^\s*FUN_000e76c4\(\*\(undefined4\ \*\)\(iVar5\ \+\ 0x3a0\),puVar6\);$	+1
+use	StandardIndex__ctor_124b24	iVar5	program	INFERRED	compiler->currentProgram	^\s*\*\(undefined4\ \*\*\)\(param_2\ \*\ 4\ \+\ iVar5\ \+\ 0x38\)\ =\ puVar6;$	+1
+use	StandardIndex__ctor_124b24	iVar5	program	INFERRED	compiler->currentProgram	^\s*FUN_000e7688\(\*\(undefined4\ \*\)\(iVar5\ \+\ 0x3a0\),uVar4\);$	+1
+use	StandardIndex__ctor_124b24	puVar6	loadTempInst	INFERRED	new IRLoadTemp (allocation + 1)	^\s*puVar6\ =\ puVar3\ \+\ 1;$	+1
+use	StandardIndex__ctor_124b24	puVar6	loadTempInst	INFERRED	new IRLoadTemp (allocation + 1)	^\s*FUN_00109348\(puVar6,param_1,param_5\);$	+5

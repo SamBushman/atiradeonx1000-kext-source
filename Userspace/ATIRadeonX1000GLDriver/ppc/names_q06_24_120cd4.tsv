@@ -1,0 +1,30 @@
+use	FUN_00120cd4	puVar1	blockCursor	INFERRED	cursor over the block array from FUN_000ec4f0	^\s*puVar1\ =\ \(undefined4\ \*\)FUN_000ec4f0\(param_1\);$	+1
+use	FUN_00120cd4	puVar1	blockCursor	INFERRED	cursor over the block array from FUN_000ec4f0	^\s*puVar1\ =\ puVar1\ \+\ 1;$	+1
+use	FUN_00120cd4	puVar1	blockCursor	INFERRED	cursor over the block array from FUN_000ec4f0	^\s*\(\(int\ \(\*\)\(\)\)FUN_0011ff7c\)\(param_1,\*puVar1,puVar3\ \+\ 1,puVar8,puVar9,puVar10,puVar12,in_r10\);$	+1
+use	FUN_00120cd4	puVar8	pendingCopyVector	INFERRED	vector of pending copies handed to FUN_0011ff7c as its second vector	^\s*puVar8\ =\ puVar4\ \+\ 1;$	+1
+use	FUN_00120cd4	puVar8	pendingCopyVector	INFERRED	vector of pending copies handed to FUN_0011ff7c as its second vector	^\s*in_r6\ =\ puVar8;$	+1
+use	FUN_00120cd4	puVar8	pendingCopyVector	INFERRED	vector of pending copies handed to FUN_0011ff7c as its second vector	^\s*\(\(int\ \(\*\)\(\)\)FUN_0011ff7c\)\(param_1,\*puVar1,puVar3\ \+\ 1,puVar8,puVar9,puVar10,puVar12,in_r10\);$	+1
+use	FUN_00120cd4	puVar8	pendingCopyVector	INFERRED	vector of pending copies handed to FUN_0011ff7c as its second vector	^\s*if\ \(puVar8\ !=\ \(undefined4\ \*\)0x0\)\ \{$	+1
+use	FUN_00120cd4	puVar9	locationVector	INFERRED	vector of current locations handed to FUN_0011ff7c as its third vector	^\s*puVar9\ =\ puVar5\ \+\ 1;$	+1
+use	FUN_00120cd4	puVar9	locationVector	INFERRED	vector of current locations handed to FUN_0011ff7c as its third vector	^\s*in_r7\ =\ puVar9;$	+1
+use	FUN_00120cd4	puVar9	locationVector	INFERRED	vector of current locations handed to FUN_0011ff7c as its third vector	^\s*\(\(int\ \(\*\)\(\)\)FUN_0011ff7c\)\(param_1,\*puVar1,puVar3\ \+\ 1,puVar8,puVar9,puVar10,puVar12,in_r10\);$	+1
+use	FUN_00120cd4	puVar9	locationVector	INFERRED	vector of current locations handed to FUN_0011ff7c as its third vector	^\s*if\ \(puVar9\ !=\ \(undefined4\ \*\)0x0\)\ \{$	+1
+use	FUN_00120cd4	puVar10	readyVector	INFERRED	vector of ready copies handed to FUN_0011ff7c as its fourth vector	^\s*puVar10\ =\ puVar6\ \+\ 1;$	+1
+use	FUN_00120cd4	puVar10	readyVector	INFERRED	vector of ready copies handed to FUN_0011ff7c as its fourth vector	^\s*in_r8\ =\ puVar10;$	+1
+use	FUN_00120cd4	puVar10	readyVector	INFERRED	vector of ready copies handed to FUN_0011ff7c as its fourth vector	^\s*\(\(int\ \(\*\)\(\)\)FUN_0011ff7c\)\(param_1,\*puVar1,puVar3\ \+\ 1,puVar8,puVar9,puVar10,puVar12,in_r10\);$	+1
+use	FUN_00120cd4	puVar10	readyVector	INFERRED	vector of ready copies handed to FUN_0011ff7c as its fourth vector	^\s*if\ \(puVar10\ !=\ \(undefined4\ \*\)0x0\)\ \{$	+1
+use	FUN_00120cd4	puVar12	instTableVector	INFERRED	vector id-to-instruction table handed to FUN_0011ff7c as its fifth vector	^\s*puVar12\ =\ puVar7\ \+\ 1;$	+1
+use	FUN_00120cd4	puVar12	instTableVector	INFERRED	vector id-to-instruction table handed to FUN_0011ff7c as its fifth vector	^\s*in_r9\ =\ puVar12;$	+2
+use	FUN_00120cd4	puVar12	instTableVector	INFERRED	vector id-to-instruction table handed to FUN_0011ff7c as its fifth vector	^\s*if\ \(puVar12\ !=\ \(undefined4\ \*\)0x0\)\ \{$	+1
+use	FUN_00120cd4	in_r6	staleArg6	INFERRED	r6 left over from the last FUN_0011ff7c call (pending copy vector)	^\s*in_r6\ =\ puVar8;$	+1
+use	FUN_00120cd4	in_r6	staleArg6	INFERRED	r6 left over from the last FUN_0011ff7c call (pending copy vector)	^\s*FUN_000e0e0c\(\*\(undefined4\ \*\)\(param_1\ \+\ 8\),$	+3
+use	FUN_00120cd4	in_r7	staleArg7	INFERRED	r7 left over from the last call (location vector)	^\s*in_r7\ =\ puVar9;$	+1
+use	FUN_00120cd4	in_r7	staleArg7	INFERRED	r7 left over from the last call (location vector)	^\s*FUN_000e0e0c\(\*\(undefined4\ \*\)\(param_1\ \+\ 8\),$	+3
+use	FUN_00120cd4	in_r8	staleArg8	INFERRED	r8 left over from the last call (ready vector)	^\s*in_r8\ =\ puVar10;$	+1
+use	FUN_00120cd4	in_r8	staleArg8	INFERRED	r8 left over from the last call (ready vector)	^\s*FUN_000e0e0c\(\*\(undefined4\ \*\)\(param_1\ \+\ 8\),$	+3
+use	FUN_00120cd4	in_r9	staleArg9	INFERRED	r9 left over from the last call (instruction table)	^\s*in_r9\ =\ puVar12;$	+1
+use	FUN_00120cd4	in_r9	staleArg9	INFERRED	r9 left over from the last call (instruction table)	^\s*FUN_000e0e0c\(\*\(undefined4\ \*\)\(param_1\ \+\ 8\),$	+3
+use	FUN_00120cd4	in_r10	staleTempCountRef	INFERRED	r10 left over from the last call: address of the temp counter	^\s*in_r10\ =\ local_48;$	+1
+use	FUN_00120cd4	in_r10	staleTempCountRef	INFERRED	r10 left over from the last call: address of the temp counter	^\s*\(\(int\ \(\*\)\(\)\)FUN_0011ff7c\)\(param_1,\*puVar1,puVar3\ \+\ 1,puVar8,puVar9,puVar10,puVar12,in_r10\);$	+1
+use	FUN_00120cd4	in_r10	staleTempCountRef	INFERRED	r10 left over from the last call: address of the temp counter	^\s*FUN_000e0e0c\(\*\(undefined4\ \*\)\(param_1\ \+\ 8\),$	+3
+local	FUN_00120cd4	local_48	tempCount	INFERRED	number of temporaries added to break copy cycles (logged at the end)

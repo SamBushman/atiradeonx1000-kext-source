@@ -1,0 +1,21 @@
+local	FUN_00135c20	param_1	graph	INFERRED	register interference graph (+4 node vector)
+local	FUN_00135c20	param_3	nodeB	INFERRED	second node of the coalescing candidate pair
+use	FUN_00135c20	uVar1	merged	INFERRED	return value: 1 when the two nodes were merged or are the same node	^\s*uVar1\ =\ 1;$	+1
+use	FUN_00135c20	uVar1	merged	INFERRED	return value: 1 when the two nodes were merged or are the same node	^\s*uVar1\ =\ 0;$	+1
+use	FUN_00135c20	uVar1	merged	INFERRED	return value: 1 when the two nodes were merged or are the same node	^\s*uVar1\ =\ 1;$@2	+1
+use	FUN_00135c20	uVar1	merged	INFERRED	return value: 1 when the two nodes were merged or are the same node	^\s*return\ uVar1;$	+1
+use	FUN_00135c20	uVar3	nodeVectorCount	INFERRED	filled count of the node vector	^\s*uVar3\ =\ puVar6\[1\];$	+3
+use	FUN_00135c20	puVar4	lowerNodeRef	INFERRED	element reference of the lower-numbered node in the node vector	^\s*puVar4\ =\ \(undefined4\ \*\)\(uVar5\ \*\ 4\ \+\ puVar6\[2\]\);$	+1
+use	FUN_00135c20	puVar4	lowerNodeRef	INFERRED	element reference of the lower-numbered node in the node vector	^\s*puVar4\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar6,uVar5\);$	+1
+use	FUN_00135c20	puVar4	lowerNodeRef	INFERRED	element reference of the lower-numbered node in the node vector	^\s*\(\(int\ \(\*\)\(\)\)FUN_00135a2c\)\(\*puVar4,param_2,param_1\);$	+1
+use	FUN_00135c20	uVar5	lowerNode	INFERRED	the lower-numbered node of the pair (the one that keeps its entry)	^\s*uVar5\ =\ param_2;$	+1
+use	FUN_00135c20	uVar5	lowerNode	INFERRED	the lower-numbered node of the pair (the one that keeps its entry)	^\s*uVar5\ =\ param_3;$	+1
+use	FUN_00135c20	uVar5	lowerNode	INFERRED	the lower-numbered node of the pair (the one that keeps its entry)	^\s*if\ \(uVar5\ <\ \*puVar6\)\ \{$	+1
+use	FUN_00135c20	uVar5	lowerNode	INFERRED	the lower-numbered node of the pair (the one that keeps its entry)	^\s*if\ \(uVar3\ <=\ uVar5\)\ \{$	+3
+use	FUN_00135c20	uVar5	lowerNode	INFERRED	the lower-numbered node of the pair (the one that keeps its entry)	^\s*puVar4\ =\ \(undefined4\ \*\)\(uVar5\ \*\ 4\ \+\ puVar6\[2\]\);$	+1
+use	FUN_00135c20	uVar5	lowerNode	INFERRED	the lower-numbered node of the pair (the one that keeps its entry)	^\s*puVar4\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar6,uVar5\);$	+1
+use	FUN_00135c20	uVar5	lowerNode	INFERRED	the lower-numbered node of the pair (the one that keeps its entry)	^\s*\(\(int\ \(\*\)\(\)\)FUN_00134cd4\)\(param_1,uVar5,param_2\);$	+1
+use	FUN_00135c20	puVar6	nodeVector	INFERRED	node vector header (graph +4)	^\s*puVar6\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 4\);$	+3
+use	FUN_00135c20	puVar6	nodeVector	INFERRED	node vector header (graph +4)	^\s*_memset\(uVar3\ \*\ 4\ \+\ puVar6\[2\],0,\(uVar5\ \-\ uVar3\)\ \*\ 4\ \+\ 4\);$	+2
+use	FUN_00135c20	puVar6	nodeVector	INFERRED	node vector header (graph +4)	^\s*puVar4\ =\ \(undefined4\ \*\)\(uVar5\ \*\ 4\ \+\ puVar6\[2\]\);$	+1
+use	FUN_00135c20	puVar6	nodeVector	INFERRED	node vector header (graph +4)	^\s*puVar4\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar6,uVar5\);$	+1

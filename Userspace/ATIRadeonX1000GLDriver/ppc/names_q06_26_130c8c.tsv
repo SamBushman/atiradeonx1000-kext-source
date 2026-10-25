@@ -1,0 +1,14 @@
+local	FUN_00130c8c	param_1	allocator	INFERRED	register allocator object (+0x2c pass, +0x18 counters)
+local	FUN_00130c8c	param_2	spillRecord	INFERRED	record from which the instruction to copy before is derived (FUN_00130728)
+local	FUN_00130c8c	param_4	registerCountRef	INFERRED	in/out register count; the new move takes the old value as its destination register
+use	FUN_00130c8c	uVar1	sourceRegKind	INFERRED	register kind (+0x98) of the source, copied to the move's destination	^\s*uVar1\ =\ \*\(undefined4\ \*\)\(param_3\ \+\ 0x98\);$	+1
+use	FUN_00130c8c	uVar1	sourceRegKind	INFERRED	register kind (+0x98) of the source, copied to the move's destination	^\s*\*\(undefined4\ \*\)\(iVar3\ \+\ 0x98\)\ =\ uVar1;$	+1
+use	FUN_00130c8c	uVar1	anchorInstWord4	INFERRED	word 4 of the anchor instruction, queried against the backend	^\s*uVar1\ =\ \*\(undefined4\ \*\)\(iVar2\ \+\ 4\);$	+1
+use	FUN_00130c8c	uVar1	anchorInstWord4	INFERRED	word 4 of the anchor instruction, queried against the backend	^\s*iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*piVar4\ \+\ 0x150\)\)\(piVar4,uVar1\);$	+1
+use	FUN_00130c8c	iVar2	anchorInst	INFERRED	instruction before which the move is inserted	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)FUN_00130728\)\(param_2\);$	+1
+use	FUN_00130c8c	iVar2	anchorInst	INFERRED	instruction before which the move is inserted	^\s*uVar1\ =\ \*\(undefined4\ \*\)\(iVar2\ \+\ 4\);$	+1
+use	FUN_00130c8c	iVar2	anchorInst	INFERRED	instruction before which the move is inserted	^\s*FUN_000e7700\(\*\(undefined4\ \*\)\(iVar2\ \+\ 0x158\),iVar2,iVar3\);$	+1
+use	FUN_00130c8c	piVar4	backend	INFERRED	compiler backend object (compiler + 0x30c)	^\s*piVar4\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x2c\)\ \+\ 0x30c\);$	+2
+use	FUN_00130c8c	iVar5	backendQuery150	INFERRED	backend vtable slot 0x150 result: the move needs flag 0x1000	^\s*iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*piVar4\ \+\ 0x150\)\)\(piVar4,uVar1\);$	+2
+use	FUN_00130c8c	iVar6	program	INFERRED	pass->program (+0x45c/+0x458 register tables)	^\s*iVar6\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x2c\)\ \+\ 0x6c4\);$	+1
+use	FUN_00130c8c	iVar6	program	INFERRED	pass->program (+0x45c/+0x458 register tables)	^\s*\*\(undefined4\ \*\)\(\*param_4\ \*\ 4\ \+\ \*\(int\ \*\)\(iVar6\ \+\ 0x45c\)\)\ =\ 0;$	+2

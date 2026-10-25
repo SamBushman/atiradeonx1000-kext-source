@@ -2045,8 +2045,8 @@ int FUN_0012ae1c(param_1)
 }
 
 /* FUN_0012ae6c @ 0x12ae6c (132 bytes) */
-int FUN_0012ae6c(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  int param_1;
+int FUN_0012ae6c(block, param_2, param_3, param_4, param_5, param_6, param_7)
+  int block;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
@@ -2054,60 +2054,60 @@ int FUN_0012ae6c(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_6;
   undefined4 param_7;
 {
-  int *piVar1;
-  int *piVar2;
-  int iVar3;
+  int *inst;
+  int *nextInstLink;
+  int instQuery28;
   
-  piVar1 = *(int **)(param_1 + 0x98);
-  piVar2 = (int *)(*(int **)(param_1 + 0x98))[2];
+  inst = *(int **)(block + 0x98);
+  nextInstLink = (int *)(*(int **)(block + 0x98))[2];
   do {
-    if (piVar2 == (int *)0x0) {
+    if (nextInstLink == (int *)0x0) {
       return 0;
     }
-    if ((piVar1[5] & 1U) != 0) {
-      iVar3 = (**(code **)(*piVar1 + 0x28))(piVar1);
-      if (iVar3 != 0) {
+    if ((inst[5] & 1U) != 0) {
+      instQuery28 = (**(code **)(*inst + 0x28))(inst);
+      if (instQuery28 != 0) {
         return 1;
       }
-      piVar2 = (int *)piVar1[2];
+      nextInstLink = (int *)inst[2];
     }
-    piVar1 = piVar2;
-    piVar2 = (int *)piVar2[2];
+    inst = nextInstLink;
+    nextInstLink = (int *)nextInstLink[2];
   } while( true );
 }
 
 /* FUN_0012aef0 @ 0x12aef0 (248 bytes) */
-int FUN_0012aef0(param_1, param_2, block)
+int FUN_0012aef0(param_1, firstBlock, block)
   undefined4 param_1;
-  undefined4 param_2;
+  undefined4 firstBlock;
   int block;
 {
   undefined4 successor;
-  int iVar1;
-  undefined4 uVar2;
-  int *piVar3;
-  int *piVar4;
+  int isSimple;
+  undefined4 mergeResult;
+  int *nextInst;
+  int *inst;
   
-  iVar1 = Block__isSimple(param_2);
-  if ((((iVar1 == 0) || (iVar1 = Block__isSimple(block), iVar1 == 0)) ||
-      (iVar1 = Block__successorCount(param_2), iVar1 != 1)) ||
-     ((iVar1 = Block__predecessorCount(block), iVar1 != 1 || (iVar1 = Block__hasSuccessors(block), iVar1 == 0)))) {
-    uVar2 = 0;
+  isSimple = Block__isSimple(firstBlock);
+  if ((((isSimple == 0) || (isSimple = Block__isSimple(block), isSimple == 0)) ||
+      (isSimple = Block__successorCount(firstBlock), isSimple != 1)) ||
+     ((isSimple = Block__predecessorCount(block), isSimple != 1 || (isSimple = Block__hasSuccessors(block), isSimple == 0)))) {
+    mergeResult = 0;
   }
   else {
-    piVar3 = *(int **)(*(int *)(block + 200) + 8);
-    while (piVar4 = piVar3, iVar1 = (**(code **)(*piVar4 + 0x38))(piVar4), iVar1 == 0) {
-      piVar3 = (int *)piVar4[2];
-      if ((piVar4[5] & 1U) != 0) {
-        DList__unlink(piVar4);
-        Block__appendInst(param_2,piVar4);
+    nextInst = *(int **)(*(int *)(block + 200) + 8);
+    while (inst = nextInst, isSimple = (**(code **)(*inst + 0x38))(inst), isSimple == 0) {
+      nextInst = (int *)inst[2];
+      if ((inst[5] & 1U) != 0) {
+        DList__unlink(inst);
+        Block__appendInst(firstBlock,inst);
       }
     }
     successor = Block__getSuccessor(block,0);
-    Block__bypassAndDetach(block,param_2,successor);
-    uVar2 = 1;
+    Block__bypassAndDetach(block,firstBlock,successor);
+    mergeResult = 1;
   }
-  return uVar2;
+  return mergeResult;
 }
 
 /* FUN_0012afe8 @ 0x12afe8 (344 bytes) */

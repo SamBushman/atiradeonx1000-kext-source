@@ -674,42 +674,42 @@ int FUN_001272d4(param_1, param_2, param_3)
 }
 
 /* FUN_00127324 @ 0x127324 (232 bytes) */
-int FUN_00127324(param_1, param_2, param_3, param_4, param_5)
-  int param_1;
-  int param_2;
-  int param_3;
-  undefined4 *param_4;
-  undefined4 *param_5;
+int FUN_00127324(program, registerFileKind, vregId, kindOut, indexOut)
+  int program;
+  int registerFileKind;
+  int vregId;
+  undefined4 *kindOut;
+  undefined4 *indexOut;
 {
-  if (param_2 == 0x24) {
-    if (*(int *)(param_1 + 0x4c) == param_3) {
-      *param_4 = 0x3f;
-      *param_5 = 0;
+  if (registerFileKind == 0x24) {
+    if (*(int *)(program + 0x4c) == vregId) {
+      *kindOut = 0x3f;
+      *indexOut = 0;
       return 1;
     }
-    if (param_3 == *(int *)(param_1 + 0x54)) {
-      *param_4 = 0x3f;
-      *param_5 = 1;
+    if (vregId == *(int *)(program + 0x54)) {
+      *kindOut = 0x3f;
+      *indexOut = 1;
       return 1;
     }
-    if (param_3 == *(int *)(param_1 + 0x50)) {
-      *param_4 = 0x40;
-      *param_5 = 0;
+    if (vregId == *(int *)(program + 0x50)) {
+      *kindOut = 0x40;
+      *indexOut = 0;
       return 1;
     }
-    if (param_3 == *(int *)(param_1 + 0x58)) {
-      *param_4 = 0x40;
-      *param_5 = 1;
+    if (vregId == *(int *)(program + 0x58)) {
+      *kindOut = 0x40;
+      *indexOut = 1;
       return 1;
     }
-    if (param_3 == *(int *)(param_1 + 0x5c)) {
-      *param_4 = 0x3e;
-      *param_5 = 0;
+    if (vregId == *(int *)(program + 0x5c)) {
+      *kindOut = 0x3e;
+      *indexOut = 0;
       return 1;
     }
-    if (param_3 == *(int *)(param_1 + 0x60)) {
-      *param_4 = 0x41;
-      *param_5 = 0;
+    if (vregId == *(int *)(program + 0x60)) {
+      *kindOut = 0x41;
+      *indexOut = 0;
       return 1;
     }
   }

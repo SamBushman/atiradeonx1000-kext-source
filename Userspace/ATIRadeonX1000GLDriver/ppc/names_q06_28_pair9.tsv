@@ -1,0 +1,21 @@
+local	FUN_0012ae6c	param_1	block	INFERRED	block whose instruction list is scanned
+use	FUN_0012ae6c	piVar1	inst	INFERRED	instruction being tested	^\s*piVar1\ =\ \*\(int\ \*\*\)\(param_1\ \+\ 0x98\);$	+1
+use	FUN_0012ae6c	piVar1	inst	INFERRED	instruction being tested	^\s*if\ \(\(piVar1\[5\]\ \&\ 1U\)\ !=\ 0\)\ \{$	+2
+use	FUN_0012ae6c	piVar1	inst	INFERRED	instruction being tested	^\s*piVar2\ =\ \(int\ \*\)piVar1\[2\];$	+1
+use	FUN_0012ae6c	piVar1	inst	INFERRED	instruction being tested	^\s*piVar1\ =\ piVar2;$	+1
+use	FUN_0012ae6c	piVar2	nextInstLink	INFERRED	link to the instruction after the cursor	^\s*piVar2\ =\ \(int\ \*\)\(\*\(int\ \*\*\)\(param_1\ \+\ 0x98\)\)\[2\];$	+1
+use	FUN_0012ae6c	piVar2	nextInstLink	INFERRED	link to the instruction after the cursor	^\s*if\ \(piVar2\ ==\ \(int\ \*\)0x0\)\ \{$	+1
+use	FUN_0012ae6c	piVar2	nextInstLink	INFERRED	link to the instruction after the cursor	^\s*piVar2\ =\ \(int\ \*\)piVar1\[2\];$	+1
+use	FUN_0012ae6c	piVar2	nextInstLink	INFERRED	link to the instruction after the cursor	^\s*piVar1\ =\ piVar2;$	+2
+use	FUN_0012ae6c	iVar3	instQuery28	INFERRED	instruction vtable slot 0x28 test (returns 1 when found)	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*piVar1\ \+\ 0x28\)\)\(piVar1\);$	+2
+local	FUN_0010fa24	param_1	scopeId	INFERRED	scope id compared with record word 7 (+0x1c)
+local	FUN_0010fa24	param_2	slotOwnerRegister	INFERRED	array: for each slot, the register that owned it before renumbering
+local	FUN_0010fa24	param_3	firstSlot	INFERRED	first slot searched
+local	FUN_0010fa24	param_4	slotEnd	INFERRED	one past the last slot searched
+use	FUN_0010fa24	piVar4	slotScanCursor	INFERRED	cursor over the owner array from firstSlot	^\s*piVar4\ =\ \(int\ \*\)\(param_2\ \+\ param_3\ \*\ 4\);$	+1
+use	FUN_0010fa24	piVar4	slotScanCursor	INFERRED	cursor over the owner array from firstSlot	^\s*piVar4\ =\ piVar4\ \+\ 1;$	+2
+use	FUN_0010fa24	iVar1	slotsLeft	INFERRED	slots still to scan	^\s*iVar1\ =\ param_4\ \-\ param_3;$	+1
+use	FUN_0010fa24	iVar1	slotsLeft	INFERRED	slots still to scan	^\s*iVar1\ =\ iVar1\ \+\ \-1;$	+2
+use	FUN_0010fa24	iVar3	foundSlot	INFERRED	slot whose old owner matches the record's register (stored back into the record)	^\s*iVar3\ =\ param_3;$	+1
+use	FUN_0010fa24	iVar3	foundSlot	INFERRED	slot whose old owner matches the record's register (stored back into the record)	^\s*iVar3\ =\ iVar3\ \+\ 1;$	+1
+use	FUN_0010fa24	iVar3	foundSlot	INFERRED	slot whose old owner matches the record's register (stored back into the record)	^\s*\*\(int\ \*\)\(iVar5\ \+\ 0x14\)\ =\ iVar3;$	+1
