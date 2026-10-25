@@ -7848,119 +7848,119 @@ LAB_001452d4:
 }
 
 /* FUN_0014532c @ 0x14532c (836 bytes) */
-int FUN_0014532c(param_1, param_2)
-  undefined4 *param_1;
-  int *param_2;
+int FUN_0014532c(pass, pair)
+  undefined4 *pass;
+  int *pair;
 {
   int sourceDef;
-  uint uVar1;
-  int *piVar2;
-  int iVar3;
-  undefined4 uVar4;
-  int iVar5;
-  int iVar6;
+  uint userCount;
+  int *elementPtr;
+  int secondExtraSource;
+  undefined4 compiler;
+  int secondSelect;
+  int firstSelect;
   uint loopIndex;
-  int iVar8;
-  uint *puVar9;
-  int iVar10;
-  int iVar11;
+  int firstExtraSource;
+  uint *userVec;
+  int secondInst;
+  int firstInst;
   
-  iVar5 = param_2[3];
-  iVar6 = param_2[2];
-  iVar10 = param_2[1];
-  iVar11 = *param_2;
-  if (param_2[4] != 0) {
-    iVar5 = param_2[2];
-    iVar6 = param_2[3];
-    iVar10 = *param_2;
-    iVar11 = param_2[1];
+  secondSelect = pair[3];
+  firstSelect = pair[2];
+  secondInst = pair[1];
+  firstInst = *pair;
+  if (pair[4] != 0) {
+    secondSelect = pair[2];
+    firstSelect = pair[3];
+    secondInst = *pair;
+    firstInst = pair[1];
   }
-  param_1[2] = param_1[2] + 1;
-  if (0 < param_2[5]) {
-    ((int (*)())FUN_001440e4)(param_1,iVar11,iVar10,param_2 + 5);
+  pass[2] = pass[2] + 1;
+  if (0 < pair[5]) {
+    ((int (*)())FUN_001440e4)(pass,firstInst,secondInst,pair + 5);
   }
-  iVar8 = 0;
-  if ((*(uint *)(iVar11 + 0x14) & 0x200) != 0) {
-    iVar8 = IRInst__getOperandSource(iVar11,*(undefined4 *)(iVar11 + 0x84));
+  firstExtraSource = 0;
+  if ((*(uint *)(firstInst + 0x14) & 0x200) != 0) {
+    firstExtraSource = IRInst__getOperandSource(firstInst,*(undefined4 *)(firstInst + 0x84));
   }
-  if (iVar10 == iVar8) {
-    uVar4 = *param_1;
-    sourceDef = IRInst__getOperandSource(iVar11,*(undefined4 *)(iVar11 + 0x84));
-    puVar9 = *(uint **)(sourceDef + 0x10);
-    uVar1 = puVar9[1];
-    if (0 < (int)uVar1) {
+  if (secondInst == firstExtraSource) {
+    compiler = *pass;
+    sourceDef = IRInst__getOperandSource(firstInst,*(undefined4 *)(firstInst + 0x84));
+    userVec = *(uint **)(sourceDef + 0x10);
+    userCount = userVec[1];
+    if (0 < (int)userCount) {
       loopIndex = 0;
       do {
-        if (loopIndex < *puVar9) {
-          if (uVar1 <= loopIndex) {
-            _memset(uVar1 * 4 + puVar9[2],0,(loopIndex - uVar1) * 4 + 4);
-            puVar9[1] = loopIndex + 1;
+        if (loopIndex < *userVec) {
+          if (userCount <= loopIndex) {
+            _memset(userCount * 4 + userVec[2],0,(loopIndex - userCount) * 4 + 4);
+            userVec[1] = loopIndex + 1;
           }
-          piVar2 = (int *)(loopIndex * 4 + puVar9[2]);
+          elementPtr = (int *)(loopIndex * 4 + userVec[2]);
         }
         else {
-          piVar2 = (int *)Vector__elementRefGrow(puVar9,loopIndex);
+          elementPtr = (int *)Vector__elementRefGrow(userVec,loopIndex);
         }
-        if (iVar11 == *piVar2) {
-          Vector__removeAt(puVar9,loopIndex);
-          sourceDef = IRInst__getOperandSource(iVar11,*(undefined4 *)(iVar11 + 0x84));
+        if (firstInst == *elementPtr) {
+          Vector__removeAt(userVec,loopIndex);
+          sourceDef = IRInst__getOperandSource(firstInst,*(undefined4 *)(firstInst + 0x84));
           *(int *)(sourceDef + 0x160) = *(int *)(sourceDef + 0x160) + -1;
           break;
         }
-        uVar1 = puVar9[1];
+        userCount = userVec[1];
         loopIndex = loopIndex + 1;
-      } while ((int)loopIndex < (int)uVar1);
+      } while ((int)loopIndex < (int)userCount);
     }
-    iVar8 = 0;
-    IRInst__setOperandSource(iVar11,*(undefined4 *)(iVar11 + 0x84),0,1,uVar4);
-    *(int *)(iVar11 + 0x84) = *(int *)(iVar11 + 0x84) + -1;
-    *(uint *)(iVar11 + 0x14) = *(uint *)(iVar11 + 0x14) & 0xfffffdff;
+    firstExtraSource = 0;
+    IRInst__setOperandSource(firstInst,*(undefined4 *)(firstInst + 0x84),0,1,compiler);
+    *(int *)(firstInst + 0x84) = *(int *)(firstInst + 0x84) + -1;
+    *(uint *)(firstInst + 0x14) = *(uint *)(firstInst + 0x14) & 0xfffffdff;
   }
-  iVar3 = 0;
-  if ((*(uint *)(iVar10 + 0x14) & 0x200) != 0) {
-    iVar3 = IRInst__getOperandSource(iVar10,*(undefined4 *)(iVar10 + 0x84));
+  secondExtraSource = 0;
+  if ((*(uint *)(secondInst + 0x14) & 0x200) != 0) {
+    secondExtraSource = IRInst__getOperandSource(secondInst,*(undefined4 *)(secondInst + 0x84));
   }
-  if (iVar11 == iVar3) {
-    uVar4 = *param_1;
-    sourceDef = IRInst__getOperandSource(iVar10,*(undefined4 *)(iVar10 + 0x84));
-    puVar9 = *(uint **)(sourceDef + 0x10);
-    uVar1 = puVar9[1];
-    if (0 < (int)uVar1) {
+  if (firstInst == secondExtraSource) {
+    compiler = *pass;
+    sourceDef = IRInst__getOperandSource(secondInst,*(undefined4 *)(secondInst + 0x84));
+    userVec = *(uint **)(sourceDef + 0x10);
+    userCount = userVec[1];
+    if (0 < (int)userCount) {
       loopIndex = 0;
       do {
-        if (loopIndex < *puVar9) {
-          if (uVar1 <= loopIndex) {
-            _memset(uVar1 * 4 + puVar9[2],0,(loopIndex - uVar1) * 4 + 4);
-            puVar9[1] = loopIndex + 1;
+        if (loopIndex < *userVec) {
+          if (userCount <= loopIndex) {
+            _memset(userCount * 4 + userVec[2],0,(loopIndex - userCount) * 4 + 4);
+            userVec[1] = loopIndex + 1;
           }
-          piVar2 = (int *)(loopIndex * 4 + puVar9[2]);
+          elementPtr = (int *)(loopIndex * 4 + userVec[2]);
         }
         else {
-          piVar2 = (int *)Vector__elementRefGrow(puVar9,loopIndex);
+          elementPtr = (int *)Vector__elementRefGrow(userVec,loopIndex);
         }
-        if (iVar10 == *piVar2) {
-          Vector__removeAt(puVar9,loopIndex);
-          sourceDef = IRInst__getOperandSource(iVar10,*(undefined4 *)(iVar10 + 0x84));
+        if (secondInst == *elementPtr) {
+          Vector__removeAt(userVec,loopIndex);
+          sourceDef = IRInst__getOperandSource(secondInst,*(undefined4 *)(secondInst + 0x84));
           *(int *)(sourceDef + 0x160) = *(int *)(sourceDef + 0x160) + -1;
           break;
         }
-        uVar1 = puVar9[1];
+        userCount = userVec[1];
         loopIndex = loopIndex + 1;
-      } while ((int)loopIndex < (int)uVar1);
+      } while ((int)loopIndex < (int)userCount);
     }
-    IRInst__setOperandSource(iVar10,*(undefined4 *)(iVar10 + 0x84),0,1,uVar4);
-    *(int *)(iVar10 + 0x84) = *(int *)(iVar10 + 0x84) + -1;
-    *(uint *)(iVar10 + 0x14) = *(uint *)(iVar10 + 0x14) & 0xfffffdff;
+    IRInst__setOperandSource(secondInst,*(undefined4 *)(secondInst + 0x84),0,1,compiler);
+    *(int *)(secondInst + 0x84) = *(int *)(secondInst + 0x84) + -1;
+    *(uint *)(secondInst + 0x14) = *(uint *)(secondInst + 0x14) & 0xfffffdff;
   }
-  else if ((iVar3 != 0) && (iVar8 != iVar3)) {
-    IRInst__setExtraOperandSource(iVar11,iVar3,1,*param_1);
-    IRInst__getOperandRecord(iVar11,*(undefined4 *)(iVar11 + 0x84));
+  else if ((secondExtraSource != 0) && (firstExtraSource != secondExtraSource)) {
+    IRInst__setExtraOperandSource(firstInst,secondExtraSource,1,*pass);
+    IRInst__getOperandRecord(firstInst,*(undefined4 *)(firstInst + 0x84));
   }
-  ((int (*)())FUN_0014375c)(param_1,iVar11,iVar6);
-  ((int (*)())FUN_0014375c)(param_1,iVar10,iVar5);
-  ((int (*)())FUN_001411dc)(param_1,iVar11,iVar11,iVar6);
-  ((int (*)())FUN_001411dc)(param_1,iVar11,iVar10,iVar5);
-  return ((int (*)())FUN_001415a4)(param_1,iVar10,iVar11);
+  ((int (*)())FUN_0014375c)(pass,firstInst,firstSelect);
+  ((int (*)())FUN_0014375c)(pass,secondInst,secondSelect);
+  ((int (*)())FUN_001411dc)(pass,firstInst,firstInst,firstSelect);
+  ((int (*)())FUN_001411dc)(pass,firstInst,secondInst,secondSelect);
+  return ((int (*)())FUN_001415a4)(pass,secondInst,firstInst);
 }
 
 /* pass_post_pack_insts @ 0x145670 (3828 bytes) */
