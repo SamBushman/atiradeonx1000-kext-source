@@ -69,41 +69,44 @@ int Program__isPreassignedHwReg(program, param_2)
 }
 
 /* ValueKey__loadSourceDefinitions @ 0x11e988 (280 bytes) */
-int ValueKey__loadSourceDefinitions(ctx, param_2)
+int ValueKey__loadSourceDefinitions(ctx, block)
   int ctx;
-  undefined4 param_2;
+  undefined4 block;
 {
-  int iVar1;
-  int iVar2;
+  int destDefinition;
+  int destQuery18;
+  int valueNumberEnabled;
+  int sourceDefinition;
+  int keyInstOrOperandBase;
   int loopIndex;
-  int iVar4;
-  int iVar5;
-  int *piVar6;
+  int operandByteOffset;
+  int slotCursor;
+  int *destVReg;
   
   loopIndex = 1;
-  iVar2 = *(int *)(ctx + 0xb0);
-  if (0 < *(int *)(iVar2 + 0x84)) {
-    iVar4 = 0x18;
-    iVar5 = ctx;
+  keyInstOrOperandBase = *(int *)(ctx + 0xb0);
+  if (0 < *(int *)(keyInstOrOperandBase + 0x84)) {
+    operandByteOffset = 0x18;
+    slotCursor = ctx;
     do {
-      iVar2 = iVar4 + iVar2;
+      keyInstOrOperandBase = operandByteOffset + keyInstOrOperandBase;
       loopIndex = loopIndex + 1;
-      iVar4 = iVar4 + 0x18;
-      iVar1 = ((int (*)())VReg__currentDefinition)(*(undefined4 *)(iVar2 + 0x8c),param_2,*(uint *)(ctx + 0x238));
-      iVar2 = *(int *)(ctx + 0xb0);
-      *(undefined4 *)(iVar5 + 0x214) = *(undefined4 *)(iVar1 + 0xb0);
-      iVar5 = iVar5 + 4;
-    } while (loopIndex <= *(int *)(iVar2 + 0x84));
+      operandByteOffset = operandByteOffset + 0x18;
+      sourceDefinition = ((int (*)())VReg__currentDefinition)(*(undefined4 *)(keyInstOrOperandBase + 0x8c),block,*(uint *)(ctx + 0x238));
+      keyInstOrOperandBase = *(int *)(ctx + 0xb0);
+      *(undefined4 *)(slotCursor + 0x214) = *(undefined4 *)(sourceDefinition + 0xb0);
+      slotCursor = slotCursor + 4;
+    } while (loopIndex <= *(int *)(keyInstOrOperandBase + 0x84));
   }
-  iVar2 = Compiler__isOptionEnabled(*(undefined4 *)(ctx + 0x238),7);
-  if (((iVar2 != 0) && (iVar2 = Compiler__isOptionEnabled(*(undefined4 *)(ctx + 0x238),9), iVar2 != 0)) &&
+  valueNumberEnabled = Compiler__isOptionEnabled(*(undefined4 *)(ctx + 0x238),7);
+  if (((valueNumberEnabled != 0) && (valueNumberEnabled = Compiler__isOptionEnabled(*(undefined4 *)(ctx + 0x238),9), valueNumberEnabled != 0)) &&
      (*(int *)(*(int *)(ctx + 0xb0) + 0x80) != 0)) {
-    piVar6 = *(int **)(*(int *)(ctx + 0xb0) + 0x8c);
-    iVar2 = (**(code **)(*piVar6 + 0x18))(piVar6);
-    if (((iVar2 != 0) && (*(int *)(*(int *)(ctx + 0xb0) + 0x84) != 0)) &&
+    destVReg = *(int **)(*(int *)(ctx + 0xb0) + 0x8c);
+    destQuery18 = (**(code **)(*destVReg + 0x18))(destVReg);
+    if (((destQuery18 != 0) && (*(int *)(*(int *)(ctx + 0xb0) + 0x84) != 0)) &&
        ((*(uint *)(*(int *)(ctx + 0xb0) + 0x14) & 0x200) == 0)) {
-      iVar2 = ((int (*)())VReg__currentDefinition)(piVar6,param_2,*(uint *)(ctx + 0x238));
-      *(undefined4 *)(loopIndex * 4 + ctx + 0x210) = *(undefined4 *)(iVar2 + 0xb0);
+      destDefinition = ((int (*)())VReg__currentDefinition)(destVReg,block,*(uint *)(ctx + 0x238));
+      *(undefined4 *)(loopIndex * 4 + ctx + 0x210) = *(undefined4 *)(destDefinition + 0xb0);
     }
   }
   return;

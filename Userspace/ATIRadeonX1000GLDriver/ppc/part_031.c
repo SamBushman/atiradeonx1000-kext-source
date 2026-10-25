@@ -1298,29 +1298,29 @@ int HwLimits__vslot9_failNotSupported()
 }
 
 /* FUN_0010de6c @ 0x10de6c (140 bytes) */
-int FUN_0010de6c(param_1, param_2, param_3, param_4, param_5, param_6)
+int FUN_0010de6c(param_1, program, param_3, vertexAttrWord, param_5, insertRef)
   undefined4 param_1;
-  int param_2;
+  int program;
   undefined4 param_3;
-  uint *param_4;
+  uint *vertexAttrWord;
   undefined4 param_5;
-  undefined4 param_6;
+  undefined4 insertRef;
 {
-  uint uVar1;
-  undefined4 uVar2;
-  int iVar3;
-  undefined4 uVar4;
-  undefined4 uVar5;
+  uint attrWordCopy;
+  undefined4 loadVReg;
+  int loadVertexInst;
+  undefined4 compiler;
+  undefined4 vregList;
   
-  uVar1 = *param_4;
-  uVar5 = *(undefined4 *)(param_2 + 0x3ac);
-  uVar4 = *(undefined4 *)(param_2 + 8);
-  uVar2 = Program__registerFileOfIlType(param_2,*param_4 >> 0x10 & 0x3f);
-  uVar2 = FUN_00127608(uVar5,uVar2,(int)(short)uVar1,0);
-  iVar3 = IRLoadVertex__new_109810(0xa4,uVar4);
-  IRInst__setOperandRef(iVar3,0,uVar2);
-  *(int *)(iVar3 + 300) = (int)(short)uVar1;
-  return Program__appendInst(param_2,iVar3,param_6);
+  attrWordCopy = *vertexAttrWord;
+  vregList = *(undefined4 *)(program + 0x3ac);
+  compiler = *(undefined4 *)(program + 8);
+  loadVReg = Program__registerFileOfIlType(program,*vertexAttrWord >> 0x10 & 0x3f);
+  loadVReg = FUN_00127608(vregList,loadVReg,(int)(short)attrWordCopy,0);
+  loadVertexInst = IRLoadVertex__new_109810(0xa4,compiler);
+  IRInst__setOperandRef(loadVertexInst,0,loadVReg);
+  *(int *)(loadVertexInst + 300) = (int)(short)attrWordCopy;
+  return Program__appendInst(program,loadVertexInst,insertRef);
 }
 
 /* FUN_0010defc @ 0x10defc (340 bytes) */
@@ -2280,23 +2280,24 @@ LAB_0010f168:
 }
 
 /* FUN_0010f38c @ 0x10f38c (328 bytes) */
-int FUN_0010f38c(param_1, vector)
-  undefined4 *param_1;
+int FUN_0010f38c(entry, vector)
+  undefined4 *entry;
   uint *vector;
 {
+  bool moreEntryLanes;
   undefined4 *vectorElementRef;
   int operandRecord2;
   int operandRecord;
-  bool bVar1;
+  bool moreOtherLanes;
   uint vectorCount;
-  undefined4 *puVar3;
-  int iVar4;
-  int iVar5;
-  int iVar6;
-  int iVar7;
+  undefined4 *entryLaneCursor;
+  int otherLaneIndex;
+  int otherLanesLeft;
+  int otherInst;
+  int entryLaneIndex;
   int *vectorElement;
   uint loopIndex;
-  int *piVar10;
+  int *otherLaneCursor;
   
   vectorCount = vector[1];
   if (vectorCount != 0) {
@@ -2314,31 +2315,31 @@ int FUN_0010f38c(param_1, vector)
       }
       loopIndex = loopIndex + 1;
       vectorElement = (int *)*vectorElementRef;
-      iVar7 = 0;
-      puVar3 = param_1;
+      entryLaneIndex = 0;
+      entryLaneCursor = entry;
       do {
-        operandRecord = IRInst__getOperandRecord(*param_1,0);
-        if (*(char *)(iVar7 + operandRecord + 0x10) != '\x01') {
-          iVar4 = 0;
-          piVar10 = vectorElement;
+        operandRecord = IRInst__getOperandRecord(*entry,0);
+        if (*(char *)(entryLaneIndex + operandRecord + 0x10) != '\x01') {
+          otherLaneIndex = 0;
+          otherLaneCursor = vectorElement;
           do {
             operandRecord2 = IRInst__getOperandRecord(*vectorElement,0);
-            if ((*(char *)(iVar4 + operandRecord2 + 0x10) != '\x01') && (piVar10[1] == puVar3[1])) {
-              iVar5 = vectorElement[5];
-              iVar6 = *vectorElement;
-              piVar10[1] = 0;
-              vectorElement[5] = iVar5 + -1;
-              *(undefined1 *)(iVar4 + iVar6 + 0x9c) = 1;
+            if ((*(char *)(otherLaneIndex + operandRecord2 + 0x10) != '\x01') && (otherLaneCursor[1] == entryLaneCursor[1])) {
+              otherLanesLeft = vectorElement[5];
+              otherInst = *vectorElement;
+              otherLaneCursor[1] = 0;
+              vectorElement[5] = otherLanesLeft + -1;
+              *(undefined1 *)(otherLaneIndex + otherInst + 0x9c) = 1;
             }
-            bVar1 = iVar4 != 3;
-            piVar10 = piVar10 + 1;
-            iVar4 = iVar4 + 1;
-          } while (bVar1);
+            moreOtherLanes = otherLaneIndex != 3;
+            otherLaneCursor = otherLaneCursor + 1;
+            otherLaneIndex = otherLaneIndex + 1;
+          } while (moreOtherLanes);
         }
-        bVar1 = iVar7 != 3;
-        puVar3 = puVar3 + 1;
-        iVar7 = iVar7 + 1;
-      } while (bVar1);
+        moreEntryLanes = entryLaneIndex != 3;
+        entryLaneCursor = entryLaneCursor + 1;
+        entryLaneIndex = entryLaneIndex + 1;
+      } while (moreEntryLanes);
       vectorCount = vector[1];
     } while (loopIndex < vectorCount);
   }

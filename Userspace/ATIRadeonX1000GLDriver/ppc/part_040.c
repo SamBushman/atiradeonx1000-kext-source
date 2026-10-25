@@ -3635,38 +3635,39 @@ int FUN_00130bfc(param_1, param_2)
 }
 
 /* FUN_00130c8c @ 0x130c8c (276 bytes) */
-int FUN_00130c8c(param_1, param_2, newSource, param_4)
-  int param_1;
-  undefined4 param_2;
+int FUN_00130c8c(allocator, spillRecord, newSource, registerCountRef)
+  int allocator;
+  undefined4 spillRecord;
   int newSource;
-  int *param_4;
+  int *registerCountRef;
 {
-  undefined4 uVar1;
-  int iVar2;
+  undefined4 anchorInstWord4;
+  undefined4 sourceRegKind;
+  int anchorInst;
   int callResult;
-  int *piVar4;
-  int iVar5;
-  int iVar6;
+  int *backend;
+  int backendQuery150;
+  int program;
   
-  iVar2 = ((int (*)())FUN_00130728)(param_2);
-  iVar6 = *(int *)(*(int *)(param_1 + 0x2c) + 0x6c4);
-  callResult = IRInst__create(0x31,*(int *)(param_1 + 0x2c));
-  uVar1 = *(undefined4 *)(newSource + 0x98);
-  *(int *)(callResult + 0x94) = *param_4;
-  *(undefined4 *)(callResult + 0x98) = uVar1;
-  IRInst__setOperandSource(callResult,1,newSource,0,*(undefined4 *)(param_1 + 0x2c));
-  uVar1 = *(undefined4 *)(iVar2 + 4);
+  anchorInst = ((int (*)())FUN_00130728)(spillRecord);
+  program = *(int *)(*(int *)(allocator + 0x2c) + 0x6c4);
+  callResult = IRInst__create(0x31,*(int *)(allocator + 0x2c));
+  sourceRegKind = *(undefined4 *)(newSource + 0x98);
+  *(int *)(callResult + 0x94) = *registerCountRef;
+  *(undefined4 *)(callResult + 0x98) = sourceRegKind;
+  IRInst__setOperandSource(callResult,1,newSource,0,*(undefined4 *)(allocator + 0x2c));
+  anchorInstWord4 = *(undefined4 *)(anchorInst + 4);
   *(uint *)(callResult + 0x14) = *(uint *)(callResult + 0x14) & 0xffffffbf | 0x80000000;
-  piVar4 = *(int **)(*(int *)(param_1 + 0x2c) + 0x30c);
-  iVar5 = (**(code **)(*piVar4 + 0x150))(piVar4,uVar1);
-  if (iVar5 != 0) {
+  backend = *(int **)(*(int *)(allocator + 0x2c) + 0x30c);
+  backendQuery150 = (**(code **)(*backend + 0x150))(backend,anchorInstWord4);
+  if (backendQuery150 != 0) {
     *(uint *)(callResult + 0x14) = *(uint *)(callResult + 0x14) | 0x1000;
   }
-  Block__insertInstBefore(*(undefined4 *)(iVar2 + 0x158),iVar2,callResult);
-  *(undefined4 *)(*param_4 * 4 + *(int *)(iVar6 + 0x45c)) = 0;
-  *(undefined4 *)(*param_4 * 4 + *(int *)(iVar6 + 0x458)) = 0xffffffff;
-  **(int **)(param_1 + 0x18) = **(int **)(param_1 + 0x18) + 1;
-  *param_4 = *param_4 + 1;
+  Block__insertInstBefore(*(undefined4 *)(anchorInst + 0x158),anchorInst,callResult);
+  *(undefined4 *)(*registerCountRef * 4 + *(int *)(program + 0x45c)) = 0;
+  *(undefined4 *)(*registerCountRef * 4 + *(int *)(program + 0x458)) = 0xffffffff;
+  **(int **)(allocator + 0x18) = **(int **)(allocator + 0x18) + 1;
+  *registerCountRef = *registerCountRef + 1;
   return callResult;
 }
 
