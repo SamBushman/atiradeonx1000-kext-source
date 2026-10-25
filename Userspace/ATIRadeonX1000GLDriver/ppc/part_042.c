@@ -2605,6 +2605,11 @@ int pass_rewrite(program)
 int FUN_0013d3b8(program)
   int program;
 {
+  int writtenCount;
+  int operandIndex;
+  int selectIsFullMask;
+  int splitRgbAlphaEnabled;
+  int predicateResult;
   int loopIndex;
   int operandClone;
   int vcall5cResult;
@@ -2624,14 +2629,14 @@ int FUN_0013d3b8(program)
   int block;
   int *lookaheadInst;
   int *nextInst;
-  int iVar5;
+  int nextBlock;
   int cloneResult2;
   undefined4 cloneVregId;
   uint operandSelect;
   int *inst;
   
   block = *(int *)(program + 900);
-  for (iVar5 = *(int *)(*(int *)(program + 900) + 8); iVar5 != 0; iVar5 = *(int *)(iVar5 + 8)) {
+  for (nextBlock = *(int *)(*(int *)(program + 900) + 8); nextBlock != 0; nextBlock = *(int *)(nextBlock + 8)) {
     lookaheadInst = (int *)(*(int **)(block + 0x98))[2];
     inst = *(int **)(block + 0x98);
     if (lookaheadInst != (int *)0x0) {
@@ -2640,8 +2645,8 @@ int FUN_0013d3b8(program)
         if ((inst[5] & 1U) != 0) {
           vcall7cResult = (int *)(**(code **)(*inst + 0x7c))(inst);
           if ((((vcall7cResult != (int *)0x0) && (vcall7cResult[0x20] != 0)) &&
-              (iVar5 = RegKind__flagBit0(vcall7cResult[0x26]), iVar5 != 0)) &&
-             ((((vcall7cResult[5] & 2U) == 0 && (iVar5 = (**(code **)(*vcall7cResult + 0x50))(vcall7cResult), iVar5 == 0)
+              (predicateResult = RegKind__flagBit0(vcall7cResult[0x26]), predicateResult != 0)) &&
+             ((((vcall7cResult[5] & 2U) == 0 && (predicateResult = (**(code **)(*vcall7cResult + 0x50))(vcall7cResult), predicateResult == 0)
                ) && ((vcall7cResult[5] & 0x40U) == 0)))) {
             cloneResult = IRInst__clone(vcall7cResult,*(undefined4 *)(program + 8),0);
             *(undefined4 *)(cloneResult + 0x94) = *(undefined4 *)(cloneResult + 0x14c);
@@ -2661,21 +2666,21 @@ int FUN_0013d3b8(program)
             *(int *)(cloneResult2 + 300) = cloneResult3;
             vcall7cResult[0x4b] = cloneResult2;
           }
-          iVar5 = (**(code **)(*inst + 0x24))(inst);
-          if (((iVar5 != 0) && (inst[0x20] != 0)) &&
-             ((iVar5 = RegKind__flagBit0(inst[0x26]), iVar5 != 0 &&
+          predicateResult = (**(code **)(*inst + 0x24))(inst);
+          if (((predicateResult != 0) && (inst[0x20] != 0)) &&
+             ((predicateResult = RegKind__flagBit0(inst[0x26]), predicateResult != 0 &&
               ((((inst[5] & 2U) == 0 &&
-                (iVar5 = (**(code **)(*inst + 0x50))(inst), iVar5 == 0)) &&
-               (iVar5 = OpcodeTraits__getField34(*(undefined4 *)(inst[0x22] + 8),*(undefined4 *)(program + 8)
-                                    ), iVar5 == 0)))))) {
+                (predicateResult = (**(code **)(*inst + 0x50))(inst), predicateResult == 0)) &&
+               (predicateResult = OpcodeTraits__getField34(*(undefined4 *)(inst[0x22] + 8),*(undefined4 *)(program + 8)
+                                    ), predicateResult == 0)))))) {
             splitIntoScalarEnabled = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),0x32);
             if (splitIntoScalarEnabled == 0) {
-              iVar5 = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),0x30);
-              if (iVar5 != 0) {
+              splitRgbAlphaEnabled = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),0x30);
+              if (splitRgbAlphaEnabled != 0) {
                 operandRecord2 = IRInst__getOperandRecord(inst,0);
                 operandSelect = *(uint *)(operandRecord2 + 0x10);
-                iVar5 = FUN_000f2e18(operandSelect);
-                if (iVar5 == 0) {
+                selectIsFullMask = FUN_000f2e18(operandSelect);
+                if (selectIsFullMask == 0) {
                   cloneResult = IRInst__clone(inst,*(undefined4 *)(program + 8),0);
                   *(uint *)(cloneResult + 0x9c) = operandSelect & 0xffffff00 | 1;
                   cloneVregId = *(undefined4 *)(cloneResult + 0x14c);
@@ -2684,9 +2689,9 @@ int FUN_0013d3b8(program)
                   inst[0x27] = 0x1010100;
                   IRInst__setExtraOperandSource(inst,cloneResult,0,*(undefined4 *)(program + 8));
                   Block__insertInstBefore(block,inst,cloneResult);
-                  for (iVar5 = 1; operandLimit = (**(code **)(*inst + 0x14))(inst), iVar5 <= operandLimit;
-                      iVar5 = iVar5 + 1) {
-                    operandVReg = (int *)IRInst__getOperandSource(inst,iVar5);
+                  for (operandIndex = 1; operandLimit = (**(code **)(*inst + 0x14))(inst), operandIndex <= operandLimit;
+                      operandIndex = operandIndex + 1) {
+                    operandVReg = (int *)IRInst__getOperandSource(inst,operandIndex);
                     vcall5cResult = (**(code **)(*operandVReg + 0x5c))(operandVReg);
                     if (vcall5cResult != 0) {
                       operandClone = IRInst__clone(operandVReg,*(undefined4 *)(program + 8),0);
@@ -2694,21 +2699,21 @@ int FUN_0013d3b8(program)
                       operandRecord = IRInst__getOperandRecord(operandClone,0);
                       *(undefined4 *)(operandRecord + 8) = cloneVregIdB;
                       Block__insertInstAfter(operandVReg[0x56],operandVReg,operandClone);
-                      IRInst__setOperandSource(inst,iVar5,operandClone,0,*(undefined4 *)(program + 8));
+                      IRInst__setOperandSource(inst,operandIndex,operandClone,0,*(undefined4 *)(program + 8));
                     }
                   }
                 }
               }
             }
             else {
-              iVar5 = IRInst__countWrittenComponents(inst);
-              if (1 < iVar5) {
+              writtenCount = IRInst__countWrittenComponents(inst);
+              if (1 < writtenCount) {
                 loopIndex = 0;
                 componentSelectTable = (int *)PTR_DAT_001e8b64;
                 do {
                   operandRecord = IRInst__getOperandRecord(inst,0);
                   if (*(char *)(loopIndex + operandRecord + 0x10) != '\x01') {
-                    if (iVar5 < 2) {
+                    if (writtenCount < 2) {
                       inst[0x27] = *componentSelectTable;
                       IRInst__clearSourceSelectsOfUnwrittenComponents(inst);
                     }
@@ -2722,7 +2727,7 @@ int FUN_0013d3b8(program)
                       }
                       IRInst__setExtraOperandSource(inst,cloneResult2,0,*(undefined4 *)(program + 8));
                     }
-                    iVar5 = iVar5 + -1;
+                    writtenCount = writtenCount + -1;
                   }
                   moreComponents = loopIndex != 3;
                   componentSelectTable = componentSelectTable + 1;
@@ -2736,9 +2741,9 @@ int FUN_0013d3b8(program)
         lookaheadInst = (int *)nextInst[2];
         inst = nextInst;
       } while ((int *)nextInst[2] != (int *)0x0);
-      iVar5 = *(int *)(block + 8);
+      nextBlock = *(int *)(block + 8);
     }
-    block = iVar5;
+    block = nextBlock;
   }
   return;
 }
