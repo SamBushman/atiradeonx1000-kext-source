@@ -1671,7 +1671,7 @@ int FUN_0001c380(param_1, param_2, param_3, param_4, param_5, param_6)
   int iVar49;
   int iVar50;
   byte *pbVar51;
-  byte in_xer_so = 0;
+  byte xerSummaryOverflow = 0;
   int iVar52;
   int iStack00000024;
   byte local_508 [4];
@@ -1797,7 +1797,7 @@ int FUN_0001c380(param_1, param_2, param_3, param_4, param_5, param_6)
   local_58 = auStack_478;
   local_54 = local_4d0;
   local_60 = (uint)(byte)((param_4 < 0xc) << 3 | (0xc < param_4) << 2 | (param_4 == 0xc) << 1 |
-                         in_xer_so & 1) << 0x1c;
+                         xerSummaryOverflow & 1) << 0x1c;
   local_78 = 0;
   iStack00000024 = param_4;
   do {
@@ -2985,13 +2985,13 @@ int FUN_0001e280(ctx, param_2, param_3)
   bool bVar1;
   undefined4 uVar2;
   uint uVar3;
-  undefined4 in_r6;
+  undefined4 staleArgR6;
   int iVar4;
   uint uVar5;
   uint *puVar6;
   uint uVar7;
   int iVar8;
-  undefined4 *in_r10;
+  undefined4 *staleArgR10;
   undefined4 *puVar9;
   uint uVar10;
   int *piVar11;
@@ -3079,26 +3079,26 @@ LAB_0001e440:
       piVar11[0x15] = 0;
       *(short *)((int)piVar11 + 0x42) = (short)local_48;
       uVar3 = local_3c[0];
-      in_r10 = (undefined4 *)
+      staleArgR10 = (undefined4 *)
                FUN_00030a60(piVar11 + 0x288,6,local_3c[0],local_3c[0],0,uVar7,
                             local_44 << 0x10 | local_40);
       if (uVar10 != 0) {
         uVar5 = 0;
         uVar3 = local_3c[0];
-        in_r10 = (undefined4 *)
-                 FUN_00030a60(in_r10,6,local_3c[0],local_3c[0],0,uVar7,uVar10 >> 2 | 0x10000);
+        staleArgR10 = (undefined4 *)
+                 FUN_00030a60(staleArgR10,6,local_3c[0],local_3c[0],0,uVar7,uVar10 >> 2 | 0x10000);
       }
-      puVar9 = in_r10 + 4;
+      puVar9 = staleArgR10 + 4;
       *(ushort *)(*(int *)param_2[2] + 0x1c) = *(ushort *)(*(int *)param_2[2] + 0x1c) | 1;
       *(ushort *)(*(int *)param_2[2] + 0x28) = *(ushort *)(*(int *)param_2[2] + 0x28) & 0xfffe;
-      *in_r10 = 0xd0b;
-      in_r10[2] = 0x5c8;
-      in_r10[1] = 5;
-      in_r10[3] = 0x10000;
+      *staleArgR10 = 0xd0b;
+      staleArgR10[2] = 0x5c8;
+      staleArgR10[1] = 5;
+      staleArgR10[3] = 0x10000;
       if (!bVar1) {
         uVar2 = *(undefined4 *)(ctx + 0x1d74);
-        puVar9 = in_r10 + 5;
-        in_r10[4] = 0x4790b1;
+        puVar9 = staleArgR10 + 5;
+        staleArgR10[4] = 0x4790b1;
         iVar4 = 0x48;
         do {
           *puVar9 = uVar2;
@@ -3112,17 +3112,17 @@ LAB_0001e440:
     *(undefined1 *)(iVar4 + 0x14) = 1;
     puVar6 = (uint *)param_2[1];
     if (((*puVar6 & 2) == 0) || ((*(uint *)(ctx + 0x24) & 2) == 0)) goto LAB_0001e6e0;
-    gldFlushDataCacheRange(ctx,*puVar12,puVar12[2],uVar3,uVar5,puVar6,iVar4,in_r10);
+    gldFlushDataCacheRange(ctx,*puVar12,puVar12[2],uVar3,uVar5,puVar6,iVar4,staleArgR10);
   }
   else {
     puVar6 = (uint *)param_2[1];
     uVar10 = *puVar6;
-    in_r10 = (undefined4 *)(uVar10 ^ 1);
-    if (((uint)in_r10 & 1) == 0) goto LAB_0001e3b0;
+    staleArgR10 = (undefined4 *)(uVar10 ^ 1);
+    if (((uint)staleArgR10 & 1) == 0) goto LAB_0001e3b0;
     if (*(short *)(puVar12 + 3) != -0x771c) {
       if (param_2[4] == 6) {
         if (((uVar10 & 2) != 0) && ((*(uint *)(ctx + 0x24) & 2) != 0)) {
-          gldFlushDataCacheRange(ctx,*puVar12,puVar12[2],in_r6,iVar4,puVar6,0,uVar10 & 2);
+          gldFlushDataCacheRange(ctx,*puVar12,puVar12[2],staleArgR6,iVar4,puVar6,0,uVar10 & 2);
           puVar6 = (uint *)param_2[1];
         }
         goto LAB_0001e6e0;
@@ -3136,7 +3136,7 @@ LAB_0001e440:
     iVar8 = *(int *)param_2[2];
     *(ushort *)(iVar8 + 0x28) = *(ushort *)(iVar8 + 0x28) & 0xfffe;
     if ((*(uint *)(ctx + 0x24) & 2) != 0) {
-      gldFlushDataCacheRange(ctx,*puVar12,puVar12[2],in_r6,iVar4,puVar6,iVar8,uVar10 & 2);
+      gldFlushDataCacheRange(ctx,*puVar12,puVar12[2],staleArgR6,iVar4,puVar6,iVar8,uVar10 & 2);
       puVar6 = (uint *)param_2[1];
       goto LAB_0001e6e0;
     }
@@ -3649,16 +3649,16 @@ int gld_drawVertexArray(ctx, param_2, primitiveMode, first, count, indexType, dr
   char reservation;
   uint uVar35;
   int iVar36;
-  double in_f1;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
+  double staleFpr1;
+  double staleFpr2;
+  double staleFpr3;
+  double staleFpr4;
+  double staleFpr5;
+  double staleFpr6;
+  double staleFpr7;
+  double staleFpr8;
   uint uStack00000030;
-  double in_stack_ffffff68;
+  double staleStackArg_ffffff68;
   int iStack_60;
   
   ring = ctx + GLD_commandStream;
@@ -3733,8 +3733,8 @@ LAB_0001ef50:
    * 25) that supplies a genuine 7th argument - verified via real stock disassembly
    * (`lwz r9,0xa8(r10)`, matching this stack store just above). */
   puVar19 = (undefined *)
-            ((uint (*)())FUN_0002cc30)(ctx,1,primitiveMode,count,count,puVar19,drawFlags,in_f1,in_f2,in_f3,in_f4,in_f5,
-                         in_f6,in_f7,in_f8,in_stack_ffffff68);
+            ((uint (*)())FUN_0002cc30)(ctx,1,primitiveMode,count,count,puVar19,drawFlags,staleFpr1,staleFpr2,staleFpr3,staleFpr4,staleFpr5,
+                         staleFpr6,staleFpr7,staleFpr8,staleStackArg_ffffff68);
   bVar2 = 0 < (int)puVar19;
   hasElements = puVar19 != (undefined *)0x0;
   needStatePacket = hasElements;
@@ -5202,7 +5202,7 @@ int noop_22280()
 }
 
 /* _gldUpdateDispatch @ 0x22290 (2632 bytes) */
-uint _gldUpdateDispatch(int ctx,int dispatch,uint *dirtyBits,undefined4 scratchR6,undefined4 scratchR7,undefined4 scratchR8,double fpPassThrough1,double fpPassThrough2,double fpPassThrough3,double fpPassThrough4,double fpPassThrough5,double fpPassThrough6,double fpPassThrough7,double fpPassThrough8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+uint _gldUpdateDispatch(int ctx,int dispatch,uint *dirtyBits,undefined4 scratchR6,undefined4 scratchR7,undefined4 scratchR8,double fpPassThrough1,double fpPassThrough2,double fpPassThrough3,double fpPassThrough4,double fpPassThrough5,double fpPassThrough6,double fpPassThrough7,double fpPassThrough8,double staleFprArg9,double staleFprArg10,double staleFprArg11,double staleFprArg12,double staleFprArg13)
 {
   int *programObject;
   uint dirtyWord2;
@@ -5256,11 +5256,11 @@ uint _gldUpdateDispatch(int ctx,int dispatch,uint *dirtyBits,undefined4 scratchR
   bool bVar27;
   uint uVar26;
   int targetsLeft2;
-  double in_stack_ffffff78;
-  double in_stack_ffffff80;
-  double in_stack_ffffff88;
-  double in_stack_ffffff90;
-  double in_stack_ffffff98;
+  double staleStackArg_ffffff78;
+  double staleStackArg_ffffff80;
+  double staleStackArg_ffffff88;
+  double staleStackArg_ffffff90;
+  double staleStackArg_ffffff98;
   
   if (*(char *)(ctx + 0x2a69) == '\0') {
     if (*(char *)(ctx + 0x2a44) != '\0') {
@@ -5512,8 +5512,8 @@ LAB_000225e8:
       dirtyBits[2] = dirtyWord2;
       *dirtyWord3Ptr = uVar26;
       ((void (*)())FUN_000a9ac0)(ctx + GLD_commandStream,dirtyBits,dirtyBitsArg,scratchR6,dirtyWord3,dirtyWord1,uVar24,dirtyWord4,fpPassThrough1,
-                   fpPassThrough2,fpPassThrough3,fpPassThrough4,fpPassThrough5,fpPassThrough6,fpPassThrough7,fpPassThrough8,in_stack_ffffff78,
-                   in_stack_ffffff80,in_stack_ffffff88,in_stack_ffffff90,in_stack_ffffff98);
+                   fpPassThrough2,fpPassThrough3,fpPassThrough4,fpPassThrough5,fpPassThrough6,fpPassThrough7,fpPassThrough8,staleStackArg_ffffff78,
+                   staleStackArg_ffffff80,staleStackArg_ffffff88,staleStackArg_ffffff90,staleStackArg_ffffff98);
       framebufferObj = r4Out4;
     }
     if ((uVar26 & 0x10000000) != *(uint *)(ctx + GLD_lastDirtyBit28) ||
@@ -5662,19 +5662,19 @@ int _gldInitDispatch(ctx, dispatch, savedState, updateArg3, updateArg4)
   undefined4 word1;
   undefined4 word2;
   int unit;
-  double fparam_1;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
-  double in_stack_ffffff98;
-  double in_stack_ffffffa0;
-  double in_stack_ffffffa8;
-  double in_stack_ffffffb0;
-  double in_stack_ffffffb8;
+  double staleFprArg1;
+  double staleFpr2;
+  double staleFpr3;
+  double staleFpr4;
+  double staleFpr5;
+  double staleFpr6;
+  double staleFpr7;
+  double staleFpr8;
+  double staleStackArg_ffffff98;
+  double staleStackArg_ffffffa0;
+  double staleStackArg_ffffffa8;
+  double staleStackArg_ffffffb0;
+  double staleStackArg_ffffffb8;
   undefined4 defaultState0;
   undefined4 defaultState1;
   undefined4 defaultState2;
@@ -5700,7 +5700,7 @@ int _gldInitDispatch(ctx, dispatch, savedState, updateArg3, updateArg4)
   savedState[5] = word1;
   *(undefined4 **)(ctx + GLD_dispatchTable) = dispatch;
   do {
-    fparam_1 = (double)FUN_000a82c0(ctx,unit);
+    staleFprArg1 = (double)FUN_000a82c0(ctx,unit);
     entry = PTR_FUN_001e8950;
     moreUnits = unit != 0xf;
     unit = unit + 1;
@@ -5736,9 +5736,9 @@ int _gldInitDispatch(ctx, dispatch, savedState, updateArg3, updateArg4)
   dispatch[0x1a] = PTR_FUN_001e896c;
   dispatch[0x1b] = entry;
   dispatch[0x20] = PTR_FUN_001e88d8;
-  return ((uint (*)())_gldUpdateDispatch)(ctx,dispatch,&defaultState0,updateArg3,updateArg4,word0,fparam_1,in_f2,in_f3,in_f4,
-                     in_f5,in_f6,in_f7,in_f8,in_stack_ffffff98,in_stack_ffffffa0,in_stack_ffffffa8,
-                     in_stack_ffffffb0,in_stack_ffffffb8);
+  return ((uint (*)())_gldUpdateDispatch)(ctx,dispatch,&defaultState0,updateArg3,updateArg4,word0,staleFprArg1,staleFpr2,staleFpr3,staleFpr4,
+                     staleFpr5,staleFpr6,staleFpr7,staleFpr8,staleStackArg_ffffff98,staleStackArg_ffffffa0,staleStackArg_ffffffa8,
+                     staleStackArg_ffffffb0,staleStackArg_ffffffb8);
 }
 
 /* FUN_00022eb0 @ 0x22eb0 (536 bytes) */
@@ -6445,7 +6445,7 @@ int FUN_00024190(param_1, param_2, param_3, param_4, param_5)
   int iVar1;
   undefined4 *puVar2;
   undefined4 *puVar3;
-  undefined4 in_r8;
+  undefined4 staleArgR8;
   uint uVar4;
   undefined4 uVar5;
   
@@ -6454,7 +6454,7 @@ int FUN_00024190(param_1, param_2, param_3, param_4, param_5)
            (**(code **)(param_1 + 0x2758))
                      (param_1,(*(int *)(param_1 + 0x243c) + 1U & 0xfffffffe) +
                               *(int *)(param_1 + 0x243c) * param_4 * 5 + param_4 * 2 + 0x16,param_3,
-                      param_4,param_5,in_r8,*(code **)(param_1 + 0x2758));
+                      param_4,param_5,staleArgR8,*(code **)(param_1 + 0x2758));
   iVar1 = *(int *)(param_1 + 0x2440);
   *(undefined4 **)(0x00002748 + param_1 + 4) = puVar2;
   if (iVar1 != param_1 + 0x1be4) {
@@ -6500,12 +6500,12 @@ int FUN_00024190(param_1, param_2, param_3, param_4, param_5)
  * misreading of this function's own real 7th argument (see FUN_0002cc30): no real caller here sets r9
  * either, it just forwards garbage like the rest of the dispatch-wrapper family. */
 /* FUN_000242f0 @ 0x242f0 (116 bytes) */
-void FUN_000242f0(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)
+void FUN_000242f0(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8)
 {
   uint uVar1;
-  undefined4 in_r9;
+  undefined4 staleArgR9;
 
-  uVar1 = ((uint (*)())FUN_0002cc30)(param_1,0,4,param_3,param_5,param_6,in_r9,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
+  uVar1 = ((uint (*)())FUN_0002cc30)(param_1,0,4,param_3,param_5,param_6,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8);
   if (uVar1 != 0) {
     return gld_emitPrimitiveVertices(param_1 + 0x240,4,0,param_2,uVar1,param_4);
   }
@@ -6516,12 +6516,12 @@ void FUN_000242f0(int param_1,int param_2,undefined4 param_3,undefined4 param_4,
  * had been overwritten with unrelated FUN_00039330-family content). Rewritten from real stock disassembly,
  * same as the part_004.c siblings. */
 /* FUN_00024370 @ 0x24370 (112 bytes) */
-void FUN_00024370(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9)
+void FUN_00024370(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
 {
   uint uVar1;
-  undefined4 in_r9;
+  undefined4 staleArgR9;
 
-  uVar1 = ((uint (*)())FUN_0002cc30)(param_1,0,5,param_3,param_5,param_6,in_r9,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,fparam_9);
+  uVar1 = ((uint (*)())FUN_0002cc30)(param_1,0,5,param_3,param_5,param_6,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleFprArg9);
   if (uVar1 != 0) {
     return gld_emitPrimitiveVertices(param_1 + 0x240,6,0,param_2,uVar1,param_4);
   }

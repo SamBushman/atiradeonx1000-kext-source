@@ -3227,7 +3227,7 @@ int gld_setBufferAgpRefBacking(ctx, buffer, requestArg0, requestArg1, requestArg
   int status;
   undefined4 succeeded;
   int oldBacking;
-  char in_RESERVE;
+  char reservation;
   byte cr0Bits;
   undefined4 outSize;
   undefined1 outHandleUnused [4];
@@ -3256,7 +3256,7 @@ int gld_setBufferAgpRefBacking(ctx, buffer, requestArg0, requestArg1, requestArg
     **(int **)(buffer + 8) = newBacking;
     newRefCountPtr = (int *)(newBacking + 0x10);
     do {
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         newRefCountStored = storeWordConditionalIndexed(*newRefCountPtr + 0x10000,0,newRefCountPtr);
         *newRefCountPtr = newRefCountStored;
         cr0Bits = 2;
@@ -3269,7 +3269,7 @@ int gld_setBufferAgpRefBacking(ctx, buffer, requestArg0, requestArg1, requestArg
     oldRefCountPtr = (int *)(oldBacking + 0x10);
     do {
       oldRefCountValue = *oldRefCountPtr;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         oldRefCountStored = storeWordConditionalIndexed(oldRefCountValue + -0x10000,0,oldRefCountPtr);
         *oldRefCountPtr = oldRefCountStored;
         cr0Bits = 2;
@@ -3300,7 +3300,7 @@ int gld_setBufferNewTextureBacking(ctx, buffer, requestArg0, requestArg1, reques
   int status;
   undefined4 succeeded;
   int oldBacking;
-  char in_RESERVE;
+  char reservation;
   byte cr0Bits;
   undefined4 outSize;
   undefined4 outHandle;
@@ -3330,7 +3330,7 @@ int gld_setBufferNewTextureBacking(ctx, buffer, requestArg0, requestArg1, reques
     newRefCountPtr = (int *)(newBacking + 0x10);
     **(int **)(buffer + 8) = newBacking;
     do {
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         newRefCountStored = storeWordConditionalIndexed(*newRefCountPtr + 0x10000,0,newRefCountPtr);
         *newRefCountPtr = newRefCountStored;
         cr0Bits = 2;
@@ -3344,7 +3344,7 @@ int gld_setBufferNewTextureBacking(ctx, buffer, requestArg0, requestArg1, reques
     oldRefCountPtr = (int *)(oldBacking + 0x10);
     do {
       oldRefCountValue = *oldRefCountPtr;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         oldRefCountStored = storeWordConditionalIndexed(oldRefCountValue + -0x10000,0,oldRefCountPtr);
         *oldRefCountPtr = oldRefCountStored;
         cr0Bits = 2;

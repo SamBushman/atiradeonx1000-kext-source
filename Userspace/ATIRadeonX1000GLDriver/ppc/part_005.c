@@ -2808,7 +2808,7 @@ int gldTextureMakeResident(ctx, texture, param_3, param_4, param_5, param_6)
   int iVar11;
   undefined4 *puVar12;
   int *piVar13;
-  undefined4 extraout_r4;
+  undefined4 r4AfterCall;
   int *piVar14;
   uint uVar15;
   undefined4 uVar16;
@@ -2834,14 +2834,14 @@ int gldTextureMakeResident(ctx, texture, param_3, param_4, param_5, param_6)
   uint uVar36;
   undefined *formatInfo;
   undefined1 *puVar38;
-  byte in_xer_so = 0;
+  byte xerSummaryOverflow = 0;
   bool bVar39;
   bool bVar40;
-  byte in_cr1;
-  byte unaff_cr2;
-  byte unaff_cr3;
-  byte unaff_cr4;
-  byte in_cr5;
+  byte crField1;
+  byte calleeSavedCrField2;
+  byte calleeSavedCrField3;
+  byte calleeSavedCrField4;
+  byte crField5;
   byte bVar41;
   byte bVar42;
   byte bVar43;
@@ -3010,7 +3010,7 @@ LAB_000323a0:
     return 0;
   }
   bVar39 = *(char *)((int)texImages + 0x6f) == '\0';
-  bVar41 = (*(char *)((int)texImages + 0x6f) != '\0') << 2 | bVar39 << 1 | in_xer_so & 1;
+  bVar41 = (*(char *)((int)texImages + 0x6f) != '\0') << 2 | bVar39 << 1 | xerSummaryOverflow & 1;
   if (!bVar39) {
     if (((unsigned char *)0x00001001) <= (undefined *)(1 << (*(byte *)(texImages + 0x32) & 0x3f))) {
       return 0;
@@ -3046,7 +3046,7 @@ LAB_000323a0:
       goto LAB_00032600;
     }
     uVar19 = 0x1a2114;
-    uVar16 = extraout_r4;
+    uVar16 = r4AfterCall;
     if ((((((*(float *)(texture[0xc] + 4) == 0.0) ||
            (sVar5 = *(short *)(texture[0xc] + 0x1a), sVar5 == -0x7a41)) || (sVar5 == -0x7a42)) &&
          ((*(char *)(texImages + 0x36) == '\x01' && (*(char *)(texImages + 0x35) == '\x01')))) &&
@@ -3061,7 +3061,7 @@ LAB_000323a0:
       }
       bVar4 = *(byte *)(texture + 0xe);
       bVar42 = ((uVar32 & 0x1f) != 0) << 2 | ((uVar32 & 0x1f) == 0) << 1;
-      bVar41 = bVar42 | in_xer_so & 1;
+      bVar41 = bVar42 | xerSummaryOverflow & 1;
       param_3 = (uint)bVar4;
       uVar44 = ((int (*)())gldTextureFormatCodeMatchesType)((uint)texImages[uVar22 * 0xc + 0x58],(uint)texImages[uVar22 * 0xc + 0x59],
                             param_3);
@@ -3336,31 +3336,31 @@ LAB_00032e78:
             bVar39 = false;
             local_a4 = 0;
             local_c0 = 5;
-            local_60 = (uint)(in_xer_so & 1 | 2) << 0x1c | (uint)(in_cr1 & 0xf) << 0x18 |
-                       (uint)(unaff_cr2 & 0xf) << 0x14 | (uint)(unaff_cr3 & 0xf) << 0x10 |
-                       (uint)(unaff_cr4 & 0xf) << 0xc | (uint)(in_cr5 & 0xf) << 8 |
+            local_60 = (uint)(xerSummaryOverflow & 1 | 2) << 0x1c | (uint)(crField1 & 0xf) << 0x18 |
+                       (uint)(calleeSavedCrField2 & 0xf) << 0x14 | (uint)(calleeSavedCrField3 & 0xf) << 0x10 |
+                       (uint)(calleeSavedCrField4 & 0xf) << 0xc | (uint)(crField5 & 0xf) << 8 |
                        (uint)(bVar41 & 0xf) << 4 |
                        (uint)(byte)((uVar22 < 4) << 3 | (4 < uVar22) << 2 | (uVar22 == 4) << 1 |
-                                   in_xer_so & 1);
+                                   xerSummaryOverflow & 1);
 LAB_00032f74:
             iVar11 = 0;
           }
           else {
             local_a4 = *(uint *)(&DAT_001d9f4c + iVar11) >> 0x1c & 3;
-            bVar42 = (local_a4 != 0) << 2 | (local_a4 == 0) << 1 | in_xer_so & 1;
+            bVar42 = (local_a4 != 0) << 2 | (local_a4 == 0) << 1 | xerSummaryOverflow & 1;
             bVar39 = local_a4 != 0;
             if (bVar39) {
               local_c0 = 5 - local_a4;
-              local_60 = (uint)(in_xer_so & 1 | 4) << 0x1c | (uint)(in_cr1 & 0xf) << 0x18 |
-                         (uint)(unaff_cr2 & 0xf) << 0x14 | (uint)(unaff_cr3 & 0xf) << 0x10 |
-                         (uint)(unaff_cr4 & 0xf) << 0xc | (uint)(in_cr5 & 0xf) << 8 |
+              local_60 = (uint)(xerSummaryOverflow & 1 | 4) << 0x1c | (uint)(crField1 & 0xf) << 0x18 |
+                         (uint)(calleeSavedCrField2 & 0xf) << 0x14 | (uint)(calleeSavedCrField3 & 0xf) << 0x10 |
+                         (uint)(calleeSavedCrField4 & 0xf) << 0xc | (uint)(crField5 & 0xf) << 8 |
                          (uint)(bVar41 & 0xf) << 4 | (uint)bVar42;
             }
             else {
               local_c0 = 5;
-              local_60 = (uint)(in_xer_so & 1 | 4) << 0x1c | (uint)(in_cr1 & 0xf) << 0x18 |
-                         (uint)(unaff_cr2 & 0xf) << 0x14 | (uint)(unaff_cr3 & 0xf) << 0x10 |
-                         (uint)(unaff_cr4 & 0xf) << 0xc | (uint)(in_cr5 & 0xf) << 8 |
+              local_60 = (uint)(xerSummaryOverflow & 1 | 4) << 0x1c | (uint)(crField1 & 0xf) << 0x18 |
+                         (uint)(calleeSavedCrField2 & 0xf) << 0x14 | (uint)(calleeSavedCrField3 & 0xf) << 0x10 |
+                         (uint)(calleeSavedCrField4 & 0xf) << 0xc | (uint)(crField5 & 0xf) << 8 |
                          (uint)(bVar41 & 0xf) << 4 | (uint)bVar42;
             }
             iVar25 = 1;
@@ -3390,7 +3390,7 @@ LAB_00032f74:
             uVar30 = 0;
           }
           bVar42 = (local_80 < local_7c) << 3 | (local_7c < local_80) << 2 |
-                   (local_80 == local_7c) << 1 | in_xer_so & 1;
+                   (local_80 == local_7c) << 1 | xerSummaryOverflow & 1;
           bVar40 = (uint)((1 << (uVar32 & 0x3f)) << (local_214 & 0x3f)) <=
                    *(uint *)(ctxSaved + 0x29d8);
           uVar20 = local_7c;
@@ -3452,16 +3452,16 @@ LAB_00032f74:
               piVar34 = piVar34 + 1;
               piVar14 = piVar14 + 1;
               bVar42 = (local_80 < uVar20) << 3 | (uVar20 < local_80) << 2 |
-                       (local_80 == uVar20) << 1 | in_xer_so & 1;
+                       (local_80 == uVar20) << 1 | xerSummaryOverflow & 1;
             } while (local_80 >= uVar20);
             iVar21 = local_78 * iVar35;
             iVar33 = local_78 * iVar29;
           }
           uVar22 = 0;
-          local_6c = (uint)(byte)(bVar40 << 2 | !bVar40 << 1 | in_xer_so & 1) << 0x1c |
-                     (uint)(in_cr1 & 0xf) << 0x18 | (uint)(unaff_cr2 & 0xf) << 0x14 |
-                     (uint)(unaff_cr3 & 0xf) << 0x10 | (uint)(unaff_cr4 & 0xf) << 0xc |
-                     (uint)(in_cr5 & 0xf) << 8 | (uint)(bVar41 & 0xf) << 4 | (uint)bVar42;
+          local_6c = (uint)(byte)(bVar40 << 2 | !bVar40 << 1 | xerSummaryOverflow & 1) << 0x1c |
+                     (uint)(crField1 & 0xf) << 0x18 | (uint)(calleeSavedCrField2 & 0xf) << 0x14 |
+                     (uint)(calleeSavedCrField3 & 0xf) << 0x10 | (uint)(calleeSavedCrField4 & 0xf) << 0xc |
+                     (uint)(crField5 & 0xf) << 8 | (uint)(bVar41 & 0xf) << 4 | (uint)bVar42;
           aiStack_1c8[uVar20] = iVar29;
           aiStack_200[uVar20] = iVar35;
           if (bVar40) {
@@ -3607,22 +3607,22 @@ LAB_000334dc:
             }
           }
           bVar42 = ((int)local_78 < 0) << 3 | (0 < (int)local_78) << 2 | (local_78 == 0) << 1 |
-                   in_xer_so & 1;
+                   xerSummaryOverflow & 1;
           if (local_78 != 0) {
             local_90 = 0;
             local_dc = texture;
             local_58 = iVar11 << 1;
             local_94 = 0;
             local_e4 = local_7c * 0x18;
-            local_54 = (uint)(byte)(bVar39 << 2 | !bVar39 << 1 | in_xer_so & 1) << 0x1c |
-                       (uint)(in_cr1 & 0xf) << 0x18 | (uint)(unaff_cr2 & 0xf) << 0x14 |
-                       (uint)(unaff_cr3 & 0xf) << 0x10 | (uint)(unaff_cr4 & 0xf) << 0xc |
-                       (uint)(in_cr5 & 0xf) << 8 | (uint)(bVar41 & 0xf) << 4 | (uint)bVar42;
+            local_54 = (uint)(byte)(bVar39 << 2 | !bVar39 << 1 | xerSummaryOverflow & 1) << 0x1c |
+                       (uint)(crField1 & 0xf) << 0x18 | (uint)(calleeSavedCrField2 & 0xf) << 0x14 |
+                       (uint)(calleeSavedCrField3 & 0xf) << 0x10 | (uint)(calleeSavedCrField4 & 0xf) << 0xc |
+                       (uint)(crField5 & 0xf) << 8 | (uint)(bVar41 & 0xf) << 4 | (uint)bVar42;
             local_c4 = (uVar22 + (uVar32 & 0xfffffff8)) * 4;
             local_e0 = local_7c << 5;
-            local_68 = (uint)(in_xer_so & 1 | 2) << 0x1c | (uint)(in_cr1 & 0xf) << 0x18 |
-                       (uint)(unaff_cr2 & 0xf) << 0x14 | (uint)(unaff_cr3 & 0xf) << 0x10 |
-                       (uint)(unaff_cr4 & 0xf) << 0xc | (uint)(in_cr5 & 0xf) << 8 |
+            local_68 = (uint)(xerSummaryOverflow & 1 | 2) << 0x1c | (uint)(crField1 & 0xf) << 0x18 |
+                       (uint)(calleeSavedCrField2 & 0xf) << 0x14 | (uint)(calleeSavedCrField3 & 0xf) << 0x10 |
+                       (uint)(calleeSavedCrField4 & 0xf) << 0xc | (uint)(crField5 & 0xf) << 8 |
                        (uint)(bVar41 & 0xf) << 4 | (uint)bVar42;
             local_5c = local_84 + 0x10;
             local_d8 = local_74;
@@ -3656,17 +3656,17 @@ LAB_000334dc:
                   local_b0 = (uint)!bVar39;
                   if ((*(byte *)((int)texture + 0x39) & 3) == 0) {
                     bVar42 = ((int)uVar28 < 0) << 3 | (0 < (int)uVar28) << 2 | (uVar28 == 0) << 1 |
-                             in_xer_so & 1;
+                             xerSummaryOverflow & 1;
                     local_a8 = local_a8 & *(ushort *)(local_dc + 9);
                   }
                   else {
                     bVar42 = ((int)uVar28 < 0) << 3 | (0 < (int)uVar28) << 2 | (uVar28 == 0) << 1 |
-                             in_xer_so & 1;
+                             xerSummaryOverflow & 1;
                     uVar8 = uVar28;
                     uVar20 = uVar32;
                     if ((((uVar32 != local_a4 + 3) && (local_a4 <= uVar32)) &&
                         (bVar42 = ((int)uVar28 < 0) << 3 | (0 < (int)uVar28) << 2 |
-                                  (uVar28 == 0) << 1 | in_xer_so & 1, uVar28 != 0)) &&
+                                  (uVar28 == 0) << 1 | xerSummaryOverflow & 1, uVar28 != 0)) &&
                        (uVar36 = uVar28, uVar32 < 0xb)) {
                       do {
                         uVar8 = uVar8 - 1;
@@ -3741,7 +3741,7 @@ LAB_00033700:
                     iVar25 = gldPixelUnitBytes((uint)*(ushort *)(iVar33 + 0x10),uVar20);
                     uVar23 = (uint)*(ushort *)(iVar33 + 0xc);
                     bVar39 = uVar20 != 0;
-                    bVar4 = in_xer_so & 1;
+                    bVar4 = xerSummaryOverflow & 1;
                     local_158 = *(uint *)(iVar33 + 0x14);
                     uVar8 = iVar25 * uVar23;
                     if ((*(char *)(iVar33 + 10) != '\0') && (bVar39)) {
@@ -3770,7 +3770,7 @@ LAB_00033700:
                     bVar40 = (int)local_b0 < 0;
                     bVar1 = 0 < (int)local_b0;
                     bVar2 = local_b0 == 0;
-                    bVar3 = in_xer_so & 1;
+                    bVar3 = xerSummaryOverflow & 1;
                     uVar23 = local_b0;
                     local_154 = uVar8;
                     _glgConvertType((uint)*(ushort *)(iVar33 + 0x10),
@@ -3784,7 +3784,7 @@ LAB_00033700:
                     local_130 = 0x7ffff;
                     uVar27 = *(short *)(iVar33 + 0x10) + 0xe6fa;
                     bVar43 = (uVar27 < 4) << 3 | (4 < uVar27) << 2 | (uVar27 == 4) << 1 |
-                             in_xer_so & 1;
+                             xerSummaryOverflow & 1;
                     if ((4 >= uVar27) &&
                        (uVar23 = 1 << ((int)(short)uVar27 & 0x3fU) & 0x19, uVar23 != 0)) {
                       local_130 = 0x7dfff;
@@ -3801,11 +3801,11 @@ LAB_00033700:
                                           (uint)*(byte *)(local_74 + 0x65) & 0x3f));
                       uVar36 = local_68;
                       local_68 = (uint)(byte)(((int)local_90 < 0) << 3 | (0 < (int)local_90) << 2 |
-                                              (local_90 == 0) << 1 | in_xer_so & 1) << 0x1c |
-                                 (uint)(in_cr1 & 0xf) << 0x18 | (uint)bVar42 << 0x14 |
+                                              (local_90 == 0) << 1 | xerSummaryOverflow & 1) << 0x1c |
+                                 (uint)(crField1 & 0xf) << 0x18 | (uint)bVar42 << 0x14 |
                                  (uint)(byte)((uVar20 == 0) << 2 | bVar39 << 1 | bVar4) << 0x10 |
                                  (uint)(byte)(bVar40 << 3 | bVar1 << 2 | bVar2 << 1 | bVar3) << 0xc
-                                 | (uint)(in_cr5 & 0xf) << 8 | (uint)(bVar41 & 0xf) << 4 |
+                                 | (uint)(crField5 & 0xf) << 8 | (uint)(bVar41 & 0xf) << 4 |
                                  (uint)(bVar43 & 0xf);
                     }
                     uVar27 = *(ushort *)(iVar33 + 0x10);
@@ -3842,7 +3842,7 @@ LAB_00033700:
                           if (puVar18 == (undefined1 *)((int)((unsigned char *)0xc) + 3)) {
                             bVar39 = uVar23 == 0x1908;
                             bVar41 = (uVar23 < 0x1908) << 3 | (0x1908 < uVar23) << 2 | bVar39 << 1 |
-                                     in_xer_so & 1;
+                                     xerSummaryOverflow & 1;
                             local_b8 = local_128;
                             if ((bVar39) || (iVar11 = 3, uVar23 == local_70)) {
                               iVar11 = 4;
@@ -4155,11 +4155,11 @@ int glGenerateMipmap_impl(ctx, texture, face, passThroughArg4, passThroughArg5)
   int iVar16;
   int levelRecord;
   undefined4 *packet;
-  undefined4 extraout_r4;
+  undefined4 r4AfterCall;
   int *drawCursor;
   undefined4 uVar20;
   int *levelOffsetTable;
-  undefined4 in_r8;
+  undefined4 staleArgR8;
   uint baseWidth;
   uint *lastHeader;
   uint uVar24;
@@ -4191,7 +4191,7 @@ int glGenerateMipmap_impl(ctx, texture, face, passThroughArg4, passThroughArg5)
     lastLevel = *(byte *)((int)levelTable + 0x6b);
   }
   levelCount = lastLevel - baseLevel;
-  faceArg = ((int (*)())gldTextureHasNonPowerOfTwoSize)(texture,extraout_r4,faceArg,passThroughArg4,passThroughArg5,in_r8);
+  faceArg = ((int (*)())gldTextureHasNonPowerOfTwoSize)(texture,r4AfterCall,faceArg,passThroughArg4,passThroughArg5,staleArgR8);
   if (faceArg != 0) {
 LAB_000342e0:
     _pthread_mutex_unlock(*(undefined4 *)(ctx + GLD_mutex));
@@ -4205,7 +4205,7 @@ LAB_000342e0:
   levelRecord = ((int (*)())gldTextureFormatEntryForLevel)(ctx,texture,face,baseLevel,1);
   if (((levelRecord == 0) || ((*(uint *)(levelRecord + 0x18) & 0x10000) == 0)) ||
      (((*(byte *)((int)texture + 0x39) & 7) != 0 &&
-      (faceArg = ((int (*)())gldTextureMakeResident)(ctx,texture,faceArg,uVar12,uVar20,in_r8), faceArg == 0))))
+      (faceArg = ((int (*)())gldTextureMakeResident)(ctx,texture,faceArg,uVar12,uVar20,staleArgR8), faceArg == 0))))
   goto LAB_000342e0;
   baseWidth = *(byte *)(levelTable + 0x30) - baseLevel;
   if ((int)baseWidth < 0) {
@@ -4277,7 +4277,7 @@ LAB_0003440c:
   a0 = ctx + GLD_commandStream;
   a6 = face << 0x10;
   uVar20 = (**(code **)(ctx + GLD_streamAllocate))
-                     (a0,drawWords + levelCountPlus1 + 0x340,depthLevelCount,uVar12,uVar20,in_r8,a6);
+                     (a0,drawWords + levelCountPlus1 + 0x340,depthLevelCount,uVar12,uVar20,staleArgR8,a6);
   *(undefined4 *)(ctx + GLD_streamCurrent) = uVar20;
   packet = (undefined4 *)((int (*)())FUN_00030840)(ctx,uVar20,texture);
   stateTemplate = PTR_DAT_001e88d0;
@@ -7298,7 +7298,7 @@ int _gldGetString(ctx, name)
 }
 
 /* FUN_00039330 @ 0x39330 (724 bytes) */
-void FUN_00039330(int ctx,uint param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9)
+void FUN_00039330(int ctx,uint param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
 {
   undefined4 vap_vte_cntl;
   undefined4 uVar1;
@@ -7315,12 +7315,12 @@ void FUN_00039330(int ctx,uint param_2,undefined4 param_3,undefined4 param_4,und
   undefined4 *puVar12;
   int iVar13;
   int iVar14;
-  double in_stack_ffffffa8;
-  undefined4 in_r9;
+  double staleStackArg_ffffffa8;
+  undefined4 staleArgR9;
   
   uVar8 = 3;
-  iVar5 = ((uint (*)())FUN_0002cc30)(ctx,param_4,3,param_3,param_5,param_6,in_r9,fparam_1,fparam_2,fparam_3,fparam_4
-                       ,fparam_5,fparam_6,fparam_7,fparam_8,in_stack_ffffffa8);
+  iVar5 = ((uint (*)())FUN_0002cc30)(ctx,param_4,3,param_3,param_5,param_6,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4
+                       ,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleStackArg_ffffffa8);
   if (iVar5 != 0) {
     iVar13 = *(int *)(ctx + 0x29e8);
     iVar11 = *(int *)(**(int **)(ctx + 0x1cc) + 4);
@@ -7417,7 +7417,7 @@ void FUN_00039330(int ctx,uint param_2,undefined4 param_3,undefined4 param_4,und
 }
 
 /* FUN_00039610 @ 0x39610 (1092 bytes) */
-void FUN_00039610(int ctx,uint param_2,uint param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9)
+void FUN_00039610(int ctx,uint param_2,uint param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
 {
   undefined4 vap_vte_cntl;
   undefined4 uVar1;
@@ -7437,12 +7437,12 @@ void FUN_00039610(int ctx,uint param_2,uint param_3,undefined4 param_4,undefined
   int iVar15;
   int iVar16;
   int iVar17;
-  double in_stack_ffffff98;
-  undefined4 in_r9;
+  double staleStackArg_ffffff98;
+  undefined4 staleArgR9;
   
   uVar9 = 6;
-  iVar6 = ((uint (*)())FUN_0002cc30)(ctx,0,6,param_4,param_5,param_6,in_r9,fparam_1,fparam_2,fparam_3,fparam_4,
-                       fparam_5,fparam_6,fparam_7,fparam_8,in_stack_ffffff98);
+  iVar6 = ((uint (*)())FUN_0002cc30)(ctx,0,6,param_4,param_5,param_6,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,
+                       staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleStackArg_ffffff98);
   if (iVar6 != 0) {
     iVar11 = *(int *)(ctx + 0x29e8);
     iVar15 = *(int *)(**(int **)(ctx + 0x1cc) + 4);
@@ -7593,7 +7593,7 @@ void FUN_00039610(int ctx,uint param_2,uint param_3,undefined4 param_4,undefined
 }
 
 /* FUN_00039a60 @ 0x39a60 (724 bytes) */
-void FUN_00039a60(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3,undefined4 extraArg4,undefined4 extraArg5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9)
+void FUN_00039a60(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3,undefined4 extraArg4,undefined4 extraArg5,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
 {
   undefined4 element1;
   undefined4 element2;
@@ -7609,12 +7609,12 @@ void FUN_00039a60(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3
   undefined4 *weightCursor;
   int programState;
   int vertexStride;
-  double in_stack_ffffffa8;
-  undefined4 in_r9;
+  double staleStackArg_ffffffa8;
+  undefined4 staleArgR9;
   
   topology = 4;
-  unitCount = ((uint (*)())FUN_0002cc30)(ctx,0,4,elementCount,extraArg4,extraArg5,in_r9,fparam_1,fparam_2,fparam_3,fparam_4,
-                       fparam_5,fparam_6,fparam_7,fparam_8,in_stack_ffffffa8);
+  unitCount = ((uint (*)())FUN_0002cc30)(ctx,0,4,elementCount,extraArg4,extraArg5,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,
+                       staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleStackArg_ffffffa8);
   if (unitCount != 0) {
     programState = *(int *)(ctx + 0x29e8);
     vertexArrayInfo = *(int *)(**(int **)(ctx + GLD_currentProgram) + 4);
@@ -7711,7 +7711,7 @@ void FUN_00039a60(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3
 }
 
 /* FUN_00039d40 @ 0x39d40 (724 bytes) */
-void FUN_00039d40(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3,undefined4 extraArg4,undefined4 extraArg5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9)
+void FUN_00039d40(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3,undefined4 extraArg4,undefined4 extraArg5,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
 {
   undefined4 element1;
   undefined4 element2;
@@ -7727,12 +7727,12 @@ void FUN_00039d40(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3
   undefined4 *weightCursor;
   int programState;
   int vertexStride;
-  double in_stack_ffffffa8;
-  undefined4 in_r9;
+  double staleStackArg_ffffffa8;
+  undefined4 staleArgR9;
   
   topology = 5;
-  unitCount = ((uint (*)())FUN_0002cc30)(ctx,0,5,elementCount,extraArg4,extraArg5,in_r9,fparam_1,fparam_2,fparam_3,fparam_4,
-                       fparam_5,fparam_6,fparam_7,fparam_8,in_stack_ffffffa8);
+  unitCount = ((uint (*)())FUN_0002cc30)(ctx,0,5,elementCount,extraArg4,extraArg5,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,
+                       staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleStackArg_ffffffa8);
   if (unitCount != 0) {
     programState = *(int *)(ctx + 0x29e8);
     vertexArrayInfo = *(int *)(**(int **)(ctx + GLD_currentProgram) + 4);
@@ -7829,7 +7829,7 @@ void FUN_00039d40(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3
 }
 
 /* FUN_0003a020 @ 0x3a020 (724 bytes) */
-void FUN_0003a020(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3,undefined4 extraArg4,undefined4 extraArg5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9)
+void FUN_0003a020(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3,undefined4 extraArg4,undefined4 extraArg5,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
 {
   undefined4 element1;
   undefined4 element2;
@@ -7845,12 +7845,12 @@ void FUN_0003a020(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3
   undefined4 *weightCursor;
   int programState;
   int vertexStride;
-  double in_stack_ffffffa8;
-  undefined4 in_r9;
+  double staleStackArg_ffffffa8;
+  undefined4 staleArgR9;
   
   topology = 7;
-  unitCount = ((uint (*)())FUN_0002cc30)(ctx,0,7,elementCount,extraArg4,extraArg5,in_r9,fparam_1,fparam_2,fparam_3,fparam_4,
-                       fparam_5,fparam_6,fparam_7,fparam_8,in_stack_ffffffa8);
+  unitCount = ((uint (*)())FUN_0002cc30)(ctx,0,7,elementCount,extraArg4,extraArg5,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,
+                       staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleStackArg_ffffffa8);
   if (unitCount != 0) {
     programState = *(int *)(ctx + 0x29e8);
     vertexArrayInfo = *(int *)(**(int **)(ctx + GLD_currentProgram) + 4);
@@ -7947,7 +7947,7 @@ void FUN_0003a020(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3
 }
 
 /* FUN_0003a300 @ 0x3a300 (724 bytes) */
-void FUN_0003a300(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3,undefined4 extraArg4,undefined4 extraArg5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9)
+void FUN_0003a300(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3,undefined4 extraArg4,undefined4 extraArg5,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
 {
   undefined4 element1;
   undefined4 element2;
@@ -7963,12 +7963,12 @@ void FUN_0003a300(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3
   undefined4 *weightCursor;
   int programState;
   int vertexStride;
-  double in_stack_ffffffa8;
-  undefined4 in_r9;
+  double staleStackArg_ffffffa8;
+  undefined4 staleArgR9;
   
   topology = 8;
-  unitCount = ((uint (*)())FUN_0002cc30)(ctx,0,8,elementCount,extraArg4,extraArg5,in_r9,fparam_1,fparam_2,fparam_3,fparam_4,
-                       fparam_5,fparam_6,fparam_7,fparam_8,in_stack_ffffffa8);
+  unitCount = ((uint (*)())FUN_0002cc30)(ctx,0,8,elementCount,extraArg4,extraArg5,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,
+                       staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleStackArg_ffffffa8);
   if (unitCount != 0) {
     programState = *(int *)(ctx + 0x29e8);
     vertexArrayInfo = *(int *)(**(int **)(ctx + GLD_currentProgram) + 4);
@@ -8065,7 +8065,7 @@ void FUN_0003a300(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3
 }
 
 /* FUN_0003a5e0 @ 0x3a5e0 (724 bytes) */
-void FUN_0003a5e0(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3,undefined4 extraArg4,undefined4 extraArg5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9)
+void FUN_0003a5e0(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3,undefined4 extraArg4,undefined4 extraArg5,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
 {
   undefined4 element1;
   undefined4 element2;
@@ -8081,12 +8081,12 @@ void FUN_0003a5e0(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3
   undefined4 *weightCursor;
   int programState;
   int vertexStride;
-  double in_stack_ffffffa8;
-  undefined4 in_r9;
+  double staleStackArg_ffffffa8;
+  undefined4 staleArgR9;
   
   topology = 9;
-  unitCount = ((uint (*)())FUN_0002cc30)(ctx,0,9,elementCount,extraArg4,extraArg5,in_r9,fparam_1,fparam_2,fparam_3,fparam_4,
-                       fparam_5,fparam_6,fparam_7,fparam_8,in_stack_ffffffa8);
+  unitCount = ((uint (*)())FUN_0002cc30)(ctx,0,9,elementCount,extraArg4,extraArg5,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,
+                       staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleStackArg_ffffffa8);
   if (unitCount != 0) {
     programState = *(int *)(ctx + 0x29e8);
     vertexArrayInfo = *(int *)(**(int **)(ctx + GLD_currentProgram) + 4);
@@ -8183,7 +8183,7 @@ void FUN_0003a5e0(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3
 }
 
 /* FUN_0003a8c0 @ 0x3a8c0 (724 bytes) */
-void FUN_0003a8c0(int ctx,uint param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9)
+void FUN_0003a8c0(int ctx,uint param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
 {
   undefined4 vap_vte_cntl;
   undefined4 uVar1;
@@ -8200,12 +8200,12 @@ void FUN_0003a8c0(int ctx,uint param_2,undefined4 param_3,undefined4 param_4,und
   undefined4 *puVar12;
   int iVar13;
   int iVar14;
-  double in_stack_ffffffa8;
-  undefined4 in_r9;
+  double staleStackArg_ffffffa8;
+  undefined4 staleArgR9;
   
   uVar8 = 0;
-  iVar5 = ((uint (*)())FUN_0002cc30)(ctx,0,0,param_3,param_5,param_6,in_r9,fparam_1,fparam_2,fparam_3,fparam_4,
-                       fparam_5,fparam_6,fparam_7,fparam_8,in_stack_ffffffa8);
+  iVar5 = ((uint (*)())FUN_0002cc30)(ctx,0,0,param_3,param_5,param_6,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,
+                       staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleStackArg_ffffffa8);
   if (iVar5 != 0) {
     iVar13 = *(int *)(ctx + 0x29e8);
     iVar11 = *(int *)(**(int **)(ctx + 0x1cc) + 4);
@@ -8302,7 +8302,7 @@ void FUN_0003a8c0(int ctx,uint param_2,undefined4 param_3,undefined4 param_4,und
 }
 
 /* FUN_0003aba0 @ 0x3aba0 (724 bytes) */
-void FUN_0003aba0(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3,undefined4 extraArg4,undefined4 extraArg5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9)
+void FUN_0003aba0(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3,undefined4 extraArg4,undefined4 extraArg5,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
 {
   undefined4 element1;
   undefined4 element2;
@@ -8318,12 +8318,12 @@ void FUN_0003aba0(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3
   undefined4 *weightCursor;
   int programState;
   int vertexStride;
-  double in_stack_ffffffa8;
-  undefined4 in_r9;
+  double staleStackArg_ffffffa8;
+  undefined4 staleArgR9;
   
   topology = 1;
-  unitCount = ((uint (*)())FUN_0002cc30)(ctx,0,1,elementCount,extraArg4,extraArg5,in_r9,fparam_1,fparam_2,fparam_3,fparam_4,
-                       fparam_5,fparam_6,fparam_7,fparam_8,in_stack_ffffffa8);
+  unitCount = ((uint (*)())FUN_0002cc30)(ctx,0,1,elementCount,extraArg4,extraArg5,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,
+                       staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleStackArg_ffffffa8);
   if (unitCount != 0) {
     programState = *(int *)(ctx + 0x29e8);
     vertexArrayInfo = *(int *)(**(int **)(ctx + GLD_currentProgram) + 4);
@@ -8420,7 +8420,7 @@ void FUN_0003aba0(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3
 }
 
 /* FUN_0003ae80 @ 0x3ae80 (724 bytes) */
-void FUN_0003ae80(int ctx,uint param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9)
+void FUN_0003ae80(int ctx,uint param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
 {
   undefined4 vap_vte_cntl;
   undefined4 uVar1;
@@ -8437,12 +8437,12 @@ void FUN_0003ae80(int ctx,uint param_2,undefined4 param_3,undefined4 param_4,und
   undefined4 *puVar12;
   int iVar13;
   int iVar14;
-  double in_stack_ffffffa8;
-  undefined4 in_r9;
+  double staleStackArg_ffffffa8;
+  undefined4 staleArgR9;
   
   uVar8 = 2;
-  iVar5 = ((uint (*)())FUN_0002cc30)(ctx,param_4,2,param_3,param_5,param_6,in_r9,fparam_1,fparam_2,fparam_3,fparam_4
-                       ,fparam_5,fparam_6,fparam_7,fparam_8,in_stack_ffffffa8);
+  iVar5 = ((uint (*)())FUN_0002cc30)(ctx,param_4,2,param_3,param_5,param_6,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4
+                       ,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleStackArg_ffffffa8);
   if (iVar5 != 0) {
     iVar13 = *(int *)(ctx + 0x29e8);
     iVar11 = *(int *)(**(int **)(ctx + 0x1cc) + 4);
