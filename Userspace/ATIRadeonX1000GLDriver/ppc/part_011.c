@@ -3011,7 +3011,7 @@ int recordProgramAllocateAndEmit(alloc, unusedArg2, scratchArg3, scratchArg4, sc
   bool hasLiveRecords;
   unsigned char opcodeByte;
   uint srcTopBits;
-  uint uVar4;
+  uint loopCounterE;
   uint word3Before;
   uint word3BeforeB;
   uint outWord1B;
@@ -3174,7 +3174,7 @@ LAB_0007b378:
   hasLiveRecords = liveCountSnapshot != 0;
   if (hasLiveRecords) {
     liveListPtr = 0x00024870 + alloc;
-    uVar4 = 0;
+    loopCounterE = 0;
     do {
       recordCount = *(int *)liveListPtr;
       for (dependencyNode = *(int **)(recordCount * 4 + allocPlus38 + 0xa418); dependencyNode != (int *)0x0;
@@ -3197,9 +3197,9 @@ LAB_0007b378:
           ((int (*)())depListRemove)(alloc + 0xe450 + *(int *)liveListPtr * 4,dependencyNode);
         }
       }
-      uVar4 = uVar4 + 1;
+      loopCounterE = loopCounterE + 1;
       liveListPtr = liveListPtr + 4;
-    } while (uVar4 < *(uint *)(alloc + 0x26870));
+    } while (loopCounterE < *(uint *)(alloc + 0x26870));
   }
   if ((((**(uint **)(alloc + 0x34) & 0x40) != 0) && (hasLiveRecords)) &&
      (recordCount = liveCountSnapshot - 1, recordCount != 0)) {
