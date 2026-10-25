@@ -4,8 +4,8 @@
 0xd4ec8	scDumpPixelProgram
 0xda180	FUN_000da0c0
 0xda578	FUN_000da4b8
-0xe1a08	FUN_000e1920
-0xe1b30	FUN_000e1a48
+0xe1a08	Compiler__init_e1920
+0xe1b30	Compiler__init_e1a48
 0xe1bf0	Compiler__setHardwareFamily
 0xe1c20	Compiler__setHardwareFamily
 0xe21b8	FUN_000e2094
@@ -90,7 +90,7 @@
 0xee718	Program__ctor_ee29c
 0xee748	Program__ctor_ee29c
 0xee780	FUN_000eec50
-0xee830	FUN_000ee7a0
+0xee830	Program__buildBlockArrayByKey
 0xeede8	FUN_000eec50
 0xef038	FUN_000eee4c
 0xef79c	FUN_000ef498
@@ -526,7 +526,7 @@
 0x182010	Block__flattenAndRebuildAddMulTree
 0x182040	Block__flattenAndRebuildAddMulTree
 0x183a98	Block__flattenAndRebuildAddMulTree
-0x1840ac	FUN_0018401c
+0x1840ac	pass_height_reduction
 0x18421c	FUN_0018413c
 0x184250	FUN_0018413c
 0x184290	FUN_0018413c

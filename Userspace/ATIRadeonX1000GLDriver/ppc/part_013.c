@@ -5800,7 +5800,7 @@ int FUN_00093390(programBuilder)
  * large PPC links) does not silently reconcile this the way stock ld did. */
 asm(".globl FUN_0008fb70");
 asm(".set FUN_0008fb70, _FUN_0008fb70");
-asm(".globl FUN_000900a0");
-asm(".set FUN_000900a0, _ffvpComputeOutputMasks");
+asm(".globl ffvpComputeOutputMasks");
+asm(".set ffvpComputeOutputMasks, _ffvpComputeOutputMasks");
 asm(".globl gldValidateState");
 asm(".set gldValidateState, _gldValidateState");

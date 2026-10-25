@@ -1282,91 +1282,93 @@ LAB_00178de8:
   return param_1;
 }
 
-/* FUN_00178e90 @ 0x178e90 (468 bytes) */
-int FUN_00178e90(param_1, param_2, param_3, param_4)
-  float *param_1;
-  int param_2;
-  int param_3;
-  uint param_4;
+/* ValueKey__evalLitLane @ 0x178e90 (468 bytes) */
+int ValueKey__evalLitLane(resultOut, key, lane, staleArg4)
+  float *resultOut;
+  int key;
+  int lane;
+  uint staleArg4;
 {
-  float fVar1;
-  float fVar2;
-  float fVar3;
+  float clampHigh;
+  float clampedExponent;
+  float clampedX;
+  float laneOneResult;
+  float xValue;
   float *loopPtr;
   int loopRemaining;
-  double dVar6;
-  double dVar7;
-  float local_58 [15];
+  double logOrPow;
+  double logTwo;
+  float litInputs [15];
   
   loopRemaining = 5;
-  loopPtr = local_58;
+  loopPtr = litInputs;
   do {
     *loopPtr = GH_U2F(0x7fff0000U);
     loopPtr = loopPtr + 1;
     loopRemaining = loopRemaining + -1;
   } while (loopRemaining != 0);
-  *param_1 = GH_U2F(0x7fff0000U);
-  if (*(int *)(*(int *)(*(int *)(param_2 + 0xb0) + 0x88) + 8) == 0x32) {
-    if (param_3 == 1) {
-      loopPtr = (float *)Compiler__exprRecordForValueNumber(*(undefined4 *)(param_2 + 0x238),
-                                     *(undefined4 *)(param_2 + 0x178));
-      fVar3 = *loopPtr;
-      fVar1 = fVar3;
-      if (fVar3 < 0.0) {
-        fVar1 = 0.0;
+  *resultOut = GH_U2F(0x7fff0000U);
+  if (*(int *)(*(int *)(*(int *)(key + 0xb0) + 0x88) + 8) == 0x32) {
+    if (lane == 1) {
+      loopPtr = (float *)Compiler__exprRecordForValueNumber(*(undefined4 *)(key + 0x238),
+                                     *(undefined4 *)(key + 0x178));
+      xValue = *loopPtr;
+      clampedX = xValue;
+      if (xValue < 0.0) {
+        clampedX = 0.0;
       }
-      fVar2 = 0.0;
-      if (-fVar3 < 0.0) {
-        fVar2 = fVar1;
+      laneOneResult = 0.0;
+      if (-xValue < 0.0) {
+        laneOneResult = clampedX;
       }
-      *param_1 = fVar2;
+      *resultOut = laneOneResult;
     }
     else {
-      if (param_3 < 2) {
-        if (param_3 != 0) {
-          return param_1;
+      if (lane < 2) {
+        if (lane != 0) {
+          return resultOut;
         }
       }
       else {
-        if (param_3 == 2) {
-          loopPtr = (float *)Compiler__exprRecordForValueNumber(*(undefined4 *)(param_2 + 0x238),
-                                         *(undefined4 *)(param_2 + 0x178));
-          local_58[0] = *loopPtr;
-          loopPtr = (float *)Compiler__exprRecordForValueNumber(*(undefined4 *)(param_2 + 0x238),
-                                         *(undefined4 *)(param_2 + 0x17c));
-          local_58[1] = *loopPtr;
-          if ((0.0 < local_58[0]) && (0.0 < local_58[1])) {
-            loopPtr = (float *)Compiler__exprRecordForValueNumber(*(undefined4 *)(param_2 + 0x238),
-                                           *(undefined4 *)(param_2 + 0x184));
-            local_58[3] = *loopPtr;
-            fVar1 = -128.0;
-            if (-128.0 <= local_58[3]) {
-              fVar3 = 128.0;
-              if (local_58[3] - 128.0 < 0.0) {
-                fVar3 = local_58[3];
+        if (lane == 2) {
+          loopPtr = (float *)Compiler__exprRecordForValueNumber(*(undefined4 *)(key + 0x238),
+                                         *(undefined4 *)(key + 0x178));
+          litInputs[0] = *loopPtr;
+          loopPtr = (float *)Compiler__exprRecordForValueNumber(*(undefined4 *)(key + 0x238),
+                                         *(undefined4 *)(key + 0x17c));
+          litInputs[1] = *loopPtr;
+          if ((0.0 < litInputs[0]) && (0.0 < litInputs[1])) {
+            loopPtr = (float *)Compiler__exprRecordForValueNumber(*(undefined4 *)(key + 0x238),
+                                           *(undefined4 *)(key + 0x184));
+            litInputs[3] = *loopPtr;
+            clampedExponent = -128.0;
+            if (-128.0 <= litInputs[3]) {
+              clampHigh = 128.0;
+              if (litInputs[3] - 128.0 < 0.0) {
+                clampHigh = litInputs[3];
               }
-              fVar1 = local_58[3];
-              if (-(local_58[3] - 128.0) < 0.0) {
-                fVar1 = fVar3;
+              clampedExponent = litInputs[3];
+              if (-(litInputs[3] - 128.0) < 0.0) {
+                clampedExponent = clampHigh;
               }
             }
-            dVar6 = _log((double)local_58[1]);
-            dVar7 = _log(2.0);
-            dVar6 = _pow(2.0,(double)(fVar1 * (float)(dVar6 / dVar7)));
-            *param_1 = (float)dVar6;
-            return param_1;
+            logOrPow = _log((double)litInputs[1]);
+            logTwo = _log(2.0);
+            logOrPow = _pow(2.0,(double)(clampedExponent * (float)(logOrPow / logTwo)));
+            *resultOut = (float)logOrPow;
+            return resultOut;
           }
-          *param_1 = 0.0;
-          return param_1;
+          *resultOut = 0.0;
+          return resultOut;
         }
-        if (param_3 != 3) {
-          return param_1;
+        if (lane != 3) {
+          return resultOut;
         }
       }
-      *param_1 = 1.0;
+      *resultOut = 1.0;
     }
   }
-  return param_1;
+  return resultOut;
 }
 
 /* FUN_00179064 @ 0x179064 (212 bytes) */

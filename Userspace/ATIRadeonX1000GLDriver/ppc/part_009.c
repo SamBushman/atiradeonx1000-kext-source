@@ -4550,167 +4550,176 @@ int gldCurrentAttributePacketHeader(param_1, param_2, param_3)
 }
 
 /* FUN_00064230 @ 0x64230 (1256 bytes) */
-int FUN_00064230(param_1, param_2)
-  int param_1;
-  int *param_2;
+int FUN_00064230(ctx, shader)
+  int ctx;
+  int *shader;
 {
-  byte bVar1;
+  int outputsLeft;
+  uint fieldValue;
+  uint savedWord5;
+  uint fieldShift;
+  uint shaderOutputMask;
+  uint streamTotal;
+  uint descWord;
+  uint savedWord10;
+  int inputRecordCursor;
+  byte outputFlags;
   uint uVar2;
-  int iVar3;
-  uint *puVar4;
-  uint *puVar5;
-  int iVar6;
-  bool bVar7;
+  int inputBlock;
+  uint *streamBlock;
+  uint *streamFlagTable;
+  int componentMask;
+  bool nextStreamHighHalf;
   int iVar8;
   uint uVar9;
-  uint uVar10;
+  uint inputTypeWord;
   int iVar11;
-  int iVar12;
-  int iVar13;
-  int iVar14;
-  int iVar15;
+  int streamCount;
+  int programState;
+  int descriptorWordIndex;
+  int inputsLeft;
   
-  iVar13 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
-  puVar4 = *(uint **)(((unsigned char *)0x00001384) + iVar13);
-  iVar3 = *(int *)(iVar13 + 0x150);
-  if (puVar4 == (uint *)0x0) {
-    puVar4 = (uint *)(**(code **)(param_1 + 0xc))(0x7c);
-    *(uint **)(((unsigned char *)0x00001384) + iVar13) = puVar4;
+  programState = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
+  streamBlock = *(uint **)(((unsigned char *)0x00001384) + programState);
+  inputBlock = *(int *)(programState + 0x150);
+  if (streamBlock == (uint *)0x0) {
+    streamBlock = (uint *)(**(code **)(ctx + 0xc))(0x7c);
+    *(uint **)(((unsigned char *)0x00001384) + programState) = streamBlock;
   }
-  uVar9 = puVar4[5];
-  puVar4[3] = 0;
-  puVar4[4] = 0;
+  savedWord5 = streamBlock[5];
+  streamBlock[3] = 0;
+  streamBlock[4] = 0;
   iVar8 = 0;
-  puVar4[1] = 4;
-  puVar4[2] = 1;
-  uVar2 = puVar4[0x10];
-  puVar4[5] = uVar9 & 0xffffff00 | 3;
-  uVar10 = *(uint *)(((unsigned char *)0x000055e8) + iVar3);
-  puVar4[0x10] = uVar2 & 0xfffff000 | 0x688;
-  puVar4[5] = (uVar10 & 0x1f) << 8 | uVar9 & 0xffff0000 | 3;
-  if (*(int *)(((unsigned char *)0x000055e8) + iVar3) != 0x16) {
+  streamBlock[1] = 4;
+  streamBlock[2] = 1;
+  savedWord10 = streamBlock[0x10];
+  streamBlock[5] = savedWord5 & 0xffffff00 | 3;
+  inputTypeWord = *(uint *)(((unsigned char *)0x000055e8) + inputBlock);
+  streamBlock[0x10] = savedWord10 & 0xfffff000 | 0x688;
+  streamBlock[5] = (inputTypeWord & 0x1f) << 8 | savedWord5 & 0xffff0000 | 3;
+  if (*(int *)(((unsigned char *)0x000055e8) + inputBlock) != 0x16) {
     iVar8 = 0xf;
   }
-  *puVar4 = 1;
-  iVar14 = 0;
-  bVar7 = true;
-  puVar4[0x1b] = 1;
-  puVar4[0x1d] = 1;
-  puVar4[0x10] = iVar8 << 0xc | uVar2 & 0xffff0000 | 0x688;
-  puVar5 = &DAT_001dbab8;
-  iVar12 = 1;
-  iVar15 = 0x15;
-  iVar8 = iVar13;
+  *streamBlock = 1;
+  descriptorWordIndex = 0;
+  nextStreamHighHalf = true;
+  streamBlock[0x1b] = 1;
+  streamBlock[0x1d] = 1;
+  streamBlock[0x10] = iVar8 << 0xc | savedWord10 & 0xffff0000 | 0x688;
+  streamFlagTable = &DAT_001dbab8;
+  streamCount = 1;
+  inputsLeft = 0x15;
+  inputRecordCursor = programState;
   do {
-    if (0 < *(int *)(iVar8 + 100)) {
-      iVar11 = *(int *)(iVar8 + 0xbc);
-      puVar4[1] = (puVar4[1] & 0x7f) + 4 & 0x7f | puVar4[1] & 0xffffff80;
-      if (bVar7) {
-        iVar6 = 0;
-        iVar11 = iVar11 * 4 + iVar3 + 0x24;
-        uVar2 = puVar4[iVar14 + 5];
-        puVar4[iVar14 + 5] = uVar2 & 0xff00ffff | 0x30000;
-        puVar4[iVar14 + 5] =
-             (*(uint *)(((unsigned char *)0x000055c4) + iVar11) & 0x1f) << 0x18 | uVar2 & 0xffff | 0x30000;
-        puVar4[iVar14 + 0x10] = puVar4[iVar14 + 0x10] & 0xf000ffff | 0x6880000;
+    if (0 < *(int *)(inputRecordCursor + 100)) {
+      iVar11 = *(int *)(inputRecordCursor + 0xbc);
+      streamBlock[1] = (streamBlock[1] & 0x7f) + 4 & 0x7f | streamBlock[1] & 0xffffff80;
+      if (nextStreamHighHalf) {
+        componentMask = 0;
+        iVar11 = iVar11 * 4 + inputBlock + 0x24;
+        descWord = streamBlock[descriptorWordIndex + 5];
+        streamBlock[descriptorWordIndex + 5] = descWord & 0xff00ffff | 0x30000;
+        streamBlock[descriptorWordIndex + 5] =
+             (*(uint *)(((unsigned char *)0x000055c4) + iVar11) & 0x1f) << 0x18 | descWord & 0xffff | 0x30000;
+        streamBlock[descriptorWordIndex + 0x10] = streamBlock[descriptorWordIndex + 0x10] & 0xf000ffff | 0x6880000;
         if (*(int *)(((unsigned char *)0x000055c4) + iVar11) != 0x16) {
-          iVar6 = 0xf;
+          componentMask = 0xf;
         }
-        bVar7 = false;
-        puVar4[iVar14 + 0x10] = iVar6 << 0x1c | puVar4[iVar14 + 0x10] & 0xfffffff;
-        iVar14 = iVar14 + 1;
+        nextStreamHighHalf = false;
+        streamBlock[descriptorWordIndex + 0x10] = componentMask << 0x1c | streamBlock[descriptorWordIndex + 0x10] & 0xfffffff;
+        descriptorWordIndex = descriptorWordIndex + 1;
       }
       else {
-        iVar6 = 0;
-        iVar11 = iVar11 * 4 + iVar3 + 0x24;
-        uVar2 = puVar4[iVar14 + 5];
-        puVar4[iVar14 + 5] = uVar2 & 0xffffff00 | 3;
-        puVar4[iVar14 + 5] =
-             (*(uint *)(((unsigned char *)0x000055c4) + iVar11) & 0x1f) << 8 | uVar2 & 0xffff0000 | 3;
-        puVar4[iVar14 + 0x10] = puVar4[iVar14 + 0x10] & 0xfffff000 | 0x688;
+        componentMask = 0;
+        iVar11 = iVar11 * 4 + inputBlock + 0x24;
+        descWord = streamBlock[descriptorWordIndex + 5];
+        streamBlock[descriptorWordIndex + 5] = descWord & 0xffffff00 | 3;
+        streamBlock[descriptorWordIndex + 5] =
+             (*(uint *)(((unsigned char *)0x000055c4) + iVar11) & 0x1f) << 8 | descWord & 0xffff0000 | 3;
+        streamBlock[descriptorWordIndex + 0x10] = streamBlock[descriptorWordIndex + 0x10] & 0xfffff000 | 0x688;
         if (*(int *)(((unsigned char *)0x000055c4) + iVar11) != 0x16) {
-          iVar6 = 0xf;
+          componentMask = 0xf;
         }
-        bVar7 = true;
-        puVar4[iVar14 + 0x10] = iVar6 << 0xc | puVar4[iVar14 + 0x10] & 0xffff0fff;
+        nextStreamHighHalf = true;
+        streamBlock[descriptorWordIndex + 0x10] = componentMask << 0xc | streamBlock[descriptorWordIndex + 0x10] & 0xffff0fff;
       }
-      iVar12 = iVar12 + 1;
-      uVar2 = puVar4[0x1b] + 1;
-      puVar4[0x1b] = uVar2;
-      *puVar4 = *puVar4 | *puVar5;
-      if (iVar12 == *(int *)(iVar13 + 0x110)) goto LAB_000644c0;
+      streamCount = streamCount + 1;
+      streamTotal = streamBlock[0x1b] + 1;
+      streamBlock[0x1b] = streamTotal;
+      *streamBlock = *streamBlock | *streamFlagTable;
+      if (streamCount == *(int *)(programState + 0x110)) goto LAB_000644c0;
     }
-    iVar8 = iVar8 + 4;
-    puVar5 = puVar5 + 1;
-    iVar15 = iVar15 + -1;
-  } while (iVar15 != 0);
-  uVar2 = puVar4[0x1b];
+    inputRecordCursor = inputRecordCursor + 4;
+    streamFlagTable = streamFlagTable + 1;
+    inputsLeft = inputsLeft + -1;
+  } while (inputsLeft != 0);
+  streamTotal = streamBlock[0x1b];
 LAB_000644c0:
-  if (uVar2 < 2) {
-    *puVar4 = *puVar4 | 2;
-    puVar4[1] = (puVar4[1] & 0x7f) + 4 & 0x7f | puVar4[1] & 0xffffff80;
-    puVar4[5] = puVar4[5] & 0x2000ffff | 0x21030000;
-    puVar4[0x1b] = uVar2 + 1;
-    puVar4[0x10] = puVar4[0x10] & 0xffff | 0xf6880000;
+  if (streamTotal < 2) {
+    *streamBlock = *streamBlock | 2;
+    streamBlock[1] = (streamBlock[1] & 0x7f) + 4 & 0x7f | streamBlock[1] & 0xffffff80;
+    streamBlock[5] = streamBlock[5] & 0x2000ffff | 0x21030000;
+    streamBlock[0x1b] = streamTotal + 1;
+    streamBlock[0x10] = streamBlock[0x10] & 0xffff | 0xf6880000;
   }
   else {
-    if (bVar7) {
-      puVar4[iVar14 + 5] = puVar4[iVar14 + 5] | 0x2000;
+    if (nextStreamHighHalf) {
+      streamBlock[descriptorWordIndex + 5] = streamBlock[descriptorWordIndex + 5] | 0x2000;
     }
     else {
-      puVar4[iVar14 + 4] = puVar4[iVar14 + 4] | 0x20000000;
+      streamBlock[descriptorWordIndex + 4] = streamBlock[descriptorWordIndex + 4] | 0x20000000;
     }
-    if (0x10 < puVar4[0x1b]) {
-      *(undefined1 *)(param_2 + 4) = 0;
+    if (0x10 < streamBlock[0x1b]) {
+      *(undefined1 *)(shader + 4) = 0;
     }
   }
-  uVar2 = param_2[0x1b];
-  if ((((uVar2 & 0xffffff) != 0) || (*(char *)(param_2 + 0x1c) != '\0')) ||
-     (((unsigned char *)0x000013c8)[iVar13] != '\0')) {
-    puVar4[2] = puVar4[2] | 2;
-    puVar4[0x1d] = puVar4[0x1d] + 1;
-    uVar2 = param_2[0x1b];
+  shaderOutputMask = shader[0x1b];
+  if ((((shaderOutputMask & 0xffffff) != 0) || (*(char *)(shader + 0x1c) != '\0')) ||
+     (((unsigned char *)0x000013c8)[programState] != '\0')) {
+    streamBlock[2] = streamBlock[2] | 2;
+    streamBlock[0x1d] = streamBlock[0x1d] + 1;
+    shaderOutputMask = shader[0x1b];
   }
-  if ((((uVar2 & 0xffff) != 0) || (*(char *)(param_2 + 0x1c) != '\0')) ||
-     (((unsigned char *)0x000013c8)[iVar13] != '\0')) {
-    puVar4[2] = puVar4[2] | 4;
-    puVar4[0x1d] = puVar4[0x1d] + 1;
+  if ((((shaderOutputMask & 0xffff) != 0) || (*(char *)(shader + 0x1c) != '\0')) ||
+     (((unsigned char *)0x000013c8)[programState] != '\0')) {
+    streamBlock[2] = streamBlock[2] | 4;
+    streamBlock[0x1d] = streamBlock[0x1d] + 1;
   }
-  if ((*(char *)((int)param_2 + 0x6f) != '\0') || (*(char *)(param_2 + 0x1c) != '\0')) {
-    puVar4[2] = puVar4[2] | 0x18;
-    puVar4[0x1d] = puVar4[0x1d] + 2;
+  if ((*(char *)((int)shader + 0x6f) != '\0') || (*(char *)(shader + 0x1c) != '\0')) {
+    streamBlock[2] = streamBlock[2] | 0x18;
+    streamBlock[0x1d] = streamBlock[0x1d] + 2;
   }
-  if (*(char *)((int)param_2 + 0x79) != '\0') {
-    puVar4[2] = puVar4[2] | 0x10000;
-    puVar4[0x1d] = puVar4[0x1d] + 1;
+  if (*(char *)((int)shader + 0x79) != '\0') {
+    streamBlock[2] = streamBlock[2] | 0x10000;
+    streamBlock[0x1d] = streamBlock[0x1d] + 1;
   }
-  uVar2 = 0;
-  iVar13 = 8;
+  fieldShift = 0;
+  outputsLeft = 8;
   do {
-    bVar1 = *(byte *)((int)param_2 + 0x71);
-    if (bVar1 != 0) {
+    outputFlags = *(byte *)((int)shader + 0x71);
+    if (outputFlags != 0) {
       iVar8 = 4;
-      if ((bVar1 & 8) == 0) {
-        iVar8 = 3 - (uint)((bVar1 & 4) == 0);
+      if ((outputFlags & 8) == 0) {
+        iVar8 = 3 - (uint)((outputFlags & 4) == 0);
       }
-      uVar9 = iVar8 << (uVar2 & 0x3f);
-      puVar4[3] = uVar9 | puVar4[3];
-      puVar4[4] = uVar9 | puVar4[4];
-      puVar4[0x1d] = puVar4[0x1d] + 1;
+      fieldValue = iVar8 << (fieldShift & 0x3f);
+      streamBlock[3] = fieldValue | streamBlock[3];
+      streamBlock[4] = fieldValue | streamBlock[4];
+      streamBlock[0x1d] = streamBlock[0x1d] + 1;
     }
-    param_2 = (int *)((int)param_2 + 1);
-    uVar2 = uVar2 + 3;
-    iVar13 = iVar13 + -1;
-  } while (iVar13 != 0);
-  puVar4[2] = *(uint *)(((unsigned char *)0x00005498) + iVar3);
-  uVar9 = *(uint *)(((unsigned char *)0x0000549c) + iVar3);
-  puVar4[3] = uVar9;
-  uVar2 = *(uint *)(((unsigned char *)0x00005434) + iVar3);
-  puVar4[0x1d] = uVar2;
+    shader = (int *)((int)shader + 1);
+    fieldShift = fieldShift + 3;
+    outputsLeft = outputsLeft + -1;
+  } while (outputsLeft != 0);
+  streamBlock[2] = *(uint *)(((unsigned char *)0x00005498) + inputBlock);
+  uVar9 = *(uint *)(((unsigned char *)0x0000549c) + inputBlock);
+  streamBlock[3] = uVar9;
+  uVar2 = *(uint *)(((unsigned char *)0x00005434) + inputBlock);
+  streamBlock[0x1d] = uVar2;
   if (uVar2 == 1) {
-    puVar4[0x1d] = 2;
-    puVar4[3] = uVar9 & 0xff1fffff | 0x800000;
-    puVar4[4] = puVar4[4] & 0xff1fffff | 0x800000;
+    streamBlock[0x1d] = 2;
+    streamBlock[3] = uVar9 & 0xff1fffff | 0x800000;
+    streamBlock[4] = streamBlock[4] & 0xff1fffff | 0x800000;
   }
   return;
 }
@@ -5334,130 +5343,136 @@ int FUN_00065610(param_1, param_2)
 }
 
 /* FUN_000656b0 @ 0x656b0 (780 bytes) */
-int FUN_000656b0(param_1)
-  int param_1;
+int FUN_000656b0(glContext)
+  int glContext;
 {
+  int nextOutputReg;
+  int unitCursor;
+  int colorOutReg;
+  int texUnit;
+  uint nextTexReg;
+  uint positionPassThrough;
   uint loopIndex;
   byte bVar1;
-  uint uVar2;
+  uint backColorOut;
   int iVar3;
-  int iVar4;
-  undefined4 *puVar5;
+  int variant;
+  undefined4 *builder;
   undefined4 uVar6;
   undefined4 uVar7;
   undefined4 in_r7;
   undefined4 in_r8;
   uint in_r9;
-  uint uVar8;
+  uint ctxFlags;
   uint uVar9;
-  uint uVar10;
-  int iVar11;
-  uint uVar12;
+  uint outputMask;
+  int currentVariant;
+  uint pointSizeOut;
   undefined4 local_74;
-  uint local_70 [2];
-  undefined4 local_68;
-  uint local_64;
+  uint variantKey [2];
+  undefined4 variantKeyOutputMask;
+  uint variantKeyFlags;
   
-  _memset(local_70,0,0x30);
-  uVar8 = *(uint *)(param_1 + 0x44);
-  local_68 = *(undefined4 *)(param_1 + 0x1804);
-  local_70[0] = local_70[0] | 8;
-  if ((uVar8 & 0xc00) != 0) {
-    in_r9 = uVar8 >> 9 & 2;
-    local_64 = uVar8 >> 0xb & 1 | in_r9 | (uint)(byte)((unsigned char *)0x000011d3)[param_1] << 2;
+  _memset(variantKey,0,0x30);
+  ctxFlags = *(uint *)(glContext + 0x44);
+  variantKeyOutputMask = *(undefined4 *)(glContext + 0x1804);
+  variantKey[0] = variantKey[0] | 8;
+  if ((ctxFlags & 0xc00) != 0) {
+    in_r9 = ctxFlags >> 9 & 2;
+    variantKeyFlags = ctxFlags >> 0xb & 1 | in_r9 | (uint)(byte)((unsigned char *)0x000011d3)[glContext] << 2;
   }
-  iVar11 = *(int *)(param_1 + 0x14c);
-  if ((iVar11 == 0) || (iVar3 = _memcmp(iVar11,local_70,0x30), iVar4 = iVar11, iVar3 != 0)) {
-    iVar4 = fpVariantCacheLookup(param_1,local_70);
-    if (iVar4 == 0) {
-      uVar10 = *(uint *)(param_1 + 0x1804);
-      bVar1 = ((unsigned char *)0x000011d2)[param_1];
-      uVar8 = *(uint *)(param_1 + 0x44) >> 10 & 1;
-      puVar5 = (undefined4 *)ffvpCreateBuilder(param_1,1,0);
-      *puVar5 = 0;
-      ((int (*)())FUN_00065610)(param_1,puVar5);
-      if (uVar8 == 0) {
-        uVar2 = uVar10 >> 3 & 1;
-        uVar12 = uVar10 >> 1 & 1;
+  currentVariant = *(int *)(glContext + 0x14c);
+  if ((currentVariant == 0) || (iVar3 = _memcmp(currentVariant,variantKey,0x30), variant = currentVariant, iVar3 != 0)) {
+    variant = fpVariantCacheLookup(glContext,variantKey);
+    if (variant == 0) {
+      outputMask = *(uint *)(glContext + 0x1804);
+      bVar1 = ((unsigned char *)0x000011d2)[glContext];
+      positionPassThrough = *(uint *)(glContext + 0x44) >> 10 & 1;
+      builder = (undefined4 *)ffvpCreateBuilder(glContext,1,0);
+      *builder = 0;
+      ((int (*)())FUN_00065610)(glContext,builder);
+      if (positionPassThrough == 0) {
+        backColorOut = outputMask >> 3 & 1;
+        pointSizeOut = outputMask >> 1 & 1;
         uVar9 = 0;
       }
       else {
-        uVar2 = uVar10 >> 3 & 1;
-        uVar12 = uVar10 >> 1 & 1;
-        in_r9 = (uVar10 & 1) + uVar12;
-        uVar9 = (uint)bVar1 + uVar2 * 2 + in_r9 + 2;
+        backColorOut = outputMask >> 3 & 1;
+        pointSizeOut = outputMask >> 1 & 1;
+        in_r9 = (outputMask & 1) + pointSizeOut;
+        uVar9 = (uint)bVar1 + backColorOut * 2 + in_r9 + 2;
       }
-      ffvpEmitPositionPassThrough(puVar5,uVar8,(uint)bVar1);
-      if (uVar12 == 0) {
-        iVar4 = 1;
-        iVar11 = 2;
+      ffvpEmitPositionPassThrough(builder,positionPassThrough,(uint)bVar1);
+      if (pointSizeOut == 0) {
+        colorOutReg = 1;
+        nextOutputReg = 2;
       }
       else {
-        iVar4 = 2;
-        iVar11 = 3;
-        puVar5[0x13] = 1;
-        ffvpEmitPointSizePassThrough(puVar5);
+        colorOutReg = 2;
+        nextOutputReg = 3;
+        builder[0x13] = 1;
+        ffvpEmitPointSizePassThrough(builder);
       }
-      puVar5[3] = iVar4;
+      builder[3] = colorOutReg;
       uVar6 = 0;
       uVar7 = 0;
-      ffvpEmitColorPassThrough(puVar5,3,0,0);
-      if ((uVar10 & 1) != 0) {
-        puVar5[4] = iVar11;
+      ffvpEmitColorPassThrough(builder,3,0,0);
+      if ((outputMask & 1) != 0) {
+        builder[4] = nextOutputReg;
         uVar6 = 1;
         uVar7 = 0;
-        ffvpEmitColorPassThrough(puVar5,4,1,0);
-        if ((uVar10 & 4) != 0) {
-          puVar5[0x14] = iVar11;
-          puVar5[0x15] = 3;
-          ffvpEmitFogPassThrough(puVar5);
+        ffvpEmitColorPassThrough(builder,4,1,0);
+        if ((outputMask & 4) != 0) {
+          builder[0x14] = nextOutputReg;
+          builder[0x15] = 3;
+          ffvpEmitFogPassThrough(builder);
         }
-        iVar11 = iVar4 + 2;
+        nextOutputReg = colorOutReg + 2;
       }
-      if (uVar2 != 0) {
-        puVar5[5] = iVar11;
-        ffvpEmitColorPassThrough(puVar5,3,2,1);
-        puVar5[6] = iVar11 + 1;
-        puVar5[0x20] = 0;
+      if (backColorOut != 0) {
+        builder[5] = nextOutputReg;
+        ffvpEmitColorPassThrough(builder,3,2,1);
+        builder[6] = nextOutputReg + 1;
+        builder[0x20] = 0;
         uVar6 = 3;
         uVar7 = 1;
-        iVar11 = iVar11 + 2;
-        ffvpEmitColorPassThrough(puVar5,4,3,1);
+        nextOutputReg = nextOutputReg + 2;
+        ffvpEmitColorPassThrough(builder,4,3,1);
       }
-      uVar8 = (uint)(uVar2 != 0);
-      if (uVar10 >> 4 != 0) {
+      nextTexReg = (uint)(backColorOut != 0);
+      if (outputMask >> 4 != 0) {
         loopIndex = 0;
-        iVar4 = param_1;
+        unitCursor = glContext;
         do {
-          iVar3 = *(int *)(iVar4 + 0x1824);
-          puVar5[iVar3 + 0xb] = iVar11;
-          iVar11 = iVar11 + 1;
-          if (uVar8 == uVar9) {
-            uVar8 = uVar8 + 1;
+          texUnit = *(int *)(unitCursor + 0x1824);
+          builder[texUnit + 0xb] = nextOutputReg;
+          nextOutputReg = nextOutputReg + 1;
+          if (nextTexReg == uVar9) {
+            nextTexReg = nextTexReg + 1;
           }
-          puVar5[iVar3 + 0x21] = uVar8;
+          builder[texUnit + 0x21] = nextTexReg;
           loopIndex = loopIndex + 1;
-          uVar8 = uVar8 + 1;
-          iVar4 = iVar4 + 4;
-          ffvpEmitTexCoordPassThrough(puVar5,iVar3,uVar6,uVar7,in_r7,in_r8,in_r9);
-        } while (uVar10 >> 4 != loopIndex);
+          nextTexReg = nextTexReg + 1;
+          unitCursor = unitCursor + 4;
+          ffvpEmitTexCoordPassThrough(builder,texUnit,uVar6,uVar7,in_r7,in_r8,in_r9);
+        } while (outputMask >> 4 != loopIndex);
       }
-      ffvpFinishProgram(puVar5);
-      iVar4 = fpVariantCacheInsert(param_1,local_70,puVar5,iVar11,local_74,0,0,1);
-      *(undefined4 *)(iVar4 + 0x34) = 0;
-      *(int *)(iVar4 + 0x38) = *(int *)(*(int *)(iVar4 + 0x54) + 0x3cc) + -1;
-      iVar11 = *(int *)(param_1 + 0x14c);
+      ffvpFinishProgram(builder);
+      variant = fpVariantCacheInsert(glContext,variantKey,builder,nextOutputReg,local_74,0,0,1);
+      *(undefined4 *)(variant + 0x34) = 0;
+      *(int *)(variant + 0x38) = *(int *)(*(int *)(variant + 0x54) + 0x3cc) + -1;
+      currentVariant = *(int *)(glContext + 0x14c);
     }
     else {
-      iVar11 = *(int *)(param_1 + 0x14c);
+      currentVariant = *(int *)(glContext + 0x14c);
     }
   }
-  if (iVar4 != iVar11) {
-    *(int *)(param_1 + 0x14c) = iVar4;
-    *(uint *)(param_1 + 0x8c) = *(uint *)(param_1 + 0x8c) | 0x40000;
+  if (variant != currentVariant) {
+    *(int *)(glContext + 0x14c) = variant;
+    *(uint *)(glContext + 0x8c) = *(uint *)(glContext + 0x8c) | 0x40000;
   }
-  (**(code **)((int)((unsigned char *)0x00001294) + param_1))
-            (param_1,*(int *)(iVar4 + 0x54) + 0x750,*(undefined4 *)(iVar4 + 0x3c));
+  (**(code **)((int)((unsigned char *)0x00001294) + glContext))
+            (glContext,*(int *)(variant + 0x54) + 0x750,*(undefined4 *)(variant + 0x3c));
   return;
 }
 
