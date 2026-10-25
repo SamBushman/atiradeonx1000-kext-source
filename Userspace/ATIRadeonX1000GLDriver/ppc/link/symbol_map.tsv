@@ -872,7 +872,7 @@ PTR_DAT_001e8994	0x1e8994	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char 
 PTR_DAT_001e8998	0x1e8998	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e8998 asm("PTR_DAT_001e8998");	pointer -> LD_1da65c	data.s
 PTR_DAT_001e899c	0x1e899c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e899c asm("PTR_DAT_001e899c");	pointer -> LD_1da6d0	data.s
 PTR_FUN_001e89a0	0x1e89a0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89a0 asm("PTR_FUN_001e89a0");	pointer -> noop_70c50	data.s
-PTR_FUN_001e89a4	0x1e89a4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89a4 asm("PTR_FUN_001e89a4");	pointer -> FUN_00064a10	data.s
+PTR_FUN_001e89a4	0x1e89a4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89a4 asm("PTR_FUN_001e89a4");	pointer -> extvsUploadProgramConstants	data.s
 PTR_FUN_001e89a8	0x1e89a8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89a8 asm("PTR_FUN_001e89a8");	pointer -> evsFoldConstantMoves	data.s
 PTR_FUN_001e89ac	0x1e89ac	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89ac asm("PTR_FUN_001e89ac");	pointer -> vpStateSetConstantVector	data.s
 PTR_FUN_001e89b0	0x1e89b0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89b0 asm("PTR_FUN_001e89b0");	pointer -> FUN_00077030	data.s

@@ -575,7 +575,7 @@
 0x64230	1256	FUN_00064230	part_009	converted
 0x64720	304	FUN_00064720	part_009	converted
 0x64850	436	extvsApplyStreamDescriptors	part_009	converted
-0x64a10	1304	FUN_00064a10	part_009	converted
+0x64a10	1304	extvsUploadProgramConstants	part_009	converted
 0x64f40	708	extvsValidateProgramState	part_009	converted
 0x651e0	400	extvsFlushConstantUploads	part_009	converted
 0x65370	636	ffvpSelectLitProgramVariant	part_009	converted

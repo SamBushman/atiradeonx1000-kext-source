@@ -1271,12 +1271,12 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 6412c	64190	table	gldCurrentAttributePacketHeader	25	
 64408	64410	padding	FUN_00064230	2	
 64a04	64a10	padding	extvsValidateProgramState	3	
-64c3c	64c40	padding	FUN_00064a10	1	
-64f18	64f20	padding	FUN_00064a10	2	
+64c3c	64c40	padding	extvsUploadProgramConstants	1	
+64f18	64f20	padding	extvsUploadProgramConstants	2	
 64f34	64f40	padding	extvsValidateProgramState	3	
 650ac	650b0	padding	extvsValidateProgramState	1	
 6519c	651a0	padding	extvsValidateProgramState	1	
-651d8	651e0	padding	FUN_00064a10	2	
+651d8	651e0	padding	extvsUploadProgramConstants	2	
 653f4	65400	padding	ffvpSelectLitProgramVariant	3	
 6540c	65410	padding	ffvpSelectLitProgramVariant	1	
 65518	65520	padding	ffvpSelectLitProgramVariant	2	

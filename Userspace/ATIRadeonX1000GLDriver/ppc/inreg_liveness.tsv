@@ -284,10 +284,10 @@
 64720	FUN_00064720	r5	PASS-indirect	64830 bctrl 
 64720	FUN_00064720	r6	PASS-indirect	64830 bctrl 
 64720	FUN_00064720	r7	PASS-indirect	64830 bctrl 
-64a10	FUN_00064a10	r5	PASS-indirect	64d64 bctrl 
-64a10	FUN_00064a10	r6	PASS-indirect	64d64 bctrl 
-64a10	FUN_00064a10	r7	PASS-indirect	64d64 bctrl 
-64a10	FUN_00064a10	r8	PASS-indirect	64d64 bctrl 
+64a10	extvsUploadProgramConstants	r5	PASS-indirect	64d64 bctrl 
+64a10	extvsUploadProgramConstants	r6	PASS-indirect	64d64 bctrl 
+64a10	extvsUploadProgramConstants	r7	PASS-indirect	64d64 bctrl 
+64a10	extvsUploadProgramConstants	r8	PASS-indirect	64d64 bctrl 
 64f40	extvsValidateProgramState	r5	PASS-indirect	64fa0 bctrl 
 64f40	extvsValidateProgramState	r6	PASS-indirect	64fa0 bctrl 
 64f40	extvsValidateProgramState	r7	PASS-indirect	64fa0 bctrl 

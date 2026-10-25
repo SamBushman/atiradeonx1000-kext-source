@@ -782,7 +782,7 @@ extern int gldCurrentAttributePacketHeader();
 extern int FUN_00064230();
 extern int FUN_00064720();
 extern int extvsApplyStreamDescriptors();
-extern int FUN_00064a10();
+extern int extvsUploadProgramConstants();
 extern int extvsValidateProgramState();
 extern int extvsFlushConstantUploads();
 extern int ffvpSelectLitProgramVariant();

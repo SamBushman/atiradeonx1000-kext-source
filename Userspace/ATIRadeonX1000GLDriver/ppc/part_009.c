@@ -4846,214 +4846,228 @@ int extvsApplyStreamDescriptors(glContext)
   return;
 }
 
-/* FUN_00064a10 @ 0x64a10 (1304 bytes) */
-int FUN_00064a10(param_1, param_2)
-  int param_1;
-  int *param_2;
+/* extvsUploadProgramConstants @ 0x64a10 (1304 bytes) */
+int extvsUploadProgramConstants(glContext, shader)
+  int glContext;
+  int *shader;
 {
-  code *pcVar1;
-  undefined8 *puVar2;
-  undefined4 *puVar3;
-  undefined8 *puVar4;
+  int cmdEndB;
+  int cmdEnd;
+  uint freeHeight;
+  uint regionHeight;
+  uint regionWidth;
+  undefined8 valueSingleHigh;
+  undefined8 *valueSingle;
+  int entrySingle;
+  int entryB;
+  int entryA;
+  int allocX;
+  int cacheMode;
+  undefined4 *cmdBuffer;
+  int *constIndexCursor;
+  code *commitCallback;
+  undefined8 *valueC;
+  undefined4 *cmdBufferB;
+  undefined8 *valueB;
   char *in_r5;
-  undefined8 *puVar5;
+  undefined8 *valueA;
   undefined4 in_r6;
   undefined4 in_r7;
   int in_r8;
-  int iVar6;
+  int constantBlock;
   int iVar7;
-  undefined8 *puVar8;
-  int iVar9;
-  int iVar10;
+  undefined8 *valueD;
+  int symbolList;
+  int entryD;
   char cVar11;
-  int iVar12;
-  int iVar13;
+  int allocY;
+  int entryC;
   uint uVar14;
-  uint uVar15;
-  undefined4 *puVar16;
+  uint freeWidth;
+  undefined4 *hwProgramSlot;
   uint uVar17;
-  int *piVar18;
+  int *constIndexEnd;
   uint uVar19;
-  int *piVar20;
-  char *pcVar21;
-  undefined8 uVar22;
-  undefined8 uVar23;
-  undefined8 uVar24;
-  undefined8 uVar25;
-  undefined8 uVar26;
-  undefined8 uVar27;
-  undefined8 uVar28;
+  int *constAlloc;
+  char *programState;
+  undefined8 valueAHigh;
+  undefined8 valueDHigh;
+  undefined8 valueCHigh;
+  undefined8 valueBHigh;
+  undefined8 valueDLow;
+  undefined8 valueCLow;
+  undefined8 valueBLow;
   
-  if (*param_2 != 0) {
-    piVar20 = *(int **)(((unsigned char *)0x000011b4) + param_1);
-    puVar16 = *(undefined4 **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
-    pcVar21 = (char *)*puVar16;
-    uVar17 = *(uint *)(pcVar21 + 0x18);
-    uVar19 = *(uint *)(pcVar21 + 0x5c);
-    if ((*(char *)(param_2 + 4) != '\0') && ((*(uint *)(param_1 + 0x8c) & 0x40000000) == 0)) {
-      if (*pcVar21 != '\0') {
+  if (*shader != 0) {
+    constAlloc = *(int **)(((unsigned char *)0x000011b4) + glContext);
+    hwProgramSlot = *(undefined4 **)(*(int *)(((unsigned char *)0x0000118c) + glContext) * 4 + *shader);
+    programState = (char *)*hwProgramSlot;
+    regionWidth = *(uint *)(programState + 0x18);
+    regionHeight = *(uint *)(programState + 0x5c);
+    if ((*(char *)(shader + 4) != '\0') && ((*(uint *)(glContext + 0x8c) & 0x40000000) == 0)) {
+      if (*programState != '\0') {
 LAB_00064c00:
-        if (uVar19 != 0) {
-          if (*(int *)(pcVar21 + 0x2b8) == 0) {
-            iVar6 = puVar16[0x22];
-            iVar9 = param_2[8];
-            piVar18 = *(int **)(pcVar21 + 0x220) + *(int *)(pcVar21 + 0x224);
-            piVar20 = *(int **)(pcVar21 + 0x220);
-            while (piVar20 + 4 <= piVar18) {
-              iVar12 = iVar9 + *piVar20 * 0x54;
-              iVar10 = iVar9 + piVar20[3] * 0x54;
-              iVar7 = iVar9 + piVar20[1] * 0x54;
-              iVar13 = iVar9 + piVar20[2] * 0x54;
-              puVar5 = *(undefined8 **)(iVar12 + 0x38);
-              puVar4 = *(undefined8 **)(iVar7 + 0x38);
-              puVar2 = *(undefined8 **)(iVar13 + 0x38);
-              puVar8 = *(undefined8 **)(iVar10 + 0x38);
-              uVar22 = puVar5[1];
-              iVar12 = *(int *)(iVar12 + 4) * 0x10;
-              uVar24 = puVar2[1];
-              uVar25 = puVar4[1];
-              uVar23 = puVar8[1];
-              uVar28 = *puVar4;
-              in_r8 = *(int *)(iVar7 + 4) * 0x10;
-              uVar27 = *puVar2;
-              uVar26 = *puVar8;
-              iVar7 = *(int *)(iVar13 + 4) * 0x10;
-              iVar10 = *(int *)(iVar10 + 4) * 0x10;
-              *(undefined8 *)(iVar6 + iVar12) = *puVar5;
-              *(undefined8 *)(iVar6 + iVar12 + 8) = uVar22;
-              *(undefined8 *)(iVar6 + in_r8) = uVar28;
-              *(undefined8 *)(iVar6 + in_r8 + 8) = uVar25;
-              *(undefined8 *)(iVar6 + iVar7) = uVar27;
-              *(undefined8 *)(iVar6 + iVar7 + 8) = uVar24;
-              *(undefined8 *)(iVar6 + iVar10) = uVar26;
-              *(undefined8 *)(iVar6 + iVar10 + 8) = uVar23;
-              piVar20 = piVar20 + 4;
+        if (regionHeight != 0) {
+          if (*(int *)(programState + 0x2b8) == 0) {
+            constantBlock = hwProgramSlot[0x22];
+            symbolList = shader[8];
+            constIndexEnd = *(int **)(programState + 0x220) + *(int *)(programState + 0x224);
+            constIndexCursor = *(int **)(programState + 0x220);
+            while (constIndexCursor + 4 <= constIndexEnd) {
+              entryA = symbolList + *constIndexCursor * 0x54;
+              entryD = symbolList + constIndexCursor[3] * 0x54;
+              entryB = symbolList + constIndexCursor[1] * 0x54;
+              entryC = symbolList + constIndexCursor[2] * 0x54;
+              valueA = *(undefined8 **)(entryA + 0x38);
+              valueB = *(undefined8 **)(entryB + 0x38);
+              valueC = *(undefined8 **)(entryC + 0x38);
+              valueD = *(undefined8 **)(entryD + 0x38);
+              valueAHigh = valueA[1];
+              entryA = *(int *)(entryA + 4) * 0x10;
+              valueCHigh = valueC[1];
+              valueBHigh = valueB[1];
+              valueDHigh = valueD[1];
+              valueBLow = *valueB;
+              in_r8 = *(int *)(entryB + 4) * 0x10;
+              valueCLow = *valueC;
+              valueDLow = *valueD;
+              iVar7 = *(int *)(entryC + 4) * 0x10;
+              entryD = *(int *)(entryD + 4) * 0x10;
+              *(undefined8 *)(constantBlock + entryA) = *valueA;
+              *(undefined8 *)(constantBlock + entryA + 8) = valueAHigh;
+              *(undefined8 *)(constantBlock + in_r8) = valueBLow;
+              *(undefined8 *)(constantBlock + in_r8 + 8) = valueBHigh;
+              *(undefined8 *)(constantBlock + iVar7) = valueCLow;
+              *(undefined8 *)(constantBlock + iVar7 + 8) = valueCHigh;
+              *(undefined8 *)(constantBlock + entryD) = valueDLow;
+              *(undefined8 *)(constantBlock + entryD + 8) = valueDHigh;
+              constIndexCursor = constIndexCursor + 4;
             }
-            for (; piVar20 < piVar18; piVar20 = piVar20 + 1) {
-              iVar12 = iVar9 + *piVar20 * 0x54;
-              puVar2 = *(undefined8 **)(iVar12 + 0x38);
-              uVar22 = puVar2[1];
-              iVar12 = *(int *)(iVar12 + 4) * 0x10;
-              *(undefined8 *)(iVar6 + iVar12) = *puVar2;
-              *(undefined8 *)(iVar6 + iVar12 + 8) = uVar22;
+            for (; constIndexCursor < constIndexEnd; constIndexCursor = constIndexCursor + 1) {
+              entrySingle = symbolList + *constIndexCursor * 0x54;
+              valueSingle = *(undefined8 **)(entrySingle + 0x38);
+              valueSingleHigh = valueSingle[1];
+              entrySingle = *(int *)(entrySingle + 4) * 0x10;
+              *(undefined8 *)(constantBlock + entrySingle) = *valueSingle;
+              *(undefined8 *)(constantBlock + entrySingle + 8) = valueSingleHigh;
             }
           }
-          puVar3 = (undefined4 *)(**(code **)(param_1 + 0x2758))(param_1,2);
-          *(undefined4 **)(0x00002748 + param_1 + 4) = puVar3;
-          *puVar3 = 0x8a1;
-          *(undefined4 *)(*(int *)(0x00002748 + param_1 + 4) + 4) = 0;
-          iVar6 = *(int *)(0x00002748 + param_1 + 4);
-          pcVar1 = *(code **)(param_1 + 0x275c);
-          *(int *)(0x00002748 + param_1 + 4) = iVar6 + 8;
-          (*pcVar1)(param_1,iVar6 + 8);
-          in_r6 = puVar16[0x22];
+          cmdBufferB = (undefined4 *)(**(code **)(glContext + 0x2758))(glContext,2);
+          *(undefined4 **)(0x00002748 + glContext + 4) = cmdBufferB;
+          *cmdBufferB = 0x8a1;
+          *(undefined4 *)(*(int *)(0x00002748 + glContext + 4) + 4) = 0;
+          cmdEnd = *(int *)(0x00002748 + glContext + 4);
+          commitCallback = *(code **)(glContext + 0x275c);
+          *(int *)(0x00002748 + glContext + 4) = cmdEnd + 8;
+          (*commitCallback)(glContext,cmdEnd + 8);
+          in_r6 = hwProgramSlot[0x22];
           in_r7 = 1;
-          in_r5 = pcVar21;
-          ((int (*)())vpUploadConstantsWithFog)(param_1,param_2,pcVar21,in_r6,1);
+          in_r5 = programState;
+          ((int (*)())vpUploadConstantsWithFog)(glContext,shader,programState,in_r6,1);
         }
-        uVar14 = *(uint *)(param_1 + 0x1b90);
+        uVar14 = *(uint *)(glContext + 0x1b90);
         cVar11 = '\0';
-        uVar19 = *(uint *)(pcVar21 + 4) & 0x3ff;
-        *(uint *)(param_1 + 0x1b90) = uVar19 | uVar14 & 0xfffffc00;
-        uVar17 = (*(int *)(pcVar21 + 4) + *(int *)(pcVar21 + 8)) * 0x400 & 0xffc00;
-        *(uint *)(param_1 + 0x1b90) = uVar17 | uVar19 | uVar14 & 0xfff00000;
-        *(uint *)(param_1 + 0x1b90) =
-             (*(uint *)(pcVar21 + 0x10) & 0x3ff) << 0x14 | uVar17 | uVar19 | uVar14 & 0xc0000000;
-        *(uint *)(param_1 + 0x1b94) =
-             *(int *)(pcVar21 + 4) + *(int *)(pcVar21 + 0xc) & 0x3ffU |
-             *(uint *)(param_1 + 0x1b94) & 0xfffffc00;
-        *(char *)(param_1 + 0x1b8f) = (char)*(undefined4 *)(pcVar21 + 0x14);
-        if (*(int *)(pcVar21 + 0x5c) != 0) {
-          cVar11 = (char)*(int *)(pcVar21 + 0x5c) + -1;
+        uVar19 = *(uint *)(programState + 4) & 0x3ff;
+        *(uint *)(glContext + 0x1b90) = uVar19 | uVar14 & 0xfffffc00;
+        uVar17 = (*(int *)(programState + 4) + *(int *)(programState + 8)) * 0x400 & 0xffc00;
+        *(uint *)(glContext + 0x1b90) = uVar17 | uVar19 | uVar14 & 0xfff00000;
+        *(uint *)(glContext + 0x1b90) =
+             (*(uint *)(programState + 0x10) & 0x3ff) << 0x14 | uVar17 | uVar19 | uVar14 & 0xc0000000;
+        *(uint *)(glContext + 0x1b94) =
+             *(int *)(programState + 4) + *(int *)(programState + 0xc) & 0x3ffU |
+             *(uint *)(glContext + 0x1b94) & 0xfffffc00;
+        *(char *)(glContext + 0x1b8f) = (char)*(undefined4 *)(programState + 0x14);
+        if (*(int *)(programState + 0x5c) != 0) {
+          cVar11 = (char)*(int *)(programState + 0x5c) + -1;
         }
-        *(char *)(param_1 + 0x1b8d) = cVar11;
-        puVar16 = (undefined4 *)(**(code **)(param_1 + 0x2758))(param_1,4);
-        *(undefined4 **)(0x00002748 + param_1 + 4) = puVar16;
-        *puVar16 = 0x208b4;
-        *(undefined4 *)(*(int *)(0x00002748 + param_1 + 4) + 4) =
-             *(undefined4 *)(param_1 + 0x1b90);
-        *(undefined4 *)(*(int *)(0x00002748 + param_1 + 4) + 8) =
-             *(undefined4 *)(param_1 + 0x1b8c);
-        *(undefined4 *)(*(int *)(0x00002748 + param_1 + 4) + 0xc) =
-             *(undefined4 *)(param_1 + 0x1b94);
-        iVar6 = *(int *)(0x00002748 + param_1 + 4);
-        pcVar1 = *(code **)(param_1 + 0x275c);
-        *(int *)(0x00002748 + param_1 + 4) = iVar6 + 0x10;
-        (*pcVar1)(param_1,iVar6 + 0x10,in_r5,in_r6,in_r7,in_r8,pcVar1);
-        puVar16 = (undefined4 *)(**(code **)(param_1 + 0x2758))(param_1,2);
-        *(undefined4 **)(0x00002748 + param_1 + 4) = puVar16;
-        *puVar16 = 0x8b7;
-        iVar9 = *(int *)(0x00002748 + param_1 + 4);
-        *(undefined4 *)(iVar9 + 4) = *(undefined4 *)(param_1 + 0x1b98);
-        iVar6 = *(int *)(0x00002748 + param_1 + 4);
-        pcVar1 = *(code **)(param_1 + 0x275c);
-        *(int *)(0x00002748 + param_1 + 4) = iVar6 + 8;
-        (*pcVar1)(param_1,iVar6 + 8,in_r5,in_r6,in_r7,in_r8,iVar9);
-        FUN_00050ef0(param_1,*(undefined4 *)(pcVar21 + 0x2a4),*(undefined4 *)(pcVar21 + 0x2a8),
-                     *(undefined4 *)(pcVar21 + 0x2ac));
-        ((int (*)())FUN_00064720)(param_1);
+        *(char *)(glContext + 0x1b8d) = cVar11;
+        cmdBuffer = (undefined4 *)(**(code **)(glContext + 0x2758))(glContext,4);
+        *(undefined4 **)(0x00002748 + glContext + 4) = cmdBuffer;
+        *cmdBuffer = 0x208b4;
+        *(undefined4 *)(*(int *)(0x00002748 + glContext + 4) + 4) =
+             *(undefined4 *)(glContext + 0x1b90);
+        *(undefined4 *)(*(int *)(0x00002748 + glContext + 4) + 8) =
+             *(undefined4 *)(glContext + 0x1b8c);
+        *(undefined4 *)(*(int *)(0x00002748 + glContext + 4) + 0xc) =
+             *(undefined4 *)(glContext + 0x1b94);
+        cmdEnd = *(int *)(0x00002748 + glContext + 4);
+        commitCallback = *(code **)(glContext + 0x275c);
+        *(int *)(0x00002748 + glContext + 4) = cmdEnd + 0x10;
+        (*commitCallback)(glContext,cmdEnd + 0x10,in_r5,in_r6,in_r7,in_r8,commitCallback);
+        cmdBuffer = (undefined4 *)(**(code **)(glContext + 0x2758))(glContext,2);
+        *(undefined4 **)(0x00002748 + glContext + 4) = cmdBuffer;
+        *cmdBuffer = 0x8b7;
+        cmdEndB = *(int *)(0x00002748 + glContext + 4);
+        *(undefined4 *)(cmdEndB + 4) = *(undefined4 *)(glContext + 0x1b98);
+        cmdEnd = *(int *)(0x00002748 + glContext + 4);
+        commitCallback = *(code **)(glContext + 0x275c);
+        *(int *)(0x00002748 + glContext + 4) = cmdEnd + 8;
+        (*commitCallback)(glContext,cmdEnd + 8,in_r5,in_r6,in_r7,in_r8,cmdEndB);
+        FUN_00050ef0(glContext,*(undefined4 *)(programState + 0x2a4),*(undefined4 *)(programState + 0x2a8),
+                     *(undefined4 *)(programState + 0x2ac));
+        ((int (*)())FUN_00064720)(glContext);
         return;
       }
-      uVar15 = 0;
-      uVar14 = 0;
-      iVar9 = *piVar20;
-      iVar6 = *(int *)(param_1 + 0xd8);
-      iVar12 = piVar20[1] - *(int *)(param_1 + 0x2448);
+      freeWidth = 0;
+      freeHeight = 0;
+      allocX = *constAlloc;
+      cacheMode = *(int *)(glContext + 0xd8);
+      allocY = constAlloc[1] - *(int *)(glContext + 0x2448);
 LAB_00064a98:
-      if (iVar6 == 1) goto LAB_00064ac0;
-      if (iVar6 == 0) {
-        uVar15 = 0x80 - iVar9;
-        uVar14 = 0x80 - iVar12;
+      if (cacheMode == 1) goto LAB_00064ac0;
+      if (cacheMode == 0) {
+        freeWidth = 0x80 - allocX;
+        freeHeight = 0x80 - allocY;
         goto LAB_00064af0;
       }
-      if (iVar6 != 2) goto LAB_00064af0;
+      if (cacheMode != 2) goto LAB_00064af0;
       do {
-        uVar15 = 0x100 - iVar9;
-        uVar14 = 0x100 - iVar12;
-        *(uint *)(param_1 + 0x8c) = *(uint *)(param_1 + 0x8c) | 0x48000;
+        freeWidth = 0x100 - allocX;
+        freeHeight = 0x100 - allocY;
+        *(uint *)(glContext + 0x8c) = *(uint *)(glContext + 0x8c) | 0x48000;
 LAB_00064af0:
         while( true ) {
-          if ((uVar17 <= uVar15) && (uVar19 <= uVar14)) {
-            *(int *)(pcVar21 + 0x14) = iVar12;
-            *(int *)(pcVar21 + 4) = iVar9;
-            *(uint *)(pcVar21 + 0x10) = uVar17 + iVar9 + -1;
-            *piVar20 = uVar17 + *piVar20;
-            piVar20[1] = uVar19 + piVar20[1];
-            ((int (*)())vpUploadConstantArray)(param_1,pcVar21);
-            *pcVar21 = '\x01';
-            FUN_0007dcd0(param_1,pcVar21);
-            uVar19 = *(uint *)(pcVar21 + 0x5c);
+          if ((regionWidth <= freeWidth) && (regionHeight <= freeHeight)) {
+            *(int *)(programState + 0x14) = allocY;
+            *(int *)(programState + 4) = allocX;
+            *(uint *)(programState + 0x10) = regionWidth + allocX + -1;
+            *constAlloc = regionWidth + *constAlloc;
+            constAlloc[1] = regionHeight + constAlloc[1];
+            ((int (*)())vpUploadConstantArray)(glContext,programState);
+            *programState = '\x01';
+            FUN_0007dcd0(glContext,programState);
+            regionHeight = *(uint *)(programState + 0x5c);
             goto LAB_00064c00;
           }
-          if (iVar6 == 1) break;
-          if (iVar6 != 0) {
-            if (iVar6 == 2) {
-              puVar3 = (undefined4 *)(**(code **)(param_1 + 0x2758))(param_1,2);
-              *(undefined4 **)(0x00002748 + param_1 + 4) = puVar3;
-              *puVar3 = 0x8a1;
-              *(undefined4 *)(*(int *)(0x00002748 + param_1 + 4) + 4) = 0;
-              pcVar1 = *(code **)(param_1 + 0x275c);
-              iVar6 = *(int *)(0x00002748 + param_1 + 4) + 8;
-              *(int *)(0x00002748 + param_1 + 4) = iVar6;
-              (*pcVar1)(param_1,iVar6,in_r5,in_r6,in_r7,in_r8,iVar6);
-              *piVar20 = 0;
-              piVar20[1] = *(int *)(param_1 + 0x2448);
-              ((int (*)())FUN_00062490)(param_1);
-              iVar6 = *(int *)(param_1 + 0xd8);
-              iVar9 = 0;
-              iVar12 = 0;
+          if (cacheMode == 1) break;
+          if (cacheMode != 0) {
+            if (cacheMode == 2) {
+              cmdBufferB = (undefined4 *)(**(code **)(glContext + 0x2758))(glContext,2);
+              *(undefined4 **)(0x00002748 + glContext + 4) = cmdBufferB;
+              *cmdBufferB = 0x8a1;
+              *(undefined4 *)(*(int *)(0x00002748 + glContext + 4) + 4) = 0;
+              commitCallback = *(code **)(glContext + 0x275c);
+              cmdEnd = *(int *)(0x00002748 + glContext + 4) + 8;
+              *(int *)(0x00002748 + glContext + 4) = cmdEnd;
+              (*commitCallback)(glContext,cmdEnd,in_r5,in_r6,in_r7,in_r8,cmdEnd);
+              *constAlloc = 0;
+              constAlloc[1] = *(int *)(glContext + 0x2448);
+              ((int (*)())FUN_00062490)(glContext);
+              cacheMode = *(int *)(glContext + 0xd8);
+              allocX = 0;
+              allocY = 0;
             }
             goto LAB_00064a98;
           }
-          iVar6 = 1;
-          *(undefined4 *)(param_1 + 0xd8) = 1;
+          cacheMode = 1;
+          *(undefined4 *)(glContext + 0xd8) = 1;
 LAB_00064ac0:
-          uVar15 = 0xfe - iVar9;
-          uVar14 = 0x100 - iVar12;
-          *(uint *)(param_1 + 0x8c) = *(uint *)(param_1 + 0x8c) | 0x40000;
+          freeWidth = 0xfe - allocX;
+          freeHeight = 0x100 - allocY;
+          *(uint *)(glContext + 0x8c) = *(uint *)(glContext + 0x8c) | 0x40000;
         }
-        iVar6 = 2;
-        *(undefined4 *)(param_1 + 0xd8) = 2;
+        cacheMode = 2;
+        *(undefined4 *)(glContext + 0xd8) = 2;
       } while( true );
     }
   }
@@ -5156,7 +5170,7 @@ LAB_00065094:
           return;
         }
       }
-      ((int (*)())FUN_00064a10)(glContext,shader);
+      ((int (*)())extvsUploadProgramConstants)(glContext,shader);
       outputFlagCursor = glContext + 0x18a0;
       outputsLeft = 0x10;
       do {
@@ -9848,7 +9862,7 @@ asm(".set FUN_00064230, _FUN_00064230");
 asm(".globl FUN_00064850");
 asm(".set FUN_00064850, _extvsApplyStreamDescriptors");
 asm(".globl FUN_00064a10");
-asm(".set FUN_00064a10, _FUN_00064a10");
+asm(".set FUN_00064a10, _extvsUploadProgramConstants");
 asm(".globl FUN_00064f40");
 asm(".set FUN_00064f40, _extvsValidateProgramState");
 asm(".globl FUN_00065610");

@@ -576,7 +576,7 @@
 0x64230	FUN_00064230	1256	no	indirect call (driver context / vtable / callback)
 0x64720	FUN_00064720	304	no	indirect call (driver context / vtable / callback)
 0x64850	extvsApplyStreamDescriptors	436	no	indirect call (driver context / vtable / callback)
-0x64a10	FUN_00064a10	1304	no	indirect call (driver context / vtable / callback)
+0x64a10	extvsUploadProgramConstants	1304	no	indirect call (driver context / vtable / callback)
 0x64f40	extvsValidateProgramState	708	no	indirect call (driver context / vtable / callback)
 0x651e0	extvsFlushConstantUploads	400	no	indirect call (driver context / vtable / callback)
 0x65370	ffvpSelectLitProgramVariant	636	no	indirect call (driver context / vtable / callback)
