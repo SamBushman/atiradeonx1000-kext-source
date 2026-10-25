@@ -866,19 +866,25 @@ int R300MachineAssembler__noteFetchTextureUnit(this, sourceIndex, inst)
 }
 
 /* FUN_0019651c @ 0x19651c (640 bytes) */
-int FUN_0019651c(param_1, inst, param_3)
-  int *param_1;
+int FUN_0019651c(assembler, inst, staleArg3)
+  int *assembler;
   int inst;
-  uint param_3;
+  uint staleArg3;
 {
+  undefined4 registerIndex;
+  code *emitSlotBFn;
+  int slotA;
+  int compilerRef;
+  int slotB;
+  int testResult;
   int operandRecord;
-  bool bVar1;
-  int iVar2;
-  undefined4 uVar3;
+  bool moreLanes;
+  int fetchKind;
+  undefined4 fetchArg;
   undefined4 a4;
   undefined4 a3;
   uint a2;
-  code *pcVar4;
+  code *emitSlotAFn;
   int a1;
   uint loopIndex;
   
@@ -889,63 +895,63 @@ int FUN_0019651c(param_1, inst, param_3)
     if (*(char *)(loopIndex + operandRecord + 0x10) == '\x01') {
       a2 = a2 | 1 << (loopIndex & 0x3f);
     }
-    bVar1 = loopIndex != 3;
+    moreLanes = loopIndex != 3;
     loopIndex = loopIndex + 1;
-  } while (bVar1);
-  iVar2 = *(int *)(inst + 0x144);
-  if ((iVar2 == 0x16) || (iVar2 == 0x17)) {
-    pcVar4 = *(code **)(*param_1 + 0xc4);
-    a1 = param_1[0x25];
-    uVar3 = FUN_0010e40c(iVar2,*(undefined4 *)(inst + 0x148));
-    a4 = thunk_FUN_00134de8(*(undefined4 *)(param_1[3] + 0x6c4),inst);
+  } while (moreLanes);
+  fetchKind = *(int *)(inst + 0x144);
+  if ((fetchKind == 0x16) || (fetchKind == 0x17)) {
+    emitSlotAFn = *(code **)(*assembler + 0xc4);
+    a1 = assembler[0x25];
+    fetchArg = FUN_0010e40c(fetchKind,*(undefined4 *)(inst + 0x148));
+    a4 = thunk_FUN_00134de8(*(undefined4 *)(assembler[3] + 0x6c4),inst);
     a3 = 1;
   }
-  else if (iVar2 == 0x1b) {
+  else if (fetchKind == 0x1b) {
     a3 = 1;
-    pcVar4 = *(code **)(*param_1 + 0xc4);
-    a1 = param_1[0x25];
-    uVar3 = *(undefined4 *)(inst + 0x148);
-    iVar2 = FUN_000d9f3c(*(undefined4 *)(param_1[3] + 0x398),0);
-    if (iVar2 == 0) {
+    emitSlotAFn = *(code **)(*assembler + 0xc4);
+    a1 = assembler[0x25];
+    fetchArg = *(undefined4 *)(inst + 0x148);
+    testResult = FUN_000d9f3c(*(undefined4 *)(assembler[3] + 0x398),0);
+    if (testResult == 0) {
       a3 = 3;
     }
-    a4 = thunk_FUN_00134de8(*(undefined4 *)(param_1[3] + 0x6c4),inst);
+    a4 = thunk_FUN_00134de8(*(undefined4 *)(assembler[3] + 0x6c4),inst);
   }
   else {
-    if (iVar2 != 0x23) {
-      pcVar4 = *(code **)(*param_1 + 200);
+    if (fetchKind != 0x23) {
+      emitSlotBFn = *(code **)(*assembler + 200);
       loopIndex = *(uint *)(inst + 0x148);
-      iVar2 = param_1[0x26];
-      uVar3 = thunk_FUN_00134de8(*(undefined4 *)(param_1[3] + 0x6c4),inst);
-      (*pcVar4)(param_1,iVar2,loopIndex,1,uVar3,(*(uint *)(inst + 0x13c) ^ 1) & 1);
-      (**(code **)(*param_1 + 0xcc))(param_1,param_1[0x26],a2);
-      iVar2 = param_1[3];
-      param_1[0x26] = param_1[0x26] + 1;
-      if (*(int *)(*(int *)(iVar2 + 0x6c4) + 0x80) < (int)loopIndex) {
-        *(uint *)(*(int *)(iVar2 + 0x6c4) + 0x80) = loopIndex;
-        iVar2 = param_1[3];
+      slotB = assembler[0x26];
+      registerIndex = thunk_FUN_00134de8(*(undefined4 *)(assembler[3] + 0x6c4),inst);
+      (*emitSlotBFn)(assembler,slotB,loopIndex,1,registerIndex,(*(uint *)(inst + 0x13c) ^ 1) & 1);
+      (**(code **)(*assembler + 0xcc))(assembler,assembler[0x26],a2);
+      compilerRef = assembler[3];
+      assembler[0x26] = assembler[0x26] + 1;
+      if (*(int *)(*(int *)(compilerRef + 0x6c4) + 0x80) < (int)loopIndex) {
+        *(uint *)(*(int *)(compilerRef + 0x6c4) + 0x80) = loopIndex;
+        compilerRef = assembler[3];
       }
-      *(uint *)(*(int *)(iVar2 + 0x6c4) + 0x88) =
-           1 << (loopIndex & 0x3f) | *(uint *)(*(int *)(iVar2 + 0x6c4) + 0x88);
-      iVar2 = param_1[0x25];
+      *(uint *)(*(int *)(compilerRef + 0x6c4) + 0x88) =
+           1 << (loopIndex & 0x3f) | *(uint *)(*(int *)(compilerRef + 0x6c4) + 0x88);
+      slotA = assembler[0x25];
       goto LAB_0019675c;
     }
-    pcVar4 = *(code **)(*param_1 + 0xc4);
-    a1 = param_1[0x25];
-    uVar3 = *(undefined4 *)(inst + 0x148);
-    a4 = thunk_FUN_00134de8(*(undefined4 *)(param_1[3] + 0x6c4),inst);
+    emitSlotAFn = *(code **)(*assembler + 0xc4);
+    a1 = assembler[0x25];
+    fetchArg = *(undefined4 *)(inst + 0x148);
+    a4 = thunk_FUN_00134de8(*(undefined4 *)(assembler[3] + 0x6c4),inst);
     a3 = 2;
   }
-  (*pcVar4)(param_1,a1,uVar3,a3,a4,0);
-  (**(code **)(*param_1 + 0xd0))(param_1,param_1[0x25],a2);
-  iVar2 = param_1[0x25] + 1;
-  param_1[0x25] = iVar2;
+  (*emitSlotAFn)(assembler,a1,fetchArg,a3,a4,0);
+  (**(code **)(*assembler + 0xd0))(assembler,assembler[0x25],a2);
+  slotA = assembler[0x25] + 1;
+  assembler[0x25] = slotA;
 LAB_0019675c:
-  if (iVar2 <= param_1[0x26]) {
-    iVar2 = param_1[0x26];
+  if (slotA <= assembler[0x26]) {
+    slotA = assembler[0x26];
   }
-  param_1[0x1d] = iVar2 + -1;
-  param_1[0x18] = iVar2;
+  assembler[0x1d] = slotA + -1;
+  assembler[0x18] = slotA;
   return;
 }
 

@@ -1456,31 +1456,34 @@ LAB_0017dbc4:
 }
 
 /* FUN_0017dbdc @ 0x17dbdc (1104 bytes) */
-int FUN_0017dbdc(ctx, param_2)
+int FUN_0017dbdc(ctx, laneResultsOut)
   int ctx;
-  int *param_2;
+  int *laneResultsOut;
 {
+  int partialFlag;
+  int isOpcodeKindB;
+  bool cannotFold;
   undefined4 exprRecord;
-  bool bVar1;
-  int iVar2;
+  bool moreLanes;
+  int isOpcodeKindA;
   int loopRemaining;
   int loopIndex;
   int *loopPtr3;
   undefined4 opcode;
   int loopIndex2;
-  int local_58 [4];
-  int local_48;
-  int local_44;
-  int local_40;
-  int local_3c [6];
+  int foldFlags [4];
+  int laneResultOutD;
+  int laneResultOutC;
+  int laneResultOutB;
+  int laneResultOutA [6];
   
   opcode = *(undefined4 *)(*(int *)(*(int *)(ctx + 0xb0) + 0x88) + 8);
-  iVar2 = FUN_00176564(opcode);
-  if (iVar2 != 0) {
+  isOpcodeKindA = FUN_00176564(opcode);
+  if (isOpcodeKindA != 0) {
     return 0;
   }
-  iVar2 = FUN_00176574(opcode);
-  if (iVar2 == 0) {
+  isOpcodeKindB = FUN_00176574(opcode);
+  if (isOpcodeKindB == 0) {
     loopIndex = OpcodeTraits__flagBit7(opcode,*(undefined4 *)(ctx + 0x238));
     if ((loopIndex == 0) ||
        (loopIndex = OpcodeTraits__flagBit8(*(undefined4 *)(*(int *)(*(int *)(ctx + 0xb0) + 0x88) + 8),
@@ -1488,56 +1491,56 @@ int FUN_0017dbdc(ctx, param_2)
       loopIndex = OpcodeTraits__flagBit2(*(undefined4 *)(*(int *)(*(int *)(ctx + 0xb0) + 0x88) + 8),
                            *(undefined4 *)(ctx + 0x238));
       if (loopIndex == 0) {
-        iVar2 = 0;
+        partialFlag = 0;
         loopIndex2 = 0;
         loopIndex = ctx;
-        loopPtr3 = param_2;
+        loopPtr3 = laneResultsOut;
         do {
-          local_58[0] = 0;
+          foldFlags[0] = 0;
           loopRemaining = FUN_001767d8(ctx,loopIndex2);
           if (loopRemaining != 0) {
-            FUN_00176c40(local_3c,ctx,loopIndex2,local_58);
-            *loopPtr3 = local_3c[0];
-            if (local_3c[0] != 0x7ffffffe) {
-              exprRecord = Compiler__valueNumberForExpr(*(undefined4 *)(ctx + 0x238),local_3c[0]);
+            FUN_00176c40(laneResultOutA,ctx,loopIndex2,foldFlags);
+            *loopPtr3 = laneResultOutA[0];
+            if (laneResultOutA[0] != 0x7ffffffe) {
+              exprRecord = Compiler__valueNumberForExpr(*(undefined4 *)(ctx + 0x238),laneResultOutA[0]);
               *(undefined4 *)(loopIndex + 0x30) = exprRecord;
             }
           }
           loopRemaining = IRInst__getOperandRecord(*(undefined4 *)(ctx + 0xb0),0);
-          if ((*(char *)(loopIndex2 + loopRemaining + 0x10) == '\0') && (local_58[0] != 0)) {
-            iVar2 = 1;
+          if ((*(char *)(loopIndex2 + loopRemaining + 0x10) == '\0') && (foldFlags[0] != 0)) {
+            partialFlag = 1;
           }
-          bVar1 = loopIndex2 != 3;
+          moreLanes = loopIndex2 != 3;
           loopPtr3 = loopPtr3 + 1;
           loopIndex = loopIndex + 4;
           loopIndex2 = loopIndex2 + 1;
-        } while (bVar1);
+        } while (moreLanes);
         loopIndex = IRInst__getOperandRecord(*(undefined4 *)(ctx + 0xb0),0);
         if (*(int *)(loopIndex + 0x10) == 0x1010101) goto LAB_0017dfa0;
         loopIndex = 0;
-        loopPtr3 = param_2;
+        loopPtr3 = laneResultsOut;
         do {
           loopIndex2 = IRInst__getOperandRecord(*(undefined4 *)(ctx + 0xb0),0);
           if ((*(char *)(loopIndex + loopIndex2 + 0x10) != '\x01') && (*loopPtr3 == 0x7ffffffe))
           goto LAB_0017dfa0;
-          bVar1 = loopIndex != 3;
+          moreLanes = loopIndex != 3;
           loopPtr3 = loopPtr3 + 1;
           loopIndex = loopIndex + 1;
-        } while (bVar1);
+        } while (moreLanes);
       }
       else {
         loopIndex = FUN_0017672c(ctx);
         if (loopIndex == 0) goto LAB_0017df9c;
-        local_58[0] = iVar2;
-        FUN_001781a4(&local_40,ctx,local_58);
-        iVar2 = local_58[0];
-        if (local_40 == 0x7ffffffe) goto LAB_0017dfa0;
-        exprRecord = Compiler__valueNumberForExpr(*(undefined4 *)(ctx + 0x238),local_40);
+        foldFlags[0] = isOpcodeKindB;
+        FUN_001781a4(&laneResultOutB,ctx,foldFlags);
+        partialFlag = foldFlags[0];
+        if (laneResultOutB == 0x7ffffffe) goto LAB_0017dfa0;
+        exprRecord = Compiler__valueNumberForExpr(*(undefined4 *)(ctx + 0x238),laneResultOutB);
         loopRemaining = 4;
         loopIndex2 = 0;
         loopIndex = ctx;
         do {
-          *(int *)((int)param_2 + loopIndex2) = local_40;
+          *(int *)((int)laneResultsOut + loopIndex2) = laneResultOutB;
           loopIndex2 = loopIndex2 + 4;
           *(undefined4 *)(loopIndex + 0x30) = exprRecord;
           loopIndex = loopIndex + 4;
@@ -1549,21 +1552,21 @@ int FUN_0017dbdc(ctx, param_2)
       loopIndex = FUN_00178b1c(ctx);
       if (loopIndex == 0) {
 LAB_0017df9c:
-        iVar2 = 0;
+        partialFlag = 0;
 LAB_0017dfa0:
-        bVar1 = true;
+        cannotFold = true;
         goto LAB_0017dd38;
       }
-      local_58[0] = iVar2;
-      FUN_00176a94(&local_44,ctx,local_58);
-      iVar2 = local_58[0];
-      if (local_44 == 0x7ffffffe) goto LAB_0017dfa0;
-      exprRecord = Compiler__valueNumberForExpr(*(undefined4 *)(ctx + 0x238),local_44);
+      foldFlags[0] = isOpcodeKindB;
+      FUN_00176a94(&laneResultOutC,ctx,foldFlags);
+      partialFlag = foldFlags[0];
+      if (laneResultOutC == 0x7ffffffe) goto LAB_0017dfa0;
+      exprRecord = Compiler__valueNumberForExpr(*(undefined4 *)(ctx + 0x238),laneResultOutC);
       loopRemaining = 4;
       loopIndex2 = 0;
       loopIndex = ctx;
       do {
-        *(int *)((int)param_2 + loopIndex2) = local_44;
+        *(int *)((int)laneResultsOut + loopIndex2) = laneResultOutC;
         loopIndex2 = loopIndex2 + 4;
         *(undefined4 *)(loopIndex + 0x30) = exprRecord;
         loopIndex = loopIndex + 4;
@@ -1572,54 +1575,54 @@ LAB_0017dfa0:
     }
   }
   else {
-    iVar2 = 0;
+    partialFlag = 0;
     loopIndex2 = 0;
     loopIndex = ctx;
-    loopPtr3 = param_2;
+    loopPtr3 = laneResultsOut;
     do {
-      local_58[0] = 0;
+      foldFlags[0] = 0;
       loopRemaining = FUN_00178a98(ctx,loopIndex2);
       if (loopRemaining != 0) {
-        FUN_00178e90(&local_48,ctx,loopIndex2,(uint)local_58);
-        *loopPtr3 = local_48;
-        if (local_48 != 0x7ffffffe) {
-          exprRecord = Compiler__valueNumberForExpr(*(undefined4 *)(ctx + 0x238),local_48);
+        FUN_00178e90(&laneResultOutD,ctx,loopIndex2,(uint)foldFlags);
+        *loopPtr3 = laneResultOutD;
+        if (laneResultOutD != 0x7ffffffe) {
+          exprRecord = Compiler__valueNumberForExpr(*(undefined4 *)(ctx + 0x238),laneResultOutD);
           *(undefined4 *)(loopIndex + 0x30) = exprRecord;
         }
       }
       loopRemaining = IRInst__getOperandRecord(*(undefined4 *)(ctx + 0xb0),0);
-      if ((*(char *)(loopIndex2 + loopRemaining + 0x10) == '\0') && (local_58[0] != 0)) {
-        iVar2 = 1;
+      if ((*(char *)(loopIndex2 + loopRemaining + 0x10) == '\0') && (foldFlags[0] != 0)) {
+        partialFlag = 1;
       }
-      bVar1 = loopIndex2 != 3;
+      moreLanes = loopIndex2 != 3;
       loopPtr3 = loopPtr3 + 1;
       loopIndex = loopIndex + 4;
       loopIndex2 = loopIndex2 + 1;
-    } while (bVar1);
+    } while (moreLanes);
     loopIndex = IRInst__getOperandRecord(*(undefined4 *)(ctx + 0xb0),0);
     if (*(int *)(loopIndex + 0x10) == 0x1010101) goto LAB_0017dfa0;
     loopIndex = 0;
-    loopPtr3 = param_2;
+    loopPtr3 = laneResultsOut;
     do {
       loopIndex2 = IRInst__getOperandRecord(*(undefined4 *)(ctx + 0xb0),0);
       if ((*(char *)(loopIndex + loopIndex2 + 0x10) != '\x01') && (*loopPtr3 == 0x7ffffffe)) goto LAB_0017dfa0;
-      bVar1 = loopIndex != 3;
+      moreLanes = loopIndex != 3;
       loopPtr3 = loopPtr3 + 1;
       loopIndex = loopIndex + 1;
-    } while (bVar1);
+    } while (moreLanes);
   }
-  bVar1 = false;
+  cannotFold = false;
 LAB_0017dd38:
   loopIndex = (**(code **)(**(int **)(ctx + 0xb0) + 100))(*(int **)(ctx + 0xb0));
-  if ((loopIndex == 0) && (!bVar1)) {
-    loopIndex = ((int (*)())FUN_0017d6ac)(ctx,param_2);
+  if ((loopIndex == 0) && (!cannotFold)) {
+    loopIndex = ((int (*)())FUN_0017d6ac)(ctx,laneResultsOut);
     if (loopIndex != 0) {
       ValueKey__rebuild(ctx);
       return 1;
     }
     loopIndex = *(int *)(*(int *)(ctx + 0x238) + 0x6c4);
     *(int *)(loopIndex + 0x138) = *(int *)(loopIndex + 0x138) + 1;
-    if ((*(int *)(*(int *)(ctx + 0xb0) + 0x120) != 0) && (iVar2 == 0)) {
+    if ((*(int *)(*(int *)(ctx + 0xb0) + 0x120) != 0) && (partialFlag == 0)) {
       *(undefined4 *)(*(int *)(ctx + 0xb0) + 0x120) = 0;
       ValueKey__rebuild(ctx);
       return 0;
