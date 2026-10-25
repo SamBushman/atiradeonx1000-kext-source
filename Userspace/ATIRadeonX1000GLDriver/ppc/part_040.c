@@ -3197,34 +3197,35 @@ int FUN_00130478(param_1, param_2)
 }
 
 /* FUN_001304a4 @ 0x1304a4 (200 bytes) */
-int FUN_001304a4(param_1)
-  int param_1;
+int FUN_001304a4(allocator)
+  int allocator;
 {
+  int isPhysicalOrAssigned;
   int loopIndex;
-  int iVar1;
-  int iVar2;
-  int iVar3;
-  int *piVar4;
-  int iVar5;
+  int physicalRegCountA;
+  int physicalRegCountB;
+  int compilerThenTotal;
+  int *backend;
+  int virtualRegCount;
   
-  iVar5 = 0;
-  iVar3 = *(int *)(param_1 + 8);
-  piVar4 = *(int **)(iVar3 + 0x30c);
-  iVar1 = (**(code **)(*piVar4 + 0x138))(piVar4,iVar3);
-  iVar2 = (**(code **)(*piVar4 + 0x140))(piVar4,iVar3);
-  iVar3 = (**(code **)(*piVar4 + 0x13c))(piVar4,iVar3);
-  iVar3 = iVar1 + iVar2 + iVar3;
-  if (0 < iVar3) {
+  virtualRegCount = 0;
+  compilerThenTotal = *(int *)(allocator + 8);
+  backend = *(int **)(compilerThenTotal + 0x30c);
+  physicalRegCountA = (**(code **)(*backend + 0x138))(backend,compilerThenTotal);
+  physicalRegCountB = (**(code **)(*backend + 0x140))(backend,compilerThenTotal);
+  compilerThenTotal = (**(code **)(*backend + 0x13c))(backend,compilerThenTotal);
+  compilerThenTotal = physicalRegCountA + physicalRegCountB + compilerThenTotal;
+  if (0 < compilerThenTotal) {
     loopIndex = 0;
     do {
-      iVar2 = ((int (*)())FUN_00130478)(param_1,loopIndex);
-      if (iVar2 == 0) {
-        iVar5 = iVar5 + 1;
+      isPhysicalOrAssigned = ((int (*)())FUN_00130478)(allocator,loopIndex);
+      if (isPhysicalOrAssigned == 0) {
+        virtualRegCount = virtualRegCount + 1;
       }
       loopIndex = loopIndex + 1;
-    } while (iVar3 != loopIndex);
+    } while (compilerThenTotal != loopIndex);
   }
-  return iVar5;
+  return virtualRegCount;
 }
 
 /* BitSet__setBit42c @ 0x13056c (40 bytes) */
@@ -3240,34 +3241,35 @@ int BitSet__setBit42c(param_1, param_2)
 }
 
 /* FUN_00130594 @ 0x130594 (136 bytes) */
-int FUN_00130594(param_1, param_2)
-  int param_1;
-  int param_2;
+int FUN_00130594(allocator, classNumber)
+  int allocator;
+  int classNumber;
 {
-  int iVar1;
+  int registerNumber;
+  int classEnd;
   int callResult;
-  int iVar3;
-  int iVar4;
-  int iVar5;
+  int classTableAddr;
+  int highestUnassigned;
+  int classStart;
   
-  iVar3 = param_2 * 4 + param_1;
-  iVar4 = -1;
-  iVar1 = *(int *)(iVar3 + 0x448);
-  iVar5 = *(int *)(iVar3 + 0x43c);
-  iVar3 = iVar5;
-  if (iVar5 < iVar1) {
+  classTableAddr = classNumber * 4 + allocator;
+  highestUnassigned = -1;
+  classEnd = *(int *)(classTableAddr + 0x448);
+  classStart = *(int *)(classTableAddr + 0x43c);
+  registerNumber = classStart;
+  if (classStart < classEnd) {
     do {
-      callResult = ((int (*)())FUN_00130478)(param_1,iVar3);
-      if ((callResult == 0) && (iVar4 < iVar3)) {
-        iVar4 = iVar3;
+      callResult = ((int (*)())FUN_00130478)(allocator,registerNumber);
+      if ((callResult == 0) && (highestUnassigned < registerNumber)) {
+        highestUnassigned = registerNumber;
       }
-      iVar3 = iVar3 + 1;
-    } while (iVar1 != iVar3);
-    if (-1 < iVar4) {
-      iVar4 = iVar4 - iVar5;
+      registerNumber = registerNumber + 1;
+    } while (classEnd != registerNumber);
+    if (-1 < highestUnassigned) {
+      highestUnassigned = highestUnassigned - classStart;
     }
   }
-  return iVar4;
+  return highestUnassigned;
 }
 
 /* FUN_0013061c @ 0x13061c (116 bytes) */

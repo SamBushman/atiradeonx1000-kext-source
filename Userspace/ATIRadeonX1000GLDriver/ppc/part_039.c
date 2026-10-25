@@ -2045,8 +2045,8 @@ int FUN_0012ae1c(param_1)
 }
 
 /* FUN_0012ae6c @ 0x12ae6c (132 bytes) */
-int FUN_0012ae6c(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  int param_1;
+int FUN_0012ae6c(block, param_2, param_3, param_4, param_5, param_6, param_7)
+  int block;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
@@ -2054,25 +2054,25 @@ int FUN_0012ae6c(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_6;
   undefined4 param_7;
 {
-  int *piVar1;
-  int *piVar2;
-  int iVar3;
+  int *inst;
+  int *nextInstLink;
+  int instQuery28;
   
-  piVar1 = *(int **)(param_1 + 0x98);
-  piVar2 = (int *)(*(int **)(param_1 + 0x98))[2];
+  inst = *(int **)(block + 0x98);
+  nextInstLink = (int *)(*(int **)(block + 0x98))[2];
   do {
-    if (piVar2 == (int *)0x0) {
+    if (nextInstLink == (int *)0x0) {
       return 0;
     }
-    if ((piVar1[5] & 1U) != 0) {
-      iVar3 = (**(code **)(*piVar1 + 0x28))(piVar1);
-      if (iVar3 != 0) {
+    if ((inst[5] & 1U) != 0) {
+      instQuery28 = (**(code **)(*inst + 0x28))(inst);
+      if (instQuery28 != 0) {
         return 1;
       }
-      piVar2 = (int *)piVar1[2];
+      nextInstLink = (int *)inst[2];
     }
-    piVar1 = piVar2;
-    piVar2 = (int *)piVar2[2];
+    inst = nextInstLink;
+    nextInstLink = (int *)nextInstLink[2];
   } while( true );
 }
 

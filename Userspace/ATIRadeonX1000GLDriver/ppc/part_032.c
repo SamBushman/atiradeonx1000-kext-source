@@ -156,18 +156,18 @@ int FUN_0010f87c(program, param_2, vector)
 }
 
 /* FUN_0010fa24 @ 0x10fa24 (304 bytes) */
-int FUN_0010fa24(param_1, param_2, param_3, param_4, vector)
-  int param_1;
-  int param_2;
-  int param_3;
-  int param_4;
+int FUN_0010fa24(scopeId, slotOwnerRegister, firstSlot, slotEnd, vector)
+  int scopeId;
+  int slotOwnerRegister;
+  int firstSlot;
+  int slotEnd;
   uint *vector;
 {
   int *vectorElementRef;
-  int iVar1;
+  int slotsLeft;
   uint vectorCount;
-  int iVar3;
-  int *piVar4;
+  int foundSlot;
+  int *slotScanCursor;
   int vectorElement;
   uint loopIndex;
   
@@ -187,19 +187,19 @@ int FUN_0010fa24(param_1, param_2, param_3, param_4, vector)
       }
       loopIndex = loopIndex + 1;
       vectorElement = *vectorElementRef;
-      if ((*(int *)(vectorElement + 0x1c) == param_1) && (param_3 < param_4)) {
-        iVar3 = param_3;
-        if (*(int *)(vectorElement + 0x14) != *(int *)(param_2 + param_3 * 4)) {
-          iVar1 = param_4 - param_3;
-          piVar4 = (int *)(param_2 + param_3 * 4);
+      if ((*(int *)(vectorElement + 0x1c) == scopeId) && (firstSlot < slotEnd)) {
+        foundSlot = firstSlot;
+        if (*(int *)(vectorElement + 0x14) != *(int *)(slotOwnerRegister + firstSlot * 4)) {
+          slotsLeft = slotEnd - firstSlot;
+          slotScanCursor = (int *)(slotOwnerRegister + firstSlot * 4);
           do {
-            iVar3 = iVar3 + 1;
-            iVar1 = iVar1 + -1;
-            if (iVar1 == 0) goto LAB_0010fb28;
-            piVar4 = piVar4 + 1;
-          } while (*piVar4 != *(int *)(vectorElement + 0x14));
+            foundSlot = foundSlot + 1;
+            slotsLeft = slotsLeft + -1;
+            if (slotsLeft == 0) goto LAB_0010fb28;
+            slotScanCursor = slotScanCursor + 1;
+          } while (*slotScanCursor != *(int *)(vectorElement + 0x14));
         }
-        *(int *)(vectorElement + 0x14) = iVar3;
+        *(int *)(vectorElement + 0x14) = foundSlot;
       }
 LAB_0010fb28:
       vectorCount = vector[1];

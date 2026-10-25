@@ -3119,31 +3119,31 @@ int VReg__setTopDefinition(param_1, param_2)
 }
 
 /* VReg__pushDefinition @ 0x123424 (180 bytes) */
-int VReg__pushDefinition(param_1, param_2, param_3)
-  int param_1;
-  int param_2;
-  undefined4 param_3;
+int VReg__pushDefinition(vreg, definingBlock, definition)
+  int vreg;
+  int definingBlock;
+  undefined4 definition;
 {
-  undefined4 *puVar1;
-  uint uVar2;
-  uint *puVar3;
+  undefined4 *stackSlotRef;
+  uint stackCount;
+  uint *definitionStack;
   
-  puVar3 = *(uint **)(param_1 + 0x2c);
-  if ((puVar3[1] != 0) && (param_2 == *(int *)(param_1 + 0x28))) {
-    ((int (*)())VReg__setTopDefinition)(param_1,param_3);
+  definitionStack = *(uint **)(vreg + 0x2c);
+  if ((definitionStack[1] != 0) && (definingBlock == *(int *)(vreg + 0x28))) {
+    ((int (*)())VReg__setTopDefinition)(vreg,definition);
     return;
   }
-  *(int *)(param_1 + 0x28) = param_2;
-  uVar2 = puVar3[1];
-  if (uVar2 < *puVar3) {
-    _memset(uVar2 * 4 + puVar3[2],0,4);
-    puVar1 = (undefined4 *)(uVar2 * 4 + puVar3[2]);
-    puVar3[1] = uVar2 + 1;
+  *(int *)(vreg + 0x28) = definingBlock;
+  stackCount = definitionStack[1];
+  if (stackCount < *definitionStack) {
+    _memset(stackCount * 4 + definitionStack[2],0,4);
+    stackSlotRef = (undefined4 *)(stackCount * 4 + definitionStack[2]);
+    definitionStack[1] = stackCount + 1;
   }
   else {
-    puVar1 = (undefined4 *)Vector__elementRefGrow(puVar3,uVar2);
+    stackSlotRef = (undefined4 *)Vector__elementRefGrow(definitionStack,stackCount);
   }
-  *puVar1 = param_3;
+  *stackSlotRef = definition;
   return;
 }
 

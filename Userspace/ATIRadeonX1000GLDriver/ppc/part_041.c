@@ -171,37 +171,37 @@ int FUN_001318a4(allocator, nodeIndex, spillState)
 }
 
 /* FUN_001319d0 @ 0x1319d0 (176 bytes) */
-int FUN_001319d0(param_1, param_2)
-  int param_1;
-  uint param_2;
+int FUN_001319d0(allocator, slotIndexAndCount)
+  int allocator;
+  uint slotIndexAndCount;
 {
-  uint uVar1;
-  int *piVar2;
-  int iVar3;
+  uint slotVectorCount;
+  int *slotRef;
+  int slotSum;
   uint loopIndex;
-  uint *puVar5;
+  uint *slotVector;
   
-  iVar3 = 0;
-  if (0 < (int)param_2) {
+  slotSum = 0;
+  if (0 < (int)slotIndexAndCount) {
     loopIndex = 0;
     do {
-      puVar5 = *(uint **)(param_1 + 0x8c);
-      if (param_2 < *puVar5) {
-        uVar1 = puVar5[1];
-        if (uVar1 <= param_2) {
-          _memset(uVar1 * 4 + puVar5[2],0,(param_2 - uVar1) * 4 + 4);
-          puVar5[1] = param_2 + 1;
+      slotVector = *(uint **)(allocator + 0x8c);
+      if (slotIndexAndCount < *slotVector) {
+        slotVectorCount = slotVector[1];
+        if (slotVectorCount <= slotIndexAndCount) {
+          _memset(slotVectorCount * 4 + slotVector[2],0,(slotIndexAndCount - slotVectorCount) * 4 + 4);
+          slotVector[1] = slotIndexAndCount + 1;
         }
-        piVar2 = (int *)(param_2 * 4 + puVar5[2]);
+        slotRef = (int *)(slotIndexAndCount * 4 + slotVector[2]);
       }
       else {
-        piVar2 = (int *)Vector__elementRefGrow(puVar5,param_2);
+        slotRef = (int *)Vector__elementRefGrow(slotVector,slotIndexAndCount);
       }
       loopIndex = loopIndex + 1;
-      iVar3 = iVar3 + *piVar2;
-    } while (param_2 != loopIndex);
+      slotSum = slotSum + *slotRef;
+    } while (slotIndexAndCount != loopIndex);
   }
-  return iVar3;
+  return slotSum;
 }
 
 /* FUN_00131a80 @ 0x131a80 (232 bytes) */
@@ -283,31 +283,31 @@ int FUN_00131c10(param_1)
 }
 
 /* FUN_00131c74 @ 0x131c74 (148 bytes) */
-int FUN_00131c74(param_1, param_2, param_3)
-  int param_1;
-  int param_2;
-  undefined4 param_3;
+int FUN_00131c74(allocator, spillRecord, slotValue)
+  int allocator;
+  int spillRecord;
+  undefined4 slotValue;
 {
-  uint uVar1;
-  undefined4 *puVar2;
-  uint uVar3;
-  uint *puVar4;
+  uint slotVectorCount;
+  undefined4 *slotRef;
+  uint slotIndex;
+  uint *slotVector;
   
-  *(undefined4 *)(param_2 + 300) = param_3;
-  puVar4 = *(uint **)(param_1 + 0x8c);
-  uVar3 = *(uint *)(param_2 + 0x130);
-  if (uVar3 < *puVar4) {
-    uVar1 = puVar4[1];
-    if (uVar1 <= uVar3) {
-      _memset(uVar1 * 4 + puVar4[2],0,(uVar3 - uVar1) * 4 + 4);
-      puVar4[1] = uVar3 + 1;
+  *(undefined4 *)(spillRecord + 300) = slotValue;
+  slotVector = *(uint **)(allocator + 0x8c);
+  slotIndex = *(uint *)(spillRecord + 0x130);
+  if (slotIndex < *slotVector) {
+    slotVectorCount = slotVector[1];
+    if (slotVectorCount <= slotIndex) {
+      _memset(slotVectorCount * 4 + slotVector[2],0,(slotIndex - slotVectorCount) * 4 + 4);
+      slotVector[1] = slotIndex + 1;
     }
-    puVar2 = (undefined4 *)(uVar3 * 4 + puVar4[2]);
+    slotRef = (undefined4 *)(slotIndex * 4 + slotVector[2]);
   }
   else {
-    puVar2 = (undefined4 *)Vector__elementRefGrow(puVar4,uVar3);
+    slotRef = (undefined4 *)Vector__elementRefGrow(slotVector,slotIndex);
   }
-  *puVar2 = param_3;
+  *slotRef = slotValue;
   return;
 }
 
