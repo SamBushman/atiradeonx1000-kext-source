@@ -9481,7 +9481,7 @@ int glCopyPixels_impl(ctx, rasterPos, srcX, srcY, width, height, copyType)
   uint uVar41;
   undefined *puVar42;
   uint uVar43;
-  int staleArgR10;
+  int destEndY;
   uint uVar44;
   uint uVar45;
   uint uVar46;
@@ -9605,11 +9605,11 @@ int glCopyPixels_impl(ctx, rasterPos, srcX, srcY, width, height, copyType)
     }
     iVar24 = (int)fVar1;
     iVar27 = width + iVar33;
-    staleArgR10 = iVar24 + height;
+    destEndY = iVar24 + height;
     if (((((iVar33 < srcX) || (iVar40 < iVar33)) && ((iVar27 < srcX || (iVar40 < iVar27)))) ||
         ((iVar24 < srcY || (iVar38 < iVar24)))) &&
-       (((iVar33 < srcX || (((iVar40 < iVar33 || (staleArgR10 < srcY)) || (iVar38 < staleArgR10)))) &&
-        (((iVar27 < srcX || (iVar40 < iVar27)) || ((staleArgR10 < srcY || (iVar38 < staleArgR10))))))))
+       (((iVar33 < srcX || (((iVar40 < iVar33 || (destEndY < srcY)) || (iVar38 < destEndY)))) &&
+        (((iVar27 < srcX || (iVar40 < iVar27)) || ((destEndY < srcY || (iVar38 < destEndY))))))))
     goto LAB_000185c0;
     srcDstOverlap = true;
   }
@@ -10174,7 +10174,7 @@ LAB_00018700:
         (**(code **)(ctx + 0x299c))(iVar34,packetCursor + 0xca);
         return;
       }
-      FUN_00021c70(ctx,srcX,srcY,width,height,uVar41,uVar43,staleArgR10,uVar32);
+      FUN_00021c70(ctx,srcX,srcY,width,height,uVar41,uVar43,destEndY,uVar32);
     }
   }
   else {

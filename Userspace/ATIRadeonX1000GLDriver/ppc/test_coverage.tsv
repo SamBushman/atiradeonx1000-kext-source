@@ -97,18 +97,18 @@
 0x9570	_gldDestroyPipelineProgram	104	no	calls an import (free)
 0x95e0	gld_resolveProgramSlots	192	yes	
 0x96b0	gld_decodeProgramOperandOffset	72	yes	
-0x973c	FUN_0000973c	20	no	tiny (20 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x9750	FUN_00009750	48	no	tiny (48 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x979c	FUN_0000979c	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x97ac	FUN_000097ac	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x97bc	FUN_000097bc	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x97cc	FUN_000097cc	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x97dc	FUN_000097dc	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x97ec	FUN_000097ec	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x97fc	FUN_000097fc	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x9810	FUN_00009810	112	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0x9880	FUN_00009880	48	no	tiny (48 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x98c8	FUN_000098c8	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x973c	gld_decodeProgramOperandOffset_frag_0000973c	20	no	tiny (20 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x9750	gld_decodeProgramOperandOffset_frag_00009750	48	no	tiny (48 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x979c	gld_decodeProgramOperandOffset_frag_0000979c	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97ac	gld_decodeProgramOperandOffset_frag_000097ac	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bc	gld_decodeProgramOperandOffset_frag_000097bc	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97cc	gld_decodeProgramOperandOffset_frag_000097cc	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97dc	gld_decodeProgramOperandOffset_frag_000097dc	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97ec	gld_decodeProgramOperandOffset_frag_000097ec	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97fc	gld_decodeProgramOperandOffset_frag_000097fc	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x9810	gld_decodeProgramOperandOffset_frag_00009810	112	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x9880	gld_decodeProgramOperandOffset_frag_00009880	48	no	tiny (48 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x98c8	gld_decodeProgramOperandOffset_frag_000098c8	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x9b70	gldAllocQueryRecord	88	no	calls an import (calloc)
 0x9bd0	gld_waitQueryStamp	164	yes	
 0x9c80	_gldDestroyQuery	76	no	calls an import (free)
@@ -200,7 +200,7 @@
 0x1b4b0	gld_updateYInvertedFlag	44	yes	
 0x1b4f0	noop_1b4f0	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x1b500	returnOne_1b500	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x1b510	FUN_0001b510	1304	yes	
+0x1b510	gld_validateFramebuffer	1304	yes	
 0x1bac0	gld_emitFramebufferState	904	no	atomic / cache / barrier instruction; indirect call (driver context / vtable / callback)
 0x1be50	dxt5EncodeAlphaBlock	868	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x1c1c0	dxt1DecodeColorIndex	416	yes	
@@ -220,7 +220,7 @@
 0x1eae0	copyIndices16Swapped_dcbz_entry	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x1eaf0	copyIndices16Swapped_dcbz	468	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x1ecd0	gld_drawVertexArray	3964	no	atomic / cache / barrier instruction; indirect call (driver context / vtable / callback)
-0x1fd00	FUN_0001fd00	1208	yes	
+0x1fd00	gld_buildVertexStreamLayout	1208	yes	
 0x20210	FUN_00020210	280	yes	
 0x20330	FUN_00020330	216	yes	
 0x20420	gldDisplayNotificationCallback	1716	no	calls an import (CFDictionaryGetValue); calls an import (CFNumberGetValue); calls an import (CFRelease)
@@ -231,7 +231,7 @@
 0x22290	_gldUpdateDispatch	2632	no	calls an import (pthread_mutex_lock); calls an import (pthread_mutex_unlock)
 0x22ce0	_gldInitDispatch	456	yes	
 0x22eb0	FUN_00022eb0	536	no	indirect call (driver context / vtable / callback)
-0x230d0	FUN_000230d0	1544	no	indirect call (driver context / vtable / callback)
+0x230d0	gld_emitSurfaceCopyPacket	1544	no	indirect call (driver context / vtable / callback)
 0x236f0	returnSecondArgument	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x23700	gldEmitCurrentAttributeRegisters	360	yes	
 0x23870	gldEmitCurrentAttributeRegistersMasked	420	yes	
@@ -325,7 +325,7 @@
 0x31220	gldTextureFormatEntryForLevel	280	yes	
 0x31340	FUN_00031340	1352	no	calls an import (glgConvertType); calls an import (glgProcessPixels); calls an import (io_connect_method_scalarI_structureI)
 0x31890	_gldGetTextureLevel	176	no	calls an import (pthread_mutex_lock); calls an import (pthread_mutex_unlock)
-0x31940	FUN_00031940	1972	no	calls an import (glgConvertType); calls an import (glgProcessPixels)
+0x31940	gld_uploadTextureLevel	1972	no	calls an import (glgConvertType); calls an import (glgProcessPixels)
 0x32100	gldTextureMakeResident	8252	yes	
 0x341a0	FUN_000341a0	92	yes	
 0x34200	glGenerateMipmap_impl	4472	no	calls an import (pthread_mutex_lock); calls an import (pthread_mutex_unlock); indirect call (driver context / vtable / callback)
