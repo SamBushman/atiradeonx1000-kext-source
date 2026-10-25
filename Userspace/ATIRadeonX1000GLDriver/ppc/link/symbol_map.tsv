@@ -834,7 +834,7 @@ PTR_FUN_001e88fc	0x1e88fc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char 
 PTR_FUN_001e8900	0x1e8900	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8900 asm("PTR_FUN_001e8900");	pointer -> gld_drawPixelsDispatch	data.s
 PTR_LAB_001e8904	0x1e8904	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_LAB_001e8904 asm("PTR_LAB_001e8904");	pointer -> _raw_entry_2bbc0	data.s
 PTR_FUN_001e8908	0x1e8908	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8908 asm("PTR_FUN_001e8908");	pointer -> gldPrimInlineLineLoop	data.s
-PTR_FUN_001e890c	0x1e890c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e890c asm("PTR_FUN_001e890c");	pointer -> FUN_000353a0	data.s
+PTR_FUN_001e890c	0x1e890c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e890c asm("PTR_FUN_001e890c");	pointer -> glCopyTexSubImage_impl	data.s
 PTR_FUN_001e8910	0x1e8910	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8910 asm("PTR_FUN_001e8910");	pointer -> gldPrimWrapperLines_23a24	data.s
 PTR_FUN_001e8914	0x1e8914	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8914 asm("PTR_FUN_001e8914");	pointer -> gldPrimWrapperPolygon_23a24	data.s
 PTR_FUN_001e8918	0x1e8918	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8918 asm("PTR_FUN_001e8918");	pointer -> gldPrimInlinePoints	data.s

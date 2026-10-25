@@ -1622,691 +1622,691 @@ LAB_0001c300:
   return;
 }
 
-/* FUN_0001c380 @ 0x1c380 (3664 bytes) */
-int FUN_0001c380(param_1, param_2, param_3, param_4, param_5, param_6)
-  int param_1;
-  int param_2;
-  int param_3;
-  int param_4;
-  undefined1 *param_5;
-  byte *param_6;
+/* dxtCompressImage @ 0x1c380 (3664 bytes) */
+int dxtCompressImage(width, height, sourceFormat, compressionCode, srcPixels, dstBlocks)
+  int width;
+  int height;
+  int sourceFormat;
+  int compressionCode;
+  undefined1 *srcPixels;
+  byte *dstBlocks;
 {
-  byte *pbVar1;
-  byte *pbVar2;
-  bool bVar3;
-  bool bVar4;
-  bool bVar5;
-  bool bVar6;
-  byte bVar7;
-  ushort uVar8;
-  ushort uVar9;
-  ushort uVar10;
-  ushort uVar11;
-  ushort uVar12;
-  ushort uVar13;
-  uint uVar14;
-  uint uVar15;
-  int iVar16;
-  ushort *puVar17;
-  uint uVar18;
-  uint uVar19;
-  uint uVar20;
-  uint uVar21;
-  byte bVar22;
-  byte bVar24;
-  byte *pbVar23;
-  int iVar25;
-  uint uVar26;
-  byte bVar27;
-  undefined1 *puVar28;
-  uint *puVar29;
-  byte bVar30;
-  byte bVar31;
-  int iVar32;
-  byte *pbVar33;
-  uint uVar34;
-  ushort *puVar35;
-  byte bVar36;
-  int iVar37;
-  int *piVar38;
-  byte *pbVar39;
-  uint uVar40;
-  byte *pbVar41;
-  int iVar42;
-  byte *pbVar43;
-  byte bVar45;
-  uint uVar44;
-  int iVar46;
-  int iVar47;
-  int iVar48;
-  int iVar49;
-  int iVar50;
-  byte *pbVar51;
+  byte *scratchPtr1;
+  byte *scratchPtr2;
+  bool scratchFlag3;
+  bool scratchFlag4;
+  bool scratchFlag5;
+  bool scratchFlag6;
+  byte scratchFlag7;
+  ushort scratchUint8;
+  ushort scratchUint9;
+  ushort scratchUint10;
+  ushort scratchUint11;
+  ushort scratchUint12;
+  ushort scratchUint13;
+  uint scratchUint14;
+  uint scratchUint15;
+  int scratchInt16;
+  ushort *scratchPtr17;
+  uint scratchUint18;
+  uint scratchUint19;
+  uint scratchUint20;
+  uint scratchUint21;
+  byte scratchFlag22;
+  byte scratchFlag24;
+  byte *scratchPtr23;
+  int scratchInt25;
+  uint scratchUint26;
+  byte scratchFlag27;
+  undefined1 *scratchPtr28;
+  uint *scratchPtr29;
+  byte scratchFlag30;
+  byte scratchFlag31;
+  int scratchInt32;
+  byte *scratchPtr33;
+  uint scratchUint34;
+  ushort *scratchPtr35;
+  byte scratchFlag36;
+  int scratchInt37;
+  int *scratchPtr38;
+  byte *scratchPtr39;
+  uint scratchUint40;
+  byte *scratchPtr41;
+  int scratchInt42;
+  byte *scratchPtr43;
+  byte scratchFlag45;
+  uint scratchUint44;
+  int scratchInt46;
+  int scratchInt47;
+  int scratchInt48;
+  int scratchInt49;
+  int scratchInt50;
+  byte *scratchPtr51;
   byte xerSummaryOverflow = 0;
-  int iVar52;
-  int iStack00000024;
-  byte local_508 [4];
-  byte local_504;
-  byte local_503;
-  byte local_502;
-  byte local_501;
-  byte local_500;
-  byte local_4ff;
-  byte local_4fe;
-  byte local_4fd;
-  byte local_4fc;
-  byte local_4fb;
-  byte local_4fa;
-  byte local_4f9;
-  byte local_4f8;
-  byte local_4f7;
-  undefined1 local_4f6;
-  undefined1 local_4f5;
-  undefined1 local_4f4;
-  undefined1 local_4f3;
-  undefined1 local_4f2;
-  undefined1 local_4f1;
-  int local_4f0 [4];
-  byte local_4e0 [16];
-  ushort local_4d0 [12];
-  byte local_4b8 [7];
-  byte local_4b1;
-  byte local_4ad;
-  byte local_4a9;
-  byte local_4a5;
-  byte local_4a1;
-  byte local_49d;
-  byte local_499;
-  byte local_495;
-  byte local_491;
-  byte local_48d;
-  byte local_489;
-  byte local_485;
-  byte local_481;
-  byte local_47d;
-  byte local_479;
-  uint auStack_478 [256];
-  int local_78;
-  int local_74;
-  int local_70;
-  int local_6c;
-  byte *local_68;
-  uint *local_64;
-  int local_60;
-  undefined1 *local_5c;
-  uint *local_58;
-  ushort *local_54;
+  int scratchInt52;
+  int scratchIncoming00000024;
+  byte scratchStack508 [4];
+  byte scratchStack504;
+  byte scratchStack503;
+  byte scratchStack502;
+  byte scratchStack501;
+  byte scratchStack500;
+  byte scratchStack4ff;
+  byte scratchStack4fe;
+  byte scratchStack4fd;
+  byte scratchStack4fc;
+  byte scratchStack4fb;
+  byte scratchStack4fa;
+  byte scratchStack4f9;
+  byte scratchStack4f8;
+  byte scratchStack4f7;
+  undefined1 scratchStack4f6;
+  undefined1 scratchStack4f5;
+  undefined1 scratchStack4f4;
+  undefined1 scratchStack4f3;
+  undefined1 scratchStack4f2;
+  undefined1 scratchStack4f1;
+  int scratchStack4f0 [4];
+  byte scratchStack4e0 [16];
+  ushort scratchStack4d0 [12];
+  byte scratchStack4b8 [7];
+  byte scratchStack4b1;
+  byte scratchStack4ad;
+  byte scratchStack4a9;
+  byte scratchStack4a5;
+  byte scratchStack4a1;
+  byte scratchStack49d;
+  byte scratchStack499;
+  byte scratchStack495;
+  byte scratchStack491;
+  byte scratchStack48d;
+  byte scratchStack489;
+  byte scratchStack485;
+  byte scratchStack481;
+  byte scratchStack47d;
+  byte scratchStack479;
+  uint scratchStackArr478 [256];
+  int scratchStack78;
+  int scratchStack74;
+  int scratchStack70;
+  int scratchStack6c;
+  byte *scratchStack68;
+  uint *scratchStack64;
+  int scratchStack60;
+  undefined1 *scratchStack5c;
+  uint *scratchStack58;
+  ushort *scratchStack54;
   
-  if (param_3 == 0x80e0) {
-    iVar46 = 2;
-    iVar47 = 3;
+  if (sourceFormat == 0x80e0) {
+    scratchInt46 = 2;
+    scratchInt47 = 3;
   }
-  else if (param_3 == 0x80e1) {
-    iVar46 = 2;
-    iVar47 = 4;
+  else if (sourceFormat == 0x80e1) {
+    scratchInt46 = 2;
+    scratchInt47 = 4;
   }
-  else if (param_3 == 0x1907) {
-    iVar46 = 0;
-    iVar47 = 3;
+  else if (sourceFormat == 0x1907) {
+    scratchInt46 = 0;
+    scratchInt47 = 3;
   }
   else {
-    iVar46 = 0;
-    iVar47 = 4;
+    scratchInt46 = 0;
+    scratchInt47 = 4;
   }
-  if ((param_1 + 3U < 7) || (param_2 + 3U < 7)) {
-    iVar48 = param_1;
-    if (param_1 < 4) {
-      iVar48 = 4;
+  if ((width + 3U < 7) || (height + 3U < 7)) {
+    scratchInt48 = width;
+    if (width < 4) {
+      scratchInt48 = 4;
     }
-    local_70 = param_2;
-    if (param_2 < 4) {
-      local_70 = 4;
+    scratchStack70 = height;
+    if (height < 4) {
+      scratchStack70 = 4;
     }
-    else if (param_2 < 1) {
+    else if (height < 1) {
       return;
     }
-    bVar3 = 0 < iVar48;
-    iVar50 = 0;
-    iVar49 = 0;
+    scratchFlag3 = 0 < scratchInt48;
+    scratchInt50 = 0;
+    scratchInt49 = 0;
     do {
-      if (bVar3) {
-        iVar25 = 0;
-        puVar28 = &DAT_001f65e7 + iVar49 * 4;
-        iVar52 = iVar48;
+      if (scratchFlag3) {
+        scratchInt25 = 0;
+        scratchPtr28 = &DAT_001f65e7 + scratchInt49 * 4;
+        scratchInt52 = scratchInt48;
         do {
-          iVar42 = iVar47 * (iVar25 + iVar49);
-          iVar32 = param_1 * (iVar50 - (iVar50 / param_2) * param_2) +
-                   (iVar25 - (iVar25 / param_1) * param_1);
-          iVar16 = iVar47 * iVar32;
-          (DAT_001f65e4)[iVar42] = param_5[iVar16];
-          (DAT_001f65e5)[iVar42] = param_5[iVar16 + 1];
-          (DAT_001f65e6)[iVar42] = param_5[iVar16 + 2];
-          if (iVar47 == 4) {
-            *puVar28 = param_5[iVar32 * 4 + 3];
+          scratchInt42 = scratchInt47 * (scratchInt25 + scratchInt49);
+          scratchInt32 = width * (scratchInt50 - (scratchInt50 / height) * height) +
+                   (scratchInt25 - (scratchInt25 / width) * width);
+          scratchInt16 = scratchInt47 * scratchInt32;
+          (DAT_001f65e4)[scratchInt42] = srcPixels[scratchInt16];
+          (DAT_001f65e5)[scratchInt42] = srcPixels[scratchInt16 + 1];
+          (DAT_001f65e6)[scratchInt42] = srcPixels[scratchInt16 + 2];
+          if (scratchInt47 == 4) {
+            *scratchPtr28 = srcPixels[scratchInt32 * 4 + 3];
           }
-          iVar25 = iVar25 + 1;
-          puVar28 = puVar28 + 4;
-          iVar52 = iVar52 + -1;
-        } while (iVar52 != 0);
+          scratchInt25 = scratchInt25 + 1;
+          scratchPtr28 = scratchPtr28 + 4;
+          scratchInt52 = scratchInt52 + -1;
+        } while (scratchInt52 != 0);
       }
-      iVar50 = iVar50 + 1;
-      iVar49 = iVar49 + iVar48;
-    } while (local_70 != iVar50);
-    param_5 = DAT_001f65e4;
-    param_1 = iVar48;
+      scratchInt50 = scratchInt50 + 1;
+      scratchInt49 = scratchInt49 + scratchInt48;
+    } while (scratchStack70 != scratchInt50);
+    srcPixels = DAT_001f65e4;
+    width = scratchInt48;
   }
   else {
-    if (param_2 < 1) {
+    if (height < 1) {
       return;
     }
-    local_70 = param_2;
-    bVar3 = 0 < param_1;
+    scratchStack70 = height;
+    scratchFlag3 = 0 < width;
   }
-  bVar4 = iVar47 != 4;
-  local_68 = &local_500;
-  local_5c = param_5 + iVar46;
-  local_58 = auStack_478;
-  local_54 = local_4d0;
-  local_60 = (uint)(byte)((param_4 < 0xc) << 3 | (0xc < param_4) << 2 | (param_4 == 0xc) << 1 |
+  scratchFlag4 = scratchInt47 != 4;
+  scratchStack68 = &scratchStack500;
+  scratchStack5c = srcPixels + scratchInt46;
+  scratchStack58 = scratchStackArr478;
+  scratchStack54 = scratchStack4d0;
+  scratchStack60 = (uint)(byte)((compressionCode < 0xc) << 3 | (0xc < compressionCode) << 2 | (compressionCode == 0xc) << 1 |
                          xerSummaryOverflow & 1) << 0x1c;
-  local_78 = 0;
-  iStack00000024 = param_4;
+  scratchStack78 = 0;
+  scratchIncoming00000024 = compressionCode;
   do {
-    param_6 = (byte *)((uint)(param_6 + 0x1f) & 0xffffffe0);
-    if (bVar3) {
-      local_74 = 0;
-      local_64 = auStack_478;
-      local_6c = 0x55555556;
+    dstBlocks = (byte *)((uint)(dstBlocks + 0x1f) & 0xffffffe0);
+    if (scratchFlag3) {
+      scratchStack74 = 0;
+      scratchStack64 = scratchStackArr478;
+      scratchStack6c = 0x55555556;
       do {
-        if ((bool)((byte)((uint)local_60 >> 0x1d) & 1)) {
-          if (bVar4) {
+        if ((bool)((byte)((uint)scratchStack60 >> 0x1d) & 1)) {
+          if (scratchFlag4) {
 LAB_0001c6fc:
-            iVar48 = 0;
+            scratchInt48 = 0;
             do {
-              iVar50 = 0;
-              iVar52 = 4;
-              pbVar33 = local_4b8 + iVar48 * 0x10;
-              iVar49 = local_74 + param_1 * (iVar48 + local_78);
+              scratchInt50 = 0;
+              scratchInt52 = 4;
+              scratchPtr33 = scratchStack4b8 + scratchInt48 * 0x10;
+              scratchInt49 = scratchStack74 + width * (scratchInt48 + scratchStack78);
               do {
-                iVar25 = iVar50 + iVar49;
-                iVar50 = iVar50 + 1;
-                iVar25 = iVar47 * iVar25;
-                *pbVar33 = local_5c[iVar25];
-                pbVar33[1] = param_5[iVar25 + 1];
-                pbVar33[2] = param_5[(iVar25 - iVar46) + 2];
-                pbVar33[3] = 0xff;
-                pbVar33 = pbVar33 + 4;
-                iVar52 = iVar52 + -1;
-              } while (iVar52 != 0);
-              bVar6 = iVar48 != 3;
-              iVar48 = iVar48 + 1;
-            } while (bVar6);
+                scratchInt25 = scratchInt50 + scratchInt49;
+                scratchInt50 = scratchInt50 + 1;
+                scratchInt25 = scratchInt47 * scratchInt25;
+                *scratchPtr33 = scratchStack5c[scratchInt25];
+                scratchPtr33[1] = srcPixels[scratchInt25 + 1];
+                scratchPtr33[2] = srcPixels[(scratchInt25 - scratchInt46) + 2];
+                scratchPtr33[3] = 0xff;
+                scratchPtr33 = scratchPtr33 + 4;
+                scratchInt52 = scratchInt52 + -1;
+              } while (scratchInt52 != 0);
+              scratchFlag6 = scratchInt48 != 3;
+              scratchInt48 = scratchInt48 + 1;
+            } while (scratchFlag6);
             goto LAB_0001c78c;
           }
-          bVar6 = false;
-          iVar48 = 0;
+          scratchFlag6 = false;
+          scratchInt48 = 0;
           do {
-            iVar50 = 4;
-            pbVar43 = local_4b8 + iVar48 * 0x10;
-            iVar49 = (local_74 + param_1 * (iVar48 + local_78)) * 4;
-            pbVar33 = param_5 + iVar46 + iVar49;
-            puVar28 = param_5 + iVar49;
-            pbVar39 = param_5 + (iVar49 - iVar46) + 2;
+            scratchInt50 = 4;
+            scratchPtr43 = scratchStack4b8 + scratchInt48 * 0x10;
+            scratchInt49 = (scratchStack74 + width * (scratchInt48 + scratchStack78)) * 4;
+            scratchPtr33 = srcPixels + scratchInt46 + scratchInt49;
+            scratchPtr28 = srcPixels + scratchInt49;
+            scratchPtr39 = srcPixels + (scratchInt49 - scratchInt46) + 2;
             do {
-              *pbVar43 = *pbVar33;
-              pbVar43[1] = puVar28[1];
-              pbVar43[2] = *pbVar39;
-              bVar7 = puVar28[3];
-              pbVar43[3] = bVar7;
-              if (bVar7 < 0x7f) {
-                bVar6 = true;
+              *scratchPtr43 = *scratchPtr33;
+              scratchPtr43[1] = scratchPtr28[1];
+              scratchPtr43[2] = *scratchPtr39;
+              scratchFlag7 = scratchPtr28[3];
+              scratchPtr43[3] = scratchFlag7;
+              if (scratchFlag7 < 0x7f) {
+                scratchFlag6 = true;
               }
-              pbVar33 = pbVar33 + 4;
-              pbVar43 = pbVar43 + 4;
-              puVar28 = puVar28 + 4;
-              pbVar39 = pbVar39 + 4;
-              iVar50 = iVar50 + -1;
-            } while (iVar50 != 0);
-            bVar5 = iVar48 != 3;
-            iVar48 = iVar48 + 1;
-          } while (bVar5);
+              scratchPtr33 = scratchPtr33 + 4;
+              scratchPtr43 = scratchPtr43 + 4;
+              scratchPtr28 = scratchPtr28 + 4;
+              scratchPtr39 = scratchPtr39 + 4;
+              scratchInt50 = scratchInt50 + -1;
+            } while (scratchInt50 != 0);
+            scratchFlag5 = scratchInt48 != 3;
+            scratchInt48 = scratchInt48 + 1;
+          } while (scratchFlag5);
         }
         else {
-          if (bVar4) goto LAB_0001c6fc;
-          iVar48 = 0;
+          if (scratchFlag4) goto LAB_0001c6fc;
+          scratchInt48 = 0;
           do {
-            iVar50 = 4;
-            pbVar43 = local_4b8 + iVar48 * 0x10;
-            iVar49 = (local_74 + param_1 * (iVar48 + local_78)) * 4;
-            pbVar33 = param_5 + iVar46 + iVar49;
-            puVar28 = param_5 + iVar49;
-            pbVar39 = param_5 + (iVar49 - iVar46) + 2;
+            scratchInt50 = 4;
+            scratchPtr43 = scratchStack4b8 + scratchInt48 * 0x10;
+            scratchInt49 = (scratchStack74 + width * (scratchInt48 + scratchStack78)) * 4;
+            scratchPtr33 = srcPixels + scratchInt46 + scratchInt49;
+            scratchPtr28 = srcPixels + scratchInt49;
+            scratchPtr39 = srcPixels + (scratchInt49 - scratchInt46) + 2;
             do {
-              bVar7 = *pbVar33;
-              pbVar33 = pbVar33 + 4;
-              *pbVar43 = bVar7;
-              pbVar43[1] = puVar28[1];
-              bVar7 = *pbVar39;
-              pbVar39 = pbVar39 + 4;
-              pbVar43[2] = bVar7;
-              pbVar51 = puVar28 + 3;
-              puVar28 = puVar28 + 4;
-              pbVar43[3] = *pbVar51;
-              pbVar43 = pbVar43 + 4;
-              iVar50 = iVar50 + -1;
-            } while (iVar50 != 0);
-            bVar6 = iVar48 != 3;
-            iVar48 = iVar48 + 1;
-          } while (bVar6);
+              scratchFlag7 = *scratchPtr33;
+              scratchPtr33 = scratchPtr33 + 4;
+              *scratchPtr43 = scratchFlag7;
+              scratchPtr43[1] = scratchPtr28[1];
+              scratchFlag7 = *scratchPtr39;
+              scratchPtr39 = scratchPtr39 + 4;
+              scratchPtr43[2] = scratchFlag7;
+              scratchPtr51 = scratchPtr28 + 3;
+              scratchPtr28 = scratchPtr28 + 4;
+              scratchPtr43[3] = *scratchPtr51;
+              scratchPtr43 = scratchPtr43 + 4;
+              scratchInt50 = scratchInt50 + -1;
+            } while (scratchInt50 != 0);
+            scratchFlag6 = scratchInt48 != 3;
+            scratchInt48 = scratchInt48 + 1;
+          } while (scratchFlag6);
 LAB_0001c78c:
-          bVar6 = false;
+          scratchFlag6 = false;
         }
-        iVar48 = 0;
-        while (iVar49 = iVar48 + 1, iVar48 != 0xf) {
-          iVar50 = iVar48 * 4;
-          puVar29 = local_58 + iVar48 * 0x10 + iVar49;
-          iVar52 = 0x10 - iVar49;
-          bVar7 = local_4b8[iVar50 + 2];
-          bVar22 = local_4b8[iVar50];
-          bVar24 = local_4b8[iVar50 + 1];
-          iVar50 = iVar49;
-          if (0x10 < iVar48 + 2) {
-            iVar52 = 1;
+        scratchInt48 = 0;
+        while (scratchInt49 = scratchInt48 + 1, scratchInt48 != 0xf) {
+          scratchInt50 = scratchInt48 * 4;
+          scratchPtr29 = scratchStack58 + scratchInt48 * 0x10 + scratchInt49;
+          scratchInt52 = 0x10 - scratchInt49;
+          scratchFlag7 = scratchStack4b8[scratchInt50 + 2];
+          scratchFlag22 = scratchStack4b8[scratchInt50];
+          scratchFlag24 = scratchStack4b8[scratchInt50 + 1];
+          scratchInt50 = scratchInt49;
+          if (0x10 < scratchInt48 + 2) {
+            scratchInt52 = 1;
           }
           do {
-            iVar48 = iVar50 * 4;
-            iVar50 = iVar50 + 1;
-            uVar8 = (ushort)((int)((uint)local_4b8[iVar48] - (uint)bVar22) >> 0x1f);
-            uVar9 = (ushort)((int)((uint)local_4b8[iVar48 + 1] - (uint)bVar24) >> 0x1f);
-            uVar10 = (ushort)((int)((uint)local_4b8[iVar48 + 2] - (uint)bVar7) >> 0x1f);
-            *puVar29 = (int)(short)((uVar8 ^ (ushort)((uint)local_4b8[iVar48] - (uint)bVar22)) -
-                                   uVar8) +
-                       (int)(short)((uVar9 ^ (ushort)((uint)local_4b8[iVar48 + 1] - (uint)bVar24)) -
-                                   uVar9) +
-                       (int)(short)((uVar10 ^ (ushort)((uint)local_4b8[iVar48 + 2] - (uint)bVar7)) -
-                                   uVar10);
-            puVar29 = puVar29 + 1;
-            iVar52 = iVar52 + -1;
-            iVar48 = iVar49;
-          } while (iVar52 != 0);
+            scratchInt48 = scratchInt50 * 4;
+            scratchInt50 = scratchInt50 + 1;
+            scratchUint8 = (ushort)((int)((uint)scratchStack4b8[scratchInt48] - (uint)scratchFlag22) >> 0x1f);
+            scratchUint9 = (ushort)((int)((uint)scratchStack4b8[scratchInt48 + 1] - (uint)scratchFlag24) >> 0x1f);
+            scratchUint10 = (ushort)((int)((uint)scratchStack4b8[scratchInt48 + 2] - (uint)scratchFlag7) >> 0x1f);
+            *scratchPtr29 = (int)(short)((scratchUint8 ^ (ushort)((uint)scratchStack4b8[scratchInt48] - (uint)scratchFlag22)) -
+                                   scratchUint8) +
+                       (int)(short)((scratchUint9 ^ (ushort)((uint)scratchStack4b8[scratchInt48 + 1] - (uint)scratchFlag24)) -
+                                   scratchUint9) +
+                       (int)(short)((scratchUint10 ^ (ushort)((uint)scratchStack4b8[scratchInt48 + 2] - (uint)scratchFlag7)) -
+                                   scratchUint10);
+            scratchPtr29 = scratchPtr29 + 1;
+            scratchInt52 = scratchInt52 + -1;
+            scratchInt48 = scratchInt49;
+          } while (scratchInt52 != 0);
         }
-        bVar5 = !bVar6;
-        uVar26 = 0;
+        scratchFlag5 = !scratchFlag6;
+        scratchUint26 = 0;
         do {
-          iVar48 = 0;
-          iVar49 = 0x10;
+          scratchInt48 = 0;
+          scratchInt49 = 0x10;
           do {
-            local_4e0[iVar48] = (byte)iVar48;
-            iVar48 = iVar48 + 1;
-            iVar49 = iVar49 + -1;
-          } while (iVar49 != 0);
-          iVar48 = 0x10;
-          uVar34 = 0;
+            scratchStack4e0[scratchInt48] = (byte)scratchInt48;
+            scratchInt48 = scratchInt48 + 1;
+            scratchInt49 = scratchInt49 + -1;
+          } while (scratchInt49 != 0);
+          scratchInt48 = 0x10;
+          scratchUint34 = 0;
           do {
-            bVar7 = local_4e0[uVar34];
-            uVar40 = uVar34 + 1;
-            if ((bVar7 == uVar34) && ((int)uVar40 < 0x10)) {
-              iVar49 = 0x10 - uVar40;
-              pbVar33 = local_4e0 + uVar34 + 1;
-              puVar29 = local_64 + uVar34 * 0x10 + uVar40;
-              uVar34 = uVar40;
+            scratchFlag7 = scratchStack4e0[scratchUint34];
+            scratchUint40 = scratchUint34 + 1;
+            if ((scratchFlag7 == scratchUint34) && ((int)scratchUint40 < 0x10)) {
+              scratchInt49 = 0x10 - scratchUint40;
+              scratchPtr33 = scratchStack4e0 + scratchUint34 + 1;
+              scratchPtr29 = scratchStack64 + scratchUint34 * 0x10 + scratchUint40;
+              scratchUint34 = scratchUint40;
               do {
-                if (*puVar29 < uVar26) {
-                  if (uVar34 == *pbVar33) {
-                    iVar48 = iVar48 + -1;
-                    *pbVar33 = bVar7;
+                if (*scratchPtr29 < scratchUint26) {
+                  if (scratchUint34 == *scratchPtr33) {
+                    scratchInt48 = scratchInt48 + -1;
+                    *scratchPtr33 = scratchFlag7;
                   }
-                  else if (*puVar29 < auStack_478[(uint)*pbVar33 * 0x10 + uVar34]) {
-                    *pbVar33 = bVar7;
+                  else if (*scratchPtr29 < scratchStackArr478[(uint)*scratchPtr33 * 0x10 + scratchUint34]) {
+                    *scratchPtr33 = scratchFlag7;
                   }
                 }
-                uVar34 = uVar34 + 1;
-                puVar29 = puVar29 + 1;
-                pbVar33 = pbVar33 + 1;
-                iVar49 = iVar49 + -1;
-              } while (iVar49 != 0);
+                scratchUint34 = scratchUint34 + 1;
+                scratchPtr29 = scratchPtr29 + 1;
+                scratchPtr33 = scratchPtr33 + 1;
+                scratchInt49 = scratchInt49 + -1;
+              } while (scratchInt49 != 0);
             }
-            uVar34 = uVar40;
-          } while (uVar40 != 0x10);
-          uVar26 = uVar26 + 4;
-        } while ((int)(bVar5 + 3) < iVar48);
-        if (iVar48 < 1) {
-          iVar25 = 0;
-          iVar49 = 0;
+            scratchUint34 = scratchUint40;
+          } while (scratchUint40 != 0x10);
+          scratchUint26 = scratchUint26 + 4;
+        } while ((int)(scratchFlag5 + 3) < scratchInt48);
+        if (scratchInt48 < 1) {
+          scratchInt25 = 0;
+          scratchInt49 = 0;
         }
         else {
-          iVar50 = 0;
-          puVar17 = local_54;
-          iVar49 = iVar48;
+          scratchInt50 = 0;
+          scratchPtr17 = scratchStack54;
+          scratchInt49 = scratchInt48;
           do {
-            *puVar17 = 0;
-            local_508[iVar50] = 0;
-            iVar50 = iVar50 + 1;
-            puVar17[1] = 0;
-            puVar17[2] = 0;
-            puVar17 = puVar17 + 3;
-            iVar49 = iVar49 + -1;
-          } while (iVar49 != 0);
-          iVar49 = 0;
-          uVar26 = 0xffffffff;
-          puVar17 = local_54;
+            *scratchPtr17 = 0;
+            scratchStack508[scratchInt50] = 0;
+            scratchInt50 = scratchInt50 + 1;
+            scratchPtr17[1] = 0;
+            scratchPtr17[2] = 0;
+            scratchPtr17 = scratchPtr17 + 3;
+            scratchInt49 = scratchInt49 + -1;
+          } while (scratchInt49 != 0);
+          scratchInt49 = 0;
+          scratchUint26 = 0xffffffff;
+          scratchPtr17 = scratchStack54;
           do {
-            iVar50 = 0;
-            pbVar33 = local_4e0;
-            iVar52 = 0x10;
+            scratchInt50 = 0;
+            scratchPtr33 = scratchStack4e0;
+            scratchInt52 = 0x10;
             do {
-              if ((int)uVar26 < (int)(uint)local_4e0[iVar50]) {
-                uVar26 = (uint)*pbVar33;
+              if ((int)scratchUint26 < (int)(uint)scratchStack4e0[scratchInt50]) {
+                scratchUint26 = (uint)*scratchPtr33;
                 break;
               }
-              iVar50 = iVar50 + 1;
-              pbVar33 = pbVar33 + 1;
-              iVar52 = iVar52 + -1;
-            } while (iVar52 != 0);
-            if ((int)uVar26 < 0x10) {
-              iVar50 = 0x10 - uVar26;
-              pbVar33 = local_4e0 + uVar26;
-              uVar34 = uVar26;
+              scratchInt50 = scratchInt50 + 1;
+              scratchPtr33 = scratchPtr33 + 1;
+              scratchInt52 = scratchInt52 + -1;
+            } while (scratchInt52 != 0);
+            if ((int)scratchUint26 < 0x10) {
+              scratchInt50 = 0x10 - scratchUint26;
+              scratchPtr33 = scratchStack4e0 + scratchUint26;
+              scratchUint34 = scratchUint26;
               do {
-                if (uVar26 == *pbVar33) {
-                  iVar52 = uVar34 * 4;
-                  uVar8 = *puVar17;
-                  bVar27 = local_508[iVar49];
-                  *pbVar33 = (byte)iVar49;
-                  bVar7 = local_4b8[iVar52];
-                  bVar22 = local_4b8[iVar52 + 1];
-                  bVar24 = local_4b8[iVar52 + 2];
-                  local_508[iVar49] = bVar27 + 1;
-                  *puVar17 = bVar7 + uVar8;
-                  puVar17[1] = (ushort)bVar22 + puVar17[1];
-                  puVar17[2] = (ushort)bVar24 + puVar17[2];
+                if (scratchUint26 == *scratchPtr33) {
+                  scratchInt52 = scratchUint34 * 4;
+                  scratchUint8 = *scratchPtr17;
+                  scratchFlag27 = scratchStack508[scratchInt49];
+                  *scratchPtr33 = (byte)scratchInt49;
+                  scratchFlag7 = scratchStack4b8[scratchInt52];
+                  scratchFlag22 = scratchStack4b8[scratchInt52 + 1];
+                  scratchFlag24 = scratchStack4b8[scratchInt52 + 2];
+                  scratchStack508[scratchInt49] = scratchFlag27 + 1;
+                  *scratchPtr17 = scratchFlag7 + scratchUint8;
+                  scratchPtr17[1] = (ushort)scratchFlag22 + scratchPtr17[1];
+                  scratchPtr17[2] = (ushort)scratchFlag24 + scratchPtr17[2];
                 }
-                uVar34 = uVar34 + 1;
-                pbVar33 = pbVar33 + 1;
-                iVar50 = iVar50 + -1;
-              } while (iVar50 != 0);
+                scratchUint34 = scratchUint34 + 1;
+                scratchPtr33 = scratchPtr33 + 1;
+                scratchInt50 = scratchInt50 + -1;
+              } while (scratchInt50 != 0);
             }
-            bVar7 = local_508[iVar49];
-            iVar49 = iVar49 + 1;
-            *puVar17 = *puVar17 / (ushort)bVar7;
-            puVar17[1] = puVar17[1] / (ushort)bVar7;
-            puVar17[2] = puVar17[2] / (ushort)bVar7;
-            puVar17 = puVar17 + 3;
-          } while (iVar48 != iVar49);
-          iVar50 = 0;
-          iVar49 = 0;
-          iVar25 = 0;
-          puVar17 = local_54;
-          iVar52 = 0;
+            scratchFlag7 = scratchStack508[scratchInt49];
+            scratchInt49 = scratchInt49 + 1;
+            *scratchPtr17 = *scratchPtr17 / (ushort)scratchFlag7;
+            scratchPtr17[1] = scratchPtr17[1] / (ushort)scratchFlag7;
+            scratchPtr17[2] = scratchPtr17[2] / (ushort)scratchFlag7;
+            scratchPtr17 = scratchPtr17 + 3;
+          } while (scratchInt48 != scratchInt49);
+          scratchInt50 = 0;
+          scratchInt49 = 0;
+          scratchInt25 = 0;
+          scratchPtr17 = scratchStack54;
+          scratchInt52 = 0;
           do {
-            iVar16 = iVar52 + 1;
-            if (iVar16 < iVar48) {
-              iVar42 = iVar48 - iVar16;
-              puVar35 = local_54 + iVar16 * 3;
-              iVar32 = iVar16;
+            scratchInt16 = scratchInt52 + 1;
+            if (scratchInt16 < scratchInt48) {
+              scratchInt42 = scratchInt48 - scratchInt16;
+              scratchPtr35 = scratchStack54 + scratchInt16 * 3;
+              scratchInt32 = scratchInt16;
               do {
-                uVar8 = (short)(*puVar17 - *puVar35) >> 0xf;
-                uVar9 = (short)(puVar17[1] - puVar35[1]) >> 0xf;
-                uVar10 = (short)(puVar17[2] - puVar35[2]) >> 0xf;
-                iVar37 = (int)(short)((uVar8 ^ *puVar17 - *puVar35) - uVar8) +
-                         (int)(short)((uVar9 ^ puVar17[1] - puVar35[1]) - uVar9) +
-                         (int)(short)((uVar10 ^ puVar17[2] - puVar35[2]) - uVar10);
-                if (iVar50 < iVar37) {
-                  iVar49 = iVar52;
-                  iVar50 = iVar37;
-                  iVar25 = iVar32;
+                scratchUint8 = (short)(*scratchPtr17 - *scratchPtr35) >> 0xf;
+                scratchUint9 = (short)(scratchPtr17[1] - scratchPtr35[1]) >> 0xf;
+                scratchUint10 = (short)(scratchPtr17[2] - scratchPtr35[2]) >> 0xf;
+                scratchInt37 = (int)(short)((scratchUint8 ^ *scratchPtr17 - *scratchPtr35) - scratchUint8) +
+                         (int)(short)((scratchUint9 ^ scratchPtr17[1] - scratchPtr35[1]) - scratchUint9) +
+                         (int)(short)((scratchUint10 ^ scratchPtr17[2] - scratchPtr35[2]) - scratchUint10);
+                if (scratchInt50 < scratchInt37) {
+                  scratchInt49 = scratchInt52;
+                  scratchInt50 = scratchInt37;
+                  scratchInt25 = scratchInt32;
                 }
-                iVar32 = iVar32 + 1;
-                puVar35 = puVar35 + 3;
-                iVar42 = iVar42 + -1;
-              } while (iVar42 != 0);
+                scratchInt32 = scratchInt32 + 1;
+                scratchPtr35 = scratchPtr35 + 3;
+                scratchInt42 = scratchInt42 + -1;
+              } while (scratchInt42 != 0);
             }
-            puVar17 = puVar17 + 3;
-            iVar52 = iVar16;
-          } while (iVar48 != iVar16);
+            scratchPtr17 = scratchPtr17 + 3;
+            scratchInt52 = scratchInt16;
+          } while (scratchInt48 != scratchInt16);
         }
-        uVar8 = local_4d0[iVar49 * 3];
-        uVar9 = local_4d0[iVar25 * 3];
-        uVar10 = local_4d0[iVar49 * 3 + 2];
-        uVar11 = local_4d0[iVar49 * 3 + 1];
-        uVar12 = local_4d0[iVar25 * 3 + 2];
-        uVar13 = local_4d0[iVar25 * 3 + 1];
-        uVar40 = uVar8 & 0xf8;
-        uVar26 = uVar10 & 0xf8;
-        uVar34 = uVar11 & 0xfc;
-        uVar20 = uVar9 & 0xf8;
-        if ((uVar40 == (uVar9 & 0xf8)) && (uVar20 = uVar40, uVar8 != uVar9)) {
-          if (uVar9 < uVar8) {
-            if (uVar40 < 0xf8) {
-              uVar40 = uVar40 + 8 & 0xf8;
-            }
-          }
-          else if (uVar40 < 0xf8) {
-            uVar20 = uVar40 + 8 & 0xff;
-          }
-        }
-        uVar44 = uVar13 & 0xfc;
-        if ((uVar34 == (uVar13 & 0xfc)) && (uVar44 = uVar34, uVar11 != uVar13)) {
-          if (uVar13 < uVar11) {
-            if (uVar34 < 0xfc) {
-              uVar34 = uVar34 + 4 & 0xff;
+        scratchUint8 = scratchStack4d0[scratchInt49 * 3];
+        scratchUint9 = scratchStack4d0[scratchInt25 * 3];
+        scratchUint10 = scratchStack4d0[scratchInt49 * 3 + 2];
+        scratchUint11 = scratchStack4d0[scratchInt49 * 3 + 1];
+        scratchUint12 = scratchStack4d0[scratchInt25 * 3 + 2];
+        scratchUint13 = scratchStack4d0[scratchInt25 * 3 + 1];
+        scratchUint40 = scratchUint8 & 0xf8;
+        scratchUint26 = scratchUint10 & 0xf8;
+        scratchUint34 = scratchUint11 & 0xfc;
+        scratchUint20 = scratchUint9 & 0xf8;
+        if ((scratchUint40 == (scratchUint9 & 0xf8)) && (scratchUint20 = scratchUint40, scratchUint8 != scratchUint9)) {
+          if (scratchUint9 < scratchUint8) {
+            if (scratchUint40 < 0xf8) {
+              scratchUint40 = scratchUint40 + 8 & 0xf8;
             }
           }
-          else if (uVar34 < 0xfc) {
-            uVar44 = uVar34 + 4 & 0xff;
+          else if (scratchUint40 < 0xf8) {
+            scratchUint20 = scratchUint40 + 8 & 0xff;
           }
         }
-        uVar21 = uVar12 & 0xf8;
-        if ((uVar26 == (uVar12 & 0xf8)) && (uVar21 = uVar26, uVar10 != uVar12)) {
-          if (uVar12 < uVar10) {
-            if (uVar26 < 0xf8) {
-              uVar26 = uVar26 + 8 & 0xff;
+        scratchUint44 = scratchUint13 & 0xfc;
+        if ((scratchUint34 == (scratchUint13 & 0xfc)) && (scratchUint44 = scratchUint34, scratchUint11 != scratchUint13)) {
+          if (scratchUint13 < scratchUint11) {
+            if (scratchUint34 < 0xfc) {
+              scratchUint34 = scratchUint34 + 4 & 0xff;
             }
           }
-          else if (uVar26 < 0xf8) {
-            uVar21 = uVar26 + 8 & 0xff;
+          else if (scratchUint34 < 0xfc) {
+            scratchUint44 = scratchUint34 + 4 & 0xff;
           }
         }
-        uVar18 = uVar40 << 8 | uVar34 << 3;
-        uVar15 = uVar20 << 8 | uVar44 << 3;
-        uVar19 = uVar18 | uVar26 >> 3;
-        uVar14 = uVar15 | uVar21 >> 3;
-        bVar30 = (byte)uVar40;
-        bVar27 = (byte)uVar34;
-        bVar24 = (byte)uVar26;
-        bVar36 = (byte)uVar20;
-        bVar31 = (byte)uVar44;
-        bVar22 = (byte)uVar21;
-        bVar45 = (byte)uVar19;
-        local_502 = (byte)uVar14;
-        bVar7 = (byte)(uVar18 >> 8);
-        local_501 = (byte)(uVar15 >> 8);
-        if (bVar5) {
-          if (uVar14 < uVar19) {
-            local_4fc = bVar30;
-            local_4fb = bVar27;
-            local_4fa = bVar24;
-            local_4f9 = bVar36;
-            local_503 = bVar7;
-            local_4f8 = bVar31;
-            local_4f7 = bVar22;
-            local_504 = bVar45;
+        scratchUint21 = scratchUint12 & 0xf8;
+        if ((scratchUint26 == (scratchUint12 & 0xf8)) && (scratchUint21 = scratchUint26, scratchUint10 != scratchUint12)) {
+          if (scratchUint12 < scratchUint10) {
+            if (scratchUint26 < 0xf8) {
+              scratchUint26 = scratchUint26 + 8 & 0xff;
+            }
+          }
+          else if (scratchUint26 < 0xf8) {
+            scratchUint21 = scratchUint26 + 8 & 0xff;
+          }
+        }
+        scratchUint18 = scratchUint40 << 8 | scratchUint34 << 3;
+        scratchUint15 = scratchUint20 << 8 | scratchUint44 << 3;
+        scratchUint19 = scratchUint18 | scratchUint26 >> 3;
+        scratchUint14 = scratchUint15 | scratchUint21 >> 3;
+        scratchFlag30 = (byte)scratchUint40;
+        scratchFlag27 = (byte)scratchUint34;
+        scratchFlag24 = (byte)scratchUint26;
+        scratchFlag36 = (byte)scratchUint20;
+        scratchFlag31 = (byte)scratchUint44;
+        scratchFlag22 = (byte)scratchUint21;
+        scratchFlag45 = (byte)scratchUint19;
+        scratchStack502 = (byte)scratchUint14;
+        scratchFlag7 = (byte)(scratchUint18 >> 8);
+        scratchStack501 = (byte)(scratchUint15 >> 8);
+        if (scratchFlag5) {
+          if (scratchUint14 < scratchUint19) {
+            scratchStack4fc = scratchFlag30;
+            scratchStack4fb = scratchFlag27;
+            scratchStack4fa = scratchFlag24;
+            scratchStack4f9 = scratchFlag36;
+            scratchStack503 = scratchFlag7;
+            scratchStack4f8 = scratchFlag31;
+            scratchStack4f7 = scratchFlag22;
+            scratchStack504 = scratchFlag45;
           }
           else {
-            local_4f9 = bVar30;
-            local_4f8 = bVar27;
-            local_4f7 = bVar24;
-            local_4fc = bVar36;
-            local_503 = local_501;
-            local_501 = bVar7;
-            local_4fb = bVar31;
-            local_4fa = bVar22;
-            local_504 = local_502;
-            local_502 = bVar45;
+            scratchStack4f9 = scratchFlag30;
+            scratchStack4f8 = scratchFlag27;
+            scratchStack4f7 = scratchFlag24;
+            scratchStack4fc = scratchFlag36;
+            scratchStack503 = scratchStack501;
+            scratchStack501 = scratchFlag7;
+            scratchStack4fb = scratchFlag31;
+            scratchStack4fa = scratchFlag22;
+            scratchStack504 = scratchStack502;
+            scratchStack502 = scratchFlag45;
           }
-          local_4f6 = (char)((ulonglong)
-                             ((longlong)(int)((uint)local_4fc * 2 + (uint)local_4f9) *
-                             (longlong)local_6c) >> 0x20);
-          local_4f5 = (char)((ulonglong)
-                             ((longlong)(int)((uint)local_4fb * 2 + (uint)local_4f8) *
-                             (longlong)local_6c) >> 0x20);
-          local_4f4 = (char)((ulonglong)
-                             ((longlong)(int)((uint)local_4fa * 2 + (uint)local_4f7) *
-                             (longlong)local_6c) >> 0x20);
-          local_4f3 = (char)((ulonglong)
-                             ((longlong)(int)((uint)local_4fc + (uint)local_4f9 * 2) *
-                             (longlong)local_6c) >> 0x20);
-          local_4f2 = (char)((ulonglong)
-                             ((longlong)(int)((uint)local_4fb + (uint)local_4f8 * 2) *
-                             (longlong)local_6c) >> 0x20);
-          local_4f1 = (char)((ulonglong)
-                             ((longlong)(int)((uint)local_4fa + (uint)local_4f7 * 2) *
-                             (longlong)local_6c) >> 0x20);
+          scratchStack4f6 = (char)((ulonglong)
+                             ((longlong)(int)((uint)scratchStack4fc * 2 + (uint)scratchStack4f9) *
+                             (longlong)scratchStack6c) >> 0x20);
+          scratchStack4f5 = (char)((ulonglong)
+                             ((longlong)(int)((uint)scratchStack4fb * 2 + (uint)scratchStack4f8) *
+                             (longlong)scratchStack6c) >> 0x20);
+          scratchStack4f4 = (char)((ulonglong)
+                             ((longlong)(int)((uint)scratchStack4fa * 2 + (uint)scratchStack4f7) *
+                             (longlong)scratchStack6c) >> 0x20);
+          scratchStack4f3 = (char)((ulonglong)
+                             ((longlong)(int)((uint)scratchStack4fc + (uint)scratchStack4f9 * 2) *
+                             (longlong)scratchStack6c) >> 0x20);
+          scratchStack4f2 = (char)((ulonglong)
+                             ((longlong)(int)((uint)scratchStack4fb + (uint)scratchStack4f8 * 2) *
+                             (longlong)scratchStack6c) >> 0x20);
+          scratchStack4f1 = (char)((ulonglong)
+                             ((longlong)(int)((uint)scratchStack4fa + (uint)scratchStack4f7 * 2) *
+                             (longlong)scratchStack6c) >> 0x20);
         }
         else {
-          if (uVar14 < uVar19) {
-            local_4fc = bVar36;
-            local_4fb = bVar31;
-            local_4fa = bVar22;
-            local_4f9 = bVar30;
-            local_503 = local_501;
-            local_501 = bVar7;
-            local_4f8 = bVar27;
-            local_4f7 = bVar24;
-            local_504 = local_502;
-            local_502 = bVar45;
+          if (scratchUint14 < scratchUint19) {
+            scratchStack4fc = scratchFlag36;
+            scratchStack4fb = scratchFlag31;
+            scratchStack4fa = scratchFlag22;
+            scratchStack4f9 = scratchFlag30;
+            scratchStack503 = scratchStack501;
+            scratchStack501 = scratchFlag7;
+            scratchStack4f8 = scratchFlag27;
+            scratchStack4f7 = scratchFlag24;
+            scratchStack504 = scratchStack502;
+            scratchStack502 = scratchFlag45;
           }
           else {
-            local_4f9 = bVar36;
-            local_4f8 = bVar31;
-            local_4f7 = bVar22;
-            local_4fc = bVar30;
-            local_503 = bVar7;
-            local_4fb = bVar27;
-            local_4fa = bVar24;
-            local_504 = bVar45;
+            scratchStack4f9 = scratchFlag36;
+            scratchStack4f8 = scratchFlag31;
+            scratchStack4f7 = scratchFlag22;
+            scratchStack4fc = scratchFlag30;
+            scratchStack503 = scratchFlag7;
+            scratchStack4fb = scratchFlag27;
+            scratchStack4fa = scratchFlag24;
+            scratchStack504 = scratchFlag45;
           }
-          local_4f6 = (char)((int)((uint)local_4fc + (uint)local_4f9) >> 1);
-          local_4f5 = (char)((int)((uint)local_4fb + (uint)local_4f8) >> 1);
-          local_4f4 = (char)((int)((uint)local_4fa + (uint)local_4f7) >> 1);
+          scratchStack4f6 = (char)((int)((uint)scratchStack4fc + (uint)scratchStack4f9) >> 1);
+          scratchStack4f5 = (char)((int)((uint)scratchStack4fb + (uint)scratchStack4f8) >> 1);
+          scratchStack4f4 = (char)((int)((uint)scratchStack4fa + (uint)scratchStack4f7) >> 1);
         }
-        local_4fd = 0;
-        local_500 = 0;
-        local_4ff = 0;
-        local_4fe = 0;
-        if (bVar5) {
-          uVar26 = 4;
+        scratchStack4fd = 0;
+        scratchStack500 = 0;
+        scratchStack4ff = 0;
+        scratchStack4fe = 0;
+        if (scratchFlag5) {
+          scratchUint26 = 4;
         }
         else {
-          uVar26 = 3;
+          scratchUint26 = 3;
         }
-        iVar48 = 0;
-        pbVar43 = local_4b8 + 2;
-        pbVar39 = local_4b8 + 1;
-        pbVar51 = local_4b8 + 3;
-        pbVar33 = local_68;
+        scratchInt48 = 0;
+        scratchPtr43 = scratchStack4b8 + 2;
+        scratchPtr39 = scratchStack4b8 + 1;
+        scratchPtr51 = scratchStack4b8 + 3;
+        scratchPtr33 = scratchStack68;
         do {
-          uVar34 = (uint)*pbVar33;
-          uVar40 = 0;
-          pbVar23 = local_4b8 + iVar48 * 0x10 + 3;
+          scratchUint34 = (uint)*scratchPtr33;
+          scratchUint40 = 0;
+          scratchPtr23 = scratchStack4b8 + scratchInt48 * 0x10 + 3;
           do {
-            if ((!bVar6) || (uVar20 = 3, 0x7e < *pbVar23)) {
-              if (uVar26 != 0) {
-                bVar7 = pbVar23[(int)(local_4b8 + (iVar48 * 0x10 - (int)pbVar51))];
-                bVar22 = pbVar23[(int)pbVar39 - (int)pbVar51];
-                bVar24 = pbVar23[(int)pbVar43 - (int)pbVar51];
-                pbVar41 = &local_4fc;
-                iVar49 = 0;
-                uVar20 = uVar26;
+            if ((!scratchFlag6) || (scratchUint20 = 3, 0x7e < *scratchPtr23)) {
+              if (scratchUint26 != 0) {
+                scratchFlag7 = scratchPtr23[(int)(scratchStack4b8 + (scratchInt48 * 0x10 - (int)scratchPtr51))];
+                scratchFlag22 = scratchPtr23[(int)scratchPtr39 - (int)scratchPtr51];
+                scratchFlag24 = scratchPtr23[(int)scratchPtr43 - (int)scratchPtr51];
+                scratchPtr41 = &scratchStack4fc;
+                scratchInt49 = 0;
+                scratchUint20 = scratchUint26;
                 do {
-                  pbVar1 = pbVar41 + 1;
-                  bVar27 = *pbVar41;
-                  pbVar2 = pbVar41 + 2;
-                  pbVar41 = pbVar41 + 3;
-                  local_4f0[iVar49] =
-                       ((uint)bVar7 - (uint)bVar27) * ((uint)bVar7 - (uint)bVar27) +
-                       ((uint)bVar22 - (uint)*pbVar1) * ((uint)bVar22 - (uint)*pbVar1) * 4 +
-                       ((uint)bVar24 - (uint)*pbVar2) * ((uint)bVar24 - (uint)*pbVar2);
-                  uVar20 = uVar20 - 1;
-                  iVar49 = iVar49 + 1;
-                } while (uVar20 != 0);
+                  scratchPtr1 = scratchPtr41 + 1;
+                  scratchFlag27 = *scratchPtr41;
+                  scratchPtr2 = scratchPtr41 + 2;
+                  scratchPtr41 = scratchPtr41 + 3;
+                  scratchStack4f0[scratchInt49] =
+                       ((uint)scratchFlag7 - (uint)scratchFlag27) * ((uint)scratchFlag7 - (uint)scratchFlag27) +
+                       ((uint)scratchFlag22 - (uint)*scratchPtr1) * ((uint)scratchFlag22 - (uint)*scratchPtr1) * 4 +
+                       ((uint)scratchFlag24 - (uint)*scratchPtr2) * ((uint)scratchFlag24 - (uint)*scratchPtr2);
+                  scratchUint20 = scratchUint20 - 1;
+                  scratchInt49 = scratchInt49 + 1;
+                } while (scratchUint20 != 0);
               }
-              if (uVar26 < 2) {
-                uVar20 = 0;
+              if (scratchUint26 < 2) {
+                scratchUint20 = 0;
               }
               else {
-                iVar50 = uVar26 - 1;
-                uVar44 = 1;
-                piVar38 = local_4f0;
-                uVar20 = 0;
-                iVar49 = local_4f0[0];
+                scratchInt50 = scratchUint26 - 1;
+                scratchUint44 = 1;
+                scratchPtr38 = scratchStack4f0;
+                scratchUint20 = 0;
+                scratchInt49 = scratchStack4f0[0];
                 do {
-                  piVar38 = piVar38 + 1;
-                  if (*piVar38 < iVar49) {
-                    uVar20 = uVar44;
-                    iVar49 = *piVar38;
+                  scratchPtr38 = scratchPtr38 + 1;
+                  if (*scratchPtr38 < scratchInt49) {
+                    scratchUint20 = scratchUint44;
+                    scratchInt49 = *scratchPtr38;
                   }
-                  uVar44 = uVar44 + 1;
-                  iVar50 = iVar50 + -1;
-                } while (iVar50 != 0);
-                uVar20 = uVar20 & 3;
+                  scratchUint44 = scratchUint44 + 1;
+                  scratchInt50 = scratchInt50 + -1;
+                } while (scratchInt50 != 0);
+                scratchUint20 = scratchUint20 & 3;
               }
             }
-            bVar5 = uVar40 != 6;
-            uVar44 = uVar40 & 0x3f;
-            pbVar23 = pbVar23 + 4;
-            uVar40 = uVar40 + 2;
-            uVar34 = uVar20 << uVar44 | uVar34;
-            *pbVar33 = (byte)uVar34;
-          } while (bVar5);
-          bVar5 = iVar48 != 3;
-          pbVar51 = pbVar51 + 0x10;
-          pbVar39 = pbVar39 + 0x10;
-          pbVar43 = pbVar43 + 0x10;
-          pbVar33 = pbVar33 + 1;
-          iVar48 = iVar48 + 1;
-        } while (bVar5);
-        if (param_4 == 0xd) {
-          if (bVar4) {
-            param_6[7] = 0xff;
-            *param_6 = 0xff;
-            param_6[1] = 0xff;
-            param_6[2] = 0xff;
-            param_6[3] = 0xff;
-            param_6[4] = 0xff;
-            param_6[5] = 0xff;
-            param_6[6] = 0xff;
-            param_6 = param_6 + 8;
+            scratchFlag5 = scratchUint40 != 6;
+            scratchUint44 = scratchUint40 & 0x3f;
+            scratchPtr23 = scratchPtr23 + 4;
+            scratchUint40 = scratchUint40 + 2;
+            scratchUint34 = scratchUint20 << scratchUint44 | scratchUint34;
+            *scratchPtr33 = (byte)scratchUint34;
+          } while (scratchFlag5);
+          scratchFlag5 = scratchInt48 != 3;
+          scratchPtr51 = scratchPtr51 + 0x10;
+          scratchPtr39 = scratchPtr39 + 0x10;
+          scratchPtr43 = scratchPtr43 + 0x10;
+          scratchPtr33 = scratchPtr33 + 1;
+          scratchInt48 = scratchInt48 + 1;
+        } while (scratchFlag5);
+        if (compressionCode == 0xd) {
+          if (scratchFlag4) {
+            dstBlocks[7] = 0xff;
+            *dstBlocks = 0xff;
+            dstBlocks[1] = 0xff;
+            dstBlocks[2] = 0xff;
+            dstBlocks[3] = 0xff;
+            dstBlocks[4] = 0xff;
+            dstBlocks[5] = 0xff;
+            dstBlocks[6] = 0xff;
+            dstBlocks = dstBlocks + 8;
           }
           else {
-            *param_6 = local_4b1 & 0xf0 | local_4b8[3] >> 4;
-            param_6[1] = local_4a9 & 0xf0 | local_4ad >> 4;
-            param_6[2] = local_4a1 & 0xf0 | local_4a5 >> 4;
-            param_6[3] = local_499 & 0xf0 | local_49d >> 4;
-            param_6[4] = local_491 & 0xf0 | local_495 >> 4;
-            param_6[5] = local_489 & 0xf0 | local_48d >> 4;
-            param_6[6] = local_481 & 0xf0 | local_485 >> 4;
-            param_6[7] = local_479 & 0xf0 | local_47d >> 4;
-            param_6 = param_6 + 8;
+            *dstBlocks = scratchStack4b1 & 0xf0 | scratchStack4b8[3] >> 4;
+            dstBlocks[1] = scratchStack4a9 & 0xf0 | scratchStack4ad >> 4;
+            dstBlocks[2] = scratchStack4a1 & 0xf0 | scratchStack4a5 >> 4;
+            dstBlocks[3] = scratchStack499 & 0xf0 | scratchStack49d >> 4;
+            dstBlocks[4] = scratchStack491 & 0xf0 | scratchStack495 >> 4;
+            dstBlocks[5] = scratchStack489 & 0xf0 | scratchStack48d >> 4;
+            dstBlocks[6] = scratchStack481 & 0xf0 | scratchStack485 >> 4;
+            dstBlocks[7] = scratchStack479 & 0xf0 | scratchStack47d >> 4;
+            dstBlocks = dstBlocks + 8;
           }
         }
-        else if (iStack00000024 == 0xe) {
-          param_6 = (byte *)((int (*)())dxt5EncodeAlphaBlock)(local_4b8,param_6);
+        else if (scratchIncoming00000024 == 0xe) {
+          dstBlocks = (byte *)((int (*)())dxt5EncodeAlphaBlock)(scratchStack4b8,dstBlocks);
         }
-        local_74 = local_74 + 4;
-        *param_6 = local_504;
-        param_6[1] = local_503;
-        param_6[2] = local_502;
-        param_6[3] = local_501;
-        param_6[4] = local_500;
-        param_6[5] = local_4ff;
-        param_6[6] = local_4fe;
-        param_6[7] = local_4fd;
-        param_6 = param_6 + 8;
-      } while (local_74 < param_1);
+        scratchStack74 = scratchStack74 + 4;
+        *dstBlocks = scratchStack504;
+        dstBlocks[1] = scratchStack503;
+        dstBlocks[2] = scratchStack502;
+        dstBlocks[3] = scratchStack501;
+        dstBlocks[4] = scratchStack500;
+        dstBlocks[5] = scratchStack4ff;
+        dstBlocks[6] = scratchStack4fe;
+        dstBlocks[7] = scratchStack4fd;
+        dstBlocks = dstBlocks + 8;
+      } while (scratchStack74 < width);
     }
-    local_78 = local_78 + 4;
-    if (local_70 <= local_78) {
+    scratchStack78 = scratchStack78 + 4;
+    if (scratchStack70 <= scratchStack78) {
       return;
     }
   } while( true );
