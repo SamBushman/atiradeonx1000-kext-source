@@ -1238,7 +1238,7 @@
 0xe07b8	Compiler__clearOptionBit	36	yes	
 0xe07dc	Compiler__isOptionEnabled	84	yes	
 0xe0830	FUN_000e0830	32	yes	
-0xe0850	FUN_000e0850	1112	yes	
+0xe0850	Compiler__setDefaultOptions	1112	yes	
 0xe0ca8	FUN_000e0ca8	28	yes	
 0xe0cc8	testBit24	8	yes	
 0xe0cd0	FUN_000e0cd0	308	yes	
@@ -1268,8 +1268,8 @@
 0xe17b4	Compiler__setBitInSelectedBlock98	88	yes	
 0xe180c	FUN_000e180c	124	yes	
 0xe1888	Compiler__resetState	152	yes	
-0xe1920	FUN_000e1920	292	no	calls an import (setjmp); indirect call (driver context / vtable / callback)
-0xe1a48	FUN_000e1a48	292	no	calls an import (setjmp); indirect call (driver context / vtable / callback)
+0xe1920	Compiler__init_e1920	292	no	calls an import (setjmp); indirect call (driver context / vtable / callback)
+0xe1a48	Compiler__init_e1a48	292	no	calls an import (setjmp); indirect call (driver context / vtable / callback)
 0xe1b70	Compiler__setHardwareFamily	216	no	indirect call (driver context / vtable / callback)
 0xe1c50	Program__forwardMulOperandToUsers	916	no	indirect call (driver context / vtable / callback)
 0xe1fe4	Compiler__releaseChipAndPools	160	yes	
@@ -1478,12 +1478,12 @@
 0xed89c	FUN_000ed89c	1244	no	indirect call (driver context / vtable / callback)
 0xedd98	Program__ctor_edd98	1216	yes	
 0xee29c	Program__ctor_ee29c	1216	yes	
-0xee7a0	FUN_000ee7a0	492	yes	
+0xee7a0	Program__buildBlockArrayByKey	492	yes	
 0xee9ac	Program__addInst	120	yes	
 0xeea24	FUN_000eea24	556	no	indirect call (driver context / vtable / callback)
 0xeec50	FUN_000eec50	1140	no	indirect call (driver context / vtable / callback)
 0xeee4c	FUN_000eee4c	920	no	indirect call (driver context / vtable / callback)
-0xef204	FUN_000ef204	660	no	indirect call (driver context / vtable / callback)
+0xef204	Program__splitExports	660	no	indirect call (driver context / vtable / callback)
 0xef498	FUN_000ef498	1084	no	indirect call (driver context / vtable / callback)
 0xef8f8	Program__appendToVector3c8	120	yes	
 0xef970	Program__removeInst	220	yes	
@@ -1494,7 +1494,7 @@
 0xf07a8	FUN_000f07a8	3348	no	indirect call (driver context / vtable / callback)
 0xf14f8	FUN_000f14f8	2148	no	indirect call (driver context / vtable / callback)
 0xf1d7c	FUN_000f1d7c	3108	no	indirect call (driver context / vtable / callback)
-0xf29f4	FUN_000f29f4	488	no	indirect call (driver context / vtable / callback)
+0xf29f4	pass_assign_slots	488	no	indirect call (driver context / vtable / callback)
 0xf2bdc	SelectWord__compose	128	yes	
 0xf2c5c	SelectWord__isSplat	80	yes	
 0xf2cac	FUN_000f2cac	92	yes	
@@ -1552,7 +1552,7 @@
 0xf4a24	FUN_000f4a24	56	yes	
 0xf4a5c	FUN_000f4a5c	20	yes	
 0xf4a70	isRegKindBelow21	20	yes	
-0xf4a84	FUN_000f4a84	324	yes	
+0xf4a84	Emitter__allocateConstantSlot	324	yes	
 0xf4bc8	floatLess	32	no	tiny (32 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0xf4be8	BitSet__findFirstSet	92	yes	
 0xf4c44	noop_f4c44	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
@@ -1571,7 +1571,7 @@
 0xf5cf0	IRInst__getUniformSourceConstant	412	yes	
 0xf5e8c	FUN_000f5e8c	264	no	indirect call (driver context / vtable / callback)
 0xf5f94	RegisterMap__findConstVectorExact	304	yes	
-0xf60c4	FUN_000f60c4	388	no	indirect call (driver context / vtable / callback)
+0xf60c4	Program__dumpConstantRegisters	388	no	indirect call (driver context / vtable / callback)
 0xf6248	Compiler__getOrCreateConstVectorN	532	yes	
 0xf645c	Compiler__getOrCreateConstVector4	376	yes	
 0xf65d4	Compiler__getOrCreateConstVector3	396	yes	
@@ -1605,7 +1605,7 @@
 0xf8aa0	Program__applySourceTokenToOperand	488	no	indirect call (driver context / vtable / callback)
 0xf8c88	FUN_000f8c88	64	yes	
 0xf8ccc	FUN_000f8ccc	132	no	indirect call (driver context / vtable / callback)
-0xf8d50	FUN_000f8d50	568	no	indirect call (driver context / vtable / callback)
+0xf8d50	IRInst__applyDescriptorSelects	568	no	indirect call (driver context / vtable / callback)
 0xf8f88	IRInst__applyDescriptorSwizzle	176	no	indirect call (driver context / vtable / callback)
 0xf9038	FUN_000f9038	264	yes	
 0xf9140	FUN_000f9140	284	no	indirect call (driver context / vtable / callback)

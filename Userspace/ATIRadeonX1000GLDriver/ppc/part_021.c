@@ -196,62 +196,62 @@ int Compiler__resetState(compiler)
   *(undefined4 *)(compiler + 0x3a0) = allocation;
   *(undefined4 *)(compiler + 0x3a8) = 0;
   *(undefined4 *)(compiler + 0x3a4) = 0;
-  return FUN_000e0850(compiler);
+  return Compiler__setDefaultOptions(compiler);
 }
 
-/* FUN_000e1920 @ 0xe1920 (232 bytes) */
-int FUN_000e1920(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12)
-  undefined4 *param_1;
-  undefined4 param_2;
-  code *param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
-  undefined4 param_9;
-  undefined4 param_10;
-  undefined4 param_11;
-  undefined4 param_12;
+/* Compiler__init_e1920 @ 0xe1920 (232 bytes) */
+int Compiler__init_e1920(compiler, allocatorUserData, allocateFn, freeFn, callbackField0, callbackField328, callbackField358, callbackField35c, callbackField360, callbackField364, callbackField368, callbackField36c)
+  undefined4 *compiler;
+  undefined4 allocatorUserData;
+  code *allocateFn;
+  undefined4 freeFn;
+  undefined4 callbackField0;
+  undefined4 callbackField328;
+  undefined4 callbackField358;
+  undefined4 callbackField35c;
+  undefined4 callbackField360;
+  undefined4 callbackField364;
+  undefined4 callbackField368;
+  undefined4 callbackField36c;
 {
-  int iVar1;
+  int hwObject;
   undefined4 *puStack00000018;
   
-  param_1[0x162] = 1;
-  param_1[0xca] = param_6;
-  param_1[0x11e] = 0x400;
-  param_1[0xd7] = param_8;
-  param_1[0xd8] = param_9;
-  param_1[0xd9] = param_10;
-  param_1[0xd6] = param_7;
-  param_1[0xda] = param_11;
-  param_1[0xd3] = param_4;
-  *param_1 = param_5;
-  param_1[199] = 1;
-  param_1[0xd5] = param_2;
-  param_1[0xdb] = param_12;
-  param_1[1] = (int)(param_1 + 2) + (-(int)(param_1 + 2) & 7U);
-  param_1[0xc3] = 0;
-  param_1[0xc4] = 0;
-  param_1[0x11f] = 0;
-  param_1[0x120] = 0;
-  param_1[0x1b1] = 0;
-  param_1[0xd4] = param_3;
-  param_1[200] = 0;
-  param_1[0xdc] = 0;
-  param_1[0xdd] = 0;
-  param_1[0xde] = 0;
-  puStack00000018 = param_1;
-  iVar1 = (*param_3)(param_2,0x1744,param_3,param_4,param_5,param_6,param_7,param_1);
+  compiler[0x162] = 1;
+  compiler[0xca] = callbackField328;
+  compiler[0x11e] = 0x400;
+  compiler[0xd7] = callbackField35c;
+  compiler[0xd8] = callbackField360;
+  compiler[0xd9] = callbackField364;
+  compiler[0xd6] = callbackField358;
+  compiler[0xda] = callbackField368;
+  compiler[0xd3] = freeFn;
+  *compiler = callbackField0;
+  compiler[199] = 1;
+  compiler[0xd5] = allocatorUserData;
+  compiler[0xdb] = callbackField36c;
+  compiler[1] = (int)(compiler + 2) + (-(int)(compiler + 2) & 7U);
+  compiler[0xc3] = 0;
+  compiler[0xc4] = 0;
+  compiler[0x11f] = 0;
+  compiler[0x120] = 0;
+  compiler[0x1b1] = 0;
+  compiler[0xd4] = allocateFn;
+  compiler[200] = 0;
+  compiler[0xdc] = 0;
+  compiler[0xdd] = 0;
+  compiler[0xde] = 0;
+  puStack00000018 = compiler;
+  hwObject = (*allocateFn)(allocatorUserData,0x1744,allocateFn,freeFn,callbackField0,callbackField328,callbackField358,compiler);
   *(undefined1 *)(puStack00000018 + 0xfe) = 0;
-  if (iVar1 == 0) {
+  if (hwObject == 0) {
     puStack00000018[0xc5] = 2;
   }
   else {
-    KhanPs__ctor_129130(iVar1,puStack00000018,0);
-    puStack00000018[0xc3] = iVar1;
-    iVar1 = _setjmp(puStack00000018[1]);
-    if (iVar1 == 0) {
+    KhanPs__ctor_129130(hwObject,puStack00000018,0);
+    puStack00000018[0xc3] = hwObject;
+    hwObject = _setjmp(puStack00000018[1]);
+    if (hwObject == 0) {
       ((int (*)())Compiler__resetState)(puStack00000018);
       FUN_000e13b4(puStack00000018);
     }
@@ -259,59 +259,59 @@ int FUN_000e1920(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   return;
 }
 
-/* FUN_000e1a48 @ 0xe1a48 (232 bytes) */
-int FUN_000e1a48(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12)
-  undefined4 *param_1;
-  undefined4 param_2;
-  code *param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
-  undefined4 param_9;
-  undefined4 param_10;
-  undefined4 param_11;
-  undefined4 param_12;
+/* Compiler__init_e1a48 @ 0xe1a48 (232 bytes) */
+int Compiler__init_e1a48(compiler, allocatorUserData, allocateFn, freeFn, callbackField0, callbackField328, callbackField358, callbackField35c, callbackField360, callbackField364, callbackField368, callbackField36c)
+  undefined4 *compiler;
+  undefined4 allocatorUserData;
+  code *allocateFn;
+  undefined4 freeFn;
+  undefined4 callbackField0;
+  undefined4 callbackField328;
+  undefined4 callbackField358;
+  undefined4 callbackField35c;
+  undefined4 callbackField360;
+  undefined4 callbackField364;
+  undefined4 callbackField368;
+  undefined4 callbackField36c;
 {
-  int iVar1;
+  int hwObject;
   undefined4 *puStack00000018;
   
-  param_1[0x162] = 1;
-  param_1[0xca] = param_6;
-  param_1[0x11e] = 0x400;
-  param_1[0xd7] = param_8;
-  param_1[0xd8] = param_9;
-  param_1[0xd9] = param_10;
-  param_1[0xd6] = param_7;
-  param_1[0xda] = param_11;
-  param_1[0xd3] = param_4;
-  *param_1 = param_5;
-  param_1[199] = 1;
-  param_1[0xd5] = param_2;
-  param_1[0xdb] = param_12;
-  param_1[1] = (int)(param_1 + 2) + (-(int)(param_1 + 2) & 7U);
-  param_1[0xc3] = 0;
-  param_1[0xc4] = 0;
-  param_1[0x11f] = 0;
-  param_1[0x120] = 0;
-  param_1[0x1b1] = 0;
-  param_1[0xd4] = param_3;
-  param_1[200] = 0;
-  param_1[0xdc] = 0;
-  param_1[0xdd] = 0;
-  param_1[0xde] = 0;
-  puStack00000018 = param_1;
-  iVar1 = (*param_3)(param_2,0x1744,param_3,param_4,param_5,param_6,param_7,param_1);
+  compiler[0x162] = 1;
+  compiler[0xca] = callbackField328;
+  compiler[0x11e] = 0x400;
+  compiler[0xd7] = callbackField35c;
+  compiler[0xd8] = callbackField360;
+  compiler[0xd9] = callbackField364;
+  compiler[0xd6] = callbackField358;
+  compiler[0xda] = callbackField368;
+  compiler[0xd3] = freeFn;
+  *compiler = callbackField0;
+  compiler[199] = 1;
+  compiler[0xd5] = allocatorUserData;
+  compiler[0xdb] = callbackField36c;
+  compiler[1] = (int)(compiler + 2) + (-(int)(compiler + 2) & 7U);
+  compiler[0xc3] = 0;
+  compiler[0xc4] = 0;
+  compiler[0x11f] = 0;
+  compiler[0x120] = 0;
+  compiler[0x1b1] = 0;
+  compiler[0xd4] = allocateFn;
+  compiler[200] = 0;
+  compiler[0xdc] = 0;
+  compiler[0xdd] = 0;
+  compiler[0xde] = 0;
+  puStack00000018 = compiler;
+  hwObject = (*allocateFn)(allocatorUserData,0x1744,allocateFn,freeFn,callbackField0,callbackField328,callbackField358,compiler);
   *(undefined1 *)(puStack00000018 + 0xfe) = 0;
-  if (iVar1 == 0) {
+  if (hwObject == 0) {
     puStack00000018[0xc5] = 2;
   }
   else {
-    KhanPs__ctor_129130(iVar1,puStack00000018,0);
-    puStack00000018[0xc3] = iVar1;
-    iVar1 = _setjmp(puStack00000018[1]);
-    if (iVar1 == 0) {
+    KhanPs__ctor_129130(hwObject,puStack00000018,0);
+    puStack00000018[0xc3] = hwObject;
+    hwObject = _setjmp(puStack00000018[1]);
+    if (hwObject == 0) {
       ((int (*)())Compiler__resetState)(puStack00000018);
       FUN_000e13b4(puStack00000018);
     }
@@ -657,7 +657,7 @@ int FUN_000e2094(compiler, param_2)
     if (markIgnoreUncoveredEnabled != 0) {
       FUN_00139d40(*(undefined4 *)(compiler + COMP_currentProgram));
     }
-    FUN_000f29f4(*(undefined4 *)(compiler + COMP_currentProgram));
+    pass_assign_slots(*(undefined4 *)(compiler + COMP_currentProgram));
     List__freeAllNodes(*(undefined4 *)(compiler + COMP_arenaB));
     Scheduler__run(*(undefined4 *)(compiler + COMP_currentProgram));
     List__freeAllNodes(*(undefined4 *)(compiler + COMP_arenaB));
@@ -665,7 +665,7 @@ int FUN_000e2094(compiler, param_2)
     List__freeAllNodes(*(undefined4 *)(compiler + COMP_arenaB));
     FUN_00134658(*(undefined4 *)(compiler + COMP_currentProgram));
     List__freeAllNodes(*(undefined4 *)(compiler + COMP_arenaB));
-    FUN_000f60c4(*(undefined4 *)(compiler + COMP_currentProgram),compiler);
+    Program__dumpConstantRegisters(*(undefined4 *)(compiler + COMP_currentProgram),compiler);
     *(uint *)(*(int *)(compiler + COMP_currentProgram) + 0x30) =
          *(uint *)(*(int *)(compiler + COMP_currentProgram) + 0x30) | 0x10000;
     pass_optimize_control_flow(*(undefined4 *)(compiler + COMP_currentProgram));
