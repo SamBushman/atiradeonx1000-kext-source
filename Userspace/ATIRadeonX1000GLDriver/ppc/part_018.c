@@ -4206,16 +4206,16 @@ int scCheckHandle(param_1)
 }
 
 /* scDisassembleIL @ 0xcd1ec (40 bytes) */
-int scDisassembleIL(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
+int scDisassembleIL(sinkArg, tokenStart, tokenCount, param_4)
+  undefined4 sinkArg;
+  undefined4 tokenStart;
+  undefined4 tokenCount;
   undefined4 param_4;
 {
-  unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[8] = { sinkArg, tokenStart, tokenCount, param_4, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   
   (*(unsigned int *)((unsigned char *)ghidra_home + 12)) = param_4;
-  return ((int (*)())scDisassembleILImpl)(param_1,param_2,param_3,&(*(unsigned int *)((unsigned char *)ghidra_home + 12)));
+  return ((int (*)())scDisassembleILImpl)(sinkArg,tokenStart,tokenCount,&(*(unsigned int *)((unsigned char *)ghidra_home + 12)));
 }
 
 /* scDumpSrcShader @ 0xcd214 (40 bytes) */
@@ -4300,22 +4300,22 @@ int FUN_000cd290(param_1)
 }
 
 /* scDisassembleILImpl @ 0xcd388 (28 bytes) */
-int scDisassembleILImpl(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
-  int param_2;
-  int param_3;
-  int param_4;
+int scDisassembleILImpl(sinkArg, tokenStart, tokenCount, sinkRecord)
+  undefined4 sinkArg;
+  int tokenStart;
+  int tokenCount;
+  int sinkRecord;
 {
-  if (param_4 == 0) {
+  if (sinkRecord == 0) {
     return;
   }
-  if (param_2 == 0) {
+  if (tokenStart == 0) {
     return;
   }
-  if (param_3 == 0) {
+  if (tokenCount == 0) {
     return;
   }
-  return ildisDisassembleTokens(param_1,param_2,param_3,param_4);
+  return ildisDisassembleTokens(sinkArg,tokenStart,tokenCount,sinkRecord);
 }
 
 /* scLogToSink @ 0xcd3a4 (96 bytes) */
