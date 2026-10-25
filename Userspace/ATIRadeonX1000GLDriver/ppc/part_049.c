@@ -3879,46 +3879,50 @@ int FUN_0018d388(param_1, param_2, param_3)
   return 0;
 }
 
-/* FUN_0018d4b4 @ 0x18d4b4 (1428 bytes) */
-int FUN_0018d4b4(inst, param_2, param_3, param_4, compiler)
+/* PackState__tryPlaceInstructionSources @ 0x18d4b4 (1428 bytes) */
+int PackState__tryPlaceInstructionSources(inst, highLanesKind, lowLaneKind, packState, compiler)
   int *inst;
-  int *param_2;
-  int *param_3;
-  int *param_4;
+  int *highLanesKind;
+  int *lowLaneKind;
+  int *packState;
   int compiler;
 {
+  int producerOpcode;
+  int operandCount;
+  int placeResult;
+  int vslot5cResult;
   int hasSingleUse;
   int operandRecord2;
   int operandRecord;
   int *laneMask;
   int operandIndex2;
   int operandIndex;
-  bool bVar1;
-  int iVar2;
+  bool isMovOfNonConstant;
+  int opcodeOrOperandCount;
   int *sourceDef;
   undefined4 operandVReg;
   int *operandVReg2;
-  int iVar6;
+  int vslot5cResult2;
   int *a0;
   int *a3;
   int a4;
-  undefined4 in_r8;
-  int iVar7;
-  uint uVar8;
+  undefined4 staleArg6;
+  int srcIsMov;
+  uint laneMaskBits;
   int *inst1;
   undefined8 operandVReg3;
-  int local_68;
-  float local_64;
-  uint local_48;
-  uint local_44;
-  uint local_40 [5];
+  int uniformKind;
+  float uniformValue;
+  uint readMaskOut2;
+  uint readMaskOut;
+  uint readMaskScratch [5];
   
-  iVar2 = *(int *)(inst[0x22] + 8);
-  if ((((iVar2 == 0x9e) || (iVar2 == 0xa0)) || (iVar2 == 0x9f)) ||
-     (operandIndex2 = 1, laneMask = param_3, a3 = param_4, a4 = compiler, iVar2 == 0xa1)) {
+  opcodeOrOperandCount = *(int *)(inst[0x22] + 8);
+  if ((((opcodeOrOperandCount == 0x9e) || (opcodeOrOperandCount == 0xa0)) || (opcodeOrOperandCount == 0x9f)) ||
+     (operandIndex2 = 1, laneMask = lowLaneKind, a3 = packState, a4 = compiler, opcodeOrOperandCount == 0xa1)) {
     sourceDef = (int *)IRInst__getOperandSource(inst,1);
-    iVar2 = (**(code **)(*sourceDef + 0x5c))(sourceDef);
-    if (iVar2 != 0) {
+    vslot5cResult = (**(code **)(*sourceDef + 0x5c))(sourceDef);
+    if (vslot5cResult != 0) {
       return 0;
     }
     operandRecord = IRInst__getOperandRecord(inst,0);
@@ -3926,86 +3930,86 @@ int FUN_0018d4b4(inst, param_2, param_3, param_4, compiler)
         (operandRecord = IRInst__getOperandRecord(inst,0), *(char *)(operandRecord + 0x11) == '\0')) ||
        (operandRecord = IRInst__getOperandRecord(inst,0), *(char *)(operandRecord + 0x12) == '\0')) {
       operandVReg = IRInst__getOperandSource(inst,1);
-      iVar2 = ((int (*)())FUN_0018d388)(param_4,operandVReg,0);
-      if (iVar2 == 0) {
+      placeResult = ((int (*)())FUN_0018d388)(packState,operandVReg,0);
+      if (placeResult == 0) {
         return 0;
       }
     }
     operandRecord = IRInst__getOperandRecord(inst,0);
     if (*(char *)(operandRecord + 0x13) == '\0') {
       operandVReg = IRInst__getOperandSource(inst,1);
-      iVar2 = ((int (*)())FUN_0018d388)(param_4,operandVReg,1);
-      if (iVar2 == 0) {
+      placeResult = ((int (*)())FUN_0018d388)(packState,operandVReg,1);
+      if (placeResult == 0) {
         return 0;
       }
     }
   }
   else {
-    for (; iVar2 = (**(code **)(*inst + 0x14))(inst), operandIndex2 <= iVar2; operandIndex2 = operandIndex2 + 1) {
+    for (; opcodeOrOperandCount = (**(code **)(*inst + 0x14))(inst), operandIndex2 <= opcodeOrOperandCount; operandIndex2 = operandIndex2 + 1) {
       operandVReg2 = (int *)IRInst__getOperandSource(inst,operandIndex2);
-      iVar2 = (**(code **)(*operandVReg2 + 0x60))(operandVReg2);
-      if (iVar2 != 0) {
+      opcodeOrOperandCount = (**(code **)(*operandVReg2 + 0x60))(operandVReg2);
+      if (opcodeOrOperandCount != 0) {
         operandVReg2 = (int *)IRInst__getOperandSource(operandVReg2,1);
         (**(code **)(*operandVReg2 + 0x60))(operandVReg2);
       }
-      iVar6 = (**(code **)(*operandVReg2 + 0x5c))(operandVReg2);
-      if (iVar6 != 0) {
+      vslot5cResult2 = (**(code **)(*operandVReg2 + 0x5c))(operandVReg2);
+      if (vslot5cResult2 != 0) {
         if (((operandVReg2[0x56] != 0) && (inst[0x56] != 0)) && (inst[0x56] != operandVReg2[0x56])) {
           DList__unlink(operandVReg2);
           laneMask = operandVReg2;
           Block__insertInstAfter(inst[0x56],inst[1],operandVReg2);
         }
-        iVar6 = *(int *)(operandVReg2[0x22] + 8);
-        if (iVar2 == 0) {
-          iVar2 = IRInst__getOperandRecord(inst,operandIndex2);
-          SelectWord__readMask(&local_44,*(undefined4 *)(iVar2 + 0x10));
-          uVar8 = local_44;
+        producerOpcode = *(int *)(operandVReg2[0x22] + 8);
+        if (opcodeOrOperandCount == 0) {
+          opcodeOrOperandCount = IRInst__getOperandRecord(inst,operandIndex2);
+          SelectWord__readMask(&readMaskOut,*(undefined4 *)(opcodeOrOperandCount + 0x10));
+          laneMaskBits = readMaskOut;
         }
         else {
           operandVReg = IRInst__getOperandSource(inst,operandIndex2);
-          iVar2 = IRInst__getOperandRecord(operandVReg,1);
-          SelectWord__readMask(&local_48,*(undefined4 *)(iVar2 + 0x10));
-          uVar8 = local_48;
+          opcodeOrOperandCount = IRInst__getOperandRecord(operandVReg,1);
+          SelectWord__readMask(&readMaskOut2,*(undefined4 *)(opcodeOrOperandCount + 0x10));
+          laneMaskBits = readMaskOut2;
         }
-        if ((uVar8 & 0xffffff00) != 0) {
-          if ((-1 < *param_2) && (iVar6 != *param_2)) {
+        if ((laneMaskBits & 0xffffff00) != 0) {
+          if ((-1 < *highLanesKind) && (producerOpcode != *highLanesKind)) {
             return 0;
           }
-          *param_2 = iVar6;
-          iVar2 = (**(code **)(*operandVReg2 + 0x14))(operandVReg2);
-          if (iVar2 == 1) {
+          *highLanesKind = producerOpcode;
+          operandCount = (**(code **)(*operandVReg2 + 0x14))(operandVReg2);
+          if (operandCount == 1) {
             operandVReg = IRInst__getOperandSource(operandVReg2,1);
             laneMask = (int *)0x0;
-            iVar2 = ((int (*)())FUN_0018d388)(param_4,operandVReg,0);
+            opcodeOrOperandCount = ((int (*)())FUN_0018d388)(packState,operandVReg,0);
           }
           else {
             operandVReg = IRInst__getOperandSource(operandVReg2,1);
             laneMask = (int *)IRInst__getOperandSource(operandVReg2,2);
             a3 = (int *)0x0;
-            iVar2 = ((int (*)())FUN_0018cdd8)(param_4,operandVReg,laneMask,0);
+            opcodeOrOperandCount = ((int (*)())FUN_0018cdd8)(packState,operandVReg,laneMask,0);
           }
-          if (iVar2 == 0) {
+          if (opcodeOrOperandCount == 0) {
             return 0;
           }
         }
-        if ((uVar8 & 0xff) != 0) {
-          if ((-1 < *param_3) && (iVar6 != *param_3)) {
+        if ((laneMaskBits & 0xff) != 0) {
+          if ((-1 < *lowLaneKind) && (producerOpcode != *lowLaneKind)) {
             return 0;
           }
-          *param_3 = iVar6;
-          iVar2 = (**(code **)(*operandVReg2 + 0x14))(operandVReg2);
-          if (iVar2 == 1) {
+          *lowLaneKind = producerOpcode;
+          operandCount = (**(code **)(*operandVReg2 + 0x14))(operandVReg2);
+          if (operandCount == 1) {
             operandVReg = IRInst__getOperandSource(operandVReg2,1);
             laneMask = (int *)((int)((unsigned char *)0x0) + 1);
-            iVar2 = ((int (*)())FUN_0018d388)(param_4,operandVReg,1);
+            opcodeOrOperandCount = ((int (*)())FUN_0018d388)(packState,operandVReg,1);
           }
           else {
             operandVReg = IRInst__getOperandSource(operandVReg2,1);
             laneMask = (int *)IRInst__getOperandSource(operandVReg2,2);
             a3 = (int *)((int)((unsigned char *)0x0) + 1);
-            iVar2 = ((int (*)())FUN_0018cdd8)(param_4,operandVReg,laneMask,1);
+            opcodeOrOperandCount = ((int (*)())FUN_0018cdd8)(packState,operandVReg,laneMask,1);
           }
-          if (iVar2 == 0) {
+          if (opcodeOrOperandCount == 0) {
             return 0;
           }
         }
@@ -4014,28 +4018,28 @@ int FUN_0018d4b4(inst, param_2, param_3, param_4, compiler)
     for (operandIndex = 1; operandIndex2 = (**(code **)(*inst + 0x14))(inst), operandIndex <= operandIndex2;
         operandIndex = operandIndex + 1) {
       operandVReg2 = (int *)IRInst__getOperandSource(inst,operandIndex);
-      iVar7 = (**(code **)(*operandVReg2 + 0x60))(operandVReg2);
-      if (iVar7 == 0) {
-        bVar1 = false;
+      srcIsMov = (**(code **)(*operandVReg2 + 0x60))(operandVReg2);
+      if (srcIsMov == 0) {
+        isMovOfNonConstant = false;
         inst1 = inst;
         a0 = operandVReg2;
         operandIndex2 = operandIndex;
 LAB_0018d948:
-        iVar6 = (**(code **)(*a0 + 0x5c))(a0);
-        if ((iVar6 == 0) && ((bVar1 || (a0[0x26] != 0x33)))) {
+        vslot5cResult2 = (**(code **)(*a0 + 0x5c))(a0);
+        if ((vslot5cResult2 == 0) && ((isMovOfNonConstant || (a0[0x26] != 0x33)))) {
           operandIndex2 = IRInst__getOperandRecord(inst1,operandIndex2);
-          SelectWord__readMask(local_40,*(undefined4 *)(operandIndex2 + 0x10));
-          if ((local_40[0] & 0xffffff00) == 0) {
-            if ((local_40[0] & 0xff) == 0) goto LAB_0018da08;
+          SelectWord__readMask(readMaskScratch,*(undefined4 *)(operandIndex2 + 0x10));
+          if ((readMaskScratch[0] & 0xffffff00) == 0) {
+            if ((readMaskScratch[0] & 0xff) == 0) goto LAB_0018da08;
             laneMask = (int *)((int)((unsigned char *)0x0) + 1);
-            operandIndex2 = ((int (*)())FUN_0018c7f4)(param_4,a0,1);
+            operandIndex2 = ((int (*)())FUN_0018c7f4)(packState,a0,1);
           }
-          else if ((local_40[0] & 0xff) == 0) {
+          else if ((readMaskScratch[0] & 0xff) == 0) {
             laneMask = (int *)0x0;
-            operandIndex2 = ((int (*)())FUN_0018c7f4)(param_4,a0,0);
+            operandIndex2 = ((int (*)())FUN_0018c7f4)(packState,a0,0);
           }
           else {
-            operandIndex2 = ((int (*)())FUN_0018c980)(param_4,a0,a0);
+            operandIndex2 = ((int (*)())FUN_0018c980)(packState,a0,a0);
             laneMask = a0;
           }
           if (operandIndex2 == 0) {
@@ -4046,24 +4050,24 @@ LAB_0018d948:
       else {
         operandVReg3 = IRInst__getOperandSource(operandVReg2,1);
         a0 = (int *)((ulonglong)operandVReg3 >> 0x20);
-        (**(code **)(*a0 + 0x60))(a0,(int)operandVReg3,laneMask,a3,a4,in_r8,*(code **)(*a0 + 0x60));
+        (**(code **)(*a0 + 0x60))(a0,(int)operandVReg3,laneMask,a3,a4,staleArg6,*(code **)(*a0 + 0x60));
         inst1 = operandVReg2;
         if (a0[0x26] != 0x33) {
 LAB_0018d93c:
-          bVar1 = false;
+          isMovOfNonConstant = false;
           operandIndex2 = 1;
           goto LAB_0018d948;
         }
         operandRecord2 = IRInst__getOperandRecord(operandVReg2,0);
         laneMask = *(int **)(operandRecord2 + 0x10);
-        a3 = &local_68;
+        a3 = &uniformKind;
         operandIndex2 = IRInst__getUniformSourceConstant(operandVReg2,1,laneMask,a3);
-        if (((operandIndex2 == 0) || (local_68 != 2)) ||
-           (operandIndex2 = (**(code **)(**(int **)(compiler + COMP_target) + 0xf0))((double)local_64), operandIndex2 == 0)
+        if (((operandIndex2 == 0) || (uniformKind != 2)) ||
+           (operandIndex2 = (**(code **)(**(int **)(compiler + COMP_target) + 0xf0))((double)uniformValue), operandIndex2 == 0)
            ) {
           hasSingleUse = IRInst__hasSingleUse(operandVReg2,*(undefined4 *)(compiler + COMP_currentProgram));
           if (hasSingleUse == 0) {
-            bVar1 = true;
+            isMovOfNonConstant = true;
             operandIndex2 = 1;
             goto LAB_0018d948;
           }
@@ -4091,7 +4095,7 @@ int SchedModel__instructionFitsAlone(param_1, param_2)
   local_64 = 0xffffffff;
   local_68 = 0xffffffff;
   ((int (*)())PackState__reset)(auStack_58);
-  callResult = ((int (*)())FUN_0018d4b4)(param_1,&local_68,&local_64,auStack_58,param_2);
+  callResult = ((int (*)())PackState__tryPlaceInstructionSources)(param_1,&local_68,&local_64,auStack_58,param_2);
   uVar2 = 0;
   if (callResult != 0) {
     uVar2 = ((int (*)())PackState__countFreeSlots)(auStack_58,auStack_60);
@@ -4992,7 +4996,7 @@ int R520SchedModel__vslot4_addInstruction(schedModel, inst)
     callResult = (**(code **)(*inst + 0x28))(inst);
     if (callResult == 0) {
       ((int (*)())FUN_00189df4)(inst,schedModel + 0x18,schedModel + 0x20);
-      ((int (*)())FUN_0018d4b4)(inst,schedModel + 0x1c,schedModel + 0x24,schedModel + 0x28,*(undefined4 *)(schedModel + 8)
+      ((int (*)())PackState__tryPlaceInstructionSources)(inst,schedModel + 0x1c,schedModel + 0x24,schedModel + 0x28,*(undefined4 *)(schedModel + 8)
                   );
       ((int (*)())PackState__countFreeSlots)(schedModel + 0x28,&local_38);
       uVar2 = 0;
@@ -5052,7 +5056,7 @@ int R520SchedModel__vslot3_canAddInstruction(schedModel, inst)
     ((int (*)())PackState__copy)(auStack_60,schedModel + 0x28);
     callResult = ((int (*)())FUN_00189df4)(inst,&local_78,&local_70);
     if ((((callResult == 0) ||
-         (callResult = ((int (*)())FUN_0018d4b4)(inst,&local_74,&local_6c,auStack_60,*(undefined4 *)(schedModel + 8)),
+         (callResult = ((int (*)())PackState__tryPlaceInstructionSources)(inst,&local_74,&local_6c,auStack_60,*(undefined4 *)(schedModel + 8)),
          callResult == 0)) || (callResult = ((int (*)())PackState__countFreeSlots)(auStack_60,&local_68), callResult == 0)) ||
        ((*(int *)(schedModel + 100) != 0 &&
         (callResult = ((int (*)())SchedModel__fitsConstantLimit)(schedModel,*(int *)(schedModel + 100),inst,local_68,local_64), callResult == 0

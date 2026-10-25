@@ -4014,16 +4014,17 @@ int FUN_00181ab0(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   return;
 }
 
-/* FUN_00181b80 @ 0x181b80 (896 bytes) */
-int FUN_00181b80(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  int param_1;
-  int param_2;
-  int *param_3;
-  undefined4 *param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+/* RebuildState__computeNodeLevels @ 0x181b80 (896 bytes) */
+int RebuildState__computeNodeLevels(rebuildState, block, maxLevelOut, schedCostOut, staleArg5, staleArg6, staleArg7)
+  int rebuildState;
+  int block;
+  int *maxLevelOut;
+  undefined4 *schedCostOut;
+  undefined4 staleArg5;
+  undefined4 staleArg6;
+  undefined4 staleArg7;
 {
+  int newLevel;
   undefined4 *elementRef2;
   int *elementRef;
   uint vectorFilledCount4;
@@ -4035,65 +4036,65 @@ int FUN_00181b80(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   int inst2;
   int sourceDef;
   int inst;
-  int iVar2;
+  int sourceLevelPlusOne;
   uint vectorFilledCount;
-  undefined4 *puVar4;
-  int iVar5;
-  int *piVar6;
-  int *piVar7;
-  undefined4 uVar8;
-  uint uVar9;
+  undefined4 *nodeRec;
+  int nodeDepth;
+  int *consumerNode;
+  int *sourceNode;
+  undefined4 schedCost;
+  uint nodeSlot;
   int loopIndex;
   uint *vector;
   
-  inst = *(int *)(param_2 + 0x98);
-  for (loopIndex = *(int *)(*(int *)(param_2 + 0x98) + 8); loopIndex != 0; loopIndex = *(int *)(loopIndex + 8))
+  inst = *(int *)(block + 0x98);
+  for (loopIndex = *(int *)(*(int *)(block + 0x98) + 8); loopIndex != 0; loopIndex = *(int *)(loopIndex + 8))
   {
     if ((*(uint *)(inst + 0x14) & 1) != 0) {
-      vector = *(uint **)(param_1 + 0x1c);
-      uVar9 = *(uint *)(inst + 0x150);
-      if (uVar9 < *vector) {
+      vector = *(uint **)(rebuildState + 0x1c);
+      nodeSlot = *(uint *)(inst + 0x150);
+      if (nodeSlot < *vector) {
         vectorFilledCount = vector[1];
-        if (vectorFilledCount <= uVar9) {
-          _memset(vectorFilledCount * 4 + vector[2],0,(uVar9 - vectorFilledCount) * 4 + 4);
-          vector[1] = uVar9 + 1;
+        if (vectorFilledCount <= nodeSlot) {
+          _memset(vectorFilledCount * 4 + vector[2],0,(nodeSlot - vectorFilledCount) * 4 + 4);
+          vector[1] = nodeSlot + 1;
         }
-        puVar4 = (undefined4 *)(uVar9 * 4 + vector[2]);
+        nodeRec = (undefined4 *)(nodeSlot * 4 + vector[2]);
       }
       else {
-        puVar4 = (undefined4 *)Vector__elementRefGrow(vector,uVar9);
+        nodeRec = (undefined4 *)Vector__elementRefGrow(vector,nodeSlot);
       }
-      puVar4 = (undefined4 *)*puVar4;
-      *puVar4 = 1;
-      puVar4[1] = 1;
-      puVar4[2] = 0;
-      puVar4[3] = 0;
-      puVar4[4] = 0;
-      puVar4[5] = 1;
+      nodeRec = (undefined4 *)*nodeRec;
+      *nodeRec = 1;
+      nodeRec[1] = 1;
+      nodeRec[2] = 0;
+      nodeRec[3] = 0;
+      nodeRec[4] = 0;
+      nodeRec[5] = 1;
       if ((*(int *)(*(int *)(inst + 0x88) + 8) != 0x8e) && (0 < *(int *)(inst + 0x84))) {
         loopIndex = 1;
         do {
           sourceDef = IRInst__getOperandSource(inst,loopIndex);
-          if (param_2 == *(int *)(sourceDef + 0x158)) {
-            vector2 = *(uint **)(param_1 + 0x1c);
-            uVar9 = *(uint *)(sourceDef + 0x150);
-            if (uVar9 < *vector2) {
+          if (block == *(int *)(sourceDef + 0x158)) {
+            vector2 = *(uint **)(rebuildState + 0x1c);
+            nodeSlot = *(uint *)(sourceDef + 0x150);
+            if (nodeSlot < *vector2) {
               vectorFilledCount2 = vector2[1];
-              if (vectorFilledCount2 <= uVar9) {
-                _memset(vectorFilledCount2 * 4 + vector2[2],0,(uVar9 - vectorFilledCount2) * 4 + 4);
-                vector2[1] = uVar9 + 1;
+              if (vectorFilledCount2 <= nodeSlot) {
+                _memset(vectorFilledCount2 * 4 + vector2[2],0,(nodeSlot - vectorFilledCount2) * 4 + 4);
+                vector2[1] = nodeSlot + 1;
               }
-              elementRef = (int *)(uVar9 * 4 + vector2[2]);
+              elementRef = (int *)(nodeSlot * 4 + vector2[2]);
             }
             else {
-              elementRef = (int *)Vector__elementRefGrow(vector2,uVar9);
+              elementRef = (int *)Vector__elementRefGrow(vector2,nodeSlot);
             }
-            iVar2 = *(int *)(*elementRef + 4) + 1;
-            iVar5 = puVar4[1];
-            if ((int)puVar4[1] < iVar2) {
-              iVar5 = iVar2;
+            sourceLevelPlusOne = *(int *)(*elementRef + 4) + 1;
+            nodeDepth = nodeRec[1];
+            if ((int)nodeRec[1] < sourceLevelPlusOne) {
+              nodeDepth = sourceLevelPlusOne;
             }
-            puVar4[1] = iVar5;
+            nodeRec[1] = nodeDepth;
           }
           loopIndex = loopIndex + 1;
         } while (loopIndex <= *(int *)(inst + 0x84));
@@ -4102,57 +4103,57 @@ int FUN_00181b80(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
     }
     inst = loopIndex;
   }
-  *param_3 = 0;
-  SchedModel__resetCounters(*(undefined4 *)(param_1 + 8));
-  inst2 = *(int *)(param_2 + 0xa0);
-  for (loopIndex = *(int *)(*(int *)(param_2 + 0xa0) + 4); loopIndex != 0; loopIndex = *(int *)(loopIndex + 4))
+  *maxLevelOut = 0;
+  SchedModel__resetCounters(*(undefined4 *)(rebuildState + 8));
+  inst2 = *(int *)(block + 0xa0);
+  for (loopIndex = *(int *)(*(int *)(block + 0xa0) + 4); loopIndex != 0; loopIndex = *(int *)(loopIndex + 4))
   {
     if (((*(uint *)(inst2 + 0x14) & 1) != 0) && (*(int *)(*(int *)(inst2 + 0x88) + 8) != 0x8e)) {
-      vector3 = *(uint **)(param_1 + 0x1c);
-      uVar9 = *(uint *)(inst2 + 0x150);
-      if (uVar9 < *vector3) {
+      vector3 = *(uint **)(rebuildState + 0x1c);
+      nodeSlot = *(uint *)(inst2 + 0x150);
+      if (nodeSlot < *vector3) {
         vectorFilledCount3 = vector3[1];
-        if (vectorFilledCount3 <= uVar9) {
-          _memset(vectorFilledCount3 * 4 + vector3[2],0,(uVar9 - vectorFilledCount3) * 4 + 4);
-          vector3[1] = uVar9 + 1;
+        if (vectorFilledCount3 <= nodeSlot) {
+          _memset(vectorFilledCount3 * 4 + vector3[2],0,(nodeSlot - vectorFilledCount3) * 4 + 4);
+          vector3[1] = nodeSlot + 1;
         }
-        elementRef2 = (undefined4 *)(uVar9 * 4 + vector3[2]);
+        elementRef2 = (undefined4 *)(nodeSlot * 4 + vector3[2]);
       }
       else {
-        elementRef2 = (undefined4 *)Vector__elementRefGrow(vector3,uVar9);
+        elementRef2 = (undefined4 *)Vector__elementRefGrow(vector3,nodeSlot);
       }
-      piVar6 = (int *)*elementRef2;
-      FUN_00172204(*(undefined4 *)(param_1 + 8),inst2);
+      consumerNode = (int *)*elementRef2;
+      FUN_00172204(*(undefined4 *)(rebuildState + 8),inst2);
       if (0 < *(int *)(inst2 + 0x84)) {
         loopIndex = 1;
         do {
           sourceDef = IRInst__getOperandSource(inst2,loopIndex);
-          if (param_2 == *(int *)(sourceDef + 0x158)) {
-            vector4 = *(uint **)(param_1 + 0x1c);
-            uVar9 = *(uint *)(sourceDef + 0x150);
-            if (uVar9 < *vector4) {
+          if (block == *(int *)(sourceDef + 0x158)) {
+            vector4 = *(uint **)(rebuildState + 0x1c);
+            nodeSlot = *(uint *)(sourceDef + 0x150);
+            if (nodeSlot < *vector4) {
               vectorFilledCount4 = vector4[1];
-              if (vectorFilledCount4 <= uVar9) {
-                _memset(vectorFilledCount4 * 4 + vector4[2],0,(uVar9 - vectorFilledCount4) * 4 + 4);
-                vector4[1] = uVar9 + 1;
+              if (vectorFilledCount4 <= nodeSlot) {
+                _memset(vectorFilledCount4 * 4 + vector4[2],0,(nodeSlot - vectorFilledCount4) * 4 + 4);
+                vector4[1] = nodeSlot + 1;
               }
-              elementRef2 = (undefined4 *)(uVar9 * 4 + vector4[2]);
+              elementRef2 = (undefined4 *)(nodeSlot * 4 + vector4[2]);
             }
             else {
-              elementRef2 = (undefined4 *)Vector__elementRefGrow(vector4,uVar9);
+              elementRef2 = (undefined4 *)Vector__elementRefGrow(vector4,nodeSlot);
             }
-            piVar7 = (int *)*elementRef2;
-            iVar5 = *piVar7;
-            if (*piVar7 < *piVar6 + 1) {
-              iVar5 = *piVar6 + 1;
+            sourceNode = (int *)*elementRef2;
+            newLevel = *sourceNode;
+            if (*sourceNode < *consumerNode + 1) {
+              newLevel = *consumerNode + 1;
             }
-            piVar7[4] = loopIndex;
-            *piVar7 = iVar5;
-            piVar7[3] = inst2;
-            if (iVar5 < *param_3) {
-              iVar5 = *param_3;
+            sourceNode[4] = loopIndex;
+            *sourceNode = newLevel;
+            sourceNode[3] = inst2;
+            if (newLevel < *maxLevelOut) {
+              newLevel = *maxLevelOut;
             }
-            *param_3 = iVar5;
+            *maxLevelOut = newLevel;
           }
           loopIndex = loopIndex + 1;
         } while (loopIndex <= *(int *)(inst2 + 0x84));
@@ -4161,8 +4162,8 @@ int FUN_00181b80(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
     }
     inst2 = loopIndex;
   }
-  uVar8 = (**(code **)(**(int **)(param_1 + 8) + 0x5c))(*(int **)(param_1 + 8));
-  *param_4 = uVar8;
+  schedCost = (**(code **)(**(int **)(rebuildState + 8) + 0x5c))(*(int **)(rebuildState + 8));
+  *schedCostOut = schedCost;
   return;
 }
 
@@ -5259,7 +5260,7 @@ int Block__rebuildAddMulTreesWhereProfitable(rebuildState, block, staleArg3, sta
   
   ((int (*)())FUN_00181ab0)(rebuildState,block,staleArg3,staleArg4,staleArg5,staleArg6,opcodeInfo);
 LAB_00183bcc:
-  ((int (*)())FUN_00181b80)(rebuildState,block,&costLow,costHigh,staleArg5,staleArg6,opcodeInfo);
+  ((int (*)())RebuildState__computeNodeLevels)(rebuildState,block,&costLow,costHigh,staleArg5,staleArg6,opcodeInfo);
   if ((costLow < costHigh[0]) &&
      (nodeRec = *(int *)(rebuildState + 8),
      *(int *)(nodeRec + 0x14) < *(int *)(nodeRec + 0xc) - *(int *)(nodeRec + 0x10))) {

@@ -2925,7 +2925,7 @@
 0x181928	140	FUN_00181928	part_048	converted
 0x1819b4	252	FUN_001819b4	part_048	converted
 0x181ab0	208	FUN_00181ab0	part_048	converted
-0x181b80	896	FUN_00181b80	part_048	converted
+0x181b80	896	RebuildState__computeNodeLevels	part_048	converted
 0x181f00	220	Block__flattenAndRebuildAddMulTree	part_048	converted
 0x183ac8	212	FUN_00183ac8	part_048	converted
 0x183b9c	1152	Block__rebuildAddMulTreesWhereProfitable	part_048	converted
@@ -2981,7 +2981,7 @@
 0x18c980	1112	FUN_0018c980	part_049	converted
 0x18cdd8	1456	FUN_0018cdd8	part_049	converted
 0x18d388	300	FUN_0018d388	part_049	converted
-0x18d4b4	1428	FUN_0018d4b4	part_049	converted
+0x18d4b4	1428	PackState__tryPlaceInstructionSources	part_049	converted
 0x18da48	116	SchedModel__instructionFitsAlone	part_049	converted
 0x18dabc	1680	R300SchedModel__tryRewriteConsumerSelects	part_049	converted
 0x18e1a8	1724	R300SchedModel__legalizeInstruction	part_049	converted

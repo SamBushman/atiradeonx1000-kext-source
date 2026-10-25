@@ -2925,7 +2925,7 @@
 0x181928	FUN_00181928	140	no	indirect call (driver context / vtable / callback)
 0x1819b4	FUN_001819b4	252	no	indirect call (driver context / vtable / callback)
 0x181ab0	FUN_00181ab0	208	yes	
-0x181b80	FUN_00181b80	896	no	indirect call (driver context / vtable / callback)
+0x181b80	RebuildState__computeNodeLevels	896	no	indirect call (driver context / vtable / callback)
 0x181f00	Block__flattenAndRebuildAddMulTree	7020	no	indirect call (driver context / vtable / callback)
 0x183ac8	FUN_00183ac8	212	yes	
 0x183b9c	Block__rebuildAddMulTreesWhereProfitable	1152	yes	
@@ -2981,7 +2981,7 @@
 0x18c980	FUN_0018c980	1112	no	indirect call (driver context / vtable / callback)
 0x18cdd8	FUN_0018cdd8	1456	no	indirect call (driver context / vtable / callback)
 0x18d388	FUN_0018d388	300	no	indirect call (driver context / vtable / callback)
-0x18d4b4	FUN_0018d4b4	1428	yes	
+0x18d4b4	PackState__tryPlaceInstructionSources	1428	yes	
 0x18da48	SchedModel__instructionFitsAlone	116	yes	
 0x18dabc	R300SchedModel__tryRewriteConsumerSelects	1708	no	indirect call (driver context / vtable / callback)
 0x18e1a8	R300SchedModel__legalizeInstruction	4688	no	indirect call (driver context / vtable / callback)
