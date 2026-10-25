@@ -268,18 +268,18 @@ LAB_00131ae0:
 int FUN_00131c10(param_1)
   int param_1;
 {
-  int iVar1;
-  undefined4 uVar2;
-  undefined4 uVar3;
+  int cachedObject;
+  undefined4 baseHandle;
+  undefined4 derivedHandle;
   
-  iVar1 = *(int *)(param_1 + 0x438);
-  if (iVar1 == 0) {
-    uVar2 = ((int (*)())FUN_00131a80)(param_1);
-    uVar3 = ((int (*)())FUN_001319d0)(param_1,uVar2);
-    iVar1 = FUN_00130ec0(uVar2,uVar3,*(undefined4 *)(param_1 + 8));
-    *(int *)(param_1 + 0x438) = iVar1;
+  cachedObject = *(int *)(param_1 + 0x438);
+  if (cachedObject == 0) {
+    baseHandle = ((int (*)())FUN_00131a80)(param_1);
+    derivedHandle = ((int (*)())FUN_001319d0)(param_1,baseHandle);
+    cachedObject = FUN_00130ec0(baseHandle,derivedHandle,*(undefined4 *)(param_1 + 8));
+    *(int *)(param_1 + 0x438) = cachedObject;
   }
-  return iVar1;
+  return cachedObject;
 }
 
 /* FUN_00131c74 @ 0x131c74 (148 bytes) */
@@ -2188,13 +2188,13 @@ int InterferenceMatrix__setPair(param_1, param_2, param_3)
   undefined4 param_2;
   undefined4 param_3;
 {
-  uint uVar1;
-  int iVar2;
+  uint bitIndex;
+  int bitWordAddress;
   
-  iVar2 = *param_1;
-  uVar1 = ((int (*)())pairIndex)(param_1,param_2,param_3);
-  iVar2 = (uVar1 >> 3 & 0x1ffffffc) + iVar2;
-  *(uint *)(iVar2 + 8) = 1 << (uVar1 & 0x1f) | *(uint *)(iVar2 + 8);
+  bitWordAddress = *param_1;
+  bitIndex = ((int (*)())pairIndex)(param_1,param_2,param_3);
+  bitWordAddress = (bitIndex >> 3 & 0x1ffffffc) + bitWordAddress;
+  *(uint *)(bitWordAddress + 8) = 1 << (bitIndex & 0x1f) | *(uint *)(bitWordAddress + 8);
   return;
 }
 
@@ -5047,21 +5047,21 @@ int Program__finishUsevectorChain(inst, param_2, param_3, param_4)
 int FUN_00139008(param_1)
   int param_1;
 {
-  uint uVar1;
-  uint uVar2;
-  int iVar3;
-  int iVar4;
+  uint shiftAmount;
+  uint bitIndex;
+  int setBitCount;
+  int remainingLanes;
   
-  iVar4 = 4;
-  iVar3 = 0;
-  uVar2 = 0;
+  remainingLanes = 4;
+  setBitCount = 0;
+  bitIndex = 0;
   do {
-    uVar1 = uVar2 & 0x3f;
-    uVar2 = uVar2 + 1;
-    iVar3 = iVar3 + (param_1 >> uVar1 & 1U);
-    iVar4 = iVar4 + -1;
-  } while (iVar4 != 0);
-  return iVar3;
+    shiftAmount = bitIndex & 0x3f;
+    bitIndex = bitIndex + 1;
+    setBitCount = setBitCount + (param_1 >> shiftAmount & 1U);
+    remainingLanes = remainingLanes + -1;
+  } while (remainingLanes != 0);
+  return setBitCount;
 }
 
 /* FUN_00139034 @ 0x139034 (40 bytes) */

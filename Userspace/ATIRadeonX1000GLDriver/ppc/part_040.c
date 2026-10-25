@@ -3514,18 +3514,18 @@ int FUN_00130a78(param_1, param_2)
   uint param_1;
   int param_2;
 {
-  uint *puVar1;
-  uint uVar2;
+  uint *nodeFlags;
+  uint continueFlag;
   
-  uVar2 = param_1;
+  continueFlag = param_1;
   while( true ) {
-    if (uVar2 == 0) {
+    if (continueFlag == 0) {
       return 0;
     }
-    puVar1 = (uint *)(param_1 + 0x14);
-    if (((*puVar1 & 1) != 0) && (*(int *)(param_1 + 0x14c) == *(int *)(param_2 + 0x14c))) break;
+    nodeFlags = (uint *)(param_1 + 0x14);
+    if (((*nodeFlags & 1) != 0) && (*(int *)(param_1 + 0x14c) == *(int *)(param_2 + 0x14c))) break;
     param_1 = *(uint *)(param_1 + 8);
-    uVar2 = *puVar1 & 4;
+    continueFlag = *nodeFlags & 4;
     if (param_1 == 0) {
       return 0;
     }

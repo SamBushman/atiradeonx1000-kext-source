@@ -1723,20 +1723,20 @@ int FUN_0010e7b8(param_1, param_2)
   int *param_1;
   int param_2;
 {
-  int iVar1;
-  int iVar2;
+  int laneSourceCount;
+  int remainingLanes;
   
   param_1[5] = 0;
   *param_1 = param_2;
-  iVar1 = ((int (*)())FUN_0010e368)(*(undefined4 *)(param_2 + 0x13c));
-  iVar2 = 4;
-  param_1[6] = iVar1;
+  laneSourceCount = ((int (*)())FUN_0010e368)(*(undefined4 *)(param_2 + 0x13c));
+  remainingLanes = 4;
+  param_1[6] = laneSourceCount;
   do {
     param_1[1] = 0;
     param_1[7] = 0;
     param_1 = param_1 + 1;
-    iVar2 = iVar2 + -1;
-  } while (iVar2 != 0);
+    remainingLanes = remainingLanes + -1;
+  } while (remainingLanes != 0);
   return;
 }
 
@@ -1745,20 +1745,20 @@ int FUN_0010e814(param_1, param_2)
   int *param_1;
   int param_2;
 {
-  int iVar1;
-  int iVar2;
+  int laneSourceCount;
+  int remainingLanes;
   
   param_1[5] = 0;
   *param_1 = param_2;
-  iVar1 = ((int (*)())FUN_0010e368)(*(undefined4 *)(param_2 + 0x13c));
-  iVar2 = 4;
-  param_1[6] = iVar1;
+  laneSourceCount = ((int (*)())FUN_0010e368)(*(undefined4 *)(param_2 + 0x13c));
+  remainingLanes = 4;
+  param_1[6] = laneSourceCount;
   do {
     param_1[1] = 0;
     param_1[7] = 0;
     param_1 = param_1 + 1;
-    iVar2 = iVar2 + -1;
-  } while (iVar2 != 0);
+    remainingLanes = remainingLanes + -1;
+  } while (remainingLanes != 0);
   return;
 }
 
