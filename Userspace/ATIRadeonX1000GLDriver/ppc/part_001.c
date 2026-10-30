@@ -1846,8 +1846,8 @@ int gld_decodeProgramOperandOffset(operandWord, staleArgR4, offsetOut, byteSizeO
   int *offsetOut;
   undefined4 *byteSizeOut;
 {
-  uint uVar1;
-  uint uVar2;
+  uint scratchUint1;
+  uint scratchUint2;
   uint uVar3;
   int iVar4;
   
@@ -1862,69 +1862,69 @@ int gld_decodeProgramOperandOffset(operandWord, staleArgR4, offsetOut, byteSizeO
     *offsetOut = (operandWord & 0xffff) * 0x10 + 0x10;
     return;
   case 3:
-    uVar2 = operandWord & 0xff;
+    scratchUint2 = operandWord & 0xff;
     switch(operandWord >> 8 & 0xf) {
     case 0:
-      *offsetOut = uVar2 * 0x80 + 0x24c0;
+      *offsetOut = scratchUint2 * 0x80 + 0x24c0;
       return;
     case 1:
-      *offsetOut = uVar2 * 0x80 + 0x24d0;
+      *offsetOut = scratchUint2 * 0x80 + 0x24d0;
       return;
     case 2:
-      *offsetOut = uVar2 * 0x80 + 0x24e0;
+      *offsetOut = scratchUint2 * 0x80 + 0x24e0;
       return;
     case 3:
-      *offsetOut = uVar2 * 0x80 + 0x24f0;
+      *offsetOut = scratchUint2 * 0x80 + 0x24f0;
       return;
     case 4:
-      *offsetOut = uVar2 * 0x80 + 0x2500;
+      *offsetOut = scratchUint2 * 0x80 + 0x2500;
       return;
     case 5:
-      *offsetOut = uVar2 * 0x80 + 0x2510;
+      *offsetOut = scratchUint2 * 0x80 + 0x2510;
       return;
     case 6:
-      *offsetOut = uVar2 * 0x80 + 0x2520;
+      *offsetOut = scratchUint2 * 0x80 + 0x2520;
       return;
     default:
       return;
     }
   case 4:
     uVar3 = operandWord & 0xff;
-    uVar1 = operandWord >> 9 & 3;
-    uVar2 = operandWord >> 8 & 1;
-    if (uVar1 == 1) {
-      *offsetOut = uVar2 * 0x240 + uVar3 * 0x30 + 0x2920;
+    scratchUint1 = operandWord >> 9 & 3;
+    scratchUint2 = operandWord >> 8 & 1;
+    if (scratchUint1 == 1) {
+      *offsetOut = scratchUint2 * 0x240 + uVar3 * 0x30 + 0x2920;
       return;
     }
-    if (uVar1 == 2) {
-      *offsetOut = uVar2 * 0x240 + uVar3 * 0x30 + 0x2930;
+    if (scratchUint1 == 2) {
+      *offsetOut = scratchUint2 * 0x240 + uVar3 * 0x30 + 0x2930;
       return;
     }
-    if (uVar1 == 0) {
-      *offsetOut = uVar2 * 0x240 + uVar3 * 0x30 + 0x2910;
+    if (scratchUint1 == 0) {
+      *offsetOut = scratchUint2 * 0x240 + uVar3 * 0x30 + 0x2910;
       return;
     }
     return;
   case 5:
-    uVar2 = operandWord & 1;
+    scratchUint2 = operandWord & 1;
     switch(operandWord >> 1 & 7) {
     case 0:
-      *offsetOut = uVar2 * 0x240 + 0x28c0;
+      *offsetOut = scratchUint2 * 0x240 + 0x28c0;
       return;
     case 1:
-      *offsetOut = uVar2 * 0x240 + 0x28d0;
+      *offsetOut = scratchUint2 * 0x240 + 0x28d0;
       return;
     case 2:
-      *offsetOut = uVar2 * 0x240 + 0x28e0;
+      *offsetOut = scratchUint2 * 0x240 + 0x28e0;
       return;
     case 3:
-      *offsetOut = uVar2 * 0x240 + 0x28f0;
+      *offsetOut = scratchUint2 * 0x240 + 0x28f0;
       return;
     case 4:
-      *offsetOut = uVar2 * 0x240 + 0x2900;
+      *offsetOut = scratchUint2 * 0x240 + 0x2900;
       return;
     case 5:
-      *offsetOut = uVar2 * 0x240 + 0x2a90;
+      *offsetOut = scratchUint2 * 0x240 + 0x2a90;
       return;
     default:
       return;
@@ -1935,25 +1935,25 @@ int gld_decodeProgramOperandOffset(operandWord, staleArgR4, offsetOut, byteSizeO
   case 7:
     break;
   case 8:
-    uVar1 = operandWord >> 5 & 7;
-    uVar2 = operandWord & 0x1f;
-    if (uVar1 == 1) {
-      *offsetOut = (int)(((unsigned char *)0x000039c0) + uVar2 * 0x94);
+    scratchUint1 = operandWord >> 5 & 7;
+    scratchUint2 = operandWord & 0x1f;
+    if (scratchUint1 == 1) {
+      *offsetOut = (int)(((unsigned char *)0x000039c0) + scratchUint2 * 0x94);
       return;
     }
-    if (uVar1 < 2) {
-      if (uVar1 == 0) {
-        *offsetOut = (int)(((unsigned char *)0x0000399c) + uVar2 * 0x94);
+    if (scratchUint1 < 2) {
+      if (scratchUint1 == 0) {
+        *offsetOut = (int)(((unsigned char *)0x0000399c) + scratchUint2 * 0x94);
         return;
       }
       return;
     }
-    if (uVar1 == 2) {
-      *offsetOut = (int)(((unsigned char *)0x000039e4) + uVar2 * 0x94);
+    if (scratchUint1 == 2) {
+      *offsetOut = (int)(((unsigned char *)0x000039e4) + scratchUint2 * 0x94);
       return;
     }
-    if (uVar1 == 3) {
-      *offsetOut = (int)(((unsigned char *)0x00003a08) + uVar2 * 0x94);
+    if (scratchUint1 == 3) {
+      *offsetOut = (int)(((unsigned char *)0x00003a08) + scratchUint2 * 0x94);
       return;
     }
     return;
@@ -1973,8 +1973,8 @@ int gld_decodeProgramOperandOffset(operandWord, staleArgR4, offsetOut, byteSizeO
     *offsetOut = (int)((unsigned char *)0x000030cc);
     return;
   case 0x10:
-    uVar2 = operandWord & 0xff;
-    iVar4 = uVar2 << 6;
+    scratchUint2 = operandWord & 0xff;
+    iVar4 = scratchUint2 << 6;
     switch(operandWord >> 8 & 7) {
     case 0:
       iVar4 = 0;
@@ -1986,56 +1986,56 @@ int gld_decodeProgramOperandOffset(operandWord, staleArgR4, offsetOut, byteSizeO
       iVar4 = 0x80;
       break;
     case 3:
-      iVar4 = (uVar2 + 4) * 0x40;
+      iVar4 = (scratchUint2 + 4) * 0x40;
       break;
     case 4:
-      iVar4 = (uVar2 + 0x10) * 0x40;
+      iVar4 = (scratchUint2 + 0x10) * 0x40;
       break;
     case 5:
-      iVar4 = (uVar2 + 8) * 0x40;
+      iVar4 = (scratchUint2 + 8) * 0x40;
     }
-    uVar2 = operandWord >> 0xe & 3;
-    if (uVar2 < 2) {
+    scratchUint2 = operandWord >> 0xe & 3;
+    if (scratchUint2 < 2) {
       *offsetOut = iVar4 + 0x1860;
     }
     else {
       *offsetOut = iVar4 + 0x1e60;
     }
-    uVar1 = operandWord >> 0xc & 3;
-    if (uVar2 < 3) {
-      if (uVar2 != 0) {
-        *offsetOut = uVar1 * 0x10 + *offsetOut;
+    scratchUint1 = operandWord >> 0xc & 3;
+    if (scratchUint2 < 3) {
+      if (scratchUint2 != 0) {
+        *offsetOut = scratchUint1 * 0x10 + *offsetOut;
         return;
       }
     }
-    else if (uVar2 != 3) {
+    else if (scratchUint2 != 3) {
       return;
     }
-    *offsetOut = uVar1 * 4 + *offsetOut;
+    *offsetOut = scratchUint1 * 4 + *offsetOut;
     *byteSizeOut = 0x10;
     return;
   default:
     return;
   }
-  uVar1 = operandWord >> 5 & 7;
-  uVar2 = operandWord & 0x1f;
-  if (uVar1 == 1) {
-    *offsetOut = (int)(((unsigned char *)0x000039b0) + uVar2 * 0x94);
+  scratchUint1 = operandWord >> 5 & 7;
+  scratchUint2 = operandWord & 0x1f;
+  if (scratchUint1 == 1) {
+    *offsetOut = (int)(((unsigned char *)0x000039b0) + scratchUint2 * 0x94);
     return;
   }
-  if (uVar1 < 2) {
-    if (uVar1 == 0) {
-      *offsetOut = (int)(((unsigned char *)0x0000398c) + uVar2 * 0x94);
+  if (scratchUint1 < 2) {
+    if (scratchUint1 == 0) {
+      *offsetOut = (int)(((unsigned char *)0x0000398c) + scratchUint2 * 0x94);
       return;
     }
     return;
   }
-  if (uVar1 == 2) {
-    *offsetOut = (int)(((unsigned char *)0x000039d4) + uVar2 * 0x94);
+  if (scratchUint1 == 2) {
+    *offsetOut = (int)(((unsigned char *)0x000039d4) + scratchUint2 * 0x94);
     return;
   }
-  if (uVar1 == 3) {
-    *offsetOut = (int)(((unsigned char *)0x000039f8) + uVar2 * 0x94);
+  if (scratchUint1 == 3) {
+    *offsetOut = (int)(((unsigned char *)0x000039f8) + scratchUint2 * 0x94);
     return;
   }
   return;
@@ -2389,7 +2389,7 @@ int _gldCreateQuery(ctx, queryOut)
   int wordIndex;
   int *query;
   int wordByteOffset;
-  undefined4 uVar4;
+  undefined4 scratchUint4;
   uint *bitmap;
   uint bitmapWord;
   uint *bitmapCursor;
@@ -2433,9 +2433,9 @@ LAB_0000a010:
     if (*(int *)(ctx + GLD_queryPoolBytes) == 0) {
       *(undefined4 *)(ctx + GLD_queryCapacity) = 0x20;
       *(undefined4 *)(ctx + GLD_queryPoolBytes) = 0x610;
-      uVar4 = _malloc(0x610);
-      *(undefined4 *)(ctx + GLD_queryPool) = uVar4;
-      _memset(uVar4,0,*(undefined4 *)(ctx + GLD_queryPoolBytes));
+      scratchUint4 = _malloc(0x610);
+      *(undefined4 *)(ctx + GLD_queryPool) = scratchUint4;
+      _memset(scratchUint4,0,*(undefined4 *)(ctx + GLD_queryPoolBytes));
     }
     else {
       if (**(int **)(ctx + GLD_queryRecord) != 0) {
@@ -2455,9 +2455,9 @@ LAB_0000a010:
     bitmapWord = *(uint *)(ctx + GLD_queryCapacity);
     scanCounter = bitmapWord >> 3;
     if (*(int *)(ctx + GLD_queryBitmap) == 0) {
-      uVar4 = _malloc(scanCounter);
-      *(undefined4 *)(ctx + GLD_queryBitmap) = uVar4;
-      _memset(uVar4,0,scanCounter);
+      scratchUint4 = _malloc(scanCounter);
+      *(undefined4 *)(ctx + GLD_queryBitmap) = scratchUint4;
+      _memset(scratchUint4,0,scanCounter);
     }
     else {
       wordByteOffset = _realloc(*(int *)(ctx + GLD_queryBitmap),scanCounter);
