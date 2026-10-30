@@ -3405,14 +3405,14 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 179228	179248	eh-pad	FUN_00179138	8	0x193cc0,__Unwind_Resume
 17a24c	17a26c	eh-pad	ValueKey__setLiteralVec4Operand	8	0x193cc0,__Unwind_Resume
 17aed4	17aef4	eh-pad	ValueKey__setOperandFromValueKey	8	0x193cc0,__Unwind_Resume
-17befc	17bf00	eh-pad	FUN_0017bd78	1	__Unwind_Resume
+17befc	17bf00	eh-pad	ValueKey__rewriteAsMovOfOperandLane	1	__Unwind_Resume
 17c3a8	17c3ac	eh-pad	ValueKey__rewriteAsMovOfOperand	1	__Unwind_Resume
 17cf98	17cf9c	eh-pad	ValueKey__rewriteAsMovOfReplacement	1	__Unwind_Resume
 17d14c	17d150	millicode	ValueKey__rewriteAsMovOfValueKey	1	
 17d1e0	17d200	eh-pad	ValueKey__rewriteAsMovOfValueKey	8	0x193cc0,__Unwind_Resume
 17d330	17d334	eh-pad	ValueKey__rewriteAsMovOfVec4Constant	1	__Unwind_Resume
-17e138	17e13c	eh-pad	FUN_0017e02c	1	__Unwind_Resume
-17e550	17e554	eh-pad	FUN_0017e3f4	1	__Unwind_Resume
+17e138	17e13c	eh-pad	ValueKey__rewriteAsMovOfOperandWithScale	1	__Unwind_Resume
+17e550	17e554	eh-pad	ValueKey__rewriteAsBinaryOfOperands	1	__Unwind_Resume
 17ea3c	17ea40	eh-pad	FUN_0017e7e0	1	__Unwind_Resume
 17ece0	17ece4	millicode	ValueKey__rewriteAsAdd	1	
 17edb0	17edd0	eh-pad	ValueKey__rewriteAsAdd	8	0x193cc0,__Unwind_Resume

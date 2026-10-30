@@ -2880,7 +2880,7 @@
 0x17b12c	2112	ValueKey__mixLiteralSources	part_047	converted
 0x17b96c	748	FUN_0017b96c	part_047	converted
 0x17bc58	288	FUN_0017bc58	part_048	converted
-0x17bd78	388	FUN_0017bd78	part_048	converted
+0x17bd78	388	ValueKey__rewriteAsMovOfOperandLane	part_048	converted
 0x17bf70	392	ValueKey__foldDot3SingleLaneSource	part_048	converted
 0x17c0f8	332	ValueKey__foldDot4UnitVectorSource	part_048	converted
 0x17c244	356	ValueKey__rewriteAsMovOfOperand	part_048	converted
@@ -2889,8 +2889,8 @@
 0x17c5e0	404	FUN_0017c5e0	part_048	converted
 0x17c774	276	ValueKey__foldMulByPlusMinusOne	part_048	converted
 0x17c888	136	ValueKey__replaceWithSource1IfSourcesEqual	part_048	converted
-0x17c910	516	FUN_0017c910	part_048	converted
-0x17cb14	516	FUN_0017cb14	part_048	converted
+0x17c910	516	ValueKey__foldMinOfConstants	part_048	converted
+0x17cb14	516	ValueKey__foldMaxOfConstants	part_048	converted
 0x17cd18	164	ValueKey__foldMadZeroMultiplicand	part_048	converted
 0x17cdbc	192	FUN_0017cdbc	part_048	converted
 0x17ce7c	284	ValueKey__rewriteAsMovOfReplacement	part_048	converted
@@ -2901,12 +2901,12 @@
 0x17d57c	148	ValueKey__foldMulByZero	part_048	converted
 0x17d610	156	FUN_0017d610	part_048	converted
 0x17d6ac	780	FUN_0017d6ac	part_048	converted
-0x17d9b8	548	FUN_0017d9b8	part_048	converted
+0x17d9b8	548	ValueKey__foldCompareOfConstants	part_048	converted
 0x17dbdc	1104	FUN_0017dbdc	part_048	converted
-0x17e02c	268	FUN_0017e02c	part_048	converted
+0x17e02c	268	ValueKey__rewriteAsMovOfOperandWithScale	part_048	converted
 0x17e1f4	324	ValueKey__foldMulPowerOfTwoIntoOutputScale	part_048	converted
 0x17e338	188	FUN_0017e338	part_048	converted
-0x17e3f4	348	FUN_0017e3f4	part_048	converted
+0x17e3f4	348	ValueKey__rewriteAsBinaryOfOperands	part_048	converted
 0x17e658	112	ValueKey__foldMadZeroAddend	part_048	converted
 0x17e6c8	280	ValueKey__foldMadByPlusMinusOne	part_048	converted
 0x17e7e0	604	FUN_0017e7e0	part_048	converted
@@ -2924,7 +2924,7 @@
 0x180830	2472	ValueKey__simplifyModifiersAndAddressing	part_048	converted
 0x181928	140	Inst__isFoldableSingleUse	part_048	converted
 0x1819b4	252	FUN_001819b4	part_048	converted
-0x181ab0	208	FUN_00181ab0	part_048	converted
+0x181ab0	208	Pass__recordFlaggedInstructions	part_048	converted
 0x181b80	896	RebuildState__computeNodeLevels	part_048	converted
 0x181f00	220	Block__flattenAndRebuildAddMulTree	part_048	converted
 0x183ac8	212	FUN_00183ac8	part_048	converted
@@ -2934,7 +2934,7 @@
 0x184ab4	280	pass_minreg_order	part_048	converted
 0x184bcc	36	compareIntsAscending	part_048	converted
 0x184bf0	232	FUN_00184bf0	part_048	converted
-0x184cd8	164	FUN_00184cd8	part_048	converted
+0x184cd8	164	Inst__isMulDotWithinLimits	part_048	converted
 0x184d7c	372	Inst__splitAndMerge	part_048	converted
 0x184ef0	2440	IRInst__foldResultScaleIntoUsers	part_048	converted
 0x1859bc	640	Inst__tryDp3Add	part_048	converted
@@ -2989,7 +2989,7 @@
 0x18f55c	280	R520SchedModel__vslot3_canAddInstruction	part_049	converted
 0x18f674	432	R300SchedModel__vslot12	part_049	converted
 0x18f824	44	R300VSchedModel__vslot2_reset	part_049	converted
-0x18f850	200	FUN_0018f850	part_049	converted
+0x18f850	200	ConstantSlots__rowsCompatible	part_049	converted
 0x18f918	108	R300VSchedModel__vslot13	part_049	converted
 0x18f984	596	R300VSchedModel__vslot28	part_049	converted
 0x18fbd8	348	R300VSchedModel__vslot14	part_049	converted

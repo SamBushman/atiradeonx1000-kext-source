@@ -509,14 +509,14 @@ ffd5c	ffd60	FUN_000fd5c8
 179228	179248	FUN_00179138
 17a24c	17a26c	ValueKey__setLiteralVec4Operand
 17aed4	17aef4	ValueKey__setOperandFromValueKey
-17befc	17bf00	FUN_0017bd78
+17befc	17bf00	ValueKey__rewriteAsMovOfOperandLane
 17c3a8	17c3ac	ValueKey__rewriteAsMovOfOperand
 17cf98	17cf9c	ValueKey__rewriteAsMovOfReplacement
 17d14c	17d150	ValueKey__rewriteAsMovOfValueKey
 17d1e0	17d200	ValueKey__rewriteAsMovOfValueKey
 17d330	17d334	ValueKey__rewriteAsMovOfVec4Constant
-17e138	17e13c	FUN_0017e02c
-17e550	17e554	FUN_0017e3f4
+17e138	17e13c	ValueKey__rewriteAsMovOfOperandWithScale
+17e550	17e554	ValueKey__rewriteAsBinaryOfOperands
 17ea3c	17ea40	FUN_0017e7e0
 17ece0	17ece4	ValueKey__rewriteAsAdd
 17edb0	17edd0	ValueKey__rewriteAsAdd

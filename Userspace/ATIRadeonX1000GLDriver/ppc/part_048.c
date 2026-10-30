@@ -35,33 +35,34 @@ int FUN_0017bc58(inst, param_2, param_3, compilerCtx)
   return (int *)0x0;
 }
 
-/* FUN_0017bd78 @ 0x17bd78 (388 bytes) */
-int FUN_0017bd78(ctx, operandIndex, param_3, param_4)
+/* ValueKey__rewriteAsMovOfOperandLane @ 0x17bd78 (388 bytes) */
+int ValueKey__rewriteAsMovOfOperandLane(ctx, operandIndex, lane, resultScaleCode)
   int ctx;
   int operandIndex;
-  int param_3;
-  undefined4 param_4;
+  int lane;
+  undefined4 resultScaleCode;
 {
+  undefined4 operandSelectWord;
   int inst;
   int operandRecord2;
   int operandRecord;
-  bool bVar1;
-  byte bVar2;
-  uint uVar3;
+  bool noExtraSource;
+  byte laneSelectByte;
+  uint operandFlags;
   int node;
   int inst2;
   uint instFlags;
   undefined4 operandRef3;
   undefined4 afterInst;
   undefined4 block;
-  undefined4 uVar10;
-  undefined4 uVar11;
+  undefined4 operandValueNumber;
+  undefined4 destSelectWord;
   undefined4 operandRef;
   undefined4 operandRef2;
   undefined4 saturate;
   undefined4 destRegister;
   undefined4 destRegisterOffset;
-  undefined4 local_58;
+  undefined4 extraValueNumber;
   
   node = *(int *)(ctx + 0xb0);
   afterInst = *(undefined4 *)(node + 4);
@@ -70,22 +71,22 @@ int FUN_0017bd78(ctx, operandIndex, param_3, param_4)
   operandRef2 = *(undefined4 *)(*(int *)(ctx + 0xb0) + 0x8c);
   operandRecord2 = IRInst__getOperandRecord(*(int *)(ctx + 0xb0),0);
   inst = *(int *)(ctx + 0xb0);
-  uVar11 = *(undefined4 *)(operandRecord2 + 0x10);
+  destSelectWord = *(undefined4 *)(operandRecord2 + 0x10);
   operandRef = *(undefined4 *)(operandIndex * 0x18 + inst + 0x8c);
   saturate = *(undefined4 *)(inst + 0x120);
   operandRecord = IRInst__getOperandRecord(inst,operandIndex);
   inst2 = *(int *)(ctx + 0xb0);
-  bVar2 = *(byte *)(param_3 + operandRecord + 0x10);
+  laneSelectByte = *(byte *)(lane + operandRecord + 0x10);
   instFlags = *(uint *)(inst2 + 0x14);
-  uVar3 = *(uint *)(operandIndex * 0x18 + inst2 + 0xa0);
-  uVar10 = *(undefined4 *)(operandIndex * 4 + ctx + 0x210);
-  bVar1 = (instFlags >> 9 & 1) == 0;
-  if (bVar1) {
+  operandFlags = *(uint *)(operandIndex * 0x18 + inst2 + 0xa0);
+  operandValueNumber = *(undefined4 *)(operandIndex * 4 + ctx + 0x210);
+  noExtraSource = (instFlags >> 9 & 1) == 0;
+  if (noExtraSource) {
     operandRef3 = 0;
-    local_58 = 0;
+    extraValueNumber = 0;
   }
   else {
-    local_58 = *(undefined4 *)(*(int *)(inst2 + 0x84) * 4 + ctx + 0x210);
+    extraValueNumber = *(undefined4 *)(*(int *)(inst2 + 0x84) * 4 + ctx + 0x210);
     operandRef3 = *(undefined4 *)(*(int *)(inst2 + 0x84) * 0x18 + inst2 + 0x8c);
   }
   destRegister = *(undefined4 *)(inst2 + 0x94);
@@ -94,23 +95,23 @@ int FUN_0017bd78(ctx, operandIndex, param_3, param_4)
   IRInst__setOperandRef(inst2,0,operandRef2);
   *(undefined4 *)(inst2 + 0x94) = destRegister;
   *(undefined4 *)(inst2 + 0x98) = destRegisterOffset;
-  *(undefined4 *)(inst2 + 0x9c) = uVar11;
+  *(undefined4 *)(inst2 + 0x9c) = destSelectWord;
   *(undefined4 *)(inst2 + 0x120) = saturate;
-  *(undefined4 *)(inst2 + 0x124) = param_4;
+  *(undefined4 *)(inst2 + 0x124) = resultScaleCode;
   IRInst__setOperandRef(inst2,1,operandRef);
-  uVar11 = *(undefined4 *)(PTR_DAT_001e8b8c + (uint)bVar2 * 4);
+  operandSelectWord = *(undefined4 *)(PTR_DAT_001e8b8c + (uint)laneSelectByte * 4);
   operandRecord = IRInst__getOperandRecord(inst2,1);
-  *(undefined4 *)(operandRecord + 0x10) = uVar11;
-  IROperand__setModifierBits(inst2 + 0xa4,1,uVar3 & 1);
-  IROperand__setModifierBits(inst2 + 0xa4,2,uVar3 >> 1 & 1);
-  *(undefined4 *)(ctx + 0x214) = uVar10;
-  if (bVar1) {
+  *(undefined4 *)(operandRecord + 0x10) = operandSelectWord;
+  IROperand__setModifierBits(inst2 + 0xa4,1,operandFlags & 1);
+  IROperand__setModifierBits(inst2 + 0xa4,2,operandFlags >> 1 & 1);
+  *(undefined4 *)(ctx + 0x214) = operandValueNumber;
+  if (noExtraSource) {
     *(undefined4 *)(ctx + 0x218) = 0;
   }
   else {
     IRInst__appendSource(inst2,operandRef3);
     *(uint *)(inst2 + 0x14) = *(uint *)(inst2 + 0x14) | 0x200;
-    *(undefined4 *)(ctx + 0x218) = local_58;
+    *(undefined4 *)(ctx + 0x218) = extraValueNumber;
   }
   if ((instFlags & 0x200000) != 0) {
     *(uint *)(inst2 + 0x14) = *(uint *)(inst2 + 0x14) | 0x200000;
@@ -161,7 +162,7 @@ int ValueKey__foldDot3SingleLaneSource(ctx)
           if ((double)*exprRecord2 == 1.0) {
             scaleExponent = *(int *)(*(int *)(ctx + 0xb0) + 0x124);
 LAB_0017c0b0:
-            ((int (*)())FUN_0017bd78)(ctx,(loopRemaining == 1) + 1,loopIndex,scaleExponent);
+            ((int (*)())ValueKey__rewriteAsMovOfOperandLane)(ctx,(loopRemaining == 1) + 1,loopIndex,scaleExponent);
             ValueKey__rebuild(ctx);
             return 1;
           }
@@ -228,7 +229,7 @@ int ValueKey__foldDot4UnitVectorSource(ctx)
           unitLane = 2;
           resultScaleCode = *(undefined4 *)(*(int *)(ctx + 0xb0) + 0x124);
 LAB_0017c1c4:
-          ((int (*)())FUN_0017bd78)(ctx,operandNumber,unitLane,resultScaleCode);
+          ((int (*)())ValueKey__rewriteAsMovOfOperandLane)(ctx,operandNumber,unitLane,resultScaleCode);
           ValueKey__rebuild(ctx);
           return 1;
         }
@@ -256,24 +257,24 @@ int ValueKey__rewriteAsMovOfOperand(ctx, operandIndex)
   int inst;
   int operandRecord2;
   int operandRecord;
-  bool bVar1;
-  uint uVar2;
+  bool noExtraSource;
+  uint operandFlags;
   int node;
   int inst2;
   uint instFlags;
   undefined4 operandRef3;
   undefined4 afterInst;
   undefined4 block;
-  undefined4 uVar9;
-  undefined4 uVar10;
+  undefined4 operandValueNumber;
+  undefined4 destSelectWord;
   undefined4 operandRef;
   undefined4 operandRef2;
   undefined4 saturate;
   undefined4 resultScaleCode;
-  undefined4 uVar15;
+  undefined4 operandSelectWord;
   undefined4 destRegister;
   undefined4 destRegisterOffset;
-  undefined4 local_58;
+  undefined4 extraValueNumber;
   
   node = *(int *)(ctx + 0xb0);
   afterInst = *(undefined4 *)(node + 4);
@@ -282,23 +283,23 @@ int ValueKey__rewriteAsMovOfOperand(ctx, operandIndex)
   operandRef2 = *(undefined4 *)(*(int *)(ctx + 0xb0) + 0x8c);
   operandRecord2 = IRInst__getOperandRecord(*(int *)(ctx + 0xb0),0);
   inst = *(int *)(ctx + 0xb0);
-  uVar10 = *(undefined4 *)(operandRecord2 + 0x10);
+  destSelectWord = *(undefined4 *)(operandRecord2 + 0x10);
   operandRef = *(undefined4 *)(operandIndex * 0x18 + inst + 0x8c);
   saturate = *(undefined4 *)(inst + 0x120);
   resultScaleCode = *(undefined4 *)(inst + 0x124);
   operandRecord = IRInst__getOperandRecord(inst,operandIndex);
   inst2 = *(int *)(ctx + 0xb0);
-  uVar15 = *(undefined4 *)(operandRecord + 0x10);
+  operandSelectWord = *(undefined4 *)(operandRecord + 0x10);
   instFlags = *(uint *)(inst2 + 0x14);
-  uVar2 = *(uint *)(operandIndex * 0x18 + inst2 + 0xa0);
-  uVar9 = *(undefined4 *)(operandIndex * 4 + ctx + 0x210);
-  bVar1 = (instFlags >> 9 & 1) == 0;
-  if (bVar1) {
+  operandFlags = *(uint *)(operandIndex * 0x18 + inst2 + 0xa0);
+  operandValueNumber = *(undefined4 *)(operandIndex * 4 + ctx + 0x210);
+  noExtraSource = (instFlags >> 9 & 1) == 0;
+  if (noExtraSource) {
     operandRef3 = 0;
-    local_58 = 0;
+    extraValueNumber = 0;
   }
   else {
-    local_58 = *(undefined4 *)(*(int *)(inst2 + 0x84) * 4 + ctx + 0x210);
+    extraValueNumber = *(undefined4 *)(*(int *)(inst2 + 0x84) * 4 + ctx + 0x210);
     operandRef3 = *(undefined4 *)(*(int *)(inst2 + 0x84) * 0x18 + inst2 + 0x8c);
   }
   destRegister = *(undefined4 *)(inst2 + 0x94);
@@ -307,22 +308,22 @@ int ValueKey__rewriteAsMovOfOperand(ctx, operandIndex)
   IRInst__setOperandRef(inst2,0,operandRef2);
   *(undefined4 *)(inst2 + 0x98) = destRegisterOffset;
   *(undefined4 *)(inst2 + 0x94) = destRegister;
-  *(undefined4 *)(inst2 + 0x9c) = uVar10;
+  *(undefined4 *)(inst2 + 0x9c) = destSelectWord;
   *(undefined4 *)(inst2 + 0x120) = saturate;
   *(undefined4 *)(inst2 + 0x124) = resultScaleCode;
   IRInst__setOperandRef(inst2,1,operandRef);
   operandRecord = IRInst__getOperandRecord(inst2,1);
-  *(undefined4 *)(operandRecord + 0x10) = uVar15;
-  IROperand__setModifierBits(inst2 + 0xa4,1,uVar2 & 1);
-  IROperand__setModifierBits(inst2 + 0xa4,2,uVar2 >> 1 & 1);
-  *(undefined4 *)(ctx + 0x214) = uVar9;
-  if (bVar1) {
+  *(undefined4 *)(operandRecord + 0x10) = operandSelectWord;
+  IROperand__setModifierBits(inst2 + 0xa4,1,operandFlags & 1);
+  IROperand__setModifierBits(inst2 + 0xa4,2,operandFlags >> 1 & 1);
+  *(undefined4 *)(ctx + 0x214) = operandValueNumber;
+  if (noExtraSource) {
     *(undefined4 *)(ctx + 0x218) = 0;
   }
   else {
     IRInst__appendSource(inst2,operandRef3);
     *(uint *)(inst2 + 0x14) = *(uint *)(inst2 + 0x14) | 0x200;
-    *(undefined4 *)(ctx + 0x218) = local_58;
+    *(undefined4 *)(ctx + 0x218) = extraValueNumber;
   }
   if ((instFlags & 0x200000) != 0) {
     *(uint *)(inst2 + 0x14) = *(uint *)(inst2 + 0x14) | 0x200000;
@@ -559,8 +560,8 @@ int ValueKey__replaceWithSource1IfSourcesEqual(ctx)
   return 0;
 }
 
-/* FUN_0017c910 @ 0x17c910 (516 bytes) */
-int FUN_0017c910(ctx)
+/* ValueKey__foldMinOfConstants @ 0x17c910 (516 bytes) */
+int ValueKey__foldMinOfConstants(ctx)
   int ctx;
 {
   int laneResult;
@@ -660,8 +661,8 @@ int FUN_0017c910(ctx)
   } while( true );
 }
 
-/* FUN_0017cb14 @ 0x17cb14 (516 bytes) */
-int FUN_0017cb14(ctx)
+/* ValueKey__foldMaxOfConstants @ 0x17cb14 (516 bytes) */
+int ValueKey__foldMaxOfConstants(ctx)
   int ctx;
 {
   int laneResult;
@@ -1345,8 +1346,8 @@ int FUN_0017d6ac(ctx, laneConstants)
   return loopIndex;
 }
 
-/* FUN_0017d9b8 @ 0x17d9b8 (548 bytes) */
-int FUN_0017d9b8(ctx)
+/* ValueKey__foldCompareOfConstants @ 0x17d9b8 (548 bytes) */
+int ValueKey__foldCompareOfConstants(ctx)
   int ctx;
 {
   int operandRecAddr;
@@ -1640,8 +1641,8 @@ LAB_0017dd38:
   return 0;
 }
 
-/* FUN_0017e02c @ 0x17e02c (268 bytes) */
-int FUN_0017e02c(ctx, operandIndex, resultScaleCode)
+/* ValueKey__rewriteAsMovOfOperandWithScale @ 0x17e02c (268 bytes) */
+int ValueKey__rewriteAsMovOfOperandWithScale(ctx, operandIndex, resultScaleCode)
   int ctx;
   int operandIndex;
   undefined4 resultScaleCode;
@@ -1764,7 +1765,7 @@ int ValueKey__foldMulPowerOfTwoIntoOutputScale(ctx)
             operandBase = *(int *)(ctx + 0xb0) + loopIndex * 0x18 + 0x80;
             IROperand__setModifierBits(operandBase + 0xc,1,(*(uint *)(operandBase + 0x20) ^ 1) & 1);
           }
-          ((int (*)())FUN_0017e02c)(ctx,loopIndex,scaleExponent);
+          ((int (*)())ValueKey__rewriteAsMovOfOperandWithScale)(ctx,loopIndex,scaleExponent);
           ValueKey__rebuild(ctx);
           return 1;
         }
@@ -1797,7 +1798,7 @@ int FUN_0017e338(ctx)
       a1 = *(int *)(iVar1 + 0x124) + 1;
       iVar1 = (**(code **)(*a0 + 0xfc))(a0,a1,iVar1,in_r6,in_r7,in_r8,*(int *)(iVar1 + 0x124));
       if (iVar1 != 0) {
-        ((int (*)())FUN_0017e02c)(ctx,2,a1);
+        ((int (*)())ValueKey__rewriteAsMovOfOperandWithScale)(ctx,2,a1);
         ValueKey__rebuild(ctx);
         return 1;
       }
@@ -1806,8 +1807,8 @@ int FUN_0017e338(ctx)
   return 0;
 }
 
-/* FUN_0017e3f4 @ 0x17e3f4 (348 bytes) */
-int FUN_0017e3f4(ctx, newOpcode, operandIndex, operandIndex2)
+/* ValueKey__rewriteAsBinaryOfOperands @ 0x17e3f4 (348 bytes) */
+int ValueKey__rewriteAsBinaryOfOperands(ctx, newOpcode, operandIndex, operandIndex2)
   int ctx;
   undefined4 newOpcode;
   int operandIndex;
@@ -1918,7 +1919,7 @@ int ValueKey__foldMadZeroAddend(param_1)
   callResult = Compiler__valueNumberForExpr(*(undefined4 *)(param_1 + 0x238),0);
   callResult = Inst__writtenLanesAllMatchValue(param_1,*(undefined4 *)(callResult + 4),3);
   if (callResult != 0) {
-    ((int (*)())FUN_0017e3f4)(param_1,0x13,1,2);
+    ((int (*)())ValueKey__rewriteAsBinaryOfOperands)(param_1,0x13,1,2);
     ValueKey__rebuild(param_1);
   }
   return callResult != 0;
@@ -1939,7 +1940,7 @@ int ValueKey__foldMadByPlusMinusOne(ctx)
   do {
     callResult = Inst__writtenLanesAllMatchValue(ctx,uVar3,loopIndex);
     if (callResult != 0) {
-      ((int (*)())FUN_0017e3f4)(ctx,0x12,(loopIndex == 1) + 1,3);
+      ((int (*)())ValueKey__rewriteAsBinaryOfOperands)(ctx,0x12,(loopIndex == 1) + 1,3);
       ValueKey__rebuild(ctx);
       return 1;
     }
@@ -1952,7 +1953,7 @@ int ValueKey__foldMadByPlusMinusOne(ctx)
   do {
     callResult = Inst__writtenLanesAllMatchValue(ctx,uVar3,loopIndex);
     if (callResult != 0) {
-      ((int (*)())FUN_0017e3f4)(ctx,0x12,(loopIndex == 1) + 1,3);
+      ((int (*)())ValueKey__rewriteAsBinaryOfOperands)(ctx,0x12,(loopIndex == 1) + 1,3);
       IROperand__setModifierBits(*(int *)(ctx + 0xb0) + 0xa4,1,
                    (*(uint *)(*(int *)(ctx + 0xb0) + 0xb8) ^ 1) & 1);
       ValueKey__rebuild(ctx);
@@ -2679,7 +2680,7 @@ joined_r0x0017f980:
   }
   else if (loopIndex < 0x1e) {
     if (loopIndex == 0x17) {
-      loopIndex = ((int (*)())FUN_0017cb14)(ctx);
+      loopIndex = ((int (*)())ValueKey__foldMaxOfConstants)(ctx);
       if (loopIndex != 0) {
         return 0;
       }
@@ -2792,7 +2793,7 @@ LAB_0017fe28:
         loopIndex = *(int *)(ctx + 0x238);
         goto LAB_0017fe34;
       }
-      loopIndex = ((int (*)())FUN_0017c910)(ctx);
+      loopIndex = ((int (*)())ValueKey__foldMinOfConstants)(ctx);
       if (loopIndex != 0) {
         return 0;
       }
@@ -2855,7 +2856,7 @@ LAB_0017fe28:
       } while (notLastLane);
     }
     else {
-      loopIndex = ((int (*)())FUN_0017d9b8)(ctx);
+      loopIndex = ((int (*)())ValueKey__foldCompareOfConstants)(ctx);
       if (loopIndex != 0) {
         return 0;
       }
@@ -3990,8 +3991,8 @@ int FUN_001819b4(inst, inst2)
   return inst2[0x54] - iVar2 < inst[0x54] - iVar1;
 }
 
-/* FUN_00181ab0 @ 0x181ab0 (208 bytes) */
-int FUN_00181ab0(pass, block, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
+/* Pass__recordFlaggedInstructions @ 0x181ab0 (208 bytes) */
+int Pass__recordFlaggedInstructions(pass, block, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
   int *pass;
   int block;
   undefined4 unusedArg3;
@@ -5286,7 +5287,7 @@ int Block__rebuildAddMulTreesWhereProfitable(rebuildState, block, staleArg3, sta
   int costLow;
   int costHigh [8];
   
-  ((int (*)())FUN_00181ab0)(rebuildState,block,staleArg3,staleArg4,staleArg5,staleArg6,opcodeInfo);
+  ((int (*)())Pass__recordFlaggedInstructions)(rebuildState,block,staleArg3,staleArg4,staleArg5,staleArg6,opcodeInfo);
 LAB_00183bcc:
   ((int (*)())RebuildState__computeNodeLevels)(rebuildState,block,&costLow,costHigh,staleArg5,staleArg6,opcodeInfo);
   if ((costLow < costHigh[0]) &&
@@ -5920,8 +5921,8 @@ int FUN_00184bf0(param_1)
   return 1;
 }
 
-/* FUN_00184cd8 @ 0x184cd8 (164 bytes) */
-int FUN_00184cd8(this, arg2, passContext)
+/* Inst__isMulDotWithinLimits @ 0x184cd8 (164 bytes) */
+int Inst__isMulDotWithinLimits(this, arg2, passContext)
   int *this;
   undefined4 arg2;
   int passContext;

@@ -472,7 +472,7 @@ LAB_001874d4:
         goto LAB_00187498;
       }
       if ((((constantValue == 0.5) || (constantValue == -0.5)) &&
-          (uniformConstantFound = FUN_00184cd8(inst,operandIndex,program), uniformConstantFound != 0)) &&
+          (uniformConstantFound = Inst__isMulDotWithinLimits(inst,operandIndex,program), uniformConstantFound != 0)) &&
          ((inst2[0x2e] & 1U) == (uint)(constantValue == 0.5))) {
         inst3 = IRInst__create(0x99,*(undefined4 *)(program + 8));
         newRegId = *(undefined4 *)((int)inst3 + 0x14c);
@@ -5135,8 +5135,8 @@ int R300VSchedModel__vslot2_reset(param_1)
   return;
 }
 
-/* FUN_0018f850 @ 0x18f850 (200 bytes) */
-int FUN_0018f850(staleArg1, slotsA, slotsB, strict)
+/* ConstantSlots__rowsCompatible @ 0x18f850 (200 bytes) */
+int ConstantSlots__rowsCompatible(staleArg1, slotsA, slotsB, strict)
   undefined4 staleArg1;
   int *slotsA;
   int *slotsB;
@@ -5729,7 +5729,7 @@ LAB_0019092c:
               ((int (*)())R300VSchedModel__classifySourceBank)(this,inst,3,&slot2Bank,slot2Index);
             }
           }
-          callResult = ((int (*)())FUN_0018f850)(this,&slot0Bank,&slot0Index,
+          callResult = ((int (*)())ConstantSlots__rowsCompatible)(this,&slot0Bank,&slot0Index,
                                (uint)(*(int *)(inst[0x22] + 8) == 0x14));
           goto joined_r0x00190928;
         }
@@ -5741,7 +5741,7 @@ LAB_0019092c:
         numSources = (**(code **)(*inst + 0x14))(inst);
         if (0 < numSources) {
           ((int (*)())R300VSchedModel__classifySourceBank)(this,inst,1,&slot2Bank,slot2Index);
-          callResult = ((int (*)())FUN_0018f850)(this,&slot0Bank,&slot0Index,0);
+          callResult = ((int (*)())ConstantSlots__rowsCompatible)(this,&slot0Bank,&slot0Index,0);
 joined_r0x00190928:
           if (callResult == 0) goto LAB_00190854;
         }
@@ -5756,7 +5756,7 @@ joined_r0x00190928:
         if (1 < numSources) {
           ((int (*)())R300VSchedModel__classifySourceBank)(this,inst,2,&slot1Bank,&slot1Index);
         }
-        callResult = ((int (*)())FUN_0018f850)(this,&slot0Bank,&slot0Index,0);
+        callResult = ((int (*)())ConstantSlots__rowsCompatible)(this,&slot0Bank,&slot0Index,0);
         goto joined_r0x00190928;
       }
       goto LAB_0019092c;
