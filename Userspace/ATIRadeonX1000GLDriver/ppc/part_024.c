@@ -186,8 +186,8 @@ int Program__insertBlockAfter(program, ref, node)
   return ((int (*)())Program__freeWorkArrays)(program);
 }
 
-/* FUN_000ec3e8 @ 0xec3e8 (68 bytes) */
-int FUN_000ec3e8(program, node)
+/* Program__prependBlock @ 0xec3e8 (68 bytes) */
+int Program__prependBlock(program, node)
   int program;
   int node;
 {
@@ -197,8 +197,8 @@ int FUN_000ec3e8(program, node)
   return ((int (*)())Program__freeWorkArrays)(program);
 }
 
-/* FUN_000ec42c @ 0xec42c (60 bytes) */
-int FUN_000ec42c(program, node)
+/* Program__appendBlock @ 0xec42c (60 bytes) */
+int Program__appendBlock(program, node)
   int program;
   int node;
 {
@@ -297,9 +297,9 @@ int Program__getBlocksArray(program)
   return blocksArray;
 }
 
-/* FUN_000ec658 @ 0xec658 (88 bytes) */
-int FUN_000ec658(param_1)
-  int param_1;
+/* Program__countInstructions @ 0xec658 (88 bytes) */
+int Program__countInstructions(program)
+  int program;
 {
   int listCount;
   int iVar1;
@@ -307,7 +307,7 @@ int FUN_000ec658(param_1)
   int iVar3;
   
   iVar2 = 0;
-  iVar3 = *(int *)(param_1 + 900);
+  iVar3 = *(int *)(program + 900);
   iVar1 = *(int *)(iVar3 + 8);
   while (iVar1 != 0) {
     listCount = DList__count(iVar3 + 0x90);
@@ -415,12 +415,12 @@ int Program__splitMixedSourceKinds(program)
   return;
 }
 
-/* FUN_000ec8e4 @ 0xec8e4 (60 bytes) */
-int FUN_000ec8e4(param_1)
-  int param_1;
+/* Program__freezeVRegs @ 0xec8e4 (60 bytes) */
+int Program__freezeVRegs(program)
+  int program;
 {
-  FUN_0012740c(*(undefined4 *)(param_1 + 0x3ac));
-  *(uint *)(param_1 + 0x30) = *(uint *)(param_1 + 0x30) | 0x10;
+  FUN_0012740c(*(undefined4 *)(program + 0x3ac));
+  *(uint *)(program + 0x30) = *(uint *)(program + 0x30) | 0x10;
   return;
 }
 
@@ -2060,7 +2060,7 @@ LAB_000ef1c8:
           else {
             if ((inst[0x21] == 0) || ((destKind != 0x3b && (destKind != 0x2c)))) {
               if ((inst[0x20] == 0) ||
-                 ((destKind = FUN_000f3154(inst), destKind == 0 ||
+                 ((destKind = IRInst__writesAllLanes(inst), destKind == 0 ||
                   (destKind = (**(code **)(*inst + 0x4c))(inst), destKind != 0))))
               goto LAB_000ef1c8;
               resultVReg = inst[0x23];
@@ -2317,14 +2317,14 @@ int Program__initAndTranslate(program, ilReader)
   allocation = allocation + 1;
   EntryBlock__ctor_eab70(allocation,*(undefined4 *)(program + 8));
   *(undefined4 **)(program + 0x3a0) = allocation;
-  ((int (*)())FUN_000ec3e8)(program,allocation);
+  ((int (*)())Program__prependBlock)(program,allocation);
   arenaA = *(undefined4 *)(*(int *)(program + 8) + 0x374);
   allocation = (undefined4 *)Arena__alloc(arenaA,0x130);
   *allocation = arenaA;
   allocation = allocation + 1;
   ExitBlock__ctor_eaae8(allocation,*(undefined4 *)(program + 8));
   *(undefined4 **)(program + 0x3a8) = allocation;
-  ((int (*)())FUN_000ec42c)(program,allocation);
+  ((int (*)())Program__appendBlock)(program,allocation);
   VRegInfo__new_127994(*(undefined4 *)(program + 0x3ac),*(uint *)(program + 0x30) & 1);
   hwDescription = *(int **)(*(int *)(program + 8) + 0x30c);
   (**(code **)(*hwDescription + 0x10))(hwDescription,*(int *)(program + 8));
@@ -4308,11 +4308,11 @@ int FUN_000f2cac(param_1)
   return 0xffffffff;
 }
 
-/* FUN_000f2d08 @ 0xf2d08 (16 bytes) */
-int FUN_000f2d08(param_1)
-  uint param_1;
+/* Lane__isValid @ 0xf2d08 (16 bytes) */
+int Lane__isValid(selectByte)
+  uint selectByte;
 {
-  return param_1 < 4;
+  return selectByte < 4;
 }
 
 

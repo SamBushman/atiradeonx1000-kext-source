@@ -561,7 +561,7 @@ int KhanPs__vslot5_materializeSpecialRegister(this, registerKind, compiler)
         }
         listByteOffset = listByteOffset + 4;
       }
-      canCombine = FUN_000d9f3c(*(undefined4 *)(compiler + 0x398),0);
+      canCombine = CompileInput__lacksFlag0x200000(*(undefined4 *)(compiler + 0x398),0);
       if (canCombine == 0) {
         newInst = (int *)IRInst__create(0x14,compiler);
         IRInst__setOperandRef(newInst,0,newRegister);

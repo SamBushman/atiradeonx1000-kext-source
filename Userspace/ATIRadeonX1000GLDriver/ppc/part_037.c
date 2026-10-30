@@ -2849,7 +2849,7 @@ int FUN_00122de8(program)
     ((int (*)())FUN_0011f578)(program);
     ((int (*)())FUN_00121000)(program);
   }
-  FUN_000ec8e4(program);
+  Program__freezeVRegs(program);
   piVar1 = *(int **)(program + 0x3b0);
   iVar2 = *piVar1;
   if (iVar2 != 0) {

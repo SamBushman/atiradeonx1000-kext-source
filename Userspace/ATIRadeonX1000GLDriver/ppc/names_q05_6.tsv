@@ -2139,20 +2139,20 @@ local	Program__insertExitMarkerAndFlagBlocks	param_4	unusedArg4	INFERRED	passed 
 local	Program__insertExitMarkerAndFlagBlocks	param_5	unusedArg5	INFERRED	passed by the caller (register leftover) but not read in the body
 local	Program__insertExitMarkerAndFlagBlocks	param_6	unusedArg6	INFERRED	passed by the caller (register leftover) but not read in the body
 local	Program__insertExitMarkerAndFlagBlocks	param_7	unusedArg7	INFERRED	passed by the caller (register leftover) but not read in the body
-local	laneBytes__mapTwoThreeToOne	param_2	unusedArg2	INFERRED	passed by the caller (register leftover) but not read in the body
-local	SelectWord__fillUnusedLanes	param_2	unusedArg2	INFERRED	passed by the caller (register leftover) but not read in the body
-local	SelectWord__fillUnusedLanes	param_3	unusedArg3	INFERRED	passed by the caller (register leftover) but not read in the body
-local	SelectWord__firstWrittenComponent	param_1	unusedArg1	INFERRED	passed by the caller (register leftover) but not read in the body
-local	SelectWord__firstUnwrittenComponent	param_1	unusedArg1	INFERRED	passed by the caller (register leftover) but not read in the body
+local	laneBytes__mapTwoThreeToOne	param_2	laneBytes	INFERRED	four lane bytes (values 2 and 3 are mapped to 1)
+local	SelectWord__fillUnusedLanes	param_2	selectA	INFERRED	select word A: its unused lanes (4) take the byte of B
+local	SelectWord__fillUnusedLanes	param_3	selectB	INFERRED	select word B
+local	SelectWord__firstWrittenComponent	param_1	selectWord	INFERRED	select word scanned
+local	SelectWord__firstUnwrittenComponent	param_1	selectWord	INFERRED	select word scanned
 local	SelectWord__clearReadComponents	param_1	outMask	INFERRED	receives the four result bytes
 local	FUN_000f32cc	param_1	outMask	INFERRED	receives the four result bytes
 local	SelectWord__readMask	param_1	outMask	INFERRED	receives the four result bytes
 local	FUN_000f3470	param_1	outSelect	INFERRED	receives the canonical select word
 local	FUN_000f3470	param_2	selectWord	INFERRED	select word to canonicalize
 local	FUN_000f366c	param_1	outMask	INFERRED	receives the four result bytes
-local	FUN_000f366c	param_2	unusedArg2	INFERRED	passed by the caller (register leftover) but not read in the body
-local	FUN_000f370c	param_2	unusedArg2	INFERRED	passed by the caller (register leftover) but not read in the body
-local	laneBytes__clearSetLanes	param_2	unusedArg2	INFERRED	passed by the caller (register leftover) but not read in the body
+local	FUN_000f366c	param_2	selectWord	INFERRED	select word whose used lanes are cleared in the result
+local	FUN_000f370c	param_2	laneBytes	INFERRED	four lane bytes: lanes equal to zero get their lane index in the result
+local	laneBytes__clearSetLanes	param_2	laneBytes	INFERRED	four lane bytes
 local	FUN_000f3968	param_1	outMask	INFERRED	receives the four result bytes
 local	FUN_000f39d0	param_1	outMask	INFERRED	receives the four result bytes
 local	FUN_000f472c	param_1	outMask	INFERRED	receives the four result bytes
@@ -2544,3 +2544,43 @@ local	FUN_000da09c	param_2	selector	INFERRED	zero selects the object at +0x38
 func	FUN_000e33cc	EncoderState__init_e33cc	INFERRED	initialises the encoder state (same code as EncoderState__init_e3544): program and compiler pointers, zeroed counters, three arena vectors and the sink object
 local	FUN_000e33cc	param_2	program	INFERRED	program whose compiler (+8) is recorded
 local	FUN_000e33cc	param_3	sinkArg	INFERRED	argument forwarded to the sink object's initialiser (vtable +0x14)
+func	FUN_000f2d08	Lane__isValid	INFERRED	returns select value < 4 (a real component, not the unused marker 4)
+local	FUN_000f2d08	param_1	selectByte	INFERRED	select byte tested
+func	FUN_000f8960	OpcodeRecord__getField8	INFERRED	returns the word at +8 of the 0x24-byte opcode record index (param_1) in the table (param_2)
+local	FUN_000f8960	param_1	opcodeIndex	INFERRED	opcode record index
+local	FUN_000f8960	param_2	recordTable	INFERRED	opcode record table base
+func	FUN_000f8970	OpcodeRecord__getOperandCount	INFERRED	returns the word at +4 of the opcode record: number of operands iterated by the translator
+local	FUN_000f8970	param_1	opcodeIndex	INFERRED	opcode record index
+local	FUN_000f8970	param_2	recordTable	INFERRED	opcode record table base
+func	FUN_000f8994	OpcodeRecord__getFieldC	INFERRED	returns the word at +0xc of the opcode record
+local	FUN_000f8994	param_1	opcodeIndex	INFERRED	opcode record index
+local	FUN_000f8994	param_2	recordTable	INFERRED	opcode record table base
+func	FUN_000f89a4	OpcodeRecord__getTranslationKind	INFERRED	returns the word at +0x10 of the opcode record: translation kind switched on by Program__translateILStream
+local	FUN_000f89a4	param_1	opcodeIndex	INFERRED	opcode record index
+local	FUN_000f89a4	param_2	recordTable	INFERRED	opcode record table base
+func	FUN_000f8980	OpcodeRecord__getOperandByte	INFERRED	returns byte +0x1c + operand of the opcode record
+local	FUN_000f8980	param_2	operandIndex	INFERRED	operand number
+local	FUN_000f8980	param_3	recordTable	INFERRED	opcode record table base
+func	FUN_000e4710	OpcodeRecord__getOperandByteB	INFERRED	returns byte +0x1c + operand of the opcode record (same code as OpcodeRecord__getOperandByte, other argument order)
+func	FUN_000f4a5c	RegisterMap__nextTempIndex	INFERRED	returns the counter at +0x30 and decrements it (temp indices count downwards)
+local	FUN_000f4a5c	param_1	registerMap	INFERRED	register map
+func	FUN_000e2ee4	EncoderState__emitInstruction	INFERRED	calls the sink object's vtable +0x94 with (inst, inst+0x90, compiler)
+local	FUN_000e2ee4	param_1	encoder	INFERRED	encoder state (sink at [8], compiler at [0])
+local	FUN_000e2ee4	param_2	inst	INFERRED	instruction emitted
+func	FUN_000f3ae0	IRInst__destSelectLane3IsX	INFERRED	true when select byte 3 (+0x13) of operand record 0 is zero (component x)
+func	FUN_000e9910	Block__splitEdgeAndConnect	INFERRED	Block__splitOutgoingEdge(block, toBlock, param_3) then Block__connect(fromBlock, toBlock)
+local	FUN_000e9910	param_1	block	INFERRED	block whose outgoing edge is split
+func	FUN_000d9f3c	CompileInput__lacksFlag0x200000	INFERRED	for the vertex (0) or fragment side: true when the flag pointer at +0x48 is null or its first word has bit 0x200000 clear
+local	FUN_000d9f3c	param_1	compileInput	INFERRED	compile input object (+0x2c vertex side, +0x30 fragment side)
+local	FUN_000d9f3c	param_2	sideSelector	INFERRED	0 = vertex side, nonzero = fragment side
+func	FUN_000e47f4	ILReader__topScopeOpcode	INFERRED	returns the first word of the top element of the reader's scope stack (+0x40), 0 when empty
+func	FUN_000ec42c	Program__appendBlock	INFERRED	pushes node on the program's block list (+0x37c), sets node+0xac to the program and frees the cached work arrays
+func	FUN_000ec8e4	Program__freezeVRegs	INFERRED	calls FUN_0012740c on the register map and sets program flag 0x10
+local	FUN_000ec8e4	param_1	program	INFERRED	program
+func	FUN_000f3154	IRInst__writesAllLanes	INFERRED	true when none of the four write-mask bytes (+0x9c..+0x9f) equals 1 (masked)
+local	FUN_000f3154	param_1	inst	INFERRED	instruction
+func	FUN_000ec3e8	Program__prependBlock	INFERRED	pushes node at the front of the program's block list (+0x37c), sets node+0xac to the program and frees the cached work arrays
+func	FUN_000ec658	Program__countInstructions	INFERRED	sums DList__count of the instruction lists (+0x90) of all blocks after the first
+local	FUN_000ec658	param_1	program	INFERRED	program
+local	FUN_000ec3e8	param_1	program	INFERRED	program
+local	FUN_000ec3e8	param_2	node	INFERRED	block prepended

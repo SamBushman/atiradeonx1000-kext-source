@@ -48,7 +48,7 @@
 0xcec34	FUN_000cea6c
 0xcec48	FUN_000cea6c
 0xd9f34	ConstBank__addMappedEntry
-0xd9f78	FUN_000d9f3c
+0xd9f78	CompileInput__lacksFlag0x200000
 0xda880	MiniFloat__decode
 0xe2084	Compiler__releaseChipAndPools
 0xe208c	Compiler__releaseChipAndPools

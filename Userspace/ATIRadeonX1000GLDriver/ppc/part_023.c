@@ -90,14 +90,14 @@ LAB_000e9874:
   } while( true );
 }
 
-/* FUN_000e9910 @ 0xe9910 (56 bytes) */
-int FUN_000e9910(param_1, toBlock, param_3, fromBlock)
-  undefined4 param_1;
+/* Block__splitEdgeAndConnect @ 0xe9910 (56 bytes) */
+int Block__splitEdgeAndConnect(block, toBlock, param_3, fromBlock)
+  undefined4 block;
   undefined4 toBlock;
   undefined4 param_3;
   undefined4 fromBlock;
 {
-  ((int (*)())Block__splitOutgoingEdge)(param_1,toBlock,param_3);
+  ((int (*)())Block__splitOutgoingEdge)(block,toBlock,param_3);
   return Block__connect(fromBlock,toBlock);
 }
 

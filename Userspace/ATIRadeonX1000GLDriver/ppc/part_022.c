@@ -69,7 +69,7 @@ int ILReader__decodeInstruction(ilReader, tokenIndexPtr, compiler)
   }
   opcode = ILReader__currentOpcode(ilReader);
   tokenWindow = (uint *)(ilReader + 0x8c);
-  opcodeClass = FUN_000f89a4(opcode,*(undefined4 *)(*(int *)(compiler + 0x30c) + 0xc));
+  opcodeClass = OpcodeRecord__getTranslationKind(opcode,*(undefined4 *)(*(int *)(compiler + 0x30c) + 0xc));
   if (opcodeClass == 6) {
     *(ushort *)(ilReader + 0x8e) =
          ((ushort)((uint)*(undefined4 *)(ilReader + 0x8c) >> 0x10) & 0x3fff) + 0xcf;
@@ -157,11 +157,11 @@ LAB_000e4e74:
       } while (extraTokenCount != loopIndex6);
     }
   }
-  destCount = FUN_000f8960(opcode,*(undefined4 *)(*(int *)(compiler + 0x30c) + 0xc));
-  sourceCount = FUN_000f8970(opcode,*(undefined4 *)(*(int *)(compiler + 0x30c) + 0xc));
-  trailingTokenCount = FUN_000f8994(opcode,*(undefined4 *)(*(int *)(compiler + 0x30c) + 0xc));
+  destCount = OpcodeRecord__getField8(opcode,*(undefined4 *)(*(int *)(compiler + 0x30c) + 0xc));
+  sourceCount = OpcodeRecord__getOperandCount(opcode,*(undefined4 *)(*(int *)(compiler + 0x30c) + 0xc));
+  trailingTokenCount = OpcodeRecord__getFieldC(opcode,*(undefined4 *)(*(int *)(compiler + 0x30c) + 0xc));
   *(undefined4 *)(ilReader + 0x5c) = trailingTokenCount;
-  destReplicaCount = FUN_000e4710(opcode,0,*(undefined4 *)(*(int *)(compiler + 0x30c) + 0xc));
+  destReplicaCount = OpcodeRecord__getOperandByteB(opcode,0,*(undefined4 *)(*(int *)(compiler + 0x30c) + 0xc));
   operandStartIndex = *tokenIndexPtr;
   tokenIndex = operandStartIndex;
   if (destCount < 1) goto LAB_000e50f4;
@@ -247,7 +247,7 @@ LAB_000e50f4:
     sourceStartIndex = tokenIndex;
     do {
       sourceByteIndex = loopIndex * 4;
-      sourceReplicaCount = FUN_000e4710(opcode,destCount + loopIndex,*(undefined4 *)(*(int *)(compiler + 0x30c) + 0xc));
+      sourceReplicaCount = OpcodeRecord__getOperandByteB(opcode,destCount + loopIndex,*(undefined4 *)(*(int *)(compiler + 0x30c) + 0xc));
       *(int *)(*(int *)(ilReader + 0x6c) + sourceByteIndex) = sourceStartIndex * 4 + ilReader + 0x8c;
       tokenIndex = *tokenIndexPtr;
       *tokenIndexPtr = tokenIndex + 1;

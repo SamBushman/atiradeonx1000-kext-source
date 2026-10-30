@@ -1156,7 +1156,7 @@
 0xd9d74	ConstBank__storeBoolLane	228	yes	
 0xd9e58	scStoreIntConstantComponent	64	yes	
 0xd9e98	ConstBank__addMappedEntry	156	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0xd9f3c	FUN_000d9f3c	60	yes	
+0xd9f3c	CompileInput__lacksFlag0x200000	60	yes	
 0xd9f80	CompileInput__getFloatConstCount	32	yes	
 0xd9fa0	CompileInput__getIntConstCount	32	yes	
 0xd9fc0	CompileInput__getBoolConstCount	32	yes	
@@ -1292,7 +1292,7 @@
 0xe2b68	FUN_000e2b68	140	no	indirect call (driver context / vtable / callback)
 0xe2bf4	FUN_000e2bf4	132	no	indirect call (driver context / vtable / callback)
 0xe2c78	ConstRecord__emitStores	620	yes	
-0xe2ee4	FUN_000e2ee4	32	yes	
+0xe2ee4	EncoderState__emitInstruction	32	yes	
 0xe2f04	IRInst__redirectDestThroughNewMov	136	no	indirect call (driver context / vtable / callback)
 0xe2f8c	IRInst__lastSourceKeyEquals	76	yes	
 0xe2fd8	MachineAssembler__vslot34_declareDestinationLanesByClass	360	yes	
@@ -1312,10 +1312,10 @@
 0xe4450	ILReader__appendIntConst	116	yes	
 0xe44c4	ILReader__readFloatConst	456	yes	
 0xe468c	ILReader__lookupConstComponent	132	yes	
-0xe4710	FUN_000e4710	20	yes	
+0xe4710	OpcodeRecord__getOperandByteB	20	yes	
 0xe4724	ILReader__appendBoolConst	92	yes	
 0xe4780	ILReader__appendFloatConst	116	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0xe47f4	FUN_000e47f4	60	yes	
+0xe47f4	ILReader__topScopeOpcode	60	yes	
 0xe4830	ILReader__dtor_e4830	260	yes	
 0xe4934	ILReader__dtor_e4934	260	yes	
 0xe4a38	ILReader__fetchToken	520	yes	
@@ -1381,7 +1381,7 @@
 0xe93ac	Block__bypass	900	no	indirect call (driver context / vtable / callback)
 0xe9730	Block__bypassAndDetach	76	yes	
 0xe977c	Block__splitOutgoingEdge	404	yes	
-0xe9910	FUN_000e9910	56	yes	
+0xe9910	Block__splitEdgeAndConnect	56	yes	
 0xe9948	Block__splitIncomingEdge	404	yes	
 0xe9adc	Block__splitEdge	292	yes	
 0xe9c00	Block__recordDefinition	200	yes	
@@ -1454,15 +1454,15 @@
 0xec2e8	Program__freeWorkArrays	136	yes	
 0xec370	Program__insertBlockBefore	60	yes	
 0xec3ac	Program__insertBlockAfter	60	yes	
-0xec3e8	FUN_000ec3e8	68	yes	
-0xec42c	FUN_000ec42c	60	yes	
+0xec3e8	Program__prependBlock	68	yes	
+0xec42c	Program__appendBlock	60	yes	
 0xec468	Program__storeDominatorOrder	136	yes	
 0xec4f0	Program__getDominatorInfo	168	yes	
 0xec5b8	Program__getBlocksArray	160	yes	
-0xec658	FUN_000ec658	88	yes	
+0xec658	Program__countInstructions	88	yes	
 0xec6b0	Program__findBranchingBlock	120	yes	
 0xec728	Program__splitMixedSourceKinds	444	yes	
-0xec8e4	FUN_000ec8e4	60	yes	
+0xec8e4	Program__freezeVRegs	60	yes	
 0xec920	FUN_000ec920	240	no	indirect call (driver context / vtable / callback)
 0xeca10	KhanVs__vslot17_isSimpleInst	192	no	indirect call (driver context / vtable / callback)
 0xecad0	KhanPs__vslot17_isSimpleInst	192	no	indirect call (driver context / vtable / callback)
@@ -1498,7 +1498,7 @@
 0xf2bdc	SelectWord__compose	128	yes	
 0xf2c5c	SelectWord__isSplat	80	yes	
 0xf2cac	FUN_000f2cac	92	yes	
-0xf2d08	FUN_000f2d08	16	yes	
+0xf2d08	Lane__isValid	16	yes	
 0xf2d18	SelectWord__areCompatible	144	yes	
 0xf2da8	SelectWord__matches	112	yes	
 0xf2e18	FUN_000f2e18	56	yes	
@@ -1512,7 +1512,7 @@
 0xf30d4	SelectWord__firstWrittenComponent	52	yes	
 0xf3108	SelectWord__firstUnwrittenComponent	52	yes	
 0xf313c	FUN_000f313c	24	yes	
-0xf3154	FUN_000f3154	60	yes	
+0xf3154	IRInst__writesAllLanes	60	yes	
 0xf3190	SelectWord__isIdentity	88	yes	
 0xf31e8	IRInst__isSourceSelectIdentity	16	yes	
 0xf31f8	SelectWord__selectWhereMasked	96	yes	
@@ -1536,7 +1536,7 @@
 0xf39d0	FUN_000f39d0	96	yes	
 0xf3a30	IRInst__countWrittenComponents	96	yes	
 0xf3a90	FUN_000f3a90	80	yes	
-0xf3ae0	FUN_000f3ae0	48	yes	
+0xf3ae0	IRInst__destSelectLane3IsX	48	yes	
 0xf3b10	FUN_000f3b10	88	yes	
 0xf3b68	FUN_000f3b68	88	yes	
 0xf3bc0	FUN_000f3bc0	112	no	no static blocker: a test could reach it (needs arguments / state no test builds)
@@ -1550,7 +1550,7 @@
 0xf48ec	IRInst__sourceLanesAllWritten	144	yes	
 0xf497c	FUN_000f497c	168	yes	
 0xf4a24	ConstRecords__fillFloat4	56	yes	
-0xf4a5c	FUN_000f4a5c	20	yes	
+0xf4a5c	RegisterMap__nextTempIndex	20	yes	
 0xf4a70	isRegKindBelow21	20	yes	
 0xf4a84	Emitter__allocateConstantSlot	324	yes	
 0xf4bc8	floatLess	32	no	tiny (32 bytes) crt / thunk fragment: reached only through a caller no test exercises
@@ -1593,11 +1593,11 @@
 0xf8588	DominatorTree__eval	72	yes	
 0xf85d0	DominatorTree__compute	740	yes	
 0xf88b4	Program__computeDominators	140	yes	
-0xf8960	FUN_000f8960	16	yes	
-0xf8970	FUN_000f8970	16	yes	
-0xf8980	FUN_000f8980	20	yes	
-0xf8994	FUN_000f8994	16	yes	
-0xf89a4	FUN_000f89a4	16	yes	
+0xf8960	OpcodeRecord__getField8	16	yes	
+0xf8970	OpcodeRecord__getOperandCount	16	yes	
+0xf8980	OpcodeRecord__getOperandByte	20	yes	
+0xf8994	OpcodeRecord__getFieldC	16	yes	
+0xf89a4	OpcodeRecord__getTranslationKind	16	yes	
 0xf89b4	tableWordOrEight	52	yes	
 0xf89e8	remapSelect1To0	36	yes	
 0xf8a0c	remapSelectSmall	36	yes	

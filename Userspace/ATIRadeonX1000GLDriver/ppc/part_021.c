@@ -1158,14 +1158,14 @@ int ConstRecord__emitStores(constRecord, hwDescription, program)
   return;
 }
 
-/* FUN_000e2ee4 @ 0xe2ee4 (32 bytes) */
-int FUN_000e2ee4(param_1, param_2)
-  undefined4 *param_1;
-  int param_2;
+/* EncoderState__emitInstruction @ 0xe2ee4 (32 bytes) */
+int EncoderState__emitInstruction(encoder, inst)
+  undefined4 *encoder;
+  int inst;
 {
                     
                     
-  (**(code **)(*(int *)param_1[8] + 0x94))((int *)param_1[8],param_2,param_2 + 0x90,*param_1);
+  (**(code **)(*(int *)encoder[8] + 0x94))((int *)encoder[8],inst,inst + 0x90,*encoder);
   return;
 }
 
@@ -1538,7 +1538,7 @@ int MachineCodeWriter__encodeProgram(writer, outBuffer, outSize)
         firstPredecessor = (int *)*predecessorSlot;
         if (((firstPredecessor != (int *)0x0) && (predecessorQueryResult = (**(code **)(*firstPredecessor + 0x24))(firstPredecessor), predecessorQueryResult != 0))
            && (block == (int *)firstPredecessor[0x4e])) {
-          ((int (*)())FUN_000e2ee4)(auStack_74,firstPredecessor);
+          ((int (*)())EncoderState__emitInstruction)(auStack_74,firstPredecessor);
         }
       }
       ((int (*)())FUN_000e2838)(auStack_74,(uint)block,*writer);
@@ -1995,7 +1995,7 @@ int ILReader__currentOpcode(ilReader)
    * `< 0xbf` before trusting it, resetting to 0 otherwise). This function, this field's only
    * other reader, returned it raw with no such check - live-verified the caller (ILReader__decodeInstruction)
    * then used the unclamped value (0xc000 in the reproducing run) as an unbounded switch/table
-   * index, crashing in FUN_000e4710's table lookup three calls later. Added the same clamp every
+   * index, crashing in OpcodeRecord__getOperandByteB's table lookup three calls later. Added the same clamp every
    * other consumer already has. */
   undefined2 opcode;
   opcode = *(undefined2 *)(ilReader + 0x8e);
@@ -2168,8 +2168,8 @@ int ILReader__lookupConstComponent(ilReader, registerNumber, componentIndex, out
   return 1;
 }
 
-/* FUN_000e4710 @ 0xe4710 (20 bytes) */
-int FUN_000e4710(param_1, param_2, param_3)
+/* OpcodeRecord__getOperandByteB @ 0xe4710 (20 bytes) */
+int OpcodeRecord__getOperandByteB(param_1, param_2, param_3)
   int param_1;
   int param_2;
   int param_3;
@@ -2211,8 +2211,8 @@ void ILReader__appendFloatConst(int *ilReader,undefined4 registerIndex,double co
   return;
 }
 
-/* FUN_000e47f4 @ 0xe47f4 (60 bytes) */
-int FUN_000e47f4(ilReader)
+/* ILReader__topScopeOpcode @ 0xe47f4 (60 bytes) */
+int ILReader__topScopeOpcode(ilReader)
   int ilReader;
 {
   undefined4 *puVar1;

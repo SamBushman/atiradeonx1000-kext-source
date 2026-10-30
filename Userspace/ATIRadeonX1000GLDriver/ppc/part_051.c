@@ -911,7 +911,7 @@ int FUN_0019651c(assembler, inst, staleArg3)
     emitSlotAFn = *(code **)(*assembler + 0xc4);
     a1 = assembler[0x25];
     fetchArg = *(undefined4 *)(inst + 0x148);
-    testResult = FUN_000d9f3c(*(undefined4 *)(assembler[3] + 0x398),0);
+    testResult = CompileInput__lacksFlag0x200000(*(undefined4 *)(assembler[3] + 0x398),0);
     if (testResult == 0) {
       a3 = 3;
     }

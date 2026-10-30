@@ -185,7 +185,7 @@ int Compiler__getOrCreateLoadConstN(compiler, constCount, firstConstKind, firstC
     cachedInst = allocation + 1;
     IRLoadConst__ctor_109938(cachedInst,*compiler);
     if ((*(uint *)(*(int *)(*compiler + 0x6c4) + 0x30) & 0x10000) == 0) {
-      newInstId = FUN_000f4a5c(compiler);
+      newInstId = RegisterMap__nextTempIndex(compiler);
       allocation[0x26] = newInstId;
       allocation[0x27] = 0xc;
     }
@@ -902,7 +902,7 @@ int Compiler__getOrCreateConstVectorN(owner, constCount, operandWord0, operandWo
   uStack00000034 = operandWord5;
   foundEntry = HashTable__find(auStack_8c[constCount],*(undefined4 *)(owner + 0x28));
   if (foundEntry == 0) {
-    newInstId = FUN_000f4a5c(owner);
+    newInstId = RegisterMap__nextTempIndex(owner);
     iVar4 = FUN_001275a0(owner,0xc,newInstId,0);
     vectorSlot = *(int **)(iVar4 + 0x18);
     if (*vectorSlot == 0) {
@@ -1148,7 +1148,7 @@ int Program__findOrCreateConstInst(program, constWords, selectWord)
 LAB_000f6b68:
     if ((*(uint *)(program + 0x30) & 8) == 0) {
       registerMapForNew = *(undefined4 *)(program + 0x3ac);
-      newInstId = FUN_000f4a5c(registerMapForNew);
+      newInstId = RegisterMap__nextTempIndex(registerMapForNew);
       newEntry = FUN_001275a0(registerMapForNew,0x33,newInstId,0);
       newEntryVectorOrSlot = *(int **)(newEntry + 0x18);
       if (*newEntryVectorOrSlot == 0) {
@@ -1169,7 +1169,7 @@ LAB_000f6b68:
       *allocation = arena;
       resultInst = allocation + 1;
       IRLoadConst__ctor_109938(resultInst,*(undefined4 *)(program + 8));
-      newInstId = FUN_000f4a5c(*(undefined4 *)(program + 0x3ac));
+      newInstId = RegisterMap__nextTempIndex(*(undefined4 *)(program + 0x3ac));
       allocation[0x26] = newInstId;
       allocation[0x27] = 0x33;
       (**(code **)(**(int **)(program + 0x3a0) + 0xc))(*(int **)(program + 0x3a0),resultInst);
@@ -2384,45 +2384,45 @@ int Program__computeDominators(program)
   return;
 }
 
-/* FUN_000f8960 @ 0xf8960 (16 bytes) */
-int FUN_000f8960(param_1, param_2)
-  int param_1;
-  int param_2;
+/* OpcodeRecord__getField8 @ 0xf8960 (16 bytes) */
+int OpcodeRecord__getField8(opcodeIndex, recordTable)
+  int opcodeIndex;
+  int recordTable;
 {
-  return *(undefined4 *)(param_1 * 0x24 + param_2 + 8);
+  return *(undefined4 *)(opcodeIndex * 0x24 + recordTable + 8);
 }
 
-/* FUN_000f8970 @ 0xf8970 (16 bytes) */
-int FUN_000f8970(param_1, param_2)
-  int param_1;
-  int param_2;
+/* OpcodeRecord__getOperandCount @ 0xf8970 (16 bytes) */
+int OpcodeRecord__getOperandCount(opcodeIndex, recordTable)
+  int opcodeIndex;
+  int recordTable;
 {
-  return *(undefined4 *)(param_1 * 0x24 + param_2 + 4);
+  return *(undefined4 *)(opcodeIndex * 0x24 + recordTable + 4);
 }
 
-/* FUN_000f8980 @ 0xf8980 (20 bytes) */
-int FUN_000f8980(ilOpcode, param_2, param_3)
+/* OpcodeRecord__getOperandByte @ 0xf8980 (20 bytes) */
+int OpcodeRecord__getOperandByte(ilOpcode, operandIndex, recordTable)
   int ilOpcode;
-  int param_2;
-  int param_3;
+  int operandIndex;
+  int recordTable;
 {
-  return *(undefined1 *)(param_2 + ilOpcode * 0x24 + param_3 + 0x1c);
+  return *(undefined1 *)(operandIndex + ilOpcode * 0x24 + recordTable + 0x1c);
 }
 
-/* FUN_000f8994 @ 0xf8994 (16 bytes) */
-int FUN_000f8994(param_1, param_2)
-  int param_1;
-  int param_2;
+/* OpcodeRecord__getFieldC @ 0xf8994 (16 bytes) */
+int OpcodeRecord__getFieldC(opcodeIndex, recordTable)
+  int opcodeIndex;
+  int recordTable;
 {
-  return *(undefined4 *)(param_1 * 0x24 + param_2 + 0xc);
+  return *(undefined4 *)(opcodeIndex * 0x24 + recordTable + 0xc);
 }
 
-/* FUN_000f89a4 @ 0xf89a4 (16 bytes) */
-int FUN_000f89a4(param_1, param_2)
-  int param_1;
-  int param_2;
+/* OpcodeRecord__getTranslationKind @ 0xf89a4 (16 bytes) */
+int OpcodeRecord__getTranslationKind(opcodeIndex, recordTable)
+  int opcodeIndex;
+  int recordTable;
 {
-  return *(undefined4 *)(param_1 * 0x24 + param_2 + 0x10);
+  return *(undefined4 *)(opcodeIndex * 0x24 + recordTable + 0x10);
 }
 
 /* tableWordOrEight @ 0xf89b4 (52 bytes) */
@@ -5778,7 +5778,7 @@ code_r0x00103c40:
   compiler = *(int *)(program + 8);
   hwDescription = *(int **)(compiler + 0x30c);
   hwOpcodeRecords = hwDescription[3];
-  translationKind = ((int (*)())FUN_000f89a4)(ilOpcode,hwOpcodeRecords);
+  translationKind = ((int (*)())OpcodeRecord__getTranslationKind)(ilOpcode,hwOpcodeRecords);
   switch(translationKind) {
   case 0:
   case 1:
@@ -6816,13 +6816,13 @@ code_r0x000febe0:
     compilerRef = *(int *)(program + 8);
     operandNumber = (uint ******)0x0;
     opcodeRecordTable = *(undefined4 *)(*(int *)(compilerRef + 0x30c) + 0xc);
-    destOperandCount = (uint *****)((int (*)())FUN_000f8960)(ilOpcode,opcodeRecordTable);
-    opcodeOperandCount = ((int (*)())FUN_000f8970)(ilOpcode,opcodeRecordTable);
+    destOperandCount = (uint *****)((int (*)())OpcodeRecord__getField8)(ilOpcode,opcodeRecordTable);
+    opcodeOperandCount = ((int (*)())OpcodeRecord__getOperandCount)(ilOpcode,opcodeRecordTable);
     if (0 < (int)destOperandCount) {
       do {
         operandByteOffset = (int)operandNumber << 2;
         for (laneLoopIndex = 0;
-            iVar23 = ((int (*)())FUN_000f8980)(ilOpcode,operandNumber,
+            iVar23 = ((int (*)())OpcodeRecord__getOperandByte)(ilOpcode,operandNumber,
                                   *(undefined4 *)(*(int *)(compilerRef + 0x30c) + 0xc)), laneLoopIndex <= iVar23
             ; laneLoopIndex = laneLoopIndex + 1) {
           argR6 = loopStackData;
@@ -6841,7 +6841,7 @@ code_r0x000febe0:
         operandByteOffsetC = operandIndexB << 2;
         laneMaskPtr = (undefined1 *)((int)destOperandCount + operandIndexB);
         for (iVar23 = 0;
-            iVar25 = ((int (*)())FUN_000f8980)(ilOpcode,laneMaskPtr,*(undefined4 *)(*(int *)(compilerRef + 0x30c) + 0xc)),
+            iVar25 = ((int (*)())OpcodeRecord__getOperandByte)(ilOpcode,laneMaskPtr,*(undefined4 *)(*(int *)(compilerRef + 0x30c) + 0xc)),
             iVar23 <= iVar25; iVar23 = iVar23 + 1) {
           argR6 = *(uint *******)((int)ilReader[0x1b] + operandByteOffsetC);
           argR8 = (uint ******)&lastDeclRegister;
@@ -6926,8 +6926,8 @@ code_r0x001005f4:
       }
       goto code_r0x001022b4;
     case 0x17:
-      enclosingScopeOpcode = FUN_000e47f4(ilReader);
-      if ((enclosingScopeOpcode == 0x3e) || (enclosingScopeOpcode = FUN_000e47f4(ilReader), enclosingScopeOpcode == 0x71)) {
+      enclosingScopeOpcode = ILReader__topScopeOpcode(ilReader);
+      if ((enclosingScopeOpcode == 0x3e) || (enclosingScopeOpcode = ILReader__topScopeOpcode(ilReader), enclosingScopeOpcode == 0x71)) {
         loopDepth = loopStackAlloc[2];
         if (loopDepth != 0) {
           stackElement = (int *)0x0;
@@ -6964,7 +6964,7 @@ code_r0x001005f4:
         }
       }
       else {
-        enclosingScopeOpcode = FUN_000e47f4(ilReader);
+        enclosingScopeOpcode = ILReader__topScopeOpcode(ilReader);
         opcodeTemplateTable = (uint ******)PTR_DAT_001e8bb4;
         if (enclosingScopeOpcode == 0x72) {
           stackElement = (int *)0x0;
@@ -8446,7 +8446,7 @@ code_r0x00101d1c:
   argR6 = (uint ******)*ilReader[0x19];
   argR8 = builtInstB;
   ((int (*)())IRInst__applyDescriptorSelects)(program,loopStackData,0,argR6,0,builtInstB,0);
-  opcodeRecordField = ((int (*)())FUN_000f8970)(ilOpcode,*(undefined4 *)(*(int *)(*(int *)(program + 8) + 0x30c) + 0xc));
+  opcodeRecordField = ((int (*)())OpcodeRecord__getOperandCount)(ilOpcode,*(undefined4 *)(*(int *)(*(int *)(program + 8) + 0x30c) + 0xc));
   operandCountPlusOne = (uint ******)(opcodeRecordField + 1);
   if (1 < (int)operandCountPlusOne) {
     sourceOperandNumber = (uint ******)((int)((unsigned char *)0x0) + 1);

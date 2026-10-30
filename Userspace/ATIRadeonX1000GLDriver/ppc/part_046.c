@@ -1788,7 +1788,7 @@ LAB_00175ce8:
       loopPtr2[0x24] = uVar3;
       loopPtr2 = loopPtr2 + 1;
     } while (bVar1);
-    loopRemaining = FUN_000f3154(valueKey[0x2c]);
+    loopRemaining = IRInst__writesAllLanes(valueKey[0x2c]);
     if ((loopRemaining == 0) && (loopRemaining = IRInst__isProjectionOfOpcode2a(valueKey[0x2c]), loopRemaining == 0)) {
       *(int *)(*(int *)(valueKey[0x8e] + 0x6c4) + 0xa8) =
            *(int *)(*(int *)(valueKey[0x8e] + 0x6c4) + 0xa8) + 1;

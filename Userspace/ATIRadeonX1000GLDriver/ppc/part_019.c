@@ -2499,19 +2499,19 @@ int ConstBank__addMappedEntry(unusedArg1, registerKey, unusedArg3, unusedArg4, v
   return 1;
 }
 
-/* FUN_000d9f3c @ 0xd9f3c (60 bytes) */
-int FUN_000d9f3c(param_1, param_2)
-  int param_1;
-  int param_2;
+/* CompileInput__lacksFlag0x200000 @ 0xd9f3c (60 bytes) */
+int CompileInput__lacksFlag0x200000(compileInput, sideSelector)
+  int compileInput;
+  int sideSelector;
 {
   bool bVar1;
   int iVar2;
   
-  if (param_2 == 0) {
-    iVar2 = *(int *)(param_1 + 0x2c);
+  if (sideSelector == 0) {
+    iVar2 = *(int *)(compileInput + 0x2c);
   }
   else {
-    iVar2 = *(int *)(param_1 + 0x30);
+    iVar2 = *(int *)(compileInput + 0x30);
   }
   bVar1 = true;
   if (*(uint **)(iVar2 + 0x48) != (uint *)0x0) {
