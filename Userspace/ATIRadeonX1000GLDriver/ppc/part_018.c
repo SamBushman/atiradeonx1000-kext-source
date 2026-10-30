@@ -2581,7 +2581,7 @@ int ilRewriteForTextureState(ctx, param_2, compileRecord, ilSource, param_5)
    * correct, but leaving local_c100/local_c0fc/local_c0f8/local_c0f0/local_c0d0/local_c090 as
    * separate, non-overlapping locals was NOT harmless - confirmed live on real hardware. Stock's
    * real code does do pointer arithmetic from this buffer into them: FUN_000cd1b0 (called with
-   * auStack_c148) tail-calls into scSetCallbackTables/FUN_000e2524, which read *(auStack_c148+0x4c)
+   * auStack_c148) tail-calls into scSetCallbackTables/Compiler__compileWithRetry, which read *(auStack_c148+0x4c)
    * expecting local_c0fc's value; a loop just below also writes local_c0f0[8..15], expecting
    * those words to land in local_c0d0. With the locals declared separately, the compiler placed
    * them elsewhere on the stack, so auStack_c148+0x4c stayed at its memset'd 0 instead of the
@@ -4189,7 +4189,7 @@ int FUN_000cd1c4(param_1, param_2, param_3, param_4)
       iVar1 = _setjmp(*(int **)(iStack00000018 + 4));
       if (iVar1 == 0) {
         Compiler__resetState(iStack00000018);
-        FUN_000e0cd0(iStack00000018,uStack00000028);
+        Compiler__applyRequestFlags(iStack00000018,uStack00000028);
         iVar1 = FUN_00193b3c(uStack00000020,uStack00000024,iStack00000018);
         *(int *)(iStack00000018 + 0x524) = iStack0000001c;
         *(undefined4 *)(iStack0000001c + 0xf8) = 0;

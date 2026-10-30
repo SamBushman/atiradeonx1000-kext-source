@@ -2208,95 +2208,95 @@ int FUN_000d8450(ctx, ilBuilder, param_3)
   return;
 }
 
-/* FUN_000d9b58 @ 0xd9b58 (84 bytes) */
-int FUN_000d9b58(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
-  uint *param_2;
-  int param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+/* BitSet256__findNthSetBit @ 0xd9b58 (84 bytes) */
+int BitSet256__findNthSetBit(unusedArg1, bitWords, nthSetBit, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
+  undefined4 unusedArg1;
+  uint *bitWords;
+  int nthSetBit;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
 {
-  bool bVar1;
-  uint uVar2;
+  bool notLastWord;
+  uint wordBits;
   int loopCounter;
   int loopCounterB;
   
   loopCounter = 0;
   do {
-    uVar2 = *param_2;
-    if (uVar2 != 0) {
+    wordBits = *bitWords;
+    if (wordBits != 0) {
       loopCounterB = 0;
       do {
-        if ((uVar2 & 1) != 0) {
-          if (param_3 == 0) {
+        if ((wordBits & 1) != 0) {
+          if (nthSetBit == 0) {
             return loopCounterB + loopCounter;
           }
-          param_3 = param_3 + -1;
+          nthSetBit = nthSetBit + -1;
         }
-        uVar2 = uVar2 >> 1;
+        wordBits = wordBits >> 1;
         loopCounterB = loopCounterB + 1;
-      } while (uVar2 != 0);
+      } while (wordBits != 0);
     }
-    bVar1 = loopCounter != 0xe0;
-    param_2 = param_2 + 1;
+    notLastWord = loopCounter != 0xe0;
+    bitWords = bitWords + 1;
     loopCounter = loopCounter + 0x20;
-  } while (bVar1);
+  } while (notLastWord);
   return -1;
 }
 
 /* scStoreConstantComponent @ 0xd9bac (228 bytes) */
-undefined4 scStoreConstantComponent(undefined4 param_1,int param_2,undefined4 param_3,int param_4,int param_5,int param_6,double staleFprArg1)
+undefined4 scStoreConstantComponent(undefined4 unusedArg1,int constRegister,undefined4 unusedArg3,int lane,int constBlock,int useLiteralTable,double laneValue)
 {
-  int iVar1;
-  uint uVar2;
-  int iVar3;
-  int *piVar4;
-  int *piVar5;
-  uint uVar6;
+  int nextEntryOffset;
+  uint entryCount;
+  int entryOffset;
+  int *tableBase;
+  int *entryCursor;
+  uint entriesLeft;
   
-  if (param_6 == 0) {
-    piVar4 = *(int **)(param_5 + 0x84);
-    if (piVar4 != (int *)0x0) {
-      uVar2 = *(uint *)(param_5 + 0x78);
-      if (uVar2 == 0) {
+  if (useLiteralTable == 0) {
+    tableBase = *(int **)(constBlock + 0x84);
+    if (tableBase != (int *)0x0) {
+      entryCount = *(uint *)(constBlock + 0x78);
+      if (entryCount == 0) {
 LAB_000d9c0c:
-        if (*(uint *)(param_5 + 0x6c) <= uVar2) {
+        if (*(uint *)(constBlock + 0x6c) <= entryCount) {
           return 0;
         }
-        iVar3 = uVar2 * 0x14;
-        *(uint *)(param_5 + 0x78) = uVar2 + 1;
+        entryOffset = entryCount * 0x14;
+        *(uint *)(constBlock + 0x78) = entryCount + 1;
       }
-      else if (*piVar4 == param_2) {
-        iVar3 = 0;
+      else if (*tableBase == constRegister) {
+        entryOffset = 0;
       }
       else {
-        iVar1 = 0x14;
-        uVar6 = uVar2;
-        piVar5 = piVar4;
+        nextEntryOffset = 0x14;
+        entriesLeft = entryCount;
+        entryCursor = tableBase;
         do {
-          iVar3 = iVar1;
-          piVar5 = piVar5 + 5;
-          uVar6 = uVar6 - 1;
-          if (uVar6 == 0) goto LAB_000d9c0c;
-          iVar1 = iVar3 + 0x14;
-        } while (*piVar5 != param_2);
+          entryOffset = nextEntryOffset;
+          entryCursor = entryCursor + 5;
+          entriesLeft = entriesLeft - 1;
+          if (entriesLeft == 0) goto LAB_000d9c0c;
+          nextEntryOffset = entryOffset + 0x14;
+        } while (*entryCursor != constRegister);
       }
-      *(int *)(iVar3 + (int)piVar4) = param_2;
-      *(float *)((int)piVar4 + param_4 * 4 + iVar3 + 4) = (float)staleFprArg1;
+      *(int *)(entryOffset + (int)tableBase) = constRegister;
+      *(float *)((int)tableBase + lane * 4 + entryOffset + 4) = (float)laneValue;
       return 1;
     }
   }
   else {
-    uVar2 = *(uint *)(param_5 + 0x54);
-    if (uVar2 < *(uint *)(param_5 + 0x48)) {
-      *(uint *)(param_5 + 0x54) = uVar2 + 1;
-      iVar3 = uVar2 * 0x24 + *(int *)(param_5 + 0x60);
-      *(int *)(uVar2 * 0x24 + *(int *)(param_5 + 0x60)) = param_2;
-      *(float *)(iVar3 + 0x14) = (float)staleFprArg1;
-      *(int *)(iVar3 + 4) = param_4;
-      *(undefined4 *)(iVar3 + 8) = 1;
+    entryCount = *(uint *)(constBlock + 0x54);
+    if (entryCount < *(uint *)(constBlock + 0x48)) {
+      *(uint *)(constBlock + 0x54) = entryCount + 1;
+      entryOffset = entryCount * 0x24 + *(int *)(constBlock + 0x60);
+      *(int *)(entryCount * 0x24 + *(int *)(constBlock + 0x60)) = constRegister;
+      *(float *)(entryOffset + 0x14) = (float)laneValue;
+      *(int *)(entryOffset + 4) = lane;
+      *(undefined4 *)(entryOffset + 8) = 1;
       return 1;
     }
   }
@@ -2429,28 +2429,28 @@ LAB_000d9dd4:
   return 0;
 }
 
-/* FUN_000d9e58 @ 0xd9e58 (64 bytes) */
-int FUN_000d9e58(param_1, param_2, param_3, param_4, param_5, param_6)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  int param_6;
+/* scStoreIntConstantComponent @ 0xd9e58 (64 bytes) */
+int scStoreIntConstantComponent(unusedArg1, constRegister, valueHighHalf, valueLowHalf, lane, constBlock)
+  undefined4 unusedArg1;
+  undefined4 constRegister;
+  undefined4 valueHighHalf;
+  undefined4 valueLowHalf;
+  undefined4 lane;
+  int constBlock;
 {
-  uint uVar1;
-  int iVar2;
+  uint recordIndex;
+  int recordAddr;
   
-  uVar1 = *(uint *)(param_6 + 0x54);
-  if (*(uint *)(param_6 + 0x48) <= uVar1) {
+  recordIndex = *(uint *)(constBlock + 0x54);
+  if (*(uint *)(constBlock + 0x48) <= recordIndex) {
     return 0;
   }
-  iVar2 = uVar1 * 0x24 + *(int *)(param_6 + 0x60);
-  *(uint *)(param_6 + 0x54) = uVar1 + 1;
-  *(undefined4 *)(uVar1 * 0x24 + *(int *)(param_6 + 0x60)) = param_2;
-  *(undefined4 *)(iVar2 + 0x10) = param_4;
-  *(undefined4 *)(iVar2 + 4) = param_5;
-  *(undefined4 *)(iVar2 + 8) = param_3;
+  recordAddr = recordIndex * 0x24 + *(int *)(constBlock + 0x60);
+  *(uint *)(constBlock + 0x54) = recordIndex + 1;
+  *(undefined4 *)(recordIndex * 0x24 + *(int *)(constBlock + 0x60)) = constRegister;
+  *(undefined4 *)(recordAddr + 0x10) = valueLowHalf;
+  *(undefined4 *)(recordAddr + 4) = lane;
+  *(undefined4 *)(recordAddr + 8) = valueHighHalf;
   return 1;
 }
 
@@ -2520,106 +2520,106 @@ int FUN_000d9f3c(param_1, param_2)
   return bVar1;
 }
 
-/* FUN_000d9f80 @ 0xd9f80 (32 bytes) */
-int FUN_000d9f80(param_1, param_2)
-  int param_1;
-  int param_2;
+/* CompileInput__getFloatConstCount @ 0xd9f80 (32 bytes) */
+int CompileInput__getFloatConstCount(compileInput, sideSelector)
+  int compileInput;
+  int sideSelector;
 {
-  if (param_2 != 0) {
-    return *(undefined4 *)(*(int *)(param_1 + 0x30) + 0x3c);
+  if (sideSelector != 0) {
+    return *(undefined4 *)(*(int *)(compileInput + 0x30) + 0x3c);
   }
-  return *(undefined4 *)(*(int *)(param_1 + 0x2c) + 0x40);
+  return *(undefined4 *)(*(int *)(compileInput + 0x2c) + 0x40);
 }
 
-/* FUN_000d9fa0 @ 0xd9fa0 (32 bytes) */
-int FUN_000d9fa0(param_1, param_2)
-  int param_1;
-  int param_2;
+/* CompileInput__getIntConstCount @ 0xd9fa0 (32 bytes) */
+int CompileInput__getIntConstCount(compileInput, sideSelector)
+  int compileInput;
+  int sideSelector;
 {
-  if (param_2 != 0) {
-    return *(undefined4 *)(*(int *)(param_1 + 0x30) + 0xc);
+  if (sideSelector != 0) {
+    return *(undefined4 *)(*(int *)(compileInput + 0x30) + 0xc);
   }
-  return *(undefined4 *)(*(int *)(param_1 + 0x2c) + 0x10);
+  return *(undefined4 *)(*(int *)(compileInput + 0x2c) + 0x10);
 }
 
-/* FUN_000d9fc0 @ 0xd9fc0 (32 bytes) */
-int FUN_000d9fc0(param_1, param_2)
-  int param_1;
-  int param_2;
+/* CompileInput__getBoolConstCount @ 0xd9fc0 (32 bytes) */
+int CompileInput__getBoolConstCount(compileInput, sideSelector)
+  int compileInput;
+  int sideSelector;
 {
-  if (param_2 != 0) {
-    return *(undefined4 *)(*(int *)(param_1 + 0x30) + 0x24);
+  if (sideSelector != 0) {
+    return *(undefined4 *)(*(int *)(compileInput + 0x30) + 0x24);
   }
-  return *(undefined4 *)(*(int *)(param_1 + 0x2c) + 0x28);
+  return *(undefined4 *)(*(int *)(compileInput + 0x2c) + 0x28);
 }
 
-/* FUN_000d9fe0 @ 0xd9fe0 (72 bytes) */
-int FUN_000d9fe0(param_1, param_2, param_3, param_4, param_5)
-  int param_1;
-  int param_2;
-  int param_3;
-  undefined4 param_4;
-  undefined4 *param_5;
+/* CompileInput__readFloatConst @ 0xd9fe0 (72 bytes) */
+int CompileInput__readFloatConst(compileInput, sideSelector, constIndex, unusedArg4, outValue)
+  int compileInput;
+  int sideSelector;
+  int constIndex;
+  undefined4 unusedArg4;
+  undefined4 *outValue;
 {
   int iVar1;
   int iVar2;
   
-  if (param_2 == 0) {
-    iVar2 = *(int *)(*(int *)(param_1 + 0x2c) + 0x34);
+  if (sideSelector == 0) {
+    iVar2 = *(int *)(*(int *)(compileInput + 0x2c) + 0x34);
   }
   else {
-    iVar2 = *(int *)(*(int *)(param_1 + 0x30) + 0x30);
+    iVar2 = *(int *)(*(int *)(compileInput + 0x30) + 0x30);
   }
-  iVar1 = iVar2 + param_3 * 0x10;
-  *param_5 = *(undefined4 *)(iVar2 + param_3 * 0x10);
-  param_5[1] = *(undefined4 *)(iVar1 + 4);
-  param_5[2] = *(undefined4 *)(iVar1 + 8);
-  param_5[3] = *(undefined4 *)(iVar1 + 0xc);
+  iVar1 = iVar2 + constIndex * 0x10;
+  *outValue = *(undefined4 *)(iVar2 + constIndex * 0x10);
+  outValue[1] = *(undefined4 *)(iVar1 + 4);
+  outValue[2] = *(undefined4 *)(iVar1 + 8);
+  outValue[3] = *(undefined4 *)(iVar1 + 0xc);
   return;
 }
 
-/* FUN_000da028 @ 0xda028 (72 bytes) */
-int FUN_000da028(param_1, param_2, param_3, param_4, param_5)
-  int param_1;
-  int param_2;
-  int param_3;
-  undefined4 param_4;
-  undefined4 *param_5;
+/* CompileInput__readIntConst @ 0xda028 (72 bytes) */
+int CompileInput__readIntConst(compileInput, sideSelector, constIndex, unusedArg4, outValue)
+  int compileInput;
+  int sideSelector;
+  int constIndex;
+  undefined4 unusedArg4;
+  undefined4 *outValue;
 {
   int iVar1;
   int iVar2;
   
-  if (param_2 == 0) {
-    iVar1 = *(int *)(*(int *)(param_1 + 0x2c) + 4);
+  if (sideSelector == 0) {
+    iVar1 = *(int *)(*(int *)(compileInput + 0x2c) + 4);
   }
   else {
-    iVar1 = **(int **)(param_1 + 0x30);
+    iVar1 = **(int **)(compileInput + 0x30);
   }
-  iVar2 = iVar1 + param_3 * 0x10;
-  *param_5 = *(undefined4 *)(iVar1 + param_3 * 0x10);
-  param_5[1] = *(undefined4 *)(iVar2 + 4);
-  param_5[2] = *(undefined4 *)(iVar2 + 8);
-  param_5[3] = *(undefined4 *)(iVar2 + 0xc);
+  iVar2 = iVar1 + constIndex * 0x10;
+  *outValue = *(undefined4 *)(iVar1 + constIndex * 0x10);
+  outValue[1] = *(undefined4 *)(iVar2 + 4);
+  outValue[2] = *(undefined4 *)(iVar2 + 8);
+  outValue[3] = *(undefined4 *)(iVar2 + 0xc);
   return;
 }
 
-/* FUN_000da070 @ 0xda070 (44 bytes) */
-int FUN_000da070(param_1, param_2, param_3, param_4, param_5)
-  int param_1;
-  int param_2;
-  int param_3;
-  undefined4 param_4;
-  undefined4 *param_5;
+/* CompileInput__readBoolConst @ 0xda070 (44 bytes) */
+int CompileInput__readBoolConst(compileInput, sideSelector, constIndex, unusedArg4, outValue)
+  int compileInput;
+  int sideSelector;
+  int constIndex;
+  undefined4 unusedArg4;
+  undefined4 *outValue;
 {
   int iVar1;
   
-  if (param_2 == 0) {
-    iVar1 = *(int *)(*(int *)(param_1 + 0x2c) + 0x1c);
+  if (sideSelector == 0) {
+    iVar1 = *(int *)(*(int *)(compileInput + 0x2c) + 0x1c);
   }
   else {
-    iVar1 = *(int *)(*(int *)(param_1 + 0x30) + 0x18);
+    iVar1 = *(int *)(*(int *)(compileInput + 0x30) + 0x18);
   }
-  *param_5 = *(undefined4 *)(iVar1 + param_3 * 4);
+  *outValue = *(undefined4 *)(iVar1 + constIndex * 4);
   return;
 }
 
@@ -2751,7 +2751,7 @@ int scSetCallbackTables(param_1, param_2, param_3)
   *(int *)(param_1 + 0x30) = param_2;
   *(int *)(param_1 + 0x34) = param_2;
   if (*(int *)(param_1 + 8) != 0) {
-    uVar1 = FUN_000e2524(*(int *)(param_1 + 8),param_3,*(undefined4 *)(param_2 + 0x4c),
+    uVar1 = Compiler__compileWithRetry(*(int *)(param_1 + 8),param_3,*(undefined4 *)(param_2 + 0x4c),
                          *(undefined4 *)(param_2 + 0x54),param_1);
     return uVar1;
   }

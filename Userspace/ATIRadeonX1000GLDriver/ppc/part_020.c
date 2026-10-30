@@ -3479,44 +3479,44 @@ int testBit24(param_1, param_2)
   return param_2 >> 0x18 & 1;
 }
 
-/* FUN_000e0cd0 @ 0xe0cd0 (308 bytes) */
-int FUN_000e0cd0(param_1, param_2)
-  undefined4 param_1;
-  uint param_2;
+/* Compiler__applyRequestFlags @ 0xe0cd0 (308 bytes) */
+int Compiler__applyRequestFlags(compiler, requestFlags)
+  undefined4 compiler;
+  uint requestFlags;
 {
   int iVar1;
   
-  iVar1 = ((int (*)())testBit24)(param_1,param_2);
+  iVar1 = ((int (*)())testBit24)(compiler,requestFlags);
   if (iVar1 != 0) {
-    ((int (*)())Compiler__clearOptionBit)(param_1,9);
-    ((int (*)())Compiler__clearOptionBit)(param_1,0x14);
-    ((int (*)())Compiler__clearOptionBit)(param_1,0x1c);
-    ((int (*)())Compiler__clearOptionBit)(param_1,0x1d);
-    ((int (*)())Compiler__clearOptionBit)(param_1,0x39);
-    ((int (*)())Compiler__clearOptionBit)(param_1,0x3b);
-    ((int (*)())Compiler__clearOptionBit)(param_1,0x42);
-    ((int (*)())Compiler__clearOptionBit)(param_1,0x27);
+    ((int (*)())Compiler__clearOptionBit)(compiler,9);
+    ((int (*)())Compiler__clearOptionBit)(compiler,0x14);
+    ((int (*)())Compiler__clearOptionBit)(compiler,0x1c);
+    ((int (*)())Compiler__clearOptionBit)(compiler,0x1d);
+    ((int (*)())Compiler__clearOptionBit)(compiler,0x39);
+    ((int (*)())Compiler__clearOptionBit)(compiler,0x3b);
+    ((int (*)())Compiler__clearOptionBit)(compiler,0x42);
+    ((int (*)())Compiler__clearOptionBit)(compiler,0x27);
   }
-  if ((param_2 & 0x100000) != 0) {
-    ((int (*)())Compiler__setOptionBit)(param_1,0x2a);
+  if ((requestFlags & 0x100000) != 0) {
+    ((int (*)())Compiler__setOptionBit)(compiler,0x2a);
   }
-  if ((param_2 & 0x200000) != 0) {
-    ((int (*)())Compiler__setOptionBit)(param_1,0x2b);
+  if ((requestFlags & 0x200000) != 0) {
+    ((int (*)())Compiler__setOptionBit)(compiler,0x2b);
   }
-  if ((param_2 & 0x200) != 0) {
-    ((int (*)())Compiler__clearOptionBit)(param_1,0x3f);
+  if ((requestFlags & 0x200) != 0) {
+    ((int (*)())Compiler__clearOptionBit)(compiler,0x3f);
   }
-  if ((param_2 & 0x800) != 0) {
-    ((int (*)())Compiler__clearOptionBit)(param_1,0x37);
+  if ((requestFlags & 0x800) != 0) {
+    ((int (*)())Compiler__clearOptionBit)(compiler,0x37);
   }
-  if ((param_2 & 0x1000) != 0) {
-    ((int (*)())Compiler__setOptionBit)(param_1,0x3e);
+  if ((requestFlags & 0x1000) != 0) {
+    ((int (*)())Compiler__setOptionBit)(compiler,0x3e);
   }
-  if ((param_2 & 0x2000) != 0) {
-    ((int (*)())Compiler__setOptionBit)(param_1,0x4e);
+  if ((requestFlags & 0x2000) != 0) {
+    ((int (*)())Compiler__setOptionBit)(compiler,0x4e);
   }
-  if ((param_2 & 0x4000) != 0) {
-    ((int (*)())Compiler__setOptionBit)(param_1,0x4f);
+  if ((requestFlags & 0x4000) != 0) {
+    ((int (*)())Compiler__setOptionBit)(compiler,0x4f);
     return;
   }
   return;

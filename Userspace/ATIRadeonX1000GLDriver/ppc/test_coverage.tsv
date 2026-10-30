@@ -1150,19 +1150,19 @@
 0xd6340	ffpsEmitTexEnvCombine	4540	no	indirect call (driver context / vtable / callback)
 0xd7520	ffpsEmitTexEnvLegacy	3832	no	indirect call (driver context / vtable / callback)
 0xd8450	FUN_000d8450	5856	no	indirect call (driver context / vtable / callback)
-0xd9b58	FUN_000d9b58	84	yes	
+0xd9b58	BitSet256__findNthSetBit	84	yes	
 0xd9bac	scStoreConstantComponent	228	yes	
 0xd9c90	ConstBank__storeIntLane	228	yes	
 0xd9d74	ConstBank__storeBoolLane	228	yes	
-0xd9e58	FUN_000d9e58	64	yes	
+0xd9e58	scStoreIntConstantComponent	64	yes	
 0xd9e98	ConstBank__addMappedEntry	156	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0xd9f3c	FUN_000d9f3c	60	yes	
-0xd9f80	FUN_000d9f80	32	yes	
-0xd9fa0	FUN_000d9fa0	32	yes	
-0xd9fc0	FUN_000d9fc0	32	yes	
-0xd9fe0	FUN_000d9fe0	72	yes	
-0xda028	FUN_000da028	72	yes	
-0xda070	FUN_000da070	44	yes	
+0xd9f80	CompileInput__getFloatConstCount	32	yes	
+0xd9fa0	CompileInput__getIntConstCount	32	yes	
+0xd9fc0	CompileInput__getBoolConstCount	32	yes	
+0xd9fe0	CompileInput__readFloatConst	72	yes	
+0xda028	CompileInput__readIntConst	72	yes	
+0xda070	CompileInput__readBoolConst	44	yes	
 0xda09c	FUN_000da09c	36	yes	
 0xda0c0	FUN_000da0c0	720	yes	
 0xda394	scSetCallbackTables	68	yes	
@@ -1241,7 +1241,7 @@
 0xe0850	Compiler__setDefaultOptions	1112	yes	
 0xe0ca8	FUN_000e0ca8	28	yes	
 0xe0cc8	testBit24	8	yes	
-0xe0cd0	FUN_000e0cd0	308	yes	
+0xe0cd0	Compiler__applyRequestFlags	308	yes	
 0xe0e0c	Compiler__logf	28	yes	
 0xe0e28	FUN_000e0e28	116	yes	
 0xe0e9c	noop_e0e9c	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
@@ -1274,9 +1274,9 @@
 0xe1c50	Program__forwardMulOperandToUsers	916	no	indirect call (driver context / vtable / callback)
 0xe1fe4	Compiler__releaseChipAndPools	160	yes	
 0xe2094	Compiler__compileStages	1132	no	indirect call (driver context / vtable / callback)
-0xe2524	FUN_000e2524	324	no	calls an import (setjmp)
+0xe2524	Compiler__compileWithRetry	324	no	calls an import (setjmp)
 0xe2668	Compiler__compile	280	no	calls an import (setjmp)
-0xe2780	FUN_000e2780	140	yes	
+0xe2780	MachineCodeWriter__accumulateStats	140	yes	
 0xe280c	FUN_000e280c	44	yes	
 0xe2838	FUN_000e2838	20	yes	
 0xe284c	FUN_000e284c	20	yes	

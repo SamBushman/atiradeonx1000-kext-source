@@ -2871,7 +2871,7 @@ ddc20	ddf1c	table	ildisPrintInstruction	191
 e0120	e0138	table	ildisPrintInstruction	6	
 e0790	e0794	millicode	ildisDisassembleBody	1	
 e0cc4	e0cc8	millicode	FUN_000e0ca8	1	
-e0e04	e0e0c	millicode	FUN_000e0cd0	2	
+e0e04	e0e0c	millicode	Compiler__applyRequestFlags	2	
 e1480	e1484	millicode	Compiler__timerOutputFileName	1	
 e1a08	e1a0c	eh-pad	Compiler__init_e1920	1	__Unwind_Resume
 e1b30	e1b34	eh-pad	Compiler__init_e1a48	1	__Unwind_Resume

@@ -3951,33 +3951,33 @@ int Program__loadDefaultConstants(program, ilReader)
   float local_2c;
   
   programKindSet = *(uint *)(program + 0x30) & 1 | *(uint *)(program + 0x30) >> 0xe & 1;
-  boolConstCount = FUN_000d9fc0(*(undefined4 *)(*(int *)(program + 8) + 0x398),programKindSet);
+  boolConstCount = CompileInput__getBoolConstCount(*(undefined4 *)(*(int *)(program + 8) + 0x398),programKindSet);
   if (0 < boolConstCount) {
     constIndex = 0;
     do {
-      FUN_000da070(*(undefined4 *)(*(int *)(program + 8) + 0x398),programKindSet,constIndex,1,&local_48);
+      CompileInput__readBoolConst(*(undefined4 *)(*(int *)(program + 8) + 0x398),programKindSet,constIndex,1,&local_48);
       ILReader__appendBoolConst(ilReader,constIndex,(uint)(local_48 != 0));
       nextConstIndex = constIndex + 1;
       ((int (*)())Program__createConstantVReg)(program,0,constIndex,1,&local_48);
       constIndex = nextConstIndex;
     } while (boolConstCount != nextConstIndex);
   }
-  intConstCount = FUN_000d9fa0(*(undefined4 *)(*(int *)(program + 8) + 0x398),programKindSet);
+  intConstCount = CompileInput__getIntConstCount(*(undefined4 *)(*(int *)(program + 8) + 0x398),programKindSet);
   if (0 < intConstCount) {
     constIndex = 0;
     do {
-      FUN_000da028(*(undefined4 *)(*(int *)(program + 8) + 0x398),programKindSet,constIndex,4,&local_48);
+      CompileInput__readIntConst(*(undefined4 *)(*(int *)(program + 8) + 0x398),programKindSet,constIndex,4,&local_48);
       ILReader__appendIntConst(ilReader,constIndex,local_48,local_44,local_40,local_3c);
       nextConstIndex = constIndex + 1;
       ((int (*)())Program__createConstantVReg)(program,2,constIndex,4,&local_48);
       constIndex = nextConstIndex;
     } while (intConstCount != nextConstIndex);
   }
-  floatConstCount = FUN_000d9f80(*(undefined4 *)(*(int *)(program + 8) + 0x398),programKindSet);
+  floatConstCount = CompileInput__getFloatConstCount(*(undefined4 *)(*(int *)(program + 8) + 0x398),programKindSet);
   if (0 < floatConstCount) {
     constIndex = 0;
     do {
-      FUN_000d9fe0(*(undefined4 *)(*(int *)(program + 8) + 0x398),programKindSet,constIndex,4,&local_38);
+      CompileInput__readFloatConst(*(undefined4 *)(*(int *)(program + 8) + 0x398),programKindSet,constIndex,4,&local_38);
       ((void (*)())ILReader__appendFloatConst)(ilReader,constIndex,(double)local_38,(double)local_34,(double)local_30,(double)local_2c
                   );
       nextConstIndex = constIndex + 1;

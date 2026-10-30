@@ -609,3 +609,74 @@ local	IRInst__makeLiteralVec4Float	local_70	operand2Word2	INFERRED	uninitialised
 local	IRInst__makeLiteralVec4Float	local_6c	operand2Word3	INFERRED	uninitialised frame word passed as word 3 of constant operand 2 (the callee does not use it for this kind)
 local	IRInst__makeLiteralVec4Float	local_68	operand2Word4	INFERRED	uninitialised frame word passed as word 4 of constant operand 2 (the callee does not use it for this kind)
 local	IRInst__makeLiteralVec4Float	local_64	operand2Word5	INFERRED	uninitialised frame word passed as word 5 of constant operand 2 (the callee does not use it for this kind)
+func	FUN_000d9f80	CompileInput__getFloatConstCount	INFERRED	number of float4 default constants of the vertex (selector 0, +0x2c) or fragment (selector 1, +0x30) side
+func	FUN_000d9fa0	CompileInput__getIntConstCount	INFERRED	number of int4 default constants of the selected side
+func	FUN_000d9fc0	CompileInput__getBoolConstCount	INFERRED	number of bool default constants of the selected side
+func	FUN_000d9fe0	CompileInput__readFloatConst	INFERRED	copies the 4 floats of default float constant [index] of the selected side
+func	FUN_000da028	CompileInput__readIntConst	INFERRED	copies the 4 words of default int constant [index] of the selected side
+func	FUN_000da070	CompileInput__readBoolConst	INFERRED	copies the word of default bool constant [index] of the selected side
+func	FUN_000d9b58	BitSet256__findNthSetBit	INFERRED	scans eight 32-bit words (stride 0x20 bits) and returns the bit index of the n-th set bit, -1 when there are fewer
+func	FUN_000d9e58	scStoreIntConstantComponent	INFERRED	appends a 0x24-byte record {register, lane, value halves} to the constant table at +0x60 of the block object; returns 0 when the table (+0x48 capacity) is full
+local	FUN_000d9fe0	param_1	compileInput	INFERRED	program+8 compiler+0x398 compile input object: +0x2c vertex side, +0x30 fragment side
+local	FUN_000d9fe0	param_2	sideSelector	INFERRED	0 = vertex side, nonzero = fragment side
+local	FUN_000d9fe0	param_3	constIndex	INFERRED	index of the default constant
+local	FUN_000d9fe0	param_4	unusedArg4	INFERRED	passed by the caller (component count) but not read
+local	FUN_000d9fe0	param_5	outValue	INFERRED	receives the constant value words
+local	FUN_000da028	param_1	compileInput	INFERRED	program+8 compiler+0x398 compile input object: +0x2c vertex side, +0x30 fragment side
+local	FUN_000da028	param_2	sideSelector	INFERRED	0 = vertex side, nonzero = fragment side
+local	FUN_000da028	param_3	constIndex	INFERRED	index of the default constant
+local	FUN_000da028	param_4	unusedArg4	INFERRED	passed by the caller (component count) but not read
+local	FUN_000da028	param_5	outValue	INFERRED	receives the constant value words
+local	FUN_000da070	param_1	compileInput	INFERRED	program+8 compiler+0x398 compile input object: +0x2c vertex side, +0x30 fragment side
+local	FUN_000da070	param_2	sideSelector	INFERRED	0 = vertex side, nonzero = fragment side
+local	FUN_000da070	param_3	constIndex	INFERRED	index of the default constant
+local	FUN_000da070	param_4	unusedArg4	INFERRED	passed by the caller (component count) but not read
+local	FUN_000da070	param_5	outValue	INFERRED	receives the constant value words
+local	FUN_000d9f80	param_1	compileInput	INFERRED	program+8 compiler+0x398 compile input object: +0x2c vertex side, +0x30 fragment side
+local	FUN_000d9f80	param_2	sideSelector	INFERRED	0 = vertex side, nonzero = fragment side
+local	FUN_000d9fa0	param_1	compileInput	INFERRED	program+8 compiler+0x398 compile input object: +0x2c vertex side, +0x30 fragment side
+local	FUN_000d9fa0	param_2	sideSelector	INFERRED	0 = vertex side, nonzero = fragment side
+local	FUN_000d9fc0	param_1	compileInput	INFERRED	program+8 compiler+0x398 compile input object: +0x2c vertex side, +0x30 fragment side
+local	FUN_000d9fc0	param_2	sideSelector	INFERRED	0 = vertex side, nonzero = fragment side
+local	FUN_000d9b58	param_1	unusedArg1	INFERRED	passed by the caller but not read
+local	FUN_000d9b58	param_2	bitWords	INFERRED	bitmap of eight 32-bit words
+local	FUN_000d9b58	param_3	nthSetBit	INFERRED	how many set bits to skip before the one returned
+local	FUN_000d9b58	param_4	unusedArg4	INFERRED	passed by the caller but not read (register leftovers)
+local	FUN_000d9b58	param_5	unusedArg5	INFERRED	passed by the caller but not read (register leftovers)
+local	FUN_000d9b58	param_6	unusedArg6	INFERRED	passed by the caller but not read (register leftovers)
+local	FUN_000d9b58	param_7	unusedArg7	INFERRED	passed by the caller but not read (register leftovers)
+local	FUN_000d9b58	uVar2	wordBits	INFERRED	bitmap word being shifted
+local	FUN_000d9b58	bVar1	notLastWord	INFERRED	loop continue flag (word offset != 0xe0)
+local	FUN_000d9e58	param_1	unusedArg1	INFERRED	passed by the caller but not read
+local	FUN_000d9e58	param_2	constRegister	INFERRED	register id stored in the record
+local	FUN_000d9e58	param_3	valueHighHalf	INFERRED	upper 16 bits of the integer constant (record +8)
+local	FUN_000d9e58	param_4	valueLowHalf	INFERRED	lower 16 bits of the integer constant (record +0x10)
+local	FUN_000d9e58	param_5	lane	INFERRED	component index (record +4)
+local	FUN_000d9e58	param_6	constBlock	INFERRED	block object holding the record table (+0x60 data, +0x54 count, +0x48 capacity)
+local	FUN_000d9e58	uVar1	recordIndex	INFERRED	index of the new record
+local	FUN_000d9e58	iVar2	recordAddr	INFERRED	address of the new record (0x24-byte stride)
+local	scStoreConstantComponent	param_1	unusedArg1	INFERRED	passed by the caller but not read
+local	scStoreConstantComponent	param_2	constRegister	INFERRED	register id of the constant
+local	scStoreConstantComponent	param_3	unusedArg3	INFERRED	passed by the caller but not read
+local	scStoreConstantComponent	param_4	lane	INFERRED	component index 0-3
+local	scStoreConstantComponent	param_5	constBlock	INFERRED	block object with two constant tables: 0x14-byte entries (+0x84 data, +0x78 count, +0x6c capacity) and 0x24-byte entries (+0x60/+0x54/+0x48)
+local	scStoreConstantComponent	param_6	useLiteralTable	INFERRED	nonzero selects the 0x24-byte table
+local	scStoreConstantComponent	staleFprArg1	laneValue	INFERRED	float value stored for the lane
+local	scStoreConstantComponent	iVar1	nextEntryOffset	INFERRED	byte offset of the next entry while searching
+local	scStoreConstantComponent	uVar2	entryCount	INFERRED	current entry count of the selected table
+local	scStoreConstantComponent	iVar3	entryOffset	INFERRED	byte offset or address of the entry being filled
+local	scStoreConstantComponent	piVar4	tableBase	INFERRED	base of the 0x14-byte entry table
+local	scStoreConstantComponent	piVar5	entryCursor	INFERRED	cursor over the entries
+local	scStoreConstantComponent	uVar6	entriesLeft	INFERRED	entries still to compare
+func	FUN_000e0cd0	Compiler__applyRequestFlags	INFERRED	if the request flags have bit 24 (testBit24) clear option bits 9,0x14,0x1c,0x1d,0x39,0x3b,0x42,0x27; flag bits 0x100000/0x200000/0x1000/0x2000/0x4000 set options 0x2a/0x2b/0x3e/0x4e/0x4f, 0x200/0x800 clear 0x3f/0x37
+local	FUN_000e0cd0	param_1	compiler	INFERRED	compiler whose option bit set is edited
+local	FUN_000e0cd0	param_2	requestFlags	INFERRED	compile request flag word
+func	FUN_000e2780	MachineCodeWriter__accumulateStats	INFERRED	adds the seven counters at encoder+4..+0x1c to the writer statistics words 0xa4..0xaa, then calls vtable +0x1c of encoder[8] with *writer
+local	FUN_000e2780	param_1	writer	INFERRED	MachineCodeWriter whose statistics are accumulated
+local	FUN_000e2780	param_2	encoderState	INFERRED	encoder state with the counters (+4..+0x1c) and a sink object at +0x20
+func	FUN_000e2524	Compiler__compileWithRetry	INFERRED	sets compiler+0x398, runs Compiler__resetState/applyRequestFlags/compileStages under setjmp, releases the pools and repeats while FUN_000e161c accepts the retry state at compiler+0x314
+local	FUN_000e2524	param_1	compiler	INFERRED	compiler object (setjmp buffer at +4)
+local	FUN_000e2524	param_2	result	INFERRED	output object: +0xf8 status (0/1/2), +0xfc
+local	FUN_000e2524	param_3	request	INFERRED	compile request parsed by FUN_00193c00
+local	FUN_000e2524	param_4	requestFlags	INFERRED	flag word passed to Compiler__applyRequestFlags
+local	FUN_000e2524	param_5	compileInput	INFERRED	stored at compiler+0x398 (compile input object)

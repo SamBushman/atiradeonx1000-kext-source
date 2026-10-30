@@ -700,13 +700,13 @@ int Compiler__compileStages(compiler, compileRequest)
   return;
 }
 
-/* FUN_000e2524 @ 0xe2524 (324 bytes) */
-int FUN_000e2524(param_1, param_2, param_3, param_4, param_5)
-  int param_1;
-  int param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
+/* Compiler__compileWithRetry @ 0xe2524 (324 bytes) */
+int Compiler__compileWithRetry(compiler, result, request, requestFlags, compileInput)
+  int compiler;
+  int result;
+  undefined4 request;
+  undefined4 requestFlags;
+  undefined4 compileInput;
 {
   int iVar1;
   int iVar2;
@@ -715,17 +715,17 @@ int FUN_000e2524(param_1, param_2, param_3, param_4, param_5)
   undefined4 uStack00000020;
   undefined4 uStack00000024;
   
-  *(undefined4 *)(param_1 + 0x398) = param_5;
-  iStack00000018 = param_1;
-  iStack0000001c = param_2;
-  uStack00000020 = param_3;
-  uStack00000024 = param_4;
-  FUN_000e0ca8(param_1);
+  *(undefined4 *)(compiler + 0x398) = compileInput;
+  iStack00000018 = compiler;
+  iStack0000001c = result;
+  uStack00000020 = request;
+  uStack00000024 = requestFlags;
+  FUN_000e0ca8(compiler);
   do {
     iVar1 = _setjmp(*(undefined4 *)(iStack00000018 + 4));
     if (iVar1 == 0) {
       ((int (*)())Compiler__resetState)(iStack00000018);
-      FUN_000e0cd0(iStack00000018,uStack00000024);
+      Compiler__applyRequestFlags(iStack00000018,uStack00000024);
       iVar1 = FUN_00193c00(uStack00000020,iStack00000018);
       *(int *)(iStack00000018 + 0x524) = iStack0000001c;
       if ((*(uint *)(iVar1 + 4) & 4) == 0) {
@@ -787,7 +787,7 @@ int Compiler__compile(compiler, shader, sourceA, sourceB, optionsArg, unusedArg6
     iVar1 = _setjmp(*(undefined4 *)(iStack00000018 + 4));
     if (iVar1 == 0) {
       ((int (*)())Compiler__resetState)(iStack00000018);
-      FUN_000e0cd0(iStack00000018,uStack00000028);
+      Compiler__applyRequestFlags(iStack00000018,uStack00000028);
       iVar1 = FUN_00193b3c(uStack00000020,uStack00000024,iStack00000018);
       *(int *)(iStack00000018 + 0x524) = iStack0000001c;
       *(undefined4 *)(iStack0000001c + 0xf8) = 0;
@@ -810,21 +810,21 @@ int Compiler__compile(compiler, shader, sourceA, sourceB, optionsArg, unusedArg6
   return iVar1;
 }
 
-/* FUN_000e2780 @ 0xe2780 (140 bytes) */
-int FUN_000e2780(param_1, param_2)
-  undefined4 *param_1;
-  int param_2;
+/* MachineCodeWriter__accumulateStats @ 0xe2780 (140 bytes) */
+int MachineCodeWriter__accumulateStats(writer, encoderState)
+  undefined4 *writer;
+  int encoderState;
 {
-  param_1[0xa4] = param_1[0xa4] + *(int *)(param_2 + 4);
-  param_1[0xa5] = param_1[0xa5] + *(int *)(param_2 + 8);
-  param_1[0xa6] = param_1[0xa6] + *(int *)(param_2 + 0xc);
-  param_1[0xa7] = param_1[0xa7] + *(int *)(param_2 + 0x10);
-  param_1[0xa8] = param_1[0xa8] + *(int *)(param_2 + 0x14);
-  param_1[0xa9] = param_1[0xa9] + *(int *)(param_2 + 0x18);
-  param_1[0xaa] = param_1[0xaa] + *(int *)(param_2 + 0x1c);
+  writer[0xa4] = writer[0xa4] + *(int *)(encoderState + 4);
+  writer[0xa5] = writer[0xa5] + *(int *)(encoderState + 8);
+  writer[0xa6] = writer[0xa6] + *(int *)(encoderState + 0xc);
+  writer[0xa7] = writer[0xa7] + *(int *)(encoderState + 0x10);
+  writer[0xa8] = writer[0xa8] + *(int *)(encoderState + 0x14);
+  writer[0xa9] = writer[0xa9] + *(int *)(encoderState + 0x18);
+  writer[0xaa] = writer[0xaa] + *(int *)(encoderState + 0x1c);
                     
                     
-  (**(code **)(**(int **)(param_2 + 0x20) + 0x1c))(*(int **)(param_2 + 0x20),*param_1);
+  (**(code **)(**(int **)(encoderState + 0x20) + 0x1c))(*(int **)(encoderState + 0x20),*writer);
   return;
 }
 
@@ -1139,7 +1139,7 @@ int ConstRecord__emitStores(constRecord, hwDescription, program)
         emitContext = *(undefined4 *)(program + 0x398);
         programArg = (int)*(short *)(laneRecord + 0x20);
         targetBlock = ((int (*)())Compiler__selectBlockByProgramFlags)(program);
-        FUN_000d9e58(emitContext,destRegisterId,programArg,(int)laneHigh,loopCounter,targetBlock);
+        scStoreIntConstantComponent(emitContext,destRegisterId,programArg,(int)laneHigh,loopCounter,targetBlock);
       }
       else {
         laneFloat = GH_U2F((unsigned int)((**(code **)(*hwDescription + 0x8c))(hwDescription,laneValuePtr)));
@@ -1546,7 +1546,7 @@ int MachineCodeWriter__encodeProgram(writer, outBuffer, outSize)
   (**(code **)(*local_54 + 0x10))(local_54);
   sizeBeforeCompression = (**(code **)(*local_54 + 0x20))(local_54);
   writer[1] = sizeBeforeCompression;
-  ((int (*)())FUN_000e2780)(writer,auStack_74);
+  ((int (*)())MachineCodeWriter__accumulateStats)(writer,auStack_74);
   programTooLarge = ((int (*)())FUN_000e284c)(auStack_74);
   compressEnabled = Compiler__isOptionEnabled(writer[2],0x4d);
   if (compressEnabled == 0) {
