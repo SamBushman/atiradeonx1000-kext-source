@@ -614,28 +614,28 @@ LAB_000ece34:
 }
 
 /* FUN_000eced0 @ 0xeced0 (140 bytes) */
-int FUN_000eced0(param_1)
-  int param_1;
+int FUN_000eced0(program)
+  int program;
 {
-  int iVar1;
-  int iVar2;
+  int prevBlock;
+  int nextBlockLink;
   undefined4 *allocation;
   undefined4 arenaA;
   
-  arenaA = *(undefined4 *)(*(int *)(param_1 + 8) + 0x374);
+  arenaA = *(undefined4 *)(*(int *)(program + 8) + 0x374);
   allocation = (undefined4 *)Arena__alloc(arenaA,0x168);
   *allocation = arenaA;
-  IRInst__ctor_10502c(allocation + 1,0x93,*(undefined4 *)(param_1 + 8));
-  *(undefined4 **)(param_1 + 0x33c) = allocation + 1;
+  IRInst__ctor_10502c(allocation + 1,0x93,*(undefined4 *)(program + 8));
+  *(undefined4 **)(program + 0x33c) = allocation + 1;
   allocation[0x27] = 0x2d;
   allocation[0x26] = 0;
-  *(undefined4 *)(*(int *)(param_1 + 0x33c) + 300) = 0;
-  *(uint *)(*(int *)(param_1 + 0x3a0) + 0xc) = *(uint *)(*(int *)(param_1 + 0x3a0) + 0xc) | 8;
-  Block__prependInst(*(undefined4 *)(param_1 + 0x3a0),*(undefined4 *)(param_1 + 0x33c));
-  iVar1 = *(int *)(param_1 + 900);
-  for (iVar2 = *(int *)(*(int *)(param_1 + 900) + 8); iVar2 != 0; iVar2 = *(int *)(iVar2 + 8)) {
-    *(uint *)(iVar1 + 0xc) = *(uint *)(iVar1 + 0xc) | 8;
-    iVar1 = iVar2;
+  *(undefined4 *)(*(int *)(program + 0x33c) + 300) = 0;
+  *(uint *)(*(int *)(program + 0x3a0) + 0xc) = *(uint *)(*(int *)(program + 0x3a0) + 0xc) | 8;
+  Block__prependInst(*(undefined4 *)(program + 0x3a0),*(undefined4 *)(program + 0x33c));
+  prevBlock = *(int *)(program + 900);
+  for (nextBlockLink = *(int *)(*(int *)(program + 900) + 8); nextBlockLink != 0; nextBlockLink = *(int *)(nextBlockLink + 8)) {
+    *(uint *)(prevBlock + 0xc) = *(uint *)(prevBlock + 0xc) | 8;
+    prevBlock = nextBlockLink;
   }
   return;
 }

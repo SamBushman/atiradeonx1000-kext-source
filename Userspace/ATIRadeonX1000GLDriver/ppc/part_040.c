@@ -2325,7 +2325,7 @@ LAB_0012ed24:
       chainSecondKey = *(undefined4 *)(chainBlock + 0x13c);
       chainHeadKey = 0xffffffff;
       if (!foundInChain) goto LAB_0012ed5c;
-      chainLastBlock = FUN_000e83bc(containerBlock);
+      chainLastBlock = Block__getFirstRealInst(containerBlock);
       predicateRegister = *(undefined4 *)(chainLastBlock + 0x94);
     }
     newInst2 = IRInst__create(0x31,*(undefined4 *)(program + 8));

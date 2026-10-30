@@ -7348,7 +7348,7 @@ LAB_00144264:
       puVar11 = *(undefined4 **)(piVar20[0x34] + 8);
     }
     piVar20 = (int *)*puVar11;
-    iVar27 = FUN_000e83bc(piVar20);
+    iVar27 = Block__getFirstRealInst(piVar20);
   }
   vcall2cResult = (**(code **)(*piVar20 + 0x2c))(piVar20);
   piVar21 = piVar20;
@@ -7366,7 +7366,7 @@ LAB_00144264:
       }
       piVar21 = (int *)*puVar11;
     }
-    iVar27 = FUN_000e83bc(piVar21);
+    iVar27 = Block__getFirstRealInst(piVar21);
   }
   uVar5 = DAT_001b0044;
   iVar7 = piVar21[0x2b];

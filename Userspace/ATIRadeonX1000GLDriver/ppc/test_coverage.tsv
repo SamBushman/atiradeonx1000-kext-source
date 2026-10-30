@@ -1359,7 +1359,7 @@
 0xe8098	Block__phiOperandIndexForPredecessor	52	yes	
 0xe80cc	FUN_000e80cc	88	yes	
 0xe8124	Program__allocateBitSetIndex	664	yes	
-0xe83bc	FUN_000e83bc	104	no	indirect call (driver context / vtable / callback)
+0xe83bc	Block__getFirstRealInst	104	no	indirect call (driver context / vtable / callback)
 0xe8424	Block__insertAtStart	216	no	indirect call (driver context / vtable / callback)
 0xe84fc	Block__verify	468	no	indirect call (driver context / vtable / callback)
 0xe86f0	LoopHeader__verify	236	no	indirect call (driver context / vtable / callback)
@@ -1592,7 +1592,7 @@
 0xf83cc	DominatorTree__compress	412	yes	
 0xf8588	DominatorTree__eval	72	yes	
 0xf85d0	DominatorTree__compute	740	yes	
-0xf88b4	FUN_000f88b4	140	yes	
+0xf88b4	Program__computeDominators	140	yes	
 0xf8960	FUN_000f8960	16	yes	
 0xf8970	FUN_000f8970	16	yes	
 0xf8980	FUN_000f8980	20	yes	

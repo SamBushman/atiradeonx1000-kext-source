@@ -709,9 +709,9 @@ int IfHeader__ctor_ea6d0(this, param_2, param_3, param_4, compiler)
 }
 
 /* PostLoopFooter__ctor_ea828 @ 0xea828 (580 bytes) */
-int PostLoopFooter__ctor_ea828(this, param_2, enclosingLoopHeader, argR6, compiler)
+int PostLoopFooter__ctor_ea828(this, registerIndex, enclosingLoopHeader, argR6, compiler)
   undefined4 *this;
-  undefined4 param_2;
+  undefined4 registerIndex;
   undefined4 enclosingLoopHeader;
   int argR6;
   int compiler;
@@ -725,8 +725,8 @@ int PostLoopFooter__ctor_ea828(this, param_2, enclosingLoopHeader, argR6, compil
   undefined4 newInst;
   undefined4 *allocation;
   int operandRecord;
-  int *piVar3;
-  int iVar4;
+  int *definitionVector;
+  int definitionInst;
   undefined4 arenaA;
   undefined4 *blockObject;
   
@@ -759,9 +759,9 @@ int PostLoopFooter__ctor_ea828(this, param_2, enclosingLoopHeader, argR6, compil
     newInst = IRInst__create(0x81,compiler);
     this[0x52] = newInst;
     operandRecord = IRInst__getOperandRecord(newInst,0);
-    *(undefined4 *)(operandRecord + 8) = param_2;
+    *(undefined4 *)(operandRecord + 8) = registerIndex;
     *(undefined4 *)(operandRecord + 0xc) = 0x27;
-    virtualRegister = FUN_00127608(*(undefined4 *)(*(int *)(compiler + COMP_currentProgram) + 0x3ac),4,param_2,0);
+    virtualRegister = FUN_00127608(*(undefined4 *)(*(int *)(compiler + COMP_currentProgram) + 0x3ac),4,registerIndex,0);
     IRInst__setOperandRef(this[0x52],1,virtualRegister);
   }
   else {
@@ -772,24 +772,24 @@ int PostLoopFooter__ctor_ea828(this, param_2, enclosingLoopHeader, argR6, compil
     IRInst__ctor_10502c(instObject,0xfd,compiler);
     this[0x52] = instObject;
     operandRecord2 = IRInst__getOperandRecord(instObject,0);
-    *(undefined4 *)(operandRecord2 + 8) = param_2;
+    *(undefined4 *)(operandRecord2 + 8) = registerIndex;
     *(undefined4 *)(operandRecord2 + 0xc) = 0x27;
     newVReg = FUN_00127608(*(undefined4 *)(*(int *)(compiler + COMP_currentProgram) + 0x3ac),4,0,0);
-    piVar3 = *(int **)(newVReg + 0x18);
-    if (*piVar3 == 0) {
-      piVar3 = (int *)Vector__elementRefGrow(piVar3,0);
+    definitionVector = *(int **)(newVReg + 0x18);
+    if (*definitionVector == 0) {
+      definitionVector = (int *)Vector__elementRefGrow(definitionVector,0);
     }
     else {
-      if (piVar3[1] == 0) {
-        *(undefined4 *)piVar3[2] = 0;
-        piVar3[1] = 1;
+      if (definitionVector[1] == 0) {
+        *(undefined4 *)definitionVector[2] = 0;
+        definitionVector[1] = 1;
       }
-      piVar3 = (int *)piVar3[2];
+      definitionVector = (int *)definitionVector[2];
     }
-    iVar4 = *piVar3;
-    *(undefined4 *)(iVar4 + 0x20) = 0xffffffff;
-    *(byte *)(iVar4 + 0x15c) = *(byte *)(iVar4 + 0x15c) | 1;
-    *(undefined4 *)(iVar4 + 0x1c) = 3;
+    definitionInst = *definitionVector;
+    *(undefined4 *)(definitionInst + 0x20) = 0xffffffff;
+    *(byte *)(definitionInst + 0x15c) = *(byte *)(definitionInst + 0x15c) | 1;
+    *(undefined4 *)(definitionInst + 0x1c) = 3;
     IRInst__setOperandRef(this[0x52],1,newVReg);
     constantSelectWord = DAT_001aa7fc;
     operandRecord3 = IRInst__getOperandRecord(this[0x52],1);

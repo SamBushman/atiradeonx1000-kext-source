@@ -304,10 +304,10 @@ f816c	DominatorTree__dfsNumber	f8274	f83b8	-	no-handler
 f83cc	DominatorTree__compress	f83f4	f83f8	-	no-handler
 f83cc	DominatorTree__compress	f841c	f8420	f8430	cleanup
 f83cc	DominatorTree__compress	f844c	f8574	-	no-handler
-f88b4	FUN_000f88b4	f88d8	f88dc	-	no-handler
-f88b4	FUN_000f88b4	f88f0	f88f4	f8908	cleanup
-f88b4	FUN_000f88b4	f88f8	f88fc	-	no-handler
-f88b4	FUN_000f88b4	f8924	f894c	-	no-handler
+f88b4	Program__computeDominators	f88d8	f88dc	-	no-handler
+f88b4	Program__computeDominators	f88f0	f88f4	f8908	cleanup
+f88b4	Program__computeDominators	f88f8	f88fc	-	no-handler
+f88b4	Program__computeDominators	f8924	f894c	-	no-handler
 f94dc	FUN_000f94dc	f9578	f95a0	-	no-handler
 f94dc	FUN_000f94dc	f95b4	f95b8	f95e4	cleanup
 f94dc	FUN_000f94dc	f95c0	f95c4	-	no-handler

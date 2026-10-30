@@ -112,7 +112,7 @@ f513c	f515c	Compiler__getOrCreateLoadConstN
 f6c50	f6c70	Program__findOrCreateConstInst
 f8258	f8278	DominatorTree__dfsNumber
 f8430	f8450	DominatorTree__compress
-f8908	f8928	FUN_000f88b4
+f8908	f8928	Program__computeDominators
 f95e4	f9600	FUN_000f94dc
 f97a8	f97c4	FUN_000f94dc
 f9870	f988c	FUN_000f94dc

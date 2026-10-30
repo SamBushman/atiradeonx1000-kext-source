@@ -1359,7 +1359,7 @@
 0xe8098	52	Block__phiOperandIndexForPredecessor	part_022	converted
 0xe80cc	88	FUN_000e80cc	part_022	converted
 0xe8124	664	Program__allocateBitSetIndex	part_022	converted
-0xe83bc	104	FUN_000e83bc	part_022	converted
+0xe83bc	104	Block__getFirstRealInst	part_022	converted
 0xe8424	216	Block__insertAtStart	part_022	converted
 0xe84fc	468	Block__verify	part_022	converted
 0xe86f0	236	LoopHeader__verify	part_022	converted
@@ -1592,7 +1592,7 @@
 0xf83cc	100	DominatorTree__compress	part_026	converted
 0xf8588	72	DominatorTree__eval	part_026	converted
 0xf85d0	740	DominatorTree__compute	part_026	converted
-0xf88b4	104	FUN_000f88b4	part_026	converted
+0xf88b4	104	Program__computeDominators	part_026	converted
 0xf8960	16	FUN_000f8960	part_026	converted
 0xf8970	16	FUN_000f8970	part_026	converted
 0xf8980	20	FUN_000f8980	part_026	converted

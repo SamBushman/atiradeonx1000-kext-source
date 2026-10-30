@@ -2739,23 +2739,23 @@ code_r0x000da340:
 }
 
 /* scSetCallbackTables @ 0xda394 (68 bytes) */
-int scSetCallbackTables(param_1, param_2, param_3)
-  int param_1;
-  int param_2;
-  undefined4 param_3;
+int scSetCallbackTables(compileInput, request, resultObject)
+  int compileInput;
+  int request;
+  undefined4 resultObject;
 {
-  undefined4 uVar1;
+  undefined4 status;
   
-  *(undefined4 *)(param_1 + 0x38) = param_3;
-  *(undefined4 *)(param_1 + 0x3c) = param_3;
-  *(undefined4 *)(param_1 + 0x40) = param_3;
-  *(int *)(param_1 + 0x2c) = param_2;
-  *(int *)(param_1 + 0x30) = param_2;
-  *(int *)(param_1 + 0x34) = param_2;
-  if (*(int *)(param_1 + 8) != 0) {
-    uVar1 = Compiler__compileWithRetry(*(int *)(param_1 + 8),param_3,*(undefined4 *)(param_2 + 0x4c),
-                         *(undefined4 *)(param_2 + 0x54),param_1);
-    return uVar1;
+  *(undefined4 *)(compileInput + 0x38) = resultObject;
+  *(undefined4 *)(compileInput + 0x3c) = resultObject;
+  *(undefined4 *)(compileInput + 0x40) = resultObject;
+  *(int *)(compileInput + 0x2c) = request;
+  *(int *)(compileInput + 0x30) = request;
+  *(int *)(compileInput + 0x34) = request;
+  if (*(int *)(compileInput + 8) != 0) {
+    status = Compiler__compileWithRetry(*(int *)(compileInput + 8),resultObject,*(undefined4 *)(request + 0x4c),
+                         *(undefined4 *)(request + 0x54),compileInput);
+    return status;
   }
   return 2;
 }

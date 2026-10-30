@@ -2409,23 +2409,23 @@ LAB_000e8388:
   return loopCounter;
 }
 
-/* FUN_000e83bc @ 0xe83bc (104 bytes) */
-int FUN_000e83bc(param_1)
-  int param_1;
+/* Block__getFirstRealInst @ 0xe83bc (104 bytes) */
+int Block__getFirstRealInst(block)
+  int block;
 {
-  int iVar1;
-  int iVar2;
-  int *piVar3;
+  int opcodeId;
+  int cursorInst;
+  int *headInst;
   
-  piVar3 = *(int **)(param_1 + 0x98);
-  (**(code **)(*piVar3 + 0x34))(piVar3);
-  iVar2 = piVar3[2];
-  iVar1 = *(int *)(*(int *)(iVar2 + 0x88) + 8);
-  while (iVar1 == 0x8e) {
-    iVar2 = *(int *)(iVar2 + 8);
-    iVar1 = *(int *)(*(int *)(iVar2 + 0x88) + 8);
+  headInst = *(int **)(block + 0x98);
+  (**(code **)(*headInst + 0x34))(headInst);
+  cursorInst = headInst[2];
+  opcodeId = *(int *)(*(int *)(cursorInst + 0x88) + 8);
+  while (opcodeId == 0x8e) {
+    cursorInst = *(int *)(cursorInst + 8);
+    opcodeId = *(int *)(*(int *)(cursorInst + 0x88) + 8);
   }
-  return iVar2;
+  return cursorInst;
 }
 
 /* Block__insertAtStart @ 0xe8424 (216 bytes) */

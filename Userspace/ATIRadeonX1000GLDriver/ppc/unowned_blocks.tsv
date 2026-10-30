@@ -2981,7 +2981,7 @@ f513c	f515c	eh-pad	Compiler__getOrCreateLoadConstN	8	0x193cc0,__Unwind_Resume
 f6c50	f6c70	eh-pad	Program__findOrCreateConstInst	8	0x193cc0,__Unwind_Resume
 f8258	f8278	eh-pad	DominatorTree__dfsNumber	8	0x193cc0,__Unwind_Resume
 f8430	f8450	eh-pad	DominatorTree__compress	8	0x193cc0,__Unwind_Resume
-f8908	f8928	eh-pad	FUN_000f88b4	8	0x193cc0,__Unwind_Resume
+f8908	f8928	eh-pad	Program__computeDominators	8	0x193cc0,__Unwind_Resume
 f8cc8	f8ccc	millicode	FUN_000f8c88	1	
 f91e8	f9288	table	FUN_000f9140	40	
 f953c	f9550	table	FUN_000f94dc	5	

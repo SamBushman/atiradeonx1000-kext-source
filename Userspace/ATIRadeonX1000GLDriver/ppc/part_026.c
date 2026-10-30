@@ -2357,29 +2357,29 @@ int DominatorTree__compute(domInfo)
   return;
 }
 
-/* FUN_000f88b4 @ 0xf88b4 (104 bytes) */
-int FUN_000f88b4(param_1)
-  int param_1;
+/* Program__computeDominators @ 0xf88b4 (104 bytes) */
+int Program__computeDominators(program)
+  int program;
 {
   int arena;
   int *allocation;
-  int *piVar2;
-  int iVar3;
+  int *domTree;
+  int arenaObj;
   
-  arena = *(int *)(*(int *)(param_1 + 8) + 0x378);
+  arena = *(int *)(*(int *)(program + 8) + 0x378);
   allocation = (int *)Arena__alloc(arena,0x2c);
   *allocation = arena;
-  piVar2 = allocation + 1;
-  ((int (*)())DominatorTree__ctor_f7cd8)(piVar2,param_1);
-  ((int (*)())DominatorTree__compute)(piVar2);
-  if (piVar2 == (int *)0x0) {
+  domTree = allocation + 1;
+  ((int (*)())DominatorTree__ctor_f7cd8)(domTree,program);
+  ((int (*)())DominatorTree__compute)(domTree);
+  if (domTree == (int *)0x0) {
     return;
   }
-  ((int (*)())DominatorTree__free)(piVar2);
-  iVar3 = *allocation;
-  if ((*(int *)(iVar3 + 0x28) != 0) && (piVar2 = *(int **)(iVar3 + 0x14), piVar2 == allocation)) {
-    _memset(piVar2,0,*(int *)(iVar3 + 8) - (int)piVar2);
-    *(undefined4 *)(iVar3 + 8) = *(undefined4 *)(iVar3 + 0x14);
+  ((int (*)())DominatorTree__free)(domTree);
+  arenaObj = *allocation;
+  if ((*(int *)(arenaObj + 0x28) != 0) && (domTree = *(int **)(arenaObj + 0x14), domTree == allocation)) {
+    _memset(domTree,0,*(int *)(arenaObj + 8) - (int)domTree);
+    *(undefined4 *)(arenaObj + 8) = *(undefined4 *)(arenaObj + 0x14);
   }
   return;
 }
@@ -2793,43 +2793,45 @@ int Program__appendInst(program, inst, block)
   int *inst;
   undefined4 block;
 {
+  int sourceRegFile;
+  int sourceRegNumberB;
   int operandRecord;
-  uint uVar1;
-  int iVar2;
-  int *piVar3;
+  uint instField0x134;
+  int splitQuery;
+  int *hardwareInfo;
   void *inst2;
   int newTempIndex;
-  int iVar6;
+  int sourceRegNumber;
   int iVar7;
   
-  iVar2 = (**(code **)(*inst + 0x30))(inst,inst,block);
-  if ((iVar2 != 0) &&
-     (piVar3 = *(int **)(*(int *)(program + 8) + 0x30c),
-     iVar2 = (**(code **)(*piVar3 + 0x168))(piVar3,program,inst), iVar2 != 0)) {
+  splitQuery = (**(code **)(*inst + 0x30))(inst,inst,block);
+  if ((splitQuery != 0) &&
+     (hardwareInfo = *(int **)(*(int *)(program + 8) + 0x30c),
+     splitQuery = (**(code **)(*hardwareInfo + 0x168))(hardwareInfo,program,inst), splitQuery != 0)) {
     inst2 = IRInst__create(0x13,*(undefined4 *)(program + 8));
     newTempIndex = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
     *(int *)(*(int *)(program + 8) + 0x3ac) = newTempIndex;
     operandRecord = IRInst__getOperandRecord(inst2,0);
     *(undefined4 *)(operandRecord + 0xc) = 0;
     *(int *)(operandRecord + 8) = newTempIndex;
-    uVar1 = inst[0x4d];
-    ((int (*)())IRInst__makeLiteralVec4Int)(inst2,program,1,uVar1 & 0xffff | 0x60000,uVar1 & 0xffff | 0x70000,
-                 uVar1 & 0xffff | 0x70000,uVar1 & 0xffff | 0x70000);
-    iVar6 = inst[0x2b];
-    iVar7 = inst[0x2c];
+    instField0x134 = inst[0x4d];
+    ((int (*)())IRInst__makeLiteralVec4Int)(inst2,program,1,instField0x134 & 0xffff | 0x60000,instField0x134 & 0xffff | 0x70000,
+                 instField0x134 & 0xffff | 0x70000,instField0x134 & 0xffff | 0x70000);
+    sourceRegNumber = inst[0x2b];
+    sourceRegFile = inst[0x2c];
     operandRecord = IRInst__getOperandRecord(inst2,2);
-    *(int *)(operandRecord + 0xc) = iVar7;
-    *(int *)(operandRecord + 8) = iVar6;
+    *(int *)(operandRecord + 0xc) = sourceRegFile;
+    *(int *)(operandRecord + 8) = sourceRegNumber;
     ((int (*)())Program__appendInst)(program,inst2,block);
     inst2 = IRInst__create(0x31,*(undefined4 *)(program + 8));
     operandRecord = IRInst__getOperandRecord(inst2,0);
     *(undefined4 *)(operandRecord + 0xc) = 0;
     *(int *)(operandRecord + 8) = newTempIndex;
     *(undefined4 *)((int)inst2 + 0x9c) = 0x1010000;
-    iVar6 = inst[0x2b];
+    sourceRegNumberB = inst[0x2b];
     iVar7 = inst[0x2c];
     operandRecord = IRInst__getOperandRecord(inst2,1);
-    *(int *)(operandRecord + 8) = iVar6;
+    *(int *)(operandRecord + 8) = sourceRegNumberB;
     *(int *)(operandRecord + 0xc) = iVar7;
     ((int (*)())Program__appendInst)(program,inst2,block);
     operandRecord = IRInst__getOperandRecord(inst,1);

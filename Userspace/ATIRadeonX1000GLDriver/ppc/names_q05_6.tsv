@@ -2445,3 +2445,43 @@ local	IRInst__computeSourceReadMask	local_2c	laneReadMask4C	INFERRED	laneMask::f
 func	FUN_000da0c0	Compiler__createFromRequest_da0c0	INFERRED	second copy of Compiler__createFromRequest (same code): allocates and initialises the compiler from the request, picks the hardware kind and clamps the register limits
 local	FUN_000e161c	param_1	compiler	INFERRED	compiler whose retry state (+0x314, +0x318, +0x47c, +0x6b8, +0x6bc) is updated
 local	FUN_000e161c	param_2	failureKind	INFERRED	4 or 5: kind of the failure that may be retried
+use	PostLoopFooter__ctor_ea828	uVar5	constantSelectWord	INFERRED	select word DAT_001aa7fc stored on operand 1 of the footer instruction	^\s*uVar5\ =\ DAT_001aa7fc;$	+1
+use	PostLoopFooter__ctor_ea828	uVar5	constantSelectWord	INFERRED	select word DAT_001aa7fc stored on operand 1 of the footer instruction	^\s*\*\(undefined4\ \*\)\(iVar2\ \+\ 0x10\)\ =\ uVar5;$	+1
+use	PostLoopFooter__ctor_ea828	piVar3	definitionVector	INFERRED	vector of definitions (virtualRegister+0x18); element 0 is fetched or created	^\s*piVar3\ =\ \*\(int\ \*\*\)\(iVar2\ \+\ 0x18\);$	+3
+use	PostLoopFooter__ctor_ea828	piVar3	definitionVector	INFERRED	vector of definitions (virtualRegister+0x18); element 0 is fetched or created	^\s*if\ \(piVar3\[1\]\ ==\ 0\)\ \{$	+3
+use	PostLoopFooter__ctor_ea828	piVar3	definitionVector	INFERRED	vector of definitions (virtualRegister+0x18); element 0 is fetched or created	^\s*piVar3\ =\ \(int\ \*\)piVar3\[2\];$	+1
+use	PostLoopFooter__ctor_ea828	piVar3	definitionVector	INFERRED	vector of definitions (virtualRegister+0x18); element 0 is fetched or created	^\s*iVar4\ =\ \*piVar3;$	+1
+use	PostLoopFooter__ctor_ea828	iVar4	definitionInst	INFERRED	first definition of the virtual register, marked as a constant with value -1	^\s*iVar4\ =\ \*piVar3;$	+4
+use	Program__appendInst	iVar2	splitQuery	INFERRED	inst vtable +0x30 query: nonzero enables the hardware split check	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*param_2\ \+\ 0x30\)\)\(param_2,param_2,param_3\);$	+4
+use	Program__appendInst	piVar3	hardwareInfo	INFERRED	compiler+0x30c hardware-info object (vtable +0x168 decides the inst needs a literal mov)	^\s*if\ \(\(iVar2\ !=\ 0\)\ \&\&$	+3
+use	Program__appendInst	uVar1	instField0x134	INFERRED	inst[0x4d]: low 16 bits packed into the literal vec4	^\s*uVar1\ =\ param_2\[0x4d\];$	+3
+use	Program__appendInst	iVar6	sourceRegNumber	INFERRED	inst[0x2b]: register number of the inst source/destination record	^\s*iVar6\ =\ param_2\[0x2b\];$	+1
+use	Program__appendInst	iVar6	sourceRegNumber	INFERRED	inst[0x2b]: register number of the inst source/destination record	^\s*\*\(int\ \*\)\(iVar2\ \+\ 8\)\ =\ iVar6;$	+1
+use	Program__appendInst	iVar6	sourceRegNumberB	INFERRED	inst[0x2b]: register number copied to the mov source	^\s*iVar6\ =\ param_2\[0x2b\];$@2	+1
+use	Program__appendInst	iVar6	sourceRegNumberB	INFERRED	inst[0x2b]: register number copied to the mov source	^\s*\*\(int\ \*\)\(iVar2\ \+\ 8\)\ =\ iVar6;$@2	+1
+use	Program__appendInst	iVar7	sourceRegFile	INFERRED	inst[0x2c]: register file of the same record	^\s*iVar7\ =\ param_2\[0x2c\];$	+1
+use	Program__appendInst	iVar7	sourceRegFile	INFERRED	inst[0x2c]: register file of the same record	^\s*\*\(int\ \*\)\(iVar2\ \+\ 0xc\)\ =\ iVar7;$	+1
+use	FUN_000eced0	iVar1	prevBlock	INFERRED	block whose flag word (+0xc) bit 8 is set while walking the block list	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 900\);$	+1
+use	FUN_000eced0	iVar1	prevBlock	INFERRED	block whose flag word (+0xc) bit 8 is set while walking the block list	^\s*\*\(uint\ \*\)\(iVar1\ \+\ 0xc\)\ =\ \*\(uint\ \*\)\(iVar1\ \+\ 0xc\)\ \|\ 8;$	+2
+use	FUN_000eced0	iVar2	nextBlockLink	INFERRED	next link (+8) of the block list	^\s*for\ \(iVar2\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 900\)\ \+\ 8\);\ iVar2\ !=\ 0;\ iVar2\ =\ \*\(int\ \*\)\(iVar2\ \+\ 8\)\)\ \{$	+1
+use	FUN_000eced0	iVar2	nextBlockLink	INFERRED	next link (+8) of the block list	^\s*iVar1\ =\ iVar2;$	+1
+local	scSetCallbackTables	param_1	compileInput	INFERRED	compile input object: +8 compiler, +0x2c..+0x34 and +0x38..+0x40 callback table pointers
+local	scSetCallbackTables	param_2	request	INFERRED	request object stored at +0x2c/+0x30/+0x34; +0x4c and +0x54 are passed on to the compile
+local	scSetCallbackTables	param_3	resultObject	INFERRED	result object stored at +0x38/+0x3c/+0x40 and passed to the compile
+local	FUN_000eced0	param_1	program	INFERRED	program whose entry marker is created and blocks flagged
+local	scSetCallbackTables	uVar1	status	INFERRED	result of Compiler__compileWithRetry returned to the caller
+local	PostLoopFooter__ctor_ea828	param_2	registerIndex	INFERRED	register index stored in operand 0 (+8) of the footer instruction
+use	FUN_000e83bc	iVar1	opcodeId	INFERRED	opcode id (descriptor +8) of the instruction under test (0x8e = entry marker)	^\s*iVar1\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar2\ \+\ 0x88\)\ \+\ 8\);$	+2
+use	FUN_000e83bc	iVar1	opcodeId	INFERRED	opcode id (descriptor +8) of the instruction under test (0x8e = entry marker)	^\s*iVar1\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar2\ \+\ 0x88\)\ \+\ 8\);$@2	+1
+use	FUN_000e83bc	iVar2	cursorInst	INFERRED	instruction after the head, advanced while it is an entry marker	^\s*iVar2\ =\ piVar3\[2\];$	+2
+use	FUN_000e83bc	iVar2	cursorInst	INFERRED	instruction after the head, advanced while it is an entry marker	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar2\ \+\ 8\);$	+2
+use	FUN_000e83bc	iVar2	cursorInst	INFERRED	instruction after the head, advanced while it is an entry marker	^\s*return\ iVar2;$	+1
+use	FUN_000e83bc	piVar3	headInst	INFERRED	first instruction of the block list (block+0x98)	^\s*piVar3\ =\ \*\(int\ \*\*\)\(param_1\ \+\ 0x98\);$	+3
+use	FUN_000f88b4	piVar2	domTree	INFERRED	DominatorTree object (allocation + 1) built and freed again	^\s*piVar2\ =\ piVar1\ \+\ 1;$	+4
+use	FUN_000f88b4	piVar2	domTree	INFERRED	DominatorTree object (allocation + 1) built and freed again	^\s*\(\(int\ \(\*\)\(\)\)FUN_000f8044\)\(piVar2\);$	+1
+use	FUN_000f88b4	piVar2	domTree	INFERRED	DominatorTree object (allocation + 1) built and freed again	^\s*if\ \(\(\*\(int\ \*\)\(iVar3\ \+\ 0x28\)\ !=\ 0\)\ \&\&\ \(piVar2\ =\ \*\(int\ \*\*\)\(iVar3\ \+\ 0x14\),\ piVar2\ ==\ piVar1\)\)\ \{$	+2
+use	FUN_000f88b4	iVar3	arenaObj	INFERRED	arena object owning the allocation	^\s*iVar3\ =\ \*piVar1;$	+4
+func	FUN_000e83bc	Block__getFirstRealInst	INFERRED	returns the first instruction of the block list that is not an entry marker (opcode 0x8e), after calling the head instruction's vtable +0x34
+local	FUN_000e83bc	param_1	block	INFERRED	block whose instruction list (+0x98) is scanned
+func	FUN_000f88b4	Program__computeDominators	INFERRED	builds a DominatorTree for the program (DominatorTree__compute) and frees it again
+local	FUN_000f88b4	param_1	program	INFERRED	program

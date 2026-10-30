@@ -112,7 +112,7 @@
 0xf6c50	Program__findOrCreateConstInst
 0xf8258	DominatorTree__dfsNumber
 0xf8430	DominatorTree__compress
-0xf8908	FUN_000f88b4
+0xf8908	Program__computeDominators
 0xf95e4	FUN_000f94dc
 0xf97a8	FUN_000f94dc
 0xf9870	FUN_000f94dc

@@ -2841,7 +2841,7 @@ int FUN_00122de8(program)
   int iVar2;
   
   FUN_0012b520(program);
-  FUN_000f88b4(program);
+  Program__computeDominators(program);
   ((int (*)())FUN_0011eaa0)(program);
   ((int (*)())pass_ssa_build)(program);
   hoistInstructionsEnabled = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),0xe);
