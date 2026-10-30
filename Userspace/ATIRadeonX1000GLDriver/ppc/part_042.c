@@ -7240,161 +7240,177 @@ int FUN_001440e4(pass, inst, inst2, groupSlotCursor)
   int inst2;
   int groupSlotCursor;
 {
+  int *laneSourceCursor;
   int *latestSourceBlock;
+  int candidateSource;
   int insertBefore;
+  int loopIndex6;
+  int callResult2;
+  int countdown7;
+  int firstUsedLaneF;
   int thirdSource;
+  int scanIdx2;
+  int sourceDef2;
+  int operandRecord5;
+  int loopIndex5;
+  int countdown6;
+  int laneSource;
+  int countdown11;
+  int newCombinedInst;
+  int blockContext;
   int vcall2cResult;
   int vcall1cResult;
+  int instOpcode;
   int isBeforeOrSameResult;
-  uint loopIndexG;
-  int countdownJ;
-  int loopIndexF;
-  int countdownI;
-  int loopIndexE;
-  int countdownH;
-  int loopIndexD;
-  int countdownG;
-  int countdownF;
-  int countdownE;
-  int loopIndexC;
-  int countdownD;
-  int loopIndexB;
-  int countdownC;
-  int loopIndex;
+  int swapTemp;
+  uint distinctCountIfThird;
+  uint loopIndex8;
+  int firstUsedLaneC;
+  int sourceDef3;
+  int countdown9;
+  int firstUsedLaneA;
+  int firstUsedLaneB;
+  int loopIndex7;
+  int countdown8;
+  int scanIdx1;
+  int newInstSecond;
+  int secondSource;
+  int sourceDef;
+  int operandRecord4;
+  int countdown5;
+  int groupCombinedInst;
+  int newInstFirstB;
+  int newInstFirst;
+  int firstSource;
+  int scanIdx0;
+  int countdown4;
+  int firstUsedLaneD;
+  int loopIndex3;
+  int countdown3;
+  int operandRecord3;
+  int countdown2;
+  int operandRecord2;
+  int callResult;
+  int loopIndex2;
   int countdown;
+  int loopIndex;
+  int operandRecord;
+  bool noThirdSource;
   bool isLast;
   bool moreComponents;
-  int newInst;
-  int sourceDef3;
-  int sourceDef2;
-  int operandRecord;
-  int sourceDef;
-  int operandRecord2;
-  int operandRecord4;
-  int operandRecord3;
-  int operandRecord5;
-  bool noThirdSource;
   bool noFourthSource;
-  byte laneComponent;
+  byte laneSelectByte;
   char operandComponent;
-  undefined4 uVar5;
-  undefined4 uVar6;
-  int iVar7;
+  undefined4 defaultSelectWord;
+  undefined4 selectWordToStore;
+  undefined4 selectWordToStoreB;
   int laneSourceInst;
-  undefined1 uVar9;
+  undefined1 laneSelectCopy;
+  undefined1 matchedSlotIndex;
   byte *laneSelectScan;
-  undefined4 *puVar11;
-  int countdownB;
-  int iVar13;
-  int iVar14;
+  undefined4 *blockSlotPtr;
+  undefined4 *laneSlotCursor;
+  int firstUsedLaneE;
   uint distinctSourceCount;
   undefined4 *laneSelectCursor;
-  undefined4 uVar17;
-  uint uVar18;
-  int iVar19;
-  int *piVar20;
+  undefined4 compilerForBlock;
+  undefined4 extraSelectWord;
   int *insertBlock;
-  int operandIndex;
+  int loopIndex4;
   undefined4 *laneGroup;
-  int iVar24;
-  int iVar25;
-  int iVar26;
-  int iVar27;
-  int iVar28;
-  int iVar29;
   int countdownK;
-  undefined4 local_d8;
-  undefined4 local_d4;
-  undefined4 local_d0;
-  undefined4 local_cc;
-  undefined4 local_c8;
-  undefined4 local_c4 [4];
-  undefined4 local_b4;
-  undefined4 local_b0 [2];
-  undefined4 local_a8;
-  undefined4 local_a4;
-  undefined4 local_a0;
-  undefined4 local_9c;
-  undefined4 local_98;
-  undefined4 local_94;
-  undefined4 local_90;
+  undefined4 selectScratch0;
+  undefined4 selectScratch1;
+  undefined4 selectScratch2;
+  undefined4 selectScratch3;
+  undefined4 selectScratch4;
+  undefined4 selectScratch5 [4];
+  undefined4 selectScratch9;
+  undefined4 remappedSelect [2];
+  undefined4 writeMaskOutA;
+  undefined4 writeMaskOutB;
+  undefined4 writeMaskOutC;
+  undefined4 writeMaskOutD;
+  undefined4 writeMaskOutE;
+  undefined4 writeMaskOutF;
+  undefined4 writeMaskOutG;
   int fourthSource;
   int operandSourceB;
   int operandSource;
-  undefined *local_80;
-  undefined4 *local_7c;
-  undefined *local_78;
-  undefined4 *local_74;
-  undefined4 *local_70;
-  undefined4 *local_6c;
-  undefined4 *local_68;
-  undefined4 *local_64;
-  undefined4 *local_60;
-  undefined4 *local_5c;
+  undefined *constTableBaseA;
+  undefined4 *scratchBase;
+  undefined *constTableBaseB;
+  undefined4 *scratchPtrCC;
+  undefined4 *scratchPtrC4;
+  undefined4 *scratchPtrC4Plus1;
+  undefined4 *scratchPtrC4Plus2;
+  undefined4 *scratchPtrC4Plus3;
+  undefined4 *scratchPtrB4;
+  undefined4 *scratchPtrD4;
   
-  local_6c = local_c4 + 1;
-  local_68 = local_c4 + 2;
-  local_64 = local_c4 + 3;
-  local_60 = &local_b4;
-  local_5c = &local_d4;
-  operandIndex = 0;
+  scratchPtrC4Plus1 = selectScratch5 + 1;
+  scratchPtrC4Plus2 = selectScratch5 + 2;
+  scratchPtrC4Plus3 = selectScratch5 + 3;
+  scratchPtrB4 = &selectScratch9;
+  scratchPtrD4 = &selectScratch1;
+  loopIndex4 = 0;
 LAB_00144144:
   laneGroup = *(undefined4 **)(groupSlotCursor + 4);
   if (laneGroup != (undefined4 *)0x0) {
-    iVar24 = laneGroup[9];
-    local_7c = &local_d8;
-    if (iVar24 == 0) {
-      countdownF = 4;
-      iVar24 = 0;
-      puVar11 = laneGroup;
+    groupCombinedInst = laneGroup[9];
+    scratchBase = &selectScratch0;
+    if (groupCombinedInst == 0) {
+      countdown5 = 4;
+      scanIdx0 = 0;
+      laneSlotCursor = laneGroup;
       do {
-        if (puVar11[4] != 0) {
+        if (laneSlotCursor[4] != 0) {
           distinctSourceCount = 1;
-          iVar24 = laneGroup[iVar24 + 4];
+          firstSource = laneGroup[scanIdx0 + 4];
           goto LAB_001441e0;
         }
-        iVar24 = iVar24 + 1;
-        puVar11 = puVar11 + 1;
-        countdownF = countdownF + -1;
-      } while (countdownF != 0);
+        scanIdx0 = scanIdx0 + 1;
+        laneSlotCursor = laneSlotCursor + 1;
+        countdown5 = countdown5 + -1;
+      } while (countdown5 != 0);
       distinctSourceCount = 0;
-      iVar24 = 0;
+      firstSource = 0;
 LAB_001441e0:
-      countdownG = 4;
-      iVar25 = 0;
-      puVar11 = laneGroup;
+      countdown6 = 4;
+      scanIdx1 = 0;
+      laneSlotCursor = laneGroup;
       do {
-        if ((iVar24 != puVar11[4]) && (puVar11[4] != 0)) {
+        if ((firstSource != laneSlotCursor[4]) && (laneSlotCursor[4] != 0)) {
           distinctSourceCount = distinctSourceCount + 1;
-          iVar25 = laneGroup[iVar25 + 4];
+          secondSource = laneGroup[scanIdx1 + 4];
           goto LAB_00144214;
         }
-        iVar25 = iVar25 + 1;
-        puVar11 = puVar11 + 1;
-        countdownG = countdownG + -1;
-      } while (countdownG != 0);
-      iVar25 = 0;
+        scanIdx1 = scanIdx1 + 1;
+        laneSlotCursor = laneSlotCursor + 1;
+        countdown6 = countdown6 + -1;
+      } while (countdown6 != 0);
+      secondSource = 0;
 LAB_00144214:
-      countdownH = 4;
-      thirdSource = 0;
-      puVar11 = laneGroup;
+      countdown7 = 4;
+      scanIdx2 = 0;
+      laneSlotCursor = laneGroup;
       do {
-        iVar7 = puVar11[4];
-        if (((iVar24 != iVar7) && (iVar25 != iVar7)) && (iVar7 != 0)) {
-          uVar18 = distinctSourceCount + 1;
-          thirdSource = laneGroup[thirdSource + 4];
+        laneSource = laneSlotCursor[4];
+        if (((firstSource != laneSource) && (secondSource != laneSource)) && (laneSource != 0)) {
+          distinctCountIfThird = distinctSourceCount + 1;
+          thirdSource = laneGroup[scanIdx2 + 4];
           noThirdSource = thirdSource == 0;
           if (noThirdSource) goto LAB_00144258;
           distinctSourceCount = distinctSourceCount + 2;
-          countdownH = 4;
-          piVar20 = laneGroup + 4;
-          puVar11 = laneGroup;
+          countdown7 = 4;
+          laneSourceCursor = laneGroup + 4;
+          laneSlotCursor = laneGroup;
           goto LAB_001442d4;
         }
-        thirdSource = thirdSource + 1;
-        puVar11 = puVar11 + 1;
-        countdownH = countdownH + -1;
-      } while (countdownH != 0);
+        scanIdx2 = scanIdx2 + 1;
+        laneSlotCursor = laneSlotCursor + 1;
+        countdown7 = countdown7 + -1;
+      } while (countdown7 != 0);
       noThirdSource = true;
       thirdSource = 0;
       fourthSource = 0;
@@ -7405,63 +7421,63 @@ LAB_00144214:
   }
   goto LAB_001452d4;
   while( true ) {
-    piVar20 = piVar20 + 1;
-    puVar11 = puVar11 + 1;
-    countdownH = countdownH + -1;
-    if (countdownH == 0) break;
+    laneSourceCursor = laneSourceCursor + 1;
+    laneSlotCursor = laneSlotCursor + 1;
+    countdown7 = countdown7 + -1;
+    if (countdown7 == 0) break;
 LAB_001442d4:
-    iVar7 = puVar11[4];
-    if (((iVar24 != iVar7) && (iVar25 != iVar7)) && ((iVar7 != thirdSource && (iVar7 != 0)))) {
-      fourthSource = *piVar20;
+    laneSource = laneSlotCursor[4];
+    if (((firstSource != laneSource) && (secondSource != laneSource)) && ((laneSource != thirdSource && (laneSource != 0)))) {
+      fourthSource = *laneSourceCursor;
       noFourthSource = fourthSource == 0;
       if (noFourthSource) goto LAB_00144264;
-      loopIndexG = 0;
-      countdownH = 4;
-      piVar20 = laneGroup + 4;
+      loopIndex8 = 0;
+      countdown7 = 4;
+      laneSourceCursor = laneGroup + 4;
       laneSelectScan = (byte *)(laneGroup + 8);
       goto LAB_00144334;
     }
   }
 LAB_00144258:
   fourthSource = 0;
-  distinctSourceCount = uVar18;
+  distinctSourceCount = distinctCountIfThird;
   noFourthSource = true;
   goto LAB_00144264;
   while( true ) {
-    loopIndexG = loopIndexG + 1;
-    piVar20 = piVar20 + 1;
-    countdownH = countdownH + -1;
-    if (countdownH == 0) break;
+    loopIndex8 = loopIndex8 + 1;
+    laneSourceCursor = laneSourceCursor + 1;
+    countdown7 = countdown7 + -1;
+    if (countdown7 == 0) break;
 LAB_00144334:
-    laneComponent = *laneSelectScan;
+    laneSelectByte = *laneSelectScan;
     laneSelectScan = laneSelectScan + 1;
-    if (loopIndexG == laneComponent) {
-      iVar27 = *piVar20;
-      if (iVar27 != fourthSource) {
-        if (iVar27 == thirdSource) {
+    if (loopIndex8 == laneSelectByte) {
+      candidateSource = *laneSourceCursor;
+      if (candidateSource != fourthSource) {
+        if (candidateSource == thirdSource) {
           noThirdSource = fourthSource == 0;
-          iVar7 = iVar25;
+          swapTemp = secondSource;
           thirdSource = fourthSource;
         }
         else {
-          iVar7 = fourthSource;
-          if ((iVar25 != iVar27) && (iVar7 = iVar25, iVar24 == iVar27)) {
-            iVar24 = fourthSource;
+          swapTemp = fourthSource;
+          if ((secondSource != candidateSource) && (swapTemp = secondSource, firstSource == candidateSource)) {
+            firstSource = fourthSource;
           }
         }
-        iVar25 = iVar7;
-        noFourthSource = iVar27 == 0;
-        fourthSource = iVar27;
+        secondSource = swapTemp;
+        noFourthSource = candidateSource == 0;
+        fourthSource = candidateSource;
       }
       break;
     }
   }
 LAB_00144264:
-  insertBefore = *(int *)(iVar24 + 8);
+  insertBefore = *(int *)(firstSource + 8);
   latestSourceBlock = *(int **)(insertBefore + 0x158);
-  isBeforeOrSameResult = Inst__isBeforeOrSame(insertBefore,iVar25);
+  isBeforeOrSameResult = Inst__isBeforeOrSame(insertBefore,secondSource);
   if (isBeforeOrSameResult != 0) {
-    insertBefore = *(int *)(iVar25 + 8);
+    insertBefore = *(int *)(secondSource + 8);
     latestSourceBlock = *(int **)(insertBefore + 0x158);
   }
   if (!noThirdSource) {
@@ -7475,555 +7491,555 @@ LAB_00144264:
       latestSourceBlock = *(int **)(insertBefore + 0x158);
     }
   }
-  Inst__isBeforeOrSame(iVar24,insertBefore);
-  Inst__isBeforeOrSame(iVar25,insertBefore);
+  Inst__isBeforeOrSame(firstSource,insertBefore);
+  Inst__isBeforeOrSame(secondSource,insertBefore);
   if (!noThirdSource) {
     Inst__isBeforeOrSame(thirdSource,insertBefore);
   }
   if (!noFourthSource) {
     Inst__isBeforeOrSame(fourthSource,insertBefore);
   }
-  iVar7 = *(int *)(*(int *)(insertBefore + 0x88) + 8);
-  while (iVar7 == 0x8e) {
+  instOpcode = *(int *)(*(int *)(insertBefore + 0x88) + 8);
+  while (instOpcode == 0x8e) {
     insertBefore = *(int *)(insertBefore + 8);
-    iVar7 = *(int *)(*(int *)(insertBefore + 0x88) + 8);
+    instOpcode = *(int *)(*(int *)(insertBefore + 0x88) + 8);
   }
   vcall1cResult = (**(code **)(*latestSourceBlock + 0x1c))(latestSourceBlock);
   if (vcall1cResult != 0) {
-    puVar11 = (undefined4 *)0x0;
+    blockSlotPtr = (undefined4 *)0x0;
     if (*(int *)(latestSourceBlock[0x34] + 4) != 0) {
-      puVar11 = *(undefined4 **)(latestSourceBlock[0x34] + 8);
+      blockSlotPtr = *(undefined4 **)(latestSourceBlock[0x34] + 8);
     }
-    latestSourceBlock = (int *)*puVar11;
+    latestSourceBlock = (int *)*blockSlotPtr;
     insertBefore = FUN_000e83bc(latestSourceBlock);
   }
   vcall2cResult = (**(code **)(*latestSourceBlock + 0x2c))(latestSourceBlock);
   insertBlock = latestSourceBlock;
   if (vcall2cResult != 0) {
-    puVar11 = (undefined4 *)0x0;
+    blockSlotPtr = (undefined4 *)0x0;
     if (*(int *)(latestSourceBlock[0x34] + 4) != 0) {
-      puVar11 = *(undefined4 **)(latestSourceBlock[0x34] + 8);
+      blockSlotPtr = *(undefined4 **)(latestSourceBlock[0x34] + 8);
     }
-    insertBlock = (int *)*puVar11;
-    iVar27 = Block__isAncestorOf(insertBlock,latestSourceBlock[0x54]);
-    if (iVar27 == 0) {
-      puVar11 = (undefined4 *)0x0;
+    insertBlock = (int *)*blockSlotPtr;
+    callResult2 = Block__isAncestorOf(insertBlock,latestSourceBlock[0x54]);
+    if (callResult2 == 0) {
+      blockSlotPtr = (undefined4 *)0x0;
       if (1 < *(uint *)(latestSourceBlock[0x34] + 4)) {
-        puVar11 = (undefined4 *)(*(int *)(latestSourceBlock[0x34] + 8) + 4);
+        blockSlotPtr = (undefined4 *)(*(int *)(latestSourceBlock[0x34] + 8) + 4);
       }
-      insertBlock = (int *)*puVar11;
+      insertBlock = (int *)*blockSlotPtr;
     }
     insertBefore = FUN_000e83bc(insertBlock);
   }
-  uVar5 = DAT_001b0044;
-  iVar7 = insertBlock[0x2b];
-  uVar17 = *(undefined4 *)(iVar7 + 8);
+  defaultSelectWord = DAT_001b0044;
+  blockContext = insertBlock[0x2b];
+  compilerForBlock = *(undefined4 *)(blockContext + 8);
   if (distinctSourceCount == 2) {
-    loopIndexD = 0;
-    local_c4[0] = DAT_001b0038;
-    local_c8 = DAT_001b0038;
-    local_78 = &DAT_001b40f0;
-    countdownC = 4;
-    local_80 = &DAT_001b40f0;
-    local_d4 = DAT_001b0044;
-    local_7c = &local_d8;
-    puVar11 = laneGroup;
+    loopIndex5 = 0;
+    selectScratch5[0] = DAT_001b0038;
+    selectScratch4 = DAT_001b0038;
+    constTableBaseB = &DAT_001b40f0;
+    countdown2 = 4;
+    constTableBaseA = &DAT_001b40f0;
+    selectScratch1 = DAT_001b0044;
+    scratchBase = &selectScratch0;
+    laneSlotCursor = laneGroup;
     do {
-      if (iVar24 == puVar11[4]) {
-        *(undefined1 *)((int)&local_d4 + (uint)*(byte *)((int)laneGroup + loopIndexD + 0x20)) = 0;
-        laneComponent = *(byte *)((int)laneGroup + loopIndexD + 0x20);
-        *(byte *)((int)&local_c8 + (uint)laneComponent) = laneComponent;
+      if (firstSource == laneSlotCursor[4]) {
+        *(undefined1 *)((int)&selectScratch1 + (uint)*(byte *)((int)laneGroup + loopIndex5 + 0x20)) = 0;
+        laneSelectByte = *(byte *)((int)laneGroup + loopIndex5 + 0x20);
+        *(byte *)((int)&selectScratch4 + (uint)laneSelectByte) = laneSelectByte;
       }
-      loopIndexD = loopIndexD + 1;
-      puVar11 = puVar11 + 1;
-      countdownC = countdownC + -1;
-    } while (countdownC != 0);
-    loopIndexD = 0;
-    countdownC = 4;
+      loopIndex5 = loopIndex5 + 1;
+      laneSlotCursor = laneSlotCursor + 1;
+      countdown2 = countdown2 + -1;
+    } while (countdown2 != 0);
+    loopIndex5 = 0;
+    countdown2 = 4;
     do {
-      if (*(char *)((int)&local_d4 + loopIndexD) == '\x01') {
-        *(char *)((int)local_c4 + loopIndexD) = (char)loopIndexD;
-        *(undefined1 *)((int)&local_d4 + loopIndexD) = 0;
+      if (*(char *)((int)&selectScratch1 + loopIndex5) == '\x01') {
+        *(char *)((int)selectScratch5 + loopIndex5) = (char)loopIndex5;
+        *(undefined1 *)((int)&selectScratch1 + loopIndex5) = 0;
         break;
       }
-      loopIndexD = loopIndexD + 1;
-      countdownC = countdownC + -1;
-    } while (countdownC != 0);
-    iVar24 = ((int (*)())IRInst__createWithConstantOperands)(2,uVar5,iVar24,iVar7,uVar17,(double)FLOAT_001aa0d4);
-    *(undefined4 *)(iVar24 + 0x160) = *(undefined4 *)(iVar7 + 0x478);
-    operandRecord = IRInst__getOperandRecord(iVar24,0);
-    WriteMask__fromSelectWord(&local_a8,*(undefined4 *)(operandRecord + 0x10));
-    uVar5 = local_c8;
-    *(undefined4 *)(iVar24 + 0xc) = local_a8;
-    operandRecord = IRInst__getOperandRecord(iVar24,1);
-    uVar6 = local_c4[0];
-    *(undefined4 *)(operandRecord + 0x10) = uVar5;
-    operandRecord = IRInst__getOperandRecord(iVar24,2);
-    loopIndexB = 0;
-    local_c4[0] = *(undefined4 *)(local_78 + -0x40ac);
-    local_d4 = *(undefined4 *)(local_80 + -0x40b8);
-    *(undefined4 *)(operandRecord + 0x10) = uVar6;
-    countdownG = 4;
-    puVar11 = laneGroup;
+      loopIndex5 = loopIndex5 + 1;
+      countdown2 = countdown2 + -1;
+    } while (countdown2 != 0);
+    newInstFirst = ((int (*)())IRInst__createWithConstantOperands)(2,defaultSelectWord,firstSource,blockContext,compilerForBlock,(double)FLOAT_001aa0d4);
+    *(undefined4 *)(newInstFirst + 0x160) = *(undefined4 *)(blockContext + 0x478);
+    operandRecord5 = IRInst__getOperandRecord(newInstFirst,0);
+    WriteMask__fromSelectWord(&writeMaskOutA,*(undefined4 *)(operandRecord5 + 0x10));
+    selectWordToStore = selectScratch4;
+    *(undefined4 *)(newInstFirst + 0xc) = writeMaskOutA;
+    operandRecord5 = IRInst__getOperandRecord(newInstFirst,1);
+    selectWordToStoreB = selectScratch5[0];
+    *(undefined4 *)(operandRecord5 + 0x10) = selectWordToStore;
+    operandRecord5 = IRInst__getOperandRecord(newInstFirst,2);
+    loopIndex2 = 0;
+    selectScratch5[0] = *(undefined4 *)(constTableBaseB + -0x40ac);
+    selectScratch1 = *(undefined4 *)(constTableBaseA + -0x40b8);
+    *(undefined4 *)(operandRecord5 + 0x10) = selectWordToStoreB;
+    countdown6 = 4;
+    laneSlotCursor = laneGroup;
     do {
-      if (iVar25 == puVar11[4]) {
-        *(undefined1 *)((int)local_7c + *(byte *)((int)laneGroup + loopIndexB + 0x20) + 0x14) = 0;
-        laneComponent = *(byte *)((int)laneGroup + loopIndexB + 0x20);
-        *(byte *)((int)local_7c + laneComponent + 0x10) = laneComponent;
+      if (secondSource == laneSlotCursor[4]) {
+        *(undefined1 *)((int)scratchBase + *(byte *)((int)laneGroup + loopIndex2 + 0x20) + 0x14) = 0;
+        laneSelectByte = *(byte *)((int)laneGroup + loopIndex2 + 0x20);
+        *(byte *)((int)scratchBase + laneSelectByte + 0x10) = laneSelectByte;
       }
-      loopIndexB = loopIndexB + 1;
-      puVar11 = puVar11 + 1;
-      countdownG = countdownG + -1;
-    } while (countdownG != 0);
-    local_70 = local_c4;
-    countdownC = 4;
-    loopIndexD = 0;
+      loopIndex2 = loopIndex2 + 1;
+      laneSlotCursor = laneSlotCursor + 1;
+      countdown6 = countdown6 + -1;
+    } while (countdown6 != 0);
+    scratchPtrC4 = selectScratch5;
+    countdown2 = 4;
+    loopIndex5 = 0;
     do {
-      if (*(char *)(loopIndexD + (int)local_70) == '\x01') {
-        *(char *)((int)local_7c + loopIndexD + 4) = (char)loopIndexD;
-        *(undefined1 *)((int)local_7c + loopIndexD + 0x14) = 0;
+      if (*(char *)(loopIndex5 + (int)scratchPtrC4) == '\x01') {
+        *(char *)((int)scratchBase + loopIndex5 + 4) = (char)loopIndex5;
+        *(undefined1 *)((int)scratchBase + loopIndex5 + 0x14) = 0;
         break;
       }
-      loopIndexD = loopIndexD + 1;
-      countdownC = countdownC + -1;
-    } while (countdownC != 0);
-    local_c8 = local_d4;
-    iVar13 = ((int (*)())IRInst__createWithConstantOperands)(2,local_c4[0],iVar25,iVar7,uVar17,(double)FLOAT_001aa0d4);
-    *(undefined4 *)(iVar13 + 0x160) = *(undefined4 *)(iVar7 + 0x478);
-    operandRecord2 = IRInst__getOperandRecord(iVar13,0);
-    WriteMask__fromSelectWord(&local_a4,*(undefined4 *)(operandRecord2 + 0x10));
-    uVar6 = local_c8;
-    *(undefined4 *)(iVar13 + 0xc) = local_a4;
-    operandRecord2 = IRInst__getOperandRecord(iVar13,1);
-    uVar5 = local_d4;
-    *(undefined4 *)(operandRecord2 + 0x10) = uVar6;
-    operandRecord2 = IRInst__getOperandRecord(iVar13,2);
-    iVar28 = 0;
-    *(undefined4 *)(operandRecord2 + 0x10) = uVar5;
-    newInst = IRInst__create(0x12,uVar17);
-    *(undefined4 *)(newInst + 0x120) = 0;
-    *(undefined4 *)(newInst + 0x98) = 0;
-    *(undefined4 *)(newInst + 0x124) = 0;
-    *(undefined4 *)(newInst + 0x94) = *(undefined4 *)(newInst + 0x14c);
-    sourceDef = IRInst__getOperandSource(iVar24,1);
-    operandRecord = IRInst__getOperandRecord(iVar24,2);
-    local_d4 = *(undefined4 *)(operandRecord + 0x10);
-    countdownG = 4;
+      loopIndex5 = loopIndex5 + 1;
+      countdown2 = countdown2 + -1;
+    } while (countdown2 != 0);
+    selectScratch4 = selectScratch1;
+    callResult = ((int (*)())IRInst__createWithConstantOperands)(2,selectScratch5[0],secondSource,blockContext,compilerForBlock,(double)FLOAT_001aa0d4);
+    *(undefined4 *)(callResult + 0x160) = *(undefined4 *)(blockContext + 0x478);
+    operandRecord4 = IRInst__getOperandRecord(callResult,0);
+    WriteMask__fromSelectWord(&writeMaskOutB,*(undefined4 *)(operandRecord4 + 0x10));
+    selectWordToStoreB = selectScratch4;
+    *(undefined4 *)(callResult + 0xc) = writeMaskOutB;
+    operandRecord4 = IRInst__getOperandRecord(callResult,1);
+    selectWordToStore = selectScratch1;
+    *(undefined4 *)(operandRecord4 + 0x10) = selectWordToStoreB;
+    operandRecord4 = IRInst__getOperandRecord(callResult,2);
+    firstUsedLaneA = 0;
+    *(undefined4 *)(operandRecord4 + 0x10) = selectWordToStore;
+    newCombinedInst = IRInst__create(0x12,compilerForBlock);
+    *(undefined4 *)(newCombinedInst + 0x120) = 0;
+    *(undefined4 *)(newCombinedInst + 0x98) = 0;
+    *(undefined4 *)(newCombinedInst + 0x124) = 0;
+    *(undefined4 *)(newCombinedInst + 0x94) = *(undefined4 *)(newCombinedInst + 0x14c);
+    sourceDef = IRInst__getOperandSource(newInstFirst,1);
+    operandRecord5 = IRInst__getOperandRecord(newInstFirst,2);
+    selectScratch1 = *(undefined4 *)(operandRecord5 + 0x10);
+    countdown6 = 4;
     do {
-      if (*(char *)((int)&local_d4 + iVar28) != '\x04') goto LAB_0014488c;
-      iVar28 = iVar28 + 1;
-      countdownG = countdownG + -1;
-    } while (countdownG != 0);
-    iVar28 = -1;
+      if (*(char *)((int)&selectScratch1 + firstUsedLaneA) != '\x04') goto LAB_0014488c;
+      firstUsedLaneA = firstUsedLaneA + 1;
+      countdown6 = countdown6 + -1;
+    } while (countdown6 != 0);
+    firstUsedLaneA = -1;
 LAB_0014488c:
-    sourceDef2 = IRInst__getOperandSource(iVar13,1);
-    operandRecord4 = IRInst__getOperandRecord(iVar13,2);
-    iVar29 = 0;
-    local_c8 = *(undefined4 *)(operandRecord4 + 0x10);
-    countdownD = 4;
+    sourceDef2 = IRInst__getOperandSource(callResult,1);
+    operandRecord3 = IRInst__getOperandRecord(callResult,2);
+    firstUsedLaneC = 0;
+    selectScratch4 = *(undefined4 *)(operandRecord3 + 0x10);
+    countdown3 = 4;
     do {
-      if (*(char *)((int)&local_c8 + iVar29) != '\x04') goto LAB_001448d8;
-      iVar29 = iVar29 + 1;
-      countdownD = countdownD + -1;
-    } while (countdownD != 0);
-    iVar29 = -1;
+      if (*(char *)((int)&selectScratch4 + firstUsedLaneC) != '\x04') goto LAB_001448d8;
+      firstUsedLaneC = firstUsedLaneC + 1;
+      countdown3 = countdown3 + -1;
+    } while (countdown3 != 0);
+    firstUsedLaneC = -1;
 LAB_001448d8:
-    loopIndexC = 0;
-    local_c4[0] = *(undefined4 *)(local_78 + -0x40ac);
+    loopIndex3 = 0;
+    selectScratch5[0] = *(undefined4 *)(constTableBaseB + -0x40ac);
     laneSelectCursor = laneGroup + 8;
-    local_d0 = *(undefined4 *)(local_80 + -0x40b8);
-    countdownB = 4;
-    puVar11 = laneGroup;
-    local_cc = local_d0;
+    selectScratch2 = *(undefined4 *)(constTableBaseA + -0x40b8);
+    countdown = 4;
+    laneSlotCursor = laneGroup;
+    selectScratch3 = selectScratch2;
     do {
-      if (sourceDef == puVar11[4]) {
-        *(undefined1 *)(loopIndexC + (int)local_70) = 0;
-        local_74 = &local_cc;
-        *(undefined1 *)((int)&local_d0 + loopIndexC) = *(undefined1 *)laneSelectCursor;
-        *(char *)(loopIndexC + (int)&local_cc) = (char)iVar29;
+      if (sourceDef == laneSlotCursor[4]) {
+        *(undefined1 *)(loopIndex3 + (int)scratchPtrC4) = 0;
+        scratchPtrCC = &selectScratch3;
+        *(undefined1 *)((int)&selectScratch2 + loopIndex3) = *(undefined1 *)laneSelectCursor;
+        *(char *)(loopIndex3 + (int)&selectScratch3) = (char)firstUsedLaneC;
       }
-      else if (sourceDef2 == puVar11[4]) {
-        *(char *)((int)&local_d0 + loopIndexC) = (char)iVar28;
-        *(undefined1 *)(loopIndexC + (int)local_70) = 0;
-        local_74 = &local_cc;
-        *(undefined1 *)(loopIndexC + (int)&local_cc) = *(undefined1 *)laneSelectCursor;
+      else if (sourceDef2 == laneSlotCursor[4]) {
+        *(char *)((int)&selectScratch2 + loopIndex3) = (char)firstUsedLaneA;
+        *(undefined1 *)(loopIndex3 + (int)scratchPtrC4) = 0;
+        scratchPtrCC = &selectScratch3;
+        *(undefined1 *)(loopIndex3 + (int)&selectScratch3) = *(undefined1 *)laneSelectCursor;
       }
-      loopIndexC = loopIndexC + 1;
+      loopIndex3 = loopIndex3 + 1;
       laneSelectCursor = (undefined4 *)((int)laneSelectCursor + 1);
-      puVar11 = puVar11 + 1;
-      countdownB = countdownB + -1;
-    } while (countdownB != 0);
-    *(undefined4 *)(newInst + 0x9c) = local_c4[0];
-    IRInst__setOperandSource(newInst,1,iVar24,1,uVar17);
-    IROperand__setModifierBits(newInst + 0xa4,1,0);
-    IROperand__setModifierBits(newInst + 0xa4,2,0);
-    uVar5 = local_d0;
-    operandRecord2 = IRInst__getOperandRecord(newInst,1);
-    *(undefined4 *)(operandRecord2 + 0x10) = uVar5;
-    IRInst__setOperandSource(newInst,2,iVar13,1,uVar17);
-    IROperand__setModifierBits(newInst + 0xbc,1,0);
-    IROperand__setModifierBits(newInst + 0xbc,2,0);
-    uVar5 = local_cc;
-    operandRecord2 = IRInst__getOperandRecord(newInst,2);
-    *(undefined4 *)(operandRecord2 + 0x10) = uVar5;
-    operandRecord2 = IRInst__getOperandRecord(newInst,0);
-    WriteMask__fromSelectWord(&local_a0,*(undefined4 *)(operandRecord2 + 0x10));
-    *(undefined4 *)(newInst + 0xc) = local_a0;
-    Block__insertInstBefore(insertBlock,insertBefore,iVar24);
+      laneSlotCursor = laneSlotCursor + 1;
+      countdown = countdown + -1;
+    } while (countdown != 0);
+    *(undefined4 *)(newCombinedInst + 0x9c) = selectScratch5[0];
+    IRInst__setOperandSource(newCombinedInst,1,newInstFirst,1,compilerForBlock);
+    IROperand__setModifierBits(newCombinedInst + 0xa4,1,0);
+    IROperand__setModifierBits(newCombinedInst + 0xa4,2,0);
+    selectWordToStore = selectScratch2;
+    operandRecord4 = IRInst__getOperandRecord(newCombinedInst,1);
+    *(undefined4 *)(operandRecord4 + 0x10) = selectWordToStore;
+    IRInst__setOperandSource(newCombinedInst,2,callResult,1,compilerForBlock);
+    IROperand__setModifierBits(newCombinedInst + 0xbc,1,0);
+    IROperand__setModifierBits(newCombinedInst + 0xbc,2,0);
+    selectWordToStore = selectScratch3;
+    operandRecord4 = IRInst__getOperandRecord(newCombinedInst,2);
+    *(undefined4 *)(operandRecord4 + 0x10) = selectWordToStore;
+    operandRecord4 = IRInst__getOperandRecord(newCombinedInst,0);
+    WriteMask__fromSelectWord(&writeMaskOutC,*(undefined4 *)(operandRecord4 + 0x10));
+    *(undefined4 *)(newCombinedInst + 0xc) = writeMaskOutC;
+    Block__insertInstBefore(insertBlock,insertBefore,newInstFirst);
   }
   else {
     if (distinctSourceCount < 2) {
-      local_7c = &local_d8;
+      scratchBase = &selectScratch0;
       goto LAB_0014514c;
     }
-    local_7c = &local_d8;
+    scratchBase = &selectScratch0;
     if (4 < distinctSourceCount) goto LAB_0014514c;
-    local_78 = &DAT_001b40f0;
-    loopIndexB = 0;
-    local_80 = &DAT_001b40f0;
-    countdownI = 4;
-    local_c4[0] = DAT_001b0038;
-    local_cc = DAT_001b0044;
-    local_d0 = DAT_001b0038;
-    puVar11 = laneGroup;
+    constTableBaseB = &DAT_001b40f0;
+    loopIndex2 = 0;
+    constTableBaseA = &DAT_001b40f0;
+    countdown8 = 4;
+    selectScratch5[0] = DAT_001b0038;
+    selectScratch3 = DAT_001b0044;
+    selectScratch2 = DAT_001b0038;
+    laneSlotCursor = laneGroup;
     do {
-      if (iVar24 == puVar11[4]) {
-        *(undefined1 *)((int)&local_cc + (uint)*(byte *)((int)laneGroup + loopIndexB + 0x20)) = 0;
-        laneComponent = *(byte *)((int)laneGroup + loopIndexB + 0x20);
-        *(byte *)((int)&local_d0 + (uint)laneComponent) = laneComponent;
+      if (firstSource == laneSlotCursor[4]) {
+        *(undefined1 *)((int)&selectScratch3 + (uint)*(byte *)((int)laneGroup + loopIndex2 + 0x20)) = 0;
+        laneSelectByte = *(byte *)((int)laneGroup + loopIndex2 + 0x20);
+        *(byte *)((int)&selectScratch2 + (uint)laneSelectByte) = laneSelectByte;
       }
-      loopIndexB = loopIndexB + 1;
-      puVar11 = puVar11 + 1;
-      countdownI = countdownI + -1;
-    } while (countdownI != 0);
-    local_74 = &local_cc;
-    countdownI = 4;
-    loopIndexB = 0;
+      loopIndex2 = loopIndex2 + 1;
+      laneSlotCursor = laneSlotCursor + 1;
+      countdown8 = countdown8 + -1;
+    } while (countdown8 != 0);
+    scratchPtrCC = &selectScratch3;
+    countdown8 = 4;
+    loopIndex2 = 0;
     do {
-      if (*(char *)(loopIndexB + (int)local_74) == '\x01') {
-        *(char *)((int)local_c4 + loopIndexB) = (char)loopIndexB;
-        *(undefined1 *)((int)&local_cc + loopIndexB) = 0;
+      if (*(char *)(loopIndex2 + (int)scratchPtrCC) == '\x01') {
+        *(char *)((int)selectScratch5 + loopIndex2) = (char)loopIndex2;
+        *(undefined1 *)((int)&selectScratch3 + loopIndex2) = 0;
         break;
       }
-      loopIndexB = loopIndexB + 1;
-      countdownI = countdownI + -1;
-    } while (countdownI != 0);
-    iVar24 = ((int (*)())IRInst__createWithConstantOperands)(2,uVar5,iVar24,iVar7,uVar17,(double)FLOAT_001aa0e8);
-    *(undefined4 *)(iVar24 + 0x160) = *(undefined4 *)(iVar7 + 0x478);
-    operandRecord3 = IRInst__getOperandRecord(iVar24,0);
-    WriteMask__fromSelectWord(&local_9c,*(undefined4 *)(operandRecord3 + 0x10));
-    uVar5 = local_d0;
-    *(undefined4 *)(iVar24 + 0xc) = local_9c;
-    operandRecord3 = IRInst__getOperandRecord(iVar24,1);
-    uVar6 = local_c4[0];
-    *(undefined4 *)(operandRecord3 + 0x10) = uVar5;
-    operandRecord3 = IRInst__getOperandRecord(iVar24,2);
-    local_d0 = *(undefined4 *)(local_80 + -0x40b8);
-    loopIndexF = 0;
-    local_c4[0] = *(undefined4 *)(local_78 + -0x40ac);
-    *(undefined4 *)(operandRecord3 + 0x10) = uVar6;
-    countdownC = 4;
-    puVar11 = laneGroup;
+      loopIndex2 = loopIndex2 + 1;
+      countdown8 = countdown8 + -1;
+    } while (countdown8 != 0);
+    newInstFirstB = ((int (*)())IRInst__createWithConstantOperands)(2,defaultSelectWord,firstSource,blockContext,compilerForBlock,(double)FLOAT_001aa0e8);
+    *(undefined4 *)(newInstFirstB + 0x160) = *(undefined4 *)(blockContext + 0x478);
+    operandRecord2 = IRInst__getOperandRecord(newInstFirstB,0);
+    WriteMask__fromSelectWord(&writeMaskOutD,*(undefined4 *)(operandRecord2 + 0x10));
+    selectWordToStore = selectScratch2;
+    *(undefined4 *)(newInstFirstB + 0xc) = writeMaskOutD;
+    operandRecord2 = IRInst__getOperandRecord(newInstFirstB,1);
+    selectWordToStoreB = selectScratch5[0];
+    *(undefined4 *)(operandRecord2 + 0x10) = selectWordToStore;
+    operandRecord2 = IRInst__getOperandRecord(newInstFirstB,2);
+    selectScratch2 = *(undefined4 *)(constTableBaseA + -0x40b8);
+    loopIndex7 = 0;
+    selectScratch5[0] = *(undefined4 *)(constTableBaseB + -0x40ac);
+    *(undefined4 *)(operandRecord2 + 0x10) = selectWordToStoreB;
+    countdown2 = 4;
+    laneSlotCursor = laneGroup;
     do {
-      if (iVar25 == puVar11[4]) {
-        *(undefined1 *)((int)local_7c + *(byte *)((int)laneGroup + loopIndexF + 0x20) + 0x14) = 0;
-        laneComponent = *(byte *)((int)laneGroup + loopIndexF + 0x20);
-        *(byte *)((int)local_7c + laneComponent + 8) = laneComponent;
+      if (secondSource == laneSlotCursor[4]) {
+        *(undefined1 *)((int)scratchBase + *(byte *)((int)laneGroup + loopIndex7 + 0x20) + 0x14) = 0;
+        laneSelectByte = *(byte *)((int)laneGroup + loopIndex7 + 0x20);
+        *(byte *)((int)scratchBase + laneSelectByte + 8) = laneSelectByte;
       }
-      loopIndexF = loopIndexF + 1;
-      puVar11 = puVar11 + 1;
-      countdownC = countdownC + -1;
-    } while (countdownC != 0);
-    local_70 = local_c4;
-    countdownI = 4;
-    loopIndexB = 0;
+      loopIndex7 = loopIndex7 + 1;
+      laneSlotCursor = laneSlotCursor + 1;
+      countdown2 = countdown2 + -1;
+    } while (countdown2 != 0);
+    scratchPtrC4 = selectScratch5;
+    countdown8 = 4;
+    loopIndex2 = 0;
     do {
-      if (*(char *)(loopIndexB + (int)local_70) == '\x01') {
-        *(char *)((int)local_7c + loopIndexB + 0xc) = (char)loopIndexB;
-        *(undefined1 *)((int)local_7c + loopIndexB + 0x14) = 0;
+      if (*(char *)(loopIndex2 + (int)scratchPtrC4) == '\x01') {
+        *(char *)((int)scratchBase + loopIndex2 + 0xc) = (char)loopIndex2;
+        *(undefined1 *)((int)scratchBase + loopIndex2 + 0x14) = 0;
         break;
       }
-      loopIndexB = loopIndexB + 1;
-      countdownI = countdownI + -1;
-    } while (countdownI != 0);
-    loopIndexB = 0;
-    countdownI = 4;
+      loopIndex2 = loopIndex2 + 1;
+      countdown8 = countdown8 + -1;
+    } while (countdown8 != 0);
+    loopIndex2 = 0;
+    countdown8 = 4;
     do {
-      if (*(char *)(loopIndexB + (int)local_70) == '\x01') {
-        *(char *)((int)local_7c + loopIndexB + 0x10) = (char)loopIndexB;
-        *(undefined1 *)((int)local_7c + loopIndexB + 0x14) = 0;
+      if (*(char *)(loopIndex2 + (int)scratchPtrC4) == '\x01') {
+        *(char *)((int)scratchBase + loopIndex2 + 0x10) = (char)loopIndex2;
+        *(undefined1 *)((int)scratchBase + loopIndex2 + 0x14) = 0;
         break;
       }
-      loopIndexB = loopIndexB + 1;
-      countdownI = countdownI + -1;
-    } while (countdownI != 0);
-    local_cc = local_d0;
-    local_c8 = local_d0;
-    iVar25 = ((int (*)())IRInst__createWithConstantOperands)(3,local_c4[0],iVar25,iVar7,uVar17,(double)FLOAT_001aa0e8);
-    *(undefined4 *)(iVar25 + 0x160) = *(undefined4 *)(iVar7 + 0x478);
-    operandRecord3 = IRInst__getOperandRecord(iVar25,0);
-    WriteMask__fromSelectWord(&local_98,*(undefined4 *)(operandRecord3 + 0x10));
-    uVar5 = local_d0;
-    *(undefined4 *)(iVar25 + 0xc) = local_98;
-    operandRecord3 = IRInst__getOperandRecord(iVar25,1);
-    uVar6 = local_cc;
-    *(undefined4 *)(operandRecord3 + 0x10) = uVar5;
-    operandRecord3 = IRInst__getOperandRecord(iVar25,2);
-    uVar5 = local_c8;
-    *(undefined4 *)(operandRecord3 + 0x10) = uVar6;
-    operandRecord3 = IRInst__getOperandRecord(iVar25,3);
-    loopIndexF = 0;
-    local_c8 = *(undefined4 *)(local_78 + -0x40ac);
-    local_d0 = *(undefined4 *)(local_80 + -0x40b8);
-    *(undefined4 *)(operandRecord3 + 0x10) = uVar5;
-    countdownC = 4;
-    local_cc = local_d0;
-    puVar11 = laneGroup;
+      loopIndex2 = loopIndex2 + 1;
+      countdown8 = countdown8 + -1;
+    } while (countdown8 != 0);
+    selectScratch3 = selectScratch2;
+    selectScratch4 = selectScratch2;
+    newInstSecond = ((int (*)())IRInst__createWithConstantOperands)(3,selectScratch5[0],secondSource,blockContext,compilerForBlock,(double)FLOAT_001aa0e8);
+    *(undefined4 *)(newInstSecond + 0x160) = *(undefined4 *)(blockContext + 0x478);
+    operandRecord2 = IRInst__getOperandRecord(newInstSecond,0);
+    WriteMask__fromSelectWord(&writeMaskOutE,*(undefined4 *)(operandRecord2 + 0x10));
+    selectWordToStore = selectScratch2;
+    *(undefined4 *)(newInstSecond + 0xc) = writeMaskOutE;
+    operandRecord2 = IRInst__getOperandRecord(newInstSecond,1);
+    selectWordToStoreB = selectScratch3;
+    *(undefined4 *)(operandRecord2 + 0x10) = selectWordToStore;
+    operandRecord2 = IRInst__getOperandRecord(newInstSecond,2);
+    selectWordToStore = selectScratch4;
+    *(undefined4 *)(operandRecord2 + 0x10) = selectWordToStoreB;
+    operandRecord2 = IRInst__getOperandRecord(newInstSecond,3);
+    loopIndex7 = 0;
+    selectScratch4 = *(undefined4 *)(constTableBaseB + -0x40ac);
+    selectScratch2 = *(undefined4 *)(constTableBaseA + -0x40b8);
+    *(undefined4 *)(operandRecord2 + 0x10) = selectWordToStore;
+    countdown2 = 4;
+    selectScratch3 = selectScratch2;
+    laneSlotCursor = laneGroup;
     do {
-      if (thirdSource == puVar11[4]) {
-        *(undefined1 *)((int)local_7c + *(byte *)((int)laneGroup + loopIndexF + 0x20) + 0x10) = 0;
-        laneComponent = *(byte *)((int)laneGroup + loopIndexF + 0x20);
-        *(byte *)((int)local_7c + laneComponent + 0xc) = laneComponent;
+      if (thirdSource == laneSlotCursor[4]) {
+        *(undefined1 *)((int)scratchBase + *(byte *)((int)laneGroup + loopIndex7 + 0x20) + 0x10) = 0;
+        laneSelectByte = *(byte *)((int)laneGroup + loopIndex7 + 0x20);
+        *(byte *)((int)scratchBase + laneSelectByte + 0xc) = laneSelectByte;
       }
-      loopIndexF = loopIndexF + 1;
-      puVar11 = puVar11 + 1;
-      countdownC = countdownC + -1;
-    } while (countdownC != 0);
-    loopIndexB = 0;
-    countdownI = 4;
+      loopIndex7 = loopIndex7 + 1;
+      laneSlotCursor = laneSlotCursor + 1;
+      countdown2 = countdown2 + -1;
+    } while (countdown2 != 0);
+    loopIndex2 = 0;
+    countdown8 = 4;
     do {
-      if (*(char *)((int)&local_c8 + loopIndexB) == '\x01') {
-        *(char *)((int)local_7c + loopIndexB + 8) = (char)loopIndexB;
-        *(undefined1 *)((int)local_7c + loopIndexB + 0x10) = 0;
+      if (*(char *)((int)&selectScratch4 + loopIndex2) == '\x01') {
+        *(char *)((int)scratchBase + loopIndex2 + 8) = (char)loopIndex2;
+        *(undefined1 *)((int)scratchBase + loopIndex2 + 0x10) = 0;
         break;
       }
-      loopIndexB = loopIndexB + 1;
-      countdownI = countdownI + -1;
-    } while (countdownI != 0);
-    iVar13 = ((int (*)())IRInst__createWithConstantOperands)(2,local_c8,thirdSource,iVar7,uVar17,(double)FLOAT_001aa0d4);
-    *(undefined4 *)(iVar13 + 0x160) = *(undefined4 *)(iVar7 + 0x478);
-    iVar28 = 0;
-    operandRecord = IRInst__getOperandRecord(iVar13,0);
-    WriteMask__fromSelectWord(&local_94,*(undefined4 *)(operandRecord + 0x10));
-    uVar6 = local_cc;
-    *(undefined4 *)(iVar13 + 0xc) = local_94;
-    operandRecord = IRInst__getOperandRecord(iVar13,1);
-    uVar5 = local_d0;
-    *(undefined4 *)(operandRecord + 0x10) = uVar6;
-    operandRecord = IRInst__getOperandRecord(iVar13,2);
-    *(undefined4 *)(operandRecord + 0x10) = uVar5;
-    newInst = IRInst__create(0x14,uVar17);
-    *(undefined4 *)(newInst + 0x120) = 0;
-    *(undefined4 *)(newInst + 0x98) = 0;
-    *(undefined4 *)(newInst + 0x124) = 0;
-    *(undefined4 *)(newInst + 0x94) = *(undefined4 *)(newInst + 0x14c);
-    operandSource = IRInst__getOperandSource(iVar24,1);
-    operandRecord = IRInst__getOperandRecord(iVar24,2);
-    local_d0 = *(undefined4 *)(operandRecord + 0x10);
-    countdownG = 4;
+      loopIndex2 = loopIndex2 + 1;
+      countdown8 = countdown8 + -1;
+    } while (countdown8 != 0);
+    callResult = ((int (*)())IRInst__createWithConstantOperands)(2,selectScratch4,thirdSource,blockContext,compilerForBlock,(double)FLOAT_001aa0d4);
+    *(undefined4 *)(callResult + 0x160) = *(undefined4 *)(blockContext + 0x478);
+    firstUsedLaneB = 0;
+    operandRecord5 = IRInst__getOperandRecord(callResult,0);
+    WriteMask__fromSelectWord(&writeMaskOutF,*(undefined4 *)(operandRecord5 + 0x10));
+    selectWordToStoreB = selectScratch3;
+    *(undefined4 *)(callResult + 0xc) = writeMaskOutF;
+    operandRecord5 = IRInst__getOperandRecord(callResult,1);
+    selectWordToStore = selectScratch2;
+    *(undefined4 *)(operandRecord5 + 0x10) = selectWordToStoreB;
+    operandRecord5 = IRInst__getOperandRecord(callResult,2);
+    *(undefined4 *)(operandRecord5 + 0x10) = selectWordToStore;
+    newCombinedInst = IRInst__create(0x14,compilerForBlock);
+    *(undefined4 *)(newCombinedInst + 0x120) = 0;
+    *(undefined4 *)(newCombinedInst + 0x98) = 0;
+    *(undefined4 *)(newCombinedInst + 0x124) = 0;
+    *(undefined4 *)(newCombinedInst + 0x94) = *(undefined4 *)(newCombinedInst + 0x14c);
+    operandSource = IRInst__getOperandSource(newInstFirstB,1);
+    operandRecord5 = IRInst__getOperandRecord(newInstFirstB,2);
+    selectScratch2 = *(undefined4 *)(operandRecord5 + 0x10);
+    countdown6 = 4;
     do {
-      if (*(char *)((int)&local_d0 + iVar28) != '\x04') goto LAB_00144dd8;
-      iVar28 = iVar28 + 1;
-      countdownG = countdownG + -1;
-    } while (countdownG != 0);
-    iVar28 = -1;
+      if (*(char *)((int)&selectScratch2 + firstUsedLaneB) != '\x04') goto LAB_00144dd8;
+      firstUsedLaneB = firstUsedLaneB + 1;
+      countdown6 = countdown6 + -1;
+    } while (countdown6 != 0);
+    firstUsedLaneB = -1;
 LAB_00144dd8:
-    operandSourceB = IRInst__getOperandSource(iVar25,1);
-    operandRecord = IRInst__getOperandRecord(iVar25,2);
-    local_cc = *(undefined4 *)(operandRecord + 0x10);
-    iVar19 = 0;
-    operandRecord = IRInst__getOperandRecord(iVar25,3);
-    local_c8 = *(undefined4 *)(operandRecord + 0x10);
-    countdownG = 4;
+    operandSourceB = IRInst__getOperandSource(newInstSecond,1);
+    operandRecord5 = IRInst__getOperandRecord(newInstSecond,2);
+    selectScratch3 = *(undefined4 *)(operandRecord5 + 0x10);
+    firstUsedLaneD = 0;
+    operandRecord5 = IRInst__getOperandRecord(newInstSecond,3);
+    selectScratch4 = *(undefined4 *)(operandRecord5 + 0x10);
+    countdown6 = 4;
     do {
-      if (*(char *)(iVar19 + (int)local_74) != '\x04') goto LAB_00144e38;
-      iVar19 = iVar19 + 1;
-      countdownG = countdownG + -1;
-    } while (countdownG != 0);
-    iVar19 = -1;
+      if (*(char *)(firstUsedLaneD + (int)scratchPtrCC) != '\x04') goto LAB_00144e38;
+      firstUsedLaneD = firstUsedLaneD + 1;
+      countdown6 = countdown6 + -1;
+    } while (countdown6 != 0);
+    firstUsedLaneD = -1;
 LAB_00144e38:
-    iVar26 = 0;
-    countdownJ = 4;
+    firstUsedLaneF = 0;
+    countdown9 = 4;
     do {
-      if (*(char *)((int)&local_c8 + iVar26) != '\x04') goto LAB_00144e5c;
-      iVar26 = iVar26 + 1;
-      countdownJ = countdownJ + -1;
-    } while (countdownJ != 0);
-    iVar26 = -1;
+      if (*(char *)((int)&selectScratch4 + firstUsedLaneF) != '\x04') goto LAB_00144e5c;
+      firstUsedLaneF = firstUsedLaneF + 1;
+      countdown9 = countdown9 + -1;
+    } while (countdown9 != 0);
+    firstUsedLaneF = -1;
 LAB_00144e5c:
-    sourceDef3 = IRInst__getOperandSource(iVar13,1);
-    operandRecord5 = IRInst__getOperandRecord(iVar13,2);
-    iVar14 = 0;
-    local_c4[0] = *(undefined4 *)(operandRecord5 + 0x10);
-    countdownB = 4;
+    sourceDef3 = IRInst__getOperandSource(callResult,1);
+    operandRecord = IRInst__getOperandRecord(callResult,2);
+    firstUsedLaneE = 0;
+    selectScratch5[0] = *(undefined4 *)(operandRecord + 0x10);
+    countdown = 4;
     do {
-      if (*(char *)(iVar14 + (int)local_70) != '\x04') goto LAB_00144ea8;
-      iVar14 = iVar14 + 1;
-      countdownB = countdownB + -1;
-    } while (countdownB != 0);
-    iVar14 = -1;
+      if (*(char *)(firstUsedLaneE + (int)scratchPtrC4) != '\x04') goto LAB_00144ea8;
+      firstUsedLaneE = firstUsedLaneE + 1;
+      countdown = countdown + -1;
+    } while (countdown != 0);
+    firstUsedLaneE = -1;
 LAB_00144ea8:
-    local_d4 = *(undefined4 *)(local_80 + -0x40b8);
+    selectScratch1 = *(undefined4 *)(constTableBaseA + -0x40b8);
     laneSelectCursor = laneGroup + 8;
-    local_c4[1] = *(undefined4 *)(local_78 + -0x40ac);
+    selectScratch5[1] = *(undefined4 *)(constTableBaseB + -0x40ac);
     countdownK = 4;
     loopIndex = 0;
-    puVar11 = laneGroup;
+    laneSlotCursor = laneGroup;
     do {
-      laneSourceInst = puVar11[4];
+      laneSourceInst = laneSlotCursor[4];
       if (operandSource == laneSourceInst) {
-        *(undefined1 *)(loopIndex + (int)local_6c) = 0;
-        uVar9 = *(undefined1 *)laneSelectCursor;
-        *(char *)(loopIndex + (int)local_64) = (char)iVar19;
-        *(undefined1 *)(loopIndex + (int)local_68) = uVar9;
-        *(char *)(loopIndex + (int)local_60) = (char)iVar14;
+        *(undefined1 *)(loopIndex + (int)scratchPtrC4Plus1) = 0;
+        laneSelectCopy = *(undefined1 *)laneSelectCursor;
+        *(char *)(loopIndex + (int)scratchPtrC4Plus3) = (char)firstUsedLaneD;
+        *(undefined1 *)(loopIndex + (int)scratchPtrC4Plus2) = laneSelectCopy;
+        *(char *)(loopIndex + (int)scratchPtrB4) = (char)firstUsedLaneE;
       }
       else if (operandSourceB == laneSourceInst) {
-        *(undefined1 *)(loopIndex + (int)local_6c) = 0;
-        *(char *)(loopIndex + (int)local_68) = (char)iVar28;
-        uVar9 = *(undefined1 *)laneSelectCursor;
-        *(char *)(loopIndex + (int)local_60) = (char)iVar14;
-        *(undefined1 *)(loopIndex + (int)local_64) = uVar9;
+        *(undefined1 *)(loopIndex + (int)scratchPtrC4Plus1) = 0;
+        *(char *)(loopIndex + (int)scratchPtrC4Plus2) = (char)firstUsedLaneB;
+        laneSelectCopy = *(undefined1 *)laneSelectCursor;
+        *(char *)(loopIndex + (int)scratchPtrB4) = (char)firstUsedLaneE;
+        *(undefined1 *)(loopIndex + (int)scratchPtrC4Plus3) = laneSelectCopy;
       }
       else if (sourceDef3 == laneSourceInst) {
-        *(undefined1 *)(loopIndex + (int)local_6c) = 0;
-        *(char *)(loopIndex + (int)local_68) = (char)iVar28;
-        *(char *)(loopIndex + (int)local_64) = (char)iVar26;
-        *(undefined1 *)(loopIndex + (int)local_60) = *(undefined1 *)laneSelectCursor;
+        *(undefined1 *)(loopIndex + (int)scratchPtrC4Plus1) = 0;
+        *(char *)(loopIndex + (int)scratchPtrC4Plus2) = (char)firstUsedLaneB;
+        *(char *)(loopIndex + (int)scratchPtrC4Plus3) = (char)firstUsedLaneF;
+        *(undefined1 *)(loopIndex + (int)scratchPtrB4) = *(undefined1 *)laneSelectCursor;
       }
       else if ((!noFourthSource) && (fourthSource == laneSourceInst)) {
-        *(char *)(loopIndex + (int)local_5c) = (char)loopIndex;
+        *(char *)(loopIndex + (int)scratchPtrD4) = (char)loopIndex;
       }
       loopIndex = loopIndex + 1;
       laneSelectCursor = (undefined4 *)((int)laneSelectCursor + 1);
-      puVar11 = puVar11 + 1;
+      laneSlotCursor = laneSlotCursor + 1;
       countdownK = countdownK + -1;
     } while (countdownK != 0);
-    *(undefined4 *)(newInst + 0x9c) = local_c4[1];
-    local_c4[2] = local_d4;
-    local_c4[3] = local_d4;
-    local_b4 = local_d4;
-    IRInst__setOperandSource(newInst,1,iVar24,1,uVar17);
-    IROperand__setModifierBits(newInst + 0xa4,1,0);
-    IROperand__setModifierBits(newInst + 0xa4,2,0);
-    uVar5 = local_c4[2];
-    operandRecord = IRInst__getOperandRecord(newInst,1);
-    *(undefined4 *)(operandRecord + 0x10) = uVar5;
-    IRInst__setOperandSource(newInst,2,iVar25,1,uVar17);
-    IROperand__setModifierBits(newInst + 0xbc,1,0);
-    IROperand__setModifierBits(newInst + 0xbc,2,0);
-    uVar5 = local_c4[3];
-    operandRecord = IRInst__getOperandRecord(newInst,2);
-    *(undefined4 *)(operandRecord + 0x10) = uVar5;
-    IRInst__setOperandSource(newInst,3,iVar13,1,uVar17);
-    IROperand__setModifierBits(newInst + 0xd4,1,0);
-    IROperand__setModifierBits(newInst + 0xd4,2,0);
-    uVar5 = local_b4;
-    operandRecord = IRInst__getOperandRecord(newInst,3);
-    *(undefined4 *)(operandRecord + 0x10) = uVar5;
+    *(undefined4 *)(newCombinedInst + 0x9c) = selectScratch5[1];
+    selectScratch5[2] = selectScratch1;
+    selectScratch5[3] = selectScratch1;
+    selectScratch9 = selectScratch1;
+    IRInst__setOperandSource(newCombinedInst,1,newInstFirstB,1,compilerForBlock);
+    IROperand__setModifierBits(newCombinedInst + 0xa4,1,0);
+    IROperand__setModifierBits(newCombinedInst + 0xa4,2,0);
+    selectWordToStore = selectScratch5[2];
+    operandRecord5 = IRInst__getOperandRecord(newCombinedInst,1);
+    *(undefined4 *)(operandRecord5 + 0x10) = selectWordToStore;
+    IRInst__setOperandSource(newCombinedInst,2,newInstSecond,1,compilerForBlock);
+    IROperand__setModifierBits(newCombinedInst + 0xbc,1,0);
+    IROperand__setModifierBits(newCombinedInst + 0xbc,2,0);
+    selectWordToStore = selectScratch5[3];
+    operandRecord5 = IRInst__getOperandRecord(newCombinedInst,2);
+    *(undefined4 *)(operandRecord5 + 0x10) = selectWordToStore;
+    IRInst__setOperandSource(newCombinedInst,3,callResult,1,compilerForBlock);
+    IROperand__setModifierBits(newCombinedInst + 0xd4,1,0);
+    IROperand__setModifierBits(newCombinedInst + 0xd4,2,0);
+    selectWordToStore = selectScratch9;
+    operandRecord5 = IRInst__getOperandRecord(newCombinedInst,3);
+    *(undefined4 *)(operandRecord5 + 0x10) = selectWordToStore;
     if (noFourthSource) {
-      operandRecord = IRInst__getOperandRecord(newInst,0);
-      WriteMask__fromSelectWord(&local_90,*(undefined4 *)(operandRecord + 0x10));
-      *(undefined4 *)(newInst + 0xc) = local_90;
+      operandRecord5 = IRInst__getOperandRecord(newCombinedInst,0);
+      WriteMask__fromSelectWord(&writeMaskOutG,*(undefined4 *)(operandRecord5 + 0x10));
+      *(undefined4 *)(newCombinedInst + 0xc) = writeMaskOutG;
     }
     else {
-      IRInst__setExtraOperandSource(newInst,fourthSource,1,uVar17);
-      uVar17 = local_d4;
-      operandRecord = IRInst__getOperandRecord(newInst,4);
-      uVar5 = DAT_001b0048;
-      *(undefined4 *)(operandRecord + 0x10) = uVar17;
-      *(undefined4 *)(newInst + 0xc) = uVar5;
+      IRInst__setExtraOperandSource(newCombinedInst,fourthSource,1,compilerForBlock);
+      extraSelectWord = selectScratch1;
+      operandRecord5 = IRInst__getOperandRecord(newCombinedInst,4);
+      selectWordToStore = DAT_001b0048;
+      *(undefined4 *)(operandRecord5 + 0x10) = extraSelectWord;
+      *(undefined4 *)(newCombinedInst + 0xc) = selectWordToStore;
     }
-    Block__insertInstBefore(insertBlock,insertBefore,iVar24);
-    Block__insertInstBefore(insertBlock,insertBefore,iVar25);
+    Block__insertInstBefore(insertBlock,insertBefore,newInstFirstB);
+    Block__insertInstBefore(insertBlock,insertBefore,newInstSecond);
   }
-  Block__insertInstBefore(insertBlock,insertBefore,iVar13);
-  Block__insertInstBefore(insertBlock,insertBefore,newInst);
-  laneGroup[9] = newInst;
+  Block__insertInstBefore(insertBlock,insertBefore,callResult);
+  Block__insertInstBefore(insertBlock,insertBefore,newCombinedInst);
+  laneGroup[9] = newCombinedInst;
 LAB_0014514c:
-  countdownE = 4;
-  puVar11 = laneGroup;
+  countdown4 = 4;
+  laneSlotCursor = laneGroup;
   do {
-    *puVar11 = 1;
-    puVar11 = puVar11 + 1;
-    countdownE = countdownE + -1;
-  } while (countdownE != 0);
-  iVar24 = laneGroup[9];
+    *laneSlotCursor = 1;
+    laneSlotCursor = laneSlotCursor + 1;
+    countdown4 = countdown4 + -1;
+  } while (countdown4 != 0);
+  groupCombinedInst = laneGroup[9];
 LAB_0014516c:
-  operandRecord2 = IRInst__getOperandRecord(inst,operandIndex);
-  loopIndexD = 0;
-  local_b0[0] = *(undefined4 *)(operandRecord2 + 0x10);
+  operandRecord4 = IRInst__getOperandRecord(inst,loopIndex4);
+  loopIndex5 = 0;
+  remappedSelect[0] = *(undefined4 *)(operandRecord4 + 0x10);
   do {
-    operandComponent = *(char *)((int)local_b0 + loopIndexD);
+    operandComponent = *(char *)((int)remappedSelect + loopIndex5);
     if (operandComponent != '\x04') {
-      sourceDef = IRInst__getOperandSource(inst,operandIndex);
-      countdown = 4;
-      loopIndexE = 0;
-      puVar11 = laneGroup;
+      sourceDef = IRInst__getOperandSource(inst,loopIndex4);
+      countdown11 = 4;
+      loopIndex6 = 0;
+      laneSlotCursor = laneGroup;
       do {
-        if ((sourceDef == puVar11[4]) && (operandComponent == *(char *)((int)laneGroup + loopIndexE + 0x20))) {
-          uVar9 = (undefined1)loopIndexE;
+        if ((sourceDef == laneSlotCursor[4]) && (operandComponent == *(char *)((int)laneGroup + loopIndex6 + 0x20))) {
+          matchedSlotIndex = (undefined1)loopIndex6;
           goto LAB_001451cc;
         }
-        loopIndexE = loopIndexE + 1;
-        puVar11 = puVar11 + 1;
-        countdown = countdown + -1;
-      } while (countdown != 0);
-      uVar9 = 0xff;
+        loopIndex6 = loopIndex6 + 1;
+        laneSlotCursor = laneSlotCursor + 1;
+        countdown11 = countdown11 + -1;
+      } while (countdown11 != 0);
+      matchedSlotIndex = 0xff;
 LAB_001451cc:
-      *(undefined1 *)((int)local_b0 + loopIndexD) = uVar9;
+      *(undefined1 *)((int)remappedSelect + loopIndex5) = matchedSlotIndex;
     }
-    uVar5 = local_b0[0];
-    moreComponents = loopIndexD != 3;
-    loopIndexD = loopIndexD + 1;
+    selectWordToStore = remappedSelect[0];
+    moreComponents = loopIndex5 != 3;
+    loopIndex5 = loopIndex5 + 1;
   } while (moreComponents);
-  operandRecord2 = IRInst__getOperandRecord(inst,operandIndex);
-  *(undefined4 *)(operandRecord2 + 0x10) = uVar5;
-  if ((*(int *)(inst + 0x84) == operandIndex) && ((*(uint *)(inst + 0x14) & 0x200) != 0)) {
-    IRInst__setExtraOperandSource(inst,iVar24,1,*pass);
+  operandRecord4 = IRInst__getOperandRecord(inst,loopIndex4);
+  *(undefined4 *)(operandRecord4 + 0x10) = selectWordToStore;
+  if ((*(int *)(inst + 0x84) == loopIndex4) && ((*(uint *)(inst + 0x14) & 0x200) != 0)) {
+    IRInst__setExtraOperandSource(inst,groupCombinedInst,1,*pass);
   }
   else {
-    IRInst__setOperandSource(inst,operandIndex,iVar24,1,*pass);
+    IRInst__setOperandSource(inst,loopIndex4,groupCombinedInst,1,*pass);
   }
-  operandRecord2 = IRInst__getOperandRecord(inst2,operandIndex);
-  loopIndexD = 0;
-  local_d8 = *(undefined4 *)(operandRecord2 + 0x10);
+  operandRecord4 = IRInst__getOperandRecord(inst2,loopIndex4);
+  loopIndex5 = 0;
+  selectScratch0 = *(undefined4 *)(operandRecord4 + 0x10);
   do {
-    operandComponent = *(char *)(loopIndexD + (int)local_7c);
+    operandComponent = *(char *)(loopIndex5 + (int)scratchBase);
     if (operandComponent != '\x04') {
-      sourceDef = IRInst__getOperandSource(inst2,operandIndex);
-      countdown = 4;
-      loopIndexE = 0;
-      puVar11 = laneGroup;
+      sourceDef = IRInst__getOperandSource(inst2,loopIndex4);
+      countdown11 = 4;
+      loopIndex6 = 0;
+      laneSlotCursor = laneGroup;
       do {
-        if ((sourceDef == puVar11[4]) && (operandComponent == *(char *)((int)laneGroup + loopIndexE + 0x20))) {
-          uVar9 = (undefined1)loopIndexE;
+        if ((sourceDef == laneSlotCursor[4]) && (operandComponent == *(char *)((int)laneGroup + loopIndex6 + 0x20))) {
+          matchedSlotIndex = (undefined1)loopIndex6;
           goto LAB_00145280;
         }
-        loopIndexE = loopIndexE + 1;
-        puVar11 = puVar11 + 1;
-        countdown = countdown + -1;
-      } while (countdown != 0);
-      uVar9 = 0xff;
+        loopIndex6 = loopIndex6 + 1;
+        laneSlotCursor = laneSlotCursor + 1;
+        countdown11 = countdown11 + -1;
+      } while (countdown11 != 0);
+      matchedSlotIndex = 0xff;
 LAB_00145280:
-      *(undefined1 *)(loopIndexD + (int)local_7c) = uVar9;
+      *(undefined1 *)(loopIndex5 + (int)scratchBase) = matchedSlotIndex;
     }
-    uVar5 = local_d8;
-    moreComponents = loopIndexD != 3;
-    loopIndexD = loopIndexD + 1;
+    selectWordToStore = selectScratch0;
+    moreComponents = loopIndex5 != 3;
+    loopIndex5 = loopIndex5 + 1;
   } while (moreComponents);
-  operandRecord2 = IRInst__getOperandRecord(inst2,operandIndex);
-  *(undefined4 *)(operandRecord2 + 0x10) = uVar5;
-  if ((*(int *)(inst2 + 0x84) == operandIndex) && ((*(uint *)(inst2 + 0x14) & 0x200) != 0)) {
-    IRInst__setExtraOperandSource(inst2,iVar24,1,*pass);
+  operandRecord4 = IRInst__getOperandRecord(inst2,loopIndex4);
+  *(undefined4 *)(operandRecord4 + 0x10) = selectWordToStore;
+  if ((*(int *)(inst2 + 0x84) == loopIndex4) && ((*(uint *)(inst2 + 0x14) & 0x200) != 0)) {
+    IRInst__setExtraOperandSource(inst2,groupCombinedInst,1,*pass);
   }
   else {
-    IRInst__setOperandSource(inst2,operandIndex,iVar24,1,*pass);
+    IRInst__setOperandSource(inst2,loopIndex4,groupCombinedInst,1,*pass);
   }
 LAB_001452d4:
-  isLast = operandIndex == 4;
+  isLast = loopIndex4 == 4;
   groupSlotCursor = groupSlotCursor + 4;
-  operandIndex = operandIndex + 1;
+  loopIndex4 = loopIndex4 + 1;
   if (isLast) {
     return;
   }
