@@ -1501,7 +1501,7 @@ int recordRetireBindings(alloc, recordIndex, sourceWordPtrs, unusedArg4, unusedA
   char boundMaskByte;
   int *seenSlot;
   uint bindingRecord;
-  uint *puVar6;
+  uint *earliestCursor;
   uint *useNode;
   uint *bindingNode;
   uint *bindingCur;
@@ -1520,7 +1520,7 @@ int recordRetireBindings(alloc, recordIndex, sourceWordPtrs, unusedArg4, unusedA
   uint earliestMask;
   uint bindingRecordIndex;
   uint componentBitD;
-  uint uVar16;
+  uint earliestMaskB;
   uint srcWord0;
   uint boundMask;
   undefined4 *sourceCursor;
@@ -1813,15 +1813,15 @@ LAB_00079508:
         do {
           if ((1 << (componentIndexC & 0x3f) & earliestMask) != 0) {
             componentIndex = 0;
-            puVar6 = earliestWriterBase;
+            earliestCursor = earliestWriterBase;
             do {
               if ((((componentIndexC != componentIndex) && ((1 << (componentIndex & 0x3f) & earliestMask) != 0)) &&
-                  (bindingRecord = earliestWriterBase[componentIndexC], bindingRecord < *puVar6)) &&
+                  (bindingRecord = earliestWriterBase[componentIndexC], bindingRecord < *earliestCursor)) &&
                  (valueLoopIndex = ((int (*)())recordGetWriteEnable)(iStack00000024 + bindingRecord * 0x10,componentIndex), valueLoopIndex != 0)) {
-                *puVar6 = bindingRecord;
+                *earliestCursor = bindingRecord;
               }
               moreComponentsB = componentIndex != 3;
-              puVar6 = puVar6 + 1;
+              earliestCursor = earliestCursor + 1;
               componentIndex = componentIndex + 1;
             } while (moreComponentsB);
           }
@@ -1829,15 +1829,15 @@ LAB_00079508:
           componentIndexC = componentIndexC + 1;
         } while (moreComponentsB);
         componentIndexC = 0;
-        puVar6 = earliestWriter;
+        earliestCursor = earliestWriter;
         do {
           componentBit = 1 << (componentIndexC & 0x3f);
           if (((componentBit & earliestMask) != 0) &&
-             (valueLoopIndex = ((int (*)())regBindingSet)(alloc,*puVar6,registerKey,componentBit,1), valueLoopIndex != 0)) {
+             (valueLoopIndex = ((int (*)())regBindingSet)(alloc,*earliestCursor,registerKey,componentBit,1), valueLoopIndex != 0)) {
             return valueLoopIndex;
           }
           moreComponentsB = componentIndexC != 3;
-          puVar6 = puVar6 + 1;
+          earliestCursor = earliestCursor + 1;
           componentIndexC = componentIndexC + 1;
         } while (moreComponentsB);
       }
@@ -1845,7 +1845,7 @@ LAB_00079508:
     boundMaskByte = *(char *)(registerKey + alloc + 0x3087c);
     if (haveValueIds) {
       loopCounterB = 0;
-      uVar16 = 0;
+      earliestMaskB = 0;
       seenCursorB = seenValueIds;
       do {
         valueId = *seenCursorB;
@@ -1862,9 +1862,9 @@ LAB_00079508:
               do {
                 componentBitD = 1 << (bindingRecord & 0x3f);
                 if ((useMaskWord & componentBitD & ~(int)boundMaskByte) != 0) {
-                  if ((componentBitD & uVar16) == 0) {
+                  if ((componentBitD & earliestMaskB) == 0) {
                     *earliestWriterPtr = bindingRecordIndex;
-                    uVar16 = uVar16 | componentBitD;
+                    earliestMaskB = earliestMaskB | componentBitD;
                   }
                   else if (bindingRecordIndex < *earliestWriterPtr) {
                     *earliestWriterPtr = bindingRecordIndex;
@@ -1879,20 +1879,20 @@ LAB_00079508:
         }
         loopCounterB = loopCounterB + 1;
       } while (loopCounterB != seenCount);
-      if (uVar16 != 0) {
+      if (earliestMaskB != 0) {
         componentIndexB = 0;
         do {
-          if ((1 << (componentIndexB & 0x3f) & uVar16) != 0) {
+          if ((1 << (componentIndexB & 0x3f) & earliestMaskB) != 0) {
             componentIndex = 0;
-            puVar6 = earliestWriter;
+            earliestCursor = earliestWriter;
             do {
-              if (((componentIndexB != componentIndex) && ((1 << (componentIndex & 0x3f) & uVar16) != 0)) &&
-                 ((bindingRecord = earliestWriter[componentIndexB], bindingRecord < *puVar6 &&
+              if (((componentIndexB != componentIndex) && ((1 << (componentIndex & 0x3f) & earliestMaskB) != 0)) &&
+                 ((bindingRecord = earliestWriter[componentIndexB], bindingRecord < *earliestCursor &&
                   (seenCount = ((int (*)())recordGetWriteEnable)(bindingRecord * 0x10 + iStack00000024,componentIndex), seenCount != 0)))) {
-                *puVar6 = bindingRecord;
+                *earliestCursor = bindingRecord;
               }
               moreComponents = componentIndex != 3;
-              puVar6 = puVar6 + 1;
+              earliestCursor = earliestCursor + 1;
               componentIndex = componentIndex + 1;
             } while (moreComponents);
           }
@@ -1900,15 +1900,15 @@ LAB_00079508:
           componentIndexB = componentIndexB + 1;
         } while (moreComponents);
         componentIndexB = 0;
-        puVar6 = earliestWriter;
+        earliestCursor = earliestWriter;
         do {
           componentBit = 1 << (componentIndexB & 0x3f);
-          if (((componentBit & uVar16) != 0) &&
-             (seenCount = ((int (*)())regBindingSet)(alloc,*puVar6,registerKey,componentBit,1), seenCount != 0)) {
+          if (((componentBit & earliestMaskB) != 0) &&
+             (seenCount = ((int (*)())regBindingSet)(alloc,*earliestCursor,registerKey,componentBit,1), seenCount != 0)) {
             return seenCount;
           }
           moreComponents = componentIndexB != 3;
-          puVar6 = puVar6 + 1;
+          earliestCursor = earliestCursor + 1;
           componentIndexB = componentIndexB + 1;
         } while (moreComponents);
       }
@@ -3129,10 +3129,10 @@ int recordProgramAllocateAndEmit(alloc, unusedArg2, scratchArg3, scratchArg4, sc
   uint destRegisterCount;
   uint lastOutputSlot;
   int secondListCount;
-  code *local_6c;
+  code *savedBindingValue;
   uint sourceMaskCopy;
   uint registerBudget;
-  unsigned char *local_60;
+  unsigned char *bindingRowBase;
   
   allocPlus38 = alloc + 0x38;
   registerBudget = 0xe;
@@ -3264,7 +3264,7 @@ LAB_0007b378:
     recordSlotPtr = (uint *)(recordCount * 4 + alloc + 0x6450);
     do {
       configBit6Arg = (code *)(recordCount - loopIndex);
-      local_6c = configBit6Arg;
+      savedBindingValue = configBit6Arg;
       if ((recordSlotPtr[0xb40f] & 0x10000) != 0) {
         recordWord0 = *(uint *)recordPtrB;
         sourceMaskCopy = *recordSlotPtr;
@@ -3305,7 +3305,7 @@ LAB_0007b378:
               sourceSelectMask = 1 << ((uint)scratchArg6 >> 0x16 & 7) | 1 << ((uint)scratchArg6 >> 0x13 & 7) |
                        (uint)configBit6Arg;
               srcRegisterIndex = DAT_001aa761 * 0x100 + ((uint)scratchArg6 >> 5 & 0xff);
-              local_60 = (code *)(srcRegisterIndex + alloc + 0x30870);
+              bindingRowBase = (code *)(srcRegisterIndex + alloc + 0x30870);
               bindingEntryPtr = (undefined4 *)(srcRegisterIndex * 0x10 + alloc + 0x2a87c);
               do {
                 componentBit = 1 << (componentLoop & 0x3f);
@@ -3314,11 +3314,11 @@ LAB_0007b378:
                   newBindingNode = (undefined4 *)((int (*)())chunkArenaAlloc)(alloc + 0x12454,8);
                   if (newBindingNode != (undefined4 *)0x0) {
                     newBindingNode[1] = bindingValue;
-                    *newBindingNode = local_6c;
+                    *newBindingNode = savedBindingValue;
                     *bindingEntryPtr = newBindingNode;
                     bindingEntryPtr[0xc00] = 0xffffffff;
-                    local_60[0xc] = (code *)((byte)componentBit | (byte)local_60[0xc]);
-                    configBit6Arg = local_60;
+                    bindingRowBase[0xc] = (code *)((byte)componentBit | (byte)bindingRowBase[0xc]);
+                    configBit6Arg = bindingRowBase;
                   }
                 }
                 moreComponentsB = componentLoop != 3;
