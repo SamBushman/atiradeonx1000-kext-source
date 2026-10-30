@@ -1,0 +1,33 @@
+local	FUN_0010e870	param_1	lhsRef	INFERRED	comparator argument: pointer to element whose +0x13c/+0x140 pair is the sort key
+local	FUN_0010e870	param_2	rhsRef	INFERRED	comparator argument, other element (dereferenced first)
+local	FUN_0010e870	iVar1	lhsKey	INFERRED	FUN_0010e40c(+0x13c,+0x140) of the lhs element
+local	FUN_001303f4	param_1	value	INFERRED	value searched for
+local	FUN_001303f4	param_2	table	INFERRED	4-entry int table scanned
+local	FUN_001303f4	iVar1	byteOffset	INFERRED	offset into table, step 4
+local	FUN_001303f4	iVar2	remaining	INFERRED	entries left, starts at 4
+local	FUN_00122e90	param_2	kindIndex	INFERRED	index into the 0x10-stride dispatch table at PTR_PTR_001e8c60 (+0xc = handler)
+local	FUN_00122e90	uVar1	callResult	INFERRED	handler result returned
+local	FUN_00127534	param_1	cache	INFERRED	object with +4 hash table and +0x24 scratch key record
+local	FUN_00127534	param_2	keyA	INFERRED	stored in key record +4
+local	FUN_00127534	param_3	keyB	INFERRED	stored in key record +8
+local	FUN_00127534	param_4	keyExtra	INFERRED	stored in key record +0xc
+local	FUN_001275a0	param_1	cache	INFERRED	cache object (word 0 passed on to constructor, word 1 hash table)
+local	FUN_001275a0	param_2	keyA	INFERRED	same key as FUN_00127534
+local	FUN_001275a0	param_3	keyB	INFERRED	same key as FUN_00127534
+local	FUN_001275a0	param_4	keyExtra	INFERRED	same key as FUN_00127534
+local	FUN_00127608	param_1	cache	INFERRED	forwarded to FUN_00127534 / FUN_001275a0 (find, else create+insert)
+local	FUN_00127608	param_2	keyA	INFERRED	forwarded key
+local	FUN_00127608	param_3	keyB	INFERRED	forwarded key
+local	FUN_00127608	param_4	keyExtra	INFERRED	forwarded key
+local	FUN_0012b248	param_3	program	INFERRED	program whose +8 compiler has the +0x3ac vreg counter
+local	FUN_0012b248	iVar4	newVRegId	INFERRED	decremented compiler+0x3ac counter, stored in operand +8 and returned
+local	FUN_0012b248	uVar3	sourceValue	INFERRED	param_1+0x8c bound as operand 1
+local	FUN_00130a08	param_1	inst	INFERRED	passed to FUN_00130728 (chain end)
+local	FUN_00130a08	param_2	targetId	INFERRED	compared with node+0x30 record +0x13c
+local	FUN_00130a08	piVar2	cursorInst	INFERRED	walks +4 links while vslot 0x74 true
+local	FUN_0010ecb8	local_28	operandWordBytes	INFERRED	operand record +0x10 word scanned bytewise
+local	FUN_0010ecb8	bVar1	sawOne	INFERRED	set when a byte equal 1 was seen
+local	FUN_0010ecb8	iVar2	byteIndex	INFERRED	byte index
+local	FUN_0010ecb8	iVar3	remaining	INFERRED	bytes left, from 4
+local	FUN_00134bf0	param_1	graph	INFERRED	alias table at +0x20
+local	FUN_00134bf0	param_3	followAliases	INFERRED	selects disjointSetFindRoot vs direct lookup

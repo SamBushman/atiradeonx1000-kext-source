@@ -271,7 +271,7 @@ int FUN_0011eaa0(program)
               definedBitWord = *(uint *)((int)definedInBlocks + frontierWordOffset + 8);
               if ((definedBitWord >> frontierBitIndex & 1) == 0) {
                 *(uint *)((int)definedInBlocks + frontierWordOffset + 8) = 1 << frontierBitIndex | definedBitWord;
-                ((int (*)())FUN_0012306c)(registerRecord,puVar14);
+                ((int (*)())VReg__appendUser)(registerRecord,puVar14);
               }
               Block__prependInst(frontierBlock,puVar14);
               (**(code **)(*frontierBlock + 0x48))(frontierBlock);
@@ -2865,19 +2865,19 @@ int FUN_00122de8(program)
   return FUN_000f019c(program);
 }
 
-/* FUN_00122e90 @ 0x122e90 (44 bytes) */
-int FUN_00122e90(param_1, param_2, param_3, param_4)
+/* InternCache__constructByKind @ 0x122e90 (44 bytes) */
+int InternCache__constructByKind(param_1, kindIndex, param_3, param_4)
   undefined4 param_1;
-  int param_2;
+  int kindIndex;
   uint param_3;
   uint param_4;
 {
-  undefined4 uVar1;
+  undefined4 callResult;
   
                     
                     
-  uVar1 = (**(code **)(PTR_PTR_001e8c60 + param_2 * 0x10 + 0xc))(param_1,param_2,param_3,param_4);
-  return uVar1;
+  callResult = (**(code **)(PTR_PTR_001e8c60 + kindIndex * 0x10 + 0xc))(param_1,kindIndex,param_3,param_4);
+  return callResult;
 }
 
 /* VReg__popDefinition @ 0x122ebc (28 bytes) */
@@ -2918,8 +2918,8 @@ int ExportValue__vslot10(this, param_2)
   return *(undefined4 *)(this + 0x34);
 }
 
-/* FUN_00122f28 @ 0x122f28 (124 bytes) */
-int FUN_00122f28(value, inst)
+/* IRInst__bindSourceFromValue @ 0x122f28 (124 bytes) */
+int IRInst__bindSourceFromValue(value, inst)
   int *value;
   int inst;
 {
@@ -2979,8 +2979,8 @@ int VReg__currentDefinition(vreg, block, createArg)
   return definition;
 }
 
-/* FUN_0012306c @ 0x12306c (120 bytes) */
-int FUN_0012306c(vreg, user)
+/* VReg__appendUser @ 0x12306c (120 bytes) */
+int VReg__appendUser(vreg, user)
   int vreg;
   undefined4 user;
 {
@@ -3056,9 +3056,9 @@ int ImmedConstBuffer__clone(this, targetBlock, compiler)
     FUN_00174e0c(valueKey);
     ValueKey__propagateLaneValues(valueKey);
   }
-  ((int (*)())FUN_0012306c)(this,constLoad);
+  ((int (*)())VReg__appendUser)(this,constLoad);
   (**(code **)(*targetBlock + 0xc))(targetBlock,constLoad);
-  ((int (*)())FUN_00122f28)(this,constLoad);
+  ((int (*)())IRInst__bindSourceFromValue)(this,constLoad);
   return valueKey;
 }
 
@@ -3088,9 +3088,9 @@ int VertexRegister__clone(this, param_2, compiler)
     FUN_00174e0c(valueKey);
     ValueKey__propagateLaneValues(valueKey);
   }
-  ((int (*)())FUN_0012306c)(this,loadVertexInst);
+  ((int (*)())VReg__appendUser)(this,loadVertexInst);
   (**(code **)(*param_2 + 0xc))(param_2,loadVertexInst);
-  ((int (*)())FUN_00122f28)(this,loadVertexInst);
+  ((int (*)())IRInst__bindSourceFromValue)(this,loadVertexInst);
   return valueKey;
 }
 
@@ -3450,17 +3450,17 @@ int Interpolator__vslot10(this, param_2, param_3)
     allocation[0x28] = (*(unsigned int *)((unsigned char *)ghidra_home + 4));
     allocation[0x51] = *(undefined4 *)(this + 8);
     allocation[0x50] = *(undefined4 *)(this + 4);
-    uVar2 = FUN_00127608(*(undefined4 *)(param_3 + 0x3ac),0x2c,0,0);
+    uVar2 = InternCache__findOrCreate(*(undefined4 *)(param_3 + 0x3ac),0x2c,0,0);
     IRInst__setOperandRef(puVar7,0,uVar2);
     IRInst__setOperandRef(puVar7,2,uVar2);
     uVar6 = DAT_001afeec;
     iVar3 = IRInst__getOperandRecord(puVar7,2);
     *(undefined4 *)(iVar3 + 0x10) = uVar6;
-    ((int (*)())FUN_0012306c)(uVar2,puVar7);
+    ((int (*)())VReg__appendUser)(uVar2,puVar7);
     uVar6 = *(undefined4 *)(param_3 + 0x3ac);
     iVar3 = *(int *)(iVar5 + 0x3ac) + -1;
     *(int *)(iVar5 + 0x3ac) = iVar3;
-    uVar6 = FUN_001275a0(uVar6,0,iVar3,0);
+    uVar6 = InternCache__create(uVar6,0,iVar3,0);
     *(undefined4 *)(this + 0x3c) = uVar6;
     IRInst__setOperandRef(puVar7,1,uVar6);
     ((int (*)())VReg__addUse)(*(undefined4 *)(this + 0x3c),1,puVar7);
@@ -3585,7 +3585,7 @@ int FUN_00123c08(compiler, block, param_3)
       (**(code **)(**(int **)(compiler + 0x3a0) + 0xc))(*(int **)(compiler + 0x3a0),undefInst,constMoveRegA);
       newVRegId = *(int *)(*(int *)(compiler + 8) + 0x3ac) + -1;
       *(int *)(*(int *)(compiler + 8) + 0x3ac) = newVRegId;
-      undefVReg = FUN_00127608(*(undefined4 *)(program + 0x3ac),0,newVRegId,0);
+      undefVReg = InternCache__findOrCreate(*(undefined4 *)(program + 0x3ac),0,newVRegId,0);
       allocation[0x24] = undefVReg;
       operandRecord = IRInst__getOperandRecord(undefInst,0);
       *(int *)(operandRecord + 8) = newVRegId;
@@ -3600,7 +3600,7 @@ int FUN_00123c08(compiler, block, param_3)
         FUN_00174e0c(undefKeyAlloc);
         ValueKey__propagateLaneValues(undefKeyAlloc);
       }
-      ((int (*)())FUN_0012306c)(undefVReg,undefInst);
+      ((int (*)())VReg__appendUser)(undefVReg,undefInst);
       Block__recordDefinition(block,undefVReg,undefKeyAlloc);
       *(undefined4 *)(*(int *)(compiler + COMP_arenaB) + 0x9c) = undefLaneMask;
       IRInst__setExtraOperandSource(*(undefined4 *)(compiler + COMP_arenaB),undefInst,0,*(undefined4 *)(compiler + 8));
@@ -3614,9 +3614,9 @@ int FUN_00123c08(compiler, block, param_3)
     *(undefined4 *)(operandRecord + 8) = constMoveDestReg;
     newVRegIdB = *(int *)(*(int *)(compiler + 8) + 0x3ac) + -1;
     *(int *)(*(int *)(compiler + 8) + 0x3ac) = newVRegIdB;
-    movResultVReg = FUN_00127608(*(undefined4 *)(compiler + 0x3ac),0,newVRegIdB,0);
+    movResultVReg = InternCache__findOrCreate(*(undefined4 *)(compiler + 0x3ac),0,newVRegIdB,0);
     *(undefined4 *)(*(int *)(compiler + COMP_arenaB) + 0x8c) = movResultVReg;
-    ((int (*)())FUN_0012306c)(movResultVReg,*(undefined4 *)(compiler + COMP_arenaB));
+    ((int (*)())VReg__appendUser)(movResultVReg,*(undefined4 *)(compiler + COMP_arenaB));
     (**(code **)(*block + 0xc))(block,*(undefined4 *)(compiler + COMP_arenaB),newVRegIdB);
     arena = *(undefined4 *)(*(int *)(compiler + 8) + 0x378);
     allocation = (undefined4 *)Arena__alloc(arena,0x240);
@@ -3625,7 +3625,7 @@ int FUN_00123c08(compiler, block, param_3)
     valueKeyOut = allocation + 1;
     Program__valueNumberInst(program,0,0,&valueKeyOut,block);
     Block__recordDefinition(block,movResultVReg,valueKeyOut);
-    ((int (*)())FUN_00122f28)(movResultVReg,*(undefined4 *)(compiler + COMP_arenaB));
+    ((int (*)())IRInst__bindSourceFromValue)(movResultVReg,*(undefined4 *)(compiler + COMP_arenaB));
   }
   else {
     keyVector = *(uint **)(*(int *)(*(int *)(compiler + COMP_arenaB) + 0x8c) + 0x2c);
@@ -3664,7 +3664,7 @@ int TempValue__clone(this, param_2, compiler)
                       (*(int **)(compiler + COMP_target),*(undefined4 *)(this + 8));
     IRInst__setOperandRef(newInst,0,this);
     *(undefined4 *)(newInst + 0x9c) = DAT_001afee8;
-    ((int (*)())FUN_0012306c)(this,newInst);
+    ((int (*)())VReg__appendUser)(this,newInst);
     arena = *(undefined4 *)(compiler + COMP_arenaB);
     allocation = (undefined4 *)Arena__alloc(arena,0x240);
     valueKey = allocation + 1;
@@ -3677,7 +3677,7 @@ int TempValue__clone(this, param_2, compiler)
     }
     *(uint *)(*(int *)(compiler + COMP_target) + 8) = *(uint *)(*(int *)(compiler + COMP_target) + 8) | 0x20;
     (**(code **)(*param_2 + 0xc))(param_2,newInst);
-    ((int (*)())FUN_00122f28)(this,newInst);
+    ((int (*)())IRInst__bindSourceFromValue)(this,newInst);
     return valueKey;
   }
   foldedValue = (undefined4 *)((int (*)())FUN_00123c08)(*(undefined4 *)(compiler + COMP_currentProgram),param_2,this);
@@ -3716,9 +3716,9 @@ int ExportSlot__clone(this, param_2, compiler)
     FUN_00174e0c(valueKey);
     ValueKey__propagateLaneValues(valueKey);
   }
-  ((int (*)())FUN_0012306c)(this,loadInst);
+  ((int (*)())VReg__appendUser)(this,loadInst);
   (**(code **)(*param_2 + 0xc))(param_2,loadInst);
-  ((int (*)())FUN_00122f28)(this,loadInst);
+  ((int (*)())IRInst__bindSourceFromValue)(this,loadInst);
   return valueKey;
 }
 
@@ -3750,9 +3750,9 @@ int Resource__clone(this, param_2, compiler)
     FUN_00174e0c(valueKey);
     ValueKey__propagateLaneValues(valueKey);
   }
-  ((int (*)())FUN_0012306c)(this,loadInst);
+  ((int (*)())VReg__appendUser)(this,loadInst);
   (**(code **)(*param_2 + 0xc))(param_2,loadInst);
-  ((int (*)())FUN_00122f28)(this,loadInst);
+  ((int (*)())IRInst__bindSourceFromValue)(this,loadInst);
   return valueKey;
 }
 
@@ -3784,9 +3784,9 @@ int FixedValue__clone(this, param_2, compiler)
     FUN_00174e0c(valueKey);
     ValueKey__propagateLaneValues(valueKey);
   }
-  ((int (*)())FUN_0012306c)(this,loadInst);
+  ((int (*)())VReg__appendUser)(this,loadInst);
   (**(code **)(*param_2 + 0xc))(param_2,loadInst);
-  ((int (*)())FUN_00122f28)(this,loadInst);
+  ((int (*)())IRInst__bindSourceFromValue)(this,loadInst);
   return valueKey;
 }
 
@@ -3828,7 +3828,7 @@ int FixedValue__ctor_1245a8(this, registerIndex, registerFile, baseCtorArg4, com
   entryBlock = *(int **)(*(int *)(compiler + COMP_currentProgram) + 0x3a0);
   (**(code **)(*entryBlock + 0xc))(entryBlock,loadConstInst);
   IRInst__setOperandRef(loadConstInst,0,this);
-  ((int (*)())FUN_0012306c)(this,loadConstInst);
+  ((int (*)())VReg__appendUser)(this,loadConstInst);
   return;
 }
 
@@ -3870,7 +3870,7 @@ int FixedValue__ctor_124724(this, registerIndex, registerFile, baseCtorArg4, com
   entryBlock = *(int **)(*(int *)(compiler + COMP_currentProgram) + 0x3a0);
   (**(code **)(*entryBlock + 0xc))(entryBlock,loadConstInst);
   IRInst__setOperandRef(loadConstInst,0,this);
-  ((int (*)())FUN_0012306c)(this,loadConstInst);
+  ((int (*)())VReg__appendUser)(this,loadConstInst);
   return;
 }
 
@@ -3949,7 +3949,7 @@ int PrimitiveIndex__ctor_12499c(this, baseCtorArg2, baseCtorArg3, baseCtorArg4, 
   program = *(int *)(compiler + COMP_currentProgram);
   tempVReg = (**(code **)(**(int **)(compiler + COMP_target) + 0xa4))
                     (*(int **)(compiler + COMP_target),identitySwizzleWord,compiler,baseCtorArg4,compilerCopy,staleArg8,0x10203);
-  tempVReg = FUN_00127608(*(undefined4 *)(program + 0x3ac),0x10,tempVReg,0);
+  tempVReg = InternCache__findOrCreate(*(undefined4 *)(program + 0x3ac),0x10,tempVReg,0);
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   loadTempInst = allocation + 1;
@@ -3957,14 +3957,14 @@ int PrimitiveIndex__ctor_12499c(this, baseCtorArg2, baseCtorArg3, baseCtorArg4, 
   IRLoadTemp__ctor_109348(loadTempInst,this,compiler);
   Block__prependInst(*(undefined4 *)(program + 0x3a0),loadTempInst);
   IRInst__setOperandRef(loadTempInst,0,tempVReg);
-  ((int (*)())FUN_0012306c)(tempVReg,loadTempInst);
+  ((int (*)())VReg__appendUser)(tempVReg,loadTempInst);
   movInst = IRMov__new_1084b8(0x31,compiler);
   IRInst__setOperandRef(movInst,1,tempVReg);
   identitySwizzle = identitySwizzleWord[0];
   movSourceRecord = IRInst__getOperandRecord(movInst,1);
   *(undefined4 *)(movSourceRecord + 0x10) = identitySwizzle;
   IRInst__setOperandRef(movInst,0,this);
-  ((int (*)())FUN_0012306c)(this,movInst);
+  ((int (*)())VReg__appendUser)(this,movInst);
   Block__appendInst(*(undefined4 *)(program + 0x3a0),movInst);
   return;
 }
@@ -3990,7 +3990,7 @@ int StandardIndex__ctor_124b24(this, tempIndex, baseCtorArg3, baseCtorArg4, comp
   program = *(int *)(compiler + COMP_currentProgram);
   cachedLoadInst = *(int *)(tempIndex * 4 + program + 0x38);
   if (cachedLoadInst == 0) {
-    tempVReg = FUN_00127608(*(undefined4 *)(program + 0x3ac),0x10,tempIndex,0);
+    tempVReg = InternCache__findOrCreate(*(undefined4 *)(program + 0x3ac),0x10,tempIndex,0);
     arena = *(undefined4 *)(compiler + COMP_arenaA);
     allocation = (undefined4 *)Arena__alloc(arena,0x168);
     loadTempInst = allocation + 1;
@@ -3998,7 +3998,7 @@ int StandardIndex__ctor_124b24(this, tempIndex, baseCtorArg3, baseCtorArg4, comp
     IRLoadTemp__ctor_109348(loadTempInst,this,compiler);
     Block__prependInst(*(undefined4 *)(program + 0x3a0),loadTempInst);
     IRInst__setOperandRef(loadTempInst,0,tempVReg);
-    ((int (*)())FUN_0012306c)(tempVReg,loadTempInst);
+    ((int (*)())VReg__appendUser)(tempVReg,loadTempInst);
     *(undefined4 **)(tempIndex * 4 + program + 0x38) = loadTempInst;
   }
   else {
@@ -4007,7 +4007,7 @@ int StandardIndex__ctor_124b24(this, tempIndex, baseCtorArg3, baseCtorArg4, comp
   movInst = IRMov__new_1084b8(0x31,compiler);
   IRInst__setOperandRef(movInst,1,tempVReg);
   IRInst__setOperandRef(movInst,0,this);
-  ((int (*)())FUN_0012306c)(this,movInst);
+  ((int (*)())VReg__appendUser)(this,movInst);
   Block__appendInst(*(undefined4 *)(program + 0x3a0),movInst);
   return;
 }
@@ -4033,7 +4033,7 @@ int StandardIndex__ctor_124c94(this, tempIndex, baseCtorArg3, baseCtorArg4, comp
   program = *(int *)(compiler + COMP_currentProgram);
   cachedLoadInst = *(int *)(tempIndex * 4 + program + 0x38);
   if (cachedLoadInst == 0) {
-    tempVReg = FUN_00127608(*(undefined4 *)(program + 0x3ac),0x10,tempIndex,0);
+    tempVReg = InternCache__findOrCreate(*(undefined4 *)(program + 0x3ac),0x10,tempIndex,0);
     arena = *(undefined4 *)(compiler + COMP_arenaA);
     allocation = (undefined4 *)Arena__alloc(arena,0x168);
     loadTempInst = allocation + 1;
@@ -4041,7 +4041,7 @@ int StandardIndex__ctor_124c94(this, tempIndex, baseCtorArg3, baseCtorArg4, comp
     IRLoadTemp__ctor_109348(loadTempInst,this,compiler);
     Block__prependInst(*(undefined4 *)(program + 0x3a0),loadTempInst);
     IRInst__setOperandRef(loadTempInst,0,tempVReg);
-    ((int (*)())FUN_0012306c)(tempVReg,loadTempInst);
+    ((int (*)())VReg__appendUser)(tempVReg,loadTempInst);
     *(undefined4 **)(tempIndex * 4 + program + 0x38) = loadTempInst;
   }
   else {
@@ -4050,7 +4050,7 @@ int StandardIndex__ctor_124c94(this, tempIndex, baseCtorArg3, baseCtorArg4, comp
   movInst = IRMov__new_1084b8(0x31,compiler);
   IRInst__setOperandRef(movInst,1,tempVReg);
   IRInst__setOperandRef(movInst,0,this);
-  ((int (*)())FUN_0012306c)(this,movInst);
+  ((int (*)())VReg__appendUser)(this,movInst);
   Block__appendInst(*(undefined4 *)(program + 0x3a0),movInst);
   return;
 }
@@ -4109,7 +4109,7 @@ int ExportValue__ctor_124e68(this, indexValue, interpolatorKind, baseCtorArg4, c
   program = *(int *)(compiler + COMP_currentProgram);
   Block__prependInst(*(undefined4 *)(program + 0x3a8),exportInst);
   IRInst__setOperandRef(exportInst,0,this);
-  ((int (*)())FUN_0012306c)(this,exportInst);
+  ((int (*)())VReg__appendUser)(this,exportInst);
   this[0xc] = exportInst;
   allocation[0x50] = interpolatorKind;
   allocation[0x51] = indexValue;
@@ -4128,7 +4128,7 @@ int ExportValue__ctor_124e68(this, indexValue, interpolatorKind, baseCtorArg4, c
   vregList = *(undefined4 *)(program + 0x3ac);
   newVRegId = *(int *)(compiler + 0x3ac) + -1;
   *(int *)(compiler + 0x3ac) = newVRegId;
-  vregList = FUN_001275a0(vregList,0,newVRegId,0);
+  vregList = InternCache__create(vregList,0,newVRegId,0);
   this[0xd] = vregList;
   IRInst__setOperandRef(exportInst,1,vregList);
   ((int (*)())VReg__addUse)(this[0xd],1,exportInst);
@@ -4189,7 +4189,7 @@ int ExportValue__ctor_1250dc(this, indexValue, interpolatorKind, baseCtorArg4, c
   program = *(int *)(compiler + COMP_currentProgram);
   Block__prependInst(*(undefined4 *)(program + 0x3a8),exportInst);
   IRInst__setOperandRef(exportInst,0,this);
-  ((int (*)())FUN_0012306c)(this,exportInst);
+  ((int (*)())VReg__appendUser)(this,exportInst);
   this[0xc] = exportInst;
   allocation[0x50] = interpolatorKind;
   allocation[0x51] = indexValue;
@@ -4208,7 +4208,7 @@ int ExportValue__ctor_1250dc(this, indexValue, interpolatorKind, baseCtorArg4, c
   vregList = *(undefined4 *)(program + 0x3ac);
   newVRegId = *(int *)(compiler + 0x3ac) + -1;
   *(int *)(compiler + 0x3ac) = newVRegId;
-  vregList = FUN_001275a0(vregList,0,newVRegId,0);
+  vregList = InternCache__create(vregList,0,newVRegId,0);
   this[0xd] = vregList;
   IRInst__setOperandRef(exportInst,1,vregList);
   ((int (*)())VReg__addUse)(this[0xd],1,exportInst);
@@ -4294,7 +4294,7 @@ int Interpolator__ctor_125350(this, indexValue, interpolatorKind, baseCtorArg4, 
     this[0xe] = interpLoadInst;
     (**(code **)(**(int **)(program + 0x3a0) + 0xc))(*(int **)(program + 0x3a0),interpLoadInst);
     IRInst__setOperandRef(this[0xe],0,this);
-    ((int (*)())FUN_0012306c)(this,this[0xe]);
+    ((int (*)())VReg__appendUser)(this,this[0xe]);
     *(int *)(this[0xe] + 0x144) = interpolatorKind;
     *(undefined4 *)(this[0xe] + 0x148) = indexValue;
     return;
@@ -4309,12 +4309,12 @@ int Interpolator__ctor_125350(this, indexValue, interpolatorKind, baseCtorArg4, 
   IRExport__ctor_108918(exportInst,compiler);
   Block__appendInst(*(undefined4 *)(program + 0x3a8),exportInst);
   IRInst__setOperandRef(exportInst,0,this);
-  ((int (*)())FUN_0012306c)(this,exportInst);
+  ((int (*)())VReg__appendUser)(this,exportInst);
   this[0xc] = exportInst;
   vregList = *(undefined4 *)(program + 0x3ac);
   newVRegId = *(int *)(compiler + 0x3ac) + -1;
   *(int *)(compiler + 0x3ac) = newVRegId;
-  vregList = FUN_001275a0(vregList,0,newVRegId,0);
+  vregList = InternCache__create(vregList,0,newVRegId,0);
   this[0xf] = vregList;
   targetQuery120 = (**(code **)(**(int **)(compiler + COMP_target) + 0x120))
                     (*(int **)(compiler + COMP_target),program,compiler);
@@ -4337,7 +4337,7 @@ LAB_00125578:
       if ((mappedKind != 0x40) && (exportLaneKind = 0xc, mappedKind != 0x41)) goto LAB_00125578;
     }
   }
-  mappedVReg = FUN_001275a0(*(undefined4 *)(program + 0x3ac),mappedKind,mappedIndexSlot[0],0);
+  mappedVReg = InternCache__create(*(undefined4 *)(program + 0x3ac),mappedKind,mappedIndexSlot[0],0);
   arena2 = *(undefined4 *)(compiler + COMP_arenaA);
   allocation2 = (undefined4 *)Arena__alloc(arena2,0x168);
   mappedExportInst = allocation2 + 1;
@@ -4348,7 +4348,7 @@ LAB_00125578:
   IRInst__setOperandRef(this[0xd],1,this[0xf]);
   IRInst__setOperandRef(this[0xd],0,mappedVReg);
   *(undefined4 *)(this[0xd] + 0x9c) = DAT_001afef8;
-  ((int (*)())FUN_0012306c)(mappedVReg,this[0xd]);
+  ((int (*)())VReg__appendUser)(mappedVReg,this[0xd]);
   laneIndex = 0;
   do {
     IRLoadInterp__setLaneKindAndIndex(this[0xd],laneIndex,exportLaneKind,mappedIndexSlot[0]);
@@ -4441,7 +4441,7 @@ int Interpolator__ctor_1257b0(this, indexValue, interpolatorKind, baseCtorArg4, 
     this[0xe] = interpLoadInst;
     (**(code **)(**(int **)(program + 0x3a0) + 0xc))(*(int **)(program + 0x3a0),interpLoadInst);
     IRInst__setOperandRef(this[0xe],0,this);
-    ((int (*)())FUN_0012306c)(this,this[0xe]);
+    ((int (*)())VReg__appendUser)(this,this[0xe]);
     *(int *)(this[0xe] + 0x144) = interpolatorKind;
     *(undefined4 *)(this[0xe] + 0x148) = indexValue;
     return;
@@ -4456,12 +4456,12 @@ int Interpolator__ctor_1257b0(this, indexValue, interpolatorKind, baseCtorArg4, 
   IRExport__ctor_108918(exportInst,compiler);
   Block__appendInst(*(undefined4 *)(program + 0x3a8),exportInst);
   IRInst__setOperandRef(exportInst,0,this);
-  ((int (*)())FUN_0012306c)(this,exportInst);
+  ((int (*)())VReg__appendUser)(this,exportInst);
   this[0xc] = exportInst;
   vregList = *(undefined4 *)(program + 0x3ac);
   newVRegId = *(int *)(compiler + 0x3ac) + -1;
   *(int *)(compiler + 0x3ac) = newVRegId;
-  vregList = FUN_001275a0(vregList,0,newVRegId,0);
+  vregList = InternCache__create(vregList,0,newVRegId,0);
   this[0xf] = vregList;
   targetQuery120 = (**(code **)(**(int **)(compiler + COMP_target) + 0x120))
                     (*(int **)(compiler + COMP_target),program,compiler);
@@ -4484,7 +4484,7 @@ LAB_001259d8:
       if ((mappedKind != 0x40) && (exportLaneKind = 0xc, mappedKind != 0x41)) goto LAB_001259d8;
     }
   }
-  mappedVReg = FUN_001275a0(*(undefined4 *)(program + 0x3ac),mappedKind,mappedIndexSlot[0],0);
+  mappedVReg = InternCache__create(*(undefined4 *)(program + 0x3ac),mappedKind,mappedIndexSlot[0],0);
   arena2 = *(undefined4 *)(compiler + COMP_arenaA);
   allocation2 = (undefined4 *)Arena__alloc(arena2,0x168);
   mappedExportInst = allocation2 + 1;
@@ -4495,7 +4495,7 @@ LAB_001259d8:
   IRInst__setOperandRef(this[0xd],1,this[0xf]);
   IRInst__setOperandRef(this[0xd],0,mappedVReg);
   *(undefined4 *)(this[0xd] + 0x9c) = DAT_001afef8;
-  ((int (*)())FUN_0012306c)(mappedVReg,this[0xd]);
+  ((int (*)())VReg__appendUser)(mappedVReg,this[0xd]);
   laneIndex = 0;
   do {
     IRLoadInterp__setLaneKindAndIndex(this[0xd],laneIndex,exportLaneKind,mappedIndexSlot[0]);
@@ -4616,7 +4616,7 @@ int PrimitiveIndex__ctor_125db8(this, baseCtorArg2, baseCtorArg3, baseCtorArg4, 
   program = *(int *)(compiler + COMP_currentProgram);
   tempVReg = (**(code **)(**(int **)(compiler + COMP_target) + 0xa4))
                     (*(int **)(compiler + COMP_target),identitySwizzleWord,compiler,baseCtorArg4,compilerCopy,staleArg8,0x10203);
-  tempVReg = FUN_00127608(*(undefined4 *)(program + 0x3ac),0x10,tempVReg,0);
+  tempVReg = InternCache__findOrCreate(*(undefined4 *)(program + 0x3ac),0x10,tempVReg,0);
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   loadTempInst = allocation + 1;
@@ -4624,14 +4624,14 @@ int PrimitiveIndex__ctor_125db8(this, baseCtorArg2, baseCtorArg3, baseCtorArg4, 
   IRLoadTemp__ctor_109348(loadTempInst,this,compiler);
   Block__prependInst(*(undefined4 *)(program + 0x3a0),loadTempInst);
   IRInst__setOperandRef(loadTempInst,0,tempVReg);
-  ((int (*)())FUN_0012306c)(tempVReg,loadTempInst);
+  ((int (*)())VReg__appendUser)(tempVReg,loadTempInst);
   movInst = IRMov__new_1084b8(0x31,compiler);
   IRInst__setOperandRef(movInst,1,tempVReg);
   identitySwizzle = identitySwizzleWord[0];
   movSourceRecord = IRInst__getOperandRecord(movInst,1);
   *(undefined4 *)(movSourceRecord + 0x10) = identitySwizzle;
   IRInst__setOperandRef(movInst,0,this);
-  ((int (*)())FUN_0012306c)(this,movInst);
+  ((int (*)())VReg__appendUser)(this,movInst);
   Block__appendInst(*(undefined4 *)(program + 0x3a0),movInst);
   return;
 }

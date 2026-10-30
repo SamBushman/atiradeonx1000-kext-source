@@ -1316,7 +1316,7 @@ int FUN_0010de6c(param_1, program, param_3, vertexAttrWord, param_5, insertRef)
   vregList = *(undefined4 *)(program + 0x3ac);
   compiler = *(undefined4 *)(program + 8);
   loadVReg = Program__registerFileOfIlType(program,*vertexAttrWord >> 0x10 & 0x3f);
-  loadVReg = FUN_00127608(vregList,loadVReg,(int)(short)attrWordCopy,0);
+  loadVReg = InternCache__findOrCreate(vregList,loadVReg,(int)(short)attrWordCopy,0);
   loadVertexInst = IRLoadVertex__new_109810(0xa4,compiler);
   IRInst__setOperandRef(loadVertexInst,0,loadVReg);
   *(int *)(loadVertexInst + 300) = (int)(short)attrWordCopy;
@@ -1763,17 +1763,17 @@ int FUN_0010e814(param_1, param_2)
 }
 
 /* FUN_0010e870 @ 0x10e870 (84 bytes) */
-int FUN_0010e870(param_1, param_2)
-  int *param_1;
-  int *param_2;
+int FUN_0010e870(lhsRef, rhsRef)
+  int *lhsRef;
+  int *rhsRef;
 {
-  int iVar1;
+  int lhsKey;
   int iVar2;
   
-  iVar2 = *param_2;
-  iVar1 = ((int (*)())FUN_0010e40c)(*(undefined4 *)(*param_1 + 0x13c),*(undefined4 *)(*param_1 + 0x140));
+  iVar2 = *rhsRef;
+  lhsKey = ((int (*)())FUN_0010e40c)(*(undefined4 *)(*lhsRef + 0x13c),*(undefined4 *)(*lhsRef + 0x140));
   iVar2 = ((int (*)())FUN_0010e40c)(*(undefined4 *)(iVar2 + 0x13c),*(undefined4 *)(iVar2 + 0x140));
-  return iVar2 < iVar1;
+  return iVar2 < lhsKey;
 }
 
 /* FUN_0010e8c4 @ 0x10e8c4 (32 bytes) */
@@ -1997,29 +1997,29 @@ int FUN_0010ecb8(inst)
   undefined4 inst;
 {
   int operandRecord;
-  bool bVar1;
-  int iVar2;
-  int iVar3;
-  int local_28 [9];
+  bool sawOne;
+  int byteIndex;
+  int remaining;
+  int operandWordBytes [9];
   
   operandRecord = IRInst__getOperandRecord(inst,0);
-  local_28[0] = *(int *)(operandRecord + 0x10);
+  operandWordBytes[0] = *(int *)(operandRecord + 0x10);
   if (*(int *)(operandRecord + 0x10) != DAT_001afa18) {
-    bVar1 = false;
-    iVar3 = 4;
-    iVar2 = 0;
+    sawOne = false;
+    remaining = 4;
+    byteIndex = 0;
     do {
-      if (*(char *)((int)local_28 + iVar2) == '\0') {
-        if (bVar1) {
+      if (*(char *)((int)operandWordBytes + byteIndex) == '\0') {
+        if (sawOne) {
           return 1;
         }
       }
-      else if (*(char *)((int)local_28 + iVar2) == '\x01') {
-        bVar1 = true;
+      else if (*(char *)((int)operandWordBytes + byteIndex) == '\x01') {
+        sawOne = true;
       }
-      iVar2 = iVar2 + 1;
-      iVar3 = iVar3 + -1;
-    } while (iVar3 != 0);
+      byteIndex = byteIndex + 1;
+      remaining = remaining + -1;
+    } while (remaining != 0);
   }
   return 0;
 }

@@ -2235,12 +2235,12 @@
 0x121000	FUN_00121000	1232	no	indirect call (driver context / vtable / callback)
 0x1214fc	pass_ssa_build	6188	no	indirect call (driver context / vtable / callback)
 0x122de8	FUN_00122de8	168	yes	
-0x122e90	FUN_00122e90	44	yes	
+0x122e90	InternCache__constructByKind	44	yes	
 0x122ebc	VReg__popDefinition	28	yes	
 0x122ed8	ExportValue__vslot10	80	yes	
-0x122f28	FUN_00122f28	124	no	indirect call (driver context / vtable / callback)
+0x122f28	IRInst__bindSourceFromValue	124	no	indirect call (driver context / vtable / callback)
 0x122fa4	VReg__currentDefinition	200	no	indirect call (driver context / vtable / callback)
-0x12306c	FUN_0012306c	120	yes	
+0x12306c	VReg__appendUser	120	yes	
 0x1230e4	ImmedConstBuffer__clone	360	no	indirect call (driver context / vtable / callback)
 0x123288	VertexRegister__clone	240	no	indirect call (driver context / vtable / callback)
 0x123398	VReg__setTopDefinition	140	yes	
@@ -2326,9 +2326,9 @@
 0x127324	FUN_00127324	232	yes	
 0x12740c	FUN_0012740c	100	yes	
 0x127470	FUN_00127470	196	yes	
-0x127534	FUN_00127534	108	yes	
-0x1275a0	FUN_001275a0	104	yes	
-0x127608	FUN_00127608	100	yes	
+0x127534	InternCache__find	108	yes	
+0x1275a0	InternCache__create	104	yes	
+0x127608	InternCache__findOrCreate	100	yes	
 0x12766c	ConstKey__compare1	52	yes	
 0x1276a0	ConstKey__compare2	92	yes	
 0x1276fc	ConstKey__compare3	124	yes	
@@ -2426,7 +2426,7 @@
 0x12f0f8	FUN_0012f0f8	3440	no	indirect call (driver context / vtable / callback)
 0x12fe8c	Program__isRegionTrivial	524	no	indirect call (driver context / vtable / callback)
 0x1300b0	pass_remove_empty_graphs	836	no	indirect call (driver context / vtable / callback)
-0x1303f4	FUN_001303f4	48	yes	
+0x1303f4	Array4__contains	48	yes	
 0x130424	FUN_00130424	32	yes	
 0x130444	Program__markHwRegUsed	52	yes	
 0x130478	FUN_00130478	44	yes	
@@ -2478,7 +2478,7 @@
 0x134b1c	pairIndex	60	yes	
 0x134b58	InterferenceMatrix__setPair	76	yes	
 0x134ba4	InterferenceMatrix__testPair	76	yes	
-0x134bf0	FUN_00134bf0	40	yes	
+0x134bf0	InterferenceGraph__resolveNode	40	yes	
 0x134c18	FUN_00134c18	188	yes	
 0x134cd4	FUN_00134cd4	20	yes	
 0x134ce8	ColorGraph__countSameClassNeighbors	200	yes	
@@ -2491,7 +2491,7 @@
 0x135110	FUN_00135110	148	yes	
 0x1351c4	FUN_001351c4	148	yes	
 0x135278	FUN_00135278	188	yes	
-0x135334	FUN_00135334	552	yes	
+0x135334	InterferenceGraph__addEdge	552	yes	
 0x13555c	FUN_0013555c	296	yes	
 0x135684	FUN_00135684	336	yes	
 0x1357d4	FUN_001357d4	300	yes	
@@ -2504,7 +2504,7 @@
 0x13719c	FUN_0013719c	692	no	indirect call (driver context / vtable / callback)
 0x137474	FUN_00137474	512	yes	
 0x137694	FUN_00137694	564	yes	
-0x1378e8	FUN_001378e8	1420	no	indirect call (driver context / vtable / callback)
+0x1378e8	RegAlloc__accumulateUseWeights	1420	no	indirect call (driver context / vtable / callback)
 0x137e74	BitSet__testRegisterLane	36	yes	
 0x137e98	FUN_00137e98	124	yes	
 0x137f14	FUN_00137f14	364	no	indirect call (driver context / vtable / callback)

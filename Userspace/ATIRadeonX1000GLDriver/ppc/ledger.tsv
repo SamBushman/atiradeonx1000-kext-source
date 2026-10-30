@@ -2235,12 +2235,12 @@
 0x121000	1160	FUN_00121000	part_037	converted
 0x1214fc	6188	pass_ssa_build	part_037	converted
 0x122de8	168	FUN_00122de8	part_037	converted
-0x122e90	44	FUN_00122e90	part_037	converted
+0x122e90	44	InternCache__constructByKind	part_037	converted
 0x122ebc	28	VReg__popDefinition	part_037	converted
 0x122ed8	80	ExportValue__vslot10	part_037	converted
-0x122f28	124	FUN_00122f28	part_037	converted
+0x122f28	124	IRInst__bindSourceFromValue	part_037	converted
 0x122fa4	200	VReg__currentDefinition	part_037	converted
-0x12306c	120	FUN_0012306c	part_037	converted
+0x12306c	120	VReg__appendUser	part_037	converted
 0x1230e4	268	ImmedConstBuffer__clone	part_037	converted
 0x123288	148	VertexRegister__clone	part_037	converted
 0x123398	140	VReg__setTopDefinition	part_037	converted
@@ -2326,9 +2326,9 @@
 0x127324	232	FUN_00127324	part_038	converted
 0x12740c	100	FUN_0012740c	part_038	converted
 0x127470	196	FUN_00127470	part_038	converted
-0x127534	108	FUN_00127534	part_038	converted
-0x1275a0	104	FUN_001275a0	part_038	converted
-0x127608	100	FUN_00127608	part_038	converted
+0x127534	108	InternCache__find	part_038	converted
+0x1275a0	104	InternCache__create	part_038	converted
+0x127608	100	InternCache__findOrCreate	part_038	converted
 0x12766c	52	ConstKey__compare1	part_038	converted
 0x1276a0	92	ConstKey__compare2	part_038	converted
 0x1276fc	124	ConstKey__compare3	part_038	converted
@@ -2426,7 +2426,7 @@
 0x12f0f8	3356	FUN_0012f0f8	part_040	converted
 0x12fe8c	476	Program__isRegionTrivial	part_040	converted
 0x1300b0	836	pass_remove_empty_graphs	part_040	converted
-0x1303f4	48	FUN_001303f4	part_040	converted
+0x1303f4	48	Array4__contains	part_040	converted
 0x130424	32	FUN_00130424	part_040	converted
 0x130444	52	Program__markHwRegUsed	part_040	converted
 0x130478	44	FUN_00130478	part_040	converted
@@ -2478,7 +2478,7 @@
 0x134b1c	60	pairIndex	part_041	converted
 0x134b58	76	InterferenceMatrix__setPair	part_041	converted
 0x134ba4	76	InterferenceMatrix__testPair	part_041	converted
-0x134bf0	40	FUN_00134bf0	part_041	converted
+0x134bf0	40	InterferenceGraph__resolveNode	part_041	converted
 0x134c18	188	FUN_00134c18	part_041	converted
 0x134cd4	20	FUN_00134cd4	part_041	converted
 0x134ce8	200	ColorGraph__countSameClassNeighbors	part_041	converted
@@ -2491,7 +2491,7 @@
 0x135110	148	FUN_00135110	part_041	converted
 0x1351c4	148	FUN_001351c4	part_041	converted
 0x135278	188	FUN_00135278	part_041	converted
-0x135334	552	FUN_00135334	part_041	converted
+0x135334	552	InterferenceGraph__addEdge	part_041	converted
 0x13555c	296	FUN_0013555c	part_041	converted
 0x135684	336	FUN_00135684	part_041	converted
 0x1357d4	300	FUN_001357d4	part_041	converted
@@ -2504,7 +2504,7 @@
 0x13719c	152	FUN_0013719c	part_041	converted
 0x137474	428	FUN_00137474	part_041	converted
 0x137694	456	FUN_00137694	part_041	converted
-0x1378e8	1420	FUN_001378e8	part_041	converted
+0x1378e8	1420	RegAlloc__accumulateUseWeights	part_041	converted
 0x137e74	36	BitSet__testRegisterLane	part_041	converted
 0x137e98	124	FUN_00137e98	part_041	converted
 0x137f14	364	FUN_00137f14	part_041	converted

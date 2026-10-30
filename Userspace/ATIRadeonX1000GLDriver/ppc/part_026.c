@@ -891,7 +891,7 @@ int Compiler__getOrCreateConstVectorN(owner, param_2, operandWord0, operandWord1
   foundEntry = HashTable__find(auStack_8c[param_2],*(undefined4 *)(owner + 0x28));
   if (foundEntry == 0) {
     uVar1 = FUN_000f4a5c(owner);
-    iVar4 = FUN_001275a0(owner,0xc,uVar1,0);
+    iVar4 = InternCache__create(owner,0xc,uVar1,0);
     piVar3 = *(int **)(iVar4 + 0x18);
     if (*piVar3 == 0) {
       piVar3 = (int *)Vector__elementRefGrow(piVar3,0);
@@ -1131,7 +1131,7 @@ LAB_000f6b68:
     if ((*(uint *)(program + 0x30) & 8) == 0) {
       uVar12 = *(undefined4 *)(program + 0x3ac);
       uVar4 = FUN_000f4a5c(uVar12);
-      iVar2 = FUN_001275a0(uVar12,0x33,uVar4,0);
+      iVar2 = InternCache__create(uVar12,0x33,uVar4,0);
       piVar5 = *(int **)(iVar2 + 0x18);
       if (*piVar5 == 0) {
         piVar5 = (int *)Vector__elementRefGrow(piVar5,0);
@@ -2589,7 +2589,7 @@ int IRInst__applyDescriptorSelects(program, param_2, overrideSelects, descriptor
       destRegisterId = *(undefined4 *)(inst + 0x94);
       tempId = *(int *)(*(int *)(program + 8) + 0x3c0) + 1;
       *(int *)(*(int *)(program + 8) + 0x3c0) = tempId;
-      tempId = FUN_00127608(registerMap,0x2a,tempId,0);
+      tempId = InternCache__findOrCreate(registerMap,0x2a,tempId,0);
       *(undefined4 *)(tempId + 0x30) = destRegisterId;
       IRInst__setOperandRef(inst,0,tempId);
       descriptorWord = *descriptor;
@@ -2987,7 +2987,7 @@ int FUN_000f94dc(program, list, descriptor, param_4, param_5, param_6, param_7)
   IRProjection__ctor_109e28(projectionInst,0x84,*(undefined4 *)(program + PROG_compiler));
   inputTempId = *(int *)(*(int *)(program + PROG_compiler) + 0x3b4) + 1;
   *(int *)(*(int *)(program + PROG_compiler) + 0x3b4) = inputTempId;
-  inputVReg = FUN_00127608(*(undefined4 *)(program + 0x3ac),0x3a,inputTempId,0);
+  inputVReg = InternCache__findOrCreate(*(undefined4 *)(program + 0x3ac),0x3a,inputTempId,0);
   *(undefined4 *)(inputVReg + 0x30) = 2;
   IRInst__setOperandRef(projectionInst,0,inputVReg);
   descriptorWord = *descriptor;
@@ -3231,7 +3231,7 @@ LAB_000f9f08:
       registerMap = *(undefined4 *)(pass + 0x3ac);
       tempId = *(int *)(*(int *)(pass + 8) + 0x3c0) + 1;
       *(int *)(*(int *)(pass + 8) + 0x3c0) = tempId;
-      tempId = FUN_00127608(registerMap,0x2a,tempId,0);
+      tempId = InternCache__findOrCreate(registerMap,0x2a,tempId,0);
       *(int *)(tempId + 0x30) = destRegisterIndex;
       IRInst__setOperandRef(setupInst,0,tempId);
       *descriptor = *descriptor & 0xfe7fffff;
@@ -3339,7 +3339,7 @@ LAB_000f9f08:
       }
       allocation[0x51] = uVar12;
       allocation[0x50] = 0x24;
-      virtualRegister = FUN_00127608(*(undefined4 *)(*(int *)(*(int *)(pass + 8) + 0x6c4) + 0x3ac),0x2c,0,0
+      virtualRegister = InternCache__findOrCreate(*(undefined4 *)(*(int *)(*(int *)(pass + 8) + 0x6c4) + 0x3ac),0x2c,0,0
                           );
       IRInst__setOperandRef(puVar21,0,virtualRegister);
       operandRecord = IRInst__getOperandRecord(puVar21,1);
@@ -3374,7 +3374,7 @@ LAB_000fa1bc:
       allocation[0x28] = uVar14;
       allocation[0x50] = 0x24;
       allocation[0x51] = uVar12;
-      virtualRegister = FUN_00127608(*(undefined4 *)(*(int *)(*(int *)(pass + 8) + 0x6c4) + 0x3ac),0x2c,0,0
+      virtualRegister = InternCache__findOrCreate(*(undefined4 *)(*(int *)(*(int *)(pass + 8) + 0x6c4) + 0x3ac),0x2c,0,0
                           );
       IRInst__setOperandRef(puVar21,0,virtualRegister);
       operandRecord = IRInst__getOperandRecord(puVar21,1);
@@ -3796,7 +3796,7 @@ int Program__createConstantVReg(program, ilRegisterType, registerIndex, valueCou
   
   registerMapArg = *(undefined4 *)(program + 0x3ac);
   registerFile = Program__registerFileOfIlType(program,ilRegisterType);
-  virtualRegister = FUN_00127608(registerMapArg,registerFile,registerIndex,0);
+  virtualRegister = InternCache__findOrCreate(registerMapArg,registerFile,registerIndex,0);
   firstRecordSlot = *(int **)(virtualRegister + 0x18);
   if (*firstRecordSlot == 0) {
     firstRecordSlot = (int *)Vector__elementRefGrow(firstRecordSlot,0);
@@ -4102,7 +4102,7 @@ int FUN_000fb3d4(program, list, tokenWords, descriptor, param_5, argR8, movByReg
     if ((descriptorWord & 0x10000) == 0) {
       pdVar31 = (dword *)(*(int *)(iVar20 + 0x3b4) + 1);
       *(dword **)(iVar20 + 0x3b4) = pdVar31;
-      virtualRegisterB = FUN_00127608(*(undefined4 *)(program + 0x3ac),0x26,pdVar31,0);
+      virtualRegisterB = InternCache__findOrCreate(*(undefined4 *)(program + 0x3ac),0x26,pdVar31,0);
       *(dword **)(virtualRegisterB + 0x30) = pdVar25;
       arenaA = *(undefined4 *)(*(int *)(program + 8) + 0x374);
       allocation = (undefined4 *)Arena__alloc(arenaA,0x168);
@@ -4112,7 +4112,7 @@ int FUN_000fb3d4(program, list, tokenWords, descriptor, param_5, argR8, movByReg
       IRInst__setOperandRef(newInstObj,0,virtualRegisterB);
       pdVar18 = (dword *)0x0;
       registerType = 0x22;
-      pdVar25 = (dword *)FUN_00127608(*(undefined4 *)(program + 0x3ac),0x25,(uint)uVar1,0);
+      pdVar25 = (dword *)InternCache__findOrCreate(*(undefined4 *)(program + 0x3ac),0x25,(uint)uVar1,0);
       pdVar17 = pdVar25;
       IRInst__setOperandRef(newInstObj,1,pdVar25);
       modifierSelectWord = *(undefined4 *)(PTR_DAT_001e8b8c + (descriptorWord >> 0x11 & 7) * 4);
@@ -4131,12 +4131,12 @@ int FUN_000fb3d4(program, list, tokenWords, descriptor, param_5, argR8, movByReg
       iVar20 = *stackTopEntry;
       *(undefined4 *)(iVar20 + 0x140) = 1;
       virtualRegister = FUN_000e7d5c(iVar20);
-      virtualRegister = FUN_00127608(*(undefined4 *)(program + 0x3ac),0x27,virtualRegister,0);
+      virtualRegister = InternCache__findOrCreate(*(undefined4 *)(program + 0x3ac),0x27,virtualRegister,0);
       if (registerType == 1) {
         pdVar18 = (dword *)0x0;
         pdVar31 = (dword *)(*(int *)(*(int *)(program + 8) + 0x3b8) + 1);
         *(dword **)(*(int *)(program + 8) + 0x3b8) = pdVar31;
-        createdVReg = FUN_00127608(*(undefined4 *)(program + 0x3ac),0x28,pdVar31,0);
+        createdVReg = InternCache__findOrCreate(*(undefined4 *)(program + 0x3ac),0x28,pdVar31,0);
         *(dword **)(createdVReg + 0x30) = pdVar25;
         arenaAt374 = *(undefined4 *)(*(int *)(program + 8) + 0x374);
         allocation = (undefined4 *)Arena__alloc(arenaAt374,0x168);
@@ -4147,7 +4147,7 @@ int FUN_000fb3d4(program, list, tokenWords, descriptor, param_5, argR8, movByReg
         IRInst__setOperandRef(pdVar17,1,virtualRegister);
         registerType = 0x23;
         Block__appendInst(iVar20,pdVar17);
-        FUN_0012306c(createdVReg,pdVar17);
+        VReg__appendUser(createdVReg,pdVar17);
         VReg__addUse(virtualRegister,1,pdVar17);
         r4Sink = callResidualR4_0;
       }
@@ -4172,7 +4172,7 @@ int FUN_000fb3d4(program, list, tokenWords, descriptor, param_5, argR8, movByReg
         registerMap = *(undefined4 *)(program + 0x3ac);
         registerFile2 = Program__registerFileOfIlType(program,0x24);
         pdVar18 = (dword *)0x0;
-        createdVReg = FUN_00127608(registerMap,registerFile2,pdVar31,0);
+        createdVReg = InternCache__findOrCreate(registerMap,registerFile2,pdVar31,0);
         *(dword **)(createdVReg + 0x30) = pdVar25;
         arenaAt374 = *(undefined4 *)(*(int *)(program + 8) + 0x374);
         allocation = (undefined4 *)Arena__alloc(arenaAt374,0x168);
@@ -4183,7 +4183,7 @@ int FUN_000fb3d4(program, list, tokenWords, descriptor, param_5, argR8, movByReg
         IRInst__setOperandRef(pdVar17,1,virtualRegister);
         registerType = 0x24;
         Block__appendInst(iVar20,pdVar17);
-        FUN_0012306c(createdVReg,pdVar17);
+        VReg__appendUser(createdVReg,pdVar17);
         VReg__addUse(virtualRegister,1,pdVar17);
         r4Sink = callResidualR4_0B;
       }
@@ -5608,7 +5608,7 @@ code_r0x000fed00:
             if (((*(uint *)(program + 0x30) & 1) != 0) && (iVar47 < registerIndex + 1)) {
               do {
                 argR6 = (uint ******)0x0;
-                FUN_00127608(*(undefined4 *)(program + 0x3ac),registerFile2,iVar47,0);
+                InternCache__findOrCreate(*(undefined4 *)(program + 0x3ac),registerFile2,iVar47,0);
                 iVar47 = iVar47 + 1;
               } while (iVar47 < *(int *)(program + 0x3ec));
             }
@@ -5629,7 +5629,7 @@ code_r0x000fed00:
         if (((*(uint *)(program + 0x30) & 1) != 0) && (iVar47 < registerIndex + 1)) {
           do {
             argR6 = (uint ******)0x0;
-            FUN_00127608(*(undefined4 *)(program + 0x3ac),registerFile2,iVar47,0);
+            InternCache__findOrCreate(*(undefined4 *)(program + 0x3ac),registerFile2,iVar47,0);
             iVar47 = iVar47 + 1;
           } while (iVar47 < *(int *)(program + 0x3ec));
         }
@@ -5650,7 +5650,7 @@ code_r0x000fed00:
         }
         registerFile = Program__registerFileOfIlType(program,ilRegisterType);
         argR6 = (uint ******)Program__laneKindOfInterpSlot(program,ilRegisterType);
-        iVar34 = FUN_00127608(*(undefined4 *)(program + 0x3ac),registerFile,ppppppuVar19,0);
+        iVar34 = InternCache__findOrCreate(*(undefined4 *)(program + 0x3ac),registerFile,ppppppuVar19,0);
         iVar34 = *(int *)(iVar34 + 0x38);
         IRLoadInterp__setLane(iVar34,0,(uint)*tokenWords >> 0x10 & 3,argR6,ppppppuVar19);
         IRLoadInterp__setLane(iVar34,1,(uint)*tokenWords >> 0x12 & 3,argR6,ppppppuVar19);
@@ -5700,7 +5700,7 @@ code_r0x000fed00:
       *(int *)(program + 0x3ec) = iVar47;
       *(undefined4 *)(program + 0x3f4) = 0x24;
       argR6 = (uint ******)0x0;
-      iVar34 = FUN_00127608(*(undefined4 *)(program + 0x3ac),registerFile,registerIndex,0);
+      iVar34 = InternCache__findOrCreate(*(undefined4 *)(program + 0x3ac),registerFile,registerIndex,0);
       iVar34 = *(int *)(iVar34 + 0x38);
       if (uVar10 == 0) {
         *(uint *)(iVar34 + 0x13c) = *(uint *)(iVar34 + 0x13c) | 1;
@@ -5856,7 +5856,7 @@ code_r0x000fed00:
       *(int *)(program + 0x3ec) = iVar20;
       *(undefined4 *)(program + 0x3f4) = 0x24;
       argR6 = (uint ******)0x0;
-      virtualRegister2 = (int *)FUN_00127608(*(undefined4 *)(program + 0x3ac),registerFile,registerIndex,0);
+      virtualRegister2 = (int *)InternCache__findOrCreate(*(undefined4 *)(program + 0x3ac),registerFile,registerIndex,0);
       registerInfo = (**(code **)(*virtualRegister2 + 0x2c))();
       selectWordPtr = &stagedSelectWord;
       loopCounterC = 0;
@@ -5899,7 +5899,7 @@ code_r0x000fed00:
       *instAllocation = compilerArenaA;
       piVar18 = instAllocation + 1;
       IRInst__ctor_10502c(piVar18,0x94,*(undefined4 *)(program + 8));
-      virtualRegister = FUN_00127608(*(undefined4 *)(program + 0x3ac),0x2f,0,0);
+      virtualRegister = InternCache__findOrCreate(*(undefined4 *)(program + 0x3ac),0x2f,0,0);
       IRInst__setOperandRef(piVar18,0,virtualRegister);
       instAllocation[0x4c] = 0;
       ((int (*)())Program__appendInst)(program,piVar18,currentBlock);
@@ -5924,7 +5924,7 @@ code_r0x000fed00:
         iVar34 = (int)*(short *)((int)ilReader[0x1b][1] + 2);
       }
       registerFile27 = Program__registerFileOfIlType(program,(uint)source1Token >> 0x10 & 0x3f);
-      virtualRegisterB = FUN_00127608(*(undefined4 *)(program + 0x3ac),0x2b,0,0);
+      virtualRegisterB = InternCache__findOrCreate(*(undefined4 *)(program + 0x3ac),0x2b,0,0);
       mulAddInst = IRInst__create(0x14,*(undefined4 *)(program + 8));
       operandRecord2 = IRInst__getOperandRecord(mulAddInst,1);
       *(undefined4 *)(operandRecord2 + 0xc) = registerFileB;
@@ -6087,7 +6087,7 @@ code_r0x000fed00:
         pppppuVar52 = ilReader[10];
         argR6 = (uint ******)0x0;
         trailingToken = ilReader[(int)ilReader[0x16] + 0x23];
-        virtualRegister = FUN_00127608(*(undefined4 *)(program + 0x3ac),0x43,0xffffffff,0);
+        virtualRegister = InternCache__findOrCreate(*(undefined4 *)(program + 0x3ac),0x43,0xffffffff,0);
         iVar34 = IRImmedConstBuff__new_109b74(0x10a,*(undefined4 *)(program + 8));
         *(int *)(program + 0x354) = iVar34;
         IRInst__setOperandRef(iVar34,0,virtualRegister);
@@ -6225,7 +6225,7 @@ code_r0x000fed00:
             *(uint *******)(*(int *)(program + 0x3ac) + 100) = ppppppuVar19;
           }
           argR6 = (uint ******)0x0;
-          virtualRegister2 = (int *)FUN_00127608(*(undefined4 *)(program + 0x3ac),registerFile,ppppppuVar19,0);
+          virtualRegister2 = (int *)InternCache__findOrCreate(*(undefined4 *)(program + 0x3ac),registerFile,ppppppuVar19,0);
           iVar43 = (**(code **)(*virtualRegister2 + 0x2c))();
           selectWordPtr = &stagedSelectWord;
           *(uint *******)(iVar43 + 0x140) = ppppppuVar19;
@@ -6344,7 +6344,7 @@ code_r0x000feeb8:
         *(undefined4 *)(program + 0x3f4) = 0x24;
         argR7 = (uint ******)0x4050607;
         if ((*(uint *)(program + 0x30) & 1) == 0) {
-          iVar34 = FUN_00127608(*(undefined4 *)(program + 0x3ac),registerFile,ppppppuVar48,0);
+          iVar34 = InternCache__findOrCreate(*(undefined4 *)(program + 0x3ac),registerFile,ppppppuVar48,0);
           iVar34 = *(int *)(iVar34 + 0x38);
           if (!clearsInfoFlag1) {
             *(uint *)(iVar34 + 0x13c) = *(uint *)(iVar34 + 0x13c) | 1;
@@ -6387,7 +6387,7 @@ code_r0x000feeb8:
           argR6 = (uint ******)0x0;
           newTempIndex = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
           *(int *)(*(int *)(program + 8) + 0x3ac) = newTempIndex;
-          virtualRegister = FUN_00127608(*(undefined4 *)(program + 0x3ac),0,newTempIndex,0);
+          virtualRegister = InternCache__findOrCreate(*(undefined4 *)(program + 0x3ac),0,newTempIndex,0);
           IRInst__setOperandRef(ppppppuVar49,0,virtualRegister);
           goto code_r0x000ff070;
         }
@@ -6444,11 +6444,11 @@ code_r0x000feeb8:
       registerMap = *(undefined4 *)(program + 0x3ac);
       newTempIndex = *(int *)(compiler + 0x3ac) + -1;
       *(int *)(compiler + 0x3ac) = newTempIndex;
-      virtualRegister = FUN_00127608(registerMap,0,newTempIndex,0);
+      virtualRegister = InternCache__findOrCreate(registerMap,0,newTempIndex,0);
       uVar50 = *(undefined4 *)(program + 0x3ac);
       newTempIndex = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
       *(int *)(*(int *)(program + 8) + 0x3ac) = newTempIndex;
-      uVar50 = FUN_00127608(uVar50,0,newTempIndex,0);
+      uVar50 = InternCache__findOrCreate(uVar50,0,newTempIndex,0);
       movFloatInst = IRInst__create(0x31,*(undefined4 *)(program + 8));
       IRInst__setOperandRef(movFloatInst,0,uVar50);
       selectWordPtr = &stagedSelectWord;
@@ -6506,7 +6506,7 @@ code_r0x000ff070:
         iVar34 = (int)*(short *)((int)*ilReader[0x1b] + 2);
       }
       ilRegisterType = (uint)source0Token >> 0x10 & 0x3f;
-      iVar43 = FUN_00127534(*(undefined4 *)(program + 0x3ac),0x2c,0,0);
+      iVar43 = InternCache__find(*(undefined4 *)(program + 0x3ac),0x2c,0,0);
       if (iVar43 == 0) {
         compilerArenaA = *(undefined4 *)(*(int *)(program + 8) + 0x374);
         instAllocation = (undefined4 *)Arena__alloc(compilerArenaA,0x168);
@@ -6516,13 +6516,13 @@ code_r0x000ff070:
         instAllocation[6] = instAllocation[6] | 0x10000;
         *(undefined4 **)(program + 0x350) = puVar24;
         instAllocation[0x28] = 0;
-        iVar43 = FUN_001275a0(*(undefined4 *)(program + 0x3ac),0x2c,0,0);
+        iVar43 = InternCache__create(*(undefined4 *)(program + 0x3ac),0x2c,0,0);
         IRInst__setOperandRef(puVar24,0,iVar43);
         IRInst__setOperandRef(puVar24,1,iVar43);
         iVar47 = IRInst__getOperandRecord(puVar24,1);
         *(undefined4 *)(iVar47 + 0x10) = 0x10203;
         Block__appendInst(*(undefined4 *)(program + 0x3a8),puVar24);
-        FUN_0012306c(iVar43,puVar24);
+        VReg__appendUser(iVar43,puVar24);
         VReg__addUse(iVar43,1,puVar24);
       }
       IRInst__setOperandRef(ppppppuVar19,0,iVar43);
@@ -7139,13 +7139,13 @@ code_r0x00101020:
       registerMap = *(undefined4 *)(program + 0x3ac);
       newTempIndex2 = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
       *(int *)(*(int *)(program + 8) + 0x3ac) = newTempIndex2;
-      fetchResultTemp = FUN_00127608(registerMap,0,newTempIndex2,0);
+      fetchResultTemp = InternCache__findOrCreate(registerMap,0,newTempIndex2,0);
       stagedSelectWord = *(uint *******)(local_60 + -0x2c30);
       local_124 = *(uint ******)(local_78 + -0x2bfc);
       registerMap = *(undefined4 *)(program + 0x3ac);
       newTempIndex2 = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
       *(int *)(*(int *)(program + 8) + 0x3ac) = newTempIndex2;
-      virtualRegister = FUN_00127608(registerMap,0,newTempIndex2,0);
+      virtualRegister = InternCache__findOrCreate(registerMap,0,newTempIndex2,0);
       movFloatInst = IRInst__create(0x31,*(undefined4 *)(program + 8));
       IRInst__setOperandRef(movFloatInst,0,virtualRegister);
       selectWordPtr = &stagedSelectWord;
@@ -7155,7 +7155,7 @@ code_r0x00101020:
         cubeCoordTemp = *(undefined4 *)(program + 0x3ac);
         newTempIndex2 = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
         *(int *)(*(int *)(program + 8) + 0x3ac) = newTempIndex2;
-        extraOperandTemp1 = FUN_00127608(cubeCoordTemp,0,newTempIndex2,0);
+        extraOperandTemp1 = InternCache__findOrCreate(cubeCoordTemp,0,newTempIndex2,0);
         movFloatInst = IRInst__create(0x31,*(undefined4 *)(program + 8));
         IRInst__setOperandRef(movFloatInst,0,extraOperandTemp1);
         ((int (*)())FUN_000fa958)(program,10,1,ilReader,movFloatInst,1,local_124,selectWordPtr,loopStackData,1,currentBlock);
@@ -7169,7 +7169,7 @@ code_r0x00101020:
         cubeCoordTemp = *(undefined4 *)(program + 0x3ac);
         newTempIndex2 = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
         *(int *)(*(int *)(program + 8) + 0x3ac) = newTempIndex2;
-        extraOperandTemp2 = FUN_00127608(cubeCoordTemp,0,newTempIndex2,0);
+        extraOperandTemp2 = InternCache__findOrCreate(cubeCoordTemp,0,newTempIndex2,0);
         movFloatInst = IRInst__create(0x31,*(undefined4 *)(program + 8));
         IRInst__setOperandRef(movFloatInst,0,extraOperandTemp2);
         ((int (*)())FUN_000fa958)(program,0xe,1,ilReader,movFloatInst,1,local_124,selectWordPtr,loopStackData,1,currentBlock);
@@ -7193,7 +7193,7 @@ code_r0x00101020:
         cubeCoordTemp = *(undefined4 *)(program + 0x3ac);
         newTempIndex2 = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
         *(int *)(*(int *)(program + 8) + 0x3ac) = newTempIndex2;
-        cubeCoordTemp = FUN_00127608(cubeCoordTemp,0,newTempIndex2,0);
+        cubeCoordTemp = InternCache__findOrCreate(cubeCoordTemp,0,newTempIndex2,0);
         cubeInst = IRInst__create(0x1b,*(undefined4 *)(program + 8));
         IRInst__setOperandRef(cubeInst,0,cubeCoordTemp);
         IRInst__setOperandRef(cubeInst,1,virtualRegister);
@@ -7249,7 +7249,7 @@ code_r0x00101020:
       if (hasGradients) {
         setGradientsVInst = IRInst__create(0x73,*(undefined4 *)(program + 8));
         setGradientsHInst = IRInst__create(0x72,*(undefined4 *)(program + 8));
-        virtualRegister = FUN_00127608(*(undefined4 *)(program + 0x3ac),0x1e,0,0);
+        virtualRegister = InternCache__findOrCreate(*(undefined4 *)(program + 0x3ac),0x1e,0,0);
         IRInst__setOperandRef(setGradientsVInst,0,virtualRegister);
         IRInst__setOperandRef(setGradientsVInst,1,extraOperandTemp1);
         IRInst__setOperandRef(setGradientsHInst,0,virtualRegister);
@@ -7268,7 +7268,7 @@ code_r0x00101020:
           fetchCoordTemp = *(undefined4 *)(program + 0x3ac);
           newTempIndex2 = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
           *(int *)(*(int *)(program + 8) + 0x3ac) = newTempIndex2;
-          fetchCoordTemp = FUN_00127608(fetchCoordTemp,0,newTempIndex2,0);
+          fetchCoordTemp = InternCache__findOrCreate(fetchCoordTemp,0,newTempIndex2,0);
           movFloatInst = IRInst__create(0x31,*(undefined4 *)(program + 8));
           IRInst__setOperandRef(movFloatInst,0,fetchCoordTemp);
           *(undefined4 *)((int)movFloatInst + 0x9c) = 1;
@@ -7405,7 +7405,7 @@ code_r0x001019bc:
       registerMap = *(undefined4 *)(program + 0x3ac);
       newTempIndex2 = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
       *(int *)(*(int *)(program + 8) + 0x3ac) = newTempIndex2;
-      virtualRegister = FUN_00127608(registerMap,0,newTempIndex2,0);
+      virtualRegister = InternCache__findOrCreate(registerMap,0,newTempIndex2,0);
       local_124 = (uint *****)0x1;
       pppppuVar52 = *(uint ******)(local_60 + -0x2c30);
       stagedSelectWord = (uint ******)pppppuVar52;
@@ -7490,13 +7490,13 @@ code_r0x001019bc:
       registerMap = *(undefined4 *)(program + 0x3ac);
       newTempIndex2 = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
       *(int *)(*(int *)(program + 8) + 0x3ac) = newTempIndex2;
-      fetchResultTemp2 = FUN_00127608(registerMap,0,newTempIndex2,0);
+      fetchResultTemp2 = InternCache__findOrCreate(registerMap,0,newTempIndex2,0);
       stagedSelectWord = *(uint *******)(local_60 + -0x2c30);
       local_124 = *(uint ******)(local_78 + -0x2bfc);
       registerMap = *(undefined4 *)(program + 0x3ac);
       newTempIndex2 = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
       *(int *)(*(int *)(program + 8) + 0x3ac) = newTempIndex2;
-      coordTemp = FUN_00127608(registerMap,0,newTempIndex2,0);
+      coordTemp = InternCache__findOrCreate(registerMap,0,newTempIndex2,0);
       movFloatInst = IRInst__create(0x31,*(undefined4 *)(program + 8));
       IRInst__setOperandRef(movFloatInst,0,coordTemp);
       selectWordPtr = &stagedSelectWord;
@@ -7507,7 +7507,7 @@ code_r0x001019bc:
         registerMap = *(undefined4 *)(program + 0x3ac);
         newTempIndex2 = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
         *(int *)(*(int *)(program + 8) + 0x3ac) = newTempIndex2;
-        virtualRegister = FUN_00127608(registerMap,0,newTempIndex2,0);
+        virtualRegister = InternCache__findOrCreate(registerMap,0,newTempIndex2,0);
         movFloatInst = IRInst__create(0x31,*(undefined4 *)(program + 8));
         IRInst__setOperandRef(movFloatInst,0,virtualRegister);
         ((int (*)())FUN_000fa958)(program,10,1,ilReader,movFloatInst,1,local_124,selectWordPtr,loopStackData,1,currentBlock);
@@ -7515,7 +7515,7 @@ code_r0x001019bc:
         gradientYTemp = *(undefined4 *)(program + 0x3ac);
         newTempIndex2 = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
         *(int *)(*(int *)(program + 8) + 0x3ac) = newTempIndex2;
-        gradientYTemp = FUN_00127608(gradientYTemp,0,newTempIndex2,0);
+        gradientYTemp = InternCache__findOrCreate(gradientYTemp,0,newTempIndex2,0);
         movFloatInst = IRInst__create(0x31,*(undefined4 *)(program + 8));
         IRInst__setOperandRef(movFloatInst,0,gradientYTemp);
         ((int (*)())FUN_000fa958)(program,0xe,1,ilReader,movFloatInst,1,local_124,selectWordPtr,loopStackData,1,currentBlock);
@@ -8076,7 +8076,7 @@ code_r0x00101f74:
       uVar50 = *(undefined4 *)(program + 0x3ac);
       registerFile = Program__registerFileOfIlType(program,ilRegisterType);
       argR6 = (uint ******)0x0;
-      virtualRegister43 = FUN_00127608(uVar50,registerFile,(int)registerIndex2,0);
+      virtualRegister43 = InternCache__findOrCreate(uVar50,registerFile,(int)registerIndex2,0);
       if (((uint)firstTokenWord >> 0x10 & 0x3fff) == 0) goto switchD_0010061c_caseD_1;
       local_bc = 0;
       *(undefined4 *)(virtualRegister43 + 0x30) = 1;
@@ -8158,7 +8158,7 @@ code_r0x00101f74:
         argR6 = (uint ******)0x0;
         newTempIndex21 = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
         *(int *)(*(int *)(program + 8) + 0x3ac) = newTempIndex21;
-        virtualRegister = FUN_00127608(registerMap,0,newTempIndex21,0);
+        virtualRegister = InternCache__findOrCreate(registerMap,0,newTempIndex21,0);
         movFloatInst = IRInst__create(0x31,*(undefined4 *)(program + 8));
         IRInst__setOperandRef(movFloatInst,1,virtualRegister);
         pppppuVar52 = ppppppuVar38[0x25];

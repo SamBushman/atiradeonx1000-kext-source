@@ -541,14 +541,14 @@ int KhanPs__vslot5_materializeSpecialRegister(this, registerKind, compiler)
   
   if (registerKind == 1) {
     program = *(int *)(compiler + COMP_currentProgram);
-    callResult = FUN_00127534(*(undefined4 *)(program + 0x3ac),0x1b,0,0);
+    callResult = InternCache__find(*(undefined4 *)(program + 0x3ac),0x1b,0,0);
     if (callResult != 0) {
       IRLoadInterp__setLane(*(undefined4 *)(callResult + 0x38),3,3,8,0);
       constantPool = *(undefined4 *)(program + 0x3ac);
       nextRegNumber = *(int *)(compiler + 0x3ac) + -1;
       *(int *)(compiler + 0x3ac) = nextRegNumber;
       listByteOffset = 0;
-      newRegister = FUN_001275a0(constantPool,0,nextRegNumber,0);
+      newRegister = InternCache__create(constantPool,0,nextRegNumber,0);
       for (loopIndex = 1; loopIndex <= *(uint *)(*(int *)(callResult + 0x14) + 4); loopIndex = loopIndex + 1) {
         userInst = *(int *)(listByteOffset + *(int *)(*(int *)(callResult + 0x14) + 8));
         if (((*(uint *)(userInst + 0x14) & 1) != 0) && (operandIndex = 1, 0 < *(int *)(userInst + 0x84))) {
@@ -575,7 +575,7 @@ int KhanPs__vslot5_materializeSpecialRegister(this, registerKind, compiler)
         literalValue = (double)FLOAT_001aa0e8;
         ((void (*)())IRInst__makeLiteralVec4Float)(newInst,*(undefined4 *)(compiler + COMP_currentProgram),3,literalValue,literalValue,literalValue,literalValue);
         VReg__addUse(callResult,1,newInst);
-        FUN_0012306c(newRegister,newInst);
+        VReg__appendUser(newRegister,newInst);
         Block__appendInst(*(undefined4 *)(program + 0x3a0),newInst);
         (**(code **)(*newInst + 8))(newInst,compiler);
       }
@@ -587,7 +587,7 @@ int KhanPs__vslot5_materializeSpecialRegister(this, registerKind, compiler)
         srcRecord = IRInst__getOperandRecord(newInst,1);
         *(undefined4 *)(srcRecord + 0x10) = selectWord;
         VReg__addUse(callResult,1,newInst);
-        FUN_0012306c(newRegister,newInst);
+        VReg__appendUser(newRegister,newInst);
         Block__appendInst(*(undefined4 *)(program + 0x3a0),newInst);
         (**(code **)(*newInst + 8))(newInst,compiler);
       }
@@ -2208,27 +2208,27 @@ int FUN_0012b140(block)
 }
 
 /* FUN_0012b248 @ 0x12b248 (144 bytes) */
-int FUN_0012b248(param_1, block, param_3)
+int FUN_0012b248(param_1, block, program)
   int param_1;
   undefined4 block;
-  int param_3;
+  int program;
 {
   undefined4 inst;
   int operandRecord;
-  undefined4 uVar3;
-  int iVar4;
+  undefined4 sourceValue;
+  int newVRegId;
   
-  iVar4 = *(int *)(*(int *)(param_3 + 8) + 0x3ac) + -1;
-  *(int *)(*(int *)(param_3 + 8) + 0x3ac) = iVar4;
-  inst = IRInst__create(0x31,*(undefined4 *)(param_3 + 8));
+  newVRegId = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
+  *(int *)(*(int *)(program + 8) + 0x3ac) = newVRegId;
+  inst = IRInst__create(0x31,*(undefined4 *)(program + 8));
   operandRecord = IRInst__getOperandRecord(inst,0);
-  uVar3 = *(undefined4 *)(param_1 + 0x8c);
+  sourceValue = *(undefined4 *)(param_1 + 0x8c);
   *(undefined4 *)(operandRecord + 0xc) = 0;
-  *(int *)(operandRecord + 8) = iVar4;
-  IRInst__setOperandRef(inst,1,uVar3);
-  IRInst__bindOperandRegisters(param_3,inst);
+  *(int *)(operandRecord + 8) = newVRegId;
+  IRInst__setOperandRef(inst,1,sourceValue);
+  IRInst__bindOperandRegisters(program,inst);
   Block__appendInst(block,inst);
-  return iVar4;
+  return newVRegId;
 }
 
 /* FUN_0012b2d8 @ 0x12b2d8 (132 bytes) */

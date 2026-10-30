@@ -1,0 +1,10 @@
+func	FUN_0012306c	VReg__appendUser	INFERRED	appends param 2 to the vector at vreg+0x18 (grow-on-demand Vector idiom); called with new instructions that read the register
+func	FUN_00134bf0	InterferenceGraph__resolveNode	INFERRED	returns disjointSetFindRoot(node, graph+0x20) when flag set, else the direct entry of the alias table at graph+0x20
+func	FUN_00135334	InterferenceGraph__addEdge	INFERRED	if nodeA!=nodeB and testPair false: setPair then insert each node into the other's neighbour list (graph+4 node vector)
+func	FUN_00122f28	IRInst__bindSourceFromValue	INFERRED	copies value register/kind (value+0x10/+4) into inst+0x94/+0x98 and sets flag 0x40
+func	FUN_00127534	InternCache__find	INFERRED	fills scratch key at cache+0x24 and looks it up with HashTable__find(cache+4)
+func	FUN_001275a0	InternCache__create	INFERRED	creates the entry via FUN_00122e90 and HashTable__insert(cache+4)
+func	FUN_00127608	InternCache__findOrCreate	INFERRED	InternCache__find, else InternCache__create
+func	FUN_00122e90	InternCache__constructByKind	INFERRED	dispatch through table PTR_PTR_001e8c60[kind*0x10+0xc]
+func	FUN_001378e8	RegAlloc__accumulateUseWeights	INFERRED	per dest/source register adds loop-depth weight*100 (or 0x7fffffff when inst flag 0x40) into reginfo+0x1c
+func	FUN_001303f4	Array4__contains	INFERRED	linear search of a 4-entry int table

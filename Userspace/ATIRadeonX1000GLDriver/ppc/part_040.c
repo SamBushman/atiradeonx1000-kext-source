@@ -655,7 +655,7 @@ int FUN_0012c3d0(inst, registerBase, program)
       if ((instQuery18 == 1) && (instQuery18 = IRInst__operandKindClass(inst,0), instQuery18 == 1)) {
         vregListB = *(undefined4 *)(program + 0x3ac);
         definingField128 = IRInst__getDefiningField128(inst,0);
-        newDestVReg = (int *)FUN_00127608(vregListB,0x24,definingField128 + registerBase,0);
+        newDestVReg = (int *)InternCache__findOrCreate(vregListB,0x24,definingField128 + registerBase,0);
         destRebaseFn = *(code **)(*newDestVReg + 0x28);
         operandRecord = IRInst__getOperandRecord(inst,0);
         rebasedDestRef = (*destRebaseFn)(newDestVReg,*(undefined4 *)(operandRecord + 0x10),program);
@@ -687,7 +687,7 @@ int FUN_0012c3d0(inst, registerBase, program)
           vregList = *(undefined4 *)(program + 0x3ac);
         }
       }
-      registerFileKind = FUN_00127608(vregList,registerFileKind,registerBase + definingField1282,0);
+      registerFileKind = InternCache__findOrCreate(vregList,registerFileKind,registerBase + definingField1282,0);
       IRInst__setOperandRef(inst,operandNumber,registerFileKind);
     }
 LAB_0012c498:
@@ -3140,23 +3140,23 @@ LAB_0013037c:
   return Program__beginPass(program,(int)"remove_empty_graphs");
 }
 
-/* FUN_001303f4 @ 0x1303f4 (48 bytes) */
-int FUN_001303f4(param_1, param_2)
-  int param_1;
-  int param_2;
+/* Array4__contains @ 0x1303f4 (48 bytes) */
+int Array4__contains(value, table)
+  int value;
+  int table;
 {
-  int iVar1;
-  int iVar2;
+  int byteOffset;
+  int remaining;
   
-  iVar1 = 0;
-  iVar2 = 4;
+  byteOffset = 0;
+  remaining = 4;
   do {
-    if (*(int *)(iVar1 + param_2) == param_1) {
+    if (*(int *)(byteOffset + table) == value) {
       return 1;
     }
-    iVar1 = iVar1 + 4;
-    iVar2 = iVar2 + -1;
-  } while (iVar2 != 0);
+    byteOffset = byteOffset + 4;
+    remaining = remaining + -1;
+  } while (remaining != 0);
   return 0;
 }
 
@@ -3490,24 +3490,24 @@ int Program__isHwRegAllowed(program, hwReg)
 }
 
 /* FUN_00130a08 @ 0x130a08 (112 bytes) */
-int FUN_00130a08(param_1, param_2)
-  undefined4 param_1;
-  int param_2;
+int FUN_00130a08(inst, targetId)
+  undefined4 inst;
+  int targetId;
 {
   int iVar1;
-  int *piVar2;
+  int *cursorInst;
   
-  iVar1 = ((int (*)())FUN_00130728)(param_1);
-  piVar2 = *(int **)(iVar1 + 4);
+  iVar1 = ((int (*)())FUN_00130728)(inst);
+  cursorInst = *(int **)(iVar1 + 4);
   while( true ) {
-    iVar1 = (**(code **)(*piVar2 + 0x74))(piVar2);
+    iVar1 = (**(code **)(*cursorInst + 0x74))(cursorInst);
     if (iVar1 == 0) {
       return (int *)0x0;
     }
-    if (*(int *)(piVar2[0x30] + 0x13c) == param_2) break;
-    piVar2 = (int *)piVar2[1];
+    if (*(int *)(cursorInst[0x30] + 0x13c) == targetId) break;
+    cursorInst = (int *)cursorInst[1];
   }
-  return piVar2;
+  return cursorInst;
 }
 
 /* FUN_00130a78 @ 0x130a78 (68 bytes) */

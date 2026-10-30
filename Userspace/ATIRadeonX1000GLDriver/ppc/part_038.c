@@ -88,7 +88,7 @@ int ExportSlot__ctor_12622c(this, param_2, param_3, param_4, compiler)
     IRExport__ctor_108918(exportInst,compiler);
     allocation[0x28] = DAT_001afef0;
     IRInst__setOperandRef(exportInst,0,this);
-    FUN_0012306c(this,exportInst);
+    VReg__appendUser(this,exportInst);
     IRInst__setOperandRef(exportInst,1,this);
     exportStreamValue = DAT_001afeec;
     operandRecord = IRInst__getOperandRecord(exportInst,1);
@@ -126,7 +126,7 @@ int ExportSlot__ctor_126378(this, param_2, param_3, param_4, compiler)
     IRExport__ctor_108918(exportInst,compiler);
     allocation[0x28] = DAT_001afef0;
     IRInst__setOperandRef(exportInst,0,this);
-    FUN_0012306c(this,exportInst);
+    VReg__appendUser(this,exportInst);
     IRInst__setOperandRef(exportInst,1,this);
     exportStreamValue = DAT_001afeec;
     operandRecord = IRInst__getOperandRecord(exportInst,1);
@@ -777,57 +777,57 @@ int FUN_00127470(owner)
   return;
 }
 
-/* FUN_00127534 @ 0x127534 (108 bytes) */
-int FUN_00127534(param_1, param_2, param_3, param_4)
-  int param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
+/* InternCache__find @ 0x127534 (108 bytes) */
+int InternCache__find(cache, keyA, keyB, keyExtra)
+  int cache;
+  undefined4 keyA;
+  undefined4 keyB;
+  undefined4 keyExtra;
 {
-  unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[8] = { cache, keyA, keyB, keyExtra, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   undefined4 callResult;
   
-  (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = param_2;
-  (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = param_3;
-  ((int (*)())FUN_001272d4)(param_1,&(*(unsigned int *)((unsigned char *)ghidra_home + 4)),&(*(unsigned int *)((unsigned char *)ghidra_home + 8)));
-  *(undefined4 *)(*(int *)(param_1 + 0x24) + 8) = (*(unsigned int *)((unsigned char *)ghidra_home + 8));
-  *(undefined4 *)(*(int *)(param_1 + 0x24) + 4) = (*(unsigned int *)((unsigned char *)ghidra_home + 4));
-  *(undefined4 *)(*(int *)(param_1 + 0x24) + 0xc) = param_4;
-  callResult = HashTable__find(*(undefined4 *)(param_1 + 4),*(undefined4 *)(param_1 + 0x24));
+  (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = keyA;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = keyB;
+  ((int (*)())FUN_001272d4)(cache,&(*(unsigned int *)((unsigned char *)ghidra_home + 4)),&(*(unsigned int *)((unsigned char *)ghidra_home + 8)));
+  *(undefined4 *)(*(int *)(cache + 0x24) + 8) = (*(unsigned int *)((unsigned char *)ghidra_home + 8));
+  *(undefined4 *)(*(int *)(cache + 0x24) + 4) = (*(unsigned int *)((unsigned char *)ghidra_home + 4));
+  *(undefined4 *)(*(int *)(cache + 0x24) + 0xc) = keyExtra;
+  callResult = HashTable__find(*(undefined4 *)(cache + 4),*(undefined4 *)(cache + 0x24));
   return callResult;
 }
 
-/* FUN_001275a0 @ 0x1275a0 (104 bytes) */
-int FUN_001275a0(param_1, param_2, param_3, param_4)
-  uint *param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  uint param_4;
+/* InternCache__create @ 0x1275a0 (104 bytes) */
+int InternCache__create(cache, keyA, keyB, keyExtra)
+  uint *cache;
+  undefined4 keyA;
+  undefined4 keyB;
+  uint keyExtra;
 {
-  unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[8] = { cache, keyA, keyB, keyExtra, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   undefined4 callResult;
   
-  (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = param_2;
-  (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = param_3;
-  ((int (*)())FUN_001272d4)(param_1,&(*(unsigned int *)((unsigned char *)ghidra_home + 4)),&(*(unsigned int *)((unsigned char *)ghidra_home + 8)));
-  callResult = FUN_00122e90((*(unsigned int *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 4)),param_4,*param_1);
-  HashTable__insert(param_1[1],callResult);
+  (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = keyA;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = keyB;
+  ((int (*)())FUN_001272d4)(cache,&(*(unsigned int *)((unsigned char *)ghidra_home + 4)),&(*(unsigned int *)((unsigned char *)ghidra_home + 8)));
+  callResult = InternCache__constructByKind((*(unsigned int *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 4)),keyExtra,*cache);
+  HashTable__insert(cache[1],callResult);
   return callResult;
 }
 
-/* FUN_00127608 @ 0x127608 (100 bytes) */
-int FUN_00127608(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
+/* InternCache__findOrCreate @ 0x127608 (100 bytes) */
+int InternCache__findOrCreate(cache, keyA, keyB, keyExtra)
+  undefined4 cache;
+  undefined4 keyA;
+  undefined4 keyB;
+  undefined4 keyExtra;
 {
   int callResult;
   undefined4 callResult2;
   
-  callResult = ((int (*)())FUN_00127534)(param_1,param_2,param_3,param_4);
+  callResult = ((int (*)())InternCache__find)(cache,keyA,keyB,keyExtra);
   if (callResult == 0) {
-    callResult2 = ((int (*)())FUN_001275a0)(param_1,param_2,param_3,param_4);
+    callResult2 = ((int (*)())InternCache__create)(cache,keyA,keyB,keyExtra);
     return callResult2;
   }
   return callResult;

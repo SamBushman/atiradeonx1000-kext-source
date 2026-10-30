@@ -1422,8 +1422,8 @@ int FUN_00179138(ctx, operandIndex)
   uVar3 = *(undefined4 *)(*(int *)(iVar1 + 0x6c4) + 0x3ac);
   iVar5 = *(int *)(iVar1 + 0x3b0) + -1;
   *(int *)(iVar1 + 0x3b0) = iVar5;
-  operandRef = FUN_00127608(uVar3,0x36,iVar5,0);
-  FUN_0012306c(operandRef,callResult);
+  operandRef = InternCache__findOrCreate(uVar3,0x36,iVar5,0);
+  VReg__appendUser(operandRef,callResult);
   block = *(int **)(*(int *)(ctx + 0xb0) + 0x158);
   iVar5 = (**(code **)(*block + 0x24))(block);
   if (iVar5 == 0) {

@@ -109,8 +109,8 @@ int FUN_001315f8(allocator, inst, newSource, registerCountRef, beforeInst, block
       do {
         if ((*(uint *)((laneBitIndex >> 3 & 0x1ffffffc) + *(int *)(block + 0x104) + 8) >>
              (laneBitIndex & 0x1f) & 1) != 0) {
-          rootRegister = ((int (*)())FUN_00134bf0)(allocator,loopIndex,1);
-          ((int (*)())FUN_00135334)(allocator,newRegister,rootRegister);
+          rootRegister = ((int (*)())InterferenceGraph__resolveNode)(allocator,loopIndex,1);
+          ((int (*)())InterferenceGraph__addEdge)(allocator,newRegister,rootRegister);
           registerCountAfter = *registerCountRef;
           break;
         }
@@ -672,7 +672,7 @@ int HwLimits__buildInterferenceGraph(this, graph, fixedRegCount, regCount, useCo
         innerIndexOrScratch = 0;
         do {
           nextRow = innerIndexOrScratch + 1;
-          ((int (*)())FUN_00135334)(graph,rowIndex,innerIndexOrScratch);
+          ((int (*)())InterferenceGraph__addEdge)(graph,rowIndex,innerIndexOrScratch);
           innerIndexOrScratch = nextRow;
         } while (rowIndex != nextRow);
       }
@@ -768,7 +768,7 @@ int HwLimits__buildInterferenceGraph(this, graph, fixedRegCount, regCount, useCo
         if ((*(uint *)((bitScanIndex >> 3 & 0x1ffffffc) + *(int *)(allocCtxOrBlock + 0x104) + 8) >> (bitScanIndex & 0x1f)
             & 1) != 0) {
           innerIndexOrScratch = ((int)bitScanIndex >> 2) + (uint)((int)bitScanIndex < 0 && (bitScanIndex & 3) != 0);
-          repReg = ((int (*)())FUN_00134bf0)(graph,innerIndexOrScratch,1);
+          repReg = ((int (*)())InterferenceGraph__resolveNode)(graph,innerIndexOrScratch,1);
           bitIdx5 = bitScanIndex + innerIndexOrScratch * -4 + repReg * 4;
           wordOff = bitIdx5 >> 3 & 0x1ffffffc;
           *(uint *)((int)liveWords + wordOff + 8) =
@@ -798,7 +798,7 @@ int HwLimits__buildInterferenceGraph(this, graph, fixedRegCount, regCount, useCo
                   excludedRegs1 = UNK_001afff0;
                   excludedRegs2 = UNK_001afff4;
                   excludedRegs3 = UNK_001afff8;
-                  regNode = ((int (*)())FUN_00134bf0)(graph,walkInst[0x25],useCoalesced);
+                  regNode = ((int (*)())InterferenceGraph__resolveNode)(graph,walkInst[0x25],useCoalesced);
                   isMovResult = (**(code **)(*walkInst + 100))(walkInst);
                   if (isMovResult != 0) {
                     for (srcIndex = 1; innerIndexOrScratch = (**(code **)(*walkInst + 0x14))(walkInst),
@@ -829,7 +829,7 @@ int HwLimits__buildInterferenceGraph(this, graph, fixedRegCount, regCount, useCo
                              (noSourceResult = RegKind__flagBit0(cursorInst[0x26]), noSourceResult != 0)))) &&
                            ((cursorInst[5] & 2U) == 0)) &&
                           (noSourceResult = (**(code **)(*cursorInst + 0x50))(cursorInst), noSourceResult == 0)))) {
-                        excludedRegs0 = ((int (*)())FUN_00134bf0)(graph,cursorInst[0x25],useCoalesced);
+                        excludedRegs0 = ((int (*)())InterferenceGraph__resolveNode)(graph,cursorInst[0x25],useCoalesced);
                       }
                     }
                   }
@@ -865,8 +865,8 @@ code_r0x00132828:
                           nextRow = IRInst__getOperandRecord(walkInst,0);
                           if ((*(char *)(innerIndexOrScratch + nextRow + 0x10) != '\x01') &&
                              (nextRow = FUN_00130958(liveWords,nextBlock,innerIndexOrScratch), nextRow != 0)) {
-                            nextRow = ((int (*)())FUN_00134bf0)(graph,nextBlock,useCoalesced);
-                            containsResult = FUN_001303f4(nextRow,&excludedRegs0);
+                            nextRow = ((int (*)())InterferenceGraph__resolveNode)(graph,nextBlock,useCoalesced);
+                            containsResult = Array4__contains(nextRow,&excludedRegs0);
                             if (containsResult == 0) goto code_r0x00132970;
                           }
                           moreComponents = innerIndexOrScratch != 3;
@@ -875,11 +875,11 @@ code_r0x00132828:
                       }
                       else {
                         compCounter = 0;
-                        innerIndexOrScratch = ((int (*)())FUN_00134bf0)(graph,cursorInst[0x25],useCoalesced);
+                        innerIndexOrScratch = ((int (*)())InterferenceGraph__resolveNode)(graph,cursorInst[0x25],useCoalesced);
                         do {
                           nextRow = FUN_00130958(liveWords,nextBlock,compCounter);
                           if (((nextRow != 0) &&
-                              (nextRow = ((int (*)())FUN_00134bf0)(graph,nextBlock,useCoalesced), nextRow != excludedRegs0))
+                              (nextRow = ((int (*)())InterferenceGraph__resolveNode)(graph,nextBlock,useCoalesced), nextRow != excludedRegs0))
                              && ((innerIndexOrScratch != nextRow ||
                                  (compFlagResult = FUN_000f313c(walkInst,compCounter), compFlagResult != 0))))
                           goto code_r0x00132970;
@@ -896,14 +896,14 @@ code_r0x0013299c:
                        (((cursorInst[5] & 2U) == 0 &&
                         (nextBlock = (**(code **)(*cursorInst + 0x50))(cursorInst), nextBlock == 0)))) {
                       src1Inst = IRInst__getOperandSource(walkInst,1);
-                      uVar18 = ((int (*)())FUN_00134bf0)(graph,*(undefined4 *)(src1Inst + 0x94),useCoalesced);
-                      ((int (*)())FUN_00135334)(graph,regNode,uVar18);
+                      uVar18 = ((int (*)())InterferenceGraph__resolveNode)(graph,*(undefined4 *)(src1Inst + 0x94),useCoalesced);
+                      ((int (*)())InterferenceGraph__addEdge)(graph,regNode,uVar18);
                     }
                     isVertexFetchResult = (**(code **)(*walkInst + 0x2c))(walkInst);
                     if (isVertexFetchResult == 0) goto code_r0x00132adc;
                     src1Inst = IRInst__getOperandSource(walkInst,1);
-                    uVar18 = ((int (*)())FUN_00134bf0)(graph,*(undefined4 *)(src1Inst + 0x94),useCoalesced);
-                    ((int (*)())FUN_00135334)(graph,regNode,uVar18);
+                    uVar18 = ((int (*)())InterferenceGraph__resolveNode)(graph,*(undefined4 *)(src1Inst + 0x94),useCoalesced);
+                    ((int (*)())InterferenceGraph__addEdge)(graph,regNode,uVar18);
                     instFlags = walkInst[5];
                   }
                 }
@@ -927,7 +927,7 @@ code_r0x00132adc:
                 isUndefinedResult = (**(code **)(*cursorInst + 0x50))(cursorInst);
                 if (isUndefinedResult == 0) {
                   innerIndexOrScratch = 0;
-                  repReg = ((int (*)())FUN_00134bf0)(graph,cursorInst[0x25],useCoalesced);
+                  repReg = ((int (*)())InterferenceGraph__resolveNode)(graph,cursorInst[0x25],useCoalesced);
                   bitPos = repReg << 2;
                   bitIndex = bitPos;
                   do {
@@ -987,8 +987,8 @@ code_r0x00132ca8: ;
             do {
               innerIndexOrScratch = FUN_0013097c(liveWords,componentIdx);
               if (innerIndexOrScratch != 0) {
-                uVar18 = ((int (*)())FUN_00134bf0)(graph,componentIdx,useCoalesced);
-                ((int (*)())FUN_00135334)(graph,poppedReg,uVar18);
+                uVar18 = ((int (*)())InterferenceGraph__resolveNode)(graph,componentIdx,useCoalesced);
+                ((int (*)())InterferenceGraph__addEdge)(graph,poppedReg,uVar18);
               }
               componentIdx = componentIdx + 1;
             } while (regCount != componentIdx);
@@ -1020,7 +1020,7 @@ code_r0x00132ca8: ;
                     srcOperandRecord = IRInst__getOperandRecord(walkInst,innerIndexOrScratch);
                     SelectWord__readMask(swizzleComponentUse,*(undefined4 *)(srcOperandRecord + 0x10));
                     excludedRegs0 = swizzleComponentUse[0];
-                    repReg2 = ((int (*)())FUN_00134bf0)(graph,cursorInst[0x25],useCoalesced);
+                    repReg2 = ((int (*)())InterferenceGraph__resolveNode)(graph,cursorInst[0x25],useCoalesced);
                     loopLeft4 = 4;
                     bitIndex = repReg2 << 2;
                     nextRow = 0;
@@ -1047,7 +1047,7 @@ code_r0x00132ca8: ;
                    (srcCount = (**(code **)(*cursorInst + 0x50))(cursorInst), srcCount == 0)) &&
                   (srcCount = ((int (*)())FUN_00137e98)(walkInst,walkInst[0x21],walkInst), srcCount == 0)))) {
                 innerIndexOrScratch = 0;
-                repReg = ((int (*)())FUN_00134bf0)(graph,cursorInst[0x25],useCoalesced);
+                repReg = ((int (*)())InterferenceGraph__resolveNode)(graph,cursorInst[0x25],useCoalesced);
                 bitIndex = repReg << 2;
                 do {
                   operandRecord = IRInst__getOperandRecord(walkInst,0);
@@ -1078,7 +1078,7 @@ code_r0x0013304c:
     nextBlock = *(int *)(allocCtxOrBlock + 8);
   } while( true );
 code_r0x00132970:
-  ((int (*)())FUN_00135334)(graph,regNode,nextRow);
+  ((int (*)())InterferenceGraph__addEdge)(graph,regNode,nextRow);
 code_r0x00132990:
   nextBlock = nextBlock + 1;
   if (regCount == nextBlock) goto code_r0x0013299c;
@@ -1102,14 +1102,14 @@ int FUN_001330f4(graph, inst)
        ((operandVReg[5] & 2U) == 0)) {
       (**(code **)(*operandVReg + 0x50))(operandVReg);
     }
-    instRoot = ((int (*)())FUN_00134bf0)(graph,inst[0x25],0);
-    sourceRoot = ((int (*)())FUN_00134bf0)(graph,operandVReg[0x25],0);
+    instRoot = ((int (*)())InterferenceGraph__resolveNode)(graph,inst[0x25],0);
+    sourceRoot = ((int (*)())InterferenceGraph__resolveNode)(graph,operandVReg[0x25],0);
     edgesAdded = ((int (*)())FUN_0013555c)(graph,sourceRoot,instRoot);
   } while (((((edgesAdded != 0) && ((operandVReg[5] & 0x200U) != 0)) &&
             ((extraSource = (int *)IRInst__getOperandSource(operandVReg,operandVReg[0x21]), extraSource[0x20] != 0 &&
              ((edgesAdded = RegKind__flagBit0(extraSource[0x26]), edgesAdded != 0 && ((extraSource[5] & 2U) == 0)))))) &&
            (edgesAdded = (**(code **)(*extraSource + 0x50))(extraSource), edgesAdded == 0)) &&
-          ((edgesAdded = ((int (*)())FUN_00134bf0)(graph,extraSource[0x25],0), sourceRoot != edgesAdded &&
+          ((edgesAdded = ((int (*)())InterferenceGraph__resolveNode)(graph,extraSource[0x25],0), sourceRoot != edgesAdded &&
            (inst = operandVReg, operandVReg != (int *)0x0))));
   return;
 }
@@ -1284,7 +1284,7 @@ int FUN_0013323c(pass, copyState)
                          (((srcKindFlag = RegKind__flagBit0(laneSourceDef[0x26]), srcKindFlag != 0 &&
                            ((laneSourceDef[5] & 2U) == 0)) &&
                           (srcKindFlag = (**(code **)(*laneSourceDef + 0x50))(laneSourceDef), srcKindFlag == 0)))))) &&
-                       ((mergedRoot = ((int (*)())FUN_00134bf0)(copyState,laneSourceDef[0x25],changedFlag), pendingCountSnapshot = vecCount,
+                       ((mergedRoot = ((int (*)())InterferenceGraph__resolveNode)(copyState,laneSourceDef[0x25],changedFlag), pendingCountSnapshot = vecCount,
                         rootOrQuery != -1 && (rootsDiffer = rootOrQuery != mergedRoot, mergedRoot = rootOrQuery, rootsDiffer)))) {
                       if (vecCount < vecCapacity) {
                         rootOrQuery = vecCount * 4;
@@ -1309,8 +1309,8 @@ int FUN_0013323c(pass, copyState)
                        (((rootOrQuery = RegKind__flagBit0(srcDef[0x26]), rootOrQuery != 0 &&
                          ((srcDef[5] & 2U) == 0)) &&
                         (rootOrQuery = (**(code **)(*srcDef + 0x50))(srcDef), rootOrQuery == 0)))))) {
-                  destRootA = ((int (*)())FUN_00134bf0)(copyState,inst[0x25],changedFlag);
-                  laneNumber = ((int (*)())FUN_00134bf0)(copyState,srcDef[0x25],changedFlag);
+                  destRootA = ((int (*)())InterferenceGraph__resolveNode)(copyState,inst[0x25],changedFlag);
+                  laneNumber = ((int (*)())InterferenceGraph__resolveNode)(copyState,srcDef[0x25],changedFlag);
                   if (destRootA != laneNumber) {
                     if (((inst[5] & 0x40U) == 0) || ((srcDef[5] & 0x40U) == 0)) {
                       if ((*(int *)(destRootA * 4 + *(int *)(pass + 0x45c)) ==
@@ -1360,8 +1360,8 @@ int FUN_0013323c(pass, copyState)
                   if (((srcDef[0x20] != 0) && (destKindClass = RegKind__flagBit0(srcDef[0x26]), destKindClass != 0)) &&
                      (((srcDef[5] & 2U) == 0 &&
                       (destKindClass = (**(code **)(*srcDef + 0x50))(srcDef), destKindClass == 0)))) {
-                    destRootB = ((int (*)())FUN_00134bf0)(copyState,inst[0x25],changedFlag);
-                    laneNumber = ((int (*)())FUN_00134bf0)(copyState,srcDef[0x25],changedFlag);
+                    destRootB = ((int (*)())InterferenceGraph__resolveNode)(copyState,inst[0x25],changedFlag);
+                    laneNumber = ((int (*)())InterferenceGraph__resolveNode)(copyState,srcDef[0x25],changedFlag);
                     if (((0 < *(int *)(*(int *)(pass + 8) + 0x678)) &&
                         (*(int *)(destRootB * 4 + *(int *)(pass + 0x45c)) ==
                          *(int *)(laneNumber * 4 + *(int *)(pass + 0x45c)))) &&
@@ -1458,7 +1458,7 @@ LAB_00133348: ;
     registerIndex = 0;
     if (0 < *(int *)(pass + 0x464)) {
       do {
-        ((int (*)())FUN_00134bf0)(copyState,registerIndex,1);
+        ((int (*)())InterferenceGraph__resolveNode)(copyState,registerIndex,1);
         registerIndex = registerIndex + 1;
       } while (registerIndex < *(int *)(pass + 0x464));
       roundCount = *(int *)(pass + 0x248);
@@ -1480,7 +1480,7 @@ LAB_00133bf0:
       }
       deferredInst = (int *)*deferredTopRef;
       Vector__removeAt(&vec2Capacity,lastDeferredIndex);
-      destRoot = ((int (*)())FUN_00134bf0)(copyState,deferredInst[0x25],0);
+      destRoot = ((int (*)())InterferenceGraph__resolveNode)(copyState,deferredInst[0x25],0);
       chainSource = (int *)IRInst__getOperandSource(deferredInst,1);
       do {
         blockArray = (**(code **)(*chainSource + 0x50))(chainSource);
@@ -1489,7 +1489,7 @@ LAB_00133bd0:
           (**(code **)(*deferredInst + 0xc))(deferredInst,0,*(undefined4 *)(pass + 8));
           break;
         }
-        blockArray = ((int (*)())FUN_00134bf0)(copyState,chainSource[0x25],0);
+        blockArray = ((int (*)())InterferenceGraph__resolveNode)(copyState,chainSource[0x25],0);
         if ((chainSource[5] & 0x200U) == 0) {
           if (destRoot == blockArray) goto LAB_00133bd0;
           break;
@@ -2044,7 +2044,7 @@ int FUN_00134658(pass)
     ((int (*)())FUN_0013323c)(pass,*(undefined4 *)(pass + 0x3c0));
     ((int (*)())FUN_00138080)(pass);
     if (allocationRound != 0) {
-      ((int (*)())FUN_001378e8)(*(undefined4 *)(pass + 0x3c0),*(undefined4 *)(pass + 8));
+      ((int (*)())RegAlloc__accumulateUseWeights)(*(undefined4 *)(pass + 0x3c0),*(undefined4 *)(pass + 8));
     }
     pass_color_graphResult = ((int (*)())pass_color_graph)(*(undefined4 *)(pass + 0x3c0));
     if (pass_color_graphResult != 0) {
@@ -2210,19 +2210,19 @@ int InterferenceMatrix__testPair(param_1, param_2, param_3)
   return *(uint *)((bitIndex >> 3 & 0x1ffffffc) + *param_1 + 8) >> (bitIndex & 0x1f) & 1;
 }
 
-/* FUN_00134bf0 @ 0x134bf0 (40 bytes) */
-int FUN_00134bf0(param_1, element, param_3)
-  int param_1;
+/* InterferenceGraph__resolveNode @ 0x134bf0 (40 bytes) */
+int InterferenceGraph__resolveNode(graph, element, followAliases)
+  int graph;
   int element;
-  int param_3;
+  int followAliases;
 {
   undefined4 callResult;
   
-  if (param_3 != 0) {
-    callResult = disjointSetFindRoot(element,*(undefined4 *)(param_1 + 0x20));
+  if (followAliases != 0) {
+    callResult = disjointSetFindRoot(element,*(undefined4 *)(graph + 0x20));
     return callResult;
   }
-  return *(undefined4 *)(element * 4 + *(int *)(param_1 + 0x20));
+  return *(undefined4 *)(element * 4 + *(int *)(graph + 0x20));
 }
 
 /* FUN_00134c18 @ 0x134c18 (188 bytes) */
@@ -2239,7 +2239,7 @@ int FUN_00134c18(neighbourList, removedRoot, graph)
   loopIndex = 0;
   neighbourBlock = *(int *)(neighbourList + 8);
   do {
-    callResult = ((int (*)())FUN_00134bf0)(graph,*(undefined4 *)(loopIndex * 4 + neighbourBlock),1);
+    callResult = ((int (*)())InterferenceGraph__resolveNode)(graph,*(undefined4 *)(loopIndex * 4 + neighbourBlock),1);
     if (callResult == removedRoot) {
       *(undefined4 *)(loopIndex * 4 + neighbourBlock) = *(undefined4 *)(neighbourBlock + *(int *)(neighbourList + 4) * 4);
       *(int *)(neighbourList + 4) = *(int *)(neighbourList + 4) + -1;
@@ -2535,8 +2535,8 @@ int FUN_00135278(param_1)
   return;
 }
 
-/* FUN_00135334 @ 0x135334 (552 bytes) */
-int FUN_00135334(graph, nodeA, nodeB)
+/* InterferenceGraph__addEdge @ 0x135334 (552 bytes) */
+int InterferenceGraph__addEdge(graph, nodeA, nodeB)
   int graph;
   uint nodeA;
   uint nodeB;
@@ -2651,10 +2651,10 @@ int FUN_0013555c(graph, targetNode, sourceNodeIndex)
         neighbourBlock = *(int *)(neighbourBlock + 0x1c);
         slotInBlock = 0;
       }
-      callResult = ((int (*)())FUN_00134bf0)(graph,*(undefined4 *)(neighbourBlock + slotInBlock * 4),1);
+      callResult = ((int (*)())InterferenceGraph__resolveNode)(graph,*(undefined4 *)(neighbourBlock + slotInBlock * 4),1);
       if ((callResult != targetNode) && (alreadyInterfere = ((int (*)())InterferenceMatrix__testPair)(graph,targetNode,callResult), alreadyInterfere == 0)) {
         addedEdge = 1;
-        ((int (*)())FUN_00135334)(graph,targetNode,callResult);
+        ((int (*)())InterferenceGraph__addEdge)(graph,targetNode,callResult);
       }
       loopIndex = loopIndex + 1;
     } while (loopIndex < *(int *)(sourceNode + 4));
@@ -2879,7 +2879,7 @@ int FUN_00135a2c(targetNode, mergedNodeIndex, graph)
         neighbourBlock = *(int *)(neighbourBlock + 0x1c);
         slotInBlock = 0;
       }
-      neighbourRoot = ((int (*)())FUN_00134bf0)(graph,*(undefined4 *)(neighbourBlock + slotInBlock * 4),1);
+      neighbourRoot = ((int (*)())InterferenceGraph__resolveNode)(graph,*(undefined4 *)(neighbourBlock + slotInBlock * 4),1);
       callResult = ((int (*)())InterferenceMatrix__testPair)(graph,*(undefined4 *)(*targetNode * 4 + *(int *)(graph + 0x20)),neighbourRoot);
       if (callResult == 0) {
         ((int (*)())storeAfterLocate)(targetNode,neighbourRoot,neighbourLocation,neighbourLocationRest,*(undefined4 *)(graph + 0x2c));
@@ -4077,8 +4077,8 @@ int FUN_00137694(this, extraNodeCount)
   return;
 }
 
-/* FUN_001378e8 @ 0x1378e8 (1420 bytes) */
-int FUN_001378e8(regInfoOwner, pass)
+/* RegAlloc__accumulateUseWeights @ 0x1378e8 (1420 bytes) */
+int RegAlloc__accumulateUseWeights(regInfoOwner, pass)
   int regInfoOwner;
   int pass;
 {
