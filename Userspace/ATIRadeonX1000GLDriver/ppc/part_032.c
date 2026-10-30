@@ -330,7 +330,10 @@ int FUN_0010fd98(scopeId, vector, nextSlotRef, program)
 {
   bool foundExisting;
   int scanRemaining;
-  int iVar3;
+  int tableByteOffset;
+  int elementRecord;
+  int registerKey;
+  int endSlot;
   int registerRecord;
   uint vectorCount;
   undefined4 *vectorElementRef;
@@ -342,15 +345,15 @@ int FUN_0010fd98(scopeId, vector, nextSlotRef, program)
   int slotTable [52];
   
   firstSlot = 0x30;
-  iVar3 = 0;
+  tableByteOffset = 0;
   do {
-    *(undefined4 *)((int)slotTable + iVar3) = 0xffffffff;
-    iVar3 = iVar3 + 4;
+    *(undefined4 *)((int)slotTable + tableByteOffset) = 0xffffffff;
+    tableByteOffset = tableByteOffset + 4;
     firstSlot = firstSlot + -1;
   } while (firstSlot != 0);
   vectorCount = vector[1];
   firstSlot = *nextSlotRef;
-  iVar3 = firstSlot;
+  endSlot = firstSlot;
   if (0 < (int)vectorCount) {
     loopIndex = 0;
     do {
@@ -366,14 +369,14 @@ int FUN_0010fd98(scopeId, vector, nextSlotRef, program)
       }
       loopIndex = loopIndex + 1;
       vectorElement = (int *)*vectorElementRef;
-      iVar3 = *(int *)(*vectorElement + 0x94);
+      registerKey = *(int *)(*vectorElement + 0x94);
       if (firstSlot < 0x30) {
         scanRemaining = 0x30 - firstSlot;
         slotCursor = slotTable + firstSlot;
         foundExisting = false;
         slotNumber = firstSlot;
         do {
-          if (iVar3 == *slotCursor) {
+          if (registerKey == *slotCursor) {
             registerRecord = *vectorElement;
             foundExisting = true;
             *(undefined4 *)(registerRecord + 0x98) = 5;
@@ -388,17 +391,17 @@ int FUN_0010fd98(scopeId, vector, nextSlotRef, program)
       else {
 LAB_0010febc:
         slotNumber = *nextSlotRef;
-        slotTable[slotNumber] = iVar3;
-        iVar3 = *vectorElement;
-        *(int *)(iVar3 + 0x94) = slotNumber;
-        *(undefined4 *)(iVar3 + 0x98) = 5;
+        slotTable[slotNumber] = registerKey;
+        elementRecord = *vectorElement;
+        *(int *)(elementRecord + 0x94) = slotNumber;
+        *(undefined4 *)(elementRecord + 0x98) = 5;
         *nextSlotRef = *nextSlotRef + 1;
       }
       vectorCount = vector[1];
     } while ((int)loopIndex < (int)vectorCount);
-    iVar3 = *nextSlotRef;
+    endSlot = *nextSlotRef;
   }
-  return ((int (*)())FUN_0010fa24)(scopeId,slotTable,firstSlot,iVar3,*(undefined4 *)(program + 0x418));
+  return ((int (*)())FUN_0010fa24)(scopeId,slotTable,firstSlot,endSlot,*(undefined4 *)(program + 0x418));
 }
 
 /* FUN_0010ff24 @ 0x10ff24 (252 bytes) */
@@ -1903,12 +1906,12 @@ int Program__packPsInputs(program)
   int slotByteOffset;
   int candidateLoad;
   int vectorData;
-  undefined1 local_98 [4];
-  int local_94;
-  undefined4 local_90 [4];
-  undefined4 local_80 [4];
-  int local_70 [6];
-  undefined1 *local_58;
+  undefined1 gatherLaneSource [4];
+  int savedDestSwizzle;
+  undefined4 gatherLaneKind [4];
+  undefined4 gatherLaneIndex [4];
+  int gatherLoads [6];
+  undefined1 *gatherBase;
   
   targetBlock = *(int **)(program + 0x3a4);
   if (targetBlock == (int *)0x0) {
@@ -1952,10 +1955,10 @@ int Program__packPsInputs(program)
               destOperandRecord = IRInst__getOperandRecord(candidateLoad,0);
               if (*(char *)(laneIndex + destOperandRecord + 0x10) != '\x01') {
                 firstLaneKind = IRLoadInterp__laneKind(candidateLoad,laneIndex);
-                local_90[laneCount] = firstLaneKind;
+                gatherLaneKind[laneCount] = firstLaneKind;
                 firstLaneIndex = IRLoadInterp__laneIndex(candidateLoad,laneIndex);
-                local_98[laneCount] = (char)laneIndex;
-                local_80[laneCount] = firstLaneIndex;
+                gatherLaneSource[laneCount] = (char)laneIndex;
+                gatherLaneIndex[laneCount] = firstLaneIndex;
                 laneCount = laneCount + 1;
               }
               moreLanes = laneIndex != 3;
@@ -1965,9 +1968,9 @@ int Program__packPsInputs(program)
             interpWord144 = *(int *)(candidateLoad + 0x144);
             interpWord148 = *(undefined4 *)(candidateLoad + 0x148);
             interpWord13c = *(int *)(candidateLoad + 0x13c);
-            local_70[0] = candidateLoad;
+            gatherLoads[0] = candidateLoad;
             if ((int)nextIndex < (int)candidateCount) {
-              local_58 = local_98;
+              gatherBase = gatherLaneSource;
               newElementCount = outerIndex + 2;
               slotByteOffset = nextIndex * 4;
               mergeCount = 1;
@@ -1990,7 +1993,7 @@ int Program__packPsInputs(program)
                     ((interpWord13c == *(int *)(otherLoad + 0x13c) && (interpWord140 == *(int *)(otherLoad + 0x140)))))))
                 {
                   mergedLane = 0;
-                  laneSlotCursor = local_58 + laneCount * 4;
+                  laneSlotCursor = gatherBase + laneCount * 4;
                   do {
                     operandRecord = IRInst__getOperandRecord(otherLoad,0);
                     if (*(char *)(mergedLane + operandRecord + 0x10) != '\x01') {
@@ -1999,7 +2002,7 @@ int Program__packPsInputs(program)
                       mergedLaneIndex = IRLoadInterp__laneIndex(otherLoad,mergedLane);
                       *(undefined4 *)(laneSlotCursor + 0x18) = mergedLaneIndex;
                       laneSlotCursor = laneSlotCursor + 4;
-                      local_58[laneCount] = (char)mergedLane;
+                      gatherBase[laneCount] = (char)mergedLane;
                       laneCount = laneCount + 1;
                     }
                     moreLanes = mergedLane != 3;
@@ -2007,7 +2010,7 @@ int Program__packPsInputs(program)
                   } while (moreLanes);
                   mergedByteOffset = mergeCount * 4;
                   mergeCount = mergeCount + 1;
-                  *(int *)(local_58 + mergedByteOffset + 0x28) = otherLoad;
+                  *(int *)(gatherBase + mergedByteOffset + 0x28) = otherLoad;
                   if (innerIndex < *candidateVector) {
                     innerElementCount = allocation[2];
                     if (innerElementCount <= innerIndex) {
@@ -2045,9 +2048,9 @@ int Program__packPsInputs(program)
                   do {
                     *(undefined1 *)(laneFlagCursor + 0x27) = 0;
                     laneFlagCursor = (int *)((int)laneFlagCursor + 1);
-                    (**(code **)(*interpInst + 0x88))(interpInst,1,laneNo,local_98[laneNo]);
-                    laneKindSlot = (undefined4 *)((int)local_90 + laneByteOffset);
-                    laneIndexSlot = (undefined4 *)((int)local_80 + laneByteOffset);
+                    (**(code **)(*interpInst + 0x88))(interpInst,1,laneNo,gatherLaneSource[laneNo]);
+                    laneKindSlot = (undefined4 *)((int)gatherLaneKind + laneByteOffset);
+                    laneIndexSlot = (undefined4 *)((int)gatherLaneIndex + laneByteOffset);
                     nextLane = laneNo + 1;
                     laneByteOffset = laneByteOffset + 4;
                     IRLoadInterp__setLane(interpInst,laneNo,3,*laneKindSlot,*laneIndexSlot);
@@ -2059,9 +2062,9 @@ int Program__packPsInputs(program)
                 interpAlloc[0x59] = mergeCount + *(int *)(program + 0x478);
                 (**(code **)(*targetBlock + 0xc))(targetBlock,interpInst);
                 do {
-                  mergedLoad = (int *)local_70[moveIndex];
+                  mergedLoad = (int *)gatherLoads[moveIndex];
                   destRecord = IRInst__getOperandRecord(mergedLoad,0);
-                  local_94 = *(int *)(destRecord + 0x10);
+                  savedDestSwizzle = *(int *)(destRecord + 0x10);
                   instBaseOffset = mergedLoad[0x58] - *(int *)(program + 0x478);
                   if (instBaseOffset < 0) {
                     instBaseOffset = 0;
@@ -2071,11 +2074,11 @@ int Program__packPsInputs(program)
                   mergedLoad[0x26] = 0;
                   outLane = 0;
                   mergedLoad[0x25] = mergedLoad[0x53];
-                  mergedLoad[0x27] = local_94;
+                  mergedLoad[0x27] = savedDestSwizzle;
                   mergedLoad[0x58] = instBaseOffset + *(int *)(program + 0x478);
                   sourceLane = nextOutputLane;
                   do {
-                    if (*(char *)((int)local_90 + outLane + -4) == '\x01') {
+                    if (*(char *)((int)gatherLaneKind + outLane + -4) == '\x01') {
                       (**(code **)(*mergedLoad + 0x88))(mergedLoad,1,outLane,4);
                       nextOutputLane = sourceLane;
                     }
