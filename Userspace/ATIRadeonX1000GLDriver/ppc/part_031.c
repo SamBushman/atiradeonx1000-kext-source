@@ -1427,25 +1427,25 @@ int FudoChip__ctor_10e1d8(this, allocContext)
   undefined4 allocContext;
 {
   undefined *vtable;
-  int iVar2;
-  undefined *puVar3;
+  int allocated;
+  undefined *baseVtable;
   
   vtable = PTR_DAT_001e8c80;
-  puVar3 = PTR_DAT_001e8c74 + 8;
+  baseVtable = PTR_DAT_001e8c74 + 8;
   this[2] = 0;
-  *this = puVar3;
+  *this = baseVtable;
   this[1] = 0;
   *this = vtable + 8;
-  iVar2 = Compiler__allocateOrFail(allocContext,0x1740);
-  if (iVar2 != 0) {
-    FudoVs__ctor_12a8bc(iVar2,allocContext,1);
+  allocated = Compiler__allocateOrFail(allocContext,0x1740);
+  if (allocated != 0) {
+    FudoVs__ctor_12a8bc(allocated,allocContext,1);
   }
-  this[1] = iVar2;
-  iVar2 = Compiler__allocateOrFail(allocContext,0x1944);
-  if (iVar2 != 0) {
-    FudoPs__ctor_1920e0(iVar2,allocContext,1);
+  this[1] = allocated;
+  allocated = Compiler__allocateOrFail(allocContext,0x1944);
+  if (allocated != 0) {
+    FudoPs__ctor_1920e0(allocated,allocContext,1);
   }
-  this[2] = iVar2;
+  this[2] = allocated;
   return;
 }
 
@@ -1455,25 +1455,25 @@ int FudoChip__ctor_10e2a0(this, allocContext)
   undefined4 allocContext;
 {
   undefined *vtable;
-  int iVar2;
-  undefined *puVar3;
+  int allocated;
+  undefined *baseVtable;
   
   vtable = PTR_DAT_001e8c80;
-  puVar3 = PTR_DAT_001e8c74 + 8;
+  baseVtable = PTR_DAT_001e8c74 + 8;
   this[2] = 0;
-  *this = puVar3;
+  *this = baseVtable;
   this[1] = 0;
   *this = vtable + 8;
-  iVar2 = Compiler__allocateOrFail(allocContext,0x1740);
-  if (iVar2 != 0) {
-    FudoVs__ctor_12a8bc(iVar2,allocContext,1);
+  allocated = Compiler__allocateOrFail(allocContext,0x1740);
+  if (allocated != 0) {
+    FudoVs__ctor_12a8bc(allocated,allocContext,1);
   }
-  this[1] = iVar2;
-  iVar2 = Compiler__allocateOrFail(allocContext,0x1944);
-  if (iVar2 != 0) {
-    FudoPs__ctor_1920e0(iVar2,allocContext,1);
+  this[1] = allocated;
+  allocated = Compiler__allocateOrFail(allocContext,0x1944);
+  if (allocated != 0) {
+    FudoPs__ctor_1920e0(allocated,allocContext,1);
   }
-  this[2] = iVar2;
+  this[2] = allocated;
   return;
 }
 
@@ -1481,18 +1481,18 @@ int FudoChip__ctor_10e2a0(this, allocContext)
 int FUN_0010e368(regKind)
   int regKind;
 {
-  int iVar1;
-  int iVar2;
+  int laneSourceCount;
+  int widthKind;
   
-  iVar1 = 3;
+  laneSourceCount = 3;
   if (regKind != 0x18) {
-    iVar2 = RegKind__vectorWidthKind(regKind);
-    iVar1 = 1;
-    if (iVar2 != 0x15) {
-      iVar1 = (uint)(iVar2 == 0x16) << 1;
+    widthKind = RegKind__vectorWidthKind(regKind);
+    laneSourceCount = 1;
+    if (widthKind != 0x15) {
+      laneSourceCount = (uint)(widthKind == 0x16) << 1;
     }
   }
-  return iVar1;
+  return laneSourceCount;
 }
 
 /* FUN_0010e3b4 @ 0x10e3b4 (88 bytes) */
@@ -1605,17 +1605,17 @@ int FUN_0010e4ec(inst, inst2)
 }
 
 /* FUN_0010e530 @ 0x10e530 (44 bytes) */
-int FUN_0010e530(param_1, param_2)
-  int param_1;
-  int param_2;
+int FUN_0010e530(mode, value)
+  int mode;
+  int value;
 {
-  if (param_1 == 6) {
-    return param_2 << 1;
+  if (mode == 6) {
+    return value << 1;
   }
-  if (param_1 != 7) {
-    return param_2;
+  if (mode != 7) {
+    return value;
   }
-  return param_2 * 2 + 1;
+  return value * 2 + 1;
 }
 
 /* FUN_0010e55c @ 0x10e55c (16 bytes) */
@@ -1719,22 +1719,22 @@ int FUN_0010e744(inst)
 }
 
 /* FUN_0010e7b8 @ 0x10e7b8 (92 bytes) */
-int FUN_0010e7b8(param_1, param_2)
-  int *param_1;
-  int param_2;
+int FUN_0010e7b8(laneInfo, source)
+  int *laneInfo;
+  int source;
 {
   int laneSourceCount;
   int remainingLanes;
   
-  param_1[5] = 0;
-  *param_1 = param_2;
-  laneSourceCount = ((int (*)())FUN_0010e368)(*(undefined4 *)(param_2 + 0x13c));
+  laneInfo[5] = 0;
+  *laneInfo = source;
+  laneSourceCount = ((int (*)())FUN_0010e368)(*(undefined4 *)(source + 0x13c));
   remainingLanes = 4;
-  param_1[6] = laneSourceCount;
+  laneInfo[6] = laneSourceCount;
   do {
-    param_1[1] = 0;
-    param_1[7] = 0;
-    param_1 = param_1 + 1;
+    laneInfo[1] = 0;
+    laneInfo[7] = 0;
+    laneInfo = laneInfo + 1;
     remainingLanes = remainingLanes + -1;
   } while (remainingLanes != 0);
   return;
@@ -1842,10 +1842,10 @@ int FUN_0010e9d0(candidateGroup, laneIndex)
   undefined4 *candidateGroup;
   int laneIndex;
 {
-  int iVar1;
+  int operandRecord;
   
   if ((candidateGroup[laneIndex + 7] == 0) &&
-     (iVar1 = IRInst__getOperandRecord(*candidateGroup,0), *(char *)(laneIndex + iVar1 + 0x10) == '\x01')) {
+     (operandRecord = IRInst__getOperandRecord(*candidateGroup,0), *(char *)(laneIndex + operandRecord + 0x10) == '\x01')) {
     return 1;
   }
   return 0;

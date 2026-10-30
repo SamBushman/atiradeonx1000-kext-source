@@ -256,19 +256,19 @@ int KhanPs__vslot58_matchImmediateConstantCode(this, constants, outSelectCode, l
 }
 
 /* KhanPs__vslot73_seedValueNumbers @ 0x128348 (84 bytes) */
-int KhanPs__vslot73_seedValueNumbers(this, param_2)
+int KhanPs__vslot73_seedValueNumbers(this, compiler)
   undefined4 this;
-  undefined4 param_2;
+  undefined4 compiler;
 {
-  undefined4 uVar1;
-  undefined4 *puVar2;
+  undefined4 seedExpr;
+  undefined4 *seedExprCursor;
   
-  puVar2 = &DAT_001aff74;
+  seedExprCursor = &DAT_001aff74;
   do {
-    uVar1 = *puVar2;
-    puVar2 = puVar2 + 1;
-    Compiler__valueNumberForExpr(param_2,uVar1);
-  } while (puVar2 != &DAT_001aff9c);
+    seedExpr = *seedExprCursor;
+    seedExprCursor = seedExprCursor + 1;
+    Compiler__valueNumberForExpr(compiler,seedExpr);
+  } while (seedExprCursor != &DAT_001aff9c);
   return;
 }
 
@@ -2041,16 +2041,16 @@ int FUN_0012ac58(targetLoop, block)
 }
 
 /* FUN_0012ae1c @ 0x12ae1c (80 bytes) */
-int FUN_0012ae1c(param_1)
-  int *param_1;
+int FUN_0012ae1c(block)
+  int *block;
 {
-  int iVar1;
+  int query30;
   
-  iVar1 = (**(code **)(*param_1 + 0x30))(param_1);
-  if (iVar1 != 0) {
-    param_1 = *(int **)(param_1[0x4b] + 0x154);
+  query30 = (**(code **)(*block + 0x30))(block);
+  if (query30 != 0) {
+    block = *(int **)(block[0x4b] + 0x154);
   }
-  return param_1;
+  return block;
 }
 
 /* FUN_0012ae6c @ 0x12ae6c (132 bytes) */

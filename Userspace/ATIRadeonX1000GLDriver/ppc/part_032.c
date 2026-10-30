@@ -322,35 +322,35 @@ int FUN_0010fc88(bindContext, vector, param_3, program)
 }
 
 /* FUN_0010fd98 @ 0x10fd98 (396 bytes) */
-int FUN_0010fd98(scopeId, vector, param_3, program)
+int FUN_0010fd98(scopeId, vector, nextSlotRef, program)
   undefined4 scopeId;
   uint *vector;
-  int *param_3;
+  int *nextSlotRef;
   int program;
 {
-  bool bVar1;
-  int iVar2;
+  bool foundExisting;
+  int scanRemaining;
   int iVar3;
-  int iVar4;
+  int registerRecord;
   uint vectorCount;
   undefined4 *vectorElementRef;
   int *vectorElement;
-  int iVar8;
-  int *piVar9;
+  int slotNumber;
+  int *slotCursor;
   uint loopIndex;
-  int iVar11;
-  int local_f8 [52];
+  int firstSlot;
+  int slotTable [52];
   
-  iVar11 = 0x30;
+  firstSlot = 0x30;
   iVar3 = 0;
   do {
-    *(undefined4 *)((int)local_f8 + iVar3) = 0xffffffff;
+    *(undefined4 *)((int)slotTable + iVar3) = 0xffffffff;
     iVar3 = iVar3 + 4;
-    iVar11 = iVar11 + -1;
-  } while (iVar11 != 0);
+    firstSlot = firstSlot + -1;
+  } while (firstSlot != 0);
   vectorCount = vector[1];
-  iVar11 = *param_3;
-  iVar3 = iVar11;
+  firstSlot = *nextSlotRef;
+  iVar3 = firstSlot;
   if (0 < (int)vectorCount) {
     loopIndex = 0;
     do {
@@ -367,38 +367,38 @@ int FUN_0010fd98(scopeId, vector, param_3, program)
       loopIndex = loopIndex + 1;
       vectorElement = (int *)*vectorElementRef;
       iVar3 = *(int *)(*vectorElement + 0x94);
-      if (iVar11 < 0x30) {
-        iVar2 = 0x30 - iVar11;
-        piVar9 = local_f8 + iVar11;
-        bVar1 = false;
-        iVar8 = iVar11;
+      if (firstSlot < 0x30) {
+        scanRemaining = 0x30 - firstSlot;
+        slotCursor = slotTable + firstSlot;
+        foundExisting = false;
+        slotNumber = firstSlot;
         do {
-          if (iVar3 == *piVar9) {
-            iVar4 = *vectorElement;
-            bVar1 = true;
-            *(undefined4 *)(iVar4 + 0x98) = 5;
-            *(int *)(iVar4 + 0x94) = iVar8;
+          if (iVar3 == *slotCursor) {
+            registerRecord = *vectorElement;
+            foundExisting = true;
+            *(undefined4 *)(registerRecord + 0x98) = 5;
+            *(int *)(registerRecord + 0x94) = slotNumber;
           }
-          iVar8 = iVar8 + 1;
-          piVar9 = piVar9 + 1;
-          iVar2 = iVar2 + -1;
-        } while (iVar2 != 0);
-        if (!bVar1) goto LAB_0010febc;
+          slotNumber = slotNumber + 1;
+          slotCursor = slotCursor + 1;
+          scanRemaining = scanRemaining + -1;
+        } while (scanRemaining != 0);
+        if (!foundExisting) goto LAB_0010febc;
       }
       else {
 LAB_0010febc:
-        iVar8 = *param_3;
-        local_f8[iVar8] = iVar3;
+        slotNumber = *nextSlotRef;
+        slotTable[slotNumber] = iVar3;
         iVar3 = *vectorElement;
-        *(int *)(iVar3 + 0x94) = iVar8;
+        *(int *)(iVar3 + 0x94) = slotNumber;
         *(undefined4 *)(iVar3 + 0x98) = 5;
-        *param_3 = *param_3 + 1;
+        *nextSlotRef = *nextSlotRef + 1;
       }
       vectorCount = vector[1];
     } while ((int)loopIndex < (int)vectorCount);
-    iVar3 = *param_3;
+    iVar3 = *nextSlotRef;
   }
-  return ((int (*)())FUN_0010fa24)(scopeId,local_f8,iVar11,iVar3,*(undefined4 *)(program + 0x418));
+  return ((int (*)())FUN_0010fa24)(scopeId,slotTable,firstSlot,iVar3,*(undefined4 *)(program + 0x418));
 }
 
 /* FUN_0010ff24 @ 0x10ff24 (252 bytes) */
@@ -2364,14 +2364,14 @@ LAB_00112e78:
 }
 
 /* OpcodeTraits__getRecordTail @ 0x112f08 (76 bytes) */
-int OpcodeTraits__getRecordTail(param_1, param_2)
-  int param_1;
-  int param_2;
+int OpcodeTraits__getRecordTail(opcode, compiler)
+  int opcode;
+  int compiler;
 {
-  int iVar1;
+  int opcodeFlagTable;
   
-  iVar1 = (**(code **)(**(int **)(param_2 + 0x30c) + 0x16c))(*(int **)(param_2 + 0x30c),param_2);
-  return iVar1 + param_1 * 0x38 + 0x10;
+  opcodeFlagTable = (**(code **)(**(int **)(compiler + 0x30c) + 0x16c))(*(int **)(compiler + 0x30c),compiler);
+  return opcodeFlagTable + opcode * 0x38 + 0x10;
 }
 
 /* Opcode__getInfo @ 0x112f54 (36 bytes) */
@@ -2594,31 +2594,31 @@ int OpcodeTraits__instFlagBit2(compiler, param_2)
 }
 
 /* OpcodeInfo__getResultMode @ 0x1134bc (152 bytes) */
-int OpcodeInfo__getResultMode(param_1, param_2, program)
-  int param_1;
-  int *param_2;
+int OpcodeInfo__getResultMode(opcodeInfo, inst, program)
+  int opcodeInfo;
+  int *inst;
   int program;
 {
   int vtableQueryResult;
   int instFlagBit2Result;
   int resultMode;
   
-  resultMode = *(int *)(param_1 + 0xc);
+  resultMode = *(int *)(opcodeInfo + 0xc);
   if (resultMode == 0) {
-    instFlagBit2Result = ((int (*)())OpcodeTraits__instFlagBit2)(*(undefined4 *)(program + 8),param_2);
+    instFlagBit2Result = ((int (*)())OpcodeTraits__instFlagBit2)(*(undefined4 *)(program + 8),inst);
     if (instFlagBit2Result != 0) {
       return 1;
     }
-    resultMode = *(int *)(param_1 + 0xc);
+    resultMode = *(int *)(opcodeInfo + 0xc);
   }
   if (resultMode != 0x10) {
     return resultMode;
   }
-  vtableQueryResult = (**(code **)(*param_2 + 0x30))(param_2);
+  vtableQueryResult = (**(code **)(*inst + 0x30))(inst);
   if (vtableQueryResult != 0) {
     return 9;
   }
-  instFlagBit2Result = ((int (*)())OpcodeTraits__instFlagBit2)(*(undefined4 *)(program + 8),param_2);
+  instFlagBit2Result = ((int (*)())OpcodeTraits__instFlagBit2)(*(undefined4 *)(program + 8),inst);
   if (instFlagBit2Result != 0) {
     return 1;
   }

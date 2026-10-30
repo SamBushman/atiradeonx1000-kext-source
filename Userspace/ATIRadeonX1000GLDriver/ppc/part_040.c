@@ -3186,11 +3186,11 @@ int Program__markHwRegUsed(program, hwReg)
 }
 
 /* FUN_00130478 @ 0x130478 (44 bytes) */
-int FUN_00130478(param_1, param_2)
-  int param_1;
-  uint param_2;
+int FUN_00130478(allocator, bitIndex)
+  int allocator;
+  uint bitIndex;
 {
-  if ((*(uint *)((param_2 >> 3 & 0x1ffffffc) + *(int *)(param_1 + 0x42c) + 8) >> (param_2 & 0x1f) &
+  if ((*(uint *)((bitIndex >> 3 & 0x1ffffffc) + *(int *)(allocator + 0x42c) + 8) >> (bitIndex & 0x1f) &
       1) != 0) {
     return 1;
   }
@@ -3677,19 +3677,19 @@ int FUN_00130c8c(allocator, spillRecord, newSource, registerCountRef)
 }
 
 /* FUN_00130da0 @ 0x130da0 (200 bytes) */
-int FUN_00130da0(allocator, inst, operandIndex, afterInst, param_5)
+int FUN_00130da0(allocator, inst, operandIndex, afterInst, compiler)
   undefined4 allocator;
   int inst;
   undefined4 operandIndex;
   int afterInst;
-  undefined4 param_5;
+  undefined4 compiler;
 {
   undefined4 sourceDef;
   undefined4 uVar1;
   int callResult;
   
   sourceDef = IRInst__getOperandSource(inst,operandIndex);
-  callResult = IRInst__clone(sourceDef,param_5,0);
+  callResult = IRInst__clone(sourceDef,compiler,0);
   if ((*(uint *)(inst + 0x14) & 0x40) == 0) {
     uVar1 = ((int (*)())FUN_00130424)(allocator);
     *(undefined4 *)(callResult + 0x98) = 0;
@@ -3697,24 +3697,24 @@ int FUN_00130da0(allocator, inst, operandIndex, afterInst, param_5)
   }
   Block__insertInstAfter(*(undefined4 *)(afterInst + 0x158),afterInst,callResult);
   *(uint *)(callResult + 0x14) = *(uint *)(callResult + 0x14) | 0x8000000;
-  IRInst__setOperandSource(inst,operandIndex,callResult,0,param_5);
+  IRInst__setOperandSource(inst,operandIndex,callResult,0,compiler);
   *(uint *)(inst + 0x18) = *(uint *)(inst + 0x18) | 1;
   *(uint *)(inst + 0x14) = *(uint *)(inst + 0x14) & 0xffffeffb | 0x8000000;
   return callResult;
 }
 
 /* FUN_00130e68 @ 0x130e68 (88 bytes) */
-int FUN_00130e68(param_1)
-  int *param_1;
+int FUN_00130e68(inst)
+  int *inst;
 {
-  int iVar1;
-  undefined4 uVar2;
+  int query28;
+  undefined4 result;
   
-  iVar1 = (**(code **)(*param_1 + 0x28))(param_1);
-  if ((iVar1 != 0) || (uVar2 = 0, *(int *)(param_1[0x22] + 8) == 0x93)) {
-    uVar2 = 1;
+  query28 = (**(code **)(*inst + 0x28))(inst);
+  if ((query28 != 0) || (result = 0, *(int *)(inst[0x22] + 8) == 0x93)) {
+    result = 1;
   }
-  return uVar2;
+  return result;
 }
 
 /* FUN_00130ec0 @ 0x130ec0 (72 bytes) */
@@ -3725,19 +3725,19 @@ int FUN_00130ec0(baseHandle, derivedHandle, compiler)
 {
   undefined4 *allocation;
   undefined4 arena;
-  undefined4 *puVar3;
+  undefined4 *loadInst;
   
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
-  puVar3 = allocation + 1;
+  loadInst = allocation + 1;
   *allocation = arena;
-  IRLoad__ctor_109a80(puVar3,0xfa,compiler);
+  IRLoad__ctor_109a80(loadInst,0xfa,compiler);
   allocation[0x4d] = baseHandle;
   allocation[0x27] = 0x3b;
   allocation[0x4e] = derivedHandle;
   allocation[0x26] = baseHandle;
-  Block__appendInst(*(undefined4 *)(*(int *)(compiler + COMP_currentProgram) + 0x3a0),puVar3);
-  return puVar3;
+  Block__appendInst(*(undefined4 *)(*(int *)(compiler + COMP_currentProgram) + 0x3a0),loadInst);
+  return loadInst;
 }
 
 /* FUN_00130f64 @ 0x130f64 (72 bytes) */
@@ -3748,19 +3748,19 @@ int FUN_00130f64(param_1, newSlotNumber, compiler)
 {
   undefined4 *allocation;
   undefined4 arena;
-  undefined4 *puVar3;
+  undefined4 *loadInst;
   
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
-  puVar3 = allocation + 1;
+  loadInst = allocation + 1;
   *allocation = arena;
-  IRLoad__ctor_109a80(puVar3,0x79,compiler);
+  IRLoad__ctor_109a80(loadInst,0x79,compiler);
   allocation[0x4d] = param_1;
   allocation[0x27] = 0x3c;
   allocation[0x50] = newSlotNumber;
   allocation[0x26] = newSlotNumber;
-  Block__prependInst(*(undefined4 *)(*(int *)(compiler + COMP_currentProgram) + 0x3a0),puVar3);
-  return puVar3;
+  Block__prependInst(*(undefined4 *)(*(int *)(compiler + COMP_currentProgram) + 0x3a0),loadInst);
+  return loadInst;
 }
 
 /* FUN_00131008 @ 0x131008 (452 bytes) */

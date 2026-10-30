@@ -1,0 +1,9 @@
+local	FUN_0010e9d0	iVar1	operandRecord	INFERRED	operand 0 record of the group's first instruction; +0x10+lane byte tested against 1
+local	FUN_00130478	param_1	allocator	INFERRED	+0x42c bitmap (data at +8)
+local	FUN_00130478	param_2	bitIndex	INFERRED	bit tested
+local	FUN_00130ec0	puVar3	loadInst	INFERRED	IRLoad (opcode 0xfa) appended to the first block
+local	FUN_00130f64	puVar3	loadInst	INFERRED	IRLoad (opcode 0x79) prepended to the first block
+local	FUN_00130da0	param_5	compiler	INFERRED	passed to IRInst__clone / IRInst__setOperandSource as the compiler
+local	KhanPs__vslot73_seedValueNumbers	param_2	compiler	INFERRED	first argument of Compiler__valueNumberForExpr
+local	KhanPs__vslot73_seedValueNumbers	uVar1	seedExpr	INFERRED	expression id read from DAT_001aff74..9c
+local	KhanPs__vslot73_seedValueNumbers	puVar2	seedExprCursor	INFERRED	iterates DAT_001aff74..9c

@@ -2325,22 +2325,22 @@ int FUN_00134db0(copyState)
 }
 
 /* FUN_00134de8 @ 0x134de8 (264 bytes) */
-int FUN_00134de8(param_1, inst)
-  int param_1;
+int FUN_00134de8(allocator, inst)
+  int allocator;
   int *inst;
 {
-  int iVar1;
+  int query;
   
   if (inst[0x26] != 0xc) {
-    iVar1 = (**(code **)(*inst + 0x50))(inst);
-    if ((iVar1 != 0) || (iVar1 = IRInst__getOperandRecord(inst,0), *(int *)(iVar1 + 0x10) == DAT_001afffc)) {
+    query = (**(code **)(*inst + 0x50))(inst);
+    if ((query != 0) || (query = IRInst__getOperandRecord(inst,0), *(int *)(query + 0x10) == DAT_001afffc)) {
       return 0;
     }
     if ((((inst[0x26] != 0x37) && (inst[0x20] != 0)) &&
-        (iVar1 = RegKind__flagBit0(inst[0x26]), iVar1 != 0)) &&
-       ((((inst[5] & 2U) == 0 && (iVar1 = (**(code **)(*inst + 0x50))(inst), iVar1 == 0))
-        && (((*(uint *)(param_1 + 0x30) & 0x400) != 0 || ((inst[5] & 0x40U) == 0)))))) {
-      return *(int *)(inst[0x25] * 4 + *(int *)(param_1 + 0x458));
+        (query = RegKind__flagBit0(inst[0x26]), query != 0)) &&
+       ((((inst[5] & 2U) == 0 && (query = (**(code **)(*inst + 0x50))(inst), query == 0))
+        && (((*(uint *)(allocator + 0x30) & 0x400) != 0 || ((inst[5] & 0x40U) == 0)))))) {
+      return *(int *)(inst[0x25] * 4 + *(int *)(allocator + 0x458));
     }
   }
   return inst[0x25];
@@ -4274,15 +4274,15 @@ LAB_00137b2c:
 }
 
 /* BitSet__testRegisterLane @ 0x137e74 (36 bytes) */
-int BitSet__testRegisterLane(param_1, param_2, param_3)
-  int param_1;
-  int param_2;
-  int param_3;
+int BitSet__testRegisterLane(bitSet, registerIndex, lane)
+  int bitSet;
+  int registerIndex;
+  int lane;
 {
-  uint uVar1;
+  uint bitIndex;
   
-  uVar1 = param_2 * 4 + param_3;
-  return *(uint *)((uVar1 >> 3 & 0x1ffffffc) + param_1 + 8) >> (uVar1 & 0x1f) & 1;
+  bitIndex = registerIndex * 4 + lane;
+  return *(uint *)((bitIndex >> 3 & 0x1ffffffc) + bitSet + 8) >> (bitIndex & 0x1f) & 1;
 }
 
 /* FUN_00137e98 @ 0x137e98 (124 bytes) */
@@ -5068,16 +5068,16 @@ int FUN_00139008(param_1)
 }
 
 /* FUN_00139034 @ 0x139034 (40 bytes) */
-int FUN_00139034(param_1, block, param_3, param_4)
-  int param_1;
+int FUN_00139034(node, block, excludeA, excludeB)
+  int node;
   int block;
-  int param_3;
-  int param_4;
+  int excludeA;
+  int excludeB;
 {
   int currentValue;
   
-  currentValue = *(int *)(param_1 + 0x158);
-  if (((currentValue != param_3) && (currentValue != param_4)) && (currentValue != block)) {
+  currentValue = *(int *)(node + 0x158);
+  if (((currentValue != excludeA) && (currentValue != excludeB)) && (currentValue != block)) {
     return 1;
   }
   return 0;

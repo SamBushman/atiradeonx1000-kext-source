@@ -272,24 +272,24 @@ int IRMix__ctor_10a140(this, kind, compiler)
   undefined4 kind;
   undefined4 compiler;
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
-  int iVar3;
+  undefined4 laneDefaultWord;
+  undefined4 defaultWord27;
+  int remaining;
   
   IRPseudo__ctor(this,kind,compiler);
-  uVar2 = DAT_001af9c8;
+  defaultWord27 = DAT_001af9c8;
   this[0x20] = 1;
-  uVar1 = DAT_001af9c4;
+  laneDefaultWord = DAT_001af9c4;
   *this = &PTR_FUN_001ea070;
-  iVar3 = 4;
+  remaining = 4;
   this[0x4b] = 0;
-  this[0x27] = uVar2;
+  this[0x27] = defaultWord27;
   this[0x21] = 0;
   do {
-    this[0x2d] = uVar1;
+    this[0x2d] = laneDefaultWord;
     this = this + 6;
-    iVar3 = iVar3 + -1;
-  } while (iVar3 != 0);
+    remaining = remaining + -1;
+  } while (remaining != 0);
   return;
 }
 
@@ -299,24 +299,24 @@ int IRMix__ctor_10a1c0(this, kind, compiler)
   undefined4 kind;
   undefined4 compiler;
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
-  int iVar3;
+  undefined4 laneDefaultWord;
+  undefined4 defaultWord27;
+  int remaining;
   
   IRPseudo__ctor(this,kind,compiler);
-  uVar2 = DAT_001af9c8;
+  defaultWord27 = DAT_001af9c8;
   this[0x20] = 1;
-  uVar1 = DAT_001af9c4;
+  laneDefaultWord = DAT_001af9c4;
   *this = &PTR_FUN_001ea070;
-  iVar3 = 4;
+  remaining = 4;
   this[0x4b] = 0;
-  this[0x27] = uVar2;
+  this[0x27] = defaultWord27;
   this[0x21] = 0;
   do {
-    this[0x2d] = uVar1;
+    this[0x2d] = laneDefaultWord;
     this = this + 6;
-    iVar3 = iVar3 + -1;
-  } while (iVar3 != 0);
+    remaining = remaining + -1;
+  } while (remaining != 0);
   return;
 }
 

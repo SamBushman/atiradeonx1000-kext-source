@@ -846,35 +846,35 @@ int ConstKey__compare1(param_1, param_2)
 }
 
 /* ConstKey__compare2 @ 0x1276a0 (92 bytes) */
-int ConstKey__compare2(param_1, param_2)
-  int param_1;
-  int param_2;
+int ConstKey__compare2(keyA, keyB)
+  int keyA;
+  int keyB;
 {
-  if ((((((int)*(char *)(param_1 + 0x15c) & 1U) == ((int)*(char *)(param_2 + 0x15c) & 1U)) &&
-       (*(int *)(param_1 + 0x20) == *(int *)(param_2 + 0x20))) &&
-      (((uint)(int)*(char *)(param_1 + 0x15c) >> 1 & 1) ==
-       ((uint)(int)*(char *)(param_2 + 0x15c) >> 1 & 1))) &&
-     (*(int *)(param_1 + 0x38) == *(int *)(param_2 + 0x38))) {
+  if ((((((int)*(char *)(keyA + 0x15c) & 1U) == ((int)*(char *)(keyB + 0x15c) & 1U)) &&
+       (*(int *)(keyA + 0x20) == *(int *)(keyB + 0x20))) &&
+      (((uint)(int)*(char *)(keyA + 0x15c) >> 1 & 1) ==
+       ((uint)(int)*(char *)(keyB + 0x15c) >> 1 & 1))) &&
+     (*(int *)(keyA + 0x38) == *(int *)(keyB + 0x38))) {
     return 0;
   }
   return 0xffffffff;
 }
 
 /* ConstKey__compare3 @ 0x1276fc (124 bytes) */
-int ConstKey__compare3(param_1, param_2)
-  int param_1;
-  int param_2;
+int ConstKey__compare3(keyA, keyB)
+  int keyA;
+  int keyB;
 {
   uint flagsB;
   uint flagsA;
   
-  flagsA = (uint)*(char *)(param_1 + 0x15c);
-  flagsB = (uint)*(char *)(param_2 + 0x15c);
-  if (((((flagsA & 1) == (flagsB & 1)) && (*(int *)(param_1 + 0x20) == *(int *)(param_2 + 0x20))) &&
+  flagsA = (uint)*(char *)(keyA + 0x15c);
+  flagsB = (uint)*(char *)(keyB + 0x15c);
+  if (((((flagsA & 1) == (flagsB & 1)) && (*(int *)(keyA + 0x20) == *(int *)(keyB + 0x20))) &&
       ((flagsA >> 1 & 1) == (flagsB >> 1 & 1))) &&
-     (((*(int *)(param_1 + 0x38) == *(int *)(param_2 + 0x38) &&
+     (((*(int *)(keyA + 0x38) == *(int *)(keyB + 0x38) &&
        ((flagsA >> 2 & 1) == (flagsB >> 2 & 1))) &&
-      (*(int *)(param_1 + 0x50) == *(int *)(param_2 + 0x50))))) {
+      (*(int *)(keyA + 0x50) == *(int *)(keyB + 0x50))))) {
     return 0;
   }
   return 0xffffffff;
@@ -903,13 +903,13 @@ int ConstKey__compare4(keyA, keyB)
 }
 
 /* keyEqualsThreeWords @ 0x127814 (60 bytes) */
-int keyEqualsThreeWords(param_1, param_2)
-  int param_1;
-  int param_2;
+int keyEqualsThreeWords(keyA, keyB)
+  int keyA;
+  int keyB;
 {
-  if (((*(int *)(param_1 + 8) == *(int *)(param_2 + 8)) &&
-      (*(int *)(param_1 + 4) == *(int *)(param_2 + 4))) &&
-     (*(int *)(param_1 + 0xc) == *(int *)(param_2 + 0xc))) {
+  if (((*(int *)(keyA + 8) == *(int *)(keyB + 8)) &&
+      (*(int *)(keyA + 4) == *(int *)(keyB + 4))) &&
+     (*(int *)(keyA + 0xc) == *(int *)(keyB + 0xc))) {
     return 0;
   }
   return 0xffffffff;

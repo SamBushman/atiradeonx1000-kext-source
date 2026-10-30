@@ -1,0 +1,13 @@
+local	OpcodeInfo__getResultMode	param_1	opcodeInfo	INFERRED	word +0xc is the default result mode
+local	OpcodeInfo__getResultMode	param_2	inst	INFERRED	vslot 0x30 queried; passed to OpcodeTraits__instFlagBit2
+local	keyEqualsThreeWords	param_1	keyA	INFERRED	words +4,+8,+0xc compared with keyB
+local	keyEqualsThreeWords	param_2	keyB	INFERRED	words +4,+8,+0xc compared with keyA
+local	FUN_0012ae1c	param_1	block	INFERRED	vslot 0x30 queried; returns the +0x154 field of block[0x4b] or block itself
+local	FUN_0012ae1c	iVar1	query30	INFERRED	vslot 0x30 result
+local	FUN_0010e368	iVar1	laneSourceCount	INFERRED	1/2/3 derived from the register kind's vector width
+local	FUN_0010e368	iVar2	widthKind	INFERRED	RegKind__vectorWidthKind result
+local	FUN_0010e530	param_1	mode	INFERRED	6 doubles the value, 7 doubles and adds 1
+local	FUN_0010e530	param_2	value	INFERRED	input index
+local	FUN_00139034	param_1	node	INFERRED	+0x158 current value compared with the three exclusions
+local	FUN_00139034	param_3	excludeA	INFERRED	value that makes the test fail
+local	FUN_00139034	param_4	excludeB	INFERRED	value that makes the test fail
