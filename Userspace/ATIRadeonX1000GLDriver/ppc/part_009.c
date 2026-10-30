@@ -3786,13 +3786,13 @@ int FUN_00062490(glContext)
 }
 
 /* FUN_00062510 @ 0x62510 (92 bytes) */
-int FUN_00062510(param_1)
-  int param_1;
+int FUN_00062510(glContext)
+  int glContext;
 {
-  if (*(int *)(((unsigned char *)0x000011b4) + param_1) != 0) {
-    ((int (*)())FUN_00062490)(param_1);
-    (**(code **)(param_1 + 0x18))(*(undefined4 *)(((unsigned char *)0x000011b4) + param_1));
-    *(undefined4 *)(((unsigned char *)0x000011b4) + param_1) = 0;
+  if (*(int *)(((unsigned char *)0x000011b4) + glContext) != 0) {
+    ((int (*)())FUN_00062490)(glContext);
+    (**(code **)(glContext + 0x18))(*(undefined4 *)(((unsigned char *)0x000011b4) + glContext));
+    *(undefined4 *)(((unsigned char *)0x000011b4) + glContext) = 0;
   }
   return;
 }

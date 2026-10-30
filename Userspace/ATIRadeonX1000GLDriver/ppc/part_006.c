@@ -2389,11 +2389,11 @@ LAB_000414c0:
 }
 
 /* fragmentTranslateAngleConvert @ 0x41510 (548 bytes) */
-int fragmentTranslateAngleConvert(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  int *param_1;
+int fragmentTranslateAngleConvert(emitter, param_2, entryHeader, srcRegWord1, param_5, param_6, param_7)
+  int *emitter;
   int param_2;
-  undefined4 *param_3;
-  undefined4 param_4;
+  undefined4 *entryHeader;
+  undefined4 srcRegWord1;
   undefined4 param_5;
   undefined4 param_6;
   undefined4 param_7;
@@ -2412,23 +2412,23 @@ int fragmentTranslateAngleConvert(param_1, param_2, param_3, param_4, param_5, p
   int *tokenDataPtrAddr;
   uint uVar9;
   
-  iVar3 = (param_2 + *(int *)(*param_1 + 0x54)) * 8;
-  uVar9 = *(uint *)(iVar3 + *param_1);
-  ((int (*)())fpilEmitAngleConstants)(param_1,iVar3,param_3,param_4,param_5,param_6,param_7);
-  uVar7 = *(undefined4 *)(*param_1 + 0x28);
-  param_3[7] = 0;
-  param_3[4] = 0x10000;
-  *(short *)((int)param_3 + 0x12) = (short)uVar7;
+  iVar3 = (param_2 + *(int *)(*emitter + 0x54)) * 8;
+  uVar9 = *(uint *)(iVar3 + *emitter);
+  ((int (*)())fpilEmitAngleConstants)(emitter,iVar3,entryHeader,srcRegWord1,param_5,param_6,param_7);
+  uVar7 = *(undefined4 *)(*emitter + 0x28);
+  entryHeader[7] = 0;
+  entryHeader[4] = 0x10000;
+  *(short *)((int)entryHeader + 0x12) = (short)uVar7;
   uVar9 = *(uint *)(&UNK_001aa574 + (2 - ((int)-(uVar9 & 0x3fc0000 ^ 0x580000) >> 0x1f)) * 4);
-  param_3[4] = param_3[4] | 0x400000;
-  param_3[7] = (uVar9 & 7) << 0xc |
-               (uVar9 & 7) << 8 | (uVar9 & 7) << 4 | uVar9 & 7 | param_3[7] & 0xffff0000;
-  if (param_1[9] != 0) {
-    return param_1[9];
+  entryHeader[4] = entryHeader[4] | 0x400000;
+  entryHeader[7] = (uVar9 & 7) << 0xc |
+               (uVar9 & 7) << 8 | (uVar9 & 7) << 4 | uVar9 & 7 | entryHeader[7] & 0xffff0000;
+  if (emitter[9] != 0) {
+    return emitter[9];
   }
-  tokenDataPtrAddr = param_1 + 10;
-  tokenCount = param_1[0xb];
-  tokenCapacity = param_1[0xc];
+  tokenDataPtrAddr = emitter + 10;
+  tokenCount = emitter[0xb];
+  tokenCapacity = emitter[0xc];
   if (tokenCapacity < tokenCount + 7U) {
     if (tokenCapacity == 0) {
       tokenCapacity = 0x10;
@@ -2445,10 +2445,10 @@ int fragmentTranslateAngleConvert(param_1, param_2, param_3, param_4, param_5, p
       allocation = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
     }
     if (allocation == 0) {
-      translatorError = param_1[9];
+      translatorError = emitter[9];
       if (translatorError == 0) {
         translatorError = 1;
-        param_1[9] = 1;
+        emitter[9] = 1;
       }
       if (translatorError != 0) {
         return translatorError;
@@ -2459,24 +2459,24 @@ int fragmentTranslateAngleConvert(param_1, param_2, param_3, param_4, param_5, p
       goto LAB_00041698;
     }
     *tokenDataPtrAddr = allocation;
-    param_1[0xc] = tokenCapacity;
-    tokenCount = param_1[0xb];
+    emitter[0xc] = tokenCapacity;
+    tokenCount = emitter[0xb];
   }
-  param_1[0xb] = tokenCount + 7;
+  emitter[0xb] = tokenCount + 7;
   tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
   tokenWord1Ptr = tokenWritePtr + 1;
   tokenWord2Ptr = tokenWritePtr + 2;
 LAB_00041698:
   iVar3 = 0;
-  *tokenWritePtr = *param_3;
-  *tokenWord1Ptr = param_3[1];
-  *tokenWord2Ptr = param_3[2];
+  *tokenWritePtr = *entryHeader;
+  *tokenWord1Ptr = entryHeader[1];
+  *tokenWord2Ptr = entryHeader[2];
   do {
     bVar2 = iVar3 != 1;
     iVar3 = iVar3 + 1;
-    tokenWritePtr[3] = param_3[3];
-    puVar1 = param_3 + 6;
-    param_3 = param_3 + 1;
+    tokenWritePtr[3] = entryHeader[3];
+    puVar1 = entryHeader + 6;
+    entryHeader = entryHeader + 1;
     tokenWritePtr[4] = *puVar1;
     tokenWritePtr = tokenWritePtr + 2;
   } while (bVar2);
