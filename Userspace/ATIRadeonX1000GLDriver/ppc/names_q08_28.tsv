@@ -1,0 +1,79 @@
+use	FUN_0017b96c	bVar1	lastLane	INFERRED	loop over 4 lanes: lane == 3 ends the loop	^\s*bVar1\ =\ iVar13\ ==\ 3;$	+1
+use	FUN_0017b96c	bVar1	lastLane	INFERRED	loop over 4 lanes: lane == 3 ends the loop	^\s*if\ \(bVar1\)\ break;$	+1
+use	FUN_0017b96c	bVar2	allSourceLanesMatch	INFERRED	stays true while every used lane of source 1 compares equal (Ptr__equalNonNull) to lane 0	^\s*bVar2\ =\ true;$	+1
+use	FUN_0017b96c	bVar2	allSourceLanesMatch	INFERRED	stays true while every used lane of source 1 compares equal (Ptr__equalNonNull) to lane 0	^\s*bVar2\ =\ false;$	+1
+use	FUN_0017b96c	bVar2	allSourceLanesMatch	INFERRED	stays true while every used lane of source 1 compares equal (Ptr__equalNonNull) to lane 0	^\s*if\ \(bVar2\)\ \{$	+1
+use	FUN_0017b96c	bVar2	notLastLane	INFERRED	do-while continue flag lane != 3	^\s*bVar2\ =\ iVar3\ !=\ 3;$	+1
+use	FUN_0017b96c	bVar2	notLastLane	INFERRED	do-while continue flag lane != 3	^\s*\}\ while\ \(bVar2\);$	+1
+use	FUN_0017b96c	bVar2	lastLane2	INFERRED	lane == 3 ends the second loop	^\s*bVar2\ =\ iVar11\ ==\ 3;$	+1
+use	FUN_0017b96c	bVar2	lastLane2	INFERRED	lane == 3 ends the second loop	^\s*if\ \(bVar2\)\ break;$	+1
+use	FUN_0017b96c	uVar6	swizzleRewritten	INFERRED	return value: 1 when the source swizzle was rewritten/flag cleared	^\s*uVar6\ =\ 1;$	+1
+use	FUN_0017b96c	uVar6	swizzleRewritten	INFERRED	return value: 1 when the source swizzle was rewritten/flag cleared	^\s*uVar6\ =\ 0;$	+1
+use	FUN_0017b96c	uVar6	swizzleRewritten	INFERRED	return value: 1 when the source swizzle was rewritten/flag cleared	^\s*return\ uVar6;$	+1
+use	FUN_0017b96c	uVar6	swizzleRewritten	INFERRED	return value: 1 when the source swizzle was rewritten/flag cleared	^\s*return\ uVar6;$@2	+1
+use	FUN_0017b96c	uVar6	swizzleRewritten	INFERRED	return value: 1 when the source swizzle was rewritten/flag cleared	^\s*uVar6\ =\ 1;$@2	+1
+use	FUN_0017b96c	uVar6	swizzleRewritten	INFERRED	return value: 1 when the source swizzle was rewritten/flag cleared	^\s*return\ uVar6;$@3	+1
+use	FUN_0017b96c	uVar7	lastElementIndex	INFERRED	vector size - 1 index into the value vector	^\s*uVar7\ =\ uVar9\ \-\ 1;$	+4
+use	FUN_0017b96c	uVar7	lastElementIndex	INFERRED	vector size - 1 index into the value vector	^\s*piVar4\ =\ \(int\ \*\)\(uVar7\ \*\ 4\ \+\ puVar12\[2\]\);$	+1
+use	FUN_0017b96c	uVar7	lastElementIndex	INFERRED	vector size - 1 index into the value vector	^\s*piVar4\ =\ \(int\ \*\)FUN_0019423c\(puVar12,uVar7\);$	+1
+use	FUN_0017b96c	uVar7	lastElementIndex2	INFERRED	same for the second vector lookup	^\s*uVar7\ =\ uVar9\ \-\ 1;$@2	+4
+use	FUN_0017b96c	uVar7	lastElementIndex2	INFERRED	same for the second vector lookup	^\s*puVar5\ =\ \(undefined4\ \*\)\(uVar7\ \*\ 4\ \+\ puVar12\[2\]\);$	+1
+use	FUN_0017b96c	uVar7	lastElementIndex2	INFERRED	same for the second vector lookup	^\s*puVar5\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar12,uVar7\);$	+1
+use	FUN_0017b96c	uVar7	instFlags	INFERRED	instruction +0xb8 flag word; bit0 tested	^\s*uVar7\ =\ \*\(uint\ \*\)\(iVar3\ \+\ 0xb8\);$	+1
+use	FUN_0017b96c	uVar7	instFlags	INFERRED	instruction +0xb8 flag word; bit0 tested	^\s*if\ \(\(uVar7\ \&\ 1\)\ !=\ 0\)\ \{$	+1
+use	FUN_0017b96c	uVar8	newSwizzleWord	INFERRED	packed 4 byte swizzle built in local_38	^\s*uVar8\ =\ local_38\[0\];$	+1
+use	FUN_0017b96c	uVar8	newSwizzleWord	INFERRED	packed 4 byte swizzle built in local_38	^\s*\*\(undefined4\ \*\)\(iVar3\ \+\ 0x10\)\ =\ uVar8;$	+1
+use	FUN_0017b96c	uVar8	valueRow	INFERRED	value-key row fetched from the vector element	^\s*uVar8\ =\ \*puVar5;$	+1
+use	FUN_0017b96c	uVar8	valueRow	INFERRED	value-key row fetched from the vector element	^\s*iVar3\ =\ FUN_001764e0\(uVar8,\(uint\)\*\(byte\ \*\)\(iVar11\ \+\ iVar3\ \+\ 0x10\)\);$	+1
+use	FUN_0017b96c	iVar10	firstValueRow	INFERRED	value-key row fetched from the first vector element	^\s*iVar10\ =\ \*piVar4;$	+1
+use	FUN_0017b96c	iVar10	firstValueRow	INFERRED	value-key row fetched from the first vector element	^\s*iVar11\ =\ iVar10;$	+1
+use	FUN_0017b96c	iVar10	firstValueRow	INFERRED	value-key row fetched from the first vector element	^\s*iVar3\ =\ FUN_00176264\(\*\(undefined4\ \*\)$	+3
+local	FUN_0017b96c	local_38	newSwizzle	INFERRED	packed byte swizzle (4 bytes used) written per lane, then stored to operand record 1 +0x10
+local	FUN_0017f7ec	bVar1	notLastLane	INFERRED	do-while continue flag of the 4-lane loops (lane != 3)
+local	FUN_0017f7ec	local_38	laneResults	INFERRED	per-lane results of the fold helpers; 0x7ffffffe marks a lane no helper produced a replacement for
+local	FUN_0018c7f4	param_1	slotOwner	INFERRED	object with 3-entry slot rows of 0xc bytes at +0x18
+local	FUN_0018c7f4	param_2	candidate	INFERRED	node to put into the slot row if no compatible one is already there
+local	FUN_0018c7f4	param_3	slotRow	INFERRED	index of the 3-entry slot row
+local	FUN_0018c7f4	iVar2	predicateResult	INFERRED	result of the RegKind / vtable +0x50 predicates
+local	FUN_0018c7f4	piVar3	existingNode	INFERRED	node already stored in the slot being tested
+use	FUN_0018c7f4	bVar1	lastSlot	INFERRED	slot index == 2 (third and last entry)	^\s*bVar1\ =\ iVar4\ ==\ 2;$	+1
+use	FUN_0018c7f4	bVar1	lastSlot	INFERRED	slot index == 2 (third and last entry)	^\s*if\ \(bVar1\)\ \{$	+1
+use	FUN_0018c7f4	bVar1	moreSlots	INFERRED	slot index != 2 loop continue flag	^\s*bVar1\ =\ iVar4\ !=\ 2;$	+1
+use	FUN_0018c7f4	bVar1	moreSlots	INFERRED	slot index != 2 loop continue flag	^\s*\}\ while\ \(bVar1\);$	+1
+func	FUN_0017f7ec	ValueKey__simplifyInstruction	INFERRED	switch on the instruction opcode (ctx+0xb0 -> +0x88 -> +8) calling the ValueKey__fold* / replaceWithSource helpers, then per-lane FUN_001765a4 for the lanes that got a replacement
+local	FUN_00178c84	param_1	resultOut	INFERRED	out: value number of the lane (copied from the expr record) or 0x7ffffffe for none
+local	FUN_00178c84	param_2	ctx	INFERRED	pass context (+0xb0 current instruction, +0x168.. per-lane value numbers, +0x238 compiler)
+local	FUN_00178c84	param_3	lane	INFERRED	lane / source index selecting the value-number slot
+local	FUN_00178c84	piVar4	inst	INFERRED	current instruction ctx+0xb0
+local	FUN_00178c84	iVar1	valueNumber	INFERRED	value number looked up for the lane (negative = expr record id); first holds the instruction's operand count from vtable +0x14
+local	FUN_00178c84	iVar3	laneBase	INFERRED	ctx + lane*0x10, base of the lane value-number words
+local	FUN_0017a294	param_2	vec4Constant	INFERRED	4-float constant written into operand 1 as a literal vec4
+local	FUN_0017a294	param_3	compiler	INFERRED	compiler (+0x6c4 current program)
+local	FUN_0017a294	iVar1	opcode	INFERRED	instruction opcode (0x8b / 0x8c)
+local	FUN_0017a294	uVar3	operandValueNumber	INFERRED	value number returned by FUN_0017a130 for the operand
+local	FUN_0017a294	local_28	secondVec4X	INFERRED	vec4 built from DAT_001b01e8..f4 constants, address passed to FUN_0017a130 (frame-adjacent, whole-variable names)
+local	FUN_0017a294	local_24	secondVec4Y	INFERRED	see secondVec4X
+local	FUN_0017a294	local_20	secondVec4Z	INFERRED	see secondVec4X
+local	FUN_0017a294	local_1c	secondVec4W	INFERRED	see secondVec4X
+local	FUN_0017ebb0	param_2	valueKey	INFERRED	value key whose instruction supplies operand 1 (+0x8c reg ref, +0x158 block)
+local	FUN_0017ebb0	param_3	src1Swizzle	INFERRED	swizzle word written to operand record 1 +0x10 of the rebuilt instruction
+local	FUN_0017ebb0	uVar4	src2ModifierBits	INFERRED	old instruction +0xe8: bit0/bit1 re-applied to operand 2 modifier bits
+local	FUN_0017ebb0	uVar7	src2Swizzle	INFERRED	swizzle (+0x10) of old operand record 3, stored in operand record 2
+local	FUN_0017ebb0	uVar10	savedExtraSourceRef	INFERRED	extra source ref (inst+0x84 index) saved before the instruction is relinked, 0 if the flag bit 9 was clear
+local	FUN_0017ebb0	uVar11	src0Swizzle	INFERRED	swizzle (+0x10) of old operand record 0, stored at new inst +0x9c
+local	FUN_0017ebb0	iVar5	useScanPtr	INFERRED	walks the rebuilt instruction's operand slots (+0x18 stride) to register VReg uses
+local	FUN_001781a4	param_1	resultOut	INFERRED	out: folded float result, 2.1474836e+09 (GH_U2F 0x7fff0000) when not foldable
+local	FUN_001781a4	param_3	changedOut	INFERRED	out: set to 1 when output scale/clamp changed the value
+local	FUN_001781a4	iVar2	operandCount	INFERRED	instruction operand count from vtable +0x14 (loop bound); reused for the lane word read
+local	FUN_001781a4	iVar4	laneInputOffset	INFERRED	byte offset into laneInputs
+local	FUN_001781a4	loopRemaining	loopCounter	INFERRED	count-down / operand loop counter
+local	FUN_001781a4	local_68	laneInputs	INFERRED	array of lane constant words (0x7ffffffe = unknown) passed to the opcode evaluator vtable +4
+local	FUN_001781a4	local_50	operandLaneSelect	INFERRED	per-operand lane index into the valueKey value-number words (0, 3, 0, 1 by operand)
+local	FUN_001781a4	local_38	scaledResult	INFERRED	result after IRInst__scaleByOutputScale
+local	FUN_001781a4	local_34	clampedResult	INFERRED	result after IRInst__clampOutputValue
+local	FUN_0017729c	param_1	ctx	INFERRED	pass context: +0xb0 instruction (index 0x2c), +0x238 compiler (0x8e), per-lane value numbers and compare codes
+local	FUN_0017729c	iVar2	valueNumber	INFERRED	lane value number, then sign/compare code
+local	FUN_0017729c	puVar3	exprRecord	INFERRED	expr record of the lane value (negative value numbers)
+local	FUN_0017729c	iVar4	ptrSetEntry	INFERRED	Compiler__findInPtrSet entry for a positive value number
+local	FUN_0017729c	bVar1	lastLane	INFERRED	lane == 3 ends the 4-lane loop
+local	FUN_0017ebb0	bVar1	hasExtraSource	INFERRED	inst flag bit 9: instruction carries an extra source (operand ref + index saved and re-appended)

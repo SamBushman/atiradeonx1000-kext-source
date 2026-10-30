@@ -2918,7 +2918,7 @@
 0x17f59c	ValueKey__foldMinOfNegatedPair	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x17f5a4	FUN_0017f5a4	488	no	indirect call (driver context / vtable / callback)
 0x17f78c	FUN_0017f78c	96	yes	
-0x17f7ec	FUN_0017f7ec	1848	no	indirect call (driver context / vtable / callback)
+0x17f7ec	ValueKey__simplifyInstruction	1848	no	indirect call (driver context / vtable / callback)
 0x180154	FUN_00180154	888	yes	
 0x180250	ValueKey__canonicalizeConstantSources	1504	no	indirect call (driver context / vtable / callback)
 0x180830	ValueKey__simplifyModifiersAndAddressing	4312	no	indirect call (driver context / vtable / callback)

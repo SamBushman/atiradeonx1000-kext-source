@@ -3598,45 +3598,46 @@ int PackState__countFreeSlots(state, freeCounts)
 }
 
 /* FUN_0018c7f4 @ 0x18c7f4 (396 bytes) */
-int FUN_0018c7f4(param_1, param_2, param_3)
-  int param_1;
-  int *param_2;
-  int param_3;
+int FUN_0018c7f4(slotOwner, candidate, slotRow)
+  int slotOwner;
+  int *candidate;
+  int slotRow;
 {
-  bool bVar1;
-  int iVar2;
-  int *piVar3;
+  bool moreSlots;
+  bool lastSlot;
+  int predicateResult;
+  int *existingNode;
   int loopIndex;
   int *loopPtr2;
   
-  loopPtr2 = (int *)(param_3 * 0xc + param_1 + 0x18);
+  loopPtr2 = (int *)(slotRow * 0xc + slotOwner + 0x18);
   loopIndex = 0;
   while (((int *)*loopPtr2 == (int *)0x0 ||
-         ((param_2 != (int *)*loopPtr2 &&
-          (((((param_2 == (int *)0x0 || (param_2[0x20] == 0)) ||
-             (iVar2 = RegKind__flagBit0(param_2[0x26]), iVar2 == 0)) ||
-            (((((param_2[5] & 2U) != 0 ||
-               (iVar2 = (**(code **)(*param_2 + 0x50))(param_2), iVar2 != 0)) ||
-              ((piVar3 = (int *)*loopPtr2, piVar3[0x20] == 0 ||
-               ((iVar2 = RegKind__flagBit0(piVar3[0x26]), iVar2 == 0 || ((piVar3[5] & 2U) != 0)))))) ||
-             (iVar2 = (**(code **)(*piVar3 + 0x50))(piVar3), iVar2 != 0)))) ||
-           ((((param_2[5] & 0x40U) == 0 || ((*(uint *)(*loopPtr2 + 0x14) & 0x40) == 0)) ||
-            (param_2[0x25] != *(int *)(*loopPtr2 + 0x94)))))))))) {
-    bVar1 = loopIndex == 2;
+         ((candidate != (int *)*loopPtr2 &&
+          (((((candidate == (int *)0x0 || (candidate[0x20] == 0)) ||
+             (predicateResult = RegKind__flagBit0(candidate[0x26]), predicateResult == 0)) ||
+            (((((candidate[5] & 2U) != 0 ||
+               (predicateResult = (**(code **)(*candidate + 0x50))(candidate), predicateResult != 0)) ||
+              ((existingNode = (int *)*loopPtr2, existingNode[0x20] == 0 ||
+               ((predicateResult = RegKind__flagBit0(existingNode[0x26]), predicateResult == 0 || ((existingNode[5] & 2U) != 0)))))) ||
+             (predicateResult = (**(code **)(*existingNode + 0x50))(existingNode), predicateResult != 0)))) ||
+           ((((candidate[5] & 0x40U) == 0 || ((*(uint *)(*loopPtr2 + 0x14) & 0x40) == 0)) ||
+            (candidate[0x25] != *(int *)(*loopPtr2 + 0x94)))))))))) {
+    lastSlot = loopIndex == 2;
     loopPtr2 = loopPtr2 + 1;
     loopIndex = loopIndex + 1;
-    if (bVar1) {
+    if (lastSlot) {
       loopIndex = 0;
-      loopPtr2 = (int *)(param_3 * 0xc + param_1 + 0x18);
+      loopPtr2 = (int *)(slotRow * 0xc + slotOwner + 0x18);
       do {
         if (*loopPtr2 == 0) {
-          *(int **)((param_3 * 3 + loopIndex) * 4 + param_1 + 0x18) = param_2;
+          *(int **)((slotRow * 3 + loopIndex) * 4 + slotOwner + 0x18) = candidate;
           return 1;
         }
-        bVar1 = loopIndex != 2;
+        moreSlots = loopIndex != 2;
         loopPtr2 = loopPtr2 + 1;
         loopIndex = loopIndex + 1;
-      } while (bVar1);
+      } while (moreSlots);
       return 0;
     }
   }

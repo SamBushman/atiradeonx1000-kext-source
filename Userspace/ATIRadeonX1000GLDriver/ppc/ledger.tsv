@@ -2918,7 +2918,7 @@
 0x17f59c	8	ValueKey__foldMinOfNegatedPair	part_048	converted
 0x17f5a4	488	FUN_0017f5a4	part_048	converted
 0x17f78c	96	FUN_0017f78c	part_048	converted
-0x17f7ec	1848	FUN_0017f7ec	part_048	converted
+0x17f7ec	1848	ValueKey__simplifyInstruction	part_048	converted
 0x180154	888	FUN_00180154	part_048	converted
 0x180250	1504	ValueKey__canonicalizeConstantSources	part_048	converted
 0x180830	2472	ValueKey__simplifyModifiersAndAddressing	part_048	converted

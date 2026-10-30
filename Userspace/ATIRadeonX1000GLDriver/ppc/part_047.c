@@ -216,57 +216,57 @@ LAB_00177254:
 }
 
 /* FUN_0017729c @ 0x17729c (224 bytes) */
-int FUN_0017729c(param_1)
-  int *param_1;
+int FUN_0017729c(ctx)
+  int *ctx;
 {
   int operandRecord;
-  bool bVar1;
-  int iVar2;
-  undefined4 *puVar3;
-  int iVar4;
+  bool lastLane;
+  int valueNumber;
+  undefined4 *exprRecord;
+  int ptrSetEntry;
   int loopIndex;
   int *loopPtr2;
   
   loopIndex = 0;
-  loopPtr2 = param_1;
+  loopPtr2 = ctx;
   do {
-    operandRecord = IRInst__getOperandRecord(param_1[0x2c],0);
+    operandRecord = IRInst__getOperandRecord(ctx[0x2c],0);
     if (*(char *)(loopIndex + operandRecord + 0x10) != '\x01') {
-      puVar3 = (undefined4 *)loopPtr2[0xc];
-      if (puVar3 == (undefined4 *)0x0) {
-        iVar2 = *loopPtr2;
-        if (iVar2 < 0) {
-          puVar3 = (undefined4 *)Compiler__exprRecordForValueNumber(param_1[0x8e],iVar2);
+      exprRecord = (undefined4 *)loopPtr2[0xc];
+      if (exprRecord == (undefined4 *)0x0) {
+        valueNumber = *loopPtr2;
+        if (valueNumber < 0) {
+          exprRecord = (undefined4 *)Compiler__exprRecordForValueNumber(ctx[0x8e],valueNumber);
           goto LAB_00177304;
         }
-        iVar4 = loopPtr2[0x10];
-        if (iVar4 == 0) {
-          if (0 < iVar2) {
-            iVar4 = Compiler__findInPtrSet(param_1[0x8e],iVar2);
+        ptrSetEntry = loopPtr2[0x10];
+        if (ptrSetEntry == 0) {
+          if (0 < valueNumber) {
+            ptrSetEntry = Compiler__findInPtrSet(ctx[0x8e],valueNumber);
             goto LAB_00177330;
           }
-          iVar2 = 0;
+          valueNumber = 0;
         }
         else {
 LAB_00177330:
-          iVar2 = *(int *)(iVar4 + 0xc);
+          valueNumber = *(int *)(ptrSetEntry + 0xc);
         }
       }
       else {
 LAB_00177304:
-        iVar2 = signToCompareCode(*puVar3);
+        valueNumber = signToCompareCode(*exprRecord);
       }
-      if (*(int *)(param_1[0x2c] + 0x120) == 0) {
-        loopPtr2[0x20] = iVar2;
+      if (*(int *)(ctx[0x2c] + 0x120) == 0) {
+        loopPtr2[0x20] = valueNumber;
       }
       else {
-        loopPtr2[0x20] = (DAT_001e61a0)[iVar2];
+        loopPtr2[0x20] = (DAT_001e61a0)[valueNumber];
       }
     }
-    bVar1 = loopIndex == 3;
+    lastLane = loopIndex == 3;
     loopPtr2 = loopPtr2 + 1;
     loopIndex = loopIndex + 1;
-    if (bVar1) {
+    if (lastLane) {
       return;
     }
   } while( true );
@@ -770,68 +770,68 @@ int FUN_00178024(ctx, operandIndex, param_3, param_4)
 }
 
 /* FUN_001781a4 @ 0x1781a4 (404 bytes) */
-int FUN_001781a4(param_1, valueKey, param_3)
-  float *param_1;
+int FUN_001781a4(resultOut, valueKey, changedOut)
+  float *resultOut;
   int valueKey;
-  undefined4 *param_3;
+  undefined4 *changedOut;
 {
   int instFlagBit2Result;
   undefined4 *loopPtr2;
-  int iVar2;
+  int operandCount;
   int *loopPtr;
-  int iVar4;
-  int loopRemaining;
-  undefined4 local_68 [6];
-  int local_50 [6];
-  float local_38;
-  float local_34 [2];
+  int laneInputOffset;
+  int loopCounter;
+  undefined4 laneInputs [6];
+  int operandLaneSelect [6];
+  float scaledResult;
+  float clampedResult [2];
   
-  loopRemaining = 5;
-  *param_1 = GH_U2F(0x7fff0000U);
-  loopPtr2 = local_68;
+  loopCounter = 5;
+  *resultOut = GH_U2F(0x7fff0000U);
+  loopPtr2 = laneInputs;
   do {
     *loopPtr2 = 0x7ffffffe;
     loopPtr2 = loopPtr2 + 1;
-    loopRemaining = loopRemaining + -1;
-  } while (loopRemaining != 0);
-  loopPtr = local_50;
-  iVar4 = 4;
-  for (loopRemaining = 1;
-      iVar2 = (**(code **)(**(int **)(valueKey + 0xb0) + 0x14))(*(int **)(valueKey + 0xb0)),
-      loopRemaining <= iVar2; loopRemaining = loopRemaining + 1) {
+    loopCounter = loopCounter + -1;
+  } while (loopCounter != 0);
+  loopPtr = operandLaneSelect;
+  laneInputOffset = 4;
+  for (loopCounter = 1;
+      operandCount = (**(code **)(**(int **)(valueKey + 0xb0) + 0x14))(*(int **)(valueKey + 0xb0)),
+      loopCounter <= operandCount; loopCounter = loopCounter + 1) {
     instFlagBit2Result = OpcodeTraits__instFlagBit2(*(undefined4 *)(valueKey + 0x238),*(undefined4 *)(valueKey + 0xb0));
     if (instFlagBit2Result == 0) {
       *loopPtr = 0;
     }
-    else if (loopRemaining == 2) {
-      local_50[1] = 0;
+    else if (loopCounter == 2) {
+      operandLaneSelect[1] = 0;
     }
-    else if (loopRemaining == 3) {
-      local_50[2] = 1;
+    else if (loopCounter == 3) {
+      operandLaneSelect[2] = 1;
     }
-    else if (loopRemaining == 1) {
-      local_50[0] = 3;
+    else if (loopCounter == 1) {
+      operandLaneSelect[0] = 3;
     }
-    iVar2 = *loopPtr;
+    operandCount = *loopPtr;
     loopPtr = loopPtr + 1;
     loopPtr2 = (undefined4 *)
              Compiler__exprRecordForValueNumber(*(undefined4 *)(valueKey + 0x238),
-                          *(undefined4 *)((iVar4 + iVar2) * 4 + valueKey + 0x168));
-    *(undefined4 *)(iVar4 + (int)local_68) = *loopPtr2;
-    iVar4 = iVar4 + 4;
+                          *(undefined4 *)((laneInputOffset + operandCount) * 4 + valueKey + 0x168));
+    *(undefined4 *)(laneInputOffset + (int)laneInputs) = *loopPtr2;
+    laneInputOffset = laneInputOffset + 4;
   }
   loopPtr = *(int **)(*(int *)(valueKey + 0xb0) + 0x88);
-  (**(code **)(*loopPtr + 4))(loopPtr,param_1,local_68,*(undefined4 *)(valueKey + 0x238));
-  if (*param_1 != 2.1474836e+09) {
-    IRInst__scaleByOutputScale(&local_38,*(undefined4 *)(valueKey + 0xb0),*param_1);
-    *param_1 = local_38;
-    IRInst__clampOutputValue(local_34,*(undefined4 *)(valueKey + 0xb0),local_38);
-    if (local_34[0] != *param_1) {
-      *param_3 = 1;
-      *param_1 = local_34[0];
+  (**(code **)(*loopPtr + 4))(loopPtr,resultOut,laneInputs,*(undefined4 *)(valueKey + 0x238));
+  if (*resultOut != 2.1474836e+09) {
+    IRInst__scaleByOutputScale(&scaledResult,*(undefined4 *)(valueKey + 0xb0),*resultOut);
+    *resultOut = scaledResult;
+    IRInst__clampOutputValue(clampedResult,*(undefined4 *)(valueKey + 0xb0),scaledResult);
+    if (clampedResult[0] != *resultOut) {
+      *changedOut = 1;
+      *resultOut = clampedResult[0];
     }
   }
-  return param_1;
+  return resultOut;
 }
 
 /* FUN_00178338 @ 0x178338 (656 bytes) */
@@ -1192,47 +1192,47 @@ LAB_00178b50:
 }
 
 /* FUN_00178c84 @ 0x178c84 (244 bytes) */
-int FUN_00178c84(param_1, param_2, param_3)
-  undefined4 *param_1;
-  int param_2;
-  int param_3;
+int FUN_00178c84(resultOut, ctx, lane)
+  undefined4 *resultOut;
+  int ctx;
+  int lane;
 {
-  int iVar1;
+  int valueNumber;
   undefined4 *exprRecord;
-  int iVar3;
-  int *piVar4;
+  int laneBase;
+  int *inst;
   
-  piVar4 = *(int **)(param_2 + 0xb0);
-  if (*(int *)(piVar4[0x22] + 8) == 0x32) {
-    iVar1 = (**(code **)(*piVar4 + 0x14))(piVar4);
-    if (iVar1 == 1) {
-      iVar3 = param_3 * 0x10 + param_2;
-      iVar1 = *(int *)(iVar3 + 0x168);
-      if ((iVar1 != *(int *)(iVar3 + 0x16c)) || (iVar1 != *(int *)(iVar3 + 0x174)))
+  inst = *(int **)(ctx + 0xb0);
+  if (*(int *)(inst[0x22] + 8) == 0x32) {
+    valueNumber = (**(code **)(*inst + 0x14))(inst);
+    if (valueNumber == 1) {
+      laneBase = lane * 0x10 + ctx;
+      valueNumber = *(int *)(laneBase + 0x168);
+      if ((valueNumber != *(int *)(laneBase + 0x16c)) || (valueNumber != *(int *)(laneBase + 0x174)))
       goto LAB_00178d10;
     }
     else {
-      if (iVar1 != 3) goto LAB_00178d10;
-      if (param_3 == 2) {
-        iVar1 = *(int *)(param_2 + 0x18c);
+      if (valueNumber != 3) goto LAB_00178d10;
+      if (lane == 2) {
+        valueNumber = *(int *)(ctx + 0x18c);
       }
-      else if (param_3 == 3) {
-        iVar1 = *(int *)(param_2 + 0x1a4);
+      else if (lane == 3) {
+        valueNumber = *(int *)(ctx + 0x1a4);
       }
       else {
-        if (param_3 != 1) goto LAB_00178d10;
-        iVar1 = *(int *)(param_2 + 0x178);
+        if (lane != 1) goto LAB_00178d10;
+        valueNumber = *(int *)(ctx + 0x178);
       }
     }
-    if (iVar1 < 0) {
-      exprRecord = (undefined4 *)Compiler__exprRecordForValueNumber(*(undefined4 *)(param_2 + 0x238),iVar1);
-      *param_1 = *exprRecord;
-      return param_1;
+    if (valueNumber < 0) {
+      exprRecord = (undefined4 *)Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),valueNumber);
+      *resultOut = *exprRecord;
+      return resultOut;
     }
   }
 LAB_00178d10:
-  *param_1 = 0x7ffffffe;
-  return param_1;
+  *resultOut = 0x7ffffffe;
+  return resultOut;
 }
 
 /* FUN_00178d78 @ 0x178d78 (280 bytes) */
@@ -2102,42 +2102,42 @@ int FUN_0017a130(operandIndex, param_2, inst, compiler)
 }
 
 /* FUN_0017a294 @ 0x17a294 (320 bytes) */
-int FUN_0017a294(ctx, param_2, param_3)
+int FUN_0017a294(ctx, vec4Constant, compiler)
   int ctx;
-  float *param_2;
-  int param_3;
+  float *vec4Constant;
+  int compiler;
 {
-  int iVar1;
+  int opcode;
   int member0xb0;
-  undefined4 uVar3;
-  undefined4 local_28;
-  undefined4 local_24;
-  undefined4 local_20;
-  undefined4 local_1c;
+  undefined4 operandValueNumber;
+  undefined4 secondVec4X;
+  undefined4 secondVec4Y;
+  undefined4 secondVec4Z;
+  undefined4 secondVec4W;
   
   member0xb0 = *(int *)(ctx + 0xb0);
-  iVar1 = *(int *)(*(int *)(member0xb0 + 0x88) + 8);
-  if (iVar1 == 0x8b) {
+  opcode = *(int *)(*(int *)(member0xb0 + 0x88) + 8);
+  if (opcode == 0x8b) {
     IRInst__initOperandRecord(member0xb0,1);
-    uVar3 = ((int (*)())FUN_0017a130)(1,param_2,*(undefined4 *)(ctx + 0xb0),param_3);
-    *(undefined4 *)(ctx + 0x214) = uVar3;
-    ((void (*)())IRInst__makeLiteralVec4Float)(*(undefined4 *)(ctx + 0xb0),*(undefined4 *)(param_3 + 0x6c4),1,(double)*param_2
-                 ,(double)param_2[1],(double)param_2[2],(double)param_2[3]);
+    operandValueNumber = ((int (*)())FUN_0017a130)(1,vec4Constant,*(undefined4 *)(ctx + 0xb0),compiler);
+    *(undefined4 *)(ctx + 0x214) = operandValueNumber;
+    ((void (*)())IRInst__makeLiteralVec4Float)(*(undefined4 *)(ctx + 0xb0),*(undefined4 *)(compiler + 0x6c4),1,(double)*vec4Constant
+                 ,(double)vec4Constant[1],(double)vec4Constant[2],(double)vec4Constant[3]);
     IRInst__initOperandRecord(*(undefined4 *)(ctx + 0xb0),2);
-    local_24 = DAT_001b01ec;
-    local_28 = DAT_001b01e8;
-    local_20 = DAT_001b01f0;
-    local_1c = DAT_001b01f4;
-    uVar3 = ((int (*)())FUN_0017a130)(2,&local_28,*(undefined4 *)(ctx + 0xb0),param_3);
-    *(undefined4 *)(ctx + 0x218) = uVar3;
+    secondVec4Y = DAT_001b01ec;
+    secondVec4X = DAT_001b01e8;
+    secondVec4Z = DAT_001b01f0;
+    secondVec4W = DAT_001b01f4;
+    operandValueNumber = ((int (*)())FUN_0017a130)(2,&secondVec4X,*(undefined4 *)(ctx + 0xb0),compiler);
+    *(undefined4 *)(ctx + 0x218) = operandValueNumber;
     *(undefined4 *)(*(int *)(ctx + 0xb0) + 300) = 0;
   }
-  else if (iVar1 == 0x8c) {
+  else if (opcode == 0x8c) {
     IRInst__initOperandRecord(member0xb0,1);
-    uVar3 = ((int (*)())FUN_0017a130)(1,param_2,*(undefined4 *)(ctx + 0xb0),param_3);
-    *(undefined4 *)(ctx + 0x214) = uVar3;
-    ((void (*)())IRInst__makeLiteralVec4Float)(*(undefined4 *)(ctx + 0xb0),*(undefined4 *)(param_3 + 0x6c4),1,(double)*param_2
-                 ,(double)param_2[1],(double)param_2[2],(double)param_2[3]);
+    operandValueNumber = ((int (*)())FUN_0017a130)(1,vec4Constant,*(undefined4 *)(ctx + 0xb0),compiler);
+    *(undefined4 *)(ctx + 0x214) = operandValueNumber;
+    ((void (*)())IRInst__makeLiteralVec4Float)(*(undefined4 *)(ctx + 0xb0),*(undefined4 *)(compiler + 0x6c4),1,(double)*vec4Constant
+                 ,(double)vec4Constant[1],(double)vec4Constant[2],(double)vec4Constant[3]);
     *(undefined4 *)(*(int *)(ctx + 0xb0) + 300) = 0;
   }
   return;
@@ -3096,22 +3096,27 @@ int ValueKey__mixLiteralSources(key)
 int FUN_0017b96c(ctx)
   int ctx;
 {
+  undefined4 valueRow;
+  uint instFlags;
+  uint lastElementIndex2;
+  bool lastLane2;
+  bool notLastLane;
   uint vectorFilledCount2;
   uint *vector2;
-  bool bVar1;
-  bool bVar2;
+  bool lastLane;
+  bool allSourceLanesMatch;
   int loopIndex3;
   int *elementRef;
   undefined4 *elementRef2;
-  undefined4 uVar6;
-  uint uVar7;
-  undefined4 uVar8;
+  undefined4 swizzleRewritten;
+  uint lastElementIndex;
+  undefined4 newSwizzleWord;
   uint vectorFilledCount;
-  int iVar10;
+  int firstValueRow;
   int loopIndex;
   uint *vector;
   int loopIndex2;
-  undefined4 local_38 [8];
+  undefined4 newSwizzle [8];
   
   if ((*(int *)(*(int *)(ctx + 0x238) + 0x658) <=
        *(int *)(*(int *)(*(int *)(ctx + 0x238) + 0x6c4) + 0xa8)) ||
@@ -3125,100 +3130,100 @@ int FUN_0017b96c(ctx)
     loopIndex3 = *(int *)(ctx + 0xb0);
     vector = *(uint **)(*(int *)(loopIndex3 + 0xa4) + 0x2c);
     vectorFilledCount = vector[1];
-    uVar7 = vectorFilledCount - 1;
-    if (uVar7 < *vector) {
-      if (vectorFilledCount <= uVar7) {
-        _memset(vectorFilledCount * 4 + vector[2],0,(uVar7 - vectorFilledCount) * 4 + 4);
+    lastElementIndex = vectorFilledCount - 1;
+    if (lastElementIndex < *vector) {
+      if (vectorFilledCount <= lastElementIndex) {
+        _memset(vectorFilledCount * 4 + vector[2],0,(lastElementIndex - vectorFilledCount) * 4 + 4);
         vector[1] = vectorFilledCount;
         loopIndex3 = *(int *)(ctx + 0xb0);
       }
-      elementRef = (int *)(uVar7 * 4 + vector[2]);
+      elementRef = (int *)(lastElementIndex * 4 + vector[2]);
     }
     else {
-      elementRef = (int *)Vector__elementRefGrow(vector,uVar7);
+      elementRef = (int *)Vector__elementRefGrow(vector,lastElementIndex);
       loopIndex3 = *(int *)(ctx + 0xb0);
     }
-    iVar10 = *elementRef;
-    bVar2 = true;
+    firstValueRow = *elementRef;
+    allSourceLanesMatch = true;
     loopIndex2 = 0;
-    loopIndex = iVar10;
+    loopIndex = firstValueRow;
     while( true ) {
       loopIndex3 = IRInst__getOperandRecord(loopIndex3,0);
       if (*(char *)(loopIndex2 + loopIndex3 + 0x10) != '\x01') {
         loopIndex3 = IRInst__getOperandRecord(*(undefined4 *)(ctx + 0xb0),1);
         loopIndex3 = Ptr__equalNonNull(*(undefined4 *)
-                              ((uint)*(byte *)(loopIndex2 + loopIndex3 + 0x10) * 4 + iVar10 + 0x20),
+                              ((uint)*(byte *)(loopIndex2 + loopIndex3 + 0x10) * 4 + firstValueRow + 0x20),
                              *(undefined4 *)(loopIndex + 0x20));
         if (loopIndex3 == 0) {
-          bVar2 = false;
+          allSourceLanesMatch = false;
         }
       }
-      bVar1 = loopIndex2 == 3;
+      lastLane = loopIndex2 == 3;
       loopIndex = loopIndex + 4;
       loopIndex2 = loopIndex2 + 1;
-      if (bVar1) break;
+      if (lastLane) break;
       loopIndex3 = *(int *)(ctx + 0xb0);
     }
-    if (bVar2) {
+    if (allSourceLanesMatch) {
       loopIndex3 = 0;
-      local_38[0] = 0x4040404;
+      newSwizzle[0] = 0x4040404;
       do {
         loopIndex = IRInst__getOperandRecord(*(undefined4 *)(ctx + 0xb0),0);
         if (*(char *)(loopIndex3 + loopIndex + 0x10) != '\x01') {
-          *(char *)((int)local_38 + loopIndex3) = (char)loopIndex3;
+          *(char *)((int)newSwizzle + loopIndex3) = (char)loopIndex3;
         }
-        uVar8 = local_38[0];
-        bVar2 = loopIndex3 != 3;
+        newSwizzleWord = newSwizzle[0];
+        notLastLane = loopIndex3 != 3;
         loopIndex3 = loopIndex3 + 1;
-      } while (bVar2);
-      uVar6 = 1;
+      } while (notLastLane);
+      swizzleRewritten = 1;
       loopIndex3 = IRInst__getOperandRecord(*(undefined4 *)(ctx + 0xb0),1);
-      *(undefined4 *)(loopIndex3 + 0x10) = uVar8;
+      *(undefined4 *)(loopIndex3 + 0x10) = newSwizzleWord;
       goto LAB_0017bb2c;
     }
   }
-  uVar6 = 0;
+  swizzleRewritten = 0;
 LAB_0017bb2c:
   loopIndex3 = *(int *)(ctx + 0xb0);
   if ((*(int *)(loopIndex3 + 0x120) != 0) && (*(int *)(loopIndex3 + 0x124) == 0)) {
     vector2 = *(uint **)(*(int *)(loopIndex3 + 0xa4) + 0x2c);
     vectorFilledCount2 = vector2[1];
-    uVar7 = vectorFilledCount2 - 1;
-    if (uVar7 < *vector2) {
-      if (vectorFilledCount2 <= uVar7) {
-        _memset(vectorFilledCount2 * 4 + vector2[2],0,(uVar7 - vectorFilledCount2) * 4 + 4);
+    lastElementIndex2 = vectorFilledCount2 - 1;
+    if (lastElementIndex2 < *vector2) {
+      if (vectorFilledCount2 <= lastElementIndex2) {
+        _memset(vectorFilledCount2 * 4 + vector2[2],0,(lastElementIndex2 - vectorFilledCount2) * 4 + 4);
         vector2[1] = vectorFilledCount2;
         loopIndex3 = *(int *)(ctx + 0xb0);
       }
-      elementRef2 = (undefined4 *)(uVar7 * 4 + vector2[2]);
+      elementRef2 = (undefined4 *)(lastElementIndex2 * 4 + vector2[2]);
     }
     else {
-      elementRef2 = (undefined4 *)Vector__elementRefGrow(vector2,uVar7);
+      elementRef2 = (undefined4 *)Vector__elementRefGrow(vector2,lastElementIndex2);
       loopIndex3 = *(int *)(ctx + 0xb0);
     }
-    uVar7 = *(uint *)(loopIndex3 + 0xb8);
+    instFlags = *(uint *)(loopIndex3 + 0xb8);
     loopIndex = 0;
-    uVar8 = *elementRef2;
+    valueRow = *elementRef2;
     while( true ) {
       loopIndex3 = IRInst__getOperandRecord(loopIndex3,0);
       if (*(char *)(loopIndex + loopIndex3 + 0x10) != '\x01') {
         loopIndex3 = IRInst__getOperandRecord(*(undefined4 *)(ctx + 0xb0),1);
-        loopIndex3 = FUN_001764e0(uVar8,(uint)*(byte *)(loopIndex + loopIndex3 + 0x10));
+        loopIndex3 = FUN_001764e0(valueRow,(uint)*(byte *)(loopIndex + loopIndex3 + 0x10));
         if (loopIndex3 == 0) {
-          return uVar6;
+          return swizzleRewritten;
         }
-        if ((uVar7 & 1) != 0) {
-          return uVar6;
+        if ((instFlags & 1) != 0) {
+          return swizzleRewritten;
         }
       }
-      bVar2 = loopIndex == 3;
+      lastLane2 = loopIndex == 3;
       loopIndex = loopIndex + 1;
-      if (bVar2) break;
+      if (lastLane2) break;
       loopIndex3 = *(int *)(ctx + 0xb0);
     }
-    uVar6 = 1;
+    swizzleRewritten = 1;
     *(undefined4 *)(*(int *)(ctx + 0xb0) + 0x120) = 0;
   }
-  return uVar6;
+  return swizzleRewritten;
 }
 

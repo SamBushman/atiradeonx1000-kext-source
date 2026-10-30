@@ -801,7 +801,7 @@ int FUN_001745f0(ctx)
       ((int (*)())ValueKey__rebuild)(ctx);
     }
     do {
-      callResult = FUN_0017f7ec(ctx);
+      callResult = ValueKey__simplifyInstruction(ctx);
     } while (callResult != 0);
     callResult = FUN_0017b96c(ctx);
     if (callResult != 0) {

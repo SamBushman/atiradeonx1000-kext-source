@@ -3124,7 +3124,7 @@ extern int ValueKey__foldMaxOfNegatedPair();
 extern int ValueKey__foldMinOfNegatedPair();
 extern int FUN_0017f5a4();
 extern int FUN_0017f78c();
-extern int FUN_0017f7ec();
+extern int ValueKey__simplifyInstruction();
 extern int FUN_00180154();
 extern int ValueKey__canonicalizeConstantSources();
 extern int ValueKey__simplifyModifiersAndAddressing();

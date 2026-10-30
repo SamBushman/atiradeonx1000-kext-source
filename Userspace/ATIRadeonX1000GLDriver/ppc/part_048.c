@@ -2097,10 +2097,10 @@ int FUN_0017e7e0(ctx)
 }
 
 /* FUN_0017ebb0 @ 0x17ebb0 (508 bytes) */
-int FUN_0017ebb0(ctx, param_2, param_3, negateFlag)
+int FUN_0017ebb0(ctx, valueKey, src1Swizzle, negateFlag)
   int ctx;
-  int param_2;
-  undefined4 param_3;
+  int valueKey;
+  undefined4 src1Swizzle;
   undefined4 negateFlag;
 {
   int operandRef;
@@ -2110,17 +2110,17 @@ int FUN_0017ebb0(ctx, param_2, param_3, negateFlag)
   int operandRecord;
   int operandRecord2;
   undefined4 arenaAt378;
-  bool bVar1;
+  bool hasExtraSource;
   undefined4 member0x21c;
   int inst;
-  uint uVar4;
-  int iVar5;
+  uint src2ModifierBits;
+  int useScanPtr;
   undefined4 *loopPtr2;
-  undefined4 uVar7;
+  undefined4 src2Swizzle;
   undefined4 operandRef3;
   undefined4 operandRef4;
-  undefined4 uVar10;
-  undefined4 uVar11;
+  undefined4 savedExtraSourceRef;
+  undefined4 src0Swizzle;
   undefined4 destRegister;
   undefined4 destRegisterOffset;
   undefined4 afterInst;
@@ -2140,20 +2140,20 @@ int FUN_0017ebb0(ctx, param_2, param_3, negateFlag)
   inst2 = *(int *)(ctx + 0xb0);
   member0x21c = *(undefined4 *)(ctx + 0x21c);
   resultScaleCode = *(undefined4 *)(inst2 + 0x124);
-  uVar11 = *(undefined4 *)(operandRecord + 0x10);
+  src0Swizzle = *(undefined4 *)(operandRecord + 0x10);
   saturate = *(undefined4 *)(inst2 + 0x120);
   operandRef3 = *(undefined4 *)(inst2 + 0xd4);
   operandRecord2 = IRInst__getOperandRecord(inst2,3);
   node = *(int *)(ctx + 0xb0);
-  uVar7 = *(undefined4 *)(operandRecord2 + 0x10);
-  uVar4 = *(uint *)(node + 0xe8);
-  bVar1 = (*(uint *)(node + 0x14) >> 9 & 1) != 0;
-  if (bVar1) {
-    uVar10 = *(undefined4 *)(*(int *)(node + 0x84) * 4 + ctx + 0x210);
+  src2Swizzle = *(undefined4 *)(operandRecord2 + 0x10);
+  src2ModifierBits = *(uint *)(node + 0xe8);
+  hasExtraSource = (*(uint *)(node + 0x14) >> 9 & 1) != 0;
+  if (hasExtraSource) {
+    savedExtraSourceRef = *(undefined4 *)(*(int *)(node + 0x84) * 4 + ctx + 0x210);
     operandRef2 = *(undefined4 *)(*(int *)(node + 0x84) * 0x18 + node + 0x8c);
   }
   else {
-    uVar10 = 0;
+    savedExtraSourceRef = 0;
     operandRef2 = 0;
   }
   DList__unlink(node);
@@ -2165,44 +2165,44 @@ int FUN_0017ebb0(ctx, param_2, param_3, negateFlag)
   *(undefined4 *)(inst3 + 0x94) = destRegister;
   *(undefined4 *)(inst3 + 0x98) = destRegisterOffset;
   IRInst__setOperandRef(inst3,0,operandRef4);
-  operandRef = *(int *)(param_2 + 0x8c);
-  *(undefined4 *)(inst3 + 0x9c) = uVar11;
+  operandRef = *(int *)(valueKey + 0x8c);
+  *(undefined4 *)(inst3 + 0x9c) = src0Swizzle;
   if (*(int *)(*(int *)(operandRef + 0x2c) + 4) == 0) {
     arenaAt378 = *(undefined4 *)(*(int *)(ctx + 0x238) + 0x378);
     loopPtr2 = (undefined4 *)Arena__alloc(arenaAt378,0x240);
     *loopPtr2 = arenaAt378;
     loopPtr2 = loopPtr2 + 1;
-    ValueKey__init(loopPtr2,param_2,*(undefined4 *)(ctx + 0x238));
+    ValueKey__init(loopPtr2,valueKey,*(undefined4 *)(ctx + 0x238));
     FUN_00174e0c(loopPtr2);
     ValueKey__propagateLaneValues(loopPtr2);
-    VReg__pushDefinition(operandRef,*(undefined4 *)(*(int *)(param_2 + 0x158) + 0xb0),loopPtr2);
+    VReg__pushDefinition(operandRef,*(undefined4 *)(*(int *)(valueKey + 0x158) + 0xb0),loopPtr2);
   }
   IRInst__setOperandRef(inst3,1,operandRef);
   operandRecord = IRInst__getOperandRecord(inst3,1);
-  *(undefined4 *)(operandRecord + 0x10) = param_3;
+  *(undefined4 *)(operandRecord + 0x10) = src1Swizzle;
   IROperand__setModifierBits(inst3 + 0xa4,1,negateFlag);
   IRInst__setOperandRef(inst3,2,operandRef3);
   operandRecord = IRInst__getOperandRecord(inst3,2);
-  *(undefined4 *)(operandRecord + 0x10) = uVar7;
-  IROperand__setModifierBits(inst3 + 0xbc,1,uVar4 & 1);
-  IROperand__setModifierBits(inst3 + 0xbc,2,uVar4 >> 1 & 1);
-  if (bVar1) {
+  *(undefined4 *)(operandRecord + 0x10) = src2Swizzle;
+  IROperand__setModifierBits(inst3 + 0xbc,1,src2ModifierBits & 1);
+  IROperand__setModifierBits(inst3 + 0xbc,2,src2ModifierBits >> 1 & 1);
+  if (hasExtraSource) {
     IRInst__appendSource(inst3,operandRef2);
     *(uint *)(inst3 + 0x14) = *(uint *)(inst3 + 0x14) | 0x200;
   }
-  *(int *)(ctx + 0x214) = param_2;
+  *(int *)(ctx + 0x214) = valueKey;
   *(undefined4 *)(ctx + 0x218) = member0x21c;
-  if (!bVar1) {
-    uVar10 = 0;
+  if (!hasExtraSource) {
+    savedExtraSourceRef = 0;
   }
-  *(undefined4 *)(ctx + 0x21c) = uVar10;
+  *(undefined4 *)(ctx + 0x21c) = savedExtraSourceRef;
   FUN_0012306c(operandRef4,inst3);
   if (0 < *(int *)(inst3 + 0x84)) {
     loopIndex = 1;
-    iVar5 = inst3;
+    useScanPtr = inst3;
     do {
-      loopPtr2 = (undefined4 *)(iVar5 + 0xa4);
-      iVar5 = iVar5 + 0x18;
+      loopPtr2 = (undefined4 *)(useScanPtr + 0xa4);
+      useScanPtr = useScanPtr + 0x18;
       VReg__addUse(*loopPtr2,loopIndex,inst3);
       loopIndex = loopIndex + 1;
     } while (loopIndex <= *(int *)(inst3 + 0x84));
@@ -2612,22 +2612,22 @@ int FUN_0017f78c(ctx)
   return;
 }
 
-/* FUN_0017f7ec @ 0x17f7ec (1848 bytes) */
-int FUN_0017f7ec(ctx)
+/* ValueKey__simplifyInstruction @ 0x17f7ec (1848 bytes) */
+int ValueKey__simplifyInstruction(ctx)
   int ctx;
 {
-  bool bVar1;
+  bool notLastLane;
   int loopIndex;
   int *loopPtr3;
   int *loopPtr4;
   int loopIndex2;
-  int local_38 [8];
+  int laneResults [8];
   
   if ((*(int *)(*(int *)(ctx + 0xb0) + 0x80) == 1) &&
      (loopIndex = IRInst__getOperandRecord(*(int *)(ctx + 0xb0),0), *(int *)(loopIndex + 0x10) == DAT_001b01d0)) {
     return 0;
   }
-  loopPtr4 = local_38;
+  loopPtr4 = laneResults;
   loopIndex = 4;
   loopPtr3 = loopPtr4;
   do {
@@ -2695,10 +2695,10 @@ joined_r0x0017f980:
             FUN_0017994c(ctx,loopIndex2);
           }
         }
-        bVar1 = loopIndex2 != 3;
+        notLastLane = loopIndex2 != 3;
         loopPtr3 = loopPtr3 + 1;
         loopIndex2 = loopIndex2 + 1;
-      } while (bVar1);
+      } while (notLastLane);
     }
     else if (loopIndex < 0x18) {
       if (loopIndex == 0x13) {
@@ -2727,10 +2727,10 @@ joined_r0x0017f980:
               FUN_00179f38(ctx,loopIndex2);
             }
           }
-          bVar1 = loopIndex2 != 3;
+          notLastLane = loopIndex2 != 3;
           loopPtr3 = loopPtr3 + 1;
           loopIndex2 = loopIndex2 + 1;
-        } while (bVar1);
+        } while (notLastLane);
       }
       else {
         if (loopIndex != 0x14) goto LAB_0017fe28;
@@ -2763,10 +2763,10 @@ joined_r0x0017f980:
               FUN_00179db0(ctx,loopIndex2);
             }
           }
-          bVar1 = loopIndex2 != 3;
+          notLastLane = loopIndex2 != 3;
           loopPtr3 = loopPtr3 + 1;
           loopIndex2 = loopIndex2 + 1;
-        } while (bVar1);
+        } while (notLastLane);
       }
     }
     else {
@@ -2808,10 +2808,10 @@ LAB_0017fe28:
             FUN_00179a34(ctx,loopIndex2);
           }
         }
-        bVar1 = loopIndex2 != 3;
+        notLastLane = loopIndex2 != 3;
         loopPtr3 = loopPtr3 + 1;
         loopIndex2 = loopIndex2 + 1;
-      } while (bVar1);
+      } while (notLastLane);
     }
   }
   else if (loopIndex < 0x2b) {
@@ -2841,10 +2841,10 @@ LAB_0017fe28:
             FUN_001797d0(ctx,loopIndex2);
           }
         }
-        bVar1 = loopIndex2 != 3;
+        notLastLane = loopIndex2 != 3;
         loopPtr3 = loopPtr3 + 1;
         loopIndex2 = loopIndex2 + 1;
-      } while (bVar1);
+      } while (notLastLane);
     }
     else {
       loopIndex = ((int (*)())FUN_0017d9b8)(ctx);
@@ -2867,10 +2867,10 @@ LAB_0017fe28:
             ValueKey__foldCompareSameSourcesValueNumber(ctx,loopIndex2);
           }
         }
-        bVar1 = loopIndex2 != 3;
+        notLastLane = loopIndex2 != 3;
         loopPtr3 = loopPtr3 + 1;
         loopIndex2 = loopIndex2 + 1;
-      } while (bVar1);
+      } while (notLastLane);
     }
   }
   else {
@@ -2910,10 +2910,10 @@ LAB_0017fe34:
       if (*loopPtr4 != 0x7ffffffe) {
         FUN_001765a4(ctx,*loopPtr4,loopIndex);
       }
-      bVar1 = loopIndex != 3;
+      notLastLane = loopIndex != 3;
       loopPtr4 = loopPtr4 + 1;
       loopIndex = loopIndex + 1;
-    } while (bVar1);
+    } while (notLastLane);
   }
   else {
     loopIndex = 0;
@@ -2925,10 +2925,10 @@ LAB_0017fe34:
       if (*loopPtr4 != 0x7ffffffe) {
         FUN_001765a4(ctx,*loopPtr4,loopIndex);
       }
-      bVar1 = loopIndex != 3;
+      notLastLane = loopIndex != 3;
       loopPtr4 = loopPtr4 + 1;
       loopIndex = loopIndex + 1;
-    } while (bVar1);
+    } while (notLastLane);
   }
   return 0;
 LAB_0017fe30:

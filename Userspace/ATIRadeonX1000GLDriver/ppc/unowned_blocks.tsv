@@ -3417,7 +3417,7 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 17ece0	17ece4	millicode	FUN_0017ebb0	1	
 17edb0	17edd0	eh-pad	FUN_0017ebb0	8	0x193cc0,__Unwind_Resume
 17f03c	17f040	eh-pad	FUN_0017ee68	1	__Unwind_Resume
-1801a4	1801f8	table	FUN_0017f7ec	21	
+1801a4	1801f8	table	ValueKey__simplifyInstruction	21	
 1811d8	1811f8	eh-pad	ValueKey__simplifyModifiersAndAddressing	8	0x193cc0,__Unwind_Resume
 181fdc	181ff8	other	Block__flattenAndRebuildAddMulTree	7	0x193cc0
 182010	18202c	other	Block__flattenAndRebuildAddMulTree	7	0x193cc0
