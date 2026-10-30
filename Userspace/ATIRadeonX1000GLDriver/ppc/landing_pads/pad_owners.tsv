@@ -382,8 +382,8 @@
 0x12e768	IfFooter__ctor_12e56c
 0x12e7ac	IfFooter__ctor_12e56c
 0x12e88c	IfFooter__ctor_12e56c
-0x12e9f0	FUN_0012e8c0
-0x12ea90	FUN_0012e8c0
+0x12e9f0	Program__splitCriticalEdges
+0x12ea90	Program__splitCriticalEdges
 0x12ec10	FUN_0012eacc
 0x12eec4	FUN_0012eacc
 0x12eef4	FUN_0012eacc
@@ -410,7 +410,7 @@
 0x136fac	FUN_00136ec8
 0x137234	InterferenceGraph__ctor_13719c
 0x137284	InterferenceGraph__ctor_13719c
-0x137620	FUN_00137474
+0x137620	InterferenceGraph__growNodeArray
 0x13785c	FUN_00137694
 0x139f4c	FUN_00139d40
 0x13b49c	Program__hoistFetchInsts

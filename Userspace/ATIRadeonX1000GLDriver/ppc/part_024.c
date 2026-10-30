@@ -395,7 +395,7 @@ int Program__splitMixedSourceKinds(program)
                 tempVReg = VRegPool__findOrCreate(tempVReg,0,newTempIndex,0);
                 IRInst__setOperandRef(inst,0,tempVReg);
                 IRInst__setOperandRef(inst,1,sourceVReg);
-                FUN_001235b8(sourceVReg,candidateInst,inst);
+                Owner__replaceVectorEntry(sourceVReg,candidateInst,inst);
                 IRInst__setOperandRef(candidateInst,loopIndex3,tempVReg);
                 Block__insertInstBefore(*(undefined4 *)(candidateInst + 0x158),candidateInst,inst);
               }

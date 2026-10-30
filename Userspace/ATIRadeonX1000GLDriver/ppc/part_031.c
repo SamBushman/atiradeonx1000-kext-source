@@ -1323,8 +1323,8 @@ int Program__emitLoadVertexAttr(param_1, program, param_3, vertexAttrWord, param
   return Program__appendInst(program,loadVertexInst,insertRef);
 }
 
-/* FUN_0010defc @ 0x10defc (340 bytes) */
-int FUN_0010defc(this, compiler)
+/* ChipShaders__release @ 0x10defc (340 bytes) */
+int ChipShaders__release(this, compiler)
   int this;
   int compiler;
 {

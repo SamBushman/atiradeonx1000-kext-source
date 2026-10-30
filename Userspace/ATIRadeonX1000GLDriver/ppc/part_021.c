@@ -508,7 +508,7 @@ int Compiler__releaseChipAndPools(compiler, releaseChip)
   int iVar1;
   
   if ((releaseChip != 0) && (*(int *)(compiler + 0x310) != 0)) {
-    FUN_0010defc(*(int *)(compiler + 0x310),compiler);
+    ChipShaders__release(*(int *)(compiler + 0x310),compiler);
     (**(code **)(compiler + 0x34c))
               (*(undefined4 *)(compiler + 0x354),*(undefined4 *)(compiler + 0x310));
   }

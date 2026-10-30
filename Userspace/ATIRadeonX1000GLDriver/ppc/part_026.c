@@ -5513,7 +5513,7 @@ code_r0x00103c40:
     Program__splitMixedSourceKinds(program);
     Block__connect(currentBlock,*(undefined4 *)(program + 0x3a8));
     *(uint *)(program + 0x30) = *(uint *)(program + 0x30) | 2;
-    FUN_0012e8c0(program,*(undefined4 *)(program + 0x3a0),*(undefined4 *)(program + 0x3a8));
+    Program__splitCriticalEdges(program,*(undefined4 *)(program + 0x3a0),*(undefined4 *)(program + 0x3a8));
     if ((uint ******)ifStack != (uint ******)0x0) {
       Arena__free(ifStack[3],ifStack[2]);
       Arena__free(ifStack[-1],ifStack + -1);

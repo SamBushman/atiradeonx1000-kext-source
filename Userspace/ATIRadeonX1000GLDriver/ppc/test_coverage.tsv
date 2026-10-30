@@ -1888,7 +1888,7 @@
 0x10ddfc	HwLimits__vslot8_failNotSupported	56	yes	
 0x10de34	HwLimits__vslot9_failNotSupported	56	yes	
 0x10de6c	Program__emitLoadVertexAttr	140	yes	
-0x10defc	FUN_0010defc	340	yes	
+0x10defc	ChipShaders__release	340	yes	
 0x10e050	KhanChip__ctor_10e050	172	yes	
 0x10e114	KhanChip__ctor_10e114	172	yes	
 0x10e1d8	FudoChip__ctor_10e1d8	176	yes	
@@ -1919,7 +1919,7 @@
 0x10ef68	FUN_0010ef68	1052	no	indirect call (driver context / vtable / callback)
 0x10f38c	FUN_0010f38c	328	yes	
 0x10f4d4	FUN_0010f4d4	560	yes	
-0x10f704	FUN_0010f704	376	yes	
+0x10f704	Program__countUsedInterpolatorSlots	376	yes	
 0x10f87c	FUN_0010f87c	424	yes	
 0x10fa24	FUN_0010fa24	304	yes	
 0x10fb54	FUN_0010fb54	308	yes	
@@ -2245,8 +2245,8 @@
 0x123288	VertexRegister__clone	240	no	indirect call (driver context / vtable / callback)
 0x123398	VReg__setTopDefinition	140	yes	
 0x123424	VReg__pushDefinition	180	yes	
-0x1234d8	FUN_001234d8	224	yes	
-0x1235b8	FUN_001235b8	300	yes	
+0x1234d8	Owner__removeVectorEntry	224	yes	
+0x1235b8	Owner__replaceVectorEntry	300	yes	
 0x1236e4	VReg__addUse	184	yes	
 0x12379c	VRegInfo__ctor_12379c	296	yes	
 0x1238e8	VRegInfo__ctor_1238e8	296	yes	
@@ -2421,7 +2421,7 @@
 0x12df90	Program__foldConstantIfRegion	1248	no	indirect call (driver context / vtable / callback)
 0x12e488	Program__getOrCreateLandingBlock	196	yes	
 0x12e56c	IfFooter__ctor_12e56c	680	no	indirect call (driver context / vtable / callback)
-0x12e8c0	FUN_0012e8c0	488	no	indirect call (driver context / vtable / callback)
+0x12e8c0	Program__splitCriticalEdges	488	no	indirect call (driver context / vtable / callback)
 0x12eacc	FUN_0012eacc	1460	yes	
 0x12f0f8	FUN_0012f0f8	3440	no	indirect call (driver context / vtable / callback)
 0x12fe8c	Program__isRegionTrivial	524	no	indirect call (driver context / vtable / callback)
@@ -2458,16 +2458,16 @@
 0x131008	FUN_00131008	452	no	indirect call (driver context / vtable / callback)
 0x1311cc	Program__insertMemLoadFbAfter	264	yes	
 0x1312f4	RegAlloc__emitSpillStore	420	yes	
-0x1314b8	FUN_001314b8	320	no	indirect call (driver context / vtable / callback)
+0x1314b8	RegAlloc__initRegisterTables	320	no	indirect call (driver context / vtable / callback)
 0x1315f8	FUN_001315f8	684	yes	
-0x1318a4	FUN_001318a4	300	yes	
+0x1318a4	RegAlloc__getOrCreateSpillSlot	300	yes	
 0x1319d0	RegAlloc__sumSlotCounts	176	yes	
 0x131a80	RegAlloc__findFreeSpillSlot	368	yes	
 0x131c10	RegAlloc__getCachedLoadFa	100	yes	
 0x131c74	RegAlloc__setSpillSlotValue	148	yes	
 0x131d08	FUN_00131d08	1440	no	indirect call (driver context / vtable / callback)
 0x1322a8	HwLimits__buildInterferenceGraph	3608	no	indirect call (driver context / vtable / callback)
-0x1330f4	FUN_001330f4	328	no	indirect call (driver context / vtable / callback)
+0x1330f4	InterferenceGraph__addEdgesForInst	328	no	indirect call (driver context / vtable / callback)
 0x13323c	FUN_0013323c	3452	no	indirect call (driver context / vtable / callback)
 0x133fe4	FUN_00133fe4	1020	no	indirect call (driver context / vtable / callback)
 0x134400	FUN_00134400	600	no	indirect call (driver context / vtable / callback)
@@ -2492,22 +2492,22 @@
 0x1351c4	InterferenceNode__ctor_1351c4	148	yes	
 0x135278	InterferenceState__clearNodeWord4	188	yes	
 0x135334	InterferenceGraph__addEdge	552	yes	
-0x13555c	FUN_0013555c	296	yes	
+0x13555c	InterferenceGraph__addNeighbour	296	yes	
 0x135684	FUN_00135684	336	yes	
-0x1357d4	FUN_001357d4	300	yes	
-0x135900	FUN_00135900	300	yes	
+0x1357d4	InterferenceGraph__dtor_1357d4	300	yes	
+0x135900	InterferenceGraph__dtor_135900	300	yes	
 0x135a2c	FUN_00135a2c	500	yes	
 0x135c20	InterferenceGraph__mergeNodes	260	yes	
 0x135d24	ColorGraph__removeNodeUpdateDegrees	652	yes	
 0x135fb0	pass_color_graph	3828	no	indirect call (driver context / vtable / callback)
 0x136ec4	InterferenceGraph__ctor_136ec4	692	no	indirect call (driver context / vtable / callback)
 0x13719c	InterferenceGraph__ctor_13719c	692	no	indirect call (driver context / vtable / callback)
-0x137474	FUN_00137474	512	yes	
+0x137474	InterferenceGraph__growNodeArray	512	yes	
 0x137694	FUN_00137694	564	yes	
 0x1378e8	RegAlloc__accumulateUseWeights	1420	no	indirect call (driver context / vtable / callback)
 0x137e74	BitSet__testRegisterLane	36	yes	
 0x137e98	IRInst__chainContainsOperandSource	124	yes	
-0x137f14	FUN_00137f14	364	no	indirect call (driver context / vtable / callback)
+0x137f14	Liveness__applyInstEffect	364	no	indirect call (driver context / vtable / callback)
 0x138080	Program__freeBlockBitsets	176	yes	
 0x138130	FUN_00138130	272	yes	
 0x138240	IRInst__laneWrittenInChain	120	yes	

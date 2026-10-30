@@ -72,7 +72,7 @@ IRCmp1S__ctor_10a620 compiler
 IRCmp1S__ctor_10a6bc compiler
 IRLoadConst__vslot57 compiler
 IRInst__newOpcode8c compiler
-FUN_0010f704 compiler
+Program__countUsedInterpolatorSlots compiler
 OpcodeTraits__flagBit0 compiler
 OpcodeTraits__flagBit2 compiler
 OpcodeTraits__flagBit3 compiler

@@ -3274,8 +3274,8 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 12e768	12e784	other	IfFooter__ctor_12e56c	7	0x193cc0
 12e7ac	12e7c8	other	IfFooter__ctor_12e56c	7	0x193cc0
 12e88c	12e8ac	eh-pad	IfFooter__ctor_12e56c	8	0x193cc0,__Unwind_Resume
-12e9f0	12e9f4	millicode	FUN_0012e8c0	1	
-12ea90	12eab0	eh-pad	FUN_0012e8c0	8	0x193cc0,__Unwind_Resume
+12e9f0	12e9f4	millicode	Program__splitCriticalEdges	1	
+12ea90	12eab0	eh-pad	Program__splitCriticalEdges	8	0x193cc0,__Unwind_Resume
 12ec10	12ec2c	other	FUN_0012eacc	7	0x193cc0
 12eec4	12eee0	other	FUN_0012eacc	7	0x193cc0
 12eef4	12ef10	other	FUN_0012eacc	7	0x193cc0
@@ -3303,7 +3303,7 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 136fac	136fcc	eh-pad	InterferenceGraph__ctor_136ec4	8	0x193cc0,__Unwind_Resume
 137234	137238	millicode	InterferenceGraph__ctor_13719c	1	
 137284	1372a4	eh-pad	InterferenceGraph__ctor_13719c	8	0x193cc0,__Unwind_Resume
-137620	137640	eh-pad	FUN_00137474	8	0x193cc0,__Unwind_Resume
+137620	137640	eh-pad	InterferenceGraph__growNodeArray	8	0x193cc0,__Unwind_Resume
 13785c	13787c	eh-pad	FUN_00137694	8	0x193cc0,__Unwind_Resume
 139384	1394a0	table	IRInst__isOpcodeInSet139344	71	
 139f4c	139f64	eh-pad	FUN_00139d40	6	0x193cc0,__Unwind_Resume

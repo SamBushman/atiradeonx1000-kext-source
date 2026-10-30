@@ -1,7 +1,7 @@
 #include "decls.h"
 
-/* FUN_0010f704 @ 0x10f704 (376 bytes) */
-int FUN_0010f704(scopeId, vector, compiler)
+/* Program__countUsedInterpolatorSlots @ 0x10f704 (376 bytes) */
+int Program__countUsedInterpolatorSlots(scopeId, vector, compiler)
   int scopeId;
   uint *vector;
   int compiler;
@@ -807,7 +807,7 @@ LAB_0011047c:
   if ((allocationCount & 3) != 0) {
     vec4GroupCount = vec4GroupCount + 1;
   }
-  groupLimit = ((int (*)())FUN_0010f704)(iStack0000001c,vectorAt418B,*(undefined4 *)(program + 8));
+  groupLimit = ((int (*)())Program__countUsedInterpolatorSlots)(iStack0000001c,vectorAt418B,*(undefined4 *)(program + 8));
   if (vec4GroupCount < groupLimit) {
     packEntryCount = vector[1];
     vectorIndex = 0;
@@ -1560,7 +1560,7 @@ LAB_001116f4: ;
       outVectorAlloc[4] = arena;
       vectorData = Arena__alloc(arena,8);
       outVectorAlloc[3] = vectorData;
-      groupCursor = ((int (*)())FUN_0010f704)(iStack0000001c,*(undefined4 *)(program + 0x418),
+      groupCursor = ((int (*)())Program__countUsedInterpolatorSlots)(iStack0000001c,*(undefined4 *)(program + 0x418),
                            *(undefined4 *)(program + 8));
       if (vec4GroupCount < groupCursor) {
         allocationCount = allocation[2];

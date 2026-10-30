@@ -382,8 +382,8 @@ ffd5c	ffd60	FUN_000fd5c8
 12e768	12e784	IfFooter__ctor_12e56c
 12e7ac	12e7c8	IfFooter__ctor_12e56c
 12e88c	12e8ac	IfFooter__ctor_12e56c
-12e9f0	12e9f4	FUN_0012e8c0
-12ea90	12eab0	FUN_0012e8c0
+12e9f0	12e9f4	Program__splitCriticalEdges
+12ea90	12eab0	Program__splitCriticalEdges
 12ec10	12ec2c	FUN_0012eacc
 12eec4	12eee0	FUN_0012eacc
 12eef4	12ef10	FUN_0012eacc
@@ -410,7 +410,7 @@ ffd5c	ffd60	FUN_000fd5c8
 136fac	136fcc	FUN_00136ec8
 137234	137238	InterferenceGraph__ctor_13719c
 137284	1372a4	InterferenceGraph__ctor_13719c
-137620	137640	FUN_00137474
+137620	137640	InterferenceGraph__growNodeArray
 13785c	13787c	FUN_00137694
 139f4c	139f64	FUN_00139d40
 13b49c	13b4b8	Program__hoistFetchInsts

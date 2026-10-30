@@ -41,7 +41,7 @@ int FUN_001315f8(allocator, inst, newSource, registerCountRef, beforeInst, block
   *(uint *)(newInst + 0x14) = *(uint *)(newInst + 0x14) & 0xffffffbf | 0x80000000;
   Block__insertInstBefore(block,beforeInst,newInst);
   IRInst__setExtraOperandSource(inst,newInst,0,*(undefined4 *)(allocator + 0x2c));
-  ((int (*)())FUN_00137474)(allocator);
+  ((int (*)())InterferenceGraph__growNodeArray)(allocator);
   *(undefined4 *)(*registerCountRef * 4 + *(int *)(program + 0x45c)) = 0;
   **(int **)(allocator + 0x18) = **(int **)(allocator + 0x18) + 1;
   *registerCountRef = *registerCountRef + 1;
@@ -124,8 +124,8 @@ int FUN_001315f8(allocator, inst, newSource, registerCountRef, beforeInst, block
   return;
 }
 
-/* FUN_001318a4 @ 0x1318a4 (300 bytes) */
-int FUN_001318a4(allocator, nodeIndex, spillState)
+/* RegAlloc__getOrCreateSpillSlot @ 0x1318a4 (300 bytes) */
+int RegAlloc__getOrCreateSpillSlot(allocator, nodeIndex, spillState)
   int allocator;
   uint nodeIndex;
   int spillState;
@@ -1086,8 +1086,8 @@ code_r0x00132990:
   goto code_r0x00132828;
 }
 
-/* FUN_001330f4 @ 0x1330f4 (328 bytes) */
-int FUN_001330f4(graph, inst)
+/* InterferenceGraph__addEdgesForInst @ 0x1330f4 (328 bytes) */
+int InterferenceGraph__addEdgesForInst(graph, inst)
   undefined4 graph;
   int *inst;
 {
@@ -1105,7 +1105,7 @@ int FUN_001330f4(graph, inst)
     }
     instRoot = ((int (*)())InterferenceGraph__resolveNode)(graph,inst[0x25],0);
     sourceRoot = ((int (*)())InterferenceGraph__resolveNode)(graph,operandVReg[0x25],0);
-    edgesAdded = ((int (*)())FUN_0013555c)(graph,sourceRoot,instRoot);
+    edgesAdded = ((int (*)())InterferenceGraph__addNeighbour)(graph,sourceRoot,instRoot);
   } while (((((edgesAdded != 0) && ((operandVReg[5] & 0x200U) != 0)) &&
             ((extraSource = (int *)IRInst__getOperandSource(operandVReg,operandVReg[0x21]), extraSource[0x20] != 0 &&
              ((edgesAdded = RegKind__flagBit0(extraSource[0x26]), edgesAdded != 0 && ((extraSource[5] & 2U) == 0)))))) &&
@@ -1702,7 +1702,7 @@ int FUN_00133fe4(allocator)
           Vector__removeAt(pendingVector,allocation[2] - 1);
           spillLocationA = IRInst__chainEndNext(pendingInst);
           RegAlloc__markReloadModifiers(spillLocationA,allocator,*(undefined4 *)(allocator + 0x2c));
-          spillSlotB = ((int (*)())FUN_001318a4)(allocator,*(undefined4 *)(pendingInst + 0x94),spillState);
+          spillSlotB = ((int (*)())RegAlloc__getOrCreateSpillSlot)(allocator,*(undefined4 *)(pendingInst + 0x94),spillState);
           spillModeA = thunk_FUN_001307f8(pendingInst);
           RegAlloc__emitSpillStore(pendingInst,spillState,spillSlotB,spillModeA,*(undefined4 *)(allocator + 0x2c));
           spillTempCount = *(int *)(program + 0x454) + 1;
@@ -1736,7 +1736,7 @@ int FUN_00133fe4(allocator)
                   if ((loopIndex <= regKindFlag) && (regKindFlag = FUN_00131008(1,inst,loopIndex), regKindFlag != 0)) {
                     RegAlloc__markReloadModifiers(inst,allocator,*(undefined4 *)(allocator + 0x2c));
                     if (((operandVReg[5] & 0x20000000U) == 0) || ((operandVReg[6] & 1U) != 0)) {
-                      regKindFlag = ((int (*)())FUN_001318a4)(allocator,sourceRegister,spillState);
+                      regKindFlag = ((int (*)())RegAlloc__getOrCreateSpillSlot)(allocator,sourceRegister,spillState);
                       reloadSource = IRInst__findChainNodeById(inst,*(undefined4 *)(regKindFlag + 0x13c));
                       if (reloadSource == 0) {
                         spillAddress = RegAlloc__nextTempId(allocator);
@@ -1941,7 +1941,7 @@ int FUN_00134658(pass)
   uint copyCountA;
   uint bitsetWordCount;
   
-  FUN_001314b8(pass);
+  RegAlloc__initRegisterTables(pass);
   compiler = *(int *)(pass + 8);
   if (*(int *)(compiler + 0x3c4) == -1) {
     return;
@@ -2102,7 +2102,7 @@ code_r0x001348ac:
               restoreWordCountB = restoreWordCountB + -1;
             } while (restoreWordCountB != 0);
           }
-          FUN_001314b8(pass);
+          RegAlloc__initRegisterTables(pass);
           goto LAB_00134a58;
         }
       }
@@ -2111,7 +2111,7 @@ code_r0x001348ac:
 LAB_00134a58:
     allocatorObj = *(int *)(pass + 0x3c0);
     if (allocatorObj != 0) {
-      ((int (*)())FUN_001357d4)(allocatorObj);
+      ((int (*)())InterferenceGraph__dtor_1357d4)(allocatorObj);
       Arena__free(*(undefined4 *)(allocatorObj + -4),allocatorObj + -4);
     }
     if (pass_color_graphResult == 0) {
@@ -2608,8 +2608,8 @@ int InterferenceGraph__addEdge(graph, nodeA, nodeB)
   return;
 }
 
-/* FUN_0013555c @ 0x13555c (296 bytes) */
-int FUN_0013555c(graph, targetNode, sourceNodeIndex)
+/* InterferenceGraph__addNeighbour @ 0x13555c (296 bytes) */
+int InterferenceGraph__addNeighbour(graph, targetNode, sourceNodeIndex)
   int graph;
   int targetNode;
   uint sourceNodeIndex;
@@ -2719,8 +2719,8 @@ int FUN_00135684(graph, nodeA, nodeB)
   return;
 }
 
-/* FUN_001357d4 @ 0x1357d4 (300 bytes) */
-int FUN_001357d4(graph)
+/* InterferenceGraph__dtor_1357d4 @ 0x1357d4 (300 bytes) */
+int InterferenceGraph__dtor_1357d4(graph)
   int graph;
 {
   int nodeVectorBlock;
@@ -2764,8 +2764,8 @@ int FUN_001357d4(graph)
   return Arena__free(*(undefined4 *)(*(int *)(graph + 0x2c) + 0x378),*(undefined4 *)(graph + 0x20));
 }
 
-/* FUN_00135900 @ 0x135900 (300 bytes) */
-int FUN_00135900(graph)
+/* InterferenceGraph__dtor_135900 @ 0x135900 (300 bytes) */
+int InterferenceGraph__dtor_135900(graph)
   int graph;
 {
   int nodeVectorBlock;
@@ -3875,8 +3875,8 @@ int InterferenceGraph__ctor_13719c(this, ownerArg, nodeCount, ownerArg4, compile
   return;
 }
 
-/* FUN_00137474 @ 0x137474 (428 bytes) */
-int FUN_00137474(this)
+/* InterferenceGraph__growNodeArray @ 0x137474 (428 bytes) */
+int InterferenceGraph__growNodeArray(this)
   int *this;
 {
   int oldNodeArray;
@@ -4320,8 +4320,8 @@ int IRInst__chainContainsOperandSource(inst, operandIndex, cursorInst)
   return 1;
 }
 
-/* FUN_00137f14 @ 0x137f14 (364 bytes) */
-int FUN_00137f14(liveness, inst, liveBits)
+/* Liveness__applyInstEffect @ 0x137f14 (364 bytes) */
+int Liveness__applyInstEffect(liveness, inst, liveBits)
   int liveness;
   int *inst;
   int liveBits;
@@ -4464,7 +4464,7 @@ int FUN_00138130(liveness)
       inst = *(int *)(block + 0x98);
       for (nextInstLink = *(int *)(*(int *)(block + 0x98) + 8); nextInstLink != 0; nextInstLink = *(int *)(nextInstLink + 8)) {
         if ((*(uint *)(inst + 0x14) & 1) != 0) {
-          ((int (*)())FUN_00137f14)(liveness,inst,liveTable);
+          ((int (*)())Liveness__applyInstEffect)(liveness,inst,liveTable);
           nextInstLink = *(int *)(inst + 8);
         }
         inst = nextInstLink;

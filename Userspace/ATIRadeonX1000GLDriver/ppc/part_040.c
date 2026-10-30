@@ -1182,7 +1182,7 @@ int FUN_0012cfa4(program, headerBlock, deadRegionEntry, footerBlock)
             operandSlotCursor = deadInst;
             for (operandNumber = 1; operandCountOrSuccessors = (**(code **)(*deadInst + 0x14))(deadInst), operandNumber <= operandCountOrSuccessors;
                 operandNumber = operandNumber + 1) {
-              FUN_001234d8(operandSlotCursor[0x29],deadInst);
+              Owner__removeVectorEntry(operandSlotCursor[0x29],deadInst);
               operandSlotCursor = operandSlotCursor + 6;
             }
           }
@@ -2080,8 +2080,8 @@ int IfFooter__ctor_12e56c(conditionRegister, loopBlock, compiler)
   return;
 }
 
-/* FUN_0012e8c0 @ 0x12e8c0 (304 bytes) */
-int FUN_0012e8c0(program, block, lastBlock)
+/* Program__splitCriticalEdges @ 0x12e8c0 (304 bytes) */
+int Program__splitCriticalEdges(program, block, lastBlock)
   int program;
   int *block;
   int *lastBlock;
@@ -2537,7 +2537,7 @@ int FUN_0012f0f8(pass, loopStack, block, lastBlockRef, newBlockOut, blockCounter
                   operandCount = (**(code **)(*bodyInst + 0x14))(bodyInst);
                   if (operandCount < operandNumber) break;
                   operandNumber = operandNumber + 1;
-                  FUN_001234d8(instCursor[0x29],bodyInst);
+                  Owner__removeVectorEntry(instCursor[0x29],bodyInst);
                   instCursor = instCursor + 6;
                 }
                 (**(code **)(*bodyInst + 0xc))(bodyInst,0,*(undefined4 *)(pass + 8));
@@ -2914,7 +2914,7 @@ LAB_0012fafc:
           allocation[0x2f] = *blockCounter;
           Program__insertBlockAfter(pass,*lastBlockRef,*newBlockOut);
           Block__connect(*lastBlockRef,*newBlockOut);
-          ((int (*)())FUN_0012e8c0)(pass,findSimplePredecessorResult,*lastBlockRef);
+          ((int (*)())Program__splitCriticalEdges)(pass,findSimplePredecessorResult,*lastBlockRef);
           *lastBlockRef = *newBlockOut;
           return 1;
         }
@@ -2923,7 +2923,7 @@ LAB_0012fafc:
           if (instQuery3c == 0) {
             if (*(int *)(exitInst[0x22] + 4) == 3) {
               if (*(int *)(block + 0x134) == 0) goto LAB_0012fc9c;
-              FUN_001234d8(exitInst[0x29],exitInst);
+              Owner__removeVectorEntry(exitInst[0x29],exitInst);
               DList__unlink(exitInst);
               loopFooterBlock = *(int *)(block + 0x14c);
               IRInst__setOperandRef(exitInst,1,*(undefined4 *)(*(int *)(loopFooterBlock + 0x148) + 0x8c));
@@ -2937,7 +2937,7 @@ LAB_0012fafc:
           }
           else {
 LAB_0012fc9c:
-            FUN_001234d8(exitInst[0x29],exitInst);
+            Owner__removeVectorEntry(exitInst[0x29],exitInst);
             (**(code **)(*exitInst + 0xc))(exitInst,0,*(undefined4 *)(pass + 8));
             nextExitInst = (int *)exitInst[2];
           }
@@ -3926,8 +3926,8 @@ int RegAlloc__emitSpillStore(inst, newSource, addressSource, ref, compiler)
   return;
 }
 
-/* FUN_001314b8 @ 0x1314b8 (320 bytes) */
-int FUN_001314b8(allocator)
+/* RegAlloc__initRegisterTables @ 0x1314b8 (320 bytes) */
+int RegAlloc__initRegisterTables(allocator)
   int allocator;
 {
   int fillByteOffset;

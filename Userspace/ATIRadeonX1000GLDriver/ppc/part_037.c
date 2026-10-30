@@ -3151,8 +3151,8 @@ int VReg__pushDefinition(vreg, definingBlock, definition)
   return;
 }
 
-/* FUN_001234d8 @ 0x1234d8 (224 bytes) */
-int FUN_001234d8(owner, entry)
+/* Owner__removeVectorEntry @ 0x1234d8 (224 bytes) */
+int Owner__removeVectorEntry(owner, entry)
   int owner;
   int entry;
 {
@@ -3192,8 +3192,8 @@ int FUN_001234d8(owner, entry)
   return;
 }
 
-/* FUN_001235b8 @ 0x1235b8 (300 bytes) */
-int FUN_001235b8(owner, oldEntry, newEntry)
+/* Owner__replaceVectorEntry @ 0x1235b8 (300 bytes) */
+int Owner__replaceVectorEntry(owner, oldEntry, newEntry)
   int owner;
   int oldEntry;
   undefined4 newEntry;
