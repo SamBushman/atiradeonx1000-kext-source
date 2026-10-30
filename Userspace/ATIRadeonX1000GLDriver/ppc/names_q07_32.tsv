@@ -55,3 +55,116 @@ local	FUN_001440e4	pbVar10	laneSelectScan	INFERRED	pbVar10 = (byte *)(puVar23 + 
 local	FUN_001440e4	iVar8	laneSourceInst	INFERRED	iVar8 = puVar11[4], source inst of the current lane
 local	FUN_001440e4	bVar3	laneComponent	INFERRED	byte read from laneGroup+0x20+lane: component of the source used by that lane
 local	FUN_001440e4	cVar4	operandComponent	INFERRED	byte of the operand select word (value 4 = unused component)
+local	FUN_0013fc38	iVar25	currentBlock	INFERRED	iVar25 = *(pass+900), advanced by iVar25 = *(iVar25+8); its instruction list is *(iVar25+0x98)
+local	FUN_0013fc38	puVar28	candidateVecHeader	INFERRED	puVar28 = allocation + 1: header (capacity,count,data) of the candidate instruction vector, passed to Vector__elementRefGrow
+use	FUN_0013fc38	bVar20	sameSrc1Src1	INFERRED	operandVReg3 == operandVReg && operand mode bits equal (first source of both insts)	^\s*if\ \(\(piVar15\ !=\ piVar16\)\ \|\|\ \(bVar20\ =\ true,\ iVar13\ !=\ iVar21\)\)\ \{$	+2
+use	FUN_0013fc38	bVar20	sameSrc1Src1	INFERRED	operandVReg3 == operandVReg && operand mode bits equal (first source of both insts)	^\s*if\ \(\(\(\(!bVar20\)\ \&\&\ \(piVar31\ =\ piVar16,\ !bVar2\)\)\ \&\&$	+3
+use	FUN_0013fc38	bVar20	pastLastCandidate	INFERRED	bVar20 = uVar29 <= uVar32: candidate index reached the candidate count	^\s*bVar20\ =\ uVar29\ <=\ uVar32;$	+1
+use	FUN_0013fc38	bVar20	pastLastCandidate	INFERRED	bVar20 = uVar29 <= uVar32: candidate index reached the candidate count	^\s*if\ \(bVar20\)\ goto\ LAB_00140d3c;$	+1
+local	FUN_0013fc38	bVar2	sameSrc1Src2	INFERRED	operandVReg3 == operandVReg2 && mode bits equal
+local	FUN_0013fc38	bVar22	sameSrc2Src1	INFERRED	second source of the first inst equals first source of the second inst && mode bits equal
+local	FUN_0013fc38	bVar3	sameSrc2Src2	INFERRED	second source of the first inst equals second source of the second inst && mode bits equal
+use	FUN_0013fc38	uVar34	candidateMask	INFERRED	result of FUN_0013a644(inst) stored into the parallel mask vector next to each candidate	^\s*uVar34\ =\ \(\(int\ \(\*\)\(\)\)FUN_0013a644\)\(piVar11\);$	+1
+use	FUN_0013fc38	uVar34	candidateMask	INFERRED	result of FUN_0013a644(inst) stored into the parallel mask vector next to each candidate	^\s*\*puVar12\ =\ uVar34;$	+1
+local	FUN_0013fc38	uVar27	nextCandidateIndex	INFERRED	uVar27 = uVar32 + 1, loop-continue index of the pair scan
+use	FUN_0013fc38	uVar29	candidateCount	INFERRED	uVar29 = allocation[2]: element count of the candidate vector	^\s*uVar29\ =\ puVar7\[2\];$	+3
+use	FUN_0013fc38	uVar29	candidateCount	INFERRED	uVar29 = allocation[2]: element count of the candidate vector	^\s*uVar29\ =\ uVar32\ \+\ 1;$	+1
+use	FUN_0013fc38	uVar29	candidateCount	INFERRED	uVar29 = allocation[2]: element count of the candidate vector	^\s*uVar29\ =\ puVar7\[2\];$@2	+1
+use	FUN_0013fc38	uVar29	candidateCount	INFERRED	uVar29 = allocation[2]: element count of the candidate vector	^\s*if\ \(\(iVar4\ !=\ 0\)\ \&\&\ \(uVar27\ <\ uVar29\)\)\ \{$	+1
+use	FUN_0013fc38	uVar29	candidateCount	INFERRED	uVar29 = allocation[2]: element count of the candidate vector	^\s*if\ \(uVar29\ <=\ uVar35\)\ \{$	+2
+use	FUN_0013fc38	uVar29	candidateCount	INFERRED	uVar29 = allocation[2]: element count of the candidate vector	^\s*uVar29\ =\ puVar7\[2\];$@3	+1
+use	FUN_0013fc38	uVar29	candidateCount	INFERRED	uVar29 = allocation[2]: element count of the candidate vector	^\s*\}\ while\ \(uVar27\ <\ uVar29\);$	+1
+use	FUN_0013fc38	uVar29	candidateCount	INFERRED	uVar29 = allocation[2]: element count of the candidate vector	^\s*uVar29\ =\ puVar7\[2\];$@4	+1
+use	FUN_0013fc38	uVar29	candidateCount	INFERRED	uVar29 = allocation[2]: element count of the candidate vector	^\s*bVar20\ =\ uVar29\ <=\ uVar32;$	+1
+use	FUN_0013fc38	uVar29	secondCandidateMask	INFERRED	uVar29 = *puVar10 read from the mask vector for the later candidate	^\s*uVar29\ =\ \*puVar10;$	+1
+use	FUN_0013fc38	uVar29	secondCandidateMask	INFERRED	uVar29 = *puVar10 read from the mask vector for the later candidate	^\s*iVar14\ =\ FUN_00139008\(uVar29\);$	+1
+use	FUN_0013fc38	uVar29	secondCandidateMask	INFERRED	uVar29 = *puVar10 read from the mask vector for the later candidate	^\s*uVar32\ =\ \~\(uVar26\ \|\ uVar29\)\ \&\ 0xf;$	+1
+use	FUN_0013fc38	uVar29	secondCandidateMask	INFERRED	uVar29 = *puVar10 read from the mask vector for the later candidate	^\s*if\ \(\(uVar26\ \&\ uVar29\)\ ==\ 0\)\ \{$	+1
+use	FUN_0013fc38	uVar29	secondCandidateMask	INFERRED	uVar29 = *puVar10 read from the mask vector for the later candidate	^\s*if\ \(\(\(\(int\)\(uVar26\ \&\ uVar29\)\ >>\ \(uVar35\ \&\ 0x3f\)\ \&\ 1U\)\ !=\ 0\)\ \&\&\ \(\(int\)uVar18\ <\ 4\)\)\ \{$	+1
+use	FUN_0013fc38	uVar29	secondCandidateMask	INFERRED	uVar29 = *puVar10 read from the mask vector for the later candidate	^\s*if\ \(\(\(\(int\)uVar29\ >>\ \(uVar32\ \&\ 0x3f\)\ \&\ 1U\)\ !=\ 0\)\ \&\&\ \(uVar32\ !=\ 3\)\)\ \{$	+1
+use	FUN_0013fc38	uVar32	freeLaneMask	INFERRED	uVar32 = ~(uVar26 | uVar29) & 0xf: write-mask lanes used by neither inst	^\s*uVar32\ =\ \~\(uVar26\ \|\ uVar29\)\ \&\ 0xf;$	+1
+use	FUN_0013fc38	uVar32	freeLaneMask	INFERRED	uVar32 = ~(uVar26 | uVar29) & 0xf: write-mask lanes used by neither inst	^\s*if\ \(\(\(int\)uVar32\ >>\ \(uVar18\ \&\ 0x3f\)\ \&\ 1U\)\ ==\ 0\)\ \{$	+1
+use	FUN_0013fc38	uVar32	freeLaneMask	INFERRED	uVar32 = ~(uVar26 | uVar29) & 0xf: write-mask lanes used by neither inst	^\s*\}\ while\ \(\(\(int\)uVar32\ >>\ \(uVar18\ \&\ 0x3f\)\ \&\ 1U\)\ ==\ 0\);$	+1
+use	FUN_0013fc38	iVar21	srcModeSecond1	INFERRED	bit-swapped mode field of the second inst first source (piVar11[0x2e])	^\s*iVar21\ =\ \(\(uint\)piVar11\[0x2e\]\ >>\ 1\ \&\ 1\)\ \+\ \(piVar11\[0x2e\]\ \&\ 1U\)\ \*\ 2;$	+1
+use	FUN_0013fc38	iVar21	srcModeSecond1	INFERRED	bit-swapped mode field of the second inst first source (piVar11[0x2e])	^\s*if\ \(\(piVar15\ !=\ piVar16\)\ \|\|\ \(bVar20\ =\ true,\ iVar13\ !=\ iVar21\)\)\ \{$	+1
+use	FUN_0013fc38	iVar21	srcModeSecond1	INFERRED	bit-swapped mode field of the second inst first source (piVar11[0x2e])	^\s*if\ \(\(piVar5\ !=\ piVar16\)\ \|\|\ \(bVar22\ =\ true,\ iVar23\ !=\ iVar21\)\)\ \{$	+1
+local	FUN_0013fc38	iVar23	srcModeFirst2	INFERRED	bit-swapped mode field of the first inst second source (iVar4+0xd0)
+use	FUN_0013fc38	iVar14	srcModeSecond2	INFERRED	bit-swapped mode field of the second inst second source (piVar11[0x34])	^\s*iVar14\ =\ \(\(uint\)piVar11\[0x34\]\ >>\ 1\ \&\ 1\)\ \+\ \(piVar11\[0x34\]\ \&\ 1U\)\ \*\ 2;$	+1
+use	FUN_0013fc38	iVar14	srcModeSecond2	INFERRED	bit-swapped mode field of the second inst second source (piVar11[0x34])	^\s*if\ \(\(piVar15\ !=\ piVar17\)\ \|\|\ \(bVar2\ =\ true,\ iVar13\ !=\ iVar14\)\)\ \{$	+1
+use	FUN_0013fc38	iVar14	srcModeSecond2	INFERRED	bit-swapped mode field of the second inst second source (piVar11[0x34])	^\s*if\ \(\(piVar5\ !=\ piVar17\)\ \|\|\ \(bVar3\ =\ true,\ iVar23\ !=\ iVar14\)\)\ \{$	+1
+use	FUN_0013fc38	iVar14	srcModeSecond2	INFERRED	bit-swapped mode field of the second inst second source (piVar11[0x34])	^\s*iVar14\ =\ piVar5\[0x53\];$	+1
+use	FUN_0013fc38	iVar14	srcModeSecond2	INFERRED	bit-swapped mode field of the second inst second source (piVar11[0x34])	^\s*\*\(int\ \*\)\(iVar9\ \+\ 8\)\ =\ iVar14;$	+1
+use	FUN_0013fc38	iVar14	srcModeSecond2	INFERRED	bit-swapped mode field of the second inst second source (piVar11[0x34])	^\s*iVar14\ =\ 0;$	+1
+use	FUN_0013fc38	iVar14	srcModeSecond2	INFERRED	bit-swapped mode field of the second inst second source (piVar11[0x34])	^\s*iVar14\ =\ iVar14\ \+\ 1;$	+1
+use	FUN_0013fc38	iVar14	srcModeSecond2	INFERRED	bit-swapped mode field of the second inst second source (piVar11[0x34])	^\s*if\ \(iVar14\ ==\ 1\)\ \{$	+1
+use	FUN_0013fc38	iVar14	srcModeSecond2	INFERRED	bit-swapped mode field of the second inst second source (piVar11[0x34])	^\s*iVar14\ =\ \(\*\*\(code\ \*\*\)\(\*piVar15\ \+\ 0x14\)\)\(piVar15\);$	+2
+use	FUN_0013fc38	iVar14	srcModeSecond2	INFERRED	bit-swapped mode field of the second inst second source (piVar11[0x34])	^\s*iVar14\ =\ 0;$@2	+1
+use	FUN_0013fc38	iVar14	srcModeSecond2	INFERRED	bit-swapped mode field of the second inst second source (piVar11[0x34])	^\s*uVar35\ =\ \(uint\)\*\(byte\ \*\)\(iVar14\ \+\ iVar21\ \+\ 0x10\);$	+1
+use	FUN_0013fc38	iVar14	srcModeSecond2	INFERRED	bit-swapped mode field of the second inst second source (piVar11[0x34])	^\s*\(piVar15,iVar13,iVar14,\*\(undefined1\ \*\)\(\(int\)\&local_88\ \+\ uVar35\)\);$	+1
+use	FUN_0013fc38	iVar14	srcModeSecond2	INFERRED	bit-swapped mode field of the second inst second source (piVar11[0x34])	^\s*bVar20\ =\ iVar14\ !=\ 3;$	+2
+use	FUN_0013fc38	iVar14	srcModeSecond2	INFERRED	bit-swapped mode field of the second inst second source (piVar11[0x34])	^\s*for\ \(iVar13\ =\ 1;\ iVar14\ =\ \(\*\*\(code\ \*\*\)\(\*piVar11\ \+\ 0x14\)\)\(piVar11\),\ iVar13\ <=\ iVar14;$	+4
+use	FUN_0013fc38	iVar14	secondMaskLaneCount	INFERRED	FUN_00139008(uVar29): lane count of the second mask; sum with the first must be <= 4	^\s*iVar14\ =\ FUN_00139008\(uVar29\);$	+2
+local	FUN_0013fc38	cVar1	destSelectLastByte	INFERRED	low byte of the destination operand select word local_80
+local	FUN_0013fc38	local_80	destSelectWord	INFERRED	select word of the second inst destination operand (operand record 0 +0x10)
+local	FUN_0013fc38	local_84	compactToSourceLane	INFERRED	byte array initialised 0x10203; [compact lane] = source lane written by the loop
+local	FUN_0013fc38	local_88	sourceToCompactLane	INFERRED	byte array initialised 0x10203; [source lane] = compact lane assigned by the merge loop
+local	FUN_0013fc38	local_7c	operandSelectWord	INFERRED	select word of operand iVar9 of the second inst (operand record +0x10)
+local	FUN_0013fc38	local_58	foldedSelectFirst	INFERRED	out word of IRInst__foldMovSourceSelect for the second inst
+local	FUN_0013fc38	local_54	foldedSelectSecond	INFERRED	out word of IRInst__foldMovSourceSelect for the cloned inst
+local	FUN_0013fc38	local_5c	scratchVecArena	INFERRED	fourth vector word: arena, allocated once and freed on exit
+local	FUN_0013fc38	local_60	scratchVecData	INFERRED	scratch vector storage allocated with Arena__alloc(.,8) and freed on exit
+local	FUN_0013fc38	local_64	scratchVecCount	INFERRED	count word of the scratch vector, reset to 0 per block
+local	FUN_0013fc38	local_68	scratchVecCapacity	INFERRED	capacity word of the scratch vector, initialised 2
+use	FUN_0013fc38	puVar12	laneMapPtr	INFERRED	puVar12 = &local_88: pointer to the lane map passed to the vcall	^\s*puVar12\ =\ \&local_88;$	+1
+use	FUN_0013fc38	puVar12	laneMapPtr	INFERRED	puVar12 = &local_88: pointer to the lane map passed to the vcall	^\s*\*\(char\ \*\)\(uVar35\ \+\ \(int\)puVar12\)\ =\ \(char\)uVar24;$	+1
+use	FUN_0013fc38	puVar12	laneMapPtr	INFERRED	puVar12 = &local_88: pointer to the lane map passed to the vcall	^\s*puVar12\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 8\);$	+1
+use	FUN_0013fc38	puVar12	laneMapPtr	INFERRED	puVar12 = &local_88: pointer to the lane map passed to the vcall	^\s*FUN_00106004\(piVar11,piVar11\[0x21\],0,1,puVar12\);$	+1
+use	FUN_0013fc38	puVar12	laneMapPtr	INFERRED	puVar12 = &local_88: pointer to the lane map passed to the vcall	^\s*\(piVar11,iVar9,iVar21,$	+4
+use	FUN_0013fc38	puVar12	elementPtr	INFERRED	address of a vector element (index*4+data, or Vector__elementRefGrow)	^\s*puVar12\ =\ \(undefined4\ \*\)\(uVar32\ \*\ 4\ \+\ puVar7\[3\]\);$	+1
+use	FUN_0013fc38	puVar12	elementPtr	INFERRED	address of a vector element (index*4+data, or Vector__elementRefGrow)	^\s*puVar12\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar28,uVar32\);$	+1
+use	FUN_0013fc38	puVar12	elementPtr	INFERRED	address of a vector element (index*4+data, or Vector__elementRefGrow)	^\s*\*puVar12\ =\ 0;$	+1
+use	FUN_0013fc38	puVar12	elementPtr	INFERRED	address of a vector element (index*4+data, or Vector__elementRefGrow)	^\s*puVar12\ =\ \(undefined4\ \*\)\(iVar4\ \+\ local_70\);$	+1
+use	FUN_0013fc38	puVar12	elementPtr	INFERRED	address of a vector element (index*4+data, or Vector__elementRefGrow)	^\s*puVar12\ =\ \(undefined4\ \*\)FUN_0019423c\(\&local_78,local_74\);$	+1
+use	FUN_0013fc38	puVar12	elementPtr	INFERRED	address of a vector element (index*4+data, or Vector__elementRefGrow)	^\s*\*puVar12\ =\ 0;$@2	+1
+use	FUN_0013fc38	puVar12	elementPtr	INFERRED	address of a vector element (index*4+data, or Vector__elementRefGrow)	^\s*puVar12\ =\ \(undefined4\ \*\)\(iVar4\ \+\ local_70\);$@2	+1
+use	FUN_0013fc38	puVar12	elementPtr	INFERRED	address of a vector element (index*4+data, or Vector__elementRefGrow)	^\s*puVar12\ =\ \(undefined4\ \*\)FUN_0019423c\(\&local_78,local_74\);$@2	+1
+use	FUN_0013fc38	puVar12	elementPtr	INFERRED	address of a vector element (index*4+data, or Vector__elementRefGrow)	^\s*\*puVar12\ =\ uVar34;$	+1
+use	FUN_0013fc38	puVar12	elementPtr	INFERRED	address of a vector element (index*4+data, or Vector__elementRefGrow)	^\s*puVar12\ =\ \(undefined4\ \*\)\(iVar9\ \+\ puVar7\[3\]\);$	+1
+use	FUN_0013fc38	puVar12	elementPtr	INFERRED	address of a vector element (index*4+data, or Vector__elementRefGrow)	^\s*puVar12\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar28,uVar35\);$	+1
+use	FUN_0013fc38	puVar12	elementPtr	INFERRED	address of a vector element (index*4+data, or Vector__elementRefGrow)	^\s*piVar11\ =\ \(int\ \*\)\*puVar12;$	+1
+use	FUN_0013fc38	puVar12	elementPtr	INFERRED	address of a vector element (index*4+data, or Vector__elementRefGrow)	^\s*puVar12\ =\ \(undefined4\ \*\)\(uVar35\ \*\ 4\ \+\ puVar7\[3\]\);$	+1
+use	FUN_0013fc38	puVar12	elementPtr	INFERRED	address of a vector element (index*4+data, or Vector__elementRefGrow)	^\s*puVar12\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar28,uVar35\);$@2	+1
+use	FUN_0013fc38	puVar12	elementPtr	INFERRED	address of a vector element (index*4+data, or Vector__elementRefGrow)	^\s*\*puVar12\ =\ 0;$@3	+1
+use	FUN_0013fc38	puVar12	elementPtr	INFERRED	address of a vector element (index*4+data, or Vector__elementRefGrow)	^\s*puVar12\ =\ \(undefined4\ \*\)\(iVar9\ \+\ puVar10\[2\]\);$	+1
+use	FUN_0013fc38	puVar12	elementPtr	INFERRED	address of a vector element (index*4+data, or Vector__elementRefGrow)	^\s*puVar12\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar10,uVar26\);$	+1
+use	FUN_0013fc38	puVar12	elementPtr	INFERRED	address of a vector element (index*4+data, or Vector__elementRefGrow)	^\s*piVar15\ =\ \(int\ \*\)\*puVar12;$	+1
+use	FUN_0013fc38	puVar12	elementPtr	INFERRED	address of a vector element (index*4+data, or Vector__elementRefGrow)	^\s*puVar12\ =\ \(undefined4\ \*\)\(iVar9\ \+\ puVar10\[2\]\);$@2	+1
+use	FUN_0013fc38	puVar12	elementPtr	INFERRED	address of a vector element (index*4+data, or Vector__elementRefGrow)	^\s*puVar12\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar10,uVar26\);$@2	+1
+use	FUN_0013fc38	puVar12	elementPtr	INFERRED	address of a vector element (index*4+data, or Vector__elementRefGrow)	^\s*piVar11\ =\ \(int\ \*\)\*puVar12;$@2	+1
+use	FUN_0013fc38	puVar10	maskElementPtr	INFERRED	address of an element in the candidate mask vector (vecData)	^\s*puVar10\ =\ \(uint\ \*\)\(uVar32\ \*\ 4\ \+\ local_70\);$	+1
+use	FUN_0013fc38	puVar10	maskElementPtr	INFERRED	address of an element in the candidate mask vector (vecData)	^\s*puVar10\ =\ \(uint\ \*\)FUN_0019423c\(\&local_78,uVar32\);$	+1
+use	FUN_0013fc38	puVar10	maskElementPtr	INFERRED	address of an element in the candidate mask vector (vecData)	^\s*uVar26\ =\ \*puVar10;$	+1
+use	FUN_0013fc38	puVar10	maskElementPtr	INFERRED	address of an element in the candidate mask vector (vecData)	^\s*puVar10\ =\ \(uint\ \*\)\(iVar9\ \+\ local_70\);$	+1
+use	FUN_0013fc38	puVar10	maskElementPtr	INFERRED	address of an element in the candidate mask vector (vecData)	^\s*puVar10\ =\ \(uint\ \*\)FUN_0019423c\(\&local_78,uVar35\);$	+1
+use	FUN_0013fc38	puVar10	maskElementPtr	INFERRED	address of an element in the candidate mask vector (vecData)	^\s*uVar29\ =\ \*puVar10;$	+1
+use	FUN_0013fc38	puVar10	userVec	INFERRED	*(def+0x10): users vector of an operand source	^\s*puVar10\ =\ \*\(uint\ \*\*\)\(iVar9\ \+\ 0x10\);$	+2
+use	FUN_0013fc38	puVar10	userVec	INFERRED	*(def+0x10): users vector of an operand source	^\s*if\ \(uVar35\ <\ \*puVar10\)\ \{$	+1
+use	FUN_0013fc38	puVar10	userVec	INFERRED	*(def+0x10): users vector of an operand source	^\s*_memset\(uVar32\ \*\ 4\ \+\ puVar10\[2\],0,\(uVar35\ \-\ uVar32\)\ \*\ 4\ \+\ 4\);$	+2
+use	FUN_0013fc38	puVar10	userVec	INFERRED	*(def+0x10): users vector of an operand source	^\s*piVar5\ =\ \(int\ \*\)\(uVar35\ \*\ 4\ \+\ puVar10\[2\]\);$	+1
+use	FUN_0013fc38	puVar10	userVec	INFERRED	*(def+0x10): users vector of an operand source	^\s*piVar5\ =\ \(int\ \*\)FUN_0019423c\(puVar10,uVar35\);$	+1
+use	FUN_0013fc38	puVar10	userVec	INFERRED	*(def+0x10): users vector of an operand source	^\s*FUN_00194208\(puVar10,uVar35\);$	+1
+use	FUN_0013fc38	puVar10	userVec	INFERRED	*(def+0x10): users vector of an operand source	^\s*uVar32\ =\ puVar10\[1\];$@2	+1
+use	FUN_0013fc38	puVar10	userVec	INFERRED	*(def+0x10): users vector of an operand source	^\s*puVar10\ =\ \*\(uint\ \*\*\)\(iVar13\ \+\ 0x10\);$	+6
+use	FUN_0013fc38	puVar10	userVec	INFERRED	*(def+0x10): users vector of an operand source	^\s*puVar19\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar10,uVar32\);$	+1
+use	FUN_0013fc38	puVar10	secondInstUsers	INFERRED	piVar11[4]: users vector of the second inst	^\s*puVar10\ =\ \(uint\ \*\)piVar11\[4\];$	+2
+use	FUN_0013fc38	puVar10	secondInstUsers	INFERRED	piVar11[4]: users vector of the second inst	^\s*if\ \(uVar26\ <\ \*puVar10\)\ \{$	+2
+use	FUN_0013fc38	puVar10	secondInstUsers	INFERRED	piVar11[4]: users vector of the second inst	^\s*_memset\(uVar35\ \*\ 4\ \+\ puVar10\[2\],0,\(uVar26\ \-\ uVar35\)\ \*\ 4\ \+\ 4\);$	+2
+use	FUN_0013fc38	puVar10	secondInstUsers	INFERRED	piVar11[4]: users vector of the second inst	^\s*puVar12\ =\ \(undefined4\ \*\)\(iVar9\ \+\ puVar10\[2\]\);$	+1
+use	FUN_0013fc38	puVar10	secondInstUsers	INFERRED	piVar11[4]: users vector of the second inst	^\s*puVar12\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar10,uVar26\);$	+1
+use	FUN_0013fc38	puVar10	secondInstUsers	INFERRED	piVar11[4]: users vector of the second inst	^\s*puVar10\ =\ \(uint\ \*\)piVar11\[4\];$@2	+1
+use	FUN_0013fc38	puVar10	firstInstUsers	INFERRED	*(iVar4+0x10): users vector of the first inst	^\s*puVar10\ =\ \*\(uint\ \*\*\)\(iVar4\ \+\ 0x10\);$	+2
+use	FUN_0013fc38	puVar10	firstInstUsers	INFERRED	*(iVar4+0x10): users vector of the first inst	^\s*if\ \(uVar26\ <\ \*puVar10\)\ \{$@2	+2
+use	FUN_0013fc38	puVar10	firstInstUsers	INFERRED	*(iVar4+0x10): users vector of the first inst	^\s*_memset\(uVar35\ \*\ 4\ \+\ puVar10\[2\],0,\(uVar26\ \-\ uVar35\)\ \*\ 4\ \+\ 4\);$@2	+2
+use	FUN_0013fc38	puVar10	firstInstUsers	INFERRED	*(iVar4+0x10): users vector of the first inst	^\s*puVar12\ =\ \(undefined4\ \*\)\(iVar9\ \+\ puVar10\[2\]\);$@2	+1
+use	FUN_0013fc38	puVar10	firstInstUsers	INFERRED	*(iVar4+0x10): users vector of the first inst	^\s*puVar12\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar10,uVar26\);$@2	+1
+use	FUN_0013fc38	puVar10	firstInstUsers	INFERRED	*(iVar4+0x10): users vector of the first inst	^\s*puVar10\ =\ \*\(uint\ \*\*\)\(iVar4\ \+\ 0x10\);$@2	+1
