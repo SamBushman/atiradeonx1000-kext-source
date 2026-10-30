@@ -1550,13 +1550,13 @@ int arbEmitIlMovMadMov(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src
   int allocator;
   uint src1ModifierToken;
   uint *instrCountPtr;
-  undefined1 auStack_88 [4];
-  uint uStack_84;
+  undefined1 emitRecordFrame [4];
+  uint emitRecordWord1;
   
   src1ModifierToken = 0;
-  (**(code **)(ctx + 0x748))(ctx,0,auStack_88,dstMask,src0File,src0Index,src0Words,src0Flags);
+  (**(code **)(ctx + 0x748))(ctx,0,emitRecordFrame,dstMask,src0File,src0Index,src0Words,src0Flags);
   instrCountPtr = (uint *)(ctx + ARB_tokenCount);
-  instrWord = uStack_84 & 0xffff;
+  instrWord = emitRecordWord1 & 0xffff;
   src1Token = (src1File & 0x3f) << 0x10 | src1Index & 0xffff;
   if (*src1Flags == 0) {
     src1Flags1 = src1Flags[1];
@@ -1697,7 +1697,7 @@ LAB_0006edc0:
     *instrCountPtr = instrWord;
   }
   src0ModifierToken = 0;
-  instrBase = uStack_84 & 0xffff;
+  instrBase = emitRecordWord1 & 0xffff;
   src0Token = (src0File & 0x3f) << 0x10 | src0Index & 0xffff;
   if (*src0Flags == 0) {
     src0Flags1 = src0Flags[1];
@@ -1837,7 +1837,7 @@ LAB_0006f1f0:
     *instrCountPtr = instrWord;
   }
   src2ModifierToken = 0;
-  instrBase = uStack_84 & 0xffff;
+  instrBase = emitRecordWord1 & 0xffff;
   dstMaskToken = 0x40;
   src2Token = (src2File & 0x3f) << 0x10 | src2Index & 0xffff;
   if (*src2Flags == 0) {
@@ -2063,9 +2063,9 @@ LAB_0006f9f0:
     instrWord = *instrCountPtr;
     *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(instrWord * 4 + *(int *)(ctx + ARB_tokenBuffer)) = uStack_84 & 0xffff | 0x40000;
+  *(uint *)(instrWord * 4 + *(int *)(ctx + ARB_tokenBuffer)) = emitRecordWord1 & 0xffff | 0x40000;
   *instrCountPtr = *instrCountPtr + 1;
-  (**(code **)(ctx + 0x74c))(ctx,auStack_88);
+  (**(code **)(ctx + 0x74c))(ctx,emitRecordFrame);
   return;
 }
 
@@ -4834,19 +4834,19 @@ int evsEmitLogp(compiler, tokenStream, compileState, op)
   int evsEncodeSourceResult;
   int encodeResult;
   int tokenCountPtr;
-  undefined4 uStack_38;
-  undefined4 uStack_34;
-  undefined4 uStack_30;
-  undefined4 uStack_2c;
+  undefined4 selectOverride0;
+  undefined4 selectOverride1;
+  undefined4 selectOverride2;
+  undefined4 selectOverride3;
   
   tokenCountPtr = tokenStream + 4;
   encodeResult = ((int (*)())evsAppendInstruction)(compiler,tokenCountPtr,0x3d,0);
   if ((encodeResult != 0) && (encodeResult = ((int (*)())evsEncodeDestination)(compiler,tokenCountPtr,compileState,op + 4,0), encodeResult != 0)) {
-    uStack_2c = 4;
-    uStack_34 = 4;
-    uStack_30 = 4;
-    uStack_38 = 0xc;
-    evsEncodeSourceResult = ((int (*)())evsEncodeSource)(compiler,tokenCountPtr,compileState,op + 0x20,1,&uStack_38);
+    selectOverride3 = 4;
+    selectOverride1 = 4;
+    selectOverride2 = 4;
+    selectOverride0 = 0xc;
+    evsEncodeSourceResult = ((int (*)())evsEncodeSource)(compiler,tokenCountPtr,compileState,op + 0x20,1,&selectOverride0);
     if (evsEncodeSourceResult != 0) {
       return 1;
     }
@@ -5563,19 +5563,19 @@ int evsEmitMov(compiler, tokenStream, compileState, op)
   int evsEncodeSourceResult;
   int encodeResult;
   int tokenCountPtr;
-  undefined4 uStack_38;
-  undefined4 uStack_34;
-  undefined4 uStack_30;
-  undefined4 uStack_2c;
+  undefined4 selectOverride0;
+  undefined4 selectOverride1;
+  undefined4 selectOverride2;
+  undefined4 selectOverride3;
   
   tokenCountPtr = tokenStream + 4;
   encodeResult = ((int (*)())evsAppendInstruction)(compiler,tokenCountPtr,0x47,0);
   if ((encodeResult != 0) && (encodeResult = ((int (*)())evsEncodeDestination)(compiler,tokenCountPtr,compileState,op + 4,0), encodeResult != 0)) {
-    uStack_38 = 4;
-    uStack_34 = 5;
-    uStack_30 = 6;
-    uStack_2c = 7;
-    evsEncodeSourceResult = ((int (*)())evsEncodeSource)(compiler,tokenCountPtr,compileState,op + 0x20,1,&uStack_38);
+    selectOverride0 = 4;
+    selectOverride1 = 5;
+    selectOverride2 = 6;
+    selectOverride3 = 7;
+    evsEncodeSourceResult = ((int (*)())evsEncodeSource)(compiler,tokenCountPtr,compileState,op + 0x20,1,&selectOverride0);
     if (evsEncodeSourceResult != 0) {
       return 1;
     }

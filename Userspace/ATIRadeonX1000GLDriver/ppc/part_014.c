@@ -2357,7 +2357,7 @@ int ffvpEmitDirectionalLight(programBuilder, lightIndex, isFirstLight, isLastLig
   int builderCursor;
   int stateBlock;
   int glCtxB;
-  int iVar8;
+  int unusedNormalReg;
   int srcReg;
   int srcFile;
   int sideCount;
@@ -2532,7 +2532,7 @@ LAB_000984b0:
     glCtx = *(int *)(programBuilder + 0x3d4);
     stateBlockB = *(int *)(*(int *)(glCtx + 4) + 0x10);
     /* #70 stack words (stackargs_overrides.json): the stock's r16, the 9th argument of the ctx+0x12e4 calls below, is rec[0]
-     * on three arms and rec[4] (`lwz r16,0x4(r2)` at 0x97638) on the arm that takes iVar8 = *(programBuilder + 4); Ghidra dropped
+     * on three arms and rec[4] (`lwz r16,0x4(r2)` at 0x97638) on the arm that takes unusedNormalReg = *(programBuilder + 4); Ghidra dropped
      * the dead loads */
     src1File = **(int **)(programBuilder + 0x3ec);
     if (*(char *)(glCtx + 0x128) == '\0') {

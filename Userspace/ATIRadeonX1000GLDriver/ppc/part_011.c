@@ -370,14 +370,14 @@ int recordAllocCreate(allocFn, allocArg)
 }
 
 /* recordCollectDependencies @ 0x77560 (228 bytes) */
-int recordCollectDependencies(alloc, recordIndex, depth, unusedArg4, unusedArg5, param_6, param_7)
+int recordCollectDependencies(alloc, recordIndex, depth, unusedArg4, unusedArg5, parentSlotBase, parentSourceBit)
   int alloc;
   int recordIndex;
   uint depth;
   undefined4 unusedArg4;
   undefined4 unusedArg5;
-  undefined4 param_6;
-  undefined4 param_7;
+  undefined4 parentSlotBase;
+  undefined4 parentSourceBit;
 {
   int callerSlotBase;
   bool moreSlots;
@@ -2193,7 +2193,7 @@ int recordFindScheduleConflict(alloc, useDistinctCheck)
   int queuedRecord;
   int dependencyRecord;
   uint laterQueueIndex;
-  undefined8 uVar17;
+  undefined8 callResultPair;
   
   programBase = alloc + 0x1286c;
   queueCount = *(uint *)(alloc + 0x2a878);
@@ -2208,9 +2208,9 @@ int recordFindScheduleConflict(alloc, useDistinctCheck)
       if ((((checkDistinct) && ((**(uint **)(alloc + 0x34) & 0x40) != 0)) &&
           (opcodeClass = (char)*record + 0xbc, opcodeClass < 0xb)) &&
          (opcodeBit = 1 << ((int)(char)opcodeClass & 0x3fU) & 0x601, opcodeBit != 0)) {
-        uVar17 = ((int (*)())recordSourcesAreDistinctTemps)(record,useDistinctCheck,in_r5,in_r6,in_r7,in_r8,opcodeBit);
-        useDistinctCheck = (int)uVar17;
-        if ((int)((ulonglong)uVar17 >> 0x20) != 0) {
+        callResultPair = ((int (*)())recordSourcesAreDistinctTemps)(record,useDistinctCheck,in_r5,in_r6,in_r7,in_r8,opcodeBit);
+        useDistinctCheck = (int)callResultPair;
+        if ((int)((ulonglong)callResultPair >> 0x20) != 0) {
           conflictFound = true;
           resultCode = 8;
         }
@@ -2227,10 +2227,10 @@ int recordFindScheduleConflict(alloc, useDistinctCheck)
             do {
               laterRecordIndex = *laterQueueCursor;
               if ((*(uint *)(programBase + laterRecordIndex * 0x10) & 0xfef00) == (recordWord0 & 0xfef00)) {
-                uVar17 = ((int (*)())recordGetWriteMask)(programBase + laterRecordIndex * 0x10);
-                useDistinctCheck = (int)uVar17;
+                callResultPair = ((int (*)())recordGetWriteMask)(programBase + laterRecordIndex * 0x10);
+                useDistinctCheck = (int)callResultPair;
                 overlaps = true;
-                if (((uint)((ulonglong)uVar17 >> 0x20) & dependencyNode[1]) == 0) goto LAB_00079fc0;
+                if (((uint)((ulonglong)callResultPair >> 0x20) & dependencyNode[1]) == 0) goto LAB_00079fc0;
               }
               else {
 LAB_00079fc0:
@@ -2703,14 +2703,14 @@ LAB_0007aa50:
 }
 
 /* recordPickNextToEmit @ 0x7aae0 (1460 bytes) */
-int recordPickNextToEmit(ctx, registerCount, readyCycle, keepFlag, chosenReg, program, param_7, laterPass)
+int recordPickNextToEmit(ctx, registerCount, readyCycle, keepFlag, chosenReg, program, configFlagsArg, laterPass)
   int ctx;
   int registerCount;
   uint readyCycle;
   undefined1 *keepFlag;
   undefined4 *chosenReg;
   int program;
-  undefined4 param_7;
+  undefined4 configFlagsArg;
   undefined4 laterPass;
 {
   char *chosenAffinity;
@@ -3123,7 +3123,7 @@ int recordProgramAllocateAndEmit(alloc, unusedArg2, scratchArg3, scratchArg4, sc
   char recordBFileCount2;
   char recordBFileCount3;
   undefined1 pickScratch [12];
-  uint local_9c [5];
+  uint unusedFrame9c [5];
   uint liveCountSnapshot;
   int partnerIndex;
   int combinedPairCount;
@@ -4073,7 +4073,7 @@ int recordProgramBuildDependencies(alloc)
   uint *recordPtrAlias;
   byte in_xer_so = 0;
   int remainingB;
-  int iVar36;
+  int perSourceOffset;
   int predResult;
   int edgeStatus;
   int wordIndex;
@@ -4521,7 +4521,7 @@ LAB_0007ceb4:
       srcWordPtrAlias0 = srcWordPtrTable;
       srcWordPtr1 = (uint *)srcWordPtrTableTail.name.offset;
       srcWordPtr2 = (uint *)srcWordPtrTableTail.timestamp;
-      iVar36 = dependencyOffset;
+      perSourceOffset = dependencyOffset;
       srcWordPtrTableTail.compatibility_version = (dword)&srcWordPtrTableTail;
       do {
         if ((sourceMask & 1 << (sourceSlot & 0x3f)) == 0) {
@@ -4553,7 +4553,7 @@ LAB_0007ceb4:
             }
             if ((srcSpecialBit == 1) && (srcSelectBits = sourceWordValue >> 0x1d & 3, -1 < (int)lastRecordIndex)) {
               scanPtr = (undefined1 *)0x0;
-              dependentsBase = (int)alloc + iVar36 + 0x450;
+              dependentsBase = (int)alloc + perSourceOffset + 0x450;
               recordPtrAlias = record;
               do {
                 recordPtrAlias = recordPtrAlias + -4;
@@ -4808,7 +4808,7 @@ switchD_0007d27c_caseD_0:
         }
 LAB_0007da08:
         moreSources = sourceSlot != 2;
-        iVar36 = iVar36 + 4;
+        perSourceOffset = perSourceOffset + 4;
         sourceSlot = sourceSlot + 1;
         perSourceDepHead = perSourceDepHead + 1;
         scratchArg6 = sourceSlotOffset + 1;

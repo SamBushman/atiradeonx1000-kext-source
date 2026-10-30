@@ -1533,7 +1533,7 @@ int arbValidateProgram(callbacks, program, sourceLength, sourceText)
   int aluCount;
   int outInstOffset;
   int paramBlock;
-  int iVar2;
+  int codeBuffer;
   int totalInsts;
   int arrayCount;
   int internStatus;
@@ -1976,12 +1976,12 @@ LAB_0008ce38:
               else {
                 stageR9 = (int *)workArea[0x928a];
                 hasKillFlag = hasKill;
-                iVar2 = (**(code **)(limits + 0xc))
+                codeBuffer = (**(code **)(limits + 0xc))
                                   (totalInsts * 0x70 + (int)(workArea[0x9149] + (int)stageR9) * 0x14 +
                                    workArea[0x9116] * 0x10 + 0x70,hasKill,a2,totalInsts,in_r7,in_r8,stageR9)
                 ;
-                *(int *)(program + 0x60) = iVar2;
-                if (iVar2 != 0) {
+                *(int *)(program + 0x60) = codeBuffer;
+                if (codeBuffer != 0) {
                   if (hasKillFlag != 0) {
                     program[3] = 1;
                   }
@@ -3650,12 +3650,12 @@ int arbfpLoadDefaultProgram(context)
 }
 
 /* gldDrawInternalRect @ 0x8f7f0 (884 bytes) */
-int gldDrawInternalRect(ctx, param_2, param_3, rect, param_5)
+int gldDrawInternalRect(ctx, unusedArg2, passThroughArg3, rect, passThroughArg5)
   int ctx;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 unusedArg2;
+  undefined4 passThroughArg3;
   uint *rect;
-  uint param_5;
+  uint passThroughArg5;
 {
   int scaledWidth;
   undefined4 stateWord2da0;
@@ -3676,11 +3676,11 @@ int gldDrawInternalRect(ctx, param_2, param_3, rect, param_5)
   undefined4 *packet;
   undefined4 packetWords;
   undefined4 extraout_r4;
-  undefined4 uVar14;
+  undefined4 stageArgA;
   uint *a3;
   undefined4 a3_00;
   undefined1 *a4;
-  undefined *puVar15;
+  undefined *stageArgB;
   undefined4 *a1_00;
   int recordBase;
   uint a6;
@@ -3701,10 +3701,10 @@ int gldDrawInternalRect(ctx, param_2, param_3, rect, param_5)
   
   stateBlock = *(int *)(*(int *)(ctx + 4) + 0x10);
   a3 = rect;
-  a1 = (**(code **)(ctx + 0x2758))(ctx,10000,param_3,rect,param_5);
+  a1 = (**(code **)(ctx + 0x2758))(ctx,10000,passThroughArg3,rect,passThroughArg5);
   commitFn = *(code **)(ctx + 0x275c);
   *(int *)(0x00002748 + ctx + 4) = a1;
-  (*commitFn)(ctx,a1,param_3,a3,param_5);
+  (*commitFn)(ctx,a1,passThroughArg3,a3,passThroughArg5);
   recordBase = *(int *)(ctx + 4);
   if (((((*(uint *)(recordBase + 0x154) & 0x700000) == 0) || (*rect != 0)) || (rect[1] != 0)) ||
      ((rect[2] != *(uint *)(recordBase + 0x15c) || (rect[3] != *(uint *)(recordBase + 0x160))))) {
@@ -3716,7 +3716,7 @@ int gldDrawInternalRect(ctx, param_2, param_3, rect, param_5)
     FUN_000a5c40(ctx);
     recordBase = *(int *)(0x00002748 + ctx + 4);
   }
-  uVar14 = 0;
+  stageArgA = 0;
   a3_00 = 0;
   a4 = savedDrawState;
   gldEnterInternalDrawState(ctx,1,0,0,a4);
@@ -3724,7 +3724,7 @@ int gldDrawInternalRect(ctx, param_2, param_3, rect, param_5)
   if (*(char *)(ctx + 0x2802) != '\0') {
     packetWords = 0x23;
   }
-  packet = (undefined4 *)(**(code **)(ctx + 0x2758))(ctx,packetWords,uVar14,a3_00,a4);
+  packet = (undefined4 *)(**(code **)(ctx + 0x2758))(ctx,packetWords,stageArgA,a3_00,a4);
   rasterInitFlag = *(char *)(ctx + 0x2802);
   *(undefined4 **)(0x00002748 + ctx + 4) = packet;
   if (rasterInitFlag == '\0') {
@@ -3732,13 +3732,13 @@ int gldDrawInternalRect(ctx, param_2, param_3, rect, param_5)
     *packet = 0x5c8;
     *(undefined1 *)(ctx + 0x2802) = 1;
   }
-  packetBase = (**(code **)(ctx + 0x2758))(ctx,0x23,uVar14,a3_00,a4);
+  packetBase = (**(code **)(ctx + 0x2758))(ctx,0x23,stageArgA,a3_00,a4);
   *(undefined4 *)(0x00002748 + ctx + 4) = packetBase;
   packet = (undefined4 *)gldEmitInternalDrawSetupPackets(ctx,packetBase);
   if (recordCommands) {
     *(int *)(a1 + 8) = (int)packet - a1 >> 2;
   }
-  puVar15 = ((unsigned char *)0x00001087U);
+  stageArgB = ((unsigned char *)0x00001087U);
   a1_00 = packet + 0x10;
   i2dHi2 = 0x43300000;
   i2dHi3 = 0x43300000;
@@ -3782,7 +3782,7 @@ int gldDrawInternalRect(ctx, param_2, param_3, rect, param_5)
   packet[0xf] = *(undefined4 *)(ctx + 0x1ccc);
   *(undefined4 **)(0x00002748 + ctx + 4) = a1_00;
   (**(code **)(ctx + 0x275c))(ctx,a1_00,packet,a3_00,((unsigned char *)0x00001087U),a1_00,a6,0xc0083500);
-  gldValidateVertexProgramState(ctx,extraout_r4,packet,a3_00,puVar15,a1_00,a6);
+  gldValidateVertexProgramState(ctx,extraout_r4,packet,a3_00,stageArgB,a1_00,a6);
   gldLeaveInternalDrawState(ctx,savedDrawState);
   if (recordCommands) {
     *(int *)(a1 + 4) = *(int *)(0x00002748 + ctx + 4) - recordBase >> 2;

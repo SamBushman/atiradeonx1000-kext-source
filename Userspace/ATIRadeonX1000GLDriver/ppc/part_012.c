@@ -4296,7 +4296,8 @@ int arbLexNumber(parser)
   double intBias;
   byte suffixChar;
   byte curChar;
-  bool bVar2;
+  bool isIntegerLiteral;
+  bool exponentNegative;
   double ten;
   double tenth;
   int exponent;
@@ -4330,20 +4331,20 @@ int arbLexNumber(parser)
       fracScale = fracScale * tenth;
       curChar = *fracCursor;
     }
-    bVar2 = false;
+    isIntegerLiteral = false;
   }
   else {
-    bVar2 = true;
+    isIntegerLiteral = true;
   }
   cursor = *(byte **)(parser + 0xc);
   if ((*cursor != 0x45) && (*cursor != 0x65)) goto LAB_0008886c;
   *(byte **)(parser + 0xc) = cursor + 1;
   if (cursor[1] == 0x2d) {
-    bVar2 = true;
+    exponentNegative = true;
     *(byte **)(parser + 0xc) = cursor + 2;
   }
   else {
-    bVar2 = false;
+    exponentNegative = false;
     if (cursor[1] == 0x2b) {
       *(byte **)(parser + 0xc) = cursor + 2;
     }
@@ -4378,11 +4379,11 @@ LAB_000887c4:
     exponentScale = DOUBLE_001aa200;
     if ((expDigit - 0x30 & 0xff) < 10) goto LAB_000887c4;
   }
-  if (bVar2) {
+  if (exponentNegative) {
     exponentScale = DOUBLE_001aa200 / exponentScale;
   }
   value = value * exponentScale;
-  bVar2 = false;
+  isIntegerLiteral = false;
 LAB_0008886c:
   suffixChar = *cursor;
   if ((((byte)(suffixChar + 0xbf) < 0x1a) || ((byte)(suffixChar + 0x9f) < 0x1a)) || (suffixChar == 0x5f)) {
@@ -4390,7 +4391,7 @@ LAB_0008886c:
   }
   *(double *)(parser + 0x1c) = value;
   *(int *)(parser + 0x18) = (int)GH_F2U((float)(value));
-  if ((bVar2) && (value == (double)CONCAT44(0x43300000,(int)value) - DOUBLE_001aa250)) {
+  if ((isIntegerLiteral) && (value == (double)CONCAT44(0x43300000,(int)value) - DOUBLE_001aa250)) {
     *(undefined4 *)(parser + 0x14) = 0xf;
   }
   else {

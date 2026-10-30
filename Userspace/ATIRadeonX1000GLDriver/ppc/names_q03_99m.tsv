@@ -1,0 +1,5 @@
+use	recordProgramBuildDependencies	iVar36	perSourceOffset	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar36\ =\ iVar23;$	+1
+use	recordProgramBuildDependencies	iVar36	perSourceOffset	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*local_88\ =\ \(int\)param_1\ \+\ iVar36\ \+\ 0x450;$	+1
+use	recordProgramBuildDependencies	iVar36	perSourceOffset	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar36\ =\ iVar36\ \+\ 4;$@2	+1
+local	recordProgramAllocateAndEmit	local_9c	unusedFrame9c	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	ffvpEmitDirectionalLight	iVar8	unusedNormalReg	INFERRED	role read off the function body (see notes_gld_q03.md)
