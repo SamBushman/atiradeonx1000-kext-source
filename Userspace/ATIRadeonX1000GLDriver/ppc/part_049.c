@@ -154,7 +154,7 @@ LAB_00186708:
       else {
         mergedSelect = destSelect;
       }
-      loopIndex2 = FUN_000f2e18(mergedSelect);
+      loopIndex2 = SelectWord__hasNonzeroLaneBytes(mergedSelect);
       if (loopIndex2 == 0) goto LAB_00186a60;
       loopIndex3 = 1;
       inst1[0x27] = mergedSelect;
@@ -2681,7 +2681,7 @@ code_r0x0018aab8:
               operandVReg = (int *)IRInst__getOperandSource(inst,operandIndex);
               loopIndex = (**(code **)(*operandVReg + 0x80))();
               loopIndex2 = IRInst__getOperandRecord(inst,operandIndex);
-              FUN_000f39d0(&local_60,*(undefined4 *)(loopIndex2 + 0x10));
+              laneMask__fromUsedLanes(&local_60,*(undefined4 *)(loopIndex2 + 0x10));
               laneSelectWord = local_60;
               loopIndex2 = IRInst__getOperandRecord(inst,operandIndex);
               loopIndex3 = *(uint *)(loopIndex2 + 0x10);

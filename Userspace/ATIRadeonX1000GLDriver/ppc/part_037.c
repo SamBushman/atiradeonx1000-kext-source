@@ -41,7 +41,7 @@ int Program__noSuccessorHasMultipleSuccessors(program)
     if (nextBlock == 0) {
       return 1;
     }
-    blockQuery79b8 = FUN_000e79b8(block);
+    blockQuery79b8 = Block__hasMultiplePredecessors(block);
     if (blockQuery79b8 != 0) {
       successorByteOffset = 0;
       for (loopIndex = 1; loopIndex <= *(uint *)(*(int *)(block + 0xd4) + 4); loopIndex = loopIndex + 1) {

@@ -32,8 +32,8 @@ int Compiler__selectEntry534ByProgramFlags(compiler)
   return *(undefined4 *)(compiler + 0x534);
 }
 
-/* FUN_000e161c @ 0xe161c (156 bytes) */
-int FUN_000e161c(compiler, failureKind)
+/* Compiler__tryRetryAfterFailure @ 0xe161c (156 bytes) */
+int Compiler__tryRetryAfterFailure(compiler, failureKind)
   int compiler;
   int failureKind;
 {
@@ -756,7 +756,7 @@ int Compiler__compileWithRetry(compiler, result, request, requestFlags, compileI
     retryState = *(int *)(iStack00000018 + 0x314);
     FUN_000e0e28(iStack00000018);
     ((int (*)())Compiler__releaseChipAndPools)(iStack00000018,0);
-  } while ((retryState != 0) && (retryHandled = ((int (*)())FUN_000e161c)(iStack00000018,retryState), retryHandled != 0));
+  } while ((retryState != 0) && (retryHandled = ((int (*)())Compiler__tryRetryAfterFailure)(iStack00000018,retryState), retryHandled != 0));
   return retryState;
 }
 
@@ -810,7 +810,7 @@ int Compiler__compile(compiler, shader, sourceA, sourceB, optionsArg, unusedArg6
     retryState = *(int *)(iStack00000018 + 0x314);
     FUN_000e0e28(iStack00000018);
     ((int (*)())Compiler__releaseChipAndPools)(iStack00000018,0);
-  } while ((retryState != 0) && (retryHandled = ((int (*)())FUN_000e161c)(iStack00000018,retryState), retryHandled != 0));
+  } while ((retryState != 0) && (retryHandled = ((int (*)())Compiler__tryRetryAfterFailure)(iStack00000018,retryState), retryHandled != 0));
   return retryState;
 }
 
@@ -1778,7 +1778,7 @@ int FUN_000e3b88(ctx, block, beforeInst, changedOut)
         if ((iVar14 == secondPendingKey) && (operandVReg3 == operandVReg2)) {
           ctx[1] = ctx[1] + 1;
           iVar14 = ((int (*)())IRInst__createMovForDest)(firstPending,operandVReg2,*ctx);
-          FUN_000f47a8(iVar14,firstPending,secondPending);
+          IRInst__mergeDestMasksIntoFirst(iVar14,firstPending,secondPending);
           Block__insertInstAfter(scanInst[0x56],scanInst,iVar14);
           return iVar14;
         }

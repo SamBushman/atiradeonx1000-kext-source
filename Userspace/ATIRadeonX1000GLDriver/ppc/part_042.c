@@ -2691,7 +2691,7 @@ int FUN_0013d3b8(program)
               if (splitRgbAlphaEnabled != 0) {
                 operandRecord2 = IRInst__getOperandRecord(inst,0);
                 operandSelect = *(uint *)(operandRecord2 + 0x10);
-                selectIsFullMask = FUN_000f2e18(operandSelect);
+                selectIsFullMask = SelectWord__hasNonzeroLaneBytes(operandSelect);
                 if (selectIsFullMask == 0) {
                   cloneResult = IRInst__clone(inst,*(undefined4 *)(program + 8),0);
                   *(uint *)(cloneResult + 0x9c) = operandSelect & 0xffffff00 | 1;

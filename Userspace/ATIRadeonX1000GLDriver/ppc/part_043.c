@@ -733,7 +733,7 @@ int FUN_00147b8c(inst, operandIndex, inst2, operandIndex2, param_5, param_6, par
             if (callResult != operandVReg) {
               return 0;
             }
-            iVar3 = FUN_000f485c(inst2,operandIndex2);
+            iVar3 = IRInst__sourceLanesAllWritten_f485c(inst2,operandIndex2);
             if (iVar3 == 0) {
               return 0;
             }
@@ -754,7 +754,7 @@ int FUN_00147b8c(inst, operandIndex, inst2, operandIndex2, param_5, param_6, par
                 return 0;
               }
               inst1 = (int *)IRInst__getOperandSource(inst1,inst1[0x21]);
-            } while ((callResult2 != inst1) || (iVar3 = FUN_000f485c(inst,operandIndex), iVar3 == 0));
+            } while ((callResult2 != inst1) || (iVar3 = IRInst__sourceLanesAllWritten_f485c(inst,operandIndex), iVar3 == 0));
             if (param_6 != 0) {
               IRInst__setOperandSource(inst2,operandIndex2,callResult,0,*(undefined4 *)(param_5 + 8));
               if (*(int *)(param_5 + 0x478) < callResult[0x58]) {
@@ -1049,7 +1049,7 @@ int FUN_0014846c(inst, param_2)
   if ((inst[5] & 2U) != 0) {
     operandRecord = IRInst__getOperandRecord(inst,0);
     uVar2 = *(uint *)(operandRecord + 0x10);
-    iVar3 = FUN_000f2e18(uVar2);
+    iVar3 = SelectWord__hasNonzeroLaneBytes(uVar2);
     if ((iVar3 != 0) && (iVar3 = Compiler__isOptionEnabled(*(undefined4 *)(param_2 + 8),0x31), iVar3 != 0)) {
       destRegisterOffset = inst[0x26];
       destRegister = inst[0x25];
@@ -1149,7 +1149,7 @@ int FUN_001486e8(inst, param_2)
   if ((inst[5] & 2U) != 0) {
     operandRecord = IRInst__getOperandRecord(inst,0);
     uVar2 = *(uint *)(operandRecord + 0x10);
-    iVar3 = FUN_000f2e18(uVar2);
+    iVar3 = SelectWord__hasNonzeroLaneBytes(uVar2);
     if ((iVar3 != 0) && (iVar3 = Compiler__isOptionEnabled(*(undefined4 *)(param_2 + 8),0x31), iVar3 != 0)) {
       destRegisterOffset = inst[0x26];
       destRegister = inst[0x25];

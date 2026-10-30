@@ -2763,18 +2763,18 @@ int scSetCallbackTables(compileInput, request, resultObject)
   return 2;
 }
 
-/* FUN_000da420 @ 0xda420 (24 bytes) */
-int FUN_000da420(param_1)
-  int param_1;
+/* Compiler__getFailureCode @ 0xda420 (24 bytes) */
+int Compiler__getFailureCode(owner)
+  int owner;
 {
-  if (*(int *)(param_1 + 8) == 0) {
+  if (*(int *)(owner + 8) == 0) {
     return 2;
   }
-  return *(undefined4 *)(*(int *)(param_1 + 8) + 0x314);
+  return *(undefined4 *)(*(int *)(owner + 8) + 0x314);
 }
 
-/* FUN_000da438 @ 0xda438 (32 bytes) */
-int FUN_000da438(targetObject, param_2)
+/* Object__setThreeWords @ 0xda438 (32 bytes) */
+int Object__setThreeWords(targetObject, param_2)
   int targetObject;
   undefined4 *param_2;
 {

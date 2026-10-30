@@ -4111,7 +4111,7 @@ int FUN_000cd05c(scCallbacks, param_2, allocTag)
   }
   else {
     Compiler__createFromRequest_da0c0(a1,scCallbacks);
-    iVar1 = FUN_000da420(a1);
+    iVar1 = Compiler__getFailureCode(a1);
     if (iVar1 != 0) {
       scDestroyCompilerObject(a1,1);
       (**(code **)(scCallbacks + 0x34))(*(undefined4 *)(scCallbacks + 0x2c),a1,allocTag);
@@ -4208,7 +4208,7 @@ int FUN_000cd1c4(param_1, param_2, param_3, param_4)
       iStack00000018Word314 = *(int *)(iStack00000018 + 0x314);
       FUN_000e0e28(iStack00000018);
       Compiler__releaseChipAndPools(iStack00000018,0);
-    } while ((iStack00000018Word314 != 0) && (iVar2 = FUN_000e161c(iStack00000018,iStack00000018Word314), iVar2 != 0));
+    } while ((iStack00000018Word314 != 0) && (iVar2 = Compiler__tryRetryAfterFailure(iStack00000018,iStack00000018Word314), iVar2 != 0));
     return iStack00000018Word314;
   }
   return 2;

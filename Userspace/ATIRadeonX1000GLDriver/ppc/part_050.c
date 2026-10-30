@@ -1129,7 +1129,7 @@ LAB_00193490:
             callResult = IRInst__getOperandRecord(combinedInst,loopIndex3);
             laneByte = (uint)*(byte *)(loopIndex2 + callResult + 0x10);
             if (laneByte < 4) {
-              callResult = FUN_000f313c(newSource,laneByte);
+              callResult = IRInst__isLaneWritten(newSource,laneByte);
               if (callResult == 0) {
                 *(undefined1 *)(loopIndex + 0x9c) = 1;
               }

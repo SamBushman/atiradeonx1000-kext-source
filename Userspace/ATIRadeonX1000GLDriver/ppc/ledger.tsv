@@ -1166,8 +1166,8 @@
 0xda09c	36	Compiler__bumpStatsCounter100	part_019	converted
 0xda0c0	192	Compiler__createFromRequest_da0c0	part_019	converted
 0xda394	68	scSetCallbackTables	part_019	converted
-0xda420	24	FUN_000da420	part_019	converted
-0xda438	32	FUN_000da438	part_019	converted
+0xda420	24	Compiler__getFailureCode	part_019	converted
+0xda438	32	Object__setThreeWords	part_019	converted
 0xda458	96	scDestroyCompilerObject	part_019	converted
 0xda4b8	192	Compiler__createFromRequest	part_019	converted
 0xda78c	244	MiniFloat__decode	part_019	converted
@@ -1261,7 +1261,7 @@
 0xe1564	84	Compiler__allocateOrFail	part_020	converted
 0xe15b8	36	Compiler__propagateFlag5a1Bit1	part_021	converted
 0xe15dc	64	Compiler__selectEntry534ByProgramFlags	part_021	converted
-0xe161c	156	FUN_000e161c	part_021	converted
+0xe161c	156	Compiler__tryRetryAfterFailure	part_021	converted
 0xe16b8	76	Compiler__selectBlockByProgramFlags	part_021	converted
 0xe1704	88	Compiler__setBitInSelectedBlockB8	part_021	converted
 0xe175c	88	Compiler__setBitInSelectedBlockD8	part_021	converted
@@ -1339,7 +1339,7 @@
 0xe7924	104	Block__nearestCommonAncestor	part_022	converted
 0xe798c	20	Block__vectorF8NonEmpty	part_022	converted
 0xe79a0	24	Block__hasMultipleSuccessors	part_022	converted
-0xe79b8	24	FUN_000e79b8	part_022	converted
+0xe79b8	24	Block__hasMultiplePredecessors	part_022	converted
 0xe79d0	12	Block__successorCount	part_022	converted
 0xe79dc	12	Block__predecessorCount	part_022	converted
 0xe79e8	20	Block__hasSuccessors	part_022	converted
@@ -1501,7 +1501,7 @@
 0xf2d08	16	Lane__isValid	part_024	converted
 0xf2d18	144	SelectWord__areCompatible	part_025	converted
 0xf2da8	112	SelectWord__matches	part_025	converted
-0xf2e18	56	FUN_000f2e18	part_025	converted
+0xf2e18	56	SelectWord__hasNonzeroLaneBytes	part_025	converted
 0xf2e50	72	laneBytes__mapTwoThreeToOne	part_025	converted
 0xf2e98	144	laneBytes__mergeOneAndTwo	part_025	converted
 0xf2f28	92	SelectWord__markLanesWhereSecondIsOne	part_025	converted
@@ -1511,7 +1511,7 @@
 0xf308c	72	laneBytes__commonSelect	part_025	converted
 0xf30d4	52	SelectWord__firstWrittenComponent	part_025	converted
 0xf3108	52	SelectWord__firstUnwrittenComponent	part_025	converted
-0xf313c	24	FUN_000f313c	part_025	converted
+0xf313c	24	IRInst__isLaneWritten	part_025	converted
 0xf3154	60	IRInst__writesAllLanes	part_025	converted
 0xf3190	88	SelectWord__isIdentity	part_025	converted
 0xf31e8	16	IRInst__isSourceSelectIdentity	part_025	converted
@@ -1523,7 +1523,7 @@
 0xf33f8	120	SelectWord__fillUnusedWithFirstUsed	part_025	converted
 0xf3470	340	SelectWord__canonicalize	part_025	converted
 0xf35c4	168	IRInst__clearSourceSelectsOfUnwrittenComponents	part_025	converted
-0xf366c	76	FUN_000f366c	part_025	converted
+0xf366c	76	WriteMask__fromUsedComponents	part_025	converted
 0xf36b8	84	WriteMask__fromUsedLanes	part_025	converted
 0xf370c	88	FUN_000f370c	part_025	converted
 0xf3764	84	laneBytes__clearSetLanes	part_025	converted
@@ -1533,7 +1533,7 @@
 0xf388c	124	laneMask__fromSelectBytes	part_025	converted
 0xf3908	96	WriteMask__fromSelectWord	part_025	converted
 0xf3968	104	laneBytes__selectWhereFirstIsOne	part_025	converted
-0xf39d0	96	FUN_000f39d0	part_025	converted
+0xf39d0	96	laneMask__fromUsedLanes	part_025	converted
 0xf3a30	96	IRInst__countWrittenComponents	part_025	converted
 0xf3a90	80	FUN_000f3a90	part_025	converted
 0xf3ae0	48	IRInst__destSelectLane3IsX	part_025	converted
@@ -1544,9 +1544,9 @@
 0xf403c	1404	IRInst__computeSourceReadMask	part_025	converted
 0xf45f8	160	FUN_000f45f8	part_025	converted
 0xf4698	148	IRInst__maskUnusedLanesOfOperand	part_025	converted
-0xf472c	124	FUN_000f472c	part_025	converted
-0xf47a8	180	FUN_000f47a8	part_025	converted
-0xf485c	144	FUN_000f485c	part_025	converted
+0xf472c	124	IRInst__storeInvertedDestMask	part_025	converted
+0xf47a8	180	IRInst__mergeDestMasksIntoFirst	part_025	converted
+0xf485c	144	IRInst__sourceLanesAllWritten_f485c	part_025	converted
 0xf48ec	144	IRInst__sourceLanesAllWritten	part_025	converted
 0xf497c	168	IRInst__writeMasksOverlap	part_025	converted
 0xf4a24	56	ConstRecords__fillFloat4	part_025	converted

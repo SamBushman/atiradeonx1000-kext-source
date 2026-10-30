@@ -36,12 +36,12 @@ int SelectWord__matches(selectWord, pattern)
   return 0;
 }
 
-/* FUN_000f2e18 @ 0xf2e18 (56 bytes) */
-int FUN_000f2e18(param_1)
-  uint param_1;
+/* SelectWord__hasNonzeroLaneBytes @ 0xf2e18 (56 bytes) */
+int SelectWord__hasNonzeroLaneBytes(selectWord)
+  uint selectWord;
 {
-  if ((((param_1 >> 0x18 == 0) || ((param_1 >> 0x10 & 0xff) == 0)) || ((param_1 >> 8 & 0xff) == 0))
-     && ((param_1 & 0xff) == 0)) {
+  if ((((selectWord >> 0x18 == 0) || ((selectWord >> 0x10 & 0xff) == 0)) || ((selectWord >> 8 & 0xff) == 0))
+     && ((selectWord & 0xff) == 0)) {
     return 0;
   }
   return 1;
@@ -302,12 +302,12 @@ int SelectWord__firstUnwrittenComponent(selectWord)
   return -1;
 }
 
-/* FUN_000f313c @ 0xf313c (24 bytes) */
-int FUN_000f313c(param_1, param_2)
-  int param_1;
-  int param_2;
+/* IRInst__isLaneWritten @ 0xf313c (24 bytes) */
+int IRInst__isLaneWritten(inst, componentIndex)
+  int inst;
+  int componentIndex;
 {
-  return -(uint)(*(byte *)(param_2 + param_1 + 0x9c) ^ 1) >> 0x1f;
+  return -(uint)(*(byte *)(componentIndex + inst + 0x9c) ^ 1) >> 0x1f;
 }
 
 /* IRInst__writesAllLanes @ 0xf3154 (60 bytes) */
@@ -624,8 +624,8 @@ int IRInst__clearSourceSelectsOfUnwrittenComponents(inst)
   return;
 }
 
-/* FUN_000f366c @ 0xf366c (76 bytes) */
-int FUN_000f366c(outMask, selectWord)
+/* WriteMask__fromUsedComponents @ 0xf366c (76 bytes) */
+int WriteMask__fromUsedComponents(outMask, selectWord)
   undefined4 *outMask;
   undefined4 selectWord;
 {
@@ -838,22 +838,22 @@ int laneBytes__selectWhereFirstIsOne(outMask, selectMask, values)
   return;
 }
 
-/* FUN_000f39d0 @ 0xf39d0 (96 bytes) */
-int FUN_000f39d0(outMask, param_2)
+/* laneMask__fromUsedLanes @ 0xf39d0 (96 bytes) */
+int laneMask__fromUsedLanes(outMask, selectWord)
   undefined4 *outMask;
-  uint param_2;
+  uint selectWord;
 {
   *outMask = 0;
-  if (param_2 >> 0x18 < 4) {
+  if (selectWord >> 0x18 < 4) {
     *(undefined1 *)outMask = 1;
   }
-  if ((param_2 >> 0x10 & 0xff) < 4) {
+  if ((selectWord >> 0x10 & 0xff) < 4) {
     *(undefined1 *)((int)outMask + 1) = 1;
   }
-  if ((param_2 >> 8 & 0xff) < 4) {
+  if ((selectWord >> 8 & 0xff) < 4) {
     *(undefined1 *)((int)outMask + 2) = 1;
   }
-  if (3 < (param_2 & 0xff)) {
+  if (3 < (selectWord & 0xff)) {
     return;
   }
   *(undefined1 *)((int)outMask + 3) = 1;
@@ -1486,36 +1486,36 @@ int IRInst__maskUnusedLanesOfOperand(inst, operandIndex, program)
   return;
 }
 
-/* FUN_000f472c @ 0xf472c (124 bytes) */
-int FUN_000f472c(outMask, inst)
+/* IRInst__storeInvertedDestMask @ 0xf472c (124 bytes) */
+int IRInst__storeInvertedDestMask(outMask, inst)
   int outMask;
   undefined4 inst;
 {
   int operandRecord;
   int loopCounter;
   int loopCounterB;
-  undefined4 local_28 [8];
+  undefined4 invertedMask [8];
   
   operandRecord = IRInst__getOperandRecord(inst,0);
   loopCounter = 0;
-  local_28[0] = *(undefined4 *)(operandRecord + 0x10);
+  invertedMask[0] = *(undefined4 *)(operandRecord + 0x10);
   loopCounterB = 4;
   do {
-    if (*(char *)((int)local_28 + loopCounter) == '\x01') {
-      *(undefined1 *)((int)local_28 + loopCounter) = 0;
+    if (*(char *)((int)invertedMask + loopCounter) == '\x01') {
+      *(undefined1 *)((int)invertedMask + loopCounter) = 0;
     }
     else {
-      *(undefined1 *)((int)local_28 + loopCounter) = 1;
+      *(undefined1 *)((int)invertedMask + loopCounter) = 1;
     }
     loopCounter = loopCounter + 1;
     loopCounterB = loopCounterB + -1;
   } while (loopCounterB != 0);
-  *(undefined4 *)(outMask + 0x9c) = local_28[0];
+  *(undefined4 *)(outMask + 0x9c) = invertedMask[0];
   return;
 }
 
-/* FUN_000f47a8 @ 0xf47a8 (180 bytes) */
-int FUN_000f47a8(outMask, inst, inst2)
+/* IRInst__mergeDestMasksIntoFirst @ 0xf47a8 (180 bytes) */
+int IRInst__mergeDestMasksIntoFirst(outMask, inst, inst2)
   int outMask;
   undefined4 inst;
   undefined4 inst2;
@@ -1524,36 +1524,36 @@ int FUN_000f47a8(outMask, inst, inst2)
   int operandRecord;
   int loopCounter;
   int loopCounterB;
-  undefined4 local_28;
-  undefined4 local_24 [6];
+  undefined4 instSelect;
+  undefined4 inst2Select [6];
   
   operandRecord = IRInst__getOperandRecord(inst,0);
-  local_28 = *(undefined4 *)(operandRecord + 0x10);
+  instSelect = *(undefined4 *)(operandRecord + 0x10);
   operandRecord2 = IRInst__getOperandRecord(inst2,0);
   loopCounter = 0;
-  local_24[0] = *(undefined4 *)(operandRecord2 + 0x10);
+  inst2Select[0] = *(undefined4 *)(operandRecord2 + 0x10);
   loopCounterB = 4;
   do {
-    if ((*(char *)((int)local_24 + loopCounter + -4) != '\x01') &&
-       (*(char *)((int)local_24 + loopCounter) != '\x01')) break;
+    if ((*(char *)((int)inst2Select + loopCounter + -4) != '\x01') &&
+       (*(char *)((int)inst2Select + loopCounter) != '\x01')) break;
     loopCounter = loopCounter + 1;
     loopCounterB = loopCounterB + -1;
   } while (loopCounterB != 0);
   loopCounter = 0;
   loopCounterB = 4;
   do {
-    if (*(char *)((int)local_24 + loopCounter) != '\x01') {
-      *(char *)((int)local_24 + loopCounter + -4) = *(char *)((int)local_24 + loopCounter);
+    if (*(char *)((int)inst2Select + loopCounter) != '\x01') {
+      *(char *)((int)inst2Select + loopCounter + -4) = *(char *)((int)inst2Select + loopCounter);
     }
     loopCounter = loopCounter + 1;
     loopCounterB = loopCounterB + -1;
   } while (loopCounterB != 0);
-  *(undefined4 *)(outMask + 0x9c) = local_28;
+  *(undefined4 *)(outMask + 0x9c) = instSelect;
   return;
 }
 
-/* FUN_000f485c @ 0xf485c (144 bytes) */
-int FUN_000f485c(inst, operandIndex)
+/* IRInst__sourceLanesAllWritten_f485c @ 0xf485c (144 bytes) */
+int IRInst__sourceLanesAllWritten_f485c(inst, operandIndex)
   undefined4 inst;
   undefined4 operandIndex;
 {

@@ -2162,7 +2162,7 @@ int Program__splitExports(program)
            ) {
           operandRecord = IRInst__getOperandRecord(exportInst2,0);
           destSelectWord = *(uint *)(operandRecord + 0x10);
-          isFullSelect = FUN_000f2e18(destSelectWord);
+          isFullSelect = SelectWord__hasNonzeroLaneBytes(destSelectWord);
           if (isFullSelect == 0) {
             cloneResult = IRInst__clone(exportInst2,*(undefined4 *)(program + 8),0);
             *(uint *)(cloneResult + 0x9c) = destSelectWord & 0xffffff00 | 1;

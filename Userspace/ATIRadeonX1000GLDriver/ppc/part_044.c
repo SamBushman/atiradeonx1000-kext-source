@@ -9333,7 +9333,7 @@ int Scheduler__findFreeTempRegister(scheduler, registerFile, componentMask)
 LAB_00167d14:
             if (((requestedByte != '\0') && (writerNode = *(int *)(scheduler[1] + 0x38), writerNode != 0)) &&
                ((*(uint *)(writerNode + 0x94) == reg &&
-                ((((writerNode = FUN_000f313c(writerNode,componentIndex), writerNode != 0 &&
+                ((((writerNode = IRInst__isLaneWritten(writerNode,componentIndex), writerNode != 0 &&
                    (writerNode = *(int *)(hwLimits[0x4d] + regByteOffset), writerNode != 0)) &&
                   (*(int *)(writerNode + 0x38) == *(int *)(scheduler[1] + 0x38))) &&
                  (writerNode = ((int (*)())SchedNode__getLastConsumerCycle)(writerNode,componentIndex), writerNode == scheduler[0xb])))))) goto LAB_00167cf0;

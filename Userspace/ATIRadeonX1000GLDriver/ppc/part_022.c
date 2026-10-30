@@ -1879,11 +1879,11 @@ int Block__hasMultipleSuccessors(block)
   return 1 < *(uint *)(*(int *)(block + 0xd0) + 4);
 }
 
-/* FUN_000e79b8 @ 0xe79b8 (24 bytes) */
-int FUN_000e79b8(param_1)
-  int param_1;
+/* Block__hasMultiplePredecessors @ 0xe79b8 (24 bytes) */
+int Block__hasMultiplePredecessors(block)
+  int block;
 {
-  return 1 < *(uint *)(*(int *)(param_1 + 0xd4) + 4);
+  return 1 < *(uint *)(*(int *)(block + 0xd4) + 4);
 }
 
 /* Block__successorCount @ 0xe79d0 (12 bytes) */

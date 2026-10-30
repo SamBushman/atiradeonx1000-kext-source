@@ -2546,7 +2546,7 @@ int FUN_0017f5a4(ctx)
   int *piVar5;
   
   loopIndex = IRInst__getOperandRecord(*(undefined4 *)(ctx + 0xb0),0);
-  loopIndex = FUN_000f2e18(*(undefined4 *)(loopIndex + 0x10));
+  loopIndex = SelectWord__hasNonzeroLaneBytes(*(undefined4 *)(loopIndex + 0x10));
   if (loopIndex == 0) {
     inst = (int *)IRInst__clone(*(undefined4 *)(ctx + 0xb0),*(undefined4 *)(ctx + 0x238),0)
     ;

@@ -2834,3 +2834,23 @@ local	Table__interpolatorKindToCode	param_2	kind	INFERRED	interpolator kind inde
 local	Program__insertMovAfter	local_28	clearedSelect	INFERRED	SelectWord::clearReadComponents output stored at the new mov +0x9c
 local	ConstKey__countPresentOperands	param_1	constInst	INFERRED	constant instruction whose present-lane flag byte (+0x15c) is read
 local	Compiler__isOptionEnabled	iVar1	targetAllows	INFERRED	BitSet__testBit on the hardware target for the option
+func	FUN_000f2e18	SelectWord__hasNonzeroLaneBytes	INFERRED	returns 0 only when lane 3 (low byte) is zero and at least one of the other three lane bytes is zero, else 1
+local	FUN_000f2e18	param_1	selectWord	INFERRED	select word tested
+func	FUN_000f313c	IRInst__isLaneWritten	INFERRED	true when write-mask byte (+0x9c + component) of inst is not 1 (masked)
+local	FUN_000f313c	param_1	inst	INFERRED	instruction
+local	FUN_000f313c	param_2	componentIndex	INFERRED	component 0-3
+func	FUN_000f366c	WriteMask__fromUsedComponents	INFERRED	result bytes start as DAT_001aa838 and byte[component] is cleared for every lane that selects that component
+func	FUN_000f39d0	laneMask__fromUsedLanes	INFERRED	result byte i is 1 when select byte i is below 4 (lane used)
+local	FUN_000f39d0	param_2	selectWord	INFERRED	select word tested
+func	FUN_000f472c	IRInst__storeInvertedDestMask	INFERRED	stores at inst+0x9c a 0/1 mask: 1 where the lane byte of operand 0 is not 1, 0 where it is 1
+local	FUN_000f472c	local_28	invertedMask	INFERRED	inverted operand-0 select bytes
+func	FUN_000f47a8	IRInst__mergeDestMasksIntoFirst	INFERRED	merges the lane bytes of operand 0 of inst2 into those of inst (lanes of inst2 not equal to 1 override) and stores the result at outMask+0x9c
+local	FUN_000f47a8	local_28	instSelect	INFERRED	select word of operand 0 of inst
+local	FUN_000f47a8	local_24	inst2Select	INFERRED	select word of operand 0 of inst2 (overlaid with merged bytes)
+func	FUN_000f485c	IRInst__sourceLanesAllWritten_f485c	INFERRED	same test as IRInst__sourceLanesAllWritten: every used lane of the source reads a component written by the source register
+func	FUN_000e161c	Compiler__tryRetryAfterFailure	INFERRED	for failure kinds 4/5 decides whether the compile can be retried with reduced state (sets +0x318/+0x6b8/+0x6bc, clears +0x314) and returns 1 if so
+func	FUN_000da420	Compiler__getFailureCode	INFERRED	returns 2 when the object has no compiler, else the compiler's failure code at +0x314
+local	FUN_000da420	param_1	owner	INFERRED	object whose compiler pointer is at +8
+func	FUN_000e79b8	Block__hasMultiplePredecessors	INFERRED	true when the predecessor vector (+0xd4) holds more than one element
+local	FUN_000e79b8	param_1	block	INFERRED	block
+func	FUN_000da438	Object__setThreeWords	INFERRED	copies the three words of param_2 to +0x18, +0x1c, +0x20 of targetObject
