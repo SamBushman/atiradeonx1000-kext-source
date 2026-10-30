@@ -1,0 +1,53 @@
+use	FUN_0004ea70	sVar1	frontPolygonMode	INFERRED	state+0x3170 GL front polygon mode; GL polygon mode (state+0x3170 front, +0x3172 back; GL_POINT 0x1b00 / GL_LINE 0x1b01 / GL_FILL 0x1b02) translated into the mode word glContext+0x1b3c	^\s*sVar1\ =\ \*\(short\ \*\)\(\(\(unsigned\ char\ \*\)0x00003170\)\ \+\ iVar3\);$	+2
+use	FUN_0004ea70	sVar1	frontPolygonMode	INFERRED	state+0x3170 GL front polygon mode; GL polygon mode (state+0x3170 front, +0x3172 back; GL_POINT 0x1b00 / GL_LINE 0x1b01 / GL_FILL 0x1b02) translated into the mode word glContext+0x1b3c	^\s*else\ if\ \(sVar1\ ==\ 0x1b02\)\ \{$	+1
+use	FUN_0004ea70	sVar1	frontPolygonMode	INFERRED	state+0x3170 GL front polygon mode; GL polygon mode (state+0x3170 front, +0x3172 back; GL_POINT 0x1b00 / GL_LINE 0x1b01 / GL_FILL 0x1b02) translated into the mode word glContext+0x1b3c	^\s*else\ if\ \(sVar1\ ==\ 0x1b00\)\ \{$	+1
+use	FUN_0004ea70	sVar1	backPolygonMode	INFERRED	state+0x3172 GL back polygon mode; GL polygon mode (state+0x3170 front, +0x3172 back; GL_POINT 0x1b00 / GL_LINE 0x1b01 / GL_FILL 0x1b02) translated into the mode word glContext+0x1b3c	^\s*sVar1\ =\ \*\(short\ \*\)\(\(\(unsigned\ char\ \*\)0x00003172\)\ \+\ iVar3\);$	+2
+use	FUN_0004ea70	sVar1	backPolygonMode	INFERRED	state+0x3172 GL back polygon mode; GL polygon mode (state+0x3170 front, +0x3172 back; GL_POINT 0x1b00 / GL_LINE 0x1b01 / GL_FILL 0x1b02) translated into the mode word glContext+0x1b3c	^\s*else\ if\ \(sVar1\ ==\ 0x1b02\)\ \{$@2	+1
+use	FUN_0004ea70	sVar1	backPolygonMode	INFERRED	state+0x3172 GL back polygon mode; GL polygon mode (state+0x3170 front, +0x3172 back; GL_POINT 0x1b00 / GL_LINE 0x1b01 / GL_FILL 0x1b02) translated into the mode word glContext+0x1b3c	^\s*else\ if\ \(sVar1\ ==\ 0x1b00\)\ \{$@2	+1
+local	FUN_0004ea70	uVar2	newModeWord	INFERRED	glContext+0x1b3c after the front/back fields were updated; GL polygon mode (state+0x3170 front, +0x3172 back; GL_POINT 0x1b00 / GL_LINE 0x1b01 / GL_FILL 0x1b02) translated into the mode word glContext+0x1b3c
+local	FUN_0004ea70	iVar3	glStateBlock	INFERRED	*(*(context+4)+0x10), the GL state block; GL polygon mode (state+0x3170 front, +0x3172 back; GL_POINT 0x1b00 / GL_LINE 0x1b01 / GL_FILL 0x1b02) translated into the mode word glContext+0x1b3c
+local	FUN_0004ea70	uVar4	oldModeWord	INFERRED	glContext+0x1b3c on entry; GL polygon mode (state+0x3170 front, +0x3172 back; GL_POINT 0x1b00 / GL_LINE 0x1b01 / GL_FILL 0x1b02) translated into the mode word glContext+0x1b3c
+local	FUN_0004ea70	fparam_1	fprF1	INFERRED	FPR argument forwarded to gldValidateViewportPolygonOffset; GL polygon mode (state+0x3170 front, +0x3172 back; GL_POINT 0x1b00 / GL_LINE 0x1b01 / GL_FILL 0x1b02) translated into the mode word glContext+0x1b3c
+local	FUN_0004ea70	fparam_2	fprF2	INFERRED	FPR argument forwarded to gldValidateViewportPolygonOffset; GL polygon mode (state+0x3170 front, +0x3172 back; GL_POINT 0x1b00 / GL_LINE 0x1b01 / GL_FILL 0x1b02) translated into the mode word glContext+0x1b3c
+local	FUN_0004ea70	fparam_3	fprF3	INFERRED	FPR argument forwarded to gldValidateViewportPolygonOffset; GL polygon mode (state+0x3170 front, +0x3172 back; GL_POINT 0x1b00 / GL_LINE 0x1b01 / GL_FILL 0x1b02) translated into the mode word glContext+0x1b3c
+local	FUN_0004ea70	fparam_4	fprF4	INFERRED	FPR argument forwarded to gldValidateViewportPolygonOffset; GL polygon mode (state+0x3170 front, +0x3172 back; GL_POINT 0x1b00 / GL_LINE 0x1b01 / GL_FILL 0x1b02) translated into the mode word glContext+0x1b3c
+local	FUN_0004ea70	fparam_5	fprF5	INFERRED	FPR argument forwarded to gldValidateViewportPolygonOffset; GL polygon mode (state+0x3170 front, +0x3172 back; GL_POINT 0x1b00 / GL_LINE 0x1b01 / GL_FILL 0x1b02) translated into the mode word glContext+0x1b3c
+local	FUN_0004ea70	fparam_6	fprF6	INFERRED	FPR argument forwarded to gldValidateViewportPolygonOffset; GL polygon mode (state+0x3170 front, +0x3172 back; GL_POINT 0x1b00 / GL_LINE 0x1b01 / GL_FILL 0x1b02) translated into the mode word glContext+0x1b3c
+local	FUN_0004ea70	fparam_7	fprF7	INFERRED	FPR argument forwarded to gldValidateViewportPolygonOffset; GL polygon mode (state+0x3170 front, +0x3172 back; GL_POINT 0x1b00 / GL_LINE 0x1b01 / GL_FILL 0x1b02) translated into the mode word glContext+0x1b3c
+local	FUN_0004ea70	fparam_8	fprF8	INFERRED	FPR argument forwarded to gldValidateViewportPolygonOffset; GL polygon mode (state+0x3170 front, +0x3172 back; GL_POINT 0x1b00 / GL_LINE 0x1b01 / GL_FILL 0x1b02) translated into the mode word glContext+0x1b3c
+local	FUN_0004f160	param_2	channel	INFERRED	fog colour channel selector: 1 red (state+0x2de0), 2 green (+0x2de4), 3 blue (+0x2de8); fog colour channel scaled to an 8-bit value and split into the returned two-field word
+local	FUN_0004f160	iVar2	glStateBlock	CONFIRMED	*(*(context+4)+0x10), the GL state block; fog colour channel scaled to an 8-bit value
+local	FUN_0004f160	uVar1	channelByte	INFERRED	fog colour channel * 255 converted to an integer; its low 6 bits form the high field of the result
+local	FUN_0004f160	uVar3	highBits	INFERRED	channelByte >> 6 (low 2 bits of the result), 0 for an unknown channel
+use	FUN_0004f160	dVar4	greenScaled	INFERRED	state+0x2de4 fog colour green * 255.0	^\s*dVar4\ =\ \(double\)\(\*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x00002de4\)\ \+\ iVar2\)\ \*\ FLOAT_001aa0f0\);$	+3
+use	FUN_0004f160	dVar4	blueScaled	INFERRED	state+0x2de8 fog colour blue * 255.0	^\s*dVar4\ =\ \(double\)\(\*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x00002de8\)\ \+\ iVar2\)\ \*\ FLOAT_001aa0f0\);$	+3
+use	FUN_0004f160	dVar4	redScaled	INFERRED	state+0x2de0 fog colour red * 255.0	^\s*dVar4\ =\ \(double\)\(\*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x00002de0\)\ \+\ iVar2\)\ \*\ FLOAT_001aa0f0\);$	+3
+local	FUN_000530c0	param_2	symbolId	INFERRED	EXT_vertex_shader symbol id to look up; fills outInfo with the symbol storage fields
+local	FUN_000530c0	param_3	outInfo	INFERRED	5-word output record (record +0x54, +0x5c+0x60, +0x64, +0x58, +0x68), zeroed when not found; fills from the matching symbol record
+local	FUN_000530c0	iVar2	matchedRecord	INFERRED	current shader if its id matches, else the matching entry (stride 0x7c) of the shader list at state+0x116c+0xc; 0 when none matches
+local	FUN_000530c0	iVar1	entriesLeft	INFERRED	count of entries of the shader list (state+0x116c +4) still to test
+local	FUN_000530c0	iVar3	entryCursor	INFERRED	cursor over the shader list entries (stride 0x7c)
+local	FUN_000534c0	iVar1	extvsState	INFERRED	EXT_vertex_shader state *(ctx+0x1168); creates a chain of vector symbols, one per element, sharing the parent symbol
+use	FUN_000534c0	uVar2	createdSymbol	INFERRED	result of extvsCreateSymbol (symbol id) for one element; creates a chain of vector symbols	^\s*uVar2\ =\ FUN_00055610\(param_1,iVar1\ \+\ 0x1c,0x87bf,local_48\[\*param_3\],0x87e1,0,param_2,\*param_4\);$	+2
+use	FUN_000534c0	uVar2	createdSymbol	INFERRED	result of extvsCreateSymbol (symbol id) for one element; creates a chain of vector symbols	^\s*uVar2\ =\ FUN_00055610\(param_1,iVar1\ \+\ 0x1c,0x87bf,local_48\[param_3\[uVar3\]\],0x87e1,\*param_5,$	+3
+local	FUN_000534c0	uVar3	elementIndex	INFERRED	index of the element being created (starts at 1); creates a chain of vector symbols
+local	FUN_000534c0	uVar4	nextElementIndex	INFERRED	elementIndex + 1; creates a chain of vector symbols
+local	FUN_000534c0	local_48	storageClassTable	INFERRED	three storage class constants DAT_001aa584/588/58c indexed by the element kind; creates a chain of vector symbols
+local	FUN_000534c0	param_4	elementValues	INFERRED	per-element value passed as the last extvsCreateSymbol argument; creates a chain of vector symbols
+local	FUN_0004de30	param_2	programEntry	INFERRED	program entry whose constant bank is updated (0 = the current program, glContext+0x1e70 / +0x1e5c); copies a unit scale vector into the constant bank
+local	FUN_0004de30	param_3	unusedArg3	INFERRED	argument the function never reads; copies a unit scale vector into the constant bank
+local	FUN_0004de30	param_4	firstUnit	INFERRED	first texture unit whose scale vector is written; copies a unit scale vector into the constant bank
+local	FUN_0004de30	param_6	unitCount	INFERRED	number of units to update; copies a unit scale vector into the constant bank
+local	FUN_0004de30	iVar2	programState	INFERRED	program state block (entry + 0x124) holding the constant bank (+0x8c, 0x10 bytes per unit); copies a unit scale vector into the constant bank
+local	FUN_0004de30	puVar1	constEntry	INFERRED	constant bank entry of the current unit; copies a unit scale vector into the constant bank
+local	FUN_0004de30	pcVar3	unitFlagCursor	INFERRED	cursor over the per-unit enable flags (second flag array 0x100 bytes later marks units already fixed); copies a unit scale vector into the constant bank
+local	FUN_00053220	param_2	stateKind	INFERRED	state parameter kind (stored at symbol+0x48); finds or creates the symbol for a GL state value in the hash chains at state+0x28
+local	FUN_00053220	param_6	stateFlags	INFERRED	value stored at symbol+0x50; finds or creates the symbol for a GL state value
+local	FUN_00053220	uVar3	hashBucket	INFERRED	(stateKind + constantIndex) * 4 & 0x7c: byte offset of the hash bucket (32 buckets); finds or creates the symbol for a GL state value
+use	FUN_00053220	piVar1	bucketEntry	INFERRED	entry of the hash chain being searched (kind, index, symbol id, next); finds or creates the symbol for a GL state value	^\s*piVar1\ =\ \*\(int\ \*\*\)\(uVar3\ \+\ \*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x0000116c\)\ \+\ param_1\)\ \+\ 0x28\);$	+1
+use	FUN_00053220	piVar1	bucketEntry	INFERRED	entry of the hash chain being searched (kind, index, symbol id, next); finds or creates the symbol for a GL state value	^\s*if\ \(piVar1\ ==\ \(int\ \*\)0x0\)\ \{$	+1
+use	FUN_00053220	piVar1	bucketEntry	INFERRED	entry of the hash chain being searched (kind, index, symbol id, next); finds or creates the symbol for a GL state value	^\s*if\ \(\(param_2\ ==\ \*piVar1\)\ \&\&\ \(param_3\ ==\ piVar1\[1\]\)\)\ break;$	+2
+use	FUN_00053220	piVar1	bucketEntry	INFERRED	entry of the hash chain being searched (kind, index, symbol id, next); finds or creates the symbol for a GL state value	^\s*return\ piVar1\[2\];$	+1
+use	FUN_00053220	piVar1	newEntry	INFERRED	newly allocated 16-byte chain entry (kind, index, symbol id, next); finds or creates the symbol for a GL state value	^\s*piVar1\ =\ \(int\ \*\)\(\*\*\(code\ \*\*\)\(param_1\ \+\ 0xc\)\)\(0x10\);$	+6
+local	FUN_00053220	iVar2	symbolId	INFERRED	id returned by extvsCreateSymbol for the new state symbol; finds or creates the symbol for a GL state value
+local	FUN_00053220	iVar4	symbolList	INFERRED	symbol list state+0x14 / the symbol record found by id; finds or creates the symbol for a GL state value

@@ -8823,7 +8823,7 @@ int FUN_000b6580(glContext, param_2)
   bVar1 = param_2 == 0;
   iVar11 = *(int *)(*(int *)(glContext + 4) + 0x10);
   if (bVar1) {
-    uVar16 = FUN_0004bbf0(glContext);
+    uVar16 = gldLookupProgramVariant(glContext);
     param_2 = (int)uVar16;
     if ((int)((ulonglong)uVar16 >> 0x20) == 0) goto LAB_000b66b8;
     glContextWord1e5c_2 = *(int *)(glContext + 0x1e5c);
