@@ -554,109 +554,115 @@ int recordGetWriteMask(param_1)
 }
 
 /* FUN_00077860 @ 0x77860 (792 bytes) */
-int FUN_00077860(param_1, param_2, param_3, param_4)
-  int param_1;
-  int param_2;
-  int param_3;
-  int param_4;
+int FUN_00077860(alloc, records, liveIndex, modeFlag)
+  int alloc;
+  int records;
+  int liveIndex;
+  int modeFlag;
 {
-  bool bVar1;
-  uint uVar2;
-  int iVar3;
-  uint uVar4;
-  uint uVar5;
-  int *piVar6;
-  int *piVar7;
-  uint *puVar8;
-  uint *puVar9;
-  uint uVar10;
+  uint recordWriteMask;
+  uint laneIndex;
+  uint oldUsage;
+  uint recordIndex;
+  uint writeMask;
+  int flagResult;
+  bool moreLanes;
+  uint fileBit;
+  int recordOffset;
+  uint recordWord;
+  uint otherWriteMask;
+  int *listNode;
+  int *listHeadCursor;
+  uint *recordPtr;
+  uint *usageMaskPtr;
+  uint otherIndex;
   
-  iVar3 = *(int *)(0x00024870 + param_3 * 4 + param_1) * 0x10;
-  puVar8 = (uint *)(iVar3 + param_2);
-  if (param_4 == 0) {
-    switch(*(uint *)(param_2 + iVar3) >> 8 & 0xf) {
+  recordOffset = *(int *)(0x00024870 + liveIndex * 4 + alloc) * 0x10;
+  recordPtr = (uint *)(recordOffset + records);
+  if (modeFlag == 0) {
+    switch(*(uint *)(records + recordOffset) >> 8 & 0xf) {
     case 0:
-      puVar9 = (uint *)(param_1 + 0x30ba0 + (*puVar8 >> 0xb & 0x1fc));
+      usageMaskPtr = (uint *)(alloc + 0x30ba0 + (*recordPtr >> 0xb & 0x1fc));
       break;
     default:
       goto switchD_000778cc_caseD_1;
     case 3:
-      puVar9 = (uint *)(param_1 + 0x30c20 + (*puVar8 >> 0xb & 0x1fc));
+      usageMaskPtr = (uint *)(alloc + 0x30c20 + (*recordPtr >> 0xb & 0x1fc));
       break;
     case 4:
-      puVar9 = (uint *)(param_1 + 0x30c24 + (*puVar8 >> 0xb & 0x1fc));
+      usageMaskPtr = (uint *)(alloc + 0x30c24 + (*recordPtr >> 0xb & 0x1fc));
       break;
     case 5:
-      puVar9 = (uint *)(param_1 + 0x30c28 + (*puVar8 >> 0xb & 0x1fc));
+      usageMaskPtr = (uint *)(alloc + 0x30c28 + (*recordPtr >> 0xb & 0x1fc));
       break;
     case 6:
-      puVar9 = (uint *)(param_1 + 0x30c30 + (*puVar8 >> 0xb & 0x1fc));
+      usageMaskPtr = (uint *)(alloc + 0x30c30 + (*recordPtr >> 0xb & 0x1fc));
       break;
     case 7:
-      puVar9 = (uint *)(((unsigned char *)0x00030c48) + (*puVar8 >> 0xb & 0x1fc) + param_1);
+      usageMaskPtr = (uint *)(((unsigned char *)0x00030c48) + (*recordPtr >> 0xb & 0x1fc) + alloc);
       break;
     case 8:
-      puVar9 = (uint *)(((unsigned char *)0x00030c4c) + (*puVar8 >> 0xb & 0x1fc) + param_1);
+      usageMaskPtr = (uint *)(((unsigned char *)0x00030c4c) + (*recordPtr >> 0xb & 0x1fc) + alloc);
     }
   }
   else {
-    uVar4 = *(uint *)(param_2 + iVar3);
-    uVar2 = uVar4 >> 8 & 0xf;
-    if (uVar2 < 6) {
-      uVar2 = 1 << uVar2;
-      if ((uVar2 & 0x31) != 0) {
-        puVar9 = (uint *)(param_1 + 0x30ba0 + (uVar4 >> 0xb & 0x1fc));
+    recordWord = *(uint *)(records + recordOffset);
+    fileBit = recordWord >> 8 & 0xf;
+    if (fileBit < 6) {
+      fileBit = 1 << fileBit;
+      if ((fileBit & 0x31) != 0) {
+        usageMaskPtr = (uint *)(alloc + 0x30ba0 + (recordWord >> 0xb & 0x1fc));
         goto LAB_000779d4;
       }
-      if ((uVar2 & 2) != 0) {
-        puVar9 = (uint *)(param_1 + 0x30c20 + (uVar4 >> 0xb & 0x1fc));
+      if ((fileBit & 2) != 0) {
+        usageMaskPtr = (uint *)(alloc + 0x30c20 + (recordWord >> 0xb & 0x1fc));
         goto LAB_000779d4;
       }
-      if ((uVar2 & 0xc) != 0) {
-        puVar9 = (uint *)(param_1 + 0x31450 + (uVar4 >> 0xb & 0x1fc));
+      if ((fileBit & 0xc) != 0) {
+        usageMaskPtr = (uint *)(alloc + 0x31450 + (recordWord >> 0xb & 0x1fc));
         goto LAB_000779d4;
       }
     }
 switchD_000778cc_caseD_1:
-    puVar9 = (uint *)0x0;
+    usageMaskPtr = (uint *)0x0;
   }
 LAB_000779d4:
-  iVar3 = ((int (*)())FUN_000777b0)(puVar8,param_4);
-  if ((iVar3 == 0) && (iVar3 = ((int (*)())FUN_00077800)(puVar8,param_4), iVar3 == 0)) {
-    uVar4 = ((int (*)())recordGetWriteMask)(puVar8);
-    uVar2 = *puVar9;
-    *puVar9 = uVar4 | uVar2;
-    if ((uVar2 & uVar4 & 0xff) != 0) {
+  flagResult = ((int (*)())FUN_000777b0)(recordPtr,modeFlag);
+  if ((flagResult == 0) && (flagResult = ((int (*)())FUN_00077800)(recordPtr,modeFlag), flagResult == 0)) {
+    writeMask = ((int (*)())recordGetWriteMask)(recordPtr);
+    oldUsage = *usageMaskPtr;
+    *usageMaskPtr = writeMask | oldUsage;
+    if ((oldUsage & writeMask & 0xff) != 0) {
       return 0;
     }
   }
-  uVar2 = 0;
-  uVar4 = *(uint *)(0x00024870 + param_3 * 4 + param_1);
-  piVar7 = (int *)(uVar4 * 0xc + param_1 + 0x450);
+  laneIndex = 0;
+  recordIndex = *(uint *)(0x00024870 + liveIndex * 4 + alloc);
+  listHeadCursor = (int *)(recordIndex * 0xc + alloc + 0x450);
   do {
-    if ((*(uint *)(uVar4 * 4 + param_1 + 0x6450) & 1 << (uVar2 & 0x3f)) != 0) {
-      for (piVar6 = (int *)*piVar7; piVar6 != (int *)0x0; piVar6 = (int *)piVar6[4]) {
-        if ((*(uint *)(*piVar6 * 4 + param_1 + 0x3348c) & 0x40000) == 0) {
+    if ((*(uint *)(recordIndex * 4 + alloc + 0x6450) & 1 << (laneIndex & 0x3f)) != 0) {
+      for (listNode = (int *)*listHeadCursor; listNode != (int *)0x0; listNode = (int *)listNode[4]) {
+        if ((*(uint *)(*listNode * 4 + alloc + 0x3348c) & 0x40000) == 0) {
           return 0;
         }
       }
     }
-    bVar1 = uVar2 != 2;
-    piVar7 = piVar7 + 1;
-    uVar2 = uVar2 + 1;
-  } while (bVar1);
-  iVar3 = ((int (*)())FUN_000777b0)(puVar8,param_4);
-  if ((iVar3 != 0) && (puVar9 = *(uint **)(uVar4 * 4 + param_1 + 0xe450), puVar9 != (uint *)0x0)) {
-    uVar2 = ((int (*)())recordGetWriteMask)(puVar8);
+    moreLanes = laneIndex != 2;
+    listHeadCursor = listHeadCursor + 1;
+    laneIndex = laneIndex + 1;
+  } while (moreLanes);
+  flagResult = ((int (*)())FUN_000777b0)(recordPtr,modeFlag);
+  if ((flagResult != 0) && (usageMaskPtr = *(uint **)(recordIndex * 4 + alloc + 0xe450), usageMaskPtr != (uint *)0x0)) {
+    recordWriteMask = ((int (*)())recordGetWriteMask)(recordPtr);
     do {
-      uVar10 = *puVar9;
-      uVar5 = ((int (*)())recordGetWriteMask)(param_2 + uVar10 * 0x10);
-      if ((((uVar2 & uVar5) != 0) && (uVar10 < uVar4)) &&
-         ((*(uint *)(uVar10 * 4 + param_1 + 0x3348c) & 0x40000) == 0)) {
+      otherIndex = *usageMaskPtr;
+      otherWriteMask = ((int (*)())recordGetWriteMask)(records + otherIndex * 0x10);
+      if ((((recordWriteMask & otherWriteMask) != 0) && (otherIndex < recordIndex)) &&
+         ((*(uint *)(otherIndex * 4 + alloc + 0x3348c) & 0x40000) == 0)) {
         return 0;
       }
-      puVar9 = (uint *)puVar9[4];
-    } while (puVar9 != (uint *)0x0);
+      usageMaskPtr = (uint *)usageMaskPtr[4];
+    } while (usageMaskPtr != (uint *)0x0);
   }
   return 1;
 }
@@ -8790,167 +8796,178 @@ LAB_0007e2e0:
 }
 
 /* FUN_00082900 @ 0x82900 (812 bytes) */
-int FUN_00082900(glContext, param_2)
+int FUN_00082900(glContext, program)
   int glContext;
-  int param_2;
+  int program;
 {
-  undefined4 *puVar1;
-  uint uVar2;
-  int iVar3;
-  code *pcVar4;
-  undefined4 *puVar5;
+  uint reg1b94Value;
+  undefined4 *packet;
+  uint copyCounter;
+  uint reg1b90Old;
+  uint availableCount;
+  int packetWords;
+  int cmdPos;
+  int programField38;
+  undefined4 *srcWord3Ptr;
+  uint availableConsts;
+  int limitRaw;
+  code *streamSetCurrent;
+  undefined4 *dstWords;
   undefined4 in_r5;
   undefined4 in_r6;
-  uint uVar6;
-  undefined4 a4;
-  uint uVar7;
-  code *a5;
-  int iVar8;
-  uint uVar9;
-  int iVar10;
-  uint uVar11;
-  undefined4 *puVar12;
-  uint uVar13;
+  uint oldBase;
+  undefined4 oldOffset;
+  uint newOffset;
+  code *streamAlloc;
+  int constBlock;
+  uint ctxFlags;
+  int allocMode;
+  uint newBase;
+  undefined4 *srcConsts;
+  uint constCount;
   
-  iVar8 = *(int *)(param_2 + 0x54);
-  uVar13 = *(uint *)(iVar8 + 0x3cc);
-  puVar12 = *(undefined4 **)(iVar8 + 0x3c8);
-  if ((uVar13 == 0) || (puVar12 == (undefined4 *)0x0)) {
+  constBlock = *(int *)(program + 0x54);
+  constCount = *(uint *)(constBlock + 0x3cc);
+  srcConsts = *(undefined4 **)(constBlock + 0x3c8);
+  if ((constCount == 0) || (srcConsts == (undefined4 *)0x0)) {
     return;
   }
-  uVar9 = *(uint *)(glContext + 0x8c);
-  if ((uVar9 & 0x40000) == 0) {
+  ctxFlags = *(uint *)(glContext + 0x8c);
+  if ((ctxFlags & 0x40000) == 0) {
 LAB_00082b00:
-    uVar6 = *(uint *)(glContext + 0x3cc);
-    uVar9 = *(uint *)(glContext + 0x1b90);
-    a4 = *(undefined4 *)(glContext + 0x3d0);
-    a5 = *(code **)(glContext + 0x2758);
-    *(uint *)(glContext + 0x1b90) = uVar6 & 0x3ff | uVar9 & 0xfffffc00;
+    oldBase = *(uint *)(glContext + 0x3cc);
+    reg1b90Old = *(uint *)(glContext + 0x1b90);
+    oldOffset = *(undefined4 *)(glContext + 0x3d0);
+    streamAlloc = *(code **)(glContext + 0x2758);
+    *(uint *)(glContext + 0x1b90) = oldBase & 0x3ff | reg1b90Old & 0xfffffc00;
     *(uint *)(glContext + 0x1b90) =
-         (uVar6 + uVar13 + -1) * 0x100000 & 0x3ff00000 |
-         (uVar6 + *(int *)(param_2 + 0x34)) * 0x400 & 0xffc00 | uVar6 & 0x3ff | uVar9 & 0xc0000000;
-    iVar8 = *(int *)(param_2 + 0x38);
-    *(char *)(glContext + 0x1b8f) = (char)a4;
-    uVar6 = uVar6 + iVar8;
-    uVar13 = uVar6 & 0x3ff | *(uint *)(glContext + 0x1b94) & 0xfffffc00;
-    *(uint *)(glContext + 0x1b94) = uVar13;
-    *(char *)(glContext + 0x1b8d) = (char)*(undefined4 *)(param_2 + 0x48);
-    puVar12 = (undefined4 *)(*a5)(glContext,4,in_r5,in_r6,a4,a5,uVar6,uVar13);
-    *(undefined4 **)(0x00002748 + glContext + 4) = puVar12;
-    *puVar12 = 0x208b4;
-    puVar12[1] = *(undefined4 *)(glContext + 0x1b90);
-    puVar12[2] = *(undefined4 *)(glContext + 0x1b8c);
-    puVar12[3] = *(undefined4 *)(glContext + 0x1b94);
-    pcVar4 = *(code **)(glContext + 0x275c);
-    iVar8 = *(int *)(0x00002748 + glContext + 4) + 0x10;
-    *(int *)(0x00002748 + glContext + 4) = iVar8;
-    (*pcVar4)(glContext,iVar8,in_r5,in_r6,a4,a5,iVar8);
-    puVar12 = (undefined4 *)(**(code **)(glContext + 0x2758))(glContext,2);
-    *(undefined4 **)(0x00002748 + glContext + 4) = puVar12;
-    *puVar12 = 0x8b7;
-    puVar12[1] = *(undefined4 *)(glContext + 0x1b98);
-    iVar8 = *(int *)(0x00002748 + glContext + 4);
-    pcVar4 = *(code **)(glContext + 0x275c);
-    *(int *)(0x00002748 + glContext + 4) = iVar8 + 8;
-    (*pcVar4)(glContext,iVar8 + 8,in_r5,in_r6,a4,a5,puVar12);
-    FUN_00050ef0(glContext,*(undefined4 *)(param_2 + 0x3c),*(undefined4 *)(param_2 + 0x40),
-                 *(undefined4 *)(param_2 + 0x44));
+         (oldBase + constCount + -1) * 0x100000 & 0x3ff00000 |
+         (oldBase + *(int *)(program + 0x34)) * 0x400 & 0xffc00 | oldBase & 0x3ff | reg1b90Old & 0xc0000000;
+    programField38 = *(int *)(program + 0x38);
+    *(char *)(glContext + 0x1b8f) = (char)oldOffset;
+    oldBase = oldBase + programField38;
+    reg1b94Value = oldBase & 0x3ff | *(uint *)(glContext + 0x1b94) & 0xfffffc00;
+    *(uint *)(glContext + 0x1b94) = reg1b94Value;
+    *(char *)(glContext + 0x1b8d) = (char)*(undefined4 *)(program + 0x48);
+    packet = (undefined4 *)(*streamAlloc)(glContext,4,in_r5,in_r6,oldOffset,streamAlloc,oldBase,reg1b94Value);
+    *(undefined4 **)(0x00002748 + glContext + 4) = packet;
+    *packet = 0x208b4;
+    packet[1] = *(undefined4 *)(glContext + 0x1b90);
+    packet[2] = *(undefined4 *)(glContext + 0x1b8c);
+    packet[3] = *(undefined4 *)(glContext + 0x1b94);
+    streamSetCurrent = *(code **)(glContext + 0x275c);
+    cmdPos = *(int *)(0x00002748 + glContext + 4) + 0x10;
+    *(int *)(0x00002748 + glContext + 4) = cmdPos;
+    (*streamSetCurrent)(glContext,cmdPos,in_r5,in_r6,oldOffset,streamAlloc,cmdPos);
+    packet = (undefined4 *)(**(code **)(glContext + 0x2758))(glContext,2);
+    *(undefined4 **)(0x00002748 + glContext + 4) = packet;
+    *packet = 0x8b7;
+    packet[1] = *(undefined4 *)(glContext + 0x1b98);
+    cmdPos = *(int *)(0x00002748 + glContext + 4);
+    streamSetCurrent = *(code **)(glContext + 0x275c);
+    *(int *)(0x00002748 + glContext + 4) = cmdPos + 8;
+    (*streamSetCurrent)(glContext,cmdPos + 8,in_r5,in_r6,oldOffset,streamAlloc,packet);
+    FUN_00050ef0(glContext,*(undefined4 *)(program + 0x3c),*(undefined4 *)(program + 0x40),
+                 *(undefined4 *)(program + 0x44));
     return;
   }
-  iVar10 = *(int *)(glContext + 0xd8);
-  uVar11 = 0;
-  uVar7 = 0;
-  uVar2 = 0;
-  uVar6 = 0;
+  allocMode = *(int *)(glContext + 0xd8);
+  newBase = 0;
+  newOffset = 0;
+  availableConsts = 0;
+  availableCount = 0;
   do {
-    if (iVar10 == 1) goto LAB_000829a0;
-    if (iVar10 == 0) {
-      uVar6 = (uint)(*(ushort *)(((unsigned char *)0x000013be) + glContext) >> 1);
-      uVar11 = *(uint *)(iVar8 + 0x3e4) >> 1;
-      uVar2 = uVar11 - 2;
-      uVar7 = uVar6;
+    if (allocMode == 1) goto LAB_000829a0;
+    if (allocMode == 0) {
+      availableCount = (uint)(*(ushort *)(((unsigned char *)0x000013be) + glContext) >> 1);
+      newBase = *(uint *)(constBlock + 0x3e4) >> 1;
+      availableConsts = newBase - 2;
+      newOffset = availableCount;
       goto LAB_000829e0;
     }
-    if (iVar10 != 2) goto LAB_000829e0;
+    if (allocMode != 2) goto LAB_000829e0;
     while( true ) {
-      uVar2 = *(uint *)(iVar8 + 0x3e4);
-      uVar6 = (uint)*(ushort *)(((unsigned char *)0x000013be) + glContext);
-      uVar11 = 0;
-      uVar9 = uVar9 | 0x18000;
-      *(uint *)(glContext + 0x8c) = uVar9;
-      uVar7 = 0;
+      availableConsts = *(uint *)(constBlock + 0x3e4);
+      availableCount = (uint)*(ushort *)(((unsigned char *)0x000013be) + glContext);
+      newBase = 0;
+      ctxFlags = ctxFlags | 0x18000;
+      *(uint *)(glContext + 0x8c) = ctxFlags;
+      newOffset = 0;
 LAB_000829e0:
       while( true ) {
-        if ((uVar13 <= uVar2) && (*(uint *)(param_2 + 0x48) <= uVar6)) {
-          *(uint *)(glContext + 0x3d0) = uVar7;
-          *(uint *)(glContext + 0x3cc) = uVar11;
-          iVar8 = uVar13 * 4 + 5;
-          puVar5 = (undefined4 *)(**(code **)(glContext + 0x2758))(glContext,iVar8);
-          *(undefined4 **)(0x00002748 + glContext + 4) = puVar5;
-          puVar5[3] = uVar11;
-          *puVar5 = 0x8a1;
-          puVar5[1] = 0;
-          puVar5[4] = (uVar13 * 4 + -1) * 0x10000 | 0x8882;
-          puVar5[2] = 0x880;
-          puVar5 = puVar5 + 5;
-          uVar9 = uVar13;
+        if ((constCount <= availableConsts) && (*(uint *)(program + 0x48) <= availableCount)) {
+          *(uint *)(glContext + 0x3d0) = newOffset;
+          *(uint *)(glContext + 0x3cc) = newBase;
+          packetWords = constCount * 4 + 5;
+          dstWords = (undefined4 *)(**(code **)(glContext + 0x2758))(glContext,packetWords);
+          *(undefined4 **)(0x00002748 + glContext + 4) = dstWords;
+          dstWords[3] = newBase;
+          *dstWords = 0x8a1;
+          dstWords[1] = 0;
+          dstWords[4] = (constCount * 4 + -1) * 0x10000 | 0x8882;
+          dstWords[2] = 0x880;
+          dstWords = dstWords + 5;
+          copyCounter = constCount;
           do {
-            *puVar5 = *puVar12;
-            puVar5[1] = puVar12[1];
-            puVar5[2] = puVar12[2];
-            puVar1 = puVar12 + 3;
-            puVar12 = puVar12 + 4;
-            puVar5[3] = *puVar1;
-            puVar5 = puVar5 + 4;
-            uVar9 = uVar9 - 1;
-          } while (uVar9 != 0);
-          pcVar4 = *(code **)(glContext + 0x275c);
-          iVar8 = iVar8 * 4 + *(int *)(0x00002748 + glContext + 4);
-          *(int *)(0x00002748 + glContext + 4) = iVar8;
-          (*pcVar4)(glContext,iVar8);
+            *dstWords = *srcConsts;
+            dstWords[1] = srcConsts[1];
+            dstWords[2] = srcConsts[2];
+            srcWord3Ptr = srcConsts + 3;
+            srcConsts = srcConsts + 4;
+            dstWords[3] = *srcWord3Ptr;
+            dstWords = dstWords + 4;
+            copyCounter = copyCounter - 1;
+          } while (copyCounter != 0);
+          streamSetCurrent = *(code **)(glContext + 0x275c);
+          packetWords = packetWords * 4 + *(int *)(0x00002748 + glContext + 4);
+          *(int *)(0x00002748 + glContext + 4) = packetWords;
+          (*streamSetCurrent)(glContext,packetWords);
           if (*(int *)(glContext + 0xd8) == 0) {
             *(uint *)(glContext + 0x8c) = *(uint *)(glContext + 0x8c) & 0xfffbffff;
           }
           goto LAB_00082b00;
         }
-        if (iVar10 != 0) break;
-        iVar10 = 1;
+        if (allocMode != 0) break;
+        allocMode = 1;
         *(undefined4 *)(glContext + 0xd8) = 1;
 LAB_000829a0:
-        iVar3 = *(int *)(iVar8 + 0x3e4);
-        uVar6 = (uint)*(ushort *)(((unsigned char *)0x000013be) + glContext);
-        uVar9 = uVar9 | 0x10000;
-        uVar11 = 0;
-        *(uint *)(glContext + 0x8c) = uVar9;
-        uVar2 = iVar3 - 2;
-        uVar7 = 0;
+        limitRaw = *(int *)(constBlock + 0x3e4);
+        availableCount = (uint)*(ushort *)(((unsigned char *)0x000013be) + glContext);
+        ctxFlags = ctxFlags | 0x10000;
+        newBase = 0;
+        *(uint *)(glContext + 0x8c) = ctxFlags;
+        availableConsts = limitRaw - 2;
+        newOffset = 0;
       }
-      if (iVar10 != 1) break;
-      iVar10 = 2;
+      if (allocMode != 1) break;
+      allocMode = 2;
       *(undefined4 *)(glContext + 0xd8) = 2;
     }
   } while( true );
 }
 
 /* FUN_00082c50 @ 0x82c50 (760 bytes) */
-int FUN_00082c50(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  int param_1;
-  int param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+int FUN_00082c50(ctx, program, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7, unusedArg8)
+  int ctx;
+  int program;
+  undefined4 unusedArg3;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
+  undefined4 unusedArg8;
 {
+  int constRegBase;
+  int packetWords;
+  undefined4 *srcWord3Ptr;
   code *UNRECOVERED_JUMPTABLE;
-  undefined4 *puVar1;
-  int iVar2;
-  int iVar3;
-  undefined4 *puVar4;
+  undefined4 *packet;
+  int cmdPos;
+  int constRegOffset;
+  undefined4 *dstWords;
   uint loopIndex;
-  int iVar6;
-  undefined4 *puVar7;
+  int stateBlock;
+  undefined4 *srcConstants;
   double fparam_1;
   double in_f2;
   double in_f3;
@@ -8965,98 +8982,98 @@ int FUN_00082c50(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   double in_stack_ffffffc0;
   double in_stack_ffffffc8;
   
-  iVar6 = *(int *)(*(int *)(param_1 + 4) + 0x10);
-  puVar1 = (undefined4 *)
-           (**(code **)(param_1 + 0x2758))
-                     (param_1,2,param_3,param_4,param_5,param_6,param_7,param_8);
-  *(undefined4 **)(0x00002748 + param_1 + 4) = puVar1;
-  puVar1[1] = 0;
-  *puVar1 = 0x8a1;
-  iVar2 = *(int *)(0x00002748 + param_1 + 4);
-  UNRECOVERED_JUMPTABLE = *(code **)(param_1 + 0x275c);
-  *(int *)(0x00002748 + param_1 + 4) = iVar2 + 8;
-  (*UNRECOVERED_JUMPTABLE)(param_1,iVar2 + 8);
-  if (*(char *)(param_2 + 0x58) == '\0') {
-    if (*(int *)(param_2 + 0x48) == 0) {
+  stateBlock = *(int *)(*(int *)(ctx + 4) + 0x10);
+  packet = (undefined4 *)
+           (**(code **)(ctx + 0x2758))
+                     (ctx,2,unusedArg3,unusedArg4,unusedArg5,unusedArg6,unusedArg7,unusedArg8);
+  *(undefined4 **)(0x00002748 + ctx + 4) = packet;
+  packet[1] = 0;
+  *packet = 0x8a1;
+  cmdPos = *(int *)(0x00002748 + ctx + 4);
+  UNRECOVERED_JUMPTABLE = *(code **)(ctx + 0x275c);
+  *(int *)(0x00002748 + ctx + 4) = cmdPos + 8;
+  (*UNRECOVERED_JUMPTABLE)(ctx,cmdPos + 8);
+  if (*(char *)(program + 0x58) == '\0') {
+    if (*(int *)(program + 0x48) == 0) {
       return;
     }
-    puVar7 = *(undefined4 **)(param_2 + 0x4c);
-    ((void (*)())programFillStateConstants)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,fparam_1,in_f2,
+    srcConstants = *(undefined4 **)(program + 0x4c);
+    ((void (*)())programFillStateConstants)(ctx,program,unusedArg3,unusedArg4,unusedArg5,unusedArg6,unusedArg7,unusedArg8,fparam_1,in_f2,
                  in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_stack_ffffffa8,in_stack_ffffffb0,
                  in_stack_ffffffb8,in_stack_ffffffc0,in_stack_ffffffc8);
-    iVar2 = *(int *)(param_2 + 0x48) * 4 + 3;
-    puVar1 = (undefined4 *)(**(code **)(param_1 + 0x2758))(param_1,iVar2);
-    *(undefined4 **)(0x00002748 + param_1 + 4) = puVar1;
-    puVar4 = puVar1 + 3;
-    *puVar1 = 0x880;
-    puVar1[1] = *(int *)(param_1 + 0x2448) + *(int *)(param_1 + 0x3d0);
-    puVar1[2] = *(int *)(param_2 + 0x48) * 0x40000 - 0x10000U | 0x8882;
-    if (*(int *)(param_2 + 0x48) != 0) {
+    packetWords = *(int *)(program + 0x48) * 4 + 3;
+    packet = (undefined4 *)(**(code **)(ctx + 0x2758))(ctx,packetWords);
+    *(undefined4 **)(0x00002748 + ctx + 4) = packet;
+    dstWords = packet + 3;
+    *packet = 0x880;
+    packet[1] = *(int *)(ctx + 0x2448) + *(int *)(ctx + 0x3d0);
+    packet[2] = *(int *)(program + 0x48) * 0x40000 - 0x10000U | 0x8882;
+    if (*(int *)(program + 0x48) != 0) {
       loopIndex = 0;
       do {
         loopIndex = loopIndex + 1;
-        *puVar4 = *puVar7;
-        puVar4[1] = puVar7[1];
-        puVar4[2] = puVar7[2];
-        puVar1 = puVar7 + 3;
-        puVar7 = puVar7 + 4;
-        puVar4[3] = *puVar1;
-        puVar4 = puVar4 + 4;
-      } while (loopIndex < *(uint *)(param_2 + 0x48));
+        *dstWords = *srcConstants;
+        dstWords[1] = srcConstants[1];
+        dstWords[2] = srcConstants[2];
+        srcWord3Ptr = srcConstants + 3;
+        srcConstants = srcConstants + 4;
+        dstWords[3] = *srcWord3Ptr;
+        dstWords = dstWords + 4;
+      } while (loopIndex < *(uint *)(program + 0x48));
     }
-    UNRECOVERED_JUMPTABLE = *(code **)(param_1 + 0x275c);
-    *(int *)(0x00002748 + param_1 + 4) = iVar2 * 4 + *(int *)(0x00002748 + param_1 + 4);
+    UNRECOVERED_JUMPTABLE = *(code **)(ctx + 0x275c);
+    *(int *)(0x00002748 + ctx + 4) = packetWords * 4 + *(int *)(0x00002748 + ctx + 4);
   }
   else {
-    puVar1 = (undefined4 *)(**(code **)(param_1 + 0x2758))(param_1,0x13);
-    *(undefined4 **)(0x00002748 + param_1 + 4) = puVar1;
-    *puVar1 = 0x880;
-    iVar2 = *(int *)(param_1 + 0x2448);
-    iVar3 = *(int *)(param_1 + 0x3d0);
-    puVar1[2] = 0xf8882;
-    puVar1[1] = iVar2 + iVar3;
-    if ((*(uint *)(((unsigned char *)0x000013c0) + param_1) & 4) == 0) {
-      puVar1[3] = *(undefined4 *)(iVar6 + 0x2460);
-      puVar1[4] = *(undefined4 *)(iVar6 + 0x2470);
-      puVar1[5] = *(undefined4 *)(iVar6 + 0x2480);
-      puVar1[6] = *(undefined4 *)(iVar6 + 0x2490);
-      puVar1[7] = *(undefined4 *)(iVar6 + 0x2464);
-      puVar1[8] = *(undefined4 *)(iVar6 + 0x2474);
-      puVar1[9] = *(undefined4 *)(iVar6 + 0x2484);
-      puVar1[10] = *(undefined4 *)(iVar6 + 0x2494);
-      puVar1[0xb] = *(undefined4 *)(iVar6 + 0x2468);
-      puVar1[0xc] = *(undefined4 *)(iVar6 + 0x2478);
-      puVar1[0xd] = *(undefined4 *)(iVar6 + 0x2488);
-      puVar1[0xe] = *(undefined4 *)(iVar6 + 0x2498);
-      puVar1[0xf] = *(undefined4 *)(iVar6 + 0x246c);
-      puVar1[0x10] = *(undefined4 *)(iVar6 + 0x247c);
-      puVar1[0x11] = *(undefined4 *)(iVar6 + 0x248c);
-      puVar1[0x12] = *(undefined4 *)(iVar6 + 0x249c);
+    packet = (undefined4 *)(**(code **)(ctx + 0x2758))(ctx,0x13);
+    *(undefined4 **)(0x00002748 + ctx + 4) = packet;
+    *packet = 0x880;
+    constRegBase = *(int *)(ctx + 0x2448);
+    constRegOffset = *(int *)(ctx + 0x3d0);
+    packet[2] = 0xf8882;
+    packet[1] = constRegBase + constRegOffset;
+    if ((*(uint *)(((unsigned char *)0x000013c0) + ctx) & 4) == 0) {
+      packet[3] = *(undefined4 *)(stateBlock + 0x2460);
+      packet[4] = *(undefined4 *)(stateBlock + 0x2470);
+      packet[5] = *(undefined4 *)(stateBlock + 0x2480);
+      packet[6] = *(undefined4 *)(stateBlock + 0x2490);
+      packet[7] = *(undefined4 *)(stateBlock + 0x2464);
+      packet[8] = *(undefined4 *)(stateBlock + 0x2474);
+      packet[9] = *(undefined4 *)(stateBlock + 0x2484);
+      packet[10] = *(undefined4 *)(stateBlock + 0x2494);
+      packet[0xb] = *(undefined4 *)(stateBlock + 0x2468);
+      packet[0xc] = *(undefined4 *)(stateBlock + 0x2478);
+      packet[0xd] = *(undefined4 *)(stateBlock + 0x2488);
+      packet[0xe] = *(undefined4 *)(stateBlock + 0x2498);
+      packet[0xf] = *(undefined4 *)(stateBlock + 0x246c);
+      packet[0x10] = *(undefined4 *)(stateBlock + 0x247c);
+      packet[0x11] = *(undefined4 *)(stateBlock + 0x248c);
+      packet[0x12] = *(undefined4 *)(stateBlock + 0x249c);
     }
     else {
-      puVar1[3] = *(undefined4 *)(iVar6 + 0x2460);
-      puVar1[4] = *(undefined4 *)(iVar6 + 0x2464);
-      puVar1[5] = *(undefined4 *)(iVar6 + 0x2468);
-      puVar1[6] = *(undefined4 *)(iVar6 + 0x246c);
-      puVar1[7] = *(undefined4 *)(iVar6 + 0x2470);
-      puVar1[8] = *(undefined4 *)(iVar6 + 0x2474);
-      puVar1[9] = *(undefined4 *)(iVar6 + 0x2478);
-      puVar1[10] = *(undefined4 *)(iVar6 + 0x247c);
-      puVar1[0xb] = *(undefined4 *)(iVar6 + 0x2480);
-      puVar1[0xc] = *(undefined4 *)(iVar6 + 0x2484);
-      puVar1[0xd] = *(undefined4 *)(iVar6 + 0x2488);
-      puVar1[0xe] = *(undefined4 *)(iVar6 + 0x248c);
-      puVar1[0xf] = *(undefined4 *)(iVar6 + 0x2490);
-      puVar1[0x10] = *(undefined4 *)(iVar6 + 0x2494);
-      puVar1[0x11] = *(undefined4 *)(iVar6 + 0x2498);
-      puVar1[0x12] = *(undefined4 *)(iVar6 + 0x249c);
+      packet[3] = *(undefined4 *)(stateBlock + 0x2460);
+      packet[4] = *(undefined4 *)(stateBlock + 0x2464);
+      packet[5] = *(undefined4 *)(stateBlock + 0x2468);
+      packet[6] = *(undefined4 *)(stateBlock + 0x246c);
+      packet[7] = *(undefined4 *)(stateBlock + 0x2470);
+      packet[8] = *(undefined4 *)(stateBlock + 0x2474);
+      packet[9] = *(undefined4 *)(stateBlock + 0x2478);
+      packet[10] = *(undefined4 *)(stateBlock + 0x247c);
+      packet[0xb] = *(undefined4 *)(stateBlock + 0x2480);
+      packet[0xc] = *(undefined4 *)(stateBlock + 0x2484);
+      packet[0xd] = *(undefined4 *)(stateBlock + 0x2488);
+      packet[0xe] = *(undefined4 *)(stateBlock + 0x248c);
+      packet[0xf] = *(undefined4 *)(stateBlock + 0x2490);
+      packet[0x10] = *(undefined4 *)(stateBlock + 0x2494);
+      packet[0x11] = *(undefined4 *)(stateBlock + 0x2498);
+      packet[0x12] = *(undefined4 *)(stateBlock + 0x249c);
     }
-    UNRECOVERED_JUMPTABLE = *(code **)(param_1 + 0x275c);
-    *(int *)(0x00002748 + param_1 + 4) = *(int *)(0x00002748 + param_1 + 4) + 0x4c;
+    UNRECOVERED_JUMPTABLE = *(code **)(ctx + 0x275c);
+    *(int *)(0x00002748 + ctx + 4) = *(int *)(0x00002748 + ctx + 4) + 0x4c;
   }
                     
                     
-  (*UNRECOVERED_JUMPTABLE)(param_1,*(int *)(0x00002748 + param_1 + 4));
+  (*UNRECOVERED_JUMPTABLE)(ctx,*(int *)(0x00002748 + ctx + 4));
   return;
 }
 
