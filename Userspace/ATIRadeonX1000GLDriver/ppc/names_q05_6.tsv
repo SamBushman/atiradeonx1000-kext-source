@@ -661,7 +661,6 @@ local	scStoreConstantComponent	param_3	unusedArg3	INFERRED	passed by the caller 
 local	scStoreConstantComponent	param_4	lane	INFERRED	component index 0-3
 local	scStoreConstantComponent	param_5	constBlock	INFERRED	block object with two constant tables: 0x14-byte entries (+0x84 data, +0x78 count, +0x6c capacity) and 0x24-byte entries (+0x60/+0x54/+0x48)
 local	scStoreConstantComponent	param_6	useLiteralTable	INFERRED	nonzero selects the 0x24-byte table
-local	scStoreConstantComponent	staleFprArg1	laneValue	INFERRED	float value stored for the lane
 local	scStoreConstantComponent	iVar1	nextEntryOffset	INFERRED	byte offset of the next entry while searching
 local	scStoreConstantComponent	uVar2	entryCount	INFERRED	current entry count of the selected table
 local	scStoreConstantComponent	iVar3	entryOffset	INFERRED	byte offset or address of the entry being filled
@@ -680,3 +679,114 @@ local	FUN_000e2524	param_2	result	INFERRED	output object: +0xf8 status (0/1/2), 
 local	FUN_000e2524	param_3	request	INFERRED	compile request parsed by FUN_00193c00
 local	FUN_000e2524	param_4	requestFlags	INFERRED	flag word passed to Compiler__applyRequestFlags
 local	FUN_000e2524	param_5	compileInput	INFERRED	stored at compiler+0x398 (compile input object)
+use	IRInst__canFoldConstantSource	iVar5	constEncodable	INFERRED	hardware-info vtable +0xf0 on the (signed) float constant: nonzero when it can be encoded as an immediate	^\s*iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0xf0\)\)\(dVar9,piVar7\);$	+2
+use	IRInst__canFoldConstantSource	iVar5	operandRecordB	INFERRED	operand record of inst operandIndex	^\s*iVar5\ =\ FUN_001054ec\(param_1,param_2\);$@2	+6
+use	IRInst__canFoldConstantSource	iVar3	inst2Foldable	INFERRED	FUN_0011379c(compiler, inst2): inst2 is a foldable mov	^\s*iVar3\ =\ FUN_0011379c\(\*\(undefined4\ \*\)\(param_4\ \+\ 8\),param_3\);$	+2
+use	IRInst__canFoldConstantSource	bVar1	notLastLane	INFERRED	loop continue flag (lane != 3)	^\s*bVar1\ =\ iVar8\ !=\ 3;$	+1
+use	IRInst__canFoldConstantSource	bVar1	notLastLane	INFERRED	loop continue flag (lane != 3)	^\s*\}\ while\ \(bVar1\);$	+1
+use	IRInst__canFoldConstantSource	bVar1	notLastLane	INFERRED	loop continue flag (lane != 3)	^\s*bVar1\ =\ iVar8\ !=\ 3;$@2	+1
+use	IRInst__canFoldConstantSource	bVar1	notLastLane	INFERRED	loop continue flag (lane != 3)	^\s*\}\ while\ \(bVar1\);$@2	+1
+use	IRInst__canFoldConstantSource	uVar2	negateFlag	INFERRED	bit 0 of the operand modifier word at inst+0xa0+index*0x18: operand is negated	^\s*uVar2\ =\ \*\(uint\ \*\)\(param_2\ \*\ 0x18\ \+\ param_1\ \+\ 0xa0\)\ \&\ 1;$	+1
+use	IRInst__canFoldConstantSource	uVar2	negateFlag	INFERRED	bit 0 of the operand modifier word at inst+0xa0+index*0x18: operand is negated	^\s*if\ \(uVar2\ ==\ 0\)\ \{$	+1
+use	IRInst__canFoldConstantSource	uVar2	negateFlag	INFERRED	bit 0 of the operand modifier word at inst+0xa0+index*0x18: operand is negated	^\s*if\ \(uVar2\ ==\ 0\)\ \{$@2	+1
+use	IRInst__canFoldConstantSource	uVar2	selectedComponent	INFERRED	component selected by the lane of the operand record	^\s*uVar2\ =\ \(uint\)\*\(byte\ \*\)\(iVar8\ \+\ iVar5\ \+\ 0x10\);$	+5
+use	IRInst__canFoldConstantSource	uVar4	foldable	INFERRED	return value: 1 when every used lane of the constant can be encoded	^\s*uVar4\ =\ 1;$	+1
+use	IRInst__canFoldConstantSource	uVar4	foldable	INFERRED	return value: 1 when every used lane of the constant can be encoded	^\s*uVar4\ =\ 0;$	+1
+use	IRInst__canFoldConstantSource	uVar4	foldable	INFERRED	return value: 1 when every used lane of the constant can be encoded	^\s*return\ uVar4;$	+1
+use	IRInst__canFoldConstantSource	uVar6	selectedComponentB	INFERRED	component selected by the lane of the operand record (negatable path)	^\s*uVar6\ =\ \(uint\)\*\(byte\ \*\)\(iVar8\ \+\ iVar5\ \+\ 0x10\);$	+3
+use	IRInst__canFoldConstantSource	uVar6	selectedComponentB	INFERRED	component selected by the lane of the operand record (negatable path)	^\s*dVar9\ =\ \(double\)\*\(float\ \*\)\(uVar6\ \*\ 0x18\ \+\ iVar3\ \+\ 0x20\);$	+1
+use	IRInst__canFoldConstantSource	uVar6	selectedComponentB	INFERRED	component selected by the lane of the operand record (negatable path)	^\s*dVar9\ =\ \-\(double\)\*\(float\ \*\)\(uVar6\ \*\ 0x18\ \+\ iVar3\ \+\ 0x20\);$	+1
+use	IRInst__canFoldConstantSource	piVar7	hardwareInfo	INFERRED	compiler+0x30c hardware-info object (vtable +0xf0 immediate query)	^\s*piVar7\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(param_4\ \+\ 8\)\ \+\ 0x30c\);$	+1
+use	IRInst__canFoldConstantSource	piVar7	hardwareInfo	INFERRED	compiler+0x30c hardware-info object (vtable +0xf0 immediate query)	^\s*iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0xf0\)\)\(dVar9,piVar7\);$	+1
+use	IRInst__canFoldConstantSource	piVar7	hardwareInfo	INFERRED	compiler+0x30c hardware-info object (vtable +0xf0 immediate query)	^\s*piVar7\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(param_4\ \+\ 8\)\ \+\ 0x30c\);$@2	+1
+use	IRInst__canFoldConstantSource	piVar7	hardwareInfo	INFERRED	compiler+0x30c hardware-info object (vtable +0xf0 immediate query)	^\s*if\ \(\(uVar2\ !=\ 4\)\ \&\&$	+4
+use	IRInst__canFoldConstantSource	dVar9	constValue	INFERRED	float constant of the selected component, negated when negateFlag	^\s*dVar9\ =\ \(double\)\*\(float\ \*\)\(uVar6\ \*\ 0x18\ \+\ iVar3\ \+\ 0x20\);$	+1
+use	IRInst__canFoldConstantSource	dVar9	constValue	INFERRED	float constant of the selected component, negated when negateFlag	^\s*dVar9\ =\ \-\(double\)\*\(float\ \*\)\(uVar6\ \*\ 0x18\ \+\ iVar3\ \+\ 0x20\);$	+1
+use	IRInst__canFoldConstantSource	dVar9	constValue	INFERRED	float constant of the selected component, negated when negateFlag	^\s*iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0xf0\)\)\(dVar9,piVar7\);$	+1
+use	FUN_000f14f8	iVar12	vtable	INFERRED	vtable pointer of the object	^\s*iVar12\ =\ \*piVar7;$	+1
+use	FUN_000f14f8	iVar12	vtable	INFERRED	vtable pointer of the object	^\s*iVar12\ =\ \(\*\*\(code\ \*\*\)\(iVar12\ \+\ 0x7c\)\)\(piVar7\);$	+7
+use	FUN_000f14f8	iVar9	sourceCheckResult	INFERRED	scratch for the successive source suitability queries (vtable +0x7c, FUN_0011379c, scheduling distance, vtable +0x28)	^\s*iVar9\ =\ \(\*\*\(code\ \*\*\)\(\*piVar8\ \+\ 0x7c\)\)\(\);$	+7
+use	FUN_000f14f8	bVar1	singleFold	INFERRED	foldedCount == 1	^\s*bVar1\ =\ iVar12\ ==\ 1;$	+1
+use	FUN_000f14f8	bVar1	singleFold	INFERRED	foldedCount == 1	^\s*if\ \(bVar1\)\ \{$	+1
+use	RegisterMap__findConstVectorExact	piVar2	vectorSlot	INFERRED	element reference in the constant instruction vector	^\s*piVar2\ =\ \(int\ \*\)\(uVar7\ \*\ 4\ \+\ puVar8\[2\]\);$	+1
+use	RegisterMap__findConstVectorExact	piVar2	vectorSlot	INFERRED	element reference in the constant instruction vector	^\s*piVar2\ =\ \(int\ \*\)FUN_0019423c\(puVar8,uVar7\);$	+1
+use	RegisterMap__findConstVectorExact	piVar2	vectorSlot	INFERRED	element reference in the constant instruction vector	^\s*iVar3\ =\ \*piVar2;$	+1
+use	RegisterMap__findConstVectorExact	iVar3	candidateInst	INFERRED	constant instruction under test; returned when all used lanes match exactly	^\s*iVar3\ =\ \*piVar2;$	+1
+use	RegisterMap__findConstVectorExact	iVar3	candidateInst	INFERRED	constant instruction under test; returned when all used lanes match exactly	^\s*while\ \(\(uVar1\ =\ \(uint\)\*pbVar6,\ uVar1\ ==\ 4\ \|\|$	+4
+use	RegisterMap__findConstVectorExact	iVar3	candidateInst	INFERRED	constant instruction under test; returned when all used lanes match exactly	^\s*\*\(undefined4\ \*\)\(iVar3\ \+\ 0x9c\)\ =\ DAT_001aa860;$	+2
+use	RegisterMap__findConstVectorExact	iVar4	recordAddr	INFERRED	24-byte constant record selected by the lane	^\s*while\ \(\(uVar1\ =\ \(uint\)\*pbVar6,\ uVar1\ ==\ 4\ \|\|$	+4
+use	RegisterMap__findConstVectorExact	pbVar6	selectByteCursor	INFERRED	cursor over the four select bytes	^\s*pbVar6\ =\ param_3;$	+6
+use	RegisterMap__findConstVectorExact	puVar8	instVector	INFERRED	vector of constant instructions at registerMap+0x20	^\s*puVar8\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 0x20\);$	+3
+use	RegisterMap__findConstVectorExact	puVar8	instVector	INFERRED	vector of constant instructions at registerMap+0x20	^\s*_memset\(uVar1\ \*\ 4\ \+\ puVar8\[2\],0,\(uVar7\ \-\ uVar1\)\ \*\ 4\ \+\ 4\);$	+2
+use	RegisterMap__findConstVectorExact	puVar8	instVector	INFERRED	vector of constant instructions at registerMap+0x20	^\s*piVar2\ =\ \(int\ \*\)\(uVar7\ \*\ 4\ \+\ puVar8\[2\]\);$	+1
+use	RegisterMap__findConstVectorExact	puVar8	instVector	INFERRED	vector of constant instructions at registerMap+0x20	^\s*piVar2\ =\ \(int\ \*\)FUN_0019423c\(puVar8,uVar7\);$	+1
+use	Block__recordDefinition	piVar1	listEntry	INFERRED	entry of the definition list under comparison	^\s*piVar1\ =\ \(int\ \*\)0x0;$	+1
+use	Block__recordDefinition	piVar1	listEntry	INFERRED	entry of the definition list under comparison	^\s*piVar1\ =\ \(int\ \*\)\(uVar2\ \*\ 4\ \+\ puVar3\[2\]\);$	+1
+use	Block__recordDefinition	piVar1	listEntry	INFERRED	entry of the definition list under comparison	^\s*if\ \(param_2\ ==\ \*piVar1\)\ goto\ LAB_000e9ca8;$	+1
+use	Block__recordDefinition	piVar1	vectorSlot	INFERRED	slot of the appended definition	^\s*piVar1\ =\ \(int\ \*\)\(uVar4\ \*\ 4\ \+\ puVar3\[2\]\);$	+1
+use	Block__recordDefinition	piVar1	vectorSlot	INFERRED	slot of the appended definition	^\s*piVar1\ =\ \(int\ \*\)FUN_0019423c\(puVar3,uVar4\);$	+1
+use	Block__recordDefinition	piVar1	vectorSlot	INFERRED	slot of the appended definition	^\s*\*piVar1\ =\ param_2;$	+1
+use	Block__recordDefinition	puVar3	definitionList	INFERRED	vector at block+0xc4 of virtual registers defined in the block	^\s*puVar3\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 0xc4\);$	+2
+use	Block__recordDefinition	puVar3	definitionList	INFERRED	vector at block+0xc4 of virtual registers defined in the block	^\s*piVar1\ =\ \(int\ \*\)\(uVar2\ \*\ 4\ \+\ puVar3\[2\]\);$	+1
+use	Block__recordDefinition	puVar3	definitionList	INFERRED	vector at block+0xc4 of virtual registers defined in the block	^\s*if\ \(uVar4\ <\ \*puVar3\)\ \{$	+4
+use	Block__recordDefinition	puVar3	definitionList	INFERRED	vector at block+0xc4 of virtual registers defined in the block	^\s*piVar1\ =\ \(int\ \*\)FUN_0019423c\(puVar3,uVar4\);$	+1
+use	Block__recordDefinition	uVar4	definitionCount	INFERRED	element count of the definition list	^\s*uVar4\ =\ puVar3\[1\];$	+2
+use	Block__recordDefinition	uVar4	definitionCount	INFERRED	element count of the definition list	^\s*uVar5\ =\ uVar4;$	+1
+use	Block__recordDefinition	uVar4	definitionCount	INFERRED	element count of the definition list	^\s*if\ \(uVar2\ <\ uVar4\)\ \{$	+1
+use	Block__recordDefinition	uVar4	definitionCount	INFERRED	element count of the definition list	^\s*if\ \(uVar4\ <\ \*puVar3\)\ \{$	+4
+use	Block__recordDefinition	uVar4	definitionCount	INFERRED	element count of the definition list	^\s*piVar1\ =\ \(int\ \*\)FUN_0019423c\(puVar3,uVar4\);$	+1
+use	Block__recordDefinition	uVar5	entriesLeft	INFERRED	entries still to compare	^\s*uVar5\ =\ uVar4;$	+1
+use	Block__recordDefinition	uVar5	entriesLeft	INFERRED	entries still to compare	^\s*uVar5\ =\ uVar5\ \-\ 1;$	+2
+use	MachineAssembler__visitIfHeaderStatic	iVar1	branchFlag	INFERRED	branch instruction field at +300: 1 means the condition is not inverted (iVar1 != 1 is passed to vtable +0x98)	^\s*iVar1\ =\ \*\(int\ \*\)\(iVar2\ \+\ 300\);$	+1
+use	MachineAssembler__visitIfHeaderStatic	iVar1	branchFlag	INFERRED	branch instruction field at +300: 1 means the condition is not inverted (iVar1 != 1 is passed to vtable +0x98)	^\s*uVar3\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0x98\)\)\(param_1,iVar1\ !=\ 1,uVar3,0\);$	+1
+use	MachineAssembler__visitIfHeaderStatic	puVar4	vectorSlot	INFERRED	slot appended to the result stack vector	^\s*puVar4\ =\ \(undefined4\ \*\)\(uVar6\ \*\ 4\ \+\ puVar7\[2\]\);$	+1
+use	MachineAssembler__visitIfHeaderStatic	puVar4	vectorSlot	INFERRED	slot appended to the result stack vector	^\s*puVar4\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar7,uVar6\);$	+1
+use	MachineAssembler__visitIfHeaderStatic	puVar4	vectorSlot	INFERRED	slot appended to the result stack vector	^\s*\*puVar4\ =\ uVar3;$	+1
+use	MachineAssembler__visitIfHeaderStatic	uVar5	currentProgram	INFERRED	compiler+0x6c4: current program	^\s*uVar5\ =\ \*\(undefined4\ \*\)\(param_4\ \+\ 0x6c4\);$	+1
+use	MachineAssembler__visitIfHeaderStatic	uVar5	currentProgram	INFERRED	compiler+0x6c4: current program	^\s*uVar3\ =\ thunk_FUN_00134de8\(uVar5,uVar3\);$	+1
+use	MachineAssembler__visitIfHeaderStatic	uVar6	stackSize	INFERRED	element count of the result stack	^\s*uVar6\ =\ puVar7\[1\];$	+5
+use	MachineAssembler__visitIfHeaderStatic	uVar6	stackSize	INFERRED	element count of the result stack	^\s*puVar4\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar7,uVar6\);$	+1
+use	MachineAssembler__visitIfHeaderStatic	puVar7	resultStack	INFERRED	result stack vector at (this[4]+0x24)	^\s*puVar7\ =\ \*\(uint\ \*\*\)\(param_1\[4\]\ \+\ 0x24\);$	+6
+use	MachineAssembler__visitIfHeaderStatic	puVar7	resultStack	INFERRED	result stack vector at (this[4]+0x24)	^\s*puVar4\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar7,uVar6\);$	+1
+use	IRInst__bindOperandRegisters	iVar4	sourceRegisterFile	INFERRED	register file field (+0xb0) of the source operand	^\s*iVar4\ =\ \*\(int\ \*\)\(iVar2\ \+\ 0xb0\);$	+2
+use	IRInst__bindOperandRegisters	iVar4	sourceRegisterFile	INFERRED	register file field (+0xb0) of the source operand	^\s*iVar4\ =\ \*\(int\ \*\)\(iVar2\ \+\ 0xb0\);$@2	+1
+use	IRInst__bindOperandRegisters	iVar4	sourceRegisterFile	INFERRED	register file field (+0xb0) of the source operand	^\s*piVar1\ =\ \(int\ \*\)FUN_00127608\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x3ac\),iVar4,$	+2
+use	IRInst__bindOperandRegisters	iVar2	operandCursor	INFERRED	inst + index*0x18: the operand being bound	^\s*iVar2\ =\ param_2;$	+1
+use	IRInst__bindOperandRegisters	iVar2	operandCursor	INFERRED	inst + index*0x18: the operand being bound	^\s*iVar4\ =\ \*\(int\ \*\)\(iVar2\ \+\ 0xb0\);$	+1
+use	IRInst__bindOperandRegisters	iVar2	operandCursor	INFERRED	inst + index*0x18: the operand being bound	^\s*uVar6\ =\ \*\(undefined4\ \*\)\(iVar2\ \+\ 0xb0\);$	+1
+use	IRInst__bindOperandRegisters	iVar2	operandCursor	INFERRED	inst + index*0x18: the operand being bound	^\s*iVar4\ =\ \*\(int\ \*\)\(iVar2\ \+\ 0xb0\);$@2	+1
+use	IRInst__bindOperandRegisters	iVar2	operandCursor	INFERRED	inst + index*0x18: the operand being bound	^\s*piVar1\ =\ \(int\ \*\)FUN_00127608\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x3ac\),iVar4,$	+2
+use	IRInst__bindOperandRegisters	iVar2	operandCursor	INFERRED	inst + index*0x18: the operand being bound	^\s*iVar2\ =\ iVar2\ \+\ 0x18;$	+1
+use	IRInst__bindOperandRegisters	piVar1	destVReg	INFERRED	virtual register of the destination (FUN_00127608 lookup)	^\s*piVar1\ =\ \(int\ \*\)FUN_00127608\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x3ac\),\*\(undefined4\ \*\)\(param_2\ \+\ 0x98\),$	+3
+use	IRInst__bindOperandRegisters	piVar1	destVReg	INFERRED	virtual register of the destination (FUN_00127608 lookup)	^\s*piVar3\ =\ \(int\ \*\)\(\*pcVar7\)\(piVar1,\*\(undefined4\ \*\)\(iVar2\ \+\ 0x10\),param_1\);$	+4
+use	IRInst__bindOperandRegisters	piVar1	destVReg	INFERRED	virtual register of the destination (FUN_00127608 lookup)	^\s*FUN_000e7738\(\*\(undefined4\ \*\)\(param_2\ \+\ 0x158\),param_2,piVar1\[0xc\]\);$	+1
+use	IRInst__bindOperandRegisters	piVar1	sourceVReg	INFERRED	virtual register of the source operand (FUN_00127608 lookup)	^\s*piVar1\ =\ \(int\ \*\)FUN_00127608\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x3ac\),iVar4,$	+3
+use	IRInst__bindOperandRegisters	piVar1	sourceVReg	INFERRED	virtual register of the source operand (FUN_00127608 lookup)	^\s*piVar1\ =\ piVar3;$	+1
+use	IRInst__bindOperandRegisters	piVar1	sourceVReg	INFERRED	virtual register of the source operand (FUN_00127608 lookup)	^\s*FUN_001236e4\(piVar1,iVar5,param_2\);$	+2
+use	IRInst__bindOperandRegisters	piVar3	destVRegRemapped	INFERRED	replacement register returned by vtable +0x28 for the destination	^\s*piVar3\ =\ \(int\ \*\)\(\*pcVar7\)\(piVar1,\*\(undefined4\ \*\)\(iVar2\ \+\ 0x10\),param_1\);$	+2
+use	IRInst__bindOperandRegisters	piVar3	destVRegRemapped	INFERRED	replacement register returned by vtable +0x28 for the destination	^\s*FUN_0012306c\(piVar3,param_2\);$	+2
+use	IRInst__bindOperandRegisters	piVar3	sourceVRegRemapped	INFERRED	replacement register returned by vtable +0x28 for the source	^\s*piVar3\ =\ \(int\ \*\)\(\*\*\(code\ \*\*\)\(\*piVar1\ \+\ 0x28\)\)\(piVar1,DAT_001aa80c,param_1\);$	+3
+use	IRInst__bindOperandRegisters	uVar6	newRegisterFile	INFERRED	register file stored into the operand record when the source is of kind 0x1c	^\s*uVar6\ =\ \*\(undefined4\ \*\)\(iVar2\ \+\ 0xb0\);$	+1
+use	IRInst__bindOperandRegisters	uVar6	newRegisterFile	INFERRED	register file stored into the operand record when the source is of kind 0x1c	^\s*\*\(undefined4\ \*\)\(iVar4\ \+\ 0xc\)\ =\ uVar6;$	+1
+use	IRInst__bindOperandRegisters	pcVar7	remapFn	INFERRED	vtable slot +0x28 of the destination virtual register	^\s*pcVar7\ =\ \*\(code\ \*\*\)\(\*piVar1\ \+\ 0x28\);$	+1
+use	IRInst__bindOperandRegisters	pcVar7	remapFn	INFERRED	vtable slot +0x28 of the destination virtual register	^\s*piVar3\ =\ \(int\ \*\)\(\*pcVar7\)\(piVar1,\*\(undefined4\ \*\)\(iVar2\ \+\ 0x10\),param_1\);$	+1
+local	FUN_000f14f8	local_48	chainMarkedSelect	INFERRED	SelectWord::markEqualLanes output for the chain select word
+local	FUN_000f14f8	local_44	firstMarkedSelect	INFERRED	SelectWord::markEqualLanes output for the first move
+local	FUN_000f14f8	local_40	nextMarkedSelect	INFERRED	SelectWord::markEqualLanes output for the next move in the chain
+local	FUN_000f14f8	local_3c	destMarkedSelect	INFERRED	SelectWord::markEqualLanes output for the destination select word
+local	FUN_000f14f8	local_38	composedMarkedSelect	INFERRED	SelectWord::markEqualLanes output for the composed select word
+use	RegisterMap__findConstVectorExact	uVar1	vectorSize	INFERRED	element count of the constant instruction vector	^\s*uVar1\ =\ puVar8\[1\];$	^\s*piVar2\ =\ \(int\ \*\)\(uVar7\ \*\ 4\ \+\ puVar8\[2\]\);$	all	none
+use	RegisterMap__findConstVectorExact	uVar1	selectedComponent	INFERRED	component selected by the lane (4 = unused)	^\s*while\ \(\(uVar1\ =\ \(uint\)\*pbVar6,\ uVar1\ ==\ 4\ \|\|$	^\s*pbVar6\ =\ pbVar6\ \+\ 1;$	all	none
+local	Block__recordDefinition	param_1	block	INFERRED	block whose definition list (+0xc4) is updated
+local	Block__recordDefinition	param_2	vreg	INFERRED	virtual register defined in the block
+local	Block__recordDefinition	param_3	definition	INFERRED	definition passed to VReg__pushDefinition
+local	RegisterMap__findConstVectorExact	param_4	unusedArg4	INFERRED	passed by the caller but not read (register leftovers)
+local	RegisterMap__findConstVectorExact	param_5	unusedArg5	INFERRED	passed by the caller but not read (register leftovers)
+local	RegisterMap__findConstVectorExact	param_6	unusedArg6	INFERRED	passed by the caller but not read (register leftovers)
+local	RegisterMap__findConstVectorExact	param_7	unusedArg7	INFERRED	passed by the caller but not read (register leftovers)
+use	MachineAssembler__visitIfHeaderStatic	uVar3	conditionRegister	INFERRED	thunk_FUN_00134de8(program, branch source): register holding the condition	^\s*uVar3\ =\ thunk_FUN_00134de8\(uVar5,uVar3\);$	^\s*uVar3\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0x98\)\)\(param_1,iVar1\ !=\ 1,uVar3,0\);$	all	rhs
+use	MachineAssembler__visitIfHeaderStatic	uVar3	emittedBranch	INFERRED	result of vtable +0x98 (emit the branch): pushed on the result stack	^\s*uVar3\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0x98\)\)\(param_1,iVar1\ !=\ 1,uVar3,0\);$	^\s*return;$	lhs	none
+local	MachineAssembler__visitIfHeaderStatic	param_4	compiler	INFERRED	compiler: +0x6c4 current program
+local	MachineAssembler__visitIfHeaderStatic	param_5	unusedArg5	INFERRED	forwarded to Block__getBranchInst but not read (register leftovers)
+local	MachineAssembler__visitIfHeaderStatic	param_6	unusedArg6	INFERRED	forwarded to Block__getBranchInst but not read (register leftovers)
+local	MachineAssembler__visitIfHeaderStatic	param_7	unusedArg7	INFERRED	forwarded to Block__getBranchInst but not read (register leftovers)

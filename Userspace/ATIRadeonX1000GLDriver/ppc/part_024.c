@@ -773,59 +773,61 @@ int IRInst__bindOperandRegisters(program, inst)
   int program;
   int inst;
 {
+  int *sourceVRegRemapped;
+  int *sourceVReg;
   int operandRecord;
   int operandRecord2;
-  int *piVar1;
-  int iVar2;
-  int *piVar3;
-  int iVar4;
+  int *destVReg;
+  int operandCursor;
+  int *destVRegRemapped;
+  int sourceRegisterFile;
   int loopIndex;
-  undefined4 uVar6;
-  code *pcVar7;
+  undefined4 newRegisterFile;
+  code *remapFn;
   int newTempIndex;
   
   if (*(int *)(inst + 0x80) != 0) {
-    piVar1 = (int *)FUN_00127608(*(undefined4 *)(program + 0x3ac),*(undefined4 *)(inst + 0x98),
+    destVReg = (int *)FUN_00127608(*(undefined4 *)(program + 0x3ac),*(undefined4 *)(inst + 0x98),
                                  *(undefined4 *)(inst + 0x94),0);
-    pcVar7 = *(code **)(*piVar1 + 0x28);
+    remapFn = *(code **)(*destVReg + 0x28);
     operandRecord2 = IRInst__getOperandRecord(inst,0);
-    piVar3 = (int *)(*pcVar7)(piVar1,*(undefined4 *)(operandRecord2 + 0x10),program);
-    if ((piVar3 == (int *)0x0) || (piVar1 == piVar3)) {
-      FUN_0012306c(piVar1,inst);
-      IRInst__setOperandRef(inst,0,piVar1);
+    destVRegRemapped = (int *)(*remapFn)(destVReg,*(undefined4 *)(operandRecord2 + 0x10),program);
+    if ((destVRegRemapped == (int *)0x0) || (destVReg == destVRegRemapped)) {
+      FUN_0012306c(destVReg,inst);
+      IRInst__setOperandRef(inst,0,destVReg);
     }
     else {
-      FUN_0012306c(piVar3,inst);
-      IRInst__setOperandRef(inst,0,piVar3);
+      FUN_0012306c(destVRegRemapped,inst);
+      IRInst__setOperandRef(inst,0,destVRegRemapped);
       if ((*(uint *)(program + 0x30) & 0x4000) != 0) {
-        Block__insertInstAfter(*(undefined4 *)(inst + 0x158),inst,piVar1[0xc]);
+        Block__insertInstAfter(*(undefined4 *)(inst + 0x158),inst,destVReg[0xc]);
       }
     }
   }
   if (0 < *(int *)(inst + 0x84)) {
     loopIndex = 1;
-    iVar2 = inst;
+    operandCursor = inst;
     do {
-      iVar4 = *(int *)(iVar2 + 0xb0);
-      if (iVar4 == 0x1c) {
+      sourceRegisterFile = *(int *)(operandCursor + 0xb0);
+      if (sourceRegisterFile == 0x1c) {
         newTempIndex = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
         *(int *)(*(int *)(program + 8) + 0x3ac) = newTempIndex;
-        uVar6 = *(undefined4 *)(iVar2 + 0xb0);
+        newRegisterFile = *(undefined4 *)(operandCursor + 0xb0);
         operandRecord = IRInst__getOperandRecord(inst,loopIndex);
         *(int *)(operandRecord + 8) = newTempIndex;
-        *(undefined4 *)(operandRecord + 0xc) = uVar6;
-        iVar4 = *(int *)(iVar2 + 0xb0);
+        *(undefined4 *)(operandRecord + 0xc) = newRegisterFile;
+        sourceRegisterFile = *(int *)(operandCursor + 0xb0);
       }
-      piVar1 = (int *)FUN_00127608(*(undefined4 *)(program + 0x3ac),iVar4,
-                                   *(undefined4 *)(iVar2 + 0xac),0);
-      piVar3 = (int *)(**(code **)(*piVar1 + 0x28))(piVar1,DAT_001aa80c,program);
-      if (piVar3 != (int *)0x0) {
-        piVar1 = piVar3;
+      sourceVReg = (int *)FUN_00127608(*(undefined4 *)(program + 0x3ac),sourceRegisterFile,
+                                   *(undefined4 *)(operandCursor + 0xac),0);
+      sourceVRegRemapped = (int *)(**(code **)(*sourceVReg + 0x28))(sourceVReg,DAT_001aa80c,program);
+      if (sourceVRegRemapped != (int *)0x0) {
+        sourceVReg = sourceVRegRemapped;
       }
-      VReg__addUse(piVar1,loopIndex,inst);
-      IRInst__setOperandRef(inst,loopIndex,piVar1);
+      VReg__addUse(sourceVReg,loopIndex,inst);
+      IRInst__setOperandRef(inst,loopIndex,sourceVReg);
       loopIndex = loopIndex + 1;
-      iVar2 = iVar2 + 0x18;
+      operandCursor = operandCursor + 0x18;
     } while (loopIndex <= *(int *)(inst + 0x84));
   }
   return;
@@ -3389,7 +3391,7 @@ int FUN_000f14f8(program, inst, inst2)
   int operandRecord;
   int operandRecord3;
   int *operandVReg2;
-  bool bVar1;
+  bool singleFold;
   code *UNRECOVERED_JUMPTABLE;
   uint instFlags;
   undefined4 *allocation;
@@ -3398,17 +3400,17 @@ int FUN_000f14f8(program, inst, inst2)
   int hwFoldRejects;
   int *operandVReg;
   int *newMov;
-  int iVar9;
+  int sourceCheckResult;
   int *newMov2;
   undefined4 compiler;
-  int iVar12;
+  int vtable;
   undefined4 destSelectWord2;
   undefined4 arenaA;
-  int local_48;
-  int local_44;
-  int local_40;
-  int local_3c;
-  int local_38 [3];
+  int chainMarkedSelect;
+  int firstMarkedSelect;
+  int nextMarkedSelect;
+  int destMarkedSelect;
+  int composedMarkedSelect [3];
   
   arenaA = *(undefined4 *)(*(int *)(program + 8) + 0x374);
   allocation = (undefined4 *)Arena__alloc(arenaA,0x168);
@@ -3455,9 +3457,9 @@ int FUN_000f14f8(program, inst, inst2)
         (**(code **)(*moveSource + 0x94))
                   (moveSource,*(undefined4 *)(program + 0x340),*(undefined4 *)(program + 8));
         operandRecord = IRInst__getOperandRecord(moveSource,0);
-        SelectWord__markEqualLanes(&local_44,destSelectWord,*(undefined4 *)(operandRecord + 0x10));
+        SelectWord__markEqualLanes(&firstMarkedSelect,destSelectWord,*(undefined4 *)(operandRecord + 0x10));
         instFlags = moveSource[5];
-        block = local_44;
+        block = firstMarkedSelect;
         do {
           if ((instFlags & 0x200) == 0) {
 code_r0x000e76c4:
@@ -3468,15 +3470,15 @@ code_r0x000e76c4:
           }
           operandVReg = (int *)IRInst__getOperandSource(moveSource,moveSource[0x21]);
           IRInst__setOperandSource(moveSource,moveSource[0x21],0,0,*(undefined4 *)(program + 8));
-          iVar12 = *operandVReg;
+          vtable = *operandVReg;
           moveSource[0x21] = moveSource[0x21] + -1;
           moveSource[5] = moveSource[5] & 0xfffffdff;
-          iVar12 = (**(code **)(iVar12 + 0x7c))(operandVReg);
-          if ((((iVar12 != 0) ||
-               (iVar12 = FUN_0011379c(*(undefined4 *)(program + 8),operandVReg), iVar12 == 0)) ||
-              ((iVar12 = operandVReg[0x58] - *(int *)(program + 0x478), -1 < iVar12 && (1 < iVar12)))) ||
+          vtable = (**(code **)(vtable + 0x7c))(operandVReg);
+          if ((((vtable != 0) ||
+               (vtable = FUN_0011379c(*(undefined4 *)(program + 8),operandVReg), vtable == 0)) ||
+              ((vtable = operandVReg[0x58] - *(int *)(program + 0x478), -1 < vtable && (1 < vtable)))) ||
              (((sourceBlock != operandVReg[0x56] ||
-               (iVar12 = (**(code **)(*operandVReg + 0x28))(operandVReg), iVar12 != 0)) || (operandVReg[0x21] == 0)
+               (vtable = (**(code **)(*operandVReg + 0x28))(operandVReg), vtable != 0)) || (operandVReg[0x21] == 0)
               ))) {
             newMov = (int *)IRMov__new_1084b8(0x31,*(undefined4 *)(program + 8));
             IRInst__setOperandSource(newMov,1,operandVReg,0,*(undefined4 *)(program + 8));
@@ -3491,10 +3493,10 @@ code_r0x000e76c4:
                     (operandVReg,*(undefined4 *)(program + 0x340),*(undefined4 *)(program + 8));
           IRInst__setHardwareRegisterAndAdd(operandVReg,program,6,0);
           operandRecord3 = IRInst__getOperandRecord(operandVReg,0);
-          SelectWord__markEqualLanes(&local_40,block,*(undefined4 *)(operandRecord3 + 0x10));
+          SelectWord__markEqualLanes(&nextMarkedSelect,block,*(undefined4 *)(operandRecord3 + 0x10));
           instFlags = operandVReg[5];
           moveSource = operandVReg;
-          block = local_40;
+          block = nextMarkedSelect;
         } while( true );
       }
       FUN_000e8424(block,*(undefined4 *)(program + 0x340));
@@ -3528,21 +3530,21 @@ code_r0x000e76c4:
           (**(code **)(*inst2 + 0xc))(inst2,0,*(undefined4 *)(program + 8));
           Block__prependInst(sourceBlock,*(undefined4 *)(program + 0x340));
           operandRecord = IRInst__getOperandRecord(moveSource,0);
-          SelectWord__markEqualLanes(&local_3c,destSelectWord2,*(undefined4 *)(operandRecord + 0x10));
+          SelectWord__markEqualLanes(&destMarkedSelect,destSelectWord2,*(undefined4 *)(operandRecord + 0x10));
           do {
             (**(code **)(*moveSource + 0x94))
                       (moveSource,*(undefined4 *)(program + 0x340),*(undefined4 *)(program + 8));
             IRInst__setHardwareRegisterAndAdd(moveSource,program,hwRegisterFile,0);
             instFlags = moveSource[5];
-            composedSelectWord = local_3c;
+            composedSelectWord = destMarkedSelect;
             while ((instFlags & 0x200) != 0) {
               operandVReg2 = (int *)IRInst__getOperandSource(moveSource,moveSource[0x21]);
-              iVar9 = (**(code **)(*operandVReg2 + 0x7c))();
-              if ((((iVar9 != 0) ||
-                   (iVar9 = FUN_0011379c(*(undefined4 *)(program + 8),operandVReg2), iVar9 == 0)) ||
-                  ((iVar9 = operandVReg2[0x58] - *(int *)(program + 0x478), -1 < iVar9 && (1 < iVar9))))
+              sourceCheckResult = (**(code **)(*operandVReg2 + 0x7c))();
+              if ((((sourceCheckResult != 0) ||
+                   (sourceCheckResult = FUN_0011379c(*(undefined4 *)(program + 8),operandVReg2), sourceCheckResult == 0)) ||
+                  ((sourceCheckResult = operandVReg2[0x58] - *(int *)(program + 0x478), -1 < sourceCheckResult && (1 < sourceCheckResult))))
                  || (((sourceBlock != operandVReg2[0x56] ||
-                      (iVar9 = (**(code **)(*operandVReg2 + 0x28))(operandVReg2), iVar9 != 0)) ||
+                      (sourceCheckResult = (**(code **)(*operandVReg2 + 0x28))(operandVReg2), sourceCheckResult != 0)) ||
                      (operandVReg2[0x21] == 0)))) {
                 newMov2 = (int *)IRMov__new_1084b8(0x31,*(undefined4 *)(program + 8));
                 IRInst__setOperandSource(newMov2,1,operandVReg2,0,*(undefined4 *)(program + 8));
@@ -3557,19 +3559,19 @@ code_r0x000e76c4:
                         (operandVReg2,*(undefined4 *)(program + 0x340),*(undefined4 *)(program + 8));
               IRInst__setHardwareRegisterAndAdd(operandVReg2,program,hwRegisterFile,0);
               operandRecord4 = IRInst__getOperandRecord(operandVReg2,0);
-              SelectWord__markEqualLanes(local_38,composedSelectWord,*(undefined4 *)(operandRecord4 + 0x10));
-              composedSelectWord = local_38[0];
+              SelectWord__markEqualLanes(composedMarkedSelect,composedSelectWord,*(undefined4 *)(operandRecord4 + 0x10));
+              composedSelectWord = composedMarkedSelect[0];
               moveSource = operandVReg2;
               instFlags = operandVReg2[5];
             }
             block = IRInst__getOperandRecord(operandVReg,0);
             hwRegisterFile = 7;
-            SelectWord__markEqualLanes(&local_48,chainSelectWord,*(undefined4 *)(block + 0x10));
-            bVar1 = foldedCount == 1;
+            SelectWord__markEqualLanes(&chainMarkedSelect,chainSelectWord,*(undefined4 *)(block + 0x10));
+            singleFold = foldedCount == 1;
             foldedCount = foldedCount + 1;
-            local_3c = local_48;
+            destMarkedSelect = chainMarkedSelect;
             moveSource = operandVReg;
-            if (bVar1) {
+            if (singleFold) {
               return;
             }
           } while( true );

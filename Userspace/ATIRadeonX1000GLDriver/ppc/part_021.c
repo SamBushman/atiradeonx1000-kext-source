@@ -1254,42 +1254,43 @@ int MachineAssembler__vslot34_declareDestinationLanesByClass(this, inst)
 }
 
 /* MachineAssembler__visitIfHeaderStatic @ 0xe3140 (260 bytes) */
-int MachineAssembler__visitIfHeaderStatic(this, block, param_3, param_4, param_5, param_6, param_7)
+int MachineAssembler__visitIfHeaderStatic(this, block, param_3, compiler, unusedArg5, unusedArg6, unusedArg7)
   int *this;
   int block;
   undefined4 param_3;
-  int param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+  int compiler;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
 {
+  undefined4 emittedBranch;
   undefined4 sourceDef;
-  int iVar1;
+  int branchFlag;
   int branchInst;
-  undefined4 uVar3;
-  undefined4 *puVar4;
-  undefined4 uVar5;
-  uint uVar6;
-  uint *puVar7;
+  undefined4 conditionRegister;
+  undefined4 *vectorSlot;
+  undefined4 currentProgram;
+  uint stackSize;
+  uint *resultStack;
   
-  branchInst = Block__getBranchInst(block,block,param_3,param_4,param_5,param_6,param_7);
-  uVar5 = *(undefined4 *)(param_4 + 0x6c4);
-  iVar1 = *(int *)(branchInst + 300);
+  branchInst = Block__getBranchInst(block,block,param_3,compiler,unusedArg5,unusedArg6,unusedArg7);
+  currentProgram = *(undefined4 *)(compiler + 0x6c4);
+  branchFlag = *(int *)(branchInst + 300);
   sourceDef = IRInst__getOperandSource(branchInst,1);
-  uVar3 = thunk_FUN_00134de8(uVar5,sourceDef);
+  conditionRegister = thunk_FUN_00134de8(currentProgram,sourceDef);
   (**(code **)(*this + 0x34))(this,param_3,*(undefined4 *)(block + 0xdc));
-  uVar3 = (**(code **)(*this + 0x98))(this,iVar1 != 1,uVar3,0);
-  puVar7 = *(uint **)(this[4] + 0x24);
-  uVar6 = puVar7[1];
-  if (uVar6 < *puVar7) {
-    _memset(uVar6 * 4 + puVar7[2],0,4);
-    puVar4 = (undefined4 *)(uVar6 * 4 + puVar7[2]);
-    puVar7[1] = uVar6 + 1;
+  emittedBranch = (**(code **)(*this + 0x98))(this,branchFlag != 1,conditionRegister,0);
+  resultStack = *(uint **)(this[4] + 0x24);
+  stackSize = resultStack[1];
+  if (stackSize < *resultStack) {
+    _memset(stackSize * 4 + resultStack[2],0,4);
+    vectorSlot = (undefined4 *)(stackSize * 4 + resultStack[2]);
+    resultStack[1] = stackSize + 1;
   }
   else {
-    puVar4 = (undefined4 *)Vector__elementRefGrow(puVar7,uVar6);
+    vectorSlot = (undefined4 *)Vector__elementRefGrow(resultStack,stackSize);
   }
-  *puVar4 = uVar3;
+  *vectorSlot = emittedBranch;
   return;
 }
 

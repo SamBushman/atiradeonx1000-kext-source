@@ -442,79 +442,82 @@ int IRInst__canFoldConstantSource(inst, operandIndex, inst2, program)
   undefined4 inst2;
   int program;
 {
+  uint selectedComponent;
+  int inst2Foldable;
+  int operandRecordB;
   int operandRecord;
   int sourceDef;
-  bool bVar1;
-  uint uVar2;
+  bool notLastLane;
+  uint negateFlag;
   int iVar3;
-  undefined4 uVar4;
-  int iVar5;
-  uint uVar6;
-  int *piVar7;
+  undefined4 foldable;
+  int constEncodable;
+  uint selectedComponentB;
+  int *hardwareInfo;
   int loopCounter;
-  double dVar9;
+  double constValue;
   
-  iVar3 = FUN_0011379c(*(undefined4 *)(program + 8),inst2);
-  if (iVar3 == 0) goto LAB_000f5a8c;
-  uVar2 = *(uint *)(operandIndex * 0x18 + inst + 0xa0) & 1;
+  inst2Foldable = FUN_0011379c(*(undefined4 *)(program + 8),inst2);
+  if (inst2Foldable == 0) goto LAB_000f5a8c;
+  negateFlag = *(uint *)(operandIndex * 0x18 + inst + 0xa0) & 1;
   IRInst__getOperandRecord(inst2,0);
   sourceDef = IRInst__getOperandSource(inst,operandIndex);
   iVar3 = *(int *)(sourceDef + 0x98);
   if (iVar3 == 0xc) {
 LAB_000f5b30:
     sourceDef = IRInst__getOperandSource(inst,operandIndex);
-    piVar7 = *(int **)(*(int *)(program + 8) + 0x30c);
+    hardwareInfo = *(int **)(*(int *)(program + 8) + 0x30c);
     loopCounter = 0;
     do {
       operandRecord = IRInst__getOperandRecord(inst2,0);
       if (*(char *)(loopCounter + operandRecord + 0x10) != '\x01') {
         operandRecord = IRInst__getOperandRecord(inst,operandIndex);
-        uVar6 = (uint)*(byte *)(loopCounter + operandRecord + 0x10);
-        if (uVar6 != 4) {
-          if (((int)*(char *)(sourceDef + 0x15c) >> (uVar6 & 0x3f) & 1U) == 0) goto LAB_000f5a8c;
-          if (uVar2 == 0) {
-            dVar9 = (double)*(float *)(uVar6 * 0x18 + sourceDef + 0x20);
+        selectedComponentB = (uint)*(byte *)(loopCounter + operandRecord + 0x10);
+        if (selectedComponentB != 4) {
+          if (((int)*(char *)(sourceDef + 0x15c) >> (selectedComponentB & 0x3f) & 1U) == 0) goto LAB_000f5a8c;
+          if (negateFlag == 0) {
+            constValue = (double)*(float *)(selectedComponentB * 0x18 + sourceDef + 0x20);
           }
           else {
-            dVar9 = -(double)*(float *)(uVar6 * 0x18 + sourceDef + 0x20);
+            constValue = -(double)*(float *)(selectedComponentB * 0x18 + sourceDef + 0x20);
           }
-          iVar5 = (**(code **)(*piVar7 + 0xf0))(dVar9,piVar7);
-          if (iVar5 == 0) goto LAB_000f5a8c;
+          constEncodable = (**(code **)(*hardwareInfo + 0xf0))(constValue,hardwareInfo);
+          if (constEncodable == 0) goto LAB_000f5a8c;
         }
       }
-      bVar1 = loopCounter != 3;
+      notLastLane = loopCounter != 3;
       loopCounter = loopCounter + 1;
-    } while (bVar1);
+    } while (notLastLane);
 LAB_000f5b28:
-    uVar4 = 1;
+    foldable = 1;
   }
   else {
     if (iVar3 == 0x33) {
-      if (uVar2 == 0) {
+      if (negateFlag == 0) {
         sourceDef = IRInst__getOperandSource(inst,operandIndex);
         loopCounter = 0;
-        piVar7 = *(int **)(*(int *)(program + 8) + 0x30c);
+        hardwareInfo = *(int **)(*(int *)(program + 8) + 0x30c);
         do {
           operandRecord = IRInst__getOperandRecord(inst2,0);
           if (*(char *)(loopCounter + operandRecord + 0x10) != '\x01') {
-            iVar5 = IRInst__getOperandRecord(inst,operandIndex);
-            uVar2 = (uint)*(byte *)(loopCounter + iVar5 + 0x10);
-            if ((uVar2 != 4) &&
-               (iVar5 = (**(code **)(*piVar7 + 0xf0))
-                                  ((double)*(float *)(uVar2 * 0x18 + sourceDef + 0x20),piVar7),
-               iVar5 == 0)) goto LAB_000f5a8c;
+            operandRecordB = IRInst__getOperandRecord(inst,operandIndex);
+            selectedComponent = (uint)*(byte *)(loopCounter + operandRecordB + 0x10);
+            if ((selectedComponent != 4) &&
+               (operandRecordB = (**(code **)(*hardwareInfo + 0xf0))
+                                  ((double)*(float *)(selectedComponent * 0x18 + sourceDef + 0x20),hardwareInfo),
+               operandRecordB == 0)) goto LAB_000f5a8c;
           }
-          bVar1 = loopCounter != 3;
+          notLastLane = loopCounter != 3;
           loopCounter = loopCounter + 1;
-        } while (bVar1);
+        } while (notLastLane);
         goto LAB_000f5b28;
       }
     }
     else if (iVar3 == 2) goto LAB_000f5b30;
 LAB_000f5a8c:
-    uVar4 = 0;
+    foldable = 0;
   }
-  return uVar4;
+  return foldable;
 }
 
 /* IRInst__sourceMatchesConstant @ 0xf5c0c (228 bytes) */
@@ -695,54 +698,55 @@ LAB_000f5f7c:
 }
 
 /* RegisterMap__findConstVectorExact @ 0xf5f94 (304 bytes) */
-int RegisterMap__findConstVectorExact(registerMap, values, selectBytes, param_4, param_5, param_6, param_7)
+int RegisterMap__findConstVectorExact(registerMap, values, selectBytes, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
   int registerMap;
   int values;
   byte *selectBytes;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
 {
-  uint uVar1;
-  int *piVar2;
-  int iVar3;
-  int iVar4;
+  uint selectedComponent;
+  uint vectorSize;
+  int *vectorSlot;
+  int candidateInst;
+  int recordAddr;
   int loopCounter;
-  byte *pbVar6;
+  byte *selectByteCursor;
   uint loopIndex;
-  uint *puVar8;
+  uint *instVector;
   int loopCounterB;
   
   if (*(int *)(registerMap + 0x1c) != 0) {
     loopIndex = 0;
     do {
-      puVar8 = *(uint **)(registerMap + 0x20);
-      if (loopIndex < *puVar8) {
-        uVar1 = puVar8[1];
-        if (uVar1 <= loopIndex) {
-          _memset(uVar1 * 4 + puVar8[2],0,(loopIndex - uVar1) * 4 + 4);
-          puVar8[1] = loopIndex + 1;
+      instVector = *(uint **)(registerMap + 0x20);
+      if (loopIndex < *instVector) {
+        vectorSize = instVector[1];
+        if (vectorSize <= loopIndex) {
+          _memset(vectorSize * 4 + instVector[2],0,(loopIndex - vectorSize) * 4 + 4);
+          instVector[1] = loopIndex + 1;
         }
-        piVar2 = (int *)(loopIndex * 4 + puVar8[2]);
+        vectorSlot = (int *)(loopIndex * 4 + instVector[2]);
       }
       else {
-        piVar2 = (int *)Vector__elementRefGrow(puVar8,loopIndex);
+        vectorSlot = (int *)Vector__elementRefGrow(instVector,loopIndex);
       }
-      iVar3 = *piVar2;
+      candidateInst = *vectorSlot;
       loopCounterB = 4;
       loopCounter = 0;
-      pbVar6 = selectBytes;
-      while ((uVar1 = (uint)*pbVar6, uVar1 == 4 ||
-             (((((int)*(char *)(iVar3 + 0x15c) >> (uVar1 & 0x3f) & 1U) != 0 &&
-               (iVar4 = uVar1 * 0x18 + iVar3, *(int *)(iVar4 + 0x1c) == 2)) &&
-              (*(float *)(iVar4 + 0x20) == *(float *)(loopCounter + values)))))) {
-        pbVar6 = pbVar6 + 1;
+      selectByteCursor = selectBytes;
+      while ((selectedComponent = (uint)*selectByteCursor, selectedComponent == 4 ||
+             (((((int)*(char *)(candidateInst + 0x15c) >> (selectedComponent & 0x3f) & 1U) != 0 &&
+               (recordAddr = selectedComponent * 0x18 + candidateInst, *(int *)(recordAddr + 0x1c) == 2)) &&
+              (*(float *)(recordAddr + 0x20) == *(float *)(loopCounter + values)))))) {
+        selectByteCursor = selectByteCursor + 1;
         loopCounter = loopCounter + 4;
         loopCounterB = loopCounterB + -1;
         if (loopCounterB == 0) {
-          *(undefined4 *)(iVar3 + 0x9c) = DAT_001aa860;
-          return iVar3;
+          *(undefined4 *)(candidateInst + 0x9c) = DAT_001aa860;
+          return candidateInst;
         }
       }
       loopIndex = loopIndex + 1;

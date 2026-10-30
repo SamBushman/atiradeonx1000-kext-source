@@ -224,43 +224,44 @@ int Block__splitEdge(fromBlock, toBlock, newBlock)
 }
 
 /* Block__recordDefinition @ 0xe9c00 (200 bytes) */
-int Block__recordDefinition(param_1, param_2, param_3)
-  int param_1;
-  int param_2;
-  undefined4 param_3;
+int Block__recordDefinition(block, vreg, definition)
+  int block;
+  int vreg;
+  undefined4 definition;
 {
-  int *piVar1;
+  int *vectorSlot;
+  int *listEntry;
   uint loopIndex;
-  uint *puVar3;
-  uint uVar4;
-  uint uVar5;
+  uint *definitionList;
+  uint definitionCount;
+  uint entriesLeft;
   
-  puVar3 = *(uint **)(param_1 + 0xc4);
-  uVar4 = puVar3[1];
-  if (0 < (int)uVar4) {
+  definitionList = *(uint **)(block + 0xc4);
+  definitionCount = definitionList[1];
+  if (0 < (int)definitionCount) {
     loopIndex = 0;
-    uVar5 = uVar4;
+    entriesLeft = definitionCount;
     do {
-      piVar1 = (int *)0x0;
-      if (loopIndex < uVar4) {
-        piVar1 = (int *)(loopIndex * 4 + puVar3[2]);
+      listEntry = (int *)0x0;
+      if (loopIndex < definitionCount) {
+        listEntry = (int *)(loopIndex * 4 + definitionList[2]);
       }
-      if (param_2 == *piVar1) goto LAB_000e9ca8;
+      if (vreg == *listEntry) goto LAB_000e9ca8;
       loopIndex = loopIndex + 1;
-      uVar5 = uVar5 - 1;
-    } while (uVar5 != 0);
+      entriesLeft = entriesLeft - 1;
+    } while (entriesLeft != 0);
   }
-  if (uVar4 < *puVar3) {
-    _memset(uVar4 * 4 + puVar3[2],0,4);
-    piVar1 = (int *)(uVar4 * 4 + puVar3[2]);
-    puVar3[1] = uVar4 + 1;
+  if (definitionCount < *definitionList) {
+    _memset(definitionCount * 4 + definitionList[2],0,4);
+    vectorSlot = (int *)(definitionCount * 4 + definitionList[2]);
+    definitionList[1] = definitionCount + 1;
   }
   else {
-    piVar1 = (int *)Vector__elementRefGrow(puVar3,uVar4);
+    vectorSlot = (int *)Vector__elementRefGrow(definitionList,definitionCount);
   }
-  *piVar1 = param_2;
+  *vectorSlot = vreg;
 LAB_000e9ca8:
-  return VReg__pushDefinition(param_2,*(undefined4 *)(param_1 + 0xb0),param_3);
+  return VReg__pushDefinition(vreg,*(undefined4 *)(block + 0xb0),definition);
 }
 
 /* FUN_000e9cc8 @ 0xe9cc8 (160 bytes) */
