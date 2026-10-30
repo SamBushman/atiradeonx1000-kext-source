@@ -797,18 +797,18 @@ int psnPackedLaneNegate(descriptor, lane)
 }
 
 /* FUN_0019eb30 @ 0x19eb30 (172 bytes) */
-int FUN_0019eb30(param_1)
-  uint *param_1;
+int FUN_0019eb30(tokenWords)
+  uint *tokenWords;
 {
-  uint uVar1;
+  uint componentWord;
   int loopIndex;
   int loopRemaining;
   
-  if ((*param_1 & 0x400000) == 0) {
+  if ((*tokenWords & 0x400000) == 0) {
     return 0;
   }
-  uVar1 = param_1[1];
-  if (1 < (uVar1 & 3) - 2) {
+  componentWord = tokenWords[1];
+  if (1 < (componentWord & 3) - 2) {
     loopRemaining = 4;
     loopIndex = 0;
     do {
@@ -821,40 +821,40 @@ int FUN_0019eb30(param_1)
               return 0;
             }
             if (loopIndex != 1) break;
-            if ((uVar1 & 0xc) == 8) {
+            if ((componentWord & 0xc) == 8) {
               return 1;
             }
-            if ((uVar1 & 0xc) == 0xc) {
+            if ((componentWord & 0xc) == 0xc) {
               return 1;
             }
           }
         } while (loopIndex < 2);
         if (loopIndex != 2) break;
-        if ((uVar1 & 0x30) == 0x20) {
+        if ((componentWord & 0x30) == 0x20) {
           return 1;
         }
-        if ((uVar1 & 0x30) == 0x30) {
+        if ((componentWord & 0x30) == 0x30) {
           return 1;
         }
       }
-    } while ((loopIndex != 3) || (((uVar1 & 0xc0) != 0x80 && ((uVar1 & 0xc0) != 0xc0))));
+    } while ((loopIndex != 3) || (((componentWord & 0xc0) != 0x80 && ((componentWord & 0xc0) != 0xc0))));
   }
   return 1;
 }
 
 /* FUN_0019ebdc @ 0x19ebdc (172 bytes) */
-int FUN_0019ebdc(param_1)
-  uint *param_1;
+int FUN_0019ebdc(tokenWords)
+  uint *tokenWords;
 {
-  uint uVar1;
+  uint componentWord;
   int loopIndex;
   int loopRemaining;
   
-  if ((*param_1 & 0x400000) == 0) {
+  if ((*tokenWords & 0x400000) == 0) {
     return 0;
   }
-  uVar1 = param_1[1];
-  if (1 < (uVar1 & 7) - 4) {
+  componentWord = tokenWords[1];
+  if (1 < (componentWord & 7) - 4) {
     loopRemaining = 4;
     loopIndex = 0;
     do {
@@ -867,25 +867,25 @@ int FUN_0019ebdc(param_1)
               return 0;
             }
             if (loopIndex != 1) break;
-            if ((uVar1 & 0x70) == 0x40) {
+            if ((componentWord & 0x70) == 0x40) {
               return 1;
             }
-            if ((uVar1 & 0x70) == 0x50) {
+            if ((componentWord & 0x70) == 0x50) {
               return 1;
             }
           }
         } while (loopIndex < 2);
         if (loopIndex != 2) break;
-        if ((uVar1 & 0x700) == 0x400) {
+        if ((componentWord & 0x700) == 0x400) {
           return 1;
         }
-        if ((uVar1 & 0x700) == 0x500) {
+        if ((componentWord & 0x700) == 0x500) {
           return 1;
         }
       }
     } while ((loopIndex != 3) ||
-            (((undefined *)(uVar1 & 0x7000) != (undefined *)0x4000 &&
-             ((undefined *)(uVar1 & 0x7000) != ((unsigned char *)0x00005000)))));
+            (((undefined *)(componentWord & 0x7000) != (undefined *)0x4000 &&
+             ((undefined *)(componentWord & 0x7000) != ((unsigned char *)0x00005000)))));
   }
   return 1;
 }

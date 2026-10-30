@@ -1131,7 +1131,7 @@ int ValueKey__replaceWithZeroIfSourcesEqual(ctx)
   undefined4 zeroVec4Z;
   undefined4 zeroVec4W;
   
-  callResult = FUN_00176fd4(ctx,1,2);
+  callResult = ValueKey__laneRelationHoldsOnWrittenLanes_176fd4(ctx,1,2);
   if (callResult != 0) {
     word0xd0Flags = *(uint *)(*(int *)(ctx + 0xb0) + 0xd0);
     word0xb8Flags = *(uint *)(*(int *)(ctx + 0xb0) + 0xb8);
@@ -1559,7 +1559,7 @@ int FUN_0017dbdc(ctx, laneResultsOut)
       }
     }
     else {
-      loopIndex = FUN_00178b1c(ctx);
+      loopIndex = ValueKey__allDotInputsConstant(ctx);
       if (loopIndex == 0) {
 LAB_0017df9c:
         partialFlag = 0;
@@ -3950,21 +3950,21 @@ code_r0x00181700:
 }
 
 /* Inst__isFoldableSingleUse @ 0x181928 (140 bytes) */
-int Inst__isFoldableSingleUse(param_1, param_2, program)
-  int *param_1;
-  int param_2;
+int Inst__isFoldableSingleUse(inst, block, program)
+  int *inst;
+  int block;
   undefined4 program;
 {
   int hasSingleUse;
-  undefined4 uVar2;
+  undefined4 result;
   
-  hasSingleUse = IRInst__hasSingleUse(param_1,program);
-  if ((((hasSingleUse == 0) || (hasSingleUse = (**(code **)(*param_1 + 0x68))(param_1), hasSingleUse != 0)) ||
-      ((param_1[5] & 0x200U) != 0)) ||
-     ((*(int *)(param_1[0x22] + 8) == 0x8e || (uVar2 = 1, param_1[0x56] != param_2)))) {
-    uVar2 = 0;
+  hasSingleUse = IRInst__hasSingleUse(inst,program);
+  if ((((hasSingleUse == 0) || (hasSingleUse = (**(code **)(*inst + 0x68))(inst), hasSingleUse != 0)) ||
+      ((inst[5] & 0x200U) != 0)) ||
+     ((*(int *)(inst[0x22] + 8) == 0x8e || (result = 1, inst[0x56] != block)))) {
+    result = 0;
   }
-  return uVar2;
+  return result;
 }
 
 /* Inst__compareScheduleSlack @ 0x1819b4 (252 bytes) */

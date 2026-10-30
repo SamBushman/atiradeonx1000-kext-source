@@ -2123,30 +2123,30 @@ int R300SchedModel__vslot15(this, param_2)
   return 2;
 }
 
-/* FUN_00189c24 @ 0x189c24 (188 bytes) */
-int FUN_00189c24(inst)
+/* Inst__computeKey @ 0x189c24 (188 bytes) */
+int Inst__computeKey(inst)
   int *inst;
 {
   int operandRecord;
   int sourceDef;
-  int iVar1;
-  uint uVar2;
-  uint uVar3;
-  int iVar4;
+  int sourceCount;
+  uint src2Register;
+  uint src1Register;
+  int opcode;
   
-  uVar2 = 0;
+  src2Register = 0;
   (**(code **)(*inst + 0x5c))(inst);
-  iVar4 = *(int *)(inst[0x22] + 8);
+  opcode = *(int *)(inst[0x22] + 8);
   sourceDef = IRInst__getOperandSource(inst,1);
-  uVar3 = *(uint *)(sourceDef + 0x94);
-  iVar1 = (**(code **)(*inst + 0x14))(inst);
-  if (1 < iVar1) {
+  src1Register = *(uint *)(sourceDef + 0x94);
+  sourceCount = (**(code **)(*inst + 0x14))(inst);
+  if (1 < sourceCount) {
     sourceDef = IRInst__getOperandSource(inst,2);
-    uVar2 = *(uint *)(sourceDef + 0x94) & 0xfff;
+    src2Register = *(uint *)(sourceDef + 0x94) & 0xfff;
   }
   operandRecord = IRInst__getOperandRecord(inst,0);
-  return uVar2 | iVar4 << 0x19 | -(*(byte *)(operandRecord + 0x13) ^ 1) >> 7 & 0x1000000 |
-                 (uVar3 & 0xfff) << 0xc;
+  return src2Register | opcode << 0x19 | -(*(byte *)(operandRecord + 0x13) ^ 1) >> 7 & 0x1000000 |
+                 (src1Register & 0xfff) << 0xc;
 }
 
 /* FUN_00189ce0 @ 0x189ce0 (276 bytes) */
