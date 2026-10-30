@@ -23,4 +23,17 @@ def name(var, k, defs, lines, ctx):
     if all(re.match(r'^\*\(undefined4 \*\)\(\*\(int \*\)\(%s \+ 8\) \+ 0x378\)$' % ID, d) for d in ds): return 'arenaB'
     if all(re.match(r'^\*\(undefined4 \*\)\(\*\(int \*\)\(%s \+ 8\) \+ 0x374\)$' % ID, d) for d in ds): return 'arenaA'
     if all(re.match(r'^FUN_00127608\(', d) for d in ds): return 'virtualRegister'
+    cs = set()
+    for d in ds:
+        v = re.match(r'^\(\*\*\(code \*\*\)\(.*? \+ (0x[0-9a-f]+|\d+)\)\)\(', d)
+        m = re.match(r'^(?:\(\w[\w \*]*\))?\(*(?:\w[\w \*]*\(\*\)\(\)\))?\)?\(*([A-Za-z_]\w*)\)?\(', d)
+        if v: cs.add('vcall%sResult' % (v.group(1)[2:] if v.group(1).startswith('0x') else '%x' % int(v.group(1))))
+        elif m and m.group(1) not in ('code', 'int', 'uint', 'char', 'byte', 'float', 'double', 'bool', 'undefined4', 'undefined1', 'undefined'):
+            c = m.group(1)
+            if c.startswith('FUN_'): cs.add('callResult')
+            else:
+                b = c.split('__')[-1]
+                cs.add(b[0].lower() + b[1:] + 'Result')
+        else: return None
+    if len(cs) == 1: return cs.pop()
     return None

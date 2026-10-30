@@ -1189,3 +1189,222 @@ local	FUN_0013a644	puVar3	userSlot	INFERRED	address of the user element
 local	FUN_0013a644	piVar10	user	INFERRED	user inst
 local	FUN_0013a644	iVar5	operandCount	INFERRED	vtable +0x14 operand count of the user
 local	FUN_0013a644	iVar8	operandIdx	INFERRED	user operand index 1..operandCount
+use	FUN_00174e0c	iVar10	loopIndex	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar10\ =\ 0;$	+1
+use	FUN_00174e0c	iVar10	loopIndex	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*if\ \(\*\(char\ \*\)\(iVar10\ \+\ iVar2\ \+\ 0x10\)\ !=\ '\\x01'\)\ \{$	+1
+use	FUN_00174e0c	iVar10	loopIndex	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar2\ =\ FUN_00179bbc\(param_1,iVar10\);$	+1
+use	FUN_00174e0c	iVar10	loopIndex	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*piVar3\ =\ \(int\ \*\)\(\(int\ \(\*\)\(\)\)FUN_00174ce0\)\(param_1\[0x8e\],iVar10,param_1\);$	+1
+use	FUN_00174e0c	iVar10	loopIndex	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar12\ =\ param_1\[iVar2\ \*\ 4\ \+\ iVar10\ \+\ 0x5a\];$	+1
+use	FUN_00174e0c	iVar10	loopIndex	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*FUN_00178648\(param_1,iVar10\);$	+2
+use	FUN_00174e0c	iVar10	loopIndex	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*if\ \(\*\(char\ \*\)\(iVar10\ \+\ iVar2\ \+\ 0x10\)\ ==\ '\\0'\)\ \{$	+1
+use	FUN_00174e0c	iVar10	loopIndex	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*bVar8\ =\ iVar10\ ==\ 3;$	+1
+use	FUN_00174e0c	iVar10	loopIndex	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar10\ =\ iVar10\ \+\ 1;$@2	+1
+use	FUN_00174e0c	iVar10	countdown	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar10\ =\ 4;$	+1
+use	FUN_00174e0c	iVar10	countdown	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar10\ =\ iVar10\ \+\ \-1;$	+2
+use	FUN_00174e0c	iVar10	countdown	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar10\ =\ 4;$@2	+1
+use	FUN_00174e0c	iVar10	countdown	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar10\ =\ iVar10\ \+\ \-1;$@2	+2
+use	FUN_00174e0c	iVar12	countdown2	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar12\ =\ 4;$	+1
+use	FUN_00174e0c	iVar12	countdown2	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar12\ =\ iVar12\ \+\ \-1;$	+2
+use	FUN_00174e0c	iVar2	callResult	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar2\ =\ FUN_0011e780\(uVar1\);$	+2
+use	FUN_00174e0c	iVar2	callResult	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar2\ =\ FUN_00179064\(param_1,uVar7\);$	+2
+use	FUN_00174e0c	iVar2	callResult	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar2\ =\ FUN_00179bbc\(param_1,iVar10\);$	+2
+use	FUN_00174e0c	iVar2	callResult	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)FUN_0017361c\)\(param_1\[0x2c\]\);$	+2
+use	FUN_00174e0c	iVar2	callResult	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar2\ =\ FUN_00176ed4\(param_1,iVar12\);$	+2
+use	FUN_00174e0c	iVar2	callResult	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar2\ =\ FUN_00176f0c\(param_1,iVar12\);$	+2
+use	FUN_00174e0c	iVar2	callResult	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)FUN_0017361c\)\(param_1\[0x2c\]\);$@2	+2
+use	FUN_00174e0c	iVar2	callResult	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)FUN_00173e10\)\(param_1\[0x8e\],local_50\);$	+2
+use	FUN_00174e0c	iVar2	loopIndex2	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar2\ =\ 0;$	+1
+use	FUN_00174e0c	iVar2	loopIndex2	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*piVar3\[2\]\ =\ iVar2;$	+1
+use	FUN_00174e0c	iVar2	loopIndex2	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*bVar8\ =\ iVar2\ !=\ 3;$	+2
+use	FUN_00174e0c	iVar2	loopIndex2	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar2\ =\ 0;$@2	+1
+use	FUN_00174e0c	iVar2	loopIndex2	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*if\ \(\*\(char\ \*\)\(iVar2\ \+\ iVar9\ \+\ 0x10\)\ ==\ '\\x01'\)\ \{$	+1
+use	FUN_00174e0c	iVar2	loopIndex2	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*piVar3\ =\ param_1\ \+\ iVar2\ \+\ 0x5e;$	+1
+use	FUN_00174e0c	iVar2	loopIndex2	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*if\ \(\*\(char\ \*\)\(iVar2\ \+\ iVar9\ \+\ 0x10\)\ !=\ '\\x04'\)\ \{$	+1
+use	FUN_00174e0c	iVar2	loopIndex2	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*bVar8\ =\ iVar2\ ==\ 3;$	+1
+use	FUN_00174e0c	iVar2	loopIndex2	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar2\ =\ iVar2\ \+\ 1;$@2	+1
+use	FUN_00174e0c	iVar2	loopIndex2	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar2\ =\ 0;$@3	+1
+use	FUN_00174e0c	iVar2	loopIndex2	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*if\ \(\*\(char\ \*\)\(iVar2\ \+\ iVar9\ \+\ 0x10\)\ ==\ '\\x01'\)\ \{$@2	+1
+use	FUN_00174e0c	iVar2	loopIndex2	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*bVar8\ =\ iVar2\ ==\ 3;$@2	+1
+use	FUN_00174e0c	iVar2	loopIndex2	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar2\ =\ iVar2\ \+\ 1;$@3	+1
+use	FUN_00174e0c	iVar2	vcall60Result	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_1\[0x2c\]\ \+\ 0x60\)\)\(\(int\ \*\)param_1\[0x2c\]\);$	+2
+use	FUN_00174e0c	iVar2	vcall50Result	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_1\[0x2c\]\ \+\ 0x50\)\)\(\(int\ \*\)param_1\[0x2c\]\);$	+2
+use	FUN_00174e0c	iVar2	countdown3	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar2\ =\ 4;$	+1
+use	FUN_00174e0c	iVar2	countdown3	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar2\ =\ iVar2\ \+\ \-1;$	+2
+use	FUN_00174e0c	iVar2	countdown3	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar2\ =\ 4;$@2	+1
+use	FUN_00174e0c	iVar2	countdown3	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar2\ =\ iVar2\ \+\ \-1;$@2	+2
+use	FUN_00174e0c	iVar2	vcall48Result	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_1\[0x2c\]\ \+\ 0x48\)\)\(\(int\ \*\)param_1\[0x2c\]\);$	+2
+use	FUN_00174e0c	iVar2	vcall64Result	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*piVar3\ \+\ 100\)\)\(piVar3\);$	+2
+use	FUN_00174e0c	iVar2	vcall64Result	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_1\[0x2c\]\ \+\ 100\)\)\(\(int\ \*\)param_1\[0x2c\]\);$	+2
+use	FUN_00174e0c	iVar2	operandRecord2	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar2\ =\ FUN_001054ec\(param_1\[0x2c\],0\);$	+2
+use	FUN_00174e0c	iVar2	operandRecord2	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar2\ =\ FUN_001054ec\(param_1\[0x2c\],0\);$@2	+2
+use	FUN_00174e0c	piVar3	callResult2	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*piVar3\ =\ \(int\ \*\)\(\(int\ \(\*\)\(\)\)FUN_001746c8\)\(iVar9,uVar1\);$	+5
+use	FUN_00174e0c	piVar3	callResult2	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*\*piVar11\ =\ \*piVar3;$	+1
+use	FUN_00174e0c	piVar3	callResult2	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*piVar3\ =\ \(int\ \*\)\(\(int\ \(\*\)\(\)\)FUN_00174ce0\)\(param_1\[0x8e\],uVar7,param_1\);$	+3
+use	FUN_00174e0c	piVar3	callResult2	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*piVar3\ =\ \(int\ \*\)\(\(int\ \(\*\)\(\)\)FUN_00174ce0\)\(param_1\[0x8e\],iVar10,param_1\);$	+2
+use	FUN_00174e0c	uVar7	loopIndex3	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*uVar7\ =\ 0;$	+1
+use	FUN_00174e0c	uVar7	loopIndex3	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*if\ \(\(\(int\)\*\(char\ \*\)\(iVar2\ \+\ 0x15c\)\ >>\ \(uVar7\ \&\ 0x3f\)\ \&\ 1U\)\ ==\ 0\)\ \{$	+2
+use	FUN_00174e0c	uVar7	loopIndex3	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar2\ =\ FUN_00179064\(param_1,uVar7\);$	+1
+use	FUN_00174e0c	uVar7	loopIndex3	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*bVar8\ =\ uVar7\ ==\ 3;$	+1
+use	FUN_00174e0c	uVar7	loopIndex3	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*uVar7\ =\ uVar7\ \+\ 1;$	+1
+use	FUN_00174e0c	iVar2	keyInst	INFERRED	param_1[0x2c]: the ValueKey instruction (+0xb0)	^\s*iVar2\ =\ param_1\[0x2c\];$	+1
+use	FUN_00174e0c	iVar2	keyInst	INFERRED	param_1[0x2c]: the ValueKey instruction (+0xb0)	^\s*iVar2\ =\ param_1\[0x2c\];$@2	+2
+use	FUN_00174e0c	iVar2	keyInst	INFERRED	param_1[0x2c]: the ValueKey instruction (+0xb0)	^\s*if\ \(\(\(int\)\*\(char\ \*\)\(iVar2\ \+\ 0x15c\)\ >>\ \(uVar7\ \&\ 0x3f\)\ \&\ 1U\)\ ==\ 0\)\ \{$	+1
+use	FUN_00174e0c	iVar2	keyInst	INFERRED	param_1[0x2c]: the ValueKey instruction (+0xb0)	^\s*iVar2\ =\ param_1\[0x2c\];$@3	+1
+use	FUN_00174e0c	iVar2	keyInst	INFERRED	param_1[0x2c]: the ValueKey instruction (+0xb0)	^\s*iVar2\ =\ FUN_00113090\(\*\(undefined4\ \*\)\(\*\(int\ \*\)\(iVar2\ \+\ 0x88\)\ \+\ 8\),param_1\[0x8e\]\);$	+8
+use	FUN_00174e0c	iVar2	keyInst	INFERRED	param_1[0x2c]: the ValueKey instruction (+0xb0)	^\s*iVar2\ =\ param_1\[0x2c\];$@4	+2
+use	FUN_00174e0c	iVar2	keyInst	INFERRED	param_1[0x2c]: the ValueKey instruction (+0xb0)	^\s*iVar2\ =\ FUN_001054ec\(iVar2,0\);$	+2
+use	FUN_00174e0c	iVar2	keyInst	INFERRED	param_1[0x2c]: the ValueKey instruction (+0xb0)	^\s*iVar2\ =\ param_1\[0x2c\];$@6	+1
+use	FUN_00174e0c	iVar2	keyInst	INFERRED	param_1[0x2c]: the ValueKey instruction (+0xb0)	^\s*iVar2\ =\ param_1\[0x2c\];$@7	+1
+use	FUN_00174e0c	iVar2	keyInst	INFERRED	param_1[0x2c]: the ValueKey instruction (+0xb0)	^\s*iVar2\ =\ FUN_001054ec\(iVar2,0\);$@2	+1
+use	FUN_00174e0c	iVar2	keyInst	INFERRED	param_1[0x2c]: the ValueKey instruction (+0xb0)	^\s*if\ \(\*\(int\ \*\)\(iVar2\ \+\ 0x10\)\ !=\ 0x1010101\)\ \{$	+1
+use	FUN_00174e0c	iVar2	keyInst	INFERRED	param_1[0x2c]: the ValueKey instruction (+0xb0)	^\s*iVar2\ =\ param_1\[0x2c\];$@5	+4
+use	FUN_00174e0c	iVar2	keyInst	INFERRED	param_1[0x2c]: the ValueKey instruction (+0xb0)	^\s*iVar2\ =\ param_1\[0x2c\];$@8	+3
+use	FUN_00174e0c	iVar2	compareFloatsResult	INFERRED	evaluateCompareFloats(inst, constant, 0.0): decides which select source is taken	^\s*iVar2\ =\ \(\(bool\ \(\*\)\(\)\)FUN_0010b820\)\(param_1\[0x2c\],\(double\)local_30,0\.0\);$	+3
+use	FUN_00174e0c	iVar2	compareFloatsResult	INFERRED	evaluateCompareFloats(inst, constant, 0.0): decides which select source is taken	^\s*if\ \(\(\(\(\*\(int\ \*\)\(iVar6\ \+\ 0x120\)\ ==\ 0\)\ \&\&\ \(\*\(int\ \*\)\(iVar6\ \+\ 0x124\)\ ==\ 0\)\)\ \&\&$	+3
+use	FUN_00174e0c	iVar2	compareFloatsResult	INFERRED	evaluateCompareFloats(inst, constant, 0.0): decides which select source is taken	^\s*iVar2\ =\ \(\(bool\ \(\*\)\(\)\)FUN_0010b820\)\(param_1\[0x2c\],\(double\)local_30,0\.0\);$@2	+3
+use	FUN_00174e0c	iVar2	compareFloatsResult	INFERRED	evaluateCompareFloats(inst, constant, 0.0): decides which select source is taken	^\s*if\ \(\(\(\*\(int\ \*\)\(iVar12\ \+\ 0x120\)\ ==\ 0\)\ \&\&\ \(\*\(int\ \*\)\(iVar12\ \+\ 0x124\)\ ==\ 0\)\)\ \&\&$	+3
+use	FUN_00174e0c	piVar11	keyInstPtr	INFERRED	param_1[0x2c]: the ValueKey instruction	^\s*piVar11\ =\ \(int\ \*\)param_1\[0x2c\];$	+1
+use	FUN_00174e0c	piVar11	keyInstPtr	INFERRED	param_1[0x2c]: the ValueKey instruction	^\s*if\ \(\*\(int\ \*\)\(piVar11\[0x22\]\ \+\ 8\)\ ==\ 0x8e\)\ \{$	+2
+use	FUN_00174e0c	piVar11	keyInstPtr	INFERRED	param_1[0x2c]: the ValueKey instruction	^\s*piVar11\ =\ \(int\ \*\)param_1\[0x2c\];$@2	+1
+use	FUN_00174e0c	piVar11	keyInstPtr	INFERRED	param_1[0x2c]: the ValueKey instruction	^\s*iVar2\ =\ FUN_001055cc\(piVar11\);$	+5
+use	FUN_00174e0c	piVar11	laneValuePtr	INFERRED	param_1 (the per-lane value number words [0..3]) advanced one lane at a time	^\s*piVar11\ =\ param_1;$	+1
+use	FUN_00174e0c	piVar11	laneValuePtr	INFERRED	param_1 (the per-lane value number words [0..3]) advanced one lane at a time	^\s*\*piVar11\ =\ \*piVar3;$	+2
+use	FUN_00174e0c	piVar11	laneValuePtr	INFERRED	param_1 (the per-lane value number words [0..3]) advanced one lane at a time	^\s*piVar11\ =\ param_1;$@2	+1
+use	FUN_00174e0c	piVar11	laneValuePtr	INFERRED	param_1 (the per-lane value number words [0..3]) advanced one lane at a time	^\s*\*piVar11\ =\ \*piVar3;$@2	+1
+use	FUN_00174e0c	piVar11	laneValuePtr	INFERRED	param_1 (the per-lane value number words [0..3]) advanced one lane at a time	^\s*piVar11\ =\ piVar11\ \+\ 1;$@2	+1
+use	FUN_00174e0c	piVar11	laneValuePtr	INFERRED	param_1 (the per-lane value number words [0..3]) advanced one lane at a time	^\s*piVar11\ =\ param_1;$@3	+1
+use	FUN_00174e0c	piVar11	laneValuePtr	INFERRED	param_1 (the per-lane value number words [0..3]) advanced one lane at a time	^\s*\*piVar11\ =\ 2;$	+1
+use	FUN_00174e0c	piVar11	laneValuePtr	INFERRED	param_1 (the per-lane value number words [0..3]) advanced one lane at a time	^\s*piVar11\ =\ piVar11\ \+\ 1;$@3	+1
+use	FUN_00174e0c	piVar11	laneValuePtr	INFERRED	param_1 (the per-lane value number words [0..3]) advanced one lane at a time	^\s*piVar11\ =\ param_1;$@4	+1
+use	FUN_00174e0c	piVar11	laneValuePtr	INFERRED	param_1 (the per-lane value number words [0..3]) advanced one lane at a time	^\s*\*piVar11\ =\ 1;$	+2
+use	FUN_00174e0c	piVar11	laneValuePtr	INFERRED	param_1 (the per-lane value number words [0..3]) advanced one lane at a time	^\s*piVar11\ =\ param_1;$@5	+1
+use	FUN_00174e0c	piVar11	laneValuePtr	INFERRED	param_1 (the per-lane value number words [0..3]) advanced one lane at a time	^\s*piVar11\[0x10\]\ =\ \(int\)piVar3;$	+2
+use	FUN_00174e0c	piVar11	laneValuePtr	INFERRED	param_1 (the per-lane value number words [0..3]) advanced one lane at a time	^\s*\*piVar11\ =\ \*\(int\ \*\)\(iVar2\ \+\ 4\);$	+1
+use	FUN_00174e0c	piVar11	laneValuePtr	INFERRED	param_1 (the per-lane value number words [0..3]) advanced one lane at a time	^\s*piVar11\ =\ piVar11\ \+\ 1;$@5	+1
+use	FUN_00174e0c	piVar11	laneValuePtr	INFERRED	param_1 (the per-lane value number words [0..3]) advanced one lane at a time	^\s*piVar11\ =\ param_1;$@6	+1
+use	FUN_00174e0c	piVar11	laneValuePtr	INFERRED	param_1 (the per-lane value number words [0..3]) advanced one lane at a time	^\s*iVar2\ =\ piVar11\[0x5e\];$	+1
+use	FUN_00174e0c	piVar11	laneValuePtr	INFERRED	param_1 (the per-lane value number words [0..3]) advanced one lane at a time	^\s*\*piVar11\ =\ iVar2;$	+1
+use	FUN_00174e0c	piVar11	laneValuePtr	INFERRED	param_1 (the per-lane value number words [0..3]) advanced one lane at a time	^\s*if\ \(\(iVar2\ ==\ 0\)\ \|\|\ \(\-1\ <\ piVar11\[0x5e\]\)\)\ \{$	+3
+use	FUN_00174e0c	piVar11	laneValuePtr	INFERRED	param_1 (the per-lane value number words [0..3]) advanced one lane at a time	^\s*pfVar5\ =\ \(float\ \*\)FUN_00173360\(param_1\[0x8e\],piVar11\[0x5e\]\);$	+1
+use	FUN_00174e0c	piVar11	laneValuePtr	INFERRED	param_1 (the per-lane value number words [0..3]) advanced one lane at a time	^\s*piVar3\ =\ \(int\ \*\)piVar11\[0x10\];$	+4
+use	FUN_00174e0c	piVar11	laneValuePtr	INFERRED	param_1 (the per-lane value number words [0..3]) advanced one lane at a time	^\s*iVar12\ =\ piVar11\[0x5e\];$	+1
+use	FUN_00174e0c	piVar11	laneValuePtr	INFERRED	param_1 (the per-lane value number words [0..3]) advanced one lane at a time	^\s*\*piVar11\ =\ iVar12;$	+1
+use	FUN_00174e0c	piVar11	laneValuePtr	INFERRED	param_1 (the per-lane value number words [0..3]) advanced one lane at a time	^\s*\*piVar11\ =\ iVar12;$@2	+1
+use	FUN_00174e0c	piVar11	laneValuePtr	INFERRED	param_1 (the per-lane value number words [0..3]) advanced one lane at a time	^\s*piVar11\[0x20\]\ =\ iVar2;$	+1
+use	FUN_00174e0c	piVar11	laneValuePtr	INFERRED	param_1 (the per-lane value number words [0..3]) advanced one lane at a time	^\s*piVar11\[0x14\]\ =\ iVar2;$	+1
+use	FUN_00174e0c	piVar11	laneValuePtr	INFERRED	param_1 (the per-lane value number words [0..3]) advanced one lane at a time	^\s*piVar11\ =\ piVar11\ \+\ 1;$@6	+1
+use	FUN_00174e0c	piVar11	laneValuePtr	INFERRED	param_1 (the per-lane value number words [0..3]) advanced one lane at a time	^\s*piVar11\ =\ param_1;$@7	+1
+use	FUN_00174e0c	piVar11	laneValuePtr	INFERRED	param_1 (the per-lane value number words [0..3]) advanced one lane at a time	^\s*piVar11\[0x10\]\ =\ \(param_1\ \+\ iVar9\)\[0x10\];$	+2
+use	FUN_00174e0c	piVar11	laneValuePtr	INFERRED	param_1 (the per-lane value number words [0..3]) advanced one lane at a time	^\s*piVar11\ =\ param_1;$@8	+1
+use	FUN_00174e0c	piVar11	laneValuePtr	INFERRED	param_1 (the per-lane value number words [0..3]) advanced one lane at a time	^\s*piVar11\[0x10\]\ =\ \(param_1\ \+\ iVar9\)\[0x10\];$@2	+2
+use	FUN_00174e0c	piVar11	laneValuePtr	INFERRED	param_1 (the per-lane value number words [0..3]) advanced one lane at a time	^\s*piVar11\ =\ param_1;$@9	+1
+use	FUN_00174e0c	piVar11	laneValuePtr	INFERRED	param_1 (the per-lane value number words [0..3]) advanced one lane at a time	^\s*\*piVar11\ =\ iVar10;$	+4
+use	FUN_00174e0c	piVar11	laneValuePtrAt	INFERRED	param_1 + lane byte offset: the lane value word being filled	^\s*piVar11\ =\ param_1\ \+\ iVar9;$	+3
+use	FUN_00174e0c	piVar11	laneValuePtrAt	INFERRED	param_1 + lane byte offset: the lane value word being filled	^\s*iVar2\ =\ piVar11\[0xc\];$	+1
+use	FUN_00174e0c	piVar11	laneValuePtrAt	INFERRED	param_1 + lane byte offset: the lane value word being filled	^\s*piVar3\[0x10\]\ =\ piVar11\[0x10\];$	+1
+use	FUN_00174e0c	piVar11	laneExprRecord	INFERRED	expression record pointer of a lane (param_1[0x10 + lane])	^\s*piVar11\ =\ \(int\ \*\)\(param_1\ \+\ iVar9\)\[0x10\];$	+4
+use	FUN_00174e0c	piVar11	laneExprRecord	INFERRED	expression record pointer of a lane (param_1[0x10 + lane])	^\s*piVar11\ =\ \(int\ \*\)param_1\[iVar9\ \+\ 0x10\];$	+4
+use	FUN_00174e0c	piVar3	operandLaneKeyPtr	INFERRED	param_1 + operand*4 + 0x5e: lane value of the operand being scanned	^\s*piVar3\ =\ param_1\ \+\ iVar2\ \+\ 0x5e;$	+1
+use	FUN_00174e0c	piVar3	operandLaneKeyPtr	INFERRED	param_1 + operand*4 + 0x5e: lane value of the operand being scanned	^\s*\*piVar11\ =\ \*piVar3;$@2	+1
+use	FUN_00174e0c	piVar3	operandLaneKeyPtr	INFERRED	param_1 + operand*4 + 0x5e: lane value of the operand being scanned	^\s*piVar3\ =\ piVar3\ \+\ 4;$	+1
+use	FUN_00174e0c	piVar3	keyInstPtr2	INFERRED	param_1[0x2c]: the ValueKey instruction	^\s*piVar3\ =\ \(int\ \*\)param_1\[0x2c\];$	+2
+use	FUN_00174e0c	piVar3	keyInstPtr2	INFERRED	param_1[0x2c]: the ValueKey instruction	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*piVar3\ \+\ 100\)\)\(piVar3\);$	+1
+use	FUN_00174e0c	piVar3	laneExprRecord2	INFERRED	expression record pointer of a lane (piVar11[0x10])	^\s*piVar3\ =\ \(int\ \*\)piVar11\[0x10\];$	+4
+use	FUN_00174e0c	piVar3	laneValuePtr2	INFERRED	param_1 advanced one lane at a time	^\s*piVar3\ =\ param_1;$	+1
+use	FUN_00174e0c	piVar3	laneValuePtr2	INFERRED	param_1 advanced one lane at a time	^\s*piVar3\[0x10\]\ =\ piVar11\[0x10\];$	+2
+use	FUN_00174e0c	iVar9	compilerForKey	INFERRED	param_1[0x8e]: compiler/program of the key	^\s*iVar9\ =\ param_1\[0x8e\];$	+3
+use	FUN_00174e0c	iVar9	producerKind	INFERRED	*(inst+0x98): producer kind tested against 2, 0xc, 0x33	^\s*iVar9\ =\ \*\(int\ \*\)\(iVar2\ \+\ 0x98\);$	+2
+use	FUN_00174e0c	iVar9	laneByteOffset	INFERRED	lane index * 4: byte offset into the lane arrays and local_68	^\s*iVar9\ =\ 0;$	+1
+use	FUN_00174e0c	iVar9	laneByteOffset	INFERRED	lane index * 4: byte offset into the lane arrays and local_68	^\s*\*\(undefined4\ \*\)\(\(int\)local_68\ \+\ iVar9\)\ =\ uVar1;$	+1
+use	FUN_00174e0c	iVar9	laneByteOffset	INFERRED	lane index * 4: byte offset into the lane arrays and local_68	^\s*iVar9\ =\ iVar9\ \+\ 4;$	+1
+use	FUN_00174e0c	iVar9	laneByteOffset	INFERRED	lane index * 4: byte offset into the lane arrays and local_68	^\s*iVar9\ =\ 0;$@2	+1
+use	FUN_00174e0c	iVar9	laneByteOffset	INFERRED	lane index * 4: byte offset into the lane arrays and local_68	^\s*iVar9\ =\ FUN_000f30d4\(\*\(undefined4\ \*\)\(iVar2\ \+\ 0x10\)\);$	+1
+use	FUN_00174e0c	iVar9	laneByteOffset	INFERRED	lane index * 4: byte offset into the lane arrays and local_68	^\s*iVar2\ =\ \(param_1\ \+\ iVar9\)\[0xc\];$	+1
+use	FUN_00174e0c	iVar9	laneByteOffset	INFERRED	lane index * 4: byte offset into the lane arrays and local_68	^\s*FUN_00178648\(param_1,iVar9\);$	+2
+use	FUN_00174e0c	iVar9	laneByteOffset	INFERRED	lane index * 4: byte offset into the lane arrays and local_68	^\s*piVar11\[0x10\]\ =\ \(param_1\ \+\ iVar9\)\[0x10\];$	+1
+use	FUN_00174e0c	iVar9	laneByteOffset	INFERRED	lane index * 4: byte offset into the lane arrays and local_68	^\s*\*\(int\ \*\)\(\(int\)local_68\ \+\ iVar2\)\ =\ local_68\[iVar9\];$	+1
+use	FUN_00174e0c	iVar9	laneByteOffset	INFERRED	lane index * 4: byte offset into the lane arrays and local_68	^\s*piVar11\ =\ param_1\ \+\ iVar9;$	+1
+use	FUN_00174e0c	iVar9	laneByteOffset	INFERRED	lane index * 4: byte offset into the lane arrays and local_68	^\s*iVar10\ =\ param_1\[iVar2\ \*\ 4\ \+\ iVar9\ \+\ 0x5a\];$	+1
+use	FUN_00174e0c	iVar9	laneByteOffset	INFERRED	lane index * 4: byte offset into the lane arrays and local_68	^\s*FUN_00178648\(param_1,iVar9\);$@2	+2
+use	FUN_00174e0c	iVar9	laneByteOffset	INFERRED	lane index * 4: byte offset into the lane arrays and local_68	^\s*piVar11\[0x10\]\ =\ \(param_1\ \+\ iVar9\)\[0x10\];$@2	+1
+use	FUN_00174e0c	iVar9	laneByteOffset	INFERRED	lane index * 4: byte offset into the lane arrays and local_68	^\s*\*\(int\ \*\)\(\(int\)local_68\ \+\ iVar10\)\ =\ local_68\[iVar9\];$	+1
+use	FUN_00174e0c	iVar9	laneByteOffset	INFERRED	lane index * 4: byte offset into the lane arrays and local_68	^\s*FUN_00178648\(param_1,iVar9\);$@3	+2
+use	FUN_00174e0c	iVar9	laneByteOffset	INFERRED	lane index * 4: byte offset into the lane arrays and local_68	^\s*\*\(int\ \*\)\(\(int\)local_68\ \+\ iVar2\)\ =\ local_68\[iVar9\];$@2	+1
+use	FUN_00174e0c	iVar9	laneByteOffset	INFERRED	lane index * 4: byte offset into the lane arrays and local_68	^\s*piVar11\ =\ \(int\ \*\)\(param_1\ \+\ iVar9\)\[0x10\];$	+1
+use	FUN_00174e0c	iVar9	laneByteOffset	INFERRED	lane index * 4: byte offset into the lane arrays and local_68	^\s*iVar10\ =\ param_1\[iVar9\ \+\ 0x5e\];$	+1
+use	FUN_00174e0c	iVar9	laneByteOffset	INFERRED	lane index * 4: byte offset into the lane arrays and local_68	^\s*FUN_00178648\(param_1,iVar9\);$@4	+3
+use	FUN_00174e0c	iVar9	laneByteOffset	INFERRED	lane index * 4: byte offset into the lane arrays and local_68	^\s*iVar9\ =\ 0;$@3	+1
+use	FUN_00174e0c	iVar9	laneByteOffset	INFERRED	lane index * 4: byte offset into the lane arrays and local_68	^\s*iVar9\ =\ piVar11\[4\];$	+1
+use	FUN_00174e0c	iVar9	laneByteOffset	INFERRED	lane index * 4: byte offset into the lane arrays and local_68	^\s*iVar9\ =\ 0;$@4	+1
+use	FUN_00174e0c	iVar9	laneByteOffset	INFERRED	lane index * 4: byte offset into the lane arrays and local_68	^\s*iVar9\ =\ 0;$@5	+1
+use	FUN_00174e0c	iVar9	laneByteOffset	INFERRED	lane index * 4: byte offset into the lane arrays and local_68	^\s*iVar9\ =\ FUN_00176f0c\(param_1,iVar10\);$	+1
+use	FUN_00174e0c	iVar9	laneByteOffset	INFERRED	lane index * 4: byte offset into the lane arrays and local_68	^\s*iVar9\ =\ piVar11\[4\];$@2	+1
+use	FUN_00174e0c	iVar9	laneByteOffset	INFERRED	lane index * 4: byte offset into the lane arrays and local_68	^\s*piVar11\[0x14\]\ =\ iVar9;$	+1
+use	FUN_00174e0c	iVar10	valueNumber	INFERRED	*(record+4): value number of the expression record	^\s*iVar10\ =\ \*\(int\ \*\)\(iVar2\ \+\ 4\);$	+1
+use	FUN_00174e0c	iVar10	valueNumber	INFERRED	*(record+4): value number of the expression record	^\s*iVar10\ =\ param_1\[iVar2\ \*\ 4\ \+\ iVar9\ \+\ 0x5a\];$	+2
+use	FUN_00174e0c	iVar10	valueNumber	INFERRED	*(record+4): value number of the expression record	^\s*puVar4\ =\ \(undefined4\ \*\)FUN_00173360\(param_1\[0x8e\],iVar10\);$	+1
+use	FUN_00174e0c	iVar10	valueNumber	INFERRED	*(record+4): value number of the expression record	^\s*iVar10\ =\ \*piVar11;$	+1
+use	FUN_00174e0c	iVar10	valueNumber	INFERRED	*(record+4): value number of the expression record	^\s*iVar10\ =\ param_1\[iVar9\ \+\ 0x5e\];$	+2
+use	FUN_00174e0c	iVar10	valueNumber	INFERRED	*(record+4): value number of the expression record	^\s*puVar4\ =\ \(undefined4\ \*\)FUN_00173360\(param_1\[0x8e\],iVar10\);$@2	+1
+use	FUN_00174e0c	iVar10	valueNumber	INFERRED	*(record+4): value number of the expression record	^\s*iVar10\ =\ \*\(int\ \*\)\(iVar2\ \+\ 4\);$@2	+1
+use	FUN_00174e0c	iVar10	valueNumber	INFERRED	*(record+4): value number of the expression record	^\s*iVar2\ =\ FUN_00176ed4\(param_1,iVar10\);$	+2
+use	FUN_00174e0c	iVar10	valueNumber	INFERRED	*(record+4): value number of the expression record	^\s*iVar10\ =\ \*piVar11;$@2	+1
+use	FUN_00174e0c	iVar10	valueNumber	INFERRED	*(record+4): value number of the expression record	^\s*\*piVar11\ =\ iVar10;$	+1
+use	FUN_00174e0c	iVar10	laneIdx	INFERRED	lane index 0..3	^\s*iVar10\ =\ 0;$@2	+1
+use	FUN_00174e0c	iVar10	laneIdx	INFERRED	lane index 0..3	^\s*\*\(int\ \*\)\(\(int\)local_68\ \+\ iVar10\)\ =\ local_68\[iVar9\];$	+2
+use	FUN_00174e0c	iVar12	selectedValueNumber	INFERRED	param_1[select*4 + lane + 0x5a]: value number of the compare-selected source	^\s*iVar12\ =\ param_1\[iVar2\ \*\ 4\ \+\ iVar10\ \+\ 0x5a\];$	+3
+use	FUN_00174e0c	iVar12	selectedValueNumber	INFERRED	param_1[select*4 + lane + 0x5a]: value number of the compare-selected source	^\s*iVar12\ =\ piVar11\[0x5e\];$	+3
+use	FUN_00174e0c	iVar12	selectedValueNumber	INFERRED	param_1[select*4 + lane + 0x5a]: value number of the compare-selected source	^\s*\*piVar11\ =\ iVar12;$@2	+2
+use	FUN_00174e0c	iVar12	selectedValueNumber	INFERRED	param_1[select*4 + lane + 0x5a]: value number of the compare-selected source	^\s*iVar2\ =\ FUN_00176f0c\(param_1,iVar12\);$	+1
+use	FUN_00174e0c	iVar12	clampedValue	INFERRED	IRInst__clampOutputValue result	^\s*iVar12\ =\ local_3c\[0\];$	+1
+use	FUN_00174e0c	iVar12	clampedValue	INFERRED	IRInst__clampOutputValue result	^\s*iVar12\ =\ local_44;$	+1
+use	FUN_00174e0c	iVar12	clampedValue	INFERRED	IRInst__clampOutputValue result	^\s*iVar2\ =\ iVar12;$	+1
+use	FUN_00174e0c	iVar12	recordValueNumber	INFERRED	*(record+4): value number of the expression record	^\s*iVar12\ =\ \*\(int\ \*\)\(iVar2\ \+\ 4\);$	+1
+use	FUN_00174e0c	iVar12	recordValueNumber	INFERRED	*(record+4): value number of the expression record	^\s*\*piVar11\ =\ iVar12;$	+1
+use	FUN_00174e0c	iVar12	keyInstB	INFERRED	param_1[0x2c]: the ValueKey instruction	^\s*iVar12\ =\ param_1\[0x2c\];$	+4
+use	FUN_00174e0c	uVar7	operandModifierBits	INFERRED	*(inst + operand*0x18 + 0xa0): negate/abs bits of the operand	^\s*if\ \(\(\(\(\*\(int\ \*\)\(iVar6\ \+\ 0x120\)\ ==\ 0\)\ \&\&\ \(\*\(int\ \*\)\(iVar6\ \+\ 0x124\)\ ==\ 0\)\)\ \&\&$	+3
+use	FUN_00174e0c	uVar7	operandModifierBits	INFERRED	*(inst + operand*0x18 + 0xa0): negate/abs bits of the operand	^\s*if\ \(\(\(\*\(int\ \*\)\(iVar12\ \+\ 0x120\)\ ==\ 0\)\ \&\&\ \(\*\(int\ \*\)\(iVar12\ \+\ 0x124\)\ ==\ 0\)\)\ \&\&$	+3
+local	FUN_00174e0c	iVar6	keyInstC	INFERRED	param_1[0x2c]: the ValueKey instruction
+use	FUN_00174e0c	uVar1	clampChanged	INFERRED	0, set to 1 when the clamped value differs from the scaled value; stored into local_68	^\s*uVar1\ =\ 0;$	+1
+use	FUN_00174e0c	uVar1	clampChanged	INFERRED	0, set to 1 when the clamped value differs from the scaled value; stored into local_68	^\s*uVar1\ =\ 1;$	+1
+use	FUN_00174e0c	uVar1	clampChanged	INFERRED	0, set to 1 when the clamped value differs from the scaled value; stored into local_68	^\s*\*\(undefined4\ \*\)\(\(int\)local_68\ \+\ iVar9\)\ =\ uVar1;$	+1
+local	FUN_00174e0c	local_68	laneFlags	INFERRED	per-lane clamp-changed flags [0..3] (initialised 1), [4] scalar value
+local	FUN_00174e0c	local_40	scaledValueA	INFERRED	IRInst__scaleByOutputScale out
+local	FUN_00174e0c	local_3c	clampedValueA	INFERRED	IRInst__clampOutputValue out
+local	FUN_00174e0c	local_48	scaledValueB	INFERRED	IRInst__scaleByOutputScale out
+local	FUN_00174e0c	local_44	clampedValueB	INFERRED	IRInst__clampOutputValue out
+local	FUN_00174e0c	local_50	scaledValueC	INFERRED	IRInst__scaleByOutputScale out
+local	FUN_00174e0c	local_4c	clampedValueC	INFERRED	IRInst__clampOutputValue out
+local	FUN_00174e0c	local_54	clampedValueD	INFERRED	IRInst__clampOutputValue out for local_68[4]
+local	FUN_00174e0c	local_30	constantValue	INFERRED	float read from the expression record, compared against 0.0
+use	FUN_00174e0c	iVar2	callResult4	INFERRED	FUN_001055cc(piVar11) result	^\s*iVar2\ =\ FUN_001055cc\(piVar11\);$	+5
+use	FUN_00174e0c	iVar2	exprRecordWord	INFERRED	*piVar3: first word of the lane expression record (value number)	^\s*iVar2\ =\ \*piVar3;$	+1
+use	FUN_00174e0c	iVar2	exprRecordWord	INFERRED	*piVar3: first word of the lane expression record (value number)	^\s*iVar2\ =\ piVar11\[0x5e\];$	+1
+use	FUN_00174e0c	iVar2	exprRecordWord	INFERRED	*piVar3: first word of the lane expression record (value number)	^\s*\*piVar11\ =\ iVar2;$	+1
+use	FUN_00174e0c	iVar2	scaledValueCopy	INFERRED	local_40 (scaled output value) kept across the clamp call	^\s*iVar2\ =\ local_40;$	+1
+use	FUN_00174e0c	iVar2	scaledValueCopy	INFERRED	local_40 (scaled output value) kept across the clamp call	^\s*if\ \(local_3c\[0\]\ !=\ iVar2\)\ goto\ LAB_001756e4;$	+1
+use	FUN_00174e0c	iVar2	scaledValueCopy	INFERRED	local_40 (scaled output value) kept across the clamp call	^\s*iVar2\ =\ local_48;$	+1
+use	FUN_00174e0c	iVar2	scaledValueCopy	INFERRED	local_40 (scaled output value) kept across the clamp call	^\s*if\ \(local_44\ !=\ iVar2\)\ \{$	+1
+use	FUN_00174e0c	iVar2	scaledValueCopy	INFERRED	local_40 (scaled output value) kept across the clamp call	^\s*iVar2\ =\ iVar12;$	+1
+use	FUN_00174e0c	iVar2	scaledValueCopy	INFERRED	local_40 (scaled output value) kept across the clamp call	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)FUN_00173e10\)\(param_1\[0x8e\],iVar2\);$	+2
+use	FUN_00174e0c	iVar2	laneConstRecord	INFERRED	(param_1 + lane)[0xc]: constant expression record of the lane	^\s*iVar2\ =\ \(param_1\ \+\ iVar9\)\[0xc\];$	+2
+use	FUN_00174e0c	iVar2	laneConstRecord	INFERRED	(param_1 + lane)[0xc]: constant expression record of the lane	^\s*iVar10\ =\ \*\(int\ \*\)\(iVar2\ \+\ 4\);$	+1
+use	FUN_00174e0c	iVar2	laneConstRecord	INFERRED	(param_1 + lane)[0xc]: constant expression record of the lane	^\s*iVar2\ =\ piVar11\[0xc\];$	+2
+use	FUN_00174e0c	iVar2	laneCounter	INFERRED	lane/operand counter 0..	^\s*iVar2\ =\ 0;$@4	+1
+use	FUN_00174e0c	iVar2	laneCounter	INFERRED	lane/operand counter 0..	^\s*iVar2\ =\ piVar11\[3\];$	+1
+use	FUN_00174e0c	iVar2	laneCounter	INFERRED	lane/operand counter 0..	^\s*iVar2\ =\ 0;$@7	+1
+use	FUN_00174e0c	iVar2	laneCounter	INFERRED	lane/operand counter 0..	^\s*iVar2\ =\ 0;$@8	+1
+use	FUN_00174e0c	iVar2	laneCounter	INFERRED	lane/operand counter 0..	^\s*iVar2\ =\ FUN_00176ed4\(param_1,iVar10\);$	+1
+use	FUN_00174e0c	iVar2	laneCounter	INFERRED	lane/operand counter 0..	^\s*iVar2\ =\ piVar11\[3\];$@2	+1
+use	FUN_00174e0c	iVar2	laneCounter	INFERRED	lane/operand counter 0..	^\s*piVar11\[0x20\]\ =\ iVar2;$@2	+1
+use	FUN_00174e0c	iVar2	laneCounter	INFERRED	lane/operand counter 0..	^\s*iVar2\ =\ 0;$@5	+1
+use	FUN_00174e0c	iVar2	laneCounter	INFERRED	lane/operand counter 0..	^\s*\*\(int\ \*\)\(\(int\)local_68\ \+\ iVar2\)\ =\ local_68\[iVar9\];$	+2
+use	FUN_00174e0c	iVar2	laneCounter	INFERRED	lane/operand counter 0..	^\s*iVar2\ =\ 0;$@6	+1
+use	FUN_00174e0c	iVar2	laneCounter	INFERRED	lane/operand counter 0..	^\s*\*\(int\ \*\)\(\(int\)local_68\ \+\ iVar2\)\ =\ local_68\[iVar9\];$@2	+2
+use	FUN_00174e0c	iVar10	operandIndex	INFERRED	operand index 1..operand count	^\s*iVar10\ =\ 1;$	+1
+use	FUN_00174e0c	iVar10	operandIndex	INFERRED	operand index 1..operand count	^\s*iVar9\ =\ FUN_001054ec\(iVar9,iVar10\);$	+1
+use	FUN_00174e0c	iVar10	operandIndex	INFERRED	operand index 1..operand count	^\s*iVar10\ =\ iVar10\ \+\ 1;$	+1
+use	FUN_00174e0c	iVar10	operandIndex	INFERRED	operand index 1..operand count	^\s*\}\ while\ \(iVar10\ <=\ \*\(int\ \*\)\(iVar9\ \+\ 0x84\)\);$	+1
+use	FUN_00174e0c	bVar8	laneClamped	INFERRED	false, set when the clamped value differs from the scaled value	^\s*bVar8\ =\ false;$	+1
+use	FUN_00174e0c	bVar8	laneClamped	INFERRED	false, set when the clamped value differs from the scaled value	^\s*bVar8\ =\ false;$@2	+1
+use	FUN_00174e0c	bVar8	laneClamped	INFERRED	false, set when the clamped value differs from the scaled value	^\s*bVar8\ =\ true;$	+1
+use	FUN_00174e0c	bVar8	laneClamped	INFERRED	false, set when the clamped value differs from the scaled value	^\s*if\ \(\(\*\(int\ \*\)\(param_1\[0x2c\]\ \+\ 0x120\)\ ==\ 0\)\ \|\|\ \(bVar8\)\)\ \{$	+1

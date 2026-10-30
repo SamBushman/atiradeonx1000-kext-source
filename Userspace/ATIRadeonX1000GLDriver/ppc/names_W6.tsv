@@ -42,12 +42,6 @@ local	FUN_0017494c	puVar9	loopPtr2	INFERRED	rule R1: incremented by 1 inside a l
 local	FUN_00174b04	param_1	ctx	INFERRED	rule R3: param_1 is dereferenced at +0xb0 and +0x238 (the shared per-context layout used across this family)
 local	FUN_00174b04	iVar10	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_00174b04	uVar6	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_00174e0c	iVar10	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_00174e0c	iVar12	loopRemaining	INFERRED	rule R1: decremented by 1 inside a loop
-local	FUN_00174e0c	iVar2	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_00174e0c	piVar11	loopPtr3	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_00174e0c	piVar3	loopPtr4	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_00174e0c	uVar7	loopIndex5	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_001758d8	iVar7	loopRemaining	INFERRED	rule R1: decremented by 1 inside a loop
 local	FUN_001758d8	puVar2	loopPtr	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_00175b40	iVar4	loopRemaining	INFERRED	rule R1: decremented by 1 inside a loop
