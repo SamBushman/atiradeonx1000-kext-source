@@ -1495,7 +1495,7 @@ extern int IREndCallRoutine__acceptCallPseudo();
 extern int IRStartMakeCall__acceptCallPseudo();
 extern int IREndMakeCall__acceptCallPseudo();
 extern int IRInst__hasSourceWithKey();
-extern int FUN_000e2b68();
+extern int IRInst__foldConstantSourceSwizzle();
 extern int FUN_000e2bf4();
 extern int ConstRecord__emitStores();
 extern int EncoderState__emitInstruction();

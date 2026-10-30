@@ -104,13 +104,13 @@ int Program__registerFileOfIlType(program, ilRegisterType)
   int program;
   int ilRegisterType;
 {
-  int iVar1;
+  int registerFile;
   
-  iVar1 = *(int *)(ilRegisterType * 8 + *(int *)(*(int *)(*(int *)(program + 8) + 0x30c) + 4) + 4);
-  if (iVar1 == -1) {
+  registerFile = *(int *)(ilRegisterType * 8 + *(int *)(*(int *)(*(int *)(program + 8) + 0x30c) + 4) + 4);
+  if (registerFile == -1) {
     Compiler__fail(*(int *)(program + 8),0xf);
   }
-  return iVar1;
+  return registerFile;
 }
 
 /* Program__interpSlotOfIlType @ 0xec258 (36 bytes) */
@@ -138,11 +138,11 @@ int Program__laneKindOfInterpSlot(program, interpSlot)
 }
 
 /* Table__interpolatorKindToCode @ 0xec2c4 (36 bytes) */
-int Table__interpolatorKindToCode(unusedArg1, param_2)
+int Table__interpolatorKindToCode(unusedArg1, kind)
   undefined4 unusedArg1;
-  int param_2;
+  int kind;
 {
-  return *(undefined4 *)(PTR_DAT_001e8b60 + param_2 * 4);
+  return *(undefined4 *)(PTR_DAT_001e8b60 + kind * 4);
 }
 
 /* Program__freeWorkArrays @ 0xec2e8 (136 bytes) */
@@ -577,14 +577,14 @@ int Program__insertMovAfter(program, newSource, afterInst, destRegisterOffset, d
   int *newMov;
   int sourceBlock;
   int *scanInst;
-  int local_28 [2];
+  int clearedSelect [2];
   
   newMov = (int *)IRMov__new_1084b8(0x31,*(undefined4 *)(program + 8));
   IRInst__setOperandSource(newMov,1,newSource,0,*(undefined4 *)(program + 8));
   IRInst__setHardwareRegisterAndAdd(newMov,program,destRegisterOffset,destRegister);
   (**(code **)(*newMov + 0x94))(newMov,afterInst,*(undefined4 *)(program + 8));
-  SelectWord__clearReadComponents(local_28,sourceSelectWord);
-  newMov[0x27] = local_28[0];
+  SelectWord__clearReadComponents(clearedSelect,sourceSelectWord);
+  newMov[0x27] = clearedSelect[0];
   operandRecord = IRInst__getOperandRecord(newMov,1);
   *(undefined4 *)(operandRecord + 0x10) = sourceSelectWord;
   sourceBlock = newSource[0x56];
@@ -4289,7 +4289,7 @@ int SelectWord__firstUsedComponent(selectWord)
   undefined4 selectWord;
 {
   unsigned int ghidra_home[8] = { selectWord, 0, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
-  char *pcVar1;
+  char *laneCursor;
   int loopCounter;
   int loopCounterB;
   
@@ -4297,13 +4297,13 @@ int SelectWord__firstUsedComponent(selectWord)
   ((int (*)())SelectWord__isSplat)(selectWord);
   loopCounterB = 4;
   loopCounter = 0;
-  pcVar1 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 0));
+  laneCursor = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 0));
   do {
-    if (*pcVar1 != '\x04') {
+    if (*laneCursor != '\x04') {
       return (uint)*(byte *)((int)&(*(unsigned int *)((unsigned char *)ghidra_home + 0)) + loopCounter);
     }
     loopCounter = loopCounter + 1;
-    pcVar1 = pcVar1 + 1;
+    laneCursor = laneCursor + 1;
     loopCounterB = loopCounterB + -1;
   } while (loopCounterB != 0);
   return 0xffffffff;

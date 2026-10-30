@@ -2182,7 +2182,7 @@ int Block__successorIndex(block, successor)
   int block;
   int successor;
 {
-  int iVar1;
+  int listEntry;
   int loopCounter;
   uint loopIndex;
   int loopCounterB;
@@ -2194,9 +2194,9 @@ int Block__successorIndex(block, successor)
     if (*(uint *)(*(int *)(block + 0xd0) + 4) < loopIndex) {
       return -1;
     }
-    iVar1 = *(int *)(*(int *)(*(int *)(block + 0xd0) + 8) + loopCounterB);
-    if (iVar1 != 0) {
-      if (iVar1 == successor) {
+    listEntry = *(int *)(*(int *)(*(int *)(block + 0xd0) + 8) + loopCounterB);
+    if (listEntry != 0) {
+      if (listEntry == successor) {
         return loopCounter;
       }
       loopCounter = loopCounter + 1;

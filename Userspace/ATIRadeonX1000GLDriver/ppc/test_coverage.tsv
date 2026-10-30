@@ -1289,7 +1289,7 @@
 0xe2a8c	IRStartMakeCall__acceptCallPseudo	28	yes	
 0xe2aa8	IREndMakeCall__acceptCallPseudo	28	yes	
 0xe2acc	IRInst__hasSourceWithKey	156	no	indirect call (driver context / vtable / callback)
-0xe2b68	FUN_000e2b68	140	no	indirect call (driver context / vtable / callback)
+0xe2b68	IRInst__foldConstantSourceSwizzle	140	no	indirect call (driver context / vtable / callback)
 0xe2bf4	FUN_000e2bf4	132	no	indirect call (driver context / vtable / callback)
 0xe2c78	ConstRecord__emitStores	620	yes	
 0xe2ee4	EncoderState__emitInstruction	32	yes	

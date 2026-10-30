@@ -1289,7 +1289,7 @@
 0xe2a8c	28	IRStartMakeCall__acceptCallPseudo	part_021	converted
 0xe2aa8	28	IREndMakeCall__acceptCallPseudo	part_021	converted
 0xe2acc	156	IRInst__hasSourceWithKey	part_021	converted
-0xe2b68	140	FUN_000e2b68	part_021	converted
+0xe2b68	140	IRInst__foldConstantSourceSwizzle	part_021	converted
 0xe2bf4	132	FUN_000e2bf4	part_021	converted
 0xe2c78	620	ConstRecord__emitStores	part_021	converted
 0xe2ee4	32	EncoderState__emitInstruction	part_021	converted

@@ -887,13 +887,13 @@ int IfFooterStatic__accept(this, traversal)
   int this;
   int traversal;
 {
-  undefined4 uVar1;
+  undefined4 footerWord;
   
-  uVar1 = *(undefined4 *)(this + 0xdc);
+  footerWord = *(undefined4 *)(this + 0xdc);
   (**(code **)(**(int **)(traversal + 0x20) + 0x74))(*(int **)(traversal + 0x20),traversal);
                     
                     
-  (**(code **)(**(int **)(traversal + 0x20) + 0x34))(*(int **)(traversal + 0x20),this + 0x90,uVar1);
+  (**(code **)(**(int **)(traversal + 0x20) + 0x34))(*(int **)(traversal + 0x20),this + 0x90,footerWord);
   return;
 }
 
@@ -997,23 +997,23 @@ int IRInst__hasSourceWithKey(inst, wantedKey, compiler)
   return 1;
 }
 
-/* FUN_000e2b68 @ 0xe2b68 (140 bytes) */
-int FUN_000e2b68(inst, operandIndex)
+/* IRInst__foldConstantSourceSwizzle @ 0xe2b68 (140 bytes) */
+int IRInst__foldConstantSourceSwizzle(inst, operandIndex)
   undefined4 inst;
   undefined4 operandIndex;
 {
   int operandRecord;
-  int *a0;
-  int iVar1;
-  undefined4 local_18 [2];
+  int *sourceVReg;
+  int isConstantSource;
+  undefined4 composedSelect [2];
   
-  a0 = (int *)IRInst__getOperandSource(inst,operandIndex);
-  iVar1 = (**(code **)(*a0 + 0x48))(a0);
-  if ((iVar1 != 0) && (a0[0x26] == 0xc)) {
+  sourceVReg = (int *)IRInst__getOperandSource(inst,operandIndex);
+  isConstantSource = (**(code **)(*sourceVReg + 0x48))(sourceVReg);
+  if ((isConstantSource != 0) && (sourceVReg[0x26] == 0xc)) {
     operandRecord = IRInst__getOperandRecord(inst,operandIndex);
-    SelectWord__compose(local_18,a0[0x55],*(undefined4 *)(operandRecord + 0x10));
+    SelectWord__compose(composedSelect,sourceVReg[0x55],*(undefined4 *)(operandRecord + 0x10));
     operandRecord = IRInst__getOperandRecord(inst,operandIndex);
-    *(undefined4 *)(operandRecord + 0x10) = local_18[0];
+    *(undefined4 *)(operandRecord + 0x10) = composedSelect[0];
   }
   return;
 }
@@ -1200,11 +1200,11 @@ int IRInst__lastSourceKeyEquals(inst, key, compiler)
   int compiler;
 {
   undefined4 operandVReg;
-  int iVar2;
+  int lastSourceKey;
   
   operandVReg = IRInst__getOperandSource(inst,*(undefined4 *)(inst + 0x84));
-  iVar2 = thunk_FUN_00134de8(*(undefined4 *)(compiler + 0x6c4),operandVReg);
-  return iVar2 == key;
+  lastSourceKey = thunk_FUN_00134de8(*(undefined4 *)(compiler + 0x6c4),operandVReg);
+  return lastSourceKey == key;
 }
 
 /* MachineAssembler__vslot34_declareDestinationLanesByClass @ 0xe2fd8 (360 bytes) */

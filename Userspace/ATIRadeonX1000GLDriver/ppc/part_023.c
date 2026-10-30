@@ -623,7 +623,7 @@ int IfHeader__ctor_ea530(this, compiler)
 {
   undefined4 *allocation;
   undefined4 arena;
-  undefined4 *puVar3;
+  undefined4 *mergeBlock;
   
   ((int (*)())Block__ctor_ea148)(this,compiler);
   *this = &PTR_FUN_001e9cc0;
@@ -635,11 +635,11 @@ int IfHeader__ctor_ea530(this, compiler)
   this[0x51] = 1;
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x130);
-  puVar3 = allocation + 1;
+  mergeBlock = allocation + 1;
   *allocation = arena;
-  ((int (*)())Block__ctor_ea020)(puVar3,compiler);
-  this[0x4d] = puVar3;
-  return Block__connect(this,puVar3);
+  ((int (*)())Block__ctor_ea020)(mergeBlock,compiler);
+  this[0x4d] = mergeBlock;
+  return Block__connect(this,mergeBlock);
 }
 
 /* IfHeader__ctor_ea600 @ 0xea600 (140 bytes) */
@@ -649,7 +649,7 @@ int IfHeader__ctor_ea600(this, compiler)
 {
   undefined4 *allocation;
   undefined4 arena;
-  undefined4 *puVar3;
+  undefined4 *mergeBlock;
   
   ((int (*)())Block__ctor_ea148)(this,compiler);
   *this = &PTR_FUN_001e9cc0;
@@ -661,11 +661,11 @@ int IfHeader__ctor_ea600(this, compiler)
   this[0x51] = 1;
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x130);
-  puVar3 = allocation + 1;
+  mergeBlock = allocation + 1;
   *allocation = arena;
-  ((int (*)())Block__ctor_ea020)(puVar3,compiler);
-  this[0x4d] = puVar3;
-  return Block__connect(this,puVar3);
+  ((int (*)())Block__ctor_ea020)(mergeBlock,compiler);
+  this[0x4d] = mergeBlock;
+  return Block__connect(this,mergeBlock);
 }
 
 /* IfHeader__ctor_ea6d0 @ 0xea6d0 (268 bytes) */
@@ -846,15 +846,15 @@ int BreakOrContinueBlock__ctor_eac08(this, source)
   undefined4 *this;
   int source;
 {
-  undefined *puVar1;
-  undefined4 uVar2;
+  undefined *vtablePtr;
+  undefined4 copiedField0x12c;
   
   ((int (*)())Block__ctor_e9f00)(this,source);
-  uVar2 = *(undefined4 *)(source + 300);
-  puVar1 = PTR_DAT_001e8b54 + 8;
+  copiedField0x12c = *(undefined4 *)(source + 300);
+  vtablePtr = PTR_DAT_001e8b54 + 8;
   this[0x4c] = *(undefined4 *)(source + 0x130);
-  *this = puVar1;
-  this[0x4b] = uVar2;
+  *this = vtablePtr;
+  this[0x4b] = copiedField0x12c;
   return;
 }
 
@@ -863,15 +863,15 @@ int BreakOrContinueBlock__ctor_eac60(this, source)
   undefined4 *this;
   int source;
 {
-  undefined *puVar1;
-  undefined4 uVar2;
+  undefined *vtablePtr;
+  undefined4 copiedField0x12c;
   
   ((int (*)())Block__ctor_e9f00)(this,source);
-  uVar2 = *(undefined4 *)(source + 300);
-  puVar1 = PTR_DAT_001e8b54 + 8;
+  copiedField0x12c = *(undefined4 *)(source + 300);
+  vtablePtr = PTR_DAT_001e8b54 + 8;
   this[0x4c] = *(undefined4 *)(source + 0x130);
-  *this = puVar1;
-  this[0x4b] = uVar2;
+  *this = vtablePtr;
+  this[0x4b] = copiedField0x12c;
   return;
 }
 

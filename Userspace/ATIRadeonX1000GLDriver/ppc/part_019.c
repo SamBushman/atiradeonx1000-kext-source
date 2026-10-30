@@ -3638,7 +3638,7 @@ int ildisPrintTexelOffsets(disassembler, offsetsWord, passThroughR5, fmtArgR6, f
 {
   undefined4 integerBitsArg;
   undefined4 fractionBitsArg;
-  double dVar3;
+  double printResult;
   double staleFpr2;
   double staleFpr3;
   double staleFpr4;
@@ -3651,22 +3651,22 @@ int ildisPrintTexelOffsets(disassembler, offsetsWord, passThroughR5, fmtArgR6, f
   double staleStackArg_ffffffb8;
   double staleStackArg_ffffffc0;
   
-  dVar3 = (double)((int (*)())ildisAppendf)(disassembler,"_xoffset(",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+  printResult = (double)((int (*)())ildisAppendf)(disassembler,"_xoffset(",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
   integerBitsArg = 7;
   fractionBitsArg = 1;
-  ((void (*)())ildisPrintFixedPoint)(disassembler,offsetsWord & 0xff,7,1,dVar3,staleFpr2,staleFpr3,staleFpr4,staleFpr5,staleFpr6,staleFpr7,staleFpr8,
+  ((void (*)())ildisPrintFixedPoint)(disassembler,offsetsWord & 0xff,7,1,printResult,staleFpr2,staleFpr3,staleFpr4,staleFpr5,staleFpr6,staleFpr7,staleFpr8,
                staleStackArg_ffffffa8,staleStackArg_ffffffb0,staleStackArg_ffffffb8,staleStackArg_ffffffc0);
   ((int (*)())ildisAppendf)(disassembler,")",integerBitsArg,fractionBitsArg,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
-  dVar3 = (double)((int (*)())ildisAppendf)(disassembler,"_yoffset(",integerBitsArg,fractionBitsArg,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+  printResult = (double)((int (*)())ildisAppendf)(disassembler,"_yoffset(",integerBitsArg,fractionBitsArg,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
   integerBitsArg = 7;
   fractionBitsArg = 1;
-  ((void (*)())ildisPrintFixedPoint)(disassembler,offsetsWord >> 8 & 0xff,7,1,dVar3,staleFpr2,staleFpr3,staleFpr4,staleFpr5,staleFpr6,staleFpr7,staleFpr8,
+  ((void (*)())ildisPrintFixedPoint)(disassembler,offsetsWord >> 8 & 0xff,7,1,printResult,staleFpr2,staleFpr3,staleFpr4,staleFpr5,staleFpr6,staleFpr7,staleFpr8,
                staleStackArg_ffffffa8,staleStackArg_ffffffb0,staleStackArg_ffffffb8,staleStackArg_ffffffc0);
   ((int (*)())ildisAppendf)(disassembler,")",integerBitsArg,fractionBitsArg,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
-  dVar3 = (double)((int (*)())ildisAppendf)(disassembler,"_zoffset(",integerBitsArg,fractionBitsArg,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+  printResult = (double)((int (*)())ildisAppendf)(disassembler,"_zoffset(",integerBitsArg,fractionBitsArg,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
   integerBitsArg = 7;
   fractionBitsArg = 1;
-  ((void (*)())ildisPrintFixedPoint)(disassembler,offsetsWord >> 0x10 & 0xff,7,1,dVar3,staleFpr2,staleFpr3,staleFpr4,staleFpr5,staleFpr6,staleFpr7,staleFpr8,
+  ((void (*)())ildisPrintFixedPoint)(disassembler,offsetsWord >> 0x10 & 0xff,7,1,printResult,staleFpr2,staleFpr3,staleFpr4,staleFpr5,staleFpr6,staleFpr7,staleFpr8,
                staleStackArg_ffffffa8,staleStackArg_ffffffb0,staleStackArg_ffffffb8,staleStackArg_ffffffc0);
   ((int (*)())ildisAppendf)(disassembler,")",integerBitsArg,fractionBitsArg,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
   return;

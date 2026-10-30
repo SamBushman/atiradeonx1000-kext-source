@@ -259,20 +259,20 @@ int SelectWord__firstWrittenComponent(selectWord)
   undefined4 selectWord;
 {
   unsigned int ghidra_home[8] = { selectWord, 0, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
-  char *pcVar1;
+  char *laneCursor;
   int loopCounter;
   int loopCounterB;
   
   (*(unsigned int *)((unsigned char *)ghidra_home + 0)) = selectWord;
   loopCounterB = 4;
   loopCounter = 0;
-  pcVar1 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 0));
+  laneCursor = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 0));
   do {
-    if (*pcVar1 != '\x01') {
+    if (*laneCursor != '\x01') {
       return loopCounter;
     }
     loopCounter = loopCounter + 1;
-    pcVar1 = pcVar1 + 1;
+    laneCursor = laneCursor + 1;
     loopCounterB = loopCounterB + -1;
   } while (loopCounterB != 0);
   return -1;
@@ -283,20 +283,20 @@ int SelectWord__firstUnwrittenComponent(selectWord)
   undefined4 selectWord;
 {
   unsigned int ghidra_home[8] = { selectWord, 0, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
-  char *pcVar1;
+  char *laneCursor;
   int loopCounter;
   int loopCounterB;
   
   (*(unsigned int *)((unsigned char *)ghidra_home + 0)) = selectWord;
   loopCounterB = 4;
   loopCounter = 0;
-  pcVar1 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 0));
+  laneCursor = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 0));
   do {
-    if (*pcVar1 == '\x01') {
+    if (*laneCursor == '\x01') {
       return loopCounter;
     }
     loopCounter = loopCounter + 1;
-    pcVar1 = pcVar1 + 1;
+    laneCursor = laneCursor + 1;
     loopCounterB = loopCounterB + -1;
   } while (loopCounterB != 0);
   return -1;
@@ -653,18 +653,18 @@ int WriteMask__fromUsedLanes(result, selectWord)
   undefined4 selectWord;
 {
   unsigned int ghidra_home[8] = { result, selectWord, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
-  char *pcVar1;
+  char *laneCursor;
   int loopCounter;
   
   (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = selectWord;
-  pcVar1 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 4));
+  laneCursor = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 4));
   loopCounter = 4;
   *result = DAT_001aa838;
   do {
-    if (*pcVar1 != '\x04') {
+    if (*laneCursor != '\x04') {
       *(undefined1 *)result = 0;
     }
-    pcVar1 = pcVar1 + 1;
+    laneCursor = laneCursor + 1;
     result = (undefined4 *)((int)result + 1);
     loopCounter = loopCounter + -1;
   } while (loopCounter != 0);
@@ -864,7 +864,7 @@ int FUN_000f39d0(outMask, param_2)
 int IRInst__countWrittenComponents(inst)
   undefined4 inst;
 {
-  bool bVar1;
+  bool notLastLane;
   int operandRecord;
   int loopCounter;
   int loopCounterB;
@@ -876,9 +876,9 @@ int IRInst__countWrittenComponents(inst)
     if (*(char *)(loopCounterB + operandRecord + 0x10) != '\x01') {
       loopCounter = loopCounter + 1;
     }
-    bVar1 = loopCounterB != 3;
+    notLastLane = loopCounterB != 3;
     loopCounterB = loopCounterB + 1;
-  } while (bVar1);
+  } while (notLastLane);
   return loopCounter;
 }
 
@@ -886,17 +886,17 @@ int IRInst__countWrittenComponents(inst)
 int FUN_000f3a90(inst)
   undefined4 inst;
 {
-  uint uVar1;
+  uint destSelect;
   int operandRecord;
-  undefined4 uVar3;
+  undefined4 result;
   
   operandRecord = IRInst__getOperandRecord(inst,0);
-  uVar1 = *(uint *)(operandRecord + 0x10);
-  if (((uVar1 >> 0x18 == 0) || ((uVar1 >> 0x10 & 0xff) == 0)) ||
-     (uVar3 = 0, (uVar1 >> 8 & 0xff) == 0)) {
-    uVar3 = 1;
+  destSelect = *(uint *)(operandRecord + 0x10);
+  if (((destSelect >> 0x18 == 0) || ((destSelect >> 0x10 & 0xff) == 0)) ||
+     (result = 0, (destSelect >> 8 & 0xff) == 0)) {
+    result = 1;
   }
-  return uVar3;
+  return result;
 }
 
 /* IRInst__destSelectLane3IsX @ 0xf3ae0 (48 bytes) */
@@ -1469,19 +1469,19 @@ int IRInst__maskUnusedLanesOfOperand(inst, operandIndex, program)
   undefined4 program;
 {
   int operandRecord;
-  undefined4 local_18;
-  undefined4 local_14;
+  undefined4 laneMask;
+  undefined4 maskedSelect;
   
   operandRecord = IRInst__getOperandRecord(inst,0);
-  ((int (*)())IRInst__computeSourceLaneMask)(&local_18,inst,operandIndex,program,*(undefined4 *)(operandRecord + 0x10));
+  ((int (*)())IRInst__computeSourceLaneMask)(&laneMask,inst,operandIndex,program,*(undefined4 *)(operandRecord + 0x10));
   operandRecord = IRInst__getOperandRecord(inst,operandIndex);
-  ((int (*)())SelectWord__maskUnused)(&local_14,*(undefined4 *)(operandRecord + 0x10),local_18);
+  ((int (*)())SelectWord__maskUnused)(&maskedSelect,*(undefined4 *)(operandRecord + 0x10),laneMask);
   if (operandIndex == 0) {
-    *(undefined4 *)(inst + 0x9c) = local_14;
+    *(undefined4 *)(inst + 0x9c) = maskedSelect;
   }
   else {
     operandRecord = IRInst__getOperandRecord(inst,operandIndex);
-    *(undefined4 *)(operandRecord + 0x10) = local_14;
+    *(undefined4 *)(operandRecord + 0x10) = maskedSelect;
   }
   return;
 }
@@ -1855,8 +1855,8 @@ LAB_000f4d20:
 }
 
 /* ConstKey__countPresentOperands @ 0xf4d54 (44 bytes) */
-int ConstKey__countPresentOperands(param_1, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
-  int param_1;
+int ConstKey__countPresentOperands(constInst, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
+  int constInst;
   undefined4 unusedArg2;
   undefined4 unusedArg3;
   undefined4 unusedArg4;
@@ -1870,7 +1870,7 @@ int ConstKey__countPresentOperands(param_1, unusedArg2, unusedArg3, unusedArg4, 
   loopCounterB = 0;
   loopCounter = 4;
   do {
-    if (((int)*(char *)(param_1 + 0x15c) >> (loopCounterB & 0x3f) & 1U) == 0) {
+    if (((int)*(char *)(constInst + 0x15c) >> (loopCounterB & 0x3f) & 1U) == 0) {
       return;
     }
     loopCounterB = loopCounterB + 1;

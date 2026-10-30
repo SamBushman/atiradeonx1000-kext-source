@@ -3221,15 +3221,15 @@ int ildisRun(disassembler, passThroughR4, passThroughR5, fmtArgR6, fmtArgR7, fmt
   undefined4 fmtArgR7;
   undefined4 fmtArgR8;
 {
-  undefined8 uVar1;
+  undefined8 printResult;
   
   do {
     if ((uint)(*(int *)(disassembler + 0xc) * 4 + *(int *)(disassembler + 4)) <= *(uint *)(disassembler + 8)) {
       return;
     }
-    uVar1 = ((int (*)())ildisPrintInstruction)(disassembler,passThroughR4,passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,*(int *)(disassembler + 4));
-    passThroughR4 = (undefined4)uVar1;
-  } while ((int)((ulonglong)uVar1 >> 0x20) != 0);
+    printResult = ((int (*)())ildisPrintInstruction)(disassembler,passThroughR4,passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,*(int *)(disassembler + 4));
+    passThroughR4 = (undefined4)printResult;
+  } while ((int)((ulonglong)printResult >> 0x20) != 0);
   return;
 }
 
@@ -3327,10 +3327,10 @@ int Compiler__isOptionEnabled(compiler, optionId)
   int compiler;
   uint optionId;
 {
-  int iVar1;
+  int targetAllows;
   
   if ((((int)*(char *)(((int)optionId >> 3) + compiler + 0x59c) >> (optionId & 7) & 1U) != 0) &&
-     (iVar1 = BitSet__testBit(*(undefined4 *)(compiler + COMP_target),optionId), iVar1 != 0)) {
+     (targetAllows = BitSet__testBit(*(undefined4 *)(compiler + COMP_target),optionId), targetAllows != 0)) {
     return 1;
   }
   return 0;
@@ -3926,12 +3926,12 @@ int Compiler__allocateOrFail(compiler, size)
   int compiler;
   uint size;
 {
-  int iVar1;
+  int memory;
   
-  iVar1 = (**(code **)(compiler + 0x350))(*(undefined4 *)(compiler + 0x354),size);
-  if (iVar1 == 0) {
+  memory = (**(code **)(compiler + 0x350))(*(undefined4 *)(compiler + 0x354),size);
+  if (memory == 0) {
     ((int (*)())Compiler__fail)(compiler,2);
   }
-  return iVar1;
+  return memory;
 }
 

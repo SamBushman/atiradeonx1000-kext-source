@@ -2804,3 +2804,33 @@ local	FUN_000f45f8	param_4	program	INFERRED	program passed to IRInst__computeSou
 local	FUN_000f45f8	bVar1	lastLane	INFERRED	lane == 3
 local	FUN_000f45f8	local_28	readMaskBytes	INFERRED	copy of the read mask (one byte per lane)
 local	FUN_000f45f8	local_18	readMaskOut	INFERRED	IRInst__computeSourceReadMask output
+local	BreakOrContinueBlock__ctor_eac08	puVar1	vtablePtr	INFERRED	vtable pointer (PTR_DAT_001e8b54 + 8) stored at this[0]
+local	BreakOrContinueBlock__ctor_eac08	uVar2	copiedField0x12c	INFERRED	source+0x12c copied to this[0x4b]
+local	BreakOrContinueBlock__ctor_eac60	puVar1	vtablePtr	INFERRED	vtable pointer (PTR_DAT_001e8b54 + 8) stored at this[0]
+local	BreakOrContinueBlock__ctor_eac60	uVar2	copiedField0x12c	INFERRED	source+0x12c copied to this[0x4b]
+local	IfHeader__ctor_ea530	puVar3	mergeBlock	INFERRED	freshly allocated merge block (Block__ctor_ea020) stored at this[0x4d] and connected
+local	IfHeader__ctor_ea600	puVar3	mergeBlock	INFERRED	freshly allocated merge block (Block__ctor_ea020) stored at this[0x4d] and connected
+local	WriteMask__fromUsedLanes	pcVar1	laneCursor	INFERRED	cursor over the four lane bytes
+local	SelectWord__firstWrittenComponent	pcVar1	laneCursor	INFERRED	cursor over the four lane bytes
+local	SelectWord__firstUnwrittenComponent	pcVar1	laneCursor	INFERRED	cursor over the four lane bytes
+local	SelectWord__firstUsedComponent	pcVar1	laneCursor	INFERRED	cursor over the four lane bytes
+func	FUN_000e2b68	IRInst__foldConstantSourceSwizzle	INFERRED	when the operand source is a constant register of kind 0xc, replaces the operand select word by the composition of the source's own select word (a0[0x55]) with it
+local	FUN_000e2b68	a0	sourceVReg	INFERRED	virtual register that is the source of the operand
+local	FUN_000e2b68	iVar1	isConstantSource	INFERRED	source vtable +0x48 query: constant register
+local	FUN_000e2b68	local_18	composedSelect	INFERRED	SelectWord::compose output stored back into the operand record
+local	IRInst__maskUnusedLanesOfOperand	local_18	laneMask	INFERRED	IRInst__computeSourceLaneMask output
+local	IRInst__maskUnusedLanesOfOperand	local_14	maskedSelect	INFERRED	SelectWord::maskUnused output stored into the operand
+local	Compiler__allocateOrFail	iVar1	memory	INFERRED	block returned by the compiler allocation callback (+0x350); null raises Compiler__fail(2)
+local	Program__registerFileOfIlType	iVar1	registerFile	INFERRED	register file of the IL register type from the hardware table; -1 raises Compiler__fail(0xf)
+local	FUN_000f3a90	uVar1	destSelect	INFERRED	select word of operand 0 (+0x10)
+local	FUN_000f3a90	uVar3	result	INFERRED	1 when lane 0, 1 or 2 byte is zero (lane written as x), else 0
+local	Block__successorIndex	iVar1	listEntry	INFERRED	non-null entry of the successor vector under comparison
+local	ildisPrintTexelOffsets	dVar3	printResult	INFERRED	value returned by the print helper FUN_000da904
+local	ildisRun	uVar1	printResult	INFERRED	64-bit result pair of ildisPrintInstruction: low word is passed on, high word nonzero continues the loop
+local	IRInst__lastSourceKeyEquals	iVar2	lastSourceKey	INFERRED	thunk_FUN_00134de8 key of the last source of inst
+local	IfFooterStatic__accept	uVar1	footerWord	INFERRED	this+0xdc, passed to the traversal sink
+local	IRInst__countWrittenComponents	bVar1	notLastLane	INFERRED	loop continue flag (lane != 3)
+local	Table__interpolatorKindToCode	param_2	kind	INFERRED	interpolator kind index into PTR_DAT_001e8b60
+local	Program__insertMovAfter	local_28	clearedSelect	INFERRED	SelectWord::clearReadComponents output stored at the new mov +0x9c
+local	ConstKey__countPresentOperands	param_1	constInst	INFERRED	constant instruction whose present-lane flag byte (+0x15c) is read
+local	Compiler__isOptionEnabled	iVar1	targetAllows	INFERRED	BitSet__testBit on the hardware target for the option
