@@ -2854,7 +2854,7 @@
 0x179138	240	FUN_00179138	part_047	converted
 0x1792f0	232	FUN_001792f0	part_047	converted
 0x1793d8	560	ValueKey__findLaneWithSameValue	part_047	converted
-0x179608	456	FUN_00179608	part_047	converted
+0x179608	456	ValueKey__operandLanesEqual	part_047	converted
 0x1797d0	196	FUN_001797d0	part_047	converted
 0x179894	184	ValueKey__foldCompareSameSourcesValueNumber	part_047	converted
 0x17994c	232	FUN_0017994c	part_047	converted
@@ -3046,7 +3046,7 @@
 0x1943f0	276	HashTable__destroy_1943f0	part_050	converted
 0x194504	276	HashTable__destroy_194504	part_050	converted
 0x194618	264	HashTable__findEntry	part_050	converted
-0x194720	276	FUN_00194720	part_050	converted
+0x194720	276	HashTable__remove	part_050	converted
 0x194834	260	HashTable__find	part_050	converted
 0x194938	348	HashTableIterator__advance	part_050	converted
 0x194a94	20	HashTableIterator__begin	part_050	converted

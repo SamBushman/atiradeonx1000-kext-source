@@ -1894,7 +1894,7 @@ int ConstRecord__findInTable(constTables, constRecord)
    * local_28/local_24/local_20/local_1c landed at offsets 68/64/60/56 - contiguous with EACH
    * OTHer but 16 bytes away from local_2c - so selectedTable's forward walk from &local_2c by separate
    * declared locals never actually reaches them; it walks off into unrelated stack space,
-   * which happened to read back as 0 and crashed three frames down in FUN_00194720
+   * which happened to read back as 0 and crashed three frames down in HashTable__remove
    * (constTables[4]() through a NULL dispatch pointer). Fixed properly this time by giving the
    * cluster real, guaranteed-contiguous storage as an array, per this project's own
    * established fix pattern for this exact defect class. */
@@ -1914,6 +1914,6 @@ int ConstRecord__findInTable(constTables, constRecord)
   local_cluster[2] = *(undefined4 *)(constTables + 0xc);
   local_cluster[3] = *(undefined4 *)(constTables + 0x10);
   local_cluster[4] = *(undefined4 *)(constTables + 0x14);
-  return FUN_00194720(*selectedTable,constRecord);
+  return HashTable__remove(*selectedTable,constRecord);
 }
 

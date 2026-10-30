@@ -1598,75 +1598,76 @@ int ValueKey__findLaneWithSameValue(ctx, operandIndex, laneEnableFlags)
   } while( true );
 }
 
-/* FUN_00179608 @ 0x179608 (456 bytes) */
-int FUN_00179608(ctx, param_2, operandIndex, operandIndex2)
+/* ValueKey__operandLanesEqual @ 0x179608 (456 bytes) */
+int ValueKey__operandLanesEqual(ctx, lane, operandIndex, operandIndex2)
   int ctx;
-  int param_2;
+  int lane;
   int operandIndex;
   int operandIndex2;
 {
+  byte laneSelect2;
   uint vectorFilledCount2;
   uint vectorFilledCount;
   uint *vector2;
   int inst;
   int operandRecord2;
   int operandRecord;
-  byte bVar1;
+  byte laneSelect;
   int *elementRef;
-  int iVar3;
-  int iVar4;
+  int firstValue;
+  int secondValue;
   undefined4 callResult;
-  uint uVar6;
-  uint uVar7;
+  uint lastElementIndex;
+  uint lastElementIndex2;
   uint *vector;
   
   operandRecord = IRInst__getOperandRecord(*(undefined4 *)(ctx + 0xb0),operandIndex);
-  bVar1 = *(byte *)(param_2 + operandRecord + 0x10);
-  iVar3 = *(int *)((operandIndex * 4 + param_2) * 4 + ctx + 0x168);
-  if (iVar3 < 0) {
+  laneSelect = *(byte *)(lane + operandRecord + 0x10);
+  firstValue = *(int *)((operandIndex * 4 + lane) * 4 + ctx + 0x168);
+  if (firstValue < 0) {
     inst = *(int *)(ctx + 0xb0);
     if (*(int *)(*(int *)(inst + 0x88) + 8) != 0x8e) {
       vector = *(uint **)(*(int *)(operandIndex * 0x18 + inst + 0x8c) + 0x2c);
       vectorFilledCount2 = vector[1];
-      uVar6 = vectorFilledCount2 - 1;
-      if (uVar6 < *vector) {
-        if (vectorFilledCount2 <= uVar6) {
-          _memset(vectorFilledCount2 * 4 + vector[2],0,(uVar6 - vectorFilledCount2) * 4 + 4);
+      lastElementIndex = vectorFilledCount2 - 1;
+      if (lastElementIndex < *vector) {
+        if (vectorFilledCount2 <= lastElementIndex) {
+          _memset(vectorFilledCount2 * 4 + vector[2],0,(lastElementIndex - vectorFilledCount2) * 4 + 4);
           vector[1] = vectorFilledCount2;
           inst = *(int *)(ctx + 0xb0);
         }
-        elementRef = (int *)(uVar6 * 4 + vector[2]);
+        elementRef = (int *)(lastElementIndex * 4 + vector[2]);
       }
       else {
-        elementRef = (int *)Vector__elementRefGrow(vector,uVar6);
+        elementRef = (int *)Vector__elementRefGrow(vector,lastElementIndex);
         inst = *(int *)(ctx + 0xb0);
       }
-      iVar3 = *(int *)((uint)bVar1 * 4 + *elementRef + 0x20);
+      firstValue = *(int *)((uint)laneSelect * 4 + *elementRef + 0x20);
     }
   }
   else {
     inst = *(int *)(ctx + 0xb0);
   }
   operandRecord2 = IRInst__getOperandRecord(inst,operandIndex2);
-  bVar1 = *(byte *)(param_2 + operandRecord2 + 0x10);
-  iVar4 = *(int *)((operandIndex2 * 4 + param_2) * 4 + ctx + 0x168);
-  if ((iVar4 < 0) && (*(int *)(*(int *)(*(int *)(ctx + 0xb0) + 0x88) + 8) != 0x8e)) {
+  laneSelect2 = *(byte *)(lane + operandRecord2 + 0x10);
+  secondValue = *(int *)((operandIndex2 * 4 + lane) * 4 + ctx + 0x168);
+  if ((secondValue < 0) && (*(int *)(*(int *)(*(int *)(ctx + 0xb0) + 0x88) + 8) != 0x8e)) {
     vector2 = *(uint **)(*(int *)(operandIndex2 * 0x18 + *(int *)(ctx + 0xb0) + 0x8c) + 0x2c);
     vectorFilledCount = vector2[1];
-    uVar7 = vectorFilledCount - 1;
-    if (uVar7 < *vector2) {
-      if (vectorFilledCount <= uVar7) {
-        _memset(vectorFilledCount * 4 + vector2[2],0,(uVar7 - vectorFilledCount) * 4 + 4);
+    lastElementIndex2 = vectorFilledCount - 1;
+    if (lastElementIndex2 < *vector2) {
+      if (vectorFilledCount <= lastElementIndex2) {
+        _memset(vectorFilledCount * 4 + vector2[2],0,(lastElementIndex2 - vectorFilledCount) * 4 + 4);
         vector2[1] = vectorFilledCount;
       }
-      elementRef = (int *)(uVar7 * 4 + vector2[2]);
+      elementRef = (int *)(lastElementIndex2 * 4 + vector2[2]);
     }
     else {
-      elementRef = (int *)Vector__elementRefGrow(vector2,uVar7);
+      elementRef = (int *)Vector__elementRefGrow(vector2,lastElementIndex2);
     }
-    iVar4 = *(int *)((uint)bVar1 * 4 + *elementRef + 0x20);
+    secondValue = *(int *)((uint)laneSelect2 * 4 + *elementRef + 0x20);
   }
-  callResult = Ptr__equalNonNull(iVar3,iVar4);
+  callResult = Ptr__equalNonNull(firstValue,secondValue);
   return callResult;
 }
 
@@ -1680,7 +1681,7 @@ int FUN_001797d0(ctx, param_2)
   undefined4 exprRecordForValueNumberResult;
   uint uVar4;
   
-  iVar2 = ((int (*)())FUN_00179608)(ctx,param_2,2,3);
+  iVar2 = ((int (*)())ValueKey__operandLanesEqual)(ctx,param_2,2,3);
   if (iVar2 != 0) {
     iVar2 = *(int *)(ctx + 0xb0);
     uVar4 = *(uint *)(iVar2 + 0xe8);
@@ -1708,7 +1709,7 @@ int ValueKey__foldCompareSameSourcesValueNumber(ctx, param_2)
   int iVar1;
   undefined4 uVar2;
   
-  iVar1 = ((int (*)())FUN_00179608)(ctx,param_2,1,2);
+  iVar1 = ((int (*)())ValueKey__operandLanesEqual)(ctx,param_2,1,2);
   if (iVar1 != 0) {
     iVar1 = *(int *)(ctx + 0xb0);
     if (((*(uint *)(iVar1 + 0xb8) & 1) == (*(uint *)(iVar1 + 0xd0) & 1)) &&
@@ -1738,7 +1739,7 @@ int FUN_0017994c(ctx, param_2)
   uint uVar5;
   int iVar6;
   
-  iVar2 = ((int (*)())FUN_00179608)(ctx,param_2,1,2);
+  iVar2 = ((int (*)())ValueKey__operandLanesEqual)(ctx,param_2,1,2);
   if (iVar2 != 0) {
     uVar5 = *(uint *)(*(int *)(ctx + 0xb0) + 0xd0);
     uVar1 = *(uint *)(*(int *)(ctx + 0xb0) + 0xb8);
@@ -1773,7 +1774,7 @@ int FUN_00179a34(ctx, param_2)
   undefined4 exprRecordForValueNumberResult;
   uint uVar5;
   
-  iVar2 = ((int (*)())FUN_00179608)(ctx,param_2,1,2);
+  iVar2 = ((int (*)())ValueKey__operandLanesEqual)(ctx,param_2,1,2);
   if (iVar2 != 0) {
     uVar5 = *(uint *)(*(int *)(ctx + 0xb0) + 0xd0);
     uVar1 = *(uint *)(*(int *)(ctx + 0xb0) + 0xb8);
@@ -1809,7 +1810,7 @@ int FUN_00179b28(ctx, param_2)
   undefined4 exprRecord;
   uint uVar4;
   
-  callResult = ((int (*)())FUN_00179608)(ctx,param_2,1,2);
+  callResult = ((int (*)())ValueKey__operandLanesEqual)(ctx,param_2,1,2);
   if (callResult != 0) {
     uVar4 = *(uint *)(*(int *)(ctx + 0xb0) + 0xd0);
     uVar1 = *(uint *)(*(int *)(ctx + 0xb0) + 0xb8);
@@ -1834,7 +1835,7 @@ int FUN_00179bbc(ctx, param_2)
   if ((loopIndex != 1) && (1 < loopIndex)) {
     loopIndex = 2;
     do {
-      callResult = ((int (*)())FUN_00179608)(ctx,param_2,loopIndex + -1,loopIndex);
+      callResult = ((int (*)())ValueKey__operandLanesEqual)(ctx,param_2,loopIndex + -1,loopIndex);
       if (callResult == 0) {
         return 0;
       }
@@ -1857,7 +1858,7 @@ int Inst__allWrittenLanesSatisfy(valueKey, param_2, param_3)
   loopIndex = 0;
   while ((iVar2 = IRInst__getOperandRecord(*(undefined4 *)(valueKey + 0xb0),0),
          *(char *)(loopIndex + iVar2 + 0x10) == '\x01' ||
-         (iVar2 = ((int (*)())FUN_00179608)(valueKey,loopIndex,param_2,param_3), iVar2 != 0))) {
+         (iVar2 = ((int (*)())ValueKey__operandLanesEqual)(valueKey,loopIndex,param_2,param_3), iVar2 != 0))) {
     bVar1 = loopIndex == 3;
     loopIndex = loopIndex + 1;
     if (bVar1) {
@@ -1948,7 +1949,7 @@ int FUN_00179e74(ctx, param_2)
   undefined4 exprRecordForValueNumberResult;
   uint uVar3;
   
-  iVar1 = ((int (*)())FUN_00179608)(ctx,param_2,1,2);
+  iVar1 = ((int (*)())ValueKey__operandLanesEqual)(ctx,param_2,1,2);
   if (iVar1 != 0) {
     iVar1 = *(int *)(ctx + 0xb0);
     uVar3 = *(uint *)(iVar1 + 0xb8);

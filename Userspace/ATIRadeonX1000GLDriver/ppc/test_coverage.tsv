@@ -2854,7 +2854,7 @@
 0x179138	FUN_00179138	408	no	indirect call (driver context / vtable / callback)
 0x1792f0	FUN_001792f0	232	no	indirect call (driver context / vtable / callback)
 0x1793d8	ValueKey__findLaneWithSameValue	560	yes	
-0x179608	FUN_00179608	456	yes	
+0x179608	ValueKey__operandLanesEqual	456	yes	
 0x1797d0	FUN_001797d0	196	yes	
 0x179894	ValueKey__foldCompareSameSourcesValueNumber	184	yes	
 0x17994c	FUN_0017994c	232	yes	
@@ -3046,7 +3046,7 @@
 0x1943f0	HashTable__destroy_1943f0	276	yes	
 0x194504	HashTable__destroy_194504	276	yes	
 0x194618	HashTable__findEntry	264	no	indirect call (driver context / vtable / callback)
-0x194720	FUN_00194720	276	no	indirect call (driver context / vtable / callback)
+0x194720	HashTable__remove	276	no	indirect call (driver context / vtable / callback)
 0x194834	HashTable__find	260	yes	
 0x194938	HashTableIterator__advance	348	yes	
 0x194a94	HashTableIterator__begin	20	yes	
