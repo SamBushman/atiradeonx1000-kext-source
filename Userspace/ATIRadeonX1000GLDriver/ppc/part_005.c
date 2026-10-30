@@ -1588,50 +1588,50 @@ int gldCompressedImageBytes(format, width, height, depth)
   return 0;
 }
 
-/* FUN_00030420 @ 0x30420 (392 bytes) */
-int FUN_00030420(param_1, formatInfo, param_3, param_4, param_5, param_6, param_7)
-  int param_1;
-  int formatInfo;
-  uint param_3;
-  uint param_4;
-  uint param_5;
-  uint param_6;
-  uint param_7;
+/* gld_buildTextureStatePacket @ 0x30420 (392 bytes) */
+int gld_buildTextureStatePacket(packet, formatEntry, pitchBytes, blockPitchBytes, tileFlags, widthTexels, heightTexels)
+  int packet;
+  int formatEntry;
+  uint pitchBytes;
+  uint blockPitchBytes;
+  uint tileFlags;
+  uint widthTexels;
+  uint heightTexels;
 {
-  uint uVar1;
-  uint uVar2;
-  float fVar3;
-  double dVar4;
-  uint uVar5;
+  uint tileModeBits;
+  uint pitchBlocks;
+  float half;
+  double i2dBias;
+  uint oldWord0c;
   uint scratchUint6;
   
-  _memcpy(param_1,PTR_DAT_001e8998,0x74);
-  dVar4 = DOUBLE_001aa250;
-  fVar3 = FLOAT_001aa10c;
-  uVar5 = *(uint *)(param_1 + 0xc);
-  uVar2 = param_4 >> (*(uint *)(formatInfo + 0x14) & 7) & 0x3ffe;
-  scratchUint6 = (param_5 & 1) << 0x10;
-  uVar1 = (param_5 & 6) << 0x10;
-  *(uint *)(param_1 + 0xc) = uVar1 | scratchUint6 | uVar2 | uVar5 & 0xffe0c001;
-  *(uint *)(param_1 + 0xc) =
-       (*(uint *)(formatInfo + 0x18) & 0x3c00) << 0xb | uVar1 | scratchUint6 | uVar2 | uVar5 & 0xfe00c001;
-  scratchUint6 = *(uint *)(formatInfo + 0x18);
-  *(uint *)(param_1 + 0x1c) =
-       (param_7 - 1 & 0x7ff) << 0xb | param_6 - 1 & 0x7ff | *(uint *)(param_1 + 0x1c) & 0x80000000 |
+  _memcpy(packet,PTR_DAT_001e8998,0x74);
+  i2dBias = DOUBLE_001aa250;
+  half = FLOAT_001aa10c;
+  oldWord0c = *(uint *)(packet + 0xc);
+  pitchBlocks = blockPitchBytes >> (*(uint *)(formatEntry + 0x14) & 7) & 0x3ffe;
+  scratchUint6 = (tileFlags & 1) << 0x10;
+  tileModeBits = (tileFlags & 6) << 0x10;
+  *(uint *)(packet + 0xc) = tileModeBits | scratchUint6 | pitchBlocks | oldWord0c & 0xffe0c001;
+  *(uint *)(packet + 0xc) =
+       (*(uint *)(formatEntry + 0x18) & 0x3c00) << 0xb | tileModeBits | scratchUint6 | pitchBlocks | oldWord0c & 0xfe00c001;
+  scratchUint6 = *(uint *)(formatEntry + 0x18);
+  *(uint *)(packet + 0x1c) =
+       (heightTexels - 1 & 0x7ff) << 0xb | widthTexels - 1 & 0x7ff | *(uint *)(packet + 0x1c) & 0x80000000 |
        0x80000000;
-  *(uint *)(param_1 + 0x14) = scratchUint6 >> 0x1e;
-  scratchUint6 = *(uint *)(formatInfo + 0x14);
-  *(uint *)(param_1 + 0x30) =
-       (param_7 - 1 & 0x1fff) << 0xd | param_6 - 1 & 0x1fff | *(uint *)(param_1 + 0x30) & 0xfc000000
+  *(uint *)(packet + 0x14) = scratchUint6 >> 0x1e;
+  scratchUint6 = *(uint *)(formatEntry + 0x14);
+  *(uint *)(packet + 0x30) =
+       (heightTexels - 1 & 0x1fff) << 0xd | widthTexels - 1 & 0x1fff | *(uint *)(packet + 0x30) & 0xfc000000
   ;
-  *(uint *)(param_1 + 0x4c) = param_6 * 0x60000 | param_7 * 6;
-  *(float *)(param_1 + 0x5c) = (float)((double)CONCAT44(0x43300000,param_7) - dVar4) * fVar3;
-  *(float *)(param_1 + 0x58) = (float)((double)CONCAT44(0x43300000,param_6) - dVar4) * fVar3;
-  *(uint *)(param_1 + 0x24) =
-       (uint)(0x800 < param_7) * 0x10000 |
-       (uint)(0x800 < param_6) * 0x8000 |
-       (param_3 >> (scratchUint6 & 7)) - 1 & 0x3fff | *(uint *)(param_1 + 0x24) & 0xfff00000;
-  return param_1 + 0x74;
+  *(uint *)(packet + 0x4c) = widthTexels * 0x60000 | heightTexels * 6;
+  *(float *)(packet + 0x5c) = (float)((double)CONCAT44(0x43300000,heightTexels) - i2dBias) * half;
+  *(float *)(packet + 0x58) = (float)((double)CONCAT44(0x43300000,widthTexels) - i2dBias) * half;
+  *(uint *)(packet + 0x24) =
+       (uint)(0x800 < heightTexels) * 0x10000 |
+       (uint)(0x800 < widthTexels) * 0x8000 |
+       (pitchBytes >> (scratchUint6 & 7)) - 1 & 0x3fff | *(uint *)(packet + 0x24) & 0xfff00000;
+  return packet + 0x74;
 }
 
 /* gld_compressAlphaBlock @ 0x305b0 (492 bytes) */
@@ -1870,35 +1870,35 @@ int FUN_00030a50(param_1, param_2)
   return _gldDeleteTexture(*(undefined4 *)(param_1 + 4),param_2);
 }
 
-/* FUN_00030a60 @ 0x30a60 (240 bytes) */
-int FUN_00030a60(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 *param_1;
-  uint param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+/* gld_emitRenderTargetPacket @ 0x30a60 (240 bytes) */
+int gld_emitRenderTargetPacket(cmd, colorFormat, colorPitch, blockPitch, tileFlags, colorOffset, colorSize)
+  undefined4 *cmd;
+  uint colorFormat;
+  undefined4 colorPitch;
+  undefined4 blockPitch;
+  undefined4 tileFlags;
+  undefined4 colorOffset;
+  undefined4 colorSize;
 {
-  *param_1 = 0xc0101000;
-  param_1[1] = 0x51b;
-  param_1[2] = (param_2 & 0xf) << 8 | 0x42cc30f3;
-  param_1[3] = 0x1056b;
-  param_1[4] = 0;
-  param_1[5] = param_3;
-  param_1[6] = 0x10501;
-  param_1[7] = 0;
-  param_1[8] = param_4;
-  param_1[9] = 0x5c1;
-  param_1[10] = 0;
-  param_1[0xb] = 0x5c0;
-  param_1[0xc] = param_5;
-  param_1[0xd] = 0x50d;
-  param_1[0xe] = param_6;
-  param_1[0xf] = 0x1050e;
-  param_1[0x10] = 0;
-  param_1[0x11] = param_7;
-  return param_1 + 0x12;
+  *cmd = 0xc0101000;
+  cmd[1] = 0x51b;
+  cmd[2] = (colorFormat & 0xf) << 8 | 0x42cc30f3;
+  cmd[3] = 0x1056b;
+  cmd[4] = 0;
+  cmd[5] = colorPitch;
+  cmd[6] = 0x10501;
+  cmd[7] = 0;
+  cmd[8] = blockPitch;
+  cmd[9] = 0x5c1;
+  cmd[10] = 0;
+  cmd[0xb] = 0x5c0;
+  cmd[0xc] = tileFlags;
+  cmd[0xd] = 0x50d;
+  cmd[0xe] = colorOffset;
+  cmd[0xf] = 0x1050e;
+  cmd[0x10] = 0;
+  cmd[0x11] = colorSize;
+  return cmd + 0x12;
 }
 
 /* gldTextureHasNonPowerOfTwoSize @ 0x30b50 (236 bytes) */
@@ -1965,113 +1965,113 @@ int gldTextureHasNonPowerOfTwoSize(texture, unusedArg2, unusedArg3, unusedArg4, 
   return 0;
 }
 
-/* FUN_00030c50 @ 0x30c50 (684 bytes) */
-int FUN_00030c50(glContext, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+/* gld_createInternalTexture @ 0x30c50 (684 bytes) */
+int gld_createInternalTexture(glContext, width, height, depth, enumParam5, formatIndex, enumParam7, dimension)
   int glContext;
-  int param_2;
-  int param_3;
-  int param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  int param_8;
+  int width;
+  int height;
+  int depth;
+  undefined4 enumParam5;
+  undefined4 formatIndex;
+  undefined4 enumParam7;
+  int dimension;
 {
-  int allocation2;
-  undefined2 *allocation;
+  int texelStorage;
+  undefined2 *texDesc;
   int scratchInt2;
-  int iVar3;
-  int iVar4;
-  int iVar5;
+  int log2Height;
+  int log2Depth;
+  int log2Max;
   int scratchInt6;
-  undefined4 uVar7;
-  int local_58 [9];
+  undefined4 connection;
+  int createdTexture [9];
   
-  uVar7 = *(undefined4 *)(glContext + 4);
-  local_58[0] = 0;
-  allocation = (undefined2 *)_malloc(0x910);
-  if (allocation != (undefined2 *)0x0) {
-    allocation[0x24] = 0;
-    *(undefined4 *)(allocation + 0x26) = 0;
-    *(undefined4 *)(allocation + 4) = 0;
-    allocation[6] = 0x405;
-    *(undefined4 *)(allocation + 0x22) = 0;
-    allocation[10] = 0x2901;
-    allocation[8] = 0x2901;
-    allocation[9] = 0x2901;
-    *(undefined4 *)(allocation + 0xe) = 0;
-    *(undefined4 *)(allocation + 0x10) = 0;
-    *(undefined4 *)(allocation + 0x12) = 0;
-    *(undefined4 *)(allocation + 0x14) = 0;
-    *(undefined4 *)(allocation + 0x1c) = 0;
-    allocation[0x1e] = 0;
-    allocation[0x1f] = 0;
-    allocation[0x20] = 0;
-    allocation[0x21] = 0;
-    *allocation = (short)param_8;
-    allocation[0xd] = 0x85bd;
-    *(undefined4 *)(allocation + 0x16) = 0x3f800000;
-    *(undefined4 *)(allocation + 2) = 0x3f800000;
-    *(undefined4 *)(allocation + 0x18) = 0xc47a0000;
-    *(undefined4 *)(allocation + 0x1a) = 0x447a0000;
-    allocation[0x2e] = 0x2600;
-    allocation[0xb] = 0x2600;
-    allocation[0xc] = 0x2600;
-    allocation[1] = (*(unsigned short *)((unsigned char *)&(param_5) + 2));
-    allocation[0x2a] = (*(unsigned short *)((unsigned char *)&(param_5) + 2));
-    allocation[0x2c] = (*(unsigned short *)((unsigned char *)&(param_5) + 2));
-    allocation[0x2d] = (*(unsigned short *)((unsigned char *)&(param_7) + 2));
-    *(undefined1 *)(allocation + 0x2f) = 0;
-    *(uint *)(allocation + 0x24) = *(uint *)(allocation + 0x24) & 0xffff7f7f;
-    *(undefined1 *)((int)allocation + 0x5f) = 0;
-    scratchInt2 = ((int (*)())floorLog2)(param_2);
-    iVar3 = ((int (*)())floorLog2)(param_3);
-    iVar4 = ((int (*)())floorLog2)(param_4);
-    *(char *)(allocation + 0x30) = (char)scratchInt2;
-    *(char *)(allocation + 0x31) = (char)iVar4;
-    *(char *)((int)allocation + 0x61) = (char)iVar3;
-    scratchInt6 = iVar3;
-    if (iVar3 < iVar4) {
-      scratchInt6 = iVar4;
+  connection = *(undefined4 *)(glContext + 4);
+  createdTexture[0] = 0;
+  texDesc = (undefined2 *)_malloc(0x910);
+  if (texDesc != (undefined2 *)0x0) {
+    texDesc[0x24] = 0;
+    *(undefined4 *)(texDesc + 0x26) = 0;
+    *(undefined4 *)(texDesc + 4) = 0;
+    texDesc[6] = 0x405;
+    *(undefined4 *)(texDesc + 0x22) = 0;
+    texDesc[10] = 0x2901;
+    texDesc[8] = 0x2901;
+    texDesc[9] = 0x2901;
+    *(undefined4 *)(texDesc + 0xe) = 0;
+    *(undefined4 *)(texDesc + 0x10) = 0;
+    *(undefined4 *)(texDesc + 0x12) = 0;
+    *(undefined4 *)(texDesc + 0x14) = 0;
+    *(undefined4 *)(texDesc + 0x1c) = 0;
+    texDesc[0x1e] = 0;
+    texDesc[0x1f] = 0;
+    texDesc[0x20] = 0;
+    texDesc[0x21] = 0;
+    *texDesc = (short)dimension;
+    texDesc[0xd] = 0x85bd;
+    *(undefined4 *)(texDesc + 0x16) = 0x3f800000;
+    *(undefined4 *)(texDesc + 2) = 0x3f800000;
+    *(undefined4 *)(texDesc + 0x18) = 0xc47a0000;
+    *(undefined4 *)(texDesc + 0x1a) = 0x447a0000;
+    texDesc[0x2e] = 0x2600;
+    texDesc[0xb] = 0x2600;
+    texDesc[0xc] = 0x2600;
+    texDesc[1] = (*(unsigned short *)((unsigned char *)&(enumParam5) + 2));
+    texDesc[0x2a] = (*(unsigned short *)((unsigned char *)&(enumParam5) + 2));
+    texDesc[0x2c] = (*(unsigned short *)((unsigned char *)&(enumParam5) + 2));
+    texDesc[0x2d] = (*(unsigned short *)((unsigned char *)&(enumParam7) + 2));
+    *(undefined1 *)(texDesc + 0x2f) = 0;
+    *(uint *)(texDesc + 0x24) = *(uint *)(texDesc + 0x24) & 0xffff7f7f;
+    *(undefined1 *)((int)texDesc + 0x5f) = 0;
+    scratchInt2 = ((int (*)())floorLog2)(width);
+    log2Height = ((int (*)())floorLog2)(height);
+    log2Depth = ((int (*)())floorLog2)(depth);
+    *(char *)(texDesc + 0x30) = (char)scratchInt2;
+    *(char *)(texDesc + 0x31) = (char)log2Depth;
+    *(char *)((int)texDesc + 0x61) = (char)log2Height;
+    scratchInt6 = log2Height;
+    if (log2Height < log2Depth) {
+      scratchInt6 = log2Depth;
     }
-    iVar5 = scratchInt2;
+    log2Max = scratchInt2;
     if (scratchInt2 < scratchInt6) {
-      iVar5 = scratchInt6;
+      log2Max = scratchInt6;
     }
-    *(char *)((int)allocation + 0x65) = (char)iVar3;
-    *(char *)(allocation + 0x32) = (char)scratchInt2;
-    *(undefined1 *)(allocation + 0x36) = 1;
-    *(undefined1 *)(allocation + 0x35) = 1;
-    *(char *)(allocation + 0x33) = (char)iVar4;
-    *(char *)((int)allocation + 0x67) = (char)iVar5;
-    *(undefined1 *)((int)allocation + 0x6d) = 0;
-    allocation[0x3e] = 1;
-    *(char *)((int)allocation + 99) = (char)iVar5;
-    *(undefined1 *)((int)allocation + 0x69) = 0;
-    *(undefined1 *)((int)allocation + 0x6b) = 0;
-    allocation[0x38] = 1;
-    *(char *)(allocation + 0x37) = (param_8 == 3) << 1;
-    *(char *)((int)allocation + 0x6f) = (param_8 == 1) << 1;
-    scratchInt2 = 1 << (*(uint *)(&DAT_001d9f48 + (uint)(byte)param_6 * 0x24) & 7);
-    allocation2 = _malloc(scratchInt2 * param_4 * param_2 * param_3);
-    if (allocation2 != 0) {
-      *(int *)(allocation + 0x5a) = allocation2;
-      allocation[0x54] = (short)param_4;
-      allocation[0x57] = (short)param_3;
-      *(undefined1 *)(allocation + 0x55) = 0;
-      allocation[0x58] = (*(unsigned short *)((unsigned char *)&(param_5) + 2));
-      allocation[0x56] = (short)param_2 * (short)scratchInt2;
-      allocation[0x59] = (*(unsigned short *)((unsigned char *)&(param_7) + 2));
-      allocation[0x52] = (short)param_2;
-      allocation[0x53] = (short)param_3;
-      scratchInt6 = _gldCreateTexture(uVar7,local_58,allocation);
-      if ((scratchInt6 == 0) && (local_58[0] != 0)) {
-        *(undefined1 *)(local_58[0] + 0x39) = 0xff;
-        *(byte *)(local_58[0] + 0x38) = (byte)param_6;
-        *(ushort *)(local_58[0] + 0x24) = *(ushort *)(local_58[0] + 0x24) | 1;
-        return local_58[0];
+    *(char *)((int)texDesc + 0x65) = (char)log2Height;
+    *(char *)(texDesc + 0x32) = (char)scratchInt2;
+    *(undefined1 *)(texDesc + 0x36) = 1;
+    *(undefined1 *)(texDesc + 0x35) = 1;
+    *(char *)(texDesc + 0x33) = (char)log2Depth;
+    *(char *)((int)texDesc + 0x67) = (char)log2Max;
+    *(undefined1 *)((int)texDesc + 0x6d) = 0;
+    texDesc[0x3e] = 1;
+    *(char *)((int)texDesc + 99) = (char)log2Max;
+    *(undefined1 *)((int)texDesc + 0x69) = 0;
+    *(undefined1 *)((int)texDesc + 0x6b) = 0;
+    texDesc[0x38] = 1;
+    *(char *)(texDesc + 0x37) = (dimension == 3) << 1;
+    *(char *)((int)texDesc + 0x6f) = (dimension == 1) << 1;
+    scratchInt2 = 1 << (*(uint *)(&DAT_001d9f48 + (uint)(byte)formatIndex * 0x24) & 7);
+    texelStorage = _malloc(scratchInt2 * depth * width * height);
+    if (texelStorage != 0) {
+      *(int *)(texDesc + 0x5a) = texelStorage;
+      texDesc[0x54] = (short)depth;
+      texDesc[0x57] = (short)height;
+      *(undefined1 *)(texDesc + 0x55) = 0;
+      texDesc[0x58] = (*(unsigned short *)((unsigned char *)&(enumParam5) + 2));
+      texDesc[0x56] = (short)width * (short)scratchInt2;
+      texDesc[0x59] = (*(unsigned short *)((unsigned char *)&(enumParam7) + 2));
+      texDesc[0x52] = (short)width;
+      texDesc[0x53] = (short)height;
+      scratchInt6 = _gldCreateTexture(connection,createdTexture,texDesc);
+      if ((scratchInt6 == 0) && (createdTexture[0] != 0)) {
+        *(undefined1 *)(createdTexture[0] + 0x39) = 0xff;
+        *(byte *)(createdTexture[0] + 0x38) = (byte)formatIndex;
+        *(ushort *)(createdTexture[0] + 0x24) = *(ushort *)(createdTexture[0] + 0x24) | 1;
+        return createdTexture[0];
       }
     }
-    _free(allocation);
+    _free(texDesc);
   }
   return 0;
 }
@@ -2750,7 +2750,7 @@ LAB_00031eb4:
   }
   scratchUint17 = (packedFormatFlag << 1 | levelNumber) << 1 | scratchUint17;
   packetEndB = (undefined4 *)
-            ((int (*)())FUN_00030420)(backing + 0x32f,formatEntry,alignedRowBytes,scratchUint23,scratchUint17,
+            ((int (*)())gld_buildTextureStatePacket)(backing + 0x32f,formatEntry,alignedRowBytes,scratchUint23,scratchUint17,
                          (int)(levelWidth << (texelShift & 0x3f)) >> (*(uint *)(formatEntry + 0x14) & 7),
                          levelHeight);
   *packetEndB = ((unsigned char *)0x00001393U);
@@ -2761,7 +2761,7 @@ LAB_00031eb4:
   packetEndB[5] = 0;
   if (fitsSizeLimit) {
     packetEndC = (undefined4 *)
-              ((int (*)())FUN_00030a60)(packetEndA,formatClass,alignedRowBytes,scratchUint23,scratchUint17,0,
+              ((int (*)())gld_emitRenderTargetPacket)(packetEndA,formatClass,alignedRowBytes,scratchUint23,scratchUint17,0,
                            levelHeight << 0x10 | (int)(levelWidth << (texelShift & 0x3f)) >> scratchInt7);
     *packetEndC = 0xd0b;
     packetEndC[1] = 5;
@@ -3262,11 +3262,11 @@ LAB_00032c54:
             }
           }
           scratchPtr12 = (undefined4 *)
-                    ((int (*)())FUN_00030420)(scratchPtr34 + 0x32f,formatInfo,scratchUint28,scratchUint23,0,
+                    ((int (*)())gld_buildTextureStatePacket)(scratchPtr34 + 0x32f,formatInfo,scratchUint28,scratchUint23,0,
                                  (scratchInt33 << (scratchStack218 & 0x3f)) >> (*(uint *)(formatInfo + 0x14) & 7),
                                  scratchUint22);
           if (scratchFlag39) {
-            scratchPtr13 = (int *)((int (*)())FUN_00030a60)(scratchPtr13,scratchStack214,scratchUint28,scratchUint23,0,0,
+            scratchPtr13 = (int *)((int (*)())gld_emitRenderTargetPacket)(scratchPtr13,scratchStack214,scratchUint28,scratchUint23,0,0,
                                           scratchUint22 << 0x10 | (scratchInt33 << (scratchStack218 & 0x3f)) >> scratchInt11)
             ;
           }
@@ -3723,11 +3723,11 @@ LAB_00033700:
                           scratchUint36 = 1;
                         }
                         scratchUint36 = (scratchUint36 | scratchStack58) << 1 | scratchUint20 & 1;
-                        scratchStacke8 = (int *)((int (*)())FUN_00030420)(scratchStacke8,formatInfo,scratchInt11,scratchInt29,scratchUint36,
+                        scratchStacke8 = (int *)((int (*)())gld_buildTextureStatePacket)(scratchStacke8,formatInfo,scratchInt11,scratchInt29,scratchUint36,
                                                        (scratchInt35 << (scratchStack214 & 0x3f)) >>
                                                        (*(uint *)(formatInfo + 0x14) & 7),scratchInt33);
                         if (!(bool)((byte)(scratchStack6c >> 0x1d) & 1)) {
-                          scratchStack8c = (int *)((int (*)())FUN_00030a60)(scratchStack8c,scratchStack210,scratchInt11,scratchInt29,scratchUint36,0,
+                          scratchStack8c = (int *)((int (*)())gld_emitRenderTargetPacket)(scratchStack8c,scratchStack210,scratchInt11,scratchInt29,scratchUint36,0,
                                                          scratchInt33 << 0x10 |
                                                          (scratchInt35 << (scratchStack214 & 0x3f)) >> scratchInt25);
                         }

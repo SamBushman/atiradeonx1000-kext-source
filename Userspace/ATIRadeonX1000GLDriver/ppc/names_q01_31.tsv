@@ -259,3 +259,145 @@ local	glReadPixels_impl	iStack_8c	procHeight	INFERRED	clipped height in the proc
 local	glReadPixels_impl	uStack_88	procZero88	INFERRED	zero field of the processor descriptor
 local	glReadPixels_impl	uStack_84	procZero84	INFERRED	zero field of the processor descriptor
 local	glReadPixels_impl	uStack_50	procEnd	INFERRED	zero byte ending the processor descriptor
+local	FUN_00029c00	fVar5	windowXStart	INFERRED	window x of the first pixel of a row (rasterX + half-pixel offset, plus the 1/pixel-zoom term in the stencil path); restarts each row
+local	FUN_00029c00	dVar7	uintBiasD	INFERRED	DOUBLE_001aa250 (2^52 bias) used by the unsigned int -> double conversion
+local	FUN_00029c00	fVar8	pixelValueF	INFERRED	source pixel read as float; its integer value holds the packed RGBA8 colour (unpacked into colorR/G/B/A)
+local	FUN_00029c00	local_158	oneBits	INFERRED	constant 1.0f bit pattern 0x3f800000, never read
+local	FUN_00029c00	local_b8	pointSizeI2dHi	INFERRED	0x43300000: high word of the int->double conversion of pointSizeWord
+local	FUN_00029c00	uStack_b4	pointSizeI2dLo	INFERRED	low word of the int->double conversion: pointSizeWord
+local	FUN_00029c00	local_b0	fctiwzSlot0	INFERRED	fctiwz conversion slot (compiler temp)
+local	FUN_00029c00	local_a8	rasterYI2dHi	INFERRED	0x43300000: high word of the int->double conversion of rasterY
+local	FUN_00029c00	pfStack_a4	rasterYI2dLo	INFERRED	low word: rasterY ^ 0x80000000
+local	FUN_00029c00	local_98	pointSizeI2dHi2	INFERRED	0x43300000: high word of the second int->double conversion of ctx+0x248
+local	FUN_00029c00	uStack_94	pointSizeI2dLo2	INFERRED	low word: ctx+0x248
+local	FUN_00029c00	local_90	fctiwzSlot1	INFERRED	fctiwz conversion slot (compiler temp)
+local	FUN_00029c00	local_80	alphaI2dHi	INFERRED	0x43300000 for the alpha byte conversion
+local	FUN_00029c00	uStack_7c	alphaI2dLo	INFERRED	alpha byte of the packed colour (bits 24..31)
+local	FUN_00029c00	local_78	redI2dHi	INFERRED	0x43300000 for the red byte conversion
+local	FUN_00029c00	pfStack_74	redI2dLo	INFERRED	red byte of the packed colour (bits 16..23)
+local	FUN_00029c00	local_70	greenI2dHi	INFERRED	0x43300000 for the green byte conversion
+local	FUN_00029c00	uStack_6c	greenI2dLo	INFERRED	green byte (bits 8..15)
+local	FUN_00029c00	local_68	blueI2dHi	INFERRED	0x43300000 for the blue byte conversion
+local	FUN_00029c00	uStack_64	blueI2dLo	INFERRED	blue byte (bits 0..7)
+local	FUN_00029c00	pfVar13	scratchPtr13	INFERRED	register-allocation scratch: draw-state save pointer, &colorA, 0, or the constant 0x3f800000, finally a stale argument register of FUN_0009d3b0
+local	FUN_00029c00	pfVar14	scratchPtr14	INFERRED	register-allocation scratch: srcRowBytes copy, draw-state save pointer, 0x43300000 or a register constant, finally a stale argument of FUN_0009d3b0
+local	FUN_00029c00	pfVar16	scratchPtr16	INFERRED	register-allocation scratch: 0xc0003500, stencil/alpha source cursor, finally a stale argument of FUN_0009d3b0
+local	gld_readPixelsViaBlit	param_9	transferMode	INFERRED	pixel-transfer mode byte, unused here (stale argument slot)
+local	gld_readPixelsViaBlit	fVar5	renderWidthOrInverse	INFERRED	render width as float, later overwritten with its reciprocal 1.0/renderWidth (texture-coordinate scale)
+local	gld_readPixelsViaBlit	fVar6	renderHeightOrInverse	INFERRED	render height as float, later overwritten with its reciprocal
+local	gld_readPixelsViaBlit	fVar16	quadLeft	INFERRED	left edge of the blit rectangle clamped to the render area, times 1/renderWidth into packet[0xc3]
+local	gld_readPixelsViaBlit	fVar15	quadRight	INFERRED	right edge clamped to the render width, times 1/renderWidth into packet[0xc5]
+local	gld_readPixelsViaBlit	fVar17	quadLeftMinusRectX	INFERRED	quadLeft plus the negated rect x; clamped at 0 into fVar10
+local	gld_readPixelsViaBlit	fVar10	readLeft	INFERRED	fVar17 clamped to >= 0: left edge of the destination sub-rectangle
+local	gld_readPixelsViaBlit	fVar13	readTopOverflow	INFERRED	flipped top edge minus the height; negative when the rect is clipped
+local	gld_readPixelsViaBlit	uVar21	oldColorFormatWord	INFERRED	packet[0x8f] before its colour-format bit-fields are rebuilt from the format entry
+local	gld_readPixelsViaBlit	uVar30	packetConst110f8	INFERRED	constant 0x110f8 staged in a register for later packet words
+local	gld_readPixelsViaBlit	uVar31	packetConstAaaa	INFERRED	constant 0xaaaa staged in a register for later packet words
+local	gld_readPixelsViaBlit	uVar35	packetHeaderC0221000	INFERRED	constant 0xc0221000 staged in a register for later packet words
+local	FUN_00024190	param_1	ctx	INFERRED	GL context (+0x2758 stream allocate, +0x275c stream commit, +0x243c attribute set size)
+local	FUN_00024190	param_2	primitiveType	INFERRED	value written to register 0x821 (primitive walk type) after the stream control
+local	FUN_00024190	param_3	vertexAttribs	INFERRED	array of per-vertex current-attribute block pointers
+local	FUN_00024190	param_4	vertexCount	INFERRED	number of vertices; sizes the allocation and bounds the loop
+local	FUN_00024190	param_5	passThroughArg5	INFERRED	forwarded unchanged to the stream allocate callback
+local	FUN_00024190	iVar1	oldStreamControl	INFERRED	ctx+0x2440 before it is reset to ctx+0x1be4
+local	FUN_00024190	puVar2	packetCursor	INFERRED	allocated command space, advanced past optional stream-control and sync packets
+local	FUN_00024190	puVar3	vertexCursor	INFERRED	write cursor after the primitive header; advanced by gldEmitCurrentAttributeRegisters per vertex
+local	FUN_00024190	uVar4	vertexIndex	INFERRED	loop counter over vertexAttribs
+func	FUN_00024190	gld_emitImmediateVertexList	INFERRED	allocates command space, optionally re-emits the VAP stream control, writes the primitive type and then one gldEmitCurrentAttributeRegisters block per vertex, ending with the 0x92b walk-end packet
+local	FUN_00020210	iVar1	scissorHeight	INFERRED	engineState+0x318c, scissor height
+local	FUN_00020210	iVar3	scratchInt3	INFERRED	register-allocation scratch: engineState pointer, then the scissor width (+0x3188)
+local	FUN_00020210	local_28	rectX	INFERRED	clip rectangle x (scissor x clamped to >= 0)
+local	FUN_00020210	local_24	rectY	INFERRED	clip rectangle y (scissor y, flipped when ctx+0x2b7c is set, clamped to >= 0)
+local	FUN_00020210	local_20	rectWidthOrRight	INFERRED	width of the clip rectangle, converted in place to the right edge before the call
+local	FUN_00020210	local_1c	rectHeightOrBottom	INFERRED	height of the clip rectangle, converted in place to the bottom edge before the call
+local	FUN_00020b30	param_6	dstX	INFERRED	destination x, high half of packet word 10
+local	FUN_00020b30	param_7	dstY	INFERRED	destination y, low half of packet word 10
+local	FUN_00020b30	param_8	surfaceHandle	INFERRED	stored at packet word 5
+local	FUN_00020b30	param_9	rasterOp	INFERRED	low byte placed in bits 16..23 of packet word 3
+local	FUN_00020b30	puVar3	packet	INFERRED	0x10-word packet reserved at the ring write cursor
+local	FUN_00020b30	puVar5	ringTailLink	INFERRED	ctx+0x1d8, link word of the previous packet, patched with the new offset
+local	FUN_00020b30	uVar1	channelMask	INFERRED	colour write mask assembled from the per-channel enable bytes (engineState+0x2e40..43)
+local	FUN_00020b30	uVar2	greenMask	INFERRED	0xff00 when the green channel write is enabled
+local	FUN_00020b30	iVar8	pixelFormatCode	INFERRED	3 for 16-bit render format ((ctx+0x154)&0xf == 3), else 6 (32-bit)
+func	FUN_00020210	gld_updateScissorRect	INFERRED	builds the clip rectangle from the scissor state and render size and passes it to FUN_0008f7f0
+func	FUN_00020b30	gld_emitCopyRectPacket	INFERRED	emits a 2D rectangle copy packet (0x2a000000 header) with channel mask, source/destination coordinates and size
+local	FUN_00024fe0	fVar4	vecZPlusOne	INFERRED	z (+0x24f8) plus 1.0 of the case-6 vector (x, y, z+1) which is then normalised
+local	FUN_00024fe0	dVar5	i2dMagic	INFERRED	DOUBLE_001aa1e0, the int->double conversion constant
+local	FUN_00024fe0	iVar13	materialRecord	INFERRED	engineState+0x28c0 + side*0x240 material record (light*material products)
+local	FUN_00024fe0	iVar18	lightRecord	INFERRED	engineState+0x24c0 + light*0x80 light record
+local	FUN_00024fe0	uVar22	operandByte	INFERRED	operandWord & 0xff: index added to the base offsets of the operand file
+local	FUN_00024fe0	local_78	negXI2dHi	INFERRED	0x43300000: high word of the int->double conversion of the negated x
+local	FUN_00024fe0	fStack_74	negXI2dLo	INFERRED	low word: -x
+local	FUN_00024fe0	local_70	negYI2dHi	INFERRED	high word of the conversion of -y
+local	FUN_00024fe0	fStack_6c	negYI2dLo	INFERRED	low word: -y
+local	FUN_00024fe0	local_68	negZI2dHi	INFERRED	high word of the conversion of -z
+local	FUN_00024fe0	fStack_64	negZI2dLo	INFERRED	low word: -z
+local	FUN_00024fe0	local_60	negWI2dHi	INFERRED	high word of the conversion of -w
+local	FUN_00024fe0	fStack_5c	negWI2dLo	INFERRED	low word: -w
+local	FUN_00030c50	param_2	width	INFERRED	texture width; floorLog2 stored at descriptor +0x60 and used for the malloc size
+local	FUN_00030c50	param_3	height	INFERRED	texture height
+local	FUN_00030c50	param_4	depth	INFERRED	texture depth
+local	FUN_00030c50	param_5	enumParam5	INFERRED	low half stored in descriptor words 1, 0x2a, 0x2c and 0x58 (GL enum, e.g. internal format)
+local	FUN_00030c50	param_6	formatIndex	CONFIRMED	byte index into the 0x24-byte format table at DAT_001d9f34 and stored at texture+0x38
+local	FUN_00030c50	param_7	enumParam7	INFERRED	low half stored in descriptor words 0x2d and 0x59
+local	FUN_00030c50	param_8	dimension	INFERRED	stored at descriptor +0; 1 and 3 select the flags at +0x6e/+0x6f
+local	FUN_00030c50	iVar3	log2Height	INFERRED	floorLog2(height)
+local	FUN_00030c50	iVar4	log2Depth	INFERRED	floorLog2(depth)
+local	FUN_00030c50	iVar5	log2Max	INFERRED	largest of the three log2 sizes: number of mip levels - 1
+local	FUN_00030c50	uVar7	connection	INFERRED	glContext+4, the driver connection passed to _gldCreateTexture
+local	FUN_00030c50	local_58	createdTexture	INFERRED	[0] receives the texture object from _gldCreateTexture
+func	FUN_00024fe0	gld_gatherProgramConstants	INFERRED	copies up to maxCount program constants (literal pool, parameter file, light/material products, state vectors) into outConstants as vec4s; adds the fog/point-sprite constants of the bound extra program
+func	FUN_00030c50	gld_createInternalTexture	INFERRED	builds a 0x910-byte texture descriptor with mip count from the log2 sizes, allocates texel storage and creates the texture through _gldCreateTexture
+local	gld_buildVertexStreamCache	uVar3	arrayTypeWord	INFERRED	attribute array record +8: GL type with the normalized flag in bit 15
+local	gld_buildVertexStreamCache	iVar4	typeRowOffset	INFERRED	((arrayTypeWord & 0x7fff) - 0x1400) * 4: byte offset of the GL type in the format tables
+local	gld_buildVertexStreamCache	iVar5	typeSizeOffset	INFERRED	(typeRowOffset + component count - 1) * 4: byte offset into the per-(type,size) tables DAT_001d98b0..1d9cfc
+local	gld_buildVertexStreamCache	uVar6	dataTypeBits	INFERRED	stream data-type field already shifted to bit 10 of the descriptor halfword
+local	gld_buildVertexStreamCache	uVar19	streamDescHalf	INFERRED	stream descriptor halfword assembled from skip dwords, data type and the stream byte offset
+local	gld_buildVertexStreamCache	uVar9	swizzleSelectX	INFERRED	3-bit VAP swizzle select for component X from the per-(type,size) table
+local	gld_buildVertexStreamCache	uVar11	swizzleSelectY	INFERRED	3-bit swizzle select for component Y
+local	gld_buildVertexStreamCache	uVar13	swizzleSelectZ	INFERRED	3-bit swizzle select for component Z
+local	gld_buildVertexStreamCache	uVar28	swizzleSelectW	INFERRED	3-bit swizzle select for component W
+local	gld_buildVertexStreamCache	uVar15	extWordBits	INFERRED	low 7 bits merged into the +0x26e4 per-stream extension words (even and odd stream halves)
+local	glReadPixels_entry	puVar11	convertOutAPtr	INFERRED	&convertOutA
+local	glReadPixels_entry	puVar12	convertOutBPtr	INFERRED	&convertOutB
+local	glReadPixels_entry	puVar13	layoutRowBytesPtr	INFERRED	&layoutRowBytes
+local	glReadPixels_entry	uStack_e8	layoutRowBytes	INFERRED	row bytes output of gld_computePixelStoreLayout (becomes srcRowBytes)
+local	glReadPixels_entry	iStack_e4	layoutPixelBytes	INFERRED	pixel bytes output of gld_computePixelStoreLayout; reused for the rectX byte offset of negative rects
+local	glReadPixels_entry	aiStack_e0	layoutSkipBytes	INFERRED	[0] skip-bytes output of gld_computePixelStoreLayout; [1] reply size and [2] rectX of the IOConnect request that continue the same stack block
+local	glReadPixels_entry	auStack_a4	convertOutA	INFERRED	_glgConvertType output A
+local	glReadPixels_entry	auStack_a0	convertOutB	INFERRED	_glgConvertType output B
+local	glReadPixels_entry	uStack_9c	procMode	INFERRED	constant 2 in the processor descriptor
+local	glReadPixels_entry	iStack_90	procWidth	INFERRED	clipped width in the processor descriptor
+local	glReadPixels_entry	iStack_8c	procHeight	INFERRED	clipped height in the processor descriptor
+local	glReadPixels_entry	uStack_88	procZero88	INFERRED	zero field of the processor descriptor
+local	glReadPixels_entry	uStack_84	procZero84	INFERRED	zero field of the processor descriptor
+local	glReadPixels_entry	uStack_50	procEnd	INFERRED	zero byte ending the processor descriptor
+local	FUN_0002ce40	param_1	stream	CONFIRMED	ctx+0x240 embedded command stream (stream+4 is the GL context; +0x2758 allocate, +0x275c commit callbacks)
+local	FUN_0002ce40	param_2	unitMaskRecord	INFERRED	record whose ushort at +6 is the bit mask of texture units to process
+local	FUN_0002ce40	iVar5	glContext	CONFIRMED	*(stream+4): the GL context (ring fields +0x1d8/+0x1dc/+0x1e4)
+local	FUN_0002ce40	puVar1	ringTailLink	INFERRED	ctx+0x1d8, link word of the previous packet
+local	FUN_0002ce40	puVar2	packet	INFERRED	0x3fa-word packet allocated for the depth-target sync
+local	FUN_0002ce40	uVar3	streamCursor	INFERRED	result of the 0x96-word allocation, advanced by gld_emitUnitObjectPacket per unit
+local	FUN_0002ce40	a1	packetEnd	INFERRED	packet + 0x3f8 words
+local	FUN_0002ce40	a6	formatByte	INFERRED	unit object +0x38 byte stored in the packet (stale argument register afterwards)
+local	FUN_00030420	param_1	packet	INFERRED	texture-state packet; initialised from the 0x74-byte template PTR_DAT_001e8998, returned advanced by 0x74
+local	FUN_00030420	param_3	pitchBytes	INFERRED	aligned row bytes, shifted by the format's texel shift into the pitch field (+0x24)
+local	FUN_00030420	param_4	blockPitchBytes	INFERRED	pitch in macro-tile blocks, into word +0xc
+local	FUN_00030420	param_5	tileFlags	INFERRED	bit 0 and bits 1-2 select the tile modes in word +0xc
+local	FUN_00030420	param_6	widthTexels	INFERRED	level width in texels (size fields minus one)
+local	FUN_00030420	param_7	heightTexels	INFERRED	level height in texels
+local	FUN_00030420	uVar1	tileModeBits	INFERRED	(tileFlags & 6) << 16
+local	FUN_00030420	uVar2	pitchBlocks	INFERRED	blockPitchBytes >> texel shift, masked to 0x3ffe
+local	FUN_00030420	uVar5	oldWord0c	INFERRED	packet word 3 before its bit-fields are rewritten
+local	FUN_00030420	fVar3	half	INFERRED	FLOAT_001aa10c (0.5): scale of the width/height floats stored at +0x58/+0x5c
+local	FUN_00030420	dVar4	i2dBias	INFERRED	DOUBLE_001aa250: int->double conversion constant
+local	FUN_00030a60	param_1	cmd	INFERRED	command words written (0x12 words), returned advanced
+local	FUN_00030a60	param_2	colorFormat	INFERRED	format class, low 4 bits placed in bits 8-11 of the second register value
+local	FUN_00030a60	param_3	colorPitch	INFERRED	aligned row bytes of the target
+local	FUN_00030a60	param_4	blockPitch	INFERRED	block pitch bytes
+local	FUN_00030a60	param_5	tileFlags	INFERRED	tile mode flags
+local	FUN_00030a60	param_6	colorOffset	INFERRED	surface offset (callers pass 0)
+local	FUN_00030a60	param_7	colorSize	INFERRED	height << 16 | width
+func	FUN_0002ce40	gld_emitUnitObjectPackets	INFERRED	for each unit in the mask: depth-target sync packet, then one gld_emitUnitObjectPacket per unit object
+func	FUN_00030420	gld_buildTextureStatePacket	INFERRED	copies the 0x74-byte texture state template and fills pitch, tile, size and format fields from a format table entry
+func	FUN_00030a60	gld_emitRenderTargetPacket	INFERRED	writes a fixed register packet (format, pitch, block pitch, tile flags, offset, size) for a render target

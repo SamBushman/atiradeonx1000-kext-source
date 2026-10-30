@@ -2883,11 +2883,11 @@ LAB_0001ddc0:
         *(short *)((int)commandBuffer + 0x42) = (short)tailMode;
         commandBuffer[0x17] = 0;
         packetEnd = (undefined4 *)
-                 FUN_00030a60(commandBuffer + 0x288,6,chunkVerts[0],chunkVerts[0],0,lineWordOffset,
+                 gld_emitRenderTargetPacket(commandBuffer + 0x288,6,chunkVerts[0],chunkVerts[0],0,lineWordOffset,
                               chunkCount << 0x10 | chunkDwords);
         if (tailBytes != 0) {
           packetEnd = (undefined4 *)
-                   FUN_00030a60(packetEnd,6,chunkVerts[0],chunkVerts[0],0,lineWordOffset,tailBytes >> 2 | 0x10000);
+                   gld_emitRenderTargetPacket(packetEnd,6,chunkVerts[0],chunkVerts[0],0,lineWordOffset,tailBytes >> 2 | 0x10000);
         }
         *(ushort *)(vertexArray[0x8a] + 0x1c) = *(ushort *)(vertexArray[0x8a] + 0x1c) | 1;
         *(ushort *)(vertexArray[0x8a] + 0x28) = *(ushort *)(vertexArray[0x8a] + 0x28) & 0xfffe;
@@ -3103,13 +3103,13 @@ LAB_0001e440:
       *(short *)((int)commandBuffer + 0x42) = (short)tailMode;
       scratchUint3 = chunkVerts[0];
       packetEnd = (undefined4 *)
-               FUN_00030a60(commandBuffer + 0x288,6,chunkVerts[0],chunkVerts[0],0,scratchUint7,
+               gld_emitRenderTargetPacket(commandBuffer + 0x288,6,chunkVerts[0],chunkVerts[0],0,scratchUint7,
                             chunkCount << 0x10 | chunkDwords);
       if (tailBytes != 0) {
         uVar5 = 0;
         scratchUint3 = chunkVerts[0];
         packetEnd = (undefined4 *)
-                 FUN_00030a60(packetEnd,6,chunkVerts[0],chunkVerts[0],0,scratchUint7,tailBytes >> 2 | 0x10000);
+                 gld_emitRenderTargetPacket(packetEnd,6,chunkVerts[0],chunkVerts[0],0,scratchUint7,tailBytes >> 2 | 0x10000);
       }
       packetCursor = packetEnd + 4;
       *(ushort *)(*(int *)bufferObject[2] + 0x1c) = *(ushort *)(*(int *)bufferObject[2] + 0x1c) | 1;
@@ -4494,65 +4494,65 @@ LAB_0001ff00:
   return;
 }
 
-/* FUN_00020210 @ 0x20210 (280 bytes) */
-int FUN_00020210(ctx)
+/* gld_updateScissorRect @ 0x20210 (280 bytes) */
+int gld_updateScissorRect(ctx)
   int ctx;
 {
-  int iVar1;
+  int scissorHeight;
   int renderHeight;
-  int iVar3;
-  int local_28;
-  int local_24;
-  int local_20;
-  int local_1c;
+  int scratchInt3;
+  int rectX;
+  int rectY;
+  int rectWidthOrRight;
+  int rectHeightOrBottom;
   
   *(undefined1 *)(ctx + 0x2a5e) = 1;
-  iVar3 = *(int *)(ctx + 0x10);
-  if (((unsigned char *)0x00003190)[iVar3] == '\0') {
-    local_20 = *(int *)(ctx + 0x15c);
-    local_1c = *(int *)(ctx + 0x160);
-    local_28 = 0;
-    local_24 = 0;
+  scratchInt3 = *(int *)(ctx + 0x10);
+  if (((unsigned char *)0x00003190)[scratchInt3] == '\0') {
+    rectWidthOrRight = *(int *)(ctx + 0x15c);
+    rectHeightOrBottom = *(int *)(ctx + 0x160);
+    rectX = 0;
+    rectY = 0;
   }
   else {
-    local_28 = *(int *)(((unsigned char *)0x00003180) + iVar3);
+    rectX = *(int *)(((unsigned char *)0x00003180) + scratchInt3);
     if (((unsigned char *)0x00002b7c)[ctx] == '\0') {
-      local_24 = *(int *)(((unsigned char *)0x00003184) + iVar3);
-      iVar1 = *(int *)(((unsigned char *)0x0000318c) + iVar3);
+      rectY = *(int *)(((unsigned char *)0x00003184) + scratchInt3);
+      scissorHeight = *(int *)(((unsigned char *)0x0000318c) + scratchInt3);
       renderHeight = *(int *)(ctx + 0x160);
     }
     else {
-      iVar1 = *(int *)(((unsigned char *)0x0000318c) + iVar3);
+      scissorHeight = *(int *)(((unsigned char *)0x0000318c) + scratchInt3);
       renderHeight = *(int *)(ctx + 0x160);
-      local_24 = renderHeight - (*(int *)(((unsigned char *)0x00003184) + iVar3) + iVar1);
+      rectY = renderHeight - (*(int *)(((unsigned char *)0x00003184) + scratchInt3) + scissorHeight);
     }
-    iVar3 = *(int *)(((unsigned char *)0x00003188) + iVar3);
-    if (local_28 < 0) {
-      iVar3 = iVar3 + local_28;
-      local_28 = 0;
+    scratchInt3 = *(int *)(((unsigned char *)0x00003188) + scratchInt3);
+    if (rectX < 0) {
+      scratchInt3 = scratchInt3 + rectX;
+      rectX = 0;
     }
-    if (local_24 < 0) {
-      iVar1 = iVar1 + local_24;
-      local_24 = 0;
+    if (rectY < 0) {
+      scissorHeight = scissorHeight + rectY;
+      rectY = 0;
     }
-    local_20 = *(int *)(ctx + 0x15c) - local_28;
-    if (iVar3 <= local_20) {
-      local_20 = iVar3;
+    rectWidthOrRight = *(int *)(ctx + 0x15c) - rectX;
+    if (scratchInt3 <= rectWidthOrRight) {
+      rectWidthOrRight = scratchInt3;
     }
-    local_1c = renderHeight - local_24;
-    if (iVar1 <= renderHeight - local_24) {
-      local_1c = iVar1;
+    rectHeightOrBottom = renderHeight - rectY;
+    if (scissorHeight <= renderHeight - rectY) {
+      rectHeightOrBottom = scissorHeight;
     }
-    if (local_20 < 1) {
+    if (rectWidthOrRight < 1) {
       return;
     }
-    if (local_1c < 1) {
+    if (rectHeightOrBottom < 1) {
       return;
     }
   }
-  local_20 = local_28 + local_20;
-  local_1c = local_24 + local_1c;
-  FUN_0008f7f0(ctx + 0x240,0,0,&local_28,0);
+  rectWidthOrRight = rectX + rectWidthOrRight;
+  rectHeightOrBottom = rectY + rectHeightOrBottom;
+  FUN_0008f7f0(ctx + 0x240,0,0,&rectX,0);
   return;
 }
 
@@ -4578,7 +4578,7 @@ int FUN_00020330(param_1, param_2)
   }
   if ((uVar2 & 0x4000) != 0) {
     uVar2 = uVar2 & 0xffffbfff;
-    ((int (*)())FUN_00020210)(param_1);
+    ((int (*)())gld_updateScissorRect)(param_1);
   }
   if ((uVar2 & 0x500) != 0) {
     FUN_000a6cb0(param_1 + 0x240,uVar2);
@@ -4836,40 +4836,40 @@ int FUN_00020b00(param_1)
   return;
 }
 
-/* FUN_00020b30 @ 0x20b30 (620 bytes) */
-int FUN_00020b30(ctx, srcX, srcY, width, height, param_6, param_7, param_8, param_9)
+/* gld_emitCopyRectPacket @ 0x20b30 (620 bytes) */
+int gld_emitCopyRectPacket(ctx, srcX, srcY, width, height, dstX, dstY, surfaceHandle, rasterOp)
   int ctx;
   int srcX;
   uint srcY;
   int width;
   uint height;
-  int param_6;
-  uint param_7;
-  undefined4 param_8;
-  uint param_9;
+  int dstX;
+  uint dstY;
+  undefined4 surfaceHandle;
+  uint rasterOp;
 {
-  uint uVar1;
-  uint uVar2;
-  undefined4 *puVar3;
+  uint channelMask;
+  uint greenMask;
+  undefined4 *packet;
   int engineState;
-  uint *puVar5;
+  uint *ringTailLink;
   uint scratchUint6;
   uint scratchUint7;
-  int iVar8;
+  int pixelFormatCode;
   
-  iVar8 = 3;
+  pixelFormatCode = 3;
   if ((*(uint *)(ctx + 0x154) & 0xf) != 3) {
-    iVar8 = 6;
+    pixelFormatCode = 6;
   }
-  puVar3 = *(undefined4 **)(ctx + 0x1dc);
+  packet = *(undefined4 **)(ctx + 0x1dc);
   *(undefined1 *)(ctx + 0x2a5e) = 1;
-  if (*(undefined4 **)(ctx + 0x1e0) <= puVar3 + 0x10) {
+  if (*(undefined4 **)(ctx + 0x1e0) <= packet + 0x10) {
     ((int (*)())gld_submitRing)(ctx,0x1000000);
-    puVar3 = *(undefined4 **)(ctx + 0x1dc);
+    packet = *(undefined4 **)(ctx + 0x1dc);
   }
-  *(undefined4 **)(ctx + 0x1dc) = puVar3 + 0x10;
-  uVar1 = 0;
-  *puVar3 = 0xd07;
+  *(undefined4 **)(ctx + 0x1dc) = packet + 0x10;
+  channelMask = 0;
+  *packet = 0xd07;
   engineState = *(int *)(ctx + 0x10);
   if (*(short *)(((unsigned char *)0x00002dba) + engineState) != 0) {
     if ((*(uint *)(ctx + 0x154) & 0xf) == 3) {
@@ -4881,12 +4881,12 @@ int FUN_00020b30(ctx, srcX, srcY, width, height, param_6, param_7, param_8, para
       if (((unsigned char *)0x00002e41)[engineState] == '\0') {
         scratchUint7 = 0;
       }
-      uVar1 = 0x1f;
+      channelMask = 0x1f;
       if (((unsigned char *)0x00002e42)[engineState] == '\0') {
-        uVar1 = 0;
+        channelMask = 0;
       }
-      uVar1 = uVar1 | scratchUint7 | -(uint)(byte)((unsigned char *)0x00002e43)[engineState] >> 0x10 & 0x8000 | scratchUint6;
-      uVar1 = uVar1 | uVar1 << 0x10;
+      channelMask = channelMask | scratchUint7 | -(uint)(byte)((unsigned char *)0x00002e43)[engineState] >> 0x10 & 0x8000 | scratchUint6;
+      channelMask = channelMask | channelMask << 0x10;
     }
     else {
       scratchUint6 = 0xff000000;
@@ -4897,35 +4897,35 @@ int FUN_00020b30(ctx, srcX, srcY, width, height, param_6, param_7, param_8, para
       if (((unsigned char *)0x00002e40)[engineState] == '\0') {
         scratchUint7 = 0;
       }
-      uVar2 = 0xff00;
+      greenMask = 0xff00;
       if (((unsigned char *)0x00002e41)[engineState] == '\0') {
-        uVar2 = 0;
+        greenMask = 0;
       }
-      uVar1 = 0xff;
+      channelMask = 0xff;
       if (((unsigned char *)0x00002e42)[engineState] == '\0') {
-        uVar1 = 0;
+        channelMask = 0;
       }
-      uVar1 = uVar1 | uVar2 | scratchUint6 | scratchUint7;
+      channelMask = channelMask | greenMask | scratchUint6 | scratchUint7;
     }
   }
-  puVar3[1] = uVar1;
-  puVar3[2] = 0xc0089b00;
-  puVar3[3] = iVar8 << 8 | (param_9 & 0xff) << 0x10 | 0x20030ff;
-  puVar5 = *(uint **)(ctx + 0x1d8);
-  *puVar5 = (int)(puVar3 + 4) - (int)puVar5 >> 2 | *puVar5;
-  *(undefined4 **)(ctx + 0x1d8) = puVar3 + 4;
-  puVar3[5] = param_8;
-  puVar3[6] = 0;
-  puVar3[4] = 0x2a000000;
-  puVar3[7] = 0;
-  puVar3[8] = 0;
-  puVar3[9] = srcX << 0x10 | srcY & 0xffff;
-  puVar3[10] = param_6 << 0x10 | param_7 & 0xffff;
-  puVar3[0xb] = width << 0x10 | height & 0xffff;
-  puVar3[0xc] = 0xd0b;
-  puVar3[0xd] = 5;
-  puVar3[0xe] = 0x5c8;
-  puVar3[0xf] = 0x10000;
+  packet[1] = channelMask;
+  packet[2] = 0xc0089b00;
+  packet[3] = pixelFormatCode << 8 | (rasterOp & 0xff) << 0x10 | 0x20030ff;
+  ringTailLink = *(uint **)(ctx + 0x1d8);
+  *ringTailLink = (int)(packet + 4) - (int)ringTailLink >> 2 | *ringTailLink;
+  *(undefined4 **)(ctx + 0x1d8) = packet + 4;
+  packet[5] = surfaceHandle;
+  packet[6] = 0;
+  packet[4] = 0x2a000000;
+  packet[7] = 0;
+  packet[8] = 0;
+  packet[9] = srcX << 0x10 | srcY & 0xffff;
+  packet[10] = dstX << 0x10 | dstY & 0xffff;
+  packet[0xb] = width << 0x10 | height & 0xffff;
+  packet[0xc] = 0xd0b;
+  packet[0xd] = 5;
+  packet[0xe] = 0x5c8;
+  packet[0xf] = 0x10000;
   return;
 }
 
@@ -6456,68 +6456,68 @@ int gld_emitPrimitiveVertices(ctx, hwPrimType, extraVertexAttribs, vertexAttribs
   return;
 }
 
-/* FUN_00024190: hidden-argument defect (found auditing #70): real callers
+/* gld_emitImmediateVertexList: hidden-argument defect (found auditing #70): real callers
  * (gldPrimWrapperPolygon_24190/000246f0/0002 47f0, tail-calling in via 0x24190) pass a real 5th argument
  * in r7, previously read here as an undeclared, uninitialised in_r7. in_r8 stays as-is: no real caller
  * supplies it (stock genuinely forwards whatever garbage is there). */
-/* FUN_00024190 @ 0x24190 (344 bytes) */
-int FUN_00024190(param_1, param_2, param_3, param_4, param_5)
-  int param_1;
-  undefined4 param_2;
-  undefined4 *param_3;
-  uint param_4;
-  undefined4 param_5;
+/* gld_emitImmediateVertexList @ 0x24190 (344 bytes) */
+int gld_emitImmediateVertexList(ctx, primitiveType, vertexAttribs, vertexCount, passThroughArg5)
+  int ctx;
+  undefined4 primitiveType;
+  undefined4 *vertexAttribs;
+  uint vertexCount;
+  undefined4 passThroughArg5;
 {
-  int iVar1;
-  undefined4 *puVar2;
-  undefined4 *puVar3;
+  int oldStreamControl;
+  undefined4 *packetCursor;
+  undefined4 *vertexCursor;
   undefined4 staleArgR8;
-  uint uVar4;
+  uint vertexIndex;
   undefined4 scratchUint5;
   
-  scratchUint5 = *(undefined4 *)(param_1 + 4);
-  puVar2 = (undefined4 *)
-           (**(code **)(param_1 + 0x2758))
-                     (param_1,(*(int *)(param_1 + 0x243c) + 1U & 0xfffffffe) +
-                              *(int *)(param_1 + 0x243c) * param_4 * 5 + param_4 * 2 + 0x16,param_3,
-                      param_4,param_5,staleArgR8,*(code **)(param_1 + 0x2758));
-  iVar1 = *(int *)(param_1 + 0x2440);
-  *(undefined4 **)(0x00002748 + param_1 + 4) = puVar2;
-  if (iVar1 != param_1 + 0x1be4) {
-    *(int *)(param_1 + 0x2440) = param_1 + 0x1be4;
-    *(int *)(param_1 + 0x2444) = param_1 + 0x1c04;
-    *(undefined4 *)(param_1 + 0x248c) = *(undefined4 *)(param_1 + 0x1ca4);
-    puVar2 = (undefined4 *)gld_emitVapStreamControl(scratchUint5,puVar2);
+  scratchUint5 = *(undefined4 *)(ctx + 4);
+  packetCursor = (undefined4 *)
+           (**(code **)(ctx + 0x2758))
+                     (ctx,(*(int *)(ctx + 0x243c) + 1U & 0xfffffffe) +
+                              *(int *)(ctx + 0x243c) * vertexCount * 5 + vertexCount * 2 + 0x16,vertexAttribs,
+                      vertexCount,passThroughArg5,staleArgR8,*(code **)(ctx + 0x2758));
+  oldStreamControl = *(int *)(ctx + 0x2440);
+  *(undefined4 **)(0x00002748 + ctx + 4) = packetCursor;
+  if (oldStreamControl != ctx + 0x1be4) {
+    *(int *)(ctx + 0x2440) = ctx + 0x1be4;
+    *(int *)(ctx + 0x2444) = ctx + 0x1c04;
+    *(undefined4 *)(ctx + 0x248c) = *(undefined4 *)(ctx + 0x1ca4);
+    packetCursor = (undefined4 *)gld_emitVapStreamControl(scratchUint5,packetCursor);
   }
-  if (*(char *)(param_1 + 0x2802) == '\0') {
-    *puVar2 = 0x5c8;
-    puVar2[1] = 0x10000000;
-    puVar2 = puVar2 + 2;
-    *(undefined1 *)(param_1 + 0x2802) = 1;
+  if (*(char *)(ctx + 0x2802) == '\0') {
+    *packetCursor = 0x5c8;
+    packetCursor[1] = 0x10000000;
+    packetCursor = packetCursor + 2;
+    *(undefined1 *)(ctx + 0x2802) = 1;
   }
-  puVar3 = puVar2 + 4;
-  *puVar2 = 0x82c;
-  scratchUint5 = *(undefined4 *)(param_1 + 0x1b84);
-  puVar2[2] = 0x821;
-  puVar2[3] = param_2;
-  puVar2[1] = scratchUint5;
-  if (param_4 != 0) {
-    uVar4 = 0;
+  vertexCursor = packetCursor + 4;
+  *packetCursor = 0x82c;
+  scratchUint5 = *(undefined4 *)(ctx + 0x1b84);
+  packetCursor[2] = 0x821;
+  packetCursor[3] = primitiveType;
+  packetCursor[1] = scratchUint5;
+  if (vertexCount != 0) {
+    vertexIndex = 0;
     do {
-      scratchUint5 = *param_3;
-      uVar4 = uVar4 + 1;
-      param_3 = param_3 + 1;
-      puVar3 = (undefined4 *)((int (*)())gldEmitCurrentAttributeRegisters)(param_1,scratchUint5,puVar3);
-    } while (uVar4 < param_4);
+      scratchUint5 = *vertexAttribs;
+      vertexIndex = vertexIndex + 1;
+      vertexAttribs = vertexAttribs + 1;
+      vertexCursor = (undefined4 *)((int (*)())gldEmitCurrentAttributeRegisters)(ctx,scratchUint5,vertexCursor);
+    } while (vertexIndex < vertexCount);
   }
-  *puVar3 = 0x92b;
-  puVar3[3] = 0;
-  puVar3[2] = ((unsigned char *)0x00001393U);
-  puVar3[1] = 0;
-  *(undefined4 **)(0x00002748 + param_1 + 4) = puVar3 + 4;
+  *vertexCursor = 0x92b;
+  vertexCursor[3] = 0;
+  vertexCursor[2] = ((unsigned char *)0x00001393U);
+  vertexCursor[1] = 0;
+  *(undefined4 **)(0x00002748 + ctx + 4) = vertexCursor + 4;
   /* dropped 2nd arg, same defect class as gld_startPacket (issue #64) - stock stores the just-advanced
    * pointer to +0x274c then loads it right back into r4 before the bctr tail-jump. */
-  (**(code **)(param_1 + 0x275c))(param_1,puVar3 + 4);
+  (**(code **)(ctx + 0x275c))(ctx,vertexCursor + 4);
   return;
 }
 

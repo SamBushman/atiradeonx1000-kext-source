@@ -21,7 +21,7 @@ gld_submitRing
 gld_updateYInvertedFlag
 gld_startPacket
 gld_drawVertexArray
-FUN_00024fe0
+gld_gatherProgramConstants
 FUN_00025bf0
 gld_readPixelsViaBlit
 glReadPixels_entry

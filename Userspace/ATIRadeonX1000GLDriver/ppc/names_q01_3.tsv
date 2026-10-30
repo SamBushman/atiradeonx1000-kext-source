@@ -94,7 +94,7 @@ local	FUN_0002ebc0	param_2	unitIndex	INFERRED	callers pass their variable `loopI
 local	FUN_0002ee30	param_1	ctxSaved	INFERRED	callers pass their variable `ctxSaved` here (1 call site(s), e.g. in gldTextureMakeResident)
 local	FUN_0002ee30	param_2	texture	INFERRED	callers pass their variable `texture` here (1 call site(s), e.g. in gldTextureMakeResident)
 local	FUN_0002fac0	param_2	texture	INFERRED	callers pass their variable `texture` here (2 call site(s), e.g. in gldTextureFormatEntryForLevel)
-local	FUN_00030420	param_2	formatInfo	INFERRED	callers pass their variable `formatInfo` here (2 call site(s), e.g. in gldTextureMakeResident)
+local	FUN_00030420	param_2	formatEntry	INFERRED	callers pass their variable `formatInfo` here (2 call site(s), e.g. in gldTextureMakeResident)
 local	FUN_00030840	param_1	ctx	INFERRED	callers pass their variable `ctx` here (4 call site(s), e.g. in glGenerateMipmap_impl)
 local	FUN_00030840	param_3	texture	INFERRED	callers pass their variable `texture` here (3 call site(s), e.g. in glGenerateMipmap_impl)
 local	FUN_000308c0	param_1	ctx	INFERRED	callers pass their variable `ctx` here (4 call site(s), e.g. in glGenerateMipmap_impl)

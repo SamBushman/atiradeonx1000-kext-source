@@ -2523,7 +2523,7 @@ LAB_000a5188:
     uVar29 = 1;
   }
   pcVar24 = (char *)0x1;
-  uVar47 = FUN_00030c50(glContext,uVar21,entryFlag15,levelCountClamped,0x1909,1,((unsigned char *)0x00001401U),uVar29);
+  uVar47 = gld_createInternalTexture(glContext,uVar21,entryFlag15,levelCountClamped,0x1909,1,((unsigned char *)0x00001401U),uVar29);
   maskTexture = (int)((ulonglong)uVar47 >> 0x20);
   uVar16 = (uint)uVar47;
   iVar38 = 0;

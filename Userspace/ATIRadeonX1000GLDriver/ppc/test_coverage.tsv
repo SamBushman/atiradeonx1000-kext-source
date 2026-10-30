@@ -221,11 +221,11 @@
 0x1eaf0	copyIndices16Swapped_dcbz	468	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x1ecd0	gld_drawVertexArray	3964	no	atomic / cache / barrier instruction; indirect call (driver context / vtable / callback)
 0x1fd00	gld_buildVertexStreamLayout	1208	yes	
-0x20210	FUN_00020210	280	yes	
+0x20210	gld_updateScissorRect	280	yes	
 0x20330	FUN_00020330	216	yes	
 0x20420	gldDisplayNotificationCallback	1716	no	calls an import (CFDictionaryGetValue); calls an import (CFNumberGetValue); calls an import (CFRelease)
 0x20b00	FUN_00020b00	40	yes	
-0x20b30	FUN_00020b30	620	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x20b30	gld_emitCopyRectPacket	620	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x21c70	gld_emitCopyBlitPacket	1540	no	indirect call (driver context / vtable / callback)
 0x22280	noop_22280	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x22290	_gldUpdateDispatch	2632	no	calls an import (pthread_mutex_lock); calls an import (pthread_mutex_unlock)
@@ -236,7 +236,7 @@
 0x23700	gldEmitCurrentAttributeRegisters	360	yes	
 0x23870	gldEmitCurrentAttributeRegistersMasked	420	yes	
 0x23a24	gld_emitPrimitiveVertices	1860	no	indirect call (driver context / vtable / callback)
-0x24190	FUN_00024190	344	no	indirect call (driver context / vtable / callback)
+0x24190	gld_emitImmediateVertexList	344	no	indirect call (driver context / vtable / callback)
 0x242f0	gldPrimWrapperTriangles_23a24	116	yes	
 0x24370	gldPrimWrapperTriangleStrip_23a24	112	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x243f0	gldPrimWrapperTriangleFan_23a24	112	no	no static blocker: a test could reach it (needs arguments / state no test builds)
@@ -254,7 +254,7 @@
 0x24fb0	FUN_00024fb0	16	yes	
 0x24fc0	noop_24fc0	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x24fd0	noop_24fd0	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x24fe0	FUN_00024fe0	2908	yes	
+0x24fe0	gld_gatherProgramConstants	2908	yes	
 0x25bf0	FUN_00025bf0	408	no	calls an import (free); calls an import (glpFreePPShaderLinearize); calls an import (glpFreePPShaderToProgram)
 0x25da0	gld_deleteContextProgramObjects	264	no	calls an import (free); calls an import (pthread_mutex_lock)
 0x25ec0	gld_bindFragmentProgramRecord	1372	no	calls an import (calloc); calls an import (free); calls an import (glpFreePPShaderLinearize)
@@ -295,7 +295,7 @@
 0x2cc10	FUN_0002cc10	28	yes	
 0x2cc30	gld_prepareDrawCount	276	yes	
 0x2cd50	gld_emitUnitObjectPacket	236	yes	
-0x2ce40	FUN_0002ce40	492	no	indirect call (driver context / vtable / callback)
+0x2ce40	gld_emitUnitObjectPackets	492	no	indirect call (driver context / vtable / callback)
 0x2d030	FUN_0002d030	456	yes	
 0x2d210	FUN_0002d210	140	yes	
 0x2d2b0	gldPackColorForSurfaceFormat	2388	yes	
@@ -308,7 +308,7 @@
 0x2f7c0	gldTextureFormatCodeFromFormatType	716	yes	
 0x2fac0	gld_selectTextureHardwareFormat	2252	yes	
 0x303d0	gldCompressedImageBytes	68	yes	
-0x30420	FUN_00030420	392	yes	
+0x30420	gld_buildTextureStatePacket	392	yes	
 0x305b0	gld_compressAlphaBlock	492	yes	
 0x307a0	FUN_000307a0	148	yes	
 0x30840	FUN_00030840	124	yes	
@@ -316,9 +316,9 @@
 0x30990	floorLog2	40	yes	
 0x309c0	FUN_000309c0	136	no	indirect call (driver context / vtable / callback)
 0x30a50	FUN_00030a50	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x30a60	FUN_00030a60	240	yes	
+0x30a60	gld_emitRenderTargetPacket	240	yes	
 0x30b50	gldTextureHasNonPowerOfTwoSize	236	yes	
-0x30c50	FUN_00030c50	684	no	calls an import (free); calls an import (malloc)
+0x30c50	gld_createInternalTexture	684	no	calls an import (free); calls an import (malloc)
 0x30f00	FUN_00030f00	88	yes	
 0x30f60	FUN_00030f60	492	yes	
 0x31170	gldTextureFormatLookup	164	no	no static blocker: a test could reach it (needs arguments / state no test builds)

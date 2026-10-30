@@ -2639,7 +2639,7 @@ void FUN_000abab0(int glContext,int a1,undefined4 a2,double fpPassThrough1)
   
   iVar1 = *(int *)(*(int *)(a1 + 0x74) + 0x84) * -0x10;
   *(unsigned char **)(auStack_70 + iVar1) = ((unsigned int)__builtin_frame_address(0));
-  ((double (*)())FUN_00024fe0)(*(undefined4 *)(glContext + 4),*(undefined4 *)(*(int *)(a1 + 0x74) + 0x84),
+  ((double (*)())gld_gatherProgramConstants)(*(undefined4 *)(glContext + 4),*(undefined4 *)(*(int *)(a1 + 0x74) + 0x84),
                auStack_30 + iVar1,fpPassThrough1);
   (**(code **)(((unsigned char *)0x00001280) + glContext))
             (glContext,a2,0,0,auStack_30 + iVar1,*(undefined4 *)(*(int *)(a1 + 0x74) + 0x84)

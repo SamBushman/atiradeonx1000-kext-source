@@ -220,11 +220,11 @@
 0x1eaf0	468	copyIndices16Swapped_dcbz	part_003	converted
 0x1ecd0	696	gld_drawVertexArray	part_003	converted
 0x1fd00	1208	gld_buildVertexStreamLayout	part_003	converted
-0x20210	280	FUN_00020210	part_003	converted
+0x20210	280	gld_updateScissorRect	part_003	converted
 0x20330	216	FUN_00020330	part_003	converted
 0x20420	1716	gldDisplayNotificationCallback	part_003	converted
 0x20b00	40	FUN_00020b00	part_003	converted
-0x20b30	620	FUN_00020b30	part_003	converted
+0x20b30	620	gld_emitCopyRectPacket	part_003	converted
 0x21c70	1540	gld_emitCopyBlitPacket	part_003	converted
 0x22280	4	noop_22280	part_003	converted
 0x22290	2632	_gldUpdateDispatch	part_003	converted
@@ -235,7 +235,7 @@
 0x23700	360	gldEmitCurrentAttributeRegisters	part_003	converted
 0x23870	420	gldEmitCurrentAttributeRegistersMasked	part_003	converted
 0x23a24	1860	gld_emitPrimitiveVertices	part_003	converted
-0x24190	344	FUN_00024190	part_003	converted
+0x24190	344	gld_emitImmediateVertexList	part_003	converted
 0x242f0	116	gldPrimWrapperTriangles_23a24	part_003	converted
 0x24370	112	gldPrimWrapperTriangleStrip_23a24	part_003	converted
 0x243f0	112	gldPrimWrapperTriangleFan_23a24	part_004	converted
@@ -253,7 +253,7 @@
 0x24fb0	16	FUN_00024fb0	part_004	converted
 0x24fc0	4	noop_24fc0	part_004	converted
 0x24fd0	4	noop_24fd0	part_004	converted
-0x24fe0	2908	FUN_00024fe0	part_004	converted
+0x24fe0	2908	gld_gatherProgramConstants	part_004	converted
 0x25bf0	408	FUN_00025bf0	part_004	converted
 0x25da0	264	gld_deleteContextProgramObjects	part_004	converted
 0x25ec0	1372	gld_bindFragmentProgramRecord	part_004	converted
@@ -294,7 +294,7 @@
 0x2cc10	28	FUN_0002cc10	part_004	converted
 0x2cc30	276	gld_prepareDrawCount	part_004	converted
 0x2cd50	236	gld_emitUnitObjectPacket	part_004	converted
-0x2ce40	492	FUN_0002ce40	part_004	converted
+0x2ce40	492	gld_emitUnitObjectPackets	part_004	converted
 0x2d030	456	FUN_0002d030	part_004	converted
 0x2d210	140	FUN_0002d210	part_004	converted
 0x2d2b0	2388	gldPackColorForSurfaceFormat	part_004	converted
@@ -307,7 +307,7 @@
 0x2f7c0	716	gldTextureFormatCodeFromFormatType	part_005	converted
 0x2fac0	2252	gld_selectTextureHardwareFormat	part_005	converted
 0x303d0	68	gldCompressedImageBytes	part_005	converted
-0x30420	392	FUN_00030420	part_005	converted
+0x30420	392	gld_buildTextureStatePacket	part_005	converted
 0x305b0	492	gld_compressAlphaBlock	part_005	converted
 0x307a0	148	FUN_000307a0	part_005	converted
 0x30840	124	FUN_00030840	part_005	converted
@@ -315,9 +315,9 @@
 0x30990	40	floorLog2	part_005	converted
 0x309c0	136	FUN_000309c0	part_005	converted
 0x30a50	8	FUN_00030a50	part_005	converted
-0x30a60	240	FUN_00030a60	part_005	converted
+0x30a60	240	gld_emitRenderTargetPacket	part_005	converted
 0x30b50	236	gldTextureHasNonPowerOfTwoSize	part_005	converted
-0x30c50	684	FUN_00030c50	part_005	converted
+0x30c50	684	gld_createInternalTexture	part_005	converted
 0x30f00	88	FUN_00030f00	part_005	converted
 0x30f60	492	FUN_00030f60	part_005	converted
 0x31170	164	gldTextureFormatLookup	part_005	converted

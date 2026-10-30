@@ -26,7 +26,7 @@
 0x8b160	arbParseSourceRegister	0x8afd8	arbParseParamBinding	r6	0x0 not at argument 3 of any C call (2 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)
 0x8b160	arbParseSourceRegister	0x8b010	arbParseParamBinding	r5	0x0 not at argument 2 of any C call (2 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)
 0x8b160	arbParseSourceRegister	0x8b010	arbParseParamBinding	r6	0x0 not at argument 3 of any C call (2 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)
-0xa4980	FUN_000a4980	0xa523c	FUN_00030c50	r9	0x1401 printed as &UNK_00001401 (symbolized-text-address)	BENIGN-SYMBOLIZED
+0xa4980	FUN_000a4980	0xa523c	gld_createInternalTexture	r9	0x1401 printed as &UNK_00001401 (symbolized-text-address)	BENIGN-SYMBOLIZED
 0xa4980	FUN_000a4980	0xa56c8	FUN_000a3790	r7	r1+0x38 (a stack address) not at argument 4 of any C call (2 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)
 0xa4980	FUN_000a4980	0xa5760	FUN_000a3a60	r7	r1+0x38 (a stack address) not at argument 4 of any C call (2 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)
 0xb3630	atifsCompileCurrentShader	0xb4030	ilTokenBufPush	r9	0x3 not at argument 6 of any C call (13 C calls)	BENIGN-CALLEE-IGNORES

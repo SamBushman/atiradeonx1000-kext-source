@@ -9675,7 +9675,7 @@ LAB_00018700:
         writeMaskNibble = *(uint *)(ctx + 0x1d38) >> 8 & 0xf;
         writeMaskByte = writeMaskNibble << 4;
       }
-      FUN_00020b30(ctx,srcX,srcY,width,height,scratchUint41,scratchUint43,scratchUint32,writeMaskNibble | writeMaskByte);
+      gld_emitCopyRectPacket(ctx,srcX,srcY,width,height,scratchUint41,scratchUint43,scratchUint32,writeMaskNibble | writeMaskByte);
     }
     else {
       if (scratchInt33 == 3) {
