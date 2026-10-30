@@ -3854,34 +3854,34 @@ LAB_0018cfbc:
 }
 
 /* FUN_0018d388 @ 0x18d388 (300 bytes) */
-int FUN_0018d388(param_1, param_2, param_3)
-  int param_1;
-  int *param_2;
-  int param_3;
+int FUN_0018d388(sourceState, candidate, slot)
+  int sourceState;
+  int *candidate;
+  int slot;
 {
-  int iVar1;
+  int slotOffset;
   int callResult;
-  int *piVar3;
+  int *existingSource;
   
-  iVar1 = param_3 * 4;
-  piVar3 = *(int **)(iVar1 + param_1);
-  if (piVar3 == (int *)0x0) {
-    callResult = ((int (*)())FUN_0018c7f4)(param_1,param_2,param_3);
+  slotOffset = slot * 4;
+  existingSource = *(int **)(slotOffset + sourceState);
+  if (existingSource == (int *)0x0) {
+    callResult = ((int (*)())FUN_0018c7f4)(sourceState,candidate,slot);
     if (callResult != 0) {
-      *(int **)(iVar1 + param_1) = param_2;
+      *(int **)(slotOffset + sourceState) = candidate;
       return 1;
     }
   }
-  else if ((piVar3 == param_2) ||
-          (((((param_2 != (int *)0x0 && (piVar3[0x20] != 0)) &&
-             (callResult = RegKind__flagBit0(piVar3[0x26]), callResult != 0)) &&
-            (((((piVar3[5] & 2U) == 0 && (callResult = (**(code **)(*piVar3 + 0x50))(piVar3), callResult == 0)
-               ) && ((param_2[0x20] != 0 &&
-                     ((callResult = RegKind__flagBit0(param_2[0x26]), callResult != 0 && ((param_2[5] & 2U) == 0)))
-                     ))) && (callResult = (**(code **)(*param_2 + 0x50))(param_2), callResult == 0)))) &&
-           ((((*(uint *)(*(int *)(iVar1 + param_1) + 0x14) & 0x40) != 0 &&
-             ((param_2[5] & 0x40U) != 0)) &&
-            (*(int *)(*(int *)(iVar1 + param_1) + 0x94) == param_2[0x25])))))) {
+  else if ((existingSource == candidate) ||
+          (((((candidate != (int *)0x0 && (existingSource[0x20] != 0)) &&
+             (callResult = RegKind__flagBit0(existingSource[0x26]), callResult != 0)) &&
+            (((((existingSource[5] & 2U) == 0 && (callResult = (**(code **)(*existingSource + 0x50))(existingSource), callResult == 0)
+               ) && ((candidate[0x20] != 0 &&
+                     ((callResult = RegKind__flagBit0(candidate[0x26]), callResult != 0 && ((candidate[5] & 2U) == 0)))
+                     ))) && (callResult = (**(code **)(*candidate + 0x50))(candidate), callResult == 0)))) &&
+           ((((*(uint *)(*(int *)(slotOffset + sourceState) + 0x14) & 0x40) != 0 &&
+             ((candidate[5] & 0x40U) != 0)) &&
+            (*(int *)(*(int *)(slotOffset + sourceState) + 0x94) == candidate[0x25])))))) {
     return 1;
   }
   return 0;

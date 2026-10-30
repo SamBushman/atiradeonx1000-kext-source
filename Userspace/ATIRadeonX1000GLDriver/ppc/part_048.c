@@ -125,24 +125,24 @@ int ValueKey__foldDot3SingleLaneSource(ctx)
 {
   int lanesAreUnset;
   int exprRecord;
-  bool bVar1;
-  int iVar2;
-  int iVar3;
+  bool notLastTriple;
+  int zeroValueNumber;
+  int operandRowOffset;
   float *exprRecord2;
   int *a0;
-  int iVar5;
+  int scaleAccepted;
   undefined4 a3;
-  int iVar6;
+  int scaleExponent;
   undefined4 a4;
   undefined4 a5;
   code *a6;
   int loopRemaining;
   int loopIndex;
-  int *piVar9;
+  int *laneTriplePtr;
   
   loopRemaining = 2;
   exprRecord = Compiler__valueNumberForExpr(*(undefined4 *)(ctx + 0x238),0);
-  iVar2 = *(int *)(exprRecord + 4);
+  zeroValueNumber = *(int *)(exprRecord + 4);
   do {
     a3 = 1;
     a4 = 1;
@@ -150,34 +150,34 @@ int ValueKey__foldDot3SingleLaneSource(ctx)
     lanesAreUnset = ValueKey__lanesAreUnset(ctx,loopRemaining,1,1,1,0);
     if (lanesAreUnset != 0) {
       loopIndex = 0;
-      piVar9 = &DAT_001e6134;
-      iVar3 = loopRemaining * 4;
+      laneTriplePtr = &DAT_001e6134;
+      operandRowOffset = loopRemaining * 4;
       do {
-        if ((iVar2 == *(int *)((iVar3 + *piVar9) * 4 + ctx + 0x168)) &&
-           (iVar2 == *(int *)((iVar3 + piVar9[1]) * 4 + ctx + 0x168))) {
+        if ((zeroValueNumber == *(int *)((operandRowOffset + *laneTriplePtr) * 4 + ctx + 0x168)) &&
+           (zeroValueNumber == *(int *)((operandRowOffset + laneTriplePtr[1]) * 4 + ctx + 0x168))) {
           exprRecord2 = (float *)Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),
-                                         *(undefined4 *)((iVar3 + piVar9[2]) * 4 + ctx + 0x168))
+                                         *(undefined4 *)((operandRowOffset + laneTriplePtr[2]) * 4 + ctx + 0x168))
           ;
           if ((double)*exprRecord2 == 1.0) {
-            iVar6 = *(int *)(*(int *)(ctx + 0xb0) + 0x124);
+            scaleExponent = *(int *)(*(int *)(ctx + 0xb0) + 0x124);
 LAB_0017c0b0:
-            ((int (*)())FUN_0017bd78)(ctx,(loopRemaining == 1) + 1,loopIndex,iVar6);
+            ((int (*)())FUN_0017bd78)(ctx,(loopRemaining == 1) + 1,loopIndex,scaleExponent);
             ValueKey__rebuild(ctx);
             return 1;
           }
-          iVar6 = ((int (*)())outputScaleExponent)((double)*exprRecord2);
-          if (iVar6 != 0) {
+          scaleExponent = ((int (*)())outputScaleExponent)((double)*exprRecord2);
+          if (scaleExponent != 0) {
             a0 = *(int **)(*(int *)(ctx + 0x238) + 0x30c);
-            iVar6 = iVar6 + *(int *)(*(int *)(ctx + 0xb0) + 0x124);
+            scaleExponent = scaleExponent + *(int *)(*(int *)(ctx + 0xb0) + 0x124);
             a6 = *(code **)(*a0 + 0xfc);
-            iVar5 = (*a6)(a0,iVar6,*(int *)(ctx + 0xb0),a3,a4,a5,a6);
-            if (iVar5 != 0) goto LAB_0017c0b0;
+            scaleAccepted = (*a6)(a0,scaleExponent,*(int *)(ctx + 0xb0),a3,a4,a5,a6);
+            if (scaleAccepted != 0) goto LAB_0017c0b0;
           }
         }
-        bVar1 = loopIndex != 2;
-        piVar9 = piVar9 + 3;
+        notLastTriple = loopIndex != 2;
+        laneTriplePtr = laneTriplePtr + 3;
         loopIndex = loopIndex + 1;
-      } while (bVar1);
+      } while (notLastTriple);
     }
     loopRemaining = loopRemaining + -1;
     if (loopRemaining == 0) {
@@ -1727,49 +1727,52 @@ int FUN_0017e02c(ctx, operandIndex, resultScaleCode)
 int ValueKey__foldMulPowerOfTwoIntoOutputScale(ctx)
   int ctx;
 {
-  bool bVar1;
-  int iVar2;
-  int iVar3;
+  int operandBase;
+  int scaleExponent;
+  bool notLastOperand;
+  bool isPositive;
+  int isOutputScale;
+  int scaleAccepted;
   undefined4 in_r6;
   undefined4 in_r7;
   undefined4 in_r8;
   int *a0;
   int loopIndex;
-  double fparam_1;
-  float local_38 [7];
+  double magnitude;
+  float operandValue [7];
   
   loopIndex = 1;
   do {
-    FUN_001770e4(local_38,ctx,loopIndex);
-    if ((GH_F2U(local_38[0]) != 0x7fff0000U)) {
-      bVar1 = -1 < (int)GH_F2U(local_38[0]);
-      if (bVar1) {
-        fparam_1 = (double)local_38[0];
+    FUN_001770e4(operandValue,ctx,loopIndex);
+    if ((GH_F2U(operandValue[0]) != 0x7fff0000U)) {
+      isPositive = -1 < (int)GH_F2U(operandValue[0]);
+      if (isPositive) {
+        magnitude = (double)operandValue[0];
       }
       else {
-        fparam_1 = -(double)local_38[0];
+        magnitude = -(double)operandValue[0];
       }
-      iVar2 = ((undefined4 (*)())isOutputScaleValue)(fparam_1);
-      if (iVar2 != 0) {
-        iVar2 = ((int (*)())outputScaleExponent)(fparam_1);
+      isOutputScale = ((undefined4 (*)())isOutputScaleValue)(magnitude);
+      if (isOutputScale != 0) {
+        scaleExponent = ((int (*)())outputScaleExponent)(magnitude);
         a0 = *(int **)(*(int *)(ctx + 0x238) + 0x30c);
-        iVar2 = iVar2 + *(int *)(*(int *)(ctx + 0xb0) + 0x124);
-        iVar3 = (**(code **)(*a0 + 0xfc))(a0,iVar2,*(int *)(ctx + 0xb0),in_r6,in_r7,in_r8,a0);
-        if (iVar3 != 0) {
+        scaleExponent = scaleExponent + *(int *)(*(int *)(ctx + 0xb0) + 0x124);
+        scaleAccepted = (**(code **)(*a0 + 0xfc))(a0,scaleExponent,*(int *)(ctx + 0xb0),in_r6,in_r7,in_r8,a0);
+        if (scaleAccepted != 0) {
           loopIndex = (loopIndex == 1) + 1;
-          if (!bVar1) {
-            iVar3 = *(int *)(ctx + 0xb0) + loopIndex * 0x18 + 0x80;
-            IROperand__setModifierBits(iVar3 + 0xc,1,(*(uint *)(iVar3 + 0x20) ^ 1) & 1);
+          if (!isPositive) {
+            operandBase = *(int *)(ctx + 0xb0) + loopIndex * 0x18 + 0x80;
+            IROperand__setModifierBits(operandBase + 0xc,1,(*(uint *)(operandBase + 0x20) ^ 1) & 1);
           }
-          ((int (*)())FUN_0017e02c)(ctx,loopIndex,iVar2);
+          ((int (*)())FUN_0017e02c)(ctx,loopIndex,scaleExponent);
           ValueKey__rebuild(ctx);
           return 1;
         }
       }
     }
-    bVar1 = loopIndex != 2;
+    notLastOperand = loopIndex != 2;
     loopIndex = loopIndex + 1;
-  } while (bVar1);
+  } while (notLastOperand);
   return 0;
 }
 
@@ -2456,61 +2459,62 @@ int ValueKey__foldMulOfConstants(ctx)
 }
 
 /* ValueKey__foldMinMaxOfNegatedPair @ 0x17f3f8 (412 bytes) */
-int ValueKey__foldMinMaxOfNegatedPair(ctx, param_2)
+int ValueKey__foldMinMaxOfNegatedPair(ctx, signFlag)
   int ctx;
-  uint param_2;
+  uint signFlag;
 {
+  int hwPredicateResult;
   int lanesAllSatisfy;
   int inst;
   int operandRecord;
-  bool bVar1;
-  bool bVar2;
-  int iVar3;
+  bool lastLane;
+  bool signNotSeen;
+  int laneWordPtr;
   uint *exprRecord;
   int *a0;
-  uint uVar5;
+  uint signBit;
   int loopIndex;
-  undefined4 local_38 [6];
+  undefined4 writeMaskWord [6];
   
   lanesAllSatisfy = Inst__allWrittenLanesSatisfy(ctx,1,2);
   if (lanesAllSatisfy != 0) {
     inst = *(int *)(ctx + 0xb0);
     if (((*(uint *)(inst + 0xb8) & 1) != (*(uint *)(inst + 0xd0) & 1)) &&
        ((*(uint *)(inst + 0xb8) >> 1 & 1) == (*(uint *)(inst + 0xd0) >> 1 & 1))) {
-      bVar2 = true;
+      signNotSeen = true;
       operandRecord = IRInst__getOperandRecord(inst,0);
-      uVar5 = 0;
+      signBit = 0;
       loopIndex = 0;
-      local_38[0] = *(undefined4 *)(operandRecord + 0x10);
-      iVar3 = ctx;
+      writeMaskWord[0] = *(undefined4 *)(operandRecord + 0x10);
+      laneWordPtr = ctx;
       do {
-        if (*(char *)((int)local_38 + loopIndex) == '\0') {
-          if (-1 < *(int *)(iVar3 + 0x178)) {
+        if (*(char *)((int)writeMaskWord + loopIndex) == '\0') {
+          if (-1 < *(int *)(laneWordPtr + 0x178)) {
 LAB_0017f514:
             a0 = *(int **)(*(int *)(ctx + 0x238) + 0x30c);
-            iVar3 = (**(code **)(*a0 + 0x88))(a0);
-            if (iVar3 == 0) {
+            hwPredicateResult = (**(code **)(*a0 + 0x88))(a0);
+            if (hwPredicateResult == 0) {
               return 0;
             }
             ((int (*)())FUN_0017c244)(ctx,1);
             IROperand__setModifierBits(*(int *)(ctx + 0xb0) + 0xa4,2,1);
-            IROperand__setModifierBits(*(int *)(ctx + 0xb0) + 0xa4,1,param_2 ^ 1);
+            IROperand__setModifierBits(*(int *)(ctx + 0xb0) + 0xa4,1,signFlag ^ 1);
             ValueKey__rebuild(ctx);
             return 1;
           }
-          exprRecord = (uint *)Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),*(int *)(iVar3 + 0x178));
-          if (bVar2) {
-            uVar5 = *exprRecord >> 0x1f;
-            bVar2 = false;
+          exprRecord = (uint *)Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),*(int *)(laneWordPtr + 0x178));
+          if (signNotSeen) {
+            signBit = *exprRecord >> 0x1f;
+            signNotSeen = false;
           }
-          else if (*exprRecord >> 0x1f != uVar5) goto LAB_0017f514;
+          else if (*exprRecord >> 0x1f != signBit) goto LAB_0017f514;
         }
-        bVar1 = loopIndex == 3;
-        iVar3 = iVar3 + 4;
+        lastLane = loopIndex == 3;
+        laneWordPtr = laneWordPtr + 4;
         loopIndex = loopIndex + 1;
-        if (bVar1) {
+        if (lastLane) {
           ((int (*)())FUN_0017c244)(ctx,1);
-          IROperand__setModifierBits(*(int *)(ctx + 0xb0) + 0xa4,1,(uint)(param_2 == uVar5));
+          IROperand__setModifierBits(*(int *)(ctx + 0xb0) + 0xa4,1,(uint)(signFlag == signBit));
           IROperand__setModifierBits(*(int *)(ctx + 0xb0) + 0xa4,2,0);
           ValueKey__rebuild(ctx);
           return 1;
@@ -3987,37 +3991,37 @@ int FUN_001819b4(inst, inst2)
 }
 
 /* FUN_00181ab0 @ 0x181ab0 (208 bytes) */
-int FUN_00181ab0(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  int *param_1;
-  int param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+int FUN_00181ab0(pass, block, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
+  int *pass;
+  int block;
+  undefined4 unusedArg3;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
 {
-  int iVar1;
-  int iVar2;
+  int nextLink;
+  int nextNode;
   undefined4 *allocation;
   int *elementRef;
   int loopIndex;
-  int iVar6;
+  int currentNode;
   uint vectorFilledCount;
   undefined4 arenaAt378;
   uint *vector;
   
-  iVar1 = *(int *)(*(int *)(param_2 + 0x98) + 8);
-  if (iVar1 != 0) {
+  nextLink = *(int *)(*(int *)(block + 0x98) + 8);
+  if (nextLink != 0) {
     loopIndex = 0;
-    iVar6 = *(int *)(param_2 + 0x98);
+    currentNode = *(int *)(block + 0x98);
     do {
-      iVar2 = iVar1;
-      if ((*(uint *)(iVar6 + 0x14) & 1) != 0) {
-        *(int *)(iVar6 + 0x150) = loopIndex;
-        arenaAt378 = *(undefined4 *)(*param_1 + 0x378);
+      nextNode = nextLink;
+      if ((*(uint *)(currentNode + 0x14) & 1) != 0) {
+        *(int *)(currentNode + 0x150) = loopIndex;
+        arenaAt378 = *(undefined4 *)(*pass + 0x378);
         allocation = (undefined4 *)Arena__alloc(arenaAt378,0x1c);
         *allocation = arenaAt378;
-        vector = (uint *)param_1[7];
+        vector = (uint *)pass[7];
         vectorFilledCount = vector[1];
         if (vectorFilledCount < *vector) {
           _memset(vectorFilledCount * 4 + vector[2],0,4);
@@ -4029,11 +4033,11 @@ int FUN_00181ab0(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
         }
         *elementRef = (int)(allocation + 1);
         loopIndex = loopIndex + 1;
-        iVar2 = *(int *)(iVar6 + 8);
+        nextNode = *(int *)(currentNode + 8);
       }
-      iVar1 = *(int *)(iVar2 + 8);
-      iVar6 = iVar2;
-    } while (*(int *)(iVar2 + 8) != 0);
+      nextLink = *(int *)(nextNode + 8);
+      currentNode = nextNode;
+    } while (*(int *)(nextNode + 8) != 0);
   }
   return;
 }
@@ -5917,27 +5921,28 @@ int FUN_00184bf0(param_1)
 }
 
 /* FUN_00184cd8 @ 0x184cd8 (164 bytes) */
-int FUN_00184cd8(param_1, param_2, param_3)
-  int *param_1;
-  undefined4 param_2;
-  int param_3;
+int FUN_00184cd8(this, arg2, passContext)
+  int *this;
+  undefined4 arg2;
+  int passContext;
 {
-  int iVar1;
-  int *piVar2;
-  undefined4 uVar3;
+  int opcode;
+  int testResult;
+  int *hwLimitsObj;
+  undefined4 result;
   
-  iVar1 = (**(code **)(*param_1 + 0x24))(param_1,param_2,param_3);
-  if (((iVar1 == 0) ||
-      (piVar2 = *(int **)(*(int *)(param_3 + 8) + 0x30c),
-      iVar1 = (**(code **)(*piVar2 + 0xfc))(piVar2,param_1[0x49] + -1,param_1), iVar1 == 0)) ||
-     ((iVar1 = *(int *)(param_1[0x22] + 8), iVar1 != 0x13 && ((iVar1 != 0x1c && (iVar1 != 0x1d))))))
+  testResult = (**(code **)(*this + 0x24))(this,arg2,passContext);
+  if (((testResult == 0) ||
+      (hwLimitsObj = *(int **)(*(int *)(passContext + 8) + 0x30c),
+      testResult = (**(code **)(*hwLimitsObj + 0xfc))(hwLimitsObj,this[0x49] + -1,this), testResult == 0)) ||
+     ((opcode = *(int *)(this[0x22] + 8), opcode != 0x13 && ((opcode != 0x1c && (opcode != 0x1d))))))
   {
-    uVar3 = 0;
+    result = 0;
   }
   else {
-    uVar3 = 1;
+    result = 1;
   }
-  return uVar3;
+  return result;
 }
 
 /* Inst__splitAndMerge @ 0x184d7c (372 bytes) */

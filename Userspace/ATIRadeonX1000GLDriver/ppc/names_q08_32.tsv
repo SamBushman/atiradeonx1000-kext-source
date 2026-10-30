@@ -1,0 +1,23 @@
+local	FUN_00181ab0	param_1	pass	INFERRED	pass object: [0] compiler, [7] result vector
+local	FUN_00181ab0	param_2	block	INFERRED	object whose +0x98 is the head of a list linked through +8 (instruction list)
+local	FUN_00181ab0	param_3	unusedArg3	INFERRED	unused argument
+local	FUN_00181ab0	param_4	unusedArg4	INFERRED	unused argument
+local	FUN_00181ab0	param_5	unusedArg5	INFERRED	unused argument
+local	FUN_00181ab0	param_6	unusedArg6	INFERRED	unused argument
+local	FUN_00181ab0	param_7	unusedArg7	INFERRED	unused argument
+local	FUN_00181ab0	iVar1	nextLink	INFERRED	+8 link of the following node, loop condition
+local	FUN_00181ab0	iVar2	nextNode	INFERRED	node the loop advances to (current node, or its +8 link after a record was made)
+local	FUN_00181ab0	iVar6	currentNode	INFERRED	node being tested (flag bit 0 selects it)
+local	FUN_00184cd8	param_1	this	INFERRED	object with vtable +0x24 predicate, +0x88 instruction, +0x124 counter
+local	FUN_00184cd8	param_2	arg2	INFERRED	forwarded to the vtable +0x24 predicate
+local	FUN_00184cd8	param_3	passContext	INFERRED	pass context; +8 compiler
+local	FUN_00184cd8	piVar2	hwLimitsObj	INFERRED	compiler +0x30c hardware limits object
+local	FUN_00184cd8	uVar3	result	INFERRED	return value: 1 when the predicate holds and the opcode is 0x13, 0x1c or 0x1d
+local	FUN_0018d388	param_1	sourceState	INFERRED	state holding one source per slot at +slot*4
+local	FUN_0018d388	param_2	candidate	INFERRED	source to put into the slot if compatible
+local	FUN_0018d388	param_3	slot	INFERRED	slot index
+local	FUN_0018d388	iVar1	slotOffset	INFERRED	slot * 4
+local	FUN_0018d388	piVar3	existingSource	INFERRED	source already stored in the slot
+use	FUN_00184cd8	iVar1	testResult	INFERRED	vtable +0x24 predicate result, then the hardware-limit predicate result	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0x24\)\)\(param_1,param_2,param_3\);$	+2
+use	FUN_00184cd8	iVar1	testResult	INFERRED	vtable +0x24 predicate result, then the hardware-limit predicate result	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*piVar2\ \+\ 0xfc\)\)\(piVar2,param_1\[0x49\]\ \+\ \-1,param_1\),\ iVar1\ ==\ 0\)\)\ \|\|$	+1
+use	FUN_00184cd8	iVar1	opcode	INFERRED	opcode of the instruction (+0x88 -> +8): 0x13, 0x1c or 0x1d	^\s*\(\(iVar1\ =\ \*\(int\ \*\)\(param_1\[0x22\]\ \+\ 8\),\ iVar1\ !=\ 0x13\ \&\&\ \(\(iVar1\ !=\ 0x1c\ \&\&\ \(iVar1\ !=\ 0x1d\)\)\)\)\)\)$	+1
