@@ -1854,7 +1854,8 @@ int Program__packPsInputs(program)
   int iVar10;
   int operandRecord;
   undefined4 uVar12;
-  undefined4 *puVar13;
+  undefined4 *candidateSlotRef;
+  undefined4 *interpAlloc;
   uint candidateCount;
   undefined1 *laneSlotCursor;
   int mergeCount;
@@ -1979,12 +1980,12 @@ int Program__packPsInputs(program)
                       _memset((void *)(innerElementCount * 4 + allocation[3]),0,(uVar23 - innerElementCount) * 4 + 4);
                       allocation[2] = newElementCount;
                     }
-                    puVar13 = (undefined4 *)(iVar26 + allocation[3]);
+                    candidateSlotRef = (undefined4 *)(iVar26 + allocation[3]);
                   }
                   else {
-                    puVar13 = (undefined4 *)Vector__elementRefGrow(candidateVector,uVar23);
+                    candidateSlotRef = (undefined4 *)Vector__elementRefGrow(candidateVector,uVar23);
                   }
-                  *puVar13 = 0;
+                  *candidateSlotRef = 0;
                   if (iVar19 == 4) break;
                 }
                 uVar23 = uVar23 + 1;
@@ -1993,16 +1994,16 @@ int Program__packPsInputs(program)
               } while (candidateCount != uVar23);
               if (1 < mergeCount) {
                 uVar12 = *(undefined4 *)(*(int *)(program + 8) + 0x374);
-                puVar13 = (undefined4 *)Arena__alloc(uVar12,0x168);
-                *puVar13 = uVar12;
-                piVar6 = puVar13 + 1;
+                interpAlloc = (undefined4 *)Arena__alloc(uVar12,0x168);
+                *interpAlloc = uVar12;
+                piVar6 = interpAlloc + 1;
                 IRLoadInterp__ctor_109198(piVar6,*(undefined4 *)(program + 8));
-                puVar13[0x51] = iVar22;
-                puVar13[0x50] = iVar7;
-                puVar13[0x26] = uVar8;
-                puVar13[0x27] = interpWord144;
-                puVar13[0x52] = interpWord144;
-                puVar13[0x53] = uVar8;
+                interpAlloc[0x51] = iVar22;
+                interpAlloc[0x50] = iVar7;
+                interpAlloc[0x26] = uVar8;
+                interpAlloc[0x27] = interpWord144;
+                interpAlloc[0x52] = interpWord144;
+                interpAlloc[0x53] = uVar8;
                 if (0 < iVar19) {
                   iVar22 = 0;
                   piVar24 = piVar6;
@@ -2021,7 +2022,7 @@ int Program__packPsInputs(program)
                 }
                 iVar26 = 0;
                 iVar19 = 0;
-                puVar13[0x59] = mergeCount + *(int *)(program + 0x478);
+                interpAlloc[0x59] = mergeCount + *(int *)(program + 0x478);
                 (**(code **)(*targetBlock + 0xc))(targetBlock,piVar6);
                 do {
                   piVar24 = (int *)local_70[iVar19];
