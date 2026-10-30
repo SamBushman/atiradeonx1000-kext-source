@@ -5031,7 +5031,8 @@ int evsFoldConstantMoves(compiler, shaderProgram)
   uint writeEnableZ;
   byte passZ;
   uint writeEnableW;
-  uint uVar30;
+  uint crBitsX;
+  uint instIndex;
   int currentInstruction;
   int movRecord;
   byte in_xer_so = 0;
@@ -5072,20 +5073,20 @@ LAB_0007de3c:
       xIsOne = constantX == 1.0;
       yIsOne = constantY == 1.0;
       wIsOne = constantW == 1.0;
-      uVar30 = (uint)(byte)((constantX == 0.0) << 2 | (constantX != 0.0) << 1 | in_xer_so & 1);
-      iStack_78 = uVar30 << 0x1c;
+      crBitsX = (uint)(byte)((constantX == 0.0) << 2 | (constantX != 0.0) << 1 | in_xer_so & 1);
+      iStack_78 = crBitsX << 0x1c;
       bVar36 = constantZ == 1.0;
       bVar37 = constantZ == 0.0;
       yIsZero = constantY == 0.0;
       wIsZero = constantW == 0.0;
-      if (((((!(bool)((byte)((uVar30 << 0xc) >> 8) >> 5 & 1)) ||
+      if (((((!(bool)((byte)((crBitsX << 0xc) >> 8) >> 5 & 1)) ||
             (((xIsOne || (constantX == -1.0)) || (yIsZero)))) ||
            (((yIsOne || (constantY == -1.0)) || (bVar37)))) ||
           (((bVar36 || (constantZ == -1.0)) || ((wIsZero || ((wIsOne || (constantW == -1.0)))))))) &&
-         (uVar30 = instructionIndex + 1, uVar30 < instructionCount)) {
-        movRecord = uVar30 * 0x74;
+         (instIndex = instructionIndex + 1, instIndex < instructionCount)) {
+        movRecord = instIndex * 0x74;
         allLanesPass = false;
-        scanIndex = uVar30;
+        scanIndex = instIndex;
         symbol = movRecord;
         do {
           laterRecord = symbol + instructions;
@@ -5188,8 +5189,8 @@ LAB_0007e330:
   instructionIndex = 0;
   do {
     bVar33 = false;
-    for (uVar30 = instructionCount; 1 < uVar30; uVar30 = uVar30 - 1) {
-      currentInstruction = uVar30 * 0x74;
+    for (instIndex = instructionCount; 1 < instIndex; instIndex = instIndex - 1) {
+      currentInstruction = instIndex * 0x74;
       instructions = *(int *)(shaderProgram + 0x18) + currentInstruction;
       if (((((*(int *)(instructions + -0x74) == 0x879b) || (*(int *)(instructions + -0x74) == 0x8799)) &&
            (*(int *)(instructions + -0x54) == 2)) &&
@@ -5199,8 +5200,8 @@ LAB_0007e330:
            )))) && ((*(int *)(instructions + -0x4c) == 0x87d5 &&
                     (((*(int *)(instructions + -0x48) == 0x87d6 && (*(int *)(instructions + -0x44) == 0x87d7))
                      && (*(int *)(instructions + -0x40) == 0x87d8)))))) {
-        if (uVar30 < instructionCount) {
-          symbol = instructionCount - uVar30;
+        if (instIndex < instructionCount) {
+          symbol = instructionCount - instIndex;
           laterSlotCursor = (int *)(instructions + 0x20);
           laneX = 0;
           laneY = 0;
@@ -5232,7 +5233,7 @@ LAB_0007e530:
           } while ((symbol != 0) && (laterSlotCursor = laterSlotCursor + 0x1d, !bVar35));
           if (!bVar34) goto LAB_0007e760;
         }
-        scanIndex = uVar30 - 1;
+        scanIndex = instIndex - 1;
         if (scanIndex != 0) {
           writeEnableW = 0;
           writeEnableZ = 0;
@@ -5281,8 +5282,8 @@ LAB_0007e530:
             if (((((readsX == '\0') || (writeEnableX != 0)) && ((readsY == '\0' || (writeEnableY != 0))))
                 && ((readsZ == '\0' || (writeEnableZ != 0)))) &&
                ((acStack_85[0] == '\0' || (writeEnableW != 0)))) {
-              if (instructionIndex < uVar30) {
-                symbol = uVar30 - instructionIndex;
+              if (instructionIndex < instIndex) {
+                symbol = instIndex - instructionIndex;
                 movRecord = instructionIndex * 0x74;
                 do {
                   laterRecord = movRecord + *(int *)(shaderProgram + 0x18);
@@ -5305,8 +5306,8 @@ LAB_0007e530:
                 } while (symbol != 0);
               }
               instructionCount = *(uint *)(shaderProgram + 0x14);
-              scanIndex = uVar30;
-              if (uVar30 < instructionCount) {
+              scanIndex = instIndex;
+              if (instIndex < instructionCount) {
                 do {
                   scanIndex = scanIndex + 1;
                   instructions = currentInstruction + *(int *)(shaderProgram + 0x18);
@@ -5328,10 +5329,10 @@ LAB_0007e530:
 LAB_0007e760: ;
     }
     if (instructionCount != 0) {
-      uVar30 = 0;
+      instIndex = 0;
       do {
         currentInstruction = *(int *)(shaderProgram + 0x18);
-        symbol = uVar30 * 0x74;
+        symbol = instIndex * 0x74;
         instructions = *(int *)(currentInstruction + symbol);
         movRecord = currentInstruction + symbol;
         if ((((instructions == 0x879b) || (instructions == 0x8799)) || (instructions == 0x879a)) &&
@@ -5340,7 +5341,7 @@ LAB_0007e760: ;
               (*(int *)(*(int *)(movRecord + 8) * 0x54 + *(int *)(shaderProgram + 0x20) + 0x28) != 0x87c4))))
             && ((((*(int *)(movRecord + 0xc) != 0 && (*(int *)(movRecord + 0x10) != 0)) &&
                  (*(int *)(movRecord + 0x14) != 0)) && (*(int *)(movRecord + 0x18) != 0)))))) {
-          writeEnableX = uVar30 + 1;
+          writeEnableX = instIndex + 1;
           scanIndex = writeEnableX;
           instructionIndex = instructionCount;
           if (writeEnableX < instructionCount) {
@@ -7042,8 +7043,8 @@ code_r0x000807a8:
           }
           instructionCount = instructionCount - 1;
           *(uint *)(shaderProgram + 0x14) = instructionCount;
-          scanIndex = uVar30;
-          if (uVar30 < instructionCount) {
+          scanIndex = instIndex;
+          if (instIndex < instructionCount) {
             do {
               scanIndex = scanIndex + 1;
               instructions = symbol + *(int *)(shaderProgram + 0x18);
@@ -7055,8 +7056,8 @@ code_r0x000807a8:
           bVar33 = true;
         }
 LAB_00080860:
-        uVar30 = uVar30 + 1;
-      } while (uVar30 < instructionCount);
+        instIndex = instIndex + 1;
+      } while (instIndex < instructionCount);
     }
   } while (bVar33);
   instructionIndex = 0;
@@ -7064,13 +7065,13 @@ LAB_00080860:
     instructions = instructionCount * 0x74;
     instructionIndex = 0;
     do {
-      uVar30 = instructionCount - instructionIndex;
+      instIndex = instructionCount - instructionIndex;
       currentInstruction = instructions + *(int *)(shaderProgram + 0x18);
       if (((*(int *)(currentInstruction + -0x74) == 0x879d) && (*(int *)(currentInstruction + -0x70) == 2)) &&
          (symbol = extvsOperandDataType(shaderProgram + 0x1c,currentInstruction + -0x54), symbol == 0x87bf)) {
         instructionCountCopy = *(uint *)(shaderProgram + 0x14);
-        if (uVar30 < instructionCountCopy) {
-          symbol = instructionCountCopy - uVar30;
+        if (instIndex < instructionCountCopy) {
+          symbol = instructionCountCopy - instIndex;
           bVar34 = true;
           bVar33 = false;
           laterSlotCursor = (int *)(instructions + *(int *)(shaderProgram + 0x18) + 4);
@@ -7136,8 +7137,8 @@ code_r0x00080a54:
           selectorEnumerant = *(undefined4 *)(currentInstruction + -0x40);
         }
         symbol = instructions;
-        writeEnableX = uVar30;
-        if (uVar30 < instructionCountCopy) {
+        writeEnableX = instIndex;
+        if (instIndex < instructionCountCopy) {
           do {
             movRecord = symbol + *(int *)(shaderProgram + 0x18);
             if ((*(int *)(movRecord + 0x20) != 2) ||
@@ -8731,14 +8732,14 @@ code_r0x00082578:
             instructionCountCopy = *(uint *)(shaderProgram + 0x14);
           } while ((writeEnableX + 1 < instructionCountCopy) && (symbol = symbol + 0x74, writeEnableX = writeEnableX + 1, !bVar33));
           currentInstruction = instructions;
-          if (uVar30 < instructionCountCopy) {
+          if (instIndex < instructionCountCopy) {
             do {
-              uVar30 = uVar30 + 1;
+              instIndex = instIndex + 1;
               symbol = currentInstruction + *(int *)(shaderProgram + 0x18);
               _memcpy(symbol + -0x74,symbol,0x74);
               instructionCountCopy = *(uint *)(shaderProgram + 0x14);
               currentInstruction = currentInstruction + 0x74;
-            } while (uVar30 < instructionCountCopy);
+            } while (instIndex < instructionCountCopy);
           }
         }
         *(uint *)(shaderProgram + 0x14) = instructionCountCopy - 1;
@@ -8784,7 +8785,7 @@ code_r0x00082770:
     if (instructionIndex != 0) {
       symbol = instructionIndex * 0x74;
       bVar33 = false;
-      uVar30 = instructionIndex;
+      instIndex = instructionIndex;
       do {
         movRecord = symbol + *(int *)(shaderProgram + 0x18);
         if ((*(int *)(movRecord + -0x70) == 2) &&
@@ -8818,35 +8819,35 @@ code_r0x0008286c:
               (*(int *)(movRecord + -0x18) == *(int *)(instructions + -0x50))))) goto code_r0x0008286c;
           bVar34 = false;
         }
-        uVar30 = uVar30 - 1;
-      } while ((uVar30 != 0) && (symbol = symbol + -0x74, !bVar34));
+        instIndex = instIndex - 1;
+      } while ((instIndex != 0) && (symbol = symbol + -0x74, !bVar34));
       if (bVar33) {
-        uVar30 = *(uint *)(shaderProgram + 0x14);
-        if (instructionCount < uVar30) {
+        instIndex = *(uint *)(shaderProgram + 0x14);
+        if (instructionCount < instIndex) {
           do {
             instructionCount = instructionCount + 1;
             instructions = currentInstruction + *(int *)(shaderProgram + 0x18);
             currentInstruction = currentInstruction + 0x74;
             _memcpy(instructions + -0x74,instructions,0x74);
-            uVar30 = *(uint *)(shaderProgram + 0x14);
-          } while (instructionCount < uVar30);
+            instIndex = *(uint *)(shaderProgram + 0x14);
+          } while (instructionCount < instIndex);
         }
-        *(uint *)(shaderProgram + 0x14) = uVar30 - 1;
+        *(uint *)(shaderProgram + 0x14) = instIndex - 1;
       }
     }
   } while( true );
 LAB_0007e2d4:
   if (allLanesPass) {
-    if (uVar30 < instructionCount) {
+    if (instIndex < instructionCount) {
       do {
-        uVar30 = uVar30 + 1;
+        instIndex = instIndex + 1;
         instructions = movRecord + *(int *)(shaderProgram + 0x18);
         movRecord = movRecord + 0x74;
         uStack_70 = selectorEnumerant;
         _memcpy(instructions + -0x74,instructions,0x74);
         instructionCount = *(uint *)(shaderProgram + 0x14);
         selectorEnumerant = uStack_70;
-      } while (uVar30 < instructionCount);
+      } while (instIndex < instructionCount);
     }
     instructionCount = instructionCount - 1;
     *(uint *)(shaderProgram + 0x14) = instructionCount;
