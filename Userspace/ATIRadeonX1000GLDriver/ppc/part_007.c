@@ -1658,28 +1658,29 @@ int FUN_0004e880(glContext)
 {
   uint glContextWord243c;
   code *UNRECOVERED_JUMPTABLE;
-  uint *puVar2;
-  int iVar3;
-  uint uVar4;
+  uint *packet;
+  int packetByteOffset;
+  uint packetHeader;
+  uint pairsLeft;
   
   if (*(int *)(glContext + 0x243c) != 0) {
     glContextWord243c = *(int *)(glContext + 0x243c) + 1U >> 1;
-    puVar2 = (uint *)(**(code **)(glContext + 0x2758))(glContext,glContextWord243c * 2 + 2);
-    *(uint **)(0x00002748 + glContext + 4) = puVar2;
-    uVar4 = (glContextWord243c - 1) * 0x10000;
-    *puVar2 = uVar4 | 0x854;
-    puVar2[glContextWord243c + 1] = uVar4 | 0x878;
+    packet = (uint *)(**(code **)(glContext + 0x2758))(glContext,glContextWord243c * 2 + 2);
+    *(uint **)(0x00002748 + glContext + 4) = packet;
+    packetHeader = (glContextWord243c - 1) * 0x10000;
+    *packet = packetHeader | 0x854;
+    packet[glContextWord243c + 1] = packetHeader | 0x878;
     if (glContextWord243c != 0) {
-      iVar3 = 0;
-      uVar4 = glContextWord243c;
+      packetByteOffset = 0;
+      pairsLeft = glContextWord243c;
       do {
-        *(undefined4 *)((int)puVar2 + iVar3 + 4) =
-             *(undefined4 *)(iVar3 + *(int *)(glContext + 0x2440));
-        *(undefined4 *)((int)puVar2 + iVar3 + glContextWord243c * 4 + 8) =
-             *(undefined4 *)(iVar3 + *(int *)(glContext + 0x2444));
-        iVar3 = iVar3 + 4;
-        uVar4 = uVar4 - 1;
-      } while (uVar4 != 0);
+        *(undefined4 *)((int)packet + packetByteOffset + 4) =
+             *(undefined4 *)(packetByteOffset + *(int *)(glContext + 0x2440));
+        *(undefined4 *)((int)packet + packetByteOffset + glContextWord243c * 4 + 8) =
+             *(undefined4 *)(packetByteOffset + *(int *)(glContext + 0x2444));
+        packetByteOffset = packetByteOffset + 4;
+        pairsLeft = pairsLeft - 1;
+      } while (pairsLeft != 0);
     }
     UNRECOVERED_JUMPTABLE = *(code **)(glContext + 0x275c);
     *(uint *)(0x00002748 + glContext + 4) = glContextWord243c * 8 + *(int *)(0x00002748 + glContext + 4) + 8;
@@ -4701,38 +4702,38 @@ int glGenSymbolsEXT_impl(ctx, dataType, storageClass, entryWord2c, elementCount,
   uint elementCount;
   int constantIndex;
 {
-  int iVar1;
-  int iVar2;
-  int iVar3;
+  int remainingElements;
+  int childConstantIndex;
+  int symbolList;
   uint loopIndex;
-  undefined4 uVar5;
+  undefined4 firstSymbolId;
   
   if (((dataType - 0x87beU < 3) &&
       (((((storageClass - 0x87c1U < 2 || (storageClass == 0x87c4)) || (storageClass == 0x87c3)) ||
         ((storageClass == -3 || (storageClass == -2)))) || (storageClass == -1)))) && (entryWord2c - 0x87e0U < 2)) {
     if (((storageClass - 0x87c3U < 2) || (storageClass == -3)) || ((storageClass == -2 || (storageClass == -1)))) {
-      iVar3 = *(int *)(((unsigned char *)0x00001168) + ctx) + 0x1c;
+      symbolList = *(int *)(((unsigned char *)0x00001168) + ctx) + 0x1c;
       if (((unsigned char *)0x00001170)[ctx] == '\0') goto LAB_000534a0;
     }
     else {
-      iVar3 = *(int *)(((unsigned char *)0x0000116c) + ctx) + 0x14;
+      symbolList = *(int *)(((unsigned char *)0x0000116c) + ctx) + 0x14;
     }
-    uVar5 = extvsCreateSymbol(ctx,iVar3,dataType,storageClass,entryWord2c,0,elementCount,constantIndex);
+    firstSymbolId = extvsCreateSymbol(ctx,symbolList,dataType,storageClass,entryWord2c,0,elementCount,constantIndex);
     if (1 < elementCount) {
       loopIndex = 1;
       do {
-        iVar1 = elementCount - loopIndex;
-        iVar2 = loopIndex + constantIndex;
+        remainingElements = elementCount - loopIndex;
+        childConstantIndex = loopIndex + constantIndex;
         loopIndex = loopIndex + 1;
-        extvsCreateSymbol(ctx,iVar3,dataType,storageClass,entryWord2c,uVar5,iVar1,iVar2);
+        extvsCreateSymbol(ctx,symbolList,dataType,storageClass,entryWord2c,firstSymbolId,remainingElements,childConstantIndex);
       } while (elementCount != loopIndex);
     }
   }
   else {
 LAB_000534a0:
-    uVar5 = 0;
+    firstSymbolId = 0;
   }
-  return uVar5;
+  return firstSymbolId;
 }
 
 /* FUN_000534c0 @ 0x534c0 (260 bytes) */

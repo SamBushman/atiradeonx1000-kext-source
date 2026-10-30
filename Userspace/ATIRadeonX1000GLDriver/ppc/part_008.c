@@ -159,18 +159,18 @@ int glWriteMaskEXT_impl(ctx, resultId, sourceId, enableX, enableY, enableZ, enab
   uint enableZ;
   uint enableW;
 {
-  uint local_28;
-  uint local_24;
-  uint local_20;
-  uint local_1c;
+  uint writeMaskX;
+  uint writeMaskY;
+  uint writeMaskZ;
+  uint writeMaskW;
   
   if ((((((unsigned char *)0x00001170)[ctx] != '\0') && (enableX < 2)) && (enableY < 2)) &&
      ((enableZ < 2 && (enableW < 2)))) {
-    local_28 = enableX;
-    local_24 = enableY;
-    local_20 = enableZ;
-    local_1c = enableW;
-    ((int (*)())extvsAppendInstruction)(ctx,*(undefined4 *)(((unsigned char *)0x00001168) + ctx),0x879b,resultId,&local_28,sourceId,
+    writeMaskX = enableX;
+    writeMaskY = enableY;
+    writeMaskZ = enableZ;
+    writeMaskW = enableW;
+    ((int (*)())extvsAppendInstruction)(ctx,*(undefined4 *)(((unsigned char *)0x00001168) + ctx),0x879b,resultId,&writeMaskX,sourceId,
                  &DAT_001db998,0,&DAT_001db998,0,&DAT_001db998);
   }
   return;
@@ -962,9 +962,11 @@ int extvsCreateSymbol(ctx, symbolList, dataType, storageClass, entryWord2c, base
   int constantIndex;
 {
   uint symbolId;
-  int iVar1;
+  int symbolRecord;
+  int nextOrdinal;
   uint entriesBase;
-  undefined4 uVar3;
+  undefined4 parentSymbol;
+  undefined4 growSlots;
   uint entryIndex;
   int symbolIdState;
   int entryOffset;
@@ -972,7 +974,7 @@ int extvsCreateSymbol(ctx, symbolList, dataType, storageClass, entryWord2c, base
   symbolIdState = *(int *)(((unsigned char *)0x0000116c) + ctx);
   if (*(int *)(symbolIdState + 0x24) < 0) {
 LAB_00055a00:
-    uVar3 = 0;
+    parentSymbol = 0;
   }
   else {
     entryIndex = *symbolList;
@@ -1009,10 +1011,10 @@ LAB_00055a00:
       entryOffset = entryIndex * 0x54;
       *(int *)(symbolList[1] + entryOffset + 0x28) = storageClass;
       if (dataType == 0x87bf) {
-        uVar3 = 0x10;
+        growSlots = 0x10;
       }
       else if (dataType == 0x87c0) {
-        uVar3 = 0x40;
+        growSlots = 0x40;
       }
       else {
         if (dataType != 0x87be) {
@@ -1020,11 +1022,11 @@ LAB_00055a00:
           *(undefined1 *)(entryOffset + symbolList[1] + 0x3c) = 0;
           goto LAB_00055870;
         }
-        uVar3 = 4;
+        growSlots = 4;
       }
       entriesBase = symbolList[1];
-      uVar3 = (**(code **)(ctx + 0xc))(uVar3);
-      *(undefined4 *)(entryOffset + entriesBase + 0x38) = uVar3;
+      growSlots = (**(code **)(ctx + 0xc))(growSlots);
+      *(undefined4 *)(entryOffset + entriesBase + 0x38) = growSlots;
       *(undefined1 *)(entryOffset + symbolList[1] + 0x3c) = 1;
     }
 LAB_00055870:
@@ -1033,15 +1035,15 @@ LAB_00055870:
     *(int *)(symbolList[1] + entryOffset + 0x24) = dataType;
     *(undefined4 *)(symbolList[1] + entryOffset + 0x2c) = entryWord2c;
     if ((baseId != 0) || (1 < elementCount)) {
-      iVar1 = entryOffset + symbolList[1];
+      symbolRecord = entryOffset + symbolList[1];
       if (baseId == 0) {
-        baseId = *(int *)(iVar1 + 0x20);
+        baseId = *(int *)(symbolRecord + 0x20);
       }
     }
     else {
-      iVar1 = symbolList[1] + entryOffset;
+      symbolRecord = symbolList[1] + entryOffset;
     }
-    *(int *)(iVar1 + 0x30) = baseId;
+    *(int *)(symbolRecord + 0x30) = baseId;
     *(uint *)(symbolList[1] + entryOffset + 0x34) = elementCount;
     *(undefined1 *)(symbolList[1] + entryOffset + 0x3d) = 0;
     *(undefined4 *)(symbolList[1] + entryOffset + 0x40) = 0xffffffff;
@@ -1060,17 +1062,17 @@ LAB_00055870:
     }
     *(uint *)(symbolId * 4 + symbolList[2]) = entryIndex;
     *symbolList = *symbolList + 1;
-    iVar1 = *(int *)(symbolIdState + 0x24) + 1;
-    *(int *)(symbolIdState + 0x24) = iVar1;
-    if (iVar1 == 0x610e) {
+    nextOrdinal = *(int *)(symbolIdState + 0x24) + 1;
+    *(int *)(symbolIdState + 0x24) = nextOrdinal;
+    if (nextOrdinal == 0x610e) {
       *(undefined4 *)(symbolIdState + 0x24) = 0x6111;
     }
-    else if (iVar1 == 0x879a) {
+    else if (nextOrdinal == 0x879a) {
       *(undefined4 *)(symbolIdState + 0x24) = 0x87be;
     }
-    uVar3 = *(undefined4 *)(symbolList[1] + entryOffset + 0x20);
+    parentSymbol = *(undefined4 *)(symbolList[1] + entryOffset + 0x20);
   }
-  return uVar3;
+  return parentSymbol;
 }
 
 /* extvsSymbolListGetSymbol @ 0x55a30 (48 bytes) */
