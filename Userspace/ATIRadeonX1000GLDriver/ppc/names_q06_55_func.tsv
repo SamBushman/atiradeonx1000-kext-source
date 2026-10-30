@@ -1,0 +1,13 @@
+func	FUN_001318a4	RegAlloc__getOrCreateSpillSlot	INFERRED	returns the spill slot of a node, creating it with Program__prependLoad79 when absent
+func	FUN_0012e8c0	Program__splitCriticalEdges	INFERRED	inserts split blocks on multi-successor / multi-predecessor edges between block and lastBlock
+func	FUN_001314b8	RegAlloc__initRegisterTables	INFERRED	allocates and fills the per-register tables sized from the backend physical register counts
+func	FUN_001330f4	InterferenceGraph__addEdgesForInst	INFERRED	adds interference edges between the roots of an instruction's sources
+func	FUN_0013555c	InterferenceGraph__addNeighbour	INFERRED	appends sourceNode to targetNode's neighbour list, adding a block when full
+func	FUN_00137f14	Liveness__applyInstEffect	INFERRED	updates liveBits for the instruction's definition and sources
+func	FUN_00137474	InterferenceGraph__growNodeArray	INFERRED	reallocates the node array and edge bitset for a larger node count
+func	FUN_0010f704	Program__countUsedInterpolatorSlots	INFERRED	counts the used interpolator slots of a scope
+func	FUN_001234d8	Owner__removeVectorEntry	INFERRED	removes the first occurrence of entry from the vector at owner+0x14
+func	FUN_001235b8	Owner__replaceVectorEntry	INFERRED	replaces the first occurrence of oldEntry with newEntry in the vector at owner+0x14
+func	FUN_001357d4	InterferenceGraph__dtor_1357d4	INFERRED	frees the tables, every node (neighbour list + node), the node vector and the alias table
+func	FUN_00135900	InterferenceGraph__dtor_135900	INFERRED	identical body to InterferenceGraph__dtor_1357d4
+func	FUN_0010defc	ChipShaders__release	INFERRED	releases the shader object, program and entry of the two pointers at this+4 / this+8

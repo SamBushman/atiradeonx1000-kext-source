@@ -1,0 +1,18 @@
+func	FUN_0012c3d0	Program__rebaseInstRegisters	INFERRED	rebases the destination and operand registers of an instruction by registerBase using VRegPool entries
+func	FUN_0010ead4	PsBackend__bindExportRegisters	INFERRED	assigns hardware registers to the colour/depth/other export instructions of the last block
+func	FUN_0010c47c	IRInst__canFoldConstantCompare	INFERRED	true when the compare's constant sources fold to a known result for the selected lanes
+func	FUN_00135a2c	InterferenceGraph__mergeNeighbourLists	INFERRED	moves the merged node's neighbours into the target node's list (roots resolved)
+func	FUN_0012dd58	Program__detachRegion	INFERRED	detaches the blocks between currentBlock and regionEnd and reconnects predecessor and successor
+func	FUN_0012cfa4	Program__removeDeadRegion	INFERRED	removes a dead region (header .. footer) block by block using a work list
+func	FUN_0010f4d4	Program__classifyExportInsts	INFERRED	classifies export instructions by destination kind class for output binding
+func	FUN_0011f578	Program__computeHoistWeights	INFERRED	propagates block weights through the dominator walk for hoisting
+func	FUN_00121000	Program__hoistInstructions	INFERRED	hoists instructions out of dominated children using a work stack
+func	FUN_00134658	RegAlloc__run	INFERRED	register allocation driver: tables, colouring rounds, Compiler__fail on spill failure
+func	FUN_0011eaa0	Program__insertPhiNodes	INFERRED	inserts IRPhiNode for every register at the dominance frontier of its definitions
+func	FUN_001315f8	RegAlloc__insertCopyBefore	INFERRED	creates a copy instruction before beforeInst for a split register and updates the bitsets
+func	FUN_00138390	Liveness__markUsedBits	INFERRED	marks the used lanes of a block's sources in the usedBits bitset
+func	FUN_00123c08	ValueKey__createConstantMov	INFERRED	creates the undefined/constant MOV with VRegPool registers for a block's lanes
+func	FUN_0010ef68	PsBackend__assignInterpolatorRegisters	INFERRED	assigns hardware registers to interpolator loads respecting fixed and allowed registers
+func	FUN_00131d08	RegAlloc__buildClassTables	INFERRED	counts physical and virtual registers per class and builds the per-class maps
+func	FUN_00131008	RegAlloc__laneDependsOnChain	INFERRED	true when a lane's definition chain reaches a dependent instruction within maxDistance
+func	FUN_00137694	InterferenceGraph__addNodes	INFERRED	grows the node array and edge bitset by extraNodeCount nodes

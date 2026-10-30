@@ -24,8 +24,8 @@ int IRInst__sourcesAreSameValue(inst)
   return 1;
 }
 
-/* FUN_0011e894 @ 0x11e894 (180 bytes) */
-int FUN_0011e894(program)
+/* Program__noSuccessorHasMultipleSuccessors @ 0x11e894 (180 bytes) */
+int Program__noSuccessorHasMultipleSuccessors(program)
   int program;
 {
   int successorByteOffset;
@@ -62,10 +62,10 @@ int Program__isPreassignedHwReg(program, inst)
   undefined4 program;
   int inst;
 {
-  int iVar1;
+  int allowedResult;
   
   if (((*(uint *)(inst + 0x14) & 0x40) != 0) &&
-     (iVar1 = Program__isHwRegAllowed(program,*(undefined4 *)(inst + 0x94)), iVar1 != 0)) {
+     (allowedResult = Program__isHwRegAllowed(program,*(undefined4 *)(inst + 0x94)), allowedResult != 0)) {
     return 1;
   }
   return 0;
@@ -115,8 +115,8 @@ int ValueKey__loadSourceDefinitions(ctx, block)
   return;
 }
 
-/* FUN_0011eaa0 @ 0x11eaa0 (672 bytes) */
-int FUN_0011eaa0(program)
+/* Program__insertPhiNodes @ 0x11eaa0 (672 bytes) */
+int Program__insertPhiNodes(program)
   int program;
 {
   uint frontierNumber;
@@ -575,8 +575,8 @@ int Program__tryEliminateRedundantCopy(program, inst, block)
   return 0;
 }
 
-/* FUN_0011f578 @ 0x11f578 (588 bytes) */
-int FUN_0011f578(program)
+/* Program__computeHoistWeights @ 0x11f578 (588 bytes) */
+int Program__computeHoistWeights(program)
   int program;
 {
   undefined4 *workSlotRefB;
@@ -691,9 +691,9 @@ LAB_0011f744:
 #undef workData
 
 /* Program__assignVectorSlot @ 0x11f7fc (164 bytes) */
-int Program__assignVectorSlot(pass, param_2, vector)
+int Program__assignVectorSlot(pass, block, vector)
   int pass;
-  int param_2;
+  int block;
   uint *vector;
 {
   uint vectorCount;
@@ -702,8 +702,8 @@ int Program__assignVectorSlot(pass, param_2, vector)
   uint slotIndex;
   
   baseIndex = *(int *)(pass + 0x474);
-  if (baseIndex < *(int *)(param_2 + 0x150)) {
-    slotIndex = *(int *)(param_2 + 0x150) - baseIndex;
+  if (baseIndex < *(int *)(block + 0x150)) {
+    slotIndex = *(int *)(block + 0x150) - baseIndex;
   }
   else {
     vectorCount = vector[1];
@@ -715,15 +715,15 @@ int Program__assignVectorSlot(pass, param_2, vector)
     else {
       vectorElementSlot = (int *)Vector__elementRefGrow(vector,vectorCount);
     }
-    *vectorElementSlot = param_2;
+    *vectorElementSlot = block;
     slotIndex = vector[1];
-    *(uint *)(param_2 + 0x150) = slotIndex + baseIndex;
+    *(uint *)(block + 0x150) = slotIndex + baseIndex;
   }
   return slotIndex - 1;
 }
 
-/* FUN_0011f8a0 @ 0x11f8a0 (756 bytes) */
-int FUN_0011f8a0(vector, destRegister, writeMaskRef, markPinned, sourceIndex, block, compiler, recordResultFlag, vector2, resultIndex)
+/* Block__appendCopyForDest @ 0x11f8a0 (756 bytes) */
+int Block__appendCopyForDest(vector, destRegister, writeMaskRef, markPinned, sourceIndex, block, compiler, recordResultFlag, vector2, resultIndex)
   uint *vector;
   int destRegister;
   int *writeMaskRef;
@@ -978,8 +978,8 @@ int Program__foldUselessPhis(program)
 #undef vecData
 #undef vecArena
 
-/* FUN_0011ff7c @ 0x11ff7c (3416 bytes) */
-int FUN_0011ff7c(pass, block, vector, vector2, vector3, vector4, vector5, tempCounter)
+/* Program__sequentializeParallelCopies @ 0x11ff7c (3416 bytes) */
+int Program__sequentializeParallelCopies(pass, block, vector, vector2, vector3, vector4, vector5, tempCounter)
   int pass;
   int *block;
   uint *vector;
@@ -1352,7 +1352,7 @@ LAB_0012079c:
           else {
             locationSlotRefB = (undefined4 *)Vector__elementRefGrow(vector3,srcId);
           }
-          ((int (*)())FUN_0011f8a0)(vector5,dstRegister,&copyEmitted,instFlagBit6,*locationSlotRefB,predecessor2,*(undefined4 *)(pass + 8),0,0
+          ((int (*)())Block__appendCopyForDest)(vector5,dstRegister,&copyEmitted,instFlagBit6,*locationSlotRefB,predecessor2,*(undefined4 *)(pass + 8),0,0
                        ,0xffffffff);
           targetBlockForCopy = (int *)Block__getPredecessor(block,0);
           zeroPredecessorIndex = 1;
@@ -1372,7 +1372,7 @@ LAB_00120890:
           dstLocation = *locationSlotRefB;
           compiler = *(undefined4 *)(pass + 8);
         }
-        ((int (*)())FUN_0011f8a0)(vector5,dstRegister,&copyEmitted,instFlagBit6,dstLocation,targetBlockForCopy,compiler,0,0,0xffffffff);
+        ((int (*)())Block__appendCopyForDest)(vector5,dstRegister,&copyEmitted,instFlagBit6,dstLocation,targetBlockForCopy,compiler,0,0,0xffffffff);
         if (copyEmitted == 0) {
           if (srcId < *vector3) {
             locationCountB = vector3[1];
@@ -1456,7 +1456,7 @@ LAB_00120cb8:
       successorQuery34 = (**(code **)(*successor + 0x34))(successor);
       if (successorQuery34 == 0) goto LAB_00120cb8;
     }
-    ((int (*)())FUN_0011f8a0)(vector5,newTempId,&DAT_001afee4,0,cycleDstId,block,*(undefined4 *)(pass + 8),1,vector3
+    ((int (*)())Block__appendCopyForDest)(vector5,newTempId,&DAT_001afee4,0,cycleDstId,block,*(undefined4 *)(pass + 8),1,vector3
                  ,cycleDstId);
     readyCountB = vector4[1];
     if (readyCountB < *vector4) {
@@ -1473,8 +1473,8 @@ LAB_00120cb8:
   } while( true );
 }
 
-/* FUN_00120cd4 @ 0x120cd4 (384 bytes) */
-int FUN_00120cd4(pass)
+/* Program__eliminatePhiCopies @ 0x120cd4 (384 bytes) */
+int Program__eliminatePhiCopies(pass)
   int pass;
 {
   undefined4 *blockCursor;
@@ -1554,7 +1554,7 @@ int FUN_00120cd4(pass)
       staleArg7 = locationVector;
       staleArg8 = readyVector;
       staleArg9 = instTableVector;
-      ((int (*)())FUN_0011ff7c)(pass,*blockCursor,allocation + 1,pendingCopyVector,locationVector,readyVector,instTableVector,staleTempCountRef);
+      ((int (*)())Program__sequentializeParallelCopies)(pass,*blockCursor,allocation + 1,pendingCopyVector,locationVector,readyVector,instTableVector,staleTempCountRef);
     } while (loopIndex <= listCount);
   }
   if (instTableVector != (undefined4 *)0x0) {
@@ -1586,8 +1586,8 @@ int FUN_00120cd4(pass)
   return;
 }
 
-/* FUN_00121000 @ 0x121000 (1160 bytes) */
-int FUN_00121000(program)
+/* Program__hoistInstructions @ 0x121000 (1160 bytes) */
+int Program__hoistInstructions(program)
   int program;
 {
   undefined4 dominatedChild;
@@ -2473,7 +2473,7 @@ LAB_00122704:
       target = *(int **)(*(int *)(program + PROG_compiler) + COMP_target);
       targetQueryC0 = (**(code **)(*target + 0xc0))(target);
       if (targetQueryC0 != 0) {
-        FUN_00110020(program,valueKey);
+        Program__collectExportEntry(program,valueKey);
       }
       option7Enabled = Compiler__isOptionEnabled(*(undefined4 *)(program + PROG_compiler),7);
       if ((((option7Enabled == 0) || (option7Enabled = Compiler__isOptionEnabled(*(undefined4 *)(program + PROG_compiler),9), option7Enabled == 0))
@@ -2780,14 +2780,14 @@ LAB_001228ec:
       targetB = *(int **)(*(int *)(program + PROG_compiler) + COMP_target);
       targetQueryC0b = (**(code **)(*targetB + 0xc0))(targetB);
       if (targetQueryC0b != 0) {
-        FUN_0010f87c(program,2,*(undefined4 *)(program + 0x420));
+        Program__renumberExportInsts(program,2,*(undefined4 *)(program + 0x420));
         option7On = Compiler__isOptionEnabled(*(undefined4 *)(program + PROG_compiler),0x3f);
         if (option7On != 0) {
-          FUN_001102e0(program,1,*(undefined4 *)(program + 0x41c));
+          Program__packInterpolatorEntries(program,1,*(undefined4 *)(program + 0x41c));
           targetC = *(int **)(*(int *)(program + PROG_compiler) + COMP_target);
           targetQueryC8 = (**(code **)(*targetC + 200))(targetC);
           if (targetQueryC8 != 0) {
-            FUN_001102e0(program,2,*(undefined4 *)(program + 0x420));
+            Program__packInterpolatorEntries(program,2,*(undefined4 *)(program + 0x420));
           }
         }
       }
@@ -2841,14 +2841,14 @@ int Program__runSsaPipeline(program)
   int *table;
   int remaining;
   
-  FUN_0012b520(program);
+  Program__removeUnreachableBlocks(program);
   FUN_000f88b4(program);
-  ((int (*)())FUN_0011eaa0)(program);
+  ((int (*)())Program__insertPhiNodes)(program);
   ((int (*)())pass_ssa_build)(program);
   hoistInstructionsEnabled = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),0xe);
   if (hoistInstructionsEnabled != 0) {
-    ((int (*)())FUN_0011f578)(program);
-    ((int (*)())FUN_00121000)(program);
+    ((int (*)())Program__computeHoistWeights)(program);
+    ((int (*)())Program__hoistInstructions)(program);
   }
   FUN_000ec8e4(program);
   table = *(int **)(program + 0x3b0);
@@ -2867,17 +2867,17 @@ int Program__runSsaPipeline(program)
 }
 
 /* VRegPool__constructByKind @ 0x122e90 (44 bytes) */
-int VRegPool__constructByKind(param_1, kindIndex, keyExtra, param_4)
-  undefined4 param_1;
+int VRegPool__constructByKind(arg0, kindIndex, keyExtra, keyLast)
+  undefined4 arg0;
   int kindIndex;
   uint keyExtra;
-  uint param_4;
+  uint keyLast;
 {
   undefined4 callResult;
   
                     
                     
-  callResult = (**(code **)(PTR_PTR_001e8c60 + kindIndex * 0x10 + 0xc))(param_1,kindIndex,keyExtra,param_4);
+  callResult = (**(code **)(PTR_PTR_001e8c60 + kindIndex * 0x10 + 0xc))(arg0,kindIndex,keyExtra,keyLast);
   return callResult;
 }
 
@@ -3064,9 +3064,9 @@ int ImmedConstBuffer__clone(this, targetBlock, compiler)
 }
 
 /* VertexRegister__clone @ 0x123288 (148 bytes) */
-int VertexRegister__clone(this, param_2, compiler)
+int VertexRegister__clone(this, instSink, compiler)
   int this;
-  int *param_2;
+  int *instSink;
   int compiler;
 {
   int loadVertexInst;
@@ -3090,7 +3090,7 @@ int VertexRegister__clone(this, param_2, compiler)
     ValueKey__propagateLaneValues(valueKey);
   }
   ((int (*)())VReg__appendUser)(this,loadVertexInst);
-  (**(code **)(*param_2 + 0xc))(param_2,loadVertexInst);
+  (**(code **)(*instSink + 0xc))(instSink,loadVertexInst);
   ((int (*)())IRInst__bindSourceFromValue)(this,loadVertexInst);
   return valueKey;
 }
@@ -3151,8 +3151,8 @@ int VReg__pushDefinition(vreg, definingBlock, definition)
   return;
 }
 
-/* FUN_001234d8 @ 0x1234d8 (224 bytes) */
-int FUN_001234d8(owner, entry)
+/* Owner__removeVectorEntry @ 0x1234d8 (224 bytes) */
+int Owner__removeVectorEntry(owner, entry)
   int owner;
   int entry;
 {
@@ -3192,8 +3192,8 @@ int FUN_001234d8(owner, entry)
   return;
 }
 
-/* FUN_001235b8 @ 0x1235b8 (300 bytes) */
-int FUN_001235b8(owner, oldEntry, newEntry)
+/* Owner__replaceVectorEntry @ 0x1235b8 (300 bytes) */
+int Owner__replaceVectorEntry(owner, oldEntry, newEntry)
   int owner;
   int oldEntry;
   undefined4 newEntry;
@@ -3478,8 +3478,8 @@ int Interpolator__vslot10(this, laneMask, program)
   return resultValue;
 }
 
-/* FUN_00123c08 @ 0x123c08 (984 bytes) */
-int FUN_00123c08(compiler, block, param_3)
+/* ValueKey__createConstantMov @ 0x123c08 (984 bytes) */
+int ValueKey__createConstantMov(compiler, block, param_3)
   int compiler;
   int *block;
   uint param_3;
@@ -3687,21 +3687,21 @@ int TempValue__clone(this, block, compiler)
     ((int (*)())IRInst__bindSourceFromValue)(this,newInst);
     return valueKey;
   }
-  foldedValue = (undefined4 *)((int (*)())FUN_00123c08)(*(undefined4 *)(compiler + COMP_currentProgram),block,this);
+  foldedValue = (undefined4 *)((int (*)())ValueKey__createConstantMov)(*(undefined4 *)(compiler + COMP_currentProgram),block,this);
   return foldedValue;
 }
 
 /* ExportSlot__clone @ 0x1241fc (184 bytes) */
-int ExportSlot__clone(this, param_2, compiler)
+int ExportSlot__clone(this, instSink, compiler)
   undefined4 this;
-  int *param_2;
+  int *instSink;
   int compiler;
 {
   undefined4 arena;
   undefined4 *allocation;
   int callResult;
   undefined4 *valueKey;
-  undefined4 uVar4;
+  undefined4 defaultWord28;
   undefined4 *loadInst;
   
   arena = *(undefined4 *)(compiler + COMP_arenaA);
@@ -3710,9 +3710,9 @@ int ExportSlot__clone(this, param_2, compiler)
   *allocation = arena;
   IRLoad__ctor_109a80(loadInst,0xfa,compiler);
   IRInst__setOperandRef(loadInst,0,this);
-  uVar4 = DAT_001afee8;
+  defaultWord28 = DAT_001afee8;
   allocation[6] = allocation[6] & 0xffff7fff;
-  allocation[0x28] = uVar4;
+  allocation[0x28] = defaultWord28;
   arena = *(undefined4 *)(compiler + COMP_arenaB);
   allocation = (undefined4 *)Arena__alloc(arena,0x240);
   valueKey = allocation + 1;
@@ -3724,15 +3724,15 @@ int ExportSlot__clone(this, param_2, compiler)
     ValueKey__propagateLaneValues(valueKey);
   }
   ((int (*)())VReg__appendUser)(this,loadInst);
-  (**(code **)(*param_2 + 0xc))(param_2,loadInst);
+  (**(code **)(*instSink + 0xc))(instSink,loadInst);
   ((int (*)())IRInst__bindSourceFromValue)(this,loadInst);
   return valueKey;
 }
 
 /* Resource__clone @ 0x12434c (152 bytes) */
-int Resource__clone(this, param_2, compiler)
+int Resource__clone(this, instSink, compiler)
   undefined4 this;
-  int *param_2;
+  int *instSink;
   int compiler;
 {
   undefined4 *allocation;
@@ -3758,15 +3758,15 @@ int Resource__clone(this, param_2, compiler)
     ValueKey__propagateLaneValues(valueKey);
   }
   ((int (*)())VReg__appendUser)(this,loadInst);
-  (**(code **)(*param_2 + 0xc))(param_2,loadInst);
+  (**(code **)(*instSink + 0xc))(instSink,loadInst);
   ((int (*)())IRInst__bindSourceFromValue)(this,loadInst);
   return valueKey;
 }
 
 /* FixedValue__clone @ 0x12447c (148 bytes) */
-int FixedValue__clone(this, param_2, compiler)
+int FixedValue__clone(this, instSink, compiler)
   undefined4 this;
-  int *param_2;
+  int *instSink;
   int compiler;
 {
   undefined4 *allocation;
@@ -3792,7 +3792,7 @@ int FixedValue__clone(this, param_2, compiler)
     ValueKey__propagateLaneValues(valueKey);
   }
   ((int (*)())VReg__appendUser)(this,loadInst);
-  (**(code **)(*param_2 + 0xc))(param_2,loadInst);
+  (**(code **)(*instSink + 0xc))(instSink,loadInst);
   ((int (*)())IRInst__bindSourceFromValue)(this,loadInst);
   return valueKey;
 }
@@ -4328,7 +4328,7 @@ int Interpolator__ctor_125350(this, indexValue, interpolatorKind, baseCtorArg4, 
   if (targetQuery120 == 0) goto LAB_00125660;
   mappedKind = 6;
   mappedIndexSlot[0] = 0;
-  mappingFound = FUN_00127324(*(undefined4 *)(program + 0x3ac),this[1],indexValue,&mappedKind,mappedIndexSlot);
+  mappingFound = Program__decodeRegisterKey(*(undefined4 *)(program + 0x3ac),this[1],indexValue,&mappedKind,mappedIndexSlot);
   if (mappingFound == 0) goto LAB_00125660;
   exportLaneKind = 0xd;
   if (mappedKind != 0x3f) {
@@ -4475,7 +4475,7 @@ int Interpolator__ctor_1257b0(this, indexValue, interpolatorKind, baseCtorArg4, 
   if (targetQuery120 == 0) goto LAB_00125ac0;
   mappedKind = 6;
   mappedIndexSlot[0] = 0;
-  mappingFound = FUN_00127324(*(undefined4 *)(program + 0x3ac),this[1],indexValue,&mappedKind,mappedIndexSlot);
+  mappingFound = Program__decodeRegisterKey(*(undefined4 *)(program + 0x3ac),this[1],indexValue,&mappedKind,mappedIndexSlot);
   if (mappingFound == 0) goto LAB_00125ac0;
   exportLaneKind = 0xd;
   if (mappedKind != 0x3f) {

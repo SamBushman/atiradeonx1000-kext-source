@@ -6258,13 +6258,13 @@ int FUN_00151370(inst, inst2, program)
           vcall60Result = (**(code **)(*operandVReg + 0x60))();
           if (vcall60Result != 0) {
             sourceDef = IRInst__getOperandSource(newSrcA,1);
-            FUN_0010c670(sourceDef,newSrcA,*(undefined4 *)(program + 8));
+            IRInst__foldConstantSourcesIntoClone(sourceDef,newSrcA,*(undefined4 *)(program + 8));
           }
           operandVReg = (int *)IRInst__getOperandSource(newSrcB,1);
           vcall60Result = (**(code **)(*operandVReg + 0x60))();
           if (vcall60Result != 0) {
             sourceDef = IRInst__getOperandSource(newSrcB,1);
-            FUN_0010c670(sourceDef,newSrcB,*(undefined4 *)(program + 8));
+            IRInst__foldConstantSourcesIntoClone(sourceDef,newSrcB,*(undefined4 *)(program + 8));
           }
           IRInst__dropCounterAndDeleteIfUnused(inst2,*(undefined4 *)(program + 8));
           return 1;
@@ -6553,13 +6553,13 @@ int FUN_00151a74(inst, inst2, program)
               vcall60Result = (**(code **)(*operandVReg + 0x60))();
               if (vcall60Result != 0) {
                 sourceDef = IRInst__getOperandSource(a0,1);
-                FUN_0010c670(sourceDef,a0,*(undefined4 *)(program + 8));
+                IRInst__foldConstantSourcesIntoClone(sourceDef,a0,*(undefined4 *)(program + 8));
               }
               operandVReg = (int *)IRInst__getOperandSource(newSrcB,1);
               vcall60Result = (**(code **)(*operandVReg + 0x60))();
               if (vcall60Result != 0) {
                 sourceDef = IRInst__getOperandSource(newSrcB,1);
-                FUN_0010c670(sourceDef,newSrcB,*(undefined4 *)(program + 8));
+                IRInst__foldConstantSourcesIntoClone(sourceDef,newSrcB,*(undefined4 *)(program + 8));
               }
               IRInst__dropCounterAndDeleteIfUnused(inst2,*(undefined4 *)(program + 8));
               return 1;
@@ -6877,13 +6877,13 @@ int FUN_001524b8(inst, inst2, program)
               vcall60Result = (**(code **)(*operandVReg + 0x60))();
               if (vcall60Result != 0) {
                 sourceDef2 = IRInst__getOperandSource(a0,1);
-                FUN_0010c670(sourceDef2,a0,*(undefined4 *)(program + 8));
+                IRInst__foldConstantSourcesIntoClone(sourceDef2,a0,*(undefined4 *)(program + 8));
               }
               operandVReg = (int *)IRInst__getOperandSource(piVar9,1);
               vcall60Result = (**(code **)(*operandVReg + 0x60))();
               if (vcall60Result != 0) {
                 sourceDef2 = IRInst__getOperandSource(piVar9,1);
-                FUN_0010c670(sourceDef2,piVar9,*(undefined4 *)(program + 8));
+                IRInst__foldConstantSourcesIntoClone(sourceDef2,piVar9,*(undefined4 *)(program + 8));
               }
               IRInst__dropCounterAndDeleteIfUnused(inst2,*(undefined4 *)(program + 8));
               return 1;
@@ -8037,19 +8037,19 @@ int FUN_001541f0(node, inst, pass)
                   vcall60Result = (**(code **)(*operandVReg + 0x60))();
                   if (vcall60Result != 0) {
                     sourceDef = IRInst__getOperandSource(a0,1);
-                    FUN_0010c670(sourceDef,a0,*(undefined4 *)(pass + 8));
+                    IRInst__foldConstantSourcesIntoClone(sourceDef,a0,*(undefined4 *)(pass + 8));
                   }
                   operandVReg = (int *)IRInst__getOperandSource(newSrcB,1);
                   vcall60Result = (**(code **)(*operandVReg + 0x60))();
                   if (vcall60Result != 0) {
                     sourceDef = IRInst__getOperandSource(newSrcB,1);
-                    FUN_0010c670(sourceDef,newSrcB,*(undefined4 *)(pass + 8));
+                    IRInst__foldConstantSourcesIntoClone(sourceDef,newSrcB,*(undefined4 *)(pass + 8));
                   }
                   operandVReg = (int *)IRInst__getOperandSource(newSrcC,1);
                   vcall60Result = (**(code **)(*operandVReg + 0x60))();
                   if (vcall60Result != 0) {
                     sourceDef = IRInst__getOperandSource(newSrcC,1);
-                    FUN_0010c670(sourceDef,newSrcC,*(undefined4 *)(pass + 8));
+                    IRInst__foldConstantSourcesIntoClone(sourceDef,newSrcC,*(undefined4 *)(pass + 8));
                   }
                   IRInst__dropCounterAndDeleteIfUnused(inst,*(undefined4 *)(pass + 8));
                   return 1;

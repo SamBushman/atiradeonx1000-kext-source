@@ -201,8 +201,8 @@ int IRInst__removeDefaultSelectOperands(inst, compilerCtx)
   return;
 }
 
-/* FUN_0010c47c @ 0x10c47c (500 bytes) */
-int FUN_0010c47c(inst, pass)
+/* IRInst__canFoldConstantCompare @ 0x10c47c (500 bytes) */
+int IRInst__canFoldConstantCompare(inst, pass)
   int *inst;
   int pass;
 {
@@ -281,8 +281,8 @@ LAB_0010c648:
   return canFold;
 }
 
-/* FUN_0010c670 @ 0x10c670 (1240 bytes) */
-int FUN_0010c670(inst, inst2, pass)
+/* IRInst__foldConstantSourcesIntoClone @ 0x10c670 (1240 bytes) */
+int IRInst__foldConstantSourcesIntoClone(inst, inst2, pass)
   int inst;
   int *inst2;
   int pass;
@@ -489,8 +489,8 @@ int FUN_0010c670(inst, inst2, pass)
   return;
 }
 
-/* FUN_0010cb48 @ 0x10cb48 (1156 bytes) */
-int FUN_0010cb48(inst, pass)
+/* IRInst__foldCompareResultIntoCopy @ 0x10cb48 (1156 bytes) */
+int IRInst__foldCompareResultIntoCopy(inst, pass)
   int inst;
   int pass;
 {
@@ -598,7 +598,7 @@ int FUN_0010cb48(inst, pass)
     operandCountLimit = (**(code **)(*newSource + 0x60))(newSource);
     if (operandCountLimit != 0) {
       sourceDef = IRInst__getOperandSource(copyInst,1);
-      ((int (*)())FUN_0010c670)(sourceDef,copyInst,pass);
+      ((int (*)())IRInst__foldConstantSourcesIntoClone)(sourceDef,copyInst,pass);
     }
     IRInst__setOperandSource(operandVReg,operandNumberA,copyInst,0,pass);
     copyListCursor = copyListCursor + 1;
@@ -688,7 +688,7 @@ int IRInst__foldMovSourceSelect(outSelect, inst, operandIndex, program)
   int loopIndex;
   byte selectByte;
   int *a0;
-  int iVar2;
+  int splatLane;
   int srcRecord;
   undefined4 innerSelect;
   undefined4 trackUses;
@@ -701,10 +701,10 @@ int IRInst__foldMovSourceSelect(outSelect, inst, operandIndex, program)
   isMovLike = (**(code **)(*a0 + 0x60))(a0);
   if (isMovLike != 0) {
     operandRecord = IRInst__getOperandRecord(inst,0);
-    iVar2 = SelectWord__splatComponent(*(undefined4 *)(operandRecord + 0x10));
+    splatLane = SelectWord__splatComponent(*(undefined4 *)(operandRecord + 0x10));
     srcRecord = IRInst__getOperandRecord(inst,operandIndex);
-    selectByte = *(byte *)(iVar2 + srcRecord + 0x10);
-    if (-1 < iVar2) {
+    selectByte = *(byte *)(splatLane + srcRecord + 0x10);
+    if (-1 < splatLane) {
       IRInst__getOperandRecord(a0,0);
     }
     for (loopIndex = 1; srcRecord = (**(code **)(*a0 + 0x14))(a0), loopIndex <= srcRecord; loopIndex = loopIndex + 1) {
@@ -1298,12 +1298,12 @@ int HwLimits__vslot9_failNotSupported()
 }
 
 /* Program__emitLoadVertexAttr @ 0x10de6c (140 bytes) */
-int Program__emitLoadVertexAttr(param_1, program, param_3, vertexAttrWord, param_5, insertRef)
-  undefined4 param_1;
+int Program__emitLoadVertexAttr(unusedArg1, program, unusedArg3, vertexAttrWord, unusedArg5, insertRef)
+  undefined4 unusedArg1;
   int program;
-  undefined4 param_3;
+  undefined4 unusedArg3;
   uint *vertexAttrWord;
-  undefined4 param_5;
+  undefined4 unusedArg5;
   undefined4 insertRef;
 {
   uint attrWordCopy;
@@ -1323,8 +1323,8 @@ int Program__emitLoadVertexAttr(param_1, program, param_3, vertexAttrWord, param
   return Program__appendInst(program,loadVertexInst,insertRef);
 }
 
-/* FUN_0010defc @ 0x10defc (340 bytes) */
-int FUN_0010defc(this, compiler)
+/* ChipShaders__release @ 0x10defc (340 bytes) */
+int ChipShaders__release(this, compiler)
   int this;
   int compiler;
 {
@@ -1619,18 +1619,18 @@ int Index__scaleForMode(mode, value)
 }
 
 /* Vslot__outZeroReturnZero @ 0x10e55c (16 bytes) */
-int Vslot__outZeroReturnZero(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 *param_4;
+int Vslot__outZeroReturnZero(unusedArg1, unusedArg2, unusedArg3, out)
+  undefined4 unusedArg1;
+  undefined4 unusedArg2;
+  undefined4 unusedArg3;
+  undefined4 *out;
 {
-  *param_4 = 0;
+  *out = 0;
   return 0;
 }
 
-/* FUN_0010e56c @ 0x10e56c (200 bytes) */
-int FUN_0010e56c(backend, program)
+/* Program__assignHwRegsToVertexLoads @ 0x10e56c (200 bytes) */
+int Program__assignHwRegsToVertexLoads(backend, program)
   int *backend;
   int program;
 {
@@ -1662,14 +1662,14 @@ int FUN_0010e56c(backend, program)
 int IRInst__query68AndWord4fNotIn6_7(outputInst)
   int *outputInst;
 {
-  int iVar1;
-  undefined4 uVar2;
+  int query68;
+  undefined4 result;
   
-  iVar1 = (**(code **)(*outputInst + 0x68))(outputInst);
-  if ((iVar1 == 0) || (uVar2 = 1, outputInst[0x4f] - 6U < 2)) {
-    uVar2 = 0;
+  query68 = (**(code **)(*outputInst + 0x68))(outputInst);
+  if ((query68 == 0) || (result = 1, outputInst[0x4f] - 6U < 2)) {
+    result = 0;
   }
-  return uVar2;
+  return result;
 }
 
 /* IRInst__query68AndWord4fIs18 @ 0x10e690 (88 bytes) */
@@ -1768,20 +1768,21 @@ int Compare__descendingByRemappedKey(lhsRef, rhsRef)
   int *rhsRef;
 {
   int lhsKey;
-  int iVar2;
+  int rhsElement;
+  int rhsKey;
   
-  iVar2 = *rhsRef;
+  rhsElement = *rhsRef;
   lhsKey = ((int (*)())Lane__remapValue)(*(undefined4 *)(*lhsRef + 0x13c),*(undefined4 *)(*lhsRef + 0x140));
-  iVar2 = ((int (*)())Lane__remapValue)(*(undefined4 *)(iVar2 + 0x13c),*(undefined4 *)(iVar2 + 0x140));
-  return iVar2 < lhsKey;
+  rhsKey = ((int (*)())Lane__remapValue)(*(undefined4 *)(rhsElement + 0x13c),*(undefined4 *)(rhsElement + 0x140));
+  return rhsKey < lhsKey;
 }
 
 /* Compare__descendingByField140 @ 0x10e8c4 (32 bytes) */
-int Compare__descendingByField140(param_1, param_2)
-  int *param_1;
-  int *param_2;
+int Compare__descendingByField140(lhsRef, rhsRef)
+  int *lhsRef;
+  int *rhsRef;
 {
-  return *(int *)(*param_2 + 0x140) < *(int *)(*param_1 + 0x140);
+  return *(int *)(*rhsRef + 0x140) < *(int *)(*lhsRef + 0x140);
 }
 
 /* PackEntry__assignLaneSources @ 0x10e8e4 (120 bytes) */
@@ -1880,15 +1881,15 @@ int Program__callBackendFinish(program)
   return;
 }
 
-/* FUN_0010ead4 @ 0x10ead4 (484 bytes) */
-int FUN_0010ead4(hwState, program, param_3, param_4, param_5, param_6, param_7)
+/* PsBackend__bindExportRegisters @ 0x10ead4 (484 bytes) */
+int PsBackend__bindExportRegisters(hwState, program, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
   int hwState;
   int program;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+  undefined4 unusedArg3;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
 {
   int otherExportInst;
   int outputBaseC;
@@ -1992,8 +1993,8 @@ LAB_0010ebe4:
   return;
 }
 
-/* FUN_0010ecb8 @ 0x10ecb8 (148 bytes) */
-int FUN_0010ecb8(inst)
+/* IRInst__destMaskHasGap @ 0x10ecb8 (148 bytes) */
+int IRInst__destMaskHasGap(inst)
   undefined4 inst;
 {
   int operandRecord;
@@ -2108,15 +2109,15 @@ int KhanPs__vslot87_assignInterpolatorBindings(this, program)
   return;
 }
 
-/* FUN_0010ef68 @ 0x10ef68 (1052 bytes) */
-int FUN_0010ef68(psBackend, program, param_3, param_4, param_5, param_6, param_7)
+/* PsBackend__assignInterpolatorRegisters @ 0x10ef68 (1052 bytes) */
+int PsBackend__assignInterpolatorRegisters(psBackend, program, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
   int *psBackend;
   int program;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+  undefined4 unusedArg3;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
 {
   int loadInst;
   int isInterpLoadB;
@@ -2279,8 +2280,8 @@ LAB_0010f168:
   return;
 }
 
-/* FUN_0010f38c @ 0x10f38c (328 bytes) */
-int FUN_0010f38c(entry, vector)
+/* PackEntry__lanesFitVector @ 0x10f38c (328 bytes) */
+int PackEntry__lanesFitVector(entry, vector)
   undefined4 *entry;
   uint *vector;
 {
@@ -2346,8 +2347,8 @@ int FUN_0010f38c(entry, vector)
   return;
 }
 
-/* FUN_0010f4d4 @ 0x10f4d4 (560 bytes) */
-int FUN_0010f4d4(program)
+/* Program__classifyExportInsts @ 0x10f4d4 (560 bytes) */
+int Program__classifyExportInsts(program)
   int program;
 {
   uint *exportList424;
@@ -2464,5 +2465,5 @@ asm(".globl Program__emitLoadVertexAttr");
 asm(".set Program__emitLoadVertexAttr, _Program__emitLoadVertexAttr");
 asm(".globl FUN_0010ed4c");
 asm(".set FUN_0010ed4c, _KhanPs__vslot87_assignInterpolatorBindings");
-asm(".globl FUN_0010ef68");
-asm(".set FUN_0010ef68, _FUN_0010ef68");
+asm(".globl PsBackend__assignInterpolatorRegisters");
+asm(".set PsBackend__assignInterpolatorRegisters, _FUN_0010ef68");

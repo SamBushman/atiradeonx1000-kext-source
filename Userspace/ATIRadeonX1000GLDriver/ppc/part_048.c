@@ -3653,7 +3653,7 @@ LAB_00181100:
                   }
                   else {
                     loopIndex5 = *(int *)(*(int *)(key + 0x238) + 0x6c4);
-                    loopIndex5 = FUN_00123c08(loopIndex5,*(undefined4 *)(loopIndex5 + 0x3a0),0);
+                    loopIndex5 = ValueKey__createConstantMov(loopIndex5,*(undefined4 *)(loopIndex5 + 0x3a0),0);
                     loopIndex5 = *(int *)(loopIndex5 + 0xb0);
                     IRInst__setOperandRef(inst2,1,*(undefined4 *)(loopIndex5 + 0x8c));
                     IRInst__setOperandSource(inst2,1,loopIndex5,0,*(undefined4 *)(key + 0x238));
@@ -3677,7 +3677,7 @@ LAB_00181100:
           }
           else {
             zeroInst = *(int *)(*(int *)(key + 0x238) + 0x6c4);
-            zeroInst = FUN_00123c08(zeroInst,*(undefined4 *)(zeroInst + 0x3a0),0);
+            zeroInst = ValueKey__createConstantMov(zeroInst,*(undefined4 *)(zeroInst + 0x3a0),0);
             zeroInst = *(int *)(zeroInst + 0xb0);
             inst1 = *(undefined4 *)(key + 0xb0);
             *(int *)(keyWordPtr2 + 0x214) = zeroInst;

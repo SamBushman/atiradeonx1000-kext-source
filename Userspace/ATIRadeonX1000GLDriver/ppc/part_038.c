@@ -239,10 +239,10 @@ int LoopIndexedOutputSet__ctor_126694(this, ctorWord2, ctorWord1, ctorWord3, com
 }
 
 /* RegKind__flagBit7 @ 0x126708 (44 bytes) */
-int RegKind__flagBit7(param_1)
-  int param_1;
+int RegKind__flagBit7(regKind)
+  int regKind;
 {
-  return *(uint *)(&DAT_001ea904 + param_1 * 0x10) >> 7 & 1;
+  return *(uint *)(&DAT_001ea904 + regKind * 0x10) >> 7 & 1;
 }
 
 /* RegKind__flagBit8 @ 0x126734 (44 bytes) */
@@ -260,17 +260,17 @@ int RegKind__flagBit0(kind)
 }
 
 /* RegKind__flagBit6 @ 0x12678c (44 bytes) */
-int RegKind__flagBit6(param_1)
-  int param_1;
+int RegKind__flagBit6(regKind)
+  int regKind;
 {
-  return *(uint *)(&DAT_001ea904 + param_1 * 0x10) >> 6 & 1;
+  return *(uint *)(&DAT_001ea904 + regKind * 0x10) >> 6 & 1;
 }
 
 /* Table1ea904__hasFlag0x11 @ 0x1267b8 (52 bytes) */
-int Table1ea904__hasFlag0x11(param_1)
-  int param_1;
+int Table1ea904__hasFlag0x11(rowIndex)
+  int rowIndex;
 {
-  return -(uint)(*(uint *)(&DAT_001ea904 + param_1 * 0x10) & 0x11) >> 0x1f;
+  return -(uint)(*(uint *)(&DAT_001ea904 + rowIndex * 0x10) & 0x11) >> 0x1f;
 }
 
 /* ImmedConstBuffer__vslot283 @ 0x1267ec (84 bytes) */
@@ -291,24 +291,24 @@ int ImmedConstBuffer__vslot283(this, ctorWord1, ctorWord3, compiler)
 }
 
 /* RegKind__flagBit1 @ 0x126878 (44 bytes) */
-int RegKind__flagBit1(param_1)
-  int param_1;
+int RegKind__flagBit1(regKind)
+  int regKind;
 {
-  return *(uint *)(&DAT_001ea904 + param_1 * 0x10) >> 1 & 1;
+  return *(uint *)(&DAT_001ea904 + regKind * 0x10) >> 1 & 1;
 }
 
 /* RegKind__flagBit9 @ 0x1268a4 (44 bytes) */
-int RegKind__flagBit9(param_1)
-  int param_1;
+int RegKind__flagBit9(regKind)
+  int regKind;
 {
-  return *(uint *)(&DAT_001ea904 + param_1 * 0x10) >> 9 & 1;
+  return *(uint *)(&DAT_001ea904 + regKind * 0x10) >> 9 & 1;
 }
 
 /* RegKind__byte4 @ 0x1268d0 (40 bytes) */
-int RegKind__byte4(param_1)
-  int param_1;
+int RegKind__byte4(regKind)
+  int regKind;
 {
-  return (DAT_001ea908)[param_1 * 0x10];
+  return (DAT_001ea908)[regKind * 0x10];
 }
 
 /* ImmedConstBuffer__vslot235 @ 0x1268f8 (84 bytes) */
@@ -474,17 +474,17 @@ int LoopIndexedSet__ctor_126de4(ctorWord2, ctorWord1, ctorWord3, compiler)
   undefined *vtable;
   undefined4 *allocation;
   undefined4 arena;
-  undefined4 *puVar4;
+  undefined4 *object;
   
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x38);
-  puVar4 = allocation + 1;
+  object = allocation + 1;
   *allocation = arena;
-  VRegInfo__ctor_12379c(puVar4,ctorWord2,ctorWord1,ctorWord3,compiler);
+  VRegInfo__ctor_12379c(object,ctorWord2,ctorWord1,ctorWord3,compiler);
   vtable = PTR_DAT_001e90ec;
   allocation[0xd] = 0;
-  *puVar4 = vtable + 8;
-  return puVar4;
+  *object = vtable + 8;
+  return object;
 }
 
 /* ImmedConstBuffer__vslot183 @ 0x126e90 (84 bytes) */
@@ -607,74 +607,74 @@ int ImmedConstBuffer__vslot39(this, interpolatorKind, baseCtorArg4, compiler)
 }
 
 /* ConstKey__lanes1 @ 0x127264 (8 bytes) */
-int ConstKey__lanes1(param_1)
-  int param_1;
+int ConstKey__lanes1(key)
+  int key;
 {
-  return *(undefined4 *)(param_1 + 0x20);
+  return *(undefined4 *)(key + 0x20);
 }
 
 /* ConstKey__lanes2 @ 0x12726c (16 bytes) */
-int ConstKey__lanes2(param_1)
-  int param_1;
+int ConstKey__lanes2(key)
+  int key;
 {
-  return *(int *)(param_1 + 0x20) + *(int *)(param_1 + 0x38);
+  return *(int *)(key + 0x20) + *(int *)(key + 0x38);
 }
 
 /* ConstKey__lanes3 @ 0x12727c (24 bytes) */
-int ConstKey__lanes3(param_1)
-  int param_1;
+int ConstKey__lanes3(key)
+  int key;
 {
-  return *(int *)(param_1 + 0x20) + *(int *)(param_1 + 0x38) + *(int *)(param_1 + 0x50);
+  return *(int *)(key + 0x20) + *(int *)(key + 0x38) + *(int *)(key + 0x50);
 }
 
 /* ConstKey__lanes4 @ 0x127294 (32 bytes) */
-int ConstKey__lanes4(param_1)
-  int param_1;
+int ConstKey__lanes4(key)
+  int key;
 {
-  return *(int *)(param_1 + 0x20) + *(int *)(param_1 + 0x38) + *(int *)(param_1 + 0x50) +
-         *(int *)(param_1 + 0x68);
+  return *(int *)(key + 0x20) + *(int *)(key + 0x38) + *(int *)(key + 0x50) +
+         *(int *)(key + 0x68);
 }
 
 /* Object__sumWords4And8 @ 0x1272b4 (16 bytes) */
-int Object__sumWords4And8(param_1)
-  int param_1;
+int Object__sumWords4And8(object)
+  int object;
 {
-  return *(int *)(param_1 + 4) + *(int *)(param_1 + 8);
+  return *(int *)(object + 4) + *(int *)(object + 8);
 }
 
 /* Object__setWord0 @ 0x1272cc (8 bytes) */
-int Object__setWord0(param_1, param_2)
-  undefined4 *param_1;
-  undefined4 param_2;
+int Object__setWord0(object, value)
+  undefined4 *object;
+  undefined4 value;
 {
-  *param_1 = param_2;
+  *object = value;
   return;
 }
 
 /* VRegPool__canonicalizeKey @ 0x1272d4 (80 bytes) */
-int VRegPool__canonicalizeKey(cache, param_2, param_3)
+int VRegPool__canonicalizeKey(cache, kindRef, valueRef)
   int cache;
-  int *param_2;
-  int *param_3;
+  int *kindRef;
+  int *valueRef;
 {
-  if (*param_2 != 0x24) {
+  if (*kindRef != 0x24) {
     return;
   }
-  if (*param_3 == *(int *)(cache + 0x44)) {
-    *param_2 = 6;
-    *param_3 = 0;
+  if (*valueRef == *(int *)(cache + 0x44)) {
+    *kindRef = 6;
+    *valueRef = 0;
     return;
   }
-  if (*param_3 != *(int *)(cache + 0x48)) {
+  if (*valueRef != *(int *)(cache + 0x48)) {
     return;
   }
-  *param_2 = 7;
-  *param_3 = 0;
+  *kindRef = 7;
+  *valueRef = 0;
   return;
 }
 
-/* FUN_00127324 @ 0x127324 (232 bytes) */
-int FUN_00127324(program, registerFileKind, vregId, kindOut, indexOut)
+/* Program__decodeRegisterKey @ 0x127324 (232 bytes) */
+int Program__decodeRegisterKey(program, registerFileKind, vregId, kindOut, indexOut)
   int program;
   int registerFileKind;
   int vregId;
@@ -720,14 +720,14 @@ int FUN_00127324(program, registerFileKind, vregId, kindOut, indexOut)
 int VRegPool__destroyEntries(owner)
   int owner;
 {
-  /* issue #64 live-repro: same iterator-object split as FUN_0011eaa0 (part_037.c), fixed earlier
+  /* issue #64 live-repro: same iterator-object split as Program__insertPhiNodes (part_037.c), fixed earlier
    * this session - auStack_38 is walked by HashTableIterator__advance/HashTableIterator__begin as owner[0..4] (0x14 bytes)
    * but declared only 16 bytes; local_28, the missing 5th word, is what this loop reads back as its
    * own continuation value. Separated, HashTableIterator__advance's real update never reached local_28, so the
    * loop never saw it become null - not just a hang: the same (unchanging) local_28 object got
    * re-passed to the vtable call on every spin instead of the real next node, repeatedly
    * re-processing/re-freeing one object - a plausible source of the unrelated heap corruption seen
-   * elsewhere on this issue (FUN_00121000: an objects own vtable-like field changing under it
+   * elsewhere on this issue (Program__hoistInstructions: an objects own vtable-like field changing under it
    * between two visits). Merged into one 0x14-byte buffer. */
   unsigned char auStack_38 [0x14];
 #define local_28 (*(int **)(auStack_38 + 0x10))
@@ -740,8 +740,8 @@ int VRegPool__destroyEntries(owner)
   return;
 }
 
-/* FUN_00127470 @ 0x127470 (196 bytes) */
-int FUN_00127470(owner)
+/* VRegPool__dtor_127470 @ 0x127470 (196 bytes) */
+int VRegPool__dtor_127470(owner)
   int owner;
 {
   uint bucketCount;
@@ -921,14 +921,14 @@ int VRegPool__countEntriesWithQuery18(owner)
 {
   int elementQuery18;
   int matchCount;
-  /* issue #64 live-repro: same iterator-object split as FUN_0011eaa0 (part_037.c), fixed earlier
+  /* issue #64 live-repro: same iterator-object split as Program__insertPhiNodes (part_037.c), fixed earlier
    * this session - iteratorState is walked by HashTableIterator__advance/HashTableIterator__begin as owner[0..4] (0x14 bytes)
    * but declared only 16 bytes; iteratorCurrent, the missing 5th word, is what this loop reads back as its
    * own continuation value. Separated, HashTableIterator__advance's real update never reached iteratorCurrent, so the
    * loop never saw it become null - not just a hang: the same (unchanging) iteratorCurrent object got
    * re-passed to the vtable call on every spin instead of the real next node, repeatedly
    * re-processing/re-freeing one object - a plausible source of the unrelated heap corruption seen
-   * elsewhere on this issue (FUN_00121000: an objects own vtable-like field changing under it
+   * elsewhere on this issue (Program__hoistInstructions: an objects own vtable-like field changing under it
    * between two visits). Merged into one 0x14-byte buffer. */
   unsigned char iteratorState [0x14];
 #define iteratorCurrent (*(int **)(iteratorState + 0x10))
@@ -946,8 +946,8 @@ int VRegPool__countEntriesWithQuery18(owner)
 }
 #undef iteratorCurrent
 
-/* FUN_001278d0 @ 0x1278d0 (196 bytes) */
-int FUN_001278d0(owner)
+/* VRegPool__dtor_1278d0 @ 0x1278d0 (196 bytes) */
+int VRegPool__dtor_1278d0(owner)
   int owner;
 {
   uint bucketCount;
@@ -1156,17 +1156,17 @@ int VRegInfo__new_127994(compiler, ownerArg)
 }
 
 /* KhanPs__vslot21_appendRegisterBinding @ 0x127e48 (132 bytes) */
-int KhanPs__vslot21_appendRegisterBinding(this, regIndex, bindingKind, param_4, laneSelectWord, param_6, param_7, param_8, param_9, param_10)
+int KhanPs__vslot21_appendRegisterBinding(this, regIndex, bindingKind, recordWord0xc, laneSelectWord, conditionFlag, unusedArg7, unusedArg8, recordWord0x18, recordWord0x10)
   int this;
   undefined4 regIndex;
   undefined4 bindingKind;
-  undefined4 param_4;
+  undefined4 recordWord0xc;
   undefined4 laneSelectWord;
-  int param_6;
-  undefined4 param_7;
-  undefined4 param_8;
-  undefined4 param_9;
-  undefined4 param_10;
+  int conditionFlag;
+  undefined4 unusedArg7;
+  undefined4 unusedArg8;
+  undefined4 recordWord0x18;
+  undefined4 recordWord0x10;
 {
   int record;
   
@@ -1174,16 +1174,16 @@ int KhanPs__vslot21_appendRegisterBinding(this, regIndex, bindingKind, param_4, 
   *(int *)(((unsigned char *)0x0000172c) + this) = record + 1;
   record = this + record * 0x34 + 0x60;
   *(undefined4 *)(record + 8) = bindingKind;
-  *(undefined4 *)(record + 0xc) = param_4;
-  *(undefined4 *)(record + 0x10) = param_10;
+  *(undefined4 *)(record + 0xc) = recordWord0xc;
+  *(undefined4 *)(record + 0x10) = recordWord0x10;
   *(undefined4 *)(record + 0x1c) = 1;
   *(undefined1 *)(record + 0x37) = (undefined1)regIndex;
   *(char *)(record + 0x38) = (char)((uint)laneSelectWord >> 0x18);
   *(char *)(record + 0x39) = (char)((uint)laneSelectWord >> 0x10);
   *(char *)(record + 0x3a) = (char)((uint)laneSelectWord >> 8);
   *(char *)(record + 0x3b) = (char)laneSelectWord;
-  *(uint *)(record + 0x24) = (uint)(param_6 == 0);
-  *(undefined4 *)(record + 0x18) = param_9;
+  *(uint *)(record + 0x24) = (uint)(conditionFlag == 0);
+  *(undefined4 *)(record + 0x18) = recordWord0x18;
   *(undefined1 *)(record + 0x34) = (undefined1)regIndex;
   *(undefined1 *)(record + 0x35) = (undefined1)regIndex;
   *(undefined1 *)(record + 0x36) = (undefined1)regIndex;

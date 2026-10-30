@@ -1,7 +1,7 @@
 #include "decls.h"
 
-/* FUN_0010f704 @ 0x10f704 (376 bytes) */
-int FUN_0010f704(scopeId, vector, compiler)
+/* Program__countUsedInterpolatorSlots @ 0x10f704 (376 bytes) */
+int Program__countUsedInterpolatorSlots(scopeId, vector, compiler)
   int scopeId;
   uint *vector;
   int compiler;
@@ -71,10 +71,10 @@ int FUN_0010f704(scopeId, vector, compiler)
   return usedSlotCount;
 }
 
-/* FUN_0010f87c @ 0x10f87c (424 bytes) */
-int FUN_0010f87c(program, param_2, vector)
+/* Program__renumberExportInsts @ 0x10f87c (424 bytes) */
+int Program__renumberExportInsts(program, unusedArg2, vector)
   int program;
-  undefined4 param_2;
+  undefined4 unusedArg2;
   uint *vector;
 {
   uint vectorCount;
@@ -155,8 +155,8 @@ int FUN_0010f87c(program, param_2, vector)
   return;
 }
 
-/* FUN_0010fa24 @ 0x10fa24 (304 bytes) */
-int FUN_0010fa24(scopeId, slotOwnerRegister, firstSlot, slotEnd, vector)
+/* Program__bindLinkRecordsToSlots @ 0x10fa24 (304 bytes) */
+int Program__bindLinkRecordsToSlots(scopeId, slotOwnerRegister, firstSlot, slotEnd, vector)
   int scopeId;
   int slotOwnerRegister;
   int firstSlot;
@@ -208,8 +208,8 @@ LAB_0010fb28:
   return;
 }
 
-/* FUN_0010fb54 @ 0x10fb54 (308 bytes) */
-int FUN_0010fb54(vector, nextSlotRef, program)
+/* Program__assignExportSlotsByKind @ 0x10fb54 (308 bytes) */
+int Program__assignExportSlotsByKind(vector, nextSlotRef, program)
   uint *vector;
   int *nextSlotRef;
   int program;
@@ -265,14 +265,14 @@ int FUN_0010fb54(vector, nextSlotRef, program)
     } while ((int)loopIndex < (int)vectorCount);
     slotEnd = slotEnd + 1;
   }
-  return ((int (*)())FUN_0010fa24)(2,slotOwnerRegister,firstSlot,slotEnd,*(undefined4 *)(program + 0x418));
+  return ((int (*)())Program__bindLinkRecordsToSlots)(2,slotOwnerRegister,firstSlot,slotEnd,*(undefined4 *)(program + 0x418));
 }
 
-/* FUN_0010fc88 @ 0x10fc88 (272 bytes) */
-int FUN_0010fc88(bindContext, vector, param_3, program)
+/* Program__assignOutputExportSlots @ 0x10fc88 (272 bytes) */
+int Program__assignOutputExportSlots(bindContext, vector, unusedArg3, program)
   undefined4 bindContext;
   uint *vector;
-  undefined4 param_3;
+  undefined4 unusedArg3;
   int program;
 {
   int exportInstB;
@@ -318,11 +318,11 @@ int FUN_0010fc88(bindContext, vector, param_3, program)
     } while ((int)loopIndex < (int)vectorCount);
     slotEnd = slotEnd + 1;
   }
-  return ((int (*)())FUN_0010fa24)(bindContext,slotOwnerRegister,outputBase,slotEnd,*(undefined4 *)(program + 0x418));
+  return ((int (*)())Program__bindLinkRecordsToSlots)(bindContext,slotOwnerRegister,outputBase,slotEnd,*(undefined4 *)(program + 0x418));
 }
 
-/* FUN_0010fd98 @ 0x10fd98 (396 bytes) */
-int FUN_0010fd98(scopeId, vector, nextSlotRef, program)
+/* Program__assignSharedExportSlots @ 0x10fd98 (396 bytes) */
+int Program__assignSharedExportSlots(scopeId, vector, nextSlotRef, program)
   undefined4 scopeId;
   uint *vector;
   int *nextSlotRef;
@@ -401,11 +401,11 @@ LAB_0010febc:
     } while ((int)loopIndex < (int)vectorCount);
     endSlot = *nextSlotRef;
   }
-  return ((int (*)())FUN_0010fa24)(scopeId,slotTable,firstSlot,endSlot,*(undefined4 *)(program + 0x418));
+  return ((int (*)())Program__bindLinkRecordsToSlots)(scopeId,slotTable,firstSlot,endSlot,*(undefined4 *)(program + 0x418));
 }
 
-/* FUN_0010ff24 @ 0x10ff24 (252 bytes) */
-int FUN_0010ff24(packEntry, vector)
+/* PackEntry__bindToVectorRegister @ 0x10ff24 (252 bytes) */
+int PackEntry__bindToVectorRegister(packEntry, vector)
   int *packEntry;
   uint *vector;
 {
@@ -454,8 +454,8 @@ int FUN_0010ff24(packEntry, vector)
   return;
 }
 
-/* FUN_00110020 @ 0x110020 (204 bytes) */
-int FUN_00110020(program, valueKey)
+/* Program__collectExportEntry @ 0x110020 (204 bytes) */
+int Program__collectExportEntry(program, valueKey)
   int program;
   int valueKey;
 {
@@ -576,8 +576,8 @@ LAB_001101ac:
   return;
 }
 
-/* FUN_001102e0 @ 0x1102e0 (124 bytes) */
-int FUN_001102e0(program, scopeId, vector)
+/* Program__packInterpolatorEntries @ 0x1102e0 (124 bytes) */
+int Program__packInterpolatorEntries(program, scopeId, vector)
   int program;
   int scopeId;
   uint *vector;
@@ -807,7 +807,7 @@ LAB_0011047c:
   if ((allocationCount & 3) != 0) {
     vec4GroupCount = vec4GroupCount + 1;
   }
-  groupLimit = ((int (*)())FUN_0010f704)(iStack0000001c,vectorAt418B,*(undefined4 *)(program + 8));
+  groupLimit = ((int (*)())Program__countUsedInterpolatorSlots)(iStack0000001c,vectorAt418B,*(undefined4 *)(program + 8));
   if (vec4GroupCount < groupLimit) {
     packEntryCount = vector[1];
     vectorIndex = 0;
@@ -911,7 +911,7 @@ LAB_0011047c:
           }
           vectorIndex = vectorIndex + 1;
           vectorElement2 = (int *)*vectorElementRef;
-          needsLaneFixup = FUN_0010ecb8(*vectorElement2);
+          needsLaneFixup = IRInst__destMaskHasGap(*vectorElement2);
           if (needsLaneFixup != 0) {
             laneCounter = 0;
             do {
@@ -1095,8 +1095,8 @@ LAB_0011047c:
             }
             else if (packEntryElemRef[5] == groupSizeRemaining) {
               Vector__removeValue(vector,packEntryElemRef);
-              FUN_0010f38c(packEntryElemRef,vector);
-              ((int (*)())FUN_0010ff24)(packEntryElemRef,*(undefined4 *)(program + 0x418));
+              PackEntry__lanesFitVector(packEntryElemRef,vector);
+              ((int (*)())PackEntry__bindToVectorRegister)(packEntryElemRef,*(undefined4 *)(program + 0x418));
               allocationCount = allocation[2];
               if (allocationCount < *outVector) {
                 _memset((void *)(allocationCount * 4 + allocation[3]),0,4);
@@ -1560,7 +1560,7 @@ LAB_001116f4: ;
       outVectorAlloc[4] = arena;
       vectorData = Arena__alloc(arena,8);
       outVectorAlloc[3] = vectorData;
-      groupCursor = ((int (*)())FUN_0010f704)(iStack0000001c,*(undefined4 *)(program + 0x418),
+      groupCursor = ((int (*)())Program__countUsedInterpolatorSlots)(iStack0000001c,*(undefined4 *)(program + 0x418),
                            *(undefined4 *)(program + 8));
       if (vec4GroupCount < groupCursor) {
         allocationCount = allocation[2];
@@ -2247,7 +2247,7 @@ LAB_0011293c:
     IRLoadInterp__laneIndex_104180(outputKind7Inst,0);
     (*bindOutputFn)(this,1,1,kind7LaneIndex,defaultLaneMask,0,0,0);
   }
-  fixedLayout = FUN_0010f4d4(program);
+  fixedLayout = Program__classifyExportInsts(program);
   *(int *)(program + 0x3e4) = fixedLayout;
   if (fixedLayout == 0) {
     Vector__shellSort(*(undefined4 *)(program + 0x420),Compare__descendingByRemappedKey);
@@ -2323,7 +2323,7 @@ LAB_0011293c:
             }
           }
           else {
-            ((int (*)())FUN_0010fb54)(*(undefined4 *)(program + 0x420),&nextSlot,program);
+            ((int (*)())Program__assignExportSlotsByKind)(*(undefined4 *)(program + 0x420),&nextSlot,program);
           }
           goto LAB_00112c28;
         }
@@ -2334,17 +2334,17 @@ LAB_0011293c:
       } while (loopIndex < recordCount);
       kind2Vector = *(uint **)(program + 0x420);
     }
-    ((int (*)())FUN_0010fd98)(2,kind2Vector,&nextSlot,program);
+    ((int (*)())Program__assignSharedExportSlots)(2,kind2Vector,&nextSlot,program);
 LAB_00112c28:
-    ((int (*)())FUN_0010fd98)(3,*(undefined4 *)(program + 0x424),&nextSlot,program);
+    ((int (*)())Program__assignSharedExportSlots)(3,*(undefined4 *)(program + 0x424),&nextSlot,program);
     Vector__shellSort(*(undefined4 *)(program + 0x41c),Compare__descendingByField140);
-    ((int (*)())FUN_0010fd98)(1,*(undefined4 *)(program + 0x41c),&nextSlot,program);
+    ((int (*)())Program__assignSharedExportSlots)(1,*(undefined4 *)(program + 0x41c),&nextSlot,program);
   }
   else {
     *(int *)(program + 0x3f0) = nextSlot - *(int *)(program + 1000);
-    ((int (*)())FUN_0010fc88)(2,*(undefined4 *)(program + 0x420),&nextSlot,program);
-    ((int (*)())FUN_0010fc88)(3,*(undefined4 *)(program + 0x424),&nextSlot,program);
-    ((int (*)())FUN_0010fc88)(1,*(undefined4 *)(program + 0x41c),&nextSlot,program);
+    ((int (*)())Program__assignOutputExportSlots)(2,*(undefined4 *)(program + 0x420),&nextSlot,program);
+    ((int (*)())Program__assignOutputExportSlots)(3,*(undefined4 *)(program + 0x424),&nextSlot,program);
+    ((int (*)())Program__assignOutputExportSlots)(1,*(undefined4 *)(program + 0x41c),&nextSlot,program);
   }
   *(int *)(program + 0x234) = nextSlot + 1;
   slotMask = 0;
@@ -2424,24 +2424,24 @@ int OpcodeTraits__flagBit0(opcode, compiler)
   int opcode;
   int compiler;
 {
-  int iVar1;
+  int opcodeFlagTable;
   
-  iVar1 = (**(code **)(**(int **)(compiler + COMP_target) + 0x16c))(*(int **)(compiler + COMP_target),compiler);
-  return *(uint *)(opcode * 0x38 + iVar1) & 1;
+  opcodeFlagTable = (**(code **)(**(int **)(compiler + COMP_target) + 0x16c))(*(int **)(compiler + COMP_target),compiler);
+  return *(uint *)(opcode * 0x38 + opcodeFlagTable) & 1;
 }
 
 /* Value__isBelow8 @ 0x112fc4 (16 bytes) */
-int Value__isBelow8(param_1)
-  uint param_1;
+int Value__isBelow8(value)
+  uint value;
 {
-  return param_1 < 8;
+  return value < 8;
 }
 
 /* Value__isBelow7 @ 0x112fd4 (16 bytes) */
-int Value__isBelow7(param_1)
-  uint param_1;
+int Value__isBelow7(value)
+  uint value;
 {
-  return param_1 < 7;
+  return value < 7;
 }
 
 /* Backend__bindingSlotsSequential @ 0x112fe4 (172 bytes) */
@@ -2482,10 +2482,10 @@ int OpcodeTraits__flagBit2(opcode, compiler)
   int opcode;
   int compiler;
 {
-  int iVar1;
+  int opcodeFlagTable;
   
-  iVar1 = (**(code **)(**(int **)(compiler + COMP_target) + 0x16c))(*(int **)(compiler + COMP_target),compiler);
-  return *(uint *)(opcode * 0x38 + iVar1) >> 2 & 1;
+  opcodeFlagTable = (**(code **)(**(int **)(compiler + COMP_target) + 0x16c))(*(int **)(compiler + COMP_target),compiler);
+  return *(uint *)(opcode * 0x38 + opcodeFlagTable) >> 2 & 1;
 }
 
 /* OpcodeTraits__flagBit3 @ 0x1130dc (76 bytes) */
@@ -2493,10 +2493,10 @@ int OpcodeTraits__flagBit3(opcode, compiler)
   int opcode;
   int compiler;
 {
-  int iVar1;
+  int opcodeFlagTable;
   
-  iVar1 = (**(code **)(**(int **)(compiler + COMP_target) + 0x16c))(*(int **)(compiler + COMP_target),compiler);
-  return *(uint *)(opcode * 0x38 + iVar1) >> 3 & 1;
+  opcodeFlagTable = (**(code **)(**(int **)(compiler + COMP_target) + 0x16c))(*(int **)(compiler + COMP_target),compiler);
+  return *(uint *)(opcode * 0x38 + opcodeFlagTable) >> 3 & 1;
 }
 
 /* OpcodeTraits__flagBit6 @ 0x113128 (76 bytes) */
@@ -2504,10 +2504,10 @@ int OpcodeTraits__flagBit6(opcode, compiler)
   int opcode;
   int compiler;
 {
-  int iVar1;
+  int opcodeFlagTable;
   
-  iVar1 = (**(code **)(**(int **)(compiler + COMP_target) + 0x16c))(*(int **)(compiler + COMP_target),compiler);
-  return *(uint *)(opcode * 0x38 + iVar1) >> 6 & 1;
+  opcodeFlagTable = (**(code **)(**(int **)(compiler + COMP_target) + 0x16c))(*(int **)(compiler + COMP_target),compiler);
+  return *(uint *)(opcode * 0x38 + opcodeFlagTable) >> 6 & 1;
 }
 
 /* OpcodeTraits__flagBit7 @ 0x113174 (76 bytes) */
@@ -2515,10 +2515,10 @@ int OpcodeTraits__flagBit7(opcode, compiler)
   int opcode;
   int compiler;
 {
-  int iVar1;
+  int opcodeFlagTable;
   
-  iVar1 = (**(code **)(**(int **)(compiler + COMP_target) + 0x16c))(*(int **)(compiler + COMP_target),compiler);
-  return *(uint *)(opcode * 0x38 + iVar1) >> 7 & 1;
+  opcodeFlagTable = (**(code **)(**(int **)(compiler + COMP_target) + 0x16c))(*(int **)(compiler + COMP_target),compiler);
+  return *(uint *)(opcode * 0x38 + opcodeFlagTable) >> 7 & 1;
 }
 
 /* OpcodeTraits__flagBit8 @ 0x1131c0 (76 bytes) */
@@ -2526,10 +2526,10 @@ int OpcodeTraits__flagBit8(opcode, compiler)
   int opcode;
   int compiler;
 {
-  int iVar1;
+  int opcodeFlagTable;
   
-  iVar1 = (**(code **)(**(int **)(compiler + COMP_target) + 0x16c))(*(int **)(compiler + COMP_target),compiler);
-  return *(uint *)(opcode * 0x38 + iVar1) >> 8 & 1;
+  opcodeFlagTable = (**(code **)(**(int **)(compiler + COMP_target) + 0x16c))(*(int **)(compiler + COMP_target),compiler);
+  return *(uint *)(opcode * 0x38 + opcodeFlagTable) >> 8 & 1;
 }
 
 /* OpcodeTraits__flagBit9 @ 0x11320c (76 bytes) */
@@ -2537,10 +2537,10 @@ int OpcodeTraits__flagBit9(opcode, compiler)
   int opcode;
   int compiler;
 {
-  int iVar1;
+  int opcodeFlagTable;
   
-  iVar1 = (**(code **)(**(int **)(compiler + COMP_target) + 0x16c))(*(int **)(compiler + COMP_target),compiler);
-  return *(uint *)(opcode * 0x38 + iVar1) >> 9 & 1;
+  opcodeFlagTable = (**(code **)(**(int **)(compiler + COMP_target) + 0x16c))(*(int **)(compiler + COMP_target),compiler);
+  return *(uint *)(opcode * 0x38 + opcodeFlagTable) >> 9 & 1;
 }
 
 /* OpcodeTraits__flagBit10 @ 0x113258 (76 bytes) */
@@ -2548,10 +2548,10 @@ int OpcodeTraits__flagBit10(opcode, compiler)
   int opcode;
   int compiler;
 {
-  int iVar1;
+  int opcodeFlagTable;
   
-  iVar1 = (**(code **)(**(int **)(compiler + COMP_target) + 0x16c))(*(int **)(compiler + COMP_target),compiler);
-  return *(uint *)(opcode * 0x38 + iVar1) >> 10 & 1;
+  opcodeFlagTable = (**(code **)(**(int **)(compiler + COMP_target) + 0x16c))(*(int **)(compiler + COMP_target),compiler);
+  return *(uint *)(opcode * 0x38 + opcodeFlagTable) >> 10 & 1;
 }
 
 /* OpcodeTraits__flagBit12 @ 0x1132a4 (76 bytes) */
@@ -2559,10 +2559,10 @@ int OpcodeTraits__flagBit12(opcode, compiler)
   int opcode;
   int compiler;
 {
-  int iVar1;
+  int opcodeFlagTable;
   
-  iVar1 = (**(code **)(**(int **)(compiler + COMP_target) + 0x16c))(*(int **)(compiler + COMP_target),compiler);
-  return *(uint *)(opcode * 0x38 + iVar1) >> 0xc & 1;
+  opcodeFlagTable = (**(code **)(**(int **)(compiler + COMP_target) + 0x16c))(*(int **)(compiler + COMP_target),compiler);
+  return *(uint *)(opcode * 0x38 + opcodeFlagTable) >> 0xc & 1;
 }
 
 /* OpcodeTraits__flagBit13 @ 0x1132f0 (76 bytes) */
@@ -2570,10 +2570,10 @@ int OpcodeTraits__flagBit13(opcode, compiler)
   int opcode;
   int compiler;
 {
-  int iVar1;
+  int opcodeFlagTable;
   
-  iVar1 = (**(code **)(**(int **)(compiler + COMP_target) + 0x16c))(*(int **)(compiler + COMP_target),compiler);
-  return *(uint *)(opcode * 0x38 + iVar1) >> 0xd & 1;
+  opcodeFlagTable = (**(code **)(**(int **)(compiler + COMP_target) + 0x16c))(*(int **)(compiler + COMP_target),compiler);
+  return *(uint *)(opcode * 0x38 + opcodeFlagTable) >> 0xd & 1;
 }
 
 /* OpcodeTraits__getField4 @ 0x11333c (76 bytes) */
@@ -2581,10 +2581,10 @@ int OpcodeTraits__getField4(opcode, compiler)
   int opcode;
   int compiler;
 {
-  int iVar1;
+  int opcodeFlagTable;
   
-  iVar1 = (**(code **)(**(int **)(compiler + COMP_target) + 0x16c))(*(int **)(compiler + COMP_target),compiler);
-  return *(undefined4 *)(opcode * 0x38 + iVar1 + 4);
+  opcodeFlagTable = (**(code **)(**(int **)(compiler + COMP_target) + 0x16c))(*(int **)(compiler + COMP_target),compiler);
+  return *(undefined4 *)(opcode * 0x38 + opcodeFlagTable + 4);
 }
 
 /* OpcodeTraits__getInstClass @ 0x113388 (76 bytes) */
@@ -2592,10 +2592,10 @@ int OpcodeTraits__getInstClass(opcode, compiler)
   int opcode;
   int compiler;
 {
-  int iVar1;
+  int opcodeFlagTable;
   
-  iVar1 = (**(code **)(**(int **)(compiler + COMP_target) + 0x16c))(*(int **)(compiler + COMP_target),compiler);
-  return *(undefined4 *)(opcode * 0x38 + iVar1 + 0x30);
+  opcodeFlagTable = (**(code **)(**(int **)(compiler + COMP_target) + 0x16c))(*(int **)(compiler + COMP_target),compiler);
+  return *(undefined4 *)(opcode * 0x38 + opcodeFlagTable + 0x30);
 }
 
 /* OpcodeTraits__getFieldC @ 0x1133d4 (76 bytes) */
@@ -2603,10 +2603,10 @@ int OpcodeTraits__getFieldC(opcode, compiler)
   int opcode;
   int compiler;
 {
-  int iVar1;
+  int opcodeFlagTable;
   
-  iVar1 = (**(code **)(**(int **)(compiler + COMP_target) + 0x16c))(*(int **)(compiler + COMP_target),compiler);
-  return *(undefined4 *)(opcode * 0x38 + iVar1 + 0xc);
+  opcodeFlagTable = (**(code **)(**(int **)(compiler + COMP_target) + 0x16c))(*(int **)(compiler + COMP_target),compiler);
+  return *(undefined4 *)(opcode * 0x38 + opcodeFlagTable + 0xc);
 }
 
 /* OpcodeTraits__getField34 @ 0x113420 (76 bytes) */
@@ -2614,10 +2614,10 @@ int OpcodeTraits__getField34(opcode, compiler)
   int opcode;
   int compiler;
 {
-  int iVar1;
+  int opcodeFlagTable;
   
-  iVar1 = (**(code **)(**(int **)(compiler + COMP_target) + 0x16c))(*(int **)(compiler + COMP_target),compiler);
-  return *(undefined4 *)(opcode * 0x38 + iVar1 + 0x34);
+  opcodeFlagTable = (**(code **)(**(int **)(compiler + COMP_target) + 0x16c))(*(int **)(compiler + COMP_target),compiler);
+  return *(undefined4 *)(opcode * 0x38 + opcodeFlagTable + 0x34);
 }
 
 /* OpcodeTraits__instFlagBit2 @ 0x11346c (80 bytes) */
@@ -2679,115 +2679,115 @@ double mulFloatZeroAnnihilates(double fparam_1,double fparam_2)
 }
 
 /* OpcodeSetup__mode9 @ 0x11358c (28 bytes) */
-int OpcodeSetup__mode9(param_1, param_2)
-  int param_1;
-  int param_2;
+int OpcodeSetup__mode9(setup, inst)
+  int setup;
+  int inst;
 {
-  *(undefined4 *)(param_2 + 0x84) = 3;
-  *(undefined4 *)(param_2 + 0x80) = 1;
-  *(undefined4 *)(param_1 + 4) = 9;
+  *(undefined4 *)(inst + 0x84) = 3;
+  *(undefined4 *)(inst + 0x80) = 1;
+  *(undefined4 *)(setup + 4) = 9;
   return;
 }
 
 /* OpcodeSetup__mode6 @ 0x1135a8 (24 bytes) */
-int OpcodeSetup__mode6(param_1, param_2)
-  int param_1;
-  int param_2;
+int OpcodeSetup__mode6(setup, inst)
+  int setup;
+  int inst;
 {
-  *(undefined4 *)(param_2 + 0x84) = 1;
-  *(undefined4 *)(param_2 + 0x80) = 1;
-  *(undefined4 *)(param_1 + 4) = 6;
+  *(undefined4 *)(inst + 0x84) = 1;
+  *(undefined4 *)(inst + 0x80) = 1;
+  *(undefined4 *)(setup + 4) = 6;
   return;
 }
 
 /* OpcodeSetup__mode1 @ 0x1135c0 (44 bytes) */
-int OpcodeSetup__mode1(param_1, param_2)
-  int param_1;
-  int param_2;
+int OpcodeSetup__mode1(setup, inst)
+  int setup;
+  int inst;
 {
-  *(undefined4 *)(param_2 + 0x84) = 0;
-  *(undefined4 *)(param_2 + 300) = 0;
-  *(undefined4 *)(param_2 + 0x80) = 1;
-  *(uint *)(param_2 + 0x14) = *(uint *)(param_2 + 0x14) | 0x18000;
-  *(undefined4 *)(param_1 + 4) = 1;
+  *(undefined4 *)(inst + 0x84) = 0;
+  *(undefined4 *)(inst + 300) = 0;
+  *(undefined4 *)(inst + 0x80) = 1;
+  *(uint *)(inst + 0x14) = *(uint *)(inst + 0x14) | 0x18000;
+  *(undefined4 *)(setup + 4) = 1;
   return;
 }
 
 /* OpcodeSetup__mode7 @ 0x1135ec (80 bytes) */
-int OpcodeSetup__mode7(param_1, inst, param_3)
-  int param_1;
+int OpcodeSetup__mode7(setup, inst, compiler)
+  int setup;
   int inst;
-  int param_3;
+  int compiler;
 {
   *(undefined4 *)(inst + 0x84) = 1;
   *(undefined4 *)(inst + 0x80) = 1;
   *(uint *)(inst + 0x14) = *(uint *)(inst + 0x14) | 0x18;
-  Program__addInst(*(undefined4 *)(param_3 + 0x6c4),inst);
-  *(undefined4 *)(param_1 + 4) = 7;
+  Program__addInst(*(undefined4 *)(compiler + 0x6c4),inst);
+  *(undefined4 *)(setup + 4) = 7;
   return;
 }
 
 /* OpcodeSetup__mode8 @ 0x11363c (84 bytes) */
-int OpcodeSetup__mode8(param_1, inst, param_3)
-  int param_1;
+int OpcodeSetup__mode8(setup, inst, compiler)
+  int setup;
   int inst;
-  int param_3;
+  int compiler;
 {
   *(undefined4 *)(inst + 0x80) = 0;
   *(uint *)(inst + 0x14) = *(uint *)(inst + 0x14) | 0x18;
   *(undefined4 *)(inst + 0x84) = 1;
-  Program__addInst(*(undefined4 *)(param_3 + 0x6c4),inst);
-  *(undefined4 *)(param_1 + 4) = 8;
+  Program__addInst(*(undefined4 *)(compiler + 0x6c4),inst);
+  *(undefined4 *)(setup + 4) = 8;
   return;
 }
 
 /* OpcodeSetup__mode5 @ 0x113690 (84 bytes) */
-int OpcodeSetup__mode5(param_1, inst, param_3)
-  int param_1;
+int OpcodeSetup__mode5(setup, inst, compiler)
+  int setup;
   int inst;
-  int param_3;
+  int compiler;
 {
   *(undefined4 *)(inst + 0x84) = 1;
   *(undefined4 *)(inst + 0x80) = 1;
   *(uint *)(inst + 0x14) = *(uint *)(inst + 0x14) | 0x18018;
-  Program__addInst(*(undefined4 *)(param_3 + 0x6c4),inst);
-  *(undefined4 *)(param_1 + 4) = 5;
+  Program__addInst(*(undefined4 *)(compiler + 0x6c4),inst);
+  *(undefined4 *)(setup + 4) = 5;
   return;
 }
 
 /* OpcodeSetup__mode3 @ 0x1136e4 (40 bytes) */
-int OpcodeSetup__mode3(param_1, param_2)
-  int param_1;
-  int param_2;
+int OpcodeSetup__mode3(setup, inst)
+  int setup;
+  int inst;
 {
-  *(undefined4 *)(param_2 + 0x84) = 1;
-  *(undefined4 *)(param_2 + 0x80) = 1;
-  *(uint *)(param_2 + 0x14) = *(uint *)(param_2 + 0x14) | 0x18000;
-  *(undefined4 *)(param_1 + 4) = 3;
+  *(undefined4 *)(inst + 0x84) = 1;
+  *(undefined4 *)(inst + 0x80) = 1;
+  *(uint *)(inst + 0x14) = *(uint *)(inst + 0x14) | 0x18000;
+  *(undefined4 *)(setup + 4) = 3;
   return;
 }
 
 /* OpcodeSetup__mode2 @ 0x11370c (40 bytes) */
-int OpcodeSetup__mode2(param_1, param_2)
-  int param_1;
-  int param_2;
+int OpcodeSetup__mode2(setup, inst)
+  int setup;
+  int inst;
 {
-  *(undefined4 *)(param_2 + 0x84) = 0;
-  *(undefined4 *)(param_2 + 0x80) = 0;
-  *(uint *)(param_2 + 0x14) = *(uint *)(param_2 + 0x14) | 0x18000;
-  *(undefined4 *)(param_1 + 4) = 2;
+  *(undefined4 *)(inst + 0x84) = 0;
+  *(undefined4 *)(inst + 0x80) = 0;
+  *(uint *)(inst + 0x14) = *(uint *)(inst + 0x14) | 0x18000;
+  *(undefined4 *)(setup + 4) = 2;
   return;
 }
 
 /* OpcodeTraits__instFlagBit2_113734 @ 0x113734 (104 bytes) */
-int OpcodeTraits__instFlagBit2_113734(compiler, inst, param_3, destDescriptor, param_5, foldedResult, param_7)
+int OpcodeTraits__instFlagBit2_113734(compiler, inst, unusedArg3, destDescriptor, unusedArg5, foldedResult, unusedArg7)
   int compiler;
   int inst;
-  undefined4 param_3;
+  undefined4 unusedArg3;
   undefined4 destDescriptor;
-  undefined4 param_5;
+  undefined4 unusedArg5;
   undefined4 foldedResult;
-  undefined4 param_7;
+  undefined4 unusedArg7;
 {
   uint flagBit2;
   int *targetObject;
@@ -2803,17 +2803,17 @@ int OpcodeTraits__instFlagBit2_113734(compiler, inst, param_3, destDescriptor, p
 }
 
 /* OpcodeTraits__flag1WithoutFlag7 @ 0x11379c (124 bytes) */
-int OpcodeTraits__flag1WithoutFlag7(compiler, param_2)
+int OpcodeTraits__flag1WithoutFlag7(compiler, inst)
   int compiler;
-  int param_2;
+  int inst;
 {
   int opcodeFlagTable;
   int flagBit7Result;
   undefined4 result;
   int opcode;
   
-  opcodeFlagTable = (**(code **)(**(int **)(compiler + 0x30c) + 0x16c))(*(int **)(compiler + 0x30c),param_2);
-  opcode = *(int *)(*(int *)(param_2 + 0x88) + 8);
+  opcodeFlagTable = (**(code **)(**(int **)(compiler + 0x30c) + 0x16c))(*(int **)(compiler + 0x30c),inst);
+  opcode = *(int *)(*(int *)(inst + 0x88) + 8);
   flagBit7Result = ((int (*)())OpcodeTraits__flagBit7)(opcode,compiler);
   if ((flagBit7Result != 0) || (result = 1, (*(uint *)(opcodeFlagTable + opcode * 0x38) & 2) == 0)) {
     result = 0;

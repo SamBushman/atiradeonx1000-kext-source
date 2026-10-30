@@ -59,10 +59,10 @@ double constantZeroFloat( void)
 }
 
 /* isLessThan2 @ 0x103e70 (16 bytes) */
-int isLessThan2(param_1)
-  uint param_1;
+int isLessThan2(value)
+  uint value;
 {
-  return param_1 < 2;
+  return value < 2;
 }
 
 /* setSelectedConstantWord @ 0x103e84 (56 bytes) */
@@ -445,13 +445,13 @@ int IRInst__clone(srcInst, compiler, keepId)
 }
 
 /* IRInst__replaceExtraData @ 0x1044e0 (60 bytes) */
-int IRInst__replaceExtraData(param_1, newData, compiler)
-  int param_1;
+int IRInst__replaceExtraData(inst, newData, compiler)
+  int inst;
   undefined4 newData;
   int compiler;
 {
-  Arena__free(*(undefined4 *)(compiler + COMP_arenaA),*(undefined4 *)(param_1 + 0x13c));
-  *(undefined4 *)(param_1 + 0x13c) = newData;
+  Arena__free(*(undefined4 *)(compiler + COMP_arenaA),*(undefined4 *)(inst + 0x13c));
+  *(undefined4 *)(inst + 0x13c) = newData;
   return;
 }
 

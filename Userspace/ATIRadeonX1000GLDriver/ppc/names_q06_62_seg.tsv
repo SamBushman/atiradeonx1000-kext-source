@@ -1,0 +1,6 @@
+use	IRInst__hasOperandKindClass1	iVar1	operandCount	INFERRED	vslot 0x14 operand count	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0x14\)\)\(param_1\);$	^\s*return\ 0;$	lhs	none
+use	IRInst__hasOperandKindClass1	iVar1	kindClass	INFERRED	IRInst__operandKindClass result	^\s*iVar1\ =\ FUN_00105dbc\(param_1,iVar2\);$	^\s*iVar2\ =\ iVar2\ \+\ 1;$	lhs	none
+use	IRInst__findChainNodeById	iVar1	chainEnd	INFERRED	IRInst__chainLast result	^\s*iVar1\ =\ \(\(int\ \(\*\)\(\)\)FUN_00130728\)\(param_1\);$	^\s*while\(\ true\ \)\ \{$	lhs	none
+use	IRInst__findChainNodeById	iVar1	query74	INFERRED	vslot 0x74 result	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*piVar2\ \+\ 0x74\)\)\(piVar2\);$	^\s*return\ \(int\ \*\)0x0;$	lhs	none
+use	Compare__descendingByRemappedKey	iVar2	rhsElement	INFERRED	element pointed to by rhsRef	^\s*iVar2\ =\ \*param_2;$	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)FUN_0010e40c\)\(\*\(undefined4\ \*\)\(iVar2\ \+\ 0x13c\),\*\(undefined4\ \*\)\(iVar2\ \+\ 0x140\)\);$	all	rhs
+use	Compare__descendingByRemappedKey	iVar2	rhsKey	INFERRED	Lane__remapValue key of the rhs element	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)FUN_0010e40c\)\(\*\(undefined4\ \*\)\(iVar2\ \+\ 0x13c\),\*\(undefined4\ \*\)\(iVar2\ \+\ 0x140\)\);$	^\s*\}$	lhs	none

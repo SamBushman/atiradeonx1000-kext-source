@@ -33,18 +33,18 @@ int LoopInfo__setCounterPhi(loopInfo, inst)
   return result;
 }
 
-/* FUN_0012b3f8 @ 0x12b3f8 (272 bytes) */
-int FUN_0012b3f8(branchInst, inst, compiler)
+/* IRInst__swapCompareOperands @ 0x12b3f8 (272 bytes) */
+int IRInst__swapCompareOperands(branchInst, inst, compiler)
   int branchInst;
   int inst;
   uint compiler;
 {
-  uint uVar1;
+  uint branchFlags;
   
   switch(*(undefined4 *)(branchInst + 300)) {
   case 0:
     IROperand__setModifierBits(inst + 0xa4,2,1);
-    uVar1 = *(uint *)(inst + 0xb8);
+    branchFlags = *(uint *)(inst + 0xb8);
     goto LAB_0012b4b0;
   case 1:
     IROperand__setModifierBits(inst + 0xa4,2,1);
@@ -58,24 +58,24 @@ int FUN_0012b3f8(branchInst, inst, compiler)
   case 4:
     break;
   case 5:
-    uVar1 = *(uint *)(inst + 0xb8);
+    branchFlags = *(uint *)(inst + 0xb8);
 LAB_0012b4b0:
-    IROperand__setModifierBits(inst + 0xa4,1,uVar1 & 1 ^ 1);
+    IROperand__setModifierBits(inst + 0xa4,1,branchFlags & 1 ^ 1);
     return;
   }
   IRInst__swapOperands(inst,2,3,compiler);
   return;
 }
 
-/* FUN_0012b520 @ 0x12b520 (192 bytes) */
-int FUN_0012b520(program)
+/* Program__removeUnreachableBlocks @ 0x12b520 (192 bytes) */
+int Program__removeUnreachableBlocks(program)
   int program;
 {
   int predecessorCount;
   int *nextBlockLink;
   bool removedAny;
   undefined4 *successorPredVector;
-  int iVar4;
+  int predecessorBlock;
   int blockPredecessorTotal;
   int entryBlock;
   uint loopIndex;
@@ -98,15 +98,15 @@ int FUN_0012b520(program)
       if ((entryBlock != block) && (blockPredecessorTotal = Block__predecessorCount(block), blockPredecessorTotal == 0)) {
         blockPredecessorTotal = 0;
         for (loopIndex = 1; loopIndex <= *(uint *)(*(int *)(block + 0xd0) + 4); loopIndex = loopIndex + 1) {
-          iVar4 = *(int *)(blockPredecessorTotal + *(int *)(*(int *)(block + 0xd0) + 8));
-          if (iVar4 != 0) {
-            successorPredVector = *(undefined4 **)(iVar4 + 0xd4);
+          predecessorBlock = *(int *)(blockPredecessorTotal + *(int *)(*(int *)(block + 0xd0) + 8));
+          if (predecessorBlock != 0) {
+            successorPredVector = *(undefined4 **)(predecessorBlock + 0xd4);
             predVectorCopyArena = successorPredVector[3];
             predVectorCopyCapacity = *successorPredVector;
             predVectorCopyCount = successorPredVector[1];
             predVectorCopyData = successorPredVector[2];
             Vector__removeValue(&predVectorCopyCapacity,block);
-            predecessorCount = Block__predecessorCount(iVar4);
+            predecessorCount = Block__predecessorCount(predecessorBlock);
             if (predecessorCount == 0) {
               removedAny = true;
             }
@@ -324,8 +324,8 @@ int LoopInfo__init(loopInfo, header)
   return 0;
 }
 
-/* FUN_0012bb48 @ 0x12bb48 (296 bytes) */
-int FUN_0012bb48(pass, block)
+/* Program__collapseIfRegion @ 0x12bb48 (296 bytes) */
+int Program__collapseIfRegion(pass, block)
   int pass;
   int *block;
 {
@@ -489,14 +489,14 @@ int FUN_0012bb48(pass, block)
 }
 
 /* Program__hasKillTexture @ 0x12c0e4 (80 bytes) */
-int Program__hasKillTexture(param_1)
-  int param_1;
+int Program__hasKillTexture(program)
+  int program;
 {
   int inst;
   int nextInst;
   
-  inst = *(int *)(param_1 + 0x98);
-  nextInst = *(int *)(*(int *)(param_1 + 0x98) + 8);
+  inst = *(int *)(program + 0x98);
+  nextInst = *(int *)(*(int *)(program + 0x98) + 8);
   while( true ) {
     if (nextInst == 0) {
       return 0;
@@ -582,8 +582,8 @@ int FudoPs__vslot69_shouldFlattenIf(this, ifHeader, optionSource, staleArg4, sta
   return 0;
 }
 
-/* FUN_0012c2dc @ 0x12c2dc (244 bytes) */
-int FUN_0012c2dc(program, block)
+/* Program__isTrivialBranchRegion @ 0x12c2dc (244 bytes) */
+int Program__isTrivialBranchRegion(program, block)
   int program;
   int block;
 {
@@ -625,8 +625,8 @@ int FUN_0012c2dc(program, block)
   return 0;
 }
 
-/* FUN_0012c3d0 @ 0x12c3d0 (460 bytes) */
-int FUN_0012c3d0(inst, registerBase, program)
+/* Program__rebaseInstRegisters @ 0x12c3d0 (460 bytes) */
+int Program__rebaseInstRegisters(inst, registerBase, program)
   int *inst;
   int registerBase;
   int program;
@@ -706,7 +706,7 @@ int LoopInfo__matchCounterInit(loopInfo, inst)
   int index;
   int sourceCount;
   int *byteCursor;
-  undefined4 local_28 [6];
+  undefined4 operandSwizzleBytes [6];
   
   index = (**(code **)(*inst + 100))(inst,inst);
   if (index != 0) {
@@ -744,8 +744,8 @@ int LoopInfo__matchCounterInit(loopInfo, inst)
         index = (**(code **)(*operandVReg + 0x48))(operandVReg);
         if (index != 0) {
           index = IRInst__getOperandRecord(inst,1);
-          local_28[0] = *(undefined4 *)(index + 0x10);
-          lane = (uint)*(byte *)((int)local_28 + *(int *)(loopInfo + 0x38));
+          operandSwizzleBytes[0] = *(undefined4 *)(index + 0x10);
+          lane = (uint)*(byte *)((int)operandSwizzleBytes + *(int *)(loopInfo + 0x38));
           if (((int)*(char *)(operandVReg + 0x57) >> (lane & 0x3f) & 1U) == 0) {
             *(undefined4 *)(loopInfo + 4) = 0;
             *(uint *)(loopInfo + 0xc) = lane;
@@ -1116,8 +1116,8 @@ LAB_0012ce40:
   return 0;
 }
 
-/* FUN_0012cfa4 @ 0x12cfa4 (820 bytes) */
-int FUN_0012cfa4(program, headerBlock, deadRegionEntry, footerBlock)
+/* Program__removeDeadRegion @ 0x12cfa4 (820 bytes) */
+int Program__removeDeadRegion(program, headerBlock, deadRegionEntry, footerBlock)
   int program;
   int *headerBlock;
   undefined4 deadRegionEntry;
@@ -1182,7 +1182,7 @@ int FUN_0012cfa4(program, headerBlock, deadRegionEntry, footerBlock)
             operandSlotCursor = deadInst;
             for (operandNumber = 1; operandCountOrSuccessors = (**(code **)(*deadInst + 0x14))(deadInst), operandNumber <= operandCountOrSuccessors;
                 operandNumber = operandNumber + 1) {
-              FUN_001234d8(operandSlotCursor[0x29],deadInst);
+              Owner__removeVectorEntry(operandSlotCursor[0x29],deadInst);
               operandSlotCursor = operandSlotCursor + 6;
             }
           }
@@ -1579,7 +1579,7 @@ int pass_flatten_ifs(flattenPass)
             *(undefined4 *)(selectSource3Record + 0x10) = phiSource2Swizzle;
             insertAfterInst = phiInst;
             if (*(int *)(branchInst[0x22] + 8) == 0x8b) {
-              ((int (*)())FUN_0012b3f8)(branchInst,phiInst,*(undefined4 *)(flattenPass + 8));
+              ((int (*)())IRInst__swapCompareOperands)(branchInst,phiInst,*(undefined4 *)(flattenPass + 8));
             }
           }
           else {
@@ -1622,7 +1622,7 @@ int pass_flatten_ifs(flattenPass)
           changedAny = true;
           walkSuccessor = Block__findSimpleSuccessor(walkBlock);
           if (((blockAfterIf != walkSuccessor) && (changedAny = false, walkSuccessor == 0)) ||
-             (walkSuccessor = FUN_0012aef0(flattenPass,walkBlock,walkSuccessor), walkSuccessor == 0)) {
+             (walkSuccessor = Program__mergeBlockWithSuccessor(flattenPass,walkBlock,walkSuccessor), walkSuccessor == 0)) {
             walkBlock = *(int *)(walkBlock + 8);
           }
         } while ((!changedAny) && (walkBlock != blockAfterIf));
@@ -1656,8 +1656,8 @@ int FudoPs__flattenIfs(this, flattenPass)
   return;
 }
 
-/* FUN_0012dd58 @ 0x12dd58 (512 bytes) */
-int FUN_0012dd58(program, currentBlock, regionEnd)
+/* Program__detachRegion @ 0x12dd58 (512 bytes) */
+int Program__detachRegion(program, currentBlock, regionEnd)
   int program;
   int *currentBlock;
   int regionEnd;
@@ -2038,7 +2038,7 @@ int IfFooter__ctor_12e56c(conditionRegister, loopBlock, compiler)
     allocation[0x2f] = headerWordB8;
     Program__insertBlockAfter(program,loopHeader,preHeaderBlock);
     Block__splitOutgoingEdge(loopHeader,loopExitTarget,preHeaderBlock);
-    headerChainBlock = FUN_0012b140(loopHeader);
+    headerChainBlock = Block__findRegionHeader(loopHeader);
     arenaAt374 = *(undefined4 *)(compiler + COMP_arenaA);
     allocation = (undefined4 *)Arena__alloc(arenaAt374,0x130);
     thenBlock = allocation + 1;
@@ -2080,8 +2080,8 @@ int IfFooter__ctor_12e56c(conditionRegister, loopBlock, compiler)
   return;
 }
 
-/* FUN_0012e8c0 @ 0x12e8c0 (304 bytes) */
-int FUN_0012e8c0(program, block, lastBlock)
+/* Program__splitCriticalEdges @ 0x12e8c0 (304 bytes) */
+int Program__splitCriticalEdges(program, block, lastBlock)
   int program;
   int *block;
   int *lastBlock;
@@ -2103,7 +2103,7 @@ int FUN_0012e8c0(program, block, lastBlock)
       return;
     }
     successorBlock = (int *)Block__getSuccessor(block,0);
-    blockNeedsSplit = FUN_0012aef0(program,block,successorBlock);
+    blockNeedsSplit = Program__mergeBlockWithSuccessor(program,block,successorBlock);
     if (blockNeedsSplit == 0) {
       block = (int *)block[2];
     }
@@ -2137,8 +2137,8 @@ int FUN_0012e8c0(program, block, lastBlock)
   return;
 }
 
-/* FUN_0012eacc @ 0x12eacc (1428 bytes) */
-int FUN_0012eacc(program)
+/* Program__predicatePendingIfs @ 0x12eacc (1428 bytes) */
+int Program__predicatePendingIfs(program)
   int program;
 {
   int pendingEntry;
@@ -2240,7 +2240,7 @@ int FUN_0012eacc(program)
           return;
         }
         successorCursor = (int *)Block__getSuccessor(blockCursor,0);
-        splitResult = FUN_0012aef0(program,blockCursor,successorCursor);
+        splitResult = Program__mergeBlockWithSuccessor(program,blockCursor,successorCursor);
         if (splitResult == 0) {
           blockCursor = (int *)blockCursor[2];
         }
@@ -2280,13 +2280,13 @@ int FUN_0012eacc(program)
     pendingEntry = *pendingTopRef;
     Vector__removeAt(pendingVector,pendingCount - 1);
     containerBlock = *(undefined4 *)(pendingEntry + 0x158);
-    chainBlock = FUN_0012b140(containerBlock);
+    chainBlock = Block__findRegionHeader(containerBlock);
     chainKey = *(undefined4 *)(chainBlock + 0x13c);
     isOrdinaryEntry = (uint)(*(int *)(*(int *)(pendingEntry + 0x88) + 8) != 0xf8);
     if (isOrdinaryEntry == 0) {
       chainHeadKey = *(undefined4 *)(pendingEntry + 300);
       chainSecondKey = 0;
-      conditionKey = FUN_0012ac58(chainHeadKey,chainKey);
+      conditionKey = Block__findLoopEntryPredecessor(chainHeadKey,chainKey);
 LAB_0012ed5c:
       predicateRegister = 0;
       if (conditionKey != 0) {
@@ -2295,7 +2295,7 @@ LAB_0012ed5c:
     }
     else {
       do {
-        chainBlock = FUN_0012b140(chainBlock);
+        chainBlock = Block__findRegionHeader(chainBlock);
       } while (*(int *)(chainBlock + 0x150) == 0);
       visitedCount = allocation[2];
       loopIndex = 0;
@@ -2341,8 +2341,8 @@ LAB_0012ed24:
       while( true ) {
         chainKey = ((int (*)())Program__getOrCreateLandingBlock)(program,chainKey);
         movDestOperand = Block__getSuccessor(chainKey,0);
-        pendingEntry = FUN_0012afe8(isOrdinaryEntry,chainHeadKey,movDestOperand,chainSecondKey);
-        chainKey = FUN_0012b140(movDestOperand);
+        pendingEntry = Block__walkToLoopFooter(isOrdinaryEntry,chainHeadKey,movDestOperand,chainSecondKey);
+        chainKey = Block__findRegionHeader(movDestOperand);
         if (movDestOperand != pendingEntry) break;
         ((int (*)())IfFooter__ctor_12e56c)(predicateRegister,movDestOperand,*(undefined4 *)(program + 8));
         chainKey = Block__footerTargetOrSelf(movDestOperand);
@@ -2404,8 +2404,8 @@ LAB_0012ed24:
   } while( true );
 }
 
-/* FUN_0012f0f8 @ 0x12f0f8 (3356 bytes) */
-int FUN_0012f0f8(pass, loopStack, block, lastBlockRef, newBlockOut, blockCounter)
+/* Program__unrollLoop @ 0x12f0f8 (3356 bytes) */
+int Program__unrollLoop(pass, loopStack, block, lastBlockRef, newBlockOut, blockCounter)
   int pass;
   int loopStack;
   int block;
@@ -2537,7 +2537,7 @@ int FUN_0012f0f8(pass, loopStack, block, lastBlockRef, newBlockOut, blockCounter
                   operandCount = (**(code **)(*bodyInst + 0x14))(bodyInst);
                   if (operandCount < operandNumber) break;
                   operandNumber = operandNumber + 1;
-                  FUN_001234d8(instCursor[0x29],bodyInst);
+                  Owner__removeVectorEntry(instCursor[0x29],bodyInst);
                   instCursor = instCursor + 6;
                 }
                 (**(code **)(*bodyInst + 0xc))(bodyInst,0,*(undefined4 *)(pass + 8));
@@ -2627,7 +2627,7 @@ int FUN_0012f0f8(pass, loopStack, block, lastBlockRef, newBlockOut, blockCounter
                       if ((*(int *)(block + 0x134) == 0) &&
                          (needsOffsetFixClone = IRInst__hasOperandKindClass1(cloneResult), needsOffsetFixClone != 0)) {
                         extraBranchArg = pass;
-                        ((int (*)())FUN_0012c3d0)(cloneResult,counterValue,pass);
+                        ((int (*)())Program__rebaseInstRegisters)(cloneResult,counterValue,pass);
                       }
                       if ((*(uint *)(cloneResult + 0x14) & 0x10) != 0) {
                         Program__addInst(pass,cloneResult);
@@ -2869,7 +2869,7 @@ LAB_0012fafc:
                     instIter = *(int *)(instListHead + 8);
                   }
                   else {
-                    ((int (*)())FUN_0012c3d0)(instListHead,loopStart,pass);
+                    ((int (*)())Program__rebaseInstRegisters)(instListHead,loopStart,pass);
                     instIter = *(int *)(instListHead + 8);
                   }
                 }
@@ -2914,7 +2914,7 @@ LAB_0012fafc:
           allocation[0x2f] = *blockCounter;
           Program__insertBlockAfter(pass,*lastBlockRef,*newBlockOut);
           Block__connect(*lastBlockRef,*newBlockOut);
-          ((int (*)())FUN_0012e8c0)(pass,findSimplePredecessorResult,*lastBlockRef);
+          ((int (*)())Program__splitCriticalEdges)(pass,findSimplePredecessorResult,*lastBlockRef);
           *lastBlockRef = *newBlockOut;
           return 1;
         }
@@ -2923,7 +2923,7 @@ LAB_0012fafc:
           if (instQuery3c == 0) {
             if (*(int *)(exitInst[0x22] + 4) == 3) {
               if (*(int *)(block + 0x134) == 0) goto LAB_0012fc9c;
-              FUN_001234d8(exitInst[0x29],exitInst);
+              Owner__removeVectorEntry(exitInst[0x29],exitInst);
               DList__unlink(exitInst);
               loopFooterBlock = *(int *)(block + 0x14c);
               IRInst__setOperandRef(exitInst,1,*(undefined4 *)(*(int *)(loopFooterBlock + 0x148) + 0x8c));
@@ -2937,7 +2937,7 @@ LAB_0012fafc:
           }
           else {
 LAB_0012fc9c:
-            FUN_001234d8(exitInst[0x29],exitInst);
+            Owner__removeVectorEntry(exitInst[0x29],exitInst);
             (**(code **)(*exitInst + 0xc))(exitInst,0,*(undefined4 *)(pass + 8));
             nextExitInst = (int *)exitInst[2];
           }
@@ -3110,10 +3110,10 @@ int pass_remove_empty_graphs(program)
           Vector__removeValue(successorOrNextBlock[0x35],joinBlock);
           Block__connect(nextBlock,successorOrNextBlock);
           successorOrNextBlock[0x3c] = testResult;
-          ((int (*)())FUN_0012dd58)(program,block,joinBlock);
+          ((int (*)())Program__detachRegion)(program,block,joinBlock);
           (**(code **)(*nextBlock + 0x48))(nextBlock);
           (**(code **)(*successorOrNextBlock + 0x48))(successorOrNextBlock);
-          testResult = FUN_0012aef0(program,nextBlock,successorOrNextBlock);
+          testResult = Program__mergeBlockWithSuccessor(program,nextBlock,successorOrNextBlock);
           if (testResult == 0) {
 LAB_0013037c:
             changed = true;
@@ -3164,11 +3164,11 @@ int Array4__contains(value, table)
 int RegAlloc__nextTempId(allocator)
   int allocator;
 {
-  int iVar1;
+  int tempId;
   
-  iVar1 = *(int *)(*(int *)(allocator + 0x2c) + 0x3c4) + 1;
-  *(int *)(*(int *)(allocator + 0x2c) + 0x3c4) = iVar1;
-  return iVar1 + *(int *)(allocator + 8);
+  tempId = *(int *)(*(int *)(allocator + 0x2c) + 0x3c4) + 1;
+  *(int *)(*(int *)(allocator + 0x2c) + 0x3c4) = tempId;
+  return tempId + *(int *)(allocator + 8);
 }
 
 /* Program__markHwRegUsed @ 0x130444 (52 bytes) */
@@ -3197,8 +3197,8 @@ int RegAlloc__testBit42c(allocator, bitIndex)
   return 0;
 }
 
-/* FUN_001304a4 @ 0x1304a4 (200 bytes) */
-int FUN_001304a4(allocator)
+/* RegAlloc__countUnassignedHwRegs @ 0x1304a4 (200 bytes) */
+int RegAlloc__countUnassignedHwRegs(allocator)
   int allocator;
 {
   int isPhysicalOrAssigned;
@@ -3358,11 +3358,11 @@ int IRInst__chainLast(inst)
 int IRInst__chainLastOfPredecessor(inst)
   undefined4 inst;
 {
-  int iVar1;
+  int chainNode;
   undefined4 callResult;
   
-  iVar1 = ((int (*)())IRInst__chainLast)(inst);
-  callResult = ((int (*)())IRInst__chainLast)(*(undefined4 *)(iVar1 + 4));
+  chainNode = ((int (*)())IRInst__chainLast)(inst);
+  callResult = ((int (*)())IRInst__chainLast)(*(undefined4 *)(chainNode + 4));
   return callResult;
 }
 
@@ -3408,32 +3408,32 @@ int IRInst__advanceToChainEnd(inst)
 int IRInst__chainEndNext(pendingInst)
   undefined4 pendingInst;
 {
-  int iVar1;
+  int chainEnd;
   
-  iVar1 = ((int (*)())IRInst__advanceToChainEnd)(pendingInst);
-  return *(undefined4 *)(iVar1 + 8);
+  chainEnd = ((int (*)())IRInst__advanceToChainEnd)(pendingInst);
+  return *(undefined4 *)(chainEnd + 8);
 }
 
 /* IRInst__chainEndSkippingFlag4000000 @ 0x130904 (64 bytes) */
 int IRInst__chainEndSkippingFlag4000000(inst)
   undefined4 inst;
 {
-  int iVar1;
+  int chainNode;
   undefined4 callResult;
   
-  iVar1 = ((int (*)())IRInst__chainLastOfPredecessor)(inst);
-  if ((*(uint *)(iVar1 + 0x14) & 0x4000000) != 0) {
-    iVar1 = ((int (*)())IRInst__chainLastOfPredecessor)(inst);
+  chainNode = ((int (*)())IRInst__chainLastOfPredecessor)(inst);
+  if ((*(uint *)(chainNode + 0x14) & 0x4000000) != 0) {
+    chainNode = ((int (*)())IRInst__chainLastOfPredecessor)(inst);
   }
-  callResult = ((int (*)())IRInst__advanceToChainEnd)(iVar1);
+  callResult = ((int (*)())IRInst__advanceToChainEnd)(chainNode);
   return callResult;
 }
 
 /* Record__field98IsBelow2 @ 0x130944 (20 bytes) */
-int Record__field98IsBelow2(param_1)
-  int param_1;
+int Record__field98IsBelow2(record)
+  int record;
 {
-  return *(uint *)(param_1 + 0x98) < 2;
+  return *(uint *)(record + 0x98) < 2;
 }
 
 /* BitSet__testRegisterLane_130958 @ 0x130958 (36 bytes) */
@@ -3449,14 +3449,14 @@ int BitSet__testRegisterLane_130958(bitSet, registerIndex, lane)
 }
 
 /* BitSet__testAnyLane @ 0x13097c (64 bytes) */
-int BitSet__testAnyLane(liveWords, param_2)
+int BitSet__testAnyLane(liveWords, registerIndex)
   int liveWords;
-  int param_2;
+  int registerIndex;
 {
   uint bitIndex;
   int remainingLanes;
   
-  bitIndex = param_2 << 2;
+  bitIndex = registerIndex << 2;
   remainingLanes = 4;
   do {
     if ((*(uint *)((bitIndex >> 3 & 0x1ffffffc) + liveWords + 8) >> (bitIndex & 0x1f) & 1) != 0) {
@@ -3494,14 +3494,15 @@ int IRInst__findChainNodeById(inst, targetId)
   undefined4 inst;
   int targetId;
 {
-  int iVar1;
+  int chainEnd;
+  int query74;
   int *cursorInst;
   
-  iVar1 = ((int (*)())IRInst__chainLast)(inst);
-  cursorInst = *(int **)(iVar1 + 4);
+  chainEnd = ((int (*)())IRInst__chainLast)(inst);
+  cursorInst = *(int **)(chainEnd + 4);
   while( true ) {
-    iVar1 = (**(code **)(*cursorInst + 0x74))(cursorInst);
-    if (iVar1 == 0) {
+    query74 = (**(code **)(*cursorInst + 0x74))(cursorInst);
+    if (query74 == 0) {
       return (int *)0x0;
     }
     if (*(int *)(cursorInst[0x30] + 0x13c) == targetId) break;
@@ -3534,8 +3535,8 @@ int IRInst__findSameClassNode(cursorInst, referenceInst)
   return cursorInst;
 }
 
-/* FUN_00130abc @ 0x130abc (280 bytes) */
-int FUN_00130abc(spillInfo, allocator, markFlag)
+/* RegAlloc__markReloadModifiers @ 0x130abc (280 bytes) */
+int RegAlloc__markReloadModifiers(spillInfo, allocator, markFlag)
   undefined4 spillInfo;
   uint allocator;
   uint markFlag;
@@ -3639,8 +3640,8 @@ int RegAlloc__classOfInst(allocator, inst)
   return -1;
 }
 
-/* FUN_00130c8c @ 0x130c8c (276 bytes) */
-int FUN_00130c8c(allocator, spillRecord, newSource, registerCountRef)
+/* RegAlloc__emitSpillReload @ 0x130c8c (276 bytes) */
+int RegAlloc__emitSpillReload(allocator, spillRecord, newSource, registerCountRef)
   int allocator;
   undefined4 spillRecord;
   int newSource;
@@ -3676,8 +3677,8 @@ int FUN_00130c8c(allocator, spillRecord, newSource, registerCountRef)
   return callResult;
 }
 
-/* FUN_00130da0 @ 0x130da0 (200 bytes) */
-int FUN_00130da0(allocator, inst, operandIndex, afterInst, compiler)
+/* RegAlloc__cloneSourceDefAfter @ 0x130da0 (200 bytes) */
+int RegAlloc__cloneSourceDefAfter(allocator, inst, operandIndex, afterInst, compiler)
   undefined4 allocator;
   int inst;
   undefined4 operandIndex;
@@ -3685,15 +3686,15 @@ int FUN_00130da0(allocator, inst, operandIndex, afterInst, compiler)
   undefined4 compiler;
 {
   undefined4 sourceDef;
-  undefined4 uVar1;
+  undefined4 newTempId;
   int callResult;
   
   sourceDef = IRInst__getOperandSource(inst,operandIndex);
   callResult = IRInst__clone(sourceDef,compiler,0);
   if ((*(uint *)(inst + 0x14) & 0x40) == 0) {
-    uVar1 = ((int (*)())RegAlloc__nextTempId)(allocator);
+    newTempId = ((int (*)())RegAlloc__nextTempId)(allocator);
     *(undefined4 *)(callResult + 0x98) = 0;
-    *(undefined4 *)(callResult + 0x94) = uVar1;
+    *(undefined4 *)(callResult + 0x94) = newTempId;
   }
   Block__insertInstAfter(*(undefined4 *)(afterInst + 0x158),afterInst,callResult);
   *(uint *)(callResult + 0x14) = *(uint *)(callResult + 0x14) | 0x8000000;
@@ -3763,8 +3764,8 @@ int Program__prependLoad79(param_1, newSlotNumber, compiler)
   return loadInst;
 }
 
-/* FUN_00131008 @ 0x131008 (452 bytes) */
-int FUN_00131008(maxDistance, inst, operandIndex)
+/* RegAlloc__laneDependsOnChain @ 0x131008 (452 bytes) */
+int RegAlloc__laneDependsOnChain(maxDistance, inst, operandIndex)
   int maxDistance;
   int *inst;
   undefined4 operandIndex;
@@ -3790,7 +3791,7 @@ int FUN_00131008(maxDistance, inst, operandIndex)
   laneIndex = 0;
   do {
     if ((laneDefOut[laneIndex + -4] != '\0') &&
-       (laneDefinition = FUN_001382b8(operandVReg,laneIndex,laneDefOut), -1 < maxDistance)) {
+       (laneDefinition = IRInst__findLaneDefinition(operandVReg,laneIndex,laneDefOut), -1 < maxDistance)) {
       loopIndex = 0;
       chainInst = inst;
       do {
@@ -3863,8 +3864,8 @@ int Program__insertMemLoadFbAfter(destRegister, operandSwizzle, newSource, offse
   return loadInst;
 }
 
-/* FUN_001312f4 @ 0x1312f4 (228 bytes) */
-int FUN_001312f4(inst, newSource, addressSource, ref, compiler)
+/* RegAlloc__emitSpillStore @ 0x1312f4 (228 bytes) */
+int RegAlloc__emitSpillStore(inst, newSource, addressSource, ref, compiler)
   int inst;
   int newSource;
   undefined4 addressSource;
@@ -3926,8 +3927,8 @@ int FUN_001312f4(inst, newSource, addressSource, ref, compiler)
   return;
 }
 
-/* FUN_001314b8 @ 0x1314b8 (320 bytes) */
-int FUN_001314b8(allocator)
+/* RegAlloc__initRegisterTables @ 0x1314b8 (320 bytes) */
+int RegAlloc__initRegisterTables(allocator)
   int allocator;
 {
   int fillByteOffset;
@@ -3942,7 +3943,7 @@ int FUN_001314b8(allocator)
   int *backend;
   
   *(int *)(allocator + 0x468) = *(int *)(*(int *)(allocator + 8) + 0x3c4) + 1;
-  virtualRegCount = ((int (*)())FUN_001304a4)(allocator);
+  virtualRegCount = ((int (*)())RegAlloc__countUnassignedHwRegs)(allocator);
   compilerThenTotal = *(int *)(allocator + 8);
   *(int *)(allocator + 0x46c) = virtualRegCount;
   *(int *)(allocator + 0x464) = virtualRegCount + *(int *)(allocator + 0x468);
