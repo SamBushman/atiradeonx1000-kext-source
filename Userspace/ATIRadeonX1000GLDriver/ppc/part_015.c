@@ -124,12 +124,12 @@ int glGenFragmentShadersATI_impl(ctx, range)
   int ctx;
   int range;
 {
-  int iVar1;
+  int firstId;
   
   if ((range != 0) && (((unsigned char *)0x00001134)[ctx] == '\0')) {
-    iVar1 = **(int **)(((unsigned char *)0x00001154) + ctx);
-    **(int **)(((unsigned char *)0x00001154) + ctx) = range + iVar1;
-    return iVar1;
+    firstId = **(int **)(((unsigned char *)0x00001154) + ctx);
+    **(int **)(((unsigned char *)0x00001154) + ctx) = range + firstId;
+    return firstId;
   }
   return 0;
 }
@@ -704,7 +704,7 @@ int atifsUnshareShaderTable(ctx, srcCtx)
   undefined4 newSlotTable;
   uint loopIndex;
   undefined4 oldSlotTable;
-  int iVar5;
+  int shaderEntry;
   int sharedTable;
   
   *(int *)(*(int *)(((unsigned char *)0x00001154) + ctx) + 8) =
@@ -733,10 +733,10 @@ int atifsUnshareShaderTable(ctx, srcCtx)
     shaderOffset = 0;
     do {
       loopIndex = loopIndex + 1;
-      iVar5 = shaderOffset + *(int *)(sharedTable + 0x88);
-      oldProgramTable = *(undefined4 *)(iVar5 + 0x70);
+      shaderEntry = shaderOffset + *(int *)(sharedTable + 0x88);
+      oldProgramTable = *(undefined4 *)(shaderEntry + 0x70);
       newProgramTable = (**(code **)(ctx + 0x10))(*(undefined4 *)(sharedTable + 0x8c),4);
-      *(undefined4 *)(iVar5 + 0x70) = newProgramTable;
+      *(undefined4 *)(shaderEntry + 0x70) = newProgramTable;
       shader = *(int *)(sharedTable + 0x88) + shaderOffset;
       shaderOffset = shaderOffset + 0x78;
       _memcpy(*(undefined4 *)(shader + 0x70),oldProgramTable,*(int *)(sharedTable + 0x8c) * 4 + -4);
@@ -1380,15 +1380,15 @@ int gld_scalePointSizeToPixels(glContext, addSizeBias)
   int glContext;
   int addSizeBias;
 {
-  float fVar1;
+  float sizeBias;
   
   if (addSizeBias != 0) {
-    fVar1 = FLOAT_001aa0e8;
+    sizeBias = FLOAT_001aa0e8;
     if (*(short *)(((unsigned char *)0x00002e0e) + *(int *)(*(int *)(glContext + 4) + 0x10)) == 0x1102) {
-      fVar1 = FLOAT_001aa108;
+      sizeBias = FLOAT_001aa108;
     }
     return (int)((float)((double)CONCAT44(0x43300000,*(undefined4 *)(glContext + 8)) - DOUBLE_001aa250
-                        ) * FLOAT_001aa10c * (fVar1 + *(float *)(glContext + 0xe0)));
+                        ) * FLOAT_001aa10c * (sizeBias + *(float *)(glContext + 0xe0)));
   }
   return (int)((float)((double)CONCAT44(0x43300000,*(undefined4 *)(glContext + 8)) - DOUBLE_001aa250)
                * FLOAT_001aa10c * *(float *)(glContext + 0xe0));
@@ -3712,10 +3712,10 @@ LAB_000a6ebc:
 }
 
 /* gld_callocBytes @ 0xa6f70 (8 bytes) */
-int gld_callocBytes(param_1)
-  undefined4 param_1;
+int gld_callocBytes(byteCount)
+  undefined4 byteCount;
 {
-  return (int)_calloc(param_1,1);
+  return (int)_calloc(byteCount,1);
 }
 
 /* noop_a6f80 @ 0xa6f80 (4 bytes) */

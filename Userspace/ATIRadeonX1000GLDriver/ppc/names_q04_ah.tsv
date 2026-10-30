@@ -1,0 +1,6 @@
+local	psnAnalyzeProgram	iVar8	unusedInt	INFERRED	declared but never read or written in the body
+local	psnAnalyzeProgram	local_7c	fileCountSlot7c	INFERRED	stack slot of the fileUseCounts cluster, kept as a separate variable (see the comment above)
+local	psnAnalyzeProgram	local_68	fileCountSlot68	INFERRED	stack slot of the fileUseCounts cluster, kept as a separate variable
+local	psnDecAllocateTempsAndCompact	uStack_68	freeTempCount	INFERRED	count of entries on the free-temp stack (its address is the stack top handed to the pop loop)
+local	gld_emitFormatConvertTokens	local_88	operandTokens	INFERRED	first of the consecutive operand token words (indexed through its address)
+local	gld_scalePointSizeToPixels	fVar1	sizeBias	INFERRED	antialiasing bias added to the point size (two constants selected by texture state)

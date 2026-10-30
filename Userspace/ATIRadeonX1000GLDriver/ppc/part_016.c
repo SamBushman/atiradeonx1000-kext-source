@@ -2657,14 +2657,14 @@ LAB_000ab460:
 }
 
 /* gld_selectProgramCallback @ 0xab900 (60 bytes) */
-int gld_selectProgramCallback(param_1)
-  int param_1;
+int gld_selectProgramCallback(glContext)
+  int glContext;
 {
-  if (*(char *)(param_1 + 0x1868) != '\0') {
-    *(undefined **)((int)((unsigned char *)0x000011cc) + param_1) = PTR_FUN_001e8b40;
+  if (*(char *)(glContext + 0x1868) != '\0') {
+    *(undefined **)((int)((unsigned char *)0x000011cc) + glContext) = PTR_FUN_001e8b40;
     return;
   }
-  *(undefined **)((int)((unsigned char *)0x000011cc) + param_1) = PTR_FUN_001e8b3c;
+  *(undefined **)((int)((unsigned char *)0x000011cc) + glContext) = PTR_FUN_001e8b3c;
   return;
 }
 
@@ -3337,7 +3337,7 @@ int gld_emitFormatConvertTokens(glContext, a1Ptr74, wordVector, formatCode, form
   uint extraFlagBits;
   uint writeMaskPacked;
   int loopIndex5;
-  undefined4 local_88;
+  undefined4 operandTokens;
   uint operandToken1;
   uint operandToken2;
   uint swizzleTokens [9];
@@ -3347,7 +3347,7 @@ int gld_emitFormatConvertTokens(glContext, a1Ptr74, wordVector, formatCode, form
   extraFlagBits = 0;
   staleArgR8 = 0;
   stackArgCtx = a1Ptr74;
-  local_88 = 0;
+  operandTokens = 0;
   operandToken1 = 0;
   operandToken2 = 0;
   swizzleTokens[0] = 0;
@@ -3910,7 +3910,7 @@ LAB_000ad33c:
     swizzleTokens[5] = src0Swizzle1;
     swizzleTokens[4] = src0Swizzle2;
     swizzleTokens[3] = src0Swizzle3;
-    local_88 = (src0Operand[1] & 0x3f) << 0x10 | *src0Operand & 0xffff | 0x400000;
+    operandTokens = (src0Operand[1] & 0x3f) << 0x10 | *src0Operand & 0xffff | 0x400000;
     if (src0Operand[1] == 0x10) {
       loopIndex6 = 0;
       remaining4 = 4;
@@ -4531,9 +4531,9 @@ LAB_000ad33c:
     }
     loopIndex = 1;
     *(undefined **)(tokenCountD * 4 + wordVector[2]) = ((unsigned char *)0x00004444);
-    local_88 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_88) + 0)),(short)maxRegisterPlus2);
+    operandTokens = CONCAT22((*(unsigned short *)((unsigned char *)&(operandTokens) + 0)),(short)maxRegisterPlus2);
     *wordVector = *wordVector + 1;
-    local_88 = local_88 & 0xff80ffff | 0x40000;
+    operandTokens = operandTokens & 0xff80ffff | 0x40000;
   }
   switch(formatCode) {
   case 0:
@@ -4665,7 +4665,7 @@ LAB_000ae47c:
       tokenCountD = *wordVector;
       wordVector[1] = wordVector[1] + 0x80;
     }
-    swizzleTokenCopy = local_88;
+    swizzleTokenCopy = operandTokens;
     *(uint *)(tokenCountD * 4 + wordVector[2]) = glContextWord11e0 + 1U & 0xffff | 0x40000;
     tokenCountD = *wordVector + 1;
     *wordVector = tokenCountD;
@@ -4683,7 +4683,7 @@ LAB_000ae47c:
     *(uint *)(tokenCountD * 4 + wordVector[2]) = swizzleTokenCopy;
     tokenCountD = *wordVector + 1;
     *wordVector = tokenCountD;
-    if ((local_88 & 0x400000) != 0) {
+    if ((operandTokens & 0x400000) != 0) {
       if (wordVector[1] <= tokenCountD) {
         allocation8 = (**(code **)(glContext + 0xc))(wordVector[1] * 4 + 0x200);
         if (wordVector[2] != 0) {
@@ -4697,7 +4697,7 @@ LAB_000ae47c:
       *(uint *)(tokenCountD * 4 + wordVector[2]) = swizzleWord1;
       *wordVector = *wordVector + 1;
     }
-    local_88 = CONCAT22((short)(local_88 >> 0x10),
+    operandTokens = CONCAT22((short)(operandTokens >> 0x10),
                         (short)*(undefined4 *)(((unsigned char *)0x000011e0) + glContext) + 1) & 0xffc0ffff | 0x40000;
     break;
   case 0x1a:
@@ -4717,7 +4717,7 @@ LAB_000ae47c:
       loopIndex7 = 0;
       swizzleTokenCount = loopIndex;
       do {
-        if (((&local_88)[loopIndex7] & 0x400000) != 0) {
+        if (((&operandTokens)[loopIndex7] & 0x400000) != 0) {
           tokenWordCopy = swizzleTokens[loopIndex7];
           swizzleTokens[loopIndex7] = tokenWordCopy >> 8 & 7 | tokenWordCopy >> 8 & 8 | tokenWordCopy & 0xfffffff0;
         }
@@ -4780,9 +4780,9 @@ LAB_000ae47c:
   if (loopIndex != 0) {
     loopIndex4 = 0;
     loopIndex8 = 0;
-    cursor = &local_88;
+    cursor = &operandTokens;
     do {
-      operandTokenWord = *(undefined4 *)(loopIndex8 + (int)&local_88);
+      operandTokenWord = *(undefined4 *)(loopIndex8 + (int)&operandTokens);
       if (wordVector[1] <= tokenCountC) {
         allocation12 = (**(code **)(glContext + 0xc))(wordVector[1] * 4 + 0x200);
         if (wordVector[2] != 0) {

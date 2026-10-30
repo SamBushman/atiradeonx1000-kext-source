@@ -989,13 +989,13 @@ int ilPushDclRecord(listHeadPtr, record)
 /* ilStoreFloat4Constant @ 0xc8e30 (28 bytes) */
 void ilStoreFloat4Constant(int programRecord,int constantIndex,double fpPassThrough1,double fpPassThrough2,double fpPassThrough3,double fpPassThrough4)
 {
-  int iVar1;
+  int constantSlot;
   
-  iVar1 = constantIndex * 0x10 + programRecord;
-  *(float *)(iVar1 + 0x98) = (float)fpPassThrough4;
-  *(float *)(iVar1 + 0x8c) = (float)fpPassThrough1;
-  *(float *)(iVar1 + 0x90) = (float)fpPassThrough2;
-  *(float *)(iVar1 + 0x94) = (float)fpPassThrough3;
+  constantSlot = constantIndex * 0x10 + programRecord;
+  *(float *)(constantSlot + 0x98) = (float)fpPassThrough4;
+  *(float *)(constantSlot + 0x8c) = (float)fpPassThrough1;
+  *(float *)(constantSlot + 0x90) = (float)fpPassThrough2;
+  *(float *)(constantSlot + 0x94) = (float)fpPassThrough3;
   return;
 }
 
@@ -4225,10 +4225,10 @@ int scCompile(scHandle, vertexShader, fragmentShader, programOutput)
 }
 
 /* scCheckHandle @ 0xcd1d8 (20 bytes) */
-int scCheckHandle(param_1)
-  int param_1;
+int scCheckHandle(handle)
+  int handle;
 {
-  if (param_1 == 0) {
+  if (handle == 0) {
     return 3;
   }
   return 0;
@@ -4297,10 +4297,10 @@ int scDumpShaderToString(sinkArg, shaderState, sinkFn, argR6, argR7, argR8, argR
 }
 
 /* vsOpcodeSourceCount @ 0xcd290 (88 bytes) */
-int vsOpcodeSourceCount(param_1)
-  undefined4 param_1;
+int vsOpcodeSourceCount(opcode)
+  undefined4 opcode;
 {
-  switch(param_1) {
+  switch(opcode) {
   case 0x1a:
   case 0x1b:
   case 0x1c:
@@ -9429,20 +9429,20 @@ switchD_000d324c_caseD_4:
 }
 
 /* psnClearSinkRecord @ 0xd4de8 (16 bytes) */
-int psnClearSinkRecord(param_1)
-  undefined4 *param_1;
+int psnClearSinkRecord(sinkRecord)
+  undefined4 *sinkRecord;
 {
-  param_1[1] = 0;
-  *param_1 = 0;
+  sinkRecord[1] = 0;
+  *sinkRecord = 0;
   return;
 }
 
 /* psnClearSinkRecord2 @ 0xd4df8 (16 bytes) */
-int psnClearSinkRecord2(param_1)
-  undefined4 *param_1;
+int psnClearSinkRecord2(sinkRecord)
+  undefined4 *sinkRecord;
 {
-  param_1[1] = 0;
-  *param_1 = 0;
+  sinkRecord[1] = 0;
+  *sinkRecord = 0;
   return;
 }
 

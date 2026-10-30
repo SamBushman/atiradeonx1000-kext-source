@@ -5068,7 +5068,7 @@ int psnDecRecomputeSourceUsage(entry)
   ushort sourceSelect;
   uint writeAndOutputMaskWide;
   undefined4 defaultScaleBits;
-  uint uVar9;
+  uint usageFlags;
   int referencedHalfIndex;
   uint replicatedMask;
   int sourceFlagsBase;
@@ -5285,19 +5285,19 @@ int psnDecRecomputeSourceUsage(entry)
       *(undefined2 *)((int)usageCursor + 0x16) = 0;
     }
     if ((*(short *)((int)usageCursor + -0x12) == 0 && *(short *)((int)usageCursor + -0xe) == 0) &&
-       (uVar9 = usageCursor[7], (uVar9 & 1) == 0)) {
+       (usageFlags = usageCursor[7], (usageFlags & 1) == 0)) {
       usageCursor[4] = 0;
       *usageCursor = 0;
       usageCursor[1] = 0;
       usageCursor[2] = 0;
-      usageCursor[7] = uVar9 & 0xfffffff7;
+      usageCursor[7] = usageFlags & 0xfffffff7;
       usageCursor[3] = 0;
       usageCursor[6] = 0x3f800000;
       if ((*(uint *)(halfCursor + 0x70) & 6) == 0) {
         *(undefined2 *)(usageCursor + 9) = 1;
         *(undefined2 *)((int)usageCursor + 0x22) = 1;
         *(undefined2 *)(usageCursor + 8) = 1;
-        usageCursor[7] = uVar9 & 0xffffffe5;
+        usageCursor[7] = usageFlags & 0xffffffe5;
         defaultScaleBits = (*(unsigned int *)&DAT_001dbf94);
         *(undefined2 *)(usageCursor + 5) = 0;
         usageCursor[-3] = defaultScaleBits;
@@ -5397,13 +5397,13 @@ int psnDecCanonicalizeEntry(entry, unusedArgR4, unusedArgR5, unusedArgR6, oldAdd
   int sourceSlotPtr;
   int sourceFlagsBase;
   ushort source2Flags;
-  uint uVar13;
+  uint savedRestrictMask;
   ushort opcode;
   uint readComponents;
   ushort source1FlagsOld;
   uint groupNumber;
   int readMaskPtr;
-  uint uVar19;
+  uint sourceIndex;
   uint oldHalfFlags;
   uint swizzleMode;
   ushort *sourceFlagsPtr;
@@ -5640,10 +5640,10 @@ LAB_000c14b0:
         if (((maskWithoutBit4 - 1 & 0xffff) < 2) || (maskWithoutBit4 == 4)) {
           sourceSlots = peepholeHalf + 8;
           sourceByteOffset = 0;
-          uVar13 = lastRestrictMask;
+          savedRestrictMask = lastRestrictMask;
           do {
             sourceSwizzleOfSlot = *(ushort *)(sourceByteOffset + sourceSlots + 2);
-            lastRestrictMask = uVar13;
+            lastRestrictMask = savedRestrictMask;
             if ((sourceSwizzleOfSlot | 0xfffffff9) == 0xffffffff) {
               swizzleMode = sourceSwizzleOfSlot & 0x300;
               lastRestrictMask = (writeAndOutputMaskInt & 3) << 1 | (int)(writeAndOutputMaskInt & 4) >> 2;
@@ -5651,14 +5651,14 @@ LAB_000c14b0:
                 if (swizzleMode < 0x101) {
                   lastRestrictMask = maskWithoutBit4;
                   if ((sourceSwizzleOfSlot & 0x300) != 0) {
-                    lastRestrictMask = uVar13;
+                    lastRestrictMask = savedRestrictMask;
                   }
                 }
                 else if (swizzleMode == 0x200) {
                   lastRestrictMask = (writeAndOutputMaskInt & 1) << 2 | writeAndOutputMaskBits >> 1 & 3;
                 }
                 else {
-                  lastRestrictMask = uVar13;
+                  lastRestrictMask = savedRestrictMask;
                   if (swizzleMode == 0x300) {
                     lastRestrictMask = (writeAndOutputMaskInt & 2) << 1 | (int)(writeAndOutputMaskInt & 4) >> 1 | (writeAndOutputMaskInt & 1) << 3;
                     if ((writeAndOutputMaskBits & 1) == 0) {
@@ -5675,7 +5675,7 @@ LAB_000c14b0:
             }
             loopContinue2 = sourceByteOffset != 8;
             sourceByteOffset = sourceByteOffset + 4;
-            uVar13 = lastRestrictMask;
+            savedRestrictMask = lastRestrictMask;
           } while (loopContinue2);
         }
       }
@@ -5725,11 +5725,11 @@ LAB_000c14b0:
             copyHalfNumber = nextHalfIndex;
           }
           opcodeInSet1f1 = (1 << ((int)(short)opcode & 0x3fU) & 0x1f1U) != 0;
-          uVar19 = 0;
+          sourceIndex = 0;
           sourceFlagsBase = half;
           do {
-            sourceSelect = *(ushort *)(half + 8 + uVar19 * 4);
-            sourceSwizzle = *(ushort *)(half + 8 + uVar19 * 4 + 2);
+            sourceSelect = *(ushort *)(half + 8 + sourceIndex * 4);
+            sourceSwizzle = *(ushort *)(half + 8 + sourceIndex * 4 + 2);
             addressSlot = sourceSelect & 3;
             componentMode = sourceSwizzle & 0x300;
             componentSelect = sourceSwizzle & 0x1f;
@@ -5738,7 +5738,7 @@ LAB_000c14b0:
               *(uint *)(half + 0x30) = *(uint *)(half + 0x30) | 0x10;
             }
             if ((opcode == 3) && ((componentSelect | 0xfffffff9) == 0xffffffff)) {
-              slotComponentMask = (1 < uVar19) + 3;
+              slotComponentMask = (1 < sourceIndex) + 3;
               if (componentMode == 0x200) {
                 slotComponentMask = slotComponentMask * 4 & 4 | slotComponentMask >> 1;
               }
@@ -5787,7 +5787,7 @@ LAB_000c14b0:
             if ((sourceSwizzle & 0x2000) != 0) {
               *sourceFlagsPtr = *sourceFlagsPtr | 0x40;
             }
-            if ((halfIndex == 1) && (uVar19 == 2)) {
+            if ((halfIndex == 1) && (sourceIndex == 2)) {
               propagateHalf = 0;
             }
             if ((sourceSelect & 0x100) != 0) {
@@ -5856,9 +5856,9 @@ LAB_000c14b0:
                 }
               }
             }
-            loopContinue2 = uVar19 != 2;
+            loopContinue2 = sourceIndex != 2;
             sourceFlagsBase = sourceFlagsBase + 2;
-            uVar19 = uVar19 + 1;
+            sourceIndex = sourceIndex + 1;
           } while (loopContinue2);
           halfIndex = nextHalfIndex;
         } while (nextHalfIndex != 2);
@@ -5898,19 +5898,19 @@ LAB_000c14b0:
             *(undefined2 *)((int)usageCursor + 0x16) = 0;
           }
           if ((*(short *)((int)usageCursor + -0x12) == 0 && *(short *)((int)usageCursor + -0xe) == 0) &&
-             (uVar19 = usageCursor[7], (uVar19 & 1) == 0)) {
+             (sourceIndex = usageCursor[7], (sourceIndex & 1) == 0)) {
             usageCursor[4] = 0;
             *usageCursor = 0;
             usageCursor[1] = 0;
             usageCursor[2] = 0;
-            usageCursor[7] = uVar19 & 0xfffffff7;
+            usageCursor[7] = sourceIndex & 0xfffffff7;
             usageCursor[3] = 0;
             usageCursor[6] = 0x3f800000;
             if ((*(uint *)(halfCursor + 0x70) & 6) == 0) {
               *(undefined2 *)(usageCursor + 9) = 1;
               *(undefined2 *)((int)usageCursor + 0x22) = 1;
               *(undefined2 *)(usageCursor + 8) = 1;
-              usageCursor[7] = uVar19 & 0xffffffe5;
+              usageCursor[7] = sourceIndex & 0xffffffe5;
               defaultScaleBits = (*(unsigned int *)&DAT_001dbf94);
               *(undefined2 *)(usageCursor + 5) = 0;
               usageCursor[-3] = defaultScaleBits;
@@ -7264,7 +7264,7 @@ int psnDecAllocateTempsAndCompact(psnState, decodedProgram, rsWords, programImag
   uint regMapTable;
   int entry;
   int initCounter;
-  uint uStack_68;
+  uint freeTempCount;
   uint maxTempIndex;
   short *freeTempList;
   undefined4 constOneBits;
@@ -7277,7 +7277,7 @@ int psnDecAllocateTempsAndCompact(psnState, decodedProgram, rsWords, programImag
     freeTempStack = (uint *)0x0;
   }
   else {
-    freeTempStack = &uStack_68;
+    freeTempStack = &freeTempCount;
     tempRegisterCount = 0x80;
   }
   targetIndex = 0;
@@ -7292,11 +7292,11 @@ int psnDecAllocateTempsAndCompact(psnState, decodedProgram, rsWords, programImag
   } while (initCounter != 0);
   targetLiveTable[1] = targetLiveTable[1] | 0x10;
   _memset(regMapTable,0,*(int *)(psnState + 0x30) << 2);
-  uStack_68 = 0;
+  freeTempCount = 0;
   if (tempRegisterCount != 0) {
-    uStack_68 = tempRegisterCount & 0xffff;
+    freeTempCount = tempRegisterCount & 0xffff;
     freeListIndex = 0;
-    freeEntryValue = uStack_68;
+    freeEntryValue = freeTempCount;
     do {
       freeEntryNext = freeEntryValue - 1;
       freeEntryValue = freeEntryNext & 0xffff;
@@ -7403,8 +7403,8 @@ int psnDecAllocateTempsAndCompact(psnState, decodedProgram, rsWords, programImag
             readMask = *readMaskPtr;
             sourceMapEntry[1] = readMask | liveMaskBefore;
             if ((liveMaskBefore == 0) && (readMask != 0)) {
-              uStack_68 = uStack_68 - 1;
-              newTempRegister = freeTempList[uStack_68];
+              freeTempCount = freeTempCount - 1;
+              newTempRegister = freeTempList[freeTempCount];
               if (maxTempIndex < newTempRegister) {
                 maxTempIndex = (uint)newTempRegister;
               }
@@ -7677,7 +7677,7 @@ int psnDecMaskCoveredByDests(entry, componentMask, registerNumber)
 int psnDecFirstFreeAddressSlot(entry)
   int entry;
 {
-  bool bVar1;
+  bool loopContinue;
   int loopIndex;
   
   loopIndex = 0;
@@ -7685,10 +7685,10 @@ int psnDecFirstFreeAddressSlot(entry)
     if (*(short *)(entry + 0x86) == -1) {
       return loopIndex;
     }
-    bVar1 = loopIndex != 2;
+    loopContinue = loopIndex != 2;
     entry = entry + 2;
     loopIndex = loopIndex + 1;
-  } while (bVar1);
+  } while (loopContinue);
   return -1;
 }
 
@@ -7696,10 +7696,10 @@ int psnDecFirstFreeAddressSlot(entry)
 int psnDecHasFreeAddressSlot(entry)
   undefined4 entry;
 {
-  uint uVar1;
+  uint firstFreeSlot;
   
-  uVar1 = ((int (*)())psnDecFirstFreeAddressSlot)(entry);
-  return ~uVar1 >> 0x1f;
+  firstFreeSlot = ((int (*)())psnDecFirstFreeAddressSlot)(entry);
+  return ~firstFreeSlot >> 0x1f;
 }
 
 /* psnDecRetargetSourceReg @ 0xc3100 (312 bytes) */
@@ -8042,16 +8042,16 @@ int psnDecDestMatchesRegMask(entry, registerNumber, componentMask, passThroughR6
   undefined4 passThroughR8;
   undefined4 passThroughR9;
 {
-  bool bVar1;
+  bool lastHalf;
   int loopIndex;
   
   loopIndex = 0;
   while ((*(ushort *)(entry + 4) != registerNumber || ((*(ushort *)(entry + 6) & (*(unsigned short *)((unsigned char *)&(componentMask) + 2))) == 0)))
   {
-    bVar1 = loopIndex == 1;
+    lastHalf = loopIndex == 1;
     entry = entry + 0x40;
     loopIndex = loopIndex + 1;
-    if (bVar1) {
+    if (lastHalf) {
       return 0;
     }
   }
@@ -9889,7 +9889,7 @@ int psnAnalyzeProgram(psnProgram)
   ushort *recFieldShortPtre;
   ushort *recFieldShortPtr6;
   char *recFieldBytePtr9;
-  int iVar8;
+  int unusedInt;
   int wordIndex;
   char *recFieldBytePtrb;
   ushort *recFieldShortPtr4;
@@ -9914,29 +9914,29 @@ int psnAnalyzeProgram(psnProgram)
   uint kind1Count;
   int remaining;
   /* issue #64 live-repro (crash #8, past the ilRewriteForTextureState fixes): local_98/local_94/local_90/
-   * local_8c/local_88/local_84/local_80/local_7c were 8 separately-declared 4-byte locals,
+   * local_8c/local_88/local_84/local_80/fileCountSlot7c were 8 separately-declared 4-byte locals,
    * each initialized to the same value below, that a later loop (`*(short*)((int)&local_98 +
-   * iVar8) = ...`, iVar8 running 0..30) treats as one contiguous 32-byte/16-ushort array -
+   * unusedInt) = ...`, unusedInt running 0..30) treats as one contiguous 32-byte/16-ushort array -
    * the same Ghidra local-splitting defect class already fixed in FUN_000fd5c8,
-   * ffpsBuildProgram's local_68 cluster, and this session's own ConstRecord__findInTable local_2c cluster.
+   * ffpsBuildProgram's fileCountSlot68 cluster, and this session's own ConstRecord__findInTable local_2c cluster.
    * Only local_98's OWN 4 bytes are real storage; the walk past it (needed to reach what
-   * should be local_94/local_90/.../local_7c) ran off local_98's real bounds into whatever
+   * should be local_94/local_90/.../fileCountSlot7c) ran off local_98's real bounds into whatever
    * gcc actually placed next on the stack. Live-verified on real hardware via a hardware
    * watchpoint on the calling function's saved r30/r31 stack slot: this loop's clamping
-   * store (`*(undefined2*)((int)&local_98+iVar8) = 0xff;`) was confirmed to be the exact
+   * store (`*(undefined2*)((int)&local_98+unusedInt) = 0xff;`) was confirmed to be the exact
    * write corrupting that slot, which is what caused gld_compileILProgram's r30 to read back as
    * 0xff00ff and crash on its next stack-relative access. Fixed by giving the cluster real,
-   * guaranteed-contiguous storage as an array (local_7c is kept as its own separate variable
+   * guaranteed-contiguous storage as an array (fileCountSlot7c is kept as its own separate variable
    * too, since it is independently used above for the early-return check; fileUseCounts[7] is
    * initialized to the same value alongside it so the walk's last slot still gets it). */
   uint fileUseCounts[8];
-  uint local_7c;
+  uint fileCountSlot7c;
   uint alreadyAnalysed;
   uint fileCount4;
   uint fileCount3;
   int noKind2Yet;
   uint fileCount2;
-  uint local_68;
+  uint fileCountSlot68;
   uint fileCount1;
   uint kind2Count;
   undefined4 maxFlaggedRegister;
@@ -10602,21 +10602,21 @@ int scCallbackAlloc(psnState, psnProgram)
 }
 
 /* scCallbackFree @ 0xc6e50 (40 bytes) */
-int scCallbackFree(unusedArgR3, param_2)
+int scCallbackFree(unusedArgR3, block)
   undefined4 unusedArgR3;
-  undefined4 param_2;
+  undefined4 block;
 {
-  _free(param_2);
+  _free(block);
   return 0;
 }
 
 /* scCallbackGetFlagZero @ 0xc6e80 (16 bytes) */
-int scCallbackGetFlagZero(unusedArgR3, unusedArgR4, param_3)
+int scCallbackGetFlagZero(unusedArgR3, unusedArgR4, outFlag)
   undefined4 unusedArgR3;
   undefined4 unusedArgR4;
-  undefined4 *param_3;
+  undefined4 *outFlag;
 {
-  *param_3 = 0;
+  *outFlag = 0;
   return 0;
 }
 
@@ -10827,11 +10827,11 @@ int ilRecordInputSemantic(programRecord, inputIndex, semanticValue)
   int inputIndex;
   undefined4 semanticValue;
 {
-  int iVar1;
+  int inputSlot;
   
-  iVar1 = inputIndex * 4 + programRecord;
-  *(undefined4 *)(iVar1 + 0x2278) = 1;
-  *(undefined4 *)(iVar1 + 0x2238) = semanticValue;
+  inputSlot = inputIndex * 4 + programRecord;
+  *(undefined4 *)(inputSlot + 0x2278) = 1;
+  *(undefined4 *)(inputSlot + 0x2238) = semanticValue;
   return;
 }
 
@@ -10896,16 +10896,16 @@ int ilAllocLowestFreeBit8(programRecord, passThroughR4, passThroughR5, passThrou
   undefined4 passThroughR9;
   undefined4 passThroughR10;
 {
-  uint uVar1;
+  uint bitMask;
   uint loopIndex;
   int remaining;
   
   loopIndex = 0;
   remaining = 8;
   do {
-    uVar1 = 1 << (loopIndex & 0x3f);
-    if ((uVar1 & *(uint *)(programRecord + 8)) == 0) {
-      *(uint *)(programRecord + 8) = uVar1 | *(uint *)(programRecord + 8);
+    bitMask = 1 << (loopIndex & 0x3f);
+    if ((bitMask & *(uint *)(programRecord + 8)) == 0) {
+      *(uint *)(programRecord + 8) = bitMask | *(uint *)(programRecord + 8);
       return loopIndex;
     }
     loopIndex = loopIndex + 1;
