@@ -1244,28 +1244,28 @@ int R520SchedModel__vslot21(this, hwLimits, inst, latencyOut)
 }
 
 /* R520SchedModel__vslot22 @ 0x1939b4 (76 bytes) */
-int R520SchedModel__vslot22(this, param_2, param_3, param_4)
+int R520SchedModel__vslot22(this, slotCount, constantCount, sourceCount)
   int this;
-  int param_2;
-  int param_3;
-  int param_4;
+  int slotCount;
+  int constantCount;
+  int sourceCount;
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
+  undefined4 limitExceeded;
+  undefined4 result;
   
   if (*(int *)(*(int *)(this + 8) + 0x6b8) != 0) {
     return 1;
   }
-  if ((param_2 < 0x18) && ((param_3 < 0x10 || (param_4 <= param_3 << 2)))) {
-    uVar1 = 0;
-    uVar2 = 0;
+  if ((slotCount < 0x18) && ((constantCount < 0x10 || (sourceCount <= constantCount << 2)))) {
+    limitExceeded = 0;
+    result = 0;
   }
   else {
-    uVar1 = 1;
-    uVar2 = 1;
+    limitExceeded = 1;
+    result = 1;
   }
-  *(undefined4 *)(*(int *)(this + 8) + 0x6b8) = uVar1;
-  return uVar2;
+  *(undefined4 *)(*(int *)(this + 8) + 0x6b8) = limitExceeded;
+  return result;
 }
 
 /* FudoPs__vslot29_convertInnerIfsToPredicates @ 0x193a00 (140 bytes) */
@@ -1594,19 +1594,19 @@ int DList__initSentinel(param_1)
 }
 
 /* DListNode__clear @ 0x193fb4 (104 bytes) */
-int DListNode__clear(param_1)
-  int param_1;
+int DListNode__clear(list)
+  int list;
 {
-  int *piVar1;
-  int *piVar2;
+  int *node;
+  int *nextNode;
   
-  piVar1 = *(int **)(param_1 + 8);
-  while (piVar1 != (int *)(param_1 + 0xc)) {
-    piVar2 = (int *)piVar1[2];
-    (**(code **)(*piVar1 + 4))(piVar1);
-    piVar1 = piVar2;
+  node = *(int **)(list + 8);
+  while (node != (int *)(list + 0xc)) {
+    nextNode = (int *)node[2];
+    (**(code **)(*node + 4))(node);
+    node = nextNode;
   }
-  return ((int (*)())DList__initSentinel)(param_1);
+  return ((int (*)())DList__initSentinel)(list);
 }
 
 /* DList__unlink @ 0x19401c (24 bytes) */
@@ -1636,38 +1636,38 @@ int DList__count(list)
 }
 
 /* DListNode__ctor_194060 @ 0x194060 (72 bytes) */
-int DListNode__ctor_194060(param_1)
-  undefined4 *param_1;
+int DListNode__ctor_194060(this)
+  undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *vtableBase;
   
-  param_1[4] = 0;
-  puVar1 = PTR_DAT_001e8b48;
-  param_1[5] = 0;
-  param_1[5] = 0;
-  param_1[3] = puVar1 + 8;
-  param_1[2] = param_1 + 3;
-  *param_1 = puVar1 + 8;
-  param_1[1] = 0;
-  param_1[4] = param_1;
+  this[4] = 0;
+  vtableBase = PTR_DAT_001e8b48;
+  this[5] = 0;
+  this[5] = 0;
+  this[3] = vtableBase + 8;
+  this[2] = this + 3;
+  *this = vtableBase + 8;
+  this[1] = 0;
+  this[4] = this;
   return;
 }
 
 /* DListNode__init @ 0x1940a8 (72 bytes) */
-int DListNode__init(param_1)
-  undefined4 *param_1;
+int DListNode__init(this)
+  undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *vtableBase;
   
-  param_1[4] = 0;
-  puVar1 = PTR_DAT_001e8b48;
-  param_1[5] = 0;
-  param_1[5] = 0;
-  param_1[3] = puVar1 + 8;
-  param_1[2] = param_1 + 3;
-  *param_1 = puVar1 + 8;
-  param_1[1] = 0;
-  param_1[4] = param_1;
+  this[4] = 0;
+  vtableBase = PTR_DAT_001e8b48;
+  this[5] = 0;
+  this[5] = 0;
+  this[3] = vtableBase + 8;
+  this[2] = this + 3;
+  *this = vtableBase + 8;
+  this[1] = 0;
+  this[4] = this;
   return;
 }
 

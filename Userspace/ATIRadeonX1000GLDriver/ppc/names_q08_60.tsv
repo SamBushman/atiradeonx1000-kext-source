@@ -1,0 +1,36 @@
+use	R520MachineAssembler__setAlphaOpcode	iVar3	recordPtr	INFERRED	current 0x48-byte record: this+0xa8 table + this+0x60 index * 0x48	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x60\)\ \*\ 0x48\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0xa8\);$	+2
+use	R520MachineAssembler__setAlphaOpcode	iVar3	recordPtr	INFERRED	current 0x48-byte record: this+0xa8 table + this+0x60 index * 0x48	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x60\)\ \*\ 0x48\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0xa8\);$@2	+2
+use	R520MachineAssembler__setAlphaOpcode	iVar3	recordPtr	INFERRED	current 0x48-byte record: this+0xa8 table + this+0x60 index * 0x48	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x60\)\ \*\ 0x48\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0xa8\);$@3	+2
+use	R520MachineAssembler__setAlphaOpcode	iVar3	recordPtr	INFERRED	current 0x48-byte record: this+0xa8 table + this+0x60 index * 0x48	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x60\)\ \*\ 0x48\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0xa8\);$@4	+1
+use	R520MachineAssembler__setAlphaOpcode	iVar3	recordPtr	INFERRED	current 0x48-byte record: this+0xa8 table + this+0x60 index * 0x48	^\s*\*\(undefined1\ \*\)\(iVar3\ \+\ 0x3c\)\ =\ \*\(undefined1\ \*\)\(iVar3\ \+\ 0x3d\);$	+1
+use	R520MachineAssembler__setAlphaOpcode	iVar3	recordPtr	INFERRED	current 0x48-byte record: this+0xa8 table + this+0x60 index * 0x48	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x60\)\ \*\ 0x48\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0xa8\);$@5	+2
+use	R520MachineAssembler__setAlphaOpcode	iVar3	recordPtr	INFERRED	current 0x48-byte record: this+0xa8 table + this+0x60 index * 0x48	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x60\)\ \*\ 0x48\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0xa8\);$@6	+2
+use	R520MachineAssembler__setAlphaOpcode	iVar3	recordPtr	INFERRED	current 0x48-byte record: this+0xa8 table + this+0x60 index * 0x48	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x60\)\ \*\ 0x48\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0xa8\);$@7	+2
+use	R520MachineAssembler__setAlphaOpcode	iVar3	recordPtr	INFERRED	current 0x48-byte record: this+0xa8 table + this+0x60 index * 0x48	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x60\)\ \*\ 0x48\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0xa8\);$@8	+2
+use	R520MachineAssembler__setAlphaOpcode	iVar3	recordTable	INFERRED	this+0xa8: base of the record table	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xa8\);$	+1
+use	R520MachineAssembler__setAlphaOpcode	iVar3	recordTable	INFERRED	this+0xa8: base of the record table	^\s*\*\(undefined1\ \*\)\(iVar5\ \*\ 0x48\ \+\ iVar3\ \+\ 0x41\)\ =\ uVar4;$	+1
+use	R520MachineAssembler__setAlphaOpcode	iVar5	recordPtr2	INFERRED	current record pointer	^\s*iVar5\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x60\)\ \*\ 0x48\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0xa8\);$	+4
+use	R520MachineAssembler__setAlphaOpcode	iVar5	recordPtr2	INFERRED	current record pointer	^\s*uVar2\ =\ \*\(undefined1\ \*\)\(iVar5\ \+\ 0x36\);$	+1
+use	R520MachineAssembler__setAlphaOpcode	iVar5	recordIndex	INFERRED	this+0x60: index of the current record	^\s*iVar5\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x60\);$	+1
+use	R520MachineAssembler__setAlphaOpcode	iVar5	recordIndex	INFERRED	this+0x60: index of the current record	^\s*\*\(undefined1\ \*\)\(iVar5\ \*\ 0x48\ \+\ iVar3\ \+\ 0x41\)\ =\ uVar4;$	+1
+use	R520MachineAssembler__setAlphaOpcode	uVar1	savedByte3c	INFERRED	record byte +0x3c saved before the byte rotation	^\s*uVar1\ =\ \*\(undefined1\ \*\)\(iVar5\ \+\ 0x3c\);$	+1
+use	R520MachineAssembler__setAlphaOpcode	uVar1	savedByte3c	INFERRED	record byte +0x3c saved before the byte rotation	^\s*\*\(undefined1\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x60\)\ \*\ 0x48\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0xa8\)\ \+\ 0x3e\)\ =\ uVar1$	+1
+use	R520MachineAssembler__setAlphaOpcode	uVar2	savedByte36	INFERRED	record byte +0x36 saved before the byte rotation	^\s*uVar2\ =\ \*\(undefined1\ \*\)\(iVar5\ \+\ 0x36\);$	+1
+use	R520MachineAssembler__setAlphaOpcode	uVar2	savedByte36	INFERRED	record byte +0x36 saved before the byte rotation	^\s*\*\(undefined1\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x60\)\ \*\ 0x48\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0xa8\)\ \+\ 0x38\)\ =\ uVar2$	+1
+local	PackState__copy	puVar1	sourceNextPtr	INFERRED	source + 9: second word row of the current column
+local	PackState__copy	bVar2	notLastColumn	INFERRED	column != 2 loop continue flag (3 columns of words +6, +9, +0xc)
+local	R520SchedModel__vslot22	param_2	slotCount	UNKNOWN	compared with 0x18
+local	R520SchedModel__vslot22	param_3	constantCount	UNKNOWN	compared with 0x10 and shifted left 2 against param_4
+local	R520SchedModel__vslot22	param_4	sourceCount	UNKNOWN	compared with constantCount * 4
+local	R520SchedModel__vslot22	uVar1	limitExceeded	INFERRED	value stored into compiler +0x6b8 (1 when the 0x18 / 0x10 limits are exceeded)
+local	R520SchedModel__vslot22	uVar2	result	INFERRED	return value (1 when exceeded)
+use	PackState__copy	uVar3	sourceWord3	INFERRED	source[3]	^\s*uVar3\ =\ param_2\[3\];$	+1
+use	PackState__copy	uVar3	sourceWord3	INFERRED	source[3]	^\s*param_1\[3\]\ =\ uVar3;$	+1
+use	PackState__copy	uVar3	sourceWord5	INFERRED	source[5]	^\s*uVar3\ =\ param_2\[5\];$	+1
+use	PackState__copy	uVar3	sourceWord5	INFERRED	source[5]	^\s*param_1\[5\]\ =\ uVar3;$	+1
+use	PackState__copy	uVar3	sourceWord12	INFERRED	source[0xc] (column copy)	^\s*uVar3\ =\ param_2\[0xc\];$	+1
+use	PackState__copy	uVar3	sourceWord12	INFERRED	source[0xc] (column copy)	^\s*param_1\[0xc\]\ =\ uVar3;$	+1
+use	PackState__copy	uVar4	sourceWord0	INFERRED	source[0]	^\s*uVar4\ =\ \*param_2;$	+1
+use	PackState__copy	uVar4	sourceWord0	INFERRED	source[0]	^\s*\*param_1\ =\ uVar4;$	+1
+use	PackState__copy	uVar4	sourceWord1	INFERRED	source[1]	^\s*uVar4\ =\ param_2\[1\];$	+1
+use	PackState__copy	uVar4	sourceWord1	INFERRED	source[1]	^\s*param_1\[1\]\ =\ uVar4;$	+1

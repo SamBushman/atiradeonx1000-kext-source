@@ -1795,34 +1795,37 @@ int PackState__copy(dest, source)
   undefined4 *dest;
   undefined4 *source;
 {
-  undefined4 *puVar1;
-  bool bVar2;
-  undefined4 uVar3;
-  undefined4 uVar4;
+  undefined4 sourceWord1;
+  undefined4 sourceWord12;
+  undefined4 sourceWord5;
+  undefined4 *sourceNextPtr;
+  bool notLastColumn;
+  undefined4 sourceWord3;
+  undefined4 sourceWord0;
   int loopIndex;
   
-  uVar4 = *source;
+  sourceWord0 = *source;
   dest[2] = source[2];
-  uVar3 = source[3];
-  *dest = uVar4;
+  sourceWord3 = source[3];
+  *dest = sourceWord0;
   loopIndex = 0;
-  dest[3] = uVar3;
-  uVar4 = source[1];
+  dest[3] = sourceWord3;
+  sourceWord1 = source[1];
   dest[4] = source[4];
-  uVar3 = source[5];
-  dest[1] = uVar4;
-  dest[5] = uVar3;
+  sourceWord5 = source[5];
+  dest[1] = sourceWord1;
+  dest[5] = sourceWord5;
   do {
-    bVar2 = loopIndex != 2;
+    notLastColumn = loopIndex != 2;
     loopIndex = loopIndex + 1;
     dest[6] = source[6];
-    puVar1 = source + 9;
-    uVar3 = source[0xc];
+    sourceNextPtr = source + 9;
+    sourceWord12 = source[0xc];
     source = source + 1;
-    dest[9] = *puVar1;
-    dest[0xc] = uVar3;
+    dest[9] = *sourceNextPtr;
+    dest[0xc] = sourceWord12;
     dest = dest + 1;
-  } while (bVar2);
+  } while (notLastColumn);
   return;
 }
 
