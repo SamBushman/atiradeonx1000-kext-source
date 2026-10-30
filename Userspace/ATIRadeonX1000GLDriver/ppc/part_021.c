@@ -372,7 +372,7 @@ int Program__forwardMulOperandToUsers(program, passThroughR4, unusedArg3, argR6,
   int block;
   int *nextInst;
   int *followingInst;
-  int iVar4;
+  int queryResult;
   uint userCountCheck;
   undefined4 compiler;
   uint userCount;
@@ -396,12 +396,12 @@ int Program__forwardMulOperandToUsers(program, passThroughR4, unusedArg3, argR6,
             if (*(int *)(inst[0x22] + 8) == 0x13) {
               replacementSource = (int *)IRInst__getOperandSource(inst,1);
               operandVReg = (int *)IRInst__getOperandSource(inst,2);
-              iVar4 = (**(code **)(*replacementSource + 0x4c))(replacementSource);
-              if (((iVar4 != 0) && (iVar4 = (**(code **)(*operandVReg + 0x48))(operandVReg), iVar4 != 0)) ||
-                 ((iVar4 = (**(code **)(*operandVReg + 0x4c))(operandVReg), iVar4 != 0 &&
-                  (iVar4 = (**(code **)(*replacementSource + 0x48))(replacementSource), iVar4 != 0)))) {
-                iVar4 = (**(code **)(*replacementSource + 0x4c))(replacementSource);
-                if (iVar4 == 0) {
+              queryResult = (**(code **)(*replacementSource + 0x4c))(replacementSource);
+              if (((queryResult != 0) && (queryResult = (**(code **)(*operandVReg + 0x48))(operandVReg), queryResult != 0)) ||
+                 ((queryResult = (**(code **)(*operandVReg + 0x4c))(operandVReg), queryResult != 0 &&
+                  (queryResult = (**(code **)(*replacementSource + 0x48))(replacementSource), queryResult != 0)))) {
+                queryResult = (**(code **)(*replacementSource + 0x4c))(replacementSource);
+                if (queryResult == 0) {
                   replacementSource = operandVReg;
                 }
                 userVector = (uint *)inst[4];
@@ -443,11 +443,11 @@ int Program__forwardMulOperandToUsers(program, passThroughR4, unusedArg3, argR6,
                 }
               }
             }
-            iVar4 = (**(code **)(*inst + 100))(inst);
-            if ((iVar4 != 0) && ((inst[0x49] != 0 || (inst[0x48] != 0)))) {
+            queryResult = (**(code **)(*inst + 100))(inst);
+            if ((queryResult != 0) && ((inst[0x49] != 0 || (inst[0x48] != 0)))) {
               operandVReg2 = (int *)IRInst__getOperandSource(inst,1);
-              iVar4 = (**(code **)(*operandVReg2 + 0x4c))(operandVReg2);
-              if (iVar4 != 0) {
+              queryResult = (**(code **)(*operandVReg2 + 0x4c))(operandVReg2);
+              if (queryResult != 0) {
                 userVector = (uint *)inst[4];
                 userCount = userVector[1];
                 userIndex = userCount - 1;

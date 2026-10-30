@@ -602,25 +602,25 @@ int IRInst__clearSourceSelectsOfUnwrittenComponents(inst)
   int *inst;
 {
   int operandRecord;
-  bool bVar1;
-  int iVar2;
-  int iVar3;
+  bool notLastLane;
+  int sourceNumber;
+  int sourceCount;
   int loopCounter;
-  undefined4 local_38 [9];
+  undefined4 destSelectBytes [9];
   
   loopCounter = 0;
   operandRecord = IRInst__getOperandRecord(inst,0);
-  local_38[0] = *(undefined4 *)(operandRecord + 0x10);
+  destSelectBytes[0] = *(undefined4 *)(operandRecord + 0x10);
   do {
-    iVar2 = 1;
-    if (*(char *)((int)local_38 + loopCounter) == '\x01') {
-      for (; iVar3 = (**(code **)(*inst + 0x14))(inst), iVar2 <= iVar3; iVar2 = iVar2 + 1) {
-        (**(code **)(*inst + 0x88))(inst,iVar2,loopCounter,4);
+    sourceNumber = 1;
+    if (*(char *)((int)destSelectBytes + loopCounter) == '\x01') {
+      for (; sourceCount = (**(code **)(*inst + 0x14))(inst), sourceNumber <= sourceCount; sourceNumber = sourceNumber + 1) {
+        (**(code **)(*inst + 0x88))(inst,sourceNumber,loopCounter,4);
       }
     }
-    bVar1 = loopCounter != 3;
+    notLastLane = loopCounter != 3;
     loopCounter = loopCounter + 1;
-  } while (bVar1);
+  } while (notLastLane);
   return;
 }
 
@@ -1436,26 +1436,26 @@ LAB_000f4584:
 }
 
 /* FUN_000f45f8 @ 0xf45f8 (160 bytes) */
-int FUN_000f45f8(param_1, operandIndex, inst, param_4)
-  undefined4 param_1;
+int FUN_000f45f8(sourceInst, operandIndex, inst, program)
+  undefined4 sourceInst;
   undefined4 operandIndex;
   undefined4 inst;
-  undefined4 param_4;
+  undefined4 program;
 {
-  bool bVar1;
+  bool lastLane;
   int operandRecord;
   int loopCounter;
-  undefined4 local_28 [4];
-  undefined4 local_18 [2];
+  undefined4 readMaskBytes [4];
+  undefined4 readMaskOut [2];
   
-  ((int (*)())IRInst__computeSourceReadMask)(local_18,param_1,operandIndex,DAT_001aa840,param_4);
+  ((int (*)())IRInst__computeSourceReadMask)(readMaskOut,sourceInst,operandIndex,DAT_001aa840,program);
   loopCounter = 0;
-  local_28[0] = local_18[0];
-  while ((*(char *)((int)local_28 + loopCounter) == '\0' ||
+  readMaskBytes[0] = readMaskOut[0];
+  while ((*(char *)((int)readMaskBytes + loopCounter) == '\0' ||
          (operandRecord = IRInst__getOperandRecord(inst,0), *(char *)(loopCounter + operandRecord + 0x10) != '\x01'))) {
-    bVar1 = loopCounter == 3;
+    lastLane = loopCounter == 3;
     loopCounter = loopCounter + 1;
-    if (bVar1) {
+    if (lastLane) {
       return 1;
     }
   }

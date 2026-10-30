@@ -302,20 +302,20 @@ int Program__countInstructions(program)
   int program;
 {
   int listCount;
-  int iVar1;
-  int iVar2;
-  int iVar3;
+  int nextBlockLink;
+  int total;
+  int block;
   
-  iVar2 = 0;
-  iVar3 = *(int *)(program + 900);
-  iVar1 = *(int *)(iVar3 + 8);
-  while (iVar1 != 0) {
-    listCount = DList__count(iVar3 + 0x90);
-    iVar3 = *(int *)(iVar3 + 8);
-    iVar2 = iVar2 + listCount;
-    iVar1 = *(int *)(iVar3 + 8);
+  total = 0;
+  block = *(int *)(program + 900);
+  nextBlockLink = *(int *)(block + 8);
+  while (nextBlockLink != 0) {
+    listCount = DList__count(block + 0x90);
+    block = *(int *)(block + 8);
+    total = total + listCount;
+    nextBlockLink = *(int *)(block + 8);
   }
-  return iVar2;
+  return total;
 }
 
 /* Program__findBranchingBlock @ 0xec6b0 (120 bytes) */

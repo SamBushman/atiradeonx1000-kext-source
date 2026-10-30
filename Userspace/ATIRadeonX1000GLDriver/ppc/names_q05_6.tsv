@@ -2791,3 +2791,16 @@ local	FUN_000e0830	param_3	handle	INFERRED	handle compared with compiler+0x64c
 local	ildisAppendIndentedf	uVar1	bufferLength	INFERRED	strlen of the line buffer at disassembler+0x10
 local	ildisAppendIndentedf	uVar2	unusedFormatCopy	INFERRED	copy of format passed through the indentation printf calls
 local	ildisAppendIndentedf	auStack_234	lineBuffer	INFERRED	0x200-byte buffer receiving the formatted text
+local	Program__forwardMulOperandToUsers	iVar4	queryResult	INFERRED	scratch for the successive boolean queries on the operand registers (vtable +0x4c / +0x48 / +100)
+local	Program__countInstructions	iVar1	nextBlockLink	INFERRED	next link (+8) of the block list node after the current block
+local	Program__countInstructions	iVar2	total	INFERRED	running total of instructions over the blocks
+local	Program__countInstructions	iVar3	block	INFERRED	block whose instruction list (+0x90) is counted
+local	IRInst__clearSourceSelectsOfUnwrittenComponents	bVar1	notLastLane	INFERRED	loop continue flag (lane != 3)
+local	IRInst__clearSourceSelectsOfUnwrittenComponents	iVar2	sourceNumber	INFERRED	source operand number 1..sourceCount
+local	IRInst__clearSourceSelectsOfUnwrittenComponents	iVar3	sourceCount	INFERRED	inst vtable +0x14: number of source operands
+local	IRInst__clearSourceSelectsOfUnwrittenComponents	local_38	destSelectBytes	INFERRED	select word of operand 0 (+0x10), one byte per lane (1 = lane masked)
+local	FUN_000f45f8	param_1	sourceInst	INFERRED	instruction whose operand read mask is computed
+local	FUN_000f45f8	param_4	program	INFERRED	program passed to IRInst__computeSourceReadMask
+local	FUN_000f45f8	bVar1	lastLane	INFERRED	lane == 3
+local	FUN_000f45f8	local_28	readMaskBytes	INFERRED	copy of the read mask (one byte per lane)
+local	FUN_000f45f8	local_18	readMaskOut	INFERRED	IRInst__computeSourceReadMask output
