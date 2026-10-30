@@ -2080,29 +2080,29 @@ int Block__isInVectorD4Of(fromBlock, toBlock)
 {
   int loopCounter;
   uint loopIndex;
-  int iVar1;
+  int listEntry;
   uint loopCounterB;
-  undefined4 uVar3;
-  int iVar4;
+  undefined4 isPredecessor;
+  int byteOffset;
   
   loopIndex = 1;
   loopCounter = 0;
   do {
     if (*(uint *)(*(int *)(toBlock + 0xd4) + 4) < loopIndex) {
-      uVar3 = 0;
+      isPredecessor = 0;
 LAB_000e7e3c:
       loopCounterB = 1;
-      for (iVar4 = 0;
+      for (byteOffset = 0;
           (loopCounterB <= *(uint *)(*(int *)(fromBlock + 0xd0) + 4) &&
-          ((iVar1 = *(int *)(*(int *)(*(int *)(fromBlock + 0xd0) + 8) + iVar4), iVar1 == 0 ||
-           (toBlock != iVar1)))); iVar4 = iVar4 + 4) {
+          ((listEntry = *(int *)(*(int *)(*(int *)(fromBlock + 0xd0) + 8) + byteOffset), listEntry == 0 ||
+           (toBlock != listEntry)))); byteOffset = byteOffset + 4) {
         loopCounterB = loopCounterB + 1;
       }
-      return uVar3;
+      return isPredecessor;
     }
-    iVar1 = *(int *)(loopCounter + *(int *)(*(int *)(toBlock + 0xd4) + 8));
-    if ((iVar1 != 0) && (fromBlock == iVar1)) {
-      uVar3 = 1;
+    listEntry = *(int *)(loopCounter + *(int *)(*(int *)(toBlock + 0xd4) + 8));
+    if ((listEntry != 0) && (fromBlock == listEntry)) {
+      isPredecessor = 1;
       goto LAB_000e7e3c;
     }
     loopIndex = loopIndex + 1;
@@ -2782,21 +2782,21 @@ int Block__appendPredecessor(block, predecessor)
   int block;
   undefined4 predecessor;
 {
-  undefined4 *puVar1;
-  uint uVar2;
-  uint *puVar3;
+  undefined4 *vectorSlot;
+  uint vectorSize;
+  uint *predecessorVector;
   
-  puVar3 = *(uint **)(block + 0xd4);
-  uVar2 = puVar3[1];
-  if (uVar2 < *puVar3) {
-    _memset(uVar2 * 4 + puVar3[2],0,4);
-    puVar1 = (undefined4 *)(uVar2 * 4 + puVar3[2]);
-    puVar3[1] = uVar2 + 1;
+  predecessorVector = *(uint **)(block + 0xd4);
+  vectorSize = predecessorVector[1];
+  if (vectorSize < *predecessorVector) {
+    _memset(vectorSize * 4 + predecessorVector[2],0,4);
+    vectorSlot = (undefined4 *)(vectorSize * 4 + predecessorVector[2]);
+    predecessorVector[1] = vectorSize + 1;
   }
   else {
-    puVar1 = (undefined4 *)Vector__elementRefGrow(puVar3,uVar2);
+    vectorSlot = (undefined4 *)Vector__elementRefGrow(predecessorVector,vectorSize);
   }
-  *puVar1 = predecessor;
+  *vectorSlot = predecessor;
   return;
 }
 
@@ -2805,21 +2805,21 @@ int Block__appendSuccessor(block, successor)
   int block;
   undefined4 successor;
 {
-  undefined4 *puVar1;
-  uint uVar2;
-  uint *puVar3;
+  undefined4 *vectorSlot;
+  uint vectorSize;
+  uint *successorVector;
   
-  puVar3 = *(uint **)(block + 0xd0);
-  uVar2 = puVar3[1];
-  if (uVar2 < *puVar3) {
-    _memset(uVar2 * 4 + puVar3[2],0,4);
-    puVar1 = (undefined4 *)(uVar2 * 4 + puVar3[2]);
-    puVar3[1] = uVar2 + 1;
+  successorVector = *(uint **)(block + 0xd0);
+  vectorSize = successorVector[1];
+  if (vectorSize < *successorVector) {
+    _memset(vectorSize * 4 + successorVector[2],0,4);
+    vectorSlot = (undefined4 *)(vectorSize * 4 + successorVector[2]);
+    successorVector[1] = vectorSize + 1;
   }
   else {
-    puVar1 = (undefined4 *)Vector__elementRefGrow(puVar3,uVar2);
+    vectorSlot = (undefined4 *)Vector__elementRefGrow(successorVector,vectorSize);
   }
-  *puVar1 = successor;
+  *vectorSlot = successor;
   return;
 }
 

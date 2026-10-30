@@ -2485,3 +2485,61 @@ func	FUN_000e83bc	Block__getFirstRealInst	INFERRED	returns the first instruction
 local	FUN_000e83bc	param_1	block	INFERRED	block whose instruction list (+0x98) is scanned
 func	FUN_000f88b4	Program__computeDominators	INFERRED	builds a DominatorTree for the program (DominatorTree__compute) and frees it again
 local	FUN_000f88b4	param_1	program	INFERRED	program
+use	Block__appendSuccessor	puVar1	vectorSlot	INFERRED	element reference of the appended entry	^\s*puVar1\ =\ \(undefined4\ \*\)\(uVar2\ \*\ 4\ \+\ puVar3\[2\]\);$	+1
+use	Block__appendSuccessor	puVar1	vectorSlot	INFERRED	element reference of the appended entry	^\s*puVar1\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar3,uVar2\);$	+1
+use	Block__appendSuccessor	puVar1	vectorSlot	INFERRED	element reference of the appended entry	^\s*\*puVar1\ =\ param_2;$	+1
+use	Block__appendSuccessor	uVar2	vectorSize	INFERRED	element count of the successor vector (append index)	^\s*uVar2\ =\ puVar3\[1\];$	+5
+use	Block__appendSuccessor	uVar2	vectorSize	INFERRED	element count of the successor vector (append index)	^\s*puVar1\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar3,uVar2\);$	+1
+use	Block__appendSuccessor	puVar3	successorVector	INFERRED	vector at block+0xd0: successors of the block	^\s*puVar3\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 0xd0\);$	+6
+use	Block__appendSuccessor	puVar3	successorVector	INFERRED	vector at block+0xd0: successors of the block	^\s*puVar1\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar3,uVar2\);$	+1
+use	Block__appendPredecessor	puVar1	vectorSlot	INFERRED	element reference of the appended entry	^\s*puVar1\ =\ \(undefined4\ \*\)\(uVar2\ \*\ 4\ \+\ puVar3\[2\]\);$	+1
+use	Block__appendPredecessor	puVar1	vectorSlot	INFERRED	element reference of the appended entry	^\s*puVar1\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar3,uVar2\);$	+1
+use	Block__appendPredecessor	puVar1	vectorSlot	INFERRED	element reference of the appended entry	^\s*\*puVar1\ =\ param_2;$	+1
+use	Block__appendPredecessor	uVar2	vectorSize	INFERRED	element count of the predecessor vector (append index)	^\s*uVar2\ =\ puVar3\[1\];$	+5
+use	Block__appendPredecessor	uVar2	vectorSize	INFERRED	element count of the predecessor vector (append index)	^\s*puVar1\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar3,uVar2\);$	+1
+use	Block__appendPredecessor	puVar3	predecessorVector	INFERRED	vector at block+0xd4: predecessors of the block	^\s*puVar3\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 0xd4\);$	+6
+use	Block__appendPredecessor	puVar3	predecessorVector	INFERRED	vector at block+0xd4: predecessors of the block	^\s*puVar1\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar3,uVar2\);$	+1
+use	Program__appendToVector3c8	puVar1	vectorSlot	INFERRED	element reference of the appended entry	^\s*puVar1\ =\ \(undefined4\ \*\)\(uVar2\ \*\ 4\ \+\ puVar3\[2\]\);$	+1
+use	Program__appendToVector3c8	puVar1	vectorSlot	INFERRED	element reference of the appended entry	^\s*puVar1\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar3,uVar2\);$	+1
+use	Program__appendToVector3c8	puVar1	vectorSlot	INFERRED	element reference of the appended entry	^\s*\*puVar1\ =\ param_2;$	+1
+use	Program__appendToVector3c8	uVar2	vectorSize	INFERRED	element count of the vector at program+0x3c8 (append index)	^\s*uVar2\ =\ puVar3\[1\];$	+5
+use	Program__appendToVector3c8	uVar2	vectorSize	INFERRED	element count of the vector at program+0x3c8 (append index)	^\s*puVar1\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar3,uVar2\);$	+1
+use	Program__appendToVector3c8	puVar3	instVector3c8	INFERRED	vector at program+0x3c8	^\s*puVar3\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 0x3c8\);$	+6
+use	Program__appendToVector3c8	puVar3	instVector3c8	INFERRED	vector at program+0x3c8	^\s*puVar1\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar3,uVar2\);$	+1
+use	Compiler__setBitInSelectedBlockD8	iVar1	wordIndex	INFERRED	bitIndex / 32 (rounded toward zero)	^\s*iVar1\ =\ \(\(int\)param_2\ >>\ 5\)\ \+\ \(uint\)\(\(int\)param_2\ <\ 0\ \&\&\ \(param_2\ \&\ 0x1f\)\ !=\ 0\);$	+3
+use	Compiler__setBitInSelectedBlockD8	iVar2	wordAddress	INFERRED	selected block + wordIndex*4	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)FUN_000e16b8\)\(param_1\);$	+1
+use	Compiler__setBitInSelectedBlockD8	iVar2	wordAddress	INFERRED	selected block + wordIndex*4	^\s*iVar2\ =\ iVar1\ \*\ 4\ \+\ iVar2;$	+2
+use	Compiler__setBitInSelectedBlockB8	iVar1	wordIndex	INFERRED	bitIndex / 32 (rounded toward zero)	^\s*iVar1\ =\ \(\(int\)param_2\ >>\ 5\)\ \+\ \(uint\)\(\(int\)param_2\ <\ 0\ \&\&\ \(param_2\ \&\ 0x1f\)\ !=\ 0\);$	+3
+use	Compiler__setBitInSelectedBlockB8	iVar2	wordAddress	INFERRED	selected block + wordIndex*4	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)FUN_000e16b8\)\(param_1\);$	+1
+use	Compiler__setBitInSelectedBlockB8	iVar2	wordAddress	INFERRED	selected block + wordIndex*4	^\s*iVar2\ =\ iVar1\ \*\ 4\ \+\ iVar2;$	+2
+use	Compiler__setBitInSelectedBlock98	iVar1	wordIndex	INFERRED	bitIndex / 32 (rounded toward zero)	^\s*iVar1\ =\ \(\(int\)param_2\ >>\ 5\)\ \+\ \(uint\)\(\(int\)param_2\ <\ 0\ \&\&\ \(param_2\ \&\ 0x1f\)\ !=\ 0\);$	+3
+use	Compiler__setBitInSelectedBlock98	iVar2	wordAddress	INFERRED	selected block + wordIndex*4	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)FUN_000e16b8\)\(param_1\);$	+1
+use	Compiler__setBitInSelectedBlock98	iVar2	wordAddress	INFERRED	selected block + wordIndex*4	^\s*iVar2\ =\ iVar1\ \*\ 4\ \+\ iVar2;$	+2
+use	Program__getBlocksArray	uVar3	blockEntry	INFERRED	block taken from the dominator-order array (walked backwards)	^\s*uVar3\ =\ \*puVar4;$	+1
+use	Program__getBlocksArray	uVar3	blockEntry	INFERRED	block taken from the dominator-order array (walked backwards)	^\s*\*\(undefined4\ \*\)\(iVar1\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x398\)\)\ =\ uVar3;$	+1
+use	Program__getBlocksArray	iVar2	blocksArray	INFERRED	program+0x398: cached array of blocks in reverse dominator order	^\s*iVar2\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x398\);$	+2
+use	Program__getBlocksArray	iVar2	blocksArray	INFERRED	program+0x398: cached array of blocks in reverse dominator order	^\s*iVar2\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x398\);$@2	+1
+use	Program__getBlocksArray	iVar2	blocksArray	INFERRED	program+0x398: cached array of blocks in reverse dominator order	^\s*return\ iVar2;$	+1
+use	Program__getBlocksArray	iVar1	byteOffset	INFERRED	index * 4 into the blocks array	^\s*iVar1\ =\ iVar5\ \*\ 4;$	+1
+use	Program__getBlocksArray	iVar1	byteOffset	INFERRED	index * 4 into the blocks array	^\s*\*\(undefined4\ \*\)\(iVar1\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x398\)\)\ =\ uVar3;$	+1
+use	Program__getBlocksArray	puVar4	domOrder	INFERRED	dominator-order array from Program__getDominatorInfo, walked from the end	^\s*puVar4\ =\ \(undefined4\ \*\)\(\(int\ \(\*\)\(\)\)FUN_000ec4f0\)\(param_1\);$	+2
+use	Program__getBlocksArray	puVar4	domOrder	INFERRED	dominator-order array from Program__getDominatorInfo, walked from the end	^\s*puVar4\ =\ puVar4\ \+\ iVar2;$	+1
+use	Program__getBlocksArray	puVar4	domOrder	INFERRED	dominator-order array from Program__getDominatorInfo, walked from the end	^\s*uVar3\ =\ \*puVar4;$	+2
+use	Block__isInVectorD4Of	iVar4	byteOffset	INFERRED	byte offset into the successor vector of fromBlock	^\s*for\ \(iVar4\ =\ 0;$	+4
+use	Block__isInVectorD4Of	iVar1	listEntry	INFERRED	vector entry under comparison	^\s*for\ \(iVar4\ =\ 0;$	+4
+use	Block__isInVectorD4Of	iVar1	listEntry	INFERRED	vector entry under comparison	^\s*iVar1\ =\ \*\(int\ \*\)\(iVar4\ \+\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_2\ \+\ 0xd4\)\ \+\ 8\)\);$	+2
+use	Block__isInVectorD4Of	uVar3	isPredecessor	INFERRED	1 when fromBlock is in the predecessor vector (+0xd4) of toBlock	^\s*uVar3\ =\ 0;$	+1
+use	Block__isInVectorD4Of	uVar3	isPredecessor	INFERRED	1 when fromBlock is in the predecessor vector (+0xd4) of toBlock	^\s*return\ uVar3;$	+1
+use	Block__isInVectorD4Of	uVar3	isPredecessor	INFERRED	1 when fromBlock is in the predecessor vector (+0xd4) of toBlock	^\s*uVar3\ =\ 1;$	+1
+use	BitSet__findFirstSet	uVar1	wordBits	INFERRED	bitmap word being shifted right	^\s*uVar1\ =\ \*param_1;$	+1
+use	BitSet__findFirstSet	uVar1	wordBits	INFERRED	bitmap word being shifted right	^\s*if\ \(uVar1\ ==\ 0\)\ \{$	+1
+use	BitSet__findFirstSet	uVar1	wordBits	INFERRED	bitmap word being shifted right	^\s*if\ \(\(uVar1\ \&\ 1\)\ !=\ 0\)\ \{$	+1
+use	BitSet__findFirstSet	uVar1	wordBits	INFERRED	bitmap word being shifted right	^\s*uVar1\ =\ uVar1\ >>\ 1;$	+1
+local	Compiler__setBitInSelectedBlockD8	param_1	program	INFERRED	program whose selected block is updated
+local	Compiler__setBitInSelectedBlockD8	param_2	bitIndex	INFERRED	bit number set in the word array at block+0xd8
+local	Compiler__setBitInSelectedBlockB8	param_1	program	INFERRED	program whose selected block is updated
+local	Compiler__setBitInSelectedBlockB8	param_2	bitIndex	INFERRED	bit number set in the word array at block+0xb8
+local	Compiler__setBitInSelectedBlock98	param_1	program	INFERRED	program whose selected block is updated
+local	Compiler__setBitInSelectedBlock98	param_2	bitIndex	INFERRED	bit number set in the word array at block+0x98
+local	BitSet__findFirstSet	param_1	bitWords	INFERRED	bitmap words (cursor advanced)
+local	BitSet__findFirstSet	param_2	wordCount	INFERRED	number of 32-bit words

@@ -90,47 +90,47 @@ int Compiler__selectBlockByProgramFlags(param_1)
 }
 
 /* Compiler__setBitInSelectedBlockB8 @ 0xe1704 (88 bytes) */
-int Compiler__setBitInSelectedBlockB8(param_1, param_2)
-  undefined4 param_1;
-  uint param_2;
+int Compiler__setBitInSelectedBlockB8(program, bitIndex)
+  undefined4 program;
+  uint bitIndex;
 {
-  int iVar1;
-  int iVar2;
+  int wordIndex;
+  int wordAddress;
   
-  iVar2 = ((int (*)())Compiler__selectBlockByProgramFlags)(param_1);
-  iVar1 = ((int)param_2 >> 5) + (uint)((int)param_2 < 0 && (param_2 & 0x1f) != 0);
-  iVar2 = iVar1 * 4 + iVar2;
-  *(uint *)(iVar2 + 0xb8) = 1 << (param_2 + iVar1 * -0x20 & 0x3f) | *(uint *)(iVar2 + 0xb8);
+  wordAddress = ((int (*)())Compiler__selectBlockByProgramFlags)(program);
+  wordIndex = ((int)bitIndex >> 5) + (uint)((int)bitIndex < 0 && (bitIndex & 0x1f) != 0);
+  wordAddress = wordIndex * 4 + wordAddress;
+  *(uint *)(wordAddress + 0xb8) = 1 << (bitIndex + wordIndex * -0x20 & 0x3f) | *(uint *)(wordAddress + 0xb8);
   return;
 }
 
 /* Compiler__setBitInSelectedBlockD8 @ 0xe175c (88 bytes) */
-int Compiler__setBitInSelectedBlockD8(param_1, param_2)
-  undefined4 param_1;
-  uint param_2;
+int Compiler__setBitInSelectedBlockD8(program, bitIndex)
+  undefined4 program;
+  uint bitIndex;
 {
-  int iVar1;
-  int iVar2;
+  int wordIndex;
+  int wordAddress;
   
-  iVar2 = ((int (*)())Compiler__selectBlockByProgramFlags)(param_1);
-  iVar1 = ((int)param_2 >> 5) + (uint)((int)param_2 < 0 && (param_2 & 0x1f) != 0);
-  iVar2 = iVar1 * 4 + iVar2;
-  *(uint *)(iVar2 + 0xd8) = 1 << (param_2 + iVar1 * -0x20 & 0x3f) | *(uint *)(iVar2 + 0xd8);
+  wordAddress = ((int (*)())Compiler__selectBlockByProgramFlags)(program);
+  wordIndex = ((int)bitIndex >> 5) + (uint)((int)bitIndex < 0 && (bitIndex & 0x1f) != 0);
+  wordAddress = wordIndex * 4 + wordAddress;
+  *(uint *)(wordAddress + 0xd8) = 1 << (bitIndex + wordIndex * -0x20 & 0x3f) | *(uint *)(wordAddress + 0xd8);
   return;
 }
 
 /* Compiler__setBitInSelectedBlock98 @ 0xe17b4 (88 bytes) */
-int Compiler__setBitInSelectedBlock98(param_1, param_2)
-  undefined4 param_1;
-  uint param_2;
+int Compiler__setBitInSelectedBlock98(program, bitIndex)
+  undefined4 program;
+  uint bitIndex;
 {
-  int iVar1;
-  int iVar2;
+  int wordIndex;
+  int wordAddress;
   
-  iVar2 = ((int (*)())Compiler__selectBlockByProgramFlags)(param_1);
-  iVar1 = ((int)param_2 >> 5) + (uint)((int)param_2 < 0 && (param_2 & 0x1f) != 0);
-  iVar2 = iVar1 * 4 + iVar2;
-  *(uint *)(iVar2 + 0x98) = 1 << (param_2 + iVar1 * -0x20 & 0x3f) | *(uint *)(iVar2 + 0x98);
+  wordAddress = ((int (*)())Compiler__selectBlockByProgramFlags)(program);
+  wordIndex = ((int)bitIndex >> 5) + (uint)((int)bitIndex < 0 && (bitIndex & 0x1f) != 0);
+  wordAddress = wordIndex * 4 + wordAddress;
+  *(uint *)(wordAddress + 0x98) = 1 << (bitIndex + wordIndex * -0x20 & 0x3f) | *(uint *)(wordAddress + 0x98);
   return;
 }
 

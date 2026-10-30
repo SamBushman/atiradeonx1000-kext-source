@@ -1746,37 +1746,37 @@ int floatLess(param_1_w, param_2_w)
 }
 
 /* BitSet__findFirstSet @ 0xf4be8 (92 bytes) */
-int BitSet__findFirstSet(param_1, param_2)
-  uint *param_1;
-  int param_2;
+int BitSet__findFirstSet(bitWords, wordCount)
+  uint *bitWords;
+  int wordCount;
 {
-  uint uVar1;
+  uint wordBits;
   int loopCounter;
   int loopIndex;
   int loopCounterB;
   
-  if (0 < param_2) {
+  if (0 < wordCount) {
     loopIndex = 0;
     loopCounter = 0;
     do {
-      uVar1 = *param_1;
-      param_1 = param_1 + 1;
-      if (uVar1 == 0) {
+      wordBits = *bitWords;
+      bitWords = bitWords + 1;
+      if (wordBits == 0) {
         loopCounter = loopCounter + 0x20;
       }
       else {
         loopCounterB = 0x20;
         do {
-          if ((uVar1 & 1) != 0) {
+          if ((wordBits & 1) != 0) {
             return loopCounter;
           }
-          uVar1 = uVar1 >> 1;
+          wordBits = wordBits >> 1;
           loopCounter = loopCounter + 1;
           loopCounterB = loopCounterB + -1;
         } while (loopCounterB != 0);
       }
       loopIndex = loopIndex + 1;
-    } while (param_2 != loopIndex);
+    } while (wordCount != loopIndex);
   }
   return -1;
 }

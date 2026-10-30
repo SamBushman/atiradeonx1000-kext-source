@@ -268,33 +268,33 @@ int Program__getBlocksArray(program)
 {
   undefined4 allocation;
   int listCount;
-  int iVar1;
-  int iVar2;
-  undefined4 uVar3;
-  undefined4 *puVar4;
+  int byteOffset;
+  int blocksArray;
+  undefined4 blockEntry;
+  undefined4 *domOrder;
   int loopIndex;
   
-  iVar2 = *(int *)(program + 0x398);
-  if (iVar2 == 0) {
+  blocksArray = *(int *)(program + 0x398);
+  if (blocksArray == 0) {
     listCount = DList__count(program + 0x37c);
     allocation = Arena__alloc(*(undefined4 *)(*(int *)(program + 8) + 0x374),listCount * 4 + 4);
     *(undefined4 *)(program + 0x398) = allocation;
-    puVar4 = (undefined4 *)((int (*)())Program__getDominatorInfo)(program);
-    **(undefined4 **)(program + 0x398) = *puVar4;
+    domOrder = (undefined4 *)((int (*)())Program__getDominatorInfo)(program);
+    **(undefined4 **)(program + 0x398) = *domOrder;
     if (0 < listCount) {
-      puVar4 = puVar4 + listCount;
+      domOrder = domOrder + listCount;
       loopIndex = 1;
       do {
-        iVar1 = loopIndex * 4;
+        byteOffset = loopIndex * 4;
         loopIndex = loopIndex + 1;
-        uVar3 = *puVar4;
-        puVar4 = puVar4 + -1;
-        *(undefined4 *)(iVar1 + *(int *)(program + 0x398)) = uVar3;
+        blockEntry = *domOrder;
+        domOrder = domOrder + -1;
+        *(undefined4 *)(byteOffset + *(int *)(program + 0x398)) = blockEntry;
       } while (loopIndex <= listCount);
     }
-    iVar2 = *(int *)(program + 0x398);
+    blocksArray = *(int *)(program + 0x398);
   }
-  return iVar2;
+  return blocksArray;
 }
 
 /* FUN_000ec658 @ 0xec658 (88 bytes) */
@@ -2382,21 +2382,21 @@ int Program__appendToVector3c8(program, value)
   int program;
   undefined4 value;
 {
-  undefined4 *puVar1;
-  uint uVar2;
-  uint *puVar3;
+  undefined4 *vectorSlot;
+  uint vectorSize;
+  uint *instVector3c8;
   
-  puVar3 = *(uint **)(program + 0x3c8);
-  uVar2 = puVar3[1];
-  if (uVar2 < *puVar3) {
-    _memset(uVar2 * 4 + puVar3[2],0,4);
-    puVar1 = (undefined4 *)(uVar2 * 4 + puVar3[2]);
-    puVar3[1] = uVar2 + 1;
+  instVector3c8 = *(uint **)(program + 0x3c8);
+  vectorSize = instVector3c8[1];
+  if (vectorSize < *instVector3c8) {
+    _memset(vectorSize * 4 + instVector3c8[2],0,4);
+    vectorSlot = (undefined4 *)(vectorSize * 4 + instVector3c8[2]);
+    instVector3c8[1] = vectorSize + 1;
   }
   else {
-    puVar1 = (undefined4 *)Vector__elementRefGrow(puVar3,uVar2);
+    vectorSlot = (undefined4 *)Vector__elementRefGrow(instVector3c8,vectorSize);
   }
-  *puVar1 = value;
+  *vectorSlot = value;
   return;
 }
 
