@@ -1362,7 +1362,7 @@ int R300MachineAssembler__assembleBlock(this, block, startOfShaderFlag)
     }
     iVar11 = this[3];
     if (**(int **)(iVar11 + 0x6c4) == 0) {
-      prevInst = (int *)FUN_000e3b88(this[4],block,groupInst,&local_88);
+      prevInst = (int *)Block__materializePendingMovs(this[4],block,groupInst,&local_88);
       if ((prevInst == (int *)0x0) || (local_88 == 0)) {
         iVar11 = this[3];
       }

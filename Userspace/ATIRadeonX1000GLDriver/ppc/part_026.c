@@ -2846,8 +2846,8 @@ int Program__appendInst(program, inst, block)
   return;
 }
 
-/* FUN_000f94dc @ 0xf94dc (968 bytes) */
-int FUN_000f94dc(program, list, descriptor, unusedArg4, projectionDestRegister, param_6, param_7)
+/* Program__emitInputMerge @ 0xf94dc (968 bytes) */
+int Program__emitInputMerge(program, list, descriptor, unusedArg4, projectionDestRegister, param_6, param_7)
   int program;
   undefined4 list;
   uint *descriptor;
@@ -3041,8 +3041,8 @@ int FUN_000f94dc(program, list, descriptor, unusedArg4, projectionDestRegister, 
   return;
 }
 
-/* FUN_000f9a58 @ 0xf9a58 (2736 bytes) */
-int FUN_000f9a58(pass, list, descriptor, unusedArg4, modeSelector)
+/* Program__lowerDestinationToken @ 0xf9a58 (2736 bytes) */
+int Program__lowerDestinationToken(pass, list, descriptor, unusedArg4, modeSelector)
   int pass;
   undefined4 list;
   uint *descriptor;
@@ -4633,7 +4633,7 @@ LAB_000fc3f4:
         if (((pdVar18 != (dword *)0x0) && (pdVar30 == (dword *)0x0)) && (pdVar27 == (dword *)0x0)) {
           pdVar32 = ((unsigned char *)0x4);
           param_5 = pdVar25;
-          ((int (*)())FUN_000f94dc)(program,list,pdVar17,pdVar18,pdVar25,4,*(undefined4 *)(program + 0x400));
+          ((int (*)())Program__emitInputMerge)(program,list,pdVar17,pdVar18,pdVar25,4,*(undefined4 *)(program + 0x400));
           uVar1 = *(ushort *)((int)descriptor + (int)pdVar29 * 4 + 2);
           inst = IRInst__create(0x68,*(undefined4 *)(program + 8));
           registerFile = Program__registerFileOfIlType(program,4);
@@ -4644,7 +4644,7 @@ LAB_000fc3f4:
           goto LAB_000fc3f4;
         }
 LAB_000fc43c:
-        ((int (*)())FUN_000f94dc)(program,list,pdVar17,pdVar18,pdVar25,4,*(undefined4 *)(program + 0x400));
+        ((int (*)())Program__emitInputMerge)(program,list,pdVar17,pdVar18,pdVar25,4,*(undefined4 *)(program + 0x400));
         newTempIndex2 = *(int *)(*(int *)(program + 8) + 0x3ac) - 1;
         *(uint *)(*(int *)(program + 8) + 0x3ac) = newTempIndex2;
         swizzleWord = (uint)(ushort)*pdVar30;
@@ -6827,7 +6827,7 @@ code_r0x000febe0:
             ; laneLoopIndex = laneLoopIndex + 1) {
           argR6 = loopStackData;
           argR7 = (uint ******)outputSlotCounter;
-          ((int (*)())FUN_000f9a58)(program,pendingListA,*(undefined4 *)((int)ilReader[0x19] + operandByteOffset),loopStackData,
+          ((int (*)())Program__lowerDestinationToken)(program,pendingListA,*(undefined4 *)((int)ilReader[0x19] + operandByteOffset),loopStackData,
                        outputSlotCounter);
           compilerRef = *(int *)(program + 8);
           operandByteOffset = operandByteOffset + 0x14;
@@ -8436,7 +8436,7 @@ code_r0x00101d1c:
     isTranslationKind7 = true;
   }
   builtInstB = (uint ******)((int (*)())Program__createInstForIlOpcode)(program,ilOpcode,(uint)*tokenWords >> 0x10 & 0x3fff);
-  ((int (*)())FUN_000f9a58)(program,pendingListA,*ilReader[0x19],loopStackData,outputSlotCounter);
+  ((int (*)())Program__lowerDestinationToken)(program,pendingListA,*ilReader[0x19],loopStackData,outputSlotCounter);
   registerIndex2 = *(short *)((int)*ilReader[0x19] + 2);
   registerFile = Program__registerFileOfIlType(program,(uint)**ilReader[0x19] >> 0x10 & 0x3f);
   operandRecord2 = IRInst__getOperandRecord(builtInstB,0);

@@ -367,7 +367,7 @@ int Program__collapseIfRegion(pass, block)
     if (((((((int)((ulonglong)branchInst2 >> 0x20) != 0) &&
            (footerBlock = Block__getBranchInst(block,(int)branchInst2,staleArg5,staleArg6,staleArg7,staleArg8,a6),
            *(int *)(*(int *)(footerBlock + 0x88) + 8) == 0x8b)) &&
-          (footerBlock = FUN_000e9294(block), footerBlock != 0)) &&
+          (footerBlock = IfHeader__armsAreSimple(block), footerBlock != 0)) &&
          ((footerBlock = block[0x4f], block[0x43] == 0 && (block[0x44] == 0)))) &&
         ((((block[3] & 0x10U) == 0 &&
           ((*(int *)(footerBlock + 0x10c) == 0 && (*(int *)(footerBlock + 0x110) == 0)))) &&
@@ -533,7 +533,7 @@ int FudoPs__vslot69_shouldFlattenIf(this, ifHeader, optionSource, staleArg4, sta
   double intToDoubleBias;
   undefined8 optionResult;
   
-  isIfRegion = FUN_000e9294(ifHeader);
+  isIfRegion = IfHeader__armsAreSimple(ifHeader);
   if (isIfRegion != 0) {
     thenBlock = *(int *)(ifHeader + 0x134);
     elseBlock = *(int *)(ifHeader + 0x138);

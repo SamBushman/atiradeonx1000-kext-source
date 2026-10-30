@@ -1939,7 +1939,7 @@ int R300VMachineAssembler__assembleBlock(this, block)
     }
     iVar3 = this[3];
     if (**(int **)(iVar3 + 0x6c4) == 0) {
-      groupInst = (int *)FUN_000e3b88(this[4],block,piVar5,lookahead);
+      groupInst = (int *)Block__materializePendingMovs(this[4],block,piVar5,lookahead);
       if ((groupInst == (int *)0x0) || (lookahead[0] == 0)) {
         iVar3 = this[3];
       }

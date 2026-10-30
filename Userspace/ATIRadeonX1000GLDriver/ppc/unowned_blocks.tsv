@@ -2888,7 +2888,7 @@ e3524	e3544	eh-pad	EncoderState__init_e33cc	8	0x193cc0,__Unwind_Resume
 e3640	e3644	millicode	EncoderState__init	1	
 e369c	e36bc	eh-pad	EncoderState__init	8	0x193cc0,__Unwind_Resume
 e3948	e395c	eh-pad	MachineCodeWriter__encodeProgram	5	0xe3308,__Unwind_Resume
-e42c0	e42c4	eh-pad	FUN_000e3b88	1	__Unwind_Resume
+e42c0	e42c4	eh-pad	Block__materializePendingMovs	1	__Unwind_Resume
 e4d2c	e4d8c	table	ILReader__decodeInstruction	24	
 e5638	e5654	other	ILReader__ctor_e5570	7	0x193cc0
 e5874	e5878	millicode	ILReader__ctor_e5570	1	
@@ -2949,7 +2949,7 @@ ec56c	ec58c	eh-pad	Program__getDominatorInfo	8	0x193cc0,__Unwind_Resume
 ecf5c	ecf7c	eh-pad	FUN_000eced0	8	0x193cc0,__Unwind_Resume
 ed0e4	ed0fc	eh-pad	Program__dtor_ecfac	6	__Unwind_Resume
 ed25c	ed274	eh-pad	Program__dtor_ed124	6	__Unwind_Resume
-edbf0	edc10	eh-pad	FUN_000ed89c	8	0x193cc0,__Unwind_Resume
+edbf0	edc10	eh-pad	Program__groupLoadsIntoProjections	8	0x193cc0,__Unwind_Resume
 ee114	ee118	millicode	Program__ctor_edd98	1	
 ee214	ee218	millicode	Program__ctor_edd98	1	
 ee244	ee260	other	Program__ctor_edd98	7	0x193cc0
@@ -2967,14 +2967,14 @@ efaf0	efb2c	eh-pad	Program__orderBlocksByDfs	15	0x193cc0,__Unwind_Resume
 efe3c	efe40	millicode	Program__insertExitMarkerAndFlagBlocks	1	
 efea0	efebc	other	Program__insertExitMarkerAndFlagBlocks	7	0x193cc0
 f001c	f003c	eh-pad	Program__insertExitMarkerAndFlagBlocks	8	0x193cc0,__Unwind_Resume
-f02c0	f02e0	eh-pad	FUN_000f019c	8	0x193cc0,__Unwind_Resume
-f0978	f0994	other	FUN_000f07a8	7	0x193cc0
-f09bc	f09dc	eh-pad	FUN_000f07a8	8	0x193cc0,__Unwind_Resume
+f02c0	f02e0	eh-pad	Program__trimOutputChain	8	0x193cc0,__Unwind_Resume
+f0978	f0994	other	Program__forwardMovIntoConsumers	7	0x193cc0
+f09bc	f09dc	eh-pad	Program__forwardMovIntoConsumers	8	0x193cc0,__Unwind_Resume
 f157c	f159c	eh-pad	FUN_000f14f8	8	0x193cc0,__Unwind_Resume
-f293c	f2950	other	FUN_000f1d7c	5	0x193cc0
-f2960	f2974	other	FUN_000f1d7c	5	0x193cc0
-f2984	f2998	other	FUN_000f1d7c	5	0x193cc0
-f29b8	f29d0	eh-pad	FUN_000f1d7c	6	0x193cc0,__Unwind_Resume
+f293c	f2950	other	Program__propagateMovThroughUses	5	0x193cc0
+f2960	f2974	other	Program__propagateMovThroughUses	5	0x193cc0
+f2984	f2998	other	Program__propagateMovThroughUses	5	0x193cc0
+f29b8	f29d0	eh-pad	Program__propagateMovThroughUses	6	0x193cc0,__Unwind_Resume
 f3cf8	f3d38	table	IRInst__computeSourceLaneMask	16	
 f40d4	f4114	table	IRInst__computeSourceReadMask	16	
 f513c	f515c	eh-pad	Compiler__getOrCreateLoadConstN	8	0x193cc0,__Unwind_Resume
@@ -2984,15 +2984,15 @@ f8430	f8450	eh-pad	DominatorTree__compress	8	0x193cc0,__Unwind_Resume
 f8908	f8928	eh-pad	Program__computeDominators	8	0x193cc0,__Unwind_Resume
 f8cc8	f8ccc	millicode	FUN_000f8c88	1	
 f91e8	f9288	table	Program__createInstForIlOpcode	40	
-f953c	f9550	table	FUN_000f94dc	5	
-f95e4	f9600	other	FUN_000f94dc	7	0x193cc0
-f97a8	f97c4	other	FUN_000f94dc	7	0x193cc0
-f9870	f988c	other	FUN_000f94dc	7	0x193cc0
-f990c	f992c	eh-pad	FUN_000f94dc	8	0x193cc0,__Unwind_Resume
-fa144	fa160	other	FUN_000f9a58	7	0x193cc0
-fa27c	fa298	other	FUN_000f9a58	7	0x193cc0
-fa45c	fa460	millicode	FUN_000f9a58	1	
-fa544	fa564	eh-pad	FUN_000f9a58	8	0x193cc0,__Unwind_Resume
+f953c	f9550	table	Program__emitInputMerge	5	
+f95e4	f9600	other	Program__emitInputMerge	7	0x193cc0
+f97a8	f97c4	other	Program__emitInputMerge	7	0x193cc0
+f9870	f988c	other	Program__emitInputMerge	7	0x193cc0
+f990c	f992c	eh-pad	Program__emitInputMerge	8	0x193cc0,__Unwind_Resume
+fa144	fa160	other	Program__lowerDestinationToken	7	0x193cc0
+fa27c	fa298	other	Program__lowerDestinationToken	7	0x193cc0
+fa45c	fa460	millicode	Program__lowerDestinationToken	1	
+fa544	fa564	eh-pad	Program__lowerDestinationToken	8	0x193cc0,__Unwind_Resume
 faeb4	faed4	eh-pad	Program__createIfBlock	8	0x193cc0,__Unwind_Resume
 fb584	fb588	millicode	FUN_000fb3d4	1	
 fb690	fb694	millicode	FUN_000fb3d4	1	

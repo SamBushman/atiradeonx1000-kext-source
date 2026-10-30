@@ -1304,7 +1304,7 @@
 0xe36bc	652	MachineCodeWriter__encodeProgram	part_021	converted
 0xe3968	396	IRInst__createMovForDest	part_021	converted
 0xe3af4	148	IRInst__dropAppendedSources	part_021	converted
-0xe3b88	1848	FUN_000e3b88	part_021	converted
+0xe3b88	1848	Block__materializePendingMovs	part_021	converted
 0xe43ec	20	FUN_000e43ec	part_021	converted
 0xe4400	8	setWord30	part_021	converted
 0xe4408	8	ILReader__currentOpcode	part_021	converted
@@ -1377,7 +1377,7 @@
 0xe910c	120	Block__addDominanceFrontier	part_022	converted
 0xe9184	136	Block__getPredecessor	part_022	converted
 0xe920c	136	Block__getSuccessor	part_022	converted
-0xe9294	280	FUN_000e9294	part_022	converted
+0xe9294	280	IfHeader__armsAreSimple	part_022	converted
 0xe93ac	900	Block__bypass	part_022	converted
 0xe9730	76	Block__bypassAndDetach	part_023	converted
 0xe977c	404	Block__splitOutgoingEdge	part_023	converted
@@ -1475,7 +1475,7 @@
 0xed29c	264	HwLimits__vslot43_prependDefaultMov	part_024	converted
 0xed63c	424	IRInst__bindOperandRegisters	part_024	converted
 0xed7e4	184	Program__beginPass	part_024	converted
-0xed89c	852	FUN_000ed89c	part_024	converted
+0xed89c	852	Program__groupLoadsIntoProjections	part_024	converted
 0xedd98	1216	Program__ctor_edd98	part_024	converted
 0xee29c	1216	Program__ctor_ee29c	part_024	converted
 0xee7a0	144	Program__buildBlockArrayByKey	part_024	converted
@@ -1489,11 +1489,11 @@
 0xef970	220	Program__removeInst	part_024	converted
 0xefa4c	164	Program__orderBlocksByDfs	part_024	converted
 0xefde4	536	Program__insertExitMarkerAndFlagBlocks	part_024	converted
-0xf019c	292	FUN_000f019c	part_024	converted
+0xf019c	292	Program__trimOutputChain	part_024	converted
 0xf04d4	724	IRInst__tryFoldOutputScale	part_024	converted
-0xf07a8	464	FUN_000f07a8	part_024	converted
+0xf07a8	464	Program__forwardMovIntoConsumers	part_024	converted
 0xf14f8	132	FUN_000f14f8	part_024	converted
-0xf1d7c	3008	FUN_000f1d7c	part_024	converted
+0xf1d7c	3008	Program__propagateMovThroughUses	part_024	converted
 0xf29f4	488	pass_assign_slots	part_024	converted
 0xf2bdc	128	SelectWord__compose	part_024	converted
 0xf2c5c	80	SelectWord__isSplat	part_024	converted
@@ -1610,8 +1610,8 @@
 0xf9038	264	Program__emitClampPair	part_026	converted
 0xf9140	284	Program__createInstForIlOpcode	part_026	converted
 0xf92fc	480	Program__appendInst	part_026	converted
-0xf94dc	968	FUN_000f94dc	part_026	converted
-0xf9a58	2736	FUN_000f9a58	part_026	converted
+0xf94dc	968	Program__emitInputMerge	part_026	converted
+0xf9a58	2736	Program__lowerDestinationToken	part_026	converted
 0xfa958	1132	Template__bindOperand	part_026	converted
 0xfadc4	240	Program__createIfBlock	part_026	converted
 0xfafa4	652	Program__createConstantVReg	part_026	converted

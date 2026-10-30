@@ -870,8 +870,8 @@ int Program__beginPass(program, param_2)
   return 1;
 }
 
-/* FUN_000ed89c @ 0xed89c (852 bytes) */
-int FUN_000ed89c(program)
+/* Program__groupLoadsIntoProjections @ 0xed89c (852 bytes) */
+int Program__groupLoadsIntoProjections(program)
   int program;
 {
   undefined4 *projectionInst;
@@ -2732,8 +2732,8 @@ LAB_000eff98:
   } while( true );
 }
 
-/* FUN_000f019c @ 0xf019c (292 bytes) */
-int FUN_000f019c(program)
+/* Program__trimOutputChain @ 0xf019c (292 bytes) */
+int Program__trimOutputChain(program)
   int program;
 {
   uint chainLength;
@@ -2936,8 +2936,8 @@ LAB_000f0628:
   return 0;
 }
 
-/* FUN_000f07a8 @ 0xf07a8 (464 bytes) */
-int FUN_000f07a8(pass, afterInst, inst)
+/* Program__forwardMovIntoConsumers @ 0xf07a8 (464 bytes) */
+int Program__forwardMovIntoConsumers(pass, afterInst, inst)
   int pass;
   undefined4 afterInst;
   int *inst;
@@ -3600,8 +3600,8 @@ LAB_000f1940:
   return;
 }
 
-/* FUN_000f1d7c @ 0xf1d7c (3008 bytes) */
-int FUN_000f1d7c(pass, afterInst, inst)
+/* Program__propagateMovThroughUses @ 0xf1d7c (3008 bytes) */
+int Program__propagateMovThroughUses(pass, afterInst, inst)
   int pass;
   undefined4 afterInst;
   dword *inst;
@@ -3807,7 +3807,7 @@ LAB_000f26b0:
           (**(code **)(*inst + 0xc))(inst,0,*(undefined4 *)(pass + 8));
         }
         else {
-          ((int (*)())FUN_000f07a8)(pass,afterInst,inst);
+          ((int (*)())Program__forwardMovIntoConsumers)(pass,afterInst,inst);
         }
         Arena__free(vec3Arena,vec3Data);
         Arena__free(vec2Arena,vec2Data);
@@ -4170,10 +4170,10 @@ int pass_assign_slots(program)
       isStore = (**(code **)(*instCursor + 0x68))(instCursor);
       if (isStore != 0) {
         if (instCursor[0x51] == 0) {
-          ((int (*)())FUN_000f07a8)(program,*(undefined4 *)(program + 0x33c),instCursor);
+          ((int (*)())Program__forwardMovIntoConsumers)(program,*(undefined4 *)(program + 0x33c),instCursor);
         }
         else {
-          ((int (*)())FUN_000f1d7c)(program,*(undefined4 *)(program + 0x33c),instCursor);
+          ((int (*)())Program__propagateMovThroughUses)(program,*(undefined4 *)(program + 0x33c),instCursor);
         }
       }
       instCursor = loopInst;
@@ -4201,7 +4201,7 @@ int pass_assign_slots(program)
         if (((isStore2 != 0) && (lastKind6Inst = instCursorB, instCursorB[0x4f] != 6)) &&
            (lastKind7Inst = instCursorB, lastKind6Inst = lastKind6Prev, instCursorB[0x4f] != 7)) {
           loopIndex = loopIndex + 1;
-          ((int (*)())FUN_000f07a8)(program,*(undefined4 *)(program + 0x33c),instCursorB);
+          ((int (*)())Program__forwardMovIntoConsumers)(program,*(undefined4 *)(program + 0x33c),instCursorB);
           lastKind7Inst = lastKind7Prev;
         }
         nextInstCursor = (int *)nextInstB[2];

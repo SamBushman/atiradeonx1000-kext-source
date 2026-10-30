@@ -116,7 +116,7 @@ int KhanPs__vslot69(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
-  FUN_000e9294(param_2);
+  IfHeader__armsAreSimple(param_2);
   return;
 }
 
@@ -125,7 +125,7 @@ int KhanVs__vslot69(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
-  FUN_000e9294(param_2);
+  IfHeader__armsAreSimple(param_2);
   return;
 }
 

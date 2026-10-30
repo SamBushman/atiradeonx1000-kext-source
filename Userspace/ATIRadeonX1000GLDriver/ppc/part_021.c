@@ -1675,8 +1675,8 @@ int IRInst__dropAppendedSources(inst, compilerCtx)
   return;
 }
 
-/* FUN_000e3b88 @ 0xe3b88 (1848 bytes) */
-int FUN_000e3b88(ctx, block, beforeInst, changedOut)
+/* Block__materializePendingMovs @ 0xe3b88 (1848 bytes) */
+int Block__materializePendingMovs(ctx, block, beforeInst, changedOut)
   int *ctx;
   int block;
   int *beforeInst;

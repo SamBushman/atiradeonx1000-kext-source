@@ -2854,3 +2854,11 @@ local	FUN_000da420	param_1	owner	INFERRED	object whose compiler pointer is at +8
 func	FUN_000e79b8	Block__hasMultiplePredecessors	INFERRED	true when the predecessor vector (+0xd4) holds more than one element
 local	FUN_000e79b8	param_1	block	INFERRED	block
 func	FUN_000da438	Object__setThreeWords	INFERRED	copies the three words of param_2 to +0x18, +0x1c, +0x20 of targetObject
+func	FUN_000f9a58	Program__lowerDestinationToken	INFERRED	lowers an IL destination token: inserts the setup movs for zero/one literal lanes, handles relative addressing and the export/memstore rewrite of output registers, and rewrites the descriptor to the temp register it produced
+func	FUN_000f07a8	Program__forwardMovIntoConsumers	INFERRED	forwards the source of a mov into the consumers of its destination using explicit stacks of consumers and lane masks, falling back to inserting a mov after afterInst when a consumer cannot take it
+func	FUN_000f1d7c	Program__propagateMovThroughUses	INFERRED	walks the use chain of a mov depth-first (instruction/index stacks), splits lane masks, inserts fixup movs for consumers that cannot read the forwarded source, then calls Program__forwardMovIntoConsumers
+func	FUN_000f94dc	Program__emitInputMerge	INFERRED	on first use creates the IRMerge instruction(s) over the hardware input registers (up to six) in the entry block, then adds the projection and mov for the declared input descriptor
+func	FUN_000e3b88	Block__materializePendingMovs	INFERRED	collects up to two pending instructions from beforeInst on, and creates/moves the mov instructions (IRInst__createMovForDest) that give them a common source key; reports changes through changedOut
+func	FUN_000ed89c	Program__groupLoadsIntoProjections	INFERRED	groups loads of the same key/select by block, then rewrites each group to read one shared virtual register through IRProjection instructions
+func	FUN_000e9294	IfHeader__armsAreSimple	INFERRED	true when both arm blocks (+0x134/+0x138) have exactly one successor and one predecessor and those are blocks answering vtable +0x28 / +0x24
+func	FUN_000f019c	Program__trimOutputChain	INFERRED	for flagged programs finds the last output-type instruction, collects the chain of its source-1 definitions and, if longer than the limit at program+0x3f8, drops the excess instructions and rewires the source

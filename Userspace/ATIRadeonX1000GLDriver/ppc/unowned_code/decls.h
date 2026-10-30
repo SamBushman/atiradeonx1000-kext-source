@@ -499,7 +499,7 @@ extern int extvsCreateSymbol();
 extern int extvsSymbolListGetSymbol();
 extern int scDestroyCompilerObject();
 extern int Compiler__fail();
-extern int FUN_000e9294();
+extern int IfHeader__armsAreSimple();
 extern int Emitter__allocateConstantSlot();
 extern int ChipShaders__release();
 extern int OpcodeSetup__mode7();

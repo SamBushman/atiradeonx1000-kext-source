@@ -3014,8 +3014,8 @@ int Block__getSuccessor(block, index)
   return *elementRef;
 }
 
-/* FUN_000e9294 @ 0xe9294 (280 bytes) */
-int FUN_000e9294(ifHeader)
+/* IfHeader__armsAreSimple @ 0xe9294 (280 bytes) */
+int IfHeader__armsAreSimple(ifHeader)
   int ifHeader;
 {
   int secondPredecessorQuery;

@@ -294,9 +294,9 @@ db574	ildisPrintFixedPoint	r10	PASS-import	GARBAGE
 e36bc	MachineCodeWriter__encodeProgram	r8	PASS-deep	GARBAGE	
 e36bc	MachineCodeWriter__encodeProgram	r9	PASS-deep	GARBAGE	
 e36bc	MachineCodeWriter__encodeProgram	r10	PASS-deep	GARBAGE	
-f1d7c	FUN_000f1d7c	r6	PASS-indirect	GARBAGE	
-f1d7c	FUN_000f1d7c	r7	PASS-indirect	GARBAGE	
-f1d7c	FUN_000f1d7c	r8	PASS-indirect	GARBAGE	
+f1d7c	Program__propagateMovThroughUses	r6	PASS-indirect	GARBAGE	
+f1d7c	Program__propagateMovThroughUses	r7	PASS-indirect	GARBAGE	
+f1d7c	Program__propagateMovThroughUses	r8	PASS-indirect	GARBAGE	
 f29f4	pass_assign_slots	r5	PASS-indirect	GARBAGE-UNSUPPLIED	supply=GARBAGE []; 10eabc bctr (argument registers up to r5); 10ea70 bctrl via +0x164 (argument registers up to r5)
 f29f4	pass_assign_slots	r6	PASS-indirect	GARBAGE	
 f29f4	pass_assign_slots	r7	PASS-indirect	GARBAGE	

@@ -575,7 +575,7 @@ int Block__scanBranchConeForFetchAndInterp(block, vector, coneStamp)
           if ((bool)(coneHasFetch & coneHasInterpLoad)) {
             iVar9 = block[0x4d];
             iVar5 = block[0x4e];
-            iVar10 = FUN_000e9294(block);
+            iVar10 = IfHeader__armsAreSimple(block);
             if (iVar10 == 0) goto LAB_0013a198;
             piVar8 = *(int **)(iVar9 + 0x98);
             piVar3 = (int *)(*(int **)(iVar9 + 0x98))[2];
@@ -2370,7 +2370,7 @@ int IfHeader__convertInnerIfToCmov(block, program, compiler)
   undefined8 uVar18;
   
   uVar9 = compiler;
-  iVar3 = FUN_000e9294(block);
+  iVar3 = IfHeader__armsAreSimple(block);
   if (iVar3 != 0) {
     isStatic = (**(code **)(*block + 0x40))(block);
     if ((int)((ulonglong)isStatic >> 0x20) == 0) {

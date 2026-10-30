@@ -2863,7 +2863,7 @@ int Program__runSsaPipeline(program)
       remaining = remaining + -1;
     } while (remaining != 0);
   }
-  return FUN_000f019c(program);
+  return Program__trimOutputChain(program);
 }
 
 /* VRegPool__constructByKind @ 0x122e90 (44 bytes) */
