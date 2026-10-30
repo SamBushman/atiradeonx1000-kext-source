@@ -184,39 +184,40 @@ int glInsertComponentEXT_impl(ctx, resultId, sourceId, componentIndex)
   uint componentIndex;
 {
   int extvsOperandDataTypeResult;
-  int iVar1;
-  int iVar2;
+  int appendResult;
+  int instRecord;
+  int extvsState;
   
   if ((((unsigned char *)0x00001170)[ctx] != '\0') && (componentIndex < 4)) {
-    iVar2 = *(int *)(((unsigned char *)0x00001168) + ctx);
-    iVar1 = ((int (*)())extvsAppendInstruction)(ctx,iVar2,0x879c,resultId,&DAT_001db9a8,sourceId,&DAT_001db998,0,
+    extvsState = *(int *)(((unsigned char *)0x00001168) + ctx);
+    appendResult = ((int (*)())extvsAppendInstruction)(ctx,extvsState,0x879c,resultId,&DAT_001db9a8,sourceId,&DAT_001db998,0,
                          &DAT_001db998,0,&DAT_001db998);
-    if (iVar1 != 0) {
-      iVar1 = *(int *)(iVar2 + 0x14) * 0x74 + *(int *)(iVar2 + 0x18);
-      extvsOperandDataTypeResult = ((int (*)())extvsOperandDataType)(iVar2 + 0x1c,iVar1 + -0x70);
+    if (appendResult != 0) {
+      instRecord = *(int *)(extvsState + 0x14) * 0x74 + *(int *)(extvsState + 0x18);
+      extvsOperandDataTypeResult = ((int (*)())extvsOperandDataType)(extvsState + 0x1c,instRecord + -0x70);
       if (extvsOperandDataTypeResult == 0x87bf) {
         if (componentIndex == 1) {
-          *(undefined4 *)(iVar1 + -0x5c) = 0;
-          *(undefined4 *)(iVar1 + -0x68) = 0;
-          *(undefined4 *)(iVar1 + -0x60) = 0;
+          *(undefined4 *)(instRecord + -0x5c) = 0;
+          *(undefined4 *)(instRecord + -0x68) = 0;
+          *(undefined4 *)(instRecord + -0x60) = 0;
         }
         else if (componentIndex == 0) {
-          *(undefined4 *)(iVar1 + -0x5c) = 0;
-          *(undefined4 *)(iVar1 + -100) = 0;
-          *(undefined4 *)(iVar1 + -0x60) = 0;
+          *(undefined4 *)(instRecord + -0x5c) = 0;
+          *(undefined4 *)(instRecord + -100) = 0;
+          *(undefined4 *)(instRecord + -0x60) = 0;
         }
         else if (componentIndex == 2) {
-          *(undefined4 *)(iVar1 + -0x5c) = 0;
-          *(undefined4 *)(iVar1 + -0x68) = 0;
-          *(undefined4 *)(iVar1 + -100) = 0;
+          *(undefined4 *)(instRecord + -0x5c) = 0;
+          *(undefined4 *)(instRecord + -0x68) = 0;
+          *(undefined4 *)(instRecord + -100) = 0;
         }
         else if (componentIndex == 3) {
-          *(undefined4 *)(iVar1 + -0x60) = 0;
-          *(undefined4 *)(iVar1 + -0x68) = 0;
-          *(undefined4 *)(iVar1 + -100) = 0;
+          *(undefined4 *)(instRecord + -0x60) = 0;
+          *(undefined4 *)(instRecord + -0x68) = 0;
+          *(undefined4 *)(instRecord + -100) = 0;
         }
       }
-      *(uint *)(iVar1 + -0x34) = componentIndex;
+      *(uint *)(instRecord + -0x34) = componentIndex;
     }
   }
   return;
@@ -229,15 +230,15 @@ int glExtractComponentEXT_impl(ctx, resultId, sourceId, componentIndex)
   undefined4 sourceId;
   uint componentIndex;
 {
-  int iVar1;
-  int iVar2;
+  int appendResult;
+  int extvsState;
   
   if ((((unsigned char *)0x00001170)[ctx] != '\0') && (componentIndex < 4)) {
-    iVar2 = *(int *)(((unsigned char *)0x00001168) + ctx);
-    iVar1 = ((int (*)())extvsAppendInstruction)(ctx,iVar2,0x879d,resultId,&DAT_001db9a8,sourceId,&DAT_001db998,0,
+    extvsState = *(int *)(((unsigned char *)0x00001168) + ctx);
+    appendResult = ((int (*)())extvsAppendInstruction)(ctx,extvsState,0x879d,resultId,&DAT_001db9a8,sourceId,&DAT_001db998,0,
                          &DAT_001db998,0,&DAT_001db998);
-    if (iVar1 != 0) {
-      *(uint *)(*(int *)(iVar2 + 0x14) * 0x74 + *(int *)(iVar2 + 0x18) + -0x34) = componentIndex;
+    if (appendResult != 0) {
+      *(uint *)(*(int *)(extvsState + 0x14) * 0x74 + *(int *)(extvsState + 0x18) + -0x34) = componentIndex;
     }
   }
   return;
@@ -443,15 +444,15 @@ int glSetLocalConstantEXT_impl(ctx, symbolId, dataType, values)
 }
 
 /* extvsBindCurrentVertexParameter @ 0x54940 (56 bytes) */
-int extvsBindCurrentVertexParameter(ctx, param_2)
+int extvsBindCurrentVertexParameter(ctx, unusedArg2)
   undefined4 ctx;
-  int param_2;
+  int unusedArg2;
 {
-  undefined4 uVar1;
+  undefined4 stateSymbol;
   
-  if (param_2 == 0x87e2) {
-    uVar1 = extvsGetOrCreateStateSymbol(ctx,0,0,0x87bf,0x87c1,0);
-    return uVar1;
+  if (unusedArg2 == 0x87e2) {
+    stateSymbol = extvsGetOrCreateStateSymbol(ctx,0,0,0x87bf,0x87c1,0);
+    return stateSymbol;
   }
   return 0;
 }
@@ -1094,26 +1095,27 @@ int extvsInitSymbolListWithMVP(ctx, symbolList)
   int ctx;
   undefined4 *symbolList;
 {
-  undefined4 uVar1;
-  int iVar2;
+  undefined4 mvpSymbolId;
+  int symbolList2;
+  int symbolRecord;
   
   *symbolList = 0;
   symbolList[1] = 0;
   symbolList[2] = 0;
   symbolList[3] = 0;
-  iVar2 = *(int *)(*(int *)(((unsigned char *)0x0000116c) + ctx) + 0x24);
-  if (iVar2 == 0) {
-    uVar1 = ((int (*)())extvsCreateSymbol)(ctx,symbolList,0x87c0,0x87c2,0x87e1,0,0,0);
-    iVar2 = ((int (*)())extvsSymbolListGetSymbol)(symbolList,uVar1);
-    *(undefined4 *)(iVar2 + 0x4c) = 0;
-    *(undefined1 *)(iVar2 + 0x44) = 1;
-    *(undefined4 *)(iVar2 + 0x48) = 0x87e3;
-    *(undefined4 *)(iVar2 + 0x50) = 0x80;
+  symbolList2 = *(int *)(*(int *)(((unsigned char *)0x0000116c) + ctx) + 0x24);
+  if (symbolList2 == 0) {
+    mvpSymbolId = ((int (*)())extvsCreateSymbol)(ctx,symbolList,0x87c0,0x87c2,0x87e1,0,0,0);
+    symbolRecord = ((int (*)())extvsSymbolListGetSymbol)(symbolList,mvpSymbolId);
+    *(undefined4 *)(symbolRecord + 0x4c) = 0;
+    *(undefined1 *)(symbolRecord + 0x44) = 1;
+    *(undefined4 *)(symbolRecord + 0x48) = 0x87e3;
+    *(undefined4 *)(symbolRecord + 0x50) = 0x80;
   }
   else {
     *(undefined4 *)(*(int *)(((unsigned char *)0x0000116c) + ctx) + 0x24) = 0;
     ((int (*)())extvsCreateSymbol)(ctx,symbolList,0x87be,0x87c1,0x87e1,0,0,0);
-    *(int *)(*(int *)(((unsigned char *)0x0000116c) + ctx) + 0x24) = iVar2;
+    *(int *)(*(int *)(((unsigned char *)0x0000116c) + ctx) + 0x24) = symbolList2;
   }
   return;
 }
@@ -2445,7 +2447,8 @@ int extvsAllocTempSlot(ctx, shader)
   int *shader;
 {
   bool searching;
-  int iVar2;
+  int slotByteOffset;
+  int newSlotArray;
   int newSlotOffset;
   undefined4 foundFree;
   uint slotIndex;
@@ -2454,21 +2457,21 @@ int extvsAllocTempSlot(ctx, shader)
   slotIndex = 0;
   searching = true;
   foundFree = 0;
-  iVar2 = 0;
+  slotByteOffset = 0;
   programState = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
   while( true ) {
     if (*(uint *)(programState + 0x50) <= slotIndex) {
       if (searching) {
         *(char *)(shader + 4) = (char)foundFree;
         slotIndex = *(uint *)(programState + 0x50);
-        iVar2 = (**(code **)(ctx + 0x10))(slotIndex + 0x10,0x28);
+        newSlotArray = (**(code **)(ctx + 0x10))(slotIndex + 0x10,0x28);
         (**(code **)(((unsigned char *)0x00001344) + ctx))
-                  (iVar2,*(undefined4 *)(programState + 0x4c),*(int *)(programState + 0x50) * 0x28);
+                  (newSlotArray,*(undefined4 *)(programState + 0x4c),*(int *)(programState + 0x50) * 0x28);
         (**(code **)(ctx + 0x18))(*(undefined4 *)(programState + 0x4c));
         newSlotOffset = slotIndex * 0x28;
-        *(int *)(programState + 0x4c) = iVar2;
+        *(int *)(programState + 0x4c) = newSlotArray;
         *(int *)(programState + 0x50) = *(int *)(programState + 0x50) + 0x10;
-        *(undefined1 *)(iVar2 + newSlotOffset + 0x10) = 1;
+        *(undefined1 *)(newSlotArray + newSlotOffset + 0x10) = 1;
         *(undefined4 *)(newSlotOffset + *(int *)(programState + 0x4c) + 0x14) = 4;
         *(undefined4 *)(newSlotOffset + *(int *)(programState + 0x4c) + 0x18) = foundFree;
         *(undefined4 *)(newSlotOffset + *(int *)(programState + 0x4c) + 0x1c) = foundFree;
@@ -2479,13 +2482,13 @@ int extvsAllocTempSlot(ctx, shader)
       return slotIndex;
     }
     if (!searching) break;
-    if (*(char *)(iVar2 + *(int *)(programState + 0x4c) + 0x10) == '\0') {
+    if (*(char *)(slotByteOffset + *(int *)(programState + 0x4c) + 0x10) == '\0') {
       foundFree = 1;
       searching = false;
     }
     else {
       slotIndex = slotIndex + 1;
-      iVar2 = iVar2 + 0x28;
+      slotByteOffset = slotByteOffset + 0x28;
     }
   }
   return slotIndex;

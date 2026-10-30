@@ -377,18 +377,18 @@ int fpilEmitAngleConstants(emitter, opRecordOffset, entryHeader, srcRegWord1, un
 }
 
 /* fpilClassifyDestination @ 0x3ed50 (60 bytes) */
-int fpilClassifyDestination(translator, param_2)
+int fpilClassifyDestination(translator, irDest)
   int *translator;
-  int param_2;
+  int irDest;
 {
-  uint uVar1;
+  uint destEntryWord;
   
-  uVar1 = *(uint *)(((uint)*(ushort *)(param_2 + 6) + *(int *)(*translator + 0x14)) * 8 + *translator) >>
+  destEntryWord = *(uint *)(((uint)*(ushort *)(irDest + 6) + *(int *)(*translator + 0x14)) * 8 + *translator) >>
           0x1a & 7;
-  if (uVar1 == 3) {
+  if (destEntryWord == 3) {
     return 1;
   }
-  return (uint)(uVar1 == 4) << 1;
+  return (uint)(destEntryWord == 4) << 1;
 }
 
 /* fpilBuildDestinationToken @ 0x3ed90 (160 bytes) */
@@ -427,24 +427,24 @@ int fpilBuildDestinationToken(translator, irDest, outToken, outMask, saturate)
 }
 
 /* fpilSetComponentSelect @ 0x3ee30 (88 bytes) */
-int fpilSetComponentSelect(param_1, param_2, param_3)
-  uint param_1;
-  int param_2;
-  uint *param_3;
+int fpilSetComponentSelect(selectValue, componentIdx, swizzleWord)
+  uint selectValue;
+  int componentIdx;
+  uint *swizzleWord;
 {
-  if (param_2 == 0) {
-    *param_3 = param_1 & 7 | *param_3 & 0xfffffff8;
+  if (componentIdx == 0) {
+    *swizzleWord = selectValue & 7 | *swizzleWord & 0xfffffff8;
     return;
   }
-  if (param_2 == 1) {
-    *param_3 = (param_1 & 7) << 4 | *param_3 & 0xffffff8f;
+  if (componentIdx == 1) {
+    *swizzleWord = (selectValue & 7) << 4 | *swizzleWord & 0xffffff8f;
     return;
   }
-  if (param_2 == 2) {
-    *param_3 = (param_1 & 7) << 8 | *param_3 & 0xfffff8ff;
+  if (componentIdx == 2) {
+    *swizzleWord = (selectValue & 7) << 8 | *swizzleWord & 0xfffff8ff;
     return;
   }
-  *param_3 = (param_1 & 7) << 0xc | *param_3 & 0xffff8fff;
+  *swizzleWord = (selectValue & 7) << 0xc | *swizzleWord & 0xffff8fff;
   return;
 }
 
@@ -854,8 +854,8 @@ int fpilEmitEmptyProgram(translator)
   uint tokenCapacity;
   int tokenCount;
   dword *tokenWord4Ptr;
-  dword *pdVar4;
-  dword *pdVar5;
+  dword *tokenWord5Ptr;
+  dword *tokenWord6Ptr;
   undefined4 *tokenWritePtr;
   dword *tokenWord1Ptr;
   int *tokenDataPtrAddr;
@@ -896,8 +896,8 @@ int fpilEmitEmptyProgram(translator)
       tokenWord2Ptr = ((unsigned char *)0x8);
       tokenWord3Ptr = ((unsigned char *)0xc);
       tokenWord4Ptr = ((unsigned char *)0x10);
-      pdVar4 = ((unsigned char *)0x14);
-      pdVar5 = ((unsigned char *)0x18);
+      tokenWord5Ptr = ((unsigned char *)0x14);
+      tokenWord6Ptr = ((unsigned char *)0x18);
       goto LAB_0003f918;
     }
     *tokenDataPtrAddr = allocation;
@@ -910,16 +910,16 @@ int fpilEmitEmptyProgram(translator)
   tokenWord2Ptr = tokenWritePtr + 2;
   tokenWord3Ptr = tokenWritePtr + 3;
   tokenWord4Ptr = tokenWritePtr + 4;
-  pdVar4 = tokenWritePtr + 5;
-  pdVar5 = tokenWritePtr + 6;
+  tokenWord5Ptr = tokenWritePtr + 5;
+  tokenWord6Ptr = tokenWritePtr + 6;
 LAB_0003f918:
   *tokenWritePtr = 1;
   *tokenWord1Ptr = 0x10200;
   *tokenWord2Ptr = 0x47;
   *tokenWord3Ptr = 0x170000;
   *tokenWord4Ptr = 0x440000;
-  *pdVar4 = (dword)((unsigned char *)0x00004444);
-  *pdVar5 = 0x28;
+  *tokenWord5Ptr = (dword)((unsigned char *)0x00004444);
+  *tokenWord6Ptr = 0x28;
   return 0;
 }
 
@@ -7830,20 +7830,20 @@ LAB_0004a7b4:
 /* floatToFp24 @ 0x4a7d0 (80 bytes) */
 uint floatToFp24(double value)
 {
-  float fVar1;
-  uint uVar2;
-  uint uVar3;
+  float floatValue;
+  uint exponentBits;
+  uint signBit;
   
-  fVar1 = (float)value;
-  uVar2 = (uint)GH_F2U(fVar1) >> 0x17 & 0xff;
-  uVar3 = (uint)GH_F2U(fVar1) >> 8 & 0x800000;
-  if (uVar2 < 0x41) {
+  floatValue = (float)value;
+  exponentBits = (uint)GH_F2U(floatValue) >> 0x17 & 0xff;
+  signBit = (uint)GH_F2U(floatValue) >> 8 & 0x800000;
+  if (exponentBits < 0x41) {
     return 0;
   }
-  if (0xbf < uVar2) {
-    return uVar3 | 0x7fffff;
+  if (0xbf < exponentBits) {
+    return signBit | 0x7fffff;
   }
-  return (uint)GH_F2U(fVar1) >> 7 & 0xffff | uVar3 | (uVar2 - 0x40) * 0x10000;
+  return (uint)GH_F2U(floatValue) >> 7 & 0xffff | signBit | (exponentBits - 0x40) * 0x10000;
 }
 
 /* fp24ToFloat @ 0x4a830 (40 bytes) */
@@ -7904,49 +7904,49 @@ void FUN_0004a8f0(int glContext,undefined4 param_2,undefined4 unusedArgR5,undefi
 }
 
 /* FUN_0004a990 @ 0x4a990 (100 bytes) */
-int FUN_0004a990(glContext, param_2)
+int FUN_0004a990(glContext, unusedArg2)
   int glContext;
-  undefined4 *param_2;
+  undefined4 *unusedArg2;
 {
-  /* issue #74: this called freeAndNullField(param_2+8) twice in a row with the identical argument.
+  /* issue #74: this called freeAndNullField(unusedArg2+8) twice in a row with the identical argument.
    * freeAndNullField is a plain free-and-null helper, so the second call was always a guaranteed
    * no-op once the first succeeded (or, before the malloc_size() guard above, a second harmless
    * skip once the first left a bad value in place) - a redundant duplicate, not a real second
    * resource being freed. Removed; no other call site in this corpus uses a different offset
    * here to compare against, so there is no evidence a second, distinct field was ever meant
    * to be freed. */
-  freeAndNullField(param_2 + 8);
-  *param_2 = 0;
-  param_2[7] = 0;
-  if ((glContext != 0) && (param_2 == *(undefined4 **)(glContext + 0x1e68))) {
+  freeAndNullField(unusedArg2 + 8);
+  *unusedArg2 = 0;
+  unusedArg2[7] = 0;
+  if ((glContext != 0) && (unusedArg2 == *(undefined4 **)(glContext + 0x1e68))) {
     *(undefined4 *)(glContext + 0x1e68) = 0;
   }
   return;
 }
 
 /* FUN_0004aa00 @ 0x4aa00 (136 bytes) */
-int FUN_0004aa00(ctx, param_2)
+int FUN_0004aa00(ctx, unusedArg2)
   int ctx;
-  int param_2;
+  int unusedArg2;
 {
-  undefined4 uVar1;
-  undefined1 *puVar2;
+  undefined4 flagValue;
+  undefined1 *flagBytePtr;
   
-  puVar2 = *(undefined1 **)(((unsigned char *)0x00001488) + ctx);
-  if ((puVar2 == (undefined1 *)0x0) ||
-     ((*(int *)(puVar2 + 0x37cc) < 0x41 && (*(int *)(puVar2 + 0x37d0) < 0x41)))) {
-    uVar1 = 0;
+  flagBytePtr = *(undefined1 **)(((unsigned char *)0x00001488) + ctx);
+  if ((flagBytePtr == (undefined1 *)0x0) ||
+     ((*(int *)(flagBytePtr + 0x37cc) < 0x41 && (*(int *)(flagBytePtr + 0x37d0) < 0x41)))) {
+    flagValue = 0;
   }
   else {
-    if (param_2 != 0) {
+    if (unusedArg2 != 0) {
       *(undefined4 *)(ctx + 0x1e68) = 0;
-      *puVar2 = 0;
+      *flagBytePtr = 0;
       *(undefined4 *)(((unsigned char *)0x00001488) + ctx) = 0;
     }
-    arbfpBindFragmentProgram(ctx,puVar2);
-    uVar1 = 1;
+    arbfpBindFragmentProgram(ctx,flagBytePtr);
+    flagValue = 1;
   }
-  return uVar1;
+  return flagValue;
 }
 
 /* FUN_0004aa90 @ 0x4aa90 (196 bytes) */
@@ -8507,19 +8507,19 @@ LAB_0004b6a8:
 int FUN_0004b710(glContext)
   int glContext;
 {
-  undefined *puVar1;
+  undefined *programEntry;
   int loopIndex;
-  undefined *puVar3;
+  undefined *entryByteOffset;
   
   if (*(short *)(glContext + 0x1e6c) != 0) {
     loopIndex = 0;
-    puVar3 = (undefined *)0x0;
+    entryByteOffset = (undefined *)0x0;
     do {
       loopIndex = loopIndex + 1;
-      puVar1 = puVar3 + *(int *)(glContext + 0x1e60);
-      puVar3 = ((unsigned char *)0x00003754U) + (int)puVar3;
-      *(undefined4 *)(puVar1 + 0x1780) = 0;
-      ((int (*)())FUN_0004b5d0)(glContext,puVar1);
+      programEntry = entryByteOffset + *(int *)(glContext + 0x1e60);
+      entryByteOffset = ((unsigned char *)0x00003754U) + (int)entryByteOffset;
+      *(undefined4 *)(programEntry + 0x1780) = 0;
+      ((int (*)())FUN_0004b5d0)(glContext,programEntry);
     } while (loopIndex < (int)(uint)*(ushort *)(glContext + 0x1e6c));
   }
   _free(*(undefined4 *)(glContext + 0x1e60));
