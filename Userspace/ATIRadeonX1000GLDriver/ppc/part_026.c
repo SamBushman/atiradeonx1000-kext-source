@@ -448,7 +448,7 @@ int IRInst__canFoldConstantSource(inst, operandIndex, inst2, program)
   int loopCounter;
   double dVar9;
   
-  iVar3 = FUN_0011379c(*(undefined4 *)(program + 8),inst2);
+  iVar3 = OpcodeTraits__flag1WithoutFlag7(*(undefined4 *)(program + 8),inst2);
   if (iVar3 == 0) goto LAB_000f5a8c;
   uVar2 = *(uint *)(operandIndex * 0x18 + inst + 0xa0) & 1;
   IRInst__getOperandRecord(inst2,0);
@@ -2899,13 +2899,13 @@ int FUN_000f94dc(program, list, descriptor, param_4, param_5, param_6, param_7)
       do {
         hwRegister = loopIndex + 2;
         inst = IRInst__create(0x31,*(undefined4 *)(program + PROG_compiler));
-        FUN_00130478(program,hwRegister);
+        RegAlloc__testBit42c(program,hwRegister);
         operandRecord = IRInst__getOperandRecord(inst,0);
         *(int *)(operandRecord + 8) = hwRegister;
         *(undefined4 *)(operandRecord + 0xc) = 0x10;
         *(undefined4 *)((int)inst + 0x9c) = 0x10101;
         Program__markHwRegUsed(program,hwRegister);
-        FUN_00130bd4(program,hwRegister);
+        RegAlloc__clearBit430(program,hwRegister);
         hwDescription = *(int **)(*(int *)(program + PROG_compiler) + COMP_target);
         hwInputRegister = (**(code **)(*hwDescription + 0x9c))(hwDescription,loopIndex,*(int *)(program + PROG_compiler));
         operandRecord = IRInst__getOperandRecord(inst,1);
@@ -3631,7 +3631,7 @@ LAB_000fabd8:
   *(int *)(operandRecord + 8) = registerIndex2;
   foldedResult = inst;
   ((int (*)())IRInst__applyDescriptorSelects)(program,param_9,param_7,destDescriptor,0,inst,param_10);
-  foldedResult = FUN_00113734(*(undefined4 *)(program + 8),inst,param_7,destDescriptor,uVar2,foldedResult,param_10);
+  foldedResult = OpcodeTraits__instFlagBit2_113734(*(undefined4 *)(program + 8),inst,param_7,destDescriptor,uVar2,foldedResult,param_10);
   if (foldedResult != 0) {
     operandRecord4 = IRInst__getOperandRecord(inst,0);
     loopIndex = 0;

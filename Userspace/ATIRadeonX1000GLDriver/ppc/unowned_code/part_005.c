@@ -323,7 +323,7 @@ int IrKillE__init(param_1, param_2, param_3)
   undefined4 param_2;
   undefined4 param_3;
 {
-  FUN_001135ec(param_1,param_2,param_3);
+  OpcodeSetup__mode7(param_1,param_2,param_3);
   return;
 }
 
@@ -333,7 +333,7 @@ int IrKillGT__init(param_1, param_2, param_3)
   undefined4 param_2;
   undefined4 param_3;
 {
-  FUN_001135ec(param_1,param_2,param_3);
+  OpcodeSetup__mode7(param_1,param_2,param_3);
   return;
 }
 
@@ -343,7 +343,7 @@ int IrKillGE__init(param_1, param_2, param_3)
   undefined4 param_2;
   undefined4 param_3;
 {
-  FUN_001135ec(param_1,param_2,param_3);
+  OpcodeSetup__mode7(param_1,param_2,param_3);
   return;
 }
 
@@ -353,7 +353,7 @@ int IrKillNE__init(param_1, param_2, param_3)
   undefined4 param_2;
   undefined4 param_3;
 {
-  FUN_001135ec(param_1,param_2,param_3);
+  OpcodeSetup__mode7(param_1,param_2,param_3);
   return;
 }
 
@@ -363,7 +363,7 @@ int IrKillOne__init(param_1, param_2, param_3)
   undefined4 param_2;
   undefined4 param_3;
 {
-  FUN_001135ec(param_1,param_2,param_3);
+  OpcodeSetup__mode7(param_1,param_2,param_3);
   return;
 }
 
@@ -373,7 +373,7 @@ int IrCmp1D__init(param_1, param_2, param_3)
   undefined4 param_2;
   undefined4 param_3;
 {
-  FUN_0011363c(param_1,param_2,param_3);
+  OpcodeSetup__mode8(param_1,param_2,param_3);
   return;
 }
 
@@ -383,7 +383,7 @@ int IrWhileStart__init(param_1, param_2, param_3)
   undefined4 param_2;
   undefined4 param_3;
 {
-  FUN_00113690(param_1,param_2,param_3);
+  OpcodeSetup__mode5(param_1,param_2,param_3);
   return;
 }
 

@@ -247,7 +247,7 @@ int FUN_0010fb54(vector, nextSlotRef, program)
       loopIndex = loopIndex + 1;
       vectorElement = (int *)*vectorElementRef;
       exportInst = *vectorElement;
-      bindingKind = FUN_0010e40c(*(undefined4 *)(exportInst + 0x13c),*(undefined4 *)(exportInst + 0x140));
+      bindingKind = Lane__remapValue(*(undefined4 *)(exportInst + 0x13c),*(undefined4 *)(exportInst + 0x140));
       assignedSlot = firstSlot + bindingKind;
       if (3 < bindingKind) {
         assignedSlot = *nextSlotRef;
@@ -483,7 +483,7 @@ int FUN_00110020(program, valueKey)
   uint *exportListVector;
   
   outputInst = *(int **)(valueKey + 0xb0);
-  isOutputInst = FUN_0010e634(outputInst);
+  isOutputInst = IRInst__query68AndWord4fNotIn6_7(outputInst);
   if (isOutputInst == 0) {
     return;
   }
@@ -499,12 +499,12 @@ int FUN_00110020(program, valueKey)
   allocation = (undefined4 *)Arena__alloc(arena,0x30);
   exportRecord = allocation + 1;
   *allocation = arena;
-  FUN_0010e814(exportRecord,outputInst);
-  kindQuery744 = FUN_0010e744(outputInst);
+  LaneInfo__ctor_10e814(exportRecord,outputInst);
+  kindQuery744 = IRInst__query68AndWord4fNotMasked(outputInst);
   if (kindQuery744 == 0) {
-    kindQuery6e8 = FUN_0010e6e8(outputInst);
+    kindQuery6e8 = IRInst__query68AndWord4fIn16_17(outputInst);
     if (kindQuery6e8 == 0) {
-      kindQuery690 = FUN_0010e690(outputInst);
+      kindQuery690 = IRInst__query68AndWord4fIs18(outputInst);
       if (kindQuery690 == 0) goto LAB_001101ac;
       exportListVector = *(uint **)(program + 0x424);
       exportListCount = exportListVector[1];
@@ -532,7 +532,7 @@ LAB_001101ac:
   valueNumberEnabled = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),7);
   if (valueNumberEnabled != 0) {
     ValueKey__initResultLaneValues(valueKey);
-    FUN_0010e8e4(exportRecord,valueKey + 0x20);
+    PackEntry__assignLaneSources(exportRecord,valueKey + 0x20);
   }
   laneNumber = 0;
   do {
@@ -542,7 +542,7 @@ LAB_001101ac:
       laneKind = IRLoadInterp__laneKind_104ee4(*exportRecord,laneNumber);
       laneIndexValue = IRLoadInterp__laneIndex_104180(*exportRecord,laneNumber);
       destRegister = *(undefined4 *)(*exportRecord + 0x94);
-      semanticCode = FUN_0010e368(*(undefined4 *)(*exportRecord + 0x13c));
+      semanticCode = RegKind__laneSourceCount(*(undefined4 *)(*exportRecord + 0x13c));
       arenaAt374 = *(undefined4 *)(*(int *)(program + 8) + 0x374);
       allocation = (undefined4 *)Arena__alloc(arenaAt374,0x24);
       *allocation = arenaAt374;
@@ -848,7 +848,7 @@ LAB_0011047c:
         do {
           operandOrSlot = IRInst__getOperandRecord(*vectorElement,0);
           if ((*(char *)(laneCounter + operandOrSlot + 0x10) != '\x01') &&
-             (operandOrSlot = FUN_0010e3b4(vectorElement,laneCounter), -1 < operandOrSlot)) {
+             (operandOrSlot = Array__firstIndexOfEntry(vectorElement,laneCounter), -1 < operandOrSlot)) {
             entryLanesLeft = vectorElement[5];
             laneSourceCursor[1] = 0;
             vectorElement[5] = entryLanesLeft + -1;
@@ -1008,7 +1008,7 @@ LAB_0011047c:
                   vectorElementRef = (undefined4 *)Vector__elementRefGrow(vector,otherIndex);
                 }
                 vectorElement = (int *)*vectorElementRef;
-                matchResult = FUN_0010e460(vectorElement,vectorElement2,savedSwizzleWords);
+                matchResult = PackEntry__computeLaneMap(vectorElement,vectorElement2,savedSwizzleWords);
                 if (matchResult != 0) {
                   vectorAt418B = *(uint **)(program + 0x418);
                   vectorAt418BCount = vectorAt418B[1];
@@ -1609,7 +1609,7 @@ code_r0x00111aa4:
                   allocRef = (undefined4 *)Vector__elementRefGrow(allocationVector,allocIndex);
                 }
                 candidateGroup = (int *)*allocRef;
-                candidateLaneCount = FUN_0010e95c(candidateGroup);
+                candidateLaneCount = PackEntry__activeLaneCount(candidateGroup);
                 if (laneCountTarget == candidateLaneCount) {
                   laneIndex = 0;
                   laneKindTable = (undefined4 *)PTR_DAT_001e8b64;
@@ -1652,7 +1652,7 @@ code_r0x00111b80:
                       newEntryAlloc = (undefined4 *)Arena__alloc(arena,0x30);
                       newEntry = newEntryAlloc + 1;
                       *newEntryAlloc = arena;
-                      FUN_0010e814(newEntry,clonedInst);
+                      LaneInfo__ctor_10e814(newEntry,clonedInst);
                       newEntryAlloc[6] = 1;
                       newEntry[laneIndex + 1] = laneSource;
                       groupVectorCount = outVectorAlloc[2];
@@ -1893,7 +1893,7 @@ int Program__packPsInputs(program)
   piVar24 = (int *)((int *)targetBlock[0x26])[2];
   do {
     if (piVar24 == (int *)0x0) {
-      Vector__shellSort(candidateVector,FUN_0010e4ec);
+      Vector__shellSort(candidateVector,Compare__ascendingByWrittenComponents);
       if (0 < (int)candidateCount) {
         uVar23 = 0;
         do {
@@ -2245,7 +2245,7 @@ LAB_0011293c:
         else {
           outputRecordRef = (undefined4 *)Vector__elementRefGrow(kind2Vector,loopIndex);
         }
-        bindingKind = FUN_0010e40c(semanticWord,*(undefined4 *)(*(int *)*outputRecordRef + 0x140));
+        bindingKind = Lane__remapValue(semanticWord,*(undefined4 *)(*(int *)*outputRecordRef + 0x140));
         if (bindingKind - 2U < 2) {
           exportPackingEnabled = Compiler__isOptionEnabled(compiler,0x3f);
           slotBase = nextSlot;
@@ -2268,7 +2268,7 @@ LAB_0011293c:
                 }
                 scanIndex = scanIndex + 1;
                 recordInst = *(int *)*outputRecordRef;
-                bindingKindB = FUN_0010e40c(*(undefined4 *)(recordInst + 0x13c),*(undefined4 *)(recordInst + 0x140)
+                bindingKindB = Lane__remapValue(*(undefined4 *)(recordInst + 0x13c),*(undefined4 *)(recordInst + 0x140)
                                     );
                 if (bindingKindB < 4) {
                   *(undefined4 *)(recordInst + 0x98) = 5;
@@ -2299,7 +2299,7 @@ LAB_0011293c:
     ((int (*)())FUN_0010fd98)(2,kind2Vector,&nextSlot,program);
 LAB_00112c28:
     ((int (*)())FUN_0010fd98)(3,*(undefined4 *)(program + 0x424),&nextSlot,program);
-    Vector__shellSort(*(undefined4 *)(program + 0x41c),FUN_0010e8c4);
+    Vector__shellSort(*(undefined4 *)(program + 0x41c),Compare__descendingByField140);
     ((int (*)())FUN_0010fd98)(1,*(undefined4 *)(program + 0x41c),&nextSlot,program);
   }
   else {
@@ -2355,7 +2355,7 @@ code_r0x00112df4:
 LAB_00112e78:
     bindGroupFn = *(code **)(*this + 0x58);
     interpolatorCode = Table__interpolatorKindToCode(program,interpolatorKind);
-    semanticCode = FUN_0010e530(*(undefined4 *)(outputRecord + 4),*(undefined4 *)(outputRecord + 8));
+    semanticCode = Index__scaleForMode(*(undefined4 *)(outputRecord + 4),*(undefined4 *)(outputRecord + 8));
     (*bindGroupFn)(this,slotValueWords,slotFlagBytes,interpolatorCode,semanticCode,slotMask);
     slotMask = 0;
     exportIndex = nextExportIndex;
@@ -2392,22 +2392,22 @@ int OpcodeTraits__flagBit0(opcode, compiler)
   return *(uint *)(opcode * 0x38 + iVar1) & 1;
 }
 
-/* FUN_00112fc4 @ 0x112fc4 (16 bytes) */
-int FUN_00112fc4(param_1)
+/* Value__isBelow8 @ 0x112fc4 (16 bytes) */
+int Value__isBelow8(param_1)
   uint param_1;
 {
   return param_1 < 8;
 }
 
-/* FUN_00112fd4 @ 0x112fd4 (16 bytes) */
-int FUN_00112fd4(param_1)
+/* Value__isBelow7 @ 0x112fd4 (16 bytes) */
+int Value__isBelow7(param_1)
   uint param_1;
 {
   return param_1 < 7;
 }
 
-/* FUN_00112fe4 @ 0x112fe4 (172 bytes) */
-int FUN_00112fe4(compiler)
+/* Backend__bindingSlotsSequential @ 0x112fe4 (172 bytes) */
+int Backend__bindingSlotsSequential(compiler)
   int compiler;
 {
   int entrySlotNumber;
@@ -2640,8 +2640,8 @@ double mulFloatZeroAnnihilates(double fparam_1,double fparam_2)
   return (double)(float)(fparam_1 * fparam_2);
 }
 
-/* FUN_0011358c @ 0x11358c (28 bytes) */
-int FUN_0011358c(param_1, param_2)
+/* OpcodeSetup__mode9 @ 0x11358c (28 bytes) */
+int OpcodeSetup__mode9(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -2651,8 +2651,8 @@ int FUN_0011358c(param_1, param_2)
   return;
 }
 
-/* FUN_001135a8 @ 0x1135a8 (24 bytes) */
-int FUN_001135a8(param_1, param_2)
+/* OpcodeSetup__mode6 @ 0x1135a8 (24 bytes) */
+int OpcodeSetup__mode6(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -2662,8 +2662,8 @@ int FUN_001135a8(param_1, param_2)
   return;
 }
 
-/* FUN_001135c0 @ 0x1135c0 (44 bytes) */
-int FUN_001135c0(param_1, param_2)
+/* OpcodeSetup__mode1 @ 0x1135c0 (44 bytes) */
+int OpcodeSetup__mode1(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -2675,8 +2675,8 @@ int FUN_001135c0(param_1, param_2)
   return;
 }
 
-/* FUN_001135ec @ 0x1135ec (80 bytes) */
-int FUN_001135ec(param_1, inst, param_3)
+/* OpcodeSetup__mode7 @ 0x1135ec (80 bytes) */
+int OpcodeSetup__mode7(param_1, inst, param_3)
   int param_1;
   int inst;
   int param_3;
@@ -2689,8 +2689,8 @@ int FUN_001135ec(param_1, inst, param_3)
   return;
 }
 
-/* FUN_0011363c @ 0x11363c (84 bytes) */
-int FUN_0011363c(param_1, inst, param_3)
+/* OpcodeSetup__mode8 @ 0x11363c (84 bytes) */
+int OpcodeSetup__mode8(param_1, inst, param_3)
   int param_1;
   int inst;
   int param_3;
@@ -2703,8 +2703,8 @@ int FUN_0011363c(param_1, inst, param_3)
   return;
 }
 
-/* FUN_00113690 @ 0x113690 (84 bytes) */
-int FUN_00113690(param_1, inst, param_3)
+/* OpcodeSetup__mode5 @ 0x113690 (84 bytes) */
+int OpcodeSetup__mode5(param_1, inst, param_3)
   int param_1;
   int inst;
   int param_3;
@@ -2717,8 +2717,8 @@ int FUN_00113690(param_1, inst, param_3)
   return;
 }
 
-/* FUN_001136e4 @ 0x1136e4 (40 bytes) */
-int FUN_001136e4(param_1, param_2)
+/* OpcodeSetup__mode3 @ 0x1136e4 (40 bytes) */
+int OpcodeSetup__mode3(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -2729,8 +2729,8 @@ int FUN_001136e4(param_1, param_2)
   return;
 }
 
-/* FUN_0011370c @ 0x11370c (40 bytes) */
-int FUN_0011370c(param_1, param_2)
+/* OpcodeSetup__mode2 @ 0x11370c (40 bytes) */
+int OpcodeSetup__mode2(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -2741,8 +2741,8 @@ int FUN_0011370c(param_1, param_2)
   return;
 }
 
-/* FUN_00113734 @ 0x113734 (104 bytes) */
-int FUN_00113734(compiler, inst, param_3, destDescriptor, param_5, foldedResult, param_7)
+/* OpcodeTraits__instFlagBit2_113734 @ 0x113734 (104 bytes) */
+int OpcodeTraits__instFlagBit2_113734(compiler, inst, param_3, destDescriptor, param_5, foldedResult, param_7)
   int compiler;
   int inst;
   undefined4 param_3;
@@ -2764,8 +2764,8 @@ int FUN_00113734(compiler, inst, param_3, destDescriptor, param_5, foldedResult,
   return flagBit2;
 }
 
-/* FUN_0011379c @ 0x11379c (124 bytes) */
-int FUN_0011379c(compiler, param_2)
+/* OpcodeTraits__flag1WithoutFlag7 @ 0x11379c (124 bytes) */
+int OpcodeTraits__flag1WithoutFlag7(compiler, param_2)
   int compiler;
   int param_2;
 {

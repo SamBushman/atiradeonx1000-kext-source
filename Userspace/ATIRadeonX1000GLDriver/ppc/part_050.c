@@ -1105,7 +1105,7 @@ LAB_00193490:
     changedFlag = 1;
     combinedInst = (int *)IRInst__getOperandSourceOrDefault(inst,consumerSrcIndex,combinedInst);
   }
-  loopIndex3 = FUN_0011379c(program[PROG_compiler / 4],combinedInst);
+  loopIndex3 = OpcodeTraits__flag1WithoutFlag7(program[PROG_compiler / 4],combinedInst);
   if ((loopIndex3 != 0) && ((combinedInst[5] & 0x200U) == 0)) {
     for (loopIndex3 = 1; loopRemaining = (**(code **)(*combinedInst + 0x14))(combinedInst), loopIndex3 <= loopRemaining; loopIndex3 = loopIndex3 + 1
         ) {

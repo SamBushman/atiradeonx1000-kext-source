@@ -418,7 +418,7 @@ int Program__splitMixedSourceKinds(program)
 int FUN_000ec8e4(param_1)
   int param_1;
 {
-  FUN_0012740c(*(undefined4 *)(param_1 + 0x3ac));
+  VRegPool__destroyEntries(*(undefined4 *)(param_1 + 0x3ac));
   *(uint *)(param_1 + 0x30) = *(uint *)(param_1 + 0x30) | 0x10;
   return;
 }
@@ -511,7 +511,7 @@ int FUN_000ecb90(param_1, compiler)
   int iVar1;
   undefined4 uVar2;
   
-  iVar1 = FUN_0011379c(compiler,param_1);
+  iVar1 = OpcodeTraits__flag1WithoutFlag7(compiler,param_1);
   if (iVar1 == 0) {
     uVar2 = *(undefined4 *)(*(int *)(param_1 + 0x88) + 8);
     iVar1 = OpcodeTraits__flagBit2(uVar2,compiler);
@@ -935,7 +935,7 @@ int FUN_000ed89c(param_1)
             inst[0x4d] = 1;
             operandRecord = IRInst__getOperandRecord(inst,1);
             sourceSelectWord = *(int *)(operandRecord + 0x10);
-            FUN_00104364(inst,&local_58,&local_54,local_50);
+            Vslot__outDefaults_0_0_4(inst,&local_58,&local_54,local_50);
             allocation[3] = local_54;
             allocation[4] = local_50[0];
             groupCursor = groupList;
@@ -1289,7 +1289,7 @@ int Program__ctor_edd98(program, compiler)
   arenaA = *(undefined4 *)(program[2] + 0x374);
   allocation = (undefined4 *)Arena__alloc(arenaA,0x6c);
   *allocation = arenaA;
-  FUN_001272cc(allocation + 1,program[2]);
+  Object__setWord0(allocation + 1,program[2]);
   program[0xeb] = allocation + 1;
   arenaA = *(undefined4 *)(program[2] + 0x374);
   registerTableAlloc = (undefined4 *)Arena__alloc(arenaA,0x20c);
@@ -1560,7 +1560,7 @@ int Program__ctor_ee29c(program, compiler)
   arenaA = *(undefined4 *)(program[2] + 0x374);
   allocation = (undefined4 *)Arena__alloc(arenaA,0x6c);
   *allocation = arenaA;
-  FUN_001272cc(allocation + 1,program[2]);
+  Object__setWord0(allocation + 1,program[2]);
   program[0xeb] = allocation + 1;
   arenaA = *(undefined4 *)(program[2] + 0x374);
   registerTableAlloc = (undefined4 *)Arena__alloc(arenaA,0x20c);
@@ -1780,7 +1780,7 @@ int Program__pinInputRegisters(program)
             *(int *)(inputVReg + 0x10) = registerNumber + *(int *)(program + 0x3e0);
             *(uint *)(inputVReg + 0x24) = *(uint *)(inputVReg + 0x24) | 2;
             Program__markHwRegUsed(program,registerNumber + *(int *)(program + 0x3e0));
-            FUN_00130bd4(program,registerNumber + *(int *)(program + 0x3e0));
+            RegAlloc__clearBit430(program,registerNumber + *(int *)(program + 0x3e0));
           }
           registerNumber = registerNumber + 1;
         } while (registerNumber < *(int *)(program + 0x3dc));
@@ -2028,7 +2028,7 @@ int FUN_000eee4c(program)
                   *(int *)(iVar6 + 0x10) = hwRegIndex;
                   *(uint *)(iVar6 + 0x24) = *(uint *)(iVar6 + 0x24) | 2;
                   Program__markHwRegUsed(program,hwRegIndex);
-                  FUN_00130bd4(program,hwRegIndex);
+                  RegAlloc__clearBit430(program,hwRegIndex);
                 }
                 resultVRegCopy = inst[0x23];
                 IRInst__setOperandRef(projection,0,iVar6);
@@ -3228,7 +3228,7 @@ code_r0x000f101c:
               consumer[0x27] = local_58;
               iVar15 = SelectWord__areCompatible(local_84,0x10203);
               if ((iVar15 == 0) &&
-                 (iVar15 = FUN_0011379c(*(undefined4 *)(pass + 8),consumer), iVar15 != 0)) {
+                 (iVar15 = OpcodeTraits__flag1WithoutFlag7(*(undefined4 *)(pass + 8),consumer), iVar15 != 0)) {
                 for (sourceIndexB = 1; iVar9 = (**(code **)(*consumer + 0x14))(consumer), sourceIndexB <= iVar9;
                     sourceIndexB = sourceIndexB + 1) {
                   operandRecord3 = IRInst__getOperandRecord(consumer,sourceIndexB);
@@ -3426,7 +3426,7 @@ int FUN_000f14f8(program, inst, inst2)
       moveSourceSelect = *(int *)(operandRecord2 + 0x10);
       hwFoldRejects = (**(code **)(**(int **)(*(int *)(program + 8) + 0x30c) + 0xb8))();
       if (((hwFoldRejects == 0) && (hwFoldRejects = (**(code **)(*moveSource + 0x7c))(moveSource), hwFoldRejects == 0)) &&
-         ((((hwFoldRejects = FUN_0011379c(*(undefined4 *)(program + 8),moveSource), hwFoldRejects != 0 &&
+         ((((hwFoldRejects = OpcodeTraits__flag1WithoutFlag7(*(undefined4 *)(program + 8),moveSource), hwFoldRejects != 0 &&
             ((hwFoldRejects = moveSource[0x58] - *(int *)(program + 0x478), hwFoldRejects < 0 || (hwFoldRejects < 2)))) &&
            (hwFoldRejects = (**(code **)(*moveSource + 0x28))(moveSource), hwFoldRejects == 0)) &&
           ((moveSource[0x21] != 0 && (moveSourceSelect == DAT_001aa804)))))) {
@@ -3457,7 +3457,7 @@ code_r0x000e76c4:
           moveSource[5] = moveSource[5] & 0xfffffdff;
           iVar12 = (**(code **)(iVar12 + 0x7c))(operandVReg);
           if ((((iVar12 != 0) ||
-               (iVar12 = FUN_0011379c(*(undefined4 *)(program + 8),operandVReg), iVar12 == 0)) ||
+               (iVar12 = OpcodeTraits__flag1WithoutFlag7(*(undefined4 *)(program + 8),operandVReg), iVar12 == 0)) ||
               ((iVar12 = operandVReg[0x58] - *(int *)(program + 0x478), -1 < iVar12 && (1 < iVar12)))) ||
              (((sourceBlock != operandVReg[0x56] ||
                (iVar12 = (**(code **)(*operandVReg + 0x28))(operandVReg), iVar12 != 0)) || (operandVReg[0x21] == 0)
@@ -3523,7 +3523,7 @@ code_r0x000e76c4:
               operandVReg2 = (int *)IRInst__getOperandSource(moveSource,moveSource[0x21]);
               iVar9 = (**(code **)(*operandVReg2 + 0x7c))();
               if ((((iVar9 != 0) ||
-                   (iVar9 = FUN_0011379c(*(undefined4 *)(program + 8),operandVReg2), iVar9 == 0)) ||
+                   (iVar9 = OpcodeTraits__flag1WithoutFlag7(*(undefined4 *)(program + 8),operandVReg2), iVar9 == 0)) ||
                   ((iVar9 = operandVReg2[0x58] - *(int *)(program + 0x478), -1 < iVar9 && (1 < iVar9))))
                  || (((sourceBlock != operandVReg2[0x56] ||
                       (iVar9 = (**(code **)(*operandVReg2 + 0x28))(operandVReg2), iVar9 != 0)) ||
@@ -4123,7 +4123,7 @@ int pass_assign_slots(program)
   int *nextInstB;
   int *loopInst;
   
-  FUN_0010ea30(program);
+  Program__callBackendFinish(program);
   ((int (*)())Program__beginPass)(program,(int)"assign_slots");
   hwDescription = *(int **)(*(int *)(program + 8) + 0x30c);
   hwVtable = *hwDescription;

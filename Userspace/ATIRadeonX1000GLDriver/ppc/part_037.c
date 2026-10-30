@@ -689,8 +689,8 @@ LAB_0011f744:
 #undef workCount
 #undef workData
 
-/* FUN_0011f7fc @ 0x11f7fc (164 bytes) */
-int FUN_0011f7fc(pass, param_2, vector)
+/* Program__assignVectorSlot @ 0x11f7fc (164 bytes) */
+int Program__assignVectorSlot(pass, param_2, vector)
   int pass;
   int param_2;
   uint *vector;
@@ -821,7 +821,7 @@ int FUN_0011f8a0(vector, destRegister, writeMaskRef, markPinned, sourceIndex, bl
     else {
       resultSlotRef = (undefined4 *)Vector__elementRefGrow(vector2,resultIndex);
     }
-    copyId = ((int (*)())FUN_0011f7fc)(*(undefined4 *)(compiler + COMP_currentProgram),newInst,vector);
+    copyId = ((int (*)())Program__assignVectorSlot)(*(undefined4 *)(compiler + COMP_currentProgram),newInst,vector);
     *resultSlotRef = copyId;
   }
   return;
@@ -1096,8 +1096,8 @@ LAB_001203fc:
           if (((srcKindFlag == operandRecord) && (*(int *)(phiInst + 0x98) == operandVReg[0x26])) &&
              ((*(uint *)(phiInst + 0x14) >> 6 & 1) == ((uint)operandVReg[5] >> 6 & 1))) goto LAB_001203fc;
 LAB_001200cc:
-          copyDstId = ((int (*)())FUN_0011f7fc)(pass,phiInst,vector5);
-          copySrcId = ((int (*)())FUN_0011f7fc)(pass,operandVReg,vector5);
+          copyDstId = ((int (*)())Program__assignVectorSlot)(pass,phiInst,vector5);
+          copySrcId = ((int (*)())Program__assignVectorSlot)(pass,operandVReg,vector5);
           pendingCountA = vector2[1];
           if (pendingCountA < *vector2) {
             _memset(pendingCountA * 4 + vector2[2],0,4);
@@ -1215,7 +1215,7 @@ LAB_00120400:
         pendingSlotRefA = (undefined4 *)Vector__elementRefGrow(vector2,lastPendingIndex);
       }
       packedCopyA = *pendingSlotRefA;
-      decodedDstId = FUN_0011e6ec(packedCopyA);
+      decodedDstId = Value__lowHalfword(packedCopyA);
       if (decodedDstId < *vector) {
         vectorCount2 = vector[1];
         if (vectorCount2 <= decodedDstId) {
@@ -1267,7 +1267,7 @@ LAB_00120b04:
           readySlotRefA = (int *)Vector__elementRefGrow(vector4,lastPendingIndex);
         }
         srcId = *readySlotRefA >> 0x10;
-        readyDstId = FUN_0011e6ec(*readySlotRefA);
+        readyDstId = Value__lowHalfword(*readySlotRefA);
         Vector__removeAt(vector4,lastPendingIndex);
         instTableCapacity = *vector5;
         if (readyDstId < instTableCapacity) {
@@ -1404,7 +1404,7 @@ LAB_00120890:
               pendingSlotRefA = (undefined4 *)Vector__elementRefGrow(vector2,lastPendingIndex);
             }
             packedCopyB = *pendingSlotRefA;
-            scanDstId = FUN_0011e6ec(packedCopyB);
+            scanDstId = Value__lowHalfword(packedCopyB);
             if (srcId == scanDstId) {
               readyCountB = vector4[1];
               if (readyCountB < *vector4) {
@@ -1440,7 +1440,7 @@ LAB_00120890:
       pendingTopRef = (undefined4 *)Vector__elementRefGrow(vector2,lastPendingIdx2);
     }
     cycleCopy = *pendingTopRef;
-    cycleDstId = FUN_0011e6ec(cycleCopy);
+    cycleDstId = Value__lowHalfword(cycleCopy);
     Vector__removeAt(vector2,lastPendingIdx2);
     newTempId = *(int *)(*(int *)(pass + 8) + 0x3c4) + 1;
     *(int *)(*(int *)(pass + 8) + 0x3c4) = newTempId;
@@ -1664,7 +1664,7 @@ int FUN_00121000(program)
         nextInst = (int *)nextInst[2]) {
       if (((((*(int *)(inst[0x22] + 8) != 0x8e) &&
             (instQuery68 = (**(code **)(*inst + 0x68))(inst), instQuery68 == 0)) &&
-           (instQuery68 = FUN_0012ab04(inst), instQuery68 == 0)) &&
+           (instQuery68 = IRInst__hasOperandKindClass1(inst), instQuery68 == 0)) &&
           ((inst[0x21] != 0 && ((inst[5] & 8U) == 0)))) &&
          (instQuery68 = IRInst__isProjectionOfClass26or3a(inst), instQuery68 == 0)) {
         operandCounter = 0;
@@ -2832,8 +2832,8 @@ LAB_001228ec:
 #undef blockStackCount
 #undef blockStackData
 
-/* FUN_00122de8 @ 0x122de8 (168 bytes) */
-int FUN_00122de8(program)
+/* Program__runSsaPipeline @ 0x122de8 (168 bytes) */
+int Program__runSsaPipeline(program)
   int program;
 {
   int hoistInstructionsEnabled;

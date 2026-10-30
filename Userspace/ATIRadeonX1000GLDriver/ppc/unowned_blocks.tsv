@@ -3118,7 +3118,7 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 10dcfc	10dd08	other	HwLimits__vslot10_failNotSupported	3	
 10dd4c	10dd54	millicode	HwLimits__vslot20_createInstWithOwner	2	
 10ddf4	10ddfc	other	KhanPs__vslot16_getConstant0xb5	2	
-10def8	10defc	millicode	FUN_0010de6c	1	
+10def8	10defc	millicode	Program__emitLoadVertexAttr	1	
 10e0d0	10e0d4	millicode	KhanChip__ctor_10e050	1	
 10e100	10e114	eh-pad	KhanChip__ctor_10e050	5	__Unwind_Resume
 10e194	10e198	millicode	KhanChip__ctor_10e114	1	
@@ -3233,7 +3233,7 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 127114	127134	eh-pad	ImmedConstBuffer__vslot191	8	0x193cc0,__Unwind_Resume
 1271a0	1271c0	eh-pad	ImmedConstBuffer__vslot79	8	0x193cc0,__Unwind_Resume
 12722c	12724c	eh-pad	ImmedConstBuffer__vslot39	8	0x193cc0,__Unwind_Resume
-1272c4	1272cc	millicode	FUN_001272b4	2	
+1272c4	1272cc	millicode	Object__sumWords4And8	2	
 127abc	127ac0	millicode	VRegInfo__new_127994	1	
 127b50	127b54	millicode	VRegInfo__new_127994	1	
 127be4	127be8	millicode	VRegInfo__new_127994	1	
@@ -3257,7 +3257,7 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 12a7e0	12a7f4	eh-pad	KhanVs__ctor_12a6c0	5	__Unwind_Resume
 12a884	12a8a8	eh-pad	FudoVs__ctor_12a808	9	__Unwind_Resume
 12a938	12a95c	eh-pad	FudoVs__ctor_12a8bc	9	__Unwind_Resume
-12ab70	12ab80	other	FUN_0012ab04	4	
+12ab70	12ab80	other	IRInst__hasOperandKindClass1	4	
 12b440	12b458	table	FUN_0012b3f8	6	
 12b5e0	12b5f8	eh-pad	FUN_0012b520	6	0x193cc0,__Unwind_Resume
 12b788	12b7a8	eh-pad	LoopInfo__convertToHardwareLoop	8	0x193cc0,__Unwind_Resume
@@ -3267,7 +3267,7 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 12dd48	12dd58	other	FudoPs__flattenIfs	4	
 12df58	12df70	eh-pad	FUN_0012dd58	6	0x193cc0,__Unwind_Resume
 12e450	12e468	eh-pad	Program__foldConstantIfRegion	6	0x193cc0,__Unwind_Resume
-12e534	12e554	eh-pad	FUN_0012e488	8	0x193cc0,__Unwind_Resume
+12e534	12e554	eh-pad	Program__getOrCreateLandingBlock	8	0x193cc0,__Unwind_Resume
 12e658	12e674	other	IfFooter__ctor_12e56c	7	0x193cc0
 12e6cc	12e6e8	other	IfFooter__ctor_12e56c	7	0x193cc0
 12e718	12e734	other	IfFooter__ctor_12e56c	7	0x193cc0
@@ -3284,10 +3284,10 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 12f3b0	12f3b4	millicode	FUN_0012f0f8	1	
 12fe18	12fe38	eh-pad	FUN_0012f0f8	8	0x193cc0,__Unwind_Resume
 130068	130080	eh-pad	Program__isRegionTrivial	6	0x193cc0,__Unwind_Resume
-1308dc	1308e0	millicode	FUN_001307f8	1	
-130f08	130f28	eh-pad	FUN_00130ec0	8	0x193cc0,__Unwind_Resume
-130fac	130fcc	eh-pad	FUN_00130f64	8	0x193cc0,__Unwind_Resume
-131224	131244	eh-pad	FUN_001311cc	8	0x193cc0,__Unwind_Resume
+1308dc	1308e0	millicode	IRInst__advanceToChainEnd	1	
+130f08	130f28	eh-pad	Program__appendLoadFa	8	0x193cc0,__Unwind_Resume
+130fac	130fcc	eh-pad	Program__prependLoad79	8	0x193cc0,__Unwind_Resume
+131224	131244	eh-pad	Program__insertMemLoadFbAfter	8	0x193cc0,__Unwind_Resume
 1313d8	1313f8	eh-pad	FUN_001312f4	8	0x193cc0,__Unwind_Resume
 131b68	131b88	eh-pad	FUN_00131a80	8	0x193cc0,__Unwind_Resume
 132448	13247c	eh-pad	HwLimits__buildInterferenceGraph	13	0x193cc0,__Unwind_Resume
@@ -3296,8 +3296,8 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 134070	134090	eh-pad	FUN_00133fe4	8	0x193cc0,__Unwind_Resume
 1348bc	1348dc	eh-pad	FUN_00134658	8	0x193cc0,__Unwind_Resume
 134ef0	134ef4	millicode	FUN_00134de8	1	
-1351a4	1351c4	eh-pad	FUN_00135110	8	0x193cc0,__Unwind_Resume
-135258	135278	eh-pad	FUN_001351c4	8	0x193cc0,__Unwind_Resume
+1351a4	1351c4	eh-pad	InterferenceNode__ctor_135110	8	0x193cc0,__Unwind_Resume
+135258	135278	eh-pad	InterferenceNode__ctor_1351c4	8	0x193cc0,__Unwind_Resume
 1361b4	1361d4	eh-pad	pass_color_graph	8	0x193cc0,__Unwind_Resume
 136f5c	136f60	millicode	FUN_00136ec4	1	
 136fac	136fcc	eh-pad	FUN_00136ec4	8	0x193cc0,__Unwind_Resume

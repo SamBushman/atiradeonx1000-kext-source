@@ -338,7 +338,7 @@ int Compiler__setHardwareFamily(compiler, chipFamily)
       }
       *(int *)(compiler + 0x310) = iVar1;
       if (chipFamily == 2) {
-        FUN_0010dd54(*(undefined4 *)(iVar1 + 4));
+        HwLimits__installDefaults(*(undefined4 *)(iVar1 + 4));
         *(undefined4 *)(0x00001740 + *(int *)(*(int *)(compiler + 0x310) + 8)) = 2;
       }
     }
@@ -609,7 +609,7 @@ int Compiler__compileStages(compiler, compileRequest)
       Arena__free(*readerAlloc,readerAlloc);
     }
     List__freeAllNodes(*(undefined4 *)(compiler + COMP_arenaB));
-    FUN_00122de8(*(undefined4 *)(compiler + COMP_currentProgram));
+    Program__runSsaPipeline(*(undefined4 *)(compiler + COMP_currentProgram));
     List__freeAllNodes(*(undefined4 *)(compiler + COMP_arenaB));
     reduceDepEnabled = Compiler__isOptionEnabled(compiler,0xf);
     if (reduceDepEnabled != 0) {
@@ -678,7 +678,7 @@ int Compiler__compileStages(compiler, compileRequest)
     ((int (*)())MachineCodeWriter__encodeProgram)(*(undefined4 *)(compiler + COMP_currentProgram),*(int *)(compiler + 0x52c) * 4 + compiler + 0x484,
                  *(int *)(compiler + 0x52c));
     List__freeAllNodes(*(undefined4 *)(compiler + COMP_arenaB));
-    FUN_0013061c(*(undefined4 *)(compiler + COMP_currentProgram),0);
+    RegAlloc__countUnassignedInClass(*(undefined4 *)(compiler + COMP_currentProgram),0);
     (**(code **)(**(int **)(compiler + COMP_target) + 0x38))
               (*(int **)(compiler + COMP_target),*(undefined4 *)(compiler + 0x52c),compiler);
     sourceTable = (char *)**(undefined4 **)(compiler + COMP_target);
@@ -902,7 +902,7 @@ int FUN_000e2a04(param_1, param_2)
   
   iVar1 = *(int *)(param_1 + 0x30);
   if (iVar1 < 0) {
-    iVar1 = FUN_00130690(*(undefined4 *)(param_1 + 0x34),param_2);
+    iVar1 = RegAlloc__allocateFirstFreeInClass(*(undefined4 *)(param_1 + 0x34),param_2);
     *(int *)(param_1 + 0x30) = iVar1;
   }
   return iVar1;

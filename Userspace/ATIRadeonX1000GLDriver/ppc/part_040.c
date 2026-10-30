@@ -124,8 +124,8 @@ int FUN_0012b520(program)
   return;
 }
 
-/* FUN_0012b64c @ 0x12b64c (92 bytes) */
-int FUN_0012b64c(block)
+/* Block__bridgePredecessorToSuccessor @ 0x12b64c (92 bytes) */
+int Block__bridgePredecessorToSuccessor(block)
   undefined4 block;
 {
   int predecessor;
@@ -220,7 +220,7 @@ LAB_0012ba38:
     }
     else {
       keptSuccessor = *(int *)(loopInfo[10] + 0x134);
-      ((int (*)())FUN_0012b64c)(*(undefined4 *)(loopInfo[10] + 0x13c));
+      ((int (*)())Block__bridgePredecessorToSuccessor)(*(undefined4 *)(loopInfo[10] + 0x13c));
     }
     *(undefined4 *)(*(int *)(constRegister + 0xd0) + 4) = 0;
     *(undefined4 *)(*(int *)(keptSuccessor + 0xd4) + 4) = 0;
@@ -543,11 +543,11 @@ int FudoPs__vslot69_shouldFlattenIf(this, ifHeader, optionSource, staleArg4, sta
       optionResult = FUN_000e0830(optionSource,0,3);
       if ((int)((ulonglong)optionResult >> 0x20) == 0) {
         if ((*(uint *)(ifHeader + 0xc) & 0x800) == 0) {
-          optionResult = FUN_0012ae6c(thenBlock,(int)optionResult,armLimitKind,staleArg4,staleArg5,staleArg6,staleArg7);
+          optionResult = Block__hasInstWithQuery28(thenBlock,(int)optionResult,armLimitKind,staleArg4,staleArg5,staleArg6,staleArg7);
           if ((int)((ulonglong)optionResult >> 0x20) != 0) {
             return 0;
           }
-          elseNotFlattenable = FUN_0012ae6c(elseBlock,(int)optionResult,armLimitKind,staleArg4,staleArg5,staleArg6,staleArg7);
+          elseNotFlattenable = Block__hasInstWithQuery28(elseBlock,(int)optionResult,armLimitKind,staleArg4,staleArg5,staleArg6,staleArg7);
           if (elseNotFlattenable != 0) {
             return 0;
           }
@@ -1957,8 +1957,8 @@ int Program__foldConstantIfRegion(program, ifHeader, ifFooter, outSurvivingEntry
 #undef vecData
 #undef vecArena
 
-/* FUN_0012e488 @ 0x12e488 (172 bytes) */
-int FUN_0012e488(program, block)
+/* Program__getOrCreateLandingBlock @ 0x12e488 (172 bytes) */
+int Program__getOrCreateLandingBlock(program, block)
   int program;
   int block;
 {
@@ -2290,7 +2290,7 @@ int FUN_0012eacc(program)
 LAB_0012ed5c:
       predicateRegister = 0;
       if (conditionKey != 0) {
-        predicateRegister = FUN_0012b248(zeroMovInst,conditionKey,program);
+        predicateRegister = Program__emitMovFromField8c(zeroMovInst,conditionKey,program);
       }
     }
     else {
@@ -2339,7 +2339,7 @@ LAB_0012ed24:
     DList__unlink(pendingEntry);
     while( true ) {
       while( true ) {
-        chainKey = ((int (*)())FUN_0012e488)(program,chainKey);
+        chainKey = ((int (*)())Program__getOrCreateLandingBlock)(program,chainKey);
         movDestOperand = Block__getSuccessor(chainKey,0);
         pendingEntry = FUN_0012afe8(isOrdinaryEntry,chainHeadKey,movDestOperand,chainSecondKey);
         chainKey = FUN_0012b140(movDestOperand);
@@ -2515,9 +2515,9 @@ int FUN_0012f0f8(pass, loopStack, block, lastBlockRef, newBlockOut, blockCounter
     compiler = *(undefined4 *)(pass + 8);
     loopStepArg = loopStep;
     blockArg = block;
-    cannotUnroll = FUN_0012aa78(compiler,unrollCount,loopStart,loopStep,block);
+    cannotUnroll = Loop__unrollExceedsLimits(compiler,unrollCount,loopStart,loopStep,block);
     if (cannotUnroll == 0) {
-      FUN_0012aae0(compiler,unrollCount);
+      Compiler__noteUnrollCount(compiler,unrollCount);
       *(int *)(pass + 0x98) = *(int *)(pass + 0x98) + 1;
       findSimplePredecessorResult = Block__findSimplePredecessor(block);
       exitBlock = *(undefined4 *)(block + 8);
@@ -2625,7 +2625,7 @@ int FUN_0012f0f8(pass, loopStack, block, lastBlockRef, newBlockOut, blockCounter
                       extraBranchArg = 0;
                       cloneResult = IRInst__clone(srcInst,*(undefined4 *)(pass + 8),0);
                       if ((*(int *)(block + 0x134) == 0) &&
-                         (needsOffsetFixClone = FUN_0012ab04(cloneResult), needsOffsetFixClone != 0)) {
+                         (needsOffsetFixClone = IRInst__hasOperandKindClass1(cloneResult), needsOffsetFixClone != 0)) {
                         extraBranchArg = pass;
                         ((int (*)())FUN_0012c3d0)(cloneResult,counterValue,pass);
                       }
@@ -2864,7 +2864,7 @@ LAB_0012fafc:
               do {
                 instIter = nextInst;
                 if ((*(uint *)(instListHead + 0x14) & 1) != 0) {
-                  needsOffsetFix = FUN_0012ab04(instListHead);
+                  needsOffsetFix = IRInst__hasOperandKindClass1(instListHead);
                   if (needsOffsetFix == 0) {
                     instIter = *(int *)(instListHead + 8);
                   }
@@ -3160,8 +3160,8 @@ int Array4__contains(value, table)
   return 0;
 }
 
-/* FUN_00130424 @ 0x130424 (32 bytes) */
-int FUN_00130424(allocator)
+/* RegAlloc__nextTempId @ 0x130424 (32 bytes) */
+int RegAlloc__nextTempId(allocator)
   int allocator;
 {
   int iVar1;
@@ -3185,8 +3185,8 @@ int Program__markHwRegUsed(program, hwReg)
   return;
 }
 
-/* FUN_00130478 @ 0x130478 (44 bytes) */
-int FUN_00130478(allocator, bitIndex)
+/* RegAlloc__testBit42c @ 0x130478 (44 bytes) */
+int RegAlloc__testBit42c(allocator, bitIndex)
   int allocator;
   uint bitIndex;
 {
@@ -3219,7 +3219,7 @@ int FUN_001304a4(allocator)
   if (0 < compilerThenTotal) {
     loopIndex = 0;
     do {
-      isPhysicalOrAssigned = ((int (*)())FUN_00130478)(allocator,loopIndex);
+      isPhysicalOrAssigned = ((int (*)())RegAlloc__testBit42c)(allocator,loopIndex);
       if (isPhysicalOrAssigned == 0) {
         virtualRegCount = virtualRegCount + 1;
       }
@@ -3241,8 +3241,8 @@ int BitSet__setBit42c(param_1, param_2)
   return;
 }
 
-/* FUN_00130594 @ 0x130594 (136 bytes) */
-int FUN_00130594(allocator, classNumber)
+/* RegAlloc__highestUnassignedInClass @ 0x130594 (136 bytes) */
+int RegAlloc__highestUnassignedInClass(allocator, classNumber)
   int allocator;
   int classNumber;
 {
@@ -3260,7 +3260,7 @@ int FUN_00130594(allocator, classNumber)
   registerNumber = classStart;
   if (classStart < classEnd) {
     do {
-      callResult = ((int (*)())FUN_00130478)(allocator,registerNumber);
+      callResult = ((int (*)())RegAlloc__testBit42c)(allocator,registerNumber);
       if ((callResult == 0) && (highestUnassigned < registerNumber)) {
         highestUnassigned = registerNumber;
       }
@@ -3273,8 +3273,8 @@ int FUN_00130594(allocator, classNumber)
   return highestUnassigned;
 }
 
-/* FUN_0013061c @ 0x13061c (116 bytes) */
-int FUN_0013061c(allocator, classNumber)
+/* RegAlloc__countUnassignedInClass @ 0x13061c (116 bytes) */
+int RegAlloc__countUnassignedInClass(allocator, classNumber)
   int allocator;
   int classNumber;
 {
@@ -3289,7 +3289,7 @@ int FUN_0013061c(allocator, classNumber)
   classTableAddrThenReg = *(int *)(classTableAddrThenReg + 0x43c);
   if (classTableAddrThenReg < classEnd) {
     do {
-      callResult = ((int (*)())FUN_00130478)(allocator,classTableAddrThenReg);
+      callResult = ((int (*)())RegAlloc__testBit42c)(allocator,classTableAddrThenReg);
       if (callResult == 0) {
         unassignedCount = unassignedCount + 1;
       }
@@ -3299,8 +3299,8 @@ int FUN_0013061c(allocator, classNumber)
   return unassignedCount;
 }
 
-/* FUN_00130690 @ 0x130690 (152 bytes) */
-int FUN_00130690(program, classNumber)
+/* RegAlloc__allocateFirstFreeInClass @ 0x130690 (152 bytes) */
+int RegAlloc__allocateFirstFreeInClass(program, classNumber)
   int program;
   int classNumber;
 {
@@ -3308,11 +3308,11 @@ int FUN_00130690(program, classNumber)
   int hwRegister;
   int callResult;
   
-  hwRegister = ((int (*)())FUN_0013061c)(program,classNumber);
+  hwRegister = ((int (*)())RegAlloc__countUnassignedInClass)(program,classNumber);
   if (classNumber == 1) {
     hwRegister = hwRegister + 0x20;
   }
-  callResult = ((int (*)())FUN_00130478)(program,hwRegister);
+  callResult = ((int (*)())RegAlloc__testBit42c)(program,hwRegister);
   if (callResult == 0) {
     Compiler__fail(*(undefined4 *)(program + 8),4);
   }
@@ -3324,8 +3324,8 @@ int FUN_00130690(program, classNumber)
   return newEntryIndex;
 }
 
-/* FUN_00130728 @ 0x130728 (164 bytes) */
-int FUN_00130728(inst)
+/* IRInst__chainLast @ 0x130728 (164 bytes) */
+int IRInst__chainLast(inst)
   int *inst;
 {
   int instQuery28;
@@ -3354,20 +3354,20 @@ int FUN_00130728(inst)
   return inst;
 }
 
-/* FUN_001307cc @ 0x1307cc (44 bytes) */
-int FUN_001307cc(inst)
+/* IRInst__chainLastOfPredecessor @ 0x1307cc (44 bytes) */
+int IRInst__chainLastOfPredecessor(inst)
   undefined4 inst;
 {
   int iVar1;
   undefined4 callResult;
   
-  iVar1 = ((int (*)())FUN_00130728)(inst);
-  callResult = ((int (*)())FUN_00130728)(*(undefined4 *)(iVar1 + 4));
+  iVar1 = ((int (*)())IRInst__chainLast)(inst);
+  callResult = ((int (*)())IRInst__chainLast)(*(undefined4 *)(iVar1 + 4));
   return callResult;
 }
 
-/* FUN_001307f8 @ 0x1307f8 (228 bytes) */
-int FUN_001307f8(param_1)
+/* IRInst__advanceToChainEnd @ 0x1307f8 (228 bytes) */
+int IRInst__advanceToChainEnd(param_1)
   int *param_1;
 {
   uint nextHasMarkBit;
@@ -3404,40 +3404,40 @@ int FUN_001307f8(param_1)
   return param_1;
 }
 
-/* FUN_001308e0 @ 0x1308e0 (36 bytes) */
-int FUN_001308e0(pendingInst)
+/* IRInst__chainEndNext @ 0x1308e0 (36 bytes) */
+int IRInst__chainEndNext(pendingInst)
   undefined4 pendingInst;
 {
   int iVar1;
   
-  iVar1 = ((int (*)())FUN_001307f8)(pendingInst);
+  iVar1 = ((int (*)())IRInst__advanceToChainEnd)(pendingInst);
   return *(undefined4 *)(iVar1 + 8);
 }
 
-/* FUN_00130904 @ 0x130904 (64 bytes) */
-int FUN_00130904(inst)
+/* IRInst__chainEndSkippingFlag4000000 @ 0x130904 (64 bytes) */
+int IRInst__chainEndSkippingFlag4000000(inst)
   undefined4 inst;
 {
   int iVar1;
   undefined4 callResult;
   
-  iVar1 = ((int (*)())FUN_001307cc)(inst);
+  iVar1 = ((int (*)())IRInst__chainLastOfPredecessor)(inst);
   if ((*(uint *)(iVar1 + 0x14) & 0x4000000) != 0) {
-    iVar1 = ((int (*)())FUN_001307cc)(inst);
+    iVar1 = ((int (*)())IRInst__chainLastOfPredecessor)(inst);
   }
-  callResult = ((int (*)())FUN_001307f8)(iVar1);
+  callResult = ((int (*)())IRInst__advanceToChainEnd)(iVar1);
   return callResult;
 }
 
-/* FUN_00130944 @ 0x130944 (20 bytes) */
-int FUN_00130944(param_1)
+/* Record__field98IsBelow2 @ 0x130944 (20 bytes) */
+int Record__field98IsBelow2(param_1)
   int param_1;
 {
   return *(uint *)(param_1 + 0x98) < 2;
 }
 
-/* FUN_00130958 @ 0x130958 (36 bytes) */
-int FUN_00130958(bitSet, registerIndex, lane)
+/* BitSet__testRegisterLane_130958 @ 0x130958 (36 bytes) */
+int BitSet__testRegisterLane_130958(bitSet, registerIndex, lane)
   int bitSet;
   int registerIndex;
   int lane;
@@ -3448,8 +3448,8 @@ int FUN_00130958(bitSet, registerIndex, lane)
   return *(uint *)((bitIndex >> 3 & 0x1ffffffc) + bitSet + 8) >> (bitIndex & 0x1f) & 1;
 }
 
-/* FUN_0013097c @ 0x13097c (64 bytes) */
-int FUN_0013097c(liveWords, param_2)
+/* BitSet__testAnyLane @ 0x13097c (64 bytes) */
+int BitSet__testAnyLane(liveWords, param_2)
   int liveWords;
   int param_2;
 {
@@ -3468,8 +3468,8 @@ int FUN_0013097c(liveWords, param_2)
   return 0;
 }
 
-/* FUN_001309bc @ 0x1309bc (32 bytes) */
-int FUN_001309bc(allocator, sourceRegister)
+/* RegAlloc__testBit24 @ 0x1309bc (32 bytes) */
+int RegAlloc__testBit24(allocator, sourceRegister)
   int allocator;
   uint sourceRegister;
 {
@@ -3489,15 +3489,15 @@ int Program__isHwRegAllowed(program, hwReg)
   return 0;
 }
 
-/* FUN_00130a08 @ 0x130a08 (112 bytes) */
-int FUN_00130a08(inst, targetId)
+/* IRInst__findChainNodeById @ 0x130a08 (112 bytes) */
+int IRInst__findChainNodeById(inst, targetId)
   undefined4 inst;
   int targetId;
 {
   int iVar1;
   int *cursorInst;
   
-  iVar1 = ((int (*)())FUN_00130728)(inst);
+  iVar1 = ((int (*)())IRInst__chainLast)(inst);
   cursorInst = *(int **)(iVar1 + 4);
   while( true ) {
     iVar1 = (**(code **)(*cursorInst + 0x74))(cursorInst);
@@ -3510,8 +3510,8 @@ int FUN_00130a08(inst, targetId)
   return cursorInst;
 }
 
-/* FUN_00130a78 @ 0x130a78 (68 bytes) */
-int FUN_00130a78(cursorInst, referenceInst)
+/* IRInst__findSameClassNode @ 0x130a78 (68 bytes) */
+int IRInst__findSameClassNode(cursorInst, referenceInst)
   uint cursorInst;
   int referenceInst;
 {
@@ -3557,8 +3557,8 @@ int FUN_00130abc(spillInfo, allocator, markFlag)
   int *cursorOrBlockFlag;
   undefined8 reloadPair;
   
-  spilledInst = (int *)((int (*)())FUN_001307cc)(spillInfo);
-  reloadPair = ((int (*)())FUN_00130728)(spillInfo);
+  spilledInst = (int *)((int (*)())IRInst__chainLastOfPredecessor)(spillInfo);
+  reloadPair = ((int (*)())IRInst__chainLast)(spillInfo);
   reloadInst = (int *)((ulonglong)reloadPair >> 0x20);
   instQuery24 = (**(code **)(*spilledInst + 0x24))(spilledInst,(int)reloadPair,markFlag);
   if (((instQuery24 != 0) && ((spilledInst[5] & 0x4000000U) == 0)) &&
@@ -3573,7 +3573,7 @@ int FUN_00130abc(spillInfo, allocator, markFlag)
         for (operandNumber = 1; operandCountLimit = (**(code **)(*instCursor + 0x14))(instCursor,staleArg4,markFlag), operandNumber <= operandCountLimit;
             operandNumber = operandNumber + 1) {
           sourceDef = IRInst__getOperandSource(instCursor,operandNumber);
-          sourceCheckResult = ((int (*)())FUN_00130a78)(spilledInst,sourceDef);
+          sourceCheckResult = ((int (*)())IRInst__findSameClassNode)(spilledInst,sourceDef);
           staleArg4 = (undefined4)sourceCheckResult;
           if ((int)((ulonglong)sourceCheckResult >> 0x20) != 0) {
             markFlag = 1;
@@ -3593,8 +3593,8 @@ int FUN_00130abc(spillInfo, allocator, markFlag)
   return;
 }
 
-/* FUN_00130bd4 @ 0x130bd4 (40 bytes) */
-int FUN_00130bd4(allocator, bitIndex)
+/* RegAlloc__clearBit430 @ 0x130bd4 (40 bytes) */
+int RegAlloc__clearBit430(allocator, bitIndex)
   int allocator;
   uint bitIndex;
 {
@@ -3606,8 +3606,8 @@ int FUN_00130bd4(allocator, bitIndex)
   return;
 }
 
-/* FUN_00130bfc @ 0x130bfc (144 bytes) */
-int FUN_00130bfc(allocator, inst)
+/* RegAlloc__classOfInst @ 0x130bfc (144 bytes) */
+int RegAlloc__classOfInst(allocator, inst)
   int allocator;
   int inst;
 {
@@ -3654,7 +3654,7 @@ int FUN_00130c8c(allocator, spillRecord, newSource, registerCountRef)
   int backendQuery150;
   int program;
   
-  anchorInst = ((int (*)())FUN_00130728)(spillRecord);
+  anchorInst = ((int (*)())IRInst__chainLast)(spillRecord);
   program = *(int *)(*(int *)(allocator + 0x2c) + 0x6c4);
   callResult = IRInst__create(0x31,*(int *)(allocator + 0x2c));
   sourceRegKind = *(undefined4 *)(newSource + 0x98);
@@ -3691,7 +3691,7 @@ int FUN_00130da0(allocator, inst, operandIndex, afterInst, compiler)
   sourceDef = IRInst__getOperandSource(inst,operandIndex);
   callResult = IRInst__clone(sourceDef,compiler,0);
   if ((*(uint *)(inst + 0x14) & 0x40) == 0) {
-    uVar1 = ((int (*)())FUN_00130424)(allocator);
+    uVar1 = ((int (*)())RegAlloc__nextTempId)(allocator);
     *(undefined4 *)(callResult + 0x98) = 0;
     *(undefined4 *)(callResult + 0x94) = uVar1;
   }
@@ -3703,8 +3703,8 @@ int FUN_00130da0(allocator, inst, operandIndex, afterInst, compiler)
   return callResult;
 }
 
-/* FUN_00130e68 @ 0x130e68 (88 bytes) */
-int FUN_00130e68(inst)
+/* IRInst__isQuery28OrOpcode93 @ 0x130e68 (88 bytes) */
+int IRInst__isQuery28OrOpcode93(inst)
   int *inst;
 {
   int query28;
@@ -3717,8 +3717,8 @@ int FUN_00130e68(inst)
   return result;
 }
 
-/* FUN_00130ec0 @ 0x130ec0 (72 bytes) */
-int FUN_00130ec0(baseHandle, derivedHandle, compiler)
+/* Program__appendLoadFa @ 0x130ec0 (72 bytes) */
+int Program__appendLoadFa(baseHandle, derivedHandle, compiler)
   undefined4 baseHandle;
   undefined4 derivedHandle;
   int compiler;
@@ -3740,8 +3740,8 @@ int FUN_00130ec0(baseHandle, derivedHandle, compiler)
   return loadInst;
 }
 
-/* FUN_00130f64 @ 0x130f64 (72 bytes) */
-int FUN_00130f64(param_1, newSlotNumber, compiler)
+/* Program__prependLoad79 @ 0x130f64 (72 bytes) */
+int Program__prependLoad79(param_1, newSlotNumber, compiler)
   undefined4 param_1;
   undefined4 newSlotNumber;
   int compiler;
@@ -3796,7 +3796,7 @@ int FUN_00131008(maxDistance, inst, operandIndex)
       do {
         do {
           do {
-            chainInst = (int *)((int (*)())FUN_001307cc)(chainInst);
+            chainInst = (int *)((int (*)())IRInst__chainLastOfPredecessor)(chainInst);
           } while ((chainInst[5] & 0x4000000U) != 0);
           instQuery34 = (**(code **)(*chainInst + 0x34))(chainInst);
         } while ((((instQuery34 != 0) || (instQuery34 = (**(code **)(*chainInst + 0x68))(chainInst), instQuery34 != 0)) ||
@@ -3810,7 +3810,7 @@ int FUN_00131008(maxDistance, inst, operandIndex)
             && (chainInst[0x56] != inst[0x56])))) {
           return 1;
         }
-        laneDependsOnChain = ((int (*)())FUN_00130a78)(chainInst,laneDefinition);
+        laneDependsOnChain = ((int (*)())IRInst__findSameClassNode)(chainInst,laneDefinition);
         if (laneDependsOnChain != 0) {
           return 0;
         }
@@ -3824,8 +3824,8 @@ int FUN_00131008(maxDistance, inst, operandIndex)
   } while( true );
 }
 
-/* FUN_001311cc @ 0x1311cc (88 bytes) */
-int FUN_001311cc(destRegister, operandSwizzle, newSource, offsetSource, afterInst, compiler)
+/* Program__insertMemLoadFbAfter @ 0x1311cc (88 bytes) */
+int Program__insertMemLoadFbAfter(destRegister, operandSwizzle, newSource, offsetSource, afterInst, compiler)
   undefined4 destRegister;
   undefined4 operandSwizzle;
   undefined4 newSource;
@@ -3893,7 +3893,7 @@ int FUN_001312f4(inst, newSource, addressSource, ref, compiler)
     do {
       operandRecord2 = IRInst__getOperandRecord(inst,0);
       if ((*(char *)(laneIndex + operandRecord2 + 0x10) == '\x01') &&
-         (operandRecord2 = FUN_00138240(operandRecord,laneIndex), operandRecord2 != 0)) {
+         (operandRecord2 = IRInst__laneWrittenInChain(operandRecord,laneIndex), operandRecord2 != 0)) {
         *(undefined1 *)((int)writtenLaneMask + laneIndex) = 0;
       }
       moreLanes = laneIndex != 3;
@@ -3998,4 +3998,4 @@ asm(".set FudoPs__flattenIfs, _FudoPs__flattenIfs");
  * "thunk_FUN_xxx" IS calling FUN_xxx - which is exactly what the original binary's trampoline
  * did. */
 asm(".globl _thunk_FUN_001307f8");
-asm(".set _thunk_FUN_001307f8, _FUN_001307f8");
+asm(".set _thunk_FUN_001307f8, _IRInst__advanceToChainEnd");

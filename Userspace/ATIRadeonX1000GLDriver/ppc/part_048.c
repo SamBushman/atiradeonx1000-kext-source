@@ -2602,7 +2602,7 @@ int FUN_0017f78c(ctx)
   int iVar1;
   
   if ((*(int *)(*(int *)(ctx + 0xb0) + 0x98) != 0x2c) &&
-     (iVar1 = FUN_0011379c(*(undefined4 *)(ctx + 0x238),*(int *)(ctx + 0xb0)), iVar1 != 0))
+     (iVar1 = OpcodeTraits__flag1WithoutFlag7(*(undefined4 *)(ctx + 0x238),*(int *)(ctx + 0xb0)), iVar1 != 0))
   {
     ((int (*)())FUN_0017f5a4)(ctx);
     return;
@@ -6599,7 +6599,7 @@ LAB_0018601c:
           operandSelectBytes[0] = *(int *)(loopIndex2 + 0x10);
           loopIndex2 = SelectWord__isSplat(operandSelectBytes[0]);
           if (loopIndex2 != 0) {
-            loopIndex2 = FUN_0011379c(*(undefined4 *)(program + 8),operandVReg);
+            loopIndex2 = OpcodeTraits__flag1WithoutFlag7(*(undefined4 *)(program + 8),operandVReg);
             if ((loopIndex2 == 0) || (loopIndex2 = IRInst__hasSingleUse(operandVReg,program), loopIndex2 == 0)) {
               sourceHandled = false;
             }

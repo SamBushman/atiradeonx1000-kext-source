@@ -2073,7 +2073,7 @@ LAB_0013c54c:
           iVar2 = *piVar4;
           if (iVar2 != 0) {
             if (local_58 != 0) {
-              callResult = FUN_00139190(&vec2Capacity,*(undefined4 *)(iVar2 + 0x84));
+              callResult = LaneStack__topFitsLaneCount(&vec2Capacity,*(undefined4 *)(iVar2 + 0x84));
               countBefore = vecCount;
               if (callResult == 0) {
                 uVar10 = ((int (*)())FUN_0013a240)(&vec2Capacity);
@@ -4391,8 +4391,8 @@ LAB_00140128:
             puVar10 = (uint *)Vector__elementRefGrow(&vecCapacity,uVar35);
           }
           uVar29 = *puVar10;
-          iVar13 = FUN_00139008(uVar26);
-          iVar14 = FUN_00139008(uVar29);
+          iVar13 = Mask__countSetBits4(uVar26);
+          iVar14 = Mask__countSetBits4(uVar29);
           if (4 < iVar13 + iVar14) goto LAB_00140dc4;
           operandVReg3 = (int *)IRInst__getOperandSource(iVar4,1);
           piVar5 = (int *)IRInst__getOperandSource(iVar4,2);
@@ -4791,7 +4791,7 @@ int FUN_00140e7c(param_1, param_2, param_3)
   int iVar2;
   
   if ((((((*(int *)(param_2[0x22] + 8) == *(int *)(param_3[0x22] + 8)) &&
-         (iVar1 = FUN_0011379c(*param_1,param_2), iVar1 != 0)) &&
+         (iVar1 = OpcodeTraits__flag1WithoutFlag7(*param_1,param_2), iVar1 != 0)) &&
         (iVar1 = (**(code **)(*param_2 + 100))(param_2), iVar1 == 0)) &&
        ((param_2[0x20] != 0 && (iVar1 = RegKind__flagBit0(param_2[0x26]), iVar1 != 0)))) &&
       (((param_2[5] & 2U) == 0 &&
@@ -4928,8 +4928,8 @@ int FUN_001411dc(param_1, inst, inst2, param_4)
   
   bVar1 = inst == inst2;
   (*(unsigned int *)((unsigned char *)ghidra_home + 12)) = param_4;
-  FUN_0011379c(*param_1,inst);
-  FUN_0011379c(*param_1,inst2);
+  OpcodeTraits__flag1WithoutFlag7(*param_1,inst);
+  OpcodeTraits__flag1WithoutFlag7(*param_1,inst2);
   operandRecord = IRInst__getOperandRecord(inst,0);
   local_44[0] = *(undefined4 *)(operandRecord + 0x10);
   operandRecord = IRInst__getOperandRecord(inst2,0);
@@ -5042,7 +5042,7 @@ int FUN_00141458(param_1, inst, param_3, param_4)
   undefined4 operandSelect;
   undefined4 local_44 [8];
   
-  FUN_0011379c(*param_1,inst);
+  OpcodeTraits__flag1WithoutFlag7(*param_1,inst);
   operandRecord2 = IRInst__getOperandRecord(inst,0);
   operandSelect = *(undefined4 *)(operandRecord2 + 0x10);
   uVar3 = *(uint *)(inst + 0x14);
@@ -6213,7 +6213,7 @@ LAB_00142c3c:
     ((int (*)())FUN_00141090)(&local_4c,param_1,iVar6);
     local_74 = local_4c;
     if (*(char *)((int)&local_74 + param_3) != '\0') {
-      iVar7 = FUN_0011379c(*param_1,iVar6);
+      iVar7 = OpcodeTraits__flag1WithoutFlag7(*param_1,iVar6);
       if (((iVar7 == 0) || (*(char *)((int)&local_74 + param_4) != '\0')) ||
          (*(char *)((int)&local_78 + param_4) != '\0')) goto LAB_00142f88;
       puVar11 = *(uint **)(iVar6 + 0x10);
@@ -8145,7 +8145,7 @@ int pass_post_pack_insts(param_1)
         do {
           iVar5 = iVar6;
           if ((*(uint *)(instA + 0x14) & 1) != 0) {
-            iVar6 = FUN_0011379c(*(undefined4 *)(param_1[1] + 8),instA);
+            iVar6 = OpcodeTraits__flag1WithoutFlag7(*(undefined4 *)(param_1[1] + 8),instA);
             if (iVar6 != 0) {
               atScanStart = true;
               iVar6 = *(int *)(param_1[1] + 900);
@@ -8164,7 +8164,7 @@ int pass_post_pack_insts(param_1)
                         iVar6 = iVar2;
                       }
                       else {
-                        packable = FUN_0011379c(*(undefined4 *)(param_1[1] + 8),iVar5);
+                        packable = OpcodeTraits__flag1WithoutFlag7(*(undefined4 *)(param_1[1] + 8),iVar5);
                         if (packable == 0) {
                           nextInstB = *(int *)(iVar5 + 8);
                         }

@@ -3950,8 +3950,8 @@ int FUN_00115fa0()
   return;
 }
 
-/* FUN_0011e6ec @ 0x11e6ec (8 bytes) */
-int FUN_0011e6ec(param_1)
+/* Value__lowHalfword @ 0x11e6ec (8 bytes) */
+int Value__lowHalfword(param_1)
   undefined4 param_1;
 {
   return (*(unsigned short *)((unsigned char *)&(param_1) + 2));

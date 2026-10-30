@@ -1218,8 +1218,8 @@ int HwLimits__vslot20_createInstWithOwner(this, owner, compiler)
   return;
 }
 
-/* FUN_0010dd54 @ 0x10dd54 (120 bytes) */
-int FUN_0010dd54(hwLimits)
+/* HwLimits__installDefaults @ 0x10dd54 (120 bytes) */
+int HwLimits__installDefaults(hwLimits)
   int hwLimits;
 {
   undefined *defaultDataA;
@@ -1259,8 +1259,8 @@ int Compiler__getThreadModel(compiler)
   return *(undefined4 *)(*(int *)(compiler + 0x30c) + 100);
 }
 
-/* FUN_0010dde4 @ 0x10dde4 (8 bytes) */
-int FUN_0010dde4()
+/* Vslot__returnConst0x10c @ 0x10dde4 (8 bytes) */
+int Vslot__returnConst0x10c()
 {
   return 0x10c;
 }
@@ -1297,8 +1297,8 @@ int HwLimits__vslot9_failNotSupported()
   return 0;
 }
 
-/* FUN_0010de6c @ 0x10de6c (140 bytes) */
-int FUN_0010de6c(param_1, program, param_3, vertexAttrWord, param_5, insertRef)
+/* Program__emitLoadVertexAttr @ 0x10de6c (140 bytes) */
+int Program__emitLoadVertexAttr(param_1, program, param_3, vertexAttrWord, param_5, insertRef)
   undefined4 param_1;
   int program;
   undefined4 param_3;
@@ -1477,8 +1477,8 @@ int FudoChip__ctor_10e2a0(this, allocContext)
   return;
 }
 
-/* FUN_0010e368 @ 0x10e368 (76 bytes) */
-int FUN_0010e368(regKind)
+/* RegKind__laneSourceCount @ 0x10e368 (76 bytes) */
+int RegKind__laneSourceCount(regKind)
   int regKind;
 {
   int laneSourceCount;
@@ -1495,8 +1495,8 @@ int FUN_0010e368(regKind)
   return laneSourceCount;
 }
 
-/* FUN_0010e3b4 @ 0x10e3b4 (88 bytes) */
-int FUN_0010e3b4(valueTable, position)
+/* Array__firstIndexOfEntry @ 0x10e3b4 (88 bytes) */
+int Array__firstIndexOfEntry(valueTable, position)
   int valueTable;
   int position;
 {
@@ -1524,8 +1524,8 @@ int FUN_0010e3b4(valueTable, position)
   return -1;
 }
 
-/* FUN_0010e40c @ 0x10e40c (84 bytes) */
-int FUN_0010e40c(kind, value)
+/* Lane__remapValue @ 0x10e40c (84 bytes) */
+int Lane__remapValue(kind, value)
   int kind;
   int value;
 {
@@ -1550,8 +1550,8 @@ int FUN_0010e40c(kind, value)
   return 2;
 }
 
-/* FUN_0010e460 @ 0x10e460 (140 bytes) */
-int FUN_0010e460(entryA, entryB, laneMapOut)
+/* PackEntry__computeLaneMap @ 0x10e460 (140 bytes) */
+int PackEntry__computeLaneMap(entryA, entryB, laneMapOut)
   int *entryA;
   int *entryB;
   int laneMapOut;
@@ -1591,8 +1591,8 @@ int FUN_0010e460(entryA, entryB, laneMapOut)
   return 0;
 }
 
-/* FUN_0010e4ec @ 0x10e4ec (68 bytes) */
-int FUN_0010e4ec(inst, inst2)
+/* Compare__ascendingByWrittenComponents @ 0x10e4ec (68 bytes) */
+int Compare__ascendingByWrittenComponents(inst, inst2)
   undefined4 inst;
   undefined4 inst2;
 {
@@ -1604,8 +1604,8 @@ int FUN_0010e4ec(inst, inst2)
   return countWrittenComponentsResult < countWrittenComponentsResult2;
 }
 
-/* FUN_0010e530 @ 0x10e530 (44 bytes) */
-int FUN_0010e530(mode, value)
+/* Index__scaleForMode @ 0x10e530 (44 bytes) */
+int Index__scaleForMode(mode, value)
   int mode;
   int value;
 {
@@ -1618,8 +1618,8 @@ int FUN_0010e530(mode, value)
   return value * 2 + 1;
 }
 
-/* FUN_0010e55c @ 0x10e55c (16 bytes) */
-int FUN_0010e55c(param_1, param_2, param_3, param_4)
+/* Vslot__outZeroReturnZero @ 0x10e55c (16 bytes) */
+int Vslot__outZeroReturnZero(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1644,7 +1644,7 @@ int FUN_0010e56c(backend, program)
     inst = *(int *)(inst + 0x98);
     for (nextInstLink = *(int *)(inst + 8); nextInstLink != 0; nextInstLink = *(int *)(nextInstLink + 8)) {
       if (((*(uint *)(inst + 0x14) & 1) != 0) && (*(int *)(*(int *)(inst + 0x88) + 8) == 0xa4)) {
-        while (nextInstLink = FUN_00130478(program,nextHwRegister), nextInstLink == 0) {
+        while (nextInstLink = RegAlloc__testBit42c(program,nextHwRegister), nextInstLink == 0) {
           nextHwRegister = nextHwRegister + 1;
         }
         Program__markHwRegUsed(program,nextHwRegister);
@@ -1658,8 +1658,8 @@ int FUN_0010e56c(backend, program)
   return;
 }
 
-/* FUN_0010e634 @ 0x10e634 (92 bytes) */
-int FUN_0010e634(outputInst)
+/* IRInst__query68AndWord4fNotIn6_7 @ 0x10e634 (92 bytes) */
+int IRInst__query68AndWord4fNotIn6_7(outputInst)
   int *outputInst;
 {
   int iVar1;
@@ -1672,8 +1672,8 @@ int FUN_0010e634(outputInst)
   return uVar2;
 }
 
-/* FUN_0010e690 @ 0x10e690 (88 bytes) */
-int FUN_0010e690(inst)
+/* IRInst__query68AndWord4fIs18 @ 0x10e690 (88 bytes) */
+int IRInst__query68AndWord4fIs18(inst)
   int *inst;
 {
   int query68;
@@ -1686,8 +1686,8 @@ int FUN_0010e690(inst)
   return result;
 }
 
-/* FUN_0010e6e8 @ 0x10e6e8 (92 bytes) */
-int FUN_0010e6e8(inst)
+/* IRInst__query68AndWord4fIn16_17 @ 0x10e6e8 (92 bytes) */
+int IRInst__query68AndWord4fIn16_17(inst)
   int *inst;
 {
   int query68;
@@ -1700,8 +1700,8 @@ int FUN_0010e6e8(inst)
   return result;
 }
 
-/* FUN_0010e744 @ 0x10e744 (116 bytes) */
-int FUN_0010e744(inst)
+/* IRInst__query68AndWord4fNotMasked @ 0x10e744 (116 bytes) */
+int IRInst__query68AndWord4fNotMasked(inst)
   int *inst;
 {
   int query68;
@@ -1718,8 +1718,8 @@ int FUN_0010e744(inst)
   return result;
 }
 
-/* FUN_0010e7b8 @ 0x10e7b8 (92 bytes) */
-int FUN_0010e7b8(laneInfo, source)
+/* LaneInfo__ctor_10e7b8 @ 0x10e7b8 (92 bytes) */
+int LaneInfo__ctor_10e7b8(laneInfo, source)
   int *laneInfo;
   int source;
 {
@@ -1728,7 +1728,7 @@ int FUN_0010e7b8(laneInfo, source)
   
   laneInfo[5] = 0;
   *laneInfo = source;
-  laneSourceCount = ((int (*)())FUN_0010e368)(*(undefined4 *)(source + 0x13c));
+  laneSourceCount = ((int (*)())RegKind__laneSourceCount)(*(undefined4 *)(source + 0x13c));
   remainingLanes = 4;
   laneInfo[6] = laneSourceCount;
   do {
@@ -1740,8 +1740,8 @@ int FUN_0010e7b8(laneInfo, source)
   return;
 }
 
-/* FUN_0010e814 @ 0x10e814 (92 bytes) */
-int FUN_0010e814(laneInfo, source)
+/* LaneInfo__ctor_10e814 @ 0x10e814 (92 bytes) */
+int LaneInfo__ctor_10e814(laneInfo, source)
   int *laneInfo;
   int source;
 {
@@ -1750,7 +1750,7 @@ int FUN_0010e814(laneInfo, source)
   
   laneInfo[5] = 0;
   *laneInfo = source;
-  laneSourceCount = ((int (*)())FUN_0010e368)(*(undefined4 *)(source + 0x13c));
+  laneSourceCount = ((int (*)())RegKind__laneSourceCount)(*(undefined4 *)(source + 0x13c));
   remainingLanes = 4;
   laneInfo[6] = laneSourceCount;
   do {
@@ -1771,21 +1771,21 @@ int FUN_0010e870(lhsRef, rhsRef)
   int iVar2;
   
   iVar2 = *rhsRef;
-  lhsKey = ((int (*)())FUN_0010e40c)(*(undefined4 *)(*lhsRef + 0x13c),*(undefined4 *)(*lhsRef + 0x140));
-  iVar2 = ((int (*)())FUN_0010e40c)(*(undefined4 *)(iVar2 + 0x13c),*(undefined4 *)(iVar2 + 0x140));
+  lhsKey = ((int (*)())Lane__remapValue)(*(undefined4 *)(*lhsRef + 0x13c),*(undefined4 *)(*lhsRef + 0x140));
+  iVar2 = ((int (*)())Lane__remapValue)(*(undefined4 *)(iVar2 + 0x13c),*(undefined4 *)(iVar2 + 0x140));
   return iVar2 < lhsKey;
 }
 
-/* FUN_0010e8c4 @ 0x10e8c4 (32 bytes) */
-int FUN_0010e8c4(param_1, param_2)
+/* Compare__descendingByField140 @ 0x10e8c4 (32 bytes) */
+int Compare__descendingByField140(param_1, param_2)
   int *param_1;
   int *param_2;
 {
   return *(int *)(*param_2 + 0x140) < *(int *)(*param_1 + 0x140);
 }
 
-/* FUN_0010e8e4 @ 0x10e8e4 (120 bytes) */
-int FUN_0010e8e4(packEntry, sourceLaneCursor)
+/* PackEntry__assignLaneSources @ 0x10e8e4 (120 bytes) */
+int PackEntry__assignLaneSources(packEntry, sourceLaneCursor)
   undefined4 *packEntry;
   undefined4 *sourceLaneCursor;
 {
@@ -1812,8 +1812,8 @@ int FUN_0010e8e4(packEntry, sourceLaneCursor)
   return;
 }
 
-/* FUN_0010e95c @ 0x10e95c (116 bytes) */
-int FUN_0010e95c(packEntry)
+/* PackEntry__activeLaneCount @ 0x10e95c (116 bytes) */
+int PackEntry__activeLaneCount(packEntry)
   undefined4 *packEntry;
 {
   bool moreLanes;
@@ -1851,8 +1851,8 @@ int FUN_0010e9d0(candidateGroup, laneIndex)
   return 0;
 }
 
-/* FUN_0010ea30 @ 0x10ea30 (164 bytes) */
-int FUN_0010ea30(program)
+/* Program__callBackendFinish @ 0x10ea30 (164 bytes) */
+int Program__callBackendFinish(program)
   int program;
 {
   uint programFlags;
@@ -2169,7 +2169,7 @@ int FUN_0010ef68(psBackend, program, param_3, param_4, param_5, param_6, param_7
         else {
           fixedRegister = isInterpLoad - fixedRegBase;
           Program__markHwRegUsed(program,fixedRegister);
-          FUN_00130bd4(program,fixedRegister);
+          RegAlloc__clearBit430(program,fixedRegister);
           inst[0x25] = fixedRegister;
           inst[0x26] = 0;
           inst[5] = inst[5] | 0x40;
@@ -2200,7 +2200,7 @@ LAB_0010f084:
             for (; regLimitOrScratch = (**(code **)(*psBackend + 0x138))(psBackend,*(undefined4 *)(program + 8)),
                 (int)nextFreeRegister < regLimitOrScratch; nextFreeRegister = nextFreeRegister + 1) {
               regLimitOrScratch = Program__isHwRegAllowed(program,nextFreeRegister);
-              if ((regLimitOrScratch != 0) && (regLimitOrScratch = FUN_00130478(program,nextFreeRegister), regLimitOrScratch != 0)) {
+              if ((regLimitOrScratch != 0) && (regLimitOrScratch = RegAlloc__testBit42c(program,nextFreeRegister), regLimitOrScratch != 0)) {
                 savedNextFreeRegister = nextFreeRegister + 1;
                 assignedRegister = nextFreeRegister;
                 goto LAB_0010f168;
@@ -2461,7 +2461,7 @@ asm(".set FUN_0010ddfc, _HwLimits__vslot8_failNotSupported");
 asm(".globl FUN_0010de34");
 asm(".set FUN_0010de34, _HwLimits__vslot9_failNotSupported");
 asm(".globl FUN_0010de6c");
-asm(".set FUN_0010de6c, _FUN_0010de6c");
+asm(".set FUN_0010de6c, _Program__emitLoadVertexAttr");
 asm(".globl FUN_0010ed4c");
 asm(".set FUN_0010ed4c, _KhanPs__vslot87_assignInterpolatorBindings");
 asm(".globl FUN_0010ef68");

@@ -1897,8 +1897,8 @@ int KhanPs__vslot96_installHardwareTables(this)
   return;
 }
 
-/* FUN_0012aa78 @ 0x12aa78 (104 bytes) */
-int FUN_0012aa78(compiler, unrollCount, loopStart, loopStep, block)
+/* Loop__unrollExceedsLimits @ 0x12aa78 (104 bytes) */
+int Loop__unrollExceedsLimits(compiler, unrollCount, loopStart, loopStep, block)
   int compiler;
   int unrollCount;
   int loopStart;
@@ -1916,8 +1916,8 @@ int FUN_0012aa78(compiler, unrollCount, loopStart, loopStep, block)
   return 1;
 }
 
-/* FUN_0012aae0 @ 0x12aae0 (36 bytes) */
-int FUN_0012aae0(compiler, unrollCount)
+/* Compiler__noteUnrollCount @ 0x12aae0 (36 bytes) */
+int Compiler__noteUnrollCount(compiler, unrollCount)
   int compiler;
   int unrollCount;
 {
@@ -1932,8 +1932,8 @@ int FUN_0012aae0(compiler, unrollCount)
   return;
 }
 
-/* FUN_0012ab04 @ 0x12ab04 (108 bytes) */
-int FUN_0012ab04(inst)
+/* IRInst__hasOperandKindClass1 @ 0x12ab04 (108 bytes) */
+int IRInst__hasOperandKindClass1(inst)
   int *inst;
 {
   int iVar1;
@@ -2053,8 +2053,8 @@ int FUN_0012ae1c(block)
   return block;
 }
 
-/* FUN_0012ae6c @ 0x12ae6c (132 bytes) */
-int FUN_0012ae6c(block, optionResult, armLimitKind, staleArg4, staleArg5, staleArg6, staleArg7)
+/* Block__hasInstWithQuery28 @ 0x12ae6c (132 bytes) */
+int Block__hasInstWithQuery28(block, optionResult, armLimitKind, staleArg4, staleArg5, staleArg6, staleArg7)
   int block;
   undefined4 optionResult;
   undefined4 armLimitKind;
@@ -2207,8 +2207,8 @@ int FUN_0012b140(block)
   } while( true );
 }
 
-/* FUN_0012b248 @ 0x12b248 (144 bytes) */
-int FUN_0012b248(zeroMovInst, block, program)
+/* Program__emitMovFromField8c @ 0x12b248 (144 bytes) */
+int Program__emitMovFromField8c(zeroMovInst, block, program)
   int zeroMovInst;
   undefined4 block;
   int program;
@@ -2231,8 +2231,8 @@ int FUN_0012b248(zeroMovInst, block, program)
   return newVRegId;
 }
 
-/* FUN_0012b2d8 @ 0x12b2d8 (132 bytes) */
-int FUN_0012b2d8(param_1, block, param_3, program)
+/* Program__emitMovFromFieldA4 @ 0x12b2d8 (132 bytes) */
+int Program__emitMovFromFieldA4(param_1, block, param_3, program)
   int param_1;
   undefined4 block;
   undefined4 param_3;

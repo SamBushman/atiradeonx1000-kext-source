@@ -266,8 +266,8 @@ int RegKind__flagBit6(param_1)
   return *(uint *)(&DAT_001ea904 + param_1 * 0x10) >> 6 & 1;
 }
 
-/* FUN_001267b8 @ 0x1267b8 (52 bytes) */
-int FUN_001267b8(param_1)
+/* Table1ea904__hasFlag0x11 @ 0x1267b8 (52 bytes) */
+int Table1ea904__hasFlag0x11(param_1)
   int param_1;
 {
   return -(uint)(*(uint *)(&DAT_001ea904 + param_1 * 0x10) & 0x11) >> 0x1f;
@@ -635,15 +635,15 @@ int ConstKey__lanes4(param_1)
          *(int *)(param_1 + 0x68);
 }
 
-/* FUN_001272b4 @ 0x1272b4 (16 bytes) */
-int FUN_001272b4(param_1)
+/* Object__sumWords4And8 @ 0x1272b4 (16 bytes) */
+int Object__sumWords4And8(param_1)
   int param_1;
 {
   return *(int *)(param_1 + 4) + *(int *)(param_1 + 8);
 }
 
-/* FUN_001272cc @ 0x1272cc (8 bytes) */
-int FUN_001272cc(param_1, param_2)
+/* Object__setWord0 @ 0x1272cc (8 bytes) */
+int Object__setWord0(param_1, param_2)
   undefined4 *param_1;
   undefined4 param_2;
 {
@@ -716,8 +716,8 @@ int FUN_00127324(program, registerFileKind, vregId, kindOut, indexOut)
   return 0;
 }
 
-/* FUN_0012740c @ 0x12740c (100 bytes) */
-int FUN_0012740c(owner)
+/* VRegPool__destroyEntries @ 0x12740c (100 bytes) */
+int VRegPool__destroyEntries(owner)
   int owner;
 {
   /* issue #64 live-repro: same iterator-object split as FUN_0011eaa0 (part_037.c), fixed earlier
@@ -750,7 +750,7 @@ int FUN_00127470(owner)
   uint *hashTable;
   uint loopIndex;
   
-  ((int (*)())FUN_0012740c)(owner);
+  ((int (*)())VRegPool__destroyEntries)(owner);
   hashTable = *(uint **)(owner + 4);
   if (hashTable != (uint *)0x0) {
     bucketCount = *hashTable;
@@ -915,8 +915,8 @@ int keyEqualsThreeWords(keyA, keyB)
   return 0xffffffff;
 }
 
-/* FUN_00127850 @ 0x127850 (128 bytes) */
-int FUN_00127850(owner)
+/* VRegPool__countEntriesWithQuery18 @ 0x127850 (128 bytes) */
+int VRegPool__countEntriesWithQuery18(owner)
   int owner;
 {
   int elementQuery18;
@@ -956,7 +956,7 @@ int FUN_001278d0(owner)
   uint *hashTable;
   uint loopIndex;
   
-  ((int (*)())FUN_0012740c)(owner);
+  ((int (*)())VRegPool__destroyEntries)(owner);
   hashTable = *(uint **)(owner + 4);
   if (hashTable != (uint *)0x0) {
     bucketCount = *hashTable;
@@ -1014,7 +1014,7 @@ int VRegInfo__new_127994(compiler, ownerArg)
   allocation[4] = keyEqualsThreeWords;
   allocation[1] = 1;
   sizeLoopCountdown = 0x20;
-  allocation[5] = FUN_001272b4;
+  allocation[5] = Object__sumWords4And8;
   allocation[6] = arena;
   do {
     hashTableSize = hashTableSize << 1;
