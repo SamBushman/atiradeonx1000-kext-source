@@ -1297,8 +1297,8 @@
 0xe2f8c	76	IRInst__lastSourceKeyEquals	part_021	converted
 0xe2fd8	360	MachineAssembler__vslot34_declareDestinationLanesByClass	part_021	converted
 0xe3140	260	MachineAssembler__visitIfHeaderStatic	part_021	converted
-0xe3244	196	FUN_000e3244	part_021	converted
-0xe3308	196	FUN_000e3308	part_021	converted
+0xe3244	196	EncoderState__destroy_e3244	part_021	converted
+0xe3308	196	EncoderState__destroy_e3308	part_021	converted
 0xe33cc	340	FUN_000e33cc	part_021	converted
 0xe3544	340	FUN_000e3544	part_021	converted
 0xe36bc	652	MachineCodeWriter__encodeProgram	part_021	converted
@@ -1484,7 +1484,7 @@
 0xeec50	1072	FUN_000eec50	part_024	converted
 0xeee4c	492	FUN_000eee4c	part_024	converted
 0xef204	660	Program__splitExports	part_024	converted
-0xef498	860	FUN_000ef498	part_024	converted
+0xef498	860	Program__initAndTranslate	part_024	converted
 0xef8f8	120	Program__appendToVector3c8	part_024	converted
 0xef970	220	Program__removeInst	part_024	converted
 0xefa4c	164	FUN_000efa4c	part_024	converted
@@ -1618,7 +1618,7 @@
 0xfb230	420	Program__loadDefaultConstants	part_026	converted
 0xfb3d4	2560	FUN_000fb3d4	part_026	converted
 0xfd50c	188	Template__pushCallFrame	part_026	converted
-0xfd5c8	408	FUN_000fd5c8	part_026	converted
+0xfd5c8	408	Program__translateILStream	part_026	converted
 0x103d50	40	IROperand__setModifierBits	part_027	converted
 0x103d78	220	floatToFixedSaturate	part_027	converted
 0x103e54	28	constantZeroFloat	part_027	converted

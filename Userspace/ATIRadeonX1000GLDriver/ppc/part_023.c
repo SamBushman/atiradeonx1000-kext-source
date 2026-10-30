@@ -292,45 +292,48 @@ int FUN_000e9cc8(param_1)
 }
 
 /* Block__ctor_e9d68 @ 0xe9d68 (252 bytes) */
-int Block__ctor_e9d68(this, param_2)
+int Block__ctor_e9d68(this, owner)
   undefined4 *this;
-  int param_2;
+  int owner;
 {
-  undefined4 uVar1;
+  undefined4 bitSetIndex;
+  undefined4 ownerField0xc0;
+  undefined4 ownerField0xac;
+  undefined4 ownerField0xc;
   int compiler;
   undefined4 r4AfterCall;
   undefined4 staleArgR5;
   undefined4 staleArgR6;
   undefined4 staleArgR7;
-  undefined4 uVar3;
+  undefined4 ownerField0x110;
   int blockSerial;
-  undefined4 uVar5;
-  undefined4 uVar6;
+  undefined4 ownerField0xdc;
+  undefined4 ownerField0x10c;
   
   this[1] = 0;
   this[2] = 0;
-  uVar1 = *(undefined4 *)(param_2 + 0xc);
+  ownerField0xc = *(undefined4 *)(owner + 0xc);
   *this = &PTR_FUN_001e9b08;
-  this[3] = uVar1;
+  this[3] = ownerField0xc;
   DListNode__init(this + 0x24);
-  compiler = *(int *)(param_2 + 0xa8);
-  uVar1 = *(undefined4 *)(param_2 + 0xac);
+  compiler = *(int *)(owner + 0xa8);
+  ownerField0xac = *(undefined4 *)(owner + 0xac);
   this[0x2a] = compiler;
-  this[0x2b] = uVar1;
+  this[0x2b] = ownerField0xac;
   blockSerial = *(int *)(compiler + 0x32c);
   this[0x2c] = blockSerial;
   *(int *)(compiler + 0x32c) = blockSerial + 1;
-  uVar3 = *(undefined4 *)(param_2 + 0x110);
-  uVar1 = *(undefined4 *)(param_2 + 0xc0);
-  uVar5 = *(undefined4 *)(param_2 + 0xdc);
-  uVar6 = *(undefined4 *)(param_2 + 0x10c);
-  this[0x2e] = *(undefined4 *)(param_2 + 0xb8);
-  this[0x30] = uVar1;
-  this[0x37] = uVar5;
+  ownerField0x110 = *(undefined4 *)(owner + 0x110);
+  ownerField0xc0 = *(undefined4 *)(owner + 0xc0);
+  ownerField0xdc = *(undefined4 *)(owner + 0xdc);
+  ownerField0x10c = *(undefined4 *)(owner + 0x10c);
+  this[0x2e] = *(undefined4 *)(owner + 0xb8);
+  this[0x30] = ownerField0xc0;
+  this[0x37] = ownerField0xdc;
   this[0x3a] = 0x7fffffff;
   this[0x42] = 0;
-  this[0x43] = uVar6;
-  this[0x44] = uVar3;
+  this[0x43] = ownerField0x10c;
+  this[0x44] = ownerField0x110;
   this[0x46] = 0xffffffff;
   this[0x39] = 0x7fffffff;
   this[0x3b] = 0;
@@ -340,8 +343,8 @@ int Block__ctor_e9d68(this, param_2)
   this[0x41] = 0;
   FUN_000e8a08(this);
   Block__createEntryExitInsts(this);
-  uVar1 = Program__allocateBitSetIndex(this[0x2b],r4AfterCall,staleArgR5,staleArgR6,staleArgR7,uVar3,uVar5);
-  this[0x2d] = uVar1;
+  bitSetIndex = Program__allocateBitSetIndex(this[0x2b],r4AfterCall,staleArgR5,staleArgR6,staleArgR7,ownerField0x110,ownerField0xdc);
+  this[0x2d] = bitSetIndex;
   return;
 }
 
@@ -360,45 +363,48 @@ int Block__clone(this)
 }
 
 /* Block__ctor_e9f00 @ 0xe9f00 (252 bytes) */
-int Block__ctor_e9f00(this, param_2)
+int Block__ctor_e9f00(this, owner)
   undefined4 *this;
-  int param_2;
+  int owner;
 {
-  undefined4 uVar1;
+  undefined4 bitSetIndex;
+  undefined4 ownerField0xc0;
+  undefined4 ownerField0xac;
+  undefined4 ownerField0xc;
   int compiler;
   undefined4 r4AfterCall;
   undefined4 staleArgR5;
   undefined4 staleArgR6;
   undefined4 staleArgR7;
-  undefined4 uVar3;
+  undefined4 ownerField0x110;
   int blockSerial;
-  undefined4 uVar5;
-  undefined4 uVar6;
+  undefined4 ownerField0xdc;
+  undefined4 ownerField0x10c;
   
   this[1] = 0;
   this[2] = 0;
-  uVar1 = *(undefined4 *)(param_2 + 0xc);
+  ownerField0xc = *(undefined4 *)(owner + 0xc);
   *this = &PTR_FUN_001e9b08;
-  this[3] = uVar1;
+  this[3] = ownerField0xc;
   DListNode__init(this + 0x24);
-  compiler = *(int *)(param_2 + 0xa8);
-  uVar1 = *(undefined4 *)(param_2 + 0xac);
+  compiler = *(int *)(owner + 0xa8);
+  ownerField0xac = *(undefined4 *)(owner + 0xac);
   this[0x2a] = compiler;
-  this[0x2b] = uVar1;
+  this[0x2b] = ownerField0xac;
   blockSerial = *(int *)(compiler + 0x32c);
   this[0x2c] = blockSerial;
   *(int *)(compiler + 0x32c) = blockSerial + 1;
-  uVar3 = *(undefined4 *)(param_2 + 0x110);
-  uVar1 = *(undefined4 *)(param_2 + 0xc0);
-  uVar5 = *(undefined4 *)(param_2 + 0xdc);
-  uVar6 = *(undefined4 *)(param_2 + 0x10c);
-  this[0x2e] = *(undefined4 *)(param_2 + 0xb8);
-  this[0x30] = uVar1;
-  this[0x37] = uVar5;
+  ownerField0x110 = *(undefined4 *)(owner + 0x110);
+  ownerField0xc0 = *(undefined4 *)(owner + 0xc0);
+  ownerField0xdc = *(undefined4 *)(owner + 0xdc);
+  ownerField0x10c = *(undefined4 *)(owner + 0x10c);
+  this[0x2e] = *(undefined4 *)(owner + 0xb8);
+  this[0x30] = ownerField0xc0;
+  this[0x37] = ownerField0xdc;
   this[0x3a] = 0x7fffffff;
   this[0x42] = 0;
-  this[0x43] = uVar6;
-  this[0x44] = uVar3;
+  this[0x43] = ownerField0x10c;
+  this[0x44] = ownerField0x110;
   this[0x46] = 0xffffffff;
   this[0x39] = 0x7fffffff;
   this[0x3b] = 0;
@@ -408,8 +414,8 @@ int Block__ctor_e9f00(this, param_2)
   this[0x41] = 0;
   FUN_000e8a08(this);
   Block__createEntryExitInsts(this);
-  uVar1 = Program__allocateBitSetIndex(this[0x2b],r4AfterCall,staleArgR5,staleArgR6,staleArgR7,uVar3,uVar5);
-  this[0x2d] = uVar1;
+  bitSetIndex = Program__allocateBitSetIndex(this[0x2b],r4AfterCall,staleArgR5,staleArgR6,staleArgR7,ownerField0x110,ownerField0xdc);
+  this[0x2d] = bitSetIndex;
   return;
 }
 

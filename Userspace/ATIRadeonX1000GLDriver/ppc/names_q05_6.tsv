@@ -1858,3 +1858,165 @@ local	FUN_000ed89c	param_1	program	INFERRED	program whose blocks (+900) are walk
 local	FUN_000ed89c	local_58	loadBaseKey	INFERRED	first output of FUN_00104364: key compared with the group key
 local	FUN_000ed89c	local_54	loadOffset	INFERRED	second output of FUN_00104364: offset of the load
 local	FUN_000ed89c	local_50	loadSize	INFERRED	third output of FUN_00104364: size of the load
+use	Block__ctor_e9f00	uVar1	ownerField0xc	INFERRED	word at owner+0xc copied to this[3]	^\s*uVar1\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0xc\);$	+1
+use	Block__ctor_e9f00	uVar1	ownerField0xc	INFERRED	word at owner+0xc copied to this[3]	^\s*param_1\[3\]\ =\ uVar1;$	+1
+use	Block__ctor_e9f00	uVar1	ownerField0xac	INFERRED	word at owner+0xac copied to this[0x2b]	^\s*uVar1\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0xac\);$	+1
+use	Block__ctor_e9f00	uVar1	ownerField0xac	INFERRED	word at owner+0xac copied to this[0x2b]	^\s*param_1\[0x2b\]\ =\ uVar1;$	+1
+use	Block__ctor_e9f00	uVar1	ownerField0xc0	INFERRED	word at owner+0xc0 copied to this[0x30]	^\s*uVar1\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0xc0\);$	+1
+use	Block__ctor_e9f00	uVar1	ownerField0xc0	INFERRED	word at owner+0xc0 copied to this[0x30]	^\s*param_1\[0x30\]\ =\ uVar1;$	+1
+use	Block__ctor_e9f00	uVar1	bitSetIndex	INFERRED	Program__allocateBitSetIndex result stored at this[0x2d]	^\s*uVar1\ =\ FUN_000e8124\(param_1\[0x2b\],extraout_r4,in_r5,in_r6,in_r7,uVar3,uVar5\);$	+2
+use	Block__ctor_e9f00	uVar3	ownerField0x110	INFERRED	word at owner+0x110 copied to this[0x44]	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x110\);$	+1
+use	Block__ctor_e9f00	uVar3	ownerField0x110	INFERRED	word at owner+0x110 copied to this[0x44]	^\s*param_1\[0x44\]\ =\ uVar3;$	+1
+use	Block__ctor_e9f00	uVar3	ownerField0x110	INFERRED	word at owner+0x110 copied to this[0x44]	^\s*uVar1\ =\ FUN_000e8124\(param_1\[0x2b\],extraout_r4,in_r5,in_r6,in_r7,uVar3,uVar5\);$	+1
+use	Block__ctor_e9f00	uVar5	ownerField0xdc	INFERRED	word at owner+0xdc copied to this[0x37]	^\s*uVar5\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0xdc\);$	+1
+use	Block__ctor_e9f00	uVar5	ownerField0xdc	INFERRED	word at owner+0xdc copied to this[0x37]	^\s*param_1\[0x37\]\ =\ uVar5;$	+1
+use	Block__ctor_e9f00	uVar5	ownerField0xdc	INFERRED	word at owner+0xdc copied to this[0x37]	^\s*uVar1\ =\ FUN_000e8124\(param_1\[0x2b\],extraout_r4,in_r5,in_r6,in_r7,uVar3,uVar5\);$	+1
+use	Block__ctor_e9f00	uVar6	ownerField0x10c	INFERRED	word at owner+0x10c copied to this[0x43]	^\s*uVar6\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x10c\);$	+1
+use	Block__ctor_e9f00	uVar6	ownerField0x10c	INFERRED	word at owner+0x10c copied to this[0x43]	^\s*param_1\[0x43\]\ =\ uVar6;$	+1
+use	IRInst__sourceMatchesConstant	iVar2	isConstantSource	INFERRED	source virtual register vtable +0x48 query: nonzero for a constant register	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x48\)\)\(a0\);$	+2
+use	IRInst__sourceMatchesConstant	a0	sourceVReg	INFERRED	virtual register that is the source of the operand	^\s*a0\ =\ \(int\ \*\)FUN_00105594\(param_1,param_2\);$	+2
+use	IRInst__sourceMatchesConstant	a0	sourceVReg	INFERRED	virtual register that is the source of the operand	^\s*if\ \(\(\(\*pcVar5\ ==\ '\\0'\)\ \&\&\ \(uVar1\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)local_38\ \+\ iVar4\),\ uVar1\ <\ 4\)\)\ \&\&$	+3
+use	IRInst__sourceMatchesConstant	uVar3	result	INFERRED	return value: 1 when every lane that must match equals the wanted constant	^\s*uVar3\ =\ 0;$	+1
+use	IRInst__sourceMatchesConstant	uVar3	result	INFERRED	return value: 1 when every lane that must match equals the wanted constant	^\s*uVar3\ =\ 1;$	+1
+use	IRInst__sourceMatchesConstant	uVar3	result	INFERRED	return value: 1 when every lane that must match equals the wanted constant	^\s*return\ uVar3;$	+1
+use	IRInst__sourceMatchesConstant	uVar1	laneComponent	INFERRED	component selected by the lane of the operand select word	^\s*uint\ uVar1;$	+1
+use	IRInst__sourceMatchesConstant	uVar1	laneComponent	INFERRED	component selected by the lane of the operand select word	^\s*if\ \(\(\(\*pcVar5\ ==\ '\\0'\)\ \&\&\ \(uVar1\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)local_38\ \+\ iVar4\),\ uVar1\ <\ 4\)\)\ \&\&$	+3
+use	IRInst__sourceMatchesConstant	pcVar5	skipMaskCursor	INFERRED	cursor over the four lane skip bytes (non-zero lanes are not compared)	^\s*pcVar5\ =\ \(char\ \*\)\&\(\*\(unsigned\ int\ \*\)\(\(unsigned\ char\ \*\)ghidra_home\ \+\ 8\)\);$	+1
+use	IRInst__sourceMatchesConstant	pcVar5	skipMaskCursor	INFERRED	cursor over the four lane skip bytes (non-zero lanes are not compared)	^\s*if\ \(\(\(\*pcVar5\ ==\ '\\0'\)\ \&\&\ \(uVar1\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)local_38\ \+\ iVar4\),\ uVar1\ <\ 4\)\)\ \&\&$	+3
+use	IRInst__sourceMatchesConstant	pcVar5	skipMaskCursor	INFERRED	cursor over the four lane skip bytes (non-zero lanes are not compared)	^\s*pcVar5\ =\ pcVar5\ \+\ 1;$	+1
+use	Block__popDefinitions	iVar1	definitionList	INFERRED	vector at block+0xc4 of virtual registers defined in the block	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xc4\);$	+2
+use	Block__popDefinitions	iVar1	definitionList	INFERRED	vector at block+0xc4 of virtual registers defined in the block	^\s*puVar3\ =\ \(undefined4\ \*\)\(\(uVar2\ \-\ 1\)\ \*\ 4\ \+\ \*\(int\ \*\)\(iVar1\ \+\ 8\)\);$	+1
+use	Block__popDefinitions	iVar1	definitionList	INFERRED	vector at block+0xc4 of virtual registers defined in the block	^\s*FUN_00194208\(iVar1,uVar2\ \-\ 1\);$	+1
+use	Block__popDefinitions	iVar1	definitionList	INFERRED	vector at block+0xc4 of virtual registers defined in the block	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xc4\);$@2	+2
+use	Block__popDefinitions	uVar2	definitionCount	INFERRED	element count of the definition list	^\s*uVar2\ =\ \*\(uint\ \*\)\(iVar1\ \+\ 4\);$	+2
+use	Block__popDefinitions	uVar2	definitionCount	INFERRED	element count of the definition list	^\s*if\ \(uVar2\ \-\ 1\ <\ uVar2\)\ \{$	+2
+use	Block__popDefinitions	uVar2	definitionCount	INFERRED	element count of the definition list	^\s*FUN_00194208\(iVar1,uVar2\ \-\ 1\);$	+1
+use	Block__popDefinitions	uVar2	definitionCount	INFERRED	element count of the definition list	^\s*uVar2\ =\ \*\(uint\ \*\)\(iVar1\ \+\ 4\);$@2	+1
+use	Block__popDefinitions	puVar3	topSlot	INFERRED	pointer to the last element, null when empty	^\s*puVar3\ =\ \(undefined4\ \*\)0x0;$	+1
+use	Block__popDefinitions	puVar3	topSlot	INFERRED	pointer to the last element, null when empty	^\s*puVar3\ =\ \(undefined4\ \*\)\(\(uVar2\ \-\ 1\)\ \*\ 4\ \+\ \*\(int\ \*\)\(iVar1\ \+\ 8\)\);$	+1
+use	Block__popDefinitions	puVar3	topSlot	INFERRED	pointer to the last element, null when empty	^\s*uVar4\ =\ \*puVar3;$	+1
+use	Block__popDefinitions	uVar4	topVReg	INFERRED	virtual register popped and passed to VReg__popDefinition	^\s*uVar4\ =\ \*puVar3;$	+1
+use	Block__popDefinitions	uVar4	topVReg	INFERRED	virtual register popped and passed to VReg__popDefinition	^\s*FUN_00122ebc\(uVar4\);$	+1
+use	IRInst__createMovForDest	iVar1	destRegisterNumber	INFERRED	inst+0x94: register number copied to the new mov	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x94\);$	+1
+use	IRInst__createMovForDest	iVar1	destRegisterNumber	INFERRED	inst+0x94: register number copied to the new mov	^\s*piVar3\[0x25\]\ =\ iVar1;$	+1
+use	IRInst__createMovForDest	uVar2	flagWord	INFERRED	flag word of the new mov with bit 0x40 copied from inst, then bit 0x20	^\s*uVar2\ =\ piVar3\[5\]\ \&\ 0xffffffbf;$	+2
+use	IRInst__createMovForDest	uVar2	flagWord	INFERRED	flag word of the new mov with bit 0x40 copied from inst, then bit 0x20	^\s*uVar2\ =\ piVar3\[5\]\ \|\ 0x40;$	+2
+use	IRInst__createMovForDest	uVar2	flagWord	INFERRED	flag word of the new mov with bit 0x40 copied from inst, then bit 0x20	^\s*piVar3\[5\]\ =\ uVar2\ \&\ 0xffffffdf;$	+1
+use	IRInst__createMovForDest	uVar2	flagWord	INFERRED	flag word of the new mov with bit 0x40 copied from inst, then bit 0x20	^\s*piVar3\[5\]\ =\ uVar2\ \|\ 0x20;$	+1
+use	IRInst__createMovForDest	uVar4	mergedSelect	INFERRED	select word of the source's destination, merged with the written lanes of its source chain	^\s*uVar4\ =\ \*\(undefined4\ \*\)\(iVar1\ \+\ 0x10\);$	+1
+use	IRInst__createMovForDest	uVar4	mergedSelect	INFERRED	select word of the source's destination, merged with the written lanes of its source chain	^\s*FUN_000f2f84\(\&local_28,uVar4,\*\(undefined4\ \*\)\(iVar1\ \+\ 0x10\)\);$	+2
+use	IRInst__createMovForDest	uVar4	mergedSelect	INFERRED	select word of the source's destination, merged with the written lanes of its source chain	^\s*FUN_000f2f28\(local_24,uVar4,local_38\[0\]\);$	+1
+use	Block__ctor_e9f00	uVar1	ownerField0xc	INFERRED	word at owner+0xc copied to this[3]	^\s*uVar1\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0xc\);$	+1
+use	Block__ctor_e9f00	uVar1	ownerField0xc	INFERRED	word at owner+0xc copied to this[3]	^\s*param_1\[3\]\ =\ uVar1;$	+1
+use	Block__ctor_e9f00	uVar1	ownerField0xac	INFERRED	word at owner+0xac copied to this[0x2b]	^\s*uVar1\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0xac\);$	+1
+use	Block__ctor_e9f00	uVar1	ownerField0xac	INFERRED	word at owner+0xac copied to this[0x2b]	^\s*param_1\[0x2b\]\ =\ uVar1;$	+1
+use	Block__ctor_e9f00	uVar1	ownerField0xc0	INFERRED	word at owner+0xc0 copied to this[0x30]	^\s*uVar1\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0xc0\);$	+1
+use	Block__ctor_e9f00	uVar1	ownerField0xc0	INFERRED	word at owner+0xc0 copied to this[0x30]	^\s*param_1\[0x30\]\ =\ uVar1;$	+1
+use	Block__ctor_e9f00	uVar1	bitSetIndex	INFERRED	Program__allocateBitSetIndex result stored at this[0x2d]	^\s*uVar1\ =\ FUN_000e8124\(param_1\[0x2b\],extraout_r4,in_r5,in_r6,in_r7,uVar3,uVar5\);$	+2
+use	Block__ctor_e9f00	uVar3	ownerField0x110	INFERRED	word at owner+0x110 copied to this[0x44]	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x110\);$	+1
+use	Block__ctor_e9f00	uVar3	ownerField0x110	INFERRED	word at owner+0x110 copied to this[0x44]	^\s*param_1\[0x44\]\ =\ uVar3;$	+1
+use	Block__ctor_e9f00	uVar3	ownerField0x110	INFERRED	word at owner+0x110 copied to this[0x44]	^\s*uVar1\ =\ FUN_000e8124\(param_1\[0x2b\],extraout_r4,in_r5,in_r6,in_r7,uVar3,uVar5\);$	+1
+use	Block__ctor_e9f00	uVar5	ownerField0xdc	INFERRED	word at owner+0xdc copied to this[0x37]	^\s*uVar5\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0xdc\);$	+1
+use	Block__ctor_e9f00	uVar5	ownerField0xdc	INFERRED	word at owner+0xdc copied to this[0x37]	^\s*param_1\[0x37\]\ =\ uVar5;$	+1
+use	Block__ctor_e9f00	uVar5	ownerField0xdc	INFERRED	word at owner+0xdc copied to this[0x37]	^\s*uVar1\ =\ FUN_000e8124\(param_1\[0x2b\],extraout_r4,in_r5,in_r6,in_r7,uVar3,uVar5\);$	+1
+use	Block__ctor_e9f00	uVar6	ownerField0x10c	INFERRED	word at owner+0x10c copied to this[0x43]	^\s*uVar6\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x10c\);$	+1
+use	Block__ctor_e9f00	uVar6	ownerField0x10c	INFERRED	word at owner+0x10c copied to this[0x43]	^\s*param_1\[0x43\]\ =\ uVar6;$	+1
+use	IRInst__sourceMatchesConstant	iVar2	isConstantSource	INFERRED	source virtual register vtable +0x48 query: nonzero for a constant register	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x48\)\)\(a0\);$	+2
+use	IRInst__sourceMatchesConstant	a0	sourceVReg	INFERRED	virtual register that is the source of the operand	^\s*a0\ =\ \(int\ \*\)FUN_00105594\(param_1,param_2\);$	+2
+use	IRInst__sourceMatchesConstant	a0	sourceVReg	INFERRED	virtual register that is the source of the operand	^\s*if\ \(\(\(\*pcVar5\ ==\ '\\0'\)\ \&\&\ \(uVar1\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)local_38\ \+\ iVar4\),\ uVar1\ <\ 4\)\)\ \&\&$	+3
+use	IRInst__sourceMatchesConstant	uVar3	result	INFERRED	return value: 1 when every lane that must match equals the wanted constant	^\s*uVar3\ =\ 0;$	+1
+use	IRInst__sourceMatchesConstant	uVar3	result	INFERRED	return value: 1 when every lane that must match equals the wanted constant	^\s*uVar3\ =\ 1;$	+1
+use	IRInst__sourceMatchesConstant	uVar3	result	INFERRED	return value: 1 when every lane that must match equals the wanted constant	^\s*return\ uVar3;$	+1
+use	IRInst__sourceMatchesConstant	uVar1	laneComponent	INFERRED	component selected by the lane of the operand select word	^\s*uint\ uVar1;$	+1
+use	IRInst__sourceMatchesConstant	uVar1	laneComponent	INFERRED	component selected by the lane of the operand select word	^\s*if\ \(\(\(\*pcVar5\ ==\ '\\0'\)\ \&\&\ \(uVar1\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)local_38\ \+\ iVar4\),\ uVar1\ <\ 4\)\)\ \&\&$	+3
+use	IRInst__sourceMatchesConstant	pcVar5	skipMaskCursor	INFERRED	cursor over the four lane skip bytes (non-zero lanes are not compared)	^\s*pcVar5\ =\ \(char\ \*\)\&\(\*\(unsigned\ int\ \*\)\(\(unsigned\ char\ \*\)ghidra_home\ \+\ 8\)\);$	+1
+use	IRInst__sourceMatchesConstant	pcVar5	skipMaskCursor	INFERRED	cursor over the four lane skip bytes (non-zero lanes are not compared)	^\s*if\ \(\(\(\*pcVar5\ ==\ '\\0'\)\ \&\&\ \(uVar1\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)local_38\ \+\ iVar4\),\ uVar1\ <\ 4\)\)\ \&\&$	+3
+use	IRInst__sourceMatchesConstant	pcVar5	skipMaskCursor	INFERRED	cursor over the four lane skip bytes (non-zero lanes are not compared)	^\s*pcVar5\ =\ pcVar5\ \+\ 1;$	+1
+use	Block__popDefinitions	iVar1	definitionList	INFERRED	vector at block+0xc4 of virtual registers defined in the block	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xc4\);$	+2
+use	Block__popDefinitions	iVar1	definitionList	INFERRED	vector at block+0xc4 of virtual registers defined in the block	^\s*puVar3\ =\ \(undefined4\ \*\)\(\(uVar2\ \-\ 1\)\ \*\ 4\ \+\ \*\(int\ \*\)\(iVar1\ \+\ 8\)\);$	+1
+use	Block__popDefinitions	iVar1	definitionList	INFERRED	vector at block+0xc4 of virtual registers defined in the block	^\s*FUN_00194208\(iVar1,uVar2\ \-\ 1\);$	+1
+use	Block__popDefinitions	iVar1	definitionList	INFERRED	vector at block+0xc4 of virtual registers defined in the block	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xc4\);$@2	+2
+use	Block__popDefinitions	uVar2	definitionCount	INFERRED	element count of the definition list	^\s*uVar2\ =\ \*\(uint\ \*\)\(iVar1\ \+\ 4\);$	+2
+use	Block__popDefinitions	uVar2	definitionCount	INFERRED	element count of the definition list	^\s*if\ \(uVar2\ \-\ 1\ <\ uVar2\)\ \{$	+2
+use	Block__popDefinitions	uVar2	definitionCount	INFERRED	element count of the definition list	^\s*FUN_00194208\(iVar1,uVar2\ \-\ 1\);$	+1
+use	Block__popDefinitions	uVar2	definitionCount	INFERRED	element count of the definition list	^\s*uVar2\ =\ \*\(uint\ \*\)\(iVar1\ \+\ 4\);$@2	+1
+use	Block__popDefinitions	puVar3	topSlot	INFERRED	pointer to the last element, null when empty	^\s*puVar3\ =\ \(undefined4\ \*\)0x0;$	+1
+use	Block__popDefinitions	puVar3	topSlot	INFERRED	pointer to the last element, null when empty	^\s*puVar3\ =\ \(undefined4\ \*\)\(\(uVar2\ \-\ 1\)\ \*\ 4\ \+\ \*\(int\ \*\)\(iVar1\ \+\ 8\)\);$	+1
+use	Block__popDefinitions	puVar3	topSlot	INFERRED	pointer to the last element, null when empty	^\s*uVar4\ =\ \*puVar3;$	+1
+use	Block__popDefinitions	uVar4	topVReg	INFERRED	virtual register popped and passed to VReg__popDefinition	^\s*uVar4\ =\ \*puVar3;$	+1
+use	Block__popDefinitions	uVar4	topVReg	INFERRED	virtual register popped and passed to VReg__popDefinition	^\s*FUN_00122ebc\(uVar4\);$	+1
+use	IRInst__createMovForDest	iVar1	destRegisterNumber	INFERRED	inst+0x94: register number copied to the new mov	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x94\);$	+1
+use	IRInst__createMovForDest	iVar1	destRegisterNumber	INFERRED	inst+0x94: register number copied to the new mov	^\s*piVar3\[0x25\]\ =\ iVar1;$	+1
+use	IRInst__createMovForDest	uVar2	flagWord	INFERRED	flag word of the new mov with bit 0x40 copied from inst, then bit 0x20	^\s*uVar2\ =\ piVar3\[5\]\ \&\ 0xffffffbf;$	+2
+use	IRInst__createMovForDest	uVar2	flagWord	INFERRED	flag word of the new mov with bit 0x40 copied from inst, then bit 0x20	^\s*uVar2\ =\ piVar3\[5\]\ \|\ 0x40;$	+2
+use	IRInst__createMovForDest	uVar2	flagWord	INFERRED	flag word of the new mov with bit 0x40 copied from inst, then bit 0x20	^\s*piVar3\[5\]\ =\ uVar2\ \&\ 0xffffffdf;$	+1
+use	IRInst__createMovForDest	uVar2	flagWord	INFERRED	flag word of the new mov with bit 0x40 copied from inst, then bit 0x20	^\s*piVar3\[5\]\ =\ uVar2\ \|\ 0x20;$	+1
+use	IRInst__createMovForDest	uVar4	mergedSelect	INFERRED	select word of the source's destination, merged with the written lanes of its source chain	^\s*uVar4\ =\ \*\(undefined4\ \*\)\(iVar1\ \+\ 0x10\);$	+1
+use	IRInst__createMovForDest	uVar4	mergedSelect	INFERRED	select word of the source's destination, merged with the written lanes of its source chain	^\s*FUN_000f2f84\(\&local_28,uVar4,\*\(undefined4\ \*\)\(iVar1\ \+\ 0x10\)\);$	+2
+use	IRInst__createMovForDest	uVar4	mergedSelect	INFERRED	select word of the source's destination, merged with the written lanes of its source chain	^\s*FUN_000f2f28\(local_24,uVar4,local_38\[0\]\);$	+1
+use	FUN_000e3308	a0	sinkObject	INFERRED	sink object at encoder+0x20, destroyed through vtable +4	^\s*a0\ =\ \*\(int\ \*\*\)\(param_1\ \+\ 0x20\);$	+3
+use	FUN_000e3308	iVar1	arrayAlloc28	INFERRED	arena array at encoder+0x28	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x28\);$	+4
+use	FUN_000e3308	iVar1	arrayAlloc2c	INFERRED	arena array at encoder+0x2c	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x2c\);$	+4
+use	FUN_000e3308	iVar1	arrayAlloc24	INFERRED	arena array at encoder+0x24	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x24\);$	+4
+use	FUN_000e3244	a0	sinkObject	INFERRED	sink object at encoder+0x20, destroyed through vtable +4	^\s*a0\ =\ \*\(int\ \*\*\)\(param_1\ \+\ 0x20\);$	+3
+use	FUN_000e3244	iVar1	arrayAlloc28	INFERRED	arena array at encoder+0x28	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x28\);$	+4
+use	FUN_000e3244	iVar1	arrayAlloc2c	INFERRED	arena array at encoder+0x2c	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x2c\);$	+4
+use	FUN_000e3244	iVar1	arrayAlloc24	INFERRED	arena array at encoder+0x24	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x24\);$	+4
+use	FUN_000ef498	iVar7	programInst	INFERRED	instruction of the program instruction vector	^\s*iVar7\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar2\ \+\ 8\)\ \+\ iVar3\);$	+3
+use	FUN_000ef498	iVar2	shaderKind2	INFERRED	0 fragment-with-flag1, 1 flag 0x2000, else 2: shader kind passed to hardware hook +0x14	^\s*iVar2\ =\ 2;$	+1
+use	FUN_000ef498	iVar2	shaderKind2	INFERRED	0 fragment-with-flag1, 1 flag 0x2000, else 2: shader kind passed to hardware hook +0x14	^\s*iVar2\ =\ 1;$@2	+1
+use	FUN_000ef498	iVar2	shaderKind2	INFERRED	0 fragment-with-flag1, 1 flag 0x2000, else 2: shader kind passed to hardware hook +0x14	^\s*iVar2\ =\ 0;$	+1
+use	FUN_000ef498	iVar2	shaderKind2	INFERRED	0 fragment-with-flag1, 1 flag 0x2000, else 2: shader kind passed to hardware hook +0x14	^\s*if\ \(iVar2\ ==\ 1\)\ \{$	+1
+use	FUN_000ef498	iVar2	shaderKind2	INFERRED	0 fragment-with-flag1, 1 flag 0x2000, else 2: shader kind passed to hardware hook +0x14	^\s*else\ if\ \(\(iVar2\ ==\ 2\)\ \|\|\ \(iVar2\ ==\ 0\)\)\ \{$	+1
+use	FUN_000ef498	iVar2	blockNextLink	INFERRED	next link of the block list node being walked	^\s*iVar2\ =\ piVar8\[2\];$	+2
+use	FUN_000ef498	iVar2	blockNextLink	INFERRED	next link of the block list node being walked	^\s*iVar2\ =\ piVar8\[2\];$@2	+1
+use	FUN_000ef498	iVar2	programInstVector	INFERRED	program+0x3c4 vector of instructions	^\s*iVar2\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x3c4\);$	+1
+use	FUN_000ef498	iVar2	programInstVector	INFERRED	program+0x3c4 vector of instructions	^\s*for\ \(uVar11\ =\ 1;\ uVar11\ <=\ \*\(uint\ \*\)\(iVar2\ \+\ 4\);\ uVar11\ =\ uVar11\ \+\ 1\)\ \{$	+2
+use	FUN_000ef498	iVar2	programInstVector	INFERRED	program+0x3c4 vector of instructions	^\s*iVar2\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x3c4\);$@2	+1
+use	FUN_000ef498	pcVar6	blockLabel	INFERRED	label string passed to the block vtable +0x48 call ('non_local_set')	^\s*pcVar6\ =\ "non_local_set";$	+1
+use	FUN_000ef498	pcVar6	blockLabel	INFERRED	label string passed to the block vtable +0x48 call ('non_local_set')	^\s*\(\*\*\(code\ \*\*\)\(\*piVar8\ \+\ 0x48\)\)\(piVar8,pcVar6\);$	+1
+use	FUN_000ef498	pcVar6	blockLabel	INFERRED	label string passed to the block vtable +0x48 call ('non_local_set')	^\s*pcVar6\ =\ extraout_r4;$	+1
+use	Block__ctor_e9d68	uVar1	ownerField0xc	INFERRED	word at owner+0xc copied to this[3]	^\s*uVar1\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0xc\);$	+1
+use	Block__ctor_e9d68	uVar1	ownerField0xc	INFERRED	word at owner+0xc copied to this[3]	^\s*param_1\[3\]\ =\ uVar1;$	+1
+use	Block__ctor_e9d68	uVar1	ownerField0xac	INFERRED	word at owner+0xac copied to this[0x2b]	^\s*uVar1\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0xac\);$	+1
+use	Block__ctor_e9d68	uVar1	ownerField0xac	INFERRED	word at owner+0xac copied to this[0x2b]	^\s*param_1\[0x2b\]\ =\ uVar1;$	+1
+use	Block__ctor_e9d68	uVar1	ownerField0xc0	INFERRED	word at owner+0xc0 copied to this[0x30]	^\s*uVar1\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0xc0\);$	+1
+use	Block__ctor_e9d68	uVar1	ownerField0xc0	INFERRED	word at owner+0xc0 copied to this[0x30]	^\s*param_1\[0x30\]\ =\ uVar1;$	+1
+use	Block__ctor_e9d68	uVar1	bitSetIndex	INFERRED	Program__allocateBitSetIndex result stored at this[0x2d]	^\s*uVar1\ =\ FUN_000e8124\(param_1\[0x2b\],extraout_r4,in_r5,in_r6,in_r7,uVar3,uVar5\);$	+2
+use	Block__ctor_e9d68	uVar3	ownerField0x110	INFERRED	word at owner+0x110 copied to this[0x44]	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x110\);$	+1
+use	Block__ctor_e9d68	uVar3	ownerField0x110	INFERRED	word at owner+0x110 copied to this[0x44]	^\s*param_1\[0x44\]\ =\ uVar3;$	+1
+use	Block__ctor_e9d68	uVar3	ownerField0x110	INFERRED	word at owner+0x110 copied to this[0x44]	^\s*uVar1\ =\ FUN_000e8124\(param_1\[0x2b\],extraout_r4,in_r5,in_r6,in_r7,uVar3,uVar5\);$	+1
+use	Block__ctor_e9d68	uVar5	ownerField0xdc	INFERRED	word at owner+0xdc copied to this[0x37]	^\s*uVar5\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0xdc\);$	+1
+use	Block__ctor_e9d68	uVar5	ownerField0xdc	INFERRED	word at owner+0xdc copied to this[0x37]	^\s*param_1\[0x37\]\ =\ uVar5;$	+1
+use	Block__ctor_e9d68	uVar5	ownerField0xdc	INFERRED	word at owner+0xdc copied to this[0x37]	^\s*uVar1\ =\ FUN_000e8124\(param_1\[0x2b\],extraout_r4,in_r5,in_r6,in_r7,uVar3,uVar5\);$	+1
+use	Block__ctor_e9d68	uVar6	ownerField0x10c	INFERRED	word at owner+0x10c copied to this[0x43]	^\s*uVar6\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x10c\);$	+1
+use	Block__ctor_e9d68	uVar6	ownerField0x10c	INFERRED	word at owner+0x10c copied to this[0x43]	^\s*param_1\[0x43\]\ =\ uVar6;$	+1
+use	Block__ctor_e9d68	uVar1	ownerField0xc	INFERRED	word at owner+0xc copied to this[3]	^\s*uVar1\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0xc\);$	+1
+use	Block__ctor_e9d68	uVar1	ownerField0xc	INFERRED	word at owner+0xc copied to this[3]	^\s*param_1\[3\]\ =\ uVar1;$	+1
+use	Block__ctor_e9d68	uVar1	ownerField0xac	INFERRED	word at owner+0xac copied to this[0x2b]	^\s*uVar1\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0xac\);$	+1
+use	Block__ctor_e9d68	uVar1	ownerField0xac	INFERRED	word at owner+0xac copied to this[0x2b]	^\s*param_1\[0x2b\]\ =\ uVar1;$	+1
+use	Block__ctor_e9d68	uVar1	ownerField0xc0	INFERRED	word at owner+0xc0 copied to this[0x30]	^\s*uVar1\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0xc0\);$	+1
+use	Block__ctor_e9d68	uVar1	ownerField0xc0	INFERRED	word at owner+0xc0 copied to this[0x30]	^\s*param_1\[0x30\]\ =\ uVar1;$	+1
+use	Block__ctor_e9d68	uVar1	bitSetIndex	INFERRED	Program__allocateBitSetIndex result stored at this[0x2d]	^\s*uVar1\ =\ FUN_000e8124\(param_1\[0x2b\],extraout_r4,in_r5,in_r6,in_r7,uVar3,uVar5\);$	+2
+use	Block__ctor_e9d68	uVar3	ownerField0x110	INFERRED	word at owner+0x110 copied to this[0x44]	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x110\);$	+1
+use	Block__ctor_e9d68	uVar3	ownerField0x110	INFERRED	word at owner+0x110 copied to this[0x44]	^\s*param_1\[0x44\]\ =\ uVar3;$	+1
+use	Block__ctor_e9d68	uVar3	ownerField0x110	INFERRED	word at owner+0x110 copied to this[0x44]	^\s*uVar1\ =\ FUN_000e8124\(param_1\[0x2b\],extraout_r4,in_r5,in_r6,in_r7,uVar3,uVar5\);$	+1
+use	Block__ctor_e9d68	uVar5	ownerField0xdc	INFERRED	word at owner+0xdc copied to this[0x37]	^\s*uVar5\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0xdc\);$	+1
+use	Block__ctor_e9d68	uVar5	ownerField0xdc	INFERRED	word at owner+0xdc copied to this[0x37]	^\s*param_1\[0x37\]\ =\ uVar5;$	+1
+use	Block__ctor_e9d68	uVar5	ownerField0xdc	INFERRED	word at owner+0xdc copied to this[0x37]	^\s*uVar1\ =\ FUN_000e8124\(param_1\[0x2b\],extraout_r4,in_r5,in_r6,in_r7,uVar3,uVar5\);$	+1
+use	Block__ctor_e9d68	uVar6	ownerField0x10c	INFERRED	word at owner+0x10c copied to this[0x43]	^\s*uVar6\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x10c\);$	+1
+use	Block__ctor_e9d68	uVar6	ownerField0x10c	INFERRED	word at owner+0x10c copied to this[0x43]	^\s*param_1\[0x43\]\ =\ uVar6;$	+1
+local	Block__ctor_e9f00	param_2	owner	INFERRED	block/owner object whose fields are copied into the new block
+local	Block__popDefinitions	param_1	block	INFERRED	block whose definition list (+0xc4) is popped
+local	IRInst__sourceMatchesConstant	param_3	skipLaneMask	INFERRED	four bytes: lanes with a non-zero byte are not compared
+local	IRInst__sourceMatchesConstant	param_4	wantedValues	INFERRED	array of the wanted constant words, one per lane
+local	IRInst__sourceMatchesConstant	local_38	operandSelectBytes	INFERRED	select word of the operand record (+0x10), one byte per lane
+local	IRInst__createMovForDest	local_38	destMask	INFERRED	select word of inst operand 0 turned into a 0/1 mask (1 where the lane byte was not 1)
+local	IRInst__createMovForDest	local_24	markedSelect	INFERRED	SelectWord::markLanesWhereSecondIsOne output stored at the new mov +0x9c
+func	FUN_000fd5c8	Program__translateILStream	INFERRED	reads IL instructions with ILReader__nextInstruction and translates each opcode (declarations, flow control, ALU, fetches) into IR instructions/blocks of the program through the per-opcode template tables
+func	FUN_000ef498	Program__initAndTranslate	INFERRED	allocates the register bitsets, declaration table, entry and exit blocks, runs FUN_000fd5c8 (IL translation) and the hardware setup hooks, then post-processes the program
+func	FUN_000e3308	EncoderState__destroy_e3308	INFERRED	releases the sink object (+0x20 vtable +4) and the three arena arrays at +0x28/+0x2c/+0x24
+func	FUN_000e3244	EncoderState__destroy_e3244	INFERRED	releases the sink object (+0x20 vtable +4) and the three arena arrays at +0x28/+0x2c/+0x24
+local	FUN_000e3308	param_1	encoder	INFERRED	encoder state object
+local	FUN_000e3244	param_1	encoder	INFERRED	encoder state object
+local	Block__ctor_e9d68	param_2	owner	INFERRED	block/owner object whose fields are copied into the new block

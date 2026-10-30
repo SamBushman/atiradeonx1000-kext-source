@@ -1297,8 +1297,8 @@
 0xe2f8c	IRInst__lastSourceKeyEquals	76	yes	
 0xe2fd8	MachineAssembler__vslot34_declareDestinationLanesByClass	360	yes	
 0xe3140	MachineAssembler__visitIfHeaderStatic	260	no	indirect call (driver context / vtable / callback)
-0xe3244	FUN_000e3244	196	no	indirect call (driver context / vtable / callback)
-0xe3308	FUN_000e3308	196	no	indirect call (driver context / vtable / callback)
+0xe3244	EncoderState__destroy_e3244	196	no	indirect call (driver context / vtable / callback)
+0xe3308	EncoderState__destroy_e3308	196	no	indirect call (driver context / vtable / callback)
 0xe33cc	FUN_000e33cc	340	no	indirect call (driver context / vtable / callback)
 0xe3544	FUN_000e3544	340	no	indirect call (driver context / vtable / callback)
 0xe36bc	MachineCodeWriter__encodeProgram	664	no	indirect call (driver context / vtable / callback)
@@ -1484,7 +1484,7 @@
 0xeec50	FUN_000eec50	1140	no	indirect call (driver context / vtable / callback)
 0xeee4c	FUN_000eee4c	920	no	indirect call (driver context / vtable / callback)
 0xef204	Program__splitExports	660	no	indirect call (driver context / vtable / callback)
-0xef498	FUN_000ef498	1084	no	indirect call (driver context / vtable / callback)
+0xef498	Program__initAndTranslate	1084	no	indirect call (driver context / vtable / callback)
 0xef8f8	Program__appendToVector3c8	120	yes	
 0xef970	Program__removeInst	220	yes	
 0xefa4c	FUN_000efa4c	860	yes	
@@ -1618,7 +1618,7 @@
 0xfb230	Program__loadDefaultConstants	420	yes	
 0xfb3d4	FUN_000fb3d4	8428	no	indirect call (driver context / vtable / callback)
 0xfd50c	Template__pushCallFrame	188	yes	
-0xfd5c8	FUN_000fd5c8	24388	no	indirect call (driver context / vtable / callback)
+0xfd5c8	Program__translateILStream	24388	no	indirect call (driver context / vtable / callback)
 0x103d50	IROperand__setModifierBits	40	yes	
 0x103d78	floatToFixedSaturate	220	yes	
 0x103e54	constantZeroFloat	28	yes	

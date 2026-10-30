@@ -603,7 +603,7 @@ int Compiler__compileStages(compiler, compileRequest)
       ((int (*)())setWord30)(ilReader,secondSource);
     }
     (**(code **)(**(int **)(compiler + COMP_target) + 0x60))(*(int **)(compiler + COMP_target));
-    FUN_000ef498(*(undefined4 *)(compiler + COMP_currentProgram),ilReader);
+    Program__initAndTranslate(*(undefined4 *)(compiler + COMP_currentProgram),ilReader);
     if (ilReader != (undefined4 *)0x0) {
       ((int (*)())ILReader__dtor_e4934)(ilReader);
       Arena__free(*readerAlloc,readerAlloc);
@@ -1294,61 +1294,65 @@ int MachineAssembler__visitIfHeaderStatic(this, block, param_3, compiler, unused
   return;
 }
 
-/* FUN_000e3244 @ 0xe3244 (196 bytes) */
-int FUN_000e3244(param_1)
-  int param_1;
+/* EncoderState__destroy_e3244 @ 0xe3244 (196 bytes) */
+int EncoderState__destroy_e3244(encoder)
+  int encoder;
 {
-  int *a0;
-  int iVar1;
+  int arrayAlloc24;
+  int arrayAlloc2c;
+  int *sinkObject;
+  int arrayAlloc28;
   
-  a0 = *(int **)(param_1 + 0x20);
-  if (a0 != (int *)0x0) {
-    (**(code **)(*a0 + 4))(a0);
+  sinkObject = *(int **)(encoder + 0x20);
+  if (sinkObject != (int *)0x0) {
+    (**(code **)(*sinkObject + 4))(sinkObject);
   }
-  iVar1 = *(int *)(param_1 + 0x28);
-  if (iVar1 != 0) {
-    Arena__free(*(undefined4 *)(iVar1 + 0xc),*(undefined4 *)(iVar1 + 8));
-    Arena__free(*(undefined4 *)(iVar1 + -4),iVar1 + -4);
+  arrayAlloc28 = *(int *)(encoder + 0x28);
+  if (arrayAlloc28 != 0) {
+    Arena__free(*(undefined4 *)(arrayAlloc28 + 0xc),*(undefined4 *)(arrayAlloc28 + 8));
+    Arena__free(*(undefined4 *)(arrayAlloc28 + -4),arrayAlloc28 + -4);
   }
-  iVar1 = *(int *)(param_1 + 0x2c);
-  if (iVar1 != 0) {
-    Arena__free(*(undefined4 *)(iVar1 + 0xc),*(undefined4 *)(iVar1 + 8));
-    Arena__free(*(undefined4 *)(iVar1 + -4),iVar1 + -4);
+  arrayAlloc2c = *(int *)(encoder + 0x2c);
+  if (arrayAlloc2c != 0) {
+    Arena__free(*(undefined4 *)(arrayAlloc2c + 0xc),*(undefined4 *)(arrayAlloc2c + 8));
+    Arena__free(*(undefined4 *)(arrayAlloc2c + -4),arrayAlloc2c + -4);
   }
-  iVar1 = *(int *)(param_1 + 0x24);
-  if (iVar1 != 0) {
-    Arena__free(*(undefined4 *)(iVar1 + 0xc),*(undefined4 *)(iVar1 + 8));
-    Arena__free(*(undefined4 *)(iVar1 + -4),iVar1 + -4);
+  arrayAlloc24 = *(int *)(encoder + 0x24);
+  if (arrayAlloc24 != 0) {
+    Arena__free(*(undefined4 *)(arrayAlloc24 + 0xc),*(undefined4 *)(arrayAlloc24 + 8));
+    Arena__free(*(undefined4 *)(arrayAlloc24 + -4),arrayAlloc24 + -4);
     return;
   }
   return;
 }
 
-/* FUN_000e3308 @ 0xe3308 (196 bytes) */
-int FUN_000e3308(param_1)
-  int param_1;
+/* EncoderState__destroy_e3308 @ 0xe3308 (196 bytes) */
+int EncoderState__destroy_e3308(encoder)
+  int encoder;
 {
-  int *a0;
-  int iVar1;
+  int arrayAlloc24;
+  int arrayAlloc2c;
+  int *sinkObject;
+  int arrayAlloc28;
   
-  a0 = *(int **)(param_1 + 0x20);
-  if (a0 != (int *)0x0) {
-    (**(code **)(*a0 + 4))(a0);
+  sinkObject = *(int **)(encoder + 0x20);
+  if (sinkObject != (int *)0x0) {
+    (**(code **)(*sinkObject + 4))(sinkObject);
   }
-  iVar1 = *(int *)(param_1 + 0x28);
-  if (iVar1 != 0) {
-    Arena__free(*(undefined4 *)(iVar1 + 0xc),*(undefined4 *)(iVar1 + 8));
-    Arena__free(*(undefined4 *)(iVar1 + -4),iVar1 + -4);
+  arrayAlloc28 = *(int *)(encoder + 0x28);
+  if (arrayAlloc28 != 0) {
+    Arena__free(*(undefined4 *)(arrayAlloc28 + 0xc),*(undefined4 *)(arrayAlloc28 + 8));
+    Arena__free(*(undefined4 *)(arrayAlloc28 + -4),arrayAlloc28 + -4);
   }
-  iVar1 = *(int *)(param_1 + 0x2c);
-  if (iVar1 != 0) {
-    Arena__free(*(undefined4 *)(iVar1 + 0xc),*(undefined4 *)(iVar1 + 8));
-    Arena__free(*(undefined4 *)(iVar1 + -4),iVar1 + -4);
+  arrayAlloc2c = *(int *)(encoder + 0x2c);
+  if (arrayAlloc2c != 0) {
+    Arena__free(*(undefined4 *)(arrayAlloc2c + 0xc),*(undefined4 *)(arrayAlloc2c + 8));
+    Arena__free(*(undefined4 *)(arrayAlloc2c + -4),arrayAlloc2c + -4);
   }
-  iVar1 = *(int *)(param_1 + 0x24);
-  if (iVar1 != 0) {
-    Arena__free(*(undefined4 *)(iVar1 + 0xc),*(undefined4 *)(iVar1 + 8));
-    Arena__free(*(undefined4 *)(iVar1 + -4),iVar1 + -4);
+  arrayAlloc24 = *(int *)(encoder + 0x24);
+  if (arrayAlloc24 != 0) {
+    Arena__free(*(undefined4 *)(arrayAlloc24 + 0xc),*(undefined4 *)(arrayAlloc24 + 8));
+    Arena__free(*(undefined4 *)(arrayAlloc24 + -4),arrayAlloc24 + -4);
     return;
   }
   return;
@@ -1569,7 +1573,7 @@ LAB_000e3900:
   }
   (**(code **)(*local_54 + 0x24))(local_54,outBuffer,outSize);
 LAB_000e392c:
-  return ((int (*)())FUN_000e3308)(auStack_74);
+  return ((int (*)())EncoderState__destroy_e3308)(auStack_74);
 }
 #undef auStack_78
 #undef auStack_74
@@ -1583,60 +1587,60 @@ int IRInst__createMovForDest(inst, inst2, compiler)
 {
   int loopCounter;
   int operandRecord;
-  int iVar1;
-  uint uVar2;
+  int destRegisterNumber;
+  uint flagWord;
   int *newInst;
-  undefined4 uVar4;
+  undefined4 mergedSelect;
   int loopCounterB;
-  undefined4 local_38 [4];
+  undefined4 destMask [4];
   undefined4 local_28;
-  int local_24 [3];
+  int markedSelect [3];
   
   newInst = (int *)IRInst__create(0x31,compiler);
-  iVar1 = *(int *)(inst + 0x94);
+  destRegisterNumber = *(int *)(inst + 0x94);
   newInst[0x26] = *(int *)(inst + 0x98);
-  newInst[0x25] = iVar1;
+  newInst[0x25] = destRegisterNumber;
   if ((*(uint *)(inst + 0x14) & 0x40) == 0) {
-    uVar2 = newInst[5] & 0xffffffbf;
-    newInst[5] = uVar2;
+    flagWord = newInst[5] & 0xffffffbf;
+    newInst[5] = flagWord;
   }
   else {
-    uVar2 = newInst[5] | 0x40;
-    newInst[5] = uVar2;
+    flagWord = newInst[5] | 0x40;
+    newInst[5] = flagWord;
   }
   if ((*(uint *)(inst + 0x14) & 0x20) == 0) {
-    newInst[5] = uVar2 & 0xffffffdf;
+    newInst[5] = flagWord & 0xffffffdf;
   }
   else {
-    newInst[5] = uVar2 | 0x20;
+    newInst[5] = flagWord | 0x20;
   }
   IRInst__setOperandSource(newInst,1,inst2,0,compiler);
   operandRecord = IRInst__getOperandRecord(inst2,0);
-  uVar4 = *(undefined4 *)(operandRecord + 0x10);
+  mergedSelect = *(undefined4 *)(operandRecord + 0x10);
   operandRecord = IRInst__getOperandRecord(inst,0);
-  local_38[0] = *(undefined4 *)(operandRecord + 0x10);
+  destMask[0] = *(undefined4 *)(operandRecord + 0x10);
   if ((*(uint *)(inst2 + 0x14) & 0x200) != 0) {
     do {
       inst2 = IRInst__getOperandSource(inst2,*(undefined4 *)(inst2 + 0x84));
       operandRecord = IRInst__getOperandRecord(inst2,0);
-      SelectWord__mergeWrittenLanes(&local_28,uVar4,*(undefined4 *)(operandRecord + 0x10));
-      uVar4 = local_28;
+      SelectWord__mergeWrittenLanes(&local_28,mergedSelect,*(undefined4 *)(operandRecord + 0x10));
+      mergedSelect = local_28;
     } while ((*(uint *)(inst2 + 0x14) & 0x200) != 0);
   }
   loopCounter = 0;
   loopCounterB = 4;
   do {
-    if (*(char *)((int)local_38 + loopCounter) == '\x01') {
-      *(undefined1 *)((int)local_38 + loopCounter) = 0;
+    if (*(char *)((int)destMask + loopCounter) == '\x01') {
+      *(undefined1 *)((int)destMask + loopCounter) = 0;
     }
     else {
-      *(undefined1 *)((int)local_38 + loopCounter) = 1;
+      *(undefined1 *)((int)destMask + loopCounter) = 1;
     }
     loopCounter = loopCounter + 1;
     loopCounterB = loopCounterB + -1;
   } while (loopCounterB != 0);
-  SelectWord__markLanesWhereSecondIsOne(local_24,uVar4,local_38[0]);
-  newInst[0x27] = local_24[0];
+  SelectWord__markLanesWhereSecondIsOne(markedSelect,mergedSelect,destMask[0]);
+  newInst[0x27] = markedSelect[0];
   (**(code **)(*newInst + 0x84))(newInst,*(undefined4 *)(inst + 0x11c));
   return newInst;
 }

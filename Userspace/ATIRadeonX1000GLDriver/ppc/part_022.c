@@ -1922,26 +1922,26 @@ int Block__hasDominatedChildren(param_1)
 }
 
 /* Block__popDefinitions @ 0xe7a24 (120 bytes) */
-int Block__popDefinitions(param_1)
-  int param_1;
+int Block__popDefinitions(block)
+  int block;
 {
-  int iVar1;
-  uint uVar2;
-  undefined4 *puVar3;
-  undefined4 uVar4;
+  int definitionList;
+  uint definitionCount;
+  undefined4 *topSlot;
+  undefined4 topVReg;
   
-  iVar1 = *(int *)(param_1 + 0xc4);
-  uVar2 = *(uint *)(iVar1 + 4);
-  while (uVar2 != 0) {
-    puVar3 = (undefined4 *)0x0;
-    if (uVar2 - 1 < uVar2) {
-      puVar3 = (undefined4 *)((uVar2 - 1) * 4 + *(int *)(iVar1 + 8));
+  definitionList = *(int *)(block + 0xc4);
+  definitionCount = *(uint *)(definitionList + 4);
+  while (definitionCount != 0) {
+    topSlot = (undefined4 *)0x0;
+    if (definitionCount - 1 < definitionCount) {
+      topSlot = (undefined4 *)((definitionCount - 1) * 4 + *(int *)(definitionList + 8));
     }
-    uVar4 = *puVar3;
-    Vector__removeAt(iVar1,uVar2 - 1);
-    VReg__popDefinition(uVar4);
-    iVar1 = *(int *)(param_1 + 0xc4);
-    uVar2 = *(uint *)(iVar1 + 4);
+    topVReg = *topSlot;
+    Vector__removeAt(definitionList,definitionCount - 1);
+    VReg__popDefinition(topVReg);
+    definitionList = *(int *)(block + 0xc4);
+    definitionCount = *(uint *)(definitionList + 4);
   }
   return;
 }

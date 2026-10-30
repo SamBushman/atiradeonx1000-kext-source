@@ -2179,11 +2179,13 @@ LAB_000ef344:
   return;
 }
 
-/* FUN_000ef498 @ 0xef498 (860 bytes) */
-int FUN_000ef498(program, ilReader)
+/* Program__initAndTranslate @ 0xef498 (860 bytes) */
+int Program__initAndTranslate(program, ilReader)
   int program;
   undefined4 ilReader;
 {
+  int programInstVector;
+  int blockNextLink;
   int compiler;
   int *blockCursor;
   int *bitsetData;
@@ -2198,14 +2200,14 @@ int FUN_000ef498(program, ilReader)
   undefined4 registerTable;
   uint loopIndex;
   int *wordCursor;
-  int iVar2;
+  int shaderKind2;
   int loopCounter;
   undefined4 *allocation;
   undefined4 *tableAlloc;
   char *r4AfterCall;
   undefined4 r4AfterCall2;
-  char *pcVar6;
-  int iVar7;
+  char *blockLabel;
+  int programInst;
   int *hwDescription;
   undefined4 arenaA;
   uint wordsLeft;
@@ -2324,27 +2326,27 @@ int FUN_000ef498(program, ilReader)
   VRegInfo__new_127994(*(undefined4 *)(program + 0x3ac),*(uint *)(program + 0x30) & 1);
   hwDescription = *(int **)(*(int *)(program + 8) + 0x30c);
   (**(code **)(*hwDescription + 0x10))(hwDescription,*(int *)(program + 8));
-  FUN_000fd5c8(program,ilReader);
+  Program__translateILStream(program,ilReader);
   if ((*(uint *)(program + 0x30) & 1) == 0) {
     if ((*(uint *)(program + 0x30) & 0x2000) == 0) {
       shaderKind = 2;
-      iVar2 = 2;
+      shaderKind2 = 2;
     }
     else {
       shaderKind = 1;
-      iVar2 = 1;
+      shaderKind2 = 1;
     }
   }
   else {
     shaderKind = 0;
-    iVar2 = 0;
+    shaderKind2 = 0;
   }
   hwDescription = *(int **)(*(int *)(program + 8) + 0x30c);
   (**(code **)(*hwDescription + 0x14))(hwDescription,shaderKind,*(int *)(program + 8));
-  if (iVar2 == 1) {
+  if (shaderKind2 == 1) {
     ((int (*)())FUN_000eec50)(program,r4AfterCall2);
   }
-  else if ((iVar2 == 2) || (iVar2 == 0)) {
+  else if ((shaderKind2 == 2) || (shaderKind2 == 0)) {
     hwDescription = *(int **)(*(int *)(program + 8) + 0x30c);
     (**(code **)(*hwDescription + 0xac))(hwDescription,*(undefined4 *)(program + 0x358),program,*(int *)(program + 8));
   }
@@ -2353,22 +2355,22 @@ int FUN_000ef498(program, ilReader)
   ((int (*)())FUN_000eee4c)(program);
   ((int (*)())Program__pinInputRegisters)(program);
   FUN_00138130(program);
-  pcVar6 = "non_local_set";
+  blockLabel = "non_local_set";
   blockCursor = *(int **)(program + 900);
-  iVar2 = blockCursor[2];
-  while (iVar2 != 0) {
-    (**(code **)(*blockCursor + 0x48))(blockCursor,pcVar6);
+  blockNextLink = blockCursor[2];
+  while (blockNextLink != 0) {
+    (**(code **)(*blockCursor + 0x48))(blockCursor,blockLabel);
     blockCursor = (int *)blockCursor[2];
-    pcVar6 = r4AfterCall;
-    iVar2 = blockCursor[2];
+    blockLabel = r4AfterCall;
+    blockNextLink = blockCursor[2];
   }
-  iVar2 = *(int *)(program + 0x3c4);
+  programInstVector = *(int *)(program + 0x3c4);
   loopCounter = 0;
-  for (loopIndex = 1; loopIndex <= *(uint *)(iVar2 + 4); loopIndex = loopIndex + 1) {
-    iVar7 = *(int *)(*(int *)(iVar2 + 8) + loopCounter);
-    if ((*(uint *)(iVar7 + 0x14) & 1) != 0) {
-      IRInst__getOperandRecord(iVar7,0);
-      iVar2 = *(int *)(program + 0x3c4);
+  for (loopIndex = 1; loopIndex <= *(uint *)(programInstVector + 4); loopIndex = loopIndex + 1) {
+    programInst = *(int *)(*(int *)(programInstVector + 8) + loopCounter);
+    if ((*(uint *)(programInst + 0x14) & 1) != 0) {
+      IRInst__getOperandRecord(programInst,0);
+      programInstVector = *(int *)(program + 0x3c4);
     }
     loopCounter = loopCounter + 4;
   }

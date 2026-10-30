@@ -2961,8 +2961,8 @@ ee780	ee7a0	eh-pad	FUN_000eec50	8	__Unwind_Resume
 ee830	ee850	eh-pad	Program__buildBlockArrayByKey	8	0x193cc0,__Unwind_Resume
 eede8	eee08	eh-pad	FUN_000eec50	8	0x193cc0,__Unwind_Resume
 ef038	ef058	eh-pad	FUN_000eee4c	8	0x193cc0,__Unwind_Resume
-ef79c	ef7a0	millicode	FUN_000ef498	1	
-ef7f8	ef818	eh-pad	FUN_000ef498	8	0x193cc0,__Unwind_Resume
+ef79c	ef7a0	millicode	Program__initAndTranslate	1	
+ef7f8	ef818	eh-pad	Program__initAndTranslate	8	0x193cc0,__Unwind_Resume
 efaf0	efb2c	eh-pad	FUN_000efa4c	15	0x193cc0,__Unwind_Resume
 efe3c	efe40	millicode	Program__insertExitMarkerAndFlagBlocks	1	
 efea0	efebc	other	Program__insertExitMarkerAndFlagBlocks	7	0x193cc0
@@ -3000,48 +3000,48 @@ fb77c	fb780	millicode	FUN_000fb3d4	1
 fb974	fb978	millicode	FUN_000fb3d4	1	
 fbb88	fbba4	other	FUN_000fb3d4	7	0x193cc0
 fbe00	fbe20	eh-pad	FUN_000fb3d4	8	0x193cc0,__Unwind_Resume
-fd760	fd77c	other	FUN_000fd5c8	7	0x193cc0
-fd7c4	fd7d8	other	FUN_000fd5c8	5	
-fd820	fd840	other	FUN_000fd5c8	8	0x193cc0
-fd8ac	fd8b0	millicode	FUN_000fd5c8	1	
-fd8fc	fd91c	other	FUN_000fd5c8	8	0x193cc0
-fdaf4	fdb14	table	FUN_000fd5c8	8	
-fdb44	fde84	table	FUN_000fd5c8	208	
-fdebc	fdec0	millicode	FUN_000fd5c8	1	
-fdfa4	fdfa8	millicode	FUN_000fd5c8	1	
-fe8b0	fe8b4	millicode	FUN_000fd5c8	1	
-fe910	fe92c	other	FUN_000fd5c8	7	0x193cc0
-fe9f0	fe9f4	millicode	FUN_000fd5c8	1	
-feb38	feb3c	millicode	FUN_000fd5c8	1	
-feb78	feb94	other	FUN_000fd5c8	7	0x193cc0
-ff7a0	ff7a4	millicode	FUN_000fd5c8	1	
-ff864	ff868	millicode	FUN_000fd5c8	1	
-ffcf8	ffd14	other	FUN_000fd5c8	7	0x193cc0
-ffd5c	ffd60	millicode	FUN_000fd5c8	1	
-10042c	100448	other	FUN_000fd5c8	7	0x193cc0
-1004a8	1004c4	other	FUN_000fd5c8	7	0x193cc0
-100620	1007e8	table	FUN_000fd5c8	114	
-101fb8	101fd0	table	FUN_000fd5c8	6	
-102048	102060	table	FUN_000fd5c8	6	
-102754	102758	millicode	FUN_000fd5c8	1	
-102828	10282c	millicode	FUN_000fd5c8	1	
-102a78	102a94	other	FUN_000fd5c8	7	0x193cc0
-102b04	102b08	millicode	FUN_000fd5c8	1	
-102bdc	102c20	table	FUN_000fd5c8	17	
-102c5c	102c60	millicode	FUN_000fd5c8	1	
-102cb8	102cbc	millicode	FUN_000fd5c8	1	
-102da4	102da8	millicode	FUN_000fd5c8	1	
-102e6c	102e70	millicode	FUN_000fd5c8	1	
-102f4c	102f50	millicode	FUN_000fd5c8	1	
-103014	103030	other	FUN_000fd5c8	7	0x193cc0
-103174	103190	other	FUN_000fd5c8	7	0x193cc0
-1032ec	1032f0	millicode	FUN_000fd5c8	1	
-103414	103430	other	FUN_000fd5c8	7	0x193cc0
-1034d8	1034dc	millicode	FUN_000fd5c8	1	
-10361c	103638	other	FUN_000fd5c8	7	0x193cc0
-10379c	1037b8	other	FUN_000fd5c8	7	0x193cc0
-103840	1038ec	table	FUN_000fd5c8	43	
-103cec	103cf8	eh-pad	FUN_000fd5c8	3	__Unwind_Resume
+fd760	fd77c	other	Program__translateILStream	7	0x193cc0
+fd7c4	fd7d8	other	Program__translateILStream	5	
+fd820	fd840	other	Program__translateILStream	8	0x193cc0
+fd8ac	fd8b0	millicode	Program__translateILStream	1	
+fd8fc	fd91c	other	Program__translateILStream	8	0x193cc0
+fdaf4	fdb14	table	Program__translateILStream	8	
+fdb44	fde84	table	Program__translateILStream	208	
+fdebc	fdec0	millicode	Program__translateILStream	1	
+fdfa4	fdfa8	millicode	Program__translateILStream	1	
+fe8b0	fe8b4	millicode	Program__translateILStream	1	
+fe910	fe92c	other	Program__translateILStream	7	0x193cc0
+fe9f0	fe9f4	millicode	Program__translateILStream	1	
+feb38	feb3c	millicode	Program__translateILStream	1	
+feb78	feb94	other	Program__translateILStream	7	0x193cc0
+ff7a0	ff7a4	millicode	Program__translateILStream	1	
+ff864	ff868	millicode	Program__translateILStream	1	
+ffcf8	ffd14	other	Program__translateILStream	7	0x193cc0
+ffd5c	ffd60	millicode	Program__translateILStream	1	
+10042c	100448	other	Program__translateILStream	7	0x193cc0
+1004a8	1004c4	other	Program__translateILStream	7	0x193cc0
+100620	1007e8	table	Program__translateILStream	114	
+101fb8	101fd0	table	Program__translateILStream	6	
+102048	102060	table	Program__translateILStream	6	
+102754	102758	millicode	Program__translateILStream	1	
+102828	10282c	millicode	Program__translateILStream	1	
+102a78	102a94	other	Program__translateILStream	7	0x193cc0
+102b04	102b08	millicode	Program__translateILStream	1	
+102bdc	102c20	table	Program__translateILStream	17	
+102c5c	102c60	millicode	Program__translateILStream	1	
+102cb8	102cbc	millicode	Program__translateILStream	1	
+102da4	102da8	millicode	Program__translateILStream	1	
+102e6c	102e70	millicode	Program__translateILStream	1	
+102f4c	102f50	millicode	Program__translateILStream	1	
+103014	103030	other	Program__translateILStream	7	0x193cc0
+103174	103190	other	Program__translateILStream	7	0x193cc0
+1032ec	1032f0	millicode	Program__translateILStream	1	
+103414	103430	other	Program__translateILStream	7	0x193cc0
+1034d8	1034dc	millicode	Program__translateILStream	1	
+10361c	103638	other	Program__translateILStream	7	0x193cc0
+10379c	1037b8	other	Program__translateILStream	7	0x193cc0
+103840	1038ec	table	Program__translateILStream	43	
+103cec	103cf8	eh-pad	Program__translateILStream	3	__Unwind_Resume
 103e80	103e84	millicode	isLessThan2	1	
 10451c	10453c	other	IRInst__replaceExtraData	8	
 105164	10519c	eh-pad	IRInst__ctor_10502c	14	0x193cc0,__Unwind_Resume

@@ -521,48 +521,48 @@ LAB_000f5a8c:
 }
 
 /* IRInst__sourceMatchesConstant @ 0xf5c0c (228 bytes) */
-int IRInst__sourceMatchesConstant(inst, operandIndex, param_3, param_4)
+int IRInst__sourceMatchesConstant(inst, operandIndex, skipLaneMask, wantedValues)
   undefined4 inst;
   undefined4 operandIndex;
-  undefined4 param_3;
-  int *param_4;
+  undefined4 skipLaneMask;
+  int *wantedValues;
 {
   int loopCounter;
   int operandRecord;
-  unsigned int ghidra_home[8] = { inst, operandIndex, param_3, param_4, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
-  uint uVar1;
-  int *a0;
-  int iVar2;
-  undefined4 uVar3;
+  unsigned int ghidra_home[8] = { inst, operandIndex, skipLaneMask, wantedValues, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  uint laneComponent;
+  int *sourceVReg;
+  int isConstantSource;
+  undefined4 result;
   int loopCounterB;
-  char *pcVar5;
-  undefined4 local_38 [9];
+  char *skipMaskCursor;
+  undefined4 operandSelectBytes [9];
   
-  (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = param_3;
-  a0 = (int *)IRInst__getOperandSource(inst,operandIndex);
-  iVar2 = (**(code **)(*a0 + 0x48))(a0);
-  if (iVar2 == 0) {
+  (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = skipLaneMask;
+  sourceVReg = (int *)IRInst__getOperandSource(inst,operandIndex);
+  isConstantSource = (**(code **)(*sourceVReg + 0x48))(sourceVReg);
+  if (isConstantSource == 0) {
 LAB_000f5cd8:
-    uVar3 = 0;
+    result = 0;
   }
   else {
     operandRecord = IRInst__getOperandRecord(inst,operandIndex);
     loopCounterB = 0;
-    pcVar5 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 8));
-    local_38[0] = *(undefined4 *)(operandRecord + 0x10);
+    skipMaskCursor = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 8));
+    operandSelectBytes[0] = *(undefined4 *)(operandRecord + 0x10);
     loopCounter = 4;
     do {
-      if (((*pcVar5 == '\0') && (uVar1 = (uint)*(byte *)((int)local_38 + loopCounterB), uVar1 < 4)) &&
-         ((((int)*(char *)(a0 + 0x57) >> (uVar1 & 0x3f) & 1U) == 0 ||
-          (a0[uVar1 * 6 + 8] != *param_4)))) goto LAB_000f5cd8;
+      if (((*skipMaskCursor == '\0') && (laneComponent = (uint)*(byte *)((int)operandSelectBytes + loopCounterB), laneComponent < 4)) &&
+         ((((int)*(char *)(sourceVReg + 0x57) >> (laneComponent & 0x3f) & 1U) == 0 ||
+          (sourceVReg[laneComponent * 6 + 8] != *wantedValues)))) goto LAB_000f5cd8;
       loopCounterB = loopCounterB + 1;
-      pcVar5 = pcVar5 + 1;
-      param_4 = param_4 + 1;
+      skipMaskCursor = skipMaskCursor + 1;
+      wantedValues = wantedValues + 1;
       loopCounter = loopCounter + -1;
     } while (loopCounter != 0);
-    uVar3 = 1;
+    result = 1;
   }
-  return uVar3;
+  return result;
 }
 
 /* IRInst__getUniformSourceConstant @ 0xf5cf0 (412 bytes) */
@@ -5193,8 +5193,8 @@ int Template__pushCallFrame(program, templateBase, templateCursorPtr, frameBlock
   return calleeTemplate;
 }
 
-/* FUN_000fd5c8 @ 0xfd5c8 (408 bytes) */
-int FUN_000fd5c8(program, ilReader)
+/* Program__translateILStream @ 0xfd5c8 (408 bytes) */
+int Program__translateILStream(program, ilReader)
   int program;
   uint ******ilReader;
 {
