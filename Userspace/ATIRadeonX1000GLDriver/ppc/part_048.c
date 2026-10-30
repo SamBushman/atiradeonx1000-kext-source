@@ -353,8 +353,8 @@ int ValueKey__replaceWithSource2IfSourcesEqual23(ctx)
   return 0;
 }
 
-/* FUN_0017c4a4 @ 0x17c4a4 (316 bytes) */
-int FUN_0017c4a4(ctx)
+/* ValueKey__foldModifierDifferenceIntoSource2 @ 0x17c4a4 (316 bytes) */
+int ValueKey__foldModifierDifferenceIntoSource2(ctx)
   int ctx;
 {
   uint word0xe8Bit0;
@@ -413,8 +413,8 @@ LAB_0017c5b4:
   return 1;
 }
 
-/* FUN_0017c5e0 @ 0x17c5e0 (404 bytes) */
-int FUN_0017c5e0(ctx)
+/* ValueKey__foldCompareAgainstZeroToSource @ 0x17c5e0 (404 bytes) */
+int ValueKey__foldCompareAgainstZeroToSource(ctx)
   int ctx;
 {
   int currentProgram;
@@ -1211,8 +1211,8 @@ int ValueKey__foldOppositeNegatesToZero(ctx)
   return 0;
 }
 
-/* FUN_0017d6ac @ 0x17d6ac (780 bytes) */
-int FUN_0017d6ac(ctx, laneConstants)
+/* ValueKey__replaceWithLaneConstants @ 0x17d6ac (780 bytes) */
+int ValueKey__replaceWithLaneConstants(ctx, laneConstants)
   int ctx;
   float *laneConstants;
 {
@@ -1450,7 +1450,7 @@ int ValueKey__foldCompareOfConstants(ctx)
     loopPtr4 = loopPtr4 + 1;
     loopIndex = loopIndex + 1;
   } while (moreIterations);
-  loopIndex = ((int (*)())FUN_0017d6ac)(ctx,laneResults);
+  loopIndex = ((int (*)())ValueKey__replaceWithLaneConstants)(ctx,laneResults);
   if (loopIndex == 0) {
 LAB_0017dbc4:
     result = 0;
@@ -1466,8 +1466,8 @@ LAB_0017dbc4:
   return result;
 }
 
-/* FUN_0017dbdc @ 0x17dbdc (1104 bytes) */
-int FUN_0017dbdc(ctx, laneResultsOut)
+/* ValueKey__evaluateLaneConstants @ 0x17dbdc (1104 bytes) */
+int ValueKey__evaluateLaneConstants(ctx, laneResultsOut)
   int ctx;
   int *laneResultsOut;
 {
@@ -1626,7 +1626,7 @@ LAB_0017dfa0:
 LAB_0017dd38:
   loopIndex = (**(code **)(**(int **)(ctx + 0xb0) + 100))(*(int **)(ctx + 0xb0));
   if ((loopIndex == 0) && (!cannotFold)) {
-    loopIndex = ((int (*)())FUN_0017d6ac)(ctx,laneResultsOut);
+    loopIndex = ((int (*)())ValueKey__replaceWithLaneConstants)(ctx,laneResultsOut);
     if (loopIndex != 0) {
       ValueKey__rebuild(ctx);
       return 1;
@@ -2655,7 +2655,7 @@ int ValueKey__simplifyInstruction(ctx)
     loopIndex = loopIndex + 4;
     loopIndex2 = loopIndex2 + -1;
   } while (loopIndex2 != 0);
-  loopIndex = ((int (*)())FUN_0017dbdc)(ctx,loopPtr4);
+  loopIndex = ((int (*)())ValueKey__evaluateLaneConstants)(ctx,loopPtr4);
   if (loopIndex != 0) {
     return 0;
   }
@@ -2830,7 +2830,7 @@ LAB_0017fe28:
   else if (loopIndex < 0x2b) {
     if (loopIndex < 0x27) {
       if (loopIndex < 0x24) goto LAB_0017fe28;
-      loopIndex = ((int (*)())FUN_0017c5e0)(ctx);
+      loopIndex = ((int (*)())ValueKey__foldCompareAgainstZeroToSource)(ctx);
       if (loopIndex != 0) {
         return 0;
       }
@@ -2838,7 +2838,7 @@ LAB_0017fe28:
       if (loopIndex != 0) {
         return 0;
       }
-      loopIndex = ((int (*)())FUN_0017c4a4)(ctx);
+      loopIndex = ((int (*)())ValueKey__foldModifierDifferenceIntoSource2)(ctx);
       if (loopIndex != 0) {
         return 0;
       }
@@ -2888,11 +2888,11 @@ LAB_0017fe28:
   }
   else {
     if (loopIndex == 0x8b) {
-      loopIndex = FUN_0017a748(ctx);
+      loopIndex = ValueKey__foldEqualSourcesCompareToLiteralOperands(ctx);
       if (loopIndex != 0) {
         return 0;
       }
-      loopIndex = FUN_0017a3d4(ctx);
+      loopIndex = ValueKey__foldCompareOfFloatConstants(ctx);
       if (loopIndex != 0) {
         return 0;
       }
@@ -2949,8 +2949,8 @@ LAB_0017fe30:
   goto LAB_0017fe34;
 }
 
-/* FUN_00180154 @ 0x180154 (888 bytes) */
-int FUN_00180154(ctx)
+/* ValueKey__createLaneRecordsByOpcode @ 0x180154 (888 bytes) */
+int ValueKey__createLaneRecordsByOpcode(ctx)
   int ctx;
 {
   int operandsMatch2;
@@ -6515,8 +6515,8 @@ LAB_00185afc:
   return;
 }
 
-/* FUN_00185da4 @ 0x185da4 (1900 bytes) */
-int FUN_00185da4(operandIndex, negateOperand, inst, inst2, inst3, program, commitChange, checkFits, replacementOut, altMovInst)
+/* Inst__foldProducerIntoOperand @ 0x185da4 (1900 bytes) */
+int Inst__foldProducerIntoOperand(operandIndex, negateOperand, inst, inst2, inst3, program, commitChange, checkFits, replacementOut, altMovInst)
   int operandIndex;
   int negateOperand;
   int *inst;

@@ -1,7 +1,7 @@
 #include "decls.h"
 
-/* FUN_00186510 @ 0x186510 (1400 bytes) */
-int FUN_00186510(inst, sourceInstRefA, sourceInstRefB, compiler)
+/* Inst__mergeSourceInstructions @ 0x186510 (1400 bytes) */
+int Inst__mergeSourceInstructions(inst, sourceInstRefA, sourceInstRefB, compiler)
   int inst;
   undefined4 *sourceInstRefA;
   undefined4 *sourceInstRefB;
@@ -227,8 +227,8 @@ LAB_00186a60:
   return result;
 }
 
-/* FUN_00186a88 @ 0x186a88 (2816 bytes) */
-int FUN_00186a88(inst, operandIndex, inst2, program, commitChange, checkFits, replacementOut)
+/* Inst__foldSourceProducerIntoConsumer @ 0x186a88 (2816 bytes) */
+int Inst__foldSourceProducerIntoConsumer(inst, operandIndex, inst2, program, commitChange, checkFits, replacementOut)
   int *inst;
   int operandIndex;
   int *inst2;
@@ -481,7 +481,7 @@ LAB_001874d4:
         *(undefined4 *)(destRecord + 8) = newRegId;
         sourceDef = IRInst__getOperandSource(inst2,1);
         IRInst__setOperandSource(inst3,1,sourceDef,0,*(undefined4 *)(program + 8));
-        commitResult = FUN_00185da4(operandIndex,(uint)(constantValue == -0.5),inst,inst3,inst2,program,commitChange
+        commitResult = Inst__foldProducerIntoOperand(operandIndex,(uint)(constantValue == -0.5),inst,inst3,inst2,program,commitChange
                              ,checkFits,replacementOut,originalInst2);
         if (commitResult != 0) {
           inst[0x49] = inst[0x49] + -1;
@@ -527,7 +527,7 @@ LAB_001874d4:
     }
     if (((constTable[1] == (int *)0x0) || ((inst2[0x34] & 2U) != 0)) ||
        ((loopRemaining = (**(code **)(*constTable[1] + 0x5c))(constTable[1]), loopRemaining != 0 ||
-        (loopRemaining = ((int (*)())FUN_00186510)(inst2,&scratchInst,constTable + 1,*(undefined4 *)(program + 8)),
+        (loopRemaining = ((int (*)())Inst__mergeSourceInstructions)(inst2,&scratchInst,constTable + 1,*(undefined4 *)(program + 8)),
         loopRemaining == 0)))) {
       return 0;
     }
@@ -644,7 +644,7 @@ LAB_00187498:
     IRInst__setOperandSource(inst3,1,loopPtr4,0,compiler);
   }
 LAB_0018754c:
-  commitResult = FUN_00185da4(operandIndex,negate,inst,inst3,inst2,program,commitChange,checkFits,replacementOut,originalInst2)
+  commitResult = Inst__foldProducerIntoOperand(operandIndex,negate,inst,inst3,inst2,program,commitChange,checkFits,replacementOut,originalInst2)
   ;
   return commitResult;
 }
@@ -769,7 +769,7 @@ int Inst__r300ReassociateAddPair(inst, srcIndex, inst2, program)
         IROperand__setModifierBits(inst2Src2ModBase,1,*(uint *)(inst2 + 0xd0) & 1 ^ 1);
         IROperand__setModifierBits(otherModBase,1,inst[otherIndex * 6 + 0x28] & 1U ^ 1);
       }
-      callResult = ((int (*)())FUN_00186a88)(inst,srcIndex,inst2,program,1,1,0);
+      callResult = ((int (*)())Inst__foldSourceProducerIntoConsumer)(inst,srcIndex,inst2,program,1,1,0);
       if (callResult != 0) {
         return 1;
       }
@@ -786,15 +786,15 @@ int Inst__r300ReassociateAddPair(inst, srcIndex, inst2, program)
     }
   }
 LAB_00187a90:
-  callResult = ((int (*)())FUN_00186a88)(inst,srcIndex,inst2,program,1,1,0);
+  callResult = ((int (*)())Inst__foldSourceProducerIntoConsumer)(inst,srcIndex,inst2,program,1,1,0);
   if (callResult == 0) {
     return 0;
   }
   return 1;
 }
 
-/* FUN_00187ad8 @ 0x187ad8 (1996 bytes) */
-int FUN_00187ad8(inst, program)
+/* Inst__foldSelectIntoUsers @ 0x187ad8 (1996 bytes) */
+int Inst__foldSelectIntoUsers(inst, program)
   undefined4 inst;
   int program;
 {
@@ -855,7 +855,7 @@ int FUN_00187ad8(inst, program)
   undefined4 otherSource;
   undefined4 *destRecordCopy;
   
-  callResult = (int *)FUN_001922c4(0,0,inst,program);
+  callResult = (int *)Inst__rewriteSetOpcodesWithLiterals(0,0,inst,program);
   cndOpcode = *(int *)(callResult[0x22] + 8);
   if (((cndOpcode != 0x24) && (cndOpcode != 0x25)) && (cndOpcode != 0x26)) {
     return;
@@ -1526,7 +1526,7 @@ int KhanPs__vslot27_optimizeInstruction(this, inst, program)
   int callResult;
   
   if ((*(uint *)(inst + 0x14) & 1) != 0) {
-    ((int (*)())FUN_00187ad8)(inst,program);
+    ((int (*)())Inst__foldSelectIntoUsers)(inst,program);
     callResult = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),0x36);
     if ((callResult == 0) || (Inst__splitAndMerge(inst,program), (*(uint *)(inst + 0x14) & 1) != 0)) {
       callResult = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),0x15);
@@ -2849,8 +2849,8 @@ LAB_0018b190:
   return (int *)0x0;
 }
 
-/* FUN_0018b1bc @ 0x18b1bc (1176 bytes) */
-int FUN_0018b1bc(unusedArg1, packNode, rangeLo, rangeHi, targetSlot)
+/* PackNode__clearSlotRangeAndReassign @ 0x18b1bc (1176 bytes) */
+int PackNode__clearSlotRangeAndReassign(unusedArg1, packNode, rangeLo, rangeHi, targetSlot)
   undefined4 unusedArg1;
   int packNode;
   int rangeLo;
@@ -3144,7 +3144,7 @@ int R300SchedModel__vslot11(this, node, writerArrays)
   if (*(int *)(node + 0x60) != 0) {
     *(undefined1 *)(*(int *)(node + 0x60) + loopIndex) = 1;
   }
-  ((int (*)())FUN_0018b1bc)(this,node,targetLane,targetLane,loopIndex);
+  ((int (*)())PackNode__clearSlotRangeAndReassign)(this,node,targetLane,targetLane,loopIndex);
   return 1;
 }
 
@@ -3242,11 +3242,11 @@ int R300SchedModel__vslot14(this, node)
       *(undefined4 *)(node + 0x5c) = 0;
     }
   }
-  return ((int (*)())FUN_0018b1bc)(this,node,a2,lastLane,resultLane);
+  return ((int (*)())PackNode__clearSlotRangeAndReassign)(this,node,a2,lastLane,resultLane);
 }
 
-/* FUN_0018bc94 @ 0x18bc94 (1332 bytes) */
-int FUN_0018bc94(packStateRow, depth, slotTable, fillCounts)
+/* PackState__placeSourcesRecursive @ 0x18bc94 (1332 bytes) */
+int PackState__placeSourcesRecursive(packStateRow, depth, slotTable, fillCounts)
   int packStateRow;
   int depth;
   int *slotTable;
@@ -3275,7 +3275,7 @@ int FUN_0018bc94(packStateRow, depth, slotTable, fillCounts)
   if (depth < 3) {
     loopIndex2 = depth * 4 + packStateRow;
     if (*(int *)(loopIndex2 + 0x30) == 0) {
-      loopIndex2 = ((int (*)())FUN_0018bc94)(packStateRow,depth + 1,slotTable,fillCounts);
+      loopIndex2 = ((int (*)())PackState__placeSourcesRecursive)(packStateRow,depth + 1,slotTable,fillCounts);
       if (loopIndex2 != 0) goto LAB_0018c1b0;
     }
     else {
@@ -3313,7 +3313,7 @@ int FUN_0018bc94(packStateRow, depth, slotTable, fillCounts)
           *loopPtr3 = *(int *)(loopIndex2 + 0x24);
           *loopPtr6 = *loopPtr6 + 1;
           *loopPtr7 = *loopPtr7 + 1;
-          placed = ((int (*)())FUN_0018bc94)(packStateRow,depth + 1,slotTable,fillCounts);
+          placed = ((int (*)())PackState__placeSourcesRecursive)(packStateRow,depth + 1,slotTable,fillCounts);
           if (placed != 0) goto LAB_0018c1b0;
           *loopPtr6 = *loopPtr6 + -1;
           testResult = *loopPtr7 + -1;
@@ -3477,7 +3477,7 @@ LAB_0018c498:
       do {
         if ((packState[4] == 0) || (packState[5] == 0)) {
 LAB_0018c6a0:
-          callResult = ((int (*)())FUN_0018bc94)(packState,0,slotTable,slotUseCounts);
+          callResult = ((int (*)())PackState__placeSourcesRecursive)(packState,0,slotTable,slotUseCounts);
           if (callResult != 0) {
             return 1;
           }
@@ -3647,8 +3647,8 @@ int ConstantSlots__tryAddToRow(slotOwner, candidate, slotRow)
   return 1;
 }
 
-/* FUN_0018c980 @ 0x18c980 (1112 bytes) */
-int FUN_0018c980(packState, regA, regB)
+/* ConstantSlots__tryAssignSourceToBothHalves @ 0x18c980 (1112 bytes) */
+int ConstantSlots__tryAssignSourceToBothHalves(packState, regA, regB)
   int packState;
   int *regA;
   int *regB;
@@ -4051,7 +4051,7 @@ LAB_0018d948:
             operandIndex2 = ((int (*)())ConstantSlots__tryAddToRow)(packState,a0,0);
           }
           else {
-            operandIndex2 = ((int (*)())FUN_0018c980)(packState,a0,a0);
+            operandIndex2 = ((int (*)())ConstantSlots__tryAssignSourceToBothHalves)(packState,a0,a0);
             laneMask = a0;
           }
           if (operandIndex2 == 0) {

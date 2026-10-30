@@ -2841,8 +2841,8 @@
 0x177e14	ValueKey__insertBinaryOfOperandsLane	528	yes	
 0x178024	ValueKey__insertMovOfOperandLane	384	yes	
 0x1781a4	FUN_001781a4	404	no	indirect call (driver context / vtable / callback)
-0x178338	FUN_00178338	656	no	indirect call (driver context / vtable / callback)
-0x178648	FUN_00178648	708	no	indirect call (driver context / vtable / callback)
+0x178338	ValueKey__classifyLaneRangeClass	656	no	indirect call (driver context / vtable / callback)
+0x178648	ValueKey__classifyLaneCompareClass	708	no	indirect call (driver context / vtable / callback)
 0x1789d4	IRInst__isOpcode8bOr8c	28	yes	
 0x1789f0	ValueKey__sourcesHaveNoModifiers	168	no	indirect call (driver context / vtable / callback)
 0x178a98	FUN_00178a98	132	yes	
@@ -2869,8 +2869,8 @@
 0x17a034	ValueKey__forwardOperandByCompareToZero	252	yes	
 0x17a130	ValueKey__setLiteralVec4Operand	324	yes	
 0x17a294	ValueKey__setLiteralOperandsForOpcode	320	yes	
-0x17a3d4	FUN_0017a3d4	884	no	indirect call (driver context / vtable / callback)
-0x17a748	FUN_0017a748	348	yes	
+0x17a3d4	ValueKey__foldCompareOfFloatConstants	884	no	indirect call (driver context / vtable / callback)
+0x17a748	ValueKey__foldEqualSourcesCompareToLiteralOperands	348	yes	
 0x17a8a4	ValueKey__foldCompareAgainstZero	680	no	indirect call (driver context / vtable / callback)
 0x17ab4c	ValueKey__foldDotPowerOfTwoIntoOutputScale	472	no	indirect call (driver context / vtable / callback)
 0x17ad24	ValueKey__insertSplatMov	260	yes	
@@ -2885,8 +2885,8 @@
 0x17c0f8	ValueKey__foldDot4UnitVectorSource	332	yes	
 0x17c244	ValueKey__rewriteAsMovOfOperand	468	yes	
 0x17c41c	ValueKey__replaceWithSource2IfSourcesEqual23	136	yes	
-0x17c4a4	FUN_0017c4a4	316	no	indirect call (driver context / vtable / callback)
-0x17c5e0	FUN_0017c5e0	404	yes	
+0x17c4a4	ValueKey__foldModifierDifferenceIntoSource2	316	no	indirect call (driver context / vtable / callback)
+0x17c5e0	ValueKey__foldCompareAgainstZeroToSource	404	yes	
 0x17c774	ValueKey__foldMulByPlusMinusOne	276	yes	
 0x17c888	ValueKey__replaceWithSource1IfSourcesEqual	136	yes	
 0x17c910	ValueKey__foldMinOfConstants	516	no	indirect call (driver context / vtable / callback)
@@ -2900,9 +2900,9 @@
 0x17d4e0	ValueKey__replaceWithZeroIfSourcesEqual	156	yes	
 0x17d57c	ValueKey__foldMulByZero	148	yes	
 0x17d610	ValueKey__foldOppositeNegatesToZero	156	yes	
-0x17d6ac	FUN_0017d6ac	780	no	indirect call (driver context / vtable / callback)
+0x17d6ac	ValueKey__replaceWithLaneConstants	780	no	indirect call (driver context / vtable / callback)
 0x17d9b8	ValueKey__foldCompareOfConstants	548	yes	
-0x17dbdc	FUN_0017dbdc	1104	no	indirect call (driver context / vtable / callback)
+0x17dbdc	ValueKey__evaluateLaneConstants	1104	no	indirect call (driver context / vtable / callback)
 0x17e02c	ValueKey__rewriteAsMovOfOperandWithScale	452	yes	
 0x17e1f4	ValueKey__foldMulPowerOfTwoIntoOutputScale	324	no	indirect call (driver context / vtable / callback)
 0x17e338	ValueKey__foldEqualSourcesIntoOutputScale	188	no	indirect call (driver context / vtable / callback)
@@ -2919,7 +2919,7 @@
 0x17f5a4	ValueKey__splitDestinationToTemp	488	no	indirect call (driver context / vtable / callback)
 0x17f78c	ValueKey__splitDestinationIfEligible	96	yes	
 0x17f7ec	ValueKey__simplifyInstruction	1848	no	indirect call (driver context / vtable / callback)
-0x180154	FUN_00180154	888	yes	
+0x180154	ValueKey__createLaneRecordsByOpcode	888	yes	
 0x180250	ValueKey__canonicalizeConstantSources	1504	no	indirect call (driver context / vtable / callback)
 0x180830	ValueKey__simplifyModifiersAndAddressing	4312	no	indirect call (driver context / vtable / callback)
 0x181928	Inst__isFoldableSingleUse	140	no	indirect call (driver context / vtable / callback)
@@ -2938,11 +2938,11 @@
 0x184d7c	Inst__splitAndMerge	372	yes	
 0x184ef0	IRInst__foldResultScaleIntoUsers	2760	no	indirect call (driver context / vtable / callback)
 0x1859bc	Inst__tryDp3Add	996	yes	
-0x185da4	FUN_00185da4	1900	no	indirect call (driver context / vtable / callback)
-0x186510	FUN_00186510	1400	no	indirect call (driver context / vtable / callback)
-0x186a88	FUN_00186a88	2816	no	indirect call (driver context / vtable / callback)
+0x185da4	Inst__foldProducerIntoOperand	1900	no	indirect call (driver context / vtable / callback)
+0x186510	Inst__mergeSourceInstructions	1400	no	indirect call (driver context / vtable / callback)
+0x186a88	Inst__foldSourceProducerIntoConsumer	2816	no	indirect call (driver context / vtable / callback)
 0x1875a8	Inst__r300ReassociateAddPair	1328	no	indirect call (driver context / vtable / callback)
-0x187ad8	FUN_00187ad8	1996	no	indirect call (driver context / vtable / callback)
+0x187ad8	Inst__foldSelectIntoUsers	1996	no	indirect call (driver context / vtable / callback)
 0x1882a4	Inst__r300Peephole_1882a4	408	no	indirect call (driver context / vtable / callback)
 0x18843c	KhanPs__peepholeCombine	1328	no	indirect call (driver context / vtable / callback)
 0x18896c	Inst__movAndShiftUseVector	1208	no	indirect call (driver context / vtable / callback)
@@ -2971,14 +2971,14 @@
 0x18a1ec	R300SchedModel__vslot26	596	no	indirect call (driver context / vtable / callback)
 0x18a440	R300SchedModel__vslot28	2212	no	indirect call (driver context / vtable / callback)
 0x18ad08	R300SchedModel__vslot16	1204	no	indirect call (driver context / vtable / callback)
-0x18b1bc	FUN_0018b1bc	1176	no	indirect call (driver context / vtable / callback)
+0x18b1bc	PackNode__clearSlotRangeAndReassign	1176	no	indirect call (driver context / vtable / callback)
 0x18b654	R300SchedModel__vslot11	888	no	indirect call (driver context / vtable / callback)
 0x18b9cc	R300SchedModel__vslot14	712	no	indirect call (driver context / vtable / callback)
-0x18bc94	FUN_0018bc94	1332	yes	
+0x18bc94	PackState__placeSourcesRecursive	1332	yes	
 0x18c1c8	PackState__buildSlotTable	1440	yes	
 0x18c768	PackState__countFreeSlots	140	yes	
 0x18c7f4	ConstantSlots__tryAddToRow	396	no	indirect call (driver context / vtable / callback)
-0x18c980	FUN_0018c980	1112	no	indirect call (driver context / vtable / callback)
+0x18c980	ConstantSlots__tryAssignSourceToBothHalves	1112	no	indirect call (driver context / vtable / callback)
 0x18cdd8	ConstantSlots__tryAssignPair	1456	no	indirect call (driver context / vtable / callback)
 0x18d388	ConstantSlots__tryAssignSingle	300	no	indirect call (driver context / vtable / callback)
 0x18d4b4	PackState__tryPlaceInstructionSources	1428	yes	
@@ -3010,7 +3010,7 @@
 0x191e28	FudoPs__createSchedModels	196	yes	
 0x191efc	FudoPs__ctor_191efc	448	yes	
 0x1920e0	FudoPs__ctor_1920e0	748	yes	
-0x1922c4	FUN_001922c4	1220	no	indirect call (driver context / vtable / callback)
+0x1922c4	Inst__rewriteSetOpcodesWithLiterals	1220	no	indirect call (driver context / vtable / callback)
 0x19286c	FudoPs__peepholeCombine	4308	no	indirect call (driver context / vtable / callback)
 0x193944	R520SchedModel__vslot21	112	no	indirect call (driver context / vtable / callback)
 0x1939b4	R520SchedModel__vslot22	76	yes	
@@ -3108,7 +3108,7 @@
 0x196370	R300MachineAssembler__trackMaxLevelAndAssemble	64	yes	
 0x1963b0	R300MachineAssembler__vslot5_beginProgram	236	yes	
 0x19649c	R300MachineAssembler__noteFetchTextureUnit	128	no	indirect call (driver context / vtable / callback)
-0x19651c	FUN_0019651c	640	no	indirect call (driver context / vtable / callback)
+0x19651c	R300MachineAssembler__emitFetchRecord	640	no	indirect call (driver context / vtable / callback)
 0x19679c	R300MachineAssembler__resolveSourceRegister	188	no	indirect call (driver context / vtable / callback)
 0x196858	R300MachineAssembler__setAluSourceSelectsAndModifiers	640	no	indirect call (driver context / vtable / callback)
 0x196ad8	R300MachineAssembler__setRgbOpcode	644	yes	

@@ -1497,9 +1497,9 @@ fd5c8	Program__translateILStream	103cf4	103cf8	-	no-handler
 1920e0	FudoPs__ctor_1920e0	192108	19210c	-	no-handler
 1920e0	FudoPs__ctor_1920e0	19217c	192284	1922a0	cleanup
 1920e0	FudoPs__ctor_1920e0	1922c0	1922c4	-	no-handler
-1922c4	FUN_001922c4	1924c8	1926ac	-	no-handler
-1922c4	FUN_001922c4	1926b8	1926bc	19279c	cleanup
-1922c4	FUN_001922c4	1926c4	192854	-	no-handler
+1922c4	Inst__rewriteSetOpcodesWithLiterals	1924c8	1926ac	-	no-handler
+1922c4	Inst__rewriteSetOpcodesWithLiterals	1926b8	1926bc	19279c	cleanup
+1922c4	Inst__rewriteSetOpcodesWithLiterals	1926c4	192854	-	no-handler
 19286c	FudoPs__peepholeCombine	1928b0	193228	-	no-handler
 19286c	FudoPs__peepholeCombine	193234	193238	19323c	cleanup
 19286c	FudoPs__peepholeCombine	19323c	193910	-	no-handler

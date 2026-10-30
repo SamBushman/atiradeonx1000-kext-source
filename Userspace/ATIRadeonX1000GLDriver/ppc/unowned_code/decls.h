@@ -508,7 +508,7 @@ extern int OpcodeSetup__mode5();
 extern int pass_flatten_ifs();
 extern int ResourceModel__vslot11();
 extern int Compiler__findInPtrSet();
-extern int FUN_00186a88();
+extern int Inst__foldSourceProducerIntoConsumer();
 extern int List__freeAllNodes();
 extern int _calloc();
 extern int _malloc();

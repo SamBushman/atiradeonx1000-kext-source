@@ -158,8 +158,8 @@
 17ab4c	ValueKey__foldDotPowerOfTwoIntoOutputScale	r8	PASS-indirect	17ab98 bl 0x178d78
 17b12c	ValueKey__mixLiteralSources	r7	PASS-no	17b154 bl 0xe07dc
 17b12c	ValueKey__mixLiteralSources	r8	PASS-no	17b154 bl 0xe07dc
-17d6ac	FUN_0017d6ac	r7	PASS-deep	17d6dc bl 0x1054ec
-17d6ac	FUN_0017d6ac	r8	PASS-deep	17d6dc bl 0x1054ec
+17d6ac	ValueKey__replaceWithLaneConstants	r7	PASS-deep	17d6dc bl 0x1054ec
+17d6ac	ValueKey__replaceWithLaneConstants	r8	PASS-deep	17d6dc bl 0x1054ec
 17e1f4	ValueKey__foldMulPowerOfTwoIntoOutputScale	r6	PASS-deep	17e22c bl 0x1770e4
 17e1f4	ValueKey__foldMulPowerOfTwoIntoOutputScale	r7	PASS-deep	17e22c bl 0x1770e4
 17e1f4	ValueKey__foldMulPowerOfTwoIntoOutputScale	r8	PASS-deep	17e22c bl 0x1770e4
@@ -176,7 +176,7 @@
 18120	glCopyPixels_impl	r10	PASS-no	18168 bl 0xa2f0
 18ad08	R300SchedModel__vslot16	r7	PASS-indirect	18ad4c bl 0x1043f0
 18ad08	R300SchedModel__vslot16	r8	PASS-indirect	18ad4c bl 0x1043f0
-18b1bc	FUN_0018b1bc	r8	PASS-indirect	18b29c bl 0x19423c
+18b1bc	PackNode__clearSlotRangeAndReassign	r8	PASS-indirect	18b29c bl 0x19423c
 18b654	R300SchedModel__vslot11	r7	PASS-deep	18b714 bl 0xf3a30
 18b654	R300SchedModel__vslot11	r8	PASS-deep	18b714 bl 0xf3a30
 18b9cc	R300SchedModel__vslot14	r7	PASS-indirect	18ba00 bl 0x126760

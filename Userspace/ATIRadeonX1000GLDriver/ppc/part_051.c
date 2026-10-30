@@ -870,8 +870,8 @@ int R300MachineAssembler__noteFetchTextureUnit(this, sourceIndex, inst)
   return;
 }
 
-/* FUN_0019651c @ 0x19651c (640 bytes) */
-int FUN_0019651c(assembler, inst, staleArg3)
+/* R300MachineAssembler__emitFetchRecord @ 0x19651c (640 bytes) */
+int R300MachineAssembler__emitFetchRecord(assembler, inst, staleArg3)
   int *assembler;
   int inst;
   uint staleArg3;
@@ -1293,7 +1293,7 @@ int R300MachineAssembler__placeInstructionConstants(this, inst, constantAllocato
             placed = ConstantSlots__tryAddToRow(constantAllocator,a0,0);
           }
           else {
-            placed = FUN_0018c980(constantAllocator,a0,a0);
+            placed = ConstantSlots__tryAssignSourceToBothHalves(constantAllocator,a0,a0);
           }
 joined_r0x00197160:
           if (placed == 0) {
@@ -1531,7 +1531,7 @@ LAB_001976d0:
               }
               predicate4c = (**(code **)(*cursorInst + 0x4c))(cursorInst);
               if (predicate4c != 0) {
-                ((int (*)())FUN_0019651c)(this,cursorInst,this[3]);
+                ((int (*)())R300MachineAssembler__emitFetchRecord)(this,cursorInst,this[3]);
               }
               predicate38 = (**(code **)(*cursorInst + 0x38))(cursorInst);
               if ((predicate38 != 0) && (this[0x23] == 1)) {

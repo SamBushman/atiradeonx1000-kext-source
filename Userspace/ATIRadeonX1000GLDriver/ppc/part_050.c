@@ -580,8 +580,8 @@ int FudoPs__ctor_1920e0(this, compiler, createSchedModels)
   return;
 }
 
-/* FUN_001922c4 @ 0x1922c4 (1016 bytes) */
-int FUN_001922c4(staleArg1, staleArg2, inst, program)
+/* Inst__rewriteSetOpcodesWithLiterals @ 0x1922c4 (1016 bytes) */
+int Inst__rewriteSetOpcodesWithLiterals(staleArg1, staleArg2, inst, program)
   undefined4 staleArg1;
   undefined4 staleArg2;
   int *inst;
@@ -1101,7 +1101,7 @@ LAB_00193490:
       curInst = (int *)IRInst__getOperandSourceOrDefault(inst,consumerSrcIndex,curInst);
     }
   }
-  combinedInst = (int *)((int (*)())FUN_001922c4)(inst,consumerSrcIndex,curInst,program);
+  combinedInst = (int *)((int (*)())Inst__rewriteSetOpcodesWithLiterals)(inst,consumerSrcIndex,curInst,program);
   loopIndex3 = FUN_00159b58(combinedInst,1,program);
   if (loopIndex3 != 0) {
     changedFlag = 1;

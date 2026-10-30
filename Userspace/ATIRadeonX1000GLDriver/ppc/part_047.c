@@ -842,8 +842,8 @@ int FUN_001781a4(resultOut, valueKey, changedOut)
   return resultOut;
 }
 
-/* FUN_00178338 @ 0x178338 (656 bytes) */
-int FUN_00178338(ctx, lane, clampFlagsOut)
+/* ValueKey__classifyLaneRangeClass @ 0x178338 (656 bytes) */
+int ValueKey__classifyLaneRangeClass(ctx, lane, clampFlagsOut)
   int ctx;
   int lane;
   int clampFlagsOut;
@@ -947,8 +947,8 @@ int FUN_00178338(ctx, lane, clampFlagsOut)
   return;
 }
 
-/* FUN_00178648 @ 0x178648 (708 bytes) */
-int FUN_00178648(ctx, lane)
+/* ValueKey__classifyLaneCompareClass @ 0x178648 (708 bytes) */
+int ValueKey__classifyLaneCompareClass(ctx, lane)
   int ctx;
   int lane;
 {
@@ -2166,8 +2166,8 @@ int ValueKey__setLiteralOperandsForOpcode(ctx, vec4Constant, compiler)
   return;
 }
 
-/* FUN_0017a3d4 @ 0x17a3d4 (884 bytes) */
-int FUN_0017a3d4(ctx)
+/* ValueKey__foldCompareOfFloatConstants @ 0x17a3d4 (884 bytes) */
+int ValueKey__foldCompareOfFloatConstants(ctx)
   int ctx;
 {
   int operandRecAddr;
@@ -2347,8 +2347,8 @@ LAB_0017a608:
   } while( true );
 }
 
-/* FUN_0017a748 @ 0x17a748 (348 bytes) */
-int FUN_0017a748(ctx)
+/* ValueKey__foldEqualSourcesCompareToLiteralOperands @ 0x17a748 (348 bytes) */
+int ValueKey__foldEqualSourcesCompareToLiteralOperands(ctx)
   int ctx;
 {
   int operandRecord;

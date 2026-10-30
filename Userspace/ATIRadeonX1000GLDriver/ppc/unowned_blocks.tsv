@@ -3400,8 +3400,8 @@ ffd5c	ffd60	millicode	Program__translateILStream	1
 172f2c	172f34	millicode	returnZero_172f24	2	
 1764dc	1764e0	millicode	ValueKey__findOrInsertLiteral	1	
 176e0c	176e20	other	FUN_00176d6c	5	
-178478	1784f8	table	FUN_00178338	32	
-1787b4	17887c	table	FUN_00178648	50	
+178478	1784f8	table	ValueKey__classifyLaneRangeClass	32	
+1787b4	17887c	table	ValueKey__classifyLaneCompareClass	50	
 179228	179248	eh-pad	ValueKey__insertTempCopyOfOperand	8	0x193cc0,__Unwind_Resume
 17a24c	17a26c	eh-pad	ValueKey__setLiteralVec4Operand	8	0x193cc0,__Unwind_Resume
 17aed4	17aef4	eh-pad	ValueKey__setOperandFromValueKey	8	0x193cc0,__Unwind_Resume
@@ -3429,7 +3429,7 @@ ffd5c	ffd60	millicode	Program__translateILStream	1
 184290	1842b0	eh-pad	Block__moveProducersBefore	8	0x193cc0,__Unwind_Resume
 185878	18587c	eh-pad	IRInst__foldResultScaleIntoUsers	1	__Unwind_Resume
 185c28	185c2c	eh-pad	Inst__tryDp3Add	1	__Unwind_Resume
-187588	1875a8	other	FUN_00186a88	8	
+187588	1875a8	other	Inst__foldSourceProducerIntoConsumer	8	
 189764	18976c	millicode	SelectWord__isDefaultAfterCanonicalise	2	
 1897f8	1897fc	millicode	KhanPs__vslot66_callHelper189788	1	
 18a528	18a548	eh-pad	R300SchedModel__vslot28	8	0x193cc0,__Unwind_Resume
@@ -3446,8 +3446,8 @@ ffd5c	ffd60	millicode	Program__translateILStream	1
 191eec	191efc	eh-pad	FudoPs__ctor_1920e0	4	__Unwind_Resume
 1920bc	1920e0	eh-pad	FudoPs__ctor_1920e0	9	__Unwind_Resume
 1922a0	1922c4	eh-pad	FudoPs__ctor_191efc	9	__Unwind_Resume
-192358	192438	table	FUN_001922c4	56	
-19279c	1927a0	eh-pad	FUN_001922c4	1	__Unwind_Resume
+192358	192438	table	Inst__rewriteSetOpcodesWithLiterals	56	
+19279c	1927a0	eh-pad	Inst__rewriteSetOpcodesWithLiterals	1	__Unwind_Resume
 19323c	193240	eh-pad	FudoPs__peepholeCombine	1	__Unwind_Resume
 193b88	193ba8	eh-pad	TypedValueArray__createWrapping	8	0x193cc0,__Unwind_Resume
 193bd0	193be8	other	TypedValueArray__createWrapping	6	
