@@ -527,9 +527,9 @@ ffd5c	ffd60	FUN_000fd5c8
 182040	182060	Block__flattenAndRebuildAddMulTree
 183a98	183a9c	Block__flattenAndRebuildAddMulTree
 1840ac	1840cc	pass_height_reduction
-18421c	184238	FUN_0018413c
-184250	18426c	FUN_0018413c
-184290	1842b0	FUN_0018413c
+18421c	184238	Block__moveProducersBefore
+184250	18426c	Block__moveProducersBefore
+184290	1842b0	Block__moveProducersBefore
 185878	18587c	IRInst__foldResultScaleIntoUsers
 185c28	185c2c	Inst__tryDp3Add
 18a528	18a548	R300SchedModel__vslot28

@@ -2258,7 +2258,7 @@ int FUN_0017ee68(ctx)
   float laneValues [5];
   
   loopIndex = 1;
-  while ((FUN_00178d78(laneValues,ctx,loopIndex), laneValues[0] != FLOAT_001aa0e8 &&
+  while ((ValueKey__dotOperandSplatValue(laneValues,ctx,loopIndex), laneValues[0] != FLOAT_001aa0e8 &&
          (laneValues[0] != FLOAT_001aa114))) {
     isLastLane = loopIndex == 2;
     loopIndex = loopIndex + 1;
@@ -2847,7 +2847,7 @@ LAB_0017fe28:
           loopIndex = *(int *)(ctx + 0x238);
           if (*(int *)(loopIndex + 0x658) <= *(int *)(*(int *)(loopIndex + 0x6c4) + 0xa8))
           goto LAB_0017fe30;
-          if ((*loopPtr3 == 0x7ffffffe) && (loopIndex = FUN_0017a034(ctx,loopIndex2), loopIndex == 0)) {
+          if ((*loopPtr3 == 0x7ffffffe) && (loopIndex = ValueKey__forwardOperandByCompareToZero(ctx,loopIndex2), loopIndex == 0)) {
             ValueKey__forwardSource3LaneIfEqual(ctx,loopIndex2);
           }
         }
@@ -2899,7 +2899,7 @@ LAB_0017fe28:
       goto LAB_0017fe34;
     }
     if (loopIndex != 0x8c) goto LAB_0017fe28;
-    loopIndex = FUN_0017a8a4(ctx);
+    loopIndex = ValueKey__foldCompareAgainstZero(ctx);
     if (loopIndex != 0) {
       return 0;
     }
@@ -3753,7 +3753,7 @@ code_r0x001812b0:
           }
         }
         else {
-          FUN_00178d78(&valueNumberOut3,key,loopIndex2);
+          ValueKey__dotOperandSplatValue(&valueNumberOut3,key,loopIndex2);
           loopPtr8 = *(int **)(key + 0xb0);
           loopIndex = valueNumberOut3;
         }
@@ -5216,19 +5216,19 @@ code_r0x001836f0:
   return 1;
 }
 
-/* FUN_00183ac8 @ 0x183ac8 (212 bytes) */
-int FUN_00183ac8(param_1)
-  int param_1;
+/* ObjectVector__freeAllElements @ 0x183ac8 (212 bytes) */
+int ObjectVector__freeAllElements(owner)
+  int owner;
 {
   uint vectorFilledCount;
   int *elementRef;
-  int iVar3;
+  int element;
   uint vectorFilledCount2;
   uint loopIndex;
   uint *vector;
   
   loopIndex = 0;
-  vector = *(uint **)(param_1 + 0x1c);
+  vector = *(uint **)(owner + 0x1c);
   vectorFilledCount2 = vector[1];
   if (0 < (int)vectorFilledCount2) {
     while( true ) {
@@ -5244,14 +5244,14 @@ int FUN_00183ac8(param_1)
         elementRef = (int *)Vector__elementRefGrow(vector,loopIndex);
       }
       loopIndex = loopIndex + 1;
-      iVar3 = *elementRef;
-      if (iVar3 != 0) {
-        Arena__free(*(undefined4 *)(iVar3 + -4),iVar3 + -4);
+      element = *elementRef;
+      if (element != 0) {
+        Arena__free(*(undefined4 *)(element + -4),element + -4);
       }
       if (vectorFilledCount2 == loopIndex) break;
-      vector = *(uint **)(param_1 + 0x1c);
+      vector = *(uint **)(owner + 0x1c);
     }
-    vector = *(uint **)(param_1 + 0x1c);
+    vector = *(uint **)(owner + 0x1c);
   }
   vector[1] = 0;
   return;
@@ -5411,7 +5411,7 @@ LAB_00183fe8:
       } while( true );
     }
   }
-  return ((int (*)())FUN_00183ac8)(rebuildState);
+  return ((int (*)())ObjectVector__freeAllElements)(rebuildState);
 }
 
 /* pass_height_reduction @ 0x18401c (144 bytes) */
@@ -5493,8 +5493,8 @@ int pass_height_reduction(rebuildState, program, staleArg3, staleArg4, staleArg5
   return 1;
 }
 
-/* FUN_0018413c @ 0x18413c (224 bytes) */
-int FUN_0018413c(compilerRef, passArg, block, beforeInst)
+/* Block__moveProducersBefore @ 0x18413c (224 bytes) */
+int Block__moveProducersBefore(compilerRef, passArg, block, beforeInst)
   int *compilerRef;
   undefined4 passArg;
   undefined4 block;
@@ -5851,7 +5851,7 @@ int pass_minreg_order(scheduler, program)
         if ((((nextBlock == 0) && (nextBlock = (**(code **)(*inst + 0x38))(inst), nextBlock == 0)) &&
             (nextBlock = (**(code **)(*inst + 0x14))(inst), 0 < nextBlock)) &&
            (nextBlock = ((int (*)())Inst__isFoldableSingleUse)(inst,block,program), nextBlock == 0)) {
-          ((int (*)())FUN_0018413c)(scheduler,program,block,inst);
+          ((int (*)())Block__moveProducersBefore)(scheduler,program,block,inst);
         }
         nextInst = (int *)currentInst[1];
         inst = currentInst;

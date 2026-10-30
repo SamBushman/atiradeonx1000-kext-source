@@ -2149,12 +2149,12 @@ int Inst__computeKey(inst)
                  (src1Register & 0xfff) << 0xc;
 }
 
-/* FUN_00189ce0 @ 0x189ce0 (276 bytes) */
-int FUN_00189ce0(inst, inst2)
+/* Inst__compareForMerge @ 0x189ce0 (276 bytes) */
+int Inst__compareForMerge(inst, inst2)
   int *inst;
   int *inst2;
 {
-  char cVar1;
+  char alphaFlag;
   int callResult;
   int operandVReg;
   
@@ -2164,9 +2164,9 @@ int FUN_00189ce0(inst, inst2)
   }
   if (*(int *)(inst[0x22] + 8) == *(int *)(inst2[0x22] + 8)) {
     callResult = IRInst__getOperandRecord(inst,0);
-    cVar1 = *(char *)(callResult + 0x13);
+    alphaFlag = *(char *)(callResult + 0x13);
     callResult = IRInst__getOperandRecord(inst2,0);
-    if (cVar1 == *(char *)(callResult + 0x13)) {
+    if (alphaFlag == *(char *)(callResult + 0x13)) {
       callResult = IRInst__getOperandSource(inst,1);
       operandVReg = IRInst__getOperandSource(inst2,1);
       if (callResult == operandVReg) {

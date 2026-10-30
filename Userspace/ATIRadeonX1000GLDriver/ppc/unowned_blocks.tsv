@@ -3424,9 +3424,9 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 182040	182060	eh-pad	Block__flattenAndRebuildAddMulTree	8	0x193cc0,__Unwind_Resume
 183a98	183a9c	eh-pad	Block__flattenAndRebuildAddMulTree	1	__Unwind_Resume
 1840ac	1840cc	eh-pad	pass_height_reduction	8	0x193cc0,__Unwind_Resume
-18421c	184238	other	FUN_0018413c	7	0x193cc0
-184250	18426c	other	FUN_0018413c	7	0x193cc0
-184290	1842b0	eh-pad	FUN_0018413c	8	0x193cc0,__Unwind_Resume
+18421c	184238	other	Block__moveProducersBefore	7	0x193cc0
+184250	18426c	other	Block__moveProducersBefore	7	0x193cc0
+184290	1842b0	eh-pad	Block__moveProducersBefore	8	0x193cc0,__Unwind_Resume
 185878	18587c	eh-pad	IRInst__foldResultScaleIntoUsers	1	__Unwind_Resume
 185c28	185c2c	eh-pad	Inst__tryDp3Add	1	__Unwind_Resume
 187588	1875a8	other	FUN_00186a88	8	

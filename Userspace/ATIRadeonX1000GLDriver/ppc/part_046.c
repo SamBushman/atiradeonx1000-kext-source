@@ -803,7 +803,7 @@ int FUN_001745f0(ctx)
     do {
       callResult = ValueKey__simplifyInstruction(ctx);
     } while (callResult != 0);
-    callResult = FUN_0017b96c(ctx);
+    callResult = ValueKey__rewriteUniformSwizzle(ctx);
     if (callResult != 0) {
       ((int (*)())ValueKey__rebuild)(ctx);
     }
@@ -1582,8 +1582,8 @@ LAB_001754f8:
   } while (loopRemaining != 0);
 LAB_001757ec:
   ((int (*)())FUN_00173af8)(valueKey,local_68);
-  FUN_0017729c(valueKey);
-  FUN_001771b0(valueKey);
+  ValueKey__computeLaneCompareCodes(valueKey);
+  ValueKey__computeLaneRangeClasses(valueKey);
   return;
 }
 

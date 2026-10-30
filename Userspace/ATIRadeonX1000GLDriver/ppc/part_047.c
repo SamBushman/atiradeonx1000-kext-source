@@ -162,8 +162,8 @@ LAB_00177184:
   return resultOut;
 }
 
-/* FUN_001771b0 @ 0x1771b0 (236 bytes) */
-int FUN_001771b0(ctx)
+/* ValueKey__computeLaneRangeClasses @ 0x1771b0 (236 bytes) */
+int ValueKey__computeLaneRangeClasses(ctx)
   int *ctx;
 {
   int operandRecord;
@@ -217,8 +217,8 @@ LAB_00177254:
   } while( true );
 }
 
-/* FUN_0017729c @ 0x17729c (224 bytes) */
-int FUN_0017729c(ctx)
+/* ValueKey__computeLaneCompareCodes @ 0x17729c (224 bytes) */
+int ValueKey__computeLaneCompareCodes(ctx)
   int *ctx;
 {
   int operandRecord;
@@ -1243,8 +1243,8 @@ LAB_00178d10:
   return resultOut;
 }
 
-/* FUN_00178d78 @ 0x178d78 (280 bytes) */
-int FUN_00178d78(resultOut, key, operandNumber)
+/* ValueKey__dotOperandSplatValue @ 0x178d78 (280 bytes) */
+int ValueKey__dotOperandSplatValue(resultOut, key, operandNumber)
   undefined4 *resultOut;
   int key;
   int operandNumber;
@@ -1463,39 +1463,39 @@ int ValueKey__insertTempCopyOfOperand(ctx, operandIndex)
   return callResult;
 }
 
-/* FUN_001792f0 @ 0x1792f0 (232 bytes) */
-int FUN_001792f0(ctx, param_2)
+/* ValueKey__operandDefinitionIsFlagBit8 @ 0x1792f0 (232 bytes) */
+int ValueKey__operandDefinitionIsFlagBit8(ctx, operandIndex)
   int ctx;
-  int param_2;
+  int operandIndex;
 {
   int *a0;
   int callResult;
   int *elementRef;
-  uint uVar3;
+  uint lastElementIndex;
   uint vectorFilledCount;
   uint *vector;
-  int iVar6;
+  int definingRow;
   
   a0 = *(int **)(ctx + 0xb0);
-  vector = *(uint **)(a0[param_2 * 6 + 0x23] + 0x2c);
+  vector = *(uint **)(a0[operandIndex * 6 + 0x23] + 0x2c);
   vectorFilledCount = vector[1];
-  uVar3 = vectorFilledCount - 1;
-  if (uVar3 < *vector) {
-    if (vectorFilledCount <= uVar3) {
-      _memset(vectorFilledCount * 4 + vector[2],0,(uVar3 - vectorFilledCount) * 4 + 4);
+  lastElementIndex = vectorFilledCount - 1;
+  if (lastElementIndex < *vector) {
+    if (vectorFilledCount <= lastElementIndex) {
+      _memset(vectorFilledCount * 4 + vector[2],0,(lastElementIndex - vectorFilledCount) * 4 + 4);
       vector[1] = vectorFilledCount;
       a0 = *(int **)(ctx + 0xb0);
     }
-    elementRef = (int *)(uVar3 * 4 + vector[2]);
+    elementRef = (int *)(lastElementIndex * 4 + vector[2]);
   }
   else {
-    elementRef = (int *)Vector__elementRefGrow(vector,uVar3);
+    elementRef = (int *)Vector__elementRefGrow(vector,lastElementIndex);
     a0 = *(int **)(ctx + 0xb0);
   }
-  iVar6 = *elementRef;
+  definingRow = *elementRef;
   callResult = (**(code **)(*a0 + 100))(a0);
   if ((callResult != 0) &&
-     (callResult = OpcodeTraits__flagBit8(*(undefined4 *)(*(int *)(*(int *)(iVar6 + 0xb0) + 0x88) + 8),
+     (callResult = OpcodeTraits__flagBit8(*(undefined4 *)(*(int *)(*(int *)(definingRow + 0xb0) + 0x88) + 8),
                            *(undefined4 *)(ctx + 0x238)), callResult != 0)) {
     return 1;
   }
@@ -2028,8 +2028,8 @@ int ValueKey__forwardOtherSourceIfOne(ctx, lane)
   return 1;
 }
 
-/* FUN_0017a034 @ 0x17a034 (252 bytes) */
-int FUN_0017a034(ctx, lane)
+/* ValueKey__forwardOperandByCompareToZero @ 0x17a034 (252 bytes) */
+int ValueKey__forwardOperandByCompareToZero(ctx, lane)
   int ctx;
   int lane;
 {
@@ -2121,8 +2121,8 @@ int ValueKey__setLiteralVec4Operand(operandIndex, vec4Constant, inst, compiler)
   return vectorCapacity;
 }
 
-/* FUN_0017a294 @ 0x17a294 (320 bytes) */
-int FUN_0017a294(ctx, vec4Constant, compiler)
+/* ValueKey__setLiteralOperandsForOpcode @ 0x17a294 (320 bytes) */
+int ValueKey__setLiteralOperandsForOpcode(ctx, vec4Constant, compiler)
   int ctx;
   float *vec4Constant;
   int compiler;
@@ -2314,7 +2314,7 @@ LAB_0017a608:
         loopIndex = *(int *)(*(int *)(ctx + 0x238) + 0x6c4);
         *(int *)(loopIndex + 0x134) = *(int *)(loopIndex + 0x134) + 1;
       }
-      ((int (*)())FUN_0017a294)(ctx,laneResults,*(undefined4 *)(ctx + 0x238));
+      ((int (*)())ValueKey__setLiteralOperandsForOpcode)(ctx,laneResults,*(undefined4 *)(ctx + 0x238));
       loopIndex = Compiler__isOptionEnabled(*(undefined4 *)(ctx + 0x238),0xd);
       if ((loopIndex != 0) && (lanesAgree != 0)) {
         loopPtr5 = *(int **)(*(int *)(ctx + 0xb0) + 0x158);
@@ -2396,7 +2396,7 @@ int FUN_0017a748(ctx)
         loopPtr3 = loopPtr3 + 1;
         loopIndex = loopIndex + 1;
       } while (notLastLane);
-      ((int (*)())FUN_0017a294)(ctx,replacementVec4,*(undefined4 *)(ctx + 0x238));
+      ((int (*)())ValueKey__setLiteralOperandsForOpcode)(ctx,replacementVec4,*(undefined4 *)(ctx + 0x238));
       ValueKey__rebuild(ctx);
       return 1;
     }
@@ -2404,8 +2404,8 @@ int FUN_0017a748(ctx)
   return 0;
 }
 
-/* FUN_0017a8a4 @ 0x17a8a4 (680 bytes) */
-int FUN_0017a8a4(ctx)
+/* ValueKey__foldCompareAgainstZero @ 0x17a8a4 (680 bytes) */
+int ValueKey__foldCompareAgainstZero(ctx)
   int ctx;
 {
   int compareCondition;
@@ -2498,7 +2498,7 @@ int FUN_0017a8a4(ctx)
     loopRemaining = *(int *)(*(int *)(ctx + 0x238) + 0x6c4);
     *(int *)(loopRemaining + 0x134) = *(int *)(loopRemaining + 0x134) + 1;
   }
-  ((int (*)())FUN_0017a294)(ctx,&laneResults,*(undefined4 *)(ctx + 0x238));
+  ((int (*)())ValueKey__setLiteralOperandsForOpcode)(ctx,&laneResults,*(undefined4 *)(ctx + 0x238));
   loopRemaining = Compiler__isOptionEnabled(*(undefined4 *)(ctx + 0x238),0xd);
   if ((loopRemaining != 0) && (lanesAgree)) {
     blockRef = *(int **)(*(int *)(ctx + 0xb0) + 0x158);
@@ -2553,7 +2553,7 @@ int ValueKey__foldDotPowerOfTwoIntoOutputScale(ctx)
   operandRecOffset = 0x98;
   loopPtr2 = (undefined4 *)(ctx + 0x214);
   do {
-    ((int (*)())FUN_00178d78)(laneValue,ctx,loopIndex);
+    ((int (*)())ValueKey__dotOperandSplatValue)(laneValue,ctx,loopIndex);
     if ((GH_F2U(laneValue[0]) != 0x7ffffffeU)) {
       notNegative = -1 < (int)GH_F2U(laneValue[0]);
       if (notNegative) {
@@ -3115,8 +3115,8 @@ int ValueKey__mixLiteralSources(key)
   return changed;
 }
 
-/* FUN_0017b96c @ 0x17b96c (748 bytes) */
-int FUN_0017b96c(ctx)
+/* ValueKey__rewriteUniformSwizzle @ 0x17b96c (748 bytes) */
+int ValueKey__rewriteUniformSwizzle(ctx)
   int ctx;
 {
   undefined4 valueRow;

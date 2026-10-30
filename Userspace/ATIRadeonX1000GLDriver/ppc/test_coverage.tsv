@@ -2825,8 +2825,8 @@
 0x176fd4	ValueKey__laneRelationHoldsOnWrittenLanes_176fd4	144	yes	
 0x177064	Inst__writtenLanesAllMatchValue	128	yes	
 0x1770e4	ValueKey__commonLaneValue	204	yes	
-0x1771b0	FUN_001771b0	236	yes	
-0x17729c	FUN_0017729c	224	yes	
+0x1771b0	ValueKey__computeLaneRangeClasses	236	yes	
+0x17729c	ValueKey__computeLaneCompareCodes	224	yes	
 0x17737c	ValueKey__sourcesEqualOnWrittenLanes	144	yes	
 0x17740c	ValueKey__sourceIsSplatOfConstant	156	yes	
 0x177548	ValueKey__flagZeroSelectLanes	144	yes	
@@ -2848,11 +2848,11 @@
 0x178a98	FUN_00178a98	132	yes	
 0x178b1c	ValueKey__allDotInputsConstant	360	no	indirect call (driver context / vtable / callback)
 0x178c84	ValueKey__singleLaneValueNumber	244	no	indirect call (driver context / vtable / callback)
-0x178d78	FUN_00178d78	280	yes	
+0x178d78	ValueKey__dotOperandSplatValue	280	yes	
 0x178e90	ValueKey__evalLitLane	468	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x179064	ValueKey__refreshExprRecordForOperand	212	no	indirect call (driver context / vtable / callback)
 0x179138	ValueKey__insertTempCopyOfOperand	408	no	indirect call (driver context / vtable / callback)
-0x1792f0	FUN_001792f0	232	no	indirect call (driver context / vtable / callback)
+0x1792f0	ValueKey__operandDefinitionIsFlagBit8	232	no	indirect call (driver context / vtable / callback)
 0x1793d8	ValueKey__findLaneWithSameValue	560	yes	
 0x179608	ValueKey__operandLanesEqual	456	yes	
 0x1797d0	ValueKey__forwardSource3LaneIfEqual	196	yes	
@@ -2866,19 +2866,19 @@
 0x179db0	ValueKey__forwardAddendIfMultiplicandZero	196	yes	
 0x179e74	ValueKey__forwardSource1LaneIfEqual	196	yes	
 0x179f38	ValueKey__forwardOtherSourceIfOne	252	yes	
-0x17a034	FUN_0017a034	252	yes	
+0x17a034	ValueKey__forwardOperandByCompareToZero	252	yes	
 0x17a130	ValueKey__setLiteralVec4Operand	324	yes	
-0x17a294	FUN_0017a294	320	yes	
+0x17a294	ValueKey__setLiteralOperandsForOpcode	320	yes	
 0x17a3d4	FUN_0017a3d4	884	no	indirect call (driver context / vtable / callback)
 0x17a748	FUN_0017a748	348	yes	
-0x17a8a4	FUN_0017a8a4	680	no	indirect call (driver context / vtable / callback)
+0x17a8a4	ValueKey__foldCompareAgainstZero	680	no	indirect call (driver context / vtable / callback)
 0x17ab4c	ValueKey__foldDotPowerOfTwoIntoOutputScale	472	no	indirect call (driver context / vtable / callback)
 0x17ad24	ValueKey__insertSplatMov	260	yes	
 0x17ae28	ValueKey__setOperandFromValueKey	272	yes	
 0x17af58	ValueKey__commonLaneValue_17af58	200	yes	
 0x17b020	FUN_0017b020	268	no	indirect call (driver context / vtable / callback)
 0x17b12c	ValueKey__mixLiteralSources	2112	no	indirect call (driver context / vtable / callback)
-0x17b96c	FUN_0017b96c	748	no	indirect call (driver context / vtable / callback)
+0x17b96c	ValueKey__rewriteUniformSwizzle	748	no	indirect call (driver context / vtable / callback)
 0x17bc58	Inst__findLaneProducer	288	no	indirect call (driver context / vtable / callback)
 0x17bd78	ValueKey__rewriteAsMovOfOperandLane	500	yes	
 0x17bf70	ValueKey__foldDot3SingleLaneSource	392	no	indirect call (driver context / vtable / callback)
@@ -2927,10 +2927,10 @@
 0x181ab0	Pass__recordFlaggedInstructions	208	yes	
 0x181b80	RebuildState__computeNodeLevels	896	no	indirect call (driver context / vtable / callback)
 0x181f00	Block__flattenAndRebuildAddMulTree	7020	no	indirect call (driver context / vtable / callback)
-0x183ac8	FUN_00183ac8	212	yes	
+0x183ac8	ObjectVector__freeAllElements	212	yes	
 0x183b9c	Block__rebuildAddMulTreesWhereProfitable	1152	yes	
 0x18401c	pass_height_reduction	256	yes	
-0x18413c	FUN_0018413c	2336	no	indirect call (driver context / vtable / callback)
+0x18413c	Block__moveProducersBefore	2336	no	indirect call (driver context / vtable / callback)
 0x184ab4	pass_minreg_order	280	no	indirect call (driver context / vtable / callback)
 0x184bcc	compareIntsAscending	36	yes	
 0x184bf0	ObjectVector__allSatisfyPredicate24	232	no	indirect call (driver context / vtable / callback)
@@ -2964,7 +2964,7 @@
 0x1899ac	SchedModel__assignConstantSelectors	568	no	indirect call (driver context / vtable / callback)
 0x189be4	R300SchedModel__vslot15	64	yes	
 0x189c24	Inst__computeKey	188	no	indirect call (driver context / vtable / callback)
-0x189ce0	FUN_00189ce0	276	no	indirect call (driver context / vtable / callback)
+0x189ce0	Inst__compareForMerge	276	no	indirect call (driver context / vtable / callback)
 0x189df4	SchedModel__classifySlotUse	480	no	indirect call (driver context / vtable / callback)
 0x189fd4	R300SchedModel__vslot19	172	no	indirect call (driver context / vtable / callback)
 0x18a080	R300SchedModel__vslot34	364	no	indirect call (driver context / vtable / callback)

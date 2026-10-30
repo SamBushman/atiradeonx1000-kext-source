@@ -527,9 +527,9 @@
 0x182040	Block__flattenAndRebuildAddMulTree
 0x183a98	Block__flattenAndRebuildAddMulTree
 0x1840ac	pass_height_reduction
-0x18421c	FUN_0018413c
-0x184250	FUN_0018413c
-0x184290	FUN_0018413c
+0x18421c	Block__moveProducersBefore
+0x184250	Block__moveProducersBefore
+0x184290	Block__moveProducersBefore
 0x185878	IRInst__foldResultScaleIntoUsers
 0x185c28	Inst__tryDp3Add
 0x18a528	R300SchedModel__vslot28
