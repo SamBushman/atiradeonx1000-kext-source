@@ -3302,3 +3302,65 @@ use	FUN_00141930	iVar26	copyDestC	INFERRED	role read off the web (cursor/offset/
 use	FUN_00141930	iVar26	copyDestC	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*_memcpy\(iVar26,iVar12,0x2c\);$	+1
 use	FUN_00141930	iVar26	copyDestD	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*iVar26\ =\ iVar23\ \+\ iVar9;$	+1
 use	FUN_00141930	iVar26	copyDestD	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*_memcpy\(iVar11,iVar26,0x2c\);$	+1
+use	FUN_001524b8	bVar1	laneAFree	INFERRED	no lane assigned yet to the first select slot	^\s*bVar1\ =\ true;$	+1
+use	FUN_001524b8	bVar1	laneAFree	INFERRED	no lane assigned yet to the first select slot	^\s*bVar3\ =\ bVar1;$	+1
+use	FUN_001524b8	bVar1	laneAFree	INFERRED	no lane assigned yet to the first select slot	^\s*else\ if\ \(\(\(\*\(char\ \*\)\(\(int\)\&local_a4\ \+\ iVar4\)\ ==\ '\\0'\)\ \&\&$	+3
+use	FUN_001524b8	bVar1	laneAFree	INFERRED	no lane assigned yet to the first select slot	^\s*if\ \(!bVar1\)\ \{$	+1
+use	FUN_001524b8	bVar2	noExtraSource	INFERRED	no extra operand source (inst1 == 0)	^\s*bVar2\ =\ local_7c\ ==\ \(int\ \*\)0x0;$	+2
+use	FUN_001524b8	bVar2	noExtraSource	INFERRED	no extra operand source (inst1 == 0)	^\s*if\ \(\(\(\(bVar2\)\ \|\|\ \(iVar8\ !=\ 0\)\)\ \|\|$	+6
+use	FUN_001524b8	bVar2	noExtraSource	INFERRED	no extra operand source (inst1 == 0)	^\s*if\ \(!bVar2\)\ \{$	+1
+use	FUN_001524b8	bVar3	laneBFree	INFERRED	no lane assigned yet to the second select slot	^\s*bVar3\ =\ bVar1;$	+1
+use	FUN_001524b8	bVar3	laneBFree	INFERRED	no lane assigned yet to the second select slot	^\s*if\ \(\(\-1\ <\ iVar5\)\ \&\&\ \(iVar12\ =\ iVar5,\ bVar3\)\)\ \{$	+2
+use	FUN_001524b8	bVar3	laneBFree	INFERRED	no lane assigned yet to the second select slot	^\s*if\ \(!bVar3\)\ \{$	+1
+use	FUN_001524b8	uVar11	componentValue	INFERRED	component byte read through the lane map	^\s*uVar11\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)\&local_a0\ \+\ iVar12\);$	+1
+use	FUN_001524b8	uVar11	componentValue	INFERRED	component byte read through the lane map	^\s*\*\(undefined1\ \*\)\(\(int\)\&local_94\ \+\ uVar11\)\ =\ 0;$	+2
+use	FUN_001524b8	uVar11	componentValue	INFERRED	component byte read through the lane map	^\s*uVar11\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)\&local_a0\ \+\ iVar18\);$	+3
+use	FUN_001524b8	uVar11	componentValue	INFERRED	component byte read through the lane map	^\s*uVar11\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)\&local_9c\ \+\ iVar14\);$	+3
+use	FUN_001524b8	uVar11	componentValue	INFERRED	component byte read through the lane map	^\s*uVar11\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)\&local_9c\ \+\ iVar15\);$	+3
+use	FUN_001524b8	uVar11	componentSentinel	INFERRED	0xffffffff or the lane component found	^\s*uVar11\ =\ 0xffffffff;$	+1
+use	FUN_001524b8	uVar11	componentSentinel	INFERRED	0xffffffff or the lane component found	^\s*if\ \(\(uVar17\ !=\ \*\(byte\ \*\)\(uVar17\ \+\ iVar5\ \+\ 0x10\)\)\ \&\&\ \(\(int\)uVar11\ <\ 0\)\)\ \{$	+1
+use	FUN_001524b8	uVar11	componentSentinel	INFERRED	0xffffffff or the lane component found	^\s*uVar11\ =\ uVar17;$	+1
+use	FUN_001524b8	uVar11	componentSentinel	INFERRED	0xffffffff or the lane component found	^\s*\(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0x88\)\)\(param_1,1,iVar18,uVar11\);$	+1
+use	FUN_001524b8	uVar16	componentSentinelB	INFERRED	0xffffffff or the lane component found	^\s*uVar16\ =\ 0xffffffff;$	+1
+use	FUN_001524b8	uVar16	componentSentinelB	INFERRED	0xffffffff or the lane component found	^\s*if\ \(\(uVar17\ !=\ \*\(byte\ \*\)\(uVar17\ \+\ iVar5\ \+\ 0x10\)\)\ \&\&\ \(\(int\)uVar16\ <\ 0\)\)\ \{$	+1
+use	FUN_001524b8	uVar16	componentSentinelB	INFERRED	0xffffffff or the lane component found	^\s*uVar16\ =\ uVar17;$	+1
+use	FUN_001524b8	uVar16	componentSentinelB	INFERRED	0xffffffff or the lane component found	^\s*\(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0x88\)\)\(param_1,2,iVar18,uVar16\);$	+1
+use	FUN_001524b8	uVar7	compilerForPass	INFERRED	*(program+8): compiler	^\s*uVar7\ =\ \*\(undefined4\ \*\)\(param_3\ \+\ 8\);$	+2
+use	FUN_001524b8	uVar7	compilerForPass	INFERRED	*(program+8): compiler	^\s*\(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x88\)\)\(a0,1,uVar11,uVar11,uVar7,in_r8,0x1010101\);$	+1
+use	FUN_001524b8	piVar10	candidateInst	INFERRED	extra operand source inst1 / first candidate inst	^\s*piVar10\ =\ local_7c;$	+1
+use	FUN_001524b8	piVar10	candidateInst	INFERRED	extra operand source inst1 / first candidate inst	^\s*if\ \(\(\(\(bVar2\)\ \|\|\ \(iVar8\ !=\ 0\)\)\ \|\|$	+6
+use	FUN_001524b8	piVar10	candidateInst	INFERRED	extra operand source inst1 / first candidate inst	^\s*if\ \(\*\(int\ \*\)\(param_3\ \+\ 0x478\)\ <\ piVar10\[0x58\]\)\ \{$	+2
+use	FUN_001524b8	piVar10	candidateInst	INFERRED	extra operand source inst1 / first candidate inst	^\s*piVar10\[0x58\]\ =\ \*\(int\ \*\)\(param_3\ \+\ 0x478\)\ \+\ 1;$	+1
+local	FUN_001524b8	local_a4	inst2DestSelect	INFERRED	dest select word of inst2 (then the merged one)
+local	FUN_001524b8	local_98	mergedDestSelect	INFERRED	merged dest select (SelectWord__mergeWrittenLanes result)
+local	FUN_001524b8	local_94	constSelectWord	INFERRED	0x1010101 / select word used for the constants
+local	FUN_001524b8	local_90	lastOperandBuf	INFERRED	IRInst__readLastOperand out buffer (5 words)
+local	FUN_001524b8	local_6c	lastOperandBuf0	INFERRED	zero-initialised word before the last operand buffer
+local	FUN_001524b8	local_64	zeroWordA	INFERRED	zero-initialised scratch word
+local	FUN_001524b8	local_54	zeroWordB	INFERRED	zero-initialised scratch word
+local	FUN_001524b8	local_48	mergeOut	INFERRED	out of SelectWord__mergeWrittenLanes
+local	FUN_001524b8	local_68	scaleOut	INFERRED	out buffer of FUN_00104730
+use	FUN_001524b8	uVar6	inst2DestSelectCopy	INFERRED	copy of the inst2 dest select word	^\s*uVar6\ =\ local_a4;$	+1
+use	FUN_001524b8	uVar6	inst2DestSelectCopy	INFERRED	copy of the inst2 dest select word	^\s*local_a4\ =\ uVar6;$	+1
+use	FUN_001524b8	iVar18	countdownL	INFERRED	countdown from 4	^\s*iVar18\ =\ 4;$	+1
+use	FUN_001524b8	iVar18	countdownL	INFERRED	countdown from 4	^\s*iVar18\ =\ iVar18\ \+\ \-1;$	+2
+use	FUN_001524b8	iVar18	candidateCheck	INFERRED	vtable +0x64 / IRInst__hasSingleUse on the candidate inst	^\s*\(\(iVar18\ =\ \(\*\*\(code\ \*\*\)\(\*piVar10\ \+\ 100\)\)\(piVar10\),\ iVar18\ ==\ 0\ \&\&$	+2
+use	FUN_001524b8	iVar5	candidateDestSelect	INFERRED	dest select of the extra source inst (0x1010101 when none)	^\s*iVar5\ =\ 0x1010101;$	+1
+use	FUN_001524b8	iVar5	candidateDestSelect	INFERRED	dest select of the extra source inst (0x1010101 when none)	^\s*iVar5\ =\ \*\(int\ \*\)\(iVar5\ \+\ 0x10\);$	+1
+use	FUN_001524b8	iVar5	candidateDestSelect	INFERRED	dest select of the extra source inst (0x1010101 when none)	^\s*\(\(\(\(iVar5\ ==\ 0x1010100\ \|\|\ \(iVar5\ =\ FUN_000f3824\(iVar5\),\ iVar5\ ==\ 0\)\)\ \|\|$	+3
+use	FUN_001524b8	iVar5	mergedSelectArg	INFERRED	merged dest select passed to IRInst__createWithConstantOperands	^\s*iVar5\ =\ local_98;$	+1
+use	FUN_001524b8	iVar5	mergedSelectArg	INFERRED	merged dest select passed to IRInst__createWithConstantOperands	^\s*a0\ =\ \(int\ \*\)\(\(int\ \(\*\)\(\)\)FUN_0010bed0\)\(3,iVar5,uVar6,param_3,uVar7,1\.0\);$	+1
+use	FUN_001524b8	iVar5	destRegisterKind	INFERRED	register tested against 0x31	^\s*iVar5\ =\ piVar10\[0x2c\];$	+1
+use	FUN_001524b8	iVar5	destRegisterKind	INFERRED	register tested against 0x31	^\s*iVar5\ =\ \*\(int\ \*\)\(iVar5\ \+\ 0x98\);$	+1
+use	FUN_001524b8	iVar5	destRegisterKind	INFERRED	register tested against 0x31	^\s*if\ \(iVar5\ ==\ 0x31\)\ \{$	+1
+local	FUN_001524b8	iVar12	laneSlot2A	INFERRED	lane index chosen for the second slot (set both in a statement and inside the following condition: one variable)
+local	FUN_001524b8	iVar13	laneSlot1A	INFERRED	lane index chosen for the first slot, -1 when none
+local	FUN_001524b8	iVar14	laneSlot1B	INFERRED	second candidate lane for the first slot
+local	FUN_001524b8	iVar15	laneSlot2B	INFERRED	second candidate lane for the second slot, -1 when none
+use	FUN_001524b8	iVar18	laneSlotC	INFERRED	lane index (-1 when none)	^\s*iVar18\ =\ \-1;$	+1
+use	FUN_001524b8	iVar18	laneSlotC	INFERRED	lane index (-1 when none)	^\s*iVar18\ =\ iVar4;$	+1
+use	FUN_001524b8	iVar18	laneSlotC	INFERRED	lane index (-1 when none)	^\s*uVar11\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)\&local_a0\ \+\ iVar18\);$	+1
+use	FUN_001524b8	iVar5	laneSlot2C	INFERRED	lane index (-1 when none) copied between laneSlot2A and the scan	^\s*iVar5\ =\ \-1;$	+1
+use	FUN_001524b8	iVar5	laneSlot2C	INFERRED	lane index (-1 when none) copied between laneSlot2A and the scan	^\s*iVar12\ =\ iVar5;$	+1
+use	FUN_001524b8	iVar5	laneSlot2C	INFERRED	lane index (-1 when none) copied between laneSlot2A and the scan	^\s*if\ \(\(\-1\ <\ iVar5\)\ \&\&\ \(iVar12\ =\ iVar5,\ bVar3\)\)\ \{$	+1
+use	FUN_001524b8	iVar5	laneSlot2C	INFERRED	lane index (-1 when none) copied between laneSlot2A and the scan	^\s*iVar5\ =\ iVar12;$	+1
