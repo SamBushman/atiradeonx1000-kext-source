@@ -602,7 +602,7 @@ int R520MachineAssembler__emitCompareToPredicate(this, inst, blockArg, flag)
   undefined4 a3;
   int operandRecord2;
   undefined1 compareCode;
-  undefined1 auStack_48 [40];
+  undefined1 predicateInstList [40];
   
   inst2 = IRInst__create(0x12,this[3]);
   newSource = IRInst__getOperandSource(inst,1);
@@ -660,9 +660,9 @@ LAB_001a27a4:
     compareCode = 2;
     IROperand__setModifierBits(operandRecord1,1,modifierWordToInvert & 1 ^ 1);
   }
-  DListNode__init(auStack_48);
-  DList__pushBack(auStack_48,inst2);
-  (**(code **)(*this + 0x34))(this,auStack_48,blockArg,a3);
+  DListNode__init(predicateInstList);
+  DList__pushBack(predicateInstList,inst2);
+  (**(code **)(*this + 0x34))(this,predicateInstList,blockArg,a3);
   *(undefined1 *)(this[0x18] * 0x48 + this[0x2a] + -5) = 0;
   *(undefined1 *)(this[0x18] * 0x48 + this[0x2a] + -4) = compareCode;
   *(undefined1 *)(this[0x18] * 0x48 + this[0x2a] + -0x34) = 0;
@@ -764,11 +764,11 @@ int R520MachineAssembler__emitConditionalBranch(this, branchCount, inst, variant
 {
   int callResult;
   uint predecessor;
-  int local_38 [7];
+  int comparisonKnown [7];
   
-  local_38[0] = 0;
-  callResult = evaluateConstantComparison(inst,local_38);
-  if (local_38[0] == 0) {
+  comparisonKnown[0] = 0;
+  callResult = evaluateConstantComparison(inst,comparisonKnown);
+  if (comparisonKnown[0] == 0) {
     predecessor = Block__getPredecessor(parentNode,0);
     ((int (*)())R520MachineAssembler__emitCompareToPredicate)(this,inst,blockFlag,predecessor);
     ((int (*)())R520MachineAssembler__appendBranchEndRecord)(this,branchCount + -1,variant);
@@ -794,7 +794,7 @@ int R520MachineAssembler__vslot27_assembleIf(this, node, block, extra1, extra2, 
   int thenBlock;
   int successorList;
   int *a0;
-  int *piVar2;
+  int *firstSuccessorRef;
   undefined4 emittedAny;
   int recordIndexBefore;
   
@@ -804,12 +804,12 @@ int R520MachineAssembler__vslot27_assembleIf(this, node, block, extra1, extra2, 
   *(undefined4 *)(node + 0x130) = 0;
   recordIndexBefore = this[0x18];
   (**(code **)(*this + 0x34))(this,block,*(undefined4 *)(node + 0xdc));
-  piVar2 = (int *)0x0;
+  firstSuccessorRef = (int *)0x0;
   successorList = *(int *)(*(int *)(node + 0x134) + 0xd0);
   if (*(int *)(successorList + 4) != 0) {
-    piVar2 = *(int **)(successorList + 8);
+    firstSuccessorRef = *(int **)(successorList + 8);
   }
-  thenBlock = *piVar2;
+  thenBlock = *firstSuccessorRef;
   (**(code **)(*this + 0x34))
             (this,thenBlock + 0x90,*(undefined4 *)(thenBlock + 0xdc),extra1,extra2,extra3,
              *(code **)(*this + 0x34));
@@ -853,7 +853,7 @@ int R520MachineAssembler__appendLoopRecord(this, hasSecondCondition)
   int *this;
   int hasSecondCondition;
 {
-  int *piVar1;
+  int *elementRef;
   int recordIndex;
   uint stackCount;
   uint *stackVector;
@@ -871,13 +871,13 @@ int R520MachineAssembler__appendLoopRecord(this, hasSecondCondition)
   stackCount = stackVector[1];
   if (stackCount < *stackVector) {
     _memset(stackCount * 4 + stackVector[2],0,4);
-    piVar1 = (int *)(stackCount * 4 + stackVector[2]);
+    elementRef = (int *)(stackCount * 4 + stackVector[2]);
     stackVector[1] = stackCount + 1;
   }
   else {
-    piVar1 = (int *)Vector__elementRefGrow(stackVector,stackCount);
+    elementRef = (int *)Vector__elementRefGrow(stackVector,stackCount);
   }
-  *piVar1 = recordIndex;
+  *elementRef = recordIndex;
   (**(code **)(*this + 0x15c))(this);
   this[0x2e] = this[0x2e] + 1;
   return;

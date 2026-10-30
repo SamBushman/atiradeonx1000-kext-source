@@ -3206,11 +3206,11 @@ int R300VMachineAssembler__getOrAllocateScratchRegister(this, registerAllocator)
   int this;
   undefined4 registerAllocator;
 {
-  undefined4 uVar1;
+  undefined4 scratchRegister;
   
   if (*(int *)(this + 0x8c) < 0) {
-    uVar1 = RegAlloc__allocateFirstFreeInClass(registerAllocator,0);
-    *(undefined4 *)(this + 0x8c) = uVar1;
+    scratchRegister = RegAlloc__allocateFirstFreeInClass(registerAllocator,0);
+    *(undefined4 *)(this + 0x8c) = scratchRegister;
   }
   return;
 }

@@ -1754,10 +1754,10 @@ int KhanVs__vslot27_optimizeInstruction(this, inst, program)
   int inst;
   int program;
 {
-  int iVar1;
+  int optionEnabled;
   
   if (((*(uint *)(inst + 0x14) & 1) != 0) &&
-     (iVar1 = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),0x15), iVar1 != 0)) {
+     (optionEnabled = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),0x15), optionEnabled != 0)) {
     Inst__reassociate_150b94(inst,program);
     Inst__reassociate_14e6e4(inst,program);
     return;
@@ -1769,7 +1769,7 @@ int KhanVs__vslot27_optimizeInstruction(this, inst, program)
 int PackState__reset(state)
   undefined4 *state;
 {
-  bool bVar1;
+  bool notLastRow;
   int loopIndex;
   
   loopIndex = 0;
@@ -1780,13 +1780,13 @@ int PackState__reset(state)
   state[3] = 0;
   state[4] = 0;
   do {
-    bVar1 = loopIndex != 2;
+    notLastRow = loopIndex != 2;
     state[6] = 0;
     state[9] = 0;
     loopIndex = loopIndex + 1;
     state[0xc] = 0;
     state = state + 1;
-  } while (bVar1);
+  } while (notLastRow);
   return;
 }
 
@@ -1847,10 +1847,10 @@ int KhanPs__vslot31_isNotTextureFetch(this, inst)
   undefined4 this;
   int *inst;
 {
-  uint uVar1;
+  uint isFetch;
   
-  uVar1 = (**(code **)(*inst + 0x30))(inst,inst);
-  return uVar1 ^ 1;
+  isFetch = (**(code **)(*inst + 0x30))(inst,inst);
+  return isFetch ^ 1;
 }
 
 /* KhanPs__vslot65_isEncodableSourceSwizzle @ 0x189660 (152 bytes) */

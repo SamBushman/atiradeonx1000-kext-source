@@ -11,7 +11,7 @@ int Inst__findLaneProducer(inst, laneMask, relinkFlag, compilerCtx)
   int *source1;
   int callResult;
   undefined4 producerSelectWord;
-  uint local_28 [3];
+  uint producerWriteMask [3];
   
   callResult2 = (int *)IRInst__getOperandSource(inst,1);
   while( true ) {
@@ -23,7 +23,7 @@ int Inst__findLaneProducer(inst, laneMask, relinkFlag, compilerCtx)
     producerSelectWord = *(undefined4 *)(callResult + 0x10);
     callResult = FUN_00176534(inst,callResult2);
     if (callResult == 2) break;
-    if ((callResult == 0) && (WriteMask__fromSelectWord(local_28,producerSelectWord), (laneMask & local_28[0]) != DAT_001b01e0)) {
+    if ((callResult == 0) && (WriteMask__fromSelectWord(producerWriteMask,producerSelectWord), (laneMask & producerWriteMask[0]) != DAT_001b01e0)) {
       return callResult2;
     }
     callResult2 = (int *)IRInst__getOperandSource(callResult2,3);
