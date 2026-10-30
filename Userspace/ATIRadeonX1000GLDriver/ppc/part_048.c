@@ -544,15 +544,15 @@ int ValueKey__foldMulByPlusMinusOne(ctx)
 int ValueKey__replaceWithSource1IfSourcesEqual(ctx)
   int ctx;
 {
-  uint uVar1;
+  uint word0xb8Flags;
   int callResult;
-  uint uVar3;
+  uint word0xd0Flags;
   
   callResult = Inst__allWrittenLanesSatisfy(ctx,1,2);
   if (callResult != 0) {
-    uVar3 = *(uint *)(*(int *)(ctx + 0xb0) + 0xd0);
-    uVar1 = *(uint *)(*(int *)(ctx + 0xb0) + 0xb8);
-    if (((uVar1 & 1) == (uVar3 & 1)) && ((uVar1 >> 1 & 1) == (uVar3 >> 1 & 1))) {
+    word0xd0Flags = *(uint *)(*(int *)(ctx + 0xb0) + 0xd0);
+    word0xb8Flags = *(uint *)(*(int *)(ctx + 0xb0) + 0xb8);
+    if (((word0xb8Flags & 1) == (word0xd0Flags & 1)) && ((word0xb8Flags >> 1 & 1) == (word0xd0Flags >> 1 & 1))) {
       ((int (*)())ValueKey__rewriteAsMovOfOperand)(ctx,1);
       ValueKey__rebuild(ctx);
       return 1;
@@ -5950,8 +5950,8 @@ int Inst__isMulDotWithinLimits(this, arg2, passContext)
 }
 
 /* Inst__splitAndMerge @ 0x184d7c (372 bytes) */
-int Inst__splitAndMerge(param_1, program)
-  int param_1;
+int Inst__splitAndMerge(inst, program)
+  int inst;
   undefined4 program;
 {
   uint vectorFilledCount2;
@@ -5961,8 +5961,8 @@ int Inst__splitAndMerge(param_1, program)
   uint loopIndex;
   uint *vector;
   
-  if (*(int *)(*(int *)(param_1 + 0x88) + 8) == 0x13) {
-    vector = *(uint **)(param_1 + 0x10);
+  if (*(int *)(*(int *)(inst + 0x88) + 8) == 0x13) {
+    vector = *(uint **)(inst + 0x10);
     vectorFilledCount = vector[1];
     if (0 < (int)vectorFilledCount) {
       loopIndex = 0;
@@ -5981,7 +5981,7 @@ int Inst__splitAndMerge(param_1, program)
         if (callResult == 0) {
           return;
         }
-        vector = *(uint **)(param_1 + 0x10);
+        vector = *(uint **)(inst + 0x10);
         loopIndex = loopIndex + 1;
         vectorFilledCount = vector[1];
       } while ((int)loopIndex < (int)vectorFilledCount);
@@ -6002,7 +6002,7 @@ int Inst__splitAndMerge(param_1, program)
         }
         loopIndex = loopIndex + 1;
         Inst__collapseAddOfMulToMad(*elementRef,program,1,0);
-        vector = *(uint **)(param_1 + 0x10);
+        vector = *(uint **)(inst + 0x10);
         vectorFilledCount2 = vector[1];
       } while ((int)loopIndex < (int)vectorFilledCount2);
     }

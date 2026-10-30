@@ -1522,16 +1522,16 @@ int DList__isEmpty(list)
 int DListNode__unlinkAndDelete(node)
   int *node;
 {
-  int iVar1;
-  int iVar2;
+  int nodeVtable;
+  int nextNode;
   
-  iVar2 = node[2];
-  iVar1 = *node;
-  *(int *)(iVar2 + 4) = node[1];
-  *(int *)(node[1] + 8) = iVar2;
+  nextNode = node[2];
+  nodeVtable = *node;
+  *(int *)(nextNode + 4) = node[1];
+  *(int *)(node[1] + 8) = nextNode;
                     
                     
-  (**(code **)(iVar1 + 4))();
+  (**(code **)(nodeVtable + 4))();
   return;
 }
 

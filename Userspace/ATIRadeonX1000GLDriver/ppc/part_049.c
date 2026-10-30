@@ -3579,14 +3579,14 @@ int PackState__countFreeSlots(state, freeCounts)
 {
   int callResult;
   int *loopPtr;
-  int local_38 [3];
-  int local_2c [9];
+  int slotTable [3];
+  int slotTableEnd [9];
   
-  callResult = ((int (*)())PackState__buildSlotTable)(state,local_38);
+  callResult = ((int (*)())PackState__buildSlotTable)(state,slotTable);
   freeCounts[1] = 0;
   *freeCounts = 0;
   if (callResult != 0) {
-    loopPtr = local_38;
+    loopPtr = slotTable;
     do {
       if (*loopPtr == 0) {
         *freeCounts = *freeCounts + 1;
@@ -3595,7 +3595,7 @@ int PackState__countFreeSlots(state, freeCounts)
         freeCounts[1] = freeCounts[1] + 1;
       }
       loopPtr = loopPtr + 1;
-    } while (loopPtr != local_2c);
+    } while (loopPtr != slotTableEnd);
   }
   return callResult;
 }

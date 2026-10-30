@@ -1,0 +1,10 @@
+local	ValueKey__replaceWithSource1IfSourcesEqual	uVar1	word0xb8Flags	INFERRED	inst +0xb8 modifier word
+local	ValueKey__replaceWithSource1IfSourcesEqual	uVar3	word0xd0Flags	INFERRED	inst +0xd0 modifier word
+local	DListNode__unlinkAndDelete	iVar1	nodeVtable	INFERRED	node vtable; +4 is the deleting destructor
+local	DListNode__unlinkAndDelete	iVar2	nextNode	INFERRED	node[2]: next node, relinked to the previous one
+local	ValueKey__cancelNegatedSourcePair	uVar2	result	INFERRED	1 when the sources cancel and the instruction was rewritten
+local	Inst__splitAndMerge	param_1	inst	INFERRED	instruction (opcode 0x13 case splits and merges its operands); +0x10 vector
+local	Inst__writtenLanesAllMatchValue	iVar2	operandRecord	INFERRED	operand record 0 of the instruction (swizzle bytes: 1 = lane unused)
+local	Inst__writtenLanesAllMatchValue	bVar1	lastLane	INFERRED	lane == 3
+local	PackState__countFreeSlots	local_38	slotTable	INFERRED	slot table filled by PackState__buildSlotTable (array, whole variable)
+local	PackState__countFreeSlots	local_2c	slotTableEnd	INFERRED	end marker of slotTable (adjacent frame slot, whole variable)

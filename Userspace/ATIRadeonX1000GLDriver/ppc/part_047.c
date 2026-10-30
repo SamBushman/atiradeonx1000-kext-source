@@ -98,19 +98,19 @@ int Inst__writtenLanesAllMatchValue(valueKey, value, row)
   int value;
   int row;
 {
-  bool bVar1;
-  int iVar2;
+  bool lastLane;
+  int operandRecord;
   int loopIndex;
   int *loopPtr2;
   
   loopPtr2 = (int *)(row * 0x10 + valueKey + 0x168);
   loopIndex = 0;
-  while ((iVar2 = IRInst__getOperandRecord(*(undefined4 *)(valueKey + 0xb0),0),
-         *(char *)(loopIndex + iVar2 + 0x10) == '\x01' || (*loopPtr2 == value))) {
-    bVar1 = loopIndex == 3;
+  while ((operandRecord = IRInst__getOperandRecord(*(undefined4 *)(valueKey + 0xb0),0),
+         *(char *)(loopIndex + operandRecord + 0x10) == '\x01' || (*loopPtr2 == value))) {
+    lastLane = loopIndex == 3;
     loopPtr2 = loopPtr2 + 1;
     loopIndex = loopIndex + 1;
-    if (bVar1) {
+    if (lastLane) {
       return 1;
     }
   }
@@ -580,19 +580,19 @@ int ValueKey__cancelNegatedSourcePair(ctx)
   int ctx;
 {
   int member0xb0;
-  undefined4 uVar2;
+  undefined4 result;
   
   member0xb0 = *(int *)(ctx + 0xb0);
   if (((*(uint *)(member0xb0 + 0xb8) & 1) == 0) || ((*(uint *)(member0xb0 + 0xd0) & 1) == 0)) {
-    uVar2 = 0;
+    result = 0;
   }
   else {
     IROperand__setModifierBits(member0xb0 + 0xa4,1,0);
     IROperand__setModifierBits(*(int *)(ctx + 0xb0) + 0xbc,1,0);
     ValueKey__rebuild(ctx);
-    uVar2 = 1;
+    result = 1;
   }
-  return uVar2;
+  return result;
 }
 
 /* ValueKey__insertMovOfOperandLane_177b4c @ 0x177b4c (388 bytes) */
