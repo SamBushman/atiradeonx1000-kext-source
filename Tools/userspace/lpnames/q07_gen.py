@@ -33,6 +33,12 @@ for pf in sorted(glob.glob(os.path.join(d, 'part_*.c'))):
             cur = m.group(1); buf = []; continue
         buf.append(l)
     if cur in fns: text[cur] = ''.join(buf)
+FUNCMAP = {}
+for t in glob.glob(os.path.join(d, 'names*.tsv')):
+    for l in open(t, errors='surrogateescape'):
+        c = l.rstrip('\n').split('\t')
+        if len(c) > 3 and c[0] == 'func': FUNCMAP[c[1]] = c[2]
+R.FUNCMAP = FUNCMAP
 blocks = []
 for fn in fns:
     try:
@@ -57,7 +63,7 @@ for fn in fns:
     for var, ks, nm in rows:
         base = nm; j = 1
         while nm in idents or nm in used:
-            j += 1; nm = base + str(j)
+            j += 1; nm = base + (chr(ord('A') + j - 1) if base.startswith('savedField') else str(j))
         used.add(nm); res.append('%s\t%s\t%s\tINFERRED\t%s' % (var, ','.join(map(str, ks)), nm, R.EVIDENCE))
     if res: blocks.append('@FN %s\n%s\n' % (fn, '\n'.join(res)))
     print(fn, len(res))

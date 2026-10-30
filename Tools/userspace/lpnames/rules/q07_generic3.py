@@ -17,6 +17,13 @@ def name(var, k, defs, lines, ctx):
         if steps and all(s == 1 for s in steps) and starts and all(s == 0 for s in starts): return 'loopIndex'
         return None
     if all(re.match(r'^[A-Za-z_]\w*\[1\]$', d) for d in ds): return 'vectorFilledCount'
+    if all(re.match(r'^\*\(u?int\d* ?\*?\)\(\w+ \+ 0x10\)$|^\*\(undefined4 \*\)\(\w+ \+ 0x10\)$', d) for d in ds): return 'operandSelect'
+    fs = set()
+    for d in ds:
+        m = re.match(r'^\*\((?:undefined4|int|uint) \*\)\(\(int\)param_1 \+ (0x[0-9a-f]+)\)$', d)
+        if m and m.group(1) != '0x10': fs.add(m.group(1)[2:])
+        else: fs = None; break
+    if fs and len(fs) == 1: return 'savedField' + fs.pop()
     if all(re.match(r'^FUN_001054ec\(', d) for d in ds): return 'operandRecord'
     if all(re.match(r'^FUN_00105594\(', d) for d in ds): return 'operandVReg' if var.startswith('p') else 'sourceDef'
     if all(re.match(r'^\(\*\*\(code \*\*\)\(\*%s \+ 0x14\)\)\(%s\)$' % (ID, ID), d) for d in ds): return 'operandCount'
@@ -31,6 +38,7 @@ def name(var, k, defs, lines, ctx):
         if v: cs.add('vcall%sResult' % (v.group(1)[2:] if v.group(1).startswith('0x') else '%x' % int(v.group(1))))
         elif m and m.group(1) not in ('code', 'int', 'uint', 'char', 'byte', 'float', 'double', 'bool', 'undefined4', 'undefined1', 'undefined'):
             c = m.group(1)
+            c = globals().get('FUNCMAP', {}).get(c, c)
             if c.startswith('FUN_'): cs.add('callResult')
             else:
                 b = c.split('__')[-1]
