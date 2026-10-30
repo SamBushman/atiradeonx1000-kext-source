@@ -21,20 +21,20 @@ entry	function	register	class	callers setting it	first reader
 2c790	gld_initContextHardwareState	f6	PASS-no	callers set it 0/1	2c7c8 bl 0x1a3760	; symbol stub for: _memset
 2c790	gld_initContextHardwareState	f7	PASS-no	callers set it 0/1	2c7c8 bl 0x1a3760	; symbol stub for: _memset
 2c790	gld_initContextHardwareState	f8	PASS-no	callers set it 0/1	2c7c8 bl 0x1a3760	; symbol stub for: _memset
-4eba0	FUN_0004eba0	f2	PASS-yes	callers set it 0/1	4ebf4 bl 0x1a010
-4eba0	FUN_0004eba0	f3	PASS-no	callers set it 0/1	4ebf4 bl 0x1a010
-4eba0	FUN_0004eba0	f4	PASS-no	callers set it 0/1	4ebf4 bl 0x1a010
-4eba0	FUN_0004eba0	f5	PASS-no	callers set it 0/1	4ebf4 bl 0x1a010
-4eba0	FUN_0004eba0	f6	PASS-no	callers set it 0/1	4ebf4 bl 0x1a010
-4eba0	FUN_0004eba0	f7	PASS-no	callers set it 0/1	4ebf4 bl 0x1a010
-4eba0	FUN_0004eba0	f8	PASS-no	callers set it 0/1	4ebf4 bl 0x1a010
-4ed90	FUN_0004ed90	f2	PASS-yes	callers set it 0/1	4edb4 bl 0xa3670
-4ed90	FUN_0004ed90	f3	PASS-no	callers set it 0/1	4edb4 bl 0xa3670
-4ed90	FUN_0004ed90	f4	PASS-no	callers set it 0/1	4edb4 bl 0xa3670
-4ed90	FUN_0004ed90	f5	PASS-no	callers set it 0/1	4edb4 bl 0xa3670
-4ed90	FUN_0004ed90	f6	PASS-no	callers set it 0/1	4edb4 bl 0xa3670
-4ed90	FUN_0004ed90	f7	PASS-no	callers set it 0/1	4edb4 bl 0xa3670
-4ed90	FUN_0004ed90	f8	PASS-no	callers set it 0/1	4edb4 bl 0xa3670
+4eba0	gldValidatePolygonOffset	f2	PASS-yes	callers set it 0/1	4ebf4 bl 0x1a010
+4eba0	gldValidatePolygonOffset	f3	PASS-no	callers set it 0/1	4ebf4 bl 0x1a010
+4eba0	gldValidatePolygonOffset	f4	PASS-no	callers set it 0/1	4ebf4 bl 0x1a010
+4eba0	gldValidatePolygonOffset	f5	PASS-no	callers set it 0/1	4ebf4 bl 0x1a010
+4eba0	gldValidatePolygonOffset	f6	PASS-no	callers set it 0/1	4ebf4 bl 0x1a010
+4eba0	gldValidatePolygonOffset	f7	PASS-no	callers set it 0/1	4ebf4 bl 0x1a010
+4eba0	gldValidatePolygonOffset	f8	PASS-no	callers set it 0/1	4ebf4 bl 0x1a010
+4ed90	gldValidatePointSize	f2	PASS-yes	callers set it 0/1	4edb4 bl 0xa3670
+4ed90	gldValidatePointSize	f3	PASS-no	callers set it 0/1	4edb4 bl 0xa3670
+4ed90	gldValidatePointSize	f4	PASS-no	callers set it 0/1	4edb4 bl 0xa3670
+4ed90	gldValidatePointSize	f5	PASS-no	callers set it 0/1	4edb4 bl 0xa3670
+4ed90	gldValidatePointSize	f6	PASS-no	callers set it 0/1	4edb4 bl 0xa3670
+4ed90	gldValidatePointSize	f7	PASS-no	callers set it 0/1	4edb4 bl 0xa3670
+4ed90	gldValidatePointSize	f8	PASS-no	callers set it 0/1	4edb4 bl 0xa3670
 82c50	gldEmitProgramConstants	f2	PASS-indirect	callers set it 0/0	82c80 bctrl 
 82c50	gldEmitProgramConstants	f3	PASS-indirect	callers set it 0/0	82c80 bctrl 
 82c50	gldEmitProgramConstants	f4	PASS-indirect	callers set it 0/0	82c80 bctrl 

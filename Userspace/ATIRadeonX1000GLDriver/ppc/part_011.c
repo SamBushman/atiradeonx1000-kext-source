@@ -39,7 +39,7 @@ int vpStateSelectForDraw(ctx)
     stateRecord = vpStateCacheLookup(slotEntry,stateKey);
     noState = stateRecord == 0;
     if ((noState) || (*(char *)(shader[1] + *(int *)(((unsigned char *)0x0000118c) + ctx)) != '\0')) {
-      FUN_000546d0(ctx,shader);
+      extvsMakeShaderCurrent(ctx,shader);
     }
     else {
       *slotEntry = stateRecord;
@@ -8951,7 +8951,7 @@ LAB_00082b00:
     streamSetCurrent = *(code **)(glContext + 0x275c);
     *(int *)(0x00002748 + glContext + 4) = cmdPos + 8;
     (*streamSetCurrent)(glContext,cmdPos + 8,in_r5,in_r6,oldOffset,streamAlloc,packet);
-    FUN_00050ef0(glContext,*(undefined4 *)(program + 0x3c),*(undefined4 *)(program + 0x40),
+    gldSetVertexPacketLimits(glContext,*(undefined4 *)(program + 0x3c),*(undefined4 *)(program + 0x40),
                  *(undefined4 *)(program + 0x44));
     return;
   }

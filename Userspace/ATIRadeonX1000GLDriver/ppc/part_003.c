@@ -5213,7 +5213,7 @@ int gld_emitCopyBlitPacket(ctx, srcX, srcY, width, height, destX, destY, destEnd
   packetBody[0xba] = *(undefined4 *)(ctx + 0x1f04);
   packetBody[0xbb] = *(undefined4 *)(ctx + 0x1f00);
   packetBody[0xbc] = *(undefined4 *)(ctx + 0x1f08);
-  FUN_0004c100(packetBody + 2,commandStream);
+  gldCopyProgramStreamState(packetBody + 2,commandStream);
   *(undefined4 **)(ctx + 0x298c) = packetBody + 0xbf;
                     
                     
@@ -6125,7 +6125,7 @@ int gld_emitSurfaceCopyPacket(ctx, packet, readSurfaceCode, resolveFlag, srcX, s
     packetBase[0x1b4] = *(undefined4 *)(ctx + 0x1f04);
     packetBase[0x1b5] = *(undefined4 *)(ctx + 0x1f00);
     packetBase[0x1b6] = *(undefined4 *)(ctx + 0x1f08);
-    FUN_0004c100(packetBase + 0xfc,commandStream);
+    gldCopyProgramStreamState(packetBase + 0xfc,commandStream);
     if (allocatedHere) {
       *(undefined4 **)(ctx + 0x298c) = packet;
       (**(code **)(ctx + 0x299c))(commandStream,packet);

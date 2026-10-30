@@ -4770,7 +4770,7 @@ LAB_00034df0:
   tailCursor[0xba] = *(int *)(ctx + GLD_ga_point_t0);
   tailCursor[0xbb] = *(int *)(ctx + GLD_ga_point_s1);
   tailCursor[0xbc] = *(int *)(ctx + GLD_ga_point_t1);
-  FUN_0004c100(tailCursor + 2,a0);
+  gldCopyProgramStreamState(tailCursor + 2,a0);
   scratchUint20 = ((int (*)())gld_emitBoundUnitObjects)(ctx,tailCursor + 0xbf);
   *(undefined4 *)(ctx + GLD_streamCurrent) = scratchUint20;
   (**(code **)(ctx + GLD_streamSetCurrent))(a0,scratchUint20);
@@ -5604,7 +5604,7 @@ LAB_00035dd8:
   scratchPtr30[0xba] = *(uint *)(ctx + 0x1f04);
   scratchPtr30[0xbb] = *(uint *)(ctx + 0x1f00);
   scratchPtr30[0xbc] = *(uint *)(ctx + 0x1f08);
-  FUN_0004c100(scratchPtr30 + 2,scratchInt53);
+  gldCopyProgramStreamState(scratchPtr30 + 2,scratchInt53);
   scratchPtr31 = scratchPtr30 + 0xbf;
   if (!scratchFlag12) {
     scratchPtr30[0xbf] = (uint)((unsigned char *)0x000013c4U);
@@ -6631,7 +6631,7 @@ LAB_00038698:
               packet[0x186] = *(undefined4 *)(ctx + GLD_ga_point_t0);
               packet[0x187] = *(undefined4 *)(ctx + GLD_ga_point_s1);
               packet[0x188] = *(undefined4 *)(ctx + GLD_ga_point_t1);
-              FUN_0004c100(packet + 0xce,commandStream);
+              gldCopyProgramStreamState(packet + 0xce,commandStream);
               packetWrite = packet + 0x18b;
               for (alignedPtr = packet + 0x18c; ((uint)alignedPtr & 0x1f) != 0; alignedPtr = alignedPtr + 1) {
               }
@@ -7198,7 +7198,7 @@ LAB_000371ac:
   texPacket[0x188] = *(undefined4 *)(ctx + GLD_ga_point_t0);
   texPacket[0x189] = *(undefined4 *)(ctx + GLD_ga_point_s1);
   texPacket[0x18a] = *(undefined4 *)(ctx + GLD_ga_point_t1);
-  FUN_0004c100(texPacket + 0xd0,commandStreamB);
+  gldCopyProgramStreamState(texPacket + 0xd0,commandStreamB);
   scratchUint28 = ((int (*)())gld_emitBoundUnitObjects)(ctx,texPacket + 0x18d);
   *(undefined4 *)(ctx + GLD_streamCurrent) = scratchUint28;
   (**(code **)(ctx + GLD_streamSetCurrent))(commandStreamB,scratchUint28);
@@ -8697,7 +8697,7 @@ LAB_0003b3e0:
           scratchInt4 = scratchInt4 + -1;
           scratchFlag1 = scratchInt4 != 0;
         }
-        FUN_000534c0(ctx,scratchInt15,kindArray,indexFrameLink + 0x10,symbolOut);
+        extvsCreateVectorSymbolChain(ctx,scratchInt15,kindArray,indexFrameLink + 0x10,symbolOut);
         if (scratchInt15 != 0) {
           loopIndex2 = 0;
           do {
@@ -8832,7 +8832,7 @@ int FUN_0003b620(ctx, program, hwProgram, operandCount, operandTable)
       operandCount = operandCount + -1;
     } while (operandCount != 0);
   }
-  return FUN_00054590(ctx + 0x240,program,entryTotal,entrySymbols);
+  return extvsCompactSymbolEntries(ctx + 0x240,program,entryTotal,entrySymbols);
 }
 
 /* FUN_0003b870 @ 0x3b870 (2500 bytes) */
@@ -8884,7 +8884,7 @@ int FUN_0003b870(ctx, passThroughArg2, passThroughArg3, operandTable, literalCon
   uint operandWordCopy;
   undefined4 operandWord2Copy;
   
-  entryCount = FUN_00054470(ctx + GLD_commandStream,&program,&constantTable,registerBase);
+  entryCount = extvsGetConstantUploadInfo(ctx + GLD_commandStream,&program,&constantTable,registerBase);
   if (entryCount != 0) {
     ((int (*)())FUN_0003b620)(ctx,program,passThroughArg2,passThroughArg3,operandTable);
   }
@@ -9588,7 +9588,7 @@ LAB_0003c9b8:
           }
           if ((((swizzleX != 0x87d5) || (swizzleY != 0x87d6)) || (swizzleZ != 0x87d7)) ||
              (swizzleW != 0x87d8)) {
-            FUN_00054080(ctx,scratchPtr19[0xd],*(undefined4 *)((int)sourceSymbols + sourceByteOffset),swizzleX,swizzleY,
+            extvsEmitSwizzleInstruction(ctx,scratchPtr19[0xd],*(undefined4 *)((int)sourceSymbols + sourceByteOffset),swizzleX,swizzleY,
                          swizzleZ,swizzleW);
             *(undefined4 *)((int)sourceSymbols + sourceByteOffset) = scratchPtr19[0xd];
           }
@@ -9605,7 +9605,7 @@ LAB_0003c9b8:
           glShaderOp1EXT_impl(ctx,0x879e,scratchInt3,sourceSymbols[0]);
           break;
         case 2:
-          FUN_00054080(ctx,hwProgram[0x18],sourceSymbols[0],0x87d9,0x87da,0x87db,0x87dc);
+          extvsEmitSwizzleInstruction(ctx,hwProgram[0x18],sourceSymbols[0],0x87d9,0x87da,0x87db,0x87dc);
           glShaderOp2EXT_impl(ctx,0x878a,scratchInt3,sourceSymbols[0],hwProgram[0x18]);
           break;
         default:
@@ -9617,7 +9617,7 @@ LAB_0003c9b8:
           glShaderOp1EXT_impl(ctx,0x878f,scratchInt3,sourceSymbols[0]);
           break;
         case 0xd:
-          FUN_00054080(ctx,hwProgram[0x18],sourceSymbols[0],0x87d9,0x87da,0x87db,0x87dc);
+          extvsEmitSwizzleInstruction(ctx,hwProgram[0x18],sourceSymbols[0],0x87d9,0x87da,0x87db,0x87dc);
           glShaderOp2EXT_impl(ctx,0x878a,hwProgram[0x19],sourceSymbols[0],hwProgram[0x18]);
           glExtractComponentEXT_impl(ctx,hwProgram[0x10],hwProgram[0x19],0);
           scratchUint26 = hwProgram[0x11];
@@ -9667,7 +9667,7 @@ LAB_0003cdec:
           glShaderOp2EXT_impl(ctx,0x8785,scratchInt3,sourceSymbols[0],sourceSymbols[1]);
           break;
         case 0x2a:
-          FUN_00054080(ctx,hwProgram[0x18],sourceSymbols[0],0x87d5,0x87d6,0x87d7,0x87de);
+          extvsEmitSwizzleInstruction(ctx,hwProgram[0x18],sourceSymbols[0],0x87d5,0x87d6,0x87d7,0x87de);
           glShaderOp2EXT_impl(ctx,0x8785,scratchInt3,hwProgram[0x18],sourceSymbols[1]);
           break;
         case 0x2b:
@@ -9704,7 +9704,7 @@ LAB_0003cdec:
               (*(int *)(&DAT_001da630 + (scratchUint15 >> 6 & 0x3c)) != 0x87d6)) ||
              ((*(int *)(&DAT_001da630 + (scratchUint15 >> 2 & 0x3c)) != 0x87d7 ||
               (*(int *)(&DAT_001da630 + (scratchUint15 & 0xf) * 4) != 0x87d8)))) {
-            FUN_00054080(ctx,scratchInt3,sourceSymbols[0],*(int *)(&DAT_001da630 + (scratchUint15 >> 10 & 0x3c)),
+            extvsEmitSwizzleInstruction(ctx,scratchInt3,sourceSymbols[0],*(int *)(&DAT_001da630 + (scratchUint15 >> 10 & 0x3c)),
                          *(int *)(&DAT_001da630 + (scratchUint15 >> 6 & 0x3c)),
                          *(int *)(&DAT_001da630 + (scratchUint15 >> 2 & 0x3c)),
                          *(int *)(&DAT_001da630 + (scratchUint15 & 0xf) * 4));
@@ -9763,7 +9763,7 @@ LAB_0003d254:
           scratchInt5 = 4;
           do {
             scratchUint24 = scratchUint24 + 1;
-            scratchUint7 = FUN_00052ee0(ctx,*(undefined4 *)(hwProgram[4] + scratchInt5));
+            scratchUint7 = extvsGetSymbolStorageWord(ctx,*(undefined4 *)(hwProgram[4] + scratchInt5));
             *(undefined4 *)((int)scratchPtr19 + scratchInt5) = scratchUint7;
             scratchInt5 = scratchInt5 + 4;
           } while (scratchUint15 != scratchUint24);
@@ -9794,7 +9794,7 @@ LAB_0003d254:
         if (1 < scratchUint15) {
           scratchUint24 = 1;
           do {
-            scratchInt5 = FUN_00052f60(ctx,*(undefined4 *)(scratchUint24 * 4 + hwProgram[4]));
+            scratchInt5 = extvsGetSymbolStorageKind(ctx,*(undefined4 *)(scratchUint24 * 4 + hwProgram[4]));
             if (scratchInt5 != 0x81) {
               symbolRemapTable[scratchInt5 + -1] = scratchUint24;
             }
@@ -9802,7 +9802,7 @@ LAB_0003d254:
           } while (scratchUint15 != scratchUint24);
         }
       }
-      FUN_000530c0(ctx,*hwProgram,hwProgram + 0x1e);
+      extvsGetSymbolStorageInfo(ctx,*hwProgram,hwProgram + 0x1e);
       return 1;
     }
   }
@@ -9871,7 +9871,7 @@ int gld_emitProgramConstantUpdates(ctx, passThroughArg2, passThroughArg3, operan
   undefined4 operandWord2Copy;
   
   ring = ctx + GLD_commandStream;
-  status = FUN_00054470(ring,&program,&constantTable,registerBase);
+  status = extvsGetConstantUploadInfo(ring,&program,&constantTable,registerBase);
   if (status != 0) {
     ((int (*)())FUN_0003b620)(ctx,program,passThroughArg2,passThroughArg3,operandTable);
   }

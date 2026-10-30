@@ -268,22 +268,22 @@
 50300	gldEmitHardwareState	r6	PASS-indirect	50358 bctrl 
 50300	gldEmitHardwareState	r7	PASS-indirect	50358 bctrl 
 50300	gldEmitHardwareState	r8	PASS-indirect	50358 bctrl 
-50ef0	FUN_00050ef0	r7	PASS-indirect	50fac bctrl 
-50ef0	FUN_00050ef0	r8	PASS-indirect	50fac bctrl 
+50ef0	gldSetVertexPacketLimits	r7	PASS-indirect	50fac bctrl 
+50ef0	gldSetVertexPacketLimits	r8	PASS-indirect	50fac bctrl 
 53990	extvsEndShader	r5	PASS-no	539c8 bl 0xb9f10
 53990	extvsEndShader	r6	PASS-indirect	539c8 bl 0xb9f10
 53990	extvsEndShader	r7	PASS-no	539c8 bl 0xb9f10
 53990	extvsEndShader	r8	PASS-no	539c8 bl 0xb9f10
-546d0	FUN_000546d0	r6	PASS-indirect	54704 bctrl 
-546d0	FUN_000546d0	r7	PASS-indirect	54704 bctrl 
-546d0	FUN_000546d0	r8	PASS-indirect	54704 bctrl 
+546d0	extvsMakeShaderCurrent	r6	PASS-indirect	54704 bctrl 
+546d0	extvsMakeShaderCurrent	r7	PASS-indirect	54704 bctrl 
+546d0	extvsMakeShaderCurrent	r8	PASS-indirect	54704 bctrl 
 5f810	extvsPrepareHardwareProgram	r5	PASS-no	5f878 bl 0x5e7f0
 5f810	extvsPrepareHardwareProgram	r6	PASS-no	5f878 bl 0x5e7f0
 5f810	extvsPrepareHardwareProgram	r7	PASS-no	5f878 bl 0x5e7f0
 5f810	extvsPrepareHardwareProgram	r8	PASS-no	5f878 bl 0x5e7f0
-64720	FUN_00064720	r5	PASS-indirect	64830 bctrl 
-64720	FUN_00064720	r6	PASS-indirect	64830 bctrl 
-64720	FUN_00064720	r7	PASS-indirect	64830 bctrl 
+64720	gldCopyRouteRegisters	r5	PASS-indirect	64830 bctrl 
+64720	gldCopyRouteRegisters	r6	PASS-indirect	64830 bctrl 
+64720	gldCopyRouteRegisters	r7	PASS-indirect	64830 bctrl 
 64a10	extvsUploadProgramConstants	r5	PASS-indirect	64d64 bctrl 
 64a10	extvsUploadProgramConstants	r6	PASS-indirect	64d64 bctrl 
 64a10	extvsUploadProgramConstants	r7	PASS-indirect	64d64 bctrl 

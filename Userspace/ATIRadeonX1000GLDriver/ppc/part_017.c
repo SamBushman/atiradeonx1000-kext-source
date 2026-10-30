@@ -2979,7 +2979,7 @@ void FUN_000bd9a0(int glContext,undefined4 param_2,undefined4 param_3,undefined4
     fpPassThrough1 = (double)ffvpBuildLightKey(glContext);
     param_2 = r4AfterCall;
   }
-  ((void (*)())FUN_0004d620)(glContext,param_2,param_3,param_4,fpPassThrough1);
+  ((void (*)())gldMarkProgramsDirtyByFlag)(glContext,param_2,param_3,param_4,fpPassThrough1);
   return;
 }
 

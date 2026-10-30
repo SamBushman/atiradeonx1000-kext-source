@@ -577,7 +577,7 @@ int freeAndNullField(param_1)
 {
   /* issue #74 / #79: this is the stock's plain free-and-null helper again. It used to carry a
    * malloc_size() guard because the bad values it freed on CGLDestroyContext teardown (0x84c1,
-   * 0x110001 in #74; 0x24 in FUN_0004b5d0, #79) looked like table entries - the guard hid a
+   * 0x110001 in #74; 0x24 in gldReleaseProgramEntry, #79) looked like table entries - the guard hid a
    * real bug instead of fixing it: FUN_000b5fb0 dropped the object it hands the destroy
    * callback (`lwz r4,0x1448(r30)`, loaded before the branch, so its indirect-call argument
    * count missed it) and the destructor ran on whatever r4 held. With that fixed, cgl_probe
@@ -589,8 +589,8 @@ int freeAndNullField(param_1)
   return;
 }
 
-/* FUN_0004ce30 @ 0x4ce30 (680 bytes) */
-int FUN_0004ce30(glContext)
+/* gldValidateHyperZ @ 0x4ce30 (680 bytes) */
+int gldValidateHyperZ(glContext)
   int glContext;
 {
   int glState;
@@ -803,7 +803,7 @@ LAB_0004d2c8:
     *(uint *)(glContext + 0x18a4) = *(uint *)(glContext + 0x18a4) & 0xffffffef;
     if ((*(uint *)(((unsigned char *)0x00001544) + glContextWord1e5c) & 0x10) != 0) goto LAB_0004d2c8;
   }
-  ((int (*)())FUN_0004ce30)(glContext);
+  ((int (*)())gldValidateHyperZ)(glContext);
   zbCntl = *(uint *)(glContext + 0x1aa0);
   glContextWord1ab8 = *(uint *)(glContext + 0x1ab8);
   glContextWord4 = *(int *)(glContext + 4);
@@ -900,8 +900,8 @@ LAB_0004d460:
   return;
 }
 
-/* FUN_0004d620 @ 0x4d620 (328 bytes) */
-void FUN_0004d620(int glContext,undefined4 param_2,undefined4 unusedArgR5,undefined4 unused,double fprF1)
+/* gldMarkProgramsDirtyByFlag @ 0x4d620 (328 bytes) */
+void gldMarkProgramsDirtyByFlag(int glContext,undefined4 param_2,undefined4 unusedArgR5,undefined4 unused,double fprF1)
 {
   uint loopIndex;
   int programEntry;
@@ -1239,8 +1239,8 @@ int FUN_0004ddc0(glContext)
   return;
 }
 
-/* FUN_0004de30 @ 0x4de30 (180 bytes) */
-int FUN_0004de30(glContext, programEntry, unusedArg3, firstUnit, unitScalePtr, unitCount)
+/* gldSetUnitScaleConstants @ 0x4de30 (180 bytes) */
+int gldSetUnitScaleConstants(glContext, programEntry, unusedArg3, firstUnit, unitScalePtr, unitCount)
   int glContext;
   int programEntry;
   undefined4 unusedArg3;
@@ -1448,7 +1448,7 @@ LAB_0004df78:
                 *(float *)(unitScalePtr + 0xc) = rectSumScaled / *(float *)(texObj + 0x48);
               }
               unitWordOffset = loopIndex << 2;
-              fprF1 = (double)((int (*)())FUN_0004de30)(glContext,0,loopIndex + 0x14,loopIndex + 0x14,unitScalePtr,1);
+              fprF1 = (double)((int (*)())gldSetUnitScaleConstants)(glContext,0,loopIndex + 0x14,loopIndex + 0x14,unitScalePtr,1);
               lodBiasFromProgram = false;
               *(uint *)(glContext + 0x27b4) = unitBit | *(uint *)(glContext + 0x27b4);
             }
@@ -1652,8 +1652,8 @@ LAB_0004e760:
   return;
 }
 
-/* FUN_0004e880 @ 0x4e880 (252 bytes) */
-int FUN_0004e880(glContext)
+/* gldEmitRegisterPairPacket @ 0x4e880 (252 bytes) */
+int gldEmitRegisterPairPacket(glContext)
   int glContext;
 {
   uint glContextWord243c;
@@ -1692,8 +1692,8 @@ int FUN_0004e880(glContext)
   return;
 }
 
-/* FUN_0004e990 @ 0x4e990 (208 bytes) */
-int FUN_0004e990(glContext)
+/* gldDepthBiasScaledInt @ 0x4e990 (208 bytes) */
+int gldDepthBiasScaledInt(glContext)
   int glContext;
 {
   uint depthBufferBits;
@@ -1766,8 +1766,8 @@ double gldValidatePolygonMode(int glContext,double fprF1,double fprF2,double fpr
   return;
 }
 
-/* FUN_0004eba0 @ 0x4eba0 (476 bytes) */
-int FUN_0004eba0(glContext, param_2, staleArgR5, staleArgR6, staleArgR7, staleArgR8, staleArgR9)
+/* gldValidatePolygonOffset @ 0x4eba0 (476 bytes) */
+int gldValidatePolygonOffset(glContext, param_2, staleArgR5, staleArgR6, staleArgR7, staleArgR8, staleArgR9)
   int glContext;
   undefined4 param_2;
   undefined4 staleArgR5;
@@ -1838,8 +1838,8 @@ int FUN_0004eba0(glContext, param_2, staleArgR5, staleArgR6, staleArgR7, staleAr
   return;
 }
 
-/* FUN_0004ed90 @ 0x4ed90 (692 bytes) */
-int FUN_0004ed90(glContext)
+/* gldValidatePointSize @ 0x4ed90 (692 bytes) */
+int gldValidatePointSize(glContext)
   int glContext;
 {
   uint registerDirty;
@@ -1980,8 +1980,8 @@ LAB_0004f0dc:
   return;
 }
 
-/* FUN_0004f160 @ 0x4f160 (352 bytes) */
-int FUN_0004f160(glContext, channel)
+/* gldFogColorChannelByte @ 0x4f160 (352 bytes) */
+int gldFogColorChannelByte(glContext, channel)
   int glContext;
   int channel;
 {
@@ -2031,8 +2031,8 @@ LAB_0004f2c8:
   return highBits & 3 | channelByte;
 }
 
-/* FUN_0004f2e0 @ 0x4f2e0 (616 bytes) */
-void FUN_0004f2e0(int glContext,undefined4 param_2,undefined4 unusedArgR5,undefined4 unused,double fprF1)
+/* gldValidateFog @ 0x4f2e0 (616 bytes) */
+void gldValidateFog(int glContext,undefined4 param_2,undefined4 unusedArgR5,undefined4 unused,double fprF1)
 {
   byte colorFormatIndex;
   short fogMode;
@@ -2093,11 +2093,11 @@ void FUN_0004f2e0(int glContext,undefined4 param_2,undefined4 unusedArgR5,undefi
   else {
     ((undefined4 (*)())FUN_000afe40)(glContext,0,unusedArgR5,unused,fprF1);
   }
-  fogColorWord0 = ((int (*)())FUN_0004f160)(glContext,*(uint *)(colorFormatTable + (uint)colorFormatIndex * 0x24 + 0x1c) >> 0x1e);
+  fogColorWord0 = ((int (*)())gldFogColorChannelByte)(glContext,*(uint *)(colorFormatTable + (uint)colorFormatIndex * 0x24 + 0x1c) >> 0x1e);
   *(uint *)(glContext + 0x1a54) = fogColorWord0 & 0x3ff | *(uint *)(glContext + 0x1a54) & 0xfffffc00;
-  fogColorWord1 = ((int (*)())FUN_0004f160)(glContext,*(uint *)(colorFormatTable + (uint)colorFormatIndex * 0x24 + 0x18) >> 1 & 3);
+  fogColorWord1 = ((int (*)())gldFogColorChannelByte)(glContext,*(uint *)(colorFormatTable + (uint)colorFormatIndex * 0x24 + 0x18) >> 1 & 3);
   *(uint *)(glContext + 0x1a58) = fogColorWord1 & 0x3ff | *(uint *)(glContext + 0x1a58) & 0xfffffc00;
-  fogColorWord2 = ((int (*)())FUN_0004f160)(glContext,*(uint *)(colorFormatTable + (uint)colorFormatIndex * 0x24 + 0x18) >> 3 & 3);
+  fogColorWord2 = ((int (*)())gldFogColorChannelByte)(glContext,*(uint *)(colorFormatTable + (uint)colorFormatIndex * 0x24 + 0x18) >> 3 & 3);
   *(uint *)(glContext + 0x1930) = *(uint *)(glContext + 0x1930) | 1;
   *(uint *)(glContext + 0x1a5c) = fogColorWord2 & 0x3ff | *(uint *)(glContext + 0x1a5c) & 0xfffffc00;
   return;
@@ -2359,8 +2359,8 @@ int gldInitStateDefaults(glContext)
   return;
 }
 
-/* FUN_0004fc80 @ 0x4fc80 (252 bytes) */
-int FUN_0004fc80(ctx, routeSlot, routeField0, routeField1, routeSourceId, routeFlag13, routeFlag14, routeFlag15)
+/* ffvpSetOutputRoute @ 0x4fc80 (252 bytes) */
+int ffvpSetOutputRoute(ctx, routeSlot, routeField0, routeField1, routeSourceId, routeFlag13, routeFlag14, routeFlag15)
   int ctx;
   uint routeSlot;
   uint routeField0;
@@ -2556,8 +2556,8 @@ int gldValidateAlphaTest(glContext)
   return;
 }
 
-/* FUN_00050140 @ 0x50140 (424 bytes) */
-int FUN_00050140(glContext, param_2, param_3, param_4, param_5, param_6)
+/* gldValidateColorMask @ 0x50140 (424 bytes) */
+int gldValidateColorMask(glContext, param_2, param_3, param_4, param_5, param_6)
   int glContext;
   undefined4 param_2;
   undefined4 param_3;
@@ -2868,7 +2868,7 @@ int gldEmitHardwareState(glContext)
   streamSetCurrent = *(code **)(glContext + 0x275c);
   *(undefined4 **)(0x00002748 + glContext + 4) = packetEnd;
   (*streamSetCurrent)(glContext,packetEnd);
-  ((int (*)())FUN_0004e880)(glContext);
+  ((int (*)())gldEmitRegisterPairPacket)(glContext);
   dirtyUnitMask = *(uint *)(glContext + 0x27b0) |
            (*(uint *)(glContext + 0x27b0) & *(uint *)(glContext + 0x27b4)) << 8;
   if (dirtyUnitMask != 0) {
@@ -3140,8 +3140,8 @@ LAB_00050920:
   return;
 }
 
-/* FUN_00050ef0 @ 0x50ef0 (284 bytes) */
-int FUN_00050ef0(glContext, elementSizeA, elementSizeB, elementSizeC)
+/* gldSetVertexPacketLimits @ 0x50ef0 (284 bytes) */
+int gldSetVertexPacketLimits(glContext, elementSizeA, elementSizeB, elementSizeC)
   int glContext;
   uint elementSizeA;
   uint elementSizeB;
@@ -4391,8 +4391,8 @@ int FUN_00052280(glContext)
   return;
 }
 
-/* FUN_00052cc0 @ 0x52cc0 (372 bytes) */
-int FUN_00052cc0(glContext)
+/* extvsSelectHandlerTables @ 0x52cc0 (372 bytes) */
+int extvsSelectHandlerTables(glContext)
   int glContext;
 {
   undefined *handlerTemp;
@@ -4471,8 +4471,8 @@ int FUN_00052e60(glContext, arg2, unusedArg3)
   return streamPos;
 }
 
-/* FUN_00052ee0 @ 0x52ee0 (128 bytes) */
-int FUN_00052ee0(ctx, position)
+/* extvsGetSymbolStorageWord @ 0x52ee0 (128 bytes) */
+int extvsGetSymbolStorageWord(ctx, position)
   int ctx;
   undefined4 position;
 {
@@ -4495,8 +4495,8 @@ int FUN_00052ee0(ctx, position)
   return symbolIndexOrField;
 }
 
-/* FUN_00052f60 @ 0x52f60 (148 bytes) */
-int FUN_00052f60(ctx, position)
+/* extvsGetSymbolStorageKind @ 0x52f60 (148 bytes) */
+int extvsGetSymbolStorageKind(ctx, position)
   int ctx;
   undefined4 position;
 {
@@ -4578,8 +4578,8 @@ int extvsClearConstantsDirty(ctx)
   return;
 }
 
-/* FUN_000530c0 @ 0x530c0 (184 bytes) */
-int FUN_000530c0(ctx, symbolId, outInfo)
+/* extvsGetSymbolStorageInfo @ 0x530c0 (184 bytes) */
+int extvsGetSymbolStorageInfo(ctx, symbolId, outInfo)
   int ctx;
   int symbolId;
   undefined4 *outInfo;
@@ -4622,8 +4622,8 @@ LAB_00053150:
   return;
 }
 
-/* FUN_00053190 @ 0x53190 (116 bytes) */
-int FUN_00053190(param_1)
+/* extvsEnabledInputMask @ 0x53190 (116 bytes) */
+int extvsEnabledInputMask(param_1)
   int param_1;
 {
   int unitFlagCursor;
@@ -4736,8 +4736,8 @@ LAB_000534a0:
   return firstSymbolId;
 }
 
-/* FUN_000534c0 @ 0x534c0 (260 bytes) */
-int FUN_000534c0(ctx, elementCount, kindArray, elementValues, symbolOut)
+/* extvsCreateVectorSymbolChain @ 0x534c0 (260 bytes) */
+int extvsCreateVectorSymbolChain(ctx, elementCount, kindArray, elementValues, symbolOut)
   int ctx;
   uint elementCount;
   byte *kindArray;
@@ -5062,7 +5062,7 @@ asm(".set gldValidateVertexStreams, _gldValidateVertexStreams");
 asm(".globl FUN_0004dbe0");
 asm(".set FUN_0004dbe0, _FUN_0004dbe0");
 asm(".globl FUN_0004de30");
-asm(".set FUN_0004de30, _FUN_0004de30");
+asm(".set FUN_0004de30, _gldSetUnitScaleConstants");
 
 /* issue #75 (follow-up #3): Ghidra recognized this as a THUNK - a pure trampoline stub that
  * just branches straight to the real function below, no different behavior or arguments - but

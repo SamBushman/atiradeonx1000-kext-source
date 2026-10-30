@@ -10,12 +10,12 @@
 0x46e90	fragmentInstructionToIL	0x48528	memset	r10	r1+0x90 (a stack address) not at argument 7 of any C call (10 C calls)	BENIGN-IMPORT-ARITY
 0x46e90	fragmentInstructionToIL	0x48670	memset	r10	r1+0x6c (a stack address) not at argument 7 of any C call (10 C calls)	BENIGN-IMPORT-ARITY
 0x46e90	fragmentInstructionToIL	0x47d5c	fpilEmitInstruction	r10	0x1 not at argument 7 of any C call (23 C calls)	BENIGN-CALLEE-IGNORES
-0x4b7d0	FUN_0004b7d0	0x4b800	malloc	r3	0x3754 printed as &UNK_00003754 (symbolized-text-address)	BENIGN-SYMBOLIZED
-0x4b7d0	FUN_0004b7d0	0x4b810	memset	r5	0x3754 printed as &UNK_00003754 (symbolized-text-address)	BENIGN-SYMBOLIZED
+0x4b7d0	gldMarkAllProgramsDirty	0x4b800	malloc	r3	0x3754 printed as &UNK_00003754 (symbolized-text-address)	BENIGN-SYMBOLIZED
+0x4b7d0	gldMarkAllProgramsDirty	0x4b810	memset	r5	0x3754 printed as &UNK_00003754 (symbolized-text-address)	BENIGN-SYMBOLIZED
 0x4bbf0	gldLookupProgramVariant	0x4bf84	malloc	r3	0x3754 printed as &UNK_00003754 (symbolized-text-address)	BENIGN-SYMBOLIZED
 0x4bbf0	gldLookupProgramVariant	0x4bf94	memset	r5	0x3754 printed as &UNK_00003754 (symbolized-text-address)	BENIGN-SYMBOLIZED
 0x4bbf0	gldLookupProgramVariant	0x4c0b0	memset	r5	0x3754 printed as &UNK_00003754 (symbolized-text-address)	BENIGN-SYMBOLIZED
-0x4def0	FUN_0004def0	0x4e454	FUN_0004de30	r9	0x0 not at argument 6 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
+0x4def0	FUN_0004def0	0x4e454	gldSetUnitScaleConstants	r9	0x0 not at argument 6 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
 0x4f720	gldInitStateDefaults	0x4f930	memset	r9	0x9 not at argument 6 of any C call (1 C calls)	BENIGN-IMPORT-ARITY
 0x656b0	ffvpSelectPassThroughVariant	0x65790	FUN_00065610	r5	r1+0x38 (a stack address) not at argument 2 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
 0x656b0	ffvpSelectPassThroughVariant	0x65790	FUN_00065610	r6	r1+0x3c (a stack address) not at argument 3 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES

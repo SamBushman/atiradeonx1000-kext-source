@@ -8024,8 +8024,8 @@ int FUN_0004ab60(glContext)
   return;
 }
 
-/* FUN_0004ac90 @ 0x4ac90 (1272 bytes) */
-int FUN_0004ac90(glContext)
+/* gldUploadProgramState @ 0x4ac90 (1272 bytes) */
+int gldUploadProgramState(glContext)
   int glContext;
 {
   int copyCountdown;
@@ -8247,8 +8247,8 @@ int FUN_0004ac90(glContext)
   return;
 }
 
-/* FUN_0004b190 @ 0x4b190 (700 bytes) */
-int FUN_0004b190(glContext, mode)
+/* gldSetProgramStreamMode @ 0x4b190 (700 bytes) */
+int gldSetProgramStreamMode(glContext, mode)
   int glContext;
   int mode;
 {
@@ -8402,8 +8402,8 @@ int FUN_0004b480(glContext, slotIndex)
   return;
 }
 
-/* FUN_0004b520 @ 0x4b520 (160 bytes) */
-int FUN_0004b520(glContext, programEntry)
+/* gldRemoveProgramFromList @ 0x4b520 (160 bytes) */
+int gldRemoveProgramFromList(glContext, programEntry)
   int glContext;
   int programEntry;
 {
@@ -8449,8 +8449,8 @@ int FUN_0004b520(glContext, programEntry)
   return;
 }
 
-/* FUN_0004b5d0 @ 0x4b5d0 (296 bytes) */
-int FUN_0004b5d0(glContext, programEntry)
+/* gldReleaseProgramEntry @ 0x4b5d0 (296 bytes) */
+int gldReleaseProgramEntry(glContext, programEntry)
   int glContext;
   int programEntry;
 {
@@ -8519,7 +8519,7 @@ int FUN_0004b710(glContext)
       programEntry = entryByteOffset + *(int *)(glContext + 0x1e60);
       entryByteOffset = ((unsigned char *)0x00003754U) + (int)entryByteOffset;
       *(undefined4 *)(programEntry + 0x1780) = 0;
-      ((int (*)())FUN_0004b5d0)(glContext,programEntry);
+      ((int (*)())gldReleaseProgramEntry)(glContext,programEntry);
     } while (loopIndex < (int)(uint)*(ushort *)(glContext + 0x1e6c));
   }
   _free(*(undefined4 *)(glContext + 0x1e60));
@@ -8533,8 +8533,8 @@ int FUN_0004b710(glContext)
   return;
 }
 
-/* FUN_0004b7d0 @ 0x4b7d0 (392 bytes) */
-int FUN_0004b7d0(glContext)
+/* gldMarkAllProgramsDirty @ 0x4b7d0 (392 bytes) */
+int gldMarkAllProgramsDirty(glContext)
   int glContext;
 {
   uint shaderCount;
@@ -8901,8 +8901,8 @@ LAB_0004bf48:
   return lookupResult;
 }
 
-/* FUN_0004c100 @ 0x4c100 (336 bytes) */
-int FUN_0004c100(dstState, glContext)
+/* gldCopyProgramStreamState @ 0x4c100 (336 bytes) */
+int gldCopyProgramStreamState(dstState, glContext)
   int dstState;
   int glContext;
 {

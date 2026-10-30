@@ -3119,7 +3119,7 @@ LAB_000284b0:
   packet[0x188] = *(undefined4 *)(ctx + GLD_ga_point_t0);
   packet[0x189] = *(undefined4 *)(ctx + GLD_ga_point_s1);
   packet[0x18a] = *(undefined4 *)(ctx + GLD_ga_point_t1);
-  FUN_0004c100(packet + 0xd0,ring);
+  gldCopyProgramStreamState(packet + 0xd0,ring);
   packet = packet + 0x18d;
   hwFormat = ctx;
   do {
@@ -4962,7 +4962,7 @@ LAB_0002a520:
       packet[0x187] = *(undefined4 *)(ctx + GLD_ga_point_t0);
       packet[0x188] = *(undefined4 *)(ctx + GLD_ga_point_s1);
       packet[0x189] = *(undefined4 *)(ctx + GLD_ga_point_t1);
-      FUN_0004c100(packet + 0xcf,ring);
+      gldCopyProgramStreamState(packet + 0xcf,ring);
       packet = packet + 0x18c;
       hwFormat = ctx;
       do {
@@ -6032,7 +6032,7 @@ int gld_initContextHardwareState(ctx, pixelFormat)
   *(undefined4 *)(ctx + 0x1f0) = 0;
   FUN_000a7050(ctx);
   atifsInit(engineBase);
-  staleFprArg1 = (double)FUN_00052cc0(engineBase);
+  staleFprArg1 = (double)extvsSelectHandlerTables(engineBase);
   *(undefined4 *)(((unsigned char *)0x00002b74) + ctx) = 0;
   *(undefined4 *)(ctx + 0x26a0) = 0;
   *(undefined4 *)(ctx + 0x26b0) = 0;

@@ -26,7 +26,7 @@ int ffvpSetupVertexOutputRouting(ctx)
   *(undefined4 *)(ctx + 0x1ca0) = 1;
   *(undefined4 *)(ctx + 0x1ca4) = 4;
   outputMask = *(uint *)(ctx + 0x1804);
-  FUN_0004fc80(ctx,0,3,0,0,0,0,0);
+  ffvpSetOutputRoute(ctx,0,3,0,0,0,0,0);
   *(undefined4 *)(ctx + 0x1b9c) = 1;
   *(undefined4 *)(ctx + 0x1bb0) = 0;
   *(undefined4 *)(ctx + 0x1ba0) = 0;
@@ -40,13 +40,13 @@ int ffvpSetupVertexOutputRouting(ctx)
     *(uint *)(ctx + 0x1ca0) = *(uint *)(ctx + 0x1ca0) | 0x40000;
     *(uint *)(ctx + 0x1ca4) =
          (*(uint *)(ctx + 0x1ca4) & 0x7f) + 1 & 0x7f | *(uint *)(ctx + 0x1ca4) & 0xffffff80;
-    FUN_0004fc80(ctx,1,0,0,1,0,0,0);
+    ffvpSetOutputRoute(ctx,1,0,0,1,0,0,0);
     *(uint *)(ctx + 0x1b9c) = *(uint *)(ctx + 0x1b9c) | 0x10000;
   }
   *(uint *)(ctx + 0x1ca0) = *(uint *)(ctx + 0x1ca0) | 4;
   *(uint *)(ctx + 0x1ca4) =
        (*(uint *)(ctx + 0x1ca4) & 0x7f) + 4 & 0x7f | *(uint *)(ctx + 0x1ca4) & 0xffffff80;
-  FUN_0004fc80(ctx,colorSlot,3,0,colorSlot,0,0,0);
+  ffvpSetOutputRoute(ctx,colorSlot,3,0,colorSlot,0,0,0);
   *(uint *)(ctx + 0x1b9c) = *(uint *)(ctx + 0x1b9c) | 2;
   slotCursor = secondarySlot;
   if ((outputMask & 1) != 0) {
@@ -54,17 +54,17 @@ int ffvpSetupVertexOutputRouting(ctx)
     *(uint *)(ctx + 0x1ca0) = *(uint *)(ctx + 0x1ca0) | 8;
     *(uint *)(ctx + 0x1ca4) =
          (*(uint *)(ctx + 0x1ca4) & 0x7f) + 4 & 0x7f | *(uint *)(ctx + 0x1ca4) & 0xffffff80;
-    FUN_0004fc80(ctx,secondarySlot,3,0,secondarySlot,0,0,0);
+    ffvpSetOutputRoute(ctx,secondarySlot,3,0,secondarySlot,0,0,0);
     *(uint *)(ctx + 0x1b9c) = *(uint *)(ctx + 0x1b9c) | 4;
   }
   if ((outputMask & 8) != 0) {
     *(uint *)(ctx + 0x1ca0) = *(uint *)(ctx + 0x1ca0) | 0x30;
     *(uint *)(ctx + 0x1ca4) =
          (*(uint *)(ctx + 0x1ca4) & 0x7f) + 7 & 0x7f | *(uint *)(ctx + 0x1ca4) & 0xffffff80;
-    FUN_0004fc80(ctx,slotCursor,3,0,slotCursor,0,0,0);
+    ffvpSetOutputRoute(ctx,slotCursor,3,0,slotCursor,0,0,0);
     nextSlot = slotCursor + 1;
     slotCursor = slotCursor + 2;
-    FUN_0004fc80(ctx,nextSlot,2,0,nextSlot,0,0,0);
+    ffvpSetOutputRoute(ctx,nextSlot,2,0,nextSlot,0,0,0);
     *(uint *)(ctx + 0x1b9c) = *(uint *)(ctx + 0x1b9c) | 0x18;
   }
   if (outputMask >> 4 != 0) {
@@ -81,7 +81,7 @@ int ffvpSetupVertexOutputRouting(ctx)
       *(uint *)(ctx + 0x1ca4) =
            (*(uint *)(ctx + 0x1ca4) & 0x7f) + 4 & 0x7f |
            *(uint *)(ctx + 0x1ca4) & 0xffffff80;
-      FUN_0004fc80(ctx,nextSlot,3,0,nextSlot,0,0,0);
+      ffvpSetOutputRoute(ctx,nextSlot,3,0,nextSlot,0,0,0);
       *(uint *)(ctx + 0x1bb0) = texRouteWord | *(uint *)(ctx + 0x1bb0);
       *(uint *)(ctx + 0x1ba0) = texRouteWord | *(uint *)(ctx + 0x1ba0);
       nextSlot = slotCursor;
@@ -296,7 +296,7 @@ int gldEmitVertexRoutingPackets(ctx)
   streamSetCurrent = *(code **)(ctx + 0x275c);
   *(int *)(0x00002748 + ctx + 4) = cmdPos + 0x24;
   (*streamSetCurrent)(ctx,cmdPos + 0x24,in_r5,in_r6,in_r7,in_r8,a6);
-  return FUN_0004e880(ctx);
+  return gldEmitRegisterPairPacket(ctx);
 }
 
 /* ffvpValidateProgram @ 0x83870 (1012 bytes) */
@@ -3892,7 +3892,7 @@ int arbfpUnbindWorkAreaChecked(glContext, fpState)
     if (workArea == *(int *)(glContext + 0x1e70)) {
       *(undefined4 *)(glContext + 0x1e70) = 0;
     }
-    FUN_0004b5d0(glContext,workArea);
+    gldReleaseProgramEntry(glContext,workArea);
     if (workArea == *(int *)(glContext + 0x1e64)) {
       *(undefined4 *)(glContext + 0x1e64) = 0;
     }
@@ -3918,7 +3918,7 @@ int arbfpUnbindWorkArea(glContext, fpState)
   if (workArea == *(int *)(glContext + 0x1e70)) {
     *(undefined4 *)(glContext + 0x1e70) = 0;
   }
-  FUN_0004b5d0(glContext,workArea);
+  gldReleaseProgramEntry(glContext,workArea);
   if (workArea == *(int *)(glContext + 0x1e64)) {
     *(undefined4 *)(glContext + 0x1e64) = 0;
   }

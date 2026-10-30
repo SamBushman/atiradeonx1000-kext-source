@@ -3725,8 +3725,8 @@ int extvsStateFree(ctx, chainEntry)
   return ctxTempListRemove(ctx,chainEntry);
 }
 
-/* FUN_00062370 @ 0x62370 (104 bytes) */
-int FUN_00062370(param_1, param_2, useUnitFlags)
+/* gldLoadUnitFlagBits @ 0x62370 (104 bytes) */
+int gldLoadUnitFlagBits(param_1, param_2, useUnitFlags)
   int param_1;
   int param_2;
   int useUnitFlags;
@@ -3770,8 +3770,8 @@ int extvsInitLimits(ctx)
   return;
 }
 
-/* FUN_00062410 @ 0x62410 (116 bytes) */
-int FUN_00062410(param_1)
+/* gldAllocListNode @ 0x62410 (116 bytes) */
+int gldAllocListNode(param_1)
   int param_1;
 {
   undefined4 nodeData;
@@ -3791,8 +3791,8 @@ int FUN_00062410(param_1)
   return;
 }
 
-/* FUN_00062490 @ 0x62490 (120 bytes) */
-int FUN_00062490(glContext)
+/* gldFreeListNodes @ 0x62490 (120 bytes) */
+int gldFreeListNodes(glContext)
   int glContext;
 {
   undefined4 *listNode;
@@ -3816,7 +3816,7 @@ int FUN_00062510(glContext)
   int glContext;
 {
   if (*(int *)(((unsigned char *)0x000011b4) + glContext) != 0) {
-    ((int (*)())FUN_00062490)(glContext);
+    ((int (*)())gldFreeListNodes)(glContext);
     (**(code **)(glContext + 0x18))(*(undefined4 *)(((unsigned char *)0x000011b4) + glContext));
     *(undefined4 *)(((unsigned char *)0x000011b4) + glContext) = 0;
   }
@@ -4830,8 +4830,8 @@ LAB_000644c0:
   return;
 }
 
-/* FUN_00064720 @ 0x64720 (304 bytes) */
-int FUN_00064720(glContext)
+/* gldCopyRouteRegisters @ 0x64720 (304 bytes) */
+int gldCopyRouteRegisters(glContext)
   int glContext;
 {
   undefined4 *constWordPtr;
@@ -5109,9 +5109,9 @@ LAB_00064c00:
         commitCallback = *(code **)(glContext + 0x275c);
         *(int *)(0x00002748 + glContext + 4) = cmdEnd + 8;
         (*commitCallback)(glContext,cmdEnd + 8,in_r5,in_r6,in_r7,in_r8,cmdEndB);
-        FUN_00050ef0(glContext,*(undefined4 *)(programState + 0x2a4),*(undefined4 *)(programState + 0x2a8),
+        gldSetVertexPacketLimits(glContext,*(undefined4 *)(programState + 0x2a4),*(undefined4 *)(programState + 0x2a8),
                      *(undefined4 *)(programState + 0x2ac));
-        ((int (*)())FUN_00064720)(glContext);
+        ((int (*)())gldCopyRouteRegisters)(glContext);
         return;
       }
       freeWidth = 0;
@@ -5158,7 +5158,7 @@ LAB_00064af0:
               (*commitCallback)(glContext,cmdEnd,in_r5,in_r6,in_r7,in_r8,cmdEnd);
               *constAlloc = 0;
               constAlloc[1] = *(int *)(glContext + 0x2448);
-              ((int (*)())FUN_00062490)(glContext);
+              ((int (*)())gldFreeListNodes)(glContext);
               cacheMode = *(int *)(glContext + 0xd8);
               allocX = 0;
               allocY = 0;
@@ -5229,7 +5229,7 @@ int extvsValidateProgramState(glContext, arg2)
       (*commitCallback)(glContext,cmdEndSaved,in_r5,in_r6,in_r7,in_r8,cmdEndSaved);
       *constantAlloc = 0;
       constantAlloc[1] = *(undefined4 *)(glContext + 0x2448);
-      ((int (*)())FUN_00062490)(glContext);
+      ((int (*)())gldFreeListNodes)(glContext);
       *(uint *)(glContext + 0x8c) = *(uint *)(glContext + 0x8c) & 0xfffeffff;
     }
     if (*(char *)(shader + 4) != '\0') {
@@ -5254,7 +5254,7 @@ int extvsValidateProgramState(glContext, arg2)
             break;
           }
         }
-        FUN_000546d0(glContext,shader);
+        extvsMakeShaderCurrent(glContext,shader);
 LAB_00065094:
         *(byte *)(glContext + 0x2d) = *(byte *)(glContext + 0x2d) | 3;
       }
@@ -5336,7 +5336,7 @@ int extvsFlushConstantUploads(glContext)
     commitCallback = *(code **)(glContext + 0x275c);
     *(int *)(0x00002748 + glContext + 4) = cmdEnd + 8;
     (*commitCallback)(glContext,cmdEnd + 8,in_r5,in_r6,in_r7,in_r8,a6);
-    FUN_00050ef0(glContext,*(undefined4 *)(programState + 0x2a4),*(undefined4 *)(programState + 0x2a8),
+    gldSetVertexPacketLimits(glContext,*(undefined4 *)(programState + 0x2a4),*(undefined4 *)(programState + 0x2a8),
                  *(undefined4 *)(programState + 0x2ac));
     ((int (*)())vpUploadConstantsWithFog)(glContext,shader,programState,hwProgramSlot[0x22],1);
   }
@@ -9957,11 +9957,11 @@ asm(".set extvsRewriteHardwareInstructions, _FUN_0005f540");
 asm(".globl extvsPrepareHardwareProgram");
 asm(".set extvsPrepareHardwareProgram, _extvsPrepareHardwareProgram");
 asm(".globl FUN_00062370");
-asm(".set FUN_00062370, _FUN_00062370");
+asm(".set FUN_00062370, _gldLoadUnitFlagBits");
 asm(".globl extvsInitLimits");
 asm(".set extvsInitLimits, _extvsInitLimits");
 asm(".globl FUN_00062410");
-asm(".set FUN_00062410, _FUN_00062410");
+asm(".set FUN_00062410, _gldAllocListNode");
 asm(".globl FUN_00062510");
 asm(".set FUN_00062510, _FUN_00062510");
 asm(".globl extvsStateCacheCreate");

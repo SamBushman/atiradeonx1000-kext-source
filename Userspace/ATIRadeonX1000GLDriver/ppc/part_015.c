@@ -1597,7 +1597,7 @@ int FUN_000a3be0(glContext, primitiveMode, param_3, unusedArgR6, param_5, extraA
     *(undefined4 *)(glContext + 0x1b68) = 0;
     extraArg5 = (undefined4 *)(uVar5 & 0x10 | *(uint *)(glContext + 0x1a64) & 0xffffffef);
     *(undefined4 **)(glContext + 0x1a64) = extraArg5;
-    FUN_0004b190(glContext,*(undefined4 *)(param_5 + 0xc0));
+    gldSetProgramStreamMode(glContext,*(undefined4 *)(param_5 + 0xc0));
   }
   *(undefined4 *)(glContext + 0x1ba8) = *(undefined4 *)(glContext + 0x1ba0);
   if (!bVar1) goto LAB_000a41d0;
@@ -1605,7 +1605,7 @@ int FUN_000a3be0(glContext, primitiveMode, param_3, unusedArgR6, param_5, extraA
     ffvpComputeOutputMasks(glContext);
   }
   else {
-    FUN_00064720(glContext);
+    gldCopyRouteRegisters(glContext);
   }
   (**(code **)(((unsigned char *)0x00001334) + glContext))(glContext,1);
   glContextWord44 = *(uint *)(glContext + 0x44);
@@ -1958,7 +1958,7 @@ int FUN_000a4550(glContext)
       loopIndex3 = loopIndex3 + 0x18;
     } while (loopIndex < uVar1);
   }
-  FUN_0004b190(glContext,0);
+  gldSetProgramStreamMode(glContext,0);
   *(uint *)(glContext + 0x1b50) = (uint)*(ushort *)(glContext + 0x1b52);
   *(uint *)(glContext + 0x1a64) = *(uint *)(glContext + 0x1a64) & 0xffffffef;
   *(uint *)(glContext + 0x1930) = *(uint *)(glContext + 0x1930) | 0x2000;
@@ -3292,7 +3292,7 @@ int FUN_000a6500(glContext, param_2)
   
   glContextPtr4 = *(int *)(glContext + 4);
   iVar11 = *(int *)(glContextPtr4 + 0x10);
-  uVar3 = FUN_0004e990(glContext);
+  uVar3 = gldDepthBiasScaledInt(glContext);
   uVar8 = *(uint *)(glContextPtr4 + 0x154) & 0x30000;
   if ((uVar8 == 0x20000) || (uVar8 == 0x30000)) {
     iVar10 = 0x18;
@@ -3637,7 +3637,7 @@ LAB_000a6ebc:
     *(uint *)(glContext + 0x8c) = *(uint *)(glContext + 0x8c) | 0x20000000;
   }
   glContextPtr4 = *(int *)(glContext + 4);
-  FUN_0004ce30(glContext);
+  gldValidateHyperZ(glContext);
   puVar4 = (undefined4 *)(**(code **)(glContext + 0x2758))(glContext,5);
   *(undefined4 **)(0x00002748 + glContext + 4) = puVar4;
   puVar3 = *(uint **)(glContextPtr4 + 0x1d8);

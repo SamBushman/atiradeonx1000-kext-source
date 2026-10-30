@@ -115,8 +115,8 @@ int glShaderOp3EXT_impl(ctx, op, resultId, arg1, arg2, arg3)
   return;
 }
 
-/* FUN_00054080 @ 0x54080 (276 bytes) */
-int FUN_00054080(ctx, scratchInt3, src0Id, swizzleX, swizzleY, swizzleZ, swizzleW)
+/* extvsEmitSwizzleInstruction @ 0x54080 (276 bytes) */
+int extvsEmitSwizzleInstruction(ctx, scratchInt3, src0Id, swizzleX, swizzleY, swizzleZ, swizzleW)
   int ctx;
   int scratchInt3;
   undefined4 src0Id;
@@ -258,8 +258,8 @@ int glGenSymbolsEXT_impl5(ctx, dataType, storageType, range, components)
   return uVar1;
 }
 
-/* FUN_00054470 @ 0x54470 (272 bytes) */
-int FUN_00054470(ring, outConstBuffer, outRegisterCount, registerBase)
+/* extvsGetConstantUploadInfo @ 0x54470 (272 bytes) */
+int extvsGetConstantUploadInfo(ring, outConstBuffer, outRegisterCount, registerBase)
   int ring;
   int *outConstBuffer;
   int *outRegisterCount;
@@ -299,8 +299,8 @@ int FUN_00054470(ring, outConstBuffer, outRegisterCount, registerBase)
   return 0;
 }
 
-/* FUN_00054590 @ 0x54590 (288 bytes) */
-int FUN_00054590(glContext, program, entryTotal, entrySymbols)
+/* extvsCompactSymbolEntries @ 0x54590 (288 bytes) */
+int extvsCompactSymbolEntries(glContext, program, entryTotal, entrySymbols)
   int glContext;
   undefined4 *program;
   int entryTotal;
@@ -364,8 +364,8 @@ int FUN_00054590(glContext, program, entryTotal, entrySymbols)
   return;
 }
 
-/* FUN_000546d0 @ 0x546d0 (284 bytes) */
-int FUN_000546d0(glContext, shader)
+/* extvsMakeShaderCurrent @ 0x546d0 (284 bytes) */
+int extvsMakeShaderCurrent(glContext, shader)
   int glContext;
   int shader;
 {
@@ -421,7 +421,7 @@ int glSetLocalConstantEXT_impl(ctx, symbolId, dataType, values)
     shader = *(int *)(((unsigned char *)0x00001168) + ctx);
     if ((*(char *)(ctx + 0x31) != '\0') &&
        (*(char *)(*(int *)(shader + 4) + *(int *)(((unsigned char *)0x0000118c) + ctx)) != '\0')) {
-      ((int (*)())FUN_000546d0)(ctx,shader);
+      ((int (*)())extvsMakeShaderCurrent)(ctx,shader);
     }
     symbolRecord = ((int (*)())extvsSymbolListGetSymbol)(shader + 0x1c,symbolId);
     if (((symbolRecord != 0) && (*(int *)(symbolRecord + 0x28) == 0x87c3)) && (*(char *)(symbolRecord + 0x44) == '\0')) {
@@ -669,8 +669,8 @@ LAB_00054e60:
   return entryIndex;
 }
 
-/* FUN_00054f50 @ 0x54f50 (380 bytes) */
-int FUN_00054f50(glContext, shader, operandId, swizzleSrc, outOperand)
+/* extvsResolveOperand @ 0x54f50 (380 bytes) */
+int extvsResolveOperand(glContext, shader, operandId, swizzleSrc, outOperand)
   int glContext;
   int shader;
   uint operandId;
@@ -941,10 +941,10 @@ LAB_00055550:
   *(undefined4 *)(instrRecord + 0xc) = maskWord0;
   *(undefined4 *)(instrRecord + 0x10) = maskWord1;
   *(undefined4 *)(instrRecord + 0x14) = maskWord2;
-  srcResult = ((int (*)())FUN_00054f50)(glContext,shader,src0Id,src0Swizzle,instrRecord + 0x20);
+  srcResult = ((int (*)())extvsResolveOperand)(glContext,shader,src0Id,src0Swizzle,instrRecord + 0x20);
   if (((srcResult != 0) &&
-      (srcResult = ((int (*)())FUN_00054f50)(glContext,shader,src1Id,src1Swizzle,instrRecord + 0x3c), srcResult != 0)) &&
-     (instrRecord = ((int (*)())FUN_00054f50)(glContext,shader,src2Id,src2Swizzle,instrRecord + 0x58), instrRecord != 0)) {
+      (srcResult = ((int (*)())extvsResolveOperand)(glContext,shader,src1Id,src1Swizzle,instrRecord + 0x3c), srcResult != 0)) &&
+     (instrRecord = ((int (*)())extvsResolveOperand)(glContext,shader,src2Id,src2Swizzle,instrRecord + 0x58), instrRecord != 0)) {
     *(int *)(shader + 0x14) = *(int *)(shader + 0x14) + 1;
     return 1;
   }
