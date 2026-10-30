@@ -158,7 +158,7 @@ int IrAddFloat__vslot5_getValueKeyTransformLevel(this, param_2, param_3, compile
         }
         if ((*param_3 == 0x7ffffffe) &&
            ((operandRecord = FUN_00179b28(param_2,loopIndex), operandRecord != 0 ||
-            (operandRecord = FUN_00179cc0(param_2,loopIndex), operandRecord != 0)))) {
+            (operandRecord = ValueKey__forwardOtherSourceIfZero(param_2,loopIndex), operandRecord != 0)))) {
           uVar6 = 1;
         }
       }
@@ -536,7 +536,7 @@ int IrAddInt__vslot5_getValueKeyTransformLevel(this, param_2, param_3, param_4)
         if (iVar4 <= iVar2) {
           return uVar5;
         }
-        if ((*param_3 == 0x7ffffffe) && (operandRecord = FUN_00179cc0(param_2,loopIndex), operandRecord != 0)) {
+        if ((*param_3 == 0x7ffffffe) && (operandRecord = ValueKey__forwardOtherSourceIfZero(param_2,loopIndex), operandRecord != 0)) {
           uVar5 = 1;
         }
       }

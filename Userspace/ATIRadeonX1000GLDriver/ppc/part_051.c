@@ -1247,7 +1247,7 @@ int R300MachineAssembler__placeInstructionConstants(this, inst, constantAllocato
         (operandRecord = IRInst__getOperandRecord(inst,0), *(char *)(operandRecord + 0x11) == '\0')) ||
        (operandRecord = IRInst__getOperandRecord(inst,0), *(char *)(operandRecord + 0x12) == '\0')) {
       operandVReg = IRInst__getOperandSource(inst,1);
-      placed = FUN_0018d388(constantAllocator,operandVReg,0);
+      placed = ConstantSlots__tryAssignSingle(constantAllocator,operandVReg,0);
       if (placed == 0) {
         return 0;
       }
@@ -1255,7 +1255,7 @@ int R300MachineAssembler__placeInstructionConstants(this, inst, constantAllocato
     operandRecord = IRInst__getOperandRecord(inst,0);
     if (*(char *)(operandRecord + 0x13) == '\0') {
       operandVReg = IRInst__getOperandSource(inst,1);
-      placed = FUN_0018d388(constantAllocator,operandVReg,1);
+      placed = ConstantSlots__tryAssignSingle(constantAllocator,operandVReg,1);
       if (placed == 0) {
         return 0;
       }
@@ -1281,10 +1281,10 @@ int R300MachineAssembler__placeInstructionConstants(this, inst, constantAllocato
         if ((a0[0x26] != 0x33) || (a0[0x4b] == 3)) {
           if ((sourceLaneWord & 0xffffff00) == 0) {
             if ((sourceLaneWord & 0xff) == 0) goto LAB_001971a8;
-            placed = FUN_0018c7f4(constantAllocator,a0,1);
+            placed = ConstantSlots__tryAddToRow(constantAllocator,a0,1);
           }
           else if ((sourceLaneWord & 0xff) == 0) {
-            placed = FUN_0018c7f4(constantAllocator,a0,0);
+            placed = ConstantSlots__tryAddToRow(constantAllocator,a0,0);
           }
           else {
             placed = FUN_0018c980(constantAllocator,a0,a0);
@@ -1300,12 +1300,12 @@ joined_r0x00197160:
           sourceOperandCount = (**(code **)(*a0 + 0x14))(a0);
           if (sourceOperandCount == 1) {
             operandVReg = IRInst__getOperandSource(a0,1);
-            placed = FUN_0018d388(constantAllocator,operandVReg,0);
+            placed = ConstantSlots__tryAssignSingle(constantAllocator,operandVReg,0);
           }
           else {
             operandVReg = IRInst__getOperandSource(a0,1);
             operandVReg3 = IRInst__getOperandSource(a0,2);
-            placed = FUN_0018cdd8(constantAllocator,operandVReg,operandVReg3,0);
+            placed = ConstantSlots__tryAssignPair(constantAllocator,operandVReg,operandVReg3,0);
           }
           if (placed == 0) {
             return 0;
@@ -1315,12 +1315,12 @@ joined_r0x00197160:
           sourceOperandCount2 = (**(code **)(*a0 + 0x14))(a0);
           if (sourceOperandCount2 == 1) {
             operandVReg = IRInst__getOperandSource(a0,1);
-            placed = FUN_0018d388(constantAllocator,operandVReg,1);
+            placed = ConstantSlots__tryAssignSingle(constantAllocator,operandVReg,1);
           }
           else {
             operandVReg = IRInst__getOperandSource(a0,1);
             operandVReg3 = IRInst__getOperandSource(a0,2);
-            placed = FUN_0018cdd8(constantAllocator,operandVReg,operandVReg3,1);
+            placed = ConstantSlots__tryAssignPair(constantAllocator,operandVReg,operandVReg3,1);
           }
           goto joined_r0x00197160;
         }

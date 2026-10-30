@@ -1354,8 +1354,8 @@ int FUN_00193b3c(param_1, param_2, param_3)
   return allocation + 1;
 }
 
-/* FUN_00193be8 @ 0x193be8 (24 bytes) */
-int FUN_00193be8(param_1)
+/* ArenaObject__freeBuffer @ 0x193be8 (24 bytes) */
+int ArenaObject__freeBuffer(param_1)
   int *param_1;
 {
   if (param_1[5] == 0) {

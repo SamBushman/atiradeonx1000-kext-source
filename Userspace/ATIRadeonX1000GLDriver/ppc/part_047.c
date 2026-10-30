@@ -1,7 +1,7 @@
 #include "decls.h"
 
-/* FUN_00176ed4 @ 0x176ed4 (56 bytes) */
-int FUN_00176ed4(param_1, param_2)
+/* ValueKey__compareClassForValueNumber @ 0x176ed4 (56 bytes) */
+int ValueKey__compareClassForValueNumber(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -16,8 +16,8 @@ int FUN_00176ed4(param_1, param_2)
   return uVar1;
 }
 
-/* FUN_00176f0c @ 0x176f0c (56 bytes) */
-int FUN_00176f0c(param_1, param_2)
+/* ValueKey__rangeClassForValueNumber @ 0x176f0c (56 bytes) */
+int ValueKey__rangeClassForValueNumber(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -115,8 +115,8 @@ int Inst__writtenLanesAllMatchValue(valueKey, value, row)
   return 0;
 }
 
-/* FUN_001770e4 @ 0x1770e4 (204 bytes) */
-int FUN_001770e4(resultOut, ctx, sourceIndex)
+/* ValueKey__commonLaneValue @ 0x1770e4 (204 bytes) */
+int ValueKey__commonLaneValue(resultOut, ctx, sourceIndex)
   undefined4 *resultOut;
   int ctx;
   int sourceIndex;
@@ -435,7 +435,7 @@ int FUN_00177748(ctx)
   float compareConst;
   
   callResult = IRInst__getCompareCondition(*(undefined4 *)(ctx + 0xb0));
-  ((int (*)())FUN_001770e4)(compareConstOut,ctx,2);
+  ((int (*)())ValueKey__commonLaneValue)(compareConstOut,ctx,2);
   compareConst = compareConstOut[0];
   if ((compareConstOut[0] == FLOAT_001aa0d4) &&
      (hwLimits = *(int **)(*(int *)(ctx + 0x238) + 0x30c),
@@ -1191,8 +1191,8 @@ LAB_00178b50:
   return uVar4;
 }
 
-/* FUN_00178c84 @ 0x178c84 (244 bytes) */
-int FUN_00178c84(resultOut, ctx, lane)
+/* ValueKey__singleLaneValueNumber @ 0x178c84 (244 bytes) */
+int ValueKey__singleLaneValueNumber(resultOut, ctx, lane)
   undefined4 *resultOut;
   int ctx;
   int lane;
@@ -1671,8 +1671,8 @@ int ValueKey__operandLanesEqual(ctx, lane, operandIndex, operandIndex2)
   return callResult;
 }
 
-/* FUN_001797d0 @ 0x1797d0 (196 bytes) */
-int FUN_001797d0(ctx, lane)
+/* ValueKey__forwardSource3LaneIfEqual @ 0x1797d0 (196 bytes) */
+int ValueKey__forwardSource3LaneIfEqual(ctx, lane)
   int ctx;
   int lane;
 {
@@ -1729,8 +1729,8 @@ int ValueKey__foldCompareSameSourcesValueNumber(ctx, param_2)
   return 0;
 }
 
-/* FUN_0017994c @ 0x17994c (232 bytes) */
-int FUN_0017994c(ctx, lane)
+/* ValueKey__forwardSelectedSourceBySign @ 0x17994c (232 bytes) */
+int ValueKey__forwardSelectedSourceBySign(ctx, lane)
   int ctx;
   int lane;
 {
@@ -1766,8 +1766,8 @@ int FUN_0017994c(ctx, lane)
   return 0;
 }
 
-/* FUN_00179a34 @ 0x179a34 (244 bytes) */
-int FUN_00179a34(ctx, lane)
+/* ValueKey__forwardSelectedSourceByPositive @ 0x179a34 (244 bytes) */
+int ValueKey__forwardSelectedSourceByPositive(ctx, lane)
   int ctx;
   int lane;
 {
@@ -1873,8 +1873,8 @@ int Inst__allWrittenLanesSatisfy(valueKey, param_2, param_3)
   return 0;
 }
 
-/* FUN_00179cc0 @ 0x179cc0 (240 bytes) */
-int FUN_00179cc0(ctx, lane)
+/* ValueKey__forwardOtherSourceIfZero @ 0x179cc0 (240 bytes) */
+int ValueKey__forwardOtherSourceIfZero(ctx, lane)
   int ctx;
   int lane;
 {
@@ -1911,8 +1911,8 @@ int FUN_00179cc0(ctx, lane)
   return 1;
 }
 
-/* FUN_00179db0 @ 0x179db0 (196 bytes) */
-int FUN_00179db0(ctx, lane)
+/* ValueKey__forwardAddendIfMultiplicandZero @ 0x179db0 (196 bytes) */
+int ValueKey__forwardAddendIfMultiplicandZero(ctx, lane)
   int ctx;
   int lane;
 {
@@ -1945,8 +1945,8 @@ int FUN_00179db0(ctx, lane)
   return 1;
 }
 
-/* FUN_00179e74 @ 0x179e74 (196 bytes) */
-int FUN_00179e74(ctx, lane)
+/* ValueKey__forwardSource1LaneIfEqual @ 0x179e74 (196 bytes) */
+int ValueKey__forwardSource1LaneIfEqual(ctx, lane)
   int ctx;
   int lane;
 {
@@ -1975,8 +1975,8 @@ int FUN_00179e74(ctx, lane)
   return 0;
 }
 
-/* FUN_00179f38 @ 0x179f38 (252 bytes) */
-int FUN_00179f38(ctx, lane)
+/* ValueKey__forwardOtherSourceIfOne @ 0x179f38 (252 bytes) */
+int ValueKey__forwardOtherSourceIfOne(ctx, lane)
   int ctx;
   int lane;
 {
@@ -2056,8 +2056,8 @@ int FUN_0017a034(ctx, lane)
   return result;
 }
 
-/* FUN_0017a130 @ 0x17a130 (284 bytes) */
-int FUN_0017a130(operandIndex, param_2, inst, compiler)
+/* ValueKey__setLiteralVec4Operand @ 0x17a130 (284 bytes) */
+int ValueKey__setLiteralVec4Operand(operandIndex, param_2, inst, compiler)
   int operandIndex;
   float *param_2;
   int inst;
@@ -2127,7 +2127,7 @@ int FUN_0017a294(ctx, vec4Constant, compiler)
   opcode = *(int *)(*(int *)(member0xb0 + 0x88) + 8);
   if (opcode == 0x8b) {
     IRInst__initOperandRecord(member0xb0,1);
-    operandValueNumber = ((int (*)())FUN_0017a130)(1,vec4Constant,*(undefined4 *)(ctx + 0xb0),compiler);
+    operandValueNumber = ((int (*)())ValueKey__setLiteralVec4Operand)(1,vec4Constant,*(undefined4 *)(ctx + 0xb0),compiler);
     *(undefined4 *)(ctx + 0x214) = operandValueNumber;
     ((void (*)())IRInst__makeLiteralVec4Float)(*(undefined4 *)(ctx + 0xb0),*(undefined4 *)(compiler + 0x6c4),1,(double)*vec4Constant
                  ,(double)vec4Constant[1],(double)vec4Constant[2],(double)vec4Constant[3]);
@@ -2136,13 +2136,13 @@ int FUN_0017a294(ctx, vec4Constant, compiler)
     secondVec4X = DAT_001b01e8;
     secondVec4Z = DAT_001b01f0;
     secondVec4W = DAT_001b01f4;
-    operandValueNumber = ((int (*)())FUN_0017a130)(2,&secondVec4X,*(undefined4 *)(ctx + 0xb0),compiler);
+    operandValueNumber = ((int (*)())ValueKey__setLiteralVec4Operand)(2,&secondVec4X,*(undefined4 *)(ctx + 0xb0),compiler);
     *(undefined4 *)(ctx + 0x218) = operandValueNumber;
     *(undefined4 *)(*(int *)(ctx + 0xb0) + 300) = 0;
   }
   else if (opcode == 0x8c) {
     IRInst__initOperandRecord(member0xb0,1);
-    operandValueNumber = ((int (*)())FUN_0017a130)(1,vec4Constant,*(undefined4 *)(ctx + 0xb0),compiler);
+    operandValueNumber = ((int (*)())ValueKey__setLiteralVec4Operand)(1,vec4Constant,*(undefined4 *)(ctx + 0xb0),compiler);
     *(undefined4 *)(ctx + 0x214) = operandValueNumber;
     ((void (*)())IRInst__makeLiteralVec4Float)(*(undefined4 *)(ctx + 0xb0),*(undefined4 *)(compiler + 0x6c4),1,(double)*vec4Constant
                  ,(double)vec4Constant[1],(double)vec4Constant[2],(double)vec4Constant[3]);
@@ -2560,7 +2560,7 @@ int ValueKey__foldDotPowerOfTwoIntoOutputScale(ctx)
           unitConst1 = 0x3f800000;
           unitConst2 = 0x3f800000;
           unitConst3 = 0x3f800000;
-          literalValueNumber = ((int (*)())FUN_0017a130)(loopIndex,&unitConst0,*(undefined4 *)(ctx + 0xb0),
+          literalValueNumber = ((int (*)())ValueKey__setLiteralVec4Operand)(loopIndex,&unitConst0,*(undefined4 *)(ctx + 0xb0),
                                *(undefined4 *)(ctx + 0x238));
           keyInst = *(int *)(ctx + 0xb0);
           *loopPtr2 = literalValueNumber;
@@ -2584,8 +2584,8 @@ int ValueKey__foldDotPowerOfTwoIntoOutputScale(ctx)
   return 0;
 }
 
-/* FUN_0017ad24 @ 0x17ad24 (260 bytes) */
-int FUN_0017ad24(ctx, fillValue, operandIndex)
+/* ValueKey__insertSplatMov @ 0x17ad24 (260 bytes) */
+int ValueKey__insertSplatMov(ctx, fillValue, operandIndex)
   int ctx;
   undefined4 fillValue;
   int operandIndex;
@@ -2612,7 +2612,7 @@ int FUN_0017ad24(ctx, fillValue, operandIndex)
     fillOffset = fillOffset + 4;
     loopRemaining = loopRemaining + -1;
   } while (loopRemaining != 0);
-  ((int (*)())FUN_0017a130)(1,fillVec4,callResult,*(undefined4 *)(ctx + 0x238));
+  ((int (*)())ValueKey__setLiteralVec4Operand)(1,fillVec4,callResult,*(undefined4 *)(ctx + 0x238));
   IRInst__appendSource(callResult,*(undefined4 *)(*(int *)(ctx + 0xb0) + 0x8c));
   *(undefined1 *)(operandIndex + *(int *)(ctx + 0xb0) + 0x9c) = 1;
   inst = *(int *)(ctx + 0xb0);
@@ -2624,8 +2624,8 @@ int FUN_0017ad24(ctx, fillValue, operandIndex)
   return callResult;
 }
 
-/* FUN_0017ae28 @ 0x17ae28 (172 bytes) */
-int FUN_0017ae28(ctx, operandIndex, valueKey, swizzle, negateFlag, absFlag, compiler)
+/* ValueKey__setOperandFromValueKey @ 0x17ae28 (172 bytes) */
+int ValueKey__setOperandFromValueKey(ctx, operandIndex, valueKey, swizzle, negateFlag, absFlag, compiler)
   int ctx;
   int operandIndex;
   int valueKey;
@@ -2666,8 +2666,8 @@ int FUN_0017ae28(ctx, operandIndex, valueKey, swizzle, negateFlag, absFlag, comp
   return valueKey;
 }
 
-/* FUN_0017af58 @ 0x17af58 (200 bytes) */
-int FUN_0017af58(resultOut, ctx, sourceIndex)
+/* ValueKey__commonLaneValue_17af58 @ 0x17af58 (200 bytes) */
+int ValueKey__commonLaneValue_17af58(resultOut, ctx, sourceIndex)
   undefined4 *resultOut;
   int ctx;
   int sourceIndex;

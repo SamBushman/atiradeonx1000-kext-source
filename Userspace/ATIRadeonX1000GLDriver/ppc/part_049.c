@@ -3597,8 +3597,8 @@ int PackState__countFreeSlots(state, freeCounts)
   return callResult;
 }
 
-/* FUN_0018c7f4 @ 0x18c7f4 (396 bytes) */
-int FUN_0018c7f4(slotOwner, candidate, slotRow)
+/* ConstantSlots__tryAddToRow @ 0x18c7f4 (396 bytes) */
+int ConstantSlots__tryAddToRow(slotOwner, candidate, slotRow)
   int slotOwner;
   int *candidate;
   int slotRow;
@@ -3733,8 +3733,8 @@ int FUN_0018c980(packState, regA, regB)
       loopIndex = loopIndex + 1;
     } while (moreRows);
   }
-  if (((displacedRegA == 0) || (rowPtr = ((int (*)())FUN_0018c7f4)(packState,displacedRegA,0), rowPtr != 0)) &&
-     ((loopIndex2 == 0 || (rowPtr = ((int (*)())FUN_0018c7f4)(packState,loopIndex2,1), rowPtr != 0)))) {
+  if (((displacedRegA == 0) || (rowPtr = ((int (*)())ConstantSlots__tryAddToRow)(packState,displacedRegA,0), rowPtr != 0)) &&
+     ((loopIndex2 == 0 || (rowPtr = ((int (*)())ConstantSlots__tryAddToRow)(packState,loopIndex2,1), rowPtr != 0)))) {
 LAB_0018cdb8:
     placed = 1;
   }
@@ -3744,8 +3744,8 @@ LAB_0018cdb8:
   return placed;
 }
 
-/* FUN_0018cdd8 @ 0x18cdd8 (1456 bytes) */
-int FUN_0018cdd8(sourceState, sourceA, sourceB, slot)
+/* ConstantSlots__tryAssignPair @ 0x18cdd8 (1456 bytes) */
+int ConstantSlots__tryAssignPair(sourceState, sourceA, sourceB, slot)
   int sourceState;
   int *sourceA;
   int *sourceB;
@@ -3787,8 +3787,8 @@ int FUN_0018cdd8(sourceState, sourceA, sourceB, slot)
               ((*(uint *)(*(int *)(iVar3 + sourceState) + 0x14) & 0x40) != 0)))) &&
             (((sourceB[5] & 0x40U) != 0 &&
              (*(int *)(*(int *)(iVar3 + sourceState) + 0x94) == sourceB[0x25])))))))))))) &&
-       ((iVar3 = ((int (*)())FUN_0018c7f4)(sourceState,sourceA,slot), iVar3 != 0 &&
-        (iVar3 = ((int (*)())FUN_0018c7f4)(sourceState,sourceB,slot), iVar3 != 0)))) {
+       ((iVar3 = ((int (*)())ConstantSlots__tryAddToRow)(sourceState,sourceA,slot), iVar3 != 0 &&
+        (iVar3 = ((int (*)())ConstantSlots__tryAddToRow)(sourceState,sourceB,slot), iVar3 != 0)))) {
       *(int **)(pairOffset + sourceState + 0xc) = sourceB;
       *(int **)(pairOffset + sourceState + 8) = sourceA;
       return 1;
@@ -3853,8 +3853,8 @@ LAB_0018cfbc:
   return result;
 }
 
-/* FUN_0018d388 @ 0x18d388 (300 bytes) */
-int FUN_0018d388(sourceState, candidate, slot)
+/* ConstantSlots__tryAssignSingle @ 0x18d388 (300 bytes) */
+int ConstantSlots__tryAssignSingle(sourceState, candidate, slot)
   int sourceState;
   int *candidate;
   int slot;
@@ -3866,7 +3866,7 @@ int FUN_0018d388(sourceState, candidate, slot)
   slotOffset = slot * 4;
   existingSource = *(int **)(slotOffset + sourceState);
   if (existingSource == (int *)0x0) {
-    callResult = ((int (*)())FUN_0018c7f4)(sourceState,candidate,slot);
+    callResult = ((int (*)())ConstantSlots__tryAddToRow)(sourceState,candidate,slot);
     if (callResult != 0) {
       *(int **)(slotOffset + sourceState) = candidate;
       return 1;
@@ -3938,7 +3938,7 @@ int PackState__tryPlaceInstructionSources(inst, highLanesKind, lowLaneKind, pack
         (operandRecord = IRInst__getOperandRecord(inst,0), *(char *)(operandRecord + 0x11) == '\0')) ||
        (operandRecord = IRInst__getOperandRecord(inst,0), *(char *)(operandRecord + 0x12) == '\0')) {
       operandVReg = IRInst__getOperandSource(inst,1);
-      placeResult = ((int (*)())FUN_0018d388)(packState,operandVReg,0);
+      placeResult = ((int (*)())ConstantSlots__tryAssignSingle)(packState,operandVReg,0);
       if (placeResult == 0) {
         return 0;
       }
@@ -3946,7 +3946,7 @@ int PackState__tryPlaceInstructionSources(inst, highLanesKind, lowLaneKind, pack
     operandRecord = IRInst__getOperandRecord(inst,0);
     if (*(char *)(operandRecord + 0x13) == '\0') {
       operandVReg = IRInst__getOperandSource(inst,1);
-      placeResult = ((int (*)())FUN_0018d388)(packState,operandVReg,1);
+      placeResult = ((int (*)())ConstantSlots__tryAssignSingle)(packState,operandVReg,1);
       if (placeResult == 0) {
         return 0;
       }
@@ -3988,13 +3988,13 @@ int PackState__tryPlaceInstructionSources(inst, highLanesKind, lowLaneKind, pack
           if (operandCount == 1) {
             operandVReg = IRInst__getOperandSource(operandVReg2,1);
             laneMask = (int *)0x0;
-            opcodeOrOperandCount = ((int (*)())FUN_0018d388)(packState,operandVReg,0);
+            opcodeOrOperandCount = ((int (*)())ConstantSlots__tryAssignSingle)(packState,operandVReg,0);
           }
           else {
             operandVReg = IRInst__getOperandSource(operandVReg2,1);
             laneMask = (int *)IRInst__getOperandSource(operandVReg2,2);
             a3 = (int *)0x0;
-            opcodeOrOperandCount = ((int (*)())FUN_0018cdd8)(packState,operandVReg,laneMask,0);
+            opcodeOrOperandCount = ((int (*)())ConstantSlots__tryAssignPair)(packState,operandVReg,laneMask,0);
           }
           if (opcodeOrOperandCount == 0) {
             return 0;
@@ -4009,13 +4009,13 @@ int PackState__tryPlaceInstructionSources(inst, highLanesKind, lowLaneKind, pack
           if (operandCount == 1) {
             operandVReg = IRInst__getOperandSource(operandVReg2,1);
             laneMask = (int *)((int)((unsigned char *)0x0) + 1);
-            opcodeOrOperandCount = ((int (*)())FUN_0018d388)(packState,operandVReg,1);
+            opcodeOrOperandCount = ((int (*)())ConstantSlots__tryAssignSingle)(packState,operandVReg,1);
           }
           else {
             operandVReg = IRInst__getOperandSource(operandVReg2,1);
             laneMask = (int *)IRInst__getOperandSource(operandVReg2,2);
             a3 = (int *)((int)((unsigned char *)0x0) + 1);
-            opcodeOrOperandCount = ((int (*)())FUN_0018cdd8)(packState,operandVReg,laneMask,1);
+            opcodeOrOperandCount = ((int (*)())ConstantSlots__tryAssignPair)(packState,operandVReg,laneMask,1);
           }
           if (opcodeOrOperandCount == 0) {
             return 0;
@@ -4040,11 +4040,11 @@ LAB_0018d948:
           if ((readMaskScratch[0] & 0xffffff00) == 0) {
             if ((readMaskScratch[0] & 0xff) == 0) goto LAB_0018da08;
             laneMask = (int *)((int)((unsigned char *)0x0) + 1);
-            operandIndex2 = ((int (*)())FUN_0018c7f4)(packState,a0,1);
+            operandIndex2 = ((int (*)())ConstantSlots__tryAddToRow)(packState,a0,1);
           }
           else if ((readMaskScratch[0] & 0xff) == 0) {
             laneMask = (int *)0x0;
-            operandIndex2 = ((int (*)())FUN_0018c7f4)(packState,a0,0);
+            operandIndex2 = ((int (*)())ConstantSlots__tryAddToRow)(packState,a0,0);
           }
           else {
             operandIndex2 = ((int (*)())FUN_0018c980)(packState,a0,a0);

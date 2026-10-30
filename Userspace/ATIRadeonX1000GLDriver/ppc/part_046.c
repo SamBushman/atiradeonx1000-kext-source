@@ -183,7 +183,7 @@ LAB_00173854:
     *(int *)(loopIndex + 0xa8) = *(int *)(loopIndex + 0xa8) + 1;
     loopIndex = *(int *)(*(int *)(ctx + 0x238) + 0x6c4);
     *(int *)(loopIndex + 0x140) = *(int *)(loopIndex + 0x140) + 1;
-    FUN_0017d06c(ctx,inst,&DAT_001b01bc,0);
+    ValueKey__rewriteAsMovOfValueKey(ctx,inst,&DAT_001b01bc,0);
     uVar4 = 1;
   }
   return uVar4;
@@ -436,7 +436,7 @@ int FUN_00173cdc(ctx, param_2)
     *(int *)(iVar4 + 0xa8) = *(int *)(iVar4 + 0xa8) + 1;
     iVar4 = *(int *)(*(int *)(ctx + 0x238) + 0x6c4);
     *(int *)(iVar4 + 0x13c) = *(int *)(iVar4 + 0x13c) + 1;
-    FUN_0017d06c(ctx,iVar1,local_38,0);
+    ValueKey__rewriteAsMovOfValueKey(ctx,iVar1,local_38,0);
     uVar3 = 1;
   }
   return uVar3;
@@ -1013,7 +1013,7 @@ int FUN_0017494c(ctx, param_2, param_3)
       *(int *)(loopIndex + 0xa8) = *(int *)(loopIndex + 0xa8) + 1;
       loopIndex = *(int *)(*(int *)(ctx + 0x238) + 0x6c4);
       *(int *)(loopIndex + 0x144) = *(int *)(loopIndex + 0x144) + 1;
-      FUN_0017d06c(ctx,iVar2,&DAT_001b01bc,0);
+      ValueKey__rewriteAsMovOfValueKey(ctx,iVar2,&DAT_001b01bc,0);
       return 1;
     }
   }
@@ -1418,9 +1418,9 @@ LAB_001756ec:
                 goto LAB_001757a0;
 LAB_00175760:
                 *loopPtr3 = loopRemaining;
-                loopIndex2 = FUN_00176ed4(valueKey,loopRemaining);
+                loopIndex2 = ValueKey__compareClassForValueNumber(valueKey,loopRemaining);
                 loopPtr3[0x20] = loopIndex2;
-                loopIndex2 = FUN_00176f0c(valueKey,loopRemaining);
+                loopIndex2 = ValueKey__rangeClassForValueNumber(valueKey,loopRemaining);
                 loopPtr3[0x14] = loopIndex2;
               }
             }
@@ -1557,8 +1557,8 @@ LAB_00175350:
       if ((((*(int *)(loopIndex2 + 0x120) == 0) && (*(int *)(loopIndex2 + 0x124) == 0)) &&
           ((*(uint *)(loopIndex2 + 0xb8) & 1) == 0)) && ((*(uint *)(loopIndex2 + 0xb8) & 2) == 0)) {
 LAB_001753c0:
-        loopIndex2 = FUN_00176ed4(valueKey,loopIndex);
-        iVar9 = FUN_00176f0c(valueKey,loopIndex);
+        loopIndex2 = ValueKey__compareClassForValueNumber(valueKey,loopIndex);
+        iVar9 = ValueKey__rangeClassForValueNumber(valueKey,loopIndex);
       }
       else {
         FUN_00178648(valueKey,iVar9);

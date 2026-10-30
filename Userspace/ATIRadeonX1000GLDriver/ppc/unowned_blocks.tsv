@@ -3403,19 +3403,19 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 178478	1784f8	table	FUN_00178338	32	
 1787b4	17887c	table	FUN_00178648	50	
 179228	179248	eh-pad	FUN_00179138	8	0x193cc0,__Unwind_Resume
-17a24c	17a26c	eh-pad	FUN_0017a130	8	0x193cc0,__Unwind_Resume
-17aed4	17aef4	eh-pad	FUN_0017ae28	8	0x193cc0,__Unwind_Resume
+17a24c	17a26c	eh-pad	ValueKey__setLiteralVec4Operand	8	0x193cc0,__Unwind_Resume
+17aed4	17aef4	eh-pad	ValueKey__setOperandFromValueKey	8	0x193cc0,__Unwind_Resume
 17befc	17bf00	eh-pad	FUN_0017bd78	1	__Unwind_Resume
-17c3a8	17c3ac	eh-pad	FUN_0017c244	1	__Unwind_Resume
-17cf98	17cf9c	eh-pad	FUN_0017ce7c	1	__Unwind_Resume
-17d14c	17d150	millicode	FUN_0017d06c	1	
-17d1e0	17d200	eh-pad	FUN_0017d06c	8	0x193cc0,__Unwind_Resume
-17d330	17d334	eh-pad	FUN_0017d26c	1	__Unwind_Resume
+17c3a8	17c3ac	eh-pad	ValueKey__rewriteAsMovOfOperand	1	__Unwind_Resume
+17cf98	17cf9c	eh-pad	ValueKey__rewriteAsMovOfReplacement	1	__Unwind_Resume
+17d14c	17d150	millicode	ValueKey__rewriteAsMovOfValueKey	1	
+17d1e0	17d200	eh-pad	ValueKey__rewriteAsMovOfValueKey	8	0x193cc0,__Unwind_Resume
+17d330	17d334	eh-pad	ValueKey__rewriteAsMovOfVec4Constant	1	__Unwind_Resume
 17e138	17e13c	eh-pad	FUN_0017e02c	1	__Unwind_Resume
 17e550	17e554	eh-pad	FUN_0017e3f4	1	__Unwind_Resume
 17ea3c	17ea40	eh-pad	FUN_0017e7e0	1	__Unwind_Resume
-17ece0	17ece4	millicode	FUN_0017ebb0	1	
-17edb0	17edd0	eh-pad	FUN_0017ebb0	8	0x193cc0,__Unwind_Resume
+17ece0	17ece4	millicode	ValueKey__rewriteAsAdd	1	
+17edb0	17edd0	eh-pad	ValueKey__rewriteAsAdd	8	0x193cc0,__Unwind_Resume
 17f03c	17f040	eh-pad	FUN_0017ee68	1	__Unwind_Resume
 1801a4	1801f8	table	ValueKey__simplifyInstruction	21	
 1811d8	1811f8	eh-pad	ValueKey__simplifyModifiersAndAddressing	8	0x193cc0,__Unwind_Resume
