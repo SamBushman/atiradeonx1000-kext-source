@@ -1710,3 +1710,87 @@ use	FUN_000fd5c8	iVar47	flushNodeC	INFERRED	pending-instruction list node being 
 use	FUN_000fd5c8	iVar47	flushNodeC	INFERRED	pending-instruction list node being flushed	^\s*while\ \(iVar47\ =\ iVar43,\ iVar47\ !=\ 0\)\ \{$@4	^\s*\}$	all	none
 use	FUN_000fd5c8	iVar47	flushNodeC	INFERRED	pending-instruction list node being flushed	^\s*while\ \(iVar47\ =\ iVar43,\ iVar47\ !=\ 0\)\ \{$@5	^\s*\}$	all	none
 use	FUN_000fd5c8	iVar47	flushNodeC	INFERRED	pending-instruction list node being flushed	^\s*while\ \(iVar47\ =\ iVar43,\ iVar47\ !=\ 0\)\ \{$@6	^\s*\}$	all	none
+use	FUN_000fd5c8	ppppuVar51	elseBlock	INFERRED	new block allocated for the else/end part of the closed scope (Block__ctor_ea020), linked as target 0x4e of the last block of the chain	^\s*ppppuVar51\ =\ ppppuVar30;$	+1
+use	FUN_000fd5c8	ppppuVar51	elseBlock	INFERRED	new block allocated for the else/end part of the closed scope (Block__ctor_ea020), linked as target 0x4e of the last block of the chain	^\s*ppppuVar51\ =\ \(uint\ \*\*\*\*\)\(puVar32\ \+\ 1\);$	+2
+use	FUN_000fd5c8	ppppuVar51	elseBlock	INFERRED	new block allocated for the else/end part of the closed scope (Block__ctor_ea020), linked as target 0x4e of the last block of the chain	^\s*ppppuVar30\[0x4e\]\ =\ \(uint\ \*\*\*\)ppppuVar51;$	+3
+use	FUN_000fd5c8	ppppuVar51	elseBlock	INFERRED	new block allocated for the else/end part of the closed scope (Block__ctor_ea020), linked as target 0x4e of the last block of the chain	^\s*iVar43\ =\ \(\*\(code\ \*\)\(\*ppppuVar51\)\[0xe\]\)\(ppppuVar51\);$	+3
+use	FUN_000fd5c8	ppppuVar30	chainLastBlockB	INFERRED	last block of the scope's block chain (Block__lastBlockOfChain_e7a9c)	^\s*ppppuVar30\ =\ \(uint\ \*\*\*\*\)FUN_000e7a9c\(ppppuVar45\);$	+4
+use	FUN_000fd5c8	ppppuVar30	chainLastBlockB	INFERRED	last block of the scope's block chain (Block__lastBlockOfChain_e7a9c)	^\s*ppppuVar30\[0x4e\]\ =\ \(uint\ \*\*\*\)ppppuVar51;$	+2
+use	FUN_000fd5c8	puVar53	registerEndC	INFERRED	program+0x3ec: end of the declared register range, raised to the declared register + 1	^\s*puVar53\ =\ \*\(undefined1\ \*\*\)\(param_1\ \+\ 0x3ec\);$	+1
+use	FUN_000fd5c8	puVar53	registerEndC	INFERRED	program+0x3ec: end of the declared register range, raised to the declared register + 1	^\s*if\ \(\(int\)puVar53\ <=\ \(int\)ppppppuVar19\)\ \{$	+2
+use	FUN_000fd5c8	puVar53	registerEndC	INFERRED	program+0x3ec: end of the declared register range, raised to the declared register + 1	^\s*\*\(undefined1\ \*\*\)\(param_1\ \+\ 0x3ec\)\ =\ puVar53;$	+1
+use	FUN_000fd5c8	puVar53	registerEndC	INFERRED	program+0x3ec: end of the declared register range, raised to the declared register + 1	^\s*puVar53\ =\ \*\(undefined1\ \*\*\)\(param_1\ \+\ 0x3ec\);$@2	+1
+use	FUN_000fd5c8	puVar53	registerEndC	INFERRED	program+0x3ec: end of the declared register range, raised to the declared register + 1	^\s*if\ \(\(int\)puVar53\ <=\ \(int\)ppppppuVar48\)\ \{$	+2
+use	FUN_000fd5c8	puVar53	registerEndC	INFERRED	program+0x3ec: end of the declared register range, raised to the declared register + 1	^\s*\*\(undefined1\ \*\*\)\(param_1\ \+\ 0x3ec\)\ =\ puVar53;$@2	+1
+use	FUN_000fd5c8	puVar53	laneMaskPtr	INFERRED	pointer into the lane mask bytes (destOperandCount + operand number)	^\s*puVar53\ =\ \(undefined1\ \*\)\(\(int\)local_c0\ \+\ iVar21\);$	+4
+use	FUN_000fd5c8	pppppuVar11	rewrittenSelect	INFERRED	select word of the operand rewritten byte by byte (lane substitution through templateModeWord)	^\s*pppppuVar11\ =\ \*\(uint\ \*\*\*\*\*\*\)\(iVar23\ \+\ 0x10\);$	+1
+use	FUN_000fd5c8	pppppuVar11	rewrittenSelect	INFERRED	select word of the operand rewritten byte by byte (lane substitution through templateModeWord)	^\s*CONCAT31\(\(int3\)\(\(uint\)pppppuVar11\ >>\ 8\),$	+2
+use	FUN_000fd5c8	pppppuVar11	rewrittenSelect	INFERRED	select word of the operand rewritten byte by byte (lane substitution through templateModeWord)	^\s*CONCAT13\(\*\(undefined1\ \*\)\(\(int\)ppppuVar45\ \+\ iVar21\ \+\ 100\),$	+2
+use	FUN_000fd5c8	pppppuVar11	rewrittenSelect	INFERRED	select word of the operand rewritten byte by byte (lane substitution through templateModeWord)	^\s*local_124\ =\ pppppuVar11;$	+1
+use	FUN_000fd5c8	pppppuVar11	rewrittenSelect	INFERRED	select word of the operand rewritten byte by byte (lane substitution through templateModeWord)	^\s*\(\*\(unsigned\ short\ \*\)\(\(unsigned\ char\ \*\)\&\(local_124\)\ \+\ 0\)\)\ =\ \(undefined2\)\(\(uint\)pppppuVar11\ >>\ 0x10\);$	+1
+use	FUN_000fd5c8	pppppuVar11	rewrittenSelect	INFERRED	select word of the operand rewritten byte by byte (lane substitution through templateModeWord)	^\s*CONCAT11\(\*\(undefined1\ \*\)\(\(int\)ppppuVar45\ \+\ iVar21\ \+\ 100\),\(char\)pppppuVar11\);$	+1
+use	FUN_000fd5c8	pppppuVar11	rewrittenSelect	INFERRED	select word of the operand rewritten byte by byte (lane substitution through templateModeWord)	^\s*pppppuVar11\ =\ local_124;$	+1
+use	FUN_000fd5c8	pppppuVar11	rewrittenSelect	INFERRED	select word of the operand rewritten byte by byte (lane substitution through templateModeWord)	^\s*\*\(uint\ \*\*\*\*\*\*\)\(iVar23\ \+\ 0x10\)\ =\ pppppuVar11;$	+1
+use	FUN_000fd5c8	pppppuVar11	instWord0x98C	INFERRED	word at inst+0x98 (register file) copied to operand +0xc	^\s*pppppuVar11\ =\ ppppppuVar19\[0x26\];$	+1
+use	FUN_000fd5c8	pppppuVar11	instWord0x98C	INFERRED	word at inst+0x98 (register file) copied to operand +0xc	^\s*\*\(uint\ \*\*\*\*\*\*\)\(iVar34\ \+\ 0xc\)\ =\ pppppuVar11;$	+1
+use	FUN_000fd5c8	puVar24	exportInst	INFERRED	IRExport instruction (IRExport__ctor_108918) stored at program+0x350 and filled with exportVReg operands	^\s*puVar24\ =\ puVar14\ \+\ 1;$@2	+2
+use	FUN_000fd5c8	puVar24	exportInst	INFERRED	IRExport instruction (IRExport__ctor_108918) stored at program+0x350 and filled with exportVReg operands	^\s*\*\(undefined4\ \*\*\)\(param_1\ \+\ 0x350\)\ =\ puVar24;$	+1
+use	FUN_000fd5c8	puVar24	exportInst	INFERRED	IRExport instruction (IRExport__ctor_108918) stored at program+0x350 and filled with exportVReg operands	^\s*FUN_001046c8\(puVar24,0,iVar43\);$	+3
+use	FUN_000fd5c8	puVar24	exportInst	INFERRED	IRExport instruction (IRExport__ctor_108918) stored at program+0x350 and filled with exportVReg operands	^\s*FUN_000e7688\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x3a8\),puVar24\);$	+3
+use	FUN_000fd5c8	bVar1	laneUsedFlag	INFERRED	(secondTokenWord & 3) != 0: lane group is used	^\s*bVar1\ =\ \(\(uint\)pppppuVar52\ \&\ 3\)\ !=\ 0;$	+1
+use	FUN_000fd5c8	bVar1	laneUsedFlag	INFERRED	(secondTokenWord & 3) != 0: lane group is used	^\s*if\ \(bVar1\)\ \{$	+1
+use	FUN_000fd5c8	bVar1	laneUsedFlag	INFERRED	(secondTokenWord & 3) != 0: lane group is used	^\s*uVar10\ =\ \(uint\)bVar1;$	+1
+use	FUN_000fd5c8	bVar1	hasPendingExtra	INFERRED	local_ac != 0	^\s*bVar1\ =\ local_ac\ !=\ 0;$	+2
+use	FUN_000fd5c8	bVar1	hasPendingExtra	INFERRED	local_ac != 0	^\s*if\ \(bVar1\)\ \{$@3	+1
+use	FUN_000fd5c8	bVar1	hwFlag0x40Clear	INFERRED	true unless hardware-info flag 0x40 is set	^\s*if\ \(\(\(\(uint\)\*ppppppuVar49\ \&\ 0x10000\)\ ==\ 0\)\ \|\|$	+3
+use	FUN_000fd5c8	bVar1	hwFlag0x40Clear	INFERRED	true unless hardware-info flag 0x40 is set	^\s*if\ \(bVar1\)\ \{$@5	+1
+use	FUN_000fd5c8	bVar2	setsInterpBit2	INFERRED	declaration mode 1: bit 2 is set in the interpolant record flags (+0x13c)	^\s*bVar2\ =\ false;$	+1
+use	FUN_000fd5c8	bVar2	setsInterpBit2	INFERRED	declaration mode 1: bit 2 is set in the interpolant record flags (+0x13c)	^\s*bVar2\ =\ true;$	+1
+use	FUN_000fd5c8	bVar2	setsInterpBit2	INFERRED	declaration mode 1: bit 2 is set in the interpolant record flags (+0x13c)	^\s*bVar2\ =\ false;$@2	+1
+use	FUN_000fd5c8	bVar2	setsInterpBit2	INFERRED	declaration mode 1: bit 2 is set in the interpolant record flags (+0x13c)	^\s*bVar2\ =\ false;$@3	+1
+use	FUN_000fd5c8	bVar2	setsInterpBit2	INFERRED	declaration mode 1: bit 2 is set in the interpolant record flags (+0x13c)	^\s*bVar2\ =\ false;$@4	+1
+use	FUN_000fd5c8	bVar2	setsInterpBit2	INFERRED	declaration mode 1: bit 2 is set in the interpolant record flags (+0x13c)	^\s*if\ \(bVar2\)\ \{$	+1
+use	FUN_000fd5c8	bVar3	setsInterpBit4	INFERRED	declaration mode 4: bit 4 is set in the interpolant record flags (+0x13c)	^\s*bVar3\ =\ false;$	+1
+use	FUN_000fd5c8	bVar3	setsInterpBit4	INFERRED	declaration mode 4: bit 4 is set in the interpolant record flags (+0x13c)	^\s*bVar3\ =\ false;$@2	+1
+use	FUN_000fd5c8	bVar3	setsInterpBit4	INFERRED	declaration mode 4: bit 4 is set in the interpolant record flags (+0x13c)	^\s*bVar3\ =\ false;$@3	+1
+use	FUN_000fd5c8	bVar3	setsInterpBit4	INFERRED	declaration mode 4: bit 4 is set in the interpolant record flags (+0x13c)	^\s*bVar3\ =\ true;$	+1
+use	FUN_000fd5c8	bVar3	setsInterpBit4	INFERRED	declaration mode 4: bit 4 is set in the interpolant record flags (+0x13c)	^\s*bVar3\ =\ true;$@2	+1
+use	FUN_000fd5c8	bVar3	setsInterpBit4	INFERRED	declaration mode 4: bit 4 is set in the interpolant record flags (+0x13c)	^\s*if\ \(bVar3\)\ \{$	+1
+use	FUN_000fd5c8	fVar5	literalFloat	INFERRED	0.5 or 1.0 literal selected for the vec4 literal	^\s*fVar5\ =\ 1\.0;$	+1
+use	FUN_000fd5c8	fVar5	literalFloat	INFERRED	0.5 or 1.0 literal selected for the vec4 literal	^\s*dVar54\ =\ \(double\)fVar5;$	+1
+use	FUN_000fd5c8	fVar5	literalFloat	INFERRED	0.5 or 1.0 literal selected for the vec4 literal	^\s*fVar5\ =\ 0\.5;$	+1
+use	FUN_000fd5c8	fVar5	literalFloat	INFERRED	0.5 or 1.0 literal selected for the vec4 literal	^\s*fVar5\ =\ 0\.5;$@2	+1
+use	FUN_000fd5c8	fVar5	literalFloat	INFERRED	0.5 or 1.0 literal selected for the vec4 literal	^\s*fVar5\ =\ 1\.0;$@2	+1
+use	FUN_000fd5c8	fVar5	literalFloat	INFERRED	0.5 or 1.0 literal selected for the vec4 literal	^\s*dVar54\ =\ \(double\)fVar5;$@2	+1
+use	FUN_000fd5c8	puVar35	listHeader	INFERRED	header word of the small list allocation (+4), holds a token bit or 0	^\s*puVar35\ =\ puVar32\ \+\ 1;$	+1
+use	FUN_000fd5c8	puVar35	listHeader	INFERRED	header word of the small list allocation (+4), holds a token bit or 0	^\s*\*puVar35\ =\ \(uint\)\*ppppppuVar49\ >>\ 0x12\ \&\ 1;$	+1
+use	FUN_000fd5c8	puVar35	listHeader	INFERRED	header word of the small list allocation (+4), holds a token bit or 0	^\s*\*puVar35\ =\ 0;$	+1
+use	FUN_000fd5c8	puVar35	listHeader	INFERRED	header word of the small list allocation (+4), holds a token bit or 0	^\s*\*puVar35\ =\ \(uint\)\*ppppppuVar49\ >>\ 0x18\ \&\ 1;$	+1
+use	FUN_000fd5c8	puVar35	listHeader	INFERRED	header word of the small list allocation (+4), holds a token bit or 0	^\s*\*puVar35\ =\ 1;$	+1
+use	FUN_000fd5c8	puVar35	listHeader	INFERRED	header word of the small list allocation (+4), holds a token bit or 0	^\s*\*puVar32\ =\ puVar35;$	+1
+local	FUN_000fd5c8	local_90	literalValue0	INFERRED	integer literal 0 of the vec4 passed to IRInst__makeLiteralVec4Int for the mul instruction (samplerIndex | 0x130000)
+local	FUN_000fd5c8	local_94	literalValue1	INFERRED	integer literal 1 of that vec4 (samplerIndex | 0x130000)
+local	FUN_000fd5c8	local_98	literalValue2	INFERRED	integer literal 2 of that vec4: the sampler index as a short
+local	FUN_000fd5c8	local_9c	literalValue3	INFERRED	integer literal 3 of that vec4 (samplerIndex | 0x130000)
+local	FUN_000fd5c8	local_80	mulAddLiteral0	INFERRED	integer literal 0 of the vec4 for the mul-add instruction (register type | 0x120000)
+local	FUN_000fd5c8	local_84	mulAddLiteral1	INFERRED	integer literal 1 of that vec4 (copy of argR7)
+local	FUN_000fd5c8	local_88	mulAddLiteral2	INFERRED	integer literal 2 of that vec4 (register type | 0x100000, copy of argR8)
+local	FUN_000fd5c8	local_8c	mulAddLiteral3	INFERRED	integer literal 3 of that vec4: the register type field
+local	FUN_000fd5c8	local_64	opcodeTableOffset	INFERRED	index counted over the 3-word opcode table entries then multiplied by 0xc (byte offset into the table)
+local	FUN_000fd5c8	local_74	opcodeTableBase	INFERRED	0x1dd5d8: base of the opcode table addressed at -0xf70
+local	FUN_000fd5c8	local_78	constantsBaseB	INFERRED	base address (DAT_001ad5d8) of the constant select-word area addressed at -0x2bfc
+local	FUN_000fd5c8	local_5c	constantsBaseC	INFERRED	base address (DAT_001ad5d8) of the constant select-word area addressed at -0x2bf8
+local	FUN_000fd5c8	local_174	lastDeclRegister	INFERRED	register number of the last declaration (or -1), passed by address to FUN_000fb3d4
+local	FUN_000fd5c8	local_a4	outputSlotCounter	INFERRED	0, incremented per processed destination; passed as the mode selector of FUN_000f9a58
+local	FUN_000fd5c8	local_100	sharedTempIndex	INFERRED	temp register index allocated once (compiler+0x3ac - 1) and reused by the operand records
+local	FUN_000fd5c8	local_c4	fetchFlagBit	INFERRED	token bit 24 stored inverted in fetchDescriptor[9]
+local	FUN_000fd5c8	local_b8	writtenComponentCount	INFERRED	IRInst__countWrittenComponents(builtInstB)
+local	FUN_000fd5c8	local_b4	opcodeVariantFlag	INFERRED	0 or 1, passed to the operand binder (FUN_000fb3d4 call in the operand loop)
+local	FUN_000fd5c8	local_ac	extraSeen	INFERRED	cleared at start, set to 1 once the extra operand token was processed
+local	FUN_000fd5c8	local_7c	scopeLevelPtr	INFERRED	address of scopeLevel
+local	FUN_000fd5c8	local_58	scopeLevelPtrCopy	INFERRED	copy of scopeLevelPtr used as stagedSelectCopy source
+local	FUN_000fd5c8	local_d8	composedSelectOut	INFERRED	SelectWord::compose output
+local	FUN_000fd5c8	local_d4	markedSelectOut	INFERRED	FUN_000f32cc output stored at workInst+0x9c
+local	FUN_000fd5c8	local_11c	pendingListHead	INFERRED	head node of the pending instruction list walked and flushed
+local	FUN_000fd5c8	local_6c	pendingListA	INFERRED	pointer to the DListNode sentinel auStack_16c: instructions to emit first
+local	FUN_000fd5c8	local_68	pendingListB	INFERRED	pointer to the DListNode sentinel auStack_154: second pending instruction list

@@ -2,7 +2,7 @@
 """gatediag.py TAG PART FUNCLABEL : explain a gate DATAFLOW/UNINIT problem: new uninit warning names, and for every load whose reaching stores differ the base/candidate stores (frame slots) -- map the slots to variables by looking at the cand source around the stores"""
 import sys, re, subprocess, collections
 tag, part, fn = sys.argv[1:4]
-T = '/tmp/vn_Userspace_ATIRadeonX1000GLDriver_ppc_%s' % tag
+T = '/home/sam/g5logs/q05/vn/vn_Userspace_ATIRadeonX1000GLDriver_ppc_%s' % tag
 def uninit(p):
     c = collections.Counter()
     for l in open(p, errors='replace'):
