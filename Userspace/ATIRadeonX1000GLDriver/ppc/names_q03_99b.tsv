@@ -1,0 +1,16 @@
+use	recordProgramBuildDependencies	piVar31	scratchArg5	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*piVar31\ =\ local_68;$	+1
+use	recordProgramBuildDependencies	piVar31	scratchArg5	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*piVar31\ =\ local_6c;$	+1
+use	recordProgramBuildDependencies	piVar31	scratchArg5	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar19\ =\ \(\(int\ \(\*\)\(\)\)FUN_0007b0d0\)\(param_1,puVar27,pdVar15,in_r6,piVar31,piVar32,pdVar14,pdVar20\);$	+1
+use	recordProgramBuildDependencies	piVar32	scratchArg6	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*piVar32\ =\ local_6c;$	+1
+use	recordProgramBuildDependencies	piVar32	scratchArg6	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*piVar32\ =\ local_70;$	+1
+use	recordProgramBuildDependencies	piVar32	scratchArg6	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*for\ \(piVar32\ =\ \(int\ \*\)param_1\[0x4114\];\ piVar32\ !=\ \(int\ \*\)0x0;$	+3
+use	recordProgramBuildDependencies	piVar32	scratchArg6	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*for\ \(piVar32\ =\ \(int\ \*\)param_1\[0x4114\];\ piVar32\ !=\ \(int\ \*\)0x0;\ piVar32\ =\ \(int\ \*\)piVar32\[4\]\)\ \{$	+2
+use	recordProgramBuildDependencies	piVar32	scratchArg6	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(iVar36\ !=\ 0\)\ \|\|\ \(iVar36\ =\ \(\(int\ \(\*\)\(\)\)FUN_00077800\)\(puVar9,uVar10\),\ iVar36\ !=\ 0\)\)\ \&\&$	+2
+use	recordProgramBuildDependencies	piVar32	scratchArg6	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar10\ =\ pdVar18\[\*piVar32\ \+\ 0x2106\];$	+1
+use	recordProgramBuildDependencies	piVar32	scratchArg6	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*piVar32\ =\ \(int\ \*\)piVar32\[4\];$	+2
+use	recordProgramBuildDependencies	piVar32	scratchArg6	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*piVar32\ =\ local_a0\ \+\ 1;$	+1
+use	recordProgramBuildDependencies	piVar32	scratchArg6	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*local_a0\ =\ piVar32;$	+1
+use	recordProgramBuildDependencies	piVar32	scratchArg6	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*piVar32\ =\ \(int\ \*\)0x0;$	+1
+use	recordProgramBuildDependencies	piVar32	scratchArg6	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(local_68\ !=\ \(int\ \*\)0x0\)\ \&\&\ \(piVar32\ =\ local_6c,\ local_6c\ !=\ \(int\ \*\)0x0\)\)\ \&\&$	+2
+use	recordProgramBuildDependencies	piVar32	scratchArg6	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*piVar32\ =\ local_68;$	+1
+use	recordProgramBuildDependencies	piVar32	scratchArg6	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar19\ =\ \(\(int\ \(\*\)\(\)\)FUN_0007b0d0\)\(param_1,puVar27,pdVar15,in_r6,piVar31,piVar32,pdVar14,pdVar20\);$	+1

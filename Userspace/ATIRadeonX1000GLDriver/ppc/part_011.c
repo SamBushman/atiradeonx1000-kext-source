@@ -4020,7 +4020,7 @@ int recordProgramBuildDependencies(alloc)
   undefined1 *lastRecordIndex;
   uint srcIndexBitsC;
   uint srcTopBitsC;
-  lc_str lVar7;
+  lc_str srcWordPtr1Copy;
   uint outputWordOld;
   uint *clearPtr3;
   uint inputCount;
@@ -4045,26 +4045,26 @@ int recordProgramBuildDependencies(alloc)
   uint *extraout_r4_13;
   uint *extraout_r4_14;
   uint *extraout_r4_15;
-  dword *pdVar15;
+  dword *scratchArg3;
   dword *in_r6;
-  uint *puVar16;
+  uint *srcWordPtr0Copy;
   uint inputWord1;
   dword *arena;
   int loopIndex;
-  dword *pdVar20;
+  dword *scratchArg8;
   uint *tablePtr;
   char opcodeByte;
   int dependencyOffset;
   dword *recordFlagPtr;
   dword *outRecordPtr;
   uint inputWord2;
-  uint *puVar27;
+  uint *scratchArg2;
   uint sourceWordValue;
-  dword dVar29;
+  dword srcWordPtrScratch;
   undefined1 *scanPtr;
-  int *piVar31;
+  int *scratchArg5;
   int *edgeNode;
-  int *piVar32;
+  int *scratchArg6;
   int *sourceDepNode;
   int componentIndex;
   uint *srcWordPtr;
@@ -4075,10 +4075,10 @@ int recordProgramBuildDependencies(alloc)
   int predResult;
   int edgeStatus;
   int wordIndex;
-  undefined8 uVar37;
+  undefined8 callResultPair;
   uint recordCopyWord;
-  uint *local_b4;
-  dylib local_b0;
+  uint *srcWordPtrTable;
+  dylib srcWordPtrTableTail;
   int *sourceSlotOffset;
   dword *perSourceDepHead;
   undefined1 *lastRecordIndexSaved;
@@ -4136,7 +4136,7 @@ int recordProgramBuildDependencies(alloc)
     clearPtr = clearPtr + 1;
     loopCount4 = loopCount4 + -1;
   } while (loopCount4 != 0);
-  pdVar15 = (dword *)0x2000;
+  scratchArg3 = (dword *)0x2000;
   alloc[0x9a1c] = 0;
   _memset(allocTail + 0x523,0,0x2000);
   loopCount800 = 0x800;
@@ -4151,7 +4151,7 @@ int recordProgramBuildDependencies(alloc)
   ((int (*)())chunkArenaResetCursor)(arena);
   tablePtr = alloc + 0x3914;
   loopIndex = 0;
-  pdVar20 = (dword *)0x0;
+  scratchArg8 = (dword *)0x0;
   clearPtr = alloc + 0x112;
   do {
     clearPtr3 = clearPtr + 2;
@@ -4176,62 +4176,62 @@ int recordProgramBuildDependencies(alloc)
   } while (moreEntries);
   if ((*alloc & 0x40) == 0) {
     alloc[0x8a1b] = alloc[2];
-    pdVar15 = (dword *)(alloc[2] << 4);
-    _memcpy(alloc + 0x4a1b,alloc[1],pdVar15);
-    puVar27 = extraout_r4_00;
+    scratchArg3 = (dword *)(alloc[2] << 4);
+    _memcpy(alloc + 0x4a1b,alloc[1],scratchArg3);
+    scratchArg2 = extraout_r4_00;
   }
   else {
     inputCount = alloc[2];
     alloc[0x8a1b] = inputCount;
     alloc[0x8a1b] = 0;
-    puVar27 = extraout_r4;
+    scratchArg2 = extraout_r4;
     if (inputCount != 0) {
-      pdVar15 = alloc + 0x4a1b;
+      scratchArg3 = alloc + 0x4a1b;
       inputRecords = (uint *)alloc[1];
-      pdVar20 = pdVar15;
+      scratchArg8 = scratchArg3;
       while( true ) {
-        puVar27 = inputRecords + 4;
+        scratchArg2 = inputRecords + 4;
         inputWord1 = inputRecords[1];
         inputWord2 = inputRecords[2];
         inputWord3 = inputRecords[3];
-        *pdVar20 = *inputRecords;
-        pdVar20[1] = inputWord1;
-        pdVar20[2] = inputWord2;
-        pdVar20[3] = inputWord3;
+        *scratchArg8 = *inputRecords;
+        scratchArg8[1] = inputWord1;
+        scratchArg8[2] = inputWord2;
+        scratchArg8[3] = inputWord3;
         outputIndexPlus1 = alloc[0x8a1b] + 1;
         alloc[0x8a1b] = outputIndexPlus1;
         if ((*inputRecords & 0x10000000) != 0) {
           inputWord3Ptr = inputRecords + 3;
-          in_r6 = pdVar15 + outputIndexPlus1 * 4;
+          in_r6 = scratchArg3 + outputIndexPlus1 * 4;
           opcodeInfoOffset = (inputRecords[3] >> 0x15 & 0xf) * 0x14;
           if (0x7ff < outputIndexPlus1) {
             return 10;
           }
-          pdVar20[3] = 0x124800;
-          *pdVar20 = *pdVar20 & 0xefffffff;
-          pdVar15[outputIndexPlus1 * 4] = 0;
+          scratchArg8[3] = 0x124800;
+          *scratchArg8 = *scratchArg8 & 0xefffffff;
+          scratchArg3[outputIndexPlus1 * 4] = 0;
           in_r6[3] = 0x124800;
           in_r6[1] = 0x124800;
           in_r6[2] = 0x124800;
           *(byte *)((int)in_r6 + 3) = (byte)(inputRecords[3] >> 0x15) & 0xf | 0x40;
-          outputWordOldB = pdVar15[outputIndexPlus1 * 4];
-          pdVar15[outputIndexPlus1 * 4] = outputWordOldB & 0xfffff0ff | 0x400;
+          outputWordOldB = scratchArg3[outputIndexPlus1 * 4];
+          scratchArg3[outputIndexPlus1 * 4] = outputWordOldB & 0xfffff0ff | 0x400;
           outputWordOldB = (inputRecords[3] >> 0x13 & 3) << 0xd | outputWordOldB & 0xff0010ff | 0x400;
-          pdVar15[outputIndexPlus1 * 4] = outputWordOldB;
+          scratchArg3[outputIndexPlus1 * 4] = outputWordOldB;
           inputModeBits = inputRecords[3] >> 0x1b & 3;
           if (inputModeBits == 1) {
-            pdVar15[outputIndexPlus1 * 4] = outputWordOldB | 0x200000;
+            scratchArg3[outputIndexPlus1 * 4] = outputWordOldB | 0x200000;
           }
           else if (inputModeBits < 2) {
             if (inputModeBits == 0) {
-              pdVar15[outputIndexPlus1 * 4] = outputWordOldB | 0x100000;
+              scratchArg3[outputIndexPlus1 * 4] = outputWordOldB | 0x100000;
             }
           }
           else if (inputModeBits == 2) {
-            pdVar15[outputIndexPlus1 * 4] = outputWordOldB | 0x400000;
+            scratchArg3[outputIndexPlus1 * 4] = outputWordOldB | 0x400000;
           }
           else if (inputModeBits == 3) {
-            pdVar15[outputIndexPlus1 * 4] = outputWordOldB | 0x800000;
+            scratchArg3[outputIndexPlus1 * 4] = outputWordOldB | 0x800000;
           }
           *in_r6 = *in_r6 & 0xefffffff;
           srcOperandIndexA = *(uint *)(&DAT_001aa5f8 + opcodeInfoOffset);
@@ -4272,8 +4272,8 @@ int recordProgramBuildDependencies(alloc)
         }
         inputCount = inputCount - 1;
         if (inputCount == 0) break;
-        pdVar20 = pdVar15 + alloc[0x8a1b] * 4;
-        inputRecords = puVar27;
+        scratchArg8 = scratchArg3 + alloc[0x8a1b] * 4;
+        inputRecords = scratchArg2;
         if (0x7ff < alloc[0x8a1b]) {
           return 10;
         }
@@ -4291,10 +4291,10 @@ int recordProgramBuildDependencies(alloc)
   }
   crBitsOut = (uint)(byte)(((int)lastRecordOut < 0) << 3 | (0 < (int)lastRecordOut) << 2 |
                           (lastRecordOut == (int *)0x0) << 1 | in_xer_so & 1) << 0x1c;
-  piVar32 = outputListOut;
+  scratchArg6 = outputListOut;
   if (lastRecordOut != (int *)0x0) {
     *lastRecordOut = (int)((int)recordCount + -1);
-    piVar32 = lastRecordOut;
+    scratchArg6 = lastRecordOut;
   }
   lastRecordIndexValue = (dword *)((int)recordCount + -1);
   lastRecordIndexSaved = (undefined1 *)lastRecordIndexValue;
@@ -4304,7 +4304,7 @@ int recordProgramBuildDependencies(alloc)
     record = records + (int)lastRecordIndexValue * 4;
     sawOutputRecord = 0;
     outRecordPtr = outRecordsOut + (int)lastRecordIndexValue * 4;
-    srcWordPtrFrameBase = &local_b4;
+    srcWordPtrFrameBase = &srcWordPtrTable;
     noOutputRecords = outRecordsOut == (dword *)0x0;
     recordFlagPtr = arena + (int)(recordCount + 0x641) + 1;
     loopCounterC = 0;
@@ -4340,7 +4340,7 @@ LAB_0007cc7c:
         *(uint **)(wordIndex + (int)srcWordPtrFrameBase) = recordPtrC;
         wordIndex = wordIndex + 4;
       } while (moreWords);
-      local_b0.current_version = (dword)(records + recordWordOffset);
+      srcWordPtrTableTail.current_version = (dword)(records + recordWordOffset);
       recordWriteMask = (dword *)((int (*)())recordGetWriteMask)(record);
       if (recordWriteMask == (dword *)0x0) {
 LAB_0007ceb8:
@@ -4348,19 +4348,19 @@ LAB_0007ceb8:
       }
       else {
         if ((*configFlagsPtr & 0x40) == 0) {
-          pdVar20 = (dword *)*record;
-          if (((uint)pdVar20 >> 8 & 0xf) - 4 < 5) {
-            for (piVar32 = (int *)alloc[0x4114]; piVar32 != (int *)0x0;
-                piVar32 = (int *)piVar32[4]) {
-              recordCopyWord = records[*piVar32 * 4];
-              if (((uint)pdVar20 & 0xfef00) == (recordCopyWord & 0xfef00)) {
+          scratchArg8 = (dword *)*record;
+          if (((uint)scratchArg8 >> 8 & 0xf) - 4 < 5) {
+            for (scratchArg6 = (int *)alloc[0x4114]; scratchArg6 != (int *)0x0;
+                scratchArg6 = (int *)scratchArg6[4]) {
+              recordCopyWord = records[*scratchArg6 * 4];
+              if (((uint)scratchArg8 & 0xfef00) == (recordCopyWord & 0xfef00)) {
                 writeMask = ((int (*)())recordGetWriteMask)(&recordCopyWord);
                 recordWriteMask = (dword *)((uint)recordWriteMask & ~writeMask);
                 ((int (*)())recordSetWriteMask)(record,recordWriteMask);
-                pdVar20 = (dword *)*record;
+                scratchArg8 = (dword *)*record;
               }
             }
-            if ((((uint)pdVar20 & 0xf00) == 0x400) && (recordFlagPtr[0x800] = 1, sawOutputRecord == 0)) {
+            if ((((uint)scratchArg8 & 0xf00) == 0x400) && (recordFlagPtr[0x800] = 1, sawOutputRecord == 0)) {
               if ((bool)((byte)((uint)crBitsOut >> 0x1d) & 1)) {
                 sawOutputRecord = 1;
               }
@@ -4369,7 +4369,7 @@ LAB_0007ceb8:
                 sawOutputRecord = 1;
               }
             }
-            pdVar15 = recordIndex;
+            scratchArg3 = recordIndex;
             in_r6 = recordWriteMask;
             edgeStatus = ((int (*)())depListAddEdge)(alloc,alloc + 0x4114,recordIndex,recordWriteMask,0,0,arena);
             if (edgeStatus != 0) {
@@ -4380,18 +4380,18 @@ LAB_0007ceb4:
           }
           goto LAB_0007ceb8;
         }
-        pdVar20 = (dword *)*record;
-        if (1 < ((uint)pdVar20 >> 8 & 0xf) - 2) goto LAB_0007ceb8;
-        for (piVar32 = (int *)alloc[0x4114]; piVar32 != (int *)0x0; piVar32 = (int *)piVar32[4]) {
-          recordCopyWord = records[*piVar32 * 4];
-          if (((uint)pdVar20 & 0xfe000) == (recordCopyWord & 0xfe000)) {
+        scratchArg8 = (dword *)*record;
+        if (1 < ((uint)scratchArg8 >> 8 & 0xf) - 2) goto LAB_0007ceb8;
+        for (scratchArg6 = (int *)alloc[0x4114]; scratchArg6 != (int *)0x0; scratchArg6 = (int *)scratchArg6[4]) {
+          recordCopyWord = records[*scratchArg6 * 4];
+          if (((uint)scratchArg8 & 0xfe000) == (recordCopyWord & 0xfe000)) {
             writeMask = ((int (*)())recordGetWriteMask)(&recordCopyWord);
             recordWriteMask = (dword *)((uint)recordWriteMask & ~writeMask);
             ((int (*)())recordSetWriteMask)(record,recordWriteMask);
-            pdVar20 = (dword *)*record;
+            scratchArg8 = (dword *)*record;
           }
         }
-        if (((uint)pdVar20 & 0xfe000) == 0) {
+        if (((uint)scratchArg8 & 0xfe000) == 0) {
           recordFlagPtr[0x800] = 1;
         }
         if ((sawOutputRecord == 0) && ((*record & 0xfe000) == 0)) {
@@ -4403,7 +4403,7 @@ LAB_0007ceb4:
             sawOutputRecord = 1;
           }
         }
-        pdVar15 = recordIndex;
+        scratchArg3 = recordIndex;
         in_r6 = recordWriteMask;
         edgeStatus = ((int (*)())depListAddEdge)(alloc,alloc + 0x4114,recordIndex,recordWriteMask,0,0,arena);
         if (edgeStatus != 0) {
@@ -4416,15 +4416,15 @@ LAB_0007ceb4:
       configBit6 = *configFlagsPtr >> 6 & 1;
       predResult = ((int (*)())recordDestFileIs0Or45)(record,configBit6);
       if (((predResult != 0) || (predResult = ((int (*)())recordDestFileIs3Or1)(record,configBit6), predResult != 0)) &&
-         (piVar32 = (*(int * *)(recordFlagPtr + (0x1000))), piVar32 != (int *)0x0)) {
-        pdVar20 = (dword *)((int)((unsigned char *)0x0) + 1);
+         (scratchArg6 = (*(int * *)(recordFlagPtr + (0x1000))), scratchArg6 != (int *)0x0)) {
+        scratchArg8 = (dword *)((int)((unsigned char *)0x0) + 1);
         do {
-          dependencyUsed = arena[*piVar32 + 0x2106];
+          dependencyUsed = arena[*scratchArg6 + 0x2106];
           if (dependencyUsed != 0) {
             recordFlagPtr[0x800] = 1;
           }
-          piVar32 = (int *)piVar32[4];
-        } while ((piVar32 != (int *)0x0) && (dependencyUsed == 0));
+          scratchArg6 = (int *)scratchArg6[4];
+        } while ((scratchArg6 != (int *)0x0) && (dependencyUsed == 0));
         configFlagsPtr = (uint *)alloc[0xd];
       }
       configBit6 = *configFlagsPtr >> 6 & 1;
@@ -4439,7 +4439,7 @@ LAB_0007ceb4:
           configFlagsPtr = (uint *)alloc[0xd];
         }
       }
-      srcWordPtr0 = local_b4;
+      srcWordPtr0 = srcWordPtrTable;
       opcodeByte = (char)*record;
       if (((opcodeByte == 'A') && ((*configFlagsPtr & 0x80) != 0)) && (configBit6 = recordFlagPtr[0x1000], configBit6 != 0))
       {
@@ -4451,12 +4451,12 @@ LAB_0007ceb4:
         } while (configBit6 != 0);
         if ((usedBits & 7) == 2) {
           *(undefined1 *)((int)record + 3) = 6;
-          pdVar15 = (dword *)((int (*)())recordGetSourceSelect)(local_b4,3);
-          ((int (*)())recordSetSourceSelect)(srcWordPtr0,1,pdVar15);
+          scratchArg3 = (dword *)((int (*)())recordGetSourceSelect)(srcWordPtrTable,3);
+          ((int (*)())recordSetSourceSelect)(srcWordPtr0,1,scratchArg3);
           if (!noOutputRecords) {
             predResult = 4;
             outRecordCopyPtr = outRecordsOut + recordWordOffset;
-            outRecordSrc = (uint *)local_b0.current_version;
+            outRecordSrc = (uint *)srcWordPtrTableTail.current_version;
             do {
               configFlagsValue = *outRecordSrc;
               outRecordSrc = outRecordSrc + 1;
@@ -4470,28 +4470,28 @@ LAB_0007ceb4:
         }
       }
       if ((opcodeByte == 'D') &&
-         (predResult = ((int (*)())recordDestFileIs0Or45)(record,*configFlagsPtr >> 6 & 1), puVar16 = local_b4, predResult != 0)) {
-        pdVar20 = (dword *)(*record & 0xff7fffff);
+         (predResult = ((int (*)())recordDestFileIs0Or45)(record,*configFlagsPtr >> 6 & 1), srcWordPtr0Copy = srcWordPtrTable, predResult != 0)) {
+        scratchArg8 = (dword *)(*record & 0xff7fffff);
         *record = *record & 0xff6fffff;
         configFlagsPtr = (uint *)alloc[0xd];
         if ((((*configFlagsPtr >> 6 & 1) != 0) &&
-            ((predResult = ((int (*)())recordSourceFileIs0)(local_b4), lVar7.offset = local_b0.name.offset, predResult != 0 &&
-             (predResult = ((int (*)())recordSourceFileIs0)(local_b0.name.offset), dVar29 = local_b0.timestamp, predResult != 0)
-             ))) && (predResult = ((int (*)())recordSourceFileIs0)(local_b0.timestamp), predResult != 0)) {
-          srcWord0 = *puVar16;
-          if (((srcWord0 & 0x1fe0) == (*(uint *)lVar7.offset & 0x1fe0)) &&
-             ((srcWord0 & 0x1fe0) == (*(uint *)dVar29 & 0x1fe0))) {
-            swizzleBitsA = *(uint *)lVar7.offset >> 9 & 0xe000;
-            *puVar16 = swizzleBitsA | srcWord0 & 0xffff1fff;
-            *puVar16 = *(uint *)dVar29 >> 6 & 0x70000 | swizzleBitsA | srcWord0 & 0xfff81fff;
-            srcWord1Old = *(uint *)lVar7.offset;
+            ((predResult = ((int (*)())recordSourceFileIs0)(srcWordPtrTable), srcWordPtr1Copy.offset = srcWordPtrTableTail.name.offset, predResult != 0 &&
+             (predResult = ((int (*)())recordSourceFileIs0)(srcWordPtrTableTail.name.offset), srcWordPtrScratch = srcWordPtrTableTail.timestamp, predResult != 0)
+             ))) && (predResult = ((int (*)())recordSourceFileIs0)(srcWordPtrTableTail.timestamp), predResult != 0)) {
+          srcWord0 = *srcWordPtr0Copy;
+          if (((srcWord0 & 0x1fe0) == (*(uint *)srcWordPtr1Copy.offset & 0x1fe0)) &&
+             ((srcWord0 & 0x1fe0) == (*(uint *)srcWordPtrScratch & 0x1fe0))) {
+            swizzleBitsA = *(uint *)srcWordPtr1Copy.offset >> 9 & 0xe000;
+            *srcWordPtr0Copy = swizzleBitsA | srcWord0 & 0xffff1fff;
+            *srcWordPtr0Copy = *(uint *)srcWordPtrScratch >> 6 & 0x70000 | swizzleBitsA | srcWord0 & 0xfff81fff;
+            srcWord1Old = *(uint *)srcWordPtr1Copy.offset;
             srcWord0 = (srcWord0 & 0x1c00000) >> 9;
-            *(uint *)lVar7.offset = srcWord0 | srcWord1Old & 0xffff1fff;
-            *(uint *)lVar7.offset = *(uint *)dVar29 >> 6 & 0x70000 | srcWord0 | srcWord1Old & 0xfff81fff;
-            srcWord2Old = *(uint *)dVar29;
-            srcWordShifted = *puVar16 >> 9 & 0xe000;
-            *(uint *)dVar29 = srcWordShifted | srcWord2Old & 0xffff1fff;
-            *(uint *)dVar29 = *(uint *)lVar7.offset >> 6 & 0x70000 | srcWordShifted | srcWord2Old & 0xfff81fff;
+            *(uint *)srcWordPtr1Copy.offset = srcWord0 | srcWord1Old & 0xffff1fff;
+            *(uint *)srcWordPtr1Copy.offset = *(uint *)srcWordPtrScratch >> 6 & 0x70000 | srcWord0 | srcWord1Old & 0xfff81fff;
+            srcWord2Old = *(uint *)srcWordPtrScratch;
+            srcWordShifted = *srcWordPtr0Copy >> 9 & 0xe000;
+            *(uint *)srcWordPtrScratch = srcWordShifted | srcWord2Old & 0xffff1fff;
+            *(uint *)srcWordPtrScratch = *(uint *)srcWordPtr1Copy.offset >> 6 & 0x70000 | srcWordShifted | srcWord2Old & 0xfff81fff;
             configFlagsPtr = (uint *)alloc[0xd];
           }
         }
@@ -4499,7 +4499,7 @@ LAB_0007ceb4:
       if ((!noOutputRecords) && ((*configFlagsPtr & 0x200) != 0)) {
         remainingC = 4;
         outRecordCopyPtr = outRecordsOut + recordWordOffset;
-        outRecordSrc = (uint *)local_b0.current_version;
+        outRecordSrc = (uint *)srcWordPtrTableTail.current_version;
         do {
           configFlagsValue = *outRecordSrc;
           outRecordSrc = outRecordSrc + 1;
@@ -4511,16 +4511,16 @@ LAB_0007ceb4:
       }
       sourceSlot = 0;
       sourceSlotOffset = (int *)0x0;
-      uVar37 = ((int (*)())recordOpcodeSourceMask)(record,*configFlagsPtr >> 6 & 1);
-      sourceMask = (uint)((ulonglong)uVar37 >> 0x20);
-      puVar27 = (uint *)uVar37;
+      callResultPair = ((int (*)())recordOpcodeSourceMask)(record,*configFlagsPtr >> 6 & 1);
+      sourceMask = (uint)((ulonglong)callResultPair >> 0x20);
+      scratchArg2 = (uint *)callResultPair;
       *recordFlagPtr = sourceMask;
       perSourceDepHead = arena + (int)recordIndex * 3 + 0x106;
-      srcWordPtrAlias0 = local_b4;
-      srcWordPtr1 = (uint *)local_b0.name.offset;
-      srcWordPtr2 = (uint *)local_b0.timestamp;
+      srcWordPtrAlias0 = srcWordPtrTable;
+      srcWordPtr1 = (uint *)srcWordPtrTableTail.name.offset;
+      srcWordPtr2 = (uint *)srcWordPtrTableTail.timestamp;
       iVar36 = dependencyOffset;
-      local_b0.compatibility_version = (dword)&local_b0;
+      srcWordPtrTableTail.compatibility_version = (dword)&srcWordPtrTableTail;
       do {
         if ((sourceMask & 1 << (sourceSlot & 0x3f)) == 0) {
           srcFileDefault = 5;
@@ -4542,9 +4542,9 @@ LAB_0007ceb4:
           sourceIsRegisterFile = false;
         }
         if (!sourceIsRegisterFile) {
-          uVar37 = ((int (*)())recordSourceFileIs2)(*(uint **)((int)sourceSlotOffset + (int)srcWordPtrFrameBase));
-          puVar27 = (uint *)uVar37;
-          if ((int)((ulonglong)uVar37 >> 0x20) != 0) {
+          callResultPair = ((int (*)())recordSourceFileIs2)(*(uint **)((int)sourceSlotOffset + (int)srcWordPtrFrameBase));
+          scratchArg2 = (uint *)callResultPair;
+          if ((int)((ulonglong)callResultPair >> 0x20) != 0) {
             srcSpecialBit = sourceWordValue >> 4 & 1;
             if ((configBit6B & 1) != 0) {
               srcSpecialBit = sourceWordValue >> 0x1e & 2 | sourceWordValue >> 4 & 1;
@@ -4556,21 +4556,21 @@ LAB_0007ceb4:
               do {
                 recordPtrAlias = recordPtrAlias + -4;
                 recordCopyWord = *recordPtrAlias;
-                uVar37 = ((int (*)())recordDestFileIs3Or1)(&recordCopyWord,*configFlagsPtrB >> 6 & 1);
-                puVar27 = (uint *)uVar37;
-                if ((int)((ulonglong)uVar37 >> 0x20) == 0) {
+                callResultPair = ((int (*)())recordDestFileIs3Or1)(&recordCopyWord,*configFlagsPtrB >> 6 & 1);
+                scratchArg2 = (uint *)callResultPair;
+                if ((int)((ulonglong)callResultPair >> 0x20) == 0) {
 LAB_0007d968:
                   sourceIsRegisterFile = false;
                 }
                 else {
-                  uVar37 = ((int (*)())recordGetWriteEnable)(&recordCopyWord,srcSelectBits);
-                  puVar27 = (uint *)uVar37;
-                  if ((int)((ulonglong)uVar37 >> 0x20) == 0) goto LAB_0007d968;
-                  pdVar15 = (dword *)(lastRecordIndex + -(int)scanPtr);
+                  callResultPair = ((int (*)())recordGetWriteEnable)(&recordCopyWord,srcSelectBits);
+                  scratchArg2 = (uint *)callResultPair;
+                  if ((int)((ulonglong)callResultPair >> 0x20) == 0) goto LAB_0007d968;
+                  scratchArg3 = (dword *)(lastRecordIndex + -(int)scanPtr);
                   in_r6 = (dword *)(1 << (srcSelectBits & 0x3f));
-                  ((int (*)())depListAddEdge)(alloc,dependentsBase,pdVar15,in_r6,0,0,arena);
+                  ((int (*)())depListAddEdge)(alloc,dependentsBase,scratchArg3,in_r6,0,0,arena);
                   sourceIsRegisterFile = true;
-                  puVar27 = extraout_r4_13;
+                  scratchArg2 = extraout_r4_13;
                 }
                 if ((scanPtr == lastRecordIndex) || (scanPtr = scanPtr + 1, sourceIsRegisterFile)) break;
                 configFlagsPtrB = (uint *)alloc[0xd];
@@ -4582,15 +4582,15 @@ LAB_0007d968:
         switch((char)*record) {
         case '\x01':
           componentIndex = 0;
-          dVar29 = ((lc_str *)local_b0.compatibility_version)->offset;
+          srcWordPtrScratch = ((lc_str *)srcWordPtrTableTail.compatibility_version)->offset;
           do {
-            uVar37 = ((int (*)())recordGetSourceSelect)(dVar29,componentIndex);
-            puVar27 = (uint *)uVar37;
-            if ((int)((ulonglong)uVar37 >> 0x20) != 4) {
-              pdVar15 = outRecordsOut;
+            callResultPair = ((int (*)())recordGetSourceSelect)(srcWordPtrScratch,componentIndex);
+            scratchArg2 = (uint *)callResultPair;
+            if ((int)((ulonglong)callResultPair >> 0x20) != 4) {
+              scratchArg3 = outRecordsOut;
               in_r6 = arena;
               ((int (*)())recordLinkSourceToDefinition)(alloc,records,outRecordsOut,arena,recordIndex,sourceSlot,componentIndex);
-              puVar27 = extraout_r4_08;
+              scratchArg2 = extraout_r4_08;
             }
             moreComponents = componentIndex != 3;
             componentIndex = componentIndex + 1;
@@ -4601,30 +4601,30 @@ LAB_0007d968:
           recordHasNoSpecialWrite = recordIsSpecialWrite == 0;
           do {
             if (recordHasNoSpecialWrite) {
-              uVar37 = ((int (*)())recordGetWriteEnable)(record,componentIndex);
-              puVar27 = (uint *)uVar37;
-              if ((int)((ulonglong)uVar37 >> 0x20) != 0) {
-                uVar37 = ((int (*)())recordGetSourceSelect)(((lc_str *)local_b0.compatibility_version)->offset,componentIndex);
-                puVar27 = (uint *)uVar37;
-                if ((int)((ulonglong)uVar37 >> 0x20) != 4) {
-                  pdVar15 = outRecordsOut;
+              callResultPair = ((int (*)())recordGetWriteEnable)(record,componentIndex);
+              scratchArg2 = (uint *)callResultPair;
+              if ((int)((ulonglong)callResultPair >> 0x20) != 0) {
+                callResultPair = ((int (*)())recordGetSourceSelect)(((lc_str *)srcWordPtrTableTail.compatibility_version)->offset,componentIndex);
+                scratchArg2 = (uint *)callResultPair;
+                if ((int)((ulonglong)callResultPair >> 0x20) != 4) {
+                  scratchArg3 = outRecordsOut;
                   in_r6 = arena;
                   ((int (*)())recordLinkSourceToDefinition)(alloc,records,outRecordsOut,arena,recordIndex,sourceSlot,componentIndex);
-                  puVar27 = extraout_r4_10;
+                  scratchArg2 = extraout_r4_10;
                 }
               }
             }
             else if (componentIndex == 0) {
-              uVar37 = ((int (*)())recordGetWriteMask)(record);
-              puVar27 = (uint *)uVar37;
-              if ((int)((ulonglong)uVar37 >> 0x20) != 0) {
-                uVar37 = ((int (*)())recordGetSourceSelect)(((lc_str *)local_b0.compatibility_version)->offset,0);
-                puVar27 = (uint *)uVar37;
-                if ((int)((ulonglong)uVar37 >> 0x20) != 4) {
-                  pdVar15 = outRecordsOut;
+              callResultPair = ((int (*)())recordGetWriteMask)(record);
+              scratchArg2 = (uint *)callResultPair;
+              if ((int)((ulonglong)callResultPair >> 0x20) != 0) {
+                callResultPair = ((int (*)())recordGetSourceSelect)(((lc_str *)srcWordPtrTableTail.compatibility_version)->offset,0);
+                scratchArg2 = (uint *)callResultPair;
+                if ((int)((ulonglong)callResultPair >> 0x20) != 4) {
+                  scratchArg3 = outRecordsOut;
                   in_r6 = arena;
                   ((int (*)())recordLinkSourceToDefinition)(alloc,records,outRecordsOut,arena,recordIndex,sourceSlot,0);
-                  puVar27 = extraout_r4_09;
+                  scratchArg2 = extraout_r4_09;
                 }
               }
             }
@@ -4649,23 +4649,23 @@ LAB_0007d968:
           recordHasNoSpecialWrite = recordIsSpecialWrite == 0;
           do {
             if (recordHasNoSpecialWrite) {
-              uVar37 = ((int (*)())recordGetWriteEnable)(record,componentIndex);
-              puVar27 = (uint *)uVar37;
-              if ((int)((ulonglong)uVar37 >> 0x20) != 0) {
-                pdVar15 = outRecordsOut;
+              callResultPair = ((int (*)())recordGetWriteEnable)(record,componentIndex);
+              scratchArg2 = (uint *)callResultPair;
+              if ((int)((ulonglong)callResultPair >> 0x20) != 0) {
+                scratchArg3 = outRecordsOut;
                 in_r6 = arena;
                 ((int (*)())recordLinkSourceToDefinition)(alloc,records,outRecordsOut,arena,recordIndex,sourceSlot,componentIndex);
-                puVar27 = extraout_r4_12;
+                scratchArg2 = extraout_r4_12;
               }
             }
             else if (componentIndex == 0) {
-              uVar37 = ((int (*)())recordGetWriteMask)(record);
-              puVar27 = (uint *)uVar37;
-              if ((int)((ulonglong)uVar37 >> 0x20) != 0) {
-                pdVar15 = outRecordsOut;
+              callResultPair = ((int (*)())recordGetWriteMask)(record);
+              scratchArg2 = (uint *)callResultPair;
+              if ((int)((ulonglong)callResultPair >> 0x20) != 0) {
+                scratchArg3 = outRecordsOut;
                 in_r6 = arena;
                 ((int (*)())recordLinkSourceToDefinition)(alloc,records,outRecordsOut,arena,recordIndex,sourceSlot,0);
-                puVar27 = extraout_r4_11;
+                scratchArg2 = extraout_r4_11;
               }
             }
             moreComponentsC = componentIndex != 3;
@@ -4678,13 +4678,13 @@ LAB_0007d968:
             if (sourceSlot == 0) {
               if (componentIndex - 1U < 2) {
 LAB_0007d6c4:
-                uVar37 = ((int (*)())recordGetWriteEnable)(record,componentIndex);
-                puVar27 = (uint *)uVar37;
-                if ((int)((ulonglong)uVar37 >> 0x20) != 0) {
-                  pdVar15 = outRecordsOut;
+                callResultPair = ((int (*)())recordGetWriteEnable)(record,componentIndex);
+                scratchArg2 = (uint *)callResultPair;
+                if ((int)((ulonglong)callResultPair >> 0x20) != 0) {
+                  scratchArg3 = outRecordsOut;
                   in_r6 = arena;
                   ((int (*)())recordLinkSourceToDefinition)(alloc,records,outRecordsOut,arena,recordIndex,sourceSlot,componentIndex);
-                  puVar27 = extraout_r4_07;
+                  scratchArg2 = extraout_r4_07;
                 }
               }
             }
@@ -4706,16 +4706,16 @@ LAB_0007d6c4:
         case 'G':
         case 'I':
           if ((configBit6B & 1) != 0) goto switchD_0007d27c_caseD_41;
-          pdVar15 = outRecordsOut;
+          scratchArg3 = outRecordsOut;
           in_r6 = arena;
           ((int (*)())recordLinkSourceToDefinition)(alloc,records,outRecordsOut,arena,recordIndex,sourceSlot,0);
-          puVar27 = extraout_r4_04;
+          scratchArg2 = extraout_r4_04;
           break;
         case 'D':
           componentIndex = 0;
           if ((configBit6B & 1) == 0) {
             do {
-              pdVar15 = outRecordsOut;
+              scratchArg3 = outRecordsOut;
               in_r6 = arena;
               ((int (*)())recordLinkSourceToDefinition)(alloc,records,outRecordsOut,arena,recordIndex,sourceSlot,componentIndex);
               componentsLeftC = 4 - componentIndex;
@@ -4725,7 +4725,7 @@ LAB_0007d6c4:
               do {
                 componentIndex = componentIndex + 1;
                 componentsLeftC = componentsLeftC + -1;
-                puVar27 = extraout_r4_01;
+                scratchArg2 = extraout_r4_01;
                 if (componentsLeftC == 0) goto switchD_0007d27c_caseD_0;
               } while (componentIndex == 2);
             } while( true );
@@ -4735,7 +4735,7 @@ LAB_0007d6c4:
               ((configBit6B = *srcWordPtrAlias0 & 0x1fe0, configBit6B == (*srcWordPtr1 & 0x1fe0) &&
                (componentIndex = 0, configBit6B == (*srcWordPtr2 & 0x1fe0))))))) {
             do {
-              pdVar15 = outRecordsOut;
+              scratchArg3 = outRecordsOut;
               in_r6 = arena;
               ((int (*)())recordLinkSourceToDefinition)(alloc,records,outRecordsOut,arena,recordIndex,sourceSlot,componentIndex);
               componentsLeftC = 4 - componentIndex;
@@ -4745,7 +4745,7 @@ LAB_0007d6c4:
               do {
                 componentIndex = componentIndex + 1;
                 componentsLeftC = componentsLeftC + -1;
-                puVar27 = extraout_r4_02;
+                scratchArg2 = extraout_r4_02;
                 if (componentsLeftC == 0) goto switchD_0007d27c_caseD_0;
               } while (componentIndex == 2);
             } while( true );
@@ -4758,7 +4758,7 @@ LAB_0007d6c4:
           componentIndex = 0;
           if ((configBit6B & 1) == 0) {
             do {
-              pdVar15 = outRecordsOut;
+              scratchArg3 = outRecordsOut;
               in_r6 = arena;
               ((int (*)())recordLinkSourceToDefinition)(alloc,records,outRecordsOut,arena,recordIndex,sourceSlot,componentIndex);
               componentsLeftC = 3 - componentIndex;
@@ -4768,38 +4768,38 @@ LAB_0007d6c4:
               do {
                 componentIndex = componentIndex + 1;
                 componentsLeftC = componentsLeftC + -1;
-                puVar27 = extraout_r4_03;
+                scratchArg2 = extraout_r4_03;
                 if (componentsLeftC == 0) goto switchD_0007d27c_caseD_0;
               } while (((componentIndex == 1) && ((char)*record != '\r')) && ((char)*record != '\x0e'));
             } while( true );
           }
 switchD_0007d27c_caseD_41:
-          pdVar15 = outRecordsOut;
+          scratchArg3 = outRecordsOut;
           in_r6 = arena;
           ((int (*)())recordLinkSourceToDefinition)(alloc,records,outRecordsOut,arena,recordIndex,sourceSlot,3);
-          puVar27 = extraout_r4_06;
+          scratchArg2 = extraout_r4_06;
           break;
         case 'J':
           if ((configBit6B & 1) != 0) goto switchD_0007d27c_caseD_41;
           componentIndex = 0;
           do {
-            pdVar15 = outRecordsOut;
+            scratchArg3 = outRecordsOut;
             in_r6 = arena;
             ((int (*)())recordLinkSourceToDefinition)(alloc,records,outRecordsOut,arena,recordIndex,sourceSlot,componentIndex);
             moreComponentsB = componentIndex != 1;
             componentIndex = componentIndex + 1;
-            puVar27 = extraout_r4_05;
+            scratchArg2 = extraout_r4_05;
           } while (moreComponentsB);
         }
 switchD_0007d27c_caseD_0:
         for (sourceDepNode = (int *)*perSourceDepHead; sourceDepNode != (int *)0x0;
             sourceDepNode = *(int **)((int)sourceDepNode + 0x10)) {
           in_r6 = *(dword **)((int)sourceDepNode + 4);
-          pdVar15 = recordIndex;
-          uVar37 = ((int (*)())depListAddEdge)(alloc,alloc + *sourceDepNode + 0x2914,recordIndex,in_r6,
+          scratchArg3 = recordIndex;
+          callResultPair = ((int (*)())depListAddEdge)(alloc,alloc + *sourceDepNode + 0x2914,recordIndex,in_r6,
                                 *(int *)((int)sourceDepNode + 8),0,arena);
-          componentIndex = (int)((ulonglong)uVar37 >> 0x20);
-          puVar27 = (uint *)uVar37;
+          componentIndex = (int)((ulonglong)callResultPair >> 0x20);
+          scratchArg2 = (uint *)callResultPair;
           if (componentIndex != 0) {
             return componentIndex;
           }
@@ -4809,10 +4809,10 @@ LAB_0007da08:
         iVar36 = iVar36 + 4;
         sourceSlot = sourceSlot + 1;
         perSourceDepHead = perSourceDepHead + 1;
-        piVar32 = sourceSlotOffset + 1;
-        lastRecordIndexValue = &((dylib *)(local_b0.compatibility_version + -0x10))->compatibility_version;
-        local_b0.compatibility_version = (dword)lastRecordIndexValue;
-        sourceSlotOffset = piVar32;
+        scratchArg6 = sourceSlotOffset + 1;
+        lastRecordIndexValue = &((dylib *)(srcWordPtrTableTail.compatibility_version + -0x10))->compatibility_version;
+        srcWordPtrTableTail.compatibility_version = (dword)lastRecordIndexValue;
+        sourceSlotOffset = scratchArg6;
       } while (moreSources);
       loopCounterC = loopCounterC + 1;
       recordIndex = (dword *)((int)recordIndex + -1);
@@ -4836,9 +4836,9 @@ LAB_0007da08:
         perRecordWordPtr = lastRecordIndexValue + 0x106;
         do {
           if (((usedSourcesMask & 1 << (slotLoopB & 0x3f)) != 0) &&
-             (pdVar15 = (dword *)*perRecordWordPtr, pdVar15 != (dword *)0x0)) {
+             (scratchArg3 = (dword *)*perRecordWordPtr, scratchArg3 != (dword *)0x0)) {
             lastRecordIndexValue = (dword *)0x0;
-            listPosB = pdVar15;
+            listPosB = scratchArg3;
             do {
               if (listIndex == *listPosB) {
                 lastRecordIndexValue = (dword *)((int)((unsigned char *)0x0) + 1);
@@ -4847,17 +4847,17 @@ LAB_0007da08:
               scanFlag = lastRecordIndexValue;
             } while (listPosB != (dword *)0x0);
             while (scanFlag != (dword *)0x0) {
-              if (listIndex != *pdVar15) {
-                in_r6 = (*(dword * *)(pdVar15 + (1)));
-                piVar32 = (int *)0x0;
+              if (listIndex != *scratchArg3) {
+                in_r6 = (*(dword * *)(scratchArg3 + (1)));
+                scratchArg6 = (int *)0x0;
                 lastRecordIndexValue = arena;
-                status = ((int (*)())depListAddEdge)(alloc,dependencyHeadPtr,*pdVar15,in_r6,0,0,arena);
+                status = ((int (*)())depListAddEdge)(alloc,dependencyHeadPtr,*scratchArg3,in_r6,0,0,arena);
                 if (status != 0) {
                   return status;
                 }
               }
-              pdVar15 = (*(dword * *)(pdVar15 + (4)));
-              scanFlag = pdVar15;
+              scratchArg3 = (*(dword * *)(scratchArg3 + (4)));
+              scanFlag = scratchArg3;
             }
           }
           moreSourcesB = slotLoopB != 2;
@@ -4872,30 +4872,30 @@ LAB_0007da08:
     tablePtr = alloc + 0x3114;
     loopIndex = 0;
     do {
-      pdVar15 = (unsigned int *)0x800;
+      scratchArg3 = (unsigned int *)0x800;
       _memset(allocTail + 0x314,0,0x800);
-      puVar27 = extraout_r4_14;
+      scratchArg2 = extraout_r4_14;
       for (edgeNode = (int *)*tablePtr; edgeNode != (int *)0x0; edgeNode = (int *)edgeNode[4]) {
-        pdVar15 = (dword *)*edgeNode;
+        scratchArg3 = (dword *)*edgeNode;
         in_r6 = (dword *)edgeNode[1];
-        ((int (*)())recordAddTransitiveDependencies)(alloc,loopIndex,pdVar15,in_r6);
-        puVar27 = extraout_r4_15;
+        ((int (*)())recordAddTransitiveDependencies)(alloc,loopIndex,scratchArg3,in_r6);
+        scratchArg2 = extraout_r4_15;
       }
       loopIndex = loopIndex + 1;
       tablePtr = tablePtr + 1;
     } while ((dword *)loopIndex != recordCount);
   }
-  piVar31 = outputCountOut;
-  if (((outputCountOut != (int *)0x0) && (piVar32 = outputListOut, outputListOut != (int *)0x0)) &&
+  scratchArg5 = outputCountOut;
+  if (((outputCountOut != (int *)0x0) && (scratchArg6 = outputListOut, outputListOut != (int *)0x0)) &&
      (*outputCountOut = 0, hasRecords)) {
-    puVar27 = alloc + 0x2114;
-    pdVar20 = (dword *)0x0;
-    pdVar15 = outRecordsOut;
+    scratchArg2 = alloc + 0x2114;
+    scratchArg8 = (dword *)0x0;
+    scratchArg3 = outRecordsOut;
     do {
-      if (*puVar27 != 0) {
+      if (*scratchArg2 != 0) {
         loopIndex = 0;
         remainingB = 4;
-        arenaB = pdVar15;
+        arenaB = scratchArg3;
         do {
           arenaCursor = *arenaB;
           arenaB = arenaB + 1;
@@ -4905,17 +4905,17 @@ LAB_0007da08:
           remainingB = remainingB + -1;
         } while (remainingB != 0);
         *outputCountOut = *outputCountOut + 1;
-        piVar31 = outputListOut;
-        piVar32 = outputCountOut;
+        scratchArg5 = outputListOut;
+        scratchArg6 = outputCountOut;
       }
-      pdVar20 = (dword *)((int)pdVar20 + 1);
-      puVar27 = puVar27 + 1;
-      pdVar15 = pdVar15 + 4;
+      scratchArg8 = (dword *)((int)scratchArg8 + 1);
+      scratchArg2 = scratchArg2 + 1;
+      scratchArg3 = scratchArg3 + 4;
       lastRecordIndexValue = recordCount;
-    } while (pdVar20 != recordCount);
+    } while (scratchArg8 != recordCount);
   }
   if ((*alloc & 0x100) == 0) {
-    status = ((int (*)())recordProgramAllocateAndEmit)(alloc,puVar27,pdVar15,in_r6,piVar31,piVar32,lastRecordIndexValue,pdVar20);
+    status = ((int (*)())recordProgramAllocateAndEmit)(alloc,scratchArg2,scratchArg3,in_r6,scratchArg5,scratchArg6,lastRecordIndexValue,scratchArg8);
     return status;
   }
   return 0;
