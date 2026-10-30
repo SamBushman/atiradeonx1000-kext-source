@@ -3058,7 +3058,9 @@ int pass_color_graph(colorGraph)
   int lowDegreeWorklists;
   int usedColorBits;
   int *classNodeCount;
-  undefined4 *puVar12;
+  undefined4 *bitsetCursor;
+  undefined4 *affinitySlotRef;
+  undefined4 *nodeSlotRef;
   int *elementRef;
   int *neighborElementRef;
   int programOrNodeRecord;
@@ -3138,13 +3140,13 @@ int pass_color_graph(colorGraph)
       allocation[1] = nodeIdOrBitsetWords;
       allocation[2] = programOrClassOffset;
       if (nodeIdOrBitsetWords != 0) {
-        puVar12 = bitsetData;
+        bitsetCursor = bitsetData;
         if (nodeIdOrBitsetWords == 0) {
           nodeIdOrBitsetWords = 1;
         }
         do {
-          puVar12[2] = 0;
-          puVar12 = puVar12 + 1;
+          bitsetCursor[2] = 0;
+          bitsetCursor = bitsetCursor + 1;
           nodeIdOrBitsetWords = nodeIdOrBitsetWords - 1;
         } while (nodeIdOrBitsetWords != 0);
       }
@@ -3202,12 +3204,12 @@ int pass_color_graph(colorGraph)
             _memset(nodeOrCount * 4 + elementDest[2],0,(nodeIdOrBitsetWords - nodeOrCount) * 4 + 4);
             elementDest[1] = nextIdOrAffinityIndex;
           }
-          puVar12 = (undefined4 *)(byteOffset + elementDest[2]);
+          nodeSlotRef = (undefined4 *)(byteOffset + elementDest[2]);
         }
         else {
-          puVar12 = (undefined4 *)Vector__elementRefGrow(elementDest,nodeIdOrBitsetWords);
+          nodeSlotRef = (undefined4 *)Vector__elementRefGrow(elementDest,nodeIdOrBitsetWords);
         }
-        arenaOrScratch = ((int (*)())ColorGraph__countSameClassNeighbors)(*puVar12,nodeIdOrBitsetWords,*(undefined4 *)(*(int *)(colorGraph + 0x28) + 0x45c),
+        arenaOrScratch = ((int (*)())ColorGraph__countSameClassNeighbors)(*nodeSlotRef,nodeIdOrBitsetWords,*(undefined4 *)(*(int *)(colorGraph + 0x28) + 0x45c),
                               colorGraph);
         *(undefined4 *)(classIndexOrNodeCount + 0xc) = arenaOrScratch;
         vectorHeader = *(uint **)(colorGraph + 4);
@@ -3483,13 +3485,13 @@ code_r0x001367c0:
               _memset(colorOrNextId * 4 + vectorHeader[2],0,(nextIdOrAffinityIndex - colorOrNextId) * 4 + 4);
               vectorHeader[1] = nextIdOrAffinityIndex + 1;
             }
-            puVar12 = (undefined4 *)(nextIdOrAffinityIndex * 4 + vectorHeader[2]);
+            affinitySlotRef = (undefined4 *)(nextIdOrAffinityIndex * 4 + vectorHeader[2]);
           }
           else {
-            puVar12 = (undefined4 *)Vector__elementRefGrow(vectorHeader,nextIdOrAffinityIndex);
+            affinitySlotRef = (undefined4 *)Vector__elementRefGrow(vectorHeader,nextIdOrAffinityIndex);
           }
           chunkOrBitsetOrCount = *(int *)(colorGraph + 0x28);
-          colorOrNextId = *(uint *)(*(int *)*puVar12 * 4 + *(int *)(chunkOrBitsetOrCount + 0x458));
+          colorOrNextId = *(uint *)(*(int *)*affinitySlotRef * 4 + *(int *)(chunkOrBitsetOrCount + 0x458));
           if ((-1 < (int)colorOrNextId) &&
              ((*(uint *)((colorOrNextId >> 3 & 0x1ffffffc) + *workSlot + 8) >> (colorOrNextId & 0x1f) & 1) == 0)) {
             *(int *)(chunkOrBitsetOrCount + 0x260) = *(int *)(chunkOrBitsetOrCount + 0x260) + 1;
@@ -4700,7 +4702,8 @@ int HwLimits__computeBlockLiveness(this, regCount, program, compiler)
   int alreadyDefined;
   int *srcWordPtr;
   int blockCount;
-  undefined4 *puVar11;
+  undefined4 *blocksArray;
+  undefined4 *bitsetClearCursor;
   undefined4 *blockListCursor;
   uint bitsetWordCount;
   int sourceIndex;
@@ -4725,11 +4728,11 @@ int HwLimits__computeBlockLiveness(this, regCount, program, compiler)
   while( true ) {
     blockCount = DList__count(program + 0x37c);
     if (blockCount < blockIndex) {
-      puVar11 = (undefined4 *)Program__getBlocksArray(program);
+      blocksArray = (undefined4 *)Program__getBlocksArray(program);
       do {
         liveInChangedAny = false;
         blockOrdinal = 1;
-        blockListCursor = puVar11;
+        blockListCursor = blocksArray;
         while( true ) {
           blockListCursor = blockListCursor + 1;
           blockCountNow = DList__count(program + 0x37c);
@@ -4830,14 +4833,14 @@ int HwLimits__computeBlockLiveness(this, regCount, program, compiler)
     allocation[1] = bitsetWordCount;
     allocation[2] = bitCount;
     if (bitsetHasWords) {
-      puVar11 = bitsetWords;
+      bitsetClearCursor = bitsetWords;
       zeroWordsLeft = bitsetWordCount;
       if (bitsetWordCount == 0) {
         zeroWordsLeft = 1;
       }
       do {
-        puVar11[2] = 0;
-        puVar11 = puVar11 + 1;
+        bitsetClearCursor[2] = 0;
+        bitsetClearCursor = bitsetClearCursor + 1;
         zeroWordsLeft = zeroWordsLeft - 1;
       } while (zeroWordsLeft != 0);
     }
@@ -4849,14 +4852,14 @@ int HwLimits__computeBlockLiveness(this, regCount, program, compiler)
     allocation[1] = bitsetWordCount;
     allocation[2] = bitCount;
     if (bitsetHasWords) {
-      puVar11 = bitsetWords;
+      bitsetClearCursor = bitsetWords;
       zeroWordsLeft = bitsetWordCount;
       if (bitsetWordCount == 0) {
         zeroWordsLeft = 1;
       }
       do {
-        puVar11[2] = 0;
-        puVar11 = puVar11 + 1;
+        bitsetClearCursor[2] = 0;
+        bitsetClearCursor = bitsetClearCursor + 1;
         zeroWordsLeft = zeroWordsLeft - 1;
       } while (zeroWordsLeft != 0);
     }
@@ -4868,14 +4871,14 @@ int HwLimits__computeBlockLiveness(this, regCount, program, compiler)
     allocation[1] = bitsetWordCount;
     allocation[2] = bitCount;
     if (bitsetHasWords) {
-      puVar11 = bitsetWords;
+      bitsetClearCursor = bitsetWords;
       zeroWordsLeft = bitsetWordCount;
       if (bitsetWordCount == 0) {
         zeroWordsLeft = 1;
       }
       do {
-        puVar11[2] = 0;
-        puVar11 = puVar11 + 1;
+        bitsetClearCursor[2] = 0;
+        bitsetClearCursor = bitsetClearCursor + 1;
         zeroWordsLeft = zeroWordsLeft - 1;
       } while (zeroWordsLeft != 0);
     }

@@ -4,21 +4,22 @@
 int IRInst__sourcesAreSameValue(inst)
   int inst;
 {
-  int iVar1;
+  int sourceQuery;
+  int operandNumber;
   int operandVReg;
   int operandVReg2;
   
-  if (((*(int *)(inst + 0x84) != 1) || (iVar1 = IRInst__getOperandSource(inst,1), iVar1 == 0)) &&
+  if (((*(int *)(inst + 0x84) != 1) || (sourceQuery = IRInst__getOperandSource(inst,1), sourceQuery == 0)) &&
      (1 < *(int *)(inst + 0x84))) {
-    iVar1 = 2;
+    operandNumber = 2;
     do {
-      operandVReg = IRInst__getOperandSource(inst,iVar1 + -1);
-      operandVReg2 = IRInst__getOperandSource(inst,iVar1);
-      if ((operandVReg != operandVReg2) || (operandVReg = IRInst__getOperandSource(inst,iVar1), operandVReg == 0)) {
+      operandVReg = IRInst__getOperandSource(inst,operandNumber + -1);
+      operandVReg2 = IRInst__getOperandSource(inst,operandNumber);
+      if ((operandVReg != operandVReg2) || (operandVReg = IRInst__getOperandSource(inst,operandNumber), operandVReg == 0)) {
         return 0;
       }
-      iVar1 = iVar1 + 1;
-    } while (iVar1 <= *(int *)(inst + 0x84));
+      operandNumber = operandNumber + 1;
+    } while (operandNumber <= *(int *)(inst + 0x84));
   }
   return 1;
 }
@@ -3406,69 +3407,75 @@ int Interpolator__vslot10(this, laneMask, program)
   unsigned int ghidra_home[8] = { this, laneMask, program, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   undefined4 *allocation;
   undefined4 specialRegister;
-  int iVar3;
+  int resultValue;
+  int newVRegId;
+  int exportOperandRecord;
+  int laneIndex;
   char *maskCursor;
-  int iVar5;
-  undefined4 uVar6;
+  int remaining;
+  int compiler;
+  undefined4 defaultSwizzle;
+  undefined4 newSource;
+  undefined4 vregPool;
   undefined4 *exportInst;
   
   (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = laneMask;
   if ((*(uint *)(program + 0x30) & 0x4000) == 0) {
     if (*(int *)(this + 0x30) == 0) {
-      iVar3 = *(int *)(this + 0x3c);
+      resultValue = *(int *)(this + 0x3c);
       if (*(int *)(this + 0x3c) == 0) {
-        iVar3 = this;
+        resultValue = this;
       }
     }
     else {
       if (*(int *)(*(int *)(this + 0x30) + 0x98) != 0x18) {
-        iVar3 = 0;
-        iVar5 = 4;
+        laneIndex = 0;
+        remaining = 4;
         maskCursor = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 4));
         do {
           if (*maskCursor == '\0') {
-            *(undefined1 *)(iVar3 + *(int *)(this + 0x30) + 0x9c) = 0;
+            *(undefined1 *)(laneIndex + *(int *)(this + 0x30) + 0x9c) = 0;
             if (*(int *)(this + 0x34) != 0) {
-              *(undefined1 *)(iVar3 + *(int *)(this + 0x34) + 0x9c) = 0;
+              *(undefined1 *)(laneIndex + *(int *)(this + 0x34) + 0x9c) = 0;
             }
           }
-          iVar3 = iVar3 + 1;
+          laneIndex = laneIndex + 1;
           maskCursor = maskCursor + 1;
-          iVar5 = iVar5 + -1;
-        } while (iVar5 != 0);
+          remaining = remaining + -1;
+        } while (remaining != 0);
       }
-      iVar3 = *(int *)(this + 0x3c);
+      resultValue = *(int *)(this + 0x3c);
     }
   }
   else {
-    iVar5 = *(int *)(program + 8);
-    arena = *(undefined4 *)(iVar5 + 0x374);
+    compiler = *(int *)(program + 8);
+    arena = *(undefined4 *)(compiler + 0x374);
     allocation = (undefined4 *)Arena__alloc(arena,0x168);
     exportInst = allocation + 1;
     *allocation = arena;
-    IRGeomExport__ctor_108770(exportInst,iVar5);
+    IRGeomExport__ctor_108770(exportInst,compiler);
     allocation[0x28] = (*(unsigned int *)((unsigned char *)ghidra_home + 4));
     allocation[0x51] = *(undefined4 *)(this + 8);
     allocation[0x50] = *(undefined4 *)(this + 4);
     specialRegister = VRegPool__findOrCreate(*(undefined4 *)(program + 0x3ac),0x2c,0,0);
     IRInst__setOperandRef(exportInst,0,specialRegister);
     IRInst__setOperandRef(exportInst,2,specialRegister);
-    uVar6 = DAT_001afeec;
-    iVar3 = IRInst__getOperandRecord(exportInst,2);
-    *(undefined4 *)(iVar3 + 0x10) = uVar6;
+    defaultSwizzle = DAT_001afeec;
+    exportOperandRecord = IRInst__getOperandRecord(exportInst,2);
+    *(undefined4 *)(exportOperandRecord + 0x10) = defaultSwizzle;
     ((int (*)())VReg__appendUser)(specialRegister,exportInst);
-    uVar6 = *(undefined4 *)(program + 0x3ac);
-    iVar3 = *(int *)(iVar5 + 0x3ac) + -1;
-    *(int *)(iVar5 + 0x3ac) = iVar3;
-    uVar6 = VRegPool__create(uVar6,0,iVar3,0);
-    *(undefined4 *)(this + 0x3c) = uVar6;
-    IRInst__setOperandRef(exportInst,1,uVar6);
+    vregPool = *(undefined4 *)(program + 0x3ac);
+    newVRegId = *(int *)(compiler + 0x3ac) + -1;
+    *(int *)(compiler + 0x3ac) = newVRegId;
+    newSource = VRegPool__create(vregPool,0,newVRegId,0);
+    *(undefined4 *)(this + 0x3c) = newSource;
+    IRInst__setOperandRef(exportInst,1,newSource);
     ((int (*)())VReg__addUse)(*(undefined4 *)(this + 0x3c),1,exportInst);
     ((int (*)())VReg__addUse)(specialRegister,2,exportInst);
     *(undefined4 **)(this + 0x30) = exportInst;
-    iVar3 = *(int *)(this + 0x3c);
+    resultValue = *(int *)(this + 0x3c);
   }
-  return iVar3;
+  return resultValue;
 }
 
 /* FUN_00123c08 @ 0x123c08 (984 bytes) */

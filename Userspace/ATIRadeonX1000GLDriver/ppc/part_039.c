@@ -2175,12 +2175,13 @@ int FUN_0012afe8(acceptFooterOnly, targetLoop, block, stopBlock)
 int FUN_0012b140(block)
   int *block;
 {
-  int iVar1;
+  int vtable;
+  int query;
   
-  iVar1 = *block;
+  vtable = *block;
   do {
-    iVar1 = (**(code **)(iVar1 + 0x2c))(block);
-    if (iVar1 == 0) {
+    query = (**(code **)(vtable + 0x2c))(block);
+    if (query == 0) {
       block = (int *)Block__getPredecessor(block,0);
     }
     else {
@@ -2191,19 +2192,19 @@ int FUN_0012b140(block)
         if (block == (int *)0x0) {
           return (int *)0x0;
         }
-        iVar1 = (**(code **)(*block + 0x24))(block);
-        if (iVar1 != 0) {
+        query = (**(code **)(*block + 0x24))(block);
+        if (query != 0) {
           return block;
         }
-        iVar1 = (**(code **)(*block + 0x28))(block);
-        if (iVar1 == 0) break;
+        query = (**(code **)(*block + 0x28))(block);
+        if (query == 0) break;
         block = (int *)Block__getPredecessor(block[0x4b],0);
       }
-      iVar1 = (**(code **)(*block + 0x34))(block);
-      if (iVar1 == 0) break;
+      query = (**(code **)(*block + 0x34))(block);
+      if (query == 0) break;
       block = (int *)Block__findSimplePredecessor(block[0x4b]);
     }
-    iVar1 = *block;
+    vtable = *block;
   } while( true );
 }
 
