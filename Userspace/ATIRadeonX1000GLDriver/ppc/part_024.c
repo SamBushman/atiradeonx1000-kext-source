@@ -532,11 +532,12 @@ int IRInst__isForwardable(inst, selectWord, compiler)
   undefined4 selectWord;
   int compiler;
 {
+  int queryResult;
   int hasSingleUse;
   int iVar1;
   
-  iVar1 = (**(code **)(*inst + 0x60))(inst,selectWord,compiler);
-  if (iVar1 != 0) {
+  queryResult = (**(code **)(*inst + 0x60))(inst,selectWord,compiler);
+  if (queryResult != 0) {
     hasSingleUse = IRInst__hasSingleUse(inst,*(undefined4 *)(compiler + COMP_currentProgram));
     if (hasSingleUse == 0) {
       return 0;

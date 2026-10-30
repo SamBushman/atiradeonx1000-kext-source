@@ -2313,8 +2313,8 @@ int ConstBank__storeIntLane(unusedArg1, registerKey, laneValue, lane, bank, useG
   int bank;
   int useGlobalList;
 {
-  int nextEntryOffset;
   uint uVar2;
+  int nextEntryOffset;
   int entryOffset;
   int *entryTable;
   int *entryCursor;
@@ -2376,8 +2376,8 @@ int ConstBank__storeBoolLane(unusedArg1, registerKey, laneValue, lane, bank, use
   int bank;
   int useGlobalList;
 {
-  int nextEntryOffset;
   uint uVar2;
+  int nextEntryOffset;
   int entryOffset;
   int *entryTable;
   int *entryCursor;
@@ -2776,14 +2776,14 @@ int FUN_000da438(targetObject, param_2)
   int targetObject;
   undefined4 *param_2;
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
+  undefined4 secondWord;
+  undefined4 thirdWord;
   
-  uVar2 = param_2[2];
-  uVar1 = param_2[1];
+  thirdWord = param_2[2];
+  secondWord = param_2[1];
   *(undefined4 *)(targetObject + 0x18) = *param_2;
-  *(undefined4 *)(targetObject + 0x20) = uVar2;
-  *(undefined4 *)(targetObject + 0x1c) = uVar1;
+  *(undefined4 *)(targetObject + 0x20) = thirdWord;
+  *(undefined4 *)(targetObject + 0x1c) = secondWord;
   return;
 }
 

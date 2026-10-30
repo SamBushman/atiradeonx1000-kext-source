@@ -23,10 +23,10 @@ int Block__splitOutgoingEdge(block, successor, newBlock)
   int loopCounterB;
   int loopCounter;
   uint loopIndex;
-  int iVar1;
+  int predecessorEntry;
   int *successorSlot;
-  int iVar3;
-  uint uVar4;
+  int newBlockPredecessorEntry;
+  uint vectorSize;
   int successorPredecessors;
   int loopCounterC;
   uint loopIndex2;
@@ -39,9 +39,9 @@ int Block__splitOutgoingEdge(block, successor, newBlock)
     if (*(int *)(loopCounterB + successorVector[2]) != 0) {
       if (successor == *(int *)(loopCounterB + successorVector[2])) {
         if (loopIndex2 < *successorVector) {
-          uVar4 = successorVector[1];
-          if (uVar4 <= loopIndex2) {
-            _memset(uVar4 * 4 + successorVector[2],0,(loopIndex2 - uVar4) * 4 + 4);
+          vectorSize = successorVector[1];
+          if (vectorSize <= loopIndex2) {
+            _memset(vectorSize * 4 + successorVector[2],0,(loopIndex2 - vectorSize) * 4 + 4);
             successorVector[1] = loopIndex2 + 1;
           }
           successorSlot = (int *)(loopIndex2 * 4 + successorVector[2]);
@@ -70,16 +70,16 @@ LAB_000e9874:
           Block__appendPredecessor(newBlock,block);
           return;
         }
-        iVar3 = *(int *)(*(int *)(*(int *)(newBlock + 0xd4) + 8) + loopCounterB);
-        if ((iVar3 != 0) && (block == iVar3)) break;
+        newBlockPredecessorEntry = *(int *)(*(int *)(*(int *)(newBlock + 0xd4) + 8) + loopCounterB);
+        if ((newBlockPredecessorEntry != 0) && (block == newBlockPredecessorEntry)) break;
         loopIndex = loopIndex + 1;
         loopCounterB = loopCounterB + 4;
       }
       return;
     }
-    iVar1 = *(int *)(*(int *)(successorPredecessors + 8) + loopCounterC);
-    if (iVar1 != 0) {
-      if (block == iVar1) {
+    predecessorEntry = *(int *)(*(int *)(successorPredecessors + 8) + loopCounterC);
+    if (predecessorEntry != 0) {
+      if (block == predecessorEntry) {
         Vector__removeAt(successorPredecessors,loopCounter);
         goto LAB_000e9874;
       }
@@ -110,10 +110,10 @@ int Block__splitIncomingEdge(block, predecessor, newBlock)
   int loopCounterB;
   int loopCounter;
   uint loopIndex;
-  int iVar1;
+  int successorEntry;
   int *predecessorSlot;
-  int iVar3;
-  uint uVar4;
+  int newBlockSuccessorEntry;
+  uint vectorSize;
   int predecessorSuccessors;
   int loopCounterC;
   uint loopIndex2;
@@ -126,9 +126,9 @@ int Block__splitIncomingEdge(block, predecessor, newBlock)
     if (*(int *)(loopCounterB + predecessorVector[2]) != 0) {
       if (predecessor == *(int *)(loopCounterB + predecessorVector[2])) {
         if (loopIndex2 < *predecessorVector) {
-          uVar4 = predecessorVector[1];
-          if (uVar4 <= loopIndex2) {
-            _memset(uVar4 * 4 + predecessorVector[2],0,(loopIndex2 - uVar4) * 4 + 4);
+          vectorSize = predecessorVector[1];
+          if (vectorSize <= loopIndex2) {
+            _memset(vectorSize * 4 + predecessorVector[2],0,(loopIndex2 - vectorSize) * 4 + 4);
             predecessorVector[1] = loopIndex2 + 1;
           }
           predecessorSlot = (int *)(loopIndex2 * 4 + predecessorVector[2]);
@@ -157,16 +157,16 @@ LAB_000e9a40:
           Block__appendSuccessor(newBlock,block);
           return;
         }
-        iVar3 = *(int *)(*(int *)(*(int *)(newBlock + 0xd0) + 8) + loopCounterB);
-        if ((iVar3 != 0) && (block == iVar3)) break;
+        newBlockSuccessorEntry = *(int *)(*(int *)(*(int *)(newBlock + 0xd0) + 8) + loopCounterB);
+        if ((newBlockSuccessorEntry != 0) && (block == newBlockSuccessorEntry)) break;
         loopIndex = loopIndex + 1;
         loopCounterB = loopCounterB + 4;
       }
       return;
     }
-    iVar1 = *(int *)(*(int *)(predecessorSuccessors + 8) + loopCounterC);
-    if (iVar1 != 0) {
-      if (block == iVar1) {
+    successorEntry = *(int *)(*(int *)(predecessorSuccessors + 8) + loopCounterC);
+    if (successorEntry != 0) {
+      if (block == successorEntry) {
         Vector__removeAt(predecessorSuccessors,loopCounter);
         goto LAB_000e9a40;
       }

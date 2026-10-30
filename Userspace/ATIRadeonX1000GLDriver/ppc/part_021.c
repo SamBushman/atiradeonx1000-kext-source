@@ -708,8 +708,10 @@ int Compiler__compileWithRetry(compiler, result, request, requestFlags, compileI
   undefined4 requestFlags;
   undefined4 compileInput;
 {
-  int iVar1;
-  int iVar2;
+  int retryState;
+  int parsedRequest;
+  int setjmpResult;
+  int retryHandled;
   int iStack00000018;
   int iStack0000001c;
   undefined4 uStack00000020;
@@ -722,14 +724,14 @@ int Compiler__compileWithRetry(compiler, result, request, requestFlags, compileI
   uStack00000024 = requestFlags;
   FUN_000e0ca8(compiler);
   do {
-    iVar1 = _setjmp(*(undefined4 *)(iStack00000018 + 4));
-    if (iVar1 == 0) {
+    setjmpResult = _setjmp(*(undefined4 *)(iStack00000018 + 4));
+    if (setjmpResult == 0) {
       ((int (*)())Compiler__resetState)(iStack00000018);
       Compiler__applyRequestFlags(iStack00000018,uStack00000024);
-      iVar1 = FUN_00193c00(uStack00000020,iStack00000018);
+      parsedRequest = FUN_00193c00(uStack00000020,iStack00000018);
       *(int *)(iStack00000018 + 0x524) = iStack0000001c;
-      if ((*(uint *)(iVar1 + 4) & 4) == 0) {
-        if ((*(uint *)(iVar1 + 4) & 2) == 0) {
+      if ((*(uint *)(parsedRequest + 4) & 4) == 0) {
+        if ((*(uint *)(parsedRequest + 4) & 2) == 0) {
           *(undefined4 *)(iStack0000001c + 0xf8) = 2;
         }
         else {
@@ -741,21 +743,21 @@ int Compiler__compileWithRetry(compiler, result, request, requestFlags, compileI
       }
       *(undefined4 *)(iStack0000001c + 0xfc) =
            *(undefined4 *)(*(int *)(iStack00000018 + 0x398) + 0x28);
-      ((int (*)())Compiler__compileStages)(iStack00000018,iVar1);
-      if (iVar1 != 0) {
-        FUN_00193be8(iVar1);
-        Arena__free(*(undefined4 *)(iVar1 + -4),iVar1 + -4);
+      ((int (*)())Compiler__compileStages)(iStack00000018,parsedRequest);
+      if (parsedRequest != 0) {
+        FUN_00193be8(parsedRequest);
+        Arena__free(*(undefined4 *)(parsedRequest + -4),parsedRequest + -4);
       }
     }
     *(undefined4 *)(iStack00000018 + 0x4d8) = 0;
     *(undefined4 *)(iStack00000018 + 0x484) = 0;
     *(undefined4 *)(iStack00000018 + 0x4d4) = 0;
     *(undefined4 *)(iStack00000018 + 0x488) = 0;
-    iVar1 = *(int *)(iStack00000018 + 0x314);
+    retryState = *(int *)(iStack00000018 + 0x314);
     FUN_000e0e28(iStack00000018);
     ((int (*)())Compiler__releaseChipAndPools)(iStack00000018,0);
-  } while ((iVar1 != 0) && (iVar2 = ((int (*)())FUN_000e161c)(iStack00000018,iVar1), iVar2 != 0));
-  return iVar1;
+  } while ((retryState != 0) && (retryHandled = ((int (*)())FUN_000e161c)(iStack00000018,retryState), retryHandled != 0));
+  return retryState;
 }
 
 /* Compiler__compile @ 0xe2668 (280 bytes) */
@@ -768,7 +770,9 @@ int Compiler__compile(compiler, shader, sourceA, sourceB, optionsArg, unusedArg6
   undefined4 unusedArg6;
   undefined4 emitContext;
 {
-  int iVar1;
+  int retryState;
+  int parsedRequest;
+  int setjmpResult;
   int retryHandled;
   int iStack00000018;
   int iStack0000001c;
@@ -784,30 +788,30 @@ int Compiler__compile(compiler, shader, sourceA, sourceB, optionsArg, unusedArg6
   uStack00000028 = optionsArg;
   FUN_000e0ca8(compiler);
   do {
-    iVar1 = _setjmp(*(undefined4 *)(iStack00000018 + 4));
-    if (iVar1 == 0) {
+    setjmpResult = _setjmp(*(undefined4 *)(iStack00000018 + 4));
+    if (setjmpResult == 0) {
       ((int (*)())Compiler__resetState)(iStack00000018);
       Compiler__applyRequestFlags(iStack00000018,uStack00000028);
-      iVar1 = FUN_00193b3c(uStack00000020,uStack00000024,iStack00000018);
+      parsedRequest = FUN_00193b3c(uStack00000020,uStack00000024,iStack00000018);
       *(int *)(iStack00000018 + 0x524) = iStack0000001c;
       *(undefined4 *)(iStack0000001c + 0xf8) = 0;
       *(undefined4 *)(iStack0000001c + 0xfc) =
            *(undefined4 *)(*(int *)(iStack00000018 + 0x398) + 0x28);
-      ((int (*)())Compiler__compileStages)(iStack00000018,iVar1);
-      if (iVar1 != 0) {
-        FUN_00193be8(iVar1);
-        Arena__free(*(undefined4 *)(iVar1 + -4),iVar1 + -4);
+      ((int (*)())Compiler__compileStages)(iStack00000018,parsedRequest);
+      if (parsedRequest != 0) {
+        FUN_00193be8(parsedRequest);
+        Arena__free(*(undefined4 *)(parsedRequest + -4),parsedRequest + -4);
       }
     }
     *(undefined4 *)(iStack00000018 + 0x4d8) = 0;
     *(undefined4 *)(iStack00000018 + 0x484) = 0;
     *(undefined4 *)(iStack00000018 + 0x4d4) = 0;
     *(undefined4 *)(iStack00000018 + 0x488) = 0;
-    iVar1 = *(int *)(iStack00000018 + 0x314);
+    retryState = *(int *)(iStack00000018 + 0x314);
     FUN_000e0e28(iStack00000018);
     ((int (*)())Compiler__releaseChipAndPools)(iStack00000018,0);
-  } while ((iVar1 != 0) && (retryHandled = ((int (*)())FUN_000e161c)(iStack00000018,iVar1), retryHandled != 0));
-  return iVar1;
+  } while ((retryState != 0) && (retryHandled = ((int (*)())FUN_000e161c)(iStack00000018,retryState), retryHandled != 0));
+  return retryState;
 }
 
 /* MachineCodeWriter__accumulateStats @ 0xe2780 (140 bytes) */
@@ -898,14 +902,14 @@ int FUN_000e2a04(param_1, param_2)
   int param_1;
   undefined4 param_2;
 {
-  int iVar1;
+  int cachedId;
   
-  iVar1 = *(int *)(param_1 + 0x30);
-  if (iVar1 < 0) {
-    iVar1 = FUN_00130690(*(undefined4 *)(param_1 + 0x34),param_2);
-    *(int *)(param_1 + 0x30) = iVar1;
+  cachedId = *(int *)(param_1 + 0x30);
+  if (cachedId < 0) {
+    cachedId = FUN_00130690(*(undefined4 *)(param_1 + 0x34),param_2);
+    *(int *)(param_1 + 0x30) = cachedId;
   }
-  return iVar1;
+  return cachedId;
 }
 
 /* moduloDifference @ 0xe2a44 (16 bytes) */

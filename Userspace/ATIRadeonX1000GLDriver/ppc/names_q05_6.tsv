@@ -2643,3 +2643,34 @@ use	FUN_000fd5c8	puVar9	resourceOperandTable	INFERRED	static table PTR_DAT_001e8
 use	FUN_000fd5c8	puVar9	resourceOperandTable	INFERRED	static table PTR_DAT_001e8b8c indexed by lane for the resource operand words	^\s*uVar50\ =\ \*\(undefined4\ \*\)\(puVar9\ \+\ iVar34\);$	+1
 use	FUN_000fd5c8	iVar25	operandByteLimit	INFERRED	OpcodeRecord__getOperandByte result: upper bound of the operand lane loop	^\s*int\ iVar25;$	+1
 use	FUN_000fd5c8	iVar25	operandByteLimit	INFERRED	OpcodeRecord__getOperandByte result: upper bound of the operand lane loop	^\s*for\ \(iVar23\ =\ 0;$	+3
+use	Compiler__compileWithRetry	iVar1	setjmpResult	INFERRED	_setjmp result of the compiler's jump buffer: nonzero means a compile failure was raised	^\s*iVar1\ =\ _setjmp\(\*\(undefined4\ \*\)\(iStack00000018\ \+\ 4\)\);$	^\s*\(\(int\ \(\*\)\(\)\)FUN_000e1888\)\(iStack00000018\);$	all	none
+use	Compiler__compileWithRetry	iVar1	parsedRequest	INFERRED	parsed compile request (FUN_00193b3c/00193c00) passed to Compiler__compileStages and released afterwards	^\s*iVar1\ =\ FUN_00193c00\(uStack00000020,iStack00000018\);$	^\s*\*\(undefined4\ \*\)\(iStack00000018\ \+\ 0x4d8\)\ =\ 0;$	all	none
+use	Compiler__compileWithRetry	iVar1	retryState	INFERRED	compiler+0x314: failure/retry state read after the attempt; returned	^\s*iVar1\ =\ \*\(int\ \*\)\(iStack00000018\ \+\ 0x314\);$	^\s*\}$	all	none
+use	Compiler__compile	iVar1	setjmpResult	INFERRED	_setjmp result of the compiler's jump buffer: nonzero means a compile failure was raised	^\s*iVar1\ =\ _setjmp\(\*\(undefined4\ \*\)\(iStack00000018\ \+\ 4\)\);$	^\s*\(\(int\ \(\*\)\(\)\)FUN_000e1888\)\(iStack00000018\);$	all	none
+use	Compiler__compile	iVar1	parsedRequest	INFERRED	parsed compile request (FUN_00193b3c/00193c00) passed to Compiler__compileStages and released afterwards	^\s*iVar1\ =\ FUN_00193b3c\(uStack00000020,uStack00000024,iStack00000018\);$	^\s*\}$	all	none
+use	Compiler__compile	iVar1	retryState	INFERRED	compiler+0x314: failure/retry state read after the attempt; returned	^\s*iVar1\ =\ \*\(int\ \*\)\(iStack00000018\ \+\ 0x314\);$	^\s*\}$	all	none
+use	Compiler__compileWithRetry	iVar2	retryHandled	INFERRED	FUN_000e161c result: nonzero repeats the compile loop	^\s*\}\ while\ \(\(iVar1\ !=\ 0\)\ \&\&\ \(iVar2\ =\ \(\(int\ \(\*\)\(\)\)FUN_000e161c\)\(iStack00000018,iVar1\),\ iVar2\ !=\ 0\)\);$	+1
+use	IRInst__isForwardable	iVar1	queryResult	INFERRED	scratch for the successive boolean queries (vtable +0x60, FUN_0010c47c, hasSingleUse, hardware vtable +0x44, areCompatible, FUN_000ecb90)	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0x60\)\)\(param_1,param_2,param_3\);$	+2
+local	SelectWord__markEqualLanes	cVar1	laneB	INFERRED	lane byte of selectWordB
+local	SelectWord__markEqualLanes	pcVar2	laneBCursor	INFERRED	cursor over the four lane bytes of selectWordB
+local	SelectWord__markEqualLanes	pcVar3	laneACursor	INFERRED	cursor over the four lane bytes of selectWordA (rewritten in place)
+local	SelectWord__fillUnusedWithFirstUsed	pcVar1	scanCursor	INFERRED	cursor searching the first used lane (byte != 4)
+local	SelectWord__fillUnusedWithFirstUsed	pcVar2	fillCursor	INFERRED	cursor over the lane bytes whose unused entries take the first used lane's byte
+local	laneBytes__clearSetLanes	param_1	outMask	INFERRED	receives DAT_001aa838 with the bytes of lanes whose laneBytes entry is non-zero cleared
+local	laneBytes__clearSetLanes	pcVar1	laneCursor	INFERRED	cursor over the four lane bytes
+local	SelectWord__fillUnusedLanes	param_1	outSelect	INFERRED	receives selectA with its unused lanes filled from selectB
+local	SelectWord__fillUnusedLanes	pcVar1	laneACursor	INFERRED	cursor over the lane bytes of selectA
+local	SelectWord__fillUnusedLanes	pcVar2	laneBCursor	INFERRED	cursor over the lane bytes of selectB
+local	FUN_000f32cc	param_2	selectWord	INFERRED	select word whose used lanes clear the matching result bytes
+local	FUN_000f32cc	uVar1	laneComponent	INFERRED	component selected by the lane
+local	SelectWord__readMask	param_2	selectWord	INFERRED	select word whose selected components are marked
+local	SelectWord__readMask	uVar1	laneComponent	INFERRED	component selected by the lane
+local	Block__splitOutgoingEdge	iVar1	predecessorEntry	INFERRED	entry of successor's predecessor vector under comparison with block
+local	Block__splitOutgoingEdge	iVar3	newBlockPredecessorEntry	INFERRED	entry of newBlock's predecessor vector under comparison with block
+local	Block__splitOutgoingEdge	uVar4	vectorSize	INFERRED	element count of the successor vector before zero-fill
+local	Block__splitIncomingEdge	iVar1	successorEntry	INFERRED	entry of predecessor's successor vector under comparison with block
+local	Block__splitIncomingEdge	iVar3	newBlockSuccessorEntry	INFERRED	entry of newBlock's successor vector under comparison with block
+local	Block__splitIncomingEdge	uVar4	vectorSize	INFERRED	element count of the predecessor vector before zero-fill
+local	FUN_000e2a04	iVar1	cachedId	INFERRED	value cached at param_1+0x30, computed by FUN_00130690 on first use (negative = unset)
+local	FUN_000da438	uVar1	secondWord	INFERRED	param_2[1]
+local	FUN_000da438	uVar2	thirdWord	INFERRED	param_2[2]
