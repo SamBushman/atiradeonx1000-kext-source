@@ -116,100 +116,100 @@ int Inst__writtenLanesAllMatchValue(valueKey, value, row)
 }
 
 /* FUN_001770e4 @ 0x1770e4 (204 bytes) */
-int FUN_001770e4(param_1, param_2, param_3)
-  undefined4 *param_1;
-  int param_2;
-  int param_3;
+int FUN_001770e4(resultOut, ctx, sourceIndex)
+  undefined4 *resultOut;
+  int ctx;
+  int sourceIndex;
 {
-  bool bVar1;
-  bool bVar2;
-  bool bVar3;
+  bool commonIsExpr;
+  bool noLaneSeen;
+  bool notLastLane;
   int operandRecord;
   undefined4 *exprRecord;
-  int iVar6;
+  int commonValueNumber;
   int loopIndex;
   int *loopPtr2;
   
-  iVar6 = 0;
-  bVar1 = false;
-  bVar2 = true;
-  loopPtr2 = (int *)(param_3 * 0x10 + param_2 + 0x168);
+  commonValueNumber = 0;
+  commonIsExpr = false;
+  noLaneSeen = true;
+  loopPtr2 = (int *)(sourceIndex * 0x10 + ctx + 0x168);
   loopIndex = 0;
   do {
-    operandRecord = IRInst__getOperandRecord(*(undefined4 *)(param_2 + 0xb0),0);
+    operandRecord = IRInst__getOperandRecord(*(undefined4 *)(ctx + 0xb0),0);
     if (*(char *)(loopIndex + operandRecord + 0x10) != '\x01') {
-      if (bVar2) {
-        iVar6 = *loopPtr2;
-        bVar1 = iVar6 < 0;
-        bVar2 = iVar6 == 0;
+      if (noLaneSeen) {
+        commonValueNumber = *loopPtr2;
+        commonIsExpr = commonValueNumber < 0;
+        noLaneSeen = commonValueNumber == 0;
       }
-      else if (*loopPtr2 != iVar6) goto LAB_00177184;
+      else if (*loopPtr2 != commonValueNumber) goto LAB_00177184;
     }
-    bVar3 = loopIndex != 3;
+    notLastLane = loopIndex != 3;
     loopPtr2 = loopPtr2 + 1;
     loopIndex = loopIndex + 1;
-  } while (bVar3);
-  if (bVar1) {
-    exprRecord = (undefined4 *)Compiler__exprRecordForValueNumber(*(undefined4 *)(param_2 + 0x238),iVar6);
-    *param_1 = *exprRecord;
+  } while (notLastLane);
+  if (commonIsExpr) {
+    exprRecord = (undefined4 *)Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),commonValueNumber);
+    *resultOut = *exprRecord;
   }
   else {
 LAB_00177184:
-    *param_1 = 0x7ffffffe;
+    *resultOut = 0x7ffffffe;
   }
-  return param_1;
+  return resultOut;
 }
 
 /* FUN_001771b0 @ 0x1771b0 (236 bytes) */
-int FUN_001771b0(param_1)
-  int *param_1;
+int FUN_001771b0(ctx)
+  int *ctx;
 {
   int operandRecord;
-  bool bVar1;
-  int iVar2;
+  bool lastLane;
+  int rangeClass;
   float *exprRecord;
-  int iVar4;
+  int ptrSetEntry;
   int loopIndex;
   int *loopPtr2;
   
   loopIndex = 0;
-  loopPtr2 = param_1;
+  loopPtr2 = ctx;
   do {
-    operandRecord = IRInst__getOperandRecord(param_1[0x2c],0);
+    operandRecord = IRInst__getOperandRecord(ctx[0x2c],0);
     if (*(char *)(loopIndex + operandRecord + 0x10) != '\x01') {
       if ((float *)loopPtr2[0xc] == (float *)0x0) {
-        iVar2 = *loopPtr2;
-        if (iVar2 < 0) {
-          exprRecord = (float *)Compiler__exprRecordForValueNumber(param_1[0x8e],iVar2);
-          iVar2 = ((undefined4 (*)())classifyConstantRange)((double)*exprRecord);
+        rangeClass = *loopPtr2;
+        if (rangeClass < 0) {
+          exprRecord = (float *)Compiler__exprRecordForValueNumber(ctx[0x8e],rangeClass);
+          rangeClass = ((undefined4 (*)())classifyConstantRange)((double)*exprRecord);
         }
         else {
-          iVar4 = loopPtr2[0x10];
-          if (iVar4 == 0) {
-            if (iVar2 < 1) {
-              iVar2 = 0;
+          ptrSetEntry = loopPtr2[0x10];
+          if (ptrSetEntry == 0) {
+            if (rangeClass < 1) {
+              rangeClass = 0;
               goto LAB_00177254;
             }
-            iVar4 = Compiler__findInPtrSet(param_1[0x8e],iVar2);
+            ptrSetEntry = Compiler__findInPtrSet(ctx[0x8e],rangeClass);
           }
-          iVar2 = *(int *)(iVar4 + 0x10);
+          rangeClass = *(int *)(ptrSetEntry + 0x10);
         }
       }
       else {
-        iVar2 = ((undefined4 (*)())classifyConstantRange)((double)*(float *)loopPtr2[0xc]);
+        rangeClass = ((undefined4 (*)())classifyConstantRange)((double)*(float *)loopPtr2[0xc]);
       }
 LAB_00177254:
-      if (*(int *)(param_1[0x2c] + 0x120) == 0) {
-        loopPtr2[0x14] = iVar2;
+      if (*(int *)(ctx[0x2c] + 0x120) == 0) {
+        loopPtr2[0x14] = rangeClass;
       }
       else {
-        loopPtr2[0x14] = (DAT_001e6158)[iVar2];
+        loopPtr2[0x14] = (DAT_001e6158)[rangeClass];
       }
     }
-    bVar1 = loopIndex == 3;
+    lastLane = loopIndex == 3;
     loopPtr2 = loopPtr2 + 1;
     loopIndex = loopIndex + 1;
-    if (bVar1) {
+    if (lastLane) {
       return;
     }
   } while( true );
@@ -780,36 +780,36 @@ int FUN_001781a4(resultOut, valueKey, changedOut)
   int operandCount;
   int *loopPtr;
   int laneInputOffset;
-  int loopCounter;
+  int loopRemaining;
   undefined4 laneInputs [6];
   int operandLaneSelect [6];
   float scaledResult;
   float clampedResult [2];
   
-  loopCounter = 5;
+  loopRemaining = 5;
   *resultOut = GH_U2F(0x7fff0000U);
   loopPtr2 = laneInputs;
   do {
     *loopPtr2 = 0x7ffffffe;
     loopPtr2 = loopPtr2 + 1;
-    loopCounter = loopCounter + -1;
-  } while (loopCounter != 0);
+    loopRemaining = loopRemaining + -1;
+  } while (loopRemaining != 0);
   loopPtr = operandLaneSelect;
   laneInputOffset = 4;
-  for (loopCounter = 1;
+  for (loopRemaining = 1;
       operandCount = (**(code **)(**(int **)(valueKey + 0xb0) + 0x14))(*(int **)(valueKey + 0xb0)),
-      loopCounter <= operandCount; loopCounter = loopCounter + 1) {
+      loopRemaining <= operandCount; loopRemaining = loopRemaining + 1) {
     instFlagBit2Result = OpcodeTraits__instFlagBit2(*(undefined4 *)(valueKey + 0x238),*(undefined4 *)(valueKey + 0xb0));
     if (instFlagBit2Result == 0) {
       *loopPtr = 0;
     }
-    else if (loopCounter == 2) {
+    else if (loopRemaining == 2) {
       operandLaneSelect[1] = 0;
     }
-    else if (loopCounter == 3) {
+    else if (loopRemaining == 3) {
       operandLaneSelect[2] = 1;
     }
-    else if (loopCounter == 1) {
+    else if (loopRemaining == 1) {
       operandLaneSelect[0] = 3;
     }
     operandCount = *loopPtr;
@@ -2009,43 +2009,43 @@ int FUN_00179f38(ctx, param_2)
 }
 
 /* FUN_0017a034 @ 0x17a034 (252 bytes) */
-int FUN_0017a034(ctx, param_2)
+int FUN_0017a034(ctx, lane)
   int ctx;
-  int param_2;
+  int lane;
 {
   undefined4 findInPtrSetResult;
   undefined4 exprRecordForValueNumberResult;
-  undefined4 uVar1;
-  uint uVar2;
+  undefined4 result;
+  uint selectedOperandFlags;
   float *exprRecord2;
   float *exprRecord;
   int iVar5;
   int member0xb0;
-  int iVar7;
+  int laneBase;
   
-  iVar7 = param_2 * 4 + ctx;
-  uVar1 = 0;
-  if (*(int *)(iVar7 + 0x178) < 0) {
-    exprRecord2 = (float *)Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),*(int *)(iVar7 + 0x178));
+  laneBase = lane * 4 + ctx;
+  result = 0;
+  if (*(int *)(laneBase + 0x178) < 0) {
+    exprRecord2 = (float *)Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),*(int *)(laneBase + 0x178));
     exprRecord = (float *)Compiler__valueNumberForExpr(*(undefined4 *)(ctx + 0x238),0);
     iVar5 = ((bool (*)())evaluateCompareFloats)(*(undefined4 *)(ctx + 0xb0),(double)*exprRecord2,(double)*exprRecord);
     member0xb0 = *(int *)(ctx + 0xb0);
     iVar5 = (iVar5 == 0) + 2;
     if ((((*(int *)(member0xb0 + 0x120) == 0) && (*(int *)(member0xb0 + 0x124) == 0)) &&
-        (uVar2 = *(uint *)(iVar5 * 0x18 + member0xb0 + 0xa0), (uVar2 & 1) == 0)) && ((uVar2 & 2) == 0)) {
-      iVar5 = *(int *)((iVar5 * 4 + param_2) * 4 + ctx + 0x168);
+        (selectedOperandFlags = *(uint *)(iVar5 * 0x18 + member0xb0 + 0xa0), (selectedOperandFlags & 1) == 0)) && ((selectedOperandFlags & 2) == 0)) {
+      iVar5 = *(int *)((iVar5 * 4 + lane) * 4 + ctx + 0x168);
       if (iVar5 < 0) {
         exprRecordForValueNumberResult = Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),iVar5);
-        *(undefined4 *)(iVar7 + 0x30) = exprRecordForValueNumberResult;
+        *(undefined4 *)(laneBase + 0x30) = exprRecordForValueNumberResult;
         return 1;
       }
       findInPtrSetResult = Compiler__findInPtrSet(*(undefined4 *)(ctx + 0x238),iVar5);
-      *(undefined4 *)(iVar7 + 0x40) = findInPtrSetResult;
+      *(undefined4 *)(laneBase + 0x40) = findInPtrSetResult;
       return 1;
     }
-    uVar1 = 1;
+    result = 1;
   }
-  return uVar1;
+  return result;
 }
 
 /* FUN_0017a130 @ 0x17a130 (284 bytes) */
@@ -2658,50 +2658,50 @@ int FUN_0017ae28(ctx, operandIndex, param_3, param_4, negateFlag, absFlag, compi
 }
 
 /* FUN_0017af58 @ 0x17af58 (200 bytes) */
-int FUN_0017af58(param_1, param_2, param_3)
-  undefined4 *param_1;
-  int param_2;
-  int param_3;
+int FUN_0017af58(resultOut, ctx, sourceIndex)
+  undefined4 *resultOut;
+  int ctx;
+  int sourceIndex;
 {
-  bool bVar1;
-  bool bVar2;
+  bool commonIsExpr;
+  bool noLaneSeen;
   int loopIndex;
   int loopRemaining;
   undefined4 *exprRecord;
-  int iVar6;
+  int commonValueNumber;
   int *loopPtr2;
-  undefined4 local_28 [6];
+  undefined4 writeMaskWord [6];
   
-  loopPtr2 = (int *)(param_3 * 0x10 + param_2 + 0x168);
-  loopRemaining = IRInst__getOperandRecord(*(undefined4 *)(param_2 + 0xb0),0);
-  iVar6 = 0;
-  bVar1 = false;
-  bVar2 = true;
+  loopPtr2 = (int *)(sourceIndex * 0x10 + ctx + 0x168);
+  loopRemaining = IRInst__getOperandRecord(*(undefined4 *)(ctx + 0xb0),0);
+  commonValueNumber = 0;
+  commonIsExpr = false;
+  noLaneSeen = true;
   loopIndex = 0;
-  local_28[0] = *(undefined4 *)(loopRemaining + 0x10);
+  writeMaskWord[0] = *(undefined4 *)(loopRemaining + 0x10);
   loopRemaining = 4;
   do {
-    if (*(char *)((int)local_28 + loopIndex) != '\x01') {
-      if (bVar2) {
-        iVar6 = *loopPtr2;
-        bVar1 = iVar6 < 0;
-        bVar2 = iVar6 == 0;
+    if (*(char *)((int)writeMaskWord + loopIndex) != '\x01') {
+      if (noLaneSeen) {
+        commonValueNumber = *loopPtr2;
+        commonIsExpr = commonValueNumber < 0;
+        noLaneSeen = commonValueNumber == 0;
       }
-      else if (*loopPtr2 != iVar6) goto LAB_0017affc;
+      else if (*loopPtr2 != commonValueNumber) goto LAB_0017affc;
     }
     loopIndex = loopIndex + 1;
     loopPtr2 = loopPtr2 + 1;
     loopRemaining = loopRemaining + -1;
   } while (loopRemaining != 0);
-  if (bVar1) {
-    exprRecord = (undefined4 *)Compiler__exprRecordForValueNumber(*(undefined4 *)(param_2 + 0x238),iVar6);
-    *param_1 = *exprRecord;
+  if (commonIsExpr) {
+    exprRecord = (undefined4 *)Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),commonValueNumber);
+    *resultOut = *exprRecord;
   }
   else {
 LAB_0017affc:
-    *param_1 = 0x7ffffffe;
+    *resultOut = 0x7ffffffe;
   }
-  return param_1;
+  return resultOut;
 }
 
 /* FUN_0017b020 @ 0x17b020 (268 bytes) */

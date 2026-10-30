@@ -356,58 +356,58 @@ int ValueKey__replaceWithSource2IfSourcesEqual23(ctx)
 int FUN_0017c4a4(ctx)
   int ctx;
 {
-  uint uVar1;
-  uint uVar2;
+  uint word0xe8Bit0;
+  uint word0xd0Bit0;
   int *a0;
-  int iVar3;
+  int inst;
   undefined4 mask;
   
   a0 = *(int **)(*(int *)(ctx + 0x238) + 0x30c);
-  iVar3 = (**(code **)(*a0 + 0x88))(a0);
-  if (((iVar3 == 0) || (iVar3 = Inst__allWrittenLanesSatisfy(ctx,2,3), iVar3 == 0)) ||
-     (iVar3 = Inst__allWrittenLanesSatisfy(ctx,1,3), iVar3 == 0)) {
+  inst = (**(code **)(*a0 + 0x88))(a0);
+  if (((inst == 0) || (inst = Inst__allWrittenLanesSatisfy(ctx,2,3), inst == 0)) ||
+     (inst = Inst__allWrittenLanesSatisfy(ctx,1,3), inst == 0)) {
     return 0;
   }
-  iVar3 = *(int *)(ctx + 0xb0);
-  if ((*(uint *)(iVar3 + 0xb8) & 2) != 0) {
+  inst = *(int *)(ctx + 0xb0);
+  if ((*(uint *)(inst + 0xb8) & 2) != 0) {
     return 0;
   }
-  if ((*(uint *)(iVar3 + 0xd0) & 2) != 0) {
+  if ((*(uint *)(inst + 0xd0) & 2) != 0) {
     return 0;
   }
-  if ((*(uint *)(iVar3 + 0xe8) & 2) != 0) {
+  if ((*(uint *)(inst + 0xe8) & 2) != 0) {
     return 0;
   }
-  uVar1 = *(uint *)(iVar3 + 0xe8) & 1;
-  uVar2 = *(uint *)(iVar3 + 0xd0) & 1;
-  if ((*(uint *)(iVar3 + 0xb8) & 1) == 0) {
-    if (uVar2 != 0) {
+  word0xe8Bit0 = *(uint *)(inst + 0xe8) & 1;
+  word0xd0Bit0 = *(uint *)(inst + 0xd0) & 1;
+  if ((*(uint *)(inst + 0xb8) & 1) == 0) {
+    if (word0xd0Bit0 != 0) {
       return 0;
     }
-    if (uVar1 == 0) {
+    if (word0xe8Bit0 == 0) {
       return 0;
     }
   }
   else {
-    if (uVar2 == 0) {
-      if (uVar1 == 0) {
+    if (word0xd0Bit0 == 0) {
+      if (word0xe8Bit0 == 0) {
         return 0;
       }
       ((int (*)())FUN_0017c244)(ctx,2);
       IROperand__setModifierBits(*(int *)(ctx + 0xb0) + 0xa4,2,1);
-      iVar3 = *(int *)(ctx + 0xb0);
+      inst = *(int *)(ctx + 0xb0);
       mask = 1;
       goto LAB_0017c5b4;
     }
-    if (uVar1 != 0) {
+    if (word0xe8Bit0 != 0) {
       return 0;
     }
   }
   ((int (*)())FUN_0017c244)(ctx,2);
-  iVar3 = *(int *)(ctx + 0xb0);
+  inst = *(int *)(ctx + 0xb0);
   mask = 2;
 LAB_0017c5b4:
-  IROperand__setModifierBits(iVar3 + 0xa4,mask,1);
+  IROperand__setModifierBits(inst + 0xa4,mask,1);
   ValueKey__rebuild(ctx);
   return 1;
 }
@@ -829,26 +829,27 @@ int FUN_0017cdbc(param_1)
 }
 
 /* FUN_0017ce7c @ 0x17ce7c (284 bytes) */
-int FUN_0017ce7c(ctx, param_2)
+int FUN_0017ce7c(ctx, replacement)
   int ctx;
-  int param_2;
+  int replacement;
 {
+  undefined4 replacementSwizzle;
   int operandRecord;
-  bool bVar1;
-  uint uVar2;
+  bool hasNoExtraSource;
+  uint oldFlags;
   int node;
   int *vector;
-  undefined4 *puVar5;
-  undefined4 uVar6;
+  undefined4 *elementRef;
+  undefined4 savedExtraSourceRef;
   undefined4 operandRef2;
   undefined4 afterInst;
   undefined4 block;
-  undefined4 uVar10;
-  undefined4 uVar11;
-  undefined4 uVar12;
+  undefined4 saturate;
+  undefined4 resultScaleCode;
+  undefined4 src0Swizzle;
   undefined4 operandRef;
-  undefined4 uVar14;
-  undefined4 uVar15;
+  undefined4 destRegister;
+  undefined4 destRegisterOffset;
   int member0xb0;
   
   node = *(int *)(ctx + 0xb0);
@@ -858,58 +859,58 @@ int FUN_0017ce7c(ctx, param_2)
   operandRef = *(undefined4 *)(*(int *)(ctx + 0xb0) + 0x8c);
   operandRecord = IRInst__getOperandRecord(*(int *)(ctx + 0xb0),0);
   member0xb0 = *(int *)(ctx + 0xb0);
-  uVar12 = *(undefined4 *)(operandRecord + 0x10);
-  uVar2 = *(uint *)(member0xb0 + 0x14);
-  uVar10 = *(undefined4 *)(member0xb0 + 0x120);
-  uVar11 = *(undefined4 *)(member0xb0 + 0x124);
-  bVar1 = (uVar2 >> 9 & 1) == 0;
-  if (bVar1) {
-    uVar6 = 0;
+  src0Swizzle = *(undefined4 *)(operandRecord + 0x10);
+  oldFlags = *(uint *)(member0xb0 + 0x14);
+  saturate = *(undefined4 *)(member0xb0 + 0x120);
+  resultScaleCode = *(undefined4 *)(member0xb0 + 0x124);
+  hasNoExtraSource = (oldFlags >> 9 & 1) == 0;
+  if (hasNoExtraSource) {
+    savedExtraSourceRef = 0;
     operandRef2 = 0;
   }
   else {
-    uVar6 = *(undefined4 *)(*(int *)(member0xb0 + 0x84) * 4 + ctx + 0x210);
+    savedExtraSourceRef = *(undefined4 *)(*(int *)(member0xb0 + 0x84) * 4 + ctx + 0x210);
     operandRef2 = *(undefined4 *)(*(int *)(member0xb0 + 0x84) * 0x18 + member0xb0 + 0x8c);
   }
-  uVar14 = *(undefined4 *)(member0xb0 + 0x94);
-  uVar15 = *(undefined4 *)(member0xb0 + 0x98);
+  destRegister = *(undefined4 *)(member0xb0 + 0x94);
+  destRegisterOffset = *(undefined4 *)(member0xb0 + 0x98);
   IRInst__reinitAsMov(member0xb0,0x31,*(undefined4 *)(ctx + 0x238));
   IRInst__setOperandRef(member0xb0,0,operandRef);
-  *(undefined4 *)(member0xb0 + 0x98) = uVar15;
-  *(undefined4 *)(member0xb0 + 0x94) = uVar14;
-  *(undefined4 *)(member0xb0 + 0x9c) = uVar12;
-  *(undefined4 *)(member0xb0 + 0x120) = uVar10;
-  *(undefined4 *)(member0xb0 + 0x124) = uVar11;
-  IRInst__setOperandRef(member0xb0,1,*(undefined4 *)(param_2 + 0xc));
-  uVar12 = *(undefined4 *)(PTR_DAT_001e8b8c + *(int *)(param_2 + 0x10) * 4);
+  *(undefined4 *)(member0xb0 + 0x98) = destRegisterOffset;
+  *(undefined4 *)(member0xb0 + 0x94) = destRegister;
+  *(undefined4 *)(member0xb0 + 0x9c) = src0Swizzle;
+  *(undefined4 *)(member0xb0 + 0x120) = saturate;
+  *(undefined4 *)(member0xb0 + 0x124) = resultScaleCode;
+  IRInst__setOperandRef(member0xb0,1,*(undefined4 *)(replacement + 0xc));
+  replacementSwizzle = *(undefined4 *)(PTR_DAT_001e8b8c + *(int *)(replacement + 0x10) * 4);
   operandRecord = IRInst__getOperandRecord(member0xb0,1);
-  *(undefined4 *)(operandRecord + 0x10) = uVar12;
-  if (*(int *)(param_2 + 0x18) != 0) {
+  *(undefined4 *)(operandRecord + 0x10) = replacementSwizzle;
+  if (*(int *)(replacement + 0x18) != 0) {
     IROperand__setModifierBits(member0xb0 + 0xa4,1,1);
   }
-  *(undefined4 *)(member0xb0 + 0x120) = uVar10;
-  *(undefined4 *)(member0xb0 + 0x124) = uVar11;
+  *(undefined4 *)(member0xb0 + 0x120) = saturate;
+  *(undefined4 *)(member0xb0 + 0x124) = resultScaleCode;
   vector = *(int **)(*(int *)(member0xb0 + 0xa4) + 0x18);
   if (*vector == 0) {
-    puVar5 = (undefined4 *)Vector__elementRefGrow(vector,0);
+    elementRef = (undefined4 *)Vector__elementRefGrow(vector,0);
   }
   else {
     if (vector[1] == 0) {
       *(undefined4 *)vector[2] = 0;
       vector[1] = 1;
     }
-    puVar5 = (undefined4 *)vector[2];
+    elementRef = (undefined4 *)vector[2];
   }
-  *(undefined4 *)(ctx + 0x214) = *puVar5;
-  if (bVar1) {
+  *(undefined4 *)(ctx + 0x214) = *elementRef;
+  if (hasNoExtraSource) {
     *(undefined4 *)(ctx + 0x218) = 0;
   }
   else {
     IRInst__appendSource(member0xb0,operandRef2);
     *(uint *)(member0xb0 + 0x14) = *(uint *)(member0xb0 + 0x14) | 0x200;
-    *(undefined4 *)(ctx + 0x218) = uVar6;
+    *(undefined4 *)(ctx + 0x218) = savedExtraSourceRef;
   }
-  if ((uVar2 & 0x200000) != 0) {
+  if ((oldFlags & 0x200000) != 0) {
     *(uint *)(member0xb0 + 0x14) = *(uint *)(member0xb0 + 0x14) | 0x200000;
   }
   Block__insertInstAfter(block,afterInst,member0xb0);
@@ -998,26 +999,28 @@ int FUN_0017d06c(ctx, param_2, param_3, negateFlag)
 }
 
 /* FUN_0017d26c @ 0x17d26c (196 bytes) */
-int FUN_0017d26c(ctx, param_2)
+int FUN_0017d26c(ctx, vec4Constant)
   int ctx;
-  undefined4 param_2;
+  undefined4 vec4Constant;
 {
+  bool notLastLane;
+  undefined4 operandValueNumber;
   int node;
   int operandRecord2;
-  bool bVar1;
-  uint uVar2;
-  int iVar3;
+  bool hasNoExtraSource;
+  uint oldFlags;
+  int laneWordPtr;
   int operandRecord;
-  undefined4 uVar5;
+  undefined4 savedExtraSourceRef;
   undefined4 afterInst;
   undefined4 block;
   undefined4 operandRef2;
-  undefined4 uVar9;
+  undefined4 src0Swizzle;
   undefined4 operandRef;
   int member0xb0;
-  undefined4 uVar12;
+  undefined4 destRegister;
   int loopIndex;
-  undefined4 uVar14;
+  undefined4 destRegisterOffset;
   
   node = *(int *)(ctx + 0xb0);
   afterInst = *(undefined4 *)(node + 4);
@@ -1026,46 +1029,46 @@ int FUN_0017d26c(ctx, param_2)
   operandRef = *(undefined4 *)(*(int *)(ctx + 0xb0) + 0x8c);
   operandRecord2 = IRInst__getOperandRecord(*(int *)(ctx + 0xb0),0);
   member0xb0 = *(int *)(ctx + 0xb0);
-  uVar9 = *(undefined4 *)(operandRecord2 + 0x10);
-  uVar2 = *(uint *)(member0xb0 + 0x14);
-  bVar1 = (uVar2 >> 9 & 1) == 0;
-  if (bVar1) {
-    uVar5 = 0;
+  src0Swizzle = *(undefined4 *)(operandRecord2 + 0x10);
+  oldFlags = *(uint *)(member0xb0 + 0x14);
+  hasNoExtraSource = (oldFlags >> 9 & 1) == 0;
+  if (hasNoExtraSource) {
+    savedExtraSourceRef = 0;
     operandRef2 = 0;
   }
   else {
-    uVar5 = *(undefined4 *)(*(int *)(member0xb0 + 0x84) * 4 + ctx + 0x210);
+    savedExtraSourceRef = *(undefined4 *)(*(int *)(member0xb0 + 0x84) * 4 + ctx + 0x210);
     operandRef2 = *(undefined4 *)(*(int *)(member0xb0 + 0x84) * 0x18 + member0xb0 + 0x8c);
   }
-  uVar12 = *(undefined4 *)(member0xb0 + 0x94);
-  uVar14 = *(undefined4 *)(member0xb0 + 0x98);
+  destRegister = *(undefined4 *)(member0xb0 + 0x94);
+  destRegisterOffset = *(undefined4 *)(member0xb0 + 0x98);
   IRInst__reinitAsMov(member0xb0,0x31,*(undefined4 *)(ctx + 0x238));
   IRInst__setOperandRef(member0xb0,0,operandRef);
-  *(undefined4 *)(member0xb0 + 0x94) = uVar12;
-  *(undefined4 *)(member0xb0 + 0x98) = uVar14;
-  if (bVar1) {
+  *(undefined4 *)(member0xb0 + 0x94) = destRegister;
+  *(undefined4 *)(member0xb0 + 0x98) = destRegisterOffset;
+  if (hasNoExtraSource) {
     *(undefined4 *)(ctx + 0x218) = 0;
   }
   else {
     IRInst__appendSource(member0xb0,operandRef2);
     *(uint *)(member0xb0 + 0x14) = *(uint *)(member0xb0 + 0x14) | 0x200;
-    *(undefined4 *)(ctx + 0x218) = uVar5;
+    *(undefined4 *)(ctx + 0x218) = savedExtraSourceRef;
   }
-  *(undefined4 *)(member0xb0 + 0x9c) = uVar9;
+  *(undefined4 *)(member0xb0 + 0x9c) = src0Swizzle;
   loopIndex = 0;
-  uVar9 = FUN_0017a130(1,param_2,member0xb0,*(undefined4 *)(ctx + 0x238));
-  *(undefined4 *)(ctx + 0x214) = uVar9;
-  iVar3 = ctx;
+  operandValueNumber = FUN_0017a130(1,vec4Constant,member0xb0,*(undefined4 *)(ctx + 0x238));
+  *(undefined4 *)(ctx + 0x214) = operandValueNumber;
+  laneWordPtr = ctx;
   do {
     operandRecord = IRInst__getOperandRecord(*(undefined4 *)(ctx + 0xb0),0);
     if (*(char *)(loopIndex + operandRecord + 0x10) == '\x01') {
-      *(undefined4 *)(iVar3 + 0x30) = 0;
+      *(undefined4 *)(laneWordPtr + 0x30) = 0;
     }
-    bVar1 = loopIndex != 3;
-    iVar3 = iVar3 + 4;
+    notLastLane = loopIndex != 3;
+    laneWordPtr = laneWordPtr + 4;
     loopIndex = loopIndex + 1;
-  } while (bVar1);
-  if ((uVar2 & 0x200000) != 0) {
+  } while (notLastLane);
+  if ((oldFlags & 0x200000) != 0) {
     *(uint *)(member0xb0 + 0x14) = *(uint *)(member0xb0 + 0x14) | 0x200000;
   }
   Block__insertInstAfter(block,afterInst,member0xb0);

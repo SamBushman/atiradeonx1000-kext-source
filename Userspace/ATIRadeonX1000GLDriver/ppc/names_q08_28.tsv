@@ -66,7 +66,6 @@ local	FUN_001781a4	param_1	resultOut	INFERRED	out: folded float result, 2.147483
 local	FUN_001781a4	param_3	changedOut	INFERRED	out: set to 1 when output scale/clamp changed the value
 local	FUN_001781a4	iVar2	operandCount	INFERRED	instruction operand count from vtable +0x14 (loop bound); reused for the lane word read
 local	FUN_001781a4	iVar4	laneInputOffset	INFERRED	byte offset into laneInputs
-local	FUN_001781a4	loopRemaining	loopCounter	INFERRED	count-down / operand loop counter
 local	FUN_001781a4	local_68	laneInputs	INFERRED	array of lane constant words (0x7ffffffe = unknown) passed to the opcode evaluator vtable +4
 local	FUN_001781a4	local_50	operandLaneSelect	INFERRED	per-operand lane index into the valueKey value-number words (0, 3, 0, 1 by operand)
 local	FUN_001781a4	local_38	scaledResult	INFERRED	result after IRInst__scaleByOutputScale
