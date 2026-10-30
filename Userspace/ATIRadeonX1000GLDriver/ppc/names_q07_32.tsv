@@ -2735,3 +2735,57 @@ local	Inst__collapseAlgebraic_0015ceb0	local_74	lastOperandBuf2	INFERRED	IRInst_
 local	Inst__collapseAlgebraic_0015ceb0	local_68	mergedWrittenLanes	INFERRED	out of SelectWord__mergeWrittenLanes
 local	Inst__collapseAlgebraic_0015ceb0	local_64	combinedDestSelectPtr	INFERRED	&local_100
 local	Inst__collapseAlgebraic_0015ceb0	local_60	constTablePtr	INFERRED	&DAT_001acec0
+local	Inst__collapseAlgebraic_0015c6d4	fVar3	literalValue	INFERRED	1.0 or 0.0 written into the literal vec4
+local	Inst__collapseAlgebraic_0015c6d4	fparam_1	literalValueD	INFERRED	literalValue as a double argument of IRInst__makeLiteralVec4Float
+local	Inst__collapseAlgebraic_0015c6d4	uVar11	zeroOperandIdxA	INFERRED	operand index set to the literal 0.0
+local	Inst__collapseAlgebraic_0015c6d4	uVar12	zeroOperandIdxB	INFERRED	second operand index set to the literal 0.0
+local	Inst__collapseAlgebraic_0015c6d4	uVar13	oneOperandIdx	INFERRED	operand index set to the literal 1.0
+use	Inst__collapseAlgebraic_0015c6d4	uVar14	selectWordOut	INFERRED	select word written back to the operand record	^\s*uVar14\ =\ local_84;$	+1
+use	Inst__collapseAlgebraic_0015c6d4	uVar14	selectWordOut	INFERRED	select word written back to the operand record	^\s*\*\(undefined4\ \*\)\(iVar5\ \+\ 0x10\)\ =\ uVar14;$	+1
+use	Inst__collapseAlgebraic_0015c6d4	uVar14	setLaneOperandIdx	INFERRED	operand index (2 or 1) passed to the vtable +0x88 set-lane call	^\s*uVar14\ =\ 2;$	+1
+use	Inst__collapseAlgebraic_0015c6d4	uVar14	setLaneOperandIdx	INFERRED	operand index (2 or 1) passed to the vtable +0x88 set-lane call	^\s*uVar14\ =\ 1;$	+1
+use	Inst__collapseAlgebraic_0015c6d4	uVar14	setLaneOperandIdx	INFERRED	operand index (2 or 1) passed to the vtable +0x88 set-lane call	^\s*\(\*pcVar4\)\(piVar9,uVar14,iVar5,4\);$	+1
+local	Inst__collapseAlgebraic_0015c6d4	uVar17	operandScanIdxOrTrackUses	INFERRED	operand index scan; the same register holds *(pass+0x30)>>7&1 on the rewrite path (not splittable)
+local	Inst__collapseAlgebraic_0015c6d4	local_84	selectWordTmp	INFERRED	operand select word being rewritten byte by byte
+local	Inst__collapseAlgebraic_0015c6d4	auStack_78	uniformConstOut	INFERRED	IRInst__getUniformSourceConstant out buffer
+local	Inst__collapseAlgebraic_0015c6d4	local_74	uniformConstValue	INFERRED	float constant read from the uniform source
+local	Inst__collapseAlgebraic_0015c6d4	pcVar4	setLaneFn	INFERRED	vtable +0x88: set one lane of an operand select
+use	Inst__collapseAlgebraic_0015c6d4	bVar1	foundUniform	INFERRED	a uniform constant equal to the literal was found	^\s*bVar1\ =\ false;$	+1
+use	Inst__collapseAlgebraic_0015c6d4	bVar1	foundUniform	INFERRED	a uniform constant equal to the literal was found	^\s*bVar1\ =\ true;$	+1
+use	Inst__collapseAlgebraic_0015c6d4	bVar1	foundUniform	INFERRED	a uniform constant equal to the literal was found	^\s*if\ \(bVar1\)\ goto\ LAB_0015ce60;$	+1
+use	Inst__collapseAlgebraic_0015c6d4	bVar1	foundUniform	INFERRED	a uniform constant equal to the literal was found	^\s*if\ \(bVar1\)\ goto\ LAB_0015ce60;$@2	+1
+use	Inst__collapseAlgebraic_0015c6d4	iVar5	operandCountA	INFERRED	vtable +0x14 operand count of inst	^\s*iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0x14\)\)$	+1
+use	Inst__collapseAlgebraic_0015c6d4	iVar5	operandCountA	INFERRED	vtable +0x14 operand count of inst	^\s*iVar5\ =\ FUN_001054ec\(param_1,iVar5\ \+\ 1\);$	+1
+use	Inst__collapseAlgebraic_0015c6d4	iVar15	instOpcode	INFERRED	opcode of inst (0x12..0x14)	^\s*iVar15\ =\ \*\(int\ \*\)\(param_1\[0x22\]\ \+\ 8\);$	+2
+use	Inst__collapseAlgebraic_0015c6d4	iVar15	instOpcode	INFERRED	opcode of inst (0x12..0x14)	^\s*if\ \(iVar15\ ==\ 0x12\)\ \{$	+1
+use	Inst__collapseAlgebraic_0015c6d4	iVar15	instOpcode	INFERRED	opcode of inst (0x12..0x14)	^\s*else\ if\ \(iVar15\ ==\ 0x13\)\ \{$	+1
+use	Inst__collapseAlgebraic_0015c6d4	iVar15	instOpcode	INFERRED	opcode of inst (0x12..0x14)	^\s*else\ if\ \(iVar15\ ==\ 0x14\)\ \{$	+1
+use	Inst__collapseAlgebraic_0015c6d4	iVar15	countdownLanes	INFERRED	countdown from 4	^\s*iVar15\ =\ 4;$	+1
+use	Inst__collapseAlgebraic_0015c6d4	iVar15	countdownLanes	INFERRED	countdown from 4	^\s*iVar15\ =\ iVar15\ \+\ \-1;$	+2
+use	Inst__collapseAlgebraic_0015c6d4	iVar15	operandScanIdx	INFERRED	operand index 2.. scanned for a uniform constant	^\s*iVar15\ =\ 2;$	+1
+use	Inst__collapseAlgebraic_0015c6d4	iVar15	operandScanIdx	INFERRED	operand index 2.. scanned for a uniform constant	^\s*iVar5\ =\ FUN_000f5cf0\(piVar8,iVar15,\*\(undefined4\ \*\)\(iVar5\ \+\ 0x10\),auStack_78\);$	+1
+use	Inst__collapseAlgebraic_0015c6d4	iVar15	operandScanIdx	INFERRED	operand index 2.. scanned for a uniform constant	^\s*iVar10\ =\ FUN_001054ec\(piVar8,iVar15\);$	+1
+use	Inst__collapseAlgebraic_0015c6d4	iVar15	operandScanIdx	INFERRED	operand index 2.. scanned for a uniform constant	^\s*iVar15\ =\ iVar15\ \+\ 1;$	+2
+use	Inst__collapseAlgebraic_0015c6d4	iVar15	operandRecord4	INFERRED	IRInst__getOperandRecord(literal source,operand)	^\s*iVar15\ =\ FUN_001054ec\(piVar8,iVar5\);$	+1	lhs	none
+use	Inst__collapseAlgebraic_0015c6d4	iVar15	operandRecord4	INFERRED	IRInst__getOperandRecord(literal source,operand)	^\s*\*\(undefined4\ \*\)\(iVar15\ \+\ 0x10\)\ =\ 0x4040404;$	+1
+use	Inst__collapseAlgebraic_0015c6d4	iVar15	fillLane	INFERRED	first written lane of the literal source (lane counter, or -1 when none): written into the unused lanes	^\s*iVar15\ =\ 0;$	+1
+use	Inst__collapseAlgebraic_0015c6d4	iVar15	fillLane	INFERRED	first written lane of the literal source (lane counter, or -1 when none): written into the unused lanes	^\s*if\ \(\*\(char\ \*\)\(iVar15\ \+\ iVar6\ \+\ 0x10\)\ !=\ '\\0'\)\ \{$	+3
+use	Inst__collapseAlgebraic_0015c6d4	iVar15	fillLane	INFERRED	first written lane of the literal source (lane counter, or -1 when none): written into the unused lanes	^\s*bVar1\ =\ iVar15\ !=\ 3;$	+2
+use	Inst__collapseAlgebraic_0015c6d4	iVar15	fillLane	INFERRED	first written lane of the literal source (lane counter, or -1 when none): written into the unused lanes	^\s*iVar15\ =\ \-1;$	+1
+use	Inst__collapseAlgebraic_0015c6d4	iVar15	fillLane	INFERRED	first written lane of the literal source (lane counter, or -1 when none): written into the unused lanes	^\s*\(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0x88\)\)\(param_1,uVar7,iVar5,iVar15\);$	+1
+use	Inst__collapseAlgebraic_0015c6d4	piVar8	userSlot	INFERRED	address of a user element in the source users vector	^\s*piVar8\ =\ \(int\ \*\)\(uVar16\ \*\ 4\ \+\ puVar18\[2\]\);$	+1
+use	Inst__collapseAlgebraic_0015c6d4	piVar8	userSlot	INFERRED	address of a user element in the source users vector	^\s*piVar8\ =\ \(int\ \*\)FUN_0019423c\(puVar18,uVar16\);$	+1
+use	Inst__collapseAlgebraic_0015c6d4	piVar8	userSlot	INFERRED	address of a user element in the source users vector	^\s*if\ \(param_1\ ==\ \(int\ \*\)\*piVar8\)\ \{$	+1
+use	Inst__collapseAlgebraic_0015c6d4	piVar8	literalSource	INFERRED	operand source that receives the literal: the source itself, or its clone when it has several uses	^\s*piVar8\ =\ \(int\ \*\)FUN_00105594\(param_1,uVar7\);$	+1
+use	Inst__collapseAlgebraic_0015c6d4	piVar8	literalSource	INFERRED	operand source that receives the literal: the source itself, or its clone when it has several uses	^\s*iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*piVar8\ \+\ 0x60\)\)\(piVar8\);$	+1
+use	Inst__collapseAlgebraic_0015c6d4	piVar8	literalSource	INFERRED	operand source that receives the literal: the source itself, or its clone when it has several uses	^\s*FUN_00106004\(piVar9,1,piVar8,0,\*\(undefined4\ \*\)\(param_2\ \+\ 8\)\);$	+1
+use	Inst__collapseAlgebraic_0015c6d4	piVar8	literalSource	INFERRED	operand source that receives the literal: the source itself, or its clone when it has several uses	^\s*iVar5\ =\ FUN_0010497c\(piVar8,param_2\);$	+1
+use	Inst__collapseAlgebraic_0015c6d4	piVar8	literalSource	INFERRED	operand source that receives the literal: the source itself, or its clone when it has several uses	^\s*piVar8\ =\ \(int\ \*\)FUN_0010445c\(piVar8,\*\(undefined4\ \*\)\(param_2\ \+\ 8\),0\);$	+3
+use	Inst__collapseAlgebraic_0015c6d4	piVar8	literalSource	INFERRED	operand source that receives the literal: the source itself, or its clone when it has several uses	^\s*iVar5\ =\ piVar8\[0x21\];$	+1
+use	Inst__collapseAlgebraic_0015c6d4	piVar8	literalSource	INFERRED	operand source that receives the literal: the source itself, or its clone when it has several uses	^\s*iVar5\ =\ FUN_001054ec\(piVar8,0\);$	+2
+use	Inst__collapseAlgebraic_0015c6d4	piVar8	literalSource	INFERRED	operand source that receives the literal: the source itself, or its clone when it has several uses	^\s*iVar10\ =\ FUN_001054ec\(piVar8,iVar15\);$	+1
+use	Inst__collapseAlgebraic_0015c6d4	piVar8	literalSource	INFERRED	operand source that receives the literal: the source itself, or its clone when it has several uses	^\s*piVar8\[0x21\]\ =\ iVar5;$	+2
+use	Inst__collapseAlgebraic_0015c6d4	piVar8	literalSource	INFERRED	operand source that receives the literal: the source itself, or its clone when it has several uses	^\s*iVar6\ =\ FUN_001054ec\(piVar8,0\);$	+1
+use	Inst__collapseAlgebraic_0015c6d4	piVar8	literalSource	INFERRED	operand source that receives the literal: the source itself, or its clone when it has several uses	^\s*\(\*\*\(code\ \*\*\)\(\*piVar8\ \+\ 0x88\)\)\(piVar8,iVar5,iVar15,iVar15\);$	+2
+use	Inst__collapseAlgebraic_0015c6d4	piVar8	literalSource	INFERRED	operand source that receives the literal: the source itself, or its clone when it has several uses	^\s*iVar15\ =\ FUN_001054ec\(piVar8,iVar5\);$	+1	rhs	none
+use	Inst__collapseAlgebraic_0015c6d4	piVar8	literalSource	INFERRED	operand source that receives the literal	^\s*iVar5\ =\ piVar8\[0x21\];$@2	+1
