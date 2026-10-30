@@ -1236,64 +1236,65 @@ int recordCountSourceRegisterFiles(ctx, outCounts, record)
   char *outCounts;
   uint *record;
 {
-  bool bVar1;
-  uint uVar2;
-  uint *puVar3;
-  uint uVar4;
-  uint *puVar5;
-  uint uVar6;
+  bool lastSource;
+  bool isNewKey;
+  uint seenKey;
+  uint *seenCursor;
+  uint sourceMask;
+  uint *seenSlot;
+  uint fileAndIndex;
   uint loopIndex;
-  uint uVar8;
-  uint local_28 [7];
+  uint remaining;
+  uint seenKeys [7];
   
-  uVar4 = ((int (*)())recordOpcodeSourceMask)(record,**(uint **)(ctx + 0x34) >> 6 & 1);
+  sourceMask = ((int (*)())recordOpcodeSourceMask)(record,**(uint **)(ctx + 0x34) >> 6 & 1);
   loopIndex = 0;
   outCounts[0] = '\0';
   outCounts[1] = '\0';
   outCounts[2] = '\0';
   outCounts[3] = '\0';
-  puVar5 = local_28;
+  seenSlot = seenKeys;
   do {
     record = record + 1;
-    if ((uVar4 & 1 << (loopIndex & 0x3f)) == 0) {
-      *puVar5 = 0x501;
+    if ((sourceMask & 1 << (loopIndex & 0x3f)) == 0) {
+      *seenSlot = 0x501;
     }
     else {
-      uVar6 = (char)(DAT_001aa760)[*record & 0xf] * 0x100 + (*record >> 5 & 0xff);
-      *puVar5 = uVar6;
+      fileAndIndex = (char)(DAT_001aa760)[*record & 0xf] * 0x100 + (*record >> 5 & 0xff);
+      *seenSlot = fileAndIndex;
       if (loopIndex != 0) {
-        bVar1 = true;
-        puVar3 = local_28;
-        uVar8 = loopIndex;
+        isNewKey = true;
+        seenCursor = seenKeys;
+        remaining = loopIndex;
         do {
-          uVar2 = *puVar3;
-          puVar3 = puVar3 + 1;
-          if (uVar6 == uVar2) {
-            bVar1 = false;
+          seenKey = *seenCursor;
+          seenCursor = seenCursor + 1;
+          if (fileAndIndex == seenKey) {
+            isNewKey = false;
           }
-          uVar8 = uVar8 - 1;
-        } while (uVar8 != 0);
-        if (!bVar1) goto LAB_00078b54;
+          remaining = remaining - 1;
+        } while (remaining != 0);
+        if (!isNewKey) goto LAB_00078b54;
       }
-      uVar6 = uVar6 >> 8;
-      if (uVar6 == 1) {
+      fileAndIndex = fileAndIndex >> 8;
+      if (fileAndIndex == 1) {
         outCounts[3] = outCounts[3] + '\x01';
       }
-      else if (uVar6 == 0) {
+      else if (fileAndIndex == 0) {
         *outCounts = *outCounts + '\x01';
       }
-      else if (uVar6 == 2) {
+      else if (fileAndIndex == 2) {
         outCounts[1] = outCounts[1] + '\x01';
       }
-      else if (uVar6 == 4) {
+      else if (fileAndIndex == 4) {
         outCounts[2] = outCounts[2] + '\x01';
       }
     }
 LAB_00078b54:
-    bVar1 = loopIndex == 2;
-    puVar5 = puVar5 + 1;
+    lastSource = loopIndex == 2;
+    seenSlot = seenSlot + 1;
     loopIndex = loopIndex + 1;
-    if (bVar1) {
+    if (lastSource) {
       return;
     }
   } while( true );
@@ -4945,6 +4946,15 @@ int evsFoldConstantMoves(compiler, shaderProgram)
   undefined4 compiler;
   int shaderProgram;
 {
+  byte laneWLoaded;
+  byte laneZLoaded;
+  byte laneYLoaded;
+  byte laneXLoaded;
+  byte laneW;
+  byte laneZ;
+  byte laneY;
+  byte laneX;
+  bool laterHasX;
   undefined4 candidateSrc2SelectorW;
   undefined4 candidateSrc2SelectorZ;
   undefined4 candidateSrc2SelectorY;
@@ -4971,14 +4981,14 @@ int evsFoldConstantMoves(compiler, shaderProgram)
   float constantW;
   float constantY;
   float constantZ;
-  bool bVar6;
-  byte bVar7;
+  bool allLanesPass;
+  byte passW;
   float *constantValue;
   undefined4 uVar9;
-  byte bVar10;
+  byte crBitsByte;
   int instructions;
-  byte bVar12;
-  byte bVar14;
+  byte passX;
+  byte passY;
   int laterRecord;
   uint instructionIndex;
   uint instructionCount;
@@ -4993,7 +5003,7 @@ int evsFoldConstantMoves(compiler, shaderProgram)
   uint writeEnableX;
   uint writeEnableY;
   uint writeEnableZ;
-  byte bVar29;
+  byte passZ;
   uint writeEnableW;
   uint uVar30;
   int currentInstruction;
@@ -5048,36 +5058,36 @@ LAB_0007de3c:
           (((bVar36 || (constantZ == -1.0)) || ((wIsZero || ((wIsOne || (constantW == -1.0)))))))) &&
          (uVar30 = instructionIndex + 1, uVar30 < instructionCount)) {
         movRecord = uVar30 * 0x74;
-        bVar6 = false;
+        allLanesPass = false;
         uVar18 = uVar30;
         symbol = movRecord;
         do {
           laterRecord = symbol + instructions;
           if (((*(int *)(symbol + instructions) == 0x879b) && (*(int *)(laterRecord + 4) == 2)) &&
              (*(int *)(laterRecord + 8) == *(int *)(currentInstruction + 8))) {
-            bVar1 = *(int *)(laterRecord + 0xc) != 0;
-            bVar10 = (byte)((uint)iStack_78 >> 0x18);
-            if (((bVar1) || (!(bool)(bVar10 >> 5 & 1))) || ((xIsOne || (bVar12 = 0, constantX == -1.0)))
+            laterHasX = *(int *)(laterRecord + 0xc) != 0;
+            crBitsByte = (byte)((uint)iStack_78 >> 0x18);
+            if (((laterHasX) || (!(bool)(crBitsByte >> 5 & 1))) || ((xIsOne || (passX = 0, constantX == -1.0)))
                ) {
-              bVar12 = 1;
+              passX = 1;
             }
             if (((*(int *)(laterRecord + 0x10) != 0) || (yIsZero)) ||
-               ((yIsOne || (bVar14 = 0, constantY == -1.0)))) {
-              bVar14 = 1;
+               ((yIsOne || (passY = 0, constantY == -1.0)))) {
+              passY = 1;
             }
             if ((((*(int *)(laterRecord + 0x14) != 0) || (bVar37)) || (bVar36)) ||
-               (bVar29 = 0, constantZ == -1.0)) {
-              bVar29 = 1;
+               (passZ = 0, constantZ == -1.0)) {
+              passZ = 1;
             }
             if (((*(int *)(laterRecord + 0x18) != 0) || (wIsZero)) ||
-               ((wIsOne || (bVar7 = 0, constantW == -1.0)))) {
-              bVar7 = 1;
+               ((wIsOne || (passW = 0, constantW == -1.0)))) {
+              passW = 1;
             }
-            bVar6 = (bool)(bVar7 & bVar29 & bVar14 & bVar12);
-            if (bVar6) {
-              if (!bVar1) {
+            allLanesPass = (bool)(passW & passZ & passY & passX);
+            if (allLanesPass) {
+              if (!laterHasX) {
                 *(undefined4 *)(laterRecord + 0xc) = 1;
-                if ((bool)(bVar10 >> 5 & 1)) {
+                if ((bool)(crBitsByte >> 5 & 1)) {
                   if (xIsOne) {
                     *(undefined4 *)(laterRecord + 0x28) = 0x87de;
                   }
@@ -5166,10 +5176,10 @@ LAB_0007e330:
         if (uVar30 < instructionCount) {
           symbol = instructionCount - uVar30;
           laterSlotCursor = (int *)(instructions + 0x20);
-          bVar29 = 0;
-          bVar10 = 0;
-          bVar12 = 0;
-          bVar14 = 0;
+          laneX = 0;
+          laneY = 0;
+          laneZ = 0;
+          laneW = 0;
           bVar34 = true;
           do {
             if (((*laterSlotCursor == 2) && (laterSlotCursor[1] == *(int *)(instructions + -0x50))) ||
@@ -5180,12 +5190,12 @@ LAB_0007e330:
             }
             else {
               if ((laterSlotCursor[-7] == 2) && (laterSlotCursor[-6] == *(int *)(instructions + -0x50))) {
-                bVar29 = bVar29 | *(byte *)((int)laterSlotCursor + -0x11);
-                bVar10 = bVar10 | *(byte *)((int)laterSlotCursor + -0xd);
-                bVar12 = bVar12 | *(byte *)((int)laterSlotCursor + -9);
-                bVar14 = bVar14 | *(byte *)((int)laterSlotCursor + -5);
-                if ((bVar29 != 0) && ((bVar10 != 0 && (bVar12 != 0)))) {
-                  bVar35 = bVar14 != 0;
+                laneX = laneX | *(byte *)((int)laterSlotCursor + -0x11);
+                laneY = laneY | *(byte *)((int)laterSlotCursor + -0xd);
+                laneZ = laneZ | *(byte *)((int)laterSlotCursor + -9);
+                laneW = laneW | *(byte *)((int)laterSlotCursor + -5);
+                if ((laneX != 0) && ((laneY != 0 && (laneZ != 0)))) {
+                  bVar35 = laneW != 0;
                   goto LAB_0007e530;
                 }
               }
@@ -5331,10 +5341,10 @@ LAB_0007e760: ;
           }
           bVar34 = true;
           instructions = currentInstruction + uVar18 * 0x74;
-          bVar10 = *(byte *)(instructions + -0x59);
-          bVar12 = *(byte *)(instructions + -0x65);
-          bVar14 = *(byte *)(instructions + -0x61);
-          bVar29 = *(byte *)(instructions + -0x5d);
+          laneWLoaded = *(byte *)(instructions + -0x59);
+          laneXLoaded = *(byte *)(instructions + -0x65);
+          laneYLoaded = *(byte *)(instructions + -0x61);
+          laneZLoaded = *(byte *)(instructions + -0x5d);
           if (instructionIndex < instructionCount) {
             instructions = instructionIndex * 0x74;
             uVar18 = instructionIndex;
@@ -5348,9 +5358,9 @@ LAB_0007e760: ;
                   (laterRecord = *(int *)(movRecord + 8), *(int *)(currentInstruction + 0x5c) == laterRecord)))) {
                 extvsInstReadsTempComponents(shaderProgram + 0x1c,currentInstruction,laterRecord,&readsX,&readsY,&readsZ,
                              acStack_85);
-                if (((readsX == '\0') || (bVar12 != 0)) &&
-                   ((((readsY == '\0' || (bVar14 != 0)) && ((readsZ == '\0' || (bVar29 != 0)))
-                     ) && ((acStack_85[0] == '\0' || (bVar10 != 0)))))) {
+                if (((readsX == '\0') || (laneXLoaded != 0)) &&
+                   ((((readsY == '\0' || (laneYLoaded != 0)) && ((readsZ == '\0' || (laneZLoaded != 0)))
+                     ) && ((acStack_85[0] == '\0' || (laneWLoaded != 0)))))) {
                   instructionCount = *(uint *)(shaderProgram + 0x14);
                 }
                 else {
@@ -5359,10 +5369,10 @@ LAB_0007e760: ;
                 }
               }
               if ((*(int *)(currentInstruction + 4) == 2) && (*(int *)(currentInstruction + 8) == *(int *)(movRecord + 8))) {
-                bVar10 = bVar10 | *(byte *)(currentInstruction + 0x1b);
-                bVar12 = bVar12 | *(byte *)(currentInstruction + 0xf);
-                bVar14 = bVar14 | *(byte *)(currentInstruction + 0x13);
-                bVar29 = bVar29 | *(byte *)(currentInstruction + 0x17);
+                laneWLoaded = laneWLoaded | *(byte *)(currentInstruction + 0x1b);
+                laneXLoaded = laneXLoaded | *(byte *)(currentInstruction + 0xf);
+                laneYLoaded = laneYLoaded | *(byte *)(currentInstruction + 0x13);
+                laneZLoaded = laneZLoaded | *(byte *)(currentInstruction + 0x17);
               }
               uVar18 = uVar18 + 1;
               instructions = instructions + 0x74;
@@ -8800,7 +8810,7 @@ code_r0x0008286c:
     }
   } while( true );
 LAB_0007e2d4:
-  if (bVar6) {
+  if (allLanesPass) {
     if (uVar30 < instructionCount) {
       do {
         uVar30 = uVar30 + 1;
