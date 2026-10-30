@@ -1060,16 +1060,16 @@ int IfHeader__ctor_eb168(this, source)
   undefined4 *this;
   int source;
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
+  undefined4 copiedField0x144;
+  undefined4 copiedField0x148;
   
   ((int (*)())Block__ctor_e9f00)(this,source);
-  uVar2 = *(undefined4 *)(source + 0x148);
-  uVar1 = *(undefined4 *)(source + 0x144);
+  copiedField0x148 = *(undefined4 *)(source + 0x148);
+  copiedField0x144 = *(undefined4 *)(source + 0x144);
   this[0x55] = 0;
   *this = &PTR_FUN_001e9cc0;
-  this[0x51] = uVar1;
-  this[0x52] = uVar2;
+  this[0x51] = copiedField0x144;
+  this[0x52] = copiedField0x148;
   this[0x53] = 0;
   this[0x54] = 0;
   return;
@@ -1094,16 +1094,16 @@ int IfHeader__ctor_eb248(this, source)
   undefined4 *this;
   int source;
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
+  undefined4 copiedField0x144;
+  undefined4 copiedField0x148;
   
   ((int (*)())Block__ctor_e9f00)(this,source);
-  uVar2 = *(undefined4 *)(source + 0x148);
-  uVar1 = *(undefined4 *)(source + 0x144);
+  copiedField0x148 = *(undefined4 *)(source + 0x148);
+  copiedField0x144 = *(undefined4 *)(source + 0x144);
   this[0x55] = 0;
   *this = &PTR_FUN_001e9cc0;
-  this[0x51] = uVar1;
-  this[0x52] = uVar2;
+  this[0x51] = copiedField0x144;
+  this[0x52] = copiedField0x148;
   this[0x53] = 0;
   this[0x54] = 0;
   return;

@@ -1,35 +1,35 @@
 #include "decls.h"
 
 /* Compiler__propagateFlag5a1Bit1 @ 0xe15b8 (36 bytes) */
-int Compiler__propagateFlag5a1Bit1(param_1)
-  int param_1;
+int Compiler__propagateFlag5a1Bit1(compiler)
+  int compiler;
 {
-  uint uVar1;
+  uint flagBit;
   
-  uVar1 = *(byte *)(param_1 + 0x5a1) >> 1 & 1;
-  *(uint *)(*(int *)(param_1 + 0x370) + 0x28) = uVar1;
-  *(uint *)(*(int *)(param_1 + 0x374) + 0x28) = uVar1;
-  *(uint *)(*(int *)(param_1 + 0x378) + 0x28) = uVar1;
+  flagBit = *(byte *)(compiler + 0x5a1) >> 1 & 1;
+  *(uint *)(*(int *)(compiler + 0x370) + 0x28) = flagBit;
+  *(uint *)(*(int *)(compiler + 0x374) + 0x28) = flagBit;
+  *(uint *)(*(int *)(compiler + 0x378) + 0x28) = flagBit;
   return;
 }
 
 /* Compiler__selectEntry534ByProgramFlags @ 0xe15dc (64 bytes) */
-int Compiler__selectEntry534ByProgramFlags(param_1)
-  int param_1;
+int Compiler__selectEntry534ByProgramFlags(compiler)
+  int compiler;
 {
-  uint uVar1;
+  uint programFlags;
   
-  uVar1 = *(uint *)(*(int *)(param_1 + 0x6c4) + 0x30);
-  if ((uVar1 & 1) != 0) {
-    return *(undefined4 *)(param_1 + 0x534);
+  programFlags = *(uint *)(*(int *)(compiler + 0x6c4) + 0x30);
+  if ((programFlags & 1) != 0) {
+    return *(undefined4 *)(compiler + 0x534);
   }
-  if ((uVar1 & 0x2000) != 0) {
-    return *(undefined4 *)(param_1 + 0x538);
+  if ((programFlags & 0x2000) != 0) {
+    return *(undefined4 *)(compiler + 0x538);
   }
-  if ((uVar1 & 0x4000) != 0) {
-    return *(undefined4 *)(param_1 + 0x53c);
+  if ((programFlags & 0x4000) != 0) {
+    return *(undefined4 *)(compiler + 0x53c);
   }
-  return *(undefined4 *)(param_1 + 0x534);
+  return *(undefined4 *)(compiler + 0x534);
 }
 
 /* FUN_000e161c @ 0xe161c (156 bytes) */
@@ -71,22 +71,22 @@ LAB_000e16a4:
 }
 
 /* Compiler__selectBlockByProgramFlags @ 0xe16b8 (76 bytes) */
-int Compiler__selectBlockByProgramFlags(param_1)
-  int param_1;
+int Compiler__selectBlockByProgramFlags(compiler)
+  int compiler;
 {
-  uint uVar1;
+  uint programFlags;
   
-  uVar1 = *(uint *)(*(int *)(param_1 + 0x6c4) + 0x30);
-  if ((uVar1 & 0x2000) != 0) {
-    return *(undefined4 *)(*(int *)(param_1 + 0x398) + 0x38);
+  programFlags = *(uint *)(*(int *)(compiler + 0x6c4) + 0x30);
+  if ((programFlags & 0x2000) != 0) {
+    return *(undefined4 *)(*(int *)(compiler + 0x398) + 0x38);
   }
-  if ((uVar1 & 1) != 0) {
-    return *(undefined4 *)(*(int *)(param_1 + 0x398) + 0x3c);
+  if ((programFlags & 1) != 0) {
+    return *(undefined4 *)(*(int *)(compiler + 0x398) + 0x3c);
   }
-  if ((uVar1 & 0x4000) == 0) {
+  if ((programFlags & 0x4000) == 0) {
     return 0;
   }
-  return *(undefined4 *)(*(int *)(param_1 + 0x398) + 0x40);
+  return *(undefined4 *)(*(int *)(compiler + 0x398) + 0x40);
 }
 
 /* Compiler__setBitInSelectedBlockB8 @ 0xe1704 (88 bytes) */
@@ -168,8 +168,8 @@ int Compiler__resetState(compiler)
   int compiler;
 {
   int loopCounter;
-  bool bVar1;
-  int iVar2;
+  bool notLastSlot;
+  int slotCursor;
   undefined4 allocation;
   int loopCounterB;
   
@@ -178,20 +178,20 @@ int Compiler__resetState(compiler)
   *(undefined4 *)(compiler + 0x6c0) = 0;
   *(undefined4 *)(compiler + 0x314) = 0;
   *(undefined4 *)(compiler + 0x584) = 0;
-  iVar2 = compiler;
+  slotCursor = compiler;
   do {
-    *(undefined4 *)(iVar2 + 0x484) = 0;
-    *(undefined4 *)(iVar2 + 0x4d4) = 0;
-    *(undefined4 *)(iVar2 + 0x534) = 0;
-    iVar2 = iVar2 + 4;
+    *(undefined4 *)(slotCursor + 0x484) = 0;
+    *(undefined4 *)(slotCursor + 0x4d4) = 0;
+    *(undefined4 *)(slotCursor + 0x534) = 0;
+    slotCursor = slotCursor + 4;
     loopCounterB = loopCounterB + -1;
   } while (loopCounterB != 0);
   loopCounter = 0;
   do {
     ((int (*)())Compiler__getOrCreateSlotObject)(compiler,loopCounter);
-    bVar1 = loopCounter != 2;
+    notLastSlot = loopCounter != 2;
     loopCounter = loopCounter + 1;
-  } while (bVar1);
+  } while (notLastSlot);
   allocation = Arena__alloc(*(undefined4 *)(compiler + 0x370),0x2000);
   *(undefined4 *)(compiler + 0x3a0) = allocation;
   *(undefined4 *)(compiler + 0x3a8) = 0;
@@ -505,23 +505,23 @@ int Compiler__releaseChipAndPools(compiler, releaseChip)
   int compiler;
   int releaseChip;
 {
-  int iVar1;
+  int slotCursor;
   
   if ((releaseChip != 0) && (*(int *)(compiler + 0x310) != 0)) {
     ChipShaders__release(*(int *)(compiler + 0x310),compiler);
     (**(code **)(compiler + 0x34c))
               (*(undefined4 *)(compiler + 0x354),*(undefined4 *)(compiler + 0x310));
   }
-  iVar1 = compiler;
+  slotCursor = compiler;
   do {
-    if (*(int *)(iVar1 + 0x370) != 0) {
-      List__freeAllNodes(*(int *)(iVar1 + 0x370));
+    if (*(int *)(slotCursor + 0x370) != 0) {
+      List__freeAllNodes(*(int *)(slotCursor + 0x370));
       (**(code **)(compiler + 0x34c))
-                (*(undefined4 *)(compiler + 0x354),*(undefined4 *)(iVar1 + 0x370));
-      *(undefined4 *)(iVar1 + 0x370) = 0;
+                (*(undefined4 *)(compiler + 0x354),*(undefined4 *)(slotCursor + 0x370));
+      *(undefined4 *)(slotCursor + 0x370) = 0;
     }
-    iVar1 = iVar1 + 4;
-  } while (iVar1 != compiler + 0xc);
+    slotCursor = slotCursor + 4;
+  } while (slotCursor != compiler + 0xc);
   return;
 }
 

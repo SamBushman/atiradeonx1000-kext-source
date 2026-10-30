@@ -2724,3 +2724,35 @@ local	ContinueBlock__ctor_ec178	param_3	scopeField0x12c	INFERRED	scope+0x12c sto
 local	Compiler__setHardwareFamily	iVar1	chipObject	INFERRED	KhanChip/FudoChip object allocated for the selected hardware family and stored at compiler+0x310
 use	Block__createEntryExitInsts	puVar1	entryInst	INFERRED	IREntry instruction placed first in the block's list and stored at block+200	^\s*puVar1\ =\ puVar1\ \+\ 1;$	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xa8\)\ \+\ 0x374\);$	all	none
 use	Block__createEntryExitInsts	puVar1	exitInst	INFERRED	IRExit instruction placed last in the block's list and stored at block+0xcc	^\s*puVar1\ =\ puVar1\ \+\ 1;$@2	^\s*return;$	all	none
+local	IRInst__literalForLane	dVar2	literalValue	INFERRED	float literal returned for the lane (FLOAT_001aa0d4 / FLOAT_001aa0e8)
+local	IRInst__literalForLane	puVar1	selectRemapTable	INFERRED	static table PTR_DAT_001e8bb8 mapping a select value to the lane byte
+local	Compiler__releaseChipAndPools	iVar1	slotCursor	INFERRED	cursor over the three per-index pool pointers at compiler+0x370
+local	Compiler__resetState	iVar2	slotCursor	INFERRED	cursor over the 20 per-index words reset at +0x484/+0x4d4/+0x534
+local	Compiler__resetState	bVar1	notLastSlot	INFERRED	loop continue flag (index != 2)
+local	scDestroyCompilerObject	param_1	state	INFERRED	compiler state object: [0] release callback, [1] owner, [2] compiler
+local	scDestroyCompilerObject	param_2	releaseChip	INFERRED	passed to Compiler__releaseChipAndPools
+local	IRInst__destIsSingleComponent	param_1	inst	INFERRED	instruction whose destination write mask (+0x9c) is tested
+local	IRInst__destIsSingleComponent	uVar1	result	INFERRED	SelectWord__isSingleComponentConstant result
+local	IRInst__applyDescriptorSwizzle	bVar1	notLastLane	INFERRED	loop continue flag (lane != 3)
+local	IRInst__applyDescriptorSwizzle	puVar2	laneRemapTable	INFERRED	static table PTR_DAT_001e8bb8 mapping the packed lane source to the operand select value
+local	SelectWord__isSingleComponentConstant	param_1	selectWord	INFERRED	select word compared with the four splat constants
+local	SelectWord__splatComponent	param_1	selectWord	INFERRED	splat select word; returns the component 0-3 it selects
+local	IRInst__isSourceSelectIdentity	param_1	inst	INFERRED	instruction whose source select words (+0x9c, stride 0x18) are read
+local	IRInst__isSourceSelectIdentity	param_2	operandIndex	INFERRED	source operand number
+local	IRInst__sourceLanesAllWritten	local_38	operandSelectBytes	INFERRED	select word of the operand record (+0x10), one byte per lane
+local	isWhitespaceChar	param_1	ch	INFERRED	character tested against space, tab, LF, CR
+local	Compiler__releaseOutputBuffer	param_1	compiler	INFERRED	compiler whose output buffer (+0x584) is released
+local	IfHeader__ctor_eb168	uVar1	copiedField0x144	INFERRED	source+0x144 copied to this[0x51]
+local	IfHeader__ctor_eb168	uVar2	copiedField0x148	INFERRED	source+0x148 copied to this[0x52]
+local	IfHeader__ctor_eb248	uVar1	copiedField0x144	INFERRED	source+0x144 copied to this[0x51]
+local	IfHeader__ctor_eb248	uVar2	copiedField0x148	INFERRED	source+0x148 copied to this[0x52]
+local	FUN_000e0e28	param_1	compiler	INFERRED	compiler whose staging buffer (+0x3a0, size +0x3a4) is consumed in 0x80-byte chunks and reset
+local	Compiler__propagateFlag5a1Bit1	param_1	compiler	INFERRED	compiler
+local	Compiler__propagateFlag5a1Bit1	uVar1	flagBit	INFERRED	bit 1 of byte compiler+0x5a1, copied to +0x28 of the three pool objects (+0x370/+0x374/+0x378)
+local	Compiler__selectBlockByProgramFlags	param_1	compiler	INFERRED	compiler
+local	Compiler__selectBlockByProgramFlags	uVar1	programFlags	INFERRED	flag word of the current program (+0x6c4 -> +0x30)
+local	Compiler__selectEntry534ByProgramFlags	param_1	compiler	INFERRED	compiler
+local	Compiler__selectEntry534ByProgramFlags	uVar1	programFlags	INFERRED	flag word of the current program (+0x6c4 -> +0x30)
+local	callTargetSlot25	param_1	program	INFERRED	program whose compiler hardware info (+0x30c) is called through vtable +100
+local	callTargetSlot25	piVar1	hardwareInfo	INFERRED	compiler+0x30c hardware-info object
+local	Program__createIfBlock	local_48	broadcastSelectWord	INFERRED	select word of the condition operand with one lane byte broadcast to all four lanes

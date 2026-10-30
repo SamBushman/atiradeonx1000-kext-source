@@ -336,13 +336,13 @@ int SelectWord__isIdentity(selectWord)
 }
 
 /* IRInst__isSourceSelectIdentity @ 0xf31e8 (16 bytes) */
-int IRInst__isSourceSelectIdentity(param_1, param_2)
-  int param_1;
-  int param_2;
+int IRInst__isSourceSelectIdentity(inst, operandIndex)
+  int inst;
+  int operandIndex;
 {
   undefined4 isIdentity;
   
-  isIdentity = ((int (*)())SelectWord__isIdentity)(*(undefined4 *)(param_2 * 0x18 + param_1 + 0x9c));
+  isIdentity = ((int (*)())SelectWord__isIdentity)(*(undefined4 *)(operandIndex * 0x18 + inst + 0x9c));
   return isIdentity;
 }
 
@@ -723,43 +723,43 @@ int laneBytes__clearSetLanes(outMask, laneBytes)
 }
 
 /* SelectWord__splatComponent @ 0xf37b8 (108 bytes) */
-int SelectWord__splatComponent(param_1)
-  int param_1;
+int SelectWord__splatComponent(selectWord)
+  int selectWord;
 {
-  if (param_1 == DAT_001aa85c) {
+  if (selectWord == DAT_001aa85c) {
     return 0;
   }
-  if (param_1 == DAT_001aa858) {
+  if (selectWord == DAT_001aa858) {
     return 1;
   }
-  if (param_1 == DAT_001aa854) {
+  if (selectWord == DAT_001aa854) {
     return 2;
   }
-  if (param_1 == DAT_001aa850) {
+  if (selectWord == DAT_001aa850) {
     return 3;
   }
   return 0xffffffff;
 }
 
 /* SelectWord__isSingleComponentConstant @ 0xf3824 (96 bytes) */
-int SelectWord__isSingleComponentConstant(param_1)
-  int param_1;
+int SelectWord__isSingleComponentConstant(selectWord)
+  int selectWord;
 {
-  if ((((param_1 != DAT_001aa85c) && (param_1 != DAT_001aa858)) && (param_1 != DAT_001aa854)) &&
-     (param_1 != DAT_001aa850)) {
+  if ((((selectWord != DAT_001aa85c) && (selectWord != DAT_001aa858)) && (selectWord != DAT_001aa854)) &&
+     (selectWord != DAT_001aa850)) {
     return 0;
   }
   return 1;
 }
 
 /* IRInst__destIsSingleComponent @ 0xf3884 (8 bytes) */
-int IRInst__destIsSingleComponent(param_1)
-  int param_1;
+int IRInst__destIsSingleComponent(inst)
+  int inst;
 {
-  undefined4 uVar1;
+  undefined4 result;
   
-  uVar1 = ((int (*)())SelectWord__isSingleComponentConstant)(*(undefined4 *)(param_1 + 0x9c));
-  return uVar1;
+  result = ((int (*)())SelectWord__isSingleComponentConstant)(*(undefined4 *)(inst + 0x9c));
+  return result;
 }
 
 /* laneMask__fromSelectBytes @ 0xf388c (124 bytes) */
@@ -1589,13 +1589,13 @@ int IRInst__sourceLanesAllWritten(inst, operandIndex)
   undefined4 operandVReg;
   int operandRecord;
   int loopCounter;
-  undefined4 local_38 [9];
+  undefined4 operandSelectBytes [9];
   
   operandVReg = IRInst__getOperandSource(inst,operandIndex);
   operandRecord = IRInst__getOperandRecord(inst,operandIndex);
   loopCounter = 0;
-  local_38[0] = *(undefined4 *)(operandRecord + 0x10);
-  while ((bVar2 = *(byte *)((int)local_38 + loopCounter), bVar2 == 4 ||
+  operandSelectBytes[0] = *(undefined4 *)(operandRecord + 0x10);
+  while ((bVar2 = *(byte *)((int)operandSelectBytes + loopCounter), bVar2 == 4 ||
          (operandRecord = IRInst__getOperandRecord(operandVReg,0), *(char *)((uint)bVar2 + operandRecord + 0x10) != '\x01'))) {
     bVar1 = loopCounter == 3;
     loopCounter = loopCounter + 1;

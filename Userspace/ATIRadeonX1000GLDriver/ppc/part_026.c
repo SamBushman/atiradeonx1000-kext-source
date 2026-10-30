@@ -2461,24 +2461,24 @@ int remapSelectSmall(param_1)
 /* IRInst__literalForLane @ 0xf8a30 (112 bytes) */
 double IRInst__literalForLane(int sourceSelect,int lane,int literalMask,int selectBytes)
 {
-  undefined *puVar1;
-  double dVar2;
+  undefined *selectRemapTable;
+  double literalValue;
   
-  puVar1 = PTR_DAT_001e8bb8;
+  selectRemapTable = PTR_DAT_001e8bb8;
   if (sourceSelect == 4) {
-    dVar2 = (double)FLOAT_001aa0d4;
+    literalValue = (double)FLOAT_001aa0d4;
     *(undefined1 *)(literalMask + lane) = 0;
-    return dVar2;
+    return literalValue;
   }
   if (sourceSelect == 5) {
-    dVar2 = (double)FLOAT_001aa0e8;
+    literalValue = (double)FLOAT_001aa0e8;
     *(undefined1 *)(literalMask + lane) = 0;
-    return dVar2;
+    return literalValue;
   }
   *(undefined1 *)(literalMask + lane) = 1;
-  dVar2 = (double)FLOAT_001aa0d4;
-  *(char *)(selectBytes + lane) = (char)*(undefined4 *)(puVar1 + sourceSelect * 4);
-  return dVar2;
+  literalValue = (double)FLOAT_001aa0d4;
+  *(char *)(selectBytes + lane) = (char)*(undefined4 *)(selectRemapTable + sourceSelect * 4);
+  return literalValue;
 }
 
 /* Program__applySourceTokenToOperand @ 0xf8aa0 (488 bytes) */
@@ -2685,19 +2685,19 @@ int IRInst__applyDescriptorSwizzle(descriptor, inst)
   uint *descriptor;
   int *inst;
 {
-  bool bVar1;
-  undefined *puVar2;
+  bool notLastLane;
+  undefined *laneRemapTable;
   int psnPackedLaneSourceResult;
   int loopCounter;
   
-  puVar2 = PTR_DAT_001e8bb8;
+  laneRemapTable = PTR_DAT_001e8bb8;
   loopCounter = 0;
   do {
     psnPackedLaneSourceResult = psnPackedLaneSource(descriptor,loopCounter);
-    (**(code **)(*inst + 0x88))(inst,1,loopCounter,*(undefined4 *)(puVar2 + psnPackedLaneSourceResult * 4));
-    bVar1 = loopCounter != 3;
+    (**(code **)(*inst + 0x88))(inst,1,loopCounter,*(undefined4 *)(laneRemapTable + psnPackedLaneSourceResult * 4));
+    notLastLane = loopCounter != 3;
     loopCounter = loopCounter + 1;
-  } while (bVar1);
+  } while (notLastLane);
   if ((*descriptor & 0x400000) != 0) {
     descriptor[1] = descriptor[1] & 0xffff8888 | 0x3210;
   }
@@ -3756,7 +3756,7 @@ int Program__createIfBlock(program, inst, blockKey, elseTarget, vector, scopeSta
   undefined4 broadcastSelect;
   uint vectorCount;
   int loopCounterB;
-  undefined4 local_48 [8];
+  undefined4 broadcastSelectWord [8];
   
   arena = *(undefined4 *)(*(int *)(program + 8) + 0x374);
   allocation = (undefined4 *)Arena__alloc(arena,0x15c);
@@ -3764,17 +3764,17 @@ int Program__createIfBlock(program, inst, blockKey, elseTarget, vector, scopeSta
   ifHeader = allocation + 1;
   IfHeader__ctor_ea6d0(ifHeader,inst,elseTarget,0,*(undefined4 *)(program + 8));
   Block__setField0xb8AndChildren(ifHeader,blockKey);
-  local_48[0] = DAT_001aa9a8;
-  ((int (*)())Template__bindOperand)(program,5,1,sourceArg,inst,1,DAT_001aa9dc,local_48,scopeStack,1,ifHeader);
+  broadcastSelectWord[0] = DAT_001aa9a8;
+  ((int (*)())Template__bindOperand)(program,5,1,sourceArg,inst,1,DAT_001aa9dc,broadcastSelectWord,scopeStack,1,ifHeader);
   operandRecord = IRInst__getOperandRecord(inst,1);
   loopCounter = 0;
   loopCounterB = 4;
-  (*(unsigned char *)((unsigned char *)&(local_48[0]) + 0)) = (undefined1)((uint)*(undefined4 *)(operandRecord + 0x10) >> 0x18);
-  broadcastByte = (*(unsigned char *)((unsigned char *)&(local_48[0]) + 0));
-  local_48[0] = *(undefined4 *)(operandRecord + 0x10);
+  (*(unsigned char *)((unsigned char *)&(broadcastSelectWord[0]) + 0)) = (undefined1)((uint)*(undefined4 *)(operandRecord + 0x10) >> 0x18);
+  broadcastByte = (*(unsigned char *)((unsigned char *)&(broadcastSelectWord[0]) + 0));
+  broadcastSelectWord[0] = *(undefined4 *)(operandRecord + 0x10);
   do {
-    *(undefined1 *)((int)local_48 + loopCounter) = broadcastByte;
-    broadcastSelect = local_48[0];
+    *(undefined1 *)((int)broadcastSelectWord + loopCounter) = broadcastByte;
+    broadcastSelect = broadcastSelectWord[0];
     loopCounter = loopCounter + 1;
     loopCounterB = loopCounterB + -1;
   } while (loopCounterB != 0);

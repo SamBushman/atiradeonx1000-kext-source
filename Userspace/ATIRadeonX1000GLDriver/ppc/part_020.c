@@ -3538,23 +3538,23 @@ int Compiler__logf(unusedArg1, unusedArg2, unusedArg3, unusedArg4, unusedArg5, u
 }
 
 /* FUN_000e0e28 @ 0xe0e28 (116 bytes) */
-int FUN_000e0e28(param_1)
-  int param_1;
+int FUN_000e0e28(compiler)
+  int compiler;
 {
   int loopCounter;
   undefined1 auStack_b8 [128];
   undefined1 local_38;
   
-  if (0 < *(int *)(param_1 + 0x3a4)) {
+  if (0 < *(int *)(compiler + 0x3a4)) {
     loopCounter = 0;
     do {
-      _memcpy(auStack_b8,loopCounter + *(int *)(param_1 + 0x3a0),0x80);
+      _memcpy(auStack_b8,loopCounter + *(int *)(compiler + 0x3a0),0x80);
       loopCounter = loopCounter + 0x80;
       local_38 = 0;
-    } while (loopCounter < *(int *)(param_1 + 0x3a4));
+    } while (loopCounter < *(int *)(compiler + 0x3a4));
   }
-  *(undefined4 *)(param_1 + 0x3a8) = 0;
-  *(undefined4 *)(param_1 + 0x3a4) = 0;
+  *(undefined4 *)(compiler + 0x3a8) = 0;
+  *(undefined4 *)(compiler + 0x3a4) = 0;
   return;
 }
 
@@ -3579,10 +3579,10 @@ int noop_e0ea0(unusedArg1, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unuse
 }
 
 /* isWhitespaceChar @ 0xe0ebc (44 bytes) */
-int isWhitespaceChar(param_1)
-  int param_1;
+int isWhitespaceChar(ch)
+  int ch;
 {
-  if ((((param_1 != 0x20) && (param_1 != 9)) && (param_1 != 10)) && (param_1 != 0xd)) {
+  if ((((ch != 0x20) && (ch != 9)) && (ch != 10)) && (ch != 0xd)) {
     return 0;
   }
   return 1;
@@ -3871,13 +3871,13 @@ int Compiler__timerOutputFileName()
 }
 
 /* Compiler__releaseOutputBuffer @ 0xe1484 (80 bytes) */
-int Compiler__releaseOutputBuffer(param_1)
-  int param_1;
+int Compiler__releaseOutputBuffer(compiler)
+  int compiler;
 {
-  if (*(int *)(param_1 + 0x584) != 0) {
+  if (*(int *)(compiler + 0x584) != 0) {
     /* issue #79 class: r4 = `lwz r4,0x584(r3)` (the field just tested) is the object handed to the release callback */
-    (**(code **)(param_1 + 0x34c))(*(undefined4 *)(param_1 + 0x354),*(undefined4 *)(param_1 + 0x584));
-    *(undefined4 *)(param_1 + 0x584) = 0;
+    (**(code **)(compiler + 0x34c))(*(undefined4 *)(compiler + 0x354),*(undefined4 *)(compiler + 0x584));
+    *(undefined4 *)(compiler + 0x584) = 0;
   }
   return;
 }

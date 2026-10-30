@@ -87,15 +87,15 @@ int Program__ensureVRegType13(program)
 }
 
 /* callTargetSlot25 @ 0xec1ec (28 bytes) */
-int callTargetSlot25(param_1)
-  int param_1;
+int callTargetSlot25(program)
+  int program;
 {
-  int *piVar1;
+  int *hardwareInfo;
   
-  piVar1 = *(int **)(*(int *)(param_1 + 8) + 0x30c);
+  hardwareInfo = *(int **)(*(int *)(program + 8) + 0x30c);
                     
                     
-  (**(code **)(*piVar1 + 100))(piVar1,param_1);
+  (**(code **)(*hardwareInfo + 100))(hardwareInfo,program);
   return;
 }
 

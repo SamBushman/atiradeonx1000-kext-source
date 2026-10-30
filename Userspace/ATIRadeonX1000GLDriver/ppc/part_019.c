@@ -2790,15 +2790,15 @@ int FUN_000da438(targetObject, param_2)
 }
 
 /* scDestroyCompilerObject @ 0xda458 (96 bytes) */
-int scDestroyCompilerObject(param_1, param_2)
-  undefined4 *param_1;
-  undefined4 param_2;
+int scDestroyCompilerObject(state, releaseChip)
+  undefined4 *state;
+  undefined4 releaseChip;
 {
-  if (param_1[2] != 0) {
-    Compiler__releaseChipAndPools(param_1[2],param_2);
+  if (state[2] != 0) {
+    Compiler__releaseChipAndPools(state[2],releaseChip);
                     
                     
-    (*(code *)*param_1)(param_1[1],param_1[2]);
+    (*(code *)*state)(state[1],state[2]);
     return;
   }
   return;
