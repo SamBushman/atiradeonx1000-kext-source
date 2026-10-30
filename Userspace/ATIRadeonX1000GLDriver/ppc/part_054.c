@@ -791,7 +791,8 @@ int R520MachineAssembler__vslot27_assembleIf(this, node, block, extra1, extra2, 
   undefined4 extra3;
   undefined4 extra4;
 {
-  int iVar1;
+  int thenBlock;
+  int successorList;
   int *a0;
   int *piVar2;
   undefined4 emittedAny;
@@ -804,20 +805,20 @@ int R520MachineAssembler__vslot27_assembleIf(this, node, block, extra1, extra2, 
   recordIndexBefore = this[0x18];
   (**(code **)(*this + 0x34))(this,block,*(undefined4 *)(node + 0xdc));
   piVar2 = (int *)0x0;
-  iVar1 = *(int *)(*(int *)(node + 0x134) + 0xd0);
-  if (*(int *)(iVar1 + 4) != 0) {
-    piVar2 = *(int **)(iVar1 + 8);
+  successorList = *(int *)(*(int *)(node + 0x134) + 0xd0);
+  if (*(int *)(successorList + 4) != 0) {
+    piVar2 = *(int **)(successorList + 8);
   }
-  iVar1 = *piVar2;
+  thenBlock = *piVar2;
   (**(code **)(*this + 0x34))
-            (this,iVar1 + 0x90,*(undefined4 *)(iVar1 + 0xdc),extra1,extra2,extra3,
+            (this,thenBlock + 0x90,*(undefined4 *)(thenBlock + 0xdc),extra1,extra2,extra3,
              *(code **)(*this + 0x34));
-  if (((*(int *)(node + 0xdc) == 0) && (*(int *)(iVar1 + 0xdc) == 0)) ||
+  if (((*(int *)(node + 0xdc) == 0) && (*(int *)(thenBlock + 0xdc) == 0)) ||
      (emittedAny = 1, recordIndexBefore != this[0x18])) {
     emittedAny = 0;
   }
-  return ((int (*)())R520MachineAssembler__emitConditionalBranch)(this,*(undefined4 *)(iVar1 + 0x130),a0,
-               *(undefined4 *)(*(int *)(iVar1 + 300) + 0x134),emittedAny,node);
+  return ((int (*)())R520MachineAssembler__emitConditionalBranch)(this,*(undefined4 *)(thenBlock + 0x130),a0,
+               *(undefined4 *)(*(int *)(thenBlock + 300) + 0x134),emittedAny,node);
 }
 
 /* R520MachineAssembler__vslot32_assembleBranchEnd @ 0x1a2d10 (160 bytes) */

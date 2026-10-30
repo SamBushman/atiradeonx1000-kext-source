@@ -1410,14 +1410,14 @@ int Arena__free(arena, ptr)
 int List__freeAllNodes(list)
   int *list;
 {
-  int *piVar1;
-  int iVar2;
+  int *node;
+  int nextNode;
   
-  piVar1 = (int *)list[1];
-  while (piVar1 != (int *)0x0) {
-    iVar2 = *piVar1;
-    (**(code **)(*list + 0x34c))(*(undefined4 *)(*list + 0x354),piVar1);
-    piVar1 = (int *)iVar2;
+  node = (int *)list[1];
+  while (node != (int *)0x0) {
+    nextNode = *node;
+    (**(code **)(*list + 0x34c))(*(undefined4 *)(*list + 0x354),node);
+    node = (int *)nextNode;
   }
   list[3] = 0;
   list[1] = 0;
@@ -1834,15 +1834,16 @@ LAB_001943c4:
 int HashTable__destroy_1943f0(table)
   uint *table;
 {
-  uint uVar1;
+  uint bucketSize;
+  uint bucketCount;
   int *slot;
   uint loopIndex;
   int elementBlock;
   uint loopIndex2;
   uint *bucket;
   
-  uVar1 = *table;
-  if (uVar1 == 0) {
+  bucketCount = *table;
+  if (bucketCount == 0) {
     loopIndex = table[2];
   }
   else {
@@ -1851,13 +1852,13 @@ int HashTable__destroy_1943f0(table)
     do {
       bucket = *(uint **)(loopIndex + loopIndex2 * 4);
       if (bucket != (uint *)0x0) {
-        uVar1 = bucket[1];
-        if (uVar1 != 0) {
+        bucketSize = bucket[1];
+        if (bucketSize != 0) {
           loopIndex = 0;
           do {
             if (loopIndex < *bucket) {
-              if (uVar1 <= loopIndex) {
-                _memset(uVar1 * 4 + bucket[2],0,(loopIndex - uVar1) * 4 + 4);
+              if (bucketSize <= loopIndex) {
+                _memset(bucketSize * 4 + bucket[2],0,(loopIndex - bucketSize) * 4 + 4);
                 bucket[1] = loopIndex + 1;
               }
               slot = (int *)(loopIndex * 4 + bucket[2]);
@@ -1870,16 +1871,16 @@ int HashTable__destroy_1943f0(table)
             if (elementBlock != 0) {
               ((int (*)())Arena__free)(*(undefined4 *)(elementBlock + -4),elementBlock + -4);
             }
-            uVar1 = bucket[1];
-          } while (loopIndex < uVar1);
+            bucketSize = bucket[1];
+          } while (loopIndex < bucketSize);
           loopIndex = table[2];
         }
         ((int (*)())Arena__free)(table[5],*(undefined4 *)(loopIndex + loopIndex2 * 4));
-        uVar1 = *table;
+        bucketCount = *table;
         loopIndex = table[2];
       }
       loopIndex2 = loopIndex2 + 1;
-    } while (loopIndex2 < uVar1);
+    } while (loopIndex2 < bucketCount);
   }
   return ((int (*)())Arena__free)(table[5],loopIndex);
 }
@@ -1888,15 +1889,16 @@ int HashTable__destroy_1943f0(table)
 int HashTable__destroy_194504(table)
   uint *table;
 {
-  uint uVar1;
+  uint bucketSize;
+  uint bucketCount;
   int *slot;
   uint loopIndex;
   int elementBlock;
   uint loopIndex2;
   uint *bucket;
   
-  uVar1 = *table;
-  if (uVar1 == 0) {
+  bucketCount = *table;
+  if (bucketCount == 0) {
     loopIndex = table[2];
   }
   else {
@@ -1905,13 +1907,13 @@ int HashTable__destroy_194504(table)
     do {
       bucket = *(uint **)(loopIndex + loopIndex2 * 4);
       if (bucket != (uint *)0x0) {
-        uVar1 = bucket[1];
-        if (uVar1 != 0) {
+        bucketSize = bucket[1];
+        if (bucketSize != 0) {
           loopIndex = 0;
           do {
             if (loopIndex < *bucket) {
-              if (uVar1 <= loopIndex) {
-                _memset(uVar1 * 4 + bucket[2],0,(loopIndex - uVar1) * 4 + 4);
+              if (bucketSize <= loopIndex) {
+                _memset(bucketSize * 4 + bucket[2],0,(loopIndex - bucketSize) * 4 + 4);
                 bucket[1] = loopIndex + 1;
               }
               slot = (int *)(loopIndex * 4 + bucket[2]);
@@ -1924,16 +1926,16 @@ int HashTable__destroy_194504(table)
             if (elementBlock != 0) {
               ((int (*)())Arena__free)(*(undefined4 *)(elementBlock + -4),elementBlock + -4);
             }
-            uVar1 = bucket[1];
-          } while (loopIndex < uVar1);
+            bucketSize = bucket[1];
+          } while (loopIndex < bucketSize);
           loopIndex = table[2];
         }
         ((int (*)())Arena__free)(table[5],*(undefined4 *)(loopIndex + loopIndex2 * 4));
-        uVar1 = *table;
+        bucketCount = *table;
         loopIndex = table[2];
       }
       loopIndex2 = loopIndex2 + 1;
-    } while (loopIndex2 < uVar1);
+    } while (loopIndex2 < bucketCount);
   }
   return ((int (*)())Arena__free)(table[5],loopIndex);
 }
@@ -1943,20 +1945,21 @@ int HashTable__findEntry(table, key)
   int *table;
   undefined4 key;
 {
-  uint uVar1;
+  uint bucketSize;
+  uint hash;
   undefined4 *slot;
   int callResult;
   uint loopIndex;
   uint *bucket;
   
-  uVar1 = (*(code *)table[4])(key,key);
-  bucket = *(uint **)((uVar1 & *table - 1U) * 4 + table[2]);
-  if ((bucket != (uint *)0x0) && (uVar1 = bucket[1], uVar1 != 0)) {
+  hash = (*(code *)table[4])(key,key);
+  bucket = *(uint **)((hash & *table - 1U) * 4 + table[2]);
+  if ((bucket != (uint *)0x0) && (bucketSize = bucket[1], bucketSize != 0)) {
     loopIndex = 0;
     do {
       if (loopIndex < *bucket) {
-        if (uVar1 <= loopIndex) {
-          _memset(uVar1 * 4 + bucket[2],0,(loopIndex - uVar1) * 4 + 4);
+        if (bucketSize <= loopIndex) {
+          _memset(bucketSize * 4 + bucket[2],0,(loopIndex - bucketSize) * 4 + 4);
           bucket[1] = loopIndex + 1;
         }
         slot = (undefined4 *)(loopIndex * 4 + bucket[2]);
@@ -1969,9 +1972,9 @@ int HashTable__findEntry(table, key)
       if (callResult == 0) {
   return slot;
       }
-      uVar1 = bucket[1];
+      bucketSize = bucket[1];
       loopIndex = loopIndex + 1;
-    } while (loopIndex < uVar1);
+    } while (loopIndex < bucketSize);
   }
   return 0;
 }

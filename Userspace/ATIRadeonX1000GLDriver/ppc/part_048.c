@@ -500,42 +500,43 @@ int FUN_0017c5e0(ctx)
 int ValueKey__foldMulByPlusMinusOne(ctx)
   int ctx;
 {
+  undefined4 minusOneValueNumber;
   int lanesAllMatch;
   int exprRecord;
-  bool bVar1;
-  int iVar2;
+  bool notLastOperand;
+  int keptOperand;
   int loopIndex;
-  undefined4 uVar4;
+  undefined4 plusOneValueNumber;
   
   loopIndex = 1;
   exprRecord = Compiler__valueNumberForExpr(*(undefined4 *)(ctx + 0x238),0x3f800000);
-  uVar4 = *(undefined4 *)(exprRecord + 4);
+  plusOneValueNumber = *(undefined4 *)(exprRecord + 4);
   do {
-    lanesAllMatch = Inst__writtenLanesAllMatchValue(ctx,uVar4,loopIndex);
+    lanesAllMatch = Inst__writtenLanesAllMatchValue(ctx,plusOneValueNumber,loopIndex);
     if (lanesAllMatch != 0) {
       ((int (*)())ValueKey__rewriteAsMovOfOperand)(ctx,(loopIndex == 1) + 1);
       ValueKey__rebuild(ctx);
       return 1;
     }
-    bVar1 = loopIndex != 2;
+    notLastOperand = loopIndex != 2;
     loopIndex = loopIndex + 1;
-  } while (bVar1);
+  } while (notLastOperand);
   loopIndex = 1;
   exprRecord = Compiler__valueNumberForExpr(*(undefined4 *)(ctx + 0x238),0xbf800000);
-  uVar4 = *(undefined4 *)(exprRecord + 4);
+  minusOneValueNumber = *(undefined4 *)(exprRecord + 4);
   do {
-    lanesAllMatch = Inst__writtenLanesAllMatchValue(ctx,uVar4,loopIndex);
+    lanesAllMatch = Inst__writtenLanesAllMatchValue(ctx,minusOneValueNumber,loopIndex);
     if (lanesAllMatch != 0) {
-      iVar2 = (loopIndex == 1) + 1;
-      ((int (*)())ValueKey__rewriteAsMovOfOperand)(ctx,iVar2);
+      keptOperand = (loopIndex == 1) + 1;
+      ((int (*)())ValueKey__rewriteAsMovOfOperand)(ctx,keptOperand);
       IROperand__setModifierBits(*(int *)(ctx + 0xb0) + 0xa4,1,
-                   *(uint *)(iVar2 * 0x18 + *(int *)(ctx + 0xb0) + 0xa0) & 1 ^ 1);
+                   *(uint *)(keptOperand * 0x18 + *(int *)(ctx + 0xb0) + 0xa0) & 1 ^ 1);
       ValueKey__rebuild(ctx);
       return 1;
     }
-    bVar1 = loopIndex != 2;
+    notLastOperand = loopIndex != 2;
     loopIndex = loopIndex + 1;
-  } while (bVar1);
+  } while (notLastOperand);
   return 0;
 }
 

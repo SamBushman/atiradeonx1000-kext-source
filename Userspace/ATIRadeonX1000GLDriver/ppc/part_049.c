@@ -2107,17 +2107,17 @@ LAB_00189ab0:
 }
 
 /* R300SchedModel__vslot15 @ 0x189be4 (64 bytes) */
-int R300SchedModel__vslot15(this, param_2)
+int R300SchedModel__vslot15(this, inst)
   undefined4 this;
-  int param_2;
+  int inst;
 {
-  int iVar1;
+  int opcode;
   
-  iVar1 = *(int *)(*(int *)(param_2 + 0x88) + 8);
-  if ((iVar1 == 0x1e) || (iVar1 == 0x1d)) {
+  opcode = *(int *)(*(int *)(inst + 0x88) + 8);
+  if ((opcode == 0x1e) || (opcode == 0x1d)) {
     return 1;
   }
-  if ((iVar1 != 0x1c) && (iVar1 != 0xa3)) {
+  if ((opcode != 0x1c) && (opcode != 0xa3)) {
     return 0;
   }
   return 2;
@@ -5003,9 +5003,9 @@ int R520SchedModel__vslot4_addInstruction(schedModel, inst)
   int *inst;
 {
   int callResult;
-  undefined4 uVar2;
-  undefined4 local_38;
-  undefined4 local_34;
+  undefined4 constantLimit;
+  undefined4 freeSlotsA;
+  undefined4 freeSlotsB;
   
   if ((inst[5] & 0x8000U) == 0) {
     callResult = (**(code **)(*inst + 0x28))(inst);
@@ -5013,13 +5013,13 @@ int R520SchedModel__vslot4_addInstruction(schedModel, inst)
       ((int (*)())SchedModel__classifySlotUse)(inst,schedModel + 0x18,schedModel + 0x20);
       ((int (*)())PackState__tryPlaceInstructionSources)(inst,schedModel + 0x1c,schedModel + 0x24,schedModel + 0x28,*(undefined4 *)(schedModel + 8)
                   );
-      ((int (*)())PackState__countFreeSlots)(schedModel + 0x28,&local_38);
-      uVar2 = 0;
+      ((int (*)())PackState__countFreeSlots)(schedModel + 0x28,&freeSlotsA);
+      constantLimit = 0;
       if (*(int *)(schedModel + 100) != 0) {
-        ((int (*)())SchedModel__fitsConstantLimit)(schedModel,*(int *)(schedModel + 100),inst,local_38,local_34);
-        uVar2 = *(undefined4 *)(schedModel + 100);
+        ((int (*)())SchedModel__fitsConstantLimit)(schedModel,*(int *)(schedModel + 100),inst,freeSlotsA,freeSlotsB);
+        constantLimit = *(undefined4 *)(schedModel + 100);
       }
-      ((int (*)())SchedModel__assignConstantSelectors)(schedModel,uVar2,inst,local_38,local_34);
+      ((int (*)())SchedModel__assignConstantSelectors)(schedModel,constantLimit,inst,freeSlotsA,freeSlotsB);
       if (*(int *)(schedModel + 100) == 0) {
         *(int **)(schedModel + 100) = inst;
       }
@@ -5087,16 +5087,16 @@ int R300SchedModel__vslot12(this, inst)
   int this;
   int *inst;
 {
-  uint uVar1;
+  uint instFlags;
   int callResult;
   int operandRecord;
   
   if (((((((inst[0x20] != 0) && (callResult = RegKind__flagBit0(inst[0x26]), callResult != 0)) &&
          ((inst[5] & 2U) == 0)) &&
         ((callResult = (**(code **)(*inst + 0x50))(inst), callResult == 0 &&
-         (uVar1 = inst[5], (uVar1 & 0x20) == 0)))) &&
-       (((uVar1 & 0x40) == 0 &&
-        (((uVar1 & 2) == 0 && (callResult = (**(code **)(*inst + 0x5c))(inst), callResult == 0)))))) &&
+         (instFlags = inst[5], (instFlags & 0x20) == 0)))) &&
+       (((instFlags & 0x40) == 0 &&
+        (((instFlags & 2) == 0 && (callResult = (**(code **)(*inst + 0x5c))(inst), callResult == 0)))))) &&
       (callResult = (**(code **)(*inst + 0x28))(inst), callResult == 0)) &&
      ((((callResult = *(int *)(inst[0x22] + 8), callResult != 0x9e && (callResult != 0xa0)) && (callResult != 0x9f))
       && (((callResult != 0xa1 && (callResult = *(int *)(PTR_DAT_001e913c + callResult * 0x38 + 0x34), callResult != 3))
@@ -5198,22 +5198,22 @@ int ConstantSlots__rowsCompatible(staleArg1, slotsA, slotsB, strict)
 }
 
 /* R300VSchedModel__vslot13 @ 0x18f918 (108 bytes) */
-int R300VSchedModel__vslot13(this, param_2)
+int R300VSchedModel__vslot13(this, node)
   int *this;
-  int param_2;
+  int node;
 {
   int callResult;
-  undefined4 uVar2;
+  undefined4 result;
   
-  callResult = (**(code **)(*this + 0x30))(this,*(undefined4 *)(param_2 + 0x38));
+  callResult = (**(code **)(*this + 0x30))(this,*(undefined4 *)(node + 0x38));
   if ((callResult == 0) ||
-     ((*(int *)(param_2 + 0x60) != 0 && (*(int *)(*(int *)(param_2 + 0x60) + 8) != 0)))) {
-    uVar2 = 0;
+     ((*(int *)(node + 0x60) != 0 && (*(int *)(*(int *)(node + 0x60) + 8) != 0)))) {
+    result = 0;
   }
   else {
-    uVar2 = 1;
+    result = 1;
   }
-  return uVar2;
+  return result;
 }
 
 /* R300VSchedModel__vslot28 @ 0x18f984 (596 bytes) */

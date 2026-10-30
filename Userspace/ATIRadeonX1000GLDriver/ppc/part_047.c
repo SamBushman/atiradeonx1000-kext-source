@@ -1863,22 +1863,23 @@ int ValueKey__allOperandLanesEqual(ctx, lane)
 }
 
 /* Inst__allWrittenLanesSatisfy @ 0x179c44 (124 bytes) */
-int Inst__allWrittenLanesSatisfy(valueKey, param_2, param_3)
+int Inst__allWrittenLanesSatisfy(valueKey, operandA, operandB)
   int valueKey;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 operandA;
+  undefined4 operandB;
 {
-  bool bVar1;
-  int iVar2;
+  int equalResult;
+  bool lastLane;
+  int operandRecord;
   int loopIndex;
   
   loopIndex = 0;
-  while ((iVar2 = IRInst__getOperandRecord(*(undefined4 *)(valueKey + 0xb0),0),
-         *(char *)(loopIndex + iVar2 + 0x10) == '\x01' ||
-         (iVar2 = ((int (*)())ValueKey__operandLanesEqual)(valueKey,loopIndex,param_2,param_3), iVar2 != 0))) {
-    bVar1 = loopIndex == 3;
+  while ((operandRecord = IRInst__getOperandRecord(*(undefined4 *)(valueKey + 0xb0),0),
+         *(char *)(loopIndex + operandRecord + 0x10) == '\x01' ||
+         (equalResult = ((int (*)())ValueKey__operandLanesEqual)(valueKey,loopIndex,operandA,operandB), equalResult != 0))) {
+    lastLane = loopIndex == 3;
     loopIndex = loopIndex + 1;
-    if (bVar1) {
+    if (lastLane) {
       return 1;
     }
   }
