@@ -315,7 +315,7 @@ int R300MachineAssembler__assembleAluInstruction(this, irInst)
   int *srcIdx;
   int *sourceDef3;
   undefined4 allocTable;
-  int *piVar25;
+  int *unusedPtr;
   byte in_xer_so = 0;
   int clearCount;
   undefined8 operandVReg;
@@ -626,7 +626,7 @@ LAB_00199e60:
               stagedArg3 = alphaModAlias;
               alphaHardwareOpcodeOut = swizzle2;
               /* dropped 4 args (found auditing #70 via ExtendIndirectCalls.java / ground-truth
-               * disassembly): stock passes loopPtr, loopPtr2, r21 (== a4, search-loop r23-1 / 3 on exhaustion - not a literal 3, #80), and piVar25 too. */
+               * disassembly): stock passes loopPtr, loopPtr2, r21 (== a4, search-loop r23-1 / 3 on exhaustion - not a literal 3, #80), and unusedPtr too. */
               (**(code **)(*this + 0xfc))(this,selectSrcIdx,stagedArg2,stagedArg3,stagedArg4,alphaHardwareOpcodeOut);
             }
             if (alphaLanes != 0) {

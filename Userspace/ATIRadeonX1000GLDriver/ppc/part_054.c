@@ -218,7 +218,7 @@ int R520MachineAssembler__vslot74_setPredicateSetDestination(this, writeRgb, wri
   int recordPtr;
   int recordTable;
   byte invertBit;
-  undefined1 uVar4;
+  undefined1 rgbMask;
   int operandRecord;
   undefined1 compareCode;
   int predicateKind;
@@ -255,8 +255,8 @@ int R520MachineAssembler__vslot74_setPredicateSetDestination(this, writeRgb, wri
     recordIndex = *(int *)(this + 0x60);
     recordTable = *(int *)(this + 0xa8);
     operandRecord = IRInst__getOperandRecord(inst,0);
-    uVar4 = lanesToRgbMask(*(undefined4 *)(operandRecord + 0x10));
-    *(undefined1 *)(recordIndex * 0x48 + recordTable + 0x15) = uVar4;
+    rgbMask = lanesToRgbMask(*(undefined4 *)(operandRecord + 0x10));
+    *(undefined1 *)(recordIndex * 0x48 + recordTable + 0x15) = rgbMask;
     if (predicateKind == 1) {
       recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
       *(byte *)(recordPtr + 0x2d) = invertBit ^ *(byte *)(recordPtr + 0x2d);
@@ -300,7 +300,7 @@ int R520MachineAssembler__vslot73_setOutputDestination(this, writeRgb, writeAlph
   undefined1 lanesToRgbMaskResult;
   int currentMaxRegister;
   int destinationIndex;
-  undefined1 uVar6;
+  undefined1 destinationByte;
   int destinationClass;
   
   destinationClass = *(int *)(inst + 0x98);
@@ -325,9 +325,9 @@ int R520MachineAssembler__vslot73_setOutputDestination(this, writeRgb, writeAlph
       }
       *(int *)(*(int *)(this + 0xac) + 0x9374) = maxRegister;
     }
-    uVar6 = (undefined1)destinationIndex;
+    destinationByte = (undefined1)destinationIndex;
     if ((writeRgb != 0) && (destinationClass != 8)) {
-      *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8) + 0x16) = uVar6;
+      *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8) + 0x16) = destinationByte;
       recordIndex2 = *(int *)(this + 0x60);
       destinationIndex = *(int *)(this + 0xa8);
       operandRecord = IRInst__getOperandRecord(inst,0);
@@ -335,7 +335,7 @@ int R520MachineAssembler__vslot73_setOutputDestination(this, writeRgb, writeAlph
       *(undefined1 *)(recordIndex2 * 0x48 + destinationIndex + 0x15) = lanesToRgbMaskResult;
     }
     if (writeAlpha != 0) {
-      *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8) + 0x22) = uVar6;
+      *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8) + 0x22) = destinationByte;
       if (destinationClass == 8) {
         *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8) + 0x23) = 1;
       }
@@ -1138,7 +1138,7 @@ int stub_getrealaddr(symbol)
   undefined4 symbol;
 {
   int length;
-  int iVar1;
+  int unusedLocal;
   int callResult;
   undefined4 callResult2;
   /* issue #76 (same defect class as issue #64's stack-split fixes elsewhere in this corpus):
@@ -1146,7 +1146,7 @@ int stub_getrealaddr(symbol)
    * (-0x58, -0x54, -0x50 - no gaps), meant to be ONE 72-byte buffer: code builds a symbol name
    * by strcpy'ing into symbolName+1 (needing far more than symbolName's own declared 4 bytes) and
    * then appends a literal string constant across all three via raw word-sized stores
-   * (`*(undefined4*)(symbolName+iVar1)`, `symbolNameWord2[iVar1]`, `*(undefined4*)(symbolNameWord1+iVar1)`).
+   * (`*(undefined4*)(symbolName+unusedLocal)`, `symbolNameWord2[unusedLocal]`, `*(undefined4*)(symbolNameWord1+unusedLocal)`).
    * -O0 doesn't lay separately-declared locals out contiguously, so this crashed writing/reading
    * through whatever unrelated stack content followed the undersized symbolName on its own.
    * Merged into one real buffer with offset-preserving aliases, per the established pattern. */

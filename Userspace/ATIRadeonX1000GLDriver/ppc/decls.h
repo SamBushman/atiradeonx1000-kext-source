@@ -3065,7 +3065,7 @@ extern int ValueKey__forwardSource3LaneIfEqual();
 extern int ValueKey__foldCompareSameSourcesValueNumber();
 extern int ValueKey__forwardSelectedSourceBySign();
 extern int ValueKey__forwardSelectedSourceByPositive();
-extern int FUN_00179b28();
+extern int ValueKey__foldLaneToZeroIfOppositeNegates();
 extern int ValueKey__allOperandLanesEqual();
 extern int Inst__allWrittenLanesSatisfy();
 extern int ValueKey__forwardOtherSourceIfZero();

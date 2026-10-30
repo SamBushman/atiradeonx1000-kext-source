@@ -1817,8 +1817,8 @@ int ValueKey__forwardSelectedSourceByPositive(ctx, lane)
   return 0;
 }
 
-/* FUN_00179b28 @ 0x179b28 (148 bytes) */
-int FUN_00179b28(ctx, lane)
+/* ValueKey__foldLaneToZeroIfOppositeNegates @ 0x179b28 (148 bytes) */
+int ValueKey__foldLaneToZeroIfOppositeNegates(ctx, lane)
   int ctx;
   int lane;
 {

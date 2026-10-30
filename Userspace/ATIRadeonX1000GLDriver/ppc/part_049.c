@@ -843,9 +843,9 @@ int Inst__foldSelectIntoUsers(inst, program)
   int userInst;
   int userField120;
   undefined4 cndOperandSelect;
-  undefined4 local_94;
-  undefined4 local_90;
-  undefined4 local_80;
+  undefined4 destRecordCopy0;
+  undefined4 destRecordCopy1;
+  undefined4 destRecordCopy5;
   int otherSelect;
   undefined4 userBlock;
   undefined4 userNext;
@@ -956,14 +956,14 @@ LAB_00187d00:
           cndOperandNumber = 2;
           loopIndex = 1;
         }
-        destRecordCopy = &local_94;
+        destRecordCopy = &destRecordCopy0;
         extraSource = 0;
         *(int *)(program + 500) = *(int *)(program + 500) + 1;
         Vector__removeAt(callResult[4],useIndex);
         callResult[0x58] = callResult[0x58] + -1;
-        local_80 = 0;
-        local_94 = 0;
-        local_90 = 0;
+        destRecordCopy5 = 0;
+        destRecordCopy0 = 0;
+        destRecordCopy1 = 0;
         operandRecord = IRInst__getOperandRecord(userInst,0);
         IROperand__copyFrom(destRecordCopy,operandRecord);
         otherSource = IRInst__getOperandSource(userInst,loopIndex);
