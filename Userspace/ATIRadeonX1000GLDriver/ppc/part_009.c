@@ -1416,40 +1416,58 @@ int extvsAssignVertexInputs(ctx, shader)
   uint instIndex;
   int scalarVariantCount;
   int matrixVariantCount;
-  bool bVar1;
-  bool bVar2;
-  undefined4 uVar3;
+  bool noVectorsLeft;
+  bool moreUnits;
+  undefined4 hwInputCode;
+  undefined4 newSlotArray;
   int iVar4;
-  int iVar5;
-  undefined4 *puVar6;
+  int slotAddr3;
+  int slotNumber;
+  int instrByteOffset;
+  int matrixRow;
+  int slotAddr;
+  int scalarRecord;
+  int boundCandidate;
+  int inputIndex;
+  int symbolDataType;
+  undefined4 *variantRecord2;
   int iVar7;
-  uint uVar8;
-  int iVar9;
+  int variantIndex;
+  int slotByteOffset;
+  int scanOffset;
+  uint inputMask;
+  int slotByteOffset2;
   int vectorVariantCount;
   int programState;
-  undefined4 *puVar12;
-  uint uVar13;
-  uint uVar14;
-  int iVar15;
+  undefined4 *hwInputCursor;
+  undefined4 *variantRecord3;
+  uint unitIndex;
+  uint nextSlot;
+  uint nextInputSlot;
+  int clearCountdown;
   int iVar16;
+  int variantRecord;
+  int slotByteOffset3;
+  int slotAddr2;
+  int scanCountdown;
   int iVar17;
   int boundVariants [32];
   int scalarVariants [32];
   int vectorVariants [32];
   int matrixVariants [34];
   
-  iVar7 = 0;
-  iVar15 = 0x20;
+  scanOffset = 0;
+  clearCountdown = 0x20;
   programState = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
   *(undefined4 *)(programState + 0x234) = 1;
   do {
-    *(undefined4 *)((int)boundVariants + iVar7) = 0;
-    *(undefined4 *)(iVar7 + (int)scalarVariants) = 0;
-    *(undefined4 *)(iVar7 + (int)vectorVariants) = 0;
-    *(undefined4 *)(iVar7 + (int)matrixVariants) = 0;
-    iVar7 = iVar7 + 4;
-    iVar15 = iVar15 + -1;
-  } while (iVar15 != 0);
+    *(undefined4 *)((int)boundVariants + scanOffset) = 0;
+    *(undefined4 *)(scanOffset + (int)scalarVariants) = 0;
+    *(undefined4 *)(scanOffset + (int)vectorVariants) = 0;
+    *(undefined4 *)(scanOffset + (int)matrixVariants) = 0;
+    scanOffset = scanOffset + 4;
+    clearCountdown = clearCountdown + -1;
+  } while (clearCountdown != 0);
   if (shader[5] == 0) {
     scalarVariantCount = 0;
     vectorVariantCount = 0;
@@ -1462,11 +1480,11 @@ int extvsAssignVertexInputs(ctx, shader)
     vectorVariantCount = 0;
     matrixVariantCount = 0;
     do {
-      iVar5 = instIndex * 0x74;
+      instrByteOffset = instIndex * 0x74;
       iVar17 = shader[6];
       iVar16 = iVar7;
-      if (((*(int *)(iVar5 + iVar17 + 0x20) == 2) &&
-          (iVar4 = *(int *)(iVar5 + iVar17 + 0x24) * 0x54 + shader[8],
+      if (((*(int *)(instrByteOffset + iVar17 + 0x20) == 2) &&
+          (iVar4 = *(int *)(instrByteOffset + iVar17 + 0x24) * 0x54 + shader[8],
           *(int *)(iVar4 + 0x28) == 0x87c1)) && (*(char *)(iVar4 + 0x3d) == '\0')) {
         if ((*(char *)(iVar4 + 0x44) == '\0') || (*(int *)(iVar4 + 0x48) == 0x12)) {
           iVar7 = *(int *)(iVar4 + 0x24);
@@ -1552,8 +1570,8 @@ int extvsAssignVertexInputs(ctx, shader)
         shader[0x16] = shader[0x16] + 1;
       }
       iVar4 = iVar16;
-      if (((*(int *)(iVar5 + iVar17 + 0x3c) == 2) &&
-          (iVar7 = *(int *)(iVar5 + iVar17 + 0x40) * 0x54 + shader[8],
+      if (((*(int *)(instrByteOffset + iVar17 + 0x3c) == 2) &&
+          (iVar7 = *(int *)(instrByteOffset + iVar17 + 0x40) * 0x54 + shader[8],
           *(int *)(iVar7 + 0x28) == 0x87c1)) && (*(char *)(iVar7 + 0x3d) == '\0')) {
         if ((*(char *)(iVar7 + 0x44) == '\0') || (*(int *)(iVar7 + 0x48) == 0x12)) {
           iVar16 = *(int *)(iVar7 + 0x24);
@@ -1639,20 +1657,20 @@ int extvsAssignVertexInputs(ctx, shader)
         shader[0x16] = shader[0x16] + 1;
       }
       iVar7 = iVar4;
-      if (((*(int *)(iVar5 + iVar17 + 0x58) == 2) &&
-          (iVar16 = *(int *)(iVar5 + iVar17 + 0x5c) * 0x54 + shader[8],
+      if (((*(int *)(instrByteOffset + iVar17 + 0x58) == 2) &&
+          (iVar16 = *(int *)(instrByteOffset + iVar17 + 0x5c) * 0x54 + shader[8],
           *(int *)(iVar16 + 0x28) == 0x87c1)) && (*(char *)(iVar16 + 0x3d) == '\0')) {
         if ((*(char *)(iVar16 + 0x44) == '\0') || (*(int *)(iVar16 + 0x48) == 0x12)) {
-          iVar5 = *(int *)(iVar16 + 0x24);
-          if (iVar5 == 0x87bf) {
+          symbolDataType = *(int *)(iVar16 + 0x24);
+          if (symbolDataType == 0x87bf) {
             vectorVariants[vectorVariantCount] = iVar16;
             vectorVariantCount = vectorVariantCount + 1;
           }
-          else if (iVar5 == 0x87c0) {
+          else if (symbolDataType == 0x87c0) {
             matrixVariants[matrixVariantCount] = iVar16;
             matrixVariantCount = matrixVariantCount + 1;
           }
-          else if (iVar5 == 0x87be) {
+          else if (symbolDataType == 0x87be) {
             scalarVariants[scalarVariantCount] = iVar16;
             scalarVariantCount = scalarVariantCount + 1;
           }
@@ -1669,9 +1687,9 @@ int extvsAssignVertexInputs(ctx, shader)
             shader[0xc] = shader[0xc] | 8;
             break;
           case 2:
-            iVar5 = *(int *)(iVar16 + 0x4c);
-            *(undefined1 *)(iVar5 + programState + 0x2e) = 1;
-            *(undefined1 *)((int)shader + iVar5 + 0x34) = 1;
+            inputIndex = *(int *)(iVar16 + 0x4c);
+            *(undefined1 *)(inputIndex + programState + 0x2e) = 1;
+            *(undefined1 *)((int)shader + inputIndex + 0x34) = 1;
             shader[0xc] = shader[0xc] | 4;
             break;
           case 3:
@@ -1728,164 +1746,164 @@ int extvsAssignVertexInputs(ctx, shader)
     } while (instIndex < (uint)shader[5]);
   }
   if (*(char *)(programState + 0x2c) != '\0') {
-    iVar7 = 0;
-    iVar16 = 0x20;
+    scanOffset = 0;
+    scanCountdown = 0x20;
     do {
-      iVar5 = *(int *)((int)boundVariants + iVar7);
-      if (((iVar5 == 0) || (*(int *)(iVar5 + 0x48) != 0)) || (*(int *)(iVar5 + 0x4c) != 0)) {
-        iVar5 = 0;
+      boundCandidate = *(int *)((int)boundVariants + scanOffset);
+      if (((boundCandidate == 0) || (*(int *)(boundCandidate + 0x48) != 0)) || (*(int *)(boundCandidate + 0x4c) != 0)) {
+        boundCandidate = 0;
       }
-      iVar16 = iVar16 + -1;
-    } while ((iVar16 != 0) && (iVar7 = iVar7 + 4, iVar5 == 0));
-    *(undefined4 *)(iVar5 + 4) = 0;
+      scanCountdown = scanCountdown + -1;
+    } while ((scanCountdown != 0) && (scanOffset = scanOffset + 4, boundCandidate == 0));
+    *(undefined4 *)(boundCandidate + 4) = 0;
     *(undefined4 *)(programState + 0x198) = 0;
     *(undefined1 *)(*(int *)(programState + 0x24) + 0x10) = 1;
   }
-  bVar1 = vectorVariantCount == 0;
-  uVar14 = 2;
-  uVar13 = 0;
+  noVectorsLeft = vectorVariantCount == 0;
+  nextInputSlot = 2;
+  unitIndex = 0;
   DAT_001dba98 = 0xe;
-  iVar7 = 0x50;
-  puVar12 = &DAT_001dba44;
+  slotByteOffset = 0x50;
+  hwInputCursor = &DAT_001dba44;
   do {
-    if (!bVar1) {
+    if (!noVectorsLeft) {
       vectorVariantCount = vectorVariantCount + -1;
-      puVar6 = (undefined4 *)((int (*)())popFirstNonNull32)(vectorVariants);
-      uVar3 = *puVar12;
-      bVar1 = vectorVariantCount == 0;
-      puVar6[1] = uVar14;
-      puVar12 = puVar12 + 1;
-      uVar14 = uVar14 + 1;
-      *puVar6 = uVar3;
-      iVar16 = iVar7 + *(int *)(programState + 0x24);
-      iVar7 = iVar7 + 0x28;
-      *(undefined1 *)(iVar16 + 0x10) = 1;
-      *(uint *)(programState + 0x234) = 4 << (uVar13 & 0x3f) | *(uint *)(programState + 0x234);
+      variantRecord2 = (undefined4 *)((int (*)())popFirstNonNull32)(vectorVariants);
+      hwInputCode = *hwInputCursor;
+      noVectorsLeft = vectorVariantCount == 0;
+      variantRecord2[1] = nextInputSlot;
+      hwInputCursor = hwInputCursor + 1;
+      nextInputSlot = nextInputSlot + 1;
+      *variantRecord2 = hwInputCode;
+      slotAddr2 = slotByteOffset + *(int *)(programState + 0x24);
+      slotByteOffset = slotByteOffset + 0x28;
+      *(undefined1 *)(slotAddr2 + 0x10) = 1;
+      *(uint *)(programState + 0x234) = 4 << (unitIndex & 0x3f) | *(uint *)(programState + 0x234);
     }
-    bVar2 = uVar13 != 7;
-    uVar13 = uVar13 + 1;
-  } while (bVar2);
-  iVar7 = uVar14 * 0x28;
-  uVar13 = 0;
-  puVar12 = (undefined4 *)(uVar14 * 4 + 0x1dba3c);
+    moreUnits = unitIndex != 7;
+    unitIndex = unitIndex + 1;
+  } while (moreUnits);
+  slotByteOffset = nextInputSlot * 0x28;
+  unitIndex = 0;
+  hwInputCursor = (undefined4 *)(nextInputSlot * 4 + 0x1dba3c);
   do {
-    if (!bVar1) {
+    if (!noVectorsLeft) {
       vectorVariantCount = vectorVariantCount + -1;
-      puVar6 = (undefined4 *)((int (*)())popFirstNonNull32)(vectorVariants);
-      uVar3 = *puVar12;
-      bVar1 = vectorVariantCount == 0;
-      puVar6[1] = uVar14;
-      puVar12 = puVar12 + 1;
-      uVar14 = uVar14 + 1;
-      *puVar6 = uVar3;
-      iVar16 = iVar7 + *(int *)(programState + 0x24);
-      iVar7 = iVar7 + 0x28;
-      *(undefined1 *)(iVar16 + 0x10) = 1;
-      *(uint *)(programState + 0x234) = 0x400 << (uVar13 & 0x3f) | *(uint *)(programState + 0x234);
+      variantRecord2 = (undefined4 *)((int (*)())popFirstNonNull32)(vectorVariants);
+      hwInputCode = *hwInputCursor;
+      noVectorsLeft = vectorVariantCount == 0;
+      variantRecord2[1] = nextInputSlot;
+      hwInputCursor = hwInputCursor + 1;
+      nextInputSlot = nextInputSlot + 1;
+      *variantRecord2 = hwInputCode;
+      slotAddr2 = slotByteOffset + *(int *)(programState + 0x24);
+      slotByteOffset = slotByteOffset + 0x28;
+      *(undefined1 *)(slotAddr2 + 0x10) = 1;
+      *(uint *)(programState + 0x234) = 0x400 << (unitIndex & 0x3f) | *(uint *)(programState + 0x234);
     }
-    bVar2 = uVar13 != 7;
-    uVar13 = uVar13 + 1;
-  } while (bVar2);
-  uVar13 = uVar14;
-  if (*(char *)(uVar14 * 0x28 + *(int *)(programState + 0x24) + 0x10) != '\0') {
-    uVar8 = *(uint *)(programState + 0x234);
-    uVar13 = uVar14 + 1;
-    *(uint *)(programState + 0x234) = uVar8 | 0x40000;
-    if (*(char *)(uVar13 * 0x28 + *(int *)(programState + 0x24) + 0x10) != '\0') {
-      uVar13 = uVar14 + 2;
-      *(uint *)(programState + 0x234) = uVar8 | 0xc0000;
+    moreUnits = unitIndex != 7;
+    unitIndex = unitIndex + 1;
+  } while (moreUnits);
+  nextSlot = nextInputSlot;
+  if (*(char *)(nextInputSlot * 0x28 + *(int *)(programState + 0x24) + 0x10) != '\0') {
+    inputMask = *(uint *)(programState + 0x234);
+    nextSlot = nextInputSlot + 1;
+    *(uint *)(programState + 0x234) = inputMask | 0x40000;
+    if (*(char *)(nextSlot * 0x28 + *(int *)(programState + 0x24) + 0x10) != '\0') {
+      nextSlot = nextInputSlot + 2;
+      *(uint *)(programState + 0x234) = inputMask | 0xc0000;
     }
   }
-  if (!bVar1) {
+  if (!noVectorsLeft) {
     vectorVariantCount = vectorVariantCount + -1;
-    puVar12 = (undefined4 *)((int (*)())popFirstNonNull32)(vectorVariants);
-    iVar7 = uVar13 * 0x28;
-    bVar1 = vectorVariantCount == 0;
-    uVar3 = *(undefined4 *)(uVar13 * 4 + 0x1dba3c);
-    puVar12[1] = uVar13;
-    uVar13 = uVar13 + 1;
-    *puVar12 = uVar3;
-    *(undefined1 *)(iVar7 + *(int *)(programState + 0x24) + 0x10) = 1;
+    variantRecord3 = (undefined4 *)((int (*)())popFirstNonNull32)(vectorVariants);
+    slotByteOffset = nextSlot * 0x28;
+    noVectorsLeft = vectorVariantCount == 0;
+    hwInputCode = *(undefined4 *)(nextSlot * 4 + 0x1dba3c);
+    variantRecord3[1] = nextSlot;
+    nextSlot = nextSlot + 1;
+    *variantRecord3 = hwInputCode;
+    *(undefined1 *)(slotByteOffset + *(int *)(programState + 0x24) + 0x10) = 1;
     *(uint *)(programState + 0x234) = *(uint *)(programState + 0x234) | 0x100000;
   }
-  if (((scalarVariantCount != 0) || (!bVar1)) || (matrixVariantCount != 0)) {
+  if (((scalarVariantCount != 0) || (!noVectorsLeft)) || (matrixVariantCount != 0)) {
     *(undefined1 *)(shader + 4) = 0;
     if (scalarVariantCount != 0) {
-      iVar16 = uVar13 * 0x28;
-      iVar7 = 0;
+      slotByteOffset3 = nextSlot * 0x28;
+      variantIndex = 0;
       do {
-        iVar5 = ((int (*)())popFirstNonNull32)(scalarVariants);
-        if (*(uint *)(programState + 0x28) <= uVar13) {
-          uVar3 = (**(code **)(ctx + 0x10))(*(uint *)(programState + 0x28) + 0x10,0x28);
+        scalarRecord = ((int (*)())popFirstNonNull32)(scalarVariants);
+        if (*(uint *)(programState + 0x28) <= nextSlot) {
+          newSlotArray = (**(code **)(ctx + 0x10))(*(uint *)(programState + 0x28) + 0x10,0x28);
           (**(code **)(((unsigned char *)0x00001344) + ctx))
-                    (uVar3,*(undefined4 *)(programState + 0x24),*(int *)(programState + 0x28) * 0x28);
+                    (newSlotArray,*(undefined4 *)(programState + 0x24),*(int *)(programState + 0x28) * 0x28);
           (**(code **)(ctx + 0x18))(*(undefined4 *)(programState + 0x24));
-          *(undefined4 *)(programState + 0x24) = uVar3;
+          *(undefined4 *)(programState + 0x24) = newSlotArray;
           *(int *)(programState + 0x28) = *(int *)(programState + 0x28) + 0x10;
         }
-        *(uint *)(iVar5 + 4) = uVar13;
-        *(undefined4 *)(iVar5 + 8) = 0;
-        iVar7 = iVar7 + 1;
-        uVar13 = uVar13 + 1;
-        iVar5 = iVar16 + *(int *)(programState + 0x24);
-        iVar16 = iVar16 + 0x28;
-        *(undefined1 *)(iVar5 + 0x10) = 1;
-      } while (scalarVariantCount != iVar7);
+        *(uint *)(scalarRecord + 4) = nextSlot;
+        *(undefined4 *)(scalarRecord + 8) = 0;
+        variantIndex = variantIndex + 1;
+        nextSlot = nextSlot + 1;
+        slotAddr = slotByteOffset3 + *(int *)(programState + 0x24);
+        slotByteOffset3 = slotByteOffset3 + 0x28;
+        *(undefined1 *)(slotAddr + 0x10) = 1;
+      } while (scalarVariantCount != variantIndex);
     }
-    if (!bVar1) {
-      iVar9 = uVar13 * 0x28;
-      iVar7 = 0;
+    if (!noVectorsLeft) {
+      slotByteOffset2 = nextSlot * 0x28;
+      variantIndex = 0;
       do {
-        iVar16 = ((int (*)())popFirstNonNull32)(vectorVariants);
-        if (*(uint *)(programState + 0x28) <= uVar13) {
-          uVar3 = (**(code **)(ctx + 0x10))(*(uint *)(programState + 0x28) + 0x10,0x28);
+        variantRecord = ((int (*)())popFirstNonNull32)(vectorVariants);
+        if (*(uint *)(programState + 0x28) <= nextSlot) {
+          newSlotArray = (**(code **)(ctx + 0x10))(*(uint *)(programState + 0x28) + 0x10,0x28);
           (**(code **)(((unsigned char *)0x00001344) + ctx))
-                    (uVar3,*(undefined4 *)(programState + 0x24),*(int *)(programState + 0x28) * 0x28);
+                    (newSlotArray,*(undefined4 *)(programState + 0x24),*(int *)(programState + 0x28) * 0x28);
           (**(code **)(ctx + 0x18))(*(undefined4 *)(programState + 0x24));
-          *(undefined4 *)(programState + 0x24) = uVar3;
+          *(undefined4 *)(programState + 0x24) = newSlotArray;
           *(int *)(programState + 0x28) = *(int *)(programState + 0x28) + 0x10;
         }
-        *(uint *)(iVar16 + 4) = uVar13;
-        iVar7 = iVar7 + 1;
-        uVar13 = uVar13 + 1;
-        iVar16 = *(int *)(programState + 0x24) + iVar9;
-        iVar9 = iVar9 + 0x28;
-        *(undefined1 *)(iVar16 + 0x10) = 1;
-      } while (vectorVariantCount != iVar7);
+        *(uint *)(variantRecord + 4) = nextSlot;
+        variantIndex = variantIndex + 1;
+        nextSlot = nextSlot + 1;
+        slotAddr2 = *(int *)(programState + 0x24) + slotByteOffset2;
+        slotByteOffset2 = slotByteOffset2 + 0x28;
+        *(undefined1 *)(slotAddr2 + 0x10) = 1;
+      } while (vectorVariantCount != variantIndex);
     }
     if (matrixVariantCount != 0) {
-      iVar9 = uVar13 * 0x28;
-      iVar7 = 0;
+      slotByteOffset2 = nextSlot * 0x28;
+      variantIndex = 0;
       do {
         vectorVariantCount = ((int (*)())popFirstNonNull32)(matrixVariants);
-        if (*(uint *)(programState + 0x28) <= uVar13 + 3) {
-          uVar3 = (**(code **)(ctx + 0x10))(*(uint *)(programState + 0x28) + 0x10,0x28);
+        if (*(uint *)(programState + 0x28) <= nextSlot + 3) {
+          newSlotArray = (**(code **)(ctx + 0x10))(*(uint *)(programState + 0x28) + 0x10,0x28);
           (**(code **)(((unsigned char *)0x00001344) + ctx))
-                    (uVar3,*(undefined4 *)(programState + 0x24),*(int *)(programState + 0x28) * 0x28);
+                    (newSlotArray,*(undefined4 *)(programState + 0x24),*(int *)(programState + 0x28) * 0x28);
           (**(code **)(ctx + 0x18))(*(undefined4 *)(programState + 0x24));
-          *(undefined4 *)(programState + 0x24) = uVar3;
+          *(undefined4 *)(programState + 0x24) = newSlotArray;
           *(int *)(programState + 0x28) = *(int *)(programState + 0x28) + 0x10;
         }
-        iVar5 = 0;
+        matrixRow = 0;
         iVar17 = 4;
-        iVar16 = iVar9;
+        slotByteOffset3 = slotByteOffset2;
         do {
-          iVar4 = uVar13 + iVar5;
-          iVar5 = iVar5 + 1;
-          *(int *)(vectorVariantCount + 0x10) = iVar4;
+          slotNumber = nextSlot + matrixRow;
+          matrixRow = matrixRow + 1;
+          *(int *)(vectorVariantCount + 0x10) = slotNumber;
           vectorVariantCount = vectorVariantCount + 4;
-          iVar4 = iVar16 + *(int *)(programState + 0x24);
-          iVar16 = iVar16 + 0x28;
-          *(undefined1 *)(iVar4 + 0x10) = 1;
+          slotAddr3 = slotByteOffset3 + *(int *)(programState + 0x24);
+          slotByteOffset3 = slotByteOffset3 + 0x28;
+          *(undefined1 *)(slotAddr3 + 0x10) = 1;
           iVar17 = iVar17 + -1;
         } while (iVar17 != 0);
-        iVar7 = iVar7 + 1;
-        uVar13 = uVar13 + 4;
-        iVar9 = iVar9 + 0xa0;
-      } while (iVar7 != matrixVariantCount);
+        variantIndex = variantIndex + 1;
+        nextSlot = nextSlot + 4;
+        slotByteOffset2 = slotByteOffset2 + 0xa0;
+      } while (variantIndex != matrixVariantCount);
     }
   }
-  *(uint *)(programState + 0x2a4) = uVar13;
+  *(uint *)(programState + 0x2a4) = nextSlot;
   return;
 }
 
