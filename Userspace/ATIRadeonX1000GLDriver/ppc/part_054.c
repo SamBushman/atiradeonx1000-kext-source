@@ -77,15 +77,19 @@ int R520MachineAssembler__vslot28_endLoop(this, node, block, compiler)
   undefined4 block;
   undefined4 compiler;
 {
+  int loopStackOffset;
+  int loopRecordPtr;
+  int loopCount;
+  int recordTable;
   int vector;
-  byte bVar1;
+  byte prevLoopCount;
   int *loopPtr;
-  int iVar3;
-  int iVar4;
+  int prevRecordOffset;
+  int recordIndex;
   uint loopIndex2;
-  int a4;
-  int iVar6;
-  int iVar7;
+  int loopStartOffset;
+  int loopStackDepth;
+  int prevRecordPtr;
   int loopRemaining;
   int loopStartRecord;
   undefined8 optionEnabled;
@@ -98,69 +102,69 @@ int R520MachineAssembler__vslot28_endLoop(this, node, block, compiler)
   }
   loopStartRecord = *loopPtr;
   Vector__removeAt(vector,loopIndex2 - 1);
-  iVar4 = this[0x18];
+  recordIndex = this[0x18];
   optionEnabled = Compiler__isOptionEnabled(compiler,0x4b);
   if ((int)((ulonglong)optionEnabled >> 0x20) == 0) {
-    iVar4 = this[0x2a];
+    recordTable = this[0x2a];
   }
   else {
-    iVar3 = (iVar4 + -1) * 0x48;
-    iVar4 = this[0x2a];
-    iVar7 = iVar4 + iVar3;
-    if ((((*(int *)(iVar4 + iVar3) == 5) && (*(char *)(iVar7 + 0xe) == '\0')) &&
-        ((*(uint *)(iVar7 + 0x10) & 0xff00ff00) == 0x1000000)) &&
-       (*(char *)(iVar4 + loopStartRecord * 0x48 + 0xf) == '\0')) {
-      bVar1 = *(byte *)(iVar7 + 0x13);
+    prevRecordOffset = (recordIndex + -1) * 0x48;
+    recordTable = this[0x2a];
+    prevRecordPtr = recordTable + prevRecordOffset;
+    if ((((*(int *)(recordTable + prevRecordOffset) == 5) && (*(char *)(prevRecordPtr + 0xe) == '\0')) &&
+        ((*(uint *)(prevRecordPtr + 0x10) & 0xff00ff00) == 0x1000000)) &&
+       (*(char *)(recordTable + loopStartRecord * 0x48 + 0xf) == '\0')) {
+      prevLoopCount = *(byte *)(prevRecordPtr + 0x13);
       this[0x18] = this[0x18] + -1;
       this[0x2f] = this[0x2f] + 1;
-      iVar3 = bVar1 + 1;
+      loopCount = prevLoopCount + 1;
       *(int *)(this[4] + 0x1c) = *(int *)(this[4] + 0x1c) + 1;
-      iVar4 = this[0x2a];
+      recordTable = this[0x2a];
       goto LAB_001a168c;
     }
   }
-  iVar3 = 1;
+  loopCount = 1;
   this[0x2f] = 0;
 LAB_001a168c:
-  a4 = loopStartRecord * 0x48;
-  *(short *)(iVar4 + a4 + 0xc) = (short)this[0x18] - (short)this[0x1d];
+  loopStartOffset = loopStartRecord * 0x48;
+  *(short *)(recordTable + loopStartOffset + 0xc) = (short)this[0x18] - (short)this[0x1d];
   loopRemaining = this[0x2f];
-  iVar6 = this[0x2e];
-  iVar7 = iVar6 * 4;
-  this[iVar6 + 0x30] = loopStartRecord;
+  loopStackDepth = this[0x2e];
+  loopStackOffset = loopStackDepth * 4;
+  this[loopStackDepth + 0x30] = loopStartRecord;
   if (0 < loopRemaining) {
-    iVar4 = this[0x2a];
-    loopPtr = this + iVar6 + 0x30;
-    loopIndex2 = (uint)*(byte *)(iVar4 + a4 + 0x13);
+    recordTable = this[0x2a];
+    loopPtr = this + loopStackDepth + 0x30;
+    loopIndex2 = (uint)*(byte *)(recordTable + loopStartOffset + 0x13);
     while( true ) {
-      if (*(char *)(*loopPtr * 0x48 + iVar4 + 0xf) == '\0') {
+      if (*(char *)(*loopPtr * 0x48 + recordTable + 0xf) == '\0') {
         loopIndex2 = loopIndex2 + 1;
       }
       loopStartRecord = loopPtr[1];
-      iVar6 = iVar4 + loopStartRecord * 0x48;
-      if (*(char *)(iVar6 + 0xf) == '\x01') {
+      loopRecordPtr = recordTable + loopStartRecord * 0x48;
+      if (*(char *)(loopRecordPtr + 0xf) == '\x01') {
         loopIndex2 = loopIndex2 + 1;
       }
-      *(char *)(iVar6 + 0x13) = (char)loopIndex2;
+      *(char *)(loopRecordPtr + 0x13) = (char)loopIndex2;
       if (loopIndex2 != 0) {
         *(undefined1 *)(loopStartRecord * 0x48 + this[0x2a] + 0x15) = 1;
       }
       loopPtr = loopPtr + 1;
       loopRemaining = loopRemaining + -1;
       if (loopRemaining == 0) break;
-      iVar4 = this[0x2a];
+      recordTable = this[0x2a];
     }
-    iVar6 = this[0x2e];
+    loopStackDepth = this[0x2e];
   }
-  this[0x2e] = iVar6 + -1;
+  this[0x2e] = loopStackDepth + -1;
   *(undefined4 *)(this[0x18] * 0x48 + this[0x2a]) = 5;
   *(undefined1 *)(this[0x18] * 0x48 + this[0x2a] + 0xe) = 0;
   *(undefined1 *)(this[0x18] * 0x48 + this[0x2a] + 0x12) = 0;
   *(undefined1 *)(this[0x18] * 0x48 + this[0x2a] + 0x10) = 1;
   *(undefined1 *)(this[0x18] * 0x48 + this[0x2a] + 0x14) = 1;
-  *(char *)(this[0x18] * 0x48 + this[0x2a] + 0x13) = (char)iVar3;
+  *(char *)(this[0x18] * 0x48 + this[0x2a] + 0x13) = (char)loopCount;
   (**(code **)(*this + 0x15c))
-            (this,(int)optionEnabled,iVar3,iVar7,a4,iVar4,*(code **)(*this + 0x15c),0);
+            (this,(int)optionEnabled,loopCount,loopStackOffset,loopStartOffset,recordTable,*(code **)(*this + 0x15c),0);
   if (*(int *)(node + 0xdc) != 0) {
     *(undefined1 *)(this[0x18] * 0x48 + this[0x2a] + -0x44) = 1;
   }

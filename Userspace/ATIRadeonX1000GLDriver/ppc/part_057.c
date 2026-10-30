@@ -127,50 +127,51 @@ int OpcodeInfo__deleting_dtor(this)
 }
 
 /* IrAddFloat__vslot5_getValueKeyTransformLevel @ 0x1d0278 (288 bytes) */
-int IrAddFloat__vslot5_getValueKeyTransformLevel(this, param_2, param_3, compiler)
+int IrAddFloat__vslot5_getValueKeyTransformLevel(this, ctx, laneResultPtr, compiler)
   undefined4 this;
-  int param_2;
-  int *param_3;
+  int ctx;
+  int *laneResultPtr;
   int compiler;
 {
-  bool bVar1;
-  int iVar2;
+  int instructionCount;
+  bool notLastLane;
+  int folded;
   int operandRecord;
-  int iVar4;
+  int instructionLimit;
   undefined4 inst;
-  undefined4 uVar6;
+  undefined4 transformLevel;
   int loopIndex;
   
-  iVar2 = FUN_0017d610(param_2);
-  if (((iVar2 == 0) && (iVar2 = FUN_0017cdbc(param_2), iVar2 == 0)) &&
-     ((iVar2 = Compiler__isOptionEnabled(compiler,0xc), iVar2 == 0 || (iVar2 = FUN_0017e338(param_2), iVar2 == 0))
+  folded = FUN_0017d610(ctx);
+  if (((folded == 0) && (folded = ValueKey__foldAddOfZeroSource(ctx), folded == 0)) &&
+     ((folded = Compiler__isOptionEnabled(compiler,0xc), folded == 0 || (folded = FUN_0017e338(ctx), folded == 0))
      )) {
-    iVar4 = *(int *)(compiler + 0x658);
-    iVar2 = *(int *)(*(int *)(compiler + 0x6c4) + 0xa8);
-    inst = *(undefined4 *)(param_2 + 0xb0);
-    uVar6 = 2;
+    instructionLimit = *(int *)(compiler + 0x658);
+    instructionCount = *(int *)(*(int *)(compiler + 0x6c4) + 0xa8);
+    inst = *(undefined4 *)(ctx + 0xb0);
+    transformLevel = 2;
     loopIndex = 0;
     do {
       operandRecord = IRInst__getOperandRecord(inst,0);
       if (*(char *)(loopIndex + operandRecord + 0x10) != '\x01') {
-        if (iVar4 <= iVar2) {
-          return uVar6;
+        if (instructionLimit <= instructionCount) {
+          return transformLevel;
         }
-        if ((*param_3 == 0x7ffffffe) &&
-           ((operandRecord = FUN_00179b28(param_2,loopIndex), operandRecord != 0 ||
-            (operandRecord = ValueKey__forwardOtherSourceIfZero(param_2,loopIndex), operandRecord != 0)))) {
-          uVar6 = 1;
+        if ((*laneResultPtr == 0x7ffffffe) &&
+           ((operandRecord = FUN_00179b28(ctx,loopIndex), operandRecord != 0 ||
+            (operandRecord = ValueKey__forwardOtherSourceIfZero(ctx,loopIndex), operandRecord != 0)))) {
+          transformLevel = 1;
         }
       }
-      bVar1 = loopIndex != 3;
-      param_3 = param_3 + 1;
+      notLastLane = loopIndex != 3;
+      laneResultPtr = laneResultPtr + 1;
       loopIndex = loopIndex + 1;
-    } while (bVar1);
+    } while (notLastLane);
   }
   else {
-    uVar6 = 0;
+    transformLevel = 0;
   }
-  return uVar6;
+  return transformLevel;
 }
 
 /* IrCos__fold @ 0x1d05b0 (144 bytes) */
@@ -508,44 +509,45 @@ int IrSetGTFloat__fold(this, result, operands)
 }
 
 /* IrAddInt__vslot5_getValueKeyTransformLevel @ 0x1d0e0c (212 bytes) */
-int IrAddInt__vslot5_getValueKeyTransformLevel(this, param_2, param_3, param_4)
+int IrAddInt__vslot5_getValueKeyTransformLevel(this, ctx, laneResultPtr, compiler)
   undefined4 this;
-  int param_2;
-  int *param_3;
-  int param_4;
+  int ctx;
+  int *laneResultPtr;
+  int compiler;
 {
-  bool bVar1;
-  int iVar2;
+  int instructionCount;
+  bool notLastLane;
+  int foldedAddOfZero;
   int operandRecord;
-  int iVar4;
-  undefined4 uVar5;
+  int instructionLimit;
+  undefined4 transformLevel;
   undefined4 inst;
   int loopIndex;
   
-  iVar2 = FUN_0017cdbc(param_2);
-  uVar5 = 0;
-  if (iVar2 == 0) {
-    iVar4 = *(int *)(param_4 + 0x658);
-    iVar2 = *(int *)(*(int *)(param_4 + 0x6c4) + 0xa8);
-    inst = *(undefined4 *)(param_2 + 0xb0);
-    uVar5 = 2;
+  foldedAddOfZero = ValueKey__foldAddOfZeroSource(ctx);
+  transformLevel = 0;
+  if (foldedAddOfZero == 0) {
+    instructionLimit = *(int *)(compiler + 0x658);
+    instructionCount = *(int *)(*(int *)(compiler + 0x6c4) + 0xa8);
+    inst = *(undefined4 *)(ctx + 0xb0);
+    transformLevel = 2;
     loopIndex = 0;
     do {
       operandRecord = IRInst__getOperandRecord(inst,0);
       if (*(char *)(loopIndex + operandRecord + 0x10) != '\x01') {
-        if (iVar4 <= iVar2) {
-          return uVar5;
+        if (instructionLimit <= instructionCount) {
+          return transformLevel;
         }
-        if ((*param_3 == 0x7ffffffe) && (operandRecord = ValueKey__forwardOtherSourceIfZero(param_2,loopIndex), operandRecord != 0)) {
-          uVar5 = 1;
+        if ((*laneResultPtr == 0x7ffffffe) && (operandRecord = ValueKey__forwardOtherSourceIfZero(ctx,loopIndex), operandRecord != 0)) {
+          transformLevel = 1;
         }
       }
-      bVar1 = loopIndex != 3;
-      param_3 = param_3 + 1;
+      notLastLane = loopIndex != 3;
+      laneResultPtr = laneResultPtr + 1;
       loopIndex = loopIndex + 1;
-    } while (bVar1);
+    } while (notLastLane);
   }
-  return uVar5;
+  return transformLevel;
 }
 
 /* IrMulFloat__fold @ 0x1d0ee0 (72 bytes) */

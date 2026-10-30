@@ -793,8 +793,8 @@ int ValueKey__foldMadZeroMultiplicand(ctx)
   return 0;
 }
 
-/* FUN_0017cdbc @ 0x17cdbc (192 bytes) */
-int FUN_0017cdbc(ctx)
+/* ValueKey__foldAddOfZeroSource @ 0x17cdbc (192 bytes) */
+int ValueKey__foldAddOfZeroSource(ctx)
   int ctx;
 {
   int callResult;

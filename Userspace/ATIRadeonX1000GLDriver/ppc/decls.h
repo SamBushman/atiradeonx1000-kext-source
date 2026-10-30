@@ -3098,7 +3098,7 @@ extern int ValueKey__replaceWithSource1IfSourcesEqual();
 extern int ValueKey__foldMinOfConstants();
 extern int ValueKey__foldMaxOfConstants();
 extern int ValueKey__foldMadZeroMultiplicand();
-extern int FUN_0017cdbc();
+extern int ValueKey__foldAddOfZeroSource();
 extern int ValueKey__rewriteAsMovOfReplacement();
 extern int ValueKey__rewriteAsMovOfValueKey();
 extern int ValueKey__rewriteAsMovOfVec4Constant();

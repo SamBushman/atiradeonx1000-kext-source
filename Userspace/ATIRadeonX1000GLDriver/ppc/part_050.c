@@ -143,49 +143,51 @@ int FudoPs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwi
   dword *constants;
   int *laneSwizzle;
 {
-  float fVar1;
-  bool bVar2;
-  int *piVar3;
+  int foundVector;
+  int *laneSwizzleArg;
+  float splatValue;
+  bool noLaneSeen;
+  int *laneSwizzleCursor;
   uint *loopPtr2;
   undefined *puVar5;
-  int iVar6;
+  int allLanesEqual;
   dword *loopPtr;
-  undefined4 uVar8;
+  undefined4 registerMap;
   int loopRemaining2;
   int loopRemaining;
-  uint local_38;
-  float local_20;
+  uint splatVec4;
+  float lastSplatStore;
   
   if (*laneSwizzle != 0x4040404) {
     puVar5 = &DAT_001b19e0;
-    fVar1 = 0.0;
+    splatValue = 0.0;
     loopRemaining2 = 4;
-    bVar2 = true;
-    iVar6 = 1;
-    piVar3 = laneSwizzle;
+    noLaneSeen = true;
+    allLanesEqual = 1;
+    laneSwizzleCursor = laneSwizzle;
     loopPtr = constants;
     do {
-      if (*(char *)piVar3 != '\x04') {
-        if (bVar2) {
-          fVar1 = (float)*loopPtr;
-          bVar2 = false;
+      if (*(char *)laneSwizzleCursor != '\x04') {
+        if (noLaneSeen) {
+          splatValue = (float)*loopPtr;
+          noLaneSeen = false;
         }
-        else if ((float)*loopPtr != fVar1) {
-          iVar6 = 0;
+        else if ((float)*loopPtr != splatValue) {
+          allLanesEqual = 0;
         }
       }
-      piVar3 = (int *)((int)piVar3 + 1);
+      laneSwizzleCursor = (int *)((int)laneSwizzleCursor + 1);
       loopPtr = loopPtr + 1;
       loopRemaining2 = loopRemaining2 + -1;
     } while (loopRemaining2 != 0);
-    piVar3 = laneSwizzle;
-    if (iVar6 == 0) {
+    laneSwizzleArg = laneSwizzle;
+    if (allLanesEqual == 0) {
       loopRemaining2 = Program__findOrCreateConstInst(program,constants,*laneSwizzle);
     }
     else {
       puVar5 = (undefined *)0x4;
       loopRemaining2 = 4;
-      loopPtr2 = &local_38;
+      loopPtr2 = &splatVec4;
       do {
         *loopPtr2 = 0x7ffffffe;
         loopPtr2 = loopPtr2 + 1;
@@ -195,24 +197,24 @@ int FudoPs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwi
       loopRemaining2 = 0;
       loopRemaining = 4;
       do {
-        local_20 = fVar1;
-        *(float *)(loopRemaining2 + (int)&local_38) = fVar1;
+        lastSplatStore = splatValue;
+        *(float *)(loopRemaining2 + (int)&splatVec4) = splatValue;
         loopRemaining2 = loopRemaining2 + 4;
         loopRemaining = loopRemaining + -1;
       } while (loopRemaining != 0);
-      loopRemaining2 = Program__findOrCreateConstInst(program,&local_38,0x10203);
+      loopRemaining2 = Program__findOrCreateConstInst(program,&splatVec4,0x10203);
     }
     if (loopRemaining2 != 0) {
       return loopRemaining2;
     }
-    uVar8 = *(undefined4 *)(program + 0x3ac);
-    iVar6 = RegisterMap__findConstVectorExact(uVar8,constants,laneSwizzle,piVar3,puVar5,iVar6,loopPtr);
-    if (iVar6 != 0) {
-      return iVar6;
+    registerMap = *(undefined4 *)(program + 0x3ac);
+    allLanesEqual = RegisterMap__findConstVectorExact(registerMap,constants,laneSwizzle,laneSwizzleArg,puVar5,allLanesEqual,loopPtr);
+    if (allLanesEqual != 0) {
+      return allLanesEqual;
     }
-    iVar6 = RegisterMap__findConstVector(uVar8,constants,laneSwizzle,piVar3);
-    if (iVar6 != 0) {
-      return iVar6;
+    foundVector = RegisterMap__findConstVector(registerMap,constants,laneSwizzle,laneSwizzleArg);
+    if (foundVector != 0) {
+      return foundVector;
     }
   }
   return 0;

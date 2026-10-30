@@ -2892,7 +2892,7 @@
 0x17c910	516	ValueKey__foldMinOfConstants	part_048	converted
 0x17cb14	516	ValueKey__foldMaxOfConstants	part_048	converted
 0x17cd18	164	ValueKey__foldMadZeroMultiplicand	part_048	converted
-0x17cdbc	192	FUN_0017cdbc	part_048	converted
+0x17cdbc	192	ValueKey__foldAddOfZeroSource	part_048	converted
 0x17ce7c	284	ValueKey__rewriteAsMovOfReplacement	part_048	converted
 0x17d06c	368	ValueKey__rewriteAsMovOfValueKey	part_048	converted
 0x17d26c	196	ValueKey__rewriteAsMovOfVec4Constant	part_048	converted

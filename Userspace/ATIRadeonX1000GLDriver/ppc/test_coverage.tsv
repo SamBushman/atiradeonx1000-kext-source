@@ -2892,7 +2892,7 @@
 0x17c910	ValueKey__foldMinOfConstants	516	no	indirect call (driver context / vtable / callback)
 0x17cb14	ValueKey__foldMaxOfConstants	516	no	indirect call (driver context / vtable / callback)
 0x17cd18	ValueKey__foldMadZeroMultiplicand	164	yes	
-0x17cdbc	FUN_0017cdbc	192	yes	
+0x17cdbc	ValueKey__foldAddOfZeroSource	192	yes	
 0x17ce7c	ValueKey__rewriteAsMovOfReplacement	492	yes	
 0x17d06c	ValueKey__rewriteAsMovOfValueKey	476	yes	
 0x17d26c	ValueKey__rewriteAsMovOfVec4Constant	392	yes	
