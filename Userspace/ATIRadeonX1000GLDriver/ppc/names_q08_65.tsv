@@ -1,0 +1,41 @@
+local	R520MachineAssembler__vslot55_tryEncodeImmediateLiteral	param_4	unusedArg4	INFERRED	unused argument
+local	R520MachineAssembler__vslot55_tryEncodeImmediateLiteral	param_5	unusedArg5	INFERRED	unused argument
+local	R520MachineAssembler__vslot55_tryEncodeImmediateLiteral	param_6	unusedArg6	INFERRED	unused argument
+local	R520MachineAssembler__vslot55_tryEncodeImmediateLiteral	param_7	unusedArg7	INFERRED	unused argument
+local	R520MachineAssembler__vslot55_tryEncodeImmediateLiteral	param_8	unusedArg8	INFERRED	unused argument
+local	R520MachineAssembler__vslot55_tryEncodeImmediateLiteral	local_28	immediateHigh	INFERRED	out of FudoPs__encodeImmediateFloat: high field, shifted left 3 into the immediate (adjacent to immediateLow, whole variables)
+local	R520MachineAssembler__vslot55_tryEncodeImmediateLiteral	local_24	immediateLow	INFERRED	out of FudoPs__encodeImmediateFloat: low 3 bits of the immediate
+use	R520MachineAssembler__vslot55_tryEncodeImmediateLiteral	iVar3	operandCursor	INFERRED	node + 0x18*lane: walks the operand slots looking for a float literal	^\s*iVar3\ =\ param_2;$	+1
+use	R520MachineAssembler__vslot55_tryEncodeImmediateLiteral	iVar3	operandCursor	INFERRED	node + 0x18*lane	^\s*\(\*\(int\ \*\)\(iVar3\ \+\ 0x1c\)\ ==\ 2\)\)\ \{$	+1
+use	R520MachineAssembler__vslot55_tryEncodeImmediateLiteral	iVar3	operandCursor	INFERRED	node + 0x18*lane	^\s*iVar3\ =\ iVar3\ \+\ 0x18;$	+1
+use	R520MachineAssembler__vslot55_tryEncodeImmediateLiteral	iVar3	encoded	INFERRED	FudoPs__encodeImmediateFloat result (non-zero = encodable)	^\s*iVar3\ =\ \(\(undefined4\ \(\*\)\(\)\)FUN_00191888\)\(\*\(undefined4\ \*\)\(param_1\ \+\ 0xa4\),param_2,\&local_28,local_24,\(double\)fVar1\);$	+2
+local	R300MachineAssembler__vslot5_beginProgram	param_1	this	INFERRED	R300 machine assembler being initialised ([3] compiler, [4] +0x10 field, [0x16] record table...)
+local	R300MachineAssembler__vslot5_beginProgram	param_2	programOwner	UNKNOWN	stored at this+0x10
+local	R300MachineAssembler__vslot5_beginProgram	param_3	allocTag	UNKNOWN	passed to the allocator FUN_000e14e4 and stored at this+0x14
+local	R300MachineAssembler__vslot5_beginProgram	param_4	compiler	INFERRED	compiler (+0x30c hardware limits)
+local	R300MachineAssembler__vslot5_beginProgram	uVar1	outputBlock	INFERRED	0x963c-byte zeroed output block, stored at this+0x5c
+use	R520MachineAssembler__emitCompareToPredicate	uVar2	src1SelectWord	INFERRED	select word of source 1 copied to the new add	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(iVar3\ \+\ 0x10\);$	+1
+use	R520MachineAssembler__emitCompareToPredicate	uVar2	src1SelectWord	INFERRED	select word of source 1 copied to the new add	^\s*\*\(undefined4\ \*\)\(iVar3\ \+\ 0x10\)\ =\ uVar2;$	+1
+use	R520MachineAssembler__emitCompareToPredicate	uVar2	src2SelectWord	INFERRED	select word of source 2 copied to the new add	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(iVar4\ \+\ 0x10\);$	+1
+use	R520MachineAssembler__emitCompareToPredicate	uVar2	src2SelectWord	INFERRED	select word of source 2 copied to the new add	^\s*\*\(undefined4\ \*\)\(iVar4\ \+\ 0x10\)\ =\ uVar2;$	+1
+local	R520MachineAssembler__emitCompareToPredicate	uVar5	modifierWordToInvert	INFERRED	inst modifier word (+0xb8 or +0xd0 by the compare code) whose negate bit is flipped on the new add operand
+use	R300MachineAssembler__setRgbOpcode	iVar2	recordPtr	INFERRED	current 0x48-byte record: this+0x58 table + this+0x60 index * 0x48	^\s*iVar2\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x60\)\ \*\ 0x48\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x58\);$	+3
+use	R300MachineAssembler__setRgbOpcode	iVar2	recordPtr	INFERRED	current 0x48-byte record: this+0x58 table + this+0x60 index * 0x48	^\s*uVar1\ =\ \*\(undefined1\ \*\)\(iVar2\ \+\ 0x2d\);$	+1
+use	R300MachineAssembler__setRgbOpcode	iVar2	recordPtr	INFERRED	current 0x48-byte record: this+0x58 table + this+0x60 index * 0x48	^\s*iVar2\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x60\)\ \*\ 0x48\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x58\);$@2	+4
+use	R300MachineAssembler__setRgbOpcode	iVar2	recordPtr	INFERRED	current 0x48-byte record	^\s*iVar2\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x60\)\ \*\ 0x48\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x58\);$@4	+4
+use	R300MachineAssembler__setRgbOpcode	iVar2	recordTable	INFERRED	this+0x58: base of the record table	^\s*iVar2\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x58\);$	+1
+use	R300MachineAssembler__setRgbOpcode	iVar2	recordTable	INFERRED	this+0x58: base of the record table	^\s*\*\(undefined1\ \*\)\(iVar4\ \*\ 0x48\ \+\ iVar2\ \+\ 0x32\)\ =\ uVar3;$	+1
+use	R300MachineAssembler__setRgbOpcode	iVar4	recordPtr2	INFERRED	current 0x48-byte record	^\s*iVar4\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x60\)\ \*\ 0x48\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x58\);$	+1
+use	R300MachineAssembler__setRgbOpcode	iVar4	recordPtr2	INFERRED	current 0x48-byte record	^\s*\*\(undefined1\ \*\)\(iVar4\ \+\ 0x2d\)\ =\ \*\(undefined1\ \*\)\(iVar4\ \+\ 0x2e\);$	+1
+use	R300MachineAssembler__setRgbOpcode	iVar4	recordIndex	INFERRED	this+0x60: index of the current record	^\s*iVar4\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x60\);$	+1
+use	R300MachineAssembler__setRgbOpcode	iVar4	recordIndex	INFERRED	this+0x60: index of the current record	^\s*\*\(undefined1\ \*\)\(iVar4\ \*\ 0x48\ \+\ iVar2\ \+\ 0x32\)\ =\ uVar3;$	+1
+use	R300MachineAssembler__setAlphaOpcode	iVar2	recordPtr	INFERRED	current 0x48-byte record: this+0x58 table + this+0x60 index * 0x48	^\s*iVar2\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x60\)\ \*\ 0x48\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x58\);$	+3
+use	R300MachineAssembler__setAlphaOpcode	iVar2	recordPtr	INFERRED	current 0x48-byte record: this+0x58 table + this+0x60 index * 0x48	^\s*uVar1\ =\ \*\(undefined1\ \*\)\(iVar2\ \+\ 0x3c\);$	+1
+use	R300MachineAssembler__setAlphaOpcode	iVar2	recordPtr	INFERRED	current 0x48-byte record: this+0x58 table + this+0x60 index * 0x48	^\s*iVar2\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x60\)\ \*\ 0x48\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x58\);$@2	+4
+use	R300MachineAssembler__setAlphaOpcode	iVar2	recordPtr	INFERRED	current 0x48-byte record	^\s*iVar2\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x60\)\ \*\ 0x48\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x58\);$@4	+4
+use	R300MachineAssembler__setAlphaOpcode	iVar2	recordTable	INFERRED	this+0x58: base of the record table	^\s*iVar2\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x58\);$	+1
+use	R300MachineAssembler__setAlphaOpcode	iVar2	recordTable	INFERRED	this+0x58: base of the record table	^\s*\*\(undefined1\ \*\)\(iVar4\ \*\ 0x48\ \+\ iVar2\ \+\ 0x41\)\ =\ uVar3;$	+1
+use	R300MachineAssembler__setAlphaOpcode	iVar4	recordPtr2	INFERRED	current 0x48-byte record	^\s*iVar4\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x60\)\ \*\ 0x48\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x58\);$	+1
+use	R300MachineAssembler__setAlphaOpcode	iVar4	recordPtr2	INFERRED	current 0x48-byte record	^\s*\*\(undefined1\ \*\)\(iVar4\ \+\ 0x3c\)\ =\ \*\(undefined1\ \*\)\(iVar4\ \+\ 0x3d\);$	+1
+use	R300MachineAssembler__setAlphaOpcode	iVar4	recordIndex	INFERRED	this+0x60: index of the current record	^\s*iVar4\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x60\);$	+1
+use	R300MachineAssembler__setAlphaOpcode	iVar4	recordIndex	INFERRED	this+0x60: index of the current record	^\s*\*\(undefined1\ \*\)\(iVar4\ \*\ 0x48\ \+\ iVar2\ \+\ 0x41\)\ =\ uVar3;$	+1

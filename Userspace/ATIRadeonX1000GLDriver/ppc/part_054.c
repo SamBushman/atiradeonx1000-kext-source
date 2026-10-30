@@ -586,16 +586,17 @@ int R520MachineAssembler__emitCompareToPredicate(this, inst, blockArg, flag)
   undefined4 blockArg;
   uint flag;
 {
+  undefined4 src2SelectWord;
   uint source2Flags;
   uint source1Flags;
   undefined4 newSource2;
   undefined4 newSource;
   int operandRecord1;
   int inst2;
-  undefined4 uVar2;
+  undefined4 src1SelectWord;
   int operandRecord3;
   int operandRecord;
-  uint uVar5;
+  uint modifierWordToInvert;
   undefined4 a3;
   int operandRecord2;
   undefined1 compareCode;
@@ -606,10 +607,10 @@ int R520MachineAssembler__emitCompareToPredicate(this, inst, blockArg, flag)
   IRInst__setOperandSource(inst2,1,newSource,0,this[3]);
   operandRecord2 = inst2 + 0xa4;
   operandRecord3 = IRInst__getOperandRecord(inst,1);
-  uVar2 = *(undefined4 *)(operandRecord3 + 0x10);
+  src1SelectWord = *(undefined4 *)(operandRecord3 + 0x10);
   operandRecord3 = IRInst__getOperandRecord(inst2,1);
   source1Flags = *(uint *)(inst + 0xb8);
-  *(undefined4 *)(operandRecord3 + 0x10) = uVar2;
+  *(undefined4 *)(operandRecord3 + 0x10) = src1SelectWord;
   IROperand__setModifierBits(operandRecord2,2,source1Flags >> 1 & 1);
   operandRecord1 = inst2 + 0xbc;
   IROperand__setModifierBits(operandRecord2,1,*(uint *)(inst + 0xb8) & 1);
@@ -617,10 +618,10 @@ int R520MachineAssembler__emitCompareToPredicate(this, inst, blockArg, flag)
   a3 = 0;
   IRInst__setOperandSource(inst2,2,newSource2,0,this[3]);
   operandRecord = IRInst__getOperandRecord(inst,2);
-  uVar2 = *(undefined4 *)(operandRecord + 0x10);
+  src2SelectWord = *(undefined4 *)(operandRecord + 0x10);
   operandRecord = IRInst__getOperandRecord(inst2,2);
   source2Flags = *(uint *)(inst + 0xd0);
-  *(undefined4 *)(operandRecord + 0x10) = uVar2;
+  *(undefined4 *)(operandRecord + 0x10) = src2SelectWord;
   IROperand__setModifierBits(operandRecord1,2,source2Flags >> 1 & 1);
   compareCode = 2;
   IROperand__setModifierBits(operandRecord1,1,*(uint *)(inst + 0xd0) & 1);
@@ -638,24 +639,24 @@ int R520MachineAssembler__emitCompareToPredicate(this, inst, blockArg, flag)
     IROperand__setModifierBits(operandRecord1,1,*(uint *)(inst + 0xd0) & 1 ^ 1);
     break;
   case 2:
-    uVar5 = *(uint *)(inst + 0xb8);
+    modifierWordToInvert = *(uint *)(inst + 0xb8);
     goto LAB_001a2784;
   case 3:
-    uVar5 = *(uint *)(inst + 0xd0);
+    modifierWordToInvert = *(uint *)(inst + 0xd0);
     goto LAB_001a27a4;
   case 4:
-    uVar5 = *(uint *)(inst + 0xd0);
+    modifierWordToInvert = *(uint *)(inst + 0xd0);
     operandRecord2 = operandRecord1;
 LAB_001a2784:
     compareCode = 1;
-    IROperand__setModifierBits(operandRecord2,1,uVar5 & 1 ^ 1);
+    IROperand__setModifierBits(operandRecord2,1,modifierWordToInvert & 1 ^ 1);
     break;
   case 5:
-    uVar5 = *(uint *)(inst + 0xb8);
+    modifierWordToInvert = *(uint *)(inst + 0xb8);
     operandRecord1 = operandRecord2;
 LAB_001a27a4:
     compareCode = 2;
-    IROperand__setModifierBits(operandRecord1,1,uVar5 & 1 ^ 1);
+    IROperand__setModifierBits(operandRecord1,1,modifierWordToInvert & 1 ^ 1);
   }
   DListNode__init(auStack_48);
   DList__pushBack(auStack_48,inst2);

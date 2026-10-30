@@ -569,10 +569,12 @@ int R300MachineAssembler__setAlphaOpcode(this, hardwareOpcode, irOpcode, irInst)
   int irOpcode;
   int irInst;
 {
+  int recordIndex;
+  int recordTable;
   undefined1 savedModifier;
-  int iVar2;
+  int recordPtr;
   undefined1 alphaOpcode;
-  int iVar4;
+  int recordPtr2;
   
   alphaOpcode = (undefined1)hardwareOpcode;
   *(undefined4 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58)) = 3;
@@ -588,16 +590,16 @@ LAB_00195e0c:
     if (irOpcode != 0x13) {
       if (irOpcode == 0x25) {
 LAB_00195e48:
-        iVar2 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58);
-        alphaOpcode = *(undefined1 *)(iVar2 + 0x39);
-        *(undefined1 *)(iVar2 + 0x39) = *(undefined1 *)(iVar2 + 0x3a);
-        iVar4 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58);
-        savedModifier = *(undefined1 *)(iVar2 + 0x3c);
-        *(undefined1 *)(iVar4 + 0x3c) = *(undefined1 *)(iVar4 + 0x3d);
-        iVar2 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58);
-        *(undefined1 *)(iVar2 + 0x3a) = *(undefined1 *)(iVar2 + 0x3b);
-        iVar2 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58);
-        *(undefined1 *)(iVar2 + 0x3d) = *(undefined1 *)(iVar2 + 0x3e);
+        recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58);
+        alphaOpcode = *(undefined1 *)(recordPtr + 0x39);
+        *(undefined1 *)(recordPtr + 0x39) = *(undefined1 *)(recordPtr + 0x3a);
+        recordPtr2 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58);
+        savedModifier = *(undefined1 *)(recordPtr + 0x3c);
+        *(undefined1 *)(recordPtr2 + 0x3c) = *(undefined1 *)(recordPtr2 + 0x3d);
+        recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58);
+        *(undefined1 *)(recordPtr + 0x3a) = *(undefined1 *)(recordPtr + 0x3b);
+        recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58);
+        *(undefined1 *)(recordPtr + 0x3d) = *(undefined1 *)(recordPtr + 0x3e);
         *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58) + 0x3b) = alphaOpcode;
         *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58) + 0x3e) = savedModifier;
         if (irOpcode == 0x9d) {
@@ -611,10 +613,10 @@ LAB_00195e48:
       if (irOpcode != 0x12) goto LAB_00195d6c;
 LAB_00195d94:
       alphaOpcode = 0;
-      iVar2 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58);
-      *(undefined1 *)(iVar2 + 0x3b) = *(undefined1 *)(iVar2 + 0x3a);
-      iVar2 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58);
-      *(undefined1 *)(iVar2 + 0x3e) = *(undefined1 *)(iVar2 + 0x3d);
+      recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58);
+      *(undefined1 *)(recordPtr + 0x3b) = *(undefined1 *)(recordPtr + 0x3a);
+      recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58);
+      *(undefined1 *)(recordPtr + 0x3e) = *(undefined1 *)(recordPtr + 0x3d);
       *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58) + 0x3a) = 0x11;
       *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58) + 0x3d) = 0;
       goto LAB_00195f08;
@@ -639,10 +641,10 @@ LAB_00195f08:
   if (*(int *)(irInst + 0x120) != 0) {
     *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58) + 0x42) = 1;
   }
-  iVar4 = *(int *)(this + 0x60);
-  iVar2 = *(int *)(this + 0x58);
+  recordIndex = *(int *)(this + 0x60);
+  recordTable = *(int *)(this + 0x58);
   alphaOpcode = psnOutputScaleCode(*(undefined4 *)(irInst + 0x124));
-  *(undefined1 *)(iVar4 * 0x48 + iVar2 + 0x41) = alphaOpcode;
+  *(undefined1 *)(recordIndex * 0x48 + recordTable + 0x41) = alphaOpcode;
   return;
 }
 
@@ -810,41 +812,41 @@ int R300MachineAssembler__trackMaxLevelAndAssemble(this, registerIndex, node)
 }
 
 /* R300MachineAssembler__vslot5_beginProgram @ 0x1963b0 (236 bytes) */
-int R300MachineAssembler__vslot5_beginProgram(param_1, param_2, param_3, param_4)
-  int param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  int param_4;
+int R300MachineAssembler__vslot5_beginProgram(this, programOwner, allocTag, compiler)
+  int this;
+  undefined4 programOwner;
+  undefined4 allocTag;
+  int compiler;
 {
-  undefined4 uVar1;
+  undefined4 outputBlock;
   
-  *(undefined4 *)(param_1 + 0xa4) = *(undefined4 *)(param_4 + 0x30c);
-  uVar1 = FUN_000e14e4(param_4,0x963c,param_3);
-  *(undefined4 *)(param_1 + 0x5c) = uVar1;
-  _memset(uVar1,0,0x963c);
-  *(undefined4 *)(param_1 + 0x58) = *(undefined4 *)(param_1 + 0x5c);
-  *(undefined4 *)(param_1 + 0x54) = 3;
-  *(undefined4 *)(param_1 + 0x10) = param_2;
-  *(undefined4 *)(param_1 + 0x60) = 1;
-  *(undefined4 *)(param_1 + 100) = 0;
-  *(undefined4 *)(param_1 + 0x68) = 0;
-  *(undefined4 *)(param_1 + 0x6c) = 0;
-  *(undefined4 *)(param_1 + 0x70) = 0;
-  *(undefined4 *)(param_1 + 0x9c) = 0;
-  *(undefined4 *)(param_1 + 0x88) = 0;
-  *(undefined4 *)(param_1 + 0x78) = 0;
-  *(undefined4 *)(param_1 + 0x7c) = 0;
-  *(undefined4 *)(param_1 + 0x80) = 1;
-  *(undefined4 *)(param_1 + 0x84) = 1;
-  *(int *)(param_1 + 0xc) = param_4;
-  *(undefined4 *)(param_1 + 0xa0) = 0;
-  *(undefined4 *)(param_1 + 0x90) = 0;
-  *(undefined4 *)(param_1 + 0x8c) = 0;
-  *(undefined4 *)(param_1 + 0x14) = param_3;
-  **(undefined4 **)(param_1 + 0x58) = 0;
-  *(int *)(*(int *)(param_1 + 0x58) + 4) = *(int *)(*(int *)(param_4 + 0x30c) + 0x40) + 1;
-  *(undefined4 *)(param_1 + 0x98) = 1;
-  *(undefined4 *)(param_1 + 0x94) = 1;
+  *(undefined4 *)(this + 0xa4) = *(undefined4 *)(compiler + 0x30c);
+  outputBlock = FUN_000e14e4(compiler,0x963c,allocTag);
+  *(undefined4 *)(this + 0x5c) = outputBlock;
+  _memset(outputBlock,0,0x963c);
+  *(undefined4 *)(this + 0x58) = *(undefined4 *)(this + 0x5c);
+  *(undefined4 *)(this + 0x54) = 3;
+  *(undefined4 *)(this + 0x10) = programOwner;
+  *(undefined4 *)(this + 0x60) = 1;
+  *(undefined4 *)(this + 100) = 0;
+  *(undefined4 *)(this + 0x68) = 0;
+  *(undefined4 *)(this + 0x6c) = 0;
+  *(undefined4 *)(this + 0x70) = 0;
+  *(undefined4 *)(this + 0x9c) = 0;
+  *(undefined4 *)(this + 0x88) = 0;
+  *(undefined4 *)(this + 0x78) = 0;
+  *(undefined4 *)(this + 0x7c) = 0;
+  *(undefined4 *)(this + 0x80) = 1;
+  *(undefined4 *)(this + 0x84) = 1;
+  *(int *)(this + 0xc) = compiler;
+  *(undefined4 *)(this + 0xa0) = 0;
+  *(undefined4 *)(this + 0x90) = 0;
+  *(undefined4 *)(this + 0x8c) = 0;
+  *(undefined4 *)(this + 0x14) = allocTag;
+  **(undefined4 **)(this + 0x58) = 0;
+  *(int *)(*(int *)(this + 0x58) + 4) = *(int *)(*(int *)(compiler + 0x30c) + 0x40) + 1;
+  *(undefined4 *)(this + 0x98) = 1;
+  *(undefined4 *)(this + 0x94) = 1;
   return;
 }
 
@@ -1081,10 +1083,12 @@ int R300MachineAssembler__setRgbOpcode(this, hardwareOpcode, irOpcode, irInst)
   int irOpcode;
   int irInst;
 {
+  int recordIndex;
+  int recordTable;
   undefined1 savedModifier;
-  int iVar2;
+  int recordPtr;
   undefined1 rgbOpcode;
-  int iVar4;
+  int recordPtr2;
   
   rgbOpcode = (undefined1)hardwareOpcode;
   *(undefined4 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58)) = 3;
@@ -1100,16 +1104,16 @@ LAB_00196bf8:
     if (irOpcode != 0x13) {
       if (irOpcode == 0x25) {
 LAB_00196c34:
-        iVar2 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58);
-        rgbOpcode = *(undefined1 *)(iVar2 + 0x2a);
-        *(undefined1 *)(iVar2 + 0x2a) = *(undefined1 *)(iVar2 + 0x2b);
-        iVar4 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58);
-        savedModifier = *(undefined1 *)(iVar2 + 0x2d);
-        *(undefined1 *)(iVar4 + 0x2d) = *(undefined1 *)(iVar4 + 0x2e);
-        iVar2 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58);
-        *(undefined1 *)(iVar2 + 0x2b) = *(undefined1 *)(iVar2 + 0x2c);
-        iVar2 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58);
-        *(undefined1 *)(iVar2 + 0x2e) = *(undefined1 *)(iVar2 + 0x2f);
+        recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58);
+        rgbOpcode = *(undefined1 *)(recordPtr + 0x2a);
+        *(undefined1 *)(recordPtr + 0x2a) = *(undefined1 *)(recordPtr + 0x2b);
+        recordPtr2 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58);
+        savedModifier = *(undefined1 *)(recordPtr + 0x2d);
+        *(undefined1 *)(recordPtr2 + 0x2d) = *(undefined1 *)(recordPtr2 + 0x2e);
+        recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58);
+        *(undefined1 *)(recordPtr + 0x2b) = *(undefined1 *)(recordPtr + 0x2c);
+        recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58);
+        *(undefined1 *)(recordPtr + 0x2e) = *(undefined1 *)(recordPtr + 0x2f);
         *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58) + 0x2c) = rgbOpcode;
         *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58) + 0x2f) = savedModifier;
         if (irOpcode == 0x9d) {
@@ -1123,10 +1127,10 @@ LAB_00196c34:
       if (irOpcode != 0x12) goto LAB_00196b58;
 LAB_00196b80:
       rgbOpcode = 0;
-      iVar2 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58);
-      *(undefined1 *)(iVar2 + 0x2c) = *(undefined1 *)(iVar2 + 0x2b);
-      iVar2 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58);
-      *(undefined1 *)(iVar2 + 0x2f) = *(undefined1 *)(iVar2 + 0x2e);
+      recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58);
+      *(undefined1 *)(recordPtr + 0x2c) = *(undefined1 *)(recordPtr + 0x2b);
+      recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58);
+      *(undefined1 *)(recordPtr + 0x2f) = *(undefined1 *)(recordPtr + 0x2e);
       *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58) + 0x2b) = 0x15;
       *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58) + 0x2e) = 0;
       goto LAB_00196cf4;
@@ -1151,10 +1155,10 @@ LAB_00196cf4:
   if (*(int *)(irInst + 0x120) != 0) {
     *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58) + 0x33) = 1;
   }
-  iVar4 = *(int *)(this + 0x60);
-  iVar2 = *(int *)(this + 0x58);
+  recordIndex = *(int *)(this + 0x60);
+  recordTable = *(int *)(this + 0x58);
   rgbOpcode = psnOutputScaleCode(*(undefined4 *)(irInst + 0x124));
-  *(undefined1 *)(iVar4 * 0x48 + iVar2 + 0x32) = rgbOpcode;
+  *(undefined1 *)(recordIndex * 0x48 + recordTable + 0x32) = rgbOpcode;
   return;
 }
 

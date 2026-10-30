@@ -1566,41 +1566,42 @@ int R520MachineAssembler__vslot80_setRecordByte9(this)
 }
 
 /* R520MachineAssembler__vslot55_tryEncodeImmediateLiteral @ 0x19f98c (204 bytes) */
-int R520MachineAssembler__vslot55_tryEncodeImmediateLiteral(this, node, immediateOut, param_4, param_5, param_6, param_7, param_8)
+int R520MachineAssembler__vslot55_tryEncodeImmediateLiteral(this, node, immediateOut, unusedArg4, unusedArg5, unusedArg6, unusedArg7, unusedArg8)
   int this;
   int node;
   uint *immediateOut;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
+  undefined4 unusedArg8;
 {
+  int encoded;
   float literalValue;
   uint loopIndex;
-  int iVar3;
+  int operandCursor;
   int loopRemaining;
-  int local_28;
-  uint local_24 [7];
+  int immediateHigh;
+  uint immediateLow [7];
   
   if (*(int *)(node + 300) == 3) {
     loopIndex = 0;
     loopRemaining = 4;
-    iVar3 = node;
+    operandCursor = node;
     do {
       if ((((int)*(char *)(node + 0x15c) >> (loopIndex & 0x3f) & 1U) != 0) &&
-         (*(int *)(iVar3 + 0x1c) == 2)) {
+         (*(int *)(operandCursor + 0x1c) == 2)) {
         literalValue = *(float *)(loopIndex * 0x18 + node + 0x20);
         break;
       }
       loopIndex = loopIndex + 1;
-      iVar3 = iVar3 + 0x18;
+      operandCursor = operandCursor + 0x18;
       loopRemaining = loopRemaining + -1;
       literalValue = FLOAT_001aa0d4;
     } while (loopRemaining != 0);
-    iVar3 = ((undefined4 (*)())FudoPs__encodeImmediateFloat)(*(undefined4 *)(this + 0xa4),node,&local_28,local_24,(double)literalValue);
-    if (iVar3 != 0) {
-      *immediateOut = local_24[0] | local_28 << 3 | 0x2000;
+    encoded = ((undefined4 (*)())FudoPs__encodeImmediateFloat)(*(undefined4 *)(this + 0xa4),node,&immediateHigh,immediateLow,(double)literalValue);
+    if (encoded != 0) {
+      *immediateOut = immediateLow[0] | immediateHigh << 3 | 0x2000;
       return 1;
     }
   }
