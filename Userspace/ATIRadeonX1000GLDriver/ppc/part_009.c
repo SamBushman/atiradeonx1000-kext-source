@@ -4599,55 +4599,55 @@ int extvsBuildStreamDescriptors(ctx, shader)
 }
 
 /* gldCurrentAttributePacketHeader @ 0x640f0 (220 bytes) */
-int gldCurrentAttributePacketHeader(param_1, param_2, param_3)
-  undefined4 param_1;
-  undefined4 param_2;
-  int param_3;
+int gldCurrentAttributePacketHeader(unusedArg1, attributeIndex, dwordCount)
+  undefined4 unusedArg1;
+  undefined4 attributeIndex;
+  int dwordCount;
 {
-  uint uVar1;
+  uint countField;
   
-  uVar1 = (param_3 + -1) * 0x10000;
-  switch(param_2) {
+  countField = (dwordCount + -1) * 0x10000;
+  switch(attributeIndex) {
   default:
     return 0;
   case 2:
-    return uVar1 | 0x8c8;
+    return countField | 0x8c8;
   case 3:
-    return uVar1 | 0x8cc;
+    return countField | 0x8cc;
   case 4:
-    return uVar1 | 0x8d0;
+    return countField | 0x8d0;
   case 5:
-    return uVar1 | 0x8d4;
+    return countField | 0x8d4;
   case 6:
-    return uVar1 | 0x8d8;
+    return countField | 0x8d8;
   case 7:
-    return uVar1 | 0x8dc;
+    return countField | 0x8dc;
   case 8:
-    return uVar1 | 0x8e0;
+    return countField | 0x8e0;
   case 9:
-    return uVar1 | 0x8e4;
+    return countField | 0x8e4;
   case 10:
-    return uVar1 | 0x8e8;
+    return countField | 0x8e8;
   case 0xb:
-    return uVar1 | 0x8ec;
+    return countField | 0x8ec;
   case 0xc:
-    return uVar1 | 0x8f0;
+    return countField | 0x8f0;
   case 0xd:
-    return uVar1 | 0x8f4;
+    return countField | 0x8f4;
   case 0xe:
-    return uVar1 | 0x8f8;
+    return countField | 0x8f8;
   case 0xf:
-    return uVar1 | 0x8fc;
+    return countField | 0x8fc;
   case 0x10:
-    return uVar1 | 0x900;
+    return countField | 0x900;
   case 0x11:
-    return uVar1 | 0x904;
+    return countField | 0x904;
   case 0x13:
-    return uVar1 | 0x90c;
+    return countField | 0x90c;
   case 0x14:
-    return uVar1 | 0x910;
+    return countField | 0x910;
   case 0x15:
-    return uVar1 | 0x914;
+    return countField | 0x914;
   }
 }
 

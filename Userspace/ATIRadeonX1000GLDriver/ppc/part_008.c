@@ -13,44 +13,46 @@ int extvsReserveSymbolIds(ctx, count)
 }
 
 /* extvsDeleteShaderObject @ 0x53de0 (268 bytes) */
-int extvsDeleteShaderObject(glContext, param_2)
+int extvsDeleteShaderObject(glContext, shaderId)
   int glContext;
-  int param_2;
+  int shaderId;
 {
-  bool bVar1;
-  int iVar2;
-  int iVar3;
+  bool searching;
+  int shaderByteOffset;
+  int newCurrentIndex;
+  int shaderRecord;
+  int shaderList;
   uint loopIndex;
   
-  iVar3 = *(int *)(((unsigned char *)0x0000116c) + glContext);
-  if (*(int *)(*(int *)(((unsigned char *)0x00001168) + glContext) + 8) == param_2) {
+  shaderList = *(int *)(((unsigned char *)0x0000116c) + glContext);
+  if (*(int *)(*(int *)(((unsigned char *)0x00001168) + glContext) + 8) == shaderId) {
     extvsBindShader(glContext,0);
   }
   loopIndex = 0;
-  iVar2 = 0;
-  bVar1 = true;
-  while (loopIndex < *(uint *)(iVar3 + 4)) {
-    if (!bVar1) goto LAB_00053e6c;
-    if (param_2 == *(int *)(iVar2 + *(int *)(iVar3 + 0xc) + 8)) {
-      bVar1 = false;
+  shaderByteOffset = 0;
+  searching = true;
+  while (loopIndex < *(uint *)(shaderList + 4)) {
+    if (!searching) goto LAB_00053e6c;
+    if (shaderId == *(int *)(shaderByteOffset + *(int *)(shaderList + 0xc) + 8)) {
+      searching = false;
     }
     else {
       loopIndex = loopIndex + 1;
-      iVar2 = iVar2 + 0x7c;
+      shaderByteOffset = shaderByteOffset + 0x7c;
     }
   }
-  if (!bVar1) {
+  if (!searching) {
 LAB_00053e6c:
-    iVar2 = loopIndex * 0x7c + *(int *)(iVar3 + 0xc);
-    if (*(int *)(iVar2 + 0xc) == 0) {
-      ((int (*)())extvsFreeShaderObject)(glContext,iVar2);
-      iVar2 = loopIndex * 0x7c + *(int *)(iVar3 + 0xc);
-      _memmove(iVar2,iVar2 + 0x7c,(*(int *)(iVar3 + 4) - loopIndex) * 0x7c + -0x7c);
-      *(int *)(iVar3 + 4) = *(int *)(iVar3 + 4) + -1;
+    shaderRecord = loopIndex * 0x7c + *(int *)(shaderList + 0xc);
+    if (*(int *)(shaderRecord + 0xc) == 0) {
+      ((int (*)())extvsFreeShaderObject)(glContext,shaderRecord);
+      shaderRecord = loopIndex * 0x7c + *(int *)(shaderList + 0xc);
+      _memmove(shaderRecord,shaderRecord + 0x7c,(*(int *)(shaderList + 4) - loopIndex) * 0x7c + -0x7c);
+      *(int *)(shaderList + 4) = *(int *)(shaderList + 4) + -1;
       if (loopIndex < *(uint *)(((unsigned char *)0x00001188) + glContext)) {
-        iVar2 = *(uint *)(((unsigned char *)0x00001188) + glContext) - 1;
-        *(int *)(((unsigned char *)0x00001188) + glContext) = iVar2;
-        *(int *)(((unsigned char *)0x00001168) + glContext) = iVar2 * 0x7c + *(int *)(iVar3 + 0xc);
+        newCurrentIndex = *(uint *)(((unsigned char *)0x00001188) + glContext) - 1;
+        *(int *)(((unsigned char *)0x00001188) + glContext) = newCurrentIndex;
+        *(int *)(((unsigned char *)0x00001168) + glContext) = newCurrentIndex * 0x7c + *(int *)(shaderList + 0xc);
       }
     }
   }
@@ -801,63 +803,63 @@ int extvsOperandDataType(shader, operand)
 }
 
 /* extvsFreeSymbolData @ 0x551f0 (244 bytes) */
-int extvsFreeSymbolData(ctx, param_2)
+int extvsFreeSymbolData(ctx, symbolList)
   int ctx;
-  uint *param_2;
+  uint *symbolList;
 {
-  int iVar1;
-  int a0;
-  uint uVar2;
-  uint uVar3;
+  int symbolRecord;
+  int constData;
+  uint records;
+  uint symbolCount;
   uint loopIndex;
   
-  uVar2 = param_2[1];
-  if (uVar2 != 0) {
-    uVar3 = *param_2;
+  records = symbolList[1];
+  if (records != 0) {
+    symbolCount = *symbolList;
     loopIndex = 0;
-    if (uVar3 != 0) {
+    if (symbolCount != 0) {
       do {
-        iVar1 = loopIndex * 0x54 + uVar2;
-        a0 = *(int *)(iVar1 + 0x38);
-        if ((a0 != 0) && (*(char *)(iVar1 + 0x3c) != '\0')) {
-          (**(code **)(ctx + 0x18))(a0);
-          *(undefined4 *)(loopIndex * 0x54 + param_2[1] + 0x38) = 0;
-          uVar2 = param_2[1];
-          uVar3 = *param_2;
+        symbolRecord = loopIndex * 0x54 + records;
+        constData = *(int *)(symbolRecord + 0x38);
+        if ((constData != 0) && (*(char *)(symbolRecord + 0x3c) != '\0')) {
+          (**(code **)(ctx + 0x18))(constData);
+          *(undefined4 *)(loopIndex * 0x54 + symbolList[1] + 0x38) = 0;
+          records = symbolList[1];
+          symbolCount = *symbolList;
         }
         loopIndex = loopIndex + 1;
-      } while (loopIndex < uVar3);
+      } while (loopIndex < symbolCount);
     }
-    (**(code **)(ctx + 0x18))(uVar2);
-    *param_2 = 0;
-    param_2[1] = 0;
-    (**(code **)(ctx + 0x18))(param_2[2]);
-    param_2[3] = 0;
-    param_2[2] = 0;
+    (**(code **)(ctx + 0x18))(records);
+    *symbolList = 0;
+    symbolList[1] = 0;
+    (**(code **)(ctx + 0x18))(symbolList[2]);
+    symbolList[3] = 0;
+    symbolList[2] = 0;
   }
   return;
 }
 
 /* extvsFreeShaderObject @ 0x55300 (184 bytes) */
-int extvsFreeShaderObject(param_1, param_2)
-  int param_1;
-  int *param_2;
+int extvsFreeShaderObject(glContext, shader)
+  int glContext;
+  int *shader;
 {
-  (**(code **)(((unsigned char *)0x000011ac) + param_1))(param_1,param_2,1);
-  if (*param_2 != 0) {
-    (**(code **)(param_1 + 0x18))(*param_2);
-    *param_2 = 0;
+  (**(code **)(((unsigned char *)0x000011ac) + glContext))(glContext,shader,1);
+  if (*shader != 0) {
+    (**(code **)(glContext + 0x18))(*shader);
+    *shader = 0;
   }
-  if (param_2[1] != 0) {
-    (**(code **)(param_1 + 0x18))(param_2[1]);
-    param_2[1] = 0;
+  if (shader[1] != 0) {
+    (**(code **)(glContext + 0x18))(shader[1]);
+    shader[1] = 0;
   }
-  if (param_2[6] != 0) {
-    (**(code **)(param_1 + 0x18))(param_2[6]);
-    param_2[6] = 0;
-    param_2[5] = 0;
+  if (shader[6] != 0) {
+    (**(code **)(glContext + 0x18))(shader[6]);
+    shader[6] = 0;
+    shader[5] = 0;
   }
-  return ((int (*)())extvsFreeSymbolData)(param_1,param_2 + 7);
+  return ((int (*)())extvsFreeSymbolData)(glContext,shader + 7);
 }
 
 /* extvsAppendInstruction @ 0x553c0 (556 bytes) */

@@ -2564,33 +2564,33 @@ int FUN_00050140(glContext, param_2, param_3, param_4, param_5, param_6)
 {
   uint glContextWord1b2c;
   byte colorFormatIndex;
-  undefined *puVar2;
-  uint uVar3;
-  int iVar4;
+  undefined *colorFormatTable;
+  uint colorMaskBits;
+  int glStateBlock;
   
-  puVar2 = PTR_DAT_001e88c8;
+  colorFormatTable = PTR_DAT_001e88c8;
   colorFormatIndex = *(byte *)(glContext + 0x293f);
-  iVar4 = *(int *)(*(int *)(glContext + 4) + 0x10);
+  glStateBlock = *(int *)(*(int *)(glContext + 4) + 0x10);
   if ((*(uint *)(glContext + 0x18a4) & 0x3fffc0) == 0) {
     *(undefined4 *)(0x00001af4 + glContext) = 0;
   }
   else {
-    uVar3 = (uint)(((unsigned char *)0x00002e40)[iVar4] == '\x01') *
+    colorMaskBits = (uint)(((unsigned char *)0x00002e40)[glStateBlock] == '\x01') *
             ((byte)PTR_DAT_001e88c8[(uint)colorFormatIndex * 0x24 + 0x1c] & 0xf);
-    *(uint *)(0x00001af4 + glContext) = uVar3;
-    uVar3 = uVar3 | (uint)(((unsigned char *)0x00002e41)[iVar4] == '\x01') *
-                    (*(uint *)(puVar2 + (uint)colorFormatIndex * 0x24 + 0x1c) >> 0x14 & 0xf);
-    *(uint *)(0x00001af4 + glContext) = uVar3;
-    uVar3 = uVar3 | (uint)(((unsigned char *)0x00002e42)[iVar4] == '\x01') *
-                    (*(ushort *)(puVar2 + (uint)colorFormatIndex * 0x24 + 0x1c) & 0xf);
-    *(uint *)(0x00001af4 + glContext) = uVar3;
+    *(uint *)(0x00001af4 + glContext) = colorMaskBits;
+    colorMaskBits = colorMaskBits | (uint)(((unsigned char *)0x00002e41)[glStateBlock] == '\x01') *
+                    (*(uint *)(colorFormatTable + (uint)colorFormatIndex * 0x24 + 0x1c) >> 0x14 & 0xf);
+    *(uint *)(0x00001af4 + glContext) = colorMaskBits;
+    colorMaskBits = colorMaskBits | (uint)(((unsigned char *)0x00002e42)[glStateBlock] == '\x01') *
+                    (*(ushort *)(colorFormatTable + (uint)colorFormatIndex * 0x24 + 0x1c) & 0xf);
+    *(uint *)(0x00001af4 + glContext) = colorMaskBits;
     *(uint *)(0x00001af4 + glContext) =
-         uVar3 | (uint)(((unsigned char *)0x00002e43)[iVar4] == '\x01') *
-                 (*(uint *)(puVar2 + (uint)colorFormatIndex * 0x24 + 0x1c) >> 0xc & 0xf);
+         colorMaskBits | (uint)(((unsigned char *)0x00002e43)[glStateBlock] == '\x01') *
+                 (*(uint *)(colorFormatTable + (uint)colorFormatIndex * 0x24 + 0x1c) >> 0xc & 0xf);
   }
   glContextWord1b2c = *(uint *)(glContext + 0x1b2c);
   *(uint *)(glContext + 0x1b2c) = glContextWord1b2c & 0xfffcffff | 0x30000;
-  if (*(int *)(((unsigned char *)0x00003194) + iVar4) == 0x1d01) {
+  if (*(int *)(((unsigned char *)0x00003194) + glStateBlock) == 0x1d01) {
     *(uint *)(glContext + 0x1bb8) = *(uint *)(glContext + 0x1bb8) & 0xfff0ffff | 0xa0000;
     *(uint *)(glContext + 0x1b2c) = glContextWord1b2c & 0xfffc0000 | 0x3aaaa;
   }
