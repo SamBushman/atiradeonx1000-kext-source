@@ -1,0 +1,57 @@
+local	FUN_001440e4	param_1	pass	INFERRED	*param_1 is the 4th argument (compiler) of IRInst__setOperandSource/setExtraOperandSource; the caller FUN_0014532c names its own argument pass and reads compiler = *pass
+local	FUN_001440e4	param_4	groupSlotCursor	INFERRED	advanced by 4 per operand index (param_4 = param_4 + 4, loop to operand 4); *(param_4+4) is the lane-group record of that operand
+local	FUN_001440e4	puVar23	laneGroup	INFERRED	record read at +0x10..+0x1c (source inst per lane), +0x20 (component byte per lane), +0x24 (combined inst), +0..+0xc cleared to 1 at the end
+local	FUN_001440e4	iVar22	operandIndex	INFERRED	passed as operand index to IRInst__getOperandRecord/getOperandSource/setOperandSource(inst,iVar22,..), loops 0..4
+local	FUN_001440e4	uVar15	distinctSourceCount	INFERRED	counts lanes whose source differs from the earlier distinct sources; compared with 2 and 4 to choose the combine shape
+use	FUN_001440e4	iVar26	thirdSource	INFERRED	third distinct source inst of the lane group (0 when absent, bVar1 = iVar26 == 0)	^\s*iVar26\ =\ 0;$	+1
+use	FUN_001440e4	iVar26	thirdSource	INFERRED	third distinct source inst of the lane group (0 when absent, bVar1 = iVar26 == 0)	^\s*iVar26\ =\ puVar23\[iVar26\ \+\ 4\];$	+2
+use	FUN_001440e4	iVar26	thirdSource	INFERRED	third distinct source inst of the lane group (0 when absent, bVar1 = iVar26 == 0)	^\s*iVar26\ =\ iVar26\ \+\ 1;$	+1
+use	FUN_001440e4	iVar26	thirdSource	INFERRED	third distinct source inst of the lane group (0 when absent, bVar1 = iVar26 == 0)	^\s*iVar26\ =\ 0;$@2	+1
+use	FUN_001440e4	iVar26	thirdSource	INFERRED	third distinct source inst of the lane group (0 when absent, bVar1 = iVar26 == 0)	^\s*if\ \(\(\(iVar24\ !=\ iVar7\)\ \&\&\ \(iVar25\ !=\ iVar7\)\)\ \&\&\ \(\(iVar7\ !=\ iVar26\ \&\&\ \(iVar7\ !=\ 0\)\)\)\)\ \{$	+1
+use	FUN_001440e4	iVar26	thirdSource	INFERRED	third distinct source inst of the lane group (0 when absent, bVar1 = iVar26 == 0)	^\s*if\ \(iVar27\ ==\ iVar26\)\ \{$	+1
+use	FUN_001440e4	iVar26	thirdSource	INFERRED	third distinct source inst of the lane group (0 when absent, bVar1 = iVar26 == 0)	^\s*iVar26\ =\ local_8c;$	+1
+use	FUN_001440e4	iVar26	thirdSource	INFERRED	third distinct source inst of the lane group (0 when absent, bVar1 = iVar26 == 0)	^\s*iVar7\ =\ FUN_00104800\(iVar27,iVar26\);$	+1
+use	FUN_001440e4	iVar26	thirdSource	INFERRED	third distinct source inst of the lane group (0 when absent, bVar1 = iVar26 == 0)	^\s*iVar27\ =\ \*\(int\ \*\)\(iVar26\ \+\ 8\);$	+1
+use	FUN_001440e4	iVar26	thirdSource	INFERRED	third distinct source inst of the lane group (0 when absent, bVar1 = iVar26 == 0)	^\s*FUN_00104800\(iVar26,iVar27\);$	+1
+use	FUN_001440e4	iVar26	thirdSource	INFERRED	third distinct source inst of the lane group (0 when absent, bVar1 = iVar26 == 0)	^\s*if\ \(iVar26\ ==\ puVar11\[4\]\)\ \{$	+1
+use	FUN_001440e4	iVar26	thirdSource	INFERRED	third distinct source inst of the lane group (0 when absent, bVar1 = iVar26 == 0)	^\s*iVar13\ =\ \(\(int\ \(\*\)\(\)\)FUN_0010bed0\)\(2,local_c8,iVar26,iVar7,uVar17,\(double\)FLOAT_001aa0d4\);$	+1
+local	FUN_001440e4	local_8c	fourthSource	INFERRED	fourth distinct source inst (0 when absent, bVar2 = local_8c == 0); passed to IRInst__setExtraOperandSource
+use	FUN_001440e4	bVar1	noThirdSource	INFERRED	bVar1 = iVar26 == 0, guards the isBeforeOrSame test of the third source	^\s*bVar1\ =\ iVar26\ ==\ 0;$	+2
+use	FUN_001440e4	bVar1	noThirdSource	INFERRED	bVar1 = iVar26 == 0, guards the isBeforeOrSame test of the third source	^\s*bVar1\ =\ true;$	+1
+use	FUN_001440e4	bVar1	noThirdSource	INFERRED	bVar1 = iVar26 == 0, guards the isBeforeOrSame test of the third source	^\s*bVar2\ =\ bVar1;$	+1
+use	FUN_001440e4	bVar1	noThirdSource	INFERRED	bVar1 = iVar26 == 0, guards the isBeforeOrSame test of the third source	^\s*bVar1\ =\ local_8c\ ==\ 0;$	+1
+use	FUN_001440e4	bVar1	noThirdSource	INFERRED	bVar1 = iVar26 == 0, guards the isBeforeOrSame test of the third source	^\s*if\ \(!bVar1\)\ \{$	+1
+use	FUN_001440e4	bVar1	noThirdSource	INFERRED	bVar1 = iVar26 == 0, guards the isBeforeOrSame test of the third source	^\s*if\ \(!bVar1\)\ \{$@2	+1
+local	FUN_001440e4	bVar2	noFourthSource	INFERRED	bVar2 = local_8c == 0 (or bVar1 on the early path), guards the fourth source
+local	FUN_001440e4	piVar21	insertBlock	INFERRED	first argument of Block__insertInstBefore(piVar21,iVar27,..) for every inserted inst
+use	FUN_001440e4	iVar27	insertBefore	INFERRED	second argument of Block__insertInstBefore: the latest-ordered source inst, stepped past opcode 0x8e	^\s*iVar27\ =\ \*\(int\ \*\)\(iVar24\ \+\ 8\);$	+3
+use	FUN_001440e4	iVar27	insertBefore	INFERRED	second argument of Block__insertInstBefore: the latest-ordered source inst, stepped past opcode 0x8e	^\s*iVar27\ =\ \*\(int\ \*\)\(iVar25\ \+\ 8\);$	+2
+use	FUN_001440e4	iVar27	insertBefore	INFERRED	second argument of Block__insertInstBefore: the latest-ordered source inst, stepped past opcode 0x8e	^\s*iVar7\ =\ FUN_00104800\(iVar27,iVar26\);$	+1
+use	FUN_001440e4	iVar27	insertBefore	INFERRED	second argument of Block__insertInstBefore: the latest-ordered source inst, stepped past opcode 0x8e	^\s*iVar27\ =\ \*\(int\ \*\)\(iVar26\ \+\ 8\);$	+2
+use	FUN_001440e4	iVar27	insertBefore	INFERRED	second argument of Block__insertInstBefore: the latest-ordered source inst, stepped past opcode 0x8e	^\s*if\ \(\(!bVar2\)\ \&\&\ \(iVar7\ =\ FUN_00104800\(iVar27,local_8c\),\ iVar7\ !=\ 0\)\)\ \{$	+3
+use	FUN_001440e4	iVar27	insertBefore	INFERRED	second argument of Block__insertInstBefore: the latest-ordered source inst, stepped past opcode 0x8e	^\s*FUN_00104800\(iVar24,iVar27\);$	+2
+use	FUN_001440e4	iVar27	insertBefore	INFERRED	second argument of Block__insertInstBefore: the latest-ordered source inst, stepped past opcode 0x8e	^\s*FUN_00104800\(iVar26,iVar27\);$	+1
+use	FUN_001440e4	iVar27	insertBefore	INFERRED	second argument of Block__insertInstBefore: the latest-ordered source inst, stepped past opcode 0x8e	^\s*FUN_00104800\(local_8c,iVar27\);$	+1
+use	FUN_001440e4	iVar27	insertBefore	INFERRED	second argument of Block__insertInstBefore: the latest-ordered source inst, stepped past opcode 0x8e	^\s*iVar7\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar27\ \+\ 0x88\)\ \+\ 8\);$	+1
+use	FUN_001440e4	iVar27	insertBefore	INFERRED	second argument of Block__insertInstBefore: the latest-ordered source inst, stepped past opcode 0x8e	^\s*iVar27\ =\ \*\(int\ \*\)\(iVar27\ \+\ 8\);$	+2
+use	FUN_001440e4	iVar27	insertBefore	INFERRED	second argument of Block__insertInstBefore: the latest-ordered source inst, stepped past opcode 0x8e	^\s*iVar27\ =\ FUN_000e83bc\(piVar20\);$	+1
+use	FUN_001440e4	iVar27	insertBefore	INFERRED	second argument of Block__insertInstBefore: the latest-ordered source inst, stepped past opcode 0x8e	^\s*iVar27\ =\ FUN_000e83bc\(piVar21\);$	+1
+use	FUN_001440e4	iVar27	insertBefore	INFERRED	second argument of Block__insertInstBefore: the latest-ordered source inst, stepped past opcode 0x8e	^\s*FUN_000e7700\(piVar21,iVar27,iVar24\);$	+1
+use	FUN_001440e4	iVar27	insertBefore	INFERRED	second argument of Block__insertInstBefore: the latest-ordered source inst, stepped past opcode 0x8e	^\s*FUN_000e7700\(piVar21,iVar27,iVar24\);$@2	+2
+use	FUN_001440e4	iVar27	insertBefore	INFERRED	second argument of Block__insertInstBefore: the latest-ordered source inst, stepped past opcode 0x8e	^\s*FUN_000e7700\(piVar21,iVar27,iVar13\);$	+2
+use	FUN_001440e4	piVar20	latestSourceBlock	INFERRED	*(iVar27+0x158) = block of the latest source inst; queried through vtable +0x1c/+0x2c and Block__isAncestorOf	^\s*piVar20\ =\ \*\(int\ \*\*\)\(iVar27\ \+\ 0x158\);$	+1
+use	FUN_001440e4	piVar20	latestSourceBlock	INFERRED	*(iVar27+0x158) = block of the latest source inst; queried through vtable +0x1c/+0x2c and Block__isAncestorOf	^\s*piVar20\ =\ \*\(int\ \*\*\)\(iVar27\ \+\ 0x158\);$@2	+1
+use	FUN_001440e4	piVar20	latestSourceBlock	INFERRED	*(iVar27+0x158) = block of the latest source inst; queried through vtable +0x1c/+0x2c and Block__isAncestorOf	^\s*piVar20\ =\ \*\(int\ \*\*\)\(iVar27\ \+\ 0x158\);$@3	+1
+use	FUN_001440e4	piVar20	latestSourceBlock	INFERRED	*(iVar27+0x158) = block of the latest source inst; queried through vtable +0x1c/+0x2c and Block__isAncestorOf	^\s*piVar20\ =\ \*\(int\ \*\*\)\(iVar27\ \+\ 0x158\);$@4	+1
+use	FUN_001440e4	piVar20	latestSourceBlock	INFERRED	*(iVar27+0x158) = block of the latest source inst; queried through vtable +0x1c/+0x2c and Block__isAncestorOf	^\s*iVar7\ =\ \(\*\*\(code\ \*\*\)\(\*piVar20\ \+\ 0x1c\)\)\(piVar20\);$	+1
+use	FUN_001440e4	piVar20	latestSourceBlock	INFERRED	*(iVar27+0x158) = block of the latest source inst; queried through vtable +0x1c/+0x2c and Block__isAncestorOf	^\s*if\ \(\*\(int\ \*\)\(piVar20\[0x34\]\ \+\ 4\)\ !=\ 0\)\ \{$	+2
+use	FUN_001440e4	piVar20	latestSourceBlock	INFERRED	*(iVar27+0x158) = block of the latest source inst; queried through vtable +0x1c/+0x2c and Block__isAncestorOf	^\s*piVar20\ =\ \(int\ \*\)\*puVar11;$	+2
+use	FUN_001440e4	piVar20	latestSourceBlock	INFERRED	*(iVar27+0x158) = block of the latest source inst; queried through vtable +0x1c/+0x2c and Block__isAncestorOf	^\s*iVar7\ =\ \(\*\*\(code\ \*\*\)\(\*piVar20\ \+\ 0x2c\)\)\(piVar20\);$	+2
+use	FUN_001440e4	piVar20	latestSourceBlock	INFERRED	*(iVar27+0x158) = block of the latest source inst; queried through vtable +0x1c/+0x2c and Block__isAncestorOf	^\s*if\ \(\*\(int\ \*\)\(piVar20\[0x34\]\ \+\ 4\)\ !=\ 0\)\ \{$@2	+2
+use	FUN_001440e4	piVar20	latestSourceBlock	INFERRED	*(iVar27+0x158) = block of the latest source inst; queried through vtable +0x1c/+0x2c and Block__isAncestorOf	^\s*iVar27\ =\ FUN_000e78f8\(piVar21,piVar20\[0x54\]\);$	+1
+use	FUN_001440e4	piVar20	latestSourceBlock	INFERRED	*(iVar27+0x158) = block of the latest source inst; queried through vtable +0x1c/+0x2c and Block__isAncestorOf	^\s*if\ \(1\ <\ \*\(uint\ \*\)\(piVar20\[0x34\]\ \+\ 4\)\)\ \{$	+2
+local	FUN_001440e4	puVar16	laneSelectCursor	INFERRED	puVar16 = puVar23 + 8 (component bytes), advanced by one byte per lane
+local	FUN_001440e4	pbVar10	laneSelectScan	INFERRED	pbVar10 = (byte *)(puVar23 + 8), compared with the lane index
+local	FUN_001440e4	iVar8	laneSourceInst	INFERRED	iVar8 = puVar11[4], source inst of the current lane
+local	FUN_001440e4	bVar3	laneComponent	INFERRED	byte read from laneGroup+0x20+lane: component of the source used by that lane
+local	FUN_001440e4	cVar4	operandComponent	INFERRED	byte of the operand select word (value 4 = unused component)

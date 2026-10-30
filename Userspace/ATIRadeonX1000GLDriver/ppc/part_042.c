@@ -7090,12 +7090,15 @@ LAB_001440cc:
 }
 
 /* FUN_001440e4 @ 0x1440e4 (4680 bytes) */
-int FUN_001440e4(param_1, inst, inst2, param_4)
-  undefined4 *param_1;
+int FUN_001440e4(pass, inst, inst2, groupSlotCursor)
+  undefined4 *pass;
   int inst;
   int inst2;
-  int param_4;
+  int groupSlotCursor;
 {
+  int *latestSourceBlock;
+  int insertBefore;
+  int thirdSource;
   int vcall2cResult;
   int vcall1cResult;
   int isBeforeOrSameResult;
@@ -7126,29 +7129,29 @@ int FUN_001440e4(param_1, inst, inst2, param_4)
   int operandRecord4;
   int operandRecord3;
   int operandRecord5;
-  bool bVar1;
-  bool bVar2;
-  byte bVar3;
-  char cVar4;
+  bool noThirdSource;
+  bool noFourthSource;
+  byte laneComponent;
+  char operandComponent;
   undefined4 uVar5;
   undefined4 uVar6;
   int iVar7;
-  int iVar8;
+  int laneSourceInst;
   undefined1 uVar9;
-  byte *pbVar10;
+  byte *laneSelectScan;
   undefined4 *puVar11;
   int countdownB;
   int iVar13;
   int iVar14;
-  uint uVar15;
-  undefined4 *puVar16;
+  uint distinctSourceCount;
+  undefined4 *laneSelectCursor;
   undefined4 uVar17;
   uint uVar18;
   int iVar19;
   int *piVar20;
-  int *piVar21;
-  int iVar22;
-  undefined4 *puVar23;
+  int *insertBlock;
+  int operandIndex;
+  undefined4 *laneGroup;
   int iVar24;
   int iVar25;
   int iVar26;
@@ -7171,7 +7174,7 @@ int FUN_001440e4(param_1, inst, inst2, param_4)
   undefined4 local_98;
   undefined4 local_94;
   undefined4 local_90;
-  int local_8c;
+  int fourthSource;
   int operandSourceB;
   int operandSource;
   undefined *local_80;
@@ -7190,36 +7193,36 @@ int FUN_001440e4(param_1, inst, inst2, param_4)
   local_64 = local_c4 + 3;
   local_60 = &local_b4;
   local_5c = &local_d4;
-  iVar22 = 0;
+  operandIndex = 0;
 LAB_00144144:
-  puVar23 = *(undefined4 **)(param_4 + 4);
-  if (puVar23 != (undefined4 *)0x0) {
-    iVar24 = puVar23[9];
+  laneGroup = *(undefined4 **)(groupSlotCursor + 4);
+  if (laneGroup != (undefined4 *)0x0) {
+    iVar24 = laneGroup[9];
     local_7c = &local_d8;
     if (iVar24 == 0) {
       countdownF = 4;
       iVar24 = 0;
-      puVar11 = puVar23;
+      puVar11 = laneGroup;
       do {
         if (puVar11[4] != 0) {
-          uVar15 = 1;
-          iVar24 = puVar23[iVar24 + 4];
+          distinctSourceCount = 1;
+          iVar24 = laneGroup[iVar24 + 4];
           goto LAB_001441e0;
         }
         iVar24 = iVar24 + 1;
         puVar11 = puVar11 + 1;
         countdownF = countdownF + -1;
       } while (countdownF != 0);
-      uVar15 = 0;
+      distinctSourceCount = 0;
       iVar24 = 0;
 LAB_001441e0:
       countdownG = 4;
       iVar25 = 0;
-      puVar11 = puVar23;
+      puVar11 = laneGroup;
       do {
         if ((iVar24 != puVar11[4]) && (puVar11[4] != 0)) {
-          uVar15 = uVar15 + 1;
-          iVar25 = puVar23[iVar25 + 4];
+          distinctSourceCount = distinctSourceCount + 1;
+          iVar25 = laneGroup[iVar25 + 4];
           goto LAB_00144214;
         }
         iVar25 = iVar25 + 1;
@@ -7229,29 +7232,29 @@ LAB_001441e0:
       iVar25 = 0;
 LAB_00144214:
       countdownH = 4;
-      iVar26 = 0;
-      puVar11 = puVar23;
+      thirdSource = 0;
+      puVar11 = laneGroup;
       do {
         iVar7 = puVar11[4];
         if (((iVar24 != iVar7) && (iVar25 != iVar7)) && (iVar7 != 0)) {
-          uVar18 = uVar15 + 1;
-          iVar26 = puVar23[iVar26 + 4];
-          bVar1 = iVar26 == 0;
-          if (bVar1) goto LAB_00144258;
-          uVar15 = uVar15 + 2;
+          uVar18 = distinctSourceCount + 1;
+          thirdSource = laneGroup[thirdSource + 4];
+          noThirdSource = thirdSource == 0;
+          if (noThirdSource) goto LAB_00144258;
+          distinctSourceCount = distinctSourceCount + 2;
           countdownH = 4;
-          piVar20 = puVar23 + 4;
-          puVar11 = puVar23;
+          piVar20 = laneGroup + 4;
+          puVar11 = laneGroup;
           goto LAB_001442d4;
         }
-        iVar26 = iVar26 + 1;
+        thirdSource = thirdSource + 1;
         puVar11 = puVar11 + 1;
         countdownH = countdownH + -1;
       } while (countdownH != 0);
-      bVar1 = true;
-      iVar26 = 0;
-      local_8c = 0;
-      bVar2 = bVar1;
+      noThirdSource = true;
+      thirdSource = 0;
+      fourthSource = 0;
+      noFourthSource = noThirdSource;
       goto LAB_00144264;
     }
     goto LAB_0014516c;
@@ -7264,21 +7267,21 @@ LAB_00144214:
     if (countdownH == 0) break;
 LAB_001442d4:
     iVar7 = puVar11[4];
-    if (((iVar24 != iVar7) && (iVar25 != iVar7)) && ((iVar7 != iVar26 && (iVar7 != 0)))) {
-      local_8c = *piVar20;
-      bVar2 = local_8c == 0;
-      if (bVar2) goto LAB_00144264;
+    if (((iVar24 != iVar7) && (iVar25 != iVar7)) && ((iVar7 != thirdSource && (iVar7 != 0)))) {
+      fourthSource = *piVar20;
+      noFourthSource = fourthSource == 0;
+      if (noFourthSource) goto LAB_00144264;
       loopIndexG = 0;
       countdownH = 4;
-      piVar20 = puVar23 + 4;
-      pbVar10 = (byte *)(puVar23 + 8);
+      piVar20 = laneGroup + 4;
+      laneSelectScan = (byte *)(laneGroup + 8);
       goto LAB_00144334;
     }
   }
 LAB_00144258:
-  local_8c = 0;
-  uVar15 = uVar18;
-  bVar2 = true;
+  fourthSource = 0;
+  distinctSourceCount = uVar18;
+  noFourthSource = true;
   goto LAB_00144264;
   while( true ) {
     loopIndexG = loopIndexG + 1;
@@ -7286,92 +7289,92 @@ LAB_00144258:
     countdownH = countdownH + -1;
     if (countdownH == 0) break;
 LAB_00144334:
-    bVar3 = *pbVar10;
-    pbVar10 = pbVar10 + 1;
-    if (loopIndexG == bVar3) {
+    laneComponent = *laneSelectScan;
+    laneSelectScan = laneSelectScan + 1;
+    if (loopIndexG == laneComponent) {
       iVar27 = *piVar20;
-      if (iVar27 != local_8c) {
-        if (iVar27 == iVar26) {
-          bVar1 = local_8c == 0;
+      if (iVar27 != fourthSource) {
+        if (iVar27 == thirdSource) {
+          noThirdSource = fourthSource == 0;
           iVar7 = iVar25;
-          iVar26 = local_8c;
+          thirdSource = fourthSource;
         }
         else {
-          iVar7 = local_8c;
+          iVar7 = fourthSource;
           if ((iVar25 != iVar27) && (iVar7 = iVar25, iVar24 == iVar27)) {
-            iVar24 = local_8c;
+            iVar24 = fourthSource;
           }
         }
         iVar25 = iVar7;
-        bVar2 = iVar27 == 0;
-        local_8c = iVar27;
+        noFourthSource = iVar27 == 0;
+        fourthSource = iVar27;
       }
       break;
     }
   }
 LAB_00144264:
-  iVar27 = *(int *)(iVar24 + 8);
-  piVar20 = *(int **)(iVar27 + 0x158);
-  isBeforeOrSameResult = Inst__isBeforeOrSame(iVar27,iVar25);
+  insertBefore = *(int *)(iVar24 + 8);
+  latestSourceBlock = *(int **)(insertBefore + 0x158);
+  isBeforeOrSameResult = Inst__isBeforeOrSame(insertBefore,iVar25);
   if (isBeforeOrSameResult != 0) {
-    iVar27 = *(int *)(iVar25 + 8);
-    piVar20 = *(int **)(iVar27 + 0x158);
+    insertBefore = *(int *)(iVar25 + 8);
+    latestSourceBlock = *(int **)(insertBefore + 0x158);
   }
-  if (!bVar1) {
-    isBeforeOrSameResult = Inst__isBeforeOrSame(iVar27,iVar26);
+  if (!noThirdSource) {
+    isBeforeOrSameResult = Inst__isBeforeOrSame(insertBefore,thirdSource);
     if (isBeforeOrSameResult != 0) {
-      iVar27 = *(int *)(iVar26 + 8);
-      piVar20 = *(int **)(iVar27 + 0x158);
+      insertBefore = *(int *)(thirdSource + 8);
+      latestSourceBlock = *(int **)(insertBefore + 0x158);
     }
-    if ((!bVar2) && (isBeforeOrSameResult = Inst__isBeforeOrSame(iVar27,local_8c), isBeforeOrSameResult != 0)) {
-      iVar27 = *(int *)(local_8c + 8);
-      piVar20 = *(int **)(iVar27 + 0x158);
+    if ((!noFourthSource) && (isBeforeOrSameResult = Inst__isBeforeOrSame(insertBefore,fourthSource), isBeforeOrSameResult != 0)) {
+      insertBefore = *(int *)(fourthSource + 8);
+      latestSourceBlock = *(int **)(insertBefore + 0x158);
     }
   }
-  Inst__isBeforeOrSame(iVar24,iVar27);
-  Inst__isBeforeOrSame(iVar25,iVar27);
-  if (!bVar1) {
-    Inst__isBeforeOrSame(iVar26,iVar27);
+  Inst__isBeforeOrSame(iVar24,insertBefore);
+  Inst__isBeforeOrSame(iVar25,insertBefore);
+  if (!noThirdSource) {
+    Inst__isBeforeOrSame(thirdSource,insertBefore);
   }
-  if (!bVar2) {
-    Inst__isBeforeOrSame(local_8c,iVar27);
+  if (!noFourthSource) {
+    Inst__isBeforeOrSame(fourthSource,insertBefore);
   }
-  iVar7 = *(int *)(*(int *)(iVar27 + 0x88) + 8);
+  iVar7 = *(int *)(*(int *)(insertBefore + 0x88) + 8);
   while (iVar7 == 0x8e) {
-    iVar27 = *(int *)(iVar27 + 8);
-    iVar7 = *(int *)(*(int *)(iVar27 + 0x88) + 8);
+    insertBefore = *(int *)(insertBefore + 8);
+    iVar7 = *(int *)(*(int *)(insertBefore + 0x88) + 8);
   }
-  vcall1cResult = (**(code **)(*piVar20 + 0x1c))(piVar20);
+  vcall1cResult = (**(code **)(*latestSourceBlock + 0x1c))(latestSourceBlock);
   if (vcall1cResult != 0) {
     puVar11 = (undefined4 *)0x0;
-    if (*(int *)(piVar20[0x34] + 4) != 0) {
-      puVar11 = *(undefined4 **)(piVar20[0x34] + 8);
+    if (*(int *)(latestSourceBlock[0x34] + 4) != 0) {
+      puVar11 = *(undefined4 **)(latestSourceBlock[0x34] + 8);
     }
-    piVar20 = (int *)*puVar11;
-    iVar27 = FUN_000e83bc(piVar20);
+    latestSourceBlock = (int *)*puVar11;
+    insertBefore = FUN_000e83bc(latestSourceBlock);
   }
-  vcall2cResult = (**(code **)(*piVar20 + 0x2c))(piVar20);
-  piVar21 = piVar20;
+  vcall2cResult = (**(code **)(*latestSourceBlock + 0x2c))(latestSourceBlock);
+  insertBlock = latestSourceBlock;
   if (vcall2cResult != 0) {
     puVar11 = (undefined4 *)0x0;
-    if (*(int *)(piVar20[0x34] + 4) != 0) {
-      puVar11 = *(undefined4 **)(piVar20[0x34] + 8);
+    if (*(int *)(latestSourceBlock[0x34] + 4) != 0) {
+      puVar11 = *(undefined4 **)(latestSourceBlock[0x34] + 8);
     }
-    piVar21 = (int *)*puVar11;
-    iVar27 = Block__isAncestorOf(piVar21,piVar20[0x54]);
+    insertBlock = (int *)*puVar11;
+    iVar27 = Block__isAncestorOf(insertBlock,latestSourceBlock[0x54]);
     if (iVar27 == 0) {
       puVar11 = (undefined4 *)0x0;
-      if (1 < *(uint *)(piVar20[0x34] + 4)) {
-        puVar11 = (undefined4 *)(*(int *)(piVar20[0x34] + 8) + 4);
+      if (1 < *(uint *)(latestSourceBlock[0x34] + 4)) {
+        puVar11 = (undefined4 *)(*(int *)(latestSourceBlock[0x34] + 8) + 4);
       }
-      piVar21 = (int *)*puVar11;
+      insertBlock = (int *)*puVar11;
     }
-    iVar27 = FUN_000e83bc(piVar21);
+    insertBefore = FUN_000e83bc(insertBlock);
   }
   uVar5 = DAT_001b0044;
-  iVar7 = piVar21[0x2b];
+  iVar7 = insertBlock[0x2b];
   uVar17 = *(undefined4 *)(iVar7 + 8);
-  if (uVar15 == 2) {
+  if (distinctSourceCount == 2) {
     loopIndexD = 0;
     local_c4[0] = DAT_001b0038;
     local_c8 = DAT_001b0038;
@@ -7380,12 +7383,12 @@ LAB_00144264:
     local_80 = &DAT_001b40f0;
     local_d4 = DAT_001b0044;
     local_7c = &local_d8;
-    puVar11 = puVar23;
+    puVar11 = laneGroup;
     do {
       if (iVar24 == puVar11[4]) {
-        *(undefined1 *)((int)&local_d4 + (uint)*(byte *)((int)puVar23 + loopIndexD + 0x20)) = 0;
-        bVar3 = *(byte *)((int)puVar23 + loopIndexD + 0x20);
-        *(byte *)((int)&local_c8 + (uint)bVar3) = bVar3;
+        *(undefined1 *)((int)&local_d4 + (uint)*(byte *)((int)laneGroup + loopIndexD + 0x20)) = 0;
+        laneComponent = *(byte *)((int)laneGroup + loopIndexD + 0x20);
+        *(byte *)((int)&local_c8 + (uint)laneComponent) = laneComponent;
       }
       loopIndexD = loopIndexD + 1;
       puVar11 = puVar11 + 1;
@@ -7417,12 +7420,12 @@ LAB_00144264:
     local_d4 = *(undefined4 *)(local_80 + -0x40b8);
     *(undefined4 *)(operandRecord + 0x10) = uVar6;
     countdownG = 4;
-    puVar11 = puVar23;
+    puVar11 = laneGroup;
     do {
       if (iVar25 == puVar11[4]) {
-        *(undefined1 *)((int)local_7c + *(byte *)((int)puVar23 + loopIndexB + 0x20) + 0x14) = 0;
-        bVar3 = *(byte *)((int)puVar23 + loopIndexB + 0x20);
-        *(byte *)((int)local_7c + bVar3 + 0x10) = bVar3;
+        *(undefined1 *)((int)local_7c + *(byte *)((int)laneGroup + loopIndexB + 0x20) + 0x14) = 0;
+        laneComponent = *(byte *)((int)laneGroup + loopIndexB + 0x20);
+        *(byte *)((int)local_7c + laneComponent + 0x10) = laneComponent;
       }
       loopIndexB = loopIndexB + 1;
       puVar11 = puVar11 + 1;
@@ -7483,26 +7486,26 @@ LAB_0014488c:
 LAB_001448d8:
     loopIndexC = 0;
     local_c4[0] = *(undefined4 *)(local_78 + -0x40ac);
-    puVar16 = puVar23 + 8;
+    laneSelectCursor = laneGroup + 8;
     local_d0 = *(undefined4 *)(local_80 + -0x40b8);
     countdownB = 4;
-    puVar11 = puVar23;
+    puVar11 = laneGroup;
     local_cc = local_d0;
     do {
       if (sourceDef == puVar11[4]) {
         *(undefined1 *)(loopIndexC + (int)local_70) = 0;
         local_74 = &local_cc;
-        *(undefined1 *)((int)&local_d0 + loopIndexC) = *(undefined1 *)puVar16;
+        *(undefined1 *)((int)&local_d0 + loopIndexC) = *(undefined1 *)laneSelectCursor;
         *(char *)(loopIndexC + (int)&local_cc) = (char)iVar29;
       }
       else if (sourceDef2 == puVar11[4]) {
         *(char *)((int)&local_d0 + loopIndexC) = (char)iVar28;
         *(undefined1 *)(loopIndexC + (int)local_70) = 0;
         local_74 = &local_cc;
-        *(undefined1 *)(loopIndexC + (int)&local_cc) = *(undefined1 *)puVar16;
+        *(undefined1 *)(loopIndexC + (int)&local_cc) = *(undefined1 *)laneSelectCursor;
       }
       loopIndexC = loopIndexC + 1;
-      puVar16 = (undefined4 *)((int)puVar16 + 1);
+      laneSelectCursor = (undefined4 *)((int)laneSelectCursor + 1);
       puVar11 = puVar11 + 1;
       countdownB = countdownB + -1;
     } while (countdownB != 0);
@@ -7522,15 +7525,15 @@ LAB_001448d8:
     operandRecord2 = IRInst__getOperandRecord(newInst,0);
     WriteMask__fromSelectWord(&local_a0,*(undefined4 *)(operandRecord2 + 0x10));
     *(undefined4 *)(newInst + 0xc) = local_a0;
-    Block__insertInstBefore(piVar21,iVar27,iVar24);
+    Block__insertInstBefore(insertBlock,insertBefore,iVar24);
   }
   else {
-    if (uVar15 < 2) {
+    if (distinctSourceCount < 2) {
       local_7c = &local_d8;
       goto LAB_0014514c;
     }
     local_7c = &local_d8;
-    if (4 < uVar15) goto LAB_0014514c;
+    if (4 < distinctSourceCount) goto LAB_0014514c;
     local_78 = &DAT_001b40f0;
     loopIndexB = 0;
     local_80 = &DAT_001b40f0;
@@ -7538,12 +7541,12 @@ LAB_001448d8:
     local_c4[0] = DAT_001b0038;
     local_cc = DAT_001b0044;
     local_d0 = DAT_001b0038;
-    puVar11 = puVar23;
+    puVar11 = laneGroup;
     do {
       if (iVar24 == puVar11[4]) {
-        *(undefined1 *)((int)&local_cc + (uint)*(byte *)((int)puVar23 + loopIndexB + 0x20)) = 0;
-        bVar3 = *(byte *)((int)puVar23 + loopIndexB + 0x20);
-        *(byte *)((int)&local_d0 + (uint)bVar3) = bVar3;
+        *(undefined1 *)((int)&local_cc + (uint)*(byte *)((int)laneGroup + loopIndexB + 0x20)) = 0;
+        laneComponent = *(byte *)((int)laneGroup + loopIndexB + 0x20);
+        *(byte *)((int)&local_d0 + (uint)laneComponent) = laneComponent;
       }
       loopIndexB = loopIndexB + 1;
       puVar11 = puVar11 + 1;
@@ -7576,12 +7579,12 @@ LAB_001448d8:
     local_c4[0] = *(undefined4 *)(local_78 + -0x40ac);
     *(undefined4 *)(operandRecord3 + 0x10) = uVar6;
     countdownC = 4;
-    puVar11 = puVar23;
+    puVar11 = laneGroup;
     do {
       if (iVar25 == puVar11[4]) {
-        *(undefined1 *)((int)local_7c + *(byte *)((int)puVar23 + loopIndexF + 0x20) + 0x14) = 0;
-        bVar3 = *(byte *)((int)puVar23 + loopIndexF + 0x20);
-        *(byte *)((int)local_7c + bVar3 + 8) = bVar3;
+        *(undefined1 *)((int)local_7c + *(byte *)((int)laneGroup + loopIndexF + 0x20) + 0x14) = 0;
+        laneComponent = *(byte *)((int)laneGroup + loopIndexF + 0x20);
+        *(byte *)((int)local_7c + laneComponent + 8) = laneComponent;
       }
       loopIndexF = loopIndexF + 1;
       puVar11 = puVar11 + 1;
@@ -7631,12 +7634,12 @@ LAB_001448d8:
     *(undefined4 *)(operandRecord3 + 0x10) = uVar5;
     countdownC = 4;
     local_cc = local_d0;
-    puVar11 = puVar23;
+    puVar11 = laneGroup;
     do {
-      if (iVar26 == puVar11[4]) {
-        *(undefined1 *)((int)local_7c + *(byte *)((int)puVar23 + loopIndexF + 0x20) + 0x10) = 0;
-        bVar3 = *(byte *)((int)puVar23 + loopIndexF + 0x20);
-        *(byte *)((int)local_7c + bVar3 + 0xc) = bVar3;
+      if (thirdSource == puVar11[4]) {
+        *(undefined1 *)((int)local_7c + *(byte *)((int)laneGroup + loopIndexF + 0x20) + 0x10) = 0;
+        laneComponent = *(byte *)((int)laneGroup + loopIndexF + 0x20);
+        *(byte *)((int)local_7c + laneComponent + 0xc) = laneComponent;
       }
       loopIndexF = loopIndexF + 1;
       puVar11 = puVar11 + 1;
@@ -7653,7 +7656,7 @@ LAB_001448d8:
       loopIndexB = loopIndexB + 1;
       countdownI = countdownI + -1;
     } while (countdownI != 0);
-    iVar13 = ((int (*)())IRInst__createWithConstantOperands)(2,local_c8,iVar26,iVar7,uVar17,(double)FLOAT_001aa0d4);
+    iVar13 = ((int (*)())IRInst__createWithConstantOperands)(2,local_c8,thirdSource,iVar7,uVar17,(double)FLOAT_001aa0d4);
     *(undefined4 *)(iVar13 + 0x160) = *(undefined4 *)(iVar7 + 0x478);
     iVar28 = 0;
     operandRecord = IRInst__getOperandRecord(iVar13,0);
@@ -7717,38 +7720,38 @@ LAB_00144e5c:
     iVar14 = -1;
 LAB_00144ea8:
     local_d4 = *(undefined4 *)(local_80 + -0x40b8);
-    puVar16 = puVar23 + 8;
+    laneSelectCursor = laneGroup + 8;
     local_c4[1] = *(undefined4 *)(local_78 + -0x40ac);
     countdownK = 4;
     loopIndex = 0;
-    puVar11 = puVar23;
+    puVar11 = laneGroup;
     do {
-      iVar8 = puVar11[4];
-      if (operandSource == iVar8) {
+      laneSourceInst = puVar11[4];
+      if (operandSource == laneSourceInst) {
         *(undefined1 *)(loopIndex + (int)local_6c) = 0;
-        uVar9 = *(undefined1 *)puVar16;
+        uVar9 = *(undefined1 *)laneSelectCursor;
         *(char *)(loopIndex + (int)local_64) = (char)iVar19;
         *(undefined1 *)(loopIndex + (int)local_68) = uVar9;
         *(char *)(loopIndex + (int)local_60) = (char)iVar14;
       }
-      else if (operandSourceB == iVar8) {
+      else if (operandSourceB == laneSourceInst) {
         *(undefined1 *)(loopIndex + (int)local_6c) = 0;
         *(char *)(loopIndex + (int)local_68) = (char)iVar28;
-        uVar9 = *(undefined1 *)puVar16;
+        uVar9 = *(undefined1 *)laneSelectCursor;
         *(char *)(loopIndex + (int)local_60) = (char)iVar14;
         *(undefined1 *)(loopIndex + (int)local_64) = uVar9;
       }
-      else if (sourceDef3 == iVar8) {
+      else if (sourceDef3 == laneSourceInst) {
         *(undefined1 *)(loopIndex + (int)local_6c) = 0;
         *(char *)(loopIndex + (int)local_68) = (char)iVar28;
         *(char *)(loopIndex + (int)local_64) = (char)iVar26;
-        *(undefined1 *)(loopIndex + (int)local_60) = *(undefined1 *)puVar16;
+        *(undefined1 *)(loopIndex + (int)local_60) = *(undefined1 *)laneSelectCursor;
       }
-      else if ((!bVar2) && (local_8c == iVar8)) {
+      else if ((!noFourthSource) && (fourthSource == laneSourceInst)) {
         *(char *)(loopIndex + (int)local_5c) = (char)loopIndex;
       }
       loopIndex = loopIndex + 1;
-      puVar16 = (undefined4 *)((int)puVar16 + 1);
+      laneSelectCursor = (undefined4 *)((int)laneSelectCursor + 1);
       puVar11 = puVar11 + 1;
       countdownK = countdownK + -1;
     } while (countdownK != 0);
@@ -7774,47 +7777,47 @@ LAB_00144ea8:
     uVar5 = local_b4;
     operandRecord = IRInst__getOperandRecord(newInst,3);
     *(undefined4 *)(operandRecord + 0x10) = uVar5;
-    if (bVar2) {
+    if (noFourthSource) {
       operandRecord = IRInst__getOperandRecord(newInst,0);
       WriteMask__fromSelectWord(&local_90,*(undefined4 *)(operandRecord + 0x10));
       *(undefined4 *)(newInst + 0xc) = local_90;
     }
     else {
-      IRInst__setExtraOperandSource(newInst,local_8c,1,uVar17);
+      IRInst__setExtraOperandSource(newInst,fourthSource,1,uVar17);
       uVar17 = local_d4;
       operandRecord = IRInst__getOperandRecord(newInst,4);
       uVar5 = DAT_001b0048;
       *(undefined4 *)(operandRecord + 0x10) = uVar17;
       *(undefined4 *)(newInst + 0xc) = uVar5;
     }
-    Block__insertInstBefore(piVar21,iVar27,iVar24);
-    Block__insertInstBefore(piVar21,iVar27,iVar25);
+    Block__insertInstBefore(insertBlock,insertBefore,iVar24);
+    Block__insertInstBefore(insertBlock,insertBefore,iVar25);
   }
-  Block__insertInstBefore(piVar21,iVar27,iVar13);
-  Block__insertInstBefore(piVar21,iVar27,newInst);
-  puVar23[9] = newInst;
+  Block__insertInstBefore(insertBlock,insertBefore,iVar13);
+  Block__insertInstBefore(insertBlock,insertBefore,newInst);
+  laneGroup[9] = newInst;
 LAB_0014514c:
   countdownE = 4;
-  puVar11 = puVar23;
+  puVar11 = laneGroup;
   do {
     *puVar11 = 1;
     puVar11 = puVar11 + 1;
     countdownE = countdownE + -1;
   } while (countdownE != 0);
-  iVar24 = puVar23[9];
+  iVar24 = laneGroup[9];
 LAB_0014516c:
-  operandRecord2 = IRInst__getOperandRecord(inst,iVar22);
+  operandRecord2 = IRInst__getOperandRecord(inst,operandIndex);
   loopIndexD = 0;
   local_b0[0] = *(undefined4 *)(operandRecord2 + 0x10);
   do {
-    cVar4 = *(char *)((int)local_b0 + loopIndexD);
-    if (cVar4 != '\x04') {
-      sourceDef = IRInst__getOperandSource(inst,iVar22);
+    operandComponent = *(char *)((int)local_b0 + loopIndexD);
+    if (operandComponent != '\x04') {
+      sourceDef = IRInst__getOperandSource(inst,operandIndex);
       countdown = 4;
       loopIndexE = 0;
-      puVar11 = puVar23;
+      puVar11 = laneGroup;
       do {
-        if ((sourceDef == puVar11[4]) && (cVar4 == *(char *)((int)puVar23 + loopIndexE + 0x20))) {
+        if ((sourceDef == puVar11[4]) && (operandComponent == *(char *)((int)laneGroup + loopIndexE + 0x20))) {
           uVar9 = (undefined1)loopIndexE;
           goto LAB_001451cc;
         }
@@ -7830,26 +7833,26 @@ LAB_001451cc:
     moreComponents = loopIndexD != 3;
     loopIndexD = loopIndexD + 1;
   } while (moreComponents);
-  operandRecord2 = IRInst__getOperandRecord(inst,iVar22);
+  operandRecord2 = IRInst__getOperandRecord(inst,operandIndex);
   *(undefined4 *)(operandRecord2 + 0x10) = uVar5;
-  if ((*(int *)(inst + 0x84) == iVar22) && ((*(uint *)(inst + 0x14) & 0x200) != 0)) {
-    IRInst__setExtraOperandSource(inst,iVar24,1,*param_1);
+  if ((*(int *)(inst + 0x84) == operandIndex) && ((*(uint *)(inst + 0x14) & 0x200) != 0)) {
+    IRInst__setExtraOperandSource(inst,iVar24,1,*pass);
   }
   else {
-    IRInst__setOperandSource(inst,iVar22,iVar24,1,*param_1);
+    IRInst__setOperandSource(inst,operandIndex,iVar24,1,*pass);
   }
-  operandRecord2 = IRInst__getOperandRecord(inst2,iVar22);
+  operandRecord2 = IRInst__getOperandRecord(inst2,operandIndex);
   loopIndexD = 0;
   local_d8 = *(undefined4 *)(operandRecord2 + 0x10);
   do {
-    cVar4 = *(char *)(loopIndexD + (int)local_7c);
-    if (cVar4 != '\x04') {
-      sourceDef = IRInst__getOperandSource(inst2,iVar22);
+    operandComponent = *(char *)(loopIndexD + (int)local_7c);
+    if (operandComponent != '\x04') {
+      sourceDef = IRInst__getOperandSource(inst2,operandIndex);
       countdown = 4;
       loopIndexE = 0;
-      puVar11 = puVar23;
+      puVar11 = laneGroup;
       do {
-        if ((sourceDef == puVar11[4]) && (cVar4 == *(char *)((int)puVar23 + loopIndexE + 0x20))) {
+        if ((sourceDef == puVar11[4]) && (operandComponent == *(char *)((int)laneGroup + loopIndexE + 0x20))) {
           uVar9 = (undefined1)loopIndexE;
           goto LAB_00145280;
         }
@@ -7865,18 +7868,18 @@ LAB_00145280:
     moreComponents = loopIndexD != 3;
     loopIndexD = loopIndexD + 1;
   } while (moreComponents);
-  operandRecord2 = IRInst__getOperandRecord(inst2,iVar22);
+  operandRecord2 = IRInst__getOperandRecord(inst2,operandIndex);
   *(undefined4 *)(operandRecord2 + 0x10) = uVar5;
-  if ((*(int *)(inst2 + 0x84) == iVar22) && ((*(uint *)(inst2 + 0x14) & 0x200) != 0)) {
-    IRInst__setExtraOperandSource(inst2,iVar24,1,*param_1);
+  if ((*(int *)(inst2 + 0x84) == operandIndex) && ((*(uint *)(inst2 + 0x14) & 0x200) != 0)) {
+    IRInst__setExtraOperandSource(inst2,iVar24,1,*pass);
   }
   else {
-    IRInst__setOperandSource(inst2,iVar22,iVar24,1,*param_1);
+    IRInst__setOperandSource(inst2,operandIndex,iVar24,1,*pass);
   }
 LAB_001452d4:
-  isLast = iVar22 == 4;
-  param_4 = param_4 + 4;
-  iVar22 = iVar22 + 1;
+  isLast = operandIndex == 4;
+  groupSlotCursor = groupSlotCursor + 4;
+  operandIndex = operandIndex + 1;
   if (isLast) {
     return;
   }
