@@ -3179,7 +3179,7 @@ int gld_prepareVertexArrayBuffers(ctx, vertexArray)
   bool nonePending;
   undefined4 isReady;
   int validateResult;
-  int iVar4;
+  int scratchInt4;
   uint pendingMask;
   int dirtyState;
   int arrayDesc;
@@ -3204,8 +3204,8 @@ int gld_prepareVertexArrayBuffers(ctx, vertexArray)
       while (!nonePending) {
         attrBit = *(uint *)(&DAT_001d91f0 + attrIndex * 4);
         if ((pendingMask & attrBit) != 0) {
-          iVar4 = *(int *)(attrIndex * 4 + dirtyState);
-          if ((iVar4 == 0) || (iVar4 = ((int (*)())gld_prepareBufferBacking)(ctx,iVar4,0), iVar4 == 0))
+          scratchInt4 = *(int *)(attrIndex * 4 + dirtyState);
+          if ((scratchInt4 == 0) || (scratchInt4 = ((int (*)())gld_prepareBufferBacking)(ctx,scratchInt4,0), scratchInt4 == 0))
           goto LAB_0001e86c;
           pendingMask = pendingMask & ~attrBit;
           nonePending = pendingMask == 0;

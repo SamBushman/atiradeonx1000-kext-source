@@ -8365,7 +8365,7 @@ void glBitmap_impl(int ctx,float *vertex,int width,int height,undefined4 staleAr
   float colorR;
   float colorG;
   float colorB;
-  undefined1 auStack_178 [144];
+  undefined1 internalDrawStateSave [144];
   longlong zoomXWide;
   longlong zoomYWide;
   uint lsbStartBit;
@@ -8379,7 +8379,7 @@ void glBitmap_impl(int ctx,float *vertex,int width,int height,undefined4 staleAr
   int rowIndex;
   uint msbFirstMask;
   int ring;
-  undefined1 *puStack_ac;
+  undefined1 *internalDrawStateSavePtr;
   uint lsbNextByteBit;
   uint msbNextByteBit;
   int savedTrailerOffset;
@@ -8417,12 +8417,12 @@ void glBitmap_impl(int ctx,float *vertex,int width,int height,undefined4 staleAr
     centerOffsetY = FLOAT_001aa110;
   }
   if ((0 < width) && (0 < height)) {
-    puStack_ac = auStack_178;
+    internalDrawStateSavePtr = internalDrawStateSave;
     *(undefined1 *)(ctx + GLD_inDrawPixels) = 1;
     columns = width;
     rows = height;
     rowPtr = bitmap;
-    gld_enterPointDrawState(ring,puStack_ac);
+    gld_enterPointDrawState(ring,internalDrawStateSavePtr);
     startX = _floor((double)(float)((double)*vertex - xOrigin));
     invertedRowStep = FLOAT_001aa114;
     rowStep = FLOAT_001aa0e8;
@@ -8679,7 +8679,7 @@ LAB_00016a6c:
     gaPointSizeValue = *(undefined4 *)(ring + 0x1ccc);
     *(undefined4 *)(writeCursor + 4 + trailerOffset) = gaPointSizeValue;
     FUN_0009d3b0(ring,staleArgR4Forward,width,trailerOffset,packetStart,packetVertexCount,gaPointSizeValue);
-    gldLeaveInternalDrawState(ring,puStack_ac);
+    gldLeaveInternalDrawState(ring,internalDrawStateSavePtr);
   }
   return;
 }
@@ -9198,17 +9198,17 @@ int gld_postDisplayNotification(ctx)
   int driverNotificationName;
   int driverNotificationObject;
   int userInfo;
-  /* local_48/scratchStack44 and local_40/scratchStack3c are each used as a 2-element array (&local_48 /
-   * &local_40 passed to _CFDictionaryCreate with count=2) - classic Ghidra stack-split: at -O0
-   * these landed non-adjacent (confirmed live: &local_48+4 == &local_40, not &scratchStack44), so
-   * CFDictionaryCreate read local_40's CFNumber as the 2nd dictionary key instead of scratchStack44's
+  /* dictKeyPid/scratchStack44 and dictValuePid/scratchStack3c are each used as a 2-element array (&dictKeyPid /
+   * &dictValuePid passed to _CFDictionaryCreate with count=2) - classic Ghidra stack-split: at -O0
+   * these landed non-adjacent (confirmed live: &dictKeyPid+4 == &dictValuePid, not &scratchStack44), so
+   * CFDictionaryCreate read dictValuePid's CFNumber as the 2nd dictionary key instead of scratchStack44's
    * CFString, corrupting the notification dictionary and crashing inside CFStringCreateCopy.
    * Merged into real contiguous arrays to match the actual usage (issue #64). */
   int local_48_arr[2];
   int local_40_arr[2];
-#define local_48 local_48_arr[0]
+#define dictKeyPid local_48_arr[0]
 #define scratchStack44 local_48_arr[1]
-#define local_40 local_40_arr[0]
+#define dictValuePid local_40_arr[0]
 #define scratchStack3c local_40_arr[1]
 
   distributedCenter = _CFNotificationCenterGetDistributedCenter();
@@ -9226,21 +9226,21 @@ int gld_postDisplayNotification(ctx)
   if (displaysNotificationName == 0) goto LAB_00017d90;
   if ((((displaysNotificationObject != 0) && (pidKey != 0)) && (displayMaskKey != 0)) && ((driverNotificationName != 0 && (driverNotificationObject != 0)))) {
     _CFNotificationCenterAddObserver(distributedCenter,ctx,PTR_FUN_001e88c4,displaysNotificationName,displaysNotificationObject,2);
-    local_48 = pidKey;
-    local_40 = _CFNumberCreate(0,3,ctx + 0x2a60);
+    dictKeyPid = pidKey;
+    dictValuePid = _CFNumberCreate(0,3,ctx + 0x2a60);
     scratchStack44 = displayMaskKey;
     scratchStack3c = _CFNumberCreate(0,3,ctx + 0x2a64);
-    if (local_40 != 0) {
+    if (dictValuePid != 0) {
       if (scratchStack3c != 0) {
-        userInfo = _CFDictionaryCreate(*(undefined4 *)PTR_001e88c0,&local_48,&local_40,2,PTR_001e88b8,
+        userInfo = _CFDictionaryCreate(*(undefined4 *)PTR_001e88c0,&dictKeyPid,&dictValuePid,2,PTR_001e88b8,
                                     PTR_001e88bc);
         if (userInfo != 0) {
           _CFNotificationCenterPostNotification(distributedCenter,driverNotificationName,driverNotificationObject,userInfo,1);
           _CFRelease(userInfo);
         }
-        if (local_40 == 0) goto LAB_00017cfc;
+        if (dictValuePid == 0) goto LAB_00017cfc;
       }
-      _CFRelease(local_40);
+      _CFRelease(dictValuePid);
     }
 LAB_00017cfc:
     if (scratchStack3c != 0) {

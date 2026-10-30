@@ -673,3 +673,11 @@ local	gldCompressedImageBytes	iVar1	blockCount	INFERRED	number of 4x4 blocks: ce
 local	floorLog2	iVar1	log2Result	CONFIRMED	floor(log2(value)) accumulated by the shift loop
 local	gldDeleteFragmentShaderObject	param_1	ctx	INFERRED	GL context forwarded to glDeleteFragmentShaderATI_impl
 local	gldDeleteFragmentShaderObject	param_2	shaderObject	INFERRED	object whose first word is the ATI fragment shader name
+local	glBitmap_impl	auStack_178	internalDrawStateSave	INFERRED	buffer saved by gld_enterPointDrawState and restored by gldLeaveInternalDrawState
+local	glBitmap_impl	puStack_ac	internalDrawStateSavePtr	INFERRED	&internalDrawStateSave
+local	gld_postDisplayNotification	local_48	dictKeyPid	INFERRED	first element of the 2-key array passed to _CFDictionaryCreate: the "pid" key
+local	gld_postDisplayNotification	local_40	dictValuePid	INFERRED	first element of the 2-value array: CFNumber of ctx+0x2a60 (pid)
+local	gld_prepareVertexArrayBuffers	iVar4	scratchInt4	INFERRED	register-allocation scratch: attribute buffer object, then the prepare result
+local	gld_readPixelsViaBlit	auStack_104	layoutOut	INFERRED	middle output of gld_computePixelStoreLayout
+local	glGenerateMipmap_impl	uVar9	baseFormat	CONFIRMED	GL base format of the level (0x1906 ALPHA, 0x1908 RGBA, 0x190a LUMINANCE_ALPHA tested)
+local	glGenerateMipmap_impl	iVar26	texelBytes	INFERRED	1 << texel-size bits of the format entry; tile width = 0x20 / texelBytes * 8

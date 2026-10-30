@@ -4144,7 +4144,7 @@ int glGenerateMipmap_impl(ctx, texture, face, passThroughArg4, passThroughArg5)
   float halfWidthFB;
   float halfHeightF;
   byte lastLevel;
-  ushort uVar9;
+  ushort baseFormat;
   uint a6;
   float texelBiasXPlusOne;
   undefined *stateTemplate;
@@ -4164,7 +4164,7 @@ int glGenerateMipmap_impl(ctx, texture, face, passThroughArg4, passThroughArg5)
   uint *lastHeader;
   uint scratchUint24;
   int scratchInt25;
-  int iVar26;
+  int texelBytes;
   uint scratchUint27;
   uint baseHeight;
   int storageRecord;
@@ -4343,8 +4343,8 @@ LAB_0003440c:
   packetState[0x8a] =
        *(uint *)(levelRecord + 0x18) >> 5 & 0x1f |
        scratchUint32 | scratchUint27 | scratchUint12 | levelCount | scratchUint24 & 0xffff00e0;
-  uVar9 = levelTable[1];
-  if (((uVar9 != 0x1908) && (uVar9 != 0x1906)) && (uVar9 != 0x190a)) {
+  baseFormat = levelTable[1];
+  if (((baseFormat != 0x1908) && (baseFormat != 0x1906)) && (baseFormat != 0x190a)) {
     packetState[0x56] = packetState[0x56] & 0xfffe3fffU | 0x18000;
   }
   if ((texture[0xd] == 0) || ((*(byte *)(texture[0xd] + 0x15) & 0x18) == 0)) {
@@ -4556,16 +4556,16 @@ LAB_00034df0:
       else {
         baseLevel = nextLevel - *(byte *)(texture[0xc] + 0x69);
         if ((*(byte *)(storageRecordB + 0x15) & 0x18) == 0) {
-          iVar26 = 1;
+          texelBytes = 1;
           scratchInt25 = 0x100;
         }
         else {
-          iVar26 = 1 << (*(uint *)(&DAT_001d9f4c + (uint)*(byte *)(texture + 0xe) * 0x24) >> 0x1c &
+          texelBytes = 1 << (*(uint *)(&DAT_001d9f4c + (uint)*(byte *)(texture + 0xe) * 0x24) >> 0x1c &
                         3);
-          scratchInt25 = 0x20 / iVar26 << 3;
+          scratchInt25 = 0x20 / texelBytes << 3;
         }
         if ((*(int *)(*texture + 0xc) >> (baseLevel & 0x3f) < scratchInt25) ||
-           (scratchInt25 = 1, (int)(uint)*(ushort *)(*texture + 0x16) >> (baseLevel & 0x3f) < iVar26 << 3))
+           (scratchInt25 = 1, (int)(uint)*(ushort *)(*texture + 0x16) >> (baseLevel & 0x3f) < texelBytes << 3))
         goto LAB_00034df0;
       }
       if (storageRecordB == 0) {

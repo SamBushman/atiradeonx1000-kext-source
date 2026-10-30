@@ -2533,7 +2533,7 @@ int gld_readPixelsViaBlit(ctx, rectX, rectY, width, height, format, pixelType, p
   byte bVar42;
   int targetsLeft;
   uint rowBytes;
-  undefined1 auStack_104 [4];
+  undefined1 layoutOut [4];
   int packOffsets [2];
   undefined4 widthI2dHi;
   uint widthI2dLo;
@@ -2708,7 +2708,7 @@ LAB_000284b0:
   lastHeader = &rowBytes;
   widthArg = width;
   heightArg = height;
-  gld_computePixelStoreLayout(ctx,format,pixelType,width,height,lastHeader,auStack_104,packOffsets,
+  gld_computePixelStoreLayout(ctx,format,pixelType,width,height,lastHeader,layoutOut,packOffsets,
                ((unsigned char *)0x00002e50) + *(int *)(ctx + GLD_engineState));
   dstAddress = pixels + packOffsets[0];
   if ((int)width < 1) {
