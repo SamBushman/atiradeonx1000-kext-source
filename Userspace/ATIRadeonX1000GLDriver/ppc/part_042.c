@@ -2383,15 +2383,18 @@ int IfHeader__convertInnerIfToCmov(block, program, compiler)
   int elseMovableCount;
   int *nextInst;
   int *scanInst;
-  int iVar3;
+  int armsSimpleResult;
+  int joinPredicateResult;
+  int branchInstB;
   int isNotAmong3Result;
-  int iVar4;
+  int operandCountIf;
+  int identityResultIf;
   int iVar5;
   int isNotAmong3Result2;
   undefined4 predecessorBlock;
   undefined4 operandVReg2;
   undefined4 operandVReg3;
-  uint uVar9;
+  uint staleArg3;
   int in_r6;
   undefined4 in_r7;
   undefined4 in_r8;
@@ -2406,15 +2409,15 @@ int IfHeader__convertInnerIfToCmov(block, program, compiler)
   bool thenSourcesMovable;
   undefined8 uVar18;
   
-  uVar9 = compiler;
-  iVar3 = IfHeader__armsAreSimple(block);
-  if (iVar3 != 0) {
+  staleArg3 = compiler;
+  armsSimpleResult = IfHeader__armsAreSimple(block);
+  if (armsSimpleResult != 0) {
     isStatic = (**(code **)(*block + 0x40))(block);
     if ((int)((ulonglong)isStatic >> 0x20) == 0) {
-      uVar18 = Block__getBranchInst(block,(int)isStatic,uVar9,in_r6,in_r7,in_r8,in_r9);
+      uVar18 = Block__getBranchInst(block,(int)isStatic,staleArg3,in_r6,in_r7,in_r8,in_r9);
       if ((*(int *)(*(int *)((int)((ulonglong)uVar18 >> 0x20) + 0x88) + 8) == 0x8b) ||
-         (iVar3 = Block__getBranchInst(block,(int)uVar18,uVar9,in_r6,in_r7,in_r8,in_r9),
-         *(int *)(*(int *)(iVar3 + 0x88) + 8) == 0x8c)) {
+         (branchInstB = Block__getBranchInst(block,(int)uVar18,staleArg3,in_r6,in_r7,in_r8,in_r9),
+         *(int *)(*(int *)(branchInstB + 0x88) + 8) == 0x8c)) {
         joinBlock = block[0x4f];
         thenBlock = block[0x4d];
         elseBlock = block[0x4e];
@@ -2440,11 +2443,11 @@ int IfHeader__convertInnerIfToCmov(block, program, compiler)
                 phiCount = phiCount + 1;
                 if ((thenBlock == operandVReg[0x56]) &&
                    (iVar5 = (**(code **)(*operandVReg + 100))(operandVReg), iVar5 != 0)) {
-                  for (iVar5 = 1; iVar4 = (**(code **)(*operandVReg + 0x14))(operandVReg), iVar5 <= iVar4;
+                  for (iVar5 = 1; operandCountIf = (**(code **)(*operandVReg + 0x14))(operandVReg), iVar5 <= operandCountIf;
                       iVar5 = iVar5 + 1) {
                     if ((((operandVReg[iVar5 * 6 + 0x28] & 1U) != 0) ||
                         (in_r9 = (int *)(operandVReg[iVar5 * 6 + 0x28] & 2), in_r9 != (int *)0x0)) ||
-                       (iVar4 = IRInst__isSourceSelectIdentity(operandVReg,iVar5), iVar4 == 0)) goto LAB_0013cd68;
+                       (identityResultIf = IRInst__isSourceSelectIdentity(operandVReg,iVar5), identityResultIf == 0)) goto LAB_0013cd68;
                   }
                   if ((operandVReg[0x48] != 0) || (operandVReg[0x49] != 0)) goto LAB_0013cd68;
                   if ((operandVReg[0x20] != 0) &&
@@ -2468,7 +2471,7 @@ int IfHeader__convertInnerIfToCmov(block, program, compiler)
                 }
                 else {
 LAB_0013cd68:
-                  uVar9 = thenBlock;
+                  staleArg3 = thenBlock;
                   in_r6 = elseBlock;
                   iVar5 = Node__isNotAmong3(operandVReg,block,thenBlock,elseBlock);
                   thenSourcesMovable = iVar5 != 0;
@@ -2476,11 +2479,11 @@ LAB_0013cd68:
                 operandVReg = (int *)IRInst__getOperandSource(joinInst,2);
                 if ((elseBlock == operandVReg[0x56]) &&
                    (iVar5 = (**(code **)(*operandVReg + 100))(operandVReg), iVar5 != 0)) {
-                  for (iVar5 = 1; iVar4 = (**(code **)(*operandVReg + 0x14))(operandVReg), iVar5 <= iVar4;
+                  for (iVar5 = 1; operandCountIf = (**(code **)(*operandVReg + 0x14))(operandVReg), iVar5 <= operandCountIf;
                       iVar5 = iVar5 + 1) {
                     if ((((operandVReg[iVar5 * 6 + 0x28] & 1U) != 0) ||
                         (in_r9 = (int *)(operandVReg[iVar5 * 6 + 0x28] & 2), in_r9 != (int *)0x0)) ||
-                       (iVar4 = IRInst__isSourceSelectIdentity(operandVReg,iVar5), iVar4 == 0)) goto LAB_0013cee8;
+                       (identityResultIf = IRInst__isSourceSelectIdentity(operandVReg,iVar5), identityResultIf == 0)) goto LAB_0013cee8;
                   }
                   if ((operandVReg[0x48] != 0) || (operandVReg[0x49] != 0)) goto LAB_0013cee8;
                   if (((operandVReg[0x20] != 0) &&
@@ -2503,7 +2506,7 @@ LAB_0013cd68:
                 }
                 else {
 LAB_0013cee8:
-                  uVar9 = thenBlock;
+                  staleArg3 = thenBlock;
                   in_r6 = elseBlock;
                   isNotAmong3Result2 = Node__isNotAmong3(operandVReg,block,thenBlock,elseBlock);
                   if (isNotAmong3Result2 == 0) {
@@ -2526,7 +2529,7 @@ LAB_0013cee8:
            (phiCount != 0)) {
           predecessor = Block__getPredecessor(block,0);
           predecessorBlock = (undefined4)((ulonglong)predecessor >> 0x20);
-          iVar11 = Block__getBranchInst(block,(int)predecessor,uVar9,in_r6,in_r7,in_r8,in_r9);
+          iVar11 = Block__getBranchInst(block,(int)predecessor,staleArg3,in_r6,in_r7,in_r8,in_r9);
           compareSelectWord = 0;
           if (*(int *)(*(int *)(iVar11 + 0x88) + 8) == 0x8c) {
             operandRecord = IRInst__getOperandRecord(iVar11,1);
@@ -2542,8 +2545,8 @@ LAB_0013cee8:
           }
           joinInstB = *(int **)(joinBlock + 0x98);
           for (nextJoinInst = (int *)joinInstB[2]; nextJoinInst != (int *)0x0; nextJoinInst = (int *)nextJoinInst[2]) {
-            iVar3 = (**(code **)(*joinInstB + 0x34))(joinInstB);
-            if ((iVar3 == 0) && (iVar3 = (**(code **)(*joinInstB + 0x38))(joinInstB), iVar3 == 0)) {
+            joinPredicateResult = (**(code **)(*joinInstB + 0x34))(joinInstB);
+            if ((joinPredicateResult == 0) && (joinPredicateResult = (**(code **)(*joinInstB + 0x38))(joinInstB), joinPredicateResult == 0)) {
               if (*(int *)(joinInstB[0x22] + 8) == 0x8e) {
                 operandVReg2 = IRInst__getOperandSource(joinInstB,1);
                 operandVReg3 = IRInst__getOperandSource(joinInstB,2);
