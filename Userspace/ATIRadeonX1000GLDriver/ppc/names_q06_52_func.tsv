@@ -1,0 +1,5 @@
+func	FUN_00139034	Node__isNotAmong3	INFERRED	returns 1 unless node+0x158 equals block / excludeA / excludeB
+func	FUN_001272d4	VRegPool__canonicalizeKey	INFERRED	kind 0x24 keys equal to pool+0x44 / +0x48 become kind 6 / 7 with value 0
+func	FUN_0012ae1c	Block__footerTargetOrSelf	INFERRED	vslot 0x30 true -> block[0x4b]+0x154, else the block itself
+func	FUN_0010e870	Compare__descendingByRemappedKey	INFERRED	compares Lane__remapValue(+0x13c,+0x140) of the two elements, descending
+func	FUN_0010e9d0	PackEntry__laneNeedsZero	INFERRED	lane has no source and the dest write-mask byte is 1

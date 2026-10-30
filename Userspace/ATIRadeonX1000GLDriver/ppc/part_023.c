@@ -761,7 +761,7 @@ int PostLoopFooter__ctor_ea828(this, registerIndex, enclosingLoopHeader, argR6, 
     operandRecord = IRInst__getOperandRecord(newInst,0);
     *(undefined4 *)(operandRecord + 8) = registerIndex;
     *(undefined4 *)(operandRecord + 0xc) = 0x27;
-    virtualRegister = FUN_00127608(*(undefined4 *)(*(int *)(compiler + COMP_currentProgram) + 0x3ac),4,registerIndex,0);
+    virtualRegister = VRegPool__findOrCreate(*(undefined4 *)(*(int *)(compiler + COMP_currentProgram) + 0x3ac),4,registerIndex,0);
     IRInst__setOperandRef(this[0x52],1,virtualRegister);
   }
   else {
@@ -774,7 +774,7 @@ int PostLoopFooter__ctor_ea828(this, registerIndex, enclosingLoopHeader, argR6, 
     operandRecord2 = IRInst__getOperandRecord(instObject,0);
     *(undefined4 *)(operandRecord2 + 8) = registerIndex;
     *(undefined4 *)(operandRecord2 + 0xc) = 0x27;
-    newVReg = FUN_00127608(*(undefined4 *)(*(int *)(compiler + COMP_currentProgram) + 0x3ac),4,0,0);
+    newVReg = VRegPool__findOrCreate(*(undefined4 *)(*(int *)(compiler + COMP_currentProgram) + 0x3ac),4,0,0);
     definitionVector = *(int **)(newVReg + 0x18);
     if (*definitionVector == 0) {
       definitionVector = (int *)Vector__elementRefGrow(definitionVector,0);
@@ -1196,7 +1196,7 @@ int PostLoopFooter__ctor_eb3c8(this, registerIndex, loopHeader, useFooterInst, c
     operandRecord = IRInst__getOperandRecord(exitInst,0);
     *(undefined4 *)(operandRecord + 8) = registerIndex;
     *(undefined4 *)(operandRecord + 0xc) = 0x27;
-    virtualRegisterB = FUN_00127608(*(undefined4 *)(*(int *)(compiler + COMP_currentProgram) + 0x3ac),4,registerIndex,0);
+    virtualRegisterB = VRegPool__findOrCreate(*(undefined4 *)(*(int *)(compiler + COMP_currentProgram) + 0x3ac),4,registerIndex,0);
     IRInst__setOperandRef(this[0x52],1,virtualRegisterB);
   }
   else {
@@ -1209,7 +1209,7 @@ int PostLoopFooter__ctor_eb3c8(this, registerIndex, loopHeader, useFooterInst, c
     operandRecord = IRInst__getOperandRecord(footerInst,0);
     *(undefined4 *)(operandRecord + 8) = registerIndex;
     *(undefined4 *)(operandRecord + 0xc) = 0x27;
-    virtualRegister = FUN_00127608(*(undefined4 *)(*(int *)(compiler + COMP_currentProgram) + 0x3ac),4,0,0);
+    virtualRegister = VRegPool__findOrCreate(*(undefined4 *)(*(int *)(compiler + COMP_currentProgram) + 0x3ac),4,0,0);
     definitionVector = *(int **)(virtualRegister + 0x18);
     if (*definitionVector == 0) {
       definitionVector = (int *)Vector__elementRefGrow(definitionVector,0);

@@ -896,7 +896,7 @@ PTR_FUN_001e89f4	0x1e89f4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char 
 PTR_FUN_001e89f8	0x1e89f8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89f8 asm("PTR_FUN_001e89f8");	pointer -> arbEmitRecord2Src_op4f	data.s
 PTR_FUN_001e89fc	0x1e89fc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89fc asm("PTR_FUN_001e89fc");	pointer -> arbfpInitResourceLimits	data.s
 PTR_FUN_001e8a00	0x1e8a00	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a00 asm("PTR_FUN_001e8a00");	pointer -> arbEmitRecord1Src_op4b	data.s
-PTR_FUN_001e8a04	0x1e8a04	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a04 asm("PTR_FUN_001e8a04");	pointer -> FUN_0004c720	data.s
+PTR_FUN_001e8a04	0x1e8a04	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a04 asm("PTR_FUN_001e8a04");	pointer -> gldValidateVertexStreams	data.s
 PTR_FUN_001e8a08	0x1e8a08	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a08 asm("PTR_FUN_001e8a08");	pointer -> FUN_000b5f40	data.s
 PTR_FUN_001e8a0c	0x1e8a0c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a0c asm("PTR_FUN_001e8a0c");	pointer -> arbEmitIlMulMaxMin2Src	data.s
 PTR_FUN_001e8a10	0x1e8a10	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a10 asm("PTR_FUN_001e8a10");	pointer -> arbEmitIlDp4	data.s

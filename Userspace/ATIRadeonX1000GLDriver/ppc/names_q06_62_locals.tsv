@@ -1,0 +1,7 @@
+local	Block__findLoopEntryPredecessor	piVar2	container	INFERRED	block[0x4b] container whose predecessor is returned
+local	KhanVs__vslot74	param_2	compiler	INFERRED	first argument of Compiler__valueNumberForExpr
+local	KhanPs__vslot74_seedConstantValueNumbers	param_2	compiler	INFERRED	first argument of Compiler__valueNumberForExpr
+local	VertexRegister__clone	param_2	instSink	INFERRED	object whose vslot 3 receives the created load instruction
+local	ExportSlot__clone	param_2	instSink	INFERRED	object whose vslot 3 receives the created load instruction
+local	Resource__clone	param_2	instSink	INFERRED	object whose vslot 3 receives the created load instruction
+local	FixedValue__clone	param_2	instSink	INFERRED	object whose vslot 3 receives the created load instruction

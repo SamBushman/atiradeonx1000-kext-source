@@ -1,0 +1,8 @@
+local	FUN_0010fd98	local_f8	slotTable	INFERRED	0x30-entry table of register keys, initialised to -1, passed to FUN_0010fa24
+local	FUN_0010fd98	param_3	nextSlotRef	INFERRED	next free slot index, advanced when a new key is appended
+local	FUN_0010fd98	iVar11	firstSlot	INFERRED	value of *nextSlotRef on entry; scan starts here
+local	FUN_0010fd98	iVar2	scanRemaining	INFERRED	entries left in the 0x30-slot scan
+local	FUN_0010fd98	piVar9	slotCursor	INFERRED	walks slotTable from firstSlot
+local	FUN_0010fd98	bVar1	foundExisting	INFERRED	set when the element's key is already in slotTable
+local	FUN_0010fd98	iVar8	slotNumber	INFERRED	slot index written into register word +0x94
+local	FUN_0010fd98	iVar4	registerRecord	INFERRED	vector element's register record whose +0x94/+0x98 are rewritten

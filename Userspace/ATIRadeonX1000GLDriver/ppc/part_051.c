@@ -752,7 +752,7 @@ int R300MachineAssembler__vslot4_finishProgram(param_1)
   }
   *(uint *)(param_1[0x17] + 0x9364) = uVar3;
   iVar4 = 0;
-  iVar2 = FUN_0013061c(*(undefined4 *)(param_1[3] + 0x6c4),0);
+  iVar2 = RegAlloc__countUnassignedInClass(*(undefined4 *)(param_1[3] + 0x6c4),0);
   if (iVar2 != 0) {
     iVar4 = iVar2 + -1;
   }
@@ -902,7 +902,7 @@ int FUN_0019651c(assembler, inst, staleArg3)
   if ((fetchKind == 0x16) || (fetchKind == 0x17)) {
     emitSlotAFn = *(code **)(*assembler + 0xc4);
     a1 = assembler[0x25];
-    fetchArg = FUN_0010e40c(fetchKind,*(undefined4 *)(inst + 0x148));
+    fetchArg = Lane__remapValue(fetchKind,*(undefined4 *)(inst + 0x148));
     a4 = thunk_FUN_00134de8(*(undefined4 *)(assembler[3] + 0x6c4),inst);
     a3 = 1;
   }

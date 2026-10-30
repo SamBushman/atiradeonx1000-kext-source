@@ -78,11 +78,11 @@ int IRInst__dropCounterAndDeleteIfUnused(inst, arg)
   int inst;
   undefined4 arg;
 {
-  undefined4 uVar1;
+  undefined4 result;
   
   *(int *)(inst + 0x160) = *(int *)(inst + 0x160) + -1;
-  uVar1 = ((int (*)())IRInst__deleteIfUnused)(inst,arg,0);
-  return uVar1;
+  result = ((int (*)())IRInst__deleteIfUnused)(inst,arg,0);
+  return result;
 }
 
 /* IRInst__decrementSourceUseCounts @ 0x1058a8 (136 bytes) */
@@ -507,8 +507,8 @@ int IRInst__getOrCreateOperandRecord(inst, operandIndex, srcRecord, compiler)
   undefined4 vectorData;
   undefined4 arena;
   uint extraIndex;
-  undefined4 uVar1;
-  undefined4 *puVar2;
+  undefined4 recWord0;
+  undefined4 *operandRecord;
   int *newSlot;
   uint oldCount;
   undefined4 recWord1;
@@ -518,7 +518,7 @@ int IRInst__getOrCreateOperandRecord(inst, operandIndex, srcRecord, compiler)
   uint *extraVector;
   
   if (operandIndex < 5) {
-    puVar2 = (undefined4 *)(operandIndex * 0x18 + inst + 0x8c);
+    operandRecord = (undefined4 *)(operandIndex * 0x18 + inst + 0x8c);
   }
   else {
     extraVector = *(uint **)(inst + 0x118);
@@ -562,24 +562,24 @@ int IRInst__getOrCreateOperandRecord(inst, operandIndex, srcRecord, compiler)
         _memset((void *)(oldCount * 4 + extraVector[2]),0,(extraIndex - oldCount) * 4 + 4);
         extraVector[1] = operandIndex - 4U;
       }
-      puVar2 = (undefined4 *)(extraIndex * 4 + extraVector[2]);
+      operandRecord = (undefined4 *)(extraIndex * 4 + extraVector[2]);
     }
     else {
-      puVar2 = (undefined4 *)Vector__elementRefGrow(extraVector,extraIndex);
+      operandRecord = (undefined4 *)Vector__elementRefGrow(extraVector,extraIndex);
     }
-    puVar2 = (undefined4 *)*puVar2;
+    operandRecord = (undefined4 *)*operandRecord;
   }
-  IROperand__setModifierBits(puVar2,1,srcRecord[5] & 1);
-  IROperand__setModifierBits(puVar2,2,(uint)srcRecord[5] >> 1 & 1);
-  uVar1 = *srcRecord;
+  IROperand__setModifierBits(operandRecord,1,srcRecord[5] & 1);
+  IROperand__setModifierBits(operandRecord,2,(uint)srcRecord[5] >> 1 & 1);
+  recWord0 = *srcRecord;
   recWord1 = srcRecord[1];
   recWord2 = srcRecord[2];
   recWord3 = srcRecord[3];
-  puVar2[4] = srcRecord[4];
-  *puVar2 = uVar1;
-  puVar2[1] = recWord1;
-  puVar2[2] = recWord2;
-  puVar2[3] = recWord3;
+  operandRecord[4] = srcRecord[4];
+  *operandRecord = recWord0;
+  operandRecord[1] = recWord1;
+  operandRecord[2] = recWord2;
+  operandRecord[3] = recWord3;
   return;
 }
 

@@ -630,7 +630,7 @@ int R520VMachineAssembler__vslot24_assembleWithPredicateSet(this, node, block, c
       predSlot = *(int *)(this[0x26] + 4);
       if (2 < predSlot) {
         if (predSlot < 7) {
-          destRegister = FUN_00130690(program,0);
+          destRegister = RegAlloc__allocateFirstFreeInClass(program,0);
           predSlot = predSlot + -3;
         }
         else {
@@ -1683,7 +1683,7 @@ int R520MachineAssembler__vslot4_finishProgram(param_1)
   *(int *)(param_1[0x2b] + 0x93b8) = param_1[0x24];
   *(int *)(param_1[0x2b] + 0x9364) = *(int *)(*(int *)(param_1[3] + 0x6c4) + 0x7c) + 1;
   *(undefined4 *)(param_1[0x2b] + 0x9368) = *(undefined4 *)(*(int *)(param_1[3] + 0x6c4) + 0x84);
-  callResult = FUN_0013061c(*(undefined4 *)(param_1[3] + 0x6c4),0);
+  callResult = RegAlloc__countUnassignedInClass(*(undefined4 *)(param_1[3] + 0x6c4),0);
   if (callResult != 0) {
     iVar2 = callResult + -1;
   }
