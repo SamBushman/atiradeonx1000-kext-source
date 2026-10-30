@@ -3970,23 +3970,23 @@ int arbfpCompileFragmentProgram(ctx, fpRecord, workArea, keyWords)
   int loopCounter;
   int workAreaState;
   int shaderInfo;
-  /* local_48/local_44/local_40/local_3c/local_38/local_34/local_30 are one contiguous 7-word array
-   * (&local_48 passed to FUN_000b4400, which internally indexes it keyWords[0]..keyWords[6] - and that
+  /* keyBlock0/keyBlock1/keyBlock2/keyBlock3/keyBlock4/keyBlock5/keyBlock6 are one contiguous 7-word array
+   * (&keyBlock0 passed to FUN_000b4400, which internally indexes it keyWords[0]..keyWords[6] - and that
    * value flows straight through into ilRewriteForTextureState as its own keyWords, where keyWords[1] seeds a loop
    * counter). Declared as 7 separate scalars, they landed non-adjacent at -O0 (confirmed live: the
-   * value ilRewriteForTextureState read via keyWords[1] was heap-garbage-sized, not the small local_44 value),
+   * value ilRewriteForTextureState read via keyWords[1] was heap-garbage-sized, not the small keyBlock1 value),
    * corrupting a command-stream interpreter loop's iteration count downstream and eventually walking
    * off the end into zeroed memory, hitting the interpreter's own out-of-range-opcode safety net
    * (_exit(0), confirmed present in stock too - not itself a bug). Merged into a real array, aliased
    * back to the original names so the rest of this function's logic is unchanged (issue #64). */
   undefined4 local_48_arr[7];
-#define local_48 local_48_arr[0]
-#define local_44 local_48_arr[1]
-#define local_40 local_48_arr[2]
-#define local_3c local_48_arr[3]
-#define local_38 local_48_arr[4]
-#define local_34 local_48_arr[5]
-#define local_30 local_48_arr[6]
+#define keyBlock0 local_48_arr[0]
+#define keyBlock1 local_48_arr[1]
+#define keyBlock2 local_48_arr[2]
+#define keyBlock3 local_48_arr[3]
+#define keyBlock4 local_48_arr[4]
+#define keyBlock5 local_48_arr[5]
+#define keyBlock6 local_48_arr[6]
 
   workAreaState = workArea + 0x124;
   modeByte = ctx[0x8f8];
@@ -3996,36 +3996,36 @@ int arbfpCompileFragmentProgram(ctx, fpRecord, workArea, keyWords)
     return 0;
   }
   *(int *)(((unsigned char *)0x000037e4) + workArea) = workArea;
-  local_38 = 0;
-  local_34 = 2;
-  local_30 = 0;
-  local_40 = 0;
-  local_3c = 0;
+  keyBlock4 = 0;
+  keyBlock5 = 2;
+  keyBlock6 = 0;
+  keyBlock2 = 0;
+  keyBlock3 = 0;
   keyWord1 = keyWords[1];
   keyWord2 = keyWords[2];
   altMode = ctx[0x8f8];
   *(undefined4 *)(workArea + 4) = *keyWords;
   *(undefined4 *)(workArea + 8) = keyWord1;
   *(undefined4 *)(workArea + 0xc) = keyWord2;
-  local_48 = keyWords[2];
-  local_44 = *keyWords;
+  keyBlock0 = keyWords[2];
+  keyBlock1 = *keyWords;
   if (fpRecord != 0) {
     *(undefined4 *)(((unsigned char *)0x000011fc) + workArea) = 0;
     shaderInfo = *(int *)(fpRecord + 0x74);
     texEnumValue = FUN_000abb60(ctx);
     if (texEnumValue == 0x801) {
-      local_3c = local_3c | 0xc;
+      keyBlock3 = keyBlock3 | 0xc;
     }
     else if (texEnumValue == 0x2601) {
-      local_3c = local_3c | 4;
+      keyBlock3 = keyBlock3 | 4;
     }
     else if (texEnumValue == 0x800) {
-      local_3c = local_3c | 8;
+      keyBlock3 = keyBlock3 | 8;
     }
     if (*(char *)(shaderInfo + 5) != '\0') goto LAB_00088008;
   }
   else {
-    local_3c = 2;
+    keyBlock3 = 2;
     _memset(((unsigned char *)0x00003100) + workArea,0,0x100);
     remaining = 0x10;
     fillPtr = workAreaState;
@@ -4038,31 +4038,31 @@ int arbfpCompileFragmentProgram(ctx, fpRecord, workArea, keyWords)
   }
   bitCount = ctx[0x917];
   if (bitCount != 0) {
-    local_38 = 0;
+    keyBlock4 = 0;
     do {
-      local_38 = local_38 << 1 | 1;
+      keyBlock4 = keyBlock4 << 1 | 1;
       bitCount = bitCount + -1;
     } while (bitCount != 0);
-    local_3c = local_3c | 0x400;
+    keyBlock3 = keyBlock3 | 0x400;
   }
 LAB_00088008:
   if (altMode != 0) {
-    local_3c = local_3c | 0x100;
+    keyBlock3 = keyBlock3 | 0x100;
     *(undefined4 *)(0x00001830 + workArea) = ctx[0x9db];
   }
-  flags = local_3c | 0x80;
+  flags = keyBlock3 | 0x80;
   if (*(char *)(workArea + 0x120) != '\0') {
-    flags = local_3c | 0x280;
+    flags = keyBlock3 | 0x280;
   }
-  local_3c = flags;
-  buildStatus = FUN_000b4400(ctx,workArea + 0x18a8,workArea + 0x1784,&local_48,workAreaState);
-#undef local_48
-#undef local_44
-#undef local_40
-#undef local_3c
-#undef local_38
-#undef local_34
-#undef local_30
+  keyBlock3 = flags;
+  buildStatus = FUN_000b4400(ctx,workArea + 0x18a8,workArea + 0x1784,&keyBlock0,workAreaState);
+#undef keyBlock0
+#undef keyBlock1
+#undef keyBlock2
+#undef keyBlock3
+#undef keyBlock4
+#undef keyBlock5
+#undef keyBlock6
   if (buildStatus == 1) {
     return 0xfffffffe;
   }
