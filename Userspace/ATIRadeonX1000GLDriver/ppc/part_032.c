@@ -404,8 +404,8 @@ LAB_0010febc:
   return ((int (*)())Program__bindLinkRecordsToSlots)(scopeId,slotTable,firstSlot,endSlot,*(undefined4 *)(program + 0x418));
 }
 
-/* FUN_0010ff24 @ 0x10ff24 (252 bytes) */
-int FUN_0010ff24(packEntry, vector)
+/* PackEntry__bindToVectorRegister @ 0x10ff24 (252 bytes) */
+int PackEntry__bindToVectorRegister(packEntry, vector)
   int *packEntry;
   uint *vector;
 {
@@ -454,8 +454,8 @@ int FUN_0010ff24(packEntry, vector)
   return;
 }
 
-/* FUN_00110020 @ 0x110020 (204 bytes) */
-int FUN_00110020(program, valueKey)
+/* Program__collectExportEntry @ 0x110020 (204 bytes) */
+int Program__collectExportEntry(program, valueKey)
   int program;
   int valueKey;
 {
@@ -1095,8 +1095,8 @@ LAB_0011047c:
             }
             else if (packEntryElemRef[5] == groupSizeRemaining) {
               Vector__removeValue(vector,packEntryElemRef);
-              FUN_0010f38c(packEntryElemRef,vector);
-              ((int (*)())FUN_0010ff24)(packEntryElemRef,*(undefined4 *)(program + 0x418));
+              PackEntry__lanesFitVector(packEntryElemRef,vector);
+              ((int (*)())PackEntry__bindToVectorRegister)(packEntryElemRef,*(undefined4 *)(program + 0x418));
               allocationCount = allocation[2];
               if (allocationCount < *outVector) {
                 _memset((void *)(allocationCount * 4 + allocation[3]),0,4);

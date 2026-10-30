@@ -4757,7 +4757,7 @@ code_r0x0018e934:
         loopIndex2 = IRInst__canFoldConstantCompare(inputSource,this[2]);
         if (loopIndex2 == 0) goto code_r0x0018e934;
         foldedSource = IRInst__getOperandSource(inst,loopIndex4);
-        foldedSource = FUN_0010cb48(foldedSource,this[2]);
+        foldedSource = IRInst__foldCompareResultIntoCopy(foldedSource,this[2]);
         IRInst__setOperandSource(inst,loopIndex4,foldedSource,0,this[2]);
       }
 code_r0x0018eb5c: ;

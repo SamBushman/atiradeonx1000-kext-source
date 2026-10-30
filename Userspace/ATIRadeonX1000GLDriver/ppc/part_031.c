@@ -281,8 +281,8 @@ LAB_0010c648:
   return canFold;
 }
 
-/* FUN_0010c670 @ 0x10c670 (1240 bytes) */
-int FUN_0010c670(inst, inst2, pass)
+/* IRInst__foldConstantSourcesIntoClone @ 0x10c670 (1240 bytes) */
+int IRInst__foldConstantSourcesIntoClone(inst, inst2, pass)
   int inst;
   int *inst2;
   int pass;
@@ -489,8 +489,8 @@ int FUN_0010c670(inst, inst2, pass)
   return;
 }
 
-/* FUN_0010cb48 @ 0x10cb48 (1156 bytes) */
-int FUN_0010cb48(inst, pass)
+/* IRInst__foldCompareResultIntoCopy @ 0x10cb48 (1156 bytes) */
+int IRInst__foldCompareResultIntoCopy(inst, pass)
   int inst;
   int pass;
 {
@@ -598,7 +598,7 @@ int FUN_0010cb48(inst, pass)
     operandCountLimit = (**(code **)(*newSource + 0x60))(newSource);
     if (operandCountLimit != 0) {
       sourceDef = IRInst__getOperandSource(copyInst,1);
-      ((int (*)())FUN_0010c670)(sourceDef,copyInst,pass);
+      ((int (*)())IRInst__foldConstantSourcesIntoClone)(sourceDef,copyInst,pass);
     }
     IRInst__setOperandSource(operandVReg,operandNumberA,copyInst,0,pass);
     copyListCursor = copyListCursor + 1;
@@ -2279,8 +2279,8 @@ LAB_0010f168:
   return;
 }
 
-/* FUN_0010f38c @ 0x10f38c (328 bytes) */
-int FUN_0010f38c(entry, vector)
+/* PackEntry__lanesFitVector @ 0x10f38c (328 bytes) */
+int PackEntry__lanesFitVector(entry, vector)
   undefined4 *entry;
   uint *vector;
 {

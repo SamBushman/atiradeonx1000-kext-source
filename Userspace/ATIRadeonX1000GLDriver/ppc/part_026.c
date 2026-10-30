@@ -7835,7 +7835,7 @@ code_r0x00103300:
       }
       iVar20 = *stackElement;
       iVar43 = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),3);
-      if ((iVar43 == 0) || (iVar43 = FUN_0012c2dc(program,iVar20), iVar43 == 0)) {
+      if ((iVar43 == 0) || (iVar43 = Program__isTrivialBranchRegion(program,iVar20), iVar43 == 0)) {
         argR6 = &previousBlock;
         argR7 = &currentBlock;
         argR8 = (uint ******)&scopeLevel;

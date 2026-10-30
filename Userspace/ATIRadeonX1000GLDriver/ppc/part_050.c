@@ -794,7 +794,7 @@ int FudoPs__peepholeCombine(this, inst, consumerSrcIndex, inst2, program, passTh
     loopIndex3 = (**(code **)(*src1DefInst + 0x60))(src1DefInst);
     if (loopIndex3 != 0) {
       src1DefArg = IRInst__getOperandSource(inst2,1);
-      FUN_0010c670(src1DefArg,inst2,program[PROG_compiler / 4]);
+      IRInst__foldConstantSourcesIntoClone(src1DefArg,inst2,program[PROG_compiler / 4]);
     }
   }
   loopIndex3 = Compiler__isOptionEnabled(program[PROG_compiler / 4],0x38);
@@ -1282,7 +1282,7 @@ int FudoPs__vslot29_convertInnerIfsToPredicates(this, program)
     while (iVar1 != 0) {
       iVar1 = (**(code **)(*piVar2 + 0x24))(piVar2);
       if (iVar1 != 0) {
-        piVar2 = (int *)FUN_0012bb48(program,piVar2);
+        piVar2 = (int *)Program__collapseIfRegion(program,piVar2);
       }
       piVar2 = (int *)piVar2[2];
       iVar1 = piVar2[2];

@@ -4,11 +4,11 @@
 10c47c	IRInst__canFoldConstantCompare	r6	PASS-indirect	10c4ac bctrl 
 10c47c	IRInst__canFoldConstantCompare	r7	PASS-indirect	10c4ac bctrl 
 10c47c	IRInst__canFoldConstantCompare	r8	PASS-indirect	10c4ac bctrl 
-10c670	FUN_0010c670	r6	PASS-deep	10c69c bl 0x105594
-10c670	FUN_0010c670	r7	PASS-deep	10c69c bl 0x105594
-10c670	FUN_0010c670	r8	PASS-deep	10c69c bl 0x105594
-10c670	FUN_0010c670	r9	PASS-deep	10c69c bl 0x105594
-10cb48	FUN_0010cb48	r8	PASS-deep	10cb70 bl 0x105594
+10c670	IRInst__foldConstantSourcesIntoClone	r6	PASS-deep	10c69c bl 0x105594
+10c670	IRInst__foldConstantSourcesIntoClone	r7	PASS-deep	10c69c bl 0x105594
+10c670	IRInst__foldConstantSourcesIntoClone	r8	PASS-deep	10c69c bl 0x105594
+10c670	IRInst__foldConstantSourcesIntoClone	r9	PASS-deep	10c69c bl 0x105594
+10cb48	IRInst__foldCompareResultIntoCopy	r8	PASS-deep	10cb70 bl 0x105594
 10cfcc	IRInst__foldMovSourceSelect	r8	PASS-deep	10cff4 bl 0x105594
 10cfcc	IRInst__foldMovSourceSelect	r9	PASS-deep	10cff4 bl 0x105594
 10d4cc	IRInst__convertCompareToBinaryAlu	r5	PASS-deep	10d4f0 bl 0x105594
@@ -19,11 +19,11 @@
 11f2f8	Program__tryEliminateRedundantCopy	r6	PASS-no	11f31c bl 0xe07dc
 11f2f8	Program__tryEliminateRedundantCopy	r7	PASS-no	11f31c bl 0xe07dc
 11f2f8	Program__tryEliminateRedundantCopy	r8	PASS-no	11f31c bl 0xe07dc
-120cd4	FUN_00120cd4	r6	PASS-deep	120cf8 bl 0xec4f0
-120cd4	FUN_00120cd4	r7	PASS-deep	120cf8 bl 0xec4f0
-120cd4	FUN_00120cd4	r8	PASS-deep	120cf8 bl 0xec4f0
-120cd4	FUN_00120cd4	r9	PASS-deep	120cf8 bl 0xec4f0
-120cd4	FUN_00120cd4	r10	PASS-deep	120cf8 bl 0xec4f0
+120cd4	Program__eliminatePhiCopies	r6	PASS-deep	120cf8 bl 0xec4f0
+120cd4	Program__eliminatePhiCopies	r7	PASS-deep	120cf8 bl 0xec4f0
+120cd4	Program__eliminatePhiCopies	r8	PASS-deep	120cf8 bl 0xec4f0
+120cd4	Program__eliminatePhiCopies	r9	PASS-deep	120cf8 bl 0xec4f0
+120cd4	Program__eliminatePhiCopies	r10	PASS-deep	120cf8 bl 0xec4f0
 1214fc	pass_ssa_build	r6	PASS-indirect	121544 bl 0x193e18
 1214fc	pass_ssa_build	r7	PASS-indirect	121544 bl 0x193e18
 1214fc	pass_ssa_build	r8	PASS-indirect	121544 bl 0x193e18
@@ -34,15 +34,15 @@
 12abd8	IfHeader__swapArms	r7	PASS-no	12ac08 bl 0x19401c
 12abd8	IfHeader__swapArms	r8	PASS-no	12ac08 bl 0x19401c
 12abd8	IfHeader__swapArms	r9	PASS-no	12ac08 bl 0x19401c
-12bb48	FUN_0012bb48	r5	PASS-indirect	12bb88 bctrl 
-12bb48	FUN_0012bb48	r6	PASS-indirect	12bb88 bctrl 
-12bb48	FUN_0012bb48	r7	PASS-indirect	12bb88 bctrl 
-12bb48	FUN_0012bb48	r8	PASS-indirect	12bb88 bctrl 
-12c2dc	FUN_0012c2dc	r5	PASS-deep	12c310 bl 0xe920c
-12c2dc	FUN_0012c2dc	r6	PASS-deep	12c310 bl 0xe920c
-12c2dc	FUN_0012c2dc	r7	PASS-deep	12c310 bl 0xe920c
-12c2dc	FUN_0012c2dc	r8	PASS-deep	12c310 bl 0xe920c
-12c2dc	FUN_0012c2dc	r9	PASS-deep	12c310 bl 0xe920c
+12bb48	Program__collapseIfRegion	r5	PASS-indirect	12bb88 bctrl 
+12bb48	Program__collapseIfRegion	r6	PASS-indirect	12bb88 bctrl 
+12bb48	Program__collapseIfRegion	r7	PASS-indirect	12bb88 bctrl 
+12bb48	Program__collapseIfRegion	r8	PASS-indirect	12bb88 bctrl 
+12c2dc	Program__isTrivialBranchRegion	r5	PASS-deep	12c310 bl 0xe920c
+12c2dc	Program__isTrivialBranchRegion	r6	PASS-deep	12c310 bl 0xe920c
+12c2dc	Program__isTrivialBranchRegion	r7	PASS-deep	12c310 bl 0xe920c
+12c2dc	Program__isTrivialBranchRegion	r8	PASS-deep	12c310 bl 0xe920c
+12c2dc	Program__isTrivialBranchRegion	r9	PASS-deep	12c310 bl 0xe920c
 12ccc0	pass_loop_trans	r5	PASS-indirect	12cd10 bctrl 
 12ccc0	pass_loop_trans	r6	PASS-indirect	12cd10 bctrl 
 12ccc0	pass_loop_trans	r7	PASS-indirect	12cd10 bctrl 

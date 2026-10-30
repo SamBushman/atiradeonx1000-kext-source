@@ -87,7 +87,7 @@ OpcodeTraits__getField4 compiler
 OpcodeTraits__getInstClass compiler
 OpcodeTraits__getFieldC compiler
 OpcodeTraits__getField34 compiler
-FUN_0011f8a0 compiler
+Block__appendCopyForDest compiler
 ImmedConstBuffer__clone compiler
 VertexRegister__clone compiler
 VRegInfo__ctor_12379c compiler

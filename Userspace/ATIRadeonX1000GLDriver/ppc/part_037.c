@@ -722,8 +722,8 @@ int Program__assignVectorSlot(pass, param_2, vector)
   return slotIndex - 1;
 }
 
-/* FUN_0011f8a0 @ 0x11f8a0 (756 bytes) */
-int FUN_0011f8a0(vector, destRegister, writeMaskRef, markPinned, sourceIndex, block, compiler, recordResultFlag, vector2, resultIndex)
+/* Block__appendCopyForDest @ 0x11f8a0 (756 bytes) */
+int Block__appendCopyForDest(vector, destRegister, writeMaskRef, markPinned, sourceIndex, block, compiler, recordResultFlag, vector2, resultIndex)
   uint *vector;
   int destRegister;
   int *writeMaskRef;
@@ -1352,7 +1352,7 @@ LAB_0012079c:
           else {
             locationSlotRefB = (undefined4 *)Vector__elementRefGrow(vector3,srcId);
           }
-          ((int (*)())FUN_0011f8a0)(vector5,dstRegister,&copyEmitted,instFlagBit6,*locationSlotRefB,predecessor2,*(undefined4 *)(pass + 8),0,0
+          ((int (*)())Block__appendCopyForDest)(vector5,dstRegister,&copyEmitted,instFlagBit6,*locationSlotRefB,predecessor2,*(undefined4 *)(pass + 8),0,0
                        ,0xffffffff);
           targetBlockForCopy = (int *)Block__getPredecessor(block,0);
           zeroPredecessorIndex = 1;
@@ -1372,7 +1372,7 @@ LAB_00120890:
           dstLocation = *locationSlotRefB;
           compiler = *(undefined4 *)(pass + 8);
         }
-        ((int (*)())FUN_0011f8a0)(vector5,dstRegister,&copyEmitted,instFlagBit6,dstLocation,targetBlockForCopy,compiler,0,0,0xffffffff);
+        ((int (*)())Block__appendCopyForDest)(vector5,dstRegister,&copyEmitted,instFlagBit6,dstLocation,targetBlockForCopy,compiler,0,0,0xffffffff);
         if (copyEmitted == 0) {
           if (srcId < *vector3) {
             locationCountB = vector3[1];
@@ -1456,7 +1456,7 @@ LAB_00120cb8:
       successorQuery34 = (**(code **)(*successor + 0x34))(successor);
       if (successorQuery34 == 0) goto LAB_00120cb8;
     }
-    ((int (*)())FUN_0011f8a0)(vector5,newTempId,&DAT_001afee4,0,cycleDstId,block,*(undefined4 *)(pass + 8),1,vector3
+    ((int (*)())Block__appendCopyForDest)(vector5,newTempId,&DAT_001afee4,0,cycleDstId,block,*(undefined4 *)(pass + 8),1,vector3
                  ,cycleDstId);
     readyCountB = vector4[1];
     if (readyCountB < *vector4) {
@@ -1473,8 +1473,8 @@ LAB_00120cb8:
   } while( true );
 }
 
-/* FUN_00120cd4 @ 0x120cd4 (384 bytes) */
-int FUN_00120cd4(pass)
+/* Program__eliminatePhiCopies @ 0x120cd4 (384 bytes) */
+int Program__eliminatePhiCopies(pass)
   int pass;
 {
   undefined4 *blockCursor;
@@ -2473,7 +2473,7 @@ LAB_00122704:
       target = *(int **)(*(int *)(program + PROG_compiler) + COMP_target);
       targetQueryC0 = (**(code **)(*target + 0xc0))(target);
       if (targetQueryC0 != 0) {
-        FUN_00110020(program,valueKey);
+        Program__collectExportEntry(program,valueKey);
       }
       option7Enabled = Compiler__isOptionEnabled(*(undefined4 *)(program + PROG_compiler),7);
       if ((((option7Enabled == 0) || (option7Enabled = Compiler__isOptionEnabled(*(undefined4 *)(program + PROG_compiler),9), option7Enabled == 0))
@@ -4328,7 +4328,7 @@ int Interpolator__ctor_125350(this, indexValue, interpolatorKind, baseCtorArg4, 
   if (targetQuery120 == 0) goto LAB_00125660;
   mappedKind = 6;
   mappedIndexSlot[0] = 0;
-  mappingFound = FUN_00127324(*(undefined4 *)(program + 0x3ac),this[1],indexValue,&mappedKind,mappedIndexSlot);
+  mappingFound = Program__decodeRegisterKey(*(undefined4 *)(program + 0x3ac),this[1],indexValue,&mappedKind,mappedIndexSlot);
   if (mappingFound == 0) goto LAB_00125660;
   exportLaneKind = 0xd;
   if (mappedKind != 0x3f) {
@@ -4475,7 +4475,7 @@ int Interpolator__ctor_1257b0(this, indexValue, interpolatorKind, baseCtorArg4, 
   if (targetQuery120 == 0) goto LAB_00125ac0;
   mappedKind = 6;
   mappedIndexSlot[0] = 0;
-  mappingFound = FUN_00127324(*(undefined4 *)(program + 0x3ac),this[1],indexValue,&mappedKind,mappedIndexSlot);
+  mappingFound = Program__decodeRegisterKey(*(undefined4 *)(program + 0x3ac),this[1],indexValue,&mappedKind,mappedIndexSlot);
   if (mappingFound == 0) goto LAB_00125ac0;
   exportLaneKind = 0xd;
   if (mappedKind != 0x3f) {

@@ -2861,13 +2861,13 @@ LAB_0015d5cc:
               vcall60ResultB = (**(code **)(*operandVReg + 0x60))(operandVReg);
               if (vcall60ResultB != 0) {
                 sourceDef = IRInst__getOperandSource(piVar9,1);
-                FUN_0010c670(sourceDef,piVar9,*(undefined4 *)(pass + 8));
+                IRInst__foldConstantSourcesIntoClone(sourceDef,piVar9,*(undefined4 *)(pass + 8));
               }
               operandVReg3 = (int *)IRInst__getOperandSource(piVar15,1);
               vcall60ResultB = (**(code **)(*operandVReg3 + 0x60))(operandVReg3);
               if (vcall60ResultB != 0) {
                 sourceDef = IRInst__getOperandSource(piVar15,1);
-                FUN_0010c670(sourceDef,piVar15,*(undefined4 *)(pass + 8));
+                IRInst__foldConstantSourcesIntoClone(sourceDef,piVar15,*(undefined4 *)(pass + 8));
               }
               IRInst__dropCounterAndDeleteIfUnused(a0,*(undefined4 *)(pass + 8));
               if (bVar4) {
@@ -3021,7 +3021,7 @@ LAB_0015cf80:
         vcall60Result = (**(code **)(*operandVReg4 + 0x60))(operandVReg4);
         if (vcall60Result != 0) {
           sourceDef = IRInst__getOperandSource(vslot73Result,1);
-          FUN_0010c670(sourceDef,vslot73Result,*(undefined4 *)(pass + 8));
+          IRInst__foldConstantSourcesIntoClone(sourceDef,vslot73Result,*(undefined4 *)(pass + 8));
         }
         newSource2 = 0;
         local_60 = &DAT_001acec0;
@@ -4243,7 +4243,7 @@ LAB_0015fa2c:
           iVar11 = (**(code **)(*operandVReg + 0x60))(operandVReg);
           if (iVar11 != 0) {
             inst1 = IRInst__getOperandSource(piVar8,1);
-            FUN_0010c670(inst1,piVar8,compilerCtx2);
+            IRInst__foldConstantSourcesIntoClone(inst1,piVar8,compilerCtx2);
           }
           uVar14 = uVar14 - 1;
           Block__insertInstBefore(node[0x56],node,piVar8);
@@ -5408,7 +5408,7 @@ LAB_00161e24:
                   vcall60Result = (**(code **)(*operandVReg + 0x60))(operandVReg);
                   if (vcall60Result != 0) {
                     sourceDef = IRInst__getOperandSource(vslot73Result,1);
-                    FUN_0010c670(sourceDef,vslot73Result,*(undefined4 *)(pass + 8));
+                    IRInst__foldConstantSourcesIntoClone(sourceDef,vslot73Result,*(undefined4 *)(pass + 8));
                   }
                   IRInst__dropCounterAndDeleteIfUnused(inst2,*(undefined4 *)(pass + 8));
                   if ((inst2[5] & 1U) != 0) {

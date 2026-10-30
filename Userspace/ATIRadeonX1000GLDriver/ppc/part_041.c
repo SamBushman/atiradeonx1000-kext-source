@@ -1279,7 +1279,7 @@ int RegAlloc__insertSpillCode(pass, copyState)
                   do {
                     mergedRoot = rootOrQuery;
                     if ((((*(char *)((int)&laneMask + laneNumber) != '\0') &&
-                         (laneSourceDef = (int *)((int (*)())FUN_001382b8)(srcDef,laneNumber,&laneDefOut),
+                         (laneSourceDef = (int *)((int (*)())IRInst__findLaneDefinition)(srcDef,laneNumber,&laneDefOut),
                          laneSourceDef != (int *)0x0)) &&
                         ((laneSourceDef[0x20] != 0 &&
                          (((srcKindFlag = RegKind__flagBit0(laneSourceDef[0x26]), srcKindFlag != 0 &&
@@ -1403,7 +1403,7 @@ int RegAlloc__insertSpillCode(pass, copyState)
                     if ((*(int *)(pass + 0x46c) <= destRootB) &&
                        (*(int *)(destRootB * 4 + *(int *)(pass + 0x45c)) ==
                         *(int *)(laneNumber * 4 + *(int *)(pass + 0x45c)))) {
-                      ((int (*)())FUN_00135684)(copyState,destRootB,laneNumber);
+                      ((int (*)())InterferenceGraph__appendToNodeList)(copyState,destRootB,laneNumber);
                     }
                   }
                   goto LAB_001339e0;
@@ -1527,7 +1527,7 @@ LAB_00133bd0:
         laneCursor = newCopyInst;
         do {
           if ((*(char *)((int)&laneMask + laneIndex) != '\0') &&
-             (blockArray = ((int (*)())FUN_001382b8)(newSrcDef,laneIndex,&laneDefOut), blockArray == 0)) {
+             (blockArray = ((int (*)())IRInst__findLaneDefinition)(newSrcDef,laneIndex,&laneDefOut), blockArray == 0)) {
             *(undefined1 *)(laneCursor + 0x27) = 1;
             (**(code **)(*newCopyInst + 0x88))(newCopyInst,1,laneIndex,4);
           }
@@ -1629,8 +1629,8 @@ LAB_00133bd0:
 #undef vec2Data
 #undef vec2Arena
 
-/* FUN_00133fe4 @ 0x133fe4 (140 bytes) */
-int FUN_00133fe4(allocator)
+/* RegAlloc__insertPendingReloads @ 0x133fe4 (140 bytes) */
+int RegAlloc__insertPendingReloads(allocator)
   int allocator;
 {
   int *foundPendingRef;
@@ -1795,8 +1795,8 @@ code_r0x001342f8:
   } while( true );
 }
 
-/* FUN_00134400 @ 0x134400 (600 bytes) */
-int FUN_00134400(allocator)
+/* RegAlloc__addDefinitionNodes @ 0x134400 (600 bytes) */
+int RegAlloc__addDefinitionNodes(allocator)
   int allocator;
 {
   uint *nodeVectorB;
@@ -2038,7 +2038,7 @@ int RegAlloc__run(pass)
     ((int (*)())RegAlloc__buildClassTables)(pass,*(undefined4 *)(pass + 0x468),*(undefined4 *)(pass + 0x46c),
                  *(undefined4 *)(pass + 0x464),allocationRound);
     if (allocationRound != 0) {
-      ((int (*)())FUN_00134400)(*(undefined4 *)(pass + 0x3c0));
+      ((int (*)())RegAlloc__addDefinitionNodes)(*(undefined4 *)(pass + 0x3c0));
     }
     backendB = *(int **)(*(int *)(pass + 8) + 0x30c);
     (**(code **)(*backendB + 0x144))(backendB,*(undefined4 *)(pass + 0x464),pass);
@@ -2069,7 +2069,7 @@ code_r0x001348ac:
         compilerB = *(int *)(pass + 8);
         if (*(int *)(pass + 0x264) < *(int *)(compilerB + 0x67c)) {
           *(int *)(pass + 0x264) = *(int *)(pass + 0x264) + 1;
-          ((int (*)())FUN_00133fe4)(*(int *)(pass + 0x3c0));
+          ((int (*)())RegAlloc__insertPendingReloads)(*(int *)(pass + 0x3c0));
           backendB = *(int **)(*(int *)(pass + 8) + 0x30c);
           (**(code **)(*backendB + 0x14c))(backendB,pass);
           usageBitsetAData = *(int **)(pass + 0x42c);
@@ -2663,8 +2663,8 @@ int InterferenceGraph__addNeighbour(graph, targetNode, sourceNodeIndex)
   return addedEdge;
 }
 
-/* FUN_00135684 @ 0x135684 (336 bytes) */
-int FUN_00135684(graph, nodeA, nodeB)
+/* InterferenceGraph__appendToNodeList @ 0x135684 (336 bytes) */
+int InterferenceGraph__appendToNodeList(graph, nodeA, nodeB)
   int graph;
   uint nodeA;
   uint nodeB;
@@ -4419,8 +4419,8 @@ int Program__freeBlockBitsets(program)
   return;
 }
 
-/* FUN_00138130 @ 0x138130 (272 bytes) */
-int FUN_00138130(liveness)
+/* Liveness__allocLiveTable @ 0x138130 (272 bytes) */
+int Liveness__allocLiveTable(liveness)
   int liveness;
 {
   int block;
@@ -4494,8 +4494,8 @@ int IRInst__laneWrittenInChain(inst, param_2)
   return 0;
 }
 
-/* FUN_001382b8 @ 0x1382b8 (216 bytes) */
-int FUN_001382b8(inst, param_2, laneDefOut)
+/* IRInst__findLaneDefinition @ 0x1382b8 (216 bytes) */
+int IRInst__findLaneDefinition(inst, param_2, laneDefOut)
   int *inst;
   uint param_2;
   uint *laneDefOut;
@@ -5094,8 +5094,8 @@ int Node__isNotAmong3(node, block, excludeA, excludeB)
   return 0;
 }
 
-/* FUN_0013905c @ 0x13905c (308 bytes) */
-int FUN_0013905c(endInst, inst)
+/* IRInst__noUseBetween @ 0x13905c (308 bytes) */
+int IRInst__noUseBetween(endInst, inst)
   int *endInst;
   int *inst;
 {

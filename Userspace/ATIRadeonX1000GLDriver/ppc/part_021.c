@@ -667,7 +667,7 @@ int Compiler__compileStages(compiler, compileRequest)
     List__freeAllNodes(*(undefined4 *)(compiler + COMP_arenaB));
     Scheduler__run(*(undefined4 *)(compiler + COMP_currentProgram));
     List__freeAllNodes(*(undefined4 *)(compiler + COMP_arenaB));
-    FUN_00120cd4(*(undefined4 *)(compiler + COMP_currentProgram));
+    Program__eliminatePhiCopies(*(undefined4 *)(compiler + COMP_currentProgram));
     List__freeAllNodes(*(undefined4 *)(compiler + COMP_arenaB));
     RegAlloc__run(*(undefined4 *)(compiler + COMP_currentProgram));
     List__freeAllNodes(*(undefined4 *)(compiler + COMP_arenaB));

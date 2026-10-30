@@ -673,8 +673,8 @@ int VRegPool__canonicalizeKey(cache, kindRef, valueRef)
   return;
 }
 
-/* FUN_00127324 @ 0x127324 (232 bytes) */
-int FUN_00127324(program, registerFileKind, vregId, kindOut, indexOut)
+/* Program__decodeRegisterKey @ 0x127324 (232 bytes) */
+int Program__decodeRegisterKey(program, registerFileKind, vregId, kindOut, indexOut)
   int program;
   int registerFileKind;
   int vregId;

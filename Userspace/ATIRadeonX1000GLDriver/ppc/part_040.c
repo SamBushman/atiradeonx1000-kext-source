@@ -324,8 +324,8 @@ int LoopInfo__init(loopInfo, header)
   return 0;
 }
 
-/* FUN_0012bb48 @ 0x12bb48 (296 bytes) */
-int FUN_0012bb48(pass, block)
+/* Program__collapseIfRegion @ 0x12bb48 (296 bytes) */
+int Program__collapseIfRegion(pass, block)
   int pass;
   int *block;
 {
@@ -582,8 +582,8 @@ int FudoPs__vslot69_shouldFlattenIf(this, ifHeader, optionSource, staleArg4, sta
   return 0;
 }
 
-/* FUN_0012c2dc @ 0x12c2dc (244 bytes) */
-int FUN_0012c2dc(program, block)
+/* Program__isTrivialBranchRegion @ 0x12c2dc (244 bytes) */
+int Program__isTrivialBranchRegion(program, block)
   int program;
   int block;
 {
@@ -2038,7 +2038,7 @@ int IfFooter__ctor_12e56c(conditionRegister, loopBlock, compiler)
     allocation[0x2f] = headerWordB8;
     Program__insertBlockAfter(program,loopHeader,preHeaderBlock);
     Block__splitOutgoingEdge(loopHeader,loopExitTarget,preHeaderBlock);
-    headerChainBlock = FUN_0012b140(loopHeader);
+    headerChainBlock = Block__findRegionHeader(loopHeader);
     arenaAt374 = *(undefined4 *)(compiler + COMP_arenaA);
     allocation = (undefined4 *)Arena__alloc(arenaAt374,0x130);
     thenBlock = allocation + 1;
@@ -2137,8 +2137,8 @@ int Program__splitCriticalEdges(program, block, lastBlock)
   return;
 }
 
-/* FUN_0012eacc @ 0x12eacc (1428 bytes) */
-int FUN_0012eacc(program)
+/* Program__predicatePendingIfs @ 0x12eacc (1428 bytes) */
+int Program__predicatePendingIfs(program)
   int program;
 {
   int pendingEntry;
@@ -2280,7 +2280,7 @@ int FUN_0012eacc(program)
     pendingEntry = *pendingTopRef;
     Vector__removeAt(pendingVector,pendingCount - 1);
     containerBlock = *(undefined4 *)(pendingEntry + 0x158);
-    chainBlock = FUN_0012b140(containerBlock);
+    chainBlock = Block__findRegionHeader(containerBlock);
     chainKey = *(undefined4 *)(chainBlock + 0x13c);
     isOrdinaryEntry = (uint)(*(int *)(*(int *)(pendingEntry + 0x88) + 8) != 0xf8);
     if (isOrdinaryEntry == 0) {
@@ -2295,7 +2295,7 @@ LAB_0012ed5c:
     }
     else {
       do {
-        chainBlock = FUN_0012b140(chainBlock);
+        chainBlock = Block__findRegionHeader(chainBlock);
       } while (*(int *)(chainBlock + 0x150) == 0);
       visitedCount = allocation[2];
       loopIndex = 0;
@@ -2341,8 +2341,8 @@ LAB_0012ed24:
       while( true ) {
         chainKey = ((int (*)())Program__getOrCreateLandingBlock)(program,chainKey);
         movDestOperand = Block__getSuccessor(chainKey,0);
-        pendingEntry = FUN_0012afe8(isOrdinaryEntry,chainHeadKey,movDestOperand,chainSecondKey);
-        chainKey = FUN_0012b140(movDestOperand);
+        pendingEntry = Block__walkToLoopFooter(isOrdinaryEntry,chainHeadKey,movDestOperand,chainSecondKey);
+        chainKey = Block__findRegionHeader(movDestOperand);
         if (movDestOperand != pendingEntry) break;
         ((int (*)())IfFooter__ctor_12e56c)(predicateRegister,movDestOperand,*(undefined4 *)(program + 8));
         chainKey = Block__footerTargetOrSelf(movDestOperand);
@@ -3790,7 +3790,7 @@ int RegAlloc__laneDependsOnChain(maxDistance, inst, operandIndex)
   laneIndex = 0;
   do {
     if ((laneDefOut[laneIndex + -4] != '\0') &&
-       (laneDefinition = FUN_001382b8(operandVReg,laneIndex,laneDefOut), -1 < maxDistance)) {
+       (laneDefinition = IRInst__findLaneDefinition(operandVReg,laneIndex,laneDefOut), -1 < maxDistance)) {
       loopIndex = 0;
       chainInst = inst;
       do {

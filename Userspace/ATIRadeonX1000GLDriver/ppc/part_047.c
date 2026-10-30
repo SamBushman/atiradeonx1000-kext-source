@@ -3044,7 +3044,7 @@ int ValueKey__mixLiteralSources(key)
         isForwardableMov = (**(code **)(*loopPtr6 + 0x60))(loopPtr6);
         if (isForwardableMov != 0) {
           sourceDef = IRInst__getOperandSource(loopIndex,1);
-          FUN_0010c670(sourceDef,loopIndex,*(undefined4 *)(key + 0x238));
+          IRInst__foldConstantSourcesIntoClone(sourceDef,loopIndex,*(undefined4 *)(key + 0x238));
         }
       }
       loopPtr7 = loopPtr7 + 1;

@@ -2119,8 +2119,8 @@ int Program__mergeBlockWithSuccessor(param_1, firstBlock, block)
   return mergeResult;
 }
 
-/* FUN_0012afe8 @ 0x12afe8 (344 bytes) */
-int FUN_0012afe8(acceptFooterOnly, targetLoop, block, stopBlock)
+/* Block__walkToLoopFooter @ 0x12afe8 (344 bytes) */
+int Block__walkToLoopFooter(acceptFooterOnly, targetLoop, block, stopBlock)
   int acceptFooterOnly;
   int targetLoop;
   int *block;
@@ -2171,8 +2171,8 @@ int FUN_0012afe8(acceptFooterOnly, targetLoop, block, stopBlock)
   return (int *)0x0;
 }
 
-/* FUN_0012b140 @ 0x12b140 (264 bytes) */
-int FUN_0012b140(block)
+/* Block__findRegionHeader @ 0x12b140 (264 bytes) */
+int Block__findRegionHeader(block)
   int *block;
 {
   int vtable;
