@@ -265,26 +265,26 @@ LAB_000e9ca8:
 }
 
 /* FUN_000e9cc8 @ 0xe9cc8 (160 bytes) */
-int FUN_000e9cc8(param_1)
-  int param_1;
+int FUN_000e9cc8(block)
+  int block;
 {
-  byte bVar1;
-  int *piVar2;
+  byte laneFlags;
+  int *firstDefSlot;
   
-  if (*(int *)(param_1 + 0x144) == 0) {
-    piVar2 = *(int **)(*(int *)(*(int *)(param_1 + 0x148) + 0xa4) + 0x18);
-    if (*piVar2 == 0) {
-      piVar2 = (int *)Vector__elementRefGrow(piVar2,0);
+  if (*(int *)(block + 0x144) == 0) {
+    firstDefSlot = *(int **)(*(int *)(*(int *)(block + 0x148) + 0xa4) + 0x18);
+    if (*firstDefSlot == 0) {
+      firstDefSlot = (int *)Vector__elementRefGrow(firstDefSlot,0);
     }
     else {
-      if (piVar2[1] == 0) {
-        *(undefined4 *)piVar2[2] = 0;
-        piVar2[1] = 1;
+      if (firstDefSlot[1] == 0) {
+        *(undefined4 *)firstDefSlot[2] = 0;
+        firstDefSlot[1] = 1;
       }
-      piVar2 = (int *)piVar2[2];
+      firstDefSlot = (int *)firstDefSlot[2];
     }
-    bVar1 = *(byte *)(*piVar2 + 0x15c);
-    if ((((bVar1 & 1) != 0) && ((bVar1 & 2) != 0)) && ((bVar1 & 4) != 0)) {
+    laneFlags = *(byte *)(*firstDefSlot + 0x15c);
+    if ((((laneFlags & 1) != 0) && ((laneFlags & 2) != 0)) && ((laneFlags & 4) != 0)) {
       return 1;
     }
   }

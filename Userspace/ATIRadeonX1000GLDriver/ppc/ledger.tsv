@@ -1170,7 +1170,7 @@
 0xda438	32	FUN_000da438	part_019	converted
 0xda458	96	scDestroyCompilerObject	part_019	converted
 0xda4b8	192	Compiler__createFromRequest	part_019	converted
-0xda78c	244	FUN_000da78c	part_019	converted
+0xda78c	244	MiniFloat__decode	part_019	converted
 0xda8a8	40	ildisInitContext	part_019	converted
 0xda8d0	16	ildisSkipToken	part_019	converted
 0xda8e0	20	ildisSetIndent	part_019	converted
@@ -1266,7 +1266,7 @@
 0xe1704	88	Compiler__setBitInSelectedBlockB8	part_021	converted
 0xe175c	88	Compiler__setBitInSelectedBlockD8	part_021	converted
 0xe17b4	88	Compiler__setBitInSelectedBlock98	part_021	converted
-0xe180c	124	FUN_000e180c	part_021	converted
+0xe180c	124	Compiler__getOrCreateSlotObject	part_021	converted
 0xe1888	152	Compiler__resetState	part_021	converted
 0xe1920	232	Compiler__init_e1920	part_021	converted
 0xe1a48	232	Compiler__init_e1a48	part_021	converted
@@ -1311,7 +1311,7 @@
 0xe4410	64	ILReader__lookupBoolConst	part_021	converted
 0xe4450	116	ILReader__appendIntConst	part_021	converted
 0xe44c4	456	ILReader__readFloatConst	part_021	converted
-0xe468c	132	FUN_000e468c	part_021	converted
+0xe468c	132	ILReader__lookupConstComponent	part_021	converted
 0xe4710	20	FUN_000e4710	part_021	converted
 0xe4724	92	ILReader__appendBoolConst	part_021	converted
 0xe4780	116	ILReader__appendFloatConst	part_021	converted
@@ -1360,7 +1360,7 @@
 0xe80cc	88	FUN_000e80cc	part_022	converted
 0xe8124	664	Program__allocateBitSetIndex	part_022	converted
 0xe83bc	104	FUN_000e83bc	part_022	converted
-0xe8424	216	FUN_000e8424	part_022	converted
+0xe8424	216	Block__insertAtStart	part_022	converted
 0xe84fc	468	Block__verify	part_022	converted
 0xe86f0	236	LoopHeader__verify	part_022	converted
 0xe87e4	340	IfHeader__canFlatten	part_022	converted
@@ -1369,12 +1369,12 @@
 0xe8bac	104	FUN_000e8bac	part_022	converted
 0xe8c14	104	FUN_000e8c14	part_022	converted
 0xe8c7c	104	FUN_000e8c7c	part_022	converted
-0xe8ce4	120	FUN_000e8ce4	part_022	converted
+0xe8ce4	120	Block__addDominatedChild	part_022	converted
 0xe8d5c	120	Block__appendPredecessor	part_022	converted
 0xe8dd4	120	Block__appendSuccessor	part_022	converted
 0xe8e4c	96	Block__connect	part_022	converted
 0xe8eac	608	Block__replaceRegionEdges	part_022	converted
-0xe910c	120	FUN_000e910c	part_022	converted
+0xe910c	120	Block__addDominanceFrontier	part_022	converted
 0xe9184	136	Block__getPredecessor	part_022	converted
 0xe920c	136	Block__getSuccessor	part_022	converted
 0xe9294	280	FUN_000e9294	part_022	converted
@@ -1457,7 +1457,7 @@
 0xec3e8	68	FUN_000ec3e8	part_024	converted
 0xec42c	60	FUN_000ec42c	part_024	converted
 0xec468	136	FUN_000ec468	part_024	converted
-0xec4f0	124	FUN_000ec4f0	part_024	converted
+0xec4f0	124	Program__getDominatorInfo	part_024	converted
 0xec5b8	160	Program__getBlocksArray	part_024	converted
 0xec658	88	FUN_000ec658	part_024	converted
 0xec6b0	120	FUN_000ec6b0	part_024	converted
@@ -1604,7 +1604,7 @@
 0xf8a30	112	IRInst__literalForLane	part_026	converted
 0xf8aa0	488	Program__applySourceTokenToOperand	part_026	converted
 0xf8c88	64	FUN_000f8c88	part_026	converted
-0xf8ccc	132	FUN_000f8ccc	part_026	converted
+0xf8ccc	132	OpcodeTemplate__lookup	part_026	converted
 0xf8d50	568	IRInst__applyDescriptorSelects	part_026	converted
 0xf8f88	176	IRInst__applyDescriptorSwizzle	part_026	converted
 0xf9038	264	FUN_000f9038	part_026	converted

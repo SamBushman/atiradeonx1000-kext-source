@@ -4718,7 +4718,7 @@ int HwLimits__computeBlockLiveness(this, regCount, program, compiler)
   bitCount = regCount * 4;
   blockIndex = 1;
   *(uint *)(program + 0x30) = *(uint *)(program + 0x30) | 0x1000;
-  blockArray = FUN_000ec4f0(program);
+  blockArray = Program__getDominatorInfo(program);
   bitsetWordCount = bitCount + 0x1fU >> 5;
   bitsetHasWords = bitsetWordCount != 0;
   bitsetAllocBytes = bitsetWordCount * 4 + 0xc;

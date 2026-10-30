@@ -2428,33 +2428,33 @@ int FUN_000e83bc(param_1)
   return iVar2;
 }
 
-/* FUN_000e8424 @ 0xe8424 (216 bytes) */
-int FUN_000e8424(block, param_2)
+/* Block__insertAtStart @ 0xe8424 (216 bytes) */
+int Block__insertAtStart(block, inst)
   int block;
-  int param_2;
+  int inst;
 {
-  int *piVar1;
-  int iVar2;
-  int *piVar3;
+  int *scanInst;
+  int isPinnedInst;
+  int *nextInstLink;
   
   if (*(int *)(*(int *)(*(int *)(*(int *)(block + 200) + 8) + 0x88) + 8) == 0x8e) {
-    piVar1 = *(int **)(block + 0x98);
-    for (piVar3 = (int *)(*(int **)(block + 0x98))[2]; piVar3 != (int *)0x0;
-        piVar3 = (int *)piVar3[2]) {
-      if (((piVar1[5] & 1U) != 0) && (*(int *)(piVar1[0x22] + 8) != 0x8e)) {
-        iVar2 = (**(code **)(*piVar1 + 0x34))(piVar1);
-        if (iVar2 == 0) {
-          ((int (*)())Block__insertInstBefore)(block,piVar1,param_2);
+    scanInst = *(int **)(block + 0x98);
+    for (nextInstLink = (int *)(*(int **)(block + 0x98))[2]; nextInstLink != (int *)0x0;
+        nextInstLink = (int *)nextInstLink[2]) {
+      if (((scanInst[5] & 1U) != 0) && (*(int *)(scanInst[0x22] + 8) != 0x8e)) {
+        isPinnedInst = (**(code **)(*scanInst + 0x34))(scanInst);
+        if (isPinnedInst == 0) {
+          ((int (*)())Block__insertInstBefore)(block,scanInst,inst);
           return;
         }
-        piVar3 = (int *)piVar1[2];
+        nextInstLink = (int *)scanInst[2];
       }
-      piVar1 = piVar3;
+      scanInst = nextInstLink;
     }
   }
   else {
-    DList__insertAfter(param_2,*(int *)(block + 200));
-    *(int *)(param_2 + 0x158) = block;
+    DList__insertAfter(inst,*(int *)(block + 200));
+    *(int *)(inst + 0x158) = block;
   }
   return;
 }
@@ -2754,26 +2754,26 @@ int FUN_000e8c7c(param_1)
   return *(undefined4 *)(*piVar1 + 0x20);
 }
 
-/* FUN_000e8ce4 @ 0xe8ce4 (120 bytes) */
-int FUN_000e8ce4(param_1, param_2)
-  int param_1;
-  undefined4 param_2;
+/* Block__addDominatedChild @ 0xe8ce4 (120 bytes) */
+int Block__addDominatedChild(block, child)
+  int block;
+  undefined4 child;
 {
-  undefined4 *puVar1;
-  uint uVar2;
-  uint *puVar3;
+  undefined4 *vectorSlot;
+  uint vectorSize;
+  uint *childrenVector;
   
-  puVar3 = *(uint **)(param_1 + 0xf4);
-  uVar2 = puVar3[1];
-  if (uVar2 < *puVar3) {
-    _memset(uVar2 * 4 + puVar3[2],0,4);
-    puVar1 = (undefined4 *)(uVar2 * 4 + puVar3[2]);
-    puVar3[1] = uVar2 + 1;
+  childrenVector = *(uint **)(block + 0xf4);
+  vectorSize = childrenVector[1];
+  if (vectorSize < *childrenVector) {
+    _memset(vectorSize * 4 + childrenVector[2],0,4);
+    vectorSlot = (undefined4 *)(vectorSize * 4 + childrenVector[2]);
+    childrenVector[1] = vectorSize + 1;
   }
   else {
-    puVar1 = (undefined4 *)Vector__elementRefGrow(puVar3,uVar2);
+    vectorSlot = (undefined4 *)Vector__elementRefGrow(childrenVector,vectorSize);
   }
-  *puVar1 = param_2;
+  *vectorSlot = child;
   return;
 }
 
@@ -2942,26 +2942,26 @@ LAB_000e8f80:
   } while( true );
 }
 
-/* FUN_000e910c @ 0xe910c (120 bytes) */
-int FUN_000e910c(param_1, param_2)
-  int param_1;
-  undefined4 param_2;
+/* Block__addDominanceFrontier @ 0xe910c (120 bytes) */
+int Block__addDominanceFrontier(block, frontierBlock)
+  int block;
+  undefined4 frontierBlock;
 {
-  undefined4 *puVar1;
-  uint uVar2;
-  uint *puVar3;
+  undefined4 *vectorSlot;
+  uint vectorSize;
+  uint *frontierVector;
   
-  puVar3 = *(uint **)(param_1 + 0xf8);
-  uVar2 = puVar3[1];
-  if (uVar2 < *puVar3) {
-    _memset(uVar2 * 4 + puVar3[2],0,4);
-    puVar1 = (undefined4 *)(uVar2 * 4 + puVar3[2]);
-    puVar3[1] = uVar2 + 1;
+  frontierVector = *(uint **)(block + 0xf8);
+  vectorSize = frontierVector[1];
+  if (vectorSize < *frontierVector) {
+    _memset(vectorSize * 4 + frontierVector[2],0,4);
+    vectorSlot = (undefined4 *)(vectorSize * 4 + frontierVector[2]);
+    frontierVector[1] = vectorSize + 1;
   }
   else {
-    puVar1 = (undefined4 *)Vector__elementRefGrow(puVar3,uVar2);
+    vectorSlot = (undefined4 *)Vector__elementRefGrow(frontierVector,vectorSize);
   }
-  *puVar1 = param_2;
+  *vectorSlot = frontierBlock;
   return;
 }
 
@@ -3014,32 +3014,37 @@ int Block__getSuccessor(block, index)
 }
 
 /* FUN_000e9294 @ 0xe9294 (280 bytes) */
-int FUN_000e9294(param_1)
-  int param_1;
+int FUN_000e9294(ifHeader)
+  int ifHeader;
 {
+  int secondPredecessorQuery;
+  int firstPredecessorQuery;
+  int firstArmPredecessorCount;
+  int secondSuccessorQuery;
+  int firstSuccessorQuery;
   int *predecessor;
-  int iVar1;
+  int firstArmSuccessorCount;
   int *successor;
-  undefined4 uVar3;
+  undefined4 armBlock;
   
-  uVar3 = *(undefined4 *)(param_1 + 0x134);
-  iVar1 = ((int (*)())Block__successorCount)(uVar3);
-  if ((iVar1 == 1) && (iVar1 = ((int (*)())Block__successorCount)(*(undefined4 *)(param_1 + 0x138)), iVar1 == 1)) {
-    successor = (int *)((int (*)())Block__getSuccessor)(uVar3,0);
-    iVar1 = (**(code **)(*successor + 0x28))(successor);
-    if (iVar1 != 0) {
-      successor = (int *)((int (*)())Block__getSuccessor)(*(undefined4 *)(param_1 + 0x138),0);
-      iVar1 = (**(code **)(*successor + 0x28))(successor);
-      if (iVar1 != 0) {
-        uVar3 = *(undefined4 *)(param_1 + 0x134);
-        iVar1 = ((int (*)())Block__predecessorCount)(uVar3);
-        if ((iVar1 == 1) && (iVar1 = ((int (*)())Block__predecessorCount)(*(undefined4 *)(param_1 + 0x138)), iVar1 == 1)) {
-          predecessor = (int *)((int (*)())Block__getPredecessor)(uVar3,0);
-          iVar1 = (**(code **)(*predecessor + 0x24))(predecessor);
-          if (iVar1 != 0) {
-            predecessor = (int *)((int (*)())Block__getPredecessor)(*(undefined4 *)(param_1 + 0x138),0);
-            iVar1 = (**(code **)(*predecessor + 0x24))(predecessor);
-            if (iVar1 != 0) {
+  armBlock = *(undefined4 *)(ifHeader + 0x134);
+  firstArmSuccessorCount = ((int (*)())Block__successorCount)(armBlock);
+  if ((firstArmSuccessorCount == 1) && (firstArmSuccessorCount = ((int (*)())Block__successorCount)(*(undefined4 *)(ifHeader + 0x138)), firstArmSuccessorCount == 1)) {
+    successor = (int *)((int (*)())Block__getSuccessor)(armBlock,0);
+    firstSuccessorQuery = (**(code **)(*successor + 0x28))(successor);
+    if (firstSuccessorQuery != 0) {
+      successor = (int *)((int (*)())Block__getSuccessor)(*(undefined4 *)(ifHeader + 0x138),0);
+      secondSuccessorQuery = (**(code **)(*successor + 0x28))(successor);
+      if (secondSuccessorQuery != 0) {
+        armBlock = *(undefined4 *)(ifHeader + 0x134);
+        firstArmPredecessorCount = ((int (*)())Block__predecessorCount)(armBlock);
+        if ((firstArmPredecessorCount == 1) && (firstArmPredecessorCount = ((int (*)())Block__predecessorCount)(*(undefined4 *)(ifHeader + 0x138)), firstArmPredecessorCount == 1)) {
+          predecessor = (int *)((int (*)())Block__getPredecessor)(armBlock,0);
+          firstPredecessorQuery = (**(code **)(*predecessor + 0x24))(predecessor);
+          if (firstPredecessorQuery != 0) {
+            predecessor = (int *)((int (*)())Block__getPredecessor)(*(undefined4 *)(ifHeader + 0x138),0);
+            secondPredecessorQuery = (**(code **)(*predecessor + 0x24))(predecessor);
+            if (secondPredecessorQuery != 0) {
               return 1;
             }
           }

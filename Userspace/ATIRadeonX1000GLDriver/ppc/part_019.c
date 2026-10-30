@@ -2895,34 +2895,34 @@ code_r0x000da738:
   return;
 }
 
-/* FUN_000da78c @ 0xda78c (244 bytes) */
-double FUN_000da78c(uint param_1,double staleFprArg1)
+/* MiniFloat__decode @ 0xda78c (244 bytes) */
+double MiniFloat__decode(uint encoded,double unusedFprArg)
 {
-  uint uVar1;
-  uint uVar2;
-  double dVar3;
-  double dVar4;
+  uint mantissaBits;
+  uint exponentBits;
+  double decoded;
+  double scale;
   
-  dVar3 = DOUBLE_001aa250;
-  uVar1 = param_1 & 7;
-  uVar2 = param_1 >> 3 & 0xf;
-  if (uVar2 == 0) {
-    if (uVar1 == 0) {
-      dVar3 = (double)FLOAT_001aa1c0;
+  decoded = DOUBLE_001aa250;
+  mantissaBits = encoded & 7;
+  exponentBits = encoded >> 3 & 0xf;
+  if (exponentBits == 0) {
+    if (mantissaBits == 0) {
+      decoded = (double)FLOAT_001aa1c0;
     }
     else {
-      dVar3 = (double)((float)((double)CONCAT44(0x43300000,uVar1) - DOUBLE_001aa250) *
+      decoded = (double)((float)((double)CONCAT44(0x43300000,mantissaBits) - DOUBLE_001aa250) *
                        FLOAT_001aa170 * FLOAT_001aa1c4);
     }
   }
   else {
-    dVar4 = _pow(DOUBLE_001aa2a0,
-                 (double)(float)((double)CONCAT44(0x43300000,uVar2) - DOUBLE_001aa250) -
+    scale = _pow(DOUBLE_001aa2a0,
+                 (double)(float)((double)CONCAT44(0x43300000,exponentBits) - DOUBLE_001aa250) -
                  DOUBLE_001aa2a8[0]);
-    dVar3 = (double)((float)((double)CONCAT44(0x43300000,uVar1) - dVar3) * FLOAT_001aa170 *
-                     (float)dVar4 + (float)dVar4);
+    decoded = (double)((float)((double)CONCAT44(0x43300000,mantissaBits) - decoded) * FLOAT_001aa170 *
+                     (float)scale + (float)scale);
   }
-  return dVar3;
+  return decoded;
 }
 
 /* ildisInitContext @ 0xda8a8 (40 bytes) */

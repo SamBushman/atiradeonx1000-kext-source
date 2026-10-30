@@ -8882,7 +8882,7 @@ int FUN_00146868(param_1, param_2, param_3)
     if (vcall1cResult != 0) {
       return 0;
     }
-    FUN_000ec4f0(param_3);
+    Program__getDominatorInfo(param_3);
     piVar1 = *(int **)(param_2[0x56] + 0xf0);
     if (piVar1 != (int *)param_1[0x56]) {
       do {

@@ -6955,7 +6955,7 @@ double FUN_000d10dc(undefined4 outText,uint registerWord,undefined4 argR5,undefi
         printf_LDBLStub_1a32d0(outText,"r%02u",registerWord,argR6,argR7,argR8,argR9,argR10);
       }
       else {
-        immediateValue = (double)((double (*)())FUN_000da78c)(registerWord & 0xffffdfff,floatArg1);
+        immediateValue = (double)((double (*)())MiniFloat__decode)(registerWord & 0xffffdfff,floatArg1);
         ten = DOUBLE_001aa238;
         i2dMagic = DOUBLE_001aa1e0;
         if (immediateValue == (double)FLOAT_001aa0d4) {

@@ -204,10 +204,10 @@ ebef8	BreakBlock__clone	ebf54	ebf58	-	no-handler
 ebff8	ContinueBlock__clone	ec01c	ec020	-	no-handler
 ebff8	ContinueBlock__clone	ec030	ec034	ec038	cleanup
 ebff8	ContinueBlock__clone	ec054	ec058	-	no-handler
-ec4f0	FUN_000ec4f0	ec520	ec524	-	no-handler
-ec4f0	FUN_000ec4f0	ec538	ec53c	ec56c	cleanup
-ec4f0	FUN_000ec4f0	ec544	ec560	-	no-handler
-ec4f0	FUN_000ec4f0	ec588	ec598	-	no-handler
+ec4f0	Program__getDominatorInfo	ec520	ec524	-	no-handler
+ec4f0	Program__getDominatorInfo	ec538	ec53c	ec56c	cleanup
+ec4f0	Program__getDominatorInfo	ec544	ec560	-	no-handler
+ec4f0	Program__getDominatorInfo	ec588	ec598	-	no-handler
 eced0	FUN_000eced0	ecef4	ecef8	-	no-handler
 eced0	FUN_000eced0	ecf0c	ecf10	ecf5c	cleanup
 eced0	FUN_000eced0	ecf44	ecf48	-	no-handler

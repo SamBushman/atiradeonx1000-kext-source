@@ -1496,7 +1496,7 @@ int FUN_00120cd4(pass)
   undefined4 arena;
   int tempCount [7];
   
-  blockCursor = (undefined4 *)FUN_000ec4f0(pass);
+  blockCursor = (undefined4 *)Program__getDominatorInfo(pass);
   listCount = DList__count(pass + 0x37c);
   arena = *(undefined4 *)(*(int *)(pass + 8) + 0x378);
   allocation = (undefined4 *)Arena__alloc(arena,0x14);

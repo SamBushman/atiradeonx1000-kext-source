@@ -232,34 +232,34 @@ int FUN_000ec468(param_1, param_2, param_3)
   return;
 }
 
-/* FUN_000ec4f0 @ 0xec4f0 (124 bytes) */
-int FUN_000ec4f0(param_1)
-  int param_1;
+/* Program__getDominatorInfo @ 0xec4f0 (124 bytes) */
+int Program__getDominatorInfo(program)
+  int program;
 {
-  int iVar1;
+  int dominatorInfo;
   undefined4 *allocation;
   undefined4 arenaB;
-  undefined4 *puVar4;
+  undefined4 *domTree;
   
-  iVar1 = *(int *)(param_1 + 0x394);
-  if (iVar1 == 0) {
-    arenaB = *(undefined4 *)(*(int *)(param_1 + 8) + 0x378);
+  dominatorInfo = *(int *)(program + 0x394);
+  if (dominatorInfo == 0) {
+    arenaB = *(undefined4 *)(*(int *)(program + 8) + 0x378);
     allocation = (undefined4 *)Arena__alloc(arenaB,0x2c);
     *allocation = arenaB;
-    puVar4 = allocation + 1;
-    DominatorTree__ctor_f7cd8(puVar4,param_1);
-    DominatorTree__dfsNumber(puVar4,*(undefined4 *)(param_1 + 0x3a0));
-    ((int (*)())FUN_000ec468)(param_1,allocation[7],allocation[8]);
-    DominatorTree__free(puVar4);
-    if (puVar4 == (undefined4 *)0x0) {
-      iVar1 = *(int *)(param_1 + 0x394);
+    domTree = allocation + 1;
+    DominatorTree__ctor_f7cd8(domTree,program);
+    DominatorTree__dfsNumber(domTree,*(undefined4 *)(program + 0x3a0));
+    ((int (*)())FUN_000ec468)(program,allocation[7],allocation[8]);
+    DominatorTree__free(domTree);
+    if (domTree == (undefined4 *)0x0) {
+      dominatorInfo = *(int *)(program + 0x394);
     }
     else {
       Arena__free(*allocation,allocation);
-      iVar1 = *(int *)(param_1 + 0x394);
+      dominatorInfo = *(int *)(program + 0x394);
     }
   }
-  return iVar1;
+  return dominatorInfo;
 }
 
 /* Program__getBlocksArray @ 0xec5b8 (160 bytes) */
@@ -279,7 +279,7 @@ int Program__getBlocksArray(program)
     listCount = DList__count(program + 0x37c);
     allocation = Arena__alloc(*(undefined4 *)(*(int *)(program + 8) + 0x374),listCount * 4 + 4);
     *(undefined4 *)(program + 0x398) = allocation;
-    puVar4 = (undefined4 *)((int (*)())FUN_000ec4f0)(program);
+    puVar4 = (undefined4 *)((int (*)())Program__getDominatorInfo)(program);
     **(undefined4 **)(program + 0x398) = *puVar4;
     if (0 < listCount) {
       puVar4 = puVar4 + listCount;
@@ -607,7 +607,7 @@ LAB_000ece34:
   }
   isStoreLike = (**(code **)(*afterInst + 0x7c))(afterInst);
   if (isStoreLike != 0) {
-    FUN_000e8424(targetBlock,newMov);
+    Block__insertAtStart(targetBlock,newMov);
     return;
   }
   return Block__insertInstAfter(targetBlock,afterInst,newMov);
@@ -3502,7 +3502,7 @@ code_r0x000e76c4:
           block = nextMarkedSelect;
         } while( true );
       }
-      FUN_000e8424(block,*(undefined4 *)(program + 0x340));
+      Block__insertAtStart(block,*(undefined4 *)(program + 0x340));
       compiler = *(undefined4 *)(program + 8);
       UNRECOVERED_JUMPTABLE = *(code **)(*inst + 0x94);
       placementInst = *(undefined4 *)(program + 0x340);
@@ -3580,7 +3580,7 @@ code_r0x000e76c4:
           } while( true );
         }
       }
-      FUN_000e8424(block,*(undefined4 *)(program + 0x340));
+      Block__insertAtStart(block,*(undefined4 *)(program + 0x340));
       (**(code **)(*inst + 0x94))
                 (inst,*(undefined4 *)(program + 0x340),*(undefined4 *)(program + 8));
       compiler = *(undefined4 *)(program + 8);

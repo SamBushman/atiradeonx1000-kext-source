@@ -2064,7 +2064,7 @@ local	ContinueBlock__ctor_ebf70	param_2	compiler	INFERRED	compiler passed to the
 local	ContinueBlock__ctor_ebfb4	param_2	compiler	INFERRED	compiler passed to the base constructor BreakOrContinueBlock__ctor_eac60
 local	scDumpPixelProgram	in_r10	staleArgR10	INFERRED	Ghidra pseudo-register: in_r10 (a register the function reads without having written it; no source-level role)
 local	scStoreConstantComponent	fparam_1	laneValue	INFERRED	float value (first FPR argument) stored for the lane
-local	FUN_000da78c	fparam_1	staleFprArg1	INFERRED	Ghidra pseudo-register: fparam_1 (a register the function reads without having written it; no source-level role)
+local	FUN_000da78c	fparam_1	unusedFprArg	INFERRED	Ghidra pseudo-register: fparam_1 (a register the function reads without having written it; no source-level role)
 local	ildisPrintFixedPoint	fparam_1	staleFprArg1	INFERRED	Ghidra pseudo-register: fparam_1 (a register the function reads without having written it; no source-level role)
 local	ildisPrintFixedPoint	fparam_2	staleFprArg2	INFERRED	Ghidra pseudo-register: fparam_2 (a register the function reads without having written it; no source-level role)
 local	ildisPrintFixedPoint	fparam_3	staleFprArg3	INFERRED	Ghidra pseudo-register: fparam_3 (a register the function reads without having written it; no source-level role)

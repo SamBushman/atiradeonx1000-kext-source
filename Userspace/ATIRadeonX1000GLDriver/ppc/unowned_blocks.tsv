@@ -2855,7 +2855,7 @@ d9f34	d9f3c	other	ConstBank__addMappedEntry	2
 d9f78	d9f80	other	FUN_000d9f3c	2	
 da180	da184	eh-pad	FUN_000da0c0	1	__Unwind_Resume
 da578	da57c	eh-pad	Compiler__createFromRequest	1	__Unwind_Resume
-da880	da8a8	other	FUN_000da78c	10	
+da880	da8a8	other	MiniFloat__decode	10	
 dac88	daca0	table	ildisComponentSelectChar	6	
 daec0	daedc	table	ildisPrintResultModifiers	7	
 dafb0	dafd0	table	ildisPrintElementFormat	8	
@@ -2945,7 +2945,7 @@ ebe24	ebe40	eh-pad	Block__deleting_dtor	7	__Unwind_Resume
 ebf38	ebf58	eh-pad	BreakBlock__clone	8	0x193cc0,__Unwind_Resume
 ec038	ec058	eh-pad	ContinueBlock__clone	8	0x193cc0,__Unwind_Resume
 ec1e4	ec1ec	other	FUN_000ec1d0	2	
-ec56c	ec58c	eh-pad	FUN_000ec4f0	8	0x193cc0,__Unwind_Resume
+ec56c	ec58c	eh-pad	Program__getDominatorInfo	8	0x193cc0,__Unwind_Resume
 ecf5c	ecf7c	eh-pad	FUN_000eced0	8	0x193cc0,__Unwind_Resume
 ed0e4	ed0fc	eh-pad	Program__dtor_ecfac	6	__Unwind_Resume
 ed25c	ed274	eh-pad	Program__dtor_ed124	6	__Unwind_Resume

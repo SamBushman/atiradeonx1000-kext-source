@@ -77,7 +77,7 @@
 0xebe24	Block__deleting_dtor
 0xebf38	BreakBlock__clone
 0xec038	ContinueBlock__clone
-0xec56c	FUN_000ec4f0
+0xec56c	Program__getDominatorInfo
 0xecf5c	FUN_000eced0
 0xed0e4	Program__dtor_ecfac
 0xed25c	Program__dtor_ed124

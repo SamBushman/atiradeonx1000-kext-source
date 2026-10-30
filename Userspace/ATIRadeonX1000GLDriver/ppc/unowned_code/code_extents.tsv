@@ -49,7 +49,7 @@ cec34	cec48	FUN_000cea6c
 cec48	cec5c	FUN_000cea6c
 d9f34	d9f3c	ConstBank__addMappedEntry
 d9f78	d9f80	FUN_000d9f3c
-da880	da8a8	FUN_000da78c
+da880	da8a8	MiniFloat__decode
 e2084	e208c	Compiler__releaseChipAndPools
 e208c	e2094	Compiler__releaseChipAndPools
 e2884	e28a8	Block__accept

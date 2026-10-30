@@ -134,31 +134,31 @@ int Compiler__setBitInSelectedBlock98(param_1, param_2)
   return;
 }
 
-/* FUN_000e180c @ 0xe180c (124 bytes) */
-int FUN_000e180c(compiler, param_2)
+/* Compiler__getOrCreateSlotObject @ 0xe180c (124 bytes) */
+int Compiler__getOrCreateSlotObject(compiler, slotIndex)
   int compiler;
-  int param_2;
+  int slotIndex;
 {
-  int *piVar1;
-  int iVar2;
+  int *newObject;
+  int slotAddr;
   
-  iVar2 = param_2 * 4 + compiler;
-  if (*(int *)(iVar2 + 0x370) == 0) {
-    piVar1 = (int *)Compiler__allocateOrFail(compiler,0x2c);
-    if (piVar1 != (int *)0x0) {
-      piVar1[10] = 0;
-      *piVar1 = compiler;
-      piVar1[1] = 0;
-      piVar1[2] = 0;
-      piVar1[3] = 0;
-      piVar1[4] = 0;
-      piVar1[5] = 0;
-      piVar1[6] = 0;
-      piVar1[7] = 0;
-      piVar1[8] = 0;
-      piVar1[9] = 0;
+  slotAddr = slotIndex * 4 + compiler;
+  if (*(int *)(slotAddr + 0x370) == 0) {
+    newObject = (int *)Compiler__allocateOrFail(compiler,0x2c);
+    if (newObject != (int *)0x0) {
+      newObject[10] = 0;
+      *newObject = compiler;
+      newObject[1] = 0;
+      newObject[2] = 0;
+      newObject[3] = 0;
+      newObject[4] = 0;
+      newObject[5] = 0;
+      newObject[6] = 0;
+      newObject[7] = 0;
+      newObject[8] = 0;
+      newObject[9] = 0;
     }
-    *(int **)(iVar2 + 0x370) = piVar1;
+    *(int **)(slotAddr + 0x370) = newObject;
   }
   return;
 }
@@ -188,7 +188,7 @@ int Compiler__resetState(compiler)
   } while (loopCounterB != 0);
   loopCounter = 0;
   do {
-    ((int (*)())FUN_000e180c)(compiler,loopCounter);
+    ((int (*)())Compiler__getOrCreateSlotObject)(compiler,loopCounter);
     bVar1 = loopCounter != 2;
     loopCounter = loopCounter + 1;
   } while (bVar1);
@@ -1014,21 +1014,21 @@ int FUN_000e2b68(inst, operandIndex)
 }
 
 /* FUN_000e2bf4 @ 0xe2bf4 (132 bytes) */
-int FUN_000e2bf4(param_1, param_2)
-  int param_1;
-  undefined4 param_2;
+int FUN_000e2bf4(block, callArg)
+  int block;
+  undefined4 callArg;
 {
-  int *piVar1;
-  int *piVar2;
+  int *scanInst;
+  int *nextInstLink;
   
-  piVar1 = *(int **)(param_1 + 8);
-  for (piVar2 = (int *)(*(int **)(param_1 + 8))[2]; piVar2 != (int *)0x0; piVar2 = (int *)piVar2[2])
+  scanInst = *(int **)(block + 8);
+  for (nextInstLink = (int *)(*(int **)(block + 8))[2]; nextInstLink != (int *)0x0; nextInstLink = (int *)nextInstLink[2])
   {
-    if (((piVar1[5] & 1U) != 0) && (*(int *)(piVar1[0x22] + 8) != 0x57)) {
-      (**(code **)(*piVar1 + 0x84))(piVar1,param_2);
-      piVar2 = (int *)piVar1[2];
+    if (((scanInst[5] & 1U) != 0) && (*(int *)(scanInst[0x22] + 8) != 0x57)) {
+      (**(code **)(*scanInst + 0x84))(scanInst,callArg);
+      nextInstLink = (int *)scanInst[2];
     }
-    piVar1 = piVar2;
+    scanInst = nextInstLink;
   }
   return;
 }
@@ -2121,37 +2121,37 @@ int ILReader__readFloatConst(ilReader, registerIndex, outValues, sourceToken)
   return 0;
 }
 
-/* FUN_000e468c @ 0xe468c (132 bytes) */
-int FUN_000e468c(param_1, param_2, param_3, param_4)
-  int param_1;
-  int param_2;
-  int param_3;
-  int *param_4;
+/* ILReader__lookupConstComponent @ 0xe468c (132 bytes) */
+int ILReader__lookupConstComponent(ilReader, registerNumber, componentIndex, outValue)
+  int ilReader;
+  int registerNumber;
+  int componentIndex;
+  int *outValue;
 {
-  int *piVar1;
+  int *constRecord;
   
-  piVar1 = *(int **)(*(int *)(param_1 + 0x14) + 0x14);
-  while (*piVar1 != param_2) {
-    if (*(int **)(param_1 + 0x18) == piVar1) {
+  constRecord = *(int **)(*(int *)(ilReader + 0x14) + 0x14);
+  while (*constRecord != registerNumber) {
+    if (*(int **)(ilReader + 0x18) == constRecord) {
       return 0;
     }
-    piVar1 = (int *)piVar1[5];
-    if (piVar1 == (int *)0x0) {
+    constRecord = (int *)constRecord[5];
+    if (constRecord == (int *)0x0) {
       return 0;
     }
   }
-  if (param_3 < 4) {
-    *param_4 = piVar1[param_3 + 1];
+  if (componentIndex < 4) {
+    *outValue = constRecord[componentIndex + 1];
     return 1;
   }
-  if (param_3 != 4) {
-    if (param_3 != 5) {
+  if (componentIndex != 4) {
+    if (componentIndex != 5) {
       return 0;
     }
-    *param_4 = 1;
+    *outValue = 1;
     return 1;
   }
-  *param_4 = 0;
+  *outValue = 0;
   return 1;
 }
 

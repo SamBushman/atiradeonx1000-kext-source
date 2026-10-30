@@ -1946,7 +1946,7 @@ int DominatorTree__computeDominanceFrontiers(domInfo)
         successor = *(int *)(loopCounter + *(int *)(*(int *)(block + 0xd0) + 8));
         if ((successor != 0) && (blockDfsNumber != *(int *)(*(int *)(successor + 0xe4) * 4 + *(int *)(domInfo + 8))))
         {
-          FUN_000e910c(block,successor);
+          Block__addDominanceFrontier(block,successor);
         }
         loopCounter = loopCounter + 4;
       }
@@ -1958,7 +1958,7 @@ int DominatorTree__computeDominanceFrontiers(domInfo)
             childFrontierIndex = childFrontierIndex + 1) {
           childFrontierBlock = *(int *)(loopCounterB + *(int *)(childFrontierBlock + 8));
           if (blockDfsNumber != *(int *)(*(int *)(childFrontierBlock + 0xe4) * 4 + *(int *)(domInfo + 8))) {
-            FUN_000e910c(block,childFrontierBlock);
+            Block__addDominanceFrontier(block,childFrontierBlock);
           }
           loopCounterB = loopCounterB + 4;
         }
@@ -2329,7 +2329,7 @@ int DominatorTree__compute(domInfo)
       vertexBlock = *(int *)(vertexBlock + vertexArray);
       *(int *)(vertexBlock + 0xf0) = idomBlock;
       if (idomBlock != 0) {
-        FUN_000e8ce4(idomBlock,vertexBlock);
+        Block__addDominatedChild(idomBlock,vertexBlock);
       }
       loopIndex = loopIndex + 1;
       if ((uint)domInfo[7] < loopIndex) break;
@@ -2546,27 +2546,27 @@ int FUN_000f8c88(param_1)
   return *(undefined4 *)(&DAT_001aa9e4 + iVar1 * 4);
 }
 
-/* FUN_000f8ccc @ 0xf8ccc (132 bytes) */
-int FUN_000f8ccc(param_1, param_2, param_3)
-  int param_1;
-  int param_2;
-  int param_3;
+/* OpcodeTemplate__lookup @ 0xf8ccc (132 bytes) */
+int OpcodeTemplate__lookup(ilOpcode, compiler, variant)
+  int ilOpcode;
+  int compiler;
+  int variant;
 {
-  int iVar1;
-  undefined *puVar2;
+  int hwTemplateQuery;
+  undefined *templateTable;
   
-  iVar1 = (**(code **)(**(int **)(param_2 + 0x30c) + 0xdc))
-                    (*(int **)(param_2 + 0x30c),param_2,param_3);
-  if (iVar1 == 0) {
-    puVar2 = (PTR_DAT_001e9f7c)[param_1 * 3];
+  hwTemplateQuery = (**(code **)(**(int **)(compiler + 0x30c) + 0xdc))
+                    (*(int **)(compiler + 0x30c),compiler,variant);
+  if (hwTemplateQuery == 0) {
+    templateTable = (PTR_DAT_001e9f7c)[ilOpcode * 3];
   }
-  else if (param_3 == 0) {
-    puVar2 = (PTR_DAT_001e9f80)[param_1 * 3];
+  else if (variant == 0) {
+    templateTable = (PTR_DAT_001e9f80)[ilOpcode * 3];
   }
   else {
-    puVar2 = (PTR_DAT_001e9f78)[param_1 * 3];
+    templateTable = (PTR_DAT_001e9f78)[ilOpcode * 3];
   }
-  return puVar2;
+  return templateTable;
 }
 
 /* IRInst__applyDescriptorSelects @ 0xf8d50 (568 bytes) */
@@ -8228,7 +8228,7 @@ code_r0x001022b4:
       break;
     case 0x4e:
       opcodeTemplateTable = (uint ******)
-                     ((int (*)())FUN_000f8ccc)((uint)*tokenWords >> 0x10 & 7,*(undefined4 *)(program + 8),0);
+                     ((int (*)())OpcodeTemplate__lookup)((uint)*tokenWords >> 0x10 & 7,*(undefined4 *)(program + 8),0);
       goto code_r0x00101f74;
     case 0x4f:
       templateCursor = (int *)((int)templateCursor + 1);
@@ -8266,7 +8266,7 @@ code_r0x001022b4:
       break;
     case 0x53:
       opcodeTemplateTable = (uint ******)
-                     ((int (*)())FUN_000f8ccc)((uint)*tokenWords >> 0x10 & 7,*(undefined4 *)(program + 8),1);
+                     ((int (*)())OpcodeTemplate__lookup)((uint)*tokenWords >> 0x10 & 7,*(undefined4 *)(program + 8),1);
 code_r0x00101f74:
       if (opcodeTemplateTable != (uint ******)0x0) goto switchD_00102044_default;
       goto switchD_0010061c_caseD_1;
