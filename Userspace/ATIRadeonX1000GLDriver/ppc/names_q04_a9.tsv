@@ -1,0 +1,64 @@
+local	ilRewriteForTextureState	param_2	compileOutput	INFERRED	compile output record (flags +0x1e2d.., outputs +0x1e8c..); its +0x1f1c word is the constant base
+local	ilRewriteForTextureState	param_5	scHandleSlot	INFERRED	pointer to the compiler handle slot (ctx+0x186c); word 1 is the byte size of the program scratch buffer
+local	ilRewriteForTextureState	piVar2	fieldCursorB	INFERRED	second cursor over the 16-entry scratch array
+local	ilRewriteForTextureState	local_88	ilUsageStatePtr	INFERRED	pointer to ilUsageState (&local_c08c) passed to the IL helpers
+local	ilRewriteForTextureState	local_84	operandPtrLocal	INFERRED	pointer to the first operand pair on the stack
+local	ilRewriteForTextureState	local_80	scratchArrayPtr	INFERRED	pointer to local_9e54 (16 scratch words)
+local	ilRewriteForTextureState	local_70	operandPtrExt	INFERRED	pointer to the second operand extension on the stack
+local	ilRewriteForTextureState	local_c198	streamHeaderWords	INFERRED	4-word header block pointed to by scBlockPtrA
+local	ilRewriteForTextureState	local_c188	initRegsB	INFERRED	4 words of initial register state copied to local_c060
+local	ilRewriteForTextureState	local_c168	initRegsA	INFERRED	4 words of initial register state copied to local_c080
+local	ilRewriteForTextureState	local_c16c	initRegsAWord1Alias	INFERRED	scalar overlay of initRegsA word 1
+local	ilRewriteForTextureState	local_c170	initRegsAWord2Alias	INFERRED	scalar overlay of initRegsA word 2
+local	ilRewriteForTextureState	local_c174	initRegsAWord3Alias	INFERRED	scalar overlay of initRegsA word 3
+local	ilRewriteForTextureState	local_c178	initRegsAWord4	INFERRED	fifth word of the register state copied to local_c050
+local	ilRewriteForTextureState	local_c158	initRegsCWord0	INFERRED	word copied to local_c070
+local	ilRewriteForTextureState	local_c154	initRegsCWord1	INFERRED	word copied to local_c06c
+local	ilRewriteForTextureState	local_c150	initRegsCWord2	INFERRED	word copied to local_c068
+local	ilRewriteForTextureState	local_c14c	initRegsCWord3	INFERRED	word copied to local_c064
+local	ilRewriteForTextureState	auStack_c148	scCallbackBlock	INFERRED	0xbc-byte block passed to FUN_000cd1b0 (scSetCallbackTables); the macros below are its fields
+local	ilRewriteForTextureState	local_c100	scBlockHeaderPtr	INFERRED	scCallbackBlock+0x48: pointer to streamHeaderWords
+local	ilRewriteForTextureState	local_c0fc	scBlockTokens	INFERRED	scCallbackBlock+0x4c: token array pointer
+local	ilRewriteForTextureState	local_c0f8	scBlockSizeBytes	INFERRED	scCallbackBlock+0x50: token array size in bytes
+local	ilRewriteForTextureState	local_c0f0	scBlockRegsA	INFERRED	scCallbackBlock+0x58: 8 words of register state (first copy)
+local	ilRewriteForTextureState	local_c0d0	scBlockRegsB	INFERRED	scCallbackBlock+0x78: 8 words of register state (second copy)
+local	ilRewriteForTextureState	local_c090	scBlockOutBuffer	INFERRED	scCallbackBlock+0xb8: output buffer
+local	ilRewriteForTextureState	local_c088	outputKindMask	INFERRED	0xffff initial output kind mask
+local	ilRewriteForTextureState	local_c080	initRegsDst	INFERRED	4 words of register state followed by the words below, copied into scBlockRegsA
+local	ilRewriteForTextureState	local_c070	initRegsDstWord4	INFERRED	fifth word of initRegsDst
+local	ilRewriteForTextureState	local_c06c	initRegsDstWord5	INFERRED	sixth word of initRegsDst
+local	ilRewriteForTextureState	local_c068	initRegsDstWord6	INFERRED	seventh word of initRegsDst
+local	ilRewriteForTextureState	local_c064	initRegsDstWord7	INFERRED	eighth word of initRegsDst
+local	ilRewriteForTextureState	local_c060	initRegsDstB	INFERRED	4 words of register state copied to scBlockRegsB
+local	ilRewriteForTextureState	local_c050	initRegsDstBWord4	INFERRED	fifth word of initRegsDstB
+local	ilRewriteForTextureState	local_c04c	initRegsDstBWord5	INFERRED	sixth word of initRegsDstB
+local	ilRewriteForTextureState	local_c048	initRegsDstBWord6	INFERRED	seventh word of initRegsDstB
+local	ilRewriteForTextureState	local_c044	initRegsDstBWord7	INFERRED	eighth word of initRegsDstB
+local	ilRewriteForTextureState	local_c03c	usageStateCopy	INFERRED	copy of ilUsageState taken before the word count is computed
+local	ilRewriteForTextureState	local_bfd4	unitInputWord	INFERRED	word stored at compileRecord word +0x10e0
+local	ilRewriteForTextureState	local_bf54	depthTextureCompare	INFERRED	per-unit depth texture compare mode field (+0x5c)
+local	ilRewriteForTextureState	local_bf04	constBankDirty	INFERRED	6-word bank dirty / valid masks of the vector constants
+local	ilRewriteForTextureState	auStack_beec	constBankValues	INFERRED	4104-byte bank of 4-float constants (first)
+local	ilRewriteForTextureState	local_aee4	constBankDirtyB	INFERRED	6-word bank dirty masks of the second constant bank
+local	ilRewriteForTextureState	auStack_aecc	constBankValuesB	INFERRED	4104-byte bank of constant records (second)
+local	ilRewriteForTextureState	local_9e88	neverSetFlagA	INFERRED	zero-initialised flag that is only read by the sizing arithmetic (never set to non-zero in this function)
+local	ilRewriteForTextureState	local_9e80	neverSetFlagB	INFERRED	zero-initialised flag that is only read by the sizing arithmetic (never set to non-zero in this function)
+local	ilRewriteForTextureState	local_9e78	neverSetFlagC	INFERRED	zero-initialised flag that is only read by the sizing arithmetic (never set to non-zero in this function)
+local	ilRewriteForTextureState	local_9e74	neverSetFlagD	INFERRED	zero-initialised flag that is only read by the sizing arithmetic (never set to non-zero in this function)
+local	ilRewriteForTextureState	local_9e70	neverSetFlagE	INFERRED	zero-initialised flag that is only read by the sizing arithmetic (never set to non-zero in this function)
+local	ilRewriteForTextureState	local_9e6c	neverSetFlagF	INFERRED	zero-initialised flag that is only read by the sizing arithmetic (never set to non-zero in this function)
+local	ilRewriteForTextureState	local_9e68	neverSetFlagG	INFERRED	zero-initialised flag that is only read by the sizing arithmetic (never set to non-zero in this function)
+local	ilRewriteForTextureState	local_9e5c	neverSetFlagH	INFERRED	zero-initialised flag that is only read by the sizing arithmetic (never set to non-zero in this function)
+local	ilRewriteForTextureState	local_9e64	usesFlagE64	INFERRED	zero-initialised flag copied to compileOutput+0x1efd
+local	ilRewriteForTextureState	local_9e58	oneWord	INFERRED	constant 1 (read by the sizing arithmetic)
+local	ilRewriteForTextureState	local_9e54	scratchArrayA	INFERRED	16 scratch words, cleared together with local_9e14
+local	ilRewriteForTextureState	local_9e14	scratchArrayB	INFERRED	16 scratch words, cleared together with local_9e54
+local	ilRewriteForTextureState	local_9d80	legacyShadowMode	INFERRED	1 when the engine mode short at caps+0x2e06 is -0x7baf, else 0
+local	ilRewriteForTextureState	local_9d7c	neverSetFlagI	INFERRED	zero flag read by the sizing arithmetic
+local	ilRewriteForTextureState	local_9d70	neverSetFlagJ	INFERRED	zero flag read by the sizing arithmetic
+local	ilRewriteForTextureState	local_9d20	neverSetFlagK	INFERRED	zero flag read by the sizing arithmetic
+local	ilRewriteForTextureState	auStack_9d1c	tokenBuffer	INFERRED	0x9c88-byte buffer cleared before the compile (backing storage of the token stream)
+local	ilRewriteForTextureState	local_9cd4	tokenBufferCapacity	INFERRED	0x40
+local	ilRewriteForTextureState	local_9c84	constantUsage	INFERRED	27 words OR-ed into the constant usage words
+local	ilRewriteForTextureState	auStack_96d0	decodedRecords	INFERRED	37816-byte array of 0x48-byte decoded records copied into compileRecord[3]
+local	ilRewriteForTextureState	iStack_318	spinCount	INFERRED	counter of an empty countdown loop
