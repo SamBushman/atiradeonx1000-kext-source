@@ -476,7 +476,7 @@ int extvsEmitMov(ctx, shader, instRecord)
   int instRecord;
 {
   int instSlot;
-  uint uVar1;
+  uint swizzleWord;
   undefined4 newInstArray;
   int instCount;
   int hwProgram;
@@ -499,9 +499,9 @@ int extvsEmitMov(ctx, shader, instRecord)
   instSlot = instCount * 0x10 + *(int *)(hwProgram + 0x1c);
   extvsEncodeSourceOperand(ctx,shader,instRecord + 4,instSlot,3,0,0);
   extvsEncodeSourceSwizzle(shader,shader + 7,instRecord + 0x20,instSlot + 4,0);
-  uVar1 = *(uint *)(instSlot + 4) & 0xfe001fff | 0x1248000;
-  *(uint *)(instSlot + 0xc) = uVar1;
-  *(uint *)(instSlot + 8) = uVar1;
+  swizzleWord = *(uint *)(instSlot + 4) & 0xfe001fff | 0x1248000;
+  *(uint *)(instSlot + 0xc) = swizzleWord;
+  *(uint *)(instSlot + 8) = swizzleWord;
   return 1;
 }
 
@@ -745,47 +745,49 @@ int extvsEmitWriteMask(ctx, shader, instRecord)
   int *shader;
   int instRecord;
 {
-  uint uVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
+  uint maskBitY;
+  uint maskBitZ;
+  uint oldSlotWord;
+  uint maskBitX;
+  uint swizzleWord;
   undefined4 newInstArray;
-  int iVar6;
-  int iVar7;
+  int hwProgram;
+  int instSlot;
+  int instArray;
   int iVar8;
   
-  iVar6 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
-  iVar8 = *(int *)(iVar6 + 0x18);
+  hwProgram = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
+  iVar8 = *(int *)(hwProgram + 0x18);
   if (0x100 < iVar8 + 1U) {
     *(undefined1 *)(shader + 4) = 0;
-    iVar8 = *(int *)(iVar6 + 0x18);
-    if (*(uint *)(iVar6 + 0x20) < iVar8 + 1U) {
-      newInstArray = (**(code **)(ctx + 0xc))(*(uint *)(iVar6 + 0x20) * 0x10 + 0x100);
+    iVar8 = *(int *)(hwProgram + 0x18);
+    if (*(uint *)(hwProgram + 0x20) < iVar8 + 1U) {
+      newInstArray = (**(code **)(ctx + 0xc))(*(uint *)(hwProgram + 0x20) * 0x10 + 0x100);
       (**(code **)(((unsigned char *)0x00001344) + ctx))
-                (newInstArray,*(undefined4 *)(iVar6 + 0x1c),*(int *)(iVar6 + 0x20) << 4);
-      (**(code **)(ctx + 0x18))(*(undefined4 *)(iVar6 + 0x1c));
-      *(undefined4 *)(iVar6 + 0x1c) = newInstArray;
-      iVar8 = *(int *)(iVar6 + 0x18);
-      *(int *)(iVar6 + 0x20) = *(int *)(iVar6 + 0x20) + 0x10;
+                (newInstArray,*(undefined4 *)(hwProgram + 0x1c),*(int *)(hwProgram + 0x20) << 4);
+      (**(code **)(ctx + 0x18))(*(undefined4 *)(hwProgram + 0x1c));
+      *(undefined4 *)(hwProgram + 0x1c) = newInstArray;
+      iVar8 = *(int *)(hwProgram + 0x18);
+      *(int *)(hwProgram + 0x20) = *(int *)(hwProgram + 0x20) + 0x10;
     }
   }
-  iVar7 = *(int *)(iVar6 + 0x1c);
+  instArray = *(int *)(hwProgram + 0x1c);
   iVar8 = iVar8 * 0x10;
-  iVar6 = iVar8 + iVar7;
-  extvsEncodeSourceOperand(ctx,shader,instRecord + 4,iVar6,3,0,0);
-  uVar3 = *(uint *)(iVar8 + iVar7);
-  uVar4 = (*(uint *)(instRecord + 0xc) & 1) << 0x14;
-  *(uint *)(iVar8 + iVar7) = uVar4 | uVar3 & 0xffefffff;
-  uVar1 = (*(uint *)(instRecord + 0x10) & 1) << 0x15;
-  *(uint *)(iVar8 + iVar7) = uVar1 | uVar4 | uVar3 & 0xffcfffff;
-  uVar2 = (*(uint *)(instRecord + 0x14) & 1) << 0x16;
-  *(uint *)(iVar8 + iVar7) = uVar2 | uVar1 | uVar4 | uVar3 & 0xff8fffff;
-  *(uint *)(iVar8 + iVar7) =
-       (*(uint *)(instRecord + 0x18) & 1) << 0x17 | uVar2 | uVar1 | uVar4 | uVar3 & 0xff0fffff;
-  extvsEncodeSourceSwizzle(shader,shader + 7,instRecord + 0x20,iVar6 + 4,0);
-  uVar4 = *(uint *)(iVar6 + 4) & 0xfe001fff | 0x1248000;
-  *(uint *)(iVar6 + 0xc) = uVar4;
-  *(uint *)(iVar6 + 8) = uVar4;
+  instSlot = iVar8 + instArray;
+  extvsEncodeSourceOperand(ctx,shader,instRecord + 4,instSlot,3,0,0);
+  oldSlotWord = *(uint *)(iVar8 + instArray);
+  maskBitX = (*(uint *)(instRecord + 0xc) & 1) << 0x14;
+  *(uint *)(iVar8 + instArray) = maskBitX | oldSlotWord & 0xffefffff;
+  maskBitY = (*(uint *)(instRecord + 0x10) & 1) << 0x15;
+  *(uint *)(iVar8 + instArray) = maskBitY | maskBitX | oldSlotWord & 0xffcfffff;
+  maskBitZ = (*(uint *)(instRecord + 0x14) & 1) << 0x16;
+  *(uint *)(iVar8 + instArray) = maskBitZ | maskBitY | maskBitX | oldSlotWord & 0xff8fffff;
+  *(uint *)(iVar8 + instArray) =
+       (*(uint *)(instRecord + 0x18) & 1) << 0x17 | maskBitZ | maskBitY | maskBitX | oldSlotWord & 0xff0fffff;
+  extvsEncodeSourceSwizzle(shader,shader + 7,instRecord + 0x20,instSlot + 4,0);
+  swizzleWord = *(uint *)(instSlot + 4) & 0xfe001fff | 0x1248000;
+  *(uint *)(instSlot + 0xc) = swizzleWord;
+  *(uint *)(instSlot + 8) = swizzleWord;
   return 1;
 }
 
@@ -797,8 +799,9 @@ int extvsEmitOp879c(ctx, shader, instRecord)
 {
   int instSlot;
   int extvsOperandDataTypeResult;
-  uint uVar1;
+  uint swizzleWord;
   undefined4 uVar2;
+  undefined4 newInstArray;
   int iVar3;
   int hwProgram;
   int dstOperand;
@@ -809,11 +812,11 @@ int extvsEmitOp879c(ctx, shader, instRecord)
     *(undefined1 *)(shader + 4) = 0;
     iVar3 = *(int *)(hwProgram + 0x18);
     if (*(uint *)(hwProgram + 0x20) < iVar3 + 1U) {
-      uVar2 = (**(code **)(ctx + 0xc))(*(uint *)(hwProgram + 0x20) * 0x10 + 0x100);
+      newInstArray = (**(code **)(ctx + 0xc))(*(uint *)(hwProgram + 0x20) * 0x10 + 0x100);
       (**(code **)(((unsigned char *)0x00001344) + ctx))
-                (uVar2,*(undefined4 *)(hwProgram + 0x1c),*(int *)(hwProgram + 0x20) << 4);
+                (newInstArray,*(undefined4 *)(hwProgram + 0x1c),*(int *)(hwProgram + 0x20) << 4);
       (**(code **)(ctx + 0x18))(*(undefined4 *)(hwProgram + 0x1c));
-      *(undefined4 *)(hwProgram + 0x1c) = uVar2;
+      *(undefined4 *)(hwProgram + 0x1c) = newInstArray;
       iVar3 = *(int *)(hwProgram + 0x18);
       *(int *)(hwProgram + 0x20) = *(int *)(hwProgram + 0x20) + 0x10;
     }
@@ -831,9 +834,9 @@ int extvsEmitOp879c(ctx, shader, instRecord)
     }
     extvsEncodeSourceSwizzle(shader,shader + 7,instRecord + 0x20,instSlot + 4,0);
     uVar2 = 1;
-    uVar1 = *(uint *)(instSlot + 4) & 0xfe001fff | 0x1248000;
-    *(uint *)(instSlot + 0xc) = uVar1;
-    *(uint *)(instSlot + 8) = uVar1;
+    swizzleWord = *(uint *)(instSlot + 4) & 0xfe001fff | 0x1248000;
+    *(uint *)(instSlot + 0xc) = swizzleWord;
+    *(uint *)(instSlot + 8) = swizzleWord;
   }
   else {
 LAB_0005d600:
@@ -850,75 +853,77 @@ int extvsEmitOp879d(ctx, shader, instRecord)
 {
   int instSlot;
   int extvsOperandDataTypeResult;
-  undefined4 uVar1;
-  int iVar2;
+  undefined4 newInstArray;
+  undefined4 result;
+  int instCount;
   int src0Operand;
   int *symbolList;
   int hwProgram;
-  uint uVar6;
+  uint componentSelect;
+  uint swizzleWord;
   
   hwProgram = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
-  iVar2 = *(int *)(hwProgram + 0x18);
-  if (0x100 < iVar2 + 1U) {
+  instCount = *(int *)(hwProgram + 0x18);
+  if (0x100 < instCount + 1U) {
     *(undefined1 *)(shader + 4) = 0;
-    iVar2 = *(int *)(hwProgram + 0x18);
-    if (*(uint *)(hwProgram + 0x20) < iVar2 + 1U) {
-      uVar1 = (**(code **)(ctx + 0xc))(*(uint *)(hwProgram + 0x20) * 0x10 + 0x100);
+    instCount = *(int *)(hwProgram + 0x18);
+    if (*(uint *)(hwProgram + 0x20) < instCount + 1U) {
+      newInstArray = (**(code **)(ctx + 0xc))(*(uint *)(hwProgram + 0x20) * 0x10 + 0x100);
       (**(code **)(((unsigned char *)0x00001344) + ctx))
-                (uVar1,*(undefined4 *)(hwProgram + 0x1c),*(int *)(hwProgram + 0x20) << 4);
+                (newInstArray,*(undefined4 *)(hwProgram + 0x1c),*(int *)(hwProgram + 0x20) << 4);
       (**(code **)(ctx + 0x18))(*(undefined4 *)(hwProgram + 0x1c));
-      *(undefined4 *)(hwProgram + 0x1c) = uVar1;
-      iVar2 = *(int *)(hwProgram + 0x18);
+      *(undefined4 *)(hwProgram + 0x1c) = newInstArray;
+      instCount = *(int *)(hwProgram + 0x18);
       *(int *)(hwProgram + 0x20) = *(int *)(hwProgram + 0x20) + 0x10;
     }
   }
   symbolList = shader + 7;
   src0Operand = instRecord + 0x20;
-  instSlot = iVar2 * 0x10 + *(int *)(hwProgram + 0x1c);
+  instSlot = instCount * 0x10 + *(int *)(hwProgram + 0x1c);
   extvsOperandDataTypeResult = extvsOperandDataType(symbolList,src0Operand);
-  uVar6 = *(uint *)(instRecord + 0x40);
-  if (uVar6 < 4) {
+  componentSelect = *(uint *)(instRecord + 0x40);
+  if (componentSelect < 4) {
     extvsEncodeSourceOperand(ctx,shader,instRecord + 4,instSlot,3,0,0);
     if (extvsOperandDataTypeResult == 0x87bf) {
       extvsEncodeSourceSwizzle(shader,symbolList,src0Operand,instSlot + 4,0);
-      if (uVar6 == 1) {
-        uVar6 = *(uint *)(instSlot + 4) >> 0x10 & 7;
-        uVar6 = uVar6 << 0x16 | uVar6 << 0x13 | uVar6 << 0xd | *(uint *)(instSlot + 4) & 0xfe071fff;
-        *(uint *)(instSlot + 4) = uVar6;
+      if (componentSelect == 1) {
+        swizzleWord = *(uint *)(instSlot + 4) >> 0x10 & 7;
+        swizzleWord = swizzleWord << 0x16 | swizzleWord << 0x13 | swizzleWord << 0xd | *(uint *)(instSlot + 4) & 0xfe071fff;
+        *(uint *)(instSlot + 4) = swizzleWord;
       }
-      else if (uVar6 == 0) {
-        uVar6 = *(uint *)(instSlot + 4) >> 0xd & 7;
-        uVar6 = uVar6 << 0x16 | uVar6 << 0x13 | uVar6 << 0x10 | *(uint *)(instSlot + 4) & 0xfe00ffff;
-        *(uint *)(instSlot + 4) = uVar6;
+      else if (componentSelect == 0) {
+        swizzleWord = *(uint *)(instSlot + 4) >> 0xd & 7;
+        swizzleWord = swizzleWord << 0x16 | swizzleWord << 0x13 | swizzleWord << 0x10 | *(uint *)(instSlot + 4) & 0xfe00ffff;
+        *(uint *)(instSlot + 4) = swizzleWord;
       }
-      else if (uVar6 == 2) {
-        uVar6 = *(uint *)(instSlot + 4) >> 0x13 & 7;
-        uVar6 = uVar6 << 0x16 | uVar6 << 0x10 | uVar6 << 0xd | *(uint *)(instSlot + 4) & 0xfe381fff;
-        *(uint *)(instSlot + 4) = uVar6;
+      else if (componentSelect == 2) {
+        swizzleWord = *(uint *)(instSlot + 4) >> 0x13 & 7;
+        swizzleWord = swizzleWord << 0x16 | swizzleWord << 0x10 | swizzleWord << 0xd | *(uint *)(instSlot + 4) & 0xfe381fff;
+        *(uint *)(instSlot + 4) = swizzleWord;
       }
       else {
-        if (uVar6 != 3) goto LAB_0005d81c;
-        uVar6 = *(uint *)(instSlot + 4) >> 0x16 & 7;
-        uVar6 = uVar6 << 0x13 | uVar6 << 0x10 | uVar6 << 0xd | *(uint *)(instSlot + 4) & 0xffc01fff;
-        *(uint *)(instSlot + 4) = uVar6;
+        if (componentSelect != 3) goto LAB_0005d81c;
+        swizzleWord = *(uint *)(instSlot + 4) >> 0x16 & 7;
+        swizzleWord = swizzleWord << 0x13 | swizzleWord << 0x10 | swizzleWord << 0xd | *(uint *)(instSlot + 4) & 0xffc01fff;
+        *(uint *)(instSlot + 4) = swizzleWord;
       }
     }
     else {
       if (extvsOperandDataTypeResult != 0x87c0) goto LAB_0005d850;
-      extvsEncodeSourceSwizzle(shader,symbolList,src0Operand,instSlot + 4,uVar6);
+      extvsEncodeSourceSwizzle(shader,symbolList,src0Operand,instSlot + 4,componentSelect);
 LAB_0005d81c:
-      uVar6 = *(uint *)(instSlot + 4);
+      swizzleWord = *(uint *)(instSlot + 4);
     }
-    uVar1 = 1;
-    uVar6 = uVar6 & 0xfe001fff | 0x1248000;
-    *(uint *)(instSlot + 0xc) = uVar6;
-    *(uint *)(instSlot + 8) = uVar6;
+    result = 1;
+    swizzleWord = swizzleWord & 0xfe001fff | 0x1248000;
+    *(uint *)(instSlot + 0xc) = swizzleWord;
+    *(uint *)(instSlot + 8) = swizzleWord;
   }
   else {
 LAB_0005d850:
-    uVar1 = 0xffffffff;
+    result = 0xffffffff;
   }
-  return uVar1;
+  return result;
 }
 
 /* extvsEmitLit @ 0x5d870 (336 bytes) */
@@ -1382,22 +1387,22 @@ int popFirstNonNull32(pointerArray)
   int pointerArray;
 {
   uint position;
-  int iVar2;
-  undefined4 *puVar3;
+  int entriesLeft;
+  undefined4 *shiftCursor;
   int entry;
-  uint uVar5;
+  uint nextPosition;
   
   position = 0;
   while( true ) {
     entry = *(int *)(pointerArray + position * 4);
-    if ((entry != 0) && (uVar5 = position + 1, uVar5 < 0x20)) {
-      iVar2 = 0x20 - uVar5;
-      puVar3 = (undefined4 *)(pointerArray + uVar5 * 4);
+    if ((entry != 0) && (nextPosition = position + 1, nextPosition < 0x20)) {
+      entriesLeft = 0x20 - nextPosition;
+      shiftCursor = (undefined4 *)(pointerArray + nextPosition * 4);
       do {
-        puVar3[-1] = *puVar3;
-        puVar3 = puVar3 + 1;
-        iVar2 = iVar2 + -1;
-      } while (iVar2 != 0);
+        shiftCursor[-1] = *shiftCursor;
+        shiftCursor = shiftCursor + 1;
+        entriesLeft = entriesLeft + -1;
+      } while (entriesLeft != 0);
     }
     position = position + 1;
     if (0x1f < position) break;
@@ -1416,40 +1421,58 @@ int extvsAssignVertexInputs(ctx, shader)
   uint instIndex;
   int scalarVariantCount;
   int matrixVariantCount;
-  bool bVar1;
-  bool bVar2;
-  undefined4 uVar3;
+  bool noVectorsLeft;
+  bool moreUnits;
+  undefined4 hwInputCode;
+  undefined4 newSlotArray;
   int iVar4;
-  int iVar5;
-  undefined4 *puVar6;
+  int slotAddr3;
+  int slotNumber;
+  int instrByteOffset;
+  int matrixRow;
+  int slotAddr;
+  int scalarRecord;
+  int boundCandidate;
+  int inputIndex;
+  int symbolDataType;
+  undefined4 *variantRecord2;
   int iVar7;
-  uint uVar8;
-  int iVar9;
+  int variantIndex;
+  int slotByteOffset;
+  int scanOffset;
+  uint inputMask;
+  int slotByteOffset2;
   int vectorVariantCount;
   int programState;
-  undefined4 *puVar12;
-  uint uVar13;
-  uint uVar14;
-  int iVar15;
+  undefined4 *hwInputCursor;
+  undefined4 *variantRecord3;
+  uint unitIndex;
+  uint nextSlot;
+  uint nextInputSlot;
+  int clearCountdown;
   int iVar16;
+  int variantRecord;
+  int slotByteOffset3;
+  int slotAddr2;
+  int scanCountdown;
   int iVar17;
   int boundVariants [32];
   int scalarVariants [32];
   int vectorVariants [32];
   int matrixVariants [34];
   
-  iVar7 = 0;
-  iVar15 = 0x20;
+  scanOffset = 0;
+  clearCountdown = 0x20;
   programState = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
   *(undefined4 *)(programState + 0x234) = 1;
   do {
-    *(undefined4 *)((int)boundVariants + iVar7) = 0;
-    *(undefined4 *)(iVar7 + (int)scalarVariants) = 0;
-    *(undefined4 *)(iVar7 + (int)vectorVariants) = 0;
-    *(undefined4 *)(iVar7 + (int)matrixVariants) = 0;
-    iVar7 = iVar7 + 4;
-    iVar15 = iVar15 + -1;
-  } while (iVar15 != 0);
+    *(undefined4 *)((int)boundVariants + scanOffset) = 0;
+    *(undefined4 *)(scanOffset + (int)scalarVariants) = 0;
+    *(undefined4 *)(scanOffset + (int)vectorVariants) = 0;
+    *(undefined4 *)(scanOffset + (int)matrixVariants) = 0;
+    scanOffset = scanOffset + 4;
+    clearCountdown = clearCountdown + -1;
+  } while (clearCountdown != 0);
   if (shader[5] == 0) {
     scalarVariantCount = 0;
     vectorVariantCount = 0;
@@ -1462,11 +1485,11 @@ int extvsAssignVertexInputs(ctx, shader)
     vectorVariantCount = 0;
     matrixVariantCount = 0;
     do {
-      iVar5 = instIndex * 0x74;
+      instrByteOffset = instIndex * 0x74;
       iVar17 = shader[6];
       iVar16 = iVar7;
-      if (((*(int *)(iVar5 + iVar17 + 0x20) == 2) &&
-          (iVar4 = *(int *)(iVar5 + iVar17 + 0x24) * 0x54 + shader[8],
+      if (((*(int *)(instrByteOffset + iVar17 + 0x20) == 2) &&
+          (iVar4 = *(int *)(instrByteOffset + iVar17 + 0x24) * 0x54 + shader[8],
           *(int *)(iVar4 + 0x28) == 0x87c1)) && (*(char *)(iVar4 + 0x3d) == '\0')) {
         if ((*(char *)(iVar4 + 0x44) == '\0') || (*(int *)(iVar4 + 0x48) == 0x12)) {
           iVar7 = *(int *)(iVar4 + 0x24);
@@ -1552,8 +1575,8 @@ int extvsAssignVertexInputs(ctx, shader)
         shader[0x16] = shader[0x16] + 1;
       }
       iVar4 = iVar16;
-      if (((*(int *)(iVar5 + iVar17 + 0x3c) == 2) &&
-          (iVar7 = *(int *)(iVar5 + iVar17 + 0x40) * 0x54 + shader[8],
+      if (((*(int *)(instrByteOffset + iVar17 + 0x3c) == 2) &&
+          (iVar7 = *(int *)(instrByteOffset + iVar17 + 0x40) * 0x54 + shader[8],
           *(int *)(iVar7 + 0x28) == 0x87c1)) && (*(char *)(iVar7 + 0x3d) == '\0')) {
         if ((*(char *)(iVar7 + 0x44) == '\0') || (*(int *)(iVar7 + 0x48) == 0x12)) {
           iVar16 = *(int *)(iVar7 + 0x24);
@@ -1639,20 +1662,20 @@ int extvsAssignVertexInputs(ctx, shader)
         shader[0x16] = shader[0x16] + 1;
       }
       iVar7 = iVar4;
-      if (((*(int *)(iVar5 + iVar17 + 0x58) == 2) &&
-          (iVar16 = *(int *)(iVar5 + iVar17 + 0x5c) * 0x54 + shader[8],
+      if (((*(int *)(instrByteOffset + iVar17 + 0x58) == 2) &&
+          (iVar16 = *(int *)(instrByteOffset + iVar17 + 0x5c) * 0x54 + shader[8],
           *(int *)(iVar16 + 0x28) == 0x87c1)) && (*(char *)(iVar16 + 0x3d) == '\0')) {
         if ((*(char *)(iVar16 + 0x44) == '\0') || (*(int *)(iVar16 + 0x48) == 0x12)) {
-          iVar5 = *(int *)(iVar16 + 0x24);
-          if (iVar5 == 0x87bf) {
+          symbolDataType = *(int *)(iVar16 + 0x24);
+          if (symbolDataType == 0x87bf) {
             vectorVariants[vectorVariantCount] = iVar16;
             vectorVariantCount = vectorVariantCount + 1;
           }
-          else if (iVar5 == 0x87c0) {
+          else if (symbolDataType == 0x87c0) {
             matrixVariants[matrixVariantCount] = iVar16;
             matrixVariantCount = matrixVariantCount + 1;
           }
-          else if (iVar5 == 0x87be) {
+          else if (symbolDataType == 0x87be) {
             scalarVariants[scalarVariantCount] = iVar16;
             scalarVariantCount = scalarVariantCount + 1;
           }
@@ -1669,9 +1692,9 @@ int extvsAssignVertexInputs(ctx, shader)
             shader[0xc] = shader[0xc] | 8;
             break;
           case 2:
-            iVar5 = *(int *)(iVar16 + 0x4c);
-            *(undefined1 *)(iVar5 + programState + 0x2e) = 1;
-            *(undefined1 *)((int)shader + iVar5 + 0x34) = 1;
+            inputIndex = *(int *)(iVar16 + 0x4c);
+            *(undefined1 *)(inputIndex + programState + 0x2e) = 1;
+            *(undefined1 *)((int)shader + inputIndex + 0x34) = 1;
             shader[0xc] = shader[0xc] | 4;
             break;
           case 3:
@@ -1728,164 +1751,164 @@ int extvsAssignVertexInputs(ctx, shader)
     } while (instIndex < (uint)shader[5]);
   }
   if (*(char *)(programState + 0x2c) != '\0') {
-    iVar7 = 0;
-    iVar16 = 0x20;
+    scanOffset = 0;
+    scanCountdown = 0x20;
     do {
-      iVar5 = *(int *)((int)boundVariants + iVar7);
-      if (((iVar5 == 0) || (*(int *)(iVar5 + 0x48) != 0)) || (*(int *)(iVar5 + 0x4c) != 0)) {
-        iVar5 = 0;
+      boundCandidate = *(int *)((int)boundVariants + scanOffset);
+      if (((boundCandidate == 0) || (*(int *)(boundCandidate + 0x48) != 0)) || (*(int *)(boundCandidate + 0x4c) != 0)) {
+        boundCandidate = 0;
       }
-      iVar16 = iVar16 + -1;
-    } while ((iVar16 != 0) && (iVar7 = iVar7 + 4, iVar5 == 0));
-    *(undefined4 *)(iVar5 + 4) = 0;
+      scanCountdown = scanCountdown + -1;
+    } while ((scanCountdown != 0) && (scanOffset = scanOffset + 4, boundCandidate == 0));
+    *(undefined4 *)(boundCandidate + 4) = 0;
     *(undefined4 *)(programState + 0x198) = 0;
     *(undefined1 *)(*(int *)(programState + 0x24) + 0x10) = 1;
   }
-  bVar1 = vectorVariantCount == 0;
-  uVar14 = 2;
-  uVar13 = 0;
+  noVectorsLeft = vectorVariantCount == 0;
+  nextInputSlot = 2;
+  unitIndex = 0;
   DAT_001dba98 = 0xe;
-  iVar7 = 0x50;
-  puVar12 = &DAT_001dba44;
+  slotByteOffset = 0x50;
+  hwInputCursor = &DAT_001dba44;
   do {
-    if (!bVar1) {
+    if (!noVectorsLeft) {
       vectorVariantCount = vectorVariantCount + -1;
-      puVar6 = (undefined4 *)((int (*)())popFirstNonNull32)(vectorVariants);
-      uVar3 = *puVar12;
-      bVar1 = vectorVariantCount == 0;
-      puVar6[1] = uVar14;
-      puVar12 = puVar12 + 1;
-      uVar14 = uVar14 + 1;
-      *puVar6 = uVar3;
-      iVar16 = iVar7 + *(int *)(programState + 0x24);
-      iVar7 = iVar7 + 0x28;
-      *(undefined1 *)(iVar16 + 0x10) = 1;
-      *(uint *)(programState + 0x234) = 4 << (uVar13 & 0x3f) | *(uint *)(programState + 0x234);
+      variantRecord2 = (undefined4 *)((int (*)())popFirstNonNull32)(vectorVariants);
+      hwInputCode = *hwInputCursor;
+      noVectorsLeft = vectorVariantCount == 0;
+      variantRecord2[1] = nextInputSlot;
+      hwInputCursor = hwInputCursor + 1;
+      nextInputSlot = nextInputSlot + 1;
+      *variantRecord2 = hwInputCode;
+      slotAddr2 = slotByteOffset + *(int *)(programState + 0x24);
+      slotByteOffset = slotByteOffset + 0x28;
+      *(undefined1 *)(slotAddr2 + 0x10) = 1;
+      *(uint *)(programState + 0x234) = 4 << (unitIndex & 0x3f) | *(uint *)(programState + 0x234);
     }
-    bVar2 = uVar13 != 7;
-    uVar13 = uVar13 + 1;
-  } while (bVar2);
-  iVar7 = uVar14 * 0x28;
-  uVar13 = 0;
-  puVar12 = (undefined4 *)(uVar14 * 4 + 0x1dba3c);
+    moreUnits = unitIndex != 7;
+    unitIndex = unitIndex + 1;
+  } while (moreUnits);
+  slotByteOffset = nextInputSlot * 0x28;
+  unitIndex = 0;
+  hwInputCursor = (undefined4 *)(nextInputSlot * 4 + 0x1dba3c);
   do {
-    if (!bVar1) {
+    if (!noVectorsLeft) {
       vectorVariantCount = vectorVariantCount + -1;
-      puVar6 = (undefined4 *)((int (*)())popFirstNonNull32)(vectorVariants);
-      uVar3 = *puVar12;
-      bVar1 = vectorVariantCount == 0;
-      puVar6[1] = uVar14;
-      puVar12 = puVar12 + 1;
-      uVar14 = uVar14 + 1;
-      *puVar6 = uVar3;
-      iVar16 = iVar7 + *(int *)(programState + 0x24);
-      iVar7 = iVar7 + 0x28;
-      *(undefined1 *)(iVar16 + 0x10) = 1;
-      *(uint *)(programState + 0x234) = 0x400 << (uVar13 & 0x3f) | *(uint *)(programState + 0x234);
+      variantRecord2 = (undefined4 *)((int (*)())popFirstNonNull32)(vectorVariants);
+      hwInputCode = *hwInputCursor;
+      noVectorsLeft = vectorVariantCount == 0;
+      variantRecord2[1] = nextInputSlot;
+      hwInputCursor = hwInputCursor + 1;
+      nextInputSlot = nextInputSlot + 1;
+      *variantRecord2 = hwInputCode;
+      slotAddr2 = slotByteOffset + *(int *)(programState + 0x24);
+      slotByteOffset = slotByteOffset + 0x28;
+      *(undefined1 *)(slotAddr2 + 0x10) = 1;
+      *(uint *)(programState + 0x234) = 0x400 << (unitIndex & 0x3f) | *(uint *)(programState + 0x234);
     }
-    bVar2 = uVar13 != 7;
-    uVar13 = uVar13 + 1;
-  } while (bVar2);
-  uVar13 = uVar14;
-  if (*(char *)(uVar14 * 0x28 + *(int *)(programState + 0x24) + 0x10) != '\0') {
-    uVar8 = *(uint *)(programState + 0x234);
-    uVar13 = uVar14 + 1;
-    *(uint *)(programState + 0x234) = uVar8 | 0x40000;
-    if (*(char *)(uVar13 * 0x28 + *(int *)(programState + 0x24) + 0x10) != '\0') {
-      uVar13 = uVar14 + 2;
-      *(uint *)(programState + 0x234) = uVar8 | 0xc0000;
+    moreUnits = unitIndex != 7;
+    unitIndex = unitIndex + 1;
+  } while (moreUnits);
+  nextSlot = nextInputSlot;
+  if (*(char *)(nextInputSlot * 0x28 + *(int *)(programState + 0x24) + 0x10) != '\0') {
+    inputMask = *(uint *)(programState + 0x234);
+    nextSlot = nextInputSlot + 1;
+    *(uint *)(programState + 0x234) = inputMask | 0x40000;
+    if (*(char *)(nextSlot * 0x28 + *(int *)(programState + 0x24) + 0x10) != '\0') {
+      nextSlot = nextInputSlot + 2;
+      *(uint *)(programState + 0x234) = inputMask | 0xc0000;
     }
   }
-  if (!bVar1) {
+  if (!noVectorsLeft) {
     vectorVariantCount = vectorVariantCount + -1;
-    puVar12 = (undefined4 *)((int (*)())popFirstNonNull32)(vectorVariants);
-    iVar7 = uVar13 * 0x28;
-    bVar1 = vectorVariantCount == 0;
-    uVar3 = *(undefined4 *)(uVar13 * 4 + 0x1dba3c);
-    puVar12[1] = uVar13;
-    uVar13 = uVar13 + 1;
-    *puVar12 = uVar3;
-    *(undefined1 *)(iVar7 + *(int *)(programState + 0x24) + 0x10) = 1;
+    variantRecord3 = (undefined4 *)((int (*)())popFirstNonNull32)(vectorVariants);
+    slotByteOffset = nextSlot * 0x28;
+    noVectorsLeft = vectorVariantCount == 0;
+    hwInputCode = *(undefined4 *)(nextSlot * 4 + 0x1dba3c);
+    variantRecord3[1] = nextSlot;
+    nextSlot = nextSlot + 1;
+    *variantRecord3 = hwInputCode;
+    *(undefined1 *)(slotByteOffset + *(int *)(programState + 0x24) + 0x10) = 1;
     *(uint *)(programState + 0x234) = *(uint *)(programState + 0x234) | 0x100000;
   }
-  if (((scalarVariantCount != 0) || (!bVar1)) || (matrixVariantCount != 0)) {
+  if (((scalarVariantCount != 0) || (!noVectorsLeft)) || (matrixVariantCount != 0)) {
     *(undefined1 *)(shader + 4) = 0;
     if (scalarVariantCount != 0) {
-      iVar16 = uVar13 * 0x28;
-      iVar7 = 0;
+      slotByteOffset3 = nextSlot * 0x28;
+      variantIndex = 0;
       do {
-        iVar5 = ((int (*)())popFirstNonNull32)(scalarVariants);
-        if (*(uint *)(programState + 0x28) <= uVar13) {
-          uVar3 = (**(code **)(ctx + 0x10))(*(uint *)(programState + 0x28) + 0x10,0x28);
+        scalarRecord = ((int (*)())popFirstNonNull32)(scalarVariants);
+        if (*(uint *)(programState + 0x28) <= nextSlot) {
+          newSlotArray = (**(code **)(ctx + 0x10))(*(uint *)(programState + 0x28) + 0x10,0x28);
           (**(code **)(((unsigned char *)0x00001344) + ctx))
-                    (uVar3,*(undefined4 *)(programState + 0x24),*(int *)(programState + 0x28) * 0x28);
+                    (newSlotArray,*(undefined4 *)(programState + 0x24),*(int *)(programState + 0x28) * 0x28);
           (**(code **)(ctx + 0x18))(*(undefined4 *)(programState + 0x24));
-          *(undefined4 *)(programState + 0x24) = uVar3;
+          *(undefined4 *)(programState + 0x24) = newSlotArray;
           *(int *)(programState + 0x28) = *(int *)(programState + 0x28) + 0x10;
         }
-        *(uint *)(iVar5 + 4) = uVar13;
-        *(undefined4 *)(iVar5 + 8) = 0;
-        iVar7 = iVar7 + 1;
-        uVar13 = uVar13 + 1;
-        iVar5 = iVar16 + *(int *)(programState + 0x24);
-        iVar16 = iVar16 + 0x28;
-        *(undefined1 *)(iVar5 + 0x10) = 1;
-      } while (scalarVariantCount != iVar7);
+        *(uint *)(scalarRecord + 4) = nextSlot;
+        *(undefined4 *)(scalarRecord + 8) = 0;
+        variantIndex = variantIndex + 1;
+        nextSlot = nextSlot + 1;
+        slotAddr = slotByteOffset3 + *(int *)(programState + 0x24);
+        slotByteOffset3 = slotByteOffset3 + 0x28;
+        *(undefined1 *)(slotAddr + 0x10) = 1;
+      } while (scalarVariantCount != variantIndex);
     }
-    if (!bVar1) {
-      iVar9 = uVar13 * 0x28;
-      iVar7 = 0;
+    if (!noVectorsLeft) {
+      slotByteOffset2 = nextSlot * 0x28;
+      variantIndex = 0;
       do {
-        iVar16 = ((int (*)())popFirstNonNull32)(vectorVariants);
-        if (*(uint *)(programState + 0x28) <= uVar13) {
-          uVar3 = (**(code **)(ctx + 0x10))(*(uint *)(programState + 0x28) + 0x10,0x28);
+        variantRecord = ((int (*)())popFirstNonNull32)(vectorVariants);
+        if (*(uint *)(programState + 0x28) <= nextSlot) {
+          newSlotArray = (**(code **)(ctx + 0x10))(*(uint *)(programState + 0x28) + 0x10,0x28);
           (**(code **)(((unsigned char *)0x00001344) + ctx))
-                    (uVar3,*(undefined4 *)(programState + 0x24),*(int *)(programState + 0x28) * 0x28);
+                    (newSlotArray,*(undefined4 *)(programState + 0x24),*(int *)(programState + 0x28) * 0x28);
           (**(code **)(ctx + 0x18))(*(undefined4 *)(programState + 0x24));
-          *(undefined4 *)(programState + 0x24) = uVar3;
+          *(undefined4 *)(programState + 0x24) = newSlotArray;
           *(int *)(programState + 0x28) = *(int *)(programState + 0x28) + 0x10;
         }
-        *(uint *)(iVar16 + 4) = uVar13;
-        iVar7 = iVar7 + 1;
-        uVar13 = uVar13 + 1;
-        iVar16 = *(int *)(programState + 0x24) + iVar9;
-        iVar9 = iVar9 + 0x28;
-        *(undefined1 *)(iVar16 + 0x10) = 1;
-      } while (vectorVariantCount != iVar7);
+        *(uint *)(variantRecord + 4) = nextSlot;
+        variantIndex = variantIndex + 1;
+        nextSlot = nextSlot + 1;
+        slotAddr2 = *(int *)(programState + 0x24) + slotByteOffset2;
+        slotByteOffset2 = slotByteOffset2 + 0x28;
+        *(undefined1 *)(slotAddr2 + 0x10) = 1;
+      } while (vectorVariantCount != variantIndex);
     }
     if (matrixVariantCount != 0) {
-      iVar9 = uVar13 * 0x28;
-      iVar7 = 0;
+      slotByteOffset2 = nextSlot * 0x28;
+      variantIndex = 0;
       do {
         vectorVariantCount = ((int (*)())popFirstNonNull32)(matrixVariants);
-        if (*(uint *)(programState + 0x28) <= uVar13 + 3) {
-          uVar3 = (**(code **)(ctx + 0x10))(*(uint *)(programState + 0x28) + 0x10,0x28);
+        if (*(uint *)(programState + 0x28) <= nextSlot + 3) {
+          newSlotArray = (**(code **)(ctx + 0x10))(*(uint *)(programState + 0x28) + 0x10,0x28);
           (**(code **)(((unsigned char *)0x00001344) + ctx))
-                    (uVar3,*(undefined4 *)(programState + 0x24),*(int *)(programState + 0x28) * 0x28);
+                    (newSlotArray,*(undefined4 *)(programState + 0x24),*(int *)(programState + 0x28) * 0x28);
           (**(code **)(ctx + 0x18))(*(undefined4 *)(programState + 0x24));
-          *(undefined4 *)(programState + 0x24) = uVar3;
+          *(undefined4 *)(programState + 0x24) = newSlotArray;
           *(int *)(programState + 0x28) = *(int *)(programState + 0x28) + 0x10;
         }
-        iVar5 = 0;
+        matrixRow = 0;
         iVar17 = 4;
-        iVar16 = iVar9;
+        slotByteOffset3 = slotByteOffset2;
         do {
-          iVar4 = uVar13 + iVar5;
-          iVar5 = iVar5 + 1;
-          *(int *)(vectorVariantCount + 0x10) = iVar4;
+          slotNumber = nextSlot + matrixRow;
+          matrixRow = matrixRow + 1;
+          *(int *)(vectorVariantCount + 0x10) = slotNumber;
           vectorVariantCount = vectorVariantCount + 4;
-          iVar4 = iVar16 + *(int *)(programState + 0x24);
-          iVar16 = iVar16 + 0x28;
-          *(undefined1 *)(iVar4 + 0x10) = 1;
+          slotAddr3 = slotByteOffset3 + *(int *)(programState + 0x24);
+          slotByteOffset3 = slotByteOffset3 + 0x28;
+          *(undefined1 *)(slotAddr3 + 0x10) = 1;
           iVar17 = iVar17 + -1;
         } while (iVar17 != 0);
-        iVar7 = iVar7 + 1;
-        uVar13 = uVar13 + 4;
-        iVar9 = iVar9 + 0xa0;
-      } while (iVar7 != matrixVariantCount);
+        variantIndex = variantIndex + 1;
+        nextSlot = nextSlot + 4;
+        slotByteOffset2 = slotByteOffset2 + 0xa0;
+      } while (variantIndex != matrixVariantCount);
     }
   }
-  *(uint *)(programState + 0x2a4) = uVar13;
+  *(uint *)(programState + 0x2a4) = nextSlot;
   return;
 }
 
@@ -3700,34 +3723,34 @@ int extvsStateFree(ctx, chainEntry)
 }
 
 /* FUN_00062370 @ 0x62370 (104 bytes) */
-int FUN_00062370(param_1, param_2, param_3)
+int FUN_00062370(param_1, param_2, useUnitFlags)
   int param_1;
   int param_2;
-  int param_3;
+  int useUnitFlags;
 {
-  byte *pbVar1;
-  int iVar2;
-  int iVar3;
+  byte *unitFlagPtr;
+  int wordCursor;
+  int wordsLeft;
   
-  if (param_3 == 0) {
-    iVar2 = param_1 + 0x18a0;
-    iVar3 = 0x10;
+  if (useUnitFlags == 0) {
+    wordCursor = param_1 + 0x18a0;
+    wordsLeft = 0x10;
     do {
-      pbVar1 = (byte *)(param_2 + 0x71);
+      unitFlagPtr = (byte *)(param_2 + 0x71);
       param_2 = param_2 + 1;
-      *(uint *)(iVar2 + 8) = -(uint)*pbVar1 >> 0x1f | *(uint *)(iVar2 + 8) & 0xfffffffe;
-      iVar2 = iVar2 + 8;
-      iVar3 = iVar3 + -1;
-    } while (iVar3 != 0);
+      *(uint *)(wordCursor + 8) = -(uint)*unitFlagPtr >> 0x1f | *(uint *)(wordCursor + 8) & 0xfffffffe;
+      wordCursor = wordCursor + 8;
+      wordsLeft = wordsLeft + -1;
+    } while (wordsLeft != 0);
   }
   else {
-    iVar2 = param_1 + 0x18a0;
-    iVar3 = 0x10;
+    wordCursor = param_1 + 0x18a0;
+    wordsLeft = 0x10;
     do {
-      *(uint *)(iVar2 + 8) = *(uint *)(iVar2 + 8) & 0xfffffffe;
-      iVar2 = iVar2 + 8;
-      iVar3 = iVar3 + -1;
-    } while (iVar3 != 0);
+      *(uint *)(wordCursor + 8) = *(uint *)(wordCursor + 8) & 0xfffffffe;
+      wordCursor = wordCursor + 8;
+      wordsLeft = wordsLeft + -1;
+    } while (wordsLeft != 0);
   }
   return;
 }
@@ -4577,55 +4600,55 @@ int extvsBuildStreamDescriptors(ctx, shader)
 }
 
 /* gldCurrentAttributePacketHeader @ 0x640f0 (220 bytes) */
-int gldCurrentAttributePacketHeader(param_1, param_2, param_3)
-  undefined4 param_1;
-  undefined4 param_2;
-  int param_3;
+int gldCurrentAttributePacketHeader(unusedArg1, attributeIndex, dwordCount)
+  undefined4 unusedArg1;
+  undefined4 attributeIndex;
+  int dwordCount;
 {
-  uint uVar1;
+  uint countField;
   
-  uVar1 = (param_3 + -1) * 0x10000;
-  switch(param_2) {
+  countField = (dwordCount + -1) * 0x10000;
+  switch(attributeIndex) {
   default:
     return 0;
   case 2:
-    return uVar1 | 0x8c8;
+    return countField | 0x8c8;
   case 3:
-    return uVar1 | 0x8cc;
+    return countField | 0x8cc;
   case 4:
-    return uVar1 | 0x8d0;
+    return countField | 0x8d0;
   case 5:
-    return uVar1 | 0x8d4;
+    return countField | 0x8d4;
   case 6:
-    return uVar1 | 0x8d8;
+    return countField | 0x8d8;
   case 7:
-    return uVar1 | 0x8dc;
+    return countField | 0x8dc;
   case 8:
-    return uVar1 | 0x8e0;
+    return countField | 0x8e0;
   case 9:
-    return uVar1 | 0x8e4;
+    return countField | 0x8e4;
   case 10:
-    return uVar1 | 0x8e8;
+    return countField | 0x8e8;
   case 0xb:
-    return uVar1 | 0x8ec;
+    return countField | 0x8ec;
   case 0xc:
-    return uVar1 | 0x8f0;
+    return countField | 0x8f0;
   case 0xd:
-    return uVar1 | 0x8f4;
+    return countField | 0x8f4;
   case 0xe:
-    return uVar1 | 0x8f8;
+    return countField | 0x8f8;
   case 0xf:
-    return uVar1 | 0x8fc;
+    return countField | 0x8fc;
   case 0x10:
-    return uVar1 | 0x900;
+    return countField | 0x900;
   case 0x11:
-    return uVar1 | 0x904;
+    return countField | 0x904;
   case 0x13:
-    return uVar1 | 0x90c;
+    return countField | 0x90c;
   case 0x14:
-    return uVar1 | 0x910;
+    return countField | 0x910;
   case 0x15:
-    return uVar1 | 0x914;
+    return countField | 0x914;
   }
 }
 
@@ -4808,50 +4831,50 @@ LAB_000644c0:
 int FUN_00064720(glContext)
   int glContext;
 {
-  undefined4 *puVar1;
-  byte bVar2;
-  int iVar3;
+  undefined4 *constWordPtr;
+  byte unitFlagByte;
+  int routeCount;
   undefined4 in_r5;
   undefined4 in_r6;
   undefined4 in_r7;
-  int a5;
-  int iVar4;
+  int programState;
+  int routeDst;
   undefined4 a6;
   uint loopIndex;
   code *a7;
-  int iVar6;
+  int routeSrc;
   
-  a5 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + glContext) * 4 + **(int **)(((unsigned char *)0x00001168) + glContext));
+  programState = **(int **)(*(int *)(((unsigned char *)0x0000118c) + glContext) * 4 + **(int **)(((unsigned char *)0x00001168) + glContext));
   if (*(char *)(*(int **)(((unsigned char *)0x00001168) + glContext) + 4) != '\0') {
     if ((*(uint *)(glContext + 0x8c) & 0x40000000) == 0) {
-      *(undefined4 *)(glContext + 0x1ca0) = *(undefined4 *)(a5 + 0x234);
-      *(undefined4 *)(glContext + 0x1ca4) = *(undefined4 *)(a5 + 0x238);
-      *(undefined4 *)(glContext + 0x1b9c) = *(undefined4 *)(a5 + 0x23c);
-      *(undefined4 *)(glContext + 0x1ba0) = *(undefined4 *)(a5 + 0x240);
-      iVar3 = *(int *)(a5 + 0x2a0);
-      if (iVar3 + 1U >> 1 != 0) {
+      *(undefined4 *)(glContext + 0x1ca0) = *(undefined4 *)(programState + 0x234);
+      *(undefined4 *)(glContext + 0x1ca4) = *(undefined4 *)(programState + 0x238);
+      *(undefined4 *)(glContext + 0x1b9c) = *(undefined4 *)(programState + 0x23c);
+      *(undefined4 *)(glContext + 0x1ba0) = *(undefined4 *)(programState + 0x240);
+      routeCount = *(int *)(programState + 0x2a0);
+      if (routeCount + 1U >> 1 != 0) {
         loopIndex = 0;
-        iVar4 = glContext;
-        iVar6 = a5;
+        routeDst = glContext;
+        routeSrc = programState;
         do {
           loopIndex = loopIndex + 1;
-          *(undefined4 *)(iVar4 + 0x1be4) = *(undefined4 *)(iVar6 + 0x244);
-          puVar1 = (undefined4 *)(iVar6 + 0x270);
-          iVar6 = iVar6 + 4;
-          *(undefined4 *)(iVar4 + 0x1c04) = *puVar1;
-          iVar4 = iVar4 + 4;
-          iVar3 = *(int *)(a5 + 0x2a0);
-        } while (loopIndex < iVar3 + 1U >> 1);
+          *(undefined4 *)(routeDst + 0x1be4) = *(undefined4 *)(routeSrc + 0x244);
+          constWordPtr = (undefined4 *)(routeSrc + 0x270);
+          routeSrc = routeSrc + 4;
+          *(undefined4 *)(routeDst + 0x1c04) = *constWordPtr;
+          routeDst = routeDst + 4;
+          routeCount = *(int *)(programState + 0x2a0);
+        } while (loopIndex < routeCount + 1U >> 1);
       }
-      *(int *)(glContext + 0x2438) = iVar3;
+      *(int *)(glContext + 0x2438) = routeCount;
       a7 = *(code **)(((unsigned char *)0x00001334) + glContext);
-      a6 = *(undefined4 *)(a5 + 0x2a0);
+      a6 = *(undefined4 *)(programState + 0x2a0);
       *(undefined4 *)(glContext + 0x1b78) = 0;
       *(undefined4 *)(glContext + 0x243c) = a6;
-      bVar2 = *(byte *)(a5 + 0x36);
+      unitFlagByte = *(byte *)(programState + 0x36);
       *(uint *)(glContext + 0x1930) = *(uint *)(glContext + 0x1930) | 0x40000;
-      *(uint *)(glContext + 0x1b78) = bVar2 & 3;
-      (*a7)(glContext,1,in_r5,in_r6,in_r7,a5,a6,a7);
+      *(uint *)(glContext + 0x1b78) = unitFlagByte & 3;
+      (*a7)(glContext,1,in_r5,in_r6,in_r7,programState,a6,a7);
       *(undefined1 *)(glContext + 0x2435) = 1;
     }
   }
@@ -4955,19 +4978,19 @@ int extvsUploadProgramConstants(glContext, shader)
   undefined4 in_r7;
   int in_r8;
   int constantBlock;
-  int iVar7;
+  int entryCOffset;
   undefined8 *valueD;
   int symbolList;
   int entryD;
   char cVar11;
   int allocY;
   int entryC;
-  uint uVar14;
+  uint oldWord1b90;
   uint freeWidth;
   undefined4 *hwProgramSlot;
-  uint uVar17;
+  uint constEndField;
   int *constIndexEnd;
-  uint uVar19;
+  uint constStartField;
   int *constAlloc;
   char *programState;
   undefined8 valueAHigh;
@@ -5011,14 +5034,14 @@ LAB_00064c00:
               in_r8 = *(int *)(entryB + 4) * 0x10;
               valueCLow = *valueC;
               valueDLow = *valueD;
-              iVar7 = *(int *)(entryC + 4) * 0x10;
+              entryCOffset = *(int *)(entryC + 4) * 0x10;
               entryD = *(int *)(entryD + 4) * 0x10;
               *(undefined8 *)(constantBlock + entryA) = *valueA;
               *(undefined8 *)(constantBlock + entryA + 8) = valueAHigh;
               *(undefined8 *)(constantBlock + in_r8) = valueBLow;
               *(undefined8 *)(constantBlock + in_r8 + 8) = valueBHigh;
-              *(undefined8 *)(constantBlock + iVar7) = valueCLow;
-              *(undefined8 *)(constantBlock + iVar7 + 8) = valueCHigh;
+              *(undefined8 *)(constantBlock + entryCOffset) = valueCLow;
+              *(undefined8 *)(constantBlock + entryCOffset + 8) = valueCHigh;
               *(undefined8 *)(constantBlock + entryD) = valueDLow;
               *(undefined8 *)(constantBlock + entryD + 8) = valueDHigh;
               constIndexCursor = constIndexCursor + 4;
@@ -5045,14 +5068,14 @@ LAB_00064c00:
           in_r5 = programState;
           ((int (*)())vpUploadConstantsWithFog)(glContext,shader,programState,in_r6,1);
         }
-        uVar14 = *(uint *)(glContext + 0x1b90);
+        oldWord1b90 = *(uint *)(glContext + 0x1b90);
         cVar11 = '\0';
-        uVar19 = *(uint *)(programState + 4) & 0x3ff;
-        *(uint *)(glContext + 0x1b90) = uVar19 | uVar14 & 0xfffffc00;
-        uVar17 = (*(int *)(programState + 4) + *(int *)(programState + 8)) * 0x400 & 0xffc00;
-        *(uint *)(glContext + 0x1b90) = uVar17 | uVar19 | uVar14 & 0xfff00000;
+        constStartField = *(uint *)(programState + 4) & 0x3ff;
+        *(uint *)(glContext + 0x1b90) = constStartField | oldWord1b90 & 0xfffffc00;
+        constEndField = (*(int *)(programState + 4) + *(int *)(programState + 8)) * 0x400 & 0xffc00;
+        *(uint *)(glContext + 0x1b90) = constEndField | constStartField | oldWord1b90 & 0xfff00000;
         *(uint *)(glContext + 0x1b90) =
-             (*(uint *)(programState + 0x10) & 0x3ff) << 0x14 | uVar17 | uVar19 | uVar14 & 0xc0000000;
+             (*(uint *)(programState + 0x10) & 0x3ff) << 0x14 | constEndField | constStartField | oldWord1b90 & 0xc0000000;
         *(uint *)(glContext + 0x1b94) =
              *(int *)(programState + 4) + *(int *)(programState + 0xc) & 0x3ffU |
              *(uint *)(glContext + 0x1b94) & 0xfffffc00;
@@ -5456,18 +5479,18 @@ int ffvpSelectPassThroughVariant(glContext)
   uint nextTexReg;
   uint positionPassThrough;
   uint loopIndex;
-  byte bVar1;
+  byte positionOutReg;
   uint backColorOut;
-  int iVar3;
+  int keyCompare;
   int variant;
   undefined4 *builder;
-  undefined4 uVar6;
-  undefined4 uVar7;
+  undefined4 texCoordMode;
+  undefined4 texCoordFlag;
   undefined4 in_r7;
   undefined4 in_r8;
   uint in_r9;
   uint ctxFlags;
-  uint uVar9;
+  uint nextOutputReg2;
   uint outputMask;
   int currentVariant;
   uint pointSizeOut;
@@ -5485,11 +5508,11 @@ int ffvpSelectPassThroughVariant(glContext)
     variantKeyFlags = ctxFlags >> 0xb & 1 | in_r9 | (uint)(byte)((unsigned char *)0x000011d3)[glContext] << 2;
   }
   currentVariant = *(int *)(glContext + 0x14c);
-  if ((currentVariant == 0) || (iVar3 = _memcmp(currentVariant,variantKey,0x30), variant = currentVariant, iVar3 != 0)) {
+  if ((currentVariant == 0) || (keyCompare = _memcmp(currentVariant,variantKey,0x30), variant = currentVariant, keyCompare != 0)) {
     variant = fpVariantCacheLookup(glContext,variantKey);
     if (variant == 0) {
       outputMask = *(uint *)(glContext + 0x1804);
-      bVar1 = ((unsigned char *)0x000011d2)[glContext];
+      positionOutReg = ((unsigned char *)0x000011d2)[glContext];
       positionPassThrough = *(uint *)(glContext + 0x44) >> 10 & 1;
       builder = (undefined4 *)ffvpCreateBuilder(glContext,1,0);
       *builder = 0;
@@ -5497,15 +5520,15 @@ int ffvpSelectPassThroughVariant(glContext)
       if (positionPassThrough == 0) {
         backColorOut = outputMask >> 3 & 1;
         pointSizeOut = outputMask >> 1 & 1;
-        uVar9 = 0;
+        nextOutputReg2 = 0;
       }
       else {
         backColorOut = outputMask >> 3 & 1;
         pointSizeOut = outputMask >> 1 & 1;
         in_r9 = (outputMask & 1) + pointSizeOut;
-        uVar9 = (uint)bVar1 + backColorOut * 2 + in_r9 + 2;
+        nextOutputReg2 = (uint)positionOutReg + backColorOut * 2 + in_r9 + 2;
       }
-      ffvpEmitPositionPassThrough(builder,positionPassThrough,(uint)bVar1);
+      ffvpEmitPositionPassThrough(builder,positionPassThrough,(uint)positionOutReg);
       if (pointSizeOut == 0) {
         colorOutReg = 1;
         nextOutputReg = 2;
@@ -5517,13 +5540,13 @@ int ffvpSelectPassThroughVariant(glContext)
         ffvpEmitPointSizePassThrough(builder);
       }
       builder[3] = colorOutReg;
-      uVar6 = 0;
-      uVar7 = 0;
+      texCoordMode = 0;
+      texCoordFlag = 0;
       ffvpEmitColorPassThrough(builder,3,0,0);
       if ((outputMask & 1) != 0) {
         builder[4] = nextOutputReg;
-        uVar6 = 1;
-        uVar7 = 0;
+        texCoordMode = 1;
+        texCoordFlag = 0;
         ffvpEmitColorPassThrough(builder,4,1,0);
         if ((outputMask & 4) != 0) {
           builder[0x14] = nextOutputReg;
@@ -5537,8 +5560,8 @@ int ffvpSelectPassThroughVariant(glContext)
         ffvpEmitColorPassThrough(builder,3,2,1);
         builder[6] = nextOutputReg + 1;
         builder[0x20] = 0;
-        uVar6 = 3;
-        uVar7 = 1;
+        texCoordMode = 3;
+        texCoordFlag = 1;
         nextOutputReg = nextOutputReg + 2;
         ffvpEmitColorPassThrough(builder,4,3,1);
       }
@@ -5550,14 +5573,14 @@ int ffvpSelectPassThroughVariant(glContext)
           texUnit = *(int *)(unitCursor + 0x1824);
           builder[texUnit + 0xb] = nextOutputReg;
           nextOutputReg = nextOutputReg + 1;
-          if (nextTexReg == uVar9) {
+          if (nextTexReg == nextOutputReg2) {
             nextTexReg = nextTexReg + 1;
           }
           builder[texUnit + 0x21] = nextTexReg;
           loopIndex = loopIndex + 1;
           nextTexReg = nextTexReg + 1;
           unitCursor = unitCursor + 4;
-          ffvpEmitTexCoordPassThrough(builder,texUnit,uVar6,uVar7,in_r7,in_r8,in_r9);
+          ffvpEmitTexCoordPassThrough(builder,texUnit,texCoordMode,texCoordFlag,in_r7,in_r8,in_r9);
         } while (outputMask >> 4 != loopIndex);
       }
       ffvpFinishProgram(builder);
