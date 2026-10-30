@@ -416,8 +416,8 @@
 0x4b5d0	FUN_0004b5d0	296	yes	
 0x4b710	FUN_0004b710	188	no	calls an import (free)
 0x4b7d0	FUN_0004b7d0	392	no	calls an import (malloc)
-0x4b980	FUN_0004b980	616	no	indirect call (driver context / vtable / callback)
-0x4bbf0	FUN_0004bbf0	1244	yes	
+0x4b980	gldGrowProgramHashTable	616	no	indirect call (driver context / vtable / callback)
+0x4bbf0	gldLookupProgramVariant	1244	yes	
 0x4c100	FUN_0004c100	336	yes	
 0x4c260	FUN_0004c260	732	yes	
 0x4c540	noop_4c540	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
@@ -427,7 +427,7 @@
 0x4ce30	FUN_0004ce30	680	yes	
 0x4d100	FUN_0004d100	1264	no	indirect call (driver context / vtable / callback)
 0x4d620	FUN_0004d620	328	yes	
-0x4d770	FUN_0004d770	840	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x4d770	gldValidateViewportPolygonOffset	840	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x4dac0	gldValidateDepthTest	272	yes	
 0x4dbe0	FUN_0004dbe0	76	yes	
 0x4dc30	gldValidateTexEnvColor	220	yes	

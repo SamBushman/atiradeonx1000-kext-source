@@ -415,8 +415,8 @@
 0x4b5d0	296	FUN_0004b5d0	part_006	converted
 0x4b710	188	FUN_0004b710	part_006	converted
 0x4b7d0	392	FUN_0004b7d0	part_006	converted
-0x4b980	616	FUN_0004b980	part_006	converted
-0x4bbf0	1244	FUN_0004bbf0	part_006	converted
+0x4b980	616	gldGrowProgramHashTable	part_006	converted
+0x4bbf0	1244	gldLookupProgramVariant	part_006	converted
 0x4c100	336	FUN_0004c100	part_006	converted
 0x4c260	732	FUN_0004c260	part_007	converted
 0x4c540	4	noop_4c540	part_007	converted
@@ -426,7 +426,7 @@
 0x4ce30	680	FUN_0004ce30	part_007	converted
 0x4d100	1264	FUN_0004d100	part_007	converted
 0x4d620	328	FUN_0004d620	part_007	converted
-0x4d770	840	FUN_0004d770	part_007	converted
+0x4d770	840	gldValidateViewportPolygonOffset	part_007	converted
 0x4dac0	272	gldValidateDepthTest	part_007	converted
 0x4dbe0	76	FUN_0004dbe0	part_007	converted
 0x4dc30	220	gldValidateTexEnvColor	part_007	converted
