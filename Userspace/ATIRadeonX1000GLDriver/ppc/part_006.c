@@ -8448,53 +8448,54 @@ int FUN_0004b520(glContext, param_2)
 }
 
 /* FUN_0004b5d0 @ 0x4b5d0 (296 bytes) */
-int FUN_0004b5d0(glContext, param_2)
+int FUN_0004b5d0(glContext, programEntry)
   int glContext;
-  int param_2;
+  int programEntry;
 {
   int *glContextWord1e7c;
   int loopIndex;
-  int iVar3;
-  int iVar4;
-  int iVar5;
+  int listCount;
+  int searchCountdown;
+  int shiftByteOffset;
+  int stateBlock;
   
-  ((int (*)())FUN_0004a990)(glContext,param_2);
-  if ((glContext != 0) && (iVar5 = *(int *)(((unsigned char *)0x000036c0) + param_2), iVar5 != 0)) {
-    (**(code **)(glContext + 0x18))(*(undefined4 *)(iVar5 + 0xc));
-    *(undefined4 *)(iVar5 + 0xc) = 0;
-    iVar5 = *(int *)(((unsigned char *)0x000036c0) + param_2);
-    iVar3 = *(int *)(glContext + 0x1e74);
-    while (0 < iVar3) {
+  ((int (*)())FUN_0004a990)(glContext,programEntry);
+  if ((glContext != 0) && (stateBlock = *(int *)(((unsigned char *)0x000036c0) + programEntry), stateBlock != 0)) {
+    (**(code **)(glContext + 0x18))(*(undefined4 *)(stateBlock + 0xc));
+    *(undefined4 *)(stateBlock + 0xc) = 0;
+    stateBlock = *(int *)(((unsigned char *)0x000036c0) + programEntry);
+    listCount = *(int *)(glContext + 0x1e74);
+    while (0 < listCount) {
       glContextWord1e7c = *(int **)(glContext + 0x1e7c);
       loopIndex = 0;
-      if (param_2 != *glContextWord1e7c) {
+      if (programEntry != *glContextWord1e7c) {
         loopIndex = 0;
-        iVar4 = iVar3;
+        searchCountdown = listCount;
         do {
           loopIndex = loopIndex + 1;
-          iVar4 = iVar4 + -1;
-          if (iVar4 == 0) goto LAB_0004b6a8;
-        } while (glContextWord1e7c[loopIndex] != param_2);
+          searchCountdown = searchCountdown + -1;
+          if (searchCountdown == 0) goto LAB_0004b6a8;
+        } while (glContextWord1e7c[loopIndex] != programEntry);
       }
-      iVar3 = iVar3 + -1;
-      *(int *)(glContext + 0x1e74) = iVar3;
-      if (iVar3 == loopIndex) break;
-      if (loopIndex < iVar3) {
-        iVar4 = loopIndex << 2;
+      listCount = listCount + -1;
+      *(int *)(glContext + 0x1e74) = listCount;
+      if (listCount == loopIndex) break;
+      if (loopIndex < listCount) {
+        shiftByteOffset = loopIndex << 2;
         while( true ) {
           loopIndex = loopIndex + 1;
-          *(undefined4 *)(iVar4 + (int)glContextWord1e7c) = *(undefined4 *)((int)glContextWord1e7c + iVar4 + 4);
-          iVar4 = iVar4 + 4;
-          iVar3 = *(int *)(glContext + 0x1e74);
-          if (iVar3 <= loopIndex) break;
+          *(undefined4 *)(shiftByteOffset + (int)glContextWord1e7c) = *(undefined4 *)((int)glContextWord1e7c + shiftByteOffset + 4);
+          shiftByteOffset = shiftByteOffset + 4;
+          listCount = *(int *)(glContext + 0x1e74);
+          if (listCount <= loopIndex) break;
           glContextWord1e7c = *(int **)(glContext + 0x1e7c);
         }
       }
     }
 LAB_0004b6a8:
-    (**(code **)(glContext + 0x18))(*(undefined4 *)(((unsigned char *)0x000036c0) + param_2));
-    if (param_2 != iVar5 + 0x124) {
-      *(undefined4 *)(((unsigned char *)0x000036c0) + param_2) = 0;
+    (**(code **)(glContext + 0x18))(*(undefined4 *)(((unsigned char *)0x000036c0) + programEntry));
+    if (programEntry != stateBlock + 0x124) {
+      *(undefined4 *)(((unsigned char *)0x000036c0) + programEntry) = 0;
     }
   }
   return;

@@ -747,49 +747,50 @@ LAB_000550a0:
 }
 
 /* extvsOperandDataType @ 0x550e0 (244 bytes) */
-int extvsOperandDataType(param_1, param_2)
-  int param_1;
-  int *param_2;
+int extvsOperandDataType(shader, operand)
+  int shader;
+  int *operand;
 {
-  uint uVar1;
-  int iVar2;
-  int iVar3;
+  uint registerId;
+  uint symbolKind;
+  int symbolDataType;
+  int symbolRecord;
   
-  if (*param_2 == 1) {
-    uVar1 = param_2[1];
-    if (uVar1 < 0x6111) {
-      if (0x610e < uVar1) {
+  if (*operand == 1) {
+    registerId = operand[1];
+    if (registerId < 0x6111) {
+      if (0x610e < registerId) {
         return 0x87bf;
       }
-      if (uVar1 == 0x610e) {
+      if (registerId == 0x610e) {
         return 0x87be;
       }
     }
-    else if (0x8799 < uVar1) {
-      if (uVar1 < 0x87a5) {
+    else if (0x8799 < registerId) {
+      if (registerId < 0x87a5) {
         return 0x87bf;
       }
-      if (uVar1 == 0x87bd) {
+      if (registerId == 0x87bd) {
         return 0x87be;
       }
     }
   }
-  else if (*param_2 == 2) {
-    iVar3 = param_2[1] * 0x54 + *(int *)(param_1 + 4);
-    uVar1 = *(uint *)(iVar3 + 0x28);
-    if ((0x87c0 < uVar1) && ((uVar1 < 0x87c5 || (uVar1 == 0xffffffff)))) {
-      iVar2 = *(int *)(iVar3 + 0x24);
-      if (iVar2 != 0x87bf) {
-        if (iVar2 == 0x87c0) {
+  else if (*operand == 2) {
+    symbolRecord = operand[1] * 0x54 + *(int *)(shader + 4);
+    symbolKind = *(uint *)(symbolRecord + 0x28);
+    if ((0x87c0 < symbolKind) && ((symbolKind < 0x87c5 || (symbolKind == 0xffffffff)))) {
+      symbolDataType = *(int *)(symbolRecord + 0x24);
+      if (symbolDataType != 0x87bf) {
+        if (symbolDataType == 0x87c0) {
           return 0x87c0;
         }
-        if (iVar2 != 0x87be) {
+        if (symbolDataType != 0x87be) {
           return 0;
         }
-        if (*(char *)(iVar3 + 0x44) == '\0') {
+        if (*(char *)(symbolRecord + 0x44) == '\0') {
           return 0x87be;
         }
-        if (*(int *)(iVar3 + 0x48) != 0xf) {
+        if (*(int *)(symbolRecord + 0x48) != 0xf) {
           return 0x87be;
         }
       }

@@ -2357,45 +2357,45 @@ int gldInitStateDefaults(glContext)
 }
 
 /* FUN_0004fc80 @ 0x4fc80 (252 bytes) */
-int FUN_0004fc80(ctx, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int FUN_0004fc80(ctx, routeSlot, routeField0, routeField1, routeSourceId, routeFlag13, routeFlag14, routeFlag15)
   int ctx;
-  uint param_2;
-  uint param_3;
-  uint param_4;
-  uint param_5;
-  uint param_6;
-  uint param_7;
-  uint param_8;
+  uint routeSlot;
+  uint routeField0;
+  uint routeField1;
+  uint routeSourceId;
+  uint routeFlag13;
+  uint routeFlag14;
+  uint routeFlag15;
 {
-  int iVar1;
-  int iVar2;
+  int routeRegBase;
+  int routeFieldMask;
   
   if (*(char *)(ctx + 0x1868) != '\0') {
-    iVar2 = 0;
-    param_5 = *(uint *)(param_5 * 4 + *(int *)(ctx + 0x1864));
-    if (param_5 == 0x16) goto LAB_0004fcb4;
+    routeFieldMask = 0;
+    routeSourceId = *(uint *)(routeSourceId * 4 + *(int *)(ctx + 0x1864));
+    if (routeSourceId == 0x16) goto LAB_0004fcb4;
   }
-  iVar2 = 0xf;
+  routeFieldMask = 0xf;
 LAB_0004fcb4:
-  if ((param_2 & 1) == 0) {
-    iVar1 = (param_2 >> 1) * 4 + ctx;
-    *(uint *)(iVar1 + 0x1be4) =
-         (param_8 & 1) << 0xf |
-         (param_7 & 1) << 0xe |
-         (param_6 & 1) << 0xd |
-         (param_5 & 0x1f) << 8 |
-         (param_4 & 0xf) << 4 | param_3 & 0xf | *(uint *)(iVar1 + 0x1be4) & 0xffff0000;
-    *(uint *)(iVar1 + 0x1c04) = iVar2 << 0xc | *(uint *)(iVar1 + 0x1c04) & 0xffff0000 | 0x688;
+  if ((routeSlot & 1) == 0) {
+    routeRegBase = (routeSlot >> 1) * 4 + ctx;
+    *(uint *)(routeRegBase + 0x1be4) =
+         (routeFlag15 & 1) << 0xf |
+         (routeFlag14 & 1) << 0xe |
+         (routeFlag13 & 1) << 0xd |
+         (routeSourceId & 0x1f) << 8 |
+         (routeField1 & 0xf) << 4 | routeField0 & 0xf | *(uint *)(routeRegBase + 0x1be4) & 0xffff0000;
+    *(uint *)(routeRegBase + 0x1c04) = routeFieldMask << 0xc | *(uint *)(routeRegBase + 0x1c04) & 0xffff0000 | 0x688;
   }
   else {
-    iVar1 = (param_2 >> 1) * 4 + ctx;
-    *(uint *)(iVar1 + 0x1be4) =
-         param_8 << 0x1f |
-         (param_7 & 1) << 0x1e |
-         (param_6 & 1) << 0x1d |
-         (param_5 & 0x1f) << 0x18 |
-         (param_4 & 0xf) << 0x14 | (param_3 & 0xf) << 0x10 | *(uint *)(iVar1 + 0x1be4) & 0xffff;
-    *(uint *)(iVar1 + 0x1c04) = iVar2 << 0x1c | *(uint *)(iVar1 + 0x1c04) & 0xffff | 0x6880000;
+    routeRegBase = (routeSlot >> 1) * 4 + ctx;
+    *(uint *)(routeRegBase + 0x1be4) =
+         routeFlag15 << 0x1f |
+         (routeFlag14 & 1) << 0x1e |
+         (routeFlag13 & 1) << 0x1d |
+         (routeSourceId & 0x1f) << 0x18 |
+         (routeField1 & 0xf) << 0x14 | (routeField0 & 0xf) << 0x10 | *(uint *)(routeRegBase + 0x1be4) & 0xffff;
+    *(uint *)(routeRegBase + 0x1c04) = routeFieldMask << 0x1c | *(uint *)(routeRegBase + 0x1c04) & 0xffff | 0x6880000;
   }
   return;
 }
@@ -3138,36 +3138,36 @@ LAB_00050920:
 }
 
 /* FUN_00050ef0 @ 0x50ef0 (284 bytes) */
-int FUN_00050ef0(glContext, param_2, param_3, param_4)
+int FUN_00050ef0(glContext, elementSizeA, elementSizeB, elementSizeC)
   int glContext;
-  uint param_2;
-  uint param_3;
-  uint param_4;
+  uint elementSizeA;
+  uint elementSizeB;
+  uint elementSizeC;
 {
   code *streamSetCurrent;
   uint glContextWord1b7c;
   undefined4 *a6;
-  int iVar3;
+  int streamPos;
   undefined4 in_r7;
   undefined4 in_r8;
-  uint uVar4;
-  uint uVar5;
+  uint primaryLimit;
+  uint secondaryLimit;
   
-  uVar4 = 0x80 / param_2;
-  if (0x80 / param_3 < 0x80 / param_2) {
-    uVar4 = 0x80 / param_3;
+  primaryLimit = 0x80 / elementSizeA;
+  if (0x80 / elementSizeB < 0x80 / elementSizeA) {
+    primaryLimit = 0x80 / elementSizeB;
   }
-  if (10 < uVar4) {
-    uVar4 = 10;
+  if (10 < primaryLimit) {
+    primaryLimit = 10;
   }
-  uVar5 = 6;
-  if ((param_4 != 0) && (uVar5 = 0x80 / param_4, 6 < uVar5)) {
-    uVar5 = 6;
+  secondaryLimit = 6;
+  if ((elementSizeC != 0) && (secondaryLimit = 0x80 / elementSizeC, 6 < secondaryLimit)) {
+    secondaryLimit = 6;
   }
   glContextWord1b7c = *(uint *)(glContext + 0x1b7c);
-  if ((uVar4 != (glContextWord1b7c & 0xf)) || (uVar5 != (glContextWord1b7c >> 4 & 0xf))) {
+  if ((primaryLimit != (glContextWord1b7c & 0xf)) || (secondaryLimit != (glContextWord1b7c >> 4 & 0xf))) {
     *(undefined1 *)(glContext + 0x23ec) = 1;
-    *(uint *)(glContext + 0x1b7c) = (uVar5 & 0xf) << 4 | uVar4 & 0xf | glContextWord1b7c & 0xffffff00;
+    *(uint *)(glContext + 0x1b7c) = (secondaryLimit & 0xf) << 4 | primaryLimit & 0xf | glContextWord1b7c & 0xffffff00;
   }
   if (*(char *)(glContext + 0x23ec) != '\0') {
     a6 = (undefined4 *)(**(code **)(glContext + 0x2758))(glContext,4);
@@ -3176,10 +3176,10 @@ int FUN_00050ef0(glContext, param_2, param_3, param_4)
     *a6 = 0x8a1;
     a6[2] = 0x820;
     a6[3] = *(undefined4 *)(glContext + 0x1b7c);
-    iVar3 = *(int *)(0x00002748 + glContext + 4);
+    streamPos = *(int *)(0x00002748 + glContext + 4);
     streamSetCurrent = *(code **)(glContext + 0x275c);
-    *(int *)(0x00002748 + glContext + 4) = iVar3 + 0x10;
-    (*streamSetCurrent)(glContext,iVar3 + 0x10,param_3,param_4,in_r7,in_r8,a6);
+    *(int *)(0x00002748 + glContext + 4) = streamPos + 0x10;
+    (*streamSetCurrent)(glContext,streamPos + 0x10,elementSizeB,elementSizeC,in_r7,in_r8,a6);
     *(undefined1 *)(glContext + 0x23ec) = 0;
   }
   return;

@@ -3722,34 +3722,34 @@ int extvsStateFree(ctx, chainEntry)
 }
 
 /* FUN_00062370 @ 0x62370 (104 bytes) */
-int FUN_00062370(param_1, param_2, param_3)
+int FUN_00062370(param_1, param_2, useUnitFlags)
   int param_1;
   int param_2;
-  int param_3;
+  int useUnitFlags;
 {
-  byte *pbVar1;
-  int iVar2;
-  int iVar3;
+  byte *unitFlagPtr;
+  int wordCursor;
+  int wordsLeft;
   
-  if (param_3 == 0) {
-    iVar2 = param_1 + 0x18a0;
-    iVar3 = 0x10;
+  if (useUnitFlags == 0) {
+    wordCursor = param_1 + 0x18a0;
+    wordsLeft = 0x10;
     do {
-      pbVar1 = (byte *)(param_2 + 0x71);
+      unitFlagPtr = (byte *)(param_2 + 0x71);
       param_2 = param_2 + 1;
-      *(uint *)(iVar2 + 8) = -(uint)*pbVar1 >> 0x1f | *(uint *)(iVar2 + 8) & 0xfffffffe;
-      iVar2 = iVar2 + 8;
-      iVar3 = iVar3 + -1;
-    } while (iVar3 != 0);
+      *(uint *)(wordCursor + 8) = -(uint)*unitFlagPtr >> 0x1f | *(uint *)(wordCursor + 8) & 0xfffffffe;
+      wordCursor = wordCursor + 8;
+      wordsLeft = wordsLeft + -1;
+    } while (wordsLeft != 0);
   }
   else {
-    iVar2 = param_1 + 0x18a0;
-    iVar3 = 0x10;
+    wordCursor = param_1 + 0x18a0;
+    wordsLeft = 0x10;
     do {
-      *(uint *)(iVar2 + 8) = *(uint *)(iVar2 + 8) & 0xfffffffe;
-      iVar2 = iVar2 + 8;
-      iVar3 = iVar3 + -1;
-    } while (iVar3 != 0);
+      *(uint *)(wordCursor + 8) = *(uint *)(wordCursor + 8) & 0xfffffffe;
+      wordCursor = wordCursor + 8;
+      wordsLeft = wordsLeft + -1;
+    } while (wordsLeft != 0);
   }
   return;
 }
@@ -5478,18 +5478,18 @@ int ffvpSelectPassThroughVariant(glContext)
   uint nextTexReg;
   uint positionPassThrough;
   uint loopIndex;
-  byte bVar1;
+  byte positionOutReg;
   uint backColorOut;
-  int iVar3;
+  int keyCompare;
   int variant;
   undefined4 *builder;
-  undefined4 uVar6;
-  undefined4 uVar7;
+  undefined4 texCoordMode;
+  undefined4 texCoordFlag;
   undefined4 in_r7;
   undefined4 in_r8;
   uint in_r9;
   uint ctxFlags;
-  uint uVar9;
+  uint nextOutputReg2;
   uint outputMask;
   int currentVariant;
   uint pointSizeOut;
@@ -5507,11 +5507,11 @@ int ffvpSelectPassThroughVariant(glContext)
     variantKeyFlags = ctxFlags >> 0xb & 1 | in_r9 | (uint)(byte)((unsigned char *)0x000011d3)[glContext] << 2;
   }
   currentVariant = *(int *)(glContext + 0x14c);
-  if ((currentVariant == 0) || (iVar3 = _memcmp(currentVariant,variantKey,0x30), variant = currentVariant, iVar3 != 0)) {
+  if ((currentVariant == 0) || (keyCompare = _memcmp(currentVariant,variantKey,0x30), variant = currentVariant, keyCompare != 0)) {
     variant = fpVariantCacheLookup(glContext,variantKey);
     if (variant == 0) {
       outputMask = *(uint *)(glContext + 0x1804);
-      bVar1 = ((unsigned char *)0x000011d2)[glContext];
+      positionOutReg = ((unsigned char *)0x000011d2)[glContext];
       positionPassThrough = *(uint *)(glContext + 0x44) >> 10 & 1;
       builder = (undefined4 *)ffvpCreateBuilder(glContext,1,0);
       *builder = 0;
@@ -5519,15 +5519,15 @@ int ffvpSelectPassThroughVariant(glContext)
       if (positionPassThrough == 0) {
         backColorOut = outputMask >> 3 & 1;
         pointSizeOut = outputMask >> 1 & 1;
-        uVar9 = 0;
+        nextOutputReg2 = 0;
       }
       else {
         backColorOut = outputMask >> 3 & 1;
         pointSizeOut = outputMask >> 1 & 1;
         in_r9 = (outputMask & 1) + pointSizeOut;
-        uVar9 = (uint)bVar1 + backColorOut * 2 + in_r9 + 2;
+        nextOutputReg2 = (uint)positionOutReg + backColorOut * 2 + in_r9 + 2;
       }
-      ffvpEmitPositionPassThrough(builder,positionPassThrough,(uint)bVar1);
+      ffvpEmitPositionPassThrough(builder,positionPassThrough,(uint)positionOutReg);
       if (pointSizeOut == 0) {
         colorOutReg = 1;
         nextOutputReg = 2;
@@ -5539,13 +5539,13 @@ int ffvpSelectPassThroughVariant(glContext)
         ffvpEmitPointSizePassThrough(builder);
       }
       builder[3] = colorOutReg;
-      uVar6 = 0;
-      uVar7 = 0;
+      texCoordMode = 0;
+      texCoordFlag = 0;
       ffvpEmitColorPassThrough(builder,3,0,0);
       if ((outputMask & 1) != 0) {
         builder[4] = nextOutputReg;
-        uVar6 = 1;
-        uVar7 = 0;
+        texCoordMode = 1;
+        texCoordFlag = 0;
         ffvpEmitColorPassThrough(builder,4,1,0);
         if ((outputMask & 4) != 0) {
           builder[0x14] = nextOutputReg;
@@ -5559,8 +5559,8 @@ int ffvpSelectPassThroughVariant(glContext)
         ffvpEmitColorPassThrough(builder,3,2,1);
         builder[6] = nextOutputReg + 1;
         builder[0x20] = 0;
-        uVar6 = 3;
-        uVar7 = 1;
+        texCoordMode = 3;
+        texCoordFlag = 1;
         nextOutputReg = nextOutputReg + 2;
         ffvpEmitColorPassThrough(builder,4,3,1);
       }
@@ -5572,14 +5572,14 @@ int ffvpSelectPassThroughVariant(glContext)
           texUnit = *(int *)(unitCursor + 0x1824);
           builder[texUnit + 0xb] = nextOutputReg;
           nextOutputReg = nextOutputReg + 1;
-          if (nextTexReg == uVar9) {
+          if (nextTexReg == nextOutputReg2) {
             nextTexReg = nextTexReg + 1;
           }
           builder[texUnit + 0x21] = nextTexReg;
           loopIndex = loopIndex + 1;
           nextTexReg = nextTexReg + 1;
           unitCursor = unitCursor + 4;
-          ffvpEmitTexCoordPassThrough(builder,texUnit,uVar6,uVar7,in_r7,in_r8,in_r9);
+          ffvpEmitTexCoordPassThrough(builder,texUnit,texCoordMode,texCoordFlag,in_r7,in_r8,in_r9);
         } while (outputMask >> 4 != loopIndex);
       }
       ffvpFinishProgram(builder);
