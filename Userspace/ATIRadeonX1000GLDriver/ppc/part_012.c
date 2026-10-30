@@ -366,7 +366,7 @@ void ffvpValidateProgram(int ctx,undefined4 unusedArg2,undefined4 unusedArg3,und
       variant = fpVariantCacheInsert(ctx,ctx + 0x1874,programKind,(uint)*(byte *)(ctx + 0x131),builtConstBytes
                            ,constRegCount[0],paramList,(uint)*(byte *)(ctx + 0x126));
       depRecord = (undefined4 *)
-               FUN_000774c0(*(undefined4 *)(ctx + 0xc),*(undefined4 *)(ctx + 0x18));
+               recordAllocCreate(*(undefined4 *)(ctx + 0xc),*(undefined4 *)(ctx + 0x18));
       depRecord[8] = 0;
       depRecord[9] = 0;
       *depRecord = 0x460;
@@ -374,7 +374,7 @@ void ffvpValidateProgram(int ctx,undefined4 unusedArg2,undefined4 unusedArg3,und
       depElemSize = 0x10;
       depRecordCopy = depRecord;
       dependencyStatus = fpVariantEntryRecomputeDependencies(ctx,variant,depRecord,0x10);
-      FUN_0007a110(depRecord);
+      recordAllocFree(depRecord);
       if (*(uint *)(programKind + 0x3cc) <= *(uint *)(programKind + 0x3e4)) {
         *(undefined1 *)(variant + 0x59) = 0;
         *(undefined1 *)(ctx + 0x126) = 0;
@@ -471,8 +471,8 @@ void ffvpValidateProgramForced(int param_1,undefined4 param_2,undefined4 param_3
   return;
 }
 
-/* FUN_00083c90 @ 0x83c90 (372 bytes) */
-int FUN_00083c90(ctx, packet)
+/* gldEmitInternalDrawSetupPackets @ 0x83c90 (372 bytes) */
+int gldEmitInternalDrawSetupPackets(ctx, packet)
   int ctx;
   undefined4 *packet;
 {
@@ -3071,8 +3071,8 @@ int FUN_00086710(param_1)
   return;
 }
 
-/* FUN_000867b0 @ 0x867b0 (140 bytes) */
-int FUN_000867b0(param_1)
+/* gldSyncClipPlaneEnables @ 0x867b0 (140 bytes) */
+int gldSyncClipPlaneEnables(param_1)
   int param_1;
 {
   uint uVar1;
@@ -3878,8 +3878,8 @@ int FUN_000879f0(ctx, param_2, compileInfo, hwState, unitState, unitEnabled, has
   return (int)unitState + hwCursorA + 0x240;
 }
 
-/* FUN_00087cd0 @ 0x87cd0 (188 bytes) */
-int FUN_00087cd0(glContext, param_2)
+/* arbfpUnbindWorkAreaChecked @ 0x87cd0 (188 bytes) */
+int arbfpUnbindWorkAreaChecked(glContext, param_2)
   int glContext;
   int param_2;
 {
@@ -3905,8 +3905,8 @@ int FUN_00087cd0(glContext, param_2)
   return;
 }
 
-/* FUN_00087da0 @ 0x87da0 (172 bytes) */
-int FUN_00087da0(glContext, param_2)
+/* arbfpUnbindWorkArea @ 0x87da0 (172 bytes) */
+int arbfpUnbindWorkArea(glContext, param_2)
   int glContext;
   int param_2;
 {
@@ -5067,9 +5067,9 @@ asm(".set arbfpInitResourceLimits, _arbfpInitResourceLimits");
 asm(".globl noop_879e0");
 asm(".set noop_879e0, _noop_879e0");
 asm(".globl FUN_00087cd0");
-asm(".set FUN_00087cd0, _FUN_00087cd0");
+asm(".set FUN_00087cd0, _arbfpUnbindWorkAreaChecked");
 asm(".globl FUN_00087da0");
-asm(".set FUN_00087da0, _FUN_00087da0");
+asm(".set FUN_00087da0, _arbfpUnbindWorkArea");
 asm(".globl FUN_00087e60");
 asm(".set FUN_00087e60, _FUN_00087e60");
 asm(".globl FUN_00087e80");

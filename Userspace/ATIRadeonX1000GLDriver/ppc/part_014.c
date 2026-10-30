@@ -5818,8 +5818,8 @@ int ffvpRunStateHook(ctx)
   return;
 }
 
-/* FUN_0009d3b0 @ 0x9d3b0 (64 bytes) */
-int FUN_0009d3b0(ctx, arg2, param_3, param_4, param_5, param_6, param_7)
+/* gldValidateVertexProgramState @ 0x9d3b0 (64 bytes) */
+int gldValidateVertexProgramState(ctx, arg2, param_3, param_4, param_5, param_6, param_7)
   int ctx;
   undefined4 arg2;
   undefined4 param_3;
@@ -7696,8 +7696,8 @@ int glProgramStringARB_impl(ctx, target, format, length, text, param_6, param_7,
   return arbfpProgramString(ctx,0x8875,length,text);
 }
 
-/* FUN_000a0350 @ 0xa0350 (36 bytes) */
-int FUN_000a0350(param_1, param_2)
+/* arbProgramEntryInit @ 0xa0350 (36 bytes) */
+int arbProgramEntryInit(param_1, param_2)
   undefined4 param_1;
   undefined4 *param_2;
 {
@@ -7749,7 +7749,7 @@ int glBindProgramARB_impl(ctx, target, programId, unusedArg4, unusedArg5, unused
           *(int *)(programTable + 8) = newEntries;
           programCount = *(uint *)(programTable + 4);
         }
-        ((int (*)())FUN_000a0350)(ctx,programCount * 0x18 + *(int *)(programTable + 8));
+        ((int (*)())arbProgramEntryInit)(ctx,programCount * 0x18 + *(int *)(programTable + 8));
         *(int *)(*(int *)(programTable + 4) * 0x18 + *(int *)(programTable + 8) + 4) = target;
         *(int *)(*(int *)(programTable + 4) * 0x18 + *(int *)(programTable + 8)) = programId;
         if (target == 0x8804) {
@@ -8137,7 +8137,7 @@ int arbProgramTableRelease(ctx)
   int entryOffset;
   int programTable;
   
-  FUN_0008dc40(ctx);
+  gldCallHook1278(ctx);
   if (*(int *)(((unsigned char *)0x00001128) + ctx) != 0) {
     (**(code **)(ctx + 0x18))(*(int *)(((unsigned char *)0x00001128) + ctx));
     *(undefined4 *)(((unsigned char *)0x00001128) + ctx) = 0;
@@ -8217,8 +8217,8 @@ int glDeleteProgramsARB_impl(ctx, count, ids)
   return;
 }
 
-/* FUN_000a0ef0 @ 0xa0ef0 (144 bytes) */
-int FUN_000a0ef0(context)
+/* arbProgramTableInit @ 0xa0ef0 (144 bytes) */
+int arbProgramTableInit(context)
   int context;
 {
   undefined4 uVar1;
@@ -8246,8 +8246,8 @@ int noop_a0f80()
   return;
 }
 
-/* FUN_000a0f90 @ 0xa0f90 (152 bytes) */
-int FUN_000a0f90(ctx)
+/* atifsInit @ 0xa0f90 (152 bytes) */
+int atifsInit(ctx)
   int ctx;
 {
   uint uVar1;
@@ -8289,8 +8289,8 @@ int FUN_000a1040(param_1, param_2)
   return 2;
 }
 
-/* FUN_000a1060 @ 0xa1060 (44 bytes) */
-int FUN_000a1060(param_1)
+/* arbProgramIsValid @ 0xa1060 (44 bytes) */
+int arbProgramIsValid(param_1)
   int param_1;
 {
   if (((param_1 != -0x1134) && (*(int *)(((unsigned char *)0x00001144) + param_1) != 0)) &&

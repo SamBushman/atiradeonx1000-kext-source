@@ -345,9 +345,9 @@
 8f760	arbfpLoadDefaultProgram	r7	PASS-indirect	8f7d0 bl 0x8c590
 8f760	arbfpLoadDefaultProgram	r8	PASS-indirect	8f7d0 bl 0x8c590
 8f760	arbfpLoadDefaultProgram	r10	PASS-indirect	8f7d0 bl 0x8c590
-8fb70	FUN_0008fb70	r6	PASS-indirect	8fba0 bl 0x86840
-8fb70	FUN_0008fb70	r7	PASS-indirect	8fba0 bl 0x86840
-8fb70	FUN_0008fb70	r8	PASS-indirect	8fba0 bl 0x86840
+8fb70	gldFlushProgramStateForDraw	r6	PASS-indirect	8fba0 bl 0x86840
+8fb70	gldFlushProgramStateForDraw	r7	PASS-indirect	8fba0 bl 0x86840
+8fb70	gldFlushProgramStateForDraw	r8	PASS-indirect	8fba0 bl 0x86840
 9c700	fpVariantCacheFlush	r5	PASS-indirect	9c740 bl 0x9a990
 9c700	fpVariantCacheFlush	r6	PASS-indirect	9c740 bl 0x9a990
 9c700	fpVariantCacheFlush	r7	PASS-indirect	9c740 bl 0x9a990

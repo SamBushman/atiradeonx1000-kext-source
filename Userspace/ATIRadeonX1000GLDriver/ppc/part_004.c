@@ -4105,7 +4105,7 @@ int FUN_00029c00(ctx, param_2, procWidth, procHeight, srcRowBytes, bytesPerPixel
   }
   *puVar11 = ((unsigned char *)0x000010c0U);
   puVar11[1] = *(undefined4 *)(ctx + 0x216c);
-  puVar11 = (undefined4 *)FUN_00083c90(iVar21,puVar11 + 2);
+  puVar11 = (undefined4 *)gldEmitInternalDrawSetupPackets(iVar21,puVar11 + 2);
   scratchDouble6 = DOUBLE_001aa1e0;
   fVar5 = FLOAT_001aa10c;
   pfStack_a4 = (float *)(param_8 ^ 0x80000000);
@@ -4247,7 +4247,7 @@ int FUN_00029c00(ctx, param_2, procWidth, procHeight, srcRowBytes, bytesPerPixel
   *(float **)(ctx + 0x298c) = pfVar15 + 2;
   uStack_b4 = uVar19;
   (**(code **)(ctx + 0x299c))(iVar21,pfVar15 + 2);
-  FUN_0009d3b0(iVar21,r4AfterCall,pfVar13,scratchInt9,pfVar14,pfVar15,pfVar16);
+  gldValidateVertexProgramState(iVar21,r4AfterCall,pfVar13,scratchInt9,pfVar14,pfVar15,pfVar16);
   return gldLeaveInternalDrawState(iVar21,afStack_148);
 }
 
@@ -4267,7 +4267,7 @@ int FUN_0002a260(ring, param_2)
   FUN_0004b480(ring,*(uint *)(ring + 0x18a4) >> 6 & 0xffff);
   scratchUint3 = (**(code **)(ring + 0x2758))(ring,0x1f);
   *(undefined4 *)(0x00002748 + ring + 4) = scratchUint3;
-  puVar4 = (undefined4 *)FUN_00083c90(ring,scratchUint3);
+  puVar4 = (undefined4 *)gldEmitInternalDrawSetupPackets(ring,scratchUint3);
   *puVar4 = ((unsigned char *)0x000010c0U);
   dVar2 = DOUBLE_001aa250;
   puVar4[1] = 0x80;
@@ -5788,7 +5788,7 @@ LAB_0002c610:
     if ((((dirtyBits[2] & 0x3f000008) != 0) || ((scratchUint8 & 0x4c00003) != 0)) ||
        ((*(char *)(engineObjects + 0x2a43) != '\0' || (scratchUint7 != 0)))) {
       gldUpdateHwTclState(stream,dirtyBits);
-      FUN_00090840(stream);
+      gldEmitTclModeRegs(stream);
     }
     if (*(char *)(engineObjects + 0x20) == '\0') {
       FUN_000a7d10(stream);
@@ -6031,7 +6031,7 @@ int gld_initContextHardwareState(ctx, pixelFormat)
   *(undefined4 *)(ctx + 0x1ec) = 0;
   *(undefined4 *)(ctx + 0x1f0) = 0;
   FUN_000a7050(ctx);
-  FUN_000a0f90(iVar10);
+  atifsInit(iVar10);
   staleFprArg1 = (double)FUN_00052cc0(iVar10);
   *(undefined4 *)(((unsigned char *)0x00002b74) + ctx) = 0;
   *(undefined4 *)(ctx + 0x26a0) = 0;

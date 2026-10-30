@@ -2531,8 +2531,8 @@ int arbfpBindProgram(context, programSlot, param_3, param_4, param_5, param_6, p
   return;
 }
 
-/* FUN_0008dc40 @ 0x8dc40 (12 bytes) */
-int FUN_0008dc40(param_1)
+/* gldCallHook1278 @ 0x8dc40 (12 bytes) */
+int gldCallHook1278(param_1)
   int param_1;
 {
                     
@@ -3543,7 +3543,7 @@ int arbfpInitProgramState(context)
       puVar5 = puVar5 + 4;
     } while (loopIndex < (int)(uint)(byte)((unsigned char *)0x000013b1)[context]);
   }
-  FUN_000a0350(context,*(int *)(((unsigned char *)0x0000126c) + context) * 0x18 + *(int *)(stateHolder + 8));
+  arbProgramEntryInit(context,*(int *)(((unsigned char *)0x0000126c) + context) * 0x18 + *(int *)(stateHolder + 8));
   *(undefined4 *)(*(int *)(((unsigned char *)0x0000126c) + context) * 0x18 + *(int *)(stateHolder + 8) + 4) = 0x8804;
   *(undefined4 *)(*(int *)(((unsigned char *)0x0000126c) + context) * 0x18 + *(int *)(stateHolder + 8)) = 0;
   slotIndex = *(int *)(((unsigned char *)0x0000126c) + context);
@@ -3552,7 +3552,7 @@ int arbfpInitProgramState(context)
   *(undefined4 *)(slotIndex * 0x18 + slotTable + 0x14) = uVar1;
   ((int (*)())arbfpProgramObjectInit)(context,*(undefined4 *)
                         (*(int *)(((unsigned char *)0x0000126c) + context) * 0x18 + *(int *)(stateHolder + 8) + 0x14));
-  FUN_000a0350(context,*(int *)(((unsigned char *)0x00001220) + context) * 0x18 + *(int *)(stateHolder + 8));
+  arbProgramEntryInit(context,*(int *)(((unsigned char *)0x00001220) + context) * 0x18 + *(int *)(stateHolder + 8));
   *(undefined4 *)(*(int *)(((unsigned char *)0x00001220) + context) * 0x18 + *(int *)(stateHolder + 8) + 4) = 0x8804;
   *(undefined4 *)(*(int *)(((unsigned char *)0x00001220) + context) * 0x18 + *(int *)(stateHolder + 8)) = 0;
   slotIndex = *(int *)(((unsigned char *)0x00001220) + context);
@@ -3695,7 +3695,7 @@ int gldDrawInternalRect(ctx, param_2, param_3, rect, param_5)
   }
   packetBase = (**(code **)(ctx + 0x2758))(ctx,0x23,uVar14,a3_00,a4);
   *(undefined4 *)(0x00002748 + ctx + 4) = packetBase;
-  packet = (undefined4 *)FUN_00083c90(ctx,packetBase);
+  packet = (undefined4 *)gldEmitInternalDrawSetupPackets(ctx,packetBase);
   if (recordCommands) {
     *(int *)(a1 + 8) = (int)packet - a1 >> 2;
   }
@@ -3743,7 +3743,7 @@ int gldDrawInternalRect(ctx, param_2, param_3, rect, param_5)
   packet[0xf] = *(undefined4 *)(ctx + 0x1ccc);
   *(undefined4 **)(0x00002748 + ctx + 4) = a1_00;
   (**(code **)(ctx + 0x275c))(ctx,a1_00,packet,a3_00,((unsigned char *)0x00001087U),a1_00,a6,0xc0083500);
-  FUN_0009d3b0(ctx,extraout_r4,packet,a3_00,puVar15,a1_00,a6);
+  gldValidateVertexProgramState(ctx,extraout_r4,packet,a3_00,puVar15,a1_00,a6);
   gldLeaveInternalDrawState(ctx,savedDrawState);
   if (recordCommands) {
     *(int *)(a1 + 4) = *(int *)(0x00002748 + ctx + 4) - recordBase >> 2;
@@ -3751,8 +3751,8 @@ int gldDrawInternalRect(ctx, param_2, param_3, rect, param_5)
   return;
 }
 
-/* FUN_0008fb70 @ 0x8fb70 (248 bytes) */
-int FUN_0008fb70(ctx)
+/* gldFlushProgramStateForDraw @ 0x8fb70 (248 bytes) */
+int gldFlushProgramStateForDraw(ctx)
   int ctx;
 {
   int iVar1;
@@ -4149,7 +4149,7 @@ void gldValidateState(int glContext,undefined4 forwardedArg2,undefined4 forwarde
     }
     if ((*(uint *)(glContext + 0x8c) & 0x40000000) == 0) {
       if ((dirtyMask & 0x20000) != 0) {
-        forwardedFloatArg1 = (double)FUN_000867b0(glContext);
+        forwardedFloatArg1 = (double)gldSyncClipPlaneEnables(glContext);
         dirtyMask = *(uint *)(glContext + 0x38);
         forwardedArg2 = extraout_r4_09;
       }
@@ -4240,8 +4240,8 @@ void gldValidateState(int glContext,undefined4 forwardedArg2,undefined4 forwarde
   return;
 }
 
-/* FUN_00090840 @ 0x90840 (264 bytes) */
-int FUN_00090840(param_1)
+/* gldEmitTclModeRegs @ 0x90840 (264 bytes) */
+int gldEmitTclModeRegs(param_1)
   int param_1;
 {
   uint uVar1;
@@ -4293,7 +4293,7 @@ int FUN_00090960(param_1)
   }
   *(undefined1 *)(iVar1 + 0x20) = 0;
   *(undefined4 *)(iVar1 + 0x1cc) = 0;
-  return ((int (*)())FUN_00090840)(param_1);
+  return ((int (*)())gldEmitTclModeRegs)(param_1);
 }
 
 /* gldUpdateHwTclState @ 0x90990 (772 bytes) */
@@ -5824,7 +5824,7 @@ int FUN_00093390(programBuilder)
  * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
  * large PPC links) does not silently reconcile this the way stock ld did. */
 asm(".globl FUN_0008fb70");
-asm(".set FUN_0008fb70, _FUN_0008fb70");
+asm(".set FUN_0008fb70, _gldFlushProgramStateForDraw");
 asm(".globl ffvpComputeOutputMasks");
 asm(".set ffvpComputeOutputMasks, _ffvpComputeOutputMasks");
 asm(".globl gldValidateState");

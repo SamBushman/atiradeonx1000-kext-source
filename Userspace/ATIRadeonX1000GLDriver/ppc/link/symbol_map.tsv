@@ -875,10 +875,10 @@ PTR_FUN_001e89a0	0x1e89a0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char 
 PTR_FUN_001e89a4	0x1e89a4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89a4 asm("PTR_FUN_001e89a4");	pointer -> extvsUploadProgramConstants	data.s
 PTR_FUN_001e89a8	0x1e89a8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89a8 asm("PTR_FUN_001e89a8");	pointer -> evsFoldConstantMoves	data.s
 PTR_FUN_001e89ac	0x1e89ac	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89ac asm("PTR_FUN_001e89ac");	pointer -> vpStateSetConstantVector	data.s
-PTR_FUN_001e89b0	0x1e89b0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89b0 asm("PTR_FUN_001e89b0");	pointer -> FUN_00077030	data.s
+PTR_FUN_001e89b0	0x1e89b0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89b0 asm("PTR_FUN_001e89b0");	pointer -> ctxTempListFree	data.s
 PTR_FUN_001e89b4	0x1e89b4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89b4 asm("PTR_FUN_001e89b4");	pointer -> extvsPrepareHardwareProgram	data.s
 PTR_FUN_001e89b8	0x1e89b8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89b8 asm("PTR_FUN_001e89b8");	pointer -> FUN_00062510	data.s
-PTR_FUN_001e89bc	0x1e89bc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89bc asm("PTR_FUN_001e89bc");	pointer -> FUN_00076fe0	data.s
+PTR_FUN_001e89bc	0x1e89bc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89bc asm("PTR_FUN_001e89bc");	pointer -> ctxTempListCreate	data.s
 PTR_FUN_001e89c0	0x1e89c0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89c0 asm("PTR_FUN_001e89c0");	pointer -> FUN_000768e0	data.s
 PTR_FUN_001e89c4	0x1e89c4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89c4 asm("PTR_FUN_001e89c4");	pointer -> FUN_00062410	data.s
 PTR_FUN_001e89c8	0x1e89c8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89c8 asm("PTR_FUN_001e89c8");	pointer -> extvsStateCacheCreate	data.s
@@ -903,7 +903,7 @@ PTR_FUN_001e8a10	0x1e8a10	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char 
 PTR_FUN_001e8a14	0x1e8a14	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a14 asm("PTR_FUN_001e8a14");	pointer -> FUN_00082c50	data.s
 PTR_FUN_001e8a18	0x1e8a18	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a18 asm("PTR_FUN_001e8a18");	pointer -> FUN_00062370	data.s
 PTR_FUN_001e8a1c	0x1e8a1c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a1c asm("PTR_FUN_001e8a1c");	pointer -> arbEmitRecord2Src_op09	data.s
-PTR_FUN_001e8a20	0x1e8a20	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a20 asm("PTR_FUN_001e8a20");	pointer -> FUN_0008fb70	data.s
+PTR_FUN_001e8a20	0x1e8a20	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a20 asm("PTR_FUN_001e8a20");	pointer -> gldFlushProgramStateForDraw	data.s
 PTR_FUN_001e8a24	0x1e8a24	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a24 asm("PTR_FUN_001e8a24");	pointer -> arbEmitRecord2Src_op0a	data.s
 PTR_FUN_001e8a28	0x1e8a28	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a28 asm("PTR_FUN_001e8a28");	pointer -> arbEmitRecord2Src_op07	data.s
 PTR_FUN_001e8a2c	0x1e8a2c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a2c asm("PTR_FUN_001e8a2c");	pointer -> FUN_000b57a0	data.s
@@ -929,7 +929,7 @@ PTR_FUN_001e8a78	0x1e8a78	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char 
 PTR_FUN_001e8a7c	0x1e8a7c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a7c asm("PTR_FUN_001e8a7c");	pointer -> arbEmitIlAddMad3Src	data.s
 PTR_FUN_001e8a80	0x1e8a80	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a80 asm("PTR_FUN_001e8a80");	pointer -> arbEmitRecord2Src_op03	data.s
 PTR_FUN_001e8a84	0x1e8a84	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a84 asm("PTR_FUN_001e8a84");	pointer -> interpolatorMapInit	data.s
-PTR_FUN_001e8a88	0x1e8a88	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a88 asm("PTR_FUN_001e8a88");	pointer -> FUN_00087cd0	data.s
+PTR_FUN_001e8a88	0x1e8a88	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a88 asm("PTR_FUN_001e8a88");	pointer -> arbfpUnbindWorkAreaChecked	data.s
 PTR_FUN_001e8a8c	0x1e8a8c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a8c asm("PTR_FUN_001e8a8c");	pointer -> arbEmitRecord1Src_op43	data.s
 PTR_FUN_001e8a90	0x1e8a90	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a90 asm("PTR_FUN_001e8a90");	pointer -> arbEmitRecord2Src_op08	data.s
 PTR_FUN_001e8a94	0x1e8a94	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a94 asm("PTR_FUN_001e8a94");	pointer -> arbEmitIlPow	data.s
@@ -958,7 +958,7 @@ PTR_FUN_001e8aec	0x1e8aec	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char 
 PTR_FUN_001e8af0	0x1e8af0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8af0 asm("PTR_FUN_001e8af0");	pointer -> arbEmitIlMad	data.s
 PTR_FUN_001e8af4	0x1e8af4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8af4 asm("PTR_FUN_001e8af4");	pointer -> FUN_00064230	data.s
 PTR_FUN_001e8af8	0x1e8af8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8af8 asm("PTR_FUN_001e8af8");	pointer -> arbEmitRecord1Src_op02	data.s
-PTR_FUN_001e8afc	0x1e8afc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8afc asm("PTR_FUN_001e8afc");	pointer -> FUN_00087da0	data.s
+PTR_FUN_001e8afc	0x1e8afc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8afc asm("PTR_FUN_001e8afc");	pointer -> arbfpUnbindWorkArea	data.s
 PTR_FUN_001e8b00	0x1e8b00	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b00 asm("PTR_FUN_001e8b00");	pointer -> FUN_000b5bd0	data.s
 PTR_FUN_001e8b04	0x1e8b04	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b04 asm("PTR_FUN_001e8b04");	pointer -> arbEmitIlExp	data.s
 PTR_FUN_001e8b08	0x1e8b08	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b08 asm("PTR_FUN_001e8b08");	pointer -> arbEmitIlHeader	data.s

@@ -3478,7 +3478,7 @@ int FUN_000a6860(glContext, dirtyMask)
       puVar14 = puVar14 + 2;
       *(undefined1 *)(glContext + 0x2802) = 1;
     }
-    puVar14 = (undefined4 *)FUN_00083c90(glContext,puVar14);
+    puVar14 = (undefined4 *)gldEmitInternalDrawSetupPackets(glContext,puVar14);
     i2dLo3 = *(undefined4 *)(glContext + 8);
     i2dHi3 = 0x43300000;
     *(undefined4 **)(glContext + 0x2794) = puVar14;
@@ -3511,7 +3511,7 @@ int FUN_000a6860(glContext, dirtyMask)
       puVar14 = puVar14 + 2;
       *(undefined1 *)(glContext + 0x2802) = 1;
     }
-    puVar14 = (undefined4 *)FUN_00083c90(glContext,puVar14);
+    puVar14 = (undefined4 *)gldEmitInternalDrawSetupPackets(glContext,puVar14);
     i2dLo4 = *(undefined4 *)(glContext + 8);
     i2dHi4 = 0x43300000;
     *(undefined4 **)(glContext + 0x2794) = puVar14;
@@ -3549,7 +3549,7 @@ int FUN_000a6860(glContext, dirtyMask)
   puVar14[0xf] = *(undefined4 *)(glContext + 0x1ccc);
   *(undefined4 **)(0x00002748 + glContext + 4) = puVar18;
   (**(code **)(glContext + 0x275c))(glContext,puVar18);
-  FUN_0009d3b0(glContext,r4AfterCall,iVar16,puVar17,puVar18,uVar19,iVar20);
+  gldValidateVertexProgramState(glContext,r4AfterCall,iVar16,puVar17,puVar18,uVar19,iVar20);
   gldLeaveInternalDrawState(glContext,auStack_128);
   return;
 }
@@ -4018,7 +4018,7 @@ int FUN_000a7050(ctx)
   *(int *)(iVar9 + 0x1154) = ((int (*)())FUN_000a6f70)(0x90);
   *(int *)(iVar9 + 0x112c) = ((int (*)())FUN_000a6f70)(0x14);
   ((int (*)())atifsCreateShaderTable)(iVar9);
-  FUN_000a0ef0(iVar9);
+  arbProgramTableInit(iVar9);
   arbfpLoadDefaultProgram(iVar9);
   *(undefined1 *)(ctx + 0x26f) = 1;
   puVar2 = PTR_FUN_001e8a04;

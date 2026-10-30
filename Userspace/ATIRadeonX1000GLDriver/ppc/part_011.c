@@ -112,8 +112,8 @@ int vpStateFree(ctx, state)
   return;
 }
 
-/* FUN_00076fe0 @ 0x76fe0 (76 bytes) */
-int FUN_00076fe0(param_1)
+/* ctxTempListCreate @ 0x76fe0 (76 bytes) */
+int ctxTempListCreate(param_1)
   int param_1;
 {
   undefined4 uVar1;
@@ -126,8 +126,8 @@ int FUN_00076fe0(param_1)
   return;
 }
 
-/* FUN_00077030 @ 0x77030 (84 bytes) */
-int FUN_00077030(param_1)
+/* ctxTempListFree @ 0x77030 (84 bytes) */
+int ctxTempListFree(param_1)
   int param_1;
 {
   if (*(int *)(((unsigned char *)0x000011b4) + param_1) != 0) {
@@ -348,8 +348,8 @@ int vpStateSetConstantVector(ctx, shader, constantEntry)
   return;
 }
 
-/* FUN_000774c0 @ 0x774c0 (156 bytes) */
-int FUN_000774c0(param_1, param_2)
+/* recordAllocCreate @ 0x774c0 (156 bytes) */
+int recordAllocCreate(param_1, param_2)
   code *param_1;
   undefined4 param_2;
 {
@@ -517,8 +517,8 @@ int arrayRemoveAt(param_1, param_2, param_3)
   return;
 }
 
-/* FUN_000777b0 @ 0x777b0 (56 bytes) */
-int FUN_000777b0(param_1, param_2)
+/* recordDestFileIs0Or45 @ 0x777b0 (56 bytes) */
+int recordDestFileIs0Or45(param_1, param_2)
   uint *param_1;
   int param_2;
 {
@@ -531,8 +531,8 @@ int FUN_000777b0(param_1, param_2)
   return 1;
 }
 
-/* FUN_00077800 @ 0x77800 (64 bytes) */
-int FUN_00077800(param_1, param_2)
+/* recordDestFileIs3Or1 @ 0x77800 (64 bytes) */
+int recordDestFileIs3Or1(param_1, param_2)
   uint *param_1;
   int param_2;
 {
@@ -628,8 +628,8 @@ switchD_000778cc_caseD_1:
     usageMaskPtr = (uint *)0x0;
   }
 LAB_000779d4:
-  flagResult = ((int (*)())FUN_000777b0)(recordPtr,modeFlag);
-  if ((flagResult == 0) && (flagResult = ((int (*)())FUN_00077800)(recordPtr,modeFlag), flagResult == 0)) {
+  flagResult = ((int (*)())recordDestFileIs0Or45)(recordPtr,modeFlag);
+  if ((flagResult == 0) && (flagResult = ((int (*)())recordDestFileIs3Or1)(recordPtr,modeFlag), flagResult == 0)) {
     writeMask = ((int (*)())recordGetWriteMask)(recordPtr);
     oldUsage = *usageMaskPtr;
     *usageMaskPtr = writeMask | oldUsage;
@@ -652,7 +652,7 @@ LAB_000779d4:
     listHeadCursor = listHeadCursor + 1;
     laneIndex = laneIndex + 1;
   } while (moreLanes);
-  flagResult = ((int (*)())FUN_000777b0)(recordPtr,modeFlag);
+  flagResult = ((int (*)())recordDestFileIs0Or45)(recordPtr,modeFlag);
   if ((flagResult != 0) && (usageMaskPtr = *(uint **)(recordIndex * 4 + alloc + 0xe450), usageMaskPtr != (uint *)0x0)) {
     recordWriteMask = ((int (*)())recordGetWriteMask)(recordPtr);
     do {
@@ -1185,8 +1185,8 @@ int recordAssignDestinationRegister(ctx, program, recordIndex, keepFlag, chosenR
   return iVar4 != -1;
 }
 
-/* FUN_00078950 @ 0x78950 (64 bytes) */
-int FUN_00078950(param_1)
+/* recordMarkPairEmitted @ 0x78950 (64 bytes) */
+int recordMarkPairEmitted(param_1)
   int param_1;
 {
   int iVar1;
@@ -2014,8 +2014,8 @@ int recordSetSourceSelect(param_1, param_2, param_3)
   return;
 }
 
-/* FUN_00079b00 @ 0x79b00 (200 bytes) */
-int FUN_00079b00(param_1, param_2, param_3, param_4)
+/* recordAddTransitiveDependencies @ 0x79b00 (200 bytes) */
+int recordAddTransitiveDependencies(param_1, param_2, param_3, param_4)
   int param_1;
   int param_2;
   int param_3;
@@ -2032,7 +2032,7 @@ int FUN_00079b00(param_1, param_2, param_3, param_4)
     }
     for (puVar2 = *(undefined4 **)(param_3 * 4 + param_1 + 0xc450); puVar2 != (undefined4 *)0x0;
         puVar2 = (undefined4 *)puVar2[4]) {
-      iVar1 = ((int (*)())FUN_00079b00)(param_1,param_2,*puVar2,puVar2[1]);
+      iVar1 = ((int (*)())recordAddTransitiveDependencies)(param_1,param_2,*puVar2,puVar2[1]);
       if (iVar1 != 0) {
         return iVar1;
       }
@@ -2122,8 +2122,8 @@ LAB_00079dc0:
   return;
 }
 
-/* FUN_00079e10 @ 0x79e10 (88 bytes) */
-int FUN_00079e10(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+/* recordSourcesAreDistinctTemps @ 0x79e10 (88 bytes) */
+int recordSourcesAreDistinctTemps(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -2188,7 +2188,7 @@ int FUN_00079e70(alloc, param_2)
       if ((((bVar1) && ((**(uint **)(alloc + 0x34) & 0x40) != 0)) &&
           (bVar5 = (char)*record + 0xbc, bVar5 < 0xb)) &&
          (uVar6 = 1 << ((int)(char)bVar5 & 0x3fU) & 0x601, uVar6 != 0)) {
-        uVar17 = ((int (*)())FUN_00079e10)(record,param_2,in_r5,in_r6,in_r7,in_r8,uVar6);
+        uVar17 = ((int (*)())recordSourcesAreDistinctTemps)(record,param_2,in_r5,in_r6,in_r7,in_r8,uVar6);
         param_2 = (int)uVar17;
         if ((int)((ulonglong)uVar17 >> 0x20) != 0) {
           conflictFound = true;
@@ -2276,8 +2276,8 @@ int chunkArenaFree(param_1)
   return ((int (*)())chunkArenaResetCursor)(param_1);
 }
 
-/* FUN_0007a110 @ 0x7a110 (100 bytes) */
-int FUN_0007a110(param_1)
+/* recordAllocFree @ 0x7a110 (100 bytes) */
+int recordAllocFree(param_1)
   int param_1;
 {
   if (param_1 != 0) {
@@ -2466,9 +2466,9 @@ int recordPlanDestination(ctx, program, laterPass, tempRegLimit, recordIndex, ke
   *keepFlagOut = 0;
   *chosenRegOut = 0xffffffff;
   record = (uint *)(recordIndex * 0x10 + program);
-  callResult = ((int (*)())FUN_000777b0)(record,laterPass);
+  callResult = ((int (*)())recordDestFileIs0Or45)(record,laterPass);
   if (callResult == 0) {
-    callResult = ((int (*)())FUN_00077800)(record,laterPass);
+    callResult = ((int (*)())recordDestFileIs3Or1)(record,laterPass);
     if (callResult != 0) {
       swizzleWord = ((unsigned char *)0x00003210U);
       combinedWriteMask = ((int (*)())recordCombinedWriteMask)(ctx,recordIndex);
@@ -2769,7 +2769,7 @@ int recordPickNextToEmit(ctx, registerCount, readyCycle, keepFlag, chosenReg, pr
     *(undefined4 *)(ctx + 0x35490) = 3;
     assignOk = ((int (*)())recordAssignDestinationRegister)(ctx,program,chosenRecord,keepFlag,chosenReg);
     if (assignOk != 0) {
-      ((int (*)())FUN_00078950)(ctx);
+      ((int (*)())recordMarkPairEmitted)(ctx);
       return chosenRecord;
     }
   }
@@ -2784,7 +2784,7 @@ int recordPickNextToEmit(ctx, registerCount, readyCycle, keepFlag, chosenReg, pr
     if (fitOk != 0) {
       *puStack00000024 = keepFlagTmp[0];
       *puStack00000028 = chosenRegTmp[0];
-      ((int (*)())FUN_00078950)(ctx);
+      ((int (*)())recordMarkPairEmitted)(ctx);
       return chosenRecord;
     }
   }
@@ -3386,9 +3386,9 @@ LAB_0007b894:
     else {
       configPtrB = *(uint **)(alloc + 0x34);
       configBit6 = *configPtrB >> 6 & 1;
-      iVar27 = ((int (*)())FUN_000777b0)(recordPtr,configBit6);
+      iVar27 = ((int (*)())recordDestFileIs0Or45)(recordPtr,configBit6);
       if (iVar27 == 0) {
-        iVar27 = ((int (*)())FUN_00077800)(recordPtr,configBit6);
+        iVar27 = ((int (*)())recordDestFileIs3Or1)(recordPtr,configBit6);
         if (iVar27 != 0) {
           ((int (*)())FUN_0007a1a0)(alloc,recordCount,pickedRegister);
           configPtrB = *(uint **)(alloc + 0x34);
@@ -3405,10 +3405,10 @@ LAB_0007b894:
     if (status != 0) {
       return status;
     }
-    iVar27 = ((int (*)())FUN_000777b0)(recordPtr,**(uint **)(alloc + 0x34) >> 6 & 1);
+    iVar27 = ((int (*)())recordDestFileIs0Or45)(recordPtr,**(uint **)(alloc + 0x34) >> 6 & 1);
     if (iVar27 == 0) {
       recordOffset4 = recordCount * 4;
-      recordIsFixed = ((int (*)())FUN_00077800)(recordPtr,*configPtr >> 6 & 1);
+      recordIsFixed = ((int (*)())recordDestFileIs3Or1)(recordPtr,*configPtr >> 6 & 1);
       if (recordIsFixed != 0) {
         scratchArg3 = (code *)((int (*)())recordGetWriteMask)(recordPtr);
         scratchArg4 = (code *)((int)((unsigned char *)0x0) + 1);
@@ -3679,7 +3679,7 @@ LAB_0007bc50:
     opcodeRewriteIndex = 0;
     recordCursorB = records;
     do {
-      statusAndValue = ((int (*)())FUN_00079e10)(recordCursorB,uVar26,scratchArg3,scratchArg4,scratchArg5,scratchArg6,configBit6Arg);
+      statusAndValue = ((int (*)())recordSourcesAreDistinctTemps)(recordCursorB,uVar26,scratchArg3,scratchArg4,scratchArg5,scratchArg6,configBit6Arg);
       uVar26 = (undefined4)statusAndValue;
       if ((int)((ulonglong)statusAndValue >> 0x20) != 0) {
         if (recordCursorB[3] == (code *)0x4) {
@@ -4385,8 +4385,8 @@ LAB_0007ceb4:
         local_90 = 1;
       }
       configBit6 = *configFlagsPtr >> 6 & 1;
-      iVar36 = ((int (*)())FUN_000777b0)(record,configBit6);
-      if (((iVar36 != 0) || (iVar36 = ((int (*)())FUN_00077800)(record,configBit6), iVar36 != 0)) &&
+      iVar36 = ((int (*)())recordDestFileIs0Or45)(record,configBit6);
+      if (((iVar36 != 0) || (iVar36 = ((int (*)())recordDestFileIs3Or1)(record,configBit6), iVar36 != 0)) &&
          (piVar32 = (*(int * *)(recordFlagPtr + (0x1000))), piVar32 != (int *)0x0)) {
         pdVar20 = (dword *)((int)((unsigned char *)0x0) + 1);
         do {
@@ -4399,8 +4399,8 @@ LAB_0007ceb4:
         configFlagsPtr = (uint *)alloc[0xd];
       }
       configBit6 = *configFlagsPtr >> 6 & 1;
-      iVar36 = ((int (*)())FUN_000777b0)(record,configBit6);
-      if ((iVar36 != 0) || (iVar36 = ((int (*)())FUN_00077800)(record,configBit6), iVar36 != 0)) {
+      iVar36 = ((int (*)())recordDestFileIs0Or45)(record,configBit6);
+      if ((iVar36 != 0) || (iVar36 = ((int (*)())recordDestFileIs3Or1)(record,configBit6), iVar36 != 0)) {
         usedMaskAccum = (uint *)0x0;
         for (configBit6 = recordFlagPtr[0x1000]; configBit6 != 0; configBit6 = *(uint *)(configBit6 + 0x10)) {
           usedMaskAccum = (uint *)((uint)usedMaskAccum | *(uint *)(configBit6 + 4));
@@ -4441,7 +4441,7 @@ LAB_0007ceb4:
         }
       }
       if ((opcodeByte == 'D') &&
-         (iVar36 = ((int (*)())FUN_000777b0)(record,*configFlagsPtr >> 6 & 1), puVar16 = local_b4, iVar36 != 0)) {
+         (iVar36 = ((int (*)())recordDestFileIs0Or45)(record,*configFlagsPtr >> 6 & 1), puVar16 = local_b4, iVar36 != 0)) {
         pdVar20 = (dword *)(*record & 0xff7fffff);
         *record = *record & 0xff6fffff;
         configFlagsPtr = (uint *)alloc[0xd];
@@ -4527,7 +4527,7 @@ LAB_0007ceb4:
               do {
                 puVar34 = puVar34 + -4;
                 local_b8 = *puVar34;
-                uVar37 = ((int (*)())FUN_00077800)(&local_b8,*configFlagsPtrB >> 6 & 1);
+                uVar37 = ((int (*)())recordDestFileIs3Or1)(&local_b8,*configFlagsPtrB >> 6 & 1);
                 puVar27 = (uint *)uVar37;
                 if ((int)((ulonglong)uVar37 >> 0x20) == 0) {
 LAB_0007d968:
@@ -4849,7 +4849,7 @@ LAB_0007da08:
       for (piVar31 = (int *)*tablePtr; piVar31 != (int *)0x0; piVar31 = (int *)piVar31[4]) {
         pdVar15 = (dword *)*piVar31;
         in_r6 = (dword *)piVar31[1];
-        ((int (*)())FUN_00079b00)(alloc,loopIndex,pdVar15,in_r6);
+        ((int (*)())recordAddTransitiveDependencies)(alloc,loopIndex,pdVar15,in_r6);
         puVar27 = extraout_r4_15;
       }
       loopIndex = loopIndex + 1;
@@ -4892,8 +4892,8 @@ LAB_0007da08:
   return 0;
 }
 
-/* FUN_0007dcd0 @ 0x7dcd0 (88 bytes) */
-int FUN_0007dcd0(param_1, param_2)
+/* ctxTempListPush @ 0x7dcd0 (88 bytes) */
+int ctxTempListPush(param_1, param_2)
   int param_1;
   undefined4 param_2;
 {
@@ -4908,8 +4908,8 @@ int FUN_0007dcd0(param_1, param_2)
   return;
 }
 
-/* FUN_0007dd30 @ 0x7dd30 (160 bytes) */
-int FUN_0007dd30(param_1, param_2)
+/* ctxTempListRemove @ 0x7dd30 (160 bytes) */
+int ctxTempListRemove(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -9212,9 +9212,9 @@ int interpolatorMapInit(ctx, builder, param_3, param_4)
 asm(".globl FUN_00076c60");
 asm(".set FUN_00076c60, _FUN_00076c60");
 asm(".globl FUN_00076fe0");
-asm(".set FUN_00076fe0, _FUN_00076fe0");
+asm(".set FUN_00076fe0, _ctxTempListCreate");
 asm(".globl FUN_00077030");
-asm(".set FUN_00077030, _FUN_00077030");
+asm(".set FUN_00077030, _ctxTempListFree");
 asm(".globl vpStateCacheCreate");
 asm(".set vpStateCacheCreate, _vpStateCacheCreate");
 asm(".globl vpStateCacheFreeAll");

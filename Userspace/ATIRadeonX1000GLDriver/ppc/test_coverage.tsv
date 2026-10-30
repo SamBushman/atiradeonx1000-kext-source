@@ -662,18 +662,18 @@
 0x76c60	FUN_00076c60	480	no	indirect call (driver context / vtable / callback)
 0x76e60	noop_76e60	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x76e70	vpStateFree	356	no	indirect call (driver context / vtable / callback)
-0x76fe0	FUN_00076fe0	76	no	indirect call (driver context / vtable / callback)
-0x77030	FUN_00077030	84	no	indirect call (driver context / vtable / callback)
+0x76fe0	ctxTempListCreate	76	no	indirect call (driver context / vtable / callback)
+0x77030	ctxTempListFree	84	no	indirect call (driver context / vtable / callback)
 0x77090	vpStateCacheCreate	600	no	indirect call (driver context / vtable / callback)
 0x772f4	vpStateCacheFreeAll	300	no	indirect call (driver context / vtable / callback)
 0x77430	vpStateSetConstantVector	132	yes	
-0x774c0	FUN_000774c0	156	no	indirect call (driver context / vtable / callback)
+0x774c0	recordAllocCreate	156	no	indirect call (driver context / vtable / callback)
 0x77560	recordCollectDependencies	228	yes	
 0x77650	depListRemove	76	yes	
 0x776b0	recordClearBindingTables	176	yes	
 0x77760	arrayRemoveAt	72	yes	
-0x777b0	FUN_000777b0	56	yes	
-0x77800	FUN_00077800	64	yes	
+0x777b0	recordDestFileIs0Or45	56	yes	
+0x77800	recordDestFileIs3Or1	64	yes	
 0x77850	recordGetWriteMask	12	yes	
 0x77860	recordIsSchedulable	792	yes	
 0x77ba0	regBindingSet	140	yes	
@@ -687,7 +687,7 @@
 0x78300	recordOpcodeSourceMask	200	yes	
 0x78700	recordMarkDependentsDirty	84	yes	
 0x78760	recordAssignDestinationRegister	448	yes	
-0x78950	FUN_00078950	64	yes	
+0x78950	recordMarkPairEmitted	64	yes	
 0x78990	FUN_00078990	56	yes	
 0x789d0	FUN_000789d0	56	yes	
 0x78a10	recordCountSourceRegisterFiles	356	yes	
@@ -701,20 +701,20 @@
 0x79910	depListAddEdge	248	yes	
 0x79a20	recordGetSourceSelect	92	yes	
 0x79a90	recordSetSourceSelect	100	yes	
-0x79b00	FUN_00079b00	200	yes	
+0x79b00	recordAddTransitiveDependencies	200	yes	
 0x79bd0	recordLinkSourceToDefinition	532	yes	
-0x79e10	FUN_00079e10	88	yes	
+0x79e10	recordSourcesAreDistinctTemps	88	yes	
 0x79e70	FUN_00079e70	488	yes	
 0x7a060	chunkArenaResetCursor	16	yes	
 0x7a070	chunkArenaFree	156	yes	
-0x7a110	FUN_0007a110	100	yes	
+0x7a110	recordAllocFree	100	yes	
 0x7a1a0	FUN_0007a1a0	756	yes	
 0x7a4a0	recordPlanDestination	1544	yes	
 0x7aae0	recordPickNextToEmit	1460	no	indirect call (driver context / vtable / callback)
 0x7b0d0	recordProgramAllocateAndEmit	5660	yes	
 0x7c760	recordProgramBuildDependencies	4940	yes	
-0x7dcd0	FUN_0007dcd0	88	no	indirect call (driver context / vtable / callback)
-0x7dd30	FUN_0007dd30	160	no	indirect call (driver context / vtable / callback)
+0x7dcd0	ctxTempListPush	88	no	indirect call (driver context / vtable / callback)
+0x7dd30	ctxTempListRemove	160	no	indirect call (driver context / vtable / callback)
 0x7dde0	evsFoldConstantMoves	14156	yes	
 0x82900	FUN_00082900	812	no	indirect call (driver context / vtable / callback)
 0x82c50	FUN_00082c50	760	no	indirect call (driver context / vtable / callback)
@@ -725,7 +725,7 @@
 0x837b0	gldEmitVertexRoutingPackets	188	no	indirect call (driver context / vtable / callback)
 0x83870	ffvpValidateProgram	1012	no	indirect call (driver context / vtable / callback)
 0x83c80	ffvpValidateProgramForced	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x83c90	FUN_00083c90	372	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x83c90	gldEmitInternalDrawSetupPackets	372	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x83e10	arbEmitRecord3Src_op44	692	no	calls an import (calloc); calls an import (free)
 0x840d0	arbEmitRecord2Src_op01	548	no	calls an import (calloc); calls an import (free)
 0x84300	arbEmitRecord1Src_op02	472	no	calls an import (calloc); calls an import (free)
@@ -746,7 +746,7 @@
 0x862b0	arbEmitRecord2Src_op45	548	no	calls an import (calloc); calls an import (free)
 0x864e0	arbEmitRecord2Src_op4f	548	no	calls an import (calloc); calls an import (free)
 0x86710	FUN_00086710	152	no	indirect call (driver context / vtable / callback)
-0x867b0	FUN_000867b0	140	yes	
+0x867b0	gldSyncClipPlaneEnables	140	yes	
 0x86840	gldUploadClipPlanes	228	no	indirect call (driver context / vtable / callback)
 0x86930	FUN_00086930	204	yes	
 0x86a10	FUN_00086a10	96	yes	
@@ -757,8 +757,8 @@
 0x87960	arbfpInitResourceLimits	120	yes	
 0x879e0	noop_879e0	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x879f0	FUN_000879f0	732	yes	
-0x87cd0	FUN_00087cd0	188	yes	
-0x87da0	FUN_00087da0	172	yes	
+0x87cd0	arbfpUnbindWorkAreaChecked	188	yes	
+0x87da0	arbfpUnbindWorkArea	172	yes	
 0x87e60	FUN_00087e60	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x87e70	FUN_00087e70	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x87e80	arbfpCompileFragmentProgram	764	yes	
@@ -797,7 +797,7 @@
 0x8c590	arbValidateProgram	3768	no	indirect call (driver context / vtable / callback)
 0x8d470	arbfpUpdateStateForProgram	1744	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x8dbd0	arbfpBindProgram	100	yes	
-0x8dc40	FUN_0008dc40	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x8dc40	gldCallHook1278	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x8dc50	arbfpProgramObjectInit	336	no	indirect call (driver context / vtable / callback)
 0x8dda0	arbfpProgramObjectFree	408	no	indirect call (driver context / vtable / callback)
 0x8df50	arbfpProgramString	880	no	indirect call (driver context / vtable / callback)
@@ -807,11 +807,11 @@
 0x8f6f0	arbfpGrowInstanceTable	108	no	indirect call (driver context / vtable / callback)
 0x8f760	arbfpLoadDefaultProgram	144	yes	
 0x8f7f0	gldDrawInternalRect	884	no	indirect call (driver context / vtable / callback)
-0x8fb70	FUN_0008fb70	248	no	indirect call (driver context / vtable / callback)
+0x8fb70	gldFlushProgramStateForDraw	248	no	indirect call (driver context / vtable / callback)
 0x8fc70	ffvpAssignOutputSlots	1028	yes	
 0x900a0	ffvpComputeOutputMasks	944	no	indirect call (driver context / vtable / callback)
 0x90470	gldValidateState	952	no	indirect call (driver context / vtable / callback)
-0x90840	FUN_00090840	264	no	indirect call (driver context / vtable / callback)
+0x90840	gldEmitTclModeRegs	264	no	indirect call (driver context / vtable / callback)
 0x90960	FUN_00090960	48	yes	
 0x90990	gldUpdateHwTclState	772	yes	
 0x90ca0	ffvpAllocTempRegister	1240	yes	
@@ -880,25 +880,25 @@
 0x9cff0	ffvpBuildBlendKey	132	yes	
 0x9d080	ffvpUpdateLightModelFlags	596	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x9d2e0	ffvpRunStateHook	184	yes	
-0x9d3b0	FUN_0009d3b0	64	yes	
+0x9d3b0	gldValidateVertexProgramState	64	yes	
 0x9d410	ffvpBuildProgram	5944	no	indirect call (driver context / vtable / callback)
 0x9eb90	fpVariantCacheGrow	560	no	indirect call (driver context / vtable / callback)
 0x9edd0	fpVariantCacheLookup	708	yes	
 0x9f0b0	programFillStateConstants	4444	no	indirect call (driver context / vtable / callback)
 0xa0290	arbProgramFindIndex	96	yes	
 0xa0300	glProgramStringARB_impl	80	yes	
-0xa0350	FUN_000a0350	36	yes	
+0xa0350	arbProgramEntryInit	36	yes	
 0xa0380	glBindProgramARB_impl	476	no	indirect call (driver context / vtable / callback)
 0xa0570	glGenProgramsARB_impl	124	yes	
 0xa05f0	glGetProgramivARB_impl	704	yes	
 0xa0ba0	arbProgramEntryFree	188	no	indirect call (driver context / vtable / callback)
 0xa0c60	arbProgramTableRelease	260	no	indirect call (driver context / vtable / callback)
 0xa0d70	glDeleteProgramsARB_impl	372	yes	
-0xa0ef0	FUN_000a0ef0	144	no	indirect call (driver context / vtable / callback)
+0xa0ef0	arbProgramTableInit	144	no	indirect call (driver context / vtable / callback)
 0xa0f80	noop_a0f80	4	yes	
-0xa0f90	FUN_000a0f90	152	yes	
+0xa0f90	atifsInit	152	yes	
 0xa1040	FUN_000a1040	20	yes	
-0xa1060	FUN_000a1060	44	yes	
+0xa1060	arbProgramIsValid	44	yes	
 0xa1090	FUN_000a1090	200	yes	
 0xa1160	FUN_000a1160	48	yes	
 0xa11a0	FUN_000a11a0	64	yes	

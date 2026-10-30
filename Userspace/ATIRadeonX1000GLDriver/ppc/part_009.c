@@ -1912,7 +1912,7 @@ int extvsRewriteHardwareInstructions(ctx, shader)
   if (*(char *)(shader + 4) != '\0') {
     newInstArray = (**(code **)(ctx + 0xc))(*(int *)(hwProgram + 0x18) << 4);
     buildJob = (undefined4 *)
-             FUN_000774c0(*(undefined4 *)(ctx + 0xc),*(undefined4 *)(ctx + 0x18));
+             recordAllocCreate(*(undefined4 *)(ctx + 0xc),*(undefined4 *)(ctx + 0x18));
     buildJob[8] = 0;
     buildJob[9] = 0;
     buildJob[3] = 0x20;
@@ -1926,7 +1926,7 @@ int extvsRewriteHardwareInstructions(ctx, shader)
     buildJob[2] = oldInstCount;
     buildJob[0xc] = auStack_2c;
     buildStatus = recordProgramBuildDependencies(buildJob);
-    FUN_0007a110(buildJob);
+    recordAllocFree(buildJob);
     (**(code **)(ctx + 0x18))(*(undefined4 *)(hwProgram + 0x1c));
     *(int *)(hwProgram + 0x1c) = newInstArray;
     if (buildStatus == 0) {
@@ -3627,7 +3627,7 @@ int extvsStateFree(param_1, param_2)
     (**(code **)(param_1 + 0x18))(*(int *)(param_2 + 0x2b8));
   }
   (**(code **)(param_1 + 0x18))(param_2);
-  return FUN_0007dd30(param_1,param_2);
+  return ctxTempListRemove(param_1,param_2);
 }
 
 /* FUN_00062370 @ 0x62370 (104 bytes) */
@@ -5046,7 +5046,7 @@ LAB_00064af0:
             constAlloc[1] = regionHeight + constAlloc[1];
             ((int (*)())vpUploadConstantArray)(glContext,programState);
             *programState = '\x01';
-            FUN_0007dcd0(glContext,programState);
+            ctxTempListPush(glContext,programState);
             regionHeight = *(uint *)(programState + 0x5c);
             goto LAB_00064c00;
           }
