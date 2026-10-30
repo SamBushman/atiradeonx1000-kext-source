@@ -1939,6 +1939,7 @@ int FUN_00149de4(inst, operandIndex8, inst2, composeSelectPtr, compiler)
   byte componentUnused;
   char selectByteC;
   int iVar4;
+  int staleArg5;
   int instLastOperandIdx;
   int operandCountInst2;
   int singleUseCheck;
@@ -1954,7 +1955,7 @@ int FUN_00149de4(inst, operandIndex8, inst2, composeSelectPtr, compiler)
   int loopIndex;
   int constByteOffset;
   int operandIndex;
-  undefined4 uVar11;
+  undefined4 selectWordStored;
   undefined4 in_r8;
   int operandIndex2;
   uint absFlag;
@@ -1979,10 +1980,10 @@ int FUN_00149de4(inst, operandIndex8, inst2, composeSelectPtr, compiler)
     target = *(int **)(compiler + COMP_target);
     composedSelect = composeOut[0];
     targetCheckFn = *(code **)(*target + 0x104);
-    iVar4 = IRInst__getOperandSource(inst2,1);
+    staleArg5 = IRInst__getOperandSource(inst2,1);
     /* dropped 5th arg (found auditing #70 via ExtendIndirectCalls.java / ground-truth
-     * disassembly): stock passes the just-computed iVar4 in r7 too. */
-    targetCheckResult = (*targetCheckFn)(target,inst,operandIndex8,&composedSelect,iVar4);
+     * disassembly): stock passes the just-computed staleArg5 (inst2 source 1) in r7 too. */
+    targetCheckResult = (*targetCheckFn)(target,inst,operandIndex8,&composedSelect,staleArg5);
     if (targetCheckResult != 0) {
       operandVReg = (int *)IRInst__getOperandSource(inst2,1);
       operandVReg2 = (int *)IRInst__getOperandSource(inst,operandIndex8);
@@ -2064,9 +2065,9 @@ int FUN_00149de4(inst, operandIndex8, inst2, composeSelectPtr, compiler)
               (*instAddSourceFn)(inst,sourceDef4,compiler);
             }
           }
-          uVar11 = composedSelect;
+          selectWordStored = composedSelect;
           operandRecord2 = IRInst__getOperandRecord(inst,operandIndex8);
-          *(undefined4 *)(operandRecord2 + 0x10) = uVar11;
+          *(undefined4 *)(operandRecord2 + 0x10) = selectWordStored;
           IROperand__setModifierBits(inst + operandIndex8 * 6 + 0x23,2,absFlag);
           IROperand__setModifierBits(inst + operandIndex8 * 6 + 0x23,1,negateFlag);
         }
@@ -2082,7 +2083,7 @@ int FUN_00149de4(inst, operandIndex8, inst2, composeSelectPtr, compiler)
               componentByte = (uint)*(byte *)(loopIndex + operandRecord3 + 0x10);
               if (componentByte != 4) {
                 (**(code **)(*operandVReg2 + 0x88))
-                          (operandVReg2,1,loopIndex,(uint)*(byte *)((int)selectScratch + componentByte),iVar4,in_r8,
+                          (operandVReg2,1,loopIndex,(uint)*(byte *)((int)selectScratch + componentByte),staleArg5,in_r8,
                            (int)selectScratch + (componentByte - 4));
                 IRInst__getOperandRecord(inst2,0);
               }
@@ -2151,7 +2152,7 @@ int FUN_00149de4(inst, operandIndex8, inst2, composeSelectPtr, compiler)
               chainProducerCopy[0x26] = 0x36;
               chainProducerCopy[0x25] = chainProducerCopy[0x53];
               Block__insertInstBefore(inst[0x56],inst,chainProducerCopy);
-              iVar4 = compiler;
+              staleArg5 = compiler;
               IRInst__setOperandSource(inst,operandIndex8,chainProducerCopy,0,compiler);
               chainOperandCount = chainProducerCopy[0x21];
               operandVReg2[0x58] = operandVReg2[0x58] + -1;
@@ -2181,7 +2182,7 @@ int FUN_00149de4(inst, operandIndex8, inst2, composeSelectPtr, compiler)
               if (componentByte != 4) {
                 if (*(char *)((uint)componentUnused + operandRecord + 0x10) == '\x04') {
                   (**(code **)(*chainProducerCopy + 0x88))
-                            (chainProducerCopy,1,loopIndex,4,iVar4,in_r8,*(code **)(*chainProducerCopy + 0x88));
+                            (chainProducerCopy,1,loopIndex,4,staleArg5,in_r8,*(code **)(*chainProducerCopy + 0x88));
                   if (1 < operandVReg[0x21]) {
                     operandIndex2 = 2;
                     constByteOffset = 0x30;

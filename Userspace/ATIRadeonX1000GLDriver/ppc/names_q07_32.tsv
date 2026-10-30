@@ -3436,3 +3436,10 @@ use	FUN_00149de4	iVar5	byteOffsetP	INFERRED	role read off the web	^\s*iVar5\ =\ 
 use	FUN_00149de4	iVar5	instLastOperandIdxB	INFERRED	role read off the web	^\s*iVar5\ =\ param_1\[0x21\];$	+1
 use	FUN_00149de4	iVar5	instLastOperandIdxB	INFERRED	role read off the web	^\s*iVar5\ =\ param_1\[0x21\]\ \+\ \-1;$	+1
 use	FUN_00149de4	iVar5	instLastOperandIdxB	INFERRED	role read off the web	^\s*if\ \(iVar5\ <\ iVar14\)\ goto\ LAB_0014a868;$	+1
+use	FUN_00149de4	uVar11	selectWordStored	INFERRED	composed select word stored to the operand record	^\s*uVar11\ =\ local_68;$	+1
+use	FUN_00149de4	uVar11	selectWordStored	INFERRED	composed select word stored to the operand record	^\s*\*\(undefined4\ \*\)\(iVar4\ \+\ 0x10\)\ =\ uVar11;$	+1
+use	FUN_00149de4	iVar4	staleArg5	INFERRED	inst2 source 1 then compiler: values left in r7 as the 5th (stale) argument of the target check and of later vcalls; one register, not splittable	^\s*iVar4\ =\ FUN_00105594\(param_3,1\);$	+1
+use	FUN_00149de4	iVar4	staleArg5	INFERRED	inst2 source 1 then compiler: values left in r7 as the 5th (stale) argument of the target check and of later vcalls; one register, not splittable	^\s*iVar5\ =\ \(\*pcVar15\)\(piVar18,param_1,param_2,\&local_68,iVar4\);$	+1
+use	FUN_00149de4	iVar4	staleArg5	INFERRED	inst2 source 1 then compiler: values left in r7 as the 5th (stale) argument of the target check and of later vcalls; one register, not splittable	^\s*\(piVar6,1,iVar8,\(uint\)\*\(byte\ \*\)\(\(int\)local_64\ \+\ uVar16\),iVar4,in_r8,$	+2
+use	FUN_00149de4	iVar4	staleArg5	INFERRED	inst2 source 1 then compiler: values left in r7 as the 5th (stale) argument of the target check and of later vcalls; one register, not splittable	^\s*iVar4\ =\ param_5;$	+1
+use	FUN_00149de4	iVar4	staleArg5	INFERRED	inst2 source 1 then compiler: values left in r7 as the 5th (stale) argument of the target check and of later vcalls; one register, not splittable	^\s*\(piVar7,1,iVar8,4,iVar4,in_r8,\*\(code\ \*\*\)\(\*piVar7\ \+\ 0x88\)\);$	+1
