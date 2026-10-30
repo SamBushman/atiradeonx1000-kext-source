@@ -2674,3 +2674,7 @@ local	Block__splitIncomingEdge	uVar4	vectorSize	INFERRED	element count of the pr
 local	FUN_000e2a04	iVar1	cachedId	INFERRED	value cached at param_1+0x30, computed by FUN_00130690 on first use (negative = unset)
 local	FUN_000da438	uVar1	secondWord	INFERRED	param_2[1]
 local	FUN_000da438	uVar2	thirdWord	INFERRED	param_2[2]
+use	ConstBank__storeIntLane	uVar2	entryCount	INFERRED	count of 0x14-byte per-register entries in the bank	^\s*uVar2\ =\ \*\(uint\ \*\)\(param_5\ \+\ 0x7c\);$	^\s*piVar5\ =\ piVar4;$	all	none
+use	ConstBank__storeIntLane	uVar2	literalRecordCount	INFERRED	count of 0x24-byte literal records in the bank	^\s*uVar2\ =\ \*\(uint\ \*\)\(param_5\ \+\ 0x58\);$	^\s*\*\(undefined4\ \*\)\(iVar3\ \+\ 0x14\)\ =\ param_3;$	all	none
+use	ConstBank__storeBoolLane	uVar2	entryCount	INFERRED	count of 0x14-byte per-register entries in the bank	^\s*uVar2\ =\ \*\(uint\ \*\)\(param_5\ \+\ 0x80\);$	^\s*piVar5\ =\ piVar4;$	all	none
+use	ConstBank__storeBoolLane	uVar2	literalRecordCount	INFERRED	count of 0x24-byte literal records in the bank	^\s*uVar2\ =\ \*\(uint\ \*\)\(param_5\ \+\ 0x5c\);$	^\s*\*\(undefined4\ \*\)\(iVar3\ \+\ 0x14\)\ =\ param_3;$	all	none

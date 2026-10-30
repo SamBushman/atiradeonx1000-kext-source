@@ -2313,7 +2313,8 @@ int ConstBank__storeIntLane(unusedArg1, registerKey, laneValue, lane, bank, useG
   int bank;
   int useGlobalList;
 {
-  uint uVar2;
+  uint literalRecordCount;
+  uint entryCount;
   int nextEntryOffset;
   int entryOffset;
   int *entryTable;
@@ -2323,21 +2324,21 @@ int ConstBank__storeIntLane(unusedArg1, registerKey, laneValue, lane, bank, useG
   if (useGlobalList == 0) {
     entryTable = *(int **)(bank + 0x88);
     if (entryTable != (int *)0x0) {
-      uVar2 = *(uint *)(bank + 0x7c);
-      if (uVar2 == 0) {
+      entryCount = *(uint *)(bank + 0x7c);
+      if (entryCount == 0) {
 LAB_000d9cf0:
-        if (*(uint *)(bank + 0x70) <= uVar2) {
+        if (*(uint *)(bank + 0x70) <= entryCount) {
           return 0;
         }
-        entryOffset = uVar2 * 0x14;
-        *(uint *)(bank + 0x7c) = uVar2 + 1;
+        entryOffset = entryCount * 0x14;
+        *(uint *)(bank + 0x7c) = entryCount + 1;
       }
       else if (*entryTable == registerKey) {
         entryOffset = 0;
       }
       else {
         nextEntryOffset = 0x14;
-        entriesLeft = uVar2;
+        entriesLeft = entryCount;
         entryCursor = entryTable;
         do {
           entryOffset = nextEntryOffset;
@@ -2353,11 +2354,11 @@ LAB_000d9cf0:
     }
   }
   else {
-    uVar2 = *(uint *)(bank + 0x58);
-    if (uVar2 < *(uint *)(bank + 0x4c)) {
-      *(uint *)(bank + 0x58) = uVar2 + 1;
-      entryOffset = uVar2 * 0x24 + *(int *)(bank + 100);
-      *(int *)(uVar2 * 0x24 + *(int *)(bank + 100)) = registerKey;
+    literalRecordCount = *(uint *)(bank + 0x58);
+    if (literalRecordCount < *(uint *)(bank + 0x4c)) {
+      *(uint *)(bank + 0x58) = literalRecordCount + 1;
+      entryOffset = literalRecordCount * 0x24 + *(int *)(bank + 100);
+      *(int *)(literalRecordCount * 0x24 + *(int *)(bank + 100)) = registerKey;
       *(undefined4 *)(entryOffset + 0x14) = laneValue;
       *(int *)(entryOffset + 4) = lane;
       *(undefined4 *)(entryOffset + 8) = 0;
@@ -2376,7 +2377,8 @@ int ConstBank__storeBoolLane(unusedArg1, registerKey, laneValue, lane, bank, use
   int bank;
   int useGlobalList;
 {
-  uint uVar2;
+  uint literalRecordCount;
+  uint entryCount;
   int nextEntryOffset;
   int entryOffset;
   int *entryTable;
@@ -2386,21 +2388,21 @@ int ConstBank__storeBoolLane(unusedArg1, registerKey, laneValue, lane, bank, use
   if (useGlobalList == 0) {
     entryTable = *(int **)(bank + 0x8c);
     if (entryTable != (int *)0x0) {
-      uVar2 = *(uint *)(bank + 0x80);
-      if (uVar2 == 0) {
+      entryCount = *(uint *)(bank + 0x80);
+      if (entryCount == 0) {
 LAB_000d9dd4:
-        if (*(uint *)(bank + 0x74) <= uVar2) {
+        if (*(uint *)(bank + 0x74) <= entryCount) {
           return 0;
         }
-        entryOffset = uVar2 * 0x14;
-        *(uint *)(bank + 0x80) = uVar2 + 1;
+        entryOffset = entryCount * 0x14;
+        *(uint *)(bank + 0x80) = entryCount + 1;
       }
       else if (*entryTable == registerKey) {
         entryOffset = 0;
       }
       else {
         nextEntryOffset = 0x14;
-        entriesLeft = uVar2;
+        entriesLeft = entryCount;
         entryCursor = entryTable;
         do {
           entryOffset = nextEntryOffset;
@@ -2416,11 +2418,11 @@ LAB_000d9dd4:
     }
   }
   else {
-    uVar2 = *(uint *)(bank + 0x5c);
-    if (uVar2 < *(uint *)(bank + 0x50)) {
-      *(uint *)(bank + 0x5c) = uVar2 + 1;
-      entryOffset = uVar2 * 0x24 + *(int *)(bank + 0x68);
-      *(int *)(uVar2 * 0x24 + *(int *)(bank + 0x68)) = registerKey;
+    literalRecordCount = *(uint *)(bank + 0x5c);
+    if (literalRecordCount < *(uint *)(bank + 0x50)) {
+      *(uint *)(bank + 0x5c) = literalRecordCount + 1;
+      entryOffset = literalRecordCount * 0x24 + *(int *)(bank + 0x68);
+      *(int *)(literalRecordCount * 0x24 + *(int *)(bank + 0x68)) = registerKey;
       *(undefined4 *)(entryOffset + 0x14) = laneValue;
       *(int *)(entryOffset + 4) = lane;
       *(undefined4 *)(entryOffset + 8) = 2;
