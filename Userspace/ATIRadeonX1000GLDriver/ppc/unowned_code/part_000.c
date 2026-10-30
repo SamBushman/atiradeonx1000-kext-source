@@ -1695,7 +1695,7 @@ int orph_e2084(param_1)
   int iVar1;
   
   if (*(int *)(param_1 + 0x310) != 0) {
-    FUN_0010defc(*(int *)(param_1 + 0x310),param_1);
+    ChipShaders__release(*(int *)(param_1 + 0x310),param_1);
     (**(code **)(param_1 + 0x34c))
               (*(undefined4 *)(param_1 + 0x354),*(undefined4 *)(param_1 + 0x310));
   }
@@ -1719,7 +1719,7 @@ int orph_e208c(param_1)
   int iVar1;
   
   if (*(int *)(param_1 + 0x310) != 0) {
-    FUN_0010defc(*(int *)(param_1 + 0x310),param_1);
+    ChipShaders__release(*(int *)(param_1 + 0x310),param_1);
     (**(code **)(param_1 + 0x34c))
               (*(undefined4 *)(param_1 + 0x354),*(undefined4 *)(param_1 + 0x310));
   }

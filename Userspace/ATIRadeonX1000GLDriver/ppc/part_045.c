@@ -3423,7 +3423,7 @@ code_r0x00171ba0:
   Compiler__logf(*scheduler,"Scheduler : Total dot-product transformed %d\n",scheduler[0x6a],in_r6,in_r7,
                in_r8,registerCount,in_r10);
   Program__beginPass(scheduler[1],(int)"schedule_inst");
-  FUN_00138080(program);
+  Program__freeBlockBitsets(program);
   liveOutSet = scheduler[0x4c];
   componentCursor = scheduler;
   if (liveOutSet != 0) {
@@ -4097,7 +4097,7 @@ int KeyLaneTable__eqKeys(param_1, param_2)
   piVar9 = *(int **)(iVar12 + 0xb0);
   iVar7 = *(int *)(param_1 + 8);
   iVar8 = *(int *)(param_2 + 8);
-  iVar3 = FUN_0011379c(*(undefined4 *)(iVar12 + 0x238),piVar9);
+  iVar3 = OpcodeTraits__flag1WithoutFlag7(*(undefined4 *)(iVar12 + 0x238),piVar9);
   iVar5 = iVar12 + 0xb4;
   iVar6 = iVar10 + 0xb4;
   if ((((iVar3 == 0) || (*(int *)(iVar12 + 0xb4) != *(int *)(iVar10 + 0xb4))) ||

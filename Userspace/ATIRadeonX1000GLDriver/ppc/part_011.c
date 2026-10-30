@@ -9242,27 +9242,27 @@ int interpolatorMapInit(ctx, builder, unusedArg3, slotCountOut)
  * against the real compiled C symbols (gcc adds one underscore automatically).
  * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
  * large PPC links) does not silently reconcile this the way stock ld did. */
-asm(".globl FUN_00076c60");
-asm(".set FUN_00076c60, _vpStateSelectForDraw");
-asm(".globl FUN_00076fe0");
-asm(".set FUN_00076fe0, _ctxTempListCreate");
-asm(".globl FUN_00077030");
-asm(".set FUN_00077030, _ctxTempListFree");
+asm(".globl vpStateSelectForDraw");
+asm(".set vpStateSelectForDraw, _vpStateSelectForDraw");
+asm(".globl ctxTempListCreate");
+asm(".set ctxTempListCreate, _ctxTempListCreate");
+asm(".globl ctxTempListFree");
+asm(".set ctxTempListFree, _ctxTempListFree");
 asm(".globl vpStateCacheCreate");
 asm(".set vpStateCacheCreate, _vpStateCacheCreate");
 asm(".globl vpStateCacheFreeAll");
 asm(".set vpStateCacheFreeAll, _vpStateCacheFreeAll");
 asm(".globl vpStateSetConstantVector");
 asm(".set vpStateSetConstantVector, _vpStateSetConstantVector");
-asm(".globl FUN_00078990");
-asm(".set FUN_00078990, _recordFlagsPending20");
-asm(".globl FUN_000789d0");
-asm(".set FUN_000789d0, _recordFlagsPending2");
+asm(".globl recordFlagsPending20");
+asm(".set recordFlagsPending20, _recordFlagsPending20");
+asm(".globl recordFlagsPending2");
+asm(".set recordFlagsPending2, _recordFlagsPending2");
 asm(".globl evsFoldConstantMoves");
 asm(".set evsFoldConstantMoves, _evsFoldConstantMoves");
-asm(".globl FUN_00082900");
-asm(".set FUN_00082900, _gldAllocAndUploadConstants");
-asm(".globl FUN_00082c50");
-asm(".set FUN_00082c50, _gldEmitProgramConstants");
+asm(".globl gldAllocAndUploadConstants");
+asm(".set gldAllocAndUploadConstants, _gldAllocAndUploadConstants");
+asm(".globl gldEmitProgramConstants");
+asm(".set gldEmitProgramConstants, _gldEmitProgramConstants");
 asm(".globl interpolatorMapInit");
 asm(".set interpolatorMapInit, _interpolatorMapInit");

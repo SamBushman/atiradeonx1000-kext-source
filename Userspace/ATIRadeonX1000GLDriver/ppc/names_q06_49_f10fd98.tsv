@@ -1,0 +1,5 @@
+use	FUN_0010fd98	iVar3	tableByteOffset	INFERRED	byte offset while filling slotTable with -1	^\s*iVar3\ =\ 0;$	^\s*iVar11\ =\ iVar11\ \+\ \-1;$	lhs	none
+use	FUN_0010fd98	iVar3	endSlot	INFERRED	next free slot index, returned to FUN_0010fa24 when the vector is empty	^\s*iVar3\ =\ iVar11;$	+1	lhs	none
+use	FUN_0010fd98	iVar3	endSlot	INFERRED	final next-free slot index	^\s*iVar3\ =\ \*param_3;$		lhs	none
+use	FUN_0010fd98	iVar3	registerKey	INFERRED	+0x94 key of the vector element's register	^\s*iVar3\ =\ \*\(int\ \*\)\(\*piVar7\ \+\ 0x94\);$	^\s*iVar3\ =\ \*piVar7;$	lhs	none
+use	FUN_0010fd98	iVar3	elementRecord	INFERRED	register record of the vector element whose +0x94/+0x98 are rewritten	^\s*iVar3\ =\ \*piVar7;$	^\s*\*param_3\ =\ \*param_3\ \+\ 1;$	lhs	none

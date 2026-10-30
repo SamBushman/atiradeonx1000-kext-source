@@ -12,8 +12,8 @@ use	FUN_00017ee0	iVar5	allocation2	INFERRED	every definition is the result of a 
 use	FUN_00020420	iVar10	value2	INFERRED	every definition is the result of a call whose name says it returns this	#30	+15	all	all
 use	FUN_00025ec0	uVar8	length	INFERRED	every definition is the result of a call whose name says it returns this	#170	+1	all	all
 use	FUN_0002c790	uVar5	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#11	+5	all	all
-use	FUN_00030c50	iVar6	allocation2	INFERRED	every definition is the result of a call whose name says it returns this	#68	+2	all	all
-use	FUN_00030c50	puVar1	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#4	+83	all	all
+use	FUN_00030c50	iVar6	texelStorage	INFERRED	every definition is the result of a call whose name says it returns this	#68	+2	all	all
+use	FUN_00030c50	puVar1	texDesc	INFERRED	every definition is the result of a call whose name says it returns this	#4	+83	all	all
 use	FUN_0003ef50	iVar2	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#13	+12	all	all
 use	FUN_0003f660	iVar2	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#0	+20	all	all
 use	FUN_0003f660	iVar3	allocation2	INFERRED	every definition is the result of a call whose name says it returns this	#9	+4	all	all

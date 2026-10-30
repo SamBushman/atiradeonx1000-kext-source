@@ -4159,7 +4159,7 @@ void gldValidateState(int glContext,undefined4 forwardedArg2,undefined4 forwarde
       forwardedArg2 = extraout_r4_02;
     }
     if ((dirtyMask & 0x400) != 0) {
-      forwardedFloatArg1 = (double)((double (*)())FUN_000520c0)(glContext,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,
+      forwardedFloatArg1 = (double)((double (*)())gldValidateViewport)(glContext,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,
                                       forwardedFloatArg7,forwardedFloatArg8);
       dirtyMask = *(uint *)(glContext + 0x38);
       forwardedArg2 = extraout_r4_03;
@@ -5864,8 +5864,8 @@ int ffvpEmitVectorLength(programBuilder)
  * against the real compiled C symbols (gcc adds one underscore automatically).
  * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
  * large PPC links) does not silently reconcile this the way stock ld did. */
-asm(".globl FUN_0008fb70");
-asm(".set FUN_0008fb70, _gldFlushProgramStateForDraw");
+asm(".globl gldFlushProgramStateForDraw");
+asm(".set gldFlushProgramStateForDraw, _gldFlushProgramStateForDraw");
 asm(".globl ffvpComputeOutputMasks");
 asm(".set ffvpComputeOutputMasks, _ffvpComputeOutputMasks");
 asm(".globl gldValidateState");

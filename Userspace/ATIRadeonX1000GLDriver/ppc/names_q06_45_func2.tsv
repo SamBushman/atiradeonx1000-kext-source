@@ -1,0 +1,17 @@
+func	FUN_0010dde4	Vslot__returnConst0x10c	INFERRED	returns constant 0x10c
+func	FUN_0011e6ec	Value__lowHalfword	INFERRED	returns the low halfword of its argument
+func	FUN_001272cc	Object__setWord0	INFERRED	*param_1 = param_2
+func	FUN_00134aa8	InterferenceNode__setSpillSlot	INFERRED	stores spillSlot at node+0x14
+func	FUN_00134ab0	InterferenceNode__getSpillSlot	INFERRED	returns node+0x14
+func	FUN_0010e55c	Vslot__outZeroReturnZero	INFERRED	stores 0 through param_4 and returns
+func	FUN_00112fc4	Value__isBelow8	INFERRED	param_1 < 8 (unsigned)
+func	FUN_00112fd4	Value__isBelow7	INFERRED	param_1 < 7 (unsigned)
+func	FUN_001272b4	Object__sumWords4And8	INFERRED	returns word +4 plus word +8
+func	FUN_00130944	Record__field98IsBelow2	INFERRED	returns record+0x98 < 2 (unsigned)
+func	FUN_00134cd4	InterferenceGraph__storeAliasEntry	INFERRED	storeIndexedWord(value, index, graph+0x20 alias table)
+func	FUN_00104364	Vslot__outDefaults_0_0_4	INFERRED	writes 0, 0, 4 through its three out pointers
+func	FUN_0010e8c4	Compare__descendingByField140	INFERRED	*p2+0x140 < *p1+0x140
+func	FUN_00130424	RegAlloc__nextTempId	INFERRED	increments compiler+0x3c4 counter, returns it plus allocator+8
+func	FUN_001309bc	RegAlloc__testBit24	INFERRED	tests bit N of the bitmap at allocator+0x24
+func	FUN_0012aae0	Compiler__noteUnrollCount	INFERRED	sets compiler+0x47c=1 and raises the max at +0x480 to unrollCount
+func	FUN_001308e0	IRInst__chainEndNext	INFERRED	IRInst__advanceToChainEnd(inst)+8

@@ -1,0 +1,23 @@
+use	IRInst__sourcesAreSameValue	iVar1	sourceQuery	INFERRED	IRInst__getOperandSource(inst,1) when there is a single operand	^\s*if\ \(\(\(\*\(int\ \*\)\(param_1\ \+\ 0x84\)\ !=\ 1\)\ \|\|\ \(iVar1\ =\ FUN_00105594\(param_1,1\),\ iVar1\ ==\ 0\)\)\ \&\&$	^\s*\(1\ <\ \*\(int\ \*\)\(param_1\ \+\ 0x84\)\)\)\ \{$	all	none
+use	IRInst__sourcesAreSameValue	iVar1	operandNumber	INFERRED	operand number 2..count	^\s*iVar1\ =\ 2;$	^\s*return\ 1;$	lhs	none
+use	pass_color_graph	puVar12	bitsetCursor	INFERRED	walks the bitset words clearing word +8	^\s*puVar12\ =\ puVar21;$	^\s*uVar26\ =\ uVar26\ \-\ 1;$	lhs	none
+use	pass_color_graph	puVar12	nodeSlotRef	INFERRED	slot ref into the node vector	^\s*puVar12\ =\ \(undefined4\ \*\)\(iVar25\ \+\ puVar29\[2\]\);$	^\s*param_1\);$	lhs	none
+use	pass_color_graph	puVar12	affinitySlotRef	INFERRED	slot ref into the affinity vector	^\s*puVar12\ =\ \(undefined4\ \*\)\(uVar23\ \*\ 4\ \+\ puVar28\[2\]\);$	^\s*if\ \(\(\-1\ <\ \(int\)uVar16\)\ \&\&$	lhs	none
+use	HwLimits__computeBlockLiveness	puVar11	blocksArray	INFERRED	Program__getBlocksArray result	^\s*puVar11\ =\ \(undefined4\ \*\)FUN_000ec5b8\(param_3\);$	^\s*while\(\ true\ \)\ \{$	lhs	none
+use	HwLimits__computeBlockLiveness	puVar11	bitsetClearCursor	INFERRED	walks bitset words clearing word +8	^\s*puVar11\ =\ puVar12;$	^\s*uVar21\ =\ uVar21\ \-\ 1;$	lhs	none
+use	HwLimits__computeBlockLiveness	puVar11	bitsetClearCursor	INFERRED	walks bitset words clearing word +8	^\s*puVar11\ =\ puVar12;$@2	^\s*uVar21\ =\ uVar21\ \-\ 1;$	lhs	none
+use	HwLimits__computeBlockLiveness	puVar11	bitsetClearCursor	INFERRED	walks bitset words clearing word +8	^\s*puVar11\ =\ puVar12;$@3	^\s*uVar21\ =\ uVar21\ \-\ 1;$	lhs	none
+use	Interpolator__vslot10	iVar3	resultValue	INFERRED	value returned	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x3c\);$	^\s*\}$	lhs	none
+use	Interpolator__vslot10	iVar3	laneIndex	INFERRED	mask byte index 0..3	^\s*iVar3\ =\ 0;$	^\s*\}\ while\ \(iVar5\ !=\ 0\);$	lhs	none
+use	Interpolator__vslot10	iVar3	resultValue	INFERRED	value returned	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x3c\);$@2	+1	lhs	none
+use	Interpolator__vslot10	iVar3	exportOperandRecord	INFERRED	operand 2 record of the new export	^\s*iVar3\ =\ FUN_001054ec\(puVar7,2\);$	^\s*\(\(int\ \(\*\)\(\)\)FUN_0012306c\)\(uVar2,puVar7\);$	lhs	none
+use	Interpolator__vslot10	iVar3	newVRegId	INFERRED	decremented compiler vreg counter	^\s*iVar3\ =\ \*\(int\ \*\)\(iVar5\ \+\ 0x3ac\)\ \+\ \-1;$	^\s*\*\(undefined4\ \*\)\(param_1\ \+\ 0x3c\)\ =\ uVar6;$	lhs	none
+use	Interpolator__vslot10	iVar3	resultValue	INFERRED	value returned	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x3c\);$@3		lhs	none
+use	Interpolator__vslot10	iVar5	remaining	INFERRED	mask bytes left from 4	^\s*iVar5\ =\ 4;$	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x3c\);$	lhs	none
+use	Interpolator__vslot10	iVar5	compiler	INFERRED	program+8	^\s*iVar5\ =\ \*\(int\ \*\)\(param_3\ \+\ 8\);$	^\s*uVar6\ =\ FUN_001275a0\(uVar6,0,iVar3,0\);$	lhs	none
+use	Interpolator__vslot10	uVar6	defaultSwizzle	INFERRED	DAT_001afeec stored in operand 2 +0x10	^\s*uVar6\ =\ DAT_001afeec;$	^\s*\(\(int\ \(\*\)\(\)\)FUN_0012306c\)\(uVar2,puVar7\);$	lhs	none
+use	Interpolator__vslot10	uVar6	vregPool	INFERRED	program+0x3ac VRegPool	^\s*uVar6\ =\ \*\(undefined4\ \*\)\(param_3\ \+\ 0x3ac\);$	^\s*uVar6\ =\ FUN_001275a0\(uVar6,0,iVar3,0\);$	all	rhs
+use	Interpolator__vslot10	uVar6	newSource	INFERRED	fresh VRegPool entry used as operand 1	^\s*uVar6\ =\ FUN_001275a0\(uVar6,0,iVar3,0\);$	^\s*\(\(int\ \(\*\)\(\)\)FUN_001236e4\)\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x3c\),1,puVar7\);$	lhs	none
+use	FUN_0012b140	iVar1	vtable	INFERRED	block vtable word	^\s*iVar1\ =\ \*param_1;$	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(iVar1\ \+\ 0x2c\)\)\(param_1\);$	all	rhs
+use	FUN_0012b140	iVar1	query	INFERRED	block vslot query results (0x2c/0x24/0x28/0x34)	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(iVar1\ \+\ 0x2c\)\)\(param_1\);$	^\s*iVar1\ =\ \*param_1;$	lhs	none
+use	FUN_0012b140	iVar1	vtable	INFERRED	block vtable word re-read after moving to the next block	^\s*iVar1\ =\ \*param_1;$@2	+1	lhs	none

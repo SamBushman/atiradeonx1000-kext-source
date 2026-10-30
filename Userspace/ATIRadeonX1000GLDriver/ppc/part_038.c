@@ -1,73 +1,73 @@
 #include "decls.h"
 
 /* ExportAddress__ctor_1260f4 @ 0x1260f4 (88 bytes) */
-int ExportAddress__ctor_1260f4(param_1, param_2, param_3, param_4, compiler)
-  undefined4 *param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
+int ExportAddress__ctor_1260f4(this, ctorWord2, ctorWord1, ctorWord3, compiler)
+  undefined4 *this;
+  undefined4 ctorWord2;
+  undefined4 ctorWord1;
+  undefined4 ctorWord3;
   undefined4 compiler;
 {
   undefined *vtable;
   
-  VRegInfo__ctor_12379c(param_1,param_2,param_3,param_4,compiler);
+  VRegInfo__ctor_12379c(this,ctorWord2,ctorWord1,ctorWord3,compiler);
   vtable = PTR_DAT_001e90d0;
-  param_1[4] = 0x20;
-  param_1[9] = param_1[9] | 2;
-  *param_1 = vtable + 8;
+  this[4] = 0x20;
+  this[9] = this[9] | 2;
+  *this = vtable + 8;
   return;
 }
 
 /* ExportAddress__ctor_12614c @ 0x12614c (88 bytes) */
-int ExportAddress__ctor_12614c(param_1, param_2, param_3, param_4, compiler)
-  undefined4 *param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
+int ExportAddress__ctor_12614c(this, ctorWord2, ctorWord1, ctorWord3, compiler)
+  undefined4 *this;
+  undefined4 ctorWord2;
+  undefined4 ctorWord1;
+  undefined4 ctorWord3;
   undefined4 compiler;
 {
   undefined *vtable;
   
-  VRegInfo__ctor_12379c(param_1,param_2,param_3,param_4,compiler);
+  VRegInfo__ctor_12379c(this,ctorWord2,ctorWord1,ctorWord3,compiler);
   vtable = PTR_DAT_001e90d0;
-  param_1[4] = 0x20;
-  param_1[9] = param_1[9] | 2;
-  *param_1 = vtable + 8;
+  this[4] = 0x20;
+  this[9] = this[9] | 2;
+  *this = vtable + 8;
   return;
 }
 
 /* ImmedConstBuffer__ctor_1261a4 @ 0x1261a4 (68 bytes) */
-int ImmedConstBuffer__ctor_1261a4(this, param_2, param_3, param_4, compiler)
+int ImmedConstBuffer__ctor_1261a4(this, ctorWord2, ctorWord1, ctorWord3, compiler)
   undefined4 *this;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
+  undefined4 ctorWord2;
+  undefined4 ctorWord1;
+  undefined4 ctorWord3;
   undefined4 compiler;
 {
-  VRegInfo__ctor_12379c(this,param_2,param_3,param_4,compiler);
+  VRegInfo__ctor_12379c(this,ctorWord2,ctorWord1,ctorWord3,compiler);
   *this = &PTR_FUN_001ea8d0;
   return;
 }
 
 /* ImmedConstBuffer__ctor_1261e8 @ 0x1261e8 (68 bytes) */
-int ImmedConstBuffer__ctor_1261e8(this, param_2, param_3, param_4, compiler)
+int ImmedConstBuffer__ctor_1261e8(this, ctorWord2, ctorWord1, ctorWord3, compiler)
   undefined4 *this;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
+  undefined4 ctorWord2;
+  undefined4 ctorWord1;
+  undefined4 ctorWord3;
   undefined4 compiler;
 {
-  VRegInfo__ctor_12379c(this,param_2,param_3,param_4,compiler);
+  VRegInfo__ctor_12379c(this,ctorWord2,ctorWord1,ctorWord3,compiler);
   *this = &PTR_FUN_001ea8d0;
   return;
 }
 
 /* ExportSlot__ctor_12622c @ 0x12622c (256 bytes) */
-int ExportSlot__ctor_12622c(this, param_2, param_3, param_4, compiler)
+int ExportSlot__ctor_12622c(this, ctorWord2, ctorWord1, ctorWord3, compiler)
   undefined4 *this;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
+  undefined4 ctorWord2;
+  undefined4 ctorWord1;
+  undefined4 ctorWord3;
   int compiler;
 {
   undefined4 arena;
@@ -76,8 +76,8 @@ int ExportSlot__ctor_12622c(this, param_2, param_3, param_4, compiler)
   undefined4 *exportInst;
   undefined4 exportStreamValue;
   
-  VRegInfo__ctor_12379c(this,param_2,param_3,param_4,compiler);
-  this[4] = param_2;
+  VRegInfo__ctor_12379c(this,ctorWord2,ctorWord1,ctorWord3,compiler);
+  this[4] = ctorWord2;
   this[9] = this[9] | 2;
   *this = &PTR_FUN_001ea7f0;
   if ((*(uint *)(*(int *)(compiler + COMP_currentProgram) + 0x30) & 0x4000) != 0) {
@@ -88,7 +88,7 @@ int ExportSlot__ctor_12622c(this, param_2, param_3, param_4, compiler)
     IRExport__ctor_108918(exportInst,compiler);
     allocation[0x28] = DAT_001afef0;
     IRInst__setOperandRef(exportInst,0,this);
-    FUN_0012306c(this,exportInst);
+    VReg__appendUser(this,exportInst);
     IRInst__setOperandRef(exportInst,1,this);
     exportStreamValue = DAT_001afeec;
     operandRecord = IRInst__getOperandRecord(exportInst,1);
@@ -101,11 +101,11 @@ int ExportSlot__ctor_12622c(this, param_2, param_3, param_4, compiler)
 }
 
 /* ExportSlot__ctor_126378 @ 0x126378 (256 bytes) */
-int ExportSlot__ctor_126378(this, param_2, param_3, param_4, compiler)
+int ExportSlot__ctor_126378(this, ctorWord2, ctorWord1, ctorWord3, compiler)
   undefined4 *this;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
+  undefined4 ctorWord2;
+  undefined4 ctorWord1;
+  undefined4 ctorWord3;
   int compiler;
 {
   undefined4 arena;
@@ -114,8 +114,8 @@ int ExportSlot__ctor_126378(this, param_2, param_3, param_4, compiler)
   undefined4 *exportInst;
   undefined4 exportStreamValue;
   
-  VRegInfo__ctor_12379c(this,param_2,param_3,param_4,compiler);
-  this[4] = param_2;
+  VRegInfo__ctor_12379c(this,ctorWord2,ctorWord1,ctorWord3,compiler);
+  this[4] = ctorWord2;
   this[9] = this[9] | 2;
   *this = &PTR_FUN_001ea7f0;
   if ((*(uint *)(*(int *)(compiler + COMP_currentProgram) + 0x30) & 0x4000) != 0) {
@@ -126,7 +126,7 @@ int ExportSlot__ctor_126378(this, param_2, param_3, param_4, compiler)
     IRExport__ctor_108918(exportInst,compiler);
     allocation[0x28] = DAT_001afef0;
     IRInst__setOperandRef(exportInst,0,this);
-    FUN_0012306c(this,exportInst);
+    VReg__appendUser(this,exportInst);
     IRInst__setOperandRef(exportInst,1,this);
     exportStreamValue = DAT_001afeec;
     operandRecord = IRInst__getOperandRecord(exportInst,1);
@@ -139,16 +139,16 @@ int ExportSlot__ctor_126378(this, param_2, param_3, param_4, compiler)
 }
 
 /* LoopIndexedConstSet__ctor_1264c4 @ 0x1264c4 (116 bytes) */
-int LoopIndexedConstSet__ctor_1264c4(this, param_2, param_3, param_4, compiler)
+int LoopIndexedConstSet__ctor_1264c4(this, ctorWord2, ctorWord1, ctorWord3, compiler)
   undefined4 *this;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
+  undefined4 ctorWord2;
+  undefined4 ctorWord1;
+  undefined4 ctorWord3;
   int compiler;
 {
   undefined *vtable;
   
-  VRegInfo__ctor_12379c(this,param_2,param_3,param_4,compiler);
+  VRegInfo__ctor_12379c(this,ctorWord2,ctorWord1,ctorWord3,compiler);
   vtable = PTR_DAT_001e90ec;
   this[0xc] = 0;
   *this = vtable + 8;
@@ -159,16 +159,16 @@ int LoopIndexedConstSet__ctor_1264c4(this, param_2, param_3, param_4, compiler)
 }
 
 /* LoopIndexedConstSet__ctor_126538 @ 0x126538 (116 bytes) */
-int LoopIndexedConstSet__ctor_126538(this, param_2, param_3, param_4, compiler)
+int LoopIndexedConstSet__ctor_126538(this, ctorWord2, ctorWord1, ctorWord3, compiler)
   undefined4 *this;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
+  undefined4 ctorWord2;
+  undefined4 ctorWord1;
+  undefined4 ctorWord3;
   int compiler;
 {
   undefined *vtable;
   
-  VRegInfo__ctor_12379c(this,param_2,param_3,param_4,compiler);
+  VRegInfo__ctor_12379c(this,ctorWord2,ctorWord1,ctorWord3,compiler);
   vtable = PTR_DAT_001e90ec;
   this[0xc] = 0;
   *this = vtable + 8;
@@ -179,16 +179,16 @@ int LoopIndexedConstSet__ctor_126538(this, param_2, param_3, param_4, compiler)
 }
 
 /* LoopIndexedInputSet__ctor_1265ac @ 0x1265ac (116 bytes) */
-int LoopIndexedInputSet__ctor_1265ac(this, param_2, param_3, param_4, compiler)
+int LoopIndexedInputSet__ctor_1265ac(this, ctorWord2, ctorWord1, ctorWord3, compiler)
   undefined4 *this;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
+  undefined4 ctorWord2;
+  undefined4 ctorWord1;
+  undefined4 ctorWord3;
   int compiler;
 {
   undefined *vtable;
   
-  VRegInfo__ctor_12379c(this,param_2,param_3,param_4,compiler);
+  VRegInfo__ctor_12379c(this,ctorWord2,ctorWord1,ctorWord3,compiler);
   vtable = PTR_DAT_001e90ec;
   this[0xc] = 0;
   *this = vtable + 8;
@@ -199,16 +199,16 @@ int LoopIndexedInputSet__ctor_1265ac(this, param_2, param_3, param_4, compiler)
 }
 
 /* LoopIndexedInputSet__ctor_126620 @ 0x126620 (116 bytes) */
-int LoopIndexedInputSet__ctor_126620(this, param_2, param_3, param_4, compiler)
+int LoopIndexedInputSet__ctor_126620(this, ctorWord2, ctorWord1, ctorWord3, compiler)
   undefined4 *this;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
+  undefined4 ctorWord2;
+  undefined4 ctorWord1;
+  undefined4 ctorWord3;
   int compiler;
 {
   undefined *vtable;
   
-  VRegInfo__ctor_12379c(this,param_2,param_3,param_4,compiler);
+  VRegInfo__ctor_12379c(this,ctorWord2,ctorWord1,ctorWord3,compiler);
   vtable = PTR_DAT_001e90ec;
   this[0xc] = 0;
   *this = vtable + 8;
@@ -219,16 +219,16 @@ int LoopIndexedInputSet__ctor_126620(this, param_2, param_3, param_4, compiler)
 }
 
 /* LoopIndexedOutputSet__ctor_126694 @ 0x126694 (116 bytes) */
-int LoopIndexedOutputSet__ctor_126694(this, param_2, param_3, param_4, compiler)
+int LoopIndexedOutputSet__ctor_126694(this, ctorWord2, ctorWord1, ctorWord3, compiler)
   undefined4 *this;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
+  undefined4 ctorWord2;
+  undefined4 ctorWord1;
+  undefined4 ctorWord3;
   int compiler;
 {
   undefined *vtable;
   
-  VRegInfo__ctor_12379c(this,param_2,param_3,param_4,compiler);
+  VRegInfo__ctor_12379c(this,ctorWord2,ctorWord1,ctorWord3,compiler);
   vtable = PTR_DAT_001e90ec;
   this[0xc] = 0;
   *this = vtable + 8;
@@ -239,17 +239,17 @@ int LoopIndexedOutputSet__ctor_126694(this, param_2, param_3, param_4, compiler)
 }
 
 /* RegKind__flagBit7 @ 0x126708 (44 bytes) */
-int RegKind__flagBit7(param_1)
-  int param_1;
+int RegKind__flagBit7(regKind)
+  int regKind;
 {
-  return *(uint *)(&DAT_001ea904 + param_1 * 0x10) >> 7 & 1;
+  return *(uint *)(&DAT_001ea904 + regKind * 0x10) >> 7 & 1;
 }
 
 /* RegKind__flagBit8 @ 0x126734 (44 bytes) */
-int RegKind__flagBit8(param_1)
-  int param_1;
+int RegKind__flagBit8(movSourceKind)
+  int movSourceKind;
 {
-  return *(uint *)(&DAT_001ea904 + param_1 * 0x10) >> 8 & 1;
+  return *(uint *)(&DAT_001ea904 + movSourceKind * 0x10) >> 8 & 1;
 }
 
 /* RegKind__flagBit0 @ 0x126760 (44 bytes) */
@@ -260,24 +260,24 @@ int RegKind__flagBit0(kind)
 }
 
 /* RegKind__flagBit6 @ 0x12678c (44 bytes) */
-int RegKind__flagBit6(param_1)
-  int param_1;
+int RegKind__flagBit6(regKind)
+  int regKind;
 {
-  return *(uint *)(&DAT_001ea904 + param_1 * 0x10) >> 6 & 1;
+  return *(uint *)(&DAT_001ea904 + regKind * 0x10) >> 6 & 1;
 }
 
-/* FUN_001267b8 @ 0x1267b8 (52 bytes) */
-int FUN_001267b8(param_1)
-  int param_1;
+/* Table1ea904__hasFlag0x11 @ 0x1267b8 (52 bytes) */
+int Table1ea904__hasFlag0x11(rowIndex)
+  int rowIndex;
 {
-  return -(uint)(*(uint *)(&DAT_001ea904 + param_1 * 0x10) & 0x11) >> 0x1f;
+  return -(uint)(*(uint *)(&DAT_001ea904 + rowIndex * 0x10) & 0x11) >> 0x1f;
 }
 
 /* ImmedConstBuffer__vslot283 @ 0x1267ec (84 bytes) */
-int ImmedConstBuffer__vslot283(this, param_2, param_3, compiler)
+int ImmedConstBuffer__vslot283(this, ctorWord1, ctorWord3, compiler)
   undefined4 this;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 ctorWord1;
+  undefined4 ctorWord3;
   int compiler;
 {
   undefined4 *allocation;
@@ -286,36 +286,36 @@ int ImmedConstBuffer__vslot283(this, param_2, param_3, compiler)
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x34);
   *allocation = arena;
-  ((int (*)())ImmedConstBuffer__ctor_1261e8)(allocation + 1,this,param_2,param_3,compiler);
+  ((int (*)())ImmedConstBuffer__ctor_1261e8)(allocation + 1,this,ctorWord1,ctorWord3,compiler);
   return allocation + 1;
 }
 
 /* RegKind__flagBit1 @ 0x126878 (44 bytes) */
-int RegKind__flagBit1(param_1)
-  int param_1;
+int RegKind__flagBit1(regKind)
+  int regKind;
 {
-  return *(uint *)(&DAT_001ea904 + param_1 * 0x10) >> 1 & 1;
+  return *(uint *)(&DAT_001ea904 + regKind * 0x10) >> 1 & 1;
 }
 
 /* RegKind__flagBit9 @ 0x1268a4 (44 bytes) */
-int RegKind__flagBit9(param_1)
-  int param_1;
+int RegKind__flagBit9(regKind)
+  int regKind;
 {
-  return *(uint *)(&DAT_001ea904 + param_1 * 0x10) >> 9 & 1;
+  return *(uint *)(&DAT_001ea904 + regKind * 0x10) >> 9 & 1;
 }
 
 /* RegKind__byte4 @ 0x1268d0 (40 bytes) */
-int RegKind__byte4(param_1)
-  int param_1;
+int RegKind__byte4(regKind)
+  int regKind;
 {
-  return (DAT_001ea908)[param_1 * 0x10];
+  return (DAT_001ea908)[regKind * 0x10];
 }
 
 /* ImmedConstBuffer__vslot235 @ 0x1268f8 (84 bytes) */
-int ImmedConstBuffer__vslot235(this, param_2, param_3, compiler)
+int ImmedConstBuffer__vslot235(this, ctorWord1, ctorWord3, compiler)
   undefined4 this;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 ctorWord1;
+  undefined4 ctorWord3;
   int compiler;
 {
   undefined4 *allocation;
@@ -324,15 +324,15 @@ int ImmedConstBuffer__vslot235(this, param_2, param_3, compiler)
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x34);
   *allocation = arena;
-  VertexRegister__ctor_1248ec(allocation + 1,this,param_2,param_3,compiler);
+  VertexRegister__ctor_1248ec(allocation + 1,this,ctorWord1,ctorWord3,compiler);
   return allocation + 1;
 }
 
 /* ImmedConstBuffer__vslot15 @ 0x126984 (84 bytes) */
-int ImmedConstBuffer__vslot15(this, param_2, param_3, compiler)
+int ImmedConstBuffer__vslot15(this, ctorWord1, ctorWord3, compiler)
   undefined4 this;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 ctorWord1;
+  undefined4 ctorWord3;
   int compiler;
 {
   undefined4 *allocation;
@@ -341,15 +341,15 @@ int ImmedConstBuffer__vslot15(this, param_2, param_3, compiler)
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x38);
   *allocation = arena;
-  TempValue__ctor_124e04(allocation + 1,this,param_2,param_3,compiler);
+  TempValue__ctor_124e04(allocation + 1,this,ctorWord1,ctorWord3,compiler);
   return allocation + 1;
 }
 
 /* ImmedConstBuffer__vslot23 @ 0x126a10 (84 bytes) */
-int ImmedConstBuffer__vslot23(this, param_2, param_3, compiler)
+int ImmedConstBuffer__vslot23(this, registerFile, baseCtorArg4, compiler)
   undefined4 this;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 registerFile;
+  undefined4 baseCtorArg4;
   int compiler;
 {
   undefined4 *allocation;
@@ -358,15 +358,15 @@ int ImmedConstBuffer__vslot23(this, param_2, param_3, compiler)
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x34);
   *allocation = arena;
-  FixedValue__ctor_124724(allocation + 1,this,param_2,param_3,compiler);
+  FixedValue__ctor_124724(allocation + 1,this,registerFile,baseCtorArg4,compiler);
   return allocation + 1;
 }
 
 /* ImmedConstBuffer__vslot83 @ 0x126a9c (84 bytes) */
-int ImmedConstBuffer__vslot83(this, param_2, param_3, compiler)
+int ImmedConstBuffer__vslot83(this, interpolatorKind, baseCtorArg4, compiler)
   undefined4 this;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 interpolatorKind;
+  undefined4 baseCtorArg4;
   int compiler;
 {
   undefined4 *allocation;
@@ -375,15 +375,15 @@ int ImmedConstBuffer__vslot83(this, param_2, param_3, compiler)
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x44);
   *allocation = arena;
-  Interpolator__ctor_1257b0(allocation + 1,this,param_2,param_3,compiler);
+  Interpolator__ctor_1257b0(allocation + 1,this,interpolatorKind,baseCtorArg4,compiler);
   return allocation + 1;
 }
 
 /* ImmedConstBuffer__vslot67 @ 0x126b28 (84 bytes) */
-int ImmedConstBuffer__vslot67(this, param_2, param_3, compiler)
+int ImmedConstBuffer__vslot67(this, baseCtorArg3, baseCtorArg4, compiler)
   undefined4 this;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 baseCtorArg3;
+  undefined4 baseCtorArg4;
   int compiler;
 {
   undefined4 *allocation;
@@ -392,15 +392,15 @@ int ImmedConstBuffer__vslot67(this, param_2, param_3, compiler)
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x38);
   *allocation = arena;
-  StandardIndex__ctor_124b24(allocation + 1,this,param_2,param_3,compiler);
+  StandardIndex__ctor_124b24(allocation + 1,this,baseCtorArg3,baseCtorArg4,compiler);
   return allocation + 1;
 }
 
 /* ImmedConstBuffer__vslot71 @ 0x126bb4 (84 bytes) */
-int ImmedConstBuffer__vslot71(this, param_2, param_3, compiler)
+int ImmedConstBuffer__vslot71(this, baseCtorArg3, baseCtorArg4, compiler)
   undefined4 this;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 baseCtorArg3;
+  undefined4 baseCtorArg4;
   int compiler;
 {
   undefined4 *allocation;
@@ -409,15 +409,15 @@ int ImmedConstBuffer__vslot71(this, param_2, param_3, compiler)
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x38);
   *allocation = arena;
-  PrimitiveIndex__ctor_125db8(allocation + 1,this,param_2,param_3,compiler);
+  PrimitiveIndex__ctor_125db8(allocation + 1,this,baseCtorArg3,baseCtorArg4,compiler);
   return allocation + 1;
 }
 
 /* ImmedConstBuffer__vslot35 @ 0x126c40 (84 bytes) */
-int ImmedConstBuffer__vslot35(this, param_2, param_3, compiler)
+int ImmedConstBuffer__vslot35(this, ctorWord1, ctorWord3, compiler)
   undefined4 this;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 ctorWord1;
+  undefined4 ctorWord3;
   int compiler;
 {
   undefined4 *allocation;
@@ -426,15 +426,15 @@ int ImmedConstBuffer__vslot35(this, param_2, param_3, compiler)
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x34);
   *allocation = arena;
-  Resource__ctor_125d60(allocation + 1,this,param_2,param_3,compiler);
+  Resource__ctor_125d60(allocation + 1,this,ctorWord1,ctorWord3,compiler);
   return allocation + 1;
 }
 
 /* ImmedConstBuffer__vslot167 @ 0x126ccc (84 bytes) */
-int ImmedConstBuffer__vslot167(this, param_2, param_3, compiler)
+int ImmedConstBuffer__vslot167(this, ctorWord1, ctorWord3, compiler)
   undefined4 this;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 ctorWord1;
+  undefined4 ctorWord3;
   int compiler;
 {
   undefined4 *allocation;
@@ -443,15 +443,15 @@ int ImmedConstBuffer__vslot167(this, param_2, param_3, compiler)
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x38);
   *allocation = arena;
-  AddrIndexedSet__ctor_125f94(allocation + 1,this,param_2,param_3,compiler);
+  AddrIndexedSet__ctor_125f94(allocation + 1,this,ctorWord1,ctorWord3,compiler);
   return allocation + 1;
 }
 
 /* ImmedConstBuffer__vslot171 @ 0x126d58 (84 bytes) */
-int ImmedConstBuffer__vslot171(this, param_2, param_3, compiler)
+int ImmedConstBuffer__vslot171(this, ctorWord1, ctorWord3, compiler)
   undefined4 this;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 ctorWord1;
+  undefined4 ctorWord3;
   int compiler;
 {
   undefined4 *allocation;
@@ -460,38 +460,38 @@ int ImmedConstBuffer__vslot171(this, param_2, param_3, compiler)
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x34);
   *allocation = arena;
-  LoopRegister__ctor_126034(allocation + 1,this,param_2,param_3,compiler);
+  LoopRegister__ctor_126034(allocation + 1,this,ctorWord1,ctorWord3,compiler);
   return allocation + 1;
 }
 
 /* LoopIndexedSet__ctor_126de4 @ 0x126de4 (92 bytes) */
-int LoopIndexedSet__ctor_126de4(param_1, param_2, param_3, compiler)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
+int LoopIndexedSet__ctor_126de4(ctorWord2, ctorWord1, ctorWord3, compiler)
+  undefined4 ctorWord2;
+  undefined4 ctorWord1;
+  undefined4 ctorWord3;
   int compiler;
 {
   undefined *vtable;
   undefined4 *allocation;
   undefined4 arena;
-  undefined4 *puVar4;
+  undefined4 *object;
   
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x38);
-  puVar4 = allocation + 1;
+  object = allocation + 1;
   *allocation = arena;
-  VRegInfo__ctor_12379c(puVar4,param_1,param_2,param_3,compiler);
+  VRegInfo__ctor_12379c(object,ctorWord2,ctorWord1,ctorWord3,compiler);
   vtable = PTR_DAT_001e90ec;
   allocation[0xd] = 0;
-  *puVar4 = vtable + 8;
-  return puVar4;
+  *object = vtable + 8;
+  return object;
 }
 
 /* ImmedConstBuffer__vslot183 @ 0x126e90 (84 bytes) */
-int ImmedConstBuffer__vslot183(this, param_2, param_3, compiler)
+int ImmedConstBuffer__vslot183(this, ctorWord1, ctorWord3, compiler)
   undefined4 this;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 ctorWord1;
+  undefined4 ctorWord3;
   int compiler;
 {
   undefined4 *allocation;
@@ -500,15 +500,15 @@ int ImmedConstBuffer__vslot183(this, param_2, param_3, compiler)
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x38);
   *allocation = arena;
-  LoopIndexedOutputSet__ctor_126080(allocation + 1,this,param_2,param_3,compiler);
+  LoopIndexedOutputSet__ctor_126080(allocation + 1,this,ctorWord1,ctorWord3,compiler);
   return allocation + 1;
 }
 
 /* ImmedConstBuffer__vslot179 @ 0x126f1c (84 bytes) */
-int ImmedConstBuffer__vslot179(this, param_2, param_3, compiler)
+int ImmedConstBuffer__vslot179(this, ctorWord1, ctorWord3, compiler)
   undefined4 this;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 ctorWord1;
+  undefined4 ctorWord3;
   int compiler;
 {
   undefined4 *allocation;
@@ -517,15 +517,15 @@ int ImmedConstBuffer__vslot179(this, param_2, param_3, compiler)
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x38);
   *allocation = arena;
-  ((int (*)())LoopIndexedInputSet__ctor_126620)(allocation + 1,this,param_2,param_3,compiler);
+  ((int (*)())LoopIndexedInputSet__ctor_126620)(allocation + 1,this,ctorWord1,ctorWord3,compiler);
   return allocation + 1;
 }
 
 /* ImmedConstBuffer__vslot175 @ 0x126fa8 (84 bytes) */
-int ImmedConstBuffer__vslot175(this, param_2, param_3, compiler)
+int ImmedConstBuffer__vslot175(this, ctorWord1, ctorWord3, compiler)
   undefined4 this;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 ctorWord1;
+  undefined4 ctorWord3;
   int compiler;
 {
   undefined4 *allocation;
@@ -534,15 +534,15 @@ int ImmedConstBuffer__vslot175(this, param_2, param_3, compiler)
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x38);
   *allocation = arena;
-  ((int (*)())LoopIndexedConstSet__ctor_126538)(allocation + 1,this,param_2,param_3,compiler);
+  ((int (*)())LoopIndexedConstSet__ctor_126538)(allocation + 1,this,ctorWord1,ctorWord3,compiler);
   return allocation + 1;
 }
 
 /* ImmedConstBuffer__vslot187 @ 0x127034 (84 bytes) */
-int ImmedConstBuffer__vslot187(this, param_2, param_3, compiler)
+int ImmedConstBuffer__vslot187(this, ctorWord1, ctorWord3, compiler)
   undefined4 this;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 ctorWord1;
+  undefined4 ctorWord3;
   int compiler;
 {
   undefined4 *allocation;
@@ -551,15 +551,15 @@ int ImmedConstBuffer__vslot187(this, param_2, param_3, compiler)
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x34);
   *allocation = arena;
-  ((int (*)())ExportAddress__ctor_12614c)(allocation + 1,this,param_2,param_3,compiler);
+  ((int (*)())ExportAddress__ctor_12614c)(allocation + 1,this,ctorWord1,ctorWord3,compiler);
   return allocation + 1;
 }
 
 /* ImmedConstBuffer__vslot191 @ 0x1270c0 (84 bytes) */
-int ImmedConstBuffer__vslot191(this, param_2, param_3, compiler)
+int ImmedConstBuffer__vslot191(this, ctorWord1, ctorWord3, compiler)
   undefined4 this;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 ctorWord1;
+  undefined4 ctorWord3;
   int compiler;
 {
   undefined4 *allocation;
@@ -568,15 +568,15 @@ int ImmedConstBuffer__vslot191(this, param_2, param_3, compiler)
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x34);
   *allocation = arena;
-  ((int (*)())ExportSlot__ctor_126378)(allocation + 1,this,param_2,param_3,compiler);
+  ((int (*)())ExportSlot__ctor_126378)(allocation + 1,this,ctorWord1,ctorWord3,compiler);
   return allocation + 1;
 }
 
 /* ImmedConstBuffer__vslot79 @ 0x12714c (84 bytes) */
-int ImmedConstBuffer__vslot79(this, param_2, param_3, compiler)
+int ImmedConstBuffer__vslot79(this, ctorWord1, ctorWord3, compiler)
   undefined4 this;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 ctorWord1;
+  undefined4 ctorWord3;
   int compiler;
 {
   undefined4 *allocation;
@@ -585,15 +585,15 @@ int ImmedConstBuffer__vslot79(this, param_2, param_3, compiler)
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x34);
   *allocation = arena;
-  Physical__ctor_125c8c(allocation + 1,this,param_2,param_3,compiler);
+  Physical__ctor_125c8c(allocation + 1,this,ctorWord1,ctorWord3,compiler);
   return allocation + 1;
 }
 
 /* ImmedConstBuffer__vslot39 @ 0x1271d8 (84 bytes) */
-int ImmedConstBuffer__vslot39(this, param_2, param_3, compiler)
+int ImmedConstBuffer__vslot39(this, interpolatorKind, baseCtorArg4, compiler)
   undefined4 this;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 interpolatorKind;
+  undefined4 baseCtorArg4;
   int compiler;
 {
   undefined4 *allocation;
@@ -602,79 +602,79 @@ int ImmedConstBuffer__vslot39(this, param_2, param_3, compiler)
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x3c);
   *allocation = arena;
-  ExportValue__ctor_1250dc(allocation + 1,this,param_2,param_3,compiler);
+  ExportValue__ctor_1250dc(allocation + 1,this,interpolatorKind,baseCtorArg4,compiler);
   return allocation + 1;
 }
 
 /* ConstKey__lanes1 @ 0x127264 (8 bytes) */
-int ConstKey__lanes1(param_1)
-  int param_1;
+int ConstKey__lanes1(key)
+  int key;
 {
-  return *(undefined4 *)(param_1 + 0x20);
+  return *(undefined4 *)(key + 0x20);
 }
 
 /* ConstKey__lanes2 @ 0x12726c (16 bytes) */
-int ConstKey__lanes2(param_1)
-  int param_1;
+int ConstKey__lanes2(key)
+  int key;
 {
-  return *(int *)(param_1 + 0x20) + *(int *)(param_1 + 0x38);
+  return *(int *)(key + 0x20) + *(int *)(key + 0x38);
 }
 
 /* ConstKey__lanes3 @ 0x12727c (24 bytes) */
-int ConstKey__lanes3(param_1)
-  int param_1;
+int ConstKey__lanes3(key)
+  int key;
 {
-  return *(int *)(param_1 + 0x20) + *(int *)(param_1 + 0x38) + *(int *)(param_1 + 0x50);
+  return *(int *)(key + 0x20) + *(int *)(key + 0x38) + *(int *)(key + 0x50);
 }
 
 /* ConstKey__lanes4 @ 0x127294 (32 bytes) */
-int ConstKey__lanes4(param_1)
-  int param_1;
+int ConstKey__lanes4(key)
+  int key;
 {
-  return *(int *)(param_1 + 0x20) + *(int *)(param_1 + 0x38) + *(int *)(param_1 + 0x50) +
-         *(int *)(param_1 + 0x68);
+  return *(int *)(key + 0x20) + *(int *)(key + 0x38) + *(int *)(key + 0x50) +
+         *(int *)(key + 0x68);
 }
 
-/* FUN_001272b4 @ 0x1272b4 (16 bytes) */
-int FUN_001272b4(param_1)
-  int param_1;
+/* Object__sumWords4And8 @ 0x1272b4 (16 bytes) */
+int Object__sumWords4And8(object)
+  int object;
 {
-  return *(int *)(param_1 + 4) + *(int *)(param_1 + 8);
+  return *(int *)(object + 4) + *(int *)(object + 8);
 }
 
-/* FUN_001272cc @ 0x1272cc (8 bytes) */
-int FUN_001272cc(param_1, param_2)
-  undefined4 *param_1;
-  undefined4 param_2;
+/* Object__setWord0 @ 0x1272cc (8 bytes) */
+int Object__setWord0(object, value)
+  undefined4 *object;
+  undefined4 value;
 {
-  *param_1 = param_2;
+  *object = value;
   return;
 }
 
-/* FUN_001272d4 @ 0x1272d4 (80 bytes) */
-int FUN_001272d4(param_1, param_2, param_3)
-  int param_1;
-  int *param_2;
-  int *param_3;
+/* VRegPool__canonicalizeKey @ 0x1272d4 (80 bytes) */
+int VRegPool__canonicalizeKey(cache, kindRef, valueRef)
+  int cache;
+  int *kindRef;
+  int *valueRef;
 {
-  if (*param_2 != 0x24) {
+  if (*kindRef != 0x24) {
     return;
   }
-  if (*param_3 == *(int *)(param_1 + 0x44)) {
-    *param_2 = 6;
-    *param_3 = 0;
+  if (*valueRef == *(int *)(cache + 0x44)) {
+    *kindRef = 6;
+    *valueRef = 0;
     return;
   }
-  if (*param_3 != *(int *)(param_1 + 0x48)) {
+  if (*valueRef != *(int *)(cache + 0x48)) {
     return;
   }
-  *param_2 = 7;
-  *param_3 = 0;
+  *kindRef = 7;
+  *valueRef = 0;
   return;
 }
 
-/* FUN_00127324 @ 0x127324 (232 bytes) */
-int FUN_00127324(program, registerFileKind, vregId, kindOut, indexOut)
+/* Program__decodeRegisterKey @ 0x127324 (232 bytes) */
+int Program__decodeRegisterKey(program, registerFileKind, vregId, kindOut, indexOut)
   int program;
   int registerFileKind;
   int vregId;
@@ -716,23 +716,23 @@ int FUN_00127324(program, registerFileKind, vregId, kindOut, indexOut)
   return 0;
 }
 
-/* FUN_0012740c @ 0x12740c (100 bytes) */
-int FUN_0012740c(param_1)
-  int param_1;
+/* VRegPool__destroyEntries @ 0x12740c (100 bytes) */
+int VRegPool__destroyEntries(owner)
+  int owner;
 {
-  /* issue #64 live-repro: same iterator-object split as FUN_0011eaa0 (part_037.c), fixed earlier
-   * this session - auStack_38 is walked by HashTableIterator__advance/HashTableIterator__begin as param_1[0..4] (0x14 bytes)
+  /* issue #64 live-repro: same iterator-object split as Program__insertPhiNodes (part_037.c), fixed earlier
+   * this session - auStack_38 is walked by HashTableIterator__advance/HashTableIterator__begin as owner[0..4] (0x14 bytes)
    * but declared only 16 bytes; local_28, the missing 5th word, is what this loop reads back as its
    * own continuation value. Separated, HashTableIterator__advance's real update never reached local_28, so the
    * loop never saw it become null - not just a hang: the same (unchanging) local_28 object got
    * re-passed to the vtable call on every spin instead of the real next node, repeatedly
    * re-processing/re-freeing one object - a plausible source of the unrelated heap corruption seen
-   * elsewhere on this issue (FUN_00121000: an objects own vtable-like field changing under it
+   * elsewhere on this issue (Program__hoistInstructions: an objects own vtable-like field changing under it
    * between two visits). Merged into one 0x14-byte buffer. */
   unsigned char auStack_38 [0x14];
 #define local_28 (*(int **)(auStack_38 + 0x10))
   
-  HashTableIterator__begin(auStack_38,*(undefined4 *)(param_1 + 4));
+  HashTableIterator__begin(auStack_38,*(undefined4 *)(owner + 4));
   while (local_28 != (int *)0x0) {
     (**(code **)(*local_28 + 4))(local_28);
     HashTableIterator__advance(auStack_38);
@@ -740,8 +740,8 @@ int FUN_0012740c(param_1)
   return;
 }
 
-/* FUN_00127470 @ 0x127470 (196 bytes) */
-int FUN_00127470(owner)
+/* VRegPool__dtor_127470 @ 0x127470 (196 bytes) */
+int VRegPool__dtor_127470(owner)
   int owner;
 {
   uint bucketCount;
@@ -750,7 +750,7 @@ int FUN_00127470(owner)
   uint *hashTable;
   uint loopIndex;
   
-  ((int (*)())FUN_0012740c)(owner);
+  ((int (*)())VRegPool__destroyEntries)(owner);
   hashTable = *(uint **)(owner + 4);
   if (hashTable != (uint *)0x0) {
     bucketCount = *hashTable;
@@ -777,104 +777,104 @@ int FUN_00127470(owner)
   return;
 }
 
-/* FUN_00127534 @ 0x127534 (108 bytes) */
-int FUN_00127534(param_1, param_2, param_3, param_4)
-  int param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
+/* VRegPool__find @ 0x127534 (108 bytes) */
+int VRegPool__find(cache, keyA, keyB, keyExtra)
+  int cache;
+  undefined4 keyA;
+  undefined4 keyB;
+  undefined4 keyExtra;
 {
-  unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[8] = { cache, keyA, keyB, keyExtra, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   undefined4 callResult;
   
-  (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = param_2;
-  (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = param_3;
-  ((int (*)())FUN_001272d4)(param_1,&(*(unsigned int *)((unsigned char *)ghidra_home + 4)),&(*(unsigned int *)((unsigned char *)ghidra_home + 8)));
-  *(undefined4 *)(*(int *)(param_1 + 0x24) + 8) = (*(unsigned int *)((unsigned char *)ghidra_home + 8));
-  *(undefined4 *)(*(int *)(param_1 + 0x24) + 4) = (*(unsigned int *)((unsigned char *)ghidra_home + 4));
-  *(undefined4 *)(*(int *)(param_1 + 0x24) + 0xc) = param_4;
-  callResult = HashTable__find(*(undefined4 *)(param_1 + 4),*(undefined4 *)(param_1 + 0x24));
+  (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = keyA;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = keyB;
+  ((int (*)())VRegPool__canonicalizeKey)(cache,&(*(unsigned int *)((unsigned char *)ghidra_home + 4)),&(*(unsigned int *)((unsigned char *)ghidra_home + 8)));
+  *(undefined4 *)(*(int *)(cache + 0x24) + 8) = (*(unsigned int *)((unsigned char *)ghidra_home + 8));
+  *(undefined4 *)(*(int *)(cache + 0x24) + 4) = (*(unsigned int *)((unsigned char *)ghidra_home + 4));
+  *(undefined4 *)(*(int *)(cache + 0x24) + 0xc) = keyExtra;
+  callResult = HashTable__find(*(undefined4 *)(cache + 4),*(undefined4 *)(cache + 0x24));
   return callResult;
 }
 
-/* FUN_001275a0 @ 0x1275a0 (104 bytes) */
-int FUN_001275a0(param_1, param_2, param_3, param_4)
-  uint *param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  uint param_4;
+/* VRegPool__create @ 0x1275a0 (104 bytes) */
+int VRegPool__create(cache, keyA, keyB, keyExtra)
+  uint *cache;
+  undefined4 keyA;
+  undefined4 keyB;
+  uint keyExtra;
 {
-  unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[8] = { cache, keyA, keyB, keyExtra, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   undefined4 callResult;
   
-  (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = param_2;
-  (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = param_3;
-  ((int (*)())FUN_001272d4)(param_1,&(*(unsigned int *)((unsigned char *)ghidra_home + 4)),&(*(unsigned int *)((unsigned char *)ghidra_home + 8)));
-  callResult = FUN_00122e90((*(unsigned int *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 4)),param_4,*param_1);
-  HashTable__insert(param_1[1],callResult);
+  (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = keyA;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = keyB;
+  ((int (*)())VRegPool__canonicalizeKey)(cache,&(*(unsigned int *)((unsigned char *)ghidra_home + 4)),&(*(unsigned int *)((unsigned char *)ghidra_home + 8)));
+  callResult = VRegPool__constructByKind((*(unsigned int *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 4)),keyExtra,*cache);
+  HashTable__insert(cache[1],callResult);
   return callResult;
 }
 
-/* FUN_00127608 @ 0x127608 (100 bytes) */
-int FUN_00127608(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
+/* VRegPool__findOrCreate @ 0x127608 (100 bytes) */
+int VRegPool__findOrCreate(cache, keyA, keyB, keyExtra)
+  undefined4 cache;
+  undefined4 keyA;
+  undefined4 keyB;
+  undefined4 keyExtra;
 {
   int callResult;
   undefined4 callResult2;
   
-  callResult = ((int (*)())FUN_00127534)(param_1,param_2,param_3,param_4);
+  callResult = ((int (*)())VRegPool__find)(cache,keyA,keyB,keyExtra);
   if (callResult == 0) {
-    callResult2 = ((int (*)())FUN_001275a0)(param_1,param_2,param_3,param_4);
+    callResult2 = ((int (*)())VRegPool__create)(cache,keyA,keyB,keyExtra);
     return callResult2;
   }
   return callResult;
 }
 
 /* ConstKey__compare1 @ 0x12766c (52 bytes) */
-int ConstKey__compare1(param_1, param_2)
-  int param_1;
-  int param_2;
+int ConstKey__compare1(keyA, keyB)
+  int keyA;
+  int keyB;
 {
-  if (((*(byte *)(param_1 + 0x15c) & 1) == (*(byte *)(param_2 + 0x15c) & 1)) &&
-     (*(int *)(param_1 + 0x20) == *(int *)(param_2 + 0x20))) {
+  if (((*(byte *)(keyA + 0x15c) & 1) == (*(byte *)(keyB + 0x15c) & 1)) &&
+     (*(int *)(keyA + 0x20) == *(int *)(keyB + 0x20))) {
     return 0;
   }
   return 0xffffffff;
 }
 
 /* ConstKey__compare2 @ 0x1276a0 (92 bytes) */
-int ConstKey__compare2(param_1, param_2)
-  int param_1;
-  int param_2;
+int ConstKey__compare2(keyA, keyB)
+  int keyA;
+  int keyB;
 {
-  if ((((((int)*(char *)(param_1 + 0x15c) & 1U) == ((int)*(char *)(param_2 + 0x15c) & 1U)) &&
-       (*(int *)(param_1 + 0x20) == *(int *)(param_2 + 0x20))) &&
-      (((uint)(int)*(char *)(param_1 + 0x15c) >> 1 & 1) ==
-       ((uint)(int)*(char *)(param_2 + 0x15c) >> 1 & 1))) &&
-     (*(int *)(param_1 + 0x38) == *(int *)(param_2 + 0x38))) {
+  if ((((((int)*(char *)(keyA + 0x15c) & 1U) == ((int)*(char *)(keyB + 0x15c) & 1U)) &&
+       (*(int *)(keyA + 0x20) == *(int *)(keyB + 0x20))) &&
+      (((uint)(int)*(char *)(keyA + 0x15c) >> 1 & 1) ==
+       ((uint)(int)*(char *)(keyB + 0x15c) >> 1 & 1))) &&
+     (*(int *)(keyA + 0x38) == *(int *)(keyB + 0x38))) {
     return 0;
   }
   return 0xffffffff;
 }
 
 /* ConstKey__compare3 @ 0x1276fc (124 bytes) */
-int ConstKey__compare3(param_1, param_2)
-  int param_1;
-  int param_2;
+int ConstKey__compare3(keyA, keyB)
+  int keyA;
+  int keyB;
 {
   uint flagsB;
   uint flagsA;
   
-  flagsA = (uint)*(char *)(param_1 + 0x15c);
-  flagsB = (uint)*(char *)(param_2 + 0x15c);
-  if (((((flagsA & 1) == (flagsB & 1)) && (*(int *)(param_1 + 0x20) == *(int *)(param_2 + 0x20))) &&
+  flagsA = (uint)*(char *)(keyA + 0x15c);
+  flagsB = (uint)*(char *)(keyB + 0x15c);
+  if (((((flagsA & 1) == (flagsB & 1)) && (*(int *)(keyA + 0x20) == *(int *)(keyB + 0x20))) &&
       ((flagsA >> 1 & 1) == (flagsB >> 1 & 1))) &&
-     (((*(int *)(param_1 + 0x38) == *(int *)(param_2 + 0x38) &&
+     (((*(int *)(keyA + 0x38) == *(int *)(keyB + 0x38) &&
        ((flagsA >> 2 & 1) == (flagsB >> 2 & 1))) &&
-      (*(int *)(param_1 + 0x50) == *(int *)(param_2 + 0x50))))) {
+      (*(int *)(keyA + 0x50) == *(int *)(keyB + 0x50))))) {
     return 0;
   }
   return 0xffffffff;
@@ -903,32 +903,32 @@ int ConstKey__compare4(keyA, keyB)
 }
 
 /* keyEqualsThreeWords @ 0x127814 (60 bytes) */
-int keyEqualsThreeWords(param_1, param_2)
-  int param_1;
-  int param_2;
+int keyEqualsThreeWords(keyA, keyB)
+  int keyA;
+  int keyB;
 {
-  if (((*(int *)(param_1 + 8) == *(int *)(param_2 + 8)) &&
-      (*(int *)(param_1 + 4) == *(int *)(param_2 + 4))) &&
-     (*(int *)(param_1 + 0xc) == *(int *)(param_2 + 0xc))) {
+  if (((*(int *)(keyA + 8) == *(int *)(keyB + 8)) &&
+      (*(int *)(keyA + 4) == *(int *)(keyB + 4))) &&
+     (*(int *)(keyA + 0xc) == *(int *)(keyB + 0xc))) {
     return 0;
   }
   return 0xffffffff;
 }
 
-/* FUN_00127850 @ 0x127850 (128 bytes) */
-int FUN_00127850(owner)
+/* VRegPool__countEntriesWithQuery18 @ 0x127850 (128 bytes) */
+int VRegPool__countEntriesWithQuery18(owner)
   int owner;
 {
   int elementQuery18;
   int matchCount;
-  /* issue #64 live-repro: same iterator-object split as FUN_0011eaa0 (part_037.c), fixed earlier
+  /* issue #64 live-repro: same iterator-object split as Program__insertPhiNodes (part_037.c), fixed earlier
    * this session - iteratorState is walked by HashTableIterator__advance/HashTableIterator__begin as owner[0..4] (0x14 bytes)
    * but declared only 16 bytes; iteratorCurrent, the missing 5th word, is what this loop reads back as its
    * own continuation value. Separated, HashTableIterator__advance's real update never reached iteratorCurrent, so the
    * loop never saw it become null - not just a hang: the same (unchanging) iteratorCurrent object got
    * re-passed to the vtable call on every spin instead of the real next node, repeatedly
    * re-processing/re-freeing one object - a plausible source of the unrelated heap corruption seen
-   * elsewhere on this issue (FUN_00121000: an objects own vtable-like field changing under it
+   * elsewhere on this issue (Program__hoistInstructions: an objects own vtable-like field changing under it
    * between two visits). Merged into one 0x14-byte buffer. */
   unsigned char iteratorState [0x14];
 #define iteratorCurrent (*(int **)(iteratorState + 0x10))
@@ -946,8 +946,8 @@ int FUN_00127850(owner)
 }
 #undef iteratorCurrent
 
-/* FUN_001278d0 @ 0x1278d0 (196 bytes) */
-int FUN_001278d0(owner)
+/* VRegPool__dtor_1278d0 @ 0x1278d0 (196 bytes) */
+int VRegPool__dtor_1278d0(owner)
   int owner;
 {
   uint bucketCount;
@@ -956,7 +956,7 @@ int FUN_001278d0(owner)
   uint *hashTable;
   uint loopIndex;
   
-  ((int (*)())FUN_0012740c)(owner);
+  ((int (*)())VRegPool__destroyEntries)(owner);
   hashTable = *(uint **)(owner + 4);
   if (hashTable != (uint *)0x0) {
     bucketCount = *hashTable;
@@ -1014,7 +1014,7 @@ int VRegInfo__new_127994(compiler, ownerArg)
   allocation[4] = keyEqualsThreeWords;
   allocation[1] = 1;
   sizeLoopCountdown = 0x20;
-  allocation[5] = FUN_001272b4;
+  allocation[5] = Object__sumWords4And8;
   allocation[6] = arena;
   do {
     hashTableSize = hashTableSize << 1;
@@ -1156,17 +1156,17 @@ int VRegInfo__new_127994(compiler, ownerArg)
 }
 
 /* KhanPs__vslot21_appendRegisterBinding @ 0x127e48 (132 bytes) */
-int KhanPs__vslot21_appendRegisterBinding(this, regIndex, bindingKind, param_4, laneSelectWord, param_6, param_7, param_8, param_9, param_10)
+int KhanPs__vslot21_appendRegisterBinding(this, regIndex, bindingKind, recordWord0xc, laneSelectWord, conditionFlag, unusedArg7, unusedArg8, recordWord0x18, recordWord0x10)
   int this;
   undefined4 regIndex;
   undefined4 bindingKind;
-  undefined4 param_4;
+  undefined4 recordWord0xc;
   undefined4 laneSelectWord;
-  int param_6;
-  undefined4 param_7;
-  undefined4 param_8;
-  undefined4 param_9;
-  undefined4 param_10;
+  int conditionFlag;
+  undefined4 unusedArg7;
+  undefined4 unusedArg8;
+  undefined4 recordWord0x18;
+  undefined4 recordWord0x10;
 {
   int record;
   
@@ -1174,16 +1174,16 @@ int KhanPs__vslot21_appendRegisterBinding(this, regIndex, bindingKind, param_4, 
   *(int *)(((unsigned char *)0x0000172c) + this) = record + 1;
   record = this + record * 0x34 + 0x60;
   *(undefined4 *)(record + 8) = bindingKind;
-  *(undefined4 *)(record + 0xc) = param_4;
-  *(undefined4 *)(record + 0x10) = param_10;
+  *(undefined4 *)(record + 0xc) = recordWord0xc;
+  *(undefined4 *)(record + 0x10) = recordWord0x10;
   *(undefined4 *)(record + 0x1c) = 1;
   *(undefined1 *)(record + 0x37) = (undefined1)regIndex;
   *(char *)(record + 0x38) = (char)((uint)laneSelectWord >> 0x18);
   *(char *)(record + 0x39) = (char)((uint)laneSelectWord >> 0x10);
   *(char *)(record + 0x3a) = (char)((uint)laneSelectWord >> 8);
   *(char *)(record + 0x3b) = (char)laneSelectWord;
-  *(uint *)(record + 0x24) = (uint)(param_6 == 0);
-  *(undefined4 *)(record + 0x18) = param_9;
+  *(uint *)(record + 0x24) = (uint)(conditionFlag == 0);
+  *(undefined4 *)(record + 0x18) = recordWord0x18;
   *(undefined1 *)(record + 0x34) = (undefined1)regIndex;
   *(undefined1 *)(record + 0x35) = (undefined1)regIndex;
   *(undefined1 *)(record + 0x36) = (undefined1)regIndex;
