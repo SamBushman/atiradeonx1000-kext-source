@@ -1,0 +1,27 @@
+use	FUN_00052cc0	puVar1	handlerTemp	INFERRED	function pointer selected for one handler slot of the glContext+0x1190..0x11b0 / +0x1350 dispatch table (two alternative tables chosen by the mode flag)	^\s*puVar1\ =\ PTR_FUN_001e89b0;$	+1
+use	FUN_00052cc0	puVar1	handlerTemp	INFERRED	function pointer selected for one handler slot of the glContext+0x1190..0x11b0 / +0x1350 dispatch table (two alternative tables chosen by the mode flag)	^\s*\*\(undefined\ \*\*\)\(\(\(unsigned\ char\ \*\)0x000011a8\)\ \+\ param_1\)\ =\ puVar1;$	+1
+use	FUN_00052cc0	puVar1	handlerTemp	INFERRED	function pointer selected for one handler slot of the glContext+0x1190..0x11b0 / +0x1350 dispatch table (two alternative tables chosen by the mode flag)	^\s*puVar1\ =\ PTR_FUN_001e89d8;$	+1
+use	FUN_00052cc0	puVar1	handlerTemp	INFERRED	function pointer selected for one handler slot of the glContext+0x1190..0x11b0 / +0x1350 dispatch table (two alternative tables chosen by the mode flag)	^\s*\*\(undefined\ \*\*\)\(\(\(unsigned\ char\ \*\)0x000011b0\)\ \+\ param_1\)\ =\ puVar1;$	+1
+use	FUN_00052cc0	puVar1	handlerTemp	INFERRED	function pointer selected for one handler slot of the glContext+0x1190..0x11b0 / +0x1350 dispatch table (two alternative tables chosen by the mode flag)	^\s*puVar1\ =\ PTR_FUN_001e89a8;$	+1
+use	FUN_00052cc0	puVar1	handlerTemp	INFERRED	function pointer selected for one handler slot of the glContext+0x1190..0x11b0 / +0x1350 dispatch table (two alternative tables chosen by the mode flag)	^\s*\*\(undefined\ \*\*\)\(\(\(unsigned\ char\ \*\)0x00001190\)\ \+\ param_1\)\ =\ puVar1;$	+1
+use	FUN_00052cc0	puVar1	handlerTemp	INFERRED	function pointer selected for one handler slot of the glContext+0x1190..0x11b0 / +0x1350 dispatch table (two alternative tables chosen by the mode flag)	^\s*puVar1\ =\ PTR_FUN_001e89e8;$	+1
+use	FUN_00052cc0	puVar1	handlerTemp	INFERRED	function pointer selected for one handler slot of the glContext+0x1190..0x11b0 / +0x1350 dispatch table (two alternative tables chosen by the mode flag)	^\s*\*\(undefined\ \*\*\)\(\(\(unsigned\ char\ \*\)0x0000119c\)\ \+\ param_1\)\ =\ puVar1;$	+1
+use	FUN_00052cc0	puVar1	handlerTemp	INFERRED	function pointer selected for one handler slot of the glContext+0x1190..0x11b0 / +0x1350 dispatch table (two alternative tables chosen by the mode flag)	^\s*puVar1\ =\ PTR_FUN_001e89d8;$@2	+1
+use	FUN_00052cc0	puVar1	handlerTemp	INFERRED	function pointer selected for one handler slot of the glContext+0x1190..0x11b0 / +0x1350 dispatch table (two alternative tables chosen by the mode flag)	^\s*\*\(undefined\ \*\*\)\(\(\(unsigned\ char\ \*\)0x000011b0\)\ \+\ param_1\)\ =\ puVar1;$@2	+1
+use	FUN_00052cc0	puVar1	handlerTemp	INFERRED	function pointer selected for one handler slot of the glContext+0x1190..0x11b0 / +0x1350 dispatch table (two alternative tables chosen by the mode flag)	^\s*puVar1\ =\ PTR_FUN_001e89a0;$	+1
+use	FUN_00052cc0	puVar1	handlerTemp	INFERRED	function pointer selected for one handler slot of the glContext+0x1190..0x11b0 / +0x1350 dispatch table (two alternative tables chosen by the mode flag)	^\s*\*\(undefined\ \*\*\)\(\(\(unsigned\ char\ \*\)0x00001190\)\ \+\ param_1\)\ =\ puVar1;$@2	+1
+use	FUN_00052cc0	puVar1	handlerTemp	INFERRED	function pointer selected for one handler slot of the glContext+0x1190..0x11b0 / +0x1350 dispatch table (two alternative tables chosen by the mode flag)	^\s*puVar1\ =\ PTR_FUN_001e89dc;$	+1
+use	FUN_00052cc0	puVar1	handlerTemp	INFERRED	function pointer selected for one handler slot of the glContext+0x1190..0x11b0 / +0x1350 dispatch table (two alternative tables chosen by the mode flag)	^\s*\*\(undefined\ \*\*\)\(\(\(unsigned\ char\ \*\)0x0000119c\)\ \+\ param_1\)\ =\ puVar1;$@2	+1
+use	FUN_00052cc0	puVar1	handlerTemp	INFERRED	function pointer selected for one handler slot of the glContext+0x1190..0x11b0 / +0x1350 dispatch table (two alternative tables chosen by the mode flag)	^\s*puVar1\ =\ PTR_FUN_001e89ac;$	+1
+use	FUN_00052cc0	puVar1	handlerTemp	INFERRED	function pointer selected for one handler slot of the glContext+0x1190..0x11b0 / +0x1350 dispatch table (two alternative tables chosen by the mode flag)	^\s*\*\(undefined\ \*\*\)\(\(\(unsigned\ char\ \*\)0x00001350\)\ \+\ param_1\)\ =\ puVar1;$	+1
+local	FUN_00052cc0	puVar2	handlerTemp2	INFERRED	second function pointer kept in a register across the table writes
+local	FUN_00052ee0	iVar1	symbolIndexOrField	INFERRED	symbol index found for the position, then the symbol record word (+0) returned
+local	FUN_00052ee0	iVar2	symbolList	INFERRED	shader-local symbol list (state+0x1c) or the global list (state+0x14) the symbol was found in
+local	FUN_00052f60	iVar1	symbolIndexOrField	INFERRED	symbol index found for the position, then the symbol record word (+4) returned (0x81 when zero)
+local	FUN_00052f60	iVar2	symbolList	INFERRED	shader-local symbol list (state+0x1c) or the global list (state+0x14) the symbol was found in
+local	FUN_00054080	iVar1	appendResult	INFERRED	return value of extvsAppendInstruction (0 = failure)
+local	FUN_00054080	iVar2	extvsState	INFERRED	EXT_vertex_shader state *(ctx+0x1168)
+local	FUN_00054080	local_28	outSelectX	INFERRED	staged select array element 0 (copy of swizzleX), address passed to extvsAppendInstruction
+local	FUN_00054080	local_24	outSelectY	INFERRED	staged select array element 1 (copy of swizzleY)
+local	FUN_00054080	local_20	outSelectZ	INFERRED	staged select array element 2 (copy of swizzleZ)
+local	FUN_00054080	local_1c	outSelectW	INFERRED	staged select array element 3 (copy of swizzleW)

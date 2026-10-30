@@ -1,0 +1,37 @@
+local	FUN_00065c40	param_1	glContext	INFERRED	the GL context
+local	FUN_00065c40	param_2	variant	INFERRED	program variant object (+0x54 program data, constant bank at +0x750)
+local	FUN_00065c40	param_3	unusedArg3	INFERRED	argument the function never reads
+local	FUN_00065c40	param_4	unusedArg4	INFERRED	argument the function never reads
+local	FUN_00065c40	param_5	unusedArg5	INFERRED	argument the function never reads
+local	FUN_00065c40	param_6	unusedArg6	INFERRED	argument the function never reads
+local	FUN_00065c40	param_7	unusedArg7	INFERRED	argument the function never reads
+local	FUN_0004a860	param_2	unusedArg2	INFERRED	argument the function never reads
+local	FUN_0004a860	param_3	unusedArg3	INFERRED	argument the function never reads
+local	FUN_0004a860	param_4	unusedArg4	INFERRED	argument the function never reads
+local	FUN_0004a860	param_5	unusedArg5	INFERRED	argument the function never reads
+local	FUN_0004a860	param_6	unusedArg6	INFERRED	argument the function never reads
+local	FUN_0004a860	param_7	unusedArg7	INFERRED	argument the function never reads
+local	FUN_00050140	param_2	unusedArg2	INFERRED	argument the function never reads
+local	FUN_00050140	param_3	unusedArg3	INFERRED	argument the function never reads
+local	FUN_00050140	param_4	unusedArg4	INFERRED	argument the function never reads
+local	FUN_00050140	param_5	unusedArg5	INFERRED	argument the function never reads
+local	FUN_00050140	param_6	unusedArg6	INFERRED	argument the function never reads
+local	FUN_00062370	param_1	glContext	INFERRED	the GL context
+local	FUN_00062370	param_2	programEntry	INFERRED	program entry whose unit flag bytes (+0x71..) are loaded
+local	FUN_0004eba0	param_2	unusedArg2	INFERRED	argument the function never reads
+local	FUN_0004cde0	param_1	fieldPtr	INFERRED	address of the pointer field to free and clear
+local	FUN_00053190	param_1	glContext	INFERRED	the GL context
+local	FUN_00053040	param_1	unusedArg1	INFERRED	argument the function never reads
+local	FUN_00053ef0	param_2	shaderId	INFERRED	id of the vertex shader to delete
+local	FUN_00062410	param_1	glContext	INFERRED	the GL context
+use	FUN_00056be0	iVar6	operandUsesTemp	INFERRED	result of the operand temp-slot use test for source operands 0..2 / the destination (non-zero = uses the slot)	^\s*iVar6\ =\ \(\(int\ \(\*\)\(\)\)FUN_00056b80\)\(iVar20\ \+\ 0x20,iVar19\);$	+3
+use	FUN_00056be0	iVar6	operandUsesTemp	INFERRED	result of the operand temp-slot use test for source operands 0..2 / the destination (non-zero = uses the slot)	^\s*iVar6\ =\ \(\(int\ \(\*\)\(\)\)FUN_00056b80\)\(iVar20\ \+\ 4,iVar19\);$	+2
+use	FUN_00056be0	iVar6	destSymbolId	INFERRED	destination operand symbol id (instruction record +8) tested against the temp slot component registers	^\s*iVar6\ =\ \*\(int\ \*\)\(iVar20\ \+\ 8\);$	+6
+use	FUN_0003f750	uVar1	tempBase	INFERRED	program word +0x10: first temp register index, used as the destination temp	^\s*uVar1\ =\ \*\(undefined4\ \*\)\(\*param_1\ \+\ 0x10\);$	+1
+use	FUN_0003f750	uVar1	tempBase	INFERRED	program word +0x10: first temp register index, used as the destination temp	^\s*\*\(short\ \*\)\(\(int\)param_3\ \+\ 2\)\ =\ \(short\)uVar1;$	+1
+use	FUN_0003f750	uVar1	buildResult	INFERRED	return value of fpilBuildDestinationToken	^\s*uVar1\ =\ \(\(int\ \(\*\)\(\)\)FUN_0003ed90\)\(param_1,param_2,param_3,param_4,param_5\);$	+2
+local	FUN_0003f750	uVar2	destWord	INFERRED	IR destination word *irDest: per-component write flags and select fields
+local	FUN_000538e0	uVar1	currentShader	INFERRED	current shader object *(ctx+0x1168), freed and re-initialised
+local	FUN_00055a30	iVar1	symbolRecord	INFERRED	symbol record for the position (records + indexed id * 0x54), 0 when out of range
+local	FUN_00058300	uVar1	swizzleWord	INFERRED	slot word +4 of the instruction slot (source swizzle), merged into the replicate / mask fields 0x1248000
+local	FUN_00053dc0	iVar1	firstId	INFERRED	symbol id counter before the reservation (returned as the first reserved id)

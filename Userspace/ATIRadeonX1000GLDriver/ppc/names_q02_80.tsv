@@ -1,0 +1,10 @@
+func	FUN_0004dbe0	gldValidateVertexOutputRouting	INFERRED	runs ffvpSetupVertexOutputRouting when glContext+0x124 is set and marks dirty bit 0x40000
+func	FUN_0004c560	gldSetCurrentProgramObject	INFERRED	makes programObj the current program (glContext+0x1e68), clearing the dirty bytes of the previous and new object and revalidating the tex env colour
+func	FUN_0004b710	gldFlushProgramCache	INFERRED	releases every program entry (glContext+0x1e60), frees the entry array and resets the hash table and cache counters
+func	FUN_00065610	ffvpInitBuilderOutputSlots	INFERRED	initialises the output slot table of a program builder (builder+0x68..0xa3) to the default slot assignment
+func	FUN_00052e60	extvsSetStreamAndValidate	INFERRED	sets the stream position, copies the stream flag bits into glContext+0x44 and validates the program state
+func	FUN_00064230	extvsBuildStreamBlock	INFERRED	builds the stream block of an EXT_vertex_shader program: input descriptors, enable masks and output counts
+func	FUN_0004c260	gldEmitProgramStatePacket	INFERRED	emits the program state command packet for a program object and stage selection into the command cursor
+func	FUN_00040ac4	fragmentTranslateScalarMath2Src	INFERRED	two-source scalar math expansion: replicates both source swizzles and emits one instruction per component
+func	FUN_00065c40	ffvpUploadVariantConstants	INFERRED	uploads the constant bank of a program variant (variant+0x54 +0x750) through the glContext+0x1298 handler
+func	FUN_0004a860	gldReselectProgramStream	INFERRED	chooses the program stream flag (glContext+0x1136 or +0x11d0 by bit 0x2000) and rebinds the stream setup

@@ -3838,10 +3838,10 @@ int ffvpAssignOutputSlots(ctx)
   
   stateBlock = *(int *)(*(int *)(ctx + 4) + 0x10);
   _memset(ctx + 0x19c,0xffffffff,0x68);
-  FUN_0004fc80(ctx,0,3,0,0,0,0,0);
+  ffvpSetOutputRoute(ctx,0,3,0,0,0,0,0);
   *(undefined4 *)(ctx + 0x19c) = 0;
   if (*(int *)(ctx + 0x44) < 0) {
-    FUN_0004fc80(ctx,1,3,0,1,0,0,0);
+    ffvpSetOutputRoute(ctx,1,3,0,1,0,0,0);
     *(undefined4 *)(ctx + 0x1a0) = 1;
     if (((unsigned char *)0x00002d48)[stateBlock + 3] == '\0') {
       ctxFlags44 = *(uint *)(ctx + 0x44);
@@ -3849,7 +3849,7 @@ int ffvpAssignOutputSlots(ctx)
     }
     else {
       nextSlot = 3;
-      FUN_0004fc80(ctx,2,3,0,2,0,0,0);
+      ffvpSetOutputRoute(ctx,2,3,0,2,0,0,0);
       ctxFlags44 = *(uint *)(ctx + 0x44);
       *(undefined4 *)(ctx + 0x1a8) = 2;
     }
@@ -3864,15 +3864,15 @@ int ffvpAssignOutputSlots(ctx)
     else {
       slotBase = 2;
       nextSlot = 3;
-      FUN_0004fc80(ctx,1,3,0,1,0,0,0);
+      ffvpSetOutputRoute(ctx,1,3,0,1,0,0,0);
       colorSlot = 2;
       *(undefined4 *)(ctx + 0x1a0) = 1;
     }
-    FUN_0004fc80(ctx,colorSlot,3,0,colorSlot,0,0,0);
+    ffvpSetOutputRoute(ctx,colorSlot,3,0,colorSlot,0,0,0);
     ctxFlags44 = *(uint *)(ctx + 0x44);
     *(undefined4 *)(ctx + 0x1a8) = colorSlot;
     if ((ctxFlags44 & 0xa10000) != 0) {
-      FUN_0004fc80(ctx,nextSlot,3,0,nextSlot,0,0,0);
+      ffvpSetOutputRoute(ctx,nextSlot,3,0,nextSlot,0,0,0);
       ctxFlags44 = *(uint *)(ctx + 0x44);
       *(uint *)(ctx + 0x1ac) = nextSlot;
       nextSlot = slotBase + 2;
@@ -3889,7 +3889,7 @@ int ffvpAssignOutputSlots(ctx)
     enableCursor = ctx;
     do {
       if ((((unsigned char *)0x00001438)[enableCursor] != '\0') && (*(int *)(((unsigned char *)0x000013f8) + unitCursor) != 0)) {
-        FUN_0004fc80(ctx,nextSlot,3,0,nextSlot,0,0,0);
+        ffvpSetOutputRoute(ctx,nextSlot,3,0,nextSlot,0,0,0);
         *(uint *)(unitCursor + 0x1c8) = nextSlot;
         nextSlot = nextSlot + 1;
       }
@@ -3911,7 +3911,7 @@ int ffvpAssignOutputSlots(ctx)
     unitCursor = ctx;
     do {
       if (((uint)texEnableMask & 1 << (loopIndex & 0x3f)) != 0) {
-        FUN_0004fc80(ctx,nextSlot,3,0,nextSlot,0,0,0);
+        ffvpSetOutputRoute(ctx,nextSlot,3,0,nextSlot,0,0,0);
         texUnitCount = (uint)(byte)((unsigned char *)0x000013b0)[ctx];
         *(uint *)(unitCursor + 0x1c8) = nextSlot;
         nextSlot = nextSlot + 1;
@@ -3923,13 +3923,13 @@ int ffvpAssignOutputSlots(ctx)
   ctxFlags44 = *(uint *)(ctx + 0x44);
 LAB_0008ff78:
   if (((ctxFlags44 & 0x1000800) != 0) && (*(short *)(((unsigned char *)0x00002e06) + stateBlock) == -0x7baf)) {
-    FUN_0004fc80(ctx,nextSlot,3,0,nextSlot,0,0,0);
+    ffvpSetOutputRoute(ctx,nextSlot,3,0,nextSlot,0,0,0);
     *(uint *)(ctx + 0x1ec) = nextSlot;
     nextSlot = nextSlot + 1;
     *(undefined4 *)(ctx + 0x1f0) = 0;
   }
   if (((unsigned char *)0x00004301)[stateBlock] != '\0') {
-    FUN_0004fc80(ctx,nextSlot,3,0,nextSlot,0,0,0);
+    ffvpSetOutputRoute(ctx,nextSlot,3,0,nextSlot,0,0,0);
     *(uint *)(ctx + 0x1f8) = nextSlot;
     nextSlot = nextSlot + 1;
   }
@@ -3978,7 +3978,7 @@ int ffvpComputeOutputMasks(glContext)
   oldMask1ca0 = *(int *)(glContext + 0x1ca0);
   stateBlock = *(int *)(*(int *)(glContext + 4) + 0x10);
   if ((*(char *)(glContext + 0x1868) != '\0') && (*(char *)(glContext + 0x124) != '\0')) {
-    FUN_0004dbe0(glContext);
+    gldValidateVertexOutputRouting(glContext);
     return;
   }
   stateFlags = *(uint *)(glContext + 0x44);
@@ -4149,12 +4149,12 @@ void gldValidateState(int glContext,undefined4 forwardedArg2,undefined4 forwarde
       forwardedArg2 = extraout_r4_00;
     }
     if ((dirtyMask & 2) != 0) {
-      forwardedFloatArg1 = (double)FUN_0004eba0(glContext,forwardedArg2,forwardedArg3,forwardedArg4,forwardedArg5,forwardedArg6,dirtyMask2);
+      forwardedFloatArg1 = (double)gldValidatePolygonOffset(glContext,forwardedArg2,forwardedArg3,forwardedArg4,forwardedArg5,forwardedArg6,dirtyMask2);
       dirtyMask = *(uint *)(glContext + 0x38);
       forwardedArg2 = extraout_r4_01;
     }
     if ((dirtyMask & 8) != 0) {
-      forwardedFloatArg1 = (double)FUN_0004ed90(glContext);
+      forwardedFloatArg1 = (double)gldValidatePointSize(glContext);
       dirtyMask = *(uint *)(glContext + 0x38);
       forwardedArg2 = extraout_r4_02;
     }
@@ -4165,7 +4165,7 @@ void gldValidateState(int glContext,undefined4 forwardedArg2,undefined4 forwarde
       forwardedArg2 = extraout_r4_03;
     }
     if ((dirtyMask & 0x100) != 0) {
-      ((void (*)())FUN_0004f2e0)(glContext,forwardedArg2,forwardedArg3,forwardedArg4,forwardedFloatArg1);
+      ((void (*)())gldValidateFog)(glContext,forwardedArg2,forwardedArg3,forwardedArg4,forwardedFloatArg1);
       forwardedFloatArg1 = (double)ffvpBuildFogKey(glContext,extraout_r4_04,forwardedArg3,forwardedArg4,forwardedArg5,forwardedArg6);
       dirtyMask = *(uint *)(glContext + 0x38);
       forwardedArg2 = extraout_r4_05;
@@ -4181,7 +4181,7 @@ void gldValidateState(int glContext,undefined4 forwardedArg2,undefined4 forwarde
       forwardedArg2 = extraout_r4_07;
     }
     if ((dirtyMask & 0x2200) != 0) {
-      forwardedFloatArg1 = (double)((double (*)())FUN_0004def0)(glContext,forwardedArg2,forwardedArg3,forwardedArg4,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,
+      forwardedFloatArg1 = (double)((double (*)())gldValidateTextureUnits)(glContext,forwardedArg2,forwardedArg3,forwardedArg4,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,
                                       forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8,forwarded_in_stack_ffffffb8
                                      );
       dirtyMask = *(uint *)(glContext + 0x38);
@@ -4210,7 +4210,7 @@ void gldValidateState(int glContext,undefined4 forwardedArg2,undefined4 forwarde
       }
     }
     else if ((dirtyMask & 0x20) != 0) {
-      ((void (*)())FUN_0004d620)(glContext,forwardedArg2,forwardedArg3,forwardedArg4,forwardedFloatArg1);
+      ((void (*)())gldMarkProgramsDirtyByFlag)(glContext,forwardedArg2,forwardedArg3,forwardedArg4,forwardedFloatArg1);
       forwardedArg2 = extraout_r4_13;
     }
   }
@@ -4242,7 +4242,7 @@ void gldValidateState(int glContext,undefined4 forwardedArg2,undefined4 forwarde
       forwardedArg2 = extraout_r4_18;
     }
     if ((dirtyMask2 & 0x40) != 0) {
-      FUN_00050140(glContext,forwardedArg2,forwardedArg3,forwardedArg4,forwardedArg5,forwardedArg6);
+      gldValidateColorMask(glContext,forwardedArg2,forwardedArg3,forwardedArg4,forwardedArg5,forwardedArg6);
       dirtyMask2 = *(uint *)(glContext + 0x3c);
     }
     if ((dirtyMask2 & 0x400) != 0) {
@@ -4261,11 +4261,11 @@ void gldValidateState(int glContext,undefined4 forwardedArg2,undefined4 forwarde
       }
     }
     else {
-      FUN_0004dbe0(glContext);
+      gldValidateVertexOutputRouting(glContext);
     }
   }
-  FUN_0004d100(glContext);
-  FUN_00052280(glContext);
+  gldValidateAlphaBlendEarlyZ(glContext);
+  gldEmitDirtyStatePackets(glContext);
   *(undefined1 *)(glContext + 0x2e) = 0;
   *(undefined1 *)(glContext + 0x29) = 0;
   *(undefined2 *)(glContext + 0x32) = 0;

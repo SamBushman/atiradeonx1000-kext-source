@@ -1,0 +1,31 @@
+local	FUN_00064230	iVar8	componentMaskOrOutputCount	INFERRED	component mask (0 or 0xf for the position descriptor), later the per-output count (4 / 3) - joined: the register is reused
+local	FUN_00064230	iVar11	inputIndexOrAddr	INFERRED	input record index (+0xbc), then its descriptor address (index * 4 + inputBlock + 0x24) - joined: the register is reused
+local	FUN_00064230	uVar9	fogParamWord	INFERRED	word 0x549c of the input block copied to streamBlock[3]
+local	FUN_00064230	uVar2	tclStateWord	INFERRED	word 0x5434 of the input block, copied to streamBlock[0x1d]
+local	FUN_0005f540	uStack_38	rewriteInstHeader	INFERRED	first word of the staged hardware instruction being rewritten
+local	FUN_0005f540	uStack_34	rewriteInstWord1	INFERRED	second word of the staged hardware instruction
+local	FUN_0005f540	uStack_30	rewriteInstWord2	INFERRED	third word of the staged hardware instruction
+local	FUN_0005f540	auStack_2c	rewriteInstWords	INFERRED	remaining words of the staged hardware instruction
+local	FUN_0004ed90	fVar1	viewportExtent	INFERRED	viewport extent as float (glContext word 8 converted)
+local	FUN_0004ed90	fVar2	sizeScale	INFERRED	state float at glContext+0x13c4
+local	FUN_0004ed90	uVar3	halfSizeFixed	INFERRED	point / line size in half-pixel fixed point (low 16 bits stored)
+local	FUN_0004ed90	iVar4	sizeModeOrWidth	INFERRED	FUN_000a3670 size-mode result, later glContext+0x13d4 line width word - joined: the register is reused
+local	FUN_0004def0	uVar26	unitIndexCounter	INFERRED	running texture unit counter (0 .. units), incremented per unit
+local	FUN_00062940	uVar1	valueXOrCmdWord	INFERRED	constant vector word 0 (valueX copy), later reused for the command packet word - joined: the register is reused
+local	FUN_00062940	uVar5	valueYOrCmdWord	INFERRED	constant vector word 1, later reused for the command packet word - joined
+local	FUN_00062940	uVar6	valueZOrCmdWord	INFERRED	constant vector word 2, later reused for the command packet word - joined
+local	FUN_00041310	uStack_58	ilInstOpcode	INFERRED	staged IL instruction opcode word (copy of ilInstr, rewritten to 0x4d)
+local	FUN_00041310	uStack_40	ilInstSwz0	INFERRED	staged IL instruction swizzle word 0
+local	FUN_0004eba0	dVar6	fprResidualF1	INFERRED	FPR f1 value left by the callee (stale first FP argument of gldValidateViewportPolygonOffset)
+local	FUN_00052cc0	uVar3	result	INFERRED	return value: 1 when a handler table was installed, 0 otherwise
+local	FUN_0003ed90	iVar4	programTempBase	INFERRED	program word +0x10: first temp register index
+local	FUN_0004ddc0	puVar1	packet	INFERRED	two-dword command packet returned by the glContext+0x2758 allocator
+local	FUN_00053000	bVar1	unitMaskBits	INFERRED	extra state flag bits (0xc when updateFlags bit 2 is set)
+local	FUN_00054460	uVar1	symbolId	INFERRED	id returned by glGenSymbolsEXT_impl
+local	FUN_00064a10	cVar11	topSlot	INFERRED	programState+0x5c slot high-water mark minus 1 (0 when none), stored at glContext+0x1b8d
+local	FUN_0005d870	uVar1	swizzleWord	INFERRED	slot word +4 after the source swizzle was encoded
+local	FUN_000656b0	local_74	variantKeyWord	INFERRED	build key word written by ffvpBuildProgram
+local	FUN_0004a8f0	param_2	unusedArg2	INFERRED	argument the function never reads
+local	FUN_0004d620	param_2	unusedArg2	INFERRED	argument the function never reads
+local	FUN_0004f2e0	param_2	unusedArg2	INFERRED	argument the function never reads
+local	FUN_000659d0	param_7	unusedArg7	INFERRED	argument the function never reads

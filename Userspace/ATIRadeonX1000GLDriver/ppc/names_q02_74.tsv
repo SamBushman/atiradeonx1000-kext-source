@@ -1,0 +1,73 @@
+local	FUN_0004a7d0	fVar1	floatValue	INFERRED	input float converted to the 24-bit hardware format
+local	FUN_0004a7d0	uVar2	exponentBits	INFERRED	IEEE exponent field (bits 23..30 of the float)
+local	FUN_0004a7d0	uVar3	signBit	INFERRED	IEEE sign bit moved to bit 23 of the 24-bit result
+use	FUN_0005c600	iVar2	instCount2	INFERRED	hwProgram+0x18: instruction count (index of the next slot)	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar7\ \+\ 0x18\);$	+2
+use	FUN_0005c600	iVar2	instCount2	INFERRED	hwProgram+0x18: instruction count (index of the next slot)	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar7\ \+\ 0x18\);$@2	+2
+use	FUN_0005c600	iVar2	instCount2	INFERRED	hwProgram+0x18: instruction count (index of the next slot)	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar7\ \+\ 0x18\);$@3	+1
+use	FUN_0005c600	iVar2	instCount2	INFERRED	hwProgram+0x18: instruction count (index of the next slot)	^\s*iVar2\ =\ iVar2\ \*\ 0x10;$	+1
+use	FUN_0005c600	iVar2	instCount2	INFERRED	hwProgram+0x18: instruction count (index of the next slot)	^\s*iVar9\ =\ iVar2\ \+\ iVar8;$	+1
+use	FUN_0005c600	iVar2	instCount2	INFERRED	hwProgram+0x18: instruction count (index of the next slot)	^\s*\*\(uint\ \*\)\(iVar2\ \+\ iVar8\)\ =\ \*\(uint\ \*\)\(iVar2\ \+\ iVar8\)\ \&\ 0xff1fffff;$	+1
+use	FUN_0005c600	iVar2	src0Operand2	INFERRED	source 0 operand of the instruction record (record + 0x20)	^\s*iVar2\ =\ param_3\ \+\ 0x20;$	+1
+use	FUN_0005c600	iVar2	src0Operand2	INFERRED	source 0 operand of the instruction record (record + 0x20)	^\s*FUN_00057340\(param_2,piVar5,iVar2,iVar4\ \+\ 0x14,0\);$	+1
+use	FUN_0005c600	iVar2	src0Operand2	INFERRED	source 0 operand of the instruction record (record + 0x20)	^\s*FUN_00057340\(param_2,piVar5,iVar2,iVar4\ \+\ 0x24,1\);$	+1
+use	FUN_0005c600	iVar2	src0Operand2	INFERRED	source 0 operand of the instruction record (record + 0x20)	^\s*FUN_00057340\(param_2,piVar5,iVar2,iVar4\ \+\ 0x34,2\);$	+1
+use	FUN_0005c600	iVar2	src0Operand2	INFERRED	source 0 operand of the instruction record (record + 0x20)	^\s*FUN_00057340\(param_2,piVar5,iVar2,iVar4\ \+\ 0x44,3\);$	+1
+local	FUN_0004aa00	param_2	unusedArg2	INFERRED	argument the function never reads
+local	FUN_0004aa00	puVar2	flagBytePtr	INFERRED	pointer into the per-unit flag bytes at glContext+0x1488
+local	FUN_0004aa00	uVar1	flagValue	INFERRED	flag value written (0 or 1) into the unit flag bytes
+local	FUN_00053b00	iVar1	shaderRecord	INFERRED	shader list entry (list + index * 0x7c), or 0 when the id is unknown
+local	FUN_00053b00	iVar2	shaderIndex	INFERRED	index returned by extvsFindShaderIndex for the shader id
+local	FUN_00053b00	iVar3	shaderList	INFERRED	EXT_vertex_shader shader list *(glContext+0x116c)
+local	FUN_00062490	iVar2	listObject	INFERRED	list object *(glContext+0x11b4); head pointer at +8
+local	FUN_00062490	puVar1	listNode	INFERRED	list node being visited / freed
+local	FUN_00062490	puVar3	nextNode	INFERRED	next node pointer (node[1]) saved before the node is freed
+local	FUN_00062410	puVar2	newNode	INFERRED	newly allocated 0xc-byte list node
+local	FUN_00062410	uVar1	nodeData	INFERRED	glContext+0x2448 value stored in the new node
+use	FUN_00054270	iVar1	appendResult	INFERRED	return value of extvsAppendInstruction (0 = failure)	^\s*iVar1\ =\ \(\(int\ \(\*\)\(\)\)FUN_000553c0\)\(param_1,iVar2,0x879c,param_2,\&DAT_001db9a8,param_3,\&DAT_001db998,0,$	+3
+use	FUN_00054270	iVar1	instRecord	INFERRED	last appended instruction record (records + (count-1) * 0x74)	^\s*iVar1\ =\ \*\(int\ \*\)\(iVar2\ \+\ 0x14\)\ \*\ 0x74\ \+\ \*\(int\ \*\)\(iVar2\ \+\ 0x18\);$	+2
+use	FUN_00054270	iVar1	instRecord	INFERRED	last appended instruction record (records + (count-1) * 0x74)	^\s*\*\(undefined4\ \*\)\(iVar1\ \+\ \-0x5c\)\ =\ 0;$	+3
+use	FUN_00054270	iVar1	instRecord	INFERRED	last appended instruction record (records + (count-1) * 0x74)	^\s*\*\(undefined4\ \*\)\(iVar1\ \+\ \-0x5c\)\ =\ 0;$@2	+3
+use	FUN_00054270	iVar1	instRecord	INFERRED	last appended instruction record (records + (count-1) * 0x74)	^\s*\*\(undefined4\ \*\)\(iVar1\ \+\ \-0x5c\)\ =\ 0;$@3	+3
+use	FUN_00054270	iVar1	instRecord	INFERRED	last appended instruction record (records + (count-1) * 0x74)	^\s*\*\(undefined4\ \*\)\(iVar1\ \+\ \-0x60\)\ =\ 0;$@3	+3
+use	FUN_00054270	iVar1	instRecord	INFERRED	last appended instruction record (records + (count-1) * 0x74)	^\s*\*\(uint\ \*\)\(iVar1\ \+\ \-0x34\)\ =\ param_4;$	+1
+local	FUN_00054270	iVar2	extvsState	INFERRED	EXT_vertex_shader state *(ctx+0x1168)
+local	FUN_000543b0	iVar1	appendResult	INFERRED	return value of extvsAppendInstruction (0 = failure)
+local	FUN_000543b0	iVar2	extvsState	INFERRED	EXT_vertex_shader state *(ctx+0x1168)
+local	FUN_0005d470	iVar3	instCount	INFERRED	hwProgram+0x18: instruction count (index of the new slot)
+use	FUN_0005d470	uVar2	result	INFERRED	return value: 1 on success, -1 when the operand is unsupported	^\s*uVar2\ =\ 1;$	+1
+use	FUN_0005d470	uVar2	result	INFERRED	return value: 1 on success, -1 when the operand is unsupported	^\s*uVar2\ =\ 0xffffffff;$	+1
+use	FUN_0005d470	uVar2	result	INFERRED	return value: 1 on success, -1 when the operand is unsupported	^\s*return\ uVar2;$	+1
+local	FUN_0005d2f0	iVar8	instCountOrOffset	INFERRED	hwProgram+0x18 instruction count, then multiplied by 0x10 into the slot byte offset (joined)
+local	FUN_00061dc0	iVar2	packetPos	INFERRED	stream write position (count * 0x10 + glContext+0x2748 base)
+local	FUN_00061dc0	puVar1	packet	INFERRED	command packet buffer returned by the glContext+0x2758 allocator (header 0x880)
+local	FUN_0003ee30	param_1	selectValue	INFERRED	3-bit component select value
+local	FUN_0003ee30	param_2	componentIdx	INFERRED	component index (0..3) whose 4-bit field is updated
+local	FUN_0003ee30	param_3	swizzleWord	INFERRED	swizzle word being updated (select at bits 4*component, preserving the others)
+local	FUN_0004b710	puVar1	programEntry	INFERRED	program entry: array base glContext+0x1e60 + index * 0x3754
+local	FUN_0004b710	puVar3	entryByteOffset	INFERRED	byte offset of the program entry (index * 0x3754)
+local	FUN_0003ed50	param_2	irDest	INFERRED	IR destination operand
+local	FUN_0003ed50	uVar1	destEntryWord	INFERRED	parameter table entry word of the destination register
+local	FUN_0004f720	fVar1	defaultFloat	INFERRED	FLOAT_001aa150: default float value written to the state block
+local	FUN_0004f720	iVar6	unitByteOffset	INFERRED	unit index * 0xb4: byte offset of the per-unit default record
+local	FUN_0004f720	uVar3	defaultWord	INFERRED	default word copied from the table DAT_001db2f4
+local	FUN_00052e60	param_3	unusedArg3	INFERRED	argument the function never reads
+local	FUN_00052e60	uVar1	streamPos	INFERRED	stream write position *(glContext+0x2748+4)
+use	FUN_00055a60	iVar2	symbolList2	INFERRED	global symbol list state+0x14	^\s*iVar2\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x0000116c\)\ \+\ param_1\)\ \+\ 0x24\);$	+2
+use	FUN_00055a60	iVar2	symbolList2	INFERRED	global symbol list state+0x14	^\s*\*\(int\ \*\)\(\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x0000116c\)\ \+\ param_1\)\ \+\ 0x24\)\ =\ iVar2;$	+1
+use	FUN_00055a60	iVar2	symbolRecord	INFERRED	record of the modelview-projection symbol, looked up by id	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)FUN_00055a30\)\(param_2,uVar1\);$	+5
+local	FUN_00055a60	uVar1	mvpSymbolId	INFERRED	id returned by extvsCreateSymbol for the MVP matrix symbol
+use	FUN_00057b80	iVar2	slotByteOffset	INFERRED	byte offset of the slot being tested (stride 0x28)	^\s*iVar2\ =\ 0;$	+1
+use	FUN_00057b80	iVar2	slotByteOffset	INFERRED	byte offset of the slot being tested (stride 0x28)	^\s*if\ \(\*\(char\ \*\)\(iVar2\ \+\ \*\(int\ \*\)\(iVar6\ \+\ 0x4c\)\ \+\ 0x10\)\ ==\ '\\0'\)\ \{$	+1
+use	FUN_00057b80	iVar2	slotByteOffset	INFERRED	byte offset of the slot being tested (stride 0x28)	^\s*iVar2\ =\ iVar2\ \+\ 0x28;$	+1
+use	FUN_00057b80	iVar2	newSlotArray	INFERRED	newly allocated slot array (count + 0x10 slots)	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x10\)\)\(uVar5\ \+\ 0x10,0x28\);$	+1
+use	FUN_00057b80	iVar2	newSlotArray	INFERRED	newly allocated slot array (count + 0x10 slots)	^\s*\(iVar2,\*\(undefined4\ \*\)\(iVar6\ \+\ 0x4c\),\*\(int\ \*\)\(iVar6\ \+\ 0x50\)\ \*\ 0x28\);$	+1
+use	FUN_00057b80	iVar2	newSlotArray	INFERRED	newly allocated slot array (count + 0x10 slots)	^\s*\*\(int\ \*\)\(iVar6\ \+\ 0x4c\)\ =\ iVar2;$	+1
+use	FUN_00057b80	iVar2	newSlotArray	INFERRED	newly allocated slot array (count + 0x10 slots)	^\s*\*\(undefined1\ \*\)\(iVar2\ \+\ iVar3\ \+\ 0x10\)\ =\ 1;$	+1
+local	FUN_0003f850	pdVar4	tokenWord5Ptr	INFERRED	pointer to token word 5 of the emitted instruction
+local	FUN_0003f850	pdVar5	tokenWord6Ptr	INFERRED	pointer to token word 6 of the emitted instruction
+local	FUN_00054940	param_2	unusedArg2	INFERRED	argument the function never reads
+local	FUN_00054940	uVar1	stateSymbol	INFERRED	symbol id of the current vertex parameter state symbol (0x87bf vector / 0x87c1 invariant)
+local	FUN_0005dd00	uVar2	swizzleWord	INFERRED	slot word +4 after the source swizzle was encoded; component fields are rearranged for the exp operation
+local	FUN_0005de50	uVar2	swizzleWord	INFERRED	slot word +4 after the source swizzle was encoded; component fields are rearranged for the log operation
+local	FUN_0004a990	param_2	unusedArg2	INFERRED	argument the function never reads
+local	FUN_00053040	param_2	unusedArg2	INFERRED	argument the function never reads

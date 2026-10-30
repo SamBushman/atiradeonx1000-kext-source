@@ -1242,7 +1242,7 @@ int orph_4c544(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_7;
 {
   *(undefined4 *)(param_1 + 0x1e68) = 0;
-  FUN_0004a860(param_1,param_2,param_3,param_4,param_5,param_6,param_7);
+  gldReselectProgramStream(param_1,param_2,param_3,param_4,param_5,param_6,param_7);
   return;
 }
 

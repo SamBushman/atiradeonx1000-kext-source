@@ -1,0 +1,2 @@
+local	FUN_0003f660	iVar1	bufferOrZero	INFERRED	token buffer pointer (allocation) stored in the translator, or 0 when the allocation failed
+local	FUN_00040ac4	iVar7	tempRegister	INFERRED	translator[8]: temp register index used as the intermediate destination

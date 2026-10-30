@@ -2981,7 +2981,7 @@ void gld_emitLightingStatePacket(int glContext,undefined4 passArgR4,undefined4 p
     fpPassThrough1 = (double)ffvpBuildLightKey(glContext);
     passArgR4 = r4AfterCall;
   }
-  ((void (*)())FUN_0004d620)(glContext,passArgR4,passArgR5,passArgR6,fpPassThrough1);
+  ((void (*)())gldMarkProgramsDirtyByFlag)(glContext,passArgR4,passArgR5,passArgR6,fpPassThrough1);
   return;
 }
 

@@ -1,0 +1,1 @@
+func	FUN_00052280	gldEmitDirtyStatePackets	INFERRED	called from the state validator after the gldValidate* passes: emits the command packets (per dirty texture unit register shadows at glContext+0x1cdc..0x1e1c, unit enable masks 0x1041, constants) selected by the dirty bits glContext+0x1930 / +0x1934 / +0x27b0

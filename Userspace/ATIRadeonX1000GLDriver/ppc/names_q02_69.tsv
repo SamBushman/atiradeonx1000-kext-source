@@ -1,0 +1,33 @@
+use	FUN_0005b010	iVar7	hwProgram2	INFERRED	hardware program record *(*(ctx+0x118c)*4 + *shader)	^\s*iVar7\ =\ \*\*\(int\ \*\*\)\(\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x0000118c\)\ \+\ param_1\)\ \*\ 4\ \+\ \*param_2\);$	+2
+use	FUN_0005b010	iVar7	hwProgram2	INFERRED	hardware program record *(*(ctx+0x118c)*4 + *shader)	^\s*iVar8\ =\ \*\(int\ \*\)\(iVar7\ \+\ 0x18\);$@2	+3
+use	FUN_0005b010	iVar7	hwProgram2	INFERRED	hardware program record *(*(ctx+0x118c)*4 + *shader)	^\s*\(uVar3,\*\(undefined4\ \*\)\(iVar7\ \+\ 0x1c\),\*\(int\ \*\)\(iVar7\ \+\ 0x20\)\ <<\ 4\);$	+5
+use	FUN_0005b010	iVar7	hwProgram2	INFERRED	hardware program record *(*(ctx+0x118c)*4 + *shader)	^\s*iVar9\ =\ iVar8\ \*\ 0x10\ \+\ \*\(int\ \*\)\(iVar7\ \+\ 0x1c\);$	+1
+use	FUN_0005b010	iVar7	tempSlotRecord	INFERRED	hardware slot record of the allocated temp slot (slot array + tempSlot * 0x28)	^\s*iVar7\ =\ iVar8\ \*\ 0x28\ \+\ \*\(int\ \*\)\(iVar6\ \+\ 0x4c\);$	+3
+local	FUN_0005b010	uVar1	savedInUseFlag	INFERRED	in-use byte (+0x10) of the temp slot saved and restored around the emitted sequence
+local	FUN_0005b010	uVar2	swizzleWord	INFERRED	slot word +4 with the rounding swizzle / replicate fields 0x1f6da000 set, copied to words +8 and +0xc
+local	FUN_0005b010	iVar4	src0Operand	INFERRED	source 0 operand of the instruction record (record + 0x20)
+use	FUN_0004ab60	iVar1	clearByteOffset	INFERRED	byte offset into the 8 words at glContext+0x1e88 being cleared	^\s*iVar1\ =\ 0;$@2	+1
+use	FUN_0004ab60	iVar1	clearByteOffset	INFERRED	byte offset into the 8 words at glContext+0x1e88 being cleared	^\s*\*\(undefined4\ \*\)\(param_1\ \+\ 0x1e88\ \+\ iVar1\)\ =\ 0;$	+2
+use	FUN_0004ab60	iVar2	listByteOffset	INFERRED	index * 4: byte offset into the program list glContext+0x1e7c	^\s*iVar2\ =\ iVar1\ \*\ 4;$	+1
+use	FUN_0004ab60	iVar2	listByteOffset	INFERRED	index * 4: byte offset into the program list glContext+0x1e7c	^\s*\(\(unsigned\ char\ \*\)0x000010e9\)\[\*\(int\ \*\)\(iVar2\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x1e7c\)\)\]\ =\ 0;$	+2
+use	FUN_0004ab60	iVar2	wordsLeft	INFERRED	countdown of the 8 words to clear	^\s*iVar2\ =\ 8;$	+1
+use	FUN_0004ab60	iVar2	wordsLeft	INFERRED	countdown of the 8 words to clear	^\s*iVar2\ =\ iVar2\ \+\ \-1;$	+2
+local	FUN_0004a860	cVar1	selectedByteFlag	INFERRED	byte glContext+0x1136 or +0x11d0 chosen by bit 0x2000 of glContext+0x44
+use	FUN_0005bf60	iVar3	hwProgramOrInstSlot	INFERRED	hardware program record, then the instruction slot (instArray + count * 0x10) in the cross-product expansion	^\s*iVar3\ =\ \*\*\(int\ \*\*\)\(\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x0000118c\)\ \+\ param_1\)\ \*\ 4\ \+\ \*param_2\);$	+2
+use	FUN_0005bf60	iVar3	hwProgramOrInstSlot	INFERRED	hardware program record, then the instruction slot (instArray + count * 0x10) in the cross-product expansion	^\s*iVar10\ =\ \*\(int\ \*\)\(iVar3\ \+\ 0x18\);$@2	+3
+use	FUN_0005bf60	iVar3	hwProgramOrInstSlot	INFERRED	hardware program record, then the instruction slot (instArray + count * 0x10) in the cross-product expansion	^\s*\(uVar4,\*\(undefined4\ \*\)\(iVar3\ \+\ 0x1c\),\*\(int\ \*\)\(iVar3\ \+\ 0x20\)\ <<\ 4\);$	+5
+use	FUN_0005bf60	iVar3	hwProgramOrInstSlot	INFERRED	hardware program record, then the instruction slot (instArray + count * 0x10) in the cross-product expansion	^\s*iVar3\ =\ iVar10\ \*\ 0x10\ \+\ \*\(int\ \*\)\(iVar3\ \+\ 0x1c\);$	+1
+use	FUN_0005bf60	iVar3	hwProgramOrInstSlot	INFERRED	hardware program record, then the instruction slot (instArray + count * 0x10) in the cross-product expansion	^\s*FUN_00056f20\(param_1,param_2,\&local_98,iVar3,2,0,0\);$	+4
+use	FUN_0005bf60	iVar3	hwProgramOrInstSlot	INFERRED	hardware program record, then the instruction slot (instArray + count * 0x10) in the cross-product expansion	^\s*FUN_00057340\(param_2,piVar5,iVar7,iVar3\ \+\ 8,0\);$	+2
+use	FUN_0005bf60	iVar3	hwProgramOrInstSlot	INFERRED	hardware program record, then the instruction slot (instArray + count * 0x10) in the cross-product expansion	^\s*\*\(uint\ \*\)\(iVar3\ \+\ 0xc\)\ =\ uVar2;$	+6
+use	FUN_0005bf60	iVar3	hwProgramOrInstSlot	INFERRED	hardware program record, then the instruction slot (instArray + count * 0x10) in the cross-product expansion	^\s*FUN_00057340\(param_2,piVar5,iVar7,iVar3\ \+\ 0x18,0\);$	+3
+use	FUN_0005bf60	iVar3	hwProgramOrInstSlot	INFERRED	hardware program record, then the instruction slot (instArray + count * 0x10) in the cross-product expansion	^\s*FUN_00057340\(param_2,piVar5,\&local_7c,iVar3\ \+\ 0x1c,0\);$	+1
+use	FUN_0005bf60	iVar3	instCountValue	INFERRED	hwProgram+0x18: instruction count read for the second slot group	^\s*iVar3\ =\ \*\(int\ \*\)\(iVar10\ \+\ 0x18\);$	+2
+use	FUN_0005bf60	iVar3	instCountValue	INFERRED	hwProgram+0x18: instruction count read for the second slot group	^\s*iVar3\ =\ \*\(int\ \*\)\(iVar10\ \+\ 0x18\);$@2	+2
+use	FUN_0005bf60	iVar3	instCountValue	INFERRED	hwProgram+0x18: instruction count read for the second slot group	^\s*iVar3\ =\ \*\(int\ \*\)\(iVar10\ \+\ 0x18\);$@3	+1
+use	FUN_0005bf60	iVar3	instCountValue	INFERRED	hwProgram+0x18: instruction count read for the second slot group	^\s*iVar9\ =\ iVar3\ \*\ 0x10\ \+\ \*\(int\ \*\)\(iVar10\ \+\ 0x1c\);$	+1
+use	FUN_0005bf60	iVar3	tempSlotRecord	INFERRED	hardware slot record of the temp slot (slot array + tempIndex * 0x28)	^\s*iVar3\ =\ iVar10\ \*\ 0x28\ \+\ \*\(int\ \*\)\(iVar8\ \+\ 0x4c\);$	+3
+use	FUN_0005bf60	iVar10	hwProgram2	INFERRED	hardware program record *(*(ctx+0x118c)*4 + *shader) for the second slot group	^\s*iVar10\ =\ \*\*\(int\ \*\*\)\(\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x0000118c\)\ \+\ param_1\)\ \*\ 4\ \+\ \*param_2\);$	+2
+use	FUN_0005bf60	iVar10	hwProgram2	INFERRED	hardware program record *(*(ctx+0x118c)*4 + *shader) for the second slot group	^\s*iVar3\ =\ \*\(int\ \*\)\(iVar10\ \+\ 0x18\);$@2	+3
+use	FUN_0005bf60	iVar10	hwProgram2	INFERRED	hardware program record *(*(ctx+0x118c)*4 + *shader) for the second slot group	^\s*\(uVar4,\*\(undefined4\ \*\)\(iVar10\ \+\ 0x1c\),\*\(int\ \*\)\(iVar10\ \+\ 0x20\)\ <<\ 4\);$	+5
+use	FUN_0005bf60	iVar10	hwProgram2	INFERRED	hardware program record *(*(ctx+0x118c)*4 + *shader) for the second slot group	^\s*iVar9\ =\ iVar3\ \*\ 0x10\ \+\ \*\(int\ \*\)\(iVar10\ \+\ 0x1c\);$	+1
