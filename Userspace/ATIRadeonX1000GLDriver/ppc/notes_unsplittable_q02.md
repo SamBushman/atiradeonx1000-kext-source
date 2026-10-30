@@ -16,3 +16,7 @@ Whole-variable joined names (`AOrB`) stand for these registers; the finer per-we
   be split by the line-range tool (lhs and rhs of one statement with a later use of the result on the same line).
 * Declaration placement: new declarations must follow the first declaration and precede the fake-struct arrays (notes_q06_split_placement.md). `USE_DECL=beside` used.
 * Registers `in_r7` / `in_r8` of `extvsPrepareHardwareProgram` (stale call arguments) and `extraout_*` / `in_f*` residuals are decompiler artifacts and are not renamed.
+* `extvsUploadSingleConstant` (`FUN_00062940`): naming the second webs of `uVar1` / `uVar5` / `uVar6` separately (`valueX2`, `valueY`, `valueZ2`) gave
+  `MERGE _FUN_00062940 candidate slot 100 stands for 104 and 80` (gate q02_74, log ~/g5logs/q02_74.log). The function was restored to its committed text and the
+  registers are not split further; the joined names `valueXOrCmdWord`, `valueYOrCmdWord`, `valueZOrCmdWord` (whole variable, gate q02_79 IDENTICAL) stand for
+  the constant word and its later reuse as a command packet word.
