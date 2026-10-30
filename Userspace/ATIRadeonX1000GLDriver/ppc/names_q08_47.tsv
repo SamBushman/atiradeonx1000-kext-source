@@ -1,0 +1,22 @@
+use	R300VMachineAssembler__assembleBlock	iVar3	stateError	INFERRED	assembler vtable +8 check; non-zero fails the compile (Compiler__fail 5)	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 8\)\)\(param_1\);$	+2
+use	R300VMachineAssembler__assembleBlock	iVar3	compiler	INFERRED	this[3] compiler	^\s*iVar3\ =\ param_1\[3\];$	+2
+use	R300VMachineAssembler__assembleBlock	iVar3	compiler	INFERRED	this[3] compiler	^\s*iVar3\ =\ param_1\[3\];$@2	+1
+use	R300VMachineAssembler__assembleBlock	iVar3	compiler	INFERRED	this[3] compiler	^\s*iVar3\ =\ param_1\[3\];$@3	+1
+use	R300VMachineAssembler__assembleBlock	iVar3	compiler	INFERRED	this[3] compiler	^\s*if\ \(\*\*\(int\ \*\*\)\(iVar3\ \+\ 0x6c4\)\ ==\ 0\)\ \{$@2	+1
+use	R300VMachineAssembler__assembleBlock	iVar3	compiler	INFERRED	this[3] compiler	^\s*iVar3\ =\ param_1\[3\];$@4	+1
+use	R300VMachineAssembler__assembleBlock	iVar3	compiler	INFERRED	this[3] compiler	^\s*iVar3\ =\ FUN_00106cf8\(piVar4,\*\(undefined4\ \*\)\(iVar3\ \+\ 0x6c4\)\);$	+3
+use	R300VMachineAssembler__assembleBlock	iVar3	hasSingleSourceMov	INFERRED	instruction vtable +0x68 predicate	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*piVar6\ \+\ 0x68\)\)\(piVar6\);$	+2
+use	R300VMachineAssembler__assembleBlock	iVar3	sourceFlag	INFERRED	source instruction vtable +0x50 predicate	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*piVar5\ \+\ 0x50\)\)\(piVar5\);$	+2
+use	R300VMachineAssembler__assembleBlock	iVar3	isLoadConst	INFERRED	instruction vtable +0x48 predicate	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*piVar6\ \+\ 0x48\)\)\(piVar6\);$	+2
+use	R300VMachineAssembler__assembleBlock	iVar3	endsGroup	INFERRED	group instruction vtable +0x24 predicate: emit the group terminator	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*piVar4\ \+\ 0x24\)\)\(piVar4\);$	+2
+use	R300VMachineAssembler__assembleBlock	piVar5	blockInst	INFERRED	instruction at the head of the not-yet-assembled list (block+8 -> +8 link)	^\s*piVar5\ =\ \*\(int\ \*\*\)\(param_2\ \+\ 8\);$	+2
+use	R300VMachineAssembler__assembleBlock	piVar5	blockInst	INFERRED	instruction at the head of the not-yet-assembled list (block+8 -> +8 link)	^\s*piVar4\ =\ \(int\ \*\)FUN_000e3b88\(param_1\[4\],param_2,piVar5,local_38\);$	+1
+use	R300VMachineAssembler__assembleBlock	piVar5	blockInst	INFERRED	instruction at the head of the not-yet-assembled list (block+8 -> +8 link)	^\s*piVar5\ =\ piVar4;$	+1
+use	R300VMachineAssembler__assembleBlock	piVar5	blockInst	INFERRED	instruction at the head of the not-yet-assembled list (block+8 -> +8 link)	^\s*piVar4\ =\ piVar5;$	+1
+use	R300VMachineAssembler__assembleBlock	piVar5	blockInst	INFERRED	instruction at the head of the not-yet-assembled list (block+8 -> +8 link)	^\s*piVar4\ =\ \(int\ \*\)\(\(int\ \(\*\)\(\)\)FUN_0019b03c\)\(param_1,param_2,piVar5,param_1\ \+\ 0x1f\);$	+1
+use	R300VMachineAssembler__assembleBlock	piVar5	blockInst	INFERRED	instruction at the head of the not-yet-assembled list (block+8 -> +8 link)	^\s*piVar5\ =\ piVar6;$	+1
+use	R300VMachineAssembler__assembleBlock	piVar5	blockInst	INFERRED	instruction at the head of the not-yet-assembled list (block+8 -> +8 link)	^\s*if\ \(\(int\ \*\)piVar5\[2\]\ ==\ \(int\ \*\)0x0\)\ \{$	+1
+use	R300VMachineAssembler__assembleBlock	piVar5	blockInst	INFERRED	instruction at the head of the not-yet-assembled list (block+8 -> +8 link)	^\s*piVar6\ =\ \(int\ \*\)piVar5\[2\];$	+2
+use	R300VMachineAssembler__assembleBlock	piVar5	groupStart	INFERRED	first instruction of the group being emitted	^\s*piVar5\ =\ piVar4;$@2	+1
+use	R300VMachineAssembler__assembleBlock	piVar5	groupStart	INFERRED	first instruction of the group being emitted	^\s*if\ \(piVar5\ ==\ \(int\ \*\)0x0\)\ break;$	+1
+use	R300VMachineAssembler__assembleBlock	piVar5	groupStart	INFERRED	first instruction of the group being emitted	^\s*piVar5\ =\ \(int\ \*\)\(uVar2\ \&\ 4\);$	+1

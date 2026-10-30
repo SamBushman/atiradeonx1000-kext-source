@@ -1041,84 +1041,84 @@ int _restf14()
 }
 
 /* printf_LDBLStub_1a32d0 @ 0x1a32d0 (172 bytes) */
-int printf_LDBLStub_1a32d0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+int printf_LDBLStub_1a32d0(buffer, format, variadicArg3, variadicArg4, variadicArg5, variadicArg6, variadicArg7, variadicArg8)
+  undefined4 buffer;
+  undefined4 format;
+  undefined4 variadicArg3;
+  undefined4 variadicArg4;
+  undefined4 variadicArg5;
+  undefined4 variadicArg6;
+  undefined4 variadicArg7;
+  undefined4 variadicArg8;
 {
-  undefined4 uVar1;
+  undefined4 result;
   
   if (DAT_001fc1d4 == (code *)0x0) {
     DAT_001fc1d4 = (code *)((int (*)())stub_getrealaddr)("sprintf");
   }
                     
                     
-  uVar1 = (*DAT_001fc1d4)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8);
-  return uVar1;
+  result = (*DAT_001fc1d4)(buffer,format,variadicArg3,variadicArg4,variadicArg5,variadicArg6,variadicArg7,variadicArg8);
+  return result;
 }
 
 /* printf_LDBLStub_1a337c @ 0x1a337c (172 bytes) */
-int printf_LDBLStub_1a337c(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+int printf_LDBLStub_1a337c(format, variadicArg2, variadicArg3, variadicArg4, variadicArg5, variadicArg6, variadicArg7, variadicArg8)
+  undefined4 format;
+  undefined4 variadicArg2;
+  undefined4 variadicArg3;
+  undefined4 variadicArg4;
+  undefined4 variadicArg5;
+  undefined4 variadicArg6;
+  undefined4 variadicArg7;
+  undefined4 variadicArg8;
 {
   if (DAT_001fc1d8 == (code *)0x0) {
     DAT_001fc1d8 = (code *)((int (*)())stub_getrealaddr)("printf");
   }
                     
                     
-  (*DAT_001fc1d8)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8);
+  (*DAT_001fc1d8)(format,variadicArg2,variadicArg3,variadicArg4,variadicArg5,variadicArg6,variadicArg7,variadicArg8);
   return;
 }
 
 /* printf_LDBLStub_1a3428 @ 0x1a3428 (172 bytes) */
-int printf_LDBLStub_1a3428(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+int printf_LDBLStub_1a3428(buffer, bufferSize, format, argList, variadicArg5, variadicArg6, variadicArg7, variadicArg8)
+  undefined4 buffer;
+  undefined4 bufferSize;
+  undefined4 format;
+  undefined4 argList;
+  undefined4 variadicArg5;
+  undefined4 variadicArg6;
+  undefined4 variadicArg7;
+  undefined4 variadicArg8;
 {
   if (DAT_001fc1dc == (code *)0x0) {
     DAT_001fc1dc = (code *)((int (*)())stub_getrealaddr)("vsnprintf");
   }
                     
                     
-  (*DAT_001fc1dc)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8);
+  (*DAT_001fc1dc)(buffer,bufferSize,format,argList,variadicArg5,variadicArg6,variadicArg7,variadicArg8);
   return;
 }
 
 /* printf_LDBLStub_1a34d4 @ 0x1a34d4 (172 bytes) */
-int printf_LDBLStub_1a34d4(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+int printf_LDBLStub_1a34d4(buffer, format, argList, variadicArg4, variadicArg5, variadicArg6, variadicArg7, variadicArg8)
+  undefined4 buffer;
+  undefined4 format;
+  undefined4 argList;
+  undefined4 variadicArg4;
+  undefined4 variadicArg5;
+  undefined4 variadicArg6;
+  undefined4 variadicArg7;
+  undefined4 variadicArg8;
 {
   if (DAT_001fc1e0 == (code *)0x0) {
     DAT_001fc1e0 = (code *)((int (*)())stub_getrealaddr)("vsprintf");
   }
                     
                     
-  (*DAT_001fc1e0)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8);
+  (*DAT_001fc1e0)(buffer,format,argList,variadicArg4,variadicArg5,variadicArg6,variadicArg7,variadicArg8);
   return;
 }
 

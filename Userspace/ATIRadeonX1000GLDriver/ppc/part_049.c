@@ -3751,21 +3751,22 @@ int ConstantSlots__tryAssignPair(sourceState, sourceA, sourceB, slot)
   int *sourceB;
   int slot;
 {
+  int slotWordOffset;
   int *pairEntry;
   int *singleSource;
   int regTestResult;
   undefined4 result;
-  int iVar3;
+  int slotPairBase;
   int *pairSecond;
   int pairOffset;
   int *pairFirst;
   
   pairOffset = slot * 8;
-  iVar3 = pairOffset + sourceState;
-  pairFirst = *(int **)(iVar3 + 8);
-  if ((pairFirst == (int *)0x0) || (pairSecond = *(int **)(iVar3 + 0xc), pairSecond == (int *)0x0)) {
-    iVar3 = slot * 4;
-    singleSource = *(int **)(iVar3 + sourceState);
+  slotPairBase = pairOffset + sourceState;
+  pairFirst = *(int **)(slotPairBase + 8);
+  if ((pairFirst == (int *)0x0) || (pairSecond = *(int **)(slotPairBase + 0xc), pairSecond == (int *)0x0)) {
+    slotWordOffset = slot * 4;
+    singleSource = *(int **)(slotWordOffset + sourceState);
     if ((((singleSource == (int *)0x0) || (singleSource == sourceA)) ||
         (((((((sourceA != (int *)0x0 && (singleSource[0x20] != 0)) &&
              (regTestResult = RegKind__flagBit0(singleSource[0x26]), regTestResult != 0)) &&
@@ -3773,10 +3774,10 @@ int ConstantSlots__tryAssignPair(sourceState, sourceA, sourceB, slot)
              && (sourceA[0x20] != 0)))) &&
            ((regTestResult = RegKind__flagBit0(sourceA[0x26]), regTestResult != 0 && ((sourceA[5] & 2U) == 0)))) &&
           ((regTestResult = (**(code **)(*sourceA + 0x50))(sourceA), regTestResult == 0 &&
-           ((((*(uint *)(*(int *)(iVar3 + sourceState) + 0x14) & 0x40) != 0 &&
+           ((((*(uint *)(*(int *)(slotWordOffset + sourceState) + 0x14) & 0x40) != 0 &&
              ((sourceA[5] & 0x40U) != 0)) &&
-            (*(int *)(*(int *)(iVar3 + sourceState) + 0x94) == sourceA[0x25])))))) ||
-         ((singleSource = *(int **)(iVar3 + sourceState), sourceB == singleSource ||
+            (*(int *)(*(int *)(slotWordOffset + sourceState) + 0x94) == sourceA[0x25])))))) ||
+         ((singleSource = *(int **)(slotWordOffset + sourceState), sourceB == singleSource ||
           ((((singleSource != (int *)0x0 && (sourceB != (int *)0x0)) &&
             (((singleSource[0x20] != 0 &&
               ((regTestResult = RegKind__flagBit0(singleSource[0x26]), regTestResult != 0 && ((singleSource[5] & 2U) == 0)))) &&
@@ -3784,11 +3785,11 @@ int ConstantSlots__tryAssignPair(sourceState, sourceA, sourceB, slot)
            (((((sourceB[0x20] != 0 && (regTestResult = RegKind__flagBit0(sourceB[0x26]), regTestResult != 0)) &&
               ((sourceB[5] & 2U) == 0)) &&
              ((regTestResult = (**(code **)(*sourceB + 0x50))(sourceB), regTestResult == 0 &&
-              ((*(uint *)(*(int *)(iVar3 + sourceState) + 0x14) & 0x40) != 0)))) &&
+              ((*(uint *)(*(int *)(slotWordOffset + sourceState) + 0x14) & 0x40) != 0)))) &&
             (((sourceB[5] & 0x40U) != 0 &&
-             (*(int *)(*(int *)(iVar3 + sourceState) + 0x94) == sourceB[0x25])))))))))))) &&
-       ((iVar3 = ((int (*)())ConstantSlots__tryAddToRow)(sourceState,sourceA,slot), iVar3 != 0 &&
-        (iVar3 = ((int (*)())ConstantSlots__tryAddToRow)(sourceState,sourceB,slot), iVar3 != 0)))) {
+             (*(int *)(*(int *)(slotWordOffset + sourceState) + 0x94) == sourceB[0x25])))))))))))) &&
+       ((slotWordOffset = ((int (*)())ConstantSlots__tryAddToRow)(sourceState,sourceA,slot), slotWordOffset != 0 &&
+        (slotWordOffset = ((int (*)())ConstantSlots__tryAddToRow)(sourceState,sourceB,slot), slotWordOffset != 0)))) {
       *(int **)(pairOffset + sourceState + 0xc) = sourceB;
       *(int **)(pairOffset + sourceState + 8) = sourceA;
       return 1;
@@ -3807,8 +3808,8 @@ LAB_0018cee8:
             ((((sourceB[0x20] == 0 || (regTestResult = RegKind__flagBit0(sourceB[0x26]), regTestResult == 0)) ||
               ((sourceB[5] & 2U) != 0)) ||
              ((regTestResult = (**(code **)(*sourceB + 0x50))(sourceB), regTestResult != 0 ||
-              ((*(uint *)(*(int *)(iVar3 + 0xc) + 0x14) & 0x40) == 0)))))) ||
-           (((sourceB[5] & 0x40U) == 0 || (*(int *)(*(int *)(iVar3 + 0xc) + 0x94) != sourceB[0x25]))
+              ((*(uint *)(*(int *)(slotPairBase + 0xc) + 0x14) & 0x40) == 0)))))) ||
+           (((sourceB[5] & 0x40U) == 0 || (*(int *)(*(int *)(slotPairBase + 0xc) + 0x94) != sourceB[0x25]))
            )))))) goto LAB_0018cfbc;
     }
     else {
@@ -3818,9 +3819,9 @@ LAB_0018cee8:
            && ((sourceA[0x20] != 0 &&
                ((regTestResult = RegKind__flagBit0(sourceA[0x26]), regTestResult != 0 && ((sourceA[5] & 2U) == 0))))))))
          && ((regTestResult = (**(code **)(*sourceA + 0x50))(sourceA), regTestResult == 0 &&
-             ((((*(uint *)(*(int *)(iVar3 + 8) + 0x14) & 0x40) != 0 && ((sourceA[5] & 0x40U) != 0))
-              && (*(int *)(*(int *)(iVar3 + 8) + 0x94) == sourceA[0x25])))))) {
-        pairSecond = *(int **)(iVar3 + 0xc);
+             ((((*(uint *)(*(int *)(slotPairBase + 8) + 0x14) & 0x40) != 0 && ((sourceA[5] & 0x40U) != 0))
+              && (*(int *)(*(int *)(slotPairBase + 8) + 0x94) == sourceA[0x25])))))) {
+        pairSecond = *(int **)(slotPairBase + 0xc);
         goto LAB_0018cee8;
       }
 LAB_0018cfbc:
@@ -3829,21 +3830,21 @@ LAB_0018cfbc:
       if (((sourceB != pairEntry) &&
           (((((pairEntry == (int *)0x0 || (sourceB == (int *)0x0)) ||
              ((pairEntry[0x20] == 0 ||
-              (((iVar3 = RegKind__flagBit0(pairEntry[0x26]), iVar3 == 0 || ((pairEntry[5] & 2U) != 0)) ||
-               (iVar3 = (**(code **)(*pairEntry + 0x50))(pairEntry), iVar3 != 0)))))) ||
-            ((sourceB[0x20] == 0 || (iVar3 = RegKind__flagBit0(sourceB[0x26]), iVar3 == 0)))) ||
+              (((slotPairBase = RegKind__flagBit0(pairEntry[0x26]), slotPairBase == 0 || ((pairEntry[5] & 2U) != 0)) ||
+               (slotPairBase = (**(code **)(*pairEntry + 0x50))(pairEntry), slotPairBase != 0)))))) ||
+            ((sourceB[0x20] == 0 || (slotPairBase = RegKind__flagBit0(sourceB[0x26]), slotPairBase == 0)))) ||
            (((sourceB[5] & 2U) != 0 ||
-            (((iVar3 = (**(code **)(*sourceB + 0x50))(sourceB), iVar3 != 0 ||
+            (((slotPairBase = (**(code **)(*sourceB + 0x50))(sourceB), slotPairBase != 0 ||
               ((*(uint *)(*(int *)(pairOffset + 8) + 0x14) & 0x40) == 0)) ||
              (((sourceB[5] & 0x40U) == 0 || (*(int *)(*(int *)(pairOffset + 8) + 0x94) != sourceB[0x25]))
              )))))))) ||
          ((pairEntry = *(int **)(pairOffset + 0xc), sourceA != pairEntry &&
           (((((pairEntry == (int *)0x0 || (sourceA == (int *)0x0)) || (pairEntry[0x20] == 0)) ||
-            ((iVar3 = RegKind__flagBit0(pairEntry[0x26]), iVar3 == 0 || ((pairEntry[5] & 2U) != 0)))) ||
-           ((((iVar3 = (**(code **)(*pairEntry + 0x50))(pairEntry), iVar3 != 0 ||
-              ((sourceA[0x20] == 0 || (iVar3 = RegKind__flagBit0(sourceA[0x26]), iVar3 == 0)))) ||
+            ((slotPairBase = RegKind__flagBit0(pairEntry[0x26]), slotPairBase == 0 || ((pairEntry[5] & 2U) != 0)))) ||
+           ((((slotPairBase = (**(code **)(*pairEntry + 0x50))(pairEntry), slotPairBase != 0 ||
+              ((sourceA[0x20] == 0 || (slotPairBase = RegKind__flagBit0(sourceA[0x26]), slotPairBase == 0)))) ||
              ((sourceA[5] & 2U) != 0)) ||
-            ((((iVar3 = (**(code **)(*sourceA + 0x50))(sourceA), iVar3 != 0 ||
+            ((((slotPairBase = (**(code **)(*sourceA + 0x50))(sourceA), slotPairBase != 0 ||
                ((*(uint *)(*(int *)(pairOffset + 0xc) + 0x14) & 0x40) == 0)) ||
               ((sourceA[5] & 0x40U) == 0)) ||
              (*(int *)(*(int *)(pairOffset + 0xc) + 0x94) != sourceA[0x25])))))))))) goto LAB_0018d170;

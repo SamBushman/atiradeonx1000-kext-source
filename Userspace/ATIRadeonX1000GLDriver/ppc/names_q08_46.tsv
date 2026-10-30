@@ -1,0 +1,38 @@
+local	printf_LDBLStub_1a32d0	param_1	buffer	CONFIRMED	sprintf destination
+local	printf_LDBLStub_1a32d0	param_2	format	CONFIRMED	sprintf format
+local	printf_LDBLStub_1a32d0	param_3	variadicArg3	CONFIRMED	forwarded variadic register argument
+local	printf_LDBLStub_1a32d0	param_4	variadicArg4	CONFIRMED	forwarded variadic register argument
+local	printf_LDBLStub_1a32d0	param_5	variadicArg5	CONFIRMED	forwarded variadic register argument
+local	printf_LDBLStub_1a32d0	param_6	variadicArg6	CONFIRMED	forwarded variadic register argument
+local	printf_LDBLStub_1a32d0	param_7	variadicArg7	CONFIRMED	forwarded variadic register argument
+local	printf_LDBLStub_1a32d0	param_8	variadicArg8	CONFIRMED	forwarded variadic register argument
+local	printf_LDBLStub_1a32d0	uVar1	result	CONFIRMED	sprintf return value
+local	printf_LDBLStub_1a337c	param_1	format	CONFIRMED	printf format
+local	printf_LDBLStub_1a337c	param_2	variadicArg2	CONFIRMED	forwarded variadic register argument
+local	printf_LDBLStub_1a337c	param_3	variadicArg3	CONFIRMED	forwarded variadic register argument
+local	printf_LDBLStub_1a337c	param_4	variadicArg4	CONFIRMED	forwarded variadic register argument
+local	printf_LDBLStub_1a337c	param_5	variadicArg5	CONFIRMED	forwarded variadic register argument
+local	printf_LDBLStub_1a337c	param_6	variadicArg6	CONFIRMED	forwarded variadic register argument
+local	printf_LDBLStub_1a337c	param_7	variadicArg7	CONFIRMED	forwarded variadic register argument
+local	printf_LDBLStub_1a337c	param_8	variadicArg8	CONFIRMED	forwarded variadic register argument
+local	printf_LDBLStub_1a3428	param_1	buffer	CONFIRMED	vsnprintf destination
+local	printf_LDBLStub_1a3428	param_2	bufferSize	CONFIRMED	vsnprintf size
+local	printf_LDBLStub_1a3428	param_3	format	CONFIRMED	vsnprintf format
+local	printf_LDBLStub_1a3428	param_4	argList	CONFIRMED	vsnprintf va_list
+local	printf_LDBLStub_1a3428	param_5	variadicArg5	CONFIRMED	forwarded register argument
+local	printf_LDBLStub_1a3428	param_6	variadicArg6	CONFIRMED	forwarded register argument
+local	printf_LDBLStub_1a3428	param_7	variadicArg7	CONFIRMED	forwarded register argument
+local	printf_LDBLStub_1a3428	param_8	variadicArg8	CONFIRMED	forwarded register argument
+local	printf_LDBLStub_1a34d4	param_1	buffer	CONFIRMED	vsprintf destination
+local	printf_LDBLStub_1a34d4	param_2	format	CONFIRMED	vsprintf format
+local	printf_LDBLStub_1a34d4	param_3	argList	CONFIRMED	vsprintf va_list
+local	printf_LDBLStub_1a34d4	param_4	variadicArg4	CONFIRMED	forwarded register argument
+local	printf_LDBLStub_1a34d4	param_5	variadicArg5	CONFIRMED	forwarded register argument
+local	printf_LDBLStub_1a34d4	param_6	variadicArg6	CONFIRMED	forwarded register argument
+local	printf_LDBLStub_1a34d4	param_7	variadicArg7	CONFIRMED	forwarded register argument
+local	printf_LDBLStub_1a34d4	param_8	variadicArg8	CONFIRMED	forwarded register argument
+use	ConstantSlots__tryAssignPair	iVar3	slotPairBase	INFERRED	sourceState + slot*8: the pair entry words at +8/+0xc	^\s*iVar3\ =\ iVar5\ \+\ param_1;$	+3
+use	ConstantSlots__tryAssignPair	iVar3	slotPairBase	INFERRED	sourceState + slot*8: the pair entry words at +8/+0xc	^\s*if\ \(\(param_3\ !=\ piVar4\)\ \&\&$	+11
+use	ConstantSlots__tryAssignPair	iVar3	slotPairBase	INFERRED	sourceState + slot*8: the pair entry words at +8/+0xc	^\s*if\ \(\(\(\(\(param_2\ !=\ \(int\ \*\)0x0\)\ \&\&\ \(piVar6\[0x20\]\ !=\ 0\)\)\ \&\&$	+9
+use	ConstantSlots__tryAssignPair	iVar3	slotPairBase	INFERRED	sourceState + slot*8: the pair entry words at +8/+0xc	^\s*if\ \(\(\(param_3\ !=\ piVar6\)\ \&\&$	+21
+use	ConstantSlots__tryAssignPair	iVar3	slotWordOffset	INFERRED	slot*4: offset of the single source word	^\s*iVar3\ =\ param_4\ \*\ 4;$	+25

@@ -1337,6 +1337,17 @@ int R300MachineAssembler__assembleBlock(this, block, startOfShaderFlag)
   int block;
   int startOfShaderFlag;
 {
+  int predicate38;
+  int predicate4c;
+  int isLoadConst;
+  int predicate5c;
+  int isFetchInst3;
+  int isFetchInst2;
+  int clauseState;
+  int isFetchInst;
+  int isSourceConstant;
+  int slotIndex;
+  int compiler;
   uint *flagsPtr;
   bool aluClauseOpened;
   bool prevEndedAluClause;
@@ -1347,14 +1358,14 @@ int R300MachineAssembler__assembleBlock(this, block, startOfShaderFlag)
   bool groupHasPresub;
   uint instFlags;
   int *cursorInst;
-  int iVar11;
+  int stateError;
   int *prevInst;
   int *src1Inst;
   int *groupInst;
   code *visitSlot;
-  int local_88;
+  int lookaheadFlag;
   undefined1 packState [60];
-  undefined4 local_48 [2];
+  undefined4 firstLiteralValue [2];
   
   groupInst = *(int **)(block + 8);
   prevEndedAluClause = false;
@@ -1362,24 +1373,24 @@ int R300MachineAssembler__assembleBlock(this, block, startOfShaderFlag)
     return;
   }
   do {
-    iVar11 = (**(code **)(*this + 8))(this);
-    if (iVar11 != 0) {
+    stateError = (**(code **)(*this + 8))(this);
+    if (stateError != 0) {
       Compiler__fail(this[3],5);
     }
-    iVar11 = this[3];
-    if (**(int **)(iVar11 + 0x6c4) == 0) {
-      prevInst = (int *)FUN_000e3b88(this[4],block,groupInst,&local_88);
-      if ((prevInst == (int *)0x0) || (local_88 == 0)) {
-        iVar11 = this[3];
+    compiler = this[3];
+    if (**(int **)(compiler + 0x6c4) == 0) {
+      prevInst = (int *)FUN_000e3b88(this[4],block,groupInst,&lookaheadFlag);
+      if ((prevInst == (int *)0x0) || (lookaheadFlag == 0)) {
+        compiler = this[3];
       }
       else {
-        iVar11 = this[3];
+        compiler = this[3];
         groupInst = prevInst;
       }
     }
-    iVar11 = IRInst__isCoalescableMov(groupInst,*(undefined4 *)(iVar11 + 0x6c4));
+    compiler = IRInst__isCoalescableMov(groupInst,*(undefined4 *)(compiler + 0x6c4));
     prevInst = groupInst;
-    if ((((iVar11 == 0) || (instFlags = groupInst[5], (instFlags & 4) != 0)) || ((int)instFlags < 0)) ||
+    if ((((compiler == 0) || (instFlags = groupInst[5], (instFlags & 4) != 0)) || ((int)instFlags < 0)) ||
        ((instFlags & 0x1000) != 0)) {
       PackState__reset(packState);
       if (groupInst == (int *)0x0) {
@@ -1416,20 +1427,20 @@ LAB_00197808:
         do {
           instFlags = cursorInst[5];
           if ((instFlags & 1) != 0) {
-            iVar11 = cursorInst[0x47];
+            slotIndex = cursorInst[0x47];
             visitSlot = *(code **)(*this + 0x13c);
-            IRInst__firstLiteralSourceValue(local_48,cursorInst);
-            (*visitSlot)(this,iVar11,local_48[0]);
+            IRInst__firstLiteralSourceValue(firstLiteralValue,cursorInst);
+            (*visitSlot)(this,slotIndex,firstLiteralValue[0]);
             if ((cursorInst[5] & 0x10000U) == 0) {
               if ((cursorInst[5] & 2U) != 0) {
                 src1Inst = (int *)IRInst__getOperandSource(cursorInst,1);
-                iVar11 = (**(code **)(*src1Inst + 0x50))(src1Inst);
-                if ((iVar11 != 0) &&
-                   (iVar11 = IRInst__getOperandRecord(cursorInst,0), *(int *)(iVar11 + 0x10) == 0x1010100))
+                isSourceConstant = (**(code **)(*src1Inst + 0x50))(src1Inst);
+                if ((isSourceConstant != 0) &&
+                   (isSourceConstant = IRInst__getOperandRecord(cursorInst,0), *(int *)(isSourceConstant + 0x10) == 0x1010100))
                 goto LAB_00197784;
               }
-              iVar11 = (**(code **)(*cursorInst + 0x28))(cursorInst);
-              if (iVar11 == 0) {
+              isFetchInst = (**(code **)(*cursorInst + 0x28))(cursorInst);
+              if (isFetchInst == 0) {
                 if (!aluClauseOpened) {
                   aluClauseOpened = true;
                   (**(code **)(*this + 0xc0))(this);
@@ -1450,14 +1461,14 @@ LAB_00197808:
                 groupHasAlu = true;
               }
               else {
-                iVar11 = this[0x23];
-                if (iVar11 == 0) {
+                clauseState = this[0x23];
+                if (clauseState == 0) {
                   this[0x23] = 1;
                   (**(code **)(*this + 0x134))(this);
                 }
                 else {
-                  if (iVar11 != 2) {
-                    if ((iVar11 != 1) || ((cursorInst[5] & 0x1000U) == 0)) goto LAB_0019752c;
+                  if (clauseState != 2) {
+                    if ((clauseState != 1) || ((cursorInst[5] & 0x1000U) == 0)) goto LAB_0019752c;
                     (**(code **)(*this + 0x148))(this);
                   }
                   this[0x23] = 1;
@@ -1477,8 +1488,8 @@ LAB_00197624:
               if (startsNewWord) {
                 if ((((cursorInst[5] & 0x1000U) != 0) || (startOfShaderFlag != 0)) || ((cursorInst[5] & 2U) != 0)) {
                   (**(code **)(*this + 0x14c))(this);
-                  iVar11 = (**(code **)(*cursorInst + 0x28))(cursorInst);
-                  if (iVar11 == 0) {
+                  isFetchInst2 = (**(code **)(*cursorInst + 0x28))(cursorInst);
+                  if (isFetchInst2 == 0) {
                     prevEndedAluClause = true;
                     startOfShaderFlag = 0;
                     goto LAB_001976d0;
@@ -1495,8 +1506,8 @@ LAB_001976d0:
                 (**(code **)(*this + 0x140))(this);
               }
               (**(code **)(*cursorInst + 0x20))(cursorInst,this,0,this[3]);
-              iVar11 = (**(code **)(*cursorInst + 0x28))(cursorInst);
-              if (iVar11 != 0) {
+              isFetchInst3 = (**(code **)(*cursorInst + 0x28))(cursorInst);
+              if (isFetchInst3 != 0) {
                 this[0x1a] = this[0x1a] + 1;
                 (**(code **)(*this + 0x15c))(this);
                 instFlags = cursorInst[5];
@@ -1504,20 +1515,20 @@ LAB_001976d0:
               }
             }
             else {
-              iVar11 = (**(code **)(*cursorInst + 0x5c))(cursorInst);
-              if (iVar11 != 0) {
+              predicate5c = (**(code **)(*cursorInst + 0x5c))(cursorInst);
+              if (predicate5c != 0) {
                 groupHasPresub = true;
               }
-              iVar11 = (**(code **)(*cursorInst + 0x48))(cursorInst);
-              if (iVar11 != 0) {
+              isLoadConst = (**(code **)(*cursorInst + 0x48))(cursorInst);
+              if (isLoadConst != 0) {
                 ((int (*)())R300MachineAssembler__callSlot65)(this,(uint)cursorInst,this[3]);
               }
-              iVar11 = (**(code **)(*cursorInst + 0x4c))(cursorInst);
-              if (iVar11 != 0) {
+              predicate4c = (**(code **)(*cursorInst + 0x4c))(cursorInst);
+              if (predicate4c != 0) {
                 ((int (*)())FUN_0019651c)(this,cursorInst,this[3]);
               }
-              iVar11 = (**(code **)(*cursorInst + 0x38))(cursorInst);
-              if ((iVar11 != 0) && (this[0x23] == 1)) {
+              predicate38 = (**(code **)(*cursorInst + 0x38))(cursorInst);
+              if ((predicate38 != 0) && (this[0x23] == 1)) {
                 (**(code **)(*this + 0x148))(this);
                 instFlags = cursorInst[5];
                 goto LAB_00197788;

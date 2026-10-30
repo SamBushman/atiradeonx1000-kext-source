@@ -1919,56 +1919,62 @@ int R300VMachineAssembler__assembleBlock(this, block)
   int *this;
   int block;
 {
+  int *groupStart;
+  int endsGroup;
+  int isLoadConst;
+  int sourceFlag;
+  int hasSingleSourceMov;
+  int compiler;
   int *operandVReg;
   uint *flagsPtr;
   uint instFlags;
-  int iVar3;
+  int stateError;
   int *groupInst;
-  int *piVar5;
+  int *blockInst;
   int *cursorInst;
   int lookahead [9];
   
-  piVar5 = *(int **)(block + 8);
-  if (piVar5[2] == 0) {
+  blockInst = *(int **)(block + 8);
+  if (blockInst[2] == 0) {
     return;
   }
   do {
-    iVar3 = (**(code **)(*this + 8))(this);
-    if (iVar3 != 0) {
+    stateError = (**(code **)(*this + 8))(this);
+    if (stateError != 0) {
       Compiler__fail(this[3],5);
     }
-    iVar3 = this[3];
-    if (**(int **)(iVar3 + 0x6c4) == 0) {
-      groupInst = (int *)FUN_000e3b88(this[4],block,piVar5,lookahead);
+    compiler = this[3];
+    if (**(int **)(compiler + 0x6c4) == 0) {
+      groupInst = (int *)FUN_000e3b88(this[4],block,blockInst,lookahead);
       if ((groupInst == (int *)0x0) || (lookahead[0] == 0)) {
-        iVar3 = this[3];
+        compiler = this[3];
       }
       else {
-        iVar3 = this[3];
-        piVar5 = groupInst;
+        compiler = this[3];
+        blockInst = groupInst;
       }
     }
-    groupInst = piVar5;
-    if (**(int **)(iVar3 + 0x6c4) == 0) {
-      groupInst = (int *)((int (*)())R300VMachineAssembler__findFoldableMovePair)(this,block,piVar5,this + 0x1f);
-      iVar3 = this[3];
+    groupInst = blockInst;
+    if (**(int **)(compiler + 0x6c4) == 0) {
+      groupInst = (int *)((int (*)())R300VMachineAssembler__findFoldableMovePair)(this,block,blockInst,this + 0x1f);
+      compiler = this[3];
     }
-    iVar3 = IRInst__isCoalescableMov(groupInst,*(undefined4 *)(iVar3 + 0x6c4));
-    if ((((iVar3 == 0) || (instFlags = groupInst[5], (instFlags & 4) != 0)) || ((int)instFlags < 0)) ||
+    compiler = IRInst__isCoalescableMov(groupInst,*(undefined4 *)(compiler + 0x6c4));
+    if ((((compiler == 0) || (instFlags = groupInst[5], (instFlags & 4) != 0)) || ((int)instFlags < 0)) ||
        ((instFlags & 0x1000) != 0)) {
       (**(code **)(*this + 0xbc))(this);
       cursorInst = groupInst;
-      piVar5 = groupInst;
+      groupStart = groupInst;
       do {
-        if (piVar5 == (int *)0x0) break;
+        if (groupStart == (int *)0x0) break;
         instFlags = cursorInst[5];
         if ((instFlags & 1) != 0) {
           if ((instFlags & 0x10000) == 0) {
-            iVar3 = (**(code **)(*cursorInst + 0x68))(cursorInst);
-            if (iVar3 != 0) {
+            hasSingleSourceMov = (**(code **)(*cursorInst + 0x68))(cursorInst);
+            if (hasSingleSourceMov != 0) {
               operandVReg = (int *)IRInst__getOperandSource(cursorInst,1);
-              iVar3 = (**(code **)(*operandVReg + 0x50))(operandVReg);
-              if ((iVar3 != 0) && (cursorInst[0x51] != 0)) {
+              sourceFlag = (**(code **)(*operandVReg + 0x50))(operandVReg);
+              if ((sourceFlag != 0) && (cursorInst[0x51] != 0)) {
                 return;
               }
             }
@@ -1976,8 +1982,8 @@ int R300VMachineAssembler__assembleBlock(this, block)
             (**(code **)(*cursorInst + 0x1c))(cursorInst,this,0,this[3]);
           }
           else {
-            iVar3 = (**(code **)(*cursorInst + 0x48))(cursorInst);
-            if (iVar3 != 0) {
+            isLoadConst = (**(code **)(*cursorInst + 0x48))(cursorInst);
+            if (isLoadConst != 0) {
               (**(code **)(*this + 0xc0))(this,cursorInst,this[3]);
             }
           }
@@ -1985,10 +1991,10 @@ int R300VMachineAssembler__assembleBlock(this, block)
           instFlags = cursorInst[5];
         }
         cursorInst = (int *)cursorInst[2];
-        piVar5 = (int *)(instFlags & 4);
+        groupStart = (int *)(instFlags & 4);
       } while (cursorInst != (int *)0x0);
-      iVar3 = (**(code **)(*groupInst + 0x24))(groupInst);
-      if (iVar3 == 0) {
+      endsGroup = (**(code **)(*groupInst + 0x24))(groupInst);
+      if (endsGroup == 0) {
         cursorInst = (int *)groupInst[2];
       }
       else {
@@ -2001,13 +2007,13 @@ int R300VMachineAssembler__assembleBlock(this, block)
       cursorInst = (int *)groupInst[2];
     }
     do {
-      piVar5 = cursorInst;
+      blockInst = cursorInst;
       flagsPtr = (uint *)(groupInst + 5);
-      if ((int *)piVar5[2] == (int *)0x0) {
+      if ((int *)blockInst[2] == (int *)0x0) {
         return;
       }
-      cursorInst = (int *)piVar5[2];
-      groupInst = piVar5;
+      cursorInst = (int *)blockInst[2];
+      groupInst = blockInst;
     } while ((*flagsPtr & 4) != 0);
   } while( true );
 }
