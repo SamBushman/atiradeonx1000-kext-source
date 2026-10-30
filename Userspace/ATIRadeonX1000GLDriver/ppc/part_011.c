@@ -3094,8 +3094,9 @@ int recordProgramAllocateAndEmit(alloc, unusedArg2, scratchArg3, scratchArg4, sc
   uint *recordSlotPtr;
   int *dependencyListCursor;
   char emitToSecondList;
-  undefined4 uVar26;
-  int iVar27;
+  undefined4 stageR4;
+  int destFileTest;
+  int recordFlagsSlotBase;
   int recordCount;
   uint srcBit13;
   bool noCandidate;
@@ -3340,12 +3341,12 @@ LAB_0007b378:
   liveIndexByte = (code *)0x0;
   ((int (*)())recordClearBindingTables)(alloc);
   liveListPtrB = 0x00024870 + alloc;
-  uVar26 = extraout_r4;
+  stageR4 = extraout_r4;
   while (liveIndexByte < *(code **)(alloc + 0x26870)) {
     scratchArg4 = (code *)(**(uint **)(alloc + 0x34) >> 6 & 1);
     scratchArg3 = liveIndexByte;
     statusAndValue = ((int (*)())recordIsSchedulable)(alloc,records,liveIndexByte,scratchArg4);
-    uVar26 = (undefined4)statusAndValue;
+    stageR4 = (undefined4)statusAndValue;
     if ((int)((ulonglong)statusAndValue >> 0x20) == 0) {
       liveIndexByte = liveIndexByte + 1;
       liveListPtrB = liveListPtrB + 4;
@@ -3361,7 +3362,7 @@ LAB_0007b378:
       recordCount = retiredRecord * 4 + alloc;
       ((int (*)())arrayRemoveAt)(liveIndexByte,alloc + 0x26870,scratchArg3);
       *(uint *)(recordCount + 0x3348c) = *(uint *)(recordCount + 0x3348c) & 0xfffeffff | 0x20000;
-      uVar26 = extraout_r4_00;
+      stageR4 = extraout_r4_00;
     }
   }
   while (*(uint *)(alloc + 0x2a878) < liveCountSnapshot) {
@@ -3410,10 +3411,10 @@ LAB_0007b894:
     else {
       configPtrB = *(uint **)(alloc + 0x34);
       configBit6 = *configPtrB >> 6 & 1;
-      iVar27 = ((int (*)())recordDestFileIs0Or45)(recordPtr,configBit6);
-      if (iVar27 == 0) {
-        iVar27 = ((int (*)())recordDestFileIs3Or1)(recordPtr,configBit6);
-        if (iVar27 != 0) {
+      destFileTest = ((int (*)())recordDestFileIs0Or45)(recordPtr,configBit6);
+      if (destFileTest == 0) {
+        destFileTest = ((int (*)())recordDestFileIs3Or1)(recordPtr,configBit6);
+        if (destFileTest != 0) {
           ((int (*)())recordRemapComponents)(alloc,recordCount,pickedRegister);
           configPtrB = *(uint **)(alloc + 0x34);
         }
@@ -3429,8 +3430,8 @@ LAB_0007b894:
     if (status != 0) {
       return status;
     }
-    iVar27 = ((int (*)())recordDestFileIs0Or45)(recordPtr,**(uint **)(alloc + 0x34) >> 6 & 1);
-    if (iVar27 == 0) {
+    destFileTest = ((int (*)())recordDestFileIs0Or45)(recordPtr,**(uint **)(alloc + 0x34) >> 6 & 1);
+    if (destFileTest == 0) {
       recordOffset4 = recordCount * 4;
       recordIsFixed = ((int (*)())recordDestFileIs3Or1)(recordPtr,*configPtr >> 6 & 1);
       if (recordIsFixed != 0) {
@@ -3614,14 +3615,14 @@ LAB_0007bc50:
         componentCounter = componentCounter + 1;
       } while (moreComponents);
     }
-    iVar27 = recordCount * 4 + alloc;
+    recordFlagsSlotBase = recordCount * 4 + alloc;
     emittedCount = *(int *)(alloc + 0x2a878);
     retiredCountSnapshot = *(int *)(alloc + 0x28874);
-    configBit6Arg = (code *)(iVar27 + 0x30000);
-    recordFlagsOld = *(uint *)(iVar27 + 0x3348c);
+    configBit6Arg = (code *)(recordFlagsSlotBase + 0x30000);
+    recordFlagsOld = *(uint *)(recordFlagsSlotBase + 0x3348c);
     *(int *)(alloc + 0x2a878) = emittedCount + 1;
     *(int *)(emittedCount * 4 + alloc + 0x28878) = recordCount;
-    *(uint *)(iVar27 + 0x3348c) = recordFlagsOld & 0xfffdffff | 0x40000;
+    *(uint *)(recordFlagsSlotBase + 0x3348c) = recordFlagsOld & 0xfffdffff | 0x40000;
     scanPosition = (code *)0x0;
     if (retiredCountSnapshot != 0) {
       scratchArg5 = (int *)(alloc + 0x26874);
@@ -3665,12 +3666,12 @@ LAB_0007bc50:
     liveIndexByteB = (code *)0x0;
     ((int (*)())recordClearBindingTables)(alloc);
     liveListPtrB = 0x00024870 + alloc;
-    uVar26 = extraout_r4_01;
+    stageR4 = extraout_r4_01;
     while (liveIndexByteB < *(code **)(alloc + 0x26870)) {
       scratchArg4 = (code *)(**(uint **)(alloc + 0x34) >> 6 & 1);
       scratchArg3 = liveIndexByteB;
       statusAndValue = ((int (*)())recordIsSchedulable)(alloc,records,liveIndexByteB,scratchArg4);
-      uVar26 = (undefined4)statusAndValue;
+      stageR4 = (undefined4)statusAndValue;
       if ((int)((ulonglong)statusAndValue >> 0x20) == 0) {
         liveIndexByteB = liveIndexByteB + 1;
         liveListPtrB = liveListPtrB + 4;
@@ -3686,13 +3687,13 @@ LAB_0007bc50:
         recordCount = retiredRecord * 4 + alloc;
         ((int (*)())arrayRemoveAt)(liveIndexByteB,alloc + 0x26870,scratchArg3);
         *(uint *)(recordCount + 0x3348c) = *(uint *)(recordCount + 0x3348c) & 0xfffeffff | 0x20000;
-        uVar26 = extraout_r4_02;
+        stageR4 = extraout_r4_02;
       }
     }
     if ((*configPtr & 0x10) != 0) {
       statusAndValue = ((int (*)())recordFindScheduleConflict)(alloc,0);
       recordCount = (int)((ulonglong)statusAndValue >> 0x20);
-      uVar26 = (undefined4)statusAndValue;
+      stageR4 = (undefined4)statusAndValue;
       if (recordCount != 0) {
         return recordCount;
       }
@@ -3703,8 +3704,8 @@ LAB_0007bc50:
     opcodeRewriteIndex = 0;
     recordCursorB = records;
     do {
-      statusAndValue = ((int (*)())recordSourcesAreDistinctTemps)(recordCursorB,uVar26,scratchArg3,scratchArg4,scratchArg5,scratchArg6,configBit6Arg);
-      uVar26 = (undefined4)statusAndValue;
+      statusAndValue = ((int (*)())recordSourcesAreDistinctTemps)(recordCursorB,stageR4,scratchArg3,scratchArg4,scratchArg5,scratchArg6,configBit6Arg);
+      stageR4 = (undefined4)statusAndValue;
       if ((int)((ulonglong)statusAndValue >> 0x20) != 0) {
         if (recordCursorB[3] == (code *)0x4) {
           recordCursorB[3] = (code *)0x80;
