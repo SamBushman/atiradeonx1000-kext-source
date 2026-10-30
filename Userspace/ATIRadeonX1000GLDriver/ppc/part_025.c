@@ -1667,14 +1667,14 @@ int isRegKindBelow21(param_1)
 }
 
 /* Emitter__allocateConstantSlot @ 0xf4a84 (324 bytes) */
-int Emitter__allocateConstantSlot(emitter, slotKind, allowFailure, param_4, param_5, param_6, param_7)
+int Emitter__allocateConstantSlot(emitter, slotKind, allowFailure, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
   int *emitter;
   int slotKind;
   int allowFailure;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
 {
   int emitContext;
   int slotTableBase;
@@ -1687,7 +1687,7 @@ int Emitter__allocateConstantSlot(emitter, slotKind, allowFailure, param_4, para
     else {
       slotTableBase = *(int *)(emitContext + 0x30);
     }
-    emitContext = BitSet256__findNthSetBit(emitContext,slotTableBase + 0x58,emitter[0xe],param_4,param_5,param_6,param_7);
+    emitContext = BitSet256__findNthSetBit(emitContext,slotTableBase + 0x58,emitter[0xe],unusedArg4,unusedArg5,unusedArg6,unusedArg7);
     if (-1 < emitContext) {
       emitter[0xe] = emitter[0xe] + 1;
     }
@@ -1709,7 +1709,7 @@ LAB_000f4ac4:
       else {
         slotTableBase = *(int *)(emitContext + 0x30);
       }
-      emitContext = BitSet256__findNthSetBit(emitContext,slotTableBase + 0x98,emitter[0x10],param_4,param_5,param_6,param_7);
+      emitContext = BitSet256__findNthSetBit(emitContext,slotTableBase + 0x98,emitter[0x10],unusedArg4,unusedArg5,unusedArg6,unusedArg7);
       if (-1 < emitContext) {
         emitter[0x10] = emitter[0x10] + 1;
       }
@@ -1724,7 +1724,7 @@ LAB_000f4ac4:
   else {
     slotTableBase = *(int *)(emitContext + 0x30);
   }
-  emitContext = BitSet256__findNthSetBit(emitContext,slotTableBase + 0x78,emitter[0xf],param_4,param_5,param_6,param_7);
+  emitContext = BitSet256__findNthSetBit(emitContext,slotTableBase + 0x78,emitter[0xf],unusedArg4,unusedArg5,unusedArg6,unusedArg7);
   if (-1 < emitContext) {
     emitter[0xf] = emitter[0xf] + 1;
   }

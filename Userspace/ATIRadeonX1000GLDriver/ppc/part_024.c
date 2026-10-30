@@ -15,57 +15,57 @@ int ContinueBlock__clone(this)
 }
 
 /* BreakBlock__ctor_ec070 @ 0xec070 (88 bytes) */
-int BreakBlock__ctor_ec070(this, param_2, param_3, compiler)
+int BreakBlock__ctor_ec070(this, scope, scopeField0x12c, compiler)
   undefined4 *this;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 scope;
+  undefined4 scopeField0x12c;
   undefined4 compiler;
 {
   Block__ctor_ea148(this,compiler);
-  this[0x4b] = param_2;
-  this[0x4c] = param_3;
+  this[0x4b] = scope;
+  this[0x4c] = scopeField0x12c;
   *this = &PTR_FUN_001e9e20;
   return;
 }
 
 /* BreakBlock__ctor_ec0c8 @ 0xec0c8 (88 bytes) */
-int BreakBlock__ctor_ec0c8(this, param_2, param_3, compiler)
+int BreakBlock__ctor_ec0c8(this, scope, scopeField0x12c, compiler)
   undefined4 *this;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 scope;
+  undefined4 scopeField0x12c;
   undefined4 compiler;
 {
   Block__ctor_ea148(this,compiler);
-  this[0x4b] = param_2;
-  this[0x4c] = param_3;
+  this[0x4b] = scope;
+  this[0x4c] = scopeField0x12c;
   *this = &PTR_FUN_001e9e20;
   return;
 }
 
 /* ContinueBlock__ctor_ec120 @ 0xec120 (88 bytes) */
-int ContinueBlock__ctor_ec120(this, param_2, param_3, compiler)
+int ContinueBlock__ctor_ec120(this, scope, scopeField0x12c, compiler)
   undefined4 *this;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 scope;
+  undefined4 scopeField0x12c;
   undefined4 compiler;
 {
   Block__ctor_ea148(this,compiler);
-  this[0x4b] = param_2;
-  this[0x4c] = param_3;
+  this[0x4b] = scope;
+  this[0x4c] = scopeField0x12c;
   *this = &PTR_FUN_001e9e78;
   return;
 }
 
 /* ContinueBlock__ctor_ec178 @ 0xec178 (88 bytes) */
-int ContinueBlock__ctor_ec178(this, param_2, param_3, compiler)
+int ContinueBlock__ctor_ec178(this, scope, scopeField0x12c, compiler)
   undefined4 *this;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 scope;
+  undefined4 scopeField0x12c;
   undefined4 compiler;
 {
   Block__ctor_ea148(this,compiler);
-  this[0x4b] = param_2;
-  this[0x4c] = param_3;
+  this[0x4b] = scope;
+  this[0x4c] = scopeField0x12c;
   *this = &PTR_FUN_001e9e78;
   return;
 }

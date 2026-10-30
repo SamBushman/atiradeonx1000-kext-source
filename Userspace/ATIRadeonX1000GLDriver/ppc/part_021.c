@@ -324,7 +324,7 @@ int Compiler__setHardwareFamily(compiler, chipFamily)
   int compiler;
   int chipFamily;
 {
-  int iVar1;
+  int chipObject;
   
   if (*(int *)(compiler + 0x30c) != 0) {
     (**(code **)(compiler + 0x34c))(*(undefined4 *)(compiler + 0x354),*(int *)(compiler + 0x30c));
@@ -332,22 +332,22 @@ int Compiler__setHardwareFamily(compiler, chipFamily)
   }
   if (0 < chipFamily) {
     if (chipFamily < 4) {
-      iVar1 = Compiler__allocateOrFail(compiler,0x10);
-      if (iVar1 != 0) {
-        KhanChip__ctor_10e114(iVar1,compiler);
+      chipObject = Compiler__allocateOrFail(compiler,0x10);
+      if (chipObject != 0) {
+        KhanChip__ctor_10e114(chipObject,compiler);
       }
-      *(int *)(compiler + 0x310) = iVar1;
+      *(int *)(compiler + 0x310) = chipObject;
       if (chipFamily == 2) {
-        HwLimits__installDefaults(*(undefined4 *)(iVar1 + 4));
+        HwLimits__installDefaults(*(undefined4 *)(chipObject + 4));
         *(undefined4 *)(0x00001740 + *(int *)(*(int *)(compiler + 0x310) + 8)) = 2;
       }
     }
     else if (chipFamily == 4) {
-      iVar1 = Compiler__allocateOrFail(compiler,0x10);
-      if (iVar1 != 0) {
-        FudoChip__ctor_10e1d8(iVar1,compiler);
+      chipObject = Compiler__allocateOrFail(compiler,0x10);
+      if (chipObject != 0) {
+        FudoChip__ctor_10e1d8(chipObject,compiler);
       }
-      *(int *)(compiler + 0x310) = iVar1;
+      *(int *)(compiler + 0x310) = chipObject;
     }
   }
   return;

@@ -2678,3 +2678,49 @@ use	ConstBank__storeIntLane	uVar2	entryCount	INFERRED	count of 0x14-byte per-reg
 use	ConstBank__storeIntLane	uVar2	literalRecordCount	INFERRED	count of 0x24-byte literal records in the bank	^\s*uVar2\ =\ \*\(uint\ \*\)\(param_5\ \+\ 0x58\);$	^\s*\*\(undefined4\ \*\)\(iVar3\ \+\ 0x14\)\ =\ param_3;$	all	none
 use	ConstBank__storeBoolLane	uVar2	entryCount	INFERRED	count of 0x14-byte per-register entries in the bank	^\s*uVar2\ =\ \*\(uint\ \*\)\(param_5\ \+\ 0x80\);$	^\s*piVar5\ =\ piVar4;$	all	none
 use	ConstBank__storeBoolLane	uVar2	literalRecordCount	INFERRED	count of 0x24-byte literal records in the bank	^\s*uVar2\ =\ \*\(uint\ \*\)\(param_5\ \+\ 0x5c\);$	^\s*\*\(undefined4\ \*\)\(iVar3\ \+\ 0x14\)\ =\ param_3;$	all	none
+local	Compiler__clearOptionBit	param_1	compiler	INFERRED	compiler holding the option bit array at +0x59c
+local	Compiler__clearOptionBit	param_2	optionBit	INFERRED	option bit number
+local	Compiler__clearOptionBit	iVar1	optionByteAddress	INFERRED	compiler + optionBit/8: address (+0x59c) of the byte holding the bit
+local	Compiler__setOptionBit	param_1	compiler	INFERRED	compiler holding the option bit array at +0x59c
+local	Compiler__setOptionBit	param_2	optionBit	INFERRED	option bit number
+local	Compiler__setOptionBit	iVar1	optionByteAddress	INFERRED	compiler + optionBit/8: address (+0x59c) of the byte holding the bit
+local	Emitter__allocateConstantSlot	param_4	unusedArg4	INFERRED	forwarded to BitSet256__findNthSetBit, which ignores it (register leftover)
+local	Emitter__allocateConstantSlot	param_5	unusedArg5	INFERRED	forwarded to BitSet256__findNthSetBit, which ignores it (register leftover)
+local	Emitter__allocateConstantSlot	param_6	unusedArg6	INFERRED	forwarded to BitSet256__findNthSetBit, which ignores it (register leftover)
+local	Emitter__allocateConstantSlot	param_7	unusedArg7	INFERRED	forwarded to BitSet256__findNthSetBit, which ignores it (register leftover)
+use	ildisPrintHeader	uVar3	headerToken	INFERRED	IL header token word (**(disassembler+8)): shader type, major and minor version fields	^\s*uVar3\ =\ \*\*\(uint\ \*\*\)\(param_1\ \+\ 8\);$	^\s*uVar3\ =\ uVar3\ >>\ 8\ \&\ 0xff;$	all	rhs
+use	ildisPrintHeader	uVar3	majorVersion	INFERRED	major version field (bits 8-15) printed in il_%s_%d_%d	^\s*uVar3\ =\ uVar3\ >>\ 8\ \&\ 0xff;$	^\s*\}$	lhs	none
+local	Block__lastBlockOfChain_e7a9c	iVar2	queryResult	INFERRED	scratch for the successive boolean queries of the chain block (Block__hasSuccessors, vtable +0x38/+0x3c/+0x2c/+0x24)
+local	Block__lastBlockOfChain_e7b9c	iVar2	queryResult	INFERRED	scratch for the successive boolean queries of the chain block (Block__hasSuccessors, vtable +0x38/+0x3c/+0x2c/+0x24)
+local	Block__resolveRedirect	param_1	block	INFERRED	block whose redirect target (+0xa0) is resolved
+local	Block__resolveRedirect	piVar1	redirectTarget	INFERRED	object at block+0xa0, replaced by its own +4 field when flag 8 is set
+local	Block__predecessorIndex	param_1	block	INFERRED	block whose predecessor vector (+0xd4) is searched
+local	Block__predecessorIndex	param_2	predecessor	INFERRED	predecessor looked for
+local	Block__predecessorIndex	iVar1	listEntry	INFERRED	non-null entry of the predecessor vector under comparison
+local	Block__phiOperandIndexForPredecessor	param_1	block	INFERRED	block with phi operands
+local	Block__phiOperandIndexForPredecessor	param_2	predecessor	INFERRED	predecessor block
+local	Block__phiOperandIndexForPredecessor	iVar1	phiOperandIndex	INFERRED	predecessor index + 1 (operand 0 is the result), -1 when the block is not a predecessor
+local	Block__findSimplePredecessor	param_1	block	INFERRED	block whose predecessor vector (+0xd4) is scanned
+local	Block__ctor_ea020	iVar3	blockSerial	INFERRED	compiler block counter (COMP_nextBlockId) value taken as this[0x2c], then incremented
+local	Block__ctor_ea020	uVar2	bitSetIndex	INFERRED	Program__allocateBitSetIndex result stored at this[0x2d]
+local	Block__ctor_ea020	puVar1	clearCursor	INFERRED	cursor clearing the 0x20 words starting at this[4]
+local	Block__ctor_ea148	iVar3	blockSerial	INFERRED	compiler block counter (COMP_nextBlockId) value taken as this[0x2c], then incremented
+local	Block__ctor_ea148	uVar2	bitSetIndex	INFERRED	Program__allocateBitSetIndex result stored at this[0x2d]
+local	Block__ctor_ea148	puVar1	clearCursor	INFERRED	cursor clearing the 0x20 words starting at this[4]
+local	IfHeader__ctor_ea6d0	param_2	branchInst	INFERRED	branch instruction stored at this[0x4c] and appended to the header block
+local	IfHeader__ctor_ea6d0	param_3	value0x140	INFERRED	stored at this[0x50]
+local	IfHeader__ctor_ea6d0	param_4	mergeBlock	INFERRED	merge/target block stored at this[0x4d]; a new block is allocated when zero
+local	IfHeader__ctor_eb688	param_2	branchInst	INFERRED	branch instruction stored at this[0x4c] and appended to the header block
+local	IfHeader__ctor_eb688	param_3	value0x140	INFERRED	stored at this[0x50]
+local	IfHeader__ctor_eb688	param_4	mergeBlock	INFERRED	merge/target block stored at this[0x4d]; a new block is allocated when zero
+local	BreakBlock__ctor_ec070	param_2	scope	INFERRED	structured scope (loop) object stored at this[0x4b]
+local	BreakBlock__ctor_ec070	param_3	scopeField0x12c	INFERRED	scope+0x12c stored at this[0x4c]
+local	BreakBlock__ctor_ec0c8	param_2	scope	INFERRED	structured scope (loop) object stored at this[0x4b]
+local	BreakBlock__ctor_ec0c8	param_3	scopeField0x12c	INFERRED	scope+0x12c stored at this[0x4c]
+local	ContinueBlock__ctor_ec120	param_2	scope	INFERRED	structured scope (loop) object stored at this[0x4b]
+local	ContinueBlock__ctor_ec120	param_3	scopeField0x12c	INFERRED	scope+0x12c stored at this[0x4c]
+local	ContinueBlock__ctor_ec178	param_2	scope	INFERRED	structured scope (loop) object stored at this[0x4b]
+local	ContinueBlock__ctor_ec178	param_3	scopeField0x12c	INFERRED	scope+0x12c stored at this[0x4c]
+local	Compiler__setHardwareFamily	iVar1	chipObject	INFERRED	KhanChip/FudoChip object allocated for the selected hardware family and stored at compiler+0x310
+use	Block__createEntryExitInsts	puVar1	entryInst	INFERRED	IREntry instruction placed first in the block's list and stored at block+200	^\s*puVar1\ =\ puVar1\ \+\ 1;$	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xa8\)\ \+\ 0x374\);$	all	none
+use	Block__createEntryExitInsts	puVar1	exitInst	INFERRED	IRExit instruction placed last in the block's list and stored at block+0xcc	^\s*puVar1\ =\ puVar1\ \+\ 1;$@2	^\s*return;$	all	none

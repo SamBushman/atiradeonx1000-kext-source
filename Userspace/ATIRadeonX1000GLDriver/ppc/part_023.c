@@ -425,14 +425,14 @@ int Block__ctor_ea020(this, compiler)
   int compiler;
 {
   int loopCounter;
-  undefined4 *puVar1;
-  undefined4 uVar2;
+  undefined4 *clearCursor;
+  undefined4 bitSetIndex;
   undefined4 r4AfterCall;
   undefined4 staleArgR5;
   undefined4 staleArgR6;
   undefined4 staleArgR7;
   undefined4 staleArgR8;
-  int iVar3;
+  int blockSerial;
   
   this[1] = 0;
   this[2] = 0;
@@ -441,9 +441,9 @@ int Block__ctor_ea020(this, compiler)
   DListNode__init(this + 0x24);
   this[0x2a] = compiler;
   this[0x2b] = 0;
-  iVar3 = *(int *)(compiler + COMP_nextBlockId);
-  this[0x2c] = iVar3;
-  *(int *)(compiler + COMP_nextBlockId) = iVar3 + 1;
+  blockSerial = *(int *)(compiler + COMP_nextBlockId);
+  this[0x2c] = blockSerial;
+  *(int *)(compiler + COMP_nextBlockId) = blockSerial + 1;
   this[0x3a] = 0x7fffffff;
   this[0x46] = 0xffffffff;
   this[0x4a] = 0;
@@ -463,15 +463,15 @@ int Block__ctor_ea020(this, compiler)
   Block__initVectors(this);
   Block__createEntryExitInsts(this);
   loopCounter = 0x20;
-  puVar1 = this;
+  clearCursor = this;
   do {
-    puVar1[4] = 0;
-    puVar1 = puVar1 + 1;
+    clearCursor[4] = 0;
+    clearCursor = clearCursor + 1;
     loopCounter = loopCounter + -1;
   } while (loopCounter != 0);
-  uVar2 = Program__allocateBitSetIndex(*(undefined4 *)(this[0x2a] + 0x6c4),r4AfterCall,staleArgR5,staleArgR6,staleArgR7,staleArgR8,
+  bitSetIndex = Program__allocateBitSetIndex(*(undefined4 *)(this[0x2a] + 0x6c4),r4AfterCall,staleArgR5,staleArgR6,staleArgR7,staleArgR8,
                        0x20);
-  this[0x2d] = uVar2;
+  this[0x2d] = bitSetIndex;
   return;
 }
 
@@ -481,14 +481,14 @@ int Block__ctor_ea148(this, compiler)
   int compiler;
 {
   int loopCounter;
-  undefined4 *puVar1;
-  undefined4 uVar2;
+  undefined4 *clearCursor;
+  undefined4 bitSetIndex;
   undefined4 r4AfterCall;
   undefined4 staleArgR5;
   undefined4 staleArgR6;
   undefined4 staleArgR7;
   undefined4 staleArgR8;
-  int iVar3;
+  int blockSerial;
   
   this[1] = 0;
   this[2] = 0;
@@ -497,9 +497,9 @@ int Block__ctor_ea148(this, compiler)
   DListNode__init(this + 0x24);
   this[0x2a] = compiler;
   this[0x2b] = 0;
-  iVar3 = *(int *)(compiler + COMP_nextBlockId);
-  this[0x2c] = iVar3;
-  *(int *)(compiler + COMP_nextBlockId) = iVar3 + 1;
+  blockSerial = *(int *)(compiler + COMP_nextBlockId);
+  this[0x2c] = blockSerial;
+  *(int *)(compiler + COMP_nextBlockId) = blockSerial + 1;
   this[0x3a] = 0x7fffffff;
   this[0x46] = 0xffffffff;
   this[0x4a] = 0;
@@ -519,15 +519,15 @@ int Block__ctor_ea148(this, compiler)
   Block__initVectors(this);
   Block__createEntryExitInsts(this);
   loopCounter = 0x20;
-  puVar1 = this;
+  clearCursor = this;
   do {
-    puVar1[4] = 0;
-    puVar1 = puVar1 + 1;
+    clearCursor[4] = 0;
+    clearCursor = clearCursor + 1;
     loopCounter = loopCounter + -1;
   } while (loopCounter != 0);
-  uVar2 = Program__allocateBitSetIndex(*(undefined4 *)(this[0x2a] + 0x6c4),r4AfterCall,staleArgR5,staleArgR6,staleArgR7,staleArgR8,
+  bitSetIndex = Program__allocateBitSetIndex(*(undefined4 *)(this[0x2a] + 0x6c4),r4AfterCall,staleArgR5,staleArgR6,staleArgR7,staleArgR8,
                        0x20);
-  this[0x2d] = uVar2;
+  this[0x2d] = bitSetIndex;
   return;
 }
 
@@ -669,27 +669,27 @@ int IfHeader__ctor_ea600(this, compiler)
 }
 
 /* IfHeader__ctor_ea6d0 @ 0xea6d0 (268 bytes) */
-int IfHeader__ctor_ea6d0(this, param_2, param_3, param_4, compiler)
+int IfHeader__ctor_ea6d0(this, branchInst, value0x140, mergeBlock, compiler)
   undefined4 *this;
-  undefined4 param_2;
-  undefined4 param_3;
-  int param_4;
+  undefined4 branchInst;
+  undefined4 value0x140;
+  int mergeBlock;
   int compiler;
 {
   undefined4 *allocation;
   undefined4 arena;
   
   ((int (*)())Block__ctor_ea148)(this,compiler);
-  this[0x4c] = param_2;
+  this[0x4c] = branchInst;
   *this = &PTR_FUN_001e9cc0;
-  this[0x50] = param_3;
+  this[0x50] = value0x140;
   this[0x52] = 1;
   this[0x55] = 0;
-  this[0x4d] = param_4;
+  this[0x4d] = mergeBlock;
   this[0x4e] = 0;
   this[0x51] = 1;
   this[0x54] = 0;
-  if (param_4 == 0) {
+  if (mergeBlock == 0) {
     arena = *(undefined4 *)(compiler + COMP_arenaA);
     allocation = (undefined4 *)Arena__alloc(arena,0x130);
     *allocation = arena;
@@ -1235,27 +1235,27 @@ int PostLoopFooter__ctor_eb3c8(this, registerIndex, loopHeader, useFooterInst, c
 }
 
 /* IfHeader__ctor_eb688 @ 0xeb688 (268 bytes) */
-int IfHeader__ctor_eb688(this, param_2, param_3, param_4, compiler)
+int IfHeader__ctor_eb688(this, branchInst, value0x140, mergeBlock, compiler)
   undefined4 *this;
-  undefined4 param_2;
-  undefined4 param_3;
-  int param_4;
+  undefined4 branchInst;
+  undefined4 value0x140;
+  int mergeBlock;
   int compiler;
 {
   undefined4 *allocation;
   undefined4 arena;
   
   ((int (*)())Block__ctor_ea148)(this,compiler);
-  this[0x4c] = param_2;
+  this[0x4c] = branchInst;
   *this = &PTR_FUN_001e9cc0;
-  this[0x50] = param_3;
+  this[0x50] = value0x140;
   this[0x52] = 1;
   this[0x55] = 0;
-  this[0x4d] = param_4;
+  this[0x4d] = mergeBlock;
   this[0x4e] = 0;
   this[0x51] = 1;
   this[0x54] = 0;
-  if (param_4 == 0) {
+  if (mergeBlock == 0) {
     arena = *(undefined4 *)(compiler + COMP_arenaA);
     allocation = (undefined4 *)Arena__alloc(arena,0x130);
     *allocation = arena;

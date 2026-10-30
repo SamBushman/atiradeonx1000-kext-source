@@ -792,18 +792,19 @@ int ildisPrintHeader(disassembler, passThroughR4, passThroughR5, fmtArgR6, fmtAr
   char *shaderTypeTextArg;
   undefined4 fmtArgR10;
 {
+  uint majorVersion;
   uint shaderType;
   undefined4 r4AfterCall;
   char *shaderTypeText;
-  uint uVar3;
+  uint headerToken;
   uint minorVersion;
   char shaderTypeChar0;
   char shaderTypeCharsRest [15];
   undefined1 auStack_118 [268];
   
-  uVar3 = **(uint **)(disassembler + 8);
+  headerToken = **(uint **)(disassembler + 8);
   *(uint **)(disassembler + 8) = *(uint **)(disassembler + 8) + 1;
-  shaderType = uVar3 >> 0x10 & 0xff;
+  shaderType = headerToken >> 0x10 & 0xff;
   if (shaderType == 1) {
     shaderTypeTextArg = "ps";
     shaderTypeChar0 = s_ps_001a8390[0];
@@ -822,13 +823,13 @@ int ildisPrintHeader(disassembler, passThroughR4, passThroughR5, fmtArgR6, fmtAr
     shaderTypeCharsRest[0] = s_gs_001a8394[1];
     shaderTypeCharsRest[1] = s_gs_001a8394[2];
   }
-  minorVersion = uVar3 & 0xff;
+  minorVersion = headerToken & 0xff;
   shaderTypeText = &shaderTypeChar0;
-  uVar3 = uVar3 >> 8 & 0xff;
-  printf_LDBLStub_1a32d0(auStack_118,"il_%s_%d_%d",shaderTypeText,uVar3,minorVersion,fmtArgR8,shaderTypeTextArg,fmtArgR10);
+  majorVersion = headerToken >> 8 & 0xff;
+  printf_LDBLStub_1a32d0(auStack_118,"il_%s_%d_%d",shaderTypeText,majorVersion,minorVersion,fmtArgR8,shaderTypeTextArg,fmtArgR10);
   *(uint *)(disassembler + 0x218) = (uint)(shaderType == 1);
-  ildisAppendf(disassembler,auStack_118,shaderTypeText,uVar3,minorVersion,fmtArgR8,shaderTypeTextArg,fmtArgR10);
-  return ildisFlushLine(disassembler,r4AfterCall,shaderTypeText,uVar3,minorVersion,fmtArgR8,shaderTypeTextArg,fmtArgR10);
+  ildisAppendf(disassembler,auStack_118,shaderTypeText,majorVersion,minorVersion,fmtArgR8,shaderTypeTextArg,fmtArgR10);
+  return ildisFlushLine(disassembler,r4AfterCall,shaderTypeText,majorVersion,minorVersion,fmtArgR8,shaderTypeTextArg,fmtArgR10);
 }
 
 /* ildisPrintRegisterType @ 0xdcef4 (640 bytes) */
@@ -3296,28 +3297,28 @@ int ildisDisassembleBody(disassembler, tokenStart, tokenCount, fmtArgR6, fmtArgR
 }
 
 /* Compiler__setOptionBit @ 0xe0794 (36 bytes) */
-int Compiler__setOptionBit(param_1, param_2)
-  int param_1;
-  uint param_2;
+int Compiler__setOptionBit(compiler, optionBit)
+  int compiler;
+  uint optionBit;
 {
-  int iVar1;
+  int optionByteAddress;
   
-  iVar1 = ((int)param_2 >> 3) + param_1;
-  *(byte *)(iVar1 + 0x59c) = (byte)(1 << (param_2 & 7)) | *(byte *)(iVar1 + 0x59c);
+  optionByteAddress = ((int)optionBit >> 3) + compiler;
+  *(byte *)(optionByteAddress + 0x59c) = (byte)(1 << (optionBit & 7)) | *(byte *)(optionByteAddress + 0x59c);
   return;
 }
 
 /* Compiler__clearOptionBit @ 0xe07b8 (36 bytes) */
-int Compiler__clearOptionBit(param_1, param_2)
-  int param_1;
-  uint param_2;
+int Compiler__clearOptionBit(compiler, optionBit)
+  int compiler;
+  uint optionBit;
 {
-  int iVar1;
+  int optionByteAddress;
   
-  iVar1 = ((int)param_2 >> 3) + param_1;
-  *(byte *)(iVar1 + 0x59c) =
-       ((byte)(-2 << (param_2 & 7)) | (byte)(0xfffffffe >> 0x20 - (param_2 & 7))) &
-       *(byte *)(iVar1 + 0x59c);
+  optionByteAddress = ((int)optionBit >> 3) + compiler;
+  *(byte *)(optionByteAddress + 0x59c) =
+       ((byte)(-2 << (optionBit & 7)) | (byte)(0xfffffffe >> 0x20 - (optionBit & 7))) &
+       *(byte *)(optionByteAddress + 0x59c);
   return;
 }
 
