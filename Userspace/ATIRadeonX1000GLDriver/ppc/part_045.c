@@ -3423,7 +3423,7 @@ code_r0x00171ba0:
   Compiler__logf(*scheduler,"Scheduler : Total dot-product transformed %d\n",scheduler[0x6a],in_r6,in_r7,
                in_r8,registerCount,in_r10);
   Program__beginPass(scheduler[1],(int)"schedule_inst");
-  FUN_00138080(program);
+  Program__freeBlockBitsets(program);
   liveOutSet = scheduler[0x4c];
   componentCursor = scheduler;
   if (liveOutSet != 0) {

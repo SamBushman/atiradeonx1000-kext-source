@@ -666,7 +666,7 @@ int Program__dtor_ecfac(program)
   }
   ownedObject = *(int *)(program + 0x3ac);
   if (ownedObject != 0) {
-    FUN_00127470(ownedObject);
+    VRegPool__dtor_127470(ownedObject);
     Arena__free(*(undefined4 *)(ownedObject + -4),ownedObject + -4);
   }
   Arena__free(*(undefined4 *)(*(int *)(program + 8) + 0x374),*(undefined4 *)(program + 0x460));
@@ -709,7 +709,7 @@ int Program__dtor_ed124(program)
   }
   ownedObject = *(int *)(program + 0x3ac);
   if (ownedObject != 0) {
-    FUN_00127470(ownedObject);
+    VRegPool__dtor_127470(ownedObject);
     Arena__free(*(undefined4 *)(ownedObject + -4),ownedObject + -4);
   }
   Arena__free(*(undefined4 *)(*(int *)(program + 8) + 0x374),*(undefined4 *)(program + 0x460));

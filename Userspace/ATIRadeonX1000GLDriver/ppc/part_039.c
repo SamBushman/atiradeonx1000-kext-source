@@ -314,9 +314,9 @@ int KhanPs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwi
   bool firstLane;
   int *laneCursor;
   uint *fillCursor;
-  char *pcVar5;
+  char *staleArg5;
   int isUniform;
-  dword *pdVar7;
+  dword *constantCursor;
   undefined4 constantPool;
   int lanesLeft;
   int lanesLeft2;
@@ -330,25 +330,25 @@ int KhanPs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwi
   float uniformValueCopy;
   
   if (*laneSwizzle != 0x4040404) {
-    pcVar5 = "In";
+    staleArg5 = "In";
     uniformValue = 0.0;
     lanesLeft = 4;
     firstLane = true;
     isUniform = 1;
     laneCursor = laneSwizzle;
-    pdVar7 = constants;
+    constantCursor = constants;
     do {
       if (*(char *)laneCursor != '\x04') {
         if (firstLane) {
-          uniformValue = (float)*pdVar7;
+          uniformValue = (float)*constantCursor;
           firstLane = false;
         }
-        else if ((float)*pdVar7 != uniformValue) {
+        else if ((float)*constantCursor != uniformValue) {
           isUniform = 0;
         }
       }
       laneCursor = (int *)((int)laneCursor + 1);
-      pdVar7 = pdVar7 + 1;
+      constantCursor = constantCursor + 1;
       lanesLeft = lanesLeft + -1;
     } while (lanesLeft != 0);
     laneSwizzleArg = laneSwizzle;
@@ -356,7 +356,7 @@ int KhanPs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwi
       existingConstant = Program__findOrCreateConstInst(program,constants,*laneSwizzle);
     }
     else {
-      pcVar5 = "";
+      staleArg5 = "";
       lanesLeft = 4;
       fillCursor = &constVec0;
       do {
@@ -364,7 +364,7 @@ int KhanPs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwi
         fillCursor = fillCursor + 1;
         lanesLeft = lanesLeft + -1;
       } while (lanesLeft != 0);
-      pdVar7 = ((unsigned char *)0x4);
+      constantCursor = ((unsigned char *)0x4);
       byteOffset = 0;
       lanesLeft2 = 4;
       do {
@@ -379,7 +379,7 @@ int KhanPs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwi
       return existingConstant;
     }
     constantPool = *(undefined4 *)(program + 0x3ac);
-    foundConstant = RegisterMap__findConstVectorExact(constantPool,constants,laneSwizzle,laneSwizzleArg,pcVar5,isUniform,pdVar7);
+    foundConstant = RegisterMap__findConstVectorExact(constantPool,constants,laneSwizzle,laneSwizzleArg,staleArg5,isUniform,constantCursor);
     if (foundConstant != 0) {
       return foundConstant;
     }
@@ -1421,9 +1421,9 @@ int KhanVs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwi
   bool firstLane;
   int *laneCursor;
   uint *fillCursor;
-  char *pcVar5;
+  char *staleArg5;
   int isUniform;
-  dword *pdVar7;
+  dword *constantCursor;
   undefined4 constantPool;
   int lanesLeft;
   int lanesLeft2;
@@ -1431,25 +1431,25 @@ int KhanVs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwi
   float uniformValueCopy;
   
   if (*laneSwizzle != 0x4040404) {
-    pcVar5 = "te()\n";
+    staleArg5 = "te()\n";
     uniformValue = 0.0;
     lanesLeft = 4;
     firstLane = true;
     isUniform = 1;
     laneCursor = laneSwizzle;
-    pdVar7 = constants;
+    constantCursor = constants;
     do {
       if (*(char *)laneCursor != '\x04') {
         if (firstLane) {
-          uniformValue = (float)*pdVar7;
+          uniformValue = (float)*constantCursor;
           firstLane = false;
         }
-        else if ((float)*pdVar7 != uniformValue) {
+        else if ((float)*constantCursor != uniformValue) {
           isUniform = 0;
         }
       }
       laneCursor = (int *)((int)laneCursor + 1);
-      pdVar7 = pdVar7 + 1;
+      constantCursor = constantCursor + 1;
       lanesLeft = lanesLeft + -1;
     } while (lanesLeft != 0);
     laneSwizzleArg = laneSwizzle;
@@ -1457,7 +1457,7 @@ int KhanVs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwi
       existingConstant = Program__findOrCreateConstInst(program,constants,*laneSwizzle);
     }
     else {
-      pcVar5 = "";
+      staleArg5 = "";
       lanesLeft = 4;
       fillCursor = &uniformVec0;
       do {
@@ -1465,7 +1465,7 @@ int KhanVs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwi
         fillCursor = fillCursor + 1;
         lanesLeft = lanesLeft + -1;
       } while (lanesLeft != 0);
-      pdVar7 = ((unsigned char *)0x4);
+      constantCursor = ((unsigned char *)0x4);
       byteOffset = 0;
       lanesLeft2 = 4;
       do {
@@ -1480,7 +1480,7 @@ int KhanVs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwi
       return existingConstant;
     }
     constantPool = *(undefined4 *)(program + 0x3ac);
-    foundConstant = RegisterMap__findConstVectorExact(constantPool,constants,laneSwizzle,laneSwizzleArg,pcVar5,isUniform,pdVar7);
+    foundConstant = RegisterMap__findConstVectorExact(constantPool,constants,laneSwizzle,laneSwizzleArg,staleArg5,isUniform,constantCursor);
     if (foundConstant != 0) {
       return foundConstant;
     }
@@ -2085,8 +2085,8 @@ int Block__hasInstWithQuery28(block, optionResult, armLimitKind, staleArg4, stal
   } while( true );
 }
 
-/* FUN_0012aef0 @ 0x12aef0 (248 bytes) */
-int FUN_0012aef0(param_1, firstBlock, block)
+/* Program__mergeBlockWithSuccessor @ 0x12aef0 (248 bytes) */
+int Program__mergeBlockWithSuccessor(param_1, firstBlock, block)
   undefined4 param_1;
   undefined4 firstBlock;
   int block;

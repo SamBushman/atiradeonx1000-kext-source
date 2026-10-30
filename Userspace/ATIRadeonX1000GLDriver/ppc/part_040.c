@@ -33,8 +33,8 @@ int LoopInfo__setCounterPhi(loopInfo, inst)
   return result;
 }
 
-/* FUN_0012b3f8 @ 0x12b3f8 (272 bytes) */
-int FUN_0012b3f8(branchInst, inst, compiler)
+/* IRInst__swapCompareOperands @ 0x12b3f8 (272 bytes) */
+int IRInst__swapCompareOperands(branchInst, inst, compiler)
   int branchInst;
   int inst;
   uint compiler;
@@ -67,8 +67,8 @@ LAB_0012b4b0:
   return;
 }
 
-/* FUN_0012b520 @ 0x12b520 (192 bytes) */
-int FUN_0012b520(program)
+/* Program__removeUnreachableBlocks @ 0x12b520 (192 bytes) */
+int Program__removeUnreachableBlocks(program)
   int program;
 {
   int predecessorCount;
@@ -1579,7 +1579,7 @@ int pass_flatten_ifs(flattenPass)
             *(undefined4 *)(selectSource3Record + 0x10) = phiSource2Swizzle;
             insertAfterInst = phiInst;
             if (*(int *)(branchInst[0x22] + 8) == 0x8b) {
-              ((int (*)())FUN_0012b3f8)(branchInst,phiInst,*(undefined4 *)(flattenPass + 8));
+              ((int (*)())IRInst__swapCompareOperands)(branchInst,phiInst,*(undefined4 *)(flattenPass + 8));
             }
           }
           else {
@@ -1622,7 +1622,7 @@ int pass_flatten_ifs(flattenPass)
           changedAny = true;
           walkSuccessor = Block__findSimpleSuccessor(walkBlock);
           if (((blockAfterIf != walkSuccessor) && (changedAny = false, walkSuccessor == 0)) ||
-             (walkSuccessor = FUN_0012aef0(flattenPass,walkBlock,walkSuccessor), walkSuccessor == 0)) {
+             (walkSuccessor = Program__mergeBlockWithSuccessor(flattenPass,walkBlock,walkSuccessor), walkSuccessor == 0)) {
             walkBlock = *(int *)(walkBlock + 8);
           }
         } while ((!changedAny) && (walkBlock != blockAfterIf));
@@ -2103,7 +2103,7 @@ int FUN_0012e8c0(program, block, lastBlock)
       return;
     }
     successorBlock = (int *)Block__getSuccessor(block,0);
-    blockNeedsSplit = FUN_0012aef0(program,block,successorBlock);
+    blockNeedsSplit = Program__mergeBlockWithSuccessor(program,block,successorBlock);
     if (blockNeedsSplit == 0) {
       block = (int *)block[2];
     }
@@ -2240,7 +2240,7 @@ int FUN_0012eacc(program)
           return;
         }
         successorCursor = (int *)Block__getSuccessor(blockCursor,0);
-        splitResult = FUN_0012aef0(program,blockCursor,successorCursor);
+        splitResult = Program__mergeBlockWithSuccessor(program,blockCursor,successorCursor);
         if (splitResult == 0) {
           blockCursor = (int *)blockCursor[2];
         }
@@ -3113,7 +3113,7 @@ int pass_remove_empty_graphs(program)
           ((int (*)())FUN_0012dd58)(program,block,joinBlock);
           (**(code **)(*nextBlock + 0x48))(nextBlock);
           (**(code **)(*successorOrNextBlock + 0x48))(successorOrNextBlock);
-          testResult = FUN_0012aef0(program,nextBlock,successorOrNextBlock);
+          testResult = Program__mergeBlockWithSuccessor(program,nextBlock,successorOrNextBlock);
           if (testResult == 0) {
 LAB_0013037c:
             changed = true;
@@ -3197,8 +3197,8 @@ int RegAlloc__testBit42c(allocator, bitIndex)
   return 0;
 }
 
-/* FUN_001304a4 @ 0x1304a4 (200 bytes) */
-int FUN_001304a4(allocator)
+/* RegAlloc__countUnassignedHwRegs @ 0x1304a4 (200 bytes) */
+int RegAlloc__countUnassignedHwRegs(allocator)
   int allocator;
 {
   int isPhysicalOrAssigned;
@@ -3534,8 +3534,8 @@ int IRInst__findSameClassNode(cursorInst, referenceInst)
   return cursorInst;
 }
 
-/* FUN_00130abc @ 0x130abc (280 bytes) */
-int FUN_00130abc(spillInfo, allocator, markFlag)
+/* RegAlloc__markReloadModifiers @ 0x130abc (280 bytes) */
+int RegAlloc__markReloadModifiers(spillInfo, allocator, markFlag)
   undefined4 spillInfo;
   uint allocator;
   uint markFlag;
@@ -3639,8 +3639,8 @@ int RegAlloc__classOfInst(allocator, inst)
   return -1;
 }
 
-/* FUN_00130c8c @ 0x130c8c (276 bytes) */
-int FUN_00130c8c(allocator, spillRecord, newSource, registerCountRef)
+/* RegAlloc__emitSpillReload @ 0x130c8c (276 bytes) */
+int RegAlloc__emitSpillReload(allocator, spillRecord, newSource, registerCountRef)
   int allocator;
   undefined4 spillRecord;
   int newSource;
@@ -3676,8 +3676,8 @@ int FUN_00130c8c(allocator, spillRecord, newSource, registerCountRef)
   return callResult;
 }
 
-/* FUN_00130da0 @ 0x130da0 (200 bytes) */
-int FUN_00130da0(allocator, inst, operandIndex, afterInst, compiler)
+/* RegAlloc__cloneSourceDefAfter @ 0x130da0 (200 bytes) */
+int RegAlloc__cloneSourceDefAfter(allocator, inst, operandIndex, afterInst, compiler)
   undefined4 allocator;
   int inst;
   undefined4 operandIndex;
@@ -3863,8 +3863,8 @@ int Program__insertMemLoadFbAfter(destRegister, operandSwizzle, newSource, offse
   return loadInst;
 }
 
-/* FUN_001312f4 @ 0x1312f4 (228 bytes) */
-int FUN_001312f4(inst, newSource, addressSource, ref, compiler)
+/* RegAlloc__emitSpillStore @ 0x1312f4 (228 bytes) */
+int RegAlloc__emitSpillStore(inst, newSource, addressSource, ref, compiler)
   int inst;
   int newSource;
   undefined4 addressSource;
@@ -3942,7 +3942,7 @@ int FUN_001314b8(allocator)
   int *backend;
   
   *(int *)(allocator + 0x468) = *(int *)(*(int *)(allocator + 8) + 0x3c4) + 1;
-  virtualRegCount = ((int (*)())FUN_001304a4)(allocator);
+  virtualRegCount = ((int (*)())RegAlloc__countUnassignedHwRegs)(allocator);
   compilerThenTotal = *(int *)(allocator + 8);
   *(int *)(allocator + 0x46c) = virtualRegCount;
   *(int *)(allocator + 0x464) = virtualRegCount + *(int *)(allocator + 0x468);

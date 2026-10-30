@@ -24,8 +24,8 @@ int IRInst__sourcesAreSameValue(inst)
   return 1;
 }
 
-/* FUN_0011e894 @ 0x11e894 (180 bytes) */
-int FUN_0011e894(program)
+/* Program__noSuccessorHasMultipleSuccessors @ 0x11e894 (180 bytes) */
+int Program__noSuccessorHasMultipleSuccessors(program)
   int program;
 {
   int successorByteOffset;
@@ -2783,11 +2783,11 @@ LAB_001228ec:
         FUN_0010f87c(program,2,*(undefined4 *)(program + 0x420));
         option7On = Compiler__isOptionEnabled(*(undefined4 *)(program + PROG_compiler),0x3f);
         if (option7On != 0) {
-          FUN_001102e0(program,1,*(undefined4 *)(program + 0x41c));
+          Program__packInterpolatorEntries(program,1,*(undefined4 *)(program + 0x41c));
           targetC = *(int **)(*(int *)(program + PROG_compiler) + COMP_target);
           targetQueryC8 = (**(code **)(*targetC + 200))(targetC);
           if (targetQueryC8 != 0) {
-            FUN_001102e0(program,2,*(undefined4 *)(program + 0x420));
+            Program__packInterpolatorEntries(program,2,*(undefined4 *)(program + 0x420));
           }
         }
       }
@@ -2841,7 +2841,7 @@ int Program__runSsaPipeline(program)
   int *table;
   int remaining;
   
-  FUN_0012b520(program);
+  Program__removeUnreachableBlocks(program);
   FUN_000f88b4(program);
   ((int (*)())FUN_0011eaa0)(program);
   ((int (*)())pass_ssa_build)(program);

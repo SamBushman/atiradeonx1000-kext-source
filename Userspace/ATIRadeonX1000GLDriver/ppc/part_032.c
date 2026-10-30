@@ -576,8 +576,8 @@ LAB_001101ac:
   return;
 }
 
-/* FUN_001102e0 @ 0x1102e0 (124 bytes) */
-int FUN_001102e0(program, scopeId, vector)
+/* Program__packInterpolatorEntries @ 0x1102e0 (124 bytes) */
+int Program__packInterpolatorEntries(program, scopeId, vector)
   int program;
   int scopeId;
   uint *vector;
@@ -911,7 +911,7 @@ LAB_0011047c:
           }
           vectorIndex = vectorIndex + 1;
           vectorElement2 = (int *)*vectorElementRef;
-          needsLaneFixup = FUN_0010ecb8(*vectorElement2);
+          needsLaneFixup = IRInst__destMaskHasGap(*vectorElement2);
           if (needsLaneFixup != 0) {
             laneCounter = 0;
             do {

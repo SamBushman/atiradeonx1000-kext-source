@@ -5526,7 +5526,7 @@ code_r0x00103c40:
       Arena__free(usedRegisterBitmap[-1],usedRegisterBitmap + -1);
     }
     Arena__free(*(undefined4 *)(*(int *)(program + 8) + 0x378),*(undefined4 *)(program + 0x78));
-    FUN_0011e894(program);
+    Program__noSuccessorHasMultipleSuccessors(program);
     return;
   }
   iVar34 = FUN_000e43ec(ilReader);

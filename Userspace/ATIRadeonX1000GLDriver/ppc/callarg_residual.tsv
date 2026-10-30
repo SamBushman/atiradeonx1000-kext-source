@@ -47,9 +47,9 @@
 0xfd5c8	FUN_000fd5c8	0xfffdc	SelectWord__firstWrittenComponent	r9	r1+0x48 (a stack address) not at argument 6 of any C call (2 C calls)	BENIGN-CALLEE-IGNORES
 0x11ff7c	FUN_0011ff7c	0x120ba4	Block__getPredecessor	r4	0x0 not at argument 1 of any C call (6 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)
 0x120cd4	FUN_00120cd4	0x120f10	FUN_0011ff7c	r10	r1+0x38 (a stack address) not at argument 7 of any C call (1 C calls)	CHECK (C arg7: in_r10)
-0x133fe4	FUN_00133fe4	0x1341ac	FUN_00130abc	r4	incoming param_1 not at argument 1 of any C call (2 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)
-0x133fe4	FUN_00133fe4	0x134380	FUN_00130abc	r4	incoming param_1 not at argument 1 of any C call (2 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)
-0x133fe4	FUN_00133fe4	0x1341ac	FUN_00130abc	r5	field at param_1+0x2c: 2 stock site(s), 0 C call(s) carry it at argument 2 (2 C calls)	BENIGN-REVIEWED (FUN_00130abc reads only r3; r4/r5 go to a this-only virtual call `(*(vtbl+0x34))(this)` at 0x13074c: unused parameters of the source prototype)
+0x133fe4	FUN_00133fe4	0x1341ac	RegAlloc__markReloadModifiers	r4	incoming param_1 not at argument 1 of any C call (2 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)
+0x133fe4	FUN_00133fe4	0x134380	RegAlloc__markReloadModifiers	r4	incoming param_1 not at argument 1 of any C call (2 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)
+0x133fe4	FUN_00133fe4	0x1341ac	RegAlloc__markReloadModifiers	r5	field at param_1+0x2c: 2 stock site(s), 0 C call(s) carry it at argument 2 (2 C calls)	BENIGN-REVIEWED (RegAlloc__markReloadModifiers reads only r3; r4/r5 go to a this-only virtual call `(*(vtbl+0x34))(this)` at 0x13074c: unused parameters of the source prototype)
 0x158264	Inst__collapseAlgebraic_00158264	0x158380	FUN_0015800c	r7	incoming param_2 not at argument 4 of any C call (1 C calls)	CHECK (C arg4: local_68)
 0x15a68c	Inst__takeOutCommonFactor	0x15b248	IRInst__getOperandRecord	r4	0x1 not at argument 1 of any C call (15 C calls)	CHECK (C arg1: iVar9; iVar9)
 0x175dac	Program__valueNumberInst	0x175e08	ValueKey__maybeRefineSources	r4	incoming param_2 not at argument 1 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES

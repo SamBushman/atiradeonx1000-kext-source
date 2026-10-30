@@ -1629,8 +1629,8 @@ int Vslot__outZeroReturnZero(param_1, param_2, param_3, param_4)
   return 0;
 }
 
-/* FUN_0010e56c @ 0x10e56c (200 bytes) */
-int FUN_0010e56c(backend, program)
+/* Program__assignHwRegsToVertexLoads @ 0x10e56c (200 bytes) */
+int Program__assignHwRegsToVertexLoads(backend, program)
   int *backend;
   int program;
 {
@@ -1992,8 +1992,8 @@ LAB_0010ebe4:
   return;
 }
 
-/* FUN_0010ecb8 @ 0x10ecb8 (148 bytes) */
-int FUN_0010ecb8(inst)
+/* IRInst__destMaskHasGap @ 0x10ecb8 (148 bytes) */
+int IRInst__destMaskHasGap(inst)
   undefined4 inst;
 {
   int operandRecord;

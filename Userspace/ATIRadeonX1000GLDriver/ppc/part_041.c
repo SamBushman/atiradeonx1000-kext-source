@@ -170,8 +170,8 @@ int FUN_001318a4(allocator, nodeIndex, spillState)
   return spillSlot;
 }
 
-/* FUN_001319d0 @ 0x1319d0 (176 bytes) */
-int FUN_001319d0(allocator, slotIndexAndCount)
+/* RegAlloc__sumSlotCounts @ 0x1319d0 (176 bytes) */
+int RegAlloc__sumSlotCounts(allocator, slotIndexAndCount)
   int allocator;
   uint slotIndexAndCount;
 {
@@ -204,8 +204,8 @@ int FUN_001319d0(allocator, slotIndexAndCount)
   return slotSum;
 }
 
-/* FUN_00131a80 @ 0x131a80 (232 bytes) */
-int FUN_00131a80(allocator)
+/* RegAlloc__findFreeSpillSlot @ 0x131a80 (232 bytes) */
+int RegAlloc__findFreeSpillSlot(allocator)
   int allocator;
 {
   undefined4 *allocation;
@@ -274,8 +274,8 @@ int RegAlloc__getCachedLoadFa(allocator)
   
   cachedObject = *(int *)(allocator + 0x438);
   if (cachedObject == 0) {
-    baseHandle = ((int (*)())FUN_00131a80)(allocator);
-    derivedHandle = ((int (*)())FUN_001319d0)(allocator,baseHandle);
+    baseHandle = ((int (*)())RegAlloc__findFreeSpillSlot)(allocator);
+    derivedHandle = ((int (*)())RegAlloc__sumSlotCounts)(allocator,baseHandle);
     cachedObject = Program__appendLoadFa(baseHandle,derivedHandle,*(undefined4 *)(allocator + 8));
     *(int *)(allocator + 0x438) = cachedObject;
   }
@@ -1229,7 +1229,7 @@ int FUN_0013323c(pass, copyState)
   do {
     *(undefined4 *)(pass + 0x250) = 0;
     if (0 < roundCount) {
-      ((int (*)())FUN_00135278)(copyState);
+      ((int (*)())InterferenceState__clearNodeWord4)(copyState);
       ((int (*)())BitSet__clearAllWords)(copyState);
       vecCount = 0;
     }
@@ -1316,7 +1316,7 @@ int FUN_0013323c(pass, copyState)
                     if (((inst[5] & 0x40U) == 0) || ((srcDef[5] & 0x40U) == 0)) {
                       if ((*(int *)(destRootA * 4 + *(int *)(pass + 0x45c)) ==
                            *(int *)(laneNumber * 4 + *(int *)(pass + 0x45c))) &&
-                         (destRootA = ((int (*)())FUN_00135c20)(copyState,destRootA,laneNumber), destRootA != 0)) {
+                         (destRootA = ((int (*)())InterferenceGraph__mergeNodes)(copyState,destRootA,laneNumber), destRootA != 0)) {
                         changedFlag = 1;
                         *(int *)(pass + 0x24c) = *(int *)(pass + 0x24c) + 1;
                       }
@@ -1366,7 +1366,7 @@ int FUN_0013323c(pass, copyState)
                     if (((0 < *(int *)(*(int *)(pass + 8) + 0x678)) &&
                         (*(int *)(destRootB * 4 + *(int *)(pass + 0x45c)) ==
                          *(int *)(laneNumber * 4 + *(int *)(pass + 0x45c)))) &&
-                       (mergedRoot = ((int (*)())FUN_00135c20)(copyState,destRootB,laneNumber), deferredCountSnapshot = vec2Count, mergedRoot != 0)
+                       (mergedRoot = ((int (*)())InterferenceGraph__mergeNodes)(copyState,destRootB,laneNumber), deferredCountSnapshot = vec2Count, mergedRoot != 0)
                        ) {
                       *(int *)(pass + 0x254) = *(int *)(pass + 0x254) + 1;
                       if ((inst[5] & 0x1000U) != 0) {
@@ -1512,7 +1512,7 @@ LAB_00133bd0:
         Vector__removeAt(&vecCapacity,lastPendingIndex);
         *(int *)(pass + 600) = *(int *)(pass + 600) + 1;
         pendingSrcDef = IRInst__getOperandSource(pendingInst,1);
-        newCopyInst = (int *)FUN_00130c8c(copyState,pendingInst,pendingSrcDef,pass + 0x464);
+        newCopyInst = (int *)RegAlloc__emitSpillReload(copyState,pendingInst,pendingSrcDef,pass + 0x464);
         srcRecordA = IRInst__getOperandRecord(pendingInst,1);
         FUN_000f366c(&swizzleWord,*(undefined4 *)(srcRecordA + 0x10));
         newCopyInst[0x27] = swizzleWord;
@@ -1601,7 +1601,7 @@ LAB_00133bd0:
           bitsetBlock = *(int *)(bitsetBlock + 8);
         } while (*(int *)(bitsetBlock + 8) != 0);
       }
-      ((int (*)())FUN_00135278)(copyState);
+      ((int (*)())InterferenceState__clearNodeWord4)(copyState);
       ((int (*)())BitSet__clearAllWords)(copyState);
       backend = *(int **)(*(int *)(pass + 8) + 0x30c);
       (**(code **)(*backend + 0x148))
@@ -1610,7 +1610,7 @@ LAB_00133bd0:
     }
   }
   if (needsFlagUpdate) {
-    ((int (*)())FUN_00135278)(copyState);
+    ((int (*)())InterferenceState__clearNodeWord4)(copyState);
     ((int (*)())BitSet__clearAllWords)(copyState);
     backend = *(int **)(*(int *)(pass + 8) + 0x30c);
     (**(code **)(*backend + 0x148))
@@ -1701,10 +1701,10 @@ int FUN_00133fe4(allocator)
           pendingInst = *pendingElemRef;
           Vector__removeAt(pendingVector,allocation[2] - 1);
           spillLocationA = IRInst__chainEndNext(pendingInst);
-          FUN_00130abc(spillLocationA,allocator,*(undefined4 *)(allocator + 0x2c));
+          RegAlloc__markReloadModifiers(spillLocationA,allocator,*(undefined4 *)(allocator + 0x2c));
           spillSlotB = ((int (*)())FUN_001318a4)(allocator,*(undefined4 *)(pendingInst + 0x94),spillState);
           spillModeA = thunk_FUN_001307f8(pendingInst);
-          FUN_001312f4(pendingInst,spillState,spillSlotB,spillModeA,*(undefined4 *)(allocator + 0x2c));
+          RegAlloc__emitSpillStore(pendingInst,spillState,spillSlotB,spillModeA,*(undefined4 *)(allocator + 0x2c));
           spillTempCount = *(int *)(program + 0x454) + 1;
           *(int *)(program + 0x454) = spillTempCount;
           pendingCount = allocation[2];
@@ -1734,7 +1734,7 @@ int FUN_00133fe4(allocator)
                   operandVReg[5] = operandVReg[5] | 0x8000000;
                   regKindFlag = (**(code **)(regKindFlag + 0x14))(inst);
                   if ((loopIndex <= regKindFlag) && (regKindFlag = FUN_00131008(1,inst,loopIndex), regKindFlag != 0)) {
-                    FUN_00130abc(inst,allocator,*(undefined4 *)(allocator + 0x2c));
+                    RegAlloc__markReloadModifiers(inst,allocator,*(undefined4 *)(allocator + 0x2c));
                     if (((operandVReg[5] & 0x20000000U) == 0) || ((operandVReg[6] & 1U) != 0)) {
                       regKindFlag = ((int (*)())FUN_001318a4)(allocator,sourceRegister,spillState);
                       reloadSource = IRInst__findChainNodeById(inst,*(undefined4 *)(regKindFlag + 0x13c));
@@ -1774,7 +1774,7 @@ int FUN_00133fe4(allocator)
                     else {
                       insertedReload = 1;
                       reloadModeB = IRInst__chainEndSkippingFlag4000000(inst);
-                      FUN_00130da0(allocator,inst,loopIndex,reloadModeB,*(undefined4 *)(allocator + 0x2c));
+                      RegAlloc__cloneSourceDefAfter(allocator,inst,loopIndex,reloadModeB,*(undefined4 *)(allocator + 0x2c));
                     }
                   }
                 }
@@ -2032,7 +2032,7 @@ int FUN_00134658(pass)
     arena = *(undefined4 *)(*(int *)(pass + 8) + 0x378);
     allocation = (undefined4 *)Arena__alloc(arena,0x34);
     *allocation = arena;
-    ((int (*)())FUN_0013719c)(allocation + 1,*(undefined4 *)(pass + 0x46c),*(undefined4 *)(pass + 0x464),
+    ((int (*)())InterferenceGraph__ctor_13719c)(allocation + 1,*(undefined4 *)(pass + 0x46c),*(undefined4 *)(pass + 0x464),
                  pass,*(undefined4 *)(pass + 8));
     *(undefined4 **)(pass + 0x3c0) = allocation + 1;
     ((int (*)())FUN_00131d08)(pass,*(undefined4 *)(pass + 0x468),*(undefined4 *)(pass + 0x46c),
@@ -2043,7 +2043,7 @@ int FUN_00134658(pass)
     backendB = *(int **)(*(int *)(pass + 8) + 0x30c);
     (**(code **)(*backendB + 0x144))(backendB,*(undefined4 *)(pass + 0x464),pass);
     ((int (*)())FUN_0013323c)(pass,*(undefined4 *)(pass + 0x3c0));
-    ((int (*)())FUN_00138080)(pass);
+    ((int (*)())Program__freeBlockBitsets)(pass);
     if (allocationRound != 0) {
       ((int (*)())RegAlloc__accumulateUseWeights)(*(undefined4 *)(pass + 0x3c0),*(undefined4 *)(pass + 8));
     }
@@ -2226,8 +2226,8 @@ int InterferenceGraph__resolveNode(graph, element, followAliases)
   return *(undefined4 *)(element * 4 + *(int *)(graph + 0x20));
 }
 
-/* FUN_00134c18 @ 0x134c18 (188 bytes) */
-int FUN_00134c18(neighbourList, removedRoot, graph)
+/* NeighbourList__removeResolvedNode @ 0x134c18 (188 bytes) */
+int NeighbourList__removeResolvedNode(neighbourList, removedRoot, graph)
   int neighbourList;
   int removedRoot;
   undefined4 graph;
@@ -2347,8 +2347,8 @@ int FUN_00134de8(allocator, inst)
   return inst[0x25];
 }
 
-/* FUN_00134ef4 @ 0x134ef4 (204 bytes) */
-int FUN_00134ef4(neighbourList, slotInBlockRef, currentBlockRef, compiler)
+/* NeighbourList__reserveAppendSlot @ 0x134ef4 (204 bytes) */
+int NeighbourList__reserveAppendSlot(neighbourList, slotInBlockRef, currentBlockRef, compiler)
   int neighbourList;
   int *slotInBlockRef;
   int *currentBlockRef;
@@ -2396,7 +2396,7 @@ int storeAfterLocate(neighbourList, param_2, slotInBlockRef, currentBlockRef, co
   int *currentBlockRef;
   undefined4 compiler;
 {
-  ((int (*)())FUN_00134ef4)(neighbourList,slotInBlockRef,currentBlockRef,compiler);
+  ((int (*)())NeighbourList__reserveAppendSlot)(neighbourList,slotInBlockRef,currentBlockRef,compiler);
   *(undefined4 *)(*currentBlockRef + *slotInBlockRef * 4) = param_2;
   return;
 }
@@ -2505,8 +2505,8 @@ int InterferenceNode__ctor_1351c4(node, nodeId, nodeClass, graph, compiler)
   return;
 }
 
-/* FUN_00135278 @ 0x135278 (188 bytes) */
-int FUN_00135278(copyState)
+/* InterferenceState__clearNodeWord4 @ 0x135278 (188 bytes) */
+int InterferenceState__clearNodeWord4(copyState)
   int copyState;
 {
   uint vectorCount;
@@ -2894,8 +2894,8 @@ int FUN_00135a2c(targetNode, mergedNodeIndex, graph)
   return;
 }
 
-/* FUN_00135c20 @ 0x135c20 (260 bytes) */
-int FUN_00135c20(graph, elementIndex, nodeB)
+/* InterferenceGraph__mergeNodes @ 0x135c20 (260 bytes) */
+int InterferenceGraph__mergeNodes(graph, elementIndex, nodeB)
   int graph;
   uint elementIndex;
   uint nodeB;
@@ -3619,8 +3619,8 @@ code_r0x00136cac:
   return 0 < uncolorableCount;
 }
 
-/* FUN_00136ec4 @ 0x136ec4 (152 bytes) */
-int FUN_00136ec4(this, ownerArg, nodeCount, ownerArg4, compiler)
+/* InterferenceGraph__ctor_136ec4 @ 0x136ec4 (152 bytes) */
+int InterferenceGraph__ctor_136ec4(this, ownerArg, nodeCount, ownerArg4, compiler)
   int *this;
   int ownerArg;
   int nodeCount;
@@ -3747,8 +3747,8 @@ int FUN_00136ec4(this, ownerArg, nodeCount, ownerArg4, compiler)
   return;
 }
 
-/* FUN_0013719c @ 0x13719c (152 bytes) */
-int FUN_0013719c(this, ownerArg, nodeCount, ownerArg4, compiler)
+/* InterferenceGraph__ctor_13719c @ 0x13719c (152 bytes) */
+int InterferenceGraph__ctor_13719c(this, ownerArg, nodeCount, ownerArg4, compiler)
   int *this;
   int ownerArg;
   int nodeCount;
@@ -4102,7 +4102,14 @@ int RegAlloc__accumulateUseWeights(regInfoOwner, pass)
   int copySource;
   uint clearedFlags;
   int *operandCursor;
-  int iVar6;
+  int operandCountA;
+  int query50;
+  int flagBit0Result;
+  int operandCountB;
+  int operandKindClass;
+  int flagBit6Result;
+  int regKind;
+  int sourceOfOperand;
   int nextBlock;
   int block;
   int *instListHead;
@@ -4135,17 +4142,17 @@ int RegAlloc__accumulateUseWeights(regInfoOwner, pass)
                   if ((instQuery40 == 0) && (instQuery40 = (**(code **)(*inst + 0x28))(inst), instQuery40 == 0)) {
                     inst[5] = inst[5] | 0x20000000;
                     operandCursor = inst;
-                    for (operandNumberA = 1; iVar6 = (**(code **)(*inst + 0x14))(inst), operandNumberA <= iVar6;
+                    for (operandNumberA = 1; operandCountA = (**(code **)(*inst + 0x14))(inst), operandNumberA <= operandCountA;
                         operandNumberA = operandNumberA + 1) {
-                      if ((operandNumberA < 1) || (iVar6 = IRInst__getOperandSource(inst,operandNumberA), iVar6 == 0)) {
-                        iVar6 = operandCursor[0x2c];
+                      if ((operandNumberA < 1) || (sourceOfOperand = IRInst__getOperandSource(inst,operandNumberA), sourceOfOperand == 0)) {
+                        regKind = operandCursor[0x2c];
                       }
                       else {
                         sourceDef = IRInst__getOperandSource(inst,operandNumberA);
-                        iVar6 = *(int *)(sourceDef + 0x98);
+                        regKind = *(int *)(sourceDef + 0x98);
                       }
-                      iVar6 = RegKind__flagBit6(iVar6);
-                      if (iVar6 == 0) {
+                      flagBit6Result = RegKind__flagBit6(regKind);
+                      if (flagBit6Result == 0) {
 LAB_00137af8:
                         clearedFlags = inst[5] & 0xdfffffff;
                         inst[5] = clearedFlags;
@@ -4153,8 +4160,8 @@ LAB_00137af8:
                       }
                       IRInst__getOperandRecord(inst,operandNumberA);
                       operandCursor = operandCursor + 6;
-                      iVar6 = IRInst__operandKindClass(inst,operandNumberA);
-                      if (iVar6 != 0) goto LAB_00137af8;
+                      operandKindClass = IRInst__operandKindClass(inst,operandNumberA);
+                      if (operandKindClass != 0) goto LAB_00137af8;
                     }
                     clearedFlags = inst[5];
                   }
@@ -4223,13 +4230,13 @@ LAB_00137b2c:
                     *(int *)(*regInfoRef + 0x1c) = useWeight + *(int *)(*regInfoRef + 0x1c);
                   }
                 }
-                for (operandNumberB = 1; iVar6 = (**(code **)(*inst + 0x14))(inst), operandNumberB <= iVar6;
+                for (operandNumberB = 1; operandCountB = (**(code **)(*inst + 0x14))(inst), operandNumberB <= operandCountB;
                     operandNumberB = operandNumberB + 1) {
                   operandVReg = (int *)IRInst__getOperandSource(inst,operandNumberB);
                   sourceRegister = operandVReg[0x25];
-                  if ((((operandVReg[0x20] != 0) && (iVar6 = RegKind__flagBit0(operandVReg[0x26]), iVar6 != 0)) &&
+                  if ((((operandVReg[0x20] != 0) && (flagBit0Result = RegKind__flagBit0(operandVReg[0x26]), flagBit0Result != 0)) &&
                       ((operandVReg[5] & 2U) == 0)) &&
-                     (iVar6 = (**(code **)(*operandVReg + 0x50))(operandVReg), iVar6 == 0)) {
+                     (query50 = (**(code **)(*operandVReg + 0x50))(operandVReg), query50 == 0)) {
                     regInfoVector = *(uint **)(regInfoOwner + 4);
                     if (sourceRegister < *regInfoVector) {
                       regInfoCount = regInfoVector[1];
@@ -4373,8 +4380,8 @@ int FUN_00137f14(liveness, inst, liveBits)
   return;
 }
 
-/* FUN_00138080 @ 0x138080 (176 bytes) */
-int FUN_00138080(program)
+/* Program__freeBlockBitsets @ 0x138080 (176 bytes) */
+int Program__freeBlockBitsets(program)
   int program;
 {
   int bitsetAt104;

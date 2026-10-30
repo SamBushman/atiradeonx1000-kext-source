@@ -136,13 +136,13 @@ IfFooter__ctor_12e56c compiler
 Program__appendLoadFa compiler
 Program__prependLoad79 compiler
 Program__insertMemLoadFbAfter compiler
-FUN_001312f4 compiler
+RegAlloc__emitSpillStore compiler
 HwLimits__buildInterferenceGraph compiler
-FUN_00134ef4 compiler
+NeighbourList__reserveAppendSlot compiler
 InterferenceNode__ctor_135110 compiler
 InterferenceNode__ctor_1351c4 compiler
-FUN_00136ec4 compiler
-FUN_0013719c compiler
+InterferenceGraph__ctor_136ec4 compiler
+InterferenceGraph__ctor_13719c compiler
 HwLimits__computeBlockLiveness compiler
 FUN_00147f54 compiler
 FUN_00149de4 compiler

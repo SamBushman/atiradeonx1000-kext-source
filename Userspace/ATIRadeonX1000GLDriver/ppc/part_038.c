@@ -740,8 +740,8 @@ int VRegPool__destroyEntries(owner)
   return;
 }
 
-/* FUN_00127470 @ 0x127470 (196 bytes) */
-int FUN_00127470(owner)
+/* VRegPool__dtor_127470 @ 0x127470 (196 bytes) */
+int VRegPool__dtor_127470(owner)
   int owner;
 {
   uint bucketCount;
@@ -946,8 +946,8 @@ int VRegPool__countEntriesWithQuery18(owner)
 }
 #undef iteratorCurrent
 
-/* FUN_001278d0 @ 0x1278d0 (196 bytes) */
-int FUN_001278d0(owner)
+/* VRegPool__dtor_1278d0 @ 0x1278d0 (196 bytes) */
+int VRegPool__dtor_1278d0(owner)
   int owner;
 {
   uint bucketCount;
