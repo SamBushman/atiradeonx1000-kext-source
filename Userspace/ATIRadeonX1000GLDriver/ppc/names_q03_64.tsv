@@ -1,0 +1,339 @@
+use	arbEmitIlDp4	iVar16	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ param_4\[3\];$	+1
+use	arbEmitIlDp4	iVar16	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar14\ =\ \(uint\)\(iVar16\ !=\ 0\)\ \*\ 0x40\ \|$	+1
+use	arbEmitIlDp4	iVar16	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ param_4\[3\];$@2	+1
+use	arbEmitIlDp4	iVar16	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ param_4\[3\];$@3	+1
+use	arbEmitIlDp4	iVar16	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ 0;$	+1
+use	arbEmitIlDp4	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$	+1
+use	arbEmitIlDp4	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$	+1
+use	arbEmitIlDp4	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$	+1
+use	arbEmitIlDp4	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@2	+1
+use	arbEmitIlDp4	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@2	+1
+use	arbEmitIlDp4	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@2	+1
+use	arbEmitIlDp4	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@3	+1
+use	arbEmitIlDp4	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@3	+1
+use	arbEmitIlDp4	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@3	+1
+use	arbEmitIlDp4	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@4	+1
+use	arbEmitIlDp4	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@4	+1
+use	arbEmitIlDp4	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@4	+1
+use	arbEmitIlDp4	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@5	+1
+use	arbEmitIlDp4	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@5	+1
+use	arbEmitIlDp4	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@5	+1
+use	arbEmitIlDp4	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@6	+1
+use	arbEmitIlDp4	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@6	+1
+use	arbEmitIlDp4	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@6	+1
+use	arbEmitIlDp4	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@7	+1
+use	arbEmitIlDp4	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@7	+1
+use	arbEmitIlDp4	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@7	+1
+use	arbEmitIlMul	iVar16	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ param_4\[3\];$	+1
+use	arbEmitIlMul	iVar16	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar14\ =\ \(uint\)\(iVar16\ !=\ 0\)\ \*\ 0x40\ \|$	+1
+use	arbEmitIlMul	iVar16	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ param_4\[3\];$@2	+1
+use	arbEmitIlMul	iVar16	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ param_4\[3\];$@3	+1
+use	arbEmitIlMul	iVar16	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ 0;$	+1
+use	arbEmitIlMul	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$	+1
+use	arbEmitIlMul	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$	+1
+use	arbEmitIlMul	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$	+1
+use	arbEmitIlMul	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@2	+1
+use	arbEmitIlMul	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@2	+1
+use	arbEmitIlMul	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@2	+1
+use	arbEmitIlMul	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@3	+1
+use	arbEmitIlMul	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@3	+1
+use	arbEmitIlMul	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@3	+1
+use	arbEmitIlMul	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@4	+1
+use	arbEmitIlMul	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@4	+1
+use	arbEmitIlMul	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@4	+1
+use	arbEmitIlMul	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@5	+1
+use	arbEmitIlMul	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@5	+1
+use	arbEmitIlMul	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@5	+1
+use	arbEmitIlMul	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@6	+1
+use	arbEmitIlMul	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@6	+1
+use	arbEmitIlMul	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@6	+1
+use	arbEmitIlMul	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@7	+1
+use	arbEmitIlMul	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@7	+1
+use	arbEmitIlMul	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@7	+1
+use	arbEmitIlAdd	iVar16	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ param_4\[3\];$	+1
+use	arbEmitIlAdd	iVar16	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar14\ =\ \(uint\)\(iVar16\ !=\ 0\)\ \*\ 0x40\ \|$	+1
+use	arbEmitIlAdd	iVar16	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ param_4\[3\];$@2	+1
+use	arbEmitIlAdd	iVar16	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ param_4\[3\];$@3	+1
+use	arbEmitIlAdd	iVar16	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ 0;$	+1
+use	arbEmitIlAdd	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$	+1
+use	arbEmitIlAdd	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$	+1
+use	arbEmitIlAdd	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$	+1
+use	arbEmitIlAdd	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@2	+1
+use	arbEmitIlAdd	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@2	+1
+use	arbEmitIlAdd	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@2	+1
+use	arbEmitIlAdd	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@3	+1
+use	arbEmitIlAdd	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@3	+1
+use	arbEmitIlAdd	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@3	+1
+use	arbEmitIlAdd	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@4	+1
+use	arbEmitIlAdd	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@4	+1
+use	arbEmitIlAdd	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@4	+1
+use	arbEmitIlAdd	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@5	+1
+use	arbEmitIlAdd	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@5	+1
+use	arbEmitIlAdd	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@5	+1
+use	arbEmitIlAdd	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@6	+1
+use	arbEmitIlAdd	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@6	+1
+use	arbEmitIlAdd	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@6	+1
+use	arbEmitIlAdd	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@7	+1
+use	arbEmitIlAdd	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@7	+1
+use	arbEmitIlAdd	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@7	+1
+use	arbEmitIlMin	iVar16	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ param_4\[3\];$	+1
+use	arbEmitIlMin	iVar16	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar14\ =\ \(uint\)\(iVar16\ !=\ 0\)\ \*\ 0x40\ \|$	+1
+use	arbEmitIlMin	iVar16	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ param_4\[3\];$@2	+1
+use	arbEmitIlMin	iVar16	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ param_4\[3\];$@3	+1
+use	arbEmitIlMin	iVar16	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ 0;$	+1
+use	arbEmitIlMin	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$	+1
+use	arbEmitIlMin	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$	+1
+use	arbEmitIlMin	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$	+1
+use	arbEmitIlMin	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@2	+1
+use	arbEmitIlMin	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@2	+1
+use	arbEmitIlMin	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@2	+1
+use	arbEmitIlMin	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@3	+1
+use	arbEmitIlMin	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@3	+1
+use	arbEmitIlMin	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@3	+1
+use	arbEmitIlMin	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@4	+1
+use	arbEmitIlMin	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@4	+1
+use	arbEmitIlMin	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@4	+1
+use	arbEmitIlMin	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@5	+1
+use	arbEmitIlMin	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@5	+1
+use	arbEmitIlMin	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@5	+1
+use	arbEmitIlMin	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@6	+1
+use	arbEmitIlMin	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@6	+1
+use	arbEmitIlMin	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@6	+1
+use	arbEmitIlMin	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@7	+1
+use	arbEmitIlMin	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@7	+1
+use	arbEmitIlMin	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@7	+1
+use	arbEmitIlMax	iVar16	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ param_4\[3\];$	+1
+use	arbEmitIlMax	iVar16	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar14\ =\ \(uint\)\(iVar16\ !=\ 0\)\ \*\ 0x40\ \|$	+1
+use	arbEmitIlMax	iVar16	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ param_4\[3\];$@2	+1
+use	arbEmitIlMax	iVar16	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ param_4\[3\];$@3	+1
+use	arbEmitIlMax	iVar16	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ 0;$	+1
+use	arbEmitIlMax	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$	+1
+use	arbEmitIlMax	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$	+1
+use	arbEmitIlMax	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$	+1
+use	arbEmitIlMax	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@2	+1
+use	arbEmitIlMax	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@2	+1
+use	arbEmitIlMax	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@2	+1
+use	arbEmitIlMax	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@3	+1
+use	arbEmitIlMax	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@3	+1
+use	arbEmitIlMax	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@3	+1
+use	arbEmitIlMax	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@4	+1
+use	arbEmitIlMax	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@4	+1
+use	arbEmitIlMax	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@4	+1
+use	arbEmitIlMax	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@5	+1
+use	arbEmitIlMax	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@5	+1
+use	arbEmitIlMax	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@5	+1
+use	arbEmitIlMax	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@6	+1
+use	arbEmitIlMax	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@6	+1
+use	arbEmitIlMax	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@6	+1
+use	arbEmitIlMax	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@7	+1
+use	arbEmitIlMax	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@7	+1
+use	arbEmitIlMax	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@7	+1
+use	arbEmitIlSetCompare5	iVar16	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ param_4\[3\];$	+1
+use	arbEmitIlSetCompare5	iVar16	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar14\ =\ \(uint\)\(iVar16\ !=\ 0\)\ \*\ 0x40\ \|$	+1
+use	arbEmitIlSetCompare5	iVar16	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ param_4\[3\];$@2	+1
+use	arbEmitIlSetCompare5	iVar16	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ param_4\[3\];$@3	+1
+use	arbEmitIlSetCompare5	iVar16	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ 0;$	+1
+use	arbEmitIlSetCompare5	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$	+1
+use	arbEmitIlSetCompare5	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$	+1
+use	arbEmitIlSetCompare5	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$	+1
+use	arbEmitIlSetCompare5	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@2	+1
+use	arbEmitIlSetCompare5	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@2	+1
+use	arbEmitIlSetCompare5	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@2	+1
+use	arbEmitIlSetCompare5	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@3	+1
+use	arbEmitIlSetCompare5	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@3	+1
+use	arbEmitIlSetCompare5	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@3	+1
+use	arbEmitIlSetCompare5	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@4	+1
+use	arbEmitIlSetCompare5	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@4	+1
+use	arbEmitIlSetCompare5	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@4	+1
+use	arbEmitIlSetCompare5	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@5	+1
+use	arbEmitIlSetCompare5	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@5	+1
+use	arbEmitIlSetCompare5	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@5	+1
+use	arbEmitIlSetCompare5	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@6	+1
+use	arbEmitIlSetCompare5	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@6	+1
+use	arbEmitIlSetCompare5	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@6	+1
+use	arbEmitIlSetCompare5	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@7	+1
+use	arbEmitIlSetCompare5	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@7	+1
+use	arbEmitIlSetCompare5	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@7	+1
+use	arbEmitIlSetCompare2	iVar16	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ param_4\[3\];$	+1
+use	arbEmitIlSetCompare2	iVar16	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar14\ =\ \(uint\)\(iVar16\ !=\ 0\)\ \*\ 0x40\ \|$	+1
+use	arbEmitIlSetCompare2	iVar16	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ param_4\[3\];$@2	+1
+use	arbEmitIlSetCompare2	iVar16	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ param_4\[3\];$@3	+1
+use	arbEmitIlSetCompare2	iVar16	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ 0;$	+1
+use	arbEmitIlSetCompare2	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$	+1
+use	arbEmitIlSetCompare2	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$	+1
+use	arbEmitIlSetCompare2	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$	+1
+use	arbEmitIlSetCompare2	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@2	+1
+use	arbEmitIlSetCompare2	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@2	+1
+use	arbEmitIlSetCompare2	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@2	+1
+use	arbEmitIlSetCompare2	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@3	+1
+use	arbEmitIlSetCompare2	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@3	+1
+use	arbEmitIlSetCompare2	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@3	+1
+use	arbEmitIlSetCompare2	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@4	+1
+use	arbEmitIlSetCompare2	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@4	+1
+use	arbEmitIlSetCompare2	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@4	+1
+use	arbEmitIlSetCompare2	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@5	+1
+use	arbEmitIlSetCompare2	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@5	+1
+use	arbEmitIlSetCompare2	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@5	+1
+use	arbEmitIlSetCompare2	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@6	+1
+use	arbEmitIlSetCompare2	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@6	+1
+use	arbEmitIlSetCompare2	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@6	+1
+use	arbEmitIlSetCompare2	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@7	+1
+use	arbEmitIlSetCompare2	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@7	+1
+use	arbEmitIlSetCompare2	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@7	+1
+use	arbEmitIlPow	iVar16	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ param_4\[3\];$	+1
+use	arbEmitIlPow	iVar16	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar14\ =\ \(uint\)\(iVar16\ !=\ 0\)\ \*\ 0x40\ \|$	+1
+use	arbEmitIlPow	iVar16	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ param_4\[3\];$@2	+1
+use	arbEmitIlPow	iVar16	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ param_4\[3\];$@3	+1
+use	arbEmitIlPow	iVar16	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ 0;$	+1
+use	arbEmitIlPow	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$	+1
+use	arbEmitIlPow	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$	+1
+use	arbEmitIlPow	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$	+1
+use	arbEmitIlPow	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@2	+1
+use	arbEmitIlPow	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@2	+1
+use	arbEmitIlPow	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@2	+1
+use	arbEmitIlPow	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@3	+1
+use	arbEmitIlPow	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@3	+1
+use	arbEmitIlPow	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@3	+1
+use	arbEmitIlPow	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@4	+1
+use	arbEmitIlPow	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@4	+1
+use	arbEmitIlPow	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@4	+1
+use	arbEmitIlPow	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@5	+1
+use	arbEmitIlPow	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@5	+1
+use	arbEmitIlPow	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@5	+1
+use	arbEmitIlPow	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@6	+1
+use	arbEmitIlPow	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@6	+1
+use	arbEmitIlPow	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@6	+1
+use	arbEmitIlPow	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@7	+1
+use	arbEmitIlPow	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@7	+1
+use	arbEmitIlPow	iVar16	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar16\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@7	+1
+use	arbEmitIlMov	iVar14	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ param_4\[3\];$	+1
+use	arbEmitIlMov	iVar14	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar13\ =\ \(uint\)\(iVar14\ !=\ 0\)\ \*\ 0x40\ \|$	+1
+use	arbEmitIlMov	iVar14	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ param_4\[3\];$@2	+1
+use	arbEmitIlMov	iVar14	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ param_4\[3\];$@3	+1
+use	arbEmitIlMov	iVar14	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ 0;$	+1
+use	arbEmitIlMov	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$	+1
+use	arbEmitIlMov	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$	+1
+use	arbEmitIlMov	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$	+1
+use	arbEmitIlMov	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@2	+1
+use	arbEmitIlMov	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@2	+1
+use	arbEmitIlMov	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@2	+1
+use	arbEmitIlMov	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@3	+1
+use	arbEmitIlMov	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@3	+1
+use	arbEmitIlMov	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@3	+1
+use	arbEmitIlMov	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@4	+1
+use	arbEmitIlMov	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@4	+1
+use	arbEmitIlMov	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@4	+1
+use	arbEmitIlMov	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@5	+1
+use	arbEmitIlMov	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@5	+1
+use	arbEmitIlMov	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@5	+1
+use	arbEmitIlRcp	iVar14	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ param_4\[3\];$	+1
+use	arbEmitIlRcp	iVar14	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar13\ =\ \(uint\)\(iVar14\ !=\ 0\)\ \*\ 0x40\ \|$	+1
+use	arbEmitIlRcp	iVar14	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ param_4\[3\];$@2	+1
+use	arbEmitIlRcp	iVar14	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ param_4\[3\];$@3	+1
+use	arbEmitIlRcp	iVar14	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ 0;$	+1
+use	arbEmitIlRcp	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$	+1
+use	arbEmitIlRcp	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$	+1
+use	arbEmitIlRcp	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$	+1
+use	arbEmitIlRcp	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@2	+1
+use	arbEmitIlRcp	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@2	+1
+use	arbEmitIlRcp	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@2	+1
+use	arbEmitIlRcp	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@3	+1
+use	arbEmitIlRcp	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@3	+1
+use	arbEmitIlRcp	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@3	+1
+use	arbEmitIlRcp	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@4	+1
+use	arbEmitIlRcp	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@4	+1
+use	arbEmitIlRcp	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@4	+1
+use	arbEmitIlRcp	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@5	+1
+use	arbEmitIlRcp	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@5	+1
+use	arbEmitIlRcp	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@5	+1
+use	arbEmitIlRsq	iVar14	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ param_4\[3\];$	+1
+use	arbEmitIlRsq	iVar14	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar13\ =\ \(uint\)\(iVar14\ !=\ 0\)\ \*\ 0x40\ \|$	+1
+use	arbEmitIlRsq	iVar14	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ param_4\[3\];$@2	+1
+use	arbEmitIlRsq	iVar14	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ param_4\[3\];$@3	+1
+use	arbEmitIlRsq	iVar14	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ 0;$	+1
+use	arbEmitIlRsq	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$	+1
+use	arbEmitIlRsq	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$	+1
+use	arbEmitIlRsq	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$	+1
+use	arbEmitIlRsq	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@2	+1
+use	arbEmitIlRsq	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@2	+1
+use	arbEmitIlRsq	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@2	+1
+use	arbEmitIlRsq	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@3	+1
+use	arbEmitIlRsq	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@3	+1
+use	arbEmitIlRsq	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@3	+1
+use	arbEmitIlRsq	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@4	+1
+use	arbEmitIlRsq	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@4	+1
+use	arbEmitIlRsq	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@4	+1
+use	arbEmitIlRsq	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@5	+1
+use	arbEmitIlRsq	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@5	+1
+use	arbEmitIlRsq	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@5	+1
+use	arbEmitIlExp	iVar14	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ param_4\[3\];$	+1
+use	arbEmitIlExp	iVar14	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar13\ =\ \(uint\)\(iVar14\ !=\ 0\)\ \*\ 0x40\ \|$	+1
+use	arbEmitIlExp	iVar14	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ param_4\[3\];$@2	+1
+use	arbEmitIlExp	iVar14	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ param_4\[3\];$@3	+1
+use	arbEmitIlExp	iVar14	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ 0;$	+1
+use	arbEmitIlExp	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$	+1
+use	arbEmitIlExp	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$	+1
+use	arbEmitIlExp	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$	+1
+use	arbEmitIlExp	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@2	+1
+use	arbEmitIlExp	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@2	+1
+use	arbEmitIlExp	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@2	+1
+use	arbEmitIlExp	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@3	+1
+use	arbEmitIlExp	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@3	+1
+use	arbEmitIlExp	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@3	+1
+use	arbEmitIlExp	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@4	+1
+use	arbEmitIlExp	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@4	+1
+use	arbEmitIlExp	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@4	+1
+use	arbEmitIlExp	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@5	+1
+use	arbEmitIlExp	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@5	+1
+use	arbEmitIlExp	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@5	+1
+use	arbEmitIlExn	iVar14	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ param_4\[3\];$	+1
+use	arbEmitIlExn	iVar14	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar13\ =\ \(uint\)\(iVar14\ !=\ 0\)\ \*\ 0x40\ \|$	+1
+use	arbEmitIlExn	iVar14	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ param_4\[3\];$@2	+1
+use	arbEmitIlExn	iVar14	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ param_4\[3\];$@3	+1
+use	arbEmitIlExn	iVar14	dstMask3	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ 0;$	+1
+use	arbEmitIlExn	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$	+1
+use	arbEmitIlExn	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$	+1
+use	arbEmitIlExn	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$	+1
+use	arbEmitIlExn	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@2	+1
+use	arbEmitIlExn	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@2	+1
+use	arbEmitIlExn	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@2	+1
+use	arbEmitIlExn	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@3	+1
+use	arbEmitIlExn	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@3	+1
+use	arbEmitIlExn	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@3	+1
+use	arbEmitIlExn	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@4	+1
+use	arbEmitIlExn	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@4	+1
+use	arbEmitIlExn	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@4	+1
+use	arbEmitIlExn	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ \*\(int\ \*\)\(param_1\ \+\ ARB_allocator\);$@5	+1
+use	arbEmitIlExn	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@5	+1
+use	arbEmitIlExn	iVar14	allocator	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\);$@5	+1
+local	evsEmitMova	param_2	tokenStream	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsEmitMova	param_4	op	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsEmitMova	iVar1	encodeResult	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsEmitMova	iVar2	tokenCountPtr	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsEmitMova	local_48	dstWord0	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsEmitMova	local_44	dstWord1	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsEmitMova	local_40	dstWord2	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsEmitMova	local_3c	dstWord3	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsEmitMova	local_38	dstWord4	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsEmitMova	local_34	dstWord5	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsEmitMova	local_30	dstWord6	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsEmitLogp	param_2	tokenStream	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsEmitLogp	param_4	op	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsEmitLogp	iVar1	encodeResult	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsEmitLogp	iVar2	tokenCountPtr	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsEmitMov	param_2	tokenStream	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsEmitMov	param_4	op	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsEmitMov	iVar1	encodeResult	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsEmitMov	iVar2	tokenCountPtr	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsEmitOp879d	param_2	tokenStream	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsEmitOp879d	param_4	op	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsEmitClamp	param_2	tokenStream	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsEmitClamp	param_3	compileState	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsEmitClamp	param_4	op	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsEmitClamp	iVar1	encodeResult	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsEmitClamp	iVar2	tokenCountPtr	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsEmitMad	param_2	tokenStream	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsEmitMad	param_3	compileState	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsEmitMad	param_4	op	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsEmitMad	iVar1	encodeResult	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsEmitMad	iVar2	tokenCountPtr	INFERRED	role read off the function body (see notes_gld_q03.md)

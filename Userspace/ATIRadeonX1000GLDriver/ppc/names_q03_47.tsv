@@ -1,0 +1,58 @@
+local	recordLinkSourceToDefinition	param_1	alloc	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordLinkSourceToDefinition	param_2	records	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordLinkSourceToDefinition	param_3	recordsCopy	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordLinkSourceToDefinition	param_4	dependent	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordLinkSourceToDefinition	param_5	recordIndex	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordLinkSourceToDefinition	param_6	sourceSlot	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordLinkSourceToDefinition	param_7	componentSel	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordLinkSourceToDefinition	iVar1	sourceByteOffset	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	recordLinkSourceToDefinition	bVar2	fileMatches	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar2\ =\ uVar6\ ==\ 5;$	+1
+use	recordLinkSourceToDefinition	bVar2	fileMatches	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(!bVar2\)\ \|\|\ \(\(\*puVar10\ >>\ 0xd\ \&\ 0x7f\)\ !=\ \(\*puVar7\ >>\ 5\ \&\ 0xff\)\)\)\ \|\|$	+2
+use	recordLinkSourceToDefinition	bVar2	fileMatches	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar2\ =\ uVar6\ ==\ 0;$	+1
+use	recordLinkSourceToDefinition	bVar2	fileMatches	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar2\ =\ uVar6\ ==\ 4;$	+1
+use	recordLinkSourceToDefinition	bVar2	linked	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar2\ =\ true;$	+1
+use	recordLinkSourceToDefinition	bVar2	linked	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar2\ =\ true;$@2	+1
+use	recordLinkSourceToDefinition	bVar2	linked	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar2\ =\ true;$@3	+1
+use	recordLinkSourceToDefinition	bVar2	linked	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar2\ =\ false;$	+1
+use	recordLinkSourceToDefinition	bVar2	linked	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\}\ while\ \(!bVar2\);$	+1
+local	recordLinkSourceToDefinition	uVar3	sourceFile	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordLinkSourceToDefinition	uVar4	sourceSelect	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordLinkSourceToDefinition	iVar5	writesComponent	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordLinkSourceToDefinition	uVar6	defFile	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordLinkSourceToDefinition	puVar7	sourcePtr	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordLinkSourceToDefinition	iVar8	defIndex	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordLinkSourceToDefinition	puVar10	defRecord	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	recordRegisterIsAssignable	puVar4	valueIdPtr	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar4\ =\ \(uint\ \*\)\(iVar3\ \+\ param_1\ \+\ 0x2d87c\);$	+1
+use	recordRegisterIsAssignable	puVar4	valueIdPtr	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(param_6\ \&\ 1\ <<\ \(uVar12\ \&\ 0x3f\)\)\ ==\ 0\)\ \|\|$	+3
+use	recordRegisterIsAssignable	puVar4	valueIdPtr	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar4\ =\ puVar4\ \+\ 1;$	+1
+use	recordRegisterIsAssignable	puVar4	valueIdPtr	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(\(\(uVar13\ \&\ uVar12\)\ !=\ 0\)\ \&\&\ \(puVar4\ =\ \(uint\ \*\)\*puVar5,\ puVar4\ !=\ \(uint\ \*\)0x0\)\)\ \&\&$	+2
+use	recordRegisterIsAssignable	puVar4	valueIdPtr	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar4\ =\ \(uint\ \*\)\(iVar3\ \+\ param_1\ \+\ 0x2d87c\);$@2	+1
+use	recordRegisterIsAssignable	puVar4	valueIdPtr	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\*puVar15\ ==\ \*puVar4\)\ \{$	+1
+use	recordRegisterIsAssignable	puVar4	valueIdPtr	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*else\ if\ \(param_5\ ==\ \*puVar4\)\ \{$	+1
+use	recordRegisterIsAssignable	puVar4	valueIdPtr	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar4\ =\ puVar4\ \+\ 1;$@3	+1
+use	recordRegisterIsAssignable	puVar4	useNode	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*for\ \(puVar4\ =\ \*\(uint\ \*\*\)\(iVar6\ \*\ 4\ \+\ param_1\ \+\ 0xc450\);\ puVar4\ !=\ \(uint\ \*\)0x0;$	+3
+use	recordRegisterIsAssignable	puVar4	earliestWriterPtr	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar4\ =\ local_58;$	+1
+use	recordRegisterIsAssignable	puVar4	earliestWriterPtr	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(uVar8\ \&\ uVar10\)\ !=\ 0\)\ \&\&\ \(param_5\ ==\ \*puVar4\)\)\ \{$	+1
+use	recordRegisterIsAssignable	puVar4	earliestWriterPtr	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar4\ =\ puVar4\ \+\ 1;$@2	+1
+use	recordRegisterIsAssignable	iVar6	valueId	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar6\ =\ \*piVar11;$	+1
+use	recordRegisterIsAssignable	iVar6	valueId	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(iVar6\ !=\ \-1\)\ \{$	+3
+use	recordRegisterIsAssignable	uVar13	writerRecord	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar13\ =\ \*puVar4;$	+3
+use	recordRegisterIsAssignable	uVar13	writerRecord	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*puVar15\ =\ uVar13;$	+1
+use	recordRegisterIsAssignable	uVar13	writerRecord	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*else\ if\ \(uVar13\ <\ \*puVar15\)\ \{$	+2
+use	recordRegisterIsAssignable	uVar8	writerWriteMask	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar8\ =\ \(\(int\ \(\*\)\(\)\)FUN_00077850\)\(uVar13\ \*\ 0x10\ \+\ param_2\);$	+1
+use	recordRegisterIsAssignable	uVar8	writerWriteMask	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(uVar8\ \&\ uVar7\ \&\ \~uVar12\)\ !=\ 0\)\ \{$	+1
+use	recordRegisterIsAssignable	uVar8	laneBitG	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar8\ =\ 1\ <<\ \(uVar13\ \&\ 0x3f\);$	+3
+local	recordRegisterIsAssignable	uVar7	laneBit	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	recordRegisterIsAssignable	iVar14	candidateValueId	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ \*piVar11;$	+1
+use	recordRegisterIsAssignable	iVar14	candidateValueId	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\*piVar16\ !=\ iVar14\)\ goto\ LAB_00077f68;$	+1
+use	recordRegisterIsAssignable	iVar14	candidateValueId	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\}\ while\ \(\*piVar16\ !=\ iVar14\);$	+1
+use	recordRegisterIsAssignable	iVar14	candidateValueId	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ \*piVar11;$@2	+1
+use	recordRegisterIsAssignable	iVar14	candidateValueId	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*local_68\[iVar17\]\ =\ iVar14;$	+1
+local	recordRegisterIsAssignable	piVar16	seenSlot	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	recordRegisterIsAssignable	puVar15	earliestPtr	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar15\ =\ local_58;$	+1
+use	recordRegisterIsAssignable	puVar15	earliestPtr	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*puVar15\ =\ uVar13;$	+1
+use	recordRegisterIsAssignable	puVar15	earliestPtr	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*else\ if\ \(uVar13\ <\ \*puVar15\)\ \{$	+2
+use	recordRegisterIsAssignable	puVar15	earliestPtr	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar15\ =\ puVar15\ \+\ 1;$	+1
+use	recordRegisterIsAssignable	puVar15	listNode	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar15\ =\ \*\(uint\ \*\*\)\(param_5\ \*\ 4\ \+\ param_1\ \+\ 0xc450\);$	+2
+use	recordRegisterIsAssignable	puVar15	listNode	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\*puVar15\ ==\ \*puVar4\)\ \{$	+1
+use	recordRegisterIsAssignable	puVar15	listNode	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar15\ =\ \(uint\ \*\)puVar15\[4\];$	+2

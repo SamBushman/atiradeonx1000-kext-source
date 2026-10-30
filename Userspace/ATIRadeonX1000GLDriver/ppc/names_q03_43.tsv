@@ -1,0 +1,47 @@
+use	FUN_0007aae0	iVar3	remainingRegisters	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar3\ =\ param_2;$	+1
+use	FUN_0007aae0	iVar3	remainingRegisters	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar3\ =\ iVar3\ \+\ \-1;$	+2
+use	FUN_0007aae0	iVar3	pairState	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x35490\);$	+1
+use	FUN_0007aae0	iVar3	pairState	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(iVar3\ ==\ 2\)\ \{$	+1
+use	FUN_0007aae0	iVar3	pairState	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*else\ if\ \(iVar3\ ==\ 3\)\ \{$	+1
+use	FUN_0007aae0	iVar3	pairState	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*else\ if\ \(iVar3\ ==\ 1\)\ \{$	+1
+use	FUN_0007aae0	iVar3	assignOk	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar3\ =\ \(\(int\ \(\*\)\(\)\)FUN_00078760\)\(param_1,param_6,local_68,param_4,param_5\);$	+2
+use	FUN_0007aae0	iVar3	fitOk	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar3\ =\ \(\(int\ \(\*\)\(\)\)FUN_0007a4a0\)\(param_1,param_6,param_8,param_2,local_68,local_77,local_70\);$	+1
+use	FUN_0007aae0	iVar3	fitOk	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(iVar3\ !=\ 0\)\ \{$@2	+1
+use	FUN_0007aae0	iVar3	bestScore	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar3\ =\ \-1;$	+1
+use	FUN_0007aae0	iVar3	bestScore	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(iVar3\ <\ iVar7\)\ \|\|\ \(uVar15\ ==\ 0\)\)\ \{$	+1
+use	FUN_0007aae0	iVar3	bestScore	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar3\ =\ iVar7;$	+1
+use	FUN_0007aae0	iVar3	unitAllowed	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar3\ =\ \(\*\(code\ \*\)\(PTR_FUN_001e9150\)\[uVar15\]\)$	+1
+use	FUN_0007aae0	iVar3	unitAllowed	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(iVar3\ ==\ 0\)\ \{$	+1
+use	FUN_0007aae0	iVar3	affinityBase	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar3\ =\ param_1\ \+\ 0x3148c;$	+1
+use	FUN_0007aae0	iVar3	affinityBase	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*pcVar13\ =\ \(char\ \*\)\(iVar3\ \+\ local_68\ \*\ 4\);$	+1
+use	FUN_0007aae0	iVar3	affinityBase	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar12\ =\ iVar3\ \+\ iVar7\ \*\ 4;$	+1
+use	FUN_0007aae0	iVar3	affinityBase	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(\(\(int\)\*pcVar13\ \+\ \(int\)\*\(char\ \*\)\(iVar3\ \+\ iVar7\ \*\ 4\)\ <\ 3\)\ \&\&$	+4
+use	FUN_0007aae0	iVar3	assignOk	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar3\ =\ \(\(int\ \(\*\)\(\)\)FUN_00078760\)\(param_1,param_6,local_68,local_77,local_70\);$	+2
+use	FUN_0007aae0	iVar4	registerCountArg	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar4\ =\ param_2;$	+1
+use	FUN_0007aae0	iVar4	registerCountArg	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(param_1,local_68,a2,iVar4,a4,a5,\&PTR_FUN_001e9150\);$	+1
+use	FUN_0007aae0	iVar4	registerCountArg	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(param_1,iVar7,a2,iVar4,a4,a5,\&PTR_FUN_001e9150\);$	+1
+use	FUN_0007aae0	puVar5	candidateRecord	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar5\ =\ \(uint\ \*\)\(param_6\ \+\ iVar16\ \*\ 0x10\);$	+1
+use	FUN_0007aae0	puVar5	candidateRecord	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar5\ =\ puVar5\ \+\ 1;$	+2
+use	FUN_0007aae0	puVar5	candidateRecord	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\(\(char\)\(DAT_001aa760\)\[\*puVar5\ \&\ 0xf\]\ \*\ 0x100\ \+\ \(\*puVar5\ >>\ 5\ \&\ 0xff\)\)\ \*\ 0x10$	+2
+use	FUN_0007aae0	puVar5	chosenRecordPtr	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar5\ =\ \(uint\ \*\)\(param_6\ \+\ local_68\ \*\ 0x10\);$	+2
+use	FUN_0007aae0	puVar5	chosenRecordPtr	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\*puVar5\ \&\ 0x40\)\ ==\ 0\)\ \{$	+2
+use	FUN_0007aae0	iVar7	candidateFits	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar7\ =\ \(\(int\ \(\*\)\(\)\)FUN_0007a4a0\)\(param_1,param_6,param_8,param_2,a4,a5,local_58\);$	+2
+use	FUN_0007aae0	iVar7	score	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar7\ =\ 100;$	+1
+use	FUN_0007aae0	iVar7	score	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar7\ =\ 0;$	+1
+use	FUN_0007aae0	iVar7	score	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar7\ =\ \*\(int\ \*\)\(iVar10\ \+\ 0x10454\)\ \*\ 2\ \+\ iVar7;$	+1
+use	FUN_0007aae0	iVar7	score	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar7\ =\ iVar7\ \+\ 0x20;$	+1
+use	FUN_0007aae0	iVar7	score	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar7\ =\ iVar10\ \*\ \(param_2\ \-\ iVar12\)\ \*\ 2\ \+\ iVar7;$	+2
+use	FUN_0007aae0	iVar7	score	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar3\ =\ iVar7;$	+1
+use	FUN_0007aae0	iVar7	otherIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar7\ =\ \*piVar18;$	+2
+use	FUN_0007aae0	iVar7	otherIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(param_1,iVar7,a2,iVar4,a4,a5,\&PTR_FUN_001e9150\);$	+1
+use	FUN_0007aae0	iVar7	otherIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar12\ =\ iVar3\ \+\ iVar7\ \*\ 4;$	+1
+use	FUN_0007aae0	iVar7	otherIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(\(\(int\)\*pcVar13\ \+\ \(int\)\*\(char\ \*\)\(iVar3\ \+\ iVar7\ \*\ 4\)\ <\ 3\)\ \&\&$	+4
+use	FUN_0007aae0	iVar7	otherIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(int\ \*\)\(param_1\ \+\ 0x35494\)\ =\ iVar7;$	+1
+use	FUN_0007aae0	iVar7	otherIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(int\ \*\)\(param_1\ \+\ 0x35498\)\ =\ iVar7;$	+1
+use	FUN_0007aae0	pcVar13	slotCursor	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*pcVar13\ =\ \(char\ \*\)\(param_1\ \+\ 0x3087c\);$	+1
+use	FUN_0007aae0	pcVar13	slotCursor	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\*pcVar13\ ==\ '\\0'\)\ \{$	+1
+use	FUN_0007aae0	pcVar13	slotCursor	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*pcVar13\ =\ pcVar13\ \+\ 1;$	+1
+use	FUN_0007aae0	pcVar13	chosenAffinity	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*pcVar13\ =\ \(char\ \*\)\(iVar3\ \+\ local_68\ \*\ 4\);$	+1
+use	FUN_0007aae0	pcVar13	chosenAffinity	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(\(\(int\)\*pcVar13\ \+\ \(int\)\*\(char\ \*\)\(iVar3\ \+\ iVar7\ \*\ 4\)\ <\ 3\)\ \&\&$	+4
+local	FUN_0007aae0	bVar2	chosenUnitByte	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0007aae0	local_5c	queueBase	INFERRED	role read off the function body (see notes_gld_q03.md)

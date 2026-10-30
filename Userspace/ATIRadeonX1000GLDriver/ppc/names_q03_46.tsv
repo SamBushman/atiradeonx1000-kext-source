@@ -1,0 +1,68 @@
+local	arbfpUpdateStateForProgram	bVar2	fpDisabled	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	arbfpUpdateStateForProgram	uVar3	liveMaskLow	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar3\ =\ \*\(uint\ \*\)\(pcVar8\ \+\ 8\);$	+2
+use	arbfpUpdateStateForProgram	uVar3	liveMaskLow	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(uVar3\ \&\ 0xff\ \|\ uVar5\)\ >>\ \(uVar12\ \&\ 0x3f\)\ \&\ 1\)\ !=\ 0\)\ goto\ LAB_0008d4f8;$	+1
+use	arbfpUpdateStateForProgram	uVar3	lastUnsetSlot	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar3\ =\ 0xffffffff;$	+1
+use	arbfpUpdateStateForProgram	uVar3	lastUnsetSlot	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar13\ =\ uVar3;$	+3
+use	arbfpUpdateStateForProgram	uVar3	lastUnsetSlot	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar3\ =\ uVar13;$	+1
+use	arbfpUpdateStateForProgram	uVar3	pendingWordA	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar3\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x38\);$	+1
+use	arbfpUpdateStateForProgram	uVar3	pendingWordA	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x38\)\ =\ uVar3\ \|\ 0x100;$	+1
+use	arbfpUpdateStateForProgram	uVar3	pendingWordA	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x38\)\ =\ uVar3\ \|\ 0x120;$	+1
+local	arbfpUpdateStateForProgram	uVar4	slotByte	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	arbfpUpdateStateForProgram	uVar5	liveMaskHigh	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar5\ =\ \*\(uint\ \*\)\(pcVar8\ \+\ 0xc\);$	+2
+use	arbfpUpdateStateForProgram	uVar5	liveMaskHigh	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(uVar3\ \&\ 0xff\ \|\ uVar5\)\ >>\ \(uVar12\ \&\ 0x3f\)\ \&\ 1\)\ !=\ 0\)\ goto\ LAB_0008d4f8;$	+1
+use	arbfpUpdateStateForProgram	uVar5	firstUnsetSlot	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar5\ =\ 0xffffffff;$	+1
+use	arbfpUpdateStateForProgram	uVar5	firstUnsetSlot	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar5\ =\ 0xffffffff;$@2	+1
+use	arbfpUpdateStateForProgram	uVar5	firstUnsetSlot	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(\(\(int\)\(uint\)\(byte\)\(\(unsigned\ char\ \*\)0x000011d3\)\[param_1\]\ >>\ \(uVar6\ \&\ 0x3f\)\ \&\ 1U\)\ ==\ 0\)\ \&\&$	+3
+use	arbfpUpdateStateForProgram	uVar5	firstUnsetSlot	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(undefined1\)uVar5;$	+2
+use	arbfpUpdateStateForProgram	uVar5	firstUnsetSlot	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(int\)uVar12\ <\ \(int\)uVar5\)\ \{$	+1
+use	arbfpUpdateStateForProgram	uVar5	firstUnsetSlot	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar12\ =\ uVar5;$	+1
+use	arbfpUpdateStateForProgram	bVar9	slotCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar9\ =\ \(\(unsigned\ char\ \*\)0x000013b0\)\[param_1\];$	+2
+use	arbfpUpdateStateForProgram	bVar9	slotCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar9\ =\ \(byte\)uVar13;$	+1
+use	arbfpUpdateStateForProgram	bVar9	slotCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\(unsigned\ char\ \*\)0x000011d2\)\[param_1\]\ =\ bVar9;$	+1
+use	arbfpUpdateStateForProgram	bVar9	slotCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar9\ =\ \(byte\)uVar13;$@2	+1
+use	arbfpUpdateStateForProgram	bVar9	slotCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\(unsigned\ char\ \*\)0x000011d1\)\[param_1\]\ =\ bVar9;$	+1
+use	arbfpUpdateStateForProgram	bVar9	texUnitCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar9\ =\ \(\(unsigned\ char\ \*\)0x000013b6\)\[param_1\];$	+1
+use	arbfpUpdateStateForProgram	bVar9	texUnitCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(ushort\ \*\)\(param_1\ \+\ 0x34\)\ =\ \(short\)\(1\ <<\ \(bVar9\ \&\ 0x3f\)\)\ \-\ 1U\ \|\ \*\(ushort\ \*\)\(param_1\ \+\ 0x34\);$	+1
+use	arbfpUpdateStateForProgram	uVar12	highestLiveSlot	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar12\ =\ 0xffffffff;$	+1
+use	arbfpUpdateStateForProgram	uVar12	highestLiveSlot	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar12\ =\ uVar15\ \-\ 1;$	+2
+use	arbfpUpdateStateForProgram	uVar12	highestLiveSlot	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(uVar3\ \&\ 0xff\ \|\ uVar5\)\ >>\ \(uVar12\ \&\ 0x3f\)\ \&\ 1\)\ !=\ 0\)\ goto\ LAB_0008d4f8;$	+2
+use	arbfpUpdateStateForProgram	uVar12	highestLiveSlot	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar12\ =\ 0xffffffff;$@2	+1
+use	arbfpUpdateStateForProgram	uVar12	highestLiveSlot	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(int\)uVar13\ <=\ \(int\)uVar12\)\ goto\ LAB_0008d98c;$	+1
+use	arbfpUpdateStateForProgram	uVar12	highestLiveSlot	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar12\ =\ uVar13;$	+1
+use	arbfpUpdateStateForProgram	uVar12	highestLiveSlot	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(int\)uVar12\ <\ \(int\)uVar13\)\ \{$	+2
+use	arbfpUpdateStateForProgram	uVar12	highestLiveSlot	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(int\)uVar12\ <\ \(int\)uVar5\)\ \{$	+1
+use	arbfpUpdateStateForProgram	uVar12	highestLiveSlot	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar12\ =\ uVar5;$	+1
+use	arbfpUpdateStateForProgram	uVar12	highestLiveSlot	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x2b\)\ <=\ \(int\)uVar12\)\ \{$	+2
+use	arbfpUpdateStateForProgram	uVar12	pendingWordB	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar12\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x38\);$	+1
+use	arbfpUpdateStateForProgram	uVar12	pendingWordB	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x38\)\ =\ uVar12\ \|\ 0x100;$	+1
+use	arbfpUpdateStateForProgram	uVar12	pendingWordB	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x38\)\ =\ uVar12\ \|\ 0x120;$	+1
+local	arbfpUpdateStateForProgram	uVar13	lastUnsetSlotB	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbfpUpdateStateForProgram	pcVar14	objectCursor	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	arbfpUpdateStateForProgram	uVar15	unitCountLoop	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar15\ =\ \(uint\)\(byte\)\(\(unsigned\ char\ \*\)0x000013b6\)\[param_1\];$	+2
+use	arbfpUpdateStateForProgram	uVar15	unitCountLoop	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar15\ =\ uVar15\ \-\ 1;$	+2
+use	arbfpUpdateStateForProgram	uVar15	maxUnits	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar15\ =\ \(uint\)\(byte\)\(\(unsigned\ char\ \*\)0x000013b1\)\[param_1\];$	+2
+use	arbfpUpdateStateForProgram	uVar15	maxUnits	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar15\ =\ \(uint\)\(byte\)\(\(unsigned\ char\ \*\)0x000013b1\)\[param_1\];$@2	+1
+use	arbfpUpdateStateForProgram	uVar15	maxUnits	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar15\ =\ \(uint\)\(byte\)\(\(unsigned\ char\ \*\)0x000013b1\)\[param_1\];$@3	+1
+use	arbfpUpdateStateForProgram	uVar15	maxUnits	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar15\ =\ \(uint\)\(byte\)\(\(unsigned\ char\ \*\)0x000013b1\)\[param_1\];$@4	+1
+use	arbfpUpdateStateForProgram	uVar15	maxUnits	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar15\ =\ \(uint\)\(byte\)\(\(unsigned\ char\ \*\)0x000013b1\)\[param_1\];$@5	+1
+use	arbfpUpdateStateForProgram	uVar15	maxUnits	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar15\ =\ \(uint\)\(byte\)\(\(unsigned\ char\ \*\)0x000013b1\)\[param_1\];$@6	+1
+use	arbfpUpdateStateForProgram	uVar15	maxUnits	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar15\ =\ \(uint\)\(byte\)\(\(unsigned\ char\ \*\)0x000013b1\)\[param_1\];$@7	+1
+use	arbfpUpdateStateForProgram	uVar15	maxUnits	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\}\ while\ \(iVar10\ <\ \(int\)uVar15\);$	+1
+use	arbfpUpdateStateForProgram	uVar15	ctxWord3c	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar15\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x3c\);$	+1
+use	arbfpUpdateStateForProgram	uVar15	ctxWord3c	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar15\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x3c\);$@2	+1
+use	arbfpUpdateStateForProgram	uVar15	ctxWord3c	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x3c\)\ =\ uVar15\ \|\ 1;$	+1
+use	arbfpUpdateStateForProgram	uVar15	pendingWordC	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar15\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x38\);$	+1
+use	arbfpUpdateStateForProgram	uVar15	pendingWordC	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar15\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x38\);$@2	+1
+use	arbfpUpdateStateForProgram	uVar15	pendingWordC	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x38\)\ =\ uVar15\ \|\ 0x20;$	+1
+use	arbfpUpdateStateForProgram	uVar15	pendingWordC	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar15\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x38\);$@3	+1
+use	arbfpUpdateStateForProgram	uVar15	pendingWordC	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar15\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x38\);$@4	+1
+use	arbfpUpdateStateForProgram	uVar15	pendingWordC	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x38\)\ =\ uVar15\ \|\ 1;$	+1
+use	arbfpUpdateStateForProgram	uVar15	slotCountLoop	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar15\ =\ \(uint\)bVar9;$	+2
+use	arbfpUpdateStateForProgram	uVar15	slotCountLoop	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar15\ =\ uVar15\ \-\ 1;$@2	+1
+use	arbfpUpdateStateForProgram	uVar15	slotCountLoop	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\}\ while\ \(uVar15\ !=\ 0\);$@2	+1
+use	arbfpUpdateStateForProgram	uVar15	clearedFlags	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar15\ =\ uVar11\ \&\ 0xfeffffff;$	+2
+use	arbfpUpdateStateForProgram	uVar15	clearedFlags	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(\(int\)uVar11\ <\ 0\ \|\|\ \(uVar15\ >>\ 0x17\ \&\ 1\)\ !=\ 0\)\ \|\|\ \(uVar15\ >>\ 0x15\ \&\ 1\)\ !=\ 0\)\ \|\|$	+2
+use	arbfpUpdateStateForProgram	uVar15	stateWord48Masked	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar15\ =\ \*\(uint\ \*\)\(iVar17\ \+\ 0x48\)\ \&\ 0xffffffe0;$	+2
+use	arbfpUpdateStateForProgram	uVar15	stateWord48Masked	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(uint\ \*\)\(iVar17\ \+\ 0x48\)\ =\ uVar15\ \|\ \*puVar1;$	+1
+local	arbfpUpdateStateForProgram	puVar16	slotCursor	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbfpUpdateStateForProgram	puVar1	slotFlagPtr	INFERRED	role read off the function body (see notes_gld_q03.md)

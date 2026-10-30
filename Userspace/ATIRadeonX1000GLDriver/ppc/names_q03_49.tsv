@@ -1,0 +1,53 @@
+local	glBindProgramARB_impl	iVar5	programTable	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	glBindProgramARB_impl	uVar1	programCount	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	glBindProgramARB_impl	iVar2	programIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)FUN_000a0290\)\(param_1,iVar5,param_3\);$	+2
+use	glBindProgramARB_impl	iVar2	programIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(param_2\ !=\ \*\(int\ \*\)\(iVar2\ \*\ 0x18\ \+\ param_7\ \+\ 4\)\)\ \{$	+1
+use	glBindProgramARB_impl	iVar2	programIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(iVar2\ ==\ 0\)\ \{$@3	+2
+use	glBindProgramARB_impl	iVar2	programIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*FUN_0008dbd0\(param_1,iVar2,a2,param_4,param_5,param_6,param_7,in_r10\);$	+1
+use	glBindProgramARB_impl	iVar2	newEntries	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ 0xc\)\)\(uVar1\ \*\ 0x18\ \+\ 0xc0\);$	+2
+use	glBindProgramARB_impl	iVar2	newEntries	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(\(\(unsigned\ char\ \*\)0x00001344\)\ \+\ param_1\)\)\(iVar2,\*\(undefined4\ \*\)\(iVar5\ \+\ 8\),a2\);$	+1
+use	glBindProgramARB_impl	iVar2	newEntries	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(int\ \*\)\(iVar5\ \+\ 8\)\ =\ iVar2;$	+1
+use	glBindProgramARB_impl	iVar2	entriesBase	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar5\ \+\ 8\);$	+3
+use	glBindProgramARB_impl	iVar2	entriesBase	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*FUN_0008dbd0\(param_1,\*\(undefined4\ \*\)\(iVar5\ \+\ 4\),a2,param_4,param_5,param_6,iVar2,in_r10\);$	+1
+local	glBindProgramARB_impl	iVar4	entryPtr	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	glBindProgramARB_impl	uVar3	programObject	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	glBindProgramARB_impl	param_4	unusedArg4	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	glBindProgramARB_impl	param_5	unusedArg5	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	glBindProgramARB_impl	param_6	unusedArg6	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	glBindProgramARB_impl	param_7	entries	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsEncodeSource	uVar1	overrideZ	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsEncodeSource	uVar6	overrideY	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsEncodeSource	uVar5	overrideW	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	evsEncodeSource	uVar9	overrideX	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar9\ =\ \*param_6;$	+2
+use	evsEncodeSource	uVar9	overrideX	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(uVar9\ \&\ 4\)\ !=\ 0\)\ \{$	+1
+use	evsEncodeSource	uVar9	overrideX	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(uVar9\ \&\ 8\)\ !=\ 0\)\ \{$	+1
+use	evsEncodeSource	uVar9	symbolWord	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar9\ =\ \*\(uint\ \*\)\(iVar4\ \+\ 8\);$	+1
+use	evsEncodeSource	uVar9	symbolWord	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\(uVar9\ \&\ 7\)\ <<\ 0xc\ \|$	+2
+use	evsEncodeSource	uVar9	symbolWord	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar9\ =\ \*\(uint\ \*\)\(iVar4\ \+\ 8\);$@2	+1
+use	evsEncodeSource	uVar9	symbolWord	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar9\ =\ \*\(uint\ \*\)\(iVar4\ \+\ 8\);$@3	+1
+use	evsEncodeSource	uVar9	symbolWord	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\(uVar9\ \&\ 7\)\ <<\ 0xc\ \|$@2	+2
+use	evsEncodeSource	uVar9	tokenIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar9\ =\ \*param_2;$	+2
+use	evsEncodeSource	uVar9	tokenIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar9\ =\ \*param_2;$@2	+1
+use	evsEncodeSource	uVar9	tokenIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(uint\ \*\)\(uVar9\ \*\ 4\ \+\ param_2\[2\]\)\ =\ uVar2;$	+1
+use	evsEncodeSource	uVar9	tokenIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar9\ =\ \*param_2;$@3	+2
+use	evsEncodeSource	uVar9	tokenIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar9\ =\ \*param_2;$@4	+1
+use	evsEncodeSource	uVar9	tokenIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(uint\ \*\)\(uVar9\ \*\ 4\ \+\ param_2\[2\]\)\ =\ uVar2\ \|\ 0x800000;$	+1
+use	evsEncodeSource	uVar9	tokenIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar9\ =\ \*param_2;$@5	+2
+use	evsEncodeSource	uVar9	tokenIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar9\ =\ \*param_2;$@6	+1
+use	evsEncodeSource	uVar9	tokenIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(uint\ \*\)\(uVar9\ \*\ 4\ \+\ param_2\[2\]\)\ =\ uVar2\ \|\ 0x400000;$	+1
+use	evsEncodeSource	uVar9	tokenIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar9\ =\ \*param_2;$@7	+2
+use	evsEncodeSource	uVar9	tokenIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar9\ =\ \*param_2;$@8	+1
+use	evsEncodeSource	uVar9	tokenIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(uint\ \*\)\(uVar9\ \*\ 4\ \+\ param_2\[2\]\)\ =\ uVar2\ \|\ 0xc00000;$	+1
+use	evsEncodeSource	uVar9	newBuffer	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar9\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ 0xc\)\)\(param_2\[1\]\ \*\ 4\ \+\ 0x200\);$	+1
+use	evsEncodeSource	uVar9	newBuffer	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*_memcpy\(uVar9,param_2\[2\],\*param_2\ <<\ 2\);$	+1
+use	evsEncodeSource	uVar9	newBuffer	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*param_2\[2\]\ =\ uVar9;$	+1
+use	evsEncodeSource	uVar9	newBuffer	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar9\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ 0xc\)\)\(param_2\[1\]\ \*\ 4\ \+\ 0x200\);$@2	+1
+use	evsEncodeSource	uVar9	newBuffer	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*_memcpy\(uVar9,param_2\[2\],\*param_2\ <<\ 2\);$@2	+1
+use	evsEncodeSource	uVar9	newBuffer	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*param_2\[2\]\ =\ uVar9;$@2	+1
+use	evsEncodeSource	uVar9	newBuffer	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar9\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ 0xc\)\)\(param_2\[1\]\ \*\ 4\ \+\ 0x200\);$@3	+1
+use	evsEncodeSource	uVar9	newBuffer	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*_memcpy\(uVar9,param_2\[2\],\*param_2\ <<\ 2\);$@3	+1
+use	evsEncodeSource	uVar9	newBuffer	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*param_2\[2\]\ =\ uVar9;$@3	+1
+use	evsEncodeSource	uVar9	newBuffer	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar9\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ 0xc\)\)\(param_2\[1\]\ \*\ 4\ \+\ 0x200\);$@4	+1
+use	evsEncodeSource	uVar9	newBuffer	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*_memcpy\(uVar9,param_2\[2\],\*param_2\ <<\ 2\);$@4	+1
+use	evsEncodeSource	uVar9	newBuffer	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*param_2\[2\]\ =\ uVar9;$@4	+1
+local	evsEncodeSource	puVar10	finalSwizzle	INFERRED	role read off the function body (see notes_gld_q03.md)

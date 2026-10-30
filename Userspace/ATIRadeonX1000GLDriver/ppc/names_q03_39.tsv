@@ -1,0 +1,36 @@
+local	FUN_00077860	param_1	alloc	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_00077860	param_2	records	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_00077860	param_3	liveIndex	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_00077860	param_4	modeFlag	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	FUN_00077860	iVar3	recordOffset	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar3\ =\ \*\(int\ \*\)\(0x00024870\ \+\ param_3\ \*\ 4\ \+\ param_1\)\ \*\ 0x10;$	+2
+use	FUN_00077860	iVar3	recordOffset	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*switch\(\*\(uint\ \*\)\(param_2\ \+\ iVar3\)\ >>\ 8\ \&\ 0xf\)\ \{$	+1
+use	FUN_00077860	iVar3	recordOffset	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \*\(uint\ \*\)\(param_2\ \+\ iVar3\);$	+1
+use	FUN_00077860	iVar3	flagResult	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar3\ =\ \(\(int\ \(\*\)\(\)\)FUN_000777b0\)\(puVar8,param_4\);$	+2
+use	FUN_00077860	iVar3	flagResult	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar3\ =\ \(\(int\ \(\*\)\(\)\)FUN_000777b0\)\(puVar8,param_4\);$@2	+2
+local	FUN_00077860	puVar8	recordPtr	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_00077860	puVar9	usageMaskPtr	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	FUN_00077860	uVar4	recordWord	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \*\(uint\ \*\)\(param_2\ \+\ iVar3\);$	+2
+use	FUN_00077860	uVar4	recordWord	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar9\ =\ \(uint\ \*\)\(param_1\ \+\ 0x30ba0\ \+\ \(uVar4\ >>\ 0xb\ \&\ 0x1fc\)\);$	+1
+use	FUN_00077860	uVar4	recordWord	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar9\ =\ \(uint\ \*\)\(param_1\ \+\ 0x30c20\ \+\ \(uVar4\ >>\ 0xb\ \&\ 0x1fc\)\);$	+1
+use	FUN_00077860	uVar4	recordWord	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar9\ =\ \(uint\ \*\)\(param_1\ \+\ 0x31450\ \+\ \(uVar4\ >>\ 0xb\ \&\ 0x1fc\)\);$	+1
+use	FUN_00077860	uVar4	writeMask	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\(int\ \(\*\)\(\)\)FUN_00077850\)\(puVar8\);$	+1
+use	FUN_00077860	uVar4	writeMask	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*puVar9\ =\ uVar4\ \|\ uVar2;$	+2
+use	FUN_00077860	uVar4	recordIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \*\(uint\ \*\)\(0x00024870\ \+\ param_3\ \*\ 4\ \+\ param_1\);$	+2
+use	FUN_00077860	uVar4	recordIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\*\(uint\ \*\)\(uVar4\ \*\ 4\ \+\ param_1\ \+\ 0x6450\)\ \&\ 1\ <<\ \(uVar2\ \&\ 0x3f\)\)\ !=\ 0\)\ \{$	+1
+use	FUN_00077860	uVar4	recordIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(iVar3\ !=\ 0\)\ \&\&\ \(puVar9\ =\ \*\(uint\ \*\*\)\(uVar4\ \*\ 4\ \+\ param_1\ \+\ 0xe450\),\ puVar9\ !=\ \(uint\ \*\)0x0\)\)\ \{$	+1
+use	FUN_00077860	uVar4	recordIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(\(uVar2\ \&\ uVar5\)\ !=\ 0\)\ \&\&\ \(uVar10\ <\ uVar4\)\)\ \&\&$	+2
+use	FUN_00077860	uVar2	fileBit	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar2\ =\ uVar4\ >>\ 8\ \&\ 0xf;$	+4
+use	FUN_00077860	uVar2	fileBit	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(uVar2\ \&\ 2\)\ !=\ 0\)\ \{$	+1
+use	FUN_00077860	uVar2	fileBit	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(uVar2\ \&\ 0xc\)\ !=\ 0\)\ \{$	+1
+use	FUN_00077860	uVar2	oldUsage	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar2\ =\ \*puVar9;$	+3
+use	FUN_00077860	uVar2	laneIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar2\ =\ 0;$	+1
+use	FUN_00077860	uVar2	laneIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\*\(uint\ \*\)\(uVar4\ \*\ 4\ \+\ param_1\ \+\ 0x6450\)\ \&\ 1\ <<\ \(uVar2\ \&\ 0x3f\)\)\ !=\ 0\)\ \{$	+1
+use	FUN_00077860	uVar2	laneIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar1\ =\ uVar2\ !=\ 2;$	+1
+use	FUN_00077860	uVar2	laneIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar2\ =\ uVar2\ \+\ 1;$	+1
+use	FUN_00077860	uVar2	recordWriteMask	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar2\ =\ \(\(int\ \(\*\)\(\)\)FUN_00077850\)\(puVar8\);$	+1
+use	FUN_00077860	uVar2	recordWriteMask	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(\(uVar2\ \&\ uVar5\)\ !=\ 0\)\ \&\&\ \(uVar10\ <\ uVar4\)\)\ \&\&$	+2
+local	FUN_00077860	uVar5	otherWriteMask	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_00077860	uVar10	otherIndex	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_00077860	piVar7	listHeadCursor	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_00077860	piVar6	listNode	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_00077860	bVar1	moreLanes	INFERRED	role read off the function body (see notes_gld_q03.md)
