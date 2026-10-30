@@ -7668,7 +7668,7 @@ int FUN_000b4400(glContext, compileOutput, compileRecord, ilSource, glContextWor
   *puVar5 = 0;
   puVar5[2] = 0;
   compileRecord[2] = (int)(puVar5 + 0x12);
-  iVar8 = FUN_000879f0(glContext,compileOutput,compileRecord,compileRecord[1],puVar5 + 0x12,local_38,0);
+  iVar8 = arbfpInitUnitState(glContext,compileOutput,compileRecord,compileRecord[1],puVar5 + 0x12,local_38,0);
   iVar10 = 0;
   compileRecord[2] = iVar8;
   *(undefined1 *)(compileOutput + 0x7c8) = 1;

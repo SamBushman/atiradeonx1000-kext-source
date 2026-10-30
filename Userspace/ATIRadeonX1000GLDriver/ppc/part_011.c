@@ -1,7 +1,7 @@
 #include "decls.h"
 
-/* FUN_00076c60 @ 0x76c60 (480 bytes) */
-int FUN_00076c60(ctx)
+/* vpStateSelectForDraw @ 0x76c60 (480 bytes) */
+int vpStateSelectForDraw(ctx)
   int ctx;
 {
   bool noState;
@@ -23,7 +23,7 @@ int FUN_00076c60(ctx)
   slotIndex = *(int *)(((unsigned char *)0x0000118c) + ctx);
   slotEntry = *(int **)(slotIndex * 4 + *shader);
   iVar5 = *slotEntry;
-  stateKey = FUN_00076ac0(ctx,iVar5);
+  stateKey = vpStateComputeKey(ctx,iVar5);
   if (((*(char *)(shader[1] + slotIndex) == '\0') && (stateKey == *(int *)(iVar5 + 0x38))) &&
      (*(int *)(iVar5 + 4) == shader[0x15])) {
     if ((*(byte *)(ctx + 0x2d) & 4) == 0) {
@@ -2148,8 +2148,8 @@ int recordSourcesAreDistinctTemps(param_1, param_2, param_3, param_4, param_5, p
   return 0;
 }
 
-/* FUN_00079e70 @ 0x79e70 (488 bytes) */
-int FUN_00079e70(alloc, param_2)
+/* recordFindScheduleConflict @ 0x79e70 (488 bytes) */
+int recordFindScheduleConflict(alloc, param_2)
   int alloc;
   int param_2;
 {
@@ -2291,8 +2291,8 @@ int recordAllocFree(param_1)
   return;
 }
 
-/* FUN_0007a1a0 @ 0x7a1a0 (756 bytes) */
-int FUN_0007a1a0(alloc, recordIndex, swizzle)
+/* recordRemapComponents @ 0x7a1a0 (756 bytes) */
+int recordRemapComponents(alloc, recordIndex, swizzle)
   int alloc;
   int recordIndex;
   uint swizzle;
@@ -2412,7 +2412,7 @@ int FUN_0007a1a0(alloc, recordIndex, swizzle)
     }
     for (listHeadCursor = *(undefined4 **)(recordSlot + alloc + 0xc450); listHeadCursor != (undefined4 *)0x0;
         listHeadCursor = (undefined4 *)listHeadCursor[4]) {
-      ((int (*)())FUN_0007a1a0)(alloc,*listHeadCursor,swizzle);
+      ((int (*)())recordRemapComponents)(alloc,*listHeadCursor,swizzle);
     }
   }
   return;
@@ -3390,7 +3390,7 @@ LAB_0007b894:
       if (iVar27 == 0) {
         iVar27 = ((int (*)())recordDestFileIs3Or1)(recordPtr,configBit6);
         if (iVar27 != 0) {
-          ((int (*)())FUN_0007a1a0)(alloc,recordCount,pickedRegister);
+          ((int (*)())recordRemapComponents)(alloc,recordCount,pickedRegister);
           configPtrB = *(uint **)(alloc + 0x34);
         }
       }
@@ -3666,7 +3666,7 @@ LAB_0007bc50:
       }
     }
     if ((*configPtr & 0x10) != 0) {
-      statusAndValue = ((int (*)())FUN_00079e70)(alloc,0);
+      statusAndValue = ((int (*)())recordFindScheduleConflict)(alloc,0);
       recordCount = (int)((ulonglong)statusAndValue >> 0x20);
       uVar26 = (undefined4)statusAndValue;
       if (recordCount != 0) {
@@ -3693,7 +3693,7 @@ LAB_0007bc50:
       recordCursorB = recordCursorB + 0x10;
     } while (liveCountSnapshot != opcodeRewriteIndex);
   }
-  if (((*configPtr & 0x20) != 0) && (recordCount = ((int (*)())FUN_00079e70)(alloc,1), recordCount != 0)) {
+  if (((*configPtr & 0x20) != 0) && (recordCount = ((int (*)())recordFindScheduleConflict)(alloc,1), recordCount != 0)) {
     return recordCount;
   }
   config = *(int *)(alloc + 0x34);
@@ -9210,7 +9210,7 @@ int interpolatorMapInit(ctx, builder, param_3, param_4)
  * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
  * large PPC links) does not silently reconcile this the way stock ld did. */
 asm(".globl FUN_00076c60");
-asm(".set FUN_00076c60, _FUN_00076c60");
+asm(".set FUN_00076c60, _vpStateSelectForDraw");
 asm(".globl FUN_00076fe0");
 asm(".set FUN_00076fe0, _ctxTempListCreate");
 asm(".globl FUN_00077030");

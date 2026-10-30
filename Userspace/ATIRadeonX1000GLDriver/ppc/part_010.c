@@ -5747,8 +5747,8 @@ int FUN_000768e0(ctx, vpCache)
   return;
 }
 
-/* FUN_00076ac0 @ 0x76ac0 (188 bytes) */
-int FUN_00076ac0(param_1, param_2)
+/* vpStateComputeKey @ 0x76ac0 (188 bytes) */
+int vpStateComputeKey(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -5792,7 +5792,7 @@ int vpStateCacheInsert(ctx, shader)
   
   stateTable = *(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
   state = *stateTable;
-  stateKey = ((int (*)())FUN_00076ac0)(ctx,state);
+  stateKey = ((int (*)())vpStateComputeKey)(ctx,state);
   *(uint *)(state + 0x38) = stateKey;
   *(int *)(state + 0x138) = stateTable[(stateKey & 0x1f) + 1];
   stateTable[(stateKey & 0x1f) + 1] = state;

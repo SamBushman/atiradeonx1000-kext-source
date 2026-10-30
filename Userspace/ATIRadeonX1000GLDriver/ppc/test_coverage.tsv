@@ -655,11 +655,11 @@
 0x76560	evsEmitIndexOrMove	524	no	indirect call (driver context / vtable / callback)
 0x76770	vpStateUpdateFogConstants	352	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x768e0	FUN_000768e0	384	no	indirect call (driver context / vtable / callback)
-0x76ac0	FUN_00076ac0	188	yes	
+0x76ac0	vpStateComputeKey	188	yes	
 0x76b80	vpStateCacheInsert	116	yes	
 0x76c00	noop_76c00	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x76c10	vpStateCacheLookup	72	yes	
-0x76c60	FUN_00076c60	480	no	indirect call (driver context / vtable / callback)
+0x76c60	vpStateSelectForDraw	480	no	indirect call (driver context / vtable / callback)
 0x76e60	noop_76e60	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x76e70	vpStateFree	356	no	indirect call (driver context / vtable / callback)
 0x76fe0	ctxTempListCreate	76	no	indirect call (driver context / vtable / callback)
@@ -704,11 +704,11 @@
 0x79b00	recordAddTransitiveDependencies	200	yes	
 0x79bd0	recordLinkSourceToDefinition	532	yes	
 0x79e10	recordSourcesAreDistinctTemps	88	yes	
-0x79e70	FUN_00079e70	488	yes	
+0x79e70	recordFindScheduleConflict	488	yes	
 0x7a060	chunkArenaResetCursor	16	yes	
 0x7a070	chunkArenaFree	156	yes	
 0x7a110	recordAllocFree	100	yes	
-0x7a1a0	FUN_0007a1a0	756	yes	
+0x7a1a0	recordRemapComponents	756	yes	
 0x7a4a0	recordPlanDestination	1544	yes	
 0x7aae0	recordPickNextToEmit	1460	no	indirect call (driver context / vtable / callback)
 0x7b0d0	recordProgramAllocateAndEmit	5660	yes	
@@ -756,13 +756,13 @@
 0x87800	arbfpUpdateConstantsFp24	344	yes	
 0x87960	arbfpInitResourceLimits	120	yes	
 0x879e0	noop_879e0	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x879f0	FUN_000879f0	732	yes	
+0x879f0	arbfpInitUnitState	732	yes	
 0x87cd0	arbfpUnbindWorkAreaChecked	188	yes	
 0x87da0	arbfpUnbindWorkArea	172	yes	
 0x87e60	FUN_00087e60	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x87e70	FUN_00087e70	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x87e80	arbfpCompileFragmentProgram	764	yes	
-0x88190	FUN_00088190	740	no	indirect call (driver context / vtable / callback)
+0x88190	arbfpBindFragmentProgram	740	no	indirect call (driver context / vtable / callback)
 0x88480	arbfpLookupKeyword	268	yes	
 0x885b0	arbLexNumber	860	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x88920	arbNextToken	892	yes	

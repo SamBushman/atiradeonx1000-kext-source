@@ -942,7 +942,7 @@ PTR_FUN_001e8aac	0x1e8aac	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char 
 PTR_FUN_001e8ab0	0x1e8ab0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8ab0 asm("PTR_FUN_001e8ab0");	pointer -> FUN_0002be00	data.s
 PTR_FUN_001e8ab4	0x1e8ab4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8ab4 asm("PTR_FUN_001e8ab4");	pointer -> arbEmitIlMin	data.s
 PTR_FUN_001e8ab8	0x1e8ab8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8ab8 asm("PTR_FUN_001e8ab8");	pointer -> arbEmitIlExn	data.s
-PTR_FUN_001e8abc	0x1e8abc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8abc asm("PTR_FUN_001e8abc");	pointer -> FUN_00088190	data.s
+PTR_FUN_001e8abc	0x1e8abc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8abc asm("PTR_FUN_001e8abc");	pointer -> arbfpBindFragmentProgram	data.s
 PTR_FUN_001e8ac0	0x1e8ac0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8ac0 asm("PTR_FUN_001e8ac0");	pointer -> arbEmitIlAdd	data.s
 PTR_FUN_001e8ac4	0x1e8ac4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8ac4 asm("PTR_FUN_001e8ac4");	pointer -> FUN_0004dbe0	data.s
 PTR_FUN_001e8ac8	0x1e8ac8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8ac8 asm("PTR_FUN_001e8ac8");	pointer -> noop_4c540	data.s
@@ -975,7 +975,7 @@ PTR_FUN_001e8b30	0x1e8b30	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char 
 PTR_FUN_001e8b34	0x1e8b34	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b34 asm("PTR_FUN_001e8b34");	pointer -> arbEmitIlEnd	data.s
 PTR_FUN_001e8b38	0x1e8b38	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b38 asm("PTR_FUN_001e8b38");	pointer -> FUN_000b5c00	data.s
 PTR_FUN_001e8b3c	0x1e8b3c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b3c asm("PTR_FUN_001e8b3c");	pointer -> extvsValidateProgramState	data.s
-PTR_FUN_001e8b40	0x1e8b40	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b40 asm("PTR_FUN_001e8b40");	pointer -> FUN_00076c60	data.s
+PTR_FUN_001e8b40	0x1e8b40	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b40 asm("PTR_FUN_001e8b40");	pointer -> vpStateSelectForDraw	data.s
 PTR_DAT_001e8b48	0x1e8b48	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e8b48 asm("PTR_DAT_001e8b48");	pointer -> LD_1f1008	data.s
 PTR_DAT_001e8b4c	0x1e8b4c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e8b4c asm("PTR_DAT_001e8b4c");	pointer -> LD_1e9fc0	data.s
 PTR_DAT_001e8b50	0x1e8b50	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e8b50 asm("PTR_DAT_001e8b50");	pointer -> LD_1f0f60	data.s

@@ -3762,8 +3762,8 @@ int noop_879e0()
   return;
 }
 
-/* FUN_000879f0 @ 0x879f0 (732 bytes) */
-int FUN_000879f0(ctx, param_2, compileInfo, hwState, unitState, unitEnabled, hasFogOrSecondary)
+/* arbfpInitUnitState @ 0x879f0 (732 bytes) */
+int arbfpInitUnitState(ctx, param_2, compileInfo, hwState, unitState, unitEnabled, hasFogOrSecondary)
   int ctx;
   undefined4 param_2;
   int compileInfo;
@@ -4109,8 +4109,8 @@ LAB_00088008:
   return 0xffffffff;
 }
 
-/* FUN_00088190 @ 0x88190 (740 bytes) */
-int FUN_00088190(ctx, fpState)
+/* arbfpBindFragmentProgram @ 0x88190 (740 bytes) */
+int arbfpBindFragmentProgram(ctx, fpState)
   int ctx;
   char *fpState;
 {
@@ -5075,4 +5075,4 @@ asm(".set FUN_00087e60, _FUN_00087e60");
 asm(".globl FUN_00087e80");
 asm(".set FUN_00087e80, _arbfpCompileFragmentProgram");
 asm(".globl FUN_00088190");
-asm(".set FUN_00088190, _FUN_00088190");
+asm(".set FUN_00088190, _arbfpBindFragmentProgram");
