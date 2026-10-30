@@ -2371,42 +2371,43 @@ int R520MachineAssembler__vslot29_patchBranchTarget(this)
 }
 
 /* R520MachineAssembler__vslot26_assembleThenAppendRecord @ 0x1a11f0 (328 bytes) */
-int R520MachineAssembler__vslot26_assembleThenAppendRecord(this, node, block, compiler, param_5, param_6, param_7)
+int R520MachineAssembler__vslot26_assembleThenAppendRecord(this, node, block, compiler, unusedArg5, unusedArg6, unusedArg7)
   int *this;
   int node;
   undefined4 block;
   int compiler;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
 {
+  undefined4 recordId;
   int inst;
   undefined4 sourceDef;
-  bool bVar1;
-  int iVar2;
+  bool flagPrevRecord;
+  int branchKind;
   int iVar3;
-  undefined4 uVar4;
+  undefined4 registerIndex;
   undefined4 *elementRef;
   int a3;
   uint vectorFilledCount;
-  undefined4 uVar7;
+  undefined4 program;
   uint *vector;
   
   a3 = compiler;
-  inst = Block__getBranchInst(node,node,block,compiler,param_5,param_6,param_7);
-  uVar7 = *(undefined4 *)(compiler + COMP_currentProgram);
-  iVar2 = *(int *)(inst + 300);
+  inst = Block__getBranchInst(node,node,block,compiler,unusedArg5,unusedArg6,unusedArg7);
+  program = *(undefined4 *)(compiler + COMP_currentProgram);
+  branchKind = *(int *)(inst + 300);
   sourceDef = IRInst__getOperandSource(inst,1);
-  uVar4 = thunk_FUN_00134de8(uVar7,sourceDef);
+  registerIndex = thunk_FUN_00134de8(program,sourceDef);
   iVar3 = this[0x18];
   (**(code **)(*this + 0x34))
-            (this,block,*(undefined4 *)(node + 0xdc),a3,param_5,param_6,
+            (this,block,*(undefined4 *)(node + 0xdc),a3,unusedArg5,unusedArg6,
              *(code **)(*this + 0x34));
-  if ((*(int *)(node + 0xdc) == 0) || (bVar1 = true, iVar3 != this[0x18])) {
-    bVar1 = false;
+  if ((*(int *)(node + 0xdc) == 0) || (flagPrevRecord = true, iVar3 != this[0x18])) {
+    flagPrevRecord = false;
   }
-  uVar4 = (**(code **)(*this + 0x98))(this,iVar2 != 1,uVar4,0);
-  if (bVar1) {
+  recordId = (**(code **)(*this + 0x98))(this,branchKind != 1,registerIndex,0);
+  if (flagPrevRecord) {
     *(undefined1 *)(this[0x18] * 0x48 + this[0x2a] + -0x44) = 1;
   }
   vector = *(uint **)(this[4] + 0x24);
@@ -2419,7 +2420,7 @@ int R520MachineAssembler__vslot26_assembleThenAppendRecord(this, node, block, co
   else {
     elementRef = (undefined4 *)Vector__elementRefGrow(vector,vectorFilledCount);
   }
-  *elementRef = uVar4;
+  *elementRef = recordId;
   return;
 }
 

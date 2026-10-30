@@ -1,0 +1,18 @@
+use	FUN_00177cd0	uVar3	destSelectWord	INFERRED	select word from PTR_DAT_001e8b64 for the lane, stored at new inst +0x9c	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(PTR_DAT_001e8b64\ \+\ param_3\ \*\ 4\);$	+1
+use	FUN_00177cd0	uVar3	destSelectWord	INFERRED	select word from PTR_DAT_001e8b64 for the lane, stored at new inst +0x9c	^\s*\*\(undefined4\ \*\)\(iVar1\ \+\ 0x9c\)\ =\ uVar3;$	+1
+use	FUN_00177cd0	uVar3	srcSelectWord	INFERRED	select word from the PTR_DAT_001e8b8c table indexed by the replacement's swizzle index	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(PTR_DAT_001e8b8c\ \+\ \*\(int\ \*\)\(param_2\ \+\ 0x10\)\ \*\ 4\);$	+1
+use	FUN_00177cd0	uVar3	srcSelectWord	INFERRED	select word from the PTR_DAT_001e8b8c table indexed by the replacement's swizzle index	^\s*\*\(undefined4\ \*\)\(iVar2\ \+\ 0x10\)\ =\ uVar3;$	+1
+use	FUN_00177cd0	iVar2	inst	INFERRED	current instruction ctx+0xb0	^\s*iVar2\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xb0\);$	+4
+use	FUN_00177cd0	iVar2	inst	INFERRED	current instruction ctx+0xb0	^\s*FUN_000e7738\(uVar4,iVar2,iVar1\);$	+1
+use	FUN_00177b4c	uVar3	destSelectWord	INFERRED	select word from PTR_DAT_001e8b64 for the lane, stored at new inst +0x9c	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(PTR_DAT_001e8b64\ \+\ param_3\ \*\ 4\);$	+1
+use	FUN_00177b4c	uVar3	destSelectWord	INFERRED	select word from PTR_DAT_001e8b64 for the lane, stored at new inst +0x9c	^\s*\*\(undefined4\ \*\)\(iVar1\ \+\ 0x9c\)\ =\ uVar3;$	+1
+use	FUN_00177b4c	uVar3	srcSelectWord	INFERRED	select word from the PTR_DAT_001e8b8c table for the operand's lane byte	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(PTR_DAT_001e8b8c\ \+\ \(uint\)\*\(byte\ \*\)\(param_3\ \+\ iVar2\ \+\ 0x10\)\ \*\ 4\);$	+1
+use	FUN_00177b4c	uVar3	srcSelectWord	INFERRED	select word from the PTR_DAT_001e8b8c table for the operand's lane byte	^\s*\*\(undefined4\ \*\)\(iVar2\ \+\ 0x10\)\ =\ uVar3;$	+1
+use	FUN_00177b4c	iVar2	inst	INFERRED	current instruction ctx+0xb0	^\s*iVar2\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xb0\);$	+4
+use	FUN_00177b4c	iVar2	inst	INFERRED	current instruction ctx+0xb0	^\s*FUN_000e7738\(uVar4,iVar2,iVar1\);$	+1
+local	FUN_00177cd0	param_2	replacement	INFERRED	replacement record: +0xc operand ref, +0x10 swizzle index, +0x18 negate flag
+local	FUN_00177cd0	param_3	lane	INFERRED	lane selecting the dest select word; flagged at inst +0x9c
+func	FUN_00177cd0	ValueKey__insertMovOfReplacementLane	INFERRED	creates a mov (0x31) of the replacement record for one lane, copying saturate and scale, and inserts it after the instruction
+local	FUN_00177b4c	param_3	lane	INFERRED	lane whose select byte picks the table entries; flagged at inst +0x9c
+local	FUN_00177b4c	iVar5	operandOffset	INFERRED	operandIndex * 0x18 + 0x80
+func	FUN_00177b4c	ValueKey__insertMovOfOperandLane_177b4c	INFERRED	creates a mov (0x31) of one operand for one lane keeping the instruction's saturate and scale (sibling of ValueKey__insertMovOfOperandLane, which takes the scale as an argument)

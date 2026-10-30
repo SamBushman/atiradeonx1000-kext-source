@@ -593,179 +593,185 @@ int ValueKey__cancelNegatedSourcePair(ctx)
   return uVar2;
 }
 
-/* FUN_00177b4c @ 0x177b4c (388 bytes) */
-int FUN_00177b4c(ctx, operandIndex, param_3)
+/* ValueKey__insertMovOfOperandLane_177b4c @ 0x177b4c (388 bytes) */
+int ValueKey__insertMovOfOperandLane_177b4c(ctx, operandIndex, lane)
   int ctx;
   int operandIndex;
-  int param_3;
+  int lane;
 {
+  undefined4 srcSelectWord;
   int operandRecord;
   int callResult;
-  int iVar2;
-  undefined4 uVar3;
+  int inst;
+  undefined4 destSelectWord;
   undefined4 block;
-  int iVar5;
+  int operandOffset;
   
   block = *(undefined4 *)(*(int *)(ctx + 0xb0) + 0x158);
   callResult = IRInst__create(0x31,*(undefined4 *)(ctx + 0x238));
   IRInst__setOperandRef(callResult,0,*(undefined4 *)(*(int *)(ctx + 0xb0) + 0x8c));
-  uVar3 = *(undefined4 *)(PTR_DAT_001e8b64 + param_3 * 4);
+  destSelectWord = *(undefined4 *)(PTR_DAT_001e8b64 + lane * 4);
   *(undefined4 *)(callResult + 0x94) = *(undefined4 *)(callResult + 0x14c);
-  *(undefined4 *)(callResult + 0x9c) = uVar3;
+  *(undefined4 *)(callResult + 0x9c) = destSelectWord;
   *(undefined4 *)(callResult + 0x98) = 0;
-  iVar5 = operandIndex * 0x18 + 0x80;
+  operandOffset = operandIndex * 0x18 + 0x80;
   IRInst__setOperandRef(callResult,1,*(undefined4 *)(operandIndex * 0x18 + *(int *)(ctx + 0xb0) + 0x8c));
   operandRecord = IRInst__getOperandRecord(*(undefined4 *)(ctx + 0xb0),operandIndex);
-  uVar3 = *(undefined4 *)(PTR_DAT_001e8b8c + (uint)*(byte *)(param_3 + operandRecord + 0x10) * 4);
+  srcSelectWord = *(undefined4 *)(PTR_DAT_001e8b8c + (uint)*(byte *)(lane + operandRecord + 0x10) * 4);
   operandRecord = IRInst__getOperandRecord(callResult,1);
-  *(undefined4 *)(operandRecord + 0x10) = uVar3;
-  IROperand__setModifierBits(callResult + 0xa4,2,*(uint *)(*(int *)(ctx + 0xb0) + iVar5 + 0x20) >> 1 & 1);
-  IROperand__setModifierBits(callResult + 0xa4,1,*(uint *)(*(int *)(ctx + 0xb0) + iVar5 + 0x20) & 1);
+  *(undefined4 *)(operandRecord + 0x10) = srcSelectWord;
+  IROperand__setModifierBits(callResult + 0xa4,2,*(uint *)(*(int *)(ctx + 0xb0) + operandOffset + 0x20) >> 1 & 1);
+  IROperand__setModifierBits(callResult + 0xa4,1,*(uint *)(*(int *)(ctx + 0xb0) + operandOffset + 0x20) & 1);
   *(undefined4 *)(callResult + 0x120) = *(undefined4 *)(*(int *)(ctx + 0xb0) + 0x120);
   *(undefined4 *)(callResult + 0x124) = *(undefined4 *)(*(int *)(ctx + 0xb0) + 0x124);
   IRInst__appendSource(callResult,*(undefined4 *)(*(int *)(ctx + 0xb0) + 0x8c));
-  *(undefined1 *)(param_3 + *(int *)(ctx + 0xb0) + 0x9c) = 1;
-  iVar2 = *(int *)(ctx + 0xb0);
-  if ((*(uint *)(iVar2 + 0x14) & 0x200) == 0) {
-    IRInst__appendSource(iVar2,*(undefined4 *)(iVar2 + 0x8c));
-    iVar2 = *(int *)(ctx + 0xb0);
+  *(undefined1 *)(lane + *(int *)(ctx + 0xb0) + 0x9c) = 1;
+  inst = *(int *)(ctx + 0xb0);
+  if ((*(uint *)(inst + 0x14) & 0x200) == 0) {
+    IRInst__appendSource(inst,*(undefined4 *)(inst + 0x8c));
+    inst = *(int *)(ctx + 0xb0);
   }
-  Block__insertInstAfter(block,iVar2,callResult);
+  Block__insertInstAfter(block,inst,callResult);
   return callResult;
 }
 
-/* FUN_00177cd0 @ 0x177cd0 (324 bytes) */
-int FUN_00177cd0(ctx, param_2, param_3)
+/* ValueKey__insertMovOfReplacementLane @ 0x177cd0 (324 bytes) */
+int ValueKey__insertMovOfReplacementLane(ctx, replacement, lane)
   int ctx;
-  int param_2;
-  int param_3;
+  int replacement;
+  int lane;
 {
+  undefined4 srcSelectWord;
   int operandRecord;
   int callResult;
-  int iVar2;
-  undefined4 uVar3;
+  int inst;
+  undefined4 destSelectWord;
   undefined4 block;
   
   block = *(undefined4 *)(*(int *)(ctx + 0xb0) + 0x158);
   callResult = IRInst__create(0x31,*(undefined4 *)(ctx + 0x238));
   IRInst__setOperandRef(callResult,0,*(undefined4 *)(*(int *)(ctx + 0xb0) + 0x8c));
-  uVar3 = *(undefined4 *)(PTR_DAT_001e8b64 + param_3 * 4);
+  destSelectWord = *(undefined4 *)(PTR_DAT_001e8b64 + lane * 4);
   *(undefined4 *)(callResult + 0x94) = *(undefined4 *)(callResult + 0x14c);
   *(undefined4 *)(callResult + 0x98) = 0;
-  *(undefined4 *)(callResult + 0x9c) = uVar3;
-  IRInst__setOperandRef(callResult,1,*(undefined4 *)(param_2 + 0xc));
-  uVar3 = *(undefined4 *)(PTR_DAT_001e8b8c + *(int *)(param_2 + 0x10) * 4);
+  *(undefined4 *)(callResult + 0x9c) = destSelectWord;
+  IRInst__setOperandRef(callResult,1,*(undefined4 *)(replacement + 0xc));
+  srcSelectWord = *(undefined4 *)(PTR_DAT_001e8b8c + *(int *)(replacement + 0x10) * 4);
   operandRecord = IRInst__getOperandRecord(callResult,1);
-  *(undefined4 *)(operandRecord + 0x10) = uVar3;
-  if (*(int *)(param_2 + 0x18) != 0) {
+  *(undefined4 *)(operandRecord + 0x10) = srcSelectWord;
+  if (*(int *)(replacement + 0x18) != 0) {
     IROperand__setModifierBits(callResult + 0xa4,1,1);
   }
   *(undefined4 *)(callResult + 0x120) = *(undefined4 *)(*(int *)(ctx + 0xb0) + 0x120);
   *(undefined4 *)(callResult + 0x124) = *(undefined4 *)(*(int *)(ctx + 0xb0) + 0x124);
   IRInst__appendSource(callResult,*(undefined4 *)(*(int *)(ctx + 0xb0) + 0x8c));
-  *(undefined1 *)(param_3 + *(int *)(ctx + 0xb0) + 0x9c) = 1;
-  iVar2 = *(int *)(ctx + 0xb0);
-  if ((*(uint *)(iVar2 + 0x14) & 0x200) == 0) {
-    IRInst__appendSource(iVar2,*(undefined4 *)(iVar2 + 0x8c));
-    iVar2 = *(int *)(ctx + 0xb0);
+  *(undefined1 *)(lane + *(int *)(ctx + 0xb0) + 0x9c) = 1;
+  inst = *(int *)(ctx + 0xb0);
+  if ((*(uint *)(inst + 0x14) & 0x200) == 0) {
+    IRInst__appendSource(inst,*(undefined4 *)(inst + 0x8c));
+    inst = *(int *)(ctx + 0xb0);
   }
-  Block__insertInstAfter(block,iVar2,callResult);
+  Block__insertInstAfter(block,inst,callResult);
   return callResult;
 }
 
-/* FUN_00177e14 @ 0x177e14 (528 bytes) */
-int FUN_00177e14(ctx, opcode, operandIndex, operandIndex2, param_5)
+/* ValueKey__insertBinaryOfOperandsLane @ 0x177e14 (528 bytes) */
+int ValueKey__insertBinaryOfOperandsLane(ctx, opcode, operandIndex, operandIndex2, lane)
   int ctx;
   undefined4 opcode;
   int operandIndex;
   int operandIndex2;
-  int param_5;
+  int lane;
 {
+  int src2OperandOffset;
+  undefined4 src2SelectWord;
+  undefined4 src1SelectWord;
   int operandRecord;
-  undefined *puVar1;
+  undefined *selectTable;
   int callResult;
-  int iVar3;
-  undefined4 uVar4;
+  int inst;
+  undefined4 destSelectWord;
   undefined4 block;
-  int iVar6;
+  int src1OperandOffset;
   
   block = *(undefined4 *)(*(int *)(ctx + 0xb0) + 0x158);
   callResult = IRInst__create(opcode,*(undefined4 *)(ctx + 0x238));
   IRInst__setOperandRef(callResult,0,*(undefined4 *)(*(int *)(ctx + 0xb0) + 0x8c));
-  uVar4 = *(undefined4 *)(PTR_DAT_001e8b64 + param_5 * 4);
+  destSelectWord = *(undefined4 *)(PTR_DAT_001e8b64 + lane * 4);
   *(undefined4 *)(callResult + 0x94) = *(undefined4 *)(callResult + 0x14c);
-  *(undefined4 *)(callResult + 0x9c) = uVar4;
+  *(undefined4 *)(callResult + 0x9c) = destSelectWord;
   *(undefined4 *)(callResult + 0x98) = 0;
-  iVar6 = operandIndex * 0x18 + 0x80;
+  src1OperandOffset = operandIndex * 0x18 + 0x80;
   IRInst__setOperandRef(callResult,1,*(undefined4 *)(operandIndex * 0x18 + *(int *)(ctx + 0xb0) + 0x8c));
   operandRecord = IRInst__getOperandRecord(*(undefined4 *)(ctx + 0xb0),operandIndex);
-  puVar1 = PTR_DAT_001e8b8c;
-  uVar4 = *(undefined4 *)(PTR_DAT_001e8b8c + (uint)*(byte *)(param_5 + operandRecord + 0x10) * 4);
+  selectTable = PTR_DAT_001e8b8c;
+  src1SelectWord = *(undefined4 *)(PTR_DAT_001e8b8c + (uint)*(byte *)(lane + operandRecord + 0x10) * 4);
   operandRecord = IRInst__getOperandRecord(callResult,1);
-  *(undefined4 *)(operandRecord + 0x10) = uVar4;
-  IROperand__setModifierBits(callResult + 0xa4,2,*(uint *)(*(int *)(ctx + 0xb0) + iVar6 + 0x20) >> 1 & 1);
-  IROperand__setModifierBits(callResult + 0xa4,1,*(uint *)(*(int *)(ctx + 0xb0) + iVar6 + 0x20) & 1);
-  iVar6 = operandIndex2 * 0x18 + 0x80;
+  *(undefined4 *)(operandRecord + 0x10) = src1SelectWord;
+  IROperand__setModifierBits(callResult + 0xa4,2,*(uint *)(*(int *)(ctx + 0xb0) + src1OperandOffset + 0x20) >> 1 & 1);
+  IROperand__setModifierBits(callResult + 0xa4,1,*(uint *)(*(int *)(ctx + 0xb0) + src1OperandOffset + 0x20) & 1);
+  src2OperandOffset = operandIndex2 * 0x18 + 0x80;
   IRInst__setOperandRef(callResult,2,*(undefined4 *)(operandIndex2 * 0x18 + *(int *)(ctx + 0xb0) + 0x8c));
   operandRecord = IRInst__getOperandRecord(*(undefined4 *)(ctx + 0xb0),operandIndex2);
-  uVar4 = *(undefined4 *)(puVar1 + (uint)*(byte *)(param_5 + operandRecord + 0x10) * 4);
+  src2SelectWord = *(undefined4 *)(selectTable + (uint)*(byte *)(lane + operandRecord + 0x10) * 4);
   operandRecord = IRInst__getOperandRecord(callResult,2);
-  *(undefined4 *)(operandRecord + 0x10) = uVar4;
-  IROperand__setModifierBits(callResult + 0xbc,2,*(uint *)(*(int *)(ctx + 0xb0) + iVar6 + 0x20) >> 1 & 1);
-  IROperand__setModifierBits(callResult + 0xbc,1,*(uint *)(*(int *)(ctx + 0xb0) + iVar6 + 0x20) & 1);
+  *(undefined4 *)(operandRecord + 0x10) = src2SelectWord;
+  IROperand__setModifierBits(callResult + 0xbc,2,*(uint *)(*(int *)(ctx + 0xb0) + src2OperandOffset + 0x20) >> 1 & 1);
+  IROperand__setModifierBits(callResult + 0xbc,1,*(uint *)(*(int *)(ctx + 0xb0) + src2OperandOffset + 0x20) & 1);
   *(undefined4 *)(callResult + 0x120) = *(undefined4 *)(*(int *)(ctx + 0xb0) + 0x120);
   *(undefined4 *)(callResult + 0x124) = *(undefined4 *)(*(int *)(ctx + 0xb0) + 0x124);
   IRInst__appendSource(callResult,*(undefined4 *)(*(int *)(ctx + 0xb0) + 0x8c));
-  *(undefined1 *)(param_5 + *(int *)(ctx + 0xb0) + 0x9c) = 1;
-  iVar3 = *(int *)(ctx + 0xb0);
-  if ((*(uint *)(iVar3 + 0x14) & 0x200) == 0) {
-    IRInst__appendSource(iVar3,*(undefined4 *)(iVar3 + 0x8c));
-    iVar3 = *(int *)(ctx + 0xb0);
+  *(undefined1 *)(lane + *(int *)(ctx + 0xb0) + 0x9c) = 1;
+  inst = *(int *)(ctx + 0xb0);
+  if ((*(uint *)(inst + 0x14) & 0x200) == 0) {
+    IRInst__appendSource(inst,*(undefined4 *)(inst + 0x8c));
+    inst = *(int *)(ctx + 0xb0);
   }
-  Block__insertInstAfter(block,iVar3,callResult);
+  Block__insertInstAfter(block,inst,callResult);
   return callResult;
 }
 
-/* FUN_00178024 @ 0x178024 (384 bytes) */
-int FUN_00178024(ctx, operandIndex, param_3, param_4)
+/* ValueKey__insertMovOfOperandLane @ 0x178024 (384 bytes) */
+int ValueKey__insertMovOfOperandLane(ctx, operandIndex, lane, resultScaleCode)
   int ctx;
   int operandIndex;
-  int param_3;
-  undefined4 param_4;
+  int lane;
+  undefined4 resultScaleCode;
 {
+  undefined4 srcSelectWord;
   int operandRecord;
   int callResult;
-  int iVar2;
-  undefined4 uVar3;
+  int inst;
+  undefined4 destSelectWord;
   undefined4 block;
-  int iVar5;
+  int operandOffset;
   
   block = *(undefined4 *)(*(int *)(ctx + 0xb0) + 0x158);
   callResult = IRInst__create(0x31,*(undefined4 *)(ctx + 0x238));
   IRInst__setOperandRef(callResult,0,*(undefined4 *)(*(int *)(ctx + 0xb0) + 0x8c));
-  uVar3 = *(undefined4 *)(PTR_DAT_001e8b64 + param_3 * 4);
+  destSelectWord = *(undefined4 *)(PTR_DAT_001e8b64 + lane * 4);
   *(undefined4 *)(callResult + 0x94) = *(undefined4 *)(callResult + 0x14c);
-  *(undefined4 *)(callResult + 0x9c) = uVar3;
+  *(undefined4 *)(callResult + 0x9c) = destSelectWord;
   *(undefined4 *)(callResult + 0x98) = 0;
-  iVar5 = operandIndex * 0x18 + 0x80;
+  operandOffset = operandIndex * 0x18 + 0x80;
   IRInst__setOperandRef(callResult,1,*(undefined4 *)(operandIndex * 0x18 + *(int *)(ctx + 0xb0) + 0x8c));
   operandRecord = IRInst__getOperandRecord(*(undefined4 *)(ctx + 0xb0),operandIndex);
-  uVar3 = *(undefined4 *)(PTR_DAT_001e8b8c + (uint)*(byte *)(param_3 + operandRecord + 0x10) * 4);
+  srcSelectWord = *(undefined4 *)(PTR_DAT_001e8b8c + (uint)*(byte *)(lane + operandRecord + 0x10) * 4);
   operandRecord = IRInst__getOperandRecord(callResult,1);
-  *(undefined4 *)(operandRecord + 0x10) = uVar3;
-  IROperand__setModifierBits(callResult + 0xa4,2,*(uint *)(*(int *)(ctx + 0xb0) + iVar5 + 0x20) >> 1 & 1);
-  IROperand__setModifierBits(callResult + 0xa4,1,*(uint *)(*(int *)(ctx + 0xb0) + iVar5 + 0x20) & 1);
-  iVar2 = *(int *)(ctx + 0xb0);
-  *(undefined4 *)(callResult + 0x124) = param_4;
-  *(undefined4 *)(callResult + 0x120) = *(undefined4 *)(iVar2 + 0x120);
+  *(undefined4 *)(operandRecord + 0x10) = srcSelectWord;
+  IROperand__setModifierBits(callResult + 0xa4,2,*(uint *)(*(int *)(ctx + 0xb0) + operandOffset + 0x20) >> 1 & 1);
+  IROperand__setModifierBits(callResult + 0xa4,1,*(uint *)(*(int *)(ctx + 0xb0) + operandOffset + 0x20) & 1);
+  inst = *(int *)(ctx + 0xb0);
+  *(undefined4 *)(callResult + 0x124) = resultScaleCode;
+  *(undefined4 *)(callResult + 0x120) = *(undefined4 *)(inst + 0x120);
   IRInst__appendSource(callResult,*(undefined4 *)(*(int *)(ctx + 0xb0) + 0x8c));
-  *(undefined1 *)(param_3 + *(int *)(ctx + 0xb0) + 0x9c) = 1;
-  iVar2 = *(int *)(ctx + 0xb0);
-  if ((*(uint *)(iVar2 + 0x14) & 0x200) == 0) {
-    IRInst__appendSource(iVar2,*(undefined4 *)(iVar2 + 0x8c));
-    iVar2 = *(int *)(ctx + 0xb0);
+  *(undefined1 *)(lane + *(int *)(ctx + 0xb0) + 0x9c) = 1;
+  inst = *(int *)(ctx + 0xb0);
+  if ((*(uint *)(inst + 0x14) & 0x200) == 0) {
+    IRInst__appendSource(inst,*(undefined4 *)(inst + 0x8c));
+    inst = *(int *)(ctx + 0xb0);
   }
-  Block__insertInstAfter(block,iVar2,callResult);
+  Block__insertInstAfter(block,inst,callResult);
   return callResult;
 }
 

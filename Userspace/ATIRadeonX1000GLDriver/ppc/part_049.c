@@ -1398,7 +1398,7 @@ int Inst__movAndShiftUseVector(inst, program)
     isIdentity = SelectWord__isIdentity(*(undefined4 *)(operandRecord3 + 0x10));
     if (isIdentity != 0) goto LAB_00188a5c;
   }
-  canForward = FUN_00184bf0(inst);
+  canForward = ObjectVector__allSatisfyPredicate24(inst);
   if (canForward == 0) {
     return;
   }

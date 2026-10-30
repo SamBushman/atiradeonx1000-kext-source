@@ -5876,46 +5876,46 @@ int compareIntsAscending(param_1, param_2)
   return 0xffffffff;
 }
 
-/* FUN_00184bf0 @ 0x184bf0 (232 bytes) */
-int FUN_00184bf0(param_1)
-  int param_1;
+/* ObjectVector__allSatisfyPredicate24 @ 0x184bf0 (232 bytes) */
+int ObjectVector__allSatisfyPredicate24(owner)
+  int owner;
 {
   uint vectorFilledCount;
   uint vectorFilledCount2;
-  undefined4 *puVar3;
+  undefined4 *elementRef;
   int callResult;
   uint loopIndex;
-  int iVar6;
-  uint uVar7;
+  int elementOffset;
+  uint elementIndex;
   uint *vector;
   
-  vector = *(uint **)(param_1 + 0x10);
+  vector = *(uint **)(owner + 0x10);
   vectorFilledCount = vector[1];
-  uVar7 = vectorFilledCount - 1;
-  if (-1 < (int)uVar7) {
-    iVar6 = uVar7 * 4;
+  elementIndex = vectorFilledCount - 1;
+  if (-1 < (int)elementIndex) {
+    elementOffset = elementIndex * 4;
     loopIndex = 0;
     while( true ) {
-      if (uVar7 < *vector) {
+      if (elementIndex < *vector) {
         vectorFilledCount2 = vector[1];
-        if (vectorFilledCount2 <= uVar7) {
-          _memset(vectorFilledCount2 * 4 + vector[2],0,(uVar7 - vectorFilledCount2) * 4 + 4);
-          vector[1] = uVar7 + 1;
+        if (vectorFilledCount2 <= elementIndex) {
+          _memset(vectorFilledCount2 * 4 + vector[2],0,(elementIndex - vectorFilledCount2) * 4 + 4);
+          vector[1] = elementIndex + 1;
         }
-        puVar3 = (undefined4 *)(iVar6 + vector[2]);
+        elementRef = (undefined4 *)(elementOffset + vector[2]);
       }
       else {
-        puVar3 = (undefined4 *)Vector__elementRefGrow(vector,uVar7);
+        elementRef = (undefined4 *)Vector__elementRefGrow(vector,elementIndex);
       }
-      callResult = (**(code **)(*(int *)*puVar3 + 0x24))((int *)*puVar3);
+      callResult = (**(code **)(*(int *)*elementRef + 0x24))((int *)*elementRef);
       if (callResult == 0) {
         return 0;
       }
       loopIndex = loopIndex + 1;
-      uVar7 = uVar7 - 1;
-      iVar6 = iVar6 + -4;
+      elementIndex = elementIndex - 1;
+      elementOffset = elementOffset + -4;
       if (vectorFilledCount == loopIndex) break;
-      vector = *(uint **)(param_1 + 0x10);
+      vector = *(uint **)(owner + 0x10);
     }
   }
   return 1;

@@ -2836,10 +2836,10 @@
 0x1778e0	272	FUN_001778e0	part_047	converted
 0x1779f0	224	FUN_001779f0	part_047	converted
 0x177ad0	124	ValueKey__cancelNegatedSourcePair	part_047	converted
-0x177b4c	388	FUN_00177b4c	part_047	converted
-0x177cd0	324	FUN_00177cd0	part_047	converted
-0x177e14	528	FUN_00177e14	part_047	converted
-0x178024	384	FUN_00178024	part_047	converted
+0x177b4c	388	ValueKey__insertMovOfOperandLane_177b4c	part_047	converted
+0x177cd0	324	ValueKey__insertMovOfReplacementLane	part_047	converted
+0x177e14	528	ValueKey__insertBinaryOfOperandsLane	part_047	converted
+0x178024	384	ValueKey__insertMovOfOperandLane	part_047	converted
 0x1781a4	404	FUN_001781a4	part_047	converted
 0x178338	656	FUN_00178338	part_047	converted
 0x178648	708	FUN_00178648	part_047	converted
@@ -2933,7 +2933,7 @@
 0x18413c	224	FUN_0018413c	part_048	converted
 0x184ab4	280	pass_minreg_order	part_048	converted
 0x184bcc	36	compareIntsAscending	part_048	converted
-0x184bf0	232	FUN_00184bf0	part_048	converted
+0x184bf0	232	ObjectVector__allSatisfyPredicate24	part_048	converted
 0x184cd8	164	Inst__isMulDotWithinLimits	part_048	converted
 0x184d7c	372	Inst__splitAndMerge	part_048	converted
 0x184ef0	2440	IRInst__foldResultScaleIntoUsers	part_048	converted
