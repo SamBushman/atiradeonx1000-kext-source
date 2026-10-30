@@ -2932,6 +2932,20 @@ int FUN_000f07a8(pass, afterInst, inst)
   undefined4 afterInst;
   int *inst;
 {
+  int composedSelectCopy;
+  int movSourceForwardable;
+  int selectIsIdentityOperand;
+  int sourceCount;
+  int sourceVtable0x7cResult;
+  int constantsEncodable;
+  int sourceIsConstant;
+  int selectIsIdentity;
+  int vtable0x64Result;
+  int pushedUnwrittenSelectB;
+  int consumerForwardable;
+  int moveSourceNeedsClone;
+  int moveSourceForwardable;
+  int vtable0x68Result;
   uint consumerStackCount;
   uint maskStackCount;
   undefined4 *identityCursor;
@@ -2958,52 +2972,52 @@ int FUN_000f07a8(pass, afterInst, inst)
   int operandRecord;
   int operandRecord2;
   int *operandVReg;
-  bool bVar1;
+  bool allSourcesForwardable;
   uint initialCapacity;
   int *hwDescription;
-  int iVar4;
+  int hwBlocksForwarding;
   undefined4 *allocation;
   undefined4 *vectorAlloc;
   undefined4 *consumerStackSlot;
-  int iVar8;
-  int iVar9;
+  int pushedUnwrittenSelect;
+  int consumerVtable0x7cResult;
   int destRegister;
   uint *consumerStack;
   uint *maskStack;
   uint consumerStackCountInit;
   int *maskStackTop;
-  int iVar15;
+  int vtable0x50Result;
   undefined4 moveSourceSelect;
-  int local_88;
-  int local_84;
-  int local_80;
-  undefined4 local_7c;
-  undefined1 auStack_78 [4];
-  undefined4 local_74 [7];
-  int local_58;
-  int local_54;
-  undefined4 local_50;
-  int local_4c [6];
+  int moveSelect;
+  int writtenLanesSelect;
+  int unwrittenLanesSelect;
+  undefined4 consumerDestMask;
+  undefined1 consumerDestMaskView [4];
+  undefined4 unitConstQuad [7];
+  int clearedReadSelect;
+  int composedSelect;
+  undefined4 moveDestMask;
+  int maskedSelect [6];
   
   hwDescription = *(int **)(*(int *)(pass + 8) + 0x30c);
-  iVar4 = (**(code **)(*hwDescription + 0xb8))(hwDescription,afterInst,inst);
-  if ((((iVar4 == 0) && ((inst[5] & 8U) == 0)) &&
-      (iVar4 = (**(code **)(*inst + 0x18))(inst), iVar4 < 2)) &&
-     (iVar4 = (**(code **)(*inst + 0x14))(inst), iVar4 != 0)) {
+  hwBlocksForwarding = (**(code **)(*hwDescription + 0xb8))(hwDescription,afterInst,inst);
+  if ((((hwBlocksForwarding == 0) && ((inst[5] & 8U) == 0)) &&
+      (hwBlocksForwarding = (**(code **)(*inst + 0x18))(inst), hwBlocksForwarding < 2)) &&
+     (hwBlocksForwarding = (**(code **)(*inst + 0x14))(inst), hwBlocksForwarding != 0)) {
     moveSource = (int *)IRInst__getOperandSource(inst,1);
-    iVar4 = (**(code **)(*inst + 0x68))(inst);
-    if (((iVar4 != 0) || (iVar4 = (**(code **)(*inst + 100))(inst), iVar4 != 0)) &&
+    vtable0x68Result = (**(code **)(*inst + 0x68))(inst);
+    if (((vtable0x68Result != 0) || (vtable0x68Result = (**(code **)(*inst + 100))(inst), vtable0x68Result != 0)) &&
        (((inst[0x2e] & 1U) == 0 && ((inst[0x2e] & 2U) == 0)))) {
       operandRecord = IRInst__getOperandRecord(inst,1);
       moveSourceSelect = *(undefined4 *)(operandRecord + 0x10);
       operandRecord = IRInst__getOperandRecord(inst,0);
-      WriteMask__fromSelectWord(&local_50,*(undefined4 *)(operandRecord + 0x10));
-      SelectWord__maskUnused(local_4c,moveSourceSelect,local_50);
-      local_88 = local_4c[0];
-      iVar4 = ((int (*)())IRInst__isForwardable)(moveSource,local_4c[0],*(undefined4 *)(pass + 8));
-      if (iVar4 != 0) {
-        iVar4 = (**(code **)(*moveSource + 0x60))(moveSource);
-        if (iVar4 != 0) {
+      WriteMask__fromSelectWord(&moveDestMask,*(undefined4 *)(operandRecord + 0x10));
+      SelectWord__maskUnused(maskedSelect,moveSourceSelect,moveDestMask);
+      moveSelect = maskedSelect[0];
+      moveSourceForwardable = ((int (*)())IRInst__isForwardable)(moveSource,maskedSelect[0],*(undefined4 *)(pass + 8));
+      if (moveSourceForwardable != 0) {
+        moveSourceNeedsClone = (**(code **)(*moveSource + 0x60))(moveSource);
+        if (moveSourceNeedsClone != 0) {
           moveSource = (int *)FUN_0010cb48(moveSource,*(undefined4 *)(pass + 8));
           IRInst__setOperandSource(inst,1,moveSource,0,*(undefined4 *)(pass + 8));
         }
@@ -3037,7 +3051,7 @@ int FUN_000f07a8(pass, afterInst, inst)
         else {
           consumerStackSlot = (undefined4 *)Vector__elementRefGrow(consumerStack,consumerStackCountInit);
         }
-        pushedSelectWord = local_88;
+        pushedSelectWord = moveSelect;
         *consumerStackSlot = moveSource;
         maskStackCount = vectorAlloc[2];
         if (maskStackCount < *maskStack) {
@@ -3082,7 +3096,7 @@ code_r0x000f1384:
                 }
                 poppedSelectWord = *maskStackTop;
                 Vector__removeAt(maskStack,maskStackCount - 1);
-                local_88 = poppedSelectWord;
+                moveSelect = poppedSelectWord;
                 poppedSelectWord = ((int (*)())IRInst__isForwardable)(consumer,poppedSelectWord,*(undefined4 *)(pass + 8));
                 if ((poppedSelectWord != 0) && (poppedSelectWord = (**(code **)(*consumer + 0x60))(consumer), poppedSelectWord != 0))
                 {
@@ -3091,29 +3105,29 @@ code_r0x000f1384:
               } while ((*(int *)(pass + 0x474) == consumer[0x54]) &&
                       (*(int *)(consumer[0x22] + 8) == 0x8e));
               consumer[0x54] = *(int *)(pass + 0x474);
-              iVar15 = (**(code **)(*consumer + 0x50))(consumer);
-            } while (iVar15 != 0);
-            local_80 = local_88;
-            local_84 = local_88;
+              vtable0x50Result = (**(code **)(*consumer + 0x50))(consumer);
+            } while (vtable0x50Result != 0);
+            unwrittenLanesSelect = moveSelect;
+            writtenLanesSelect = moveSelect;
             operandRecord2 = IRInst__getOperandRecord(consumer,0);
             laneIndex = 0;
-            local_7c = *(undefined4 *)(operandRecord2 + 0x10);
+            consumerDestMask = *(undefined4 *)(operandRecord2 + 0x10);
             lanesLeft = 4;
             do {
-              if (*(byte *)((int)&local_88 + laneIndex) != 4) {
-                if (auStack_78[*(byte *)((int)&local_88 + laneIndex) - 4] == '\x01') {
-                  *(undefined1 *)((int)&local_84 + laneIndex) = 4;
+              if (*(byte *)((int)&moveSelect + laneIndex) != 4) {
+                if (consumerDestMaskView[*(byte *)((int)&moveSelect + laneIndex) - 4] == '\x01') {
+                  *(undefined1 *)((int)&writtenLanesSelect + laneIndex) = 4;
                 }
                 else {
-                  *(undefined1 *)((int)&local_80 + laneIndex) = 4;
+                  *(undefined1 *)((int)&unwrittenLanesSelect + laneIndex) = 4;
                 }
               }
-              iVar8 = local_80;
+              pushedUnwrittenSelect = unwrittenLanesSelect;
               laneIndex = laneIndex + 1;
               lanesLeft = lanesLeft + -1;
             } while (lanesLeft != 0);
-            if (local_84 != 0x4040404) break;
-            if (((consumer[5] & 0x200U) != 0) && (local_80 != 0x4040404)) {
+            if (writtenLanesSelect != 0x4040404) break;
+            if (((consumer[5] & 0x200U) != 0) && (unwrittenLanesSelect != 0x4040404)) {
               maskStackCount = vectorAlloc[2];
               if (maskStackCount < *maskStack) {
                 _memset(maskStackCount * 4 + vectorAlloc[3],0,4);
@@ -3123,7 +3137,7 @@ code_r0x000f1384:
               else {
                 maskStackSlot = (int *)Vector__elementRefGrow(maskStack,maskStackCount);
               }
-              *maskStackSlot = iVar8;
+              *maskStackSlot = pushedUnwrittenSelect;
               pushedSource = IRInst__getOperandSource(consumer,consumer[0x21]);
               consumerStackCount = allocation[2];
               if (consumerStackCount < *consumerStack) {
@@ -3137,12 +3151,12 @@ code_r0x000f1384:
               *consumerStackSlot = pushedSource;
             }
           }
-          iVar15 = ((int (*)())IRInst__isForwardable)(consumer,local_84,*(undefined4 *)(pass + 8));
-          if (iVar15 != 0) {
-            iVar9 = (**(code **)(*consumer + 0x7c))(consumer);
-            iVar15 = local_80;
-            if (iVar9 == 0) {
-              if (((consumer[5] & 0x200U) != 0) && (local_80 != 0x4040404)) {
+          consumerForwardable = ((int (*)())IRInst__isForwardable)(consumer,writtenLanesSelect,*(undefined4 *)(pass + 8));
+          if (consumerForwardable != 0) {
+            consumerVtable0x7cResult = (**(code **)(*consumer + 0x7c))(consumer);
+            pushedUnwrittenSelectB = unwrittenLanesSelect;
+            if (consumerVtable0x7cResult == 0) {
+              if (((consumer[5] & 0x200U) != 0) && (unwrittenLanesSelect != 0x4040404)) {
                 maskStackCount = vectorAlloc[2];
                 if (maskStackCount < *maskStack) {
                   _memset(maskStackCount * 4 + vectorAlloc[3],0,4);
@@ -3152,7 +3166,7 @@ code_r0x000f1384:
                 else {
                   maskStackSlot = (int *)Vector__elementRefGrow(maskStack,maskStackCount);
                 }
-                *maskStackSlot = iVar15;
+                *maskStackSlot = pushedUnwrittenSelectB;
                 pushedSource = IRInst__getOperandSource(consumer,consumer[0x21]);
                 consumerStackCount = allocation[2];
                 if (consumerStackCount < *consumerStack) {
@@ -3168,13 +3182,13 @@ code_r0x000f1384:
                 consumer[0x21] = consumer[0x21] + -1;
                 consumer[5] = consumer[5] & 0xfffffdff;
               }
-              iVar15 = (**(code **)(*consumer + 100))(consumer);
-              if (iVar15 != 0) {
-                for (sourceIndexB = 1; iVar9 = (**(code **)(*consumer + 0x14))(consumer), sourceIndexB <= iVar9;
+              vtable0x64Result = (**(code **)(*consumer + 100))(consumer);
+              if (vtable0x64Result != 0) {
+                for (sourceIndexB = 1; sourceCount = (**(code **)(*consumer + 0x14))(consumer), sourceIndexB <= sourceCount;
                     sourceIndexB = sourceIndexB + 1) {
                   if ((((consumer[sourceIndexB * 6 + 0x28] & 1U) != 0) ||
                       ((consumer[sourceIndexB * 6 + 0x28] & 2U) != 0)) ||
-                     (iVar9 = IRInst__isSourceSelectIdentity(consumer,sourceIndexB), iVar9 == 0)) goto code_r0x000f101c;
+                     (selectIsIdentityOperand = IRInst__isSourceSelectIdentity(consumer,sourceIndexB), selectIsIdentityOperand == 0)) goto code_r0x000f101c;
                 }
                 if ((consumer[0x48] == 0) && (consumer[0x49] == 0)) {
                   if (((consumer[0x20] != 0) &&
@@ -3192,9 +3206,9 @@ code_r0x000f1384:
                   destKindClass = IRInst__operandKindClass(consumer,0);
                   if ((destKindClass == 0) && ((consumer[5] & 2U) == 0)) {
                     pushedSource = IRInst__getOperandSource(consumer,1);
-                    iVar9 = ((int (*)())IRInst__isForwardable)(pushedSource,local_84,*(undefined4 *)(pass + 8));
-                    pushedSelectWord = local_84;
-                    if (iVar9 != 0) {
+                    movSourceForwardable = ((int (*)())IRInst__isForwardable)(pushedSource,writtenLanesSelect,*(undefined4 *)(pass + 8));
+                    pushedSelectWord = writtenLanesSelect;
+                    if (movSourceForwardable != 0) {
                       maskStackCount = vectorAlloc[2];
                       if (maskStackCount < *maskStack) {
                         _memset(maskStackCount * 4 + vectorAlloc[3],0,4);
@@ -3224,32 +3238,32 @@ code_r0x000f1384:
 code_r0x000f101c:
               IRInst__setHardwareRegisterAndAdd(consumer,pass,destRegisterOffset,destRegister);
               (**(code **)(*consumer + 0x94))(consumer,afterInst,*(undefined4 *)(pass + 8));
-              SelectWord__clearReadComponents(&local_58,local_84);
-              consumer[0x27] = local_58;
-              iVar15 = SelectWord__areCompatible(local_84,0x10203);
-              if ((iVar15 == 0) &&
-                 (iVar15 = FUN_0011379c(*(undefined4 *)(pass + 8),consumer), iVar15 != 0)) {
-                for (sourceIndexB = 1; iVar9 = (**(code **)(*consumer + 0x14))(consumer), sourceIndexB <= iVar9;
+              SelectWord__clearReadComponents(&clearedReadSelect,writtenLanesSelect);
+              consumer[0x27] = clearedReadSelect;
+              selectIsIdentity = SelectWord__areCompatible(writtenLanesSelect,0x10203);
+              if ((selectIsIdentity == 0) &&
+                 (selectIsIdentity = FUN_0011379c(*(undefined4 *)(pass + 8),consumer), selectIsIdentity != 0)) {
+                for (sourceIndexB = 1; sourceCount = (**(code **)(*consumer + 0x14))(consumer), sourceIndexB <= sourceCount;
                     sourceIndexB = sourceIndexB + 1) {
                   operandRecord3 = IRInst__getOperandRecord(consumer,sourceIndexB);
-                  ((int (*)())SelectWord__compose)(&local_54,*(undefined4 *)(operandRecord3 + 0x10),local_84);
-                  iVar9 = local_54;
+                  ((int (*)())SelectWord__compose)(&composedSelect,*(undefined4 *)(operandRecord3 + 0x10),writtenLanesSelect);
+                  composedSelectCopy = composedSelect;
                   if (sourceIndexB == 0) {
-                    consumer[0x27] = local_54;
+                    consumer[0x27] = composedSelect;
                   }
                   else {
                     operandRecord4 = IRInst__getOperandRecord(consumer,sourceIndexB);
-                    *(int *)(operandRecord4 + 0x10) = iVar9;
+                    *(int *)(operandRecord4 + 0x10) = composedSelectCopy;
                   }
                 }
               }
-              iVar15 = (**(code **)(*consumer + 100))(consumer);
-              if (iVar15 != 0) {
-                for (sourceIndexB = 1; iVar9 = (**(code **)(*consumer + 0x14))(consumer), sourceIndexB <= iVar9;
+              vtable0x64Result = (**(code **)(*consumer + 100))(consumer);
+              if (vtable0x64Result != 0) {
+                for (sourceIndexB = 1; sourceCount = (**(code **)(*consumer + 0x14))(consumer), sourceIndexB <= sourceCount;
                     sourceIndexB = sourceIndexB + 1) {
                   if ((((consumer[sourceIndexB * 6 + 0x28] & 1U) != 0) ||
                       ((consumer[sourceIndexB * 6 + 0x28] & 2U) != 0)) ||
-                     (iVar9 = IRInst__isSourceSelectIdentity(consumer,sourceIndexB), iVar9 == 0)) goto code_r0x000f1384;
+                     (selectIsIdentityOperand = IRInst__isSourceSelectIdentity(consumer,sourceIndexB), selectIsIdentityOperand == 0)) goto code_r0x000f1384;
                 }
                 if ((consumer[0x48] == 0) && (consumer[0x49] == 0)) {
                   if (((consumer[0x20] != 0) &&
@@ -3267,22 +3281,22 @@ code_r0x000f101c:
                   destKindClass = IRInst__operandKindClass(consumer,0);
                   if (destKindClass == 0) {
                     operandVReg = (int *)IRInst__getOperandSource(consumer,1);
-                    iVar15 = (**(code **)(*operandVReg + 0x48))();
-                    if (iVar15 != 0) {
+                    sourceIsConstant = (**(code **)(*operandVReg + 0x48))();
+                    if (sourceIsConstant != 0) {
                       lanesLeft = 4;
-                      identityCursor = local_74;
+                      identityCursor = unitConstQuad;
                       do {
                         *identityCursor = 0x7ffffffe;
                         identityCursor = identityCursor + 1;
                         lanesLeft = lanesLeft + -1;
                       } while (lanesLeft != 0);
-                      local_74[0] = 0x3f800000;
-                      local_74[3] = 0x3f800000;
-                      local_74[2] = 0x3f800000;
-                      local_74[1] = 0x3f800000;
+                      unitConstQuad[0] = 0x3f800000;
+                      unitConstQuad[3] = 0x3f800000;
+                      unitConstQuad[2] = 0x3f800000;
+                      unitConstQuad[1] = 0x3f800000;
                       hwDescriptionObj = *(int **)(*(int *)(pass + 8) + 0x30c);
-                      iVar15 = (**(code **)(*hwDescriptionObj + 0xe8))(hwDescriptionObj,local_74,auStack_78,0x10203);
-                      if (iVar15 != 0) {
+                      constantsEncodable = (**(code **)(*hwDescriptionObj + 0xe8))(hwDescriptionObj,unitConstQuad,consumerDestMaskView,0x10203);
+                      if (constantsEncodable != 0) {
                         ((int (*)())IRInst__tryFoldOutputScale)(pass,consumer);
                       }
                     }
@@ -3294,24 +3308,24 @@ code_r0x000f101c:
               lastSourceIndex = consumer[0x21];
               if (0 < lastSourceIndex) {
                 sourceIndex = 1;
-                bVar1 = true;
+                allSourcesForwardable = true;
                 do {
                   operandVReg = (int *)IRInst__getOperandSource(consumer,sourceIndex);
-                  iVar15 = (**(code **)(*operandVReg + 0x7c))();
-                  if ((iVar15 != 0) ||
-                     (iVar15 = ((int (*)())IRInst__isForwardable)(operandVReg,local_84,*(undefined4 *)(pass + 8)),
-                     iVar15 == 0)) {
-                    bVar1 = false;
+                  sourceVtable0x7cResult = (**(code **)(*operandVReg + 0x7c))();
+                  if ((sourceVtable0x7cResult != 0) ||
+                     (sourceVtable0x7cResult = ((int (*)())IRInst__isForwardable)(operandVReg,writtenLanesSelect,*(undefined4 *)(pass + 8)),
+                     sourceVtable0x7cResult == 0)) {
+                    allSourcesForwardable = false;
                   }
                   lastSourceIndex = consumer[0x21];
                   sourceIndex = sourceIndex + 1;
                 } while (sourceIndex <= lastSourceIndex);
-                if (!bVar1) goto code_r0x000f0d0c;
+                if (!allSourcesForwardable) goto code_r0x000f0d0c;
               }
               sourceIndex = 1;
               if (0 < lastSourceIndex) {
                 do {
-                  pushedSelectWord = local_88;
+                  pushedSelectWord = moveSelect;
                   maskStackCount = vectorAlloc[2];
                   if (maskStackCount < *maskStack) {
                     _memset(maskStackCount * 4 + vectorAlloc[3],0,4);
@@ -3342,7 +3356,7 @@ code_r0x000f1140:
             goto code_r0x000f1384;
           }
 code_r0x000f0d0c:
-          ((int (*)())Program__insertMovAfter)(pass,consumer,afterInst,destRegisterOffset,destRegister,local_88);
+          ((int (*)())Program__insertMovAfter)(pass,consumer,afterInst,destRegisterOffset,destRegister,moveSelect);
         } while( true );
       }
     }

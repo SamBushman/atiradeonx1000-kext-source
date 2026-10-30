@@ -1,0 +1,217 @@
+use	FUN_000f9a58	uVar17	destTokenWord	INFERRED	first word of the IL destination token (*descriptor) re-read after the setup instructions rewrote it	^\s*uVar17\ =\ \*param_3;$	+2
+use	FUN_000f9a58	uVar17	destTokenWord	INFERRED	first word of the IL destination token (*descriptor) re-read after the setup instructions rewrote it	^\s*uVar17\ =\ \*param_3;$@2	+1
+use	FUN_000f9a58	uVar17	destTokenWord	INFERRED	first word of the IL destination token (*descriptor) re-read after the setup instructions rewrote it	^\s*uVar17\ =\ \*param_3;$@3	+1
+use	FUN_000f9a58	uVar17	destTokenWord	INFERRED	first word of the IL destination token (*descriptor) re-read after the setup instructions rewrote it	^\s*uVar17\ =\ \*param_3;$@4	+2
+use	FUN_000f9a58	uVar17	destTokenWord	INFERRED	first word of the IL destination token (*descriptor) re-read after the setup instructions rewrote it	^\s*uVar17\ =\ \*param_3;$@5	+1
+use	FUN_000f9a58	uVar17	destTokenWord	INFERRED	first word of the IL destination token (*descriptor) re-read after the setup instructions rewrote it	^\s*if\ \(\(uVar17\ \&\ 0x1800000\)\ ==\ 0x800000\)\ \{$	+1
+use	FUN_000f9a58	uVar17	destTokenWord	INFERRED	first word of the IL destination token (*descriptor) re-read after the setup instructions rewrote it	^\s*uVar17\ =\ \*param_3;$@6	+2
+use	FUN_000f9a58	uVar17	destTokenWord	INFERRED	first word of the IL destination token (*descriptor) re-read after the setup instructions rewrote it	^\s*if\ \(\(\(undefined4\ \*\)\(uVar17\ \&\ 0x3f0000\)\ !=\ 0x001b0000\)\ \&\&\ \(!bVar1\)\)\ goto\ LAB_000fa744;$	+1
+use	FUN_000f9a58	uVar17	destTokenWord	INFERRED	first word of the IL destination token (*descriptor) re-read after the setup instructions rewrote it	^\s*uVar17\ =\ \*param_3;$@7	+1
+use	FUN_000f9a58	uVar17	destTokenWord	INFERRED	first word of the IL destination token (*descriptor) re-read after the setup instructions rewrote it	^\s*uVar11\ =\ uVar17\ >>\ 0x10\ \&\ 0x3f;$	+2
+use	FUN_000f9a58	uVar17	destTokenWord	INFERRED	first word of the IL destination token (*descriptor) re-read after the setup instructions rewrote it	^\s*if\ \(\(uVar17\ \&\ 0x400000\)\ !=\ 0\)\ \{$@2	+1
+use	FUN_000f9a58	uVar17	destTokenWord	INFERRED	first word of the IL destination token (*descriptor) re-read after the setup instructions rewrote it	^\s*if\ \(\(uVar17\ \&\ 0x1800000\)\ ==\ 0x1000000\)\ \{$	+1
+use	FUN_000f9a58	uVar17	destTokenWord	INFERRED	first word of the IL destination token (*descriptor) re-read after the setup instructions rewrote it	^\s*else\ if\ \(\(uVar17\ \&\ 0x1800000\)\ ==\ 0\)\ \{$	+1
+use	FUN_000f9a58	uVar17	destTokenWord	INFERRED	first word of the IL destination token (*descriptor) re-read after the setup instructions rewrote it	^\s*if\ \(\(uVar17\ \&\ 0x4000000\)\ !=\ 0\)\ \{$	+1
+use	FUN_000f9a58	uVar17	relativeOffset	INFERRED	descriptor word after the source token; offset constant added to the index (IRInst__setIntConstantOperand4 / uVar12 + ...)	^\s*uVar17\ =\ param_3\[iVar20\ \+\ 2\];$	+1
+use	FUN_000f9a58	uVar17	relativeOffset	INFERRED	descriptor word after the source token; offset constant added to the index (IRInst__setIntConstantOperand4 / uVar12 + ...)	^\s*\(\(int\ \(\*\)\(\)\)FUN_000f7870\)\(pvVar4,param_1,2,uVar17,uVar17,uVar17,uVar17\);$	+1
+use	FUN_000f9a58	bVar1	notLastLane	CONFIRMED	loop continue flag: loop counter != 3 (four lanes)	^\s*bVar1\ =\ uVar17\ !=\ 3;$	+1
+use	FUN_000f9a58	bVar1	notLastLane	CONFIRMED	loop continue flag: loop counter != 3 (four lanes)	^\s*\}\ while\ \(bVar1\);$	+1
+use	FUN_000f9a58	bVar1	notLastLane	CONFIRMED	loop continue flag: loop counter != 3 (four lanes)	^\s*bVar1\ =\ uVar17\ !=\ 3;$@2	+1
+use	FUN_000f9a58	bVar1	notLastLane	CONFIRMED	loop continue flag: loop counter != 3 (four lanes)	^\s*\}\ while\ \(bVar1\);$@2	+1
+use	FUN_000f9a58	bVar1	notLastLane	CONFIRMED	loop continue flag: loop counter != 3 (four lanes)	^\s*bVar1\ =\ iVar20\ !=\ 3;$	+1
+use	FUN_000f9a58	bVar1	notLastLane	CONFIRMED	loop continue flag: loop counter != 3 (four lanes)	^\s*\}\ while\ \(bVar1\);$@3	+1
+use	FUN_000f9a58	bVar1	hasSetupInstFlag	INFERRED	true when the register file accepts the write (vtable +0x78) and the hardware lacks the +0x80 capability; written to setupInst+0x120	^\s*bVar1\ =\ false;$	+1
+use	FUN_000f9a58	bVar1	hasSetupInstFlag	INFERRED	true when the register file accepts the write (vtable +0x78) and the hardware lacks the +0x80 capability; written to setupInst+0x120	^\s*bVar1\ =\ false;$@2	+1
+use	FUN_000f9a58	bVar1	hasSetupInstFlag	INFERRED	true when the register file accepts the write (vtable +0x78) and the hardware lacks the +0x80 capability; written to setupInst+0x120	^\s*bVar1\ =\ false;$@3	+1
+use	FUN_000f9a58	bVar1	hasSetupInstFlag	INFERRED	true when the register file accepts the write (vtable +0x78) and the hardware lacks the +0x80 capability; written to setupInst+0x120	^\s*bVar1\ =\ true;$	+1
+use	FUN_000f9a58	bVar1	hasSetupInstFlag	INFERRED	true when the register file accepts the write (vtable +0x78) and the hardware lacks the +0x80 capability; written to setupInst+0x120	^\s*if\ \(bVar1\)\ \{$	+1
+use	FUN_000f9a58	bVar1	forceExportPath	INFERRED	true when destination type is 0x1f and pass flag 0x4000 is set; forces the export/memstore rewrite	^\s*bVar1\ =\ false;$@4	+1
+use	FUN_000f9a58	bVar1	forceExportPath	INFERRED	true when destination type is 0x1f and pass flag 0x4000 is set; forces the export/memstore rewrite	^\s*bVar1\ =\ true;$@2	+1
+use	FUN_000f9a58	bVar1	forceExportPath	INFERRED	true when destination type is 0x1f and pass flag 0x4000 is set; forces the export/memstore rewrite	^\s*if\ \(\(\(undefined4\ \*\)\(uVar17\ \&\ 0x3f0000\)\ !=\ 0x001b0000\)\ \&\&\ \(!bVar1\)\)\ goto\ LAB_000fa744;$	+1
+use	FUN_000f9a58	bVar2	useExportInst	INFERRED	same condition as forceExportPath: selects IRGeomExport instead of IRMemStore for the rewrite	^\s*bVar2\ =\ false;$	+1
+use	FUN_000f9a58	bVar2	useExportInst	INFERRED	same condition as forceExportPath: selects IRGeomExport instead of IRMemStore for the rewrite	^\s*bVar2\ =\ true;$	+1
+use	FUN_000f9a58	bVar2	useExportInst	INFERRED	same condition as forceExportPath: selects IRGeomExport instead of IRMemStore for the rewrite	^\s*if\ \(!bVar2\)\ \{$	+1
+use	FUN_000f9a58	bVar2	useExportInst	INFERRED	same condition as forceExportPath: selects IRGeomExport instead of IRMemStore for the rewrite	^\s*if\ \(bVar2\)\ goto\ LAB_000fa4f8;$	+1
+use	FUN_000f9a58	bVar2	useExportInst	INFERRED	same condition as forceExportPath: selects IRGeomExport instead of IRMemStore for the rewrite	^\s*if\ \(bVar2\)\ \{$	+1
+use	FUN_000f9a58	bVar2	useExportInst	INFERRED	same condition as forceExportPath: selects IRGeomExport instead of IRMemStore for the rewrite	^\s*if\ \(\(!bVar2\)\ \&\&$	+3
+use	FUN_000f9a58	iVar5	descriptorTestResult	INFERRED	result of FUN_0019eb30(descriptor): nonzero adds a setup mov	^\s*iVar5\ =\ FUN_0019eb30\(param_3\);$	+2
+use	FUN_000f9a58	iVar5	registerFileSupported	INFERRED	result of the register-file capability query (vtable +0x78)	^\s*iVar5\ =\ \(\*pcVar15\)\(piVar18,uVar6\);$	+2
+use	FUN_000f9a58	iVar5	hardwareCheckResult	INFERRED	result of the hardware capability query vtable +0x80	^\s*iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*piVar18\ \+\ 0x80\)\)\(piVar18\);$	+2
+use	FUN_000f9a58	iVar20	operandEncodable	INFERRED	result of vtable +0x104 (can the hardware encode source operand 2 as is); zero makes a mov into a temp	^\s*iVar20\ =\ \(\*\*\(code\ \*\*\)\(\*piVar18\ \+\ 0x104\)\)\(piVar18,puVar21,2,\&local_68,0\);$	+2
+use	FUN_000f9a58	iVar20	operandEncodable	INFERRED	result of vtable +0x104 (can the hardware encode source operand 2 as is); zero makes a mov into a temp	^\s*iVar20\ =\ FUN_001054ec\(puVar21,2\);$@6	+2
+use	FUN_000f9a58	iVar20	operandEncodable	INFERRED	result of vtable +0x104 (can the hardware encode source operand 2 as is); zero makes a mov into a temp	^\s*if\ \(\(!bVar2\)\ \&\&$	+3
+use	FUN_000f9a58	uVar11	sourceRegisterType	INFERRED	IL register type of the destination token after the rewrite (bits 16-21)	^\s*uVar11\ =\ uVar17\ >>\ 0x10\ \&\ 0x3f;$	+1
+use	FUN_000f9a58	uVar11	sourceRegisterType	INFERRED	IL register type of the destination token after the rewrite (bits 16-21)	^\s*uVar6\ =\ FUN_000ec208\(param_1,uVar11\);$	+1
+use	FUN_000f9a58	uVar11	sourceRegisterType	INFERRED	IL register type of the destination token after the rewrite (bits 16-21)	^\s*uVar6\ =\ FUN_000ec208\(param_1,uVar11\);$@2	+1
+use	FUN_000f9a58	uVar11	sourceRegisterType	INFERRED	IL register type of the destination token after the rewrite (bits 16-21)	^\s*uVar6\ =\ FUN_000ec208\(param_1,uVar11\);$@3	+1
+use	FUN_000f9a58	uVar12	sourceRegisterIndex	INFERRED	destination token register index (low 16 bits), optionally plus the relative offset	^\s*uVar12\ =\ \(uint\)\(ushort\)\*param_3;$	+1
+use	FUN_000f9a58	uVar12	sourceRegisterIndex	INFERRED	destination token register index (low 16 bits), optionally plus the relative offset	^\s*uVar12\ =\ uVar12\ \|\ param_3\[1\]\ <<\ 0x10;$	+1
+use	FUN_000f9a58	uVar12	sourceRegisterIndex	INFERRED	destination token register index (low 16 bits), optionally plus the relative offset	^\s*\*\(uint\ \*\)\(iVar13\ \+\ 8\)\ =\ uVar12;$	+1
+use	FUN_000f9a58	uVar12	sourceRegisterIndex	INFERRED	destination token register index (low 16 bits), optionally plus the relative offset	^\s*uVar12\ =\ uVar12\ \+\ param_3\[iVar20\ \+\ 2\];$	+1
+use	FUN_000f9a58	uVar12	sourceRegisterIndex	INFERRED	destination token register index (low 16 bits), optionally plus the relative offset	^\s*puVar7\[0x51\]\ =\ uVar12;$	+1
+use	FUN_000f9a58	uVar12	sourceRegisterIndex	INFERRED	destination token register index (low 16 bits), optionally plus the relative offset	^\s*\*\(uint\ \*\)\(iVar20\ \+\ 8\)\ =\ uVar12;$	+1
+use	FUN_000f9a58	uVar12	sourceRegisterIndex	INFERRED	destination token register index (low 16 bits), optionally plus the relative offset	^\s*puVar7\[0x51\]\ =\ uVar12;$@2	+1
+use	FUN_000f9a58	uVar12	sourceRegisterIndex	INFERRED	destination token register index (low 16 bits), optionally plus the relative offset	^\s*\*\(uint\ \*\)\(iVar20\ \+\ 8\)\ =\ uVar12;$@2	+1
+use	FUN_000f9a58	uVar14	setupLiteralIndex	INFERRED	descriptor[1] >> 9 & 0xf: index into the float literal table DAT_001aa9fc	^\s*if\ \(\(\(\*param_3\ \&\ 0x400000\)\ ==\ 0\)\ \|\|\ \(uVar14\ =\ param_3\[1\]\ >>\ 9\ \&\ 0xf,\ uVar14\ ==\ 0\)\)\ \{$	+1
+use	FUN_000f9a58	uVar14	setupLiteralIndex	INFERRED	descriptor[1] >> 9 & 0xf: index into the float literal table DAT_001aa9fc	^\s*fparam_1\ =\ \(double\)\*\(float\ \*\)\(\&DAT_001aa9fc\ \+\ uVar14\ \*\ 4\);$	+1
+use	FUN_000f9a58	uVar14	zeroLaneMask	INFERRED	bit i set where psnPackedLaneComponent(descriptor,i) == 2 (lane written with 0.0)	^\s*uVar14\ =\ 0;$	+1
+use	FUN_000f9a58	uVar14	zeroLaneMask	INFERRED	bit i set where psnPackedLaneComponent(descriptor,i) == 2 (lane written with 0.0)	^\s*uVar14\ =\ uVar14\ \|\ \(uint\)\(iVar5\ ==\ 2\)\ <<\ \(uVar17\ \&\ 0x3f\);$	+1
+use	FUN_000f9a58	uVar14	zeroLaneMask	INFERRED	bit i set where psnPackedLaneComponent(descriptor,i) == 2 (lane written with 0.0)	^\s*if\ \(uVar14\ !=\ 0\)\ \{$	+1
+use	FUN_000f9a58	uVar14	zeroLaneMask	INFERRED	bit i set where psnPackedLaneComponent(descriptor,i) == 2 (lane written with 0.0)	^\s*if\ \(\(\(int\)uVar14\ >>\ \(uVar17\ \&\ 0x3f\)\ \&\ 1U\)\ ==\ 0\)\ \{$	+1
+use	FUN_000f9a58	uVar14	oneLaneMask	INFERRED	bit i set where psnPackedLaneComponent(descriptor,i) == 3 (lane written with 1.0)	^\s*uVar14\ =\ 0;$@2	+1
+use	FUN_000f9a58	uVar14	oneLaneMask	INFERRED	bit i set where psnPackedLaneComponent(descriptor,i) == 3 (lane written with 1.0)	^\s*uVar14\ =\ uVar14\ \|\ \(uint\)\(iVar5\ ==\ 3\)\ <<\ \(uVar17\ \&\ 0x3f\);$	+1
+use	FUN_000f9a58	uVar14	oneLaneMask	INFERRED	bit i set where psnPackedLaneComponent(descriptor,i) == 3 (lane written with 1.0)	^\s*if\ \(uVar14\ !=\ 0\)\ \{$@2	+1
+use	FUN_000f9a58	uVar14	oneLaneMask	INFERRED	bit i set where psnPackedLaneComponent(descriptor,i) == 3 (lane written with 1.0)	^\s*if\ \(\(\(int\)uVar14\ >>\ \(uVar17\ \&\ 0x3f\)\ \&\ 1U\)\ ==\ 0\)\ \{$@2	+1
+use	FUN_000f9a58	uVar14	laneMaskWord	INFERRED	per-nibble 'component unused' mask built from descriptor[1], stored at inst+0xa0 (allocation[0x28])	^\s*uVar14\ =\ 0;$@3	+1
+use	FUN_000f9a58	uVar14	laneMaskWord	INFERRED	per-nibble 'component unused' mask built from descriptor[1], stored at inst+0xa0 (allocation[0x28])	^\s*uVar14\ =\ param_3\[1\];$	+4
+use	FUN_000f9a58	uVar14	laneMaskWord	INFERRED	per-nibble 'component unused' mask built from descriptor[1], stored at inst+0xa0 (allocation[0x28])	^\s*puVar7\[0x28\]\ =\ uVar14;$	+1
+use	FUN_000f9a58	uVar14	laneMaskWord	INFERRED	per-nibble 'component unused' mask built from descriptor[1], stored at inst+0xa0 (allocation[0x28])	^\s*puVar7\[0x28\]\ =\ uVar14;$@2	+1
+use	FUN_000f9a58	uVar14	laneMaskWord	INFERRED	per-nibble 'component unused' mask built from descriptor[1], stored at inst+0xa0 (allocation[0x28])	^\s*puVar7\[0x28\]\ =\ uVar14;$@3	+1
+use	FUN_000f9a58	uVar14	laneMaskWord	INFERRED	per-nibble 'component unused' mask built from descriptor[1], stored at inst+0xa0 (allocation[0x28])	^\s*puVar7\[0x28\]\ =\ uVar14;$@4	+1
+use	FUN_000f9a58	uVar14	sourceTokenWord	INFERRED	first word of the source token (*sourceDescriptor)	^\s*uVar14\ =\ \*puVar9;$	+1
+use	FUN_000f9a58	uVar14	sourceTokenWord	INFERRED	first word of the source token (*sourceDescriptor)	^\s*\*\(uint\ \*\)\(iVar20\ \+\ 8\)\ =\ \(uint\)\(ushort\)uVar14;$	+1
+use	FUN_000f9a58	uVar14	sourceTokenWord	INFERRED	first word of the source token (*sourceDescriptor)	^\s*uVar14\ =\ \*puVar9;$@2	+1
+use	FUN_000f9a58	uVar14	sourceTokenWord	INFERRED	first word of the source token (*sourceDescriptor)	^\s*\*\(uint\ \*\)\(iVar20\ \+\ 8\)\ =\ \(uint\)\(ushort\)uVar14;$@2	+1
+use	FUN_000f9a58	pcVar15	registerFileQuery	INFERRED	vtable slot +0x78 of the hardware-info object	^\s*pcVar15\ =\ \*\(code\ \*\*\)\(\*piVar18\ \+\ 0x78\);$	+1
+use	FUN_000f9a58	pcVar15	registerFileQuery	INFERRED	vtable slot +0x78 of the hardware-info object	^\s*iVar5\ =\ \(\*pcVar15\)\(piVar18,uVar6\);$	+1
+use	FUN_000f9a58	uVar16	sourceOffsetConstant	INFERRED	descriptor[sourceNumber]: integer constant stored as operand 2 when bit 0x4000000 is set	^\s*uVar16\ =\ 0;$	+1
+use	FUN_000f9a58	uVar16	sourceOffsetConstant	INFERRED	descriptor[sourceNumber]: integer constant stored as operand 2 when bit 0x4000000 is set	^\s*uVar16\ =\ param_3\[iVar20\];$	+1
+use	FUN_000f9a58	uVar16	sourceOffsetConstant	INFERRED	descriptor[sourceNumber]: integer constant stored as operand 2 when bit 0x4000000 is set	^\s*\(\(int\ \(\*\)\(\)\)FUN_000f7870\)\(puVar21,param_1,2,uVar16,uVar16,uVar16,uVar16\);$	+1
+use	FUN_000f9a58	piVar18	hardwareInfo	INFERRED	object at compiler+0x30c queried through vtable slots 0x78/0x80/0x104	^\s*piVar18\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x30c\);$	+2
+use	FUN_000f9a58	piVar18	hardwareInfo	INFERRED	object at compiler+0x30c queried through vtable slots 0x78/0x80/0x104	^\s*iVar5\ =\ \(\*pcVar15\)\(piVar18,uVar6\);$	+1
+use	FUN_000f9a58	piVar18	hardwareInfo	INFERRED	object at compiler+0x30c queried through vtable slots 0x78/0x80/0x104	^\s*piVar18\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x30c\);$@2	+2
+use	FUN_000f9a58	piVar18	hardwareInfo	INFERRED	object at compiler+0x30c queried through vtable slots 0x78/0x80/0x104	^\s*piVar18\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x30c\);$@3	+2
+use	FUN_000f9a58	piVar18	hardwareInfo	INFERRED	object at compiler+0x30c queried through vtable slots 0x78/0x80/0x104	^\s*if\ \(\(!bVar2\)\ \&\&$	+3
+use	FUN_000f9a58	uVar19	operandRegisterFile	INFERRED	operand register-file field copied from the rewritten instruction	^\s*uVar19\ =\ puVar21\[0x32\];$	+1
+use	FUN_000f9a58	uVar19	operandRegisterFile	INFERRED	operand register-file field copied from the rewritten instruction	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ uVar19;$	+1
+use	FUN_000f9a58	uVar19	operandRegisterFile	INFERRED	operand register-file field copied from the rewritten instruction	^\s*uVar19\ =\ puVar21\[0x2c\];$	+1
+use	FUN_000f9a58	uVar19	operandRegisterFile	INFERRED	operand register-file field copied from the rewritten instruction	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ uVar19;$@2	+1
+use	FUN_000f9a58	puVar21	rewriteInst	INFERRED	instruction constructed in the arena (IRMemStore/IRGeomExport) = allocation + 1	^\s*puVar21\ =\ puVar7\ \+\ 1;$	+2
+use	FUN_000f9a58	puVar21	rewriteInst	INFERRED	instruction constructed in the arena (IRMemStore/IRGeomExport) = allocation + 1	^\s*iVar13\ =\ FUN_001054ec\(puVar21,0\);$	+1
+use	FUN_000f9a58	puVar21	rewriteInst	INFERRED	instruction constructed in the arena (IRMemStore/IRGeomExport) = allocation + 1	^\s*iVar13\ =\ FUN_001054ec\(puVar21,1\);$	+1
+use	FUN_000f9a58	puVar21	rewriteInst	INFERRED	instruction constructed in the arena (IRMemStore/IRGeomExport) = allocation + 1	^\s*iVar20\ =\ FUN_001054ec\(puVar21,2\);$	+1
+use	FUN_000f9a58	puVar21	rewriteInst	INFERRED	instruction constructed in the arena (IRMemStore/IRGeomExport) = allocation + 1	^\s*puVar21\ =\ puVar7\ \+\ 1;$@2	+2
+use	FUN_000f9a58	puVar21	rewriteInst	INFERRED	instruction constructed in the arena (IRMemStore/IRGeomExport) = allocation + 1	^\s*FUN_001046c8\(puVar21,0,uVar6\);$	+2
+use	FUN_000f9a58	puVar21	rewriteInst	INFERRED	instruction constructed in the arena (IRMemStore/IRGeomExport) = allocation + 1	^\s*iVar20\ =\ FUN_001054ec\(puVar21,2\);$@2	+1
+use	FUN_000f9a58	puVar21	rewriteInst	INFERRED	instruction constructed in the arena (IRMemStore/IRGeomExport) = allocation + 1	^\s*iVar20\ =\ FUN_001054ec\(puVar21,3\);$	+1
+use	FUN_000f9a58	puVar21	rewriteInst	INFERRED	instruction constructed in the arena (IRMemStore/IRGeomExport) = allocation + 1	^\s*\(\(int\ \(\*\)\(\)\)FUN_000f8aa0\)\(param_1,local_64,puVar9,2,puVar21\);$	+1
+use	FUN_000f9a58	puVar21	rewriteInst	INFERRED	instruction constructed in the arena (IRMemStore/IRGeomExport) = allocation + 1	^\s*puVar21\ =\ puVar7\ \+\ 1;$@3	+2
+use	FUN_000f9a58	puVar21	rewriteInst	INFERRED	instruction constructed in the arena (IRMemStore/IRGeomExport) = allocation + 1	^\s*FUN_001046c8\(puVar21,0,uVar6\);$@2	+2
+use	FUN_000f9a58	puVar21	rewriteInst	INFERRED	instruction constructed in the arena (IRMemStore/IRGeomExport) = allocation + 1	^\s*puVar21\ =\ puVar7\ \+\ 1;$@4	+2
+use	FUN_000f9a58	puVar21	rewriteInst	INFERRED	instruction constructed in the arena (IRMemStore/IRGeomExport) = allocation + 1	^\s*iVar20\ =\ FUN_001054ec\(puVar21,0\);$	+1
+use	FUN_000f9a58	puVar21	rewriteInst	INFERRED	instruction constructed in the arena (IRMemStore/IRGeomExport) = allocation + 1	^\s*iVar20\ =\ FUN_001054ec\(puVar21,1\);$@3	+1
+use	FUN_000f9a58	puVar21	rewriteInst	INFERRED	instruction constructed in the arena (IRMemStore/IRGeomExport) = allocation + 1	^\s*\(\(int\ \(\*\)\(\)\)FUN_000f7870\)\(puVar21,param_1,2,uVar16,uVar16,uVar16,uVar16\);$	+1
+use	FUN_000f9a58	puVar21	rewriteInst	INFERRED	instruction constructed in the arena (IRMemStore/IRGeomExport) = allocation + 1	^\s*puVar21\ =\ \(undefined4\ \*\)0x0;$	+1
+use	FUN_000f9a58	puVar21	rewriteInst	INFERRED	instruction constructed in the arena (IRMemStore/IRGeomExport) = allocation + 1	^\s*iVar20\ =\ FUN_001054ec\(puVar21,2\);$@3	+1
+use	FUN_000f9a58	puVar21	rewriteInst	INFERRED	instruction constructed in the arena (IRMemStore/IRGeomExport) = allocation + 1	^\s*iVar20\ =\ \(\*\*\(code\ \*\*\)\(\*piVar18\ \+\ 0x104\)\)\(piVar18,puVar21,2,\&local_68,0\);$	+1
+use	FUN_000f9a58	puVar21	rewriteInst	INFERRED	instruction constructed in the arena (IRMemStore/IRGeomExport) = allocation + 1	^\s*uVar19\ =\ puVar21\[0x32\];$	+2
+use	FUN_000f9a58	puVar21	rewriteInst	INFERRED	instruction constructed in the arena (IRMemStore/IRGeomExport) = allocation + 1	^\s*iVar20\ =\ FUN_001054ec\(puVar21,2\);$@4	+1
+use	FUN_000f9a58	puVar21	rewriteInst	INFERRED	instruction constructed in the arena (IRMemStore/IRGeomExport) = allocation + 1	^\s*iVar20\ =\ FUN_001054ec\(puVar21,2\);$@5	+1
+use	FUN_000f9a58	puVar21	rewriteInst	INFERRED	instruction constructed in the arena (IRMemStore/IRGeomExport) = allocation + 1	^\s*iVar20\ =\ FUN_001054ec\(puVar21,2\);$@6	+1
+use	FUN_000f9a58	puVar21	rewriteInst	INFERRED	instruction constructed in the arena (IRMemStore/IRGeomExport) = allocation + 1	^\s*if\ \(\(!bVar2\)\ \&\&$	+3
+use	FUN_000f9a58	puVar21	rewriteInst	INFERRED	instruction constructed in the arena (IRMemStore/IRGeomExport) = allocation + 1	^\s*uVar19\ =\ puVar21\[0x2c\];$	+2
+use	FUN_000f9a58	puVar21	rewriteInst	INFERRED	instruction constructed in the arena (IRMemStore/IRGeomExport) = allocation + 1	^\s*iVar20\ =\ FUN_001054ec\(puVar21,1\);$@4	+1
+use	FUN_000f9a58	puVar21	rewriteInst	INFERRED	instruction constructed in the arena (IRMemStore/IRGeomExport) = allocation + 1	^\s*iVar20\ =\ FUN_001054ec\(puVar21,1\);$@5	+1
+use	FUN_000f9a58	puVar21	rewriteInst	INFERRED	instruction constructed in the arena (IRMemStore/IRGeomExport) = allocation + 1	^\s*iVar20\ =\ FUN_001054ec\(puVar21,1\);$@6	+1
+use	FUN_000f9a58	puVar21	rewriteInst	INFERRED	instruction constructed in the arena (IRMemStore/IRGeomExport) = allocation + 1	^\s*FUN_00193f64\(param_2,puVar21\);$	+1
+local	FUN_000f9a58	param_5	modeSelector	INFERRED	0-3 value stored as the integer constant operand of the 0xcc instruction
+local	FUN_000f9a58	local_68	operandSelectWordTemp	INFERRED	select word of source operand 2, passed by address to the vtable +0x104 encodability query
+local	FUN_000f9a58	local_64	identitySwizzleTokens	INFERRED	holds 0x10203 (identity xyz swizzle pattern) passed to Program__applySourceTokenToOperand
+local	Program__findOrCreateConstInst	iVar9	compiler	INFERRED	*(program+8): the compiler; +0x30c hardware-info object, +0x374 arena
+use	Program__findOrCreateConstInst	uVar13	laneBit	INFERRED	lane index & 0x3f used as the shift for the per-lane flag byte at inst+0x15c	^\s*uVar13\ =\ uVar11\ \&\ 0x3f;$	+1
+use	Program__findOrCreateConstInst	uVar13	laneBit	INFERRED	lane index & 0x3f used as the shift for the per-lane flag byte at inst+0x15c	^\s*\*\(byte\ \*\)\(puVar10\ \+\ 0x57\)\ =\ \(byte\)\(1\ <<\ uVar13\)\ \|\ \*\(byte\ \*\)\(puVar10\ \+\ 0x57\);$	+1
+use	Program__findOrCreateConstInst	uVar11	cachedInstCount	INFERRED	element count of the register map's constant-instruction vector, loop bound	^\s*uVar11\ =\ \*\(uint\ \*\)\(\*\(int\ \*\)\(iVar2\ \+\ 0x18\)\ \+\ 4\);$	+2
+use	Program__findOrCreateConstInst	uVar11	cachedInstCount	INFERRED	element count of the register map's constant-instruction vector, loop bound	^\s*if\ \(uVar11\ ==\ uVar13\)\ break;$	+1
+use	Program__findOrCreateConstInst	uVar11	vectorSize	INFERRED	vector element count used as the append index	^\s*uVar11\ =\ puVar14\[1\];$	+5
+use	Program__findOrCreateConstInst	uVar11	vectorSize	INFERRED	vector element count used as the append index	^\s*piVar5\ =\ \(int\ \*\)FUN_0019423c\(puVar14,uVar11\);$	+1
+use	Program__findOrCreateConstInst	iVar2	encodable	INFERRED	nonzero when the hardware can encode the constants (vtable +0xe8)	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(iVar9\ \+\ 0x30c\)\ \+\ 0xe8\)\)$	+1
+use	Program__findOrCreateConstInst	iVar2	encodable	INFERRED	nonzero when the hardware can encode the constants (vtable +0xe8)	^\s*if\ \(iVar2\ !=\ 0\)\ \{$	+1
+use	Program__findOrCreateConstInst	iVar2	registerMap	INFERRED	program+0x3ac: register map owning the vector of constant instructions at +0x18	^\s*iVar2\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x3ac\);$	+1
+use	Program__findOrCreateConstInst	iVar2	registerMap	INFERRED	program+0x3ac: register map owning the vector of constant instructions at +0x18	^\s*uVar11\ =\ \*\(uint\ \*\)\(\*\(int\ \*\)\(iVar2\ \+\ 0x18\)\ \+\ 4\);$	+1
+use	Program__findOrCreateConstInst	iVar2	registerMap	INFERRED	program+0x3ac: register map owning the vector of constant instructions at +0x18	^\s*puVar14\ =\ \*\(uint\ \*\*\)\(iVar2\ \+\ 0x18\);$	+1
+use	Program__findOrCreateConstInst	iVar2	registerMap	INFERRED	program+0x3ac: register map owning the vector of constant instructions at +0x18	^\s*iVar2\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x3ac\);$@2	+1
+use	Program__findOrCreateConstInst	iVar2	newEntry	INFERRED	instruction/entry created by FUN_001275a0 (kind 0x33)	^\s*iVar2\ =\ FUN_001275a0\(uVar12,0x33,uVar4,0\);$	+2
+use	Program__findOrCreateConstInst	puVar6	recordCursor	INFERRED	cursor over the four 24-byte constant records of the instruction (starts at inst+0x10)	^\s*puVar6\ =\ puVar10\ \+\ 4;$	+1
+use	Program__findOrCreateConstInst	puVar6	recordCursor	INFERRED	cursor over the four 24-byte constant records of the instruction (starts at inst+0x10)	^\s*while\ \(\(\*pcVar7\ ==\ '\\x04'\ \|\|$	+3
+use	Program__findOrCreateConstInst	puVar6	recordCursor	INFERRED	cursor over the four 24-byte constant records of the instruction (starts at inst+0x10)	^\s*puVar6\ =\ puVar6\ \+\ 6;$	+1
+use	Program__findOrCreateConstInst	puVar6	recordCursor	INFERRED	cursor over the four 24-byte constant records of the instruction (starts at inst+0x10)	^\s*puVar6\ =\ puVar10\ \+\ 4;$@2	+1
+use	Program__findOrCreateConstInst	puVar6	recordCursor	INFERRED	cursor over the four 24-byte constant records of the instruction (starts at inst+0x10)	^\s*puVar6\[3\]\ =\ \*puVar1;$	+2
+use	Program__findOrCreateConstInst	puVar6	recordCursor	INFERRED	cursor over the four 24-byte constant records of the instruction (starts at inst+0x10)	^\s*puVar6\ =\ puVar6\ \+\ 6;$@2	+1
+use	Program__findOrCreateConstInst	uVar4	newInstId	INFERRED	id returned by FUN_000f4a5c(registerMap) for the new load-const instruction	^\s*uVar4\ =\ FUN_000f4a5c\(uVar12\);$	+2
+use	Program__findOrCreateConstInst	uVar4	newInstId	INFERRED	id returned by FUN_000f4a5c(registerMap) for the new load-const instruction	^\s*uVar4\ =\ FUN_000f4a5c\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x3ac\)\);$	+2
+use	Program__findOrCreateConstInst	uVar4	recordWord1	INFERRED	second word of the local constant record copied into the instruction	^\s*uVar4\ =\ \*\(undefined4\ \*\)\(\(int\)local_94\ \+\ iVar2\ \+\ 4\);$	+1
+use	Program__findOrCreateConstInst	uVar4	recordWord1	INFERRED	second word of the local constant record copied into the instruction	^\s*puVar6\[4\]\ =\ uVar4;$	+1
+use	Program__findOrCreateConstInst	puVar1	recordSource	INFERRED	pointer to the current local constant record	^\s*puVar1\ =\ \(undefined4\ \*\)\(\(int\)local_94\ \+\ iVar2\);$	+1
+use	Program__findOrCreateConstInst	puVar1	recordSource	INFERRED	pointer to the current local constant record	^\s*puVar6\[3\]\ =\ \*puVar1;$	+1
+use	Program__findOrCreateConstInst	uVar3	vectorCapacityCursor	INFERRED	logical size of the vector read before zero-fill	^\s*uVar3\ =\ puVar14\[1\];$	+3
+use	Program__findOrCreateConstInst	piVar5	vectorSlot	INFERRED	slot pointer in the vector (element reference)	^\s*piVar5\ =\ \(int\ \*\)\(uVar13\ \*\ 4\ \+\ puVar14\[2\]\);$	+1
+use	Program__findOrCreateConstInst	piVar5	vectorSlot	INFERRED	slot pointer in the vector (element reference)	^\s*piVar5\ =\ \(int\ \*\)FUN_0019423c\(puVar14,uVar13\);$	+1
+use	Program__findOrCreateConstInst	piVar5	vectorSlot	INFERRED	slot pointer in the vector (element reference)	^\s*puVar10\ =\ \(undefined4\ \*\)\*piVar5;$	+1
+use	Program__findOrCreateConstInst	piVar5	vectorSlot	INFERRED	slot pointer in the vector (element reference)	^\s*piVar5\ =\ \(int\ \*\)\(uVar11\ \*\ 4\ \+\ puVar14\[2\]\);$	+1
+use	Program__findOrCreateConstInst	piVar5	vectorSlot	INFERRED	slot pointer in the vector (element reference)	^\s*piVar5\ =\ \(int\ \*\)FUN_0019423c\(puVar14,uVar11\);$	+1
+use	Program__findOrCreateConstInst	piVar5	vectorSlot	INFERRED	slot pointer in the vector (element reference)	^\s*\*piVar5\ =\ \(int\)puVar10;$	+1
+use	Program__findOrCreateConstInst	piVar5	newEntryVectorOrSlot	INFERRED	starts as the new entry's vector (+0x18) then the slot returned for element 0	^\s*piVar5\ =\ \*\(int\ \*\*\)\(iVar2\ \+\ 0x18\);$	+3
+use	Program__findOrCreateConstInst	piVar5	newEntryVectorOrSlot	INFERRED	starts as the new entry's vector (+0x18) then the slot returned for element 0	^\s*if\ \(piVar5\[1\]\ ==\ 0\)\ \{$	+3
+use	Program__findOrCreateConstInst	piVar5	newEntryVectorOrSlot	INFERRED	starts as the new entry's vector (+0x18) then the slot returned for element 0	^\s*piVar5\ =\ \(int\ \*\)piVar5\[2\];$	+1
+use	Program__findOrCreateConstInst	piVar5	newEntryVectorOrSlot	INFERRED	starts as the new entry's vector (+0x18) then the slot returned for element 0	^\s*puVar10\ =\ \(undefined4\ \*\)\*piVar5;$@2	+1
+use	Program__findOrCreateConstInst	pcVar7	selectByteCursor	INFERRED	cursor over the four select bytes (0x04 = lane unused)	^\s*pcVar7\ =\ \(char\ \*\)\&\(\*\(unsigned\ int\ \*\)\(\(unsigned\ char\ \*\)ghidra_home\ \+\ 8\)\);$	+1
+use	Program__findOrCreateConstInst	pcVar7	selectByteCursor	INFERRED	cursor over the four select bytes (0x04 = lane unused)	^\s*while\ \(\(\*pcVar7\ ==\ '\\x04'\ \|\|$	+3
+use	Program__findOrCreateConstInst	pcVar7	selectByteCursor	INFERRED	cursor over the four select bytes (0x04 = lane unused)	^\s*pcVar7\ =\ pcVar7\ \+\ 1;$	+1
+use	Program__findOrCreateConstInst	puVar10	resultInst	INFERRED	found or newly created load-const instruction (return value)	^\s*puVar10\ =\ \(undefined4\ \*\)0x0;$	+1
+use	Program__findOrCreateConstInst	puVar10	resultInst	INFERRED	found or newly created load-const instruction (return value)	^\s*puVar10\ =\ \(undefined4\ \*\)\*piVar5;$@2	+1
+use	Program__findOrCreateConstInst	puVar10	resultInst	INFERRED	found or newly created load-const instruction (return value)	^\s*puVar10\ =\ puVar6\ \+\ 1;$	+2
+use	Program__findOrCreateConstInst	puVar10	resultInst	INFERRED	found or newly created load-const instruction (return value)	^\s*\(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(param_1\ \+\ 0x3a0\)\ \+\ 0xc\)\)\(\*\(int\ \*\*\)\(param_1\ \+\ 0x3a0\),puVar10\);$	+1
+use	Program__findOrCreateConstInst	puVar10	resultInst	INFERRED	found or newly created load-const instruction (return value)	^\s*puVar10\[0x4b\]\ =\ local_98;$	+1
+use	Program__findOrCreateConstInst	puVar10	resultInst	INFERRED	found or newly created load-const instruction (return value)	^\s*\*piVar5\ =\ \(int\)puVar10;$	+1
+use	Program__findOrCreateConstInst	puVar10	resultInst	INFERRED	found or newly created load-const instruction (return value)	^\s*puVar6\ =\ puVar10\ \+\ 4;$@2	+1
+use	Program__findOrCreateConstInst	puVar10	resultInst	INFERRED	found or newly created load-const instruction (return value)	^\s*\*\(byte\ \*\)\(puVar10\ \+\ 0x57\)\ =\ \(byte\)\(1\ <<\ uVar13\)\ \|\ \*\(byte\ \*\)\(puVar10\ \+\ 0x57\);$	+1
+use	Program__findOrCreateConstInst	puVar10	resultInst	INFERRED	found or newly created load-const instruction (return value)	^\s*return\ puVar10;$@2	+1
+use	Program__findOrCreateConstInst	puVar10	candidateInst	INFERRED	cached load-const instruction under comparison	^\s*puVar10\ =\ \(undefined4\ \*\)\*piVar5;$	+2
+use	Program__findOrCreateConstInst	puVar10	candidateInst	INFERRED	cached load-const instruction under comparison	^\s*puVar6\ =\ puVar10\ \+\ 4;$	+1
+use	Program__findOrCreateConstInst	puVar10	candidateInst	INFERRED	cached load-const instruction under comparison	^\s*if\ \(puVar10\ !=\ \(undefined4\ \*\)0x0\)\ \{$	+2
+use	Program__findOrCreateConstInst	uVar12	registerMapForNew	INFERRED	program+0x3ac register map passed to FUN_000f4a5c/FUN_001275a0	^\s*uVar12\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x3ac\);$	+3
+use	Program__findOrCreateConstInst	puVar14	instVector	INFERRED	vector at registerMap+0x18 (capacity,size,data)	^\s*puVar14\ =\ \*\(uint\ \*\*\)\(iVar2\ \+\ 0x18\);$	+3
+use	Program__findOrCreateConstInst	puVar14	instVector	INFERRED	vector at registerMap+0x18 (capacity,size,data)	^\s*_memset\(uVar3\ \*\ 4\ \+\ puVar14\[2\],0,\(uVar13\ \-\ uVar3\)\ \*\ 4\ \+\ 4\);$	+2
+use	Program__findOrCreateConstInst	puVar14	instVector	INFERRED	vector at registerMap+0x18 (capacity,size,data)	^\s*piVar5\ =\ \(int\ \*\)\(uVar13\ \*\ 4\ \+\ puVar14\[2\]\);$	+1
+use	Program__findOrCreateConstInst	puVar14	instVector	INFERRED	vector at registerMap+0x18 (capacity,size,data)	^\s*piVar5\ =\ \(int\ \*\)FUN_0019423c\(puVar14,uVar13\);$	+1
+use	Program__findOrCreateConstInst	puVar14	instVector	INFERRED	vector at registerMap+0x18 (capacity,size,data)	^\s*puVar14\ =\ \*\(uint\ \*\*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x3ac\)\ \+\ 0x18\);$	+6
+use	Program__findOrCreateConstInst	puVar14	instVector	INFERRED	vector at registerMap+0x18 (capacity,size,data)	^\s*piVar5\ =\ \(int\ \*\)FUN_0019423c\(puVar14,uVar11\);$	+1
+local	Program__findOrCreateConstInst	local_98	constKey	INFERRED	key output of the vtable +0xe8 encoder; stored at inst+0x12c and compared to find a cached instruction
+local	Program__findOrCreateConstInst	local_94	localConstRecords	INFERRED	4 x 24-byte constant records filled by FUN_000f4a24
+use	FUN_000f07a8	iVar4	hwBlocksForwarding	INFERRED	hardware-info vtable +0xb8 on (afterInst,inst); nonzero stops the forwarding attempt	^\s*iVar4\ =\ \(\*\*\(code\ \*\*\)\(\*piVar3\ \+\ 0xb8\)\)\(piVar3,param_2,param_3\);$	+4
+use	FUN_000f07a8	iVar4	vtable0x68Result	INFERRED	inst vtable +0x68 query; together with +0x64 selects the mov-like instruction kinds handled here	^\s*iVar4\ =\ \(\*\*\(code\ \*\*\)\(\*param_3\ \+\ 0x68\)\)\(param_3\);$	+3
+use	FUN_000f07a8	iVar4	moveSourceForwardable	INFERRED	IRInst__isForwardable(moveSource, selectWord)	^\s*iVar4\ =\ \(\(int\ \(\*\)\(\)\)FUN_000ecc1c\)\(piVar3,local_4c\[0\],\*\(undefined4\ \*\)\(param_1\ \+\ 8\)\);$	+2
+use	FUN_000f07a8	iVar4	moveSourceNeedsClone	INFERRED	moveSource vtable +0x60 query; nonzero clones the source (FUN_0010cb48)	^\s*iVar4\ =\ \(\*\*\(code\ \*\*\)\(\*piVar3\ \+\ 0x60\)\)\(piVar3\);$	+2
+use	FUN_000f07a8	iVar15	vtable0x50Result	INFERRED	consumer vtable +0x50 query; nonzero skips the consumer	^\s*iVar15\ =\ \(\*\*\(code\ \*\*\)\(\*piVar3\ \+\ 0x50\)\)\(piVar3\);$	+2
+use	FUN_000f07a8	iVar15	consumerForwardable	INFERRED	IRInst__isForwardable(consumer, writtenLanesSelect)	^\s*iVar15\ =\ \(\(int\ \(\*\)\(\)\)FUN_000ecc1c\)\(piVar3,local_84,\*\(undefined4\ \*\)\(param_1\ \+\ 8\)\);$	+2
+use	FUN_000f07a8	iVar15	pushedUnwrittenSelectB	INFERRED	copy of unwrittenLanesSelect pushed on the mask stack	^\s*iVar15\ =\ local_80;$	+1
+use	FUN_000f07a8	iVar15	pushedUnwrittenSelectB	INFERRED	copy of unwrittenLanesSelect pushed on the mask stack	^\s*\*piVar14\ =\ iVar15;$	+1
+use	FUN_000f07a8	iVar15	vtable0x64Result	INFERRED	consumer vtable +0x64 query (+100)	^\s*iVar15\ =\ \(\*\*\(code\ \*\*\)\(\*piVar3\ \+\ 100\)\)\(piVar3\);$	+2
+use	FUN_000f07a8	iVar15	vtable0x64Result	INFERRED	consumer vtable +0x64 query (+100)	^\s*iVar15\ =\ \(\*\*\(code\ \*\*\)\(\*piVar3\ \+\ 100\)\)\(piVar3\);$@2	+2
+use	FUN_000f07a8	iVar15	selectIsIdentity	INFERRED	SelectWord__areCompatible(writtenLanesSelect, 0x10203): identity xyzw swizzle test	^\s*iVar15\ =\ FUN_000f2d18\(local_84,0x10203\);$	+3
+use	FUN_000f07a8	iVar15	sourceIsConstant	INFERRED	operand vreg vtable +0x48 query: source is a constant register	^\s*iVar15\ =\ \(\*\*\(code\ \*\*\)\(\*piVar14\ \+\ 0x48\)\)\(\);$	+2
+use	FUN_000f07a8	iVar15	constantsEncodable	INFERRED	hardware-info vtable +0xe8 on the 1.0 constant quad	^\s*iVar15\ =\ \(\*\*\(code\ \*\*\)\(\*piVar14\ \+\ 0xe8\)\)\(piVar14,local_74,auStack_78,0x10203\);$	+2
+use	FUN_000f07a8	iVar15	sourceVtable0x7cResult	INFERRED	operand vreg vtable +0x7c query	^\s*iVar15\ =\ \(\*\*\(code\ \*\*\)\(\*piVar14\ \+\ 0x7c\)\)\(\);$	+4
+use	FUN_000f07a8	iVar8	pushedUnwrittenSelect	INFERRED	copy of unwrittenLanesSelect pushed on the mask stack	^\s*iVar8\ =\ local_80;$	+1
+use	FUN_000f07a8	iVar8	pushedUnwrittenSelect	INFERRED	copy of unwrittenLanesSelect pushed on the mask stack	^\s*\*piVar14\ =\ iVar8;$	+1
+use	FUN_000f07a8	bVar1	allSourcesForwardable	INFERRED	cleared when a source cannot be forwarded with the written-lanes select	^\s*bVar1\ =\ true;$	+1
+use	FUN_000f07a8	bVar1	allSourcesForwardable	INFERRED	cleared when a source cannot be forwarded with the written-lanes select	^\s*bVar1\ =\ false;$	+1
+use	FUN_000f07a8	bVar1	allSourcesForwardable	INFERRED	cleared when a source cannot be forwarded with the written-lanes select	^\s*if\ \(!bVar1\)\ goto\ code_r0x000f0d0c;$	+1
+local	FUN_000f07a8	local_88	moveSelect	INFERRED	select word of the lanes of the forwarded value (bytes 0-3 are lane indices, 4 = unused); address-indexed byte-wise
+local	FUN_000f07a8	local_84	writtenLanesSelect	INFERRED	moveSelect restricted to lanes the consumer writes (other bytes set to 4)
+local	FUN_000f07a8	local_80	unwrittenLanesSelect	INFERRED	moveSelect restricted to lanes the consumer does not write; pushed back for the consumer's own readers
+local	FUN_000f07a8	local_7c	consumerDestMask	INFERRED	write-mask word of the consumer's destination operand (operand 0 +0x10)
+local	FUN_000f07a8	auStack_78	consumerDestMaskView	INFERRED	byte index into consumerDestMask via moveSelect lane bytes (frame overlay at local_88+0x10)
+local	FUN_000f07a8	local_74	unitConstQuad	INFERRED	four 1.0f constants (0x3f800000) filled after 0x7ffffffe markers; passed to the hardware constant encoder
+local	FUN_000f07a8	local_58	clearedReadSelect	INFERRED	result of SelectWord__clearReadComponents(writtenLanesSelect), stored at consumer+0x9c
+local	FUN_000f07a8	local_54	composedSelect	INFERRED	SelectWord__compose of an operand's select word with writtenLanesSelect
+local	FUN_000f07a8	local_50	moveDestMask	INFERRED	WriteMask__fromSelectWord of the mov's destination select word
+local	FUN_000f07a8	local_4c	maskedSelect	INFERRED	SelectWord__maskUnused(moveSourceSelect, moveDestMask) result; [0] becomes moveSelect
+use	FUN_000f07a8	iVar9	consumerVtable0x7cResult	INFERRED	consumer vtable +0x7c query: zero takes the single-source forwarding path	^\s*iVar9\ =\ \(\*\*\(code\ \*\*\)\(\*piVar3\ \+\ 0x7c\)\)\(piVar3\);$	^\s*if\ \(\(\(piVar3\[5\]\ \&\ 0x200U\)\ !=\ 0\)\ \&\&\ \(local_80\ !=\ 0x4040404\)\)\ \{$	all	none
+use	FUN_000f07a8	iVar9	sourceCount	INFERRED	consumer vtable +0x14 = number of source operands (loop bound)	^\s*for\ \(iVar15\ =\ 1;\ iVar9\ =\ \(\*\*\(code\ \*\*\)\(\*piVar3\ \+\ 0x14\)\)\(piVar3\),\ iVar15\ <=\ iVar9;$	^\s*iVar15\ =\ iVar15\ \+\ 1\)\ \{$	all	none
+use	FUN_000f07a8	iVar9	selectIsIdentityOperand	INFERRED	IRInst__isSourceSelectIdentity result	^\s*\(iVar9\ =\ FUN_000f31e8\(piVar3,iVar15\),\ iVar9\ ==\ 0\)\)\ goto\ code_r0x000f101c;$	^\s*\}$	all	none
+use	FUN_000f07a8	iVar9	movSourceForwardable	INFERRED	IRInst__isForwardable(consumer source 1, writtenLanesSelect)	^\s*iVar9\ =\ \(\(int\ \(\*\)\(\)\)FUN_000ecc1c\)\(uVar16,local_84,\*\(undefined4\ \*\)\(param_1\ \+\ 8\)\);$	^\s*uVar2\ =\ puVar6\[2\];$	all	none
+use	FUN_000f07a8	iVar9	sourceCount	INFERRED	consumer vtable +0x14 = number of source operands (loop bound)	^\s*for\ \(iVar15\ =\ 1;\ iVar9\ =\ \(\*\*\(code\ \*\*\)\(\*piVar3\ \+\ 0x14\)\)\(piVar3\),\ iVar15\ <=\ iVar9;$@2	^\s*iVar15\ =\ iVar15\ \+\ 1\)\ \{$	all	none
+use	FUN_000f07a8	iVar9	composedSelectCopy	INFERRED	composedSelect written into the operand record select word	^\s*iVar9\ =\ local_54;$	^\s*iVar15\ =\ \(\*\*\(code\ \*\*\)\(\*piVar3\ \+\ 100\)\)\(piVar3\);$	all	none
+use	FUN_000f07a8	iVar9	sourceCount	INFERRED	consumer vtable +0x14 = number of source operands (loop bound)	^\s*for\ \(iVar15\ =\ 1;\ iVar9\ =\ \(\*\*\(code\ \*\*\)\(\*piVar3\ \+\ 0x14\)\)\(piVar3\),\ iVar15\ <=\ iVar9;$@3	^\s*iVar15\ =\ iVar15\ \+\ 1\)\ \{$	all	none
+use	FUN_000f07a8	iVar9	selectIsIdentityOperand	INFERRED	IRInst__isSourceSelectIdentity result	^\s*\(iVar9\ =\ FUN_000f31e8\(piVar3,iVar15\),\ iVar9\ ==\ 0\)\)\ goto\ code_r0x000f1384;$	^\s*\}$	all	none
