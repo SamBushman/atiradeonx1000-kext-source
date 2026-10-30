@@ -5485,7 +5485,7 @@ int Program__translateILStream(program, ilReader)
   short registerIndex2;
   ushort saturateBit;
   undefined *remapTable;
-  undefined *puVar9;
+  undefined *resourceOperandTable;
   uint bitmapWordCount;
   uint *****rewrittenSelect;
   uint *movVector;
@@ -5500,7 +5500,7 @@ int Program__translateILStream(program, ilReader)
   int laneLoopIndex;
   int iVar23;
   undefined4 *exportInst;
-  int iVar25;
+  int operandByteLimit;
   undefined2 *fetchDescriptor2;
   undefined4 registerFile27;
   undefined2 componentSelect;
@@ -5511,13 +5511,13 @@ int Program__translateILStream(program, ilReader)
   uint ******argR6;
   uint ******argR7;
   uint ******argR8;
-  uint ***pppuVar33;
+  uint ***sourceToken1Word;
   int hwInfoObj;
   uint *listHeader;
   int *vectorSlotC;
   uint ******loopStackData;
   uint ******workInst;
-  uint ******ppppppuVar39;
+  uint ******savedCurrentBlock;
   uint ******extWordCursor;
   undefined4 virtualRegisterB;
   uint ***firstSourceToken;
@@ -6663,7 +6663,7 @@ code_r0x000feeb8:
       IRInst__setOperandRef(getResourceInst,0,virtualRegister);
       IRInst__setOperandRef(getResourceInst,1,virtualRegisterC);
       ((int (*)())Program__appendInst)(program,getResourceInst,currentBlock);
-      puVar9 = PTR_DAT_001e8b8c;
+      resourceOperandTable = PTR_DAT_001e8b8c;
       remapTable = PTR_DAT_001e8b64;
       stagedSelectWord = (uint ******)0x10203;
       if (((uint)firstTokenWord & 0x1f000000) != 0x1000000) {
@@ -6672,7 +6672,7 @@ code_r0x000feeb8:
           int2FInst = IRInst__create(0xe1,*(undefined4 *)(program + 8));
           IRInst__setOperandRef(int2FInst,0,virtualRegister);
           IRInst__setOperandRef(int2FInst,1,virtualRegister);
-          resourceOperandWord = *(undefined4 *)(puVar9 + loopCounterB);
+          resourceOperandWord = *(undefined4 *)(resourceOperandTable + loopCounterB);
           *(undefined4 *)((int)int2FInst + 0x9c) = *(undefined4 *)(remapTable + loopCounterB);
           operandRecord2 = IRInst__getOperandRecord(int2FInst,1);
           *(undefined4 *)(operandRecord2 + 0x10) = resourceOperandWord;
@@ -6841,8 +6841,8 @@ code_r0x000febe0:
         operandByteOffsetC = operandIndexB << 2;
         laneMaskPtr = (undefined1 *)((int)destOperandCount + operandIndexB);
         for (iVar23 = 0;
-            iVar25 = ((int (*)())OpcodeRecord__getOperandByte)(ilOpcode,laneMaskPtr,*(undefined4 *)(*(int *)(compilerRef + 0x30c) + 0xc)),
-            iVar23 <= iVar25; iVar23 = iVar23 + 1) {
+            operandByteLimit = ((int (*)())OpcodeRecord__getOperandByte)(ilOpcode,laneMaskPtr,*(undefined4 *)(*(int *)(compilerRef + 0x30c) + 0xc)),
+            iVar23 <= operandByteLimit; iVar23 = iVar23 + 1) {
           argR6 = *(uint *******)((int)ilReader[0x1b] + operandByteOffsetC);
           argR8 = (uint ******)&lastDeclRegister;
           argR7 = loopStackData;
@@ -6865,7 +6865,7 @@ code_r0x000febe0:
     workInst = (uint ******)0x0;
     operandIndexC = (uint ******)0x0;
 code_r0x001005f4:
-    ppppppuVar39 = (uint ******)currentBlock;
+    savedCurrentBlock = (uint ******)currentBlock;
     opcodeTemplateTable = (uint ******)PTR_DAT_001e8bd4;
     templateToken = *(uint *)(templateBase + (int)templateCursor * 4);
     if (0x71 < templateToken) goto switchD_0010061c_caseD_0;
@@ -7885,15 +7885,15 @@ code_r0x00100810:
           sourceRegisterIndexB = (int)*(short *)((int)sourceToken0Ptr + 2);
         }
         sourceToken1Ptr = ilReader[0x1b][1];
-        pppuVar33 = *sourceToken1Ptr;
-        if (((((uint)pppuVar33 & 0x3f0000) == 0x100000) && (compiler != 0)) &&
+        sourceToken1Word = *sourceToken1Ptr;
+        if (((((uint)sourceToken1Word & 0x3f0000) == 0x100000) && (compiler != 0)) &&
            ((hwDescription[2] & 0x80U) != 0)) {
           registerIndex = 0xf;
         }
         else {
           registerIndex = (int)*(short *)((int)sourceToken1Ptr + 2);
         }
-        argR8 = (uint ******)((uint)pppuVar33 >> 0x10 & 0x3f);
+        argR8 = (uint ******)((uint)sourceToken1Word >> 0x10 & 0x3f);
         pvVar16 = (void *)(**(code **)(*hwDescription + 0x24))
                                     (hwDescription,(uint)*tokenWords >> 0x10 & 7,sourceRegisterIndexB,
                                      (uint)sourceToken0Word >> 0x10 & 0x3f,registerIndex,argR8,stagedSelectWord,ilReader);
@@ -8345,8 +8345,8 @@ code_r0x00101f74:
         argR7 = (uint ******)PTR_DAT_001e8bb0;
       }
       argR8 = scopeVector;
-      templateBase = ((int (*)())Template__pushCallFrame)(program,templateBase,&templateCursor,ppppppuVar39,argR7,scopeVector);
-      argR6 = ppppppuVar39;
+      templateBase = ((int (*)())Template__pushCallFrame)(program,templateBase,&templateCursor,savedCurrentBlock,argR7,scopeVector);
+      argR6 = savedCurrentBlock;
       goto code_r0x0010372c;
     case 0x6c:
       (*(code *)(*workInst)[9])(workInst);

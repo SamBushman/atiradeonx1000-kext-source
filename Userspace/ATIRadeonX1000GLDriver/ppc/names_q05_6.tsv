@@ -2613,3 +2613,33 @@ func	FUN_000d5390	ffpsEmitColorOutputMovs	INFERRED	for every component set in co
 use	FUN_000d5390	bVar1	notLastComponent	INFERRED	loop continue flag (component != 3)	^\s*bVar1\ =\ uVar5\ !=\ 3;$	+1
 use	FUN_000d5390	bVar1	notLastComponent	INFERRED	loop continue flag (component != 3)	^\s*\}\ while\ \(bVar1\);$	+1
 func	FUN_000eec50	Program__emitDepthExportScale	INFERRED	for fragment programs with an export block: inserts the export of the default value when none exists, then builds the mad/mul/clamp sequence that rescales the depth export (literals 0.5 and 0.99999994)
+use	FUN_000d8450	bVar1	hasNoCompareMode	INFERRED	the unit's compare-mode byte (+0x71 of its state) is zero (or false when the flag path is not taken)	^\s*bVar1\ =\ false;$	+1
+use	FUN_000d8450	bVar1	hasNoCompareMode	INFERRED	the unit's compare-mode byte (+0x71 of its state) is zero (or false when the flag path is not taken)	^\s*bVar1\ =\ \*\(char\ \*\)\(uVar10\ \+\ \*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001168\)\ \+\ param_1\)\ \+\ 0x71\)\ ==\ '\\0';$	+1
+use	FUN_000d8450	bVar1	hasNoCompareMode	INFERRED	the unit's compare-mode byte (+0x71 of its state) is zero (or false when the flag path is not taken)	^\s*if\ \(\(bVar1\)\ \&\&$	+3
+use	FUN_000d8450	uVar2	coordRegisterIndex	INFERRED	(unit + 0x14) & 0xffff: temp register index used as coordinate register token	^\s*uVar2\ =\ uVar11\ \+\ 0x14\ \&\ 0xffff;$	+1
+use	FUN_000d8450	uVar2	coordRegisterIndex	INFERRED	(unit + 0x14) & 0xffff: temp register index used as coordinate register token	^\s*\*\(uint\ \*\)\(uVar4\ \*\ 4\ \+\ \*\(int\ \*\)\(param_2\ \+\ 0xc\)\)\ =\ uVar2\ \|\ 0x410000;$	+1
+use	FUN_000d8450	uVar2	coordRegisterIndex	INFERRED	(unit + 0x14) & 0xffff: temp register index used as coordinate register token	^\s*\*\(uint\ \*\)\(uVar4\ \*\ 4\ \+\ \*\(int\ \*\)\(param_2\ \+\ 0xc\)\)\ =\ uVar2\ \|\ 0x410000;$@2	+1
+use	FUN_000d8450	uVar2	coordRegisterIndex	INFERRED	(unit + 0x14) & 0xffff: temp register index used as coordinate register token	^\s*\*\(uint\ \*\)\(uVar4\ \*\ 4\ \+\ \*\(int\ \*\)\(param_2\ \+\ 0xc\)\)\ =\ uVar2\ \|\ 0x410000;$@3	+1
+use	FUN_000d8450	uVar2	coordRegisterIndex	INFERRED	(unit + 0x14) & 0xffff: temp register index used as coordinate register token	^\s*\*\(uint\ \*\)\(uVar4\ \*\ 4\ \+\ \*\(int\ \*\)\(param_2\ \+\ 0xc\)\)\ =\ uVar2\ \|\ 0x410000;$@4	+1
+use	FUN_000d8450	uVar11	sourceRegisterToken	INFERRED	source register token of the unit: 0x10011, unit|0x110000 or the offset texture unit token	^\s*uVar11\ =\ 0x10011;$	+1
+use	FUN_000d8450	uVar11	sourceRegisterToken	INFERRED	source register token of the unit: 0x10011, unit|0x110000 or the offset texture unit token	^\s*uVar11\ =\ uVar10\ \&\ 0xffff\ \|\ 0x110000;$	+1
+use	FUN_000d8450	uVar11	sourceRegisterToken	INFERRED	source register token of the unit: 0x10011, unit|0x110000 or the offset texture unit token	^\s*uVar11\ =\ uVar10\ \+\ \(uint\)\(byte\)\(\(unsigned\ char\ \*\)0x000013b2\)\[param_1\]\ \*\ 2\ \&\ 0xffff\ \|\ 0x40000;$	+1
+use	FUN_000d8450	uVar11	sourceRegisterToken	INFERRED	source register token of the unit: 0x10011, unit|0x110000 or the offset texture unit token	^\s*\*\(uint\ \*\)\(uVar4\ \*\ 4\ \+\ \*\(int\ \*\)\(param_2\ \+\ 0xc\)\)\ =\ uVar11\ \|\ 0x400000;$	+1
+use	FUN_000d8450	uVar11	unitIndex	INFERRED	unit & 0xffff: texture unit number used to build register tokens	^\s*uVar11\ =\ uVar10\ \&\ 0xffff;$	+1
+use	FUN_000d8450	uVar11	unitIndex	INFERRED	unit & 0xffff: texture unit number used to build register tokens	^\s*uVar2\ =\ uVar11\ \+\ 0x14\ \&\ 0xffff;$	+2
+use	FUN_000d8450	uVar11	unitIndex	INFERRED	unit & 0xffff: texture unit number used to build register tokens	^\s*\*\(uint\ \*\)\(uVar4\ \*\ 4\ \+\ \*\(int\ \*\)\(param_2\ \+\ 0xc\)\)\ =\ uVar11\ \|\ 0x110000;$@2	+1
+use	FUN_000d8450	uVar11	unitIndex	INFERRED	unit & 0xffff: texture unit number used to build register tokens	^\s*\*\(uint\ \*\)\(uVar4\ \*\ 4\ \+\ \*\(int\ \*\)\(param_2\ \+\ 0xc\)\)\ =\ uVar11\ \|\ 0x510000;$	+1
+use	FUN_000d8450	uVar11	unitIndex	INFERRED	unit & 0xffff: texture unit number used to build register tokens	^\s*\*\(uint\ \*\)\(uVar4\ \*\ 4\ \+\ \*\(int\ \*\)\(param_2\ \+\ 0xc\)\)\ =\ uVar11\ \|\ 0x40000;$	+1
+use	FUN_000d8450	puVar13	swizzleToken	INFERRED	swizzle/modifier token word: 0 or 0x1111	^\s*puVar13\ =\ \(undefined\ \*\)0x0;$	+1
+use	FUN_000d8450	puVar13	swizzleToken	INFERRED	swizzle/modifier token word: 0 or 0x1111	^\s*puVar13\ =\ \(\(unsigned\ char\ \*\)0x00001111\);$	+1
+use	FUN_000d8450	puVar13	swizzleToken	INFERRED	swizzle/modifier token word: 0 or 0x1111	^\s*\*\(undefined\ \*\*\)\(uVar4\ \*\ 4\ \+\ \*\(int\ \*\)\(param_2\ \+\ 0xc\)\)\ =\ puVar13;$	+1
+local	FUN_000d8450	param_3	useUnitFlags	INFERRED	nonzero enables the per-unit flag test in acStack_68
+local	FUN_000d8450	acStack_68	unitFlags	INFERRED	per-unit flag bytes (28 bytes) tested when useUnitFlags is set
+use	FUN_000fd5c8	pppuVar33	sourceToken1Word	INFERRED	first word of the second source token (*sourceToken1Ptr): type and modifier bits	^\s*pppuVar33\ =\ \*ppppuVar45;$	+3
+use	FUN_000fd5c8	pppuVar33	sourceToken1Word	INFERRED	first word of the second source token (*sourceToken1Ptr): type and modifier bits	^\s*in_r8\ =\ \(uint\ \*\*\*\*\*\*\)\(\(uint\)pppuVar33\ >>\ 0x10\ \&\ 0x3f\);$	+1
+use	FUN_000fd5c8	ppppppuVar39	savedCurrentBlock	INFERRED	currentBlock saved before Template__pushCallFrame, passed as the frame block	^\s*ppppppuVar39\ =\ \(uint\ \*\*\*\*\*\*\)local_180;$	+1
+use	FUN_000fd5c8	ppppppuVar39	savedCurrentBlock	INFERRED	currentBlock saved before Template__pushCallFrame, passed as the frame block	^\s*iVar47\ =\ \(\(int\ \(\*\)\(\)\)FUN_000fd50c\)\(param_1,iVar47,\&local_17c,ppppppuVar39,in_r7,ppppppuVar19\);$	+2
+use	FUN_000fd5c8	puVar9	resourceOperandTable	INFERRED	static table PTR_DAT_001e8b8c indexed by lane for the resource operand words	^\s*puVar9\ =\ PTR_DAT_001e8b8c;$	+1
+use	FUN_000fd5c8	puVar9	resourceOperandTable	INFERRED	static table PTR_DAT_001e8b8c indexed by lane for the resource operand words	^\s*uVar50\ =\ \*\(undefined4\ \*\)\(puVar9\ \+\ iVar34\);$	+1
+use	FUN_000fd5c8	iVar25	operandByteLimit	INFERRED	OpcodeRecord__getOperandByte result: upper bound of the operand lane loop	^\s*int\ iVar25;$	+1
+use	FUN_000fd5c8	iVar25	operandByteLimit	INFERRED	OpcodeRecord__getOperandByte result: upper bound of the operand lane loop	^\s*for\ \(iVar23\ =\ 0;$	+3

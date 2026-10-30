@@ -1655,14 +1655,15 @@ LAB_000d75e8:
 }
 
 /* FUN_000d8450 @ 0xd8450 (5856 bytes) */
-int FUN_000d8450(ctx, ilBuilder, param_3)
+int FUN_000d8450(ctx, ilBuilder, useUnitFlags)
   int ctx;
   int ilBuilder;
-  int param_3;
+  int useUnitFlags;
 {
+  uint unitIndex;
   uint tokenIndex;
-  bool bVar1;
-  uint uVar2;
+  bool hasNoCompareMode;
+  uint coordRegisterIndex;
   undefined4 newTokenBuffer;
   uint textureUnitCount;
   int texEnvRecord;
@@ -1671,12 +1672,12 @@ int FUN_000d8450(ctx, ilBuilder, param_3)
   int unitRecordCursor;
   char *unitFlagPtr;
   uint unit;
-  uint uVar11;
+  uint sourceRegisterToken;
   uint ilOpcode;
-  undefined *puVar13;
+  undefined *swizzleToken;
   uint *countPtr;
   int iStack00000020;
-  char acStack_68 [28];
+  char unitFlags [28];
   
   countPtr = (uint *)(ilBuilder + 4);
   textureUnitCount = (uint)(byte)((unsigned char *)0x000013b2)[ctx];
@@ -1686,12 +1687,12 @@ int FUN_000d8450(ctx, ilBuilder, param_3)
     unitByteCursor = ctx;
     unitPtrCursor = ctx;
     unitRecordCursor = ctx;
-    iStack00000020 = param_3;
+    iStack00000020 = useUnitFlags;
     do {
       if (*(int *)(((unsigned char *)0x000013f8) + unitPtrCursor) != 0) {
-        bVar1 = false;
+        hasNoCompareMode = false;
         if ((*(uint *)(ctx + 0x44) & 0x100000) != 0) {
-          bVar1 = *(char *)(unit + *(int *)(((unsigned char *)0x00001168) + ctx) + 0x71) == '\0';
+          hasNoCompareMode = *(char *)(unit + *(int *)(((unsigned char *)0x00001168) + ctx) + 0x71) == '\0';
         }
         if (((int)(uint)*(byte *)(ctx + 0x20) >> (unit & 0x3f) & 1U) == 0) {
           if ((*(short *)(unitRecordCursor + 0x450) != -0x7a90) || (*(short *)(texEnvRecord + 4) != -0x7885)) {
@@ -1722,18 +1723,18 @@ int FUN_000d8450(ctx, ilBuilder, param_3)
             *(uint *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = unit & 0xffff | 0x40000;
             tokenIndex = *countPtr + 1;
             *countPtr = tokenIndex;
-            if ((iStack00000020 == 0) || (acStack_68[unit] == '\0')) {
-              if ((bVar1) &&
+            if ((iStack00000020 == 0) || (unitFlags[unit] == '\0')) {
+              if ((hasNoCompareMode) &&
                  (((*(uint *)(ctx + 0x44) & 0x20000000) == 0 ||
                   ((1 << (unit & 0x3f) & *(uint *)(ctx + 0xec)) == 0)))) {
-                uVar11 = 0x10011;
+                sourceRegisterToken = 0x10011;
               }
               else {
-                uVar11 = unit & 0xffff | 0x110000;
+                sourceRegisterToken = unit & 0xffff | 0x110000;
               }
             }
             else {
-              uVar11 = unit + (uint)(byte)((unsigned char *)0x000013b2)[ctx] * 2 & 0xffff | 0x40000;
+              sourceRegisterToken = unit + (uint)(byte)((unsigned char *)0x000013b2)[ctx] * 2 & 0xffff | 0x40000;
             }
             if (*(uint *)(ilBuilder + 8) <= tokenIndex) {
               newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
@@ -1745,7 +1746,7 @@ int FUN_000d8450(ctx, ilBuilder, param_3)
               tokenIndex = *countPtr;
               *(int *)(ilBuilder + 8) = *(int *)(ilBuilder + 8) + 0x80;
             }
-            *(uint *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = uVar11 | 0x400000;
+            *(uint *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = sourceRegisterToken | 0x400000;
             tokenIndex = *countPtr + 1;
             *countPtr = tokenIndex;
             if (*(uint *)(ilBuilder + 8) <= tokenIndex) {
@@ -1788,7 +1789,7 @@ int FUN_000d8450(ctx, ilBuilder, param_3)
             tokenIndex = *countPtr;
             *(int *)(ilBuilder + 8) = *(int *)(ilBuilder + 8) + 0x80;
           }
-          uVar11 = unit & 0xffff;
+          unitIndex = unit & 0xffff;
           *(undefined4 *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = 0x40020;
           tokenIndex = *countPtr + 1;
           *countPtr = tokenIndex;
@@ -1802,8 +1803,8 @@ int FUN_000d8450(ctx, ilBuilder, param_3)
             tokenIndex = *countPtr;
             *(int *)(ilBuilder + 8) = *(int *)(ilBuilder + 8) + 0x80;
           }
-          uVar2 = uVar11 + 0x14 & 0xffff;
-          *(uint *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = uVar11 | 0x110000;
+          coordRegisterIndex = unitIndex + 0x14 & 0xffff;
+          *(uint *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = unitIndex | 0x110000;
           tokenIndex = *countPtr + 1;
           *countPtr = tokenIndex;
           if (*(uint *)(ilBuilder + 8) <= tokenIndex) {
@@ -1817,7 +1818,7 @@ int FUN_000d8450(ctx, ilBuilder, param_3)
             *(int *)(ilBuilder + 8) = *(int *)(ilBuilder + 8) + 0x80;
           }
           unitFlagPtr = (char *)(unitByteCursor + 0x21);
-          *(uint *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = uVar2 | 0x410000;
+          *(uint *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = coordRegisterIndex | 0x410000;
           tokenIndex = *countPtr + 1;
           *countPtr = tokenIndex;
           if (*(char *)(unitByteCursor + 0x21) == '\x01') {
@@ -1927,7 +1928,7 @@ int FUN_000d8450(ctx, ilBuilder, param_3)
             tokenIndex = *countPtr;
             *(int *)(ilBuilder + 8) = *(int *)(ilBuilder + 8) + 0x80;
           }
-          *(uint *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = uVar11 | 0x110000;
+          *(uint *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = unitIndex | 0x110000;
           tokenIndex = *countPtr + 1;
           *countPtr = tokenIndex;
           if (*(uint *)(ilBuilder + 8) <= tokenIndex) {
@@ -1940,7 +1941,7 @@ int FUN_000d8450(ctx, ilBuilder, param_3)
             tokenIndex = *countPtr;
             *(int *)(ilBuilder + 8) = *(int *)(ilBuilder + 8) + 0x80;
           }
-          *(uint *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = uVar2 | 0x410000;
+          *(uint *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = coordRegisterIndex | 0x410000;
           tokenIndex = *countPtr + 1;
           *countPtr = tokenIndex;
           if (*unitFlagPtr == '\x01') {
@@ -1972,7 +1973,7 @@ int FUN_000d8450(ctx, ilBuilder, param_3)
             tokenIndex = *countPtr;
             *(int *)(ilBuilder + 8) = *(int *)(ilBuilder + 8) + 0x80;
           }
-          *(uint *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = uVar2 | 0x410000;
+          *(uint *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = coordRegisterIndex | 0x410000;
           tokenIndex = *countPtr + 1;
           *countPtr = tokenIndex;
           if (*unitFlagPtr == '\x01') {
@@ -2083,14 +2084,14 @@ int FUN_000d8450(ctx, ilBuilder, param_3)
             tokenIndex = *countPtr;
             *(int *)(ilBuilder + 8) = *(int *)(ilBuilder + 8) + 0x80;
           }
-          *(uint *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = uVar11 | 0x510000;
+          *(uint *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = unitIndex | 0x510000;
           tokenIndex = *countPtr + 1;
           *countPtr = tokenIndex;
           if (*unitFlagPtr == '\x01') {
-            puVar13 = (undefined *)0x0;
+            swizzleToken = (undefined *)0x0;
           }
           else {
-            puVar13 = ((unsigned char *)0x00001111);
+            swizzleToken = ((unsigned char *)0x00001111);
           }
           if (*(uint *)(ilBuilder + 8) <= tokenIndex) {
             newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
@@ -2102,7 +2103,7 @@ int FUN_000d8450(ctx, ilBuilder, param_3)
             tokenIndex = *countPtr;
             *(int *)(ilBuilder + 8) = *(int *)(ilBuilder + 8) + 0x80;
           }
-          *(undefined **)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = puVar13;
+          *(undefined **)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = swizzleToken;
           tokenIndex = *countPtr + 1;
           *countPtr = tokenIndex;
           if (*(uint *)(ilBuilder + 8) <= tokenIndex) {
@@ -2115,7 +2116,7 @@ int FUN_000d8450(ctx, ilBuilder, param_3)
             tokenIndex = *countPtr;
             *(int *)(ilBuilder + 8) = *(int *)(ilBuilder + 8) + 0x80;
           }
-          *(uint *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = uVar2 | 0x410000;
+          *(uint *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = coordRegisterIndex | 0x410000;
           tokenIndex = *countPtr + 1;
           *countPtr = tokenIndex;
           if (*(uint *)(ilBuilder + 8) <= tokenIndex) {
@@ -2154,7 +2155,7 @@ int FUN_000d8450(ctx, ilBuilder, param_3)
             tokenIndex = *countPtr;
             *(int *)(ilBuilder + 8) = *(int *)(ilBuilder + 8) + 0x80;
           }
-          *(uint *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = uVar11 | 0x40000;
+          *(uint *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = unitIndex | 0x40000;
           tokenIndex = *countPtr + 1;
           *countPtr = tokenIndex;
           if (*(uint *)(ilBuilder + 8) <= tokenIndex) {
