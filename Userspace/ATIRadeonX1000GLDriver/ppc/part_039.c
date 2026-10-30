@@ -1294,7 +1294,7 @@ int KhanVs__vslot71_canCombineSources(this, inst, replacedSourceIndex, inst2, pa
   bool moreInit;
   int tableEntry;
   int tableInitOffset;
-  int *piVar4;
+  int *seenRegCursor;
   undefined4 operandVReg2;
   int numSources;
   int loopIndex3;
@@ -1335,10 +1335,10 @@ LAB_00129cc4:
       case 0x26:
       case 0x28:
         slotIndex = 0;
-        piVar4 = seenRegs;
+        seenRegCursor = seenRegs;
         while( true ) {
-          tableEntry = *piVar4;
-          piVar4 = piVar4 + 1;
+          tableEntry = *seenRegCursor;
+          seenRegCursor = seenRegCursor + 1;
           if (tableEntry == -1) break;
           if ((regNumber == tableEntry) || (slotsFull = slotIndex == 2, slotIndex = slotIndex + 1, slotsFull))
           goto switchD_00129ce4_caseD_0;
@@ -1349,10 +1349,10 @@ LAB_00129cc4:
       case 0x29:
       case 0x37:
         slotIndex = 0;
-        piVar4 = seenRegs + 3;
+        seenRegCursor = seenRegs + 3;
         while( true ) {
-          tableEntry = *piVar4;
-          piVar4 = piVar4 + 1;
+          tableEntry = *seenRegCursor;
+          seenRegCursor = seenRegCursor + 1;
           if (tableEntry == -1) break;
           if ((regNumber == tableEntry) || (slotsFull = slotIndex == 2, slotIndex = slotIndex + 1, slotsFull))
           goto switchD_00129ce4_caseD_0;

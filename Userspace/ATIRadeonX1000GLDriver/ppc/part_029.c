@@ -220,22 +220,22 @@ int IRInst__reinitAsMov(this, opcode, compiler)
   undefined4 opcode;
   undefined4 compiler;
 {
-  bool bVar1;
+  bool moreLanes;
   undefined *vtable;
-  int iVar3;
+  int laneIndex;
   
   IRUnary__ctor_107cec(this,opcode,compiler);
   vtable = PTR_DAT_001e8bf0;
   this[0x20] = 1;
   *this = vtable + 8;
-  iVar3 = 0;
+  laneIndex = 0;
   do {
-    bVar1 = iVar3 != 1;
+    moreLanes = laneIndex != 1;
     this[0x25] = 0xffffffff;
     this[0x26] = 0;
-    iVar3 = iVar3 + 1;
+    laneIndex = laneIndex + 1;
     this = this + 6;
-  } while (bVar1);
+  } while (moreLanes);
   return;
 }
 
@@ -274,7 +274,8 @@ int IRExport__ctor_1085b0(this, compiler)
   undefined4 *this;
   int compiler;
 {
-  undefined4 uVar1;
+  undefined4 opcodeId;
+  undefined4 defaultWord27;
   undefined4 opcodeInfo;
   
   IRAlu__ctor_1071a8(this,0x30,compiler);
@@ -283,12 +284,12 @@ int IRExport__ctor_1085b0(this, compiler)
   if ((*(uint *)(*(int *)(compiler + COMP_currentProgram) + 0x30) & 0x4000) == 0) {
     Program__addInst(*(int *)(compiler + COMP_currentProgram),this);
   }
-  uVar1 = (**(code **)(**(int **)(compiler + COMP_target) + 0x178))(*(int **)(compiler + COMP_target),compiler);
-  opcodeInfo = Opcode__getInfo(uVar1);
-  uVar1 = DAT_001af9c8;
+  opcodeId = (**(code **)(**(int **)(compiler + COMP_target) + 0x178))(*(int **)(compiler + COMP_target),compiler);
+  opcodeInfo = Opcode__getInfo(opcodeId);
+  defaultWord27 = DAT_001af9c8;
   this[0x21] = 1;
   this[0x4f] = 0x32;
-  this[0x27] = uVar1;
+  this[0x27] = defaultWord27;
   this[0x22] = opcodeInfo;
   this[0x20] = 0;
   this[0x50] = 0;

@@ -317,7 +317,7 @@ int FUN_0010c670(inst, inst2, pass)
   int *sourceInst;
   int sourceIsCopyBarrier;
   int *clonedSourceDef;
-  int iVar4;
+  int destSwizzleWord;
   int operandRecord;
   undefined4 sourceSwizzleWord;
   undefined4 staleArg6;
@@ -329,7 +329,7 @@ int FUN_0010c670(inst, inst2, pass)
   uint candidateLaneByte;
   uint laneSelectByte;
   double constantValueA;
-  undefined8 uVar12;
+  undefined8 findResult;
   undefined4 swizzleWord;
   int foundSlotOut [6];
   
@@ -397,12 +397,12 @@ int FUN_0010c670(inst, inst2, pass)
               if (candidateLaneByte != 4) {
                 sourceDef2 = IRInst__getOperandSource(inst,sourceOperandNumber);
                 constantValueA = (double)*(float *)(candidateLaneByte * 0x18 + (int)((ulonglong)sourceDef2 >> 0x20) + 0x20);
-                uVar12 = ((int (*)())IRInst__findConstantOperandWithValue)(inst2,(int)sourceDef2,foundSlotOut,constantValueA);
+                findResult = ((int (*)())IRInst__findConstantOperandWithValue)(inst2,(int)sourceDef2,foundSlotOut,constantValueA);
                 foundSlotA = foundSlotOut[0];
-                foundOperandNumberA = (int)((ulonglong)uVar12 >> 0x20);
+                foundOperandNumberA = (int)((ulonglong)findResult >> 0x20);
                 if (foundOperandNumberA == 0) {
                   insertedOperandNumber = inst2[0x21];
-                  ((void (*)())IRInst__setLiteralOperandAndSource)(inst2,(int)uVar12,insertedOperandNumber + 1,pass,constantValueA);
+                  ((void (*)())IRInst__setLiteralOperandAndSource)(inst2,(int)findResult,insertedOperandNumber + 1,pass,constantValueA);
                   (**(code **)(*inst2 + 0x88))(inst2,insertedOperandNumber + 1,laneIndex,laneIndex);
                 }
                 else if (foundSlotOut[0] != laneIndex) {
@@ -439,13 +439,13 @@ int FUN_0010c670(inst, inst2, pass)
         sourceDef3 = IRInst__getOperandSource(inst2,shiftSourceNumber);
         IRInst__setOperandSource(inst2,loopIndex,sourceDef3,0,pass);
         operandRecord4 = IRInst__getOperandRecord(inst2,shiftSourceNumber);
-        iVar4 = *(int *)(operandRecord4 + 0x10);
+        destSwizzleWord = *(int *)(operandRecord4 + 0x10);
         if (loopIndex == 0) {
-          inst2[0x27] = iVar4;
+          inst2[0x27] = destSwizzleWord;
         }
         else {
           operandRecord = IRInst__getOperandRecord(inst2,loopIndex);
-          *(int *)(operandRecord + 0x10) = iVar4;
+          *(int *)(operandRecord + 0x10) = destSwizzleWord;
         }
         shiftSourceNumber = shiftSourceNumber + 1;
         loopIndex = loopIndex + 1;
@@ -463,12 +463,12 @@ int FUN_0010c670(inst, inst2, pass)
           if (candidateLaneByteB != 4) {
             sourceDef2 = IRInst__getOperandSource(inst,loopIndex2);
             constantValueB = (double)*(float *)(candidateLaneByteB * 0x18 + (int)((ulonglong)sourceDef2 >> 0x20) + 0x20);
-            uVar12 = ((int (*)())IRInst__findConstantOperandWithValue)(inst2,(int)sourceDef2,foundSlotOut,constantValueB);
+            findResult = ((int (*)())IRInst__findConstantOperandWithValue)(inst2,(int)sourceDef2,foundSlotOut,constantValueB);
             foundSlotB = foundSlotOut[0];
-            foundOperandNumberB = (int)((ulonglong)uVar12 >> 0x20);
+            foundOperandNumberB = (int)((ulonglong)findResult >> 0x20);
             if (foundOperandNumberB == 0) {
               insertedOperandNumberB = inst2[0x21];
-              ((void (*)())IRInst__setLiteralOperandAndSource)(inst2,(int)uVar12,insertedOperandNumberB + 1,pass,constantValueB);
+              ((void (*)())IRInst__setLiteralOperandAndSource)(inst2,(int)findResult,insertedOperandNumberB + 1,pass,constantValueB);
               (**(code **)(*inst2 + 0x88))(inst2,insertedOperandNumberB + 1,laneIndexB,laneIndexB);
             }
             else if (foundSlotOut[0] != laneIndexB) {
@@ -526,7 +526,7 @@ int FUN_0010cb48(inst, pass)
   undefined4 *copyListCursor;
   uint laneSelector;
   int *copyInst;
-  int iVar11;
+  int operandNumber;
   double fparam_1;
   undefined8 constantSearchResult;
   int destMaskWord;
@@ -609,17 +609,17 @@ int FUN_0010cb48(inst, pass)
     if ((*(char *)((int)&destMaskWord + laneNumber) != '\x01') &&
        (*(char *)((int)&swizzleWord + laneNumber) == '\x04')) {
       if (1 < *(int *)(inst + 0x84)) {
-        iVar11 = 2;
+        operandNumber = 2;
         do {
-          operandCountLimit = IRInst__getOperandRecord(inst,iVar11);
+          operandCountLimit = IRInst__getOperandRecord(inst,operandNumber);
           recordLaneByte = (uint)*(byte *)(laneNumber + operandCountLimit + 0x10);
           if (recordLaneByte != 4) {
-            sourceDef2 = IRInst__getOperandSource(inst,iVar11);
+            sourceDef2 = IRInst__getOperandSource(inst,operandNumber);
             fallbackSourceValue = *(undefined4 *)(recordLaneByte * 0x18 + sourceDef2 + 0x20);
             goto LAB_0010ce20;
           }
-          iVar11 = iVar11 + 1;
-        } while (iVar11 <= *(int *)(inst + 0x84));
+          operandNumber = operandNumber + 1;
+        } while (operandNumber <= *(int *)(inst + 0x84));
       }
       fallbackSourceValue = 0;
 LAB_0010ce20:

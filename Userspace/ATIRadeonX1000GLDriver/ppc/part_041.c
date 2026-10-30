@@ -649,7 +649,8 @@ int HwLimits__buildInterferenceGraph(this, graph, fixedRegCount, regCount, useCo
   int *liveWords;
   uint *worklistVecHeader;
   int rowIndex;
-  undefined4 uVar18;
+  undefined4 worklistData;
+  undefined4 resolvedNode;
   undefined4 allocArena;
   int nextRow;
   uint wordOff;
@@ -704,8 +705,8 @@ int HwLimits__buildInterferenceGraph(this, graph, fixedRegCount, regCount, useCo
   worklist[1] = 2;
   worklist[2] = 0;
   worklist[4] = allocArena;
-  uVar18 = Arena__alloc(allocArena,8);
-  worklist[3] = uVar18;
+  worklistData = Arena__alloc(allocArena,8);
+  worklist[3] = worklistData;
   inWorklistWordCount = regCount + 0x1fU >> 5;
   inWorklistAlloc = (undefined4 *)Arena__alloc(allocArena,inWorklistWordCount * 4 + 0xc);
   inWorklistWords = inWorklistAlloc + 1;
@@ -896,14 +897,14 @@ code_r0x0013299c:
                        (((cursorInst[5] & 2U) == 0 &&
                         (nextBlock = (**(code **)(*cursorInst + 0x50))(cursorInst), nextBlock == 0)))) {
                       src1Inst = IRInst__getOperandSource(walkInst,1);
-                      uVar18 = ((int (*)())InterferenceGraph__resolveNode)(graph,*(undefined4 *)(src1Inst + 0x94),useCoalesced);
-                      ((int (*)())InterferenceGraph__addEdge)(graph,regNode,uVar18);
+                      resolvedNode = ((int (*)())InterferenceGraph__resolveNode)(graph,*(undefined4 *)(src1Inst + 0x94),useCoalesced);
+                      ((int (*)())InterferenceGraph__addEdge)(graph,regNode,resolvedNode);
                     }
                     isVertexFetchResult = (**(code **)(*walkInst + 0x2c))(walkInst);
                     if (isVertexFetchResult == 0) goto code_r0x00132adc;
                     src1Inst = IRInst__getOperandSource(walkInst,1);
-                    uVar18 = ((int (*)())InterferenceGraph__resolveNode)(graph,*(undefined4 *)(src1Inst + 0x94),useCoalesced);
-                    ((int (*)())InterferenceGraph__addEdge)(graph,regNode,uVar18);
+                    resolvedNode = ((int (*)())InterferenceGraph__resolveNode)(graph,*(undefined4 *)(src1Inst + 0x94),useCoalesced);
+                    ((int (*)())InterferenceGraph__addEdge)(graph,regNode,resolvedNode);
                     instFlags = walkInst[5];
                   }
                 }
@@ -987,8 +988,8 @@ code_r0x00132ca8: ;
             do {
               innerIndexOrScratch = BitSet__testAnyLane(liveWords,componentIdx);
               if (innerIndexOrScratch != 0) {
-                uVar18 = ((int (*)())InterferenceGraph__resolveNode)(graph,componentIdx,useCoalesced);
-                ((int (*)())InterferenceGraph__addEdge)(graph,poppedReg,uVar18);
+                resolvedNode = ((int (*)())InterferenceGraph__resolveNode)(graph,componentIdx,useCoalesced);
+                ((int (*)())InterferenceGraph__addEdge)(graph,poppedReg,resolvedNode);
               }
               componentIdx = componentIdx + 1;
             } while (regCount != componentIdx);
@@ -1658,7 +1659,7 @@ int FUN_00133fe4(allocator)
   uint loopIndex2;
   int *nextInstB;
   int program;
-  uint *puVar11;
+  uint *pendingVector;
   int block;
   undefined4 operandSwizzle;
   uint pendingCountB;
@@ -1672,7 +1673,7 @@ int FUN_00133fe4(allocator)
   spillState = ((int (*)())RegAlloc__getCachedLoadFa)(program);
   arena = *(undefined4 *)(*(int *)(allocator + 0x2c) + 0x378);
   allocation = (undefined4 *)Arena__alloc(arena,0x14);
-  puVar11 = allocation + 1;
+  pendingVector = allocation + 1;
   *allocation = arena;
   allocation[1] = 2;
   allocation[2] = 0;
@@ -1698,7 +1699,7 @@ int FUN_00133fe4(allocator)
             pendingElemRef = (int *)((pendingCount - 1U) * 4 + allocation[3]);
           }
           pendingInst = *pendingElemRef;
-          Vector__removeAt(puVar11,allocation[2] - 1);
+          Vector__removeAt(pendingVector,allocation[2] - 1);
           spillLocationA = IRInst__chainEndNext(pendingInst);
           FUN_00130abc(spillLocationA,allocator,*(undefined4 *)(allocator + 0x2c));
           spillSlotB = ((int (*)())FUN_001318a4)(allocator,*(undefined4 *)(pendingInst + 0x94),spillState);
@@ -1760,13 +1761,13 @@ int FUN_00133fe4(allocator)
                           searchRemaining = searchRemaining - 1;
                         } while (searchRemaining != 0);
                       }
-                      if (pendingCountB < *puVar11) {
+                      if (pendingCountB < *pendingVector) {
                         _memset((void *)(pendingCountB * 4 + allocation[3]),0,4);
                         allocation[2] = pendingCountB + 1;
                         pendingSlotRef = (undefined4 *)(pendingCountB * 4 + allocation[3]);
                       }
                       else {
-                        pendingSlotRef = (undefined4 *)Vector__elementRefGrow(puVar11,pendingCountB);
+                        pendingSlotRef = (undefined4 *)Vector__elementRefGrow(pendingVector,pendingCountB);
                       }
                       *pendingSlotRef = operandVReg;
                     }

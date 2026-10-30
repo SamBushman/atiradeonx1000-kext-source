@@ -769,14 +769,14 @@ int LoopInfo__matchCounterStep(loopInfo, inst)
   int inst;
 {
   int loopIndex2;
-  bool bVar1;
+  bool moreLanes;
   uint lane;
   int operandRecord;
   int *stepOperand;
   int counterLane;
   int useCountOrSource;
   int loopIndex;
-  undefined4 local_38 [8];
+  undefined4 operandSwizzleBytes [8];
   
   if (*(int *)(*(int *)(inst + 0x88) + 8) == 0x12) {
     loopIndex2 = 0;
@@ -794,9 +794,9 @@ int LoopInfo__matchCounterStep(loopInfo, inst)
           return 0;
         }
       }
-      bVar1 = loopIndex != 3;
+      moreLanes = loopIndex != 3;
       loopIndex = loopIndex + 1;
-    } while (bVar1);
+    } while (moreLanes);
     useCountOrSource = IRInst__useCount(inst,loopInfo[0x10]);
     if (1 < useCountOrSource) {
       *loopInfo = 1;
@@ -807,8 +807,8 @@ int LoopInfo__matchCounterStep(loopInfo, inst)
       useCountOrSource = (**(code **)(*stepOperand + 0x48))(stepOperand);
       if (useCountOrSource != 0) {
         useCountOrSource = IRInst__getOperandRecord(inst,2);
-        local_38[0] = *(undefined4 *)(useCountOrSource + 0x10);
-        lane = (uint)*(byte *)((int)local_38 + counterLane);
+        operandSwizzleBytes[0] = *(undefined4 *)(useCountOrSource + 0x10);
+        lane = (uint)*(byte *)((int)operandSwizzleBytes + counterLane);
         if (((((int)*(char *)(stepOperand + 0x57) >> (lane & 0x3f) & 1U) != 0) && (stepOperand[lane * 6 + 7] == 2))
            && (GH_U2F((unsigned int)(stepOperand[lane * 6 + 8])) == 1.0)) {
           return 1;
@@ -2179,7 +2179,7 @@ int FUN_0012eacc(program)
   int splitResult;
   int conditionKey;
   undefined4 headerWordB8;
-  undefined4 *puVar8;
+  undefined4 *armEntryBlock;
   undefined4 *armBlock;
   undefined4 *ifHeaderAlloc;
   uint pendingCount;
@@ -2370,18 +2370,18 @@ LAB_0012ed24:
       ifHeader = ifHeaderAlloc + 1;
       IfHeader__ctor_ea6d0(ifHeader,branchInst,chainKey,movDestOperand,*(undefined4 *)(program + 8));
       isSimple = Block__isSimple(predecessor);
-      puVar8 = predecessor;
+      armEntryBlock = predecessor;
       if (isSimple == 0) {
         arenaAt374 = *(undefined4 *)(*(int *)(program + 8) + 0x374);
         blockAlloc = (undefined4 *)Arena__alloc(arenaAt374,0x130);
         *blockAlloc = arenaAt374;
-        puVar8 = blockAlloc + 1;
-        Block__ctor_ea020(puVar8,*(undefined4 *)(program + 8));
-        Block__splitOutgoingEdge(predecessor,movDestOperand,puVar8);
-        Block__splitIncomingEdge(ifHeader,movDestOperand,puVar8);
-        Program__insertBlockAfter(program,predecessor,puVar8);
+        armEntryBlock = blockAlloc + 1;
+        Block__ctor_ea020(armEntryBlock,*(undefined4 *)(program + 8));
+        Block__splitOutgoingEdge(predecessor,movDestOperand,armEntryBlock);
+        Block__splitIncomingEdge(ifHeader,movDestOperand,armEntryBlock);
+        Program__insertBlockAfter(program,predecessor,armEntryBlock);
       }
-      Program__insertBlockAfter(program,puVar8,ifHeader);
+      Program__insertBlockAfter(program,armEntryBlock,ifHeader);
       arenaAt374 = *(undefined4 *)(*(int *)(program + 8) + 0x374);
       blockAlloc2 = (undefined4 *)Arena__alloc(arenaAt374,0x130);
       *blockAlloc2 = arenaAt374;
@@ -2393,7 +2393,7 @@ LAB_0012ed24:
       Program__insertBlockAfter(program,armBlock,ifFooterBlock);
       Block__setField0xb8AndChildren(ifHeader,headerWordB8);
       Block__connect(ifHeader,armBlock);
-      Block__splitOutgoingEdge(puVar8,movDestOperand,ifHeader);
+      Block__splitOutgoingEdge(armEntryBlock,movDestOperand,ifHeader);
       Block__connect(armBlock,ifFooterBlock);
       Block__splitOutgoingEdge(predecessor2,pendingEntry,ifFooterBlock);
       Block__connect(ifFooterBlock,pendingEntry);

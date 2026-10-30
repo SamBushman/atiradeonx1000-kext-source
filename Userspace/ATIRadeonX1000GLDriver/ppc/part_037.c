@@ -148,7 +148,7 @@ int FUN_0011eaa0(program)
   int *definedInBlocks;
   uint frontierWordOffset;
   int iVar13;
-  undefined4 *puVar14;
+  undefined4 *phiNode;
   int blockCount;
   undefined4 predecessorCount;
   uint clearCountC;
@@ -261,20 +261,20 @@ int FUN_0011eaa0(program)
               arena = *(undefined4 *)(*(int *)(program + 8) + 0x374);
               instAlloc = (undefined4 *)Arena__alloc(arena,0x168);
               *instAlloc = arena;
-              puVar14 = instAlloc + 1;
-              IRPhiNode__ctor_10a398(puVar14,*(undefined4 *)(program + 8));
+              phiNode = instAlloc + 1;
+              IRPhiNode__ctor_10a398(phiNode,*(undefined4 *)(program + 8));
               predecessorCount = Block__predecessorCount(frontierBlock);
               instAlloc[0x22] = predecessorCount;
-              IRInst__setOperandRef(puVar14,0,registerRecord);
+              IRInst__setOperandRef(phiNode,0,registerRecord);
               if (*(int *)(registerRecord + 4) == 0x2c) {
                 instAlloc[0x28] = UNK_001afee0;
               }
               definedBitWord = *(uint *)((int)definedInBlocks + frontierWordOffset + 8);
               if ((definedBitWord >> frontierBitIndex & 1) == 0) {
                 *(uint *)((int)definedInBlocks + frontierWordOffset + 8) = 1 << frontierBitIndex | definedBitWord;
-                ((int (*)())VReg__appendUser)(registerRecord,puVar14);
+                ((int (*)())VReg__appendUser)(registerRecord,phiNode);
               }
-              Block__prependInst(frontierBlock,puVar14);
+              Block__prependInst(frontierBlock,phiNode);
               (**(code **)(*frontierBlock + 0x48))(frontierBlock);
               *(uint *)((int)visitedBlocks + frontierWordOffset + 8) = 1 << frontierBitIndex | *(uint *)((int)visitedBlocks + frontierWordOffset + 8)
               ;
