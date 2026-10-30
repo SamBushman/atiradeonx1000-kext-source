@@ -8224,7 +8224,7 @@ LAB_0004b42c:
 LAB_0004b2f8:
       if (cVar4 == '\0') {
         if (bVar2) {
-          FUN_00087e80(glContext,0,puVar5,puVar5 + 4);
+          arbfpCompileFragmentProgram(glContext,0,puVar5,puVar5 + 4);
         }
         else {
           FUN_000b6580(glContext,1);

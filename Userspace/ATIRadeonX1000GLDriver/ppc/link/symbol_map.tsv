@@ -949,9 +949,9 @@ PTR_FUN_001e8ac8	0x1e8ac8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char 
 PTR_FUN_001e8acc	0x1e8acc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8acc asm("PTR_FUN_001e8acc");	pointer -> FUN_0004de30	data.s
 PTR_FUN_001e8ad0	0x1e8ad0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8ad0 asm("PTR_FUN_001e8ad0");	pointer -> FUN_00065c40	data.s
 PTR_FUN_001e8ad4	0x1e8ad4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8ad4 asm("PTR_FUN_001e8ad4");	pointer -> arbEmitRecord3Src_op44	data.s
-PTR_FUN_001e8ad8	0x1e8ad8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8ad8 asm("PTR_FUN_001e8ad8");	pointer -> FUN_0006e460	data.s
+PTR_FUN_001e8ad8	0x1e8ad8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8ad8 asm("PTR_FUN_001e8ad8");	pointer -> arbEmitIlOp4e	data.s
 PTR_FUN_001e8adc	0x1e8adc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8adc asm("PTR_FUN_001e8adc");	pointer -> arbEmitIlSetCompare5	data.s
-PTR_FUN_001e8ae0	0x1e8ae0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8ae0 asm("PTR_FUN_001e8ae0");	pointer -> FUN_00087e80	data.s
+PTR_FUN_001e8ae0	0x1e8ae0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8ae0 asm("PTR_FUN_001e8ae0");	pointer -> arbfpCompileFragmentProgram	data.s
 PTR_DAT_001e8ae4	0x1e8ae4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e8ae4 asm("PTR_DAT_001e8ae4");	pointer -> orph_4c544+12	data.s
 PTR_FUN_001e8ae8	0x1e8ae8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8ae8 asm("PTR_FUN_001e8ae8");	pointer -> FUN_00087e60	data.s
 PTR_FUN_001e8aec	0x1e8aec	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8aec asm("PTR_FUN_001e8aec");	pointer -> arbEmitRecord3Src_op0b	data.s

@@ -29,7 +29,7 @@ int FUN_00076c60(ctx)
     if ((*(byte *)(ctx + 0x2d) & 4) == 0) {
       noState = iVar5 == 0;
       if ((*(byte *)(ctx + 0x2d) & 3) != 0) {
-        FUN_00076770(ctx,iVar5 + 0x13c,shader);
+        vpStateUpdateFogConstants(ctx,iVar5 + 0x13c,shader);
       }
       goto LAB_00076dc0;
     }
@@ -369,8 +369,8 @@ int FUN_000774c0(param_1, param_2)
   return iVar1;
 }
 
-/* FUN_00077560 @ 0x77560 (228 bytes) */
-int FUN_00077560(alloc, recordIndex, depth, unusedArg4, unusedArg5, param_6, param_7)
+/* recordCollectDependencies @ 0x77560 (228 bytes) */
+int recordCollectDependencies(alloc, recordIndex, depth, unusedArg4, unusedArg5, param_6, param_7)
   int alloc;
   int recordIndex;
   uint depth;
@@ -405,7 +405,7 @@ int FUN_00077560(alloc, recordIndex, depth, unusedArg4, unusedArg5, param_6, par
       if (sourceMaskBit != 0) {
         for (depNode = (undefined4 *)*sourceListHead; depNode != (undefined4 *)0x0;
             depNode = (undefined4 *)depNode[4]) {
-          ((int (*)())FUN_00077560)(alloc,*depNode,depth + 1,unusedArg4,unusedArg5,callerSlotBase,sourceMaskBit);
+          ((int (*)())recordCollectDependencies)(alloc,*depNode,depth + 1,unusedArg4,unusedArg5,callerSlotBase,sourceMaskBit);
         }
       }
       moreSlots = sourceSlot != 2;
@@ -446,8 +446,8 @@ int depListRemove(listHead, node)
   return;
 }
 
-/* FUN_000776b0 @ 0x776b0 (176 bytes) */
-int FUN_000776b0(alloc)
+/* recordClearBindingTables @ 0x776b0 (176 bytes) */
+int recordClearBindingTables(alloc)
   int alloc;
 {
   bool moreWords;
@@ -554,8 +554,8 @@ int recordGetWriteMask(param_1)
   return *param_1 >> 0x14 & 0xf;
 }
 
-/* FUN_00077860 @ 0x77860 (792 bytes) */
-int FUN_00077860(alloc, records, liveIndex, modeFlag)
+/* recordIsSchedulable @ 0x77860 (792 bytes) */
+int recordIsSchedulable(alloc, records, liveIndex, modeFlag)
   int alloc;
   int records;
   int liveIndex;
@@ -1471,8 +1471,8 @@ int recordGetWriteEnable(param_1, param_2)
   return *param_1 >> 0x17 & 1;
 }
 
-/* FUN_00078f80 @ 0x78f80 (2340 bytes) */
-int FUN_00078f80(param_1, param_2, param_3, param_4, param_5)
+/* recordRetireBindings @ 0x78f80 (2340 bytes) */
+int recordRetireBindings(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   uint param_2;
   undefined4 *param_3;
@@ -2418,8 +2418,8 @@ int FUN_0007a1a0(alloc, recordIndex, swizzle)
   return;
 }
 
-/* FUN_0007a4a0 @ 0x7a4a0 (1544 bytes) */
-int FUN_0007a4a0(ctx, program, laterPass, tempRegLimit, recordIndex, keepFlagOut, chosenRegOut)
+/* recordPlanDestination @ 0x7a4a0 (1544 bytes) */
+int recordPlanDestination(ctx, program, laterPass, tempRegLimit, recordIndex, keepFlagOut, chosenRegOut)
   int ctx;
   int program;
   int laterPass;
@@ -2679,8 +2679,8 @@ LAB_0007aa50:
   goto LAB_0007a7b0;
 }
 
-/* FUN_0007aae0 @ 0x7aae0 (1460 bytes) */
-int FUN_0007aae0(ctx, registerCount, readyCycle, keepFlag, chosenReg, program, param_7, laterPass)
+/* recordPickNextToEmit @ 0x7aae0 (1460 bytes) */
+int recordPickNextToEmit(ctx, registerCount, readyCycle, keepFlag, chosenReg, program, param_7, laterPass)
   int ctx;
   int registerCount;
   uint readyCycle;
@@ -2779,7 +2779,7 @@ int FUN_0007aae0(ctx, registerCount, readyCycle, keepFlag, chosenReg, program, p
   else if (pairState == 1) {
     chosenRecord = *(int *)(ctx + 0x35498);
     keepFlagTmp[0] = 0;
-    fitOk = ((int (*)())FUN_0007a4a0)(ctx,program,laterPass,registerCount,chosenRecord,keepFlagTmp,chosenRegTmp);
+    fitOk = ((int (*)())recordPlanDestination)(ctx,program,laterPass,registerCount,chosenRecord,keepFlagTmp,chosenRegTmp);
     *(undefined4 *)(ctx + 0x35490) = 3;
     if (fitOk != 0) {
       *puStack00000024 = keepFlagTmp[0];
@@ -2809,7 +2809,7 @@ int FUN_0007aae0(ctx, registerCount, readyCycle, keepFlag, chosenReg, program, p
       a5 = &candidateKeepFlag;
       a2 = laterPass;
       registerCountArg = registerCount;
-      candidateFits = ((int (*)())FUN_0007a4a0)(ctx,program,laterPass,registerCount,a4,a5,local_58);
+      candidateFits = ((int (*)())recordPlanDestination)(ctx,program,laterPass,registerCount,a4,a5,local_58);
       if (candidateFits != 0) {
         score = 100;
         if (uStack00000020 <= (uint)queueCursor[-0x1001]) {
@@ -3191,7 +3191,7 @@ int recordProgramAllocateAndEmit(alloc, unusedArg2, scratchArg3, scratchArg4, sc
     while( true ) {
       chainNodeLast = lastChainNodeB;
       scratchArg3 = (code *)0x0;
-      ((int (*)())FUN_00077560)(alloc,*(undefined4 *)chainNodeLast,0,scratchArg4,scratchArg5,scratchArg6,configBit6Arg);
+      ((int (*)())recordCollectDependencies)(alloc,*(undefined4 *)chainNodeLast,0,scratchArg4,scratchArg5,scratchArg6,configBit6Arg);
       configBit6Arg = *(code **)(alloc + 0x10450);
       if ((configBit6Arg == (code *)0x0) || (chainNodeLast == configBit6Arg)) break;
       lastChainNodeB = configBit6Arg;
@@ -3314,13 +3314,13 @@ LAB_0007b378:
     } while (loopIndex != recordCount);
   }
   liveIndexByte = (code *)0x0;
-  ((int (*)())FUN_000776b0)(alloc);
+  ((int (*)())recordClearBindingTables)(alloc);
   liveListPtrB = 0x00024870 + alloc;
   uVar26 = extraout_r4;
   while (liveIndexByte < *(code **)(alloc + 0x26870)) {
     scratchArg4 = (code *)(**(uint **)(alloc + 0x34) >> 6 & 1);
     scratchArg3 = liveIndexByte;
-    statusAndValue = ((int (*)())FUN_00077860)(alloc,records,liveIndexByte,scratchArg4);
+    statusAndValue = ((int (*)())recordIsSchedulable)(alloc,records,liveIndexByte,scratchArg4);
     uVar26 = (undefined4)statusAndValue;
     if ((int)((ulonglong)statusAndValue >> 0x20) == 0) {
       liveIndexByte = liveIndexByte + 1;
@@ -3345,7 +3345,7 @@ LAB_0007b378:
       return 2;
     }
     scratchArg6 = records;
-    recordCount = ((int (*)())FUN_0007aae0)(alloc,local_64,9,pickedNeedsRetarget,&pickedRegister,records,*configPtr,*configPtr >> 6 & 1);
+    recordCount = ((int (*)())recordPickNextToEmit)(alloc,local_64,9,pickedNeedsRetarget,&pickedRegister,records,*configPtr,*configPtr >> 6 & 1);
     if (recordCount < 0) {
       configFlagsB = **(uint **)(alloc + 0x34);
       bVar31 = true;
@@ -3360,7 +3360,7 @@ LAB_0007b378:
           local_64 = 0x12;
         }
         scratchArg6 = records;
-        recordCount = ((int (*)())FUN_0007aae0)(alloc,local_64,9,pickedNeedsRetarget,&pickedRegister,records,*configPtr,configFlagsB);
+        recordCount = ((int (*)())recordPickNextToEmit)(alloc,local_64,9,pickedNeedsRetarget,&pickedRegister,records,*configPtr,configFlagsB);
         bVar31 = recordCount < 0;
         if (!bVar31) goto LAB_0007b894;
         configFlagsB = **(uint **)(alloc + 0x34);
@@ -3401,7 +3401,7 @@ LAB_0007b894:
     }
     scratchArg5 = (int *)(*configPtrB >> 6 & 1);
     scratchArg4 = records;
-    status = ((int (*)())FUN_00078f80)(alloc,recordCount,scratchArg3,records,scratchArg5);
+    status = ((int (*)())recordRetireBindings)(alloc,recordCount,scratchArg3,records,scratchArg5);
     if (status != 0) {
       return status;
     }
@@ -3639,13 +3639,13 @@ LAB_0007bc50:
       } while (retiredScanIndex < *(uint *)(alloc + 0x28874));
     }
     liveIndexByteB = (code *)0x0;
-    ((int (*)())FUN_000776b0)(alloc);
+    ((int (*)())recordClearBindingTables)(alloc);
     liveListPtrB = 0x00024870 + alloc;
     uVar26 = extraout_r4_01;
     while (liveIndexByteB < *(code **)(alloc + 0x26870)) {
       scratchArg4 = (code *)(**(uint **)(alloc + 0x34) >> 6 & 1);
       scratchArg3 = liveIndexByteB;
-      statusAndValue = ((int (*)())FUN_00077860)(alloc,records,liveIndexByteB,scratchArg4);
+      statusAndValue = ((int (*)())recordIsSchedulable)(alloc,records,liveIndexByteB,scratchArg4);
       uVar26 = (undefined4)statusAndValue;
       if ((int)((ulonglong)statusAndValue >> 0x20) == 0) {
         liveIndexByteB = liveIndexByteB + 1;

@@ -4319,7 +4319,7 @@ int FUN_00052280(glContext)
       registerDirty = *(uint *)(glContext + 0x1930);
     }
     if ((registerDirty & 0x1000000) != 0) {
-      FUN_00086840(glContext);
+      gldUploadClipPlanes(glContext);
     }
     *(undefined4 *)(glContext + 0x1934) = 0;
     *(undefined4 *)(glContext + 0x1930) = 0;

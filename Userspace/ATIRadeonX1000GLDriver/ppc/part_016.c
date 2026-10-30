@@ -8807,7 +8807,7 @@ int FUN_000b6580(glContext, param_2)
    * (confirmed live: ilRewriteForTextureState read local_64's slot as heap-garbage, not the value this function
    * just stored, because the two locals landed non-adjacent at -O0). This is the exact same defect,
    * same call chain (X -> FUN_000b4400 -> ilRewriteForTextureState's param_4[0]/param_4[1]), already fixed once
-   * for FUN_00087e80's own local_48 (part_012.c, issue #64) - declared as 7 separate scalars, they
+   * for arbfpCompileFragmentProgram's own local_48 (part_012.c, issue #64) - declared as 7 separate scalars, they
    * are not guaranteed contiguous by the compiler, only by the caller's own struct convention.
    * Merged into a real array, aliased back to the original names so the rest of this function's
    * logic is unchanged (issue #64). */

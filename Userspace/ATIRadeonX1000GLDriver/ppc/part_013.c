@@ -3610,8 +3610,8 @@ int arbfpLoadDefaultProgram(context)
                in_r10);
 }
 
-/* FUN_0008f7f0 @ 0x8f7f0 (884 bytes) */
-int FUN_0008f7f0(ctx, param_2, param_3, rect, param_5)
+/* gldDrawInternalRect @ 0x8f7f0 (884 bytes) */
+int gldDrawInternalRect(ctx, param_2, param_3, rect, param_5)
   int ctx;
   undefined4 param_2;
   undefined4 param_3;
@@ -3762,7 +3762,7 @@ int FUN_0008fb70(ctx)
   int iVar2;
   
   if (*(int *)(((unsigned char *)0x00003e28) + *(int *)(*(int *)(ctx + 4) + 0x10)) != 0) {
-    FUN_00086840(ctx);
+    gldUploadClipPlanes(ctx);
   }
   iVar2 = *(int *)(ctx + 0x1b7c);
   *(undefined1 *)(ctx + 0x23ec) = 1;
@@ -4296,8 +4296,8 @@ int FUN_00090960(param_1)
   return ((int (*)())FUN_00090840)(param_1);
 }
 
-/* FUN_00090990 @ 0x90990 (772 bytes) */
-int FUN_00090990(ctx, dirtyMasks)
+/* gldUpdateHwTclState @ 0x90990 (772 bytes) */
+int gldUpdateHwTclState(ctx, dirtyMasks)
   int ctx;
   undefined4 *dirtyMasks;
 {

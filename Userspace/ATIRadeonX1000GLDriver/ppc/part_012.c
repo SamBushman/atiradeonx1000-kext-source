@@ -3105,8 +3105,8 @@ int FUN_000867b0(param_1)
   return;
 }
 
-/* FUN_00086840 @ 0x86840 (228 bytes) */
-int FUN_00086840(ctx)
+/* gldUploadClipPlanes @ 0x86840 (228 bytes) */
+int gldUploadClipPlanes(ctx)
   int ctx;
 {
   int cmdPos;
@@ -3942,8 +3942,8 @@ int FUN_00087e70()
   return ((unsigned char *)0x00003880U);
 }
 
-/* FUN_00087e80 @ 0x87e80 (764 bytes) */
-int FUN_00087e80(ctx, fpRecord, workArea, keyWords)
+/* arbfpCompileFragmentProgram @ 0x87e80 (764 bytes) */
+int arbfpCompileFragmentProgram(ctx, fpRecord, workArea, keyWords)
   undefined4 *ctx;
   int fpRecord;
   int workArea;
@@ -4124,7 +4124,7 @@ int FUN_00088190(ctx, fpState)
   if (fpState != (char *)0x0) {
     if (*(int *)(ctx + 0x23e0) == 0) {
       if (*(int *)(fpState + 0x37cc) == 0) {
-        ((int (*)())FUN_00087e80)(ctx,0,*(int *)(fpState + 0x37e4),*(int *)(fpState + 0x37e4) + 4);
+        ((int (*)())arbfpCompileFragmentProgram)(ctx,0,*(int *)(fpState + 0x37e4),*(int *)(fpState + 0x37e4) + 4);
         *fpState = '\0';
       }
       activeStateBlock = workAreaState;
@@ -4136,7 +4136,7 @@ int FUN_00088190(ctx, fpState)
     }
     else {
       if (*(int *)(fpState + 0x37d8) == 0) {
-        ((int (*)())FUN_00087e80)(ctx,0,*(int *)(fpState + 0x37e4),*(int *)(fpState + 0x37e4) + 4);
+        ((int (*)())arbfpCompileFragmentProgram)(ctx,0,*(int *)(fpState + 0x37e4),*(int *)(fpState + 0x37e4) + 4);
         *fpState = '\0';
       }
       if (0 < *(int *)(fpState + 0x37d8)) {
@@ -5073,6 +5073,6 @@ asm(".set FUN_00087da0, _FUN_00087da0");
 asm(".globl FUN_00087e60");
 asm(".set FUN_00087e60, _FUN_00087e60");
 asm(".globl FUN_00087e80");
-asm(".set FUN_00087e80, _FUN_00087e80");
+asm(".set FUN_00087e80, _arbfpCompileFragmentProgram");
 asm(".globl FUN_00088190");
 asm(".set FUN_00088190, _FUN_00088190");

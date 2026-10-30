@@ -604,7 +604,7 @@
 0x6d240	arbEmitIlExp	1308	no	indirect call (driver context / vtable / callback)
 0x6d780	arbEmitIlExn	1308	no	indirect call (driver context / vtable / callback)
 0x6dcc0	arbEmitIlPow	1912	no	indirect call (driver context / vtable / callback)
-0x6e460	FUN_0006e460	1928	no	indirect call (driver context / vtable / callback)
+0x6e460	arbEmitIlOp4e	1928	no	indirect call (driver context / vtable / callback)
 0x6ec10	arbEmitIlMovMadMov	4312	no	indirect call (driver context / vtable / callback)
 0x6fd10	evsTokenBufPush	180	no	indirect call (driver context / vtable / callback)
 0x6fdd0	evsAllocLocalConstantRegisters	1812	no	indirect call (driver context / vtable / callback)
@@ -653,7 +653,7 @@
 0x763d0	evsEmitDp3	204	yes	
 0x764a0	evsEmitMov	188	yes	
 0x76560	evsEmitIndexOrMove	524	no	indirect call (driver context / vtable / callback)
-0x76770	FUN_00076770	352	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x76770	vpStateUpdateFogConstants	352	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x768e0	FUN_000768e0	384	no	indirect call (driver context / vtable / callback)
 0x76ac0	FUN_00076ac0	188	yes	
 0x76b80	vpStateCacheInsert	116	yes	
@@ -668,14 +668,14 @@
 0x772f4	vpStateCacheFreeAll	300	no	indirect call (driver context / vtable / callback)
 0x77430	vpStateSetConstantVector	132	yes	
 0x774c0	FUN_000774c0	156	no	indirect call (driver context / vtable / callback)
-0x77560	FUN_00077560	228	yes	
+0x77560	recordCollectDependencies	228	yes	
 0x77650	depListRemove	76	yes	
-0x776b0	FUN_000776b0	176	yes	
+0x776b0	recordClearBindingTables	176	yes	
 0x77760	arrayRemoveAt	72	yes	
 0x777b0	FUN_000777b0	56	yes	
 0x77800	FUN_00077800	64	yes	
 0x77850	recordGetWriteMask	12	yes	
-0x77860	FUN_00077860	792	yes	
+0x77860	recordIsSchedulable	792	yes	
 0x77ba0	regBindingSet	140	yes	
 0x77c40	regBindingSetFixedRegister	124	yes	
 0x77cd0	recordSourceFileIs1	24	yes	
@@ -696,7 +696,7 @@
 0x78e00	chunkArenaAlloc	228	yes	
 0x78ef0	recordSourceFileIs2	24	yes	
 0x78f10	recordGetWriteEnable	92	yes	
-0x78f80	FUN_00078f80	2340	yes	
+0x78f80	recordRetireBindings	2340	yes	
 0x798f0	recordSetWriteMask	28	yes	
 0x79910	depListAddEdge	248	yes	
 0x79a20	recordGetSourceSelect	92	yes	
@@ -709,8 +709,8 @@
 0x7a070	chunkArenaFree	156	yes	
 0x7a110	FUN_0007a110	100	yes	
 0x7a1a0	FUN_0007a1a0	756	yes	
-0x7a4a0	FUN_0007a4a0	1544	yes	
-0x7aae0	FUN_0007aae0	1460	no	indirect call (driver context / vtable / callback)
+0x7a4a0	recordPlanDestination	1544	yes	
+0x7aae0	recordPickNextToEmit	1460	no	indirect call (driver context / vtable / callback)
 0x7b0d0	recordProgramAllocateAndEmit	5660	yes	
 0x7c760	recordProgramBuildDependencies	4940	yes	
 0x7dcd0	FUN_0007dcd0	88	no	indirect call (driver context / vtable / callback)
@@ -747,7 +747,7 @@
 0x864e0	arbEmitRecord2Src_op4f	548	no	calls an import (calloc); calls an import (free)
 0x86710	FUN_00086710	152	no	indirect call (driver context / vtable / callback)
 0x867b0	FUN_000867b0	140	yes	
-0x86840	FUN_00086840	228	no	indirect call (driver context / vtable / callback)
+0x86840	gldUploadClipPlanes	228	no	indirect call (driver context / vtable / callback)
 0x86930	FUN_00086930	204	yes	
 0x86a10	FUN_00086a10	96	yes	
 0x86a80	gldSaveRasterState	284	yes	
@@ -761,7 +761,7 @@
 0x87da0	FUN_00087da0	172	yes	
 0x87e60	FUN_00087e60	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x87e70	FUN_00087e70	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x87e80	FUN_00087e80	764	yes	
+0x87e80	arbfpCompileFragmentProgram	764	yes	
 0x88190	FUN_00088190	740	no	indirect call (driver context / vtable / callback)
 0x88480	arbfpLookupKeyword	268	yes	
 0x885b0	arbLexNumber	860	no	no static blocker: a test could reach it (needs arguments / state no test builds)
@@ -806,14 +806,14 @@
 0x8f520	arbfpInitProgramState	456	no	indirect call (driver context / vtable / callback)
 0x8f6f0	arbfpGrowInstanceTable	108	no	indirect call (driver context / vtable / callback)
 0x8f760	arbfpLoadDefaultProgram	144	yes	
-0x8f7f0	FUN_0008f7f0	884	no	indirect call (driver context / vtable / callback)
+0x8f7f0	gldDrawInternalRect	884	no	indirect call (driver context / vtable / callback)
 0x8fb70	FUN_0008fb70	248	no	indirect call (driver context / vtable / callback)
 0x8fc70	ffvpAssignOutputSlots	1028	yes	
 0x900a0	ffvpComputeOutputMasks	944	no	indirect call (driver context / vtable / callback)
 0x90470	gldValidateState	952	no	indirect call (driver context / vtable / callback)
 0x90840	FUN_00090840	264	no	indirect call (driver context / vtable / callback)
 0x90960	FUN_00090960	48	yes	
-0x90990	FUN_00090990	772	yes	
+0x90990	gldUpdateHwTclState	772	yes	
 0x90ca0	ffvpAllocTempRegister	1240	yes	
 0x911a0	ffvpFreeTempRegister	316	yes	
 0x912f0	ffvpResolveMaterialSource	208	yes	

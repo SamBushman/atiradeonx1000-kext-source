@@ -236,10 +236,10 @@
 82900	FUN_00082900	r5	PASS-indirect	GARBAGE	
 82900	FUN_00082900	r6	PASS-indirect	GARBAGE	
 83870	ffvpValidateProgram	r10	PASS-indirect	GARBAGE	
-86840	FUN_00086840	r5	PASS-indirect	GARBAGE	
-86840	FUN_00086840	r6	PASS-indirect	GARBAGE	
-86840	FUN_00086840	r7	PASS-indirect	GARBAGE	
-86840	FUN_00086840	r8	PASS-indirect	GARBAGE	
+86840	gldUploadClipPlanes	r5	PASS-indirect	GARBAGE	
+86840	gldUploadClipPlanes	r6	PASS-indirect	GARBAGE	
+86840	gldUploadClipPlanes	r7	PASS-indirect	GARBAGE	
+86840	gldUploadClipPlanes	r8	PASS-indirect	GARBAGE	
 872e0	gldLeaveInternalDrawState	r5	PASS-indirect	GARBAGE	
 872e0	gldLeaveInternalDrawState	r6	PASS-indirect	GARBAGE	
 872e0	gldLeaveInternalDrawState	r7	PASS-indirect	GARBAGE	

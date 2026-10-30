@@ -320,10 +320,10 @@
 837b0	gldEmitVertexRoutingPackets	r7	PASS-no	837c4 bl 0x83470
 837b0	gldEmitVertexRoutingPackets	r8	PASS-no	837c4 bl 0x83470
 83870	ffvpValidateProgram	r10	PASS-indirect	8389c bl 0x90470
-86840	FUN_00086840	r5	PASS-indirect	868a0 bctrl 
-86840	FUN_00086840	r6	PASS-indirect	868a0 bctrl 
-86840	FUN_00086840	r7	PASS-indirect	868a0 bctrl 
-86840	FUN_00086840	r8	PASS-indirect	868a0 bctrl 
+86840	gldUploadClipPlanes	r5	PASS-indirect	868a0 bctrl 
+86840	gldUploadClipPlanes	r6	PASS-indirect	868a0 bctrl 
+86840	gldUploadClipPlanes	r7	PASS-indirect	868a0 bctrl 
+86840	gldUploadClipPlanes	r8	PASS-indirect	868a0 bctrl 
 872e0	gldLeaveInternalDrawState	r5	PASS-indirect	87428 bctrl 
 872e0	gldLeaveInternalDrawState	r6	PASS-indirect	87428 bctrl 
 872e0	gldLeaveInternalDrawState	r7	PASS-indirect	87428 bctrl 

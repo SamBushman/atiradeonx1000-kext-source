@@ -1163,8 +1163,8 @@ LAB_0006e054:
   return;
 }
 
-/* FUN_0006e460 @ 0x6e460 (1928 bytes) */
-int FUN_0006e460(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate)
+/* arbEmitIlOp4e @ 0x6e460 (1928 bytes) */
+int arbEmitIlOp4e(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate)
   int ctx;
   uint dstFile;
   uint dstIndex;
@@ -5630,8 +5630,8 @@ int evsEmitIndexOrMove(compiler, tokenStream, compileState, op)
   return 0xffffffff;
 }
 
-/* FUN_00076770 @ 0x76770 (352 bytes) */
-int FUN_00076770(ctx, param_2, vpCache)
+/* vpStateUpdateFogConstants @ 0x76770 (352 bytes) */
+int vpStateUpdateFogConstants(ctx, param_2, vpCache)
   int ctx;
   undefined4 param_2;
   int *vpCache;
@@ -5737,7 +5737,7 @@ int FUN_000768e0(ctx, vpCache)
             loopIndex = loopIndex + 1;
           } while (loopIndex < paramCount);
         }
-        ((int (*)())FUN_00076770)(ctx,constantsBase,vpCache);
+        ((int (*)())vpStateUpdateFogConstants)(ctx,constantsBase,vpCache);
       }
       *(undefined4 *)(((unsigned char *)0x00001354) + ctx) = 0;
       *(undefined4 *)(((unsigned char *)0x0000134c) + ctx) = 0;
@@ -5845,7 +5845,7 @@ asm(".set arbEmitIlExn, _arbEmitIlExn");
 asm(".globl arbEmitIlPow");
 asm(".set arbEmitIlPow, _arbEmitIlPow");
 asm(".globl FUN_0006e460");
-asm(".set FUN_0006e460, _FUN_0006e460");
+asm(".set FUN_0006e460, _arbEmitIlOp4e");
 asm(".globl arbEmitIlMovMadMov");
 asm(".set arbEmitIlMovMadMov, _arbEmitIlMovMadMov");
 asm(".globl noop_70c50");

@@ -4552,7 +4552,7 @@ int FUN_00020210(ctx)
   }
   local_20 = local_28 + local_20;
   local_1c = local_24 + local_1c;
-  FUN_0008f7f0(ctx + 0x240,0,0,&local_28,0);
+  gldDrawInternalRect(ctx + 0x240,0,0,&local_28,0);
   return;
 }
 

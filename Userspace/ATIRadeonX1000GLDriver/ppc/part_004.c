@@ -5787,7 +5787,7 @@ LAB_0002c610:
   else {
     if ((((dirtyBits[2] & 0x3f000008) != 0) || ((scratchUint8 & 0x4c00003) != 0)) ||
        ((*(char *)(engineObjects + 0x2a43) != '\0' || (scratchUint7 != 0)))) {
-      FUN_00090990(stream,dirtyBits);
+      gldUpdateHwTclState(stream,dirtyBits);
       FUN_00090840(stream);
     }
     if (*(char *)(engineObjects + 0x20) == '\0') {
