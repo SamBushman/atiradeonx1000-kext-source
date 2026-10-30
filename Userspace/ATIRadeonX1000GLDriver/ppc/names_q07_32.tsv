@@ -3682,3 +3682,32 @@ use	FUN_00156d48	iVar7	operandIdxOrResult	INFERRED	one register reused through t
 use	FUN_00156d48	iVar7	operandIdxOrResult	INFERRED	one register reused through the fold: operand index (1/2), operand-record results, predicate results and loop counters (not splittable: assigned from the same chain conditions)	^\s*if\ \(\*\(char\ \*\)\(iVar7\ \+\ iVar23\ \+\ 0x10\)\ !=\ '\\x01'\)\ \{$@2	+2
 use	FUN_00156d48	iVar7	operandIdxOrResult	INFERRED	one register reused through the fold: operand index (1/2), operand-record results, predicate results and loop counters (not splittable: assigned from the same chain conditions)	^\s*bVar1\ =\ iVar7\ !=\ 3;$@2	+2
 use	FUN_00156d48	iVar7	operandIdxOrResult	INFERRED	one register reused through the fold: operand index (1/2), operand-record results, predicate results and loop counters (not splittable: assigned from the same chain conditions)	^\s*iVar7\ =\ FUN_001054ec\(param_1,iVar8\);$	+2
+local	FUN_0015b974	param_2	outSourceDef	INFERRED	operand source def of the matched multiplied value
+local	FUN_0015b974	param_3	outAddendSource	INFERRED	the non-constant other source of an add pattern, or 0
+local	FUN_0015b974	param_4	outScale	INFERRED	power-of-two scale (1 << shift) or constant multiplier
+local	FUN_0015b974	param_5	outSourceSelect	INFERRED	select byte of operand 1 of the final source
+use	FUN_0015b974	iVar1	destSplatLane	INFERRED	SelectWord__splatComponent of the dest select word; >=0 means a single splat lane	^\s*iVar1\ =\ FUN_001054ec\(param_1,0\);$	+4
+use	FUN_0015b974	iVar1	sourceScaleCheck	INFERRED	FUN_0015b8b8 result on an operand source	^\s*iVar1\ =\ FUN_001054ec\(local_68,1\);$@2	+3
+use	FUN_0015b974	iVar1	operandRecordB	INFERRED	operand record fetched for the source swizzle bytes	^\s*iVar1\ =\ FUN_001054ec\(local_68,uVar2\);$	+2
+use	FUN_0015b974	iVar1	operandRecordB	INFERRED	operand record fetched for the source swizzle bytes	^\s*if\ \(iVar1\ ==\ 0\)\ \{$@5	+1
+use	FUN_0015b974	uVar5	sourceSelectByte	INFERRED	select byte of operand 1 (+0x13)	^\s*uVar5\ =\ \(uint\)\*\(byte\ \*\)\(iVar1\ \+\ 0x13\);$	+1
+use	FUN_0015b974	uVar5	sourceSelectByte	INFERRED	select byte of operand 1 (+0x13)	^\s*iVar1\ =\ \(\(int\ \(\*\)\(\)\)FUN_0015b8b8\)\(\&local_68,uVar5\);$	+1
+use	FUN_0015b974	uVar5	sourceSelectByte	INFERRED	select byte of operand 1 (+0x13)	^\s*iVar1\ =\ \(\(int\ \(\*\)\(\)\)FUN_0015b8b8\)\(\&local_64,\(uint\)\*\(byte\ \*\)\(uVar5\ \+\ iVar1\ \+\ 0x10\)\);$	+1
+use	FUN_0015b974	uVar5	sourceSelectByte	INFERRED	select byte of operand 1 (+0x13)	^\s*iVar1\ =\ \(\(int\ \(\*\)\(\)\)FUN_0015b8b8\)\(\&local_64,\(uint\)\*\(byte\ \*\)\(uVar5\ \+\ iVar1\ \+\ 0x10\)\);$@2	+1
+use	FUN_0015b974	uVar5	sourceSelectByte	INFERRED	select byte of operand 1 (+0x13)	^\s*iVar1\ =\ \(\(int\ \(\*\)\(\)\)FUN_0015b8b8\)\(\&local_64,uVar5\);$	+1
+use	FUN_0015b974	uVar5	constantIntValue	INFERRED	integer value of the uniform constant	^\s*uVar5\ =\ \(uint\)\(int\)local_5c;$	+3
+use	FUN_0015b974	uVar5	constantIntValue	INFERRED	integer value of the uniform constant	^\s*\*param_4\ =\ uVar5;$	+1
+use	FUN_0015b974	uVar5	scaleValue	INFERRED	shift scale or 2	^\s*uVar5\ =\ 2;$	+1
+use	FUN_0015b974	uVar5	scaleValue	INFERRED	shift scale or 2	^\s*uVar5\ =\ 1\ <<\ \(local_64\[0x49\]\ \+\ local_68\[0x49\]\ \&\ 0x3fU\);$	+1
+use	FUN_0015b974	uVar5	scaleValue	INFERRED	shift scale or 2	^\s*\*param_4\ =\ uVar5;$@2	+1
+local	FUN_0015b974	piVar6	addendSource	INFERRED	the non-constant operand of the add
+use	FUN_0015b974	iVar7	sourceOpcode	INFERRED	opcode of the source inst	^\s*iVar7\ =\ \*\(int\ \*\)\(local_68\[0x22\]\ \+\ 8\);$	+1
+use	FUN_0015b974	iVar7	sourceOpcode	INFERRED	opcode of the source inst	^\s*if\ \(iVar7\ ==\ 0x13\)\ \{$	+1
+use	FUN_0015b974	iVar7	sourceOpcode	INFERRED	opcode of the source inst	^\s*if\ \(\(iVar7\ !=\ 0x12\)\ \&\&\ \(iVar7\ !=\ 0x9b\)\)\ \{$	+1
+local	FUN_0015b974	local_68	sourceInst	INFERRED	operand 1 source of inst; passed by address to FUN_0015b8b8
+local	FUN_0015b974	local_64	innerSource	INFERRED	operand source of sourceInst; passed by address to FUN_0015b8b8
+local	FUN_0015b974	auStack_60	uniformConstantHeader	INFERRED	first word of the out record of IRInst__getUniformSourceConstant
+local	FUN_0015b974	local_5c	uniformConstantValue	INFERRED	float out value of IRInst__getUniformSourceConstant
+local	FUN_0015b974	local_48	constantAsLongLong	INFERRED	fctiw conversion scratch
+local	FUN_0015b974	local_40	doubleHighWord	INFERRED	0x43300000 high word of the int-to-double trick
+local	FUN_0015b974	uStack_3c	doubleLowWord	INFERRED	biased int low word of the int-to-double trick

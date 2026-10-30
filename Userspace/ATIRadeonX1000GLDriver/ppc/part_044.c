@@ -1703,12 +1703,12 @@ int FUN_0015b8b8(param_1, param_2)
 }
 
 /* FUN_0015b974 @ 0x15b974 (972 bytes) */
-int FUN_0015b974(inst, param_2, param_3, param_4, param_5)
+int FUN_0015b974(inst, outSourceDef, outAddendSource, outScale, outSourceSelect)
   int inst;
-  undefined4 *param_2;
-  undefined4 *param_3;
-  uint *param_4;
-  uint *param_5;
+  undefined4 *outSourceDef;
+  undefined4 *outAddendSource;
+  uint *outScale;
+  uint *outSourceSelect;
 {
   int operandSelect;
   int vcall48Result;
@@ -1718,156 +1718,160 @@ int FUN_0015b974(inst, param_2, param_3, param_4, param_5)
   undefined4 sourceDef;
   int operandRecord;
   int *operandVReg;
-  int iVar1;
+  int destSplatLane;
+  int operandRecordB;
+  int sourceScaleCheck;
   int callResult;
   undefined4 operandIndex;
   int *inst1;
   undefined4 srcIndex;
-  uint uVar5;
-  int *piVar6;
-  int iVar7;
-  int *local_68;
-  int *local_64;
-  undefined1 auStack_60 [4];
-  float local_5c;
-  longlong local_48;
-  undefined4 local_40;
-  uint uStack_3c;
+  uint sourceSelectByte;
+  uint scaleValue;
+  uint constantIntValue;
+  int *addendSource;
+  int sourceOpcode;
+  int *sourceInst;
+  int *innerSource;
+  undefined1 uniformConstantHeader [4];
+  float uniformConstantValue;
+  longlong constantAsLongLong;
+  undefined4 doubleHighWord;
+  uint doubleLowWord;
   
   if (*(int *)(*(int *)(inst + 0x88) + 8) == 0x37) {
     operandRecord = IRInst__getOperandRecord(inst,0);
-    iVar1 = SelectWord__splatComponent(*(undefined4 *)(operandRecord + 0x10));
-    if ((((-1 < iVar1) && (local_68 = (int *)IRInst__getOperandSource(inst,1), local_68[0x48] == 0)) &&
+    destSplatLane = SelectWord__splatComponent(*(undefined4 *)(operandRecord + 0x10));
+    if ((((-1 < destSplatLane) && (sourceInst = (int *)IRInst__getOperandSource(inst,1), sourceInst[0x48] == 0)) &&
         ((*(uint *)(inst + 0xb8) & 1) == 0)) && ((*(uint *)(inst + 0xb8) & 2) == 0)) {
       operandRecord = IRInst__getOperandRecord(inst,1);
-      uVar5 = (uint)*(byte *)(operandRecord + 0x13);
-      iVar7 = *(int *)(local_68[0x22] + 8);
-      callResult = ((int (*)())FUN_0015b8b8)(&local_68,uVar5);
+      sourceSelectByte = (uint)*(byte *)(operandRecord + 0x13);
+      sourceOpcode = *(int *)(sourceInst[0x22] + 8);
+      callResult = ((int (*)())FUN_0015b8b8)(&sourceInst,sourceSelectByte);
       if (callResult == 0) {
-        vcall64Result = (**(code **)(*local_68 + 100))(local_68);
+        vcall64Result = (**(code **)(*sourceInst + 100))(sourceInst);
         if (vcall64Result == 0) {
-          if (iVar7 == 0x13) {
-            if ((local_68[0x2e] & 1U) != 0) {
+          if (sourceOpcode == 0x13) {
+            if ((sourceInst[0x2e] & 1U) != 0) {
               return 0;
             }
-            if ((local_68[0x2e] & 2U) != 0) {
+            if ((sourceInst[0x2e] & 2U) != 0) {
               return 0;
             }
-            if ((local_68[0x34] & 1U) != 0) {
+            if ((sourceInst[0x34] & 1U) != 0) {
               return 0;
             }
-            if ((local_68[0x34] & 2U) != 0) {
+            if ((sourceInst[0x34] & 2U) != 0) {
               return 0;
             }
-            local_64 = (int *)IRInst__getOperandSource(local_68,1);
-            operandVReg = (int *)IRInst__getOperandSource(local_68,2);
+            innerSource = (int *)IRInst__getOperandSource(sourceInst,1);
+            operandVReg = (int *)IRInst__getOperandSource(sourceInst,2);
             vcall48Result = (**(code **)(*operandVReg + 0x48))(operandVReg);
             if (vcall48Result == 0) {
-              vcall48Result = (**(code **)(*local_64 + 0x48))(local_64);
+              vcall48Result = (**(code **)(*innerSource + 0x48))(innerSource);
               if (vcall48Result == 0) {
                 return 0;
               }
               operandIndex = 2;
               srcIndex = 1;
-              piVar6 = local_64;
-              local_64 = operandVReg;
+              addendSource = innerSource;
+              innerSource = operandVReg;
             }
             else {
               operandIndex = 1;
               srcIndex = 2;
-              piVar6 = operandVReg;
+              addendSource = operandVReg;
             }
-            operandRecord = IRInst__getOperandRecord(local_68,operandIndex);
-            iVar1 = ((int (*)())FUN_0015b8b8)(&local_64,(uint)*(byte *)(uVar5 + operandRecord + 0x10));
-            inst1 = local_68;
-            if (iVar1 == 0) {
+            operandRecord = IRInst__getOperandRecord(sourceInst,operandIndex);
+            operandRecordB = ((int (*)())FUN_0015b8b8)(&innerSource,(uint)*(byte *)(sourceSelectByte + operandRecord + 0x10));
+            inst1 = sourceInst;
+            if (operandRecordB == 0) {
               return 0;
             }
-            operandRecord = IRInst__getOperandRecord(local_68,0);
-            uniformSourceConstant = IRInst__getUniformSourceConstant(inst1,srcIndex,*(undefined4 *)(operandRecord + 0x10),auStack_60);
+            operandRecord = IRInst__getOperandRecord(sourceInst,0);
+            uniformSourceConstant = IRInst__getUniformSourceConstant(inst1,srcIndex,*(undefined4 *)(operandRecord + 0x10),uniformConstantHeader);
             if (uniformSourceConstant == 0) {
-              *param_3 = piVar6;
+              *outAddendSource = addendSource;
             }
             else {
-              local_40 = 0x43300000;
-              uVar5 = (uint)(int)local_5c;
-              local_48 = (longlong)(int)uVar5;
-              uStack_3c = uVar5 ^ 0x80000000;
-              if (local_5c != (float)((double)CONCAT44(0x43300000,uStack_3c) - 4503601774854144.0))
+              doubleHighWord = 0x43300000;
+              constantIntValue = (uint)(int)uniformConstantValue;
+              constantAsLongLong = (longlong)(int)constantIntValue;
+              doubleLowWord = constantIntValue ^ 0x80000000;
+              if (uniformConstantValue != (float)((double)CONCAT44(0x43300000,doubleLowWord) - 4503601774854144.0))
               {
                 return 0;
               }
-              *param_4 = uVar5;
-              *param_3 = 0;
+              *outScale = constantIntValue;
+              *outAddendSource = 0;
             }
-            sourceDef = IRInst__getOperandSource(local_64,1);
-            *param_2 = sourceDef;
-            inst2 = local_64;
+            sourceDef = IRInst__getOperandSource(innerSource,1);
+            *outSourceDef = sourceDef;
+            inst2 = innerSource;
             goto LAB_0015bc04;
           }
-          if ((iVar7 != 0x12) && (iVar7 != 0x9b)) {
+          if ((sourceOpcode != 0x12) && (sourceOpcode != 0x9b)) {
             return 0;
           }
-          local_64 = (int *)IRInst__getOperandSource(local_68,1);
-          operandVReg = (int *)IRInst__getOperandSource(local_68,2);
-          if (operandVReg != local_64) {
+          innerSource = (int *)IRInst__getOperandSource(sourceInst,1);
+          operandVReg = (int *)IRInst__getOperandSource(sourceInst,2);
+          if (operandVReg != innerSource) {
             return 0;
           }
-          if ((local_68[0x2e] & 1U) != 0) {
+          if ((sourceInst[0x2e] & 1U) != 0) {
             return 0;
           }
-          if ((local_68[0x2e] & 2U) != 0) {
+          if ((sourceInst[0x2e] & 2U) != 0) {
             return 0;
           }
-          if ((local_68[0x34] & 1U) != 0) {
+          if ((sourceInst[0x34] & 1U) != 0) {
             return 0;
           }
-          if ((local_68[0x34] & 2U) != 0) {
+          if ((sourceInst[0x34] & 2U) != 0) {
             return 0;
           }
-          operandRecord = IRInst__getOperandRecord(local_68,1);
+          operandRecord = IRInst__getOperandRecord(sourceInst,1);
           operandSelect = *(int *)(operandRecord + 0x10);
-          operandRecord = IRInst__getOperandRecord(local_68,2);
+          operandRecord = IRInst__getOperandRecord(sourceInst,2);
           if (operandSelect != *(int *)(operandRecord + 0x10)) {
             return 0;
           }
-          operandRecord = IRInst__getOperandRecord(local_68,1);
-          iVar1 = ((int (*)())FUN_0015b8b8)(&local_64,(uint)*(byte *)(uVar5 + operandRecord + 0x10));
-          if (iVar1 == 0) {
+          operandRecord = IRInst__getOperandRecord(sourceInst,1);
+          sourceScaleCheck = ((int (*)())FUN_0015b8b8)(&innerSource,(uint)*(byte *)(sourceSelectByte + operandRecord + 0x10));
+          if (sourceScaleCheck == 0) {
             return 0;
           }
-          uVar5 = 2;
+          scaleValue = 2;
         }
         else {
-          local_64 = (int *)IRInst__getOperandSource(local_68,1);
-          if ((local_68[0x2e] & 1U) != 0) {
+          innerSource = (int *)IRInst__getOperandSource(sourceInst,1);
+          if ((sourceInst[0x2e] & 1U) != 0) {
             return 0;
           }
-          if ((local_68[0x2e] & 2U) != 0) {
+          if ((sourceInst[0x2e] & 2U) != 0) {
             return 0;
           }
-          callResult = ((int (*)())FUN_0015b8b8)(&local_64,uVar5);
+          callResult = ((int (*)())FUN_0015b8b8)(&innerSource,sourceSelectByte);
           if (callResult == 0) {
             return 0;
           }
-          uVar5 = 1 << (local_64[0x49] + local_68[0x49] & 0x3fU);
+          scaleValue = 1 << (innerSource[0x49] + sourceInst[0x49] & 0x3fU);
         }
-        *param_4 = uVar5;
-        *param_3 = 0;
-        sourceDef = IRInst__getOperandSource(local_64,1);
-        *param_2 = sourceDef;
-        inst2 = local_64;
+        *outScale = scaleValue;
+        *outAddendSource = 0;
+        sourceDef = IRInst__getOperandSource(innerSource,1);
+        *outSourceDef = sourceDef;
+        inst2 = innerSource;
       }
       else {
-        *param_4 = 1 << (local_68[0x49] & 0x3fU);
-        *param_3 = 0;
-        sourceDef = IRInst__getOperandSource(local_68,1);
-        *param_2 = sourceDef;
-        inst2 = local_68;
+        *outScale = 1 << (sourceInst[0x49] & 0x3fU);
+        *outAddendSource = 0;
+        sourceDef = IRInst__getOperandSource(sourceInst,1);
+        *outSourceDef = sourceDef;
+        inst2 = sourceInst;
       }
 LAB_0015bc04:
       operandRecord = IRInst__getOperandRecord(inst2,1);
-      *param_5 = (uint)*(byte *)(operandRecord + 0x13);
+      *outSourceSelect = (uint)*(byte *)(operandRecord + 0x13);
       return 1;
     }
   }
