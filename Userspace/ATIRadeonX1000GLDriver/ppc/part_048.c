@@ -336,15 +336,15 @@ int ValueKey__rewriteAsMovOfOperand(ctx, operandIndex)
 int ValueKey__replaceWithSource2IfSourcesEqual23(ctx)
   int ctx;
 {
-  uint uVar1;
+  uint word0xd0Flags;
   int callResult;
-  uint uVar3;
+  uint word0xe8Flags;
   
   callResult = Inst__allWrittenLanesSatisfy(ctx,2,3);
   if (callResult != 0) {
-    uVar3 = *(uint *)(*(int *)(ctx + 0xb0) + 0xe8);
-    uVar1 = *(uint *)(*(int *)(ctx + 0xb0) + 0xd0);
-    if (((uVar1 & 1) == (uVar3 & 1)) && ((uVar1 >> 1 & 1) == (uVar3 >> 1 & 1))) {
+    word0xe8Flags = *(uint *)(*(int *)(ctx + 0xb0) + 0xe8);
+    word0xd0Flags = *(uint *)(*(int *)(ctx + 0xb0) + 0xd0);
+    if (((word0xd0Flags & 1) == (word0xe8Flags & 1)) && ((word0xd0Flags >> 1 & 1) == (word0xe8Flags >> 1 & 1))) {
       ((int (*)())ValueKey__rewriteAsMovOfOperand)(ctx,2);
       ValueKey__rebuild(ctx);
       return 1;
@@ -1079,27 +1079,27 @@ int ValueKey__rewriteAsMovOfVec4Constant(ctx, vec4Constant)
 }
 
 /* ValueKey__foldCompareSameSourcesToConstant @ 0x17d3f8 (232 bytes) */
-int ValueKey__foldCompareSameSourcesToConstant(param_1)
-  int param_1;
+int ValueKey__foldCompareSameSourcesToConstant(ctx)
+  int ctx;
 {
   undefined4 *loopPtr;
   int loopRemaining;
-  undefined4 uVar3;
+  undefined4 resultBits;
   int loopRemaining2;
-  undefined4 local_28 [8];
+  undefined4 resultVec4 [8];
   
-  loopRemaining = Inst__allWrittenLanesSatisfy(param_1,1,2);
+  loopRemaining = Inst__allWrittenLanesSatisfy(ctx,1,2);
   if (loopRemaining != 0) {
-    loopRemaining = *(int *)(param_1 + 0xb0);
+    loopRemaining = *(int *)(ctx + 0xb0);
     if (((*(uint *)(loopRemaining + 0xb8) & 1) == (*(uint *)(loopRemaining + 0xd0) & 1)) &&
        ((*(uint *)(loopRemaining + 0xb8) >> 1 & 1) == (*(uint *)(loopRemaining + 0xd0) >> 1 & 1))) {
       loopRemaining = ((bool (*)())evaluateCompareFloats)(loopRemaining,(double)FLOAT_001aa0d4,(double)FLOAT_001aa0d4);
-      uVar3 = 0x3f800000;
+      resultBits = 0x3f800000;
       if (loopRemaining == 0) {
-        uVar3 = 0;
+        resultBits = 0;
       }
       loopRemaining = 4;
-      loopPtr = local_28;
+      loopPtr = resultVec4;
       do {
         *loopPtr = 0x7ffffffe;
         loopPtr = loopPtr + 1;
@@ -1108,12 +1108,12 @@ int ValueKey__foldCompareSameSourcesToConstant(param_1)
       loopRemaining = 0;
       loopRemaining2 = 4;
       do {
-        *(undefined4 *)(loopRemaining + (int)local_28) = uVar3;
+        *(undefined4 *)(loopRemaining + (int)resultVec4) = resultBits;
         loopRemaining = loopRemaining + 4;
         loopRemaining2 = loopRemaining2 + -1;
       } while (loopRemaining2 != 0);
-      ((int (*)())ValueKey__rewriteAsMovOfVec4Constant)(param_1,local_28);
-      ValueKey__rebuild(param_1);
+      ((int (*)())ValueKey__rewriteAsMovOfVec4Constant)(ctx,resultVec4);
+      ValueKey__rebuild(ctx);
       return 1;
     }
   }
@@ -1931,29 +1931,30 @@ int ValueKey__foldMadZeroAddend(param_1)
 int ValueKey__foldMadByPlusMinusOne(ctx)
   int ctx;
 {
-  bool bVar1;
+  undefined4 minusOneValueNumber;
+  bool notLastOperand;
   int callResult;
-  undefined4 uVar3;
+  undefined4 plusOneValueNumber;
   int loopIndex;
   
   callResult = Compiler__valueNumberForExpr(*(undefined4 *)(ctx + 0x238),0x3f800000);
   loopIndex = 1;
-  uVar3 = *(undefined4 *)(callResult + 4);
+  plusOneValueNumber = *(undefined4 *)(callResult + 4);
   do {
-    callResult = Inst__writtenLanesAllMatchValue(ctx,uVar3,loopIndex);
+    callResult = Inst__writtenLanesAllMatchValue(ctx,plusOneValueNumber,loopIndex);
     if (callResult != 0) {
       ((int (*)())ValueKey__rewriteAsBinaryOfOperands)(ctx,0x12,(loopIndex == 1) + 1,3);
       ValueKey__rebuild(ctx);
       return 1;
     }
-    bVar1 = loopIndex != 2;
+    notLastOperand = loopIndex != 2;
     loopIndex = loopIndex + 1;
-  } while (bVar1);
+  } while (notLastOperand);
   callResult = Compiler__valueNumberForExpr(*(undefined4 *)(ctx + 0x238),0xbf800000);
   loopIndex = 1;
-  uVar3 = *(undefined4 *)(callResult + 4);
+  minusOneValueNumber = *(undefined4 *)(callResult + 4);
   do {
-    callResult = Inst__writtenLanesAllMatchValue(ctx,uVar3,loopIndex);
+    callResult = Inst__writtenLanesAllMatchValue(ctx,minusOneValueNumber,loopIndex);
     if (callResult != 0) {
       ((int (*)())ValueKey__rewriteAsBinaryOfOperands)(ctx,0x12,(loopIndex == 1) + 1,3);
       IROperand__setModifierBits(*(int *)(ctx + 0xb0) + 0xa4,1,
@@ -1961,9 +1962,9 @@ int ValueKey__foldMadByPlusMinusOne(ctx)
       ValueKey__rebuild(ctx);
       return 1;
     }
-    bVar1 = loopIndex != 2;
+    notLastOperand = loopIndex != 2;
     loopIndex = loopIndex + 1;
-  } while (bVar1);
+  } while (notLastOperand);
   return 0;
 }
 

@@ -1796,12 +1796,12 @@ int R520MachineAssembler__vslot24_assembleWithTarget(this, node, block)
   undefined4 block;
 {
   bool emittedNothing;
-  undefined4 uVar2;
+  undefined4 targetId;
   undefined4 in_r6;
   undefined4 in_r7;
   undefined4 in_r8;
   int recordIndexBefore;
-  code *pcVar4;
+  code *slotFunction;
   
   recordIndexBefore = this[0x18];
   (**(code **)(*this + 0x34))
@@ -1810,9 +1810,9 @@ int R520MachineAssembler__vslot24_assembleWithTarget(this, node, block)
   if ((*(int *)(node + 0xdc) == 0) || (emittedNothing = true, recordIndexBefore != this[0x18])) {
     emittedNothing = false;
   }
-  pcVar4 = *(code **)(*this + 0x9c);
-  uVar2 = FUN_000e7d5c(node);
-  (*pcVar4)(this,uVar2,*(undefined4 *)(node + 0x134));
+  slotFunction = *(code **)(*this + 0x9c);
+  targetId = FUN_000e7d5c(node);
+  (*slotFunction)(this,targetId,*(undefined4 *)(node + 0x134));
   if (emittedNothing) {
     *(undefined1 *)(this[0x18] * 0x48 + this[0x2a] + -0x44) = 1;
   }

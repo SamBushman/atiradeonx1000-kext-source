@@ -2034,13 +2034,15 @@ int ValueKey__forwardOperandByCompareToZero(ctx, lane)
   int ctx;
   int lane;
 {
+  int selectedValueNumber;
+  int selectedOperand;
   undefined4 findInPtrSetResult;
   undefined4 exprRecordForValueNumberResult;
   undefined4 result;
   uint selectedOperandFlags;
   float *exprRecord2;
   float *exprRecord;
-  int iVar5;
+  int compareHolds;
   int member0xb0;
   int laneBase;
   
@@ -2049,18 +2051,18 @@ int ValueKey__forwardOperandByCompareToZero(ctx, lane)
   if (*(int *)(laneBase + 0x178) < 0) {
     exprRecord2 = (float *)Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),*(int *)(laneBase + 0x178));
     exprRecord = (float *)Compiler__valueNumberForExpr(*(undefined4 *)(ctx + 0x238),0);
-    iVar5 = ((bool (*)())evaluateCompareFloats)(*(undefined4 *)(ctx + 0xb0),(double)*exprRecord2,(double)*exprRecord);
+    compareHolds = ((bool (*)())evaluateCompareFloats)(*(undefined4 *)(ctx + 0xb0),(double)*exprRecord2,(double)*exprRecord);
     member0xb0 = *(int *)(ctx + 0xb0);
-    iVar5 = (iVar5 == 0) + 2;
+    selectedOperand = (compareHolds == 0) + 2;
     if ((((*(int *)(member0xb0 + 0x120) == 0) && (*(int *)(member0xb0 + 0x124) == 0)) &&
-        (selectedOperandFlags = *(uint *)(iVar5 * 0x18 + member0xb0 + 0xa0), (selectedOperandFlags & 1) == 0)) && ((selectedOperandFlags & 2) == 0)) {
-      iVar5 = *(int *)((iVar5 * 4 + lane) * 4 + ctx + 0x168);
-      if (iVar5 < 0) {
-        exprRecordForValueNumberResult = Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),iVar5);
+        (selectedOperandFlags = *(uint *)(selectedOperand * 0x18 + member0xb0 + 0xa0), (selectedOperandFlags & 1) == 0)) && ((selectedOperandFlags & 2) == 0)) {
+      selectedValueNumber = *(int *)((selectedOperand * 4 + lane) * 4 + ctx + 0x168);
+      if (selectedValueNumber < 0) {
+        exprRecordForValueNumberResult = Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),selectedValueNumber);
         *(undefined4 *)(laneBase + 0x30) = exprRecordForValueNumberResult;
         return 1;
       }
-      findInPtrSetResult = Compiler__findInPtrSet(*(undefined4 *)(ctx + 0x238),iVar5);
+      findInPtrSetResult = Compiler__findInPtrSet(*(undefined4 *)(ctx + 0x238),selectedValueNumber);
       *(undefined4 *)(laneBase + 0x40) = findInPtrSetResult;
       return 1;
     }
