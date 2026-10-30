@@ -5640,9 +5640,9 @@ int evsEmitIndexOrMove(compiler, tokenStream, compileState, op)
 }
 
 /* vpStateUpdateFogConstants @ 0x76770 (352 bytes) */
-int vpStateUpdateFogConstants(ctx, param_2, vpCache)
+int vpStateUpdateFogConstants(ctx, constantsBase, vpCache)
   int ctx;
-  undefined4 param_2;
+  undefined4 constantsBase;
   int *vpCache;
 {
   int constByteOffset;

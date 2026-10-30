@@ -8,7 +8,7 @@ int vpStateSelectForDraw(ctx)
   int stateKey;
   int currentStateBlock;
   int *slotEntry;
-  int iVar5;
+  int stateRecord;
   int *shader;
   int slotIndex;
   
@@ -22,29 +22,29 @@ int vpStateSelectForDraw(ctx)
   }
   slotIndex = *(int *)(((unsigned char *)0x0000118c) + ctx);
   slotEntry = *(int **)(slotIndex * 4 + *shader);
-  iVar5 = *slotEntry;
-  stateKey = vpStateComputeKey(ctx,iVar5);
-  if (((*(char *)(shader[1] + slotIndex) == '\0') && (stateKey == *(int *)(iVar5 + 0x38))) &&
-     (*(int *)(iVar5 + 4) == shader[0x15])) {
+  stateRecord = *slotEntry;
+  stateKey = vpStateComputeKey(ctx,stateRecord);
+  if (((*(char *)(shader[1] + slotIndex) == '\0') && (stateKey == *(int *)(stateRecord + 0x38))) &&
+     (*(int *)(stateRecord + 4) == shader[0x15])) {
     if ((*(byte *)(ctx + 0x2d) & 4) == 0) {
-      noState = iVar5 == 0;
+      noState = stateRecord == 0;
       if ((*(byte *)(ctx + 0x2d) & 3) != 0) {
-        vpStateUpdateFogConstants(ctx,iVar5 + 0x13c,shader);
+        vpStateUpdateFogConstants(ctx,stateRecord + 0x13c,shader);
       }
       goto LAB_00076dc0;
     }
-    noState = iVar5 == 0;
+    noState = stateRecord == 0;
   }
   else {
-    iVar5 = vpStateCacheLookup(slotEntry,stateKey);
-    noState = iVar5 == 0;
+    stateRecord = vpStateCacheLookup(slotEntry,stateKey);
+    noState = stateRecord == 0;
     if ((noState) || (*(char *)(shader[1] + *(int *)(((unsigned char *)0x0000118c) + ctx)) != '\0')) {
       FUN_000546d0(ctx,shader);
     }
     else {
-      *slotEntry = iVar5;
-      shader[0x15] = *(int *)(iVar5 + 4);
-      *(undefined4 *)(((unsigned char *)0x00001174) + ctx) = *(undefined4 *)(iVar5 + 4);
+      *slotEntry = stateRecord;
+      shader[0x15] = *(int *)(stateRecord + 4);
+      *(undefined4 *)(((unsigned char *)0x00001174) + ctx) = *(undefined4 *)(stateRecord + 4);
     }
     *(byte *)(ctx + 0x2d) = *(byte *)(ctx + 0x2d) | 3;
   }
@@ -52,11 +52,11 @@ int vpStateSelectForDraw(ctx)
   (**(code **)(((unsigned char *)0x000012a4) + ctx))(ctx,shader,0);
 LAB_00076dc0:
   (**(code **)(((unsigned char *)0x000012b4) + ctx))(ctx);
-  if ((!noState) && (currentStateBlock != iVar5 + 0x13c)) {
+  if ((!noState) && (currentStateBlock != stateRecord + 0x13c)) {
                     
                     
     (**(code **)((int)((unsigned char *)0x00001294) + ctx))
-              (ctx,iVar5 + 0x13c,*(undefined4 *)(iVar5 + 0x130));
+              (ctx,stateRecord + 0x13c,*(undefined4 *)(stateRecord + 0x130));
     return;
   }
   return;
@@ -113,26 +113,26 @@ int vpStateFree(ctx, state)
 }
 
 /* ctxTempListCreate @ 0x76fe0 (76 bytes) */
-int ctxTempListCreate(param_1)
-  int param_1;
+int ctxTempListCreate(ctx)
+  int ctx;
 {
-  undefined4 uVar1;
+  undefined4 holder;
   
-  uVar1 = (**(code **)(param_1 + 0xc))(0xc);
-  *(undefined4 *)(((unsigned char *)0x000011b4) + param_1) = uVar1;
+  holder = (**(code **)(ctx + 0xc))(0xc);
+  *(undefined4 *)(((unsigned char *)0x000011b4) + ctx) = holder;
                     
                     
-  (**(code **)(((unsigned char *)0x000011b0) + param_1))(param_1);
+  (**(code **)(((unsigned char *)0x000011b0) + ctx))(ctx);
   return;
 }
 
 /* ctxTempListFree @ 0x77030 (84 bytes) */
-int ctxTempListFree(param_1)
-  int param_1;
+int ctxTempListFree(ctx)
+  int ctx;
 {
-  if (*(int *)(((unsigned char *)0x000011b4) + param_1) != 0) {
-    (**(code **)(param_1 + 0x18))(*(int *)(((unsigned char *)0x000011b4) + param_1));
-    *(undefined4 *)(((unsigned char *)0x000011b4) + param_1) = 0;
+  if (*(int *)(((unsigned char *)0x000011b4) + ctx) != 0) {
+    (**(code **)(ctx + 0x18))(*(int *)(((unsigned char *)0x000011b4) + ctx));
+    *(undefined4 *)(((unsigned char *)0x000011b4) + ctx) = 0;
   }
   return;
 }
@@ -349,24 +349,24 @@ int vpStateSetConstantVector(ctx, shader, constantEntry)
 }
 
 /* recordAllocCreate @ 0x774c0 (156 bytes) */
-int recordAllocCreate(param_1, param_2)
-  code *param_1;
-  undefined4 param_2;
+int recordAllocCreate(allocFn, allocArg)
+  code *allocFn;
+  undefined4 allocArg;
 {
-  int iVar1;
+  int alloc;
   
-  iVar1 = (*param_1)(0x359a4,param_2);
-  if (iVar1 != 0) {
-    _memset(iVar1,0,0x359a4);
-    *(int *)(iVar1 + 0x34) = iVar1;
-    *(undefined4 *)(iVar1 + 0x12458) = param_2;
-    *(code **)(iVar1 + 0x12454) = param_1;
-    *(undefined4 *)(iVar1 + 0x359a0) = 0xdeaddead;
-    _memset(iVar1 + 0x38,0,0x1241c);
-    *(undefined4 *)(iVar1 + 0x3c) = param_2;
-    *(code **)(iVar1 + 0x38) = param_1;
+  alloc = (*allocFn)(0x359a4,allocArg);
+  if (alloc != 0) {
+    _memset(alloc,0,0x359a4);
+    *(int *)(alloc + 0x34) = alloc;
+    *(undefined4 *)(alloc + 0x12458) = allocArg;
+    *(code **)(alloc + 0x12454) = allocFn;
+    *(undefined4 *)(alloc + 0x359a0) = 0xdeaddead;
+    _memset(alloc + 0x38,0,0x1241c);
+    *(undefined4 *)(alloc + 0x3c) = allocArg;
+    *(code **)(alloc + 0x38) = allocFn;
   }
-  return iVar1;
+  return alloc;
 }
 
 /* recordCollectDependencies @ 0x77560 (228 bytes) */
@@ -421,26 +421,26 @@ int depListRemove(listHead, node)
   int *listHead;
   int node;
 {
-  int iVar1;
-  int iVar2;
+  int nextNode;
+  int curNode;
   
-  iVar2 = *listHead;
-  if (iVar2 == 0) {
+  curNode = *listHead;
+  if (curNode == 0) {
     return;
   }
   if (node != 0) {
-    if (iVar2 == node) {
-      *listHead = *(int *)(iVar2 + 0x10);
+    if (curNode == node) {
+      *listHead = *(int *)(curNode + 0x10);
       return;
     }
     do {
-      iVar1 = *(int *)(iVar2 + 0x10);
-      if (node == iVar1) {
-        *(undefined4 *)(iVar2 + 0x10) = *(undefined4 *)(node + 0x10);
+      nextNode = *(int *)(curNode + 0x10);
+      if (node == nextNode) {
+        *(undefined4 *)(curNode + 0x10) = *(undefined4 *)(node + 0x10);
         return;
       }
-      iVar2 = iVar1;
-    } while (iVar1 != 0);
+      curNode = nextNode;
+    } while (nextNode != 0);
     return;
   }
   return;
@@ -518,40 +518,40 @@ int arrayRemoveAt(removeIndex, countPtr, array)
 }
 
 /* recordDestFileIs0Or45 @ 0x777b0 (56 bytes) */
-int recordDestFileIs0Or45(param_1, param_2)
-  uint *param_1;
-  int param_2;
+int recordDestFileIs0Or45(record, isR500)
+  uint *record;
+  int isR500;
 {
-  uint uVar1;
+  uint destFile;
   
-  uVar1 = *param_1 & 0xf00;
-  if ((uVar1 != 0) && (((uVar1 != 0x400 && (uVar1 != 0x500)) || (param_2 == 0)))) {
+  destFile = *record & 0xf00;
+  if ((destFile != 0) && (((destFile != 0x400 && (destFile != 0x500)) || (isR500 == 0)))) {
     return 0;
   }
   return 1;
 }
 
 /* recordDestFileIs3Or1 @ 0x77800 (64 bytes) */
-int recordDestFileIs3Or1(param_1, param_2)
-  uint *param_1;
-  int param_2;
+int recordDestFileIs3Or1(record, isR500)
+  uint *record;
+  int isR500;
 {
-  if ((*param_1 & 0xf00) == 0x300) {
-    if (param_2 == 0) {
+  if ((*record & 0xf00) == 0x300) {
+    if (isR500 == 0) {
       return 1;
     }
   }
-  else if (((*param_1 & 0xf00) == 0x100) && (param_2 != 0)) {
+  else if (((*record & 0xf00) == 0x100) && (isR500 != 0)) {
     return 1;
   }
   return 0;
 }
 
 /* recordGetWriteMask @ 0x77850 (12 bytes) */
-int recordGetWriteMask(param_1)
-  uint *param_1;
+int recordGetWriteMask(record)
+  uint *record;
 {
-  return *param_1 >> 0x14 & 0xf;
+  return *record >> 0x14 & 0xf;
 }
 
 /* recordIsSchedulable @ 0x77860 (792 bytes) */
@@ -745,17 +745,17 @@ int regBindingSetFixedRegister(alloc, valueId, componentMask, strict, unusedArg5
 }
 
 /* recordSourceFileIs1 @ 0x77cd0 (24 bytes) */
-int recordSourceFileIs1(param_1)
-  uint *param_1;
+int recordSourceFileIs1(record)
+  uint *record;
 {
-  return (*param_1 & 0xf) == 1;
+  return (*record & 0xf) == 1;
 }
 
 /* recordDestFileIs0 @ 0x77cf0 (20 bytes) */
-int recordDestFileIs0(param_1)
-  uint *param_1;
+int recordDestFileIs0(record)
+  uint *record;
 {
-  return (*param_1 & 0xf00) == 0;
+  return (*record & 0xf00) == 0;
 }
 
 /* recordCombinedWriteMask @ 0x77d10 (120 bytes) */
@@ -1011,38 +1011,38 @@ int recordFindFreeTempRegister(ctx, program, usedValueMask, recordIndex, compone
   undefined4 recordIndex;
   undefined4 componentMask;
 {
-  bool bVar1;
-  int iVar2;
-  int iVar3;
+  bool moreRegs;
+  int assignable;
+  int regOffset;
   
-  iVar3 = 0;
+  regOffset = 0;
   do {
-    iVar2 = ((int (*)())recordRegisterIsAssignable)(ctx,program,iVar3 + 0x200,usedValueMask,recordIndex,componentMask);
-    if (iVar2 == 0) {
-      return iVar3 + 0x200;
+    assignable = ((int (*)())recordRegisterIsAssignable)(ctx,program,regOffset + 0x200,usedValueMask,recordIndex,componentMask);
+    if (assignable == 0) {
+      return regOffset + 0x200;
     }
-    bVar1 = iVar3 != 3;
-    iVar3 = iVar3 + 1;
-  } while (bVar1);
+    moreRegs = regOffset != 3;
+    regOffset = regOffset + 1;
+  } while (moreRegs);
   return -1;
 }
 
 /* recordSourceFileIs0 @ 0x782e0 (20 bytes) */
-int recordSourceFileIs0(param_1)
-  uint *param_1;
+int recordSourceFileIs0(record)
+  uint *record;
 {
-  return (*param_1 & 0xf) == 0;
+  return (*record & 0xf) == 0;
 }
 
 /* recordOpcodeSourceMask @ 0x78300 (200 bytes) */
-int recordOpcodeSourceMask(param_1, param_2)
-  int param_1;
-  int param_2;
+int recordOpcodeSourceMask(record, isR500)
+  int record;
+  int isR500;
 {
-  char cVar1;
+  char opcode;
   
-  cVar1 = *(char *)(param_1 + 3);
-  switch(cVar1) {
+  opcode = *(char *)(record + 3);
+  switch(opcode) {
   case '\0':
   case '@':
     return 0;
@@ -1077,8 +1077,8 @@ switchD_00078334_caseD_4:
   case 'Q':
     goto switchD_00078334_caseD_6;
   default:
-    if (param_2 != 0) {
-      switch(cVar1) {
+    if (isR500 != 0) {
+      switch(opcode) {
       case 'C':
         return 4;
       case 'D':
@@ -1095,7 +1095,7 @@ switchD_00078334_caseD_4:
         goto switchD_00078334_caseD_1;
       }
     }
-    if ((7 < (byte)(cVar1 + 0xbdU)) || ((1 << ((int)(char)(cVar1 + -0x43) & 0x3fU) & 0x87U) == 0)) {
+    if ((7 < (byte)(opcode + 0xbdU)) || ((1 << ((int)(char)(opcode + -0x43) & 0x3fU) & 0x87U) == 0)) {
 switchD_000785b4_caseD_46:
       return 0xffffffff;
     }
@@ -1105,23 +1105,23 @@ switchD_00078334_caseD_6:
 }
 
 /* recordMarkDependentsDirty @ 0x78700 (84 bytes) */
-int recordMarkDependentsDirty(param_1, param_2)
-  int param_1;
-  int param_2;
+int recordMarkDependentsDirty(alloc, recordIndex)
+  int alloc;
+  int recordIndex;
 {
-  int iVar1;
-  int iVar2;
-  int *piVar3;
+  int recordSlot;
+  int flagsBase;
+  int *consumerNode;
   
-  iVar1 = param_2 * 4;
-  iVar2 = param_1 + 0x3348c;
-  piVar3 = *(int **)(iVar1 + param_1 + 0xc450);
-  *(uint *)(iVar2 + iVar1) = *(uint *)(iVar2 + iVar1) | 0x2000;
-  if (piVar3 != (int *)0x0) {
+  recordSlot = recordIndex * 4;
+  flagsBase = alloc + 0x3348c;
+  consumerNode = *(int **)(recordSlot + alloc + 0xc450);
+  *(uint *)(flagsBase + recordSlot) = *(uint *)(flagsBase + recordSlot) | 0x2000;
+  if (consumerNode != (int *)0x0) {
     do {
-      *(uint *)(iVar2 + *piVar3 * 4) = *(uint *)(iVar2 + *piVar3 * 4) | 0x2000;
-      piVar3 = (int *)piVar3[4];
-    } while (piVar3 != (int *)0x0);
+      *(uint *)(flagsBase + *consumerNode * 4) = *(uint *)(flagsBase + *consumerNode * 4) | 0x2000;
+      consumerNode = (int *)consumerNode[4];
+    } while (consumerNode != (int *)0x0);
     return;
   }
   return;
@@ -1187,45 +1187,45 @@ int recordAssignDestinationRegister(ctx, program, recordIndex, keepFlag, chosenR
 }
 
 /* recordMarkPairEmitted @ 0x78950 (64 bytes) */
-int recordMarkPairEmitted(param_1)
-  int param_1;
+int recordMarkPairEmitted(alloc)
+  int alloc;
 {
-  int iVar1;
-  int iVar2;
-  int iVar3;
+  int firstSlot;
+  int secondSlot;
+  int flagsBase;
   
-  iVar3 = param_1 + 0x3348c;
-  iVar1 = *(int *)(param_1 + 0x35494) * 4;
-  iVar2 = *(int *)(param_1 + 0x35498) * 4;
-  *(uint *)(iVar3 + iVar1) = *(uint *)(iVar3 + iVar1) | 0x100;
-  *(uint *)(iVar3 + iVar2) = *(uint *)(iVar3 + iVar2) | 0x100;
-  *(int *)(param_1 + 0x3548c) = *(int *)(param_1 + 0x3548c) + 1;
+  flagsBase = alloc + 0x3348c;
+  firstSlot = *(int *)(alloc + 0x35494) * 4;
+  secondSlot = *(int *)(alloc + 0x35498) * 4;
+  *(uint *)(flagsBase + firstSlot) = *(uint *)(flagsBase + firstSlot) | 0x100;
+  *(uint *)(flagsBase + secondSlot) = *(uint *)(flagsBase + secondSlot) | 0x100;
+  *(int *)(alloc + 0x3548c) = *(int *)(alloc + 0x3548c) + 1;
   return;
 }
 
 /* recordFlagsPending20 @ 0x78990 (56 bytes) */
-int recordFlagsPending20(param_1, param_2)
-  int param_1;
-  int param_2;
+int recordFlagsPending20(alloc, recordIndex)
+  int alloc;
+  int recordIndex;
 {
-  uint uVar1;
+  uint flags;
   
-  uVar1 = *(uint *)(param_2 * 4 + param_1 + 0x3348c);
-  if ((((uVar1 & 0x100) == 0) && ((uVar1 & 0x1000) == 0)) && ((uVar1 & 0x20) != 0)) {
+  flags = *(uint *)(recordIndex * 4 + alloc + 0x3348c);
+  if ((((flags & 0x100) == 0) && ((flags & 0x1000) == 0)) && ((flags & 0x20) != 0)) {
     return 1;
   }
   return 0;
 }
 
 /* recordFlagsPending2 @ 0x789d0 (56 bytes) */
-int recordFlagsPending2(param_1, param_2)
-  int param_1;
-  int param_2;
+int recordFlagsPending2(alloc, recordIndex)
+  int alloc;
+  int recordIndex;
 {
-  uint uVar1;
+  uint flags;
   
-  uVar1 = *(uint *)(param_2 * 4 + param_1 + 0x3348c);
-  if ((((uVar1 & 0x100) == 0) && ((uVar1 & 2) != 0)) && ((uVar1 & 0x2000) == 0)) {
+  flags = *(uint *)(recordIndex * 4 + alloc + 0x3348c);
+  if ((((flags & 0x100) == 0) && ((flags & 2) != 0)) && ((flags & 0x2000) == 0)) {
     return 1;
   }
   return 0;
@@ -1393,15 +1393,15 @@ int regBindingClear(ctx, reg, compIndex)
   int reg;
   uint compIndex;
 {
-  byte bVar1;
-  int iVar2;
+  byte boundMaskByte;
+  int slotBase;
   
-  bVar1 = *(byte *)(reg + ctx + 0x3087c);
-  iVar2 = (reg * 4 + compIndex) * 4 + ctx;
-  *(undefined4 *)(iVar2 + 0x2d87c) = 0;
-  *(undefined4 *)(iVar2 + 0x2a87c) = 0;
+  boundMaskByte = *(byte *)(reg + ctx + 0x3087c);
+  slotBase = (reg * 4 + compIndex) * 4 + ctx;
+  *(undefined4 *)(slotBase + 0x2d87c) = 0;
+  *(undefined4 *)(slotBase + 0x2a87c) = 0;
   *(byte *)(reg + ctx + 0x3087c) =
-       ((byte)(-2 << (compIndex & 0x1f)) | (byte)(0xfffffffe >> 0x20 - (compIndex & 0x1f))) & bVar1;
+       ((byte)(-2 << (compIndex & 0x1f)) | (byte)(0xfffffffe >> 0x20 - (compIndex & 0x1f))) & boundMaskByte;
   return;
 }
 
@@ -1446,30 +1446,30 @@ int chunkArenaAlloc(arena, size)
 }
 
 /* recordSourceFileIs2 @ 0x78ef0 (24 bytes) */
-int recordSourceFileIs2(param_1)
-  uint *param_1;
+int recordSourceFileIs2(record)
+  uint *record;
 {
-  return (*param_1 & 0xf) == 2;
+  return (*record & 0xf) == 2;
 }
 
 /* recordGetWriteEnable @ 0x78f10 (92 bytes) */
-int recordGetWriteEnable(param_1, param_2)
-  uint *param_1;
-  int param_2;
+int recordGetWriteEnable(record, lane)
+  uint *record;
+  int lane;
 {
-  if (param_2 == 1) {
-    return *param_1 >> 0x15 & 1;
+  if (lane == 1) {
+    return *record >> 0x15 & 1;
   }
-  if (param_2 == 0) {
-    return *param_1 >> 0x14 & 1;
+  if (lane == 0) {
+    return *record >> 0x14 & 1;
   }
-  if (param_2 == 2) {
-    return *param_1 >> 0x16 & 1;
+  if (lane == 2) {
+    return *record >> 0x16 & 1;
   }
-  if (param_2 != 3) {
+  if (lane != 3) {
     return 0;
   }
-  return *param_1 >> 0x17 & 1;
+  return *record >> 0x17 & 1;
 }
 
 /* recordRetireBindings @ 0x78f80 (2340 bytes) */
@@ -1925,13 +1925,13 @@ LAB_000798a8:
 }
 
 /* recordSetWriteMask @ 0x798f0 (28 bytes) */
-int recordSetWriteMask(param_1, param_2)
-  uint *param_1;
-  uint param_2;
+int recordSetWriteMask(record, mask)
+  uint *record;
+  uint mask;
 {
-  *param_1 = (param_2 & 8) << 0x14 |
-             (param_2 & 4) << 0x14 |
-             (param_2 & 2) << 0x14 | (param_2 & 1) << 0x14 | *param_1 & 0xff0fffff;
+  *record = (mask & 8) << 0x14 |
+             (mask & 4) << 0x14 |
+             (mask & 2) << 0x14 | (mask & 1) << 0x14 | *record & 0xff0fffff;
   return;
 }
 
@@ -1988,71 +1988,71 @@ int depListAddEdge(unusedArg1, listHead, recordIndex, componentMask, nodeField2,
 }
 
 /* recordGetSourceSelect @ 0x79a20 (92 bytes) */
-int recordGetSourceSelect(param_1, param_2)
-  uint *param_1;
-  int param_2;
+int recordGetSourceSelect(record, sourceLane)
+  uint *record;
+  int sourceLane;
 {
-  if (param_2 == 1) {
-    return *(ushort *)param_1 & 7;
+  if (sourceLane == 1) {
+    return *(ushort *)record & 7;
   }
-  if (param_2 == 0) {
-    return *param_1 >> 0xd & 7;
+  if (sourceLane == 0) {
+    return *record >> 0xd & 7;
   }
-  if (param_2 == 2) {
-    return *param_1 >> 0x13 & 7;
+  if (sourceLane == 2) {
+    return *record >> 0x13 & 7;
   }
-  if (param_2 != 3) {
+  if (sourceLane != 3) {
     return 0;
   }
-  return *param_1 >> 0x16 & 7;
+  return *record >> 0x16 & 7;
 }
 
 /* recordSetSourceSelect @ 0x79a90 (100 bytes) */
-int recordSetSourceSelect(param_1, param_2, param_3)
-  uint *param_1;
-  int param_2;
-  uint param_3;
+int recordSetSourceSelect(record, sourceLane, select)
+  uint *record;
+  int sourceLane;
+  uint select;
 {
-  if (param_2 == 1) {
-    *param_1 = (param_3 & 7) << 0x10 | *param_1 & 0xfff8ffff;
+  if (sourceLane == 1) {
+    *record = (select & 7) << 0x10 | *record & 0xfff8ffff;
     return;
   }
-  if (param_2 == 0) {
-    *param_1 = (param_3 & 7) << 0xd | *param_1 & 0xffff1fff;
+  if (sourceLane == 0) {
+    *record = (select & 7) << 0xd | *record & 0xffff1fff;
     return;
   }
-  if (param_2 == 2) {
-    *param_1 = (param_3 & 7) << 0x13 | *param_1 & 0xffc7ffff;
+  if (sourceLane == 2) {
+    *record = (select & 7) << 0x13 | *record & 0xffc7ffff;
     return;
   }
-  if (param_2 != 3) {
+  if (sourceLane != 3) {
     return;
   }
-  *param_1 = (param_3 & 7) << 0x16 | *param_1 & 0xfe3fffff;
+  *record = (select & 7) << 0x16 | *record & 0xfe3fffff;
   return;
 }
 
 /* recordAddTransitiveDependencies @ 0x79b00 (200 bytes) */
-int recordAddTransitiveDependencies(param_1, param_2, param_3, param_4)
-  int param_1;
-  int param_2;
-  int param_3;
-  undefined4 param_4;
+int recordAddTransitiveDependencies(alloc, rootRecord, depRecord, componentMask)
+  int alloc;
+  int rootRecord;
+  int depRecord;
+  undefined4 componentMask;
 {
-  int iVar1;
-  undefined4 *puVar2;
+  int status;
+  undefined4 *depNode;
   
-  if ((param_3 != param_2) && (((unsigned char *)0x00030c50)[param_3 + param_1] == 0)) {
-    ((unsigned char *)0x00030c50)[param_3 + param_1] = 1;
-    iVar1 = ((int (*)())depListAddEdge)(param_1,param_1 + 0xe450 + param_2 * 4,param_3,param_4,0,0,param_1 + 0x38);
-    if (iVar1 != 0) {
-      return iVar1;
+  if ((depRecord != rootRecord) && (((unsigned char *)0x00030c50)[depRecord + alloc] == 0)) {
+    ((unsigned char *)0x00030c50)[depRecord + alloc] = 1;
+    status = ((int (*)())depListAddEdge)(alloc,alloc + 0xe450 + rootRecord * 4,depRecord,componentMask,0,0,alloc + 0x38);
+    if (status != 0) {
+      return status;
     }
-    for (puVar2 = *(undefined4 **)(param_3 * 4 + param_1 + 0xc450); puVar2 != (undefined4 *)0x0;
-        puVar2 = (undefined4 *)puVar2[4]) {
-      iVar1 = ((int (*)())recordAddTransitiveDependencies)(param_1,param_2,*puVar2,puVar2[1]);
-      if (iVar1 != 0) {
-        return iVar1;
+    for (depNode = *(undefined4 **)(depRecord * 4 + alloc + 0xc450); depNode != (undefined4 *)0x0;
+        depNode = (undefined4 *)depNode[4]) {
+      status = ((int (*)())recordAddTransitiveDependencies)(alloc,rootRecord,*depNode,depNode[1]);
+      if (status != 0) {
+        return status;
       }
     }
   }
@@ -2167,20 +2167,20 @@ int recordSourcesAreDistinctTemps(record, unusedArg2, unusedArg3, unusedArg4, un
 }
 
 /* recordFindScheduleConflict @ 0x79e70 (488 bytes) */
-int recordFindScheduleConflict(alloc, param_2)
+int recordFindScheduleConflict(alloc, useDistinctCheck)
   int alloc;
-  int param_2;
+  int useDistinctCheck;
 {
-  bool bVar1;
+  bool checkDistinct;
   bool overlaps;
   bool conflictFound;
   uint recordWord0;
-  byte bVar5;
+  byte opcodeClass;
   undefined4 in_r5;
   undefined4 in_r6;
   undefined4 in_r7;
   undefined4 in_r8;
-  uint uVar6;
+  uint opcodeBit;
   undefined4 resultCode;
   uint queueCount;
   uint *record;
@@ -2189,44 +2189,45 @@ int recordFindScheduleConflict(alloc, param_2)
   int laterRecordIndex;
   uint loopIndex;
   int *laterQueueCursor;
-  int iVar15;
+  int queuedRecord;
+  int dependencyRecord;
   uint laterQueueIndex;
   undefined8 uVar17;
   
   programBase = alloc + 0x1286c;
   queueCount = *(uint *)(alloc + 0x2a878);
   if (queueCount != 0) {
-    bVar1 = param_2 != 0;
+    checkDistinct = useDistinctCheck != 0;
     loopIndex = 0;
     resultCode = 6;
     conflictFound = false;
     do {
-      iVar15 = *(int *)(loopIndex * 4 + alloc + 0x28878);
-      record = (uint *)(programBase + iVar15 * 0x10);
-      if ((((bVar1) && ((**(uint **)(alloc + 0x34) & 0x40) != 0)) &&
-          (bVar5 = (char)*record + 0xbc, bVar5 < 0xb)) &&
-         (uVar6 = 1 << ((int)(char)bVar5 & 0x3fU) & 0x601, uVar6 != 0)) {
-        uVar17 = ((int (*)())recordSourcesAreDistinctTemps)(record,param_2,in_r5,in_r6,in_r7,in_r8,uVar6);
-        param_2 = (int)uVar17;
+      queuedRecord = *(int *)(loopIndex * 4 + alloc + 0x28878);
+      record = (uint *)(programBase + queuedRecord * 0x10);
+      if ((((checkDistinct) && ((**(uint **)(alloc + 0x34) & 0x40) != 0)) &&
+          (opcodeClass = (char)*record + 0xbc, opcodeClass < 0xb)) &&
+         (opcodeBit = 1 << ((int)(char)opcodeClass & 0x3fU) & 0x601, opcodeBit != 0)) {
+        uVar17 = ((int (*)())recordSourcesAreDistinctTemps)(record,useDistinctCheck,in_r5,in_r6,in_r7,in_r8,opcodeBit);
+        useDistinctCheck = (int)uVar17;
         if ((int)((ulonglong)uVar17 >> 0x20) != 0) {
           conflictFound = true;
           resultCode = 8;
         }
       }
-      dependencyNode = *(int **)(iVar15 * 4 + alloc + 0xa450);
+      dependencyNode = *(int **)(queuedRecord * 4 + alloc + 0xa450);
       if (dependencyNode != (int *)0x0) {
-        uVar6 = loopIndex + 1;
+        opcodeBit = loopIndex + 1;
         do {
-          if (uVar6 < queueCount) {
+          if (opcodeBit < queueCount) {
             recordWord0 = *record;
-            iVar15 = *dependencyNode;
-            laterQueueCursor = (int *)(alloc + uVar6 * 4 + 0x28878);
-            laterQueueIndex = uVar6;
+            dependencyRecord = *dependencyNode;
+            laterQueueCursor = (int *)(alloc + opcodeBit * 4 + 0x28878);
+            laterQueueIndex = opcodeBit;
             do {
               laterRecordIndex = *laterQueueCursor;
               if ((*(uint *)(programBase + laterRecordIndex * 0x10) & 0xfef00) == (recordWord0 & 0xfef00)) {
                 uVar17 = ((int (*)())recordGetWriteMask)(programBase + laterRecordIndex * 0x10);
-                param_2 = (int)uVar17;
+                useDistinctCheck = (int)uVar17;
                 overlaps = true;
                 if (((uint)((ulonglong)uVar17 >> 0x20) & dependencyNode[1]) == 0) goto LAB_00079fc0;
               }
@@ -2238,7 +2239,7 @@ LAB_00079fc0:
               if (queueCount == laterQueueIndex) {
                 if (overlaps) {
 LAB_00079ffc:
-                  if (laterRecordIndex != iVar15) {
+                  if (laterRecordIndex != dependencyRecord) {
                     conflictFound = true;
                     resultCode = 9;
                   }
@@ -2247,7 +2248,7 @@ LAB_00079ffc:
               }
               if (overlaps) goto LAB_00079ffc;
               laterQueueCursor = laterQueueCursor + 1;
-            } while (laterRecordIndex != iVar15);
+            } while (laterRecordIndex != dependencyRecord);
           }
           dependencyNode = (int *)dependencyNode[4];
         } while (dependencyNode != (int *)0x0);
@@ -2295,15 +2296,15 @@ int chunkArenaFree(arena)
 }
 
 /* recordAllocFree @ 0x7a110 (100 bytes) */
-int recordAllocFree(param_1)
-  int param_1;
+int recordAllocFree(alloc)
+  int alloc;
 {
-  if (param_1 != 0) {
-    ((int (*)())chunkArenaFree)(param_1 + 0x12454);
-    ((int (*)())chunkArenaFree)(param_1 + 0x38);
+  if (alloc != 0) {
+    ((int (*)())chunkArenaFree)(alloc + 0x12454);
+    ((int (*)())chunkArenaFree)(alloc + 0x38);
                     
                     
-    (**(code **)(param_1 + 0x12458))(param_1);
+    (**(code **)(alloc + 0x12458))(alloc);
     return;
   }
   return;
@@ -2325,16 +2326,19 @@ int recordRemapComponents(alloc, recordIndex, swizzle)
   bool found;
   int recordSlot;
   uint sourceSelects;
-  uint uVar4;
+  uint selectShiftDst;
+  uint consumerSourceMask;
   int *readerNode;
-  uint uVar6;
+  uint writeMask;
+  uint consumerRemapMask;
   int *consumerNode;
   uint componentIndex;
   uint selectShift;
   undefined4 *listHeadCursor;
   uint sourceIndexB;
   uint *sourceWordCursor;
-  uint uVar13;
+  uint usedSourceMask;
+  uint readerMask;
   uint remappedMask;
   uint *recordWordCursor;
   int consumerIndex;
@@ -2343,31 +2347,31 @@ int recordRemapComponents(alloc, recordIndex, swizzle)
   recordSlot = recordIndex * 4;
   recordWordCursor = (uint *)(alloc + 0x1286c + recordIndex * 0x10);
   remappedMask = 0;
-  uVar13 = *(uint *)(recordSlot + alloc + 0x6450);
-  uVar6 = ((int (*)())recordGetWriteMask)(recordWordCursor);
+  usedSourceMask = *(uint *)(recordSlot + alloc + 0x6450);
+  writeMask = ((int (*)())recordGetWriteMask)(recordWordCursor);
   loopCounter = 0;
   remaining = 4;
   do {
-    if ((uVar6 & 1 << (loopCounter & 0x3f)) != 0) {
+    if ((writeMask & 1 << (loopCounter & 0x3f)) != 0) {
       remappedMask = remappedMask | 1 << (swizzle >> ((loopCounter & 0xf) << 2) & 0xf);
     }
     loopCounter = loopCounter + 1;
     remaining = remaining + -1;
   } while (remaining != 0);
-  if (uVar6 != remappedMask) {
+  if (writeMask != remappedMask) {
     componentIndex = 0;
-    uVar4 = 0xd;
+    selectShiftDst = 0xd;
     do {
-      if ((uVar6 & 1 << (componentIndex & 0x3f)) != 0) {
+      if ((writeMask & 1 << (componentIndex & 0x3f)) != 0) {
         sourceIndexB = 0;
         selectShift = (swizzle >> ((componentIndex & 0xf) << 2) & 0xf) * 3 + 0xd;
         sourceWordCursor = recordWordCursor;
         do {
-          if ((uVar13 & 1 << (sourceIndexB & 0x3f)) != 0) {
+          if ((usedSourceMask & 1 << (sourceIndexB & 0x3f)) != 0) {
             sourceSelects = sourceWordCursor[1];
-            sourceWordCursor[1] = (sourceSelects & ~(7 << (uVar4 & 0x3f)) |
-                         (sourceSelects >> (selectShift & 0x3f) & 7) << (uVar4 & 0x3f)) & ~(7 << (selectShift & 0x3f)) |
-                         (sourceSelects >> (uVar4 & 0x3f) & 7) << (selectShift & 0x3f);
+            sourceWordCursor[1] = (sourceSelects & ~(7 << (selectShiftDst & 0x3f)) |
+                         (sourceSelects >> (selectShift & 0x3f) & 7) << (selectShiftDst & 0x3f)) & ~(7 << (selectShift & 0x3f)) |
+                         (sourceSelects >> (selectShiftDst & 0x3f) & 7) << (selectShift & 0x3f);
           }
           moreSources = sourceIndexB != 2;
           sourceWordCursor = sourceWordCursor + 1;
@@ -2375,45 +2379,45 @@ int recordRemapComponents(alloc, recordIndex, swizzle)
         } while (moreSources);
       }
       moreComponents = componentIndex != 3;
-      uVar4 = uVar4 + 3;
+      selectShiftDst = selectShiftDst + 3;
       componentIndex = componentIndex + 1;
     } while (moreComponents);
     *recordWordCursor = *recordWordCursor & 0xff0fffff | remappedMask << 0x14;
     for (consumerNode = *(int **)(recordSlot + alloc + 0xa450); consumerNode != (int *)0x0;
         consumerNode = (int *)consumerNode[4]) {
       consumerIndex = *consumerNode;
-      uVar6 = 0;
+      consumerRemapMask = 0;
       loopCounterB = 0;
       remainingB = 4;
-      uVar4 = *(uint *)(consumerIndex * 4 + alloc + 0x6450);
+      consumerSourceMask = *(uint *)(consumerIndex * 4 + alloc + 0x6450);
       recordWordCursor = (uint *)(alloc + consumerIndex * 0x10 + 0x12870);
       do {
         if ((consumerNode[1] & 1 << (loopCounterB & 0x3f)) != 0) {
-          uVar6 = uVar6 | 1 << (swizzle >> ((loopCounterB & 0xf) << 2) & 0xf);
+          consumerRemapMask = consumerRemapMask | 1 << (swizzle >> ((loopCounterB & 0xf) << 2) & 0xf);
         }
         loopCounterB = loopCounterB + 1;
         remainingB = remainingB + -1;
       } while (remainingB != 0);
-      consumerNode[1] = uVar6;
+      consumerNode[1] = consumerRemapMask;
       sourceIndex = 0;
       listHeadCursor = (undefined4 *)(consumerIndex * 0xc + alloc + 0x450);
       do {
-        if (((uVar4 & 1 << (sourceIndex & 0x3f)) != 0) && (readerNode = (int *)*listHeadCursor, readerNode != (int *)0x0)
+        if (((consumerSourceMask & 1 << (sourceIndex & 0x3f)) != 0) && (readerNode = (int *)*listHeadCursor, readerNode != (int *)0x0)
            ) {
           found = false;
           do {
             if (recordIndex == *readerNode) {
-              uVar13 = 0;
+              readerMask = 0;
               loopCounterC = 0;
               remaining = 4;
               do {
                 if ((readerNode[1] & 1 << (loopCounterC & 0x3f)) != 0) {
-                  uVar13 = uVar13 | 1 << (swizzle >> ((loopCounterC & 0xf) << 2) & 0xf);
+                  readerMask = readerMask | 1 << (swizzle >> ((loopCounterC & 0xf) << 2) & 0xf);
                 }
                 loopCounterC = loopCounterC + 1;
                 remaining = remaining + -1;
               } while (remaining != 0);
-              readerNode[1] = uVar13;
+              readerNode[1] = readerMask;
               found = true;
             }
             readerNode = (int *)readerNode[4];
@@ -4913,52 +4917,52 @@ LAB_0007da08:
 }
 
 /* ctxTempListPush @ 0x7dcd0 (88 bytes) */
-int ctxTempListPush(param_1, param_2)
-  int param_1;
-  undefined4 param_2;
+int ctxTempListPush(ctx, value)
+  int ctx;
+  undefined4 value;
 {
-  undefined4 *puVar1;
-  int iVar2;
+  undefined4 *node;
+  int holder;
   
-  iVar2 = *(int *)(((unsigned char *)0x000011b4) + param_1);
-  puVar1 = (undefined4 *)(**(code **)(param_1 + 0xc))(8,param_2);
-  *puVar1 = param_2;
-  puVar1[1] = *(undefined4 *)(iVar2 + 8);
-  *(undefined4 **)(iVar2 + 8) = puVar1;
+  holder = *(int *)(((unsigned char *)0x000011b4) + ctx);
+  node = (undefined4 *)(**(code **)(ctx + 0xc))(8,value);
+  *node = value;
+  node[1] = *(undefined4 *)(holder + 8);
+  *(undefined4 **)(holder + 8) = node;
   return;
 }
 
 /* ctxTempListRemove @ 0x7dd30 (160 bytes) */
-int ctxTempListRemove(param_1, param_2)
-  int param_1;
-  int param_2;
+int ctxTempListRemove(ctx, value)
+  int ctx;
+  int value;
 {
-  undefined4 uVar1;
-  int *piVar2;
-  int *piVar3;
-  int iVar4;
+  undefined4 found;
+  int *node;
+  int *prev;
+  int holder;
   
-  iVar4 = *(int *)(((unsigned char *)0x000011b4) + param_1);
-  if ((iVar4 == 0) || (piVar2 = *(int **)(iVar4 + 8), piVar2 == (int *)0x0)) {
+  holder = *(int *)(((unsigned char *)0x000011b4) + ctx);
+  if ((holder == 0) || (node = *(int **)(holder + 8), node == (int *)0x0)) {
 LAB_0007ddc0:
-    uVar1 = 0;
+    found = 0;
   }
   else {
-    if (*piVar2 == param_2) {
-      *(int *)(iVar4 + 8) = piVar2[1];
+    if (*node == value) {
+      *(int *)(holder + 8) = node[1];
     }
     else {
       do {
-        piVar3 = piVar2;
-        piVar2 = (int *)piVar3[1];
-        if (piVar2 == (int *)0x0) goto LAB_0007ddc0;
-      } while (param_2 != *piVar2);
-      piVar3[1] = piVar2[1];
+        prev = node;
+        node = (int *)prev[1];
+        if (node == (int *)0x0) goto LAB_0007ddc0;
+      } while (value != *node);
+      prev[1] = node[1];
     }
-    (**(code **)(param_1 + 0x18))(piVar2);
-    uVar1 = 1;
+    (**(code **)(ctx + 0x18))(node);
+    found = 1;
   }
-  return uVar1;
+  return found;
 }
 
 /* evsFoldConstantMoves @ 0x7dde0 (3504 bytes) */
