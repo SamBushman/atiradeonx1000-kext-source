@@ -3528,3 +3528,36 @@ use	Program__hoistFetchInsts	piVar22	blockCursorOrNewBlock	INFERRED	block cursor
 use	Program__hoistFetchInsts	piVar22	blockCursorOrNewBlock	INFERRED	block cursor of the upward walk, then the newly allocated block (same register, not splittable)	^\s*puVar25\ =\ \(uint\ \*\)piVar22\[0x4b\];$	+1
 use	Program__hoistFetchInsts	piVar22	blockCursorOrNewBlock	INFERRED	block cursor of the upward walk, then the newly allocated block (same register, not splittable)	^\s*if\ \(\(piVar22\ !=\ \*\(int\ \*\*\)\(\*piVar12\ \+\ 0x158\)\)\ \&\&$	+2
 use	Program__hoistFetchInsts	piVar22	blockCursorOrNewBlock	INFERRED	block cursor of the upward walk, then the newly allocated block (same register, not splittable)	^\s*FUN_000e76c4\(piVar22,piVar20\);$	+1
+local	FUN_001494dc	param_3	changedOut	INFERRED	*param_3 is set to 0 when the rewrite was applied
+local	FUN_001494dc	cVar1	selectByteD	INFERRED	select byte of the operand record
+use	FUN_001494dc	iVar2	operandIdxA	INFERRED	role read off the web	^\s*for\ \(iVar2\ =\ 1;\ iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0x14\)\)\(param_1\),\ iVar2\ <=\ iVar3;$	+4
+use	FUN_001494dc	iVar2	operandIdxA	INFERRED	role read off the web	^\s*if\ \(\(\(param_1\[0x20\]\ !=\ 0\)\ \&\&$	+3
+use	FUN_001494dc	iVar2	predicateResultC	INFERRED	role read off the web	^\s*iVar2\ =\ FUN_00105dbc\(param_1,0\);$	+2
+use	FUN_001494dc	iVar2	predicateResultC	INFERRED	role read off the web	^\s*if\ \(\(\-1\ <\ a0\[5\]\)\ \&\&$	+5
+use	FUN_001494dc	iVar2	predicateResultC	INFERRED	role read off the web	^\s*if\ \(\(\(\(\(a0\[0x20\]\ !=\ 0\)\ \&\&\ \(iVar2\ =\ FUN_00126760\(a0\[0x26\]\),\ iVar2\ !=\ 0\)\)\ \&\&$	+9
+use	FUN_001494dc	iVar2	vcall64ResultD	INFERRED	role read off the web	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 100\)\)\(param_1\);$@2	+6
+use	FUN_001494dc	iVar2	predicateResultD	INFERRED	role read off the web	^\s*iVar2\ =\ FUN_00105dbc\(param_1,0\);$@2	+2
+use	FUN_001494dc	iVar2	predicateResultD	INFERRED	role read off the web	^\s*if\ \(\(\(\(\-1\ <\ piVar6\[5\]\)\ \&\&\ \(\(piVar6\[5\]\ \&\ 0x200U\)\ ==\ 0\)\)\ \&\&$	+7
+use	FUN_001494dc	iVar2	flagBitResultE	INFERRED	role read off the web	^\s*iVar2\ =\ FUN_00113174\(\*\(undefined4\ \*\)\(piVar6\[0x22\]\ \+\ 8\),\*\(undefined4\ \*\)\(param_2\ \+\ 8\)\);$	+4
+use	FUN_001494dc	iVar3	operandCountA	INFERRED	role read off the web	^\s*for\ \(iVar2\ =\ 1;\ iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0x14\)\)\(param_1\),\ iVar2\ <=\ iVar3;$	+4
+use	FUN_001494dc	iVar3	operandIdxB	INFERRED	role read off the web	^\s*for\ \(iVar3\ =\ 1;\ iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x14\)\)\(a0\),\ iVar3\ <=\ iVar5;$	+4
+use	FUN_001494dc	iVar3	operandIdxB	INFERRED	role read off the web	^\s*if\ \(\(a0\[0x20\]\ !=\ 0\)\ \&\&$	+3
+use	FUN_001494dc	iVar5	instField3	INFERRED	role read off the web	^\s*iVar5\ =\ param_1\[3\];$	+1
+use	FUN_001494dc	iVar5	instField3	INFERRED	role read off the web	^\s*param_1\[3\]\ =\ iVar5;$	+1
+use	FUN_001494dc	piVar6	laneByteCursorA	INFERRED	role read off the web	^\s*piVar6\ =\ param_1;$	+1
+use	FUN_001494dc	piVar6	laneByteCursorA	INFERRED	role read off the web	^\s*if\ \(\(uint\)\(\*\(byte\ \*\)\(piVar6\ \+\ 0x27\)\ \-\ 2\)\ <\ 2\)\ goto\ LAB_00149a40;$	+2
+use	FUN_001494dc	piVar6	laneByteCursorB	INFERRED	role read off the web	^\s*piVar6\ =\ param_1;$@2	+1
+use	FUN_001494dc	piVar6	laneByteCursorB	INFERRED	role read off the web	^\s*if\ \(\(uint\)\(\*\(byte\ \*\)\(piVar6\ \+\ 0x27\)\ \-\ 2\)\ <\ 2\)\ \{$	+1
+use	FUN_001494dc	piVar6	laneByteCursorB	INFERRED	role read off the web	^\s*piVar6\ =\ \(int\ \*\)\(\(int\)piVar6\ \+\ 1\);$@3	+1
+use	FUN_001494dc	uVar4	selectWordA	INFERRED	select word stored back	^\s*uVar4\ =\ local_60;$	+1
+use	FUN_001494dc	uVar4	selectWordA	INFERRED	select word stored back	^\s*\*\(undefined4\ \*\)\(iVar3\ \+\ 0x10\)\ =\ uVar4;$	+1
+use	FUN_001494dc	uVar4	selectWordB	INFERRED	select word stored back	^\s*uVar4\ =\ 0x10203;$	+1
+use	FUN_001494dc	uVar4	selectWordB	INFERRED	select word stored back	^\s*uVar4\ =\ \*\(undefined4\ \*\)\(iVar3\ \+\ 0x10\);$	+1
+use	FUN_001494dc	uVar4	selectWordB	INFERRED	select word stored back	^\s*\*\(undefined4\ \*\)\(iVar2\ \+\ 0x10\)\ =\ uVar4;$	+1
+local	FUN_001494dc	local_64	destSelectSaved	INFERRED	dest select word of the chain / merged select
+local	FUN_001494dc	local_60	newSelect	INFERRED	0x4040404 then the lanes rewritten from destSelectSaved
+local	FUN_001494dc	local_5c	lastOperandBuf0	INFERRED	IRInst__readLastOperand out word 0
+local	FUN_001494dc	local_58	lastOperandSourceSave	INFERRED	last operand source (inst1)
+local	FUN_001494dc	local_48	lastOperandBuf2	INFERRED	IRInst__readLastOperand out word 2
+local	FUN_001494dc	local_4c	chainDestSelect	INFERRED	dest select word of the chain inst
+local	FUN_001494dc	local_38	usedLanesOut	INFERRED	out of WriteMask__fromUsedLanes
