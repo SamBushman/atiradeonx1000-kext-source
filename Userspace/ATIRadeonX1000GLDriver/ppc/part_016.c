@@ -263,17 +263,17 @@ int gld_dropStaleTextureShadow(ctx, unit)
   int ctx;
   int unit;
 {
-  int *piVar1;
+  int *unitSlotCursor;
   int remaining;
   
   if (*(int *)(((unsigned char *)0x000013f8) + unit * 4 + ctx + 0x240) == 0) {
     return;
   }
   remaining = 5;
-  piVar1 = (int *)(unit * 0x14 + *(int *)(ctx + 0x18));
-  while ((*piVar1 == 0 ||
-         (*(int *)(((unsigned char *)0x000013f8) + unit * 4 + ctx + 0x240) != *piVar1 + 0x3c))) {
-    piVar1 = piVar1 + 1;
+  unitSlotCursor = (int *)(unit * 0x14 + *(int *)(ctx + 0x18));
+  while ((*unitSlotCursor == 0 ||
+         (*(int *)(((unsigned char *)0x000013f8) + unit * 4 + ctx + 0x240) != *unitSlotCursor + 0x3c))) {
+    unitSlotCursor = unitSlotCursor + 1;
     remaining = remaining + -1;
     if (remaining == 0) {
       *(undefined4 *)(((unsigned char *)0x000013f8) + unit * 4 + ctx + 0x240) = 0;
@@ -2756,16 +2756,16 @@ int gld_classifyOperand(operandSpace, operandIndex, unusedArgR5, unusedArgR6, un
 /* gld_uploadParamConstants @ 0xabab0 (164 bytes) */
 void gld_uploadParamConstants(int glContext,int a1,undefined4 a2,double fpPassThrough1)
 {
-  int iVar1;
-  undefined1 auStack_70 [16];
-  undefined1 auStack_30 [20];
+  int allocaOffset;
+  undefined1 allocaBase [16];
+  undefined1 constantBuffer [20];
   
-  iVar1 = *(int *)(*(int *)(a1 + 0x74) + 0x84) * -0x10;
-  *(unsigned char **)(auStack_70 + iVar1) = ((unsigned int)__builtin_frame_address(0));
+  allocaOffset = *(int *)(*(int *)(a1 + 0x74) + 0x84) * -0x10;
+  *(unsigned char **)(allocaBase + allocaOffset) = ((unsigned int)__builtin_frame_address(0));
   ((double (*)())gld_gatherProgramConstants)(*(undefined4 *)(glContext + 4),*(undefined4 *)(*(int *)(a1 + 0x74) + 0x84),
-               auStack_30 + iVar1,fpPassThrough1);
+               constantBuffer + allocaOffset,fpPassThrough1);
   (**(code **)(((unsigned char *)0x00001280) + glContext))
-            (glContext,a2,0,0,auStack_30 + iVar1,*(undefined4 *)(*(int *)(a1 + 0x74) + 0x84)
+            (glContext,a2,0,0,constantBuffer + allocaOffset,*(undefined4 *)(*(int *)(a1 + 0x74) + 0x84)
              ,1);
   return;
 }
@@ -8074,15 +8074,15 @@ void gld_storeConstantVec4(int constantBank,int constantIndex,undefined4 unusedA
 }
 
 /* gld_emitSlotParamIfDirty @ 0xb5010 (132 bytes) */
-void gld_emitSlotParamIfDirty(int glContext,int engineState,int *slotRecord,int param_4,double fpPassThrough1,double fpPassThrough2,double fpPassThrough3,double fpPassThrough4)
+void gld_emitSlotParamIfDirty(int glContext,int engineState,int *slotRecord,int slotIndex,double fpPassThrough1,double fpPassThrough2,double fpPassThrough3,double fpPassThrough4)
 {
   undefined4 staleArgR7;
   undefined4 staleArgR8;
   
-  if ((param_4 < 0x100) && (((unsigned char *)0x00001658)[param_4 + engineState] != '\0')) {
-    if (*(char *)(param_4 + engineState + 0x1758) == '\0') {
-      ((void (*)())gld_storeConstantVec4)(*slotRecord,*(int *)(param_4 * 4 + engineState + 0x1a20) - *(int *)(engineState + 0x1f1c),
-                   slotRecord,param_4,staleArgR7,staleArgR8,*(undefined4 *)(glContext + 0x2454),fpPassThrough1,fpPassThrough2,
+  if ((slotIndex < 0x100) && (((unsigned char *)0x00001658)[slotIndex + engineState] != '\0')) {
+    if (*(char *)(slotIndex + engineState + 0x1758) == '\0') {
+      ((void (*)())gld_storeConstantVec4)(*slotRecord,*(int *)(slotIndex * 4 + engineState + 0x1a20) - *(int *)(engineState + 0x1f1c),
+                   slotRecord,slotIndex,staleArgR7,staleArgR8,*(undefined4 *)(glContext + 0x2454),fpPassThrough1,fpPassThrough2,
                    fpPassThrough3,fpPassThrough4);
       *(undefined4 *)(glContext + 0x1e64) = 0;
       ((unsigned char *)0x000010eb)[*slotRecord] = 0;
@@ -8384,9 +8384,9 @@ int gld_emitProgramStatePackets(glContext, programObj)
 }
 
 /* gld_compileFragmentProgramImage @ 0xb57a0 (688 bytes) */
-int gld_compileFragmentProgramImage(ctx, param_2)
+int gld_compileFragmentProgramImage(ctx, programObj)
   int ctx;
-  int param_2;
+  int programObj;
 {
   int allocationPtr4024;
   int allocationWord542c;
@@ -8404,15 +8404,15 @@ int gld_compileFragmentProgramImage(ctx, param_2)
   int constSlotCursor;
   char *slotFlagCursor;
   
-  if (*(int *)(param_2 + 0x14) != 0) {
-    (**(code **)(ctx + 0x18))(*(int *)(param_2 + 0x14));
+  if (*(int *)(programObj + 0x14) != 0) {
+    (**(code **)(ctx + 0x18))(*(int *)(programObj + 0x14));
   }
   allocation = (undefined4 *)(**(code **)(ctx + 0xc))(0x569c);
-  *(undefined4 **)(param_2 + 0x14) = allocation;
+  *(undefined4 **)(programObj + 0x14) = allocation;
   allocation[2] = 0;
   status = 0xe;
-  *allocation = *(undefined4 *)(param_2 + 0xc);
-  allocation[1] = *(undefined4 *)(param_2 + 4);
+  *allocation = *(undefined4 *)(programObj + 0xc);
+  allocation[1] = *(undefined4 *)(programObj + 4);
   allocation[3] = *(undefined4 *)(ctx + 0x2454);
   allocation[4] = *(undefined4 *)(ctx + 0x2454);
   ctxWord44 = *(uint *)(ctx + 0x44);
@@ -8429,8 +8429,8 @@ int gld_compileFragmentProgramImage(ctx, param_2)
       *(char *)((int)allocation + 0x5495) = (char)allocationWord542c;
       packedLimitWord = (allocationPtr4024 + -1) * 0x100000 & 0x3ff00000U | allocation[0x1523] & 0xc00ffc00;
       allocation[0x1523] = packedLimitWord;
-      if (*(int *)(((unsigned char *)0x00001240) + param_2) < (int)allocation[0x1590]) {
-        *(undefined4 *)(((unsigned char *)0x00001240) + param_2) = allocation[0x1590];
+      if (*(int *)(((unsigned char *)0x00001240) + programObj) < (int)allocation[0x1590]) {
+        *(undefined4 *)(((unsigned char *)0x00001240) + programObj) = allocation[0x1590];
         packedLimitWord = allocation[0x1523];
         allocationPtr4024 = allocation[0x1009];
         allocationWord542c = allocation[0x150b];
@@ -8463,21 +8463,21 @@ int gld_compileFragmentProgramImage(ctx, param_2)
           allocationPtr4024 = allocationPtr4024 + -1;
         } while ((allocationPtr4024 != 0) && (instructionCursor = instructionCursor + -4, lastDependentInstIndex == 0));
       }
-      *(int *)(((unsigned char *)0x00001038) + param_2) = allocationWord542c;
+      *(int *)(((unsigned char *)0x00001038) + programObj) = allocationWord542c;
       if (0 < allocationWord542c) {
         slotFlagCursor = (char *)(allocation + 0x100e);
         cursor = allocation + 0x100a;
         loopIndex = 0;
-        constSlotCursor = param_2;
+        constSlotCursor = programObj;
         do {
           if (*slotFlagCursor != '\0') {
-            oldMaxConstIndex = *(int *)(((unsigned char *)0x00001240) + param_2);
+            oldMaxConstIndex = *(int *)(((unsigned char *)0x00001240) + programObj);
             *(undefined4 *)(constSlotCursor + 0x18) = *cursor;
             *(undefined4 *)(constSlotCursor + 0x1c) = cursor[1];
             *(undefined4 *)(constSlotCursor + 0x20) = cursor[2];
             *(undefined4 *)(constSlotCursor + 0x24) = cursor[3];
             if (oldMaxConstIndex < loopIndex) {
-              *(int *)(((unsigned char *)0x00001240) + param_2) = loopIndex;
+              *(int *)(((unsigned char *)0x00001240) + programObj) = loopIndex;
             }
           }
           loopIndex = loopIndex + 1;
@@ -8489,7 +8489,7 @@ int gld_compileFragmentProgramImage(ctx, param_2)
       }
       status = 0;
       allocation[0x1524] = lastDependentInstIndex & 0x3ff | allocation[0x1524] & 0xfffffc00;
-      *(undefined1 *)(param_2 + 1) = 1;
+      *(undefined1 *)(programObj + 1) = 1;
     }
   }
   return status;
@@ -8535,30 +8535,30 @@ int gld_emitProgramConstants(glContext, programObj)
 }
 
 /* gld_emitProgramStateAndConstants @ 0xb5b60 (64 bytes) */
-int gld_emitProgramStateAndConstants(param_1, param_2)
-  undefined4 param_1;
-  undefined4 param_2;
+int gld_emitProgramStateAndConstants(glContext, programObj)
+  undefined4 glContext;
+  undefined4 programObj;
 {
-  ((int (*)())gld_emitProgramStatePackets)(param_1,param_2);
-  ((int (*)())gld_emitProgramConstants)(param_1,param_2);
+  ((int (*)())gld_emitProgramStatePackets)(glContext,programObj);
+  ((int (*)())gld_emitProgramConstants)(glContext,programObj);
   return 0;
 }
 
 /* gld_emitProgramStateOnly @ 0xb5ba0 (36 bytes) */
-int gld_emitProgramStateOnly(param_1, param_2)
-  undefined4 param_1;
-  undefined4 param_2;
+int gld_emitProgramStateOnly(glContext, programObj)
+  undefined4 glContext;
+  undefined4 programObj;
 {
-  ((int (*)())gld_emitProgramStatePackets)(param_1,param_2);
+  ((int (*)())gld_emitProgramStatePackets)(glContext,programObj);
   return 0;
 }
 
 /* gld_emitProgramConstantsOnly @ 0xb5bd0 (36 bytes) */
-int gld_emitProgramConstantsOnly(param_1, param_2)
-  undefined4 param_1;
-  undefined4 param_2;
+int gld_emitProgramConstantsOnly(glContext, programObj)
+  undefined4 glContext;
+  undefined4 programObj;
 {
-  ((int (*)())gld_emitProgramConstants)(param_1,param_2);
+  ((int (*)())gld_emitProgramConstants)(glContext,programObj);
   return 0;
 }
 

@@ -113,13 +113,13 @@ int ilEmitShadowCompare(programRecord, unusedArgR4, coordinateOperand, coordinat
   uint coordinateOperandWord0;
   uint programRecordWord184;
   uint programRecordWord180;
-  ushort uVar1;
+  ushort coordRegTypeBits;
   int unitByteOffset;
-  int iVar3;
-  undefined *puVar4;
+  int compareFunc;
+  undefined *compareSwizzleToken;
   uint compareSelectWord;
   uint *tokenPtr;
-  uint uVar7;
+  uint tokenWordTemp;
   
   if ((1 << (unitIndex & 0x3f) & *(uint *)(programRecord + 0x70)) != 0) {
     *outCursor = 0x5b;
@@ -131,10 +131,10 @@ int ilEmitShadowCompare(programRecord, unusedArgR4, coordinateOperand, coordinat
     programRecordWord184 = *(uint *)(programRecord + 0x184);
     outCursor[4] = 0x2222;
     outCursor[3] = programRecordWord184 & 0xffff | 0x440000;
-    uVar1 = *(ushort *)coordinateOperand;
+    coordRegTypeBits = *(ushort *)coordinateOperand;
     coordinateOperandWord0 = *coordinateOperand;
     outCursor[6] = 0x2222;
-    outCursor[5] = (uint)(ushort)coordinateOperandWord0 | (uVar1 & 0x3f) << 0x10 | 0x400000;
+    outCursor[5] = (uint)(ushort)coordinateOperandWord0 | (coordRegTypeBits & 0x3f) << 0x10 | 0x400000;
     switch(*(undefined4 *)(unitByteOffset + programRecord + 0x138)) {
     case 0x200:
     case 0x202:
@@ -158,34 +158,34 @@ int ilEmitShadowCompare(programRecord, unusedArgR4, coordinateOperand, coordinat
     }
     outCursor[7] = compareSelectWord;
     if (copyExtraWord == 0) {
-      uVar7 = *coordinateOperand;
+      tokenWordTemp = *coordinateOperand;
     }
     else {
-      uVar7 = *coordinateOperand | 0x400000;
-      *coordinateOperand = uVar7;
+      tokenWordTemp = *coordinateOperand | 0x400000;
+      *coordinateOperand = tokenWordTemp;
     }
-    outCursor[8] = uVar7;
+    outCursor[8] = tokenWordTemp;
     tokenPtr = outCursor + 9;
     if (copyExtraWord != 0) {
       tokenPtr = outCursor + 10;
       outCursor[9] = *coordinateExtraWordPtr;
     }
     *tokenPtr = *(uint *)(programRecord + 0x180) & 0xffff | 0x440000;
-    iVar3 = *(int *)(unitByteOffset + programRecord + 0x138);
-    if ((iVar3 == 0x200) || (iVar3 != 0x207)) {
-      puVar4 = (undefined *)0x2222;
+    compareFunc = *(int *)(unitByteOffset + programRecord + 0x138);
+    if ((compareFunc == 0x200) || (compareFunc != 0x207)) {
+      compareSwizzleToken = (undefined *)0x2222;
     }
     else {
-      puVar4 = ((unsigned char *)0x00004444);
+      compareSwizzleToken = ((unsigned char *)0x00004444);
     }
-    tokenPtr[1] = (uint)puVar4;
+    tokenPtr[1] = (uint)compareSwizzleToken;
     outCursor = tokenPtr + 6;
     coordinateOperandWord0 = *coordinateOperand;
     tokenPtr[3] = (uint)((unsigned char *)0x00005555);
     tokenPtr[2] = (ushort)coordinateOperandWord0 | 0x440000;
-    uVar7 = *(uint *)(unitByteOffset + programRecord + 0xb8);
+    tokenWordTemp = *(uint *)(unitByteOffset + programRecord + 0xb8);
     tokenPtr[5] = 0x2222;
-    tokenPtr[4] = uVar7 & 0xffff | 0x410000;
+    tokenPtr[4] = tokenWordTemp & 0xffff | 0x410000;
   }
   return outCursor;
 }
@@ -213,7 +213,7 @@ int ilEmitShadowStateTokens(tokenCursor, ilState, scanTokenWord, unusedArgR6, un
   uint ilRegWord21e0;
   int slotCursor;
   int ilRegWord22fc;
-  undefined4 *puVar3;
+  undefined4 *returnedCursor;
   undefined4 flagToken;
   int remaining;
   
@@ -375,19 +375,19 @@ int ilEmitShadowStateTokens(tokenCursor, ilState, scanTokenWord, unusedArgR6, un
     tokenCursor[3] = ilRegWord2208 & 0xffff | 0x440000;
     tokenCursor = tokenCursor + 5;
   }
-  /* issue #64 live-repro (3rd crash, past the earlier two fixes): puVar3 - the value this function
+  /* issue #64 live-repro (3rd crash, past the earlier two fixes): returnedCursor - the value this function
    * actually returns (part_018.c:386) - was only ever assigned as a side effect of this
    * OR-condition's third clause, via the comma operator. C's short-circuit evaluation means that
-   * side effect never runs when either of the first two clauses is already true, leaving puVar3
+   * side effect never runs when either of the first two clauses is already true, leaving returnedCursor
    * uninitialized in that case (it has no earlier assignment anywhere in the function). Live-
    * verified on real hardware via a raw memory watchpoint: with *(ilState+0x22fc)==3 (this
-   * function's own case), the returned puVar3 was garbage, corrupting a since-freed heap block's
+   * function's own case), the returned returnedCursor was garbage, corrupting a since-freed heap block's
    * `free_list_t.previous` field the moment the caller wrote through it (ilRewriteForTextureState
    * part_018.c:3651, `*puVar45 = ppppppuVar15;`) - confirmed via Apple's real scalable_malloc.c
-   * checksum formula against the live-read corrupted bytes. puVar3 is meant to track the current
+   * checksum formula against the live-read corrupted bytes. returnedCursor is meant to track the current
    * write pointer (== tokenCursor) at this checkpoint regardless of which clause is true; made the
    * assignment unconditional so the case that skipped it can no longer leave it unset. */
-  puVar3 = tokenCursor;
+  returnedCursor = tokenCursor;
   if (((*(int *)(ilState + 0x2218) != 0) || (*(int *)(ilState + 0x2220) != 0)) ||
      (*(int *)(ilState + 0x2234) == 0)) {
     if ((*(int *)(ilState + 0x2214) == 0) && (*(int *)(ilState + 0x221c) != 0)) {
@@ -396,21 +396,21 @@ int ilEmitShadowStateTokens(tokenCursor, ilState, scanTokenWord, unusedArgR6, un
       tokenCursor[1] = 0x120000;
       tokenCursor = tokenCursor + 3;
     }
-    puVar3 = tokenCursor;
+    returnedCursor = tokenCursor;
     if (*(int *)(ilState + 0x2234) == 0) {
       *tokenCursor = 0x47;
       tokenCursor[1] = 0xe0000;
       tokenCursor[2] = *(uint *)(ilState + 0x2200) & 0xffff | 0x40000;
-      puVar3 = tokenCursor + 3;
+      returnedCursor = tokenCursor + 3;
       if (*(int *)(ilState + 0x2310) != 0) {
         tokenCursor[3] = 0x47;
         tokenCursor[4] = *(uint *)(ilState + 0x2314) & 0xffff | 0x110000;
         tokenCursor[5] = *(uint *)(ilState + 0x2200) & 0xffff | 0x40000;
-        puVar3 = tokenCursor + 6;
+        returnedCursor = tokenCursor + 6;
       }
     }
   }
-  return puVar3;
+  return returnedCursor;
 }
 
 /* ilEmitPrologue @ 0xc8110 (1252 bytes) */
@@ -598,31 +598,31 @@ int ilEmitPrologue(outCursor, programRecord, passThroughR5, passThroughR6, passT
 }
 
 /* ilRecordRegisterUse @ 0xc8600 (316 bytes) */
-int ilRecordRegisterUse(registerIndex, registerKind, usageInfo, destinationExtraWord, param_5)
+int ilRecordRegisterUse(registerIndex, registerKind, usageInfo, destinationExtraWord, hasExtraWord)
   uint registerIndex;
   int registerKind;
   int *usageInfo;
   uint destinationExtraWord;
-  int param_5;
+  int hasExtraWord;
 {
-  int iVar1;
+  int lastRegister;
   
   if ((int)registerIndex < *usageInfo) {
-    iVar1 = usageInfo[1];
+    lastRegister = usageInfo[1];
   }
   else {
-    iVar1 = usageInfo[1];
-    if (iVar1 < (int)registerIndex) goto LAB_000c8650;
+    lastRegister = usageInfo[1];
+    if (lastRegister < (int)registerIndex) goto LAB_000c8650;
     *usageInfo = registerIndex + 1;
   }
-  if (((int)registerIndex <= iVar1) && (*usageInfo <= (int)registerIndex)) {
+  if (((int)registerIndex <= lastRegister) && (*usageInfo <= (int)registerIndex)) {
     usageInfo[1] = registerIndex - 1;
   }
 LAB_000c8650:
   if (registerKind == 0x17) {
     usageInfo[registerIndex + 0x87c] = 1;
     if (((((destinationExtraWord & 3) != 1) && ((destinationExtraWord & 0xc) != 4)) && ((destinationExtraWord & 0x30) != 0x10)) &&
-       (((destinationExtraWord & 0xc0) != 0x40 && (param_5 != 0)))) {
+       (((destinationExtraWord & 0xc0) != 0x40 && (hasExtraWord != 0)))) {
       return;
     }
     usageInfo[0x889] = 1;
@@ -843,7 +843,7 @@ int ilCopyInstructionRemapped(dstCursorPtr, srcCursorPtr, hasDestination, source
 {
   uint srcCursorWord0;
   uint *nextSrcCursor;
-  uint uVar2;
+  uint destRegKind;
   int remapSlot;
   uint *dstCursor;
   undefined4 *dstStart;
@@ -865,26 +865,26 @@ int ilCopyInstructionRemapped(dstCursorPtr, srcCursorPtr, hasDestination, source
   if (hasDestination != 0) {
     destinationWord = srcStart[1];
     srcCursor = srcStart + 2;
-    uVar2 = destinationWord & 0x3f0000;
-    if (uVar2 == 0x170000) {
+    destRegKind = destinationWord & 0x3f0000;
+    if (destRegKind == 0x170000) {
       remapSlot = (destinationWord & 0xffff) * 4 + programRecord;
       *(undefined4 *)(remapSlot + 0x21f0) = 1;
       destinationWord = *(uint *)(remapSlot + 0x21e0) & 0xffff | destinationWord & 0xffc00000 | 0x40000;
     }
-    else if (uVar2 == 0x100000) {
+    else if (destRegKind == 0x100000) {
       destinationWord = *(uint *)(programRecord + 0x2208) & 0xffff | destinationWord & 0xffc00000 | 0x40000;
     }
-    else if (uVar2 == 0xe0000) {
+    else if (destRegKind == 0xe0000) {
       if (*(int *)(programRecord + 0x2234) == 0) {
         destinationWord = *(uint *)(programRecord + 0x2200) & 0xffff | destinationWord & 0xffc00000 | 0x40000;
       }
     }
-    else if (uVar2 == 0xd0000) {
+    else if (destRegKind == 0xd0000) {
       if ((*(int *)(programRecord + 0x2234) == 0) && (*(int *)(programRecord + 0x2324) != 0)) {
         destinationWord = *(uint *)(programRecord + 9000) & 0xffff | destinationWord & 0xffc00000 | 0x40000;
       }
     }
-    else if (uVar2 == 0xf0000) {
+    else if (destRegKind == 0xf0000) {
       destinationWord = *(uint *)((destinationWord & 0xffff) * 4 + programRecord + 0x232c) & 0xffff | destinationWord & 0xffff0000;
     }
     *(uint *)(programRecord + 0x2318) = destinationWord;
@@ -4235,15 +4235,15 @@ int scCheckHandle(param_1)
 }
 
 /* scDisassembleIL @ 0xcd1ec (40 bytes) */
-int scDisassembleIL(sinkArg, tokenStart, tokenCount, param_4)
+int scDisassembleIL(sinkArg, tokenStart, tokenCount, extraArg)
   undefined4 sinkArg;
   undefined4 tokenStart;
   undefined4 tokenCount;
-  undefined4 param_4;
+  undefined4 extraArg;
 {
-  unsigned int ghidra_home[8] = { sinkArg, tokenStart, tokenCount, param_4, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[8] = { sinkArg, tokenStart, tokenCount, extraArg, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   
-  (*(unsigned int *)((unsigned char *)ghidra_home + 12)) = param_4;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 12)) = extraArg;
   return ((int (*)())scDisassembleILImpl)(sinkArg,tokenStart,tokenCount,&(*(unsigned int *)((unsigned char *)ghidra_home + 12)));
 }
 
@@ -4660,13 +4660,13 @@ int noop_cdc20()
 }
 
 /* scShaderStateFlag @ 0xcdc24 (24 bytes) */
-int scShaderStateFlag(param_1)
-  int param_1;
+int scShaderStateFlag(shaderState)
+  int shaderState;
 {
-  if (*(int *)(param_1 + 0x4c) == 0) {
+  if (*(int *)(shaderState + 0x4c) == 0) {
     return 1;
   }
-  return *(undefined1 *)(*(int *)(param_1 + 0x4c) + 5);
+  return *(undefined1 *)(*(int *)(shaderState + 0x4c) + 5);
 }
 
 /* vsdisFormatFloat @ 0xcdc3c (996 bytes) */
@@ -6916,11 +6916,11 @@ LAB_000d1004:
 }
 
 /* psnSwizzleIsAlphaSourceForm @ 0xd10a8 (52 bytes) */
-int psnSwizzleIsAlphaSourceForm(param_1)
-  uint param_1;
+int psnSwizzleIsAlphaSourceForm(sourceSwizzle)
+  uint sourceSwizzle;
 {
-  if ((((param_1 & 0xe000) != 0x6000) && ((param_1 & 0x1c00) != 0xc00)) &&
-     ((param_1 & 0x380) != 0x180)) {
+  if ((((sourceSwizzle & 0xe000) != 0x6000) && ((sourceSwizzle & 0x1c00) != 0xc00)) &&
+     ((sourceSwizzle & 0x380) != 0x180)) {
     return 0;
   }
   return 1;

@@ -4278,7 +4278,7 @@ int ilRemapSwizzleTriple(swizzleCode, selectX, selectY, selectZ)
   undefined4 *selectZ;
 {
   uint swizzleCodeWord0;
-  undefined4 uVar2;
+  undefined4 selectValue;
   
   swizzleCodeWord0 = *swizzleCode;
   if ((swizzleCodeWord0 & 0x80) != 0) {
@@ -4299,10 +4299,10 @@ int ilRemapSwizzleTriple(swizzleCode, selectX, selectY, selectZ)
     *selectZ = 0;
     return;
   case 2:
-    uVar2 = 1;
+    selectValue = 1;
     break;
   case 3:
-    uVar2 = 2;
+    selectValue = 2;
     break;
   case 4:
     *swizzleCode = 1;
@@ -4311,7 +4311,7 @@ int ilRemapSwizzleTriple(swizzleCode, selectX, selectY, selectZ)
     *selectZ = 2;
     return;
   case 5:
-    uVar2 = 0;
+    selectValue = 0;
     goto LAB_000bfac8;
   case 6:
     *swizzleCode = 1;
@@ -4320,7 +4320,7 @@ int ilRemapSwizzleTriple(swizzleCode, selectX, selectY, selectZ)
     *selectZ = 1;
     return;
   case 7:
-    uVar2 = 2;
+    selectValue = 2;
     goto LAB_000bfac8;
   case 8:
     *swizzleCode = 2;
@@ -4329,10 +4329,10 @@ int ilRemapSwizzleTriple(swizzleCode, selectX, selectY, selectZ)
     *selectZ = 2;
     return;
   case 9:
-    uVar2 = 0;
+    selectValue = 0;
     goto LAB_000bfae4;
   case 10:
-    uVar2 = 1;
+    selectValue = 1;
     goto LAB_000bfae4;
   case 0xb:
     *swizzleCode = 2;
@@ -4341,23 +4341,23 @@ int ilRemapSwizzleTriple(swizzleCode, selectX, selectY, selectZ)
     *selectZ = 2;
     return;
   case 0xc:
-    uVar2 = 3;
+    selectValue = 3;
     break;
   case 0xd:
-    uVar2 = 3;
+    selectValue = 3;
 LAB_000bfac8:
     *swizzleCode = 1;
-    *selectX = uVar2;
-    *selectY = uVar2;
-    *selectZ = uVar2;
+    *selectX = selectValue;
+    *selectY = selectValue;
+    *selectZ = selectValue;
     return;
   case 0xe:
-    uVar2 = 3;
+    selectValue = 3;
 LAB_000bfae4:
     *swizzleCode = 2;
-    *selectX = uVar2;
-    *selectY = uVar2;
-    *selectZ = uVar2;
+    *selectX = selectValue;
+    *selectY = selectValue;
+    *selectZ = selectValue;
     return;
   case 0xf:
     *swizzleCode = 3;
@@ -4366,18 +4366,18 @@ LAB_000bfae4:
     *selectZ = 2;
     return;
   case 0x10:
-    uVar2 = 0;
+    selectValue = 0;
     goto LAB_000bfb34;
   case 0x11:
-    uVar2 = 1;
+    selectValue = 1;
     goto LAB_000bfb34;
   case 0x12:
-    uVar2 = 2;
+    selectValue = 2;
 LAB_000bfb34:
     *swizzleCode = 3;
-    *selectX = uVar2;
-    *selectY = uVar2;
-    *selectZ = uVar2;
+    *selectX = selectValue;
+    *selectY = selectValue;
+    *selectZ = selectValue;
     return;
   case 0x13:
     *swizzleCode = 3;
@@ -4386,13 +4386,13 @@ LAB_000bfb34:
     *selectZ = 3;
     return;
   case 0x14:
-    uVar2 = 4;
+    selectValue = 4;
     break;
   case 0x15:
-    uVar2 = 6;
+    selectValue = 6;
     break;
   case 0x16:
-    uVar2 = 5;
+    selectValue = 5;
     break;
   case 0x17:
     *swizzleCode = 0;
@@ -4452,9 +4452,9 @@ LAB_000bfb34:
     return;
   }
   *swizzleCode = 0;
-  *selectX = uVar2;
-  *selectY = uVar2;
-  *selectZ = uVar2;
+  *selectX = selectValue;
+  *selectY = selectValue;
+  *selectZ = selectValue;
   return;
 }
 
@@ -4463,11 +4463,11 @@ int ilRemapSwizzleSingle(swizzleCode, channelSelect)
   uint *swizzleCode;
   undefined4 *channelSelect;
 {
-  uint uVar1;
+  uint swizzleWord;
   
-  uVar1 = *swizzleCode;
-  if ((uVar1 & 0x80) == 0) {
-    switch(uVar1) {
+  swizzleWord = *swizzleCode;
+  if ((swizzleWord & 0x80) == 0) {
+    switch(swizzleWord) {
     case 0:
       *swizzleCode = 0;
       *channelSelect = 0;
@@ -4548,7 +4548,7 @@ int ilRemapSwizzleSingle(swizzleCode, channelSelect)
       return;
     }
   }
-  *swizzleCode = uVar1 & 0xffffff7f;
+  *swizzleCode = swizzleWord & 0xffffff7f;
   return;
 }
 
@@ -7712,7 +7712,7 @@ int psnDecRetargetSourceReg(entry, oldComponentSelect, newComponentSelect, newSl
 {
   bool loopContinue;
   ushort sourceSwizzle;
-  uint uVar3;
+  uint scratchBits;
   int halfCursor;
   undefined4 r4AfterCall;
   uint newSlotCode;
@@ -7722,9 +7722,9 @@ int psnDecRetargetSourceReg(entry, oldComponentSelect, newComponentSelect, newSl
   ushort *sourceSwizzlePtr;
   int halfCounter;
   
-  uVar3 = newComponentSelect >> 3 & 1;
+  scratchBits = newComponentSelect >> 3 & 1;
   if ((newComponentSelect & 7) != 0) {
-    uVar3 = 0;
+    scratchBits = 0;
   }
   newSlotCode = 2;
   if ((newSlot != 2) && (newSlotCode = 3, newSlot != 3)) {
@@ -7732,14 +7732,14 @@ int psnDecRetargetSourceReg(entry, oldComponentSelect, newComponentSelect, newSl
   }
   halfCounter = 0;
   oldAddressOffset = (uint)(oldComponentSelect == 8) * 3;
-  newSlotAddressPtr = (uVar3 * 3 + newSlot) * 2 + entry;
+  newSlotAddressPtr = (scratchBits * 3 + newSlot) * 2 + entry;
   halfCursor = entry;
   do {
     sourceSwizzlePtr = (ushort *)(halfCursor + 10);
     sourceCounter = 0;
     do {
       sourceSwizzle = *sourceSwizzlePtr;
-      uVar3 = (uint)sourceSwizzle;
+      scratchBits = (uint)sourceSwizzle;
       if (((sourceSwizzle & 0x1f) == oldComponentSelect) &&
          (*(ushort *)((oldAddressOffset + (sourceSwizzlePtr[-1] & 3)) * 2 + entry + 0x80) == address)) {
         *sourceSwizzlePtr = sourceSwizzle & 0xffe0 | (ushort)newComponentSelect;
@@ -7756,7 +7756,7 @@ int psnDecRetargetSourceReg(entry, oldComponentSelect, newComponentSelect, newSl
   } while (loopContinue);
   if (*(int *)(entry + 0x8c) == 2) {
     ((int (*)())psnDecRecomputeSourceUsage)(entry);
-    ((int (*)())psnDecCanonicalizeEntry)(entry,r4AfterCall,newSlotCode,newSlotAddressPtr,oldAddressOffset,sourceCounter,sourceSwizzlePtr,uVar3);
+    ((int (*)())psnDecCanonicalizeEntry)(entry,r4AfterCall,newSlotCode,newSlotAddressPtr,oldAddressOffset,sourceCounter,sourceSwizzlePtr,scratchBits);
   }
   return 1;
 }
@@ -10632,11 +10632,11 @@ int scCallbackAppendFormatted(unusedArgR3, prefix, format, formatArg1, formatArg
   undefined4 formatArg5;
 {
   int length;
-  undefined1 auStack_118 [264];
+  undefined1 textBuffer [264];
   
-  _strcpy(auStack_118,prefix);
-  length = _strlen(auStack_118);
-  return printf_LDBLStub_1a3428(auStack_118 + length,0x100 - length,format,formatArg1,formatArg2,formatArg3,formatArg4,formatArg5);
+  _strcpy(textBuffer,prefix);
+  length = _strlen(textBuffer);
+  return printf_LDBLStub_1a3428(textBuffer + length,0x100 - length,format,formatArg1,formatArg2,formatArg3,formatArg4,formatArg5);
 }
 
 /* scCallbackFopen @ 0xc6ef0 (88 bytes) */
@@ -10663,14 +10663,14 @@ int scCallbackFopen(unusedArgR3, path, mode)
 }
 
 /* scCallbackFclose @ 0xc6f60 (44 bytes) */
-int scCallbackFclose(unusedArgR3, param_2)
+int scCallbackFclose(unusedArgR3, file)
   undefined4 unusedArgR3;
-  undefined4 param_2;
+  undefined4 file;
 {
-  int iVar1;
+  int closeResult;
   
-  iVar1 = _fclose(param_2);
-  return iVar1 == 0;
+  closeResult = _fclose(file);
+  return closeResult == 0;
 }
 
 /* scCallbackFwrite @ 0xc6f90 (40 bytes) */
@@ -10812,13 +10812,13 @@ int ilFreeRecordList(node)
 int ilSelectorOneToThreeOrZero(selector)
   int selector;
 {
-  undefined1 uVar1;
+  undefined1 slotCode;
   
-  uVar1 = 2;
-  if ((selector != 2) && (uVar1 = 3, selector != 3)) {
-    uVar1 = selector == 1;
+  slotCode = 2;
+  if ((selector != 2) && (slotCode = 3, selector != 3)) {
+    slotCode = selector == 1;
   }
-  return uVar1;
+  return slotCode;
 }
 
 /* ilRecordInputSemantic @ 0xc7270 (24 bytes) */

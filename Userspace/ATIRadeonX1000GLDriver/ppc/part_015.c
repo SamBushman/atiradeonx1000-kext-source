@@ -230,7 +230,7 @@ int glDeleteFragmentShaderATI_impl(ctx, shaderId)
 {
   int loopIndex2;
   bool searching;
-  int iVar2;
+  int shaderEntry;
   uint loopIndex;
   int shaderTable;
   
@@ -255,13 +255,13 @@ int glDeleteFragmentShaderATI_impl(ctx, shaderId)
     if (!searching) {
 LAB_000a161c:
       ((int (*)())atifsFreeShader)(ctx,loopIndex * 0x78 + *(int *)(shaderTable + 0x88));
-      iVar2 = loopIndex * 0x78 + *(int *)(shaderTable + 0x88);
-      _memmove(iVar2,iVar2 + 0x78,(*(int *)(shaderTable + 4) - loopIndex) * 0x78 + -0x78);
+      shaderEntry = loopIndex * 0x78 + *(int *)(shaderTable + 0x88);
+      _memmove(shaderEntry,shaderEntry + 0x78,(*(int *)(shaderTable + 4) - loopIndex) * 0x78 + -0x78);
       *(int *)(shaderTable + 4) = *(int *)(shaderTable + 4) + -1;
       if (loopIndex < *(uint *)(((unsigned char *)0x00001140) + ctx)) {
-        iVar2 = *(uint *)(((unsigned char *)0x00001140) + ctx) - 1;
-        *(int *)(((unsigned char *)0x00001140) + ctx) = iVar2;
-        *(int *)(((unsigned char *)0x00001144) + ctx) = iVar2 * 0x78 + *(int *)(shaderTable + 0x88);
+        shaderEntry = *(uint *)(((unsigned char *)0x00001140) + ctx) - 1;
+        *(int *)(((unsigned char *)0x00001140) + ctx) = shaderEntry;
+        *(int *)(((unsigned char *)0x00001144) + ctx) = shaderEntry * 0x78 + *(int *)(shaderTable + 0x88);
       }
     }
   }
@@ -1308,19 +1308,19 @@ int atifsSetConstant(ctx, shader, dst, value, inShader)
 /* gld_quantizePointSizeInt @ 0xa3560 (164 bytes) */
 uint gld_quantizePointSizeInt(int glContext,double fpPassThrough1)
 {
-  uint uVar1;
+  uint quantizedSize;
   
-  uVar1 = *(uint *)(((unsigned char *)0x000013e0) + glContext);
+  quantizedSize = *(uint *)(((unsigned char *)0x000013e0) + glContext);
   if ((double)(float)((double)CONCAT44(0x43300000,*(uint *)(((unsigned char *)0x000013e0) + glContext) ^ 0x80000000) -
                      DOUBLE_001aa1e0) < fpPassThrough1) {
-    uVar1 = *(uint *)(((unsigned char *)0x000013e4) + glContext);
+    quantizedSize = *(uint *)(((unsigned char *)0x000013e4) + glContext);
     if (fpPassThrough1 <
         (double)(float)((double)CONCAT44(0x43300000,*(uint *)(((unsigned char *)0x000013e4) + glContext) ^ 0x80000000)
                        - DOUBLE_001aa1e0)) {
-      uVar1 = (uint)(int)(fpPassThrough1 + (double)FLOAT_001aa10c);
+      quantizedSize = (uint)(int)(fpPassThrough1 + (double)FLOAT_001aa10c);
     }
   }
-  return uVar1;
+  return quantizedSize;
 }
 
 /* gld_roundUpToPowerOfTwo @ 0xa3610 (88 bytes) */
@@ -1361,28 +1361,28 @@ int gld_roundUpToPowerOfTwo(glContext, value, unusedArgR5, unusedArgR6, unusedAr
 int gld_isPointAttenuationActive(glContext)
   int glContext;
 {
-  uint uVar1;
+  uint attenuationBit;
   
   if ((*(uint *)(glContext + 0x44) & 0x100000) == 0) {
-    uVar1 = *(uint *)(glContext + 0xe8) & 1;
+    attenuationBit = *(uint *)(glContext + 0xe8) & 1;
   }
   else {
-    uVar1 = *(uint *)(glContext + 0x44) & 0x80;
+    attenuationBit = *(uint *)(glContext + 0x44) & 0x80;
   }
-  if (uVar1 == 0) {
+  if (attenuationBit == 0) {
     return 0;
   }
   return 1;
 }
 
 /* gld_scalePointSizeToPixels @ 0xa36b0 (212 bytes) */
-int gld_scalePointSizeToPixels(glContext, param_2)
+int gld_scalePointSizeToPixels(glContext, addSizeBias)
   int glContext;
-  int param_2;
+  int addSizeBias;
 {
   float fVar1;
   
-  if (param_2 != 0) {
+  if (addSizeBias != 0) {
     fVar1 = FLOAT_001aa0e8;
     if (*(short *)(((unsigned char *)0x00002e0e) + *(int *)(*(int *)(glContext + 4) + 0x10)) == 0x1102) {
       fVar1 = FLOAT_001aa108;
