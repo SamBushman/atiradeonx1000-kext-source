@@ -1775,8 +1775,11 @@ int FUN_0004eba0(glContext, param_2, staleArgR5, staleArgR6, staleArgR7, staleAr
   undefined4 staleArgR8;
   undefined4 staleArgR9;
 {
-  int iVar1;
-  undefined4 uVar2;
+  int glContextWord4;
+  int glStateBlock;
+  int resolveFlag;
+  int depthBiasScale;
+  undefined4 drawSurface;
   int glState;
   int glContextWord8;
   int glContextWord2768;
@@ -1791,20 +1794,20 @@ int FUN_0004eba0(glContext, param_2, staleArgR5, staleArgR6, staleArgR7, staleAr
   double in_f7;
   double in_f8;
   
-  iVar1 = *(int *)(glContext + 4);
+  glContextWord4 = *(int *)(glContext + 4);
   glContextWord2768 = *(int *)(glContext + 0x2768);
   glContextWord8 = *(int *)(glContext + 8);
-  if ((((((unsigned char *)0x00002e2d)[*(int *)(iVar1 + 0x10)] == '\0') ||
+  if ((((((unsigned char *)0x00002e2d)[*(int *)(glContextWord4 + 0x10)] == '\0') ||
        ((*(uint *)(glContext + 0x44) & 0x20000) != 0)) ||
-      (iVar1 = gld_needsMultisampleResolve(iVar1,*(undefined4 *)(iVar1 + 0x26a0),staleArgR5,staleArgR6,staleArgR7,staleArgR8,
-                            staleArgR9), iVar1 != 0)) || (glContextWord2768 == 0)) {
+      (glContextWord4 = gld_needsMultisampleResolve(glContextWord4,*(undefined4 *)(glContextWord4 + 0x26a0),staleArgR5,staleArgR6,staleArgR7,staleArgR8,
+                            staleArgR9), glContextWord4 != 0)) || (glContextWord2768 == 0)) {
     glState = *(int *)(glContext + 4);
-    iVar1 = ((uint (*)())FUN_000a3560)(glContext,(double)*(float *)(((unsigned char *)0x00002e20) + *(int *)(glState + 0x10)));
-    uVar2 = *(undefined4 *)(*(int *)(glContext + 4) + 0x26a0);
-    *(short *)(glContext + 0x1b42) = (short)((uint)(glContextWord8 * iVar1) >> 1);
-    iVar1 = gld_needsMultisampleResolve(*(int *)(glContext + 4),uVar2,staleArgR5,staleArgR6,staleArgR7,staleArgR8,glState);
+    depthBiasScale = ((uint (*)())FUN_000a3560)(glContext,(double)*(float *)(((unsigned char *)0x00002e20) + *(int *)(glState + 0x10)));
+    drawSurface = *(undefined4 *)(*(int *)(glContext + 4) + 0x26a0);
+    *(short *)(glContext + 0x1b42) = (short)((uint)(glContextWord8 * depthBiasScale) >> 1);
+    resolveFlag = gld_needsMultisampleResolve(*(int *)(glContext + 4),drawSurface,staleArgR5,staleArgR6,staleArgR7,staleArgR8,glState);
     dVar6 = extraout_f1_00;
-    if (iVar1 == 0) {
+    if (resolveFlag == 0) {
       *(uint *)(glContext + 0x1b40) = *(uint *)(glContext + 0x1b40) & 0xfffcffff | 0x20000;
     }
     else {
@@ -1816,12 +1819,12 @@ int FUN_0004eba0(glContext, param_2, staleArgR5, staleArgR6, staleArgR7, staleAr
     *(uint *)(glContext + 0x1b40) = *(uint *)(glContext + 0x1b40) & 0xfffcffff | 0x30000;
     dVar6 = extraout_f1;
   }
-  iVar1 = *(int *)(*(int *)(glContext + 4) + 0x10);
-  if (((((unsigned char *)0x00002e2c)[iVar1] != '\0') && ((*(uint *)(glContext + 0x44) & 0x20000) == 0)) &&
-     (*(short *)(((unsigned char *)0x00002e28) + iVar1) != -1)) {
+  glStateBlock = *(int *)(*(int *)(glContext + 4) + 0x10);
+  if (((((unsigned char *)0x00002e2c)[glStateBlock] != '\0') && ((*(uint *)(glContext + 0x44) & 0x20000) == 0)) &&
+     (*(short *)(((unsigned char *)0x00002e28) + glStateBlock) != -1)) {
     *(uint *)(glContext + 0x1b64) =
          (uint)(int)(FLOAT_001aa0e8 /
-               ((float)((double)CONCAT44(0x43300000,*(uint *)(((unsigned char *)0x00002e24) + iVar1) ^ 0x80000000) -
+               ((float)((double)CONCAT44(0x43300000,*(uint *)(((unsigned char *)0x00002e24) + glStateBlock) ^ 0x80000000) -
                        DOUBLE_001aa1e0) * FLOAT_001aa0fc *
                (float)((double)CONCAT44(0x43300000,glContextWord8) - DOUBLE_001aa250))) & 0xfffffffc |
          *(uint *)(glContext + 0x1b64) & 3;
