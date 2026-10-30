@@ -1,0 +1,20 @@
+local	FUN_0017994c	param_2	lane	INFERRED	lane / source index
+local	FUN_0017994c	uVar1	word0xb8Flags	INFERRED	inst +0xb8 modifier word
+local	FUN_0017994c	uVar5	word0xd0Flags	INFERRED	inst +0xd0 modifier word
+local	FUN_0017994c	iVar6	laneBase	INFERRED	ctx + lane*4
+local	FUN_00179db0	param_2	lane	INFERRED	lane / source index
+local	FUN_00179db0	bVar1	lastOperand	INFERRED	operand index == 2
+local	FUN_00179db0	iVar2	laneBase	INFERRED	ctx + lane*4
+local	FUN_00179db0	piVar3	operandConstant	INFERRED	expr record (int bits) of the operand's value number; looked for == 0
+local	FUN_00179db0	piVar6	valueNumberPtr	INFERRED	walks the per-operand value numbers (stride 0x10)
+local	FUN_00179e74	param_2	lane	INFERRED	lane / source index
+local	FUN_00179e74	uVar3	word0xb8Flags	INFERRED	inst +0xb8 modifier word
+local	FUN_0017ae28	param_3	valueKey	INFERRED	value key whose instruction supplies the new operand (+0x8c reg ref, +0x158 block)
+local	FUN_0017ae28	param_4	swizzle	INFERRED	swizzle word stored in the operand record (+0x10), or at inst +0x9c for operand 0
+local	FUN_0017ae28	iVar3	operandOffset	INFERRED	operandIndex * 0x18 + 0x80: offset of the operand modifier words
+local	FUN_0017ae28	puVar4	newValueKey	INFERRED	arena-allocated (0x240 bytes) ValueKey for the defining instruction
+use	FUN_0017994c	iVar2	lanesEqual	INFERRED	ValueKey__operandLanesEqual(ctx, lane, 1, 2)	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)FUN_00179608\)\(param_1,param_2,1,2\);$	+2
+use	FUN_0017994c	iVar2	valueNumber	INFERRED	lane value number at ctx+0x178	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar6\ \+\ 0x178\);$	+3
+use	FUN_00179e74	iVar1	lanesEqual	INFERRED	ValueKey__operandLanesEqual(ctx, lane, 1, 2)	^\s*iVar1\ =\ \(\(int\ \(\*\)\(\)\)FUN_00179608\)\(param_1,param_2,1,2\);$	+2
+use	FUN_00179e74	iVar1	inst	INFERRED	current instruction ctx+0xb0	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xb0\);$	+6
+use	FUN_00179e74	iVar1	laneBase	INFERRED	ctx + lane*4	^\s*iVar1\ =\ param_2\ \*\ 4\ \+\ param_1;$	+3

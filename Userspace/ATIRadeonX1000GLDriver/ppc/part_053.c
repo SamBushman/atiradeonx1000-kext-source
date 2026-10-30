@@ -914,41 +914,41 @@ int ilSkipRelativeAddressWords(param_1, param_2, param_3)
 }
 
 /* ilSourceOperandWordCount @ 0x19ecf4 (192 bytes) */
-int ilSourceOperandWordCount(param_1)
-  uint *param_1;
+int ilSourceOperandWordCount(operandWords)
+  uint *operandWords;
 {
-  uint uVar1;
-  int iVar2;
+  uint header;
+  int nestedWordCount;
   uint *loopPtr;
   uint loopIndex2;
   
-  loopPtr = param_1 + 1;
-  uVar1 = *param_1;
-  if ((uVar1 & 0x400000) != 0) {
-    loopPtr = param_1 + 2;
+  loopPtr = operandWords + 1;
+  header = *operandWords;
+  if ((header & 0x400000) != 0) {
+    loopPtr = operandWords + 2;
   }
-  if ((uVar1 & 0x1800000) == 0) {
+  if ((header & 0x1800000) == 0) {
     loopIndex2 = 0;
-    if ((uVar1 & 0x2000000) == 0) {
-      uVar1 = *param_1;
+    if ((header & 0x2000000) == 0) {
+      header = *operandWords;
     }
     else {
       do {
         loopIndex2 = loopIndex2 + 1;
-        iVar2 = ((int (*)())ilSourceOperandWordCount)(loopPtr);
-        uVar1 = *param_1;
-        loopPtr = loopPtr + iVar2;
-      } while (loopIndex2 < (uVar1 >> 0x19 & 1));
+        nestedWordCount = ((int (*)())ilSourceOperandWordCount)(loopPtr);
+        header = *operandWords;
+        loopPtr = loopPtr + nestedWordCount;
+      } while (loopIndex2 < (header >> 0x19 & 1));
     }
-    if ((uVar1 & 0x1800000) == 0) goto LAB_0019ed78;
+    if ((header & 0x1800000) == 0) goto LAB_0019ed78;
   }
-  loopPtr = (uint *)((int (*)())ilSkipRelativeAddressWords)(uVar1 >> 0x17 & 3,uVar1 >> 0x19 & 1,loopPtr);
-  uVar1 = *param_1;
+  loopPtr = (uint *)((int (*)())ilSkipRelativeAddressWords)(header >> 0x17 & 3,header >> 0x19 & 1,loopPtr);
+  header = *operandWords;
 LAB_0019ed78:
-  if ((uVar1 & 0x4000000) != 0) {
+  if ((header & 0x4000000) != 0) {
     loopPtr = loopPtr + 1;
   }
-  return (int)loopPtr - (int)param_1 >> 2;
+  return (int)loopPtr - (int)operandWords >> 2;
 }
 
 /* ilInstructionHeaderWordCount @ 0x19edb4 (84 bytes) */
@@ -974,25 +974,25 @@ int ilInstructionHeaderWordCount(param_1)
 }
 
 /* ilDestinationOperandWordCount @ 0x19ee08 (108 bytes) */
-int ilDestinationOperandWordCount(param_1)
-  uint *param_1;
+int ilDestinationOperandWordCount(operandWords)
+  uint *operandWords;
 {
-  uint uVar1;
-  uint *puVar2;
+  uint header;
+  uint *wordPtr;
   
-  puVar2 = param_1 + 1;
-  uVar1 = *param_1;
-  if ((uVar1 & 0x400000) != 0) {
-    puVar2 = param_1 + 2;
+  wordPtr = operandWords + 1;
+  header = *operandWords;
+  if ((header & 0x400000) != 0) {
+    wordPtr = operandWords + 2;
   }
-  if ((uVar1 & 0x1800000) != 0) {
-    puVar2 = (uint *)((int (*)())ilSkipRelativeAddressWords)(uVar1 >> 0x17 & 3,uVar1 >> 0x19 & 1,puVar2);
-    uVar1 = *param_1;
+  if ((header & 0x1800000) != 0) {
+    wordPtr = (uint *)((int (*)())ilSkipRelativeAddressWords)(header >> 0x17 & 3,header >> 0x19 & 1,wordPtr);
+    header = *operandWords;
   }
-  if ((uVar1 & 0x4000000) != 0) {
-    puVar2 = puVar2 + 1;
+  if ((header & 0x4000000) != 0) {
+    wordPtr = wordPtr + 1;
   }
-  return (int)puVar2 - (int)param_1 >> 2;
+  return (int)wordPtr - (int)operandWords >> 2;
 }
 
 /* FUN_0019ee74 @ 0x19ee74 (184 bytes) */

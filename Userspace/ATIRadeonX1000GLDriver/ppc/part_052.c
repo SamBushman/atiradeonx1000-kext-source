@@ -1305,26 +1305,26 @@ int R300VMachineAssembler__transitionState(this, event)
 }
 
 /* R300VMachineAssembler__vslot2_exceedsLimits @ 0x19a618 (120 bytes) */
-int R300VMachineAssembler__vslot2_exceedsLimits(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  int param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+int R300VMachineAssembler__vslot2_exceedsLimits(this, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7, unusedArg8)
+  int this;
+  undefined4 unusedArg2;
+  undefined4 unusedArg3;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
+  undefined4 unusedArg8;
 {
-  undefined4 uVar1;
+  undefined4 exceeds;
   
-  Compiler__logf(*(int *)(param_1 + 0xc),"next_sp = %d, max = %d\n",*(undefined4 *)(param_1 + 0x58),
-               *(undefined4 *)(*(int *)(*(int *)(param_1 + 0xc) + 0x30c) + 0x40),param_5,param_6,
-               param_7,param_8);
-  if ((*(int *)(*(int *)(*(int *)(param_1 + 0xc) + 0x30c) + 0x40) < *(int *)(param_1 + 0x58)) ||
-     (uVar1 = 0, 0x10 < *(int *)(param_1 + 0x5c))) {
-    uVar1 = 1;
+  Compiler__logf(*(int *)(this + 0xc),"next_sp = %d, max = %d\n",*(undefined4 *)(this + 0x58),
+               *(undefined4 *)(*(int *)(*(int *)(this + 0xc) + 0x30c) + 0x40),unusedArg5,unusedArg6,
+               unusedArg7,unusedArg8);
+  if ((*(int *)(*(int *)(*(int *)(this + 0xc) + 0x30c) + 0x40) < *(int *)(this + 0x58)) ||
+     (exceeds = 0, 0x10 < *(int *)(this + 0x5c))) {
+    exceeds = 1;
   }
-  return uVar1;
+  return exceeds;
 }
 
 /* R300VMachineAssembler__vslot49_advanceInstruction @ 0x19a690 (16 bytes) */

@@ -1365,25 +1365,25 @@ int FUN_00193be8(param_1)
 }
 
 /* FUN_00193c00 @ 0x193c00 (116 bytes) */
-int FUN_00193c00(param_1, param_2)
-  int param_1;
-  int param_2;
+int FUN_00193c00(typeDesc, compiler)
+  int typeDesc;
+  int compiler;
 {
-  char cVar1;
+  char kindByte;
   undefined4 *allocation;
-  int iVar3;
-  undefined4 uVar4;
+  int sizeCode;
+  undefined4 arena;
   
-  iVar3 = 4;
-  cVar1 = *(char *)(param_1 + 5);
-  if ((cVar1 != '\x01') && (iVar3 = 0x10, cVar1 != '\x02')) {
-    iVar3 = (uint)(cVar1 == '\0') << 1;
+  sizeCode = 4;
+  kindByte = *(char *)(typeDesc + 5);
+  if ((kindByte != '\x01') && (sizeCode = 0x10, kindByte != '\x02')) {
+    sizeCode = (uint)(kindByte == '\0') << 1;
   }
-  uVar4 = *(undefined4 *)(param_2 + 0x370);
-  allocation = (undefined4 *)((int (*)())Arena__alloc)(uVar4,0x1c);
-  *allocation = uVar4;
-  ((int (*)())FUN_00193ae4)(allocation + 1,1,iVar3,param_2);
-  allocation[4] = param_1;
+  arena = *(undefined4 *)(compiler + 0x370);
+  allocation = (undefined4 *)((int (*)())Arena__alloc)(arena,0x1c);
+  *allocation = arena;
+  ((int (*)())FUN_00193ae4)(allocation + 1,1,sizeCode,compiler);
+  allocation[4] = typeDesc;
   allocation[3] = 1;
   allocation[5] = 0;
   return allocation + 1;
@@ -1484,28 +1484,28 @@ int FUN_00193e74(param_1, param_2, param_3)
 }
 
 /* Arena__bytesInUse @ 0x193eb8 (76 bytes) */
-int Arena__bytesInUse(param_1)
-  int param_1;
+int Arena__bytesInUse(arena)
+  int arena;
 {
-  int *piVar1;
-  int iVar2;
-  int *piVar3;
+  int *chunk;
+  int bytesInUse;
+  int *olderChunk;
   
-  piVar1 = *(int **)(param_1 + 4);
-  if (piVar1 == (int *)0x0) {
+  chunk = *(int **)(arena + 4);
+  if (chunk == (int *)0x0) {
     return 0;
   }
-  piVar3 = (int *)*piVar1;
-  iVar2 = piVar1[1] - (*(int *)(param_1 + 0x10) - *(int *)(param_1 + 8));
-  if (piVar3 == (int *)0x0) {
-    return iVar2;
+  olderChunk = (int *)*chunk;
+  bytesInUse = chunk[1] - (*(int *)(arena + 0x10) - *(int *)(arena + 8));
+  if (olderChunk == (int *)0x0) {
+    return bytesInUse;
   }
   do {
-    piVar1 = piVar3 + 1;
-    piVar3 = (int *)*piVar3;
-    iVar2 = iVar2 + *piVar1;
-  } while (piVar3 != (int *)0x0);
-  return iVar2;
+    chunk = olderChunk + 1;
+    olderChunk = (int *)*olderChunk;
+    bytesInUse = bytesInUse + *chunk;
+  } while (olderChunk != (int *)0x0);
+  return bytesInUse;
 }
 
 /* DList__isEmpty @ 0x193f08 (24 bytes) */

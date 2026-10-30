@@ -1,0 +1,49 @@
+local	Arena__bytesInUse	param_1	arena	INFERRED	arena: [1] chunk list head, [2] cursor, [4] chunk end
+local	Arena__bytesInUse	piVar1	chunk	INFERRED	current chunk: [0] older chunk, [1] size
+local	Arena__bytesInUse	iVar2	bytesInUse	INFERRED	running total: current chunk size minus the free tail, plus every older chunk size
+local	Arena__bytesInUse	piVar3	olderChunk	INFERRED	next older chunk in the list
+local	FUN_00193c00	param_1	typeDesc	INFERRED	type / register descriptor: byte +5 selects the size code
+local	FUN_00193c00	param_2	compiler	INFERRED	compiler: +0x370 arena
+local	FUN_00193c00	cVar1	kindByte	INFERRED	byte +5 of the descriptor (0, 1, 2 or other)
+local	FUN_00193c00	iVar3	sizeCode	INFERRED	4 for kind 1, 0x10 for kind 2, 2 for kind 0, else 0
+local	FUN_00193c00	uVar4	arena	INFERRED	compiler arena at +0x370, stored as the allocation header
+local	ilSourceOperandWordCount	param_1	operandWords	INFERRED	IL source operand token words: word 0 = header flags
+local	ilSourceOperandWordCount	uVar1	header	INFERRED	operand header word (bit 22 extra word, bits 23-24 relative address, bit 25 nested count, bit 26 trailing word)
+local	ilSourceOperandWordCount	iVar2	nestedWordCount	INFERRED	words of one nested source operand
+local	ilDestinationOperandWordCount	param_1	operandWords	INFERRED	IL destination operand token words: word 0 = header flags
+local	ilDestinationOperandWordCount	uVar1	header	INFERRED	operand header word (bit 22 extra word, bits 23-24 relative address, bit 26 trailing word)
+local	ilDestinationOperandWordCount	puVar2	wordPtr	INFERRED	cursor past the words consumed so far
+local	R300VMachineAssembler__vslot2_exceedsLimits	param_1	this	INFERRED	assembler: +0xc compiler, +0x58 next stack pointer, +0x5c second counter
+local	R300VMachineAssembler__vslot2_exceedsLimits	param_2	unusedArg2	INFERRED	unused argument
+local	R300VMachineAssembler__vslot2_exceedsLimits	param_3	unusedArg3	INFERRED	unused argument
+local	R300VMachineAssembler__vslot2_exceedsLimits	param_4	unusedArg4	INFERRED	unused argument
+local	R300VMachineAssembler__vslot2_exceedsLimits	param_5	unusedArg5	INFERRED	unused argument, forwarded to Compiler__logf as variadic slot
+local	R300VMachineAssembler__vslot2_exceedsLimits	param_6	unusedArg6	INFERRED	unused argument, forwarded to Compiler__logf as variadic slot
+local	R300VMachineAssembler__vslot2_exceedsLimits	param_7	unusedArg7	INFERRED	unused argument, forwarded to Compiler__logf as variadic slot
+local	R300VMachineAssembler__vslot2_exceedsLimits	param_8	unusedArg8	INFERRED	unused argument, forwarded to Compiler__logf as variadic slot
+local	R300VMachineAssembler__vslot2_exceedsLimits	uVar1	exceeds	INFERRED	1 when next_sp exceeds the hardware max (limits +0x40) or the second counter exceeds 0x10
+local	FUN_0017b020	param_2	operandIndex	INFERRED	instruction operand whose defining value-key row is inspected
+local	FUN_0017b020	uVar4	lastElementIndex	INFERRED	vector size - 1
+local	FUN_0017b020	piVar1	definingInst	INFERRED	instruction (row +0xb0) of the operand's defining value key
+local	FUN_0017b020	iVar6	definingRow	INFERRED	value-key row of the last definition of the operand
+local	FUN_001797d0	param_2	lane	INFERRED	lane / source index
+local	FUN_001797d0	uVar1	word0xd0Bit0	INFERRED	bit 0 of inst +0xd0 (operand 2 modifier word)
+local	FUN_001797d0	uVar4	word0xe8Flags	INFERRED	inst +0xe8 (operand 3 modifier word)
+local	FUN_00179f38	param_2	lane	INFERRED	lane / source index
+local	FUN_00179f38	bVar1	lastOperand	INFERRED	operand index == 2
+local	FUN_00179f38	uVar2	operandModifiers	INFERRED	modifier word of the other operand (bit0 negate, bit1 abs)
+local	FUN_00179f38	iVar3	laneBase	INFERRED	ctx + lane*4
+local	FUN_00179f38	pfVar4	operandConstant	INFERRED	expr record (float) of the operand's value number; looked for == 1.0
+local	FUN_00179f38	piVar8	valueNumberPtr	INFERRED	walks the per-operand value numbers (stride 0x10)
+local	FUN_00179cc0	param_2	lane	INFERRED	lane / source index
+local	FUN_00179cc0	bVar1	lastOperand	INFERRED	operand index == 2
+local	FUN_00179cc0	uVar2	operandModifiers	INFERRED	modifier word of the other operand (bit0 negate, bit1 abs)
+local	FUN_00179cc0	iVar3	laneBase	INFERRED	ctx + lane*4
+local	FUN_00179cc0	piVar4	operandConstant	INFERRED	expr record (int bits) of the operand's value number; looked for == 0
+local	FUN_00179cc0	piVar8	valueNumberPtr	INFERRED	walks the per-operand value numbers (stride 0x10)
+use	FUN_0017b020	iVar2	predicateResult	INFERRED	instruction vtable +100 predicate	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*piVar1\ \+\ 100\)\)\(piVar1\);$	+2
+use	FUN_0017b020	iVar2	src0Record	INFERRED	operand record 0 of the defining instruction (swizzle +0x10 must be 0)	^\s*\(iVar2\ =\ FUN_001054ec\(\*\(undefined4\ \*\)\(iVar6\ \+\ 0xb0\),0\),\ \*\(int\ \*\)\(iVar2\ \+\ 0x10\)\ ==\ 0\)\)\ \&\&$	+1
+use	FUN_0017b020	iVar2	src1Record	INFERRED	operand record 1 of the current instruction (swizzle must be 0x10203)	^\s*\(iVar2\ =\ FUN_001054ec\(\*\(undefined4\ \*\)\(param_1\ \+\ 0xb0\),1\),\ \*\(int\ \*\)\(iVar2\ \+\ 0x10\)\ ==\ 0x10203\)\)\ \{$	+1
+use	FUN_001797d0	iVar2	lanesEqual	INFERRED	ValueKey__operandLanesEqual(ctx, lane, 2, 3)	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)FUN_00179608\)\(param_1,param_2,2,3\);$	+2
+use	FUN_001797d0	iVar2	inst	INFERRED	current instruction ctx+0xb0	^\s*iVar2\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xb0\);$	+6
+use	FUN_001797d0	iVar2	laneBase	INFERRED	ctx + lane*4	^\s*iVar2\ =\ param_2\ \*\ 4\ \+\ param_1;$	+3
