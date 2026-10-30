@@ -2769,18 +2769,18 @@ int FUN_0011379c(compiler, param_2)
   int compiler;
   int param_2;
 {
-  int iVar1;
+  int opcodeFlagTable;
   int flagBit7Result;
-  undefined4 uVar3;
-  int iVar4;
+  undefined4 result;
+  int opcode;
   
-  iVar1 = (**(code **)(**(int **)(compiler + 0x30c) + 0x16c))(*(int **)(compiler + 0x30c),param_2);
-  iVar4 = *(int *)(*(int *)(param_2 + 0x88) + 8);
-  flagBit7Result = ((int (*)())OpcodeTraits__flagBit7)(iVar4,compiler);
-  if ((flagBit7Result != 0) || (uVar3 = 1, (*(uint *)(iVar1 + iVar4 * 0x38) & 2) == 0)) {
-    uVar3 = 0;
+  opcodeFlagTable = (**(code **)(**(int **)(compiler + 0x30c) + 0x16c))(*(int **)(compiler + 0x30c),param_2);
+  opcode = *(int *)(*(int *)(param_2 + 0x88) + 8);
+  flagBit7Result = ((int (*)())OpcodeTraits__flagBit7)(opcode,compiler);
+  if ((flagBit7Result != 0) || (result = 1, (*(uint *)(opcodeFlagTable + opcode * 0x38) & 2) == 0)) {
+    result = 0;
   }
-  return uVar3;
+  return result;
 }
 
 /* IrRecipSqrtClamp__opcodeInfo_atexit_dtor_op65 @ 0x113818 (40 bytes) */
