@@ -1,0 +1,2 @@
+use	recordProgramAllocateAndEmit	iVar27	destFileTest	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar27\ =\ \(\(int\ \(\*\)\(\)\)FUN_000777b0\)\(puVar23,uVar4\);$	^\s*iVar30\ =\ \(\(int\ \(\*\)\(\)\)FUN_00077800\)\(puVar23,\*puVar19\ >>\ 6\ \&\ 1\);$	all	none
+use	recordProgramAllocateAndEmit	iVar27	recordFlagsSlotBase	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar27\ =\ iVar28\ \*\ 4\ \+\ param_1;$	^\s*if\ \(iVar30\ !=\ 0\)\ \{$	all	none

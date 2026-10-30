@@ -1,0 +1,5 @@
+local	arbValidateProgram	piVar13	stageR9	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbValidateProgram	piVar15	stageR10	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbValidateProgram	local_88	typeTagTable	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbValidateProgram	local_6c	typeTagTableB	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbValidateProgram	local_70	savedStageR10	INFERRED	role read off the function body (see notes_gld_q03.md)
