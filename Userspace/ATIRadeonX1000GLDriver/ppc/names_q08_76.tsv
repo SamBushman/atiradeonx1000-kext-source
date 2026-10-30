@@ -1,0 +1,7 @@
+use	FUN_0017f5a4	iVar4	tempIndex	INFERRED	next negative temporary index (compiler +0x3ac minus 1)	^\s*iVar4\ =\ \*\(int\ \*\)\(iVar1\ \+\ 0x3ac\)\ \+\ \-1;$	+3
+use	FUN_0017f5a4	iVar4	operandCount	INFERRED	instruction source count from vtable +0x14 (loop bound)	^\s*iVar4\ =\ \(\*\*\(code\ \*\*\)\(\*piVar2\ \+\ 0x14\)\)\(piVar2\);$	+2
+local	FUN_0017f5a4	piVar5	operandSlotCursor	INFERRED	walks inst + 0x18*operand: registers each source use of the clone
+func	FUN_0017f5a4	ValueKey__splitDestinationToTemp	INFERRED	clones the instruction, redirects the original's destination to a fresh temporary and inserts the clone after it with the extra source wired
+func	FUN_0017f78c	ValueKey__splitDestinationIfEligible	INFERRED	for an instruction whose destination class is not 0x2c and FUN_0011379c accepts it, calls ValueKey__splitDestinationToTemp
+func	FUN_00177748	ValueKey__canonicalizeCompareCondition	INFERRED	when all used lanes share one non-zero class and the hardware does not support the condition, replaces the compare condition (hw limits vtable +0x30)
+local	FUN_0017f78c	iVar1	eligible	INFERRED	FUN_0011379c predicate result

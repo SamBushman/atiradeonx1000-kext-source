@@ -62,7 +62,7 @@
 0x17ad24	ValueKey__insertSplatMov	0x17adcc	IRInst__appendSource	r5	field at param_1+0x238: 2 stock site(s), 0 C call(s) carry it at argument 2 (2 C calls)	BENIGN-CALLEE-IGNORES
 0x17ce7c	ValueKey__rewriteAsMovOfReplacement	0x17d00c	IRInst__appendSource	r5	field at param_1+0x238: 1 stock site(s), 0 C call(s) carry it at argument 2 (1 C calls)	BENIGN-CALLEE-IGNORES
 0x17e7e0	FUN_0017e7e0	0x17eb44	IRInst__appendSource	r5	field at param_1+0x238: 2 stock site(s), 0 C call(s) carry it at argument 2 (2 C calls)	BENIGN-CALLEE-IGNORES
-0x17f5a4	FUN_0017f5a4	0x17f6b0	IRInst__appendSource	r5	field at param_1+0x238: 2 stock site(s), 0 C call(s) carry it at argument 2 (2 C calls)	BENIGN-CALLEE-IGNORES
+0x17f5a4	ValueKey__splitDestinationToTemp	0x17f6b0	IRInst__appendSource	r5	field at param_1+0x238: 2 stock site(s), 0 C call(s) carry it at argument 2 (2 C calls)	BENIGN-CALLEE-IGNORES
 0x180830	ValueKey__simplifyModifiersAndAddressing	0x180fa0	IRInst__appendSource	r5	field at param_1+0x238: 1 stock site(s), 0 C call(s) carry it at argument 2 (1 C calls)	BENIGN-CALLEE-IGNORES
 0x186a88	FUN_00186a88	0x1874f0	IRInst__create	r3	0x9b not at argument 0 of any C call (5 C calls)	CHECK (C arg0: 0x9c; 0x99)
 0x18843c	KhanPs__peepholeCombine	0x18885c	Inst__foldProducerIntoConsumer	r7	r1+0x38 (a stack address) not at argument 4 of any C call (2 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)

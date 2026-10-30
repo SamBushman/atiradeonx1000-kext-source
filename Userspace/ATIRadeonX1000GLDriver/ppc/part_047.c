@@ -416,8 +416,8 @@ int ValueKey__foldLaneToZeroIfSourcesCancel(ctx, lane)
   return 0;
 }
 
-/* FUN_00177748 @ 0x177748 (408 bytes) */
-int FUN_00177748(ctx)
+/* ValueKey__canonicalizeCompareCondition @ 0x177748 (408 bytes) */
+int ValueKey__canonicalizeCompareCondition(ctx)
   int ctx;
 {
   int prevLaneClass;

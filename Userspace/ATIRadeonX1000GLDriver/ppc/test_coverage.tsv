@@ -2832,7 +2832,7 @@
 0x177548	ValueKey__flagZeroSelectLanes	144	yes	
 0x1775d8	ValueKey__createLaneRecordsKind20	224	yes	
 0x1776b8	ValueKey__foldLaneToZeroIfSourcesCancel	144	yes	
-0x177748	FUN_00177748	408	no	indirect call (driver context / vtable / callback)
+0x177748	ValueKey__canonicalizeCompareCondition	408	no	indirect call (driver context / vtable / callback)
 0x1778e0	FUN_001778e0	272	yes	
 0x1779f0	ValueKey__createLaneRecordsKind28	224	yes	
 0x177ad0	ValueKey__cancelNegatedSourcePair	124	yes	
@@ -2916,8 +2916,8 @@
 0x17f3f8	ValueKey__foldMinMaxOfNegatedPair	412	no	indirect call (driver context / vtable / callback)
 0x17f594	ValueKey__foldMaxOfNegatedPair	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x17f59c	ValueKey__foldMinOfNegatedPair	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x17f5a4	FUN_0017f5a4	488	no	indirect call (driver context / vtable / callback)
-0x17f78c	FUN_0017f78c	96	yes	
+0x17f5a4	ValueKey__splitDestinationToTemp	488	no	indirect call (driver context / vtable / callback)
+0x17f78c	ValueKey__splitDestinationIfEligible	96	yes	
 0x17f7ec	ValueKey__simplifyInstruction	1848	no	indirect call (driver context / vtable / callback)
 0x180154	FUN_00180154	888	yes	
 0x180250	ValueKey__canonicalizeConstantSources	1504	no	indirect call (driver context / vtable / callback)

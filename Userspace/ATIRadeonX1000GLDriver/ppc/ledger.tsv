@@ -2832,7 +2832,7 @@
 0x177548	144	ValueKey__flagZeroSelectLanes	part_047	converted
 0x1775d8	224	ValueKey__createLaneRecordsKind20	part_047	converted
 0x1776b8	144	ValueKey__foldLaneToZeroIfSourcesCancel	part_047	converted
-0x177748	408	FUN_00177748	part_047	converted
+0x177748	408	ValueKey__canonicalizeCompareCondition	part_047	converted
 0x1778e0	272	FUN_001778e0	part_047	converted
 0x1779f0	224	ValueKey__createLaneRecordsKind28	part_047	converted
 0x177ad0	124	ValueKey__cancelNegatedSourcePair	part_047	converted
@@ -2916,8 +2916,8 @@
 0x17f3f8	412	ValueKey__foldMinMaxOfNegatedPair	part_048	converted
 0x17f594	8	ValueKey__foldMaxOfNegatedPair	part_048	converted
 0x17f59c	8	ValueKey__foldMinOfNegatedPair	part_048	converted
-0x17f5a4	488	FUN_0017f5a4	part_048	converted
-0x17f78c	96	FUN_0017f78c	part_048	converted
+0x17f5a4	488	ValueKey__splitDestinationToTemp	part_048	converted
+0x17f78c	96	ValueKey__splitDestinationIfEligible	part_048	converted
 0x17f7ec	1848	ValueKey__simplifyInstruction	part_048	converted
 0x180154	888	FUN_00180154	part_048	converted
 0x180250	1504	ValueKey__canonicalizeConstantSources	part_048	converted

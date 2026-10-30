@@ -2549,15 +2549,16 @@ int ValueKey__foldMinOfNegatedPair(ctx)
   return callResult;
 }
 
-/* FUN_0017f5a4 @ 0x17f5a4 (488 bytes) */
-int FUN_0017f5a4(ctx)
+/* ValueKey__splitDestinationToTemp @ 0x17f5a4 (488 bytes) */
+int ValueKey__splitDestinationToTemp(ctx)
   int ctx;
 {
+  int operandCount;
   int loopIndex;
   int *inst;
   undefined4 operandRef;
-  int iVar4;
-  int *piVar5;
+  int tempIndex;
+  int *operandSlotCursor;
   
   loopIndex = IRInst__getOperandRecord(*(undefined4 *)(ctx + 0xb0),0);
   loopIndex = FUN_000f2e18(*(undefined4 *)(loopIndex + 0x10));
@@ -2566,9 +2567,9 @@ int FUN_0017f5a4(ctx)
     ;
     loopIndex = *(int *)(ctx + 0x238);
     operandRef = *(undefined4 *)(*(int *)(loopIndex + 0x6c4) + 0x3ac);
-    iVar4 = *(int *)(loopIndex + 0x3ac) + -1;
-    *(int *)(loopIndex + 0x3ac) = iVar4;
-    operandRef = VRegPool__findOrCreate(operandRef,0,iVar4,0);
+    tempIndex = *(int *)(loopIndex + 0x3ac) + -1;
+    *(int *)(loopIndex + 0x3ac) = tempIndex;
+    operandRef = VRegPool__findOrCreate(operandRef,0,tempIndex,0);
     VReg__appendUser(operandRef,*(undefined4 *)(ctx + 0xb0));
     IRInst__setOperandRef(*(undefined4 *)(ctx + 0xb0),0,operandRef);
     loopIndex = inst[0x23];
@@ -2576,13 +2577,13 @@ int FUN_0017f5a4(ctx)
     inst[0x27] = 0x1010100;
     VReg__appendUser(loopIndex,inst);
     loopIndex = 1;
-    piVar5 = inst;
+    operandSlotCursor = inst;
     while( true ) {
-      iVar4 = (**(code **)(*inst + 0x14))(inst);
-      if (iVar4 < loopIndex) break;
-      VReg__addUse(piVar5[0x29],loopIndex,inst);
+      operandCount = (**(code **)(*inst + 0x14))(inst);
+      if (operandCount < loopIndex) break;
+      VReg__addUse(operandSlotCursor[0x29],loopIndex,inst);
       loopIndex = loopIndex + 1;
-      piVar5 = piVar5 + 6;
+      operandSlotCursor = operandSlotCursor + 6;
     }
     if ((*(uint *)(*(int *)(ctx + 0xb0) + 0x14) & 0x200) == 0) {
       IRInst__appendSource(*(int *)(ctx + 0xb0),operandRef);
@@ -2609,16 +2610,16 @@ int FUN_0017f5a4(ctx)
   return;
 }
 
-/* FUN_0017f78c @ 0x17f78c (96 bytes) */
-int FUN_0017f78c(ctx)
+/* ValueKey__splitDestinationIfEligible @ 0x17f78c (96 bytes) */
+int ValueKey__splitDestinationIfEligible(ctx)
   int ctx;
 {
-  int iVar1;
+  int eligible;
   
   if ((*(int *)(*(int *)(ctx + 0xb0) + 0x98) != 0x2c) &&
-     (iVar1 = OpcodeTraits__flag1WithoutFlag7(*(undefined4 *)(ctx + 0x238),*(int *)(ctx + 0xb0)), iVar1 != 0))
+     (eligible = OpcodeTraits__flag1WithoutFlag7(*(undefined4 *)(ctx + 0x238),*(int *)(ctx + 0xb0)), eligible != 0))
   {
-    ((int (*)())FUN_0017f5a4)(ctx);
+    ((int (*)())ValueKey__splitDestinationToTemp)(ctx);
     return;
   }
   return;
@@ -2895,7 +2896,7 @@ LAB_0017fe28:
       if (loopIndex != 0) {
         return 0;
       }
-      FUN_00177748(ctx);
+      ValueKey__canonicalizeCompareCondition(ctx);
       loopIndex2 = *(int *)(ctx + 0xb0);
       loopIndex = *(int *)(ctx + 0x238);
       goto LAB_0017fe34;
