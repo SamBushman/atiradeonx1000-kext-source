@@ -7863,16 +7863,16 @@ int FUN_0004a860(glContext, param_2, param_3, param_4, param_5, param_6, param_7
   undefined4 param_6;
   undefined4 param_7;
 {
-  char cVar1;
+  char selectedByteFlag;
   
   if (((*(uint *)(glContext + 0x44) & 0x20000) != 0) && (*(int *)(glContext + 0x1e70) != 0)) {
     if ((*(uint *)(glContext + 0x44) & 0x2000) == 0) {
-      cVar1 = ((unsigned char *)0x00001136)[glContext];
+      selectedByteFlag = ((unsigned char *)0x00001136)[glContext];
     }
     else {
-      cVar1 = ((unsigned char *)0x000011d0)[glContext];
+      selectedByteFlag = ((unsigned char *)0x000011d0)[glContext];
     }
-    if (cVar1 == '\0') {
+    if (selectedByteFlag == '\0') {
                     
                     
       (**(code **)(glContext + 0x294c))(glContext);
@@ -7985,8 +7985,9 @@ int FUN_0004ab60(glContext)
   int glContext;
 {
   int loopIndex;
-  int iVar1;
-  int iVar2;
+  int clearByteOffset;
+  int listByteOffset;
+  int wordsLeft;
   
   FUN_000b6020(glContext,(*(uint *)(PTR_DAT_001e88c8 + (uint)*(byte *)(glContext + 0x293f) * 0x24 + 0x20
                                  ) ^ 0x800000) >> 0x17 & 1,1);
@@ -8001,10 +8002,10 @@ int FUN_0004ab60(glContext)
   if (0 < *(int *)(glContext + 0x1e74)) {
     loopIndex = 0;
     do {
-      iVar2 = loopIndex * 4;
+      listByteOffset = loopIndex * 4;
       loopIndex = loopIndex + 1;
-      ((unsigned char *)0x000010e9)[*(int *)(iVar2 + *(int *)(glContext + 0x1e7c))] = 0;
-      ((unsigned char *)0x000010ea)[*(int *)(iVar2 + *(int *)(glContext + 0x1e7c))] = 0;
+      ((unsigned char *)0x000010e9)[*(int *)(listByteOffset + *(int *)(glContext + 0x1e7c))] = 0;
+      ((unsigned char *)0x000010ea)[*(int *)(listByteOffset + *(int *)(glContext + 0x1e7c))] = 0;
     } while (loopIndex < *(int *)(glContext + 0x1e74));
   }
   *(undefined4 *)(glContext + 0x1e74) = 0;
@@ -8013,13 +8014,13 @@ int FUN_0004ab60(glContext)
   }
   *(undefined4 *)(glContext + 0x1e84) = 0;
   *(undefined4 *)(glContext + 0x1e80) = 0;
-  iVar2 = 8;
-  iVar1 = 0;
+  wordsLeft = 8;
+  clearByteOffset = 0;
   do {
-    *(undefined4 *)(glContext + 0x1e88 + iVar1) = 0;
-    iVar1 = iVar1 + 4;
-    iVar2 = iVar2 + -1;
-  } while (iVar2 != 0);
+    *(undefined4 *)(glContext + 0x1e88 + clearByteOffset) = 0;
+    clearByteOffset = clearByteOffset + 4;
+    wordsLeft = wordsLeft + -1;
+  } while (wordsLeft != 0);
   return;
 }
 

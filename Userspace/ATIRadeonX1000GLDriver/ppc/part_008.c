@@ -4020,13 +4020,14 @@ int extvsEmitRnd(ctx, shader, instRecord)
 {
   int instCount;
   undefined4 tempIndex;
-  undefined1 uVar1;
-  uint uVar2;
+  undefined1 savedInUseFlag;
+  uint swizzleWord;
   undefined4 newInstArray;
-  int iVar4;
+  int src0Operand;
   int *symbolList;
   int hwProgram;
-  int iVar7;
+  int hwProgram2;
+  int tempSlotRecord;
   int tempSlot;
   int instSlot;
   int iStack00000020;
@@ -4045,32 +4046,32 @@ int extvsEmitRnd(ctx, shader, instRecord)
   undefined4 tmpOperand1Comp3;
   undefined1 tmpOperand1Flag;
   
-  iVar7 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
-  instCount = *(int *)(iVar7 + 0x18);
+  hwProgram2 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
+  instCount = *(int *)(hwProgram2 + 0x18);
   iStack00000020 = instRecord;
   if (0x100 < instCount + 4U) {
     *(undefined1 *)(shader + 4) = 0;
-    instCount = *(int *)(iVar7 + 0x18);
-    if (*(uint *)(iVar7 + 0x20) < instCount + 4U) {
-      newInstArray = (**(code **)(ctx + 0xc))(*(uint *)(iVar7 + 0x20) * 0x10 + 0x100);
+    instCount = *(int *)(hwProgram2 + 0x18);
+    if (*(uint *)(hwProgram2 + 0x20) < instCount + 4U) {
+      newInstArray = (**(code **)(ctx + 0xc))(*(uint *)(hwProgram2 + 0x20) * 0x10 + 0x100);
       (**(code **)(((unsigned char *)0x00001344) + ctx))
-                (newInstArray,*(undefined4 *)(iVar7 + 0x1c),*(int *)(iVar7 + 0x20) << 4);
-      (**(code **)(ctx + 0x18))(*(undefined4 *)(iVar7 + 0x1c));
-      *(undefined4 *)(iVar7 + 0x1c) = newInstArray;
-      instCount = *(int *)(iVar7 + 0x18);
-      *(int *)(iVar7 + 0x20) = *(int *)(iVar7 + 0x20) + 0x10;
+                (newInstArray,*(undefined4 *)(hwProgram2 + 0x1c),*(int *)(hwProgram2 + 0x20) << 4);
+      (**(code **)(ctx + 0x18))(*(undefined4 *)(hwProgram2 + 0x1c));
+      *(undefined4 *)(hwProgram2 + 0x1c) = newInstArray;
+      instCount = *(int *)(hwProgram2 + 0x18);
+      *(int *)(hwProgram2 + 0x20) = *(int *)(hwProgram2 + 0x20) + 0x10;
     }
   }
   symbolList = shader + 7;
-  instSlot = instCount * 0x10 + *(int *)(iVar7 + 0x1c);
+  instSlot = instCount * 0x10 + *(int *)(hwProgram2 + 0x1c);
   tempSlot = ((int (*)())extvsAllocTempSlot)(ctx,shader);
   hwProgram = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
-  iVar4 = iStack00000020 + 0x20;
-  iVar7 = tempSlot * 0x28 + *(int *)(hwProgram + 0x4c);
-  uVar1 = *(undefined1 *)(iVar7 + 0x10);
-  *(undefined1 *)(iVar7 + 0x10) = 1;
+  src0Operand = iStack00000020 + 0x20;
+  tempSlotRecord = tempSlot * 0x28 + *(int *)(hwProgram + 0x4c);
+  savedInUseFlag = *(undefined1 *)(tempSlotRecord + 0x10);
+  *(undefined1 *)(tempSlotRecord + 0x10) = 1;
   tempIndex = ((int (*)())extvsAllocTempSlot)(ctx,shader);
-  *(undefined1 *)(tempSlot * 0x28 + *(int *)(hwProgram + 0x4c) + 0x10) = uVar1;
+  *(undefined1 *)(tempSlot * 0x28 + *(int *)(hwProgram + 0x4c) + 0x10) = savedInUseFlag;
   tmpOperand0Kind = 3;
   tmpOperand0Comp0 = 1;
   tmpOperand0Comp1 = 0;
@@ -4079,11 +4080,11 @@ int extvsEmitRnd(ctx, shader, instRecord)
   tmpOperand0Flag = 0;
   tmpOperand0Index = tempSlot;
   ((int (*)())extvsEncodeSourceOperand)(ctx,shader,&tmpOperand0Kind,instSlot,0xb,1,0);
-  ((int (*)())extvsEncodeSourceSwizzle)(shader,symbolList,iVar4,instSlot + 4,0);
-  uVar2 = *(uint *)(instSlot + 4) & 0xfe001fff | 0x1f6da000;
-  *(uint *)(instSlot + 0xc) = uVar2;
-  *(uint *)(instSlot + 4) = uVar2;
-  *(uint *)(instSlot + 8) = uVar2;
+  ((int (*)())extvsEncodeSourceSwizzle)(shader,symbolList,src0Operand,instSlot + 4,0);
+  swizzleWord = *(uint *)(instSlot + 4) & 0xfe001fff | 0x1f6da000;
+  *(uint *)(instSlot + 0xc) = swizzleWord;
+  *(uint *)(instSlot + 4) = swizzleWord;
+  *(uint *)(instSlot + 8) = swizzleWord;
   tmpOperand0Kind = 3;
   tmpOperand0Comp0 = 1;
   tmpOperand0Comp1 = 1;
@@ -4100,7 +4101,7 @@ int extvsEmitRnd(ctx, shader, instRecord)
   tmpOperand1Flag = 0;
   tmpOperand1Index = tempSlot;
   ((int (*)())extvsEncodeSourceSwizzle)(shader,symbolList,&tmpOperand1Kind,instSlot + 0x14,0);
-  ((int (*)())extvsEncodeSourceSwizzle)(shader,symbolList,iVar4,instSlot + 0x18,0);
+  ((int (*)())extvsEncodeSourceSwizzle)(shader,symbolList,src0Operand,instSlot + 0x18,0);
   *(undefined4 *)(instSlot + 0x1c) = *(undefined4 *)(instSlot + 0x18);
   tmpOperand0Comp3 = 1;
   tmpOperand0Kind = 3;
