@@ -2853,7 +2853,7 @@
 0x179064	212	FUN_00179064	part_047	converted
 0x179138	240	FUN_00179138	part_047	converted
 0x1792f0	232	FUN_001792f0	part_047	converted
-0x1793d8	560	FUN_001793d8	part_047	converted
+0x1793d8	560	ValueKey__findLaneWithSameValue	part_047	converted
 0x179608	456	FUN_00179608	part_047	converted
 0x1797d0	196	FUN_001797d0	part_047	converted
 0x179894	184	ValueKey__foldCompareSameSourcesValueNumber	part_047	converted
@@ -2912,7 +2912,7 @@
 0x17e7e0	604	FUN_0017e7e0	part_048	converted
 0x17ebb0	508	FUN_0017ebb0	part_048	converted
 0x17ee68	468	FUN_0017ee68	part_048	converted
-0x17f1f8	512	FUN_0017f1f8	part_048	converted
+0x17f1f8	512	ValueKey__foldMulOfConstants	part_048	converted
 0x17f3f8	412	ValueKey__foldMinMaxOfNegatedPair	part_048	converted
 0x17f594	8	ValueKey__foldMaxOfNegatedPair	part_048	converted
 0x17f59c	8	ValueKey__foldMinOfNegatedPair	part_048	converted
@@ -2994,7 +2994,7 @@
 0x18f984	596	R300VSchedModel__vslot28	part_049	converted
 0x18fbd8	348	R300VSchedModel__vslot14	part_049	converted
 0x18fd34	972	R300VSchedModel__vslot17	part_049	converted
-0x190100	728	FUN_00190100	part_049	converted
+0x190100	728	R300VSchedModel__classifySourceBank	part_049	converted
 0x1904b8	528	R300VSchedModel__vslot4_addInstruction	part_049	converted
 0x1906c8	712	R300VSchedModel__vslot3_canAddInstruction	part_049	converted
 0x190990	1256	R300VSchedModel__vslot27	part_049	converted
@@ -3048,8 +3048,8 @@
 0x194618	264	HashTable__findEntry	part_050	converted
 0x194720	276	FUN_00194720	part_050	converted
 0x194834	260	HashTable__find	part_050	converted
-0x194938	348	FUN_00194938	part_050	converted
-0x194a94	20	FUN_00194a94	part_050	converted
+0x194938	348	HashTableIterator__advance	part_050	converted
+0x194a94	20	HashTableIterator__begin	part_050	converted
 0x194aa8	260	HashTable__grow	part_050	converted
 0x194d44	184	HashTable__insert	part_050	converted
 0x194e44	260	HashTable__grow_194e44	part_050	converted
