@@ -1309,7 +1309,7 @@ LAB_00174efc:
           *loopPtr3 = *loopPtr4;
         }
         else {
-          loopIndex2 = FUN_00179064(valueKey,loopIndex5);
+          loopIndex2 = ValueKey__refreshExprRecordForOperand(valueKey,loopIndex5);
           *loopPtr3 = *(int *)(loopIndex2 + 4);
         }
         isLast = loopIndex5 == 3;

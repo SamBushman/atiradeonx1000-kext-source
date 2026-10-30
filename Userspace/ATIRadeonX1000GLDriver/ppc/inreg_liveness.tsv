@@ -163,9 +163,9 @@
 17e1f4	ValueKey__foldMulPowerOfTwoIntoOutputScale	r6	PASS-deep	17e22c bl 0x1770e4
 17e1f4	ValueKey__foldMulPowerOfTwoIntoOutputScale	r7	PASS-deep	17e22c bl 0x1770e4
 17e1f4	ValueKey__foldMulPowerOfTwoIntoOutputScale	r8	PASS-deep	17e22c bl 0x1770e4
-17e338	FUN_0017e338	r6	PASS-deep	17e354 bl 0x179c44
-17e338	FUN_0017e338	r7	PASS-deep	17e354 bl 0x179c44
-17e338	FUN_0017e338	r8	PASS-deep	17e354 bl 0x179c44
+17e338	ValueKey__foldEqualSourcesIntoOutputScale	r6	PASS-deep	17e354 bl 0x179c44
+17e338	ValueKey__foldEqualSourcesIntoOutputScale	r7	PASS-deep	17e354 bl 0x179c44
+17e338	ValueKey__foldEqualSourcesIntoOutputScale	r8	PASS-deep	17e354 bl 0x179c44
 17ee0	gld_printApplicationPath	r6	PASS-no	17f00 bl 0x1a3ae0	; symbol stub for: _getpid
 17ee0	gld_printApplicationPath	r7	PASS-no	17f00 bl 0x1a3ae0	; symbol stub for: _getpid
 17ee0	gld_printApplicationPath	r8	PASS-no	17f00 bl 0x1a3ae0	; symbol stub for: _getpid

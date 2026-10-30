@@ -142,9 +142,9 @@ int IrAddFloat__vslot5_getValueKeyTransformLevel(this, ctx, laneResultPtr, compi
   undefined4 transformLevel;
   int loopIndex;
   
-  folded = FUN_0017d610(ctx);
+  folded = ValueKey__foldOppositeNegatesToZero(ctx);
   if (((folded == 0) && (folded = ValueKey__foldAddOfZeroSource(ctx), folded == 0)) &&
-     ((folded = Compiler__isOptionEnabled(compiler,0xc), folded == 0 || (folded = FUN_0017e338(ctx), folded == 0))
+     ((folded = Compiler__isOptionEnabled(compiler,0xc), folded == 0 || (folded = ValueKey__foldEqualSourcesIntoOutputScale(ctx), folded == 0))
      )) {
     instructionLimit = *(int *)(compiler + 0x658);
     instructionCount = *(int *)(*(int *)(compiler + 0x6c4) + 0xa8);

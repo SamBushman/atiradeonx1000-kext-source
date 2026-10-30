@@ -1383,10 +1383,10 @@ fd5c8	FUN_000fd5c8	103cf4	103cf8	-	no-handler
 172474	?	1724b4	1724b8	-	no-handler
 172474	?	1724cc	1724d0	1724d4	cleanup
 172474	?	1724f0	1724fc	-	no-handler
-179138	FUN_00179138	179158	1791fc	-	no-handler
-179138	FUN_00179138	179210	179214	179228	cleanup
-179138	FUN_00179138	179220	179224	-	no-handler
-179138	FUN_00179138	179244	1792d4	-	no-handler
+179138	ValueKey__insertTempCopyOfOperand	179158	1791fc	-	no-handler
+179138	ValueKey__insertTempCopyOfOperand	179210	179214	179228	cleanup
+179138	ValueKey__insertTempCopyOfOperand	179220	179224	-	no-handler
+179138	ValueKey__insertTempCopyOfOperand	179244	1792d4	-	no-handler
 17a130	ValueKey__setLiteralVec4Operand	17a174	17a20c	-	no-handler
 17a130	ValueKey__setLiteralVec4Operand	17a220	17a224	17a24c	cleanup
 17a130	ValueKey__setLiteralVec4Operand	17a228	17a248	-	no-handler
@@ -1503,9 +1503,9 @@ fd5c8	FUN_000fd5c8	103cf4	103cf8	-	no-handler
 19286c	FudoPs__peepholeCombine	1928b0	193228	-	no-handler
 19286c	FudoPs__peepholeCombine	193234	193238	19323c	cleanup
 19286c	FudoPs__peepholeCombine	19323c	193910	-	no-handler
-193b3c	FUN_00193b3c	193b64	193b68	-	no-handler
-193b3c	FUN_00193b3c	193b80	193b84	193b88	cleanup
-193b3c	FUN_00193b3c	193ba4	193ba8	-	no-handler
+193b3c	TypedValueArray__createWrapping	193b64	193b68	-	no-handler
+193b3c	TypedValueArray__createWrapping	193b80	193b84	193b88	cleanup
+193b3c	TypedValueArray__createWrapping	193ba4	193ba8	-	no-handler
 193c00	FUN_00193c00	193c50	193c54	-	no-handler
 193c00	FUN_00193c00	193c6c	193c70	193c74	cleanup
 193c00	FUN_00193c00	193c90	193c94	-	no-handler

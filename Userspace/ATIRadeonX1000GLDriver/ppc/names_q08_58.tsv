@@ -1,0 +1,23 @@
+local	FUN_0017737c	param_1	ctx	INFERRED	pass context
+local	FUN_0017737c	param_2	sourceA	INFERRED	first source whose per-lane value numbers (ctx+0x168+src*0x10) are compared
+local	FUN_0017737c	param_3	sourceB	INFERRED	second source
+local	FUN_0017737c	bVar1	lastLane	INFERRED	lane == 3
+local	FUN_0017737c	iVar2	operandRecord	INFERRED	operand record 0 of the instruction (swizzle bytes: 1 = lane unused)
+func	FUN_0017737c	ValueKey__sourcesEqualOnWrittenLanes	INFERRED	true when two sources have the same value number on every lane the instruction writes
+local	FUN_001776b8	param_2	lane	INFERRED	lane / source index
+local	FUN_001776b8	uVar1	word0xb8Flags	INFERRED	inst +0xb8 modifier word
+local	FUN_001776b8	uVar4	word0xd0Flags	INFERRED	inst +0xd0 modifier word
+local	FUN_001776b8	iVar5	laneBase	INFERRED	ctx + lane*4
+func	FUN_001776b8	ValueKey__foldLaneToZeroIfSourcesCancel	INFERRED	sources 1 and 2 have the same-lane relation FUN_00176ec0 accepts and equal modifier bits: lane result is the value of constant 0
+local	FUN_00179064	param_2	operandIndex	INFERRED	operand whose expression record is refreshed
+local	FUN_00179064	uVar2	destRef	INFERRED	instruction destination register ref (+0x8c)
+local	FUN_00179064	uVar4	operandWord	INFERRED	operand word at inst +operandIndex*0x18+0x20, used as the expression key
+func	FUN_00179064	ValueKey__refreshExprRecordForOperand	INFERRED	looks up (Compiler__valueNumberForExpr) the expression record of an operand and (re)initialises it as kind 2 for this instruction when it is empty or flagged
+local	FUN_00179138	uVar3	registerMap	INFERRED	current program +0x3ac register map
+local	FUN_00179138	iVar1	compiler	INFERRED	ctx+0x238 compiler
+use	FUN_00179138	iVar5	tempIndex	INFERRED	next negative temporary index (compiler +0x3b0 minus 1)	^\s*iVar5\ =\ \*\(int\ \*\)\(iVar1\ \+\ 0x3b0\)\ \+\ \-1;$	+3
+use	FUN_00179138	iVar5	blockPredicate	INFERRED	block vtable +0x24 predicate (append to the block end instead of inserting before)	^\s*iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*piVar6\ \+\ 0x24\)\)\(piVar6\);$	+2
+use	FUN_00179138	iVar5	operandValueNumberPtr	INFERRED	ctx + operandIndex*4: base of the operand value-number word at +0x210	^\s*iVar5\ =\ param_2\ \*\ 4\ \+\ param_1;$	+1
+use	FUN_00179138	iVar5	operandValueNumberPtr	INFERRED	ctx + operandIndex*4: base of the operand value-number word at +0x210	^\s*FUN_00106004\(iVar2,1,\*\(undefined4\ \*\)\(iVar5\ \+\ 0x210\),0,\*\(undefined4\ \*\)\(param_1\ \+\ 0x238\)\);$	+1
+use	FUN_00179138	iVar5	operandValueNumberPtr	INFERRED	ctx + operandIndex*4: base of the operand value-number word at +0x210	^\s*\*\(int\ \*\)\(iVar5\ \+\ 0x210\)\ =\ iVar2;$	+1
+func	FUN_00179138	ValueKey__insertTempCopyOfOperand	INFERRED	creates a new instruction (opcode 0xa2) with a fresh temporary, inserts it before the current instruction and routes operandIndex through it

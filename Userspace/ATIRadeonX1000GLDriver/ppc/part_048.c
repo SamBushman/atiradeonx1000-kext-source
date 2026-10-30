@@ -1,16 +1,16 @@
 #include "decls.h"
 
-/* FUN_0017bc58 @ 0x17bc58 (288 bytes) */
-int FUN_0017bc58(inst, param_2, param_3, compilerCtx)
+/* Inst__findLaneProducer @ 0x17bc58 (288 bytes) */
+int Inst__findLaneProducer(inst, laneMask, relinkFlag, compilerCtx)
   undefined4 inst;
-  uint param_2;
-  int param_3;
+  uint laneMask;
+  int relinkFlag;
   undefined4 compilerCtx;
 {
   int *callResult2;
-  int *piVar2;
+  int *source1;
   int callResult;
-  undefined4 uVar4;
+  undefined4 producerSelectWord;
   uint local_28 [3];
   
   callResult2 = (int *)IRInst__getOperandSource(inst,1);
@@ -20,15 +20,15 @@ int FUN_0017bc58(inst, param_2, param_3, compilerCtx)
       return callResult2;
     }
     callResult = IRInst__getOperandRecord(callResult2,0);
-    uVar4 = *(undefined4 *)(callResult + 0x10);
+    producerSelectWord = *(undefined4 *)(callResult + 0x10);
     callResult = FUN_00176534(inst,callResult2);
     if (callResult == 2) break;
-    if ((callResult == 0) && (WriteMask__fromSelectWord(local_28,uVar4), (param_2 & local_28[0]) != DAT_001b01e0)) {
+    if ((callResult == 0) && (WriteMask__fromSelectWord(local_28,producerSelectWord), (laneMask & local_28[0]) != DAT_001b01e0)) {
       return callResult2;
     }
     callResult2 = (int *)IRInst__getOperandSource(callResult2,3);
   }
-  if ((param_3 != 0) && (piVar2 = (int *)IRInst__getOperandSource(inst,1), callResult2 != piVar2)) {
+  if ((relinkFlag != 0) && (source1 = (int *)IRInst__getOperandSource(inst,1), callResult2 != source1)) {
     IRInst__setOperandSource(inst,1,callResult2,0,compilerCtx);
     return (int *)0x0;
   }
@@ -777,7 +777,7 @@ int ValueKey__foldMadZeroMultiplicand(ctx)
   do {
     callResult = Inst__writtenLanesAllMatchValue(ctx,zeroValueNumber,loopIndex);
     if (callResult != 0) {
-      callResult = FUN_0017737c(ctx,0,3);
+      callResult = ValueKey__sourcesEqualOnWrittenLanes(ctx,0,3);
       if (callResult == 0) {
         ((int (*)())ValueKey__rewriteAsMovOfOperand)(ctx,3);
       }
@@ -810,7 +810,7 @@ int ValueKey__foldAddOfZeroSource(ctx)
     do {
       callResult = Inst__writtenLanesAllMatchValue(ctx,zeroValueNumber,loopIndex);
       if (callResult != 0) {
-        callResult = FUN_0017737c(ctx,0,candidateOperand);
+        callResult = ValueKey__sourcesEqualOnWrittenLanes(ctx,0,candidateOperand);
         if (callResult == 0) {
           ((int (*)())ValueKey__rewriteAsMovOfOperand)(ctx,candidateOperand);
         }
@@ -1181,28 +1181,28 @@ int ValueKey__foldMulByZero(ctx)
   return 0;
 }
 
-/* FUN_0017d610 @ 0x17d610 (156 bytes) */
-int FUN_0017d610(ctx)
+/* ValueKey__foldOppositeNegatesToZero @ 0x17d610 (156 bytes) */
+int ValueKey__foldOppositeNegatesToZero(ctx)
   int ctx;
 {
-  uint uVar1;
+  uint word0xb8Flags;
   int callResult;
-  uint uVar3;
-  undefined4 local_28;
-  undefined4 local_24;
-  undefined4 local_20;
-  undefined4 local_1c;
+  uint word0xd0Flags;
+  undefined4 zeroVec4X;
+  undefined4 zeroVec4Y;
+  undefined4 zeroVec4Z;
+  undefined4 zeroVec4W;
   
   callResult = Inst__allWrittenLanesSatisfy(ctx,1,2);
   if (callResult != 0) {
-    uVar3 = *(uint *)(*(int *)(ctx + 0xb0) + 0xd0);
-    uVar1 = *(uint *)(*(int *)(ctx + 0xb0) + 0xb8);
-    if (((uVar1 & 1) != (uVar3 & 1)) && ((uVar1 >> 1 & 1) == (uVar3 >> 1 & 1))) {
-      local_1c = 0;
-      local_28 = 0;
-      local_24 = 0;
-      local_20 = 0;
-      ((int (*)())ValueKey__rewriteAsMovOfVec4Constant)(ctx,&local_28);
+    word0xd0Flags = *(uint *)(*(int *)(ctx + 0xb0) + 0xd0);
+    word0xb8Flags = *(uint *)(*(int *)(ctx + 0xb0) + 0xb8);
+    if (((word0xb8Flags & 1) != (word0xd0Flags & 1)) && ((word0xb8Flags >> 1 & 1) == (word0xd0Flags >> 1 & 1))) {
+      zeroVec4W = 0;
+      zeroVec4X = 0;
+      zeroVec4Y = 0;
+      zeroVec4Z = 0;
+      ((int (*)())ValueKey__rewriteAsMovOfVec4Constant)(ctx,&zeroVec4X);
       ValueKey__rebuild(ctx);
       return 1;
     }
@@ -1777,12 +1777,13 @@ int ValueKey__foldMulPowerOfTwoIntoOutputScale(ctx)
   return 0;
 }
 
-/* FUN_0017e338 @ 0x17e338 (188 bytes) */
-int FUN_0017e338(ctx)
+/* ValueKey__foldEqualSourcesIntoOutputScale @ 0x17e338 (188 bytes) */
+int ValueKey__foldEqualSourcesIntoOutputScale(ctx)
   int ctx;
 {
+  int limitAccepted;
   int lanesAllSatisfy;
-  int iVar1;
+  int inst;
   int *a0;
   undefined4 in_r6;
   undefined4 in_r7;
@@ -1791,13 +1792,13 @@ int FUN_0017e338(ctx)
   
   lanesAllSatisfy = Inst__allWrittenLanesSatisfy(ctx,1,2);
   if (lanesAllSatisfy != 0) {
-    iVar1 = *(int *)(ctx + 0xb0);
-    if (((*(uint *)(iVar1 + 0xb8) & 1) == (*(uint *)(iVar1 + 0xd0) & 1)) &&
-       ((*(uint *)(iVar1 + 0xb8) >> 1 & 1) == (*(uint *)(iVar1 + 0xd0) >> 1 & 1))) {
+    inst = *(int *)(ctx + 0xb0);
+    if (((*(uint *)(inst + 0xb8) & 1) == (*(uint *)(inst + 0xd0) & 1)) &&
+       ((*(uint *)(inst + 0xb8) >> 1 & 1) == (*(uint *)(inst + 0xd0) >> 1 & 1))) {
       a0 = *(int **)(*(int *)(ctx + 0x238) + 0x30c);
-      a1 = *(int *)(iVar1 + 0x124) + 1;
-      iVar1 = (**(code **)(*a0 + 0xfc))(a0,a1,iVar1,in_r6,in_r7,in_r8,*(int *)(iVar1 + 0x124));
-      if (iVar1 != 0) {
+      a1 = *(int *)(inst + 0x124) + 1;
+      limitAccepted = (**(code **)(*a0 + 0xfc))(a0,a1,inst,in_r6,in_r7,in_r8,*(int *)(inst + 0x124));
+      if (limitAccepted != 0) {
         ((int (*)())ValueKey__rewriteAsMovOfOperandWithScale)(ctx,2,a1);
         ValueKey__rebuild(ctx);
         return 1;
@@ -3573,7 +3574,7 @@ LAB_00180cb4:
         operandRecordTmp = IRInst__getOperandRecord(*(undefined4 *)(key + 0xb0),loopIndex4);
         SelectWord__readMask(&readMaskOut,*(undefined4 *)(operandRecordTmp + 0x10));
         laneMask = readMaskOut;
-        loopPtr7 = (int *)((int (*)())FUN_0017bc58)(loopPtr8,readMaskOut,1,*(undefined4 *)(key + 0x238));
+        loopPtr7 = (int *)((int (*)())Inst__findLaneProducer)(loopPtr8,readMaskOut,1,*(undefined4 *)(key + 0x238));
         if (loopPtr7 != (int *)0x0) {
           vslot40Result = (**(code **)(*loopPtr7 + 0x40))(loopPtr7);
           if (vslot40Result == 0) {
@@ -3641,7 +3642,7 @@ LAB_00181100:
                 inst3 = inst;
                 do {
                   copyIndex = loopIndex5;
-                  callResult = (int *)((int (*)())FUN_0017bc58)(loopPtr8,laneMask,0,*(undefined4 *)(key + 0x238));
+                  callResult = (int *)((int (*)())Inst__findLaneProducer)(loopPtr8,laneMask,0,*(undefined4 *)(key + 0x238));
                   if (callResult == (int *)0x0) goto LAB_00181220;
                   inst2 = IRInst__create(0x31,*(undefined4 *)(key + 0x238));
                   IRInst__setOperandRef(inst2,0,loopPtr8[0x23]);
@@ -3966,29 +3967,29 @@ int Inst__isFoldableSingleUse(param_1, param_2, program)
   return uVar2;
 }
 
-/* FUN_001819b4 @ 0x1819b4 (252 bytes) */
-int FUN_001819b4(inst, inst2)
+/* Inst__compareScheduleSlack @ 0x1819b4 (252 bytes) */
+int Inst__compareScheduleSlack(inst, inst2)
   int *inst;
   int *inst2;
 {
-  int iVar1;
-  int iVar2;
+  int componentsA;
+  int componentsB;
   
-  if ((((inst[0x20] == 0) || (iVar1 = RegKind__flagBit0(inst[0x26]), iVar1 == 0)) ||
-      ((inst[5] & 2U) != 0)) || (iVar1 = (**(code **)(*inst + 0x50))(inst), iVar1 != 0)) {
-    iVar1 = 0;
+  if ((((inst[0x20] == 0) || (componentsA = RegKind__flagBit0(inst[0x26]), componentsA == 0)) ||
+      ((inst[5] & 2U) != 0)) || (componentsA = (**(code **)(*inst + 0x50))(inst), componentsA != 0)) {
+    componentsA = 0;
   }
   else {
-    iVar1 = IRInst__countWrittenComponents(inst);
+    componentsA = IRInst__countWrittenComponents(inst);
   }
-  if (((inst2[0x20] == 0) || (iVar2 = RegKind__flagBit0(inst2[0x26]), iVar2 == 0)) ||
-     (((inst2[5] & 2U) != 0 || (iVar2 = (**(code **)(*inst2 + 0x50))(inst2), iVar2 != 0)))) {
-    iVar2 = 0;
+  if (((inst2[0x20] == 0) || (componentsB = RegKind__flagBit0(inst2[0x26]), componentsB == 0)) ||
+     (((inst2[5] & 2U) != 0 || (componentsB = (**(code **)(*inst2 + 0x50))(inst2), componentsB != 0)))) {
+    componentsB = 0;
   }
   else {
-    iVar2 = IRInst__countWrittenComponents(inst2);
+    componentsB = IRInst__countWrittenComponents(inst2);
   }
-  return inst2[0x54] - iVar2 < inst[0x54] - iVar1;
+  return inst2[0x54] - componentsB < inst[0x54] - componentsA;
 }
 
 /* Pass__recordFlaggedInstructions @ 0x181ab0 (208 bytes) */
@@ -5648,7 +5649,7 @@ code_r0x00184480:
                 *elementRef = sourceDef;
               } while (loopIndex <= (int)stackSize);
             }
-            Vector__shellSort(vector3,FUN_001819b4);
+            Vector__shellSort(vector3,Inst__compareScheduleSlack);
             Vector__removeAt(vector,vectorAlloc[2] + -1);
             loopIndex2 = vectorAlloc[2];
             if (loopIndex2 < *vector) {
@@ -5757,7 +5758,7 @@ code_r0x00184480:
           *elementRef = sourceDef;
         } while (loopIndex <= (int)operandCount);
       }
-      Vector__shellSort(vector3,FUN_001819b4);
+      Vector__shellSort(vector3,Inst__compareScheduleSlack);
       if (0 < (int)operandCount) {
         loopIndex2 = 0;
         loopIndex = 0;

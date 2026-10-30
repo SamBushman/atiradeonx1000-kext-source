@@ -2827,11 +2827,11 @@
 0x1770e4	ValueKey__commonLaneValue	204	yes	
 0x1771b0	FUN_001771b0	236	yes	
 0x17729c	FUN_0017729c	224	yes	
-0x17737c	FUN_0017737c	144	yes	
+0x17737c	ValueKey__sourcesEqualOnWrittenLanes	144	yes	
 0x17740c	FUN_0017740c	156	yes	
 0x177548	FUN_00177548	144	yes	
 0x1775d8	FUN_001775d8	224	yes	
-0x1776b8	FUN_001776b8	144	yes	
+0x1776b8	ValueKey__foldLaneToZeroIfSourcesCancel	144	yes	
 0x177748	FUN_00177748	408	no	indirect call (driver context / vtable / callback)
 0x1778e0	FUN_001778e0	272	yes	
 0x1779f0	FUN_001779f0	224	yes	
@@ -2850,8 +2850,8 @@
 0x178c84	ValueKey__singleLaneValueNumber	244	no	indirect call (driver context / vtable / callback)
 0x178d78	FUN_00178d78	280	yes	
 0x178e90	ValueKey__evalLitLane	468	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0x179064	FUN_00179064	212	no	indirect call (driver context / vtable / callback)
-0x179138	FUN_00179138	408	no	indirect call (driver context / vtable / callback)
+0x179064	ValueKey__refreshExprRecordForOperand	212	no	indirect call (driver context / vtable / callback)
+0x179138	ValueKey__insertTempCopyOfOperand	408	no	indirect call (driver context / vtable / callback)
 0x1792f0	FUN_001792f0	232	no	indirect call (driver context / vtable / callback)
 0x1793d8	ValueKey__findLaneWithSameValue	560	yes	
 0x179608	ValueKey__operandLanesEqual	456	yes	
@@ -2879,7 +2879,7 @@
 0x17b020	FUN_0017b020	268	no	indirect call (driver context / vtable / callback)
 0x17b12c	ValueKey__mixLiteralSources	2112	no	indirect call (driver context / vtable / callback)
 0x17b96c	FUN_0017b96c	748	no	indirect call (driver context / vtable / callback)
-0x17bc58	FUN_0017bc58	288	no	indirect call (driver context / vtable / callback)
+0x17bc58	Inst__findLaneProducer	288	no	indirect call (driver context / vtable / callback)
 0x17bd78	ValueKey__rewriteAsMovOfOperandLane	500	yes	
 0x17bf70	ValueKey__foldDot3SingleLaneSource	392	no	indirect call (driver context / vtable / callback)
 0x17c0f8	ValueKey__foldDot4UnitVectorSource	332	yes	
@@ -2899,13 +2899,13 @@
 0x17d3f8	ValueKey__foldCompareSameSourcesToConstant	232	yes	
 0x17d4e0	ValueKey__replaceWithZeroIfSourcesEqual	156	yes	
 0x17d57c	ValueKey__foldMulByZero	148	yes	
-0x17d610	FUN_0017d610	156	yes	
+0x17d610	ValueKey__foldOppositeNegatesToZero	156	yes	
 0x17d6ac	FUN_0017d6ac	780	no	indirect call (driver context / vtable / callback)
 0x17d9b8	ValueKey__foldCompareOfConstants	548	yes	
 0x17dbdc	FUN_0017dbdc	1104	no	indirect call (driver context / vtable / callback)
 0x17e02c	ValueKey__rewriteAsMovOfOperandWithScale	452	yes	
 0x17e1f4	ValueKey__foldMulPowerOfTwoIntoOutputScale	324	no	indirect call (driver context / vtable / callback)
-0x17e338	FUN_0017e338	188	no	indirect call (driver context / vtable / callback)
+0x17e338	ValueKey__foldEqualSourcesIntoOutputScale	188	no	indirect call (driver context / vtable / callback)
 0x17e3f4	ValueKey__rewriteAsBinaryOfOperands	608	yes	
 0x17e658	ValueKey__foldMadZeroAddend	112	yes	
 0x17e6c8	ValueKey__foldMadByPlusMinusOne	280	yes	
@@ -2923,7 +2923,7 @@
 0x180250	ValueKey__canonicalizeConstantSources	1504	no	indirect call (driver context / vtable / callback)
 0x180830	ValueKey__simplifyModifiersAndAddressing	4312	no	indirect call (driver context / vtable / callback)
 0x181928	Inst__isFoldableSingleUse	140	no	indirect call (driver context / vtable / callback)
-0x1819b4	FUN_001819b4	252	no	indirect call (driver context / vtable / callback)
+0x1819b4	Inst__compareScheduleSlack	252	no	indirect call (driver context / vtable / callback)
 0x181ab0	Pass__recordFlaggedInstructions	208	yes	
 0x181b80	RebuildState__computeNodeLevels	896	no	indirect call (driver context / vtable / callback)
 0x181f00	Block__flattenAndRebuildAddMulTree	7020	no	indirect call (driver context / vtable / callback)
@@ -3015,9 +3015,9 @@
 0x193944	R520SchedModel__vslot21	112	no	indirect call (driver context / vtable / callback)
 0x1939b4	R520SchedModel__vslot22	76	yes	
 0x193a00	FudoPs__vslot29_convertInnerIfsToPredicates	140	no	indirect call (driver context / vtable / callback)
-0x193a8c	FUN_00193a8c	88	yes	
-0x193ae4	FUN_00193ae4	88	yes	
-0x193b3c	FUN_00193b3c	116	yes	
+0x193a8c	TypedValueArray__init_193a8c	88	yes	
+0x193ae4	TypedValueArray__init	88	yes	
+0x193b3c	TypedValueArray__createWrapping	116	yes	
 0x193be8	ArenaObject__freeBuffer	24	yes	
 0x193c00	FUN_00193c00	160	yes	
 0x193cc0	Arena__free	88	yes	

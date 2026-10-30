@@ -272,28 +272,28 @@ LAB_00177304:
   } while( true );
 }
 
-/* FUN_0017737c @ 0x17737c (144 bytes) */
-int FUN_0017737c(param_1, param_2, param_3)
-  int param_1;
-  int param_2;
-  int param_3;
+/* ValueKey__sourcesEqualOnWrittenLanes @ 0x17737c (144 bytes) */
+int ValueKey__sourcesEqualOnWrittenLanes(ctx, sourceA, sourceB)
+  int ctx;
+  int sourceA;
+  int sourceB;
 {
-  bool bVar1;
-  int iVar2;
+  bool lastLane;
+  int operandRecord;
   int loopIndex;
   int *loopPtr2;
   int *loopPtr3;
   
-  loopPtr2 = (int *)(param_2 * 0x10 + param_1 + 0x168);
-  loopPtr3 = (int *)(param_3 * 0x10 + param_1 + 0x168);
+  loopPtr2 = (int *)(sourceA * 0x10 + ctx + 0x168);
+  loopPtr3 = (int *)(sourceB * 0x10 + ctx + 0x168);
   loopIndex = 0;
-  while ((iVar2 = IRInst__getOperandRecord(*(undefined4 *)(param_1 + 0xb0),0),
-         *(char *)(loopIndex + iVar2 + 0x10) == '\x01' || (*loopPtr2 == *loopPtr3))) {
-    bVar1 = loopIndex == 3;
+  while ((operandRecord = IRInst__getOperandRecord(*(undefined4 *)(ctx + 0xb0),0),
+         *(char *)(loopIndex + operandRecord + 0x10) == '\x01' || (*loopPtr2 == *loopPtr3))) {
+    lastLane = loopIndex == 3;
     loopPtr2 = loopPtr2 + 1;
     loopPtr3 = loopPtr3 + 1;
     loopIndex = loopIndex + 1;
-    if (bVar1) {
+    if (lastLane) {
       return 1;
     }
   }
@@ -389,25 +389,25 @@ int FUN_001775d8(ctx)
   return;
 }
 
-/* FUN_001776b8 @ 0x1776b8 (144 bytes) */
-int FUN_001776b8(ctx, param_2)
+/* ValueKey__foldLaneToZeroIfSourcesCancel @ 0x1776b8 (144 bytes) */
+int ValueKey__foldLaneToZeroIfSourcesCancel(ctx, lane)
   int ctx;
-  int param_2;
+  int lane;
 {
-  uint uVar1;
+  uint word0xb8Flags;
   int callResult;
   undefined4 exprRecord;
-  uint uVar4;
-  int iVar5;
+  uint word0xd0Flags;
+  int laneBase;
   
-  iVar5 = param_2 * 4 + ctx;
-  callResult = FUN_00176ec0(ctx,*(undefined4 *)(iVar5 + 0x178),*(undefined4 *)(iVar5 + 0x188));
+  laneBase = lane * 4 + ctx;
+  callResult = FUN_00176ec0(ctx,*(undefined4 *)(laneBase + 0x178),*(undefined4 *)(laneBase + 0x188));
   if (callResult != 0) {
-    uVar4 = *(uint *)(*(int *)(ctx + 0xb0) + 0xd0);
-    uVar1 = *(uint *)(*(int *)(ctx + 0xb0) + 0xb8);
-    if (((uVar1 & 1) == (uVar4 & 1)) && ((uVar1 >> 1 & 1) == (uVar4 >> 1 & 1))) {
+    word0xd0Flags = *(uint *)(*(int *)(ctx + 0xb0) + 0xd0);
+    word0xb8Flags = *(uint *)(*(int *)(ctx + 0xb0) + 0xb8);
+    if (((word0xb8Flags & 1) == (word0xd0Flags & 1)) && ((word0xb8Flags >> 1 & 1) == (word0xd0Flags >> 1 & 1))) {
       exprRecord = Compiler__valueNumberForExpr(*(undefined4 *)(ctx + 0x238),0);
-      *(undefined4 *)(iVar5 + 0x30) = exprRecord;
+      *(undefined4 *)(laneBase + 0x30) = exprRecord;
       return 1;
     }
   }
@@ -1379,28 +1379,28 @@ int ValueKey__evalLitLane(resultOut, key, lane, staleArg4)
   return resultOut;
 }
 
-/* FUN_00179064 @ 0x179064 (212 bytes) */
-int FUN_00179064(ctx, param_2)
+/* ValueKey__refreshExprRecordForOperand @ 0x179064 (212 bytes) */
+int ValueKey__refreshExprRecordForOperand(ctx, operandIndex)
   int ctx;
-  int param_2;
+  int operandIndex;
 {
   byte bVar1;
-  undefined4 uVar2;
+  undefined4 destRef;
   int callResult;
-  undefined4 uVar4;
+  undefined4 operandWord;
   
-  (**(code **)(**(int **)(ctx + 0xb0) + 0x48))(*(int **)(ctx + 0xb0),param_2);
-  uVar4 = *(undefined4 *)(param_2 * 0x18 + *(int *)(ctx + 0xb0) + 0x20);
-  callResult = Compiler__valueNumberForExpr(*(undefined4 *)(ctx + 0x238),uVar4);
+  (**(code **)(**(int **)(ctx + 0xb0) + 0x48))(*(int **)(ctx + 0xb0),operandIndex);
+  operandWord = *(undefined4 *)(operandIndex * 0x18 + *(int *)(ctx + 0xb0) + 0x20);
+  callResult = Compiler__valueNumberForExpr(*(undefined4 *)(ctx + 0x238),operandWord);
   if ((((*(char *)(callResult + 8) != '\0') && (bVar1 = *(byte *)(callResult + 9), (bVar1 & 1) == 0)) &&
       ((bVar1 & 2) == 0)) && (((bVar1 & 4) == 0 && ((bVar1 & 8) == 0)))) {
     return callResult;
   }
   *(undefined1 *)(callResult + 8) = 2;
-  uVar2 = *(undefined4 *)(*(int *)(ctx + 0xb0) + 0x8c);
-  *(int *)(callResult + 0x10) = param_2;
-  *(undefined4 *)(callResult + 0xc) = uVar2;
-  *(undefined4 *)(callResult + 0x14) = uVar4;
+  destRef = *(undefined4 *)(*(int *)(ctx + 0xb0) + 0x8c);
+  *(int *)(callResult + 0x10) = operandIndex;
+  *(undefined4 *)(callResult + 0xc) = destRef;
+  *(undefined4 *)(callResult + 0x14) = operandWord;
   *(undefined1 *)(callResult + 9) = 0;
   *(undefined4 *)(callResult + 0x1c) = 0;
   *(undefined4 *)(callResult + 0x18) = 0;
@@ -1408,31 +1408,33 @@ int FUN_00179064(ctx, param_2)
   return callResult;
 }
 
-/* FUN_00179138 @ 0x179138 (240 bytes) */
-int FUN_00179138(ctx, operandIndex)
+/* ValueKey__insertTempCopyOfOperand @ 0x179138 (240 bytes) */
+int ValueKey__insertTempCopyOfOperand(ctx, operandIndex)
   int ctx;
   int operandIndex;
 {
+  int operandValueNumberPtr;
+  int blockPredicate;
   undefined4 operandRef2;
   int operandRef;
   undefined4 arenaAt378;
-  int iVar1;
+  int compiler;
   int callResult;
-  undefined4 uVar3;
+  undefined4 registerMap;
   undefined4 *allocation;
-  int iVar5;
+  int tempIndex;
   int *block;
   
   callResult = IRLoadConst__vslot73(0xa2,*(undefined4 *)(ctx + 0x238));
-  iVar1 = *(int *)(ctx + 0x238);
-  uVar3 = *(undefined4 *)(*(int *)(iVar1 + 0x6c4) + 0x3ac);
-  iVar5 = *(int *)(iVar1 + 0x3b0) + -1;
-  *(int *)(iVar1 + 0x3b0) = iVar5;
-  operandRef = FUN_00127608(uVar3,0x36,iVar5,0);
+  compiler = *(int *)(ctx + 0x238);
+  registerMap = *(undefined4 *)(*(int *)(compiler + 0x6c4) + 0x3ac);
+  tempIndex = *(int *)(compiler + 0x3b0) + -1;
+  *(int *)(compiler + 0x3b0) = tempIndex;
+  operandRef = FUN_00127608(registerMap,0x36,tempIndex,0);
   FUN_0012306c(operandRef,callResult);
   block = *(int **)(*(int *)(ctx + 0xb0) + 0x158);
-  iVar5 = (**(code **)(*block + 0x24))(block);
-  if (iVar5 == 0) {
+  blockPredicate = (**(code **)(*block + 0x24))(block);
+  if (blockPredicate == 0) {
     Block__insertInstBefore(block,*(undefined4 *)(ctx + 0xb0),callResult);
   }
   else {
@@ -1450,12 +1452,12 @@ int FUN_00179138(ctx, operandIndex)
   IRInst__setOperandRef(callResult,0,operandRef);
   operandRef2 = *(undefined4 *)(operandIndex * 0x18 + *(int *)(ctx + 0xb0) + 0x8c);
   IRInst__setOperandRef(callResult,1,operandRef2);
-  iVar5 = operandIndex * 4 + ctx;
+  operandValueNumberPtr = operandIndex * 4 + ctx;
   VReg__addUse(operandRef2,1,callResult);
-  IRInst__setOperandSource(callResult,1,*(undefined4 *)(iVar5 + 0x210),0,*(undefined4 *)(ctx + 0x238));
+  IRInst__setOperandSource(callResult,1,*(undefined4 *)(operandValueNumberPtr + 0x210),0,*(undefined4 *)(ctx + 0x238));
   IRInst__setOperandRef(*(undefined4 *)(ctx + 0xb0),operandIndex,operandRef);
   VReg__addUse(operandRef,operandIndex,*(undefined4 *)(ctx + 0xb0));
-  *(int *)(iVar5 + 0x210) = callResult;
+  *(int *)(operandValueNumberPtr + 0x210) = callResult;
   return callResult;
 }
 
@@ -2898,7 +2900,7 @@ int ValueKey__mixLiteralSources(key)
                                 ((double)*literalRecord);
               if (movOrFlag != 0) {
                 if (*loopPtr7 == 0) {
-                  movOrFlag = ((int (*)())FUN_00179138)(key,operandIndex2);
+                  movOrFlag = ((int (*)())ValueKey__insertTempCopyOfOperand)(key,operandIndex2);
                   *loopPtr7 = movOrFlag;
                   *loopPtr6 = 1;
                   changed = 1;
@@ -2982,7 +2984,7 @@ int ValueKey__mixLiteralSources(key)
                                        (*(int **)(key + 0xb0)), operandIndex <= operandIndex2;
                     operandIndex = operandIndex + 1) {
                   if (*loopPtr7 == 0) {
-                    loopIndex3 = ((int (*)())FUN_00179138)(key,operandIndex);
+                    loopIndex3 = ((int (*)())ValueKey__insertTempCopyOfOperand)(key,operandIndex);
                     operandIndex2 = operandIndex * 4;
                     *loopPtr7 = loopIndex3;
                     *loopPtr6 = 1;

@@ -506,7 +506,7 @@ ffd5c	ffd60	FUN_000fd5c8
 171f60	171f64	Scheduler__run
 171fa0	171fd0	Scheduler__run
 1724d4	1724f4	FUN_0017247c
-179228	179248	FUN_00179138
+179228	179248	ValueKey__insertTempCopyOfOperand
 17a24c	17a26c	ValueKey__setLiteralVec4Operand
 17aed4	17aef4	ValueKey__setOperandFromValueKey
 17befc	17bf00	ValueKey__rewriteAsMovOfOperandLane
@@ -547,7 +547,7 @@ ffd5c	ffd60	FUN_000fd5c8
 1922a0	1922c4	FudoPs__ctor_191efc
 19279c	1927a0	FUN_001922c4
 19323c	193240	FudoPs__peepholeCombine
-193b88	193ba8	FUN_00193b3c
+193b88	193ba8	TypedValueArray__createWrapping
 193c74	193c94	FUN_00193c00
 194bac	194bc8	HashTable__grow
 194bc8	194be8	HashTable__grow

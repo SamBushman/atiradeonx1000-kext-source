@@ -788,7 +788,7 @@ int Compiler__compile(compiler, shader, sourceA, sourceB, optionsArg, unusedArg6
     if (iVar1 == 0) {
       ((int (*)())Compiler__resetState)(iStack00000018);
       FUN_000e0cd0(iStack00000018,uStack00000028);
-      iVar1 = FUN_00193b3c(uStack00000020,uStack00000024,iStack00000018);
+      iVar1 = TypedValueArray__createWrapping(uStack00000020,uStack00000024,iStack00000018);
       *(int *)(iStack00000018 + 0x524) = iStack0000001c;
       *(undefined4 *)(iStack0000001c + 0xf8) = 0;
       *(undefined4 *)(iStack0000001c + 0xfc) =

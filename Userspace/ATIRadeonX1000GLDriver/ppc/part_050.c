@@ -1293,66 +1293,66 @@ int FudoPs__vslot29_convertInnerIfsToPredicates(this, program)
   return;
 }
 
-/* FUN_00193a8c @ 0x193a8c (88 bytes) */
-int FUN_00193a8c(param_1, param_2, param_3, param_4)
-  int *param_1;
-  int param_2;
-  int param_3;
-  int param_4;
+/* TypedValueArray__init_193a8c @ 0x193a8c (88 bytes) */
+int TypedValueArray__init_193a8c(this, elementCount, typeCode, compiler)
+  int *this;
+  int elementCount;
+  int typeCode;
+  int compiler;
 {
   int allocation;
   
-  param_1[1] = param_3;
-  *param_1 = param_4;
-  param_1[2] = param_2;
-  if (param_2 < 3) {
-    param_1[5] = 0;
+  this[1] = typeCode;
+  *this = compiler;
+  this[2] = elementCount;
+  if (elementCount < 3) {
+    this[5] = 0;
   }
   else {
-    allocation = ((int (*)())Arena__alloc)(*(undefined4 *)(param_4 + 0x370),param_2 << 2);
-    param_1[5] = allocation;
+    allocation = ((int (*)())Arena__alloc)(*(undefined4 *)(compiler + 0x370),elementCount << 2);
+    this[5] = allocation;
   }
   return;
 }
 
-/* FUN_00193ae4 @ 0x193ae4 (88 bytes) */
-int FUN_00193ae4(param_1, param_2, param_3, param_4)
-  int *param_1;
-  int param_2;
-  int param_3;
-  int param_4;
+/* TypedValueArray__init @ 0x193ae4 (88 bytes) */
+int TypedValueArray__init(this, elementCount, typeCode, compiler)
+  int *this;
+  int elementCount;
+  int typeCode;
+  int compiler;
 {
   int allocation;
   
-  param_1[1] = param_3;
-  *param_1 = param_4;
-  param_1[2] = param_2;
-  if (param_2 < 3) {
-    param_1[5] = 0;
+  this[1] = typeCode;
+  *this = compiler;
+  this[2] = elementCount;
+  if (elementCount < 3) {
+    this[5] = 0;
   }
   else {
-    allocation = ((int (*)())Arena__alloc)(*(undefined4 *)(param_4 + 0x370),param_2 << 2);
-    param_1[5] = allocation;
+    allocation = ((int (*)())Arena__alloc)(*(undefined4 *)(compiler + 0x370),elementCount << 2);
+    this[5] = allocation;
   }
   return;
 }
 
-/* FUN_00193b3c @ 0x193b3c (76 bytes) */
-int FUN_00193b3c(param_1, param_2, param_3)
-  undefined4 param_1;
-  undefined4 param_2;
-  int param_3;
+/* TypedValueArray__createWrapping @ 0x193b3c (76 bytes) */
+int TypedValueArray__createWrapping(owner, dataPtr, compiler)
+  undefined4 owner;
+  undefined4 dataPtr;
+  int compiler;
 {
   undefined4 *allocation;
-  undefined4 uVar2;
+  undefined4 arena;
   
-  uVar2 = *(undefined4 *)(param_3 + 0x370);
-  allocation = (undefined4 *)((int (*)())Arena__alloc)(uVar2,0x1c);
-  *allocation = uVar2;
-  ((int (*)())FUN_00193ae4)(allocation + 1,1,0x22,param_3);
-  allocation[4] = param_1;
+  arena = *(undefined4 *)(compiler + 0x370);
+  allocation = (undefined4 *)((int (*)())Arena__alloc)(arena,0x1c);
+  *allocation = arena;
+  ((int (*)())TypedValueArray__init)(allocation + 1,1,0x22,compiler);
+  allocation[4] = owner;
   allocation[3] = 1;
-  allocation[5] = param_2;
+  allocation[5] = dataPtr;
   return allocation + 1;
 }
 
@@ -1384,7 +1384,7 @@ int FUN_00193c00(typeDesc, compiler)
   arena = *(undefined4 *)(compiler + 0x370);
   allocation = (undefined4 *)((int (*)())Arena__alloc)(arena,0x1c);
   *allocation = arena;
-  ((int (*)())FUN_00193ae4)(allocation + 1,1,sizeCode,compiler);
+  ((int (*)())TypedValueArray__init)(allocation + 1,1,sizeCode,compiler);
   allocation[4] = typeDesc;
   allocation[3] = 1;
   allocation[5] = 0;

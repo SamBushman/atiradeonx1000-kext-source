@@ -75,7 +75,7 @@ ec1e4	ec1ec	FUN_000ec1d0
 176e0c	176e20	FUN_00176d6c
 187588	1875a8	FUN_00186a88
 191708	191710	R300VSchedModel__vslot12
-193bd0	193be8	FUN_00193b3c
+193bd0	193be8	TypedValueArray__createWrapping
 1961b0	1961c8	R300MachineAssembler__beginNextRecord
 19aad8	19aaf4	FUN_0019d480
 1cd664	1cd69c	stub_getrealaddr

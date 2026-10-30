@@ -506,7 +506,7 @@
 0x171f60	Scheduler__run
 0x171fa0	Scheduler__run
 0x1724d4	FUN_0017247c
-0x179228	FUN_00179138
+0x179228	ValueKey__insertTempCopyOfOperand
 0x17a24c	ValueKey__setLiteralVec4Operand
 0x17aed4	ValueKey__setOperandFromValueKey
 0x17befc	ValueKey__rewriteAsMovOfOperandLane
@@ -547,7 +547,7 @@
 0x1922a0	FudoPs__ctor_191efc
 0x19279c	FUN_001922c4
 0x19323c	FudoPs__peepholeCombine
-0x193b88	FUN_00193b3c
+0x193b88	TypedValueArray__createWrapping
 0x193c74	FUN_00193c00
 0x194bac	HashTable__grow
 0x194bc8	HashTable__grow
