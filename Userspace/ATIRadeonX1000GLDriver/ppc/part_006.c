@@ -336,11 +336,11 @@ int atifsReplayProgram(ctx, shader, unusedArg3)
 }
 
 /* fpilEmitAngleConstants @ 0x3eca0 (164 bytes) */
-int fpilEmitAngleConstants(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  int *param_1;
+int fpilEmitAngleConstants(emitter, param_2, entryHeader, srcRegWord1, param_5, param_6, param_7)
+  int *emitter;
   undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
+  undefined4 entryHeader;
+  undefined4 srcRegWord1;
   undefined4 param_5;
   undefined4 param_6;
   undefined4 param_7;
@@ -353,36 +353,36 @@ int fpilEmitAngleConstants(param_1, param_2, param_3, param_4, param_5, param_6,
   int iVar6;
   int iVar7;
   
-  uVar5 = *(uint *)(param_1[0xd] + 0x20);
+  uVar5 = *(uint *)(emitter[0xd] + 0x20);
   if ((uVar5 & 0x4000000) == 0) {
-    *(uint *)(param_1[0xd] + 0x20) = uVar5 | 0x4000000;
+    *(uint *)(emitter[0xd] + 0x20) = uVar5 | 0x4000000;
     fVar4 = FLOAT_001aa13c;
     fVar3 = FLOAT_001aa138;
     fVar2 = FLOAT_001aa134;
     fVar1 = FLOAT_001aa130;
-    iVar6 = param_1[6];
-    iVar7 = param_1[10];
+    iVar6 = emitter[6];
+    iVar7 = emitter[10];
     *(undefined4 *)(iVar6 * 4 + iVar7) = 0x1c;
     iVar7 = iVar6 * 4 + iVar7;
-    uVar5 = *(uint *)(*param_1 + 0x28);
+    uVar5 = *(uint *)(*emitter + 0x28);
     *(float *)(iVar7 + 8) = fVar1;
     *(uint *)(iVar7 + 4) = uVar5 & 0xffff | 0x10000;
     *(float *)(iVar7 + 0x14) = fVar4;
     *(float *)(iVar7 + 0xc) = fVar2;
     *(float *)(iVar7 + 0x10) = fVar3;
-    param_1[6] = param_1[6] + 6;
+    emitter[6] = emitter[6] + 6;
   }
-  return param_1[9];
+  return emitter[9];
 }
 
 /* fpilClassifyDestination @ 0x3ed50 (60 bytes) */
-int fpilClassifyDestination(param_1, param_2)
-  int *param_1;
+int fpilClassifyDestination(translator, param_2)
+  int *translator;
   int param_2;
 {
   uint uVar1;
   
-  uVar1 = *(uint *)(((uint)*(ushort *)(param_2 + 6) + *(int *)(*param_1 + 0x14)) * 8 + *param_1) >>
+  uVar1 = *(uint *)(((uint)*(ushort *)(param_2 + 6) + *(int *)(*translator + 0x14)) * 8 + *translator) >>
           0x1a & 7;
   if (uVar1 == 3) {
     return 1;
@@ -448,37 +448,37 @@ int fpilSetComponentSelect(param_1, param_2, param_3)
 }
 
 /* fpilEmitScalarConstant @ 0x3eea0 (168 bytes) */
-int fpilEmitScalarConstant(param_1, param_2, param_3)
-  int param_1;
-  undefined4 param_2;
+int fpilEmitScalarConstant(translator, constValue, param_3)
+  int translator;
+  undefined4 constValue;
   uint *param_3;
 {
   int iVar1;
   uint uVar2;
   int iVar3;
   
-  if ((*(uint *)(param_1 + 0x14) >> 0x15 & 0x3f) < 0x20) {
-    iVar1 = *(int *)(param_1 + 0x28);
-    iVar3 = *(int *)(param_1 + 0x18) * 4;
+  if ((*(uint *)(translator + 0x14) >> 0x15 & 0x3f) < 0x20) {
+    iVar1 = *(int *)(translator + 0x28);
+    iVar3 = *(int *)(translator + 0x18) * 4;
     *(undefined4 *)(iVar3 + iVar1) = 0x1c;
     iVar3 = iVar3 + iVar1;
-    uVar2 = *(uint *)(param_1 + 0x14);
+    uVar2 = *(uint *)(translator + 0x14);
     *(undefined4 *)(iVar3 + 0x14) = 0;
     *(undefined4 *)(iVar3 + 0xc) = 0;
     *(undefined4 *)(iVar3 + 0x10) = 0;
-    *(undefined4 *)(iVar3 + 8) = param_2;
+    *(undefined4 *)(iVar3 + 8) = constValue;
     *(uint *)(iVar3 + 4) = uVar2 >> 0x15 & 0x3f | 0x20000;
-    *(int *)(param_1 + 0x18) = *(int *)(param_1 + 0x18) + 6;
-    *param_3 = *(uint *)(param_1 + 0x14) >> 0x15 & 0x3f;
-    *(uint *)(param_1 + 0x14) =
-         ((*(uint *)(param_1 + 0x14) >> 0x15 & 0x3f) + 1) * 0x200000 & 0x7e00000 |
-         *(uint *)(param_1 + 0x14) & 0xf81fffff;
-    return *(int *)(param_1 + 0x24);
+    *(int *)(translator + 0x18) = *(int *)(translator + 0x18) + 6;
+    *param_3 = *(uint *)(translator + 0x14) >> 0x15 & 0x3f;
+    *(uint *)(translator + 0x14) =
+         ((*(uint *)(translator + 0x14) >> 0x15 & 0x3f) + 1) * 0x200000 & 0x7e00000 |
+         *(uint *)(translator + 0x14) & 0xf81fffff;
+    return *(int *)(translator + 0x24);
   }
-  if (*(int *)(param_1 + 0x24) != 0) {
-    return *(int *)(param_1 + 0x24);
+  if (*(int *)(translator + 0x24) != 0) {
+    return *(int *)(translator + 0x24);
   }
-  *(undefined4 *)(param_1 + 0x24) = 4;
+  *(undefined4 *)(translator + 0x24) = 4;
   return 4;
 }
 
@@ -603,23 +603,27 @@ int fpilTranslateSource(translator, irSource, outToken, outSwizzle)
   uint *outToken;
   uint *outSwizzle;
 {
-  int iVar1;
-  bool bVar2;
-  uint uVar3;
-  uint uVar4;
-  uint uVar5;
-  uint uVar6;
-  uint uVar7;
-  int iVar8;
-  uint uVar9;
-  undefined *puVar10;
+  uint select2;
+  uint ilSwizzle;
+  uint componentCount;
+  uint select3;
+  int paramEntryOffset;
+  bool remapSwizzle;
+  uint srcNegate;
+  uint negate0;
+  uint srcKindBits;
+  uint select0;
+  uint srcWord;
+  int program;
+  uint comp0Bits;
+  undefined *ilSourceToken;
   
-  uVar7 = *irSource;
-  uVar5 = uVar7 & 0x3800000;
-  if (uVar5 == 0) {
-    iVar8 = *translator;
-    iVar1 = ((uint)*(ushort *)((int)irSource + 6) + *(int *)(iVar8 + 0x24)) * 8;
-    switch(*(ushort *)(iVar8 + iVar1) & 0xf) {
+  srcWord = *irSource;
+  srcKindBits = srcWord & 0x3800000;
+  if (srcKindBits == 0) {
+    program = *translator;
+    paramEntryOffset = ((uint)*(ushort *)((int)irSource + 6) + *(int *)(program + 0x24)) * 8;
+    switch(*(ushort *)(program + paramEntryOffset) & 0xf) {
     default:
 switchD_0003f230_caseD_0:
       if (translator[9] != 0) {
@@ -628,125 +632,126 @@ switchD_0003f230_caseD_0:
       translator[9] = 3;
       return 3;
     case 1:
-      bVar2 = false;
-      puVar10 = ((unsigned char *)0x00160000);
+      remapSwizzle = false;
+      ilSourceToken = ((unsigned char *)0x00160000);
       break;
     case 2:
-      bVar2 = false;
-      puVar10 = (undefined *)0x120000;
+      remapSwizzle = false;
+      ilSourceToken = (undefined *)0x120000;
       break;
     case 3:
-      bVar2 = false;
-      puVar10 = (undefined *)0x130000;
+      remapSwizzle = false;
+      ilSourceToken = (undefined *)0x130000;
       break;
     case 5:
-      bVar2 = true;
-      puVar10 = (undefined *)0x100000;
+      remapSwizzle = true;
+      ilSourceToken = (undefined *)0x100000;
       break;
     case 7:
-      bVar2 = false;
-      puVar10 = (undefined *)(*(uint *)(iVar8 + iVar1) & 0x1f | 0x110000);
+      remapSwizzle = false;
+      ilSourceToken = (undefined *)(*(uint *)(program + paramEntryOffset) & 0x1f | 0x110000);
     }
   }
-  else if (uVar5 == 0x1000000) {
-    bVar2 = false;
-    puVar10 = (undefined *)(*(ushort *)((int)irSource + 6) | 0x10000);
+  else if (srcKindBits == 0x1000000) {
+    remapSwizzle = false;
+    ilSourceToken = (undefined *)(*(ushort *)((int)irSource + 6) | 0x10000);
   }
-  else if (uVar5 == 0x800000) {
-    bVar2 = false;
-    puVar10 = (undefined *)(*(ushort *)((int)irSource + 6) | 0x40000);
+  else if (srcKindBits == 0x800000) {
+    remapSwizzle = false;
+    ilSourceToken = (undefined *)(*(ushort *)((int)irSource + 6) | 0x40000);
   }
   else {
-    if (uVar5 != 0x1800000) goto switchD_0003f230_caseD_0;
-    bVar2 = false;
-    puVar10 = (undefined *)
+    if (srcKindBits != 0x1800000) goto switchD_0003f230_caseD_0;
+    remapSwizzle = false;
+    ilSourceToken = (undefined *)
               ((uint)*(ushort *)((int)irSource + 6) + *(int *)(*translator + 0x10) + 1 & 0xffff |
               0x40000);
   }
   if ((translator[5] & 0x20000000U) == 0) {
-    uVar5 = 4;
+    componentCount = 4;
   }
   else {
-    uVar5 = (uVar7 >> 0xc & 3) + 1;
+    componentCount = (srcWord >> 0xc & 3) + 1;
   }
-  uVar3 = uVar7 >> 0x1b & 1;
-  uVar6 = 4;
-  if (uVar5 != 0) {
-    uVar6 = *(uint *)(&DAT_001dac08 + (uVar7 >> 0x13 & 0xc)) >> 0x19 & 7;
+  srcNegate = srcWord >> 0x1b & 1;
+  select0 = 4;
+  if (componentCount != 0) {
+    select0 = *(uint *)(&DAT_001dac08 + (srcWord >> 0x13 & 0xc)) >> 0x19 & 7;
   }
-  uVar4 = uVar3 ^ *(uint *)(&DAT_001dac08 + (uVar7 >> 0x13 & 0xc)) >> 0x18 & 1;
-  uVar9 = uVar4 << 3 | uVar6;
-  if (uVar5 < 2) {
-    uVar5 = uVar4 << 0xf |
-            uVar6 << 0xc | uVar4 << 0xb | uVar6 << 8 | uVar4 << 7 | uVar6 << 4 | uVar9;
+  negate0 = srcNegate ^ *(uint *)(&DAT_001dac08 + (srcWord >> 0x13 & 0xc)) >> 0x18 & 1;
+  comp0Bits = negate0 << 3 | select0;
+  if (componentCount < 2) {
+    ilSwizzle = negate0 << 0xf |
+            select0 << 0xc | negate0 << 0xb | select0 << 8 | negate0 << 7 | select0 << 4 | comp0Bits;
   }
   else {
-    uVar6 = 4;
-    if (2 < uVar5) {
-      uVar6 = *(uint *)(&DAT_001dac08 + (uVar7 >> 0xf & 0xc)) >> 0x19 & 7;
+    select2 = 4;
+    if (2 < componentCount) {
+      select2 = *(uint *)(&DAT_001dac08 + (srcWord >> 0xf & 0xc)) >> 0x19 & 7;
     }
-    uVar4 = 4;
-    if (3 < uVar5) {
-      uVar4 = *(uint *)(&DAT_001dac08 + (uVar7 >> 0xd & 0xc)) >> 0x19 & 7;
+    select3 = 4;
+    if (3 < componentCount) {
+      select3 = *(uint *)(&DAT_001dac08 + (srcWord >> 0xd & 0xc)) >> 0x19 & 7;
     }
-    uVar5 = (uVar3 ^ *(uint *)(&DAT_001dac08 + (uVar7 >> 0xd & 0xc)) >> 0x18 & 1) << 0xf |
-            uVar4 << 0xc |
-            (uVar3 ^ *(uint *)(&DAT_001dac08 + (uVar7 >> 0xf & 0xc)) >> 0x18 & 1) << 0xb |
-            uVar6 << 8 |
-            (uVar3 ^ *(uint *)(&DAT_001dac08 + (uVar7 >> 0x11 & 0xc)) >> 0x18 & 1) << 7 |
-            *(uint *)(&DAT_001dac08 + (uVar7 >> 0x11 & 0xc)) >> 0x15 & 0x70 | uVar9;
+    ilSwizzle = (srcNegate ^ *(uint *)(&DAT_001dac08 + (srcWord >> 0xd & 0xc)) >> 0x18 & 1) << 0xf |
+            select3 << 0xc |
+            (srcNegate ^ *(uint *)(&DAT_001dac08 + (srcWord >> 0xf & 0xc)) >> 0x18 & 1) << 0xb |
+            select2 << 8 |
+            (srcNegate ^ *(uint *)(&DAT_001dac08 + (srcWord >> 0x11 & 0xc)) >> 0x18 & 1) << 7 |
+            *(uint *)(&DAT_001dac08 + (srcWord >> 0x11 & 0xc)) >> 0x15 & 0x70 | comp0Bits;
   }
-  if (bVar2) {
-    uVar5 = ((byte)(DAT_001dac00)[uVar5 >> 0xc & 7] & 7) << 0xc |
-            ((byte)(DAT_001dac00)[uVar5 >> 8 & 7] & 7) << 8 |
-            ((byte)(DAT_001dac00)[uVar5 >> 4 & 7] & 7) << 4 |
-            (byte)(DAT_001dac00)[uVar5 & 7] & 7 | uVar5 & 0xffff8888;
+  if (remapSwizzle) {
+    ilSwizzle = ((byte)(DAT_001dac00)[ilSwizzle >> 0xc & 7] & 7) << 0xc |
+            ((byte)(DAT_001dac00)[ilSwizzle >> 8 & 7] & 7) << 8 |
+            ((byte)(DAT_001dac00)[ilSwizzle >> 4 & 7] & 7) << 4 |
+            (byte)(DAT_001dac00)[ilSwizzle & 7] & 7 | ilSwizzle & 0xffff8888;
   }
-  *outToken = (uint)puVar10 | 0x400000;
-  *outSwizzle = uVar5;
+  *outToken = (uint)ilSourceToken | 0x400000;
+  *outSwizzle = ilSwizzle;
   return 0;
 }
 
 /* fpilTranslateSourceWithSwizzle @ 0x3f4e0 (232 bytes) */
-int fpilTranslateSourceWithSwizzle(param_1, param_2, param_3, param_4, param_5)
-  int param_1;
-  uint *param_2;
-  undefined4 *param_3;
-  uint *param_4;
-  uint *param_5;
+int fpilTranslateSourceWithSwizzle(translator, irSource, outToken, outSwizzle, selectWordPtr)
+  int translator;
+  uint *irSource;
+  undefined4 *outToken;
+  uint *outSwizzle;
+  uint *selectWordPtr;
 {
-  uint uVar1;
-  int iVar2;
-  undefined4 uVar3;
-  uint uVar4;
-  uint uVar5;
-  uint uVar6;
-  uint uVar7;
-  undefined4 local_38;
-  uint local_34 [7];
+  uint compEntry0;
+  uint compEntry3;
+  int srcResult;
+  undefined4 result;
+  uint compEntry2;
+  uint compEntry1;
+  uint selectWord;
+  uint srcNegate;
+  undefined4 ilToken;
+  uint ilSwizzleWords [7];
   
-  iVar2 = ((int (*)())fpilTranslateSource)(param_1,param_2,&local_38,local_34);
-  if (iVar2 == 0) {
-    uVar6 = *param_5;
-    uVar3 = 0;
-    uVar7 = *param_2 >> 0x1b & 1;
-    uVar1 = *(uint *)(&DAT_001dac08 + (uVar6 >> 10 & 0x3c));
-    uVar5 = *(uint *)(&DAT_001dac08 + (uVar6 >> 6 & 0x3c));
-    uVar4 = *(uint *)(&DAT_001dac08 + (uVar6 >> 2 & 0x3c));
-    uVar6 = *(uint *)(&DAT_001dac08 + (uVar6 & 0xf) * 4);
-    *param_3 = local_38;
-    *param_4 = (uVar7 ^ uVar6 >> 0x18 & 1) << 0xf |
-               uVar6 >> 0xd & 0x7000 |
-               (uVar7 ^ uVar4 >> 0x18 & 1) << 0xb |
-               uVar4 >> 0x11 & 0x700 |
-               (uVar7 ^ uVar5 >> 0x18 & 1) << 7 |
-               uVar5 >> 0x15 & 0x70 |
-               (uVar7 ^ uVar1 >> 0x18 & 1) << 3 | uVar1 >> 0x19 & 7 | local_34[0] & 0xffff0000;
+  srcResult = ((int (*)())fpilTranslateSource)(translator,irSource,&ilToken,ilSwizzleWords);
+  if (srcResult == 0) {
+    selectWord = *selectWordPtr;
+    result = 0;
+    srcNegate = *irSource >> 0x1b & 1;
+    compEntry3 = *(uint *)(&DAT_001dac08 + (selectWord >> 10 & 0x3c));
+    compEntry1 = *(uint *)(&DAT_001dac08 + (selectWord >> 6 & 0x3c));
+    compEntry2 = *(uint *)(&DAT_001dac08 + (selectWord >> 2 & 0x3c));
+    compEntry0 = *(uint *)(&DAT_001dac08 + (selectWord & 0xf) * 4);
+    *outToken = ilToken;
+    *outSwizzle = (srcNegate ^ compEntry0 >> 0x18 & 1) << 0xf |
+               compEntry0 >> 0xd & 0x7000 |
+               (srcNegate ^ compEntry2 >> 0x18 & 1) << 0xb |
+               compEntry2 >> 0x11 & 0x700 |
+               (srcNegate ^ compEntry1 >> 0x18 & 1) << 7 |
+               compEntry1 >> 0x15 & 0x70 |
+               (srcNegate ^ compEntry3 >> 0x18 & 1) << 3 | compEntry3 >> 0x19 & 7 | ilSwizzleWords[0] & 0xffff0000;
   }
   else {
-    uVar3 = *(undefined4 *)(param_1 + 0x24);
+    result = *(undefined4 *)(translator + 0x24);
   }
-  return uVar3;
+  return result;
 }
 
 /* freeIfNonNull @ 0x3f5d0 (12 bytes) */
@@ -760,17 +765,17 @@ int freeIfNonNull(pointer)
 }
 
 /* fpilDestroyTranslator @ 0x3f5e0 (112 bytes) */
-int fpilDestroyTranslator(param_1)
-  int param_1;
+int fpilDestroyTranslator(translator)
+  int translator;
 {
-  if (*(int *)(param_1 + 0x34) != 0) {
-    ((int (*)())freeIfNonNull)(*(int *)(param_1 + 0x34));
+  if (*(int *)(translator + 0x34) != 0) {
+    ((int (*)())freeIfNonNull)(*(int *)(translator + 0x34));
   }
-  if (*(int *)(param_1 + 0x28) != 0) {
-    _free(*(int *)(param_1 + 0x28));
+  if (*(int *)(translator + 0x28) != 0) {
+    _free(*(int *)(translator + 0x28));
   }
-  if (param_1 != 0) {
-    _free(param_1);
+  if (translator != 0) {
+    _free(translator);
     return;
   }
   return;
@@ -840,8 +845,8 @@ int fpilTranslateDestination(translator, irDest, outToken, outMask, flag)
 }
 
 /* fpilEmitEmptyProgram @ 0x3f850 (396 bytes) */
-int fpilEmitEmptyProgram(param_1)
-  int param_1;
+int fpilEmitEmptyProgram(translator)
+  int translator;
 {
   int translatorError;
   int allocation;
@@ -856,11 +861,11 @@ int fpilEmitEmptyProgram(param_1)
   dword *tokenWord2Ptr;
   dword *tokenWord3Ptr;
   
-  tokenDataPtrAddr = (int *)(param_1 + 0x28);
-  *(undefined4 *)(param_1 + 0x2c) = 0;
-  *(undefined4 *)(param_1 + 0x24) = 0;
-  tokenCount = *(int *)(param_1 + 0x2c);
-  tokenCapacity = *(uint *)(param_1 + 0x30);
+  tokenDataPtrAddr = (int *)(translator + 0x28);
+  *(undefined4 *)(translator + 0x2c) = 0;
+  *(undefined4 *)(translator + 0x24) = 0;
+  tokenCount = *(int *)(translator + 0x2c);
+  tokenCapacity = *(uint *)(translator + 0x30);
   if (tokenCapacity < tokenCount + 7U) {
     if (tokenCapacity == 0) {
       tokenCapacity = 0x10;
@@ -877,10 +882,10 @@ int fpilEmitEmptyProgram(param_1)
       allocation = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
     }
     if (allocation == 0) {
-      translatorError = *(int *)(param_1 + 0x24);
+      translatorError = *(int *)(translator + 0x24);
       if (translatorError == 0) {
         translatorError = 1;
-        *(undefined4 *)(param_1 + 0x24) = 1;
+        *(undefined4 *)(translator + 0x24) = 1;
       }
       if (translatorError != 0) {
         return translatorError;
@@ -895,10 +900,10 @@ int fpilEmitEmptyProgram(param_1)
       goto LAB_0003f918;
     }
     *tokenDataPtrAddr = allocation;
-    *(uint *)(param_1 + 0x30) = tokenCapacity;
-    tokenCount = *(int *)(param_1 + 0x2c);
+    *(uint *)(translator + 0x30) = tokenCapacity;
+    tokenCount = *(int *)(translator + 0x2c);
   }
-  *(int *)(param_1 + 0x2c) = tokenCount + 7;
+  *(int *)(translator + 0x2c) = tokenCount + 7;
   tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
   tokenWord1Ptr = tokenWritePtr + 1;
   tokenWord2Ptr = tokenWritePtr + 2;
@@ -918,45 +923,46 @@ LAB_0003f918:
 }
 
 /* fpilEmitMoveFromTemp @ 0x3f9f0 (472 bytes) */
-int fpilEmitMoveFromTemp(param_1, param_2, param_3)
-  int *param_1;
-  uint *param_2;
-  undefined4 param_3;
+int fpilEmitMoveFromTemp(translator, irDest, destFlag)
+  int *translator;
+  uint *irDest;
+  undefined4 destFlag;
 {
+  uint tempBase;
   int translatorError;
   int tokenCount;
   int allocation;
   undefined4 *tokenWritePtr;
-  int iVar2;
+  int buildResult;
   uint tokenCapacity;
-  uint uVar4;
-  uint uVar5;
+  uint compEntry1;
+  uint compEntry2;
   dword *tokenWord1Ptr;
   dword *tokenWord4Ptr;
-  uint uVar8;
-  uint uVar9;
+  uint compEntry3;
+  uint compEntry0;
   dword *tokenWord2Ptr;
-  uint uVar11;
+  uint destWord;
   dword *tokenWord3Ptr;
   int *tokenDataPtrAddr;
-  dword local_38;
-  dword local_34 [6];
+  dword destToken;
+  dword destMaskWords [6];
   
-  local_38 = 0;
-  local_34[0] = 0;
-  iVar2 = ((int (*)())fpilBuildDestinationToken)(param_1,param_2,&local_38,local_34,param_3);
-  if (iVar2 != 0) {
-    return param_1[9];
+  destToken = 0;
+  destMaskWords[0] = 0;
+  buildResult = ((int (*)())fpilBuildDestinationToken)(translator,irDest,&destToken,destMaskWords,destFlag);
+  if (buildResult != 0) {
+    return translator[9];
   }
-  uVar11 = *param_2;
-  tokenDataPtrAddr = param_1 + 10;
-  tokenCount = param_1[0xb];
-  tokenCapacity = param_1[0xc];
-  uVar8 = *(uint *)(&DAT_001dac08 + (uVar11 >> 6 & 0xc));
-  uVar5 = *(uint *)(&DAT_001dac08 + (uVar11 >> 4 & 0xc));
-  uVar4 = *(uint *)(&DAT_001dac08 + (uVar11 >> 2 & 0xc));
-  uVar9 = *(uint *)(&DAT_001dac08 + (uVar11 & 0xc));
-  uVar11 = *(uint *)(*param_1 + 0x10);
+  destWord = *irDest;
+  tokenDataPtrAddr = translator + 10;
+  tokenCount = translator[0xb];
+  tokenCapacity = translator[0xc];
+  compEntry3 = *(uint *)(&DAT_001dac08 + (destWord >> 6 & 0xc));
+  compEntry2 = *(uint *)(&DAT_001dac08 + (destWord >> 4 & 0xc));
+  compEntry1 = *(uint *)(&DAT_001dac08 + (destWord >> 2 & 0xc));
+  compEntry0 = *(uint *)(&DAT_001dac08 + (destWord & 0xc));
+  tempBase = *(uint *)(*translator + 0x10);
   if (tokenCapacity < tokenCount + 5U) {
     if (tokenCapacity == 0) {
       tokenCapacity = 0x10;
@@ -973,10 +979,10 @@ int fpilEmitMoveFromTemp(param_1, param_2, param_3)
       allocation = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
     }
     if (allocation == 0) {
-      translatorError = param_1[9];
+      translatorError = translator[9];
       if (translatorError == 0) {
         translatorError = 1;
-        param_1[9] = 1;
+        translator[9] = 1;
       }
       if (translatorError != 0) {
         return translatorError;
@@ -989,10 +995,10 @@ int fpilEmitMoveFromTemp(param_1, param_2, param_3)
       goto LAB_0003fb50;
     }
     *tokenDataPtrAddr = allocation;
-    param_1[0xc] = tokenCapacity;
-    tokenCount = param_1[0xb];
+    translator[0xc] = tokenCapacity;
+    tokenCount = translator[0xb];
   }
-  param_1[0xb] = tokenCount + 5;
+  translator[0xb] = tokenCount + 5;
   tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
   tokenWord1Ptr = tokenWritePtr + 1;
   tokenWord2Ptr = tokenWritePtr + 2;
@@ -1000,14 +1006,14 @@ int fpilEmitMoveFromTemp(param_1, param_2, param_3)
   tokenWord4Ptr = tokenWritePtr + 4;
 LAB_0003fb50:
   *tokenWritePtr = 0x47;
-  *tokenWord1Ptr = local_38;
-  *tokenWord2Ptr = local_34[0];
-  *tokenWord3Ptr = uVar11 & 0xffff | 0x440000;
-  *tokenWord4Ptr = uVar9 >> 9 & 0x8000 |
-            uVar9 >> 0xd & 0x7000 |
-            uVar4 >> 0xd & 0x800 |
-            uVar4 >> 0x11 & 0x700 |
-            uVar5 >> 0x11 & 0x80 | uVar5 >> 0x15 & 0x70 | uVar8 >> 0x15 & 8 | uVar8 >> 0x19 & 7;
+  *tokenWord1Ptr = destToken;
+  *tokenWord2Ptr = destMaskWords[0];
+  *tokenWord3Ptr = tempBase & 0xffff | 0x440000;
+  *tokenWord4Ptr = compEntry0 >> 9 & 0x8000 |
+            compEntry0 >> 0xd & 0x7000 |
+            compEntry1 >> 0xd & 0x800 |
+            compEntry1 >> 0x11 & 0x700 |
+            compEntry2 >> 0x11 & 0x80 | compEntry2 >> 0x15 & 0x70 | compEntry3 >> 0x15 & 8 | compEntry3 >> 0x19 & 7;
   return 0;
 }
 
@@ -4496,9 +4502,9 @@ LAB_00044c08:
 }
 
 /* fragmentTranslateDsl @ 0x44c90 (2856 bytes) */
-int fragmentTranslateDsl(emitter, param_2)
+int fragmentTranslateDsl(emitter, recordIndex)
   int *emitter;
-  int param_2;
+  int recordIndex;
 {
   undefined4 *tokenWritePtr;
   undefined **recordPtr3;
@@ -4550,7 +4556,7 @@ int fragmentTranslateDsl(emitter, param_2)
   recordPtr = &ilInstASrc0;
   bufferCount = *(int *)(iVar11 + 0x54);
   _memset(&ilInstAOpcode,0,0x24);
-  iVar11 = iVar11 + bufferCount * 8 + param_2 * 8;
+  iVar11 = iVar11 + bufferCount * 8 + recordIndex * 8;
   _memset(&ilInstBOpcode,0,0x24);
   ilInstADst = CONCAT22(4,(short)emitter[8]);
   ilInstAOpcode = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstAOpcode) + 0)),0x5b);
@@ -4901,9 +4907,9 @@ LAB_000457a8:
 }
 
 /* fragmentTranslateSel @ 0x457f0 (2412 bytes) */
-int fragmentTranslateSel(emitter, param_2)
+int fragmentTranslateSel(emitter, recordIndex)
   int *emitter;
-  int param_2;
+  int recordIndex;
 {
   uint *tokenWritePtr3;
   undefined **recordWordNext4;
@@ -4949,7 +4955,7 @@ int fragmentTranslateSel(emitter, param_2)
   iVar16 = *emitter;
   bufferCount = *(int *)(iVar16 + 0x54);
   _memset(&ilInstAOpcode,0,0x24);
-  iVar16 = iVar16 + bufferCount * 8 + param_2 * 8;
+  iVar16 = iVar16 + bufferCount * 8 + recordIndex * 8;
   _memset(&ilInstBOpcode,0,0x24);
   bufferCount = ((int (*)())fpilTranslateDestination)(emitter,iVar16 + 8,&local_98,&local_94,*(uint *)(iVar16 + 4) >> 0x14 & 1);
   if (bufferCount != 0) {
@@ -7833,7 +7839,7 @@ int FUN_0004a860(glContext, param_2, param_3, param_4, param_5, param_6, param_7
 }
 
 /* FUN_0004a8f0 @ 0x4a8f0 (140 bytes) */
-void FUN_0004a8f0(int glContext,undefined4 param_2,undefined4 param_3,undefined4 param_4,double fparam_1)
+void FUN_0004a8f0(int glContext,undefined4 param_2,undefined4 unusedArgR5,undefined4 unused,double fparam_1)
 {
   if ((*(uint *)(glContext + 0x44) & 0x20000) == 0) {
     FUN_000b6580(glContext,0);
@@ -7843,7 +7849,7 @@ void FUN_0004a8f0(int glContext,undefined4 param_2,undefined4 param_3,undefined4
     return;
   }
   if ((*(uint *)(glContext + 0x44) & 0x2000) != 0) {
-    ((undefined4 (*)())FUN_000afe40)(glContext,0,param_3,param_4,fparam_1);
+    ((undefined4 (*)())FUN_000afe40)(glContext,0,unusedArgR5,unused,fparam_1);
     return;
   }
   atifsCompileCurrentShader(glContext);
@@ -7851,8 +7857,8 @@ void FUN_0004a8f0(int glContext,undefined4 param_2,undefined4 param_3,undefined4
 }
 
 /* FUN_0004a990 @ 0x4a990 (100 bytes) */
-int FUN_0004a990(param_1, param_2)
-  int param_1;
+int FUN_0004a990(glContext, param_2)
+  int glContext;
   undefined4 *param_2;
 {
   /* issue #74: this called freeAndNullField(param_2+8) twice in a row with the identical argument.
@@ -7865,47 +7871,47 @@ int FUN_0004a990(param_1, param_2)
   freeAndNullField(param_2 + 8);
   *param_2 = 0;
   param_2[7] = 0;
-  if ((param_1 != 0) && (param_2 == *(undefined4 **)(param_1 + 0x1e68))) {
-    *(undefined4 *)(param_1 + 0x1e68) = 0;
+  if ((glContext != 0) && (param_2 == *(undefined4 **)(glContext + 0x1e68))) {
+    *(undefined4 *)(glContext + 0x1e68) = 0;
   }
   return;
 }
 
 /* FUN_0004aa00 @ 0x4aa00 (136 bytes) */
-int FUN_0004aa00(param_1, param_2)
-  int param_1;
+int FUN_0004aa00(ctx, param_2)
+  int ctx;
   int param_2;
 {
   undefined4 uVar1;
   undefined1 *puVar2;
   
-  puVar2 = *(undefined1 **)(((unsigned char *)0x00001488) + param_1);
+  puVar2 = *(undefined1 **)(((unsigned char *)0x00001488) + ctx);
   if ((puVar2 == (undefined1 *)0x0) ||
      ((*(int *)(puVar2 + 0x37cc) < 0x41 && (*(int *)(puVar2 + 0x37d0) < 0x41)))) {
     uVar1 = 0;
   }
   else {
     if (param_2 != 0) {
-      *(undefined4 *)(param_1 + 0x1e68) = 0;
+      *(undefined4 *)(ctx + 0x1e68) = 0;
       *puVar2 = 0;
-      *(undefined4 *)(((unsigned char *)0x00001488) + param_1) = 0;
+      *(undefined4 *)(((unsigned char *)0x00001488) + ctx) = 0;
     }
-    FUN_00088190(param_1,puVar2);
+    FUN_00088190(ctx,puVar2);
     uVar1 = 1;
   }
   return uVar1;
 }
 
 /* FUN_0004aa90 @ 0x4aa90 (196 bytes) */
-int FUN_0004aa90(param_1, param_2)
-  int param_1;
+int FUN_0004aa90(glContext, param_2)
+  int glContext;
   uint *param_2;
 {
   uint *puVar1;
   uint *puVar2;
   int loopIndex;
   
-  if (((unsigned char *)0x000013b2)[param_1] != '\0') {
+  if (((unsigned char *)0x000013b2)[glContext] != '\0') {
     loopIndex = 0;
     puVar2 = param_2;
     do {
@@ -7914,7 +7920,7 @@ int FUN_0004aa90(param_1, param_2)
       puVar2[0x22] = puVar2[0x22] & 0xfe001fc0 | 0xd10000;
       puVar2 = puVar2 + 1;
       *puVar2 = *puVar1 & 0xfffcffef;
-    } while (loopIndex < (int)(uint)(byte)((unsigned char *)0x000013b2)[param_1]);
+    } while (loopIndex < (int)(uint)(byte)((unsigned char *)0x000013b2)[glContext]);
   }
   param_2[0x87] = 0;
   param_2[0x83] = 1;
@@ -8194,115 +8200,116 @@ int FUN_0004ac90(glContext)
 }
 
 /* FUN_0004b190 @ 0x4b190 (700 bytes) */
-int FUN_0004b190(glContext, param_2)
+int FUN_0004b190(glContext, mode)
   int glContext;
-  int param_2;
+  int mode;
 {
+  char needsUpdate;
   undefined4 registerDirty;
   int glContextWord1e5c;
-  bool bVar1;
-  bool bVar2;
-  char cVar4;
-  code *pcVar3;
-  undefined1 *puVar5;
-  uint uVar6;
-  int iVar7;
-  undefined4 uVar8;
-  int iVar9;
+  bool modeIsZero;
+  bool useSecondary;
+  char selectedByteFlag;
+  code *dirtyCallback;
+  undefined1 *programStatePtr;
+  uint streamComponents;
+  int specialStream;
+  undefined4 programFlag;
+  int programEntry;
   
-  iVar7 = *(int *)(glContext + 0x276c);
+  specialStream = *(int *)(glContext + 0x276c);
   if (((*(uint *)(glContext + 0x44) & 0x20000) == 0) || (*(int *)(glContext + 0x1e70) == 0)) {
 LAB_0004b200:
-    uVar8 = 1;
-    iVar9 = *(int *)(glContext + 0x1e5c);
-    bVar2 = false;
+    programFlag = 1;
+    programEntry = *(int *)(glContext + 0x1e5c);
+    useSecondary = false;
   }
   else {
     if ((*(uint *)(glContext + 0x44) & 0x2000) == 0) {
-      cVar4 = ((unsigned char *)0x00001136)[glContext];
+      selectedByteFlag = ((unsigned char *)0x00001136)[glContext];
     }
     else {
-      cVar4 = ((unsigned char *)0x000011d0)[glContext];
+      selectedByteFlag = ((unsigned char *)0x000011d0)[glContext];
     }
-    if (cVar4 != '\0') goto LAB_0004b200;
-    uVar8 = 0;
-    iVar9 = *(int *)(glContext + 0x1e70);
-    bVar2 = true;
+    if (selectedByteFlag != '\0') goto LAB_0004b200;
+    programFlag = 0;
+    programEntry = *(int *)(glContext + 0x1e70);
+    useSecondary = true;
   }
-  bVar1 = param_2 == 0;
-  if (bVar1) {
+  modeIsZero = mode == 0;
+  if (modeIsZero) {
     *(undefined4 *)(glContext + 0x23e0) = 0;
   }
   else {
     *(undefined4 *)(glContext + 0x23e0) = 1;
   }
-  puVar5 = *(undefined1 **)(((unsigned char *)0x000036c0) + iVar9);
-  if (puVar5 == (undefined1 *)0x0) {
+  programStatePtr = *(undefined1 **)(((unsigned char *)0x000036c0) + programEntry);
+  if (programStatePtr == (undefined1 *)0x0) {
     return;
   }
-  if (param_2 == *(int *)(((unsigned char *)0x000010e4) + iVar9)) {
-    if (((unsigned char *)0x000036c4)[iVar9] == '\0') {
-      if (!bVar1) {
-        cVar4 = '\0';
+  if (mode == *(int *)(((unsigned char *)0x000010e4) + programEntry)) {
+    if (((unsigned char *)0x000036c4)[programEntry] == '\0') {
+      if (!modeIsZero) {
+        needsUpdate = '\0';
         goto LAB_0004b2f8;
       }
-      cVar4 = ((unsigned char *)0x000010e9)[iVar9];
+      needsUpdate = ((unsigned char *)0x000010e9)[programEntry];
     }
     else {
-      if (bVar1) goto LAB_0004b340;
-      cVar4 = ((unsigned char *)0x000010ea)[iVar9];
+      if (modeIsZero) goto LAB_0004b340;
+      needsUpdate = ((unsigned char *)0x000010ea)[programEntry];
     }
-    if (cVar4 != '\0') {
+    if (needsUpdate != '\0') {
       return;
     }
-    if (bVar2) {
-      *puVar5 = (char)uVar8;
-      ((unsigned char *)0x000010e9)[iVar9] = 0;
-      ((unsigned char *)0x000010ea)[iVar9] = 0;
+    if (useSecondary) {
+      *programStatePtr = (char)programFlag;
+      ((unsigned char *)0x000010e9)[programEntry] = 0;
+      ((unsigned char *)0x000010ea)[programEntry] = 0;
 LAB_0004b42c:
-      FUN_00088190(glContext,*(undefined4 *)(((unsigned char *)0x000036c0) + iVar9));
+      FUN_00088190(glContext,*(undefined4 *)(((unsigned char *)0x000036c0) + programEntry));
       return;
     }
     glContextWord1e5c = *(int *)(glContext + 0x1e5c);
     ((unsigned char *)0x000010e9)[glContextWord1e5c] = 0;
     ((unsigned char *)0x000010ea)[glContextWord1e5c] = 0;
     (**(code **)(glContext + 0x294c))(glContext,glContextWord1e5c);
-    pcVar3 = *(code **)(((unsigned char *)0x00001330) + glContext);
+    dirtyCallback = *(code **)(((unsigned char *)0x00001330) + glContext);
     registerDirty = *(undefined4 *)(glContext + 0x1930);
   }
   else {
-    if (!bVar1) {
-      cVar4 = ((unsigned char *)0x000036c4)[iVar9];
+    if (!modeIsZero) {
+      needsUpdate = ((unsigned char *)0x000036c4)[programEntry];
 LAB_0004b2f8:
-      if (cVar4 == '\0') {
-        if (bVar2) {
-          FUN_00087e80(glContext,0,puVar5,puVar5 + 4);
+      if (needsUpdate == '\0') {
+        if (useSecondary) {
+          FUN_00087e80(glContext,0,programStatePtr,programStatePtr + 4);
         }
         else {
           FUN_000b6580(glContext,1);
         }
-        ((unsigned char *)0x000036c4)[iVar9] = 1;
+        ((unsigned char *)0x000036c4)[programEntry] = 1;
       }
     }
 LAB_0004b340:
-    *(int *)(((unsigned char *)0x000010e4) + iVar9) = param_2;
-    *(int *)(((unsigned char *)0x00001528) + iVar9) = param_2;
-    *(int *)(((unsigned char *)0x000012fc) + iVar9) = param_2;
-    if (param_2 == 2) {
-      iVar7 = iVar7 << 2;
-      uVar6 = 4;
+    *(int *)(((unsigned char *)0x000010e4) + programEntry) = mode;
+    *(int *)(((unsigned char *)0x00001528) + programEntry) = mode;
+    *(int *)(((unsigned char *)0x000012fc) + programEntry) = mode;
+    if (mode == 2) {
+      specialStream = specialStream << 2;
+      streamComponents = 4;
     }
     else {
-      iVar7 = iVar7 * 4;
-      uVar6 = (*(uint *)(((unsigned char *)0x000013e0) + iVar7 + iVar9) >> 6 & 0x3f) + 1 & 0x3f;
+      specialStream = specialStream * 4;
+      streamComponents = (*(uint *)(((unsigned char *)0x000013e0) + specialStream + programEntry) >> 6 & 0x3f) + 1 & 0x3f;
     }
-    *(uint *)(((unsigned char *)0x000013e0) + iVar7 + iVar9) =
-         uVar6 << 0xc | *(uint *)(((unsigned char *)0x000013e0) + iVar7 + iVar9) & 0xff000fff | 0xfc0000;
-    if (bVar2) {
-      **(undefined1 **)(((unsigned char *)0x000036c0) + iVar9) = (char)uVar8;
-      ((unsigned char *)0x000010e9)[iVar9] = 0;
-      ((unsigned char *)0x000010ea)[iVar9] = 0;
-      *(undefined4 *)(glContext + 0x1e68) = uVar8;
+    *(uint *)(((unsigned char *)0x000013e0) + specialStream + programEntry) =
+         streamComponents << 0xc | *(uint *)(((unsigned char *)0x000013e0) + specialStream + programEntry) & 0xff000fff | 0xfc0000;
+    if (useSecondary) {
+      **(undefined1 **)(((unsigned char *)0x000036c0) + programEntry) = (char)programFlag;
+      ((unsigned char *)0x000010e9)[programEntry] = 0;
+      ((unsigned char *)0x000010ea)[programEntry] = 0;
+      *(undefined4 *)(glContext + 0x1e68) = programFlag;
       goto LAB_0004b42c;
     }
     glContextWord1e5c = *(int *)(glContext + 0x1e5c);
@@ -8311,10 +8318,10 @@ LAB_0004b340:
     *(undefined4 *)(glContext + 0x1e68) = 0;
     (**(code **)(((unsigned char *)0x00001334) + glContext))(glContext,1);
     (**(code **)(glContext + 0x294c))(glContext,glContextWord1e5c);
-    pcVar3 = *(code **)(((unsigned char *)0x00001330) + glContext);
+    dirtyCallback = *(code **)(((unsigned char *)0x00001330) + glContext);
     registerDirty = *(undefined4 *)(glContext + 0x1930);
   }
-  (*pcVar3)(glContext,registerDirty);
+  (*dirtyCallback)(glContext,registerDirty);
   *(uint *)(glContext + 0x1930) = *(uint *)(glContext + 0x1930) & 0x3fefffff;
   return;
 }
@@ -8480,16 +8487,19 @@ int FUN_0004b710(glContext)
 int FUN_0004b7d0(glContext)
   int glContext;
 {
-  int iVar1;
-  int iVar2;
+  uint shaderCount;
+  int shaderOffset;
+  int shaderEntry;
+  int programEntries;
+  int entriesLeft;
   undefined4 allocation;
-  int iVar4;
-  uint uVar5;
+  int programTable;
+  uint programCount;
   uint loopIndex2;
   int loopIndex;
-  int iVar8;
+  int shaderList;
   
-  iVar8 = *(int *)(((unsigned char *)0x0000112c) + glContext);
+  shaderList = *(int *)(((unsigned char *)0x0000112c) + glContext);
   ((int (*)())FUN_0004b710)(glContext);
   *(undefined2 *)(glContext + 0x1e6c) = 1;
   allocation = _malloc(((unsigned char *)0x00003754U));
@@ -8499,48 +8509,48 @@ int FUN_0004b7d0(glContext)
   ((int (*)())FUN_0004ab60)(glContext);
   *(undefined2 *)(((unsigned char *)0x000015c8) + *(int *)(glContext + 0x1e60)) = 0xffff;
   FUN_000b5fb0(glContext);
-  iVar4 = *(int *)(((unsigned char *)0x00001154) + glContext);
-  iVar1 = *(int *)(iVar4 + 0x88);
-  if (iVar1 != 0) {
-    uVar5 = *(uint *)(iVar4 + 4);
+  programTable = *(int *)(((unsigned char *)0x00001154) + glContext);
+  programEntries = *(int *)(programTable + 0x88);
+  if (programEntries != 0) {
+    programCount = *(uint *)(programTable + 4);
     loopIndex = 0;
-    if (uVar5 != 0) {
+    if (programCount != 0) {
       do {
-        iVar1 = *(int *)(*(int *)(((unsigned char *)0x0000113c) + glContext) * 4 +
-                        *(int *)(loopIndex * 0x78 + iVar1 + 0x70));
-        if (iVar1 != 0) {
-          *(undefined1 *)(iVar1 + 0x119) = 1;
-          uVar5 = *(uint *)(iVar4 + 4);
+        programEntries = *(int *)(*(int *)(((unsigned char *)0x0000113c) + glContext) * 4 +
+                        *(int *)(loopIndex * 0x78 + programEntries + 0x70));
+        if (programEntries != 0) {
+          *(undefined1 *)(programEntries + 0x119) = 1;
+          programCount = *(uint *)(programTable + 4);
         }
-        iVar2 = uVar5 - loopIndex;
-        if ((uVar5 < loopIndex + 1U) || (uVar5 == 0)) {
-          iVar2 = 1;
+        entriesLeft = programCount - loopIndex;
+        if ((programCount < loopIndex + 1U) || (programCount == 0)) {
+          entriesLeft = 1;
         }
         do {
           loopIndex = loopIndex + 1;
-          iVar2 = iVar2 + -1;
-          if (iVar2 == 0) goto LAB_0004b8b8;
-          iVar1 = *(int *)(iVar4 + 0x88);
-        } while (iVar1 == 0);
+          entriesLeft = entriesLeft + -1;
+          if (entriesLeft == 0) goto LAB_0004b8b8;
+          programEntries = *(int *)(programTable + 0x88);
+        } while (programEntries == 0);
       } while( true );
     }
   }
 LAB_0004b8b8:
-  uVar5 = *(uint *)(iVar8 + 4);
-  if (uVar5 != 0) {
+  shaderCount = *(uint *)(shaderList + 4);
+  if (shaderCount != 0) {
     loopIndex2 = 0;
-    iVar1 = 0;
+    shaderOffset = 0;
     do {
-      iVar4 = iVar1 + *(int *)(iVar8 + 8);
-      if (((*(int *)(iVar4 + 4) == 0x8804) &&
-          (iVar4 = *(int *)(*(int *)(iVar4 + 0x14) + 0x70), iVar4 != 0)) &&
-         (iVar4 = *(int *)(*(int *)(((unsigned char *)0x00001130) + glContext) * 4 + iVar4), iVar4 != 0)) {
-        *(undefined1 *)(iVar4 + 0x119) = 1;
-        uVar5 = *(uint *)(iVar8 + 4);
+      shaderEntry = shaderOffset + *(int *)(shaderList + 8);
+      if (((*(int *)(shaderEntry + 4) == 0x8804) &&
+          (shaderEntry = *(int *)(*(int *)(shaderEntry + 0x14) + 0x70), shaderEntry != 0)) &&
+         (shaderEntry = *(int *)(*(int *)(((unsigned char *)0x00001130) + glContext) * 4 + shaderEntry), shaderEntry != 0)) {
+        *(undefined1 *)(shaderEntry + 0x119) = 1;
+        shaderCount = *(uint *)(shaderList + 4);
       }
       loopIndex2 = loopIndex2 + 1;
-      iVar1 = iVar1 + 0x18;
-    } while (loopIndex2 < uVar5);
+      shaderOffset = shaderOffset + 0x18;
+    } while (loopIndex2 < shaderCount);
   }
   return;
 }
