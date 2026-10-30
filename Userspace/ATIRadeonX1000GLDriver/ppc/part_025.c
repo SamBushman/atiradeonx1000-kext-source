@@ -982,19 +982,21 @@ int IRInst__computeSourceLaneMask(laneMask, inst, operandIndex, program, destSel
   int program;
   undefined4 destSelectWord;
 {
+  int opcodeId;
+  int registerClassIndex;
   int loopCounterB;
   int operandRecord;
   int loopCounter;
   unsigned int ghidra_home[8] = { laneMask, inst, operandIndex, program, destSelectWord, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
-  bool bVar1;
-  uint uVar2;
-  byte *pbVar3;
-  int iVar4;
-  undefined4 uVar5;
-  char *pcVar6;
+  bool notLastLane;
+  uint classComponentMask;
+  byte *maskCursor;
+  int sourceType;
+  undefined4 resultMode;
+  char *destMaskCursor;
   int operandRecordB;
-  undefined4 local_38;
-  undefined4 local_34 [7];
+  undefined4 operandSelectWord;
+  undefined4 operandSelectWordB [7];
   
   (*(unsigned int *)((unsigned char *)ghidra_home + 16)) = destSelectWord;
   (**(code **)(*inst + 0x14))(inst,inst,operandIndex,program,destSelectWord);
@@ -1003,17 +1005,17 @@ int IRInst__computeSourceLaneMask(laneMask, inst, operandIndex, program, destSel
   laneMask[2] = 0;
   laneMask[3] = 0;
   if (0 < operandIndex) {
-    iVar4 = IRInst__getOperandSource(inst,operandIndex);
-    if (iVar4 == 0) {
-      iVar4 = *(int *)(inst[operandIndex * 6 + 0x23] + 4);
+    sourceType = IRInst__getOperandSource(inst,operandIndex);
+    if (sourceType == 0) {
+      sourceType = *(int *)(inst[operandIndex * 6 + 0x23] + 4);
     }
     else {
-      iVar4 = *(int *)(iVar4 + 0x98);
+      sourceType = *(int *)(sourceType + 0x98);
     }
-    if ((iVar4 == 0x3b) || (iVar4 == 0x42)) goto switchD_000f3cf4_caseD_b;
+    if ((sourceType == 0x3b) || (sourceType == 0x42)) goto switchD_000f3cf4_caseD_b;
   }
-  uVar5 = OpcodeInfo__getResultMode(inst[0x22],inst,program);
-  switch(uVar5) {
+  resultMode = OpcodeInfo__getResultMode(inst[0x22],inst,program);
+  switch(resultMode) {
   case 0:
     break;
   case 1:
@@ -1048,17 +1050,17 @@ LAB_000f3fe8:
   case 6:
     if (operandIndex == 1) {
       loopCounter = 0;
-      pbVar3 = laneMask;
+      maskCursor = laneMask;
       do {
         operandRecordB = IRInst__getOperandRecord(inst,0);
-        local_38 = *(undefined4 *)(operandRecordB + 0x10);
-        if (*(char *)((int)local_34 + loopCounter + -4) != '\x01') {
-          *pbVar3 = *pbVar3 | 1;
+        operandSelectWord = *(undefined4 *)(operandRecordB + 0x10);
+        if (*(char *)((int)operandSelectWordB + loopCounter + -4) != '\x01') {
+          *maskCursor = *maskCursor | 1;
         }
-        bVar1 = loopCounter != 3;
-        pbVar3 = pbVar3 + 1;
+        notLastLane = loopCounter != 3;
+        maskCursor = maskCursor + 1;
         loopCounter = loopCounter + 1;
-      } while (bVar1);
+      } while (notLastLane);
       return laneMask;
     }
     goto switchD_000f3cf4_caseD_5;
@@ -1074,28 +1076,28 @@ switchD_000f3cf4_caseD_4:
     laneMask[1] = 1;
     return laneMask;
   case 9:
-    iVar4 = 0;
+    registerClassIndex = 0;
     if (-1 < inst[0x4d]) {
-      iVar4 = *(int *)(inst[0x4d] * 0xc + *(int *)(program + 0x78) + 4);
+      registerClassIndex = *(int *)(inst[0x4d] * 0xc + *(int *)(program + 0x78) + 4);
     }
-    uVar2 = (DAT_001dc58c)[iVar4 * 2];
-    if ((uVar2 & 1) != 0) {
+    classComponentMask = (DAT_001dc58c)[registerClassIndex * 2];
+    if ((classComponentMask & 1) != 0) {
       *laneMask = 1;
     }
-    if ((uVar2 & 2) != 0) {
+    if ((classComponentMask & 2) != 0) {
       laneMask[1] = 1;
     }
-    if ((uVar2 & 4) != 0) {
+    if ((classComponentMask & 4) != 0) {
       laneMask[2] = 1;
     }
-    if ((uVar2 & 8) != 0) {
+    if ((classComponentMask & 8) != 0) {
       laneMask[3] = 1;
     }
-    iVar4 = *(int *)(inst[0x22] + 8);
-    if ((((iVar4 == 0x101) || (iVar4 == 0x100)) || (iVar4 == 0x102)) || (iVar4 == 0x6e))
+    opcodeId = *(int *)(inst[0x22] + 8);
+    if ((((opcodeId == 0x101) || (opcodeId == 0x100)) || (opcodeId == 0x102)) || (opcodeId == 0x6e))
     goto LAB_000f3ff4;
-    if (((iVar4 == 0x75) || (iVar4 == 0x76)) || (iVar4 == 0xae)) goto switchD_000f3cf4_caseD_2;
-    if (((iVar4 != 0x9e) && (iVar4 != 0x9f)) && ((iVar4 != 0xa0 && (iVar4 != 0xa1)))) {
+    if (((opcodeId == 0x75) || (opcodeId == 0x76)) || (opcodeId == 0xae)) goto switchD_000f3cf4_caseD_2;
+    if (((opcodeId != 0x9e) && (opcodeId != 0x9f)) && ((opcodeId != 0xa0 && (opcodeId != 0xa1)))) {
       return laneMask;
     }
     break;
@@ -1104,17 +1106,17 @@ switchD_000f3cf4_caseD_4:
   case 0xc:
     operandRecord = IRInst__getOperandRecord(inst,operandIndex);
     loopCounterB = 0;
-    pcVar6 = &(*(unsigned int *)((unsigned char *)ghidra_home + 16));
-    local_34[0] = *(undefined4 *)(operandRecord + 0x10);
+    destMaskCursor = &(*(unsigned int *)((unsigned char *)ghidra_home + 16));
+    operandSelectWordB[0] = *(undefined4 *)(operandRecord + 0x10);
     loopCounter = 4;
-    pbVar3 = laneMask;
+    maskCursor = laneMask;
     do {
-      if ((*pcVar6 == '\0') && (*(char *)((int)local_34 + loopCounterB) != '\x04')) {
-        *pbVar3 = *pbVar3 | 1;
+      if ((*destMaskCursor == '\0') && (*(char *)((int)operandSelectWordB + loopCounterB) != '\x04')) {
+        *maskCursor = *maskCursor | 1;
       }
       loopCounterB = loopCounterB + 1;
-      pcVar6 = pcVar6 + 1;
-      pbVar3 = pbVar3 + 1;
+      destMaskCursor = destMaskCursor + 1;
+      maskCursor = maskCursor + 1;
       loopCounter = loopCounter + -1;
     } while (loopCounter != 0);
     return laneMask;

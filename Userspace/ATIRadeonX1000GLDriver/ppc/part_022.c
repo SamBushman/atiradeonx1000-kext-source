@@ -2534,32 +2534,32 @@ int LoopHeader__verify(this, param_2, param_3, param_4, param_5, param_6, param_
   undefined4 param_6;
   uint param_7;
 {
-  int *piVar1;
-  int *piVar2;
+  int *currentInst;
+  int *nextInst;
   undefined4 r4AfterCall;
-  undefined8 uVar3;
+  undefined8 queryResult;
   
-  piVar1 = *(int **)(this + 0x98);
-  for (piVar2 = (int *)(*(int **)(this + 0x98))[2]; piVar2 != (int *)0x0;
-      piVar2 = (int *)piVar2[2]) {
-    param_7 = piVar1[5] & 1;
+  currentInst = *(int **)(this + 0x98);
+  for (nextInst = (int *)(*(int **)(this + 0x98))[2]; nextInst != (int *)0x0;
+      nextInst = (int *)nextInst[2]) {
+    param_7 = currentInst[5] & 1;
     if (param_7 != 0) {
-      uVar3 = (**(code **)(*piVar1 + 0x34))(piVar1);
-      param_2 = (undefined4)uVar3;
-      if (((((int)((ulonglong)uVar3 >> 0x20) == 0) &&
-           (uVar3 = (**(code **)(*piVar1 + 0x38))(piVar1), param_2 = (undefined4)uVar3,
-           (int)((ulonglong)uVar3 >> 0x20) == 0)) && (*(int *)(piVar1[0x22] + 8) != 0x8e)) &&
-         (uVar3 = (**(code **)(*piVar1 + 0x78))(piVar1), param_2 = (undefined4)uVar3,
-         (int)((ulonglong)uVar3 >> 0x20) == 0)) {
-        (**(code **)(*piVar1 + 0x3c))(piVar1);
-        piVar2 = (int *)piVar1[2];
+      queryResult = (**(code **)(*currentInst + 0x34))(currentInst);
+      param_2 = (undefined4)queryResult;
+      if (((((int)((ulonglong)queryResult >> 0x20) == 0) &&
+           (queryResult = (**(code **)(*currentInst + 0x38))(currentInst), param_2 = (undefined4)queryResult,
+           (int)((ulonglong)queryResult >> 0x20) == 0)) && (*(int *)(currentInst[0x22] + 8) != 0x8e)) &&
+         (queryResult = (**(code **)(*currentInst + 0x78))(currentInst), param_2 = (undefined4)queryResult,
+         (int)((ulonglong)queryResult >> 0x20) == 0)) {
+        (**(code **)(*currentInst + 0x3c))(currentInst);
+        nextInst = (int *)currentInst[2];
         param_2 = r4AfterCall;
       }
       else {
-        piVar2 = (int *)piVar1[2];
+        nextInst = (int *)currentInst[2];
       }
     }
-    piVar1 = piVar2;
+    currentInst = nextInst;
   }
   return ((int (*)())Block__verify)(this,param_2,param_3,param_4,param_5,param_6,param_7);
 }
@@ -3055,40 +3055,43 @@ int Block__bypass(block, predBlock, succBlock)
   int *predBlock;
   int *succBlock;
 {
+  uint *succPredecessors;
+  int blockSuccessors;
+  int blockPredecessors;
   int loopCounterB;
   uint loopIndex2;
-  int *piVar1;
-  undefined4 *puVar2;
+  int *listEntry;
+  undefined4 *vectorSlot;
   int loopCounter;
-  uint uVar4;
-  int iVar5;
+  uint vectorSize;
+  int succVtable0x20Result;
   int loopCounterC;
   uint loopIndex;
-  uint *puVar8;
+  uint *predSuccessors;
   
   loopIndex = 0;
   (**(code **)(*block + 0x20))(block,predBlock,succBlock);
   (**(code **)(*block + 0x1c))(block);
   loopCounterB = 0;
   for (loopIndex2 = 1; loopIndex2 <= *(uint *)(predBlock[0x34] + 4); loopIndex2 = loopIndex2 + 1) {
-    piVar1 = *(int **)(loopCounterB + *(int *)(predBlock[0x34] + 8));
-    if (piVar1 != (int *)0x0) {
-      if (block == piVar1) {
-        iVar5 = (**(code **)(*succBlock + 0x20))(succBlock);
-        if ((iVar5 == 0) || ((*(uint *)(block[0x2b] + 0x30) & 2) != 0)) {
-          puVar8 = (uint *)predBlock[0x34];
-          if (loopIndex < *puVar8) {
-            uVar4 = puVar8[1];
-            if (uVar4 <= loopIndex) {
-              _memset(uVar4 * 4 + puVar8[2],0,(loopIndex - uVar4) * 4 + 4);
-              puVar8[1] = loopIndex + 1;
+    listEntry = *(int **)(loopCounterB + *(int *)(predBlock[0x34] + 8));
+    if (listEntry != (int *)0x0) {
+      if (block == listEntry) {
+        succVtable0x20Result = (**(code **)(*succBlock + 0x20))(succBlock);
+        if ((succVtable0x20Result == 0) || ((*(uint *)(block[0x2b] + 0x30) & 2) != 0)) {
+          predSuccessors = (uint *)predBlock[0x34];
+          if (loopIndex < *predSuccessors) {
+            vectorSize = predSuccessors[1];
+            if (vectorSize <= loopIndex) {
+              _memset(vectorSize * 4 + predSuccessors[2],0,(loopIndex - vectorSize) * 4 + 4);
+              predSuccessors[1] = loopIndex + 1;
             }
-            puVar2 = (undefined4 *)(loopIndex * 4 + puVar8[2]);
+            vectorSlot = (undefined4 *)(loopIndex * 4 + predSuccessors[2]);
           }
           else {
-            puVar2 = (undefined4 *)Vector__elementRefGrow(puVar8,loopIndex);
+            vectorSlot = (undefined4 *)Vector__elementRefGrow(predSuccessors,loopIndex);
           }
-          *puVar2 = succBlock;
+          *vectorSlot = succBlock;
         }
         else {
           Vector__removeAt(predBlock[0x34],loopIndex);
@@ -3099,58 +3102,58 @@ int Block__bypass(block, predBlock, succBlock)
     }
     loopCounterB = loopCounterB + 4;
   }
-  iVar5 = block[0x35];
+  blockPredecessors = block[0x35];
   loopCounter = 0;
   loopCounterC = 0;
-  for (loopIndex2 = 1; loopIndex2 <= *(uint *)(iVar5 + 4); loopIndex2 = loopIndex2 + 1) {
-    piVar1 = *(int **)(loopCounterC + *(int *)(iVar5 + 8));
-    if (piVar1 != (int *)0x0) {
-      if (predBlock == piVar1) {
-        Vector__removeAt(iVar5,loopCounter);
+  for (loopIndex2 = 1; loopIndex2 <= *(uint *)(blockPredecessors + 4); loopIndex2 = loopIndex2 + 1) {
+    listEntry = *(int **)(loopCounterC + *(int *)(blockPredecessors + 8));
+    if (listEntry != (int *)0x0) {
+      if (predBlock == listEntry) {
+        Vector__removeAt(blockPredecessors,loopCounter);
         break;
       }
       loopCounter = loopCounter + 1;
     }
     loopCounterC = loopCounterC + 4;
   }
-  puVar8 = (uint *)succBlock[0x35];
+  succPredecessors = (uint *)succBlock[0x35];
   loopIndex = 0;
   loopCounterB = 0;
-  for (loopIndex2 = 1; loopIndex2 <= puVar8[1]; loopIndex2 = loopIndex2 + 1) {
-    if (*(int **)(puVar8[2] + loopCounterB) != (int *)0x0) {
-      if (block == *(int **)(puVar8[2] + loopCounterB)) {
-        if (loopIndex < *puVar8) {
-          uVar4 = puVar8[1];
-          if (uVar4 <= loopIndex) {
-            _memset(uVar4 * 4 + puVar8[2],0,(loopIndex - uVar4) * 4 + 4);
-            puVar8[1] = loopIndex + 1;
+  for (loopIndex2 = 1; loopIndex2 <= succPredecessors[1]; loopIndex2 = loopIndex2 + 1) {
+    if (*(int **)(succPredecessors[2] + loopCounterB) != (int *)0x0) {
+      if (block == *(int **)(succPredecessors[2] + loopCounterB)) {
+        if (loopIndex < *succPredecessors) {
+          vectorSize = succPredecessors[1];
+          if (vectorSize <= loopIndex) {
+            _memset(vectorSize * 4 + succPredecessors[2],0,(loopIndex - vectorSize) * 4 + 4);
+            succPredecessors[1] = loopIndex + 1;
           }
-          puVar2 = (undefined4 *)(loopIndex * 4 + puVar8[2]);
+          vectorSlot = (undefined4 *)(loopIndex * 4 + succPredecessors[2]);
         }
         else {
-          puVar2 = (undefined4 *)Vector__elementRefGrow(puVar8,loopIndex);
+          vectorSlot = (undefined4 *)Vector__elementRefGrow(succPredecessors,loopIndex);
         }
-        *puVar2 = predBlock;
+        *vectorSlot = predBlock;
         break;
       }
       loopIndex = loopIndex + 1;
     }
     loopCounterB = loopCounterB + 4;
   }
-  iVar5 = block[0x34];
+  blockSuccessors = block[0x34];
   loopCounter = 0;
   loopIndex2 = 1;
   loopCounterC = 0;
   do {
-    if (*(uint *)(iVar5 + 4) < loopIndex2) {
+    if (*(uint *)(blockSuccessors + 4) < loopIndex2) {
 LAB_000e9610:
       if ((*(uint *)(block[0x2b] + 0x30) & 2) == 0) {
-        iVar5 = (**(code **)(*succBlock + 0x20))(succBlock);
-        if ((iVar5 == 0) || (iVar5 = ((int (*)())Block__successorCount)(predBlock), iVar5 != 0)) {
+        succVtable0x20Result = (**(code **)(*succBlock + 0x20))(succBlock);
+        if ((succVtable0x20Result == 0) || (succVtable0x20Result = ((int (*)())Block__successorCount)(predBlock), succVtable0x20Result != 0)) {
           (**(code **)(*predBlock + 0x48))(predBlock);
         }
-        iVar5 = (**(code **)(*succBlock + 0x20))(succBlock);
-        if ((iVar5 != 0) && (iVar5 = ((int (*)())Block__predecessorCount)(succBlock), iVar5 == 0)) {
+        succVtable0x20Result = (**(code **)(*succBlock + 0x20))(succBlock);
+        if ((succVtable0x20Result != 0) && (succVtable0x20Result = ((int (*)())Block__predecessorCount)(succBlock), succVtable0x20Result == 0)) {
           return 1;
         }
       }
@@ -3160,10 +3163,10 @@ LAB_000e9610:
       (**(code **)(*succBlock + 0x48))(succBlock);
       return 1;
     }
-    piVar1 = *(int **)(*(int *)(iVar5 + 8) + loopCounterC);
-    if (piVar1 != (int *)0x0) {
-      if (succBlock == piVar1) {
-        Vector__removeAt(iVar5,loopCounter);
+    listEntry = *(int **)(*(int *)(blockSuccessors + 8) + loopCounterC);
+    if (listEntry != (int *)0x0) {
+      if (succBlock == listEntry) {
+        Vector__removeAt(blockSuccessors,loopCounter);
         goto LAB_000e9610;
       }
       loopCounter = loopCounter + 1;

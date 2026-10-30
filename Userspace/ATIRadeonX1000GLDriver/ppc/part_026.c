@@ -106,23 +106,27 @@ int ConstRecord__insertSwizzleVariants(constTables, variantStart, constRecord)
 }
 
 /* Compiler__getOrCreateLoadConstN @ 0xf4fdc (352 bytes) */
-int Compiler__getOrCreateLoadConstN(compiler, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int Compiler__getOrCreateLoadConstN(compiler, constCount, firstConstKind, firstConstValue, firstConstWord2, firstConstWord3, firstConstWord4, firstConstWord5)
   int *compiler;
-  int param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+  int constCount;
+  undefined4 firstConstKind;
+  undefined4 firstConstValue;
+  undefined4 firstConstWord2;
+  undefined4 firstConstWord3;
+  undefined4 firstConstWord4;
+  undefined4 firstConstWord5;
 {
+  undefined4 *instRecordCursor;
+  undefined4 recordWord;
+  undefined4 constantSlot;
+  undefined4 newInstId;
   undefined4 arena;
-  undefined4 uVar1;
-  int iVar2;
-  undefined4 *puVar3;
+  undefined4 recordWord0;
+  int recordDest;
+  undefined4 *cachedInst;
   undefined4 *allocation;
-  int *piVar5;
-  undefined4 *puVar6;
+  int *blockList;
+  undefined4 *keyRecordCursor;
   int loopCounter;
   uint loopIndex;
   int loopCounterB;
@@ -133,31 +137,31 @@ int Compiler__getOrCreateLoadConstN(compiler, param_2, param_3, param_4, param_5
   undefined4 uStack00000030;
   undefined4 uStack00000034;
   /* issue #64 live-repro: same defect as Compiler__getOrCreateConstVectorN in this file (fixed earlier this session) -
-   * called below as aiStack_9c[param_2] with param_2 observed as 4, one past this array's declared
+   * called below as aiStack_9c[constCount] with constCount observed as 4, one past this array's declared
    * 4 elements; local_8c (assigned right after, from compiler[5]) sits exactly at the missing 5th
    * index by its own hex offset (0x9c-0x8c=0x10). Extended to 5 elements; local_8c aliased to
    * index 4. */
   int aiStack_9c [5];
 #define local_8c aiStack_9c[4]
-  undefined4 local_88 [29];
+  undefined4 constRecords [29];
   
   aiStack_9c[1] = compiler[2];
   aiStack_9c[2] = compiler[3];
   loopCounterB = 4;
   loopCounter = 0;
   loopIndex = 0;
-  local_88[0] = param_3;
-  local_88[1] = param_4;
+  constRecords[0] = firstConstKind;
+  constRecords[1] = firstConstValue;
   aiStack_9c[3] = compiler[4];
   local_8c = compiler[5];
-  puVar6 = local_88;
+  keyRecordCursor = constRecords;
   do {
-    if ((int)loopIndex < param_2) {
+    if ((int)loopIndex < constCount) {
       *(byte *)(compiler[10] + 0x15c) = (byte)(1 << (loopIndex & 0x3f)) | *(byte *)(compiler[10] + 0x15c);
-      uVar1 = *(undefined4 *)((int)puVar6 + loopCounter);
-      iVar2 = loopCounter + 0x10 + compiler[10];
-      *(undefined4 *)(iVar2 + 0x10) = *(undefined4 *)((int)local_88 + loopCounter + 4);
-      *(undefined4 *)(iVar2 + 0xc) = uVar1;
+      recordWord0 = *(undefined4 *)((int)keyRecordCursor + loopCounter);
+      recordDest = loopCounter + 0x10 + compiler[10];
+      *(undefined4 *)(recordDest + 0x10) = *(undefined4 *)((int)constRecords + loopCounter + 4);
+      *(undefined4 *)(recordDest + 0xc) = recordWord0;
     }
     else {
       *(byte *)(compiler[10] + 0x15c) = *(byte *)(compiler[10] + 0x15c) & ~(byte)(1 << (loopIndex & 0x3f))
@@ -167,53 +171,53 @@ int Compiler__getOrCreateLoadConstN(compiler, param_2, param_3, param_4, param_5
     loopCounter = loopCounter + 0x18;
     loopCounterB = loopCounterB + -1;
   } while (loopCounterB != 0);
-  uStack00000020 = param_3;
-  uStack00000024 = param_4;
-  uStack00000028 = param_5;
-  uStack0000002c = param_6;
-  uStack00000030 = param_7;
-  uStack00000034 = param_8;
-  puVar3 = (undefined4 *)HashTable__find(aiStack_9c[param_2],compiler[10]);
-  if (puVar3 == (undefined4 *)0x0) {
+  uStack00000020 = firstConstKind;
+  uStack00000024 = firstConstValue;
+  uStack00000028 = firstConstWord2;
+  uStack0000002c = firstConstWord3;
+  uStack00000030 = firstConstWord4;
+  uStack00000034 = firstConstWord5;
+  cachedInst = (undefined4 *)HashTable__find(aiStack_9c[constCount],compiler[10]);
+  if (cachedInst == (undefined4 *)0x0) {
     arena = *(undefined4 *)(*compiler + 0x374);
     allocation = (undefined4 *)Arena__alloc(arena,0x168);
     *allocation = arena;
-    puVar3 = allocation + 1;
-    IRLoadConst__ctor_109938(puVar3,*compiler);
+    cachedInst = allocation + 1;
+    IRLoadConst__ctor_109938(cachedInst,*compiler);
     if ((*(uint *)(*(int *)(*compiler + 0x6c4) + 0x30) & 0x10000) == 0) {
-      uVar1 = FUN_000f4a5c(compiler);
-      allocation[0x26] = uVar1;
+      newInstId = FUN_000f4a5c(compiler);
+      allocation[0x26] = newInstId;
       allocation[0x27] = 0xc;
     }
     else {
-      uVar1 = Emitter__allocateConstantSlot(compiler,local_88[0],0,puVar6,loopCounter,loopIndex,*compiler);
-      allocation[0x26] = uVar1;
+      constantSlot = Emitter__allocateConstantSlot(compiler,constRecords[0],0,keyRecordCursor,loopCounter,loopIndex,*compiler);
+      allocation[0x26] = constantSlot;
       allocation[0x27] = 0xc;
     }
     loopIndex = 0;
     loopCounterB = 4;
-    puVar6 = allocation + 5;
+    instRecordCursor = allocation + 5;
     loopCounter = 0;
     do {
-      if ((int)loopIndex < param_2) {
+      if ((int)loopIndex < constCount) {
         *(byte *)(allocation + 0x58) = (byte)(1 << (loopIndex & 0x3f)) | *(byte *)(allocation + 0x58);
-        uVar1 = *(undefined4 *)((int)local_88 + loopCounter);
-        puVar6[4] = *(undefined4 *)((int)local_88 + loopCounter + 4);
-        puVar6[3] = uVar1;
+        recordWord = *(undefined4 *)((int)constRecords + loopCounter);
+        instRecordCursor[4] = *(undefined4 *)((int)constRecords + loopCounter + 4);
+        instRecordCursor[3] = recordWord;
       }
       else {
         *(byte *)(allocation + 0x58) = *(byte *)(allocation + 0x58) & ~(byte)(1 << (loopIndex & 0x3f));
       }
       loopIndex = loopIndex + 1;
       loopCounter = loopCounter + 0x18;
-      puVar6 = puVar6 + 6;
+      instRecordCursor = instRecordCursor + 6;
       loopCounterB = loopCounterB + -1;
     } while (loopCounterB != 0);
-    piVar5 = *(int **)(*(int *)(*compiler + 0x6c4) + 0x3a0);
-    (**(code **)(*piVar5 + 0xc))(piVar5,puVar3);
-    ((int (*)())ConstRecord__insertSwizzleVariants)(compiler,param_2,puVar3);
+    blockList = *(int **)(*(int *)(*compiler + 0x6c4) + 0x3a0);
+    (**(code **)(*blockList + 0xc))(blockList,cachedInst);
+    ((int (*)())ConstRecord__insertSwizzleVariants)(compiler,constCount,cachedInst);
   }
-  return puVar3;
+  return cachedInst;
 }
 #undef local_8c
 
@@ -339,88 +343,90 @@ int RegisterMap__findConstVector(registerMap, values, selectBytes, unusedArg)
   char *selectBytes;
   undefined4 unusedArg;
 {
+  bool notLastLane;
+  uint selectedComponent;
   uint loopCounterC;
   int loopCounter;
-  bool bVar1;
-  float fVar2;
-  int iVar3;
-  uint uVar4;
-  int *piVar5;
-  int iVar6;
-  char *pcVar7;
+  bool notLastWord;
+  float wantedValue;
+  int recordCursor;
+  uint vectorSize;
+  int *vectorSlot;
+  int canEncode;
+  char *selectByteCursor;
   uint loopIndex;
-  uint *puVar9;
-  int iVar10;
+  uint *instVector;
+  int candidateInst;
   int loopCounterB;
-  undefined4 local_38 [8];
+  undefined4 selectBytesCopy [8];
   
   if (registerMap[7] != 0) {
     loopIndex = 0;
     do {
-      puVar9 = (uint *)registerMap[8];
-      if (loopIndex < *puVar9) {
-        uVar4 = puVar9[1];
-        if (uVar4 <= loopIndex) {
-          _memset(uVar4 * 4 + puVar9[2],0,(loopIndex - uVar4) * 4 + 4);
-          puVar9[1] = loopIndex + 1;
+      instVector = (uint *)registerMap[8];
+      if (loopIndex < *instVector) {
+        vectorSize = instVector[1];
+        if (vectorSize <= loopIndex) {
+          _memset(vectorSize * 4 + instVector[2],0,(loopIndex - vectorSize) * 4 + 4);
+          instVector[1] = loopIndex + 1;
         }
-        piVar5 = (int *)(loopIndex * 4 + puVar9[2]);
+        vectorSlot = (int *)(loopIndex * 4 + instVector[2]);
       }
       else {
-        piVar5 = (int *)Vector__elementRefGrow(puVar9,loopIndex);
+        vectorSlot = (int *)Vector__elementRefGrow(instVector,loopIndex);
       }
-      iVar10 = *piVar5;
+      candidateInst = *vectorSlot;
       loopCounter = 0;
-      pcVar7 = selectBytes;
+      selectByteCursor = selectBytes;
       do {
-        if (*pcVar7 != '\x04') {
+        if (*selectByteCursor != '\x04') {
           loopCounterC = 0;
           loopCounterB = 4;
-          iVar3 = iVar10;
-          while (((((int)*(char *)(iVar10 + 0x15c) >> (loopCounterC & 0x3f) & 1U) == 0 ||
-                  (*(int *)(iVar3 + 0x1c) != 2)) ||
-                 (*(float *)(iVar3 + 0x20) != *(float *)(values + loopCounter)))) {
+          recordCursor = candidateInst;
+          while (((((int)*(char *)(candidateInst + 0x15c) >> (loopCounterC & 0x3f) & 1U) == 0 ||
+                  (*(int *)(recordCursor + 0x1c) != 2)) ||
+                 (*(float *)(recordCursor + 0x20) != *(float *)(values + loopCounter)))) {
             loopCounterC = loopCounterC + 1;
-            iVar3 = iVar3 + 0x18;
+            recordCursor = recordCursor + 0x18;
             loopCounterB = loopCounterB + -1;
             if (loopCounterB == 0) goto LAB_000f59bc;
           }
         }
-        bVar1 = loopCounter != 0xc;
-        pcVar7 = pcVar7 + 1;
+        notLastWord = loopCounter != 0xc;
+        selectByteCursor = selectByteCursor + 1;
         loopCounter = loopCounter + 4;
-      } while (bVar1);
+      } while (notLastWord);
       loopCounter = 0;
-      local_38[0] = *(undefined4 *)selectBytes;
-      pcVar7 = selectBytes;
+      selectBytesCopy[0] = *(undefined4 *)selectBytes;
+      selectByteCursor = selectBytes;
       do {
-        uVar4 = (uint)*(byte *)((int)local_38 + loopCounter);
-        if (((uVar4 != 4) && (((int)*(char *)(iVar10 + 0x15c) >> (uVar4 & 0x3f) & 1U) != 0)) &&
-           (fVar2 = *(float *)(values + loopCounter * 4),
-           *(float *)(uVar4 * 0x18 + iVar10 + 0x20) != fVar2)) {
+        selectedComponent = (uint)*(byte *)((int)selectBytesCopy + loopCounter);
+        if (((selectedComponent != 4) && (((int)*(char *)(candidateInst + 0x15c) >> (selectedComponent & 0x3f) & 1U) != 0)) &&
+           (wantedValue = *(float *)(values + loopCounter * 4),
+           *(float *)(selectedComponent * 0x18 + candidateInst + 0x20) != wantedValue)) {
           loopCounterB = 4;
           loopCounterC = 0;
-          iVar3 = iVar10;
+          recordCursor = candidateInst;
           do {
-            if (((((int)*(char *)(iVar10 + 0x15c) >> (loopCounterC & 0x3f) & 1U) != 0) &&
-                (*(int *)(iVar3 + 0x1c) == 2)) && (*(float *)(iVar3 + 0x20) == fVar2)) {
-              *pcVar7 = (char)loopCounterC;
+            if (((((int)*(char *)(candidateInst + 0x15c) >> (loopCounterC & 0x3f) & 1U) != 0) &&
+                (*(int *)(recordCursor + 0x1c) == 2)) && (*(float *)(recordCursor + 0x20) == wantedValue)) {
+              *selectByteCursor = (char)loopCounterC;
               break;
             }
             loopCounterC = loopCounterC + 1;
-            iVar3 = iVar3 + 0x18;
+            recordCursor = recordCursor + 0x18;
             loopCounterB = loopCounterB + -1;
           } while (loopCounterB != 0);
         }
-        bVar1 = loopCounter != 3;
-        pcVar7 = pcVar7 + 1;
+        notLastLane = loopCounter != 3;
+        selectByteCursor = selectByteCursor + 1;
         loopCounter = loopCounter + 1;
-      } while (bVar1);
-      iVar6 = (**(code **)(**(int **)(*registerMap + 0x30c) + 0x100))
+      } while (notLastLane);
+      canEncode = (**(code **)(**(int **)(*registerMap + 0x30c) + 0x100))
                         (*(int **)(*registerMap + 0x30c),selectBytes);
-      if (iVar6 != 0) {
-        *(undefined4 *)(iVar10 + 0x9c) = DAT_001aa860;
-        return iVar10;
+      if (canEncode != 0) {
+        *(undefined4 *)(candidateInst + 0x9c) = DAT_001aa860;
+        return candidateInst;
       }
 LAB_000f59bc:
       loopIndex = loopIndex + 1;
@@ -1220,6 +1226,10 @@ int IRInst__setConstantOperand(inst, program, operandIndex, constOperand0Kind, c
   int constOperand3Kind;
   undefined4 constOperand3Value;
 {
+  int compareCount;
+  int **sortCursor;
+  int **operandCursor;
+  int rankFillCount;
   int operandRecordB;
   int loopCounterD;
   int loopCounterC;
@@ -1234,26 +1244,26 @@ int IRInst__setConstantOperand(inst, program, operandIndex, constOperand0Kind, c
   bool operandLess;
   undefined4 constantHandle;
   unsigned int ghidra_home[8] = { inst, program, operandIndex, constOperand0Kind, constOperand0Value, constOperand0Word2, constOperand0Word3, constOperand0Word4 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
-  undefined1 uVar1;
-  undefined1 uVar2;
-  uint uVar3;
-  int iVar4;
-  int **ppiVar5;
+  undefined1 swapByteNext;
+  undefined1 swapByteCurrent;
+  uint laneByte;
+  int lanesLeft;
+  int **fillCursor;
   int loopCounterB;
-  int iVar7;
+  int sortPassIndex;
   undefined4 loadConstSource;
-  int *piVar9;
+  int *candidateOperand;
   uint *operandB;
-  int iVar11;
+  int previousLane;
   uint *operandA;
   undefined4 compiler;
   bool notLastWord;
-  int iVar15;
-  int local_288;
-  undefined1 auStack_284 [4];
-  undefined4 local_280;
-  undefined4 local_27c;
-  undefined4 local_278;
+  int laneIndex;
+  int existingSelect;
+  undefined1 uniqueRank [4];
+  undefined4 finalSelect;
+  undefined4 laneUniqueIndex;
+  undefined4 sortOrder;
   int *local_274;
   int *operandPtrTable [11];
   undefined4 constVec2Op0Kind;
@@ -1386,10 +1396,10 @@ int IRInst__setConstantOperand(inst, program, operandIndex, constOperand0Kind, c
   (*(unsigned int *)((unsigned char *)ghidra_home + 28)) = constOperand0Word4;
   if ((((constOperand0Kind == 2) && (constOperand1Kind == 2)) && (constOperand2Kind == 2)) && (constOperand3Kind == 2)) {
     loopCounterD = 4;
-    ppiVar5 = operandPtrTable + 7;
+    fillCursor = operandPtrTable + 7;
     do {
-      *ppiVar5 = (int *)0x7ffffffe;
-      ppiVar5 = ppiVar5 + 1;
+      *fillCursor = (int *)0x7ffffffe;
+      fillCursor = fillCursor + 1;
       loopCounterD = loopCounterD + -1;
     } while (loopCounterD != 0);
     operandPtrTable[8] = (int *)constOperand1Value;
@@ -1405,66 +1415,66 @@ int IRInst__setConstantOperand(inst, program, operandIndex, constOperand0Kind, c
         IRInst__setOperandSource(inst,(*(unsigned int *)((unsigned char *)ghidra_home + 8)),existingConstInst,*(uint *)(program + 0x30) >> 7 & 1,compiler);
       }
       existingInstRecord = IRInst__getOperandRecord(existingConstInst,0);
-      local_288 = *(int *)(existingInstRecord + 0x10);
-      if (local_288 != DAT_001aa860) {
+      existingSelect = *(int *)(existingInstRecord + 0x10);
+      if (existingSelect != DAT_001aa860) {
         loopCounterB = 0;
         do {
           operandRecord = IRInst__getOperandRecord(inst,(*(unsigned int *)((unsigned char *)ghidra_home + 8)));
           if (*(byte *)(loopCounterB + operandRecord + 0x10) < 4) {
             operandRecord = IRInst__getOperandRecord(inst,(*(unsigned int *)((unsigned char *)ghidra_home + 8)));
-            uVar3 = (uint)*(byte *)(loopCounterB + operandRecord + 0x10);
-            auStack_284[uVar3 - 4] = 0;
-            *(byte *)(existingConstInst + uVar3 + 0xc) =
-                 (byte)(1 << (uVar3 & 0x3f)) | *(byte *)(existingConstInst + uVar3 + 0xc);
+            laneByte = (uint)*(byte *)(loopCounterB + operandRecord + 0x10);
+            uniqueRank[laneByte - 4] = 0;
+            *(byte *)(existingConstInst + laneByte + 0xc) =
+                 (byte)(1 << (laneByte & 0x3f)) | *(byte *)(existingConstInst + laneByte + 0xc);
           }
           notLastWord = loopCounterB != 3;
           loopCounterB = loopCounterB + 1;
         } while (notLastWord);
-        *(int *)(existingConstInst + 0x9c) = local_288;
+        *(int *)(existingConstInst + 0x9c) = existingSelect;
       }
       return;
     }
   }
-  piVar9 = &(*(unsigned int *)((unsigned char *)ghidra_home + 12));
-  local_27c = DAT_001aa868;
+  candidateOperand = &(*(unsigned int *)((unsigned char *)ghidra_home + 12));
+  laneUniqueIndex = DAT_001aa868;
   operandPtrTable[0] = &constOperand1Kind;
-  ppiVar5 = &local_274;
-  iVar15 = 0;
+  operandCursor = &local_274;
+  laneIndex = 0;
   operandPtrTable[1] = &constOperand2Kind;
   operandPtrTable[2] = &constOperand3Kind;
   operandPtrTable[6] = (int *)PTR_DAT_001e8b70;
-  local_274 = piVar9;
+  local_274 = candidateOperand;
   operandPtrTable[3] = (int *)PTR_DAT_001e8b70;
   operandPtrTable[4] = (int *)PTR_DAT_001e8b70;
   operandPtrTable[5] = (int *)PTR_DAT_001e8b70;
   uniqueCount = 0;
 LAB_000f6f18:
   do {
-    iVar7 = uniqueCount;
-    *(char *)((int)&local_27c + iVar15) = (char)iVar7;
-    uniqueCount = iVar7 + 1;
-    operandPtrTable[iVar7 + 3] = piVar9;
+    sortPassIndex = uniqueCount;
+    *(char *)((int)&laneUniqueIndex + laneIndex) = (char)sortPassIndex;
+    uniqueCount = sortPassIndex + 1;
+    operandPtrTable[sortPassIndex + 3] = candidateOperand;
 LAB_000f6f58:
-    iVar4 = 4 - iVar15;
+    lanesLeft = 4 - laneIndex;
     do {
-      iVar11 = iVar15;
-      iVar15 = iVar11 + 1;
-      ppiVar5 = ppiVar5 + 1;
-      iVar4 = iVar4 + -1;
-      if (iVar4 == 0) {
-        local_278 = DAT_001aa868;
+      previousLane = laneIndex;
+      laneIndex = previousLane + 1;
+      operandCursor = operandCursor + 1;
+      lanesLeft = lanesLeft + -1;
+      if (lanesLeft == 0) {
+        sortOrder = DAT_001aa868;
         if (0 < uniqueCount) {
           do {
-            iVar11 = iVar7 + 1;
+            compareCount = sortPassIndex + 1;
             loopCounter = 0;
             loopCounterD = 0;
-            ppiVar5 = operandPtrTable + 4;
-            if (iVar7 < 0) {
-              iVar11 = 1;
+            sortCursor = operandPtrTable + 4;
+            if (sortPassIndex < 0) {
+              compareCount = 1;
             }
-            while (iVar11 = iVar11 + -1, iVar11 != 0) {
-              operandA = (uint *)ppiVar5[-1];
-              operandB = (uint *)*ppiVar5;
+            while (compareCount = compareCount + -1, compareCount != 0) {
+              operandA = (uint *)sortCursor[-1];
+              operandB = (uint *)*sortCursor;
               operandKindA = *operandA;
               if (operandKindA == *operandB) {
                 if (operandKindA == 2) {
@@ -1478,33 +1488,33 @@ LAB_000f6f58:
                 operandLess = operandKindA < *operandB;
               }
               if (operandLess) {
-                uVar2 = *(undefined1 *)((int)&local_278 + loopCounter);
-                uVar1 = *(undefined1 *)((int)&local_278 + loopCounterD + 1);
-                *ppiVar5 = (int *)operandA;
-                *(undefined1 *)((int)&local_278 + loopCounterD + 1) = uVar2;
-                ppiVar5[-1] = (int *)operandB;
-                *(undefined1 *)((int)&local_278 + loopCounter) = uVar1;
+                swapByteCurrent = *(undefined1 *)((int)&sortOrder + loopCounter);
+                swapByteNext = *(undefined1 *)((int)&sortOrder + loopCounterD + 1);
+                *sortCursor = (int *)operandA;
+                *(undefined1 *)((int)&sortOrder + loopCounterD + 1) = swapByteCurrent;
+                sortCursor[-1] = (int *)operandB;
+                *(undefined1 *)((int)&sortOrder + loopCounter) = swapByteNext;
               }
               loopCounter = loopCounter + 1;
-              ppiVar5 = ppiVar5 + 1;
+              sortCursor = sortCursor + 1;
               loopCounterD = loopCounterD + 1;
             }
-            moreToSort = 0 < iVar7;
-            iVar7 = iVar7 + -1;
+            moreToSort = 0 < sortPassIndex;
+            sortPassIndex = sortPassIndex + -1;
           } while (moreToSort);
           loopCounterC = 0;
-          iVar15 = uniqueCount;
+          rankFillCount = uniqueCount;
           do {
-            auStack_284[*(byte *)((int)&local_278 + loopCounterC)] = (char)loopCounterC;
+            uniqueRank[*(byte *)((int)&sortOrder + loopCounterC)] = (char)loopCounterC;
             loopCounterC = loopCounterC + 1;
-            iVar15 = iVar15 + -1;
-          } while (iVar15 != 0);
+            rankFillCount = rankFillCount + -1;
+          } while (rankFillCount != 0);
         }
         loopCounterD = 0;
         loopCounterC = 4;
         do {
-          *(undefined1 *)((int)&local_280 + loopCounterD) =
-               auStack_284[*(byte *)((int)&local_27c + loopCounterD)];
+          *(undefined1 *)((int)&finalSelect + loopCounterD) =
+               uniqueRank[*(byte *)((int)&laneUniqueIndex + loopCounterD)];
           loopCounterD = loopCounterD + 1;
           loopCounterC = loopCounterC + -1;
         } while (loopCounterC != 0);
@@ -1686,22 +1696,22 @@ LAB_000f70d4:
         IRInst__setOperandSource(inst,(*(unsigned int *)((unsigned char *)ghidra_home + 8)),loadConstSource,programFlags >> 7 & 1,compiler);
 LAB_000f76c8:
         operandRecordB = IRInst__getOperandRecord(inst,(*(unsigned int *)((unsigned char *)ghidra_home + 8)));
-        *(undefined4 *)(operandRecordB + 0x10) = local_280;
+        *(undefined4 *)(operandRecordB + 0x10) = finalSelect;
         return;
       }
     } while (uniqueCount < 0);
     if (uniqueCount != 0) {
-      piVar9 = *ppiVar5;
+      candidateOperand = *operandCursor;
       loopCounter = 0;
-      while ((*operandPtrTable[loopCounter + 3] != *piVar9 || (operandPtrTable[loopCounter + 3][1] != piVar9[1]))) {
+      while ((*operandPtrTable[loopCounter + 3] != *candidateOperand || (operandPtrTable[loopCounter + 3][1] != candidateOperand[1]))) {
         loopCounter = loopCounter + 1;
         if (uniqueCount < loopCounter) goto LAB_000f6f58;
         if (loopCounter == uniqueCount) goto LAB_000f6f18;
       }
-      *(char *)((int)&local_27c + iVar11 + 1) = (char)loopCounter;
+      *(char *)((int)&laneUniqueIndex + previousLane + 1) = (char)loopCounter;
       goto LAB_000f6f58;
     }
-    piVar9 = *ppiVar5;
+    candidateOperand = *operandCursor;
   } while( true );
 }
 

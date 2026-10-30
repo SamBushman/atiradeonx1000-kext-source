@@ -2725,58 +2725,60 @@ LAB_000eff98:
 }
 
 /* FUN_000f019c @ 0xf019c (292 bytes) */
-int FUN_000f019c(param_1)
-  int param_1;
+int FUN_000f019c(program)
+  int program;
 {
+  uint chainLength;
+  uint chainAppendIndex;
   undefined4 vectorData;
   int sourceDef;
   int *operandVReg;
   uint loopIndex;
-  int iVar1;
-  uint uVar2;
-  uint uVar3;
+  int chainElementKind;
+  uint excessCount;
+  uint instCount;
   undefined4 *allocation;
-  int iVar5;
-  undefined4 *puVar6;
-  int *piVar7;
-  int iVar8;
-  uint *puVar9;
-  uint *puVar10;
-  int *piVar11;
+  int removedElementKind;
+  undefined4 *keepSlot;
+  int *vectorSlot;
+  int outputInst;
+  uint *instVector;
+  uint *instVectorRefreshed;
+  int *keepInst;
   undefined4 arenaB;
   
-  if (((*(uint *)(param_1 + 0x30) & 0x4000) != 0) && ((*(uint *)(param_1 + 0x30) & 0x80000) == 0)) {
-    uVar3 = (*(uint **)(param_1 + 0x3c4))[1];
-    if (uVar3 == 0) {
-      iVar8 = 0;
+  if (((*(uint *)(program + 0x30) & 0x4000) != 0) && ((*(uint *)(program + 0x30) & 0x80000) == 0)) {
+    instCount = (*(uint **)(program + 0x3c4))[1];
+    if (instCount == 0) {
+      outputInst = 0;
     }
     else {
       loopIndex = 0;
-      iVar8 = 0;
-      puVar9 = *(uint **)(param_1 + 0x3c4);
+      outputInst = 0;
+      instVector = *(uint **)(program + 0x3c4);
       do {
-        if (loopIndex < *puVar9) {
-          puVar10 = puVar9;
-          if (uVar3 <= loopIndex) {
-            _memset(uVar3 * 4 + puVar9[2],0,(loopIndex - uVar3) * 4 + 4);
-            puVar9[1] = loopIndex + 1;
-            puVar10 = *(uint **)(param_1 + 0x3c4);
+        if (loopIndex < *instVector) {
+          instVectorRefreshed = instVector;
+          if (instCount <= loopIndex) {
+            _memset(instCount * 4 + instVector[2],0,(loopIndex - instCount) * 4 + 4);
+            instVector[1] = loopIndex + 1;
+            instVectorRefreshed = *(uint **)(program + 0x3c4);
           }
-          piVar7 = (int *)(loopIndex * 4 + puVar9[2]);
+          vectorSlot = (int *)(loopIndex * 4 + instVector[2]);
         }
         else {
-          piVar7 = (int *)Vector__elementRefGrow(puVar9,loopIndex);
-          puVar10 = *(uint **)(param_1 + 0x3c4);
+          vectorSlot = (int *)Vector__elementRefGrow(instVector,loopIndex);
+          instVectorRefreshed = *(uint **)(program + 0x3c4);
         }
         loopIndex = loopIndex + 1;
-        if (*(int *)(*piVar7 + 0x98) == 0x2c) {
-          iVar8 = *piVar7;
+        if (*(int *)(*vectorSlot + 0x98) == 0x2c) {
+          outputInst = *vectorSlot;
         }
-        uVar3 = puVar10[1];
-        puVar9 = puVar10;
-      } while (loopIndex < uVar3);
+        instCount = instVectorRefreshed[1];
+        instVector = instVectorRefreshed;
+      } while (loopIndex < instCount);
     }
-    arenaB = *(undefined4 *)(*(int *)(param_1 + 8) + 0x378);
+    arenaB = *(undefined4 *)(*(int *)(program + 8) + 0x378);
     allocation = (undefined4 *)Arena__alloc(arenaB,0x14);
     *allocation = arenaB;
     allocation[1] = 2;
@@ -2784,54 +2786,54 @@ int FUN_000f019c(param_1)
     allocation[4] = arenaB;
     vectorData = Arena__alloc(arenaB,8);
     allocation[3] = vectorData;
-    sourceDef = IRInst__getOperandSource(iVar8,1);
+    sourceDef = IRInst__getOperandSource(outputInst,1);
     while (*(int *)(sourceDef + 0x84) != 0) {
-      iVar1 = *(int *)(*(int *)(sourceDef + 0x88) + 8);
-      if ((iVar1 == 0xf7) || (iVar1 == 0x107)) {
-        uVar3 = allocation[2];
-        if (uVar3 < (uint)allocation[1]) {
-          _memset(uVar3 * 4 + allocation[3],0,4);
-          allocation[2] = uVar3 + 1;
-          piVar7 = (int *)(uVar3 * 4 + allocation[3]);
+      chainElementKind = *(int *)(*(int *)(sourceDef + 0x88) + 8);
+      if ((chainElementKind == 0xf7) || (chainElementKind == 0x107)) {
+        chainAppendIndex = allocation[2];
+        if (chainAppendIndex < (uint)allocation[1]) {
+          _memset(chainAppendIndex * 4 + allocation[3],0,4);
+          allocation[2] = chainAppendIndex + 1;
+          vectorSlot = (int *)(chainAppendIndex * 4 + allocation[3]);
         }
         else {
-          piVar7 = (int *)Vector__elementRefGrow(allocation + 1,uVar3);
+          vectorSlot = (int *)Vector__elementRefGrow(allocation + 1,chainAppendIndex);
         }
-        *piVar7 = sourceDef;
+        *vectorSlot = sourceDef;
         sourceDef = IRInst__getOperandSource(sourceDef,1);
       }
-      else if (iVar1 == 0xf9) {
+      else if (chainElementKind == 0xf9) {
         sourceDef = IRInst__getOperandSource(sourceDef,2);
       }
       else {
-        if (iVar1 == 0x8e) {
+        if (chainElementKind == 0x8e) {
           return;
         }
         sourceDef = IRInst__getOperandSource(sourceDef,1);
       }
     }
-    uVar3 = allocation[2];
-    if (*(int *)(param_1 + 0x3f8) < (int)uVar3) {
-      uVar2 = uVar3 - *(int *)(param_1 + 0x3f8);
-      puVar6 = (undefined4 *)0x0;
-      if (uVar2 < uVar3) {
-        puVar6 = (undefined4 *)(uVar2 * 4 + allocation[3]);
+    chainLength = allocation[2];
+    if (*(int *)(program + 0x3f8) < (int)chainLength) {
+      excessCount = chainLength - *(int *)(program + 0x3f8);
+      keepSlot = (undefined4 *)0x0;
+      if (excessCount < chainLength) {
+        keepSlot = (undefined4 *)(excessCount * 4 + allocation[3]);
       }
-      piVar11 = (int *)*puVar6;
-      operandVReg = (int *)IRInst__getOperandSource(iVar8,1);
-      while (piVar11 != operandVReg) {
-        iVar5 = *(int *)(operandVReg[0x22] + 8);
-        if (((iVar5 == 0xf7) || (iVar5 == 0x107)) || (iVar5 != 0xf9)) {
-          (**(code **)(*operandVReg + 0xc))(operandVReg,0,*(undefined4 *)(param_1 + 8));
+      keepInst = (int *)*keepSlot;
+      operandVReg = (int *)IRInst__getOperandSource(outputInst,1);
+      while (keepInst != operandVReg) {
+        removedElementKind = *(int *)(operandVReg[0x22] + 8);
+        if (((removedElementKind == 0xf7) || (removedElementKind == 0x107)) || (removedElementKind != 0xf9)) {
+          (**(code **)(*operandVReg + 0xc))(operandVReg,0,*(undefined4 *)(program + 8));
           operandVReg = (int *)IRInst__getOperandSource(operandVReg,1);
         }
         else {
-          (**(code **)(*operandVReg + 0xc))(operandVReg,0,*(undefined4 *)(param_1 + 8));
+          (**(code **)(*operandVReg + 0xc))(operandVReg,0,*(undefined4 *)(program + 8));
           operandVReg = (int *)IRInst__getOperandSource(operandVReg,2);
         }
       }
-      IRInst__setOperandSource(iVar8,1,piVar11,0,*(undefined4 *)(param_1 + 8));
-      IRInst__setOperandSourceRaw(iVar8,2,piVar11,*(undefined4 *)(param_1 + 8));
+      IRInst__setOperandSource(outputInst,1,keepInst,0,*(undefined4 *)(program + 8));
+      IRInst__setOperandSourceRaw(outputInst,2,keepInst,*(undefined4 *)(program + 8));
       return;
     }
   }
@@ -3596,6 +3598,17 @@ int FUN_000f1d7c(pass, afterInst, inst)
   undefined4 afterInst;
   dword *inst;
 {
+  int consumerVtable0x7cResult;
+  int scannedSourceDef;
+  int thirdSourceDef;
+  int slotByteOffset;
+  int fixupMov;
+  int lastSourceIndex;
+  int nodeIsProjection;
+  int lastWalkIndex;
+  int pushedSourceIndex;
+  int nodeOpcodeInSet;
+  int nodeVtable0x7cResult;
   uint fixupIndexCountB;
   uint fixupInstCount;
   uint unusedMask;
@@ -3628,24 +3641,24 @@ int FUN_000f1d7c(pass, afterInst, inst)
   bool walking;
   undefined4 *walkInstSlot;
   int *node;
-  int iVar4;
-  int iVar5;
-  int iVar6;
+  int fixupOperandIndex;
+  int operandVtable0x50Result;
+  int consumerIsProjection;
   undefined4 predecessor;
   undefined4 a1;
   dword *a2;
-  uint uVar8;
+  uint nodeDestMask;
   dword argR6;
   undefined4 argR7;
   undefined4 staleArgR8;
-  uint uVar9;
+  uint walkInstTopIndex;
   dword destRegister;
   dword *destRegisterOffset;
   int *fixupConsumer;
-  char local_8c;
-  char cStack_8b;
-  char cStack_8a;
-  char cStack_89;
+  char maskedUseByte3;
+  char maskedUseByte2;
+  char maskedUseByte1;
+  char maskedUseByte0;
   /* issue #64 (auto): growable-vector header (capacity/count/data-pointer/arena) used with Vector__elementRefGrow - vecCapacity/vecCount/vecData/vecArena are its four words by their own hex offsets. Vector__elementRefGrow unconditionally reads all four on every call (even its "no grow needed" path reallocs+copies+frees), so they must be one contiguous buffer; left as four separate locals, an -O0 rebuild does not place them contiguously. Merged into one 0x10-byte buffer (part of the issue #64 live-differential sweep). */
   unsigned char local_88_buf [0x10];
   #define vecCapacity (*(uint *)(local_88_buf + 0x00))
@@ -3670,11 +3683,11 @@ int FUN_000f1d7c(pass, afterInst, inst)
   #define vec4Count (*(uint *)(local_58_buf + 0x04))
   #define vec4Data (*(int *)(local_58_buf + 0x08))
   #define vec4Arena (*(undefined4 *)(local_58_buf + 0x0c))
-  int local_48;
-  uint local_44;
-  uint local_40;
-  undefined4 local_3c;
-  dword local_38 [2];
+  int nodeDestMaskTemp;
+  uint visitedNodeDestMask;
+  uint instDestMask;
+  undefined4 fixupMovSelect;
+  dword instSelectOut [2];
   
   *(int *)(pass + 0x474) = *(int *)(pass + 0x474) + 1;
   vec4Arena = *(undefined4 *)(*(int *)(pass + 8) + 0x378);
@@ -3728,7 +3741,7 @@ LAB_000f26b0:
     while( true ) {
       if (walkInstCount == 0) {
         operandRecord = IRInst__getOperandRecord(inst,0);
-        WriteMask__fromSelectWord(&local_40,*(undefined4 *)(operandRecord + 0x10));
+        WriteMask__fromSelectWord(&instDestMask,*(undefined4 *)(operandRecord + 0x10));
         while (vec2Count != 0) {
           fixupInstTopIndex = vec2Count - 1;
           fixupInstTop = (undefined4 *)0x0;
@@ -3742,47 +3755,47 @@ LAB_000f26b0:
           if (fixupIndexTopIndex < vec3Count) {
             fixupIndexTop = (int *)(fixupIndexTopIndex * 4 + vec3Data);
           }
-          iVar4 = *fixupIndexTop;
+          fixupOperandIndex = *fixupIndexTop;
           Vector__removeAt(&vec3Capacity,fixupIndexTopIndex);
-          operandVReg = (int *)IRInst__getOperandSource(fixupConsumer,iVar4);
+          operandVReg = (int *)IRInst__getOperandSource(fixupConsumer,fixupOperandIndex);
           if (((dword *)operandVReg[0x26] != destRegisterOffset) &&
-             (iVar5 = (**(code **)(*operandVReg + 0x50))(operandVReg), iVar5 == 0)) {
+             (operandVtable0x50Result = (**(code **)(*operandVReg + 0x50))(operandVReg), operandVtable0x50Result == 0)) {
             readMask = operandVReg[3];
-            iVar5 = IRMov__new_1084b8(0x31,*(undefined4 *)(pass + 8));
-            IRInst__setOperandSource(iVar5,1,operandVReg,0,*(undefined4 *)(pass + 8));
-            IRInst__setHardwareRegisterAndAdd(iVar5,pass,destRegisterOffset,destRegister);
-            SelectWord__selectWhereMasked(&local_3c,0,local_40 & readMask);
-            *(undefined4 *)(iVar5 + 0x9c) = local_3c;
-            IRInst__maskUnusedLanesOfOperand(iVar5,1,pass);
-            iVar6 = IRInst__isProjectionOfOpcode2a(fixupConsumer);
-            if (iVar6 == 0) {
-              iVar6 = (**(code **)(*fixupConsumer + 0x7c))(fixupConsumer);
-              if (iVar6 == 0) {
-                IRInst__setOperandSource(fixupConsumer,iVar4,iVar5,0,*(undefined4 *)(pass + 8));
-                Block__insertInstBefore(fixupConsumer[0x56],fixupConsumer,iVar5);
+            fixupMov = IRMov__new_1084b8(0x31,*(undefined4 *)(pass + 8));
+            IRInst__setOperandSource(fixupMov,1,operandVReg,0,*(undefined4 *)(pass + 8));
+            IRInst__setHardwareRegisterAndAdd(fixupMov,pass,destRegisterOffset,destRegister);
+            SelectWord__selectWhereMasked(&fixupMovSelect,0,instDestMask & readMask);
+            *(undefined4 *)(fixupMov + 0x9c) = fixupMovSelect;
+            IRInst__maskUnusedLanesOfOperand(fixupMov,1,pass);
+            consumerIsProjection = IRInst__isProjectionOfOpcode2a(fixupConsumer);
+            if (consumerIsProjection == 0) {
+              consumerVtable0x7cResult = (**(code **)(*fixupConsumer + 0x7c))(fixupConsumer);
+              if (consumerVtable0x7cResult == 0) {
+                IRInst__setOperandSource(fixupConsumer,fixupOperandIndex,fixupMov,0,*(undefined4 *)(pass + 8));
+                Block__insertInstBefore(fixupConsumer[0x56],fixupConsumer,fixupMov);
               }
               else {
-                IRInst__setOperandSource(fixupConsumer,iVar4,iVar5,0,*(undefined4 *)(pass + 8));
-                predecessor = Block__getPredecessor(fixupConsumer[0x56],iVar4 + -1);
-                Block__appendInst(predecessor,iVar5);
+                IRInst__setOperandSource(fixupConsumer,fixupOperandIndex,fixupMov,0,*(undefined4 *)(pass + 8));
+                predecessor = Block__getPredecessor(fixupConsumer[0x56],fixupOperandIndex + -1);
+                Block__appendInst(predecessor,fixupMov);
               }
             }
             else {
-              IRInst__setExtraOperandSource(fixupConsumer,iVar5,0,*(undefined4 *)(pass + 8));
-              Block__insertInstAfter(operandVReg[0x56],operandVReg,iVar5);
+              IRInst__setExtraOperandSource(fixupConsumer,fixupMov,0,*(undefined4 *)(pass + 8));
+              Block__insertInstAfter(operandVReg[0x56],operandVReg,fixupMov);
             }
           }
         }
         sourceDef = IRInst__getOperandSource(inst,1);
-        maskedUse = local_40 & *(uint *)(sourceDef + 0xc);
-        SelectWord__selectWhereMasked(local_38,0,maskedUse);
-        inst[0x27] = local_38[0];
+        maskedUse = instDestMask & *(uint *)(sourceDef + 0xc);
+        SelectWord__selectWhereMasked(instSelectOut,0,maskedUse);
+        inst[0x27] = instSelectOut[0];
         IRInst__maskUnusedLanesOfOperand(inst,1,pass);
-        cStack_89 = (char)maskedUse;
-        cStack_8a = (char)(maskedUse >> 8);
-        cStack_8b = (char)(maskedUse >> 0x10);
-        local_8c = (char)(maskedUse >> 0x18);
-        if (((cStack_89 == '\0' && cStack_8a == '\0') && cStack_8b == '\0') && local_8c == '\0') {
+        maskedUseByte0 = (char)maskedUse;
+        maskedUseByte1 = (char)(maskedUse >> 8);
+        maskedUseByte2 = (char)(maskedUse >> 0x10);
+        maskedUseByte3 = (char)(maskedUse >> 0x18);
+        if (((maskedUseByte0 == '\0' && maskedUseByte1 == '\0') && maskedUseByte2 == '\0') && maskedUseByte3 == '\0') {
           (**(code **)(*inst + 0xc))(inst,0,*(undefined4 *)(pass + 8));
         }
         else {
@@ -3806,15 +3819,15 @@ LAB_000f26a4:
       else {
         node[0x54] = *(int *)(pass + 0x474);
         operandRecord = IRInst__getOperandRecord(node,0);
-        WriteMask__fromSelectWord(&local_48,*(undefined4 *)(operandRecord + 0x10));
-        node[3] = local_48;
-        iVar4 = (**(code **)(*node + 0x7c))
+        WriteMask__fromSelectWord(&nodeDestMaskTemp,*(undefined4 *)(operandRecord + 0x10));
+        node[3] = nodeDestMaskTemp;
+        nodeVtable0x7cResult = (**(code **)(*node + 0x7c))
                           (node,a1,a2,argR6,argR7,staleArgR8,*(code **)(*node + 0x7c));
         walkInstCount = vec4Count;
-        if (iVar4 == 0) {
-          iVar4 = IRInst__opcodeIsInSet(node);
+        if (nodeVtable0x7cResult == 0) {
+          nodeOpcodeInSet = IRInst__opcodeIsInSet(node);
           walkInstCount = vec4Count;
-          if (iVar4 == 0) {
+          if (nodeOpcodeInSet == 0) {
             if ((node[5] & 0x200U) == 0) goto LAB_000f26a4;
             if (vec4Count < vec4Capacity) {
               walkInstByteOffset = vec4Count * 4;
@@ -3828,18 +3841,18 @@ LAB_000f26a4:
             }
             walkIndexCount = vecCount;
             *walkInstSlot = node;
-            iVar4 = node[0x21];
+            pushedSourceIndex = node[0x21];
             if (vecCount < vecCapacity) {
-              iVar5 = vecCount * 4;
+              slotByteOffset = vecCount * 4;
               a2 = ((unsigned char *)0x4);
-              _memset(iVar5 + vecData,0,4);
+              _memset(slotByteOffset + vecData,0,4);
               vecCount = walkIndexCount + 1;
-              walkIndexSlot = (int *)(iVar5 + vecData);
+              walkIndexSlot = (int *)(slotByteOffset + vecData);
             }
             else {
               walkIndexSlot = (int *)Vector__elementRefGrow(&vecCapacity,vecCount);
             }
-            *walkIndexSlot = iVar4;
+            *walkIndexSlot = pushedSourceIndex;
             node = (int *)IRInst__getOperandSource(node,node[0x21]);
           }
           else {
@@ -3900,10 +3913,10 @@ LAB_000f2690:
         walkInstCount = vec4Count;
       }
     }
-    uVar9 = walkInstCount - 1;
+    walkInstTopIndex = walkInstCount - 1;
     walkInstTop = (undefined4 *)0x0;
-    if (uVar9 < walkInstCount) {
-      walkInstTop = (undefined4 *)(uVar9 * 4 + vec4Data);
+    if (walkInstTopIndex < walkInstCount) {
+      walkInstTop = (undefined4 *)(walkInstTopIndex * 4 + vec4Data);
     }
     hasNode = node != (int *)0x0;
     node = (int *)*walkInstTop;
@@ -3918,42 +3931,42 @@ LAB_000f2690:
         if (walkIndexTopIndex < vecCount) {
           walkIndexTop = (int *)(walkIndexTopIndex * 4 + vecData);
         }
-        iVar4 = *walkIndexTop;
+        lastWalkIndex = *walkIndexTop;
         Vector__removeAt(&vecCapacity,walkIndexTopIndex);
         walkIndexCount = vecCount;
         if (vecCount < vecCapacity) {
-          iVar5 = vecCount * 4;
+          slotByteOffset = vecCount * 4;
           a2 = ((unsigned char *)0x4);
-          _memset(iVar5 + vecData,0,4);
+          _memset(slotByteOffset + vecData,0,4);
           vecCount = walkIndexCount + 1;
-          walkIndexSlot = (int *)(iVar5 + vecData);
+          walkIndexSlot = (int *)(slotByteOffset + vecData);
         }
         else {
           walkIndexSlot = (int *)Vector__elementRefGrow(&vecCapacity,vecCount);
         }
-        *walkIndexSlot = iVar4 + 1;
-        node = (int *)IRInst__getOperandSource(node,iVar4 + 1);
+        *walkIndexSlot = lastWalkIndex + 1;
+        node = (int *)IRInst__getOperandSource(node,lastWalkIndex + 1);
         goto LAB_000f2690;
       }
     }
-    Vector__removeAt(&vec4Capacity,uVar9);
+    Vector__removeAt(&vec4Capacity,walkInstTopIndex);
     Vector__removeAt(&vecCapacity,vecCount - 1);
     operandRecord = IRInst__getOperandRecord(node,0);
-    WriteMask__fromSelectWord(&local_44,*(undefined4 *)(operandRecord + 0x10));
-    uVar8 = local_44;
-    iVar4 = IRInst__isProjectionOfOpcode2a(node);
-    if (iVar4 == 0) {
-      iVar4 = (**(code **)(*node + 0x7c))(node);
-      if (iVar4 == 0) {
-        iVar4 = IRInst__opcodeIsInSet(node);
-        if (iVar4 != 0) {
+    WriteMask__fromSelectWord(&visitedNodeDestMask,*(undefined4 *)(operandRecord + 0x10));
+    nodeDestMask = visitedNodeDestMask;
+    nodeIsProjection = IRInst__isProjectionOfOpcode2a(node);
+    if (nodeIsProjection == 0) {
+      nodeVtable0x7cResult = (**(code **)(*node + 0x7c))(node);
+      if (nodeVtable0x7cResult == 0) {
+        nodeOpcodeInSet = IRInst__opcodeIsInSet(node);
+        if (nodeOpcodeInSet != 0) {
           sourceDef = IRInst__getOperandSource(node,2);
-          iVar5 = IRInst__getOperandSource(node,3);
+          thirdSourceDef = IRInst__getOperandSource(node,3);
           unusedMask = ~*(uint *)(sourceDef + 0xc);
-          if ((uVar8 & (unusedMask << 0x18 | (unusedMask & 0xff00) << 8 | unusedMask >> 8 & 0xff00 | unusedMask >> 0x18)
+          if ((nodeDestMask & (unusedMask << 0x18 | (unusedMask & 0xff00) << 8 | unusedMask >> 8 & 0xff00 | unusedMask >> 0x18)
               ) == 0) {
-            unusedMask = ~*(uint *)(iVar5 + 0xc);
-            if ((uVar8 & (unusedMask << 0x18 | (unusedMask & 0xff00) << 8 | unusedMask >> 8 & 0xff00 |
+            unusedMask = ~*(uint *)(thirdSourceDef + 0xc);
+            if ((nodeDestMask & (unusedMask << 0x18 | (unusedMask & 0xff00) << 8 | unusedMask >> 8 & 0xff00 |
                          unusedMask >> 0x18)) == 0) goto LAB_000f25ac;
             IRInst__reduceTernaryToBinary(node,3,*(undefined4 *)(pass + 8));
           }
@@ -3992,7 +4005,7 @@ LAB_000f2690:
 LAB_000f25ac:
         if ((node[5] & 0x200U) != 0) {
           sourceDef = IRInst__getOperandSource(node,node[0x21]);
-          node[3] = uVar8 | *(uint *)(sourceDef + 0xc);
+          node[3] = nodeDestMask | *(uint *)(sourceDef + 0xc);
           if ((dword *)*(undefined1 **)(sourceDef + 0x98) == destRegisterOffset) {
             a2 = (dword *)0x0;
             argR6 = 0;
@@ -4007,9 +4020,9 @@ LAB_000f25ac:
         loopIndex = 1;
         if (0 < node[0x21]) {
           do {
-            iVar5 = IRInst__getOperandSource(node,loopIndex);
-            unusedMask = ~*(uint *)(iVar5 + 0xc);
-            if ((uVar8 & (unusedMask << 0x18 | (unusedMask & 0xff00) << 8 | unusedMask >> 8 & 0xff00 |
+            scannedSourceDef = IRInst__getOperandSource(node,loopIndex);
+            unusedMask = ~*(uint *)(scannedSourceDef + 0xc);
+            if ((nodeDestMask & (unusedMask << 0x18 | (unusedMask & 0xff00) << 8 | unusedMask >> 8 & 0xff00 |
                          unusedMask >> 0x18)) != 0) {
               a2 = destRegisterOffset;
               argR6 = destRegister;
@@ -4018,15 +4031,15 @@ LAB_000f25ac:
               if (0 < node[0x21]) {
                 loopIndex = 1;
                 do {
-                  iVar5 = IRInst__getOperandSource(node,loopIndex);
+                  scannedSourceDef = IRInst__getOperandSource(node,loopIndex);
                   fixupInstCount = vec2Count;
-                  if ((uVar8 & *(uint *)(iVar5 + 0xc)) != 0) {
+                  if ((nodeDestMask & *(uint *)(scannedSourceDef + 0xc)) != 0) {
                     if (vec2Count < vec2Capacity) {
-                      iVar5 = vec2Count * 4;
+                      slotByteOffset = vec2Count * 4;
                       a2 = ((unsigned char *)0x4);
-                      _memset(iVar5 + vec2Data,0,4);
+                      _memset(slotByteOffset + vec2Data,0,4);
                       vec2Count = fixupInstCount + 1;
-                      fixupInstSlot = (undefined4 *)(iVar5 + vec2Data);
+                      fixupInstSlot = (undefined4 *)(slotByteOffset + vec2Data);
                     }
                     else {
                       fixupInstSlot = (undefined4 *)Vector__elementRefGrow(&vec2Capacity,vec2Count);
@@ -4034,11 +4047,11 @@ LAB_000f25ac:
                     fixupIndexCountB = vec3Count;
                     *fixupInstSlot = node;
                     if (vec3Count < vec3Capacity) {
-                      iVar5 = vec3Count * 4;
+                      slotByteOffset = vec3Count * 4;
                       a2 = ((unsigned char *)0x4);
-                      _memset(iVar5 + vec3Data,0,4);
+                      _memset(slotByteOffset + vec3Data,0,4);
                       vec3Count = fixupIndexCountB + 1;
-                      fixupIndexSlot = (int *)(iVar5 + vec3Data);
+                      fixupIndexSlot = (int *)(slotByteOffset + vec3Data);
                     }
                     else {
                       fixupIndexSlot = (int *)Vector__elementRefGrow(&vec3Capacity,vec3Count);
@@ -4065,7 +4078,7 @@ LAB_000f260c:
     sourceDef = IRInst__getOperandSource(node,node[0x21]);
     fixupInstCount = vec2Count;
     node[3] = 0;
-    if ((uVar8 & *(uint *)(sourceDef + 0xc)) == 0) goto LAB_000f260c;
+    if ((nodeDestMask & *(uint *)(sourceDef + 0xc)) == 0) goto LAB_000f260c;
     if (vec2Count < vec2Capacity) {
       fixupInstByteOffset = vec2Count * 4;
       a2 = ((unsigned char *)0x4);
@@ -4078,18 +4091,18 @@ LAB_000f260c:
     }
     fixupIndexCount = vec3Count;
     *fixupInstSlot = node;
-    iVar4 = node[0x21];
+    lastSourceIndex = node[0x21];
     if (vec3Count < vec3Capacity) {
-      iVar5 = vec3Count * 4;
+      slotByteOffset = vec3Count * 4;
       a2 = ((unsigned char *)0x4);
-      _memset(iVar5 + vec3Data,0,4);
+      _memset(slotByteOffset + vec3Data,0,4);
       vec3Count = fixupIndexCount + 1;
-      fixupIndexSlot = (int *)(iVar5 + vec3Data);
+      fixupIndexSlot = (int *)(slotByteOffset + vec3Data);
     }
     else {
       fixupIndexSlot = (int *)Vector__elementRefGrow(&vec3Capacity,vec3Count);
     }
-    *fixupIndexSlot = iVar4;
+    *fixupIndexSlot = lastSourceIndex;
     walking = false;
     walkInstCount = vec4Count;
   } while( true );

@@ -215,3 +215,219 @@ use	FUN_000f07a8	iVar9	sourceCount	INFERRED	consumer vtable +0x14 = number of so
 use	FUN_000f07a8	iVar9	composedSelectCopy	INFERRED	composedSelect written into the operand record select word	^\s*iVar9\ =\ local_54;$	^\s*iVar15\ =\ \(\*\*\(code\ \*\*\)\(\*piVar3\ \+\ 100\)\)\(piVar3\);$	all	none
 use	FUN_000f07a8	iVar9	sourceCount	INFERRED	consumer vtable +0x14 = number of source operands (loop bound)	^\s*for\ \(iVar15\ =\ 1;\ iVar9\ =\ \(\*\*\(code\ \*\*\)\(\*piVar3\ \+\ 0x14\)\)\(piVar3\),\ iVar15\ <=\ iVar9;$@3	^\s*iVar15\ =\ iVar15\ \+\ 1\)\ \{$	all	none
 use	FUN_000f07a8	iVar9	selectIsIdentityOperand	INFERRED	IRInst__isSourceSelectIdentity result	^\s*\(iVar9\ =\ FUN_000f31e8\(piVar3,iVar15\),\ iVar9\ ==\ 0\)\)\ goto\ code_r0x000f1384;$	^\s*\}$	all	none
+local	FUN_000f019c	param_1	program	INFERRED	program/pass object: +0x30 flags (0x4000 / 0x80000), +8 compiler, +0x3c4 instruction vector, +0x3f8 chain limit
+local	FUN_000f019c	iVar8	outputInst	INFERRED	last instruction in the vector whose +0x98 type is 0x2c; its source-1 chain is trimmed
+local	FUN_000f019c	iVar1	chainElementKind	INFERRED	opcode (+8 of the +0x88 descriptor) of the current chain element: 0xf7/0x107 recorded, 0xf9 follows source 2, 0x8e ends the walk
+local	FUN_000f019c	iVar5	removedElementKind	INFERRED	opcode of the chain element being released: 0xf9 follows source 2, others source 1
+local	FUN_000f019c	uVar2	excessCount	INFERRED	chain length minus the allowed limit (program+0x3f8)
+local	FUN_000f019c	puVar6	keepSlot	INFERRED	vector slot of the first chain element that is kept (index excessCount)
+local	FUN_000f019c	piVar7	vectorSlot	INFERRED	element reference into the instruction or chain vector
+local	FUN_000f019c	piVar11	keepInst	INFERRED	chain element kept as the new source of outputInst
+local	FUN_000f019c	puVar9	instVector	INFERRED	instruction vector (program+0x3c4) header: capacity, size, data
+local	FUN_000f019c	puVar10	instVectorRefreshed	INFERRED	instruction vector pointer re-read after a possible grow
+use	FUN_000f019c	uVar3	instCount	INFERRED	size of the instruction vector (loop bound)	^\s*uVar3\ =\ \(\*\(uint\ \*\*\)\(param_1\ \+\ 0x3c4\)\)\[1\];$	^\s*uVar12\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x378\);$	all	none
+use	FUN_000f019c	uVar3	chainAppendIndex	INFERRED	chain vector size = index of the appended element	^\s*uVar3\ =\ puVar4\[2\];$	^\s*\*piVar7\ =\ iVar5;$	all	none
+use	FUN_000f019c	uVar3	chainLength	INFERRED	number of collected chain elements	^\s*uVar3\ =\ puVar4\[2\];$@2	^\s*\}$	all	none
+use	FUN_000f1d7c	iVar4	fixupOperandIndex	INFERRED	operand index popped from the fixup index stack; the mov is inserted for this source of fixupConsumer	^\s*iVar4\ =\ \*piVar3;$	^\s*FUN_000e7688\(uVar7,iVar5\);$	all	none
+use	FUN_000f1d7c	iVar4	nodeVtable0x7cResult	INFERRED	node vtable +0x7c query	^\s*iVar4\ =\ \(\*\*\(code\ \*\*\)\(\*piVar3\ \+\ 0x7c\)\)$	^\s*iVar4\ =\ FUN_00104fd0\(piVar3\);$	all	none
+use	FUN_000f1d7c	iVar4	nodeOpcodeInSet	INFERRED	IRInst__opcodeIsInSet(node)	^\s*iVar4\ =\ FUN_00104fd0\(piVar3\);$	^\s*if\ \(\(piVar3\[5\]\ \&\ 0x200U\)\ ==\ 0\)\ goto\ LAB_000f26a4;$	all	none
+use	FUN_000f1d7c	iVar4	pushedSourceIndex	INFERRED	node last-source index pushed on the walk index stack	^\s*iVar4\ =\ piVar3\[0x21\];$	^\s*piVar3\ =\ \(int\ \*\)FUN_00105594\(piVar3,piVar3\[0x21\]\);$	all	none
+use	FUN_000f1d7c	iVar4	lastWalkIndex	INFERRED	top of the walk index stack; the next source index is lastWalkIndex+1	^\s*iVar4\ =\ \*piVar12;$	^\s*goto\ LAB_000f2690;$	all	none
+use	FUN_000f1d7c	iVar4	nodeIsProjection	INFERRED	IRInst__isProjectionOfOpcode2a(node)	^\s*iVar4\ =\ FUN_001055cc\(piVar3\);$	^\s*iVar4\ =\ \(\*\*\(code\ \*\*\)\(\*piVar3\ \+\ 0x7c\)\)\(piVar3\);$	all	none
+use	FUN_000f1d7c	iVar4	nodeVtable0x7cResult	INFERRED	node vtable +0x7c query	^\s*iVar4\ =\ \(\*\*\(code\ \*\*\)\(\*piVar3\ \+\ 0x7c\)\)\(piVar3\);$	^\s*iVar4\ =\ FUN_00104fd0\(piVar3\);$	all	none
+use	FUN_000f1d7c	iVar4	nodeOpcodeInSet	INFERRED	IRInst__opcodeIsInSet(node)	^\s*iVar4\ =\ FUN_00104fd0\(piVar3\);$@2	^\s*iVar4\ =\ FUN_00105594\(piVar3,2\);$	all	none
+use	FUN_000f1d7c	iVar4	lastSourceIndex	INFERRED	node last-source index pushed on the fixup index stack	^\s*iVar4\ =\ piVar3\[0x21\];$@2	^\s*bVar1\ =\ false;$	all	none
+use	FUN_000f1d7c	iVar5	operandVtable0x50Result	INFERRED	operand vtable +0x50 query; nonzero means no mov is needed	^\s*\(iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*piVar3\ \+\ 0x50\)\)\(piVar3\),\ iVar5\ ==\ 0\)\)\ \{$	^\s*uVar8\ =\ piVar3\[3\];$	all	none
+use	FUN_000f1d7c	iVar5	fixupMov	INFERRED	mov instruction created (IRMov__new_1084b8, opcode 0x31) to feed the consumer operand	^\s*iVar5\ =\ FUN_001084b8\(0x31,\*\(undefined4\ \*\)\(param_1\ \+\ 8\)\);$	^\s*iVar4\ =\ FUN_00105594\(param_3,1\);$	all	none
+use	FUN_000f1d7c	iVar5	slotByteOffset	INFERRED	element index * 4 for the vector slot	^\s*iVar5\ =\ local_84\ \*\ 4;$	^\s*\}$	all	none
+use	FUN_000f1d7c	iVar5	slotByteOffset	INFERRED	element index * 4 for the vector slot	^\s*iVar5\ =\ local_84\ \*\ 4;$@2	^\s*\}$	all	none
+use	FUN_000f1d7c	iVar5	thirdSourceDef	INFERRED	source 3 of the ternary node	^\s*iVar5\ =\ FUN_00105594\(piVar3,3\);$	^\s*if\ \(\(uVar8\ \&\ \(uVar9\ <<\ 0x18\ \|\ \(uVar9\ \&\ 0xff00\)\ <<\ 8\ \|\ uVar9\ >>\ 8\ \&\ 0xff00\ \|$	all	none
+use	FUN_000f1d7c	iVar5	scannedSourceDef	INFERRED	source loopIndex of node	^\s*iVar5\ =\ FUN_00105594\(piVar3,iVar4\);$	^\s*if\ \(\(uVar8\ \&\ \(uVar9\ <<\ 0x18\ \|\ \(uVar9\ \&\ 0xff00\)\ <<\ 8\ \|\ uVar9\ >>\ 8\ \&\ 0xff00\ \|$	all	none
+use	FUN_000f1d7c	iVar5	scannedSourceDef	INFERRED	source loopIndex of node	^\s*iVar5\ =\ FUN_00105594\(piVar3,iVar4\);$@2	^\s*if\ \(local_74\ <\ local_78\)\ \{$	all	none
+use	FUN_000f1d7c	iVar5	slotByteOffset	INFERRED	element index * 4 for the vector slot	^\s*iVar5\ =\ local_74\ \*\ 4;$	^\s*\}$	all	none
+use	FUN_000f1d7c	iVar5	slotByteOffset	INFERRED	element index * 4 for the vector slot	^\s*iVar5\ =\ local_64\ \*\ 4;$	^\s*\}$	all	none
+use	FUN_000f1d7c	iVar5	slotByteOffset	INFERRED	element index * 4 for the vector slot	^\s*iVar5\ =\ local_64\ \*\ 4;$@2	^\s*\}$	all	none
+use	FUN_000f1d7c	iVar6	consumerIsProjection	INFERRED	IRInst__isProjectionOfOpcode2a(fixupConsumer)	^\s*iVar6\ =\ FUN_001055cc\(piVar12\);$	^\s*iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*piVar12\ \+\ 0x7c\)\)\(piVar12\);$	all	none
+use	FUN_000f1d7c	iVar6	consumerVtable0x7cResult	INFERRED	fixupConsumer vtable +0x7c query	^\s*iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*piVar12\ \+\ 0x7c\)\)\(piVar12\);$	^\s*FUN_00106004\(piVar12,iVar4,iVar5,0,\*\(undefined4\ \*\)\(param_1\ \+\ 8\)\);$	all	none
+use	FUN_000f1d7c	uVar8	nodeDestMask	INFERRED	WriteMask of the visited node destination (copy of local_44)	^\s*uVar8\ =\ local_44;$	^\s*uVar8\ =\ local_64;$	all	none
+use	FUN_000f1d7c	uVar9	walkInstTopIndex	INFERRED	index of the top of the walk instruction stack	^\s*uVar9\ =\ uVar8\ \-\ 1;$	^\s*FUN_00194208\(\&local_88,local_84\ \-\ 1\);$	all	none
+local	FUN_000f1d7c	local_40	instDestMask	INFERRED	WriteMask::fromSelectWord of inst operand 0 select word: lanes the mov chain writes
+local	FUN_000f1d7c	local_48	nodeDestMaskTemp	INFERRED	WriteMask::fromSelectWord of node operand 0, stored to node+0xc
+local	FUN_000f1d7c	local_44	visitedNodeDestMask	INFERRED	WriteMask::fromSelectWord of the visited node operand 0
+local	FUN_000f1d7c	local_3c	fixupMovSelect	INFERRED	select word of the lanes the fixup mov writes, stored at mov+0x9c
+local	FUN_000f1d7c	local_38	instSelectOut	INFERRED	SelectWord::selectWhereMasked output stored to inst+0x9c
+local	FUN_000f1d7c	local_8c	maskedUseByte3	INFERRED	top byte of maskedUse (frame overlay)
+local	FUN_000f1d7c	cStack_8b	maskedUseByte2	INFERRED	byte 2 of maskedUse (frame overlay)
+local	FUN_000f1d7c	cStack_8a	maskedUseByte1	INFERRED	byte 1 of maskedUse (frame overlay)
+local	FUN_000f1d7c	cStack_89	maskedUseByte0	INFERRED	low byte of maskedUse (frame overlay)
+use	IRInst__setConstantOperand	iVar15	laneIndex	INFERRED	index 0-3 of the constant operand being deduplicated	^\s*iVar15\ =\ 0;$	+1
+use	IRInst__setConstantOperand	iVar15	laneIndex	INFERRED	index 0-3 of the constant operand being deduplicated	^\s*\*\(char\ \*\)\(\(int\)\&local_27c\ \+\ iVar15\)\ =\ \(char\)iVar7;$	+1
+use	IRInst__setConstantOperand	iVar15	laneIndex	INFERRED	index 0-3 of the constant operand being deduplicated	^\s*iVar4\ =\ 4\ \-\ iVar15;$	+1
+use	IRInst__setConstantOperand	iVar15	laneIndex	INFERRED	index 0-3 of the constant operand being deduplicated	^\s*iVar11\ =\ iVar15;$	+2
+use	IRInst__setConstantOperand	iVar15	rankFillCount	INFERRED	remaining count of unique entries while the rank table is filled	^\s*iVar15\ =\ iVar6;$	+1
+use	IRInst__setConstantOperand	iVar15	rankFillCount	INFERRED	remaining count of unique entries while the rank table is filled	^\s*iVar15\ =\ iVar15\ \+\ \-1;$@2	+2
+use	IRInst__setConstantOperand	iVar7	sortPassIndex	INFERRED	outer pass counter of the bubble sort over the unique operands (starts at uniqueCount)	^\s*iVar7\ =\ iVar6;$	+4
+use	IRInst__setConstantOperand	iVar7	sortPassIndex	INFERRED	outer pass counter of the bubble sort over the unique operands (starts at uniqueCount)	^\s*iVar11\ =\ iVar7\ \+\ 1;$	+1
+use	IRInst__setConstantOperand	iVar7	sortPassIndex	INFERRED	outer pass counter of the bubble sort over the unique operands (starts at uniqueCount)	^\s*if\ \(iVar7\ <\ 0\)\ \{$	+1
+use	IRInst__setConstantOperand	iVar7	sortPassIndex	INFERRED	outer pass counter of the bubble sort over the unique operands (starts at uniqueCount)	^\s*bVar14\ =\ 0\ <\ iVar7;$	+2
+use	IRInst__setConstantOperand	iVar4	lanesLeft	INFERRED	4 - laneIndex: lanes still to examine	^\s*iVar4\ =\ 4\ \-\ iVar15;$	+1
+use	IRInst__setConstantOperand	iVar4	lanesLeft	INFERRED	4 - laneIndex: lanes still to examine	^\s*iVar4\ =\ iVar4\ \+\ \-1;$	+2
+use	IRInst__setConstantOperand	uVar3	laneByte	INFERRED	select byte of the existing instruction's operand lane	^\s*uVar3\ =\ \(uint\)\*\(byte\ \*\)\(iVar6\ \+\ iVar7\ \+\ 0x10\);$	+4
+use	IRInst__setConstantOperand	uVar1	swapByteNext	INFERRED	sort-order byte swapped with swapByteCurrent	^\s*uVar1\ =\ \*\(undefined1\ \*\)\(\(int\)\&local_278\ \+\ iVar15\ \+\ 1\);$	+1
+use	IRInst__setConstantOperand	uVar1	swapByteNext	INFERRED	sort-order byte swapped with swapByteCurrent	^\s*\*\(undefined1\ \*\)\(\(int\)\&local_278\ \+\ iVar4\)\ =\ uVar1;$	+1
+use	IRInst__setConstantOperand	uVar2	swapByteCurrent	INFERRED	sort-order byte swapped with swapByteNext	^\s*uVar2\ =\ \*\(undefined1\ \*\)\(\(int\)\&local_278\ \+\ iVar4\);$	+1
+use	IRInst__setConstantOperand	uVar2	swapByteCurrent	INFERRED	sort-order byte swapped with swapByteNext	^\s*\*\(undefined1\ \*\)\(\(int\)\&local_278\ \+\ iVar15\ \+\ 1\)\ =\ uVar2;$	+1
+use	IRInst__setConstantOperand	ppiVar5	fillCursor	INFERRED	cursor over the 4 words that are initialised to 0x7ffffffe	^\s*ppiVar5\ =\ local_270\ \+\ 7;$	+1
+use	IRInst__setConstantOperand	ppiVar5	fillCursor	INFERRED	cursor over the 4 words that are initialised to 0x7ffffffe	^\s*\*ppiVar5\ =\ \(int\ \*\)0x7ffffffe;$	+2
+use	IRInst__setConstantOperand	ppiVar5	operandCursor	INFERRED	cursor over the operand pointer table during deduplication	^\s*ppiVar5\ =\ \&local_274;$	+1
+use	IRInst__setConstantOperand	ppiVar5	operandCursor	INFERRED	cursor over the operand pointer table during deduplication	^\s*ppiVar5\ =\ ppiVar5\ \+\ 1;$@2	+1
+use	IRInst__setConstantOperand	ppiVar5	operandCursor	INFERRED	cursor over the operand pointer table during deduplication	^\s*piVar9\ =\ \*ppiVar5;$	+1
+use	IRInst__setConstantOperand	ppiVar5	operandCursor	INFERRED	cursor over the operand pointer table during deduplication	^\s*piVar9\ =\ \*ppiVar5;$@2	+1
+use	IRInst__setConstantOperand	ppiVar5	sortCursor	INFERRED	cursor over the operand pointer table during the bubble sort	^\s*ppiVar5\ =\ local_270\ \+\ 4;$	+1
+use	IRInst__setConstantOperand	ppiVar5	sortCursor	INFERRED	cursor over the operand pointer table during the bubble sort	^\s*puVar12\ =\ \(uint\ \*\)ppiVar5\[\-1\];$	+2
+use	IRInst__setConstantOperand	ppiVar5	sortCursor	INFERRED	cursor over the operand pointer table during the bubble sort	^\s*\*ppiVar5\ =\ \(int\ \*\)puVar12;$	+1
+use	IRInst__setConstantOperand	ppiVar5	sortCursor	INFERRED	cursor over the operand pointer table during the bubble sort	^\s*ppiVar5\[\-1\]\ =\ \(int\ \*\)puVar10;$	+1
+use	IRInst__setConstantOperand	ppiVar5	sortCursor	INFERRED	cursor over the operand pointer table during the bubble sort	^\s*ppiVar5\ =\ ppiVar5\ \+\ 1;$@3	+1
+use	IRInst__setConstantOperand	piVar9	candidateOperand	INFERRED	constant operand compared with the unique operands collected so far	^\s*piVar9\ =\ \&\(\*\(unsigned\ int\ \*\)\(\(unsigned\ char\ \*\)ghidra_home\ \+\ 12\)\);$	+1
+use	IRInst__setConstantOperand	piVar9	candidateOperand	INFERRED	constant operand compared with the unique operands collected so far	^\s*local_274\ =\ piVar9;$	+1
+use	IRInst__setConstantOperand	piVar9	candidateOperand	INFERRED	constant operand compared with the unique operands collected so far	^\s*local_270\[iVar7\ \+\ 3\]\ =\ piVar9;$	+1
+use	IRInst__setConstantOperand	piVar9	candidateOperand	INFERRED	constant operand compared with the unique operands collected so far	^\s*piVar9\ =\ \*ppiVar5;$	+1
+use	IRInst__setConstantOperand	piVar9	candidateOperand	INFERRED	constant operand compared with the unique operands collected so far	^\s*while\ \(\(\*local_270\[iVar4\ \+\ 3\]\ !=\ \*piVar9\ \|\|\ \(local_270\[iVar4\ \+\ 3\]\[1\]\ !=\ piVar9\[1\]\)\)\)\ \{$	+1
+use	IRInst__setConstantOperand	piVar9	candidateOperand	INFERRED	constant operand compared with the unique operands collected so far	^\s*piVar9\ =\ \*ppiVar5;$@2	+1
+use	IRInst__setConstantOperand	iVar11	previousLane	INFERRED	lane index before the increment (slot of the lane-to-unique byte)	^\s*iVar11\ =\ iVar15;$	+2
+use	IRInst__setConstantOperand	iVar11	previousLane	INFERRED	lane index before the increment (slot of the lane-to-unique byte)	^\s*\*\(char\ \*\)\(\(int\)\&local_27c\ \+\ iVar11\ \+\ 1\)\ =\ \(char\)iVar4;$	+1
+use	IRInst__setConstantOperand	iVar11	compareCount	INFERRED	adjacent compares left in this sort pass	^\s*iVar11\ =\ iVar7\ \+\ 1;$	+1
+use	IRInst__setConstantOperand	iVar11	compareCount	INFERRED	adjacent compares left in this sort pass	^\s*iVar11\ =\ 1;$	+1
+use	IRInst__setConstantOperand	iVar11	compareCount	INFERRED	adjacent compares left in this sort pass	^\s*while\ \(iVar11\ =\ iVar11\ \+\ \-1,\ iVar11\ !=\ 0\)\ \{$	+1
+local	IRInst__setConstantOperand	local_288	existingSelect	INFERRED	select word of the cached load-const instruction's operand 0
+local	IRInst__setConstantOperand	auStack_284	uniqueRank	INFERRED	rank (sorted position) of each unique constant, 4 bytes
+local	IRInst__setConstantOperand	local_280	finalSelect	INFERRED	lane select bytes written to operand operandIndex +0x10
+local	IRInst__setConstantOperand	local_27c	laneUniqueIndex	INFERRED	for each lane the index of its unique constant, 4 bytes
+local	IRInst__setConstantOperand	local_278	sortOrder	INFERRED	permutation of unique constants after the bubble sort, 4 bytes
+use	Compiler__getOrCreateLoadConstN	uVar1	recordWord0	INFERRED	word 0 (kind) of the constant record being copied into the register map hash key	^\s*uVar1\ =\ \*\(undefined4\ \*\)\(\(int\)puVar6\ \+\ iVar7\);$	+1
+use	Compiler__getOrCreateLoadConstN	uVar1	recordWord0	INFERRED	word 0 (kind) of the constant record being copied into the register map hash key	^\s*\*\(undefined4\ \*\)\(iVar2\ \+\ 0xc\)\ =\ uVar1;$	+1
+use	Compiler__getOrCreateLoadConstN	uVar1	newInstId	INFERRED	id returned by FUN_000f4a5c for the new load-const instruction	^\s*uVar1\ =\ FUN_000f4a5c\(param_1\);$	+2
+use	Compiler__getOrCreateLoadConstN	uVar1	constantSlot	INFERRED	slot returned by Emitter__allocateConstantSlot	^\s*uVar1\ =\ FUN_000f4a84\(param_1,local_88\[0\],0,puVar6,iVar7,uVar8,\*param_1\);$	+2
+use	Compiler__getOrCreateLoadConstN	uVar1	recordWord	INFERRED	word 0 of the constant record copied into the new instruction	^\s*uVar1\ =\ \*\(undefined4\ \*\)\(\(int\)local_88\ \+\ iVar7\);$	+1
+use	Compiler__getOrCreateLoadConstN	uVar1	recordWord	INFERRED	word 0 of the constant record copied into the new instruction	^\s*puVar6\[3\]\ =\ uVar1;$	+1
+use	Compiler__getOrCreateLoadConstN	iVar2	recordDest	INFERRED	address of the destination 24-byte constant record in the key instruction (+0x10 + i*0x18)	^\s*iVar2\ =\ iVar7\ \+\ 0x10\ \+\ param_1\[10\];$	+3
+use	Compiler__getOrCreateLoadConstN	puVar3	cachedInst	INFERRED	instruction found by HashTable__find or newly created	^\s*puVar3\ =\ \(undefined4\ \*\)FUN_00194834\(aiStack_9c\[param_2\],param_1\[10\]\);$	+2
+use	Compiler__getOrCreateLoadConstN	puVar3	cachedInst	INFERRED	instruction found by HashTable__find or newly created	^\s*puVar3\ =\ puVar4\ \+\ 1;$	+2
+use	Compiler__getOrCreateLoadConstN	puVar3	cachedInst	INFERRED	instruction found by HashTable__find or newly created	^\s*\(\*\*\(code\ \*\*\)\(\*piVar5\ \+\ 0xc\)\)\(piVar5,puVar3\);$	+2
+use	Compiler__getOrCreateLoadConstN	puVar3	cachedInst	INFERRED	instruction found by HashTable__find or newly created	^\s*return\ puVar3;$	+1
+use	Compiler__getOrCreateLoadConstN	piVar5	blockList	INFERRED	program current-block list object (+0x3a0), called to add the instruction	^\s*piVar5\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(\*param_1\ \+\ 0x6c4\)\ \+\ 0x3a0\);$	+2
+use	Compiler__getOrCreateLoadConstN	puVar6	keyRecordCursor	INFERRED	cursor over the constant records on the stack	^\s*puVar6\ =\ local_88;$	+1
+use	Compiler__getOrCreateLoadConstN	puVar6	keyRecordCursor	INFERRED	cursor over the constant records on the stack	^\s*uVar1\ =\ \*\(undefined4\ \*\)\(\(int\)puVar6\ \+\ iVar7\);$	+1
+use	Compiler__getOrCreateLoadConstN	puVar6	keyRecordCursor	INFERRED	cursor over the constant records on the stack	^\s*uVar1\ =\ FUN_000f4a84\(param_1,local_88\[0\],0,puVar6,iVar7,uVar8,\*param_1\);$	+1
+use	Compiler__getOrCreateLoadConstN	puVar6	instRecordCursor	INFERRED	cursor over the constant records inside the new instruction (+0x14)	^\s*puVar6\ =\ puVar4\ \+\ 5;$	+1
+use	Compiler__getOrCreateLoadConstN	puVar6	instRecordCursor	INFERRED	cursor over the constant records inside the new instruction (+0x14)	^\s*puVar6\[4\]\ =\ \*\(undefined4\ \*\)\(\(int\)local_88\ \+\ iVar7\ \+\ 4\);$	+2
+use	Compiler__getOrCreateLoadConstN	puVar6	instRecordCursor	INFERRED	cursor over the constant records inside the new instruction (+0x14)	^\s*puVar6\ =\ puVar6\ \+\ 6;$	+1
+local	Compiler__getOrCreateLoadConstN	param_2	constCount	INFERRED	number of constants (1-4); selects the per-count hash table compiler[1+constCount]
+local	Compiler__getOrCreateLoadConstN	param_3	firstConstKind	INFERRED	word 0 of constant record 0 (24-byte records)
+local	Compiler__getOrCreateLoadConstN	param_4	firstConstValue	INFERRED	word 1 of constant record 0
+local	Compiler__getOrCreateLoadConstN	param_5	firstConstWord2	INFERRED	word 2 of constant record 0
+local	Compiler__getOrCreateLoadConstN	param_6	firstConstWord3	INFERRED	word 3 of constant record 0
+local	Compiler__getOrCreateLoadConstN	param_7	firstConstWord4	INFERRED	word 4 of constant record 0
+local	Compiler__getOrCreateLoadConstN	param_8	firstConstWord5	INFERRED	word 5 of constant record 0
+local	Compiler__getOrCreateLoadConstN	local_88	constRecords	INFERRED	stack copy of the constant records (24 bytes each); first two words from param_3/param_4, the rest are the caller's stack arguments
+use	IRInst__computeSourceLaneMask	iVar4	sourceType	INFERRED	type (+0x98) of the source operand, or of the operand's record when it has no source; 0x3b/0x42 mean no lanes are read	^\s*iVar4\ =\ FUN_00105594\(param_2,param_3\);$	+3
+use	IRInst__computeSourceLaneMask	iVar4	sourceType	INFERRED	type (+0x98) of the source operand, or of the operand's record when it has no source; 0x3b/0x42 mean no lanes are read	^\s*iVar4\ =\ \*\(int\ \*\)\(iVar4\ \+\ 0x98\);$	+1
+use	IRInst__computeSourceLaneMask	iVar4	sourceType	INFERRED	type (+0x98) of the source operand, or of the operand's record when it has no source; 0x3b/0x42 mean no lanes are read	^\s*if\ \(\(iVar4\ ==\ 0x3b\)\ \|\|\ \(iVar4\ ==\ 0x42\)\)\ goto\ switchD_000f3cf4_caseD_b;$	+1
+use	IRInst__computeSourceLaneMask	iVar4	registerClassIndex	INFERRED	index into the per-class component table DAT_001dc58c	^\s*iVar4\ =\ 0;$@2	+1
+use	IRInst__computeSourceLaneMask	iVar4	registerClassIndex	INFERRED	index into the per-class component table DAT_001dc58c	^\s*iVar4\ =\ \*\(int\ \*\)\(param_2\[0x4d\]\ \*\ 0xc\ \+\ \*\(int\ \*\)\(param_4\ \+\ 0x78\)\ \+\ 4\);$	+1
+use	IRInst__computeSourceLaneMask	iVar4	registerClassIndex	INFERRED	index into the per-class component table DAT_001dc58c	^\s*uVar2\ =\ \(DAT_001dc58c\)\[iVar4\ \*\ 2\];$	+1
+use	IRInst__computeSourceLaneMask	iVar4	opcodeId	INFERRED	opcode id (opcode descriptor +8) of the instruction	^\s*iVar4\ =\ \*\(int\ \*\)\(param_2\[0x22\]\ \+\ 8\);$	+5
+use	IRInst__computeSourceLaneMask	bVar1	notLastLane	INFERRED	loop continue flag (lane != 3)	^\s*bVar1\ =\ iVar4\ !=\ 3;$	+1
+use	IRInst__computeSourceLaneMask	bVar1	notLastLane	INFERRED	loop continue flag (lane != 3)	^\s*\}\ while\ \(bVar1\);$	+1
+use	IRInst__computeSourceLaneMask	uVar2	classComponentMask	INFERRED	component bit mask of the register class (bit0 x ... bit3 w)	^\s*uVar2\ =\ \(DAT_001dc58c\)\[iVar4\ \*\ 2\];$	+2
+use	IRInst__computeSourceLaneMask	uVar2	classComponentMask	INFERRED	component bit mask of the register class (bit0 x ... bit3 w)	^\s*if\ \(\(uVar2\ \&\ 2\)\ !=\ 0\)\ \{$	+1
+use	IRInst__computeSourceLaneMask	uVar2	classComponentMask	INFERRED	component bit mask of the register class (bit0 x ... bit3 w)	^\s*if\ \(\(uVar2\ \&\ 4\)\ !=\ 0\)\ \{$	+1
+use	IRInst__computeSourceLaneMask	uVar2	classComponentMask	INFERRED	component bit mask of the register class (bit0 x ... bit3 w)	^\s*if\ \(\(uVar2\ \&\ 8\)\ !=\ 0\)\ \{$	+1
+use	IRInst__computeSourceLaneMask	pbVar3	maskCursor	INFERRED	cursor over the four lane-mask bytes	^\s*pbVar3\ =\ param_1;$	+1
+use	IRInst__computeSourceLaneMask	pbVar3	maskCursor	INFERRED	cursor over the four lane-mask bytes	^\s*\*pbVar3\ =\ \*pbVar3\ \|\ 1;$	+1
+use	IRInst__computeSourceLaneMask	pbVar3	maskCursor	INFERRED	cursor over the four lane-mask bytes	^\s*pbVar3\ =\ pbVar3\ \+\ 1;$	+1
+use	IRInst__computeSourceLaneMask	pbVar3	maskCursor	INFERRED	cursor over the four lane-mask bytes	^\s*pbVar3\ =\ param_1;$@2	+1
+use	IRInst__computeSourceLaneMask	pbVar3	maskCursor	INFERRED	cursor over the four lane-mask bytes	^\s*\*pbVar3\ =\ \*pbVar3\ \|\ 1;$@2	+1
+use	IRInst__computeSourceLaneMask	pbVar3	maskCursor	INFERRED	cursor over the four lane-mask bytes	^\s*pbVar3\ =\ pbVar3\ \+\ 1;$@2	+1
+use	IRInst__computeSourceLaneMask	uVar5	resultMode	INFERRED	OpcodeInfo result mode of the instruction: selects the read-lane rule in the switch	^\s*uVar5\ =\ FUN_001134bc\(param_2\[0x22\],param_2,param_4\);$	+2
+use	IRInst__computeSourceLaneMask	pcVar6	destMaskCursor	INFERRED	cursor over the four destination select bytes (ghidra_home + 16)	^\s*pcVar6\ =\ \&\(\*\(unsigned\ int\ \*\)\(\(unsigned\ char\ \*\)ghidra_home\ \+\ 16\)\);$	+1
+use	IRInst__computeSourceLaneMask	pcVar6	destMaskCursor	INFERRED	cursor over the four destination select bytes (ghidra_home + 16)	^\s*if\ \(\(\*pcVar6\ ==\ '\\0'\)\ \&\&\ \(\*\(char\ \*\)\(\(int\)local_34\ \+\ iVar7\)\ !=\ '\\x04'\)\)\ \{$	+1
+use	IRInst__computeSourceLaneMask	pcVar6	destMaskCursor	INFERRED	cursor over the four destination select bytes (ghidra_home + 16)	^\s*pcVar6\ =\ pcVar6\ \+\ 1;$	+1
+local	IRInst__computeSourceLaneMask	local_38	operandSelectWord	INFERRED	select word of operand 0 (+0x10), read through byte indices in the result mode 6 loop
+local	IRInst__computeSourceLaneMask	local_34	operandSelectWordB	INFERRED	select word of the queried operand (+0x10), result mode 0xc loop
+use	RegisterMap__findConstVector	uVar4	vectorSize	INFERRED	element count of the constant instruction vector	^\s*uVar4\ =\ puVar9\[1\];$	+3
+use	RegisterMap__findConstVector	uVar4	selectedComponent	INFERRED	component selected by the lane's select byte (4 = unused)	^\s*uVar4\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)local_38\ \+\ iVar6\);$	+4
+use	RegisterMap__findConstVector	iVar6	canEncode	INFERRED	hardware-info vtable +0x100 on the remapped select bytes; nonzero accepts the instruction	^\s*iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(\*param_1\ \+\ 0x30c\)\ \+\ 0x100\)\)$	+1
+use	RegisterMap__findConstVector	iVar6	canEncode	INFERRED	hardware-info vtable +0x100 on the remapped select bytes; nonzero accepts the instruction	^\s*if\ \(iVar6\ !=\ 0\)\ \{$	+1
+use	RegisterMap__findConstVector	bVar1	notLastWord	INFERRED	loop continue flag (byte offset != 0xc)	^\s*bVar1\ =\ iVar6\ !=\ 0xc;$	+1
+use	RegisterMap__findConstVector	bVar1	notLastWord	INFERRED	loop continue flag (byte offset != 0xc)	^\s*\}\ while\ \(bVar1\);$	+1
+use	RegisterMap__findConstVector	bVar1	notLastLane	INFERRED	loop continue flag (lane != 3)	^\s*bVar1\ =\ iVar6\ !=\ 3;$	+1
+use	RegisterMap__findConstVector	bVar1	notLastLane	INFERRED	loop continue flag (lane != 3)	^\s*\}\ while\ \(bVar1\);$@2	+1
+use	RegisterMap__findConstVector	fVar2	wantedValue	INFERRED	float constant requested for the lane	^\s*if\ \(\(\(uVar4\ !=\ 4\)\ \&\&\ \(\(\(int\)\*\(char\ \*\)\(iVar10\ \+\ 0x15c\)\ >>\ \(uVar4\ \&\ 0x3f\)\ \&\ 1U\)\ !=\ 0\)\)\ \&\&$	+3
+use	RegisterMap__findConstVector	fVar2	wantedValue	INFERRED	float constant requested for the lane	^\s*if\ \(\(\(\(\(int\)\*\(char\ \*\)\(iVar10\ \+\ 0x15c\)\ >>\ \(uVar4\ \&\ 0x3f\)\ \&\ 1U\)\ !=\ 0\)\ \&\&$	+2
+use	RegisterMap__findConstVector	iVar3	recordCursor	INFERRED	cursor over the four 24-byte constant records of the candidate instruction	^\s*iVar3\ =\ iVar10;$	+4
+use	RegisterMap__findConstVector	iVar3	recordCursor	INFERRED	cursor over the four 24-byte constant records of the candidate instruction	^\s*iVar3\ =\ iVar3\ \+\ 0x18;$	+1
+use	RegisterMap__findConstVector	iVar3	recordCursor	INFERRED	cursor over the four 24-byte constant records of the candidate instruction	^\s*iVar3\ =\ iVar10;$@2	+1
+use	RegisterMap__findConstVector	iVar3	recordCursor	INFERRED	cursor over the four 24-byte constant records of the candidate instruction	^\s*if\ \(\(\(\(\(int\)\*\(char\ \*\)\(iVar10\ \+\ 0x15c\)\ >>\ \(uVar4\ \&\ 0x3f\)\ \&\ 1U\)\ !=\ 0\)\ \&\&$	+2
+use	RegisterMap__findConstVector	iVar3	recordCursor	INFERRED	cursor over the four 24-byte constant records of the candidate instruction	^\s*iVar3\ =\ iVar3\ \+\ 0x18;$@2	+1
+use	RegisterMap__findConstVector	piVar5	vectorSlot	INFERRED	slot of the candidate in the vector	^\s*piVar5\ =\ \(int\ \*\)\(uVar8\ \*\ 4\ \+\ puVar9\[2\]\);$	+1
+use	RegisterMap__findConstVector	piVar5	vectorSlot	INFERRED	slot of the candidate in the vector	^\s*piVar5\ =\ \(int\ \*\)FUN_0019423c\(puVar9,uVar8\);$	+1
+use	RegisterMap__findConstVector	piVar5	vectorSlot	INFERRED	slot of the candidate in the vector	^\s*iVar10\ =\ \*piVar5;$	+1
+use	RegisterMap__findConstVector	pcVar7	selectByteCursor	INFERRED	cursor over the four select bytes	^\s*pcVar7\ =\ param_3;$	+1
+use	RegisterMap__findConstVector	pcVar7	selectByteCursor	INFERRED	cursor over the four select bytes	^\s*if\ \(\*pcVar7\ !=\ '\\x04'\)\ \{$	+1
+use	RegisterMap__findConstVector	pcVar7	selectByteCursor	INFERRED	cursor over the four select bytes	^\s*pcVar7\ =\ pcVar7\ \+\ 1;$	+1
+use	RegisterMap__findConstVector	pcVar7	selectByteCursor	INFERRED	cursor over the four select bytes	^\s*pcVar7\ =\ param_3;$@2	+1
+use	RegisterMap__findConstVector	pcVar7	selectByteCursor	INFERRED	cursor over the four select bytes	^\s*\*pcVar7\ =\ \(char\)uVar4;$	+1
+use	RegisterMap__findConstVector	pcVar7	selectByteCursor	INFERRED	cursor over the four select bytes	^\s*pcVar7\ =\ pcVar7\ \+\ 1;$@2	+1
+use	RegisterMap__findConstVector	puVar9	instVector	INFERRED	vector of constant instructions at registerMap+0x20	^\s*puVar9\ =\ \(uint\ \*\)param_1\[8\];$	+3
+use	RegisterMap__findConstVector	puVar9	instVector	INFERRED	vector of constant instructions at registerMap+0x20	^\s*_memset\(uVar4\ \*\ 4\ \+\ puVar9\[2\],0,\(uVar8\ \-\ uVar4\)\ \*\ 4\ \+\ 4\);$	+2
+use	RegisterMap__findConstVector	puVar9	instVector	INFERRED	vector of constant instructions at registerMap+0x20	^\s*piVar5\ =\ \(int\ \*\)\(uVar8\ \*\ 4\ \+\ puVar9\[2\]\);$	+1
+use	RegisterMap__findConstVector	puVar9	instVector	INFERRED	vector of constant instructions at registerMap+0x20	^\s*piVar5\ =\ \(int\ \*\)FUN_0019423c\(puVar9,uVar8\);$	+1
+use	RegisterMap__findConstVector	iVar10	candidateInst	INFERRED	constant instruction under test; returned when its select bytes can be encoded	^\s*iVar10\ =\ \*piVar5;$	+1
+use	RegisterMap__findConstVector	iVar10	candidateInst	INFERRED	constant instruction under test; returned when its select bytes can be encoded	^\s*iVar3\ =\ iVar10;$	+4
+use	RegisterMap__findConstVector	iVar10	candidateInst	INFERRED	constant instruction under test; returned when its select bytes can be encoded	^\s*if\ \(\(\(uVar4\ !=\ 4\)\ \&\&\ \(\(\(int\)\*\(char\ \*\)\(iVar10\ \+\ 0x15c\)\ >>\ \(uVar4\ \&\ 0x3f\)\ \&\ 1U\)\ !=\ 0\)\)\ \&\&$	+3
+use	RegisterMap__findConstVector	iVar10	candidateInst	INFERRED	constant instruction under test; returned when its select bytes can be encoded	^\s*iVar3\ =\ iVar10;$@2	+1
+use	RegisterMap__findConstVector	iVar10	candidateInst	INFERRED	constant instruction under test; returned when its select bytes can be encoded	^\s*if\ \(\(\(\(\(int\)\*\(char\ \*\)\(iVar10\ \+\ 0x15c\)\ >>\ \(uVar4\ \&\ 0x3f\)\ \&\ 1U\)\ !=\ 0\)\ \&\&$	+2
+use	RegisterMap__findConstVector	iVar10	candidateInst	INFERRED	constant instruction under test; returned when its select bytes can be encoded	^\s*\*\(undefined4\ \*\)\(iVar10\ \+\ 0x9c\)\ =\ DAT_001aa860;$	+2
+local	RegisterMap__findConstVector	local_38	selectBytesCopy	INFERRED	copy of the four select bytes indexed by lane
+use	Block__bypass	iVar5	succVtable0x20Result	INFERRED	succBlock vtable +0x20 query (also tested on block at the start)	^\s*iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*param_3\ \+\ 0x20\)\)\(param_3\);$	+2
+use	Block__bypass	iVar5	succVtable0x20Result	INFERRED	succBlock vtable +0x20 query (also tested on block at the start)	^\s*iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*param_3\ \+\ 0x20\)\)\(param_3\);$@2	+2
+use	Block__bypass	iVar5	succVtable0x20Result	INFERRED	succBlock vtable +0x20 query (also tested on block at the start)	^\s*iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*param_3\ \+\ 0x20\)\)\(param_3\);$@3	+2
+use	Block__bypass	iVar5	blockPredecessors	INFERRED	block[0x35]: predecessor vector of the bypassed block	^\s*iVar5\ =\ param_1\[0x35\];$	+1
+use	Block__bypass	iVar5	blockPredecessors	INFERRED	block[0x35]: predecessor vector of the bypassed block	^\s*for\ \(uVar4\ =\ 1;\ uVar4\ <=\ \*\(uint\ \*\)\(iVar5\ \+\ 4\);\ uVar4\ =\ uVar4\ \+\ 1\)\ \{$	+2
+use	Block__bypass	iVar5	blockPredecessors	INFERRED	block[0x35]: predecessor vector of the bypassed block	^\s*FUN_00194208\(iVar5,iVar3\);$	+1
+use	Block__bypass	iVar5	blockSuccessors	INFERRED	block[0x34]: successor vector of the bypassed block	^\s*iVar5\ =\ param_1\[0x34\];$	+1
+use	Block__bypass	iVar5	blockSuccessors	INFERRED	block[0x34]: successor vector of the bypassed block	^\s*if\ \(\*\(uint\ \*\)\(iVar5\ \+\ 4\)\ <\ uVar4\)\ \{$	+1
+use	Block__bypass	iVar5	blockSuccessors	INFERRED	block[0x34]: successor vector of the bypassed block	^\s*piVar1\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(iVar5\ \+\ 8\)\ \+\ iVar6\);$	+1
+use	Block__bypass	iVar5	blockSuccessors	INFERRED	block[0x34]: successor vector of the bypassed block	^\s*FUN_00194208\(iVar5,iVar3\);$@2	+1
+use	Block__bypass	piVar1	listEntry	INFERRED	entry of the vector being scanned (non-null entries are counted)	^\s*piVar1\ =\ \*\(int\ \*\*\)\(iVar5\ \+\ \*\(int\ \*\)\(param_2\[0x34\]\ \+\ 8\)\);$	+3
+use	Block__bypass	piVar1	listEntry	INFERRED	entry of the vector being scanned (non-null entries are counted)	^\s*piVar1\ =\ \*\(int\ \*\*\)\(iVar6\ \+\ \*\(int\ \*\)\(iVar5\ \+\ 8\)\);$	+3
+use	Block__bypass	piVar1	listEntry	INFERRED	entry of the vector being scanned (non-null entries are counted)	^\s*piVar1\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(iVar5\ \+\ 8\)\ \+\ iVar6\);$	+3
+use	Block__bypass	puVar2	vectorSlot	INFERRED	element reference in the successor/predecessor vector being rewritten	^\s*puVar2\ =\ \(undefined4\ \*\)\(uVar7\ \*\ 4\ \+\ puVar8\[2\]\);$	+1
+use	Block__bypass	puVar2	vectorSlot	INFERRED	element reference in the successor/predecessor vector being rewritten	^\s*puVar2\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar8,uVar7\);$	+1
+use	Block__bypass	puVar2	vectorSlot	INFERRED	element reference in the successor/predecessor vector being rewritten	^\s*\*puVar2\ =\ param_3;$	+1
+use	Block__bypass	puVar2	vectorSlot	INFERRED	element reference in the successor/predecessor vector being rewritten	^\s*puVar2\ =\ \(undefined4\ \*\)\(uVar7\ \*\ 4\ \+\ puVar8\[2\]\);$@2	+1
+use	Block__bypass	puVar2	vectorSlot	INFERRED	element reference in the successor/predecessor vector being rewritten	^\s*puVar2\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar8,uVar7\);$@2	+1
+use	Block__bypass	puVar2	vectorSlot	INFERRED	element reference in the successor/predecessor vector being rewritten	^\s*\*puVar2\ =\ param_2;$	+1
+use	Block__bypass	uVar4	vectorSize	INFERRED	element count of the vector	^\s*uVar4\ =\ puVar8\[1\];$	+3
+use	Block__bypass	uVar4	vectorSize	INFERRED	element count of the vector	^\s*uVar4\ =\ puVar8\[1\];$@2	+3
+use	Block__bypass	puVar8	predSuccessors	INFERRED	predBlock[0x34]: successor vector of the predecessor	^\s*puVar8\ =\ \(uint\ \*\)param_2\[0x34\];$	+3
+use	Block__bypass	puVar8	predSuccessors	INFERRED	predBlock[0x34]: successor vector of the predecessor	^\s*_memset\(uVar4\ \*\ 4\ \+\ puVar8\[2\],0,\(uVar7\ \-\ uVar4\)\ \*\ 4\ \+\ 4\);$	+2
+use	Block__bypass	puVar8	predSuccessors	INFERRED	predBlock[0x34]: successor vector of the predecessor	^\s*puVar2\ =\ \(undefined4\ \*\)\(uVar7\ \*\ 4\ \+\ puVar8\[2\]\);$	+1
+use	Block__bypass	puVar8	predSuccessors	INFERRED	predBlock[0x34]: successor vector of the predecessor	^\s*puVar2\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar8,uVar7\);$	+1
+use	Block__bypass	puVar8	succPredecessors	INFERRED	succBlock[0x35]: predecessor vector of the successor	^\s*puVar8\ =\ \(uint\ \*\)param_3\[0x35\];$	+1
+use	Block__bypass	puVar8	succPredecessors	INFERRED	succBlock[0x35]: predecessor vector of the successor	^\s*for\ \(uVar4\ =\ 1;\ uVar4\ <=\ puVar8\[1\];\ uVar4\ =\ uVar4\ \+\ 1\)\ \{$	+5
+use	Block__bypass	puVar8	succPredecessors	INFERRED	succBlock[0x35]: predecessor vector of the successor	^\s*_memset\(uVar4\ \*\ 4\ \+\ puVar8\[2\],0,\(uVar7\ \-\ uVar4\)\ \*\ 4\ \+\ 4\);$@2	+2
+use	Block__bypass	puVar8	succPredecessors	INFERRED	succBlock[0x35]: predecessor vector of the successor	^\s*puVar2\ =\ \(undefined4\ \*\)\(uVar7\ \*\ 4\ \+\ puVar8\[2\]\);$@2	+1
+use	Block__bypass	puVar8	succPredecessors	INFERRED	succBlock[0x35]: predecessor vector of the successor	^\s*puVar2\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar8,uVar7\);$@2	+1
+use	LoopHeader__verify	piVar1	currentInst	INFERRED	instruction in the block list (this+0x98), walked via the next link at [2]	^\s*piVar1\ =\ \*\(int\ \*\*\)\(param_1\ \+\ 0x98\);$	+1
+use	LoopHeader__verify	piVar1	currentInst	INFERRED	instruction in the block list (this+0x98), walked via the next link at [2]	^\s*param_7\ =\ piVar1\[5\]\ \&\ 1;$	+1
+use	LoopHeader__verify	piVar1	currentInst	INFERRED	instruction in the block list (this+0x98), walked via the next link at [2]	^\s*uVar3\ =\ \(\*\*\(code\ \*\*\)\(\*piVar1\ \+\ 0x34\)\)\(piVar1\);$	+1
+use	LoopHeader__verify	piVar1	currentInst	INFERRED	instruction in the block list (this+0x98), walked via the next link at [2]	^\s*if\ \(\(\(\(\(int\)\(\(ulonglong\)uVar3\ >>\ 0x20\)\ ==\ 0\)\ \&\&$	+7
+use	LoopHeader__verify	piVar1	currentInst	INFERRED	instruction in the block list (this+0x98), walked via the next link at [2]	^\s*piVar2\ =\ \(int\ \*\)piVar1\[2\];$@2	+1
+use	LoopHeader__verify	piVar1	currentInst	INFERRED	instruction in the block list (this+0x98), walked via the next link at [2]	^\s*piVar1\ =\ piVar2;$	+1
+use	LoopHeader__verify	piVar2	nextInst	INFERRED	next instruction of the list	^\s*for\ \(piVar2\ =\ \(int\ \*\)\(\*\(int\ \*\*\)\(param_1\ \+\ 0x98\)\)\[2\];\ piVar2\ !=\ \(int\ \*\)0x0;$	+2
+use	LoopHeader__verify	piVar2	nextInst	INFERRED	next instruction of the list	^\s*piVar2\ =\ \(int\ \*\)piVar1\[2\];$	+1
+use	LoopHeader__verify	piVar2	nextInst	INFERRED	next instruction of the list	^\s*piVar2\ =\ \(int\ \*\)piVar1\[2\];$@2	+1
+use	LoopHeader__verify	piVar2	nextInst	INFERRED	next instruction of the list	^\s*piVar1\ =\ piVar2;$	+1
+use	LoopHeader__verify	uVar3	queryResult	INFERRED	64-bit return pair of the instruction vtable queries (+0x34, +0x38, +0x78)	^\s*uVar3\ =\ \(\*\*\(code\ \*\*\)\(\*piVar1\ \+\ 0x34\)\)\(piVar1\);$	+7
