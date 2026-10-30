@@ -1273,21 +1273,22 @@ int FudoPs__vslot29_convertInnerIfsToPredicates(this, program)
   undefined4 this;
   int program;
 {
+  int isInnerIf;
   int convertInnerIfToPredEnabled;
-  int iVar1;
-  int *piVar2;
+  int nextLink;
+  int *block;
   
   convertInnerIfToPredEnabled = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),0x4a);
   if (convertInnerIfToPredEnabled != 0) {
-    piVar2 = *(int **)(program + 900);
-    iVar1 = piVar2[2];
-    while (iVar1 != 0) {
-      iVar1 = (**(code **)(*piVar2 + 0x24))(piVar2);
-      if (iVar1 != 0) {
-        piVar2 = (int *)FUN_0012bb48(program,piVar2);
+    block = *(int **)(program + 900);
+    nextLink = block[2];
+    while (nextLink != 0) {
+      isInnerIf = (**(code **)(*block + 0x24))(block);
+      if (isInnerIf != 0) {
+        block = (int *)FUN_0012bb48(program,block);
       }
-      piVar2 = (int *)piVar2[2];
-      iVar1 = piVar2[2];
+      block = (int *)block[2];
+      nextLink = block[2];
     }
   }
   return;

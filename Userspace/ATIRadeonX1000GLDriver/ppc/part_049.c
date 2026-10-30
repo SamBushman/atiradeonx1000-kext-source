@@ -1854,23 +1854,23 @@ int KhanPs__vslot31_isNotTextureFetch(this, inst)
 }
 
 /* KhanPs__vslot65_isEncodableSourceSwizzle @ 0x189660 (152 bytes) */
-int KhanPs__vslot65_isEncodableSourceSwizzle(this, param_2, param_3, param_4, param_5)
+int KhanPs__vslot65_isEncodableSourceSwizzle(this, unusedArg2, unusedArg3, swizzlePtr, sourceInst)
   int *this;
-  undefined4 param_2;
-  undefined4 param_3;
-  int *param_4;
-  int *param_5;
+  undefined4 unusedArg2;
+  undefined4 unusedArg3;
+  int *swizzlePtr;
+  int *sourceInst;
 {
-  int iVar1;
+  int predicate4c;
   undefined4 callResult;
   
-  if (((param_5 != (int *)0x0) && (iVar1 = (**(code **)(*param_5 + 0x4c))(param_5), iVar1 != 0)) &&
-     (*param_4 == 0x10304)) {
+  if (((sourceInst != (int *)0x0) && (predicate4c = (**(code **)(*sourceInst + 0x4c))(sourceInst), predicate4c != 0)) &&
+     (*swizzlePtr == 0x10304)) {
     return 1;
   }
                     
                     
-  callResult = (**(code **)(*this + 0x100))(this,param_4);
+  callResult = (**(code **)(*this + 0x100))(this,swizzlePtr);
   return callResult;
 }
 
@@ -2005,16 +2005,16 @@ LAB_00189934:
 }
 
 /* SchedModel__assignConstantSelectors @ 0x1899ac (568 bytes) */
-int SchedModel__assignConstantSelectors(schedModel, instA, instB, param_4, inlineLimit)
+int SchedModel__assignConstantSelectors(schedModel, instA, instB, unusedArg4, inlineLimit)
   int schedModel;
   int *instA;
   int *instB;
-  undefined4 param_4;
+  undefined4 unusedArg4;
   int inlineLimit;
 {
   int *operandVReg;
-  bool bVar1;
-  int *piVar2;
+  bool notLastLane;
+  int *seenConstant;
   int *a0;
   int loopIndex;
   int operandIndex;
@@ -2024,7 +2024,7 @@ int SchedModel__assignConstantSelectors(schedModel, instA, instB, param_4, inlin
   int loopIndex4;
   int *inst2;
   int *inst;
-  int *local_68 [13];
+  int *seenConstants [13];
   
   loopIndex2 = 0;
   do {
@@ -2045,18 +2045,18 @@ LAB_00189a60:
               if (loopIndex2 < 1) {
                 loopIndex = 0;
 LAB_00189ab0:
-                local_68[loopIndex2] = a0;
+                seenConstants[loopIndex2] = a0;
                 loopIndex2 = loopIndex2 + 1;
               }
               else {
                 loopIndex = 0;
                 loopIndex4 = loopIndex2;
-                piVar2 = local_68[0];
-                while (a0 != piVar2) {
+                seenConstant = seenConstants[0];
+                while (a0 != seenConstant) {
                   loopIndex = loopIndex + 1;
                   loopIndex4 = loopIndex4 + -1;
                   if (loopIndex4 == 0) goto LAB_00189ab0;
-                  piVar2 = local_68[loopIndex];
+                  seenConstant = seenConstants[loopIndex];
                 }
               }
               loopIndex4 = 0;
@@ -2066,9 +2066,9 @@ LAB_00189ab0:
                   if (*(char *)(loopIndex4 + loopIndex + 0x10) != '\x04') {
                     (**(code **)(*inst2 + 0x88))(inst2,operandIndex,loopIndex4,3);
                   }
-                  bVar1 = loopIndex4 != 3;
+                  notLastLane = loopIndex4 != 3;
                   loopIndex4 = loopIndex4 + 1;
-                } while (bVar1);
+                } while (notLastLane);
                 *(undefined1 *)((int)a0 + 0x9f) = 0;
               }
               else {
@@ -2077,9 +2077,9 @@ LAB_00189ab0:
                   if (*(char *)(loopIndex4 + loopIndex + 0x10) != '\x04') {
                     (**(code **)(*inst2 + 0x88))(inst2,operandIndex,loopIndex4,0);
                   }
-                  bVar1 = loopIndex4 != 3;
+                  notLastLane = loopIndex4 != 3;
                   loopIndex4 = loopIndex4 + 1;
-                } while (bVar1);
+                } while (notLastLane);
                 *(undefined1 *)(a0 + 0x27) = 0;
               }
             }
@@ -2096,9 +2096,9 @@ LAB_00189ab0:
           }
         }
       }
-      bVar1 = loopIndex3 == 1;
+      notLastLane = loopIndex3 == 1;
       loopIndex3 = loopIndex3 + 1;
-      if (bVar1) {
+      if (notLastLane) {
         return;
       }
       inst = instB;

@@ -1711,26 +1711,28 @@ int ValueKey__forwardSource3LaneIfEqual(ctx, lane)
 }
 
 /* ValueKey__foldCompareSameSourcesValueNumber @ 0x179894 (184 bytes) */
-int ValueKey__foldCompareSameSourcesValueNumber(ctx, param_2)
+int ValueKey__foldCompareSameSourcesValueNumber(ctx, lane)
   int ctx;
-  int param_2;
+  int lane;
 {
+  int compareHolds;
+  int inst;
   undefined4 exprRecord;
-  int iVar1;
-  undefined4 uVar2;
+  int lanesEqual;
+  undefined4 resultBits;
   
-  iVar1 = ((int (*)())ValueKey__operandLanesEqual)(ctx,param_2,1,2);
-  if (iVar1 != 0) {
-    iVar1 = *(int *)(ctx + 0xb0);
-    if (((*(uint *)(iVar1 + 0xb8) & 1) == (*(uint *)(iVar1 + 0xd0) & 1)) &&
-       ((*(uint *)(iVar1 + 0xb8) >> 1 & 1) == (*(uint *)(iVar1 + 0xd0) >> 1 & 1))) {
-      iVar1 = ((bool (*)())evaluateCompareFloats)(iVar1,(double)FLOAT_001aa0d4,(double)FLOAT_001aa0d4);
-      uVar2 = 0x3f800000;
-      if (iVar1 == 0) {
-        uVar2 = 0;
+  lanesEqual = ((int (*)())ValueKey__operandLanesEqual)(ctx,lane,1,2);
+  if (lanesEqual != 0) {
+    inst = *(int *)(ctx + 0xb0);
+    if (((*(uint *)(inst + 0xb8) & 1) == (*(uint *)(inst + 0xd0) & 1)) &&
+       ((*(uint *)(inst + 0xb8) >> 1 & 1) == (*(uint *)(inst + 0xd0) >> 1 & 1))) {
+      compareHolds = ((bool (*)())evaluateCompareFloats)(inst,(double)FLOAT_001aa0d4,(double)FLOAT_001aa0d4);
+      resultBits = 0x3f800000;
+      if (compareHolds == 0) {
+        resultBits = 0;
       }
-      exprRecord = Compiler__valueNumberForExpr(*(undefined4 *)(ctx + 0x238),uVar2);
-      *(undefined4 *)(param_2 * 4 + ctx + 0x30) = exprRecord;
+      exprRecord = Compiler__valueNumberForExpr(*(undefined4 *)(ctx + 0x238),resultBits);
+      *(undefined4 *)(lane * 4 + ctx + 0x30) = exprRecord;
       return 1;
     }
   }
@@ -2065,9 +2067,9 @@ int FUN_0017a034(ctx, lane)
 }
 
 /* ValueKey__setLiteralVec4Operand @ 0x17a130 (284 bytes) */
-int ValueKey__setLiteralVec4Operand(operandIndex, param_2, inst, compiler)
+int ValueKey__setLiteralVec4Operand(operandIndex, vec4Constant, inst, compiler)
   int operandIndex;
-  float *param_2;
+  float *vec4Constant;
   int inst;
   int compiler;
 {
@@ -2076,20 +2078,20 @@ int ValueKey__setLiteralVec4Operand(operandIndex, param_2, inst, compiler)
   int *vector;
   undefined4 *allocation;
   int operandRef;
-  undefined4 uVar4;
+  undefined4 dummySelectWord;
   int vectorCapacity;
-  undefined4 *puVar6;
+  undefined4 *newValueKey;
   
-  uVar4 = DAT_001b01d8;
+  dummySelectWord = DAT_001b01d8;
   if (operandIndex == 0) {
     *(undefined4 *)(inst + 0x9c) = DAT_001b01d8;
   }
   else {
     operandRecord = IRInst__getOperandRecord(inst,operandIndex);
-    *(undefined4 *)(operandRecord + 0x10) = uVar4;
+    *(undefined4 *)(operandRecord + 0x10) = dummySelectWord;
   }
-  ((void (*)())IRInst__makeLiteralVec4Float)(inst,*(undefined4 *)(compiler + COMP_currentProgram),operandIndex,(double)*param_2,(double)param_2[1],
-               (double)param_2[2],(double)param_2[3]);
+  ((void (*)())IRInst__makeLiteralVec4Float)(inst,*(undefined4 *)(compiler + COMP_currentProgram),operandIndex,(double)*vec4Constant,(double)vec4Constant[1],
+               (double)vec4Constant[2],(double)vec4Constant[3]);
   vector = *(int **)(*(int *)(operandIndex * 0x18 + inst + 0x8c) + 0x18);
   if (*vector == 0) {
     vector = (int *)Vector__elementRefGrow(vector,0);
@@ -2106,12 +2108,12 @@ int ValueKey__setLiteralVec4Operand(operandIndex, param_2, inst, compiler)
   if (*(int *)(*(int *)(operandRef + 0x2c) + 4) == 0) {
     arenaAt378 = *(undefined4 *)(compiler + COMP_arenaB);
     allocation = (undefined4 *)Arena__alloc(arenaAt378,0x240);
-    puVar6 = allocation + 1;
+    newValueKey = allocation + 1;
     *allocation = arenaAt378;
-    ValueKey__init(puVar6,vectorCapacity,compiler);
-    FUN_00174e0c(puVar6);
-    ValueKey__propagateLaneValues(puVar6);
-    VReg__pushDefinition(operandRef,*(undefined4 *)(*(int *)(vectorCapacity + 0x158) + 0xb0),puVar6);
+    ValueKey__init(newValueKey,vectorCapacity,compiler);
+    FUN_00174e0c(newValueKey);
+    ValueKey__propagateLaneValues(newValueKey);
+    VReg__pushDefinition(operandRef,*(undefined4 *)(*(int *)(vectorCapacity + 0x158) + 0xb0),newValueKey);
   }
   IRInst__setOperandRef(inst,operandIndex,operandRef);
   return vectorCapacity;
@@ -2345,22 +2347,22 @@ int FUN_0017a748(ctx)
   int ctx;
 {
   int operandRecord;
-  bool bVar1;
-  uint uVar2;
+  bool notLastLane;
+  uint word0xb8Flags;
   undefined4 *loopPtr2;
   int loopRemaining;
   int compareCondition;
-  uint uVar6;
+  uint word0xd0Flags;
   undefined4 *loopPtr3;
   int loopIndex;
-  undefined4 local_38 [8];
+  undefined4 replacementVec4 [8];
   
   loopRemaining = ((int (*)())Inst__allWrittenLanesSatisfy)(ctx,1,2);
   if (loopRemaining != 0) {
-    uVar6 = *(uint *)(*(int *)(ctx + 0xb0) + 0xd0);
-    uVar2 = *(uint *)(*(int *)(ctx + 0xb0) + 0xb8);
-    if (((uVar2 & 1) == (uVar6 & 1)) && ((uVar2 >> 1 & 1) == (uVar6 >> 1 & 1))) {
-      loopPtr3 = local_38;
+    word0xd0Flags = *(uint *)(*(int *)(ctx + 0xb0) + 0xd0);
+    word0xb8Flags = *(uint *)(*(int *)(ctx + 0xb0) + 0xb8);
+    if (((word0xb8Flags & 1) == (word0xd0Flags & 1)) && ((word0xb8Flags >> 1 & 1) == (word0xd0Flags >> 1 & 1))) {
+      loopPtr3 = replacementVec4;
       loopRemaining = 4;
       loopPtr2 = loopPtr3;
       do {
@@ -2388,11 +2390,11 @@ int FUN_0017a748(ctx)
             *loopPtr3 = 0x3f800000;
           }
         }
-        bVar1 = loopIndex != 3;
+        notLastLane = loopIndex != 3;
         loopPtr3 = loopPtr3 + 1;
         loopIndex = loopIndex + 1;
-      } while (bVar1);
-      ((int (*)())FUN_0017a294)(ctx,local_38,*(undefined4 *)(ctx + 0x238));
+      } while (notLastLane);
+      ((int (*)())FUN_0017a294)(ctx,replacementVec4,*(undefined4 *)(ctx + 0x238));
       ValueKey__rebuild(ctx);
       return 1;
     }

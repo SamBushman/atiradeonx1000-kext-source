@@ -1123,24 +1123,24 @@ int ValueKey__foldCompareSameSourcesToConstant(param_1)
 int ValueKey__replaceWithZeroIfSourcesEqual(ctx)
   int ctx;
 {
-  uint uVar1;
+  uint word0xb8Flags;
   int callResult;
-  uint uVar3;
-  undefined4 local_28;
-  undefined4 local_24;
-  undefined4 local_20;
-  undefined4 local_1c;
+  uint word0xd0Flags;
+  undefined4 zeroVec4X;
+  undefined4 zeroVec4Y;
+  undefined4 zeroVec4Z;
+  undefined4 zeroVec4W;
   
   callResult = FUN_00176fd4(ctx,1,2);
   if (callResult != 0) {
-    uVar3 = *(uint *)(*(int *)(ctx + 0xb0) + 0xd0);
-    uVar1 = *(uint *)(*(int *)(ctx + 0xb0) + 0xb8);
-    if (((uVar1 & 1) == (uVar3 & 1)) && ((uVar1 >> 1 & 1) == (uVar3 >> 1 & 1))) {
-      local_1c = 0;
-      local_28 = 0;
-      local_24 = 0;
-      local_20 = 0;
-      ((int (*)())ValueKey__rewriteAsMovOfVec4Constant)(ctx,&local_28);
+    word0xd0Flags = *(uint *)(*(int *)(ctx + 0xb0) + 0xd0);
+    word0xb8Flags = *(uint *)(*(int *)(ctx + 0xb0) + 0xb8);
+    if (((word0xb8Flags & 1) == (word0xd0Flags & 1)) && ((word0xb8Flags >> 1 & 1) == (word0xd0Flags >> 1 & 1))) {
+      zeroVec4W = 0;
+      zeroVec4X = 0;
+      zeroVec4Y = 0;
+      zeroVec4Z = 0;
+      ((int (*)())ValueKey__rewriteAsMovOfVec4Constant)(ctx,&zeroVec4X);
       ValueKey__rebuild(ctx);
       return 1;
     }

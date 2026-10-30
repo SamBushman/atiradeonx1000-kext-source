@@ -2114,16 +2114,16 @@ int R520MachineAssembler__vslot66_selectBitsForLiteralLanes(this, sourceIndex, p
   undefined4 laneSelectors;
 {
   unsigned int ghidra_home[8] = { this, sourceIndex, packedBase, inst, laneSelectors, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
-  bool bVar1;
-  byte bVar2;
+  bool notLastGroup;
+  byte laneSelector;
   float callResult;
-  uint uVar4;
+  uint sourceComponent;
   int *a0;
   int operandRecord;
   uint *packedWord;
   byte *loopPtr2;
   int loopIndex;
-  uint uVar9;
+  uint bitShift;
   
   if (1 < *(int *)(inst + 0x84)) {
     loopIndex = 2;
@@ -2133,29 +2133,29 @@ int R520MachineAssembler__vslot66_selectBitsForLiteralLanes(this, sourceIndex, p
       a0 = (int *)IRInst__getOperandSource(inst,loopIndex);
       if ((a0 != (int *)0x0) && (operandRecord = (**(code **)(*a0 + 0x48))(a0), operandRecord != 0)) {
         loopPtr2 = (byte *)&(*(unsigned int *)((unsigned char *)ghidra_home + 16));
-        uVar9 = 0;
+        bitShift = 0;
         do {
-          bVar2 = *loopPtr2;
-          if (bVar2 < 4) {
+          laneSelector = *loopPtr2;
+          if (laneSelector < 4) {
             operandRecord = IRInst__getOperandRecord(inst,loopIndex);
-            uVar4 = (uint)*(byte *)((uint)bVar2 + operandRecord + 0x10);
-            if (uVar4 < 4) {
-              callResult = GH_U2F((unsigned int)(a0[uVar4 * 6 + 8]));
+            sourceComponent = (uint)*(byte *)((uint)laneSelector + operandRecord + 0x10);
+            if (sourceComponent < 4) {
+              callResult = GH_U2F((unsigned int)(a0[sourceComponent * 6 + 8]));
               if (callResult == 0.0) {
-                *packedWord = *packedWord & ~(7 << (uVar9 & 0x3f)) | 4 << (uVar9 & 0x3f);
+                *packedWord = *packedWord & ~(7 << (bitShift & 0x3f)) | 4 << (bitShift & 0x3f);
               }
               else if (callResult == 0.5) {
-                *packedWord = *packedWord & ~(7 << (uVar9 & 0x3f)) | 5 << (uVar9 & 0x3f);
+                *packedWord = *packedWord & ~(7 << (bitShift & 0x3f)) | 5 << (bitShift & 0x3f);
               }
               else if (callResult == 1.0) {
-                *packedWord = *packedWord & ~(7 << (uVar9 & 0x3f)) | 6 << (uVar9 & 0x3f);
+                *packedWord = *packedWord & ~(7 << (bitShift & 0x3f)) | 6 << (bitShift & 0x3f);
               }
             }
           }
-          bVar1 = uVar9 != 6;
+          notLastGroup = bitShift != 6;
           loopPtr2 = loopPtr2 + 1;
-          uVar9 = uVar9 + 3;
-        } while (bVar1);
+          bitShift = bitShift + 3;
+        } while (notLastGroup);
       }
       loopIndex = loopIndex + 1;
     } while (loopIndex <= *(int *)(inst + 0x84));
@@ -2176,7 +2176,7 @@ int R520MachineAssembler__vslot71_setAluSourceSelectsAndModifiers(this, irInst, 
 {
   bool writeRgbFlag;
   bool writeAlphaFlag;
-  int iVar3;
+  int recordPtr;
   int sourceCount;
   undefined1 modifierBits;
   int loopIndex;
@@ -2213,18 +2213,18 @@ int R520MachineAssembler__vslot71_setAluSourceSelectsAndModifiers(this, irInst, 
     }
     loopIndex = 1;
     while( true ) {
-      iVar3 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-      *(byte *)(iVar3 + 0x2a) = *(byte *)(iVar3 + 0x2a) | 0x80;
-      iVar3 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-      *(byte *)(iVar3 + 0x39) = *(byte *)(iVar3 + 0x39) | 0x80;
-      iVar3 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-      *(byte *)(iVar3 + 0x2b) = *(byte *)(iVar3 + 0x2b) | 0x80;
-      iVar3 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-      *(byte *)(iVar3 + 0x3a) = *(byte *)(iVar3 + 0x3a) | 0x80;
-      iVar3 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-      *(byte *)(iVar3 + 0x2c) = *(byte *)(iVar3 + 0x2c) | 0x80;
-      iVar3 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-      *(byte *)(iVar3 + 0x3b) = *(byte *)(iVar3 + 0x3b) | 0x80;
+      recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+      *(byte *)(recordPtr + 0x2a) = *(byte *)(recordPtr + 0x2a) | 0x80;
+      recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+      *(byte *)(recordPtr + 0x39) = *(byte *)(recordPtr + 0x39) | 0x80;
+      recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+      *(byte *)(recordPtr + 0x2b) = *(byte *)(recordPtr + 0x2b) | 0x80;
+      recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+      *(byte *)(recordPtr + 0x3a) = *(byte *)(recordPtr + 0x3a) | 0x80;
+      recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+      *(byte *)(recordPtr + 0x2c) = *(byte *)(recordPtr + 0x2c) | 0x80;
+      recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+      *(byte *)(recordPtr + 0x3b) = *(byte *)(recordPtr + 0x3b) | 0x80;
       modifierBits = packSourceModifier(irInst[loopIndex * 6 + 0x28] & 1,(uint)irInst[loopIndex * 6 + 0x28] >> 1 & 1);
       if (writeAlphaFlag) {
         if (loopIndex == 1) {
@@ -2263,15 +2263,15 @@ int R520MachineAssembler__vslot71_setAluSourceSelectsAndModifiers(this, irInst, 
         if (writeRgbFlag) {
           *(char *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8) + 0x2b) =
                (char)*(undefined4 *)(rgbSelects + 8);
-          iVar3 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-          *(uint *)(iVar3 + 0x24) =
-               (*(uint *)(rgbPacked + 8) & 7) << 0xd | *(uint *)(iVar3 + 0x24) & 0xffff1fff;
-          iVar3 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-          *(uint *)(iVar3 + 0x24) =
-               (*(uint *)(rgbPacked + 8) & 0x38) << 7 | *(uint *)(iVar3 + 0x24) & 0xffffe3ff;
-          iVar3 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-          *(uint *)(iVar3 + 0x24) =
-               (*(uint *)(rgbPacked + 8) & 0x1c0) << 1 | *(uint *)(iVar3 + 0x24) & 0xfffffc7f;
+          recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+          *(uint *)(recordPtr + 0x24) =
+               (*(uint *)(rgbPacked + 8) & 7) << 0xd | *(uint *)(recordPtr + 0x24) & 0xffff1fff;
+          recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+          *(uint *)(recordPtr + 0x24) =
+               (*(uint *)(rgbPacked + 8) & 0x38) << 7 | *(uint *)(recordPtr + 0x24) & 0xffffe3ff;
+          recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+          *(uint *)(recordPtr + 0x24) =
+               (*(uint *)(rgbPacked + 8) & 0x1c0) << 1 | *(uint *)(recordPtr + 0x24) & 0xfffffc7f;
         }
         if (writeAlphaFlag) {
           *(char *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8) + 0x3a) =
@@ -2284,15 +2284,15 @@ int R520MachineAssembler__vslot71_setAluSourceSelectsAndModifiers(this, irInst, 
         if (writeRgbFlag) {
           *(char *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8) + 0x2c) =
                (char)*(undefined4 *)(rgbSelects + 0xc);
-          iVar3 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-          *(uint *)(iVar3 + 0x28) =
-               *(int *)(rgbPacked + 0xc) << 0x1d | *(uint *)(iVar3 + 0x28) & 0x1fffffff;
-          iVar3 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-          *(uint *)(iVar3 + 0x28) =
-               (*(uint *)(rgbPacked + 0xc) & 0x38) << 0x17 | *(uint *)(iVar3 + 0x28) & 0xe3ffffff;
-          iVar3 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-          *(uint *)(iVar3 + 0x28) =
-               (*(uint *)(rgbPacked + 0xc) & 0x1c0) << 0x11 | *(uint *)(iVar3 + 0x28) & 0xfc7fffff;
+          recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+          *(uint *)(recordPtr + 0x28) =
+               *(int *)(rgbPacked + 0xc) << 0x1d | *(uint *)(recordPtr + 0x28) & 0x1fffffff;
+          recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+          *(uint *)(recordPtr + 0x28) =
+               (*(uint *)(rgbPacked + 0xc) & 0x38) << 0x17 | *(uint *)(recordPtr + 0x28) & 0xe3ffffff;
+          recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+          *(uint *)(recordPtr + 0x28) =
+               (*(uint *)(rgbPacked + 0xc) & 0x1c0) << 0x11 | *(uint *)(recordPtr + 0x28) & 0xfc7fffff;
         }
         if (writeAlphaFlag) {
           *(char *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8) + 0x3b) =

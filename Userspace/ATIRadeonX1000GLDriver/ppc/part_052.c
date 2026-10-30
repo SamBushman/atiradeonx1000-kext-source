@@ -7,47 +7,51 @@ int R300MachineAssembler__emitTexRecord(this, inst, unused, compiler)
   undefined4 unused;
   int compiler;
 {
+  int sourceIsNotSampled;
+  int isSampledOperand;
+  int texTargetType;
+  int texUnit;
   int *operandVReg;
   undefined2 sourceRegister;
-  int iVar2;
-  int iVar3;
+  int targetQueryResult;
+  int recordTable;
   byte texFlags;
   int irOpcode;
-  int iVar7;
+  int recordIndex;
   
   operandVReg = (int *)IRInst__getOperandSource(inst,1);
   sourceRegister = thunk_FUN_00134de8(*(undefined4 *)(compiler + COMP_currentProgram),operandVReg);
-  iVar2 = (**(code **)(**(int **)(compiler + COMP_target) + 0x7c))(*(int **)(compiler + COMP_target),inst);
-  if (iVar2 == 0) {
+  targetQueryResult = (**(code **)(**(int **)(compiler + COMP_target) + 0x7c))(*(int **)(compiler + COMP_target),inst);
+  if (targetQueryResult == 0) {
     IRInst__getOperandRecord(inst,0);
   }
   *(undefined4 *)(this[0x18] * 0x48 + this[0x16]) = 2;
   *(undefined2 *)(this[0x18] * 0x48 + this[0x16] + 0xe) = sourceRegister;
-  iVar2 = *(int *)(inst + 0x134);
+  texUnit = *(int *)(inst + 0x134);
   irOpcode = *(int *)(*(int *)(inst + 0x88) + 8);
   if (irOpcode != 0x77) {
-    *(char *)(this[0x18] * 0x48 + this[0x16] + 0x19) = (char)iVar2;
-    iVar7 = this[0x18];
-    iVar3 = this[0x16];
+    *(char *)(this[0x18] * 0x48 + this[0x16] + 0x19) = (char)texUnit;
+    recordIndex = this[0x18];
+    recordTable = this[0x16];
     sourceRegister = thunk_FUN_00134de8(*(undefined4 *)(compiler + COMP_currentProgram),inst);
-    *(undefined2 *)(iVar7 * 0x48 + iVar3 + 0xc) = sourceRegister;
+    *(undefined2 *)(recordIndex * 0x48 + recordTable + 0xc) = sourceRegister;
   }
   else {
     *(undefined2 *)(this[0x18] * 0x48 + this[0x16] + 0xc) = 0;
     *(undefined4 *)(this[0x17] + 0x9370) = 1;
     *(undefined1 *)(this[0x18] * 0x48 + this[0x16] + 0x19) = 0;
   }
-  iVar3 = (**(code **)(*operandVReg + 0x80))(operandVReg);
-  if (iVar3 == 0) {
-    *(undefined4 *)(iVar2 * 4 + this[0x17] + 0x9378) = 1;
+  sourceIsNotSampled = (**(code **)(*operandVReg + 0x80))(operandVReg);
+  if (sourceIsNotSampled == 0) {
+    *(undefined4 *)(texUnit * 4 + this[0x17] + 0x9378) = 1;
   }
   if (*(int *)(PTR_DAT_001e913c + irOpcode * 0x38 + 0xc) != -1) {
     *(char *)(this[0x18] * 0x48 + this[0x16] + 0x1a) =
          (char)*(int *)(PTR_DAT_001e913c + irOpcode * 0x38 + 0xc);
   }
   texFlags = 0xc;
-  iVar2 = *(int *)(iVar2 * 0xc + *(int *)(*(int *)(compiler + COMP_currentProgram) + 0x78) + 4);
-  if (((iVar2 != 2) && (texFlags = 8, iVar2 != 3)) && (texFlags = 0, iVar2 == 1)) {
+  texTargetType = *(int *)(texUnit * 0xc + *(int *)(*(int *)(compiler + COMP_currentProgram) + 0x78) + 4);
+  if (((texTargetType != 2) && (texFlags = 8, texTargetType != 3)) && (texFlags = 0, texTargetType == 1)) {
     texFlags = 0xe;
   }
   if (irOpcode != 0x77) {
@@ -62,8 +66,8 @@ int R300MachineAssembler__emitTexRecord(this, inst, unused, compiler)
     *(undefined1 *)(this[0x18] * 0x48 + this[0x16] + 0x1f) = 0;
   }
   operandVReg = (int *)IRInst__getOperandSource(inst,1);
-  iVar2 = (**(code **)(*operandVReg + 0x80))(operandVReg);
-  if (iVar2 != 0) {
+  isSampledOperand = (**(code **)(*operandVReg + 0x80))(operandVReg);
+  if (isSampledOperand != 0) {
                     
                     
     (**(code **)(*this + 0x154))(this,1,inst,compiler);

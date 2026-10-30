@@ -1,0 +1,30 @@
+local	ValueKey__replaceWithZeroIfSourcesEqual	uVar1	word0xb8Flags	INFERRED	inst +0xb8 modifier word
+local	ValueKey__replaceWithZeroIfSourcesEqual	uVar3	word0xd0Flags	INFERRED	inst +0xd0 modifier word
+local	ValueKey__replaceWithZeroIfSourcesEqual	local_28	zeroVec4X	INFERRED	vec4 {0,0,0,0} handed to the mov rewrite (frame-adjacent, whole variables)
+local	ValueKey__replaceWithZeroIfSourcesEqual	local_24	zeroVec4Y	INFERRED	see zeroVec4X
+local	ValueKey__replaceWithZeroIfSourcesEqual	local_20	zeroVec4Z	INFERRED	see zeroVec4X
+local	ValueKey__replaceWithZeroIfSourcesEqual	local_1c	zeroVec4W	INFERRED	see zeroVec4X
+local	SchedModel__assignConstantSelectors	param_4	unusedArg4	INFERRED	unused argument
+local	SchedModel__assignConstantSelectors	bVar1	notLastLane	INFERRED	lane != 3 loop continue flag
+local	SchedModel__assignConstantSelectors	piVar2	seenConstant	INFERRED	entry of the list of distinct constant sources already assigned
+local	SchedModel__assignConstantSelectors	local_68	seenConstants	INFERRED	distinct constant-register sources seen so far (position = constant slot index)
+use	ValueKey__foldCompareSameSourcesValueNumber	iVar1	lanesEqual	INFERRED	ValueKey__operandLanesEqual(ctx, lane, 1, 2)	^\s*iVar1\ =\ \(\(int\ \(\*\)\(\)\)FUN_00179608\)\(param_1,param_2,1,2\);$	+2
+use	ValueKey__foldCompareSameSourcesValueNumber	iVar1	inst	INFERRED	current instruction ctx+0xb0	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xb0\);$	+3
+use	ValueKey__foldCompareSameSourcesValueNumber	iVar1	inst	INFERRED	current instruction ctx+0xb0	^\s*iVar1\ =\ \(\(bool\ \(\*\)\(\)\)FUN_0010b820\)\(iVar1,\(double\)FLOAT_001aa0d4,\(double\)FLOAT_001aa0d4\);$	+1	rhs	none
+use	ValueKey__foldCompareSameSourcesValueNumber	iVar1	compareHolds	INFERRED	evaluateCompareFloats of equal operands	^\s*iVar1\ =\ \(\(bool\ \(\*\)\(\)\)FUN_0010b820\)\(iVar1,\(double\)FLOAT_001aa0d4,\(double\)FLOAT_001aa0d4\);$	+1	lhs	none
+use	ValueKey__foldCompareSameSourcesValueNumber	iVar1	compareHolds	INFERRED	evaluateCompareFloats of equal operands	^\s*if\ \(iVar1\ ==\ 0\)\ \{$	+1
+use	R300MachineAssembler__emitTexRecord	iVar2	targetQueryResult	INFERRED	target vtable +0x7c query for the instruction	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(param_4\ \+\ COMP_target\)\ \+\ 0x7c\)\)\(\*\(int\ \*\*\)\(param_4\ \+\ COMP_target\),param_2\);$	+2
+use	R300MachineAssembler__emitTexRecord	iVar2	texUnit	INFERRED	texture unit / sampler index of the instruction (inst +0x134)	^\s*iVar2\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x134\);$	+1
+use	R300MachineAssembler__emitTexRecord	iVar2	texUnit	INFERRED	texture unit / sampler index	^\s*\*\(char\ \*\)\(param_1\[0x18\]\ \*\ 0x48\ \+\ param_1\[0x16\]\ \+\ 0x19\)\ =\ \(char\)iVar2;$	+1
+use	R300MachineAssembler__emitTexRecord	iVar2	texUnit	INFERRED	texture unit / sampler index	^\s*\*\(undefined4\ \*\)\(iVar2\ \*\ 4\ \+\ param_1\[0x17\]\ \+\ 0x9378\)\ =\ 1;$	+1
+use	R300MachineAssembler__emitTexRecord	iVar2	texUnit	INFERRED	texture unit / sampler index	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar2\ \*\ 0xc\ \+\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_4\ \+\ COMP_currentProgram\)\ \+\ 0x78\)\ \+\ 4\);$	+1	rhs	none
+use	R300MachineAssembler__emitTexRecord	iVar2	texTargetType	INFERRED	texture target type from the program's sampler table	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar2\ \*\ 0xc\ \+\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_4\ \+\ COMP_currentProgram\)\ \+\ 0x78\)\ \+\ 4\);$	+1	lhs	none
+use	R300MachineAssembler__emitTexRecord	iVar2	texTargetType	INFERRED	texture target type from the program's sampler table	^\s*if\ \(\(\(iVar2\ !=\ 2\)\ \&\&\ \(bVar5\ =\ 8,\ iVar2\ !=\ 3\)\)\ \&\&\ \(bVar5\ =\ 0,\ iVar2\ ==\ 1\)\)\ \{$	+1
+use	R300MachineAssembler__emitTexRecord	iVar2	isSampledOperand	INFERRED	source 1 vtable +0x80 predicate	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*piVar1\ \+\ 0x80\)\)\(piVar1\);$	+2
+use	R300MachineAssembler__emitTexRecord	iVar3	recordTable	INFERRED	this[0x16]: base of the 0x48-byte record table	^\s*iVar3\ =\ param_1\[0x16\];$	+1
+use	R300MachineAssembler__emitTexRecord	iVar3	recordTable	INFERRED	this[0x16]: base of the 0x48-byte record table	^\s*\*\(undefined2\ \*\)\(iVar7\ \*\ 0x48\ \+\ iVar3\ \+\ 0xc\)\ =\ uVar4;$	+1
+use	R300MachineAssembler__emitTexRecord	iVar3	sourceIsNotSampled	INFERRED	source 1 vtable +0x80 predicate	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*piVar1\ \+\ 0x80\)\)\(piVar1\);$	+2
+use	R300MachineAssembler__emitTexRecord	iVar7	recordIndex	INFERRED	this[0x18]: index of the current record	^\s*iVar7\ =\ param_1\[0x18\];$	+1
+use	R300MachineAssembler__emitTexRecord	iVar7	recordIndex	INFERRED	this[0x18]: index of the current record	^\s*\*\(undefined2\ \*\)\(iVar7\ \*\ 0x48\ \+\ iVar3\ \+\ 0xc\)\ =\ uVar4;$	+1
+local	ValueKey__foldCompareSameSourcesValueNumber	param_2	lane	INFERRED	lane / source index
+local	ValueKey__foldCompareSameSourcesValueNumber	uVar2	resultBits	INFERRED	IEEE bits of the compare result: 0x3f800000 (1.0) when the comparison holds for equal operands, else 0
