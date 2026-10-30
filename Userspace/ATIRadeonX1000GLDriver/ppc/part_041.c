@@ -2204,10 +2204,10 @@ int InterferenceMatrix__testPair(param_1, param_2, param_3)
   undefined4 param_2;
   undefined4 param_3;
 {
-  uint uVar1;
+  uint bitIndex;
   
-  uVar1 = ((int (*)())pairIndex)(param_1,param_2,param_3);
-  return *(uint *)((uVar1 >> 3 & 0x1ffffffc) + *param_1 + 8) >> (uVar1 & 0x1f) & 1;
+  bitIndex = ((int (*)())pairIndex)(param_1,param_2,param_3);
+  return *(uint *)((bitIndex >> 3 & 0x1ffffffc) + *param_1 + 8) >> (bitIndex & 0x1f) & 1;
 }
 
 /* FUN_00134bf0 @ 0x134bf0 (40 bytes) */

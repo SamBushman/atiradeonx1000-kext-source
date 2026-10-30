@@ -277,22 +277,22 @@ int KhanPs__vslot74_seedConstantValueNumbers(this, param_2)
   undefined4 this;
   undefined4 param_2;
 {
-  undefined4 uVar1;
+  undefined4 seedExpr;
   int exprRecord;
-  undefined4 *puVar3;
+  undefined4 *seedExprCursor;
   
-  puVar3 = &DAT_001aff68;
+  seedExprCursor = &DAT_001aff68;
   do {
-    exprRecord = Compiler__valueNumberForExpr(param_2,*puVar3);
-    uVar1 = *puVar3;
+    exprRecord = Compiler__valueNumberForExpr(param_2,*seedExprCursor);
+    seedExpr = *seedExprCursor;
     *(undefined4 *)(exprRecord + 0x1c) = 0;
-    puVar3 = puVar3 + 1;
-    *(undefined4 *)(exprRecord + 0x14) = uVar1;
+    seedExprCursor = seedExprCursor + 1;
+    *(undefined4 *)(exprRecord + 0x14) = seedExpr;
     *(undefined1 *)(exprRecord + 8) = 1;
     *(undefined1 *)(exprRecord + 9) = 0;
     *(undefined4 *)(exprRecord + 0x18) = 0;
     FUN_0017629c(exprRecord,param_2);
-  } while (puVar3 != &DAT_001aff74);
+  } while (seedExprCursor != &DAT_001aff74);
   return;
 }
 
@@ -1197,22 +1197,22 @@ int KhanVs__vslot74(this, param_2)
   undefined4 this;
   undefined4 param_2;
 {
-  undefined4 uVar1;
+  undefined4 seedExpr;
   int exprRecord;
-  undefined4 *puVar3;
+  undefined4 *seedExprCursor;
   
-  puVar3 = &DAT_001affb0;
+  seedExprCursor = &DAT_001affb0;
   do {
-    exprRecord = Compiler__valueNumberForExpr(param_2,*puVar3);
-    uVar1 = *puVar3;
+    exprRecord = Compiler__valueNumberForExpr(param_2,*seedExprCursor);
+    seedExpr = *seedExprCursor;
     *(undefined4 *)(exprRecord + 0x1c) = 0;
-    puVar3 = puVar3 + 1;
-    *(undefined4 *)(exprRecord + 0x14) = uVar1;
+    seedExprCursor = seedExprCursor + 1;
+    *(undefined4 *)(exprRecord + 0x14) = seedExpr;
     *(undefined1 *)(exprRecord + 8) = 1;
     *(undefined1 *)(exprRecord + 9) = 0;
     *(undefined4 *)(exprRecord + 0x18) = 0;
     FUN_0017629c(exprRecord,param_2);
-  } while (puVar3 != &DAT_001affb8);
+  } while (seedExprCursor != &DAT_001affb8);
   return;
 }
 

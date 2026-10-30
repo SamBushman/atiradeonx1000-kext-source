@@ -3910,14 +3910,14 @@ int TempValue__ctor_124938(this, param_2, param_3, param_4, compiler)
   undefined4 param_4;
   int compiler;
 {
-  int iVar1;
+  int streamCounter;
   
   ((int (*)())VRegInfo__ctor_12379c)(this,param_2,param_3,param_4,compiler);
   *this = &PTR_FUN_001ea7b8;
-  iVar1 = *(int *)(compiler + 0x334);
-  this[4] = iVar1;
-  this[7] = iVar1;
-  *(int *)(compiler + 0x334) = iVar1 + 1;
+  streamCounter = *(int *)(compiler + 0x334);
+  this[4] = streamCounter;
+  this[7] = streamCounter;
+  *(int *)(compiler + 0x334) = streamCounter + 1;
   this[0xc] = 0;
   return;
 }
@@ -4063,14 +4063,14 @@ int TempValue__ctor_124e04(this, param_2, param_3, param_4, compiler)
   undefined4 param_4;
   int compiler;
 {
-  int iVar1;
+  int streamCounter;
   
   ((int (*)())VRegInfo__ctor_12379c)(this,param_2,param_3,param_4,compiler);
   *this = &PTR_FUN_001ea7b8;
-  iVar1 = *(int *)(compiler + 0x334);
-  this[4] = iVar1;
-  this[7] = iVar1;
-  *(int *)(compiler + 0x334) = iVar1 + 1;
+  streamCounter = *(int *)(compiler + 0x334);
+  this[4] = streamCounter;
+  this[7] = streamCounter;
+  *(int *)(compiler + 0x334) = streamCounter + 1;
   this[0xc] = 0;
   return;
 }
