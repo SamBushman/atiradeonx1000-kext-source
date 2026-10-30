@@ -421,7 +421,7 @@
 0x4c260	732	FUN_0004c260	part_007	converted
 0x4c540	4	noop_4c540	part_007	converted
 0x4c560	440	FUN_0004c560	part_007	converted
-0x4c720	1632	FUN_0004c720	part_007	converted
+0x4c720	1632	gldValidateVertexStreams	part_007	converted
 0x4cde0	72	freeAndNullField	part_007	converted
 0x4ce30	680	FUN_0004ce30	part_007	converted
 0x4d100	1264	FUN_0004d100	part_007	converted

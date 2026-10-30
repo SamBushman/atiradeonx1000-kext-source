@@ -422,7 +422,7 @@
 0x4c260	FUN_0004c260	732	yes	
 0x4c540	noop_4c540	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x4c560	FUN_0004c560	440	no	indirect call (driver context / vtable / callback)
-0x4c720	FUN_0004c720	1632	yes	
+0x4c720	gldValidateVertexStreams	1632	yes	
 0x4cde0	freeAndNullField	72	yes	
 0x4ce30	FUN_0004ce30	680	yes	
 0x4d100	FUN_0004d100	1264	no	indirect call (driver context / vtable / callback)

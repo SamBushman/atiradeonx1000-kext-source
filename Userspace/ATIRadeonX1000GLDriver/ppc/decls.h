@@ -628,7 +628,7 @@ extern int FUN_0004c100();
 extern int FUN_0004c260();
 extern int noop_4c540();
 extern int FUN_0004c560();
-extern int FUN_0004c720();
+extern int gldValidateVertexStreams();
 extern int freeAndNullField();
 extern int FUN_0004ce30();
 extern int FUN_0004d100();
