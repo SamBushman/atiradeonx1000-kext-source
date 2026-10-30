@@ -1,0 +1,5 @@
+local	recordProgramAllocateAndEmit	local_64	registerBudget	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordProgramAllocateAndEmit	local_68	sourceMaskCopy	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordProgramAllocateAndEmit	local_a8	pickScratch	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordProgramAllocateAndEmit	bVar31	noCandidate	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordProgramAllocateAndEmit	iVar30	destIsFile0	INFERRED	role read off the function body (see notes_gld_q03.md)

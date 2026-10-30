@@ -5917,16 +5917,16 @@ int ffvpBuildProgram(ctx, passThroughArg2, passThroughArg3, constRegCountOut, pa
   int unitKindIndex;
   ushort *texCoordMapPtr;
   int unitCountdown;
-  float local_78;
-  uint local_74 [4];
-  float local_64;
-  int local_60;
-  int local_5c;
-  int local_58;
-  int local_54;
-  float local_50;
-  int local_4c;
-  int local_48;
+  float matrixElem0;
+  uint matrixElems1to4 [4];
+  float matrixElem5;
+  int matrixElem6;
+  int matrixElem7;
+  int matrixElem8;
+  int matrixElem9;
+  float matrixElem10;
+  int matrixElem11;
+  int matrixElem12;
   
   stateBlock = *(int *)(*(int *)(ctx + 4) + 0x10);
   if ((*(uint *)(ctx + 0x1874) & 0xc0000000) != 0x40000000) {
@@ -5957,7 +5957,7 @@ LAB_0009d4b8:
   }
   ctxByte11d2 = (uint)(byte)((unsigned char *)0x000011d2)[ctx];
   programRecord = ffvpCreateBuilder(ctx,passThroughArg2,programFlag);
-  (**(code **)(((unsigned char *)0x000012c0) + ctx))(ctx,programRecord,&local_78,passThroughArg3);
+  (**(code **)(((unsigned char *)0x000012c0) + ctx))(ctx,programRecord,&matrixElem0,passThroughArg3);
   if (*(int *)(ctx + 0x13c) == 1) {
     _memcpy(programRecord,ctx + 0x19c,0x68);
   }
@@ -5969,13 +5969,13 @@ LAB_0009d4b8:
   _memset(paramMapCursor,0xffffffff,0x324);
   paramList[2] = 0;
   if (((unsigned char *)0x00004301)[stateBlockCopy] == '\0') {
-    local_78 = GH_U2F((unsigned int)((stateBlockCopy + 0x2460)));
+    matrixElem0 = GH_U2F((unsigned int)((stateBlockCopy + 0x2460)));
     nextConstReg = 0;
-    if ((((((local_74[0] != 0 || local_74[1] != 0) || local_74[2] != 0) ||
-          FLOAT_001aa0e8 != local_78) ||
-         (((local_74[3] != 0 || local_60 != 0) || local_5c != 0) || FLOAT_001aa0e8 != local_64)) ||
-        (((local_58 != 0 || local_54 != 0) || local_4c != 0) || FLOAT_001aa0e8 != local_50)) ||
-        (((local_48 != 0 || unaff_r17 != 0) || unaff_r18 != 0) || FLOAT_001aa0e8 != unaff_r19)) {
+    if ((((((matrixElems1to4[0] != 0 || matrixElems1to4[1] != 0) || matrixElems1to4[2] != 0) ||
+          FLOAT_001aa0e8 != matrixElem0) ||
+         (((matrixElems1to4[3] != 0 || matrixElem6 != 0) || matrixElem7 != 0) || FLOAT_001aa0e8 != matrixElem5)) ||
+        (((matrixElem8 != 0 || matrixElem9 != 0) || matrixElem11 != 0) || FLOAT_001aa0e8 != matrixElem10)) ||
+        (((matrixElem12 != 0 || unaff_r17 != 0) || unaff_r18 != 0) || FLOAT_001aa0e8 != unaff_r19)) {
       *(undefined4 *)(programRecord + 0xa4) = 0;
       nextConstReg = 4;
       *(undefined4 *)(paramList[2] * 4 + *paramList) = 0;
@@ -6006,11 +6006,11 @@ LAB_0009d4b8:
     mapCursorA = paramMapCursor;
     do {
       if (((1 << (matrixCountByte & 0x3f)) - 1U & 1 << (matrixIndex & 0x3f)) != 0) {
-        if ((((((local_74[0] != 0 || local_74[1] != 0) || local_74[2] != 0) ||
+        if ((((((matrixElems1to4[0] != 0 || matrixElems1to4[1] != 0) || matrixElems1to4[2] != 0) ||
               FLOAT_001aa0e8 != matrixCursor) ||
-             (((local_74[3] != 0 || local_60 != 0) || local_5c != 0) || FLOAT_001aa0e8 != local_64))
-            || (((local_58 != 0 || local_54 != 0) || local_4c != 0) || FLOAT_001aa0e8 != local_50))
-            || (((local_48 != 0 || unaff_r17 != 0) || unaff_r18 != 0) || FLOAT_001aa0e8 != unaff_r19
+             (((matrixElems1to4[3] != 0 || matrixElem6 != 0) || matrixElem7 != 0) || FLOAT_001aa0e8 != matrixElem5))
+            || (((matrixElem8 != 0 || matrixElem9 != 0) || matrixElem11 != 0) || FLOAT_001aa0e8 != matrixElem10))
+            || (((matrixElem12 != 0 || unaff_r17 != 0) || unaff_r18 != 0) || FLOAT_001aa0e8 != unaff_r19
                )) {
           *mapCursorA = nextConstReg;
           nextConstReg = nextConstReg + 4;
@@ -6018,7 +6018,7 @@ LAB_0009d4b8:
           *(uint *)(paramList[2] * 4 + paramList[1]) = matrixIndex;
           paramList[2] = paramList[2] + 1;
         }
-        local_78 = matrixCursor;
+        matrixElem0 = matrixCursor;
         if ((*(uint *)(ctx + 0x8c) & 0x80000) != 0) {
           mapCursorA[4] = nextConstReg;
           regAfterFour = nextConstReg + 4;
@@ -6387,12 +6387,12 @@ LAB_0009d4b8:
   }
   *constRegCountOut = nextConstReg;
   if (((unsigned char *)0x00004301)[stateBlock] == '\0') {
-    local_78 = GH_U2F((unsigned int)((stateBlock + 0x1960)));
-    if ((((((local_74[0] == 0 && local_74[1] == 0) && local_74[2] == 0) &&
-          FLOAT_001aa0e8 == local_78) &&
-         (((local_74[3] == 0 && local_60 == 0) && local_5c == 0) && FLOAT_001aa0e8 == local_64)) &&
-        (((local_58 == 0 && local_54 == 0) && local_4c == 0) && FLOAT_001aa0e8 == local_50)) &&
-        (((local_48 == 0 && unaff_r17 == 0) && unaff_r18 == 0) && FLOAT_001aa0e8 == unaff_r19)) {
+    matrixElem0 = GH_U2F((unsigned int)((stateBlock + 0x1960)));
+    if ((((((matrixElems1to4[0] == 0 && matrixElems1to4[1] == 0) && matrixElems1to4[2] == 0) &&
+          FLOAT_001aa0e8 == matrixElem0) &&
+         (((matrixElems1to4[3] == 0 && matrixElem6 == 0) && matrixElem7 == 0) && FLOAT_001aa0e8 == matrixElem5)) &&
+        (((matrixElem8 == 0 && matrixElem9 == 0) && matrixElem11 == 0) && FLOAT_001aa0e8 == matrixElem10)) &&
+        (((matrixElem12 == 0 && unaff_r17 == 0) && unaff_r18 == 0) && FLOAT_001aa0e8 == unaff_r19)) {
       ffvpEmitPositionPassThrough(programRecord,ctxFlag400Active,ctxByte11d2);
     }
     else {
@@ -6411,7 +6411,7 @@ LAB_0009d4b8:
         tableCount = 1;
       }
       do {
-        local_74[genIndex] = (uint)(byte)((unsigned char *)0x000013a9)[texUnitEnableCursor];
+        matrixElems1to4[genIndex] = (uint)(byte)((unsigned char *)0x000013a9)[texUnitEnableCursor];
         tableCount = tableCount - 1;
         genIndex = genIndex + 1;
         texUnitEnableCursor = texUnitEnableCursor + 1;
@@ -6419,16 +6419,16 @@ LAB_0009d4b8:
     }
     ((int (*)())ffvpPrepareBlendWeights)(programRecord,(uint)*(byte *)(ctx + 0x91),(uint)(byte)((unsigned char *)0x00004302)[stateBlock]);
     if (*(char *)(ctx + 0x129) == '\0') {
-      ((int (*)())ffvpEmitBlendedClipPosition)(programRecord,local_74,(uint)*(byte *)(ctx + 0x91),
+      ((int (*)())ffvpEmitBlendedClipPosition)(programRecord,matrixElems1to4,(uint)*(byte *)(ctx + 0x91),
                    (uint)(byte)((unsigned char *)0x00004302)[stateBlock],ctxFlag400Active,ctxByte11d2);
     }
     else {
-      ((int (*)())ffvpEmitBlendedEyePosition)(programRecord,local_74,(uint)*(byte *)(ctx + 0x91),
+      ((int (*)())ffvpEmitBlendedEyePosition)(programRecord,matrixElems1to4,(uint)*(byte *)(ctx + 0x91),
                    (uint)(byte)((unsigned char *)0x00004302)[stateBlock],(uint)(*(char *)(ctx + 0x90) == '\x02'));
       ((int (*)())ffvpEmitProjectedPosition)(programRecord,ctxFlag400Active,ctxByte11d2);
     }
     if (*(char *)(ctx + 0x12a) != '\0') {
-      ((int (*)())ffvpEmitBlendedEyeNormal)(programRecord,local_74,(uint)*(byte *)(ctx + 0x91),
+      ((int (*)())ffvpEmitBlendedEyeNormal)(programRecord,matrixElems1to4,(uint)*(byte *)(ctx + 0x91),
                    (uint)(byte)((unsigned char *)0x00004302)[stateBlock]);
     }
   }

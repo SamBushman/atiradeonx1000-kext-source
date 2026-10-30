@@ -4922,61 +4922,61 @@ int evsEmitOp879d(compiler, tokenStream, compileState, op)
   int evsEncodeSourceResult;
   int extvsOperandDataTypeResult;
   int evsAppendInstructionResult;
-  int iVar3;
-  uint uVar4;
-  uint uStack_58;
-  uint uStack_54;
-  uint uStack_50;
-  uint uStack_4c;
-  undefined4 uStack_48;
-  int iStack_44;
-  undefined4 uStack_40;
-  undefined4 uStack_3c;
-  undefined4 uStack_38;
-  undefined4 uStack_34;
-  undefined4 uStack_30;
+  int tokenCountPtr;
+  uint laneIndex;
+  uint selectWord0;
+  uint selectWord1;
+  uint selectWord2;
+  uint selectWord3;
+  undefined4 srcWord0;
+  int srcWord1;
+  undefined4 srcWord2;
+  undefined4 srcWord3;
+  undefined4 srcWord4;
+  undefined4 srcWord5;
+  undefined4 srcWord6;
   
   extvsOperandDataTypeResult = extvsOperandDataType(compileState + 0x1c,op + 4);
-  uVar4 = *(uint *)(op + 0x40);
-  if (3 < uVar4) {
+  laneIndex = *(uint *)(op + 0x40);
+  if (3 < laneIndex) {
     return 0xffffffff;
   }
-  iVar3 = tokenStream + 4;
-  evsAppendInstructionResult = ((int (*)())evsAppendInstruction)(compiler,iVar3,0x47,0);
+  tokenCountPtr = tokenStream + 4;
+  evsAppendInstructionResult = ((int (*)())evsAppendInstruction)(compiler,tokenCountPtr,0x47,0);
   if (evsAppendInstructionResult == 0) {
     return 0xffffffff;
   }
-  evsEncodeDestinationResult = ((int (*)())evsEncodeDestination)(compiler,iVar3,compileState,op + 4,0);
+  evsEncodeDestinationResult = ((int (*)())evsEncodeDestination)(compiler,tokenCountPtr,compileState,op + 4,0);
   if (evsEncodeDestinationResult == 0) {
     return 0xffffffff;
   }
-  uStack_30 = *(undefined4 *)(op + 0x38);
-  uStack_48 = *(undefined4 *)(op + 0x20);
-  iStack_44 = *(int *)(op + 0x24);
-  uStack_3c = *(undefined4 *)(op + 0x2c);
-  uStack_38 = *(undefined4 *)(op + 0x30);
-  uStack_34 = *(undefined4 *)(op + 0x34);
-  uStack_40 = *(undefined4 *)(op + 0x28);
+  srcWord6 = *(undefined4 *)(op + 0x38);
+  srcWord0 = *(undefined4 *)(op + 0x20);
+  srcWord1 = *(int *)(op + 0x24);
+  srcWord3 = *(undefined4 *)(op + 0x2c);
+  srcWord4 = *(undefined4 *)(op + 0x30);
+  srcWord5 = *(undefined4 *)(op + 0x34);
+  srcWord2 = *(undefined4 *)(op + 0x28);
   if (extvsOperandDataTypeResult != 0x87be) {
-    iStack_44 = uVar4 + iStack_44;
-    evsEncodeSourceResult = ((int (*)())evsEncodeSource)(compiler,iVar3,compileState,&uStack_48,1,0);
+    srcWord1 = laneIndex + srcWord1;
+    evsEncodeSourceResult = ((int (*)())evsEncodeSource)(compiler,tokenCountPtr,compileState,&srcWord0,1,0);
     goto LAB_00075028;
   }
-  if (uVar4 == 1) {
+  if (laneIndex == 1) {
 LAB_00074fd4:
-    uStack_58 = uVar4;
-    uStack_54 = uVar4;
-    uStack_50 = uVar4;
-    uStack_4c = uVar4;
+    selectWord0 = laneIndex;
+    selectWord1 = laneIndex;
+    selectWord2 = laneIndex;
+    selectWord3 = laneIndex;
   }
-  else if (uVar4 == 0) {
-    uStack_4c = 0;
-    uStack_58 = 0;
-    uStack_54 = 0;
-    uStack_50 = 0;
+  else if (laneIndex == 0) {
+    selectWord3 = 0;
+    selectWord0 = 0;
+    selectWord1 = 0;
+    selectWord2 = 0;
   }
-  else if ((uVar4 == 2) || (uVar4 == 3)) goto LAB_00074fd4;
-  evsEncodeSourceResult = ((int (*)())evsEncodeSource)(compiler,iVar3,compileState,&uStack_48,1,&uStack_58);
+  else if ((laneIndex == 2) || (laneIndex == 3)) goto LAB_00074fd4;
+  evsEncodeSourceResult = ((int (*)())evsEncodeSource)(compiler,tokenCountPtr,compileState,&srcWord0,1,&selectWord0);
 LAB_00075028:
   if (evsEncodeSourceResult == 0) {
     return 0xffffffff;
@@ -4996,7 +4996,7 @@ int evsEmitOp879c(compiler, tokenStream, compileState, op)
   int evsAppendInstructionResult;
   int tokenCountPtr;
   uint laneIndex;
-  uint uStack_48;
+  uint dstWord0;
   uint dstWord1;
   uint dstWord2;
   uint dstWord3;
@@ -5015,7 +5015,7 @@ int evsEmitOp879c(compiler, tokenStream, compileState, op)
     return 0xffffffff;
   }
   if (extvsOperandDataTypeResult == 0x87bf) {
-    uStack_48 = *(uint *)(op + 4);
+    dstWord0 = *(uint *)(op + 4);
     dstWord1 = *(uint *)(op + 8);
     dstWord2 = *(uint *)(op + 0xc);
     dstWord3 = *(uint *)(op + 0x10);
@@ -5042,17 +5042,17 @@ int evsEmitOp879c(compiler, tokenStream, compileState, op)
       dstWord2 = 0;
       dstWord3 = 0;
     }
-    evsEncodeDestinationResult = ((int (*)())evsEncodeDestination)(compiler,tokenCountPtr,compileState,&uStack_48,1);
+    evsEncodeDestinationResult = ((int (*)())evsEncodeDestination)(compiler,tokenCountPtr,compileState,&dstWord0,1);
   }
   else {
-    uStack_48 = *(uint *)(op + 4);
+    dstWord0 = *(uint *)(op + 4);
     dstWord2 = *(uint *)(op + 0xc);
     dstWord3 = *(uint *)(op + 0x10);
     dstWord4 = *(undefined4 *)(op + 0x14);
     dstWord5 = *(undefined4 *)(op + 0x18);
     dstWord6 = *(undefined4 *)(op + 0x1c);
     dstWord1 = laneIndex + *(int *)(op + 8);
-    evsEncodeDestinationResult = ((int (*)())evsEncodeDestination)(compiler,tokenCountPtr,compileState,&uStack_48,1);
+    evsEncodeDestinationResult = ((int (*)())evsEncodeDestination)(compiler,tokenCountPtr,compileState,&dstWord0,1);
   }
   if (evsEncodeDestinationResult == 0) {
     return 0xffffffff;
@@ -5064,19 +5064,19 @@ int evsEmitOp879c(compiler, tokenStream, compileState, op)
   if (laneIndex != 1) {
     if (laneIndex == 0) {
       dstWord3 = 0;
-      uStack_48 = 0;
+      dstWord0 = 0;
       dstWord1 = 0;
       dstWord2 = 0;
       goto LAB_00075258;
     }
     if ((laneIndex != 2) && (laneIndex != 3)) goto LAB_00075258;
   }
-  uStack_48 = laneIndex;
+  dstWord0 = laneIndex;
   dstWord1 = laneIndex;
   dstWord2 = laneIndex;
   dstWord3 = laneIndex;
 LAB_00075258:
-  ((int (*)())evsEncodeSource)(compiler,tokenCountPtr,compileState,op + 0x20,1,&uStack_48);
+  ((int (*)())evsEncodeSource)(compiler,tokenCountPtr,compileState,op + 0x20,1,&dstWord0);
   return 1;
 }
 

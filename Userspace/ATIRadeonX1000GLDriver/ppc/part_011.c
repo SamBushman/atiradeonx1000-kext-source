@@ -3096,8 +3096,8 @@ int recordProgramAllocateAndEmit(alloc, unusedArg2, scratchArg3, scratchArg4, sc
   int iVar27;
   int recordCount;
   uint srcBit13;
-  bool bVar31;
-  int iVar30;
+  bool noCandidate;
+  int destIsFile0;
   int *lastChainNode;
   uint componentLoopB;
   uint componentLoop;
@@ -3119,7 +3119,7 @@ int recordProgramAllocateAndEmit(alloc, unusedArg2, scratchArg3, scratchArg4, sc
   char recordBFileCount1;
   char recordBFileCount2;
   char recordBFileCount3;
-  undefined1 local_a8 [12];
+  undefined1 pickScratch [12];
   uint local_9c [5];
   uint liveCountSnapshot;
   int partnerIndex;
@@ -3129,17 +3129,17 @@ int recordProgramAllocateAndEmit(alloc, unusedArg2, scratchArg3, scratchArg4, sc
   uint lastOutputSlot;
   int secondListCount;
   code *local_6c;
-  uint local_68;
-  uint local_64;
+  uint sourceMaskCopy;
+  uint registerBudget;
   unsigned char *local_60;
   
   allocPlus38 = alloc + 0x38;
-  local_64 = 0xe;
+  registerBudget = 0xe;
   configPtr = *(uint **)(alloc + 0x34);
   configFlags = *configPtr;
   configBit6 = configFlags >> 6 & 1;
   if (configBit6 == 0) {
-    local_64 = 0xc;
+    registerBudget = 0xc;
   }
   recordCount = *(int *)(alloc + 0x2286c);
   records = (code *)(alloc + 0x1286c);
@@ -3266,7 +3266,7 @@ LAB_0007b378:
       local_6c = configBit6Arg;
       if ((recordSlotPtr[0xb40f] & 0x10000) != 0) {
         recordWord0 = *(uint *)recordPtrB;
-        local_68 = *recordSlotPtr;
+        sourceMaskCopy = *recordSlotPtr;
         if ((recordWord0 & 0xf00) == 0x500) {
           configBit6Arg = (code *)(recordWord0 >> 0xd & 0x7f);
           registerSlot = configBit6Arg + (char)(DAT_001aa758)[recordWord0 >> 8 & 0xf] * 0x100;
@@ -3294,7 +3294,7 @@ LAB_0007b378:
         sourceWordPtr = recordPtrB;
         do {
           sourceWordPtr = sourceWordPtr + 4;
-          if ((local_68 & 1 << (sourceSlot & 0x3f)) != 0) {
+          if ((sourceMaskCopy & 1 << (sourceSlot & 0x3f)) != 0) {
             scratchArg6 = *(code **)sourceWordPtr;
             scratchArg5 = (int *)((uint)scratchArg6 & 0xf);
             if (scratchArg5 == (int *)((int)((unsigned char *)0x0) + 1U)) {
@@ -3367,33 +3367,33 @@ LAB_0007b378:
       return 2;
     }
     scratchArg6 = records;
-    recordCount = ((int (*)())recordPickNextToEmit)(alloc,local_64,9,pickedNeedsRetarget,&pickedRegister,records,*configPtr,*configPtr >> 6 & 1);
+    recordCount = ((int (*)())recordPickNextToEmit)(alloc,registerBudget,9,pickedNeedsRetarget,&pickedRegister,records,*configPtr,*configPtr >> 6 & 1);
     if (recordCount < 0) {
       configFlagsB = **(uint **)(alloc + 0x34);
-      bVar31 = true;
-      while ((configFlagsB = configFlagsB >> 6 & 1, configFlagsB != 0 && (local_64 < 0x20))) {
-        if (local_64 == 0x12) {
-          local_64 = 0x18;
+      noCandidate = true;
+      while ((configFlagsB = configFlagsB >> 6 & 1, configFlagsB != 0 && (registerBudget < 0x20))) {
+        if (registerBudget == 0x12) {
+          registerBudget = 0x18;
         }
-        else if (local_64 == 0x18) {
-          local_64 = 0x20;
+        else if (registerBudget == 0x18) {
+          registerBudget = 0x20;
         }
-        else if (local_64 == 0xe) {
-          local_64 = 0x12;
+        else if (registerBudget == 0xe) {
+          registerBudget = 0x12;
         }
         scratchArg6 = records;
-        recordCount = ((int (*)())recordPickNextToEmit)(alloc,local_64,9,pickedNeedsRetarget,&pickedRegister,records,*configPtr,configFlagsB);
-        bVar31 = recordCount < 0;
-        if (!bVar31) goto LAB_0007b894;
+        recordCount = ((int (*)())recordPickNextToEmit)(alloc,registerBudget,9,pickedNeedsRetarget,&pickedRegister,records,*configPtr,configFlagsB);
+        noCandidate = recordCount < 0;
+        if (!noCandidate) goto LAB_0007b894;
         configFlagsB = **(uint **)(alloc + 0x34);
       }
-      if (bVar31) {
+      if (noCandidate) {
         return 3;
       }
     }
 LAB_0007b894:
     loopIndex = 0;
-    scratchArg3 = (code *)local_a8;
+    scratchArg3 = (code *)pickScratch;
     recordPtrB = records + recordCount * 0x10;
     recordPtr = (uint *)(alloc + 0x1286c + recordCount * 0x10);
     do {
@@ -3519,7 +3519,7 @@ LAB_0007bdf0:
         if ((*(uint *)(dependentRecordIndex * 4 + alloc + 0x3348c) & 0x40000) == 0) {
           writeMaskB = ((int (*)())recordGetWriteMask)(alloc + 0x1286c + dependentRecordIndex * 0x10);
           componentIndex = 0;
-          bestRecordSlot = (uint *)(local_a8 + 0xc);
+          bestRecordSlot = (uint *)(pickScratch + 0xc);
           componentsLeft = 4;
           do {
             componentBit = 1 << (componentIndex & 0x3f);
@@ -3539,7 +3539,7 @@ LAB_0007bdf0:
         }
       }
       componentLoopB = 0;
-      bestRecordCursor = (undefined4 *)(local_a8 + 0xc);
+      bestRecordCursor = (undefined4 *)(pickScratch + 0xc);
       do {
         scratchArg4 = (code *)(1 << (componentLoopB & 0x3f));
         if ((componentsSeen & (uint)scratchArg4) != 0) {
@@ -3900,8 +3900,8 @@ LAB_0007c484:
       if (hasFile1SourceFirst != 0) {
         lastFile1SourceSlot = outRecordCount;
       }
-      iVar30 = ((int (*)())recordDestFileIs0)(emitRecord);
-      if ((iVar30 != 0) && (sourceLoop = (outWord0 >> 0xd & 0x7f) + 1, destRegisterCount < sourceLoop)) {
+      destIsFile0 = ((int (*)())recordDestFileIs0)(emitRecord);
+      if ((destIsFile0 != 0) && (sourceLoop = (outWord0 >> 0xd & 0x7f) + 1, destRegisterCount < sourceLoop)) {
         destRegisterCount = sourceLoop;
       }
       if (outRecordCount == 0x400) {
