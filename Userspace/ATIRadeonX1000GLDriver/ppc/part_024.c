@@ -395,7 +395,7 @@ int Program__splitMixedSourceKinds(program)
                 tempVReg = VRegPool__findOrCreate(tempVReg,0,newTempIndex,0);
                 IRInst__setOperandRef(inst,0,tempVReg);
                 IRInst__setOperandRef(inst,1,sourceVReg);
-                FUN_001235b8(sourceVReg,candidateInst,inst);
+                Owner__replaceVectorEntry(sourceVReg,candidateInst,inst);
                 IRInst__setOperandRef(candidateInst,loopIndex3,tempVReg);
                 Block__insertInstBefore(*(undefined4 *)(candidateInst + 0x158),candidateInst,inst);
               }
@@ -538,7 +538,7 @@ int IRInst__isForwardable(inst, selectWord, compiler)
     if (hasSingleUse == 0) {
       return 0;
     }
-    iVar1 = FUN_0010c47c(inst,compiler);
+    iVar1 = IRInst__canFoldConstantCompare(inst,compiler);
     if (iVar1 == 0) {
       return 0;
     }
@@ -666,7 +666,7 @@ int Program__dtor_ecfac(program)
   }
   ownedObject = *(int *)(program + 0x3ac);
   if (ownedObject != 0) {
-    FUN_00127470(ownedObject);
+    VRegPool__dtor_127470(ownedObject);
     Arena__free(*(undefined4 *)(ownedObject + -4),ownedObject + -4);
   }
   Arena__free(*(undefined4 *)(*(int *)(program + 8) + 0x374),*(undefined4 *)(program + 0x460));
@@ -709,7 +709,7 @@ int Program__dtor_ed124(program)
   }
   ownedObject = *(int *)(program + 0x3ac);
   if (ownedObject != 0) {
-    FUN_00127470(ownedObject);
+    VRegPool__dtor_127470(ownedObject);
     Arena__free(*(undefined4 *)(ownedObject + -4),ownedObject + -4);
   }
   Arena__free(*(undefined4 *)(*(int *)(program + 8) + 0x374),*(undefined4 *)(program + 0x460));
@@ -2346,10 +2346,10 @@ int FUN_000ef498(program, ilReader)
     (**(code **)(*hwDescription + 0xac))(hwDescription,*(undefined4 *)(program + 0x358),program,*(int *)(program + 8));
   }
   ((int (*)())Program__splitExports)(program);
-  FUN_0012eacc(program);
+  Program__predicatePendingIfs(program);
   ((int (*)())FUN_000eee4c)(program);
   ((int (*)())Program__pinInputRegisters)(program);
-  FUN_00138130(program);
+  Liveness__allocLiveTable(program);
   pcVar6 = "non_local_set";
   blockCursor = *(int **)(program + 900);
   iVar2 = blockCursor[2];
@@ -3004,7 +3004,7 @@ int FUN_000f07a8(pass, afterInst, inst)
       if (iVar4 != 0) {
         iVar4 = (**(code **)(*moveSource + 0x60))(moveSource);
         if (iVar4 != 0) {
-          moveSource = (int *)FUN_0010cb48(moveSource,*(undefined4 *)(pass + 8));
+          moveSource = (int *)IRInst__foldCompareResultIntoCopy(moveSource,*(undefined4 *)(pass + 8));
           IRInst__setOperandSource(inst,1,moveSource,0,*(undefined4 *)(pass + 8));
         }
         destRegisterOffset = inst[0x26];
@@ -3086,7 +3086,7 @@ code_r0x000f1384:
                 poppedSelectWord = ((int (*)())IRInst__isForwardable)(consumer,poppedSelectWord,*(undefined4 *)(pass + 8));
                 if ((poppedSelectWord != 0) && (poppedSelectWord = (**(code **)(*consumer + 0x60))(consumer), poppedSelectWord != 0))
                 {
-                  consumer = (int *)FUN_0010cb48(consumer,*(undefined4 *)(pass + 8));
+                  consumer = (int *)IRInst__foldCompareResultIntoCopy(consumer,*(undefined4 *)(pass + 8));
                 }
               } while ((*(int *)(pass + 0x474) == consumer[0x54]) &&
                       (*(int *)(consumer[0x22] + 8) == 0x8e));

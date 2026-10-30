@@ -508,7 +508,7 @@ int Compiler__releaseChipAndPools(compiler, releaseChip)
   int iVar1;
   
   if ((releaseChip != 0) && (*(int *)(compiler + 0x310) != 0)) {
-    FUN_0010defc(*(int *)(compiler + 0x310),compiler);
+    ChipShaders__release(*(int *)(compiler + 0x310),compiler);
     (**(code **)(compiler + 0x34c))
               (*(undefined4 *)(compiler + 0x354),*(undefined4 *)(compiler + 0x310));
   }
@@ -567,7 +567,7 @@ int Compiler__compileStages(compiler, compileRequest)
   sourceTable = "ASSEMBLY";
   *(char **)(compiler + 0x620) = "GLOBAL_ALLOC";
   *(char **)(compiler + 0x634) = "ASSEMBLY";
-  FUN_00115fa0(compiler);
+  Compiler__initStaticLocals(compiler);
   stageIndex = *(int *)(compileRequest + 8) + -1;
   *(int *)(compiler + 0x52c) = stageIndex;
   while (-1 < stageIndex) {
@@ -667,9 +667,9 @@ int Compiler__compileStages(compiler, compileRequest)
     List__freeAllNodes(*(undefined4 *)(compiler + COMP_arenaB));
     Scheduler__run(*(undefined4 *)(compiler + COMP_currentProgram));
     List__freeAllNodes(*(undefined4 *)(compiler + COMP_arenaB));
-    FUN_00120cd4(*(undefined4 *)(compiler + COMP_currentProgram));
+    Program__eliminatePhiCopies(*(undefined4 *)(compiler + COMP_currentProgram));
     List__freeAllNodes(*(undefined4 *)(compiler + COMP_arenaB));
-    FUN_00134658(*(undefined4 *)(compiler + COMP_currentProgram));
+    RegAlloc__run(*(undefined4 *)(compiler + COMP_currentProgram));
     List__freeAllNodes(*(undefined4 *)(compiler + COMP_arenaB));
     Program__dumpConstantRegisters(*(undefined4 *)(compiler + COMP_currentProgram),compiler);
     *(uint *)(*(int *)(compiler + COMP_currentProgram) + 0x30) =

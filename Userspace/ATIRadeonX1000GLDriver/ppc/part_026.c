@@ -5513,7 +5513,7 @@ code_r0x00103c40:
     Program__splitMixedSourceKinds(program);
     Block__connect(currentBlock,*(undefined4 *)(program + 0x3a8));
     *(uint *)(program + 0x30) = *(uint *)(program + 0x30) | 2;
-    FUN_0012e8c0(program,*(undefined4 *)(program + 0x3a0),*(undefined4 *)(program + 0x3a8));
+    Program__splitCriticalEdges(program,*(undefined4 *)(program + 0x3a0),*(undefined4 *)(program + 0x3a8));
     if ((uint ******)ifStack != (uint ******)0x0) {
       Arena__free(ifStack[3],ifStack[2]);
       Arena__free(ifStack[-1],ifStack + -1);
@@ -5526,7 +5526,7 @@ code_r0x00103c40:
       Arena__free(usedRegisterBitmap[-1],usedRegisterBitmap + -1);
     }
     Arena__free(*(undefined4 *)(*(int *)(program + 8) + 0x378),*(undefined4 *)(program + 0x78));
-    FUN_0011e894(program);
+    Program__noSuccessorHasMultipleSuccessors(program);
     return;
   }
   iVar34 = FUN_000e43ec(ilReader);
@@ -7835,11 +7835,11 @@ code_r0x00103300:
       }
       iVar20 = *stackElement;
       iVar43 = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),3);
-      if ((iVar43 == 0) || (iVar43 = FUN_0012c2dc(program,iVar20), iVar43 == 0)) {
+      if ((iVar43 == 0) || (iVar43 = Program__isTrivialBranchRegion(program,iVar20), iVar43 == 0)) {
         argR6 = &previousBlock;
         argR7 = &currentBlock;
         argR8 = (uint ******)&scopeLevel;
-        iVar43 = FUN_0012f0f8(program,loopStackData,iVar20,argR6,argR7,argR8);
+        iVar43 = Program__unrollLoop(program,loopStackData,iVar20,argR6,argR7,argR8);
         if (iVar43 != 0) goto switchD_0010061c_caseD_1;
         if (*(int *)(*(int *)(*(int *)(program + 8) + 0x30c) + 0x4c) < (int)scopeLevel) {
           Compiler__fail(*(int *)(program + 8),8);

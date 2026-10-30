@@ -501,7 +501,7 @@ extern int scDestroyCompilerObject();
 extern int Compiler__fail();
 extern int FUN_000e9294();
 extern int Emitter__allocateConstantSlot();
-extern int FUN_0010defc();
+extern int ChipShaders__release();
 extern int OpcodeSetup__mode7();
 extern int OpcodeSetup__mode8();
 extern int OpcodeSetup__mode5();

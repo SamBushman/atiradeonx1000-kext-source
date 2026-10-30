@@ -1,0 +1,4 @@
+local	KhanVs__vslot85_findOrEncodeConstantVector	pcVar5	staleArg5	INFERRED	stale register argument 5 of RegisterMap__findConstVectorExact (string-pointer artifact)
+local	KhanPs__vslot85_findOrEncodeConstantVector	pcVar5	staleArg5	INFERRED	stale register argument 5 of RegisterMap__findConstVectorExact (string-pointer artifact)
+local	KhanVs__vslot85_findOrEncodeConstantVector	pdVar7	constantCursor	INFERRED	cursor over the 4 constant dwords; its end value is also the stale 7th argument of RegisterMap__findConstVectorExact on the non-uniform path
+local	KhanPs__vslot85_findOrEncodeConstantVector	pdVar7	constantCursor	INFERRED	cursor over the 4 constant dwords; its end value is also the stale 7th argument of RegisterMap__findConstVectorExact on the non-uniform path

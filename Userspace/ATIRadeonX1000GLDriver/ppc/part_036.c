@@ -392,8 +392,8 @@ int IrAddFloat__opcodeInfo_atexit_dtor_op18()
   return;
 }
 
-/* FUN_00115fa0 @ 0x115fa0 (34636 bytes) */
-int FUN_00115fa0()
+/* Compiler__initStaticLocals @ 0x115fa0 (34636 bytes) */
+int Compiler__initStaticLocals()
 {
   int guardResult;
   undefined *vtablePtr;
@@ -3951,10 +3951,10 @@ int FUN_00115fa0()
 }
 
 /* Value__lowHalfword @ 0x11e6ec (8 bytes) */
-int Value__lowHalfword(param_1)
-  undefined4 param_1;
+int Value__lowHalfword(value)
+  undefined4 value;
 {
-  return (*(unsigned short *)((unsigned char *)&(param_1) + 2));
+  return (*(unsigned short *)((unsigned char *)&(value) + 2));
 }
 
 /* IRPhi__getUniqueSource @ 0x11e6f4 (140 bytes) */

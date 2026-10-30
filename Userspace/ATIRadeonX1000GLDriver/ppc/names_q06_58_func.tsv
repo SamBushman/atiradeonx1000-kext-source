@@ -1,0 +1,12 @@
+func	FUN_0013323c	RegAlloc__insertSpillCode	INFERRED	walks the blocks rewriting sources of spilled registers with reloads (RegAlloc__emitSpillReload) and tracks deferred copies
+func	FUN_0012f0f8	Program__unrollLoop	INFERRED	clones the loop body unrollCount times, rewiring blocks and the loop stack (Loop__unrollExceedsLimits, Compiler__noteUnrollCount)
+func	FUN_0011ff7c	Program__sequentializeParallelCopies	INFERRED	orders the phi copies of a block using pending/ready vectors and temporaries
+func	FUN_00115fa0	Compiler__initStaticLocals	INFERRED	function-local statics of the compiler stages guarded by __cxa_guard and registered with atexit
+func	FUN_00127fd8	LandingPad__resume_127fd8	INFERRED	exception landing pad ending in __Unwind_Resume
+func	FUN_00134de8	RegAlloc__registerOfInst	INFERRED	register id of an instruction's destination, resolved through the alias table at allocator+0x458
+func	FUN_0010fb54	Program__assignExportSlotsByKind	INFERRED	assigns slots to export records from Lane__remapValue binding kinds, kinds above 3 get fresh slots
+func	FUN_0010fc88	Program__assignOutputExportSlots	INFERRED	assigns export slots from program+0x3f0 plus the export index and records the owner register
+func	FUN_0010fa24	Program__bindLinkRecordsToSlots	INFERRED	updates link records of a scope with the slot found for their owner register
+func	FUN_0010fd98	Program__assignSharedExportSlots	INFERRED	assigns one slot per distinct register key in a 0x30-entry table
+func	FUN_0010f87c	Program__renumberExportInsts	INFERRED	renumbers export instructions and the lane records that reference them
+func	FUN_0012ac58	Block__findLoopEntryPredecessor	INFERRED	walks successors until the block whose loop info matches targetLoop and returns its predecessor

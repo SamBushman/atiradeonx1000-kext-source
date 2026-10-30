@@ -3660,7 +3660,7 @@ code_r0x0013f320:
       if (((vcall30Result != 0) && (-1 < workInst[0x4d])) &&
          (*(int *)(workInst[0x4d] * 0xc + *(int *)(program + 0x78) + 4) - 10U < 2)) {
         firstOperandSource = IRInst__getOperandSource(workInst,1);
-        producerInst = (int *)FUN_001382b8(firstOperandSource,3,&currentInst);
+        producerInst = (int *)IRInst__findLaneDefinition(firstOperandSource,3,&currentInst);
         if ((producerInst != (int *)0x0) && (vcall30Result = (**(code **)(*producerInst + 0x50))(), vcall30Result != 0)) {
           (**(code **)(*workInst + 0x88))(workInst,1,3,4);
         }
@@ -4434,7 +4434,7 @@ LAB_00140128:
           if ((((iVar9 == 0) && (iVar9 = (**(code **)(*piVar15 + 0x48))(piVar15), iVar9 == 0)) &&
               ((iVar9 = (**(code **)(*piVar5 + 0x80))(piVar5), iVar9 == 0 &&
                (iVar9 = (**(code **)(*piVar15 + 0x80))(piVar15), iVar9 == 0)))) ||
-             (iVar9 = FUN_0013905c(iVar4,piVar11), iVar9 == 0)) goto LAB_00140d38;
+             (iVar9 = IRInst__noUseBetween(iVar4,piVar11), iVar9 == 0)) goto LAB_00140d38;
           if (uVar35 < *puVar28) {
             uVar18 = allocation[2];
             if (uVar18 <= uVar35) {

@@ -674,7 +674,7 @@ LAB_00199fdc:
         else {
           if ((((sourceInst[0x20] != 0) && (sourceKind = RegKind__flagBit0(sourceKind), sourceKind != 0)) &&
               ((sourceInst[5] & 2U) == 0)) && (sourceKind = (**(code **)(*sourceInst + 0x50))(sourceInst), sourceKind == 0)) {
-            sourceRegister = FUN_00134de8(*(undefined4 *)(this[3] + 0x6c4),sourceInst);
+            sourceRegister = RegAlloc__registerOfInst(*(undefined4 *)(this[3] + 0x6c4),sourceInst);
             vslot80Result = (**(code **)(*sourceInst + 0x80))(sourceInst);
             if (vslot80Result != 0) {
               stagedArg3 = (int *)this[3];

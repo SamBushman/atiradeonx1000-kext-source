@@ -78,11 +78,11 @@ int IRInst__dropCounterAndDeleteIfUnused(inst, arg)
   int inst;
   undefined4 arg;
 {
-  undefined4 uVar1;
+  undefined4 result;
   
   *(int *)(inst + 0x160) = *(int *)(inst + 0x160) + -1;
-  uVar1 = ((int (*)())IRInst__deleteIfUnused)(inst,arg,0);
-  return uVar1;
+  result = ((int (*)())IRInst__deleteIfUnused)(inst,arg,0);
+  return result;
 }
 
 /* IRInst__decrementSourceUseCounts @ 0x1058a8 (136 bytes) */

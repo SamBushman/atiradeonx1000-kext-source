@@ -2307,7 +2307,7 @@ LAB_0017a608:
           else {
             loopIndex = loopPtr5[0x4e];
           }
-          FUN_0012cfa4(*(undefined4 *)(*(int *)(ctx + 0x238) + 0x6c4),loopPtr5,loopIndex,
+          Program__removeDeadRegion(*(undefined4 *)(*(int *)(ctx + 0x238) + 0x6c4),loopPtr5,loopIndex,
                        loopPtr5[0x4f]);
           if (branchTaken) {
             loopIndex = 2;
@@ -2490,7 +2490,7 @@ int FUN_0017a8a4(ctx)
       else {
         loopRemaining = blockRef[0x4e];
       }
-      FUN_0012cfa4(*(undefined4 *)(*(int *)(ctx + 0x238) + 0x6c4),blockRef,loopRemaining,blockRef[0x4f]);
+      Program__removeDeadRegion(*(undefined4 *)(*(int *)(ctx + 0x238) + 0x6c4),blockRef,loopRemaining,blockRef[0x4f]);
       if (foldedResult != 0.0) {
         loopRemaining = 2;
       }
@@ -3044,7 +3044,7 @@ int ValueKey__mixLiteralSources(key)
         isForwardableMov = (**(code **)(*loopPtr6 + 0x60))(loopPtr6);
         if (isForwardableMov != 0) {
           sourceDef = IRInst__getOperandSource(loopIndex,1);
-          FUN_0010c670(sourceDef,loopIndex,*(undefined4 *)(key + 0x238));
+          IRInst__foldConstantSourcesIntoClone(sourceDef,loopIndex,*(undefined4 *)(key + 0x238));
         }
       }
       loopPtr7 = loopPtr7 + 1;
