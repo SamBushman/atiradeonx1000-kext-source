@@ -1386,7 +1386,7 @@ int ValueKey__refreshExprRecordForOperand(ctx, operandIndex)
   int ctx;
   int operandIndex;
 {
-  byte bVar1;
+  byte exprFlags;
   undefined4 destRef;
   int callResult;
   undefined4 operandWord;
@@ -1394,8 +1394,8 @@ int ValueKey__refreshExprRecordForOperand(ctx, operandIndex)
   (**(code **)(**(int **)(ctx + 0xb0) + 0x48))(*(int **)(ctx + 0xb0),operandIndex);
   operandWord = *(undefined4 *)(operandIndex * 0x18 + *(int *)(ctx + 0xb0) + 0x20);
   callResult = Compiler__valueNumberForExpr(*(undefined4 *)(ctx + 0x238),operandWord);
-  if ((((*(char *)(callResult + 8) != '\0') && (bVar1 = *(byte *)(callResult + 9), (bVar1 & 1) == 0)) &&
-      ((bVar1 & 2) == 0)) && (((bVar1 & 4) == 0 && ((bVar1 & 8) == 0)))) {
+  if ((((*(char *)(callResult + 8) != '\0') && (exprFlags = *(byte *)(callResult + 9), (exprFlags & 1) == 0)) &&
+      ((exprFlags & 2) == 0)) && (((exprFlags & 4) == 0 && ((exprFlags & 8) == 0)))) {
     return callResult;
   }
   *(undefined1 *)(callResult + 8) = 2;

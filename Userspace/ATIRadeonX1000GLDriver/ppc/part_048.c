@@ -1913,16 +1913,16 @@ int ValueKey__rewriteAsBinaryOfOperands(ctx, newOpcode, operandIndex, operandInd
 }
 
 /* ValueKey__foldMadZeroAddend @ 0x17e658 (112 bytes) */
-int ValueKey__foldMadZeroAddend(param_1)
-  int param_1;
+int ValueKey__foldMadZeroAddend(ctx)
+  int ctx;
 {
   int callResult;
   
-  callResult = Compiler__valueNumberForExpr(*(undefined4 *)(param_1 + 0x238),0);
-  callResult = Inst__writtenLanesAllMatchValue(param_1,*(undefined4 *)(callResult + 4),3);
+  callResult = Compiler__valueNumberForExpr(*(undefined4 *)(ctx + 0x238),0);
+  callResult = Inst__writtenLanesAllMatchValue(ctx,*(undefined4 *)(callResult + 4),3);
   if (callResult != 0) {
-    ((int (*)())ValueKey__rewriteAsBinaryOfOperands)(param_1,0x13,1,2);
-    ValueKey__rebuild(param_1);
+    ((int (*)())ValueKey__rewriteAsBinaryOfOperands)(ctx,0x13,1,2);
+    ValueKey__rebuild(ctx);
   }
   return callResult != 0;
 }
@@ -2530,22 +2530,22 @@ LAB_0017f514:
 }
 
 /* ValueKey__foldMaxOfNegatedPair @ 0x17f594 (8 bytes) */
-int ValueKey__foldMaxOfNegatedPair(param_1)
-  undefined4 param_1;
+int ValueKey__foldMaxOfNegatedPair(ctx)
+  undefined4 ctx;
 {
   undefined4 callResult;
   
-  callResult = ((int (*)())ValueKey__foldMinMaxOfNegatedPair)(param_1,1);
+  callResult = ((int (*)())ValueKey__foldMinMaxOfNegatedPair)(ctx,1);
   return callResult;
 }
 
 /* ValueKey__foldMinOfNegatedPair @ 0x17f59c (8 bytes) */
-int ValueKey__foldMinOfNegatedPair(param_1)
-  undefined4 param_1;
+int ValueKey__foldMinOfNegatedPair(ctx)
+  undefined4 ctx;
 {
   undefined4 callResult;
   
-  callResult = ((int (*)())ValueKey__foldMinMaxOfNegatedPair)(param_1,0);
+  callResult = ((int (*)())ValueKey__foldMinMaxOfNegatedPair)(ctx,0);
   return callResult;
 }
 

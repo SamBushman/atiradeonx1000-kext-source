@@ -420,11 +420,11 @@ int R520VMachineAssembler__vslot25_assembleConditionalBlock(this, node, block, c
   int *topKindSlot;
   undefined4 sourceDef;
   bool moreLanes;
-  uint uVar2;
+  uint topKindIndex;
   uint predKindCount;
   int loopIndex;
   int *branchInst;
-  undefined4 uVar5;
+  undefined4 sourceSelectKind;
   int operandRecord;
   undefined4 *pushedSlot;
   int *program;
@@ -438,9 +438,9 @@ int R520VMachineAssembler__vslot25_assembleConditionalBlock(this, node, block, c
   (**(code **)(*branchInst + 0x14))(branchInst);
   topKindSlot = (int *)0x0;
   predKindCount = *(uint *)(this[0x25] + 4);
-  uVar2 = predKindCount - 1;
-  if (uVar2 < predKindCount) {
-    topKindSlot = (int *)(uVar2 * 4 + *(int *)(this[0x25] + 8));
+  topKindIndex = predKindCount - 1;
+  if (topKindIndex < predKindCount) {
+    topKindSlot = (int *)(topKindIndex * 4 + *(int *)(this[0x25] + 8));
   }
   loopIndex = branchInst[0x4b];
   unpredicated = *topKindSlot == 0;
@@ -514,13 +514,13 @@ LAB_0019e3d4:
   do {
     setSourceSelect = *(code **)(*predSetInst + 0x88);
     if (unpredicated) {
-      uVar5 = 1;
+      sourceSelectKind = 1;
     }
     else {
-      uVar5 = 2;
+      sourceSelectKind = 2;
     }
     operandRecord = IRInst__getOperandRecord(branchInst,1);
-    (*setSourceSelect)(predSetInst,uVar5,loopIndex,*(undefined1 *)(operandRecord + 0x13));
+    (*setSourceSelect)(predSetInst,sourceSelectKind,loopIndex,*(undefined1 *)(operandRecord + 0x13));
     moreLanes = loopIndex != 3;
     loopIndex = loopIndex + 1;
   } while (moreLanes);
@@ -1997,18 +1997,19 @@ int R520MachineAssembler__vslot86_resolveSourceRegister(this, inst, sourceIndex,
   undefined4 sourceIndex;
   int compiler;
 {
+  int definingField;
   int *callResult;
-  int iVar2;
+  int predicateResult;
   uint registerWord;
   
   callResult = (int *)IRInst__getOperandSource(inst,sourceIndex);
-  if (((((callResult[0x20] == 0) || (iVar2 = RegKind__flagBit0(callResult[0x26]), iVar2 == 0)) ||
-       ((callResult[5] & 2U) != 0)) || (iVar2 = (**(code **)(*callResult + 0x50))(callResult), iVar2 != 0)) &&
-     (iVar2 = (**(code **)(*callResult + 0x50))(callResult), iVar2 == 0)) {
+  if (((((callResult[0x20] == 0) || (predicateResult = RegKind__flagBit0(callResult[0x26]), predicateResult == 0)) ||
+       ((callResult[5] & 2U) != 0)) || (predicateResult = (**(code **)(*callResult + 0x50))(callResult), predicateResult != 0)) &&
+     (predicateResult = (**(code **)(*callResult + 0x50))(callResult), predicateResult == 0)) {
     registerWord = 0;
     if (callResult[0x26] == 0x29) {
-      iVar2 = IRInst__getDefiningField128(inst,sourceIndex);
-      registerWord = iVar2 + *(int *)(*(int *)(compiler + COMP_currentProgram) + 0x3f0) | 0x4000;
+      definingField = IRInst__getDefiningField128(inst,sourceIndex);
+      registerWord = definingField + *(int *)(*(int *)(compiler + COMP_currentProgram) + 0x3f0) | 0x4000;
     }
     return registerWord;
   }
@@ -2361,16 +2362,16 @@ int R520MachineAssembler__vslot29_patchBranchTarget(this)
 {
   int stackVector;
   uint stackCount;
-  int *piVar3;
+  int *topSlot;
   int popped;
   
-  piVar3 = (int *)0x0;
+  topSlot = (int *)0x0;
   stackVector = *(int *)(*(int *)(this + 0x10) + 0x24);
   stackCount = *(uint *)(stackVector + 4);
   if (stackCount - 1 < stackCount) {
-    piVar3 = (int *)((stackCount - 1) * 4 + *(int *)(stackVector + 8));
+    topSlot = (int *)((stackCount - 1) * 4 + *(int *)(stackVector + 8));
   }
-  popped = *piVar3;
+  popped = *topSlot;
   Vector__removeAt(stackVector,stackCount - 1);
   *(short *)(popped * 0x48 + *(int *)(this + 0xa8) + 0xc) =
        ((short)*(undefined4 *)(this + 0x60) - (short)*(undefined4 *)(this + 0x74)) + -1;

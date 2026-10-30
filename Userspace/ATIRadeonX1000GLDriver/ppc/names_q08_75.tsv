@@ -1,0 +1,17 @@
+local	ValueKey__refreshExprRecordForOperand	bVar1	exprFlags	INFERRED	byte +9 of the expression record: flags 1, 2, 4, 8 mark it as already used
+local	R520MachineAssembler__vslot37_closeBranch	uVar7	hasSuccessorsResult	INFERRED	64-bit result of Block__hasSuccessors (low word is the count, high word the flag)
+local	ValueKey__foldMadZeroAddend	param_1	ctx	INFERRED	pass context
+local	ValueKey__foldMaxOfNegatedPair	param_1	ctx	INFERRED	pass context
+local	ValueKey__foldMinOfNegatedPair	param_1	ctx	INFERRED	pass context
+use	R520MachineAssembler__vslot86_resolveSourceRegister	iVar2	predicateResult	INFERRED	RegKind / vtable +0x50 predicate on the source	^\s*if\ \(\(\(\(\(piVar1\[0x20\]\ ==\ 0\)\ \|\|\ \(iVar2\ =\ FUN_00126760\(piVar1\[0x26\]\),\ iVar2\ ==\ 0\)\)\ \|\|$	+3
+use	R520MachineAssembler__vslot86_resolveSourceRegister	iVar2	definingField	INFERRED	IRInst__getDefiningField128 register field of the source, plus the program's +0x3f0 base	^\s*iVar2\ =\ FUN_00105c5c\(param_2,param_3\);$	+2
+use	R300MachineAssembler__vslot12_assembleNodeAndMarkChildren	iVar2	predicateResult	INFERRED	node vtable +0x14 predicate	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*param_2\ \+\ 0x14\)\)\(param_2,param_2\);$	+2
+use	R300MachineAssembler__vslot12_assembleNodeAndMarkChildren	iVar2	recordIndexBefore	INFERRED	this[0x18]: record index before assembling	^\s*iVar2\ =\ param_1\[0x18\];$	+1
+use	R300MachineAssembler__vslot12_assembleNodeAndMarkChildren	iVar2	recordIndexBefore	INFERRED	this[0x18]: record index before assembling	^\s*if\ \(iVar2\ ==\ param_1\[0x18\]\)\ \{$	+1
+use	R300MachineAssembler__vslot12_assembleNodeAndMarkChildren	iVar2	childList	INFERRED	node[0x34]: vector of child blocks	^\s*iVar2\ =\ param_2\[0x34\];$	+1
+use	R300MachineAssembler__vslot12_assembleNodeAndMarkChildren	iVar2	childList	INFERRED	node[0x34]: vector of child blocks	^\s*for\ \(uVar3\ =\ 1;\ uVar3\ <=\ \*\(uint\ \*\)\(iVar2\ \+\ 4\);\ uVar3\ =\ uVar3\ \+\ 1\)\ \{$	+2
+local	R300VMachineAssembler__init	uVar2	scratchBuffer	INFERRED	0x28-byte zeroed allocation stored at this+0x50
+local	R520VMachineAssembler__vslot25_assembleConditionalBlock	uVar2	topKindIndex	INFERRED	predicate-kind stack size - 1
+local	R520VMachineAssembler__vslot25_assembleConditionalBlock	uVar5	sourceSelectKind	INFERRED	1 or 2 selector passed to the set-source-select slot
+local	R520MachineAssembler__vslot29_patchBranchTarget	piVar3	topSlot	INFERRED	top of the pending-record vector
+local	R520MachineAssembler__vslot25_assembleLoop	iVar5	loopBlock	INFERRED	node +0x138 block whose record count and successors are tested

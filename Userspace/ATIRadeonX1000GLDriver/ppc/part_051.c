@@ -21,24 +21,26 @@ int R300MachineAssembler__vslot12_assembleNodeAndMarkChildren(this, node)
   int *this;
   int *node;
 {
+  int childList;
+  int recordIndexBefore;
   int child;
-  int iVar2;
+  int predicateResult;
   uint loopIndex;
   int childByteOffset;
   
-  iVar2 = (**(code **)(*node + 0x14))(node,node);
-  if (iVar2 != 0) {
+  predicateResult = (**(code **)(*node + 0x14))(node,node);
+  if (predicateResult != 0) {
     this[6] = 1;
   }
-  iVar2 = this[0x18];
+  recordIndexBefore = this[0x18];
   (**(code **)(*node + 0x44))(node,this[4]);
   this[6] = 0;
   if (node[0x37] != 0) {
-    if (iVar2 == this[0x18]) {
-      iVar2 = node[0x34];
+    if (recordIndexBefore == this[0x18]) {
+      childList = node[0x34];
       childByteOffset = 0;
-      for (loopIndex = 1; loopIndex <= *(uint *)(iVar2 + 4); loopIndex = loopIndex + 1) {
-        child = *(int *)(*(int *)(iVar2 + 8) + childByteOffset);
+      for (loopIndex = 1; loopIndex <= *(uint *)(childList + 4); loopIndex = loopIndex + 1) {
+        child = *(int *)(*(int *)(childList + 8) + childByteOffset);
         if (child != 0) {
           *(undefined4 *)(child + 0xdc) = 1;
         }

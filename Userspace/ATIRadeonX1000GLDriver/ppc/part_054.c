@@ -897,7 +897,7 @@ int R520MachineAssembler__vslot25_assembleLoop(this, node, block, extra1, extra2
   uint predecessor;
   undefined4 hasCondition;
   int recordIndexBefore;
-  int iVar5;
+  int loopBlock;
   
   conditionNode = (int *)Block__getBranchInst(node,node,block,extra1,extra2,extra3,extra4);
   (**(code **)(*conditionNode + 0x14))(conditionNode);
@@ -912,12 +912,12 @@ int R520MachineAssembler__vslot25_assembleLoop(this, node, block, extra1, extra2
   }
   predecessor = Block__getPredecessor(node,0);
   ((int (*)())R520MachineAssembler__emitCompareToPredicate)(this,conditionNode,hasCondition,predecessor);
-  iVar5 = *(int *)(node + 0x138);
-  recordIndexBefore = DList__count(iVar5 + 0x90);
-  if ((recordIndexBefore < 3) && (recordIndexBefore = Block__hasSuccessors(iVar5), recordIndexBefore != 0)) {
+  loopBlock = *(int *)(node + 0x138);
+  recordIndexBefore = DList__count(loopBlock + 0x90);
+  if ((recordIndexBefore < 3) && (recordIndexBefore = Block__hasSuccessors(loopBlock), recordIndexBefore != 0)) {
     conditionNode = (int *)0x0;
-    if (*(int *)(*(int *)(iVar5 + 0xd0) + 4) != 0) {
-      conditionNode = *(int **)(*(int *)(iVar5 + 0xd0) + 8);
+    if (*(int *)(*(int *)(loopBlock + 0xd0) + 4) != 0) {
+      conditionNode = *(int **)(*(int *)(loopBlock + 0xd0) + 8);
     }
     hasCondition = 0;
     if (*conditionNode == *(int *)(node + 0x13c)) goto LAB_001a2fe8;
@@ -946,13 +946,13 @@ int R520MachineAssembler__vslot37_closeBranch(this, node)
   int stackVector;
   uint *vector;
   longlong callResult;
-  undefined8 uVar7;
+  undefined8 hasSuccessorsResult;
   
   stackVector = node[0x4e];
   callResult = DList__count(stackVector + 0x90);
   a1 = (undefined4)callResult;
   if ((callResult < 0x300000000) &&
-     (uVar7 = Block__hasSuccessors(stackVector), a1 = (undefined4)uVar7, (int)((ulonglong)uVar7 >> 0x20) != 0)) {
+     (hasSuccessorsResult = Block__hasSuccessors(stackVector), a1 = (undefined4)hasSuccessorsResult, (int)((ulonglong)hasSuccessorsResult >> 0x20) != 0)) {
     successorHead = (int *)0x0;
     if (*(int *)(*(int *)(stackVector + 0xd0) + 4) != 0) {
       successorHead = *(int **)(*(int *)(stackVector + 0xd0) + 8);
