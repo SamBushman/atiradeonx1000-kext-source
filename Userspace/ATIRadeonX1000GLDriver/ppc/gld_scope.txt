@@ -39,8 +39,8 @@ gldPrimInlineQuadStrip
 gldPrimInlinePolygon
 gldPrimInlineLines
 FUN_0003b870
-FUN_0003c400
-FUN_0003d590
+extvsTranslateShaderObject
+gld_emitProgramConstantUpdates
 _gldAllocVertexBuffer
 _gldAttachDrawable
 _gldCreateBuffer

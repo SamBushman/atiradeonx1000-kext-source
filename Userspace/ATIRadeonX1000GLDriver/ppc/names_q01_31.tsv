@@ -66,3 +66,105 @@ local	FUN_00031340	local_fc	convertWidth	INFERRED	level width (clamped to 1)
 local	FUN_00031340	local_f8	convertHeight	INFERRED	level height (clamped to 1)
 local	FUN_00031340	local_bc	convertByte	INFERRED	zero byte in the converter descriptor
 func	FUN_00031340	gld_readbackTextureLevel	INFERRED	converts a texture level from its GPU backing store into the caller buffer levelBuffer (destination advances by procPitch per row), after waiting for the GPU stamp and flushing dirty levels
+local	glDrawPixels_impl	pfStack0000001c	rasterPosArg	INFERRED	copy of the rasterPos argument kept across the layout calls and passed on to gld_drawPixelsAsPoints
+local	glDrawPixels_impl	fVar3	rasterYWork	INFERRED	float work value for the raster y: starts as the y scale (ctx raster scale Y), then scaled/biased to a window coordinate
+local	glDrawPixels_impl	iVar10	tileWindowYOffset	INFERRED	window-y offset of the tile row handed to gld_drawPixelsAsPoints (signed by yDir)
+local	glDrawPixels_impl	puVar16	convertOutAPtr	INFERRED	&convertOutA, output of _glgConvertType
+local	glDrawPixels_impl	puVar17	convertOutBPtr	INFERRED	&convertOutB, output of _glgConvertType
+local	glDrawPixels_impl	auStack_418	convertOutA	INFERRED	_glgConvertType output A
+local	glDrawPixels_impl	auStack_414	convertOutB	INFERRED	_glgConvertType output B
+local	glDrawPixels_impl	auStack_428	layoutOut	INFERRED	middle output of gld_computePixelStoreLayout
+local	glDrawPixels_impl	puVar21	layoutOutPtr	INFERRED	&layoutOut
+local	glDrawPixels_impl	piVar18	srcRowBytesPtr	INFERRED	&srcRowBytes, output of gld_computePixelStoreLayout
+local	glDrawPixels_impl	piVar25	srcSkipBytesPtr	INFERRED	&srcSkipBytes, output of gld_computePixelStoreLayout
+local	glDrawPixels_impl	local_420	srcCursor	INFERRED	address of the current source pixels, handed by pointer to _glgProcessPixels or to gld_drawPixelsAsPoints
+local	glDrawPixels_impl	local_3e4	procRec0F98	INFERRED	processor record 0: ushort at pixel-state +0x98
+local	glDrawPixels_impl	local_3e0	procRec0F9a	INFERRED	processor record 0: ushort at pixel-state +0x9a
+local	glDrawPixels_impl	local_3dc	procRec0F8c	INFERRED	processor record 0: ushort at pixel-state +0x8c
+local	glDrawPixels_impl	local_3d8	procRec0F9c	INFERRED	processor record 0: word at pixel-state +0x9c
+local	glDrawPixels_impl	local_3d4	procRec1F98	INFERRED	processor record 1: ushort at pixel-state +0x98
+local	glDrawPixels_impl	local_3d0	procRec1F9a	INFERRED	processor record 1: ushort at pixel-state +0x9a
+local	glDrawPixels_impl	local_3cc	procRec1F8c	INFERRED	processor record 1: ushort at pixel-state +0x8c
+local	glDrawPixels_impl	local_3c8	procRec1F9c	INFERRED	processor record 1: word at pixel-state +0x9c
+local	glDrawPixels_impl	local_3c4	procRec2F98	INFERRED	processor record 2: ushort at pixel-state +0x98
+local	glDrawPixels_impl	local_3c0	procRec2F9a	INFERRED	processor record 2: ushort at pixel-state +0x9a
+local	glDrawPixels_impl	local_3bc	procRec2F8c	INFERRED	processor record 2: ushort at pixel-state +0x8c
+local	glDrawPixels_impl	local_3b8	procRec2F9c	INFERRED	processor record 2: word at pixel-state +0x9c
+local	glDrawPixels_impl	local_3b4	procRecEnd	INFERRED	byte set to 1 after the processor records
+local	FUN_0003c400	uVar4	srcRegisterFile	INFERRED	instruction word bits 0x17..0x19: 0 = constant array (hwProgram[4]), 1 = temporaries (hwProgram[2]), 2 = parameter array (hwProgram[10], optional relative offset)
+local	FUN_0003c400	iVar8	swizzleX	CONFIRMED	GL_X_EXT..GL_W_EXT (0x87d5..0x87d8) or GL_NEGATIVE_X_EXT.. (0x87d9..) symbol for source component X, from instruction bits 0x15-0x16
+local	FUN_0003c400	iVar10	swizzleY	CONFIRMED	EXT_vertex_shader swizzle symbol for source component Y, bits 0x13-0x14
+local	FUN_0003c400	iVar11	swizzleZ	CONFIRMED	EXT_vertex_shader swizzle symbol for source component Z, bits 0x11-0x12
+local	FUN_0003c400	iVar13	swizzleW	CONFIRMED	EXT_vertex_shader swizzle symbol for source component W, bits 0xf-0x10
+local	FUN_0003c400	iVar18	sourceCount	INFERRED	number of source operands of the opcode (1, 2 or 3)
+local	FUN_0003c400	iVar20	sourceIndex	INFERRED	loop counter over the source operands
+local	FUN_0003c400	iVar23	sourceByteOffset	INFERRED	byte offset of the current source in sourceSymbols (sourceIndex * 4)
+local	FUN_0003c400	uVar9	componentTemp	INFERRED	first extract-component temp (hwProgram[0x10]) used as source of the follow-up op
+local	FUN_0003c400	puVar25	symbolRemapTable	INFERRED	hwProgram[8]: table filled with 0x80, entry [FUN_00052f60(symbol)-1] = constant index
+local	FUN_0003c400	cStack_95	symbolKindByte	INFERRED	low byte of a shader symbol record; zero marks a symbol without storage and sets hwProgram+0x23
+local	FUN_0003c400	cStack_75	relativeOffset	INFERRED	signed low byte of the source word: relative-addressing offset added to the parameter index
+local	FUN_0003c400	local_70	sourceSymbols	INFERRED	EXT_vertex_shader symbol ids of the (up to 3) source operands of the current instruction
+func	FUN_0003c400	extvsTranslateShaderObject	INFERRED	translates a shader object (instruction records at shaderObject+0x15*8) into EXT_vertex_shader operations (glShaderOp1/2/3EXT, glWriteMaskEXT, glExtractComponentEXT) bracketed by extvsBeginShader/extvsEndShader
+local	FUN_0003d590	fVar8	vecX	INFERRED	x of the vector at engineState+0x24f0 (case 6: normalised vector (x, y, z+1))
+local	FUN_0003d590	fVar7	vecY	INFERRED	y of that vector (+0x24f4)
+local	FUN_0003d590	fVar10	vecZPlusOne	INFERRED	z (+0x24f8) plus 1.0
+local	FUN_0003d590	uVar9	constX	INFERRED	first component of the state constant, stored with constY/constZ/constW
+local	FUN_0003d590	iVar18	lightArrayBase	INFERRED	engineState+0x24c0, base of the per-light records (0x80 bytes each)
+local	FUN_0003d590	iVar27	lightRecord	INFERRED	lightArrayBase + light index * 0x80
+local	FUN_0003d590	iVar20	materialRecord	INFERRED	engineState+0x28c0 + side*0x240 (material record); ambient/diffuse/specular products are light*material
+local	FUN_0003d590	pbVar34	entryCursorB	INFERRED	cursor through the second table of 8-byte entries (dynamic constants)
+local	FUN_0003d590	dVar38	depthRangeNear	INFERRED	double at engineState+0x1830 (near); +0x1838 far is scratchDouble36; emitted as (near, far, 1.0, far-near)
+local	FUN_0003d590	local_80	registerBase	INFERRED	output of FUN_00054470: [0] is the first hardware register index of the constant bank (added to the entry's destination slot)
+func	FUN_0003d590	gld_emitProgramConstantUpdates	INFERRED	builds 0x880 register-write packets (7 words per constant: header, register, count word 0x38882, x/y/z/w) for the program constants named by the entry tables, sourcing each from engine state, light/material products, literals or uniforms
+local	FUN_0003b280	param_3	variableCount	INFERRED	number of 8-byte variable records (shaderObject[10]); sizes hwProgram+0x28 array
+local	FUN_0003b280	param_4	variableRecords	INFERRED	array of 8-byte variable records (kind bits 16..20, index/value low 16 bits)
+local	FUN_0003b280	param_5	rangeCount	INFERRED	number of 8-byte range records (shaderObject[0xe])
+local	FUN_0003b280	param_6	rangeRecords	INFERRED	range records: first/last variable index in the low 16 bits of the two words; a range is declared as one symbol group
+local	FUN_0003b280	param_7	unusedArg7	INFERRED	never read
+local	FUN_0003b280	param_8	literalConstants	INFERRED	16-byte literal constants copied into local-constant symbols
+local	FUN_0003b280	puVar8	kindArray	INFERRED	alloca'd byte array: 0 = uniform/parameter, 1 = literal (kind 0x11), 2 = other; input of FUN_000534c0
+local	FUN_0003b280	puVar2	indexFrameLink	INFERRED	alloca slot holding the saved frame pointer of the index array allocation
+local	FUN_0003b280	puVar3	symbolFrameLink	INFERRED	alloca slot holding the saved frame pointer of the symbol array allocation
+local	FUN_0003b280	iVar6	indexAllocBytes	INFERRED	negated, 16-aligned byte size of the index array allocation
+local	FUN_0003b280	puVar11	indexCursor	INFERRED	write cursor through the index array (puVar2 + 0x10)
+local	FUN_0003b280	puVar16	symbolOut	INFERRED	symbol-id output array of FUN_000534c0 (puVar3 + 0x10), walked in the second loop
+local	FUN_0003b280	puVar12	recordCursor	INFERRED	cursor through the variable records of the current group while building kindArray/indexCursor
+local	FUN_0003b280	puVar18	groupRecords	INFERRED	first variable record of the current group
+local	FUN_0003b280	uVar10	recordKind	CONFIRMED	bits 16..20 of the variable record
+local	FUN_0003b280	uVar14	variableIndex	INFERRED	index of the first variable of the current group (advances by group size)
+local	FUN_0003b280	local_50	rangeRecord	INFERRED	copy of the current range record (first/last indices)
+func	FUN_0003b280	extvsDeclareProgramVariables	INFERRED	generates one EXT_vertex_shader symbol per variable record (grouped by ranges) into hwProgram+0x28 and binds literal constants with glSetLocalConstantEXT
+local	FUN_000305b0	param_1	dstBlock	CONFIRMED	8-byte output block: [0] = max value, [1] = min value, then 16 packed 3-bit indices (DXT5 / ATI1N alpha block layout)
+local	FUN_000305b0	param_2	srcPixels	CONFIRMED	byte channel values of the 4x4 block
+local	FUN_000305b0	param_3	pixelStride	CONFIRMED	byte distance between horizontally adjacent pixels
+local	FUN_000305b0	param_4	rowStride	CONFIRMED	byte distance between block rows
+local	FUN_000305b0	bVar2	pixelValue	INFERRED	source byte being quantised
+local	FUN_000305b0	iVar5	halfInterval	INFERRED	half of intervalSize, rounding offset of the quantiser
+local	FUN_000305b0	iVar12	intervalSize	INFERRED	(max-min)*256/7: width of one of the 7 palette intervals (0xffff when max==min)
+local	FUN_000305b0	iVar7	indexCode	INFERRED	3-bit palette index of the pixel looked up through indexRemapTable
+local	FUN_000305b0	iVar11	byteIndex	INFERRED	byte of dstBlock the current 3-bit field starts in (bit position >> 3)
+local	FUN_000305b0	iVar13	blockRow	INFERRED	row counter of the second pass
+local	FUN_000305b0	iVar15	blockColumn	INFERRED	column counter of the second pass
+local	FUN_000305b0	pbVar8	pixelCursor	INFERRED	cursor along the current row in the min/max pass
+local	FUN_000305b0	local_58	indexRemapTable	INFERRED	first 4 of the 8 words copied from DAT_001aa554..; indexed up to 7, so continues in local_48..local_3c
+local	FUN_000305b0	local_48	indexRemapTable4	INFERRED	word 4 of indexRemapTable (DAT_001aa564)
+local	FUN_000305b0	local_44	indexRemapTable5	INFERRED	word 5 (DAT_001aa568)
+local	FUN_000305b0	local_40	indexRemapTable6	INFERRED	word 6 (DAT_001aa56c)
+local	FUN_000305b0	local_3c	indexRemapTable7	INFERRED	word 7 (DAT_001aa570)
+local	FUN_0002bbc4	param_2	stampSource	INFERRED	pointer whose first word is stored in the packet
+local	FUN_0002bbc4	param_3	passThroughArg3	INFERRED	forwarded unchanged to gldValidateState
+local	FUN_0002bbc4	param_4	passThroughArg4	INFERRED	forwarded unchanged to gldValidateState
+local	FUN_0002bbc4	iVar16	entryCount	INFERRED	ctx+0x2610: number of register entries (forced to 2 when ctx+0x261c == 2 and count is 1)
+local	FUN_0002bbc4	iVar10	entryWords	INFERRED	ring words needed for the entries (4 per entry, 8 for the two-entry variant)
+local	FUN_0002bbc4	uVar13	ctxWord1cf8	INFERRED	ctx+0x1cf8, value written into the final entry of the two-entry variant
+local	FUN_0002bbc4	piVar3	fenceWord	INFERRED	scratchPtr14+4: word updated with store-conditional (+0x10000) before the packet is built
+local	FUN_0002bbc4	iVar1	fenceUpdated	INFERRED	result of the store-conditional on the fence word
+local	FUN_0002bbc4	puVar2	packet	INFERRED	32-byte aligned packet start in the ring (header 0x3b000000)
+local	FUN_0002bbc4	puVar4	ringTailLink	INFERRED	ctx+0x1d8, link word of the previous packet, patched with the new offset
+local	FUN_0002bbc4	uVar5	stampValue	INFERRED	first word of the stamp record (**(ctx+0x234)) stored at packet[1]
+local	FUN_0002bbc4	puVar7	param2AfterFlush	INFERRED	param_2, or the callee-returned r4 when gld_submitRing was called
+local	FUN_0002bbc4	puVar8	staleArgR7	INFERRED	only forwarded as stale argument register to gldValidateState
+local	FUN_0002bbc4	puVar9	staleArgR8	INFERRED	ring write pointer, then only forwarded as stale argument register to gldValidateState
+local	FUN_0002bbc4	puVar11	scratchPtr11	INFERRED	register-allocation scratch: old link word, entry cursor, stale argument register
+local	FUN_0002bbc4	puVar12	writeCursor	INFERRED	ring write pointer after the packet header
+func	FUN_000305b0	gld_compressAlphaBlock	INFERRED	DXT5/ATI1N alpha block encoder: min/max of a 4x4 byte block into dstBlock[0..1], 16 3-bit palette indices (7 intervals) into the rest

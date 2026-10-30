@@ -1312,7 +1312,7 @@ LAB_000264f0:
          ) {
         scratchInt2 = *(int *)(*programObject + 4);
       }
-      scratchInt2 = FUN_0003c400(commandStream,scratchInt2,contextRecord + 5);
+      scratchInt2 = extvsTranslateShaderObject(commandStream,scratchInt2,contextRecord + 5);
     }
     if (scratchInt2 != 0) {
       *(int **)(ctx + 0x29e8) = contextRecord;
@@ -3982,7 +3982,7 @@ LAB_00029bd0:
 }
 
 /* gld_drawPixelsAsPoints @ 0x29c00 (1624 bytes) */
-int gld_drawPixelsAsPoints(ctx, srcPixels, procWidth, procHeight, srcRowBytes, bytesPerPixel, rasterX, rasterY, currentAttribs, format, transferMode8)
+int gld_drawPixelsAsPoints(ctx, srcPixels, procWidth, procHeight, srcRowBytes, bytesPerPixel, rasterX, rasterY, rasterPosRecord, format, transferMode8)
   int ctx;
   float *srcPixels;
   int procWidth;
@@ -3991,7 +3991,7 @@ int gld_drawPixelsAsPoints(ctx, srcPixels, procWidth, procHeight, srcRowBytes, b
   int bytesPerPixel;
   uint rasterX;
   uint rasterY;
-  int currentAttribs;
+  int rasterPosRecord;
   int format;
   undefined4 transferMode8;
 {
@@ -4141,13 +4141,13 @@ int gld_drawPixelsAsPoints(ctx, srcPixels, procWidth, procHeight, srcRowBytes, b
           do {
             if (format == 0x1902) {
               depthZ = *srcCursor;
-              colorR = *(float *)(currentAttribs + 0x30);
-              colorG = *(float *)(currentAttribs + 0x34);
-              colorB = *(float *)(currentAttribs + 0x38);
-              colorA = *(float *)(currentAttribs + 0x3c);
+              colorR = *(float *)(rasterPosRecord + 0x30);
+              colorG = *(float *)(rasterPosRecord + 0x34);
+              colorB = *(float *)(rasterPosRecord + 0x38);
+              colorA = *(float *)(rasterPosRecord + 0x3c);
             }
             else {
-              depthZ = *(float *)(currentAttribs + 8);
+              depthZ = *(float *)(rasterPosRecord + 8);
               fVar8 = *srcCursor;
               local_80 = 0x43300000;
               local_78 = 0x43300000;
@@ -4203,11 +4203,11 @@ int gld_drawPixelsAsPoints(ctx, srcPixels, procWidth, procHeight, srcRowBytes, b
           pfVar16 = srcPixels;
           scratchInt12 = procWidth;
           do {
-            depthZ = *(float *)(currentAttribs + 8);
-            colorR = *(float *)(currentAttribs + 0x30);
-            colorG = *(float *)(currentAttribs + 0x34);
-            colorB = *(float *)(currentAttribs + 0x38);
-            colorA = *(float *)(currentAttribs + 0x3c);
+            depthZ = *(float *)(rasterPosRecord + 8);
+            colorR = *(float *)(rasterPosRecord + 0x30);
+            colorG = *(float *)(rasterPosRecord + 0x34);
+            colorB = *(float *)(rasterPosRecord + 0x38);
+            colorA = *(float *)(rasterPosRecord + 0x3c);
             alphaByte = *(byte *)pfVar16;
             *vertexCursor = GH_U2F((unsigned int)(((unsigned char *)0x000013c2U)));
             pfVar16 = (float *)((int)pfVar16 + bytesPerPixel);
@@ -5390,121 +5390,121 @@ int gld_emitQueryBeginPacket(ctx, writeCursor)
 }
 
 /* FUN_0002bbc4 @ 0x2bbc4 (564 bytes) */
-void FUN_0002bbc4(int ctx,undefined4 *param_2,undefined4 param_3,undefined4 param_4,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+void FUN_0002bbc4(int ctx,undefined4 *stampSource,undefined4 passThroughArg3,undefined4 passThroughArg4,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
 {
-  int iVar1;
-  undefined4 *puVar2;
-  int *piVar3;
-  uint *puVar4;
-  undefined4 uVar5;
+  int fenceUpdated;
+  undefined4 *packet;
+  int *fenceWord;
+  uint *ringTailLink;
+  undefined4 stampValue;
   uint scratchUint6;
   undefined4 *r4AfterCall;
-  undefined4 *puVar7;
-  undefined *puVar8;
-  uint *puVar9;
-  int iVar10;
-  undefined4 *puVar11;
-  undefined4 *puVar12;
-  undefined4 uVar13;
+  undefined4 *param2AfterFlush;
+  undefined *staleArgR7;
+  uint *staleArgR8;
+  int entryWords;
+  undefined4 *scratchPtr11;
+  undefined4 *writeCursor;
+  undefined4 ctxWord1cf8;
   undefined4 *scratchPtr14;
   int scratchInt15;
-  int iVar16;
+  int entryCount;
   char reservation;
   byte crField0;
   undefined4 in_LR;
   
-  iVar16 = *(int *)(ctx + 0x2610);
+  entryCount = *(int *)(ctx + 0x2610);
   scratchInt15 = *(int *)(ctx + 0x261c);
-  uVar13 = *(undefined4 *)(ctx + 0x1cf8);
+  ctxWord1cf8 = *(undefined4 *)(ctx + 0x1cf8);
   scratchPtr14 = (undefined4 *)**(undefined4 **)(ctx + 0x234);
-  if (iVar16 == 1) {
+  if (entryCount == 1) {
     if (scratchInt15 == 2) {
-      iVar16 = 2;
-      iVar10 = 8;
+      entryCount = 2;
+      entryWords = 8;
     }
     else {
-      iVar10 = 4;
+      entryWords = 4;
     }
   }
   else {
-    iVar10 = iVar16 << 2;
+    entryWords = entryCount << 2;
   }
-  piVar3 = scratchPtr14 + 4;
+  fenceWord = scratchPtr14 + 4;
   do {
     if (reservation != '\0') {
-      iVar1 = storeWordConditionalIndexed(*piVar3 + 0x10000,0,piVar3);
-      *piVar3 = iVar1;
+      fenceUpdated = storeWordConditionalIndexed(*fenceWord + 0x10000,0,fenceWord);
+      *fenceWord = fenceUpdated;
       crField0 = 2;
     }
   } while (!(bool)(crField0 >> 1 & 1));
-  puVar9 = *(uint **)(ctx + 0x1dc);
-  puVar7 = param_2;
-  if (*(uint **)(ctx + 0x1e0) <= puVar9 + iVar10 + 0x15) {
+  staleArgR8 = *(uint **)(ctx + 0x1dc);
+  param2AfterFlush = stampSource;
+  if (*(uint **)(ctx + 0x1e0) <= staleArgR8 + entryWords + 0x15) {
     staleFprArg1 = (double)gld_submitRing(ctx,0x1000000);
-    puVar9 = *(uint **)(ctx + 0x1dc);
-    puVar7 = r4AfterCall;
+    staleArgR8 = *(uint **)(ctx + 0x1dc);
+    param2AfterFlush = r4AfterCall;
   }
-  puVar8 = (undefined *)0x0;
-  puVar2 = (undefined4 *)((uint)(puVar9 + 0xb) & 0xffffffe0);
-  puVar12 = puVar2 + 4;
-  *puVar9 = (((int)puVar2 - (int)puVar9) + -8) * 0x4000 | 0xc0001000;
-  puVar2[-1] = (int)puVar2 - (int)puVar9;
-  puVar4 = *(uint **)(ctx + 0x1d8);
-  puVar11 = (undefined4 *)*puVar4;
-  *puVar4 = (int)puVar2 - (int)puVar4 >> 2 | (uint)puVar11;
-  *(undefined4 **)(ctx + 0x1d8) = puVar2;
-  *puVar2 = 0x3b000000;
-  uVar5 = *scratchPtr14;
-  puVar2[2] = 0;
-  puVar2[1] = uVar5;
-  puVar2[3] = *param_2;
+  staleArgR7 = (undefined *)0x0;
+  packet = (undefined4 *)((uint)(staleArgR8 + 0xb) & 0xffffffe0);
+  writeCursor = packet + 4;
+  *staleArgR8 = (((int)packet - (int)staleArgR8) + -8) * 0x4000 | 0xc0001000;
+  packet[-1] = (int)packet - (int)staleArgR8;
+  ringTailLink = *(uint **)(ctx + 0x1d8);
+  scratchPtr11 = (undefined4 *)*ringTailLink;
+  *ringTailLink = (int)packet - (int)ringTailLink >> 2 | (uint)scratchPtr11;
+  *(undefined4 **)(ctx + 0x1d8) = packet;
+  *packet = 0x3b000000;
+  stampValue = *scratchPtr14;
+  packet[2] = 0;
+  packet[1] = stampValue;
+  packet[3] = *stampSource;
   if (scratchInt15 == 2) {
-    puVar2[5] = 0;
-    puVar2[4] = ((unsigned char *)0x000013c5U);
+    packet[5] = 0;
+    packet[4] = ((unsigned char *)0x000013c5U);
     scratchUint6 = 0;
-    puVar8 = ((unsigned char *)0x000012faU);
-    puVar9 = (uint *)((int)((unsigned char *)0x0) + 1);
+    staleArgR7 = ((unsigned char *)0x000012faU);
+    staleArgR8 = (uint *)((int)((unsigned char *)0x0) + 1);
     scratchInt15 = 2;
-    puVar11 = puVar2 + 6;
+    scratchPtr11 = packet + 6;
     do {
-      scratchPtr14 = puVar11;
+      scratchPtr14 = scratchPtr11;
       *scratchPtr14 = ((unsigned char *)0x000012faU);
       scratchPtr14[2] = ((unsigned char *)0x000013d7U);
       scratchPtr14[3] = 0;
       scratchPtr14[1] = 1 << (scratchUint6 & 0x3f);
       scratchUint6 = scratchUint6 + 1;
-      puVar11 = scratchPtr14 + 4;
+      scratchPtr11 = scratchPtr14 + 4;
       scratchInt15 = scratchInt15 + -1;
     } while (scratchInt15 != 0);
-    *puVar11 = ((unsigned char *)0x000012faU);
-    scratchPtr14[7] = uVar13;
-    puVar12 = scratchPtr14 + 8;
+    *scratchPtr11 = ((unsigned char *)0x000012faU);
+    scratchPtr14[7] = ctxWord1cf8;
+    writeCursor = scratchPtr14 + 8;
     scratchPtr14[5] = 3;
     scratchPtr14[6] = ((unsigned char *)0x000013c5U);
   }
   else {
-    if (iVar16 != 0) {
+    if (entryCount != 0) {
       scratchUint6 = 0;
-      puVar8 = ((unsigned char *)0x000010b2U);
-      puVar9 = (uint *)((int)((unsigned char *)0x0) + 1);
-      puVar11 = (undefined4 *)0x0;
+      staleArgR7 = ((unsigned char *)0x000010b2U);
+      staleArgR8 = (uint *)((int)((unsigned char *)0x0) + 1);
+      scratchPtr11 = (undefined4 *)0x0;
       do {
-        *puVar12 = ((unsigned char *)0x000010b2U);
-        puVar12[2] = ((unsigned char *)0x000013d7U);
-        puVar12[3] = 0;
-        puVar12[1] = 1 << (scratchUint6 & 0x3f);
+        *writeCursor = ((unsigned char *)0x000010b2U);
+        writeCursor[2] = ((unsigned char *)0x000013d7U);
+        writeCursor[3] = 0;
+        writeCursor[1] = 1 << (scratchUint6 & 0x3f);
         scratchUint6 = scratchUint6 + 1;
-        puVar12 = puVar12 + 4;
-        iVar16 = iVar16 + -1;
-      } while (iVar16 != 0);
+        writeCursor = writeCursor + 4;
+        entryCount = entryCount + -1;
+      } while (entryCount != 0);
     }
-    *puVar12 = ((unsigned char *)0x000010b2U);
-    puVar12[1] = 0xf;
-    puVar12 = puVar12 + 2;
+    *writeCursor = ((unsigned char *)0x000010b2U);
+    writeCursor[1] = 0xf;
+    writeCursor = writeCursor + 2;
   }
-  *(undefined4 **)(ctx + 0x1dc) = puVar12;
+  *(undefined4 **)(ctx + 0x1dc) = writeCursor;
   ((unsigned char *)0x00002b7e)[ctx] = 0;
-  ((void (*)())gldValidateState)(ctx + 0x240,puVar7,param_3,param_4,puVar8,puVar9,puVar11,staleFprArg1,staleFprArg2,
+  ((void (*)())gldValidateState)(ctx + 0x240,param2AfterFlush,passThroughArg3,passThroughArg4,staleArgR7,staleArgR8,scratchPtr11,staleFprArg1,staleFprArg2,
                staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,
                (double)CONCAT44(in_LR,(*(unsigned int *)((unsigned char *)&(staleFprArg9) + 4))));
   return;

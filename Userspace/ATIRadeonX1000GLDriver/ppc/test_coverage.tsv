@@ -309,7 +309,7 @@
 0x2fac0	gld_selectTextureHardwareFormat	2252	yes	
 0x303d0	gldCompressedImageBytes	68	yes	
 0x30420	FUN_00030420	392	yes	
-0x305b0	FUN_000305b0	492	yes	
+0x305b0	gld_compressAlphaBlock	492	yes	
 0x307a0	FUN_000307a0	148	yes	
 0x30840	FUN_00030840	124	yes	
 0x308c0	FUN_000308c0	192	yes	
@@ -346,13 +346,13 @@
 0x3aba0	gldPrimInlineLines	724	no	indirect call (driver context / vtable / callback)
 0x3ae80	gldPrimInlineLineLoop	724	no	indirect call (driver context / vtable / callback)
 0x3b160	FUN_0003b160	284	yes	
-0x3b280	FUN_0003b280	772	no	indirect call (driver context / vtable / callback)
+0x3b280	extvsDeclareProgramVariables	772	no	indirect call (driver context / vtable / callback)
 0x3b5b0	FUN_0003b5b0	100	yes	
 0x3b620	FUN_0003b620	592	yes	
 0x3b870	FUN_0003b870	2500	no	calls an import (glpUniformToFloat)
 0x3c310	gldDeleteVertexShaderObject	236	no	indirect call (driver context / vtable / callback)
-0x3c400	FUN_0003c400	4136	no	indirect call (driver context / vtable / callback)
-0x3d590	FUN_0003d590	2944	no	calls an import (glpUniformToFloat); indirect call (driver context / vtable / callback)
+0x3c400	extvsTranslateShaderObject	4136	no	indirect call (driver context / vtable / callback)
+0x3d590	gld_emitProgramConstantUpdates	2944	no	calls an import (glpUniformToFloat); indirect call (driver context / vtable / callback)
 0x3e1d0	gldUpdateTextureTargetDirtyMask	124	yes	
 0x3e250	FUN_0003e250	188	yes	
 0x3e320	FUN_0003e320	120	yes	

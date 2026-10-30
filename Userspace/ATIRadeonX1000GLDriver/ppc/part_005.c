@@ -1634,44 +1634,44 @@ int FUN_00030420(param_1, formatInfo, param_3, param_4, param_5, param_6, param_
   return param_1 + 0x74;
 }
 
-/* FUN_000305b0 @ 0x305b0 (492 bytes) */
-int FUN_000305b0(param_1, param_2, param_3, param_4)
-  undefined1 *param_1;
-  byte *param_2;
-  int param_3;
-  int param_4;
+/* gld_compressAlphaBlock @ 0x305b0 (492 bytes) */
+int gld_compressAlphaBlock(dstBlock, srcPixels, pixelStride, rowStride)
+  undefined1 *dstBlock;
+  byte *srcPixels;
+  int pixelStride;
+  int rowStride;
 {
   bool scratchFlag1;
-  byte bVar2;
+  byte pixelValue;
   uint scratchUint3;
   uint scratchUint4;
-  int iVar5;
+  int halfInterval;
   int scratchInt6;
-  int iVar7;
-  byte *pbVar8;
+  int indexCode;
+  byte *pixelCursor;
   uint scratchUint9;
   byte *scratchPtr10;
-  int iVar11;
-  int iVar12;
-  int iVar13;
+  int byteIndex;
+  int intervalSize;
+  int blockRow;
   int scratchInt14;
-  int iVar15;
-  int local_58 [4];
-  undefined4 local_48;
-  undefined4 local_44;
-  undefined4 local_40;
-  undefined4 local_3c;
+  int blockColumn;
+  int indexRemapTable [4];
+  undefined4 indexRemapTable4;
+  undefined4 indexRemapTable5;
+  undefined4 indexRemapTable6;
+  undefined4 indexRemapTable7;
   
   scratchUint4 = 0;
   scratchUint9 = 0xff;
   scratchInt6 = 0;
-  scratchPtr10 = param_2;
+  scratchPtr10 = srcPixels;
   do {
     scratchInt14 = 4;
-    pbVar8 = scratchPtr10;
+    pixelCursor = scratchPtr10;
     do {
-      scratchUint3 = (uint)*pbVar8;
-      pbVar8 = pbVar8 + param_3;
+      scratchUint3 = (uint)*pixelCursor;
+      pixelCursor = pixelCursor + pixelStride;
       if (scratchUint3 < scratchUint9) {
         scratchUint9 = scratchUint3;
       }
@@ -1681,61 +1681,61 @@ int FUN_000305b0(param_1, param_2, param_3, param_4)
       scratchInt14 = scratchInt14 + -1;
     } while (scratchInt14 != 0);
     scratchFlag1 = scratchInt6 != 3;
-    scratchPtr10 = scratchPtr10 + param_4;
+    scratchPtr10 = scratchPtr10 + rowStride;
     scratchInt6 = scratchInt6 + 1;
   } while (scratchFlag1);
   scratchInt6 = scratchUint4 * 0x100;
   scratchInt14 = scratchUint9 * 0x100;
-  iVar12 = (int)(scratchInt6 + scratchUint9 * -0x100) / 7;
-  iVar5 = iVar12 >> 1;
+  intervalSize = (int)(scratchInt6 + scratchUint9 * -0x100) / 7;
+  halfInterval = intervalSize >> 1;
   if (scratchInt6 == scratchInt14) {
     if (scratchUint9 == 0) {
       scratchInt6 = 0x100;
-      iVar5 = 0x7fff;
-      iVar12 = 0xffff;
+      halfInterval = 0x7fff;
+      intervalSize = 0xffff;
     }
     else {
       scratchInt14 = scratchInt14 + -0x100;
-      iVar5 = 0x7fff;
-      iVar12 = 0xffff;
+      halfInterval = 0x7fff;
+      intervalSize = 0xffff;
     }
   }
-  iVar13 = 0;
+  blockRow = 0;
   scratchUint4 = 0x10;
-  local_58[0] = DAT_001aa554;
-  local_58[1] = DAT_001aa558;
-  local_3c = DAT_001aa570;
-  local_58[2] = DAT_001aa55c;
-  local_58[3] = DAT_001aa560;
-  local_48 = DAT_001aa564;
-  local_44 = DAT_001aa568;
-  local_40 = DAT_001aa56c;
+  indexRemapTable[0] = DAT_001aa554;
+  indexRemapTable[1] = DAT_001aa558;
+  indexRemapTable7 = DAT_001aa570;
+  indexRemapTable[2] = DAT_001aa55c;
+  indexRemapTable[3] = DAT_001aa560;
+  indexRemapTable4 = DAT_001aa564;
+  indexRemapTable5 = DAT_001aa568;
+  indexRemapTable6 = DAT_001aa56c;
   do {
-    iVar15 = 4;
-    scratchPtr10 = param_2;
+    blockColumn = 4;
+    scratchPtr10 = srcPixels;
     scratchUint9 = scratchUint4;
     do {
-      bVar2 = *scratchPtr10;
-      iVar11 = (int)scratchUint9 >> 3;
+      pixelValue = *scratchPtr10;
+      byteIndex = (int)scratchUint9 >> 3;
       scratchUint3 = scratchUint9 & 7;
-      scratchPtr10 = scratchPtr10 + param_3;
-      iVar7 = local_58[(int)(((uint)bVar2 * 0x100 + iVar5) - scratchInt14) / iVar12];
-      param_1[iVar11] = (byte)(iVar7 << scratchUint3) | param_1[iVar11] & ~(byte)(7 << scratchUint3);
+      scratchPtr10 = scratchPtr10 + pixelStride;
+      indexCode = indexRemapTable[(int)(((uint)pixelValue * 0x100 + halfInterval) - scratchInt14) / intervalSize];
+      dstBlock[byteIndex] = (byte)(indexCode << scratchUint3) | dstBlock[byteIndex] & ~(byte)(7 << scratchUint3);
       if (5 < scratchUint3) {
-        param_1[iVar11 + 1] =
-             (byte)(iVar7 >> (8 - scratchUint3 & 0x3f)) |
-             param_1[iVar11 + 1] & ~(byte)(7 >> (8 - scratchUint3 & 0x3f));
+        dstBlock[byteIndex + 1] =
+             (byte)(indexCode >> (8 - scratchUint3 & 0x3f)) |
+             dstBlock[byteIndex + 1] & ~(byte)(7 >> (8 - scratchUint3 & 0x3f));
       }
       scratchUint9 = scratchUint9 + 3;
-      iVar15 = iVar15 + -1;
-    } while (iVar15 != 0);
-    scratchFlag1 = iVar13 != 3;
-    param_2 = param_2 + param_4;
+      blockColumn = blockColumn + -1;
+    } while (blockColumn != 0);
+    scratchFlag1 = blockRow != 3;
+    srcPixels = srcPixels + rowStride;
     scratchUint4 = scratchUint4 + 0xc;
-    iVar13 = iVar13 + 1;
+    blockRow = blockRow + 1;
   } while (scratchFlag1);
-  *param_1 = (char)((uint)scratchInt6 >> 8);
-  param_1[1] = (char)((uint)scratchInt14 >> 8);
+  *dstBlock = (char)((uint)scratchInt6 >> 8);
+  dstBlock[1] = (char)((uint)scratchInt14 >> 8);
   return;
 }
 
@@ -3862,11 +3862,11 @@ LAB_00033700:
                                     scratchInt35 = scratchInt11 * scratchInt33;
                                     scratchInt33 = scratchInt33 + 4;
                                     scratchInt21 = scratchUint15 + scratchInt35 + scratchInt25 * (int)scratchPtr38;
-                                    ((int (*)())FUN_000305b0)(scratchInt29,scratchInt21 + scratchStackbc,scratchInt11,scratchPtr38);
+                                    ((int (*)())gld_compressAlphaBlock)(scratchInt29,scratchInt21 + scratchStackbc,scratchInt11,scratchPtr38);
                                     scratchInt35 = scratchInt29 + 8;
                                     scratchInt29 = scratchInt29 + 0x10;
                                     scratchPtr18 = scratchPtr38;
-                                    ((int (*)())FUN_000305b0)(scratchInt35,scratchInt21 + (uint)(1 < scratchUint23 - 0x1907) * 2,
+                                    ((int (*)())gld_compressAlphaBlock)(scratchInt35,scratchInt21 + (uint)(1 < scratchUint23 - 0x1907) * 2,
                                                  scratchInt11,scratchPtr38);
                                   } while (scratchInt33 < (int)scratchUint20);
                                 }
@@ -8577,7 +8577,7 @@ int FUN_0003b160(param_1, dirtyBits, param_3)
       iVar3 = *piVar5;
     }
     if ((uVar4 & 2) == 0) {
-      ((int (*)())FUN_0003d590)(param_1,iVar1,*(undefined4 *)(iVar2 + 0x28),iVar2 + *(int *)(iVar2 + 0x2c) * 8,
+      ((int (*)())gld_emitProgramConstantUpdates)(param_1,iVar1,*(undefined4 *)(iVar2 + 0x28),iVar2 + *(int *)(iVar2 + 0x2c) * 8,
                    *(undefined4 *)(iVar3 + 0x18),dirtyBits + 0x14);
     }
     else {
@@ -8588,49 +8588,49 @@ int FUN_0003b160(param_1, dirtyBits, param_3)
   return param_3;
 }
 
-/* FUN_0003b280 @ 0x3b280 (772 bytes) */
-int FUN_0003b280(ctx, hwProgram, param_3, param_4, param_5, param_6, param_7, param_8)
+/* extvsDeclareProgramVariables @ 0x3b280 (772 bytes) */
+int extvsDeclareProgramVariables(ctx, hwProgram, variableCount, variableRecords, rangeCount, rangeRecords, unusedArg7, literalConstants)
   int ctx;
   int hwProgram;
-  uint param_3;
-  int param_4;
-  uint param_5;
-  int param_6;
-  undefined4 param_7;
-  int param_8;
+  uint variableCount;
+  int variableRecords;
+  uint rangeCount;
+  int rangeRecords;
+  undefined4 unusedArg7;
+  int literalConstants;
 {
   int loopIndex2;
   bool scratchFlag1;
-  undefined4 *puVar2;
-  undefined4 *puVar3;
+  undefined4 *indexFrameLink;
+  undefined4 *symbolFrameLink;
   int scratchInt4;
   uint scratchUint5;
-  int iVar6;
+  int indexAllocBytes;
   undefined4 scratchUint7;
-  undefined1 *puVar8;
+  undefined1 *kindArray;
   undefined1 *scratchPtr9;
-  uint uVar10;
-  uint *puVar11;
-  uint *puVar12;
+  uint recordKind;
+  uint *indexCursor;
+  uint *recordCursor;
   uint loopIndex;
-  uint uVar14;
+  uint variableIndex;
   int scratchInt15;
-  undefined4 *puVar16;
+  undefined4 *symbolOut;
   int scratchInt17;
-  uint *puVar18;
-  uint local_50 [4];
+  uint *groupRecords;
+  uint rangeRecord [4];
   
-  if (*(uint *)(hwProgram + 0x24) != param_3) {
+  if (*(uint *)(hwProgram + 0x24) != variableCount) {
     if (*(int *)(hwProgram + 0x28) != 0) {
       (**(code **)(ctx + 0x18))(*(int *)(hwProgram + 0x28));
       *(undefined4 *)(hwProgram + 0x28) = 0;
     }
-    if (param_3 != 0) {
-      scratchUint7 = (**(code **)(ctx + 0x10))(param_3,4);
+    if (variableCount != 0) {
+      scratchUint7 = (**(code **)(ctx + 0x10))(variableCount,4);
       *(undefined4 *)(hwProgram + 0x28) = scratchUint7;
     }
   }
-  *(uint *)(hwProgram + 0x24) = param_3;
+  *(uint *)(hwProgram + 0x24) = variableCount;
   if (*(char *)(hwProgram + 0x8c) != '\0') {
     scratchInt15 = 0;
     scratchInt17 = hwProgram;
@@ -8642,82 +8642,82 @@ int FUN_0003b280(ctx, hwProgram, param_3, param_4, param_5, param_6, param_7, pa
       scratchInt17 = scratchInt17 + 4;
     } while (scratchFlag1);
   }
-  if (param_3 != 0) {
+  if (variableCount != 0) {
     scratchInt17 = *(int *)(hwProgram + 0x28);
-    uVar14 = 0;
+    variableIndex = 0;
     loopIndex = 0;
     scratchPtr9 = (undefined1 *)((unsigned int)__builtin_frame_address(0));
     do {
-      if (loopIndex < param_5) {
-        local_50[0] = *(uint *)(loopIndex * 8 + param_6);
-        local_50[1] = *(uint *)(loopIndex * 8 + param_6 + 4);
-        if ((uVar14 < (local_50[0] & 0xffff)) || ((local_50[1] & 0xffff) <= uVar14))
+      if (loopIndex < rangeCount) {
+        rangeRecord[0] = *(uint *)(loopIndex * 8 + rangeRecords);
+        rangeRecord[1] = *(uint *)(loopIndex * 8 + rangeRecords + 4);
+        if ((variableIndex < (rangeRecord[0] & 0xffff)) || ((rangeRecord[1] & 0xffff) <= variableIndex))
         goto LAB_0003b3e0;
         loopIndex = loopIndex + 1;
-        scratchInt15 = ((local_50[1] & 0xffff) - (local_50[0] & 0xffff)) + 1;
+        scratchInt15 = ((rangeRecord[1] & 0xffff) - (rangeRecord[0] & 0xffff)) + 1;
       }
       else {
 LAB_0003b3e0:
         scratchInt15 = 1;
       }
-      puVar18 = (uint *)(uVar14 * 8 + param_4);
-      if ((*(uint *)(param_4 + uVar14 * 8) & 0x1f0000) != 0) {
+      groupRecords = (uint *)(variableIndex * 8 + variableRecords);
+      if ((*(uint *)(variableRecords + variableIndex * 8) & 0x1f0000) != 0) {
         scratchInt4 = -(scratchInt15 + 0x1eU & 0xfffffff0);
         *(undefined1 **)(&STACKARG(0xffffff70) + scratchInt4) = scratchPtr9;
-        iVar6 = -(scratchInt15 * 4 + 0x1eU & 0xfffffff0);
-        puVar8 = (undefined1 *)((int)local_50 + scratchInt4);
-        puVar2 = (undefined4 *)((int)(&STACKARG(0xffffff70) + scratchInt4) + iVar6);
-        *puVar2 = scratchPtr9;
-        puVar3 = (undefined4 *)((int)puVar2 + iVar6);
-        *puVar3 = scratchPtr9;
-        puVar16 = puVar3 + 0x10;
-        puVar12 = puVar18;
+        indexAllocBytes = -(scratchInt15 * 4 + 0x1eU & 0xfffffff0);
+        kindArray = (undefined1 *)((int)rangeRecord + scratchInt4);
+        indexFrameLink = (undefined4 *)((int)(&STACKARG(0xffffff70) + scratchInt4) + indexAllocBytes);
+        *indexFrameLink = scratchPtr9;
+        symbolFrameLink = (undefined4 *)((int)indexFrameLink + indexAllocBytes);
+        *symbolFrameLink = scratchPtr9;
+        symbolOut = symbolFrameLink + 0x10;
+        recordCursor = groupRecords;
         scratchFlag1 = scratchInt15 != 0;
-        scratchPtr9 = puVar8;
-        puVar11 = puVar2 + 0x10;
+        scratchPtr9 = kindArray;
+        indexCursor = indexFrameLink + 0x10;
         scratchInt4 = scratchInt15;
         while (scratchFlag1) {
-          scratchUint5 = *puVar12;
-          uVar10 = scratchUint5 >> 0x10 & 0x1f;
-          if (uVar10 == 2) {
+          scratchUint5 = *recordCursor;
+          recordKind = scratchUint5 >> 0x10 & 0x1f;
+          if (recordKind == 2) {
             *scratchPtr9 = 0;
-            *puVar11 = scratchUint5 & 0xffff;
+            *indexCursor = scratchUint5 & 0xffff;
           }
-          else if (uVar10 == 0x11) {
+          else if (recordKind == 0x11) {
             *scratchPtr9 = 1;
-            *puVar11 = 0;
+            *indexCursor = 0;
           }
           else {
             *scratchPtr9 = 2;
-            *puVar11 = 0;
+            *indexCursor = 0;
           }
-          puVar12 = puVar12 + 2;
+          recordCursor = recordCursor + 2;
           scratchPtr9 = scratchPtr9 + 1;
-          puVar11 = puVar11 + 1;
+          indexCursor = indexCursor + 1;
           scratchInt4 = scratchInt4 + -1;
           scratchFlag1 = scratchInt4 != 0;
         }
-        FUN_000534c0(ctx,scratchInt15,puVar8,puVar2 + 0x10,puVar16);
+        FUN_000534c0(ctx,scratchInt15,kindArray,indexFrameLink + 0x10,symbolOut);
         if (scratchInt15 != 0) {
           loopIndex2 = 0;
           do {
-            scratchUint5 = *puVar18;
-            scratchUint7 = *puVar16;
-            *(undefined4 *)(scratchInt17 + (puVar18[1] & 0xffff) * 4) = scratchUint7;
+            scratchUint5 = *groupRecords;
+            scratchUint7 = *symbolOut;
+            *(undefined4 *)(scratchInt17 + (groupRecords[1] & 0xffff) * 4) = scratchUint7;
             if ((scratchUint5 >> 0x10 & 0x1f) == 0x11) {
-              glSetLocalConstantEXT_impl(ctx,scratchUint7,((unsigned char *)0x00001406U),(scratchUint5 & 0xffff) * 0x10 + param_8);
+              glSetLocalConstantEXT_impl(ctx,scratchUint7,((unsigned char *)0x00001406U),(scratchUint5 & 0xffff) * 0x10 + literalConstants);
             }
             loopIndex2 = loopIndex2 + 1;
-            puVar18 = puVar18 + 2;
-            puVar16 = puVar16 + 1;
+            groupRecords = groupRecords + 2;
+            symbolOut = symbolOut + 1;
           } while (scratchInt15 != loopIndex2);
-          uVar14 = uVar14 + loopIndex2;
+          variableIndex = variableIndex + loopIndex2;
         }
-        scratchPtr9 = (undefined1 *)*puVar3;
-        uVar14 = uVar14 - 1;
+        scratchPtr9 = (undefined1 *)*symbolFrameLink;
+        variableIndex = variableIndex - 1;
       }
-      uVar14 = uVar14 + 1;
-    } while (uVar14 < param_3);
+      variableIndex = variableIndex + 1;
+    } while (variableIndex < variableCount);
   }
   return;
 }
@@ -9334,8 +9334,8 @@ int gldDeleteVertexShaderObject(param_1, param_2)
   return glDeleteVertexShaderEXT_impl(param_1,*param_2);
 }
 
-/* FUN_0003c400 @ 0x3c400 (4136 bytes) */
-int FUN_0003c400(ctx, shaderObject, hwProgram)
+/* extvsTranslateShaderObject @ 0x3c400 (4136 bytes) */
+int extvsTranslateShaderObject(ctx, shaderObject, hwProgram)
   int ctx;
   int *shaderObject;
   undefined4 *hwProgram;
@@ -9348,32 +9348,32 @@ int FUN_0003c400(ctx, shaderObject, hwProgram)
   bool scratchFlag1;
   bool scratchFlag2;
   int scratchInt3;
-  uint uVar4;
+  uint srcRegisterFile;
   int scratchInt5;
   uint scratchUint6;
   undefined4 scratchUint7;
-  int iVar8;
-  undefined4 uVar9;
-  int iVar10;
-  int iVar11;
+  int swizzleX;
+  undefined4 componentTemp;
+  int swizzleY;
+  int swizzleZ;
   int scratchInt12;
-  int iVar13;
+  int swizzleW;
   int loopIndex;
   uint scratchUint15;
   uint dstIndex;
   int scratchInt17;
-  int iVar18;
+  int sourceCount;
   undefined4 *scratchPtr19;
-  int iVar20;
+  int sourceIndex;
   uint *scratchPtr21;
   uint *nextInstruction;
-  int iVar23;
+  int sourceByteOffset;
   uint scratchUint24;
-  undefined4 *puVar25;
+  undefined4 *symbolRemapTable;
   undefined4 scratchUint26;
-  char cStack_95;
-  char cStack_75;
-  undefined4 local_70 [11];
+  char symbolKindByte;
+  char relativeOffset;
+  undefined4 sourceSymbols [11];
   
   if (shaderObject[8] != 0) {
     isGLSLShader = *shaderObject - 0x8b30U < 2;
@@ -9385,8 +9385,8 @@ int FUN_0003c400(ctx, shaderObject, hwProgram)
     if (scratchInt12 != 0) {
       loopIndex = 0;
       do {
-        cStack_95 = (char)shaderObject[scratchInt5 * 2 + loopIndex * 2];
-        if (cStack_95 == '\0') {
+        symbolKindByte = (char)shaderObject[scratchInt5 * 2 + loopIndex * 2];
+        if (symbolKindByte == '\0') {
           *(undefined1 *)(hwProgram + 0x23) = 1;
         }
         loopIndex = loopIndex + 1;
@@ -9473,7 +9473,7 @@ int FUN_0003c400(ctx, shaderObject, hwProgram)
         loopIndex = loopIndex + 1;
       } while (scratchInt12 != loopIndex);
     }
-    ((int (*)())FUN_0003b280)(ctx,hwProgram,shaderObject[10],shaderObject + shaderObject[0xb] * 2,shaderObject[0xe],
+    ((int (*)())extvsDeclareProgramVariables)(ctx,hwProgram,shaderObject[10],shaderObject + shaderObject[0xb] * 2,shaderObject[0xe],
                  shaderObject + shaderObject[0xf] * 2,shaderObject[0x1a],shaderObject + shaderObject[0x1b] * 2);
     scratchInt12 = shaderObject[0x14];
     scratchInt5 = shaderObject[0xd];
@@ -9539,11 +9539,11 @@ LAB_0003c9b8:
         if (((operandWord & 0x1e000) != 0x1e000) && (!scratchFlag1)) {
           scratchInt3 = hwProgram[0x16];
         }
-        if ((opcode < 0x1f) || ((iVar18 = 2, 0x3a < opcode && (iVar18 = 3, 0x40 < opcode)))) {
-          iVar18 = 1;
+        if ((opcode < 0x1f) || ((sourceCount = 2, 0x3a < opcode && (sourceCount = 3, 0x40 < opcode)))) {
+          sourceCount = 1;
         }
-        iVar20 = 0;
-        iVar23 = 0;
+        sourceIndex = 0;
+        sourceByteOffset = 0;
         nextInstruction = instructionPtr + 4;
         scratchPtr19 = hwProgram;
         do {
@@ -9552,15 +9552,15 @@ LAB_0003c9b8:
           nextInstruction = scratchPtr21 + 2;
           dstIndex = scratchPtr21[1] & 0xffff;
           if ((isGLSLShader) && ((instructionWord & 0x7000) != 0x3000)) goto switchD_0003cbec_caseD_3;
-          uVar4 = instructionWord >> 0x17 & 7;
-          if (uVar4 == 1) {
+          srcRegisterFile = instructionWord >> 0x17 & 7;
+          if (srcRegisterFile == 1) {
             scratchUint7 = *(undefined4 *)(dstIndex * 4 + hwProgram[2]);
           }
-          else if (uVar4 == 2) {
+          else if (srcRegisterFile == 2) {
             if ((int)instructionWord < 0) {
-              cStack_75 = (char)instructionWord;
+              relativeOffset = (char)instructionWord;
               glShaderOp2EXT_impl(ctx,0x8782,scratchPtr19[0x13],hwProgram[0x17],
-                           *(undefined4 *)((dstIndex + (int)cStack_75) * 4 + hwProgram[10]));
+                           *(undefined4 *)((dstIndex + (int)relativeOffset) * 4 + hwProgram[10]));
               scratchUint7 = scratchPtr19[0x13];
             }
             else {
@@ -9569,133 +9569,133 @@ LAB_0003c9b8:
           }
           else {
             scratchUint7 = 0;
-            if (uVar4 == 0) {
+            if (srcRegisterFile == 0) {
               scratchUint7 = *(undefined4 *)(dstIndex * 4 + hwProgram[4]);
             }
           }
-          *(undefined4 *)((int)local_70 + iVar23) = scratchUint7;
+          *(undefined4 *)((int)sourceSymbols + sourceByteOffset) = scratchUint7;
           if ((instructionWord & 0x8000000) == 0) {
-            iVar8 = (instructionWord >> 0x15 & 3) + 0x87d5;
-            iVar10 = (instructionWord >> 0x13 & 3) + 0x87d5;
-            iVar11 = (instructionWord >> 0x11 & 3) + 0x87d5;
-            iVar13 = (instructionWord >> 0xf & 3) + 0x87d5;
+            swizzleX = (instructionWord >> 0x15 & 3) + 0x87d5;
+            swizzleY = (instructionWord >> 0x13 & 3) + 0x87d5;
+            swizzleZ = (instructionWord >> 0x11 & 3) + 0x87d5;
+            swizzleW = (instructionWord >> 0xf & 3) + 0x87d5;
           }
           else {
-            iVar8 = (instructionWord >> 0x15 & 3) + 0x87d9;
-            iVar10 = (instructionWord >> 0x13 & 3) + 0x87d9;
-            iVar11 = (instructionWord >> 0x11 & 3) + 0x87d9;
-            iVar13 = (instructionWord >> 0xf & 3) + 0x87d9;
+            swizzleX = (instructionWord >> 0x15 & 3) + 0x87d9;
+            swizzleY = (instructionWord >> 0x13 & 3) + 0x87d9;
+            swizzleZ = (instructionWord >> 0x11 & 3) + 0x87d9;
+            swizzleW = (instructionWord >> 0xf & 3) + 0x87d9;
           }
-          if ((((iVar8 != 0x87d5) || (iVar10 != 0x87d6)) || (iVar11 != 0x87d7)) ||
-             (iVar13 != 0x87d8)) {
-            FUN_00054080(ctx,scratchPtr19[0xd],*(undefined4 *)((int)local_70 + iVar23),iVar8,iVar10,
-                         iVar11,iVar13);
-            *(undefined4 *)((int)local_70 + iVar23) = scratchPtr19[0xd];
+          if ((((swizzleX != 0x87d5) || (swizzleY != 0x87d6)) || (swizzleZ != 0x87d7)) ||
+             (swizzleW != 0x87d8)) {
+            FUN_00054080(ctx,scratchPtr19[0xd],*(undefined4 *)((int)sourceSymbols + sourceByteOffset),swizzleX,swizzleY,
+                         swizzleZ,swizzleW);
+            *(undefined4 *)((int)sourceSymbols + sourceByteOffset) = scratchPtr19[0xd];
           }
-          scratchUint7 = local_70[1];
-          iVar20 = iVar20 + 1;
-          iVar23 = iVar23 + 4;
+          scratchUint7 = sourceSymbols[1];
+          sourceIndex = sourceIndex + 1;
+          sourceByteOffset = sourceByteOffset + 4;
           scratchPtr19 = scratchPtr19 + 1;
-        } while (iVar18 != iVar20);
+        } while (sourceCount != sourceIndex);
         switch(opcode) {
         case 0:
-          glShaderOp1EXT_impl(ctx,0x8799,scratchInt3,local_70[0]);
+          glShaderOp1EXT_impl(ctx,0x8799,scratchInt3,sourceSymbols[0]);
           break;
         case 1:
-          glShaderOp1EXT_impl(ctx,0x879e,scratchInt3,local_70[0]);
+          glShaderOp1EXT_impl(ctx,0x879e,scratchInt3,sourceSymbols[0]);
           break;
         case 2:
-          FUN_00054080(ctx,hwProgram[0x18],local_70[0],0x87d9,0x87da,0x87db,0x87dc);
-          glShaderOp2EXT_impl(ctx,0x878a,scratchInt3,local_70[0],hwProgram[0x18]);
+          FUN_00054080(ctx,hwProgram[0x18],sourceSymbols[0],0x87d9,0x87da,0x87db,0x87dc);
+          glShaderOp2EXT_impl(ctx,0x878a,scratchInt3,sourceSymbols[0],hwProgram[0x18]);
           break;
         default:
           goto switchD_0003cbec_caseD_3;
         case 4:
-          glShaderOp1EXT_impl(ctx,0x8789,scratchInt3,local_70[0]);
+          glShaderOp1EXT_impl(ctx,0x8789,scratchInt3,sourceSymbols[0]);
           break;
         case 5:
-          glShaderOp1EXT_impl(ctx,0x878f,scratchInt3,local_70[0]);
+          glShaderOp1EXT_impl(ctx,0x878f,scratchInt3,sourceSymbols[0]);
           break;
         case 0xd:
-          FUN_00054080(ctx,hwProgram[0x18],local_70[0],0x87d9,0x87da,0x87db,0x87dc);
-          glShaderOp2EXT_impl(ctx,0x878a,hwProgram[0x19],local_70[0],hwProgram[0x18]);
+          FUN_00054080(ctx,hwProgram[0x18],sourceSymbols[0],0x87d9,0x87da,0x87db,0x87dc);
+          glShaderOp2EXT_impl(ctx,0x878a,hwProgram[0x19],sourceSymbols[0],hwProgram[0x18]);
           glExtractComponentEXT_impl(ctx,hwProgram[0x10],hwProgram[0x19],0);
           scratchUint26 = hwProgram[0x11];
-          uVar9 = hwProgram[0x10];
+          componentTemp = hwProgram[0x10];
           scratchUint7 = 0x8795;
           goto LAB_0003cdec;
         case 0xe:
-          glExtractComponentEXT_impl(ctx,hwProgram[0x10],local_70[0],0);
+          glExtractComponentEXT_impl(ctx,hwProgram[0x10],sourceSymbols[0],0);
           scratchUint26 = hwProgram[0x11];
-          uVar9 = hwProgram[0x10];
+          componentTemp = hwProgram[0x10];
           scratchUint7 = 0x8794;
           goto LAB_0003cdec;
         case 0x10:
-          glExtractComponentEXT_impl(ctx,hwProgram[0x10],local_70[0],0);
+          glExtractComponentEXT_impl(ctx,hwProgram[0x10],sourceSymbols[0],0);
           scratchUint26 = hwProgram[0x11];
-          uVar9 = hwProgram[0x10];
+          componentTemp = hwProgram[0x10];
           scratchUint7 = 0x8791;
           goto LAB_0003cdec;
         case 0x11:
-          glShaderOp1EXT_impl(ctx,0x87a0,scratchInt3,local_70[0]);
+          glShaderOp1EXT_impl(ctx,0x87a0,scratchInt3,sourceSymbols[0]);
           break;
         case 0x13:
-          glExtractComponentEXT_impl(ctx,hwProgram[0x10],local_70[0],0);
+          glExtractComponentEXT_impl(ctx,hwProgram[0x10],sourceSymbols[0],0);
           scratchUint26 = hwProgram[0x11];
-          uVar9 = hwProgram[0x10];
+          componentTemp = hwProgram[0x10];
           scratchUint7 = 0x8792;
 LAB_0003cdec:
-          glShaderOp1EXT_impl(ctx,scratchUint7,scratchUint26,uVar9);
+          glShaderOp1EXT_impl(ctx,scratchUint7,scratchUint26,componentTemp);
           glShaderOp1EXT_impl(ctx,0x8799,scratchInt3,hwProgram[0x11]);
           break;
         case 0x14:
-          glShaderOp1EXT_impl(ctx,0x87a1,scratchInt3,local_70[0]);
+          glShaderOp1EXT_impl(ctx,0x87a1,scratchInt3,sourceSymbols[0]);
           break;
         case 0x1f:
-          glShaderOp2EXT_impl(ctx,0x8787,scratchInt3,local_70[0],local_70[1]);
+          glShaderOp2EXT_impl(ctx,0x8787,scratchInt3,sourceSymbols[0],sourceSymbols[1]);
           break;
         case 0x20:
-          glShaderOp2EXT_impl(ctx,0x8796,scratchInt3,local_70[0],local_70[1]);
+          glShaderOp2EXT_impl(ctx,0x8796,scratchInt3,sourceSymbols[0],sourceSymbols[1]);
           break;
         case 0x22:
-          glShaderOp2EXT_impl(ctx,0x8786,scratchInt3,local_70[0],local_70[1]);
+          glShaderOp2EXT_impl(ctx,0x8786,scratchInt3,sourceSymbols[0],sourceSymbols[1]);
           break;
         case 0x28:
-          glShaderOp2EXT_impl(ctx,0x8784,scratchInt3,local_70[0],local_70[1]);
+          glShaderOp2EXT_impl(ctx,0x8784,scratchInt3,sourceSymbols[0],sourceSymbols[1]);
           break;
         case 0x29:
-          glShaderOp2EXT_impl(ctx,0x8785,scratchInt3,local_70[0],local_70[1]);
+          glShaderOp2EXT_impl(ctx,0x8785,scratchInt3,sourceSymbols[0],sourceSymbols[1]);
           break;
         case 0x2a:
-          FUN_00054080(ctx,hwProgram[0x18],local_70[0],0x87d5,0x87d6,0x87d7,0x87de);
-          glShaderOp2EXT_impl(ctx,0x8785,scratchInt3,hwProgram[0x18],local_70[1]);
+          FUN_00054080(ctx,hwProgram[0x18],sourceSymbols[0],0x87d5,0x87d6,0x87d7,0x87de);
+          glShaderOp2EXT_impl(ctx,0x8785,scratchInt3,hwProgram[0x18],sourceSymbols[1]);
           break;
         case 0x2b:
-          glShaderOp2EXT_impl(ctx,0x879f,scratchInt3,local_70[0],local_70[1]);
+          glShaderOp2EXT_impl(ctx,0x879f,scratchInt3,sourceSymbols[0],sourceSymbols[1]);
           break;
         case 0x2c:
-          glShaderOp2EXT_impl(ctx,0x878b,scratchInt3,local_70[0],local_70[1]);
+          glShaderOp2EXT_impl(ctx,0x878b,scratchInt3,sourceSymbols[0],sourceSymbols[1]);
           break;
         case 0x2d:
-          glShaderOp2EXT_impl(ctx,0x878a,scratchInt3,local_70[0],local_70[1]);
+          glShaderOp2EXT_impl(ctx,0x878a,scratchInt3,sourceSymbols[0],sourceSymbols[1]);
           break;
         case 0x2e:
-          glShaderOp2EXT_impl(ctx,0x8797,scratchInt3,local_70[0],local_70[1]);
+          glShaderOp2EXT_impl(ctx,0x8797,scratchInt3,sourceSymbols[0],sourceSymbols[1]);
           break;
         case 0x32:
-          glShaderOp2EXT_impl(ctx,0x878c,scratchInt3,local_70[0],local_70[1]);
+          glShaderOp2EXT_impl(ctx,0x878c,scratchInt3,sourceSymbols[0],sourceSymbols[1]);
           break;
         case 0x35:
-          glShaderOp2EXT_impl(ctx,0x878d,scratchInt3,local_70[0],local_70[1]);
+          glShaderOp2EXT_impl(ctx,0x878d,scratchInt3,sourceSymbols[0],sourceSymbols[1]);
           break;
         case 0x38:
-          glExtractComponentEXT_impl(ctx,hwProgram[0x10],local_70[0],0);
+          glExtractComponentEXT_impl(ctx,hwProgram[0x10],sourceSymbols[0],0);
           glExtractComponentEXT_impl(ctx,hwProgram[0x11],scratchUint7,0);
           glShaderOp2EXT_impl(ctx,0x8793,hwProgram[0x12],hwProgram[0x10],hwProgram[0x11]);
           glShaderOp1EXT_impl(ctx,0x8799,scratchInt3,hwProgram[0x12]);
           break;
         case 0x3f:
-          glShaderOp3EXT_impl(ctx,0x8788,scratchInt3,local_70[0],local_70[1],local_70[2]);
+          glShaderOp3EXT_impl(ctx,0x8788,scratchInt3,sourceSymbols[0],sourceSymbols[1],sourceSymbols[2]);
           break;
         case 0x41:
           scratchUint15 = *nextInstruction;
@@ -9704,14 +9704,14 @@ LAB_0003cdec:
               (*(int *)(&DAT_001da630 + (scratchUint15 >> 6 & 0x3c)) != 0x87d6)) ||
              ((*(int *)(&DAT_001da630 + (scratchUint15 >> 2 & 0x3c)) != 0x87d7 ||
               (*(int *)(&DAT_001da630 + (scratchUint15 & 0xf) * 4) != 0x87d8)))) {
-            FUN_00054080(ctx,scratchInt3,local_70[0],*(int *)(&DAT_001da630 + (scratchUint15 >> 10 & 0x3c)),
+            FUN_00054080(ctx,scratchInt3,sourceSymbols[0],*(int *)(&DAT_001da630 + (scratchUint15 >> 10 & 0x3c)),
                          *(int *)(&DAT_001da630 + (scratchUint15 >> 6 & 0x3c)),
                          *(int *)(&DAT_001da630 + (scratchUint15 >> 2 & 0x3c)),
                          *(int *)(&DAT_001da630 + (scratchUint15 & 0xf) * 4));
           }
           break;
         case 0x48:
-          glExtractComponentEXT_impl(ctx,scratchInt3,local_70[0],0);
+          glExtractComponentEXT_impl(ctx,scratchInt3,sourceSymbols[0],0);
         }
         if (((operandWord & 0x1e000) != 0x1e000) && (!scratchFlag1)) {
           glWriteMaskEXT_impl(ctx,scratchInt17,scratchInt3,operandWord >> 0xd & 1,operandWord >> 0xe & 1,operandWord >> 0xf & 1,
@@ -9782,21 +9782,21 @@ LAB_0003d254:
       }
       hwProgram[7] = scratchUint15;
       if (scratchUint15 != 0) {
-        puVar25 = (undefined4 *)hwProgram[8];
-        scratchPtr19 = puVar25;
+        symbolRemapTable = (undefined4 *)hwProgram[8];
+        scratchPtr19 = symbolRemapTable;
         scratchUint24 = scratchUint15;
         do {
           *scratchPtr19 = 0x80;
           scratchPtr19 = scratchPtr19 + 1;
           scratchUint24 = scratchUint24 - 1;
         } while (scratchUint24 != 0);
-        *puVar25 = 0;
+        *symbolRemapTable = 0;
         if (1 < scratchUint15) {
           scratchUint24 = 1;
           do {
             scratchInt5 = FUN_00052f60(ctx,*(undefined4 *)(scratchUint24 * 4 + hwProgram[4]));
             if (scratchInt5 != 0x81) {
-              puVar25[scratchInt5 + -1] = scratchUint24;
+              symbolRemapTable[scratchInt5 + -1] = scratchUint24;
             }
             scratchUint24 = scratchUint24 + 1;
           } while (scratchUint15 != scratchUint24);
@@ -9809,8 +9809,8 @@ LAB_0003d254:
   return 0;
 }
 
-/* FUN_0003d590 @ 0x3d590 (2944 bytes) */
-int FUN_0003d590(ctx, passThroughArg2, passThroughArg3, operandTable, literalConstants, updateMask)
+/* gld_emitProgramConstantUpdates @ 0x3d590 (2944 bytes) */
+int gld_emitProgramConstantUpdates(ctx, passThroughArg2, passThroughArg3, operandTable, literalConstants, updateMask)
   int ctx;
   undefined4 passThroughArg2;
   undefined4 passThroughArg3;
@@ -9830,10 +9830,10 @@ int FUN_0003d590(ctx, passThroughArg2, passThroughArg3, operandTable, literalCon
   undefined4 scratchUint4;
   undefined4 scratchUint5;
   float scratchFloat6;
-  float fVar7;
-  float fVar8;
-  undefined4 uVar9;
-  float fVar10;
+  float vecY;
+  float vecX;
+  undefined4 constX;
+  float vecZPlusOne;
   uint cmdEndAligned;
   int scratchInt12;
   undefined *stateRecord;
@@ -9841,37 +9841,37 @@ int FUN_0003d590(ctx, passThroughArg2, passThroughArg3, operandTable, literalCon
   int status;
   undefined4 *cmdStart;
   int scratchInt17;
-  int iVar18;
+  int lightArrayBase;
   undefined4 *cmdEnd;
-  int iVar20;
+  int materialRecord;
   undefined4 *cacheClearedUpTo;
   undefined8 *scratchPtr22;
   float *srcVec;
   undefined4 *cmdCursor;
   int stateConstants;
   dword *srcWPtr;
-  int iVar27;
+  int lightRecord;
   uint cacheLineMask;
   uint cacheLineAddr;
   dword *srcYPtr;
   int ring;
   float *outSlot;
   byte *entryCursor;
-  byte *pbVar34;
+  byte *entryCursorB;
   undefined8 scratchUint35;
   double scratchDouble36;
   undefined8 scratchUint37;
-  double dVar38;
+  double depthRangeNear;
   byte *program;
   int constantTable;
-  int local_80 [2];
+  int registerBase [2];
   uint operandWord;
   undefined4 operandWord2;
   uint operandWordCopy;
   undefined4 operandWord2Copy;
   
   ring = ctx + GLD_commandStream;
-  status = FUN_00054470(ring,&program,&constantTable,local_80);
+  status = FUN_00054470(ring,&program,&constantTable,registerBase);
   if (status != 0) {
     ((int (*)())FUN_0003b620)(ctx,program,passThroughArg2,passThroughArg3,operandTable);
   }
@@ -9906,22 +9906,22 @@ int FUN_0003d590(ctx, passThroughArg2, passThroughArg3, operandTable, literalCon
       cmdStart = *(undefined4 **)(entryCursor + 4);
       entryCursor = entryCursor + 8;
       scratchInt12 = stateConstants + (uint)*entryStateIndexPtr * 4;
-      uVar9 = *(undefined4 *)(stateConstants + (uint)*entryStateIndexPtr * 4);
+      constX = *(undefined4 *)(stateConstants + (uint)*entryStateIndexPtr * 4);
       scratchInt17 = (uint)destSlot * 0x10;
       constW = *(undefined4 *)(scratchInt12 + 0x30);
       constY = *(undefined4 *)(scratchInt12 + 0x10);
       constZ = *(undefined4 *)(scratchInt12 + 0x20);
       scratchInt12 = constantTable + scratchInt17;
-      *(undefined4 *)(constantTable + scratchInt17) = uVar9;
+      *(undefined4 *)(constantTable + scratchInt17) = constX;
       *(undefined4 *)(scratchInt12 + 0xc) = constW;
       *(undefined4 *)(scratchInt12 + 4) = constY;
       *(undefined4 *)(scratchInt12 + 8) = constZ;
       cmdStart[3] = constW;
-      *cmdStart = uVar9;
+      *cmdStart = constX;
       cmdStart[1] = constY;
       cmdStart[2] = constZ;
-      cmdCursor[1] = local_80[0] + (uint)destSlot;
-      cmdCursor[3] = uVar9;
+      cmdCursor[1] = registerBase[0] + (uint)destSlot;
+      cmdCursor[3] = constX;
       cmdCursor[4] = constY;
       cmdCursor[5] = constZ;
       cmdCursor[6] = constW;
@@ -9931,17 +9931,17 @@ int FUN_0003d590(ctx, passThroughArg2, passThroughArg3, operandTable, literalCon
     } while (entryCursor < program + entryCountA * 8);
   }
   entryCountB = *(int *)(program + 0x804);
-  while (pbVar34 = entryCursor, pbVar34 < program + entryCountB * 8) {
-    entryCursor = pbVar34 + 8;
-    if ((*(uint *)((pbVar34[1] >> 3 & 0x1c) + updateMask) >> (pbVar34[1] & 0x1f) & 1) != 0) {
-      scratchPtr22 = *(undefined8 **)(pbVar34 + 4);
-      destSlot = *pbVar34;
+  while (entryCursorB = entryCursor, entryCursorB < program + entryCountB * 8) {
+    entryCursor = entryCursorB + 8;
+    if ((*(uint *)((entryCursorB[1] >> 3 & 0x1c) + updateMask) >> (entryCursorB[1] & 0x1f) & 1) != 0) {
+      scratchPtr22 = *(undefined8 **)(entryCursorB + 4);
+      destSlot = *entryCursorB;
       *cmdCursor = 0x880;
       cmdCursor[2] = 0x38882;
       stateConstants = (uint)destSlot * 0x10;
       scratchUint37 = scratchPtr22[1];
       scratchUint35 = *scratchPtr22;
-      cmdCursor[1] = local_80[0] + (uint)destSlot;
+      cmdCursor[1] = registerBase[0] + (uint)destSlot;
       *(undefined8 *)(cmdCursor + 3) = scratchUint35;
       *(undefined8 *)(constantTable + stateConstants) = scratchUint35;
       *(undefined8 *)(cmdCursor + 5) = scratchUint37;
@@ -9952,19 +9952,19 @@ int FUN_0003d590(ctx, passThroughArg2, passThroughArg3, operandTable, literalCon
   entryCountC = *(int *)(program + 0x808);
 LAB_0003d820:
   while( true ) {
-    if (program + entryCountC * 8 <= pbVar34) {
+    if (program + entryCountC * 8 <= entryCursorB) {
       *(undefined4 **)(ctx + GLD_streamCurrent) = cmdCursor;
       (**(code **)(ctx + GLD_streamSetCurrent))(ring,cmdCursor);
       return;
     }
-    if ((*(uint *)((pbVar34[1] >> 3 & 0x1c) + updateMask) >> (pbVar34[1] & 0x1f) & 1) != 0) break;
-    pbVar34 = pbVar34 + 8;
+    if ((*(uint *)((entryCursorB[1] >> 3 & 0x1c) + updateMask) >> (entryCursorB[1] & 0x1f) & 1) != 0) break;
+    entryCursorB = entryCursorB + 8;
   }
-  destSlot = *pbVar34;
+  destSlot = *entryCursorB;
   outSlot = (float *)(cmdCursor + 3);
-  operandWord = *(uint *)((uint)*(ushort *)(pbVar34 + 2) * 8 + operandTable);
-  operandWord2 = *(undefined4 *)((uint)*(ushort *)(pbVar34 + 2) * 8 + operandTable + 4);
-  cmdCursor[1] = local_80[0] + (uint)destSlot;
+  operandWord = *(uint *)((uint)*(ushort *)(entryCursorB + 2) * 8 + operandTable);
+  operandWord2 = *(undefined4 *)((uint)*(ushort *)(entryCursorB + 2) * 8 + operandTable + 4);
+  cmdCursor[1] = registerBase[0] + (uint)destSlot;
   cmdCursor[2] = 0x38882;
   *cmdCursor = 0x880;
   if ((operandWord >> 0x10 & 0x1f) == 1) {
@@ -10093,15 +10093,15 @@ LAB_0003dd8c:
       break;
     case 6:
       stateConstants = cacheLineAddr * 0x80 + *(int *)(ctx + GLD_engineState);
-      fVar7 = *(float *)(stateConstants + 0x24f4);
-      fVar8 = *(float *)(stateConstants + 0x24f0);
-      fVar10 = *(float *)(stateConstants + 0x24f8) + 1.0;
-      scratchDouble36 = _sqrt((double)(fVar10 * fVar10 + fVar8 * fVar8 + fVar7 * fVar7));
+      vecY = *(float *)(stateConstants + 0x24f4);
+      vecX = *(float *)(stateConstants + 0x24f0);
+      vecZPlusOne = *(float *)(stateConstants + 0x24f8) + 1.0;
+      scratchDouble36 = _sqrt((double)(vecZPlusOne * vecZPlusOne + vecX * vecX + vecY * vecY));
       cmdCursor[6] = 1.0;
       scratchFloat6 = (float)(1.0 / scratchDouble36);
-      cmdCursor[5] = fVar10 * scratchFloat6;
-      *outSlot = fVar8 * scratchFloat6;
-      cmdCursor[4] = fVar7 * scratchFloat6;
+      cmdCursor[5] = vecZPlusOne * scratchFloat6;
+      *outSlot = vecX * scratchFloat6;
+      cmdCursor[4] = vecY * scratchFloat6;
       goto LAB_0003e170;
     case 7:
       srcVec = (float *)(cacheLineAddr * 0x80 + 0x2530 + *(int *)(ctx + GLD_engineState));
@@ -10115,30 +10115,30 @@ LAB_0003dd8c:
     break;
   case 4:
     cacheLineAddr = operandWord >> 9 & 3;
-    iVar18 = *(int *)(ctx + GLD_engineState) + 0x24c0;
+    lightArrayBase = *(int *)(ctx + GLD_engineState) + 0x24c0;
     stateConstants = (operandWord & 0xff) * 0x80;
     scratchInt17 = (operandWord >> 8 & 1) * 0x240;
     scratchInt12 = *(int *)(ctx + GLD_engineState) + 0x28c0;
-    iVar27 = iVar18 + stateConstants;
-    iVar20 = scratchInt12 + scratchInt17;
+    lightRecord = lightArrayBase + stateConstants;
+    materialRecord = scratchInt12 + scratchInt17;
     if (cacheLineAddr == 1) {
-      *outSlot = *(float *)(iVar27 + 0x10) * *(float *)(iVar20 + 0x10);
-      cmdCursor[4] = *(float *)(iVar27 + 0x14) * *(float *)(iVar20 + 0x14);
-      cmdCursor[5] = *(float *)(iVar27 + 0x18) * *(float *)(iVar20 + 0x18);
-      cmdCursor[6] = *(undefined4 *)(iVar20 + 0x1c);
+      *outSlot = *(float *)(lightRecord + 0x10) * *(float *)(materialRecord + 0x10);
+      cmdCursor[4] = *(float *)(lightRecord + 0x14) * *(float *)(materialRecord + 0x14);
+      cmdCursor[5] = *(float *)(lightRecord + 0x18) * *(float *)(materialRecord + 0x18);
+      cmdCursor[6] = *(undefined4 *)(materialRecord + 0x1c);
     }
     else if (cacheLineAddr == 2) {
-      *outSlot = *(float *)(iVar27 + 0x20) * *(float *)(iVar20 + 0x20);
-      cmdCursor[4] = *(float *)(iVar27 + 0x24) * *(float *)(iVar20 + 0x24);
-      cmdCursor[5] = *(float *)(iVar27 + 0x28) * *(float *)(iVar20 + 0x28);
-      cmdCursor[6] = *(undefined4 *)(iVar20 + 0x2c);
+      *outSlot = *(float *)(lightRecord + 0x20) * *(float *)(materialRecord + 0x20);
+      cmdCursor[4] = *(float *)(lightRecord + 0x24) * *(float *)(materialRecord + 0x24);
+      cmdCursor[5] = *(float *)(lightRecord + 0x28) * *(float *)(materialRecord + 0x28);
+      cmdCursor[6] = *(undefined4 *)(materialRecord + 0x2c);
     }
     else {
       if (cacheLineAddr != 0) goto switchD_0003de14_caseD_1;
-      *outSlot = *(float *)(iVar18 + stateConstants) * *(float *)(scratchInt12 + scratchInt17);
-      cmdCursor[4] = *(float *)(iVar27 + 4) * *(float *)(iVar20 + 4);
-      cmdCursor[5] = *(float *)(iVar27 + 8) * *(float *)(iVar20 + 8);
-      cmdCursor[6] = *(undefined4 *)(iVar20 + 0xc);
+      *outSlot = *(float *)(lightArrayBase + stateConstants) * *(float *)(scratchInt12 + scratchInt17);
+      cmdCursor[4] = *(float *)(lightRecord + 4) * *(float *)(materialRecord + 4);
+      cmdCursor[5] = *(float *)(lightRecord + 8) * *(float *)(materialRecord + 8);
+      cmdCursor[6] = *(undefined4 *)(materialRecord + 0xc);
     }
     goto LAB_0003e170;
   case 5:
@@ -10311,10 +10311,10 @@ LAB_0003d8e4:
   case 0xf:
     *outSlot = (float)*(double *)(0x00001830 + *(int *)(ctx + GLD_engineState));
     cmdCursor[4] = (float)*(double *)(*(int *)(ctx + GLD_engineState) + 0x1838);
-    dVar38 = *(double *)(0x00001830 + *(int *)(ctx + GLD_engineState));
+    depthRangeNear = *(double *)(0x00001830 + *(int *)(ctx + GLD_engineState));
     scratchDouble36 = *(double *)(*(int *)(ctx + GLD_engineState) + 0x1838);
     cmdCursor[6] = 0x3f800000;
-    cmdCursor[5] = (float)(scratchDouble36 - dVar38);
+    cmdCursor[5] = (float)(scratchDouble36 - depthRangeNear);
     goto LAB_0003e170;
   case 0x12:
     scratchFloat6 = *(float *)(*(int *)(ctx + GLD_engineState) + 0x24a4);
@@ -10336,8 +10336,8 @@ LAB_0003e170:
   cmdCursor = cmdCursor + 7;
   *(undefined8 *)(constantTable + stateConstants) = scratchUint35;
   *(undefined8 *)(constantTable + stateConstants + 8) = scratchUint37;
-  scratchPtr22 = *(undefined8 **)(pbVar34 + 4);
-  pbVar34 = pbVar34 + 8;
+  scratchPtr22 = *(undefined8 **)(entryCursorB + 4);
+  entryCursorB = entryCursorB + 8;
   scratchPtr22[1] = scratchUint37;
   *scratchPtr22 = scratchUint35;
   goto LAB_0003d820;

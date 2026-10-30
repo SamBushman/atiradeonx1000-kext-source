@@ -71,7 +71,7 @@ local	FUN_00029c00	param_3	procWidth	INFERRED	callers pass their variable `procW
 local	FUN_00029c00	param_4	procHeight	INFERRED	callers pass their variable `procHeight` here (1 call site(s), e.g. in glDrawPixels_impl)
 local	FUN_00029c00	param_5	srcRowBytes	INFERRED	callers pass their variable `srcRowBytes` here (1 call site(s), e.g. in glDrawPixels_impl)
 local	FUN_00029c00	param_6	bytesPerPixel	INFERRED	callers pass their variable `bytesPerPixel` here (1 call site(s), e.g. in glDrawPixels_impl)
-local	FUN_00029c00	param_9	currentAttribs	INFERRED	current-attribute block (+8 depth, +0x30..+0x3c colour RGBA); callers pass their pfStack0000001c
+local	FUN_00029c00	param_9	rasterPosRecord	INFERRED	raster-position record (the caller's glDrawPixels rasterPos): +8 depth, +0x30..+0x3c current raster colour RGBA
 local	FUN_00029c00	param_10	format	INFERRED	callers pass their variable `format` here (1 call site(s), e.g. in glDrawPixels_impl)
 local	FUN_00029c00	param_11	transferMode8	INFERRED	callers pass their variable `transferMode8` here (1 call site(s), e.g. in glDrawPixels_impl)
 local	FUN_0002a260	param_1	ring	INFERRED	callers pass their variable `ring` here (1 call site(s), e.g. in glBitmap_impl)

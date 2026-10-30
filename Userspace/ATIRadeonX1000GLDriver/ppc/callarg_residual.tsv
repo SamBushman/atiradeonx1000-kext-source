@@ -6,7 +6,7 @@
 0x2c230	gld_validateStreamState	0x2c6a8	gld_buildVertexStreamLayout	r4	incoming param_2 not at argument 1 of any C call (1 C calls)	BENIGN-CALLEE-ONLY-RETURNS-IT
 0x32100	gldTextureMakeResident	0x33ad8	valloc	r8	0x1 not at argument 5 of any C call (1 C calls)	BENIGN-IMPORT-ARITY
 0x32100	gldTextureMakeResident	0x33b18	gldTextureFormatCodeMatchesType	r7	0x1 not at argument 4 of any C call (2 C calls)	BENIGN-CALLEE-IGNORES
-0x3b280	FUN_0003b280	0x3b530	glSetLocalConstantEXT_impl	r5	0x1406 printed as &DAT_00001406 (symbolized-text-address)	BENIGN-SYMBOLIZED
+0x3b280	extvsDeclareProgramVariables	0x3b530	glSetLocalConstantEXT_impl	r5	0x1406 printed as &DAT_00001406 (symbolized-text-address)	BENIGN-SYMBOLIZED
 0x46e90	fragmentInstructionToIL	0x48528	memset	r10	r1+0x90 (a stack address) not at argument 7 of any C call (10 C calls)	BENIGN-IMPORT-ARITY
 0x46e90	fragmentInstructionToIL	0x48670	memset	r10	r1+0x6c (a stack address) not at argument 7 of any C call (10 C calls)	BENIGN-IMPORT-ARITY
 0x46e90	fragmentInstructionToIL	0x47d5c	fpilEmitInstruction	r10	0x1 not at argument 7 of any C call (23 C calls)	BENIGN-CALLEE-IGNORES
