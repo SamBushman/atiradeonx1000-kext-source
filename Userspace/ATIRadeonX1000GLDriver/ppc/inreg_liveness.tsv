@@ -251,15 +251,15 @@
 48da0	fragmentProgramToIL	r4	RET	4a7cc blr 
 48da0	fragmentProgramToIL	r5	PASS-no	48f00 bl 0x1a38e0	; symbol stub for: _realloc
 48da0	fragmentProgramToIL	r6	PASS-no	48f00 bl 0x1a38e0	; symbol stub for: _realloc
-4b480	FUN_0004b480	r5	PASS-indirect	4b4cc bctrl 
-4b480	FUN_0004b480	r6	PASS-indirect	4b4cc bctrl 
-4b480	FUN_0004b480	r7	PASS-indirect	4b4cc bctrl 
-4b480	FUN_0004b480	r8	PASS-indirect	4b4cc bctrl 
-4c560	FUN_0004c560	r6	PASS-indirect	4c5d0 bl 0x4dc30
-4c560	FUN_0004c560	r7	PASS-indirect	4c5d0 bl 0x4dc30
-4c560	FUN_0004c560	r8	PASS-indirect	4c5d0 bl 0x4dc30
-4d100	FUN_0004d100	r5	PASS-indirect	4d314 bl 0x4ce30
-4d100	FUN_0004d100	r6	PASS-indirect	4d314 bl 0x4ce30
+4b480	gldClearBoundSlot	r5	PASS-indirect	4b4cc bctrl 
+4b480	gldClearBoundSlot	r6	PASS-indirect	4b4cc bctrl 
+4b480	gldClearBoundSlot	r7	PASS-indirect	4b4cc bctrl 
+4b480	gldClearBoundSlot	r8	PASS-indirect	4b4cc bctrl 
+4c560	gldSetCurrentProgramObject	r6	PASS-indirect	4c5d0 bl 0x4dc30
+4c560	gldSetCurrentProgramObject	r7	PASS-indirect	4c5d0 bl 0x4dc30
+4c560	gldSetCurrentProgramObject	r8	PASS-indirect	4c5d0 bl 0x4dc30
+4d100	gldValidateAlphaBlendEarlyZ	r5	PASS-indirect	4d314 bl 0x4ce30
+4d100	gldValidateAlphaBlendEarlyZ	r6	PASS-indirect	4d314 bl 0x4ce30
 4fd80	extvsUpdateVertexAttributeConstants	r5	PASS-indirect	4fef0 bctrl 
 4fd80	extvsUpdateVertexAttributeConstants	r6	PASS-indirect	4fef0 bctrl 
 4fd80	extvsUpdateVertexAttributeConstants	r7	PASS-indirect	4fef0 bctrl 
@@ -268,22 +268,22 @@
 50300	gldEmitHardwareState	r6	PASS-indirect	50358 bctrl 
 50300	gldEmitHardwareState	r7	PASS-indirect	50358 bctrl 
 50300	gldEmitHardwareState	r8	PASS-indirect	50358 bctrl 
-50ef0	FUN_00050ef0	r7	PASS-indirect	50fac bctrl 
-50ef0	FUN_00050ef0	r8	PASS-indirect	50fac bctrl 
+50ef0	gldSetVertexPacketLimits	r7	PASS-indirect	50fac bctrl 
+50ef0	gldSetVertexPacketLimits	r8	PASS-indirect	50fac bctrl 
 53990	extvsEndShader	r5	PASS-no	539c8 bl 0xb9f10
 53990	extvsEndShader	r6	PASS-indirect	539c8 bl 0xb9f10
 53990	extvsEndShader	r7	PASS-no	539c8 bl 0xb9f10
 53990	extvsEndShader	r8	PASS-no	539c8 bl 0xb9f10
-546d0	FUN_000546d0	r6	PASS-indirect	54704 bctrl 
-546d0	FUN_000546d0	r7	PASS-indirect	54704 bctrl 
-546d0	FUN_000546d0	r8	PASS-indirect	54704 bctrl 
+546d0	extvsMakeShaderCurrent	r6	PASS-indirect	54704 bctrl 
+546d0	extvsMakeShaderCurrent	r7	PASS-indirect	54704 bctrl 
+546d0	extvsMakeShaderCurrent	r8	PASS-indirect	54704 bctrl 
 5f810	extvsPrepareHardwareProgram	r5	PASS-no	5f878 bl 0x5e7f0
 5f810	extvsPrepareHardwareProgram	r6	PASS-no	5f878 bl 0x5e7f0
 5f810	extvsPrepareHardwareProgram	r7	PASS-no	5f878 bl 0x5e7f0
 5f810	extvsPrepareHardwareProgram	r8	PASS-no	5f878 bl 0x5e7f0
-64720	FUN_00064720	r5	PASS-indirect	64830 bctrl 
-64720	FUN_00064720	r6	PASS-indirect	64830 bctrl 
-64720	FUN_00064720	r7	PASS-indirect	64830 bctrl 
+64720	gldCopyRouteRegisters	r5	PASS-indirect	64830 bctrl 
+64720	gldCopyRouteRegisters	r6	PASS-indirect	64830 bctrl 
+64720	gldCopyRouteRegisters	r7	PASS-indirect	64830 bctrl 
 64a10	extvsUploadProgramConstants	r5	PASS-indirect	64d64 bctrl 
 64a10	extvsUploadProgramConstants	r6	PASS-indirect	64d64 bctrl 
 64a10	extvsUploadProgramConstants	r7	PASS-indirect	64d64 bctrl 

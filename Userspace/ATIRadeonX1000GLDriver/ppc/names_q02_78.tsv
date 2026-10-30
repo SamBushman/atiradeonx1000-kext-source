@@ -1,0 +1,14 @@
+local	FUN_000457f0	local_98	translatedDst	INFERRED	destination token written by fpilTranslateDestination
+local	FUN_000457f0	local_94	translatedDstMask	INFERRED	destination mask word written by fpilTranslateDestination
+local	FUN_000457f0	local_90	translatedSrcToken	INFERRED	source register token written by fpilTranslateSource
+local	FUN_000457f0	local_8c	translatedSrcSwizzle	INFERRED	source swizzle word written by fpilTranslateSource (select nibbles and negate bits)
+local	FUN_00044c90	local_70	swizzleSlots	INFERRED	staged swizzle slots (swizzle 0, 1, 2) of the expanded instruction sequence
+local	FUN_00044c90	auStack_54	srcToken	INFERRED	source register token written by fpilTranslateSource
+local	FUN_00044c90	auStack_48	srcSwizzle	INFERRED	source swizzle word written by fpilTranslateSource
+local	FUN_00044c90	auStack_b8	dstTokenHeader	INFERRED	first halfword of the destination token written by fpilBuildDestinationToken
+local	FUN_00044c90	local_b6	dstRegister	INFERRED	destination register index halfword of the destination token
+local	FUN_00044c90	auStack_b4	dstMask	INFERRED	destination mask word written by fpilBuildDestinationToken
+local	FUN_00044c90	local_b0	composedSwizzle	INFERRED	swizzle word composed one component at a time through fpilSetComponentSelect (starts as xyzw 0x3210)
+local	FUN_00065370	uVar3	staleArgR4	INFERRED	value left in r4 (lookup result / call residual) and passed as the stale second argument of later calls
+local	FUN_00065370	local_38	variantKeyHeader	INFERRED	first word of the program build key written by ffvpBuildProgram
+local	FUN_00065370	local_34	variantKeyWords	INFERRED	following words of the program build key written by ffvpBuildProgram

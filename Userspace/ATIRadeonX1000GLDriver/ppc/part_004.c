@@ -3119,7 +3119,7 @@ LAB_000284b0:
   packet[0x188] = *(undefined4 *)(ctx + GLD_ga_point_t0);
   packet[0x189] = *(undefined4 *)(ctx + GLD_ga_point_s1);
   packet[0x18a] = *(undefined4 *)(ctx + GLD_ga_point_t1);
-  FUN_0004c100(packet + 0xd0,ring);
+  gldCopyProgramStreamState(packet + 0xd0,ring);
   packet = packet + 0x18d;
   hwFormat = ctx;
   do {
@@ -4073,7 +4073,7 @@ int gld_drawPixelsAsPoints(ctx, srcPixels, procWidth, procHeight, srcRowBytes, b
       scratchPtr14 = srcRowBytes;
       gld_resetRasterStateForInternalDraw(commandStream,(*(uint *)(ctx + 0x1cf8) ^ 1) & 1 | (uint)(format == 0x1902) << 0xc,
                    scratchPtr13);
-      FUN_0004b480(commandStream,*(uint *)(ctx + 0x1ae4) >> 6 & 0xffff);
+      gldClearBoundSlot(commandStream,*(uint *)(ctx + 0x1ae4) >> 6 & 0xffff);
       *(uint *)(ctx + 0x216c) = *(uint *)(ctx + 0x216c) & 0xfffff800 | 0x80;
     }
     else {
@@ -4264,7 +4264,7 @@ int gld_enterPointDrawState(ring, drawStateSave)
   
   pointSizeWord = *(undefined4 *)(ring + 8);
   gld_resetRasterStateForInternalDraw(ring,(*(uint *)(ring + 0x1ab8) ^ 1) & 1,drawStateSave);
-  FUN_0004b480(ring,*(uint *)(ring + 0x18a4) >> 6 & 0xffff);
+  gldClearBoundSlot(ring,*(uint *)(ring + 0x18a4) >> 6 & 0xffff);
   scratchUint3 = (**(code **)(ring + 0x2758))(ring,0x1f);
   *(undefined4 *)(0x00002748 + ring + 4) = scratchUint3;
   packet = (undefined4 *)gldEmitInternalDrawSetupPackets(ring,scratchUint3);
@@ -4962,7 +4962,7 @@ LAB_0002a520:
       packet[0x187] = *(undefined4 *)(ctx + GLD_ga_point_t0);
       packet[0x188] = *(undefined4 *)(ctx + GLD_ga_point_s1);
       packet[0x189] = *(undefined4 *)(ctx + GLD_ga_point_t1);
-      FUN_0004c100(packet + 0xcf,ring);
+      gldCopyProgramStreamState(packet + 0xcf,ring);
       packet = packet + 0x18c;
       hwFormat = ctx;
       do {
@@ -6032,7 +6032,7 @@ int gld_initContextHardwareState(ctx, pixelFormat)
   *(undefined4 *)(ctx + 0x1f0) = 0;
   gld_initContextDispatch(ctx);
   atifsInit(engineBase);
-  staleFprArg1 = (double)FUN_00052cc0(engineBase);
+  staleFprArg1 = (double)extvsSelectHandlerTables(engineBase);
   *(undefined4 *)(((unsigned char *)0x00002b74) + ctx) = 0;
   *(undefined4 *)(ctx + 0x26a0) = 0;
   *(undefined4 *)(ctx + 0x26b0) = 0;

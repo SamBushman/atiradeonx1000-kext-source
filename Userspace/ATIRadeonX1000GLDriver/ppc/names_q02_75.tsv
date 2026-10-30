@@ -1,0 +1,33 @@
+func	FUN_0004ac90	gldUploadProgramState	INFERRED	after a program switch: writes the depth-compare constants (floatToFp24 of texObj+0x50) and fog constants through the glContext+0x1280 callback, per-unit scale vectors, and copies the cached state block into glContext+0x1e88..0x1f34
+func	FUN_0004b190	gldSetProgramStreamMode	INFERRED	program binding mode switch (param_2 mode): updates the stream register entry for glContext+0x276c and calls the glContext+0x1330 dirty callback
+func	FUN_0004b520	gldRemoveProgramFromList	INFERRED	removes a program entry from the program list glContext+0x1e7c (count at +0x1e74), compacting the list
+func	FUN_0004b5d0	gldReleaseProgramEntry	INFERRED	frees a program entry buffer and removes it from the program list, then frees its state
+func	FUN_0004b7d0	gldMarkAllProgramsDirty	INFERRED	sets the dirty byte (+0x119) of every bound program in the program table and shader list
+func	FUN_0004c100	gldCopyProgramStreamState	INFERRED	copies the current program entry stream setup (stream registers, counts) into the destination state object
+func	FUN_0004ce30	gldValidateHyperZ	INFERRED	decides from the GL depth/stencil state and framebuffer flags whether hierarchical Z stays enabled (SC_HYPERZ_EN, glContext+0x1ae0)
+func	FUN_0004d620	gldMarkProgramsDirtyByFlag	INFERRED	walks the program table and flags programs whose cached flag byte differs from the wanted value for revalidation
+func	FUN_0004de30	gldSetUnitScaleConstants	INFERRED	copies a per-unit texture scale vector into the constant bank of a program entry for the units that need it
+func	FUN_0004e880	gldEmitRegisterPairPacket	INFERRED	emits a command packet with the register pairs (0x854 / 0x878) from glContext+0x2440 / +0x2444
+func	FUN_0004e990	gldDepthBiasScaledInt	INFERRED	returns the polygon offset / depth scale for the current depth precision as an integer
+func	FUN_0004eba0	gldValidatePolygonOffset	INFERRED	recomputes the depth bias scale and polygon offset constants, then revalidates the viewport and polygon offset
+func	FUN_0004ed90	gldValidatePointSize	INFERRED	recomputes the point size / line width fixed-point values at glContext+0x1cc..0x1cd8 and revalidates the viewport
+func	FUN_0004f160	gldFogColorChannelByte	INFERRED	returns the fog colour channel (1 red, 2 green, 3 blue) scaled to 8 bits and split into the two-field word
+func	FUN_0004f2e0	gldValidateFog	INFERRED	translates the GL fog mode / parameters into the fog constants and colour fields of the context
+func	FUN_0004fc80	ffvpSetOutputRoute	INFERRED	writes one 16-bit half of the paired route registers at glContext+0x1be4 / +0x1c04 for an output slot
+func	FUN_00050140	gldValidateColorMask	INFERRED	combines the GL colour write masks with the colour format channel masks into glContext+0x1af4
+func	FUN_00050ef0	gldSetVertexPacketLimits	INFERRED	limits the elements per vertex packet from the element sizes so that they fit the 0x80-dword FIFO (glContext+0x1b7c)
+func	FUN_00052cc0	extvsSelectHandlerTables	INFERRED	installs the shader handler function pointer tables (glContext+0x1190..0x11b0, +0x1350) for the selected EXT_vertex_shader mode
+func	FUN_00052ee0	extvsGetSymbolStorageWord	INFERRED	looks up a symbol by id in the shader / global lists and returns its storage word
+func	FUN_00052f60	extvsGetSymbolStorageKind	INFERRED	looks up a symbol by id in the shader / global lists and returns its storage kind word (0x81 default)
+func	FUN_000530c0	extvsGetSymbolStorageInfo	INFERRED	looks up a symbol by id and fills a 5-word storage info record (zeroed when not found)
+func	FUN_00053190	extvsEnabledInputMask	INFERRED	returns the bit mask of vertex shader input units whose flag byte is set
+func	FUN_000534c0	extvsCreateVectorSymbolChain	INFERRED	creates one vector symbol per element, chained to the first through the parent id
+func	FUN_00054080	extvsEmitSwizzleInstruction	INFERRED	validates and appends a swizzle instruction (op 0x879a) with four output selects to the current shader
+func	FUN_00054470	extvsGetConstantUploadInfo	INFERRED	returns the constant upload buffer (allocated on first use), register count and register base of the current program
+func	FUN_00054590	extvsCompactSymbolEntries	INFERRED	compacts the program entry table dropping unused symbol entries and shrinks the group counts
+func	FUN_000546d0	extvsMakeShaderCurrent	INFERRED	clears the symbol in-use flags and copies the shader state into the current shader fields of the context
+func	FUN_00054f50	extvsResolveOperand	INFERRED	maps an operand symbol id to a symbol index in the shader-local list (copying dependents from the global list) and fills the operand record
+func	FUN_00062370	gldLoadUnitFlagBits	INFERRED	loads (or clears) bit 0 of the 16 words at glContext+0x18a0 from the per-unit flag bytes of a program entry
+func	FUN_00062410	gldAllocListNode	INFERRED	allocates a 0xc-byte list node holding glContext+0x2448
+func	FUN_00062490	gldFreeListNodes	INFERRED	frees every node of the list object at glContext+0x11b4
+func	FUN_00064720	gldCopyRouteRegisters	INFERRED	copies the route register words of the current vertex program into glContext+0x1be4 / +0x1c04

@@ -1533,7 +1533,7 @@ int arbValidateProgram(callbacks, program, sourceLength, sourceText)
   int aluCount;
   int outInstOffset;
   int paramBlock;
-  int iVar2;
+  int codeBuffer;
   int totalInsts;
   int arrayCount;
   int internStatus;
@@ -1569,9 +1569,9 @@ int arbValidateProgram(callbacks, program, sourceLength, sourceText)
   int *in_r7;
   uint *in_r8;
   int sourceCopy;
-  int *piVar13;
+  int *stageR9;
   uint writtenHi;
-  int *piVar15;
+  int *stageR10;
   int byteOffset;
   undefined *inst;
   uint opcode;
@@ -1584,20 +1584,20 @@ int arbValidateProgram(callbacks, program, sourceLength, sourceText)
   int loopCounterE;
   int arrayLen;
   int *fogOptionCopy;
-  int *local_88;
+  int *typeTagTable;
   uint maskLoTmp;
   int *maskHiTmp;
   uint maskLoTmpB;
   int *maskHiTmpB;
-  int *local_70;
-  int *local_6c;
+  int *savedStageR10;
+  int *typeTagTableB;
   int *paramListBase;
   int *attrListBase;
   int hasKillFlag;
   int *instBase;
   
   workArea = (int *)(**(code **)(callbacks + 0xc))(0x24a30,program,sourceLength,sourceText);
-  piVar15 = (int *)0x0;
+  stageR10 = (int *)0x0;
   program[0x54] = 0;
   maskLoTmp = 0;
   maskHiTmp = (int *)0x0;
@@ -1659,7 +1659,7 @@ int arbValidateProgram(callbacks, program, sourceLength, sourceText)
   workArea[0xb] = -1;
   workArea[10] = -1;
   workArea[9] = 1;
-  piVar13 = (int *)((int)((unsigned char *)0x4) + 3);
+  stageR9 = (int *)((int)((unsigned char *)0x4) + 3);
   remaining = 7;
   workArea[0xc] = (int)"";
   flagCursor = workArea;
@@ -1690,49 +1690,49 @@ int arbValidateProgram(callbacks, program, sourceLength, sourceText)
       optionCount = optionCount + 1;
     }
     if (optionCount < 2) {
-      piVar13 = (int *)(uint)(optionCount == 1);
+      stageR9 = (int *)(uint)(optionCount == 1);
       notPrecisionHint = *(byte *)((int)workArea + 0x37) ^ 1;
       optionCount = notPrecisionHint == 0;
       precisionCountNeg = (int *)-notPrecisionHint;
       if (*(char *)(workArea + 0xe) == '\x01') {
         optionCount = optionCount + 1;
       }
-      hasFogOption = piVar13;
+      hasFogOption = stageR9;
       if (optionCount < 2) {
 LAB_0008c88c:
         declNode = (int *)workArea[0xf];
         loopCounterE = 0;
         do {
           if (declNode != (int *)0x0) {
-            piVar13 = workArea + 0x914a;
-            local_6c = (int *)&DAT_001ac5a4;
+            stageR9 = workArea + 0x914a;
+            typeTagTableB = (int *)&DAT_001ac5a4;
             noFogOption = hasFogOption == (int *)0x0;
             fogOptionCopy = hasFogOption;
-            piVar15 = workArea + 0x928a;
-            local_88 = (int *)&DAT_001ac5a4;
-            paramListBase = piVar13;
-            attrListBase = piVar15;
+            stageR10 = workArea + 0x928a;
+            typeTagTable = (int *)&DAT_001ac5a4;
+            paramListBase = stageR9;
+            attrListBase = stageR10;
             do {
               declKind = declNode[6];
               if (declKind == 1) {
                 a2 = workArea + 0x9149;
                 in_r8 = (uint *)(declNode + 6);
-                in_r7 = local_88 + -0x1a48;
-                piVar13 = fogOptionCopy;
-                piVar15 = local_88;
+                in_r7 = typeTagTable + -0x1a48;
+                stageR9 = fogOptionCopy;
+                stageR10 = typeTagTable;
                 internStatus = ((int (*)())arbfpInternParameter)(workArea,workArea + 0x9117,a2,
                                      *(int *)(((unsigned char *)0x000011ec) + limits) - (int)fogOptionCopy,in_r7,in_r8);
                 if (internStatus < 0) goto LAB_0008d2d0;
               }
               else if (declKind == 0) {
                 if (*(int *)(((unsigned char *)0x000011dc) + limits) - (int)fogOptionCopy <= workArea[0x928b]) {
-                  piVar13 = fogOptionCopy;
+                  stageR9 = fogOptionCopy;
                   arbSetError(workArea,"too many temporaries");
                   goto LAB_0008d2d0;
                 }
                 declNode[7] = workArea[0x928b];
                 workArea[0x928b] = workArea[0x928b] + 1;
-                piVar13 = fogOptionCopy;
+                stageR9 = fogOptionCopy;
               }
               else if (declKind == 2) {
                 arrayCount = declNode[3];
@@ -1748,9 +1748,9 @@ LAB_0008c88c:
                       fogBias = 2;
                     }
                     in_r8 = (uint *)(byteOffset + declNode[5]);
-                    in_r7 = local_6c + -0x1a4f;
+                    in_r7 = typeTagTableB + -0x1a4f;
                     a2 = attrListBase;
-                    piVar15 = local_6c;
+                    stageR10 = typeTagTableB;
                     fogBias = ((int (*)())arbfpInternParameter)(workArea,paramListBase,attrListBase,
                                           *(int *)(((unsigned char *)0x000011e4) + limits) - fogBias,in_r7,in_r8);
                     if (fogBias < 0) goto LAB_0008d2d0;
@@ -1764,43 +1764,43 @@ LAB_0008c88c:
                 goto LAB_0008d2d0;
               }
               declNode = (int *)*declNode;
-              precisionCountNeg = piVar15;
+              precisionCountNeg = stageR10;
             } while (declNode != (int *)0x0);
           }
           loopCounterE = loopCounterE + 1;
           if (1 < loopCounterE) {
             aluCount = workArea[0x9014];
-            piVar13 = *(int **)(((unsigned char *)0x000011d4) + limits);
+            stageR9 = *(int **)(((unsigned char *)0x000011d4) + limits);
             totalInsts = aluCount + workArea[0x9015];
-            if (totalInsts <= (int)piVar13) {
+            if (totalInsts <= (int)stageR9) {
               noFogOption = hasFogOption == (int *)0x0;
               if (!noFogOption) {
                 if (*(char *)(workArea + 0xd) == '\x01') {
                   if (aluCount <= *(int *)(((unsigned char *)0x00001204) + limits) + -3) {
-                    if ((int)((int)piVar13 + -3) < totalInsts) goto LAB_0008cad4;
+                    if ((int)((int)stageR9 + -3) < totalInsts) goto LAB_0008cad4;
                     goto LAB_0008ca70;
                   }
 LAB_0008cab4:
                   arbSetError(workArea,"too many ALU instructions");
-                  piVar15 = precisionCountNeg;
+                  stageR10 = precisionCountNeg;
                   goto LAB_0008d2d0;
                 }
 LAB_0008ca70:
                 if (*(char *)((int)workArea + 0x35) == '\x01') {
                   if (*(int *)(((unsigned char *)0x00001204) + limits) + -4 < aluCount) goto LAB_0008cab4;
-                  if ((int)(piVar13 + -1) < totalInsts) goto LAB_0008cad4;
+                  if ((int)(stageR9 + -1) < totalInsts) goto LAB_0008cad4;
                 }
                 if (*(char *)((int)workArea + 0x36) == '\x01') {
                   if (*(int *)(((unsigned char *)0x00001204) + limits) + -2 < aluCount) goto LAB_0008cab4;
-                  if ((int)((int)piVar13 + -2) < totalInsts) goto LAB_0008cad4;
+                  if ((int)((int)stageR9 + -2) < totalInsts) goto LAB_0008cad4;
                 }
               }
               unitCount = (uint)(byte)((unsigned char *)0x000013b1)[limits];
               if (unitCount != 0) {
-                piVar15 = unitTarget;
+                stageR10 = unitTarget;
                 do {
-                  *piVar15 = 0;
-                  piVar15 = piVar15 + 1;
+                  *stageR10 = 0;
+                  stageR10 = stageR10 + 1;
                   unitCount = unitCount - 1;
                 } while (unitCount != 0);
               }
@@ -1809,7 +1809,7 @@ LAB_0008ca70:
                 loopCounterD = 1;
               }
               else {
-                piVar15 = unitTarget;
+                stageR10 = unitTarget;
                 writtenLo = 0;
                 writtenHi = 0;
                 in_r7 = (int *)0x0;
@@ -1821,7 +1821,7 @@ LAB_0008ca70:
                 do {
                   opcode = *(uint *)((int)a2 + (int)(workArea + 0x14));
                   inst = (undefined *)((int)a2 + (int)(workArea + 0x14));
-                  local_70 = piVar15;
+                  savedStageR10 = stageR10;
                   if (opcode < 0x20) {
                     if ((0x1c < opcode) || (opcode == 0xb)) goto LAB_0008cb94;
 LAB_0008cb70:
@@ -1868,12 +1868,12 @@ LAB_0008cb70:
                       in_r7 = (int *)((uint)in_r7 | bitIndex);
                       in_r8 = (uint *)((uint)in_r8 | maskBit);
                     }
-                    piVar13 = *(int **)(inst + 4);
-                    if (piVar13[6] == 0) {
-                      bitIndex = piVar13[7] - 0x20;
+                    stageR9 = *(int **)(inst + 4);
+                    if (stageR9[6] == 0) {
+                      bitIndex = stageR9[7] - 0x20;
                       if ((int)bitIndex < 0) {
                         maskLoTmp = 0;
-                        maskHiTmp = (int *)(1 << (piVar13[7] & 0x3fU));
+                        maskHiTmp = (int *)(1 << (stageR9[7] & 0x3fU));
                       }
                       else {
                         maskHiTmp = (int *)0x0;
@@ -1885,11 +1885,11 @@ LAB_0008cb70:
                     }
                     if (opcode == 0xb) goto LAB_0008ce38;
 LAB_0008cddc:
-                    if (piVar13[6] == 0) {
-                      bitOffset = piVar13[7] - 0x20;
+                    if (stageR9[6] == 0) {
+                      bitOffset = stageR9[7] - 0x20;
                       if ((int)bitOffset < 0) {
                         maskLoTmpB = 0;
-                        precisionCountNeg = (int *)(1 << (piVar13[7] & 0x3fU));
+                        precisionCountNeg = (int *)(1 << (stageR9[7] & 0x3fU));
                         maskHiTmpB = precisionCountNeg;
                       }
                       else {
@@ -1898,23 +1898,23 @@ LAB_0008cddc:
                       }
                       writtenLo = writtenLo | maskLoTmpB;
                       writtenHi = writtenHi | (uint)maskHiTmpB;
-                      piVar13 = maskHiTmpB;
+                      stageR9 = maskHiTmpB;
                     }
                   }
                   else {
                     if (2 < opcode - 0x3d) goto LAB_0008cb70;
 LAB_0008cb94:
-                    piVar13 = *(int **)(*(int *)(inst + 0xc) + 0x1c);
+                    stageR9 = *(int **)(*(int *)(inst + 0xc) + 0x1c);
                     if (*(int *)(*(int *)(inst + 0xc) + 0x18) == 0) {
-                      if ((int)(piVar13 + -8) < 0) {
-                        shiftedBits = (writtenLo << 1) << (0x1fU - (int)piVar13 & 0x3f) |
-                                 writtenHi >> ((uint)piVar13 & 0x3f);
+                      if ((int)(stageR9 + -8) < 0) {
+                        shiftedBits = (writtenLo << 1) << (0x1fU - (int)stageR9 & 0x3f) |
+                                 writtenHi >> ((uint)stageR9 & 0x3f);
                       }
                       else {
-                        shiftedBits = writtenLo >> ((uint)(piVar13 + -8) & 0x3f);
+                        shiftedBits = writtenLo >> ((uint)(stageR9 + -8) & 0x3f);
                       }
-                      piVar13 = (int *)(shiftedBits & 1);
-                      if (piVar13 == (int *)0x0) goto LAB_0008cbd4;
+                      stageR9 = (int *)(shiftedBits & 1);
+                      if (stageR9 == (int *)0x0) goto LAB_0008cbd4;
 LAB_0008cc20:
                       loopCounterD = loopCounterD + 1;
                       if (opcode != 0xb) {
@@ -1923,18 +1923,18 @@ LAB_0008cc20:
                         in_r7 = (int *)0x0;
                         in_r8 = (uint *)0x0;
 LAB_0008cc50:
-                        piVar13 = (int *)(*(int *)(inst + 0x40) * 4);
-                        precisionCountNeg = piVar15;
-                        if (*(int *)((int)piVar13 + (int)piVar15) == 0) {
-                          *(int *)((int)piVar13 + (int)piVar15) = *(int *)(inst + 0x5c);
-                          piVar13 = *(int **)(inst + 4);
+                        stageR9 = (int *)(*(int *)(inst + 0x40) * 4);
+                        precisionCountNeg = stageR10;
+                        if (*(int *)((int)stageR9 + (int)stageR10) == 0) {
+                          *(int *)((int)stageR9 + (int)stageR10) = *(int *)(inst + 0x5c);
+                          stageR9 = *(int **)(inst + 4);
                         }
                         else {
-                          if (*(int *)((int)piVar13 + (int)piVar15) != *(int *)(inst + 0x5c)) {
+                          if (*(int *)((int)stageR9 + (int)stageR10) != *(int *)(inst + 0x5c)) {
                             arbSetError(workArea,"multiple targets on texture context");
                             goto LAB_0008d2d0;
                           }
-                          piVar13 = *(int **)(inst + 4);
+                          stageR9 = *(int **)(inst + 4);
                         }
                         goto LAB_0008cddc;
                       }
@@ -1948,13 +1948,13 @@ LAB_0008cc50:
 LAB_0008cbd4:
                       if (opcode != 0xb) {
                         if (*(int *)(*(int *)(inst + 4) + 0x18) == 0) {
-                          piVar13 = *(int **)(*(int *)(inst + 4) + 0x1c);
-                          if ((int)(piVar13 + -8) < 0) {
-                            shiftedBits = ((int)in_r7 << 1) << (0x1fU - (int)piVar13 & 0x3f) |
-                                     (uint)in_r8 >> ((uint)piVar13 & 0x3f);
+                          stageR9 = *(int **)(*(int *)(inst + 4) + 0x1c);
+                          if ((int)(stageR9 + -8) < 0) {
+                            shiftedBits = ((int)in_r7 << 1) << (0x1fU - (int)stageR9 & 0x3f) |
+                                     (uint)in_r8 >> ((uint)stageR9 & 0x3f);
                           }
                           else {
-                            shiftedBits = (uint)in_r7 >> ((uint)(piVar13 + -8) & 0x3f);
+                            shiftedBits = (uint)in_r7 >> ((uint)(stageR9 + -8) & 0x3f);
                           }
                           precisionCountNeg = (int *)(shiftedBits & 1);
                           if (precisionCountNeg != (int *)0x0) goto LAB_0008cc20;
@@ -1969,19 +1969,19 @@ LAB_0008ce38:
                   instsLeft = instsLeft + -1;
                 } while (instsLeft != 0);
               }
-              piVar15 = precisionCountNeg;
+              stageR10 = precisionCountNeg;
               if (*(int *)(((unsigned char *)0x0000120cU) + limits) < loopCounterD) {
                 arbSetError(workArea,"too many indirections");
               }
               else {
-                piVar13 = (int *)workArea[0x928a];
+                stageR9 = (int *)workArea[0x928a];
                 hasKillFlag = hasKill;
-                iVar2 = (**(code **)(limits + 0xc))
-                                  (totalInsts * 0x70 + (int)(workArea[0x9149] + (int)piVar13) * 0x14 +
-                                   workArea[0x9116] * 0x10 + 0x70,hasKill,a2,totalInsts,in_r7,in_r8,piVar13)
+                codeBuffer = (**(code **)(limits + 0xc))
+                                  (totalInsts * 0x70 + (int)(workArea[0x9149] + (int)stageR9) * 0x14 +
+                                   workArea[0x9116] * 0x10 + 0x70,hasKill,a2,totalInsts,in_r7,in_r8,stageR9)
                 ;
-                *(int *)(program + 0x60) = iVar2;
-                if (iVar2 != 0) {
+                *(int *)(program + 0x60) = codeBuffer;
+                if (codeBuffer != 0) {
                   if (hasKillFlag != 0) {
                     program[3] = 1;
                   }
@@ -2008,12 +2008,12 @@ LAB_0008ce38:
                   }
                   if (((unsigned char *)0x000013b1)[limits] != '\0') {
                     loopCounter = 0;
-                    piVar13 = unitTarget;
+                    stageR9 = unitTarget;
                     unitSlotPtr = program;
                     do {
-                      nextVal = *piVar13;
+                      nextVal = *stageR9;
                       loopCounter = loopCounter + 1;
-                      piVar13 = piVar13 + 1;
+                      stageR9 = stageR9 + 1;
                       *(int *)(unitSlotPtr + 0x14) = nextVal;
                       unitSlotPtr = unitSlotPtr + 4;
                     } while (loopCounter < (int)(uint)(byte)((unsigned char *)0x000013b1)[limits]);
@@ -2089,10 +2089,10 @@ LAB_0008ce38:
                           }
                           else {
                             entryType = *(uint *)(in_r7[9] * 0x14 + *(int *)(symbolRef + 0x14));
-                            piVar15 = *(int **)(in_r7[9] * 0x14 + *(int *)(symbolRef + 0x14) + 4);
+                            stageR10 = *(int **)(in_r7[9] * 0x14 + *(int *)(symbolRef + 0x14) + 4);
                             in_r8[0xb] = 0;
                             in_r8[4] = entryType;
-                            in_r8[5] = (uint)piVar15;
+                            in_r8[5] = (uint)stageR10;
                           }
                           if (in_r8[4] == 1) {
                             paramEntry = in_r8[5] * 0x14 + *(int *)(program + 0x78);
@@ -2133,8 +2133,8 @@ LAB_0008ce38:
                     } while (loopCounterC < workArea[0x9014] + workArea[0x9015]);
                   }
                   _memset(loopCounterC * 0x70 + *(int *)(program + 100),0,0x70);
-                  piVar13 = *(int **)(program + 100);
-                  piVar13[loopCounterC * 0x1c] = 0x41;
+                  stageR9 = *(int **)(program + 100);
+                  stageR9[loopCounterC * 0x1c] = 0x41;
                   program[0x54] = 1;
                 }
               }
@@ -2142,7 +2142,7 @@ LAB_0008ce38:
             }
 LAB_0008cad4:
             arbSetError(workArea,"too many total instructions");
-            piVar15 = precisionCountNeg;
+            stageR10 = precisionCountNeg;
             goto LAB_0008d2d0;
           }
           if (loopCounterE == 0) goto LAB_0008c88c;
@@ -2150,7 +2150,7 @@ LAB_0008cad4:
         } while( true );
       }
       arbSetError(workArea,"more than one precision hint option");
-      piVar15 = precisionCountNeg;
+      stageR10 = precisionCountNeg;
     }
     else {
       arbSetError(workArea,"more than one fog option");
@@ -2165,7 +2165,7 @@ LAB_0008d2d0:
   errorMsgBuf = (**(code **)(callbacks + 0xc))(msgLen + 0xb);
   *(undefined4 *)(((unsigned char *)0x00001128) + callbacks) = errorMsgBuf;
   if ((uint)workArea[0xb] < 10000) {
-    printf_LDBLStub_1a32d0(errorMsgBuf,"line %d: %s",workArea[0xb],workArea[0xc],in_r7,in_r8,piVar13,piVar15);
+    printf_LDBLStub_1a32d0(errorMsgBuf,"line %d: %s",workArea[0xb],workArea[0xc],in_r7,in_r8,stageR9,stageR10);
   }
   else {
     _strcpy(errorMsgBuf,workArea[0xc]);
@@ -3650,12 +3650,12 @@ int arbfpLoadDefaultProgram(context)
 }
 
 /* gldDrawInternalRect @ 0x8f7f0 (884 bytes) */
-int gldDrawInternalRect(ctx, param_2, param_3, rect, param_5)
+int gldDrawInternalRect(ctx, unusedArg2, passThroughArg3, rect, passThroughArg5)
   int ctx;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 unusedArg2;
+  undefined4 passThroughArg3;
   uint *rect;
-  uint param_5;
+  uint passThroughArg5;
 {
   int scaledWidth;
   undefined4 stateWord2da0;
@@ -3676,11 +3676,11 @@ int gldDrawInternalRect(ctx, param_2, param_3, rect, param_5)
   undefined4 *packet;
   undefined4 packetWords;
   undefined4 extraout_r4;
-  undefined4 uVar14;
+  undefined4 stageArgA;
   uint *a3;
   undefined4 a3_00;
   undefined1 *a4;
-  undefined *puVar15;
+  undefined *stageArgB;
   undefined4 *a1_00;
   int recordBase;
   uint a6;
@@ -3701,10 +3701,10 @@ int gldDrawInternalRect(ctx, param_2, param_3, rect, param_5)
   
   stateBlock = *(int *)(*(int *)(ctx + 4) + 0x10);
   a3 = rect;
-  a1 = (**(code **)(ctx + 0x2758))(ctx,10000,param_3,rect,param_5);
+  a1 = (**(code **)(ctx + 0x2758))(ctx,10000,passThroughArg3,rect,passThroughArg5);
   commitFn = *(code **)(ctx + 0x275c);
   *(int *)(0x00002748 + ctx + 4) = a1;
-  (*commitFn)(ctx,a1,param_3,a3,param_5);
+  (*commitFn)(ctx,a1,passThroughArg3,a3,passThroughArg5);
   recordBase = *(int *)(ctx + 4);
   if (((((*(uint *)(recordBase + 0x154) & 0x700000) == 0) || (*rect != 0)) || (rect[1] != 0)) ||
      ((rect[2] != *(uint *)(recordBase + 0x15c) || (rect[3] != *(uint *)(recordBase + 0x160))))) {
@@ -3716,7 +3716,7 @@ int gldDrawInternalRect(ctx, param_2, param_3, rect, param_5)
     gld_emitClearColorPacket(ctx);
     recordBase = *(int *)(0x00002748 + ctx + 4);
   }
-  uVar14 = 0;
+  stageArgA = 0;
   a3_00 = 0;
   a4 = savedDrawState;
   gldEnterInternalDrawState(ctx,1,0,0,a4);
@@ -3724,7 +3724,7 @@ int gldDrawInternalRect(ctx, param_2, param_3, rect, param_5)
   if (*(char *)(ctx + 0x2802) != '\0') {
     packetWords = 0x23;
   }
-  packet = (undefined4 *)(**(code **)(ctx + 0x2758))(ctx,packetWords,uVar14,a3_00,a4);
+  packet = (undefined4 *)(**(code **)(ctx + 0x2758))(ctx,packetWords,stageArgA,a3_00,a4);
   rasterInitFlag = *(char *)(ctx + 0x2802);
   *(undefined4 **)(0x00002748 + ctx + 4) = packet;
   if (rasterInitFlag == '\0') {
@@ -3732,13 +3732,13 @@ int gldDrawInternalRect(ctx, param_2, param_3, rect, param_5)
     *packet = 0x5c8;
     *(undefined1 *)(ctx + 0x2802) = 1;
   }
-  packetBase = (**(code **)(ctx + 0x2758))(ctx,0x23,uVar14,a3_00,a4);
+  packetBase = (**(code **)(ctx + 0x2758))(ctx,0x23,stageArgA,a3_00,a4);
   *(undefined4 *)(0x00002748 + ctx + 4) = packetBase;
   packet = (undefined4 *)gldEmitInternalDrawSetupPackets(ctx,packetBase);
   if (recordCommands) {
     *(int *)(a1 + 8) = (int)packet - a1 >> 2;
   }
-  puVar15 = ((unsigned char *)0x00001087U);
+  stageArgB = ((unsigned char *)0x00001087U);
   a1_00 = packet + 0x10;
   i2dHi2 = 0x43300000;
   i2dHi3 = 0x43300000;
@@ -3782,7 +3782,7 @@ int gldDrawInternalRect(ctx, param_2, param_3, rect, param_5)
   packet[0xf] = *(undefined4 *)(ctx + 0x1ccc);
   *(undefined4 **)(0x00002748 + ctx + 4) = a1_00;
   (**(code **)(ctx + 0x275c))(ctx,a1_00,packet,a3_00,((unsigned char *)0x00001087U),a1_00,a6,0xc0083500);
-  gldValidateVertexProgramState(ctx,extraout_r4,packet,a3_00,puVar15,a1_00,a6);
+  gldValidateVertexProgramState(ctx,extraout_r4,packet,a3_00,stageArgB,a1_00,a6);
   gldLeaveInternalDrawState(ctx,savedDrawState);
   if (recordCommands) {
     *(int *)(a1 + 4) = *(int *)(0x00002748 + ctx + 4) - recordBase >> 2;
@@ -3838,10 +3838,10 @@ int ffvpAssignOutputSlots(ctx)
   
   stateBlock = *(int *)(*(int *)(ctx + 4) + 0x10);
   _memset(ctx + 0x19c,0xffffffff,0x68);
-  FUN_0004fc80(ctx,0,3,0,0,0,0,0);
+  ffvpSetOutputRoute(ctx,0,3,0,0,0,0,0);
   *(undefined4 *)(ctx + 0x19c) = 0;
   if (*(int *)(ctx + 0x44) < 0) {
-    FUN_0004fc80(ctx,1,3,0,1,0,0,0);
+    ffvpSetOutputRoute(ctx,1,3,0,1,0,0,0);
     *(undefined4 *)(ctx + 0x1a0) = 1;
     if (((unsigned char *)0x00002d48)[stateBlock + 3] == '\0') {
       ctxFlags44 = *(uint *)(ctx + 0x44);
@@ -3849,7 +3849,7 @@ int ffvpAssignOutputSlots(ctx)
     }
     else {
       nextSlot = 3;
-      FUN_0004fc80(ctx,2,3,0,2,0,0,0);
+      ffvpSetOutputRoute(ctx,2,3,0,2,0,0,0);
       ctxFlags44 = *(uint *)(ctx + 0x44);
       *(undefined4 *)(ctx + 0x1a8) = 2;
     }
@@ -3864,15 +3864,15 @@ int ffvpAssignOutputSlots(ctx)
     else {
       slotBase = 2;
       nextSlot = 3;
-      FUN_0004fc80(ctx,1,3,0,1,0,0,0);
+      ffvpSetOutputRoute(ctx,1,3,0,1,0,0,0);
       colorSlot = 2;
       *(undefined4 *)(ctx + 0x1a0) = 1;
     }
-    FUN_0004fc80(ctx,colorSlot,3,0,colorSlot,0,0,0);
+    ffvpSetOutputRoute(ctx,colorSlot,3,0,colorSlot,0,0,0);
     ctxFlags44 = *(uint *)(ctx + 0x44);
     *(undefined4 *)(ctx + 0x1a8) = colorSlot;
     if ((ctxFlags44 & 0xa10000) != 0) {
-      FUN_0004fc80(ctx,nextSlot,3,0,nextSlot,0,0,0);
+      ffvpSetOutputRoute(ctx,nextSlot,3,0,nextSlot,0,0,0);
       ctxFlags44 = *(uint *)(ctx + 0x44);
       *(uint *)(ctx + 0x1ac) = nextSlot;
       nextSlot = slotBase + 2;
@@ -3889,7 +3889,7 @@ int ffvpAssignOutputSlots(ctx)
     enableCursor = ctx;
     do {
       if ((((unsigned char *)0x00001438)[enableCursor] != '\0') && (*(int *)(((unsigned char *)0x000013f8) + unitCursor) != 0)) {
-        FUN_0004fc80(ctx,nextSlot,3,0,nextSlot,0,0,0);
+        ffvpSetOutputRoute(ctx,nextSlot,3,0,nextSlot,0,0,0);
         *(uint *)(unitCursor + 0x1c8) = nextSlot;
         nextSlot = nextSlot + 1;
       }
@@ -3911,7 +3911,7 @@ int ffvpAssignOutputSlots(ctx)
     unitCursor = ctx;
     do {
       if (((uint)texEnableMask & 1 << (loopIndex & 0x3f)) != 0) {
-        FUN_0004fc80(ctx,nextSlot,3,0,nextSlot,0,0,0);
+        ffvpSetOutputRoute(ctx,nextSlot,3,0,nextSlot,0,0,0);
         texUnitCount = (uint)(byte)((unsigned char *)0x000013b0)[ctx];
         *(uint *)(unitCursor + 0x1c8) = nextSlot;
         nextSlot = nextSlot + 1;
@@ -3923,13 +3923,13 @@ int ffvpAssignOutputSlots(ctx)
   ctxFlags44 = *(uint *)(ctx + 0x44);
 LAB_0008ff78:
   if (((ctxFlags44 & 0x1000800) != 0) && (*(short *)(((unsigned char *)0x00002e06) + stateBlock) == -0x7baf)) {
-    FUN_0004fc80(ctx,nextSlot,3,0,nextSlot,0,0,0);
+    ffvpSetOutputRoute(ctx,nextSlot,3,0,nextSlot,0,0,0);
     *(uint *)(ctx + 0x1ec) = nextSlot;
     nextSlot = nextSlot + 1;
     *(undefined4 *)(ctx + 0x1f0) = 0;
   }
   if (((unsigned char *)0x00004301)[stateBlock] != '\0') {
-    FUN_0004fc80(ctx,nextSlot,3,0,nextSlot,0,0,0);
+    ffvpSetOutputRoute(ctx,nextSlot,3,0,nextSlot,0,0,0);
     *(uint *)(ctx + 0x1f8) = nextSlot;
     nextSlot = nextSlot + 1;
   }
@@ -3978,7 +3978,7 @@ int ffvpComputeOutputMasks(glContext)
   oldMask1ca0 = *(int *)(glContext + 0x1ca0);
   stateBlock = *(int *)(*(int *)(glContext + 4) + 0x10);
   if ((*(char *)(glContext + 0x1868) != '\0') && (*(char *)(glContext + 0x124) != '\0')) {
-    FUN_0004dbe0(glContext);
+    gldValidateVertexOutputRouting(glContext);
     return;
   }
   stateFlags = *(uint *)(glContext + 0x44);
@@ -4149,12 +4149,12 @@ void gldValidateState(int glContext,undefined4 forwardedArg2,undefined4 forwarde
       forwardedArg2 = extraout_r4_00;
     }
     if ((dirtyMask & 2) != 0) {
-      forwardedFloatArg1 = (double)FUN_0004eba0(glContext,forwardedArg2,forwardedArg3,forwardedArg4,forwardedArg5,forwardedArg6,dirtyMask2);
+      forwardedFloatArg1 = (double)gldValidatePolygonOffset(glContext,forwardedArg2,forwardedArg3,forwardedArg4,forwardedArg5,forwardedArg6,dirtyMask2);
       dirtyMask = *(uint *)(glContext + 0x38);
       forwardedArg2 = extraout_r4_01;
     }
     if ((dirtyMask & 8) != 0) {
-      forwardedFloatArg1 = (double)FUN_0004ed90(glContext);
+      forwardedFloatArg1 = (double)gldValidatePointSize(glContext);
       dirtyMask = *(uint *)(glContext + 0x38);
       forwardedArg2 = extraout_r4_02;
     }
@@ -4165,7 +4165,7 @@ void gldValidateState(int glContext,undefined4 forwardedArg2,undefined4 forwarde
       forwardedArg2 = extraout_r4_03;
     }
     if ((dirtyMask & 0x100) != 0) {
-      ((void (*)())FUN_0004f2e0)(glContext,forwardedArg2,forwardedArg3,forwardedArg4,forwardedFloatArg1);
+      ((void (*)())gldValidateFog)(glContext,forwardedArg2,forwardedArg3,forwardedArg4,forwardedFloatArg1);
       forwardedFloatArg1 = (double)ffvpBuildFogKey(glContext,extraout_r4_04,forwardedArg3,forwardedArg4,forwardedArg5,forwardedArg6);
       dirtyMask = *(uint *)(glContext + 0x38);
       forwardedArg2 = extraout_r4_05;
@@ -4181,7 +4181,7 @@ void gldValidateState(int glContext,undefined4 forwardedArg2,undefined4 forwarde
       forwardedArg2 = extraout_r4_07;
     }
     if ((dirtyMask & 0x2200) != 0) {
-      forwardedFloatArg1 = (double)((double (*)())FUN_0004def0)(glContext,forwardedArg2,forwardedArg3,forwardedArg4,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,
+      forwardedFloatArg1 = (double)((double (*)())gldValidateTextureUnits)(glContext,forwardedArg2,forwardedArg3,forwardedArg4,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,
                                       forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8,forwarded_in_stack_ffffffb8
                                      );
       dirtyMask = *(uint *)(glContext + 0x38);
@@ -4210,7 +4210,7 @@ void gldValidateState(int glContext,undefined4 forwardedArg2,undefined4 forwarde
       }
     }
     else if ((dirtyMask & 0x20) != 0) {
-      ((void (*)())FUN_0004d620)(glContext,forwardedArg2,forwardedArg3,forwardedArg4,forwardedFloatArg1);
+      ((void (*)())gldMarkProgramsDirtyByFlag)(glContext,forwardedArg2,forwardedArg3,forwardedArg4,forwardedFloatArg1);
       forwardedArg2 = extraout_r4_13;
     }
   }
@@ -4242,7 +4242,7 @@ void gldValidateState(int glContext,undefined4 forwardedArg2,undefined4 forwarde
       forwardedArg2 = extraout_r4_18;
     }
     if ((dirtyMask2 & 0x40) != 0) {
-      FUN_00050140(glContext,forwardedArg2,forwardedArg3,forwardedArg4,forwardedArg5,forwardedArg6);
+      gldValidateColorMask(glContext,forwardedArg2,forwardedArg3,forwardedArg4,forwardedArg5,forwardedArg6);
       dirtyMask2 = *(uint *)(glContext + 0x3c);
     }
     if ((dirtyMask2 & 0x400) != 0) {
@@ -4261,11 +4261,11 @@ void gldValidateState(int glContext,undefined4 forwardedArg2,undefined4 forwarde
       }
     }
     else {
-      FUN_0004dbe0(glContext);
+      gldValidateVertexOutputRouting(glContext);
     }
   }
-  FUN_0004d100(glContext);
-  FUN_00052280(glContext);
+  gldValidateAlphaBlendEarlyZ(glContext);
+  gldEmitDirtyStatePackets(glContext);
   *(undefined1 *)(glContext + 0x2e) = 0;
   *(undefined1 *)(glContext + 0x29) = 0;
   *(undefined2 *)(glContext + 0x32) = 0;

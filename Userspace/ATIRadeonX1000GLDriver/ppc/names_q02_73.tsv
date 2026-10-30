@@ -1,0 +1,36 @@
+local	FUN_00053340	iVar1	remainingElements	INFERRED	elementCount - elementIndex: elements left for the child symbol
+local	FUN_00053340	iVar2	childConstantIndex	INFERRED	elementIndex + constantIndex: constant register index of the child symbol
+local	FUN_00053340	iVar3	symbolList	INFERRED	shader-local symbol list (state+0x1c) for local / constant storage classes, otherwise the global list (state+0x14)
+local	FUN_00053340	uVar5	firstSymbolId	INFERRED	id of the first (parent) symbol returned by extvsCreateSymbol; 0 on failure
+local	FUN_0004e880	iVar3	packetByteOffset	INFERRED	byte offset into the packet payload (4 per entry)
+local	FUN_0004e880	puVar2	packet	INFERRED	command packet buffer returned by the glContext+0x2758 allocator
+use	FUN_0004e880	uVar4	packetHeader	INFERRED	(pairCount - 1) << 16: packet count field ORed with the register address 0x854 / 0x878	^\s*uVar4\ =\ \(uVar1\ \-\ 1\)\ \*\ 0x10000;$	+3
+use	FUN_0004e880	uVar4	pairsLeft	INFERRED	countdown of the register pairs still to copy	^\s*uVar4\ =\ uVar1;$	+1
+use	FUN_0004e880	uVar4	pairsLeft	INFERRED	countdown of the register pairs still to copy	^\s*uVar4\ =\ uVar4\ \-\ 1;$	+2
+local	FUN_0003eea0	iVar1	tokenData	INFERRED	translator+0x28: token data pointer
+local	FUN_0003eea0	iVar3	constTokenOffsetOrAddr	INFERRED	byte offset of the constant token slot (translator+0x18 * 4), then its address (data + offset)
+local	FUN_0003eea0	param_3	outRegister	INFERRED	receives the constant register index allocated (translator flags bits 21..26)
+local	FUN_0003eea0	uVar2	translatorFlags	INFERRED	translator+0x14 flag word: bits 21..26 hold the next free constant register
+local	FUN_000541a0	local_28	writeMaskX	INFERRED	staged write mask array element 0 (copy of enableX), address passed to extvsAppendInstruction
+local	FUN_000541a0	local_24	writeMaskY	INFERRED	staged write mask array element 1 (copy of enableY)
+local	FUN_000541a0	local_20	writeMaskZ	INFERRED	staged write mask array element 2 (copy of enableZ)
+local	FUN_000541a0	local_1c	writeMaskW	INFERRED	staged write mask array element 3 (copy of enableW)
+use	FUN_00055610	iVar1	symbolRecord	INFERRED	symbol record: records + index * 0x54	^\s*iVar1\ =\ iVar6\ \+\ param_2\[1\];$	+1
+use	FUN_00055610	iVar1	symbolRecord	INFERRED	symbol record: records + index * 0x54	^\s*param_6\ =\ \*\(int\ \*\)\(iVar1\ \+\ 0x20\);$	+1
+use	FUN_00055610	iVar1	symbolRecord	INFERRED	symbol record: records + index * 0x54	^\s*iVar1\ =\ param_2\[1\]\ \+\ iVar6;$	+1
+use	FUN_00055610	iVar1	symbolRecord	INFERRED	symbol record: records + index * 0x54	^\s*\*\(int\ \*\)\(iVar1\ \+\ 0x30\)\ =\ param_6;$	+1
+use	FUN_00055610	iVar1	nextOrdinal	INFERRED	symbol record +0x24 value plus 1 (ordinal assigned to the new symbol)	^\s*iVar1\ =\ \*\(int\ \*\)\(iVar5\ \+\ 0x24\)\ \+\ 1;$	+3
+use	FUN_00055610	iVar1	nextOrdinal	INFERRED	symbol record +0x24 value plus 1 (ordinal assigned to the new symbol)	^\s*else\ if\ \(iVar1\ ==\ 0x879a\)\ \{$	+1
+use	FUN_00055610	uVar3	parentSymbol	INFERRED	parent symbol id (0 for a new base symbol, else the +0x20 field of the record)	^\s*uVar3\ =\ 0;$	+1
+use	FUN_00055610	uVar3	parentSymbol	INFERRED	parent symbol id (0 for a new base symbol, else the +0x20 field of the record)	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(param_2\[1\]\ \+\ iVar6\ \+\ 0x20\);$	+1
+use	FUN_00055610	uVar3	parentSymbol	INFERRED	parent symbol id (0 for a new base symbol, else the +0x20 field of the record)	^\s*return\ uVar3;$	+1
+use	FUN_00055610	uVar3	growSlots	INFERRED	number of records the symbol array is grown by (0x10 or 0x40)	^\s*uVar3\ =\ 0x10;$	+1
+use	FUN_00055610	uVar3	growSlots	INFERRED	number of records the symbol array is grown by (0x10 or 0x40)	^\s*uVar3\ =\ 0x40;$	+1
+use	FUN_00055610	uVar3	growSlots	INFERRED	number of records the symbol array is grown by (0x10 or 0x40)	^\s*uVar3\ =\ 4;$	+1
+use	FUN_00055610	uVar3	growSlots	INFERRED	number of records the symbol array is grown by (0x10 or 0x40)	^\s*uVar3\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ 0xc\)\)\(uVar3\);$	+2
+use	FUN_00041750	uVar3	srcSwizzleWord	INFERRED	ilInstr+0x1c: source swizzle word whose component selects are inverted	^\s*uVar3\ =\ \*\(uint\ \*\)\(param_3\ \+\ 0x1c\);$	+1
+use	FUN_00041750	uVar3	srcSwizzleWord	INFERRED	ilInstr+0x1c: source swizzle word whose component selects are inverted	^\s*uStack_3c\ =\ \(uVar3\ \&\ 0xfffff777\ \^\ 0x8000\)\ \&\ 0x8000\ \|$	+3
+use	FUN_00041750	uVar5	tempRegisterHalf	INFERRED	low 16 bits of translator+0x20: temp register index	^\s*uVar5\ =\ \(undefined2\)\*\(undefined4\ \*\)\(param_1\ \+\ 0x20\);$	+2
+use	FUN_00041750	uVar5	tempRegisterHalf	INFERRED	low 16 bits of translator+0x20: temp register index	^\s*uVar5\ =\ \(undefined2\)\*\(undefined4\ \*\)\(param_1\ \+\ 0x20\);$@2	+1
+use	FUN_00041750	uVar5	tempRegisterHalf	INFERRED	low 16 bits of translator+0x20: temp register index	^\s*uVar5\ =\ \(undefined2\)\*\(undefined4\ \*\)\(param_1\ \+\ 0x20\);$@3	+1
+use	FUN_00041750	uVar5	tempRegisterHalf	INFERRED	low 16 bits of translator+0x20: temp register index	^\s*uStack_4c\ =\ \(undefined\ \*\)CONCAT22\(4,uVar5\);$	+1

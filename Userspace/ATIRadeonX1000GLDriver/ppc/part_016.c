@@ -8621,7 +8621,7 @@ int gld_bindProgramStateAndEmit(glContext, programObj, updateArg)
       *(undefined4 *)(glContext + 0x1b94) = *(undefined4 *)(((unsigned char *)0x00005490) + programState);
       *(undefined4 *)(glContext + 0x1b8c) = *(undefined4 *)(((unsigned char *)0x00005494) + programState);
       *(undefined4 *)(glContext + 0x1b98) = *(undefined4 *)(((unsigned char *)0x000054a4) + programState);
-      FUN_00050ef0(glContext,updateArg,*(undefined4 *)(((unsigned char *)0x00005434) + programState),
+      gldSetVertexPacketLimits(glContext,updateArg,*(undefined4 *)(((unsigned char *)0x00005434) + programState),
                    *(undefined4 *)(((unsigned char *)0x00005438) + programState));
       glContextWord44 = *(uint *)(glContext + 0x44);
       *(undefined4 *)(glContext + 0x1b9c) = *(undefined4 *)(((unsigned char *)0x00005498) + programState);
@@ -9008,7 +9008,7 @@ int ffpsBuildProgram(glContext, cachedProgram)
       if (*(char *)(glContext + 0x1868) == '\0') {
         (**(code **)(((unsigned char *)0x00001334) + glContext))(glContext,0);
       }
-      FUN_0004ac90(glContext);
+      gldUploadProgramState(glContext);
       glContextPtr1e5c_2 = *(int *)(glContext + 0x1e5c);
       if (*(int *)(((unsigned char *)0x000036c0) + glContextPtr1e5c_2) == 0) {
         *(undefined4 *)(((unsigned char *)0x00001488) + glContext) = 0;
@@ -9290,7 +9290,7 @@ LAB_000b66b8:
   ((int (*)())noop_b5190)(glContext,*(int *)(glContext + 0x1e5c) + 0x1784,
                ((unsigned char *)0x00001660) + *(int *)(glContext + 0x1e5c));
   *(undefined1 **)(((unsigned char *)0x00001488) + glContext) = ffpsProgram;
-  FUN_0004ac90(glContext);
+  gldUploadProgramState(glContext);
   return;
 }
 #undef ilTokens

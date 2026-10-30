@@ -10163,7 +10163,7 @@ LAB_00018700:
         packetCursor[0xba] = *(uint *)(ctx + 0x1f04);
         packetCursor[0xbb] = *(uint *)(ctx + 0x1f00);
         packetCursor[0xbc] = *(uint *)(ctx + 0x1f08);
-        FUN_0004c100(packetCursor + 2,scratchInt34);
+        gldCopyProgramStreamState(packetCursor + 2,scratchInt34);
         packetCursor[0xbf] = (uint)((unsigned char *)0x000013c4U);
         packetCursor[200] = (uint)((unsigned char *)0x000013caU);
         packetCursor[0xc4] = (uint)((unsigned char *)0x000013cdU);

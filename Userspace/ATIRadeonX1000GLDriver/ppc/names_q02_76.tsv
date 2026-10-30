@@ -1,0 +1,12 @@
+func	FUN_0004a8f0	gldRebindCurrentProgram	INFERRED	rebinds the active program: fixed-function path via glContext+0x294c, ARB path via FUN_000afe40, or atifsCompileCurrentShader depending on glContext+0x44 bits 0x20000 / 0x2000
+func	FUN_0004a990	gldResetProgramEntry	INFERRED	frees the entry buffer (+0x20), clears its link fields and the context current-entry pointer glContext+0x1e68 when it is this entry
+func	FUN_0004aa00	arbfpRebindIfOverLimit	INFERRED	rebinds the ARB fragment program when either limit counter of glContext+0x1488 object (+0x37cc / +0x37d0) exceeds 0x40; returns 1 when rebound
+func	FUN_0004b480	gldClearBoundSlot	INFERRED	clears the dirty byte of the object in glContext slot +0x1448+index*4 and re-emits the program state packet
+func	FUN_0004ddc0	gldEmitConstantFlushPacket	INFERRED	emits a two-dword command packet (header pointer 0x1040, zero payload) to the stream
+func	FUN_00053000	extvsMarkStateDirty	INFERRED	sets context dirty bit 0x1000 and the state flag bytes (+0x2d, +0x29), adding 0xc when bit 2 of updateFlags is set
+func	FUN_00053040	extvsSelectRegisterCode	INFERRED	returns 0x882 when the argument is non-zero, otherwise 4
+func	FUN_00062510	gldDestroyListObject	INFERRED	frees the nodes and the list object at glContext+0x11b4 and clears the pointer
+func	FUN_0004aa90	gldResetProgramEntryDefaults	INFERRED	resets the per-unit state words of a program entry to their default bit patterns
+func	FUN_0004ab60	gldInitProgramCacheEntry	INFERRED	initialises the program entry state (defaults, unit flags, glContext+0x1e88 words) after a cache insert
+func	FUN_0004d100	gldValidateAlphaBlendEarlyZ	INFERRED	combines blend, alpha-test and depth state into glContext+0x1a4c bit 0x800, 0x18a4 bit 4, 0x1ab8 bit 0 and 0x1bd4 bit 0
+func	FUN_0004def0	gldValidateTextureUnits	INFERRED	per-texture-unit validation: copies texture object words into the unit registers, computes rectangle scale vectors and depth-compare keys

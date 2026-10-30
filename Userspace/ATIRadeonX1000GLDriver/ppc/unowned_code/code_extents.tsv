@@ -35,8 +35,8 @@
 40a9c	40abc	fragmentTranslateScalarMathBody
 40ac0	40ac4	fragmentTranslateScalarMathBody
 4c544	4c55c	noop_4c540
-535c4	535f0	FUN_000534c0
-535f0	5360c	FUN_000534c0
+535c4	535f0	extvsCreateVectorSymbolChain
+535f0	5360c	extvsCreateVectorSymbolChain
 76a64	76ab4	vpStateApplyParameters
 7a174	7a190	recordAllocFree
 7a190	7a1a0	recordAllocFree

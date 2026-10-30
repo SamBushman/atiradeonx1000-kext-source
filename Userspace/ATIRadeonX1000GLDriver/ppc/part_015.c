@@ -1620,7 +1620,7 @@ int gld_setPrimitiveInputRegisters(glContext, primitiveMode, unitCounter, unused
     *(undefined4 *)(glContext + 0x1b68) = 0;
     extraArg5 = (undefined4 *)(primitiveFlags & 0x10 | *(uint *)(glContext + 0x1a64) & 0xffffffef);
     *(undefined4 **)(glContext + 0x1a64) = extraArg5;
-    FUN_0004b190(glContext,*(undefined4 *)(tableCursor + 0xc0));
+    gldSetProgramStreamMode(glContext,*(undefined4 *)(tableCursor + 0xc0));
   }
   *(undefined4 *)(glContext + 0x1ba8) = *(undefined4 *)(glContext + 0x1ba0);
   if (!noPrimitiveTable) goto LAB_000a41d0;
@@ -1628,7 +1628,7 @@ int gld_setPrimitiveInputRegisters(glContext, primitiveMode, unitCounter, unused
     ffvpComputeOutputMasks(glContext);
   }
   else {
-    FUN_00064720(glContext);
+    gldCopyRouteRegisters(glContext);
   }
   (**(code **)(((unsigned char *)0x00001334) + glContext))(glContext,1);
   glContextWord44 = *(uint *)(glContext + 0x44);
@@ -1983,7 +1983,7 @@ int gld_markBoundObjectsDirty(glContext)
       loopIndex3 = loopIndex3 + 0x18;
     } while (loopIndex < objectCount);
   }
-  FUN_0004b190(glContext,0);
+  gldSetProgramStreamMode(glContext,0);
   *(uint *)(glContext + 0x1b50) = (uint)*(ushort *)(glContext + 0x1b52);
   *(uint *)(glContext + 0x1a64) = *(uint *)(glContext + 0x1a64) & 0xffffffef;
   *(uint *)(glContext + 0x1930) = *(uint *)(glContext + 0x1930) | 0x2000;
@@ -3345,7 +3345,7 @@ int gld_emitClearFillPacket(glContext, emitFill)
   
   glContextPtr4 = *(int *)(glContext + 4);
   engineCaps = *(int *)(glContextPtr4 + 0x10);
-  clearValue = FUN_0004e990(glContext);
+  clearValue = gldDepthBiasScaledInt(glContext);
   surfaceFormatBits = *(uint *)(glContextPtr4 + 0x154) & 0x30000;
   if ((surfaceFormatBits == 0x20000) || (surfaceFormatBits == 0x30000)) {
     channelBits = 0x18;
@@ -3692,7 +3692,7 @@ LAB_000a6ebc:
     *(uint *)(glContext + 0x8c) = *(uint *)(glContext + 0x8c) | 0x20000000;
   }
   glContextPtr4 = *(int *)(glContext + 4);
-  FUN_0004ce30(glContext);
+  gldValidateHyperZ(glContext);
   trailerPacket = (undefined4 *)(**(code **)(glContext + 0x2758))(glContext,5);
   *(undefined4 **)(0x00002748 + glContext + 4) = trailerPacket;
   prevPacketLink = *(uint **)(glContextPtr4 + 0x1d8);
@@ -4036,7 +4036,7 @@ int gld_initContextDispatch(ctx)
   ((unsigned char *)0x00002b81)[ctx] = 1;
   zeroArgForAlloc = (*ctxPtr250)(1,((unsigned char *)0x00003754U),zeroArgForAlloc,staleArgR6,allocatorFn,staleArgR8,0);
   *(undefined4 *)(ctx + 0x20a0) = zeroArgForAlloc;
-  FUN_0004ab60(streamBase);
+  gldInitProgramCacheEntry(streamBase);
   *(undefined2 *)(((unsigned char *)0x000015c8) + *(int *)(ctx + 0x20a0)) = 0xffff;
   *(undefined4 *)(((unsigned char *)0x0000135c) + ctx) = 5;
   idTableObject = (**(code **)(ctx + 0x250))(1,0x14);
@@ -4101,7 +4101,7 @@ int gldFreeEngineState(ctx)
   ((int (*)())gld_invalidateCachedPointMasks)(engineState);
   ((int (*)())gld_freePointMaskCache)(engineState);
   gld_destroyUnitCmdLists(engineState);
-  FUN_0004b710(engineState);
+  gldFlushProgramCache(engineState);
   fpVariantCacheFlush(engineState);
   if (*(int *)(((unsigned char *)0x00001358) + ctx) != 0) {
     (**(code **)(ctx + 600))(*(int *)(((unsigned char *)0x00001358) + ctx));
