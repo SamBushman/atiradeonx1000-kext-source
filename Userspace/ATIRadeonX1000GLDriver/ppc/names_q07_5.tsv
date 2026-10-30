@@ -79,17 +79,6 @@ use	FUN_0013fc38	uVar29	loopIndexB	INFERRED	role read off the web: loop counter 
 use	FUN_0013fc38	uVar29	loopIndexB	INFERRED	role read off the web: loop counter / continue flag of a counted loop	^\s*uVar29\ =\ 0;$@2	+1
 use	FUN_0013fc38	uVar29	loopIndexB	INFERRED	role read off the web: loop counter / continue flag of a counted loop	^\s*uVar29\ =\ uVar29\ \+\ 1;$@2	+1
 use	FUN_0013fc38	uVar29	loopIndexB	INFERRED	role read off the web: loop counter / continue flag of a counted loop	^\s*if\ \(uVar32\ ==\ uVar29\)\ break;$@2	+1
-use	FUN_0013fc38	uVar32	loopIndexC	INFERRED	role read off the web: loop counter / continue flag of a counted loop	^\s*uVar32\ =\ 0;$@2	+1
-use	FUN_0013fc38	uVar32	loopIndexC	INFERRED	role read off the web: loop counter / continue flag of a counted loop	^\s*if\ \(\(\(int\)uVar26\ >>\ \(uVar32\ \&\ 0x3f\)\ \&\ 1U\)\ !=\ 0\)\ \{$	+2
-use	FUN_0013fc38	uVar32	loopIndexC	INFERRED	role read off the web: loop counter / continue flag of a counted loop	^\s*bVar20\ =\ uVar32\ !=\ 3;$	+2
-use	FUN_0013fc38	uVar32	loopIndexC	INFERRED	role read off the web: loop counter / continue flag of a counted loop	^\s*uVar32\ =\ 0;$@3	+1
-use	FUN_0013fc38	uVar32	loopIndexC	INFERRED	role read off the web: loop counter / continue flag of a counted loop	^\s*if\ \(\(\(int\)uVar26\ >>\ \(uVar32\ \&\ 0x3f\)\ \&\ 1U\)\ !=\ 0\)\ \{$@2	+1
-use	FUN_0013fc38	uVar32	loopIndexC	INFERRED	role read off the web: loop counter / continue flag of a counted loop	^\s*\(piVar11,piVar11\[0x21\],\*\(undefined1\ \*\)\(\(int\)\&local_88\ \+\ uVar32\),$	+2
-use	FUN_0013fc38	uVar32	loopIndexC	INFERRED	role read off the web: loop counter / continue flag of a counted loop	^\s*bVar20\ =\ uVar32\ !=\ 3;$@2	+2
-use	FUN_0013fc38	uVar32	loopIndexC	INFERRED	role read off the web: loop counter / continue flag of a counted loop	^\s*uVar32\ =\ 0;$@4	+1
-use	FUN_0013fc38	uVar32	loopIndexC	INFERRED	role read off the web: loop counter / continue flag of a counted loop	^\s*if\ \(\(\(\(int\)uVar29\ >>\ \(uVar32\ \&\ 0x3f\)\ \&\ 1U\)\ !=\ 0\)\ \&\&\ \(uVar32\ !=\ 3\)\)\ \{$	+2
-use	FUN_0013fc38	uVar32	loopIndexC	INFERRED	role read off the web: loop counter / continue flag of a counted loop	^\s*if\ \(\(\(\(int\)uVar26\ >>\ \(uVar32\ \&\ 0x3f\)\ \&\ 1U\)\ !=\ 0\)\ \&\&$	+2
-use	FUN_0013fc38	uVar32	loopIndexC	INFERRED	role read off the web: loop counter / continue flag of a counted loop	^\s*bVar20\ =\ uVar32\ !=\ 3;$@3	+2
 use	FUN_0013fc38	uVar35	loopIndexD	INFERRED	role read off the web: loop counter / continue flag of a counted loop	^\s*uVar35\ =\ 0;$	+1
 use	FUN_0013fc38	uVar35	loopIndexD	INFERRED	role read off the web: loop counter / continue flag of a counted loop	^\s*if\ \(\(\(\(int\)\(uVar26\ \&\ uVar29\)\ >>\ \(uVar35\ \&\ 0x3f\)\ \&\ 1U\)\ !=\ 0\)\ \&\&\ \(\(int\)uVar18\ <\ 4\)\)\ \{$	+1
 use	FUN_0013fc38	uVar35	loopIndexD	INFERRED	role read off the web: loop counter / continue flag of a counted loop	^\s*\*\(char\ \*\)\(uVar35\ \+\ \(int\)puVar12\)\ =\ \(char\)uVar24;$	+1

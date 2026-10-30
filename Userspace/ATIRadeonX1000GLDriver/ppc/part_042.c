@@ -4179,11 +4179,17 @@ int FUN_0013fc38(pass)
   int pass;
 {
   int *unsharedAWrapper;
+  undefined4 arenaAt378;
   undefined4 storedSelectSecond;
   undefined4 storedSelectFirst;
+  undefined4 vectorData2;
+  int nextBlock;
+  int operandRecord2;
+  int firstInst;
   int maskByteOffset;
   int existingCandidate;
-  int nextBlock;
+  int destSelect;
+  int destRecord;
   int *secondInstUser;
   int *secondInst;
   int *firstCandidateSlot;
@@ -4195,51 +4201,90 @@ int FUN_0013fc38(pass)
   int *nextBlockInst;
   int *userInstB;
   uint candidateCountScan;
+  uint userCountI;
+  uint userCountH;
   uint firstCompactLane;
-  uint userVecCount;
+  uint userCountG;
+  uint laneIdxF;
+  uint userCountF;
+  uint laneIdxE;
+  uint laneIdxD;
+  uint freeLaneMask;
+  uint pairScanIdx;
+  uint pushCountB;
+  uint pushCount;
   uint remappedComponent;
   uint userCountB;
+  uint userTopIndexB;
   uint userTopIndex;
+  uint maskA;
+  uint candidateIdx;
   uint nextFreeLane;
-  int operandIdx;
+  int userByteOffsetB;
+  int userByteOffset;
+  int operandIdxB;
+  int cloneOperandIdx;
+  int cloneDestRecord;
+  int cloneOperandRecord;
+  int lastOperandRecordB;
+  int lastOperandRecord;
+  int lastOperandIdx;
+  int sourceDef;
+  int destRecordC;
   int lanesLeft;
+  int destRecordB;
+  int predicateResult;
   int isWrappedSecond;
   int isWrappedFirst;
+  int nextByteOffset;
+  int operandIdx;
+  int canMergeResult;
   uint *firstInstUsers;
   uint *secondInstUsers;
   uint *userVec;
   undefined4 *elementPtr;
   int secondMaskLaneCount;
-  uint freeLaneMask;
+  int userSource;
+  int userOperandCountB;
+  int laneIdxC;
+  int userOperandCount;
+  int rewrittenLaneCount;
+  int cloneField;
+  int srcModeSecond2;
   uint secondCandidateMask;
   undefined4 candidateMask;
+  undefined4 vectorData;
+  undefined4 arena;
+  undefined4 zeroArg;
   bool pastLastCandidate;
   uint loopIndexD;
-  uint loopIndexC;
   uint loopIndexB;
   int loopIndex;
   bool moreComponents;
-  undefined4 vectorData;
-  undefined4 arena;
-  int sourceDef;
-  int operandRecord;
-  int operandRecord2;
   int operandRecord3;
-  undefined4 arenaAt378;
   undefined4 *vectorAlloc2;
   int *operandVReg3;
   char destSelectLastByte;
   bool sameSrc1Src2;
   bool sameSrc2Src2;
-  int iVar4;
   int splitRgbAlphaEnabled;
   undefined4 *allocation;
   undefined4 *vectorAlloc;
-  int iVar9;
   uint *maskElementPtr;
   undefined4 *laneMapPtr;
-  int iVar13;
-  int srcModeSecond2;
+  int operandCount;
+  int userOperandIdxB;
+  int userOperandIdx;
+  int operandRecordE;
+  int operandRecordD;
+  int operandRecordC;
+  int operandCountC;
+  int sourceDefB;
+  int operandCountB;
+  int regKindWord;
+  int srcModeFirst1;
+  int firstMaskLaneCount;
+  int sourceDef2;
   int *unsharedBSource;
   int *operandVReg;
   int *operandVReg2;
@@ -4251,15 +4296,11 @@ int FUN_0013fc38(pass)
   int srcModeFirst2;
   uint chosenLane;
   int currentBlock;
-  uint uVar26;
   uint nextCandidateIndex;
   uint *candidateVecHeader;
   uint candidateCount;
-  undefined4 uVar30;
   int *unsharedBWrapper;
-  uint uVar32;
   undefined4 operandSelect;
-  undefined4 uVar34;
   uint secondCandidateIndex;
   undefined4 sourceToCompactLane;
   uint compactToSourceLane;
@@ -4320,42 +4361,42 @@ int FUN_0013fc38(pass)
     for (nextBlockInst = (int *)(*(int **)(currentBlock + 0x98))[2]; nextBlockInst != (int *)0x0;
         nextBlockInst = (int *)nextBlockInst[2]) {
       if ((blockInst[5] & 1U) != 0) {
-        operandRecord2 = IRInst__getOperandRecord(blockInst,0);
-        iVar4 = *(int *)(operandRecord2 + 0x10);
+        destRecord = IRInst__getOperandRecord(blockInst,0);
+        destSelect = *(int *)(destRecord + 0x10);
         if (((*(int *)(blockInst[0x22] + 8) == 0x12) &&
-            (iVar9 = ((int (*)())FUN_0013f3d4)(blockInst,pass), iVar9 != 0)) && (iVar4 != 0x1010101)) {
+            (canMergeResult = ((int (*)())FUN_0013f3d4)(blockInst,pass), canMergeResult != 0)) && (destSelect != 0x1010101)) {
           if (splitRgbAlphaEnabled == 0) {
-            if (iVar4 != 0) goto LAB_0013fe30;
+            if (destSelect != 0) goto LAB_0013fe30;
           }
-          else if ((iVar4 != 0x1010100) && (iVar4 != 1)) {
+          else if ((destSelect != 0x1010100) && (destSelect != 1)) {
 LAB_0013fe30:
             candidateCountScan = allocation[2];
-            uVar26 = 0;
+            candidateIdx = 0;
             if (candidateCountScan != 0) {
               do {
-                if (uVar26 < *candidateVecHeader) {
-                  if (candidateCountScan <= uVar26) {
-                    _memset(candidateCountScan * 4 + allocation[3],0,(uVar26 - candidateCountScan) * 4 + 4);
-                    allocation[2] = uVar26 + 1;
+                if (candidateIdx < *candidateVecHeader) {
+                  if (candidateCountScan <= candidateIdx) {
+                    _memset(candidateCountScan * 4 + allocation[3],0,(candidateIdx - candidateCountScan) * 4 + 4);
+                    allocation[2] = candidateIdx + 1;
                   }
-                  firstSlotPtr = (int *)(uVar26 * 4 + allocation[3]);
+                  firstSlotPtr = (int *)(candidateIdx * 4 + allocation[3]);
                 }
                 else {
-                  firstSlotPtr = (int *)Vector__elementRefGrow(candidateVecHeader,uVar26);
+                  firstSlotPtr = (int *)Vector__elementRefGrow(candidateVecHeader,candidateIdx);
                 }
                 existingCandidate = *firstSlotPtr;
-                for (iVar9 = 1; iVar13 = (**(code **)(*blockInst + 0x14))(blockInst), iVar9 <= iVar13;
-                    iVar9 = iVar9 + 1) {
-                  iVar13 = IRInst__getOperandSource(blockInst,iVar9);
-                  if (existingCandidate == iVar13) {
-                    candidateCountScan = allocation[2];
-                    if (candidateCountScan < *candidateVecHeader) {
-                      _memset(candidateCountScan * 4 + allocation[3],0,4);
-                      allocation[2] = candidateCountScan + 1;
-                      elementPtr = (undefined4 *)(candidateCountScan * 4 + allocation[3]);
+                for (operandIdx = 1; operandCount = (**(code **)(*blockInst + 0x14))(blockInst), operandIdx <= operandCount;
+                    operandIdx = operandIdx + 1) {
+                  sourceDef2 = IRInst__getOperandSource(blockInst,operandIdx);
+                  if (existingCandidate == sourceDef2) {
+                    pushCount = allocation[2];
+                    if (pushCount < *candidateVecHeader) {
+                      _memset(pushCount * 4 + allocation[3],0,4);
+                      allocation[2] = pushCount + 1;
+                      elementPtr = (undefined4 *)(pushCount * 4 + allocation[3]);
                     }
                     else {
-                      elementPtr = (undefined4 *)Vector__elementRefGrow(candidateVecHeader,candidateCountScan);
+                      elementPtr = (undefined4 *)Vector__elementRefGrow(candidateVecHeader,pushCount);
                     }
                     *elementPtr = 0;
                     if (vecCount < vecCapacity) {
@@ -4372,19 +4413,19 @@ LAB_0013fe30:
                   }
                 }
                 candidateCountScan = allocation[2];
-                uVar26 = uVar26 + 1;
-              } while (uVar26 < candidateCountScan);
+                candidateIdx = candidateIdx + 1;
+              } while (candidateIdx < candidateCountScan);
             }
 LAB_0013ff84:
             candidateMask = ((int (*)())FUN_0013a644)(blockInst);
-            uVar32 = allocation[2];
-            if (uVar32 < *candidateVecHeader) {
-              _memset(uVar32 * 4 + allocation[3],0,4);
-              allocation[2] = uVar32 + 1;
-              laterSlotPtr = (int *)(uVar32 * 4 + allocation[3]);
+            pushCountB = allocation[2];
+            if (pushCountB < *candidateVecHeader) {
+              _memset(pushCountB * 4 + allocation[3],0,4);
+              allocation[2] = pushCountB + 1;
+              laterSlotPtr = (int *)(pushCountB * 4 + allocation[3]);
             }
             else {
-              laterSlotPtr = (int *)Vector__elementRefGrow(candidateVecHeader,uVar32);
+              laterSlotPtr = (int *)Vector__elementRefGrow(candidateVecHeader,pushCountB);
             }
             *laterSlotPtr = (int)blockInst;
             if (vecCount < vecCapacity) {
@@ -4407,45 +4448,45 @@ LAB_00140024:
       blockInst = nextBlockInst;
     }
     if (allocation[2] != 0) {
-      uVar32 = 0;
+      pairScanIdx = 0;
       do {
-        if (uVar32 < vecCapacity) {
-          if (vecCount <= uVar32) {
-            _memset(vecCount * 4 + vecData,0,(uVar32 - vecCount) * 4 + 4);
-            vecCount = uVar32 + 1;
+        if (pairScanIdx < vecCapacity) {
+          if (vecCount <= pairScanIdx) {
+            _memset(vecCount * 4 + vecData,0,(pairScanIdx - vecCount) * 4 + 4);
+            vecCount = pairScanIdx + 1;
           }
-          maskElementPtr = (uint *)(uVar32 * 4 + vecData);
+          maskElementPtr = (uint *)(pairScanIdx * 4 + vecData);
         }
         else {
-          maskElementPtr = (uint *)Vector__elementRefGrow(&vecCapacity,uVar32);
+          maskElementPtr = (uint *)Vector__elementRefGrow(&vecCapacity,pairScanIdx);
         }
-        uVar26 = *maskElementPtr;
-        if (uVar32 < *candidateVecHeader) {
+        maskA = *maskElementPtr;
+        if (pairScanIdx < *candidateVecHeader) {
           candidateCount = allocation[2];
-          if (candidateCount <= uVar32) {
-            _memset(candidateCount * 4 + allocation[3],0,(uVar32 - candidateCount) * 4 + 4);
-            allocation[2] = uVar32 + 1;
-            candidateCount = uVar32 + 1;
+          if (candidateCount <= pairScanIdx) {
+            _memset(candidateCount * 4 + allocation[3],0,(pairScanIdx - candidateCount) * 4 + 4);
+            allocation[2] = pairScanIdx + 1;
+            candidateCount = pairScanIdx + 1;
           }
-          firstCandidateSlot = (int *)(uVar32 * 4 + allocation[3]);
+          firstCandidateSlot = (int *)(pairScanIdx * 4 + allocation[3]);
         }
         else {
-          firstCandidateSlot = (int *)Vector__elementRefGrow(candidateVecHeader,uVar32);
+          firstCandidateSlot = (int *)Vector__elementRefGrow(candidateVecHeader,pairScanIdx);
           candidateCount = allocation[2];
         }
-        nextCandidateIndex = uVar32 + 1;
-        nextBlock = *firstCandidateSlot;
-        if ((nextBlock != 0) && (nextCandidateIndex < candidateCount)) {
-          iVar9 = nextCandidateIndex * 4;
-          uVar32 = uVar32 + 2;
+        nextCandidateIndex = pairScanIdx + 1;
+        firstInst = *firstCandidateSlot;
+        if ((firstInst != 0) && (nextCandidateIndex < candidateCount)) {
+          nextByteOffset = nextCandidateIndex * 4;
+          pairScanIdx = pairScanIdx + 2;
 LAB_00140128:
-          secondCandidateIndex = uVar32 - 1;
+          secondCandidateIndex = pairScanIdx - 1;
           if (secondCandidateIndex < *candidateVecHeader) {
             if (candidateCount <= secondCandidateIndex) {
               _memset(candidateCount * 4 + allocation[3],0,(secondCandidateIndex - candidateCount) * 4 + 4);
-              allocation[2] = uVar32;
+              allocation[2] = pairScanIdx;
             }
-            elementPtr = (undefined4 *)(iVar9 + allocation[3]);
+            elementPtr = (undefined4 *)(nextByteOffset + allocation[3]);
           }
           else {
             elementPtr = (undefined4 *)Vector__elementRefGrow(candidateVecHeader,secondCandidateIndex);
@@ -4455,29 +4496,29 @@ LAB_00140128:
           if (secondCandidateIndex < vecCapacity) {
             if (vecCount <= secondCandidateIndex) {
               _memset(vecCount * 4 + vecData,0,(secondCandidateIndex - vecCount) * 4 + 4);
-              vecCount = uVar32;
+              vecCount = pairScanIdx;
             }
-            maskElementPtr = (uint *)(iVar9 + vecData);
+            maskElementPtr = (uint *)(nextByteOffset + vecData);
           }
           else {
             maskElementPtr = (uint *)Vector__elementRefGrow(&vecCapacity,secondCandidateIndex);
           }
           secondCandidateMask = *maskElementPtr;
-          iVar13 = FUN_00139008(uVar26);
+          firstMaskLaneCount = FUN_00139008(maskA);
           secondMaskLaneCount = FUN_00139008(secondCandidateMask);
-          if (4 < iVar13 + secondMaskLaneCount) goto LAB_00140dc4;
-          operandVReg3 = (int *)IRInst__getOperandSource(nextBlock,1);
-          unsharedAWrapper = (int *)IRInst__getOperandSource(nextBlock,2);
+          if (4 < firstMaskLaneCount + secondMaskLaneCount) goto LAB_00140dc4;
+          operandVReg3 = (int *)IRInst__getOperandSource(firstInst,1);
+          unsharedAWrapper = (int *)IRInst__getOperandSource(firstInst,2);
           operandVReg = (int *)IRInst__getOperandSource(secondInst,1);
           operandVReg2 = (int *)IRInst__getOperandSource(secondInst,2);
-          iVar13 = (*(uint *)(nextBlock + 0xb8) >> 1 & 1) + (*(uint *)(nextBlock + 0xb8) & 1) * 2;
+          srcModeFirst1 = (*(uint *)(firstInst + 0xb8) >> 1 & 1) + (*(uint *)(firstInst + 0xb8) & 1) * 2;
           srcModeSecond1 = ((uint)secondInst[0x2e] >> 1 & 1) + (secondInst[0x2e] & 1U) * 2;
-          srcModeFirst2 = (*(uint *)(nextBlock + 0xd0) >> 1 & 1) + (*(uint *)(nextBlock + 0xd0) & 1) * 2;
+          srcModeFirst2 = (*(uint *)(firstInst + 0xd0) >> 1 & 1) + (*(uint *)(firstInst + 0xd0) & 1) * 2;
           srcModeSecond2 = ((uint)secondInst[0x34] >> 1 & 1) + (secondInst[0x34] & 1U) * 2;
-          if ((operandVReg3 != operandVReg) || (sameSrc1Src1 = true, iVar13 != srcModeSecond1)) {
+          if ((operandVReg3 != operandVReg) || (sameSrc1Src1 = true, srcModeFirst1 != srcModeSecond1)) {
             sameSrc1Src1 = false;
           }
-          if ((operandVReg3 != operandVReg2) || (sameSrc1Src2 = true, iVar13 != srcModeSecond2)) {
+          if ((operandVReg3 != operandVReg2) || (sameSrc1Src2 = true, srcModeFirst1 != srcModeSecond2)) {
             sameSrc1Src2 = false;
           }
           if ((unsharedAWrapper != operandVReg) || (sameSrc2Src1 = true, srcModeFirst2 != srcModeSecond1)) {
@@ -4502,16 +4543,16 @@ LAB_00140128:
           else {
             unsharedBSource = (int *)IRInst__getOperandSource(unsharedBWrapper,1);
           }
-          iVar9 = (**(code **)(*unsharedAWrapper + 0x48))(unsharedAWrapper);
-          if ((((iVar9 == 0) && (iVar9 = (**(code **)(*unsharedBSource + 0x48))(unsharedBSource), iVar9 == 0)) &&
-              ((iVar9 = (**(code **)(*unsharedAWrapper + 0x80))(unsharedAWrapper), iVar9 == 0 &&
-               (iVar9 = (**(code **)(*unsharedBSource + 0x80))(unsharedBSource), iVar9 == 0)))) ||
-             (iVar9 = FUN_0013905c(nextBlock,secondInst), iVar9 == 0)) goto LAB_00140d38;
+          predicateResult = (**(code **)(*unsharedAWrapper + 0x48))(unsharedAWrapper);
+          if ((((predicateResult == 0) && (predicateResult = (**(code **)(*unsharedBSource + 0x48))(unsharedBSource), predicateResult == 0)) &&
+              ((predicateResult = (**(code **)(*unsharedAWrapper + 0x80))(unsharedAWrapper), predicateResult == 0 &&
+               (predicateResult = (**(code **)(*unsharedBSource + 0x80))(unsharedBSource), predicateResult == 0)))) ||
+             (predicateResult = FUN_0013905c(firstInst,secondInst), predicateResult == 0)) goto LAB_00140d38;
           if (secondCandidateIndex < *candidateVecHeader) {
             candidateCountB = allocation[2];
             if (candidateCountB <= secondCandidateIndex) {
               _memset(candidateCountB * 4 + allocation[3],0,(secondCandidateIndex - candidateCountB) * 4 + 4);
-              allocation[2] = uVar32;
+              allocation[2] = pairScanIdx;
             }
             elementPtr = (undefined4 *)(secondCandidateIndex * 4 + allocation[3]);
           }
@@ -4519,31 +4560,31 @@ LAB_00140128:
             elementPtr = (undefined4 *)Vector__elementRefGrow(candidateVecHeader,secondCandidateIndex);
           }
           *elementPtr = 0;
-          IRInst__setExtraOperandSource(secondInst,nextBlock,1,*(undefined4 *)(pass + 8));
+          IRInst__setExtraOperandSource(secondInst,firstInst,1,*(undefined4 *)(pass + 8));
           DList__unlink(secondInst);
-          Block__insertInstAfter(*(undefined4 *)(nextBlock + 0x158),nextBlock,secondInst);
+          Block__insertInstAfter(*(undefined4 *)(firstInst + 0x158),firstInst,secondInst);
           if (unsharedBWrapper != (int *)0x0) {
             DList__unlink(unsharedBWrapper);
-            Block__insertInstAfter(*(undefined4 *)(nextBlock + 0x158),nextBlock,unsharedBWrapper);
+            Block__insertInstAfter(*(undefined4 *)(firstInst + 0x158),firstInst,unsharedBWrapper);
           }
-          freeLaneMask = ~(uVar26 | secondCandidateMask) & 0xf;
+          freeLaneMask = ~(maskA | secondCandidateMask) & 0xf;
           compactToSourceLane = 0x10203;
           sourceToCompactLane = 0x10203;
-          iVar9 = IRInst__getOperandRecord(secondInst,0);
-          destSelectWord = *(int *)(iVar9 + 0x10);
+          destRecordB = IRInst__getOperandRecord(secondInst,0);
+          destSelectWord = *(int *)(destRecordB + 0x10);
           destSelectLastByte = (char)destSelectWord;
-          if ((uVar26 & secondCandidateMask) == 0) {
+          if ((maskA & secondCandidateMask) == 0) {
             *(int *)(pass + 0x278) = *(int *)(pass + 0x278) + 1;
-            IRInst__setExtraOperandSource(secondInst,nextBlock,1,*(undefined4 *)(pass + 8));
+            IRInst__setExtraOperandSource(secondInst,firstInst,1,*(undefined4 *)(pass + 8));
             operandRecord2 = IRInst__getOperandRecord(secondInst,secondInst[0x21]);
             *(undefined4 *)(operandRecord2 + 0x10) = 0x4040404;
-            loopIndexC = 0;
+            laneIdxD = 0;
             do {
-              if (((int)uVar26 >> (loopIndexC & 0x3f) & 1U) != 0) {
-                (**(code **)(*secondInst + 0x88))(secondInst,secondInst[0x21],loopIndexC,loopIndexC);
+              if (((int)maskA >> (laneIdxD & 0x3f) & 1U) != 0) {
+                (**(code **)(*secondInst + 0x88))(secondInst,secondInst[0x21],laneIdxD,laneIdxD);
               }
-              moreComponents = loopIndexC != 3;
-              loopIndexC = loopIndexC + 1;
+              moreComponents = laneIdxD != 3;
+              laneIdxD = laneIdxD + 1;
             } while (moreComponents);
           }
           else {
@@ -4551,9 +4592,9 @@ LAB_00140128:
             loopIndexD = 0;
             laneMapPtr = &sourceToCompactLane;
             *(int *)(pass + 0x278) = *(int *)(pass + 0x278) + 1;
-            uVar34 = 0;
+            zeroArg = 0;
             do {
-              if ((((int)(uVar26 & secondCandidateMask) >> (loopIndexD & 0x3f) & 1U) != 0) && ((int)nextFreeLane < 4)) {
+              if ((((int)(maskA & secondCandidateMask) >> (loopIndexD & 0x3f) & 1U) != 0) && ((int)nextFreeLane < 4)) {
                 chosenLane = nextFreeLane;
                 if (((int)freeLaneMask >> (nextFreeLane & 0x3f) & 1U) == 0) {
                   lanesLeft = 4 - nextFreeLane;
@@ -4575,17 +4616,17 @@ LAB_001405bc:
               loopIndexD = loopIndexD + 1;
             } while (moreComponents);
             secondInst[0x27] = destSelectWord;
-            operandRecord = IRInst__getOperandRecord(secondInst,secondInst[0x21]);
-            *(undefined4 *)(operandRecord + 0x10) = 0x4040404;
-            loopIndexC = 0;
+            destRecordC = IRInst__getOperandRecord(secondInst,secondInst[0x21]);
+            *(undefined4 *)(destRecordC + 0x10) = 0x4040404;
+            laneIdxE = 0;
             do {
-              if (((int)uVar26 >> (loopIndexC & 0x3f) & 1U) != 0) {
+              if (((int)maskA >> (laneIdxE & 0x3f) & 1U) != 0) {
                 (**(code **)(*secondInst + 0x88))
-                          (secondInst,secondInst[0x21],*(undefined1 *)((int)&sourceToCompactLane + loopIndexC),
-                           *(undefined1 *)((int)&sourceToCompactLane + loopIndexC));
+                          (secondInst,secondInst[0x21],*(undefined1 *)((int)&sourceToCompactLane + laneIdxE),
+                           *(undefined1 *)((int)&sourceToCompactLane + laneIdxE));
               }
-              moreComponents = loopIndexC != 3;
-              loopIndexC = loopIndexC + 1;
+              moreComponents = laneIdxE != 3;
+              laneIdxE = laneIdxE + 1;
             } while (moreComponents);
             if ((destSelectLastByte == '\0') || ((char)destSelectWord != '\0')) {
               cloneInst = (int *)0x0;
@@ -4594,13 +4635,13 @@ LAB_001405bc:
               laneMapPtr = *(undefined4 **)(pass + 8);
               sourceDef = IRInst__getOperandSource(secondInst,secondInst[0x21]);
               userVec = *(uint **)(sourceDef + 0x10);
-              userVecCount = userVec[1];
-              if (0 < (int)userVecCount) {
+              userCountF = userVec[1];
+              if (0 < (int)userCountF) {
                 loopIndexD = 0;
                 do {
                   if (loopIndexD < *userVec) {
-                    if (userVecCount <= loopIndexD) {
-                      _memset(userVecCount * 4 + userVec[2],0,(loopIndexD - userVecCount) * 4 + 4);
+                    if (userCountF <= loopIndexD) {
+                      _memset(userCountF * 4 + userVec[2],0,(loopIndexD - userCountF) * 4 + 4);
                       userVec[1] = loopIndexD + 1;
                     }
                     userSlotPtrB = (int *)(loopIndexD * 4 + userVec[2]);
@@ -4614,16 +4655,16 @@ LAB_001405bc:
                     *(int *)(sourceDef + 0x160) = *(int *)(sourceDef + 0x160) + -1;
                     break;
                   }
-                  userVecCount = userVec[1];
+                  userCountF = userVec[1];
                   loopIndexD = loopIndexD + 1;
-                } while ((int)loopIndexD < (int)userVecCount);
+                } while ((int)loopIndexD < (int)userCountF);
               }
               IRInst__setOperandSource(secondInst,secondInst[0x21],0,1,laneMapPtr);
-              iVar9 = secondInst[0x21];
-              secondInst[0x21] = iVar9 + -1;
+              lastOperandIdx = secondInst[0x21];
+              secondInst[0x21] = lastOperandIdx + -1;
               secondInst[5] = secondInst[5] & 0xfffffdff;
-              operandRecord = IRInst__getOperandRecord(secondInst,iVar9 + -1);
-              operandSelect = *(undefined4 *)(operandRecord + 0x10);
+              lastOperandRecord = IRInst__getOperandRecord(secondInst,lastOperandIdx + -1);
+              operandSelect = *(undefined4 *)(lastOperandRecord + 0x10);
               cloneInst = (int *)IRInst__clone(secondInst,*(undefined4 *)(pass + 8),0);
               arenaAt378 = *(undefined4 *)(*(int *)(pass + 8) + 0x378);
               vectorAlloc2 = (undefined4 *)Arena__alloc(arenaAt378,0x14);
@@ -4631,102 +4672,102 @@ LAB_001405bc:
               *vectorAlloc2 = arenaAt378;
               vectorAlloc2[2] = 0;
               vectorAlloc2[4] = arenaAt378;
-              uVar30 = Arena__alloc(arenaAt378,8);
-              vectorAlloc2[3] = uVar30;
+              vectorData2 = Arena__alloc(arenaAt378,8);
+              vectorAlloc2[3] = vectorData2;
               cloneInst[4] = (int)(vectorAlloc2 + 1);
               cloneInst[0x58] = *(int *)(*(int *)(*(int *)(pass + 8) + 0x6c4) + 0x478);
-              IRInst__setExtraOperandSource(secondInst,nextBlock,1,*(undefined4 *)(pass + 8));
-              operandRecord = IRInst__getOperandRecord(secondInst,secondInst[0x21]);
-              *(undefined4 *)(operandRecord + 0x10) = operandSelect;
+              IRInst__setExtraOperandSource(secondInst,firstInst,1,*(undefined4 *)(pass + 8));
+              lastOperandRecordB = IRInst__getOperandRecord(secondInst,secondInst[0x21]);
+              *(undefined4 *)(lastOperandRecordB + 0x10) = operandSelect;
               *(undefined1 *)((int)secondInst + 0x9f) = 1;
               cloneInst[0x27] = 0x1010100;
               Block__insertInstAfter(secondInst[0x56],secondInst,cloneInst);
               IRInst__setExtraOperandSource(cloneInst,secondInst,1,*(undefined4 *)(pass + 8));
-              operandRecord = IRInst__getOperandRecord(cloneInst,cloneInst[0x21]);
-              *(undefined4 *)(operandRecord + 0x10) = 0x4040404;
-              loopIndexC = 0;
+              cloneOperandRecord = IRInst__getOperandRecord(cloneInst,cloneInst[0x21]);
+              *(undefined4 *)(cloneOperandRecord + 0x10) = 0x4040404;
+              laneIdxF = 0;
               do {
-                if ((((int)secondCandidateMask >> (loopIndexC & 0x3f) & 1U) != 0) && (loopIndexC != 3)) {
-                  (**(code **)(*cloneInst + 0x88))(cloneInst,cloneInst[0x21],loopIndexC,loopIndexC);
+                if ((((int)secondCandidateMask >> (laneIdxF & 0x3f) & 1U) != 0) && (laneIdxF != 3)) {
+                  (**(code **)(*cloneInst + 0x88))(cloneInst,cloneInst[0x21],laneIdxF,laneIdxF);
                 }
-                if ((((int)uVar26 >> (loopIndexC & 0x3f) & 1U) != 0) &&
-                   (destSelectLastByte = *(char *)((int)&sourceToCompactLane + loopIndexC), destSelectLastByte != '\x03')) {
+                if ((((int)maskA >> (laneIdxF & 0x3f) & 1U) != 0) &&
+                   (destSelectLastByte = *(char *)((int)&sourceToCompactLane + laneIdxF), destSelectLastByte != '\x03')) {
                   (**(code **)(*cloneInst + 0x88))(cloneInst,cloneInst[0x21],destSelectLastByte,destSelectLastByte);
                 }
-                moreComponents = loopIndexC != 3;
-                loopIndexC = loopIndexC + 1;
+                moreComponents = laneIdxF != 3;
+                laneIdxF = laneIdxF + 1;
               } while (moreComponents);
-              srcModeSecond2 = cloneInst[0x53];
-              iVar13 = secondInst[0x26];
-              operandRecord = IRInst__getOperandRecord(cloneInst,0);
-              *(int *)(operandRecord + 0xc) = iVar13;
-              *(int *)(operandRecord + 8) = srcModeSecond2;
-              for (operandIdx = 1; iVar13 = (**(code **)(*cloneInst + 0x14))(cloneInst), operandIdx <= iVar13;
-                  operandIdx = operandIdx + 1) {
-                iVar13 = IRInst__getOperandSource(cloneInst,operandIdx);
-                userVec = *(uint **)(iVar13 + 0x10);
-                userVecCount = userVec[1];
-                if (userVecCount < *userVec) {
-                  _memset(userVecCount * 4 + userVec[2],0,4);
-                  userSlotPtr = (undefined4 *)(userVecCount * 4 + userVec[2]);
-                  userVec[1] = userVecCount + 1;
+              cloneField = cloneInst[0x53];
+              regKindWord = secondInst[0x26];
+              cloneDestRecord = IRInst__getOperandRecord(cloneInst,0);
+              *(int *)(cloneDestRecord + 0xc) = regKindWord;
+              *(int *)(cloneDestRecord + 8) = cloneField;
+              for (cloneOperandIdx = 1; operandCountB = (**(code **)(*cloneInst + 0x14))(cloneInst), cloneOperandIdx <= operandCountB;
+                  cloneOperandIdx = cloneOperandIdx + 1) {
+                sourceDefB = IRInst__getOperandSource(cloneInst,cloneOperandIdx);
+                userVec = *(uint **)(sourceDefB + 0x10);
+                userCountG = userVec[1];
+                if (userCountG < *userVec) {
+                  _memset(userCountG * 4 + userVec[2],0,4);
+                  userSlotPtr = (undefined4 *)(userCountG * 4 + userVec[2]);
+                  userVec[1] = userCountG + 1;
                 }
                 else {
-                  userSlotPtr = (undefined4 *)Vector__elementRefGrow(userVec,userVecCount);
+                  userSlotPtr = (undefined4 *)Vector__elementRefGrow(userVec,userCountG);
                 }
                 *userSlotPtr = cloneInst;
               }
             }
             firstCompactLane = compactToSourceLane & 0xff;
-            for (iVar9 = 1; iVar13 = (**(code **)(*secondInst + 0x14))(secondInst), iVar9 <= iVar13;
-                iVar9 = iVar9 + 1) {
-              iVar13 = IRInst__getOperandRecord(secondInst,iVar9);
-              srcModeSecond2 = 0;
+            for (operandIdxB = 1; operandCountC = (**(code **)(*secondInst + 0x14))(secondInst), operandIdxB <= operandCountC;
+                operandIdxB = operandIdxB + 1) {
+              operandRecordC = IRInst__getOperandRecord(secondInst,operandIdxB);
+              rewrittenLaneCount = 0;
               loopIndex = 0;
-              operandSelectWord = *(undefined4 *)(iVar13 + 0x10);
+              operandSelectWord = *(undefined4 *)(operandRecordC + 0x10);
               do {
                 if (*(char *)((int)&destSelectWord + loopIndex) == '\0') {
                   if ((cloneInst == (int *)0x0) || (loopIndex != 3)) {
-                    srcModeSecond2 = srcModeSecond2 + 1;
+                    rewrittenLaneCount = rewrittenLaneCount + 1;
                     (**(code **)(*secondInst + 0x88))
-                              (secondInst,iVar9,loopIndex,
+                              (secondInst,operandIdxB,loopIndex,
                                (uint)*(byte *)((int)&operandSelectWord +
                                               (uint)*(byte *)((int)&compactToSourceLane + loopIndex)),laneMapPtr,
-                               uVar34,(int)&sourceToCompactLane + (uint)*(byte *)((int)&compactToSourceLane + loopIndex));
+                               zeroArg,(int)&sourceToCompactLane + (uint)*(byte *)((int)&compactToSourceLane + loopIndex));
                   }
                   else {
-                    (**(code **)(*secondInst + 0x88))(secondInst,iVar9,3,4);
+                    (**(code **)(*secondInst + 0x88))(secondInst,operandIdxB,3,4);
                     (**(code **)(*cloneInst + 0x88))
-                              (cloneInst,iVar9,3,*(undefined1 *)((int)&operandSelectWord + firstCompactLane));
+                              (cloneInst,operandIdxB,3,*(undefined1 *)((int)&operandSelectWord + firstCompactLane));
                   }
                 }
                 else {
-                  (**(code **)(*secondInst + 0x88))(secondInst,iVar9,loopIndex,4);
+                  (**(code **)(*secondInst + 0x88))(secondInst,operandIdxB,loopIndex,4);
                   if (cloneInst != (int *)0x0) {
-                    (**(code **)(*cloneInst + 0x88))(cloneInst,iVar9,loopIndex,4);
+                    (**(code **)(*cloneInst + 0x88))(cloneInst,operandIdxB,loopIndex,4);
                   }
                 }
                 moreComponents = loopIndex != 3;
                 loopIndex = loopIndex + 1;
               } while (moreComponents);
-              if (srcModeSecond2 == 1) {
-                IRInst__foldMovSourceSelect(&foldedSelectFirst,secondInst,iVar9,pass);
+              if (rewrittenLaneCount == 1) {
+                IRInst__foldMovSourceSelect(&foldedSelectFirst,secondInst,operandIdxB,pass);
                 storedSelectFirst = foldedSelectFirst;
-                iVar13 = IRInst__getOperandRecord(secondInst,iVar9);
-                *(undefined4 *)(iVar13 + 0x10) = storedSelectFirst;
+                operandRecordD = IRInst__getOperandRecord(secondInst,operandIdxB);
+                *(undefined4 *)(operandRecordD + 0x10) = storedSelectFirst;
               }
               if (cloneInst != (int *)0x0) {
-                IRInst__foldMovSourceSelect(foldedSelectSecond,cloneInst,iVar9,pass);
+                IRInst__foldMovSourceSelect(foldedSelectSecond,cloneInst,operandIdxB,pass);
                 storedSelectSecond = foldedSelectSecond[0];
-                iVar13 = IRInst__getOperandRecord(cloneInst,iVar9);
-                *(undefined4 *)(iVar13 + 0x10) = storedSelectSecond;
+                operandRecordE = IRInst__getOperandRecord(cloneInst,operandIdxB);
+                *(undefined4 *)(operandRecordE + 0x10) = storedSelectSecond;
               }
             }
             secondInstUsers = (uint *)secondInst[4];
-            userVecCount = secondInstUsers[1];
-            userTopIndex = userVecCount - 1;
+            userCountH = secondInstUsers[1];
+            userTopIndex = userCountH - 1;
             if (-1 < (int)userTopIndex) {
-              iVar9 = userTopIndex * 4;
+              userByteOffset = userTopIndex * 4;
               loopIndexB = 0;
               do {
                 if (userTopIndex < *secondInstUsers) {
@@ -4735,74 +4776,74 @@ LAB_001405bc:
                     _memset(userCountB * 4 + secondInstUsers[2],0,(userTopIndex - userCountB) * 4 + 4);
                     secondInstUsers[1] = userTopIndex + 1;
                   }
-                  elementPtr = (undefined4 *)(iVar9 + secondInstUsers[2]);
+                  elementPtr = (undefined4 *)(userByteOffset + secondInstUsers[2]);
                 }
                 else {
                   elementPtr = (undefined4 *)Vector__elementRefGrow(secondInstUsers,userTopIndex);
                 }
                 userInstB = (int *)*elementPtr;
-                iVar13 = 1;
+                userOperandIdx = 1;
 LAB_00140c04:
-                srcModeSecond2 = (**(code **)(*userInstB + 0x14))(userInstB);
-                if (iVar13 <= srcModeSecond2) {
-                  operandVReg = (int *)IRInst__getOperandSource(userInstB,iVar13);
+                userOperandCount = (**(code **)(*userInstB + 0x14))(userInstB);
+                if (userOperandIdx <= userOperandCount) {
+                  operandVReg = (int *)IRInst__getOperandSource(userInstB,userOperandIdx);
                   if (operandVReg != secondInst) goto LAB_00140c00;
                   if (cloneInst != (int *)0x0) {
-                    IRInst__setOperandSource(userInstB,iVar13,cloneInst,1,*(undefined4 *)(pass + 8));
+                    IRInst__setOperandSource(userInstB,userOperandIdx,cloneInst,1,*(undefined4 *)(pass + 8));
                   }
-                  srcModeSecond2 = 0;
+                  laneIdxC = 0;
                   do {
-                    operandRecord3 = IRInst__getOperandRecord(userInstB,iVar13);
-                    remappedComponent = (uint)*(byte *)(srcModeSecond2 + operandRecord3 + 0x10);
+                    operandRecord3 = IRInst__getOperandRecord(userInstB,userOperandIdx);
+                    remappedComponent = (uint)*(byte *)(laneIdxC + operandRecord3 + 0x10);
                     if (remappedComponent != 4) {
                       (**(code **)(*userInstB + 0x88))
-                                (userInstB,iVar13,srcModeSecond2,*(undefined1 *)((int)&sourceToCompactLane + remappedComponent));
+                                (userInstB,userOperandIdx,laneIdxC,*(undefined1 *)((int)&sourceToCompactLane + remappedComponent));
                     }
-                    moreComponents = srcModeSecond2 != 3;
-                    srcModeSecond2 = srcModeSecond2 + 1;
+                    moreComponents = laneIdxC != 3;
+                    laneIdxC = laneIdxC + 1;
                   } while (moreComponents);
                 }
                 loopIndexB = loopIndexB + 1;
                 userTopIndex = userTopIndex - 1;
-                iVar9 = iVar9 + -4;
-                if (userVecCount == loopIndexB) break;
+                userByteOffset = userByteOffset + -4;
+                if (userCountH == loopIndexB) break;
                 secondInstUsers = (uint *)secondInst[4];
               } while( true );
             }
-            firstInstUsers = *(uint **)(nextBlock + 0x10);
-            userVecCount = firstInstUsers[1];
-            uVar26 = userVecCount - 1;
-            if (-1 < (int)uVar26) {
-              iVar9 = uVar26 * 4;
+            firstInstUsers = *(uint **)(firstInst + 0x10);
+            userCountI = firstInstUsers[1];
+            userTopIndexB = userCountI - 1;
+            if (-1 < (int)userTopIndexB) {
+              userByteOffsetB = userTopIndexB * 4;
               loopIndexB = 0;
               do {
-                if (uVar26 < *firstInstUsers) {
+                if (userTopIndexB < *firstInstUsers) {
                   userCountB = firstInstUsers[1];
-                  if (userCountB <= uVar26) {
-                    _memset(userCountB * 4 + firstInstUsers[2],0,(uVar26 - userCountB) * 4 + 4);
-                    firstInstUsers[1] = uVar26 + 1;
+                  if (userCountB <= userTopIndexB) {
+                    _memset(userCountB * 4 + firstInstUsers[2],0,(userTopIndexB - userCountB) * 4 + 4);
+                    firstInstUsers[1] = userTopIndexB + 1;
                   }
-                  elementPtr = (undefined4 *)(iVar9 + firstInstUsers[2]);
+                  elementPtr = (undefined4 *)(userByteOffsetB + firstInstUsers[2]);
                 }
                 else {
-                  elementPtr = (undefined4 *)Vector__elementRefGrow(firstInstUsers,uVar26);
+                  elementPtr = (undefined4 *)Vector__elementRefGrow(firstInstUsers,userTopIndexB);
                 }
                 secondInstUser = (int *)*elementPtr;
-                for (iVar13 = 1; srcModeSecond2 = (**(code **)(*secondInstUser + 0x14))(secondInstUser), iVar13 <= srcModeSecond2;
-                    iVar13 = iVar13 + 1) {
-                  srcModeSecond2 = IRInst__getOperandSource(secondInstUser,iVar13);
-                  if (nextBlock == srcModeSecond2) {
+                for (userOperandIdxB = 1; userOperandCountB = (**(code **)(*secondInstUser + 0x14))(secondInstUser), userOperandIdxB <= userOperandCountB;
+                    userOperandIdxB = userOperandIdxB + 1) {
+                  userSource = IRInst__getOperandSource(secondInstUser,userOperandIdxB);
+                  if (firstInst == userSource) {
                     if (cloneInst != (int *)0x0) {
-                      IRInst__setOperandSource(secondInstUser,iVar13,cloneInst,1,*(undefined4 *)(pass + 8));
+                      IRInst__setOperandSource(secondInstUser,userOperandIdxB,cloneInst,1,*(undefined4 *)(pass + 8));
                     }
                     break;
                   }
                 }
                 loopIndexB = loopIndexB + 1;
-                uVar26 = uVar26 - 1;
-                iVar9 = iVar9 + -4;
-                if (userVecCount == loopIndexB) break;
-                firstInstUsers = *(uint **)(nextBlock + 0x10);
+                userTopIndexB = userTopIndexB - 1;
+                userByteOffsetB = userByteOffsetB + -4;
+                if (userCountI == loopIndexB) break;
+                firstInstUsers = *(uint **)(firstInst + 0x10);
               } while( true );
             }
           }
@@ -4810,7 +4851,7 @@ LAB_00140d38:
           candidateCount = allocation[2];
         }
 LAB_00140d3c:
-        uVar32 = nextCandidateIndex;
+        pairScanIdx = nextCandidateIndex;
       } while (nextCandidateIndex < candidateCount);
     }
     currentBlock = *(int *)(currentBlock + 8);
@@ -4818,13 +4859,13 @@ LAB_00140d3c:
   } while( true );
 LAB_00140dc4:
   candidateCount = allocation[2];
-  iVar9 = iVar9 + 4;
-  pastLastCandidate = candidateCount <= uVar32;
-  uVar32 = uVar32 + 1;
+  nextByteOffset = nextByteOffset + 4;
+  pastLastCandidate = candidateCount <= pairScanIdx;
+  pairScanIdx = pairScanIdx + 1;
   if (pastLastCandidate) goto LAB_00140d3c;
   goto LAB_00140128;
 LAB_00140c00:
-  iVar13 = iVar13 + 1;
+  userOperandIdx = userOperandIdx + 1;
   goto LAB_00140c04;
 }
 #undef vecCapacity

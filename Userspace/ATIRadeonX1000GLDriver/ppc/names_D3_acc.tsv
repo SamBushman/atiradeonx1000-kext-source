@@ -298,13 +298,6 @@ use	FUN_0013f3d4	iVar8	sourceDef3	CONFIRMED	IRInst__getOperandSource: the value/
 use	FUN_0013f3d4	iVar8	sourceDef3	CONFIRMED	IRInst__getOperandSource: the value/instruction feeding the operand (record +4)	^\s*if\ \(iVar7\ !=\ iVar8\)\ \{$@1	+0	all	all
 use	FUN_0013f3d4	uVar14	sourceDef4	CONFIRMED	IRInst__getOperandSource: the value/instruction feeding the operand (record +4)	^\s*uVar14\ =\ FUN_00105594\(piVar4,piVar4\[0x21\]\);$@1	+1	all	all
 use	FUN_0013fc38	iVar21	operandRecord3	CONFIRMED	IRInst__getOperandRecord: address of the 0x18-byte operand record	^\s*iVar21\ =\ FUN_001054ec\(piVar15,iVar13\);$@1	+1	all	all
-use	FUN_0013fc38	iVar4	operandRecord2	CONFIRMED	IRInst__getOperandRecord: address of the 0x18-byte operand record	^\s*iVar4\ =\ FUN_001054ec\(piVar11,0\);$@1	+0	all	all
-use	FUN_0013fc38	iVar4	operandRecord2	CONFIRMED	IRInst__getOperandRecord: address of the 0x18-byte operand record	^\s*iVar4\ =\ \*\(int\ \*\)\(iVar4\ \+\ 0x10\);$@1	+0	rhs	rhs
-use	FUN_0013fc38	iVar4	operandRecord2	CONFIRMED	IRInst__getOperandRecord: address of the 0x18-byte operand record	^\s*iVar4\ =\ FUN_001054ec\(piVar11,piVar11\[0x21\]\);$@1	+1	all	all
-use	FUN_0013fc38	iVar9	operandRecord	CONFIRMED	IRInst__getOperandRecord: address of the 0x18-byte operand record	^\s*iVar9\ =\ FUN_001054ec\(piVar11,piVar11\[0x21\]\);$@1	+1	all	all
-use	FUN_0013fc38	iVar9	sourceDef	CONFIRMED	IRInst__getOperandSource: the value/instruction feeding the operand (record +4)	^\s*iVar9\ =\ FUN_00105594\(piVar11,piVar11\[0x21\]\);$@1	+19	all	all
-use	FUN_0013fc38	iVar9	operandRecord	CONFIRMED	IRInst__getOperandRecord: address of the 0x18-byte operand record	^\s*iVar9\ =\ FUN_001054ec\(piVar11,iVar9\ \+\ \-1\);$@1	+0	lhs	lhs
-use	FUN_0013fc38	iVar9	operandRecord	CONFIRMED	IRInst__getOperandRecord: address of the 0x18-byte operand record	^\s*uVar33\ =\ \*\(undefined4\ \*\)\(iVar9\ \+\ 0x10\);$@1	+37	all	all
 use	FUN_00141100	iVar1	sourceDef	CONFIRMED	IRInst__getOperandSource: the value/instruction feeding the operand (record +4)	^\s*iVar1\ =\ FUN_00105594\(param_2,iVar4\);$@1	+2	all	all
 use	FUN_00141100	iVar1	operandRecord	CONFIRMED	IRInst__getOperandRecord: address of the 0x18-byte operand record	^\s*iVar1\ =\ FUN_001054ec\(param_2,iVar4\);$@1	+3	all	all
 use	FUN_00141458	iVar4	operandRecord2	CONFIRMED	IRInst__getOperandRecord: address of the 0x18-byte operand record	^\s*iVar4\ =\ FUN_001054ec\(param_2,0\);$@1	+1	all	all

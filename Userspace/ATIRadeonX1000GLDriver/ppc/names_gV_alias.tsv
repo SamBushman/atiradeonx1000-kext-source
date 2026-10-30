@@ -228,15 +228,6 @@ use	FUN_0013da3c	puVar9	allocation	INFERRED	result of FUN_00193e18; *allocation 
 use	FUN_0013da3c	puVar9	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1	^\s*puVar9\[3\]\ =\ uVar19;$@2	+1
 use	FUN_0013da3c	puVar9	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1	^\s*puVar9\ =\ \(undefined4\ \*\)FUN_00193e18\(uVar19,0x14\);$@3	+5
 use	FUN_0013da3c	puVar9	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1	^\s*puVar9\[3\]\ =\ uVar19;$@3	+2
-use	FUN_0013fc38	uVar34	arena	INFERRED	compiler arena (before the allocation)	^\s*uVar34\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x378\);$	+2
-use	FUN_0013fc38	uVar34	arena	INFERRED	compiler arena (before the allocation)	^\s*\*puVar7\ =\ uVar34;$	+1
-use	FUN_0013fc38	uVar34	arena	INFERRED	compiler arena (before the allocation)	^\s*puVar7\[4\]\ =\ uVar34;$	+1
-use	FUN_0013fc38	uVar34	arena	INFERRED	arena argument of the data-buffer allocation	^\s*uVar34\ =\ FUN_00193e18\(uVar34,8\);$	+1	rhs
-use	FUN_0013fc38	uVar34	vectorData	INFERRED	result of the 8-byte bump allocation: data pointer of the new vector	^\s*uVar34\ =\ FUN_00193e18\(uVar34,8\);$	+2	lhs
-use	FUN_0013fc38	uVar34	arena	INFERRED	compiler arena (before the allocation)	^\s*uVar34\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x378\);$@2	+3
-use	FUN_0013fc38	uVar34	arena	INFERRED	compiler arena (before the allocation)	^\s*puVar8\[4\]\ =\ uVar34;$	+1
-use	FUN_0013fc38	uVar34	arena	INFERRED	arena argument of the data-buffer allocation	^\s*uVar34\ =\ FUN_00193e18\(uVar34,8\);$@2	+1	rhs
-use	FUN_0013fc38	uVar34	vectorData	INFERRED	result of the 8-byte bump allocation: data pointer of the new vector	^\s*uVar34\ =\ FUN_00193e18\(uVar34,8\);$@2	+2	lhs
 use	HwLimits__buildInterferenceGraph	uVar18	arena	INFERRED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object	^\s*uVar18\ =\ \*\(undefined4\ \*\)\(param_6\ \+\ COMP_arenaB\);$	+1
 use	HwLimits__buildInterferenceGraph	uVar18	arena	INFERRED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object	^\s*puVar6\ =\ \(undefined4\ \*\)FUN_00193e18\(uVar18,uVar22\ \*\ 4\ \+\ 0xc\);$	+1
 use	HwLimits__buildInterferenceGraph	uVar18	arena	INFERRED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object	^\s*\*puVar6\ =\ uVar18;$	+1
