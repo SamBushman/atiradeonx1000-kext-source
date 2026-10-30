@@ -1,0 +1,17 @@
+func	FUN_00130478	RegAlloc__testBit42c	INFERRED	tests bit N of the bitmap at allocator+0x42c (data at +8)
+func	FUN_00130bd4	RegAlloc__clearBit430	INFERRED	clears bit N of the bitmap at allocator+0x430
+func	FUN_00130958	BitSet__testRegisterLane_130958	INFERRED	same body as BitSet__testRegisterLane: bit registerIndex*4+lane
+func	FUN_0010e40c	Lane__remapValue	INFERRED	kind 0x16/0x17 remap of values 0/1
+func	FUN_00130728	IRInst__chainLast	INFERRED	follows the chain from inst and returns the last instruction
+func	FUN_001307f8	IRInst__advanceToChainEnd	INFERRED	skips forward along +8 links by vslot-query rules, returns the end instruction
+func	FUN_00130a08	IRInst__findChainNodeById	INFERRED	walks +4 links from the chain end while vslot 0x74 true; matches node[0x30]+0x13c with id
+func	FUN_0010e368	RegKind__laneSourceCount	INFERRED	returns 1/2/3 from RegKind__vectorWidthKind
+func	FUN_00135110	InterferenceNode__ctor_135110	INFERRED	initialises node record: id, class, empty neighbour list allocated from compiler arenaB, alias table slot
+func	FUN_001351c4	InterferenceNode__ctor_1351c4	INFERRED	identical body to InterferenceNode__ctor_135110
+func	FUN_0010e814	LaneInfo__ctor_10e814	INFERRED	stores source, lane source count, clears 4 lane words
+func	FUN_0010e7b8	LaneInfo__ctor_10e7b8	INFERRED	identical body to LaneInfo__ctor_10e814
+func	FUN_0012740c	VRegPool__destroyEntries	INFERRED	iterates the +4 hash table calling vslot 1 on every entry
+func	FUN_0010e530	Index__scaleForMode	INFERRED	mode 6 -> value*2, mode 7 -> value*2+1, else value
+func	FUN_00137e98	IRInst__chainContainsOperandSource	INFERRED	walks +4 links while flags bit 4; true when the operand source vreg is found
+func	FUN_0012b248	Program__emitMovFromField8c	INFERRED	creates MOV (0x31) to a fresh negative vreg sourcing owner+0x8c, appended to block
+func	FUN_0012b2d8	Program__emitMovFromFieldA4	INFERRED	creates MOV (0x31) with dest id param, sourcing owner+0xa4, appended to block

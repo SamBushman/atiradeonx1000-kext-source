@@ -331,7 +331,7 @@ int FUN_00173af8(ctx, param_2)
   undefined4 local_38 [9];
   
   if ((*(int *)(*(int *)(ctx + 0xb0) + 0x120) != 0) &&
-     (loopIndex = FUN_0011379c(*(undefined4 *)(ctx + 0x238),*(int *)(ctx + 0xb0)), loopIndex != 0))
+     (loopIndex = OpcodeTraits__flag1WithoutFlag7(*(undefined4 *)(ctx + 0x238),*(int *)(ctx + 0xb0)), loopIndex != 0))
   {
     loopIndex = 0;
     do {
@@ -1770,7 +1770,7 @@ LAB_00175c7c:
         }
         loopRemaining = Compiler__isOptionEnabled(valueKey[0x8e],0x30);
         if (((loopRemaining == 0) || (loopIndex != 3)) &&
-           (loopRemaining = FUN_00113734(valueKey[0x8e],valueKey[0x2c],piVar5,in_r6,in_r7,in_r8,iVar6),
+           (loopRemaining = OpcodeTraits__instFlagBit2_113734(valueKey[0x8e],valueKey[0x2c],piVar5,in_r6,in_r7,in_r8,iVar6),
            loopRemaining == 0)) {
           *(int *)(*(int *)(valueKey[0x8e] + 0x6c4) + 0xa8) =
                *(int *)(*(int *)(valueKey[0x8e] + 0x6c4) + 0xa8) + 1;

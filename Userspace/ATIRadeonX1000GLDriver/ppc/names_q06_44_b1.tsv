@@ -1,0 +1,28 @@
+local	FUN_00134de8	param_1	allocator	INFERRED	+0x30 flags, +0x458 alias table
+local	FUN_00134de8	iVar1	query	INFERRED	vslot 0x50 / helper results
+local	BitSet__testRegisterLane	param_1	bitSet	INFERRED	bitmap, data at +8
+local	BitSet__testRegisterLane	param_2	registerIndex	INFERRED	bit = registerIndex*4+lane
+local	BitSet__testRegisterLane	param_3	lane	INFERRED	component 0..3
+local	BitSet__testRegisterLane	uVar1	bitIndex	INFERRED	registerIndex*4+lane
+local	ConstKey__compare2	param_1	keyA	INFERRED	compared field by field with keyB
+local	ConstKey__compare2	param_2	keyB	INFERRED	compared field by field with keyA
+local	ConstKey__compare3	param_1	keyA	INFERRED	compared field by field with keyB
+local	ConstKey__compare3	param_2	keyB	INFERRED	compared field by field with keyA
+local	FUN_0010e7b8	param_1	laneInfo	INFERRED	record: +0 source, +0x14 zero, +0x18 count, 4 lane words cleared
+local	FUN_0010e7b8	param_2	source	INFERRED	stored at word 0; +0x13c passed to FUN_0010e368
+local	FUN_00130e68	param_1	inst	INFERRED	vslot 0x28 queried, +0x88 record opcode compared with 0x93
+local	FUN_00130e68	iVar1	query28	INFERRED	vslot 0x28 result
+local	FUN_00130e68	uVar2	result	INFERRED	returned 0/1
+local	IRMix__ctor_10a140	uVar1	laneDefaultWord	INFERRED	DAT_001af9c4 stored in word 0x2d of each of 4 lane records
+local	IRMix__ctor_10a140	uVar2	defaultWord27	INFERRED	DAT_001af9c8 stored in word 0x27
+local	IRMix__ctor_10a140	iVar3	remaining	INFERRED	lane records left from 4
+local	IRMix__ctor_10a1c0	uVar1	laneDefaultWord	INFERRED	DAT_001af9c4 stored in word 0x2d of each of 4 lane records
+local	IRMix__ctor_10a1c0	uVar2	defaultWord27	INFERRED	DAT_001af9c8 stored in word 0x27
+local	IRMix__ctor_10a1c0	iVar3	remaining	INFERRED	lane records left from 4
+local	FudoChip__ctor_10e1d8	iVar2	allocated	INFERRED	FudoVs / FudoPs object allocated via Compiler__allocateOrFail
+local	FudoChip__ctor_10e1d8	puVar3	baseVtable	INFERRED	PTR_DAT_001e8c74+8 stored first, overwritten by the derived vtable
+local	FudoChip__ctor_10e2a0	iVar2	allocated	INFERRED	FudoVs / FudoPs object allocated via Compiler__allocateOrFail
+local	FudoChip__ctor_10e2a0	puVar3	baseVtable	INFERRED	PTR_DAT_001e8c74+8 stored first, overwritten by the derived vtable
+local	OpcodeTraits__getRecordTail	param_1	opcode	INFERRED	index into 0x38-byte opcode records
+local	OpcodeTraits__getRecordTail	param_2	compiler	INFERRED	+0x30c backend vslot 0x16c returns the record table
+local	OpcodeTraits__getRecordTail	iVar1	opcodeFlagTable	INFERRED	backend vslot 0x16c result

@@ -1905,7 +1905,7 @@ int gld_freePointMaskCache(glContext)
   iVar1 = *(int *)(glContext + 0x2764);
   while (iVar1 != 0) {
     if (*(int *)(iVar1 + 0xbc) != 0) {
-      FUN_00030a50(glContext,*(undefined4 *)(*(int *)(iVar1 + 0xbc) + 0x7c));
+      gld_deleteTextureForStream(glContext,*(undefined4 *)(*(int *)(iVar1 + 0xbc) + 0x7c));
     }
     iVar2 = *(int *)(iVar1 + 0x138);
     (**(code **)(glContext + 0x18))(iVar1);
@@ -1925,7 +1925,7 @@ int gld_invalidateCachedPointMasks(glContext)
   
   for (glContextPtr2764 = *(int *)(glContext + 0x2764); glContextPtr2764 != 0; glContextPtr2764 = *(int *)(glContextPtr2764 + 0x138)) {
     if ((*(int *)(glContextPtr2764 + 0xbc) != 0) && (-1 < *(int *)(glContext + 0x276c))) {
-      FUN_000309c0(glContext,0,*(int *)(glContext + 0x276c));
+      gld_bindUnitObject(glContext,0,*(int *)(glContext + 0x276c));
     }
   }
   *(uint *)(glContext + 0x38) = *(uint *)(glContext + 0x38) | 0x200;
@@ -2002,7 +2002,7 @@ int gld_refreshActivePointMask(glContext)
   int glContext;
 {
   if (*(int *)(glContext + 0x2768) != 0) {
-    FUN_000309c0(glContext,*(undefined4 *)(*(int *)(*(int *)(glContext + 0x2768) + 0xbc) + 0x7c),
+    gld_bindUnitObject(glContext,*(undefined4 *)(*(int *)(*(int *)(glContext + 0x2768) + 0xbc) + 0x7c),
                  *(undefined4 *)(glContext + 0x276c));
     *(uint *)(glContext + 0x38) = *(uint *)(glContext + 0x38) | 0x200;
     *(ushort *)(glContext + 0x32) =
@@ -2045,7 +2045,7 @@ int gld_computePointSizePixels(glContext, unusedArgR4, staleArgR5, staleArgR6, s
   glContextWord8 = *(int *)(glContext + 8);
   engineCaps = *(int *)(glContextPtr4 + 0x10);
   if (((((unsigned char *)0x00002e2d)[engineCaps] == '\0') || ((*(uint *)(glContext + 0x44) & 0x20000) != 0)) ||
-     (glContextPtr4 = FUN_0001a010(glContextPtr4,*(undefined4 *)(glContextPtr4 + 0x26a0),staleArgR5,staleArgR6,staleArgR7,staleArgR8,
+     (glContextPtr4 = gld_needsMultisampleResolve(glContextPtr4,*(undefined4 *)(glContextPtr4 + 0x26a0),staleArgR5,staleArgR6,staleArgR7,staleArgR8,
                            staleArgR9), glContextPtr4 != 0)) {
     pixelSize = *(uint *)(((unsigned char *)0x000013e0) + glContext);
     pointSizeRequested = *(float *)(((unsigned char *)0x00002e20) + engineCaps);
@@ -2266,7 +2266,7 @@ int gld_buildSmoothPointMask(glContext, unusedArgR4, staleArgR5, staleArgR6, sta
   if ((glContextWord44 & 0x60020000) != 0x40000000) {
     glContextPtr4_2 = *(int *)(glContext + 4);
     if ((((unsigned char *)0x00002e2d)[*(int *)(glContextPtr4_2 + 0x10)] != '\0') && ((glContextWord44 & 0x20000) == 0)) {
-      glContextPtr4_2 = FUN_0001a010(glContextPtr4_2,*(undefined4 *)(glContextPtr4_2 + 0x26a0),staleArgR5,staleArgR6,staleArgR7,staleArgR8,
+      glContextPtr4_2 = gld_needsMultisampleResolve(glContextPtr4_2,*(undefined4 *)(glContextPtr4_2 + 0x26a0),staleArgR5,staleArgR6,staleArgR7,staleArgR8,
                             glContextWord44);
       if (glContextPtr4_2 == 0) goto LAB_000a4a50;
       glContextPtr4_2 = *(int *)(glContext + 4);
@@ -2333,7 +2333,7 @@ LAB_000a4a50:
   engineState = *(int *)(glContextPtr4_3 + 0x10);
   pointModeBits = *(uint *)(glContext + 0x44) & 0x60020000 ^ 0x40000000;
   negPointMode = (char *)-pointModeBits;
-  glContextPtr4_3 = FUN_0001a010(glContextPtr4_3,*(undefined4 *)(glContextPtr4_3 + 0x26a0),staleArgR5,staleArgR6,negPointMode,dirtyUnitMask,
+  glContextPtr4_3 = gld_needsMultisampleResolve(glContextPtr4_3,*(undefined4 *)(glContextPtr4_3 + 0x26a0),staleArgR5,staleArgR6,negPointMode,dirtyUnitMask,
                         glContextWord38);
   callResultPair = ((int (*)())gld_scalePointSizeToPixels)(glContext,(uint)(glContextPtr4_3 == 0));
   calleeResultLow = (undefined4)callResultPair;
@@ -2345,7 +2345,7 @@ LAB_000a4c38:
     sizeAttenuated = '\0';
   }
   else {
-    callResultPair2 = FUN_0001a010(glContextPtr4_4,*(undefined4 *)(glContextPtr4_4 + 0x26a0),staleArgR5,staleArgR6,negPointMode,dirtyUnitMask,
+    callResultPair2 = gld_needsMultisampleResolve(glContextPtr4_4,*(undefined4 *)(glContextPtr4_4 + 0x26a0),staleArgR5,staleArgR6,negPointMode,dirtyUnitMask,
                           engineState3);
     calleeResultLow = (undefined4)callResultPair2;
     if ((int)((ulonglong)callResultPair2 >> 0x20) != 0) {
@@ -2437,7 +2437,7 @@ LAB_000a4e90:
   cacheEntry = (char *)(**(code **)(glContext + 0x10))(1,0x13c);
   if (cacheEntry == (char *)0x0) goto LAB_000a52dc;
   *cacheEntry = (*(uint *)(glContext + 0x44) & 0x60020000) == 0x40000000;
-  callResultPair = FUN_0001a010(*(int *)(glContext + 4),*(undefined4 *)(*(int *)(glContext + 4) + 0x26a0),
+  callResultPair = gld_needsMultisampleResolve(*(int *)(glContext + 4),*(undefined4 *)(*(int *)(glContext + 4) + 0x26a0),
                         staleArgR5,staleArgR6,negPointMode,dirtyUnitMask,engineState3);
   calleeResultLow = (undefined4)callResultPair;
   cacheEntry[1] = (int)((ulonglong)callResultPair >> 0x20) == 0;
@@ -2449,7 +2449,7 @@ LAB_000a4f50:
     sizeAttenuated = '\0';
   }
   else {
-    callResultPair = FUN_0001a010(glContextPtr4,*(undefined4 *)(glContextPtr4 + 0x26a0),staleArgR5,staleArgR6,0,dirtyUnitMask,engineState3);
+    callResultPair = gld_needsMultisampleResolve(glContextPtr4,*(undefined4 *)(glContextPtr4 + 0x26a0),staleArgR5,staleArgR6,0,dirtyUnitMask,engineState3);
     calleeResultLow = (undefined4)callResultPair;
     sizeAttenuated = '\x01';
     if ((int)((ulonglong)callResultPair >> 0x20) != 0) goto LAB_000a4f50;
@@ -2565,12 +2565,12 @@ LAB_000a5188:
     textureFlags = 1;
   }
   oneValue = (char *)0x1;
-  callResultPair = FUN_00030c50(glContext,calleeResultLow,entryFlag15,levelCountClamped,0x1909,1,((unsigned char *)0x00001401U),textureFlags);
+  callResultPair = gld_createInternalTexture(glContext,calleeResultLow,entryFlag15,levelCountClamped,0x1909,1,((unsigned char *)0x00001401U),textureFlags);
   maskTexture = (int)((ulonglong)callResultPair >> 0x20);
   allocResultLow = (uint)callResultPair;
   maskLevelBytes = 0;
   if (maskTexture != 0) {
-    FUN_0002ddf0(glContextWord4,maskTexture);
+    gld_buildTextureHardwareState(glContextWord4,maskTexture);
     maskLevel = *(int *)(maskTexture + 0x30);
     maskLevelBytes = maskTexture + 0x3c;
     oneValue = (char *)0x2600;
@@ -2902,7 +2902,7 @@ LAB_000a58ec:
 LAB_000a59f4:
       cacheEntryPtrbc = *(int *)(cacheEntry + 0xbc);
     }
-    uploadResult = FUN_000341a0(glContext,*(undefined4 *)(cacheEntryPtrbc + 0x7c),*(undefined4 *)(glContext + 0x276c),
+    uploadResult = gld_makeTextureResidentOrDelete(glContext,*(undefined4 *)(cacheEntryPtrbc + 0x7c),*(undefined4 *)(glContext + 0x276c),
                           levelCountClamped,entryWord14High,oneValue);
     if (uploadResult != 0) {
       levelFormat = (uint)*(byte *)(*(int *)(cacheEntry + 0xbc) + 0x31);
@@ -3608,8 +3608,8 @@ int gld_emitInternalViewportPacket(glContext, dirtyMask)
   return;
 }
 
-/* gld_clearBuffers @ 0xa6cb0 (656 bytes) */
-int gld_clearBuffers(glContext, clearMask)
+/* gld_clearStreamBuffers @ 0xa6cb0 (656 bytes) */
+int gld_clearStreamBuffers(glContext, clearMask)
   int glContext;
   uint clearMask;
 {

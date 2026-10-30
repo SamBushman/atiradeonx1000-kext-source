@@ -1,0 +1,69 @@
+local	OpcodeTraits__flagBit0	iVar1	opcodeFlagTable	INFERRED	backend vslot 0x16c result (0x38-byte opcode record table)
+local	OpcodeTraits__flagBit2	iVar1	opcodeFlagTable	INFERRED	backend vslot 0x16c result (0x38-byte opcode record table)
+local	OpcodeTraits__flagBit3	iVar1	opcodeFlagTable	INFERRED	backend vslot 0x16c result (0x38-byte opcode record table)
+local	OpcodeTraits__flagBit6	iVar1	opcodeFlagTable	INFERRED	backend vslot 0x16c result (0x38-byte opcode record table)
+local	OpcodeTraits__flagBit7	iVar1	opcodeFlagTable	INFERRED	backend vslot 0x16c result (0x38-byte opcode record table)
+local	OpcodeTraits__flagBit8	iVar1	opcodeFlagTable	INFERRED	backend vslot 0x16c result (0x38-byte opcode record table)
+local	OpcodeTraits__flagBit9	iVar1	opcodeFlagTable	INFERRED	backend vslot 0x16c result (0x38-byte opcode record table)
+local	OpcodeTraits__flagBit10	iVar1	opcodeFlagTable	INFERRED	backend vslot 0x16c result (0x38-byte opcode record table)
+local	OpcodeTraits__flagBit12	iVar1	opcodeFlagTable	INFERRED	backend vslot 0x16c result (0x38-byte opcode record table)
+local	OpcodeTraits__flagBit13	iVar1	opcodeFlagTable	INFERRED	backend vslot 0x16c result (0x38-byte opcode record table)
+local	OpcodeTraits__getField4	iVar1	opcodeFlagTable	INFERRED	backend vslot 0x16c result (0x38-byte opcode record table)
+local	OpcodeTraits__getInstClass	iVar1	opcodeFlagTable	INFERRED	backend vslot 0x16c result (0x38-byte opcode record table)
+local	OpcodeTraits__getFieldC	iVar1	opcodeFlagTable	INFERRED	backend vslot 0x16c result (0x38-byte opcode record table)
+local	OpcodeTraits__getField34	iVar1	opcodeFlagTable	INFERRED	backend vslot 0x16c result (0x38-byte opcode record table)
+local	Program__isPreassignedHwReg	iVar1	allowedResult	INFERRED	Program__isHwRegAllowed result
+local	RegKind__flagBit7	param_1	regKind	INFERRED	register kind index
+local	RegKind__flagBit6	param_1	regKind	INFERRED	register kind index
+local	RegKind__flagBit1	param_1	regKind	INFERRED	register kind index
+local	RegKind__flagBit9	param_1	regKind	INFERRED	register kind index
+local	RegKind__byte4	param_1	regKind	INFERRED	register kind index
+local	Value__isBelow8	param_1	value	INFERRED	argument tested/narrowed
+local	Value__isBelow7	param_1	value	INFERRED	argument tested/narrowed
+local	Value__lowHalfword	param_1	value	INFERRED	argument tested/narrowed
+local	Table1ea904__hasFlag0x11	param_1	rowIndex	INFERRED	row of the 0x10-stride table at DAT_001ea904
+local	Record__field98IsBelow2	param_1	record	INFERRED	record whose +0x98 is tested
+local	Object__sumWords4And8	param_1	object	INFERRED	words +4 and +8 summed
+local	Mask__countSetBits4	param_1	mask	INFERRED	low 4 bits counted
+local	NeighbourList__free_135010	param_1	neighbourList	INFERRED	list whose +8 chunk chain and +0x10 side table are freed
+local	BitSet__testAnyLane	param_2	registerIndex	INFERRED	register whose 4 lane bits are tested
+local	IRInst__findLaneDefinition	param_2	lane	INFERRED	lane whose defining instruction is searched
+local	ConstKey__lanes1	param_1	key	INFERRED	constant key record whose lane words are summed
+local	ConstKey__lanes2	param_1	key	INFERRED	constant key record whose lane words are summed
+local	ConstKey__lanes4	param_1	key	INFERRED	constant key record whose lane words are summed
+local	InterferenceNode__getSpillSlot	param_1	node	INFERRED	node whose +0x14 spill slot is accessed
+local	InterferenceNode__setSpillSlot	param_1	node	INFERRED	node whose +0x14 spill slot is accessed
+local	Program__hasKillTexture	param_1	program	INFERRED	program whose +0x98 instruction list is scanned for opcode 0x77
+local	KhanPs__ctor_128fd0	param_3	createSchedModels	INFERRED	when nonzero the constructor also calls createSchedModels
+local	KhanPs__ctor_129130	param_3	createSchedModels	INFERRED	when nonzero the constructor also calls createSchedModels
+local	KhanVs__ctor_12a578	param_3	createSchedModels	INFERRED	when nonzero the constructor also calls createSchedModels
+local	KhanVs__ctor_12a6c0	param_3	createSchedModels	INFERRED	when nonzero the constructor also calls createSchedModels
+local	FudoVs__ctor_12a808	param_3	createSchedModels	INFERRED	when nonzero the constructor also calls createSchedModels
+local	FudoVs__ctor_12a8bc	param_3	createSchedModels	INFERRED	when nonzero the constructor also calls createSchedModels
+local	LoopInfo__matchCounterInit	local_28	operandSwizzleBytes	INFERRED	operand +0x10 swizzle word read bytewise by the counter lane
+local	IRInst__laneWrittenInChain	param_2	lane	INFERRED	lane whose write-mask byte is tested
+local	Program__assignVectorSlot	param_2	block	INFERRED	block whose +0x150 slot index is set
+local	OpcodeTraits__flag1WithoutFlag7	param_2	inst	INFERRED	instruction whose +0x88 record opcode indexes the table
+local	Program__mergeBlockWithSuccessor	param_1	program	INFERRED	program owning the blocks
+local	Program__assignOutputExportSlots	param_3	unusedArg3	INFERRED	unused argument
+local	Program__renumberExportInsts	param_2	unusedArg2	INFERRED	unused argument
+local	VRegPool__constructByKind	param_1	arg0	INFERRED	forwarded to the per-kind constructor
+local	KhanPs__vslot62_lookupTableEntry	param_2	entryIndex	INFERRED	index into the table at PTR_PTR_001e910c
+local	storeAfterLocate	param_2	value	INFERRED	stored in the located neighbour slot
+local	IRCmp2__ctor_1080e0	param_2	unusedArg2	INFERRED	unused constructor argument
+local	IRLoopStart__ctor_10a474	param_2	unusedArg2	INFERRED	unused constructor argument
+local	IRLoopStart__ctor_10a50c	param_2	unusedArg2	INFERRED	unused constructor argument
+local	IRCmp1S__ctor_10a620	param_2	unusedArg2	INFERRED	unused constructor argument
+local	IRCmp1S__ctor_10a6bc	param_2	unusedArg2	INFERRED	unused constructor argument
+local	IRInst__createCompareConstInst	param_4	unusedArg4	INFERRED	unused argument
+local	tryOutputScaleExponent	param_1	unusedArg1	INFERRED	unused argument
+local	IRInst__newOpcode8c	uVar3	defaultSwizzle	INFERRED	UNK_001af9d4 stored in operand 1 +0x10
+local	KhanVs__vslot76_getBindingLimits	uVar1	limit	INFERRED	backend vslot 0x138/0x140 results stored in outLimits
+local	KhanVs__vslot77_getBindingLimits	uVar1	limit	INFERRED	backend vslot results stored in outLimits
+local	KhanPs__vslot76_getBindingLimit	uVar1	limit	INFERRED	backend vslot result
+local	IRInst__swapCompareOperands	uVar1	branchFlags	INFERRED	inst +0xb8 flags used for the modifier bit
+local	RegAlloc__cloneSourceDefAfter	uVar1	newTempId	INFERRED	RegAlloc__nextTempId result used as the clone destination
+local	RegAlloc__nextTempId	iVar1	tempId	INFERRED	incremented compiler+0x3c4 counter
+local	IRInst__chainLastOfPredecessor	iVar1	chainNode	INFERRED	chain end found first
+local	IRInst__chainEndNext	iVar1	chainEnd	INFERRED	IRInst__advanceToChainEnd result
+local	IRInst__cloneIfPresub	puVar3	vectorAlloc	INFERRED	allocation of the user vector stored at result+0x10

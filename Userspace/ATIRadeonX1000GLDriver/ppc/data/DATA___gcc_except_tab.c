@@ -899,7 +899,7 @@ const unsigned int sectDATA___gcc_except_tab[5374] = {
     0x00040000, /* +0xe00 */
     0x00c00000, /* +0xe04 */
     0x0000dc00, /* +0xe08 */
-    0x00029c00, /* -> FUN_00029c00 */ /* +0xe0c */
+    0x00029c00, /* -> gld_drawPixelsAsPoints */ /* +0xe0c */
     0x00000000, /* +0xe10 */
     0xffff035b, /* +0xe14 */
     0x00000038, /* +0xe18 */

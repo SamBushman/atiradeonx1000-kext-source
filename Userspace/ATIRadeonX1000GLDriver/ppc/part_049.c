@@ -103,7 +103,7 @@ int FUN_00186510(inst, sourceInstRefA, sourceInstRefB, compiler)
 LAB_00186708:
   mergedSelect = DAT_001b0220;
   if (selectsCompatible) {
-    loopIndex2 = FUN_0011379c(compiler,inst1);
+    loopIndex2 = OpcodeTraits__flag1WithoutFlag7(compiler,inst1);
     if (loopIndex2 == 0) {
       loopIndex2 = OpcodeTraits__flagBit8(*(undefined4 *)(inst1[0x22] + 8),compiler);
       if (loopIndex2 == 0) goto LAB_00186a60;
@@ -403,7 +403,7 @@ LAB_001874d4:
   destSelect = *(undefined4 *)(loopIndex2 + 0x10);
   if (*(int *)(opcodeInfo + 8) == 0x12) {
     scratchInst = (int *)IRInst__getOperandSource(inst2,1);
-    sourceRegKindIsConstant = FUN_001267b8(scratchInst[0x26]);
+    sourceRegKindIsConstant = Table1ea904__hasFlag0x11(scratchInst[0x26]);
     if (sourceRegKindIsConstant == 0) {
       if (scratchInst[0x26] == 0x33) {
         operandRecord = IRInst__getOperandRecord(inst2,1);
@@ -491,7 +491,7 @@ LAB_001874d4:
       }
     }
     constTable[1] = (int *)IRInst__getOperandSource(inst2,2);
-    loopRemaining = FUN_001267b8(constTable[1][0x26]);
+    loopRemaining = Table1ea904__hasFlag0x11(constTable[1][0x26]);
     if (loopRemaining == 0) {
       if (constTable[1][0x26] == 0x33) {
         source1Record = IRInst__getOperandRecord(inst2,2);
@@ -556,7 +556,7 @@ LAB_001874d4:
         operandSource = IRInst__getOperandSource(inst2,1);
         sourceRegKind = *(undefined4 *)(operandSource + 0x98);
       }
-      operandKindIsConstant = FUN_001267b8(sourceRegKind);
+      operandKindIsConstant = Table1ea904__hasFlag0x11(sourceRegKind);
       if ((operandKindIsConstant != 0) && ((inst2[0x2e] & 2U) == 0)) {
         operandSource2 = (int *)IRInst__getOperandSource(inst2,1);
         firstSourceIsPresub = (**(code **)(*operandSource2 + 0x5c))(operandSource2);
@@ -596,7 +596,7 @@ LAB_001872f8:
       operandSource = IRInst__getOperandSource(inst2,1);
       sourceRegKind = *(undefined4 *)(operandSource + 0x98);
     }
-    operandKindIsConstant = FUN_001267b8(sourceRegKind);
+    operandKindIsConstant = Table1ea904__hasFlag0x11(sourceRegKind);
     if (operandKindIsConstant == 0) {
       return 0;
     }
@@ -1370,7 +1370,7 @@ int Inst__movAndShiftUseVector(inst, program)
     sourceDef = IRInst__getOperandSource(inst,1);
     sourceRegister = *(undefined4 *)(sourceDef + 0x98);
   }
-  registerKindOk = FUN_001267b8(sourceRegister);
+  registerKindOk = Table1ea904__hasFlag0x11(sourceRegister);
   if (registerKindOk == 0) {
     return;
   }
@@ -4754,10 +4754,10 @@ code_r0x0018e934:
         loopIndex2 = IRInst__hasSingleUse(mixInnerSource,*(undefined4 *)(this[2] + 0x6c4));
         if (loopIndex2 == 0) goto code_r0x0018e934;
         inputSource = IRInst__getOperandSource(inst,loopIndex4);
-        loopIndex2 = FUN_0010c47c(inputSource,this[2]);
+        loopIndex2 = IRInst__canFoldConstantCompare(inputSource,this[2]);
         if (loopIndex2 == 0) goto code_r0x0018e934;
         foldedSource = IRInst__getOperandSource(inst,loopIndex4);
-        foldedSource = FUN_0010cb48(foldedSource,this[2]);
+        foldedSource = IRInst__foldCompareResultIntoCopy(foldedSource,this[2]);
         IRInst__setOperandSource(inst,loopIndex4,foldedSource,0,this[2]);
       }
 code_r0x0018eb5c: ;
@@ -5498,18 +5498,18 @@ int R300VSchedModel__vslot17(this, node)
   return;
 }
 
-/* FUN_00190100 @ 0x190100 (728 bytes) */
-int FUN_00190100(param_1, inst, operandIndex, param_4, param_5)
-  undefined4 param_1;
+/* R300VSchedModel__classifySourceBank @ 0x190100 (728 bytes) */
+int R300VSchedModel__classifySourceBank(schedModel, inst, operandIndex, bankOut, sourceIndexOut)
+  undefined4 schedModel;
   undefined4 inst;
   undefined4 operandIndex;
-  undefined4 *param_4;
-  int *param_5;
+  undefined4 *bankOut;
+  int *sourceIndexOut;
 {
   int *a0;
   int callResult;
-  undefined4 uVar2;
-  int iVar3;
+  undefined4 classified;
+  int baseIndex;
   
   a0 = (int *)IRInst__getOperandSource(inst,operandIndex);
   callResult = (**(code **)(*a0 + 0x60))(a0);
@@ -5519,40 +5519,40 @@ int FUN_00190100(param_1, inst, operandIndex, param_4, param_5)
   switch(a0[0x26]) {
   case 0:
     if ((a0[5] & 0x40U) == 0) {
-      *param_5 = a0[0x25] + 0x80;
+      *sourceIndexOut = a0[0x25] + 0x80;
     }
     else {
-      *param_5 = a0[0x25];
+      *sourceIndexOut = a0[0x25];
     }
-    uVar2 = 1;
-    *param_4 = 0;
+    classified = 1;
+    *bankOut = 0;
     break;
   case 1:
     if ((a0[5] & 0x40U) == 0) {
-      *param_5 = a0[0x25] + 0x80;
+      *sourceIndexOut = a0[0x25] + 0x80;
     }
     else {
-      *param_5 = a0[0x25];
+      *sourceIndexOut = a0[0x25];
     }
-    uVar2 = 1;
-    *param_4 = 3;
+    classified = 1;
+    *bankOut = 3;
     break;
   case 2:
-    uVar2 = 1;
-    *param_5 = a0[0x25];
-    *param_4 = 2;
+    classified = 1;
+    *sourceIndexOut = a0[0x25];
+    *bankOut = 2;
     break;
   default:
-    uVar2 = 0;
+    classified = 0;
     break;
   case 0xc:
-    uVar2 = 1;
-    *param_5 = a0[0x25] + 0x700;
-    *param_4 = 2;
+    classified = 1;
+    *sourceIndexOut = a0[0x25] + 0x700;
+    *bankOut = 2;
     break;
   case 0x26:
     callResult = IRInst__getOperandSource(a0,1);
-    *param_5 = *(int *)(callResult + 0x14c) << 10;
+    *sourceIndexOut = *(int *)(callResult + 0x14c) << 10;
     callResult = IRInst__getOperandRecord(a0,1);
     callResult = SelectWord__areCompatible(*(undefined4 *)(callResult + 0x10),0);
     if (callResult == 0) {
@@ -5565,49 +5565,49 @@ int FUN_00190100(param_1, inst, operandIndex, param_4, param_5)
           callResult = IRInst__getOperandRecord(a0,1);
           callResult = SelectWord__areCompatible(*(undefined4 *)(callResult + 0x10),0x3030303);
           if (callResult != 0) {
-            iVar3 = *param_5;
+            baseIndex = *sourceIndexOut;
             callResult = IRInst__getDefiningField128(a0,0);
-            *param_5 = iVar3 + callResult + 0x400;
+            *sourceIndexOut = baseIndex + callResult + 0x400;
           }
         }
         else {
-          iVar3 = *param_5;
+          baseIndex = *sourceIndexOut;
           callResult = IRInst__getDefiningField128(a0,0);
-          *param_5 = iVar3 + callResult + 0x300;
+          *sourceIndexOut = baseIndex + callResult + 0x300;
         }
       }
       else {
-        iVar3 = *param_5;
+        baseIndex = *sourceIndexOut;
         callResult = IRInst__getDefiningField128(a0,0);
-        *param_5 = iVar3 + callResult + 0x200;
+        *sourceIndexOut = baseIndex + callResult + 0x200;
       }
     }
     else {
-      iVar3 = *param_5;
+      baseIndex = *sourceIndexOut;
       callResult = IRInst__getDefiningField128(a0,0);
-      *param_5 = iVar3 + callResult + 0x100;
+      *sourceIndexOut = baseIndex + callResult + 0x100;
     }
-    uVar2 = 1;
-    *param_4 = 2;
+    classified = 1;
+    *bankOut = 2;
     break;
   case 0x28:
     callResult = IRInst__getDefiningField128(inst,operandIndex);
-    uVar2 = 1;
-    *param_5 = callResult + 0x500;
-    *param_4 = 2;
+    classified = 1;
+    *sourceIndexOut = callResult + 0x500;
+    *bankOut = 2;
     break;
   case 0x29:
     callResult = IRInst__getDefiningField128(inst,operandIndex);
-    uVar2 = 1;
-    *param_5 = callResult + 0x600;
-    *param_4 = 1;
+    classified = 1;
+    *sourceIndexOut = callResult + 0x600;
+    *bankOut = 1;
     break;
   case 0x37:
-    uVar2 = 1;
-    *param_5 = a0[0x25];
-    *param_4 = 1;
+    classified = 1;
+    *sourceIndexOut = a0[0x25];
+    *bankOut = 1;
   }
-  return uVar2;
+  return classified;
 }
 
 /* R300VSchedModel__vslot4_addInstruction @ 0x1904b8 (528 bytes) */
@@ -5631,12 +5631,12 @@ int R300VSchedModel__vslot4_addInstruction(this, inst)
     if (callResult < 1) {
       return;
     }
-    ((int (*)())FUN_00190100)(this,inst,1,this + 8,this + 0xb);
+    ((int (*)())R300VSchedModel__classifySourceBank)(this,inst,1,this + 8,this + 0xb);
     callResult = (**(code **)(*inst + 0x14))(inst);
     if (callResult < 2) {
       return;
     }
-    ((int (*)())FUN_00190100)(this,inst,2,this + 9,this + 0xc);
+    ((int (*)())R300VSchedModel__classifySourceBank)(this,inst,2,this + 9,this + 0xc);
     callResult = (**(code **)(*inst + 0x14))(inst);
     if (callResult < 3) {
       return;
@@ -5653,7 +5653,7 @@ int R300VSchedModel__vslot4_addInstruction(this, inst)
       if (callResult < 1) {
         return;
       }
-      ((int (*)())FUN_00190100)(this,inst,1,this + 8,this + 0xb);
+      ((int (*)())R300VSchedModel__classifySourceBank)(this,inst,1,this + 8,this + 0xb);
       callResult = (**(code **)(*inst + 0x14))(inst);
       if (callResult < 2) {
         return;
@@ -5676,7 +5676,7 @@ int R300VSchedModel__vslot4_addInstruction(this, inst)
   bankWord = this + 10;
   indexWord = this + 0xd;
 LAB_0019060c:
-  ((int (*)())FUN_00190100)(this,inst,sourceSlot,bankWord,indexWord);
+  ((int (*)())R300VSchedModel__classifySourceBank)(this,inst,sourceSlot,bankWord,indexWord);
   return;
 }
 
@@ -5715,13 +5715,13 @@ LAB_0019092c:
       if ((this[7] < 0) && (this[6] < 0)) {
         numSources = (**(code **)(*inst + 0x14))(inst);
         if (0 < numSources) {
-          ((int (*)())FUN_00190100)(this,inst,1,&slot0Bank,&slot0Index);
+          ((int (*)())R300VSchedModel__classifySourceBank)(this,inst,1,&slot0Bank,&slot0Index);
           numSources = (**(code **)(*inst + 0x14))(inst);
           if (1 < numSources) {
-            ((int (*)())FUN_00190100)(this,inst,2,&slot1Bank,&slot1Index);
+            ((int (*)())R300VSchedModel__classifySourceBank)(this,inst,2,&slot1Bank,&slot1Index);
             numSources = (**(code **)(*inst + 0x14))(inst);
             if (2 < numSources) {
-              ((int (*)())FUN_00190100)(this,inst,3,&slot2Bank,slot2Index);
+              ((int (*)())R300VSchedModel__classifySourceBank)(this,inst,3,&slot2Bank,slot2Index);
             }
           }
           callResult = ((int (*)())FUN_0018f850)(this,&slot0Bank,&slot0Index,
@@ -5735,7 +5735,7 @@ LAB_0019092c:
       if ((this[7] < 0) && ((this[6] < 0 || (inst[0x26] == 1)))) {
         numSources = (**(code **)(*inst + 0x14))(inst);
         if (0 < numSources) {
-          ((int (*)())FUN_00190100)(this,inst,1,&slot2Bank,slot2Index);
+          ((int (*)())R300VSchedModel__classifySourceBank)(this,inst,1,&slot2Bank,slot2Index);
           callResult = ((int (*)())FUN_0018f850)(this,&slot0Bank,&slot0Index,0);
 joined_r0x00190928:
           if (callResult == 0) goto LAB_00190854;
@@ -5746,10 +5746,10 @@ joined_r0x00190928:
     else if ((this[6] < 0) && ((this[7] < 0 || (inst[0x26] != 1)))) {
       numSources = (**(code **)(*inst + 0x14))(inst);
       if (0 < numSources) {
-        ((int (*)())FUN_00190100)(this,inst,1,&slot0Bank,&slot0Index);
+        ((int (*)())R300VSchedModel__classifySourceBank)(this,inst,1,&slot0Bank,&slot0Index);
         numSources = (**(code **)(*inst + 0x14))(inst);
         if (1 < numSources) {
-          ((int (*)())FUN_00190100)(this,inst,2,&slot1Bank,&slot1Index);
+          ((int (*)())R300VSchedModel__classifySourceBank)(this,inst,2,&slot1Bank,&slot1Index);
         }
         callResult = ((int (*)())FUN_0018f850)(this,&slot0Bank,&slot0Index,0);
         goto joined_r0x00190928;
@@ -5947,7 +5947,7 @@ int R300VSchedModel__vslot27(this, inst)
       return changed;
     }
     sourceDef = IRInst__getOperandSource(inst,loopIndex);
-    operandIndex = ((int (*)())FUN_00190100)(this,inst,loopIndex,&sourceBank,&sourceIndex);
+    operandIndex = ((int (*)())R300VSchedModel__classifySourceBank)(this,inst,loopIndex,&sourceBank,&sourceIndex);
     nextSeenBank1 = seenIndexBank1;
     nextSeenBank2 = seenIndexBank2;
     if (operandIndex != 0) {
@@ -5961,7 +5961,7 @@ int R300VSchedModel__vslot27(this, inst)
         src3CopyOrLaneMask = 0;
         for (scanIndex = 1; operandIndex = (**(code **)(*inst + 0x14))(inst), scanIndex <= operandIndex;
             scanIndex = scanIndex + 1) {
-          operandIndex = ((int (*)())FUN_00190100)(this,inst,scanIndex,&otherBank,&otherIndex);
+          operandIndex = ((int (*)())R300VSchedModel__classifySourceBank)(this,inst,scanIndex,&otherBank,&otherIndex);
           if (((operandIndex != 0) && (otherBank == sourceBank)) && (otherIndex == sourceIndex)) {
             operandIndex = IRInst__getOperandRecord(inst,scanIndex);
             SelectWord__readMask(&readMask3,*(undefined4 *)(operandIndex + 0x10));
@@ -6000,7 +6000,7 @@ int R300VSchedModel__vslot27(this, inst)
         for (scanIndex2 = 1; nextSeenBank2 = (**(code **)(*inst + 0x14))(inst), scanIndex2 <= nextSeenBank2;
             scanIndex2 = scanIndex2 + 1) {
           otherBank = 4;
-          nextSeenBank2 = ((int (*)())FUN_00190100)(this,inst,scanIndex2,&otherBank,&otherIndex);
+          nextSeenBank2 = ((int (*)())R300VSchedModel__classifySourceBank)(this,inst,scanIndex2,&otherBank,&otherIndex);
           if (((nextSeenBank2 != 0) && (otherBank == sourceBank)) && (otherIndex == sourceIndex)) {
             nextSeenBank2 = IRInst__getOperandRecord(inst,scanIndex2);
             SelectWord__readMask(&readMask4,*(undefined4 *)(nextSeenBank2 + 0x10));

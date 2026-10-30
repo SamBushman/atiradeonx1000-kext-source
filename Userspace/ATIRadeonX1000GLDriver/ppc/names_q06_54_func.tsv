@@ -1,0 +1,23 @@
+func	FUN_00138080	Program__freeBlockBitsets	INFERRED	frees the bitsets at block+0x100/+0x104/+0x108 of every block and clears the pointers
+func	FUN_0011e894	Program__noSuccessorHasMultipleSuccessors	INFERRED	returns 0 when a successor of a FUN_000e79b8 block has multiple successors
+func	FUN_00134c18	NeighbourList__removeResolvedNode	INFERRED	removes the entries whose InterferenceGraph__resolveNode equals removedRoot (7 slots per block)
+func	FUN_00135278	InterferenceState__clearNodeWord4	INFERRED	clears word +4 of every element of the vector at +4 (count at +0xc)
+func	FUN_0012b520	Program__removeUnreachableBlocks	INFERRED	detaches non-entry blocks with no predecessors and updates successors' predecessor vectors
+func	FUN_00127470	VRegPool__dtor_127470	INFERRED	VRegPool__destroyEntries then frees the +4 hash table buckets
+func	FUN_001278d0	VRegPool__dtor_1278d0	INFERRED	identical body to VRegPool__dtor_127470
+func	FUN_0010e56c	Program__assignHwRegsToVertexLoads	INFERRED	gives each flagged opcode 0xa4 inst the next free hardware register
+func	FUN_001304a4	RegAlloc__countUnassignedHwRegs	INFERRED	counts registers below the backend totals whose bit42c is clear
+func	FUN_001319d0	RegAlloc__sumSlotCounts	INFERRED	sums the first N entries of the slot vector at allocator+0x8c
+func	FUN_001102e0	Program__packInterpolatorEntries	INFERRED	packs interpolator loads of a scope into vec4 groups, swapping lanes and unlinking entries
+func	FUN_00136ec4	InterferenceGraph__ctor_136ec4	INFERRED	sizes the edge bitset from nodeCount*(nodeCount-1)/2 and allocates the class arrays
+func	FUN_0013719c	InterferenceGraph__ctor_13719c	INFERRED	identical body to InterferenceGraph__ctor_136ec4
+func	FUN_0010ecb8	IRInst__destMaskHasGap	INFERRED	destination write-mask bytes contain a written lane after an unwritten one
+func	FUN_00130da0	RegAlloc__cloneSourceDefAfter	INFERRED	clones the instruction defining operand N, uses the clone as the source and inserts it after afterInst
+func	FUN_001312f4	RegAlloc__emitSpillStore	INFERRED	builds an IRMemStore of the spilled register with its write mask and inserts it after the definition
+func	FUN_00130c8c	RegAlloc__emitSpillReload	INFERRED	creates the reload instruction before the anchor and rewires the source
+func	FUN_00130abc	RegAlloc__markReloadModifiers	INFERRED	sets modifier bits on the sources that read the spilled register
+func	FUN_00131a80	RegAlloc__findFreeSpillSlot	INFERRED	first clear bit of the used-slot bitset, growing the slot vector
+func	FUN_0012aef0	Program__mergeBlockWithSuccessor	INFERRED	bypasses/detaches a simple block and appends its instructions to the predecessor
+func	FUN_0012b3f8	IRInst__swapCompareOperands	INFERRED	swaps the compare operands of a branch and flips the modifier bits
+func	FUN_00135c20	InterferenceGraph__mergeNodes	INFERRED	merges two nodes into the lower-numbered one
+func	FUN_00134ef4	NeighbourList__reserveAppendSlot	INFERRED	locates the append slot, allocating a new 7-entry block when full

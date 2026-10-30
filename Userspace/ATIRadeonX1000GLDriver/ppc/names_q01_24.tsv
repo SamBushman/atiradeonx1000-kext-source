@@ -1,5 +1,5 @@
 func	FUN_00027990	gld_buildVertexStreamCache	INFERRED	variant of gld_buildVertexStreamLayout for the draw path with cached descriptor blocks: maps the enabled attributes to hardware ids, fills the stream-pair shadows and the two 16-bit {size,format,offset} descriptor blocks at stream+0x258c/0x2590 and their size headers
-local	FUN_00027990	param_1	glContext	INFERRED	the embedded command-stream object (ctx+0x240); +0x243c is the stream count, +0x258c/+0x2590 the two descriptor blocks, +0x1be4.. the stream-control shadows
+local	FUN_00027990	param_1	stream	INFERRED	the embedded command-stream object (ctx+0x240); +0x243c is the stream count, +0x258c/+0x2590 the two descriptor blocks, +0x1be4.. the stream-control shadows
 local	FUN_00027990	iVar31	engineObjects	INFERRED	*(stream+4): engine object table (+0x1cc current program, +0x20 flag)
 local	FUN_00027990	uVar29	streamCount	INFERRED	number of vertex streams (stream+0x243c, 2..16)
 local	FUN_00027990	local_64	programVertexInfo	INFERRED	**(current program)+4

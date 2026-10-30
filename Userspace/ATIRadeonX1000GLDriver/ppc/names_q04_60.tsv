@@ -18,4 +18,4 @@ use	FUN_000a6cb0	iVar10	streamStart	INFERRED	stream write pointer before the fil
 use	FUN_000a6cb0	iVar10	streamStart	INFERRED	stream write pointer before the fill packet, used to compute the packet sizes	^\s*\*\(int\ \*\)\(iVar6\ \+\ 0x10\)\ =\ \*\(int\ \*\)\(0x00002748\ \+\ param_1\ \+\ 4\)\ \-\ iVar10\ >>\ 2;$	+1
 use	FUN_000a6cb0	iVar10	streamStart	INFERRED	stream write pointer before the fill packet, used to compute the packet sizes	^\s*\*\(int\ \*\)\(iVar6\ \+\ 0x14\)\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x2794\)\ \-\ iVar10\ >>\ 2;$	+1
 local	FUN_000a6cb0	param_2	clearMask	INFERRED	GL clear mask bits (bit 8 colour, bit 10 depth)
-func	FUN_000a6cb0	gld_clearBuffers	INFERRED	clear path: decides between the fast fill clear (gld_emitClearFillPacket) and the viewport quad (gld_emitInternalViewportPacket) from the surface flags, scissor and clear mask, then emits the 0x2f000000 trailer packet
+func	FUN_000a6cb0	gld_clearStreamBuffers	INFERRED	clear path: decides between the fast fill clear (gld_emitClearFillPacket) and the viewport quad (gld_emitInternalViewportPacket) from the surface flags, scissor and clear mask, then emits the 0x2f000000 trailer packet

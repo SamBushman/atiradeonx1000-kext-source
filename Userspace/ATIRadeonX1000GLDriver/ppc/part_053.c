@@ -630,7 +630,7 @@ int R520VMachineAssembler__vslot24_assembleWithPredicateSet(this, node, block, c
       predSlot = *(int *)(this[0x26] + 4);
       if (2 < predSlot) {
         if (predSlot < 7) {
-          destRegister = FUN_00130690(program,0);
+          destRegister = RegAlloc__allocateFirstFreeInClass(program,0);
           predSlot = predSlot + -3;
         }
         else {
@@ -1045,55 +1045,55 @@ int FudoPs__vslot96_installHardwareTables(this)
 }
 
 /* R520MachineAssembler__vslot5_beginProgram @ 0x19ef50 (324 bytes) */
-int R520MachineAssembler__vslot5_beginProgram(param_1, param_2, param_3, param_4)
-  int param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  int param_4;
+int R520MachineAssembler__vslot5_beginProgram(this, programArg, allocArg, compiler)
+  int this;
+  undefined4 programArg;
+  undefined4 allocArg;
+  int compiler;
 {
-  undefined *puVar1;
-  undefined4 uVar2;
-  int iVar3;
+  undefined *opcodeTable;
+  undefined4 recordBuffer;
+  int registerLimit;
   
-  *(undefined4 *)(param_1 + 0xa4) = *(undefined4 *)(param_4 + 0x30c);
-  uVar2 = FUN_000e14e4(param_4,0x963c,param_3);
-  *(undefined4 *)(param_1 + 0xac) = uVar2;
-  _memset(uVar2,0,0x963c);
-  iVar3 = *(int *)(*(int *)(param_4 + 0x30c) + 0x40);
-  *(undefined4 *)(param_1 + 0xa8) = *(undefined4 *)(param_1 + 0xac);
-  *(undefined4 *)(param_1 + 0x10) = param_2;
-  *(int *)(param_1 + 0xc) = param_4;
-  *(undefined4 *)(param_1 + 0x60) = 1;
-  *(undefined4 *)(param_1 + 100) = 0;
-  *(undefined4 *)(param_1 + 0x68) = 0;
-  *(undefined4 *)(param_1 + 0x6c) = 0;
-  *(undefined4 *)(param_1 + 0x70) = 0;
-  *(undefined4 *)(param_1 + 0x88) = 0;
-  *(undefined4 *)(param_1 + 0x78) = 0;
-  *(undefined4 *)(param_1 + 0x80) = 1;
-  *(undefined4 *)(param_1 + 0x84) = 1;
-  *(undefined4 *)(param_1 + 0xa0) = 0;
-  *(undefined4 *)(param_1 + 0xb4) = 0xffffffff;
-  *(undefined4 *)(param_1 + 0x90) = 0;
-  *(undefined4 *)(param_1 + 0x8c) = 0;
-  *(undefined4 *)(param_1 + 0xb0) = 0xffffffff;
-  *(undefined4 *)(param_1 + 0xb8) = 0;
-  *(undefined4 *)(param_1 + 0xbc) = 0;
-  *(undefined4 *)(param_1 + 0x14) = param_3;
-  *(undefined4 *)(param_1 + 0x98) = 1;
-  *(undefined4 *)(param_1 + 0x94) = 1;
-  **(undefined4 **)(param_1 + 0xa8) = 0;
-  puVar1 = PTR_DAT_001e913c;
-  *(int *)(*(int *)(param_1 + 0xa8) + 4) = iVar3 + 1;
-  *(undefined4 *)(puVar1 + 0x2654) = 7;
-  *(undefined4 *)(puVar1 + 0x10e4) = 0xd;
-  *(undefined4 *)(puVar1 + 0x22d4) = 0xe;
-  *(undefined4 *)(puVar1 + 0x229c) = 0xb;
-  *(undefined4 *)(puVar1 + 0x2344) = 0xf;
-  *(undefined4 *)(puVar1 + 0x230c) = 0xc;
-  *(undefined4 *)(puVar1 + 0x261c) = 5;
-  *(undefined4 *)(puVar1 + 0x1a4c) = 6;
-  *(undefined4 *)(puVar1 + 0x10ac) = 0xc;
+  *(undefined4 *)(this + 0xa4) = *(undefined4 *)(compiler + 0x30c);
+  recordBuffer = FUN_000e14e4(compiler,0x963c,allocArg);
+  *(undefined4 *)(this + 0xac) = recordBuffer;
+  _memset(recordBuffer,0,0x963c);
+  registerLimit = *(int *)(*(int *)(compiler + 0x30c) + 0x40);
+  *(undefined4 *)(this + 0xa8) = *(undefined4 *)(this + 0xac);
+  *(undefined4 *)(this + 0x10) = programArg;
+  *(int *)(this + 0xc) = compiler;
+  *(undefined4 *)(this + 0x60) = 1;
+  *(undefined4 *)(this + 100) = 0;
+  *(undefined4 *)(this + 0x68) = 0;
+  *(undefined4 *)(this + 0x6c) = 0;
+  *(undefined4 *)(this + 0x70) = 0;
+  *(undefined4 *)(this + 0x88) = 0;
+  *(undefined4 *)(this + 0x78) = 0;
+  *(undefined4 *)(this + 0x80) = 1;
+  *(undefined4 *)(this + 0x84) = 1;
+  *(undefined4 *)(this + 0xa0) = 0;
+  *(undefined4 *)(this + 0xb4) = 0xffffffff;
+  *(undefined4 *)(this + 0x90) = 0;
+  *(undefined4 *)(this + 0x8c) = 0;
+  *(undefined4 *)(this + 0xb0) = 0xffffffff;
+  *(undefined4 *)(this + 0xb8) = 0;
+  *(undefined4 *)(this + 0xbc) = 0;
+  *(undefined4 *)(this + 0x14) = allocArg;
+  *(undefined4 *)(this + 0x98) = 1;
+  *(undefined4 *)(this + 0x94) = 1;
+  **(undefined4 **)(this + 0xa8) = 0;
+  opcodeTable = PTR_DAT_001e913c;
+  *(int *)(*(int *)(this + 0xa8) + 4) = registerLimit + 1;
+  *(undefined4 *)(opcodeTable + 0x2654) = 7;
+  *(undefined4 *)(opcodeTable + 0x10e4) = 0xd;
+  *(undefined4 *)(opcodeTable + 0x22d4) = 0xe;
+  *(undefined4 *)(opcodeTable + 0x229c) = 0xb;
+  *(undefined4 *)(opcodeTable + 0x2344) = 0xf;
+  *(undefined4 *)(opcodeTable + 0x230c) = 0xc;
+  *(undefined4 *)(opcodeTable + 0x261c) = 5;
+  *(undefined4 *)(opcodeTable + 0x1a4c) = 6;
+  *(undefined4 *)(opcodeTable + 0x10ac) = 0xc;
   return;
 }
 
@@ -1683,7 +1683,7 @@ int R520MachineAssembler__vslot4_finishProgram(param_1)
   *(int *)(param_1[0x2b] + 0x93b8) = param_1[0x24];
   *(int *)(param_1[0x2b] + 0x9364) = *(int *)(*(int *)(param_1[3] + 0x6c4) + 0x7c) + 1;
   *(undefined4 *)(param_1[0x2b] + 0x9368) = *(undefined4 *)(*(int *)(param_1[3] + 0x6c4) + 0x84);
-  callResult = FUN_0013061c(*(undefined4 *)(param_1[3] + 0x6c4),0);
+  callResult = RegAlloc__countUnassignedInClass(*(undefined4 *)(param_1[3] + 0x6c4),0);
   if (callResult != 0) {
     iVar2 = callResult + -1;
   }

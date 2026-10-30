@@ -1,0 +1,19 @@
+func	FUN_0010c670	IRInst__foldConstantSourcesIntoClone	INFERRED	folds constant sources of an instruction, cloning shared source definitions (IRInst__findConstantOperandWithValue, IRInst__clone)
+func	FUN_0010cb48	IRInst__foldCompareResultIntoCopy	INFERRED	replaces a compare by its folded result in a copy instruction taken from the list
+func	FUN_0010f38c	PackEntry__lanesFitVector	INFERRED	checks whether the entry's written lanes fit the other entries of the vector
+func	FUN_0010ff24	PackEntry__bindToVectorRegister	INFERRED	binds the entry's lanes to the destination register of the vector
+func	FUN_00110020	Program__collectExportEntry	INFERRED	builds a LaneInfo for an output instruction and appends it to the per-kind export list at program+0x41c/0x420/0x424
+func	FUN_0011f8a0	Block__appendCopyForDest	INFERRED	creates a copy of destRegister (optionally pinned) and appends it to the block, recording the result index
+func	FUN_00120cd4	Program__eliminatePhiCopies	INFERRED	driver that sets up the pending/location/ready vectors for the copy sequentialisation
+func	FUN_00127324	Program__decodeRegisterKey	INFERRED	decodes a register file kind and vreg id into kind and index outputs
+func	FUN_0012afe8	Block__walkToLoopFooter	INFERRED	walks successors until the loop footer (or stopBlock) of targetLoop
+func	FUN_0012b140	Block__findRegionHeader	INFERRED	walks predecessors until a block whose vslot 0x24 holds
+func	FUN_0012bb48	Program__collapseIfRegion	INFERRED	replaces a trivial if/else region by a single inserted block and patches the branch instruction
+func	FUN_0012c2dc	Program__isTrivialBranchRegion	INFERRED	true for a small successor block whose branch compares equal operands
+func	FUN_0012eacc	Program__predicatePendingIfs	INFERRED	turns the pending if regions into predicate registers with MOVs and IfHeader/IfFooter blocks
+func	FUN_00133fe4	RegAlloc__insertPendingReloads	INFERRED	inserts the reloads queued for spilled sources (FUN_00131c10 spill base, RegAlloc__emitSpillReload)
+func	FUN_00134400	RegAlloc__addDefinitionNodes	INFERRED	adds graph nodes for destination registers of every flagged instruction
+func	FUN_00135684	InterferenceGraph__appendToNodeList	INFERRED	appends nodeB to the list at node A's +0x10
+func	FUN_00138130	Liveness__allocLiveTable	INFERRED	allocates the 0x80-entry live table and clears it for each block
+func	FUN_001382b8	IRInst__findLaneDefinition	INFERRED	follows an operand source to the instruction defining the requested lane
+func	FUN_0013905c	IRInst__noUseBetween	INFERRED	scans backwards from inst to endInst; false when an operand definition or vslot 0x34 inst intervenes

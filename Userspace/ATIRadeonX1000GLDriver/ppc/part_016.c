@@ -746,7 +746,7 @@ int gld_updateProgramFlags(glContext, engineCaps, dirtyBitsArg, scratchR6, dirty
   glContextPtr4 = *(int *)(glContext + 4);
   if ((((unsigned char *)0x00002e2d)[*(int *)(glContextPtr4 + 0x10)] != '\0') &&
      ((*(uint *)(glContext + 0x44) & 0x20000) == 0)) {
-    glContextPtr4 = FUN_0001a010(glContextPtr4,*(undefined4 *)(glContextPtr4 + 0x26a0),dirtyBitsArg,scratchR6,dirtyWord3,dirtyWord1,
+    glContextPtr4 = gld_needsMultisampleResolve(glContextPtr4,*(undefined4 *)(glContextPtr4 + 0x26a0),dirtyBitsArg,scratchR6,dirtyWord3,dirtyWord1,
                          staleArgR9);
     if (glContextPtr4 == 0) {
       glContextPtr4 = *(int *)(glContext + 4);
@@ -1636,7 +1636,7 @@ LAB_000a9de4:
             }
           }
           dirtyBitsArg = (char *)0x0;
-          fpPassThrough1 = (double)FUN_0003e320(glContext + -0x240,dirtyBits,0);
+          fpPassThrough1 = (double)gld_updateFragmentProgramState(glContext + -0x240,dirtyBits,0);
           staleR4Chain = r4AfterCall4;
           dirtyWord1 = ctx44Snapshot;
         }
@@ -1675,7 +1675,7 @@ LAB_000a9ffc:
         zeroFlagA = 0;
       }
       else {
-        glContextPtr4 = FUN_0001a010(glContextPtr4,*(undefined4 *)(glContextPtr4 + 0x26a0),dirtyBitsArg,scratchR6,dirtyBits0x4400000,dirtyWord1
+        glContextPtr4 = gld_needsMultisampleResolve(glContextPtr4,*(undefined4 *)(glContextPtr4 + 0x26a0),dirtyBitsArg,scratchR6,dirtyBits0x4400000,dirtyWord1
                               ,dirtyBits0x7000000);
         staleR4Chain = r4AfterCall6;
         fpPassThrough1 = f1AfterCall2;
@@ -2420,7 +2420,7 @@ LAB_000ab18c:
         }
       }
       dirtyBitsArg = (char *)0x0;
-      fpPassThrough1 = (double)FUN_0003e320(glContext + -0x240,dirtyBits,0);
+      fpPassThrough1 = (double)gld_updateFragmentProgramState(glContext + -0x240,dirtyBits,0);
       engineWord3e28 = ctx44WordB;
     }
     else if (ctx44Bit13B == 0) {
@@ -2457,7 +2457,7 @@ LAB_000ab3d0:
     zeroFlagB = 0;
   }
   else {
-    glContextPtr4 = FUN_0001a010(glContextPtr4,*(undefined4 *)(glContextPtr4 + 0x26a0),dirtyBitsArg,scratchR6,dirtyKeepAny,engineWord3e28,
+    glContextPtr4 = gld_needsMultisampleResolve(glContextPtr4,*(undefined4 *)(glContextPtr4 + 0x26a0),dirtyBitsArg,scratchR6,dirtyKeepAny,engineWord3e28,
                           dirtyHighMask);
     fpPassThrough1 = f1AfterCall3;
     if (glContextPtr4 != 0) {
@@ -2762,7 +2762,7 @@ void gld_uploadParamConstants(int glContext,int a1,undefined4 a2,double fpPassTh
   
   iVar1 = *(int *)(*(int *)(a1 + 0x74) + 0x84) * -0x10;
   *(unsigned char **)(auStack_70 + iVar1) = ((unsigned int)__builtin_frame_address(0));
-  ((double (*)())FUN_00024fe0)(*(undefined4 *)(glContext + 4),*(undefined4 *)(*(int *)(a1 + 0x74) + 0x84),
+  ((double (*)())gld_gatherProgramConstants)(*(undefined4 *)(glContext + 4),*(undefined4 *)(*(int *)(a1 + 0x74) + 0x84),
                auStack_30 + iVar1,fpPassThrough1);
   (**(code **)(((unsigned char *)0x00001280) + glContext))
             (glContext,a2,0,0,auStack_30 + iVar1,*(undefined4 *)(*(int *)(a1 + 0x74) + 0x84)
@@ -8999,7 +8999,7 @@ int ffpsBuildProgram(glContext, cachedProgram)
   noCachedProgram = cachedProgram == 0;
   engineCaps = *(int *)(*(int *)(glContext + 4) + 0x10);
   if (noCachedProgram) {
-    allocPair = FUN_0004bbf0(glContext);
+    allocPair = gldLookupProgramVariant(glContext);
     cachedProgram = (int)allocPair;
     if ((int)((ulonglong)allocPair >> 0x20) == 0) goto LAB_000b66b8;
     glContextWord1e5c_2 = *(int *)(glContext + 0x1e5c);
@@ -10366,19 +10366,19 @@ LAB_000b9ef0:
  * against the real compiled C symbols (gcc adds one underscore automatically).
  * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
  * large PPC links) does not silently reconcile this the way stock ld did. */
-asm(".globl FUN_000afe40");
-asm(".set FUN_000afe40, _gld_compileFragmentProgram");
+asm(".globl gld_compileFragmentProgram");
+asm(".set gld_compileFragmentProgram, _gld_compileFragmentProgram");
 asm(".globl atifsCompileCurrentShader");
 asm(".set atifsCompileCurrentShader, _atifsCompileCurrentShader");
-asm(".globl FUN_000b57a0");
-asm(".set FUN_000b57a0, _gld_compileFragmentProgramImage");
-asm(".globl FUN_000b5b60");
-asm(".set FUN_000b5b60, _gld_emitProgramStateAndConstants");
-asm(".globl FUN_000b5ba0");
-asm(".set FUN_000b5ba0, _gld_emitProgramStateOnly");
-asm(".globl FUN_000b5bd0");
-asm(".set FUN_000b5bd0, _gld_emitProgramConstantsOnly");
-asm(".globl FUN_000b5c00");
-asm(".set FUN_000b5c00, _gld_bindProgramStateAndEmit");
-asm(".globl FUN_000b5f40");
-asm(".set FUN_000b5f40, _gld_freeProgramImage");
+asm(".globl gld_compileFragmentProgramImage");
+asm(".set gld_compileFragmentProgramImage, _gld_compileFragmentProgramImage");
+asm(".globl gld_emitProgramStateAndConstants");
+asm(".set gld_emitProgramStateAndConstants, _gld_emitProgramStateAndConstants");
+asm(".globl gld_emitProgramStateOnly");
+asm(".set gld_emitProgramStateOnly, _gld_emitProgramStateOnly");
+asm(".globl gld_emitProgramConstantsOnly");
+asm(".set gld_emitProgramConstantsOnly, _gld_emitProgramConstantsOnly");
+asm(".globl gld_bindProgramStateAndEmit");
+asm(".set gld_bindProgramStateAndEmit, _gld_bindProgramStateAndEmit");
+asm(".globl gld_freeProgramImage");
+asm(".set gld_freeProgramImage, _gld_freeProgramImage");

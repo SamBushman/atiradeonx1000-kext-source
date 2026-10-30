@@ -1,5 +1,5 @@
 func	FUN_0002c230	gld_validateStreamState	INFERRED	re-validates the draw state when register groups are dirty: program/ffvp revalidation, dirty-state packets, the four draw-buffer indices and the 0x29000000 draw-buffer packet, then rebuilds the vertex stream cache/layout when needed
-local	FUN_0002c230	param_1	glContext	INFERRED	the embedded command-stream object (ctx+0x240); +4 is the engine object table, +0x2460.. the four draw-buffer indices
+local	FUN_0002c230	param_1	stream	INFERRED	the embedded command-stream object (ctx+0x240); +4 is the engine object table, +0x2460.. the four draw-buffer indices
 local	FUN_0002c230	iVar10	engineObjects	INFERRED	*(stream+4): engine object table (+0x150 bound framebuffer, +0x2a43 dirty byte)
 local	FUN_0002c230	iVar9	engineObjectsAlias	INFERRED	*(stream+4) re-read in the draw-buffer update block
 local	FUN_0002c230	iVar11	bufferSlot	INFERRED	index 0..3 of the draw buffer being resolved

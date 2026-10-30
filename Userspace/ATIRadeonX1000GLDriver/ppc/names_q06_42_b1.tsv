@@ -1,0 +1,88 @@
+local	FUN_0010e870	param_1	lhsRef	INFERRED	comparator argument: pointer to element whose +0x13c/+0x140 pair is the sort key
+local	FUN_0010e870	param_2	rhsRef	INFERRED	comparator argument, other element (dereferenced first)
+local	FUN_0010e870	iVar1	lhsKey	INFERRED	FUN_0010e40c(+0x13c,+0x140) of the lhs element
+local	FUN_001303f4	param_1	value	INFERRED	value searched for
+local	FUN_001303f4	param_2	table	INFERRED	4-entry int table scanned
+local	FUN_001303f4	iVar1	byteOffset	INFERRED	offset into table, step 4
+local	FUN_001303f4	iVar2	remaining	INFERRED	entries left, starts at 4
+local	FUN_00122e90	param_2	kindIndex	INFERRED	index into the 0x10-stride dispatch table at PTR_PTR_001e8c60 (+0xc = handler)
+local	FUN_00122e90	uVar1	callResult	INFERRED	handler result returned
+local	FUN_00127534	param_1	cache	INFERRED	object with +4 hash table and +0x24 scratch key record
+local	FUN_00127534	param_2	keyA	INFERRED	stored in key record +4
+local	FUN_00127534	param_3	keyB	INFERRED	stored in key record +8
+local	FUN_00127534	param_4	keyExtra	INFERRED	stored in key record +0xc
+local	FUN_001275a0	param_1	cache	INFERRED	cache object (word 0 passed on to constructor, word 1 hash table)
+local	FUN_001275a0	param_2	keyA	INFERRED	same key as FUN_00127534
+local	FUN_001275a0	param_3	keyB	INFERRED	same key as FUN_00127534
+local	FUN_001275a0	param_4	keyExtra	INFERRED	same key as FUN_00127534
+local	FUN_00127608	param_1	cache	INFERRED	forwarded to FUN_00127534 / FUN_001275a0 (find, else create+insert)
+local	FUN_00127608	param_2	keyA	INFERRED	forwarded key
+local	FUN_00127608	param_3	keyB	INFERRED	forwarded key
+local	FUN_00127608	param_4	keyExtra	INFERRED	forwarded key
+local	FUN_0012b248	param_3	program	INFERRED	program whose +8 compiler has the +0x3ac vreg counter
+local	FUN_0012b248	iVar4	newVRegId	INFERRED	decremented compiler+0x3ac counter, stored in operand +8 and returned
+local	FUN_0012b248	uVar3	sourceValue	INFERRED	param_1+0x8c bound as operand 1
+local	FUN_00130a08	param_1	inst	INFERRED	passed to FUN_00130728 (chain end)
+local	FUN_00130a08	param_2	targetId	INFERRED	compared with node+0x30 record +0x13c
+local	FUN_00130a08	piVar2	cursorInst	INFERRED	walks +4 links while vslot 0x74 true
+local	FUN_0010ecb8	local_28	operandWordBytes	INFERRED	operand record +0x10 word scanned bytewise
+local	FUN_0010ecb8	bVar1	sawOne	INFERRED	set when a byte equal 1 was seen
+local	FUN_0010ecb8	iVar2	byteIndex	INFERRED	byte index
+local	FUN_0010ecb8	iVar3	remaining	INFERRED	bytes left, from 4
+local	FUN_00134bf0	param_1	graph	INFERRED	alias table at +0x20
+local	FUN_00134bf0	param_3	followAliases	INFERRED	selects disjointSetFindRoot vs direct lookup
+local	ExportValue__vslot10	param_2	laneMask	INFERRED	4 bytes; a zero byte clears the matching byte at inst+0x9c+i
+local	ExportValue__vslot10	pcVar1	maskCursor	INFERRED	walks the 4 mask bytes
+local	ExportValue__vslot10	iVar2	laneIndex	INFERRED	byte index
+local	ExportValue__vslot10	iVar3	remaining	INFERRED	bytes left from 4
+local	Interpolator__vslot10	param_2	laneMask	INFERRED	4 bytes; a zero byte clears the matching byte at inst+0x9c+i
+local	Interpolator__vslot10	param_3	program	INFERRED	program: +8 compiler (arena +0x374, vreg counter +0x3ac), +0x3ac VRegPool
+local	Interpolator__vslot10	pcVar4	maskCursor	INFERRED	walks the 4 mask bytes
+local	Interpolator__vslot10	puVar7	exportInst	INFERRED	IRGeomExport created via IRGeomExport__ctor_108770, stored at this+0x30
+local	Interpolator__vslot10	uVar2	specialRegister	INFERRED	VRegPool__findOrCreate(0x2c,0,0) used as operands 0 and 2
+local	FUN_0010e40c	param_1	kind	INFERRED	compared with 0x16/0x17 (remap selector)
+local	FUN_0010e40c	param_2	value	INFERRED	0/1 remapped to 1/3 (kind 0x17) or 2 (kind 0x16)
+local	FUN_0010e744	param_1	inst	INFERRED	vslot 0x68 queried, +0x13c kind field tested
+local	FUN_0010e744	iVar1	query68	INFERRED	vslot 0x68 result
+local	FUN_0010e744	uVar2	result	INFERRED	returned 0/1
+local	FUN_0010e814	param_1	laneInfo	INFERRED	record: +0 source, +0x14 zero, +0x18 count, 4 lane words cleared
+local	FUN_0010e814	param_2	source	INFERRED	stored at word 0; +0x13c passed to FUN_0010e368
+local	FUN_00130a78	param_1	cursorInst	INFERRED	walked via +8 links while flags bit 4 set
+local	FUN_00130a78	param_2	referenceInst	INFERRED	+0x14c compared against cursor's +0x14c
+local	FUN_00113734	param_1	compiler	INFERRED	+0x30c backend (as in FUN_00112fe4)
+local	FUN_00122de8	piVar1	table	INFERRED	program+0x3b0 table: word 0 is the entry count, word 2 of each entry cleared
+local	FUN_00122de8	iVar2	remaining	INFERRED	entries left to clear
+local	FUN_00130958	param_1	bitSet	INFERRED	bitmap, data at +8
+local	FUN_00130958	param_2	registerIndex	INFERRED	bit index = registerIndex*4+lane
+local	FUN_00130958	param_3	lane	INFERRED	component 0..3
+local	FUN_00130958	uVar1	bitIndex	INFERRED	registerIndex*4+lane
+local	FUN_0010e690	param_1	inst	INFERRED	vslot 0x68 queried then word 0x4f compared with 0x18
+local	FUN_0010e690	iVar1	query68	INFERRED	vslot 0x68 result
+local	FUN_0010e690	uVar2	result	INFERRED	returned 0/1
+local	FUN_0010e6e8	param_1	inst	INFERRED	vslot 0x68 queried then word 0x4f in 0x16..0x17
+local	FUN_0010e6e8	iVar1	query68	INFERRED	vslot 0x68 result
+local	FUN_0010e6e8	uVar2	result	INFERRED	returned 0/1
+local	FUN_00130bd4	param_1	allocator	INFERRED	+0x430 bitmap (data at +8) cleared by bit
+local	FUN_00130bd4	param_2	bitIndex	INFERRED	bit cleared
+local	FUN_00130bd4	iVar1	wordRef	INFERRED	bitmap word address
+local	FUN_00137e98	param_3	cursorInst	INFERRED	walked via +4 links while flags bit 4 set; compared with operand vreg
+local	FUN_00137e98	uVar1	linkFlags	INFERRED	cursor flags & 4
+local	FUN_0013905c	param_1	endInst	INFERRED	scan backwards (inst[1]) until this instruction
+local	FUN_0013905c	iVar2	query	INFERRED	vslot 0x60/0x34 results
+local	IRInst__getOrCreateOperandRecord	puVar2	operandRecord	INFERRED	0x18-byte operand record (inline for index<5, else element of inst+0x118 vector) the source record is copied into
+local	IRInst__getOrCreateOperandRecord	uVar1	recWord0	INFERRED	srcRecord word 0 copied to dest word 0
+local	IRPhi__getUniqueSource	iVar2	previousSource	INFERRED	unique source found so far
+local	IRPhi__getUniqueSource	iVar3	uniqueSource	INFERRED	result: the single distinct source other than inst itself, else 0
+local	IRInst__foldCompareConstResult	uVar1	instFlags	INFERRED	inst+0xe8 / +0xb8 flags, bit 0 selects the folded value
+local	IRInst__foldCompareConstResult	fVar2	selectedValue	INFERRED	0.0/1.0 or NaN-like constant written to outValue
+local	IRInst__foldCompareConstResult	dVar3	foldedValue	INFERRED	double value stored to outValue
+local	KhanVs__vslot9_createCompareInst	param_4	src1IlType	INFERRED	passed to Program__registerFileOfIlType for operand record +0xc
+local	KhanVs__vslot9_createCompareInst	param_6	src2IlType	INFERRED	passed to Program__registerFileOfIlType for the second operand
+local	KhanVs__vslot9_createCompareInst	param_7	sourceTokenWord	INFERRED	address-taken word handed to Program__applySourceTokenToOperand
+local	KhanVs__vslot9_createCompareInst	param_8	sourceTokens	INFERRED	structure whose +0x6c points at the two source token words
+local	KhanVs__vslot9_createCompareInst	param_9	insertAfter	INFERRED	third argument of Program__appendInst
+local	KhanVs__vslot9_createCompareInst	uVar8	program	INFERRED	compiler+COMP_currentProgram
+local	FUN_0012eacc	puVar9	armBlock	INFERRED	new block stored in if-header word 0x4f
+local	Program__packPsInputs	puVar2	laneKindSlot	INFERRED	destination slot in the lane-kind array (local_90 + offset)
+local	Program__packPsInputs	puVar3	laneIndexSlot	INFERRED	destination slot in the lane-index array (local_80 + offset)
+local	Program__packPsInputs	puVar15	laneSlotCursor	INFERRED	cursor into the merged lane arrays

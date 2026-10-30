@@ -4096,7 +4096,7 @@ void gldValidateState(int glContext,undefined4 param_2,undefined4 param_3,undefi
       param_2 = extraout_r4_02;
     }
     if ((dirtyMask & 0x400) != 0) {
-      fparam_1 = (double)((double (*)())FUN_000520c0)(glContext,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,
+      fparam_1 = (double)((double (*)())gldValidateViewport)(glContext,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,
                                       fparam_7,fparam_8);
       dirtyMask = *(uint *)(glContext + 0x38);
       param_2 = extraout_r4_03;
