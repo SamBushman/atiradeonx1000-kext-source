@@ -37,9 +37,9 @@
 0x4c544	noop_4c540
 0x535c4	FUN_000534c0
 0x535f0	FUN_000534c0
-0x76a64	FUN_000768e0
-0x7a174	FUN_0007a110
-0x7a190	FUN_0007a110
+0x76a64	vpStateApplyParameters
+0x7a174	recordAllocFree
+0x7a190	recordAllocFree
 0xc6e40	psnReallocateTemps
 0xc71d0	scCreateForContext
 0xcd380	scCompile

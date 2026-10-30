@@ -4552,7 +4552,7 @@ int gld_updateScissorRect(ctx)
   }
   rectWidthOrRight = rectX + rectWidthOrRight;
   rectHeightOrBottom = rectY + rectHeightOrBottom;
-  FUN_0008f7f0(ctx + 0x240,0,0,&rectX,0);
+  gldDrawInternalRect(ctx + 0x240,0,0,&rectX,0);
   return;
 }
 

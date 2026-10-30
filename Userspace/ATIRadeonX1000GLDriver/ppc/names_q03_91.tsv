@@ -1,0 +1,17 @@
+local	evsEncodeSource	uVar3	encodeOk	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	evsEncodeDestination	iVar2	symbolDataType	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar4\ \+\ 0x24\);$	+1
+use	evsEncodeDestination	iVar2	symbolDataType	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(iVar2\ ==\ 0x87bf\)\ \{$	+1
+use	evsEncodeDestination	iVar2	symbolDataType	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*else\ if\ \(iVar2\ ==\ 0x87c0\)\ \{$	+1
+use	evsEncodeDestination	iVar2	symbolDataType	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(iVar2\ !=\ 0x87be\)\ \{$	+1
+use	evsEncodeDestination	iVar2	symbolField8	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar4\ \+\ 8\);$	+1
+use	evsEncodeDestination	iVar2	symbolField8	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(iVar2\ ==\ 1\)\ \{$@2	+1
+use	evsEncodeDestination	iVar2	symbolField8	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*else\ if\ \(iVar2\ ==\ 0\)\ \{$	+1
+use	evsEncodeDestination	iVar2	symbolField8	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*else\ if\ \(iVar2\ ==\ 2\)\ \{$	+1
+use	evsEncodeDestination	iVar2	symbolField8	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(iVar2\ !=\ 3\)\ \{$	+1
+use	arbfpInitUnitState	uVar1	compileField108	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar1\ =\ \*\(undefined4\ \*\)\(param_3\ \+\ 0x108\);$	+1
+use	arbfpInitUnitState	uVar1	compileField108	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(short\ \*\)\(param_5\ \+\ 0x91\)\ =\ \(short\)uVar1;$	+1
+use	arbfpInitUnitState	uVar1	fogUnitCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar1\ =\ 1;$	+1
+use	arbfpInitUnitState	uVar1	fogUnitCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar1\ =\ 2;$	+1
+use	arbfpInitUnitState	uVar1	fogUnitCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(undefined4\ \*\)\(param_4\ \+\ 0x20c\)\ =\ uVar1;$	+1
+local	glGenProgramsARB_impl	iVar1	foundIndex	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	glGetProgramivARB_impl	iVar2	entrySlot	INFERRED	role read off the function body (see notes_gld_q03.md)

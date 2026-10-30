@@ -4105,7 +4105,7 @@ int gld_drawPixelsAsPoints(ctx, srcPixels, procWidth, procHeight, srcRowBytes, b
   }
   *packetCursor = ((unsigned char *)0x000010c0U);
   packetCursor[1] = *(undefined4 *)(ctx + 0x216c);
-  packetCursor = (undefined4 *)FUN_00083c90(commandStream,packetCursor + 2);
+  packetCursor = (undefined4 *)gldEmitInternalDrawSetupPackets(commandStream,packetCursor + 2);
   scratchDouble6 = DOUBLE_001aa1e0;
   windowXStart = FLOAT_001aa10c;
   rasterYI2dLo = (float *)(rasterY ^ 0x80000000);
@@ -4247,7 +4247,7 @@ int gld_drawPixelsAsPoints(ctx, srcPixels, procWidth, procHeight, srcRowBytes, b
   *(float **)(ctx + 0x298c) = vertexCursor + 2;
   pointSizeI2dLo = pointSizeWord;
   (**(code **)(ctx + 0x299c))(commandStream,vertexCursor + 2);
-  FUN_0009d3b0(commandStream,r4AfterCall,scratchPtr13,scratchInt9,scratchPtr14,vertexCursor,scratchPtr16);
+  gldValidateVertexProgramState(commandStream,r4AfterCall,scratchPtr13,scratchInt9,scratchPtr14,vertexCursor,scratchPtr16);
   return gldLeaveInternalDrawState(commandStream,internalDrawStateSave);
 }
 
@@ -4267,7 +4267,7 @@ int gld_enterPointDrawState(ring, drawStateSave)
   FUN_0004b480(ring,*(uint *)(ring + 0x18a4) >> 6 & 0xffff);
   scratchUint3 = (**(code **)(ring + 0x2758))(ring,0x1f);
   *(undefined4 *)(0x00002748 + ring + 4) = scratchUint3;
-  packet = (undefined4 *)FUN_00083c90(ring,scratchUint3);
+  packet = (undefined4 *)gldEmitInternalDrawSetupPackets(ring,scratchUint3);
   *packet = ((unsigned char *)0x000010c0U);
   i2dBias = DOUBLE_001aa250;
   packet[1] = 0x80;
@@ -5659,7 +5659,7 @@ void gld_revalidateStreamProgram(int stream,int streamFlag,undefined4 passThroug
   if (forcedState != *(int *)(stream + 0x192c)) {
     ((void (*)())ffvpValidateProgramForced)(stream,streamFlag,passThroughArg3,passThroughArg4,passThroughArg5,passThroughArg6,scratchUint7,staleFprArg1,staleFprArg2,staleFprArg3,
                  staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleStackArg_ffffffb8);
-    FUN_00090960(stream);
+    gldClearHwTclFlag(stream);
     *(int *)(stream + 0x192c) = forcedState;
   }
   *(uint *)(stream + 0x1928) = *(uint *)(stream + 0x1928) & 0xfffffffe;
@@ -5787,14 +5787,14 @@ LAB_0002c610:
   else {
     if ((((dirtyBits[2] & 0x3f000008) != 0) || ((scratchUint8 & 0x4c00003) != 0)) ||
        ((*(char *)(engineObjects + 0x2a43) != '\0' || (scratchUint7 != 0)))) {
-      FUN_00090990(stream,dirtyBits);
-      FUN_00090840(stream);
+      gldUpdateHwTclState(stream,dirtyBits);
+      gldEmitTclModeRegs(stream);
     }
     if (*(char *)(engineObjects + 0x20) == '\0') {
       gld_buildActiveUnitList(stream);
     }
     ffvpSelectLitProgramVariant(stream);
-    FUN_00090960(stream);
+    gldClearHwTclFlag(stream);
     scratchUint8 = *dirtyBits;
     if (((scratchUint8 & 0x20000000) != 0) || (*(char *)(engineObjects + 0x2a43) != '\0')) {
       gld_emitDirtyStatePackets(engineObjects,0);
@@ -5877,7 +5877,7 @@ LAB_0002c610:
        * a dropped-call-args bug matching the same class already fixed for arbEmitRecord2Src_op01's own
        * dispatch calls. The line right above sets up *(0x2748+stream+4) - the exact "current
        * write pointer" value the real target expects as its 2nd argument - but never actually
-       * passes it; a sibling call site to this SAME dispatch slot (FUN_00082c50, part_011.c:8826)
+       * passes it; a sibling call site to this SAME dispatch slot (gldEmitProgramConstants, part_011.c:8826)
        * shows the correct, complete shape: `(*fn)(stream, *(int*)(0x2748+stream+4));`. Live-
        * verified via a hardware watchpoint installed from the moment CGLCreateContext returns
        * (tracking the target field through ~15 legitimate updates via gld_setStreamCursor): on real
@@ -6031,7 +6031,7 @@ int gld_initContextHardwareState(ctx, pixelFormat)
   *(undefined4 *)(ctx + 0x1ec) = 0;
   *(undefined4 *)(ctx + 0x1f0) = 0;
   gld_initContextDispatch(ctx);
-  FUN_000a0f90(engineBase);
+  atifsInit(engineBase);
   staleFprArg1 = (double)FUN_00052cc0(engineBase);
   *(undefined4 *)(((unsigned char *)0x00002b74) + ctx) = 0;
   *(undefined4 *)(ctx + 0x26a0) = 0;

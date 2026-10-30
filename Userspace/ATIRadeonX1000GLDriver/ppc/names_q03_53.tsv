@@ -1,0 +1,44 @@
+local	depListAddEdge	param_1	unusedArg1	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	depListAddEdge	param_2	listHead	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	depListAddEdge	param_3	recordIndex	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	depListAddEdge	param_4	componentMask	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	depListAddEdge	param_5	nodeField2	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	depListAddEdge	param_6	nodeField3	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	depListAddEdge	param_7	arena	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	depListAddEdge	piVar2	node	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*piVar2\ =\ \(int\ \*\)\*param_2;$	+1
+use	depListAddEdge	piVar2	node	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*piVar3\ =\ piVar2;$	+1
+use	depListAddEdge	piVar2	node	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*piVar2\ =\ \(int\ \*\)piVar3\[4\];$	+1
+use	depListAddEdge	piVar2	newNode	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*piVar2\ =\ \(int\ \*\)\(\(int\ \(\*\)\(\)\)FUN_00078e00\)\(param_7,0x14\);$	+8
+use	depListAddEdge	piVar2	newNode	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*piVar2\ =\ \(int\ \*\)\(\(int\ \(\*\)\(\)\)FUN_00078e00\)\(param_7,0x14\);$@2	+6
+local	depListAddEdge	piVar3	lastNode	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	depListAddEdge	iVar1	nextNode	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	chunkArenaAlloc	param_1	arena	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	chunkArenaAlloc	uVar3	bytesLeft	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar3\ =\ param_1\[0x105\];$	+2
+use	chunkArenaAlloc	uVar3	bytesLeft	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar3\ =\ 0x1000;$	+1
+use	chunkArenaAlloc	uVar3	bytesLeft	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*param_1\[0x105\]\ =\ uVar3\ \-\ param_2;$	+1
+use	chunkArenaAlloc	uVar3	chunkCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar3\ =\ param_1\[0x102\];$	+1
+use	chunkArenaAlloc	uVar3	chunkCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(uVar3\ <=\ uVar2\)\ \{$	+2
+use	chunkArenaAlloc	uVar3	chunkCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*param_1\[uVar3\ \+\ 2\]\ =\ uVar1;$	+1
+local	chunkArenaAlloc	uVar2	chunkIndex	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	chunkArenaAlloc	uVar1	newChunk	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	chunkArenaAlloc	iVar4	chunkCountOld	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar4\ =\ param_1\[0x102\];$	+1
+use	chunkArenaAlloc	iVar4	chunkCountOld	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(param_1\[iVar4\ \+\ 2\]\ ==\ 0\)\ \{$	+1
+use	chunkArenaAlloc	iVar4	chunkCountOld	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*param_1\[0x102\]\ =\ iVar4\ \+\ 1;$	+1
+use	chunkArenaAlloc	iVar4	cursor	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar4\ =\ param_1\[0x103\];$	+1
+use	chunkArenaAlloc	iVar4	cursor	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*param_1\[0x103\]\ =\ param_2\ \+\ iVar4;$	+2
+local	FUN_000776b0	param_1	alloc	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_000776b0	puVar2	clearPtr	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_000776b0	iVar3	remaining	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_000776b0	bVar1	moreWords	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	vpStateFree	param_1	ctx	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	vpStateFree	param_2	state	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	vpStateFree	iVar1	constantsBase	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_00086840	param_1	ctx	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	FUN_00086840	iVar2	regBase	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar2\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x1be0\);$	+1
+use	FUN_00086840	iVar2	regBase	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*a6\[1\]\ =\ uVar5\ \+\ iVar2;$	+1
+use	FUN_00086840	iVar2	cmdPos	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar2\ =\ \*\(int\ \*\)\(0x00002748\ \+\ param_1\ \+\ 4\);$	+1
+use	FUN_00086840	iVar2	cmdPos	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(int\ \*\)\(0x00002748\ \+\ param_1\ \+\ 4\)\ =\ iVar2\ \+\ 0x1c;$	+2
+local	FUN_00086840	pcVar3	streamSetCurrent	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_00086840	uVar4	clipPlaneMask	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_00086840	puVar6	planeEquation	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_00086840	bVar1	morePlanes	INFERRED	role read off the function body (see notes_gld_q03.md)

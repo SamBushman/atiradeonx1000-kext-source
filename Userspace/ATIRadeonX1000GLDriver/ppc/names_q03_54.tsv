@@ -1,0 +1,23 @@
+local	arbfpUpdateConstantsFp24	param_2	fpProgram	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbfpUpdateConstantsFp24	param_3	unusedArg3	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbfpUpdateConstantsFp24	param_4	unusedArg4	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	arbfpUpdateConstantsFp24	iVar6	fpInfo	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar6\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x74\);$	+1
+use	arbfpUpdateConstantsFp24	iVar6	fpInfo	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(0\ <\ \*\(int\ \*\)\(iVar6\ \+\ 0x84\)\)\ \{$	+1
+use	arbfpUpdateConstantsFp24	iVar6	fpInfo	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar10\ =\ iVar8\ \+\ \*\(int\ \*\)\(iVar6\ \+\ 0x80\);$	+1
+use	arbfpUpdateConstantsFp24	iVar6	fpInfo	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar6\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x74\);$@2	+1
+use	arbfpUpdateConstantsFp24	iVar6	fpInfo	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar6\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x74\);$@3	+1
+use	arbfpUpdateConstantsFp24	iVar6	fpInfo	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\}\ while\ \(iVar7\ <\ \*\(int\ \*\)\(iVar6\ \+\ 0x84\)\);$	+1
+use	arbfpUpdateConstantsFp24	iVar6	constRegOffset	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar6\ =\ \*\(int\ \*\)\(iVar10\ \+\ 4\)\ \*\ 0x10;$	+2
+use	arbfpUpdateConstantsFp24	iVar6	constRegOffset	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(int\ \*\)\(iVar6\ \+\ iVar9\ \+\ 0x8c\)\ =\ iVar2;$	+1
+local	arbfpUpdateConstantsFp24	iVar9	hwConstants	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbfpUpdateConstantsFp24	iVar10	paramEntry	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbfpUpdateConstantsFp24	iVar8	entryOffset	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbfpUpdateConstantsFp24	iVar2	fp24X	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbfpUpdateConstantsFp24	iVar3	fp24Y	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbfpUpdateConstantsFp24	iVar4	fp24Z	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbfpUpdateConstantsFp24	iVar5	fp24W	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbfpUpdateConstantsFp24	iVar1	slotPtr	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbfpUpdateConstantsFp24	fStack_48	paramX	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbfpUpdateConstantsFp24	fStack_44	paramY	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbfpUpdateConstantsFp24	fStack_40	paramZ	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbfpUpdateConstantsFp24	fStack_3c	paramW	INFERRED	role read off the function body (see notes_gld_q03.md)

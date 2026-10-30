@@ -3532,7 +3532,7 @@ int gld_emitInternalViewportPacket(glContext, dirtyMask)
       packet = packet + 2;
       *(undefined1 *)(glContext + 0x2802) = 1;
     }
-    packet = (undefined4 *)FUN_00083c90(glContext,packet);
+    packet = (undefined4 *)gldEmitInternalDrawSetupPackets(glContext,packet);
     i2dLo3 = *(undefined4 *)(glContext + 8);
     i2dHi3 = 0x43300000;
     *(undefined4 **)(glContext + 0x2794) = packet;
@@ -3565,7 +3565,7 @@ int gld_emitInternalViewportPacket(glContext, dirtyMask)
       packet = packet + 2;
       *(undefined1 *)(glContext + 0x2802) = 1;
     }
-    packet = (undefined4 *)FUN_00083c90(glContext,packet);
+    packet = (undefined4 *)gldEmitInternalDrawSetupPackets(glContext,packet);
     i2dLo4 = *(undefined4 *)(glContext + 8);
     i2dHi4 = 0x43300000;
     *(undefined4 **)(glContext + 0x2794) = packet;
@@ -3603,7 +3603,7 @@ int gld_emitInternalViewportPacket(glContext, dirtyMask)
   packet[0xf] = *(undefined4 *)(glContext + 0x1ccc);
   *(undefined4 **)(0x00002748 + glContext + 4) = packetEnd;
   (**(code **)(glContext + 0x275c))(glContext,packetEnd);
-  FUN_0009d3b0(glContext,r4AfterCall,drawFlagACopy,staleArgR6,packetEnd,staleArgR7,extentXFixed);
+  gldValidateVertexProgramState(glContext,r4AfterCall,drawFlagACopy,staleArgR6,packetEnd,staleArgR7,extentXFixed);
   gldLeaveInternalDrawState(glContext,savedDrawState);
   return;
 }
@@ -4079,7 +4079,7 @@ int gld_initContextDispatch(ctx)
   *(int *)(streamBase + 0x1154) = ((int (*)())gld_callocBytes)(0x90);
   *(int *)(streamBase + 0x112c) = ((int (*)())gld_callocBytes)(0x14);
   ((int (*)())atifsCreateShaderTable)(streamBase);
-  FUN_000a0ef0(streamBase);
+  arbProgramTableInit(streamBase);
   arbfpLoadDefaultProgram(streamBase);
   *(undefined1 *)(ctx + 0x26f) = 1;
   dispatchEntry = PTR_FUN_001e8a04;

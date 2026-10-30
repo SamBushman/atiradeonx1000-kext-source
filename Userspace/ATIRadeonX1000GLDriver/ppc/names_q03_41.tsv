@@ -1,0 +1,28 @@
+use	arbLexNumber	bVar1	curChar	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar1\ =\ \*pbVar6;$	+1
+use	arbLexNumber	bVar1	curChar	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*while\ \(\(bVar1\ \-\ 0x30\ \&\ 0xff\)\ <\ 10\)\ \{$	+1
+use	arbLexNumber	bVar1	curChar	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*dVar10\ =\ dVar10\ \*\ dVar3\ \+\ \(\(double\)CONCAT44\(0x43300000,bVar1\ \-\ 0x30\ \^\ 0x80000000\)\ \-\ dVar9\);$	+2
+use	arbLexNumber	bVar1	curChar	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(bVar1\ ==\ 0x2e\)\ \&\&\ \(pbVar7\ =\ pbVar6\ \+\ 1,\ pbVar6\[1\]\ !=\ 0x2e\)\)\ \{$	+1
+use	arbLexNumber	bVar1	curChar	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar1\ =\ pbVar6\[1\];$	+1
+use	arbLexNumber	bVar1	curChar	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*while\ \(\(bVar1\ \-\ 0x30\ \&\ 0xff\)\ <\ 10\)\ \{$@2	+1
+use	arbLexNumber	bVar1	curChar	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*dVar10\ =\ dVar9\ \*\ \(\(double\)CONCAT44\(0x43300000,bVar1\ \-\ 0x30\ \^\ 0x80000000\)\ \-\ dVar3\)\ \+\ dVar10;$	+1
+use	arbLexNumber	bVar1	curChar	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar1\ =\ \*pbVar7;$	+1
+use	arbLexNumber	bVar1	suffixChar	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar1\ =\ \*pbVar6;$@3	+2
+use	arbLexNumber	dVar3	ten	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*dVar3\ =\ DOUBLE_001aa238;$	+1
+use	arbLexNumber	dVar3	ten	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*dVar10\ =\ dVar10\ \*\ dVar3\ \+\ \(\(double\)CONCAT44\(0x43300000,bVar1\ \-\ 0x30\ \^\ 0x80000000\)\ \-\ dVar9\);$	+1
+use	arbLexNumber	dVar3	intBias	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*dVar3\ =\ DOUBLE_001aa1e0;$	+1
+use	arbLexNumber	dVar3	intBias	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*dVar10\ =\ dVar9\ \*\ \(\(double\)CONCAT44\(0x43300000,bVar1\ \-\ 0x30\ \^\ 0x80000000\)\ \-\ dVar3\)\ \+\ dVar10;$	+1
+local	arbLexNumber	dVar4	tenth	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbLexNumber	iVar5	exponent	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbLexNumber	pbVar6	cursor	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbLexNumber	pbVar7	fracCursor	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbLexNumber	uVar8	expDigit	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	arbLexNumber	dVar9	intBias2	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*dVar9\ =\ DOUBLE_001aa1e0;$	+1
+use	arbLexNumber	dVar9	intBias2	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*dVar10\ =\ dVar10\ \*\ dVar3\ \+\ \(\(double\)CONCAT44\(0x43300000,bVar1\ \-\ 0x30\ \^\ 0x80000000\)\ \-\ dVar9\);$	+1
+use	arbLexNumber	dVar9	fracScale	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*dVar9\ =\ DOUBLE_001aa220;$	+1
+use	arbLexNumber	dVar9	fracScale	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*dVar10\ =\ dVar9\ \*\ \(\(double\)CONCAT44\(0x43300000,bVar1\ \-\ 0x30\ \^\ 0x80000000\)\ \-\ dVar3\)\ \+\ dVar10;$	+2
+use	arbLexNumber	dVar9	exponentScale	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*dVar9\ =\ DOUBLE_001aa200;$	+1
+use	arbLexNumber	dVar9	exponentScale	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*dVar9\ =\ dVar9\ \*\ DOUBLE_001aa238;$	+1
+use	arbLexNumber	dVar9	exponentScale	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*dVar9\ =\ DOUBLE_001aa200;$@2	+1
+use	arbLexNumber	dVar9	exponentScale	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*dVar9\ =\ DOUBLE_001aa200\ /\ dVar9;$	+1
+use	arbLexNumber	dVar9	exponentScale	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*dVar10\ =\ dVar10\ \*\ dVar9;$	+1
+local	arbLexNumber	dVar10	value	INFERRED	role read off the function body (see notes_gld_q03.md)

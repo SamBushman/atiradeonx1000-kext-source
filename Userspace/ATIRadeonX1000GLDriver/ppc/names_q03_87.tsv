@@ -1,0 +1,20 @@
+use	recordProgramBuildDependencies	iVar36	wordIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar36\ =\ 0;$	+1
+use	recordProgramBuildDependencies	iVar36	wordIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar2\ =\ iVar36\ !=\ 8;$	+3
+use	recordProgramBuildDependencies	iVar36	edgeStatus	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar36\ =\ \(\(int\ \(\*\)\(\)\)FUN_00079910\)\(param_1,param_1\ \+\ 0x4114,pdVar13,pdVar14,0,0,pdVar18\);$	+3
+use	recordProgramBuildDependencies	iVar36	edgeStatus	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar36\ =\ \(\(int\ \(\*\)\(\)\)FUN_00079910\)\(param_1,param_1\ \+\ 0x4114,pdVar13,pdVar14,0,0,pdVar18\);$@2	+3
+use	recordProgramBuildDependencies	iVar36	predResult	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar36\ =\ \(\(int\ \(\*\)\(\)\)FUN_000777b0\)\(puVar9,uVar10\);$	+3
+use	recordProgramBuildDependencies	iVar36	predResult	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar36\ =\ \(\(int\ \(\*\)\(\)\)FUN_000777b0\)\(puVar9,uVar10\);$@2	+2
+use	recordProgramBuildDependencies	iVar36	predResult	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar36\ =\ 4;$@2	+1
+use	recordProgramBuildDependencies	iVar36	predResult	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar36\ =\ iVar36\ \+\ \-1;$@2	+2
+use	recordProgramBuildDependencies	iVar36	predResult	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(cVar22\ ==\ 'D'\)\ \&\&$	+2
+use	recordProgramBuildDependencies	iVar36	predResult	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(\(\*puVar27\ >>\ 6\ \&\ 1\)\ !=\ 0\)\ \&\&$	+4
+use	recordProgramBuildDependencies	uVar28	sourceWordValue	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar28\ =\ \*\*\(uint\ \*\*\)\(\(int\)local_a0\ \+\ \(int\)local_5c\);$	+1
+use	recordProgramBuildDependencies	uVar28	sourceWordValue	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar11\ =\ uVar28\ \&\ 0xf;$	+1
+use	recordProgramBuildDependencies	uVar28	sourceWordValue	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar11\ =\ uVar28\ >>\ 4\ \&\ 1;$	+1
+use	recordProgramBuildDependencies	uVar28	sourceWordValue	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar11\ =\ uVar28\ >>\ 0x1e\ \&\ 2\ \|\ uVar28\ >>\ 4\ \&\ 1;$	+1
+use	recordProgramBuildDependencies	uVar28	sourceWordValue	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(uVar11\ ==\ 1\)\ \&\&\ \(local_8c\ =\ uVar28\ >>\ 0x1d\ \&\ 3,\ \-1\ <\ \(int\)puVar4\)\)\ \{$	+1
+local	recordProgramBuildDependencies	puVar30	scanPtr	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	recordProgramBuildDependencies	puVar34	srcWordPtr	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar34\ =\ \(uint\ \*\)\(uVar10\ \+\ 4\);$	+1
+use	recordProgramBuildDependencies	puVar34	srcWordPtr	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar17\ =\ uVar17\ \|\ \*puVar34;$	+1
+use	recordProgramBuildDependencies	puVar34	recordPtrAlias	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar34\ =\ puVar9;$	+1
+use	recordProgramBuildDependencies	puVar34	recordPtrAlias	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar34\ =\ puVar34\ \+\ \-4;$	+2

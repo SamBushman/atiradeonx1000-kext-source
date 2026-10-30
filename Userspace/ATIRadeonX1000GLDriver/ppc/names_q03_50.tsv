@@ -1,0 +1,59 @@
+use	ffvpComputeOutputMasks	iVar5	stateBlock	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar5\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 4\)\ \+\ 0x10\);$	+1
+use	ffvpComputeOutputMasks	iVar5	stateBlock	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(unsigned\ char\ \*\)0x00002d48\)\[iVar5\ \+\ 3\]\ !=\ '\\0'\)\ \{$	+1
+use	ffvpComputeOutputMasks	iVar5	stateBlock	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(uVar8\ \&\ 0x1000800\)\ !=\ 0\)\ \&\&\ \(\*\(short\ \*\)\(\(\(unsigned\ char\ \*\)0x00002e06\)\ \+\ iVar5\)\ ==\ \-0x7baf\)\)\ \{$	+1
+use	ffvpComputeOutputMasks	iVar5	stateBlock	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(unsigned\ char\ \*\)0x00004301\)\[iVar5\]\ !=\ '\\0'\)\ \{$	+1
+use	ffvpComputeOutputMasks	iVar5	stateBlock	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\*\(short\ \*\)\(\(\(unsigned\ char\ \*\)0x00002d48\)\ \+\ iVar5\)\ ==\ \-0x7e06\)\ \{$	+1
+use	ffvpComputeOutputMasks	iVar5	stateBlock	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(unsigned\ char\ \*\)0x00002d48\)\[iVar5\ \+\ 4\]\ ==\ '\\0'\)\ \{$	+1
+use	ffvpComputeOutputMasks	iVar5	texPtrCursor	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar5\ =\ param_1;$	+1
+use	ffvpComputeOutputMasks	iVar5	texPtrCursor	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(\(unsigned\ char\ \*\)0x00001438\)\[iVar7\]\ !=\ '\\0'\)\ \&\&\ \(\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x000013f8\)\ \+\ iVar5\)\ !=\ 0\)\)\ \{$	+1
+use	ffvpComputeOutputMasks	iVar5	texPtrCursor	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar5\ =\ iVar5\ \+\ 4;$	+1
+local	ffvpComputeOutputMasks	iVar7	texFlagCursor	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	ffvpComputeOutputMasks	uVar1	ctxFlags8c	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar1\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x8c\);$	+2
+use	ffvpComputeOutputMasks	uVar1	outMask1ca0	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar1\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x1ca0\);$	+2
+use	ffvpComputeOutputMasks	uVar1	outMask1ca0	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x1ca0\)\ =\ uVar1\ \|\ 0xc;$	+1
+use	ffvpComputeOutputMasks	uVar1	newMask1b9c	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar1\ =\ 3;$	+1
+use	ffvpComputeOutputMasks	uVar1	newMask1b9c	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar1\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x1b9c\);$	+1
+use	ffvpComputeOutputMasks	uVar1	newMask1b9c	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar1\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x1b9c\)\ \|\ 0x1c;$	+2
+use	ffvpComputeOutputMasks	uVar1	newMask1b9c	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar1\ =\ 7;$	+1
+use	ffvpComputeOutputMasks	uVar1	newMask1b9c	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar1\ =\ uVar1\ \|\ 0x10000;$	+2
+use	ffvpComputeOutputMasks	uVar1	newMask1b9c	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar1\ =\ uVar1\ \|\ 4;$	+2
+use	ffvpComputeOutputMasks	uVar1	newMask1b9c	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(\(uVar9\ !=\ uVar1\)\ \|\|\ \(iVar11\ !=\ \*\(int\ \*\)\(param_1\ \+\ 0x1ba0\)\)\)\ \|\|$	+2
+use	ffvpComputeOutputMasks	uVar4	stateFlagsB	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x44\);$	+2
+use	ffvpComputeOutputMasks	uVar4	stateFlagsB	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*else\ if\ \(\(\(uVar4\ >>\ 0x17\ \&\ 1\)\ !=\ 0\ \|\|\ \(uVar4\ >>\ 0x15\ \&\ 1\)\ !=\ 0\)\ \|\|\ \(uVar4\ >>\ 0x10\ \&\ 1\)\ !=\ 0\)\ \{$	+1
+use	ffvpComputeOutputMasks	uVar4	texOutShift	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ 0;$	+1
+use	ffvpComputeOutputMasks	uVar4	texOutShift	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x1ba0\)\ =\ 4\ <<\ \(uVar4\ \&\ 0x3f\)\ \|\ \*\(uint\ \*\)\(param_1\ \+\ 0x1ba0\);$	+1
+use	ffvpComputeOutputMasks	uVar4	texOutShift	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ uVar4\ \+\ 3;$	+1
+use	ffvpComputeOutputMasks	uVar4	texLiveMask	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(uint\)\(byte\)\(\(unsigned\ char\ \*\)0x00001135\)\[param_1\];$	+1
+use	ffvpComputeOutputMasks	uVar4	texLiveMask	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(uint\)\(byte\)\(\(unsigned\ char\ \*\)0x000011d3\)\[param_1\];$	+1
+use	ffvpComputeOutputMasks	uVar4	texLiveMask	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(uVar4\ \&\ 1\ <<\ \(uVar6\ \&\ 0x3f\)\)\ !=\ 0\)\ \{$	+1
+use	ffvpComputeOutputMasks	uVar8	stateFlags	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar8\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x44\);$	+1
+use	ffvpComputeOutputMasks	uVar8	stateFlags	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(int\)uVar8\ <\ 0\)\ \{$	+1
+use	ffvpComputeOutputMasks	uVar8	stateFlags	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(uVar8\ \&\ 0xa10000\)\ !=\ 0\)\ \{$	+1
+use	ffvpComputeOutputMasks	uVar8	stateFlags	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(uVar8\ \&\ 0x1000800\)\ !=\ 0\)\ \&\&\ \(\*\(short\ \*\)\(\(\(unsigned\ char\ \*\)0x00002e06\)\ \+\ iVar5\)\ ==\ \-0x7baf\)\)\ \{$	+1
+use	ffvpComputeOutputMasks	uVar8	stateFlags	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(uVar8\ \&\ 0x1000000\)\ !=\ 0\)\ \&\&\ \(\*\(char\ \*\)\(param_1\ \+\ 0x121\)\ ==\ '\\0'\)\)\ \{$	+1
+use	ffvpComputeOutputMasks	uVar8	stateFlags	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(uVar8\ \&\ 0x20000\)\ ==\ 0\)\ \{$	+1
+use	ffvpComputeOutputMasks	uVar8	stateFlags	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(uVar8\ \&\ 0x2000\)\ ==\ 0\)\ \{$	+1
+use	ffvpComputeOutputMasks	uVar8	stateFlags	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(uVar8\ \&\ 0x800\)\ !=\ 0\)\ \{$	+1
+use	ffvpComputeOutputMasks	uVar8	stateFlags	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(uVar8\ \&\ 0x400\)\ !=\ 0\)\ \{$	+1
+use	ffvpComputeOutputMasks	uVar8	texUnitCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar8\ =\ \(uint\)\(byte\)\(\(unsigned\ char\ \*\)0x000013b0\)\[param_1\];$	+1
+use	ffvpComputeOutputMasks	uVar8	texUnitCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar8\ =\ \(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x2b\);$	+1
+use	ffvpComputeOutputMasks	uVar8	texUnitCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(uVar8\ !=\ 0\)\ \{$	+1
+use	ffvpComputeOutputMasks	uVar8	texUnitCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar8\ =\ uVar8\ \-\ 1;$	+2
+use	ffvpComputeOutputMasks	uVar8	texUnitCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar8\ =\ \(uint\)\(byte\)\(\(unsigned\ char\ \*\)0x000013b0\)\[param_1\];$@2	+2
+use	ffvpComputeOutputMasks	uVar8	texUnitCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(uVar8\ ==\ 0\)\ \{$	+2
+use	ffvpComputeOutputMasks	uVar8	texUnitCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar8\ =\ uVar8\ \-\ 1;$@2	+2
+local	FUN_00090990	param_1	ctx	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_00090990	param_2	dirtyMasks	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_00090990	bVar1	hwPathBlocked	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	FUN_00090990	iVar3	stateObject	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 4\);$	+2
+use	FUN_00090990	iVar3	stateObject	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(\(\(\(\*\(char\ \*\)\(iVar3\ \+\ 0x21\)\ !=\ '\\0'\)\ \&\&\ \(\(param_2\[3\]\ \&\ 0x10000000\)\ ==\ 0\)\)\ \&\&$	+4
+use	FUN_00090990	iVar3	stateObject	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\*\(char\ \*\)\(iVar3\ \+\ 0x20\)\ ==\ '\\0'\)\ \{$	+2
+use	FUN_00090990	iVar3	stateObject	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\*\(char\ \*\)\(iVar3\ \+\ 0x20\)\ !=\ '\\0'\)\ \{$	+2
+use	FUN_00090990	iVar3	stateObject	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(undefined4\ \*\)\(iVar3\ \+\ 0x1cc\)\ =\ 0;$	+1
+use	FUN_00090990	iVar3	unitCursor	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar3\ =\ param_1;$	+1
+use	FUN_00090990	iVar3	unitCursor	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(undefined1\ \*\)\(iVar3\ \+\ 0x1814\)\ =\ 0x3f;$	+3
+use	FUN_00090990	iVar4	stateBlock	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar4\ =\ \*\(int\ \*\)\(iVar3\ \+\ 0x10\);$	+2
+use	FUN_00090990	iVar4	stateBlock	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(\(\(\(\*\(char\ \*\)\(iVar3\ \+\ 0x21\)\ !=\ '\\0'\)\ \&\&\ \(\(param_2\[3\]\ \&\ 0x10000000\)\ ==\ 0\)\)\ \&\&$	+4
+use	FUN_00090990	iVar4	unitCursor2	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar4\ =\ param_1;$	+1
+use	FUN_00090990	iVar4	unitCursor2	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(undefined1\ \*\)\(iVar4\ \+\ 0x1814\)\ =\ 0x3f;$	+3
+local	FUN_00090990	uVar2	unitCount	INFERRED	role read off the function body (see notes_gld_q03.md)

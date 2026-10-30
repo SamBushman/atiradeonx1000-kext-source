@@ -1,0 +1,37 @@
+use	evsFoldConstantMoves	bVar1	laterHasX	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar1\ =\ \*\(int\ \*\)\(iVar13\ \+\ 0xc\)\ !=\ 0;$	+1
+use	evsFoldConstantMoves	bVar1	laterHasX	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(bVar1\)\ \|\|\ \(!\(bool\)\(bVar10\ >>\ 5\ \&\ 1\)\)\)\ \|\|\ \(\(bVar33\ \|\|\ \(bVar12\ =\ 0,\ fVar2\ ==\ \-1\.0\)\)\)$	+2
+use	evsFoldConstantMoves	bVar1	laterHasX	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(!bVar1\)\ \{$	+1
+use	evsFoldConstantMoves	bVar12	passX	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(bVar1\)\ \|\|\ \(!\(bool\)\(bVar10\ >>\ 5\ \&\ 1\)\)\)\ \|\|\ \(\(bVar33\ \|\|\ \(bVar12\ =\ 0,\ fVar2\ ==\ \-1\.0\)\)\)$	+3
+use	evsFoldConstantMoves	bVar12	passX	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar6\ =\ \(bool\)\(bVar7\ \&\ bVar29\ \&\ bVar14\ \&\ bVar12\);$	+1
+use	evsFoldConstantMoves	bVar14	passY	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(\*\(int\ \*\)\(iVar13\ \+\ 0x10\)\ !=\ 0\)\ \|\|\ \(bVar38\)\)\ \|\|$	+3
+use	evsFoldConstantMoves	bVar14	passY	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar6\ =\ \(bool\)\(bVar7\ \&\ bVar29\ \&\ bVar14\ \&\ bVar12\);$	+1
+use	evsFoldConstantMoves	bVar29	passZ	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(\(\*\(int\ \*\)\(iVar13\ \+\ 0x14\)\ !=\ 0\)\ \|\|\ \(bVar37\)\)\ \|\|\ \(bVar36\)\)\ \|\|$	+3
+use	evsFoldConstantMoves	bVar29	passZ	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar6\ =\ \(bool\)\(bVar7\ \&\ bVar29\ \&\ bVar14\ \&\ bVar12\);$	+1
+local	evsFoldConstantMoves	bVar7	passW	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsFoldConstantMoves	bVar6	allLanesPass	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	evsFoldConstantMoves	bVar10	crBitsByte	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar10\ =\ \(byte\)\(\(uint\)iStack_78\ >>\ 0x18\);$	+3
+use	evsFoldConstantMoves	bVar10	crBitsByte	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(bool\)\(bVar10\ >>\ 5\ \&\ 1\)\)\ \{$	+1
+use	evsFoldConstantMoves	bVar29	laneX	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar29\ =\ 0;$	+1
+use	evsFoldConstantMoves	bVar29	laneX	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar29\ =\ bVar29\ \|\ \*\(byte\ \*\)\(\(int\)piVar21\ \+\ \-0x11\);$	+1
+use	evsFoldConstantMoves	bVar29	laneX	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(bVar29\ !=\ 0\)\ \&\&\ \(\(bVar10\ !=\ 0\ \&\&\ \(bVar12\ !=\ 0\)\)\)\)\ \{$	+1
+use	evsFoldConstantMoves	bVar10	laneY	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar10\ =\ 0;$	+1
+use	evsFoldConstantMoves	bVar10	laneY	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar10\ =\ bVar10\ \|\ \*\(byte\ \*\)\(\(int\)piVar21\ \+\ \-0xd\);$	+1
+use	evsFoldConstantMoves	bVar10	laneY	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(bVar29\ !=\ 0\)\ \&\&\ \(\(bVar10\ !=\ 0\ \&\&\ \(bVar12\ !=\ 0\)\)\)\)\ \{$	+1
+use	evsFoldConstantMoves	bVar12	laneZ	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar12\ =\ 0;$	+1
+use	evsFoldConstantMoves	bVar12	laneZ	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar12\ =\ bVar12\ \|\ \*\(byte\ \*\)\(\(int\)piVar21\ \+\ \-9\);$	+1
+use	evsFoldConstantMoves	bVar12	laneZ	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(bVar29\ !=\ 0\)\ \&\&\ \(\(bVar10\ !=\ 0\ \&\&\ \(bVar12\ !=\ 0\)\)\)\)\ \{$	+1
+use	evsFoldConstantMoves	bVar14	laneW	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar14\ =\ 0;$	+1
+use	evsFoldConstantMoves	bVar14	laneW	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar14\ =\ bVar14\ \|\ \*\(byte\ \*\)\(\(int\)piVar21\ \+\ \-5\);$	+1
+use	evsFoldConstantMoves	bVar14	laneW	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar35\ =\ bVar14\ !=\ 0;$	+1
+use	evsFoldConstantMoves	bVar12	laneXLoaded	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar12\ =\ \*\(byte\ \*\)\(iVar11\ \+\ \-0x65\);$	+1
+use	evsFoldConstantMoves	bVar12	laneXLoaded	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(cStack_88\ ==\ '\\0'\)\ \|\|\ \(bVar12\ !=\ 0\)\)\ \&\&$	+3
+use	evsFoldConstantMoves	bVar12	laneXLoaded	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar12\ =\ bVar12\ \|\ \*\(byte\ \*\)\(iVar31\ \+\ 0xf\);$	+1
+use	evsFoldConstantMoves	bVar14	laneYLoaded	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar14\ =\ \*\(byte\ \*\)\(iVar11\ \+\ \-0x61\);$	+1
+use	evsFoldConstantMoves	bVar14	laneYLoaded	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(cStack_88\ ==\ '\\0'\)\ \|\|\ \(bVar12\ !=\ 0\)\)\ \&\&$	+3
+use	evsFoldConstantMoves	bVar14	laneYLoaded	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar14\ =\ bVar14\ \|\ \*\(byte\ \*\)\(iVar31\ \+\ 0x13\);$	+1
+use	evsFoldConstantMoves	bVar29	laneZLoaded	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar29\ =\ \*\(byte\ \*\)\(iVar11\ \+\ \-0x5d\);$	+1
+use	evsFoldConstantMoves	bVar29	laneZLoaded	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(cStack_88\ ==\ '\\0'\)\ \|\|\ \(bVar12\ !=\ 0\)\)\ \&\&$	+3
+use	evsFoldConstantMoves	bVar29	laneZLoaded	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar29\ =\ bVar29\ \|\ \*\(byte\ \*\)\(iVar31\ \+\ 0x17\);$	+1
+use	evsFoldConstantMoves	bVar10	laneWLoaded	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar10\ =\ \*\(byte\ \*\)\(iVar11\ \+\ \-0x59\);$	+1
+use	evsFoldConstantMoves	bVar10	laneWLoaded	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(cStack_88\ ==\ '\\0'\)\ \|\|\ \(bVar12\ !=\ 0\)\)\ \&\&$	+3
+use	evsFoldConstantMoves	bVar10	laneWLoaded	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar10\ =\ bVar10\ \|\ \*\(byte\ \*\)\(iVar31\ \+\ 0x1b\);$	+1

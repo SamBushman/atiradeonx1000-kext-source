@@ -1,0 +1,51 @@
+local	vpStateCacheFreeAll	param_1	ctx	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	vpStateCacheFreeAll	param_2	cacheTablePtr	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	vpStateCacheFreeAll	param_3	freeAll	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	vpStateCacheFreeAll	iVar5	cacheTable	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar5\ =\ \*param_2;$	+2
+use	vpStateCacheFreeAll	iVar5	cacheTable	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*piVar10\ =\ \*\(int\ \*\*\)\(iVar5\ \+\ iVar9\);$	+1
+use	vpStateCacheFreeAll	iVar5	cacheTable	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar5\ =\ \*param_2;$@2	+1
+local	vpStateCacheFreeAll	uVar7	firstIndex	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	vpStateCacheFreeAll	uVar3	endIndex	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	vpStateCacheFreeAll	iVar9	byteOffset	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	vpStateCacheFreeAll	piVar10	bucket	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	vpStateCacheFreeAll	piVar4	slotCursor	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	vpStateCacheFreeAll	piVar1	slotPtr	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	vpStateCacheFreeAll	iVar6	variant	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	vpStateCacheFreeAll	bVar2	moreSlots	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_00077560	param_1	alloc	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_00077560	param_2	recordIndex	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_00077560	param_3	depth	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_00077560	param_4	unusedArg4	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_00077560	param_5	unusedArg5	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_00077560	iVar2	slotBase	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	FUN_00077560	iVar3	liveCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x26870\);$	+1
+use	FUN_00077560	iVar3	liveCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(int\ \*\)\(param_1\ \+\ 0x26870\)\ =\ iVar3\ \+\ 1;$	+2
+use	FUN_00077560	iVar3	callerSlotBase	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar3\ =\ iVar2;$	+1
+use	FUN_00077560	iVar3	callerSlotBase	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\(int\ \(\*\)\(\)\)FUN_00077560\)\(param_1,\*puVar7,param_3\ \+\ 1,param_4,param_5,iVar3,uVar4\);$	+1
+local	FUN_00077560	uVar4	sourceMaskBit	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_00077560	uVar5	sourceSlot	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_00077560	piVar6	sourceListHead	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_00077560	puVar7	depNode	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_00077560	bVar1	moreSlots	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_000768e0	param_1	ctx	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_000768e0	param_2	vpCache	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_000768e0	iVar9	currentState	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_000768e0	iVar8	constantsBase	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_000768e0	iVar4	stateRecord	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_000768e0	uVar2	paramCount	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_000768e0	iVar6	oldMaxIndex	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_000768e0	iVar5	constSlotPtr	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_000768e0	puVar7	srcVector	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_00076770	param_1	ctx	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_00076770	param_3	vpCache	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_00076770	iVar4	stateRecord	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	FUN_00076770	iVar3	stateBlock	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar3\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 4\)\ \+\ 0x10\);$	+3
+use	FUN_00076770	iVar3	stateBlock	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*fVar2\ =\ \-\(\*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x00002df0\)\ \+\ iVar3\)\ \*\ \*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x00002df0\)\ \+\ iVar3\)\);$	+1
+use	FUN_00076770	iVar3	stateBlock	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*fVar5\ =\ \*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x00002dfc\)\ \+\ iVar3\)\ \*\ \*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x00002df8\)\ \+\ iVar3\);$	+2
+use	FUN_00076770	iVar3	stateBlock	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*fVar2\ =\ \-\*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x00002df0\)\ \+\ iVar3\);$	+1
+use	FUN_00076770	iVar3	constByteOffset	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar3\ =\ iVar6\ \*\ 0x10;$	+6
+local	FUN_00076770	sVar1	fogMode	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_00076770	iVar6	fogConstIndex	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_00076770	fVar5	fogParamY	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_00076770	fVar2	fogParamZ	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_00076770	iVar7	constRecord	INFERRED	role read off the function body (see notes_gld_q03.md)

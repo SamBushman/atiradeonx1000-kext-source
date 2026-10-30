@@ -1,0 +1,11 @@
+local	chunkArenaResetCursor	param_1	arena	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbfpInitResourceLimits	param_1	ctx	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbProgramIsValid	param_1	ctx	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	ffvpBuildPassThroughProgram	iVar3	memcmpResult	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	ffvpBuildPassThroughProgram	local_60	variantKeyWord2	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	ffvpBuildPassThroughProgram	local_5c	variantKeyWord3	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	recordRetargetDestination	uVar5	destWord	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar5\ =\ \*\(uint\ \*\)\(iVar7\ \+\ param_2\ \*\ 0x10\);$	+1
+use	recordRetargetDestination	uVar5	destWord	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(char\)\(DAT_001aa758\)\[uVar5\ >>\ 8\ \&\ 0xf\]\ \*\ 0x100\ \+\ \(uVar5\ >>\ 0xd\ \&\ 0x7f\)\ !=\ param_3\)\ \{$	+1
+use	recordRetargetDestination	uVar5	destWord	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(param_3\ \&\ 0x7f\)\ <<\ 0xd\ \|\ \(uVar8\ \&\ 0xf\)\ <<\ 8\ \|\ uVar5\ \&\ 0xfff010ff;$	+1
+use	recordRetargetDestination	uVar5	consumerSourceMask	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar5\ =\ \*\(uint\ \*\)\(iVar2\ \*\ 4\ \+\ param_1\ \+\ 0x6450\);$	+1
+use	recordRetargetDestination	uVar5	consumerSourceMask	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(uVar5\ \&\ 1\ <<\ \(uVar12\ \&\ 0x3f\)\)\ !=\ 0\)\ \&\&$	+2

@@ -1,0 +1,25 @@
+local	regBindingSetFixedRegister	param_1	alloc	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	regBindingSetFixedRegister	param_2	valueId	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	regBindingSetFixedRegister	param_3	componentMask	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	regBindingSetFixedRegister	param_4	strict	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	regBindingSetFixedRegister	param_5	unusedArg5	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	regBindingSetFixedRegister	bVar1	boundMaskByte	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	regBindingSetFixedRegister	uVar2	componentBit	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	regBindingSetFixedRegister	piVar3	valueIdPtr	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	regBindingSetFixedRegister	uVar4	compIdx	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	regBindingSetFixedRegister	iVar5	remaining	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	regBindingSet	bVar1	boundMaskByte	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	regBindingSet	piVar2	valueIdPtr	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	regBindingSet	uVar3	componentBit	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	regBindingSet	uVar4	compIdx	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	regBindingSet	iVar5	remaining	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordAssignDestinationRegister	cVar1	depState	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordAssignDestinationRegister	uVar2	combinedMask	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordAssignDestinationRegister	uVar3	writeMask	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	recordAssignDestinationRegister	iVar4	assignable	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar4\ =\ \(\(int\ \(\*\)\(\)\)FUN_00077d90\)\(param_1,param_2,$	+4
+use	recordAssignDestinationRegister	iVar4	freeReg	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar4\ =\ \(\(int\ \(\*\)\(\)\)FUN_00078250\)\(param_1,param_2,uVar2,param_3,uVar3\);$	+3
+use	recordAssignDestinationRegister	iVar4	freeReg	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*param_4\ =\ '\\x01'\ \-\ \(\(char\)\(DAT_001aa758\)\[uVar5\ >>\ 8\ \&\ 0xf\]\ \*\ 0x100\ \+\ \(uVar5\ >>\ 0xd\ \&\ 0x7f\)\ ==$	+2
+use	recordAssignDestinationRegister	iVar4	freeReg	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*return\ iVar4\ !=\ \-1;$	+1
+local	recordAssignDestinationRegister	uVar5	recordWord0	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordAssignDestinationRegister	piVar6	depNode	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordAssignDestinationRegister	puVar7	record	INFERRED	role read off the function body (see notes_gld_q03.md)
