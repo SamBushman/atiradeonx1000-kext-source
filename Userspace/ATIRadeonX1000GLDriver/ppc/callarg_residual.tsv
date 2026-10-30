@@ -19,9 +19,9 @@
 0x4f720	gldInitStateDefaults	0x4f930	memset	r9	0x9 not at argument 6 of any C call (1 C calls)	BENIGN-IMPORT-ARITY
 0x656b0	ffvpSelectPassThroughVariant	0x65790	FUN_00065610	r5	r1+0x38 (a stack address) not at argument 2 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
 0x656b0	ffvpSelectPassThroughVariant	0x65790	FUN_00065610	r6	r1+0x3c (a stack address) not at argument 3 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
-0x7a4a0	FUN_0007a4a0	0x7a604	recordDestFileIs0	r4	incoming param_3 not at argument 1 of any C call (2 C calls)	BENIGN-CALLEE-ONLY-RETURNS-IT
-0x7a4a0	FUN_0007a4a0	0x7aaa8	recordDestFileIs0	r4	incoming param_3 not at argument 1 of any C call (2 C calls)	BENIGN-CALLEE-ONLY-RETURNS-IT
-0x7aae0	FUN_0007aae0	0x7ad24	recordSourceFileIs0	r4	incoming param_8 not at argument 1 of any C call (1 C calls)	BENIGN-CALLEE-ONLY-RETURNS-IT
+0x7a4a0	recordPlanDestination	0x7a604	recordDestFileIs0	r4	incoming param_3 not at argument 1 of any C call (2 C calls)	BENIGN-CALLEE-ONLY-RETURNS-IT
+0x7a4a0	recordPlanDestination	0x7aaa8	recordDestFileIs0	r4	incoming param_3 not at argument 1 of any C call (2 C calls)	BENIGN-CALLEE-ONLY-RETURNS-IT
+0x7aae0	recordPickNextToEmit	0x7ad24	recordSourceFileIs0	r4	incoming param_8 not at argument 1 of any C call (1 C calls)	BENIGN-CALLEE-ONLY-RETURNS-IT
 0x8b160	arbParseSourceRegister	0x8afd8	arbParseParamBinding	r5	0x0 not at argument 2 of any C call (2 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)
 0x8b160	arbParseSourceRegister	0x8afd8	arbParseParamBinding	r6	0x0 not at argument 3 of any C call (2 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)
 0x8b160	arbParseSourceRegister	0x8b010	arbParseParamBinding	r5	0x0 not at argument 2 of any C call (2 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)
@@ -30,7 +30,7 @@
 0xa4980	FUN_000a4980	0xa56c8	FUN_000a3790	r7	r1+0x38 (a stack address) not at argument 4 of any C call (2 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)
 0xa4980	FUN_000a4980	0xa5760	FUN_000a3a60	r7	r1+0x38 (a stack address) not at argument 4 of any C call (2 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)
 0xb3630	atifsCompileCurrentShader	0xb4030	ilTokenBufPush	r9	0x3 not at argument 6 of any C call (13 C calls)	BENIGN-CALLEE-IGNORES
-0xb4400	FUN_000b4400	0xb49bc	FUN_000879f0	r10	0x0 not at argument 7 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
+0xb4400	FUN_000b4400	0xb49bc	arbfpInitUnitState	r10	0x0 not at argument 7 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
 0xc8e50	ilAssembleProgram	0xca130	ilEmitProjectiveDivide	r10	r1+0x7c (a stack address) not at argument 7 of any C call (2 C calls)	BENIGN-CALLEE-IGNORES
 0xcae90	ilRewriteForTextureState	0xcccc4	malloc	r9	r1+0x98 (a stack address) not at argument 6 of any C call (4 C calls)	BENIGN-IMPORT-ARITY
 0xed89c	Program__groupLoadsIntoProjections	0xed9ac	Vslot__outDefaults_0_0_4	r7	field at param_1+0x8: 1 stock site(s), 0 C call(s) carry it at argument 4 (1 C calls)	BENIGN-CALLEE-IGNORES

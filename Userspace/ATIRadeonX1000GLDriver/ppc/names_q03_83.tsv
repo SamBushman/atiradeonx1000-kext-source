@@ -1,0 +1,5 @@
+local	FUN_000934f0	uVar4	dstTempFile	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_000934f0	uVar5	srcTempFile	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_000934f0	uVar1	resultOrReg	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordRetireBindings	param_4	unusedArg4	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordRetireBindings	param_5	unusedArg5	INFERRED	role read off the function body (see notes_gld_q03.md)

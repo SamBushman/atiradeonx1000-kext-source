@@ -937,7 +937,7 @@ int FUN_000a9070(glContextPtr4, dirtyBitsWord10)
           if (iVar10 != 0) {
             iVar10 = iVar10 + 0x4c;
           }
-          FUN_00086a10(glContextPtr4 + 0x240,puVar19,iVar10);
+          gldUpdateLodBiasField(glContextPtr4 + 0x240,puVar19,iVar10);
         }
         if ((dirtyBitsWord10 & 0x100 << (loopIndex & 0x3f)) != 0) {
           *(undefined4 *)(puVar19 + 0x16) = *puVar18;
@@ -7668,7 +7668,7 @@ int FUN_000b4400(glContext, compileOutput, compileRecord, ilSource, glContextWor
   *puVar5 = 0;
   puVar5[2] = 0;
   compileRecord[2] = (int)(puVar5 + 0x12);
-  iVar8 = FUN_000879f0(glContext,compileOutput,compileRecord,compileRecord[1],puVar5 + 0x12,local_38,0);
+  iVar8 = arbfpInitUnitState(glContext,compileOutput,compileRecord,compileRecord[1],puVar5 + 0x12,local_38,0);
   iVar10 = 0;
   compileRecord[2] = iVar8;
   *(undefined1 *)(compileOutput + 0x7c8) = 1;
@@ -8582,7 +8582,7 @@ int FUN_000b5fb0(glContext)
     /* issue #79: the stock loads the slot's object into r4 (`lwz r4,0x1448(r30)`) BEFORE the
      * `beq` that skips an empty slot, so the `bctrl` at 0xb5ff0 sits in a different basic block
      * from the load of its second argument and the indirect-call argument count (1) missed it.
-     * The destroy callback (FUN_00087cd0) is (ctx, obj): the rebuilt code destroyed whatever
+     * The destroy callback (arbfpUnbindWorkAreaChecked) is (ctx, obj): the rebuilt code destroyed whatever
      * garbage was in r4 - the bad free(0x24) here and #74's 0x84c1 / 0x110001. */
     iVar3 = *(int *)(((unsigned char *)0x00001448) + iVar2);
     if (iVar3 != 0) {
@@ -8807,7 +8807,7 @@ int FUN_000b6580(glContext, param_2)
    * (confirmed live: ilRewriteForTextureState read local_64's slot as heap-garbage, not the value this function
    * just stored, because the two locals landed non-adjacent at -O0). This is the exact same defect,
    * same call chain (X -> FUN_000b4400 -> ilRewriteForTextureState's param_4[0]/param_4[1]), already fixed once
-   * for FUN_00087e80's own local_48 (part_012.c, issue #64) - declared as 7 separate scalars, they
+   * for arbfpCompileFragmentProgram's own local_48 (part_012.c, issue #64) - declared as 7 separate scalars, they
    * are not guaranteed contiguous by the compiler, only by the caller's own struct convention.
    * Merged into a real array, aliased back to the original names so the rest of this function's
    * logic is unchanged (issue #64). */

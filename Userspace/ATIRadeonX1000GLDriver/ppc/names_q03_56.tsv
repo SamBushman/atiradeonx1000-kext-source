@@ -1,0 +1,27 @@
+local	evsEmitOp879c	param_2	tokenStream	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsEmitOp879c	param_4	op	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsEmitOp879c	iVar3	tokenCountPtr	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsEmitOp879c	uVar4	laneIndex	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsEmitOp879c	uStack_44	dstWord1	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsEmitOp879c	uStack_40	dstWord2	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsEmitOp879c	uStack_3c	dstWord3	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsEmitOp879c	uStack_38	dstWord4	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsEmitOp879c	uStack_34	dstWord5	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsEmitOp879c	uStack_30	dstWord6	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsEmitIndexOrMove	param_2	tokenStream	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsEmitIndexOrMove	param_4	op	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsEmitIndexOrMove	puVar4	tokenCountPtr	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsEmitIndexOrMove	uVar2	newBuffer	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsEmitIndexOrMove	uVar3	tokenIndex	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordCountSourceRegisterFiles	uVar4	sourceMask	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordCountSourceRegisterFiles	uVar6	fileAndIndex	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordCountSourceRegisterFiles	local_28	seenKeys	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordCountSourceRegisterFiles	puVar5	seenSlot	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordCountSourceRegisterFiles	puVar3	seenCursor	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordCountSourceRegisterFiles	uVar2	seenKey	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordCountSourceRegisterFiles	uVar8	remaining	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	recordCountSourceRegisterFiles	bVar1	isNewKey	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar1\ =\ true;$	+1
+use	recordCountSourceRegisterFiles	bVar1	isNewKey	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar1\ =\ false;$	+1
+use	recordCountSourceRegisterFiles	bVar1	isNewKey	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(!bVar1\)\ goto\ LAB_00078b54;$	+1
+use	recordCountSourceRegisterFiles	bVar1	lastSource	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar1\ =\ uVar7\ ==\ 2;$	+1
+use	recordCountSourceRegisterFiles	bVar1	lastSource	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(bVar1\)\ \{$	+1

@@ -16,7 +16,7 @@ arbEmitIlRsq
 arbEmitIlExp
 arbEmitIlExn
 arbEmitIlPow
-FUN_0006e460
+arbEmitIlOp4e
 arbEmitIlMovMadMov
 arbEmitRecord3Src_op44
 arbEmitRecord2Src_op01

@@ -1,0 +1,19 @@
+local	gldEmitTclModeRegs	param_1	ctx	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	gldEmitTclModeRegs	uVar1	reg1b84Masked	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	gldEmitTclModeRegs	fVar2	oneF	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	gldEmitTclModeRegs	bVar4	xScaleNotOne	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	gldEmitTclModeRegs	puVar3	packet	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	gldEmitTclModeRegs	UNRECOVERED_JUMPTABLE	streamSetCurrent	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	ffvpEmitFogTexCoord	local_78	selectCopy0	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	ffvpEmitFogTexCoord	local_74	selectCopy1	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	ffvpEmitFogTexCoord	local_70	selectCopy2	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	ffvpEmitFogTexCoord	local_6c	selectCopy3	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbProgramEntryFree	param_2	entry	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbProgramEntryFree	iVar1	programObject	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	ffvpFreeTempRegister	param_1	programBuilder	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	ffvpFreeTempRegister	param_2	tempOperand	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	ffvpFreeTempRegister	iVar1	operandKind	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar1\ =\ \*param_2;$	+2
+use	ffvpFreeTempRegister	iVar1	operandKind	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(iVar1\ ==\ 0\)\ \{$	+1
+use	ffvpFreeTempRegister	iVar1	operandKind	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(iVar1\ !=\ 2\)\ \{$	+1
+use	ffvpFreeTempRegister	iVar1	laneSel	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar1\ =\ param_2\[6\];$	+3
+use	ffvpFreeTempRegister	iVar1	laneSel	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(iVar1\ !=\ 2\)\ \{$@2	+2

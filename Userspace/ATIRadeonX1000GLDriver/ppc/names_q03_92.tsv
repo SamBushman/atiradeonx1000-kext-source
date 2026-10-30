@@ -1,0 +1,19 @@
+use	recordRetireBindings	uVar16	earliestMaskB	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar16\ =\ 0;$@7	+1
+use	recordRetireBindings	uVar16	earliestMaskB	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(uVar15\ \&\ uVar16\)\ ==\ 0\)\ \{$	+1
+use	recordRetireBindings	uVar16	earliestMaskB	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar16\ =\ uVar16\ \|\ uVar15;$	+1
+use	recordRetireBindings	uVar16	earliestMaskB	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(uVar16\ !=\ 0\)\ \{$	+1
+use	recordRetireBindings	uVar16	earliestMaskB	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(1\ <<\ \(uVar14\ \&\ 0x3f\)\ \&\ uVar16\)\ !=\ 0\)\ \{$	+1
+use	recordRetireBindings	uVar16	earliestMaskB	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(uVar14\ !=\ uVar8\)\ \&\&\ \(\(1\ <<\ \(uVar8\ \&\ 0x3f\)\ \&\ uVar16\)\ !=\ 0\)\)\ \&\&$	+3
+use	recordRetireBindings	uVar16	earliestMaskB	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(uVar8\ \&\ uVar16\)\ !=\ 0\)\ \&\&$	+2
+use	recordRetireBindings	puVar6	earliestCursor	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar6\ =\ local_58;$	+1
+use	recordRetireBindings	puVar6	earliestCursor	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(\(uVar16\ !=\ uVar8\)\ \&\&\ \(\(1\ <<\ \(uVar8\ \&\ 0x3f\)\ \&\ uVar14\)\ !=\ 0\)\)\ \&\&$	+4
+use	recordRetireBindings	puVar6	earliestCursor	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar6\ =\ puVar6\ \+\ 1;$@3	+1
+use	recordRetireBindings	puVar6	earliestCursor	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar6\ =\ local_68;$	+1
+use	recordRetireBindings	puVar6	earliestCursor	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(uVar8\ \&\ uVar14\)\ !=\ 0\)\ \&\&$	+2
+use	recordRetireBindings	puVar6	earliestCursor	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar6\ =\ puVar6\ \+\ 1;$@4	+1
+use	recordRetireBindings	puVar6	earliestCursor	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar6\ =\ local_68;$@2	+1
+use	recordRetireBindings	puVar6	earliestCursor	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(uVar14\ !=\ uVar8\)\ \&\&\ \(\(1\ <<\ \(uVar8\ \&\ 0x3f\)\ \&\ uVar16\)\ !=\ 0\)\)\ \&\&$	+4
+use	recordRetireBindings	puVar6	earliestCursor	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar6\ =\ puVar6\ \+\ 1;$@5	+1
+use	recordRetireBindings	puVar6	earliestCursor	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar6\ =\ local_68;$@3	+1
+use	recordRetireBindings	puVar6	earliestCursor	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(uVar8\ \&\ uVar16\)\ !=\ 0\)\ \&\&$	+2
+use	recordRetireBindings	puVar6	earliestCursor	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar6\ =\ puVar6\ \+\ 1;$@6	+1

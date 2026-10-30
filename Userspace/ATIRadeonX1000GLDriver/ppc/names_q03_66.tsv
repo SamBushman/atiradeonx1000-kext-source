@@ -1,0 +1,31 @@
+use	evsAllocConstantsForOperand	iVar1	symbolTable	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar1\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x20\);$	+1
+use	evsAllocConstantsForOperand	iVar1	symbolTable	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar2\ =\ iVar4\ \+\ iVar1;$	+1
+use	evsAllocConstantsForOperand	iVar1	symbolTable	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar1\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x20\);$@2	+1
+use	evsAllocConstantsForOperand	iVar1	symbolTable	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\*\(int\ \*\)\(iVar4\ \+\ iVar1\ \+\ 0x34\)\ !=\ 0\)\ \{$	+1
+use	evsAllocConstantsForOperand	iVar1	symbolTable	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar1\ =\ \(\(int\ \(\*\)\(\)\)FUN_0006fdd0\)\(param_1,param_2,param_3,iVar1\ \+\ iVar2\);$	+2
+use	evsAllocConstantsForOperand	iVar1	symbolTable	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar1\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x20\);$@3	+1
+use	evsAllocConstantsForOperand	iVar1	symbolTable	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\}\ while\ \(uVar3\ <\ \*\(uint\ \*\)\(iVar1\ \+\ iVar4\ \+\ 0x34\)\);$	+1
+use	evsAllocConstantsForOperand	iVar1	allocResult	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar1\ =\ \(\(int\ \(\*\)\(\)\)FUN_0006fdd0\)\(param_1,param_2,param_3,iVar2\);$	+2
+use	evsAllocConstantsForOperand	iVar2	symbol	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar2\ =\ iVar4\ \+\ iVar1;$	+5
+use	evsAllocConstantsForOperand	iVar2	symbol	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar4\ =\ FUN_00054da0\(param_2\ \+\ 0x1c,\*\(int\ \*\)\(iVar2\ \+\ 0x30\)\);$	+1
+use	evsAllocConstantsForOperand	iVar2	childOffset	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar2\ =\ iVar4;$	+1
+use	evsAllocConstantsForOperand	iVar2	childOffset	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar1\ =\ \(\(int\ \(\*\)\(\)\)FUN_0006fdd0\)\(param_1,param_2,param_3,iVar1\ \+\ iVar2\);$	+1
+use	evsAllocConstantsForOperand	iVar2	childOffset	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar2\ =\ iVar2\ \+\ 0x54;$	+1
+local	evsAllocConstantsForOperand	iVar4	symbolOffset	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arrayRemoveAt	param_1	removeIndex	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arrayRemoveAt	param_2	countPtr	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arrayRemoveAt	param_3	array	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arrayRemoveAt	uVar1	lastIndex	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arrayRemoveAt	puVar2	elemPtr	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordCombinedWriteMask	param_1	alloc	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordCombinedWriteMask	param_2	recordIndex	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordCombinedWriteMask	iVar1	useNode	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordCombinedWriteMask	uVar2	mask	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbEmitRecord1Src_op02	param_1	ctx	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	arbEmitRecord1Src_op02	iVar14	recordCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x3cc\);$	+2
+use	arbEmitRecord1Src_op02	iVar14	recordCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x3cc\);$@2	+1
+use	arbEmitRecord1Src_op02	iVar14	recordCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar7\ =\ iVar14\ \*\ 0x10;$	+1
+use	arbEmitRecord1Src_op02	iVar14	recordCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(int\ \*\)\(param_1\ \+\ 0x3cc\)\ =\ iVar14\ \+\ 1;$	+1
+use	arbEmitRecord1Src_op02	iVar14	oldBytes	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x3e0\)\ \*\ 0x10;$	+4
+local	arbEmitRecord1Src_op02	iVar7	recordOffset	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbEmitRecord1Src_op02	iVar15	recordArray	INFERRED	role read off the function body (see notes_gld_q03.md)
