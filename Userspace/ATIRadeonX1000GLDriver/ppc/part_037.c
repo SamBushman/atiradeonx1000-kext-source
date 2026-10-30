@@ -62,10 +62,10 @@ int Program__isPreassignedHwReg(program, inst)
   undefined4 program;
   int inst;
 {
-  int iVar1;
+  int allowedResult;
   
   if (((*(uint *)(inst + 0x14) & 0x40) != 0) &&
-     (iVar1 = Program__isHwRegAllowed(program,*(undefined4 *)(inst + 0x94)), iVar1 != 0)) {
+     (allowedResult = Program__isHwRegAllowed(program,*(undefined4 *)(inst + 0x94)), allowedResult != 0)) {
     return 1;
   }
   return 0;
@@ -691,9 +691,9 @@ LAB_0011f744:
 #undef workData
 
 /* Program__assignVectorSlot @ 0x11f7fc (164 bytes) */
-int Program__assignVectorSlot(pass, param_2, vector)
+int Program__assignVectorSlot(pass, block, vector)
   int pass;
-  int param_2;
+  int block;
   uint *vector;
 {
   uint vectorCount;
@@ -702,8 +702,8 @@ int Program__assignVectorSlot(pass, param_2, vector)
   uint slotIndex;
   
   baseIndex = *(int *)(pass + 0x474);
-  if (baseIndex < *(int *)(param_2 + 0x150)) {
-    slotIndex = *(int *)(param_2 + 0x150) - baseIndex;
+  if (baseIndex < *(int *)(block + 0x150)) {
+    slotIndex = *(int *)(block + 0x150) - baseIndex;
   }
   else {
     vectorCount = vector[1];
@@ -715,9 +715,9 @@ int Program__assignVectorSlot(pass, param_2, vector)
     else {
       vectorElementSlot = (int *)Vector__elementRefGrow(vector,vectorCount);
     }
-    *vectorElementSlot = param_2;
+    *vectorElementSlot = block;
     slotIndex = vector[1];
-    *(uint *)(param_2 + 0x150) = slotIndex + baseIndex;
+    *(uint *)(block + 0x150) = slotIndex + baseIndex;
   }
   return slotIndex - 1;
 }
@@ -2867,8 +2867,8 @@ int Program__runSsaPipeline(program)
 }
 
 /* VRegPool__constructByKind @ 0x122e90 (44 bytes) */
-int VRegPool__constructByKind(param_1, kindIndex, keyExtra, keyLast)
-  undefined4 param_1;
+int VRegPool__constructByKind(arg0, kindIndex, keyExtra, keyLast)
+  undefined4 arg0;
   int kindIndex;
   uint keyExtra;
   uint keyLast;
@@ -2877,7 +2877,7 @@ int VRegPool__constructByKind(param_1, kindIndex, keyExtra, keyLast)
   
                     
                     
-  callResult = (**(code **)(PTR_PTR_001e8c60 + kindIndex * 0x10 + 0xc))(param_1,kindIndex,keyExtra,keyLast);
+  callResult = (**(code **)(PTR_PTR_001e8c60 + kindIndex * 0x10 + 0xc))(arg0,kindIndex,keyExtra,keyLast);
   return callResult;
 }
 

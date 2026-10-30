@@ -5,10 +5,10 @@ int KhanPs__vslot76_getBindingLimit(this, outLimit)
   int *this;
   undefined4 *outLimit;
 {
-  undefined4 uVar1;
+  undefined4 limit;
   
-  uVar1 = (**(code **)(*this + 0x138))(this,0);
-  *outLimit = uVar1;
+  limit = (**(code **)(*this + 0x138))(this,0);
+  *outLimit = limit;
   return;
 }
 
@@ -57,11 +57,11 @@ int LandingPad__resume_127fd8(param_1)
 }
 
 /* KhanPs__vslot62_lookupTableEntry @ 0x127ff8 (36 bytes) */
-int KhanPs__vslot62_lookupTableEntry(this, param_2)
+int KhanPs__vslot62_lookupTableEntry(this, entryIndex)
   undefined4 this;
-  int param_2;
+  int entryIndex;
 {
-  return *(undefined4 *)(PTR_PTR_001e910c + param_2 * 4);
+  return *(undefined4 *)(PTR_PTR_001e910c + entryIndex * 4);
 }
 
 /* KhanPs__vslot90_isProgramKind1 @ 0x12801c (20 bytes) */
@@ -700,10 +700,10 @@ LAB_00128e98:
 }
 
 /* KhanPs__ctor_128fd0 @ 0x128fd0 (312 bytes) */
-int KhanPs__ctor_128fd0(this, compiler, param_3)
+int KhanPs__ctor_128fd0(this, compiler, createSchedModels)
   undefined4 *this;
   undefined4 compiler;
-  int param_3;
+  int createSchedModels;
 {
   undefined *vtable;
   
@@ -734,17 +734,17 @@ int KhanPs__ctor_128fd0(this, compiler, param_3)
   BitSet__setBit(this,0x42);
   this[2] = this[2] | 0x20000;
   ((int (*)())KhanPs__vslot96_installHardwareTables)(this);
-  if (param_3 != 0) {
+  if (createSchedModels != 0) {
     ((int (*)())KhanPs__createSchedModels)(this,compiler);
   }
   return;
 }
 
 /* KhanPs__ctor_129130 @ 0x129130 (312 bytes) */
-int KhanPs__ctor_129130(this, compiler, param_3)
+int KhanPs__ctor_129130(this, compiler, createSchedModels)
   undefined4 *this;
   undefined4 compiler;
-  int param_3;
+  int createSchedModels;
 {
   undefined *vtable;
   
@@ -775,7 +775,7 @@ int KhanPs__ctor_129130(this, compiler, param_3)
   BitSet__setBit(this,0x42);
   this[2] = this[2] | 0x20000;
   ((int (*)())KhanPs__vslot96_installHardwareTables)(this);
-  if (param_3 != 0) {
+  if (createSchedModels != 0) {
     ((int (*)())KhanPs__createSchedModels)(this,compiler);
   }
   return;
@@ -816,12 +816,12 @@ int KhanVs__vslot76_getBindingLimits(this, outLimits)
   int *this;
   undefined4 *outLimits;
 {
-  undefined4 uVar1;
+  undefined4 limit;
   
-  uVar1 = (**(code **)(*this + 0x138))(this,0);
-  *outLimits = uVar1;
-  uVar1 = (**(code **)(*this + 0x140))(this,0);
-  outLimits[1] = uVar1;
+  limit = (**(code **)(*this + 0x138))(this,0);
+  *outLimits = limit;
+  limit = (**(code **)(*this + 0x140))(this,0);
+  outLimits[1] = limit;
   return;
 }
 
@@ -830,11 +830,11 @@ int KhanVs__vslot77_getBindingLimits(this, outLimits)
   int *this;
   undefined4 *outLimits;
 {
-  undefined4 uVar1;
+  undefined4 limit;
   
   *outLimits = 0;
-  uVar1 = (**(code **)(*this + 0x138))(this,0);
-  outLimits[1] = uVar1;
+  limit = (**(code **)(*this + 0x138))(this,0);
+  outLimits[1] = limit;
   return;
 }
 
@@ -1732,10 +1732,10 @@ int KhanVs__createSchedModels(this, compiler)
 }
 
 /* KhanVs__ctor_12a578 @ 0x12a578 (288 bytes) */
-int KhanVs__ctor_12a578(this, compiler, param_3)
+int KhanVs__ctor_12a578(this, compiler, createSchedModels)
   undefined4 *this;
   undefined4 compiler;
-  int param_3;
+  int createSchedModels;
 {
   undefined *vtable;
   
@@ -1768,17 +1768,17 @@ int KhanVs__ctor_12a578(this, compiler, param_3)
   this[0x19] = 0;
   this[0x18] = 0;
   ((int (*)())KhanVs__vslot96_installHardwareTables)(this);
-  if (param_3 != 0) {
+  if (createSchedModels != 0) {
     ((int (*)())KhanVs__createSchedModels)(this,compiler);
   }
   return;
 }
 
 /* KhanVs__ctor_12a6c0 @ 0x12a6c0 (288 bytes) */
-int KhanVs__ctor_12a6c0(this, compiler, param_3)
+int KhanVs__ctor_12a6c0(this, compiler, createSchedModels)
   undefined4 *this;
   undefined4 compiler;
-  int param_3;
+  int createSchedModels;
 {
   undefined *vtable;
   
@@ -1811,17 +1811,17 @@ int KhanVs__ctor_12a6c0(this, compiler, param_3)
   this[0x19] = 0;
   this[0x18] = 0;
   ((int (*)())KhanVs__vslot96_installHardwareTables)(this);
-  if (param_3 != 0) {
+  if (createSchedModels != 0) {
     ((int (*)())KhanVs__createSchedModels)(this,compiler);
   }
   return;
 }
 
 /* FudoVs__ctor_12a808 @ 0x12a808 (124 bytes) */
-int FudoVs__ctor_12a808(this, allocContext, param_3)
+int FudoVs__ctor_12a808(this, allocContext, createSchedModels)
   undefined4 *this;
   undefined4 allocContext;
-  int param_3;
+  int createSchedModels;
 {
   ((int (*)())KhanVs__ctor_12a6c0)(this,allocContext,0);
   *this = &PTR_FUN_001eb0c0;
@@ -1829,17 +1829,17 @@ int FudoVs__ctor_12a808(this, allocContext, param_3)
   this[0x10] = 0x400;
   this[2] = this[2] | 0x10100;
   ((int (*)())FudoVs__vslot96_installHardwareTables)(this);
-  if (param_3 != 0) {
+  if (createSchedModels != 0) {
     ((int (*)())FudoVs__createSchedModels)(this,allocContext);
   }
   return;
 }
 
 /* FudoVs__ctor_12a8bc @ 0x12a8bc (124 bytes) */
-int FudoVs__ctor_12a8bc(this, allocContext, param_3)
+int FudoVs__ctor_12a8bc(this, allocContext, createSchedModels)
   undefined4 *this;
   undefined4 allocContext;
-  int param_3;
+  int createSchedModels;
 {
   ((int (*)())KhanVs__ctor_12a6c0)(this,allocContext,0);
   *this = &PTR_FUN_001eb0c0;
@@ -1847,7 +1847,7 @@ int FudoVs__ctor_12a8bc(this, allocContext, param_3)
   this[0x10] = 0x400;
   this[2] = this[2] | 0x10100;
   ((int (*)())FudoVs__vslot96_installHardwareTables)(this);
-  if (param_3 != 0) {
+  if (createSchedModels != 0) {
     ((int (*)())FudoVs__createSchedModels)(this,allocContext);
   }
   return;
@@ -2086,8 +2086,8 @@ int Block__hasInstWithQuery28(block, optionResult, armLimitKind, staleArg4, stal
 }
 
 /* Program__mergeBlockWithSuccessor @ 0x12aef0 (248 bytes) */
-int Program__mergeBlockWithSuccessor(param_1, firstBlock, block)
-  undefined4 param_1;
+int Program__mergeBlockWithSuccessor(program, firstBlock, block)
+  undefined4 program;
   undefined4 firstBlock;
   int block;
 {

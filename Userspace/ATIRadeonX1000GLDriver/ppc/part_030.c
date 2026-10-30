@@ -406,9 +406,9 @@ int IRPhiNode__ctor_10a398(this, compiler)
 }
 
 /* IRLoopStart__ctor_10a474 @ 0x10a474 (96 bytes) */
-int IRLoopStart__ctor_10a474(this, param_2, compiler)
+int IRLoopStart__ctor_10a474(this, unusedArg2, compiler)
   undefined4 *this;
-  undefined4 param_2;
+  undefined4 unusedArg2;
   int compiler;
 {
   undefined *vtable;
@@ -423,9 +423,9 @@ int IRLoopStart__ctor_10a474(this, param_2, compiler)
 }
 
 /* IRLoopStart__ctor_10a50c @ 0x10a50c (96 bytes) */
-int IRLoopStart__ctor_10a50c(this, param_2, compiler)
+int IRLoopStart__ctor_10a50c(this, unusedArg2, compiler)
   undefined4 *this;
-  undefined4 param_2;
+  undefined4 unusedArg2;
   int compiler;
 {
   undefined *vtable;
@@ -455,9 +455,9 @@ int IRLoadConst__vslot65(this, compiler)
 }
 
 /* IRCmp1S__ctor_10a620 @ 0x10a620 (100 bytes) */
-int IRCmp1S__ctor_10a620(this, param_2, compiler)
+int IRCmp1S__ctor_10a620(this, unusedArg2, compiler)
   undefined4 *this;
-  undefined4 param_2;
+  undefined4 unusedArg2;
   int compiler;
 {
   undefined *vtable;
@@ -472,9 +472,9 @@ int IRCmp1S__ctor_10a620(this, param_2, compiler)
 }
 
 /* IRCmp1S__ctor_10a6bc @ 0x10a6bc (100 bytes) */
-int IRCmp1S__ctor_10a6bc(this, param_2, compiler)
+int IRCmp1S__ctor_10a6bc(this, unusedArg2, compiler)
   undefined4 *this;
-  undefined4 param_2;
+  undefined4 unusedArg2;
   int compiler;
 {
   undefined *vtable;
@@ -677,7 +677,7 @@ int outputScaleExponent(double scale)
 }
 
 /* tryOutputScaleExponent @ 0x10ab8c (172 bytes) */
-undefined4 tryOutputScaleExponent(undefined4 param_1,undefined4 *outExponent,double scale)
+undefined4 tryOutputScaleExponent(undefined4 unusedArg1,undefined4 *outExponent,double scale)
 {
   undefined4 exponent;
   
@@ -766,7 +766,7 @@ int IRInst__newOpcode8c(operandWord2, compiler)
   undefined4 arena;
   undefined4 *allocation;
   int operandRecord;
-  undefined4 uVar3;
+  undefined4 defaultSwizzle;
   undefined4 *newInst;
   
   arena = *(undefined4 *)(compiler + COMP_arenaA);
@@ -777,9 +777,9 @@ int IRInst__newOpcode8c(operandWord2, compiler)
   operandRecord = IRInst__getOperandRecord(newInst,1);
   *(undefined4 *)(operandRecord + 8) = operandWord2;
   *(undefined4 *)(operandRecord + 0xc) = 0;
-  uVar3 = UNK_001af9d4;
+  defaultSwizzle = UNK_001af9d4;
   operandRecord = IRInst__getOperandRecord(newInst,1);
-  *(undefined4 *)(operandRecord + 0x10) = uVar3;
+  *(undefined4 *)(operandRecord + 0x10) = defaultSwizzle;
   allocation[0x4c] = 0;
   return newInst;
 }
@@ -842,7 +842,7 @@ int IRInst__cloneIfPresub(inst, program, trackUses)
   int operandRecord;
   int needsClone;
   int *result;
-  undefined4 *puVar3;
+  undefined4 *vectorAlloc;
   uint userCount;
   int sourceInst;
   undefined4 arena;
@@ -874,13 +874,13 @@ int IRInst__cloneIfPresub(inst, program, trackUses)
         userCount = userVector[1];
         if (userCount < *userVector) {
           _memset(userCount * 4 + userVector[2],0,4);
-          puVar3 = (undefined4 *)(userCount * 4 + userVector[2]);
+          vectorAlloc = (undefined4 *)(userCount * 4 + userVector[2]);
           userVector[1] = userCount + 1;
         }
         else {
-          puVar3 = (undefined4 *)Vector__elementRefGrow(userVector,userCount);
+          vectorAlloc = (undefined4 *)Vector__elementRefGrow(userVector,userCount);
         }
-        *puVar3 = result;
+        *vectorAlloc = result;
       }
     }
     for (operandIndex2 = 1; sourceInst = (**(code **)(*result + 0x14))(result), operandIndex2 <= sourceInst; operandIndex2 = operandIndex2 + 1
@@ -997,7 +997,7 @@ int IRInst__applyAbsModifier(outValue, inst, operandIndex, valueBits)
 }
 
 /* IRInst__createCompareConstInst @ 0x10b32c (100 bytes) */
-int IRInst__createCompareConstInst(undefined4 compareKind,undefined4 operandWord2,undefined4 operandWord3,undefined4 param_4,int compiler,double value)
+int IRInst__createCompareConstInst(undefined4 compareKind,undefined4 operandWord2,undefined4 operandWord3,undefined4 unusedArg4,int compiler,double value)
 {
   undefined4 defaultSelect;
   undefined4 literalLaneCount;

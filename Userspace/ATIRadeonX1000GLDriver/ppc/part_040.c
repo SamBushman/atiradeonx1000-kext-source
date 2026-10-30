@@ -39,12 +39,12 @@ int IRInst__swapCompareOperands(branchInst, inst, compiler)
   int inst;
   uint compiler;
 {
-  uint uVar1;
+  uint branchFlags;
   
   switch(*(undefined4 *)(branchInst + 300)) {
   case 0:
     IROperand__setModifierBits(inst + 0xa4,2,1);
-    uVar1 = *(uint *)(inst + 0xb8);
+    branchFlags = *(uint *)(inst + 0xb8);
     goto LAB_0012b4b0;
   case 1:
     IROperand__setModifierBits(inst + 0xa4,2,1);
@@ -58,9 +58,9 @@ int IRInst__swapCompareOperands(branchInst, inst, compiler)
   case 4:
     break;
   case 5:
-    uVar1 = *(uint *)(inst + 0xb8);
+    branchFlags = *(uint *)(inst + 0xb8);
 LAB_0012b4b0:
-    IROperand__setModifierBits(inst + 0xa4,1,uVar1 & 1 ^ 1);
+    IROperand__setModifierBits(inst + 0xa4,1,branchFlags & 1 ^ 1);
     return;
   }
   IRInst__swapOperands(inst,2,3,compiler);
@@ -489,14 +489,14 @@ int Program__collapseIfRegion(pass, block)
 }
 
 /* Program__hasKillTexture @ 0x12c0e4 (80 bytes) */
-int Program__hasKillTexture(param_1)
-  int param_1;
+int Program__hasKillTexture(program)
+  int program;
 {
   int inst;
   int nextInst;
   
-  inst = *(int *)(param_1 + 0x98);
-  nextInst = *(int *)(*(int *)(param_1 + 0x98) + 8);
+  inst = *(int *)(program + 0x98);
+  nextInst = *(int *)(*(int *)(program + 0x98) + 8);
   while( true ) {
     if (nextInst == 0) {
       return 0;
@@ -706,7 +706,7 @@ int LoopInfo__matchCounterInit(loopInfo, inst)
   int index;
   int sourceCount;
   int *byteCursor;
-  undefined4 local_28 [6];
+  undefined4 operandSwizzleBytes [6];
   
   index = (**(code **)(*inst + 100))(inst,inst);
   if (index != 0) {
@@ -744,8 +744,8 @@ int LoopInfo__matchCounterInit(loopInfo, inst)
         index = (**(code **)(*operandVReg + 0x48))(operandVReg);
         if (index != 0) {
           index = IRInst__getOperandRecord(inst,1);
-          local_28[0] = *(undefined4 *)(index + 0x10);
-          lane = (uint)*(byte *)((int)local_28 + *(int *)(loopInfo + 0x38));
+          operandSwizzleBytes[0] = *(undefined4 *)(index + 0x10);
+          lane = (uint)*(byte *)((int)operandSwizzleBytes + *(int *)(loopInfo + 0x38));
           if (((int)*(char *)(operandVReg + 0x57) >> (lane & 0x3f) & 1U) == 0) {
             *(undefined4 *)(loopInfo + 4) = 0;
             *(uint *)(loopInfo + 0xc) = lane;
@@ -3164,11 +3164,11 @@ int Array4__contains(value, table)
 int RegAlloc__nextTempId(allocator)
   int allocator;
 {
-  int iVar1;
+  int tempId;
   
-  iVar1 = *(int *)(*(int *)(allocator + 0x2c) + 0x3c4) + 1;
-  *(int *)(*(int *)(allocator + 0x2c) + 0x3c4) = iVar1;
-  return iVar1 + *(int *)(allocator + 8);
+  tempId = *(int *)(*(int *)(allocator + 0x2c) + 0x3c4) + 1;
+  *(int *)(*(int *)(allocator + 0x2c) + 0x3c4) = tempId;
+  return tempId + *(int *)(allocator + 8);
 }
 
 /* Program__markHwRegUsed @ 0x130444 (52 bytes) */
@@ -3358,11 +3358,11 @@ int IRInst__chainLast(inst)
 int IRInst__chainLastOfPredecessor(inst)
   undefined4 inst;
 {
-  int iVar1;
+  int chainNode;
   undefined4 callResult;
   
-  iVar1 = ((int (*)())IRInst__chainLast)(inst);
-  callResult = ((int (*)())IRInst__chainLast)(*(undefined4 *)(iVar1 + 4));
+  chainNode = ((int (*)())IRInst__chainLast)(inst);
+  callResult = ((int (*)())IRInst__chainLast)(*(undefined4 *)(chainNode + 4));
   return callResult;
 }
 
@@ -3408,10 +3408,10 @@ int IRInst__advanceToChainEnd(inst)
 int IRInst__chainEndNext(pendingInst)
   undefined4 pendingInst;
 {
-  int iVar1;
+  int chainEnd;
   
-  iVar1 = ((int (*)())IRInst__advanceToChainEnd)(pendingInst);
-  return *(undefined4 *)(iVar1 + 8);
+  chainEnd = ((int (*)())IRInst__advanceToChainEnd)(pendingInst);
+  return *(undefined4 *)(chainEnd + 8);
 }
 
 /* IRInst__chainEndSkippingFlag4000000 @ 0x130904 (64 bytes) */
@@ -3430,10 +3430,10 @@ int IRInst__chainEndSkippingFlag4000000(inst)
 }
 
 /* Record__field98IsBelow2 @ 0x130944 (20 bytes) */
-int Record__field98IsBelow2(param_1)
-  int param_1;
+int Record__field98IsBelow2(record)
+  int record;
 {
-  return *(uint *)(param_1 + 0x98) < 2;
+  return *(uint *)(record + 0x98) < 2;
 }
 
 /* BitSet__testRegisterLane_130958 @ 0x130958 (36 bytes) */
@@ -3449,14 +3449,14 @@ int BitSet__testRegisterLane_130958(bitSet, registerIndex, lane)
 }
 
 /* BitSet__testAnyLane @ 0x13097c (64 bytes) */
-int BitSet__testAnyLane(liveWords, param_2)
+int BitSet__testAnyLane(liveWords, registerIndex)
   int liveWords;
-  int param_2;
+  int registerIndex;
 {
   uint bitIndex;
   int remainingLanes;
   
-  bitIndex = param_2 << 2;
+  bitIndex = registerIndex << 2;
   remainingLanes = 4;
   do {
     if ((*(uint *)((bitIndex >> 3 & 0x1ffffffc) + liveWords + 8) >> (bitIndex & 0x1f) & 1) != 0) {
@@ -3685,15 +3685,15 @@ int RegAlloc__cloneSourceDefAfter(allocator, inst, operandIndex, afterInst, comp
   undefined4 compiler;
 {
   undefined4 sourceDef;
-  undefined4 uVar1;
+  undefined4 newTempId;
   int callResult;
   
   sourceDef = IRInst__getOperandSource(inst,operandIndex);
   callResult = IRInst__clone(sourceDef,compiler,0);
   if ((*(uint *)(inst + 0x14) & 0x40) == 0) {
-    uVar1 = ((int (*)())RegAlloc__nextTempId)(allocator);
+    newTempId = ((int (*)())RegAlloc__nextTempId)(allocator);
     *(undefined4 *)(callResult + 0x98) = 0;
-    *(undefined4 *)(callResult + 0x94) = uVar1;
+    *(undefined4 *)(callResult + 0x94) = newTempId;
   }
   Block__insertInstAfter(*(undefined4 *)(afterInst + 0x158),afterInst,callResult);
   *(uint *)(callResult + 0x14) = *(uint *)(callResult + 0x14) | 0x8000000;

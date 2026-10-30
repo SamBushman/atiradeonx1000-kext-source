@@ -239,10 +239,10 @@ int LoopIndexedOutputSet__ctor_126694(this, ctorWord2, ctorWord1, ctorWord3, com
 }
 
 /* RegKind__flagBit7 @ 0x126708 (44 bytes) */
-int RegKind__flagBit7(param_1)
-  int param_1;
+int RegKind__flagBit7(regKind)
+  int regKind;
 {
-  return *(uint *)(&DAT_001ea904 + param_1 * 0x10) >> 7 & 1;
+  return *(uint *)(&DAT_001ea904 + regKind * 0x10) >> 7 & 1;
 }
 
 /* RegKind__flagBit8 @ 0x126734 (44 bytes) */
@@ -260,17 +260,17 @@ int RegKind__flagBit0(kind)
 }
 
 /* RegKind__flagBit6 @ 0x12678c (44 bytes) */
-int RegKind__flagBit6(param_1)
-  int param_1;
+int RegKind__flagBit6(regKind)
+  int regKind;
 {
-  return *(uint *)(&DAT_001ea904 + param_1 * 0x10) >> 6 & 1;
+  return *(uint *)(&DAT_001ea904 + regKind * 0x10) >> 6 & 1;
 }
 
 /* Table1ea904__hasFlag0x11 @ 0x1267b8 (52 bytes) */
-int Table1ea904__hasFlag0x11(param_1)
-  int param_1;
+int Table1ea904__hasFlag0x11(rowIndex)
+  int rowIndex;
 {
-  return -(uint)(*(uint *)(&DAT_001ea904 + param_1 * 0x10) & 0x11) >> 0x1f;
+  return -(uint)(*(uint *)(&DAT_001ea904 + rowIndex * 0x10) & 0x11) >> 0x1f;
 }
 
 /* ImmedConstBuffer__vslot283 @ 0x1267ec (84 bytes) */
@@ -291,24 +291,24 @@ int ImmedConstBuffer__vslot283(this, ctorWord1, ctorWord3, compiler)
 }
 
 /* RegKind__flagBit1 @ 0x126878 (44 bytes) */
-int RegKind__flagBit1(param_1)
-  int param_1;
+int RegKind__flagBit1(regKind)
+  int regKind;
 {
-  return *(uint *)(&DAT_001ea904 + param_1 * 0x10) >> 1 & 1;
+  return *(uint *)(&DAT_001ea904 + regKind * 0x10) >> 1 & 1;
 }
 
 /* RegKind__flagBit9 @ 0x1268a4 (44 bytes) */
-int RegKind__flagBit9(param_1)
-  int param_1;
+int RegKind__flagBit9(regKind)
+  int regKind;
 {
-  return *(uint *)(&DAT_001ea904 + param_1 * 0x10) >> 9 & 1;
+  return *(uint *)(&DAT_001ea904 + regKind * 0x10) >> 9 & 1;
 }
 
 /* RegKind__byte4 @ 0x1268d0 (40 bytes) */
-int RegKind__byte4(param_1)
-  int param_1;
+int RegKind__byte4(regKind)
+  int regKind;
 {
-  return (DAT_001ea908)[param_1 * 0x10];
+  return (DAT_001ea908)[regKind * 0x10];
 }
 
 /* ImmedConstBuffer__vslot235 @ 0x1268f8 (84 bytes) */
@@ -607,17 +607,17 @@ int ImmedConstBuffer__vslot39(this, interpolatorKind, baseCtorArg4, compiler)
 }
 
 /* ConstKey__lanes1 @ 0x127264 (8 bytes) */
-int ConstKey__lanes1(param_1)
-  int param_1;
+int ConstKey__lanes1(key)
+  int key;
 {
-  return *(undefined4 *)(param_1 + 0x20);
+  return *(undefined4 *)(key + 0x20);
 }
 
 /* ConstKey__lanes2 @ 0x12726c (16 bytes) */
-int ConstKey__lanes2(param_1)
-  int param_1;
+int ConstKey__lanes2(key)
+  int key;
 {
-  return *(int *)(param_1 + 0x20) + *(int *)(param_1 + 0x38);
+  return *(int *)(key + 0x20) + *(int *)(key + 0x38);
 }
 
 /* ConstKey__lanes3 @ 0x12727c (24 bytes) */
@@ -636,10 +636,10 @@ int ConstKey__lanes4(key)
 }
 
 /* Object__sumWords4And8 @ 0x1272b4 (16 bytes) */
-int Object__sumWords4And8(param_1)
-  int param_1;
+int Object__sumWords4And8(object)
+  int object;
 {
-  return *(int *)(param_1 + 4) + *(int *)(param_1 + 8);
+  return *(int *)(object + 4) + *(int *)(object + 8);
 }
 
 /* Object__setWord0 @ 0x1272cc (8 bytes) */

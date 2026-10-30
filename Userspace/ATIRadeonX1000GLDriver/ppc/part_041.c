@@ -2123,19 +2123,19 @@ LAB_00134a58:
 }
 
 /* InterferenceNode__setSpillSlot @ 0x134aa8 (8 bytes) */
-int InterferenceNode__setSpillSlot(param_1, spillSlot)
-  int param_1;
+int InterferenceNode__setSpillSlot(node, spillSlot)
+  int node;
   undefined4 spillSlot;
 {
-  *(undefined4 *)(param_1 + 0x14) = spillSlot;
+  *(undefined4 *)(node + 0x14) = spillSlot;
   return;
 }
 
 /* InterferenceNode__getSpillSlot @ 0x134ab0 (8 bytes) */
-int InterferenceNode__getSpillSlot(param_1)
-  int param_1;
+int InterferenceNode__getSpillSlot(node)
+  int node;
 {
-  return *(undefined4 *)(param_1 + 0x14);
+  return *(undefined4 *)(node + 0x14);
 }
 
 /* NeighbourList__locateAppendSlot @ 0x134ab8 (100 bytes) */
@@ -2389,30 +2389,30 @@ int NeighbourList__reserveAppendSlot(neighbourList, slotInBlockRef, currentBlock
 }
 
 /* storeAfterLocate @ 0x134fc0 (80 bytes) */
-int storeAfterLocate(neighbourList, param_2, slotInBlockRef, currentBlockRef, compiler)
+int storeAfterLocate(neighbourList, value, slotInBlockRef, currentBlockRef, compiler)
   undefined4 neighbourList;
-  undefined4 param_2;
+  undefined4 value;
   int *slotInBlockRef;
   int *currentBlockRef;
   undefined4 compiler;
 {
   ((int (*)())NeighbourList__reserveAppendSlot)(neighbourList,slotInBlockRef,currentBlockRef,compiler);
-  *(undefined4 *)(*currentBlockRef + *slotInBlockRef * 4) = param_2;
+  *(undefined4 *)(*currentBlockRef + *slotInBlockRef * 4) = value;
   return;
 }
 
 /* NeighbourList__free_135010 @ 0x135010 (128 bytes) */
-int NeighbourList__free_135010(param_1)
-  int param_1;
+int NeighbourList__free_135010(neighbourList)
+  int neighbourList;
 {
   int sideTable;
   int chunk;
   
-  while (chunk = *(int *)(param_1 + 8), chunk != 0) {
-    *(undefined4 *)(param_1 + 8) = *(undefined4 *)(chunk + 0x1c);
+  while (chunk = *(int *)(neighbourList + 8), chunk != 0) {
+    *(undefined4 *)(neighbourList + 8) = *(undefined4 *)(chunk + 0x1c);
     Arena__free(*(undefined4 *)(chunk + -4),chunk + -4);
   }
-  sideTable = *(int *)(param_1 + 0x10);
+  sideTable = *(int *)(neighbourList + 0x10);
   if (sideTable != 0) {
     Arena__free(*(undefined4 *)(sideTable + 0xc),*(undefined4 *)(sideTable + 8));
     Arena__free(*(undefined4 *)(sideTable + -4),sideTable + -4);
@@ -4478,15 +4478,15 @@ int Liveness__allocLiveTable(liveness)
 }
 
 /* IRInst__laneWrittenInChain @ 0x138240 (120 bytes) */
-int IRInst__laneWrittenInChain(inst, param_2)
+int IRInst__laneWrittenInChain(inst, lane)
   int inst;
-  int param_2;
+  int lane;
 {
   int operandRecord;
   
   do {
     operandRecord = IRInst__getOperandRecord(inst,0);
-    if (*(char *)(param_2 + operandRecord + 0x10) == '\0') {
+    if (*(char *)(lane + operandRecord + 0x10) == '\0') {
       return 1;
     }
   } while (((*(uint *)(inst + 0x14) & 0x200) != 0) &&
@@ -4495,9 +4495,9 @@ int IRInst__laneWrittenInChain(inst, param_2)
 }
 
 /* IRInst__findLaneDefinition @ 0x1382b8 (216 bytes) */
-int IRInst__findLaneDefinition(inst, param_2, laneDefOut)
+int IRInst__findLaneDefinition(inst, lane, laneDefOut)
   int *inst;
-  uint param_2;
+  uint lane;
   uint *laneDefOut;
 {
   uint laneIndexAfter;
@@ -4505,7 +4505,7 @@ int IRInst__findLaneDefinition(inst, param_2, laneDefOut)
   int vtableQueryResult;
   uint laneIndexBefore;
   
-  *laneDefOut = param_2;
+  *laneDefOut = lane;
 LAB_001382d4:
   do {
     laneIndexBefore = *laneDefOut;
@@ -5058,8 +5058,8 @@ int Program__finishUsevectorChain(inst, unusedArg2, unusedArg3, program)
 }
 
 /* Mask__countSetBits4 @ 0x139008 (44 bytes) */
-int Mask__countSetBits4(param_1)
-  int param_1;
+int Mask__countSetBits4(mask)
+  int mask;
 {
   uint shiftAmount;
   uint bitIndex;
@@ -5072,7 +5072,7 @@ int Mask__countSetBits4(param_1)
   do {
     shiftAmount = bitIndex & 0x3f;
     bitIndex = bitIndex + 1;
-    setBitCount = setBitCount + (param_1 >> shiftAmount & 1U);
+    setBitCount = setBitCount + (mask >> shiftAmount & 1U);
     remainingLanes = remainingLanes + -1;
   } while (remainingLanes != 0);
   return setBitCount;

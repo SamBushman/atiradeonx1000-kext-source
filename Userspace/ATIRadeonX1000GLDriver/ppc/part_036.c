@@ -3951,10 +3951,10 @@ int Compiler__initStaticLocals()
 }
 
 /* Value__lowHalfword @ 0x11e6ec (8 bytes) */
-int Value__lowHalfword(param_1)
-  undefined4 param_1;
+int Value__lowHalfword(value)
+  undefined4 value;
 {
-  return (*(unsigned short *)((unsigned char *)&(param_1) + 2));
+  return (*(unsigned short *)((unsigned char *)&(value) + 2));
 }
 
 /* IRPhi__getUniqueSource @ 0x11e6f4 (140 bytes) */

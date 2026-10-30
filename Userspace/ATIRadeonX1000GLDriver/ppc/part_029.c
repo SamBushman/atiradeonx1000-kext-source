@@ -94,9 +94,9 @@ int IRLoadConst__vslot55(this, compiler)
 }
 
 /* IRCmp2__ctor_1080e0 @ 0x1080e0 (92 bytes) */
-int IRCmp2__ctor_1080e0(this, param_2, compiler)
+int IRCmp2__ctor_1080e0(this, unusedArg2, compiler)
   undefined4 *this;
-  undefined4 param_2;
+  undefined4 unusedArg2;
   int compiler;
 {
   undefined *vtable;
