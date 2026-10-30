@@ -9431,22 +9431,22 @@ int extvsInstReadsTempComponents(symbolTable, inst, tempIndex, outReadsX, outRea
   undefined1 *outReadsW;
 {
   int swizzleSelect;
-  bool bVar1;
-  bool bVar2;
-  bool bVar3;
+  bool componentReadFlag1;
+  bool componentReadFlag2;
+  bool componentReadFlag3;
   char destEnableX;
   char destEnableY;
   char destEnableZ;
   char destEnableW;
-  bool bVar8;
-  bool bVar9;
-  bool bVar10;
-  bool bVar11;
-  bool bVar12;
-  bool bVar13;
-  bool bVar14;
-  bool bVar15;
-  bool bVar16;
+  bool componentReadFlag8;
+  bool componentReadFlag9;
+  bool componentReadFlag10;
+  bool componentReadFlag11;
+  bool componentReadFlag12;
+  bool componentReadFlag13;
+  bool componentReadFlag14;
+  bool componentReadFlag15;
+  bool componentReadFlag16;
   undefined1 readFlag;
   int operandDataType;
   
@@ -9477,8 +9477,8 @@ switchD_000b7340_caseD_8782:
     if (operandDataType != 0x87bf) goto switchD_000b7340_caseD_8782;
   case 0x879a:
   case 0x879b:
-    bVar3 = destEnableX == '\0';
-    if ((((bVar3) || ((inst[10] != 0x87d5 && (inst[10] != 0x87d9)))) &&
+    componentReadFlag3 = destEnableX == '\0';
+    if ((((componentReadFlag3) || ((inst[10] != 0x87d5 && (inst[10] != 0x87d9)))) &&
         (((destEnableY == '\0' || ((inst[0xb] != 0x87d5 && (inst[0xb] != 0x87d9)))) &&
          ((destEnableZ == '\0' || ((inst[0xc] != 0x87d5 && (inst[0xc] != 0x87d9)))))))) &&
        ((destEnableW == '\0' || ((inst[0xd] != 0x87d5 && (inst[0xd] != 0x87d9)))))) {
@@ -9488,7 +9488,7 @@ switchD_000b7340_caseD_8782:
       readFlag = 1;
     }
     *outReadsX = readFlag;
-    if (((((bVar3) || ((inst[10] != 0x87d6 && (inst[10] != 0x87da)))) &&
+    if (((((componentReadFlag3) || ((inst[10] != 0x87d6 && (inst[10] != 0x87da)))) &&
          ((destEnableY == '\0' || ((inst[0xb] != 0x87d6 && (inst[0xb] != 0x87da)))))) &&
         ((destEnableZ == '\0' || ((inst[0xc] != 0x87d6 && (inst[0xc] != 0x87da)))))) &&
        ((destEnableW == '\0' || ((inst[0xd] != 0x87d6 && (inst[0xd] != 0x87da)))))) {
@@ -9498,7 +9498,7 @@ switchD_000b7340_caseD_8782:
       readFlag = 1;
     }
     *outReadsY = readFlag;
-    if ((((bVar3) || ((inst[10] != 0x87d7 && (inst[10] != 0x87db)))) &&
+    if ((((componentReadFlag3) || ((inst[10] != 0x87d7 && (inst[10] != 0x87db)))) &&
         ((destEnableY == '\0' || ((inst[0xb] != 0x87d7 && (inst[0xb] != 0x87db)))))) &&
        (((destEnableZ == '\0' || ((inst[0xc] != 0x87d7 && (inst[0xc] != 0x87db)))) &&
         ((destEnableW == '\0' || ((inst[0xd] != 0x87d7 && (inst[0xd] != 0x87db)))))))) {
@@ -9508,7 +9508,7 @@ switchD_000b7340_caseD_8782:
       readFlag = 1;
     }
     *outReadsZ = readFlag;
-    if ((((bVar3) || ((inst[10] != 0x87d8 && (inst[10] != 0x87dc)))) &&
+    if ((((componentReadFlag3) || ((inst[10] != 0x87d8 && (inst[10] != 0x87dc)))) &&
         ((destEnableY == '\0' || ((inst[0xb] != 0x87d8 && (inst[0xb] != 0x87dc)))))) &&
        ((destEnableZ == '\0' || ((inst[0xc] != 0x87d8 && (inst[0xc] != 0x87dc)))))) {
       if (destEnableW == '\0') {
@@ -9529,150 +9529,150 @@ LAB_000b9960:
       swizzleSelect = inst[10];
       if ((((swizzleSelect == 0x87d5) || (swizzleSelect == 0x87d9)) || (inst[0xb] == 0x87d5)) ||
          (((inst[0xb] == 0x87d9 || (inst[0xc] == 0x87d5)) ||
-          (bVar3 = false, inst[0xc] == 0x87d9)))) {
-        bVar3 = true;
+          (componentReadFlag3 = false, inst[0xc] == 0x87d9)))) {
+        componentReadFlag3 = true;
       }
       if (((swizzleSelect == 0x87d6) || (swizzleSelect == 0x87da)) ||
          ((inst[0xb] == 0x87d6 ||
           (((inst[0xb] == 0x87da || (inst[0xc] == 0x87d6)) ||
-           (bVar9 = false, inst[0xc] == 0x87da)))))) {
-        bVar9 = true;
+           (componentReadFlag9 = false, inst[0xc] == 0x87da)))))) {
+        componentReadFlag9 = true;
       }
       if (((swizzleSelect == 0x87d7) || (swizzleSelect == 0x87db)) ||
          (((inst[0xb] == 0x87d7 || ((inst[0xb] == 0x87db || (inst[0xc] == 0x87d7)))) ||
-          (bVar11 = false, inst[0xc] == 0x87db)))) {
-        bVar11 = true;
+          (componentReadFlag11 = false, inst[0xc] == 0x87db)))) {
+        componentReadFlag11 = true;
       }
       if (((((swizzleSelect == 0x87d8) || (swizzleSelect == 0x87dc)) || (inst[0xb] == 0x87d8)) ||
           ((inst[0xb] == 0x87dc || (inst[0xc] == 0x87d8)))) ||
-         (bVar1 = false, inst[0xc] == 0x87dc)) {
-        bVar1 = true;
+         (componentReadFlag1 = false, inst[0xc] == 0x87dc)) {
+        componentReadFlag1 = true;
       }
     }
     else {
-      bVar3 = false;
-      bVar9 = false;
-      bVar11 = false;
-      bVar1 = false;
+      componentReadFlag3 = false;
+      componentReadFlag9 = false;
+      componentReadFlag11 = false;
+      componentReadFlag1 = false;
     }
     if ((inst[0xf] == 2) && (tempIndex == inst[0x10])) {
       swizzleSelect = inst[0x11];
       if ((((swizzleSelect == 0x87d5) || (swizzleSelect == 0x87d9)) || (inst[0x12] == 0x87d5)) ||
          (((inst[0x12] == 0x87d9 || (inst[0x13] == 0x87d5)) ||
-          (bVar8 = false, inst[0x13] == 0x87d9)))) {
-        bVar8 = true;
+          (componentReadFlag8 = false, inst[0x13] == 0x87d9)))) {
+        componentReadFlag8 = true;
       }
       if (((swizzleSelect == 0x87d6) || (swizzleSelect == 0x87da)) ||
          ((inst[0x12] == 0x87d6 ||
           (((inst[0x12] == 0x87da || (inst[0x13] == 0x87d6)) ||
-           (bVar10 = false, inst[0x13] == 0x87da)))))) {
-        bVar10 = true;
+           (componentReadFlag10 = false, inst[0x13] == 0x87da)))))) {
+        componentReadFlag10 = true;
       }
       if (((swizzleSelect == 0x87d7) || (swizzleSelect == 0x87db)) ||
          (((inst[0x12] == 0x87d7 || ((inst[0x12] == 0x87db || (inst[0x13] == 0x87d7)))) ||
-          (bVar12 = false, inst[0x13] == 0x87db)))) {
-        bVar12 = true;
+          (componentReadFlag12 = false, inst[0x13] == 0x87db)))) {
+        componentReadFlag12 = true;
       }
       if (((((swizzleSelect == 0x87d8) || (swizzleSelect == 0x87dc)) || (inst[0x12] == 0x87d8)) ||
           ((inst[0x12] == 0x87dc || (inst[0x13] == 0x87d8)))) ||
-         (bVar2 = false, inst[0x13] == 0x87dc)) {
-        bVar2 = true;
+         (componentReadFlag2 = false, inst[0x13] == 0x87dc)) {
+        componentReadFlag2 = true;
       }
     }
     else {
-      bVar8 = false;
-      bVar10 = false;
-      bVar12 = false;
-      bVar2 = false;
+      componentReadFlag8 = false;
+      componentReadFlag10 = false;
+      componentReadFlag12 = false;
+      componentReadFlag2 = false;
     }
-    if ((bVar3) || (readFlag = 0, bVar8)) {
+    if ((componentReadFlag3) || (readFlag = 0, componentReadFlag8)) {
       readFlag = 1;
     }
     *outReadsX = readFlag;
-    if ((bVar9) || (readFlag = 0, bVar10)) {
+    if ((componentReadFlag9) || (readFlag = 0, componentReadFlag10)) {
       readFlag = 1;
     }
     *outReadsY = readFlag;
-    if ((bVar11) || (readFlag = 0, bVar12)) {
+    if ((componentReadFlag11) || (readFlag = 0, componentReadFlag12)) {
       readFlag = 1;
     }
     *outReadsZ = readFlag;
-    if (bVar1) break;
+    if (componentReadFlag1) break;
     goto LAB_000b9dfc;
   case 0x8785:
     if ((inst[8] == 2) && (tempIndex == inst[9])) {
       swizzleSelect = inst[10];
       if ((((((swizzleSelect == 0x87d5) || (swizzleSelect == 0x87d9)) || (inst[0xb] == 0x87d5)) ||
            ((inst[0xb] == 0x87d9 || (inst[0xc] == 0x87d5)))) || (inst[0xc] == 0x87d9)) ||
-         ((inst[0xd] == 0x87d5 || (bVar3 = false, inst[0xd] == 0x87d9)))) {
-        bVar3 = true;
+         ((inst[0xd] == 0x87d5 || (componentReadFlag3 = false, inst[0xd] == 0x87d9)))) {
+        componentReadFlag3 = true;
       }
       if ((((swizzleSelect == 0x87d6) || (swizzleSelect == 0x87da)) || (inst[0xb] == 0x87d6)) ||
          (((inst[0xb] == 0x87da || (inst[0xc] == 0x87d6)) ||
           ((inst[0xc] == 0x87da ||
-           ((inst[0xd] == 0x87d6 || (bVar9 = false, inst[0xd] == 0x87da)))))))) {
-        bVar9 = true;
+           ((inst[0xd] == 0x87d6 || (componentReadFlag9 = false, inst[0xd] == 0x87da)))))))) {
+        componentReadFlag9 = true;
       }
       if ((((swizzleSelect == 0x87d7) || (swizzleSelect == 0x87db)) || (inst[0xb] == 0x87d7)) ||
          (((inst[0xb] == 0x87db || (inst[0xc] == 0x87d7)) ||
           ((inst[0xc] == 0x87db ||
-           ((inst[0xd] == 0x87d7 || (bVar11 = false, inst[0xd] == 0x87db)))))))) {
-        bVar11 = true;
+           ((inst[0xd] == 0x87d7 || (componentReadFlag11 = false, inst[0xd] == 0x87db)))))))) {
+        componentReadFlag11 = true;
       }
       if (((((swizzleSelect == 0x87d8) || (swizzleSelect == 0x87dc)) || (inst[0xb] == 0x87d8)) ||
           ((inst[0xb] == 0x87dc || (inst[0xc] == 0x87d8)))) ||
          ((inst[0xc] == 0x87dc ||
-          ((inst[0xd] == 0x87d8 || (bVar1 = false, inst[0xd] == 0x87dc)))))) {
-        bVar1 = true;
+          ((inst[0xd] == 0x87d8 || (componentReadFlag1 = false, inst[0xd] == 0x87dc)))))) {
+        componentReadFlag1 = true;
       }
     }
     else {
-      bVar3 = false;
-      bVar9 = false;
-      bVar11 = false;
-      bVar1 = false;
+      componentReadFlag3 = false;
+      componentReadFlag9 = false;
+      componentReadFlag11 = false;
+      componentReadFlag1 = false;
     }
     if ((inst[0xf] == 2) && (tempIndex == inst[0x10])) {
       swizzleSelect = inst[0x11];
       if ((((swizzleSelect == 0x87d5) || (swizzleSelect == 0x87d9)) || (inst[0x12] == 0x87d5)) ||
          (((inst[0x12] == 0x87d9 || (inst[0x13] == 0x87d5)) ||
           ((inst[0x13] == 0x87d9 ||
-           ((inst[0x14] == 0x87d5 || (bVar8 = false, inst[0x14] == 0x87d9)))))))) {
-        bVar8 = true;
+           ((inst[0x14] == 0x87d5 || (componentReadFlag8 = false, inst[0x14] == 0x87d9)))))))) {
+        componentReadFlag8 = true;
       }
       if ((((swizzleSelect == 0x87d6) || (swizzleSelect == 0x87da)) || (inst[0x12] == 0x87d6)) ||
          (((inst[0x12] == 0x87da || (inst[0x13] == 0x87d6)) ||
           ((inst[0x13] == 0x87da ||
-           ((inst[0x14] == 0x87d6 || (bVar10 = false, inst[0x14] == 0x87da)))))))) {
-        bVar10 = true;
+           ((inst[0x14] == 0x87d6 || (componentReadFlag10 = false, inst[0x14] == 0x87da)))))))) {
+        componentReadFlag10 = true;
       }
       if (((((swizzleSelect == 0x87d7) || (swizzleSelect == 0x87db)) || (inst[0x12] == 0x87d7)) ||
           ((inst[0x12] == 0x87db || (inst[0x13] == 0x87d7)))) ||
          ((inst[0x13] == 0x87db ||
-          ((inst[0x14] == 0x87d7 || (bVar12 = false, inst[0x14] == 0x87db)))))) {
-        bVar12 = true;
+          ((inst[0x14] == 0x87d7 || (componentReadFlag12 = false, inst[0x14] == 0x87db)))))) {
+        componentReadFlag12 = true;
       }
       if ((((swizzleSelect == 0x87d8) || (swizzleSelect == 0x87dc)) || (inst[0x12] == 0x87d8)) ||
          (((inst[0x12] == 0x87dc || (inst[0x13] == 0x87d8)) ||
           ((inst[0x13] == 0x87dc ||
-           ((inst[0x14] == 0x87d8 || (bVar2 = false, inst[0x14] == 0x87dc)))))))) {
-        bVar2 = true;
+           ((inst[0x14] == 0x87d8 || (componentReadFlag2 = false, inst[0x14] == 0x87dc)))))))) {
+        componentReadFlag2 = true;
       }
     }
     else {
-      bVar8 = false;
-      bVar10 = false;
-      bVar12 = false;
-      bVar2 = false;
+      componentReadFlag8 = false;
+      componentReadFlag10 = false;
+      componentReadFlag12 = false;
+      componentReadFlag2 = false;
     }
-    if ((bVar3) || (readFlag = 0, bVar8)) {
+    if ((componentReadFlag3) || (readFlag = 0, componentReadFlag8)) {
       readFlag = 1;
     }
     *outReadsX = readFlag;
-    if (bVar9) goto LAB_000b92a0;
+    if (componentReadFlag9) goto LAB_000b92a0;
 LAB_000b9294:
     readFlag = 0;
-    if (bVar10) goto LAB_000b92a0;
+    if (componentReadFlag10) goto LAB_000b92a0;
     goto LAB_000b92a4;
   case 0x8786:
   case 0x8787:
@@ -9684,116 +9684,116 @@ LAB_000b9294:
     if ((inst[8] == 2) && (tempIndex == inst[9])) {
       operandDataType = extvsOperandDataType(symbolTable,inst + 8);
       if (operandDataType == 0x87bf) {
-        bVar3 = destEnableX == '\0';
-        if (((((bVar3) || ((inst[10] != 0x87d5 && (inst[10] != 0x87d9)))) &&
+        componentReadFlag3 = destEnableX == '\0';
+        if (((((componentReadFlag3) || ((inst[10] != 0x87d5 && (inst[10] != 0x87d9)))) &&
              ((destEnableY == '\0' || ((inst[0xb] != 0x87d5 && (inst[0xb] != 0x87d9)))))) &&
             ((destEnableZ == '\0' || ((inst[0xc] != 0x87d5 && (inst[0xc] != 0x87d9)))))) &&
            ((destEnableW == '\0' || ((inst[0xd] != 0x87d5 && (inst[0xd] != 0x87d9)))))) {
-          bVar9 = false;
+          componentReadFlag9 = false;
         }
         else {
-          bVar9 = true;
+          componentReadFlag9 = true;
         }
-        if ((((bVar3) || ((inst[10] != 0x87d6 && (inst[10] != 0x87da)))) &&
+        if ((((componentReadFlag3) || ((inst[10] != 0x87d6 && (inst[10] != 0x87da)))) &&
             ((destEnableY == '\0' || ((inst[0xb] != 0x87d6 && (inst[0xb] != 0x87da)))))) &&
            (((destEnableZ == '\0' || ((inst[0xc] != 0x87d6 && (inst[0xc] != 0x87da)))) &&
             ((destEnableW == '\0' || ((inst[0xd] != 0x87d6 && (inst[0xd] != 0x87da)))))))) {
-          bVar11 = false;
+          componentReadFlag11 = false;
         }
         else {
-          bVar11 = true;
+          componentReadFlag11 = true;
         }
-        if ((((bVar3) || ((inst[10] != 0x87d7 && (inst[10] != 0x87db)))) &&
+        if ((((componentReadFlag3) || ((inst[10] != 0x87d7 && (inst[10] != 0x87db)))) &&
             ((destEnableY == '\0' || ((inst[0xb] != 0x87d7 && (inst[0xb] != 0x87db)))))) &&
            (((destEnableZ == '\0' || ((inst[0xc] != 0x87d7 && (inst[0xc] != 0x87db)))) &&
             ((destEnableW == '\0' || ((inst[0xd] != 0x87d7 && (inst[0xd] != 0x87db)))))))) {
-          bVar1 = false;
+          componentReadFlag1 = false;
         }
         else {
-          bVar1 = true;
+          componentReadFlag1 = true;
         }
-        if (((((bVar3) || ((inst[10] != 0x87d8 && (inst[10] != 0x87dc)))) &&
+        if (((((componentReadFlag3) || ((inst[10] != 0x87d8 && (inst[10] != 0x87dc)))) &&
              ((destEnableY == '\0' || ((inst[0xb] != 0x87d8 && (inst[0xb] != 0x87dc)))))) &&
             ((destEnableZ == '\0' || ((inst[0xc] != 0x87d8 && (inst[0xc] != 0x87dc)))))) &&
            ((destEnableW == '\0' || ((inst[0xd] != 0x87d8 && (inst[0xd] != 0x87dc))))))
         goto LAB_000b7dec;
-        bVar3 = true;
+        componentReadFlag3 = true;
       }
       else {
-        bVar9 = true;
-        bVar11 = true;
-        bVar1 = true;
-        bVar3 = true;
+        componentReadFlag9 = true;
+        componentReadFlag11 = true;
+        componentReadFlag1 = true;
+        componentReadFlag3 = true;
       }
     }
     else {
-      bVar9 = false;
-      bVar11 = false;
-      bVar1 = false;
+      componentReadFlag9 = false;
+      componentReadFlag11 = false;
+      componentReadFlag1 = false;
 LAB_000b7dec:
-      bVar3 = false;
+      componentReadFlag3 = false;
     }
     if ((inst[0xf] == 2) && (tempIndex == inst[0x10])) {
       operandDataType = extvsOperandDataType(symbolTable,inst + 0xf);
       if (operandDataType == 0x87bf) {
-        bVar2 = destEnableX == '\0';
-        if ((((bVar2) || ((inst[0x11] != 0x87d5 && (inst[0x11] != 0x87d9)))) &&
+        componentReadFlag2 = destEnableX == '\0';
+        if ((((componentReadFlag2) || ((inst[0x11] != 0x87d5 && (inst[0x11] != 0x87d9)))) &&
             ((destEnableY == '\0' || ((inst[0x12] != 0x87d5 && (inst[0x12] != 0x87d9)))))) &&
            (((destEnableZ == '\0' || ((inst[0x13] != 0x87d5 && (inst[0x13] != 0x87d9)))) &&
             ((destEnableW == '\0' || ((inst[0x14] != 0x87d5 && (inst[0x14] != 0x87d9)))))))) {
-          bVar8 = false;
+          componentReadFlag8 = false;
         }
         else {
-          bVar8 = true;
+          componentReadFlag8 = true;
         }
-        if ((((bVar2) || ((inst[0x11] != 0x87d6 && (inst[0x11] != 0x87da)))) &&
+        if ((((componentReadFlag2) || ((inst[0x11] != 0x87d6 && (inst[0x11] != 0x87da)))) &&
             ((destEnableY == '\0' || ((inst[0x12] != 0x87d6 && (inst[0x12] != 0x87da)))))) &&
            (((destEnableZ == '\0' || ((inst[0x13] != 0x87d6 && (inst[0x13] != 0x87da)))) &&
             ((destEnableW == '\0' || ((inst[0x14] != 0x87d6 && (inst[0x14] != 0x87da)))))))) {
-          bVar10 = false;
+          componentReadFlag10 = false;
         }
         else {
-          bVar10 = true;
+          componentReadFlag10 = true;
         }
-        if (((((bVar2) || ((inst[0x11] != 0x87d7 && (inst[0x11] != 0x87db)))) &&
+        if (((((componentReadFlag2) || ((inst[0x11] != 0x87d7 && (inst[0x11] != 0x87db)))) &&
              ((destEnableY == '\0' || ((inst[0x12] != 0x87d7 && (inst[0x12] != 0x87db)))))) &&
             ((destEnableZ == '\0' || ((inst[0x13] != 0x87d7 && (inst[0x13] != 0x87db)))))) &&
            ((destEnableW == '\0' || ((inst[0x14] != 0x87d7 && (inst[0x14] != 0x87db)))))) {
-          bVar12 = false;
+          componentReadFlag12 = false;
         }
         else {
-          bVar12 = true;
+          componentReadFlag12 = true;
         }
-        if ((((bVar2) || ((inst[0x11] != 0x87d8 && (inst[0x11] != 0x87dc)))) &&
+        if ((((componentReadFlag2) || ((inst[0x11] != 0x87d8 && (inst[0x11] != 0x87dc)))) &&
             ((destEnableY == '\0' || ((inst[0x12] != 0x87d8 && (inst[0x12] != 0x87dc)))))) &&
            (((destEnableZ == '\0' || ((inst[0x13] != 0x87d8 && (inst[0x13] != 0x87dc)))) &&
             ((destEnableW == '\0' || ((inst[0x14] != 0x87d8 && (inst[0x14] != 0x87dc))))))))
         goto LAB_000b812c;
-        bVar2 = true;
+        componentReadFlag2 = true;
       }
       else {
-        bVar8 = true;
-        bVar10 = true;
-        bVar12 = true;
-        bVar2 = true;
+        componentReadFlag8 = true;
+        componentReadFlag10 = true;
+        componentReadFlag12 = true;
+        componentReadFlag2 = true;
       }
     }
     else {
-      bVar8 = false;
-      bVar10 = false;
-      bVar12 = false;
+      componentReadFlag8 = false;
+      componentReadFlag10 = false;
+      componentReadFlag12 = false;
 LAB_000b812c:
-      bVar2 = false;
+      componentReadFlag2 = false;
     }
-    if ((bVar9) || (readFlag = 0, bVar8)) {
+    if ((componentReadFlag9) || (readFlag = 0, componentReadFlag8)) {
       readFlag = 1;
     }
     *outReadsX = readFlag;
-    if ((bVar11) || (readFlag = 0, bVar10)) {
+    if ((componentReadFlag11) || (readFlag = 0, componentReadFlag10)) {
       readFlag = 1;
     }
     *outReadsY = readFlag;
-    if ((bVar1) || (readFlag = 0, bVar12)) {
+    if ((componentReadFlag1) || (readFlag = 0, componentReadFlag12)) {
       readFlag = 1;
     }
     *outReadsZ = readFlag;
@@ -9803,177 +9803,177 @@ LAB_000b812c:
     if ((inst[8] == 2) && (tempIndex == inst[9])) {
       operandDataType = extvsOperandDataType(symbolTable,inst + 8);
       if (operandDataType == 0x87bf) {
-        bVar1 = destEnableX == '\0';
-        if (((((bVar1) || ((inst[10] != 0x87d5 && (inst[10] != 0x87d9)))) &&
+        componentReadFlag1 = destEnableX == '\0';
+        if (((((componentReadFlag1) || ((inst[10] != 0x87d5 && (inst[10] != 0x87d9)))) &&
              ((destEnableY == '\0' || ((inst[0xb] != 0x87d5 && (inst[0xb] != 0x87d9)))))) &&
             ((destEnableZ == '\0' || ((inst[0xc] != 0x87d5 && (inst[0xc] != 0x87d9)))))) &&
            ((destEnableW == '\0' || ((inst[0xd] != 0x87d5 && (inst[0xd] != 0x87d9)))))) {
-          bVar3 = false;
+          componentReadFlag3 = false;
         }
         else {
-          bVar3 = true;
+          componentReadFlag3 = true;
         }
-        if ((((bVar1) || ((inst[10] != 0x87d6 && (inst[10] != 0x87da)))) &&
+        if ((((componentReadFlag1) || ((inst[10] != 0x87d6 && (inst[10] != 0x87da)))) &&
             ((destEnableY == '\0' || ((inst[0xb] != 0x87d6 && (inst[0xb] != 0x87da)))))) &&
            (((destEnableZ == '\0' || ((inst[0xc] != 0x87d6 && (inst[0xc] != 0x87da)))) &&
             ((destEnableW == '\0' || ((inst[0xd] != 0x87d6 && (inst[0xd] != 0x87da)))))))) {
-          bVar9 = false;
+          componentReadFlag9 = false;
         }
         else {
-          bVar9 = true;
+          componentReadFlag9 = true;
         }
-        if ((((bVar1) || ((inst[10] != 0x87d7 && (inst[10] != 0x87db)))) &&
+        if ((((componentReadFlag1) || ((inst[10] != 0x87d7 && (inst[10] != 0x87db)))) &&
             ((destEnableY == '\0' || ((inst[0xb] != 0x87d7 && (inst[0xb] != 0x87db)))))) &&
            (((destEnableZ == '\0' || ((inst[0xc] != 0x87d7 && (inst[0xc] != 0x87db)))) &&
             ((destEnableW == '\0' || ((inst[0xd] != 0x87d7 && (inst[0xd] != 0x87db)))))))) {
-          bVar11 = false;
+          componentReadFlag11 = false;
         }
         else {
-          bVar11 = true;
+          componentReadFlag11 = true;
         }
-        if (((((bVar1) || ((inst[10] != 0x87d8 && (inst[10] != 0x87dc)))) &&
+        if (((((componentReadFlag1) || ((inst[10] != 0x87d8 && (inst[10] != 0x87dc)))) &&
              ((destEnableY == '\0' || ((inst[0xb] != 0x87d8 && (inst[0xb] != 0x87dc)))))) &&
             ((destEnableZ == '\0' || ((inst[0xc] != 0x87d8 && (inst[0xc] != 0x87dc)))))) &&
            ((destEnableW == '\0' || ((inst[0xd] != 0x87d8 && (inst[0xd] != 0x87dc))))))
         goto LAB_000b84cc;
-        bVar8 = true;
+        componentReadFlag8 = true;
       }
       else {
-        bVar3 = true;
-        bVar9 = true;
-        bVar11 = true;
-        bVar8 = true;
+        componentReadFlag3 = true;
+        componentReadFlag9 = true;
+        componentReadFlag11 = true;
+        componentReadFlag8 = true;
       }
     }
     else {
-      bVar3 = false;
-      bVar9 = false;
-      bVar11 = false;
+      componentReadFlag3 = false;
+      componentReadFlag9 = false;
+      componentReadFlag11 = false;
 LAB_000b84cc:
-      bVar8 = false;
+      componentReadFlag8 = false;
     }
     if ((inst[0xf] == 2) && (tempIndex == inst[0x10])) {
       operandDataType = extvsOperandDataType(symbolTable,inst + 0xf);
       if (operandDataType == 0x87bf) {
-        bVar1 = destEnableX == '\0';
-        if ((((bVar1) || ((inst[0x11] != 0x87d5 && (inst[0x11] != 0x87d9)))) &&
+        componentReadFlag1 = destEnableX == '\0';
+        if ((((componentReadFlag1) || ((inst[0x11] != 0x87d5 && (inst[0x11] != 0x87d9)))) &&
             ((destEnableY == '\0' || ((inst[0x12] != 0x87d5 && (inst[0x12] != 0x87d9)))))) &&
            (((destEnableZ == '\0' || ((inst[0x13] != 0x87d5 && (inst[0x13] != 0x87d9)))) &&
             ((destEnableW == '\0' || ((inst[0x14] != 0x87d5 && (inst[0x14] != 0x87d9)))))))) {
-          bVar10 = false;
+          componentReadFlag10 = false;
         }
         else {
-          bVar10 = true;
+          componentReadFlag10 = true;
         }
-        if (((((bVar1) || ((inst[0x11] != 0x87d6 && (inst[0x11] != 0x87da)))) &&
+        if (((((componentReadFlag1) || ((inst[0x11] != 0x87d6 && (inst[0x11] != 0x87da)))) &&
              ((destEnableY == '\0' || ((inst[0x12] != 0x87d6 && (inst[0x12] != 0x87da)))))) &&
             ((destEnableZ == '\0' || ((inst[0x13] != 0x87d6 && (inst[0x13] != 0x87da)))))) &&
            ((destEnableW == '\0' || ((inst[0x14] != 0x87d6 && (inst[0x14] != 0x87da)))))) {
-          bVar12 = false;
+          componentReadFlag12 = false;
         }
         else {
-          bVar12 = true;
+          componentReadFlag12 = true;
         }
-        if (((((bVar1) || ((inst[0x11] != 0x87d7 && (inst[0x11] != 0x87db)))) &&
+        if (((((componentReadFlag1) || ((inst[0x11] != 0x87d7 && (inst[0x11] != 0x87db)))) &&
              ((destEnableY == '\0' || ((inst[0x12] != 0x87d7 && (inst[0x12] != 0x87db)))))) &&
             ((destEnableZ == '\0' || ((inst[0x13] != 0x87d7 && (inst[0x13] != 0x87db)))))) &&
            ((destEnableW == '\0' || ((inst[0x14] != 0x87d7 && (inst[0x14] != 0x87db)))))) {
-          bVar16 = false;
+          componentReadFlag16 = false;
         }
         else {
-          bVar16 = true;
+          componentReadFlag16 = true;
         }
-        if ((((bVar1) || ((inst[0x11] != 0x87d8 && (inst[0x11] != 0x87dc)))) &&
+        if ((((componentReadFlag1) || ((inst[0x11] != 0x87d8 && (inst[0x11] != 0x87dc)))) &&
             ((destEnableY == '\0' || ((inst[0x12] != 0x87d8 && (inst[0x12] != 0x87dc)))))) &&
            (((destEnableZ == '\0' || ((inst[0x13] != 0x87d8 && (inst[0x13] != 0x87dc)))) &&
             ((destEnableW == '\0' || ((inst[0x14] != 0x87d8 && (inst[0x14] != 0x87dc))))))))
         goto LAB_000b880c;
-        bVar1 = true;
+        componentReadFlag1 = true;
       }
       else {
-        bVar10 = true;
-        bVar12 = true;
-        bVar16 = true;
-        bVar1 = true;
+        componentReadFlag10 = true;
+        componentReadFlag12 = true;
+        componentReadFlag16 = true;
+        componentReadFlag1 = true;
       }
     }
     else {
-      bVar10 = false;
-      bVar12 = false;
-      bVar16 = false;
+      componentReadFlag10 = false;
+      componentReadFlag12 = false;
+      componentReadFlag16 = false;
 LAB_000b880c:
-      bVar1 = false;
+      componentReadFlag1 = false;
     }
     if ((inst[0x16] == 2) && (tempIndex == inst[0x17])) {
       operandDataType = extvsOperandDataType(symbolTable,inst + 0x16);
       if (operandDataType == 0x87bf) {
-        bVar2 = destEnableX == '\0';
-        if ((((bVar2) || ((inst[0x18] != 0x87d5 && (inst[0x18] != 0x87d9)))) &&
+        componentReadFlag2 = destEnableX == '\0';
+        if ((((componentReadFlag2) || ((inst[0x18] != 0x87d5 && (inst[0x18] != 0x87d9)))) &&
             ((destEnableY == '\0' || ((inst[0x19] != 0x87d5 && (inst[0x19] != 0x87d9)))))) &&
            (((destEnableZ == '\0' || ((inst[0x1a] != 0x87d5 && (inst[0x1a] != 0x87d9)))) &&
             ((destEnableW == '\0' || ((inst[0x1b] != 0x87d5 && (inst[0x1b] != 0x87d9)))))))) {
-          bVar13 = false;
+          componentReadFlag13 = false;
         }
         else {
-          bVar13 = true;
+          componentReadFlag13 = true;
         }
-        if (((((bVar2) || ((inst[0x18] != 0x87d6 && (inst[0x18] != 0x87da)))) &&
+        if (((((componentReadFlag2) || ((inst[0x18] != 0x87d6 && (inst[0x18] != 0x87da)))) &&
              ((destEnableY == '\0' || ((inst[0x19] != 0x87d6 && (inst[0x19] != 0x87da)))))) &&
             ((destEnableZ == '\0' || ((inst[0x1a] != 0x87d6 && (inst[0x1a] != 0x87da)))))) &&
            ((destEnableW == '\0' || ((inst[0x1b] != 0x87d6 && (inst[0x1b] != 0x87da)))))) {
-          bVar14 = false;
+          componentReadFlag14 = false;
         }
         else {
-          bVar14 = true;
+          componentReadFlag14 = true;
         }
-        if ((((bVar2) || ((inst[0x18] != 0x87d7 && (inst[0x18] != 0x87db)))) &&
+        if ((((componentReadFlag2) || ((inst[0x18] != 0x87d7 && (inst[0x18] != 0x87db)))) &&
             ((destEnableY == '\0' || ((inst[0x19] != 0x87d7 && (inst[0x19] != 0x87db)))))) &&
            (((destEnableZ == '\0' || ((inst[0x1a] != 0x87d7 && (inst[0x1a] != 0x87db)))) &&
             ((destEnableW == '\0' || ((inst[0x1b] != 0x87d7 && (inst[0x1b] != 0x87db)))))))) {
-          bVar15 = false;
+          componentReadFlag15 = false;
         }
         else {
-          bVar15 = true;
+          componentReadFlag15 = true;
         }
-        if ((((bVar2) || ((inst[0x18] != 0x87d8 && (inst[0x18] != 0x87dc)))) &&
+        if ((((componentReadFlag2) || ((inst[0x18] != 0x87d8 && (inst[0x18] != 0x87dc)))) &&
             ((destEnableY == '\0' || ((inst[0x19] != 0x87d8 && (inst[0x19] != 0x87dc)))))) &&
            (((destEnableZ == '\0' || ((inst[0x1a] != 0x87d8 && (inst[0x1a] != 0x87dc)))) &&
             ((destEnableW == '\0' || ((inst[0x1b] != 0x87d8 && (inst[0x1b] != 0x87dc))))))))
         goto LAB_000b8b4c;
-        bVar2 = true;
+        componentReadFlag2 = true;
       }
       else {
-        bVar13 = true;
-        bVar14 = true;
-        bVar15 = true;
-        bVar2 = true;
+        componentReadFlag13 = true;
+        componentReadFlag14 = true;
+        componentReadFlag15 = true;
+        componentReadFlag2 = true;
       }
     }
     else {
-      bVar13 = false;
-      bVar14 = false;
-      bVar15 = false;
+      componentReadFlag13 = false;
+      componentReadFlag14 = false;
+      componentReadFlag15 = false;
 LAB_000b8b4c:
-      bVar2 = false;
+      componentReadFlag2 = false;
     }
-    if (((bVar3) || (bVar10)) || (readFlag = 0, bVar13)) {
+    if (((componentReadFlag3) || (componentReadFlag10)) || (readFlag = 0, componentReadFlag13)) {
       readFlag = 1;
     }
     *outReadsX = readFlag;
-    if (((bVar9) || (bVar12)) || (readFlag = 0, bVar14)) {
+    if (((componentReadFlag9) || (componentReadFlag12)) || (readFlag = 0, componentReadFlag14)) {
       readFlag = 1;
     }
     *outReadsY = readFlag;
-    if (((bVar11) || (bVar16)) || (readFlag = 0, bVar15)) {
+    if (((componentReadFlag11) || (componentReadFlag16)) || (readFlag = 0, componentReadFlag15)) {
       readFlag = 1;
     }
     *outReadsZ = readFlag;
-    if (bVar8) break;
+    if (componentReadFlag8) break;
     goto joined_r0x000b8bc8;
   case 0x8797:
     if ((inst[8] == 2) && (tempIndex == inst[9])) {
-      bVar1 = destEnableX == '\0';
-      if ((((bVar1) ||
+      componentReadFlag1 = destEnableX == '\0';
+      if ((((componentReadFlag1) ||
            ((((inst[0xb] != 0x87d5 && (inst[0xb] != 0x87d9)) && (inst[0xc] != 0x87d5)) &&
             (inst[0xc] != 0x87d9)))) &&
           ((destEnableY == '\0' ||
@@ -9982,12 +9982,12 @@ LAB_000b8b4c:
          ((destEnableZ == '\0' ||
           (((inst[10] != 0x87d5 && (inst[10] != 0x87d9)) &&
            ((inst[0xb] != 0x87d5 && (inst[0xb] != 0x87d9)))))))) {
-        bVar3 = false;
+        componentReadFlag3 = false;
       }
       else {
-        bVar3 = true;
+        componentReadFlag3 = true;
       }
-      if (((bVar1) ||
+      if (((componentReadFlag1) ||
           ((((inst[0xb] != 0x87d6 && (inst[0xb] != 0x87da)) && (inst[0xc] != 0x87d6)) &&
            (inst[0xc] != 0x87da)))) &&
          (((destEnableY == '\0' ||
@@ -9996,12 +9996,12 @@ LAB_000b8b4c:
           ((destEnableZ == '\0' ||
            (((inst[10] != 0x87d6 && (inst[10] != 0x87da)) &&
             ((inst[0xb] != 0x87d6 && (inst[0xb] != 0x87da)))))))))) {
-        bVar9 = false;
+        componentReadFlag9 = false;
       }
       else {
-        bVar9 = true;
+        componentReadFlag9 = true;
       }
-      if ((((bVar1) ||
+      if ((((componentReadFlag1) ||
            ((((inst[0xb] != 0x87d7 && (inst[0xb] != 0x87db)) && (inst[0xc] != 0x87d7)) &&
             (inst[0xc] != 0x87db)))) &&
           ((destEnableY == '\0' ||
@@ -10010,12 +10010,12 @@ LAB_000b8b4c:
          ((destEnableZ == '\0' ||
           (((inst[10] != 0x87d7 && (inst[10] != 0x87db)) &&
            ((inst[0xb] != 0x87d7 && (inst[0xb] != 0x87db)))))))) {
-        bVar11 = false;
+        componentReadFlag11 = false;
       }
       else {
-        bVar11 = true;
+        componentReadFlag11 = true;
       }
-      if (((bVar1) ||
+      if (((componentReadFlag1) ||
           ((((inst[0xb] != 0x87d8 && (inst[0xb] != 0x87dc)) && (inst[0xc] != 0x87d8)) &&
            (inst[0xc] != 0x87dc)))) &&
          (((destEnableY == '\0' ||
@@ -10024,18 +10024,18 @@ LAB_000b8b4c:
           ((destEnableZ == '\0' ||
            (((inst[10] != 0x87d8 && (inst[10] != 0x87dc)) &&
             ((inst[0xb] != 0x87d8 && (inst[0xb] != 0x87dc)))))))))) goto LAB_000b8f1c;
-      bVar1 = true;
+      componentReadFlag1 = true;
     }
     else {
-      bVar3 = false;
-      bVar9 = false;
-      bVar11 = false;
+      componentReadFlag3 = false;
+      componentReadFlag9 = false;
+      componentReadFlag11 = false;
 LAB_000b8f1c:
-      bVar1 = false;
+      componentReadFlag1 = false;
     }
     if ((inst[0xf] == 2) && (tempIndex == inst[0x10])) {
-      bVar2 = destEnableX == '\0';
-      if ((((bVar2) ||
+      componentReadFlag2 = destEnableX == '\0';
+      if ((((componentReadFlag2) ||
            ((((inst[0x12] != 0x87d5 && (inst[0x12] != 0x87d9)) && (inst[0x13] != 0x87d5))
             && (inst[0x13] != 0x87d9)))) &&
           ((destEnableY == '\0' ||
@@ -10044,12 +10044,12 @@ LAB_000b8f1c:
          ((destEnableZ == '\0' ||
           (((inst[0x11] != 0x87d5 && (inst[0x11] != 0x87d9)) &&
            ((inst[0x12] != 0x87d5 && (inst[0x12] != 0x87d9)))))))) {
-        bVar8 = false;
+        componentReadFlag8 = false;
       }
       else {
-        bVar8 = true;
+        componentReadFlag8 = true;
       }
-      if ((((bVar2) ||
+      if ((((componentReadFlag2) ||
            ((((inst[0x12] != 0x87d6 && (inst[0x12] != 0x87da)) && (inst[0x13] != 0x87d6))
             && (inst[0x13] != 0x87da)))) &&
           ((destEnableY == '\0' ||
@@ -10058,12 +10058,12 @@ LAB_000b8f1c:
          ((destEnableZ == '\0' ||
           (((inst[0x11] != 0x87d6 && (inst[0x11] != 0x87da)) &&
            ((inst[0x12] != 0x87d6 && (inst[0x12] != 0x87da)))))))) {
-        bVar10 = false;
+        componentReadFlag10 = false;
       }
       else {
-        bVar10 = true;
+        componentReadFlag10 = true;
       }
-      if (((bVar2) ||
+      if (((componentReadFlag2) ||
           ((((inst[0x12] != 0x87d7 && (inst[0x12] != 0x87db)) && (inst[0x13] != 0x87d7)) &&
            (inst[0x13] != 0x87db)))) &&
          (((destEnableY == '\0' ||
@@ -10072,12 +10072,12 @@ LAB_000b8f1c:
           ((destEnableZ == '\0' ||
            (((inst[0x11] != 0x87d7 && (inst[0x11] != 0x87db)) &&
             ((inst[0x12] != 0x87d7 && (inst[0x12] != 0x87db)))))))))) {
-        bVar12 = false;
+        componentReadFlag12 = false;
       }
       else {
-        bVar12 = true;
+        componentReadFlag12 = true;
       }
-      if ((((bVar2) ||
+      if ((((componentReadFlag2) ||
            ((((inst[0x12] != 0x87d8 && (inst[0x12] != 0x87dc)) && (inst[0x13] != 0x87d8))
             && (inst[0x13] != 0x87dc)))) &&
           ((destEnableY == '\0' ||
@@ -10086,33 +10086,33 @@ LAB_000b8f1c:
          ((destEnableZ == '\0' ||
           (((inst[0x11] != 0x87d8 && (inst[0x11] != 0x87dc)) &&
            ((inst[0x12] != 0x87d8 && (inst[0x12] != 0x87dc)))))))) goto LAB_000b926c;
-      bVar2 = true;
+      componentReadFlag2 = true;
     }
     else {
-      bVar8 = false;
-      bVar10 = false;
-      bVar12 = false;
+      componentReadFlag8 = false;
+      componentReadFlag10 = false;
+      componentReadFlag12 = false;
 LAB_000b926c:
-      bVar2 = false;
+      componentReadFlag2 = false;
     }
-    if ((bVar3) || (readFlag = 0, bVar8)) {
+    if ((componentReadFlag3) || (readFlag = 0, componentReadFlag8)) {
       readFlag = 1;
     }
     *outReadsX = readFlag;
-    if (!bVar9) goto LAB_000b9294;
+    if (!componentReadFlag9) goto LAB_000b9294;
 LAB_000b92a0:
     readFlag = 1;
 LAB_000b92a4:
     *outReadsY = readFlag;
-    if ((bVar11) || (readFlag = 0, bVar12)) {
+    if ((componentReadFlag11) || (readFlag = 0, componentReadFlag12)) {
       readFlag = 1;
     }
     *outReadsZ = readFlag;
 joined_r0x000b8bc8:
-    if (!bVar1) {
+    if (!componentReadFlag1) {
 LAB_000b9dfc:
       readFlag = 0;
-      if (!bVar2) goto LAB_000b9ef0;
+      if (!componentReadFlag2) goto LAB_000b9ef0;
     }
     break;
   case 0x8798:
@@ -10265,67 +10265,67 @@ joined_r0x000b9990:
     if ((inst[8] == 2) && (tempIndex == inst[9])) {
       swizzleSelect = inst[0xb];
       if ((((swizzleSelect == 0x87d5) || (swizzleSelect == 0x87d9)) || (inst[0xc] == 0x87d5)) ||
-         (bVar9 = false, inst[0xc] == 0x87d9)) {
-        bVar9 = true;
+         (componentReadFlag9 = false, inst[0xc] == 0x87d9)) {
+        componentReadFlag9 = true;
       }
       if (((swizzleSelect == 0x87d6) || (swizzleSelect == 0x87da)) ||
-         ((inst[0xc] == 0x87d6 || (bVar11 = false, inst[0xc] == 0x87da)))) {
-        bVar11 = true;
+         ((inst[0xc] == 0x87d6 || (componentReadFlag11 = false, inst[0xc] == 0x87da)))) {
+        componentReadFlag11 = true;
       }
       if (((swizzleSelect == 0x87d7) || (swizzleSelect == 0x87db)) ||
-         ((inst[0xc] == 0x87d7 || (bVar1 = false, inst[0xc] == 0x87db)))) {
-        bVar1 = true;
+         ((inst[0xc] == 0x87d7 || (componentReadFlag1 = false, inst[0xc] == 0x87db)))) {
+        componentReadFlag1 = true;
       }
       if ((((swizzleSelect == 0x87d8) || (swizzleSelect == 0x87dc)) || (inst[0xc] == 0x87d8)) ||
-         (bVar3 = false, inst[0xc] == 0x87dc)) {
-        bVar3 = true;
+         (componentReadFlag3 = false, inst[0xc] == 0x87dc)) {
+        componentReadFlag3 = true;
       }
     }
     else {
-      bVar9 = false;
-      bVar11 = false;
-      bVar1 = false;
-      bVar3 = false;
+      componentReadFlag9 = false;
+      componentReadFlag11 = false;
+      componentReadFlag1 = false;
+      componentReadFlag3 = false;
     }
     if ((inst[0xf] == 2) && (inst[0x10] == tempIndex)) {
       swizzleSelect = inst[0x12];
       if (((swizzleSelect == 0x87d5) || (swizzleSelect == 0x87d9)) ||
-         ((inst[0x14] == 0x87d5 || (bVar8 = false, inst[0x14] == 0x87d9)))) {
-        bVar8 = true;
+         ((inst[0x14] == 0x87d5 || (componentReadFlag8 = false, inst[0x14] == 0x87d9)))) {
+        componentReadFlag8 = true;
       }
       if ((((swizzleSelect == 0x87d6) || (swizzleSelect == 0x87da)) || (inst[0x14] == 0x87d6)) ||
-         (bVar10 = false, inst[0x14] == 0x87da)) {
-        bVar10 = true;
+         (componentReadFlag10 = false, inst[0x14] == 0x87da)) {
+        componentReadFlag10 = true;
       }
       if (((swizzleSelect == 0x87d7) || (swizzleSelect == 0x87db)) ||
-         ((inst[0x14] == 0x87d7 || (bVar12 = false, inst[0x14] == 0x87db)))) {
-        bVar12 = true;
+         ((inst[0x14] == 0x87d7 || (componentReadFlag12 = false, inst[0x14] == 0x87db)))) {
+        componentReadFlag12 = true;
       }
       if (((swizzleSelect == 0x87d8) || (swizzleSelect == 0x87dc)) ||
-         ((inst[0x14] == 0x87d8 || (bVar2 = false, inst[0x14] == 0x87dc)))) {
-        bVar2 = true;
+         ((inst[0x14] == 0x87d8 || (componentReadFlag2 = false, inst[0x14] == 0x87dc)))) {
+        componentReadFlag2 = true;
       }
     }
     else {
-      bVar8 = false;
-      bVar10 = false;
-      bVar12 = false;
-      bVar2 = false;
+      componentReadFlag8 = false;
+      componentReadFlag10 = false;
+      componentReadFlag12 = false;
+      componentReadFlag2 = false;
     }
-    if ((bVar9) || (readFlag = 0, bVar8)) {
+    if ((componentReadFlag9) || (readFlag = 0, componentReadFlag8)) {
       readFlag = 1;
     }
     *outReadsX = readFlag;
-    if ((bVar11) || (readFlag = 0, bVar10)) {
+    if ((componentReadFlag11) || (readFlag = 0, componentReadFlag10)) {
       readFlag = 1;
     }
     *outReadsY = readFlag;
-    if ((bVar1) || (readFlag = 0, bVar12)) {
+    if ((componentReadFlag1) || (readFlag = 0, componentReadFlag12)) {
       readFlag = 1;
     }
     *outReadsZ = readFlag;
 joined_r0x000b9df8:
-    if (bVar3) break;
+    if (componentReadFlag3) break;
     goto LAB_000b9dfc;
   case 0x87a0:
   case 0x87a1:
