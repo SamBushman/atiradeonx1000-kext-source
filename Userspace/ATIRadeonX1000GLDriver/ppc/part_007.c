@@ -594,81 +594,81 @@ int FUN_0004ce30(glContext)
   int glContext;
 {
   int glState;
-  short sVar1;
-  bool bVar2;
-  bool bVar3;
-  int iVar4;
+  short depthFunc;
+  bool hizBlocksFunc;
+  bool depthTestEffective;
+  int hizFunc;
   uint scHyperzEn;
   int zbBwCntl;
-  uint uVar7;
-  int iVar8;
-  int iVar9;
+  uint oldHyperzEn;
+  int fbConfig;
+  int glStateBlock;
   
   glState = *(int *)(glContext + 4);
-  uVar7 = *(uint *)(glContext + 0x1ae0);
+  oldHyperzEn = *(uint *)(glContext + 0x1ae0);
   zbBwCntl = *(int *)(glContext + 0x1ab0);
-  iVar9 = *(int *)(glState + 0x10);
-  sVar1 = *(short *)(((unsigned char *)0x00002dc4) + iVar9);
-  iVar8 = glState + 0x30;
+  glStateBlock = *(int *)(glState + 0x10);
+  depthFunc = *(short *)(((unsigned char *)0x00002dc4) + glStateBlock);
+  fbConfig = glState + 0x30;
   if (*(int *)(glState + 0x150) != 0) {
-    iVar8 = *(int *)(glState + 0x150);
+    fbConfig = *(int *)(glState + 0x150);
   }
-  if (((((((unsigned char *)0x00002dc8)[iVar9] == '\0') || (((unsigned char *)0x00002e44)[iVar9] == '\0')) || (sVar1 == 0x200))
-      || (sVar1 == 0x202)) ||
-     (((*(double *)(0x00001830 + iVar9) == DOUBLE_001aa200 &&
-       (*(double *)(iVar9 + 0x1838) == DOUBLE_001aa200)) && (sVar1 == 0x203)))) {
-    bVar3 = false;
+  if (((((((unsigned char *)0x00002dc8)[glStateBlock] == '\0') || (((unsigned char *)0x00002e44)[glStateBlock] == '\0')) || (depthFunc == 0x200))
+      || (depthFunc == 0x202)) ||
+     (((*(double *)(0x00001830 + glStateBlock) == DOUBLE_001aa200 &&
+       (*(double *)(glStateBlock + 0x1838) == DOUBLE_001aa200)) && (depthFunc == 0x203)))) {
+    depthTestEffective = false;
   }
   else {
-    bVar3 = true;
+    depthTestEffective = true;
   }
-  if (((*(char *)(iVar8 + 0xc5) == '\0') && (((unsigned char *)0x00002dc8)[iVar9] != '\0')) &&
+  if (((*(char *)(fbConfig + 0xc5) == '\0') && (((unsigned char *)0x00002dc8)[glStateBlock] != '\0')) &&
      ((*(uint *)(glContext + 0x44) & 0x200) == 0)) {
-    switch(sVar1) {
+    switch(depthFunc) {
     case 0x200:
     case 0x201:
     case 0x202:
     case 0x203:
-      if ((*(uint *)(iVar8 + 0xc4) & 0xff00ff00) == 0) {
-        bVar2 = true;
-        iVar4 = 0x201;
+      if ((*(uint *)(fbConfig + 0xc4) & 0xff00ff00) == 0) {
+        hizBlocksFunc = true;
+        hizFunc = 0x201;
       }
       else {
-        bVar2 = false;
-        iVar4 = 0x201;
+        hizBlocksFunc = false;
+        hizFunc = 0x201;
       }
       break;
     case 0x204:
     case 0x205:
     case 0x206:
-      if ((*(char *)(iVar8 + 0xc4) == '\0') && (*(char *)(iVar8 + 0xc6) != '\0')) {
-        bVar2 = true;
-        iVar4 = 0x204;
+      if ((*(char *)(fbConfig + 0xc4) == '\0') && (*(char *)(fbConfig + 0xc6) != '\0')) {
+        hizBlocksFunc = true;
+        hizFunc = 0x204;
       }
       else {
-        bVar2 = false;
-        iVar4 = 0x204;
+        hizBlocksFunc = false;
+        hizFunc = 0x204;
       }
       break;
     case 0x207:
-      bVar2 = false;
-      iVar4 = 0x207;
+      hizBlocksFunc = false;
+      hizFunc = 0x207;
       break;
     default:
-      bVar2 = false;
-      iVar4 = 0x200;
+      hizBlocksFunc = false;
+      hizFunc = 0x200;
     }
-    if (((*(int *)(((unsigned char *)0x000031c0) + iVar9) == 0) ||
-        ((((*(short *)(((unsigned char *)0x000031a2) + iVar9) == 0x1e00 &&
-           (*(short *)(((unsigned char *)0x000031a4) + iVar9) == 0x1e00)) &&
-          (*(short *)(((unsigned char *)0x000031ba) + iVar9) == 0x1e00)) &&
-         (*(short *)(((unsigned char *)0x000031bc) + iVar9) == 0x1e00)))) && (!bVar2)) {
-      if (iVar4 == 0x204) {
+    if (((*(int *)(((unsigned char *)0x000031c0) + glStateBlock) == 0) ||
+        ((((*(short *)(((unsigned char *)0x000031a2) + glStateBlock) == 0x1e00 &&
+           (*(short *)(((unsigned char *)0x000031a4) + glStateBlock) == 0x1e00)) &&
+          (*(short *)(((unsigned char *)0x000031ba) + glStateBlock) == 0x1e00)) &&
+         (*(short *)(((unsigned char *)0x000031bc) + glStateBlock) == 0x1e00)))) && (!hizBlocksFunc)) {
+      if (hizFunc == 0x204) {
         scHyperzEn = *(uint *)(glContext + 0x1ae0) | 3;
         *(uint *)(glContext + 0x1ae0) = scHyperzEn;
         *(uint *)(glContext + 0x1ab0) = *(uint *)(glContext + 0x1ab0) | 3;
       }
-      else if (iVar4 == 0x207) {
+      else if (hizFunc == 0x207) {
         scHyperzEn = *(uint *)(glContext + 0x1ae0) & 0xfffffffe;
         *(uint *)(glContext + 0x1ae0) = scHyperzEn;
         *(uint *)(glContext + 0x1ab0) = *(uint *)(glContext + 0x1ab0) | 1;
@@ -678,9 +678,9 @@ int FUN_0004ce30(glContext)
         *(uint *)(glContext + 0x1ae0) = scHyperzEn;
         *(uint *)(glContext + 0x1ab0) = *(uint *)(glContext + 0x1ab0) & 0xfffffffd | 1;
       }
-      *(byte *)(iVar8 + 0xc6) = (byte)((scHyperzEn ^ 2) >> 1) & 1;
-      if (bVar3) {
-        *(undefined1 *)(iVar8 + 0xc4) = 0;
+      *(byte *)(fbConfig + 0xc6) = (byte)((scHyperzEn ^ 2) >> 1) & 1;
+      if (depthTestEffective) {
+        *(undefined1 *)(fbConfig + 0xc4) = 0;
         scHyperzEn = *(uint *)(glContext + 0x1ae0);
       }
       else {
@@ -692,12 +692,12 @@ int FUN_0004ce30(glContext)
   scHyperzEn = *(uint *)(glContext + 0x1ae0) & 0xfffffffe;
   *(uint *)(glContext + 0x1ae0) = scHyperzEn;
   *(uint *)(glContext + 0x1ab0) = *(uint *)(glContext + 0x1ab0) & 0xfffffffe;
-  if (bVar3) {
-    *(undefined1 *)(iVar8 + 0xc5) = 1;
+  if (depthTestEffective) {
+    *(undefined1 *)(fbConfig + 0xc5) = 1;
     scHyperzEn = *(uint *)(glContext + 0x1ae0);
   }
 LAB_0004d0d0:
-  if ((uVar7 == scHyperzEn) && (zbBwCntl == *(int *)(glContext + 0x1ab0))) {
+  if ((oldHyperzEn == scHyperzEn) && (zbBwCntl == *(int *)(glContext + 0x1ab0))) {
     return;
   }
   *(uint *)(glContext + 0x1930) = *(uint *)(glContext + 0x1930) | 0x1000;

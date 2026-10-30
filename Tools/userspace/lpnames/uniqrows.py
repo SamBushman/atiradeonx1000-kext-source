@@ -27,6 +27,14 @@ for p in glob.glob(D+'/part_*.c'):
         m=H.match(l)
         if m: cur=rev.get(m.group(1)); continue
         if cur: ids[cur].update(re.findall(r'[A-Za-z_]\w*',l))
+import re as _re
+_names=collections.defaultdict(set)
+for c in rows:
+    if len(c)>3 and c[0] in('local','use'): _names[c[1]].add(c[3])
+for c in rows:
+    if len(c)>3 and c[0] in('local','use'):
+        mm=_re.match(r'^(.*[a-z])([B-Z])$',c[3])
+        if mm and mm.group(1) in _names[c[1]]: c[3]=mm.group(1)+str(ord(mm.group(2))-64)
 assign={}   # (fn,var,new)->final
 used=collections.defaultdict(lambda: collections.defaultdict(set))  # fn->final->vars
 out=[]
@@ -43,7 +51,7 @@ for c in rows:
                     return not (var in used[fn][n])
                 return False
             while bad(cand):
-                i+=1; cand=new+('B','C','D','E','F','G','H')[i-1] if i<=7 else new+str(i)
+                i+=1; cand=new+str(i+1)
             assign[k]=cand; used[fn][cand].add(var)
         c[3]=assign[k]
     out.append('\t'.join(c))
