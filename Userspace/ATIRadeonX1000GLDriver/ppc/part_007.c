@@ -901,7 +901,7 @@ LAB_0004d460:
 }
 
 /* FUN_0004d620 @ 0x4d620 (328 bytes) */
-void FUN_0004d620(int glContext,undefined4 param_2,undefined4 unusedArgR5,undefined4 unused,double fparam_1)
+void FUN_0004d620(int glContext,undefined4 param_2,undefined4 unusedArgR5,undefined4 unused,double fprF1)
 {
   uint loopIndex;
   int programEntry;
@@ -919,7 +919,7 @@ void FUN_0004d620(int glContext,undefined4 param_2,undefined4 unusedArgR5,undefi
     return;
   }
   if ((glContextWord44 & 0x2000) != 0) {
-    ((undefined4 (*)())FUN_000afe40)(glContext,0,unusedArgR5,unused,fparam_1);
+    ((undefined4 (*)())FUN_000afe40)(glContext,0,unusedArgR5,unused,fprF1);
     return;
   }
   if ((glContextWord44 & 0x80100000) == 0x80000000) {
@@ -1851,7 +1851,7 @@ int FUN_0004ed90(glContext)
   uint glContextWord44;
   int glContextWord8;
   int glContextWord2768;
-  double fparam_1;
+  double fprF1;
   double in_f2;
   double in_f3;
   double in_f4;
@@ -1935,7 +1935,7 @@ LAB_0004efc0:
   registerDirty = *(uint *)(glContext + 0x1930);
 LAB_0004f054:
   *(uint *)(glContext + 0x1930) = registerDirty | 0xc08000;
-  ((void (*)())gldValidateViewportPolygonOffset)(glContext,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8);
+  ((void (*)())gldValidateViewportPolygonOffset)(glContext,fprF1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8);
   return;
 }
 
@@ -2031,7 +2031,7 @@ LAB_0004f2c8:
 }
 
 /* FUN_0004f2e0 @ 0x4f2e0 (616 bytes) */
-void FUN_0004f2e0(int glContext,undefined4 param_2,undefined4 unusedArgR5,undefined4 unused,double fparam_1)
+void FUN_0004f2e0(int glContext,undefined4 param_2,undefined4 unusedArgR5,undefined4 unused,double fprF1)
 {
   byte colorFormatIndex;
   short fogMode;
@@ -2090,7 +2090,7 @@ void FUN_0004f2e0(int glContext,undefined4 param_2,undefined4 unusedArgR5,undefi
     atifsCompileCurrentShader(glContext);
   }
   else {
-    ((undefined4 (*)())FUN_000afe40)(glContext,0,unusedArgR5,unused,fparam_1);
+    ((undefined4 (*)())FUN_000afe40)(glContext,0,unusedArgR5,unused,fprF1);
   }
   fogColorWord0 = ((int (*)())FUN_0004f160)(glContext,*(uint *)(colorFormatTable + (uint)colorFormatIndex * 0x24 + 0x1c) >> 0x1e);
   *(uint *)(glContext + 0x1a54) = fogColorWord0 & 0x3ff | *(uint *)(glContext + 0x1a54) & 0xfffffc00;
@@ -4393,43 +4393,43 @@ int FUN_00052280(glContext)
 int FUN_00052cc0(glContext)
   int glContext;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *handlerTemp;
+  undefined *handlerTemp2;
   undefined4 uVar3;
   
-  puVar2 = PTR_FUN_001e89b8;
-  puVar1 = PTR_FUN_001e89b0;
+  handlerTemp2 = PTR_FUN_001e89b8;
+  handlerTemp = PTR_FUN_001e89b0;
   uVar3 = 0;
   if (glContext != -0x1168) {
     if (*(char *)(glContext + 0x1868) == '\0') {
       *(undefined **)(((unsigned char *)0x000011a0) + glContext) = PTR_FUN_001e89c4;
-      *(undefined **)(((unsigned char *)0x000011a8) + glContext) = puVar2;
-      puVar1 = PTR_FUN_001e89d8;
+      *(undefined **)(((unsigned char *)0x000011a8) + glContext) = handlerTemp2;
+      handlerTemp = PTR_FUN_001e89d8;
       *(undefined **)(((unsigned char *)0x000011a4) + glContext) = PTR_FUN_001e89c8;
-      *(undefined **)(((unsigned char *)0x000011b0) + glContext) = puVar1;
-      puVar1 = PTR_FUN_001e89a8;
+      *(undefined **)(((unsigned char *)0x000011b0) + glContext) = handlerTemp;
+      handlerTemp = PTR_FUN_001e89a8;
       *(undefined **)(((unsigned char *)0x000011ac) + glContext) = PTR_LAB_001e89cc;
-      *(undefined **)(((unsigned char *)0x00001190) + glContext) = puVar1;
-      puVar1 = PTR_FUN_001e89e8;
+      *(undefined **)(((unsigned char *)0x00001190) + glContext) = handlerTemp;
+      handlerTemp = PTR_FUN_001e89e8;
       *(undefined **)(((unsigned char *)0x00001194) + glContext) = PTR_FUN_001e89b4;
-      *(undefined **)(((unsigned char *)0x0000119c) + glContext) = puVar1;
+      *(undefined **)(((unsigned char *)0x0000119c) + glContext) = handlerTemp;
       *(undefined **)(((unsigned char *)0x00001198) + glContext) = PTR_FUN_001e89a4;
     }
     else {
       *(undefined **)(((unsigned char *)0x000011a0) + glContext) = PTR_FUN_001e89bc;
-      *(undefined **)(((unsigned char *)0x000011a8) + glContext) = puVar1;
-      puVar1 = PTR_FUN_001e89d8;
+      *(undefined **)(((unsigned char *)0x000011a8) + glContext) = handlerTemp;
+      handlerTemp = PTR_FUN_001e89d8;
       *(undefined **)(((unsigned char *)0x000011a4) + glContext) = PTR_FUN_001e89d0;
-      *(undefined **)(((unsigned char *)0x000011b0) + glContext) = puVar1;
-      puVar1 = PTR_FUN_001e89a0;
+      *(undefined **)(((unsigned char *)0x000011b0) + glContext) = handlerTemp;
+      handlerTemp = PTR_FUN_001e89a0;
       *(undefined **)(((unsigned char *)0x000011ac) + glContext) = PTR_LAB_001e89d4;
-      *(undefined **)(((unsigned char *)0x00001190) + glContext) = puVar1;
-      puVar1 = PTR_FUN_001e89dc;
+      *(undefined **)(((unsigned char *)0x00001190) + glContext) = handlerTemp;
+      handlerTemp = PTR_FUN_001e89dc;
       *(undefined **)(((unsigned char *)0x00001194) + glContext) = PTR_FUN_001e89e4;
-      *(undefined **)(((unsigned char *)0x0000119c) + glContext) = puVar1;
+      *(undefined **)(((unsigned char *)0x0000119c) + glContext) = handlerTemp;
       *(undefined **)(((unsigned char *)0x00001198) + glContext) = PTR_FUN_001e89c0;
     }
-    puVar1 = PTR_FUN_001e89ac;
+    handlerTemp = PTR_FUN_001e89ac;
     if (*(char *)(glContext + 0x1868) == '\0') {
       *(undefined4 *)(((unsigned char *)0x00001354) + glContext) = 0;
       *(undefined4 *)(((unsigned char *)0x0000134c) + glContext) = 0;
@@ -4438,7 +4438,7 @@ int FUN_00052cc0(glContext)
     else {
       *(undefined4 *)(((unsigned char *)0x00001354) + glContext) = 0;
       *(undefined4 *)(((unsigned char *)0x0000134c) + glContext) = 0;
-      *(undefined **)(((unsigned char *)0x00001350) + glContext) = puVar1;
+      *(undefined **)(((unsigned char *)0x00001350) + glContext) = handlerTemp;
     }
     ((unsigned char *)0x000013b0)[glContext] = 8;
     extvsInitState(glContext);
@@ -4474,23 +4474,23 @@ int FUN_00052ee0(ctx, position)
   int ctx;
   undefined4 position;
 {
-  int iVar1;
-  int iVar2;
+  int symbolIndexOrField;
+  int symbolList;
   
-  iVar2 = *(int *)(((unsigned char *)0x00001168) + ctx) + 0x1c;
-  iVar1 = extvsSymbolListGetIndex(iVar2,position);
-  if (iVar1 == 0) {
-    iVar2 = *(int *)(((unsigned char *)0x0000116c) + ctx) + 0x14;
-    iVar1 = extvsSymbolListGetIndex(iVar2,position);
-    if (iVar1 == 0) {
+  symbolList = *(int *)(((unsigned char *)0x00001168) + ctx) + 0x1c;
+  symbolIndexOrField = extvsSymbolListGetIndex(symbolList,position);
+  if (symbolIndexOrField == 0) {
+    symbolList = *(int *)(((unsigned char *)0x0000116c) + ctx) + 0x14;
+    symbolIndexOrField = extvsSymbolListGetIndex(symbolList,position);
+    if (symbolIndexOrField == 0) {
       return -0x3ffcf000;
     }
   }
-  iVar1 = *(int *)(iVar1 * 0x54 + *(int *)(iVar2 + 4));
-  if (iVar1 == 0) {
+  symbolIndexOrField = *(int *)(symbolIndexOrField * 0x54 + *(int *)(symbolList + 4));
+  if (symbolIndexOrField == 0) {
     return -0x3ffcf000;
   }
-  return iVar1;
+  return symbolIndexOrField;
 }
 
 /* FUN_00052f60 @ 0x52f60 (148 bytes) */
@@ -4498,23 +4498,23 @@ int FUN_00052f60(ctx, position)
   int ctx;
   undefined4 position;
 {
-  int iVar1;
-  int iVar2;
+  int symbolIndexOrField;
+  int symbolList;
   
-  iVar2 = *(int *)(((unsigned char *)0x00001168) + ctx) + 0x1c;
-  iVar1 = extvsSymbolListGetIndex(iVar2,position);
-  if (iVar1 == 0) {
-    iVar2 = *(int *)(((unsigned char *)0x0000116c) + ctx) + 0x14;
-    iVar1 = extvsSymbolListGetIndex(iVar2,position);
-    if (iVar1 == 0) {
+  symbolList = *(int *)(((unsigned char *)0x00001168) + ctx) + 0x1c;
+  symbolIndexOrField = extvsSymbolListGetIndex(symbolList,position);
+  if (symbolIndexOrField == 0) {
+    symbolList = *(int *)(((unsigned char *)0x0000116c) + ctx) + 0x14;
+    symbolIndexOrField = extvsSymbolListGetIndex(symbolList,position);
+    if (symbolIndexOrField == 0) {
       return 0;
     }
   }
-  iVar1 = *(int *)(iVar1 * 0x54 + *(int *)(iVar2 + 4) + 4);
-  if (iVar1 == 0) {
-    iVar1 = 0x81;
+  symbolIndexOrField = *(int *)(symbolIndexOrField * 0x54 + *(int *)(symbolList + 4) + 4);
+  if (symbolIndexOrField == 0) {
+    symbolIndexOrField = 0x81;
   }
-  return iVar1;
+  return symbolIndexOrField;
 }
 
 /* FUN_00053000 @ 0x53000 (52 bytes) */

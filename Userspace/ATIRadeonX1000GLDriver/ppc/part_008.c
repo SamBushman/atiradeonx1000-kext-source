@@ -125,25 +125,25 @@ int FUN_00054080(ctx, scratchInt3, src0Id, swizzleX, swizzleY, swizzleZ, swizzle
   uint swizzleZ;
   uint swizzleW;
 {
-  int iVar1;
-  int iVar2;
-  int local_28;
-  uint local_24;
-  uint local_20;
-  uint local_1c;
+  int appendResult;
+  int extvsState;
+  int outSelectX;
+  uint outSelectY;
+  uint outSelectZ;
+  uint outSelectW;
   
   if (((((((unsigned char *)0x00001170)[ctx] != '\0') && (swizzleX - 0x87d5U < 0xb)) && (0x87d4 < swizzleY)) &&
       ((swizzleY < 0x87e0 && (0x87d4 < swizzleZ)))) &&
      ((swizzleZ < 0x87e0 && ((0x87d4 < swizzleW && (swizzleW < 0x87e0)))))) {
-    iVar2 = *(int *)(((unsigned char *)0x00001168) + ctx);
-    local_28 = swizzleX;
-    local_24 = swizzleY;
-    local_20 = swizzleZ;
-    local_1c = swizzleW;
-    iVar1 = ((int (*)())extvsAppendInstruction)(ctx,iVar2,0x879a,scratchInt3,&DAT_001db9a8,src0Id,&local_28,0,
+    extvsState = *(int *)(((unsigned char *)0x00001168) + ctx);
+    outSelectX = swizzleX;
+    outSelectY = swizzleY;
+    outSelectZ = swizzleZ;
+    outSelectW = swizzleW;
+    appendResult = ((int (*)())extvsAppendInstruction)(ctx,extvsState,0x879a,scratchInt3,&DAT_001db9a8,src0Id,&outSelectX,0,
                          &DAT_001db998,0,&DAT_001db998);
-    if ((iVar1 != 0) && (scratchInt3 - 0x879dU < 0x10)) {
-      *(undefined1 *)((scratchInt3 - 0x879dU) + iVar2 + 0x44) = 1;
+    if ((appendResult != 0) && (scratchInt3 - 0x879dU < 0x10)) {
+      *(undefined1 *)((scratchInt3 - 0x879dU) + extvsState + 0x44) = 1;
     }
   }
   return;

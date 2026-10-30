@@ -7886,7 +7886,7 @@ int FUN_0004a860(glContext, param_2, param_3, param_4, param_5, param_6, param_7
 }
 
 /* FUN_0004a8f0 @ 0x4a8f0 (140 bytes) */
-void FUN_0004a8f0(int glContext,undefined4 param_2,undefined4 unusedArgR5,undefined4 unused,double fparam_1)
+void FUN_0004a8f0(int glContext,undefined4 param_2,undefined4 unusedArgR5,undefined4 unused,double fprF1)
 {
   if ((*(uint *)(glContext + 0x44) & 0x20000) == 0) {
     FUN_000b6580(glContext,0);
@@ -7896,7 +7896,7 @@ void FUN_0004a8f0(int glContext,undefined4 param_2,undefined4 unusedArgR5,undefi
     return;
   }
   if ((*(uint *)(glContext + 0x44) & 0x2000) != 0) {
-    ((undefined4 (*)())FUN_000afe40)(glContext,0,unusedArgR5,unused,fparam_1);
+    ((undefined4 (*)())FUN_000afe40)(glContext,0,unusedArgR5,unused,fprF1);
     return;
   }
   atifsCompileCurrentShader(glContext);
