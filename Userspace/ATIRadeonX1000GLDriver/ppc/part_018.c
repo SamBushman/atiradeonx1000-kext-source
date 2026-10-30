@@ -1063,11 +1063,11 @@ int ilAssembleProgram(ctx, programHeader, programBody)
   uint *hwWordSource;
   uint *inputMaskCursor;
   bool hasOptionalWord;
-  byte *pbVar2;
+  byte *outputEntryNumberPtr;
   bool hasSecondWord;
   bool prologuePending;
-  byte *pbVar5;
-  undefined *puVar6;
+  byte *outputEntryTypePtr;
+  undefined *registerKindBits;
   uint texModeBits;
   uint *******nextDstCursor;
   undefined4 hasDestination;
@@ -1080,19 +1080,19 @@ int ilAssembleProgram(ctx, programHeader, programBody)
   undefined4 *maskCursorA;
   int maskWordIndex;
   uint *******scanTokenWord;
-  uint *puVar19;
-  uint *******pppppppuVar20;
-  uint uVar21;
+  uint *readToken;
+  uint *******scratchCursorA;
+  uint defRecordLimit;
   uint sizeBytes3;
   char outputNumber;
   uint ******copyWord2;
-  uint *******pppppppuVar25;
+  uint *******scratchCursorB;
   uint *tokenCursor;
   undefined4 *cursor3;
   uint ******copyWord3;
   uint ******calleeSavedR14;
   uint ******calleeSavedR15;
-  uint *puVar29;
+  uint *streamPtr;
   uint calleeSavedR20;
   uint *******dstCursorCarry;
   uint calleeSavedR21;
@@ -1107,195 +1107,195 @@ int ilAssembleProgram(ctx, programHeader, programBody)
   int texExtraWords;
   uint *******dstCursor;
   uint *srcCursor;
-  uint ******local_2bb0;
-  uint local_2bac [2];
-  uint *******local_2ba4;
-  uint local_2ba0 [2];
-  uint ******local_2b98;
-  uint ******local_2b94;
-  uint ******local_2b8c [3];
-  undefined1 auStack_2b80 [12];
-  uint ******local_2b74;
-  uint ******local_2b70;
-  uint ******local_2b68;
-  uint local_2b64;
-  uint local_2b60;
-  uint local_2b5c;
-  undefined4 local_2b58 [4];
-  undefined4 local_2b48;
-  undefined4 local_2b44;
-  undefined4 local_2b40;
-  undefined4 local_2b3c;
-  undefined4 local_2b38 [4];
-  undefined4 local_2b28;
-  undefined4 local_2b24;
-  undefined4 local_2b20;
-  undefined4 local_2b1c;
+  uint ******operandWord2bb0;
+  uint operandWord2bac [2];
+  uint *******operandWord2ba4;
+  uint operandWord2ba0 [2];
+  uint ******operandWord2b98;
+  uint ******operandWord2b94;
+  uint ******remapTokenIn [3];
+  undefined1 remapExtIn [12];
+  uint ******operandWord2b74;
+  uint ******operandWord2b70;
+  uint ******constWord0;
+  uint constWord1;
+  uint constWord2;
+  uint constWord3;
+  undefined4 initRegsB [4];
+  undefined4 initRegsBWord4;
+  undefined4 initRegsBWord5;
+  undefined4 initRegsBWord6;
+  undefined4 initRegsBWord7;
+  undefined4 initRegsA [4];
+  undefined4 initRegsAWord4;
+  undefined4 initRegsAWord5;
+  undefined4 initRegsAWord6;
+  undefined4 initRegsAWord7;
   /* Same undersized-buffer defect as auStack_c148 below (issue #64), same function, a sibling call
    * site: declared 76 bytes but memset to 0xbc=188 (0x2b18-0xbc=0x2a5c, exactly this buffer's own
    * sibling declared right after it - confirming the real size). Enlarged to match. */
-  undefined1 auStack_2b18 [0xbc];
-  uint *local_2acc;
-  int local_2ac8;
-  undefined4 local_2ac0 [8];
-  undefined4 local_2aa0 [16];
-  int local_2a60;
+  undefined1 scCallbackTableA [0xbc];
+  uint *ilOutputBuffer;
+  int ilOutputBytes;
+  undefined4 compileMaskLow [8];
+  undefined4 compileMaskHigh [16];
+  int scratchAllocationCopy;
   /* Same undersized-buffer defect as auStack_9d1c below (issue #64), same function, a sibling call
    * site: declared 72 bytes but memset to 0x674=1652. Enlarged to match. */
-  undefined1 auStack_2a5c [0x674];
-  undefined4 local_2a14;
-  undefined4 local_2a10;
-  uint local_2a08;
-  uint local_2a04;
-  int local_29fc;
-  int local_29f8;
-  uint ******local_2958;
-  undefined1 uStack_2954;
-  char local_2953 [3];
-  byte abStack_2950 [764];
-  uint ******local_2654;
-  char local_2650 [576];
-  undefined4 local_2410;
-  uint *local_240c;
-  int *local_2408;
-  uint ******local_2400;
-  uint ******local_23fc;
-  uint ******local_23ec;
+  undefined1 scCallbackTableB [0x674];
+  undefined4 defRecordCapacity;
+  undefined4 dclRecordCapacity;
+  uint defRecordCount;
+  uint dclRecordCount;
+  int defRecords;
+  int dclRecords;
+  uint ******outputEntryCount;
+  undefined1 outputEntryTable;
+  char outputEntryNumbers [3];
+  byte outputEntryTypes [764];
+  uint ******outputKindCount;
+  char outputKindEntries [576];
+  undefined4 hwWordCapacity;
+  uint *hwWordBuffer;
+  int *outputMapTable;
+  uint ******hwWordQuadCount;
+  uint ******compileResultWord23fc;
+  uint ******maxUsedRegister;
   uint ******scanState;
-  undefined4 local_23e4;
+  undefined4 scanStateWord23e4;
   uint usedTexcoordMask;
-  undefined4 local_23dc [4];
-  undefined4 local_23cc;
-  undefined4 local_23c8;
-  undefined4 local_23c4;
-  undefined4 local_23c0;
-  undefined4 local_23bc [4];
-  undefined4 local_23ac;
-  undefined4 local_23a8;
-  undefined4 local_23a4;
-  undefined4 local_23a0;
-  int local_239c;
-  uint ******local_2398;
-  undefined4 local_2384;
-  uint local_2378;
-  uint local_2374;
-  int aiStack_22f0 [32];
-  uint local_2270;
-  uint local_2260 [6];
-  undefined1 auStack_2248 [8];
-  float local_2240 [1024];
-  uint local_1240 [8];
-  int aiStack_1220 [1024];
-  uint *******local_220;
-  int local_218;
-  int local_1f8 [5];
-  uint local_1e4;
-  int local_1dc;
-  uint local_1d8;
-  int local_1d4;
-  int local_1d0;
-  int local_1cc;
-  int local_1c8;
-  undefined4 local_1c4;
-  undefined4 local_1c0;
-  undefined4 local_1bc;
-  undefined4 local_1b8;
-  uint *******local_1b4;
-  undefined4 local_1b0 [16];
-  undefined4 local_170 [16];
-  uint auStack_130 [17];
-  int local_ec;
-  uint local_d8;
-  uint local_d4;
-  undefined4 local_cc;
-  int local_c8;
-  uint local_c4;
-  undefined4 local_7c;
-  longlong local_78;
-  uint ******local_70;
-  uint *local_6c;
-  uint ******local_60;
+  undefined4 initRegsDst [4];
+  undefined4 initRegsDstWord4;
+  undefined4 initRegsDstWord5;
+  undefined4 initRegsDstWord6;
+  undefined4 initRegsDstWord7;
+  undefined4 initRegsDstB [4];
+  undefined4 initRegsDstBWord4;
+  undefined4 initRegsDstBWord5;
+  undefined4 initRegsDstBWord6;
+  undefined4 initRegsDstBWord7;
+  int usesOutputKind16;
+  uint ******scanStateSnapshot;
+  undefined4 usesOutputKind10;
+  uint shadowCompareUnitMask;
+  uint shadowDoneUnitMask;
+  int unitTexFormats [32];
+  uint projectedInputMask;
+  uint inputMaskWords [6];
+  undefined1 dclTableHead [8];
+  float dclValueTable [1024];
+  uint dclValueTableTail [8];
+  int intConstTable [1024];
+  uint *******errorResult;
+  int neverSetPrologueFlag;
+  int perOutputFlags [5];
+  uint ctxFeatureFlag;
+  int neverSetFlag1dc;
+  uint ctxUnitSelector;
+  int neverSetFlag1d4;
+  int neverSetFlag1d0;
+  int neverSetFlag1cc;
+  int neverSetFlag1c8;
+  undefined4 neverSetWord1c4;
+  undefined4 neverSetWord1c0;
+  undefined4 usesToken37;
+  undefined4 neverSetWord1b8;
+  uint *******neverSetPointer1b4;
+  undefined4 maskScratchA [16];
+  undefined4 maskScratchB [16];
+  uint inputKindTable [17];
+  int featureSelector;
+  uint ctxBit10Flag;
+  uint ctxByte11d2;
+  undefined4 neverSetWord0cc;
+  int texInstructionCount;
+  uint headerWord6Zero;
+  undefined4 neverSetWord7c;
+  longlong convertedConstant;
+  uint ******operandPtrA;
+  uint *inputMaskWordsPtr;
+  uint ******operandPtrB;
   
   zeroFillCount = 8;
   zeroFillOffset = 0;
   do {
-    *(undefined4 *)((int)local_2b38 + zeroFillOffset) = 0xffffffff;
-    *(undefined4 *)((int)local_2b58 + zeroFillOffset) = 0xffffffff;
+    *(undefined4 *)((int)initRegsA + zeroFillOffset) = 0xffffffff;
+    *(undefined4 *)((int)initRegsB + zeroFillOffset) = 0xffffffff;
     zeroFillOffset = zeroFillOffset + 4;
     zeroFillCount = zeroFillCount + -1;
   } while (zeroFillCount != 0);
   scanTokenWord = programBody;
   scratchBlock = _malloc(0x400);
   ctxWord44 = *(uint *)(ctx + 0x44);
-  local_218 = 0;
+  neverSetPrologueFlag = 0;
   if ((ctxWord44 & 0x2000) == 0) {
-    local_1e4 = ctxWord44 >> 0x18 & 1;
-    local_1d8 = 0xffff;
+    ctxFeatureFlag = ctxWord44 >> 0x18 & 1;
+    ctxUnitSelector = 0xffff;
   }
   else {
-    local_1e4 = ctxWord44 >> 0xb & 1;
-    if (local_1e4 == 0) {
-      local_1d8 = 0xffff;
+    ctxFeatureFlag = ctxWord44 >> 0xb & 1;
+    if (ctxFeatureFlag == 0) {
+      ctxUnitSelector = 0xffff;
     }
     else {
-      local_1d8 = (uint)(byte)((unsigned char *)0x000011d1)[ctx];
+      ctxUnitSelector = (uint)(byte)((unsigned char *)0x000011d1)[ctx];
     }
   }
   ilTokens = (uint *)*programHeader;
-  local_d8 = ctxWord44 >> 10 & 1;
+  ctxBit10Flag = ctxWord44 >> 10 & 1;
   countdown = 8;
-  local_23e4 = 0xffff;
-  local_d4 = (uint)(byte)((unsigned char *)0x000011d2)[ctx];
-  local_c4 = (uint)(programHeader[6] == 0);
-  local_23c0 = local_2b1c;
+  scanStateWord23e4 = 0xffff;
+  ctxByte11d2 = (uint)(byte)((unsigned char *)0x000011d2)[ctx];
+  headerWord6Zero = (uint)(programHeader[6] == 0);
+  initRegsDstWord7 = initRegsAWord7;
   ilWordCount = programHeader[1];
-  local_23c4 = local_2b20;
-  local_23c8 = local_2b24;
-  local_1b4 = (uint *******)0x0;
-  local_ec = 0;
-  local_cc = 0;
-  local_7c = 0;
-  local_23cc = local_2b28;
-  local_23dc[3] = local_2b38[3];
+  initRegsDstWord6 = initRegsAWord6;
+  initRegsDstWord5 = initRegsAWord5;
+  neverSetPointer1b4 = (uint *******)0x0;
+  featureSelector = 0;
+  neverSetWord0cc = 0;
+  neverSetWord7c = 0;
+  initRegsDstWord4 = initRegsAWord4;
+  initRegsDst[3] = initRegsA[3];
   scanState = (uint ******)0x0;
-  local_239c = 0;
-  local_2384 = 0;
-  local_23dc[2] = local_2b38[2];
-  local_23dc[1] = local_2b38[1];
-  local_23dc[0] = local_2b38[0];
-  local_23a0 = local_2b3c;
-  local_2270 = 0;
-  local_1b8 = 0;
+  usesOutputKind16 = 0;
+  usesOutputKind10 = 0;
+  initRegsDst[2] = initRegsA[2];
+  initRegsDst[1] = initRegsA[1];
+  initRegsDst[0] = initRegsA[0];
+  initRegsDstBWord7 = initRegsBWord7;
+  projectedInputMask = 0;
+  neverSetWord1b8 = 0;
   usedTexcoordMask = 0;
-  local_220 = (uint *******)0x0;
-  local_1f8[0] = 0;
-  local_23a8 = local_2b44;
-  local_23a4 = local_2b40;
-  local_1f8[1] = 0;
-  local_1f8[2] = 0;
-  local_1f8[3] = 0;
-  local_1d4 = 0;
-  local_23bc[3] = local_2b58[3];
-  local_23ac = local_2b48;
-  local_1d0 = 0;
-  local_1cc = 0;
-  local_1c8 = 0;
-  local_1dc = 0;
-  local_23bc[1] = local_2b58[1];
-  local_1c4 = 0;
-  local_1c0 = 0;
-  local_1bc = 0;
-  local_23bc[2] = local_2b58[2];
-  cursor4 = local_2260;
-  local_6c = cursor4;
-  local_23bc[0] = local_2b58[0];
+  errorResult = (uint *******)0x0;
+  perOutputFlags[0] = 0;
+  initRegsDstBWord5 = initRegsBWord5;
+  initRegsDstBWord6 = initRegsBWord6;
+  perOutputFlags[1] = 0;
+  perOutputFlags[2] = 0;
+  perOutputFlags[3] = 0;
+  neverSetFlag1d4 = 0;
+  initRegsDstB[3] = initRegsB[3];
+  initRegsDstBWord4 = initRegsBWord4;
+  neverSetFlag1d0 = 0;
+  neverSetFlag1cc = 0;
+  neverSetFlag1c8 = 0;
+  neverSetFlag1dc = 0;
+  initRegsDstB[1] = initRegsB[1];
+  neverSetWord1c4 = 0;
+  neverSetWord1c0 = 0;
+  usesToken37 = 0;
+  initRegsDstB[2] = initRegsB[2];
+  cursor4 = inputMaskWords;
+  inputMaskWordsPtr = cursor4;
+  initRegsDstB[0] = initRegsB[0];
   do {
     *cursor4 = 0;
     cursor4[0x408] = 0;
     cursor4 = cursor4 + 1;
     countdown = countdown + -1;
   } while (countdown != 0);
-  maskCursorA = local_1b0;
+  maskCursorA = maskScratchA;
   countdown = 0x10;
   do {
     *maskCursorA = 0;
@@ -1306,59 +1306,59 @@ int ilAssembleProgram(ctx, programHeader, programBody)
   extraWords = 0;
   texExtraWords = 0;
   usedBits = 0;
-  puVar29 = ilTokens;
+  streamPtr = ilTokens;
 switchD_000c90cc_caseD_15:
-  srcCursor = puVar29 + 2;
+  srcCursor = streamPtr + 2;
   tokenCursor = srcCursor;
 switchD_000c90cc_caseD_18:
-  puVar29 = tokenCursor;
-  if (puVar29 < ilTokens + ilWordCount) goto code_r0x000c90a4;
-  if (local_220 != (uint *******)0x0) {
-    puVar29 = (uint *)0x0;
+  streamPtr = tokenCursor;
+  if (streamPtr < ilTokens + ilWordCount) goto code_r0x000c90a4;
+  if (errorResult != (uint *******)0x0) {
+    streamPtr = (uint *)0x0;
     uVar33 = 0;
     goto LAB_000ca6bc;
   }
   extraWords = (extraWords + ilWordCount) * 4;
-  local_2398 = scanState;
-  if (local_239c != 0) {
+  scanStateSnapshot = scanState;
+  if (usesOutputKind16 != 0) {
     extraWords = extraWords + 0x48;
   }
   uVar33 = extraWords + texExtraWords * 4;
-  extraPrologue = local_218 != 0;
+  extraPrologue = neverSetPrologueFlag != 0;
   if (extraPrologue) {
     uVar33 = uVar33 + 0x14;
   }
   sizeBytes2 = uVar33;
-  if ((local_1f8[0] != 0) && (sizeBytes2 = uVar33 + 0xc, extraPrologue)) {
+  if ((perOutputFlags[0] != 0) && (sizeBytes2 = uVar33 + 0xc, extraPrologue)) {
     sizeBytes2 = uVar33 + 0x24;
   }
   uVar33 = sizeBytes2;
-  if ((local_1f8[1] != 0) && (uVar33 = sizeBytes2 + 0xc, extraPrologue)) {
+  if ((perOutputFlags[1] != 0) && (uVar33 = sizeBytes2 + 0xc, extraPrologue)) {
     uVar33 = sizeBytes2 + 0x24;
   }
   sizeBytes2 = uVar33;
-  if ((local_1f8[2] != 0) && (sizeBytes2 = uVar33 + 0xc, extraPrologue)) {
+  if ((perOutputFlags[2] != 0) && (sizeBytes2 = uVar33 + 0xc, extraPrologue)) {
     sizeBytes2 = uVar33 + 0x24;
   }
   sizeBytes3 = sizeBytes2;
-  if ((local_1f8[3] != 0) && (sizeBytes3 = sizeBytes2 + 0xc, extraPrologue)) {
+  if ((perOutputFlags[3] != 0) && (sizeBytes3 = sizeBytes2 + 0xc, extraPrologue)) {
     sizeBytes3 = sizeBytes2 + 0x24;
   }
-  if (((local_1dc != 0) && (local_1e4 != 0)) && (local_1b4 == (uint *******)0x0)) {
+  if (((neverSetFlag1dc != 0) && (ctxFeatureFlag != 0)) && (neverSetPointer1b4 == (uint *******)0x0)) {
     sizeBytes3 = sizeBytes3 + 0x14;
   }
-  if (local_ec == 1) {
+  if (featureSelector == 1) {
     sizeBytes3 = sizeBytes3 + 0x24;
   }
-  else if (local_ec == 2) {
+  else if (featureSelector == 2) {
     sizeBytes3 = sizeBytes3 + 0x30;
   }
-  else if (local_ec == 3) {
+  else if (featureSelector == 3) {
     sizeBytes3 = sizeBytes3 + 0x40;
   }
-  else if (local_ec == 0) goto LAB_000c99d4;
+  else if (featureSelector == 0) goto LAB_000c99d4;
   sizeBytes3 = sizeBytes3 + 8;
-  flagCursor = local_1f8;
+  flagCursor = perOutputFlags;
   countdown = 4;
   do {
     if (*flagCursor != 0) {
@@ -1368,28 +1368,28 @@ switchD_000c90cc_caseD_18:
     countdown = countdown + -1;
   } while (countdown != 0);
 LAB_000c99d4:
-  if (((local_1d0 != 0) || (local_1c8 != 0)) || (uVar33 = sizeBytes3, local_1b4 == (uint *******)0x0)) {
-    if ((local_1d4 == 0) && (local_1cc != 0)) {
+  if (((neverSetFlag1d0 != 0) || (neverSetFlag1c8 != 0)) || (uVar33 = sizeBytes3, neverSetPointer1b4 == (uint *******)0x0)) {
+    if ((neverSetFlag1d4 == 0) && (neverSetFlag1cc != 0)) {
       sizeBytes3 = sizeBytes3 + 0xc;
     }
     uVar33 = sizeBytes3;
-    if ((local_1b4 == (uint *******)0x0) && (uVar33 = sizeBytes3 + 0xc, local_d8 != 0)) {
+    if ((neverSetPointer1b4 == (uint *******)0x0) && (uVar33 = sizeBytes3 + 0xc, ctxBit10Flag != 0)) {
       uVar33 = sizeBytes3 + 0x18;
     }
   }
   prologuePending = true;
-  pppppppuVar20 = local_1b4;
-  pppppppuVar25 = local_220;
-  puVar29 = (uint *)_malloc(uVar33 + 0x10);
-  *puVar29 = *ilTokens;
+  scratchCursorA = neverSetPointer1b4;
+  scratchCursorB = errorResult;
+  streamPtr = (uint *)_malloc(uVar33 + 0x10);
+  *streamPtr = *ilTokens;
   srcCursor = ilTokens + 2;
-  puVar29[1] = ilTokens[1];
+  streamPtr[1] = ilTokens[1];
   tokenCursor = srcCursor;
-  dstCursorCarry = (uint *******)(puVar29 + 2);
+  dstCursorCarry = (uint *******)(streamPtr + 2);
   goto switchD_000c9ab8_caseD_18;
 code_r0x000c90a4:
-  scanTokenWord = (uint *******)*puVar29;
-  tokenCursor = puVar29;
+  scanTokenWord = (uint *******)*streamPtr;
+  tokenCursor = streamPtr;
   switch((uint)scanTokenWord & 0xffff) {
   default:
     goto switchD_000c90cc_caseD_0;
@@ -1460,7 +1460,7 @@ code_r0x000c90a4:
   case 0x2b:
   case 0x4b:
   case 0x53:
-    srcCursor = puVar29 + 1;
+    srcCursor = streamPtr + 1;
     tokenCursor = srcCursor;
     goto switchD_000c90cc_caseD_18;
   case 7:
@@ -1469,17 +1469,17 @@ code_r0x000c90a4:
     hasDestination = 0;
 LAB_000c9340:
     scanTokenWord = (uint *******)((int)((unsigned char *)0x0) + 2);
-    srcCursor = (uint *)((int (*)())ilMarkInstructionRegistersUsed)(puVar29,hasDestination,2,&scanState);
+    srcCursor = (uint *)((int (*)())ilMarkInstructionRegistersUsed)(streamPtr,hasDestination,2,&scanState);
     tokenCursor = srcCursor;
     goto switchD_000c90cc_caseD_18;
   case 8:
   case 0x32:
-    srcCursor = puVar29 + 2;
+    srcCursor = streamPtr + 2;
     tokenCursor = srcCursor;
     goto switchD_000c90cc_caseD_18;
   case 9:
   case 0x1d:
-    srcCursor = puVar29 + 3;
+    srcCursor = streamPtr + 3;
     tokenCursor = srcCursor;
     goto switchD_000c90cc_caseD_18;
   case 10:
@@ -1490,36 +1490,36 @@ LAB_000c9340:
   case 0x40:
   case 100:
     scanTokenWord = (uint *******)((int)((unsigned char *)0x0) + 3);
-    srcCursor = (uint *)((int (*)())ilMarkInstructionRegistersUsed)(puVar29,1,3,&scanState);
+    srcCursor = (uint *)((int (*)())ilMarkInstructionRegistersUsed)(streamPtr,1,3,&scanState);
     tokenCursor = srcCursor;
     goto switchD_000c90cc_caseD_18;
   case 0xf:
-    srcCursor = puVar29 + *(ushort *)((int)puVar29 + 6) + 2;
+    srcCursor = streamPtr + *(ushort *)((int)streamPtr + 6) + 2;
     tokenCursor = srcCursor;
     goto switchD_000c90cc_caseD_18;
   case 0x14:
-    srcCursor = puVar29 + 3;
+    srcCursor = streamPtr + 3;
     tokenCursor = srcCursor;
     goto switchD_000c90cc_caseD_18;
   case 0x15:
     goto switchD_000c90cc_caseD_15;
   case 0x16:
-    srcCursor = puVar29 + 1;
+    srcCursor = streamPtr + 1;
     scanTokenWord = &scanState;
-    uVar33 = puVar29[1];
-    puVar6 = (undefined *)(uVar33 & 0x3f0000);
+    uVar33 = streamPtr[1];
+    registerKindBits = (undefined *)(uVar33 & 0x3f0000);
     ((int (*)())ilRecordRegisterUse)(uVar33 & 0xffff,uVar33 >> 0x10 & 0x3f,scanTokenWord,0,0);
-    if (puVar6 == ((unsigned char *)0x00160000U)) {
-      local_239c = 1;
+    if (registerKindBits == ((unsigned char *)0x00160000U)) {
+      usesOutputKind16 = 1;
     }
-    else if (puVar6 == (undefined *)0x110000) {
+    else if (registerKindBits == (undefined *)0x110000) {
       usedTexcoordMask = 1 << (uVar33 & 0x3f) | usedTexcoordMask;
     }
-    else if (puVar6 == (undefined *)0xf0000) {
+    else if (registerKindBits == (undefined *)0xf0000) {
       usedBits = usedBits | 1 << (uVar33 & 0x3f);
     }
-    else if (puVar6 == (undefined *)0x100000) {
-      local_2384 = 1;
+    else if (registerKindBits == (undefined *)0x100000) {
+      usesOutputKind10 = 1;
     }
     goto LAB_000c9564;
   case 0x18:
@@ -1527,8 +1527,8 @@ LAB_000c9340:
   case 0x19:
     scanTokenCopy = (uint)scanTokenWord >> 0x1b & 3;
     uVar33 = (uint)scanTokenWord >> 0x10 & 0xff;
-    if ((scanTokenCopy == 2) || ((scanTokenCopy == 0 && (auStack_130[uVar33] == 2)))) {
-      local_2270 = 1 << ((uint)scanTokenWord >> 0x10 & 0x3f) | local_2270;
+    if ((scanTokenCopy == 2) || ((scanTokenCopy == 0 && (inputKindTable[uVar33] == 2)))) {
+      projectedInputMask = 1 << ((uint)scanTokenWord >> 0x10 & 0x3f) | projectedInputMask;
     }
     scanTokenWord = (uint *******)((uint)scanTokenWord >> 0x18 & 7);
     ilRecordInputSemantic(&scanState,uVar33,scanTokenWord);
@@ -1536,37 +1536,37 @@ LAB_000c9340:
     tokenCursor = srcCursor;
     goto switchD_000c90cc_caseD_18;
   case 0x1a:
-    srcCursor = puVar29 + 1;
+    srcCursor = streamPtr + 1;
     if ((int)scanTokenWord < 0) {
-      srcCursor = puVar29 + 2;
+      srcCursor = streamPtr + 2;
     }
 LAB_000c9564:
     srcCursor = srcCursor + 1;
     tokenCursor = srcCursor;
     goto switchD_000c90cc_caseD_18;
   case 0x1c:
-    srcCursor = puVar29 + 1;
-    scanTokenCopy = puVar29[1];
+    srcCursor = streamPtr + 1;
+    scanTokenCopy = streamPtr[1];
     uVar33 = scanTokenCopy >> 0x10 & 0x3f;
     if (uVar33 == 1) {
-      scanTokenWord = &local_2b68;
-      local_2b68 = (uint ******)puVar29[2];
-      local_2b64 = puVar29[3];
-      local_2b60 = puVar29[4];
-      srcCursor = puVar29 + 6;
-      local_2b5c = puVar29[5];
+      scanTokenWord = &constWord0;
+      constWord0 = (uint ******)streamPtr[2];
+      constWord1 = streamPtr[3];
+      constWord2 = streamPtr[4];
+      srcCursor = streamPtr + 6;
+      constWord3 = streamPtr[5];
       ilRecordDefinedConstantPrimary(&scanState,scanTokenCopy & 0xffff,scanTokenWord);
       tokenCursor = srcCursor;
     }
     else {
       tokenCursor = srcCursor;
       if (uVar33 == 2) {
-        scanTokenWord = &local_2b68;
-        local_2b68 = (uint ******)puVar29[2];
-        local_2b64 = puVar29[3];
-        local_2b60 = puVar29[4];
-        srcCursor = puVar29 + 6;
-        local_2b5c = puVar29[5];
+        scanTokenWord = &constWord0;
+        constWord0 = (uint ******)streamPtr[2];
+        constWord1 = streamPtr[3];
+        constWord2 = streamPtr[4];
+        srcCursor = streamPtr + 6;
+        constWord3 = streamPtr[5];
         ilRecordDefinedConstantSecondary(&scanState,scanTokenCopy & 0xffff,scanTokenWord);
         tokenCursor = srcCursor;
       }
@@ -1575,41 +1575,41 @@ LAB_000c9564:
   case 0x24:
     scanTokenWord = (uint *******)((int)((unsigned char *)0x0) + 2);
     extraWords = extraWords + 5;
-    srcCursor = (uint *)((int (*)())ilMarkInstructionRegistersUsed)(puVar29,1,2,&scanState);
+    srcCursor = (uint *)((int (*)())ilMarkInstructionRegistersUsed)(streamPtr,1,2,&scanState);
     tokenCursor = srcCursor;
     goto switchD_000c90cc_caseD_18;
   case 0x35:
     scanTokenWord = &scanState;
-    srcCursor = puVar29 + 2;
-    local_2b8c[0] = (uint ******)puVar29[1];
-    ((int (*)())ilMarkOperandRegisterUsed)(local_2b8c,auStack_2b80,scanTokenWord);
+    srcCursor = streamPtr + 2;
+    remapTokenIn[0] = (uint ******)streamPtr[1];
+    ((int (*)())ilMarkOperandRegisterUsed)(remapTokenIn,remapExtIn,scanTokenWord);
     tokenCursor = srcCursor;
     goto switchD_000c90cc_caseD_18;
   case 0x37:
     scanTokenWord = (uint *******)((int)((unsigned char *)0x0) + 1);
-    srcCursor = (uint *)((int (*)())ilMarkInstructionRegistersUsed)(puVar29,0,1,&scanState);
-    local_1bc = 1;
+    srcCursor = (uint *)((int (*)())ilMarkInstructionRegistersUsed)(streamPtr,0,1,&scanState);
+    usesToken37 = 1;
     tokenCursor = srcCursor;
     goto switchD_000c90cc_caseD_18;
   case 0x3e:
     hasDestination = 0;
     break;
   case 0x5d:
-    srcCursor = puVar29 + 2;
-    local_c8 = local_c8 + 1;
-    uVar33 = puVar29[1];
-    scanTokenCopy = *puVar29;
+    srcCursor = streamPtr + 2;
+    texInstructionCount = texInstructionCount + 1;
+    uVar33 = streamPtr[1];
+    scanTokenCopy = *streamPtr;
     if ((((scanTokenCopy & 0xc000000) == 0x4000000) ||
         (((scanTokenCopy & 0xc000000) == 0x8000000 &&
-         ((1 << (*(byte *)((int)puVar29 + 1) & 0x3f) & local_2374) != 0)))) &&
-       (local_2378 << (*(byte *)((int)puVar29 + 1) & 0x3f) != 0)) {
+         ((1 << (*(byte *)((int)streamPtr + 1) & 0x3f) & shadowDoneUnitMask) != 0)))) &&
+       (shadowCompareUnitMask << (*(byte *)((int)streamPtr + 1) & 0x3f) != 0)) {
       texExtraWords = texExtraWords + 0x1b;
-      local_2374 = 1 << (*(byte *)((int)puVar29 + 1) & 0x3f) | local_2374;
-      scanTokenCopy = *puVar29;
+      shadowDoneUnitMask = 1 << (*(byte *)((int)streamPtr + 1) & 0x3f) | shadowDoneUnitMask;
+      scanTokenCopy = *streamPtr;
     }
     if ((int)scanTokenCopy < 0) {
-      srcCursor = puVar29 + 3;
-      scanTokenCopy = *puVar29;
+      srcCursor = streamPtr + 3;
+      scanTokenCopy = *streamPtr;
     }
     if ((scanTokenCopy & 0x40000000) != 0) {
       srcCursor = srcCursor + 1;
@@ -1620,35 +1620,35 @@ LAB_000c9564:
     }
     scanTokenWord = &scanState;
     ((int (*)())ilRecordRegisterUse)(uVar33 & 0xffff,uVar33 >> 0x10 & 0x3f,scanTokenWord,calleeSavedR21,uVar33 >> 0x16 & 1);
-    if ((1 << (*(byte *)((int)puVar29 + 1) & 0x3f) & local_2378) != 0) {
+    if ((1 << (*(byte *)((int)streamPtr + 1) & 0x3f) & shadowCompareUnitMask) != 0) {
       texExtraWords = texExtraWords + 4;
     }
-    local_2b74 = (uint ******)*srcCursor;
+    operandWord2b74 = (uint ******)*srcCursor;
     operandTokenPtr = srcCursor + 1;
-    if (((uint)local_2b74 & 0x400000) != 0) {
-      local_2bb0 = (uint ******)srcCursor[1];
+    if (((uint)operandWord2b74 & 0x400000) != 0) {
+      operandWord2bb0 = (uint ******)srcCursor[1];
       operandTokenPtr = srcCursor + 2;
     }
     srcCursor = operandTokenPtr;
-    ((int (*)())ilMarkOperandRegisterUsed)(&local_2b74,&local_2bb0,scanTokenWord);
+    ((int (*)())ilMarkOperandRegisterUsed)(&operandWord2b74,&operandWord2bb0,scanTokenWord);
     tokenCursor = srcCursor;
     goto switchD_000c90cc_caseD_18;
   case 0x5e:
-    srcCursor = puVar29 + 2;
-    local_c8 = local_c8 + 1;
-    uVar33 = puVar29[1];
-    scanTokenCopy = *puVar29;
+    srcCursor = streamPtr + 2;
+    texInstructionCount = texInstructionCount + 1;
+    uVar33 = streamPtr[1];
+    scanTokenCopy = *streamPtr;
     if ((((scanTokenCopy & 0xc000000) == 0x4000000) ||
         (((scanTokenCopy & 0xc000000) == 0x8000000 &&
-         ((1 << (*(byte *)((int)puVar29 + 1) & 0x3f) & local_2374) != 0)))) &&
-       (local_2378 << (*(byte *)((int)puVar29 + 1) & 0x3f) != 0)) {
+         ((1 << (*(byte *)((int)streamPtr + 1) & 0x3f) & shadowDoneUnitMask) != 0)))) &&
+       (shadowCompareUnitMask << (*(byte *)((int)streamPtr + 1) & 0x3f) != 0)) {
       texExtraWords = texExtraWords + 0x1b;
-      local_2374 = 1 << (*(byte *)((int)puVar29 + 1) & 0x3f) | local_2374;
-      scanTokenCopy = *puVar29;
+      shadowDoneUnitMask = 1 << (*(byte *)((int)streamPtr + 1) & 0x3f) | shadowDoneUnitMask;
+      scanTokenCopy = *streamPtr;
     }
     if ((int)scanTokenCopy < 0) {
-      srcCursor = puVar29 + 3;
-      scanTokenCopy = *puVar29;
+      srcCursor = streamPtr + 3;
+      scanTokenCopy = *streamPtr;
     }
     if ((scanTokenCopy & 0x40000000) != 0) {
       srcCursor = srcCursor + 1;
@@ -1659,53 +1659,53 @@ LAB_000c9564:
     }
     scanTokenWord = &scanState;
     ((int (*)())ilRecordRegisterUse)(uVar33 & 0xffff,uVar33 >> 0x10 & 0x3f,scanTokenWord,calleeSavedR20,uVar33 >> 0x16 & 1);
-    if ((1 << (*(byte *)((int)puVar29 + 1) & 0x3f) & local_2378) != 0) {
+    if ((1 << (*(byte *)((int)streamPtr + 1) & 0x3f) & shadowCompareUnitMask) != 0) {
       texExtraWords = texExtraWords + 4;
     }
-    local_2bb0 = (uint ******)*srcCursor;
+    operandWord2bb0 = (uint ******)*srcCursor;
     operandTokenPtr = srcCursor + 1;
-    if (((uint)local_2bb0 & 0x400000) != 0) {
-      local_2ba4 = (uint *******)srcCursor[1];
+    if (((uint)operandWord2bb0 & 0x400000) != 0) {
+      operandWord2ba4 = (uint *******)srcCursor[1];
       operandTokenPtr = srcCursor + 2;
     }
-    local_2bac[0] = *operandTokenPtr;
+    operandWord2bac[0] = *operandTokenPtr;
     srcCursor = operandTokenPtr + 1;
-    if ((local_2bac[0] & 0x400000) != 0) {
-      local_2ba0[0] = operandTokenPtr[1];
+    if ((operandWord2bac[0] & 0x400000) != 0) {
+      operandWord2ba0[0] = operandTokenPtr[1];
       srcCursor = operandTokenPtr + 2;
     }
-    ((int (*)())ilMarkOperandRegisterUsed)(&local_2bb0,&local_2ba4,scanTokenWord);
-    ((int (*)())ilMarkOperandRegisterUsed)(local_2bac,local_2ba0,scanTokenWord);
+    ((int (*)())ilMarkOperandRegisterUsed)(&operandWord2bb0,&operandWord2ba4,scanTokenWord);
+    ((int (*)())ilMarkOperandRegisterUsed)(operandWord2bac,operandWord2ba0,scanTokenWord);
     tokenCursor = srcCursor;
     goto switchD_000c90cc_caseD_18;
   }
   scanTokenWord = (uint *******)((int)((unsigned char *)0x0) + 1);
-  srcCursor = (uint *)((int (*)())ilMarkInstructionRegistersUsed)(puVar29,hasDestination,1,&scanState);
+  srcCursor = (uint *)((int (*)())ilMarkInstructionRegistersUsed)(streamPtr,hasDestination,1,&scanState);
   tokenCursor = srcCursor;
   goto switchD_000c90cc_caseD_18;
 switchD_000c9ab8_caseD_18:
   dstCursor = dstCursorCarry;
-  puVar19 = tokenCursor;
+  readToken = tokenCursor;
   dstCursorCarry = dstCursor;
-  if (ilTokens + ilWordCount <= puVar19) {
+  if (ilTokens + ilWordCount <= readToken) {
     uVar33 = uVar33 >> 2;
     usedTexcoordMask = usedBits | usedTexcoordMask;
 LAB_000ca6bc:
-    if (local_220 != (uint *******)0x0) {
-      return local_220;
+    if (errorResult != (uint *******)0x0) {
+      return errorResult;
     }
     programBody[0x1587] = (uint ******)0x0;
     inputMaskBase = 0;
     programBody[0x1589] = (uint ******)0x0;
     programBody[0x1502] = (uint ******)0x0;
     scanTokenWord = programBody + 0x1000;
-    maskSource = auStack_2248;
-    pppppppuVar20 = programBody + 0x1004;
-    inputMaskCursor = local_6c;
+    maskSource = dclTableHead;
+    scratchCursorA = programBody + 0x1004;
+    inputMaskCursor = inputMaskWordsPtr;
     do {
-      dstCursorCarry = pppppppuVar20 + 1;
+      dstCursorCarry = scratchCursorA + 1;
       maskTokenCursor = (uint *)(maskSource + 8);
-      pppppppuVar25 = scanTokenWord + 1;
+      scratchCursorB = scanTokenWord + 1;
       countdown = 0x20;
       loopIndex = 0;
       do {
@@ -1713,12 +1713,12 @@ LAB_000ca6bc:
           *(undefined1 *)dstCursorCarry = 0;
         }
         else {
-          *pppppppuVar25 = (uint ******)*maskTokenCursor;
-          pppppppuVar25[1] = (uint ******)maskTokenCursor[1];
-          pppppppuVar25[2] = (uint ******)maskTokenCursor[2];
+          *scratchCursorB = (uint ******)*maskTokenCursor;
+          scratchCursorB[1] = (uint ******)maskTokenCursor[1];
+          scratchCursorB[2] = (uint ******)maskTokenCursor[2];
           copyWord = (uint ******)maskTokenCursor[3];
-          *(undefined1 *)(pppppppuVar25 + 4) = 1;
-          pppppppuVar25[3] = copyWord;
+          *(undefined1 *)(scratchCursorB + 4) = 1;
+          scratchCursorB[3] = copyWord;
           if (programBody[0x1502] < (uint ******)(inputMaskBase + loopIndex)) {
             programBody[0x1502] = (uint ******)(inputMaskBase + loopIndex);
           }
@@ -1726,11 +1726,11 @@ LAB_000ca6bc:
         loopIndex = loopIndex + 1;
         dstCursorCarry = dstCursorCarry + 5;
         maskTokenCursor = maskTokenCursor + 4;
-        pppppppuVar25 = pppppppuVar25 + 5;
+        scratchCursorB = scratchCursorB + 5;
         countdown = countdown + -1;
       } while (countdown != 0);
       prologuePending = inputMaskBase != 0xe0;
-      pppppppuVar20 = pppppppuVar20 + 0xa0;
+      scratchCursorA = scratchCursorA + 0xa0;
       maskSource = maskSource + 0x200;
       scanTokenWord = scanTokenWord + 0xa0;
       inputMaskCursor = inputMaskCursor + 1;
@@ -1739,14 +1739,14 @@ LAB_000ca6bc:
     if ((int)programBody[0x1587] < (int)programBody[0x1502]) {
       programBody[0x1587] = programBody[0x1502];
     }
-    _memset(auStack_2b18,0,0xbc);
-    _memset(auStack_2a5c,0,0x674);
+    _memset(scCallbackTableA,0,0xbc);
+    _memset(scCallbackTableB,0,0x674);
     scratchAllocation = (**(code **)(ctx + 0xc))(*(undefined4 *)(ctx + 0x1870));
-    local_2ac8 = uVar33 << 2;
-    cursor3 = local_23dc;
-    maskCopyDst = local_2ac0;
+    ilOutputBytes = uVar33 << 2;
+    cursor3 = initRegsDst;
+    maskCopyDst = compileMaskLow;
     countdown = 8;
-    local_2a60 = scratchAllocation;
+    scratchAllocationCopy = scratchAllocation;
     do {
       maskWord = *cursor3;
       maskWordHigh = cursor3[8];
@@ -1756,16 +1756,16 @@ LAB_000ca6bc:
       maskCopyDst = maskCopyDst + 1;
       countdown = countdown + -1;
     } while (countdown != 0);
-    local_2410 = 0x400;
-    local_2acc = puVar29;
-    local_240c = (uint *)_malloc(0x40000);
-    local_2408 = (int *)_malloc(0x40000);
-    local_2a10 = 0x40;
-    local_29f8 = _malloc(0x900);
-    local_2a14 = 0x40;
-    local_29fc = _malloc(0x900);
+    hwWordCapacity = 0x400;
+    ilOutputBuffer = streamPtr;
+    hwWordBuffer = (uint *)_malloc(0x40000);
+    outputMapTable = (int *)_malloc(0x40000);
+    dclRecordCapacity = 0x40;
+    dclRecords = _malloc(0x900);
+    defRecordCapacity = 0x40;
+    defRecords = _malloc(0x900);
     outputNumber = '\0';
-    outputEntryCursor = local_2953;
+    outputEntryCursor = outputEntryNumbers;
     countdown = 0x40;
     do {
       *outputEntryCursor = outputNumber;
@@ -1778,16 +1778,16 @@ LAB_000ca6bc:
       scCreateForContext(ctx,1);
       compilerHandle = *(int *)(ctx + 0x186c);
     }
-    compilerHandle = ((int (*)())scSetCallbackTablesChecked)(compilerHandle,auStack_2b18,auStack_2a5c);
+    compilerHandle = ((int (*)())scSetCallbackTablesChecked)(compilerHandle,scCallbackTableA,scCallbackTableB);
     if (compilerHandle != 0) {
       return (uint *******)((int)((unsigned char *)0x0) + 2);
     }
-    programBody[0x1000] = local_2400;
-    if (local_2400 != (uint ******)0x0) {
-      hwWordSource = local_240c;
+    programBody[0x1000] = hwWordQuadCount;
+    if (hwWordQuadCount != (uint ******)0x0) {
+      hwWordSource = hwWordBuffer;
       scanTokenWord = programBody;
-      if (local_2400 == (uint ******)0x0) {
-        local_2400 = (uint ******)0x1;
+      if (hwWordQuadCount == (uint ******)0x0) {
+        hwWordQuadCount = (uint ******)0x1;
       }
       do {
         copyWord = (uint ******)*hwWordSource;
@@ -1800,14 +1800,14 @@ LAB_000ca6bc:
         scanTokenWord[2] = copyWord2;
         scanTokenWord[3] = copyWord3;
         scanTokenWord = scanTokenWord + 4;
-        local_2400 = (uint ******)((int)local_2400 - 1);
-      } while (local_2400 != (uint ******)0x0);
+        hwWordQuadCount = (uint ******)((int)hwWordQuadCount - 1);
+      } while (hwWordQuadCount != (uint ******)0x0);
     }
     maxInputRegister = programBody[0x1502];
-    if (maxInputRegister < local_23ec) {
-      programBody[0x1502] = local_23ec;
-      programBody[0x1501] = (uint ******)((int)local_23ec + 1);
-      maxInputRegister = local_23ec;
+    if (maxInputRegister < maxUsedRegister) {
+      programBody[0x1502] = maxUsedRegister;
+      programBody[0x1501] = (uint ******)((int)maxUsedRegister + 1);
+      maxInputRegister = maxUsedRegister;
     }
     else {
       programBody[0x1501] = (uint ******)((int)maxInputRegister + 1);
@@ -1818,68 +1818,68 @@ LAB_000ca6bc:
     if ((uint ******)0x100 < programBody[0x1501]) {
       programBody[0x1501] = (uint ******)0x100;
     }
-    if (local_2a04 == 0) goto LAB_000caa4c;
+    if (dclRecordCount == 0) goto LAB_000caa4c;
     uVar33 = 0;
     recordOffset = 0;
-    usedBits = local_2a04;
+    usedBits = dclRecordCount;
     do {
-      dclRecord = recordOffset + local_29f8;
+      dclRecord = recordOffset + dclRecords;
       if (*(int *)(dclRecord + 8) == 0x16) {
         dclRegisterIndex = *(uint *)(dclRecord + 0x10);
-        recordRegister = *(int *)(recordOffset + local_29f8);
+        recordRegister = *(int *)(recordOffset + dclRecords);
         maskWordIndex = ((int)dclRegisterIndex >> 5) + (uint)((int)dclRegisterIndex < 0 && (dclRegisterIndex & 0x1f) != 0);
-        if ((1 << (dclRegisterIndex + maskWordIndex * -0x20 & 0x3f) & local_2260[maskWordIndex]) == 0) goto LAB_000caa2c;
+        if ((1 << (dclRegisterIndex + maskWordIndex * -0x20 & 0x3f) & inputMaskWords[maskWordIndex]) == 0) goto LAB_000caa2c;
         selectorSlot = ilSelectorOneToThreeOrZero(*(undefined4 *)(dclRecord + 4));
         dclRecord = ilSelectorOneToThreeOrZero(*(undefined4 *)(dclRecord + 0xc));
-        local_78 = (longlong)(int)local_2240[dclRegisterIndex * 4 + dclRecord];
-        aiStack_1220[recordRegister * 4 + selectorSlot] = (int)local_2240[dclRegisterIndex * 4 + dclRecord];
+        convertedConstant = (longlong)(int)dclValueTable[dclRegisterIndex * 4 + dclRecord];
+        intConstTable[recordRegister * 4 + selectorSlot] = (int)dclValueTable[dclRegisterIndex * 4 + dclRecord];
       }
       else if (*(int *)(dclRecord + 8) == 0x18) {
 LAB_000caa2c:
         ((int (*)())ilPushDclRecord)(programBody + 0x1589,dclRecord);
-        usedBits = local_2a04;
+        usedBits = dclRecordCount;
       }
       uVar33 = uVar33 + 1;
       recordOffset = recordOffset + 0x24;
       if (usedBits <= uVar33) {
 LAB_000caa4c:
-        if (local_2a08 != 0) {
+        if (defRecordCount != 0) {
           loopIndex2 = 0;
           recordOffset = 0;
-          uVar21 = local_2a08;
+          defRecordLimit = defRecordCount;
           do {
-            defRecord = recordOffset + local_29fc;
+            defRecord = recordOffset + defRecords;
             if (*(int *)(defRecord + 8) == 1) {
-              defIndex = *(uint *******)(recordOffset + local_29fc);
+              defIndex = *(uint *******)(recordOffset + defRecords);
               selectorSlot = ilSelectorOneToThreeOrZero(*(undefined4 *)(defRecord + 4));
               defValue = *(uint *******)(defRecord + 0x14);
               *(undefined1 *)(programBody + (int)(((unsigned char *)0x00001005) + (int)defIndex * 5)) = 1;
               programBody[(int)(((unsigned char *)0x00001001) + (int)defIndex * 5 + selectorSlot)] = defValue;
-              uVar21 = local_2a08;
+              defRecordLimit = defRecordCount;
               if (programBody[0x1502] < defIndex) {
                 programBody[0x1502] = defIndex;
               }
             }
             loopIndex2 = loopIndex2 + 1;
             recordOffset = recordOffset + 0x24;
-          } while (loopIndex2 < uVar21);
+          } while (loopIndex2 < defRecordLimit);
         }
         outputKindFlags = (uint ******)0x0;
         *(undefined1 *)(programBody + 0x1507) = 0;
         programBody[0x1506] = (uint ******)0x0;
         programBody[0x151d] = (uint ******)0x0;
         programBody[0x151e] = (uint ******)0x0;
-        programBody[0x1503] = local_2958;
-        programBody[0x1504] = local_2654;
-        programBody[0x1505] = local_23fc;
+        programBody[0x1503] = outputEntryCount;
+        programBody[0x1504] = outputKindCount;
+        programBody[0x1505] = compileResultWord23fc;
         programBody[0x1588] = (uint ******)0x0;
-        if (local_2654 == (uint ******)0x0) {
+        if (outputKindCount == (uint ******)0x0) {
           outputKindFlags = programBody[0x151d];
         }
         else {
-          outputKindCursor = local_2650;
-          if (local_2654 == (uint ******)0x0) {
-            local_2654 = (uint ******)0x1;
+          outputKindCursor = outputKindEntries;
+          if (outputKindCount == (uint ******)0x0) {
+            outputKindCount = (uint ******)0x1;
           }
           do {
             outputKind = *outputKindCursor;
@@ -1918,8 +1918,8 @@ LAB_000caa4c:
                    (uint ******)(4 << ((uint)(byte)outputKindCursor[1] * 3 & 0x3f) | (uint)programBody[0x1588]);
             }
             outputKindCursor = outputKindCursor + 0xc;
-            local_2654 = (uint ******)((int)local_2654 - 1);
-          } while (local_2654 != (uint ******)0x0);
+            outputKindCount = (uint ******)((int)outputKindCount - 1);
+          } while (outputKindCount != (uint ******)0x0);
         }
         if (((uint)outputKindFlags & 0x18) != 0) {
           programBody[0x151d] = (uint ******)((uint)outputKindFlags | 0x1c);
@@ -1933,16 +1933,16 @@ LAB_000caa4c:
         } while (countdown != 0);
         outputCount = programBody[0x1503];
         if (outputCount != (uint ******)0x0) {
-          outputEntryBase = &uStack_2954;
+          outputEntryBase = &outputEntryTable;
           remainingEntries = outputCount;
           if (outputCount == (uint ******)0x0) {
             remainingEntries = (uint ******)0x1;
           }
           do {
-            pbVar2 = outputEntryBase + 1;
-            pbVar5 = outputEntryBase + (int)(abStack_2950 + -(int)&uStack_2954);
+            outputEntryNumberPtr = outputEntryBase + 1;
+            outputEntryTypePtr = outputEntryBase + (int)(outputEntryTypes + -(int)&outputEntryTable);
             outputEntryBase = outputEntryBase + 0xc;
-            programBody[(int)(((unsigned char *)0x00001571) + *pbVar2)] = (uint ******)(uint)*pbVar5;
+            programBody[(int)(((unsigned char *)0x00001571) + *outputEntryNumberPtr)] = (uint ******)(uint)*outputEntryTypePtr;
             remainingEntries = (uint ******)((int)remainingEntries + -1);
           } while (remainingEntries != (uint ******)0x0);
         }
@@ -1958,65 +1958,65 @@ LAB_000caa4c:
             programBody[0x1572] = (uint ******)0x0;
           }
         }
-        mapEntryCount = *local_2408;
+        mapEntryCount = *outputMapTable;
         programBody[0x1520] = (uint ******)0x0;
         programBody[0x151f] = (uint ******)(uint)(mapEntryCount != 0);
         if (((uint ******)(uint)(mapEntryCount != 0) != (uint ******)0x0) &&
-           (mapEntryCount = *local_2408, 0 < mapEntryCount)) {
+           (mapEntryCount = *outputMapTable, 0 < mapEntryCount)) {
           outputMapCursor = programBody + 0x1531;
           mapIndex = (uint ******)0x0;
           do {
             outputMapCursor[0x20] = (uint ******)0x0;
             *outputMapCursor = (uint ******)0x0;
             outputMapCursor[0x10] = (uint ******)0x0;
-            if (local_2408[(int)mapIndex * 7 + 3] == 0x3e) {
+            if (outputMapTable[(int)mapIndex * 7 + 3] == 0x3e) {
               programBody[0x1520] =
                    (uint ******)(2 << (((uint)mapIndex & 0x1f) << 1) | (uint)programBody[0x1520]);
               *(char *)((int)programBody + (int)mapIndex * 4 + 0x5547) =
-                   (char)aiStack_1220[local_2408[(int)mapIndex * 7 + 4] * 4 + 1];
+                   (char)intConstTable[outputMapTable[(int)mapIndex * 7 + 4] * 4 + 1];
               *(char *)((int)programBody + (int)mapIndex * 4 + 0x5546) =
-                   (char)aiStack_1220[local_2408[(int)mapIndex * 7 + 4] * 4 + 2];
+                   (char)intConstTable[outputMapTable[(int)mapIndex * 7 + 4] * 4 + 2];
               *(short *)((int)programBody + (int)mapIndex * 4 + 0x54c6) =
-                   (short)local_2408[(int)mapIndex * 7 + 5];
+                   (short)outputMapTable[(int)mapIndex * 7 + 5];
               *(short *)(programBody + (int)(((unsigned char *)0x00001531) + (int)mapIndex)) =
-                   (short)aiStack_1220[local_2408[(int)mapIndex * 7 + 4] * 4];
+                   (short)intConstTable[outputMapTable[(int)mapIndex * 7 + 4] * 4];
               *(short *)((int)programBody + (int)mapIndex * 4 + 0x5506) =
-                   (short)local_2408[(int)mapIndex * 7 + 7];
+                   (short)outputMapTable[(int)mapIndex * 7 + 7];
               *(short *)(programBody + (int)(((unsigned char *)0x00001541) + (int)mapIndex)) =
-                   (short)local_2408[(int)mapIndex * 7 + 5] + 1;
-              programBody[(int)(((unsigned char *)0x00001561) + local_2408[(int)mapIndex * 7 + 4])] = mapIndex;
+                   (short)outputMapTable[(int)mapIndex * 7 + 5] + 1;
+              programBody[(int)(((unsigned char *)0x00001561) + outputMapTable[(int)mapIndex * 7 + 4])] = mapIndex;
             }
             mapIndex = (uint ******)((int)mapIndex + 1);
             outputMapCursor = outputMapCursor + 1;
             mapEntryCount = mapEntryCount + -1;
           } while (mapEntryCount != 0);
         }
-        if (local_240c != (uint *)0x0) {
-          _free(local_240c);
+        if (hwWordBuffer != (uint *)0x0) {
+          _free(hwWordBuffer);
         }
         if (scratchBlock != 0) {
           _free(scratchBlock);
         }
-        if (local_2408 != (int *)0x0) {
-          _free(local_2408);
+        if (outputMapTable != (int *)0x0) {
+          _free(outputMapTable);
         }
-        if (puVar29 != (uint *)0x0) {
-          _free(puVar29);
+        if (streamPtr != (uint *)0x0) {
+          _free(streamPtr);
         }
         if (scratchAllocation != 0) {
           _free(scratchAllocation);
         }
-        if (local_29f8 != 0) {
-          _free(local_29f8);
+        if (dclRecords != 0) {
+          _free(dclRecords);
         }
-        if (local_29fc != 0) {
-          _free(local_29fc);
+        if (defRecords != 0) {
+          _free(defRecords);
         }
         return (uint *******)0x0;
       }
     } while( true );
   }
-  tokenWord = (uint ******)*puVar19;
+  tokenWord = (uint ******)*readToken;
   scanTokenCopy = (uint)tokenWord & 0xffff;
   if (100 < scanTokenCopy) {
 switchD_000c90cc_caseD_0:
@@ -2024,7 +2024,7 @@ switchD_000c90cc_caseD_0:
     _exit(0);
   }
   opcodeTimes4 = scanTokenCopy * 4;
-  tokenCursor = puVar19;
+  tokenCursor = readToken;
   switch(scanTokenCopy) {
   case 0:
   case 0x17:
@@ -2041,8 +2041,8 @@ switchD_000c90cc_caseD_0:
     if (prologuePending) {
       prologuePending = false;
       dstCursor = (uint *******)
-                   ((int (*)())ilEmitPrologue)(dstCursor,&scanState,scanTokenWord,puVar19,puVar19,pppppppuVar20,
-                                opcodeTimes4,pppppppuVar25);
+                   ((int (*)())ilEmitPrologue)(dstCursor,&scanState,scanTokenWord,readToken,readToken,scratchCursorA,
+                                opcodeTimes4,scratchCursorB);
     }
     scanTokenWord = (uint *******)((int)((unsigned char *)0x0) + 1);
     srcCursor = (uint *)((int (*)())ilCopyInstructionRemapped)(&dstCursor,&srcCursor,1,1,&scanState);
@@ -2069,8 +2069,8 @@ switchD_000c90cc_caseD_0:
     if (prologuePending) {
       prologuePending = false;
       dstCursor = (uint *******)
-                   ((int (*)())ilEmitPrologue)(dstCursor,&scanState,scanTokenWord,puVar19,puVar19,pppppppuVar20,
-                                opcodeTimes4,pppppppuVar25);
+                   ((int (*)())ilEmitPrologue)(dstCursor,&scanState,scanTokenWord,readToken,readToken,scratchCursorA,
+                                opcodeTimes4,scratchCursorB);
     }
     scanTokenWord = (uint *******)((int)((unsigned char *)0x0) + 1);
     srcCursor = (uint *)((int (*)())ilCopyInstructionRemapped)(&dstCursor,&srcCursor,1,2,&scanState);
@@ -2085,7 +2085,7 @@ switchD_000c90cc_caseD_0:
   case 0x2b:
   case 0x4b:
   case 0x53:
-    srcCursor = puVar19 + 1;
+    srcCursor = readToken + 1;
     *dstCursor = tokenWord;
     tokenCursor = srcCursor;
     dstCursorCarry = dstCursor + 1;
@@ -2103,8 +2103,8 @@ switchD_000c90cc_caseD_0:
   case 0x16:
   case 0x32:
     *dstCursor = tokenWord;
-    srcCursor = puVar19 + 2;
-    dstCursor[1] = (uint ******)puVar19[1];
+    srcCursor = readToken + 2;
+    dstCursor[1] = (uint ******)readToken[1];
     tokenCursor = srcCursor;
     dstCursorCarry = dstCursor + 2;
     goto switchD_000c9ab8_caseD_18;
@@ -2112,11 +2112,11 @@ switchD_000c90cc_caseD_0:
   case 0x14:
   case 0x1d:
     *dstCursor = tokenWord;
-    dstCursor[1] = (uint ******)puVar19[1];
-    srcCursor = puVar19 + 3;
-    dstCursor[2] = (uint ******)puVar19[2];
+    dstCursor[1] = (uint ******)readToken[1];
+    srcCursor = readToken + 3;
+    dstCursor[2] = (uint ******)readToken[2];
     tokenCursor = srcCursor;
-    pppppppuVar25 = dstCursor + 3;
+    scratchCursorB = dstCursor + 3;
     dstCursorCarry = dstCursor + 3;
     goto switchD_000c9ab8_caseD_18;
   case 10:
@@ -2129,8 +2129,8 @@ switchD_000c90cc_caseD_0:
     if (prologuePending) {
       prologuePending = false;
       dstCursor = (uint *******)
-                   ((int (*)())ilEmitPrologue)(dstCursor,&scanState,scanTokenWord,puVar19,puVar19,pppppppuVar20,
-                                opcodeTimes4,pppppppuVar25);
+                   ((int (*)())ilEmitPrologue)(dstCursor,&scanState,scanTokenWord,readToken,readToken,scratchCursorA,
+                                opcodeTimes4,scratchCursorB);
     }
     scanTokenWord = (uint *******)((int)((unsigned char *)0x0) + 1);
     srcCursor = (uint *)((int (*)())ilCopyInstructionRemapped)(&dstCursor,&srcCursor,1,3,&scanState);
@@ -2138,11 +2138,11 @@ switchD_000c90cc_caseD_0:
     dstCursorCarry = dstCursor;
     goto switchD_000c9ab8_caseD_18;
   case 0xf:
-    srcCursor = puVar19 + 2;
+    srcCursor = readToken + 2;
     *dstCursor = tokenWord;
-    dstCursor[1] = (uint ******)puVar19[1];
+    dstCursor[1] = (uint ******)readToken[1];
     dstCursorCarry = dstCursor + 2;
-    for (copyWordCount = (uint)*(ushort *)((int)puVar19 + 6); tokenCursor = srcCursor, copyWordCount != 0;
+    for (copyWordCount = (uint)*(ushort *)((int)readToken + 6); tokenCursor = srcCursor, copyWordCount != 0;
         copyWordCount = copyWordCount - 1) {
       copyWord = (uint ******)*srcCursor;
       srcCursor = srcCursor + 1;
@@ -2152,9 +2152,9 @@ switchD_000c90cc_caseD_0:
   case 0x18:
     goto switchD_000c9ab8_caseD_18;
   case 0x19:
-    srcCursor = puVar19 + 1;
+    srcCursor = readToken + 1;
     if (((uint)tokenWord & 0x18000000) == 0) {
-      inputKind = *(uint *)((int)auStack_130 + ((uint)tokenWord >> 0xe & 0x3fc));
+      inputKind = *(uint *)((int)inputKindTable + ((uint)tokenWord >> 0xe & 0x3fc));
       if (inputKind != 2) {
         inputKind = 1;
       }
@@ -2165,12 +2165,12 @@ switchD_000c90cc_caseD_0:
     dstCursorCarry = dstCursor + 1;
     goto switchD_000c9ab8_caseD_18;
   case 0x1a:
-    srcCursor = puVar19 + 1;
+    srcCursor = readToken + 1;
     *dstCursor = tokenWord;
     nextDstCursorB = dstCursor + 1;
     if ((int)tokenWord < 0) {
       copyWord = (uint ******)*srcCursor;
-      srcCursor = puVar19 + 2;
+      srcCursor = readToken + 2;
       dstCursor[1] = copyWord;
       nextDstCursorB = dstCursor + 2;
     }
@@ -2179,32 +2179,32 @@ switchD_000c90cc_caseD_0:
     srcCursor = srcCursor + 1;
     *dstCursor = copyWord;
     tokenCursor = srcCursor;
-    pppppppuVar25 = dstCursorCarry;
+    scratchCursorB = dstCursorCarry;
     dstCursorCarry = dstCursor + 1;
     goto switchD_000c9ab8_caseD_18;
   case 0x1c:
-    srcCursor = puVar19 + 1;
+    srcCursor = readToken + 1;
     scanTokenWord = dstCursor + 1;
     *dstCursor = tokenWord;
     tokenCursor = srcCursor;
     dstCursorCarry = scanTokenWord;
-    if ((puVar19[1] >> 0x10 & 0x3f) - 1 < 2) {
-      dstCursor[1] = (uint ******)puVar19[1];
-      pppppppuVar20 = dstCursor + 6;
-      dstCursor[2] = (uint ******)puVar19[2];
-      dstCursor[3] = (uint ******)puVar19[3];
-      dstCursor[4] = (uint ******)puVar19[4];
-      srcCursor = puVar19 + 6;
-      dstCursor[5] = (uint ******)puVar19[5];
+    if ((readToken[1] >> 0x10 & 0x3f) - 1 < 2) {
+      dstCursor[1] = (uint ******)readToken[1];
+      scratchCursorA = dstCursor + 6;
+      dstCursor[2] = (uint ******)readToken[2];
+      dstCursor[3] = (uint ******)readToken[3];
+      dstCursor[4] = (uint ******)readToken[4];
+      srcCursor = readToken + 6;
+      dstCursor[5] = (uint ******)readToken[5];
       tokenCursor = srcCursor;
-      pppppppuVar25 = dstCursor + 5;
-      dstCursorCarry = pppppppuVar20;
+      scratchCursorB = dstCursor + 5;
+      dstCursorCarry = scratchCursorA;
     }
     goto switchD_000c9ab8_caseD_18;
   case 0x28:
-    srcCursor = puVar19 + 1;
+    srcCursor = readToken + 1;
     prologueDst = (undefined4 *)
-              ((int (*)())ilEmitShadowStateTokens)(dstCursor,&scanState,scanTokenWord,puVar19,srcCursor,pppppppuVar20,
+              ((int (*)())ilEmitShadowStateTokens)(dstCursor,&scanState,scanTokenWord,readToken,srcCursor,scratchCursorA,
                            opcodeTimes4);
     *prologueDst = tokenWord;
     tokenCursor = srcCursor;
@@ -2213,11 +2213,11 @@ switchD_000c90cc_caseD_0:
   case 0x35:
     scanTokenWord = &scanState;
     *dstCursor = tokenWord;
-    srcCursor = puVar19 + 2;
-    local_2b8c[0] = (uint ******)puVar19[1];
+    srcCursor = readToken + 2;
+    remapTokenIn[0] = (uint ******)readToken[1];
     dstCursor = dstCursor + 1;
-    ((int (*)())ilRemapSourceOperandRegister)(local_2b8c,auStack_2b80,scanTokenWord);
-    *dstCursor = local_2b8c[0];
+    ((int (*)())ilRemapSourceOperandRegister)(remapTokenIn,remapExtIn,scanTokenWord);
+    *dstCursor = remapTokenIn[0];
     tokenCursor = srcCursor;
     dstCursorCarry = dstCursor + 1;
     goto switchD_000c9ab8_caseD_18;
@@ -2232,18 +2232,18 @@ switchD_000c90cc_caseD_0:
     if (prologuePending) {
       prologuePending = false;
       dstCursor = (uint *******)
-                   ((int (*)())ilEmitPrologue)(dstCursor,&scanState,scanTokenWord,puVar19,puVar19,pppppppuVar20,
-                                opcodeTimes4,pppppppuVar25);
-      puVar19 = srcCursor;
+                   ((int (*)())ilEmitPrologue)(dstCursor,&scanState,scanTokenWord,readToken,readToken,scratchCursorA,
+                                opcodeTimes4,scratchCursorB);
+      readToken = srcCursor;
     }
-    texTokenWord = (uint ******)*puVar19;
-    cursor = puVar19 + 1;
+    texTokenWord = (uint ******)*readToken;
+    cursor = readToken + 1;
     tokenUpper = (uint)texTokenWord >> 0x10;
     texUnit = tokenUpper & 0xff;
     hasSecondWord = ((uint)texTokenWord & 0x80000000) != 0;
     if (hasSecondWord) {
-      cursor = puVar19 + 2;
-      operandTokenWord1 = (uint ******)puVar19[1];
+      cursor = readToken + 2;
+      operandTokenWord1 = (uint ******)readToken[1];
     }
     else {
       operandTokenWord1 = (uint ******)0x0;
@@ -2256,59 +2256,59 @@ switchD_000c90cc_caseD_0:
     else {
       texOptionalWord = (uint ******)0x0;
     }
-    local_2ba4 = (uint *******)*cursor;
+    operandWord2ba4 = (uint *******)*cursor;
     operandTokenCursor = cursor + 1;
-    if (((uint)local_2ba4 & 0x400000) != 0) {
+    if (((uint)operandWord2ba4 & 0x400000) != 0) {
       operandTokenCursor = cursor + 2;
       calleeSavedR15 = (uint ******)cursor[1];
     }
-    local_2b74 = (uint ******)*operandTokenCursor;
+    operandWord2b74 = (uint ******)*operandTokenCursor;
     srcCursor = operandTokenCursor + 1;
-    if (((uint)local_2b74 & 0x400000) != 0) {
-      local_2b98 = (uint ******)operandTokenCursor[1];
+    if (((uint)operandWord2b74 & 0x400000) != 0) {
+      operandWord2b98 = (uint ******)operandTokenCursor[1];
       srcCursor = operandTokenCursor + 2;
     }
     texModeBits = (uint)texTokenWord & 0xc000000;
     if (texModeBits == 0x4000000) {
 LAB_000ca0e4:
-      if (local_2378 << (tokenUpper & 0x3f) == 0) {
-        local_70 = (uint ******)&local_2b74;
+      if (shadowCompareUnitMask << (tokenUpper & 0x3f) == 0) {
+        operandPtrA = (uint ******)&operandWord2b74;
         projectiveFlag = (uint *******)0x0;
         unitBit = 1 << (tokenUpper & 0x3f);
-        texSourceExtraPtr = (uint ******)&local_2b98;
+        texSourceExtraPtr = (uint ******)&operandWord2b98;
       }
       else {
-        local_60 = (uint ******)&local_2b98;
-        local_70 = (uint ******)&local_2b74;
-        dstCursor = (uint *******)((int (*)())ilEmitProjectiveDivide)(&scanState,local_70,local_60,texUnit,dstCursor);
-        texSourceExtraPtr = local_60;
-        if (((uint)local_2ba4 & 0x400000) == 0) {
+        operandPtrB = (uint ******)&operandWord2b98;
+        operandPtrA = (uint ******)&operandWord2b74;
+        dstCursor = (uint *******)((int (*)())ilEmitProjectiveDivide)(&scanState,operandPtrA,operandPtrB,texUnit,dstCursor);
+        texSourceExtraPtr = operandPtrB;
+        if (((uint)operandWord2ba4 & 0x400000) == 0) {
           projectiveFlag = (uint *******)0x0;
           unitBit = 1 << (tokenUpper & 0x3f);
         }
         else {
-          local_2ba4 = (uint *******)((uint)local_2ba4 & 0xffbfffff);
+          operandWord2ba4 = (uint *******)((uint)operandWord2ba4 & 0xffbfffff);
           projectiveFlag = (uint *******)((int)((unsigned char *)0x0) + 1);
           unitBit = 1 << (tokenUpper & 0x3f);
-          local_2bb0 = calleeSavedR15;
+          operandWord2bb0 = calleeSavedR15;
         }
       }
     }
     else if (texModeBits == 0x8000000) {
       unitBit = 1 << (tokenUpper & 0x3f);
-      if ((unitBit & local_2374) != 0) goto LAB_000ca0e4;
-      local_70 = (uint ******)&local_2b74;
+      if ((unitBit & shadowDoneUnitMask) != 0) goto LAB_000ca0e4;
+      operandPtrA = (uint ******)&operandWord2b74;
       projectiveFlag = (uint *******)0x0;
-      texSourceExtraPtr = (uint ******)&local_2b98;
+      texSourceExtraPtr = (uint ******)&operandWord2b98;
     }
     else {
       projectiveFlag = (uint *******)0x0;
       unitBit = 1 << (tokenUpper & 0x3f);
-      local_70 = (uint ******)&local_2b74;
-      texSourceExtraPtr = (uint ******)&local_2b98;
+      operandPtrA = (uint ******)&operandWord2b74;
+      texSourceExtraPtr = (uint ******)&operandWord2b98;
     }
     scanTokenWord = &scanState;
-    ((int (*)())ilRemapSourceOperandRegister)(local_70,texSourceExtraPtr,&scanState);
+    ((int (*)())ilRemapSourceOperandRegister)(operandPtrA,texSourceExtraPtr,&scanState);
     *dstCursor = texTokenWord;
     nextDstCursorB = dstCursor + 1;
     if (hasSecondWord) {
@@ -2320,48 +2320,48 @@ LAB_000ca0e4:
       *dstCursor = texOptionalWord;
       dstCursor = dstCursor + 1;
     }
-    *dstCursor = (uint ******)local_2ba4;
+    *dstCursor = (uint ******)operandWord2ba4;
     nextDstCursorB = dstCursor + 1;
-    if (((uint)local_2ba4 & 0x400000) != 0) {
+    if (((uint)operandWord2ba4 & 0x400000) != 0) {
       dstCursor[1] = calleeSavedR15;
       nextDstCursorB = dstCursor + 2;
     }
     dstCursor = nextDstCursorB;
-    *dstCursor = local_2b74;
-    pppppppuVar25 = (uint *******)((uint)local_2b74 & 0x400000);
+    *dstCursor = operandWord2b74;
+    scratchCursorB = (uint *******)((uint)operandWord2b74 & 0x400000);
     nextDstCursor = dstCursor + 1;
-    if (pppppppuVar25 != (uint *******)0x0) {
-      dstCursor[1] = local_2b98;
+    if (scratchCursorB != (uint *******)0x0) {
+      dstCursor[1] = operandWord2b98;
       nextDstCursor = dstCursor + 2;
     }
     dstCursor = nextDstCursor;
-    if (((texModeBits == 0x4000000) || ((texModeBits == 0x8000000 && ((unitBit & local_2374) != 0)))) &&
-       (local_2378 << (tokenUpper & 0x3f) != 0)) {
-      scanTokenWord = (uint *******)&local_2ba4;
+    if (((texModeBits == 0x4000000) || ((texModeBits == 0x8000000 && ((unitBit & shadowDoneUnitMask) != 0)))) &&
+       (shadowCompareUnitMask << (tokenUpper & 0x3f) != 0)) {
+      scanTokenWord = (uint *******)&operandWord2ba4;
       dstCursor = (uint *******)
-                   ((int (*)())ilEmitShadowCompare)(&scanState,local_70,scanTokenWord,&local_2bb0,texUnit,projectiveFlag,
-                                dstCursor,pppppppuVar25);
-      pppppppuVar20 = projectiveFlag;
+                   ((int (*)())ilEmitShadowCompare)(&scanState,operandPtrA,scanTokenWord,&operandWord2bb0,texUnit,projectiveFlag,
+                                dstCursor,scratchCursorB);
+      scratchCursorA = projectiveFlag;
     }
-    unitBit = unitBit & local_2378;
+    unitBit = unitBit & shadowCompareUnitMask;
     texExtraWord = calleeSavedR15;
     goto joined_r0x000ca538;
   case 0x5e:
     if (prologuePending) {
       prologuePending = false;
       dstCursor = (uint *******)
-                   ((int (*)())ilEmitPrologue)(dstCursor,&scanState,scanTokenWord,puVar19,puVar19,pppppppuVar20,
-                                opcodeTimes4,pppppppuVar25);
-      puVar19 = srcCursor;
+                   ((int (*)())ilEmitPrologue)(dstCursor,&scanState,scanTokenWord,readToken,readToken,scratchCursorA,
+                                opcodeTimes4,scratchCursorB);
+      readToken = srcCursor;
     }
-    texTokenWord = (uint ******)*puVar19;
-    cursor2 = puVar19 + 1;
+    texTokenWord = (uint ******)*readToken;
+    cursor2 = readToken + 1;
     tokenUpper = (uint)texTokenWord >> 0x10;
     texUnit = tokenUpper & 0xff;
     hasSecondWord = ((uint)texTokenWord & 0x80000000) != 0;
     if (hasSecondWord) {
-      cursor2 = puVar19 + 2;
-      operandTokenWord1 = (uint ******)puVar19[1];
+      cursor2 = readToken + 2;
+      operandTokenWord1 = (uint ******)readToken[1];
     }
     else {
       operandTokenWord1 = (uint ******)0x0;
@@ -2374,48 +2374,48 @@ LAB_000ca0e4:
     else {
       texOptionalWord = (uint ******)0x0;
     }
-    local_2ba4 = (uint *******)*cursor2;
+    operandWord2ba4 = (uint *******)*cursor2;
     operandTokenCursor = cursor2 + 1;
-    if (((uint)local_2ba4 & 0x400000) != 0) {
+    if (((uint)operandWord2ba4 & 0x400000) != 0) {
       operandTokenCursor = cursor2 + 2;
       calleeSavedR14 = (uint ******)cursor2[1];
     }
-    local_2b98 = (uint ******)*operandTokenCursor;
+    operandWord2b98 = (uint ******)*operandTokenCursor;
     nextTokenCursor = operandTokenCursor + 1;
-    if (((uint)local_2b98 & 0x400000) != 0) {
-      local_2b74 = (uint ******)operandTokenCursor[1];
+    if (((uint)operandWord2b98 & 0x400000) != 0) {
+      operandWord2b74 = (uint ******)operandTokenCursor[1];
       nextTokenCursor = operandTokenCursor + 2;
     }
-    local_2b94 = (uint ******)*nextTokenCursor;
+    operandWord2b94 = (uint ******)*nextTokenCursor;
     srcCursor = nextTokenCursor + 1;
-    if (((uint)local_2b94 & 0x400000) != 0) {
-      local_2b70 = (uint ******)nextTokenCursor[1];
+    if (((uint)operandWord2b94 & 0x400000) != 0) {
+      operandWord2b70 = (uint ******)nextTokenCursor[1];
       srcCursor = nextTokenCursor + 2;
     }
     texModeBits = (uint)texTokenWord & 0xc000000;
     if (texModeBits == 0x4000000) {
 LAB_000ca3b8:
-      if (local_2378 << (tokenUpper & 0x3f) != 0) {
-        scanTokenWord = &local_2b74;
+      if (shadowCompareUnitMask << (tokenUpper & 0x3f) != 0) {
+        scanTokenWord = &operandWord2b74;
         dstCursor = (uint *******)
-                     ((int (*)())ilEmitProjectiveDivide)(&scanState,&local_2b98,scanTokenWord,texUnit,dstCursor);
-        if (((uint)local_2ba4 & 0x400000) != 0) {
-          local_2ba4 = (uint *******)((uint)local_2ba4 & 0xffbfffff);
-          pppppppuVar20 = (uint *******)((int)((unsigned char *)0x0) + 1);
+                     ((int (*)())ilEmitProjectiveDivide)(&scanState,&operandWord2b98,scanTokenWord,texUnit,dstCursor);
+        if (((uint)operandWord2ba4 & 0x400000) != 0) {
+          operandWord2ba4 = (uint *******)((uint)operandWord2ba4 & 0xffbfffff);
+          scratchCursorA = (uint *******)((int)((unsigned char *)0x0) + 1);
           unitBit = 1 << (tokenUpper & 0x3f);
-          local_2bb0 = calleeSavedR14;
+          operandWord2bb0 = calleeSavedR14;
           goto LAB_000ca414;
         }
       }
 LAB_000ca3ec:
-      pppppppuVar20 = (uint *******)0x0;
+      scratchCursorA = (uint *******)0x0;
       unitBit = 1 << (tokenUpper & 0x3f);
     }
     else {
       if (texModeBits != 0x8000000) goto LAB_000ca3ec;
-      pppppppuVar20 = (uint *******)0x0;
+      scratchCursorA = (uint *******)0x0;
       unitBit = 1 << (tokenUpper & 0x3f);
-      if ((unitBit & local_2374) != 0) goto LAB_000ca3b8;
+      if ((unitBit & shadowDoneUnitMask) != 0) goto LAB_000ca3b8;
     }
 LAB_000ca414:
     *dstCursor = texTokenWord;
@@ -2429,50 +2429,50 @@ LAB_000ca414:
       *dstCursor = texOptionalWord;
       dstCursor = dstCursor + 1;
     }
-    *dstCursor = (uint ******)local_2ba4;
+    *dstCursor = (uint ******)operandWord2ba4;
     nextDstCursorB = dstCursor + 1;
-    if (((uint)local_2ba4 & 0x400000) != 0) {
+    if (((uint)operandWord2ba4 & 0x400000) != 0) {
       dstCursor[1] = calleeSavedR14;
       nextDstCursorB = dstCursor + 2;
     }
     dstCursor = nextDstCursorB;
-    *dstCursor = local_2b98;
-    pppppppuVar25 = (uint *******)((uint)local_2b98 & 0x400000);
+    *dstCursor = operandWord2b98;
+    scratchCursorB = (uint *******)((uint)operandWord2b98 & 0x400000);
     nextDstCursorC = dstCursor + 1;
-    if (pppppppuVar25 != (uint *******)0x0) {
-      dstCursor[1] = local_2b74;
+    if (scratchCursorB != (uint *******)0x0) {
+      dstCursor[1] = operandWord2b74;
       nextDstCursorC = dstCursor + 2;
     }
     dstCursor = nextDstCursorC;
-    *dstCursor = local_2b94;
+    *dstCursor = operandWord2b94;
     nextDstCursorC = dstCursor + 1;
-    if (((uint)local_2b94 & 0x400000) != 0) {
-      dstCursor[1] = local_2b70;
+    if (((uint)operandWord2b94 & 0x400000) != 0) {
+      dstCursor[1] = operandWord2b70;
       nextDstCursorC = dstCursor + 2;
     }
     dstCursor = nextDstCursorC;
-    if (((texModeBits == 0x4000000) || ((texModeBits == 0x8000000 && ((unitBit & local_2374) != 0)))) &&
-       (pppppppuVar25 = (uint *******)(local_2378 << (tokenUpper & 0x3f)),
-       pppppppuVar25 != (uint *******)0x0)) {
-      scanTokenWord = (uint *******)&local_2ba4;
+    if (((texModeBits == 0x4000000) || ((texModeBits == 0x8000000 && ((unitBit & shadowDoneUnitMask) != 0)))) &&
+       (scratchCursorB = (uint *******)(shadowCompareUnitMask << (tokenUpper & 0x3f)),
+       scratchCursorB != (uint *******)0x0)) {
+      scanTokenWord = (uint *******)&operandWord2ba4;
       dstCursor = (uint *******)
-                   ((int (*)())ilEmitShadowCompare)(&scanState,&local_2b98,scanTokenWord,&local_2bb0,texUnit,
-                                pppppppuVar20,dstCursor,pppppppuVar25);
+                   ((int (*)())ilEmitShadowCompare)(&scanState,&operandWord2b98,scanTokenWord,&operandWord2bb0,texUnit,
+                                scratchCursorA,dstCursor,scratchCursorB);
     }
-    unitBit = unitBit & local_2378;
+    unitBit = unitBit & shadowCompareUnitMask;
     texExtraWord = calleeSavedR14;
 joined_r0x000ca538:
     tokenCursor = srcCursor;
     dstCursorCarry = dstCursor;
     if (unitBit != 0) {
-      pppppppuVar20 = dstCursor + 1;
+      scratchCursorA = dstCursor + 1;
       *dstCursor = (uint ******)0x47;
-      pppppppuVar25 = local_2ba4;
-      if (((uint)local_2ba4 & 0x400000) == 0) {
-        pppppppuVar25 = (uint *******)((uint)local_2ba4 | 0x400000);
+      scratchCursorB = operandWord2ba4;
+      if (((uint)operandWord2ba4 & 0x400000) == 0) {
+        scratchCursorB = (uint *******)((uint)operandWord2ba4 | 0x400000);
         texExtraWord = (uint ******)0x55;
       }
-      if (aiStack_22f0[texUnit] == 0x1906) {
+      if (unitTexFormats[texUnit] == 0x1906) {
         if (((uint)texExtraWord & 3) == 1) {
           texExtraWord = (uint ******)((uint)texExtraWord & 0xfffffffc | 2);
         }
@@ -2483,12 +2483,12 @@ joined_r0x000ca538:
           texExtraWord = (uint ******)((uint)texExtraWord & 0xffffffcf | 0x20);
         }
       }
-      else if ((aiStack_22f0[texUnit] == 0x1909) && (((uint)texExtraWord & 0xc0) == 0x40)) {
+      else if ((unitTexFormats[texUnit] == 0x1909) && (((uint)texExtraWord & 0xc0) == 0x40)) {
         texExtraWord = (uint ******)((uint)texExtraWord & 0xffffff3f | 0xc0);
       }
-      *pppppppuVar20 = (uint ******)pppppppuVar25;
+      *scratchCursorA = (uint ******)scratchCursorB;
       dstCursor[2] = texExtraWord;
-      dstCursor[3] = (uint ******)((uint)pppppppuVar25 & 0x3fffff);
+      dstCursor[3] = (uint ******)((uint)scratchCursorB & 0x3fffff);
       dstCursorCarry = dstCursor + 4;
     }
     goto switchD_000c9ab8_caseD_18;
