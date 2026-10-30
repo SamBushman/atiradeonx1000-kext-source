@@ -4277,8 +4277,8 @@ LAB_0001f7f0:
 }
 
 /* gld_buildVertexStreamLayout @ 0x1fd00 (1208 bytes) */
-int gld_buildVertexStreamLayout(stream)
-  int stream;
+int gld_buildVertexStreamLayout(glContext)
+  int glContext;
 {
   bool noProgram;
   uint controlMaskHigh;
@@ -4309,17 +4309,17 @@ int gld_buildVertexStreamLayout(stream)
   uint streamCount;
   int attrsLeft;
   
-  *(int *)(stream + 0x2440) = stream + 0x249c;
-  *(int *)(stream + 0x2444) = stream + 0x24bc;
-  *(undefined4 *)(stream + 0x2494) = 0;
-  engineObjects = *(int *)(stream + 4);
+  *(int *)(glContext + 0x2440) = glContext + 0x249c;
+  *(int *)(glContext + 0x2444) = glContext + 0x24bc;
+  *(undefined4 *)(glContext + 0x2494) = 0;
+  engineObjects = *(int *)(glContext + 4);
   vertexArray = *(int **)(engineObjects + 0x1d4);
   if (vertexArray == (int *)0x0) {
     return;
   }
   arrayDesc = *vertexArray;
   dirtyState = vertexArray[1];
-  streamCount = *(uint *)(stream + 0x243c);
+  streamCount = *(uint *)(glContext + 0x243c);
   lowMaskUnset = *(uint *)(arrayDesc + 0x308) == 0;
   highMaskUnset = *(uint *)(arrayDesc + 0x30c) == 0;
   if (*(int *)(engineObjects + 0x1cc) == 0) {
@@ -4341,12 +4341,12 @@ LAB_0001fd8c:
        ((*(uint *)(arrayDesc + 0x300) & ~*(uint *)(arrayDesc + 0x308)) != 0 ||
         (controlMaskHigh & ~*(uint *)(arrayDesc + 0x30c)) != 0)))) || (unsupportedMode)) {
 switchD_0001ffbc_default:
-    *(undefined1 *)(stream + 0x24e4) = 0;
+    *(undefined1 *)(glContext + 0x24e4) = 0;
   }
   else {
-    *(undefined4 *)(stream + 0x24dc) = 0;
-    *(undefined4 *)(stream + 0x24e0) = 0;
-    *(undefined1 *)(stream + 0x24e4) = 1;
+    *(undefined4 *)(glContext + 0x24dc) = 0;
+    *(undefined4 *)(glContext + 0x24e0) = 0;
+    *(undefined1 *)(glContext + 0x24e4) = 1;
     if (*(int **)(engineObjects + 0x1cc) == (int *)0x0) {
       programRecord = 0;
       inputMap = (int *)0x0;
@@ -4364,12 +4364,12 @@ switchD_0001ffbc_default:
     loopIndex2 = 0;
     pairWordIndex = 0;
     attrByteOffset = 0;
-    *(uint *)(stream + 0x2588) = streamCount & 0x1f | 0x20;
+    *(uint *)(glContext + 0x2588) = streamCount & 0x1f | 0x20;
     attrsLeft = 0x16;
     do {
-      noProgram = *(int *)(*(int *)(stream + 4) + 0x1cc) == 0;
+      noProgram = *(int *)(*(int *)(glContext + 4) + 0x1cc) == 0;
       if (noProgram) {
-        if ((1 << (loopIndex2 & 0x3f) & *(uint *)(stream + 0x1ca0)) != 0) goto LAB_0001ff00;
+        if ((1 << (loopIndex2 & 0x3f) & *(uint *)(glContext + 0x1ca0)) != 0) goto LAB_0001ff00;
       }
       else if ((*(int *)(attrByteOffset + *(int *)(programRecord + 0x20)) != 0x80) ||
               (*(uint *)(programRecord + 0x1c) <= loopIndex2)) {
@@ -4424,8 +4424,8 @@ LAB_0001ff00:
           attrControlWord = *(uint *)(arrayDesc + 0x300);
         }
         if ((attrControlWord & *(uint *)(&DAT_001d91f0 + hwAttrId * 4)) == 0) {
-          *(int *)(stream + 0x24e0) = *(int *)(stream + 0x24e0) + 4;
-          *(uint *)(stream + 0x24dc) = 1 << (loopIndex2 & 0x3f) | *(uint *)(stream + 0x24dc);
+          *(int *)(glContext + 0x24e0) = *(int *)(glContext + 0x24e0) + 4;
+          *(uint *)(glContext + 0x24dc) = 1 << (loopIndex2 & 0x3f) | *(uint *)(glContext + 0x24dc);
           if (lowMaskUnset && highMaskUnset) {
             attrFormatWord = 4;
             attrOffsetWord = -1;
@@ -4439,12 +4439,12 @@ LAB_0001ff00:
             attrOffsetWord = -1;
             attrControlWord = 3;
             attrSwizzleWord = 0x688;
-            *(undefined4 *)(streamByteOffset + stream + 0x24e8) = *(undefined4 *)(streamByteOffset + stream + 0x24e4);
+            *(undefined4 *)(streamByteOffset + glContext + 0x24e8) = *(undefined4 *)(streamByteOffset + glContext + 0x24e4);
           }
         }
         else {
           if (*(char *)((int)vertexArray + hwAttrId + 8) == '\0') {
-            *(undefined1 *)(stream + 0x24e4) = 0;
+            *(undefined1 *)(glContext + 0x24e4) = 0;
             return;
           }
           attrFormatWord = vertexArray[hwAttrId + 10];
@@ -4458,22 +4458,22 @@ LAB_0001ff00:
             streamByteOffset = loopIndex * 4;
             bufferWord = *(undefined4 **)(*(int *)(dirtyState + hwAttrId * 4) + 8);
             if (bufferWord != (undefined4 *)0x0) {
-              *(undefined4 *)(streamByteOffset + stream + 0x24e8) = *bufferWord;
+              *(undefined4 *)(streamByteOffset + glContext + 0x24e8) = *bufferWord;
             }
           }
         }
         if ((loopIndex & 1) == 0) {
-          pairPtr = pairWordIndex * 4 + stream;
+          pairPtr = pairWordIndex * 4 + glContext;
           *(int *)(pairPtr + 0x2528) = attrFormatWord;
-          *(int *)(streamByteOffset + stream + 0x2548) = attrOffsetWord;
+          *(int *)(streamByteOffset + glContext + 0x2548) = attrOffsetWord;
           *(uint *)(pairPtr + 0x2410) = attrSwizzleWord | *(uint *)(pairPtr + 0x1c04) & 0xf000;
           *(uint *)(pairPtr + 0x23f0) =
                attrControlWord | *(uint *)(pairPtr + 0x1be4) & 0x1f00 | *(uint *)(pairPtr + 0x1be4) & 0x2000;
         }
         else {
-          pairPtr = pairWordIndex * 4 + stream;
+          pairPtr = pairWordIndex * 4 + glContext;
           *(uint *)(pairPtr + 0x2528) = attrFormatWord << 0x10 | *(uint *)(pairPtr + 0x2528);
-          *(int *)(streamByteOffset + stream + 0x2548) = attrOffsetWord;
+          *(int *)(streamByteOffset + glContext + 0x2548) = attrOffsetWord;
           *(uint *)(pairPtr + 0x2410) =
                attrSwizzleWord << 0x10 | *(uint *)(pairPtr + 0x1c04) & 0xf0000000 | *(uint *)(pairPtr + 0x2410);
           *(uint *)(pairPtr + 0x23f0) =
