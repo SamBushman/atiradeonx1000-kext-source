@@ -572,8 +572,8 @@ LAB_0004c770:
 }
 
 /* freeAndNullField @ 0x4cde0 (72 bytes) */
-int freeAndNullField(param_1)
-  int param_1;
+int freeAndNullField(fieldPtr)
+  int fieldPtr;
 {
   /* issue #74 / #79: this is the stock's plain free-and-null helper again. It used to carry a
    * malloc_size() guard because the bad values it freed on CGLDestroyContext teardown (0x84c1,
@@ -582,9 +582,9 @@ int freeAndNullField(param_1)
    * callback (`lwz r4,0x1448(r30)`, loaded before the branch, so its indirect-call argument
    * count missed it) and the destructor ran on whatever r4 held. With that fixed, cgl_probe
    * runs clean on real hardware WITHOUT the guard (5 runs, zero malloc warnings). */
-  if (*(int *)(param_1 + 0x10) != 0) {
-    _free(*(int *)(param_1 + 0x10));
-    *(undefined4 *)(param_1 + 0x10) = 0;
+  if (*(int *)(fieldPtr + 0x10) != 0) {
+    _free(*(int *)(fieldPtr + 0x10));
+    *(undefined4 *)(fieldPtr + 0x10) = 0;
   }
   return;
 }
@@ -1767,9 +1767,9 @@ double gldValidatePolygonMode(int glContext,double fprF1,double fprF2,double fpr
 }
 
 /* gldValidatePolygonOffset @ 0x4eba0 (476 bytes) */
-int gldValidatePolygonOffset(glContext, param_2, staleArgR5, staleArgR6, staleArgR7, staleArgR8, staleArgR9)
+int gldValidatePolygonOffset(glContext, unusedArg2, staleArgR5, staleArgR6, staleArgR7, staleArgR8, staleArgR9)
   int glContext;
-  undefined4 param_2;
+  undefined4 unusedArg2;
   undefined4 staleArgR5;
   undefined4 staleArgR6;
   undefined4 staleArgR7;
@@ -2557,13 +2557,13 @@ int gldValidateAlphaTest(glContext)
 }
 
 /* gldValidateColorMask @ 0x50140 (424 bytes) */
-int gldValidateColorMask(glContext, param_2, param_3, param_4, param_5, param_6)
+int gldValidateColorMask(glContext, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unusedArg6)
   int glContext;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
+  undefined4 unusedArg2;
+  undefined4 unusedArg3;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
 {
   uint glContextWord1b2c;
   byte colorFormatIndex;
@@ -4537,8 +4537,8 @@ int extvsMarkStateDirty(glContext, updateFlags)
 }
 
 /* extvsSelectRegisterCode @ 0x53040 (20 bytes) */
-int extvsSelectRegisterCode(param_1, unusedArg2)
-  undefined4 param_1;
+int extvsSelectRegisterCode(unusedArg1, unusedArg2)
+  undefined4 unusedArg1;
   int unusedArg2;
 {
   if (unusedArg2 != 0) {
@@ -4623,16 +4623,16 @@ LAB_00053150:
 }
 
 /* extvsEnabledInputMask @ 0x53190 (116 bytes) */
-int extvsEnabledInputMask(param_1)
-  int param_1;
+int extvsEnabledInputMask(glContext)
+  int glContext;
 {
   int unitFlagCursor;
   uint unitsLeft;
   uint enabledMask;
   uint unitIndex;
   
-  unitFlagCursor = *(int *)(((unsigned char *)0x00001168) + param_1);
-  if ((unitFlagCursor != 0) && (unitsLeft = (uint)(byte)((unsigned char *)0x000013b0)[param_1], unitsLeft != 0)) {
+  unitFlagCursor = *(int *)(((unsigned char *)0x00001168) + glContext);
+  if ((unitFlagCursor != 0) && (unitsLeft = (uint)(byte)((unsigned char *)0x000013b0)[glContext], unitsLeft != 0)) {
     unitIndex = 0;
     enabledMask = 0;
     if (unitsLeft == 0) {
@@ -4862,13 +4862,13 @@ int glSwizzleEXT_impl(glContext, res, inId, inSwizzleArg, outX, outY, outZ, outW
 int extvsBeginShader(ctx)
   int ctx;
 {
-  undefined4 uVar1;
+  undefined4 currentShader;
   
   if (((unsigned char *)0x00001170)[ctx] == '\0') {
-    uVar1 = *(undefined4 *)(((unsigned char *)0x00001168) + ctx);
+    currentShader = *(undefined4 *)(((unsigned char *)0x00001168) + ctx);
     ((unsigned char *)0x00001170)[ctx] = 1;
-    extvsFreeShaderObject(ctx,uVar1);
-    extvsInitShaderObject(ctx,uVar1);
+    extvsFreeShaderObject(ctx,currentShader);
+    extvsInitShaderObject(ctx,currentShader);
     *(undefined4 *)(((unsigned char *)0x00001184) + ctx) = 0;
     *(undefined4 *)(((unsigned char *)0x00001174) + ctx) = 0;
     *(undefined4 *)(((unsigned char *)0x0000117c) + ctx) = 0;

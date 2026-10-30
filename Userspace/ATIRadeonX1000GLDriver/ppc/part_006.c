@@ -824,25 +824,26 @@ int fpilTranslateDestination(translator, irDest, outToken, outMask, flag)
   uint *outMask;
   undefined4 flag;
 {
-  undefined4 uVar1;
-  uint uVar2;
+  undefined4 tempBase;
+  undefined4 buildResult;
+  uint destWord;
   
   if (((translator[5] & 0x20000000U) != 0) &&
-     (((((uVar2 = *irDest, (uVar2 & 0x2000) != 0 && ((uVar2 & 0x300) != 0)) ||
-        (((uVar2 & 0x4000) != 0 && ((uVar2 & 0xc0) != 0x40)))) ||
-       (((uVar2 & 0x8000) != 0 && ((uVar2 & 0x30) != 0x20)))) ||
-      (((uVar2 & 0x10000) != 0 && ((uVar2 & 0xc) != 0xc)))))) {
-    uVar1 = *(undefined4 *)(*translator + 0x10);
+     (((((destWord = *irDest, (destWord & 0x2000) != 0 && ((destWord & 0x300) != 0)) ||
+        (((destWord & 0x4000) != 0 && ((destWord & 0xc0) != 0x40)))) ||
+       (((destWord & 0x8000) != 0 && ((destWord & 0x30) != 0x20)))) ||
+      (((destWord & 0x10000) != 0 && ((destWord & 0xc) != 0xc)))))) {
+    tempBase = *(undefined4 *)(*translator + 0x10);
     *outToken = 0;
     *outMask = 0;
     *outToken = *outToken & 0xffc0ffff | 0x40000;
-    *(short *)((int)outToken + 2) = (short)uVar1;
+    *(short *)((int)outToken + 2) = (short)tempBase;
     *outToken = *outToken | 0x400000;
     *outMask = *outMask & 0xffffff00 | 0x55;
     return 0;
   }
-  uVar1 = ((int (*)())fpilBuildDestinationToken)(translator,irDest,outToken,outMask,flag);
-  return uVar1;
+  buildResult = ((int (*)())fpilBuildDestinationToken)(translator,irDest,outToken,outMask,flag);
+  return buildResult;
 }
 
 /* fpilEmitEmptyProgram @ 0x3f850 (396 bytes) */
@@ -7854,14 +7855,14 @@ double fp24ToFloat(uint fp24Bits)
 }
 
 /* FUN_0004a860 @ 0x4a860 (112 bytes) */
-int FUN_0004a860(glContext, param_2, param_3, param_4, param_5, param_6, param_7)
+int FUN_0004a860(glContext, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
   int glContext;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+  undefined4 unusedArg2;
+  undefined4 unusedArg3;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
 {
   char selectedByteFlag;
   

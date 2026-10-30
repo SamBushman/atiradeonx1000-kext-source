@@ -3726,9 +3726,9 @@ int extvsStateFree(ctx, chainEntry)
 }
 
 /* gldLoadUnitFlagBits @ 0x62370 (104 bytes) */
-int gldLoadUnitFlagBits(param_1, param_2, useUnitFlags)
-  int param_1;
-  int param_2;
+int gldLoadUnitFlagBits(glContext, programEntry, useUnitFlags)
+  int glContext;
+  int programEntry;
   int useUnitFlags;
 {
   byte *unitFlagPtr;
@@ -3736,18 +3736,18 @@ int gldLoadUnitFlagBits(param_1, param_2, useUnitFlags)
   int wordsLeft;
   
   if (useUnitFlags == 0) {
-    wordCursor = param_1 + 0x18a0;
+    wordCursor = glContext + 0x18a0;
     wordsLeft = 0x10;
     do {
-      unitFlagPtr = (byte *)(param_2 + 0x71);
-      param_2 = param_2 + 1;
+      unitFlagPtr = (byte *)(programEntry + 0x71);
+      programEntry = programEntry + 1;
       *(uint *)(wordCursor + 8) = -(uint)*unitFlagPtr >> 0x1f | *(uint *)(wordCursor + 8) & 0xfffffffe;
       wordCursor = wordCursor + 8;
       wordsLeft = wordsLeft + -1;
     } while (wordsLeft != 0);
   }
   else {
-    wordCursor = param_1 + 0x18a0;
+    wordCursor = glContext + 0x18a0;
     wordsLeft = 0x10;
     do {
       *(uint *)(wordCursor + 8) = *(uint *)(wordCursor + 8) & 0xfffffffe;
@@ -3771,23 +3771,23 @@ int extvsInitLimits(ctx)
 }
 
 /* gldAllocListNode @ 0x62410 (116 bytes) */
-int gldAllocListNode(param_1)
-  int param_1;
+int gldAllocListNode(glContext)
+  int glContext;
 {
   undefined4 nodeData;
   undefined4 *newNode;
   
-  newNode = (undefined4 *)(**(code **)(param_1 + 0xc))(0xc);
+  newNode = (undefined4 *)(**(code **)(glContext + 0xc))(0xc);
   *newNode = 0;
-  nodeData = *(undefined4 *)(param_1 + 0x2448);
+  nodeData = *(undefined4 *)(glContext + 0x2448);
   newNode[2] = 0;
   newNode[1] = nodeData;
-  *(undefined4 *)(((unsigned char *)0x000011c8) + param_1) = 0x20;
-  *(undefined4 **)(((unsigned char *)0x000011b4) + param_1) = newNode;
-  *(undefined4 *)(((unsigned char *)0x000011c4) + param_1) = 0x100;
-  *(undefined4 *)(((unsigned char *)0x000011bc) + param_1) = 0x10;
-  *(undefined4 *)(((unsigned char *)0x000011b8) + param_1) = 0x100;
-  *(undefined4 *)(((unsigned char *)0x000011c0) + param_1) = 0x100;
+  *(undefined4 *)(((unsigned char *)0x000011c8) + glContext) = 0x20;
+  *(undefined4 **)(((unsigned char *)0x000011b4) + glContext) = newNode;
+  *(undefined4 *)(((unsigned char *)0x000011c4) + glContext) = 0x100;
+  *(undefined4 *)(((unsigned char *)0x000011bc) + glContext) = 0x10;
+  *(undefined4 *)(((unsigned char *)0x000011b8) + glContext) = 0x100;
+  *(undefined4 *)(((unsigned char *)0x000011c0) + glContext) = 0x100;
   return;
 }
 
@@ -5711,21 +5711,21 @@ void vpFillConstantBank(int glContext,int variant,undefined4 unusedArg3,undefine
 }
 
 /* FUN_00065c40 @ 0x65c40 (52 bytes) */
-int FUN_00065c40(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  int param_1;
-  int param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+int FUN_00065c40(glContext, variant, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
+  int glContext;
+  int variant;
+  undefined4 unusedArg3;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
 {
-  if (((*(uint *)(param_1 + 0x44) & 0x100000) != 0) && (*(char *)(param_1 + 0x124) == '\0')) {
+  if (((*(uint *)(glContext + 0x44) & 0x100000) != 0) && (*(char *)(glContext + 0x124) == '\0')) {
     return;
   }
                     
                     
-  (**(code **)((int)((unsigned char *)0x00001298) + param_1))(param_1,*(int *)(param_2 + 0x54) + 0x750);
+  (**(code **)((int)((unsigned char *)0x00001298) + glContext))(glContext,*(int *)(variant + 0x54) + 0x750);
   return;
 }
 
