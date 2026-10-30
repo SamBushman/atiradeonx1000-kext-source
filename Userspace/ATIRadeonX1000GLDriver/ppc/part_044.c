@@ -551,7 +551,7 @@ int FUN_00159794(inst, param_2, param_3)
         sourceDef2 = IRInst__getOperandSource(sourceDef,1);
         uVar7 = *(undefined4 *)(sourceDef2 + 0x98);
       }
-      iVar4 = FUN_001267b8(uVar7);
+      iVar4 = Table1ea904__hasFlag0x11(uVar7);
       if (iVar4 == 0) {
         operandVReg = (int *)IRInst__getOperandSource(sourceDef,1);
         iVar4 = (**(code **)(*operandVReg + 0x5c))(operandVReg);
@@ -1549,7 +1549,7 @@ int FUN_0015b4a4(inst, pass)
       sourceInst = (int *)IRInst__getOperandSource(inst,1);
       vcall5cResult = (**(code **)(*sourceInst + 0x5c))(sourceInst);
       if (((vcall5cResult == 0) && ((sourceInst[5] & 0x200U) == 0)) &&
-         ((vcall5cResult = FUN_0011379c(*(undefined4 *)(pass + 8),sourceInst), vcall5cResult != 0 ||
+         ((vcall5cResult = OpcodeTraits__flag1WithoutFlag7(*(undefined4 *)(pass + 8),sourceInst), vcall5cResult != 0 ||
           (vcall5cResult = OpcodeTraits__flagBit8(*(undefined4 *)(sourceInst[0x22] + 8),*(undefined4 *)(pass + 8)),
           vcall5cResult != 0)))) {
         operandRecord2 = IRInst__getOperandRecord(inst,1);
@@ -1605,7 +1605,7 @@ int FUN_0015b4a4(inst, pass)
             remapLane = (uint)remapLaneByte;
             if ((remapLane != 4) && (remapLane != loopIndex2)) {
               operandIndex2 = 1;
-              fun11379cResult = FUN_0011379c(*(undefined4 *)(pass + 8),sourceInst);
+              fun11379cResult = OpcodeTraits__flag1WithoutFlag7(*(undefined4 *)(pass + 8),sourceInst);
               if (fun11379cResult != 0) {
                 for (; fun11379cResult = (**(code **)(*sourceInst + 0x14))(sourceInst), operandIndex2 <= fun11379cResult; operandIndex2 = operandIndex2 + 1) {
                   fun11379cResult = IRInst__getOperandRecord(sourceInst,operandIndex2);
@@ -2875,13 +2875,13 @@ LAB_0015d5cc:
               vcall60ResultB = (**(code **)(*operandVReg + 0x60))(operandVReg);
               if (vcall60ResultB != 0) {
                 sourceDef = IRInst__getOperandSource(newConstInstA,1);
-                FUN_0010c670(sourceDef,newConstInstA,*(undefined4 *)(pass + 8));
+                IRInst__foldConstantSourcesIntoClone(sourceDef,newConstInstA,*(undefined4 *)(pass + 8));
               }
               operandVReg3 = (int *)IRInst__getOperandSource(newConstInstB,1);
               vcall60ResultB = (**(code **)(*operandVReg3 + 0x60))(operandVReg3);
               if (vcall60ResultB != 0) {
                 sourceDef = IRInst__getOperandSource(newConstInstB,1);
-                FUN_0010c670(sourceDef,newConstInstB,*(undefined4 *)(pass + 8));
+                IRInst__foldConstantSourcesIntoClone(sourceDef,newConstInstB,*(undefined4 *)(pass + 8));
               }
               IRInst__dropCounterAndDeleteIfUnused(a0,*(undefined4 *)(pass + 8));
               if (partnerSwapped) {
@@ -3035,7 +3035,7 @@ LAB_0015cf80:
         vcall60Result = (**(code **)(*operandVReg4 + 0x60))(operandVReg4);
         if (vcall60Result != 0) {
           sourceDef = IRInst__getOperandSource(vslot73Result,1);
-          FUN_0010c670(sourceDef,vslot73Result,*(undefined4 *)(pass + 8));
+          IRInst__foldConstantSourcesIntoClone(sourceDef,vslot73Result,*(undefined4 *)(pass + 8));
         }
         newSource2 = 0;
         constTablePtr = &DAT_001acec0;
@@ -4278,7 +4278,7 @@ LAB_0015fa2c:
           vcall60ResultB = (**(code **)(*operandVReg + 0x60))(operandVReg);
           if (vcall60ResultB != 0) {
             inst1 = IRInst__getOperandSource(newConstInst,1);
-            FUN_0010c670(inst1,newConstInst,compilerCtx2);
+            IRInst__foldConstantSourcesIntoClone(inst1,newConstInst,compilerCtx2);
           }
           slotIdx = slotIdx - 1;
           Block__insertInstBefore(node[0x56],node,newConstInst);
@@ -5443,7 +5443,7 @@ LAB_00161e24:
                   vcall60Result = (**(code **)(*operandVReg + 0x60))(operandVReg);
                   if (vcall60Result != 0) {
                     sourceDef = IRInst__getOperandSource(vslot73Result,1);
-                    FUN_0010c670(sourceDef,vslot73Result,*(undefined4 *)(pass + 8));
+                    IRInst__foldConstantSourcesIntoClone(sourceDef,vslot73Result,*(undefined4 *)(pass + 8));
                   }
                   IRInst__dropCounterAndDeleteIfUnused(inst2,*(undefined4 *)(pass + 8));
                   if ((inst2[5] & 1U) != 0) {
@@ -6011,7 +6011,7 @@ int FUN_00162dfc(instSlot, skipCompatCheck, pass)
   int operandPermutation [6];
   undefined4 newOperandSelects [10];
   
-  inst = FUN_0011379c(*(undefined4 *)(pass + 8),*instSlot);
+  inst = OpcodeTraits__flag1WithoutFlag7(*(undefined4 *)(pass + 8),*instSlot);
   if ((inst != 0) && (inst = *instSlot, (*(uint *)(inst + 0x14) & 0x200) != 0)) {
     chainedSource = (int *)IRInst__getOperandSource(inst,*(undefined4 *)(inst + 0x84));
     if (*(int *)(*(int *)(*instSlot + 0x88) + 8) == *(int *)(chainedSource[0x22] + 8)) {

@@ -2096,7 +2096,7 @@ LAB_0013c54c:
           stackTopInst = *stackTopSlotC;
           if (stackTopInst != 0) {
             if (local_58 != 0) {
-              callResult = FUN_00139190(&vec2Capacity,*(undefined4 *)(stackTopInst + 0x84));
+              callResult = LaneStack__topFitsLaneCount(&vec2Capacity,*(undefined4 *)(stackTopInst + 0x84));
               countBefore = vecCount;
               if (callResult == 0) {
                 firstOperandIndex = ((int (*)())FUN_0013a240)(&vec2Capacity);
@@ -2461,7 +2461,7 @@ int IfHeader__convertInnerIfToCmov(block, program, compiler)
 LAB_0013cd68:
                   uVar9 = thenBlock;
                   in_r6 = elseBlock;
-                  iVar5 = FUN_00139034(operandVReg,block,thenBlock,elseBlock);
+                  iVar5 = Node__isNotAmong3(operandVReg,block,thenBlock,elseBlock);
                   thenSourcesMovable = iVar5 != 0;
                 }
                 operandVReg = (int *)IRInst__getOperandSource(joinInst,2);
@@ -2496,7 +2496,7 @@ LAB_0013cd68:
 LAB_0013cee8:
                   uVar9 = thenBlock;
                   in_r6 = elseBlock;
-                  iVar5 = FUN_00139034(operandVReg,block,thenBlock,elseBlock);
+                  iVar5 = Node__isNotAmong3(operandVReg,block,thenBlock,elseBlock);
                   if (iVar5 == 0) {
                     return;
                   }
@@ -2538,12 +2538,12 @@ LAB_0013cee8:
               if (*(int *)(joinInstB[0x22] + 8) == 0x8e) {
                 operandVReg2 = IRInst__getOperandSource(joinInstB,1);
                 operandVReg3 = IRInst__getOperandSource(joinInstB,2);
-                iVar3 = FUN_00139034(operandVReg2,block,thenBlock,elseBlock);
+                iVar3 = Node__isNotAmong3(operandVReg2,block,thenBlock,elseBlock);
                 if (iVar3 == 0) {
                   DList__unlink(operandVReg2);
                   Block__appendInst(predecessorBlock,operandVReg2);
                 }
-                iVar3 = FUN_00139034(operandVReg3,block,thenBlock,elseBlock);
+                iVar3 = Node__isNotAmong3(operandVReg3,block,thenBlock,elseBlock);
                 if (iVar3 == 0) {
                   DList__unlink(operandVReg3);
                   Block__appendInst(predecessorBlock,operandVReg3);
@@ -3688,7 +3688,7 @@ code_r0x0013f320:
       if (((vcall30Result != 0) && (-1 < workInst[0x4d])) &&
          (*(int *)(workInst[0x4d] * 0xc + *(int *)(program + 0x78) + 4) - 10U < 2)) {
         firstOperandSource = IRInst__getOperandSource(workInst,1);
-        producerInst = (int *)FUN_001382b8(firstOperandSource,3,&currentInst);
+        producerInst = (int *)IRInst__findLaneDefinition(firstOperandSource,3,&currentInst);
         if ((producerInst != (int *)0x0) && (vcall30Result = (**(code **)(*producerInst + 0x50))(), vcall30Result != 0)) {
           (**(code **)(*workInst + 0x88))(workInst,1,3,4);
         }
@@ -4504,8 +4504,8 @@ LAB_00140128:
             maskElementPtr = (uint *)Vector__elementRefGrow(&vecCapacity,secondCandidateIndex);
           }
           secondCandidateMask = *maskElementPtr;
-          firstMaskLaneCount = FUN_00139008(maskA);
-          secondMaskLaneCount = FUN_00139008(secondCandidateMask);
+          firstMaskLaneCount = Mask__countSetBits4(maskA);
+          secondMaskLaneCount = Mask__countSetBits4(secondCandidateMask);
           if (4 < firstMaskLaneCount + secondMaskLaneCount) goto LAB_00140dc4;
           operandVReg3 = (int *)IRInst__getOperandSource(firstInst,1);
           unsharedAWrapper = (int *)IRInst__getOperandSource(firstInst,2);
@@ -4547,7 +4547,7 @@ LAB_00140128:
           if ((((predicateResult == 0) && (predicateResult = (**(code **)(*unsharedBSource + 0x48))(unsharedBSource), predicateResult == 0)) &&
               ((predicateResult = (**(code **)(*unsharedAWrapper + 0x80))(unsharedAWrapper), predicateResult == 0 &&
                (predicateResult = (**(code **)(*unsharedBSource + 0x80))(unsharedBSource), predicateResult == 0)))) ||
-             (predicateResult = FUN_0013905c(firstInst,secondInst), predicateResult == 0)) goto LAB_00140d38;
+             (predicateResult = IRInst__noUseBetween(firstInst,secondInst), predicateResult == 0)) goto LAB_00140d38;
           if (secondCandidateIndex < *candidateVecHeader) {
             candidateCountB = allocation[2];
             if (candidateCountB <= secondCandidateIndex) {
@@ -4904,7 +4904,7 @@ int FUN_00140e7c(param_1, param_2, param_3)
   int iVar2;
   
   if ((((((*(int *)(param_2[0x22] + 8) == *(int *)(param_3[0x22] + 8)) &&
-         (iVar1 = FUN_0011379c(*param_1,param_2), iVar1 != 0)) &&
+         (iVar1 = OpcodeTraits__flag1WithoutFlag7(*param_1,param_2), iVar1 != 0)) &&
         (iVar1 = (**(code **)(*param_2 + 100))(param_2), iVar1 == 0)) &&
        ((param_2[0x20] != 0 && (iVar1 = RegKind__flagBit0(param_2[0x26]), iVar1 != 0)))) &&
       (((param_2[5] & 2U) == 0 &&
@@ -5042,8 +5042,8 @@ int FUN_001411dc(pass, inst, inst2, laneMap)
   
   sameInst = inst == inst2;
   (*(unsigned int *)((unsigned char *)ghidra_home + 12)) = laneMap;
-  FUN_0011379c(*pass,inst);
-  FUN_0011379c(*pass,inst2);
+  OpcodeTraits__flag1WithoutFlag7(*pass,inst);
+  OpcodeTraits__flag1WithoutFlag7(*pass,inst2);
   operandRecord = IRInst__getOperandRecord(inst,0);
   newDestSelect[0] = *(undefined4 *)(operandRecord + 0x10);
   operandRecord = IRInst__getOperandRecord(inst2,0);
@@ -5156,7 +5156,7 @@ int FUN_00141458(param_1, inst, param_3, param_4)
   undefined4 operandSelect;
   undefined4 local_44 [8];
   
-  FUN_0011379c(*param_1,inst);
+  OpcodeTraits__flag1WithoutFlag7(*param_1,inst);
   operandRecord2 = IRInst__getOperandRecord(inst,0);
   operandSelect = *(undefined4 *)(operandRecord2 + 0x10);
   uVar3 = *(uint *)(inst + 0x14);
@@ -6337,7 +6337,7 @@ LAB_00142c3c:
     ((int (*)())FUN_00141090)(&pendingUsedLanesOut,pass,pendingInst);
     pendingUsedLanes = pendingUsedLanesOut;
     if (*(char *)((int)&pendingUsedLanes + fromLane) != '\0') {
-      iVar7 = FUN_0011379c(*pass,pendingInst);
+      iVar7 = OpcodeTraits__flag1WithoutFlag7(*pass,pendingInst);
       if (((iVar7 == 0) || (*(char *)((int)&pendingUsedLanes + toLane) != '\0')) ||
          (*(char *)((int)&laneMaskWord + toLane) != '\0')) goto LAB_00142f88;
       pendingUserVec = *(uint **)(pendingInst + 0x10);
@@ -8308,7 +8308,7 @@ int pass_post_pack_insts(param_1)
         do {
           iVar5 = iVar6;
           if ((*(uint *)(instA + 0x14) & 1) != 0) {
-            iVar6 = FUN_0011379c(*(undefined4 *)(param_1[1] + 8),instA);
+            iVar6 = OpcodeTraits__flag1WithoutFlag7(*(undefined4 *)(param_1[1] + 8),instA);
             if (iVar6 != 0) {
               atScanStart = true;
               iVar6 = *(int *)(param_1[1] + 900);
@@ -8327,7 +8327,7 @@ int pass_post_pack_insts(param_1)
                         iVar6 = iVar2;
                       }
                       else {
-                        packable = FUN_0011379c(*(undefined4 *)(param_1[1] + 8),iVar5);
+                        packable = OpcodeTraits__flag1WithoutFlag7(*(undefined4 *)(param_1[1] + 8),iVar5);
                         if (packable == 0) {
                           nextInstB = *(int *)(iVar5 + 8);
                         }

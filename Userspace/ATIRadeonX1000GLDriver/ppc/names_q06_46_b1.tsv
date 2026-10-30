@@ -1,0 +1,29 @@
+local	IRInst__advanceToChainEnd	param_1	inst	INFERRED	advanced along +8/+4 links; the end instruction is returned
+local	IRLoadTemp__ctor_109348	param_2	sourceRecord	INFERRED	record whose +4/+8 words are copied to this[0x26]/[0x25]; stored at this[0x23]
+local	IRLoadTemp__ctor_109348	uVar2	sourceWord8	INFERRED	sourceRecord+8, stored at this[0x25]
+local	IRLoadTemp__ctor_1093b8	param_2	sourceRecord	INFERRED	record whose +4/+8 words are copied to this[0x26]/[0x25]; stored at this[0x23]
+local	IRLoadTemp__ctor_1093b8	uVar2	sourceWord8	INFERRED	sourceRecord+8, stored at this[0x25]
+local	IRLoadConst__ctor_109614	param_2	sourceRecord	INFERRED	record whose +4/+8 words are copied to this[0x26]/[0x25]; stored at this[0x23]
+local	IRLoadConst__ctor_109614	uVar1	sourceWord8	INFERRED	sourceRecord+8, stored at this[0x25]
+local	IRLoadConst__ctor_1096bc	param_2	sourceRecord	INFERRED	record whose +4/+8 words are copied to this[0x26]/[0x25]; stored at this[0x23]
+local	IRLoadConst__ctor_1096bc	uVar1	sourceWord8	INFERRED	sourceRecord+8, stored at this[0x25]
+local	OpcodeTraits__instFlagBit2	param_2	inst	INFERRED	inst+0x88 record opcode indexes the 0x38-byte table
+local	OpcodeTraits__instFlagBit2	iVar1	opcodeFlagTable	INFERRED	backend vslot 0x16c result
+local	VReg__popDefinition	param_1	vreg	INFERRED	vreg+0x2c definition vector
+local	VReg__popDefinition	iVar1	definitionCount	INFERRED	vector count; last element removed
+local	ConstKey__compare1	param_1	keyA	INFERRED	compared with keyB
+local	ConstKey__compare1	param_2	keyB	INFERRED	compared with keyA
+local	BitSet__setBit42c	param_1	allocator	INFERRED	+0x42c bitmap
+local	BitSet__setBit42c	param_2	bitIndex	INFERRED	bit set
+local	BitSet__setBit42c	iVar1	wordRef	INFERRED	bitmap word address
+local	Program__emitMovFromFieldA4	param_1	owner	INFERRED	source value at +0xa4
+local	Program__emitMovFromFieldA4	param_3	destVRegId	INFERRED	stored in operand record +8
+local	Program__emitMovFromFieldA4	uVar3	sourceValue	INFERRED	owner+0xa4
+local	InterferenceNode__ctor_135110	param_1	node	INFERRED	node record: id, class, neighbour list, ...
+local	InterferenceNode__ctor_135110	param_2	nodeId	INFERRED	stored in node word 0 and in the alias table slot
+local	InterferenceNode__ctor_135110	param_3	nodeClass	INFERRED	stored in node word 1
+local	InterferenceNode__ctor_135110	param_4	graph	INFERRED	graph+0x20 alias table
+local	InterferenceNode__ctor_1351c4	param_1	node	INFERRED	node record: id, class, neighbour list, ...
+local	InterferenceNode__ctor_1351c4	param_2	nodeId	INFERRED	stored in node word 0 and in the alias table slot
+local	InterferenceNode__ctor_1351c4	param_3	nodeClass	INFERRED	stored in node word 1
+local	InterferenceNode__ctor_1351c4	param_4	graph	INFERRED	graph+0x20 alias table

@@ -1,0 +1,93 @@
+local	IRStartMakeCall__ctor_10a7d4	param_2	ctorWord4b	INFERRED	stored at this[0x4b]
+local	IRStartMakeCall__ctor_10a7d4	param_3	ctorWord4c	INFERRED	stored at this[0x4c]
+local	IRStartMakeCall__ctor_10a83c	param_2	ctorWord4b	INFERRED	stored at this[0x4b]
+local	IRStartMakeCall__ctor_10a83c	param_3	ctorWord4c	INFERRED	stored at this[0x4c]
+local	IRStartCallRoutine__ctor_10a8a4	param_2	ctorWord4b	INFERRED	stored at this[0x4b]
+local	IRStartCallRoutine__ctor_10a8a4	param_3	ctorWord4c	INFERRED	stored at this[0x4c]
+local	IRStartCallRoutine__ctor_10a90c	param_2	ctorWord4b	INFERRED	stored at this[0x4b]
+local	IRStartCallRoutine__ctor_10a90c	param_3	ctorWord4c	INFERRED	stored at this[0x4c]
+local	KhanPs__vslot90_isProgramKind1	param_2	unusedArg2	INFERRED	unused virtual-slot argument
+local	KhanPs__vslot90_isProgramKind1	param_3	program	INFERRED	program+0x138 compared with 1
+local	Program__finishUsevectorChain	param_2	unusedArg2	INFERRED	unused argument
+local	Program__finishUsevectorChain	param_3	unusedArg3	INFERRED	unused argument
+local	isLessThan2	param_1	value	INFERRED	unsigned value tested < 2
+local	IRInst__replaceExtraData	param_1	inst	INFERRED	inst+0x13c extra data is freed and replaced
+local	IRInst__dropCounterAndDeleteIfUnused	uVar1	result	INFERRED	IRInst__deleteIfUnused result
+local	IRCmp2__ctor_107fd0	param_2	unusedArg2	INFERRED	unused constructor argument
+local	KhanPs__vslot75_registerConstantMultiples	param_4	unusedArg4	INFERRED	unused virtual-slot argument
+local	KhanPs__vslot75_registerConstantMultiples	param_5	unusedArg5	INFERRED	unused virtual-slot argument
+local	KhanPs__vslot75_registerConstantMultiples	param_6	unusedArg6	INFERRED	unused virtual-slot argument
+local	KhanPs__vslot75_registerConstantMultiples	param_7	unusedArg7	INFERRED	unused virtual-slot argument
+local	KhanVs__vslot75_registerConstantMultiples	param_4	unusedArg4	INFERRED	unused virtual-slot argument
+local	KhanVs__vslot75_registerConstantMultiples	param_5	unusedArg5	INFERRED	unused virtual-slot argument
+local	KhanVs__vslot75_registerConstantMultiples	param_6	unusedArg6	INFERRED	unused virtual-slot argument
+local	KhanVs__vslot75_registerConstantMultiples	param_7	unusedArg7	INFERRED	unused virtual-slot argument
+local	KhanVs__vslot99_matchesRegisterMapEntry	param_2	registerIndex	INFERRED	index into the 0xc-stride register map entries
+local	KhanVs__vslot99_matchesRegisterMapEntry	param_3	program	INFERRED	program+8 compiler tables at +0x524/+0x52c
+local	IRInst__query68AndWord4fNotIn6_7	iVar1	query68	INFERRED	vslot 0x68 result
+local	IRInst__query68AndWord4fNotIn6_7	uVar2	result	INFERRED	returned 0/1
+local	OpcodeSetup__mode1	param_1	setup	INFERRED	setup record whose +4 mode word is written
+local	OpcodeSetup__mode1	param_2	inst	INFERRED	instruction whose counts are set
+local	OpcodeSetup__mode2	param_1	setup	INFERRED	setup record whose +4 mode word is written
+local	OpcodeSetup__mode2	param_2	inst	INFERRED	instruction whose counts are set
+local	OpcodeSetup__mode3	param_1	setup	INFERRED	setup record whose +4 mode word is written
+local	OpcodeSetup__mode3	param_2	inst	INFERRED	instruction whose counts are set
+local	OpcodeSetup__mode6	param_1	setup	INFERRED	setup record whose +4 mode word is written
+local	OpcodeSetup__mode6	param_2	inst	INFERRED	instruction whose counts are set
+local	OpcodeSetup__mode9	param_1	setup	INFERRED	setup record whose +4 mode word is written
+local	OpcodeSetup__mode9	param_2	inst	INFERRED	instruction whose counts are set
+local	OpcodeSetup__mode5	param_1	setup	INFERRED	setup record whose +4 mode word is written
+local	OpcodeSetup__mode5	param_3	compiler	INFERRED	compiler whose +0x6c4 current program receives the inst
+local	OpcodeSetup__mode7	param_1	setup	INFERRED	setup record whose +4 mode word is written
+local	OpcodeSetup__mode7	param_3	compiler	INFERRED	compiler whose +0x6c4 current program receives the inst
+local	OpcodeSetup__mode8	param_1	setup	INFERRED	setup record whose +4 mode word is written
+local	OpcodeSetup__mode8	param_3	compiler	INFERRED	compiler whose +0x6c4 current program receives the inst
+local	Object__setWord0	param_1	object	INFERRED	word 0 is set
+local	Object__setWord0	param_2	value	INFERRED	stored at word 0
+local	KhanVs__vslot21_appendRegisterBinding	param_4	recordWord0xc	INFERRED	stored at record+0xc
+local	KhanVs__vslot21_appendRegisterBinding	param_6	conditionFlag	INFERRED	record+0x24 = (flag == 0)
+local	KhanVs__vslot21_appendRegisterBinding	param_7	unusedArg7	INFERRED	unused virtual-slot argument
+local	KhanVs__vslot21_appendRegisterBinding	param_8	unusedArg8	INFERRED	unused virtual-slot argument
+local	KhanVs__vslot21_appendRegisterBinding	param_9	recordWord0x18	INFERRED	stored at record+0x18
+local	KhanVs__vslot21_appendRegisterBinding	param_10	recordWord0x10	INFERRED	stored at record+0x10
+local	KhanPs__vslot21_appendRegisterBinding	param_4	recordWord0xc	INFERRED	stored at record+0xc
+local	KhanPs__vslot21_appendRegisterBinding	param_6	conditionFlag	INFERRED	record+0x24 = (flag == 0)
+local	KhanPs__vslot21_appendRegisterBinding	param_7	unusedArg7	INFERRED	unused virtual-slot argument
+local	KhanPs__vslot21_appendRegisterBinding	param_8	unusedArg8	INFERRED	unused virtual-slot argument
+local	KhanPs__vslot21_appendRegisterBinding	param_9	recordWord0x18	INFERRED	stored at record+0x18
+local	KhanPs__vslot21_appendRegisterBinding	param_10	recordWord0x10	INFERRED	stored at record+0x10
+local	KhanPs__vslot8_failNotSupported	param_2	unusedArg2	INFERRED	unused virtual-slot argument
+local	KhanPs__vslot8_failNotSupported	param_3	unusedArg3	INFERRED	unused virtual-slot argument
+local	KhanPs__vslot8_failNotSupported	param_4	unusedArg4	INFERRED	unused virtual-slot argument
+local	KhanPs__vslot8_failNotSupported	param_5	unusedArg5	INFERRED	unused virtual-slot argument
+local	KhanPs__vslot8_failNotSupported	param_6	unusedArg6	INFERRED	unused virtual-slot argument
+local	FudoVs__vslot8_failNotSupported	param_2	unusedArg2	INFERRED	unused virtual-slot argument
+local	FudoVs__vslot8_failNotSupported	param_3	unusedArg3	INFERRED	unused virtual-slot argument
+local	FudoVs__vslot8_failNotSupported	param_4	unusedArg4	INFERRED	unused virtual-slot argument
+local	FudoVs__vslot8_failNotSupported	param_5	unusedArg5	INFERRED	unused virtual-slot argument
+local	FudoVs__vslot8_failNotSupported	param_6	unusedArg6	INFERRED	unused virtual-slot argument
+local	Vslot__outZeroReturnZero	param_1	unusedArg1	INFERRED	unused argument
+local	Vslot__outZeroReturnZero	param_2	unusedArg2	INFERRED	unused argument
+local	Vslot__outZeroReturnZero	param_3	unusedArg3	INFERRED	unused argument
+local	Vslot__outZeroReturnZero	param_4	out	INFERRED	receives 0
+local	PsBackend__bindExportRegisters	param_3	unusedArg3	INFERRED	unused stale register argument
+local	PsBackend__bindExportRegisters	param_4	unusedArg4	INFERRED	unused stale register argument
+local	PsBackend__bindExportRegisters	param_5	unusedArg5	INFERRED	unused stale register argument
+local	PsBackend__bindExportRegisters	param_6	unusedArg6	INFERRED	unused stale register argument
+local	PsBackend__bindExportRegisters	param_7	unusedArg7	INFERRED	unused stale register argument
+local	PsBackend__assignInterpolatorRegisters	param_3	unusedArg3	INFERRED	unused stale register argument
+local	PsBackend__assignInterpolatorRegisters	param_4	unusedArg4	INFERRED	unused stale register argument
+local	PsBackend__assignInterpolatorRegisters	param_5	unusedArg5	INFERRED	unused stale register argument
+local	PsBackend__assignInterpolatorRegisters	param_6	unusedArg6	INFERRED	unused stale register argument
+local	PsBackend__assignInterpolatorRegisters	param_7	unusedArg7	INFERRED	unused stale register argument
+local	Program__emitLoadVertexAttr	param_1	unusedArg1	INFERRED	unused argument
+local	Program__emitLoadVertexAttr	param_3	unusedArg3	INFERRED	unused argument
+local	Program__emitLoadVertexAttr	param_5	unusedArg5	INFERRED	unused argument
+local	OpcodeTraits__instFlagBit2_113734	param_3	unusedArg3	INFERRED	unused stale register argument
+local	OpcodeTraits__instFlagBit2_113734	param_5	unusedArg5	INFERRED	unused stale register argument
+local	OpcodeTraits__instFlagBit2_113734	param_7	unusedArg7	INFERRED	unused stale register argument
+local	KhanVs__vslot71_canCombineSources	param_5	unusedArg5	INFERRED	unused virtual-slot argument
+local	KhanVs__vslot71_canCombineSources	param_6	unusedArg6	INFERRED	unused virtual-slot argument
+local	KhanPs__vslot9_createCompareInst	param_7	sourceTokenWord	INFERRED	address-taken word handed to Program__applySourceTokenToOperand
+local	KhanPs__vslot9_createCompareInst	param_8	sourceTokens	INFERRED	structure whose +0x6c points at the two source token words
+local	KhanPs__vslot9_createCompareInst	param_9	insertAfter	INFERRED	third argument of Program__appendInst

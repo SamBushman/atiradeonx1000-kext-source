@@ -1,0 +1,6 @@
+local	Program__packPsInputs	local_98	gatherLaneSource	INFERRED	byte per gathered lane: source lane number (first fake-struct member, local_58 points at it)
+local	Program__packPsInputs	local_94	savedDestSwizzle	INFERRED	dest operand +0x10 word saved before the load is rewritten as MOV
+local	Program__packPsInputs	local_90	gatherLaneKind	INFERRED	word per gathered lane: IRLoadInterp__laneKind
+local	Program__packPsInputs	local_80	gatherLaneIndex	INFERRED	word per gathered lane: IRLoadInterp__laneIndex
+local	Program__packPsInputs	local_70	gatherLoads	INFERRED	the up to 4 loads merged into the new interpolator
+local	Program__packPsInputs	local_58	gatherBase	INFERRED	pointer to local_98, used to address the gather arrays relative to each other

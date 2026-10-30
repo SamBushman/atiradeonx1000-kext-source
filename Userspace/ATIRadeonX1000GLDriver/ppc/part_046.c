@@ -336,7 +336,7 @@ int FUN_00173af8(ctx, laneFlags)
   undefined4 destSelect [9];
   
   if ((*(int *)(*(int *)(ctx + 0xb0) + 0x120) != 0) &&
-     (callResult = FUN_0011379c(*(undefined4 *)(ctx + 0x238),*(int *)(ctx + 0xb0)), callResult != 0))
+     (callResult = OpcodeTraits__flag1WithoutFlag7(*(undefined4 *)(ctx + 0x238),*(int *)(ctx + 0xb0)), callResult != 0))
   {
     loopIndex = 0;
     do {
@@ -1865,7 +1865,7 @@ LAB_00175c7c:
         }
         splitRgbAlphaEnabled = Compiler__isOptionEnabled(valueKey[0x8e],0x30);
         if (((splitRgbAlphaEnabled == 0) || (loopIndex != 3)) &&
-           (fun113734Result = FUN_00113734(valueKey[0x8e],valueKey[0x2c],topSlot,in_r6,in_r7,in_r8,keyOpcodeInfo),
+           (fun113734Result = OpcodeTraits__instFlagBit2_113734(valueKey[0x8e],valueKey[0x2c],topSlot,in_r6,in_r7,in_r8,keyOpcodeInfo),
            fun113734Result == 0)) {
           *(int *)(*(int *)(valueKey[0x8e] + 0x6c4) + 0xa8) =
                *(int *)(*(int *)(valueKey[0x8e] + 0x6c4) + 0xa8) + 1;
