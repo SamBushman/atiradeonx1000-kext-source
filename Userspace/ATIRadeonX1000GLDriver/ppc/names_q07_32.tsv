@@ -3210,3 +3210,95 @@ use	FUN_001621c8	iVar6	destRegisterArg	INFERRED	register passed to RegKind__flag
 use	FUN_001621c8	uVar13	inst2Flags	INFERRED	inst2[5]: flags	^\s*if\ \(\(uVar13\ \&\ 0x200\)\ !=\ 0\)\ \{$@2	+1
 use	FUN_001621c8	bVar2	moreLanes	INFERRED	lane != 3	^\s*bVar2\ =\ iVar7\ !=\ 3;$	+1
 use	FUN_001621c8	bVar2	moreLanes	INFERRED	lane != 3	^\s*\}\ while\ \(bVar2\);$@2	+1
+local	FUN_00141930	local_84	entryRecord	INFERRED	0x2c-byte candidate entry record built on the stack and memcpy-ed into the entry vector; this is its first part (+0x00..+0x0f)
+local	FUN_00141930	local_74	entrySources	INFERRED	entry record +0x10: source inst per lane
+local	FUN_00141930	local_64	entryComponents	INFERRED	entry record +0x20: component byte per lane
+use	FUN_00141930	piVar4	entrySlotPtr	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*piVar4\ =\ \(int\ \*\)\(uVar20\ \*\ 0x2c\ \+\ iVar6\);$	+2
+use	FUN_00141930	piVar4	entrySlotPtr	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*piVar5\ =\ piVar4;$	+3
+use	FUN_00141930	piVar4	entrySlotPtr	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*if\ \(\(iVar9\ ==\ \-1\)\ \|\|$	+3
+use	FUN_00141930	piVar4	entrySlotPtr	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*piVar4\ =\ \(int\ \*\)\(iVar23\ \+\ iVar6\);$	+1
+use	FUN_00141930	piVar4	entrySlotPtr	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*pbVar18\ =\ \(byte\ \*\)\(piVar4\ \+\ 8\);$	+2
+use	FUN_00141930	piVar4	entrySlotPtr	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*piVar4\ =\ \(int\ \*\)\(uVar7\ \*\ 0x2c\ \+\ iVar6\);$	+1
+use	FUN_00141930	piVar4	entrySlotPtr	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*_memcpy\(piVar4,local_84,0x2c\);$	+1
+use	FUN_00141930	piVar4	entrySlotPtr	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*param_4\[iVar25\ \+\ 1\]\ =\ \(int\)piVar4;$	+1
+use	FUN_00141930	uVar7	entryCount	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*uVar7\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x10\);$	+2
+use	FUN_00141930	uVar7	entryCount	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*uVar21\ =\ uVar7;$	+1
+use	FUN_00141930	uVar7	entryCount	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*if\ \(uVar7\ ==\ uVar20\)\ goto\ LAB_00141e9c;$	+1
+use	FUN_00141930	uVar7	entryCount	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*\}\ while\ \(uVar7\ !=\ uVar21\);$	+2
+use	FUN_00141930	uVar7	entryCount	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*uVar21\ =\ uVar7\ \+\ 1;$	+1
+use	FUN_00141930	uVar7	entryCount	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*piVar4\ =\ \(int\ \*\)\(uVar7\ \*\ 0x2c\ \+\ iVar6\);$	+1
+use	FUN_00141930	uVar7	entryCount	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*uVar7\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x10\);$@2	+2
+use	FUN_00141930	uVar7	entryCount	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*uVar21\ =\ uVar7;$@2	+1
+use	FUN_00141930	uVar7	entryCount	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*if\ \(uVar7\ ==\ uVar20\)\ goto\ LAB_001424ac;$	+1
+use	FUN_00141930	uVar7	entryCount	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*\}\ while\ \(uVar7\ !=\ uVar21\);$@2	+2
+use	FUN_00141930	uVar7	entryCount	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*uVar21\ =\ uVar7\ \+\ 1;$@2	+1
+use	FUN_00141930	uVar7	entryCount	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*piVar5\ =\ \(int\ \*\)\(uVar7\ \*\ 0x2c\ \+\ iVar23\);$	+1
+use	FUN_00141930	uVar7	componentValue	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*uVar7\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)local_84\ \+\ iVar9\ \+\ \-4\);$	+2
+use	FUN_00141930	uVar7	componentValue	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*if\ \(\(piVar5\ ==\ \*\(int\ \*\*\)pbVar13\)\ \&\&\ \(uVar7\ ==\ \*pbVar18\)\)\ goto\ LAB_001421bc;$	+1
+use	FUN_00141930	uVar7	componentValue	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*if\ \(\(uVar21\ !=\ uVar20\)\ \&\&$	+3
+use	FUN_00141930	uVar7	componentValue	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*\*pbVar17\ =\ \(byte\)uVar7;$	+2
+use	FUN_00141930	uVar7	componentValue	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*local_64\[uVar21\]\ =\ \(byte\)uVar7;$	+1
+use	FUN_00141930	uVar7	componentValue	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*uVar7\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)local_84\ \+\ iVar9\ \+\ \-4\);$@2	+2
+use	FUN_00141930	uVar7	componentValue	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*if\ \(\(piVar10\ ==\ \*\(int\ \*\*\)pbVar13\)\ \&\&\ \(uVar7\ ==\ \*pbVar18\)\)\ goto\ LAB_001422b0;$	+1
+use	FUN_00141930	uVar7	componentValue	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*if\ \(\(uVar21\ !=\ uVar20\)\ \&\&$@2	+3
+use	FUN_00141930	uVar7	componentValue	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*\*pbVar17\ =\ \(byte\)uVar7;$@2	+2
+use	FUN_00141930	uVar7	componentValue	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*local_64\[uVar21\]\ =\ \(byte\)uVar7;$@2	+1
+use	FUN_00141930	iVar9	copyDest	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*iVar9\ =\ iVar23\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x18\);$	+1
+use	FUN_00141930	iVar9	copyDest	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*_memcpy\(iVar9,iVar11,0x2c\);$	+1
+use	FUN_00141930	iVar9	byteOffsetC	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*iVar9\ =\ 0;$@7	+1
+use	FUN_00141930	iVar9	byteOffsetC	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*piVar5\ =\ \(int\ \*\)\(iVar9\ \+\ iVar23\);$	+1
+use	FUN_00141930	iVar9	byteOffsetC	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*iVar9\ =\ iVar9\ \+\ 0x2c;$@3	+1
+use	FUN_00141930	piVar10	laneSourceCursor	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*piVar10\ =\ \(int\ \*\)piVar4\[4\];$	+2
+use	FUN_00141930	piVar10	laneSourceCursor	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*if\ \(\(piVar10\ ==\ \*\(int\ \*\*\)pbVar18\)\ \&\&\ \(uVar21\ ==\ \*pbVar15\)\)\ goto\ LAB_00141c78;$	+1
+use	FUN_00141930	piVar10	laneSourceCursor	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*if\ \(\(uVar20\ !=\ uVar22\)\ \&\&$@2	+4
+use	FUN_00141930	piVar10	laneSourceCursor	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*piVar10\ =\ piVar16;$	+1
+use	FUN_00141930	piVar10	laneSourceCursor	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*\*\(int\ \*\*\)\(local_74\ \+\ uVar20\ \*\ 4\)\ =\ piVar10;$	+1
+use	FUN_00141930	piVar10	laneSourceCursor	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*if\ \(piVar10\ !=\ \(int\ \*\)0x0\)\ goto\ LAB_00141bd8;$	+1
+use	FUN_00141930	piVar10	laneEntryCursorD	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*piVar10\ =\ piVar5;$	+3
+use	FUN_00141930	piVar10	laneEntryCursorD	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*piVar10\ =\ piVar10\ \+\ 1;$@4	+1
+use	FUN_00141930	piVar10	laneEntryCursorD	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*piVar10\ =\ piVar5;$@2	+1
+use	FUN_00141930	piVar10	laneEntryCursorD	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*while\ \(\(\*piVar10\ ==\ \*piVar16\ \&\&\ \(piVar10\[4\]\ ==\ piVar16\[4\]\)\)\)\ \{$	+1
+use	FUN_00141930	piVar10	laneEntryCursorD	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*piVar10\ =\ piVar10\ \+\ 1;$@5	+1
+use	FUN_00141930	iVar11	copySrcOffset	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*iVar11\ =\ iVar23\ \+\ iVar6;$	+1
+use	FUN_00141930	iVar11	copySrcOffset	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*_memcpy\(iVar9,iVar11,0x2c\);$	+1
+use	FUN_00141930	iVar11	byteOffsetE	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*iVar11\ =\ 0;$@2	+1
+use	FUN_00141930	iVar11	byteOffsetE	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*iVar12\ =\ iVar11\ \+\ iVar23;$	+1
+use	FUN_00141930	iVar11	byteOffsetE	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*iVar26\ =\ iVar11\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x18\);$	+2
+use	FUN_00141930	iVar11	copyDestB	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*iVar11\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x18\)\ \+\ iVar9;$	+1
+use	FUN_00141930	iVar11	copyDestB	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*_memcpy\(iVar11,iVar26,0x2c\);$	+1
+use	FUN_00141930	iVar12	copySrc	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*iVar12\ =\ iVar11\ \+\ iVar23;$	+1
+use	FUN_00141930	iVar12	copySrc	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*_memcpy\(iVar26,iVar12,0x2c\);$	+1
+use	FUN_00141930	piVar16	sourceCursorA	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*piVar16\ =\ \(int\ \*\)piVar10\[4\];$	+2
+use	FUN_00141930	piVar16	sourceCursorA	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*if\ \(\(piVar16\ ==\ \*\(int\ \*\*\)pbVar18\)\ \&\&\ \(uVar21\ ==\ \*pbVar15\)\)\ goto\ LAB_00141a9c;$	+1
+use	FUN_00141930	piVar16	sourceCursorA	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*if\ \(\(uVar20\ !=\ uVar22\)\ \&\&$	+4
+use	FUN_00141930	piVar16	sourceCursorA	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*piVar16\ =\ piVar14;$	+1
+use	FUN_00141930	piVar16	sourceCursorA	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*\*\(int\ \*\*\)\(local_74\ \+\ uVar20\ \*\ 4\)\ =\ piVar16;$	+1
+use	FUN_00141930	piVar16	sourceCursorA	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*if\ \(piVar16\ !=\ \(int\ \*\)0x0\)\ goto\ LAB_00141ae0;$	+1
+use	FUN_00141930	piVar16	sourcePtrB	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*piVar16\ =\ \*\(int\ \*\*\)pbVar17;$	+2
+use	FUN_00141930	piVar16	sourcePtrB	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*if\ \(\(uVar20\ !=\ uVar22\)\ \&\&$@2	+3
+use	FUN_00141930	piVar16	sourcePtrB	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*piVar10\ =\ piVar16;$	+1
+use	FUN_00141930	piVar16	componentClearCursor	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*piVar16\ =\ local_84;$	+1
+use	FUN_00141930	piVar16	componentClearCursor	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*\*piVar16\ =\ 0;$	+1
+use	FUN_00141930	piVar16	componentClearCursor	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*piVar16\[4\]\ =\ 0;$	+2
+use	FUN_00141930	piVar16	candidateSource	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*piVar16\ =\ piVar5;$	+1
+use	FUN_00141930	piVar16	candidateSource	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*if\ \(\(uVar21\ !=\ uVar20\)\ \&\&$	+4
+use	FUN_00141930	piVar16	candidateSource	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*piVar16\ =\ piVar14;$@2	+1
+use	FUN_00141930	piVar16	candidateSource	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*\*\(int\ \*\*\)\(local_74\ \+\ uVar21\ \*\ 4\)\ =\ piVar16;$	+1
+use	FUN_00141930	piVar16	sourcePtrC	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*piVar16\ =\ \*\(int\ \*\*\)pbVar15;$	+2
+use	FUN_00141930	piVar16	sourcePtrC	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*if\ \(\(uVar21\ !=\ uVar20\)\ \&\&$@2	+3
+use	FUN_00141930	piVar16	sourcePtrC	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*piVar5\ =\ piVar16;$	+1
+use	FUN_00141930	piVar16	recordClearCursor	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*piVar16\ =\ local_84;$@2	+2
+use	FUN_00141930	piVar16	recordClearCursor	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*piVar16\ =\ piVar16\ \+\ 1;$@2	+1
+use	FUN_00141930	iVar23	byteOffsetF	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*iVar23\ =\ 0;$	+1
+use	FUN_00141930	iVar23	byteOffsetF	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*iVar11\ =\ iVar23\ \+\ iVar6;$	+1
+use	FUN_00141930	iVar23	byteOffsetF	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*iVar9\ =\ iVar23\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x18\);$	+2
+use	FUN_00141930	iVar23	byteOffsetF	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*iVar23\ =\ 0;$@3	+1
+use	FUN_00141930	iVar23	byteOffsetF	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*piVar4\ =\ \(int\ \*\)\(iVar23\ \+\ iVar6\);$	+1
+use	FUN_00141930	iVar23	byteOffsetF	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*iVar23\ =\ iVar23\ \+\ 0x2c;$@2	+1
+use	FUN_00141930	iVar23	byteOffsetF	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*iVar23\ =\ 0;$@4	+1
+use	FUN_00141930	iVar23	byteOffsetF	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*_memcpy\(iVar23\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x18\),iVar23\ \+\ iVar6,0x2c\);$	+2
+use	FUN_00141930	iVar23	vcall60ResultB	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*iVar23\ =\ \(\*\*\(code\ \*\*\)\(\*piVar10\ \+\ 0x60\)\)\(piVar10\);$	+2
+use	FUN_00141930	iVar26	copyDestC	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*iVar26\ =\ iVar11\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x18\);$	+1
+use	FUN_00141930	iVar26	copyDestC	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*_memcpy\(iVar26,iVar12,0x2c\);$	+1
+use	FUN_00141930	iVar26	copyDestD	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*iVar26\ =\ iVar23\ \+\ iVar9;$	+1
+use	FUN_00141930	iVar26	copyDestD	INFERRED	role read off the web (cursor/offset/index/result of this packing routine)	^\s*_memcpy\(iVar11,iVar26,0x2c\);$	+1
