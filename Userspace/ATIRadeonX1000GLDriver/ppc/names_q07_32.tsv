@@ -1624,3 +1624,75 @@ use	ValueKey__fill	iVar3	instWord51	INFERRED	piVar13[0x51]: inst word copied to 
 use	ValueKey__fill	iVar3	instWord51	INFERRED	piVar13[0x51]: inst word copied to ctx+0x1e4; also the stale argument of the vtable +0x30 call	^\s*\(piVar13,uVar4,in_r5,in_r6,in_r7,iVar3,param_1\ \+\ 0x1cc,iVar9\);$	+1
 use	ValueKey__fill	iVar3	vcall30Result	INFERRED	vtable +0x30 on the key inst	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*piVar13\ \+\ 0x30\)\)$	+1
 use	ValueKey__fill	iVar3	vcall30Result	INFERRED	vtable +0x30 on the key inst	^\s*if\ \(iVar3\ ==\ 0\)\ \{$@3	+1
+use	FUN_00173754	iVar2	currentProgram	INFERRED	*(compiler+0x6c4): program, +0xa8 / +0x140 counters bumped	^\s*iVar2\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x238\)\ \+\ 0x6c4\);$	+2
+use	FUN_00173754	iVar2	currentProgram	INFERRED	*(compiler+0x6c4): program, +0xa8 / +0x140 counters bumped	^\s*iVar2\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x238\)\ \+\ 0x6c4\);$@2	+2
+local	FUN_00173754	uVar4	result	INFERRED	1 when the lane substitution was applied
+local	FUN_00173754	local_28	otherDestSelect	INFERRED	dest select word of the other key inst
+local	FUN_00173754	local_24	keyDestSelect	INFERRED	dest select word of ctx key inst; byte at -4 is local_28
+local	FUN_00173754	param_2	otherKey	INFERRED	the other ValueKey whose inst (+0xb0) is substituted
+use	ValueKey__fillSourceLaneUsage	iVar2	operandIdx	INFERRED	operand index 1..operand count	^\s*iVar2\ =\ 1;$	+1
+use	ValueKey__fillSourceLaneUsage	iVar2	operandIdx	INFERRED	operand index 1..operand count	^\s*if\ \(iVar3\ <\ iVar2\)\ break;$	+1
+use	ValueKey__fillSourceLaneUsage	iVar2	operandIdx	INFERRED	operand index 1..operand count	^\s*FUN_000f3c30\(local_28,uVar1,iVar2,uVar4,\*\(undefined4\ \*\)\(iVar3\ \+\ 0x10\)\);$	+1
+use	ValueKey__fillSourceLaneUsage	iVar2	operandIdx	INFERRED	operand index 1..operand count	^\s*iVar2\ =\ iVar2\ \+\ 1;$	+1
+local	ValueKey__fillSourceLaneUsage	a0	keyInstPtr	INFERRED	*(ctx+0xb0): the key instruction
+local	ValueKey__fillSourceLaneUsage	iVar5	laneUsageCursor	INFERRED	ctx advanced 4 bytes per operand; lane usage masks at +0x228
+local	ValueKey__fillSourceLaneUsage	uVar4	currentProgram	INFERRED	*(compiler+0x6c4)
+local	ValueKey__fillSourceLaneUsage	local_28	sourceLaneMaskOut	INFERRED	out of IRInst__computeSourceLaneMask
+local	FUN_00173af8	param_2	laneFlags	INFERRED	per-lane word array; a nonzero entry at an unwritten lane keeps +0x120
+local	FUN_00173af8	local_38	destSelect	INFERRED	dest select word of the key inst
+local	FUN_0017494c	uVar10	topIndex	INFERRED	def vector count - 1
+local	FUN_0017494c	piVar5	topSlot	INFERRED	address of the top def vector element
+local	FUN_0017494c	param_2	scopeIndexHigh	INFERRED	highest scope table index searched (passed to FUN_00174888)
+local	FUN_0017494c	param_3	scopeIndexLow	INFERRED	lowest scope table index searched
+use	FUN_0017494c	iVar2	optionEnabled	INFERRED	Compiler__isOptionEnabled(compiler,9)	^\s*iVar2\ =\ FUN_000e07dc\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x238\),9\);$	+2
+use	FUN_0017494c	iVar2	compiler	INFERRED	*(ctx+0x238): compiler (+0x6c4 program, +0x658 limit, +0x378 arena)	^\s*\(iVar2\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x238\),$	+3
+use	FUN_0017494c	iVar2	laneKeyCursor	INFERRED	ctx advanced 4 bytes per lane: lane value words at +0x20	^\s*iVar2\ =\ param_1;$	+1
+use	FUN_0017494c	iVar2	laneKeyCursor	INFERRED	ctx advanced 4 bytes per lane: lane value words at +0x20	^\s*puVar9\[8\]\ =\ \*\(undefined4\ \*\)\(iVar2\ \+\ 0x20\);$	+1
+use	FUN_0017494c	iVar2	laneKeyCursor	INFERRED	ctx advanced 4 bytes per lane: lane value words at +0x20	^\s*iVar2\ =\ iVar2\ \+\ 4;$	+1
+use	FUN_0017494c	iVar2	foundKey	INFERRED	FUN_00174888 result: matching ValueKey from the scope tables or 0	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)FUN_00174888\)\(puVar3\ \+\ 1,param_2,param_3,$	+1
+use	FUN_0017494c	iVar2	foundKey	INFERRED	FUN_00174888 result: matching ValueKey from the scope tables or 0	^\s*if\ \(iVar2\ !=\ 0\)\ \{$	+1
+use	FUN_0017494c	iVar2	foundKey	INFERRED	foundKey	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar2\ \+\ 0xb0\);$	+1	rhs	none
+use	FUN_0017494c	iVar2	matchedInst	INFERRED	instruction of the matching key (or of the top def of its first source): the replacement passed to FUN_0017d06c	^\s*if\ \(\(\*\(uint\ \*\)\(iVar2\ \+\ 0x14\)\ \&\ 1\)\ ==\ 0\)\ \{$	+2
+use	FUN_0017494c	iVar2	matchedInst	INFERRED	instruction of the matching key (or of the top def of its first source): the replacement passed to FUN_0017d06c	^\s*iVar2\ =\ \*\(int\ \*\)\(\*piVar5\ \+\ 0xb0\);$	+1
+use	FUN_0017494c	iVar2	matchedInst	INFERRED	instruction of the matching key (or of the top def of its first source): the replacement passed to FUN_0017d06c	^\s*FUN_0017d06c\(param_1,iVar2,\&DAT_001b01bc,0\);$	+1
+use	FUN_0017494c	iVar6	currentProgram	INFERRED	*(compiler+0x6c4): program, +0xa8 and +0x144 counters	^\s*iVar6\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x238\)\ \+\ 0x6c4\);$	+4
+use	FUN_0017494c	iVar2	matchedInst	INFERRED	instruction of the matching key	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar2\ \+\ 0xb0\);$	+1	lhs	none
+local	FUN_001758d8	param_1	valueKey	INFERRED	ValueKey whose lane words are copied from the found entry / inserted into the scope table
+local	FUN_001758d8	param_2	scopeIndexHigh	INFERRED	highest scope table index searched; the insert goes there
+local	FUN_001758d8	param_3	scopeIndexLow	INFERRED	lowest scope table index searched
+local	FUN_001758d8	param_4	program	INFERRED	*(program+0x404) is the vector of per-scope hash tables
+local	FUN_001758d8	uVar6	scopeIndex	INFERRED	scope index walked downwards
+local	FUN_001758d8	iVar7	scopeByteOffset	INFERRED	scope index * 4
+use	FUN_001758d8	puVar4	scopeTableSlot	INFERRED	address of the hash table pointer of the scope	^\s*puVar4\ =\ \(undefined4\ \*\)\(iVar7\ \+\ puVar5\[2\]\);$	+1
+use	FUN_001758d8	puVar4	scopeTableSlot	INFERRED	address of the hash table pointer of the scope	^\s*puVar4\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar5,uVar6\);$	+1
+use	FUN_001758d8	puVar4	scopeTableSlot	INFERRED	address of the hash table pointer of the scope	^\s*puVar4\ =\ \(undefined4\ \*\)FUN_00194834\(\*puVar4,param_1\);$	+2
+use	FUN_001758d8	puVar4	scopeTableSlotB	INFERRED	address of the hash table pointer of the high scope	^\s*puVar4\ =\ \(undefined4\ \*\)\(param_2\ \*\ 4\ \+\ puVar5\[2\]\);$	+1
+use	FUN_001758d8	puVar4	scopeTableSlotB	INFERRED	address of the hash table pointer of the high scope	^\s*puVar4\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar5,param_2\);$	+1
+use	FUN_001758d8	puVar4	scopeTableSlotB	INFERRED	address of the hash table pointer of the high scope	^\s*FUN_00194d44\(\*puVar4,param_1\);$	+1
+local	FUN_001758d8	uVar1	copiedWord	INFERRED	lane word copied from the found entry
+local	FUN_00176c40	param_1	resultOut	INFERRED	receives the folded lane value (0x7ffffffe = not constant)
+local	FUN_00176c40	param_3	laneIndex	INFERRED	lane whose operand constants are evaluated (+4 bytes per lane in the key lane arrays)
+local	FUN_00176c40	param_4	clampedFlag	INFERRED	set to 1 when clamping changed the scaled result
+local	FUN_00176c40	a0	opcodeInfo	INFERRED	*(inst+0x88): opcode info object whose vtable +4 evaluates the opcode on constants
+local	FUN_00176c40	a6	evalFn	INFERRED	vtable +4 of opcodeInfo: evaluates the opcode on constant operands
+local	FUN_00176c40	puVar4	laneValueCursor	INFERRED	key + lane*4 + 0x178 advanced 0x10 per operand: value number of the operand lane
+local	FUN_00176c40	iVar5	operandIdx	INFERRED	operand index 1..operand count
+local	FUN_00176c40	local_48	constOperandValues	INFERRED	[0] result placeholder, [1..4] constant values of the operands; all initialised 0x7ffffffe
+local	FUN_00176c40	local_28	scaledResult	INFERRED	IRInst__scaleByOutputScale out
+local	FUN_00176c40	local_24	clampedResult	INFERRED	IRInst__clampOutputValue out
+local	FUN_0015b4a4	param_2	pass	INFERRED	*(pass+8) compiler passed to FUN_0011379c, +0x164 counter bumped
+use	FUN_0015b4a4	iVar3	vcall5cResult	INFERRED	vtable +0x5c on the source inst	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x5c\)\)\(a0\);$	+5
+use	FUN_0015b4a4	iVar3	fun11379cResult	INFERRED	FUN_0011379c(compiler, source inst): opcode allows rewriting	^\s*iVar3\ =\ FUN_0011379c\(\*\(undefined4\ \*\)\(param_2\ \+\ 8\),a0\);$	+5
+use	FUN_0015b4a4	piVar4	userSlot	INFERRED	address of a user element in the source users vector	^\s*piVar4\ =\ \(int\ \*\)\(uVar10\ \*\ 4\ \+\ puVar11\[2\]\);$	+1
+use	FUN_0015b4a4	piVar4	userSlot	INFERRED	address of a user element in the source users vector	^\s*piVar4\ =\ \(int\ \*\)FUN_0019423c\(puVar11,uVar10\);$	+1
+use	FUN_0015b4a4	piVar4	userSlot	INFERRED	address of a user element in the source users vector	^\s*iVar3\ =\ \*piVar4;$	+3
+use	FUN_0015b4a4	piVar4	sourceInstLaneBase	INFERRED	source inst advanced one byte per lane (byte +0x9c write mask cleared)	^\s*piVar4\ =\ a0;$	+1
+use	FUN_0015b4a4	piVar4	sourceInstLaneBase	INFERRED	source inst advanced one byte per lane (byte +0x9c write mask cleared)	^\s*\*\(undefined1\ \*\)\(piVar4\ \+\ 0x27\)\ =\ 0;$	+1
+use	FUN_0015b4a4	piVar4	sourceInstLaneBase	INFERRED	source inst advanced one byte per lane (byte +0x9c write mask cleared)	^\s*piVar4\ =\ \(int\ \*\)\(\(int\)piVar4\ \+\ 1\);$	+1
+local	FUN_0015b4a4	bVar2	remapLaneByte	INFERRED	lane remap byte of the current lane
+use	FUN_0015b4a4	uVar10	remapLaneCheck	INFERRED	remap byte of the current lane (4 = unused)	^\s*if\ \(\(\(\(\*\(char\ \*\)\(uVar8\ \+\ iVar3\ \+\ 0x10\)\ !=\ '\\x01'\)\ \&\&$	+3
+use	FUN_0015b4a4	uVar10	remapLane	INFERRED	remapLaneByte widened	^\s*uVar10\ =\ \(uint\)bVar2;$	+2
+use	FUN_0015b4a4	uVar10	remapLane	INFERRED	remapLaneByte widened	^\s*\(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x88\)\)\(a0,iVar9,uVar8,\*\(undefined1\ \*\)\(uVar10\ \+\ iVar3\ \+\ 0x10\)\);$	+1
+local	FUN_0015b4a4	puVar5	userSlotB	INFERRED	address of a user element in the source users vector (second pass)
+local	FUN_0015b4a4	local_44	laneRemapBytes	INFERRED	per-lane remap bytes; reads at -4 index the bytes below, which belong to the previous local
+local	FUN_0015b4a4	a0	sourceInst	INFERRED	operand 1 source of the MOV (IRInst__getOperandSource(inst,1))
