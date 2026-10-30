@@ -2570,12 +2570,12 @@ int OpcodeTemplate__lookup(ilOpcode, compiler, variant)
 }
 
 /* IRInst__applyDescriptorSelects @ 0xf8d50 (568 bytes) */
-int IRInst__applyDescriptorSelects(program, param_2, overrideSelects, descriptor, param_5, inst, forceOnes)
+int IRInst__applyDescriptorSelects(program, unusedArg2, overrideSelects, descriptor, unusedArg5, inst, forceOnes)
   int program;
-  undefined4 param_2;
+  undefined4 unusedArg2;
   undefined4 overrideSelects;
   uint *descriptor;
-  undefined4 param_5;
+  undefined4 unusedArg5;
   int inst;
   int forceOnes;
 {
@@ -2584,7 +2584,7 @@ int IRInst__applyDescriptorSelects(program, param_2, overrideSelects, descriptor
   undefined4 registerFileB;
   int loopCounter;
   int registerFile;
-  unsigned int ghidra_home[8] = { program, param_2, overrideSelects, descriptor, param_5, inst, forceOnes, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[8] = { program, unusedArg2, overrideSelects, descriptor, unusedArg5, inst, forceOnes, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   undefined *laneSelectTable;
   undefined1 laneSelectB;
   char laneSelect;
@@ -2705,9 +2705,9 @@ int IRInst__applyDescriptorSwizzle(descriptor, inst)
 }
 
 /* FUN_000f9038 @ 0xf9038 (264 bytes) */
-int FUN_000f9038(param_1, param_2, list)
+int FUN_000f9038(param_1, unusedArg2, list)
   int param_1;
-  undefined4 param_2;
+  undefined4 unusedArg2;
   undefined4 list;
 {
   undefined4 inst;
@@ -2717,21 +2717,21 @@ int FUN_000f9038(param_1, param_2, list)
   inst = IRInst__create(0x17,*(undefined4 *)(param_1 + 8));
   operandRecord = IRInst__getOperandRecord(inst,0);
   *(undefined4 *)(operandRecord + 0xc) = 0;
-  *(undefined4 *)(operandRecord + 8) = param_2;
+  *(undefined4 *)(operandRecord + 8) = unusedArg2;
   operandRecord = IRInst__getOperandRecord(inst,1);
   dVar3 = (double)FLOAT_001aa0d4;
   *(undefined4 *)(operandRecord + 0xc) = 0;
-  *(undefined4 *)(operandRecord + 8) = param_2;
+  *(undefined4 *)(operandRecord + 8) = unusedArg2;
   ((void (*)())IRInst__makeLiteralVec4Float)(inst,param_1,2,dVar3,dVar3,dVar3,dVar3);
   DList__pushBack(list,inst);
   inst = IRInst__create(0x19,*(undefined4 *)(param_1 + 8));
   operandRecord = IRInst__getOperandRecord(inst,0);
   *(undefined4 *)(operandRecord + 0xc) = 0;
-  *(undefined4 *)(operandRecord + 8) = param_2;
+  *(undefined4 *)(operandRecord + 8) = unusedArg2;
   operandRecord = IRInst__getOperandRecord(inst,1);
   dVar3 = (double)FLOAT_001aa0e8;
   *(undefined4 *)(operandRecord + 0xc) = 0;
-  *(undefined4 *)(operandRecord + 8) = param_2;
+  *(undefined4 *)(operandRecord + 8) = unusedArg2;
   ((void (*)())IRInst__makeLiteralVec4Float)(inst,param_1,2,dVar3,dVar3,dVar3,dVar3);
   DList__pushBack(list,inst);
   return inst;
@@ -2845,12 +2845,12 @@ int Program__appendInst(program, inst, block)
 }
 
 /* FUN_000f94dc @ 0xf94dc (968 bytes) */
-int FUN_000f94dc(program, list, descriptor, param_4, param_5, param_6, param_7)
+int FUN_000f94dc(program, list, descriptor, unusedArg4, unusedArg5, param_6, param_7)
   int program;
   undefined4 list;
   uint *descriptor;
-  undefined4 param_4;
-  undefined4 param_5;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
   undefined4 param_6;
   undefined4 param_7;
 {
@@ -3029,7 +3029,7 @@ int FUN_000f94dc(program, list, descriptor, param_4, param_5, param_6, param_7)
   registerFile = Program__registerFileOfIlType(program,param_6);
   operandRecord2 = IRInst__getOperandRecord(inst,0);
   *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
-  *(undefined4 *)(operandRecord2 + 8) = param_5;
+  *(undefined4 *)(operandRecord2 + 8) = unusedArg5;
   *(undefined4 *)((int)inst + 0x9c) = 0x10101;
   operandRecord2 = IRInst__getOperandRecord(inst,1);
   *(undefined4 *)(operandRecord2 + 0xc) = 0x3a;
@@ -3040,11 +3040,11 @@ int FUN_000f94dc(program, list, descriptor, param_4, param_5, param_6, param_7)
 }
 
 /* FUN_000f9a58 @ 0xf9a58 (2736 bytes) */
-int FUN_000f9a58(pass, list, descriptor, param_4, modeSelector)
+int FUN_000f9a58(pass, list, descriptor, unusedArg4, modeSelector)
   int pass;
   undefined4 list;
   uint *descriptor;
-  undefined4 param_4;
+  undefined4 unusedArg4;
   int modeSelector;
 {
   uint sourceTokenWord;

@@ -354,14 +354,14 @@ int Compiler__setHardwareFamily(compiler, chipFamily)
 }
 
 /* Program__forwardMulOperandToUsers @ 0xe1c50 (916 bytes) */
-int Program__forwardMulOperandToUsers(program, passThroughR4, param_3, argR6, param_5, param_6, param_7)
+int Program__forwardMulOperandToUsers(program, passThroughR4, unusedArg3, argR6, unusedArg5, unusedArg6, unusedArg7)
   int program;
   undefined4 passThroughR4;
-  undefined4 param_3;
+  undefined4 unusedArg3;
   undefined4 argR6;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
 {
   int *userSlot;
   int *replacementSource;
@@ -1964,11 +1964,11 @@ int FUN_000e43ec(ilReader)
 }
 
 /* setWord30 @ 0xe4400 (8 bytes) */
-int setWord30(param_1, param_2)
-  int param_1;
-  undefined4 param_2;
+int setWord30(unusedArg1, unusedArg2)
+  int unusedArg1;
+  undefined4 unusedArg2;
 {
-  *(undefined4 *)(param_1 + 0x30) = param_2;
+  *(undefined4 *)(unusedArg1 + 0x30) = unusedArg2;
   return;
 }
 

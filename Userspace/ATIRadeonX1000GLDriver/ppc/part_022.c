@@ -1775,24 +1775,24 @@ int LoopHeader__getKindName(this)
 }
 
 /* FUN_000e77f4 @ 0xe77f4 (16 bytes) */
-int FUN_000e77f4(param_1, param_2)
-  int param_1;
-  undefined4 param_2;
+int FUN_000e77f4(unusedArg1, unusedArg2)
+  int unusedArg1;
+  undefined4 unusedArg2;
 {
-  *(undefined4 *)(param_1 + 0x154) = param_2;
-  *(undefined4 *)(param_1 + 0x150) = 1;
+  *(undefined4 *)(unusedArg1 + 0x154) = unusedArg2;
+  *(undefined4 *)(unusedArg1 + 0x150) = 1;
   return;
 }
 
 /* Block__getBranchInst @ 0xe7804 (188 bytes) */
-int Block__getBranchInst(block, param_2, param_3, param_4, param_5, param_6, param_7)
+int Block__getBranchInst(block, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
   int block;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+  undefined4 unusedArg2;
+  undefined4 unusedArg3;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
 {
   int *inst;
   int *nextInst;
@@ -2275,14 +2275,14 @@ int FUN_000e80cc(param_1, param_2)
 }
 
 /* Program__allocateBitSetIndex @ 0xe8124 (664 bytes) */
-int Program__allocateBitSetIndex(program, param_2, param_3, param_4, param_5, param_6, param_7)
+int Program__allocateBitSetIndex(program, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
   int program;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+  undefined4 unusedArg2;
+  undefined4 unusedArg3;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
 {
   uint wordOffsetOfBit;
   uint bitsLeft2;
@@ -2460,14 +2460,14 @@ int Block__insertAtStart(block, inst)
 }
 
 /* Block__verify @ 0xe84fc (468 bytes) */
-int Block__verify(this, param_2, param_3, param_4, param_5, param_6, param_7)
+int Block__verify(this, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
   int this;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+  undefined4 unusedArg2;
+  undefined4 unusedArg3;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
 {
   int compiler;
   bool isFirstFlagged;

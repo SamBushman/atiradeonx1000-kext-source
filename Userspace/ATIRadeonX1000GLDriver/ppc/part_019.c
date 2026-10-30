@@ -1,14 +1,14 @@
 #include "decls.h"
 
 /* scDumpPixelProgramPsn @ 0xd4e08 (92 bytes) */
-int scDumpPixelProgramPsn(sinkRecord, shaderState, optionsArg, argR6, argR7, argR8, param_7, argR10)
+int scDumpPixelProgramPsn(sinkRecord, shaderState, optionsArg, argR6, argR7, argR8, unusedArg7, argR10)
   undefined4 *sinkRecord;
   int shaderState;
   undefined4 optionsArg;
   undefined4 argR6;
   undefined4 argR7;
   undefined4 argR8;
-  undefined4 param_7;
+  undefined4 unusedArg7;
   undefined4 argR10;
 {
   DAT_001fa61c = *sinkRecord;
@@ -2304,8 +2304,8 @@ LAB_000d9c0c:
 }
 
 /* ConstBank__storeIntLane @ 0xd9c90 (228 bytes) */
-int ConstBank__storeIntLane(param_1, registerKey, laneValue, lane, bank, useGlobalList)
-  undefined4 param_1;
+int ConstBank__storeIntLane(unusedArg1, registerKey, laneValue, lane, bank, useGlobalList)
+  undefined4 unusedArg1;
   int registerKey;
   undefined4 laneValue;
   int lane;
@@ -2367,8 +2367,8 @@ LAB_000d9cf0:
 }
 
 /* ConstBank__storeBoolLane @ 0xd9d74 (228 bytes) */
-int ConstBank__storeBoolLane(param_1, registerKey, laneValue, lane, bank, useGlobalList)
-  undefined4 param_1;
+int ConstBank__storeBoolLane(unusedArg1, registerKey, laneValue, lane, bank, useGlobalList)
+  undefined4 unusedArg1;
   int registerKey;
   undefined4 laneValue;
   int lane;
@@ -2455,11 +2455,11 @@ int scStoreIntConstantComponent(unusedArg1, constRegister, valueHighHalf, valueL
 }
 
 /* ConstBank__addMappedEntry @ 0xd9e98 (156 bytes) */
-int ConstBank__addMappedEntry(param_1, registerKey, param_3, param_4, valueLo, valueHi, maskByte, sourceRegister, extraWord, bank)
-  undefined4 param_1;
+int ConstBank__addMappedEntry(unusedArg1, registerKey, unusedArg3, unusedArg4, valueLo, valueHi, maskByte, sourceRegister, extraWord, bank)
+  undefined4 unusedArg1;
   undefined4 registerKey;
-  undefined4 param_3;
-  undefined4 param_4;
+  undefined4 unusedArg3;
+  undefined4 unusedArg4;
   undefined4 valueLo;
   undefined4 valueHi;
   int maskByte;
@@ -2769,8 +2769,8 @@ int FUN_000da420(param_1)
 }
 
 /* FUN_000da438 @ 0xda438 (32 bytes) */
-int FUN_000da438(param_1, param_2)
-  int param_1;
+int FUN_000da438(unusedArg1, param_2)
+  int unusedArg1;
   undefined4 *param_2;
 {
   undefined4 uVar1;
@@ -2778,9 +2778,9 @@ int FUN_000da438(param_1, param_2)
   
   uVar2 = param_2[2];
   uVar1 = param_2[1];
-  *(undefined4 *)(param_1 + 0x18) = *param_2;
-  *(undefined4 *)(param_1 + 0x20) = uVar2;
-  *(undefined4 *)(param_1 + 0x1c) = uVar1;
+  *(undefined4 *)(unusedArg1 + 0x18) = *param_2;
+  *(undefined4 *)(unusedArg1 + 0x20) = uVar2;
+  *(undefined4 *)(unusedArg1 + 0x1c) = uVar1;
   return;
 }
 

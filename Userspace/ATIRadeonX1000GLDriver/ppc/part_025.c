@@ -48,15 +48,15 @@ int FUN_000f2e18(param_1)
 }
 
 /* laneBytes__mapTwoThreeToOne @ 0xf2e50 (72 bytes) */
-int laneBytes__mapTwoThreeToOne(param_1, param_2)
+int laneBytes__mapTwoThreeToOne(param_1, unusedArg2)
   undefined4 *param_1;
-  undefined4 param_2;
+  undefined4 unusedArg2;
 {
-  unsigned int ghidra_home[8] = { param_1, param_2, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[8] = { param_1, unusedArg2, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   char *pcVar1;
   int loopCounter;
   
-  (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = param_2;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = unusedArg2;
   loopCounter = 4;
   pcVar1 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 4));
   do {
@@ -170,19 +170,19 @@ int SelectWord__mergeWrittenLanes(outWord, stateBytes, writtenBytes)
 }
 
 /* SelectWord__fillUnusedLanes @ 0xf2fe0 (76 bytes) */
-int SelectWord__fillUnusedLanes(param_1, param_2, param_3)
+int SelectWord__fillUnusedLanes(param_1, unusedArg2, unusedArg3)
   undefined4 *param_1;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 unusedArg2;
+  undefined4 unusedArg3;
 {
-  unsigned int ghidra_home[8] = { param_1, param_2, param_3, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[8] = { param_1, unusedArg2, unusedArg3, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   char *pcVar1;
   char *pcVar2;
   int loopCounter;
   
-  (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = param_2;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = unusedArg2;
   loopCounter = 4;
-  (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = param_3;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = unusedArg3;
   pcVar1 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 4));
   pcVar2 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 8));
   do {
@@ -255,15 +255,15 @@ int laneBytes__commonSelect(selectWord)
 }
 
 /* SelectWord__firstWrittenComponent @ 0xf30d4 (52 bytes) */
-int SelectWord__firstWrittenComponent(param_1)
-  undefined4 param_1;
+int SelectWord__firstWrittenComponent(unusedArg1)
+  undefined4 unusedArg1;
 {
-  unsigned int ghidra_home[8] = { param_1, 0, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[8] = { unusedArg1, 0, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   char *pcVar1;
   int loopCounter;
   int loopCounterB;
   
-  (*(unsigned int *)((unsigned char *)ghidra_home + 0)) = param_1;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 0)) = unusedArg1;
   loopCounterB = 4;
   loopCounter = 0;
   pcVar1 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 0));
@@ -279,15 +279,15 @@ int SelectWord__firstWrittenComponent(param_1)
 }
 
 /* SelectWord__firstUnwrittenComponent @ 0xf3108 (52 bytes) */
-int SelectWord__firstUnwrittenComponent(param_1)
-  undefined4 param_1;
+int SelectWord__firstUnwrittenComponent(unusedArg1)
+  undefined4 unusedArg1;
 {
-  unsigned int ghidra_home[8] = { param_1, 0, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[8] = { unusedArg1, 0, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   char *pcVar1;
   int loopCounter;
   int loopCounterB;
   
-  (*(unsigned int *)((unsigned char *)ghidra_home + 0)) = param_1;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 0)) = unusedArg1;
   loopCounterB = 4;
   loopCounter = 0;
   pcVar1 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 0));
@@ -378,50 +378,50 @@ int SelectWord__selectWhereMasked(outSelect, baseSelect, laneMask)
 }
 
 /* SelectWord__clearReadComponents @ 0xf3258 (116 bytes) */
-int SelectWord__clearReadComponents(param_1, param_2)
-  undefined4 *param_1;
+int SelectWord__clearReadComponents(unusedArg1, param_2)
+  undefined4 *unusedArg1;
   uint param_2;
 {
-  *param_1 = DAT_001aa838;
+  *unusedArg1 = DAT_001aa838;
   if (param_2 >> 0x18 < 4) {
-    *(undefined1 *)param_1 = 0;
+    *(undefined1 *)unusedArg1 = 0;
   }
   if ((param_2 >> 0x10 & 0xff) < 4) {
-    *(undefined1 *)((int)param_1 + 1) = 0;
+    *(undefined1 *)((int)unusedArg1 + 1) = 0;
   }
   if ((param_2 >> 8 & 0xff) < 4) {
-    *(undefined1 *)((int)param_1 + 2) = 0;
+    *(undefined1 *)((int)unusedArg1 + 2) = 0;
   }
   if (3 < (param_2 & 0xff)) {
     return;
   }
-  *(undefined1 *)((int)param_1 + 3) = 0;
+  *(undefined1 *)((int)unusedArg1 + 3) = 0;
   return;
 }
 
 /* FUN_000f32cc @ 0xf32cc (116 bytes) */
-int FUN_000f32cc(param_1, param_2)
-  undefined4 *param_1;
+int FUN_000f32cc(unusedArg1, param_2)
+  undefined4 *unusedArg1;
   uint param_2;
 {
   uint uVar1;
   
-  *param_1 = DAT_001aa838;
+  *unusedArg1 = DAT_001aa838;
   if (param_2 >> 0x18 < 4) {
-    *(undefined1 *)((int)param_1 + (param_2 >> 0x18)) = 0;
+    *(undefined1 *)((int)unusedArg1 + (param_2 >> 0x18)) = 0;
   }
   uVar1 = param_2 >> 0x10 & 0xff;
   if (uVar1 < 4) {
-    *(undefined1 *)((int)param_1 + uVar1) = 0;
+    *(undefined1 *)((int)unusedArg1 + uVar1) = 0;
   }
   uVar1 = param_2 >> 8 & 0xff;
   if (uVar1 < 4) {
-    *(undefined1 *)((int)param_1 + uVar1) = 0;
+    *(undefined1 *)((int)unusedArg1 + uVar1) = 0;
   }
   if (3 < (param_2 & 0xff)) {
     return;
   }
-  *(undefined1 *)((int)param_1 + (param_2 & 0xff)) = 0;
+  *(undefined1 *)((int)unusedArg1 + (param_2 & 0xff)) = 0;
   return;
 }
 
@@ -448,28 +448,28 @@ int SelectWord__maskUnused(outSelect, baseSelect, maskWord)
 }
 
 /* SelectWord__readMask @ 0xf3398 (96 bytes) */
-int SelectWord__readMask(param_1, param_2)
-  undefined4 *param_1;
+int SelectWord__readMask(unusedArg1, param_2)
+  undefined4 *unusedArg1;
   uint param_2;
 {
   uint uVar1;
   
-  *param_1 = 0;
+  *unusedArg1 = 0;
   if (param_2 >> 0x18 < 4) {
-    *(undefined1 *)((int)param_1 + (param_2 >> 0x18)) = 1;
+    *(undefined1 *)((int)unusedArg1 + (param_2 >> 0x18)) = 1;
   }
   uVar1 = param_2 >> 0x10 & 0xff;
   if (uVar1 < 4) {
-    *(undefined1 *)((int)param_1 + uVar1) = 1;
+    *(undefined1 *)((int)unusedArg1 + uVar1) = 1;
   }
   uVar1 = param_2 >> 8 & 0xff;
   if (uVar1 < 4) {
-    *(undefined1 *)((int)param_1 + uVar1) = 1;
+    *(undefined1 *)((int)unusedArg1 + uVar1) = 1;
   }
   if (3 < (param_2 & 0xff)) {
     return;
   }
-  *(undefined1 *)((int)param_1 + (param_2 & 0xff)) = 1;
+  *(undefined1 *)((int)unusedArg1 + (param_2 & 0xff)) = 1;
   return;
 }
 
@@ -511,12 +511,12 @@ int SelectWord__fillUnusedWithFirstUsed(result, selectWord)
 }
 
 /* FUN_000f3470 @ 0xf3470 (340 bytes) */
-int FUN_000f3470(param_1, param_2)
-  uint *param_1;
-  uint param_2;
+int FUN_000f3470(unusedArg1, unusedArg2)
+  uint *unusedArg1;
+  uint unusedArg2;
 {
   int loopCounter;
-  unsigned int ghidra_home[8] = { param_1, param_2, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[8] = { unusedArg1, unusedArg2, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   bool bVar1;
   bool bVar2;
   uint uVar3;
@@ -527,9 +527,9 @@ int FUN_000f3470(param_1, param_2)
   int iVar8;
   int iVar9;
   
-  (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = param_2;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = unusedArg2;
   uVar3 = (*(unsigned char *)((unsigned char *)ghidra_home + 4));
-  (*(byte *)((unsigned char *)ghidra_home + 4)) = (byte)(param_2 >> 0x18);
+  (*(byte *)((unsigned char *)ghidra_home + 4)) = (byte)(unusedArg2 >> 0x18);
   uVar4 = (uint)(*(byte *)((unsigned char *)ghidra_home + 4));
   if (uVar4 == 4) {
     bVar2 = true;
@@ -570,13 +570,13 @@ int FUN_000f3470(param_1, param_2)
     if (!bVar1) goto LAB_000f35b4;
   }
   if (bVar2) {
-    *param_1 = (DAT_001aa818)[uVar4];
+    *unusedArg1 = (DAT_001aa818)[uVar4];
     return;
   }
   bVar1 = (*(byte *)((unsigned char *)ghidra_home + 4)) == 4;
   (*(unsigned char *)((unsigned char *)ghidra_home + 4)) = uVar3;
   if (bVar1) {
-    (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = param_2 & 0xffffff;
+    (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = unusedArg2 & 0xffffff;
   }
   if ((*(char *)((unsigned char *)ghidra_home + 5)) == '\x04') {
     (*(char *)((unsigned char *)ghidra_home + 5)) = CONCAT12(1,(*(char *)((unsigned char *)ghidra_home + 6)));
@@ -591,7 +591,7 @@ int FUN_000f3470(param_1, param_2)
   }
 LAB_000f35b4:
   (*(unsigned char *)((unsigned char *)ghidra_home + 4)) = uVar3;
-  *param_1 = (*(unsigned char *)((unsigned char *)ghidra_home + 4));
+  *unusedArg1 = (*(unsigned char *)((unsigned char *)ghidra_home + 4));
   return;
 }
 
@@ -623,21 +623,21 @@ int IRInst__clearSourceSelectsOfUnwrittenComponents(inst)
 }
 
 /* FUN_000f366c @ 0xf366c (76 bytes) */
-int FUN_000f366c(param_1, param_2)
-  undefined4 *param_1;
-  undefined4 param_2;
+int FUN_000f366c(unusedArg1, unusedArg2)
+  undefined4 *unusedArg1;
+  undefined4 unusedArg2;
 {
-  unsigned int ghidra_home[8] = { param_1, param_2, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[8] = { unusedArg1, unusedArg2, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   byte *pbVar1;
   int loopCounter;
   
-  (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = param_2;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = unusedArg2;
   loopCounter = 4;
-  *param_1 = DAT_001aa838;
+  *unusedArg1 = DAT_001aa838;
   pbVar1 = (byte *)&(*(unsigned int *)((unsigned char *)ghidra_home + 4));
   do {
     if (*pbVar1 != 4) {
-      *(undefined1 *)((int)param_1 + (uint)*pbVar1) = 0;
+      *(undefined1 *)((int)unusedArg1 + (uint)*pbVar1) = 0;
     }
     pbVar1 = pbVar1 + 1;
     loopCounter = loopCounter + -1;
@@ -670,16 +670,16 @@ int WriteMask__fromUsedLanes(result, selectWord)
 }
 
 /* FUN_000f370c @ 0xf370c (88 bytes) */
-int FUN_000f370c(param_1, param_2)
+int FUN_000f370c(param_1, unusedArg2)
   char *param_1;
-  undefined4 param_2;
+  undefined4 unusedArg2;
 {
-  unsigned int ghidra_home[8] = { param_1, param_2, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[8] = { param_1, unusedArg2, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   char *pcVar1;
   char cVar2;
   int loopCounter;
   
-  (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = param_2;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = unusedArg2;
   cVar2 = '\0';
   pcVar1 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 4));
   loopCounter = 4;
@@ -697,15 +697,15 @@ int FUN_000f370c(param_1, param_2)
 }
 
 /* laneBytes__clearSetLanes @ 0xf3764 (84 bytes) */
-int laneBytes__clearSetLanes(param_1, param_2)
+int laneBytes__clearSetLanes(param_1, unusedArg2)
   undefined4 *param_1;
-  undefined4 param_2;
+  undefined4 unusedArg2;
 {
-  unsigned int ghidra_home[8] = { param_1, param_2, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[8] = { param_1, unusedArg2, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   char *pcVar1;
   int loopCounter;
   
-  (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = param_2;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = unusedArg2;
   pcVar1 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 4));
   loopCounter = 4;
   *param_1 = DAT_001aa838;
@@ -805,56 +805,56 @@ int WriteMask__fromSelectWord(outMask, selectWord)
 }
 
 /* FUN_000f3968 @ 0xf3968 (104 bytes) */
-int FUN_000f3968(param_1, param_2, param_3)
-  undefined4 *param_1;
+int FUN_000f3968(unusedArg1, param_2, param_3)
+  undefined4 *unusedArg1;
   uint param_2;
   undefined4 param_3;
 {
   undefined1 uVar1;
   
   uVar1 = 0;
-  *param_1 = 0;
+  *unusedArg1 = 0;
   if (param_2 >> 0x18 == 1) {
     uVar1 = (undefined1)((uint)param_3 >> 0x18);
   }
-  *(undefined1 *)param_1 = uVar1;
+  *(undefined1 *)unusedArg1 = uVar1;
   uVar1 = 0;
   if ((param_2 >> 0x10 & 0xff) == 1) {
     uVar1 = (undefined1)((uint)param_3 >> 0x10);
   }
-  *(undefined1 *)((int)param_1 + 1) = uVar1;
+  *(undefined1 *)((int)unusedArg1 + 1) = uVar1;
   uVar1 = 0;
   if ((param_2 >> 8 & 0xff) == 1) {
     uVar1 = (undefined1)((uint)param_3 >> 8);
   }
-  *(undefined1 *)((int)param_1 + 2) = uVar1;
+  *(undefined1 *)((int)unusedArg1 + 2) = uVar1;
   uVar1 = 0;
   if ((param_2 & 0xff) == 1) {
     uVar1 = (undefined1)param_3;
   }
-  *(undefined1 *)((int)param_1 + 3) = uVar1;
+  *(undefined1 *)((int)unusedArg1 + 3) = uVar1;
   return;
 }
 
 /* FUN_000f39d0 @ 0xf39d0 (96 bytes) */
-int FUN_000f39d0(param_1, param_2)
-  undefined4 *param_1;
+int FUN_000f39d0(unusedArg1, param_2)
+  undefined4 *unusedArg1;
   uint param_2;
 {
-  *param_1 = 0;
+  *unusedArg1 = 0;
   if (param_2 >> 0x18 < 4) {
-    *(undefined1 *)param_1 = 1;
+    *(undefined1 *)unusedArg1 = 1;
   }
   if ((param_2 >> 0x10 & 0xff) < 4) {
-    *(undefined1 *)((int)param_1 + 1) = 1;
+    *(undefined1 *)((int)unusedArg1 + 1) = 1;
   }
   if ((param_2 >> 8 & 0xff) < 4) {
-    *(undefined1 *)((int)param_1 + 2) = 1;
+    *(undefined1 *)((int)unusedArg1 + 2) = 1;
   }
   if (3 < (param_2 & 0xff)) {
     return;
   }
-  *(undefined1 *)((int)param_1 + 3) = 1;
+  *(undefined1 *)((int)unusedArg1 + 3) = 1;
   return;
 }
 
@@ -1485,8 +1485,8 @@ int IRInst__maskUnusedLanesOfOperand(inst, operandIndex, program)
 }
 
 /* FUN_000f472c @ 0xf472c (124 bytes) */
-int FUN_000f472c(param_1, inst)
-  int param_1;
+int FUN_000f472c(unusedArg1, inst)
+  int unusedArg1;
   undefined4 inst;
 {
   int operandRecord;
@@ -1508,13 +1508,13 @@ int FUN_000f472c(param_1, inst)
     loopCounter = loopCounter + 1;
     loopCounterB = loopCounterB + -1;
   } while (loopCounterB != 0);
-  *(undefined4 *)(param_1 + 0x9c) = local_28[0];
+  *(undefined4 *)(unusedArg1 + 0x9c) = local_28[0];
   return;
 }
 
 /* FUN_000f47a8 @ 0xf47a8 (180 bytes) */
-int FUN_000f47a8(param_1, inst, inst2)
-  int param_1;
+int FUN_000f47a8(unusedArg1, inst, inst2)
+  int unusedArg1;
   undefined4 inst;
   undefined4 inst2;
 {
@@ -1546,7 +1546,7 @@ int FUN_000f47a8(param_1, inst, inst2)
     loopCounter = loopCounter + 1;
     loopCounterB = loopCounterB + -1;
   } while (loopCounterB != 0);
-  *(undefined4 *)(param_1 + 0x9c) = local_28;
+  *(undefined4 *)(unusedArg1 + 0x9c) = local_28;
   return;
 }
 
@@ -1853,14 +1853,14 @@ LAB_000f4d20:
 }
 
 /* ConstKey__countPresentOperands @ 0xf4d54 (44 bytes) */
-int ConstKey__countPresentOperands(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+int ConstKey__countPresentOperands(param_1, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
   int param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+  undefined4 unusedArg2;
+  undefined4 unusedArg3;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
 {
   uint loopCounterB;
   int loopCounter;

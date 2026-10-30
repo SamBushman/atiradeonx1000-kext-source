@@ -138,8 +138,8 @@ int Program__laneKindOfInterpSlot(program, interpSlot)
 }
 
 /* Table__interpolatorKindToCode @ 0xec2c4 (36 bytes) */
-int Table__interpolatorKindToCode(param_1, param_2)
-  undefined4 param_1;
+int Table__interpolatorKindToCode(unusedArg1, param_2)
+  undefined4 unusedArg1;
   int param_2;
 {
   return *(undefined4 *)(PTR_DAT_001e8b60 + param_2 * 4);
@@ -208,9 +208,9 @@ int FUN_000ec42c(program, node)
 }
 
 /* FUN_000ec468 @ 0xec468 (136 bytes) */
-int FUN_000ec468(param_1, param_2, param_3)
+int FUN_000ec468(param_1, unusedArg2, param_3)
   int param_1;
-  int param_2;
+  int unusedArg2;
   uint param_3;
 {
   undefined4 allocation;
@@ -226,7 +226,7 @@ int FUN_000ec468(param_1, param_2, param_3)
   loopCounter = 0;
   do {
     loopIndex = loopIndex + 1;
-    *(undefined4 *)(*(int *)(param_1 + 0x394) + loopCounter) = *(undefined4 *)(param_2 + loopCounter);
+    *(undefined4 *)(*(int *)(param_1 + 0x394) + loopCounter) = *(undefined4 *)(unusedArg2 + loopCounter);
     loopCounter = loopCounter + 4;
   } while (loopIndex <= param_3);
   return;
@@ -727,10 +727,10 @@ int Program__dtor_ed124(program)
 }
 
 /* HwLimits__vslot43_prependDefaultMov @ 0xed29c (264 bytes) */
-int HwLimits__vslot43_prependDefaultMov(this, inst, param_3, compiler)
+int HwLimits__vslot43_prependDefaultMov(this, inst, unusedArg3, compiler)
   undefined4 this;
   int inst;
-  undefined4 param_3;
+  undefined4 unusedArg3;
   int compiler;
 {
   int lanesLeft;
@@ -1816,9 +1816,9 @@ int Program__pinInputRegisters(program)
 }
 
 /* FUN_000eec50 @ 0xeec50 (1072 bytes) */
-int FUN_000eec50(program, param_2)
+int FUN_000eec50(program, unusedArg2)
   int program;
-  undefined4 param_2;
+  undefined4 unusedArg2;
 {
   undefined4 mulResultReg;
   undefined4 finalResultReg;
@@ -2591,14 +2591,14 @@ code_r0x000efce4:
 }
 
 /* Program__insertExitMarkerAndFlagBlocks @ 0xefde4 (536 bytes) */
-int Program__insertExitMarkerAndFlagBlocks(program, param_2, param_3, param_4, param_5, param_6, param_7)
+int Program__insertExitMarkerAndFlagBlocks(program, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
   int program;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+  undefined4 unusedArg2;
+  undefined4 unusedArg3;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
 {
   int *queueFront;
   int queuedBlock;

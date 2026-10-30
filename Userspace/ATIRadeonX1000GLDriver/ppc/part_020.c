@@ -3461,19 +3461,19 @@ int Compiler__setDefaultOptions(compiler)
 }
 
 /* FUN_000e0ca8 @ 0xe0ca8 (28 bytes) */
-int FUN_000e0ca8(param_1)
-  int param_1;
+int FUN_000e0ca8(unusedArg1)
+  int unusedArg1;
 {
-  *(undefined4 *)(param_1 + 0x318) = 0;
-  *(undefined4 *)(param_1 + 0x478) = 0x400;
-  *(undefined4 *)(param_1 + 0x47c) = 0;
-  *(undefined4 *)(param_1 + 0x480) = 0;
+  *(undefined4 *)(unusedArg1 + 0x318) = 0;
+  *(undefined4 *)(unusedArg1 + 0x478) = 0x400;
+  *(undefined4 *)(unusedArg1 + 0x47c) = 0;
+  *(undefined4 *)(unusedArg1 + 0x480) = 0;
   return;
 }
 
 /* testBit24 @ 0xe0cc8 (8 bytes) */
-int testBit24(param_1, param_2)
-  undefined4 param_1;
+int testBit24(unusedArg1, param_2)
+  undefined4 unusedArg1;
   uint param_2;
 {
   return param_2 >> 0x18 & 1;
@@ -3523,15 +3523,15 @@ int Compiler__applyRequestFlags(compiler, requestFlags)
 }
 
 /* Compiler__logf @ 0xe0e0c (28 bytes) */
-int Compiler__logf(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+int Compiler__logf(unusedArg1, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7, unusedArg8)
+  undefined4 unusedArg1;
+  undefined4 unusedArg2;
+  undefined4 unusedArg3;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
+  undefined4 unusedArg8;
 {
   return;
 }
@@ -3564,15 +3564,15 @@ int noop_e0e9c()
 }
 
 /* noop_e0ea0 @ 0xe0ea0 (28 bytes) */
-int noop_e0ea0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+int noop_e0ea0(unusedArg1, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7, unusedArg8)
+  undefined4 unusedArg1;
+  undefined4 unusedArg2;
+  undefined4 unusedArg3;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
+  undefined4 unusedArg8;
 {
   return;
 }
@@ -3793,24 +3793,24 @@ int noop_e1388()
 }
 
 /* noop_e138c @ 0xe138c (28 bytes) */
-int noop_e138c(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+int noop_e138c(unusedArg1, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7, unusedArg8)
+  undefined4 unusedArg1;
+  undefined4 unusedArg2;
+  undefined4 unusedArg3;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
+  undefined4 unusedArg8;
 {
   return;
 }
 
 /* FUN_000e13a8 @ 0xe13a8 (12 bytes) */
-int FUN_000e13a8(param_1)
-  int param_1;
+int FUN_000e13a8(unusedArg1)
+  int unusedArg1;
 {
-  *(undefined4 *)(param_1 + 0x31c) = 1;
+  *(undefined4 *)(unusedArg1 + 0x31c) = 1;
   return;
 }
 
@@ -3846,20 +3846,20 @@ int FUN_000e13b4(param_1)
 }
 
 /* FUN_000e144c @ 0xe144c (24 bytes) */
-int FUN_000e144c(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  int param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+int FUN_000e144c(unusedArg1, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
+  int unusedArg1;
+  undefined4 unusedArg2;
+  undefined4 unusedArg3;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
 {
-  *(undefined4 *)(param_1 + 0x594) = param_7;
-  *(undefined4 *)(param_1 + 0x588) = param_2;
-  *(undefined4 *)(param_1 + 0x58c) = param_4;
-  *(undefined4 *)(param_1 + 0x590) = param_5;
-  *(undefined4 *)(param_1 + 0x598) = param_6;
+  *(undefined4 *)(unusedArg1 + 0x594) = unusedArg7;
+  *(undefined4 *)(unusedArg1 + 0x588) = unusedArg2;
+  *(undefined4 *)(unusedArg1 + 0x58c) = unusedArg4;
+  *(undefined4 *)(unusedArg1 + 0x590) = unusedArg5;
+  *(undefined4 *)(unusedArg1 + 0x598) = unusedArg6;
   return;
 }
 
@@ -3882,12 +3882,12 @@ int Compiler__releaseOutputBuffer(param_1)
 }
 
 /* Compiler__setTableEntry534 @ 0xe14d4 (16 bytes) */
-int Compiler__setTableEntry534(param_1, param_2, param_3)
-  int param_1;
-  int param_2;
-  undefined4 param_3;
+int Compiler__setTableEntry534(unusedArg1, unusedArg2, unusedArg3)
+  int unusedArg1;
+  int unusedArg2;
+  undefined4 unusedArg3;
 {
-  *(undefined4 *)(param_2 * 4 + param_1 + 0x534) = param_3;
+  *(undefined4 *)(unusedArg2 * 4 + unusedArg1 + 0x534) = unusedArg3;
   return;
 }
 
