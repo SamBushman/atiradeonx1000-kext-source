@@ -57,14 +57,14 @@ int FUN_0011e894(program)
 }
 
 /* Program__isPreassignedHwReg @ 0x11e948 (64 bytes) */
-int Program__isPreassignedHwReg(program, param_2)
+int Program__isPreassignedHwReg(program, inst)
   undefined4 program;
-  int param_2;
+  int inst;
 {
   int iVar1;
   
-  if (((*(uint *)(param_2 + 0x14) & 0x40) != 0) &&
-     (iVar1 = Program__isHwRegAllowed(program,*(undefined4 *)(param_2 + 0x94)), iVar1 != 0)) {
+  if (((*(uint *)(inst + 0x14) & 0x40) != 0) &&
+     (iVar1 = Program__isHwRegAllowed(program,*(undefined4 *)(inst + 0x94)), iVar1 != 0)) {
     return 1;
   }
   return 0;
@@ -690,8 +690,8 @@ LAB_0011f744:
 #undef workData
 
 /* FUN_0011f7fc @ 0x11f7fc (164 bytes) */
-int FUN_0011f7fc(param_1, param_2, vector)
-  int param_1;
+int FUN_0011f7fc(pass, param_2, vector)
+  int pass;
   int param_2;
   uint *vector;
 {
@@ -700,7 +700,7 @@ int FUN_0011f7fc(param_1, param_2, vector)
   int baseIndex;
   uint slotIndex;
   
-  baseIndex = *(int *)(param_1 + 0x474);
+  baseIndex = *(int *)(pass + 0x474);
   if (baseIndex < *(int *)(param_2 + 0x150)) {
     slotIndex = *(int *)(param_2 + 0x150) - baseIndex;
   }
@@ -2866,17 +2866,17 @@ int FUN_00122de8(program)
 }
 
 /* VRegPool__constructByKind @ 0x122e90 (44 bytes) */
-int VRegPool__constructByKind(param_1, kindIndex, param_3, param_4)
+int VRegPool__constructByKind(param_1, kindIndex, keyExtra, param_4)
   undefined4 param_1;
   int kindIndex;
-  uint param_3;
+  uint keyExtra;
   uint param_4;
 {
   undefined4 callResult;
   
                     
                     
-  callResult = (**(code **)(PTR_PTR_001e8c60 + kindIndex * 0x10 + 0xc))(param_1,kindIndex,param_3,param_4);
+  callResult = (**(code **)(PTR_PTR_001e8c60 + kindIndex * 0x10 + 0xc))(param_1,kindIndex,keyExtra,param_4);
   return callResult;
 }
 
@@ -3647,9 +3647,9 @@ int FUN_00123c08(compiler, block, param_3)
 }
 
 /* TempValue__clone @ 0x1240a8 (180 bytes) */
-int TempValue__clone(this, param_2, compiler)
+int TempValue__clone(this, block, compiler)
   int this;
-  int *param_2;
+  int *block;
   int compiler;
 {
   undefined4 *allocation;
@@ -3676,11 +3676,11 @@ int TempValue__clone(this, param_2, compiler)
       ValueKey__propagateLaneValues(valueKey);
     }
     *(uint *)(*(int *)(compiler + COMP_target) + 8) = *(uint *)(*(int *)(compiler + COMP_target) + 8) | 0x20;
-    (**(code **)(*param_2 + 0xc))(param_2,newInst);
+    (**(code **)(*block + 0xc))(block,newInst);
     ((int (*)())IRInst__bindSourceFromValue)(this,newInst);
     return valueKey;
   }
-  foldedValue = (undefined4 *)((int (*)())FUN_00123c08)(*(undefined4 *)(compiler + COMP_currentProgram),param_2,this);
+  foldedValue = (undefined4 *)((int (*)())FUN_00123c08)(*(undefined4 *)(compiler + COMP_currentProgram),block,this);
   return foldedValue;
 }
 
@@ -3875,44 +3875,44 @@ int FixedValue__ctor_124724(this, registerIndex, registerFile, baseCtorArg4, com
 }
 
 /* VertexRegister__ctor_1248a0 @ 0x1248a0 (76 bytes) */
-int VertexRegister__ctor_1248a0(this, param_2, param_3, param_4, compiler)
+int VertexRegister__ctor_1248a0(this, ctorWord2, ctorWord1, ctorWord3, compiler)
   undefined4 *this;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
+  undefined4 ctorWord2;
+  undefined4 ctorWord1;
+  undefined4 ctorWord3;
   undefined4 compiler;
 {
-  ((int (*)())VRegInfo__ctor_12379c)(this,param_2,param_3,param_4,compiler);
-  this[4] = param_2;
+  ((int (*)())VRegInfo__ctor_12379c)(this,ctorWord2,ctorWord1,ctorWord3,compiler);
+  this[4] = ctorWord2;
   *this = &PTR_FUN_001ea860;
   return;
 }
 
 /* VertexRegister__ctor_1248ec @ 0x1248ec (76 bytes) */
-int VertexRegister__ctor_1248ec(this, param_2, param_3, param_4, compiler)
+int VertexRegister__ctor_1248ec(this, ctorWord2, ctorWord1, ctorWord3, compiler)
   undefined4 *this;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
+  undefined4 ctorWord2;
+  undefined4 ctorWord1;
+  undefined4 ctorWord3;
   undefined4 compiler;
 {
-  ((int (*)())VRegInfo__ctor_12379c)(this,param_2,param_3,param_4,compiler);
-  this[4] = param_2;
+  ((int (*)())VRegInfo__ctor_12379c)(this,ctorWord2,ctorWord1,ctorWord3,compiler);
+  this[4] = ctorWord2;
   *this = &PTR_FUN_001ea860;
   return;
 }
 
 /* TempValue__ctor_124938 @ 0x124938 (100 bytes) */
-int TempValue__ctor_124938(this, param_2, param_3, param_4, compiler)
+int TempValue__ctor_124938(this, ctorWord2, ctorWord1, ctorWord3, compiler)
   undefined4 *this;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
+  undefined4 ctorWord2;
+  undefined4 ctorWord1;
+  undefined4 ctorWord3;
   int compiler;
 {
   int streamCounter;
   
-  ((int (*)())VRegInfo__ctor_12379c)(this,param_2,param_3,param_4,compiler);
+  ((int (*)())VRegInfo__ctor_12379c)(this,ctorWord2,ctorWord1,ctorWord3,compiler);
   *this = &PTR_FUN_001ea7b8;
   streamCounter = *(int *)(compiler + 0x334);
   this[4] = streamCounter;
@@ -4056,16 +4056,16 @@ int StandardIndex__ctor_124c94(this, tempIndex, baseCtorArg3, baseCtorArg4, comp
 }
 
 /* TempValue__ctor_124e04 @ 0x124e04 (100 bytes) */
-int TempValue__ctor_124e04(this, param_2, param_3, param_4, compiler)
+int TempValue__ctor_124e04(this, ctorWord2, ctorWord1, ctorWord3, compiler)
   undefined4 *this;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
+  undefined4 ctorWord2;
+  undefined4 ctorWord1;
+  undefined4 ctorWord3;
   int compiler;
 {
   int streamCounter;
   
-  ((int (*)())VRegInfo__ctor_12379c)(this,param_2,param_3,param_4,compiler);
+  ((int (*)())VRegInfo__ctor_12379c)(this,ctorWord2,ctorWord1,ctorWord3,compiler);
   *this = &PTR_FUN_001ea7b8;
   streamCounter = *(int *)(compiler + 0x334);
   this[4] = streamCounter;
@@ -4530,14 +4530,14 @@ LAB_00125ac0:
 }
 
 /* Physical__ctor_125c10 @ 0x125c10 (104 bytes) */
-int Physical__ctor_125c10(this, hwReg, param_3, param_4, compiler)
+int Physical__ctor_125c10(this, hwReg, ctorWord1, ctorWord3, compiler)
   undefined4 *this;
   undefined4 hwReg;
-  undefined4 param_3;
-  undefined4 param_4;
+  undefined4 ctorWord1;
+  undefined4 ctorWord3;
   int compiler;
 {
-  ((int (*)())VRegInfo__ctor_12379c)(this,hwReg,param_3,param_4,compiler);
+  ((int (*)())VRegInfo__ctor_12379c)(this,hwReg,ctorWord1,ctorWord3,compiler);
   *this = PTR_DAT_001e90d8 + 8;
   Program__markHwRegUsed(*(undefined4 *)(compiler + 0x6c4),hwReg);
   this[4] = hwReg;
@@ -4546,14 +4546,14 @@ int Physical__ctor_125c10(this, hwReg, param_3, param_4, compiler)
 }
 
 /* Physical__ctor_125c8c @ 0x125c8c (104 bytes) */
-int Physical__ctor_125c8c(this, hwReg, param_3, param_4, compiler)
+int Physical__ctor_125c8c(this, hwReg, ctorWord1, ctorWord3, compiler)
   undefined4 *this;
   undefined4 hwReg;
-  undefined4 param_3;
-  undefined4 param_4;
+  undefined4 ctorWord1;
+  undefined4 ctorWord3;
   int compiler;
 {
-  ((int (*)())VRegInfo__ctor_12379c)(this,hwReg,param_3,param_4,compiler);
+  ((int (*)())VRegInfo__ctor_12379c)(this,hwReg,ctorWord1,ctorWord3,compiler);
   *this = PTR_DAT_001e90d8 + 8;
   Program__markHwRegUsed(*(undefined4 *)(compiler + 0x6c4),hwReg);
   this[4] = hwReg;
@@ -4562,29 +4562,29 @@ int Physical__ctor_125c8c(this, hwReg, param_3, param_4, compiler)
 }
 
 /* Resource__ctor_125d08 @ 0x125d08 (88 bytes) */
-int Resource__ctor_125d08(this, param_2, param_3, param_4, compiler)
+int Resource__ctor_125d08(this, ctorWord2, ctorWord1, ctorWord3, compiler)
   undefined4 *this;
-  int param_2;
-  int param_3;
-  undefined4 param_4;
+  int ctorWord2;
+  int ctorWord1;
+  undefined4 ctorWord3;
   undefined4 compiler;
 {
-  ((int (*)())VRegInfo__ctor_12379c)(this,param_2,param_3,param_4,compiler);
-  this[4] = param_2 + param_3 * 0x10000;
+  ((int (*)())VRegInfo__ctor_12379c)(this,ctorWord2,ctorWord1,ctorWord3,compiler);
+  this[4] = ctorWord2 + ctorWord1 * 0x10000;
   *this = &PTR_FUN_001ea828;
   return;
 }
 
 /* Resource__ctor_125d60 @ 0x125d60 (88 bytes) */
-int Resource__ctor_125d60(this, param_2, param_3, param_4, compiler)
+int Resource__ctor_125d60(this, ctorWord2, ctorWord1, ctorWord3, compiler)
   undefined4 *this;
-  int param_2;
-  int param_3;
-  undefined4 param_4;
+  int ctorWord2;
+  int ctorWord1;
+  undefined4 ctorWord3;
   undefined4 compiler;
 {
-  ((int (*)())VRegInfo__ctor_12379c)(this,param_2,param_3,param_4,compiler);
-  this[4] = param_2 + param_3 * 0x10000;
+  ((int (*)())VRegInfo__ctor_12379c)(this,ctorWord2,ctorWord1,ctorWord3,compiler);
+  this[4] = ctorWord2 + ctorWord1 * 0x10000;
   *this = &PTR_FUN_001ea828;
   return;
 }
@@ -4637,86 +4637,86 @@ int PrimitiveIndex__ctor_125db8(this, baseCtorArg2, baseCtorArg3, baseCtorArg4, 
 }
 
 /* AddrIndexedSet__ctor_125f40 @ 0x125f40 (84 bytes) */
-int AddrIndexedSet__ctor_125f40(param_1, param_2, param_3, param_4, compiler)
-  undefined4 *param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
+int AddrIndexedSet__ctor_125f40(this, ctorWord2, ctorWord1, ctorWord3, compiler)
+  undefined4 *this;
+  undefined4 ctorWord2;
+  undefined4 ctorWord1;
+  undefined4 ctorWord3;
   undefined4 compiler;
 {
   undefined *vtable;
   
-  ((int (*)())VRegInfo__ctor_12379c)(param_1,param_2,param_3,param_4,compiler);
+  ((int (*)())VRegInfo__ctor_12379c)(this,ctorWord2,ctorWord1,ctorWord3,compiler);
   vtable = PTR_DAT_001e90cc;
-  param_1[0xc] = 0;
-  param_1[4] = param_2;
-  *param_1 = vtable + 8;
+  this[0xc] = 0;
+  this[4] = ctorWord2;
+  *this = vtable + 8;
   return;
 }
 
 /* AddrIndexedSet__ctor_125f94 @ 0x125f94 (84 bytes) */
-int AddrIndexedSet__ctor_125f94(param_1, param_2, param_3, param_4, compiler)
-  undefined4 *param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
+int AddrIndexedSet__ctor_125f94(this, ctorWord2, ctorWord1, ctorWord3, compiler)
+  undefined4 *this;
+  undefined4 ctorWord2;
+  undefined4 ctorWord1;
+  undefined4 ctorWord3;
   undefined4 compiler;
 {
   undefined *vtable;
   
-  ((int (*)())VRegInfo__ctor_12379c)(param_1,param_2,param_3,param_4,compiler);
+  ((int (*)())VRegInfo__ctor_12379c)(this,ctorWord2,ctorWord1,ctorWord3,compiler);
   vtable = PTR_DAT_001e90cc;
-  param_1[0xc] = 0;
-  param_1[4] = param_2;
-  *param_1 = vtable + 8;
+  this[0xc] = 0;
+  this[4] = ctorWord2;
+  *this = vtable + 8;
   return;
 }
 
 /* LoopRegister__ctor_125fe8 @ 0x125fe8 (76 bytes) */
-int LoopRegister__ctor_125fe8(param_1, param_2, param_3, param_4, compiler)
-  undefined4 *param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
+int LoopRegister__ctor_125fe8(this, ctorWord2, ctorWord1, ctorWord3, compiler)
+  undefined4 *this;
+  undefined4 ctorWord2;
+  undefined4 ctorWord1;
+  undefined4 ctorWord3;
   undefined4 compiler;
 {
   undefined *vtable;
   
-  ((int (*)())VRegInfo__ctor_12379c)(param_1,param_2,param_3,param_4,compiler);
+  ((int (*)())VRegInfo__ctor_12379c)(this,ctorWord2,ctorWord1,ctorWord3,compiler);
   vtable = PTR_DAT_001e90e8;
-  param_1[4] = param_2;
-  *param_1 = vtable + 8;
+  this[4] = ctorWord2;
+  *this = vtable + 8;
   return;
 }
 
 /* LoopRegister__ctor_126034 @ 0x126034 (76 bytes) */
-int LoopRegister__ctor_126034(param_1, param_2, param_3, param_4, compiler)
-  undefined4 *param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
+int LoopRegister__ctor_126034(this, ctorWord2, ctorWord1, ctorWord3, compiler)
+  undefined4 *this;
+  undefined4 ctorWord2;
+  undefined4 ctorWord1;
+  undefined4 ctorWord3;
   undefined4 compiler;
 {
   undefined *vtable;
   
-  ((int (*)())VRegInfo__ctor_12379c)(param_1,param_2,param_3,param_4,compiler);
+  ((int (*)())VRegInfo__ctor_12379c)(this,ctorWord2,ctorWord1,ctorWord3,compiler);
   vtable = PTR_DAT_001e90e8;
-  param_1[4] = param_2;
-  *param_1 = vtable + 8;
+  this[4] = ctorWord2;
+  *this = vtable + 8;
   return;
 }
 
 /* LoopIndexedOutputSet__ctor_126080 @ 0x126080 (116 bytes) */
-int LoopIndexedOutputSet__ctor_126080(this, param_2, param_3, param_4, compiler)
+int LoopIndexedOutputSet__ctor_126080(this, ctorWord2, ctorWord1, ctorWord3, compiler)
   undefined4 *this;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
+  undefined4 ctorWord2;
+  undefined4 ctorWord1;
+  undefined4 ctorWord3;
   int compiler;
 {
   undefined *vtable;
   
-  ((int (*)())VRegInfo__ctor_12379c)(this,param_2,param_3,param_4,compiler);
+  ((int (*)())VRegInfo__ctor_12379c)(this,ctorWord2,ctorWord1,ctorWord3,compiler);
   vtable = PTR_DAT_001e90ec;
   this[0xc] = 0;
   *this = vtable + 8;

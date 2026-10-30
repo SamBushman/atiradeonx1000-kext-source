@@ -246,10 +246,10 @@ int RegKind__flagBit7(param_1)
 }
 
 /* RegKind__flagBit8 @ 0x126734 (44 bytes) */
-int RegKind__flagBit8(param_1)
-  int param_1;
+int RegKind__flagBit8(movSourceKind)
+  int movSourceKind;
 {
-  return *(uint *)(&DAT_001ea904 + param_1 * 0x10) >> 8 & 1;
+  return *(uint *)(&DAT_001ea904 + movSourceKind * 0x10) >> 8 & 1;
 }
 
 /* RegKind__flagBit0 @ 0x126760 (44 bytes) */
@@ -274,10 +274,10 @@ int FUN_001267b8(param_1)
 }
 
 /* ImmedConstBuffer__vslot283 @ 0x1267ec (84 bytes) */
-int ImmedConstBuffer__vslot283(this, param_2, param_3, compiler)
+int ImmedConstBuffer__vslot283(this, ctorWord1, ctorWord3, compiler)
   undefined4 this;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 ctorWord1;
+  undefined4 ctorWord3;
   int compiler;
 {
   undefined4 *allocation;
@@ -286,7 +286,7 @@ int ImmedConstBuffer__vslot283(this, param_2, param_3, compiler)
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x34);
   *allocation = arena;
-  ((int (*)())ImmedConstBuffer__ctor_1261e8)(allocation + 1,this,param_2,param_3,compiler);
+  ((int (*)())ImmedConstBuffer__ctor_1261e8)(allocation + 1,this,ctorWord1,ctorWord3,compiler);
   return allocation + 1;
 }
 
@@ -312,10 +312,10 @@ int RegKind__byte4(param_1)
 }
 
 /* ImmedConstBuffer__vslot235 @ 0x1268f8 (84 bytes) */
-int ImmedConstBuffer__vslot235(this, param_2, param_3, compiler)
+int ImmedConstBuffer__vslot235(this, ctorWord1, ctorWord3, compiler)
   undefined4 this;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 ctorWord1;
+  undefined4 ctorWord3;
   int compiler;
 {
   undefined4 *allocation;
@@ -324,15 +324,15 @@ int ImmedConstBuffer__vslot235(this, param_2, param_3, compiler)
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x34);
   *allocation = arena;
-  VertexRegister__ctor_1248ec(allocation + 1,this,param_2,param_3,compiler);
+  VertexRegister__ctor_1248ec(allocation + 1,this,ctorWord1,ctorWord3,compiler);
   return allocation + 1;
 }
 
 /* ImmedConstBuffer__vslot15 @ 0x126984 (84 bytes) */
-int ImmedConstBuffer__vslot15(this, param_2, param_3, compiler)
+int ImmedConstBuffer__vslot15(this, ctorWord1, ctorWord3, compiler)
   undefined4 this;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 ctorWord1;
+  undefined4 ctorWord3;
   int compiler;
 {
   undefined4 *allocation;
@@ -341,15 +341,15 @@ int ImmedConstBuffer__vslot15(this, param_2, param_3, compiler)
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x38);
   *allocation = arena;
-  TempValue__ctor_124e04(allocation + 1,this,param_2,param_3,compiler);
+  TempValue__ctor_124e04(allocation + 1,this,ctorWord1,ctorWord3,compiler);
   return allocation + 1;
 }
 
 /* ImmedConstBuffer__vslot23 @ 0x126a10 (84 bytes) */
-int ImmedConstBuffer__vslot23(this, param_2, param_3, compiler)
+int ImmedConstBuffer__vslot23(this, registerFile, baseCtorArg4, compiler)
   undefined4 this;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 registerFile;
+  undefined4 baseCtorArg4;
   int compiler;
 {
   undefined4 *allocation;
@@ -358,15 +358,15 @@ int ImmedConstBuffer__vslot23(this, param_2, param_3, compiler)
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x34);
   *allocation = arena;
-  FixedValue__ctor_124724(allocation + 1,this,param_2,param_3,compiler);
+  FixedValue__ctor_124724(allocation + 1,this,registerFile,baseCtorArg4,compiler);
   return allocation + 1;
 }
 
 /* ImmedConstBuffer__vslot83 @ 0x126a9c (84 bytes) */
-int ImmedConstBuffer__vslot83(this, param_2, param_3, compiler)
+int ImmedConstBuffer__vslot83(this, interpolatorKind, baseCtorArg4, compiler)
   undefined4 this;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 interpolatorKind;
+  undefined4 baseCtorArg4;
   int compiler;
 {
   undefined4 *allocation;
@@ -375,15 +375,15 @@ int ImmedConstBuffer__vslot83(this, param_2, param_3, compiler)
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x44);
   *allocation = arena;
-  Interpolator__ctor_1257b0(allocation + 1,this,param_2,param_3,compiler);
+  Interpolator__ctor_1257b0(allocation + 1,this,interpolatorKind,baseCtorArg4,compiler);
   return allocation + 1;
 }
 
 /* ImmedConstBuffer__vslot67 @ 0x126b28 (84 bytes) */
-int ImmedConstBuffer__vslot67(this, param_2, param_3, compiler)
+int ImmedConstBuffer__vslot67(this, baseCtorArg3, baseCtorArg4, compiler)
   undefined4 this;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 baseCtorArg3;
+  undefined4 baseCtorArg4;
   int compiler;
 {
   undefined4 *allocation;
@@ -392,15 +392,15 @@ int ImmedConstBuffer__vslot67(this, param_2, param_3, compiler)
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x38);
   *allocation = arena;
-  StandardIndex__ctor_124b24(allocation + 1,this,param_2,param_3,compiler);
+  StandardIndex__ctor_124b24(allocation + 1,this,baseCtorArg3,baseCtorArg4,compiler);
   return allocation + 1;
 }
 
 /* ImmedConstBuffer__vslot71 @ 0x126bb4 (84 bytes) */
-int ImmedConstBuffer__vslot71(this, param_2, param_3, compiler)
+int ImmedConstBuffer__vslot71(this, baseCtorArg3, baseCtorArg4, compiler)
   undefined4 this;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 baseCtorArg3;
+  undefined4 baseCtorArg4;
   int compiler;
 {
   undefined4 *allocation;
@@ -409,15 +409,15 @@ int ImmedConstBuffer__vslot71(this, param_2, param_3, compiler)
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x38);
   *allocation = arena;
-  PrimitiveIndex__ctor_125db8(allocation + 1,this,param_2,param_3,compiler);
+  PrimitiveIndex__ctor_125db8(allocation + 1,this,baseCtorArg3,baseCtorArg4,compiler);
   return allocation + 1;
 }
 
 /* ImmedConstBuffer__vslot35 @ 0x126c40 (84 bytes) */
-int ImmedConstBuffer__vslot35(this, param_2, param_3, compiler)
+int ImmedConstBuffer__vslot35(this, ctorWord1, ctorWord3, compiler)
   undefined4 this;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 ctorWord1;
+  undefined4 ctorWord3;
   int compiler;
 {
   undefined4 *allocation;
@@ -426,15 +426,15 @@ int ImmedConstBuffer__vslot35(this, param_2, param_3, compiler)
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x34);
   *allocation = arena;
-  Resource__ctor_125d60(allocation + 1,this,param_2,param_3,compiler);
+  Resource__ctor_125d60(allocation + 1,this,ctorWord1,ctorWord3,compiler);
   return allocation + 1;
 }
 
 /* ImmedConstBuffer__vslot167 @ 0x126ccc (84 bytes) */
-int ImmedConstBuffer__vslot167(this, param_2, param_3, compiler)
+int ImmedConstBuffer__vslot167(this, ctorWord1, ctorWord3, compiler)
   undefined4 this;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 ctorWord1;
+  undefined4 ctorWord3;
   int compiler;
 {
   undefined4 *allocation;
@@ -443,15 +443,15 @@ int ImmedConstBuffer__vslot167(this, param_2, param_3, compiler)
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x38);
   *allocation = arena;
-  AddrIndexedSet__ctor_125f94(allocation + 1,this,param_2,param_3,compiler);
+  AddrIndexedSet__ctor_125f94(allocation + 1,this,ctorWord1,ctorWord3,compiler);
   return allocation + 1;
 }
 
 /* ImmedConstBuffer__vslot171 @ 0x126d58 (84 bytes) */
-int ImmedConstBuffer__vslot171(this, param_2, param_3, compiler)
+int ImmedConstBuffer__vslot171(this, ctorWord1, ctorWord3, compiler)
   undefined4 this;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 ctorWord1;
+  undefined4 ctorWord3;
   int compiler;
 {
   undefined4 *allocation;
@@ -460,7 +460,7 @@ int ImmedConstBuffer__vslot171(this, param_2, param_3, compiler)
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x34);
   *allocation = arena;
-  LoopRegister__ctor_126034(allocation + 1,this,param_2,param_3,compiler);
+  LoopRegister__ctor_126034(allocation + 1,this,ctorWord1,ctorWord3,compiler);
   return allocation + 1;
 }
 
@@ -488,10 +488,10 @@ int LoopIndexedSet__ctor_126de4(ctorWord2, ctorWord1, ctorWord3, compiler)
 }
 
 /* ImmedConstBuffer__vslot183 @ 0x126e90 (84 bytes) */
-int ImmedConstBuffer__vslot183(this, param_2, param_3, compiler)
+int ImmedConstBuffer__vslot183(this, ctorWord1, ctorWord3, compiler)
   undefined4 this;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 ctorWord1;
+  undefined4 ctorWord3;
   int compiler;
 {
   undefined4 *allocation;
@@ -500,15 +500,15 @@ int ImmedConstBuffer__vslot183(this, param_2, param_3, compiler)
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x38);
   *allocation = arena;
-  LoopIndexedOutputSet__ctor_126080(allocation + 1,this,param_2,param_3,compiler);
+  LoopIndexedOutputSet__ctor_126080(allocation + 1,this,ctorWord1,ctorWord3,compiler);
   return allocation + 1;
 }
 
 /* ImmedConstBuffer__vslot179 @ 0x126f1c (84 bytes) */
-int ImmedConstBuffer__vslot179(this, param_2, param_3, compiler)
+int ImmedConstBuffer__vslot179(this, ctorWord1, ctorWord3, compiler)
   undefined4 this;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 ctorWord1;
+  undefined4 ctorWord3;
   int compiler;
 {
   undefined4 *allocation;
@@ -517,15 +517,15 @@ int ImmedConstBuffer__vslot179(this, param_2, param_3, compiler)
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x38);
   *allocation = arena;
-  ((int (*)())LoopIndexedInputSet__ctor_126620)(allocation + 1,this,param_2,param_3,compiler);
+  ((int (*)())LoopIndexedInputSet__ctor_126620)(allocation + 1,this,ctorWord1,ctorWord3,compiler);
   return allocation + 1;
 }
 
 /* ImmedConstBuffer__vslot175 @ 0x126fa8 (84 bytes) */
-int ImmedConstBuffer__vslot175(this, param_2, param_3, compiler)
+int ImmedConstBuffer__vslot175(this, ctorWord1, ctorWord3, compiler)
   undefined4 this;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 ctorWord1;
+  undefined4 ctorWord3;
   int compiler;
 {
   undefined4 *allocation;
@@ -534,15 +534,15 @@ int ImmedConstBuffer__vslot175(this, param_2, param_3, compiler)
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x38);
   *allocation = arena;
-  ((int (*)())LoopIndexedConstSet__ctor_126538)(allocation + 1,this,param_2,param_3,compiler);
+  ((int (*)())LoopIndexedConstSet__ctor_126538)(allocation + 1,this,ctorWord1,ctorWord3,compiler);
   return allocation + 1;
 }
 
 /* ImmedConstBuffer__vslot187 @ 0x127034 (84 bytes) */
-int ImmedConstBuffer__vslot187(this, param_2, param_3, compiler)
+int ImmedConstBuffer__vslot187(this, ctorWord1, ctorWord3, compiler)
   undefined4 this;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 ctorWord1;
+  undefined4 ctorWord3;
   int compiler;
 {
   undefined4 *allocation;
@@ -551,15 +551,15 @@ int ImmedConstBuffer__vslot187(this, param_2, param_3, compiler)
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x34);
   *allocation = arena;
-  ((int (*)())ExportAddress__ctor_12614c)(allocation + 1,this,param_2,param_3,compiler);
+  ((int (*)())ExportAddress__ctor_12614c)(allocation + 1,this,ctorWord1,ctorWord3,compiler);
   return allocation + 1;
 }
 
 /* ImmedConstBuffer__vslot191 @ 0x1270c0 (84 bytes) */
-int ImmedConstBuffer__vslot191(this, param_2, param_3, compiler)
+int ImmedConstBuffer__vslot191(this, ctorWord1, ctorWord3, compiler)
   undefined4 this;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 ctorWord1;
+  undefined4 ctorWord3;
   int compiler;
 {
   undefined4 *allocation;
@@ -568,15 +568,15 @@ int ImmedConstBuffer__vslot191(this, param_2, param_3, compiler)
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x34);
   *allocation = arena;
-  ((int (*)())ExportSlot__ctor_126378)(allocation + 1,this,param_2,param_3,compiler);
+  ((int (*)())ExportSlot__ctor_126378)(allocation + 1,this,ctorWord1,ctorWord3,compiler);
   return allocation + 1;
 }
 
 /* ImmedConstBuffer__vslot79 @ 0x12714c (84 bytes) */
-int ImmedConstBuffer__vslot79(this, param_2, param_3, compiler)
+int ImmedConstBuffer__vslot79(this, ctorWord1, ctorWord3, compiler)
   undefined4 this;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 ctorWord1;
+  undefined4 ctorWord3;
   int compiler;
 {
   undefined4 *allocation;
@@ -585,15 +585,15 @@ int ImmedConstBuffer__vslot79(this, param_2, param_3, compiler)
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x34);
   *allocation = arena;
-  Physical__ctor_125c8c(allocation + 1,this,param_2,param_3,compiler);
+  Physical__ctor_125c8c(allocation + 1,this,ctorWord1,ctorWord3,compiler);
   return allocation + 1;
 }
 
 /* ImmedConstBuffer__vslot39 @ 0x1271d8 (84 bytes) */
-int ImmedConstBuffer__vslot39(this, param_2, param_3, compiler)
+int ImmedConstBuffer__vslot39(this, interpolatorKind, baseCtorArg4, compiler)
   undefined4 this;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 interpolatorKind;
+  undefined4 baseCtorArg4;
   int compiler;
 {
   undefined4 *allocation;
@@ -602,7 +602,7 @@ int ImmedConstBuffer__vslot39(this, param_2, param_3, compiler)
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x3c);
   *allocation = arena;
-  ExportValue__ctor_1250dc(allocation + 1,this,param_2,param_3,compiler);
+  ExportValue__ctor_1250dc(allocation + 1,this,interpolatorKind,baseCtorArg4,compiler);
   return allocation + 1;
 }
 
@@ -652,20 +652,20 @@ int FUN_001272cc(param_1, param_2)
 }
 
 /* FUN_001272d4 @ 0x1272d4 (80 bytes) */
-int FUN_001272d4(param_1, param_2, param_3)
-  int param_1;
+int FUN_001272d4(cache, param_2, param_3)
+  int cache;
   int *param_2;
   int *param_3;
 {
   if (*param_2 != 0x24) {
     return;
   }
-  if (*param_3 == *(int *)(param_1 + 0x44)) {
+  if (*param_3 == *(int *)(cache + 0x44)) {
     *param_2 = 6;
     *param_3 = 0;
     return;
   }
-  if (*param_3 != *(int *)(param_1 + 0x48)) {
+  if (*param_3 != *(int *)(cache + 0x48)) {
     return;
   }
   *param_2 = 7;
@@ -717,11 +717,11 @@ int FUN_00127324(program, registerFileKind, vregId, kindOut, indexOut)
 }
 
 /* FUN_0012740c @ 0x12740c (100 bytes) */
-int FUN_0012740c(param_1)
-  int param_1;
+int FUN_0012740c(owner)
+  int owner;
 {
   /* issue #64 live-repro: same iterator-object split as FUN_0011eaa0 (part_037.c), fixed earlier
-   * this session - auStack_38 is walked by HashTableIterator__advance/HashTableIterator__begin as param_1[0..4] (0x14 bytes)
+   * this session - auStack_38 is walked by HashTableIterator__advance/HashTableIterator__begin as owner[0..4] (0x14 bytes)
    * but declared only 16 bytes; local_28, the missing 5th word, is what this loop reads back as its
    * own continuation value. Separated, HashTableIterator__advance's real update never reached local_28, so the
    * loop never saw it become null - not just a hang: the same (unchanging) local_28 object got
@@ -732,7 +732,7 @@ int FUN_0012740c(param_1)
   unsigned char auStack_38 [0x14];
 #define local_28 (*(int **)(auStack_38 + 0x10))
   
-  HashTableIterator__begin(auStack_38,*(undefined4 *)(param_1 + 4));
+  HashTableIterator__begin(auStack_38,*(undefined4 *)(owner + 4));
   while (local_28 != (int *)0x0) {
     (**(code **)(*local_28 + 4))(local_28);
     HashTableIterator__advance(auStack_38);

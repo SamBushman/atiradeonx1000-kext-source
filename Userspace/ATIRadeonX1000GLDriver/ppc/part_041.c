@@ -265,19 +265,19 @@ LAB_00131ae0:
 }
 
 /* FUN_00131c10 @ 0x131c10 (100 bytes) */
-int FUN_00131c10(param_1)
-  int param_1;
+int FUN_00131c10(allocator)
+  int allocator;
 {
   int cachedObject;
   undefined4 baseHandle;
   undefined4 derivedHandle;
   
-  cachedObject = *(int *)(param_1 + 0x438);
+  cachedObject = *(int *)(allocator + 0x438);
   if (cachedObject == 0) {
-    baseHandle = ((int (*)())FUN_00131a80)(param_1);
-    derivedHandle = ((int (*)())FUN_001319d0)(param_1,baseHandle);
-    cachedObject = FUN_00130ec0(baseHandle,derivedHandle,*(undefined4 *)(param_1 + 8));
-    *(int *)(param_1 + 0x438) = cachedObject;
+    baseHandle = ((int (*)())FUN_00131a80)(allocator);
+    derivedHandle = ((int (*)())FUN_001319d0)(allocator,baseHandle);
+    cachedObject = FUN_00130ec0(baseHandle,derivedHandle,*(undefined4 *)(allocator + 8));
+    *(int *)(allocator + 0x438) = cachedObject;
   }
   return cachedObject;
 }
@@ -2122,11 +2122,11 @@ LAB_00134a58:
 }
 
 /* FUN_00134aa8 @ 0x134aa8 (8 bytes) */
-int FUN_00134aa8(param_1, param_2)
+int FUN_00134aa8(param_1, spillSlot)
   int param_1;
-  undefined4 param_2;
+  undefined4 spillSlot;
 {
-  *(undefined4 *)(param_1 + 0x14) = param_2;
+  *(undefined4 *)(param_1 + 0x14) = spillSlot;
   return;
 }
 
@@ -2183,31 +2183,31 @@ int pairIndex(param_1, nodeA, nodeBThenMax)
 }
 
 /* InterferenceMatrix__setPair @ 0x134b58 (76 bytes) */
-int InterferenceMatrix__setPair(param_1, param_2, param_3)
-  int *param_1;
-  undefined4 param_2;
-  undefined4 param_3;
+int InterferenceMatrix__setPair(graph, nodeA, nodeBThenMax)
+  int *graph;
+  undefined4 nodeA;
+  undefined4 nodeBThenMax;
 {
   uint bitIndex;
   int bitWordAddress;
   
-  bitWordAddress = *param_1;
-  bitIndex = ((int (*)())pairIndex)(param_1,param_2,param_3);
+  bitWordAddress = *graph;
+  bitIndex = ((int (*)())pairIndex)(graph,nodeA,nodeBThenMax);
   bitWordAddress = (bitIndex >> 3 & 0x1ffffffc) + bitWordAddress;
   *(uint *)(bitWordAddress + 8) = 1 << (bitIndex & 0x1f) | *(uint *)(bitWordAddress + 8);
   return;
 }
 
 /* InterferenceMatrix__testPair @ 0x134ba4 (76 bytes) */
-int InterferenceMatrix__testPair(param_1, param_2, param_3)
-  int *param_1;
-  undefined4 param_2;
-  undefined4 param_3;
+int InterferenceMatrix__testPair(graph, nodeA, nodeBThenMax)
+  int *graph;
+  undefined4 nodeA;
+  undefined4 nodeBThenMax;
 {
   uint bitIndex;
   
-  bitIndex = ((int (*)())pairIndex)(param_1,param_2,param_3);
-  return *(uint *)((bitIndex >> 3 & 0x1ffffffc) + *param_1 + 8) >> (bitIndex & 0x1f) & 1;
+  bitIndex = ((int (*)())pairIndex)(graph,nodeA,nodeBThenMax);
+  return *(uint *)((bitIndex >> 3 & 0x1ffffffc) + *graph + 8) >> (bitIndex & 0x1f) & 1;
 }
 
 /* InterferenceGraph__resolveNode @ 0x134bf0 (40 bytes) */
@@ -2255,12 +2255,12 @@ int FUN_00134c18(neighbourList, removedRoot, graph)
 }
 
 /* FUN_00134cd4 @ 0x134cd4 (20 bytes) */
-int FUN_00134cd4(param_1, value, elementIndex)
-  int param_1;
+int FUN_00134cd4(graph, value, elementIndex)
+  int graph;
   undefined4 value;
   undefined4 elementIndex;
 {
-  return storeIndexedWord(value,elementIndex,*(undefined4 *)(param_1 + 0x20));
+  return storeIndexedWord(value,elementIndex,*(undefined4 *)(graph + 0x20));
 }
 
 /* ColorGraph__countSameClassNeighbors @ 0x134ce8 (200 bytes) */
@@ -2302,13 +2302,13 @@ int ColorGraph__countSameClassNeighbors(nodeRecord, node, classArray, graph)
 }
 
 /* FUN_00134db0 @ 0x134db0 (56 bytes) */
-int FUN_00134db0(param_1)
-  undefined4 *param_1;
+int FUN_00134db0(copyState)
+  undefined4 *copyState;
 {
   int remainingWords;
   int *bitSet;
   
-  bitSet = (int *)*param_1;
+  bitSet = (int *)*copyState;
   remainingWords = *bitSet;
   if (remainingWords == 0) {
     return;
@@ -2388,15 +2388,15 @@ int FUN_00134ef4(neighbourList, slotInBlockRef, currentBlockRef, compiler)
 }
 
 /* storeAfterLocate @ 0x134fc0 (80 bytes) */
-int storeAfterLocate(param_1, param_2, param_3, param_4, compiler)
-  undefined4 param_1;
+int storeAfterLocate(neighbourList, param_2, slotInBlockRef, currentBlockRef, compiler)
+  undefined4 neighbourList;
   undefined4 param_2;
-  int *param_3;
-  int *param_4;
+  int *slotInBlockRef;
+  int *currentBlockRef;
   undefined4 compiler;
 {
-  ((int (*)())FUN_00134ef4)(param_1,param_3,param_4,compiler);
-  *(undefined4 *)(*param_4 + *param_3 * 4) = param_2;
+  ((int (*)())FUN_00134ef4)(neighbourList,slotInBlockRef,currentBlockRef,compiler);
+  *(undefined4 *)(*currentBlockRef + *slotInBlockRef * 4) = param_2;
   return;
 }
 
@@ -2421,17 +2421,17 @@ int FUN_00135010(param_1)
 }
 
 /* FUN_00135090 @ 0x135090 (128 bytes) */
-int FUN_00135090(param_1)
-  int param_1;
+int FUN_00135090(node)
+  int node;
 {
   int sideTable;
   int chunk;
   
-  while (chunk = *(int *)(param_1 + 8), chunk != 0) {
-    *(undefined4 *)(param_1 + 8) = *(undefined4 *)(chunk + 0x1c);
+  while (chunk = *(int *)(node + 8), chunk != 0) {
+    *(undefined4 *)(node + 8) = *(undefined4 *)(chunk + 0x1c);
     Arena__free(*(undefined4 *)(chunk + -4),chunk + -4);
   }
-  sideTable = *(int *)(param_1 + 0x10);
+  sideTable = *(int *)(node + 0x10);
   if (sideTable != 0) {
     Arena__free(*(undefined4 *)(sideTable + 0xc),*(undefined4 *)(sideTable + 8));
     Arena__free(*(undefined4 *)(sideTable + -4),sideTable + -4);
@@ -2505,18 +2505,18 @@ int FUN_001351c4(param_1, param_2, param_3, param_4, compiler)
 }
 
 /* FUN_00135278 @ 0x135278 (188 bytes) */
-int FUN_00135278(param_1)
-  int param_1;
+int FUN_00135278(copyState)
+  int copyState;
 {
   uint vectorCount;
   int *elementSlot;
   uint loopIndex;
   uint *slotVector;
   
-  if (0 < *(int *)(param_1 + 0xc)) {
+  if (0 < *(int *)(copyState + 0xc)) {
     loopIndex = 0;
     do {
-      slotVector = *(uint **)(param_1 + 4);
+      slotVector = *(uint **)(copyState + 4);
       if (loopIndex < *slotVector) {
         vectorCount = slotVector[1];
         if (vectorCount <= loopIndex) {
@@ -2530,7 +2530,7 @@ int FUN_00135278(param_1)
       }
       loopIndex = loopIndex + 1;
       *(undefined4 *)(*elementSlot + 4) = 0;
-    } while ((int)loopIndex < *(int *)(param_1 + 0xc));
+    } while ((int)loopIndex < *(int *)(copyState + 0xc));
   }
   return;
 }
@@ -4371,8 +4371,8 @@ int FUN_00137f14(liveness, inst, liveBits)
 }
 
 /* FUN_00138080 @ 0x138080 (176 bytes) */
-int FUN_00138080(param_1)
-  int param_1;
+int FUN_00138080(program)
+  int program;
 {
   int bitsetAt104;
   int bitsetAt100;
@@ -4383,10 +4383,10 @@ int FUN_00138080(param_1)
   int block;
   
   loopIndex = 1;
-  blockArrayCursor = (int *)Program__getBlocksArray(param_1);
+  blockArrayCursor = (int *)Program__getBlocksArray(program);
   while( true ) {
     blockArrayCursor = blockArrayCursor + 1;
-    listCount = DList__count(param_1 + 0x37c);
+    listCount = DList__count(program + 0x37c);
     if (listCount < loopIndex) break;
     block = *blockArrayCursor;
     bitsetAt108 = *(int *)(block + 0x108);
@@ -4485,20 +4485,20 @@ int FUN_00138240(inst, param_2)
 }
 
 /* FUN_001382b8 @ 0x1382b8 (216 bytes) */
-int FUN_001382b8(inst, param_2, param_3)
+int FUN_001382b8(inst, param_2, laneDefOut)
   int *inst;
   uint param_2;
-  uint *param_3;
+  uint *laneDefOut;
 {
   uint laneIndexAfter;
   int operandRecord;
   int vtableQueryResult;
   uint laneIndexBefore;
   
-  *param_3 = param_2;
+  *laneDefOut = param_2;
 LAB_001382d4:
   do {
-    laneIndexBefore = *param_3;
+    laneIndexBefore = *laneDefOut;
     operandRecord = IRInst__getOperandRecord(inst,0);
     if (*(char *)(laneIndexBefore + operandRecord + 0x10) == '\0') {
       if ((inst[5] & 1U) != 0) {
@@ -4506,9 +4506,9 @@ LAB_001382d4:
       }
       vtableQueryResult = (**(code **)(*inst + 100))(inst);
       if (vtableQueryResult == 0) goto LAB_001382d4;
-      laneIndexAfter = *param_3;
+      laneIndexAfter = *laneDefOut;
       operandRecord = IRInst__getOperandRecord(inst,1);
-      *param_3 = (uint)*(byte *)(laneIndexAfter + operandRecord + 0x10);
+      *laneDefOut = (uint)*(byte *)(laneIndexAfter + operandRecord + 0x10);
       inst = (int *)IRInst__getOperandSource(inst,1);
     }
     else {
@@ -5033,17 +5033,17 @@ LAB_00138d24: ;
 }
 
 /* Program__finishUsevectorChain @ 0x138fb4 (84 bytes) */
-int Program__finishUsevectorChain(inst, param_2, param_3, param_4)
+int Program__finishUsevectorChain(inst, param_2, param_3, program)
   undefined4 inst;
   undefined4 param_2;
   undefined4 param_3;
-  int param_4;
+  int program;
 {
   int *a0;
   
-  a0 = *(int **)(*(int *)(param_4 + 8) + 0x30c);
-  (**(code **)(*a0 + 0x6c))(a0,inst,param_4,param_4);
-  return FUN_0014846c(inst,param_4);
+  a0 = *(int **)(*(int *)(program + 8) + 0x30c);
+  (**(code **)(*a0 + 0x6c))(a0,inst,program,program);
+  return FUN_0014846c(inst,program);
 }
 
 /* FUN_00139008 @ 0x139008 (44 bytes) */
@@ -5068,16 +5068,16 @@ int FUN_00139008(param_1)
 }
 
 /* FUN_00139034 @ 0x139034 (40 bytes) */
-int FUN_00139034(param_1, param_2, param_3, param_4)
+int FUN_00139034(param_1, block, param_3, param_4)
   int param_1;
-  int param_2;
+  int block;
   int param_3;
   int param_4;
 {
   int currentValue;
   
   currentValue = *(int *)(param_1 + 0x158);
-  if (((currentValue != param_3) && (currentValue != param_4)) && (currentValue != param_2)) {
+  if (((currentValue != param_3) && (currentValue != param_4)) && (currentValue != block)) {
     return 1;
   }
   return 0;

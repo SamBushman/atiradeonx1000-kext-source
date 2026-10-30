@@ -700,9 +700,9 @@ LAB_00128e98:
 }
 
 /* KhanPs__ctor_128fd0 @ 0x128fd0 (312 bytes) */
-int KhanPs__ctor_128fd0(this, param_2, param_3)
+int KhanPs__ctor_128fd0(this, compiler, param_3)
   undefined4 *this;
-  undefined4 param_2;
+  undefined4 compiler;
   int param_3;
 {
   undefined *vtable;
@@ -735,15 +735,15 @@ int KhanPs__ctor_128fd0(this, param_2, param_3)
   this[2] = this[2] | 0x20000;
   ((int (*)())KhanPs__vslot96_installHardwareTables)(this);
   if (param_3 != 0) {
-    ((int (*)())KhanPs__createSchedModels)(this,param_2);
+    ((int (*)())KhanPs__createSchedModels)(this,compiler);
   }
   return;
 }
 
 /* KhanPs__ctor_129130 @ 0x129130 (312 bytes) */
-int KhanPs__ctor_129130(this, param_2, param_3)
+int KhanPs__ctor_129130(this, compiler, param_3)
   undefined4 *this;
-  undefined4 param_2;
+  undefined4 compiler;
   int param_3;
 {
   undefined *vtable;
@@ -776,25 +776,25 @@ int KhanPs__ctor_129130(this, param_2, param_3)
   this[2] = this[2] | 0x20000;
   ((int (*)())KhanPs__vslot96_installHardwareTables)(this);
   if (param_3 != 0) {
-    ((int (*)())KhanPs__createSchedModels)(this,param_2);
+    ((int (*)())KhanPs__createSchedModels)(this,compiler);
   }
   return;
 }
 
 /* FudoVs__createSchedModels @ 0x129290 (176 bytes) */
-int FudoVs__createSchedModels(this, param_2)
+int FudoVs__createSchedModels(this, compiler)
   int this;
-  undefined4 param_2;
+  undefined4 compiler;
 {
   undefined4 *secondarySchedModel;
   undefined *vtable;
   undefined4 *vertexSchedModel;
   undefined *vertexSchedVtable;
   
-  vertexSchedModel = (undefined4 *)Compiler__allocateOrFail(param_2,0x3c);
+  vertexSchedModel = (undefined4 *)Compiler__allocateOrFail(compiler,0x3c);
   vtable = PTR_DAT_001e9110;
   vertexSchedVtable = PTR_DAT_001e90fc + 8;
-  vertexSchedModel[2] = param_2;
+  vertexSchedModel[2] = compiler;
   *vertexSchedModel = vertexSchedVtable;
   vertexSchedModel[1] = 0;
   *vertexSchedModel = vtable + 8;
@@ -802,7 +802,7 @@ int FudoVs__createSchedModels(this, param_2)
   SchedModel__resetCounters(vertexSchedModel);
   vertexSchedModel[0xe] = 0;
   *(undefined4 **)(this + 0x60) = vertexSchedModel;
-  secondarySchedModel = (undefined4 *)Compiler__allocateOrFail(param_2,0xc);
+  secondarySchedModel = (undefined4 *)Compiler__allocateOrFail(compiler,0xc);
   vtable = PTR_DAT_001e9100;
   secondarySchedModel[1] = 1;
   secondarySchedModel[2] = 0;
@@ -1732,9 +1732,9 @@ int KhanVs__createSchedModels(this, compiler)
 }
 
 /* KhanVs__ctor_12a578 @ 0x12a578 (288 bytes) */
-int KhanVs__ctor_12a578(this, param_2, param_3)
+int KhanVs__ctor_12a578(this, compiler, param_3)
   undefined4 *this;
-  undefined4 param_2;
+  undefined4 compiler;
   int param_3;
 {
   undefined *vtable;
@@ -1769,15 +1769,15 @@ int KhanVs__ctor_12a578(this, param_2, param_3)
   this[0x18] = 0;
   ((int (*)())KhanVs__vslot96_installHardwareTables)(this);
   if (param_3 != 0) {
-    ((int (*)())KhanVs__createSchedModels)(this,param_2);
+    ((int (*)())KhanVs__createSchedModels)(this,compiler);
   }
   return;
 }
 
 /* KhanVs__ctor_12a6c0 @ 0x12a6c0 (288 bytes) */
-int KhanVs__ctor_12a6c0(this, param_2, param_3)
+int KhanVs__ctor_12a6c0(this, compiler, param_3)
   undefined4 *this;
-  undefined4 param_2;
+  undefined4 compiler;
   int param_3;
 {
   undefined *vtable;
@@ -1812,7 +1812,7 @@ int KhanVs__ctor_12a6c0(this, param_2, param_3)
   this[0x18] = 0;
   ((int (*)())KhanVs__vslot96_installHardwareTables)(this);
   if (param_3 != 0) {
-    ((int (*)())KhanVs__createSchedModels)(this,param_2);
+    ((int (*)())KhanVs__createSchedModels)(this,compiler);
   }
   return;
 }
@@ -1898,18 +1898,18 @@ int KhanPs__vslot96_installHardwareTables(this)
 }
 
 /* FUN_0012aa78 @ 0x12aa78 (104 bytes) */
-int FUN_0012aa78(compiler, param_2, param_3, param_4, param_5)
+int FUN_0012aa78(compiler, unrollCount, loopStart, loopStep, block)
   int compiler;
-  int param_2;
-  int param_3;
-  int param_4;
-  int param_5;
+  int unrollCount;
+  int loopStart;
+  int loopStep;
+  int block;
 {
-  if (((*(int *)(param_5 + 0x140) == 0) ||
-      (param_2 * param_4 + param_3 <= *(int *)(*(int *)(compiler + COMP_target) + 0x2c))) &&
+  if (((*(int *)(block + 0x140) == 0) ||
+      (unrollCount * loopStep + loopStart <= *(int *)(*(int *)(compiler + COMP_target) + 0x2c))) &&
      ((*(int *)(compiler + 0x318) == 0 ||
-      ((param_2 <= *(int *)(compiler + 0x478) &&
-       (param_2 * (*(int *)(compiler + COMP_nextInstId) - *(int *)(param_5 + 0x130)) <=
+      ((unrollCount <= *(int *)(compiler + 0x478) &&
+       (unrollCount * (*(int *)(compiler + COMP_nextInstId) - *(int *)(block + 0x130)) <=
         *(int *)(compiler + 0x478) << 1)))))) {
     return 0;
   }
@@ -1917,18 +1917,18 @@ int FUN_0012aa78(compiler, param_2, param_3, param_4, param_5)
 }
 
 /* FUN_0012aae0 @ 0x12aae0 (36 bytes) */
-int FUN_0012aae0(param_1, param_2)
-  int param_1;
-  int param_2;
+int FUN_0012aae0(compiler, unrollCount)
+  int compiler;
+  int unrollCount;
 {
-  if (param_2 < 1) {
+  if (unrollCount < 1) {
     return;
   }
-  *(undefined4 *)(param_1 + 0x47c) = 1;
-  if (param_2 <= *(int *)(param_1 + 0x480)) {
+  *(undefined4 *)(compiler + 0x47c) = 1;
+  if (unrollCount <= *(int *)(compiler + 0x480)) {
     return;
   }
-  *(int *)(param_1 + 0x480) = param_2;
+  *(int *)(compiler + 0x480) = unrollCount;
   return;
 }
 
@@ -2054,14 +2054,14 @@ int FUN_0012ae1c(param_1)
 }
 
 /* FUN_0012ae6c @ 0x12ae6c (132 bytes) */
-int FUN_0012ae6c(block, param_2, param_3, param_4, param_5, param_6, param_7)
+int FUN_0012ae6c(block, optionResult, armLimitKind, staleArg4, staleArg5, staleArg6, staleArg7)
   int block;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+  undefined4 optionResult;
+  undefined4 armLimitKind;
+  undefined4 staleArg4;
+  undefined4 staleArg5;
+  undefined4 staleArg6;
+  undefined4 staleArg7;
 {
   int *inst;
   int *nextInstLink;
@@ -2208,8 +2208,8 @@ int FUN_0012b140(block)
 }
 
 /* FUN_0012b248 @ 0x12b248 (144 bytes) */
-int FUN_0012b248(param_1, block, program)
-  int param_1;
+int FUN_0012b248(zeroMovInst, block, program)
+  int zeroMovInst;
   undefined4 block;
   int program;
 {
@@ -2222,7 +2222,7 @@ int FUN_0012b248(param_1, block, program)
   *(int *)(*(int *)(program + 8) + 0x3ac) = newVRegId;
   inst = IRInst__create(0x31,*(undefined4 *)(program + 8));
   operandRecord = IRInst__getOperandRecord(inst,0);
-  sourceValue = *(undefined4 *)(param_1 + 0x8c);
+  sourceValue = *(undefined4 *)(zeroMovInst + 0x8c);
   *(undefined4 *)(operandRecord + 0xc) = 0;
   *(int *)(operandRecord + 8) = newVRegId;
   IRInst__setOperandRef(inst,1,sourceValue);
@@ -2232,23 +2232,23 @@ int FUN_0012b248(param_1, block, program)
 }
 
 /* FUN_0012b2d8 @ 0x12b2d8 (132 bytes) */
-int FUN_0012b2d8(param_1, block, param_3, param_4)
+int FUN_0012b2d8(param_1, block, param_3, program)
   int param_1;
   undefined4 block;
   undefined4 param_3;
-  int param_4;
+  int program;
 {
   undefined4 callResult;
   int operandRecord;
   undefined4 uVar3;
   
-  callResult = IRInst__create(0x31,*(undefined4 *)(param_4 + 8));
+  callResult = IRInst__create(0x31,*(undefined4 *)(program + 8));
   operandRecord = IRInst__getOperandRecord(callResult,0);
   uVar3 = *(undefined4 *)(param_1 + 0xa4);
   *(undefined4 *)(operandRecord + 0xc) = 0;
   *(undefined4 *)(operandRecord + 8) = param_3;
   IRInst__setOperandRef(callResult,1,uVar3);
-  IRInst__bindOperandRegisters(param_4,callResult);
+  IRInst__bindOperandRegisters(program,callResult);
   Block__appendInst(block,callResult);
   return callResult;
 }

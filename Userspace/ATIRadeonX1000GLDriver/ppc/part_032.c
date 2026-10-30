@@ -322,11 +322,11 @@ int FUN_0010fc88(bindContext, vector, param_3, program)
 }
 
 /* FUN_0010fd98 @ 0x10fd98 (396 bytes) */
-int FUN_0010fd98(param_1, vector, param_3, param_4)
-  undefined4 param_1;
+int FUN_0010fd98(scopeId, vector, param_3, program)
+  undefined4 scopeId;
   uint *vector;
   int *param_3;
-  int param_4;
+  int program;
 {
   bool bVar1;
   int iVar2;
@@ -398,7 +398,7 @@ LAB_0010febc:
     } while ((int)loopIndex < (int)vectorCount);
     iVar3 = *param_3;
   }
-  return ((int (*)())FUN_0010fa24)(param_1,local_f8,iVar11,iVar3,*(undefined4 *)(param_4 + 0x418));
+  return ((int (*)())FUN_0010fa24)(scopeId,local_f8,iVar11,iVar3,*(undefined4 *)(program + 0x418));
 }
 
 /* FUN_0010ff24 @ 0x10ff24 (252 bytes) */
@@ -1843,8 +1843,8 @@ int Program__packPsInputs(program)
   int program;
 {
   bool moreLanes;
-  undefined4 *puVar2;
-  undefined4 *puVar3;
+  undefined4 *laneKindSlot;
+  undefined4 *laneIndexSlot;
   int *allocation;
   uint uVar5;
   int *piVar6;
@@ -1856,7 +1856,7 @@ int Program__packPsInputs(program)
   undefined4 uVar12;
   undefined4 *puVar13;
   uint candidateCount;
-  undefined1 *puVar15;
+  undefined1 *laneSlotCursor;
   int mergeCount;
   int *targetBlock;
   uint *candidateVector;
@@ -1955,15 +1955,15 @@ int Program__packPsInputs(program)
                     ((iVar7 == *(int *)(otherLoad + 0x13c) && (iVar22 == *(int *)(otherLoad + 0x140)))))))
                 {
                   iVar10 = 0;
-                  puVar15 = local_58 + iVar19 * 4;
+                  laneSlotCursor = local_58 + iVar19 * 4;
                   do {
                     operandRecord = IRInst__getOperandRecord(otherLoad,0);
                     if (*(char *)(iVar10 + operandRecord + 0x10) != '\x01') {
                       uVar12 = IRLoadInterp__laneKind(otherLoad,iVar10);
-                      *(undefined4 *)(puVar15 + 8) = uVar12;
+                      *(undefined4 *)(laneSlotCursor + 8) = uVar12;
                       uVar12 = IRLoadInterp__laneIndex(otherLoad,iVar10);
-                      *(undefined4 *)(puVar15 + 0x18) = uVar12;
-                      puVar15 = puVar15 + 4;
+                      *(undefined4 *)(laneSlotCursor + 0x18) = uVar12;
+                      laneSlotCursor = laneSlotCursor + 4;
                       local_58[iVar19] = (char)iVar10;
                       iVar19 = iVar19 + 1;
                     }
@@ -2011,11 +2011,11 @@ int Program__packPsInputs(program)
                     *(undefined1 *)(piVar24 + 0x27) = 0;
                     piVar24 = (int *)((int)piVar24 + 1);
                     (**(code **)(*piVar6 + 0x88))(piVar6,1,iVar26,local_98[iVar26]);
-                    puVar2 = (undefined4 *)((int)local_90 + iVar22);
-                    puVar3 = (undefined4 *)((int)local_80 + iVar22);
+                    laneKindSlot = (undefined4 *)((int)local_90 + iVar22);
+                    laneIndexSlot = (undefined4 *)((int)local_80 + iVar22);
                     iVar7 = iVar26 + 1;
                     iVar22 = iVar22 + 4;
-                    IRLoadInterp__setLane(piVar6,iVar26,3,*puVar2,*puVar3);
+                    IRLoadInterp__setLane(piVar6,iVar26,3,*laneKindSlot,*laneIndexSlot);
                     iVar26 = iVar7;
                   } while (iVar19 != iVar7);
                 }
@@ -2583,21 +2583,21 @@ int OpcodeTraits__getField34(opcode, compiler)
 }
 
 /* OpcodeTraits__instFlagBit2 @ 0x11346c (80 bytes) */
-int OpcodeTraits__instFlagBit2(param_1, param_2)
-  int param_1;
+int OpcodeTraits__instFlagBit2(compiler, param_2)
+  int compiler;
   int param_2;
 {
   int iVar1;
   
-  iVar1 = (**(code **)(**(int **)(param_1 + 0x30c) + 0x16c))(*(int **)(param_1 + 0x30c),param_2);
+  iVar1 = (**(code **)(**(int **)(compiler + 0x30c) + 0x16c))(*(int **)(compiler + 0x30c),param_2);
   return *(uint *)(iVar1 + *(int *)(*(int *)(param_2 + 0x88) + 8) * 0x38) >> 2 & 1;
 }
 
 /* OpcodeInfo__getResultMode @ 0x1134bc (152 bytes) */
-int OpcodeInfo__getResultMode(param_1, param_2, param_3)
+int OpcodeInfo__getResultMode(param_1, param_2, program)
   int param_1;
   int *param_2;
-  int param_3;
+  int program;
 {
   int vtableQueryResult;
   int instFlagBit2Result;
@@ -2605,7 +2605,7 @@ int OpcodeInfo__getResultMode(param_1, param_2, param_3)
   
   resultMode = *(int *)(param_1 + 0xc);
   if (resultMode == 0) {
-    instFlagBit2Result = ((int (*)())OpcodeTraits__instFlagBit2)(*(undefined4 *)(param_3 + 8),param_2);
+    instFlagBit2Result = ((int (*)())OpcodeTraits__instFlagBit2)(*(undefined4 *)(program + 8),param_2);
     if (instFlagBit2Result != 0) {
       return 1;
     }
@@ -2618,7 +2618,7 @@ int OpcodeInfo__getResultMode(param_1, param_2, param_3)
   if (vtableQueryResult != 0) {
     return 9;
   }
-  instFlagBit2Result = ((int (*)())OpcodeTraits__instFlagBit2)(*(undefined4 *)(param_3 + 8),param_2);
+  instFlagBit2Result = ((int (*)())OpcodeTraits__instFlagBit2)(*(undefined4 *)(program + 8),param_2);
   if (instFlagBit2Result != 0) {
     return 1;
   }
@@ -2742,13 +2742,13 @@ int FUN_0011370c(param_1, param_2)
 }
 
 /* FUN_00113734 @ 0x113734 (104 bytes) */
-int FUN_00113734(compiler, param_2, param_3, param_4, param_5, param_6, param_7)
+int FUN_00113734(compiler, inst, param_3, destDescriptor, param_5, foldedResult, param_7)
   int compiler;
-  int param_2;
+  int inst;
   undefined4 param_3;
-  undefined4 param_4;
+  undefined4 destDescriptor;
   undefined4 param_5;
-  undefined4 param_6;
+  undefined4 foldedResult;
   undefined4 param_7;
 {
   uint flagBit2;
@@ -2759,7 +2759,7 @@ int FUN_00113734(compiler, param_2, param_3, param_4, param_5, param_6, param_7)
   targetObject = *(int **)(compiler + 0x30c);
   if ((targetObject[2] & 0x10U) != 0) {
     opcodeFlagTable = (**(code **)(*targetObject + 0x16c))(targetObject);
-    flagBit2 = *(uint *)(opcodeFlagTable + *(int *)(*(int *)(param_2 + 0x88) + 8) * 0x38) >> 2 & 1;
+    flagBit2 = *(uint *)(opcodeFlagTable + *(int *)(*(int *)(inst + 0x88) + 8) * 0x38) >> 2 & 1;
   }
   return flagBit2;
 }

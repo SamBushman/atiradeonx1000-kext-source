@@ -83,3 +83,6 @@ local	KhanVs__vslot9_createCompareInst	param_8	sourceTokens	INFERRED	structure w
 local	KhanVs__vslot9_createCompareInst	param_9	insertAfter	INFERRED	third argument of Program__appendInst
 local	KhanVs__vslot9_createCompareInst	uVar8	program	INFERRED	compiler+COMP_currentProgram
 local	FUN_0012eacc	puVar9	armBlock	INFERRED	new block stored in if-header word 0x4f
+local	Program__packPsInputs	puVar2	laneKindSlot	INFERRED	destination slot in the lane-kind array (local_90 + offset)
+local	Program__packPsInputs	puVar3	laneIndexSlot	INFERRED	destination slot in the lane-index array (local_80 + offset)
+local	Program__packPsInputs	puVar15	laneSlotCursor	INFERRED	cursor into the merged lane arrays

@@ -733,11 +733,11 @@ int IRInst__foldMovSourceSelect(outSelect, inst, operandIndex, program)
 }
 
 /* IRInst__replaceWithMovOfSource @ 0x10d15c (448 bytes) */
-int IRInst__replaceWithMovOfSource(inst, operandIndex, trackUses, param_4)
+int IRInst__replaceWithMovOfSource(inst, operandIndex, trackUses, compiler)
   int *inst;
   int operandIndex;
   int trackUses;
-  int param_4;
+  int compiler;
 {
   int operandRecord3;
   int operandRecord2;
@@ -759,7 +759,7 @@ int IRInst__replaceWithMovOfSource(inst, operandIndex, trackUses, param_4)
   int lastOperandSource;
   undefined4 lastOperandFlags;
   
-  program = *(int *)(param_4 + 0x6c4);
+  program = *(int *)(compiler + 0x6c4);
   nextLink = inst[2];
   ownerBlock = inst[0x56];
   debugVector = inst[4];
@@ -783,13 +783,13 @@ int IRInst__replaceWithMovOfSource(inst, operandIndex, trackUses, param_4)
     for (; operandRecord = (**(code **)(*inst + 0x14))(inst), otherIndex <= operandRecord; otherIndex = otherIndex + 1) {
       if (otherIndex != operandIndex) {
         operandVReg2 = IRInst__getOperandSource(inst,otherIndex);
-        IRInst__dropCounterAndDeleteIfUnused(operandVReg2,param_4);
+        IRInst__dropCounterAndDeleteIfUnused(operandVReg2,compiler);
       }
     }
     DList__unlink(inst);
   }
   else {
-    (**(code **)(*inst + 0xc))(inst,1,param_4);
+    (**(code **)(*inst + 0xc))(inst,1,compiler);
   }
   IRInst__reinitAsMov(inst,0x31,*(undefined4 *)(program + 8));
   inst[4] = debugVector;
@@ -799,13 +799,13 @@ int IRInst__replaceWithMovOfSource(inst, operandIndex, trackUses, param_4)
   inst[0x48] = outputClampFlag;
   inst[0x49] = scaleExponentWord;
   inst[0x27] = destSelect;
-  IRInst__setOperandSource(inst,1,operandVReg,0,param_4);
+  IRInst__setOperandSource(inst,1,operandVReg,0,compiler);
   IROperand__setModifierBits(inst + 0x29,1,operandModifiers & 1);
   IROperand__setModifierBits(inst + 0x29,2,operandModifiers >> 1 & 1);
   operandRecord2 = IRInst__getOperandRecord(inst,1);
   *(undefined4 *)(operandRecord2 + 0x10) = operandSelect;
   if (lastOperandSource != 0) {
-    IRInst__setLastOperandFromRecord(inst,&lastOperandRecord,trackUses,param_4);
+    IRInst__setLastOperandFromRecord(inst,&lastOperandRecord,trackUses,compiler);
   }
   return Block__insertInstBefore(ownerBlock,nextLink,inst);
 }
@@ -1659,14 +1659,14 @@ int FUN_0010e56c(backend, program)
 }
 
 /* FUN_0010e634 @ 0x10e634 (92 bytes) */
-int FUN_0010e634(param_1)
-  int *param_1;
+int FUN_0010e634(outputInst)
+  int *outputInst;
 {
   int iVar1;
   undefined4 uVar2;
   
-  iVar1 = (**(code **)(*param_1 + 0x68))(param_1);
-  if ((iVar1 == 0) || (uVar2 = 1, param_1[0x4f] - 6U < 2)) {
+  iVar1 = (**(code **)(*outputInst + 0x68))(outputInst);
+  if ((iVar1 == 0) || (uVar2 = 1, outputInst[0x4f] - 6U < 2)) {
     uVar2 = 0;
   }
   return uVar2;
@@ -1838,29 +1838,29 @@ int FUN_0010e95c(packEntry)
 }
 
 /* FUN_0010e9d0 @ 0x10e9d0 (96 bytes) */
-int FUN_0010e9d0(param_1, param_2)
-  undefined4 *param_1;
-  int param_2;
+int FUN_0010e9d0(candidateGroup, laneIndex)
+  undefined4 *candidateGroup;
+  int laneIndex;
 {
   int iVar1;
   
-  if ((param_1[param_2 + 7] == 0) &&
-     (iVar1 = IRInst__getOperandRecord(*param_1,0), *(char *)(param_2 + iVar1 + 0x10) == '\x01')) {
+  if ((candidateGroup[laneIndex + 7] == 0) &&
+     (iVar1 = IRInst__getOperandRecord(*candidateGroup,0), *(char *)(laneIndex + iVar1 + 0x10) == '\x01')) {
     return 1;
   }
   return 0;
 }
 
 /* FUN_0010ea30 @ 0x10ea30 (164 bytes) */
-int FUN_0010ea30(param_1)
-  int param_1;
+int FUN_0010ea30(program)
+  int program;
 {
   uint programFlags;
   code *UNRECOVERED_JUMPTABLE;
   int *targetObject;
   int compiler;
   
-  compiler = *(int *)(param_1 + 8);
+  compiler = *(int *)(program + 8);
   programFlags = *(uint *)(*(int *)(compiler + 0x6c4) + 0x30);
   if ((programFlags & 1) == 0) {
     if ((programFlags & 0x2000) == 0) {
@@ -1870,13 +1870,13 @@ int FUN_0010ea30(param_1)
     UNRECOVERED_JUMPTABLE = *(code **)(*targetObject + 0x15c);
   }
   else {
-    (**(code **)(**(int **)(compiler + 0x30c) + 0x164))(*(int **)(compiler + 0x30c),param_1);
-    targetObject = *(int **)(*(int *)(param_1 + 8) + 0x30c);
+    (**(code **)(**(int **)(compiler + 0x30c) + 0x164))(*(int **)(compiler + 0x30c),program);
+    targetObject = *(int **)(*(int *)(program + 8) + 0x30c);
     UNRECOVERED_JUMPTABLE = *(code **)(*targetObject + 0x160);
   }
                     
                     
-  (*UNRECOVERED_JUMPTABLE)(targetObject,param_1);
+  (*UNRECOVERED_JUMPTABLE)(targetObject,program);
   return;
 }
 
