@@ -2322,29 +2322,29 @@ int fragmentTranslateTrig(translator, slot, ilInstr)
 {
   int allocation;
   undefined4 *tokenWritePtr;
-  undefined2 uVar2;
+  undefined2 tempRegisterHalf;
   uint tokenCapacity;
   int tokenCount;
-  undefined4 uVar5;
+  undefined4 tempRegister;
   int *tokenDataPtrAddr;
   undefined4 uStack_58;
-  undefined4 uStack_54;
-  undefined4 uStack_50;
-  undefined4 uStack_4c;
+  undefined4 ilInstDst;
+  undefined4 ilInstDstMask;
+  undefined4 ilInstSrc0;
   undefined4 uStack_40;
   
   _memcpy(&uStack_58,ilInstr,0x24);
-  uVar5 = *(undefined4 *)(translator + 0x20);
+  tempRegister = *(undefined4 *)(translator + 0x20);
   *(undefined4 *)(ilInstr + 0x18) = 0;
-  uVar2 = (undefined2)uVar5;
+  tempRegisterHalf = (undefined2)tempRegister;
   *(undefined4 *)(ilInstr + 0xc) = 0x40000;
-  *(undefined2 *)(ilInstr + 0xe) = uVar2;
-  uStack_50 = 0x55;
-  uStack_54 = CONCAT22(4,uVar2);
+  *(undefined2 *)(ilInstr + 0xe) = tempRegisterHalf;
+  ilInstDstMask = 0x55;
+  ilInstDst = CONCAT22(4,tempRegisterHalf);
   uStack_58 = 0x4d;
   *(uint *)(ilInstr + 0x18) = *(uint *)(ilInstr + 0x18) & 0xffff0000 | 0x3210;
   *(uint *)(ilInstr + 0xc) = *(uint *)(ilInstr + 0xc) | 0x400000;
-  uStack_54 = uStack_54 | 0x400000;
+  ilInstDst = ilInstDst | 0x400000;
   if (*(int *)(translator + 0x24) == 0) {
     tokenDataPtrAddr = (int *)(translator + 0x28);
     tokenCount = *(int *)(translator + 0x2c);
@@ -2377,9 +2377,9 @@ int fragmentTranslateTrig(translator, slot, ilInstr)
     *(int *)(translator + 0x2c) = tokenCount + 5;
     tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
     *tokenWritePtr = uStack_58;
-    tokenWritePtr[1] = uStack_54;
-    tokenWritePtr[2] = uStack_50;
-    tokenWritePtr[3] = uStack_4c;
+    tokenWritePtr[1] = ilInstDst;
+    tokenWritePtr[2] = ilInstDstMask;
+    tokenWritePtr[3] = ilInstSrc0;
     tokenWritePtr[4] = uStack_40;
   }
 LAB_000414c0:

@@ -364,21 +364,21 @@ int FUN_00054590(glContext, program, entryTotal, entrySymbols)
 }
 
 /* FUN_000546d0 @ 0x546d0 (284 bytes) */
-int FUN_000546d0(param_1, shader)
-  int param_1;
+int FUN_000546d0(glContext, shader)
+  int glContext;
   int shader;
 {
-  int iVar1;
+  int symbolRecord;
   undefined4 in_r6;
   undefined4 in_r7;
   undefined4 in_r8;
-  int iVar2;
+  int symbolByteOffset;
   uint loopIndex;
   
-  (**(code **)(((unsigned char *)0x000011ac) + param_1))(param_1,shader,0);
-  (**(code **)(((unsigned char *)0x000011a4) + param_1))
-            (param_1,shader,*(undefined4 *)(((unsigned char *)0x0000118c) + param_1),in_r6,in_r7,in_r8,
-             *(code **)(((unsigned char *)0x000011a4) + param_1));
+  (**(code **)(((unsigned char *)0x000011ac) + glContext))(glContext,shader,0);
+  (**(code **)(((unsigned char *)0x000011a4) + glContext))
+            (glContext,shader,*(undefined4 *)(((unsigned char *)0x0000118c) + glContext),in_r6,in_r7,in_r8,
+             *(code **)(((unsigned char *)0x000011a4) + glContext));
   *(undefined4 *)(shader + 100) = 0;
   *(undefined4 *)(shader + 0x54) = 0;
   *(undefined4 *)(shader + 0x58) = 0;
@@ -386,21 +386,21 @@ int FUN_000546d0(param_1, shader)
   *(undefined4 *)(shader + 0x60) = 0;
   if (*(int *)(shader + 0x1c) != 0) {
     loopIndex = 0;
-    iVar2 = 0;
+    symbolByteOffset = 0;
     do {
       loopIndex = loopIndex + 1;
-      iVar1 = iVar2 + *(int *)(shader + 0x20);
-      iVar2 = iVar2 + 0x54;
-      *(undefined1 *)(iVar1 + 0x3d) = 0;
+      symbolRecord = symbolByteOffset + *(int *)(shader + 0x20);
+      symbolByteOffset = symbolByteOffset + 0x54;
+      *(undefined1 *)(symbolRecord + 0x3d) = 0;
     } while (loopIndex < *(uint *)(shader + 0x1c));
   }
-  (**(code **)(((unsigned char *)0x00001194) + param_1))(param_1,shader);
-  (**(code **)(((unsigned char *)0x0000119c) + param_1))(param_1,shader);
-  *(undefined4 *)(((unsigned char *)0x00001174) + param_1) = *(undefined4 *)(shader + 0x54);
-  *(undefined4 *)(((unsigned char *)0x0000117c) + param_1) = *(undefined4 *)(shader + 0x58);
-  *(undefined4 *)(((unsigned char *)0x00001178) + param_1) = *(undefined4 *)(shader + 0x5c);
-  *(undefined4 *)(((unsigned char *)0x00001180) + param_1) = *(undefined4 *)(shader + 0x60);
-  *(undefined4 *)(((unsigned char *)0x00001184) + param_1) = *(undefined4 *)(shader + 100);
+  (**(code **)(((unsigned char *)0x00001194) + glContext))(glContext,shader);
+  (**(code **)(((unsigned char *)0x0000119c) + glContext))(glContext,shader);
+  *(undefined4 *)(((unsigned char *)0x00001174) + glContext) = *(undefined4 *)(shader + 0x54);
+  *(undefined4 *)(((unsigned char *)0x0000117c) + glContext) = *(undefined4 *)(shader + 0x58);
+  *(undefined4 *)(((unsigned char *)0x00001178) + glContext) = *(undefined4 *)(shader + 0x5c);
+  *(undefined4 *)(((unsigned char *)0x00001180) + glContext) = *(undefined4 *)(shader + 0x60);
+  *(undefined4 *)(((unsigned char *)0x00001184) + glContext) = *(undefined4 *)(shader + 100);
   return;
 }
 

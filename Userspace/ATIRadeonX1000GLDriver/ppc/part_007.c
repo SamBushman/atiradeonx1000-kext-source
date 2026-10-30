@@ -904,11 +904,11 @@ LAB_0004d460:
 void FUN_0004d620(int glContext,undefined4 param_2,undefined4 unusedArgR5,undefined4 unused,double fparam_1)
 {
   uint loopIndex;
-  int iVar1;
-  char cVar2;
-  int iVar3;
+  int programEntry;
+  char wantFlag;
+  int entryByteOffset;
   uint glContextWord44;
-  int iVar5;
+  int programTable;
   
   glContextWord44 = *(uint *)(glContext + 0x44);
   if ((glContextWord44 & 0x20000) == 0) {
@@ -928,26 +928,26 @@ void FUN_0004d620(int glContext,undefined4 param_2,undefined4 unusedArgR5,undefi
   }
   else if ((glContextWord44 & 0x800000) != 0) {
 LAB_0004d6ac:
-    cVar2 = '\x01';
+    wantFlag = '\x01';
     goto LAB_0004d6b0;
   }
-  cVar2 = '\0';
+  wantFlag = '\0';
 LAB_0004d6b0:
-  iVar5 = *(int *)(((unsigned char *)0x00001154) + glContext);
-  if (*(int *)(iVar5 + 4) != 0) {
+  programTable = *(int *)(((unsigned char *)0x00001154) + glContext);
+  if (*(int *)(programTable + 4) != 0) {
     loopIndex = 0;
-    iVar3 = 0;
+    entryByteOffset = 0;
     do {
-      iVar1 = *(int *)(*(int *)(((unsigned char *)0x0000113c) + glContext) * 4 +
-                      *(int *)(iVar3 + *(int *)(iVar5 + 0x88) + 0x70));
-      if ((iVar1 != 0) && (((unsigned char *)0x0000120c)[iVar1] != cVar2)) {
-        *(undefined4 *)(((unsigned char *)0x000016f0) + iVar1) = 1;
-        *(undefined1 *)(iVar1 + 0x119) = 1;
-        iVar5 = *(int *)(((unsigned char *)0x00001154) + glContext);
+      programEntry = *(int *)(*(int *)(((unsigned char *)0x0000113c) + glContext) * 4 +
+                      *(int *)(entryByteOffset + *(int *)(programTable + 0x88) + 0x70));
+      if ((programEntry != 0) && (((unsigned char *)0x0000120c)[programEntry] != wantFlag)) {
+        *(undefined4 *)(((unsigned char *)0x000016f0) + programEntry) = 1;
+        *(undefined1 *)(programEntry + 0x119) = 1;
+        programTable = *(int *)(((unsigned char *)0x00001154) + glContext);
       }
       loopIndex = loopIndex + 1;
-      iVar3 = iVar3 + 0x78;
-    } while (loopIndex < *(uint *)(iVar5 + 4));
+      entryByteOffset = entryByteOffset + 0x78;
+    } while (loopIndex < *(uint *)(programTable + 4));
   }
   atifsCompileCurrentShader(glContext);
   return;
@@ -1695,23 +1695,23 @@ int FUN_0004e880(glContext)
 int FUN_0004e990(glContext)
   int glContext;
 {
-  uint uVar1;
-  int iVar2;
-  double dVar3;
+  uint depthBufferBits;
+  int scaledDepth;
+  double depthScale;
   
-  uVar1 = *(uint *)(*(int *)(glContext + 4) + 0x154) & 0x30000;
-  dVar3 = DOUBLE_001aa288;
-  if (((uVar1 != 0x20000) && (uVar1 != 0x30000)) && (dVar3 = DOUBLE_001aa280, uVar1 == 0x10000)) {
-    dVar3 = DOUBLE_001aa278;
+  depthBufferBits = *(uint *)(*(int *)(glContext + 4) + 0x154) & 0x30000;
+  depthScale = DOUBLE_001aa288;
+  if (((depthBufferBits != 0x20000) && (depthBufferBits != 0x30000)) && (depthScale = DOUBLE_001aa280, depthBufferBits == 0x10000)) {
+    depthScale = DOUBLE_001aa278;
   }
-  dVar3 = dVar3 * *(double *)(((unsigned char *)0x00002d88) + *(int *)(*(int *)(glContext + 4) + 0x10));
-  if (DOUBLE_001aa1e8 <= dVar3) {
-    iVar2 = (int)(dVar3 - DOUBLE_001aa1e8) + -0x80000000;
+  depthScale = depthScale * *(double *)(((unsigned char *)0x00002d88) + *(int *)(*(int *)(glContext + 4) + 0x10));
+  if (DOUBLE_001aa1e8 <= depthScale) {
+    scaledDepth = (int)(depthScale - DOUBLE_001aa1e8) + -0x80000000;
   }
   else {
-    iVar2 = (int)dVar3;
+    scaledDepth = (int)depthScale;
   }
-  return iVar2;
+  return scaledDepth;
 }
 
 /* gldValidatePolygonMode @ 0x4ea70 (260 bytes) */
@@ -4918,26 +4918,26 @@ int extvsFindShaderIndex(shaderTable, shaderId)
   int shaderTable;
   int shaderId;
 {
-  int iVar1;
-  int iVar2;
-  int *piVar3;
-  int iVar4;
+  int entryId;
+  int shaderIndex;
+  int *idCursor;
+  int entriesLeft;
   
-  iVar4 = *(int *)(shaderTable + 4);
-  if (iVar4 != 0) {
+  entriesLeft = *(int *)(shaderTable + 4);
+  if (entriesLeft != 0) {
     if (shaderId == *(int *)(*(int *)(shaderTable + 0xc) + 8)) {
       return 0;
     }
-    piVar3 = (int *)(*(int *)(shaderTable + 0xc) + 0x84);
-    iVar2 = 0;
+    idCursor = (int *)(*(int *)(shaderTable + 0xc) + 0x84);
+    shaderIndex = 0;
     while( true ) {
-      iVar2 = iVar2 + 1;
-      iVar4 = iVar4 + -1;
-      if (iVar4 == 0) break;
-      iVar1 = *piVar3;
-      piVar3 = piVar3 + 0x1f;
-      if (shaderId == iVar1) {
-        return iVar2;
+      shaderIndex = shaderIndex + 1;
+      entriesLeft = entriesLeft + -1;
+      if (entriesLeft == 0) break;
+      entryId = *idCursor;
+      idCursor = idCursor + 0x1f;
+      if (shaderId == entryId) {
+        return shaderIndex;
       }
     }
   }

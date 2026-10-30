@@ -1387,22 +1387,22 @@ int popFirstNonNull32(pointerArray)
   int pointerArray;
 {
   uint position;
-  int iVar2;
-  undefined4 *puVar3;
+  int entriesLeft;
+  undefined4 *shiftCursor;
   int entry;
-  uint uVar5;
+  uint nextPosition;
   
   position = 0;
   while( true ) {
     entry = *(int *)(pointerArray + position * 4);
-    if ((entry != 0) && (uVar5 = position + 1, uVar5 < 0x20)) {
-      iVar2 = 0x20 - uVar5;
-      puVar3 = (undefined4 *)(pointerArray + uVar5 * 4);
+    if ((entry != 0) && (nextPosition = position + 1, nextPosition < 0x20)) {
+      entriesLeft = 0x20 - nextPosition;
+      shiftCursor = (undefined4 *)(pointerArray + nextPosition * 4);
       do {
-        puVar3[-1] = *puVar3;
-        puVar3 = puVar3 + 1;
-        iVar2 = iVar2 + -1;
-      } while (iVar2 != 0);
+        shiftCursor[-1] = *shiftCursor;
+        shiftCursor = shiftCursor + 1;
+        entriesLeft = entriesLeft + -1;
+      } while (entriesLeft != 0);
     }
     position = position + 1;
     if (0x1f < position) break;
@@ -4831,50 +4831,50 @@ LAB_000644c0:
 int FUN_00064720(glContext)
   int glContext;
 {
-  undefined4 *puVar1;
-  byte bVar2;
-  int iVar3;
+  undefined4 *constWordPtr;
+  byte unitFlagByte;
+  int routeCount;
   undefined4 in_r5;
   undefined4 in_r6;
   undefined4 in_r7;
-  int a5;
-  int iVar4;
+  int programState;
+  int routeDst;
   undefined4 a6;
   uint loopIndex;
   code *a7;
-  int iVar6;
+  int routeSrc;
   
-  a5 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + glContext) * 4 + **(int **)(((unsigned char *)0x00001168) + glContext));
+  programState = **(int **)(*(int *)(((unsigned char *)0x0000118c) + glContext) * 4 + **(int **)(((unsigned char *)0x00001168) + glContext));
   if (*(char *)(*(int **)(((unsigned char *)0x00001168) + glContext) + 4) != '\0') {
     if ((*(uint *)(glContext + 0x8c) & 0x40000000) == 0) {
-      *(undefined4 *)(glContext + 0x1ca0) = *(undefined4 *)(a5 + 0x234);
-      *(undefined4 *)(glContext + 0x1ca4) = *(undefined4 *)(a5 + 0x238);
-      *(undefined4 *)(glContext + 0x1b9c) = *(undefined4 *)(a5 + 0x23c);
-      *(undefined4 *)(glContext + 0x1ba0) = *(undefined4 *)(a5 + 0x240);
-      iVar3 = *(int *)(a5 + 0x2a0);
-      if (iVar3 + 1U >> 1 != 0) {
+      *(undefined4 *)(glContext + 0x1ca0) = *(undefined4 *)(programState + 0x234);
+      *(undefined4 *)(glContext + 0x1ca4) = *(undefined4 *)(programState + 0x238);
+      *(undefined4 *)(glContext + 0x1b9c) = *(undefined4 *)(programState + 0x23c);
+      *(undefined4 *)(glContext + 0x1ba0) = *(undefined4 *)(programState + 0x240);
+      routeCount = *(int *)(programState + 0x2a0);
+      if (routeCount + 1U >> 1 != 0) {
         loopIndex = 0;
-        iVar4 = glContext;
-        iVar6 = a5;
+        routeDst = glContext;
+        routeSrc = programState;
         do {
           loopIndex = loopIndex + 1;
-          *(undefined4 *)(iVar4 + 0x1be4) = *(undefined4 *)(iVar6 + 0x244);
-          puVar1 = (undefined4 *)(iVar6 + 0x270);
-          iVar6 = iVar6 + 4;
-          *(undefined4 *)(iVar4 + 0x1c04) = *puVar1;
-          iVar4 = iVar4 + 4;
-          iVar3 = *(int *)(a5 + 0x2a0);
-        } while (loopIndex < iVar3 + 1U >> 1);
+          *(undefined4 *)(routeDst + 0x1be4) = *(undefined4 *)(routeSrc + 0x244);
+          constWordPtr = (undefined4 *)(routeSrc + 0x270);
+          routeSrc = routeSrc + 4;
+          *(undefined4 *)(routeDst + 0x1c04) = *constWordPtr;
+          routeDst = routeDst + 4;
+          routeCount = *(int *)(programState + 0x2a0);
+        } while (loopIndex < routeCount + 1U >> 1);
       }
-      *(int *)(glContext + 0x2438) = iVar3;
+      *(int *)(glContext + 0x2438) = routeCount;
       a7 = *(code **)(((unsigned char *)0x00001334) + glContext);
-      a6 = *(undefined4 *)(a5 + 0x2a0);
+      a6 = *(undefined4 *)(programState + 0x2a0);
       *(undefined4 *)(glContext + 0x1b78) = 0;
       *(undefined4 *)(glContext + 0x243c) = a6;
-      bVar2 = *(byte *)(a5 + 0x36);
+      unitFlagByte = *(byte *)(programState + 0x36);
       *(uint *)(glContext + 0x1930) = *(uint *)(glContext + 0x1930) | 0x40000;
-      *(uint *)(glContext + 0x1b78) = bVar2 & 3;
-      (*a7)(glContext,1,in_r5,in_r6,in_r7,a5,a6,a7);
+      *(uint *)(glContext + 0x1b78) = unitFlagByte & 3;
+      (*a7)(glContext,1,in_r5,in_r6,in_r7,programState,a6,a7);
       *(undefined1 *)(glContext + 0x2435) = 1;
     }
   }
