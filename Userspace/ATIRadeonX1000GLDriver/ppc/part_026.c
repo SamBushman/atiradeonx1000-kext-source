@@ -5200,6 +5200,7 @@ int Program__translateILStream(program, ilReader)
   int program;
   uint ******ilReader;
 {
+  uint ******ppppppuVar49;
   bool hwFlag0x40Clear;
   bool hasPendingExtra;
   uint *****instWord0x98C;
@@ -5492,9 +5493,9 @@ int Program__translateILStream(program, ilReader)
   undefined4 *puVar13;
   undefined4 *vectorAllocation;
   uint *****ifStackStorage;
-  void *pvVar16;
+  void *ifConditionObject;
   uint movVectorSizeB;
-  int *piVar18;
+  int *storedObject;
   uint ******interpRegisterNumber;
   int registerEndB;
   int laneLoopIndex;
@@ -5527,7 +5528,6 @@ int Program__translateILStream(program, ilReader)
   undefined4 compilerArenaB;
   int hwOpcodeRecords;
   uint ******declRegisterNumber;
-  uint ******ppppppuVar49;
   undefined4 virtualRegisterC;
   uint ****elseBlock;
   uint *****secondTokenWord;
@@ -6229,13 +6229,13 @@ code_r0x000fed00:
       previousBlock = currentBlock;
       goto switchD_000fdaf0_caseD_2;
     case 0x72:
-      piVar18 = (int *)Arena__alloc(*(undefined4 *)(compiler + 0x378),0xc);
-      piVar18[1] = 0;
-      piVar18[2] = 0;
+      storedObject = (int *)Arena__alloc(*(undefined4 *)(compiler + 0x378),0xc);
+      storedObject[1] = 0;
+      storedObject[2] = 0;
       createdMov = IRInst__create(0x31,*(undefined4 *)(program + 8));
       newTempIndex2 = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
       *(int *)(*(int *)(program + 8) + 0x3ac) = newTempIndex2;
-      *piVar18 = newTempIndex2;
+      *storedObject = newTempIndex2;
       operandRecord = IRInst__getOperandRecord(createdMov,0);
       *(undefined4 *)(operandRecord + 0xc) = 0;
       *(int *)(operandRecord + 8) = newTempIndex2;
@@ -6280,10 +6280,10 @@ code_r0x000fed00:
       compilerArenaA = *(undefined4 *)(compiler + 0x374);
       instAllocation = (undefined4 *)Arena__alloc(compilerArenaA,0x168);
       *instAllocation = compilerArenaA;
-      piVar18 = instAllocation + 1;
-      IRInst__ctor_10502c(piVar18,0xf8,*(undefined4 *)(program + 8));
+      storedObject = instAllocation + 1;
+      IRInst__ctor_10502c(storedObject,0xf8,*(undefined4 *)(program + 8));
       instAllocation[0x4c] = ilReader[(int)ilReader[0x16] + 0x23];
-      ((int (*)())Program__appendInst)(program,piVar18,currentBlock);
+      ((int (*)())Program__appendInst)(program,storedObject,currentBlock);
       break;
     case 0x76:
     case 0x77:
@@ -6765,9 +6765,9 @@ code_r0x000ff070:
       compilerArenaA = *(undefined4 *)(compiler + 0x374);
       instAllocation = (undefined4 *)Arena__alloc(compilerArenaA,0x168);
       *instAllocation = compilerArenaA;
-      piVar18 = instAllocation + 1;
-      IRInst__ctor_10502c(piVar18,0x106,*(undefined4 *)(program + 8));
-      ((int (*)())Program__appendInst)(program,piVar18,currentBlock);
+      storedObject = instAllocation + 1;
+      IRInst__ctor_10502c(storedObject,0x106,*(undefined4 *)(program + 8));
+      ((int (*)())Program__appendInst)(program,storedObject,currentBlock);
     }
     pendingVector = *(uint **)(program + 0x414);
     vectorSize = pendingVector[1];
@@ -6780,7 +6780,7 @@ code_r0x000ff070:
       vectorSlotC = (int *)Vector__elementRefGrow(pendingVector,vectorSize);
     }
 code_r0x000febe0:
-    *vectorSlotC = (int)piVar18;
+    *vectorSlotC = (int)storedObject;
     goto switchD_000fdaf0_caseD_2;
   default:
     goto switchD_000fdaf0_caseD_2;
@@ -7816,17 +7816,17 @@ code_r0x00101cbc:
       templateCursor = (int *)((int)templateCursor + 1);
       switch(*(undefined4 *)(templateBase + (int)templateCursor * 4)) {
       case 0x62:
-        pvVar16 = IRInst__create(0x8b,*(undefined4 *)(program + 8));
-        ((void (*)())IRInst__makeLiteralVec4Float)(pvVar16,program,1,1.0,1.0,1.0,1.0);
-        ((void (*)())IRInst__makeLiteralVec4Float)(pvVar16,program,2,1.0,1.0,1.0,1.0);
-        *(undefined4 *)((int)pvVar16 + 300) = 0;
+        ifConditionObject = IRInst__create(0x8b,*(undefined4 *)(program + 8));
+        ((void (*)())IRInst__makeLiteralVec4Float)(ifConditionObject,program,1,1.0,1.0,1.0,1.0);
+        ((void (*)())IRInst__makeLiteralVec4Float)(ifConditionObject,program,2,1.0,1.0,1.0,1.0);
+        *(undefined4 *)((int)ifConditionObject + 300) = 0;
         compilerArenaA = *(undefined4 *)(*(int *)(program + 8) + 0x374);
         blockAllocation4 = (undefined4 *)Arena__alloc(compilerArenaA,0x15c);
         *blockAllocation4 = compilerArenaA;
         ifBlock = (uint *****)(blockAllocation4 + 1);
         argR6 = (uint ******)0x0;
         argR7 = *(uint *******)(program + 8);
-        IfHeader__ctor_ea6d0(ifBlock,pvVar16,ifConditionRef,0,argR7);
+        IfHeader__ctor_ea6d0(ifBlock,ifConditionObject,ifConditionRef,0,argR7);
         break;
       case 99:
         compiler = *(int *)(program + 8);
@@ -7894,7 +7894,7 @@ code_r0x00100810:
           registerIndex = (int)*(short *)((int)sourceToken1Ptr + 2);
         }
         argR8 = (uint ******)((uint)sourceToken1Word >> 0x10 & 0x3f);
-        pvVar16 = (void *)(**(code **)(*hwDescription + 0x24))
+        ifConditionObject = (void *)(**(code **)(*hwDescription + 0x24))
                                     (hwDescription,(uint)*tokenWords >> 0x10 & 7,sourceRegisterIndexB,
                                      (uint)sourceToken0Word >> 0x10 & 0x3f,registerIndex,argR8,stagedSelectWord,ilReader);
         compilerArenaA = *(undefined4 *)(*(int *)(program + 8) + 0x374);
@@ -7903,7 +7903,7 @@ code_r0x00100810:
         ifBlock = (uint *****)(blockAllocation4 + 1);
         argR6 = (uint ******)0x0;
         argR7 = *(uint *******)(program + 8);
-        IfHeader__ctor_ea6d0(ifBlock,pvVar16,ifConditionRef,0,argR7);
+        IfHeader__ctor_ea6d0(ifBlock,ifConditionObject,ifConditionRef,0,argR7);
         break;
       case 0x65:
         compilerArenaA = *(undefined4 *)(*(int *)(program + 8) + 0x374);
@@ -7977,7 +7977,7 @@ code_r0x0010082c:
           registerIndex = (int)*(short *)((int)*ilReader[0x1b] + 2);
         }
         argR8 = stagedSelectWord;
-        pvVar16 = (void *)(**(code **)(*hwDescription + 0x28))
+        ifConditionObject = (void *)(**(code **)(*hwDescription + 0x28))
                                     (hwDescription,ilOpcode == 0x6f,registerIndex,(uint)source0Token >> 0x10 & 0x3f,0,
                                      stagedSelectWord,ilReader,currentBlock);
         compilerArenaA = *(undefined4 *)(*(int *)(program + 8) + 0x374);
@@ -7986,10 +7986,10 @@ code_r0x0010082c:
         ifBlock = (uint *****)(blockAllocation4 + 1);
         argR6 = (uint ******)0x0;
         argR7 = *(uint *******)(program + 8);
-        IfHeader__ctor_ea6d0(ifBlock,pvVar16,ifConditionRef,0,argR7);
+        IfHeader__ctor_ea6d0(ifBlock,ifConditionObject,ifConditionRef,0,argR7);
       }
       Block__setField0xb8AndChildren(ifBlock,scopeLevel);
-      IRInst__bindOperandRegisters(program,pvVar16);
+      IRInst__bindOperandRegisters(program,ifConditionObject);
 code_r0x0010319c:
       ifStackNewSlot = (uint *****)0x0;
       if ((uint *****)ifStack[1] != (uint *****)0x0) {
