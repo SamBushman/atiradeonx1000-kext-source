@@ -651,8 +651,8 @@ int Object__setWord0(param_1, param_2)
   return;
 }
 
-/* FUN_001272d4 @ 0x1272d4 (80 bytes) */
-int FUN_001272d4(cache, param_2, param_3)
+/* VRegPool__canonicalizeKey @ 0x1272d4 (80 bytes) */
+int VRegPool__canonicalizeKey(cache, param_2, param_3)
   int cache;
   int *param_2;
   int *param_3;
@@ -789,7 +789,7 @@ int VRegPool__find(cache, keyA, keyB, keyExtra)
   
   (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = keyA;
   (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = keyB;
-  ((int (*)())FUN_001272d4)(cache,&(*(unsigned int *)((unsigned char *)ghidra_home + 4)),&(*(unsigned int *)((unsigned char *)ghidra_home + 8)));
+  ((int (*)())VRegPool__canonicalizeKey)(cache,&(*(unsigned int *)((unsigned char *)ghidra_home + 4)),&(*(unsigned int *)((unsigned char *)ghidra_home + 8)));
   *(undefined4 *)(*(int *)(cache + 0x24) + 8) = (*(unsigned int *)((unsigned char *)ghidra_home + 8));
   *(undefined4 *)(*(int *)(cache + 0x24) + 4) = (*(unsigned int *)((unsigned char *)ghidra_home + 4));
   *(undefined4 *)(*(int *)(cache + 0x24) + 0xc) = keyExtra;
@@ -809,7 +809,7 @@ int VRegPool__create(cache, keyA, keyB, keyExtra)
   
   (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = keyA;
   (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = keyB;
-  ((int (*)())FUN_001272d4)(cache,&(*(unsigned int *)((unsigned char *)ghidra_home + 4)),&(*(unsigned int *)((unsigned char *)ghidra_home + 8)));
+  ((int (*)())VRegPool__canonicalizeKey)(cache,&(*(unsigned int *)((unsigned char *)ghidra_home + 4)),&(*(unsigned int *)((unsigned char *)ghidra_home + 8)));
   callResult = VRegPool__constructByKind((*(unsigned int *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 4)),keyExtra,*cache);
   HashTable__insert(cache[1],callResult);
   return callResult;

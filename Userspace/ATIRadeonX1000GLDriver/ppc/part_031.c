@@ -1762,8 +1762,8 @@ int LaneInfo__ctor_10e814(laneInfo, source)
   return;
 }
 
-/* FUN_0010e870 @ 0x10e870 (84 bytes) */
-int FUN_0010e870(lhsRef, rhsRef)
+/* Compare__descendingByRemappedKey @ 0x10e870 (84 bytes) */
+int Compare__descendingByRemappedKey(lhsRef, rhsRef)
   int *lhsRef;
   int *rhsRef;
 {
@@ -1837,8 +1837,8 @@ int PackEntry__activeLaneCount(packEntry)
   return activeLaneCount;
 }
 
-/* FUN_0010e9d0 @ 0x10e9d0 (96 bytes) */
-int FUN_0010e9d0(candidateGroup, laneIndex)
+/* PackEntry__laneNeedsZero @ 0x10e9d0 (96 bytes) */
+int PackEntry__laneNeedsZero(candidateGroup, laneIndex)
   undefined4 *candidateGroup;
   int laneIndex;
 {

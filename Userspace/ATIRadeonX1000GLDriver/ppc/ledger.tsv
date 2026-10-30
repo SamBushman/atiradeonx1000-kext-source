@@ -1907,11 +1907,11 @@
 0x10e744	116	IRInst__query68AndWord4fNotMasked	part_031	converted
 0x10e7b8	92	LaneInfo__ctor_10e7b8	part_031	converted
 0x10e814	92	LaneInfo__ctor_10e814	part_031	converted
-0x10e870	84	FUN_0010e870	part_031	converted
+0x10e870	84	Compare__descendingByRemappedKey	part_031	converted
 0x10e8c4	32	Compare__descendingByField140	part_031	converted
 0x10e8e4	120	PackEntry__assignLaneSources	part_031	converted
 0x10e95c	116	PackEntry__activeLaneCount	part_031	converted
-0x10e9d0	96	FUN_0010e9d0	part_031	converted
+0x10e9d0	96	PackEntry__laneNeedsZero	part_031	converted
 0x10ea30	164	Program__callBackendFinish	part_031	converted
 0x10ead4	484	FUN_0010ead4	part_031	converted
 0x10ecb8	148	FUN_0010ecb8	part_031	converted
@@ -2322,7 +2322,7 @@
 0x127294	32	ConstKey__lanes4	part_038	converted
 0x1272b4	16	Object__sumWords4And8	part_038	converted
 0x1272cc	8	Object__setWord0	part_038	converted
-0x1272d4	80	FUN_001272d4	part_038	converted
+0x1272d4	80	VRegPool__canonicalizeKey	part_038	converted
 0x127324	232	FUN_00127324	part_038	converted
 0x12740c	100	VRegPool__destroyEntries	part_038	converted
 0x127470	196	FUN_00127470	part_038	converted
@@ -2392,7 +2392,7 @@
 0x12ab80	88	pass_optimize_control_flow	part_039	converted
 0x12abd8	128	IfHeader__swapArms	part_039	converted
 0x12ac58	452	FUN_0012ac58	part_039	converted
-0x12ae1c	80	FUN_0012ae1c	part_039	converted
+0x12ae1c	80	Block__footerTargetOrSelf	part_039	converted
 0x12ae6c	132	Block__hasInstWithQuery28	part_039	converted
 0x12aef0	248	FUN_0012aef0	part_039	converted
 0x12afe8	344	FUN_0012afe8	part_039	converted
@@ -2516,7 +2516,7 @@
 0x138694	2336	HwLimits__computeBlockLiveness	part_041	converted
 0x138fb4	84	Program__finishUsevectorChain	part_041	converted
 0x139008	44	Mask__countSetBits4	part_041	converted
-0x139034	40	FUN_00139034	part_041	converted
+0x139034	40	Node__isNotAmong3	part_041	converted
 0x13905c	308	FUN_0013905c	part_041	converted
 0x139190	156	LaneStack__topFitsLaneCount	part_041	converted
 0x13922c	104	FUN_0013922c	part_042	converted

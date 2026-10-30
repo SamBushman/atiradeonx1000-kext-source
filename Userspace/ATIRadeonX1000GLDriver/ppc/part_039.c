@@ -2040,8 +2040,8 @@ int FUN_0012ac58(targetLoop, block)
   return block;
 }
 
-/* FUN_0012ae1c @ 0x12ae1c (80 bytes) */
-int FUN_0012ae1c(block)
+/* Block__footerTargetOrSelf @ 0x12ae1c (80 bytes) */
+int Block__footerTargetOrSelf(block)
   int *block;
 {
   int query30;

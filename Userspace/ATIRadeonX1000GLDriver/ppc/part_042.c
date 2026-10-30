@@ -2433,7 +2433,7 @@ int IfHeader__convertInnerIfToCmov(block, program, compiler)
 LAB_0013cd68:
                   uVar9 = uVar14;
                   in_r6 = iVar13;
-                  iVar5 = FUN_00139034(operandVReg,block,uVar14,iVar13);
+                  iVar5 = Node__isNotAmong3(operandVReg,block,uVar14,iVar13);
                   bVar17 = iVar5 != 0;
                 }
                 operandVReg = (int *)IRInst__getOperandSource(piVar15,2);
@@ -2468,7 +2468,7 @@ LAB_0013cd68:
 LAB_0013cee8:
                   uVar9 = uVar14;
                   in_r6 = iVar13;
-                  iVar5 = FUN_00139034(operandVReg,block,uVar14,iVar13);
+                  iVar5 = Node__isNotAmong3(operandVReg,block,uVar14,iVar13);
                   if (iVar5 == 0) {
                     return;
                   }
@@ -2510,12 +2510,12 @@ LAB_0013cee8:
               if (*(int *)(piVar1[0x22] + 8) == 0x8e) {
                 operandVReg2 = IRInst__getOperandSource(piVar1,1);
                 operandVReg3 = IRInst__getOperandSource(piVar1,2);
-                iVar3 = FUN_00139034(operandVReg2,block,uVar14,iVar13);
+                iVar3 = Node__isNotAmong3(operandVReg2,block,uVar14,iVar13);
                 if (iVar3 == 0) {
                   DList__unlink(operandVReg2);
                   Block__appendInst(uVar6,operandVReg2);
                 }
-                iVar3 = FUN_00139034(operandVReg3,block,uVar14,iVar13);
+                iVar3 = Node__isNotAmong3(operandVReg3,block,uVar14,iVar13);
                 if (iVar3 == 0) {
                   DList__unlink(operandVReg3);
                   Block__appendInst(uVar6,operandVReg3);

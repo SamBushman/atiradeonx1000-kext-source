@@ -2345,7 +2345,7 @@ LAB_0012ed24:
         chainKey = FUN_0012b140(movDestOperand);
         if (movDestOperand != pendingEntry) break;
         ((int (*)())IfFooter__ctor_12e56c)(predicateRegister,movDestOperand,*(undefined4 *)(program + 8));
-        chainKey = FUN_0012ae1c(movDestOperand);
+        chainKey = Block__footerTargetOrSelf(movDestOperand);
       }
       if (pendingEntry == 0) break;
       arenaAt3742 = *(undefined4 *)(*(int *)(program + 8) + 0x374);
@@ -2399,7 +2399,7 @@ LAB_0012ed24:
       Block__connect(ifFooterBlock,pendingEntry);
       IRInst__bindOperandRegisters(program,branchInst);
       ((int (*)())IfFooter__ctor_12e56c)(predicateRegister,pendingEntry,*(undefined4 *)(program + 8));
-      chainKey = FUN_0012ae1c(pendingEntry);
+      chainKey = Block__footerTargetOrSelf(pendingEntry);
     }
   } while( true );
 }

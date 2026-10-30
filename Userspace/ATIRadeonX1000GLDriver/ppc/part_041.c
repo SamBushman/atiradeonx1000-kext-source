@@ -5071,8 +5071,8 @@ int Mask__countSetBits4(param_1)
   return setBitCount;
 }
 
-/* FUN_00139034 @ 0x139034 (40 bytes) */
-int FUN_00139034(node, block, excludeA, excludeB)
+/* Node__isNotAmong3 @ 0x139034 (40 bytes) */
+int Node__isNotAmong3(node, block, excludeA, excludeB)
   int node;
   int block;
   int excludeA;

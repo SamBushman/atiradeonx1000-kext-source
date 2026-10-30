@@ -1618,7 +1618,7 @@ code_r0x00111aa4:
                   laneKindTable = (undefined4 *)PTR_DAT_001e8b64;
                   candidateWordCursor = candidateGroup;
                   do {
-                    laneSourceInst = FUN_0010e9d0(candidateGroup,laneIndex);
+                    laneSourceInst = PackEntry__laneNeedsZero(candidateGroup,laneIndex);
                     if (laneSourceInst != 0) {
                       laneStep = 0;
                       do {
@@ -2250,7 +2250,7 @@ LAB_0011293c:
   fixedLayout = FUN_0010f4d4(program);
   *(int *)(program + 0x3e4) = fixedLayout;
   if (fixedLayout == 0) {
-    Vector__shellSort(*(undefined4 *)(program + 0x420),FUN_0010e870);
+    Vector__shellSort(*(undefined4 *)(program + 0x420),Compare__descendingByRemappedKey);
     kind2Vector = *(uint **)(program + 0x420);
     recordCount = kind2Vector[1];
     if (recordCount != 0) {
