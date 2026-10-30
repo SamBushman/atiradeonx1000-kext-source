@@ -5879,12 +5879,12 @@ int fragmentInstructionToIL(translator, unusedArg2, unusedArg3, unusedArg4, unus
   uint select3;
   uint componentCode;
   uint savedDstMask2;
-  int iVar23;
+  int opRecordOrSrcStatus;
   int tempWordOffset;
   int componentLoopIndex;
   int opRecordCopy;
   int hasSecondSource;
-  int iVar24;
+  int destPtrOrDestStatus;
   int opRecord2;
   int tempIndex;
   int opRecord;
@@ -6535,9 +6535,9 @@ joined_r0x000479e8:
             ilInstAPtr = &ilInstAOpcode;
             instructionBlock4 = *translator + *(int *)(*translator + 0x54) * 8;
             _memset(ilInstAPtr,0,0x24);
-            iVar23 = instructionBlock4 + recordByteOffset;
-            iVar24 = iVar23 + 8;
-            destClass = ((int (*)())fpilClassifyDestination)(translator,iVar24);
+            opRecordOrSrcStatus = instructionBlock4 + recordByteOffset;
+            destPtrOrDestStatus = opRecordOrSrcStatus + 8;
+            destClass = ((int (*)())fpilClassifyDestination)(translator,destPtrOrDestStatus);
             if (destClass == 1) {
               ilInstAOpcode = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstAOpcode) + 0)),99);
             }
@@ -6548,10 +6548,10 @@ joined_r0x000479e8:
             else {
               ilInstAOpcode = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstAOpcode) + 0)),0x47);
             }
-            iVar24 = ((int (*)())fpilTranslateDestination)(translator,iVar24,&ilInstADst,&ilInstADstMask,
+            destPtrOrDestStatus = ((int (*)())fpilTranslateDestination)(translator,destPtrOrDestStatus,&ilInstADst,&ilInstADstMask,
                                   *(uint *)(recordByteOffset + instructionBlock4 + 4) >> 0x14 & 1);
-            if ((iVar24 == 0) &&
-               (iVar23 = ((int (*)())fpilTranslateSource)(translator,iVar23 + 0x10,&ilInstASrc0,&ilInstASwz0), iVar23 == 0)) {
+            if ((destPtrOrDestStatus == 0) &&
+               (opRecordOrSrcStatus = ((int (*)())fpilTranslateSource)(translator,opRecordOrSrcStatus + 0x10,&ilInstASrc0,&ilInstASwz0), opRecordOrSrcStatus == 0)) {
               emittedSourceCount = 1;
               if (destClass == 2) {
                 emittedSourceCount = 2;
