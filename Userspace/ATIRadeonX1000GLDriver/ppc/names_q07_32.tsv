@@ -3128,3 +3128,85 @@ use	FUN_00161748	uVar3	laneByte	INFERRED	component byte stored for the leftover 
 use	FUN_00161748	uVar3	laneByte	INFERRED	component byte stored for the leftover lane	^\s*uVar3\ =\ \*\(undefined1\ \*\)\(\(int\)\&local_7c\ \+\ iVar11\);$	+1
 use	FUN_00161748	uVar3	laneByte	INFERRED	component byte stored for the leftover lane	^\s*\(\*\*\(code\ \*\*\)\(\*piVar12\ \+\ 0x88\)\)\(piVar12,2,iVar13,uVar3\);$	+1
 use	FUN_00161748	uVar6	source1ModBit	INFERRED	inst2 source 1 abs bit	^\s*if\ \(\(\(uVar17\ !=\ uVar6\)\ \&\&\ \(uVar15\ =\ uVar17,\ bVar4\)\)\ \&\&\ \(uVar15\ =\ uVar6,\ bVar1\)\)\ \{$	+1
+local	FUN_001621c8	pfVar4	literalCursor	INFERRED	walks local_b8 / local_a8 (the 4 literal floats being built)
+local	FUN_001621c8	pfVar12	literalCursorA	INFERRED	local_a8 base, later walked per lane
+local	FUN_001621c8	uVar3	fillComponentByte	INFERRED	component byte of the first written lane
+local	FUN_001621c8	local_c8	mergedSelectWord	INFERRED	merged select word of the two insts operands
+local	FUN_001621c8	local_c4	mergedDestSelect	INFERRED	combined dest select of the two insts
+local	FUN_001621c8	local_c0	newSelectA	INFERRED	masked select word for the first new constant inst
+local	FUN_001621c8	local_bc	newSelectB	INFERRED	masked select word for the second new constant inst
+local	FUN_001621c8	local_b8	literalVecB	INFERRED	4 floats: literal of the second constant inst
+local	FUN_001621c8	local_a8	literalVecA	INFERRED	4 floats: literal of the first constant inst
+local	FUN_001621c8	local_98	lastOperandBuf0	INFERRED	IRInst__readLastOperand out word 0
+local	FUN_001621c8	local_94	lastOperandBuf1	INFERRED	IRInst__readLastOperand out word 1
+local	FUN_001621c8	local_84	lastOperandBuf2	INFERRED	IRInst__readLastOperand out word 2
+local	FUN_001621c8	local_78	writeMaskOutA	INFERRED	WriteMask__fromSelectWord out
+local	FUN_001621c8	local_74	maskedUnusedA	INFERRED	SelectWord__maskUnused out
+local	FUN_001621c8	local_70	writeMaskOutB	INFERRED	WriteMask__fromSelectWord out
+local	FUN_001621c8	local_6c	maskedUnusedB	INFERRED	SelectWord__maskUnused out
+local	FUN_001621c8	local_68	lastOperandBufPtr	INFERRED	&local_98
+use	FUN_001621c8	iVar6	destRegisterArg	INFERRED	register (inst2[0x2c] or the source dest reg +0x98) passed to RegKind__flagBit7	^\s*iVar6\ =\ \*\(int\ \*\)\(iVar6\ \+\ 0x98\);$	+1
+use	FUN_001621c8	iVar6	destRegisterArg	INFERRED	register (inst2[0x2c] or the source dest reg +0x98) passed to RegKind__flagBit7	^\s*iVar6\ =\ FUN_00126708\(iVar6\);$	+1
+use	FUN_001621c8	iVar6	inst2OutputScale	INFERRED	inst2[0x49]: output scale exponent of inst2	^\s*iVar6\ =\ param_2\[0x49\];$	+1
+use	FUN_001621c8	iVar6	inst2OutputScale	INFERRED	inst2[0x49]: output scale exponent of inst2	^\s*if\ \(\(iVar7\ ==\ iVar8\)\ \&\&\ \(iVar16\ ==\ iVar6\)\)\ \{$	+1
+use	FUN_001621c8	iVar6	inst2OutputScale	INFERRED	inst2[0x49]: output scale exponent of inst2	^\s*if\ \(iVar6\ ==\ 0\)\ \{$@5	+2
+use	FUN_001621c8	iVar6	inst2OutputScale	INFERRED	inst2[0x49]: output scale exponent of inst2	^\s*dVar21\ =\ \(double\)\(\(double\ \(\*\)\(\)\)FUN_0010aad4\)\(iVar6\);$	+1
+use	FUN_001621c8	iVar6	inst2OutputScale	INFERRED	inst2[0x49]: output scale exponent of inst2	^\s*iVar16\ =\ iVar6;$	+1
+use	FUN_001621c8	iVar6	extraSourceA	INFERRED	extra operand source of inst2 (0 when none)	^\s*iVar6\ =\ 0;$@4	+1
+use	FUN_001621c8	iVar6	extraSourceA	INFERRED	extra operand source of inst2 (0 when none)	^\s*iVar6\ =\ FUN_00105594\(param_2,param_2\[0x21\]\);$	+1
+use	FUN_001621c8	iVar6	extraSourceA	INFERRED	extra operand source of inst2 (0 when none)	^\s*if\ \(iVar6\ !=\ 0\)\ \{$@2	+1
+use	FUN_001621c8	iVar6	extraSourceA	INFERRED	extra operand source of inst2 (0 when none)	^\s*if\ \(\*\(int\ \*\)\(param_3\ \+\ 0x478\)\ <\ \*\(int\ \*\)\(iVar6\ \+\ 0x160\)\)\ \{$	+2
+use	FUN_001621c8	iVar6	extraSourceA	INFERRED	extra operand source of inst2 (0 when none)	^\s*\*\(int\ \*\)\(iVar6\ \+\ 0x160\)\ =\ \*\(int\ \*\)\(param_3\ \+\ 0x478\)\ \+\ 1;$	+1
+use	FUN_001621c8	iVar16	outputScaleA	INFERRED	inst[0x49] output scale exponent; reused for the combined exponent (not splittable)	^\s*iVar16\ =\ param_1\[0x49\];$	+1
+use	FUN_001621c8	iVar16	outputScaleA	INFERRED	inst[0x49] output scale exponent; reused for the combined exponent (not splittable)	^\s*if\ \(\(iVar7\ ==\ iVar8\)\ \&\&\ \(iVar16\ ==\ iVar6\)\)\ \{$	+1
+use	FUN_001621c8	iVar16	outputScaleA	INFERRED	inst[0x49] output scale exponent; reused for the combined exponent (not splittable)	^\s*iVar6\ =\ iVar16;$	+2
+use	FUN_001621c8	iVar16	outputScaleA	INFERRED	inst[0x49] output scale exponent; reused for the combined exponent (not splittable)	^\s*iVar16\ =\ 0;$	+1
+use	FUN_001621c8	iVar16	outputScaleA	INFERRED	inst[0x49] output scale exponent; reused for the combined exponent (not splittable)	^\s*if\ \(iVar16\ !=\ 0\)\ \{$	+1
+use	FUN_001621c8	iVar16	outputScaleA	INFERRED	inst[0x49] output scale exponent; reused for the combined exponent (not splittable)	^\s*iVar16\ =\ iVar6;$	+1
+use	FUN_001621c8	iVar16	outputScaleA	INFERRED	inst[0x49] output scale exponent; reused for the combined exponent (not splittable)	^\s*dVar21\ =\ \(double\)\(\(double\ \(\*\)\(\)\)FUN_0010aad4\)\(iVar16\);$	+1
+use	FUN_001621c8	iVar16	outputScaleA	INFERRED	inst[0x49] output scale exponent; reused for the combined exponent (not splittable)	^\s*dVar21\ =\ \(double\)\(\(double\ \(\*\)\(\)\)FUN_0010aad4\)\(iVar16\);$@2	+1
+use	FUN_001621c8	iVar7	laneIdx	INFERRED	lane index 0..3	^\s*iVar7\ =\ 0;$	+1
+use	FUN_001621c8	iVar7	laneIdx	INFERRED	lane index 0..3	^\s*if\ \(\(\*\(char\ \*\)\(iVar7\ \+\ iVar8\ \+\ 0x10\)\ ==\ '\\x01'\)\ \&\&$	+2
+use	FUN_001621c8	iVar7	laneIdx	INFERRED	lane index 0..3	^\s*bVar1\ =\ iVar7\ !=\ 3;$	+2
+use	FUN_001621c8	iVar7	canFoldResult	INFERRED	IRInst__canFoldConstantSource result	^\s*\(\(iVar7\ =\ FUN_000f5a0c\(param_1,1,param_1,param_3\),\ iVar7\ !=\ 0\ \|\|$	+1
+use	FUN_001621c8	iVar7	canFoldResult	INFERRED	IRInst__canFoldConstantSource result	^\s*\(iVar7\ =\ FUN_000f5a0c\(param_2,1,param_2,param_3\),\ iVar7\ !=\ 0\)\)\)\)\)\)\ \{$	+1
+use	FUN_001621c8	iVar8	extraSourceB	INFERRED	extra operand source of inst2 (0 when none)	^\s*iVar8\ =\ 0;$@2	+1
+use	FUN_001621c8	iVar8	extraSourceB	INFERRED	extra operand source of inst2 (0 when none)	^\s*iVar8\ =\ FUN_00105594\(param_2,param_2\[0x21\]\);$	+1
+use	FUN_001621c8	iVar8	extraSourceB	INFERRED	extra operand source of inst2 (0 when none)	^\s*if\ \(iVar8\ !=\ 0\)\ \{$	+1
+use	FUN_001621c8	iVar8	extraSourceB	INFERRED	extra operand source of inst2 (0 when none)	^\s*if\ \(\*\(int\ \*\)\(param_3\ \+\ 0x478\)\ <\ \*\(int\ \*\)\(iVar8\ \+\ 0x160\)\)\ \{$	+2
+use	FUN_001621c8	iVar8	extraSourceB	INFERRED	extra operand source of inst2 (0 when none)	^\s*\*\(int\ \*\)\(iVar8\ \+\ 0x160\)\ =\ \*\(int\ \*\)\(param_3\ \+\ 0x478\)\ \+\ 1;$	+1
+use	FUN_001621c8	iVar11	instWriteMask	INFERRED	inst[3] write mask word saved	^\s*iVar11\ =\ param_1\[3\];$	+1
+use	FUN_001621c8	iVar11	instWriteMask	INFERRED	inst[3] write mask word saved	^\s*param_1\[3\]\ =\ iVar11;$	+1
+use	FUN_001621c8	uVar10	selectWordA	INFERRED	merged select word stored to the operand record	^\s*uVar10\ =\ local_c8;$	+1
+use	FUN_001621c8	uVar10	selectWordA	INFERRED	merged select word stored to the operand record	^\s*\*\(undefined4\ \*\)\(iVar6\ \+\ 0x10\)\ =\ uVar10;$	+1
+use	FUN_001621c8	uVar10	selectWordB	INFERRED	merged select word stored to operand record	^\s*uVar10\ =\ local_c8;$@2	+1
+use	FUN_001621c8	uVar10	selectWordB	INFERRED	merged select word stored to operand record	^\s*\*\(undefined4\ \*\)\(iVar11\ \+\ 0x10\)\ =\ uVar10;$	+1
+use	FUN_001621c8	uVar10	selectWordC	INFERRED	select word local_c0 stored to the operand record	^\s*uVar10\ =\ local_c0;$	+1
+use	FUN_001621c8	uVar10	selectWordC	INFERRED	select word local_c0 stored to the operand record	^\s*\*\(undefined4\ \*\)\(iVar6\ \+\ 0x10\)\ =\ uVar10;$@2	+1
+use	FUN_001621c8	uVar10	selectWordD	INFERRED	select word local_bc stored to the operand record	^\s*uVar10\ =\ local_bc;$	+1
+use	FUN_001621c8	uVar10	selectWordD	INFERRED	select word local_bc stored to the operand record	^\s*\*\(undefined4\ \*\)\(iVar6\ \+\ 0x10\)\ =\ uVar10;$@3	+1
+use	FUN_001621c8	uVar13	inst2Flags	INFERRED	inst2[5]: flags, 0x200 = has extra source	^\s*uVar13\ =\ param_2\[5\];$	+1
+use	FUN_001621c8	uVar13	inst2Flags	INFERRED	inst2[5]: flags, 0x200 = has extra source	^\s*if\ \(\(uVar13\ \&\ 0x200\)\ !=\ 0\)\ \{$	+1
+use	FUN_001621c8	uVar13	inst2Flags	INFERRED	inst2[5]: flags, 0x200 = has extra source	^\s*uVar13\ =\ param_2\[5\];$@2	+1
+use	FUN_001621c8	uVar13	sourceComponent	INFERRED	component byte of the operand select	^\s*uVar13\ =\ \(uint\)\*\(byte\ \*\)\(iVar6\ \+\ iVar7\ \+\ 0x10\);$	+1
+use	FUN_001621c8	uVar13	sourceComponent	INFERRED	component byte of the operand select	^\s*if\ \(\(\(int\)\*\(char\ \*\)\(iVar7\ \+\ 0x15c\)\ >>\ \(uVar13\ \&\ 0x3f\)\ \&\ 1U\)\ ==\ 0\)\ \{$	+1
+use	FUN_001621c8	uVar13	sourceComponent	INFERRED	component byte of the operand select	^\s*\*pfVar4\ =\ \*\(float\ \*\)\(uVar13\ \*\ 0x18\ \+\ iVar7\ \+\ 0x20\);$	+1
+use	FUN_001621c8	uVar13	sourceComponentB	INFERRED	component byte of the operand select	^\s*uVar13\ =\ \(uint\)\*\(byte\ \*\)\(iVar7\ \+\ iVar6\ \+\ 0x10\);$	+1
+use	FUN_001621c8	uVar13	sourceComponentB	INFERRED	component byte of the operand select	^\s*if\ \(\(\(int\)\*\(char\ \*\)\(iVar6\ \+\ 0x15c\)\ >>\ \(uVar13\ \&\ 0x3f\)\ \&\ 1U\)\ ==\ 0\)\ \{$	+1
+use	FUN_001621c8	uVar13	sourceComponentB	INFERRED	component byte of the operand select	^\s*\*pfVar4\ =\ \(float\)\(dVar21\ \*\ \(double\)\*\(float\ \*\)\(uVar13\ \*\ 0x18\ \+\ iVar6\ \+\ 0x20\)\);$	+1
+use	FUN_001621c8	uVar13	sourceComponentC	INFERRED	component byte of the operand select	^\s*uVar13\ =\ \(uint\)\*\(byte\ \*\)\(iVar6\ \+\ iVar7\ \+\ 0x10\);$@2	+1
+use	FUN_001621c8	uVar13	sourceComponentC	INFERRED	component byte of the operand select	^\s*if\ \(\(\(int\)\*\(char\ \*\)\(iVar7\ \+\ 0x15c\)\ >>\ \(uVar13\ \&\ 0x3f\)\ \&\ 1U\)\ ==\ 0\)\ \{$@2	+1
+use	FUN_001621c8	uVar13	sourceComponentC	INFERRED	component byte of the operand select	^\s*\*pfVar4\ =\ \(float\)\(dVar21\ \*\ \(double\)\*\(float\ \*\)\(uVar13\ \*\ 0x18\ \+\ iVar7\ \+\ 0x20\)\);$	+1
+use	FUN_001621c8	uVar14	inst2FlagsB	INFERRED	inst2[5]: flags	^\s*uVar14\ =\ param_2\[5\];$	+1
+use	FUN_001621c8	uVar14	inst2FlagsB	INFERRED	inst2[5]: flags	^\s*if\ \(\(uVar14\ \&\ 0x200\)\ !=\ 0\)\ \{$	+1
+use	FUN_001621c8	uVar14	inst2FlagsB	INFERRED	inst2[5]: flags	^\s*uVar14\ =\ param_2\[5\];$@2	+1
+use	FUN_001621c8	uVar14	inst2FlagsB	INFERRED	inst2[5]: flags	^\s*if\ \(\(uVar14\ \&\ 0x200\)\ !=\ 0\)\ \{$@2	+1
+use	FUN_001621c8	uVar14	instFlags	INFERRED	inst[5]: flags, bit 2 = saturate-like marker	^\s*uVar14\ =\ param_1\[5\];$	+1
+use	FUN_001621c8	uVar14	instFlags	INFERRED	inst[5]: flags, bit 2 = saturate-like marker	^\s*if\ \(\(uVar14\ \&\ 2\)\ !=\ 0\)\ \{$	+1
+use	FUN_001621c8	bVar2	foundNonConstLane	INFERRED	false when some lane of both dests is written by both insts	^\s*bVar2\ =\ true;$	+1
+use	FUN_001621c8	bVar2	foundNonConstLane	INFERRED	false when some lane of both dests is written by both insts	^\s*bVar2\ =\ false;$	+1
+use	FUN_001621c8	bVar2	foundNonConstLane	INFERRED	false when some lane of both dests is written by both insts	^\s*if\ \(\(bVar2\)\ \&\&$	+1
+use	FUN_001621c8	iVar6	destRegisterArg	INFERRED	register passed to RegKind__flagBit7	^\s*iVar6\ =\ param_2\[0x2c\];$	+1
+use	FUN_001621c8	uVar13	inst2Flags	INFERRED	inst2[5]: flags	^\s*if\ \(\(uVar13\ \&\ 0x200\)\ !=\ 0\)\ \{$@2	+1
+use	FUN_001621c8	bVar2	moreLanes	INFERRED	lane != 3	^\s*bVar2\ =\ iVar7\ !=\ 3;$	+1
+use	FUN_001621c8	bVar2	moreLanes	INFERRED	lane != 3	^\s*\}\ while\ \(bVar2\);$@2	+1
