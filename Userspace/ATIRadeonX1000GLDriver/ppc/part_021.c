@@ -1976,11 +1976,11 @@ int FUN_000e43ec(ilReader)
 }
 
 /* setWord30 @ 0xe4400 (8 bytes) */
-int setWord30(unusedArg1, unusedArg2)
-  int unusedArg1;
-  undefined4 unusedArg2;
+int setWord30(object, value)
+  int object;
+  undefined4 value;
 {
-  *(undefined4 *)(unusedArg1 + 0x30) = unusedArg2;
+  *(undefined4 *)(object + 0x30) = value;
   return;
 }
 

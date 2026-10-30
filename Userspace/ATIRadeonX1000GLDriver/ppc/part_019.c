@@ -2769,8 +2769,8 @@ int FUN_000da420(param_1)
 }
 
 /* FUN_000da438 @ 0xda438 (32 bytes) */
-int FUN_000da438(unusedArg1, param_2)
-  int unusedArg1;
+int FUN_000da438(targetObject, param_2)
+  int targetObject;
   undefined4 *param_2;
 {
   undefined4 uVar1;
@@ -2778,9 +2778,9 @@ int FUN_000da438(unusedArg1, param_2)
   
   uVar2 = param_2[2];
   uVar1 = param_2[1];
-  *(undefined4 *)(unusedArg1 + 0x18) = *param_2;
-  *(undefined4 *)(unusedArg1 + 0x20) = uVar2;
-  *(undefined4 *)(unusedArg1 + 0x1c) = uVar1;
+  *(undefined4 *)(targetObject + 0x18) = *param_2;
+  *(undefined4 *)(targetObject + 0x20) = uVar2;
+  *(undefined4 *)(targetObject + 0x1c) = uVar1;
   return;
 }
 

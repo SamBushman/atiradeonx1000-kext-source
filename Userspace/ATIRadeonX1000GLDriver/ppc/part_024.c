@@ -208,9 +208,9 @@ int FUN_000ec42c(program, node)
 }
 
 /* FUN_000ec468 @ 0xec468 (136 bytes) */
-int FUN_000ec468(param_1, unusedArg2, param_3)
+int FUN_000ec468(param_1, sourceArray, param_3)
   int param_1;
-  int unusedArg2;
+  int sourceArray;
   uint param_3;
 {
   undefined4 allocation;
@@ -226,7 +226,7 @@ int FUN_000ec468(param_1, unusedArg2, param_3)
   loopCounter = 0;
   do {
     loopIndex = loopIndex + 1;
-    *(undefined4 *)(*(int *)(param_1 + 0x394) + loopCounter) = *(undefined4 *)(unusedArg2 + loopCounter);
+    *(undefined4 *)(*(int *)(param_1 + 0x394) + loopCounter) = *(undefined4 *)(sourceArray + loopCounter);
     loopCounter = loopCounter + 4;
   } while (loopIndex <= param_3);
   return;

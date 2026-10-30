@@ -2705,9 +2705,9 @@ int IRInst__applyDescriptorSwizzle(descriptor, inst)
 }
 
 /* FUN_000f9038 @ 0xf9038 (264 bytes) */
-int FUN_000f9038(param_1, unusedArg2, list)
+int FUN_000f9038(param_1, tempIndex, list)
   int param_1;
-  undefined4 unusedArg2;
+  undefined4 tempIndex;
   undefined4 list;
 {
   undefined4 inst;
@@ -2717,21 +2717,21 @@ int FUN_000f9038(param_1, unusedArg2, list)
   inst = IRInst__create(0x17,*(undefined4 *)(param_1 + 8));
   operandRecord = IRInst__getOperandRecord(inst,0);
   *(undefined4 *)(operandRecord + 0xc) = 0;
-  *(undefined4 *)(operandRecord + 8) = unusedArg2;
+  *(undefined4 *)(operandRecord + 8) = tempIndex;
   operandRecord = IRInst__getOperandRecord(inst,1);
   dVar3 = (double)FLOAT_001aa0d4;
   *(undefined4 *)(operandRecord + 0xc) = 0;
-  *(undefined4 *)(operandRecord + 8) = unusedArg2;
+  *(undefined4 *)(operandRecord + 8) = tempIndex;
   ((void (*)())IRInst__makeLiteralVec4Float)(inst,param_1,2,dVar3,dVar3,dVar3,dVar3);
   DList__pushBack(list,inst);
   inst = IRInst__create(0x19,*(undefined4 *)(param_1 + 8));
   operandRecord = IRInst__getOperandRecord(inst,0);
   *(undefined4 *)(operandRecord + 0xc) = 0;
-  *(undefined4 *)(operandRecord + 8) = unusedArg2;
+  *(undefined4 *)(operandRecord + 8) = tempIndex;
   operandRecord = IRInst__getOperandRecord(inst,1);
   dVar3 = (double)FLOAT_001aa0e8;
   *(undefined4 *)(operandRecord + 0xc) = 0;
-  *(undefined4 *)(operandRecord + 8) = unusedArg2;
+  *(undefined4 *)(operandRecord + 8) = tempIndex;
   ((void (*)())IRInst__makeLiteralVec4Float)(inst,param_1,2,dVar3,dVar3,dVar3,dVar3);
   DList__pushBack(list,inst);
   return inst;
@@ -2845,12 +2845,12 @@ int Program__appendInst(program, inst, block)
 }
 
 /* FUN_000f94dc @ 0xf94dc (968 bytes) */
-int FUN_000f94dc(program, list, descriptor, unusedArg4, unusedArg5, param_6, param_7)
+int FUN_000f94dc(program, list, descriptor, unusedArg4, projectionDestRegister, param_6, param_7)
   int program;
   undefined4 list;
   uint *descriptor;
   undefined4 unusedArg4;
-  undefined4 unusedArg5;
+  undefined4 projectionDestRegister;
   undefined4 param_6;
   undefined4 param_7;
 {
@@ -3029,7 +3029,7 @@ int FUN_000f94dc(program, list, descriptor, unusedArg4, unusedArg5, param_6, par
   registerFile = Program__registerFileOfIlType(program,param_6);
   operandRecord2 = IRInst__getOperandRecord(inst,0);
   *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
-  *(undefined4 *)(operandRecord2 + 8) = unusedArg5;
+  *(undefined4 *)(operandRecord2 + 8) = projectionDestRegister;
   *(undefined4 *)((int)inst + 0x9c) = 0x10101;
   operandRecord2 = IRInst__getOperandRecord(inst,1);
   *(undefined4 *)(operandRecord2 + 0xc) = 0x3a;

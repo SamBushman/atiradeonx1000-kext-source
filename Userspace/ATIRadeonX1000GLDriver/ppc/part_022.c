@@ -1775,12 +1775,12 @@ int LoopHeader__getKindName(this)
 }
 
 /* FUN_000e77f4 @ 0xe77f4 (16 bytes) */
-int FUN_000e77f4(unusedArg1, unusedArg2)
-  int unusedArg1;
-  undefined4 unusedArg2;
+int FUN_000e77f4(scope, breakTarget)
+  int scope;
+  undefined4 breakTarget;
 {
-  *(undefined4 *)(unusedArg1 + 0x154) = unusedArg2;
-  *(undefined4 *)(unusedArg1 + 0x150) = 1;
+  *(undefined4 *)(scope + 0x154) = breakTarget;
+  *(undefined4 *)(scope + 0x150) = 1;
   return;
 }
 

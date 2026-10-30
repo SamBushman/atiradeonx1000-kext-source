@@ -2209,8 +2209,8 @@ local	ConstBank__storeBoolLane	param_1	unusedArg1	INFERRED	passed by the caller 
 local	ConstBank__addMappedEntry	param_1	unusedArg1	INFERRED	passed by the caller (register leftover) but not read in the body
 local	ConstBank__addMappedEntry	param_3	unusedArg3	INFERRED	passed by the caller (register leftover) but not read in the body
 local	ConstBank__addMappedEntry	param_4	unusedArg4	INFERRED	passed by the caller (register leftover) but not read in the body
-local	FUN_000da438	param_1	unusedArg1	INFERRED	passed by the caller (register leftover) but not read in the body
-local	FUN_000e0ca8	param_1	unusedArg1	INFERRED	passed by the caller (register leftover) but not read in the body
+local	FUN_000da438	param_1	targetObject	INFERRED	object whose words +0x18/+0x1c/+0x20 are set from param_2
+local	FUN_000e0ca8	param_1	compiler	INFERRED	compiler whose fields +0x318/+0x478/+0x47c/+0x480 are reset
 local	testBit24	param_1	unusedArg1	INFERRED	passed by the caller (register leftover) but not read in the body
 local	Compiler__logf	param_1	unusedArg1	INFERRED	passed by the caller (register leftover) but not read in the body
 local	Compiler__logf	param_2	unusedArg2	INFERRED	passed by the caller (register leftover) but not read in the body
@@ -2236,25 +2236,25 @@ local	noop_e138c	param_5	unusedArg5	INFERRED	passed by the caller (register left
 local	noop_e138c	param_6	unusedArg6	INFERRED	passed by the caller (register leftover) but not read in the body
 local	noop_e138c	param_7	unusedArg7	INFERRED	passed by the caller (register leftover) but not read in the body
 local	noop_e138c	param_8	unusedArg8	INFERRED	passed by the caller (register leftover) but not read in the body
-local	FUN_000e13a8	param_1	unusedArg1	INFERRED	passed by the caller (register leftover) but not read in the body
-local	FUN_000e144c	param_1	unusedArg1	INFERRED	passed by the caller (register leftover) but not read in the body
-local	FUN_000e144c	param_2	unusedArg2	INFERRED	passed by the caller (register leftover) but not read in the body
+local	FUN_000e13a8	param_1	compiler	INFERRED	compiler whose flag at +0x31c is set
+local	FUN_000e144c	param_1	compiler	INFERRED	compiler whose fields +0x588..+0x598 are set
+local	FUN_000e144c	param_2	value588	INFERRED	stored at compiler+0x588
 local	FUN_000e144c	param_3	unusedArg3	INFERRED	passed by the caller (register leftover) but not read in the body
-local	FUN_000e144c	param_4	unusedArg4	INFERRED	passed by the caller (register leftover) but not read in the body
-local	FUN_000e144c	param_5	unusedArg5	INFERRED	passed by the caller (register leftover) but not read in the body
-local	FUN_000e144c	param_6	unusedArg6	INFERRED	passed by the caller (register leftover) but not read in the body
-local	FUN_000e144c	param_7	unusedArg7	INFERRED	passed by the caller (register leftover) but not read in the body
-local	Compiler__setTableEntry534	param_1	unusedArg1	INFERRED	passed by the caller (register leftover) but not read in the body
-local	Compiler__setTableEntry534	param_2	unusedArg2	INFERRED	passed by the caller (register leftover) but not read in the body
-local	Compiler__setTableEntry534	param_3	unusedArg3	INFERRED	passed by the caller (register leftover) but not read in the body
+local	FUN_000e144c	param_4	value58c	INFERRED	stored at compiler+0x58c
+local	FUN_000e144c	param_5	value590	INFERRED	stored at compiler+0x590
+local	FUN_000e144c	param_6	value598	INFERRED	stored at compiler+0x598
+local	FUN_000e144c	param_7	value594	INFERRED	stored at compiler+0x594
+local	Compiler__setTableEntry534	param_1	compiler	INFERRED	compiler object whose table at +0x534 is written
+local	Compiler__setTableEntry534	param_2	entryIndex	INFERRED	index into the table
+local	Compiler__setTableEntry534	param_3	entryValue	INFERRED	value stored
 local	Program__forwardMulOperandToUsers	param_3	unusedArg3	INFERRED	passed by the caller (register leftover) but not read in the body
 local	Program__forwardMulOperandToUsers	param_5	unusedArg5	INFERRED	passed by the caller (register leftover) but not read in the body
 local	Program__forwardMulOperandToUsers	param_6	unusedArg6	INFERRED	passed by the caller (register leftover) but not read in the body
 local	Program__forwardMulOperandToUsers	param_7	unusedArg7	INFERRED	passed by the caller (register leftover) but not read in the body
-local	setWord30	param_1	unusedArg1	INFERRED	passed by the caller (register leftover) but not read in the body
-local	setWord30	param_2	unusedArg2	INFERRED	passed by the caller (register leftover) but not read in the body
-local	FUN_000e77f4	param_1	unusedArg1	INFERRED	passed by the caller (register leftover) but not read in the body
-local	FUN_000e77f4	param_2	unusedArg2	INFERRED	passed by the caller (register leftover) but not read in the body
+local	setWord30	param_1	object	INFERRED	object whose word +0x30 is set
+local	setWord30	param_2	value	INFERRED	stored at object+0x30
+local	FUN_000e77f4	param_1	scope	INFERRED	scope object whose break target (+0x154) and flag (+0x150) are set
+local	FUN_000e77f4	param_2	breakTarget	INFERRED	stored at scope+0x154
 local	Block__getBranchInst	param_2	unusedArg2	INFERRED	passed by the caller (register leftover) but not read in the body
 local	Block__getBranchInst	param_3	unusedArg3	INFERRED	passed by the caller (register leftover) but not read in the body
 local	Block__getBranchInst	param_4	unusedArg4	INFERRED	passed by the caller (register leftover) but not read in the body
@@ -2274,7 +2274,7 @@ local	Block__verify	param_5	unusedArg5	INFERRED	passed by the caller (register l
 local	Block__verify	param_6	unusedArg6	INFERRED	passed by the caller (register leftover) but not read in the body
 local	Block__verify	param_7	unusedArg7	INFERRED	passed by the caller (register leftover) but not read in the body
 local	Table__interpolatorKindToCode	param_1	unusedArg1	INFERRED	passed by the caller (register leftover) but not read in the body
-local	FUN_000ec468	param_2	unusedArg2	INFERRED	passed by the caller (register leftover) but not read in the body
+local	FUN_000ec468	param_2	sourceArray	INFERRED	array of words copied into the program table
 local	HwLimits__vslot43_prependDefaultMov	param_3	unusedArg3	INFERRED	passed by the caller (register leftover) but not read in the body
 local	FUN_000eec50	param_2	unusedArg2	INFERRED	passed by the caller (register leftover) but not read in the body
 local	Program__insertExitMarkerAndFlagBlocks	param_2	unusedArg2	INFERRED	passed by the caller (register leftover) but not read in the body
@@ -2288,19 +2288,19 @@ local	SelectWord__fillUnusedLanes	param_2	unusedArg2	INFERRED	passed by the call
 local	SelectWord__fillUnusedLanes	param_3	unusedArg3	INFERRED	passed by the caller (register leftover) but not read in the body
 local	SelectWord__firstWrittenComponent	param_1	unusedArg1	INFERRED	passed by the caller (register leftover) but not read in the body
 local	SelectWord__firstUnwrittenComponent	param_1	unusedArg1	INFERRED	passed by the caller (register leftover) but not read in the body
-local	SelectWord__clearReadComponents	param_1	unusedArg1	INFERRED	passed by the caller (register leftover) but not read in the body
-local	FUN_000f32cc	param_1	unusedArg1	INFERRED	passed by the caller (register leftover) but not read in the body
-local	SelectWord__readMask	param_1	unusedArg1	INFERRED	passed by the caller (register leftover) but not read in the body
-local	FUN_000f3470	param_1	unusedArg1	INFERRED	passed by the caller (register leftover) but not read in the body
-local	FUN_000f3470	param_2	unusedArg2	INFERRED	passed by the caller (register leftover) but not read in the body
-local	FUN_000f366c	param_1	unusedArg1	INFERRED	passed by the caller (register leftover) but not read in the body
+local	SelectWord__clearReadComponents	param_1	outMask	INFERRED	receives the four result bytes
+local	FUN_000f32cc	param_1	outMask	INFERRED	receives the four result bytes
+local	SelectWord__readMask	param_1	outMask	INFERRED	receives the four result bytes
+local	FUN_000f3470	param_1	outSelect	INFERRED	receives the canonical select word
+local	FUN_000f3470	param_2	selectWord	INFERRED	select word to canonicalize
+local	FUN_000f366c	param_1	outMask	INFERRED	receives the four result bytes
 local	FUN_000f366c	param_2	unusedArg2	INFERRED	passed by the caller (register leftover) but not read in the body
 local	FUN_000f370c	param_2	unusedArg2	INFERRED	passed by the caller (register leftover) but not read in the body
 local	laneBytes__clearSetLanes	param_2	unusedArg2	INFERRED	passed by the caller (register leftover) but not read in the body
-local	FUN_000f3968	param_1	unusedArg1	INFERRED	passed by the caller (register leftover) but not read in the body
-local	FUN_000f39d0	param_1	unusedArg1	INFERRED	passed by the caller (register leftover) but not read in the body
-local	FUN_000f472c	param_1	unusedArg1	INFERRED	passed by the caller (register leftover) but not read in the body
-local	FUN_000f47a8	param_1	unusedArg1	INFERRED	passed by the caller (register leftover) but not read in the body
+local	FUN_000f3968	param_1	outMask	INFERRED	receives the four result bytes
+local	FUN_000f39d0	param_1	outMask	INFERRED	receives the four result bytes
+local	FUN_000f472c	param_1	outMask	INFERRED	receives the four result bytes
+local	FUN_000f47a8	param_1	outMask	INFERRED	receives the four result bytes
 local	ConstKey__countPresentOperands	param_2	unusedArg2	INFERRED	passed by the caller (register leftover) but not read in the body
 local	ConstKey__countPresentOperands	param_3	unusedArg3	INFERRED	passed by the caller (register leftover) but not read in the body
 local	ConstKey__countPresentOperands	param_4	unusedArg4	INFERRED	passed by the caller (register leftover) but not read in the body
@@ -2309,9 +2309,9 @@ local	ConstKey__countPresentOperands	param_6	unusedArg6	INFERRED	passed by the c
 local	ConstKey__countPresentOperands	param_7	unusedArg7	INFERRED	passed by the caller (register leftover) but not read in the body
 local	IRInst__applyDescriptorSelects	param_2	unusedArg2	INFERRED	passed by the caller (register leftover) but not read in the body
 local	IRInst__applyDescriptorSelects	param_5	unusedArg5	INFERRED	passed by the caller (register leftover) but not read in the body
-local	FUN_000f9038	param_2	unusedArg2	INFERRED	passed by the caller (register leftover) but not read in the body
+local	FUN_000f9038	param_2	tempIndex	INFERRED	temp register index stored in operands 0 and 1
 local	FUN_000f94dc	param_4	unusedArg4	INFERRED	passed by the caller (register leftover) but not read in the body
-local	FUN_000f94dc	param_5	unusedArg5	INFERRED	passed by the caller (register leftover) but not read in the body
+local	FUN_000f94dc	param_5	projectionDestRegister	INFERRED	register number of the projection mov destination
 local	FUN_000f9a58	param_4	unusedArg4	INFERRED	passed by the caller (register leftover) but not read in the body
 use	FUN_000e3b88	iVar6	queryResult	INFERRED	scratch for the successive boolean queries on the scanned instruction (vtable +0x50, IRInst__lastSourceKeyEquals, RegKind__flagBit0)	^\s*iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*piVar8\ \+\ 0x50\)\)\(piVar8\);$	+2
 use	FUN_000e3b88	iVar6	queryResult	INFERRED	scratch for the successive boolean queries on the scanned instruction (vtable +0x50, IRInst__lastSourceKeyEquals, RegKind__flagBit0)	^\s*iVar6\ =\ \(\(int\ \(\*\)\(\)\)FUN_000e2f8c\)\(piVar13,uVar11,\*param_1\);$	+2

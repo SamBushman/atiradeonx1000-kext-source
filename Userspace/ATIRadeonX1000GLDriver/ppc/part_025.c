@@ -378,50 +378,50 @@ int SelectWord__selectWhereMasked(outSelect, baseSelect, laneMask)
 }
 
 /* SelectWord__clearReadComponents @ 0xf3258 (116 bytes) */
-int SelectWord__clearReadComponents(unusedArg1, param_2)
-  undefined4 *unusedArg1;
+int SelectWord__clearReadComponents(outMask, param_2)
+  undefined4 *outMask;
   uint param_2;
 {
-  *unusedArg1 = DAT_001aa838;
+  *outMask = DAT_001aa838;
   if (param_2 >> 0x18 < 4) {
-    *(undefined1 *)unusedArg1 = 0;
+    *(undefined1 *)outMask = 0;
   }
   if ((param_2 >> 0x10 & 0xff) < 4) {
-    *(undefined1 *)((int)unusedArg1 + 1) = 0;
+    *(undefined1 *)((int)outMask + 1) = 0;
   }
   if ((param_2 >> 8 & 0xff) < 4) {
-    *(undefined1 *)((int)unusedArg1 + 2) = 0;
+    *(undefined1 *)((int)outMask + 2) = 0;
   }
   if (3 < (param_2 & 0xff)) {
     return;
   }
-  *(undefined1 *)((int)unusedArg1 + 3) = 0;
+  *(undefined1 *)((int)outMask + 3) = 0;
   return;
 }
 
 /* FUN_000f32cc @ 0xf32cc (116 bytes) */
-int FUN_000f32cc(unusedArg1, param_2)
-  undefined4 *unusedArg1;
+int FUN_000f32cc(outMask, param_2)
+  undefined4 *outMask;
   uint param_2;
 {
   uint uVar1;
   
-  *unusedArg1 = DAT_001aa838;
+  *outMask = DAT_001aa838;
   if (param_2 >> 0x18 < 4) {
-    *(undefined1 *)((int)unusedArg1 + (param_2 >> 0x18)) = 0;
+    *(undefined1 *)((int)outMask + (param_2 >> 0x18)) = 0;
   }
   uVar1 = param_2 >> 0x10 & 0xff;
   if (uVar1 < 4) {
-    *(undefined1 *)((int)unusedArg1 + uVar1) = 0;
+    *(undefined1 *)((int)outMask + uVar1) = 0;
   }
   uVar1 = param_2 >> 8 & 0xff;
   if (uVar1 < 4) {
-    *(undefined1 *)((int)unusedArg1 + uVar1) = 0;
+    *(undefined1 *)((int)outMask + uVar1) = 0;
   }
   if (3 < (param_2 & 0xff)) {
     return;
   }
-  *(undefined1 *)((int)unusedArg1 + (param_2 & 0xff)) = 0;
+  *(undefined1 *)((int)outMask + (param_2 & 0xff)) = 0;
   return;
 }
 
@@ -448,28 +448,28 @@ int SelectWord__maskUnused(outSelect, baseSelect, maskWord)
 }
 
 /* SelectWord__readMask @ 0xf3398 (96 bytes) */
-int SelectWord__readMask(unusedArg1, param_2)
-  undefined4 *unusedArg1;
+int SelectWord__readMask(outMask, param_2)
+  undefined4 *outMask;
   uint param_2;
 {
   uint uVar1;
   
-  *unusedArg1 = 0;
+  *outMask = 0;
   if (param_2 >> 0x18 < 4) {
-    *(undefined1 *)((int)unusedArg1 + (param_2 >> 0x18)) = 1;
+    *(undefined1 *)((int)outMask + (param_2 >> 0x18)) = 1;
   }
   uVar1 = param_2 >> 0x10 & 0xff;
   if (uVar1 < 4) {
-    *(undefined1 *)((int)unusedArg1 + uVar1) = 1;
+    *(undefined1 *)((int)outMask + uVar1) = 1;
   }
   uVar1 = param_2 >> 8 & 0xff;
   if (uVar1 < 4) {
-    *(undefined1 *)((int)unusedArg1 + uVar1) = 1;
+    *(undefined1 *)((int)outMask + uVar1) = 1;
   }
   if (3 < (param_2 & 0xff)) {
     return;
   }
-  *(undefined1 *)((int)unusedArg1 + (param_2 & 0xff)) = 1;
+  *(undefined1 *)((int)outMask + (param_2 & 0xff)) = 1;
   return;
 }
 
@@ -511,12 +511,12 @@ int SelectWord__fillUnusedWithFirstUsed(result, selectWord)
 }
 
 /* FUN_000f3470 @ 0xf3470 (340 bytes) */
-int FUN_000f3470(unusedArg1, unusedArg2)
-  uint *unusedArg1;
-  uint unusedArg2;
+int FUN_000f3470(outSelect, selectWord)
+  uint *outSelect;
+  uint selectWord;
 {
   int loopCounter;
-  unsigned int ghidra_home[8] = { unusedArg1, unusedArg2, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[8] = { outSelect, selectWord, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   bool bVar1;
   bool bVar2;
   uint uVar3;
@@ -527,9 +527,9 @@ int FUN_000f3470(unusedArg1, unusedArg2)
   int iVar8;
   int iVar9;
   
-  (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = unusedArg2;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = selectWord;
   uVar3 = (*(unsigned char *)((unsigned char *)ghidra_home + 4));
-  (*(byte *)((unsigned char *)ghidra_home + 4)) = (byte)(unusedArg2 >> 0x18);
+  (*(byte *)((unsigned char *)ghidra_home + 4)) = (byte)(selectWord >> 0x18);
   uVar4 = (uint)(*(byte *)((unsigned char *)ghidra_home + 4));
   if (uVar4 == 4) {
     bVar2 = true;
@@ -570,13 +570,13 @@ int FUN_000f3470(unusedArg1, unusedArg2)
     if (!bVar1) goto LAB_000f35b4;
   }
   if (bVar2) {
-    *unusedArg1 = (DAT_001aa818)[uVar4];
+    *outSelect = (DAT_001aa818)[uVar4];
     return;
   }
   bVar1 = (*(byte *)((unsigned char *)ghidra_home + 4)) == 4;
   (*(unsigned char *)((unsigned char *)ghidra_home + 4)) = uVar3;
   if (bVar1) {
-    (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = unusedArg2 & 0xffffff;
+    (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = selectWord & 0xffffff;
   }
   if ((*(char *)((unsigned char *)ghidra_home + 5)) == '\x04') {
     (*(char *)((unsigned char *)ghidra_home + 5)) = CONCAT12(1,(*(char *)((unsigned char *)ghidra_home + 6)));
@@ -591,7 +591,7 @@ int FUN_000f3470(unusedArg1, unusedArg2)
   }
 LAB_000f35b4:
   (*(unsigned char *)((unsigned char *)ghidra_home + 4)) = uVar3;
-  *unusedArg1 = (*(unsigned char *)((unsigned char *)ghidra_home + 4));
+  *outSelect = (*(unsigned char *)((unsigned char *)ghidra_home + 4));
   return;
 }
 
@@ -623,21 +623,21 @@ int IRInst__clearSourceSelectsOfUnwrittenComponents(inst)
 }
 
 /* FUN_000f366c @ 0xf366c (76 bytes) */
-int FUN_000f366c(unusedArg1, unusedArg2)
-  undefined4 *unusedArg1;
+int FUN_000f366c(outMask, unusedArg2)
+  undefined4 *outMask;
   undefined4 unusedArg2;
 {
-  unsigned int ghidra_home[8] = { unusedArg1, unusedArg2, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[8] = { outMask, unusedArg2, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   byte *pbVar1;
   int loopCounter;
   
   (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = unusedArg2;
   loopCounter = 4;
-  *unusedArg1 = DAT_001aa838;
+  *outMask = DAT_001aa838;
   pbVar1 = (byte *)&(*(unsigned int *)((unsigned char *)ghidra_home + 4));
   do {
     if (*pbVar1 != 4) {
-      *(undefined1 *)((int)unusedArg1 + (uint)*pbVar1) = 0;
+      *(undefined1 *)((int)outMask + (uint)*pbVar1) = 0;
     }
     pbVar1 = pbVar1 + 1;
     loopCounter = loopCounter + -1;
@@ -805,56 +805,56 @@ int WriteMask__fromSelectWord(outMask, selectWord)
 }
 
 /* FUN_000f3968 @ 0xf3968 (104 bytes) */
-int FUN_000f3968(unusedArg1, param_2, param_3)
-  undefined4 *unusedArg1;
+int FUN_000f3968(outMask, param_2, param_3)
+  undefined4 *outMask;
   uint param_2;
   undefined4 param_3;
 {
   undefined1 uVar1;
   
   uVar1 = 0;
-  *unusedArg1 = 0;
+  *outMask = 0;
   if (param_2 >> 0x18 == 1) {
     uVar1 = (undefined1)((uint)param_3 >> 0x18);
   }
-  *(undefined1 *)unusedArg1 = uVar1;
+  *(undefined1 *)outMask = uVar1;
   uVar1 = 0;
   if ((param_2 >> 0x10 & 0xff) == 1) {
     uVar1 = (undefined1)((uint)param_3 >> 0x10);
   }
-  *(undefined1 *)((int)unusedArg1 + 1) = uVar1;
+  *(undefined1 *)((int)outMask + 1) = uVar1;
   uVar1 = 0;
   if ((param_2 >> 8 & 0xff) == 1) {
     uVar1 = (undefined1)((uint)param_3 >> 8);
   }
-  *(undefined1 *)((int)unusedArg1 + 2) = uVar1;
+  *(undefined1 *)((int)outMask + 2) = uVar1;
   uVar1 = 0;
   if ((param_2 & 0xff) == 1) {
     uVar1 = (undefined1)param_3;
   }
-  *(undefined1 *)((int)unusedArg1 + 3) = uVar1;
+  *(undefined1 *)((int)outMask + 3) = uVar1;
   return;
 }
 
 /* FUN_000f39d0 @ 0xf39d0 (96 bytes) */
-int FUN_000f39d0(unusedArg1, param_2)
-  undefined4 *unusedArg1;
+int FUN_000f39d0(outMask, param_2)
+  undefined4 *outMask;
   uint param_2;
 {
-  *unusedArg1 = 0;
+  *outMask = 0;
   if (param_2 >> 0x18 < 4) {
-    *(undefined1 *)unusedArg1 = 1;
+    *(undefined1 *)outMask = 1;
   }
   if ((param_2 >> 0x10 & 0xff) < 4) {
-    *(undefined1 *)((int)unusedArg1 + 1) = 1;
+    *(undefined1 *)((int)outMask + 1) = 1;
   }
   if ((param_2 >> 8 & 0xff) < 4) {
-    *(undefined1 *)((int)unusedArg1 + 2) = 1;
+    *(undefined1 *)((int)outMask + 2) = 1;
   }
   if (3 < (param_2 & 0xff)) {
     return;
   }
-  *(undefined1 *)((int)unusedArg1 + 3) = 1;
+  *(undefined1 *)((int)outMask + 3) = 1;
   return;
 }
 
@@ -1485,8 +1485,8 @@ int IRInst__maskUnusedLanesOfOperand(inst, operandIndex, program)
 }
 
 /* FUN_000f472c @ 0xf472c (124 bytes) */
-int FUN_000f472c(unusedArg1, inst)
-  int unusedArg1;
+int FUN_000f472c(outMask, inst)
+  int outMask;
   undefined4 inst;
 {
   int operandRecord;
@@ -1508,13 +1508,13 @@ int FUN_000f472c(unusedArg1, inst)
     loopCounter = loopCounter + 1;
     loopCounterB = loopCounterB + -1;
   } while (loopCounterB != 0);
-  *(undefined4 *)(unusedArg1 + 0x9c) = local_28[0];
+  *(undefined4 *)(outMask + 0x9c) = local_28[0];
   return;
 }
 
 /* FUN_000f47a8 @ 0xf47a8 (180 bytes) */
-int FUN_000f47a8(unusedArg1, inst, inst2)
-  int unusedArg1;
+int FUN_000f47a8(outMask, inst, inst2)
+  int outMask;
   undefined4 inst;
   undefined4 inst2;
 {
@@ -1546,7 +1546,7 @@ int FUN_000f47a8(unusedArg1, inst, inst2)
     loopCounter = loopCounter + 1;
     loopCounterB = loopCounterB + -1;
   } while (loopCounterB != 0);
-  *(undefined4 *)(unusedArg1 + 0x9c) = local_28;
+  *(undefined4 *)(outMask + 0x9c) = local_28;
   return;
 }
 
