@@ -2583,14 +2583,14 @@ int OpcodeTraits__getField34(opcode, compiler)
 }
 
 /* OpcodeTraits__instFlagBit2 @ 0x11346c (80 bytes) */
-int OpcodeTraits__instFlagBit2(compiler, param_2)
+int OpcodeTraits__instFlagBit2(compiler, inst)
   int compiler;
-  int param_2;
+  int inst;
 {
-  int iVar1;
+  int opcodeFlagTable;
   
-  iVar1 = (**(code **)(**(int **)(compiler + 0x30c) + 0x16c))(*(int **)(compiler + 0x30c),param_2);
-  return *(uint *)(iVar1 + *(int *)(*(int *)(param_2 + 0x88) + 8) * 0x38) >> 2 & 1;
+  opcodeFlagTable = (**(code **)(**(int **)(compiler + 0x30c) + 0x16c))(*(int **)(compiler + 0x30c),inst);
+  return *(uint *)(opcodeFlagTable + *(int *)(*(int *)(inst + 0x88) + 8) * 0x38) >> 2 & 1;
 }
 
 /* OpcodeInfo__getResultMode @ 0x1134bc (152 bytes) */

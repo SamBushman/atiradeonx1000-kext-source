@@ -834,12 +834,12 @@ int VRegPool__findOrCreate(cache, keyA, keyB, keyExtra)
 }
 
 /* ConstKey__compare1 @ 0x12766c (52 bytes) */
-int ConstKey__compare1(param_1, param_2)
-  int param_1;
-  int param_2;
+int ConstKey__compare1(keyA, keyB)
+  int keyA;
+  int keyB;
 {
-  if (((*(byte *)(param_1 + 0x15c) & 1) == (*(byte *)(param_2 + 0x15c) & 1)) &&
-     (*(int *)(param_1 + 0x20) == *(int *)(param_2 + 0x20))) {
+  if (((*(byte *)(keyA + 0x15c) & 1) == (*(byte *)(keyB + 0x15c) & 1)) &&
+     (*(int *)(keyA + 0x20) == *(int *)(keyB + 0x20))) {
     return 0;
   }
   return 0xffffffff;

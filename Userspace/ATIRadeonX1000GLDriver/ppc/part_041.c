@@ -2441,25 +2441,25 @@ int NeighbourList__free_135090(node)
 }
 
 /* InterferenceNode__ctor_135110 @ 0x135110 (148 bytes) */
-int InterferenceNode__ctor_135110(param_1, param_2, param_3, param_4, compiler)
-  int *param_1;
-  int param_2;
-  int param_3;
-  int param_4;
+int InterferenceNode__ctor_135110(node, nodeId, nodeClass, graph, compiler)
+  int *node;
+  int nodeId;
+  int nodeClass;
+  int graph;
   int compiler;
 {
   undefined4 *allocation;
   undefined4 arena;
   
-  *param_1 = param_2;
-  param_1[1] = param_3;
-  param_1[2] = 0;
-  param_1[3] = 0;
-  param_1[5] = 0;
-  param_1[6] = 0;
-  param_1[7] = 0;
-  param_1[8] = 0;
-  *(int *)(param_2 * 4 + *(int *)(param_4 + 0x20)) = param_2;
+  *node = nodeId;
+  node[1] = nodeClass;
+  node[2] = 0;
+  node[3] = 0;
+  node[5] = 0;
+  node[6] = 0;
+  node[7] = 0;
+  node[8] = 0;
+  *(int *)(nodeId * 4 + *(int *)(graph + 0x20)) = nodeId;
   arena = *(undefined4 *)(compiler + COMP_arenaB);
   allocation = (undefined4 *)Arena__alloc(arena,0x14);
   *allocation = arena;
@@ -2468,30 +2468,30 @@ int InterferenceNode__ctor_135110(param_1, param_2, param_3, param_4, compiler)
   allocation[4] = arena;
   arena = Arena__alloc(arena,8);
   allocation[3] = arena;
-  param_1[4] = (int)(allocation + 1);
+  node[4] = (int)(allocation + 1);
   return;
 }
 
 /* InterferenceNode__ctor_1351c4 @ 0x1351c4 (148 bytes) */
-int InterferenceNode__ctor_1351c4(param_1, param_2, param_3, param_4, compiler)
-  int *param_1;
-  int param_2;
-  int param_3;
-  int param_4;
+int InterferenceNode__ctor_1351c4(node, nodeId, nodeClass, graph, compiler)
+  int *node;
+  int nodeId;
+  int nodeClass;
+  int graph;
   int compiler;
 {
   undefined4 *allocation;
   undefined4 arena;
   
-  *param_1 = param_2;
-  param_1[1] = param_3;
-  param_1[2] = 0;
-  param_1[3] = 0;
-  param_1[5] = 0;
-  param_1[6] = 0;
-  param_1[7] = 0;
-  param_1[8] = 0;
-  *(int *)(param_2 * 4 + *(int *)(param_4 + 0x20)) = param_2;
+  *node = nodeId;
+  node[1] = nodeClass;
+  node[2] = 0;
+  node[3] = 0;
+  node[5] = 0;
+  node[6] = 0;
+  node[7] = 0;
+  node[8] = 0;
+  *(int *)(nodeId * 4 + *(int *)(graph + 0x20)) = nodeId;
   arena = *(undefined4 *)(compiler + COMP_arenaB);
   allocation = (undefined4 *)Arena__alloc(arena,0x14);
   *allocation = arena;
@@ -2500,7 +2500,7 @@ int InterferenceNode__ctor_1351c4(param_1, param_2, param_3, param_4, compiler)
   allocation[4] = arena;
   arena = Arena__alloc(arena,8);
   allocation[3] = arena;
-  param_1[4] = (int)(allocation + 1);
+  node[4] = (int)(allocation + 1);
   return;
 }
 

@@ -729,44 +729,44 @@ int IRLoadInterp__ctor_109270(this, compiler)
 }
 
 /* IRLoadTemp__ctor_109348 @ 0x109348 (112 bytes) */
-int IRLoadTemp__ctor_109348(this, param_2, compiler)
+int IRLoadTemp__ctor_109348(this, sourceRecord, compiler)
   undefined4 *this;
-  int param_2;
+  int sourceRecord;
   undefined4 compiler;
 {
   undefined *vtable;
-  undefined4 uVar2;
+  undefined4 sourceWord8;
   
   ((int (*)())IRLoad__ctor_108e40)(this,0x7a,compiler);
   vtable = PTR_DAT_001e8c20;
   this[0x20] = 1;
   *this = vtable + 8;
-  this[0x26] = *(undefined4 *)(param_2 + 4);
-  uVar2 = *(undefined4 *)(param_2 + 8);
+  this[0x26] = *(undefined4 *)(sourceRecord + 4);
+  sourceWord8 = *(undefined4 *)(sourceRecord + 8);
   this[0x21] = 0;
-  this[0x25] = uVar2;
-  this[0x23] = param_2;
+  this[0x25] = sourceWord8;
+  this[0x23] = sourceRecord;
   return;
 }
 
 /* IRLoadTemp__ctor_1093b8 @ 0x1093b8 (112 bytes) */
-int IRLoadTemp__ctor_1093b8(this, param_2, compiler)
+int IRLoadTemp__ctor_1093b8(this, sourceRecord, compiler)
   undefined4 *this;
-  int param_2;
+  int sourceRecord;
   undefined4 compiler;
 {
   undefined *vtable;
-  undefined4 uVar2;
+  undefined4 sourceWord8;
   
   ((int (*)())IRLoad__ctor_108e40)(this,0x7a,compiler);
   vtable = PTR_DAT_001e8c20;
   this[0x20] = 1;
   *this = vtable + 8;
-  this[0x26] = *(undefined4 *)(param_2 + 4);
-  uVar2 = *(undefined4 *)(param_2 + 8);
+  this[0x26] = *(undefined4 *)(sourceRecord + 4);
+  sourceWord8 = *(undefined4 *)(sourceRecord + 8);
   this[0x21] = 0;
-  this[0x25] = uVar2;
-  this[0x23] = param_2;
+  this[0x25] = sourceWord8;
+  this[0x23] = sourceRecord;
   return;
 }
 
@@ -852,38 +852,38 @@ int IRLoadTemp__ctor_1095b4(this, compiler)
 }
 
 /* IRLoadConst__ctor_109614 @ 0x109614 (112 bytes) */
-int IRLoadConst__ctor_109614(this, param_2, compiler)
+int IRLoadConst__ctor_109614(this, sourceRecord, compiler)
   undefined4 *this;
-  int param_2;
+  int sourceRecord;
   int compiler;
 {
-  undefined4 uVar1;
+  undefined4 sourceWord8;
   
   ((int (*)())IRLoad__ctor_108e40)(this,0x79,compiler);
   *this = &PTR_FUN_001ea460;
-  this[0x26] = *(undefined4 *)(param_2 + 4);
-  uVar1 = *(undefined4 *)(param_2 + 8);
-  this[0x23] = param_2;
-  this[0x25] = uVar1;
+  this[0x26] = *(undefined4 *)(sourceRecord + 4);
+  sourceWord8 = *(undefined4 *)(sourceRecord + 8);
+  this[0x23] = sourceRecord;
+  this[0x25] = sourceWord8;
   this[0x20] = 1;
   this[0x21] = 0;
   return Program__appendToVector3c8(*(undefined4 *)(compiler + 0x6c4),this);
 }
 
 /* IRLoadConst__ctor_1096bc @ 0x1096bc (112 bytes) */
-int IRLoadConst__ctor_1096bc(this, param_2, compiler)
+int IRLoadConst__ctor_1096bc(this, sourceRecord, compiler)
   undefined4 *this;
-  int param_2;
+  int sourceRecord;
   int compiler;
 {
-  undefined4 uVar1;
+  undefined4 sourceWord8;
   
   ((int (*)())IRLoad__ctor_108e40)(this,0x79,compiler);
   *this = &PTR_FUN_001ea460;
-  this[0x26] = *(undefined4 *)(param_2 + 4);
-  uVar1 = *(undefined4 *)(param_2 + 8);
-  this[0x23] = param_2;
-  this[0x25] = uVar1;
+  this[0x26] = *(undefined4 *)(sourceRecord + 4);
+  sourceWord8 = *(undefined4 *)(sourceRecord + 8);
+  this[0x23] = sourceRecord;
+  this[0x25] = sourceWord8;
   this[0x20] = 1;
   this[0x21] = 0;
   return Program__appendToVector3c8(*(undefined4 *)(compiler + 0x6c4),this);

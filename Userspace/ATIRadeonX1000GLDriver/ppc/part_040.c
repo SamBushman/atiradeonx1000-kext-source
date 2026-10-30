@@ -3230,14 +3230,14 @@ int FUN_001304a4(allocator)
 }
 
 /* BitSet__setBit42c @ 0x13056c (40 bytes) */
-int BitSet__setBit42c(param_1, param_2)
-  int param_1;
-  uint param_2;
+int BitSet__setBit42c(allocator, bitIndex)
+  int allocator;
+  uint bitIndex;
 {
-  int iVar1;
+  int wordRef;
   
-  iVar1 = (param_2 >> 3 & 0x1ffffffc) + *(int *)(param_1 + 0x42c);
-  *(uint *)(iVar1 + 8) = 1 << (param_2 & 0x1f) | *(uint *)(iVar1 + 8);
+  wordRef = (bitIndex >> 3 & 0x1ffffffc) + *(int *)(allocator + 0x42c);
+  *(uint *)(wordRef + 8) = 1 << (bitIndex & 0x1f) | *(uint *)(wordRef + 8);
   return;
 }
 
@@ -3367,8 +3367,8 @@ int IRInst__chainLastOfPredecessor(inst)
 }
 
 /* IRInst__advanceToChainEnd @ 0x1307f8 (228 bytes) */
-int IRInst__advanceToChainEnd(param_1)
-  int *param_1;
+int IRInst__advanceToChainEnd(inst)
+  int *inst;
 {
   uint nextHasMarkBit;
   int instQuery74;
@@ -3378,30 +3378,30 @@ int IRInst__advanceToChainEnd(param_1)
   int instQuery38;
   uint instFlags;
   
-  instQuery38 = (**(code **)(*param_1 + 0x38))(param_1);
+  instQuery38 = (**(code **)(*inst + 0x38))(inst);
   if (instQuery38 == 0) {
-    instQuery28 = (**(code **)(*param_1 + 0x28))(param_1);
+    instQuery28 = (**(code **)(*inst + 0x28))(inst);
     if (instQuery28 == 0) {
-      instFlags = param_1[5];
+      instFlags = inst[5];
       while ((instFlags & 4) != 0) {
-        param_1 = (int *)param_1[2];
-        instFlags = param_1[5];
+        inst = (int *)inst[2];
+        instFlags = inst[5];
       }
     }
     else {
-      instQuery74 = (**(code **)(*param_1 + 0x74))(param_1);
+      instQuery74 = (**(code **)(*inst + 0x74))(inst);
       if (instQuery74 == 0) {
-        nextHasMarkBit = (**(code **)(*param_1 + 0x78))(param_1);
-        cursorInst = param_1;
+        nextHasMarkBit = (**(code **)(*inst + 0x78))(inst);
+        cursorInst = inst;
         while (previousInst = cursorInst, nextHasMarkBit == 0) {
           cursorInst = (int *)previousInst[2];
           nextHasMarkBit = cursorInst[5] & 0x1000;
-          param_1 = previousInst;
+          inst = previousInst;
         }
       }
     }
   }
-  return param_1;
+  return inst;
 }
 
 /* IRInst__chainEndNext @ 0x1308e0 (36 bytes) */

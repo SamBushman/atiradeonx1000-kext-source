@@ -2881,14 +2881,14 @@ int VRegPool__constructByKind(param_1, kindIndex, keyExtra, param_4)
 }
 
 /* VReg__popDefinition @ 0x122ebc (28 bytes) */
-int VReg__popDefinition(param_1)
-  int param_1;
+int VReg__popDefinition(vreg)
+  int vreg;
 {
-  int iVar1;
+  int definitionCount;
   
-  iVar1 = *(int *)(*(int *)(param_1 + 0x2c) + 4);
-  *(undefined4 *)(param_1 + 0x28) = 0xffffffff;
-  return Vector__removeAt(*(int *)(param_1 + 0x2c),iVar1 + -1);
+  definitionCount = *(int *)(*(int *)(vreg + 0x2c) + 4);
+  *(undefined4 *)(vreg + 0x28) = 0xffffffff;
+  return Vector__removeAt(*(int *)(vreg + 0x2c),definitionCount + -1);
 }
 
 /* ExportValue__vslot10 @ 0x122ed8 (80 bytes) */

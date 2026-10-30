@@ -2232,22 +2232,22 @@ int Program__emitMovFromField8c(zeroMovInst, block, program)
 }
 
 /* Program__emitMovFromFieldA4 @ 0x12b2d8 (132 bytes) */
-int Program__emitMovFromFieldA4(param_1, block, param_3, program)
-  int param_1;
+int Program__emitMovFromFieldA4(owner, block, destVRegId, program)
+  int owner;
   undefined4 block;
-  undefined4 param_3;
+  undefined4 destVRegId;
   int program;
 {
   undefined4 callResult;
   int operandRecord;
-  undefined4 uVar3;
+  undefined4 sourceValue;
   
   callResult = IRInst__create(0x31,*(undefined4 *)(program + 8));
   operandRecord = IRInst__getOperandRecord(callResult,0);
-  uVar3 = *(undefined4 *)(param_1 + 0xa4);
+  sourceValue = *(undefined4 *)(owner + 0xa4);
   *(undefined4 *)(operandRecord + 0xc) = 0;
-  *(undefined4 *)(operandRecord + 8) = param_3;
-  IRInst__setOperandRef(callResult,1,uVar3);
+  *(undefined4 *)(operandRecord + 8) = destVRegId;
+  IRInst__setOperandRef(callResult,1,sourceValue);
   IRInst__bindOperandRegisters(program,callResult);
   Block__appendInst(block,callResult);
   return callResult;
