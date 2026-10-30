@@ -785,7 +785,7 @@ int fpilDestroyTranslator(translator)
 /* fpilCreateTranslator @ 0x3f660 (220 bytes) */
 int fpilCreateTranslator()
 {
-  int iVar1;
+  int bufferOrZero;
   int allocation;
   int allocation2;
   
@@ -799,12 +799,12 @@ int fpilCreateTranslator()
     *(undefined4 *)(allocation + 4) = 0xffffffff;
     *(undefined4 *)(allocation + 8) = 0xffffffff;
     allocation2 = _malloc(0x24);
-    iVar1 = 0;
+    bufferOrZero = 0;
     if (allocation2 != 0) {
       _memset(allocation2,0,0x24);
-      iVar1 = allocation2;
+      bufferOrZero = allocation2;
     }
-    *(int *)(allocation + 0x34) = iVar1;
+    *(int *)(allocation + 0x34) = bufferOrZero;
     if (*(int *)(allocation + 0x34) != 0) {
       return allocation;
     }
@@ -1950,8 +1950,8 @@ LAB_000408d0:
   return translatorError;
 }
 
-/* FUN_00040ac4 @ 0x40ac4 (2096 bytes) */
-int FUN_00040ac4(translator, slot, ilInstr, unusedArg4, unusedArg5, unusedArg6, unusedArg7, unusedArg8)
+/* fragmentTranslateScalarMath2Src @ 0x40ac4 (2096 bytes) */
+int fragmentTranslateScalarMath2Src(translator, slot, ilInstr, unusedArg4, unusedArg5, unusedArg6, unusedArg7, unusedArg8)
   int *translator;
   int slot;
   undefined4 *ilInstr;
@@ -1982,7 +1982,7 @@ int FUN_00040ac4(translator, slot, ilInstr, unusedArg4, unusedArg5, unusedArg6, 
   uint src0NegateComp0;
   uint src1SelectComp1;
   undefined4 *recordPtr;
-  int iVar7;
+  int tempRegister;
   uint src1NegateComp0;
   uint src0NegateComp1;
   undefined4 *tokenWritePtr;
@@ -2004,11 +2004,11 @@ int FUN_00040ac4(translator, slot, ilInstr, unusedArg4, unusedArg5, unusedArg6, 
   srcSwizzle0 = ilInstr[6];
   srcSwizzle1 = ilInstr[7];
   if (repeatCount >= 2) {
-    iVar7 = translator[8];
+    tempRegister = translator[8];
     unaff_r20 = ilInstr[1];
     unaff_r19 = ilInstr[2];
     ilInstr[1] = 0x40000;
-    *(short *)((int)ilInstr + 6) = (short)iVar7;
+    *(short *)((int)ilInstr + 6) = (short)tempRegister;
     ilInstr[2] = 0x55;
     ilInstr[1] = ilInstr[1] | 0x400000;
   }
@@ -2261,11 +2261,11 @@ LAB_00040ff0:
     }
   }
 LAB_00041170:
-  iVar7 = translator[8];
+  tempRegister = translator[8];
   ilInstr[3] = 0;
   *srcSwizzle0Ptr = 0;
   ilInstr[3] = ilInstr[3] & 0xffc0ffff | 0x40000;
-  *(short *)((int)ilInstr + 0xe) = (short)iVar7;
+  *(short *)((int)ilInstr + 0xe) = (short)tempRegister;
   ilInstr[3] = ilInstr[3] | 0x400000;
   *srcSwizzle0Ptr = *srcSwizzle0Ptr & 0xffff0000 | 0x3210;
   *ilInstr = 0;
@@ -7854,8 +7854,8 @@ double fp24ToFloat(uint fp24Bits)
                         (fp24Bits & 0xffff) << 7)));
 }
 
-/* FUN_0004a860 @ 0x4a860 (112 bytes) */
-int FUN_0004a860(glContext, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
+/* gldReselectProgramStream @ 0x4a860 (112 bytes) */
+int gldReselectProgramStream(glContext, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
   int glContext;
   undefined4 unusedArg2;
   undefined4 unusedArg3;
@@ -8504,8 +8504,8 @@ LAB_0004b6a8:
   return;
 }
 
-/* FUN_0004b710 @ 0x4b710 (188 bytes) */
-int FUN_0004b710(glContext)
+/* gldFlushProgramCache @ 0x4b710 (188 bytes) */
+int gldFlushProgramCache(glContext)
   int glContext;
 {
   undefined *programEntry;
@@ -8551,7 +8551,7 @@ int gldMarkAllProgramsDirty(glContext)
   int shaderList;
   
   shaderList = *(int *)(((unsigned char *)0x0000112c) + glContext);
-  ((int (*)())FUN_0004b710)(glContext);
+  ((int (*)())gldFlushProgramCache)(glContext);
   *(undefined2 *)(glContext + 0x1e6c) = 1;
   allocation = _malloc(((unsigned char *)0x00003754U));
   *(undefined4 *)(glContext + 0x1e60) = allocation;
@@ -8844,7 +8844,7 @@ LAB_0004bee0:
       glContextWord1e6c = *(ushort *)(glContext + 0x1e6c);
       if (0x400 < glContextWord1e6c) {
         entryIndex = 0;
-        ((int (*)())FUN_0004b710)(glContext);
+        ((int (*)())gldFlushProgramCache)(glContext);
         *(undefined2 *)(glContext + 0x1e6c) = 1;
         allocation2 = _malloc(((unsigned char *)0x00003754U));
         *(undefined4 *)(glContext + 0x1e60) = allocation2;

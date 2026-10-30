@@ -4655,8 +4655,8 @@ int gldCurrentAttributePacketHeader(unusedArg1, attributeIndex, dwordCount)
   }
 }
 
-/* FUN_00064230 @ 0x64230 (1256 bytes) */
-int FUN_00064230(ctx, shader)
+/* extvsBuildStreamBlock @ 0x64230 (1256 bytes) */
+int extvsBuildStreamBlock(ctx, shader)
   int ctx;
   int *shader;
 {
@@ -5447,8 +5447,8 @@ LAB_0006559c:
   return;
 }
 
-/* FUN_00065610 @ 0x65610 (152 bytes) */
-int FUN_00065610(glContext, builder)
+/* ffvpInitBuilderOutputSlots @ 0x65610 (152 bytes) */
+int ffvpInitBuilderOutputSlots(glContext, builder)
   undefined4 glContext;
   int builder;
 {
@@ -5519,7 +5519,7 @@ int ffvpSelectPassThroughVariant(glContext)
       positionPassThrough = *(uint *)(glContext + 0x44) >> 10 & 1;
       builder = (undefined4 *)ffvpCreateBuilder(glContext,1,0);
       *builder = 0;
-      ((int (*)())FUN_00065610)(glContext,builder);
+      ((int (*)())ffvpInitBuilderOutputSlots)(glContext,builder);
       if (positionPassThrough == 0) {
         backColorOut = outputMask >> 3 & 1;
         pointSizeOut = outputMask >> 1 & 1;
@@ -5710,8 +5710,8 @@ void vpFillConstantBank(int glContext,int variant,undefined4 unusedArg3,undefine
   return;
 }
 
-/* FUN_00065c40 @ 0x65c40 (52 bytes) */
-int FUN_00065c40(glContext, variant, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
+/* ffvpUploadVariantConstants @ 0x65c40 (52 bytes) */
+int ffvpUploadVariantConstants(glContext, variant, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
   int glContext;
   int variant;
   undefined4 unusedArg3;
@@ -9975,7 +9975,7 @@ asm(".set extvsBuildStreamDescriptors, _extvsBuildStreamDescriptors");
 asm(".globl gldCurrentAttributePacketHeader");
 asm(".set gldCurrentAttributePacketHeader, _gldCurrentAttributePacketHeader");
 asm(".globl FUN_00064230");
-asm(".set FUN_00064230, _FUN_00064230");
+asm(".set FUN_00064230, _extvsBuildStreamBlock");
 asm(".globl extvsApplyStreamDescriptors");
 asm(".set extvsApplyStreamDescriptors, _extvsApplyStreamDescriptors");
 asm(".globl extvsUploadProgramConstants");
@@ -9983,11 +9983,11 @@ asm(".set extvsUploadProgramConstants, _extvsUploadProgramConstants");
 asm(".globl extvsValidateProgramState");
 asm(".set extvsValidateProgramState, _extvsValidateProgramState");
 asm(".globl FUN_00065610");
-asm(".set FUN_00065610, _FUN_00065610");
+asm(".set FUN_00065610, _ffvpInitBuilderOutputSlots");
 asm(".globl vpFillConstantBank");
 asm(".set vpFillConstantBank, _vpFillConstantBank");
 asm(".globl FUN_00065c40");
-asm(".set FUN_00065c40, _FUN_00065c40");
+asm(".set FUN_00065c40, _ffvpUploadVariantConstants");
 asm(".globl noop_65c80");
 asm(".set noop_65c80, _noop_65c80");
 asm(".globl arbEmitIlHeader");

@@ -383,7 +383,7 @@
 0x401b0	fragmentTranslateDdy	420	no	calls an import (malloc); calls an import (realloc)
 0x40370	fragmentTranslateScalarMath	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x40374	fragmentTranslateScalarMathBody	1800	no	calls an import (malloc); calls an import (realloc)
-0x40ac4	FUN_00040ac4	2096	no	calls an import (malloc); calls an import (realloc)
+0x40ac4	fragmentTranslateScalarMath2Src	2096	no	calls an import (malloc); calls an import (realloc)
 0x41310	fragmentTranslateTrig	488	no	calls an import (malloc); calls an import (realloc)
 0x41510	fragmentTranslateAngleConvert	548	no	calls an import (malloc); calls an import (realloc)
 0x41750	fragmentTranslateMod	1160	no	calls an import (malloc); calls an import (realloc)
@@ -403,7 +403,7 @@
 0x48da0	fragmentProgramToIL	6552	no	calls an import (malloc); calls an import (realloc)
 0x4a7d0	floatToFp24	80	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x4a830	fp24ToFloat	40	no	tiny (40 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x4a860	FUN_0004a860	112	yes	
+0x4a860	gldReselectProgramStream	112	yes	
 0x4a8f0	gldRebindCurrentProgram	140	yes	
 0x4a990	gldResetProgramEntry	100	yes	
 0x4aa00	arbfpRebindIfOverLimit	136	yes	
@@ -414,14 +414,14 @@
 0x4b480	gldClearBoundSlot	148	no	indirect call (driver context / vtable / callback)
 0x4b520	gldRemoveProgramFromList	160	yes	
 0x4b5d0	gldReleaseProgramEntry	296	yes	
-0x4b710	FUN_0004b710	188	no	calls an import (free)
+0x4b710	gldFlushProgramCache	188	no	calls an import (free)
 0x4b7d0	gldMarkAllProgramsDirty	392	no	calls an import (malloc)
 0x4b980	gldGrowProgramHashTable	616	no	indirect call (driver context / vtable / callback)
 0x4bbf0	gldLookupProgramVariant	1244	yes	
 0x4c100	gldCopyProgramStreamState	336	yes	
-0x4c260	FUN_0004c260	732	yes	
+0x4c260	gldEmitProgramStatePacket	732	yes	
 0x4c540	noop_4c540	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x4c560	FUN_0004c560	440	no	indirect call (driver context / vtable / callback)
+0x4c560	gldSetCurrentProgramObject	440	no	indirect call (driver context / vtable / callback)
 0x4c720	gldValidateVertexStreams	1632	yes	
 0x4cde0	freeAndNullField	72	yes	
 0x4ce30	gldValidateHyperZ	680	yes	
@@ -429,7 +429,7 @@
 0x4d620	gldMarkProgramsDirtyByFlag	328	yes	
 0x4d770	gldValidateViewportPolygonOffset	840	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x4dac0	gldValidateDepthTest	272	yes	
-0x4dbe0	FUN_0004dbe0	76	yes	
+0x4dbe0	gldValidateVertexOutputRouting	76	yes	
 0x4dc30	gldValidateTexEnvColor	220	yes	
 0x4dd10	gldEmitScissorRegs	40	yes	
 0x4dd40	gldEmitViewportAndGuardBand	116	yes	
@@ -457,7 +457,7 @@
 0x520c0	gldValidateViewport	436	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x52280	FUN_00052280	2608	no	indirect call (driver context / vtable / callback)
 0x52cc0	extvsSelectHandlerTables	372	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0x52e60	FUN_00052e60	112	no	indirect call (driver context / vtable / callback)
+0x52e60	extvsSetStreamAndValidate	112	no	indirect call (driver context / vtable / callback)
 0x52ee0	extvsGetSymbolStorageWord	128	yes	
 0x52f60	extvsGetSymbolStorageKind	148	yes	
 0x53000	extvsMarkStateDirty	52	yes	
@@ -573,17 +573,17 @@
 0x62a70	extvsStateCacheInsert	116	yes	
 0x62af0	extvsBuildStreamDescriptors	5624	yes	
 0x640f0	gldCurrentAttributePacketHeader	220	yes	
-0x64230	FUN_00064230	1256	no	indirect call (driver context / vtable / callback)
+0x64230	extvsBuildStreamBlock	1256	no	indirect call (driver context / vtable / callback)
 0x64720	gldCopyRouteRegisters	304	no	indirect call (driver context / vtable / callback)
 0x64850	extvsApplyStreamDescriptors	436	no	indirect call (driver context / vtable / callback)
 0x64a10	extvsUploadProgramConstants	1304	no	indirect call (driver context / vtable / callback)
 0x64f40	extvsValidateProgramState	708	no	indirect call (driver context / vtable / callback)
 0x651e0	extvsFlushConstantUploads	400	no	indirect call (driver context / vtable / callback)
 0x65370	ffvpSelectLitProgramVariant	636	no	indirect call (driver context / vtable / callback)
-0x65610	FUN_00065610	152	yes	
+0x65610	ffvpInitBuilderOutputSlots	152	yes	
 0x656b0	ffvpSelectPassThroughVariant	780	no	indirect call (driver context / vtable / callback)
 0x659d0	vpFillConstantBank	612	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0x65c40	FUN_00065c40	52	yes	
+0x65c40	ffvpUploadVariantConstants	52	yes	
 0x65c80	noop_65c80	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x65c90	arbEmitIlHeader	328	no	indirect call (driver context / vtable / callback)
 0x65de0	arbEmitIlEnd	192	no	indirect call (driver context / vtable / callback)

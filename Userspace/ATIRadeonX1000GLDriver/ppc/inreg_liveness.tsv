@@ -255,9 +255,9 @@
 4b480	gldClearBoundSlot	r6	PASS-indirect	4b4cc bctrl 
 4b480	gldClearBoundSlot	r7	PASS-indirect	4b4cc bctrl 
 4b480	gldClearBoundSlot	r8	PASS-indirect	4b4cc bctrl 
-4c560	FUN_0004c560	r6	PASS-indirect	4c5d0 bl 0x4dc30
-4c560	FUN_0004c560	r7	PASS-indirect	4c5d0 bl 0x4dc30
-4c560	FUN_0004c560	r8	PASS-indirect	4c5d0 bl 0x4dc30
+4c560	gldSetCurrentProgramObject	r6	PASS-indirect	4c5d0 bl 0x4dc30
+4c560	gldSetCurrentProgramObject	r7	PASS-indirect	4c5d0 bl 0x4dc30
+4c560	gldSetCurrentProgramObject	r8	PASS-indirect	4c5d0 bl 0x4dc30
 4d100	gldValidateAlphaBlendEarlyZ	r5	PASS-indirect	4d314 bl 0x4ce30
 4d100	gldValidateAlphaBlendEarlyZ	r6	PASS-indirect	4d314 bl 0x4ce30
 4fd80	extvsUpdateVertexAttributeConstants	r5	PASS-indirect	4fef0 bctrl 

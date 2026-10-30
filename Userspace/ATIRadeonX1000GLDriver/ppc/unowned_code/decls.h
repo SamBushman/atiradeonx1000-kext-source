@@ -494,7 +494,7 @@ extern int R520MachineAssembler__vslot82();
 extern int R520MachineAssembler__vslot83();
 extern int R520MachineAssembler__vslot85();
 extern int R520MachineAssembler__visitContinue();
-extern int FUN_0004a860();
+extern int gldReselectProgramStream();
 extern int extvsCreateSymbol();
 extern int extvsSymbolListGetSymbol();
 extern int scDestroyCompilerObject();

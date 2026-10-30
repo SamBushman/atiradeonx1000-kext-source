@@ -4101,7 +4101,7 @@ int gldFreeEngineState(ctx)
   ((int (*)())gld_invalidateCachedPointMasks)(engineState);
   ((int (*)())gld_freePointMaskCache)(engineState);
   gld_destroyUnitCmdLists(engineState);
-  FUN_0004b710(engineState);
+  gldFlushProgramCache(engineState);
   fpVariantCacheFlush(engineState);
   if (*(int *)(((unsigned char *)0x00001358) + ctx) != 0) {
     (**(code **)(ctx + 600))(*(int *)(((unsigned char *)0x00001358) + ctx));

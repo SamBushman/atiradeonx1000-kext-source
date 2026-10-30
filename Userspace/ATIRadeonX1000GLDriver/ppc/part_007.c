@@ -1,7 +1,7 @@
 #include "decls.h"
 
-/* FUN_0004c260 @ 0x4c260 (732 bytes) */
-int FUN_0004c260(cmdCursor, programObj, stageSelect)
+/* gldEmitProgramStatePacket @ 0x4c260 (732 bytes) */
+int gldEmitProgramStatePacket(cmdCursor, programObj, stageSelect)
   undefined4 *cmdCursor;
   int programObj;
   int stageSelect;
@@ -187,8 +187,8 @@ int noop_4c540()
   return;
 }
 
-/* FUN_0004c560 @ 0x4c560 (440 bytes) */
-int FUN_0004c560(glContext, programObj)
+/* gldSetCurrentProgramObject @ 0x4c560 (440 bytes) */
+int gldSetCurrentProgramObject(glContext, programObj)
   int glContext;
   int programObj;
 {
@@ -242,7 +242,7 @@ int FUN_0004c560(glContext, programObj)
                       (glContext,vectorCount * 6 + (*(uint *)(bankBase + programObj + 0x44) & 0xf) + 0x910);
     stageFlag = (uint)*(byte *)(glContext + 0x23e3);
     *(undefined4 *)(0x00002748 + glContext + 4) = cmdBuffer;
-    cmdAfterState = (undefined4 *)((int (*)())FUN_0004c260)(cmdBuffer,programObj,stageFlag);
+    cmdAfterState = (undefined4 *)((int (*)())gldEmitProgramStatePacket)(cmdBuffer,programObj,stageFlag);
     *cmdAfterState = 0x7101d;
     *(undefined4 **)(0x00002748 + glContext + 4) = cmdAfterState + 1;
     wordsLeft = 8;
@@ -1125,8 +1125,8 @@ int gldValidateDepthTest(glContext)
   return;
 }
 
-/* FUN_0004dbe0 @ 0x4dbe0 (76 bytes) */
-int FUN_0004dbe0(glContext)
+/* gldValidateVertexOutputRouting @ 0x4dbe0 (76 bytes) */
+int gldValidateVertexOutputRouting(glContext)
   int glContext;
 {
   if (*(char *)(glContext + 0x124) != '\0') {
@@ -4449,8 +4449,8 @@ int extvsSelectHandlerTables(glContext)
   return result;
 }
 
-/* FUN_00052e60 @ 0x52e60 (112 bytes) */
-int FUN_00052e60(glContext, arg2, unusedArg3)
+/* extvsSetStreamAndValidate @ 0x52e60 (112 bytes) */
+int extvsSetStreamAndValidate(glContext, arg2, unusedArg3)
   int glContext;
   undefined4 arg2;
   uint unusedArg3;
@@ -5056,11 +5056,11 @@ int extvsBindShader(glContext, shaderId)
 asm(".globl noop_4c540");
 asm(".set noop_4c540, _noop_4c540");
 asm(".globl FUN_0004c560");
-asm(".set FUN_0004c560, _FUN_0004c560");
+asm(".set FUN_0004c560, _gldSetCurrentProgramObject");
 asm(".globl gldValidateVertexStreams");
 asm(".set gldValidateVertexStreams, _gldValidateVertexStreams");
 asm(".globl FUN_0004dbe0");
-asm(".set FUN_0004dbe0, _FUN_0004dbe0");
+asm(".set FUN_0004dbe0, _gldValidateVertexOutputRouting");
 asm(".globl gldSetUnitScaleConstants");
 asm(".set gldSetUnitScaleConstants, _gldSetUnitScaleConstants");
 

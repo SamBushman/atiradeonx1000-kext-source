@@ -3978,7 +3978,7 @@ int ffvpComputeOutputMasks(glContext)
   oldMask1ca0 = *(int *)(glContext + 0x1ca0);
   stateBlock = *(int *)(*(int *)(glContext + 4) + 0x10);
   if ((*(char *)(glContext + 0x1868) != '\0') && (*(char *)(glContext + 0x124) != '\0')) {
-    FUN_0004dbe0(glContext);
+    gldValidateVertexOutputRouting(glContext);
     return;
   }
   stateFlags = *(uint *)(glContext + 0x44);
@@ -4261,7 +4261,7 @@ void gldValidateState(int glContext,undefined4 forwardedArg2,undefined4 forwarde
       }
     }
     else {
-      FUN_0004dbe0(glContext);
+      gldValidateVertexOutputRouting(glContext);
     }
   }
   gldValidateAlphaBlendEarlyZ(glContext);
