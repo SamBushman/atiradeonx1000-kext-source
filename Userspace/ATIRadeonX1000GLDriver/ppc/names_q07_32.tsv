@@ -3616,3 +3616,33 @@ use	IfHeader__convertInnerIfToCmov	iVar4	operandCountIf	INFERRED	vtable +0x14 op
 use	IfHeader__convertInnerIfToCmov	iVar4	operandCountIf	INFERRED	vtable +0x14 operand count	^\s*for\ \(iVar5\ =\ 1;\ iVar4\ =\ \(\*\*\(code\ \*\*\)\(\*piVar1\ \+\ 0x14\)\)\(piVar1\),\ iVar5\ <=\ iVar4;$@2	+1
 use	IfHeader__convertInnerIfToCmov	iVar4	identityResultIf	INFERRED	IRInst__isSourceSelectIdentity result	^\s*\(iVar4\ =\ FUN_000f31e8\(piVar1,iVar5\),\ iVar4\ ==\ 0\)\)\ goto\ LAB_0013cd68;$	+1
 use	IfHeader__convertInnerIfToCmov	iVar4	identityResultIf	INFERRED	IRInst__isSourceSelectIdentity result	^\s*\(iVar4\ =\ FUN_000f31e8\(piVar1,iVar5\),\ iVar4\ ==\ 0\)\)\ goto\ LAB_0013cee8;$	+1
+use	FUN_0016c1fc	piVar9	tableCursor	INFERRED	compiler advanced one word at a time: walks the four per-class register tables (+0x4d..+0x50)	^\s*piVar9\ =\ param_1;$	+1
+use	FUN_0016c1fc	piVar9	tableCursor	INFERRED	compiler advanced one word at a time: walks the four per-class register tables (+0x4d..+0x50)	^\s*\*\(int\ \*\)\(piVar9\[0x4d\]\ \+\ iVar5\ \*\ 4\)\ =\ iVar12;$	+1
+use	FUN_0016c1fc	piVar9	tableCursor	INFERRED	compiler advanced one word at a time: walks the four per-class register tables (+0x4d..+0x50)	^\s*piVar9\ =\ piVar9\ \+\ 1;$	+1
+use	FUN_0016c1fc	piVar9	tableCursor	INFERRED	compiler advanced one word at a time: walks the four per-class register tables (+0x4d..+0x50)	^\s*piVar9\ =\ param_1;$@2	+1
+use	FUN_0016c1fc	piVar9	tableCursor	INFERRED	compiler advanced one word at a time: walks the four per-class register tables (+0x4d..+0x50)	^\s*iVar11\ =\ piVar9\[0x4d\];$	+1
+use	FUN_0016c1fc	piVar9	tableCursor	INFERRED	compiler advanced one word at a time: walks the four per-class register tables (+0x4d..+0x50)	^\s*piVar9\[0x4d\]\ =\ iVar6;$	+2
+use	FUN_0016c1fc	piVar9	tableCursor	INFERRED	compiler advanced one word at a time: walks the four per-class register tables (+0x4d..+0x50)	^\s*\}\ while\ \(piVar9\ !=\ param_1\ \+\ 4\);$	+1
+use	FUN_0016c1fc	piVar9	tableCursor	INFERRED	compiler advanced one word at a time: walks the four per-class register tables (+0x4d..+0x50)	^\s*piVar9\ =\ param_1;$@3	+1
+use	FUN_0016c1fc	piVar9	tableCursor	INFERRED	compiler advanced one word at a time: walks the four per-class register tables (+0x4d..+0x50)	^\s*piVar1\ =\ piVar9\ \+\ 0x4d;$	+2
+use	FUN_0016c1fc	piVar9	tableCursor	INFERRED	compiler advanced one word at a time: walks the four per-class register tables (+0x4d..+0x50)	^\s*piVar9\ =\ param_1;$@4	+1
+use	FUN_0016c1fc	piVar9	tableCursor	INFERRED	compiler advanced one word at a time: walks the four per-class register tables (+0x4d..+0x50)	^\s*\*\(int\ \*\)\(piVar9\[0x4d\]\ \+\ iVar10\)\ =\ iVar4;$	+1
+use	FUN_0016c1fc	piVar9	tableCursor	INFERRED	compiler advanced one word at a time: walks the four per-class register tables (+0x4d..+0x50)	^\s*piVar9\ =\ piVar9\ \+\ 1;$@4	+1
+use	FUN_0016c1fc	piVar9	tableCursor	INFERRED	compiler advanced one word at a time: walks the four per-class register tables (+0x4d..+0x50)	^\s*piVar9\ =\ param_1;$@5	+1
+use	FUN_0016c1fc	piVar9	tableCursor	INFERRED	compiler advanced one word at a time: walks the four per-class register tables (+0x4d..+0x50)	^\s*\*\(int\ \*\)\(piVar9\[0x4d\]\ \+\ iVar5\ \*\ 4\)\ =\ iVar4;$	+1
+use	FUN_0016c1fc	piVar9	tableCursor	INFERRED	compiler advanced one word at a time: walks the four per-class register tables (+0x4d..+0x50)	^\s*piVar9\ =\ piVar9\ \+\ 1;$@5	+1
+local	FUN_0016c1fc	piVar1	tableSlotPtr	INFERRED	address of the current per-class table pointer (compiler+0x4d+k)
+local	FUN_0016c1fc	iVar11	oldTableData	INFERRED	old register table storage freed after the grow copy
+use	FUN_0016c1fc	iVar7	oldCapacity	INFERRED	compiler[0x53] capacity before growing	^\s*iVar7\ =\ param_1\[0x53\];$	+1
+use	FUN_0016c1fc	iVar7	oldCapacity	INFERRED	compiler[0x53] capacity before growing	^\s*_memcpy\(iVar6,iVar11,iVar7\ <<\ 2\);$	+1
+use	FUN_0016c1fc	iVar10	vcall7cResult	INFERRED	target vtable +0x7c result	^\s*iVar10\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(\*param_1\ \+\ 0x30c\)\ \+\ 0x7c\)\)$	+1
+use	FUN_0016c1fc	iVar10	vcall7cResult	INFERRED	target vtable +0x7c result	^\s*if\ \(iVar10\ !=\ 0\)\ \{$	+1
+use	FUN_0016c1fc	iVar10	tableCapacity	INFERRED	compiler[0x53]: capacity of the register tables	^\s*iVar10\ =\ param_1\[0x53\];$	+1
+use	FUN_0016c1fc	iVar10	tableCapacity	INFERRED	compiler[0x53]: capacity of the register tables	^\s*if\ \(iVar10\ <\ iVar5\ \+\ 1\)\ \{$	+1
+use	FUN_0016c1fc	iVar10	tableCapacity	INFERRED	compiler[0x53]: capacity of the register tables	^\s*iVar6\ =\ FUN_00193e18\(\*\(undefined4\ \*\)\(\*param_1\ \+\ 0x378\),iVar10\ <<\ 3\);$	+1
+use	FUN_0016c1fc	iVar10	tableCapacity	INFERRED	compiler[0x53]: capacity of the register tables	^\s*param_1\[0x53\]\ =\ iVar10\ <<\ 1;$	+1
+use	FUN_0016c1fc	iVar10	slotByteOffset	INFERRED	register number * 4 byte offset into a table	^\s*iVar10\ =\ iVar5\ \*\ 4;$	+1
+use	FUN_0016c1fc	iVar10	slotByteOffset	INFERRED	register number * 4 byte offset into a table	^\s*\*\(undefined4\ \*\)\(iVar10\ \+\ \*piVar1\)\ =\ 0;$	+1
+use	FUN_0016c1fc	iVar10	slotByteOffset	INFERRED	register number * 4 byte offset into a table	^\s*iVar10\ =\ iVar5\ <<\ 2;$	+1
+use	FUN_0016c1fc	iVar10	slotByteOffset	INFERRED	register number * 4 byte offset into a table	^\s*\*\(int\ \*\)\(piVar9\[0x4d\]\ \+\ iVar10\)\ =\ iVar4;$	+1
+local	FUN_0016c1fc	uVar3	instFlags	INFERRED	inst2[5]: flags (0x20 / 0x40 tested)

@@ -12067,17 +12067,19 @@ int FUN_0016c1fc(compiler)
   int operandRecord2;
   int operandRecord;
   int loopIndex;
-  int *piVar1;
+  int *tableSlotPtr;
   bool moreComponents;
-  uint uVar3;
+  uint instFlags;
   int iVar4;
   int iVar5;
   int countdown;
-  int iVar7;
+  int oldCapacity;
   int *inst;
-  int *piVar9;
-  int iVar10;
-  int iVar11;
+  int *tableCursor;
+  int vcall7cResult;
+  int slotByteOffset;
+  int tableCapacity;
+  int oldTableData;
   int iVar12;
   
   inst = (int *)compiler[0xc];
@@ -12102,14 +12104,14 @@ LAB_0016c27c:
        && ((inst[5] & 0x40U) != 0)) {
       iVar5 = inst[0x25];
       loopIndexC = 0;
-      piVar9 = compiler;
+      tableCursor = compiler;
       do {
         operandRecord = IRInst__getOperandRecord(inst,0);
         if (*(char *)(loopIndexC + operandRecord + 0x10) != '\x01') {
-          *(int *)(piVar9[0x4d] + iVar5 * 4) = iVar12;
+          *(int *)(tableCursor[0x4d] + iVar5 * 4) = iVar12;
         }
         moreComponents = loopIndexC != 3;
-        piVar9 = piVar9 + 1;
+        tableCursor = tableCursor + 1;
         loopIndexC = loopIndexC + 1;
       } while (moreComponents);
     }
@@ -12139,10 +12141,10 @@ LAB_0016c3e0:
              (((inst2[5] & 0x40U) == 0 && ((inst2[5] & 0x20U) == 0)))) {
             if ((*(int *)(iVar4 + 0x60) == 0) ||
                (iVar5 = *(int *)(*(int *)(iVar4 + 0x60) + 4), iVar5 < 0)) {
-              iVar10 = (**(code **)(**(int **)(*compiler + 0x30c) + 0x7c))
+              vcall7cResult = (**(code **)(**(int **)(*compiler + 0x30c) + 0x7c))
                                  (*(int **)(*compiler + 0x30c),inst2);
               iVar5 = DAT_001b0194;
-              if (iVar10 != 0) {
+              if (vcall7cResult != 0) {
                 if (*(int **)(iVar4 + 0x60) == (int *)0x0) {
                   iVar5 = inst2[3];
                 }
@@ -12153,43 +12155,43 @@ LAB_0016c3e0:
               iVar5 = ((int (*)())Scheduler__findFreeTempRegister)(compiler,inst2[0x26],iVar5);
               if (iVar5 < 0) {
                 iVar5 = compiler[0x52];
-                iVar10 = compiler[0x53];
+                tableCapacity = compiler[0x53];
                 compiler[0x52] = iVar5 + 1;
-                if (iVar10 < iVar5 + 1) {
-                  piVar9 = compiler;
+                if (tableCapacity < iVar5 + 1) {
+                  tableCursor = compiler;
                   do {
-                    iVar11 = piVar9[0x4d];
-                    allocation = Arena__alloc(*(undefined4 *)(*compiler + 0x378),iVar10 << 3);
-                    iVar7 = compiler[0x53];
-                    piVar9[0x4d] = allocation;
-                    piVar9 = piVar9 + 1;
-                    _memcpy(allocation,iVar11,iVar7 << 2);
-                    Arena__free(*(undefined4 *)(*compiler + 0x378),iVar11);
-                  } while (piVar9 != compiler + 4);
-                  compiler[0x53] = iVar10 << 1;
+                    oldTableData = tableCursor[0x4d];
+                    allocation = Arena__alloc(*(undefined4 *)(*compiler + 0x378),tableCapacity << 3);
+                    oldCapacity = compiler[0x53];
+                    tableCursor[0x4d] = allocation;
+                    tableCursor = tableCursor + 1;
+                    _memcpy(allocation,oldTableData,oldCapacity << 2);
+                    Arena__free(*(undefined4 *)(*compiler + 0x378),oldTableData);
+                  } while (tableCursor != compiler + 4);
+                  compiler[0x53] = tableCapacity << 1;
                 }
-                iVar10 = iVar5 * 4;
+                slotByteOffset = iVar5 * 4;
                 countdown = 4;
-                piVar9 = compiler;
+                tableCursor = compiler;
                 do {
-                  piVar1 = piVar9 + 0x4d;
-                  piVar9 = piVar9 + 1;
-                  *(undefined4 *)(iVar10 + *piVar1) = 0;
+                  tableSlotPtr = tableCursor + 0x4d;
+                  tableCursor = tableCursor + 1;
+                  *(undefined4 *)(slotByteOffset + *tableSlotPtr) = 0;
                   countdown = countdown + -1;
                 } while (countdown != 0);
               }
               else {
-                iVar10 = iVar5 << 2;
+                slotByteOffset = iVar5 << 2;
               }
               loopIndexB = 0;
-              piVar9 = compiler;
+              tableCursor = compiler;
               do {
                 operandRecord2 = IRInst__getOperandRecord(inst2,0);
                 if (*(char *)(loopIndexB + operandRecord2 + 0x10) != '\x01') {
-                  *(int *)(piVar9[0x4d] + iVar10) = iVar4;
+                  *(int *)(tableCursor[0x4d] + slotByteOffset) = iVar4;
                 }
                 moreComponents = loopIndexB != 3;
-                piVar9 = piVar9 + 1;
+                tableCursor = tableCursor + 1;
                 loopIndexB = loopIndexB + 1;
               } while (moreComponents);
               if (*(int *)(iVar4 + 0x60) != 0) {
@@ -12198,14 +12200,14 @@ LAB_0016c3e0:
             }
             else {
               loopIndexC = 0;
-              piVar9 = compiler;
+              tableCursor = compiler;
               do {
                 operandRecord = IRInst__getOperandRecord(inst2,0);
                 if (*(char *)(loopIndexC + operandRecord + 0x10) != '\x01') {
-                  *(int *)(piVar9[0x4d] + iVar5 * 4) = iVar4;
+                  *(int *)(tableCursor[0x4d] + iVar5 * 4) = iVar4;
                 }
                 moreComponents = loopIndexC != 3;
-                piVar9 = piVar9 + 1;
+                tableCursor = tableCursor + 1;
                 loopIndexC = loopIndexC + 1;
               } while (moreComponents);
             }
@@ -12218,13 +12220,13 @@ LAB_0016c3e0:
       }
       if (((iVar5 != 0) && (iVar4 = RegKind__flagBit0(inst2[0x26]), iVar4 != 0)) &&
          (((inst2[5] & 2U) == 0 && (iVar4 = (**(code **)(*inst2 + 0x50))(inst2), iVar4 == 0)))) {
-        uVar3 = inst2[5];
-        if ((uVar3 & 0x20) == 0) {
+        instFlags = inst2[5];
+        if ((instFlags & 0x20) == 0) {
           schedulerAllocRegEnabled = Compiler__isOptionEnabled(*compiler,0x25);
           if (schedulerAllocRegEnabled != 0) goto LAB_0016c620;
-          uVar3 = inst2[5];
+          instFlags = inst2[5];
         }
-        if ((uVar3 & 0x40) == 0) {
+        if ((instFlags & 0x40) == 0) {
           iVar4 = *(int *)(*compiler + 0x3c4) + 1;
           *(int *)(*compiler + 0x3c4) = iVar4;
           inst2[0x25] = iVar4;
