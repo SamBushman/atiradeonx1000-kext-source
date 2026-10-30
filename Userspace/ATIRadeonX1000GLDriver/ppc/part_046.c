@@ -1465,8 +1465,8 @@ LAB_00174efc:
                    ((operandModifierBits & 2) == 0)) goto LAB_00175760;
               }
 LAB_001757a0:
-              FUN_00178648(valueKey,loopIndex);
-              FUN_00178338(valueKey,loopIndex,laneFlags);
+              ValueKey__classifyLaneCompareClass(valueKey,loopIndex);
+              ValueKey__classifyLaneRangeClass(valueKey,loopIndex,laneFlags);
               laneExprRecord2 = (int *)laneValuePtr[0x10];
               *laneValuePtr = *laneExprRecord2;
               laneValuePtr[0x20] = laneExprRecord2[3];
@@ -1540,8 +1540,8 @@ LAB_0017547c:
         laneByteOffset = 0;
         goto LAB_001754f8;
       }
-      FUN_00178648(valueKey,laneByteOffset);
-      FUN_00178338(valueKey,laneByteOffset,laneFlags);
+      ValueKey__classifyLaneCompareClass(valueKey,laneByteOffset);
+      ValueKey__classifyLaneRangeClass(valueKey,laneByteOffset,laneFlags);
       countdown = 4;
       laneCounter = 0;
       laneValuePtr = valueKey;
@@ -1574,8 +1574,8 @@ LAB_0017547c:
         if (((*(int *)(keyInstB + 0x120) == 0) && (*(int *)(keyInstB + 0x124) == 0)) &&
            ((operandModifierBits = *(uint *)(compareFloatsResult * 0x18 + keyInstB + 0xa0), (operandModifierBits & 1) == 0 && ((operandModifierBits & 2) == 0)
             ))) goto LAB_001753c0;
-        FUN_00178648(valueKey,laneByteOffset);
-        FUN_00178338(valueKey,laneByteOffset,laneFlags);
+        ValueKey__classifyLaneCompareClass(valueKey,laneByteOffset);
+        ValueKey__classifyLaneRangeClass(valueKey,laneByteOffset,laneFlags);
         countdown3 = 4;
         laneIdx = 0;
         laneValuePtr = valueKey;
@@ -1590,8 +1590,8 @@ LAB_0017547c:
       else {
         laneConstRecord = laneValuePtrAt[0xc];
         if (laneConstRecord != 0) goto LAB_0017547c;
-        FUN_00178648(valueKey,laneByteOffset);
-        FUN_00178338(valueKey,laneByteOffset,laneFlags);
+        ValueKey__classifyLaneCompareClass(valueKey,laneByteOffset);
+        ValueKey__classifyLaneRangeClass(valueKey,laneByteOffset,laneFlags);
         countdown = 4;
         laneCounter = 0;
         laneValuePtr2 = valueKey;
@@ -1644,8 +1644,8 @@ LAB_001753c0:
         laneByteOffset = ValueKey__rangeClassForValueNumber(valueKey,valueNumber);
       }
       else {
-        FUN_00178648(valueKey,laneByteOffset);
-        FUN_00178338(valueKey,laneByteOffset,laneFlags);
+        ValueKey__classifyLaneCompareClass(valueKey,laneByteOffset);
+        ValueKey__classifyLaneRangeClass(valueKey,laneByteOffset,laneFlags);
         laneExprRecord = (int *)valueKey[laneByteOffset + 0x10];
         laneByteOffset = laneExprRecord[4];
         valueNumber = *laneExprRecord;
@@ -1939,7 +1939,7 @@ LAB_00176244:
 LAB_00175e58:
       valueKey = ((int (*)())FUN_00173638)(valueKey);
       if (valueKey == 0) {
-        FUN_00180154(*keyRef);
+        ValueKey__createLaneRecordsByOpcode(*keyRef);
         canonicalizeCommutativeOperandsResult = ((int (*)())ValueKey__canonicalizeCommutativeOperands)(*keyRef);
         if (canonicalizeCommutativeOperandsResult != 0) {
           ((int (*)())ValueKey__rebuild)(*keyRef);

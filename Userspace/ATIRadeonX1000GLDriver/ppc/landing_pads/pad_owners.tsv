@@ -545,7 +545,7 @@
 0x191eec	FudoPs__ctor_1920e0
 0x1920bc	FudoPs__ctor_1920e0
 0x1922a0	FudoPs__ctor_191efc
-0x19279c	FUN_001922c4
+0x19279c	Inst__rewriteSetOpcodesWithLiterals
 0x19323c	FudoPs__peepholeCombine
 0x193b88	TypedValueArray__createWrapping
 0x193c74	FUN_00193c00

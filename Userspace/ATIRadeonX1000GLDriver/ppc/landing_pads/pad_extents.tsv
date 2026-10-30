@@ -545,7 +545,7 @@ ffd5c	ffd60	Program__translateILStream
 191eec	191efc	FudoPs__ctor_1920e0
 1920bc	1920e0	FudoPs__ctor_1920e0
 1922a0	1922c4	FudoPs__ctor_191efc
-19279c	1927a0	FUN_001922c4
+19279c	1927a0	Inst__rewriteSetOpcodesWithLiterals
 19323c	193240	FudoPs__peepholeCombine
 193b88	193ba8	TypedValueArray__createWrapping
 193c74	193c94	FUN_00193c00

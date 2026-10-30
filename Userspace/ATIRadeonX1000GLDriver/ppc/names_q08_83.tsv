@@ -1,0 +1,3 @@
+use	FUN_00187ad8	piVar11	sourceUseSlot	INFERRED	element of the source use list compared with the user instruction	^\s*piVar11\ =\ \(int\ \*\)\(.*\[2\]\);$@2	+1	all	none
+use	FUN_00187ad8	piVar11	sourceUseSlot	INFERRED	element of the source use list compared with the user instruction	^\s*piVar11\ =\ \(int\ \*\)FUN_0019423c\(@2	+1	all	none
+use	FUN_00187ad8	piVar11	sourceUseSlot	INFERRED	element of the source use list compared with the user instruction	\*piVar11\)\ \{$	+1	all	none

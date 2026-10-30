@@ -130,10 +130,10 @@ int R300MachineAssembler__vslot65_declareNodeRegisters(this, node, compiler)
 }
 
 /* R300MachineAssembler__vslot2_exceedsInstructionLimit @ 0x1955f8 (36 bytes) */
-int R300MachineAssembler__vslot2_exceedsInstructionLimit(param_1)
-  int param_1;
+int R300MachineAssembler__vslot2_exceedsInstructionLimit(this)
+  int this;
 {
-  return *(int *)(*(int *)(*(int *)(param_1 + 0xc) + 0x30c) + 0x40) + 1 < *(int *)(param_1 + 0x60);
+  return *(int *)(*(int *)(*(int *)(this + 0xc) + 0x30c) + 0x40) + 1 < *(int *)(this + 0x60);
 }
 
 /* R300MachineAssembler__vslot38_returnsFalse @ 0x19561c (8 bytes) */
@@ -870,8 +870,8 @@ int R300MachineAssembler__noteFetchTextureUnit(this, sourceIndex, inst)
   return;
 }
 
-/* FUN_0019651c @ 0x19651c (640 bytes) */
-int FUN_0019651c(assembler, inst, staleArg3)
+/* R300MachineAssembler__emitFetchRecord @ 0x19651c (640 bytes) */
+int R300MachineAssembler__emitFetchRecord(assembler, inst, staleArg3)
   int *assembler;
   int inst;
   uint staleArg3;
@@ -1293,7 +1293,7 @@ int R300MachineAssembler__placeInstructionConstants(this, inst, constantAllocato
             placed = ConstantSlots__tryAddToRow(constantAllocator,a0,0);
           }
           else {
-            placed = FUN_0018c980(constantAllocator,a0,a0);
+            placed = ConstantSlots__tryAssignSourceToBothHalves(constantAllocator,a0,a0);
           }
 joined_r0x00197160:
           if (placed == 0) {
@@ -1531,7 +1531,7 @@ LAB_001976d0:
               }
               predicate4c = (**(code **)(*cursorInst + 0x4c))(cursorInst);
               if (predicate4c != 0) {
-                ((int (*)())FUN_0019651c)(this,cursorInst,this[3]);
+                ((int (*)())R300MachineAssembler__emitFetchRecord)(this,cursorInst,this[3]);
               }
               predicate38 = (**(code **)(*cursorInst + 0x38))(cursorInst);
               if ((predicate38 != 0) && (this[0x23] == 1)) {
@@ -1583,10 +1583,11 @@ int R300MachineAssembler__classifyAluOperation(this, rgbLaneBytes, alphaLaneByte
   undefined4 *rgbHardwareOpcodeOut;
   undefined4 *alphaHardwareOpcodeOut;
 {
+  undefined4 alphaHardwareOpcode;
   undefined4 opcodeInfo;
   char laneW;
   char laneY;
-  undefined4 uVar3;
+  undefined4 rgbHardwareOpcode;
   uint classFlags;
   undefined1 laneEnableByte;
   char laneZ;
@@ -1605,10 +1606,10 @@ int R300MachineAssembler__classifyAluOperation(this, rgbLaneBytes, alphaLaneByte
     *(undefined4 *)(irInst + 0x88) = opcodeInfo;
   }
   opcodeClass = *(undefined4 *)(PTR_DAT_001e913c + irOpcode * 0x38 + 0x34);
-  uVar3 = ((int (*)())opcodeInfoRgbHwOpcode)(this[0x29],irOpcode);
-  *rgbHardwareOpcodeOut = uVar3;
-  uVar3 = ((int (*)())opcodeInfoAlphaHwOpcode)(this[0x29],irOpcode);
-  *alphaHardwareOpcodeOut = uVar3;
+  rgbHardwareOpcode = ((int (*)())opcodeInfoRgbHwOpcode)(this[0x29],irOpcode);
+  *rgbHardwareOpcodeOut = rgbHardwareOpcode;
+  alphaHardwareOpcode = ((int (*)())opcodeInfoAlphaHwOpcode)(this[0x29],irOpcode);
+  *alphaHardwareOpcodeOut = alphaHardwareOpcode;
   irOpcode = IRInst__getOperandRecord(irInst,0);
   this[0x28] = *(int *)(irOpcode + 0x10);
   switch(opcodeClass) {

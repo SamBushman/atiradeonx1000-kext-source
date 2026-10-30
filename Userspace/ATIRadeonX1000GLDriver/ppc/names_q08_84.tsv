@@ -1,0 +1,2 @@
+func	FUN_001781a4	ValueKey__evaluateConstantInstruction	INFERRED	evaluates the instruction on the constant lane inputs through the opcode's evaluator (vtable +4), applies the output scale and clamp and reports whether the clamp changed the value
+func	FUN_00178a98	ValueKey__sourceSignKnown	INFERRED	for opcode 0x32 returns whether the sign of the queried component of source 1 is known (negative expr value numbers), by component 0..3

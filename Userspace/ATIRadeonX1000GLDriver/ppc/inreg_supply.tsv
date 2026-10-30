@@ -121,8 +121,8 @@
 17ab4c	ValueKey__foldDotPowerOfTwoIntoOutputScale	r6	PASS-indirect	GARBAGE	
 17ab4c	ValueKey__foldDotPowerOfTwoIntoOutputScale	r7	PASS-indirect	GARBAGE	
 17ab4c	ValueKey__foldDotPowerOfTwoIntoOutputScale	r8	PASS-indirect	GARBAGE	
-17d6ac	FUN_0017d6ac	r7	PASS-deep	GARBAGE	
-17d6ac	FUN_0017d6ac	r8	PASS-deep	GARBAGE	
+17d6ac	ValueKey__replaceWithLaneConstants	r7	PASS-deep	GARBAGE	
+17d6ac	ValueKey__replaceWithLaneConstants	r8	PASS-deep	GARBAGE	
 17e1f4	ValueKey__foldMulPowerOfTwoIntoOutputScale	r6	PASS-deep	GARBAGE	
 17e1f4	ValueKey__foldMulPowerOfTwoIntoOutputScale	r7	PASS-deep	GARBAGE	
 17e1f4	ValueKey__foldMulPowerOfTwoIntoOutputScale	r8	PASS-deep	GARBAGE	
@@ -133,7 +133,7 @@
 17f1f8	ValueKey__foldMulOfConstants	r8	PASS-deep	GARBAGE	
 18ad08	R300SchedModel__vslot16	r7	PASS-indirect	GARBAGE	
 18ad08	R300SchedModel__vslot16	r8	PASS-indirect	GARBAGE	
-18b1bc	FUN_0018b1bc	r8	PASS-indirect	GARBAGE	
+18b1bc	PackNode__clearSlotRangeAndReassign	r8	PASS-indirect	GARBAGE	
 18b654	R300SchedModel__vslot11	r7	PASS-deep	GARBAGE	
 18b654	R300SchedModel__vslot11	r8	PASS-deep	GARBAGE	
 18b9cc	R300SchedModel__vslot14	r7	PASS-indirect	GARBAGE	

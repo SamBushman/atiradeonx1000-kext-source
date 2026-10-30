@@ -158,7 +158,7 @@ int IrAddFloat__vslot5_getValueKeyTransformLevel(this, ctx, laneResultPtr, compi
           return transformLevel;
         }
         if ((*laneResultPtr == 0x7ffffffe) &&
-           ((operandRecord = FUN_00179b28(ctx,loopIndex), operandRecord != 0 ||
+           ((operandRecord = ValueKey__foldLaneToZeroIfOppositeNegates(ctx,loopIndex), operandRecord != 0 ||
             (operandRecord = ValueKey__forwardOtherSourceIfZero(ctx,loopIndex), operandRecord != 0)))) {
           transformLevel = 1;
         }

@@ -1,0 +1,20 @@
+use	R300MachineAssembler__classifyAluOperation	uVar3	rgbHardwareOpcode	INFERRED	opcodeInfoRgbHwOpcode result stored through rgbHardwareOpcodeOut	^\s*uVar3\ =\ \(\(int\ \(\*\)\(\)\)FUN_00195650\)\(param_1\[0x29\],iVar8\);$	+2
+use	R300MachineAssembler__classifyAluOperation	uVar3	alphaHardwareOpcode	INFERRED	opcodeInfoAlphaHwOpcode result stored through alphaHardwareOpcodeOut	^\s*uVar3\ =\ \(\(int\ \(\*\)\(\)\)FUN_0019569c\)\(param_1\[0x29\],iVar8\);$	+2
+local	KhanVs__vslot27_optimizeInstruction	iVar1	optionEnabled	INFERRED	Compiler__isOptionEnabled(compiler, 0x15) and the preceding predicate results
+local	PackState__reset	bVar1	notLastRow	INFERRED	row != 2 loop continue flag
+local	KhanPs__vslot31_isNotTextureFetch	uVar1	isFetch	INFERRED	instruction vtable +0x30 predicate (texture fetch)
+local	R300MachineAssembler__vslot2_exceedsInstructionLimit	param_1	this	INFERRED	assembler: +0xc compiler (+0x30c hardware limits +0x40), +0x60 instruction count
+local	R300VMachineAssembler__getOrAllocateScratchRegister	uVar1	scratchRegister	INFERRED	first free register of class 0 allocated for this+0x8c
+local	R520MachineAssembler__appendLoopRecord	piVar1	elementRef	INFERRED	slot of the loop stack vector receiving recordIndex
+use	FudoPs__createSchedModels	puVar1	schedModelVtableBaseA	INFERRED	PTR_DAT_001e90f4 vtable base (shared with R520SchedModel's parent chain)	^\s*puVar1\ =\ PTR_DAT_001e90f4;$	+1
+use	FudoPs__createSchedModels	puVar1	schedModelVtableBaseA	INFERRED	PTR_DAT_001e90f4 vtable base	^\s*\*puVar2\ =\ puVar1\ \+\ 8;$	+1
+use	FudoPs__createSchedModels	puVar1	schedModelVtableBaseB	INFERRED	PTR_DAT_001e9100 vtable base of the second model	^\s*puVar1\ =\ PTR_DAT_001e9100;$	+1
+use	FudoPs__createSchedModels	puVar1	schedModelVtableBaseB	INFERRED	PTR_DAT_001e9100 vtable base of the second model	^\s*\*puVar2\ =\ puVar1\ \+\ 8;$@2	+1
+local	FudoPs__createSchedModels	puVar3	rootVtableBasePlus8	INFERRED	PTR_DAT_001e90fc + 8: root scheduling model vtable pointer
+local	Inst__findLaneProducer	local_28	producerWriteMask	INFERRED	WriteMask__fromSelectWord out for the producer's destination select
+local	FudoPs__encodeUniformImmediate	auStack_28	immediateHighOut	INFERRED	out of FudoPs__encodeImmediateFloat: high field (adjacent to immediateLowOut, whole variables)
+local	FudoPs__encodeUniformImmediate	auStack_24	immediateLowOut	INFERRED	out of FudoPs__encodeImmediateFloat: low bits
+local	R520MachineAssembler__emitConditionalBranch	local_38	comparisonKnown	INFERRED	evaluateConstantComparison out record: word 0 = result known flag
+local	R520MachineAssembler__vslot27_assembleIf	piVar2	firstSuccessorRef	INFERRED	first element reference of the successor vector
+local	R520MachineAssembler__emitCompareToPredicate	auStack_48	predicateInstList	INFERRED	40-byte DListNode list holding the new add instruction, passed to vtable +0x34 (whole variable)
+local	FudoPs__vslot85_findOrEncodeConstantVector	puVar5	staleArg5	INFERRED	stale register argument forwarded to RegisterMap__findConstVectorExact (not a real value)

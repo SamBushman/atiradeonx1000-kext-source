@@ -1,0 +1,12 @@
+local	R520VMachineAssembler__vslot27_assembleLoopHeader	param_4	staleArg4	INFERRED	stale register argument forwarded to Block__getBranchInst
+local	R520VMachineAssembler__vslot27_assembleLoopHeader	param_7	staleArg7	INFERRED	stale register argument forwarded to Block__getBranchInst
+local	R520VMachineAssembler__vslot24_assembleWithPredicateSet	fparam_1	literalValue	INFERRED	float literal (FLOAT_001aa0d4) replicated into the 4 lanes of the predicate-set literal vec4
+local	R520MachineAssembler__vslot26_assembleThenAppendRecord	iVar3	recordIndexBefore	INFERRED	this[0x18]: record index before assembling the node
+local	R520MachineAssembler__vslot74_setPredicateSetDestination	uVar4	rgbMask	INFERRED	lanesToRgbMask of operand 0's select, stored in the record at +0x15
+local	R520MachineAssembler__vslot73_setOutputDestination	uVar6	destinationByte	INFERRED	low byte of the destination register index, stored in the record at +0x16 / +0x22
+local	stub_getrealaddr	iVar1	unusedLocal	INFERRED	declared but unused (the symbol-name buffer is addressed through offsets)
+local	Inst__foldSelectIntoUsers	local_94	destRecordCopy0	INFERRED	word 0 of the stack copy of the destination operand record (frame-adjacent to local_90 / local_80, whole variables)
+local	Inst__foldSelectIntoUsers	local_90	destRecordCopy1	INFERRED	word 1 of the destination record copy
+local	Inst__foldSelectIntoUsers	local_80	destRecordCopy5	INFERRED	word 5 of the destination record copy (zeroed)
+local	R300MachineAssembler__assembleAluInstruction	piVar25	unusedPtr	INFERRED	declared but unused (the commented stock register of the same number is a stale argument)
+func	FUN_00179b28	ValueKey__foldLaneToZeroIfOppositeNegates	INFERRED	sources 1 and 2 agree on the lane with opposite negate bits and equal abs bits: lane result is the value of constant 0

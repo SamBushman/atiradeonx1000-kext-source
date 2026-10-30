@@ -1,14 +1,14 @@
 #include "decls.h"
 
 /* R520VMachineAssembler__vslot27_assembleLoopHeader @ 0x19d858 (1008 bytes) */
-int R520VMachineAssembler__vslot27_assembleLoopHeader(this, node, block, param_4, traversal, compiler, param_7)
+int R520VMachineAssembler__vslot27_assembleLoopHeader(this, node, block, staleArg4, traversal, compiler, staleArg7)
   int *this;
   int node;
   undefined4 block;
-  undefined4 param_4;
+  undefined4 staleArg4;
   undefined4 traversal;
   undefined4 compiler;
-  undefined4 param_7;
+  undefined4 staleArg7;
 {
   int *predicatedInst;
   int *predSetNEInst;
@@ -34,7 +34,7 @@ int R520VMachineAssembler__vslot27_assembleLoopHeader(this, node, block, param_4
   
   program = *(int **)(node + 0xac);
   a5 = compiler;
-  branchInst = Block__getBranchInst(node,node,block,param_4,traversal,compiler,param_7);
+  branchInst = Block__getBranchInst(node,node,block,staleArg4,traversal,compiler,staleArg7);
   if (*program != 0) goto LAB_0019dc0c;
   loopStackSlot = (uint *)0x0;
   condSwizzle = *(uint *)(this[0x25] + 4);
@@ -602,7 +602,7 @@ int R520VMachineAssembler__vslot24_assembleWithPredicateSet(this, node, block, c
   code *UNRECOVERED_JUMPTABLE;
   uint *predKindStack;
   int predSlot;
-  double fparam_1;
+  double literalValue;
   
   program = *(int **)(node + 0xac);
   if ((0 < *(int *)(node + 0x138)) || (*(int *)(node + 0x13c) != 0)) {
@@ -618,11 +618,11 @@ int R520VMachineAssembler__vslot24_assembleWithPredicateSet(this, node, block, c
       if (*program == 0) {
         predSetInst = IRInst__create(0x53,compiler);
         destSelect = DAT_001b2d50;
-        fparam_1 = (double)FLOAT_001aa0d4;
+        literalValue = (double)FLOAT_001aa0d4;
         *(undefined4 *)(predSetInst + 0x94) = destRegister;
         *(undefined4 *)(predSetInst + 0x9c) = destSelect;
         *(undefined4 *)(predSetInst + 0x98) = 0;
-        ((void (*)())IRInst__makeLiteralVec4Float)(predSetInst,program,1,fparam_1,fparam_1,fparam_1,fparam_1);
+        ((void (*)())IRInst__makeLiteralVec4Float)(predSetInst,program,1,literalValue,literalValue,literalValue,literalValue);
         *(uint *)(predSetInst + 0x14) = *(uint *)(predSetInst + 0x14) & 0xfffffffb;
         Block__appendInst(node,predSetInst);
         predKindStack = (uint *)this[0x25];
@@ -2394,7 +2394,7 @@ int R520MachineAssembler__vslot26_assembleThenAppendRecord(this, node, block, co
   undefined4 sourceDef;
   bool flagPrevRecord;
   int branchKind;
-  int iVar3;
+  int recordIndexBefore;
   undefined4 registerIndex;
   undefined4 *elementRef;
   int a3;
@@ -2408,11 +2408,11 @@ int R520MachineAssembler__vslot26_assembleThenAppendRecord(this, node, block, co
   branchKind = *(int *)(inst + 300);
   sourceDef = IRInst__getOperandSource(inst,1);
   registerIndex = thunk_FUN_00134de8(program,sourceDef);
-  iVar3 = this[0x18];
+  recordIndexBefore = this[0x18];
   (**(code **)(*this + 0x34))
             (this,block,*(undefined4 *)(node + 0xdc),a3,unusedArg5,unusedArg6,
              *(code **)(*this + 0x34));
-  if ((*(int *)(node + 0xdc) == 0) || (flagPrevRecord = true, iVar3 != this[0x18])) {
+  if ((*(int *)(node + 0xdc) == 0) || (flagPrevRecord = true, recordIndexBefore != this[0x18])) {
     flagPrevRecord = false;
   }
   recordId = (**(code **)(*this + 0x98))(this,branchKind != 1,registerIndex,0);
