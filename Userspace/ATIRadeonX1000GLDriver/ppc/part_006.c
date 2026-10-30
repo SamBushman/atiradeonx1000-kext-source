@@ -5843,7 +5843,10 @@ int fragmentInstructionToIL(translator, unusedArg2, unusedArg3, unusedArg4, unus
   short tempRegisterIndex;
   uint uVar4;
   int program;
-  int iVar6;
+  int componentCount;
+  int componentIndex;
+  int destClass;
+  int callStatus2;
   uint opcodeInfoWord0;
   int returnCode;
   undefined4 saturate;
@@ -6108,11 +6111,11 @@ LAB_00048a2c:
                (callStatus = ((int (*)())fpilTranslateSource)(translator,iVar24 + 0x10,&ilInstASrc0,&ilInstASwz0), callStatus == 0)) {
               if (((translator[5] & 0x20000000U) == 0) ||
                  (recordWord1 = *(uint *)(iVar23 + 4), (recordWord1 & 0x10000000) == 0)) {
-                iVar6 = 1;
+                componentCount = 1;
               }
               else {
-                iVar6 = (recordWord1 >> 0x1a & 3) + 1;
-                if (iVar6 == 0) goto LAB_00048c78;
+                componentCount = (recordWord1 >> 0x1a & 3) + 1;
+                if (componentCount == 0) goto LAB_00048c78;
               }
               iVar23 = 0;
               do {
@@ -6121,7 +6124,7 @@ LAB_00048a2c:
                 iVar23 = iVar23 + 1;
                 ilInstADst = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstADst) + 0)),(*(unsigned short *)((unsigned char *)&(ilInstADst) + 2)) + 1);
                 ilInstASrc0 = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstASrc0) + 0)),(*(unsigned short *)((unsigned char *)&(ilInstASrc0) + 2)) + 1);
-              } while (iVar6 != iVar23);
+              } while (componentCount != iVar23);
               goto LAB_00048c78;
             }
 LAB_00048418:
@@ -6256,7 +6259,7 @@ LAB_00048418:
             if ((arraySourceCount == 1) &&
                (((*(uint *)(iVar24 + 0x10) & 0x3000) == 0 ||
                 ((*(uint *)(iVar24 + 0x18) & 0x3000) == 0)))) {
-              iVar6 = ((int (*)())fragmentTranslateArithmetic)(translator,recordIndex);
+              callStatus2 = ((int (*)())fragmentTranslateArithmetic)(translator,recordIndex);
               goto joined_r0x00048448;
             }
             ilInstBPtr = &ilInstBOpcode;
@@ -6269,7 +6272,7 @@ LAB_00048418:
                (instructionBlock2 = ((int (*)())fpilTranslateSource)(translator,(uint *)(iVar24 + 0x18),&ilInstBSrc1,ilInstBSwz12),
                uVar22 = ilInstBDstMask, savedDstToken2 = ilInstBDst, instructionBlock2 != 0)) {
 LAB_000479ec:
-              iVar6 = translator[9];
+              callStatus2 = translator[9];
               goto joined_r0x00048448;
             }
             if (arraySourceCount == 0) {
@@ -6289,7 +6292,7 @@ joined_r0x000479e8:
               ilInstBDst = ilInstBDst | 0x400000;
               if (regSpan != 0) {
                 ilInstAPtr = &ilInstAOpcode;
-                iVar6 = 0;
+                componentIndex = 0;
                 do {
                   uVar22 = *src0OperandPtr >> 0xc & 3;
                   _memcpy(ilInstAPtr,ilInstBPtr,0x24);
@@ -6361,10 +6364,10 @@ joined_r0x000479e8:
                       }
                     }
                   }
-                  iVar6 = iVar6 + 1;
+                  componentIndex = componentIndex + 1;
                   ilInstBDst = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstBDst) + 0)),(*(unsigned short *)((unsigned char *)&(ilInstBDst) + 2)) + 1);
                   ilInstBSrc1 = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstBSrc1) + 0)),(*(unsigned short *)((unsigned char *)&(ilInstBSrc1) + 2)) + 1);
-                } while (regSpan != iVar6);
+                } while (regSpan != componentIndex);
                 newTempBase = translator[8];
               }
               ilInstBSrc0 = CONCAT22(4,tempRegisterHalf);
@@ -6375,13 +6378,13 @@ joined_r0x000479e8:
               ilInstBDstMask = savedDstMask;
               ilInstBSrc0 = ilInstBSrc0 | 0x400000;
               if (regSpan != 0) {
-                iVar6 = 0;
+                componentIndex = 0;
                 do {
-                  iVar6 = iVar6 + 1;
+                  componentIndex = componentIndex + 1;
                   ((int (*)())fpilEmitInstruction)(translator,ilInstBPtr,1,1);
                   ilInstBDst = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstBDst) + 0)),(*(unsigned short *)((unsigned char *)&(ilInstBDst) + 2)) + 1);
                   ilInstBSrc0 = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstBSrc0) + 0)),(*(unsigned short *)((unsigned char *)&(ilInstBSrc0) + 2)) + 1);
-                } while (regSpan != iVar6);
+                } while (regSpan != componentIndex);
               }
             }
             else {
@@ -6392,18 +6395,18 @@ joined_r0x000479e8:
                 ilInstBOpcode = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstBOpcode) + 0)),0x23);
                 ilInstBDst = ilInstBDst | 0x400000;
                 do {
-                  iVar6 = 0;
+                  componentIndex = 0;
                   bVar1 = uVar11 == 1;
                   while( true ) {
                     if (bVar1) {
                       uVar4 = ilInstBDstMask & 0xffffff00;
-                      if (iVar6 == 0) {
+                      if (componentIndex == 0) {
                         ilInstBDstMask = uVar4 | 1;
                       }
-                      else if (iVar6 == 1) {
+                      else if (componentIndex == 1) {
                         ilInstBDstMask = uVar4 | 4;
                       }
-                      else if (iVar6 == 2) {
+                      else if (componentIndex == 2) {
                         ilInstBDstMask = uVar4 | 0x10;
                       }
                       else {
@@ -6412,9 +6415,9 @@ joined_r0x000479e8:
                       emitStatus2 = ((int (*)())fpilEmitInstruction)(translator,ilInstBPtr,1,2);
                       if (emitStatus2 != 0) goto LAB_000479ec;
                     }
-                    iVar6 = iVar6 + 1;
+                    componentIndex = componentIndex + 1;
                     ilInstBSrc1 = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstBSrc1) + 0)),(*(unsigned short *)((unsigned char *)&(ilInstBSrc1) + 2)) + 1);
-                    if ((int)(*(uint *)(iVar24 + 0x18) >> 0xc & 3) < iVar6) {
+                    if ((int)(*(uint *)(iVar24 + 0x18) >> 0xc & 3) < componentIndex) {
                       ilInstBSrc0 = CONCAT22(4,(short)translator[8]);
                       ilInstBOpcode = 0x47;
                       ilInstBSwz0 = ((unsigned char *)0x00003210);
@@ -6424,11 +6427,11 @@ joined_r0x000479e8:
                       emitStatus = ((int (*)())fpilEmitInstruction)(translator,ilInstBPtr,1,1);
                       goto joined_r0x000479e8;
                     }
-                    if (iVar6 == 0) break;
-                    if (iVar6 == 1) {
+                    if (componentIndex == 0) break;
+                    if (componentIndex == 1) {
                       bVar1 = (uVar22 & 0xc) == 4;
                     }
-                    else if (iVar6 == 2) {
+                    else if (componentIndex == 2) {
                       bVar1 = (uVar22 & 0x30) == 0x10;
                     }
                     else {
@@ -6511,7 +6514,7 @@ joined_r0x000479e8:
             goto LAB_00048c78;
           }
           if (((opcode - 0x1f < 2) || (opcode == 0x23)) || (opcode == 0x3a)) {
-            iVar6 = ((int (*)())fragmentTranslateArithmetic)(translator,recordIndex);
+            callStatus2 = ((int (*)())fragmentTranslateArithmetic)(translator,recordIndex);
             goto joined_r0x0004802c;
           }
           if (opcode == 0x6c) {
@@ -6520,11 +6523,11 @@ joined_r0x000479e8:
             _memset(ilInstAPtr,0,0x24);
             iVar23 = instructionBlock4 + recordByteOffset;
             iVar24 = iVar23 + 8;
-            iVar6 = ((int (*)())fpilClassifyDestination)(translator,iVar24);
-            if (iVar6 == 1) {
+            destClass = ((int (*)())fpilClassifyDestination)(translator,iVar24);
+            if (destClass == 1) {
               ilInstAOpcode = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstAOpcode) + 0)),99);
             }
-            else if (iVar6 == 2) {
+            else if (destClass == 2) {
               ilInstAOpcode = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstAOpcode) + 0)),0x56);
               ilInstAOpcode = ilInstAOpcode & 0xc000ffff;
             }
@@ -6536,7 +6539,7 @@ joined_r0x000479e8:
             if ((iVar24 == 0) &&
                (iVar23 = ((int (*)())fpilTranslateSource)(translator,iVar23 + 0x10,&ilInstASrc0,&ilInstASwz0), iVar23 == 0)) {
               emittedSourceCount = 1;
-              if (iVar6 == 2) {
+              if (destClass == 2) {
                 emittedSourceCount = 2;
                 ilInstASwz1 = (undefined *)((uint)ilInstASwz1 & 0xffff0000 | 0x4444);
                 ilInstASrc1 = CONCAT22((short)(ilInstASrc1 >> 0x10),(short)translator[8]) & 0xffc0ffff |
@@ -6548,16 +6551,16 @@ joined_r0x000479e8:
             goto LAB_00048418;
           }
           if (opcode == 8) {
-            iVar6 = ((int (*)())fragmentTranslateAny)(translator,recordIndex,0);
+            callStatus2 = ((int (*)())fragmentTranslateAny)(translator,recordIndex,0);
 joined_r0x00048448:
-            if (iVar6 != 0) {
+            if (callStatus2 != 0) {
 LAB_00048d74:
               return translator[9];
             }
             goto LAB_00048c78;
           }
           if (opcode == 9) {
-            iVar6 = ((int (*)())fragmentTranslateAll)(translator,recordIndex,0);
+            callStatus2 = ((int (*)())fragmentTranslateAll)(translator,recordIndex,0);
             goto joined_r0x00048448;
           }
           if (opcode == 10) {
@@ -6608,11 +6611,11 @@ joined_r0x00048414:
             goto LAB_00048418;
           }
           if (opcode == 0x39) {
-            iVar6 = ((int (*)())fragmentTranslateSel)(translator,recordIndex);
+            callStatus2 = ((int (*)())fragmentTranslateSel)(translator,recordIndex);
             goto joined_r0x00048448;
           }
           if (opcode == 0x6d) {
-            iVar6 = ((int (*)())fragmentTranslateDsl)(translator,recordIndex);
+            callStatus2 = ((int (*)())fragmentTranslateDsl)(translator,recordIndex);
             goto joined_r0x00048448;
           }
           if ((opcode == 0x31) || (opcode == 0x36)) {
@@ -6661,7 +6664,7 @@ joined_r0x00048414:
                     ilInstBOpcode = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstBOpcode) + 0)),ilSelectOpcode);
                     tempRegisterBase = (short)translator[8];
                     ilInstBDst = CONCAT22(4,tempRegisterBase);
-                    iVar6 = 1;
+                    componentIndex = 1;
                     ilInstBSrc1 = CONCAT22(4,tempRegisterBase + 1);
                     ilInstBSrc0 = CONCAT22(4,tempRegisterBase);
                     ilInstBDstMask = 0x55;
@@ -6682,11 +6685,11 @@ joined_r0x00048414:
                       if ((emitStatus3 != 0) ||
                          (emitStatus3 = ((int (*)())fpilEmitInstruction)(translator,ilInstBPtr,1,2), emitStatus3 != 0))
                       goto LAB_000488e8;
-                      iVar6 = iVar6 + 1;
-                    } while (maxRegSpan != iVar6);
+                      componentIndex = componentIndex + 1;
+                    } while (maxRegSpan != componentIndex);
                   }
                   if ((*instHeader & 0x3fc0000) == 0xc40000) {
-                    iVar6 = ((int (*)())fragmentTranslateAll)(translator,recordIndex,maxRegSpan);
+                    callStatus2 = ((int (*)())fragmentTranslateAll)(translator,recordIndex,maxRegSpan);
                     goto joined_r0x0004802c;
                   }
                   ilInstBPtr = &ilInstBOpcode;
@@ -6711,14 +6714,14 @@ joined_r0x00048414:
               }
               ((int (*)())fpilTranslateDestination)(translator,recordByteOffset + instructionBlock + 8,&ilInstADst,&ilInstADstMask,0);
               ((int (*)())fpilEmitInstruction)(translator,ilInstAPtr,1,2);
-              iVar6 = translator[9];
+              callStatus2 = translator[9];
             }
             else {
 LAB_000488e8:
-              iVar6 = translator[9];
+              callStatus2 = translator[9];
             }
 joined_r0x0004802c:
-            if (iVar6 != 0) goto LAB_00048d74;
+            if (callStatus2 != 0) goto LAB_00048d74;
             goto LAB_00048c70;
           }
           if (opcode != 0x4d) break;
