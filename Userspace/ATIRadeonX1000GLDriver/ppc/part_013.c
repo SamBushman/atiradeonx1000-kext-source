@@ -2204,15 +2204,15 @@ LAB_0008d2d0:
 }
 
 /* arbfpUpdateStateForProgram @ 0x8d470 (1744 bytes) */
-int arbfpUpdateStateForProgram(context, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int arbfpUpdateStateForProgram(context, passThroughArg2, passThroughArg3, passThroughArg4, passThroughArg5, passThroughArg6, passThroughArg7, passThroughArg8)
   int context;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+  undefined4 passThroughArg2;
+  undefined4 passThroughArg3;
+  undefined4 passThroughArg4;
+  undefined4 passThroughArg5;
+  undefined4 passThroughArg6;
+  undefined4 passThroughArg7;
+  undefined4 passThroughArg8;
 {
   uint stateWord48Masked;
   uint clearedFlags;
@@ -2546,15 +2546,15 @@ LAB_0008da14:
 }
 
 /* arbfpBindProgram @ 0x8dbd0 (100 bytes) */
-int arbfpBindProgram(context, programSlot, param_3, param_4, param_5, param_6, param_7, param_8)
+int arbfpBindProgram(context, programSlot, passThroughArg3, passThroughArg4, passThroughArg5, passThroughArg6, passThroughArg7, passThroughArg8)
   int context;
   int programSlot;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+  undefined4 passThroughArg3;
+  undefined4 passThroughArg4;
+  undefined4 passThroughArg5;
+  undefined4 passThroughArg6;
+  undefined4 passThroughArg7;
+  undefined4 passThroughArg8;
 {
   undefined4 programObject;
   
@@ -2563,7 +2563,7 @@ int arbfpBindProgram(context, programSlot, param_3, param_4, param_5, param_6, p
     programObject = *(undefined4 *)(programSlot * 0x18 + *(int *)(*(int *)(((unsigned char *)0x0000112c) + context) + 8) + 0x14)
     ;
     *(undefined4 *)(((unsigned char *)0x0000121c) + context) = programObject;
-    ((int (*)())arbfpUpdateStateForProgram)(context,programSlot,param_3,param_4,param_5,param_6,programObject,param_8);
+    ((int (*)())arbfpUpdateStateForProgram)(context,programSlot,passThroughArg3,passThroughArg4,passThroughArg5,passThroughArg6,programObject,passThroughArg8);
     ((unsigned char *)0x000011d0)[context] = 1;
   }
   return;
@@ -4796,15 +4796,15 @@ int ffvpResolveFixedSource(programBuilder, sourceKind, fileOut, regOut, selectOu
 }
 
 /* noop_914c0 @ 0x914c0 (28 bytes) */
-int noop_914c0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+int noop_914c0(unusedArg1, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7, unusedArg8)
+  undefined4 unusedArg1;
+  undefined4 unusedArg2;
+  undefined4 unusedArg3;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
+  undefined4 unusedArg8;
 {
   return;
 }

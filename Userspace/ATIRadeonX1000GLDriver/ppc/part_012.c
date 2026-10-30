@@ -463,10 +463,10 @@ LAB_00083c10:
 }
 
 /* ffvpValidateProgramForced @ 0x83c80 (12 bytes) */
-void ffvpValidateProgramForced(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9)
+void ffvpValidateProgramForced(int ctx,undefined4 passThroughArg2,undefined4 passThroughArg3,undefined4 passThroughArg4,undefined4 passThroughArg5,undefined4 passThroughArg6,undefined4 passThroughArg7,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9)
 {
-  *(undefined1 *)(param_1 + 0x29) = 1;
-  ((void (*)())ffvpValidateProgram)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,fparam_1,fparam_2,fparam_3,
+  *(undefined1 *)(ctx + 0x29) = 1;
+  ((void (*)())ffvpValidateProgram)(ctx,passThroughArg2,passThroughArg3,passThroughArg4,passThroughArg5,passThroughArg6,passThroughArg7,fparam_1,fparam_2,fparam_3,
                fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,fparam_9);
   return;
 }

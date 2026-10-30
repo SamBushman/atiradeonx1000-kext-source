@@ -1473,12 +1473,12 @@ int recordGetWriteEnable(record, lane)
 }
 
 /* recordRetireBindings @ 0x78f80 (2340 bytes) */
-int recordRetireBindings(alloc, recordIndex, sourceWordPtrs, param_4, param_5)
+int recordRetireBindings(alloc, recordIndex, sourceWordPtrs, unusedArg4, unusedArg5)
   int alloc;
   uint recordIndex;
   undefined4 *sourceWordPtrs;
-  int param_4;
-  undefined4 param_5;
+  int unusedArg4;
+  undefined4 unusedArg5;
 {
   uint componentIndexC;
   uint loopCounterC;
@@ -1544,8 +1544,8 @@ int recordRetireBindings(alloc, recordIndex, sourceWordPtrs, param_4, param_5)
   sourceIndex = 0;
   usedSourceMask = *(uint *)(recordIndex * 4 + alloc + 0x6450);
   sourceCursor = sourceWordPtrs;
-  iStack00000024 = param_4;
-  uStack00000028 = param_5;
+  iStack00000024 = unusedArg4;
+  uStack00000028 = unusedArg5;
   do {
     if ((usedSourceMask & 1 << (sourceIndex & 0x3f)) != 0) {
       for (depNode = *sourceListHead; depNode != 0; depNode = *(int *)(depNode + 0x10)) {

@@ -4,11 +4,11 @@
 int FUN_000934f0(allocState)
   int allocState;
 {
-  undefined4 uVar1;
+  undefined4 resultOrReg;
   int allocStatus;
   int emitTable;
-  undefined4 uVar4;
-  undefined4 uVar5;
+  undefined4 dstTempFile;
+  undefined4 srcTempFile;
   undefined4 selectRowA0;
   undefined4 selectRowA1;
   undefined4 selectRowA2;
@@ -37,7 +37,7 @@ int FUN_000934f0(allocState)
   if (allocState == 0) {
     return 1;
   }
-  uVar1 = 0;
+  resultOrReg = 0;
   emitTable = *(int *)(allocState + 0x3d4);
   if (*(int *)(allocState + 0x4e8) == -1) {
     if ((*(int *)(allocState + 0x4c0) == -1) &&
@@ -46,28 +46,28 @@ int FUN_000934f0(allocState)
     }
     allocStatus = ffvpAllocTempRegister(allocState,1,allocState + 0x4e4);
     if (allocStatus == 0) {
-      uVar1 = *(undefined4 *)(allocState + 0x4e8);
+      resultOrReg = *(undefined4 *)(allocState + 0x4e8);
       allocStatus = ffvpAllocTempRegister(allocState,2,tempA);
       if (allocStatus == 0) {
         allocStatus = ffvpAllocTempRegister(allocState,2,tempB);
         if (allocStatus == 0) {
-          uVar5 = **(undefined4 **)(allocState + 0x3ec);
-          uVar4 = **(undefined4 **)(allocState + 0x3f0);
+          srcTempFile = **(undefined4 **)(allocState + 0x3ec);
+          dstTempFile = **(undefined4 **)(allocState + 0x3f0);
           (**(code **)(((unsigned char *)0x000012f0) + emitTable))
-                    (allocState,uVar4,tempAReg,tempAMask,uVar5,tempAReg,&DAT_001dbdb4,&DAT_001fa5e8,uVar5,tempAReg,&DAT_001dbdb4,&DAT_001fa5e8)
+                    (allocState,dstTempFile,tempAReg,tempAMask,srcTempFile,tempAReg,&DAT_001dbdb4,&DAT_001fa5e8,srcTempFile,tempAReg,&DAT_001dbdb4,&DAT_001fa5e8)
           ;
           selectRowA0 = 4;
           selectRowA1 = 4;
           selectRowA3 = 4;
           selectRowA2 = tempASelect2;
           (**(code **)(((unsigned char *)0x000012f4) + emitTable))
-                    (allocState,uVar4,uVar1,&DAT_001dbd84,uVar5,tempAReg,&tempASelect0,&DAT_001fa5e8,uVar5,(*(int *)((int)allocState + 1216)),(&DAT_001dbd74),&DAT_001fa5e8,uVar5,tempAReg,(&selectRowA0),&DAT_001fa5e8);
+                    (allocState,dstTempFile,resultOrReg,&DAT_001dbd84,srcTempFile,tempAReg,&tempASelect0,&DAT_001fa5e8,srcTempFile,(*(int *)((int)allocState + 1216)),(&DAT_001dbd74),&DAT_001fa5e8,srcTempFile,tempAReg,(&selectRowA0),&DAT_001fa5e8);
           (**(code **)(((unsigned char *)0x000012e4) + emitTable))
-                    (allocState,uVar4,tempAReg,tempAMask,uVar5,uVar1,&DAT_001dbd74,&DAT_001fa5e8,uVar5,uVar1,&DAT_001dbd74,&DAT_001fa5e8);
+                    (allocState,dstTempFile,tempAReg,tempAMask,srcTempFile,resultOrReg,&DAT_001dbd74,&DAT_001fa5e8,srcTempFile,resultOrReg,&DAT_001dbd74,&DAT_001fa5e8);
           (**(code **)(((unsigned char *)0x00001318) + emitTable))
-                    (allocState,uVar4,tempAReg,tempAMask,uVar5,tempAReg,&tempASelect0,&DAT_001fa5e8);
+                    (allocState,dstTempFile,tempAReg,tempAMask,srcTempFile,tempAReg,&tempASelect0,&DAT_001fa5e8);
           (**(code **)(((unsigned char *)0x0000131c) + emitTable))
-                    (allocState,uVar4,tempBReg,tempBMask,uVar5,tempBReg,&DAT_001dbdb4,&DAT_001dbd94)
+                    (allocState,dstTempFile,tempBReg,tempBMask,srcTempFile,tempBReg,&DAT_001dbdb4,&DAT_001dbd94)
           ;
           selectRowC0 = *(undefined4 *)(allocState + 0x4d4);
           selectRowC1 = *(undefined4 *)(allocState + 0x4d8);
@@ -82,16 +82,16 @@ int FUN_000934f0(allocState)
           selectRowB1 = tempBSelect1;
           selectRowB3 = tempBSelect3;
           (**(code **)(((unsigned char *)0x000012f4) + emitTable))
-                    (allocState,uVar4,uVar1,&DAT_001dbd84,uVar5,tempAReg,&selectRowA0,&DAT_001fa5e8,uVar5,(*(int *)((int)allocState + 1216)),(&selectRowC0),&DAT_001fa5e8,uVar5,tempBReg,(&selectRowB0),&DAT_001fa5e8);
+                    (allocState,dstTempFile,resultOrReg,&DAT_001dbd84,srcTempFile,tempAReg,&selectRowA0,&DAT_001fa5e8,srcTempFile,(*(int *)((int)allocState + 1216)),(&selectRowC0),&DAT_001fa5e8,srcTempFile,tempBReg,(&selectRowB0),&DAT_001fa5e8);
           ffvpFreeTempRegister(allocState,tempA);
           ffvpFreeTempRegister(allocState,tempB);
           return 0;
         }
       }
     }
-    uVar1 = 7;
+    resultOrReg = 7;
   }
-  return uVar1;
+  return resultOrReg;
 }
 
 /* ffvpEmitBlendedEyeNormal @ 0x93510 (1220 bytes) */
@@ -5819,14 +5819,14 @@ int ffvpRunStateHook(ctx)
 }
 
 /* gldValidateVertexProgramState @ 0x9d3b0 (64 bytes) */
-int gldValidateVertexProgramState(ctx, arg2, param_3, param_4, param_5, param_6, param_7)
+int gldValidateVertexProgramState(ctx, arg2, passThroughArg3, passThroughArg4, passThroughArg5, passThroughArg6, passThroughArg7)
   int ctx;
   undefined4 arg2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+  undefined4 passThroughArg3;
+  undefined4 passThroughArg4;
+  undefined4 passThroughArg5;
+  undefined4 passThroughArg6;
+  undefined4 passThroughArg7;
 {
   if (ctx == 0) {
     return;
@@ -7672,15 +7672,15 @@ int arbProgramFindIndex(ctx, programTable, programId)
 }
 
 /* glProgramStringARB_impl @ 0xa0300 (80 bytes) */
-int glProgramStringARB_impl(ctx, target, format, length, text, param_6, param_7, param_8)
+int glProgramStringARB_impl(ctx, target, format, length, text, unusedArg6, unusedArg7, unusedArg8)
   int ctx;
   int target;
   int format;
   int length;
   undefined4 text;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
+  undefined4 unusedArg8;
 {
   *(undefined4 *)(((unsigned char *)0x00001124) + ctx) = 0xffffffff;
   **(undefined1 **)(((unsigned char *)0x00001128) + ctx) = 0;
@@ -7697,16 +7697,16 @@ int glProgramStringARB_impl(ctx, target, format, length, text, param_6, param_7,
 }
 
 /* arbProgramEntryInit @ 0xa0350 (36 bytes) */
-int arbProgramEntryInit(param_1, param_2)
-  undefined4 param_1;
-  undefined4 *param_2;
+int arbProgramEntryInit(unusedArg1, entry)
+  undefined4 unusedArg1;
+  undefined4 *entry;
 {
-  param_2[5] = 0;
-  param_2[3] = 0xffffffff;
-  *param_2 = 0;
-  param_2[1] = 0;
-  param_2[2] = 0;
-  param_2[4] = 0;
+  entry[5] = 0;
+  entry[3] = 0xffffffff;
+  *entry = 0;
+  entry[1] = 0;
+  entry[2] = 0;
+  entry[4] = 0;
   return;
 }
 
@@ -7818,7 +7818,7 @@ int glGetProgramivARB_impl(ctx, target, pname, params)
   int pname;
   uint *params;
 {
-  int iVar1;
+  int programTable;
   int iVar2;
   
   if (target == 0x8620) {
@@ -7830,18 +7830,18 @@ int glGetProgramivARB_impl(ctx, target, pname, params)
     }
     iVar2 = *(int *)(((unsigned char *)0x00001270) + ctx);
   }
-  iVar1 = *(int *)(((unsigned char *)0x0000112c) + ctx);
+  programTable = *(int *)(((unsigned char *)0x0000112c) + ctx);
   if (pname == 0x8627) {
-    *params = *(uint *)(iVar2 * 0x18 + *(int *)(iVar1 + 8) + 0xc);
+    *params = *(uint *)(iVar2 * 0x18 + *(int *)(programTable + 8) + 0xc);
     return;
   }
   if (pname == 0x8876) {
-    *params = *(uint *)(iVar2 * 0x18 + *(int *)(iVar1 + 8) + 8);
+    *params = *(uint *)(iVar2 * 0x18 + *(int *)(programTable + 8) + 8);
     return;
   }
   if (pname != 0x8677) {
     if (target == 0x8804) {
-      iVar2 = *(int *)(iVar2 * 0x18 + *(int *)(iVar1 + 8) + 0x14);
+      iVar2 = *(int *)(iVar2 * 0x18 + *(int *)(programTable + 8) + 0x14);
       switch(pname) {
       case 0x8805:
         *params = *(uint *)(*(int *)(iVar2 + 0x74) + 0x6c);
@@ -8097,7 +8097,7 @@ switchD_000a0718_caseD_8811:
     }
     return;
   }
-  *params = *(uint *)(iVar2 * 0x18 + *(int *)(iVar1 + 8));
+  *params = *(uint *)(iVar2 * 0x18 + *(int *)(programTable + 8));
   return;
 }
 
@@ -8177,7 +8177,7 @@ int glDeleteProgramsARB_impl(ctx, count, ids)
   undefined4 in_r6;
   undefined4 in_r7;
   undefined4 in_r8;
-  int iVar2;
+  int entries;
   int loopIndex;
   int entryOffset;
   int programTable;
@@ -8188,14 +8188,14 @@ int glDeleteProgramsARB_impl(ctx, count, ids)
     do {
       entryIndex = ((int (*)())arbProgramFindIndex)(ctx,programTable,*ids);
       if (entryIndex != 0) {
-        iVar2 = *(int *)(programTable + 8);
+        entries = *(int *)(programTable + 8);
         entryOffset = entryIndex * 0x18;
-        if ((*(int *)(iVar2 + entryOffset + 4) == 0x8804) &&
-           (*(int *)(*(int *)(((unsigned char *)0x00001270) + ctx) * 0x18 + iVar2) == *ids)) {
+        if ((*(int *)(entries + entryOffset + 4) == 0x8804) &&
+           (*(int *)(*(int *)(((unsigned char *)0x00001270) + ctx) * 0x18 + entries) == *ids)) {
           ((int (*)())glBindProgramARB_impl)(ctx,0x8804,0,in_r6,in_r7,in_r8,*ids);
-          iVar2 = *(int *)(programTable + 8);
+          entries = *(int *)(programTable + 8);
         }
-        ((int (*)())arbProgramEntryFree)(ctx,entryOffset + iVar2);
+        ((int (*)())arbProgramEntryFree)(ctx,entryOffset + entries);
         entryOffset = entryOffset + *(int *)(programTable + 8);
         _memmove(entryOffset,entryOffset + 0x18,(*(int *)(programTable + 4) - entryIndex) * 0x18 + -0x18);
         entryOffset = *(int *)(programTable + 4) + -1;
@@ -8221,21 +8221,21 @@ int glDeleteProgramsARB_impl(ctx, count, ids)
 int arbProgramTableInit(context)
   int context;
 {
-  undefined4 uVar1;
-  undefined1 *puVar2;
-  undefined4 *puVar3;
+  undefined4 entryArray;
+  undefined1 *errorStringBuf;
+  undefined4 *programTable;
   
-  puVar3 = *(undefined4 **)(((unsigned char *)0x0000112c) + context);
-  puVar3[3] = 1;
-  *puVar3 = 1;
-  puVar3[4] = 1;
-  puVar3[1] = 3;
-  uVar1 = (**(code **)(context + 0xc))(0xc0);
-  puVar3[2] = uVar1;
+  programTable = *(undefined4 **)(((unsigned char *)0x0000112c) + context);
+  programTable[3] = 1;
+  *programTable = 1;
+  programTable[4] = 1;
+  programTable[1] = 3;
+  entryArray = (**(code **)(context + 0xc))(0xc0);
+  programTable[2] = entryArray;
   *(undefined4 *)(((unsigned char *)0x00001124) + context) = 0xffffffff;
-  puVar2 = (undefined1 *)(**(code **)(context + 0xc))(1);
-  *(undefined1 **)(((unsigned char *)0x00001128) + context) = puVar2;
-  *puVar2 = 0;
+  errorStringBuf = (undefined1 *)(**(code **)(context + 0xc))(1);
+  *(undefined1 **)(((unsigned char *)0x00001128) + context) = errorStringBuf;
+  *errorStringBuf = 0;
   *(undefined4 *)(((unsigned char *)0x00001130) + context) = 0;
   return arbfpInitProgramState(context);
 }
@@ -8250,40 +8250,40 @@ int noop_a0f80()
 int atifsInit(ctx)
   int ctx;
 {
-  uint uVar1;
-  undefined *puVar2;
-  int iVar3;
+  uint slotBit;
+  undefined *defaultTable;
+  int slotCursor;
   uint loopCounter;
-  uint uVar5;
+  uint dirtyMask;
   int remaining;
   
-  puVar2 = PTR_FUN_001e89f0;
+  defaultTable = PTR_FUN_001e89f0;
   *(code **)(((unsigned char *)0x00001160) + ctx) = noop_a0f80;
   *(code **)(((unsigned char *)0x0000115c) + ctx) = noop_a0f80;
-  *(undefined **)(((unsigned char *)0x00001164) + ctx) = puVar2;
+  *(undefined **)(((unsigned char *)0x00001164) + ctx) = defaultTable;
   atifsResetState(ctx);
-  uVar5 = *(uint *)(ctx + 0x27bc);
+  dirtyMask = *(uint *)(ctx + 0x27bc);
   loopCounter = 0;
   remaining = 0x10;
-  iVar3 = ctx;
+  slotCursor = ctx;
   do {
-    uVar1 = loopCounter & 0x3f;
-    *(undefined4 *)(iVar3 + 0x27c0) = 0xff;
+    slotBit = loopCounter & 0x3f;
+    *(undefined4 *)(slotCursor + 0x27c0) = 0xff;
     loopCounter = loopCounter + 1;
-    iVar3 = iVar3 + 4;
-    uVar5 = 1 << uVar1 | uVar5;
+    slotCursor = slotCursor + 4;
+    dirtyMask = 1 << slotBit | dirtyMask;
     remaining = remaining + -1;
   } while (remaining != 0);
-  *(uint *)(ctx + 0x27bc) = uVar5;
+  *(uint *)(ctx + 0x27bc) = dirtyMask;
   return 1;
 }
 
 /* FUN_000a1040 @ 0xa1040 (20 bytes) */
-int FUN_000a1040(param_1, param_2)
-  undefined4 param_1;
-  int param_2;
+int FUN_000a1040(unusedArg1, flag)
+  undefined4 unusedArg1;
+  int flag;
 {
-  if (param_2 != 0) {
+  if (flag != 0) {
     return 0x125;
   }
   return 2;
