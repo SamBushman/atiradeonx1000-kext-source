@@ -5838,10 +5838,11 @@ int fragmentInstructionToIL(translator, unusedArg2, unusedArg3, unusedArg4, unus
   int instructionBlockOffset;
   int recordByteOffset;
   uint operandCount;
-  bool bVar1;
+  bool isScalarForm;
+  bool maskBitSet;
   bool advanceSrc1;
   short tempRegisterIndex;
-  uint uVar4;
+  uint dstMaskHigh;
   int program;
   int componentCount;
   int componentIndex;
@@ -5851,7 +5852,10 @@ int fragmentInstructionToIL(translator, unusedArg2, unusedArg3, unusedArg4, unus
   int returnCode;
   undefined4 saturate;
   undefined2 tempRegisterHalf;
-  uint uVar11;
+  uint swizzleNegate;
+  uint dstMaskLow2;
+  uint select2;
+  uint select1;
   undefined *adjustedSwizzle;
   uint opClass;
   uint negateBit;
@@ -5871,7 +5875,10 @@ int fragmentInstructionToIL(translator, unusedArg2, unusedArg3, unusedArg4, unus
   uint *currentRecord;
   uint *instructionRecords;
   uint *sourceRecordCursor;
-  uint uVar22;
+  uint savedOpcodeWord2;
+  uint select3;
+  uint componentCode;
+  uint savedDstMask2;
   int iVar23;
   int tempWordOffset;
   int componentLoopIndex;
@@ -5890,12 +5897,12 @@ int fragmentInstructionToIL(translator, unusedArg2, unusedArg3, unusedArg4, unus
   uint dstToken2;
   uint dstMask2;
   uint *reservedTokens;
-  undefined4 local_ec;
-  uint local_e8;
-  uint local_e4;
-  uint local_e0;
-  uint local_dc;
-  uint local_d8;
+  undefined4 tempWord0;
+  uint tempWord1;
+  uint tempWord2;
+  uint tempWord3;
+  uint tempWord4;
+  uint tempWord5;
   undefined4 ilInstBOpcode;
   undefined4 ilInstBDst;
   uint ilInstBDstMask;
@@ -5918,8 +5925,8 @@ int fragmentInstructionToIL(translator, unusedArg2, unusedArg3, unusedArg4, unus
   uint src1Advances;
   uint src0Advances;
   uint *instHeader;
-  uint local_70;
-  uint local_6c;
+  uint savedDstCopy;
+  uint savedWord1Copy;
   uint savedDstToken;
   uint savedDstMask;
   undefined4 *ilInstBPtr;
@@ -5951,8 +5958,8 @@ LAB_00048d20:
           if ((opcode2 - 0x44 < 2) || (hasSecondSource = 0, opcode2 == 0x47)) {
             hasSecondSource = 1;
           }
-          if (((opcode2 == 0x43) || (opcode2 == 0x45)) || (bVar1 = false, opcode2 == 0x47)) {
-            bVar1 = true;
+          if (((opcode2 == 0x43) || (opcode2 == 0x45)) || (isScalarForm = false, opcode2 == 0x47)) {
+            isScalarForm = true;
           }
           ilInstAPtr = &ilInstAOpcode;
           opRecord = instructionBlock + recordByteOffset;
@@ -5978,20 +5985,20 @@ LAB_00048d20:
             srcModeBits = *(uint *)(opRecord + 0x20) >> 5 & 7;
             if (hasSecondSource != 0) {
               ((int (*)())fpilTranslateSource)(translator,opRecord + 0x28,&ilInstASrc1,&ilInstASwz1);
-              uVar11 = (uint)ilInstASwz1 >> 3 & 1;
+              swizzleNegate = (uint)ilInstASwz1 >> 3 & 1;
               ilInstASwz1 = (undefined *)
-                         (uVar11 << 0xf |
+                         (swizzleNegate << 0xf |
                          ((uint)ilInstASwz1 & 7) << 0xc |
-                         uVar11 << 0xb |
+                         swizzleNegate << 0xb |
                          ((uint)ilInstASwz1 & 7) << 8 |
-                         uVar11 << 7 | ((uint)ilInstASwz1 & 7) << 4 | (uint)ilInstASwz1 & 0xffff000f);
+                         swizzleNegate << 7 | ((uint)ilInstASwz1 & 7) << 4 | (uint)ilInstASwz1 & 0xffff000f);
             }
           }
           if (srcModeBits - 5 < 3) {
             ilInstAOpcode = ilInstAOpcode & 0xf3ffffff | 0x4000000;
           }
           adjustedSwizzle = ilInstASwz0;
-          if ((bVar1) &&
+          if ((isScalarForm) &&
              (adjustedSwizzle = (undefined *)((uint)ilInstASwz0 & 0xff1fffff | 0x600000),
              ((uint)ilInstASwz0 & 0x8000) != 0)) {
             adjustedSwizzle = (undefined *)
@@ -6149,7 +6156,7 @@ LAB_00048418:
               srcWordOffset = 0;
               instructionBlock2 = recordIndex * 8 + instructionBlock2 + 0x10;
               do {
-                srcStatus3 = ((int (*)())fpilTranslateSource)(translator,instructionBlock2,srcWordOffset + (int)ilInstAPtr,(int)&local_e0 + srcWordOffset);
+                srcStatus3 = ((int (*)())fpilTranslateSource)(translator,instructionBlock2,srcWordOffset + (int)ilInstAPtr,(int)&tempWord3 + srcWordOffset);
                 if (srcStatus3 != 0) goto LAB_00048418;
                 moreSources = srcWordOffset != 8;
                 instructionBlock2 = instructionBlock2 + 8;
@@ -6167,7 +6174,7 @@ LAB_00048418:
                 *(undefined4 *)(tempWordOffset + (int)ilInstBPtr) = 0;
                 dstOutPair[0xd] = dstOutPair[0xd] & 0xffc0ffff | 0x40000;
                 *(short *)((int)dstOutPair + 0x36) = tempRegisterIndex;
-                *(undefined4 *)((int)&local_ec + tempWordOffset) = 0;
+                *(undefined4 *)((int)&tempWord0 + tempWordOffset) = 0;
                 tempWordOffset = tempWordOffset + 4;
                 dstOutPair[7] = dstOutPair[7] & 0xffc0ffff | 0x40000;
                 *(short *)((int)dstOutPair + 0x1e) = tempRegisterIndex;
@@ -6175,62 +6182,62 @@ LAB_00048418:
                 dstOutPair = dstOutPair + 1;
               } while (moreTemps);
               reserveStatus = ((int (*)())fpilReserveTokens)(translator,7,&reservedTokens);
-              savedDstWord = local_ec;
+              savedDstWord = tempWord0;
               if (reserveStatus == 0) {
                 *reservedTokens = 0x5b;
-                reservedTokens[1] = local_ec;
+                reservedTokens[1] = tempWord0;
                 reservedTokens[2] = dstMask2;
                 reservedTokens[3] = ilInstADstMask;
-                reservedTokens[4] = local_d8;
+                reservedTokens[4] = tempWord5;
                 reservedTokens[5] = ilInstAOpcode;
-                reservedTokens[6] = local_e0;
+                reservedTokens[6] = tempWord3;
                 reserveStatus = ((int (*)())fpilReserveTokens)(translator,7,&reservedTokens);
                 if (reserveStatus == 0) {
                   *reservedTokens = 0x5b;
-                  local_6c = local_e8;
-                  reservedTokens[1] = local_e8;
+                  savedWord1Copy = tempWord1;
+                  reservedTokens[1] = tempWord1;
                   reservedTokens[2] = dstMask2;
                   reservedTokens[3] = ilInstADst;
-                  reservedTokens[4] = local_dc;
+                  reservedTokens[4] = tempWord4;
                   reservedTokens[5] = ilInstAOpcode;
-                  reservedTokens[6] = local_e0;
+                  reservedTokens[6] = tempWord3;
                   dstMask2 = dstMask2 | 0x100;
                   reserveStatus = ((int (*)())fpilReserveTokens)(translator,5,&reservedTokens);
-                  uVar22 = ilInstBOpcode;
+                  savedOpcodeWord2 = ilInstBOpcode;
                   if (reserveStatus == 0) {
                     *reservedTokens = 0x20;
                     reservedTokens[1] = savedDstWord;
                     reservedTokens[2] = dstMask2;
                     reservedTokens[3] = ilInstBOpcode;
-                    local_70 = ilInstBDst;
+                    savedDstCopy = ilInstBDst;
                     reservedTokens[4] = ilInstBDst;
                     dstMask2 = dstMask2 & 0xfffffeff;
                     reserveStatus = ((int (*)())fpilReserveTokens)(translator,5,&reservedTokens);
                     if (reserveStatus == 0) {
                       *reservedTokens = 3;
-                      reservedTokens[1] = local_6c;
+                      reservedTokens[1] = savedWord1Copy;
                       reservedTokens[2] = dstMask2;
-                      reservedTokens[3] = uVar22;
-                      reservedTokens[4] = uVar22;
+                      reservedTokens[3] = savedOpcodeWord2;
+                      reservedTokens[4] = savedOpcodeWord2;
                       reserveStatus = ((int (*)())fpilReserveTokens)(translator,5,&reservedTokens);
                       if (reserveStatus == 0) {
                         *reservedTokens = 0x49;
                         reservedTokens[1] = savedDstWord;
                         reservedTokens[2] = dstMask2;
-                        reservedTokens[3] = uVar22;
-                        reservedTokens[4] = uVar22;
+                        reservedTokens[3] = savedOpcodeWord2;
+                        reservedTokens[4] = savedOpcodeWord2;
                         reserveStatus = ((int (*)())fpilReserveTokens)(translator,5,&reservedTokens);
                         savedOpcodeWord = ilInstBOpcode;
                         if (reserveStatus == 0) {
                           *reservedTokens = 0x49;
-                          reservedTokens[1] = local_6c;
+                          reservedTokens[1] = savedWord1Copy;
                           reservedTokens[2] = dstMask2;
-                          reservedTokens[3] = uVar22;
-                          reservedTokens[4] = local_70;
+                          reservedTokens[3] = savedOpcodeWord2;
+                          reservedTokens[4] = savedDstCopy;
                           reserveStatus = ((int (*)())fpilReserveTokens)(translator,7,&reservedTokens);
                           if (reserveStatus == 0) {
                             *reservedTokens = 0x23;
-                            reservedTokens[1] = local_e4;
+                            reservedTokens[1] = tempWord2;
                             reservedTokens[2] = dstMask2;
                             reservedTokens[3] = savedOpcodeWord | 0x400000;
                             reservedTokens[4] = (uint)((unsigned char *)0x00004555);
@@ -6277,7 +6284,7 @@ LAB_00048418:
             if (((instructionBlock2 != 0) ||
                 (instructionBlock2 = ((int (*)())fpilTranslateSource)(translator,src0OperandPtr,&ilInstBSrc0,&ilInstBSwz0), instructionBlock2 != 0)) ||
                (instructionBlock2 = ((int (*)())fpilTranslateSource)(translator,(uint *)(opRecord2 + 0x18),&ilInstBSrc1,ilInstBSwz12),
-               uVar22 = ilInstBDstMask, savedDstToken2 = ilInstBDst, instructionBlock2 != 0)) {
+               savedDstMask2 = ilInstBDstMask, savedDstToken2 = ilInstBDst, instructionBlock2 != 0)) {
 LAB_000479ec:
               callStatus2 = translator[9];
               goto joined_r0x00048448;
@@ -6301,7 +6308,7 @@ joined_r0x000479e8:
                 ilInstAPtr = &ilInstAOpcode;
                 componentIndex = 0;
                 do {
-                  uVar22 = *src0OperandPtr >> 0xc & 3;
+                  componentCode = *src0OperandPtr >> 0xc & 3;
                   _memcpy(ilInstAPtr,ilInstBPtr,0x24);
                   tempRegister = translator[8];
                   negateBit = (uint)ilInstBSwz12[0] >> 3 & 1;
@@ -6323,49 +6330,49 @@ joined_r0x000479e8:
                     ilInstAOpcode = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstAOpcode) + 0)),0x40);
                     ilInstASwz2 = ((unsigned char *)0x00003210);
                     ilInstASrc2 = ilInstASrc2 | 0x400000;
-                    if (uVar22 == 1) {
+                    if (componentCode == 1) {
                       ilInstADst = ilInstBDst;
                       ilInstADstMask = ilInstBDstMask;
                     }
-                    uVar11 = (uint)ilInstBSwz12[0] >> 4 & 7;
+                    select1 = (uint)ilInstBSwz12[0] >> 4 & 7;
                     negateBit = (uint)ilInstBSwz12[0] >> 7 & 1;
                     ilInstASwz1 = (undefined *)
                                (negateBit << 0xf |
-                               uVar11 << 0xc |
+                               select1 << 0xc |
                                negateBit << 0xb |
-                               uVar11 << 8 |
+                               select1 << 8 |
                                negateBit << 7 |
-                               uVar11 << 4 | negateBit << 3 | uVar11 | (uint)ilInstASwz1 & 0xffff0000);
+                               select1 << 4 | negateBit << 3 | select1 | (uint)ilInstASwz1 & 0xffff0000);
                     emitStatus3 = ((int (*)())fpilEmitInstruction)(translator,ilInstAPtr,1,3);
-                    if ((emitStatus3 == 0) && (1 < uVar22)) {
+                    if ((emitStatus3 == 0) && (1 < componentCode)) {
                       ilInstASrc0 = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstASrc0) + 0)),(*(unsigned short *)((unsigned char *)&(ilInstASrc0) + 2)) + 1);
-                      if (uVar22 == 2) {
+                      if (componentCode == 2) {
                         ilInstADst = ilInstBDst;
                         ilInstADstMask = ilInstBDstMask;
                       }
-                      uVar11 = (uint)ilInstBSwz12[0] >> 8 & 7;
+                      select2 = (uint)ilInstBSwz12[0] >> 8 & 7;
                       negateBit = (uint)ilInstBSwz12[0] >> 0xb & 1;
                       ilInstASwz1 = (undefined *)
                                  (negateBit << 0xf |
-                                 uVar11 << 0xc |
+                                 select2 << 0xc |
                                  negateBit << 0xb |
-                                 uVar11 << 8 |
+                                 select2 << 8 |
                                  negateBit << 7 |
-                                 uVar11 << 4 | negateBit << 3 | uVar11 | (uint)ilInstASwz1 & 0xffff0000);
+                                 select2 << 4 | negateBit << 3 | select2 | (uint)ilInstASwz1 & 0xffff0000);
                       emitStatus3 = ((int (*)())fpilEmitInstruction)(translator,ilInstAPtr,1,3);
-                      if ((emitStatus3 == 0) && (uVar22 == 3)) {
-                        uVar22 = (uint)ilInstBSwz12[0] >> 0xc & 7;
+                      if ((emitStatus3 == 0) && (componentCode == 3)) {
+                        select3 = (uint)ilInstBSwz12[0] >> 0xc & 7;
                         negateBit = (uint)ilInstBSwz12[0] >> 0xf & 1;
                         ilInstADst = ilInstBDst;
                         ilInstADstMask = ilInstBDstMask;
                         ilInstASrc0 = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstASrc0) + 0)),(*(unsigned short *)((unsigned char *)&(ilInstASrc0) + 2)) + 1);
                         ilInstASwz1 = (undefined *)
                                    (negateBit << 0xf |
-                                   uVar22 << 0xc |
+                                   select3 << 0xc |
                                    negateBit << 0xb |
-                                   uVar22 << 8 |
+                                   select3 << 8 |
                                    negateBit << 7 |
-                                   uVar22 << 4 | negateBit << 3 | uVar22 | (uint)ilInstASwz1 & 0xffff0000)
+                                   select3 << 4 | negateBit << 3 | select3 | (uint)ilInstASwz1 & 0xffff0000)
                         ;
                         ((int (*)())fpilEmitInstruction)(translator,ilInstAPtr,1,3);
                       }
@@ -6396,25 +6403,25 @@ joined_r0x000479e8:
             }
             else {
               if ((*src0OperandPtr & 0x4000) == 0) {
-                uVar11 = ilInstBDstMask & 3;
+                dstMaskLow2 = ilInstBDstMask & 3;
                 ilInstBDst = CONCAT22(4,(short)translator[8]);
                 ilInstBDstMask = 0;
                 ilInstBOpcode = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstBOpcode) + 0)),0x23);
                 ilInstBDst = ilInstBDst | 0x400000;
                 do {
                   componentIndex = 0;
-                  bVar1 = uVar11 == 1;
+                  maskBitSet = dstMaskLow2 == 1;
                   while( true ) {
-                    if (bVar1) {
-                      uVar4 = ilInstBDstMask & 0xffffff00;
+                    if (maskBitSet) {
+                      dstMaskHigh = ilInstBDstMask & 0xffffff00;
                       if (componentIndex == 0) {
-                        ilInstBDstMask = uVar4 | 1;
+                        ilInstBDstMask = dstMaskHigh | 1;
                       }
                       else if (componentIndex == 1) {
-                        ilInstBDstMask = uVar4 | 4;
+                        ilInstBDstMask = dstMaskHigh | 4;
                       }
                       else if (componentIndex == 2) {
-                        ilInstBDstMask = uVar4 | 0x10;
+                        ilInstBDstMask = dstMaskHigh | 0x10;
                       }
                       else {
                         ilInstBDstMask = ilInstBDstMask & 0xffffff00 | 0x40;
@@ -6430,25 +6437,25 @@ joined_r0x000479e8:
                       ilInstBSwz0 = ((unsigned char *)0x00003210);
                       ilInstBSrc0 = ilInstBSrc0 | 0x400000;
                       ilInstBDst = savedDstToken2;
-                      ilInstBDstMask = uVar22;
+                      ilInstBDstMask = savedDstMask2;
                       emitStatus = ((int (*)())fpilEmitInstruction)(translator,ilInstBPtr,1,1);
                       goto joined_r0x000479e8;
                     }
                     if (componentIndex == 0) break;
                     if (componentIndex == 1) {
-                      bVar1 = (uVar22 & 0xc) == 4;
+                      maskBitSet = (savedDstMask2 & 0xc) == 4;
                     }
                     else if (componentIndex == 2) {
-                      bVar1 = (uVar22 & 0x30) == 0x10;
+                      maskBitSet = (savedDstMask2 & 0x30) == 0x10;
                     }
                     else {
-                      bVar1 = (uVar22 & 0xc0) == 0x40;
+                      maskBitSet = (savedDstMask2 & 0xc0) == 0x40;
                     }
                   }
                 } while( true );
               }
               ilInstAPtr = &ilInstAOpcode;
-              uVar22 = *src0OperandPtr >> 0xc & 3;
+              componentCode = *src0OperandPtr >> 0xc & 3;
               _memcpy(ilInstAPtr,ilInstBPtr,0x24);
               tempRegBase = translator[8];
               negateBit = (uint)ilInstBSwz12[0] >> 3 & 1;
@@ -6470,49 +6477,49 @@ joined_r0x000479e8:
                 ilInstASwz2 = ((unsigned char *)0x00003210);
                 ilInstAOpcode = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstAOpcode) + 0)),0x40);
                 ilInstASrc2 = ilInstASrc2 | 0x400000;
-                if (uVar22 == 1) {
+                if (componentCode == 1) {
                   ilInstADst = ilInstBDst;
                   ilInstADstMask = ilInstBDstMask;
                 }
-                uVar11 = (uint)ilInstBSwz12[0] >> 4 & 7;
+                select1 = (uint)ilInstBSwz12[0] >> 4 & 7;
                 negateBit = (uint)ilInstBSwz12[0] >> 7 & 1;
                 ilInstASwz1 = (undefined *)
                            (negateBit << 0xf |
-                           uVar11 << 0xc |
+                           select1 << 0xc |
                            negateBit << 0xb |
-                           uVar11 << 8 |
+                           select1 << 8 |
                            negateBit << 7 |
-                           uVar11 << 4 | negateBit << 3 | uVar11 | (uint)ilInstASwz1 & 0xffff0000);
+                           select1 << 4 | negateBit << 3 | select1 | (uint)ilInstASwz1 & 0xffff0000);
                 emitStatus = ((int (*)())fpilEmitInstruction)(translator,ilInstAPtr,1,3);
-                if ((emitStatus == 0) && (1 < uVar22)) {
+                if ((emitStatus == 0) && (1 < componentCode)) {
                   ilInstASrc0 = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstASrc0) + 0)),(*(unsigned short *)((unsigned char *)&(ilInstASrc0) + 2)) + 1);
-                  if (uVar22 == 2) {
+                  if (componentCode == 2) {
                     ilInstADst = ilInstBDst;
                     ilInstADstMask = ilInstBDstMask;
                   }
-                  uVar11 = (uint)ilInstBSwz12[0] >> 8 & 7;
+                  select2 = (uint)ilInstBSwz12[0] >> 8 & 7;
                   negateBit = (uint)ilInstBSwz12[0] >> 0xb & 1;
                   ilInstASwz1 = (undefined *)
                              (negateBit << 0xf |
-                             uVar11 << 0xc |
+                             select2 << 0xc |
                              negateBit << 0xb |
-                             uVar11 << 8 |
+                             select2 << 8 |
                              negateBit << 7 |
-                             uVar11 << 4 | negateBit << 3 | uVar11 | (uint)ilInstASwz1 & 0xffff0000);
+                             select2 << 4 | negateBit << 3 | select2 | (uint)ilInstASwz1 & 0xffff0000);
                   emitStatus = ((int (*)())fpilEmitInstruction)(translator,ilInstAPtr,1,3);
-                  if ((emitStatus == 0) && (uVar22 == 3)) {
-                    uVar22 = (uint)ilInstBSwz12[0] >> 0xc & 7;
+                  if ((emitStatus == 0) && (componentCode == 3)) {
+                    select3 = (uint)ilInstBSwz12[0] >> 0xc & 7;
                     negateBit = (uint)ilInstBSwz12[0] >> 0xf & 1;
                     ilInstADst = ilInstBDst;
                     ilInstADstMask = ilInstBDstMask;
                     ilInstASrc0 = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstASrc0) + 0)),(*(unsigned short *)((unsigned char *)&(ilInstASrc0) + 2)) + 1);
                     ilInstASwz1 = (undefined *)
                                (negateBit << 0xf |
-                               uVar22 << 0xc |
+                               select3 << 0xc |
                                negateBit << 0xb |
-                               uVar22 << 8 |
+                               select3 << 8 |
                                negateBit << 7 |
-                               uVar22 << 4 | negateBit << 3 | uVar22 | (uint)ilInstASwz1 & 0xffff0000);
+                               select3 << 4 | negateBit << 3 | select3 | (uint)ilInstASwz1 & 0xffff0000);
                     ((int (*)())fpilEmitInstruction)(translator,ilInstAPtr,1,3);
                   }
                 }
