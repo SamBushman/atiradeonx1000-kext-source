@@ -777,8 +777,8 @@ int ValueKey__insertMovOfOperandLane(ctx, operandIndex, lane, resultScaleCode)
   return callResult;
 }
 
-/* FUN_001781a4 @ 0x1781a4 (404 bytes) */
-int FUN_001781a4(resultOut, valueKey, changedOut)
+/* ValueKey__evaluateConstantInstruction @ 0x1781a4 (404 bytes) */
+int ValueKey__evaluateConstantInstruction(resultOut, valueKey, changedOut)
   float *resultOut;
   int valueKey;
   undefined4 *changedOut;
@@ -1095,8 +1095,8 @@ int ValueKey__sourcesHaveNoModifiers(ctx)
   return 0;
 }
 
-/* FUN_00178a98 @ 0x178a98 (132 bytes) */
-int FUN_00178a98(ctx, queriedComponent)
+/* ValueKey__sourceSignKnown @ 0x178a98 (132 bytes) */
+int ValueKey__sourceSignKnown(ctx, queriedComponent)
   int ctx;
   int queriedComponent;
 {

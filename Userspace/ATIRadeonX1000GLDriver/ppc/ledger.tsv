@@ -2840,12 +2840,12 @@
 0x177cd0	324	ValueKey__insertMovOfReplacementLane	part_047	converted
 0x177e14	528	ValueKey__insertBinaryOfOperandsLane	part_047	converted
 0x178024	384	ValueKey__insertMovOfOperandLane	part_047	converted
-0x1781a4	404	FUN_001781a4	part_047	converted
+0x1781a4	404	ValueKey__evaluateConstantInstruction	part_047	converted
 0x178338	656	ValueKey__classifyLaneRangeClass	part_047	converted
 0x178648	708	ValueKey__classifyLaneCompareClass	part_047	converted
 0x1789d4	28	IRInst__isOpcode8bOr8c	part_047	converted
 0x1789f0	168	ValueKey__sourcesHaveNoModifiers	part_047	converted
-0x178a98	132	FUN_00178a98	part_047	converted
+0x178a98	132	ValueKey__sourceSignKnown	part_047	converted
 0x178b1c	360	ValueKey__allDotInputsConstant	part_047	converted
 0x178c84	244	ValueKey__singleLaneValueNumber	part_047	converted
 0x178d78	280	ValueKey__dotOperandSplatValue	part_047	converted

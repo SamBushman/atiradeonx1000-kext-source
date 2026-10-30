@@ -1543,7 +1543,7 @@ int ValueKey__evaluateLaneConstants(ctx, laneResultsOut)
         loopIndex = FUN_0017672c(ctx);
         if (loopIndex == 0) goto LAB_0017df9c;
         foldFlags[0] = isOpcodeKindB;
-        FUN_001781a4(&laneResultOutB,ctx,foldFlags);
+        ValueKey__evaluateConstantInstruction(&laneResultOutB,ctx,foldFlags);
         partialFlag = foldFlags[0];
         if (laneResultOutB == 0x7ffffffe) goto LAB_0017dfa0;
         exprRecord = Compiler__valueNumberForExpr(*(undefined4 *)(ctx + 0x238),laneResultOutB);
@@ -1592,7 +1592,7 @@ LAB_0017dfa0:
     loopPtr3 = laneResultsOut;
     do {
       foldFlags[0] = 0;
-      loopRemaining = FUN_00178a98(ctx,loopIndex2);
+      loopRemaining = ValueKey__sourceSignKnown(ctx,loopIndex2);
       if (loopRemaining != 0) {
         ValueKey__evalLitLane(&laneResultOutD,ctx,loopIndex2,(uint)foldFlags);
         *loopPtr3 = laneResultOutD;
