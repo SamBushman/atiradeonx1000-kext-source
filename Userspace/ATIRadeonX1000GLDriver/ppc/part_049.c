@@ -825,7 +825,7 @@ int Inst__foldSelectIntoUsers(inst, program)
   int *useSlot;
   int *operandVReg3;
   int *operandVReg2;
-  int *piVar11;
+  int *sourceUseSlot;
   undefined4 operandRecord;
   int cndBlock;
   int levelOffset;
@@ -999,12 +999,12 @@ LAB_00187d00:
                   _memset(loopIndex2 * 4 + sourceUseList[2],0,(loopIndex4 - loopIndex2) * 4 + 4);
                   sourceUseList[1] = loopIndex4 + 1;
                 }
-                piVar11 = (int *)(loopIndex4 * 4 + sourceUseList[2]);
+                sourceUseSlot = (int *)(loopIndex4 * 4 + sourceUseList[2]);
               }
               else {
-                piVar11 = (int *)Vector__elementRefGrow(sourceUseList,loopIndex4);
+                sourceUseSlot = (int *)Vector__elementRefGrow(sourceUseList,loopIndex4);
               }
-              if (userInst == *piVar11) {
+              if (userInst == *sourceUseSlot) {
                 Vector__removeAt(sourceUseList,loopIndex4);
                 sourceDef = IRInst__getOperandSource(userInst,*(undefined4 *)(userInst + 0x84));
                 *(int *)(sourceDef + 0x160) = *(int *)(sourceDef + 0x160) + -1;
