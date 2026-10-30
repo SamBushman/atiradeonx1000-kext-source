@@ -1,9 +1,9 @@
 10b184	IRInst__findConstantOperandWithValue	r6	PASS-indirect	10b1b8 bctrl 
 10b184	IRInst__findConstantOperandWithValue	r7	PASS-indirect	10b1b8 bctrl 
-10c47c	FUN_0010c47c	r5	PASS-indirect	10c4ac bctrl 
-10c47c	FUN_0010c47c	r6	PASS-indirect	10c4ac bctrl 
-10c47c	FUN_0010c47c	r7	PASS-indirect	10c4ac bctrl 
-10c47c	FUN_0010c47c	r8	PASS-indirect	10c4ac bctrl 
+10c47c	IRInst__canFoldConstantCompare	r5	PASS-indirect	10c4ac bctrl 
+10c47c	IRInst__canFoldConstantCompare	r6	PASS-indirect	10c4ac bctrl 
+10c47c	IRInst__canFoldConstantCompare	r7	PASS-indirect	10c4ac bctrl 
+10c47c	IRInst__canFoldConstantCompare	r8	PASS-indirect	10c4ac bctrl 
 10c670	FUN_0010c670	r6	PASS-deep	10c69c bl 0x105594
 10c670	FUN_0010c670	r7	PASS-deep	10c69c bl 0x105594
 10c670	FUN_0010c670	r8	PASS-deep	10c69c bl 0x105594
@@ -51,16 +51,16 @@
 12d2f0	pass_flatten_ifs	r6	PASS-indirect	12d334 bctrl 
 12d2f0	pass_flatten_ifs	r7	PASS-indirect	12d334 bctrl 
 12d2f0	pass_flatten_ifs	r8	PASS-indirect	12d334 bctrl 
-12dd58	FUN_0012dd58	r6	PASS-indirect	12dda4 bl 0x193e18
-12dd58	FUN_0012dd58	r7	PASS-indirect	12dda4 bl 0x193e18
-12dd58	FUN_0012dd58	r8	PASS-indirect	12dda4 bl 0x193e18
+12dd58	Program__detachRegion	r6	PASS-indirect	12dda4 bl 0x193e18
+12dd58	Program__detachRegion	r7	PASS-indirect	12dda4 bl 0x193e18
+12dd58	Program__detachRegion	r8	PASS-indirect	12dda4 bl 0x193e18
 12df90	Program__foldConstantIfRegion	r8	PASS-indirect	12dffc bl 0x193e18
 1300b0	pass_remove_empty_graphs	r6	PASS-indirect	1300f8 bctrl 
 1300b0	pass_remove_empty_graphs	r7	PASS-indirect	1300f8 bctrl 
 1300b0	pass_remove_empty_graphs	r8	PASS-indirect	1300f8 bctrl 
 1300b0	pass_remove_empty_graphs	r9	PASS-indirect	1300f8 bctrl 
-131d08	FUN_00131d08	r8	PASS-indirect	131d4c bl 0x193e18
-131d08	FUN_00131d08	r10	PASS-indirect	131d4c bl 0x193e18
+131d08	RegAlloc__buildClassTables	r8	PASS-indirect	131d4c bl 0x193e18
+131d08	RegAlloc__buildClassTables	r10	PASS-indirect	131d4c bl 0x193e18
 139f84	Block__scanBranchConeForFetchAndInterp	r6	PASS-indirect	139fb0 bctrl 
 139f84	Block__scanBranchConeForFetchAndInterp	r7	PASS-indirect	139fb0 bctrl 
 139f84	Block__scanBranchConeForFetchAndInterp	r8	PASS-indirect	139fb0 bctrl 

@@ -92,7 +92,7 @@ ImmedConstBuffer__clone compiler
 VertexRegister__clone compiler
 VRegInfo__ctor_12379c compiler
 VRegInfo__ctor_1238e8 compiler
-FUN_00123c08 compiler
+ValueKey__createConstantMov compiler
 TempValue__clone compiler
 ExportSlot__clone compiler
 Resource__clone compiler

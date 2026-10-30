@@ -201,8 +201,8 @@ int IRInst__removeDefaultSelectOperands(inst, compilerCtx)
   return;
 }
 
-/* FUN_0010c47c @ 0x10c47c (500 bytes) */
-int FUN_0010c47c(inst, pass)
+/* IRInst__canFoldConstantCompare @ 0x10c47c (500 bytes) */
+int IRInst__canFoldConstantCompare(inst, pass)
   int *inst;
   int pass;
 {
@@ -1880,8 +1880,8 @@ int Program__callBackendFinish(program)
   return;
 }
 
-/* FUN_0010ead4 @ 0x10ead4 (484 bytes) */
-int FUN_0010ead4(hwState, program, param_3, param_4, param_5, param_6, param_7)
+/* PsBackend__bindExportRegisters @ 0x10ead4 (484 bytes) */
+int PsBackend__bindExportRegisters(hwState, program, param_3, param_4, param_5, param_6, param_7)
   int hwState;
   int program;
   undefined4 param_3;
@@ -2108,8 +2108,8 @@ int KhanPs__vslot87_assignInterpolatorBindings(this, program)
   return;
 }
 
-/* FUN_0010ef68 @ 0x10ef68 (1052 bytes) */
-int FUN_0010ef68(psBackend, program, param_3, param_4, param_5, param_6, param_7)
+/* PsBackend__assignInterpolatorRegisters @ 0x10ef68 (1052 bytes) */
+int PsBackend__assignInterpolatorRegisters(psBackend, program, param_3, param_4, param_5, param_6, param_7)
   int *psBackend;
   int program;
   undefined4 param_3;
@@ -2346,8 +2346,8 @@ int FUN_0010f38c(entry, vector)
   return;
 }
 
-/* FUN_0010f4d4 @ 0x10f4d4 (560 bytes) */
-int FUN_0010f4d4(program)
+/* Program__classifyExportInsts @ 0x10f4d4 (560 bytes) */
+int Program__classifyExportInsts(program)
   int program;
 {
   uint *exportList424;
@@ -2465,4 +2465,4 @@ asm(".set FUN_0010de6c, _Program__emitLoadVertexAttr");
 asm(".globl FUN_0010ed4c");
 asm(".set FUN_0010ed4c, _KhanPs__vslot87_assignInterpolatorBindings");
 asm(".globl FUN_0010ef68");
-asm(".set FUN_0010ef68, _FUN_0010ef68");
+asm(".set FUN_0010ef68, _PsBackend__assignInterpolatorRegisters");

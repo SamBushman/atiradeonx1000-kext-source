@@ -538,7 +538,7 @@ int IRInst__isForwardable(inst, selectWord, compiler)
     if (hasSingleUse == 0) {
       return 0;
     }
-    iVar1 = FUN_0010c47c(inst,compiler);
+    iVar1 = IRInst__canFoldConstantCompare(inst,compiler);
     if (iVar1 == 0) {
       return 0;
     }

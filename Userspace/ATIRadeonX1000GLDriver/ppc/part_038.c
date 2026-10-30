@@ -720,14 +720,14 @@ int FUN_00127324(program, registerFileKind, vregId, kindOut, indexOut)
 int VRegPool__destroyEntries(owner)
   int owner;
 {
-  /* issue #64 live-repro: same iterator-object split as FUN_0011eaa0 (part_037.c), fixed earlier
+  /* issue #64 live-repro: same iterator-object split as Program__insertPhiNodes (part_037.c), fixed earlier
    * this session - auStack_38 is walked by HashTableIterator__advance/HashTableIterator__begin as owner[0..4] (0x14 bytes)
    * but declared only 16 bytes; local_28, the missing 5th word, is what this loop reads back as its
    * own continuation value. Separated, HashTableIterator__advance's real update never reached local_28, so the
    * loop never saw it become null - not just a hang: the same (unchanging) local_28 object got
    * re-passed to the vtable call on every spin instead of the real next node, repeatedly
    * re-processing/re-freeing one object - a plausible source of the unrelated heap corruption seen
-   * elsewhere on this issue (FUN_00121000: an objects own vtable-like field changing under it
+   * elsewhere on this issue (Program__hoistInstructions: an objects own vtable-like field changing under it
    * between two visits). Merged into one 0x14-byte buffer. */
   unsigned char auStack_38 [0x14];
 #define local_28 (*(int **)(auStack_38 + 0x10))
@@ -921,14 +921,14 @@ int VRegPool__countEntriesWithQuery18(owner)
 {
   int elementQuery18;
   int matchCount;
-  /* issue #64 live-repro: same iterator-object split as FUN_0011eaa0 (part_037.c), fixed earlier
+  /* issue #64 live-repro: same iterator-object split as Program__insertPhiNodes (part_037.c), fixed earlier
    * this session - iteratorState is walked by HashTableIterator__advance/HashTableIterator__begin as owner[0..4] (0x14 bytes)
    * but declared only 16 bytes; iteratorCurrent, the missing 5th word, is what this loop reads back as its
    * own continuation value. Separated, HashTableIterator__advance's real update never reached iteratorCurrent, so the
    * loop never saw it become null - not just a hang: the same (unchanging) iteratorCurrent object got
    * re-passed to the vtable call on every spin instead of the real next node, repeatedly
    * re-processing/re-freeing one object - a plausible source of the unrelated heap corruption seen
-   * elsewhere on this issue (FUN_00121000: an objects own vtable-like field changing under it
+   * elsewhere on this issue (Program__hoistInstructions: an objects own vtable-like field changing under it
    * between two visits). Merged into one 0x14-byte buffer. */
   unsigned char iteratorState [0x14];
 #define iteratorCurrent (*(int **)(iteratorState + 0x10))

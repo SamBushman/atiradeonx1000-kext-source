@@ -625,8 +625,8 @@ int FUN_0012c2dc(program, block)
   return 0;
 }
 
-/* FUN_0012c3d0 @ 0x12c3d0 (460 bytes) */
-int FUN_0012c3d0(inst, registerBase, program)
+/* Program__rebaseInstRegisters @ 0x12c3d0 (460 bytes) */
+int Program__rebaseInstRegisters(inst, registerBase, program)
   int *inst;
   int registerBase;
   int program;
@@ -1116,8 +1116,8 @@ LAB_0012ce40:
   return 0;
 }
 
-/* FUN_0012cfa4 @ 0x12cfa4 (820 bytes) */
-int FUN_0012cfa4(program, headerBlock, deadRegionEntry, footerBlock)
+/* Program__removeDeadRegion @ 0x12cfa4 (820 bytes) */
+int Program__removeDeadRegion(program, headerBlock, deadRegionEntry, footerBlock)
   int program;
   int *headerBlock;
   undefined4 deadRegionEntry;
@@ -1656,8 +1656,8 @@ int FudoPs__flattenIfs(this, flattenPass)
   return;
 }
 
-/* FUN_0012dd58 @ 0x12dd58 (512 bytes) */
-int FUN_0012dd58(program, currentBlock, regionEnd)
+/* Program__detachRegion @ 0x12dd58 (512 bytes) */
+int Program__detachRegion(program, currentBlock, regionEnd)
   int program;
   int *currentBlock;
   int regionEnd;
@@ -2627,7 +2627,7 @@ int FUN_0012f0f8(pass, loopStack, block, lastBlockRef, newBlockOut, blockCounter
                       if ((*(int *)(block + 0x134) == 0) &&
                          (needsOffsetFixClone = IRInst__hasOperandKindClass1(cloneResult), needsOffsetFixClone != 0)) {
                         extraBranchArg = pass;
-                        ((int (*)())FUN_0012c3d0)(cloneResult,counterValue,pass);
+                        ((int (*)())Program__rebaseInstRegisters)(cloneResult,counterValue,pass);
                       }
                       if ((*(uint *)(cloneResult + 0x14) & 0x10) != 0) {
                         Program__addInst(pass,cloneResult);
@@ -2869,7 +2869,7 @@ LAB_0012fafc:
                     instIter = *(int *)(instListHead + 8);
                   }
                   else {
-                    ((int (*)())FUN_0012c3d0)(instListHead,loopStart,pass);
+                    ((int (*)())Program__rebaseInstRegisters)(instListHead,loopStart,pass);
                     instIter = *(int *)(instListHead + 8);
                   }
                 }
@@ -3110,7 +3110,7 @@ int pass_remove_empty_graphs(program)
           Vector__removeValue(successorOrNextBlock[0x35],joinBlock);
           Block__connect(nextBlock,successorOrNextBlock);
           successorOrNextBlock[0x3c] = testResult;
-          ((int (*)())FUN_0012dd58)(program,block,joinBlock);
+          ((int (*)())Program__detachRegion)(program,block,joinBlock);
           (**(code **)(*nextBlock + 0x48))(nextBlock);
           (**(code **)(*successorOrNextBlock + 0x48))(successorOrNextBlock);
           testResult = Program__mergeBlockWithSuccessor(program,nextBlock,successorOrNextBlock);
@@ -3763,8 +3763,8 @@ int Program__prependLoad79(param_1, newSlotNumber, compiler)
   return loadInst;
 }
 
-/* FUN_00131008 @ 0x131008 (452 bytes) */
-int FUN_00131008(maxDistance, inst, operandIndex)
+/* RegAlloc__laneDependsOnChain @ 0x131008 (452 bytes) */
+int RegAlloc__laneDependsOnChain(maxDistance, inst, operandIndex)
   int maxDistance;
   int *inst;
   undefined4 operandIndex;

@@ -3127,7 +3127,7 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 10e28c	10e2a0	eh-pad	FudoChip__ctor_10e1d8	5	__Unwind_Resume
 10e324	10e328	millicode	FudoChip__ctor_10e2a0	1	
 10e354	10e368	eh-pad	FudoChip__ctor_10e2a0	5	__Unwind_Resume
-10f384	10f38c	millicode	FUN_0010ef68	2	
+10f384	10f38c	millicode	PsBackend__assignInterpolatorRegisters	2	
 1100ec	11010c	eh-pad	FUN_00110020	8	0x193cc0,__Unwind_Resume
 11035c	110378	other	Program__packInterpolatorEntries	7	0x193cc0
 110c3c	110c40	millicode	Program__packInterpolatorEntries	1	
@@ -3138,15 +3138,15 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 112250	11226c	other	Program__packPsInputs	7	0x193cc0
 112678	112698	eh-pad	Program__packPsInputs	8	0x193cc0,__Unwind_Resume
 1127c0	1127c4	eh-pad	Program__packPsInputs	1	__Unwind_Resume
-11ed40	11ed60	eh-pad	FUN_0011eaa0	8	0x193cc0,__Unwind_Resume
-11f7c4	11f7dc	eh-pad	FUN_0011f578	6	0x193cc0,__Unwind_Resume
+11ed40	11ed60	eh-pad	Program__insertPhiNodes	8	0x193cc0,__Unwind_Resume
+11f7c4	11f7dc	eh-pad	Program__computeHoistWeights	6	0x193cc0,__Unwind_Resume
 11ff30	11ff48	eh-pad	Program__foldUselessPhis	6	0x193cc0,__Unwind_Resume
 120db4	120dd0	other	FUN_00120cd4	7	0x193cc0
 120e14	120e30	other	FUN_00120cd4	7	0x193cc0
 120e74	120e90	other	FUN_00120cd4	7	0x193cc0
 120ea8	120ee4	eh-pad	FUN_00120cd4	15	0x193cc0,__Unwind_Resume
-121488	12149c	other	FUN_00121000	5	0x193cc0
-1214d0	1214e8	eh-pad	FUN_00121000	6	0x193cc0,__Unwind_Resume
+121488	12149c	other	Program__hoistInstructions	5	0x193cc0
+1214d0	1214e8	eh-pad	Program__hoistInstructions	6	0x193cc0,__Unwind_Resume
 12165c	121660	millicode	pass_ssa_build	1	
 1216c0	1216c4	millicode	pass_ssa_build	1	
 121754	121758	millicode	pass_ssa_build	1	
@@ -3174,10 +3174,10 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 1239f4	1239f8	millicode	VRegInfo__ctor_1238e8	1	
 123a14	123a34	eh-pad	VRegInfo__ctor_1238e8	8	0x193cc0,__Unwind_Resume
 123b5c	123b7c	eh-pad	Interpolator__vslot10	8	0x193cc0,__Unwind_Resume
-123d84	123d88	millicode	FUN_00123c08	1	
-123e78	123e94	other	FUN_00123c08	7	0x193cc0
-123eac	123eb0	millicode	FUN_00123c08	1	
-124004	124024	eh-pad	FUN_00123c08	8	0x193cc0,__Unwind_Resume
+123d84	123d88	millicode	ValueKey__createConstantMov	1	
+123e78	123e94	other	ValueKey__createConstantMov	7	0x193cc0
+123eac	123eb0	millicode	ValueKey__createConstantMov	1	
+124004	124024	eh-pad	ValueKey__createConstantMov	8	0x193cc0,__Unwind_Resume
 12415c	12417c	eh-pad	TempValue__clone	8	0x193cc0,__Unwind_Resume
 12429c	1242b8	other	ExportSlot__clone	7	0x193cc0
 1242d0	1242f0	eh-pad	ExportSlot__clone	8	0x193cc0,__Unwind_Resume
@@ -3262,10 +3262,10 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 12b5e0	12b5f8	eh-pad	Program__removeUnreachableBlocks	6	0x193cc0,__Unwind_Resume
 12b788	12b7a8	eh-pad	LoopInfo__convertToHardwareLoop	8	0x193cc0,__Unwind_Resume
 12bc70	12bc90	eh-pad	FUN_0012bb48	8	0x193cc0,__Unwind_Resume
-12d2d8	12d2f0	eh-pad	FUN_0012cfa4	6	0x193cc0,__Unwind_Resume
+12d2d8	12d2f0	eh-pad	Program__removeDeadRegion	6	0x193cc0,__Unwind_Resume
 12dab4	12dab8	eh-pad	pass_flatten_ifs	1	__Unwind_Resume
 12dd48	12dd58	other	FudoPs__flattenIfs	4	
-12df58	12df70	eh-pad	FUN_0012dd58	6	0x193cc0,__Unwind_Resume
+12df58	12df70	eh-pad	Program__detachRegion	6	0x193cc0,__Unwind_Resume
 12e450	12e468	eh-pad	Program__foldConstantIfRegion	6	0x193cc0,__Unwind_Resume
 12e534	12e554	eh-pad	Program__getOrCreateLandingBlock	8	0x193cc0,__Unwind_Resume
 12e658	12e674	other	IfFooter__ctor_12e56c	7	0x193cc0
@@ -3294,7 +3294,7 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 133f50	133f64	other	FUN_0013323c	5	0x193cc0
 133f84	133f9c	eh-pad	FUN_0013323c	6	0x193cc0,__Unwind_Resume
 134070	134090	eh-pad	FUN_00133fe4	8	0x193cc0,__Unwind_Resume
-1348bc	1348dc	eh-pad	FUN_00134658	8	0x193cc0,__Unwind_Resume
+1348bc	1348dc	eh-pad	RegAlloc__run	8	0x193cc0,__Unwind_Resume
 134ef0	134ef4	millicode	FUN_00134de8	1	
 1351a4	1351c4	eh-pad	InterferenceNode__ctor_135110	8	0x193cc0,__Unwind_Resume
 135258	135278	eh-pad	InterferenceNode__ctor_1351c4	8	0x193cc0,__Unwind_Resume
@@ -3304,7 +3304,7 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 137234	137238	millicode	InterferenceGraph__ctor_13719c	1	
 137284	1372a4	eh-pad	InterferenceGraph__ctor_13719c	8	0x193cc0,__Unwind_Resume
 137620	137640	eh-pad	InterferenceGraph__growNodeArray	8	0x193cc0,__Unwind_Resume
-13785c	13787c	eh-pad	FUN_00137694	8	0x193cc0,__Unwind_Resume
+13785c	13787c	eh-pad	InterferenceGraph__addNodes	8	0x193cc0,__Unwind_Resume
 139384	1394a0	table	IRInst__isOpcodeInSet139344	71	
 139f4c	139f64	eh-pad	FUN_00139d40	6	0x193cc0,__Unwind_Resume
 13b49c	13b4b8	other	Program__hoistFetchInsts	7	0x193cc0

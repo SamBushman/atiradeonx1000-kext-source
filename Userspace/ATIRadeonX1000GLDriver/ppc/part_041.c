@@ -1,7 +1,7 @@
 #include "decls.h"
 
-/* FUN_001315f8 @ 0x1315f8 (684 bytes) */
-int FUN_001315f8(allocator, inst, newSource, registerCountRef, beforeInst, block)
+/* RegAlloc__insertCopyBefore @ 0x1315f8 (684 bytes) */
+int RegAlloc__insertCopyBefore(allocator, inst, newSource, registerCountRef, beforeInst, block)
   int allocator;
   int inst;
   undefined4 newSource;
@@ -311,8 +311,8 @@ int RegAlloc__setSpillSlotValue(allocator, spillRecord, slotValue)
   return;
 }
 
-/* FUN_00131d08 @ 0x131d08 (1440 bytes) */
-int FUN_00131d08(program, virtualRegCount, physicalRegCount, totalRegCount, virtualIdsAlreadyOffset)
+/* RegAlloc__buildClassTables @ 0x131d08 (1440 bytes) */
+int RegAlloc__buildClassTables(program, virtualRegCount, physicalRegCount, totalRegCount, virtualIdsAlreadyOffset)
   int program;
   undefined4 virtualRegCount;
   int physicalRegCount;
@@ -1326,7 +1326,7 @@ int FUN_0013323c(pass, copyState)
                     }
                     else if ((*(uint *)(*(int *)(*(int *)(pass + 8) + 0x30c) + 8) & 0x200) == 0)
                     {
-                      ((int (*)())FUN_001315f8)(copyState,inst,srcDef,pass + 0x464,instListHead,block);
+                      ((int (*)())RegAlloc__insertCopyBefore)(copyState,inst,srcDef,pass + 0x464,instListHead,block);
                     }
                   }
                 }
@@ -1500,7 +1500,7 @@ LAB_00133bd0:
       goto LAB_00133bf0;
     }
     if (vecCount != 0) {
-      ((int (*)())FUN_00137694)(copyState,vecCount);
+      ((int (*)())InterferenceGraph__addNodes)(copyState,vecCount);
       pendingCount = vecCount;
       while (vecCount != 0) {
         lastPendingIndex = vecCount - 1;
@@ -1733,7 +1733,7 @@ int FUN_00133fe4(allocator)
                   regKindFlag = *inst;
                   operandVReg[5] = operandVReg[5] | 0x8000000;
                   regKindFlag = (**(code **)(regKindFlag + 0x14))(inst);
-                  if ((loopIndex <= regKindFlag) && (regKindFlag = FUN_00131008(1,inst,loopIndex), regKindFlag != 0)) {
+                  if ((loopIndex <= regKindFlag) && (regKindFlag = RegAlloc__laneDependsOnChain(1,inst,loopIndex), regKindFlag != 0)) {
                     RegAlloc__markReloadModifiers(inst,allocator,*(undefined4 *)(allocator + 0x2c));
                     if (((operandVReg[5] & 0x20000000U) == 0) || ((operandVReg[6] & 1U) != 0)) {
                       regKindFlag = ((int (*)())RegAlloc__getOrCreateSpillSlot)(allocator,sourceRegister,spillState);
@@ -1901,8 +1901,8 @@ LAB_001345fc:
   } while( true );
 }
 
-/* FUN_00134658 @ 0x134658 (612 bytes) */
-int FUN_00134658(pass)
+/* RegAlloc__run @ 0x134658 (612 bytes) */
+int RegAlloc__run(pass)
   int pass;
 {
   uint copyCountB;
@@ -2035,7 +2035,7 @@ int FUN_00134658(pass)
     ((int (*)())InterferenceGraph__ctor_13719c)(allocation + 1,*(undefined4 *)(pass + 0x46c),*(undefined4 *)(pass + 0x464),
                  pass,*(undefined4 *)(pass + 8));
     *(undefined4 **)(pass + 0x3c0) = allocation + 1;
-    ((int (*)())FUN_00131d08)(pass,*(undefined4 *)(pass + 0x468),*(undefined4 *)(pass + 0x46c),
+    ((int (*)())RegAlloc__buildClassTables)(pass,*(undefined4 *)(pass + 0x468),*(undefined4 *)(pass + 0x46c),
                  *(undefined4 *)(pass + 0x464),allocationRound);
     if (allocationRound != 0) {
       ((int (*)())FUN_00134400)(*(undefined4 *)(pass + 0x3c0));
@@ -2809,8 +2809,8 @@ int InterferenceGraph__dtor_135900(graph)
   return Arena__free(*(undefined4 *)(*(int *)(graph + 0x2c) + 0x378),*(undefined4 *)(graph + 0x20));
 }
 
-/* FUN_00135a2c @ 0x135a2c (500 bytes) */
-int FUN_00135a2c(targetNode, mergedNodeIndex, graph)
+/* InterferenceGraph__mergeNeighbourLists @ 0x135a2c (500 bytes) */
+int InterferenceGraph__mergeNeighbourLists(targetNode, mergedNodeIndex, graph)
   int *targetNode;
   uint mergedNodeIndex;
   int graph;
@@ -2931,7 +2931,7 @@ int InterferenceGraph__mergeNodes(graph, elementIndex, nodeB)
       else {
         lowerNodeRef = (undefined4 *)Vector__elementRefGrow(nodeVector,lowerNode);
       }
-      ((int (*)())FUN_00135a2c)(*lowerNodeRef,elementIndex,graph);
+      ((int (*)())InterferenceGraph__mergeNeighbourLists)(*lowerNodeRef,elementIndex,graph);
       ((int (*)())InterferenceGraph__storeAliasEntry)(graph,lowerNode,elementIndex);
       merged = 1;
     }
@@ -3974,8 +3974,8 @@ int InterferenceGraph__growNodeArray(this)
   return;
 }
 
-/* FUN_00137694 @ 0x137694 (456 bytes) */
-int FUN_00137694(this, extraNodeCount)
+/* InterferenceGraph__addNodes @ 0x137694 (456 bytes) */
+int InterferenceGraph__addNodes(this, extraNodeCount)
   int *this;
   int extraNodeCount;
 {
@@ -4533,8 +4533,8 @@ LAB_001382d4:
   } while( true );
 }
 
-/* FUN_00138390 @ 0x138390 (772 bytes) */
-int FUN_00138390(block, usedBits)
+/* Liveness__markUsedBits @ 0x138390 (772 bytes) */
+int Liveness__markUsedBits(block, usedBits)
   int block;
   int usedBits;
 {
@@ -4896,7 +4896,7 @@ int HwLimits__computeBlockLiveness(this, regCount, program, compiler)
 LAB_00138d5c:
     blockSlot6Result = (**(code **)(*block + 0x18))(block);
     if (blockSlot6Result != 0) {
-      ((int (*)())FUN_00138390)(block,block[0x40]);
+      ((int (*)())Liveness__markUsedBits)(block,block[0x40]);
     }
     blockIndex = blockIndex + 1;
   }

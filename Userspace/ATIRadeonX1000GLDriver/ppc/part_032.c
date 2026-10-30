@@ -2247,7 +2247,7 @@ LAB_0011293c:
     IRLoadInterp__laneIndex_104180(outputKind7Inst,0);
     (*bindOutputFn)(this,1,1,kind7LaneIndex,defaultLaneMask,0,0,0);
   }
-  fixedLayout = FUN_0010f4d4(program);
+  fixedLayout = Program__classifyExportInsts(program);
   *(int *)(program + 0x3e4) = fixedLayout;
   if (fixedLayout == 0) {
     Vector__shellSort(*(undefined4 *)(program + 0x420),Compare__descendingByRemappedKey);

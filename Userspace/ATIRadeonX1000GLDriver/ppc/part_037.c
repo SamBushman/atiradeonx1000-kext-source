@@ -115,8 +115,8 @@ int ValueKey__loadSourceDefinitions(ctx, block)
   return;
 }
 
-/* FUN_0011eaa0 @ 0x11eaa0 (672 bytes) */
-int FUN_0011eaa0(program)
+/* Program__insertPhiNodes @ 0x11eaa0 (672 bytes) */
+int Program__insertPhiNodes(program)
   int program;
 {
   uint frontierNumber;
@@ -575,8 +575,8 @@ int Program__tryEliminateRedundantCopy(program, inst, block)
   return 0;
 }
 
-/* FUN_0011f578 @ 0x11f578 (588 bytes) */
-int FUN_0011f578(program)
+/* Program__computeHoistWeights @ 0x11f578 (588 bytes) */
+int Program__computeHoistWeights(program)
   int program;
 {
   undefined4 *workSlotRefB;
@@ -1586,8 +1586,8 @@ int FUN_00120cd4(pass)
   return;
 }
 
-/* FUN_00121000 @ 0x121000 (1160 bytes) */
-int FUN_00121000(program)
+/* Program__hoistInstructions @ 0x121000 (1160 bytes) */
+int Program__hoistInstructions(program)
   int program;
 {
   undefined4 dominatedChild;
@@ -2843,12 +2843,12 @@ int Program__runSsaPipeline(program)
   
   Program__removeUnreachableBlocks(program);
   FUN_000f88b4(program);
-  ((int (*)())FUN_0011eaa0)(program);
+  ((int (*)())Program__insertPhiNodes)(program);
   ((int (*)())pass_ssa_build)(program);
   hoistInstructionsEnabled = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),0xe);
   if (hoistInstructionsEnabled != 0) {
-    ((int (*)())FUN_0011f578)(program);
-    ((int (*)())FUN_00121000)(program);
+    ((int (*)())Program__computeHoistWeights)(program);
+    ((int (*)())Program__hoistInstructions)(program);
   }
   FUN_000ec8e4(program);
   table = *(int **)(program + 0x3b0);
@@ -3478,8 +3478,8 @@ int Interpolator__vslot10(this, laneMask, program)
   return resultValue;
 }
 
-/* FUN_00123c08 @ 0x123c08 (984 bytes) */
-int FUN_00123c08(compiler, block, param_3)
+/* ValueKey__createConstantMov @ 0x123c08 (984 bytes) */
+int ValueKey__createConstantMov(compiler, block, param_3)
   int compiler;
   int *block;
   uint param_3;
@@ -3687,7 +3687,7 @@ int TempValue__clone(this, block, compiler)
     ((int (*)())IRInst__bindSourceFromValue)(this,newInst);
     return valueKey;
   }
-  foldedValue = (undefined4 *)((int (*)())FUN_00123c08)(*(undefined4 *)(compiler + COMP_currentProgram),block,this);
+  foldedValue = (undefined4 *)((int (*)())ValueKey__createConstantMov)(*(undefined4 *)(compiler + COMP_currentProgram),block,this);
   return foldedValue;
 }
 

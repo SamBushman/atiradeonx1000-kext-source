@@ -2307,7 +2307,7 @@ LAB_0017a608:
           else {
             loopIndex = loopPtr5[0x4e];
           }
-          FUN_0012cfa4(*(undefined4 *)(*(int *)(ctx + 0x238) + 0x6c4),loopPtr5,loopIndex,
+          Program__removeDeadRegion(*(undefined4 *)(*(int *)(ctx + 0x238) + 0x6c4),loopPtr5,loopIndex,
                        loopPtr5[0x4f]);
           if (branchTaken) {
             loopIndex = 2;
@@ -2490,7 +2490,7 @@ int FUN_0017a8a4(ctx)
       else {
         loopRemaining = blockRef[0x4e];
       }
-      FUN_0012cfa4(*(undefined4 *)(*(int *)(ctx + 0x238) + 0x6c4),blockRef,loopRemaining,blockRef[0x4f]);
+      Program__removeDeadRegion(*(undefined4 *)(*(int *)(ctx + 0x238) + 0x6c4),blockRef,loopRemaining,blockRef[0x4f]);
       if (foldedResult != 0.0) {
         loopRemaining = 2;
       }

@@ -669,7 +669,7 @@ int Compiler__compileStages(compiler, compileRequest)
     List__freeAllNodes(*(undefined4 *)(compiler + COMP_arenaB));
     FUN_00120cd4(*(undefined4 *)(compiler + COMP_currentProgram));
     List__freeAllNodes(*(undefined4 *)(compiler + COMP_arenaB));
-    FUN_00134658(*(undefined4 *)(compiler + COMP_currentProgram));
+    RegAlloc__run(*(undefined4 *)(compiler + COMP_currentProgram));
     List__freeAllNodes(*(undefined4 *)(compiler + COMP_arenaB));
     Program__dumpConstantRegisters(*(undefined4 *)(compiler + COMP_currentProgram),compiler);
     *(uint *)(*(int *)(compiler + COMP_currentProgram) + 0x30) =

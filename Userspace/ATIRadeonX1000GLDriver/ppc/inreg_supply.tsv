@@ -1,10 +1,10 @@
 # entry	function	register	inreg_liveness class	supply verdict	detail (reg_supply.py --all)
 10b184	IRInst__findConstantOperandWithValue	r6	PASS-indirect	GARBAGE	
 10b184	IRInst__findConstantOperandWithValue	r7	PASS-indirect	GARBAGE	
-10c47c	FUN_0010c47c	r5	PASS-indirect	GARBAGE	
-10c47c	FUN_0010c47c	r6	PASS-indirect	GARBAGE	
-10c47c	FUN_0010c47c	r7	PASS-indirect	GARBAGE	
-10c47c	FUN_0010c47c	r8	PASS-indirect	GARBAGE	
+10c47c	IRInst__canFoldConstantCompare	r5	PASS-indirect	GARBAGE	
+10c47c	IRInst__canFoldConstantCompare	r6	PASS-indirect	GARBAGE	
+10c47c	IRInst__canFoldConstantCompare	r7	PASS-indirect	GARBAGE	
+10c47c	IRInst__canFoldConstantCompare	r8	PASS-indirect	GARBAGE	
 10c670	FUN_0010c670	r6	PASS-deep	GARBAGE	
 10c670	FUN_0010c670	r7	PASS-deep	GARBAGE	
 10c670	FUN_0010c670	r8	PASS-deep	GARBAGE	
@@ -44,16 +44,16 @@
 12d2f0	pass_flatten_ifs	r6	PASS-indirect	GARBAGE	
 12d2f0	pass_flatten_ifs	r7	PASS-indirect	GARBAGE	
 12d2f0	pass_flatten_ifs	r8	PASS-indirect	GARBAGE	
-12dd58	FUN_0012dd58	r6	PASS-indirect	GARBAGE	
-12dd58	FUN_0012dd58	r7	PASS-indirect	GARBAGE	
-12dd58	FUN_0012dd58	r8	PASS-indirect	GARBAGE	
+12dd58	Program__detachRegion	r6	PASS-indirect	GARBAGE	
+12dd58	Program__detachRegion	r7	PASS-indirect	GARBAGE	
+12dd58	Program__detachRegion	r8	PASS-indirect	GARBAGE	
 12df90	Program__foldConstantIfRegion	r8	PASS-indirect	GARBAGE	
 1300b0	pass_remove_empty_graphs	r6	PASS-indirect	GARBAGE	
 1300b0	pass_remove_empty_graphs	r7	PASS-indirect	GARBAGE	
 1300b0	pass_remove_empty_graphs	r8	PASS-indirect	GARBAGE	
 1300b0	pass_remove_empty_graphs	r9	PASS-indirect	GARBAGE	
-131d08	FUN_00131d08	r8	PASS-indirect	GARBAGE	
-131d08	FUN_00131d08	r10	PASS-indirect	GARBAGE	
+131d08	RegAlloc__buildClassTables	r8	PASS-indirect	GARBAGE	
+131d08	RegAlloc__buildClassTables	r10	PASS-indirect	GARBAGE	
 139f84	Block__scanBranchConeForFetchAndInterp	r6	PASS-indirect	GARBAGE-UNSUPPLIED	supply=GARBAGE []; 139fb0 bctrl via +0x40 (argument registers up to r6)
 139f84	Block__scanBranchConeForFetchAndInterp	r7	PASS-indirect	GARBAGE	
 139f84	Block__scanBranchConeForFetchAndInterp	r8	PASS-indirect	GARBAGE	
