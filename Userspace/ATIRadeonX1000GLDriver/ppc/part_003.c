@@ -6143,68 +6143,68 @@ int returnSecondArgument(param_1, param_2)
 }
 
 /* gldEmitCurrentAttributeRegisters @ 0x23700 (360 bytes) */
-int gldEmitCurrentAttributeRegisters(ctx, param_2, param_3)
+int gldEmitCurrentAttributeRegisters(ctx, attribs, cmdBuffer)
   int ctx;
-  uint *param_2;
-  undefined4 *param_3;
+  uint *attribs;
+  undefined4 *cmdBuffer;
 {
-  byte bVar1;
-  uint uVar2;
-  uint *puVar3;
-  uint uVar4;
-  uint *puVar5;
-  int iVar6;
+  byte flagByte;
+  uint registerHeader;
+  uint *unitAttribs;
+  uint attribBit;
+  uint *writeCursor;
+  int setsLeft;
   
-  puVar5 = param_3 + 5;
-  *param_3 = 0x308c8;
-  param_3[1] = param_2[0xc];
-  param_3[2] = param_2[0xd];
-  param_3[3] = param_2[0xe];
-  param_3[4] = param_2[0xf];
+  writeCursor = cmdBuffer + 5;
+  *cmdBuffer = 0x308c8;
+  cmdBuffer[1] = attribs[0xc];
+  cmdBuffer[2] = attribs[0xd];
+  cmdBuffer[3] = attribs[0xe];
+  cmdBuffer[4] = attribs[0xf];
   if ((*(uint *)(ctx + 0x1ca0) & 8) != 0) {
     if (((unsigned char *)0x00002e0a)[*(int *)(*(int *)(ctx + 4) + 0x10)] == '\0') {
-      puVar5 = param_3 + 9;
-      param_3[5] = 0x208cc;
-      param_3[6] = param_2[0x14];
-      param_3[7] = param_2[0x15];
-      param_3[8] = param_2[0x16];
+      writeCursor = cmdBuffer + 9;
+      cmdBuffer[5] = 0x208cc;
+      cmdBuffer[6] = attribs[0x14];
+      cmdBuffer[7] = attribs[0x15];
+      cmdBuffer[8] = attribs[0x16];
     }
     else {
-      puVar5 = param_3 + 10;
-      param_3[5] = 0x308cc;
-      param_3[6] = param_2[0x14];
-      param_3[7] = param_2[0x15];
-      param_3[8] = param_2[0x16];
-      param_3[9] = param_2[0x13];
+      writeCursor = cmdBuffer + 10;
+      cmdBuffer[5] = 0x308cc;
+      cmdBuffer[6] = attribs[0x14];
+      cmdBuffer[7] = attribs[0x15];
+      cmdBuffer[8] = attribs[0x16];
+      cmdBuffer[9] = attribs[0x13];
     }
   }
-  uVar4 = 10;
-  uVar2 = 0x8e8;
-  iVar6 = 8;
-  puVar3 = param_2;
+  attribBit = 10;
+  registerHeader = 0x8e8;
+  setsLeft = 8;
+  unitAttribs = attribs;
   do {
-    if ((1 << (uVar4 & 0x3f) & *(uint *)(ctx + 0x1ca0)) != 0) {
-      *puVar5 = uVar2 | 0x30000;
-      puVar5[1] = puVar3[0x20];
-      puVar5[2] = puVar3[0x21];
-      puVar5[3] = puVar3[0x22];
-      puVar5[4] = puVar3[0x23];
-      puVar5 = puVar5 + 5;
+    if ((1 << (attribBit & 0x3f) & *(uint *)(ctx + 0x1ca0)) != 0) {
+      *writeCursor = registerHeader | 0x30000;
+      writeCursor[1] = unitAttribs[0x20];
+      writeCursor[2] = unitAttribs[0x21];
+      writeCursor[3] = unitAttribs[0x22];
+      writeCursor[4] = unitAttribs[0x23];
+      writeCursor = writeCursor + 5;
     }
-    uVar4 = uVar4 + 1;
-    uVar2 = uVar2 + 4;
-    puVar3 = puVar3 + 4;
-    iVar6 = iVar6 + -1;
-  } while (iVar6 != 0);
-  *puVar5 = 0x917;
-  bVar1 = *(byte *)(param_2 + 0x1f);
-  puVar5[2] = (uint)0x000308c0;
-  puVar5[1] = -(uint)bVar1 >> 0x1f;
-  puVar5[3] = *param_2;
-  puVar5[4] = param_2[1];
-  puVar5[5] = param_2[2];
-  puVar5[6] = param_2[3];
-  return puVar5 + 7;
+    attribBit = attribBit + 1;
+    registerHeader = registerHeader + 4;
+    unitAttribs = unitAttribs + 4;
+    setsLeft = setsLeft + -1;
+  } while (setsLeft != 0);
+  *writeCursor = 0x917;
+  flagByte = *(byte *)(attribs + 0x1f);
+  writeCursor[2] = (uint)0x000308c0;
+  writeCursor[1] = -(uint)flagByte >> 0x1f;
+  writeCursor[3] = *attribs;
+  writeCursor[4] = attribs[1];
+  writeCursor[5] = attribs[2];
+  writeCursor[6] = attribs[3];
+  return writeCursor + 7;
 }
 
 /* gldEmitCurrentAttributeRegistersMasked @ 0x23870 (420 bytes) */

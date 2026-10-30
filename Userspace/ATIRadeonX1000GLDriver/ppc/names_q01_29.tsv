@@ -113,8 +113,8 @@ local	glReadPixels_entry	uStack_54	scratchStack54	INFERRED	register-allocation s
 local	glReadPixels_impl	iVar6	scratchInt6	INFERRED	register-allocation scratch: Ghidra kept several unrelated temporaries in one variable, so it has no single role (see notes_unsplittable_q01.md)
 local	glReadPixels_impl	uVar12	scratchUint12	INFERRED	register-allocation scratch: Ghidra kept several unrelated temporaries in one variable, so it has no single role (see notes_unsplittable_q01.md)
 local	glReadPixels_impl	uVar13	scratchUint13	INFERRED	register-allocation scratch: Ghidra kept several unrelated temporaries in one variable, so it has no single role (see notes_unsplittable_q01.md)
-local	glReadPixels_impl	piVar24	scratchPtr24	INFERRED	register-allocation scratch: Ghidra kept several unrelated temporaries in one variable, so it has no single role (see notes_unsplittable_q01.md)
-local	glReadPixels_impl	pdStack_c8	scratchStackc8	INFERRED	register-allocation scratch: Ghidra kept several unrelated temporaries in one variable, so it has no single role (see notes_unsplittable_q01.md)
+local	glReadPixels_impl	piVar24	layoutPixelBytesPtr	INFERRED	&layoutPixelBytes (pixel-bytes output of gld_computePixelStoreLayout)
+local	glReadPixels_impl	pdStack_c8	requestSurfaceCode	INFERRED	surface-class code stored in the IOConnect read request
 local	glReadPixels_impl	uStack_80	scratchStack80	INFERRED	register-allocation scratch: Ghidra kept several unrelated temporaries in one variable, so it has no single role (see notes_unsplittable_q01.md)
 local	glReadPixels_impl	uStack_7c	scratchStack7c	INFERRED	register-allocation scratch: Ghidra kept several unrelated temporaries in one variable, so it has no single role (see notes_unsplittable_q01.md)
 local	glReadPixels_impl	uStack_78	scratchStack78	INFERRED	register-allocation scratch: Ghidra kept several unrelated temporaries in one variable, so it has no single role (see notes_unsplittable_q01.md)

@@ -168,3 +168,94 @@ local	FUN_0002bbc4	puVar9	staleArgR8	INFERRED	ring write pointer, then only forw
 local	FUN_0002bbc4	puVar11	scratchPtr11	INFERRED	register-allocation scratch: old link word, entry cursor, stale argument register
 local	FUN_0002bbc4	puVar12	writeCursor	INFERRED	ring write pointer after the packet header
 func	FUN_000305b0	gld_compressAlphaBlock	INFERRED	DXT5/ATI1N alpha block encoder: min/max of a 4x4 byte block into dstBlock[0..1], 16 3-bit palette indices (7 intervals) into the rest
+local	gldEmitCurrentAttributeRegisters	param_2	attribs	INFERRED	current-attribute block: +0x0..+0xc primary colour words 0xc..0xf, 0x13..0x16 secondary/fog, 0x20.. eight vec4 texture-coordinate sets
+local	gldEmitCurrentAttributeRegisters	param_3	cmdBuffer	INFERRED	command words being written; returned advanced
+local	gldEmitCurrentAttributeRegisters	puVar5	writeCursor	INFERRED	next free command word
+local	gldEmitCurrentAttributeRegisters	puVar3	unitAttribs	INFERRED	attribs advanced by one vec4 per texture unit
+local	gldEmitCurrentAttributeRegisters	uVar4	attribBit	INFERRED	bit number tested in ctx+0x1ca0 (10..17: texture-coordinate sets)
+local	gldEmitCurrentAttributeRegisters	uVar2	registerHeader	INFERRED	packet header register offset of the current texture set (0x8e8, +4 per set)
+local	gldEmitCurrentAttributeRegisters	iVar6	setsLeft	INFERRED	remaining texture-coordinate sets
+local	gldEmitCurrentAttributeRegisters	bVar1	flagByte	INFERRED	attribs+0x7c byte turned into 0/1 for the last packet
+local	gld_uploadTextureLevel	uVar10	oldSamplerWord31c	INFERRED	backing[0x31c] before its bit-fields are rebuilt from the format entry
+local	gld_uploadTextureLevel	uVar19	staleArgR10	INFERRED	constant 0, only forwarded as stale argument register to _glgProcessPixels/gldFlushDataCacheRange
+local	gld_uploadTextureLevel	uVar22	tileModeFlag	INFERRED	1 when the format is not the plain linear layout class; folded into backing-store byte +0x15 bits 3-4
+local	gld_uploadTextureLevel	local_68	packedFormatFlag	INFERRED	1 when the format entry marks class 1 with tile bits 0x20000000; folded into backing-store byte +0x15
+local	gld_uploadTextureLevel	local_64	tileBitsZero	INFERRED	1 when the format entry's tile field (bits 28-29 of +0x4c word) is zero
+local	gld_uploadTextureLevel	auStack_e8	lookupOutScratch	INFERRED	output of gldTextureFormatLookup (passed for two output slots)
+local	gld_uploadTextureLevel	auStack_dc	convertOutA	INFERRED	_glgConvertType output A
+local	gld_uploadTextureLevel	auStack_d8	convertOutB	INFERRED	_glgConvertType output B
+local	gld_uploadTextureLevel	local_e4	descSrc	INFERRED	pixel-processing descriptor: source level address
+local	gld_uploadTextureLevel	local_e0	descSrcPitch	INFERRED	descriptor: source row pitch
+local	gld_uploadTextureLevel	local_d4	descDst	INFERRED	descriptor: destination (backing + 0x368 words)
+local	gld_uploadTextureLevel	local_d0	descDstPitch	INFERRED	descriptor: destination row pitch (alignedRowBytes)
+local	gld_uploadTextureLevel	local_c0	descZeroC0	INFERRED	descriptor: zero field
+local	gld_uploadTextureLevel	local_b8	descWidth	INFERRED	descriptor: level width in texels
+local	gld_uploadTextureLevel	local_b4	descHeight	INFERRED	descriptor: level height in texels
+local	gld_uploadTextureLevel	local_b0	descZeroB0	INFERRED	descriptor: zero field
+local	gld_uploadTextureLevel	local_ac	descZeroAC	INFERRED	descriptor: zero field
+local	gld_uploadTextureLevel	local_60	cacheFlushStart	INFERRED	backing + 0x280 words: start of the range flushed after the copy
+local	FUN_0003b160	param_1	ctx	INFERRED	GL context (ctx+0x240 stream, +0x1cc current program record, +0x29e8)
+local	FUN_0003b160	param_3	passThroughResult	INFERRED	returned unchanged
+local	FUN_0003b160	iVar1	constantBank	INFERRED	ctx+0x29e8 + 0x14, constant bank handed to the constant-update emitters
+local	FUN_0003b160	iVar2	programRecord	INFERRED	first non-null of program record words 0xd, 0xc, 0xb, else the sub-record's +4
+local	FUN_0003b160	iVar3	programHeader	INFERRED	*programs: header whose +0x18 is the literal-constant table
+local	FUN_0003b160	uVar4	updateFlags	INFERRED	bit 0 = program constants need re-emitting, bit 1 = full update
+local	FUN_0003b160	piVar5	currentProgram	INFERRED	ctx+0x1cc current program pointer table
+local	gld_drawPixelsFromClientSurface	fVar10	clipLeft	INFERRED	left edge of the destination quad after clipping to the render width (>= 0.5)
+local	gld_drawPixelsFromClientSurface	fVar9	clipRight	INFERRED	right edge of the destination quad after clipping to the render width
+local	gld_drawPixelsFromClientSurface	dVar40	quadWidthD	INFERRED	double copy of the clipped quad width in pixels
+local	gld_drawPixelsFromClientSurface	dVar41	quadHeightD	INFERRED	double copy of the clipped quad height in pixels
+local	gld_drawPixelsFromClientSurface	dVar37	oneD	INFERRED	double copy of the constant 1.0 (FLOAT_001aa0e8)
+local	gld_drawPixelsFromClientSurface	dVar38	quadWidthMinusOne	INFERRED	quadWidthD - 1.0, tested against the 2^31 bias for the unsigned float->int conversion
+local	gld_drawPixelsFromClientSurface	dVar15	unsignedConvBias	INFERRED	DOUBLE_001aa1e8 (2^31): bias for the compiler's float->unsigned conversion
+local	gld_drawPixelsFromClientSurface	uVar17	oldRb3dWord	INFERRED	packet[0x8e] before its colour-format bit-fields are rebuilt from the surface format entry
+local	gld_drawPixelsFromClientSurface	uVar7	colorFormatBits	INFERRED	bits 14-15 of the surface format entry's +0x1c word, merged into packet[0x8e]
+local	gld_drawPixelsFromClientSurface	local_108	srcRowBytes	INFERRED	row bytes output of gld_computePixelStoreLayout, also the pitch written into packet[0xae]
+local	gld_drawPixelsFromClientSurface	auStack_104	layoutOut	INFERRED	middle output of gld_computePixelStoreLayout
+local	gld_drawPixelsFromClientSurface	local_100	srcSkipBytes	INFERRED	skip-bytes output of gld_computePixelStoreLayout ([0]: offset of the first pixel)
+local	gld_drawPixelsFromClientSurface	local_d0	fctiwzSlot0	INFERRED	fctiwz conversion slot (compiler temp)
+local	gld_drawPixelsFromClientSurface	local_c8	fctiwzSlot1	INFERRED	fctiwz conversion slot (compiler temp)
+local	gld_drawPixelsFromClientSurface	local_c0	fctiwzSlot2	INFERRED	fctiwz conversion slot (compiler temp)
+local	gld_drawPixelsFromClientSurface	local_b8	fctiwzSlot3	INFERRED	fctiwz conversion slot (compiler temp)
+local	gld_drawPixelsFromClientSurface	local_b0	fctiwzSlot4	INFERRED	fctiwz conversion slot (compiler temp)
+local	gld_drawPixelsFromClientSurface	local_a8	fctiwzSlot5	INFERRED	fctiwz conversion slot (compiler temp)
+local	gld_drawPixelsFromClientSurface	local_a0	fctiwzSlot6	INFERRED	fctiwz conversion slot (compiler temp)
+local	gld_drawPixelsFromClientSurface	local_98	fctiwzSlot7	INFERRED	fctiwz conversion slot (compiler temp)
+local	gld_drawPixelsFromClientSurface	local_90	fctiwzSlot8	INFERRED	fctiwz conversion slot (compiler temp)
+local	gld_drawPixelsFromClientSurface	local_88	fctiwzSlot9	INFERRED	fctiwz conversion slot (compiler temp)
+local	gld_initContextHardwareState	iVar10	engineBase	CONFIRMED	ctx + 0x240: the embedded engine state block (cleared with memset 0x2950, handed to the engine init helpers)
+local	gld_initContextHardwareState	piVar1	vectorConstTable	INFERRED	16-byte aligned table at PTR_DAT_001e8994+0xc: 16 byte-permute rows (word pattern 0x00010203.. + k*0x01010101) followed by 16 shift-mask rows; address stored in PTR_DAT_001e88cc
+local	gld_initContextHardwareState	puVar2	vectorConstArea	INFERRED	PTR_DAT_001e8994, unaligned storage the vector constant table is carved from
+local	gld_initContextHardwareState	uVar7	permuteIndex	INFERRED	row counter of the permute-row loop (replicated into every byte)
+local	gld_initContextHardwareState	uVar9	maskShiftBias	INFERRED	starts at -0x60, +8 per row: shift amount bias of the mask rows
+local	gld_initContextHardwareState	local_58	queryOutCount	INFERRED	output scalar count (5) for IOConnect method 0x14
+local	gld_initContextHardwareState	local_40	queryResult0	INFERRED	scalar 0 of IOConnect method 0x14 (input DAT_001aa4fc, output stored to ctx+0x2610)
+local	gld_initContextHardwareState	local_3c	queryResult1	INFERRED	scalar 1 (DAT_001aa500, output to ctx+0x2614)
+local	gld_initContextHardwareState	local_38	queryResult2	INFERRED	scalar 2 (DAT_001aa504, output to ctx+0x2618)
+local	gld_initContextHardwareState	local_34	queryResult3	INFERRED	scalar 3 (DAT_001aa508, output to ctx+0x261c)
+local	gld_initContextHardwareState	local_30	queryResult4	INFERRED	scalar 4 (DAT_001aa50c)
+local	gld_initContextHardwareState	local_54	initParam0	INFERRED	argument 0 block passed by address to FUN_000a9ac0 (DAT_001aa4e8)
+local	gld_initContextHardwareState	local_50	initParam1	INFERRED	DAT_001aa4ec
+local	gld_initContextHardwareState	local_4c	initParam2	INFERRED	DAT_001aa4f0
+local	gld_initContextHardwareState	local_48	initParam3	INFERRED	DAT_001aa4f4
+local	gld_initContextHardwareState	local_44	initParam4	INFERRED	DAT_001aa4f8
+local	glReadPixels_impl	uVar11	staleArgR10	INFERRED	constant 0, only forwarded as stale argument register to _glgProcessPixels
+local	glReadPixels_impl	uStack_e8	layoutRowBytes	INFERRED	row bytes output of gld_computePixelStoreLayout (becomes srcRowBytes)
+local	glReadPixels_impl	iStack_e4	layoutPixelBytes	INFERRED	pixel bytes output of gld_computePixelStoreLayout; reused for the rectX byte offset of negative rects
+local	glReadPixels_impl	aiStack_e0	layoutSkipBytes	INFERRED	[0] skip-bytes output of gld_computePixelStoreLayout; [1] reply size and [2] rectX of the IOConnect request that continue the same stack block
+local	glReadPixels_impl	a5	layoutRowBytesPtr	INFERRED	&layoutRowBytes
+local	glReadPixels_impl	a2	convertOutAPtr	INFERRED	&convertOutA
+local	glReadPixels_impl	a3	convertOutBPtr	INFERRED	&convertOutB
+local	glReadPixels_impl	a1	ropPacketEnd	INFERRED	ropPacket + 2 (end of the rb3d_ropcntl restore packet)
+local	glReadPixels_impl	dStack_a4	convertOutA	INFERRED	_glgConvertType output A
+local	glReadPixels_impl	auStack_a0	convertOutB	INFERRED	_glgConvertType output B
+local	glReadPixels_impl	uStack_bc	procSrcAddress	INFERRED	address of the source pixels handed by pointer to _glgProcessPixels
+local	glReadPixels_impl	uStack_b4	targetFormatA	INFERRED	surface/format code A of the read source (from the format table or _glgConvertType)
+local	glReadPixels_impl	uStack_b0	targetFormatB	INFERRED	surface/format code B of the read source
+local	glReadPixels_impl	uStack_9c	procMode	INFERRED	constant 2 in the processor descriptor
+local	glReadPixels_impl	puStack_94	procMask	INFERRED	processor mask (0x7efff / 0x68002 bits)
+local	glReadPixels_impl	iStack_90	procWidth	INFERRED	clipped width in the processor descriptor
+local	glReadPixels_impl	iStack_8c	procHeight	INFERRED	clipped height in the processor descriptor
+local	glReadPixels_impl	uStack_88	procZero88	INFERRED	zero field of the processor descriptor
+local	glReadPixels_impl	uStack_84	procZero84	INFERRED	zero field of the processor descriptor
+local	glReadPixels_impl	uStack_50	procEnd	INFERRED	zero byte ending the processor descriptor

@@ -3601,11 +3601,11 @@ int glReadPixels_impl(ctx, rectX, rectY, width, height, format, pixelType, pixel
   undefined4 scratchBuffer;
   int savedHeight;
   undefined4 *ropPacket;
-  dword *a2;
-  undefined1 *a3;
-  undefined4 uVar11;
-  uint *a5;
-  undefined4 *a1;
+  dword *convertOutAPtr;
+  undefined1 *convertOutBPtr;
+  undefined4 staleArgR10;
+  uint *layoutRowBytesPtr;
+  undefined4 *ropPacketEnd;
   uint scratchUint12;
   uint scratchUint13;
   int attachLevel;
@@ -3618,31 +3618,31 @@ int glReadPixels_impl(ctx, rectX, rectY, width, height, format, pixelType, pixel
   int attachZOffset;
   uint flags;
   int *replySizePtr;
-  int *scratchPtr24;
-  uint uStack_e8;
-  int iStack_e4;
-  int aiStack_e0 [3];
+  int *layoutPixelBytesPtr;
+  uint layoutRowBytes;
+  int layoutPixelBytes;
+  int layoutSkipBytes [3];
   int requestY;
   int requestWidth;
   int requestHeight;
-  dword *scratchStackc8;
+  dword *requestSurfaceCode;
   uint requestAddress;
   uint requestPitch;
-  uint uStack_bc;
+  uint procSrcAddress;
   uint procPitch;
-  uint uStack_b4;
-  uint uStack_b0;
+  uint targetFormatA;
+  uint targetFormatB;
   uint dstAddress;
   uint srcRowBytes;
-  dword dStack_a4;
-  undefined1 auStack_a0 [4];
-  undefined4 uStack_9c;
+  dword convertOutA;
+  undefined1 convertOutB [4];
+  undefined4 procMode;
   uint procFlags;
-  undefined *puStack_94;
-  int iStack_90;
-  int iStack_8c;
-  undefined4 uStack_88;
-  undefined4 uStack_84;
+  undefined *procMask;
+  int procWidth;
+  int procHeight;
+  undefined4 procZero88;
+  undefined4 procZero84;
   uint scratchStack80;
   uint scratchStack7c;
   uint scratchStack78;
@@ -3655,12 +3655,12 @@ int glReadPixels_impl(ctx, rectX, rectY, width, height, format, pixelType, pixel
   uint scratchStack5c;
   uint scratchStack58;
   undefined4 scratchStack54;
-  undefined1 uStack_50;
+  undefined1 procEnd;
   
   ring = ctx + GLD_commandStream;
-  uStack_84 = 0;
-  aiStack_e0[1] = 0;
-  uStack_88 = 0;
+  procZero84 = 0;
+  layoutSkipBytes[1] = 0;
+  procZero88 = 0;
   flags = transferMode & 0xff;
   ctxState = *(int *)(ctx + GLD_engineState);
   readSurfaceCode = (dword *)gld_textureVariantClass((uint)*(ushort *)(((unsigned char *)0x00002db8) + ctxState),
@@ -3694,22 +3694,22 @@ LAB_000293b0:
     else {
       packStateArg = (undefined *)0x0;
     }
-    a5 = &uStack_e8;
-    scratchPtr24 = &iStack_e4;
+    layoutRowBytesPtr = &layoutRowBytes;
+    layoutPixelBytesPtr = &layoutPixelBytes;
     savedHeight = height;
-    gld_computePixelStoreLayout(ctx,format,pixelType,width - scratchInt6,height,a5,scratchPtr24,aiStack_e0,packStateArg);
-    dstOffsetAddress = pixels + aiStack_e0[0];
+    gld_computePixelStoreLayout(ctx,format,pixelType,width - scratchInt6,height,layoutRowBytesPtr,layoutPixelBytesPtr,layoutSkipBytes,packStateArg);
+    dstOffsetAddress = pixels + layoutSkipBytes[0];
     if (rectY < 0) {
       height = height + rectY;
-      yOffsetBytes0 = rectY * uStack_e8;
+      yOffsetBytes0 = rectY * layoutRowBytes;
       rectY = 0;
       dstOffsetAddress = dstOffsetAddress - yOffsetBytes0;
     }
     if (rectX < 0) {
       width = width + rectX;
-      iStack_e4 = rectX * iStack_e4;
+      layoutPixelBytes = rectX * layoutPixelBytes;
       rectX = 0;
-      dstOffsetAddress = dstOffsetAddress - iStack_e4;
+      dstOffsetAddress = dstOffsetAddress - layoutPixelBytes;
     }
     if (*(int *)(ctx + GLD_renderHeight) < rectY + height) {
       height = *(int *)(ctx + GLD_renderHeight) - rectY;
@@ -3726,7 +3726,7 @@ LAB_000293b0:
           procFlags = 0;
         }
         packState = ((unsigned char *)0x00002e48) + ctxState;
-        puStack_94 = ((unsigned char *)0x0007efffU);
+        procMask = ((unsigned char *)0x0007efffU);
         if (((unsigned char *)0x00002e68)[ctxState] != '\0') {
           procFlags = procFlags | 2;
         }
@@ -3736,21 +3736,21 @@ LAB_000293b0:
       }
       else {
         packState = (undefined *)0x0;
-        puStack_94 = (undefined *)0x0;
+        procMask = (undefined *)0x0;
         procFlags = 0;
       }
-      uStack_50 = 0;
-      uStack_9c = 2;
-      a2 = &dStack_a4;
-      a3 = auStack_a0;
-      srcRowBytes = uStack_e8;
+      procEnd = 0;
+      procMode = 2;
+      convertOutAPtr = &convertOutA;
+      convertOutBPtr = convertOutB;
+      srcRowBytes = layoutRowBytes;
       dstAddress = dstOffsetAddress;
-      iStack_90 = width;
-      iStack_8c = height;
-      _glgConvertType(format,pixelType,a2,a3,savedHeight,a5,scratchPtr24,dstOffsetAddress);
+      procWidth = width;
+      procHeight = height;
+      _glgConvertType(format,pixelType,convertOutAPtr,convertOutBPtr,savedHeight,layoutRowBytesPtr,layoutPixelBytesPtr,dstOffsetAddress);
       boundFramebuffer = *(int **)(ctx + GLD_boundFramebuffer);
       if (boundFramebuffer == (int *)0x0) {
-        aiStack_e0[2] = rectX;
+        layoutSkipBytes[2] = rectX;
         requestY = rectY;
         requestWidth = width;
         requestHeight = height;
@@ -3762,20 +3762,20 @@ LAB_000293b0:
               flags = *(uint *)(ctx + GLD_renderFlags);
             }
             procPitch = (width + 0xf) * 4 & 0xffffffc0;
-            uStack_b0 = 0x14;
-            uStack_b4 = 0xf;
+            targetFormatB = 0x14;
+            targetFormatA = 0xf;
             if ((flags & 0x2000) == 0) {
 LAB_000298a4:
-              scratchStackc8 = ((unsigned char *)0x4);
+              requestSurfaceCode = ((unsigned char *)0x4);
             }
             else {
 LAB_00029878:
               if (readSurfaceCode == (dword *)((int)((unsigned char *)0x4) + 3)) {
-                scratchStackc8 = (dword *)((int)((unsigned char *)0x8) + 2);
+                requestSurfaceCode = (dword *)((int)((unsigned char *)0x8) + 2);
               }
               else {
                 if (readSurfaceCode != ((unsigned char *)0x8)) goto LAB_000298a4;
-                scratchStackc8 = (dword *)((int)((unsigned char *)0x8) + 3);
+                requestSurfaceCode = (dword *)((int)((unsigned char *)0x8) + 3);
               }
             }
 LAB_000299f8:
@@ -3812,7 +3812,7 @@ LAB_00029a74:
               requestPitch = srcRowBytes;
               requestAddress = dstAddress;
             }
-            uStack_bc = requestAddress;
+            procSrcAddress = requestAddress;
             if (sendAttachments) {
               flags = *(uint *)(ctx + GLD_engineObjects);
               ring = *(int *)(*(int *)(flags + 0x140) + 0x30);
@@ -3832,27 +3832,27 @@ LAB_00029a74:
               scratchStack58 = (uint)*(ushort *)(ring + 0x8c);
               scratchStack54 = *(undefined4 *)(ring + 0x9c);
             }
-            requestPtr = aiStack_e0 + 2;
+            requestPtr = layoutSkipBytes + 2;
             requestBytes = 0x1c;
-            uVar11 = 0;
-            replySizePtr = aiStack_e0 + 1;
+            staleArgR10 = 0;
+            replySizePtr = layoutSkipBytes + 1;
             ring = _io_connect_method_structureI_structureO
                                (*(undefined4 *)(ctx + GLD_connect),7,requestPtr,0x1c,0,replySizePtr);
             if (ring != 0) goto LAB_00029bd0;
             if (!directCopy) {
-              _glgProcessPixels(packState,&uStack_bc,requestPtr,requestBytes,uVar11,replySizePtr,scratchUint12,flags);
+              _glgProcessPixels(packState,&procSrcAddress,requestPtr,requestBytes,staleArgR10,replySizePtr,scratchUint12,flags);
               return 1;
             }
           }
         }
         else {
           if (format != 0x1902) {
-            prepareResult = FUN_0001a010(ctx,readSurfaceCode,a2,a3,savedHeight,a5,scratchPtr24);
+            prepareResult = FUN_0001a010(ctx,readSurfaceCode,convertOutAPtr,convertOutBPtr,savedHeight,layoutRowBytesPtr,layoutPixelBytesPtr);
             if (prepareResult != 0) {
-              a3 = (undefined1 *)0x0;
+              convertOutBPtr = (undefined1 *)0x0;
               savedHeight = 0;
-              a5 = (uint *)0x0;
-              a2 = readSurfaceCode;
+              layoutRowBytesPtr = (uint *)0x0;
+              convertOutAPtr = readSurfaceCode;
               gld_emitSurfaceCopyPacket(ctx,0,readSurfaceCode,0,0,0,*(undefined4 *)(ctx + GLD_renderWidth),
                            *(undefined4 *)(ctx + GLD_renderHeight));
             }
@@ -3868,19 +3868,19 @@ LAB_00029a74:
             }
             if (*(int *)(ctx + GLD_rb3d_ropcntl) != 0) {
               ropPacket = (undefined4 *)(**(code **)(ctx + GLD_streamAllocate))(ring,2);
-              a1 = ropPacket + 2;
+              ropPacketEnd = ropPacket + 2;
               *ropPacket = ((unsigned char *)0x00001386U);
               ropPacket[1] = *(undefined4 *)(ctx + GLD_rb3d_ropcntl);
-              *(undefined4 **)(ctx + GLD_streamCurrent) = a1;
-              (**(code **)(ctx + GLD_streamSetCurrent))(ring,a1,a2,a3,savedHeight,a5,a1);
+              *(undefined4 **)(ctx + GLD_streamCurrent) = ropPacketEnd;
+              (**(code **)(ctx + GLD_streamSetCurrent))(ring,ropPacketEnd,convertOutAPtr,convertOutBPtr,savedHeight,layoutRowBytesPtr,ropPacketEnd);
             }
             formatIndex = ((unsigned char *)GLD_colorFormatIndex)[ctx];
             flags = *(uint *)(ctx + GLD_renderFlags);
             procPitch = (width << (*(uint *)(PTR_DAT_001e88c8 + (uint)formatIndex * 0x24 + 0x14) & 7)) +
                         0x1fU & 0xffffffe0;
-            uStack_b0 = *(uint *)(PTR_DAT_001e88c8 + (uint)formatIndex * 0x24 + 0x10) >> 0x16 & 0x1f;
-            uStack_b4 = *(uint *)(PTR_DAT_001e88c8 + (uint)formatIndex * 0x24 + 0x10) >> 0x1b;
-            scratchStackc8 = readSurfaceCode;
+            targetFormatB = *(uint *)(PTR_DAT_001e88c8 + (uint)formatIndex * 0x24 + 0x10) >> 0x16 & 0x1f;
+            targetFormatA = *(uint *)(PTR_DAT_001e88c8 + (uint)formatIndex * 0x24 + 0x10) >> 0x1b;
+            requestSurfaceCode = readSurfaceCode;
             goto LAB_000299f8;
           }
           flags = *(uint *)(ctx + GLD_renderFlags);
@@ -3890,19 +3890,19 @@ LAB_00029a74:
               flags = *(uint *)(ctx + GLD_renderFlags);
             }
             if ((flags & 0x20000) == 0) {
-              uStack_b0 = 2;
+              targetFormatB = 2;
               procPitch = (width + 0x1f) * 2 & 0xffffffc0;
-              uStack_b4 = 0xd;
+              targetFormatA = 0xd;
             }
             else {
               procPitch = (width + 0xf) * 4 & 0xffffffc0;
               if ((flags & 0x30000) == 0x30000) {
-                uStack_b4 = 0xf;
-                uStack_b0 = 0x14;
+                targetFormatA = 0xf;
+                targetFormatB = 0x14;
               }
               else {
-                uStack_b4 = 0xd;
-                uStack_b0 = 4;
+                targetFormatA = 0xd;
+                targetFormatB = 4;
               }
             }
             if ((flags & 0x2000) != 0) goto LAB_00029878;
@@ -3914,7 +3914,7 @@ LAB_00029a74:
         ring = 5;
         if ((format != 0x1901) && (ring = 4, format != 0x1902)) {
           procFlags = procFlags | 0x60000;
-          puStack_94 = (undefined *)((uint)puStack_94 | 0x68002);
+          procMask = (undefined *)((uint)procMask | 0x68002);
           ring = *(ushort *)(*boundFramebuffer + 0x98) - 0x8ce0;
           if ((convertPixels) &&
              (((*(uint *)(packState + 0x268) & 0x1ff) != 0 ||
@@ -3947,7 +3947,7 @@ LAB_00029a74:
           ctxState = attachLevel * 0x18 + attachFace * 0x168 + attachObject[0xc];
           surfaceType = (uint)*(ushort *)(ctxState + 0xb2);
           surfaceFormat = (uint)*(ushort *)(ctxState + 0xb0);
-          _glgConvertType(surfaceFormat,surfaceType,&uStack_b4,&uStack_b0,savedHeight,ring,*attachObject,dstOffsetAddress);
+          _glgConvertType(surfaceFormat,surfaceType,&targetFormatA,&targetFormatB,savedHeight,ring,*attachObject,dstOffsetAddress);
           ctxState = *(int *)(ctx + GLD_renderWidth);
           ring = gldPixelUnitBytes(surfaceFormat,surfaceType);
           procPitch = ctxState * ring;
@@ -3960,8 +3960,8 @@ LAB_00029a74:
           gld_readbackTextureLevel(ctx,attachObject,attachFace,attachLevel,surfaceFormat,surfaceType,levelBuffer,procPitch);
           ctxState = rectY * procPitch;
           bytesPerPixel = gldPixelUnitBytes(surfaceFormat,surfaceType);
-          uStack_bc = levelBuffer + attachZOffset * renderHeight + ctxState + rectX * bytesPerPixel;
-          _glgProcessPixels(packState,&uStack_bc,attachFace,attachLevel,flags,scratchUint12,ring,scratchUint13);
+          procSrcAddress = levelBuffer + attachZOffset * renderHeight + ctxState + rectX * bytesPerPixel;
+          _glgProcessPixels(packState,&procSrcAddress,attachFace,attachLevel,flags,scratchUint12,ring,scratchUint13);
           _vfree(levelBuffer);
           return 1;
         }
@@ -4367,17 +4367,17 @@ int gld_drawPixelsFromClientSurface(ctx, rasterPosition, width, height, format, 
   float scratchFloat4;
   float scratchFloat5;
   float scratchFloat6;
-  uint uVar7;
+  uint colorFormatBits;
   float scratchFloat8;
-  float fVar9;
-  float fVar10;
+  float clipRight;
+  float clipLeft;
   float scratchFloat11;
   float scratchFloat12;
   float scratchFloat13;
   float scratchFloat14;
-  double dVar15;
+  double unsignedConvBias;
   undefined *hwContextTemplate;
-  uint uVar17;
+  uint oldRb3dWord;
   undefined *unpackState;
   uint *lastHeader;
   uint scratchUint20;
@@ -4398,14 +4398,14 @@ int gld_drawPixelsFromClientSurface(ctx, rasterPosition, width, height, format, 
   char reservation;
   byte scratchFlag35;
   int targetsLeft;
-  double dVar37;
-  double dVar38;
+  double oneD;
+  double quadWidthMinusOne;
   double scratchDouble39;
-  double dVar40;
-  double dVar41;
-  uint local_108;
-  undefined1 auStack_104 [4];
-  int local_100 [2];
+  double quadWidthD;
+  double quadHeightD;
+  uint srcRowBytes;
+  undefined1 layoutOut [4];
+  int srcSkipBytes [2];
   undefined4 renderWidthI2dHi;
   uint renderWidthI2dLo;
   undefined4 renderHeightI2dHi;
@@ -4416,16 +4416,16 @@ int gld_drawPixelsFromClientSurface(ctx, rasterPosition, width, height, format, 
   uint heightI2dLo;
   undefined4 negRenderHeightI2dHi;
   uint negRenderHeightI2dLo;
-  longlong local_d0;
-  longlong local_c8;
-  longlong local_c0;
-  longlong local_b8;
-  longlong local_b0;
-  longlong local_a8;
-  longlong local_a0;
-  longlong local_98;
-  longlong local_90;
-  longlong local_88;
+  longlong fctiwzSlot0;
+  longlong fctiwzSlot1;
+  longlong fctiwzSlot2;
+  longlong fctiwzSlot3;
+  longlong fctiwzSlot4;
+  longlong fctiwzSlot5;
+  longlong fctiwzSlot6;
+  longlong fctiwzSlot7;
+  longlong fctiwzSlot8;
+  longlong fctiwzSlot9;
   
   if (format == 0x1909) {
     hwFormat = 1;
@@ -4557,10 +4557,10 @@ LAB_0002a520:
   else {
     unpackState = (undefined *)0x0;
   }
-  gld_computePixelStoreLayout(ctx,format,pixelType,width,height,&local_108,auStack_104,local_100,unpackState);
+  gld_computePixelStoreLayout(ctx,format,pixelType,width,height,&srcRowBytes,layoutOut,srcSkipBytes,unpackState);
   surfaceBase = *(int *)*surfaceInfo;
-  dstAddress = pixels + local_100[0];
-  if (((((int)local_108 < 0x1001) && ((int)height < 0x1001)) &&
+  dstAddress = pixels + srcSkipBytes[0];
+  if (((((int)srcRowBytes < 0x1001) && ((int)height < 0x1001)) &&
       (renderWidthClamped = *(uint *)(ctx + GLD_renderWidth), (int)renderWidthClamped < 0x1001)) &&
      (renderHeightClamped = *(uint *)(ctx + GLD_renderHeight), (int)renderHeightClamped < 0x1001)) {
     if ((int)renderWidthClamped < 1) {
@@ -4594,19 +4594,19 @@ LAB_0002a520:
     scratchFloat13 = renderHeightF - ((float)((double)CONCAT44(0x43300000,heightI2dLo) - DOUBLE_001aa1e0) + rasterY);
     scratchFloat11 = (float)((double)CONCAT44(0x43300000,widthI2dLo) - DOUBLE_001aa1e0) + rasterX +
              FLOAT_001aa0d4;
-    fVar10 = FLOAT_001aa0d4;
+    clipLeft = FLOAT_001aa0d4;
     scratchFloat12 = FLOAT_001aa0d4;
     if (FLOAT_001aa0d4 < scratchFloat8) {
-      fVar10 = scratchFloat8;
+      clipLeft = scratchFloat8;
       scratchFloat12 = scratchFloat8 + FLOAT_001aa0d4;
     }
     negRenderHeightI2dLo = negRenderHeightI2dLo ^ 0x80000000;
     scratchFloat8 = scratchFloat11 - renderWidthF;
     scratchFloat14 = scratchFloat2 - renderHeightF;
     negRenderHeightI2dHi = 0x43300000;
-    fVar9 = renderWidthF;
+    clipRight = renderWidthF;
     if (scratchFloat8 < 0.0) {
-      fVar9 = scratchFloat11;
+      clipRight = scratchFloat11;
     }
     scratchFloat11 = renderHeightF;
     if (scratchFloat14 < 0.0) {
@@ -4617,7 +4617,7 @@ LAB_0002a520:
       scratchFloat2 = FLOAT_001aa0d4;
     }
     if (-scratchFloat8 < 0.0) {
-      fVar9 = renderWidthF;
+      clipRight = renderWidthF;
     }
     if (-scratchFloat14 < 0.0) {
       scratchFloat11 = renderHeightF;
@@ -4627,17 +4627,17 @@ LAB_0002a520:
       scratchFloat3 = scratchFloat2;
     }
     scratchFloat8 = -rasterX + scratchFloat12 + FLOAT_001aa0d4;
-    scratchFloat12 = -rasterX + fVar9 + FLOAT_001aa0d4 + FLOAT_001aa0d4;
+    scratchFloat12 = -rasterX + clipRight + FLOAT_001aa0d4 + FLOAT_001aa0d4;
     scratchFloat4 = (float)((double)CONCAT44(0x43300000,negRenderHeightI2dLo) - DOUBLE_001aa1e0);
     scratchFloat5 = -rasterY + (FLOAT_001aa0d4 - (scratchFloat11 + scratchFloat4));
     scratchFloat4 = -rasterY + (FLOAT_001aa0d4 - (scratchFloat3 + scratchFloat4));
-    if ((fVar10 < fVar9) && (scratchFloat3 < scratchFloat11)) {
+    if ((clipLeft < clipRight) && (scratchFloat3 < scratchFloat11)) {
       if (((((*(int *)surfaceInfo[1] != 0) && (prepareResult = gld_prepareBufferBacking(ctx,surfaceInfo,1), prepareResult == 0))
            || ((formatTable = PTR_DAT_001e88c8, (int *)surfaceInfo[2] == (int *)0x0 ||
                (prepareResult = *(int *)surfaceInfo[2], prepareResult == 0)))) ||
           ((*(char *)(prepareResult + 0x16) != '\x06' &&
            ((format != 0x1908 || ((pixelType != ((unsigned char *)0x00001406) && (pixelType != (undefined *)0x8366)))))
-           ))) || (((dstAddress | local_108) & 0x1f) != 0)) goto LAB_0002a9a0;
+           ))) || (((dstAddress | srcRowBytes) & 0x1f) != 0)) goto LAB_0002a9a0;
       ring = ctx + GLD_commandStream;
       unitIndex = 0xf;
       scratchUint25 = (**(code **)(ctx + GLD_streamAllocate))(ring,0x343);
@@ -4673,35 +4673,35 @@ LAB_0002a520:
       packet[3] = dstAddress - *(int *)*surfaceInfo;
       _memcpy(packet + 4,hwContextTemplate,0x2f4);
       scratchFloat6 = scratchFloat12 - scratchFloat8;
-      dVar40 = (double)scratchFloat6;
+      quadWidthD = (double)scratchFloat6;
       scratchFloat2 = scratchFloat4 - scratchFloat5;
-      dVar41 = (double)scratchFloat2;
-      dVar37 = (double)FLOAT_001aa0e8;
+      quadHeightD = (double)scratchFloat2;
+      oneD = (double)FLOAT_001aa0e8;
       packet[0x22] = 0;
       scratchDouble39 = DOUBLE_001aa1e8;
-      dVar38 = (double)(float)(dVar40 - dVar37);
-      scratchFlag1 = DOUBLE_001aa1e8 <= dVar38;
+      quadWidthMinusOne = (double)(float)(quadWidthD - oneD);
+      scratchFlag1 = DOUBLE_001aa1e8 <= quadWidthMinusOne;
       packet[0xa4] = *(uint *)(formatTable + hwFormat * 0x24 + 0x18) >> 0x1e | packet[0xa4] & 0xfffffffc
       ;
-      dVar15 = DOUBLE_001aa1e8;
+      unsignedConvBias = DOUBLE_001aa1e8;
       if (scratchFlag1) {
-        scratchInt22 = (int)(dVar38 - scratchDouble39);
-        local_c8 = (longlong)scratchInt22;
+        scratchInt22 = (int)(quadWidthMinusOne - scratchDouble39);
+        fctiwzSlot1 = (longlong)scratchInt22;
         scratchUint20 = scratchInt22 + 0x80000000;
       }
       else {
-        scratchUint20 = (uint)(int)(dVar40 - dVar37);
-        local_d0 = (longlong)(int)scratchUint20;
+        scratchUint20 = (uint)(int)(quadWidthD - oneD);
+        fctiwzSlot0 = (longlong)(int)scratchUint20;
       }
-      scratchDouble39 = (double)(float)(dVar41 - (double)FLOAT_001aa0e8);
+      scratchDouble39 = (double)(float)(quadHeightD - (double)FLOAT_001aa0e8);
       if (DOUBLE_001aa1e8 <= scratchDouble39) {
         scratchInt22 = (int)(scratchDouble39 - DOUBLE_001aa1e8);
-        local_b8 = (longlong)scratchInt22;
+        fctiwzSlot3 = (longlong)scratchInt22;
         scratchUint28 = scratchInt22 + 0x80000000;
       }
       else {
-        scratchUint28 = (uint)(int)(dVar41 - (double)FLOAT_001aa0e8);
-        local_c0 = (longlong)(int)scratchUint28;
+        scratchUint28 = (uint)(int)(quadHeightD - (double)FLOAT_001aa0e8);
+        fctiwzSlot2 = (longlong)(int)scratchUint28;
       }
       packet[0xaa] = scratchUint20 & 0x7ff | (scratchUint28 & 0x7ff) << 0xb | 0x80000000;
       scratchUint20 = *(uint *)(formatTable + hwFormat * 0x24 + 0x1c);
@@ -4710,62 +4710,62 @@ LAB_0002a520:
            scratchUint20 >> 7 & 0x1f | scratchUint28 >> 3 & 0x400000 | (scratchUint20 & 0x70) << 5 |
            (scratchUint20 & 0xe) << 0xb | scratchUint28 >> 0xe & 0x38000 | scratchUint28 >> 8 & 0x1c0000;
       formatTableB = PTR_DAT_001e88c8;
-      if (dVar15 <= dVar40) {
-        scratchInt22 = (int)(dVar40 - dVar15);
-        local_a8 = (longlong)scratchInt22;
+      if (unsignedConvBias <= quadWidthD) {
+        scratchInt22 = (int)(quadWidthD - unsignedConvBias);
+        fctiwzSlot5 = (longlong)scratchInt22;
         scratchInt22 = scratchInt22 + -0x80000000;
       }
       else {
         scratchInt22 = (int)scratchFloat6;
-        local_b0 = (longlong)scratchInt22;
+        fctiwzSlot4 = (longlong)scratchInt22;
       }
-      if (DOUBLE_001aa1e8 <= dVar41) {
-        local_98 = (longlong)(int)(dVar41 - DOUBLE_001aa1e8);
-        scratchInt34 = (int)(dVar41 - DOUBLE_001aa1e8) + -0x80000000;
+      if (DOUBLE_001aa1e8 <= quadHeightD) {
+        fctiwzSlot7 = (longlong)(int)(quadHeightD - DOUBLE_001aa1e8);
+        scratchInt34 = (int)(quadHeightD - DOUBLE_001aa1e8) + -0x80000000;
       }
       else {
         scratchInt34 = (int)scratchFloat2;
-        local_a0 = (longlong)scratchInt34;
+        fctiwzSlot6 = (longlong)scratchInt34;
       }
-      uVar17 = packet[0x8e];
+      oldRb3dWord = packet[0x8e];
       packet[0xae] =
-           ((int)local_108 >> (*(uint *)(formatTable + hwFormat * 0x24 + 0x14) & 7)) - 1U & 0x3fff |
+           ((int)srcRowBytes >> (*(uint *)(formatTable + hwFormat * 0x24 + 0x14) & 7)) - 1U & 0x3fff |
            (scratchInt22 + -1) * 0x10 & 0xffff8000U | (scratchInt34 + -1) * 0x20 & 0xffff0000U;
       packet[0xa4] = (dstAddress - surfaceBase) * 0x20 | packet[0xa4] & 0x1f;
       formatIndex = ((unsigned char *)GLD_colorFormatIndex)[ctx];
       dstAddress = (*(uint *)(formatTableB + (uint)formatIndex * 0x24 + 0x18) & 0x18) << 5;
-      packet[0x8e] = dstAddress | uVar17 & 0xfffffcff;
+      packet[0x8e] = dstAddress | oldRb3dWord & 0xfffffcff;
       scratchUint20 = (*(uint *)(formatTableB + (uint)formatIndex * 0x24 + 0x18) & 6) << 9;
-      packet[0x8e] = scratchUint20 | dstAddress | uVar17 & 0xfffff0ff;
+      packet[0x8e] = scratchUint20 | dstAddress | oldRb3dWord & 0xfffff0ff;
       scratchUint28 = *(uint *)(formatTableB + (uint)formatIndex * 0x24 + 0x1c) >> 0x12 & 0x3000;
-      packet[0x8e] = scratchUint28 | scratchUint20 | dstAddress | uVar17 & 0xffffc0ff;
-      uVar7 = *(uint *)(formatTableB + (uint)formatIndex * 0x24 + 0x1c) >> 0xe & 0xc000;
-      packet[0x8e] = uVar7 | scratchUint28 | scratchUint20 | dstAddress | uVar17 & 0xffff00ff;
+      packet[0x8e] = scratchUint28 | scratchUint20 | dstAddress | oldRb3dWord & 0xffffc0ff;
+      colorFormatBits = *(uint *)(formatTableB + (uint)formatIndex * 0x24 + 0x1c) >> 0xe & 0xc000;
+      packet[0x8e] = colorFormatBits | scratchUint28 | scratchUint20 | dstAddress | oldRb3dWord & 0xffff00ff;
       packet[0x8e] =
            *(uint *)(formatTableB + (uint)formatIndex * 0x24 + 0x18) >> 5 & 0x1f |
-           uVar7 | scratchUint28 | scratchUint20 | dstAddress | uVar17 & 0xffff00e0;
+           colorFormatBits | scratchUint28 | scratchUint20 | dstAddress | oldRb3dWord & 0xffff00e0;
       if ((*(uint *)(formatTableB + (uint)formatIndex * 0x24 + 0x14) & 0xfc000000) == 0) {
         packet[0x5a] = packet[0x5a] & 0xfffe3fff | 0x18000;
       }
       scratchFloat14 = FLOAT_001aa12c;
       scratchFloat13 = FLOAT_001aa10c;
       packetEnd = packet + 0xcd;
-      scratchFloat6 = (float)((double)FLOAT_001aa0e8 / dVar41);
-      scratchFloat2 = (float)((double)FLOAT_001aa0e8 / dVar40);
+      scratchFloat6 = (float)((double)FLOAT_001aa0e8 / quadHeightD);
+      scratchFloat2 = (float)((double)FLOAT_001aa0e8 / quadWidthD);
       packet[0xb7] = renderWidthClamped - 1 & 0x1fff | (renderHeightClamped - 1) * 0x2000 & 0x3ffe000;
       packet[0xc1] = 0x31080;
       packet[0xc6] = ((unsigned char *)0x00001087U);
       packet[0xc5] = scratchFloat4 * scratchFloat6;
-      hwFormat = (int)((fVar9 - fVar10) * scratchFloat14);
-      local_90 = (longlong)hwFormat;
+      hwFormat = (int)((clipRight - clipLeft) * scratchFloat14);
+      fctiwzSlot8 = (longlong)hwFormat;
       packet[0xc4] = scratchFloat12 * scratchFloat2;
       packet[0xc2] = scratchFloat8 * scratchFloat2;
       packet[0xc3] = scratchFloat5 * scratchFloat6;
       dstAddress = (uint)(int)((scratchFloat11 - scratchFloat3) * scratchFloat14);
-      local_88 = (longlong)(int)dstAddress;
+      fctiwzSlot9 = (longlong)(int)dstAddress;
       packet[0xc9] = 0x10031;
       packet[200] = 0xc0033500;
-      packet[0xca] = (fVar10 + fVar9) * scratchFloat13;
+      packet[0xca] = (clipLeft + clipRight) * scratchFloat13;
       packet[0xcb] = (scratchFloat3 + scratchFloat11) * scratchFloat13;
       packet[0xcc] = 0;
       packet[199] = hwFormat << 0x10 | dstAddress;
@@ -5947,16 +5947,16 @@ int gld_initContextHardwareState(ctx, pixelFormat)
 {
   undefined4 allocation;
   int loopIndex;
-  int *piVar1;
-  undefined *puVar2;
+  int *vectorConstTable;
+  undefined *vectorConstArea;
   uint scratchUint3;
   int *scratchPtr4;
   undefined1 window_mode_to_ati_formatResult;
   undefined4 scratchUint5;
-  uint uVar7;
+  uint permuteIndex;
   int scratchInt8;
-  uint uVar9;
-  int iVar10;
+  uint maskShiftBias;
+  int engineBase;
   int scratchInt11;
   double staleFprArg1;
   double staleFpr2;
@@ -5971,20 +5971,20 @@ int gld_initContextHardwareState(ctx, pixelFormat)
   double staleStackArg_ffffff88;
   double staleStackArg_ffffff90;
   double staleStackArg_ffffff98;
-  undefined4 local_58;
-  undefined4 local_54;
-  undefined4 local_50;
-  undefined4 local_4c;
-  undefined4 local_48;
-  undefined4 local_44;
-  undefined4 local_40;
-  undefined4 local_3c;
-  undefined4 local_38;
-  undefined4 local_34;
-  undefined4 local_30;
+  undefined4 queryOutCount;
+  undefined4 initParam0;
+  undefined4 initParam1;
+  undefined4 initParam2;
+  undefined4 initParam3;
+  undefined4 initParam4;
+  undefined4 queryResult0;
+  undefined4 queryResult1;
+  undefined4 queryResult2;
+  undefined4 queryResult3;
+  undefined4 queryResult4;
   
-  iVar10 = ctx + 0x240;
-  _memset(iVar10,0,0x2950);
+  engineBase = ctx + 0x240;
+  _memset(engineBase,0,0x2950);
   ((unsigned char *)0x00002b7d)[ctx] = 0;
   ((unsigned char *)0x00002b7c)[ctx] = 1;
   *(uint *)(ctx + 0x258c) = *(uint *)(ctx + 0x258c) & 0xfffffffc | 1;
@@ -6012,17 +6012,17 @@ int gld_initContextHardwareState(ctx, pixelFormat)
   *(undefined4 *)(ctx + 0x2610) = 1;
   scratchUint5 = 0;
   *(undefined4 *)(ctx + 0x29d8) = 0xfff0;
-  local_38 = DAT_001aa504;
-  local_40 = DAT_001aa4fc;
-  local_58 = 5;
-  local_3c = DAT_001aa500;
-  local_34 = DAT_001aa508;
-  local_30 = DAT_001aa50c;
-  _io_connect_method_scalarI_scalarO(*(undefined4 *)(ctx + 4),0x14,0,0,&local_40,&local_58);
-  *(undefined4 *)(ctx + 0x2614) = local_3c;
-  *(undefined4 *)(ctx + 0x2618) = local_38;
-  *(undefined4 *)(ctx + 0x261c) = local_34;
-  *(undefined4 *)(ctx + 0x2610) = local_40;
+  queryResult2 = DAT_001aa504;
+  queryResult0 = DAT_001aa4fc;
+  queryOutCount = 5;
+  queryResult1 = DAT_001aa500;
+  queryResult3 = DAT_001aa508;
+  queryResult4 = DAT_001aa50c;
+  _io_connect_method_scalarI_scalarO(*(undefined4 *)(ctx + 4),0x14,0,0,&queryResult0,&queryOutCount);
+  *(undefined4 *)(ctx + 0x2614) = queryResult1;
+  *(undefined4 *)(ctx + 0x2618) = queryResult2;
+  *(undefined4 *)(ctx + 0x261c) = queryResult3;
+  *(undefined4 *)(ctx + 0x2610) = queryResult0;
   scratchInt8 = *(int *)(ctx + 0x1e4);
   *(int *)(ctx + 0x1dc) = scratchInt8 + 0x20;
   *(int *)(ctx + 0x1d8) = scratchInt8 + 0x1c;
@@ -6031,32 +6031,32 @@ int gld_initContextHardwareState(ctx, pixelFormat)
   *(undefined4 *)(ctx + 0x1ec) = 0;
   *(undefined4 *)(ctx + 0x1f0) = 0;
   FUN_000a7050(ctx);
-  FUN_000a0f90(iVar10);
-  staleFprArg1 = (double)FUN_00052cc0(iVar10);
+  FUN_000a0f90(engineBase);
+  staleFprArg1 = (double)FUN_00052cc0(engineBase);
   *(undefined4 *)(((unsigned char *)0x00002b74) + ctx) = 0;
   *(undefined4 *)(ctx + 0x26a0) = 0;
   *(undefined4 *)(ctx + 0x26b0) = 0;
   *(undefined4 *)(((unsigned char *)0x00002b78) + ctx) = 0;
   scratchInt11 = 0x10;
-  scratchInt8 = iVar10;
+  scratchInt8 = engineBase;
   do {
     *(undefined1 *)(scratchInt8 + 0x2784) = 0;
     scratchInt8 = scratchInt8 + 1;
     scratchInt11 = scratchInt11 + -1;
   } while (scratchInt11 != 0);
   ((unsigned char *)0x00002b82)[ctx] = 0;
-  puVar2 = PTR_DAT_001e8994;
+  vectorConstArea = PTR_DAT_001e8994;
   *(undefined4 *)(0x000026c8 + ctx) = 7;
-  uVar7 = 0;
+  permuteIndex = 0;
   *(undefined1 *)(ctx + 0x2a43) = 1;
   *(undefined1 *)(ctx + 0x26bd) = 1;
   scratchInt8 = 0x10;
-  piVar1 = (int *)((uint)(puVar2 + 0xc) & 0xfffffff3);
-  *(int **)PTR_DAT_001e88cc = piVar1;
-  scratchPtr4 = piVar1;
+  vectorConstTable = (int *)((uint)(vectorConstArea + 0xc) & 0xfffffff3);
+  *(int **)PTR_DAT_001e88cc = vectorConstTable;
+  scratchPtr4 = vectorConstTable;
   do {
-    scratchUint3 = uVar7 << 8 | uVar7;
-    uVar7 = uVar7 + 1;
+    scratchUint3 = permuteIndex << 8 | permuteIndex;
+    permuteIndex = permuteIndex + 1;
     scratchUint3 = scratchUint3 | scratchUint3 << 0x10;
     *scratchPtr4 = scratchUint3 + 0x2030001;
     scratchPtr4[3] = scratchUint3 + 0xe0f0c0d;
@@ -6066,30 +6066,30 @@ int gld_initContextHardwareState(ctx, pixelFormat)
     scratchInt8 = scratchInt8 + -1;
   } while (scratchInt8 != 0);
   scratchUint3 = 0xffffffff;
-  uVar9 = 0xffffffa0;
+  maskShiftBias = 0xffffffa0;
   scratchInt11 = 0x10;
   loopIndex = 0;
-  scratchPtr4 = piVar1;
+  scratchPtr4 = vectorConstTable;
   while( true ) {
     scratchPtr4[0x40] = scratchUint3;
     scratchUint3 = 0xffffffff;
     if ((4 < loopIndex) && (scratchUint3 = 0, loopIndex < 8)) {
-      scratchUint3 = 0xffffffff >> (uVar9 + 0x40 & 0x3f);
+      scratchUint3 = 0xffffffff >> (maskShiftBias + 0x40 & 0x3f);
     }
     scratchPtr4[0x41] = scratchUint3;
     scratchUint3 = 0xffffffff;
     if ((8 < loopIndex) && (scratchUint3 = 0, loopIndex < 0xc)) {
-      scratchUint3 = 0xffffffff >> (uVar9 + 0x20 & 0x3f);
+      scratchUint3 = 0xffffffff >> (maskShiftBias + 0x20 & 0x3f);
     }
     scratchPtr4[0x42] = scratchUint3;
     scratchUint3 = 0xffffffff;
     if (0xc < loopIndex) {
-      scratchUint3 = 0xffffffff >> (uVar9 & 0x3f);
+      scratchUint3 = 0xffffffff >> (maskShiftBias & 0x3f);
     }
     scratchPtr4[0x43] = scratchUint3;
     loopIndex = loopIndex + 1;
     scratchPtr4 = scratchPtr4 + 4;
-    uVar9 = uVar9 + 8;
+    maskShiftBias = maskShiftBias + 8;
     scratchInt11 = scratchInt11 + -1;
     if (scratchInt11 == 0) break;
     scratchUint3 = 0xffffffff;
@@ -6098,12 +6098,12 @@ int gld_initContextHardwareState(ctx, pixelFormat)
     }
   }
   ((unsigned char *)0x00002b88)[ctx] = 1;
-  local_54 = DAT_001aa4e8;
-  local_50 = DAT_001aa4ec;
-  local_44 = DAT_001aa4f8;
-  local_4c = DAT_001aa4f0;
-  local_48 = DAT_001aa4f4;
-  ((void (*)())FUN_000a9ac0)(iVar10,&local_54,scratchUint5,piVar1,uVar7,DAT_001aa4f8,DAT_001aa4e8,DAT_001aa4f4,staleFprArg1,
+  initParam0 = DAT_001aa4e8;
+  initParam1 = DAT_001aa4ec;
+  initParam4 = DAT_001aa4f8;
+  initParam2 = DAT_001aa4f0;
+  initParam3 = DAT_001aa4f4;
+  ((void (*)())FUN_000a9ac0)(engineBase,&initParam0,scratchUint5,vectorConstTable,permuteIndex,DAT_001aa4f8,DAT_001aa4e8,DAT_001aa4f4,staleFprArg1,
                staleFpr2,staleFpr3,staleFpr4,staleFpr5,staleFpr6,staleFpr7,staleFpr8,staleStackArg_ffffff78,staleStackArg_ffffff80,
                staleStackArg_ffffff88,staleStackArg_ffffff90,staleStackArg_ffffff98);
   ((int (*)())FUN_0002c6c0)(ctx);
