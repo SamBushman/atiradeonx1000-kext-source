@@ -1,0 +1,56 @@
+local	FUN_00082900	param_2	program	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	FUN_00082900	iVar8	constBlock	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar8\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x54\);$	+3
+use	FUN_00082900	iVar8	constBlock	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar11\ =\ \*\(uint\ \*\)\(iVar8\ \+\ 0x3e4\)\ >>\ 1;$	+1
+use	FUN_00082900	iVar8	constBlock	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar2\ =\ \*\(uint\ \*\)\(iVar8\ \+\ 0x3e4\);$	+1
+use	FUN_00082900	iVar8	constBlock	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar3\ =\ \*\(int\ \*\)\(iVar8\ \+\ 0x3e4\);$	+1
+use	FUN_00082900	iVar8	programField38	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar8\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x38\);$	+1
+use	FUN_00082900	iVar8	programField38	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar6\ =\ uVar6\ \+\ iVar8;$	+1
+use	FUN_00082900	iVar8	cmdPos	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar8\ =\ \*\(int\ \*\)\(0x00002748\ \+\ param_1\ \+\ 4\)\ \+\ 0x10;$	+3
+use	FUN_00082900	iVar8	cmdPos	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar8\ =\ \*\(int\ \*\)\(0x00002748\ \+\ param_1\ \+\ 4\);$	+1
+use	FUN_00082900	iVar8	cmdPos	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(int\ \*\)\(0x00002748\ \+\ param_1\ \+\ 4\)\ =\ iVar8\ \+\ 8;$	+2
+use	FUN_00082900	iVar8	packetWords	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar8\ =\ uVar13\ \*\ 4\ \+\ 5;$	+2
+use	FUN_00082900	iVar8	packetWords	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar8\ =\ iVar8\ \*\ 4\ \+\ \*\(int\ \*\)\(0x00002748\ \+\ param_1\ \+\ 4\);$	+3
+local	FUN_00082900	puVar1	srcWord3Ptr	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_00082900	uVar2	availableConsts	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_00082900	iVar3	limitRaw	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_00082900	pcVar4	streamSetCurrent	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_00082900	puVar5	dstWords	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	FUN_00082900	uVar6	oldBase	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar6\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x3cc\);$	+1
+use	FUN_00082900	uVar6	oldBase	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x1b90\)\ =\ uVar6\ \&\ 0x3ff\ \|\ uVar9\ \&\ 0xfffffc00;$	+1
+use	FUN_00082900	uVar6	oldBase	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(uVar6\ \+\ uVar13\ \+\ \-1\)\ \*\ 0x100000\ \&\ 0x3ff00000\ \|$	+2
+use	FUN_00082900	uVar6	oldBase	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar6\ =\ uVar6\ \+\ iVar8;$	+2
+use	FUN_00082900	uVar6	oldBase	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar12\ =\ \(undefined4\ \*\)\(\*a5\)\(param_1,4,in_r5,in_r6,a4,a5,uVar6,uVar13\);$	+1
+use	FUN_00082900	uVar6	availableCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar6\ =\ 0;$	+1
+use	FUN_00082900	uVar6	availableCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar6\ =\ \(uint\)\(\*\(ushort\ \*\)\(\(\(unsigned\ char\ \*\)0x000013be\)\ \+\ param_1\)\ >>\ 1\);$	+1
+use	FUN_00082900	uVar6	availableCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar7\ =\ uVar6;$	+1
+use	FUN_00082900	uVar6	availableCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar6\ =\ \(uint\)\*\(ushort\ \*\)\(\(\(unsigned\ char\ \*\)0x000013be\)\ \+\ param_1\);$	+1
+use	FUN_00082900	uVar6	availableCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(uVar13\ <=\ uVar2\)\ \&\&\ \(\*\(uint\ \*\)\(param_2\ \+\ 0x48\)\ <=\ uVar6\)\)\ \{$	+1
+use	FUN_00082900	uVar6	availableCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar6\ =\ \(uint\)\*\(ushort\ \*\)\(\(\(unsigned\ char\ \*\)0x000013be\)\ \+\ param_1\);$@2	+1
+local	FUN_00082900	a4	oldOffset	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_00082900	a5	streamAlloc	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_00082900	uVar7	newOffset	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	FUN_00082900	uVar9	ctxFlags	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar9\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x8c\);$	+2
+use	FUN_00082900	uVar9	ctxFlags	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar9\ =\ uVar9\ \|\ 0x18000;$	+2
+use	FUN_00082900	uVar9	ctxFlags	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar9\ =\ uVar9\ \|\ 0x10000;$	+1
+use	FUN_00082900	uVar9	ctxFlags	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x8c\)\ =\ uVar9;$@2	+1
+use	FUN_00082900	uVar9	reg1b90Old	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar9\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x1b90\);$	+1
+use	FUN_00082900	uVar9	reg1b90Old	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x1b90\)\ =\ uVar6\ \&\ 0x3ff\ \|\ uVar9\ \&\ 0xfffffc00;$	+1
+use	FUN_00082900	uVar9	reg1b90Old	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(uVar6\ \+\ \*\(int\ \*\)\(param_2\ \+\ 0x34\)\)\ \*\ 0x400\ \&\ 0xffc00\ \|\ uVar6\ \&\ 0x3ff\ \|\ uVar9\ \&\ 0xc0000000;$	+1
+use	FUN_00082900	uVar9	copyCounter	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar9\ =\ uVar13;$	+1
+use	FUN_00082900	uVar9	copyCounter	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar9\ =\ uVar9\ \-\ 1;$	+2
+local	FUN_00082900	iVar10	allocMode	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_00082900	uVar11	newBase	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	FUN_00082900	puVar12	srcConsts	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar12\ =\ \*\(undefined4\ \*\*\)\(iVar8\ \+\ 0x3c8\);$	+2
+use	FUN_00082900	puVar12	srcConsts	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*puVar5\ =\ \*puVar12;$	+5
+use	FUN_00082900	puVar12	packet	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar12\ =\ \(undefined4\ \*\)\(\*a5\)\(param_1,4,in_r5,in_r6,a4,a5,uVar6,uVar13\);$	+6
+use	FUN_00082900	puVar12	packet	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar12\ =\ \(undefined4\ \*\)\(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x2758\)\)\(param_1,2\);$	+4
+use	FUN_00082900	puVar12	packet	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*pcVar4\)\(param_1,iVar8\ \+\ 8,in_r5,in_r6,a4,a5,puVar12\);$	+1
+use	FUN_00082900	uVar13	constCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar13\ =\ \*\(uint\ \*\)\(iVar8\ \+\ 0x3cc\);$	+1
+use	FUN_00082900	uVar13	constCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(uVar13\ ==\ 0\)\ \|\|\ \(puVar12\ ==\ \(undefined4\ \*\)0x0\)\)\ \{$	+1
+use	FUN_00082900	uVar13	constCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(uVar6\ \+\ uVar13\ \+\ \-1\)\ \*\ 0x100000\ \&\ 0x3ff00000\ \|$	+1
+use	FUN_00082900	uVar13	constCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(uVar13\ <=\ uVar2\)\ \&\&\ \(\*\(uint\ \*\)\(param_2\ \+\ 0x48\)\ <=\ uVar6\)\)\ \{$	+1
+use	FUN_00082900	uVar13	constCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar8\ =\ uVar13\ \*\ 4\ \+\ 5;$	+1
+use	FUN_00082900	uVar13	constCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar5\[4\]\ =\ \(uVar13\ \*\ 4\ \+\ \-1\)\ \*\ 0x10000\ \|\ 0x8882;$	+1
+use	FUN_00082900	uVar13	constCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar9\ =\ uVar13;$	+1
+use	FUN_00082900	uVar13	reg1b94Value	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar13\ =\ uVar6\ \&\ 0x3ff\ \|\ \*\(uint\ \*\)\(param_1\ \+\ 0x1b94\)\ \&\ 0xfffffc00;$	+2
+use	FUN_00082900	uVar13	reg1b94Value	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar12\ =\ \(undefined4\ \*\)\(\*a5\)\(param_1,4,in_r5,in_r6,a4,a5,uVar6,uVar13\);$	+1

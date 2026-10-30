@@ -1,0 +1,126 @@
+local	FUN_0006e460	iVar8	maskY	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0006e460	iVar2	maskZ	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	FUN_0006e460	iVar14	maskW	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ param_4\[3\];$	+1
+use	FUN_0006e460	iVar14	maskW	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar17\ =\ \(uint\)\(iVar14\ !=\ 0\)\ \*\ 0x40\ \|$	+1
+use	FUN_0006e460	iVar14	maskW	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ param_4\[3\];$@2	+1
+use	FUN_0006e460	iVar14	maskW	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ param_4\[3\];$@3	+1
+use	FUN_0006e460	iVar14	maskW	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ 0;$	+1
+use	FUN_0006e460	iVar14	allocTable	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x3d4\);$	+1
+use	FUN_0006e460	iVar14	allocTable	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ 0x758\)\ \*\ 4\ \+\ 0x200\);$	+1
+use	FUN_0006e460	iVar14	allocTable	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x75c\)\);$	+1
+use	FUN_0006e460	iVar14	allocTable	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x3d4\);$@2	+1
+use	FUN_0006e460	iVar14	allocTable	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ 0x758\)\ \*\ 4\ \+\ 0x200\);$@2	+1
+use	FUN_0006e460	iVar14	allocTable	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x75c\)\);$@2	+1
+use	FUN_0006e460	iVar14	allocTable	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x3d4\);$@3	+1
+use	FUN_0006e460	iVar14	allocTable	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ 0x758\)\ \*\ 4\ \+\ 0x200\);$@3	+1
+use	FUN_0006e460	iVar14	allocTable	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x75c\)\);$@3	+1
+use	FUN_0006e460	iVar14	allocTable	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x3d4\);$@4	+1
+use	FUN_0006e460	iVar14	allocTable	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ 0x758\)\ \*\ 4\ \+\ 0x200\);$@4	+1
+use	FUN_0006e460	iVar14	allocTable	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x75c\)\);$@4	+1
+use	FUN_0006e460	iVar14	allocTable	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x3d4\);$@5	+1
+use	FUN_0006e460	iVar14	allocTable	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ 0x758\)\ \*\ 4\ \+\ 0x200\);$@5	+1
+use	FUN_0006e460	iVar14	allocTable	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x75c\)\);$@5	+1
+use	FUN_0006e460	iVar14	allocTable	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x3d4\);$@6	+1
+use	FUN_0006e460	iVar14	allocTable	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ 0x758\)\ \*\ 4\ \+\ 0x200\);$@6	+1
+use	FUN_0006e460	iVar14	allocTable	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x75c\)\);$@6	+1
+use	FUN_0006e460	iVar14	allocTable	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar14\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x3d4\);$@7	+1
+use	FUN_0006e460	iVar14	allocTable	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ 0x758\)\ \*\ 4\ \+\ 0x200\);$@7	+1
+use	FUN_0006e460	iVar14	allocTable	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(iVar14\ \+\ 0x18\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x75c\)\);$@7	+1
+use	FUN_0006e460	uVar1	src0SelZ	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar1\ =\ param_7\[2\];$	+1
+use	FUN_0006e460	uVar1	src0SelZ	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar1\ =\ param_7\[2\];$@2	+1
+use	FUN_0006e460	uVar1	src0SelZ	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar1\ =\ param_7\[2\];$@3	+1
+use	FUN_0006e460	uVar1	src0SelZ	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar1\ =\ param_7\[2\];$@4	+1
+use	FUN_0006e460	uVar1	src0SelZ	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar1\ =\ param_7\[2\];$@5	+1
+use	FUN_0006e460	uVar1	src0SelZ	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar1\ =\ param_7\[2\];$@6	+2
+use	FUN_0006e460	uVar1	src0SelZ	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar1\ =\ param_7\[2\];$@7	+1
+use	FUN_0006e460	uVar1	src0SelZ	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(uVar1\ \&\ 7\)\ <<\ 8\ \|$	+1
+use	FUN_0006e460	uVar1	src1Token	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar1\ =\ \(param_9\ \&\ 0x3f\)\ <<\ 0x10\ \|\ param_10\ \&\ 0xffff;$	+1
+use	FUN_0006e460	uVar1	src1Token	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar1\ =\ uVar1\ \|\ 0x400000;$	+1
+use	FUN_0006e460	uVar1	src1Token	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(uint\ \*\)\(uVar12\ \*\ 4\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x75c\)\)\ =\ uVar1;$	+1
+use	FUN_0006e460	uVar1	src1Token	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(uVar1\ \&\ 0x400000\)\ !=\ 0\)\ \{$	+1
+use	FUN_0006e460	uVar3	src0SelY	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar3\ =\ param_7\[1\];$	+1
+use	FUN_0006e460	uVar3	src0SelY	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar3\ =\ param_7\[1\];$@2	+1
+use	FUN_0006e460	uVar3	src0SelY	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar3\ =\ param_7\[1\];$@3	+1
+use	FUN_0006e460	uVar3	src0SelY	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar3\ =\ param_7\[1\];$@4	+1
+use	FUN_0006e460	uVar3	src0SelY	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar3\ =\ param_7\[1\];$@5	+2
+use	FUN_0006e460	uVar3	src0SelY	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar3\ =\ param_7\[1\];$@6	+1
+use	FUN_0006e460	uVar3	src0SelY	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(uVar7\ \&\ 1\)\ <<\ 7\ \|\ \(uVar3\ \&\ 7\)\ <<\ 4\ \|\ \(\*param_8\ \&\ 1\)\ <<\ 3\ \|\ uVar10\ \&\ 7;$	+1
+use	FUN_0006e460	uVar3	src1SelZ	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar3\ =\ param_11\[2\];$	+2
+use	FUN_0006e460	uVar3	src1SelZ	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar3\ =\ param_11\[2\];$@2	+1
+use	FUN_0006e460	uVar3	src1SelZ	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar3\ =\ param_11\[2\];$@3	+1
+use	FUN_0006e460	uVar3	src1SelZ	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar3\ =\ param_11\[2\];$@4	+1
+use	FUN_0006e460	uVar3	src1SelZ	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar3\ =\ param_11\[2\];$@5	+1
+use	FUN_0006e460	uVar3	src1SelZ	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar3\ =\ param_11\[2\];$@6	+1
+use	FUN_0006e460	uVar3	src1SelZ	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar3\ =\ param_11\[2\];$@7	+1
+use	FUN_0006e460	uVar3	src1SelZ	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(uVar3\ \&\ 7\)\ <<\ 8\ \|$	+1
+use	FUN_0006e460	uVar3	tokenIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar3\ =\ \*puVar18;$	+1
+use	FUN_0006e460	uVar3	tokenIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\*\(uint\ \*\)\(param_1\ \+\ 0x758\)\ <=\ uVar3\)\ \{$	+1
+use	FUN_0006e460	uVar3	tokenIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar3\ =\ \*puVar18;$@2	+1
+use	FUN_0006e460	uVar3	tokenIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(undefined4\ \*\)\(uVar3\ \*\ 4\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x75c\)\)\ =\ 0x4e;$	+1
+use	FUN_0006e460	uVar3	tokenIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar3\ =\ \*puVar18\ \+\ 1;$	+2
+use	FUN_0006e460	uVar3	tokenIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\*\(uint\ \*\)\(param_1\ \+\ 0x758\)\ <=\ uVar3\)\ \{$@2	+1
+use	FUN_0006e460	uVar3	tokenIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar3\ =\ \*puVar18;$@3	+1
+use	FUN_0006e460	uVar3	tokenIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(uint\ \*\)\(uVar3\ \*\ 4\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x75c\)\)\ =\ uVar12;$	+1
+use	FUN_0006e460	uVar3	tokenIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar3\ =\ \*puVar18\ \+\ 1;$@2	+2
+use	FUN_0006e460	uVar3	tokenIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\*\(uint\ \*\)\(param_1\ \+\ 0x758\)\ <=\ uVar3\)\ \{$@3	+1
+use	FUN_0006e460	uVar3	tokenIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar3\ =\ \*puVar18;$@4	+1
+use	FUN_0006e460	uVar3	tokenIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(uint\ \*\)\(uVar3\ \*\ 4\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x75c\)\)\ =\ uVar17;$	+3
+use	FUN_0006e460	uVar3	tokenIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\*\(uint\ \*\)\(param_1\ \+\ 0x758\)\ <=\ uVar3\)\ \{$@4	+1
+use	FUN_0006e460	uVar3	tokenIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar3\ =\ \*puVar18;$@5	+1
+use	FUN_0006e460	uVar3	tokenIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(uint\ \*\)\(uVar3\ \*\ 4\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x75c\)\)\ =\ uVar16;$	+1
+use	FUN_0006e460	uVar5	src0NegW	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar5\ =\ param_8\[3\];$	+1
+use	FUN_0006e460	uVar5	src0NegW	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar5\ =\ param_8\[3\];$@2	+1
+use	FUN_0006e460	uVar5	src0NegW	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar5\ =\ param_8\[3\];$@3	+2
+use	FUN_0006e460	uVar5	src0NegW	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar5\ =\ param_8\[3\];$@4	+1
+use	FUN_0006e460	uVar5	src0NegW	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar15\ =\ \(uVar5\ \&\ 1\)\ <<\ 0xf\ \|$	+1
+use	FUN_0006e460	uVar5	src1SelY	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar5\ =\ param_11\[1\];$	+2
+use	FUN_0006e460	uVar5	src1SelY	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar5\ =\ param_11\[1\];$@2	+1
+use	FUN_0006e460	uVar5	src1SelY	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar5\ =\ param_11\[1\];$@3	+1
+use	FUN_0006e460	uVar5	src1SelY	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar5\ =\ param_11\[1\];$@4	+1
+use	FUN_0006e460	uVar5	src1SelY	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar5\ =\ param_11\[1\];$@5	+1
+use	FUN_0006e460	uVar5	src1SelY	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar5\ =\ param_11\[1\];$@6	+1
+use	FUN_0006e460	uVar5	src1SelY	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(uVar10\ \&\ 1\)\ <<\ 7\ \|\ \(uVar5\ \&\ 7\)\ <<\ 4\ \|\ \(\*param_12\ \&\ 1\)\ <<\ 3\ \|\ uVar11\ \&\ 7;$	+1
+use	FUN_0006e460	uVar6	src0NegZ	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar6\ =\ param_8\[2\];$	+1
+use	FUN_0006e460	uVar6	src0NegZ	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar6\ =\ param_8\[2\];$@2	+2
+use	FUN_0006e460	uVar6	src0NegZ	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar6\ =\ param_8\[2\];$@3	+1
+use	FUN_0006e460	uVar6	src0NegZ	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(uVar6\ \&\ 1\)\ <<\ 0xb\ \|$	+1
+use	FUN_0006e460	uVar6	src1NegW	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar6\ =\ param_12\[3\];$	+2
+use	FUN_0006e460	uVar6	src1NegW	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar6\ =\ param_12\[3\];$@2	+1
+use	FUN_0006e460	uVar6	src1NegW	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar6\ =\ param_12\[3\];$@3	+1
+use	FUN_0006e460	uVar6	src1NegW	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar6\ =\ param_12\[3\];$@4	+1
+use	FUN_0006e460	uVar6	src1NegW	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar13\ =\ \(uVar6\ \&\ 1\)\ <<\ 0xf\ \|$	+1
+use	FUN_0006e460	uVar7	src0NegY	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar7\ =\ param_8\[1\];$	+2
+use	FUN_0006e460	uVar7	src0NegY	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar7\ =\ param_8\[1\];$@2	+1
+use	FUN_0006e460	uVar7	src0NegY	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(uVar7\ \&\ 1\)\ <<\ 7\ \|\ \(uVar3\ \&\ 7\)\ <<\ 4\ \|\ \(\*param_8\ \&\ 1\)\ <<\ 3\ \|\ uVar10\ \&\ 7;$	+1
+use	FUN_0006e460	uVar7	src1NegZ	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar7\ =\ param_12\[2\];$	+2
+use	FUN_0006e460	uVar7	src1NegZ	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar7\ =\ param_12\[2\];$@2	+1
+use	FUN_0006e460	uVar7	src1NegZ	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar7\ =\ param_12\[2\];$@3	+1
+use	FUN_0006e460	uVar7	src1NegZ	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(uVar7\ \&\ 1\)\ <<\ 0xb\ \|$	+1
+use	FUN_0006e460	uVar9	src0SelW	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar9\ =\ param_7\[3\];$	+1
+use	FUN_0006e460	uVar9	src0SelW	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar9\ =\ param_7\[3\];$@2	+1
+use	FUN_0006e460	uVar9	src0SelW	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar9\ =\ param_7\[3\];$@3	+1
+use	FUN_0006e460	uVar9	src0SelW	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar9\ =\ param_7\[3\];$@4	+1
+use	FUN_0006e460	uVar9	src0SelW	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar9\ =\ param_7\[3\];$@5	+1
+use	FUN_0006e460	uVar9	src0SelW	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar9\ =\ param_7\[3\];$@6	+1
+use	FUN_0006e460	uVar9	src0SelW	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar9\ =\ param_7\[3\];$@7	+2
+use	FUN_0006e460	uVar9	src0SelW	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar9\ =\ param_7\[3\];$@8	+1
+use	FUN_0006e460	uVar9	src0SelW	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(uVar9\ \&\ 7\)\ <<\ 0xc\ \|$	+1
+use	FUN_0006e460	uVar9	src1SelW	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar9\ =\ param_11\[3\];$	+2
+use	FUN_0006e460	uVar9	src1SelW	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar9\ =\ param_11\[3\];$@2	+1
+use	FUN_0006e460	uVar9	src1SelW	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar9\ =\ param_11\[3\];$@3	+1
+use	FUN_0006e460	uVar9	src1SelW	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar9\ =\ param_11\[3\];$@4	+1
+use	FUN_0006e460	uVar9	src1SelW	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar9\ =\ param_11\[3\];$@5	+1
+use	FUN_0006e460	uVar9	src1SelW	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar9\ =\ param_11\[3\];$@6	+1
+use	FUN_0006e460	uVar9	src1SelW	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar9\ =\ param_11\[3\];$@7	+1
+use	FUN_0006e460	uVar9	src1SelW	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar9\ =\ param_11\[3\];$@8	+1
+use	FUN_0006e460	uVar9	src1SelW	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(uVar9\ \&\ 7\)\ <<\ 0xc\ \|$@2	+1
+use	FUN_0006e460	uVar10	src0SelX	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar10\ =\ \*param_7;$	+1
+use	FUN_0006e460	uVar10	src0SelX	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar10\ =\ \*param_7;$@2	+1
+use	FUN_0006e460	uVar10	src0SelX	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar10\ =\ \*param_7;$@3	+1
+use	FUN_0006e460	uVar10	src0SelX	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar10\ =\ \*param_7;$@4	+2
+use	FUN_0006e460	uVar10	src0SelX	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar10\ =\ \*param_7;$@5	+1
+use	FUN_0006e460	uVar10	src0SelX	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(uVar7\ \&\ 1\)\ <<\ 7\ \|\ \(uVar3\ \&\ 7\)\ <<\ 4\ \|\ \(\*param_8\ \&\ 1\)\ <<\ 3\ \|\ uVar10\ \&\ 7;$	+1
+use	FUN_0006e460	uVar10	src1NegY	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar10\ =\ param_12\[1\];$	+2
+use	FUN_0006e460	uVar10	src1NegY	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar10\ =\ param_12\[1\];$@2	+1
+use	FUN_0006e460	uVar10	src1NegY	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(uVar10\ \&\ 1\)\ <<\ 7\ \|\ \(uVar5\ \&\ 7\)\ <<\ 4\ \|\ \(\*param_12\ \&\ 1\)\ <<\ 3\ \|\ uVar11\ \&\ 7;$	+1
+local	FUN_0006e460	uVar11	src1SelX	INFERRED	role read off the function body (see notes_gld_q03.md)

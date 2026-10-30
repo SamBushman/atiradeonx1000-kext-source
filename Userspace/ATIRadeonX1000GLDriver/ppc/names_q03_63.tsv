@@ -1,0 +1,24 @@
+local	recordProgramBuildDependencies	local_b8	recordCopyWord	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordProgramBuildDependencies	local_a0	sourceSlotOffset	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordProgramBuildDependencies	local_9c	perSourceDepHead	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordProgramBuildDependencies	local_98	lastRecordIndexSaved	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordProgramBuildDependencies	local_94	sawOutputRecord	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordProgramBuildDependencies	local_90	recordIsSpecialWrite	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordProgramBuildDependencies	local_8c	srcSelectBits	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordProgramBuildDependencies	local_88	dependentsBase	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordProgramBuildDependencies	local_84	srcWordPtr2	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordProgramBuildDependencies	local_80	srcWordPtr1	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordProgramBuildDependencies	local_7c	srcWordPtrAlias0	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordProgramBuildDependencies	local_78	recordCount	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordProgramBuildDependencies	local_74	outRecordsOut	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordProgramBuildDependencies	local_70	lastRecordOut	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordProgramBuildDependencies	local_6c	outputListOut	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordProgramBuildDependencies	local_68	outputCountOut	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordProgramBuildDependencies	local_64	allocTail	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordProgramBuildDependencies	local_60	crBitsOut	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordProgramBuildDependencies	local_5c	srcWordPtrFrameBase	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	recordProgramBuildDependencies	piVar31	edgeNode	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*for\ \(piVar31\ =\ \(int\ \*\)\*puVar21;\ piVar31\ !=\ \(int\ \*\)0x0;\ piVar31\ =\ \(int\ \*\)piVar31\[4\]\)\ \{$	+1
+use	recordProgramBuildDependencies	piVar31	edgeNode	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*pdVar14\ =\ pdVar18\ \+\ \*piVar31\ \*\ 3;$	+2
+use	recordProgramBuildDependencies	piVar31	edgeNode	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*for\ \(piVar31\ =\ \(int\ \*\)\*puVar21;\ piVar31\ !=\ \(int\ \*\)0x0;\ piVar31\ =\ \(int\ \*\)piVar31\[4\]\)\ \{$@2	+3
+use	recordProgramBuildDependencies	piVar32	sourceDepNode	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*for\ \(piVar32\ =\ \(int\ \*\)\*local_9c;\ piVar32\ !=\ \(int\ \*\)0x0;$	+3
+use	recordProgramBuildDependencies	piVar32	sourceDepNode	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar37\ =\ \(\(int\ \(\*\)\(\)\)FUN_00079910\)\(param_1,param_1\ \+\ \*piVar32\ \+\ 0x2914,pdVar13,in_r6,$	+2

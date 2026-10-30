@@ -1,0 +1,17 @@
+local	arbParseParamBinding	bVar1	notRangeToken	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbParseParamBinding	local_28	constVecX	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbParseParamBinding	local_24	constVecY	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbParseParamBinding	local_20	constVecZ	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	ffvpAssignOutputSlots	uVar6	colorSlot	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	ffvpAssignOutputSlots	iVar7	slotBase	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar7\ =\ 1;$	+1
+use	ffvpAssignOutputSlots	iVar7	slotBase	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar7\ =\ 2;$	+1
+use	ffvpAssignOutputSlots	iVar7	slotBase	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar5\ =\ iVar7\ \+\ 2;$	+1
+use	ffvpAssignOutputSlots	iVar7	unitCursor	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar7\ =\ param_1;$	+1
+use	ffvpAssignOutputSlots	iVar7	unitCursor	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(\(unsigned\ char\ \*\)0x00001438\)\[iVar8\]\ !=\ '\\0'\)\ \&\&\ \(\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x000013f8\)\ \+\ iVar7\)\ !=\ 0\)\)\ \{$	+1
+use	ffvpAssignOutputSlots	iVar7	unitCursor	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(uint\ \*\)\(iVar7\ \+\ 0x1c8\)\ =\ uVar5;$	+1
+use	ffvpAssignOutputSlots	iVar7	unitCursor	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar7\ =\ iVar7\ \+\ 4;$	+1
+use	ffvpAssignOutputSlots	iVar7	unitCursor	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar7\ =\ param_1;$@2	+1
+use	ffvpAssignOutputSlots	iVar7	unitCursor	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(uint\ \*\)\(iVar7\ \+\ 0x1c8\)\ =\ uVar5;$@2	+1
+use	ffvpAssignOutputSlots	iVar7	unitCursor	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar7\ =\ iVar7\ \+\ 4;$@2	+1
+local	gldDrawInternalRect	local_40	scaledHeightLL	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	gldDrawInternalRect	local_38	scaledWidthLL	INFERRED	role read off the function body (see notes_gld_q03.md)

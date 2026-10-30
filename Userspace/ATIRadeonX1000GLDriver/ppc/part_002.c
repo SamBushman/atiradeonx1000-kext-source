@@ -8678,7 +8678,7 @@ LAB_00016a6c:
     *(undefined **)(writeCursor + trailerOffset) = ((unsigned char *)0x00001087U);
     gaPointSizeValue = *(undefined4 *)(ring + 0x1ccc);
     *(undefined4 *)(writeCursor + 4 + trailerOffset) = gaPointSizeValue;
-    FUN_0009d3b0(ring,staleArgR4Forward,width,trailerOffset,packetStart,packetVertexCount,gaPointSizeValue);
+    gldValidateVertexProgramState(ring,staleArgR4Forward,width,trailerOffset,packetStart,packetVertexCount,gaPointSizeValue);
     gldLeaveInternalDrawState(ring,internalDrawStateSavePtr);
   }
   return;

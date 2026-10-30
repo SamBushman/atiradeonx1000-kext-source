@@ -1,0 +1,36 @@
+use	evsFoldConstantMoves	uVar18	scanIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar18\ =\ uVar30;$	+1
+use	evsFoldConstantMoves	uVar18	scanIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar18\ =\ uVar18\ \+\ 1;$	+2
+use	evsFoldConstantMoves	uVar18	scanIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar18\ =\ uVar30\ \-\ 1;$	+2
+use	evsFoldConstantMoves	uVar18	scanIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar23\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x18\)\ \+\ uVar18\ \*\ 0x74;$	+1
+use	evsFoldConstantMoves	uVar18	scanIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar15\ =\ uVar18\ \-\ 1;$	+1
+use	evsFoldConstantMoves	uVar18	scanIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar18\ =\ uVar18\ \-\ 1;$	+1
+use	evsFoldConstantMoves	uVar18	scanIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar15\ =\ uVar18;$	+1
+use	evsFoldConstantMoves	uVar18	scanIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\}\ while\ \(\(uVar18\ !=\ 0\)\ \&\&\ \(!bVar35\)\);$	+1
+use	evsFoldConstantMoves	uVar18	scanIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar18\ =\ uVar30;$@2	+1
+use	evsFoldConstantMoves	uVar18	scanIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar18\ =\ uVar18\ \+\ 1;$@2	+1
+use	evsFoldConstantMoves	uVar18	scanIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\}\ while\ \(uVar18\ <\ uVar16\);$	+1
+use	evsFoldConstantMoves	uVar18	scanIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar18\ =\ uVar25;$	+1
+use	evsFoldConstantMoves	uVar18	scanIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar11\ =\ iVar31\ \+\ uVar18\ \*\ 0x74;$	+1
+use	evsFoldConstantMoves	uVar18	scanIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar15\ =\ uVar18\ \+\ 1;$	+1
+use	evsFoldConstantMoves	uVar18	scanIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar18\ =\ uVar18\ \+\ 1;$@3	+2
+use	evsFoldConstantMoves	uVar18	scanIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar11\ =\ iVar31\ \+\ uVar18\ \*\ 0x74;$@2	+1
+use	evsFoldConstantMoves	uVar18	scanIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar18\ =\ uVar15;$	+1
+use	evsFoldConstantMoves	uVar18	scanIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar18\ =\ uVar18\ \+\ 1;$@4	+1
+use	evsFoldConstantMoves	uVar18	scanIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(uVar16\ <=\ uVar18\)\ break;$	+1
+use	evsFoldConstantMoves	uVar18	scanIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar18\ =\ uVar30;$@3	+1
+use	evsFoldConstantMoves	uVar18	scanIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar18\ =\ uVar18\ \+\ 1;$@5	+1
+use	evsFoldConstantMoves	uVar18	scanIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\}\ while\ \(uVar18\ <\ uVar16\);$@2	+1
+use	evsFoldConstantMoves	uVar18	instWord5Copy	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar18\ =\ \*\(uint\ \*\)\(iVar11\ \+\ \-0x60\);$	+1
+use	evsFoldConstantMoves	uVar18	instWord5Copy	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(uint\ \*\)\(iVar13\ \+\ 0x14\)\ =\ \*\(uint\ \*\)\(iVar13\ \+\ 0x14\)\ \&\ uVar18;$	+1
+use	evsFoldConstantMoves	uVar18	instructionCountCopy	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar18\ =\ \*\(uint\ \*\)\(param_2\ \+\ 0x14\);$	+3
+use	evsFoldConstantMoves	uVar18	instructionCountCopy	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(uVar30\ <\ uVar18\)\ \{$@2	+1
+use	evsFoldConstantMoves	uVar18	instructionCountCopy	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar18\ =\ \*\(uint\ \*\)\(param_2\ \+\ 0x14\);$@2	+2
+use	evsFoldConstantMoves	uVar18	instructionCountCopy	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(uVar30\ <\ uVar18\)\ \{$@3	+1
+use	evsFoldConstantMoves	uVar18	instructionCountCopy	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar18\ =\ \*\(uint\ \*\)\(param_2\ \+\ 0x14\);$@3	+1
+use	evsFoldConstantMoves	uVar18	instructionCountCopy	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\}\ while\ \(uVar30\ <\ uVar18\);$	+1
+use	evsFoldConstantMoves	uVar18	instructionCountCopy	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(uint\ \*\)\(param_2\ \+\ 0x14\)\ =\ uVar18\ \-\ 1;$	+1
+use	evsFoldConstantMoves	uVar9	instWord1	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar9\ =\ \*\(undefined4\ \*\)\(iVar11\ \+\ \-0x70\);$	+1
+use	evsFoldConstantMoves	uVar9	instWord1	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(undefined4\ \*\)\(iVar32\ \+\ \-0x70\)\ =\ uVar9;$	+1
+local	evsFoldConstantMoves	uVar19	instWord5	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsFoldConstantMoves	uVar20	instWord2	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsFoldConstantMoves	uVar22	instWord4	INFERRED	role read off the function body (see notes_gld_q03.md)

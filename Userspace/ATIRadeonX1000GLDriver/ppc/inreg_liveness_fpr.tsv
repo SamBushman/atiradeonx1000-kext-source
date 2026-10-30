@@ -35,13 +35,13 @@ entry	function	register	class	callers setting it	first reader
 4ed90	FUN_0004ed90	f6	PASS-no	callers set it 0/1	4edb4 bl 0xa3670
 4ed90	FUN_0004ed90	f7	PASS-no	callers set it 0/1	4edb4 bl 0xa3670
 4ed90	FUN_0004ed90	f8	PASS-no	callers set it 0/1	4edb4 bl 0xa3670
-82c50	FUN_00082c50	f2	PASS-indirect	callers set it 0/0	82c80 bctrl 
-82c50	FUN_00082c50	f3	PASS-indirect	callers set it 0/0	82c80 bctrl 
-82c50	FUN_00082c50	f4	PASS-indirect	callers set it 0/0	82c80 bctrl 
-82c50	FUN_00082c50	f5	PASS-indirect	callers set it 0/0	82c80 bctrl 
-82c50	FUN_00082c50	f6	PASS-indirect	callers set it 0/0	82c80 bctrl 
-82c50	FUN_00082c50	f7	PASS-indirect	callers set it 0/0	82c80 bctrl 
-82c50	FUN_00082c50	f8	PASS-indirect	callers set it 0/0	82c80 bctrl 
+82c50	gldEmitProgramConstants	f2	PASS-indirect	callers set it 0/0	82c80 bctrl 
+82c50	gldEmitProgramConstants	f3	PASS-indirect	callers set it 0/0	82c80 bctrl 
+82c50	gldEmitProgramConstants	f4	PASS-indirect	callers set it 0/0	82c80 bctrl 
+82c50	gldEmitProgramConstants	f5	PASS-indirect	callers set it 0/0	82c80 bctrl 
+82c50	gldEmitProgramConstants	f6	PASS-indirect	callers set it 0/0	82c80 bctrl 
+82c50	gldEmitProgramConstants	f7	PASS-indirect	callers set it 0/0	82c80 bctrl 
+82c50	gldEmitProgramConstants	f8	PASS-indirect	callers set it 0/0	82c80 bctrl 
 a4980	FUN_000a4980	f2	PASS-no	callers set it 0/1	a4994 bl 0x1a3258
 a4980	FUN_000a4980	f3	PASS-no	callers set it 0/1	a4994 bl 0x1a3258
 a4980	FUN_000a4980	f4	PASS-no	callers set it 0/1	a4994 bl 0x1a3258
