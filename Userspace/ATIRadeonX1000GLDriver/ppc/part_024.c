@@ -868,8 +868,8 @@ int Program__beginPass(program, param_2)
 }
 
 /* FUN_000ed89c @ 0xed89c (852 bytes) */
-int FUN_000ed89c(param_1)
-  int param_1;
+int FUN_000ed89c(program)
+  int program;
 {
   undefined4 *projectionInst;
   int *memberCursor;
@@ -904,12 +904,12 @@ int FUN_000ed89c(param_1)
   undefined4 virtualRegister;
   undefined4 arenaAt374;
   int group;
-  int local_58;
-  int local_54;
-  int local_50 [6];
+  int loadBaseKey;
+  int loadOffset;
+  int loadSize [6];
   
-  block = *(int *)(param_1 + 900);
-  nextBlock = *(int *)(*(int *)(param_1 + 900) + 8);
+  block = *(int *)(program + 900);
+  nextBlock = *(int *)(*(int *)(program + 900) + 8);
   do {
     if (nextBlock == 0) {
       return;
@@ -930,7 +930,7 @@ int FUN_000ed89c(param_1)
             followingInst = (int *)inst[2];
           }
           else {
-            arena = *(undefined4 *)(*(int *)(param_1 + 8) + 0x378);
+            arena = *(undefined4 *)(*(int *)(program + 8) + 0x378);
             allocation = (undefined4 *)Arena__alloc(arena,0x18);
             *allocation = arena;
             allocation[5] = memberList;
@@ -938,19 +938,19 @@ int FUN_000ed89c(param_1)
             inst[0x4d] = 1;
             operandRecord = IRInst__getOperandRecord(inst,1);
             sourceSelectWord = *(int *)(operandRecord + 0x10);
-            FUN_00104364(inst,&local_58,&local_54,local_50);
-            allocation[3] = local_54;
-            allocation[4] = local_50[0];
+            FUN_00104364(inst,&loadBaseKey,&loadOffset,loadSize);
+            allocation[3] = loadOffset;
+            allocation[4] = loadSize[0];
             groupCursor = groupList;
             if (!noGroupsYet) {
               do {
-                if (((*groupCursor == local_58) && (loadKind == groupCursor[1])) && (groupCursor[2] == sourceSelectWord)) {
-                  if (local_54 < groupCursor[5]) {
+                if (((*groupCursor == loadBaseKey) && (loadKind == groupCursor[1])) && (groupCursor[2] == sourceSelectWord)) {
+                  if (loadOffset < groupCursor[5]) {
                     groupCursor[3] = (int)inst;
-                    groupCursor[5] = local_54;
+                    groupCursor[5] = loadOffset;
                   }
-                  if (groupCursor[6] < local_54 + local_50[0]) {
-                    groupCursor[6] = local_54 + local_50[0];
+                  if (groupCursor[6] < loadOffset + loadSize[0]) {
+                    groupCursor[6] = loadOffset + loadSize[0];
                   }
                   groupCursor[4] = groupCursor[4] + 1;
                   goto LAB_000eda98;
@@ -959,17 +959,17 @@ int FUN_000ed89c(param_1)
                 groupCursor = (int *)*groupNextLink;
               } while ((int *)*groupNextLink != (int *)0x0);
             }
-            arena = *(undefined4 *)(*(int *)(param_1 + 8) + 0x378);
+            arena = *(undefined4 *)(*(int *)(program + 8) + 0x378);
             newGroup = (undefined4 *)Arena__alloc(arena,0x34);
             *newGroup = arena;
             groupCursor = newGroup + 1;
             noGroupsYet = groupCursor == (int *)0x0;
             newGroup[2] = loadKind;
-            newGroup[1] = local_58;
+            newGroup[1] = loadBaseKey;
             newGroup[3] = sourceSelectWord;
-            newGroup[6] = local_54;
+            newGroup[6] = loadOffset;
             newGroup[0xc] = groupList;
-            newGroup[7] = local_54 + local_50[0];
+            newGroup[7] = loadOffset + loadSize[0];
             newGroup[5] = 1;
             newGroup[4] = inst;
             groupList = groupCursor;
@@ -984,7 +984,7 @@ LAB_000eda98:
       } while ((int *)followingInst[2] != (int *)0x0);
       if (!noGroupsYet) {
         do {
-          virtualRegister = FUN_00127608(*(undefined4 *)(param_1 + 0x3ac),0x22,0,0);
+          virtualRegister = FUN_00127608(*(undefined4 *)(program + 0x3ac),0x22,0,0);
           splitGroupList = (int *)0x0;
           do {
             memberInstRef = groupList[3];
@@ -997,11 +997,11 @@ LAB_000eda98:
             IRInst__setOperandRef(groupList[7],0,virtualRegister);
             *(undefined4 *)(groupList[7] + 0x9c) = DAT_001aa800;
             FUN_0012306c(virtualRegister,groupList[7]);
-            arenaAt374 = *(undefined4 *)(*(int *)(param_1 + 8) + 0x374);
+            arenaAt374 = *(undefined4 *)(*(int *)(program + 8) + 0x374);
             allocation = (undefined4 *)Arena__alloc(arenaAt374,0x168);
             *allocation = arenaAt374;
             projectionInst = allocation + 1;
-            IRProjection__ctor_109e28(projectionInst,0x84,*(undefined4 *)(param_1 + 8));
+            IRProjection__ctor_109e28(projectionInst,0x84,*(undefined4 *)(program + 8));
             IRInst__setOperandRef(projectionInst,0,groupSourceVReg);
             allocation[0x28] = destSelectWord;
             IRInst__setOperandRef(projectionInst,1,virtualRegister);

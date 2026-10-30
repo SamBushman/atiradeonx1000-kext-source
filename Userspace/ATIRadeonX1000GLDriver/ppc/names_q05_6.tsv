@@ -1794,3 +1794,67 @@ local	FUN_000fd5c8	local_d4	markedSelectOut	INFERRED	FUN_000f32cc output stored 
 local	FUN_000fd5c8	local_11c	pendingListHead	INFERRED	head node of the pending instruction list walked and flushed
 local	FUN_000fd5c8	local_6c	pendingListA	INFERRED	pointer to the DListNode sentinel auStack_16c: instructions to emit first
 local	FUN_000fd5c8	local_68	pendingListB	INFERRED	pointer to the DListNode sentinel auStack_154: second pending instruction list
+use	Compiler__getOrCreateConstVectorN	iVar7	constInst	INFERRED	constant instruction created from the first virtual register entry; its records are filled from local_78	^\s*iVar7\ =\ \*piVar3;$	+1
+use	Compiler__getOrCreateConstVectorN	iVar7	constInst	INFERRED	constant instruction created from the first virtual register entry; its records are filled from local_78	^\s*iVar6\ =\ iVar7\ \+\ 0x10;$	+1
+use	Compiler__getOrCreateConstVectorN	iVar7	constInst	INFERRED	constant instruction created from the first virtual register entry; its records are filled from local_78	^\s*\*\(byte\ \*\)\(iVar7\ \+\ 0x15c\)\ =\ \(byte\)\(1\ <<\ \(uVar5\ \&\ 0x3f\)\)\ \|\ \*\(byte\ \*\)\(iVar7\ \+\ 0x15c\);$	+1
+use	Compiler__getOrCreateConstVectorN	iVar7	constInst	INFERRED	constant instruction created from the first virtual register entry; its records are filled from local_78	^\s*\*\(byte\ \*\)\(iVar7\ \+\ 0x15c\)\ =\ \*\(byte\ \*\)\(iVar7\ \+\ 0x15c\)\ \&\ \~\(byte\)\(1\ <<\ \(uVar5\ \&\ 0x3f\)\);$	+1
+use	Compiler__getOrCreateConstVectorN	iVar7	constInst	INFERRED	constant instruction created from the first virtual register entry; its records are filled from local_78	^\s*\(\(int\ \(\*\)\(\)\)FUN_000f4ddc\)\(param_1,param_2,iVar7\);$	+1
+use	Compiler__getOrCreateConstVectorN	iVar2	recordDest	INFERRED	address of the destination 24-byte constant record in the key instruction	^\s*iVar2\ =\ iVar4\ \+\ 0x10\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x28\);$	+3
+use	Compiler__getOrCreateConstVectorN	uVar1	recordWord0	INFERRED	word 0 (kind) of the constant record being copied into the hash key	^\s*uVar1\ =\ \*\(undefined4\ \*\)\(\(int\)local_78\ \+\ iVar4\);$	+1
+use	Compiler__getOrCreateConstVectorN	uVar1	recordWord0	INFERRED	word 0 (kind) of the constant record being copied into the hash key	^\s*\*\(undefined4\ \*\)\(iVar2\ \+\ 0xc\)\ =\ uVar1;$	+1
+use	Compiler__getOrCreateConstVectorN	uVar1	newInstId	INFERRED	id returned by FUN_000f4a5c for the new constant vector	^\s*uVar1\ =\ FUN_000f4a5c\(param_1\);$	+2
+use	Compiler__getOrCreateConstVectorN	uVar1	recordWord0B	INFERRED	word 0 (kind) of the constant record being copied into the new instruction	^\s*uVar1\ =\ \*\(undefined4\ \*\)\(\(int\)local_78\ \+\ iVar2\);$	+1
+use	Compiler__getOrCreateConstVectorN	uVar1	recordWord0B	INFERRED	word 0 (kind) of the constant record being copied into the new instruction	^\s*\*\(undefined4\ \*\)\(iVar6\ \+\ 0xc\)\ =\ uVar1;$	+1
+use	Compiler__getOrCreateConstVectorN	piVar3	vectorSlot	INFERRED	element 0 of the virtual register definition vector (created on demand)	^\s*piVar3\ =\ \*\(int\ \*\*\)\(iVar4\ \+\ 0x18\);$	+3
+use	Compiler__getOrCreateConstVectorN	piVar3	vectorSlot	INFERRED	element 0 of the virtual register definition vector (created on demand)	^\s*if\ \(piVar3\[1\]\ ==\ 0\)\ \{$	+3
+use	Compiler__getOrCreateConstVectorN	piVar3	vectorSlot	INFERRED	element 0 of the virtual register definition vector (created on demand)	^\s*piVar3\ =\ \(int\ \*\)piVar3\[2\];$	+1
+use	Compiler__getOrCreateConstVectorN	piVar3	vectorSlot	INFERRED	element 0 of the virtual register definition vector (created on demand)	^\s*iVar7\ =\ \*piVar3;$	+1
+use	Compiler__getOrCreateConstVectorN	iVar6	recordCursor	INFERRED	cursor over the 24-byte constant records of the new instruction	^\s*iVar6\ =\ iVar7\ \+\ 0x10;$	+1
+use	Compiler__getOrCreateConstVectorN	iVar6	recordCursor	INFERRED	cursor over the 24-byte constant records of the new instruction	^\s*\*\(undefined4\ \*\)\(iVar6\ \+\ 0x10\)\ =\ \*\(undefined4\ \*\)\(\(int\)local_78\ \+\ iVar2\ \+\ 4\);$	+2
+use	Compiler__getOrCreateConstVectorN	iVar6	recordCursor	INFERRED	cursor over the 24-byte constant records of the new instruction	^\s*iVar6\ =\ iVar6\ \+\ 0x18;$	+1
+use	Program__applySourceTokenToOperand	uVar1	extensionWord	INFERRED	second token word: per-lane negate bits 3/7/11/15	^\s*uVar1\ =\ param_3\[1\];$	+2
+use	Program__applySourceTokenToOperand	a4	instRef	INFERRED	copy of the instruction argument kept for the stale-argument calls	^\s*a4\ =\ param_5;$	+1
+use	Program__applySourceTokenToOperand	a4	instRef	INFERRED	copy of the instruction argument kept for the stale-argument calls	^\s*\(param_5,param_4,0,\(int\)local_38\[uVar3\ >>\ 0x18\],a4,in_r8,\*\(code\ \*\*\)\(\*param_5\ \+\ 0x88\)\);$	+1
+use	Program__applySourceTokenToOperand	a4	instRef	INFERRED	copy of the instruction argument kept for the stale-argument calls	^\s*\(param_5,param_4,1,\(int\)local_38\[uVar3\ >>\ 0x10\ \&\ 0xff\],a4,in_r8,$	+2
+use	Program__applySourceTokenToOperand	a4	instRef	INFERRED	copy of the instruction argument kept for the stale-argument calls	^\s*\(param_5,param_4,2,\(int\)local_38\[uVar3\ >>\ 8\ \&\ 0xff\],a4,in_r8,\*\(code\ \*\*\)\(\*param_5\ \+\ 0x88\)$	+2
+use	Program__applySourceTokenToOperand	a4	instRef	INFERRED	copy of the instruction argument kept for the stale-argument calls	^\s*\(param_5,param_4,3,\(int\)local_38\[uVar3\ \&\ 0xff\],a4,in_r8,\*\(code\ \*\*\)\(\*param_5\ \+\ 0x88\)\);$	+1
+use	Program__applySourceTokenToOperand	uVar2	firstTokenWord	INFERRED	first source token word (bit 22 flags the extension word)	^\s*uVar2\ =\ \*param_3;$	+2
+use	Program__applySourceTokenToOperand	uVar2	firstTokenWord	INFERRED	first source token word (bit 22 flags the extension word)	^\s*uVar2\ =\ \*param_3;$@2	+1
+use	Program__applySourceTokenToOperand	uVar2	firstTokenWord	INFERRED	first source token word (bit 22 flags the extension word)	^\s*if\ \(\(\(uVar2\ \&\ 0x400000\)\ !=\ 0\)\ \&\&\ \(\(param_3\[1\]\ \&\ 0x100000\)\ !=\ 0\)\)\ \{$	+1
+use	Program__applySourceTokenToOperand	uVar3	selectWord	INFERRED	staged select word read through selectWordPtr (one byte per lane)	^\s*uVar3\ =\ \*param_2;$	+1
+use	Program__applySourceTokenToOperand	uVar3	selectWord	INFERRED	staged select word read through selectWordPtr (one byte per lane)	^\s*\(param_5,param_4,0,\(int\)local_38\[uVar3\ >>\ 0x18\],a4,in_r8,\*\(code\ \*\*\)\(\*param_5\ \+\ 0x88\)\);$	+1
+use	Program__applySourceTokenToOperand	uVar3	selectWord	INFERRED	staged select word read through selectWordPtr (one byte per lane)	^\s*\(param_5,param_4,1,\(int\)local_38\[uVar3\ >>\ 0x10\ \&\ 0xff\],a4,in_r8,$	+2
+use	Program__applySourceTokenToOperand	uVar3	selectWord	INFERRED	staged select word read through selectWordPtr (one byte per lane)	^\s*\(param_5,param_4,2,\(int\)local_38\[uVar3\ >>\ 8\ \&\ 0xff\],a4,in_r8,\*\(code\ \*\*\)\(\*param_5\ \+\ 0x88\)$	+2
+use	Program__applySourceTokenToOperand	uVar3	selectWord	INFERRED	staged select word read through selectWordPtr (one byte per lane)	^\s*\(param_5,param_4,3,\(int\)local_38\[uVar3\ \&\ 0xff\],a4,in_r8,\*\(code\ \*\*\)\(\*param_5\ \+\ 0x88\)\);$	+1
+use	FUN_000f7b10	puVar1	vectorSlot	INFERRED	element reference in the vector	^\s*puVar1\ =\ \(undefined4\ \*\)\(uVar3\ \*\ 4\ \+\ param_1\[2\]\);$	+1
+use	FUN_000f7b10	puVar1	vectorSlot	INFERRED	element reference in the vector	^\s*puVar1\ =\ \(undefined4\ \*\)FUN_0019423c\(param_1,uVar3\);$	+1
+use	FUN_000f7b10	puVar1	vectorSlot	INFERRED	element reference in the vector	^\s*if\ \(\(\*\(int\ \*\)\*puVar1\ ==\ param_2\)\ \&\&\ \(\(\(int\ \*\)\*puVar1\)\[1\]\ ==\ param_3\)\)\ \{$	+1
+use	FUN_000f7b10	uVar2	vectorSize	INFERRED	element count of the vector (loop bound)	^\s*uVar2\ =\ 0;$	+1
+use	FUN_000f7b10	uVar2	vectorSize	INFERRED	element count of the vector (loop bound)	^\s*uVar2\ =\ param_1\[1\];$	+1
+use	FUN_000f7b10	uVar2	vectorSize	INFERRED	element count of the vector (loop bound)	^\s*if\ \(uVar2\ <=\ uVar3\)\ \{$	+2
+use	FUN_000f7b10	uVar2	vectorSize	INFERRED	element count of the vector (loop bound)	^\s*uVar2\ =\ param_1\[1\];$@2	+1
+use	FUN_000f7b10	uVar2	vectorSize	INFERRED	element count of the vector (loop bound)	^\s*\}\ while\ \(uVar3\ <\ uVar2\);$	+1
+use	FUN_000f7b10	uVar2	vectorSize	INFERRED	element count of the vector (loop bound)	^\s*return\ uVar2;$	+1
+use	FUN_000f5e8c	iVar1	isConstantSource	INFERRED	source virtual register vtable +0x48 query: nonzero for a constant register	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x48\)\)\(a0\);$	+2
+use	FUN_000f5e8c	a0	sourceVReg	INFERRED	virtual register that is the source of the operand	^\s*a0\ =\ \(int\ \*\)FUN_00105594\(param_1,param_2\);$	+2
+use	FUN_000f5e8c	a0	sourceVReg	INFERRED	virtual register that is the source of the operand	^\s*local_30\ =\ GH_U2F\(\(unsigned\ int\)\(a0\[uVar4\ \*\ 6\ \+\ 8\]\)\);$	+8
+use	FUN_000f5e8c	uVar2	result	INFERRED	return value: 1 when every read lane is a non-negative float constant	^\s*uVar2\ =\ 0;$	+1
+use	FUN_000f5e8c	uVar2	result	INFERRED	return value: 1 when every read lane is a non-negative float constant	^\s*uVar2\ =\ 1;$	+1
+use	FUN_000f5e8c	uVar2	result	INFERRED	return value: 1 when every read lane is a non-negative float constant	^\s*return\ uVar2;$	+1
+use	FUN_000f5e8c	uVar4	laneComponent	INFERRED	component selected by the lane of the operand select word	^\s*uVar4\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)\&local_38\ \+\ iVar3\);$	+10
+local	Compiler__getOrCreateConstVectorN	param_2	constCount	INFERRED	number of constants (1-4); selects the per-count hash table
+local	Compiler__getOrCreateConstVectorN	local_78	constRecords	INFERRED	stack copy of the constant records (24 bytes each); first two words from operandWord0/1
+local	Program__applySourceTokenToOperand	local_38	laneSources	INFERRED	source component of each lane (psnPackedLaneSource), identity 0..3 when no descriptor
+local	FUN_000f7b10	param_2	key0	INFERRED	first word compared with word 0 of each entry
+local	FUN_000f7b10	param_3	key1	INFERRED	second word compared with word 1 of each entry
+local	FUN_000f7b10	param_4	unusedArg4	INFERRED	passed by the caller but not read (register leftovers)
+local	FUN_000f7b10	param_5	unusedArg5	INFERRED	passed by the caller but not read (register leftovers)
+local	FUN_000f7b10	param_6	unusedArg6	INFERRED	passed by the caller but not read (register leftovers)
+local	FUN_000f7b10	param_7	unusedArg7	INFERRED	passed by the caller but not read (register leftovers)
+func	FUN_000f7b10	Vector__findIndexOfKeyPair	INFERRED	index of the first entry whose words 0 and 1 equal (key0,key1), else the element count
+local	FUN_000f5e8c	local_38	operandSelectBytes	INFERRED	select word of the operand record (+0x10), one byte per lane
+func	FUN_000f5e8c	IRInst__operandIsNonNegativeFloatConst	INFERRED	true when the operand source is a constant register and every lane it reads is a float constant (kind 2) that is flagged present and >= 0.0
+local	FUN_000ed89c	param_1	program	INFERRED	program whose blocks (+900) are walked
+local	FUN_000ed89c	local_58	loadBaseKey	INFERRED	first output of FUN_00104364: key compared with the group key
+local	FUN_000ed89c	local_54	loadOffset	INFERRED	second output of FUN_00104364: offset of the load
+local	FUN_000ed89c	local_50	loadSize	INFERRED	third output of FUN_00104364: size of the load

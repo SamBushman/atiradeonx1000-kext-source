@@ -1494,7 +1494,7 @@ LAB_001490f4:
             }
           }
           else {
-            if ((uVar4 != 0) || (iVar7 = FUN_000f5e8c(inst1,1), iVar7 == 0)) {
+            if ((uVar4 != 0) || (iVar7 = IRInst__operandIsNonNegativeFloatConst(inst1,1), iVar7 == 0)) {
               IROperand__setModifierBits(inst1 + 0x29,2,1);
               if (uVar4 != 0) {
                 sourceIsSplatConstantResult = ((undefined4 (*)())IRInst__sourceIsSplatConstant)(inst1,1,0.0);

@@ -1569,7 +1569,7 @@
 0xf5a0c	IRInst__canFoldConstantSource	512	no	indirect call (driver context / vtable / callback)
 0xf5c0c	IRInst__sourceMatchesConstant	228	yes	
 0xf5cf0	IRInst__getUniformSourceConstant	412	yes	
-0xf5e8c	FUN_000f5e8c	264	no	indirect call (driver context / vtable / callback)
+0xf5e8c	IRInst__operandIsNonNegativeFloatConst	264	no	indirect call (driver context / vtable / callback)
 0xf5f94	RegisterMap__findConstVectorExact	304	yes	
 0xf60c4	Program__dumpConstantRegisters	388	no	indirect call (driver context / vtable / callback)
 0xf6248	Compiler__getOrCreateConstVectorN	532	yes	
@@ -1582,7 +1582,7 @@
 0xf771c	IRInst__makeLiteralVec4Int	340	yes	
 0xf7870	IRInst__setIntConstantOperand4	340	yes	
 0xf79c4	IRInst__makeLiteralVec4Float	332	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0xf7b10	FUN_000f7b10	228	yes	
+0xf7b10	Vector__findIndexOfKeyPair	228	yes	
 0xf7bf4	DominatorTree__ctor_f7bf4	228	yes	
 0xf7cd8	DominatorTree__ctor_f7cd8	228	yes	
 0xf7dbc	DominatorTree__computeDominanceFrontiers	352	yes	

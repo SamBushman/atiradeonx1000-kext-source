@@ -1569,7 +1569,7 @@
 0xf5a0c	512	IRInst__canFoldConstantSource	part_026	converted
 0xf5c0c	228	IRInst__sourceMatchesConstant	part_026	converted
 0xf5cf0	412	IRInst__getUniformSourceConstant	part_026	converted
-0xf5e8c	264	FUN_000f5e8c	part_026	converted
+0xf5e8c	264	IRInst__operandIsNonNegativeFloatConst	part_026	converted
 0xf5f94	304	RegisterMap__findConstVectorExact	part_026	converted
 0xf60c4	388	Program__dumpConstantRegisters	part_026	converted
 0xf6248	532	Compiler__getOrCreateConstVectorN	part_026	converted
@@ -1582,7 +1582,7 @@
 0xf771c	340	IRInst__makeLiteralVec4Int	part_026	converted
 0xf7870	340	IRInst__setIntConstantOperand4	part_026	converted
 0xf79c4	332	IRInst__makeLiteralVec4Float	part_026	converted
-0xf7b10	228	FUN_000f7b10	part_026	converted
+0xf7b10	228	Vector__findIndexOfKeyPair	part_026	converted
 0xf7bf4	228	DominatorTree__ctor_f7bf4	part_026	converted
 0xf7cd8	228	DominatorTree__ctor_f7cd8	part_026	converted
 0xf7dbc	352	DominatorTree__computeDominanceFrontiers	part_026	converted

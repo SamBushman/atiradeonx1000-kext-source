@@ -646,19 +646,19 @@ int IRInst__getUniformSourceConstant(inst, srcIndex, laneMask, outConst)
   return 0;
 }
 
-/* FUN_000f5e8c @ 0xf5e8c (264 bytes) */
-int FUN_000f5e8c(inst, operandIndex)
+/* IRInst__operandIsNonNegativeFloatConst @ 0xf5e8c (264 bytes) */
+int IRInst__operandIsNonNegativeFloatConst(inst, operandIndex)
   undefined4 inst;
   undefined4 operandIndex;
 {
   int loopCounter;
   int operandRecord;
-  int *a0;
-  int iVar1;
-  undefined4 uVar2;
+  int *sourceVReg;
+  int isConstantSource;
+  undefined4 result;
   int loopCounterB;
-  uint uVar4;
-  undefined4 local_38;
+  uint laneComponent;
+  undefined4 operandSelectBytes;
   int local_34;
   float local_30;
   int local_2c;
@@ -666,35 +666,35 @@ int FUN_000f5e8c(inst, operandIndex)
   int local_24;
   int local_20;
   
-  a0 = (int *)IRInst__getOperandSource(inst,operandIndex);
-  iVar1 = (**(code **)(*a0 + 0x48))(a0);
-  if (iVar1 == 0) {
+  sourceVReg = (int *)IRInst__getOperandSource(inst,operandIndex);
+  isConstantSource = (**(code **)(*sourceVReg + 0x48))(sourceVReg);
+  if (isConstantSource == 0) {
 LAB_000f5f7c:
-    uVar2 = 0;
+    result = 0;
   }
   else {
     operandRecord = IRInst__getOperandRecord(inst,operandIndex);
     loopCounterB = 0;
-    local_38 = *(undefined4 *)(operandRecord + 0x10);
+    operandSelectBytes = *(undefined4 *)(operandRecord + 0x10);
     loopCounter = 4;
     do {
-      uVar4 = (uint)*(byte *)((int)&local_38 + loopCounterB);
-      if (uVar4 < 4) {
-        local_30 = GH_U2F((unsigned int)(a0[uVar4 * 6 + 8]));
-        local_2c = a0[uVar4 * 6 + 9];
-        local_28 = a0[uVar4 * 6 + 10];
-        local_34 = a0[uVar4 * 6 + 7];
-        local_20 = a0[uVar4 * 6 + 0xc];
-        local_24 = a0[uVar4 * 6 + 0xb];
-        if (((a0[uVar4 * 6 + 7] != 2) || (((int)*(char *)(a0 + 0x57) >> (uVar4 & 0x3f) & 1U) == 0))
-           || (GH_U2F((unsigned int)(a0[uVar4 * 6 + 8])) < 0.0)) goto LAB_000f5f7c;
+      laneComponent = (uint)*(byte *)((int)&operandSelectBytes + loopCounterB);
+      if (laneComponent < 4) {
+        local_30 = GH_U2F((unsigned int)(sourceVReg[laneComponent * 6 + 8]));
+        local_2c = sourceVReg[laneComponent * 6 + 9];
+        local_28 = sourceVReg[laneComponent * 6 + 10];
+        local_34 = sourceVReg[laneComponent * 6 + 7];
+        local_20 = sourceVReg[laneComponent * 6 + 0xc];
+        local_24 = sourceVReg[laneComponent * 6 + 0xb];
+        if (((sourceVReg[laneComponent * 6 + 7] != 2) || (((int)*(char *)(sourceVReg + 0x57) >> (laneComponent & 0x3f) & 1U) == 0))
+           || (GH_U2F((unsigned int)(sourceVReg[laneComponent * 6 + 8])) < 0.0)) goto LAB_000f5f7c;
       }
       loopCounterB = loopCounterB + 1;
       loopCounter = loopCounter + -1;
     } while (loopCounter != 0);
-    uVar2 = 1;
+    result = 1;
   }
-  return uVar2;
+  return result;
 }
 
 /* RegisterMap__findConstVectorExact @ 0xf5f94 (304 bytes) */
@@ -823,9 +823,9 @@ int Program__dumpConstantRegisters(program, compiler)
 }
 
 /* Compiler__getOrCreateConstVectorN @ 0xf6248 (532 bytes) */
-int Compiler__getOrCreateConstVectorN(owner, param_2, operandWord0, operandWord1, operandWord2, operandWord3, operandWord4, operandWord5)
+int Compiler__getOrCreateConstVectorN(owner, constCount, operandWord0, operandWord1, operandWord2, operandWord3, operandWord4, operandWord5)
   int owner;
-  int param_2;
+  int constCount;
   undefined4 operandWord0;
   undefined4 operandWord1;
   undefined4 operandWord2;
@@ -833,17 +833,19 @@ int Compiler__getOrCreateConstVectorN(owner, param_2, operandWord0, operandWord1
   undefined4 operandWord4;
   undefined4 operandWord5;
 {
+  undefined4 recordWord0B;
+  undefined4 newInstId;
   int loopCounterC;
   int loopCounterB;
   int loopCounter;
   int foundEntry;
-  undefined4 uVar1;
-  int iVar2;
-  int *piVar3;
+  undefined4 recordWord0;
+  int recordDest;
+  int *vectorSlot;
   int iVar4;
   uint loopIndex;
-  int iVar6;
-  int iVar7;
+  int recordCursor;
+  int constInst;
   int loopCounterD;
   undefined4 uStack00000020;
   undefined4 uStack00000024;
@@ -851,7 +853,7 @@ int Compiler__getOrCreateConstVectorN(owner, param_2, operandWord0, operandWord1
   undefined4 uStack0000002c;
   undefined4 uStack00000030;
   undefined4 uStack00000034;
-  /* issue #64 live-repro: called below as auStack_8c[param_2] with param_2 observed as 4 - one
+  /* issue #64 live-repro: called below as auStack_8c[constCount] with constCount observed as 4 - one
    * past this array's declared 4 elements (indices 0-3). Confirmed in stock's own disassembly: the
    * word this 5th index reads (entry-sp-0x8c+0x10, by this array's own hex name) is the exact same
    * stack slot as local_7c (entry-sp-0x7c), which the very next line fills with a real value
@@ -864,25 +866,25 @@ int Compiler__getOrCreateConstVectorN(owner, param_2, operandWord0, operandWord1
    * aliased to index 4 so both names reach the same word. */
   undefined4 auStack_8c [5];
 #define local_7c auStack_8c[4]
-  undefined4 local_78 [26];
+  undefined4 constRecords [26];
   
   auStack_8c[1] = *(undefined4 *)(owner + 8);
   auStack_8c[2] = *(undefined4 *)(owner + 0xc);
   loopCounterC = 4;
   loopCounterB = 0;
   loopIndex = 0;
-  local_78[0] = operandWord0;
-  local_78[1] = operandWord1;
+  constRecords[0] = operandWord0;
+  constRecords[1] = operandWord1;
   auStack_8c[3] = *(undefined4 *)(owner + 0x10);
   local_7c = *(undefined4 *)(owner + 0x14);
   do {
-    if ((int)loopIndex < param_2) {
+    if ((int)loopIndex < constCount) {
       *(byte *)(*(int *)(owner + 0x28) + 0x15c) =
            (byte)(1 << (loopIndex & 0x3f)) | *(byte *)(*(int *)(owner + 0x28) + 0x15c);
-      uVar1 = *(undefined4 *)((int)local_78 + loopCounterB);
-      iVar2 = loopCounterB + 0x10 + *(int *)(owner + 0x28);
-      *(undefined4 *)(iVar2 + 0x10) = *(undefined4 *)((int)local_78 + loopCounterB + 4);
-      *(undefined4 *)(iVar2 + 0xc) = uVar1;
+      recordWord0 = *(undefined4 *)((int)constRecords + loopCounterB);
+      recordDest = loopCounterB + 0x10 + *(int *)(owner + 0x28);
+      *(undefined4 *)(recordDest + 0x10) = *(undefined4 *)((int)constRecords + loopCounterB + 4);
+      *(undefined4 *)(recordDest + 0xc) = recordWord0;
     }
     else {
       *(byte *)(*(int *)(owner + 0x28) + 0x15c) =
@@ -898,42 +900,42 @@ int Compiler__getOrCreateConstVectorN(owner, param_2, operandWord0, operandWord1
   uStack0000002c = operandWord3;
   uStack00000030 = operandWord4;
   uStack00000034 = operandWord5;
-  foundEntry = HashTable__find(auStack_8c[param_2],*(undefined4 *)(owner + 0x28));
+  foundEntry = HashTable__find(auStack_8c[constCount],*(undefined4 *)(owner + 0x28));
   if (foundEntry == 0) {
-    uVar1 = FUN_000f4a5c(owner);
-    iVar4 = FUN_001275a0(owner,0xc,uVar1,0);
-    piVar3 = *(int **)(iVar4 + 0x18);
-    if (*piVar3 == 0) {
-      piVar3 = (int *)Vector__elementRefGrow(piVar3,0);
+    newInstId = FUN_000f4a5c(owner);
+    iVar4 = FUN_001275a0(owner,0xc,newInstId,0);
+    vectorSlot = *(int **)(iVar4 + 0x18);
+    if (*vectorSlot == 0) {
+      vectorSlot = (int *)Vector__elementRefGrow(vectorSlot,0);
     }
     else {
-      if (piVar3[1] == 0) {
-        *(undefined4 *)piVar3[2] = 0;
-        piVar3[1] = 1;
+      if (vectorSlot[1] == 0) {
+        *(undefined4 *)vectorSlot[2] = 0;
+        vectorSlot[1] = 1;
       }
-      piVar3 = (int *)piVar3[2];
+      vectorSlot = (int *)vectorSlot[2];
     }
-    iVar7 = *piVar3;
+    constInst = *vectorSlot;
     loopCounterD = 4;
     loopIndex = 0;
-    iVar6 = iVar7 + 0x10;
+    recordCursor = constInst + 0x10;
     loopCounter = 0;
     do {
-      if ((int)loopIndex < param_2) {
-        *(byte *)(iVar7 + 0x15c) = (byte)(1 << (loopIndex & 0x3f)) | *(byte *)(iVar7 + 0x15c);
-        uVar1 = *(undefined4 *)((int)local_78 + loopCounter);
-        *(undefined4 *)(iVar6 + 0x10) = *(undefined4 *)((int)local_78 + loopCounter + 4);
-        *(undefined4 *)(iVar6 + 0xc) = uVar1;
+      if ((int)loopIndex < constCount) {
+        *(byte *)(constInst + 0x15c) = (byte)(1 << (loopIndex & 0x3f)) | *(byte *)(constInst + 0x15c);
+        recordWord0B = *(undefined4 *)((int)constRecords + loopCounter);
+        *(undefined4 *)(recordCursor + 0x10) = *(undefined4 *)((int)constRecords + loopCounter + 4);
+        *(undefined4 *)(recordCursor + 0xc) = recordWord0B;
       }
       else {
-        *(byte *)(iVar7 + 0x15c) = *(byte *)(iVar7 + 0x15c) & ~(byte)(1 << (loopIndex & 0x3f));
+        *(byte *)(constInst + 0x15c) = *(byte *)(constInst + 0x15c) & ~(byte)(1 << (loopIndex & 0x3f));
       }
       loopIndex = loopIndex + 1;
       loopCounter = loopCounter + 0x18;
-      iVar6 = iVar6 + 0x18;
+      recordCursor = recordCursor + 0x18;
       loopCounterD = loopCounterD + -1;
     } while (loopCounterD != 0);
-    ((int (*)())ConstRecord__insertSwizzleVariants)(owner,param_2,iVar7);
+    ((int (*)())ConstRecord__insertSwizzleVariants)(owner,constCount,constInst);
   }
   else {
     iVar4 = *(int *)(foundEntry + 0x8c);
@@ -1799,18 +1801,18 @@ void IRInst__makeLiteralVec4Float(undefined4 inst,undefined4 program,undefined4 
   return;
 }
 
-/* FUN_000f7b10 @ 0xf7b10 (228 bytes) */
-int FUN_000f7b10(vector, param_2, param_3, param_4, param_5, param_6, param_7)
+/* Vector__findIndexOfKeyPair @ 0xf7b10 (228 bytes) */
+int Vector__findIndexOfKeyPair(vector, key0, key1, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
   uint *vector;
-  int param_2;
-  int param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+  int key0;
+  int key1;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
 {
-  undefined4 *puVar1;
-  uint uVar2;
+  undefined4 *vectorSlot;
+  uint vectorSize;
   uint loopIndex;
   int iStack0000001c;
   int iStack00000020;
@@ -1819,35 +1821,35 @@ int FUN_000f7b10(vector, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 uStack0000002c;
   undefined4 uStack00000030;
   
-  uVar2 = 0;
+  vectorSize = 0;
   if (vector[1] != 0) {
     loopIndex = 0;
-    uVar2 = vector[1];
-    iStack0000001c = param_2;
-    iStack00000020 = param_3;
-    uStack00000024 = param_4;
-    uStack00000028 = param_5;
-    uStack0000002c = param_6;
-    uStack00000030 = param_7;
+    vectorSize = vector[1];
+    iStack0000001c = key0;
+    iStack00000020 = key1;
+    uStack00000024 = unusedArg4;
+    uStack00000028 = unusedArg5;
+    uStack0000002c = unusedArg6;
+    uStack00000030 = unusedArg7;
     do {
       if (loopIndex < *vector) {
-        if (uVar2 <= loopIndex) {
-          _memset(uVar2 * 4 + vector[2],0,(loopIndex - uVar2) * 4 + 4);
+        if (vectorSize <= loopIndex) {
+          _memset(vectorSize * 4 + vector[2],0,(loopIndex - vectorSize) * 4 + 4);
           vector[1] = loopIndex + 1;
         }
-        puVar1 = (undefined4 *)(loopIndex * 4 + vector[2]);
+        vectorSlot = (undefined4 *)(loopIndex * 4 + vector[2]);
       }
       else {
-        puVar1 = (undefined4 *)Vector__elementRefGrow(vector,loopIndex);
+        vectorSlot = (undefined4 *)Vector__elementRefGrow(vector,loopIndex);
       }
-      if ((*(int *)*puVar1 == param_2) && (((int *)*puVar1)[1] == param_3)) {
+      if ((*(int *)*vectorSlot == key0) && (((int *)*vectorSlot)[1] == key1)) {
         return loopIndex;
       }
-      uVar2 = vector[1];
+      vectorSize = vector[1];
       loopIndex = loopIndex + 1;
-    } while (loopIndex < uVar2);
+    } while (loopIndex < vectorSize);
   }
-  return uVar2;
+  return vectorSize;
 }
 
 /* DominatorTree__ctor_f7bf4 @ 0xf7bf4 (228 bytes) */
@@ -2487,46 +2489,46 @@ int Program__applySourceTokenToOperand(program, selectWordPtr, descriptor, opera
   int operandIndex;
   int *inst;
 {
-  uint uVar1;
-  int *a4;
+  uint extensionWord;
+  int *instRef;
   undefined4 staleArgR8;
-  uint uVar2;
-  uint uVar3;
-  char local_38 [32];
+  uint firstTokenWord;
+  uint selectWord;
+  char laneSources [32];
   
-  local_38[0] = '\0';
-  local_38[1] = 1;
-  local_38[2] = 2;
-  local_38[3] = 3;
-  uVar3 = *selectWordPtr;
-  a4 = inst;
+  laneSources[0] = '\0';
+  laneSources[1] = 1;
+  laneSources[2] = 2;
+  laneSources[3] = 3;
+  selectWord = *selectWordPtr;
+  instRef = inst;
   if (descriptor != (uint *)0x0) {
-    uVar2 = *descriptor;
-    if ((uVar2 & 0x400000) != 0) {
-      uVar1 = descriptor[1];
-      if ((uVar1 >> 3 & 1 & uVar1 >> 7 & 1 & uVar1 >> 0xb & 1 & uVar1 >> 0xf & 1) != 0) {
+    firstTokenWord = *descriptor;
+    if ((firstTokenWord & 0x400000) != 0) {
+      extensionWord = descriptor[1];
+      if ((extensionWord >> 3 & 1 & extensionWord >> 7 & 1 & extensionWord >> 0xb & 1 & extensionWord >> 0xf & 1) != 0) {
         IROperand__setModifierBits(inst + operandIndex * 6 + 0x23,1,inst[operandIndex * 6 + 0x28] & 1U ^ 1);
-        uVar2 = *descriptor;
+        firstTokenWord = *descriptor;
       }
     }
-    if (((uVar2 & 0x400000) != 0) && ((descriptor[1] & 0x100000) != 0)) {
+    if (((firstTokenWord & 0x400000) != 0) && ((descriptor[1] & 0x100000) != 0)) {
       IROperand__setModifierBits(inst + operandIndex * 6 + 0x23,2,1);
     }
-    local_38[0] = psnPackedLaneSource(descriptor,0);
-    local_38[1] = psnPackedLaneSource(descriptor,1);
-    local_38[2] = psnPackedLaneSource(descriptor,2);
-    local_38[3] = psnPackedLaneSource(descriptor,3);
+    laneSources[0] = psnPackedLaneSource(descriptor,0);
+    laneSources[1] = psnPackedLaneSource(descriptor,1);
+    laneSources[2] = psnPackedLaneSource(descriptor,2);
+    laneSources[3] = psnPackedLaneSource(descriptor,3);
   }
   (**(code **)(*inst + 0x88))
-            (inst,operandIndex,0,(int)local_38[uVar3 >> 0x18],a4,staleArgR8,*(code **)(*inst + 0x88));
+            (inst,operandIndex,0,(int)laneSources[selectWord >> 0x18],instRef,staleArgR8,*(code **)(*inst + 0x88));
   (**(code **)(*inst + 0x88))
-            (inst,operandIndex,1,(int)local_38[uVar3 >> 0x10 & 0xff],a4,staleArgR8,
+            (inst,operandIndex,1,(int)laneSources[selectWord >> 0x10 & 0xff],instRef,staleArgR8,
              *(code **)(*inst + 0x88));
   (**(code **)(*inst + 0x88))
-            (inst,operandIndex,2,(int)local_38[uVar3 >> 8 & 0xff],a4,staleArgR8,*(code **)(*inst + 0x88)
+            (inst,operandIndex,2,(int)laneSources[selectWord >> 8 & 0xff],instRef,staleArgR8,*(code **)(*inst + 0x88)
             );
   (**(code **)(*inst + 0x88))
-            (inst,operandIndex,3,(int)local_38[uVar3 & 0xff],a4,staleArgR8,*(code **)(*inst + 0x88));
+            (inst,operandIndex,3,(int)laneSources[selectWord & 0xff],instRef,staleArgR8,*(code **)(*inst + 0x88));
   *selectWordPtr = 0x10203;
   return;
 }
