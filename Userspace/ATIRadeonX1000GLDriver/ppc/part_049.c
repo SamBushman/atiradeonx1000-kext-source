@@ -2464,28 +2464,28 @@ int R300SchedModel__vslot28(this, program)
   uint loopIndex3;
   int loopIndex;
   double literalValue;
-  undefined4 local_78;
-  int local_74 [3];
-  undefined4 local_68;
-  undefined4 local_64;
-  uint local_60;
-  int local_5c;
-  int local_58;
+  undefined4 otherDestSelect;
+  int mergedDestSelect [3];
+  undefined4 selectWriteMask;
+  undefined4 maskedSelect;
+  uint operandReadMask;
+  int hashFunctionBase;
+  int equalFunctionBase;
   
   block = *(int *)(program + 900);
   if (*(int *)(block + 8) != 0) {
-    local_5c = 0x18a450;
-    local_58 = 0x18a450;
+    hashFunctionBase = 0x18a450;
+    equalFunctionBase = 0x18a450;
     do {
       arenaAt378 = *(undefined4 *)(this[2] + 0x378);
       hashAlloc = (undefined4 *)Arena__alloc(arenaAt378,0x1c);
       hashSet = hashAlloc + 1;
       *hashAlloc = arenaAt378;
-      hashAlloc[4] = local_5c + -0x770;
+      hashAlloc[4] = hashFunctionBase + -0x770;
       bucketCount = 1;
       loopIndex = 0x20;
       hashAlloc[1] = 1;
-      hashAlloc[5] = local_58 + -0x82c;
+      hashAlloc[5] = equalFunctionBase + -0x82c;
       hashAlloc[6] = arenaAt378;
       do {
         bucketCount = bucketCount << 1;
@@ -2613,24 +2613,24 @@ code_r0x0018a910:
               }
               else if (operandVReg != callResult) {
                 destRecord = IRInst__getOperandRecord(callResult,0);
-                local_74[0] = *(int *)(destRecord + 0x10);
+                mergedDestSelect[0] = *(int *)(destRecord + 0x10);
                 loopRemaining = IRInst__getOperandRecord(operandVReg,0);
                 fullSelect = DAT_001b2a64;
                 loopIndex2 = 0;
-                local_78 = *(undefined4 *)(loopRemaining + 0x10);
+                otherDestSelect = *(undefined4 *)(loopRemaining + 0x10);
                 loopRemaining = 4;
                 do {
-                  laneSelect = *(char *)((int)local_74 + loopIndex2 + -4);
+                  laneSelect = *(char *)((int)mergedDestSelect + loopIndex2 + -4);
                   if (laneSelect != '\x01') {
-                    *(char *)((int)local_74 + loopIndex2) = laneSelect;
+                    *(char *)((int)mergedDestSelect + loopIndex2) = laneSelect;
                   }
                   loopIndex2 = loopIndex2 + 1;
                   loopRemaining = loopRemaining + -1;
                 } while (loopRemaining != 0);
-                callResult[0x27] = local_74[0];
-                WriteMask__fromSelectWord(&local_68,local_74[0]);
-                SelectWord__maskUnused(&local_64,fullSelect,local_68);
-                mergedSelect = local_64;
+                callResult[0x27] = mergedDestSelect[0];
+                WriteMask__fromSelectWord(&selectWriteMask,mergedDestSelect[0]);
+                SelectWord__maskUnused(&maskedSelect,fullSelect,selectWriteMask);
+                mergedSelect = maskedSelect;
                 source1Record = IRInst__getOperandRecord(callResult,1);
                 *(undefined4 *)(source1Record + 0x10) = mergedSelect;
                 operandIndex = (**(code **)(*callResult + 0x14))(callResult);
@@ -2681,8 +2681,8 @@ code_r0x0018aab8:
               operandVReg = (int *)IRInst__getOperandSource(inst,operandIndex);
               loopIndex = (**(code **)(*operandVReg + 0x80))();
               loopIndex2 = IRInst__getOperandRecord(inst,operandIndex);
-              FUN_000f39d0(&local_60,*(undefined4 *)(loopIndex2 + 0x10));
-              laneSelectWord = local_60;
+              FUN_000f39d0(&operandReadMask,*(undefined4 *)(loopIndex2 + 0x10));
+              laneSelectWord = operandReadMask;
               loopIndex2 = IRInst__getOperandRecord(inst,operandIndex);
               loopIndex3 = *(uint *)(loopIndex2 + 0x10);
               if ((((loopIndex != 0) &&
@@ -4418,6 +4418,9 @@ int R300SchedModel__legalizeInstruction(this, inst)
   int *this;
   int *inst;
 {
+  int producerIsFlag13;
+  int producerSource2;
+  int producerIsFlag12;
   undefined4 presubSource2;
   undefined4 foldedSource;
   undefined4 inputSource;
@@ -4456,7 +4459,7 @@ int R300SchedModel__legalizeInstruction(this, inst)
   int loopIndex4;
   int *insertedMov;
   int loopIndex5;
-  int iVar8;
+  int producerSource;
   undefined4 *listAppendSlot;
   int *inst2;
   int *constRecordCursor;
@@ -4477,8 +4480,8 @@ int R300SchedModel__legalizeInstruction(this, inst)
   #define walkStackCapacity (*(uint *)(local_94_buf + 0x00))
   #define walkStackCount (*(uint *)(local_94_buf + 0x04))
   #define walkStackData (*(int *)(local_94_buf + 0x08))
-  #define local_88 (*(undefined4 *)(local_94_buf + 0x0c))
-  uint local_84 [7];
+  #define walkStackArena (*(undefined4 *)(local_94_buf + 0x0c))
+  uint markedMovVector [7];
   undefined4 clearedSelectFirst;
   undefined4 clearedSelectMiddle;
   int clearedSelectLast;
@@ -4491,14 +4494,14 @@ int R300SchedModel__legalizeInstruction(this, inst)
     insertedMov = (int *)0x0;
   }
   else {
-    local_88 = *(undefined4 *)(this[2] + 0x378);
+    walkStackArena = *(undefined4 *)(this[2] + 0x378);
     walkStackCount = 0;
     walkStackCapacity = 2;
-    walkStackData = Arena__alloc(local_88,8);
-    local_84[3] = *(undefined4 *)(this[2] + 0x378);
-    local_84[1] = 0;
-    local_84[0] = 2;
-    local_84[2] = Arena__alloc(local_84[3],8);
+    walkStackData = Arena__alloc(walkStackArena,8);
+    markedMovVector[3] = *(undefined4 *)(this[2] + 0x378);
+    markedMovVector[1] = 0;
+    markedMovVector[0] = 2;
+    markedMovVector[2] = Arena__alloc(markedMovVector[3],8);
     loopIndex2 = *(int *)(program + 0x474) + 1;
     *(int *)(program + 0x474) = loopIndex2;
     loopIndex4 = IRInst__getOperandSource(inst,1);
@@ -4602,22 +4605,22 @@ LAB_0018e5a0:
               flagBit13Result = OpcodeTraits__flagBit13(*(undefined4 *)(sourceDef[0x22] + 8),this[2]);
               if (flagBit13Result == 0) {
                 if (*(int *)(sourceDef[0x22] + 8) == 0x31) {
-                  iVar8 = IRInst__getOperandSource(sourceDef,1);
-                  iVar8 = OpcodeTraits__flagBit12(*(undefined4 *)(*(int *)(iVar8 + 0x88) + 8),this[2]);
-                  if (iVar8 == 0) {
-                    iVar8 = IRInst__getOperandSource(sourceDef,1);
-                    iVar8 = OpcodeTraits__flagBit13(*(undefined4 *)(*(int *)(iVar8 + 0x88) + 8),this[2]);
-                    if (iVar8 == 0) goto LAB_0018e6c4;
+                  producerSource = IRInst__getOperandSource(sourceDef,1);
+                  producerIsFlag12 = OpcodeTraits__flagBit12(*(undefined4 *)(*(int *)(producerSource + 0x88) + 8),this[2]);
+                  if (producerIsFlag12 == 0) {
+                    producerSource2 = IRInst__getOperandSource(sourceDef,1);
+                    producerIsFlag13 = OpcodeTraits__flagBit13(*(undefined4 *)(*(int *)(producerSource2 + 0x88) + 8),this[2]);
+                    if (producerIsFlag13 == 0) goto LAB_0018e6c4;
                   }
-                  loopIndex7 = local_84[1];
-                  if (local_84[1] < local_84[0]) {
-                    appendByteOffset = local_84[1] * 4;
-                    _memset(appendByteOffset + local_84[2],0,4);
-                    local_84[1] = loopIndex7 + 1;
-                    listAppendSlot = (undefined4 *)(appendByteOffset + local_84[2]);
+                  loopIndex7 = markedMovVector[1];
+                  if (markedMovVector[1] < markedMovVector[0]) {
+                    appendByteOffset = markedMovVector[1] * 4;
+                    _memset(appendByteOffset + markedMovVector[2],0,4);
+                    markedMovVector[1] = loopIndex7 + 1;
+                    listAppendSlot = (undefined4 *)(appendByteOffset + markedMovVector[2]);
                   }
                   else {
-                    listAppendSlot = (undefined4 *)Vector__elementRefGrow(local_84,local_84[1]);
+                    listAppendSlot = (undefined4 *)Vector__elementRefGrow(markedMovVector,markedMovVector[1]);
                   }
                   *listAppendSlot = sourceDef;
                   hasMarkedMov = true;
@@ -4673,21 +4676,21 @@ LAB_0018e6f8:
     }
     else {
       if (hasMarkedMov) {
-        while (local_84[1] != 0) {
-          loopIndex7 = local_84[1] - 1;
+        while (markedMovVector[1] != 0) {
+          loopIndex7 = markedMovVector[1] - 1;
           stackTopSlot = (int *)0x0;
-          if (loopIndex7 < local_84[1]) {
-            stackTopSlot = (int *)(loopIndex7 * 4 + local_84[2]);
+          if (loopIndex7 < markedMovVector[1]) {
+            stackTopSlot = (int *)(loopIndex7 * 4 + markedMovVector[2]);
           }
           loopIndex4 = *stackTopSlot;
-          Vector__removeAt(local_84,loopIndex7);
+          Vector__removeAt(markedMovVector,loopIndex7);
           *(uint *)(loopIndex4 + 0x14) = *(uint *)(loopIndex4 + 0x14) | 0x80000000;
         }
       }
       insertedMov = (int *)0x0;
     }
-    Arena__free(local_84[3],local_84[2]);
-    Arena__free(local_88,walkStackData);
+    Arena__free(markedMovVector[3],markedMovVector[2]);
+    Arena__free(walkStackArena,walkStackData);
   }
   result = 0;
   loopIndex4 = (**(code **)(*inst + 0x28))(inst);
@@ -4810,22 +4813,22 @@ code_r0x0018eb5c: ;
   if (loopIndex4 == 0) {
     for (; loopIndex4 = (**(code **)(*targetInst + 0x14))(targetInst), loopIndex2 <= loopIndex4; loopIndex2 = loopIndex2 + 1) {
       swizzleGroupCount = 0;
-      (**(code **)(*this + 0x68))(this,targetInst,loopIndex2,local_84,&swizzleGroupCount,this[2]);
+      (**(code **)(*this + 0x68))(this,targetInst,loopIndex2,markedMovVector,&swizzleGroupCount,this[2]);
       if (swizzleGroupCount != 0) {
         if ((*(int *)(targetInst[0x22] + 8) == 0x31) || (*(int *)(targetInst[0x22] + 8) == 0x30)) {
           *(int *)(program + 0x238) = *(int *)(program + 0x238) + 1;
           loopIndex4 = IRInst__create(0x31,this[2]);
           IRInst__copyBodyFrom(loopIndex4,targetInst);
-          loopIndex7 = local_84[0];
+          loopIndex7 = markedMovVector[0];
           loopIndex5 = IRInst__getOperandRecord(loopIndex4,1);
           *(uint *)(loopIndex5 + 0x10) = loopIndex7;
-          SelectWord__clearReadComponents(&clearedSelectFirst,local_84[0]);
+          SelectWord__clearReadComponents(&clearedSelectFirst,markedMovVector[0]);
           *(undefined4 *)(loopIndex4 + 0x9c) = clearedSelectFirst;
           Block__insertInstBefore(block,targetInst,loopIndex4);
           loopIndex5 = swizzleGroupCount + -1;
           if (1 < loopIndex5) {
             loopIndex3 = 1;
-            loopPtr6 = local_84;
+            loopPtr6 = markedMovVector;
             do {
               loopPtr6 = loopPtr6 + 1;
               loopIndex5 = IRInst__create(0x31,this[2]);
@@ -4845,10 +4848,10 @@ code_r0x0018eb5c: ;
               loopIndex5 = swizzleGroupCount + -1;
             } while (loopIndex3 < loopIndex5);
           }
-          loopIndex7 = local_84[loopIndex5];
+          loopIndex7 = markedMovVector[loopIndex5];
           loopIndex5 = IRInst__getOperandRecord(targetInst,1);
           *(uint *)(loopIndex5 + 0x10) = loopIndex7;
-          SelectWord__clearReadComponents(&clearedSelectLast,(&local_88)[swizzleGroupCount]);
+          SelectWord__clearReadComponents(&clearedSelectLast,(&walkStackArena)[swizzleGroupCount]);
           targetInst[0x27] = clearedSelectLast;
           if ((targetInst[5] & 2U) == 0) {
             IRInst__setExtraOperandSource(targetInst,loopIndex4,0,this[2]);
@@ -4859,7 +4862,7 @@ code_r0x0018eb5c: ;
           loopIndex4 = 0;
           if (0 < swizzleGroupCount) {
             loopIndex3 = 0;
-            loopPtr6 = local_84;
+            loopPtr6 = markedMovVector;
             loopIndex5 = loopIndex4;
             do {
               *(int *)(program + 0x238) = *(int *)(program + 0x238) + 1;
@@ -4881,7 +4884,7 @@ code_r0x0018eb5c: ;
                   loopIndex7 = 0;
                   loopIndex5 = loopIndex4;
                   do {
-                    if (loopIndex7 == *(byte *)(loopIndex7 + (int)local_84)) {
+                    if (loopIndex7 == *(byte *)(loopIndex7 + (int)markedMovVector)) {
                       *(undefined1 *)(loopIndex5 + 0x9c) = 1;
                       laneSelected = true;
                     }
@@ -4988,7 +4991,7 @@ code_r0x0018eb5c: ;
 #undef walkStackCapacity
 #undef walkStackCount
 #undef walkStackData
-#undef local_88
+#undef walkStackArena
 
 /* R520SchedModel__vslot4_addInstruction @ 0x18f42c (304 bytes) */
 int R520SchedModel__vslot4_addInstruction(schedModel, inst)
