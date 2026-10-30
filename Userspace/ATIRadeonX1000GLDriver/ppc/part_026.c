@@ -1716,30 +1716,30 @@ LAB_000f76c8:
 }
 
 /* IRInst__makeLiteralVec4Int @ 0xf771c (340 bytes) */
-int IRInst__makeLiteralVec4Int(param_1, program, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
+int IRInst__makeLiteralVec4Int(inst, program, operandIndex, value0, value1, value2, value3)
+  undefined4 inst;
   undefined4 program;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+  undefined4 operandIndex;
+  undefined4 value0;
+  undefined4 value1;
+  undefined4 value2;
+  undefined4 value3;
 {
-  undefined4 local_b0;
-  undefined4 local_ac;
-  undefined4 local_a8;
-  undefined4 local_a4;
-  undefined4 local_98;
-  undefined4 local_94;
-  undefined4 local_90;
-  undefined4 local_8c;
-  undefined4 local_80;
-  undefined4 local_7c;
-  undefined4 local_78;
-  undefined4 local_74;
+  undefined4 operand0Word2;
+  undefined4 operand0Word3;
+  undefined4 operand0Word4;
+  undefined4 operand0Word5;
+  undefined4 operand1Word2;
+  undefined4 operand1Word3;
+  undefined4 operand1Word4;
+  undefined4 operand1Word5;
+  undefined4 operand2Word2;
+  undefined4 operand2Word3;
+  undefined4 operand2Word4;
+  undefined4 operand2Word5;
   
-  return ((int (*)())IRInst__setConstantOperand)(param_1,program,param_3,1,param_4,local_b0,local_ac,local_a8,local_a4,1,param_5,
-               local_98,local_94,local_90,local_8c,1,param_6,local_80,local_7c,local_78,local_74,1,param_7);
+  return ((int (*)())IRInst__setConstantOperand)(inst,program,operandIndex,1,value0,operand0Word2,operand0Word3,operand0Word4,operand0Word5,1,value1,
+               operand1Word2,operand1Word3,operand1Word4,operand1Word5,1,value2,operand2Word2,operand2Word3,operand2Word4,operand2Word5,1,value3);
 }
 
 /* IRInst__setIntConstantOperand4 @ 0xf7870 (340 bytes) */
@@ -1752,21 +1752,21 @@ int IRInst__setIntConstantOperand4(inst, program, operandIndex, value0, value1, 
   undefined4 value2;
   undefined4 value3;
 {
-  undefined4 local_b0;
-  undefined4 local_ac;
-  undefined4 local_a8;
-  undefined4 local_a4;
-  undefined4 local_98;
-  undefined4 local_94;
-  undefined4 local_90;
-  undefined4 local_8c;
-  undefined4 local_80;
-  undefined4 local_7c;
-  undefined4 local_78;
-  undefined4 local_74;
+  undefined4 operand0Word2;
+  undefined4 operand0Word3;
+  undefined4 operand0Word4;
+  undefined4 operand0Word5;
+  undefined4 operand1Word2;
+  undefined4 operand1Word3;
+  undefined4 operand1Word4;
+  undefined4 operand1Word5;
+  undefined4 operand2Word2;
+  undefined4 operand2Word3;
+  undefined4 operand2Word4;
+  undefined4 operand2Word5;
   
-  return ((int (*)())IRInst__setConstantOperand)(inst,program,operandIndex,3,value0,local_b0,local_ac,local_a8,local_a4,3,value1,
-               local_98,local_94,local_90,local_8c,3,value2,local_80,local_7c,local_78,local_74,3,value3);
+  return ((int (*)())IRInst__setConstantOperand)(inst,program,operandIndex,3,value0,operand0Word2,operand0Word3,operand0Word4,operand0Word5,3,value1,
+               operand1Word2,operand1Word3,operand1Word4,operand1Word5,3,value2,operand2Word2,operand2Word3,operand2Word4,operand2Word5,3,value3);
 }
 
 /* the raw 32-bit pattern of a float, as the stock passes it in a general register / stack word (`stfs f1,0xec(r1); lwz r7,0xec(r1)`) */
@@ -1774,24 +1774,24 @@ int IRInst__setIntConstantOperand4(inst, program, operandIndex, value0, value1, 
 #define FBITS(x) ({ float fbits_ = (float)(x); *(unsigned int *)&fbits_; })
 #endif
 /* IRInst__makeLiteralVec4Float @ 0xf79c4 (332 bytes) */
-void IRInst__makeLiteralVec4Float(undefined4 param_1,undefined4 param_2,undefined4 param_3,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4)
+void IRInst__makeLiteralVec4Float(undefined4 inst,undefined4 program,undefined4 operandIndex,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4)
 {
-  undefined4 local_a0;
-  undefined4 local_9c;
-  undefined4 local_98;
-  undefined4 local_94;
-  undefined4 local_88;
-  undefined4 local_84;
-  undefined4 local_80;
-  undefined4 local_7c;
-  undefined4 local_70;
-  undefined4 local_6c;
-  undefined4 local_68;
-  undefined4 local_64;
+  undefined4 operand0Word2;
+  undefined4 operand0Word3;
+  undefined4 operand0Word4;
+  undefined4 operand0Word5;
+  undefined4 operand1Word2;
+  undefined4 operand1Word3;
+  undefined4 operand1Word4;
+  undefined4 operand1Word5;
+  undefined4 operand2Word2;
+  undefined4 operand2Word3;
+  undefined4 operand2Word4;
+  undefined4 operand2Word5;
   
-  ((int (*)())IRInst__setConstantOperand)(param_1,param_2,param_3,2,FBITS(staleFprArg1),local_a0,local_9c,local_98,local_94,2,
-               FBITS(staleFprArg2),local_88,local_84,local_80,local_7c,2,FBITS(staleFprArg3),local_70,
-               local_6c,local_68,local_64,2,FBITS(staleFprArg4));
+  ((int (*)())IRInst__setConstantOperand)(inst,program,operandIndex,2,FBITS(staleFprArg1),operand0Word2,operand0Word3,operand0Word4,operand0Word5,2,
+               FBITS(staleFprArg2),operand1Word2,operand1Word3,operand1Word4,operand1Word5,2,FBITS(staleFprArg3),operand2Word2,
+               operand2Word3,operand2Word4,operand2Word5,2,FBITS(staleFprArg4));
   return;
 }
 

@@ -4217,58 +4217,58 @@ int pass_assign_slots(program)
 }
 
 /* SelectWord__compose @ 0xf2bdc (128 bytes) */
-int SelectWord__compose(param_1, param_2, param_3)
-  uint *param_1;
-  undefined4 param_2;
-  uint param_3;
+int SelectWord__compose(outSelect, innerSelect, outerSelect)
+  uint *outSelect;
+  undefined4 innerSelect;
+  uint outerSelect;
 {
-  unsigned int ghidra_home[8] = { param_1, param_2, param_3, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[8] = { outSelect, innerSelect, outerSelect, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   
-  (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = param_2;
-  (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = param_3;
-  (*(byte *)((unsigned char *)ghidra_home + 10)) = (byte)(param_3 >> 8);
-  (*(byte *)((unsigned char *)ghidra_home + 9)) = (byte)(param_3 >> 0x10);
-  (*(byte *)((unsigned char *)ghidra_home + 8)) = (byte)(param_3 >> 0x18);
-  *param_1 = (uint)(*(byte *)((unsigned char *)ghidra_home + 8)) << 0x18 | (uint)(*(byte *)((unsigned char *)ghidra_home + 9)) << 0x10 | (uint)(*(byte *)((unsigned char *)ghidra_home + 10)) << 8
-             | param_3 & 0xff;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = innerSelect;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = outerSelect;
+  (*(byte *)((unsigned char *)ghidra_home + 10)) = (byte)(outerSelect >> 8);
+  (*(byte *)((unsigned char *)ghidra_home + 9)) = (byte)(outerSelect >> 0x10);
+  (*(byte *)((unsigned char *)ghidra_home + 8)) = (byte)(outerSelect >> 0x18);
+  *outSelect = (uint)(*(byte *)((unsigned char *)ghidra_home + 8)) << 0x18 | (uint)(*(byte *)((unsigned char *)ghidra_home + 9)) << 0x10 | (uint)(*(byte *)((unsigned char *)ghidra_home + 10)) << 8
+             | outerSelect & 0xff;
   if ((*(byte *)((unsigned char *)ghidra_home + 8)) < 4) {
-    *(undefined1 *)param_1 = *(undefined1 *)((int)&(*(unsigned int *)((unsigned char *)ghidra_home + 4)) + (uint)(*(byte *)((unsigned char *)ghidra_home + 8)));
+    *(undefined1 *)outSelect = *(undefined1 *)((int)&(*(unsigned int *)((unsigned char *)ghidra_home + 4)) + (uint)(*(byte *)((unsigned char *)ghidra_home + 8)));
   }
   if ((*(byte *)((unsigned char *)ghidra_home + 9)) < 4) {
-    *(undefined1 *)((int)param_1 + 1) =
+    *(undefined1 *)((int)outSelect + 1) =
          *(undefined1 *)((int)&(*(unsigned int *)((unsigned char *)ghidra_home + 4)) + (uint)(*(byte *)((unsigned char *)ghidra_home + 9)));
   }
   if ((*(byte *)((unsigned char *)ghidra_home + 10)) < 4) {
-    *(undefined1 *)((int)param_1 + 2) =
+    *(undefined1 *)((int)outSelect + 2) =
          *(undefined1 *)((int)&(*(unsigned int *)((unsigned char *)ghidra_home + 4)) + (uint)(*(byte *)((unsigned char *)ghidra_home + 10)));
   }
-  if (3 < (param_3 & 0xff)) {
+  if (3 < (outerSelect & 0xff)) {
     return;
   }
-  *(undefined1 *)((int)param_1 + 3) = *(undefined1 *)((int)&(*(unsigned int *)((unsigned char *)ghidra_home + 4)) + (param_3 & 0xff));
+  *(undefined1 *)((int)outSelect + 3) = *(undefined1 *)((int)&(*(unsigned int *)((unsigned char *)ghidra_home + 4)) + (outerSelect & 0xff));
   return;
 }
 
 /* SelectWord__isSplat @ 0xf2c5c (80 bytes) */
-int SelectWord__isSplat(param_1)
-  undefined4 param_1;
+int SelectWord__isSplat(selectWord)
+  undefined4 selectWord;
 {
-  unsigned int ghidra_home[8] = { param_1, 0, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
-  char cVar1;
-  char *pcVar2;
-  char cVar3;
-  char cVar4;
+  unsigned int ghidra_home[8] = { selectWord, 0, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  char laneByte;
+  char *laneCursor;
+  char splatLane;
+  char nextSplatLane;
   int loopCounter;
   
-  (*(unsigned int *)((unsigned char *)ghidra_home + 0)) = param_1;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 0)) = selectWord;
   loopCounter = 4;
-  pcVar2 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 0));
-  cVar3 = '\x04';
-  while (((cVar1 = *pcVar2, cVar4 = cVar3, cVar1 == '\x04' || (cVar4 = cVar1, cVar3 == '\x04')) ||
-         (cVar4 = cVar3, cVar1 == cVar3))) {
-    pcVar2 = pcVar2 + 1;
+  laneCursor = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 0));
+  splatLane = '\x04';
+  while (((laneByte = *laneCursor, nextSplatLane = splatLane, laneByte == '\x04' || (nextSplatLane = laneByte, splatLane == '\x04')) ||
+         (nextSplatLane = splatLane, laneByte == splatLane))) {
+    laneCursor = laneCursor + 1;
     loopCounter = loopCounter + -1;
-    cVar3 = cVar4;
+    splatLane = nextSplatLane;
     if (loopCounter == 0) {
       return 1;
     }

@@ -1,19 +1,19 @@
 #include "decls.h"
 
 /* SelectWord__areCompatible @ 0xf2d18 (144 bytes) */
-int SelectWord__areCompatible(param_1, param_2)
-  uint param_1;
-  uint param_2;
+int SelectWord__areCompatible(selectA, selectB)
+  uint selectA;
+  uint selectB;
 {
-  uint uVar1;
-  uint uVar2;
+  uint laneB;
+  uint laneA;
   
-  if (((((param_1 >> 0x18 == 4) || (param_2 >> 0x18 == 4)) || (param_1 >> 0x18 == param_2 >> 0x18))
-      && ((((uVar2 = param_1 >> 0x10 & 0xff, uVar2 == 4 ||
-            (uVar1 = param_2 >> 0x10 & 0xff, uVar1 == 4)) || (uVar2 == uVar1)) &&
-          (((uVar2 = param_1 >> 8 & 0xff, uVar2 == 4 || (uVar1 = param_2 >> 8 & 0xff, uVar1 == 4))
-           || (uVar2 == uVar1)))))) &&
-     ((((param_1 & 0xff) == 4 || ((param_2 & 0xff) == 4)) || ((param_1 & 0xff) == (param_2 & 0xff)))
+  if (((((selectA >> 0x18 == 4) || (selectB >> 0x18 == 4)) || (selectA >> 0x18 == selectB >> 0x18))
+      && ((((laneA = selectA >> 0x10 & 0xff, laneA == 4 ||
+            (laneB = selectB >> 0x10 & 0xff, laneB == 4)) || (laneA == laneB)) &&
+          (((laneA = selectA >> 8 & 0xff, laneA == 4 || (laneB = selectB >> 8 & 0xff, laneB == 4))
+           || (laneA == laneB)))))) &&
+     ((((selectA & 0xff) == 4 || ((selectB & 0xff) == 4)) || ((selectA & 0xff) == (selectB & 0xff)))
      )) {
     return 1;
   }
@@ -71,46 +71,46 @@ int laneBytes__mapTwoThreeToOne(param_1, param_2)
 }
 
 /* laneBytes__mergeOneAndTwo @ 0xf2e98 (144 bytes) */
-int laneBytes__mergeOneAndTwo(param_1, param_2)
-  undefined4 *param_1;
-  undefined4 param_2;
+int laneBytes__mergeOneAndTwo(outBytes, laneBytes)
+  undefined4 *outBytes;
+  undefined4 laneBytes;
 {
   int loopCounter;
-  unsigned int ghidra_home[8] = { param_1, param_2, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
-  bool bVar1;
-  bool bVar2;
-  char *pcVar3;
-  char *pcVar4;
-  int iVar5;
+  unsigned int ghidra_home[8] = { outBytes, laneBytes, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  bool hasOne;
+  bool hasTwo;
+  char *laneStart;
+  char *laneCursor;
+  int laneSpan;
   
-  pcVar3 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 4));
+  laneStart = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 4));
   loopCounter = 4;
-  (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = param_2;
-  bVar1 = false;
-  bVar2 = false;
-  pcVar4 = pcVar3;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = laneBytes;
+  hasOne = false;
+  hasTwo = false;
+  laneCursor = laneStart;
   do {
-    if (*pcVar4 == '\x02') {
-      bVar2 = true;
+    if (*laneCursor == '\x02') {
+      hasTwo = true;
     }
-    else if (*pcVar4 == '\x01') {
-      bVar1 = true;
+    else if (*laneCursor == '\x01') {
+      hasOne = true;
     }
-    pcVar4 = pcVar4 + 1;
+    laneCursor = laneCursor + 1;
     loopCounter = loopCounter + -1;
   } while (loopCounter != 0);
-  if ((bVar1) && (bVar2)) {
-    iVar5 = (int)pcVar4 - (int)pcVar3;
+  if ((hasOne) && (hasTwo)) {
+    laneSpan = (int)laneCursor - (int)laneStart;
     do {
-      if (*pcVar3 == '\x01') {
-        *pcVar3 = '\x03';
+      if (*laneStart == '\x01') {
+        *laneStart = '\x03';
       }
-      pcVar3 = pcVar3 + 1;
-      iVar5 = iVar5 + -1;
-    } while (iVar5 != 0);
+      laneStart = laneStart + 1;
+      laneSpan = laneSpan + -1;
+    } while (laneSpan != 0);
   }
-  *param_1 = (*(unsigned int *)((unsigned char *)ghidra_home + 4));
-  return param_1;
+  *outBytes = (*(unsigned int *)((unsigned char *)ghidra_home + 4));
+  return outBytes;
 }
 
 /* SelectWord__markLanesWhereSecondIsOne @ 0xf2f28 (92 bytes) */
@@ -142,31 +142,31 @@ int SelectWord__markLanesWhereSecondIsOne(result, selectWordA, selectWordB)
 }
 
 /* SelectWord__mergeWrittenLanes @ 0xf2f84 (92 bytes) */
-int SelectWord__mergeWrittenLanes(param_1, param_2, param_3)
-  undefined4 *param_1;
-  undefined4 param_2;
-  undefined4 param_3;
+int SelectWord__mergeWrittenLanes(outWord, stateBytes, writtenBytes)
+  undefined4 *outWord;
+  undefined4 stateBytes;
+  undefined4 writtenBytes;
 {
-  unsigned int ghidra_home[8] = { param_1, param_2, param_3, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
-  char *pcVar1;
-  char *pcVar2;
+  unsigned int ghidra_home[8] = { outWord, stateBytes, writtenBytes, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  char *stateCursor;
+  char *writtenCursor;
   int loopCounter;
   
-  (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = param_2;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = stateBytes;
   loopCounter = 4;
-  (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = param_3;
-  pcVar1 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 4));
-  pcVar2 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 8));
+  (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = writtenBytes;
+  stateCursor = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 4));
+  writtenCursor = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 8));
   do {
-    if ((1 < (byte)(*pcVar1 - 2U)) && (*pcVar2 == '\0')) {
-      *pcVar1 = '\0';
+    if ((1 < (byte)(*stateCursor - 2U)) && (*writtenCursor == '\0')) {
+      *stateCursor = '\0';
     }
-    pcVar1 = pcVar1 + 1;
-    pcVar2 = pcVar2 + 1;
+    stateCursor = stateCursor + 1;
+    writtenCursor = writtenCursor + 1;
     loopCounter = loopCounter + -1;
   } while (loopCounter != 0);
-  *param_1 = (*(unsigned int *)((unsigned char *)ghidra_home + 4));
-  return param_1;
+  *outWord = (*(unsigned int *)((unsigned char *)ghidra_home + 4));
+  return outWord;
 }
 
 /* SelectWord__fillUnusedLanes @ 0xf2fe0 (76 bytes) */
@@ -228,27 +228,27 @@ int SelectWord__markEqualLanes(result, selectWordA, selectWordB)
 }
 
 /* laneBytes__commonSelect @ 0xf308c (72 bytes) */
-int laneBytes__commonSelect(param_1)
-  undefined4 param_1;
+int laneBytes__commonSelect(selectWord)
+  undefined4 selectWord;
 {
-  unsigned int ghidra_home[8] = { param_1, 0, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
-  uint uVar1;
-  byte *pbVar2;
-  uint uVar3;
-  uint uVar4;
+  unsigned int ghidra_home[8] = { selectWord, 0, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  uint laneByte;
+  byte *laneCursor;
+  uint commonLane;
+  uint nextCommonLane;
   int loopCounter;
   
-  (*(unsigned int *)((unsigned char *)ghidra_home + 0)) = param_1;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 0)) = selectWord;
   loopCounter = 4;
-  pbVar2 = (byte *)&(*(unsigned int *)((unsigned char *)ghidra_home + 0));
-  uVar3 = 0xffffffff;
-  while (((uVar1 = (uint)*pbVar2, uVar4 = uVar3, uVar1 == 4 || (uVar4 = uVar1, (int)uVar3 < 0)) ||
-         (uVar1 == uVar3))) {
-    pbVar2 = pbVar2 + 1;
+  laneCursor = (byte *)&(*(unsigned int *)((unsigned char *)ghidra_home + 0));
+  commonLane = 0xffffffff;
+  while (((laneByte = (uint)*laneCursor, nextCommonLane = commonLane, laneByte == 4 || (nextCommonLane = laneByte, (int)commonLane < 0)) ||
+         (laneByte == commonLane))) {
+    laneCursor = laneCursor + 1;
     loopCounter = loopCounter + -1;
-    uVar3 = uVar4;
+    commonLane = nextCommonLane;
     if (loopCounter == 0) {
-      return uVar4;
+      return nextCommonLane;
     }
   }
   return 0xffffffff;
@@ -347,33 +347,33 @@ int IRInst__isSourceSelectIdentity(param_1, param_2)
 }
 
 /* SelectWord__selectWhereMasked @ 0xf31f8 (96 bytes) */
-int SelectWord__selectWhereMasked(param_1, param_2, param_3)
-  undefined1 *param_1;
-  undefined4 param_2;
-  uint param_3;
+int SelectWord__selectWhereMasked(outSelect, baseSelect, laneMask)
+  undefined1 *outSelect;
+  undefined4 baseSelect;
+  uint laneMask;
 {
-  undefined1 uVar1;
+  undefined1 laneValue;
   
-  uVar1 = 1;
-  if (param_3 >> 0x18 != 0) {
-    uVar1 = (undefined1)((uint)param_2 >> 0x18);
+  laneValue = 1;
+  if (laneMask >> 0x18 != 0) {
+    laneValue = (undefined1)((uint)baseSelect >> 0x18);
   }
-  *param_1 = uVar1;
-  uVar1 = 1;
-  if ((param_3 >> 0x10 & 0xff) != 0) {
-    uVar1 = (undefined1)((uint)param_2 >> 0x10);
+  *outSelect = laneValue;
+  laneValue = 1;
+  if ((laneMask >> 0x10 & 0xff) != 0) {
+    laneValue = (undefined1)((uint)baseSelect >> 0x10);
   }
-  param_1[1] = uVar1;
-  uVar1 = 1;
-  if ((param_3 >> 8 & 0xff) != 0) {
-    uVar1 = (undefined1)((uint)param_2 >> 8);
+  outSelect[1] = laneValue;
+  laneValue = 1;
+  if ((laneMask >> 8 & 0xff) != 0) {
+    laneValue = (undefined1)((uint)baseSelect >> 8);
   }
-  param_1[2] = uVar1;
-  uVar1 = 1;
-  if ((param_3 & 0xff) != 0) {
-    uVar1 = (undefined1)param_2;
+  outSelect[2] = laneValue;
+  laneValue = 1;
+  if ((laneMask & 0xff) != 0) {
+    laneValue = (undefined1)baseSelect;
   }
-  param_1[3] = uVar1;
+  outSelect[3] = laneValue;
   return;
 }
 
@@ -426,24 +426,24 @@ int FUN_000f32cc(param_1, param_2)
 }
 
 /* SelectWord__maskUnused @ 0xf3340 (88 bytes) */
-int SelectWord__maskUnused(param_1, param_2, param_3)
-  uint *param_1;
-  uint param_2;
-  uint param_3;
+int SelectWord__maskUnused(outSelect, baseSelect, maskWord)
+  uint *outSelect;
+  uint baseSelect;
+  uint maskWord;
 {
-  if (param_3 >> 0x18 == 0) {
-    param_2 = param_2 & 0xffffff | 0x4000000;
+  if (maskWord >> 0x18 == 0) {
+    baseSelect = baseSelect & 0xffffff | 0x4000000;
   }
-  if ((param_3 >> 0x10 & 0xff) == 0) {
-    param_2 = param_2 & 0xff00ffff | 0x40000;
+  if ((maskWord >> 0x10 & 0xff) == 0) {
+    baseSelect = baseSelect & 0xff00ffff | 0x40000;
   }
-  if ((param_3 >> 8 & 0xff) == 0) {
-    param_2 = param_2 & 0xffff00ff | 0x400;
+  if ((maskWord >> 8 & 0xff) == 0) {
+    baseSelect = baseSelect & 0xffff00ff | 0x400;
   }
-  if ((param_3 & 0xff) == 0) {
-    param_2 = param_2 & 0xffffff00 | 4;
+  if ((maskWord & 0xff) == 0) {
+    baseSelect = baseSelect & 0xffffff00 | 4;
   }
-  *param_1 = param_2;
+  *outSelect = baseSelect;
   return;
 }
 
@@ -761,46 +761,46 @@ int IRInst__destIsSingleComponent(param_1)
 }
 
 /* laneMask__fromSelectBytes @ 0xf388c (124 bytes) */
-int laneMask__fromSelectBytes(param_1, param_2, param_3)
-  undefined4 *param_1;
-  uint param_2;
-  int param_3;
+int laneMask__fromSelectBytes(outLaneMask, selectWord, laneCount)
+  undefined4 *outLaneMask;
+  uint selectWord;
+  int laneCount;
 {
-  uint uVar1;
+  uint laneComponent;
   
-  *param_1 = 0;
-  if ((0 < param_3) && (param_2 >> 0x18 < 4)) {
-    *(undefined1 *)((int)param_1 + (param_2 >> 0x18)) = 1;
+  *outLaneMask = 0;
+  if ((0 < laneCount) && (selectWord >> 0x18 < 4)) {
+    *(undefined1 *)((int)outLaneMask + (selectWord >> 0x18)) = 1;
   }
-  if ((1 < param_3) && (uVar1 = param_2 >> 0x10 & 0xff, uVar1 < 4)) {
-    *(undefined1 *)((int)param_1 + uVar1) = 1;
+  if ((1 < laneCount) && (laneComponent = selectWord >> 0x10 & 0xff, laneComponent < 4)) {
+    *(undefined1 *)((int)outLaneMask + laneComponent) = 1;
   }
-  if ((2 < param_3) && (uVar1 = param_2 >> 8 & 0xff, uVar1 < 4)) {
-    *(undefined1 *)((int)param_1 + uVar1) = 1;
+  if ((2 < laneCount) && (laneComponent = selectWord >> 8 & 0xff, laneComponent < 4)) {
+    *(undefined1 *)((int)outLaneMask + laneComponent) = 1;
   }
-  if (param_3 < 4) {
+  if (laneCount < 4) {
     return;
   }
-  if (3 < (param_2 & 0xff)) {
+  if (3 < (selectWord & 0xff)) {
     return;
   }
-  *(undefined1 *)((int)param_1 + (param_2 & 0xff)) = 1;
+  *(undefined1 *)((int)outLaneMask + (selectWord & 0xff)) = 1;
   return;
 }
 
 /* WriteMask__fromSelectWord @ 0xf3908 (96 bytes) */
-int WriteMask__fromSelectWord(param_1, param_2)
-  byte *param_1;
-  uint param_2;
+int WriteMask__fromSelectWord(outMask, selectWord)
+  byte *outMask;
+  uint selectWord;
 {
-  param_1[0] = 0;
-  param_1[1] = 0;
-  param_1[2] = 0;
-  param_1[3] = 0;
-  param_1[3] = (byte)(-(uint)((param_2 ^ 1) & 0xff) >> 0x1f);
-  *param_1 = (byte)(-(uint)(param_2 >> 0x18 ^ 1) >> 0x1f);
-  param_1[1] = (byte)(-(uint)(param_2 >> 0x10 & 0xff ^ 1) >> 0x1f);
-  param_1[2] = (byte)(-(uint)(param_2 >> 8 & 0xff ^ 1) >> 0x1f);
+  outMask[0] = 0;
+  outMask[1] = 0;
+  outMask[2] = 0;
+  outMask[3] = 0;
+  outMask[3] = (byte)(-(uint)((selectWord ^ 1) & 0xff) >> 0x1f);
+  *outMask = (byte)(-(uint)(selectWord >> 0x18 ^ 1) >> 0x1f);
+  outMask[1] = (byte)(-(uint)(selectWord >> 0x10 & 0xff ^ 1) >> 0x1f);
+  outMask[2] = (byte)(-(uint)(selectWord >> 8 & 0xff ^ 1) >> 0x1f);
   return;
 }
 

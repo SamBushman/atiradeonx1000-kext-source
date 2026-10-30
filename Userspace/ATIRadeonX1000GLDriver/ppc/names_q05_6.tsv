@@ -522,3 +522,90 @@ local	Block__verify	piVar2	nextInstLookahead	INFERRED	next-next link of the inst
 local	Block__verify	piVar3	nextInst	INFERRED	next instruction after currentInst
 local	Block__verify	piVar8	currentInst	INFERRED	instruction in the block list (this+0x98) being verified
 local	Block__verify	bVar1	isFirstFlagged	INFERRED	loopCounter == 0 before increment: first flagged instruction (vtable +0x34 called once)
+local	SelectWord__selectWhereMasked	param_1	outSelect	INFERRED	receives four select bytes
+local	SelectWord__selectWhereMasked	param_2	baseSelect	INFERRED	select word whose lane byte is kept where the mask lane is nonzero
+local	SelectWord__selectWhereMasked	param_3	laneMask	INFERRED	per-lane mask word (0 = lane not selected, result byte 1)
+local	SelectWord__selectWhereMasked	uVar1	laneValue	INFERRED	result byte for the lane
+local	SelectWord__maskUnused	param_1	outSelect	INFERRED	receives the masked select word
+local	SelectWord__maskUnused	param_2	baseSelect	INFERRED	select word to mask
+local	SelectWord__maskUnused	param_3	maskWord	INFERRED	per-lane mask: a zero byte marks the lane unused (byte 4)
+local	SelectWord__compose	param_1	outSelect	INFERRED	composed select word
+local	SelectWord__compose	param_2	innerSelect	INFERRED	select word indexed by the outer select bytes
+local	SelectWord__compose	param_3	outerSelect	INFERRED	select word whose lane bytes (<4) pick lanes of innerSelect
+local	SelectWord__areCompatible	param_1	selectA	INFERRED	first select word
+local	SelectWord__areCompatible	param_2	selectB	INFERRED	second select word
+local	SelectWord__areCompatible	uVar1	laneB	INFERRED	lane byte of selectB
+local	SelectWord__areCompatible	uVar2	laneA	INFERRED	lane byte of selectA
+local	SelectWord__isSplat	param_1	selectWord	INFERRED	select word tested: all used lanes (byte != 4) select the same component
+local	SelectWord__isSplat	cVar1	laneByte	INFERRED	current lane byte
+local	SelectWord__isSplat	pcVar2	laneCursor	INFERRED	cursor over the four lane bytes
+local	SelectWord__isSplat	cVar3	splatLane	INFERRED	component selected by the lanes seen so far (4 = none yet)
+local	SelectWord__isSplat	cVar4	nextSplatLane	INFERRED	splat component after this lane
+local	SelectWord__mergeWrittenLanes	param_1	outWord	INFERRED	receives the merged lane state bytes
+local	SelectWord__mergeWrittenLanes	param_2	stateBytes	INFERRED	per-lane state bytes (2 and 3 are kept)
+local	SelectWord__mergeWrittenLanes	param_3	writtenBytes	INFERRED	per-lane written flags: a zero byte clears the state byte
+local	SelectWord__mergeWrittenLanes	pcVar1	stateCursor	INFERRED	cursor over the state bytes
+local	SelectWord__mergeWrittenLanes	pcVar2	writtenCursor	INFERRED	cursor over the written flags
+local	laneBytes__commonSelect	param_1	selectWord	INFERRED	select word; result is the single used component or -1
+local	laneBytes__commonSelect	uVar1	laneByte	INFERRED	current lane byte
+local	laneBytes__commonSelect	pbVar2	laneCursor	INFERRED	cursor over the four lane bytes
+local	laneBytes__commonSelect	uVar3	commonLane	INFERRED	component common to the lanes seen so far (-1 = none yet)
+local	laneBytes__commonSelect	uVar4	nextCommonLane	INFERRED	common component after this lane
+local	laneBytes__mergeOneAndTwo	param_1	outBytes	INFERRED	receives the four lane bytes
+local	laneBytes__mergeOneAndTwo	param_2	laneBytes	INFERRED	lane bytes; when values 1 and 2 are both present every 1 becomes 3
+local	laneBytes__mergeOneAndTwo	bVar1	hasOne	INFERRED	a lane byte equals 1
+local	laneBytes__mergeOneAndTwo	bVar2	hasTwo	INFERRED	a lane byte equals 2
+local	laneBytes__mergeOneAndTwo	pcVar3	laneStart	INFERRED	first lane byte
+local	laneBytes__mergeOneAndTwo	pcVar4	laneCursor	INFERRED	cursor over the lane bytes
+local	laneBytes__mergeOneAndTwo	iVar5	laneSpan	INFERRED	number of lane bytes to rewrite
+local	WriteMask__fromSelectWord	param_1	outMask	INFERRED	four bytes, 1 where the lane select byte is not 1
+local	WriteMask__fromSelectWord	param_2	selectWord	INFERRED	select word (one byte per lane)
+local	laneMask__fromSelectBytes	param_1	outLaneMask	INFERRED	four bytes: 1 for each component read by the first laneCount lanes
+local	laneMask__fromSelectBytes	param_2	selectWord	INFERRED	select word (one byte per lane, values >= 4 ignored)
+local	laneMask__fromSelectBytes	param_3	laneCount	INFERRED	number of lanes of selectWord to consider (1-4)
+local	laneMask__fromSelectBytes	uVar1	laneComponent	INFERRED	component selected by the lane
+local	IRInst__makeLiteralVec4Int	param_1	inst	INFERRED	instruction whose operand is set
+local	IRInst__makeLiteralVec4Int	param_3	operandIndex	INFERRED	operand index
+local	IRInst__makeLiteralVec4Int	param_4	value0	INFERRED	integer literal 0 of the vec4 constant
+local	IRInst__makeLiteralVec4Int	param_5	value1	INFERRED	integer literal 1 of the vec4 constant
+local	IRInst__makeLiteralVec4Int	param_6	value2	INFERRED	integer literal 2 of the vec4 constant
+local	IRInst__makeLiteralVec4Int	param_7	value3	INFERRED	integer literal 3 of the vec4 constant
+local	IRInst__makeLiteralVec4Int	local_b0	operand0Word2	INFERRED	uninitialised frame word passed as word 2 of constant operand 0 (the callee does not use it for this kind)
+local	IRInst__makeLiteralVec4Int	local_ac	operand0Word3	INFERRED	uninitialised frame word passed as word 3 of constant operand 0 (the callee does not use it for this kind)
+local	IRInst__makeLiteralVec4Int	local_a8	operand0Word4	INFERRED	uninitialised frame word passed as word 4 of constant operand 0 (the callee does not use it for this kind)
+local	IRInst__makeLiteralVec4Int	local_a4	operand0Word5	INFERRED	uninitialised frame word passed as word 5 of constant operand 0 (the callee does not use it for this kind)
+local	IRInst__makeLiteralVec4Int	local_98	operand1Word2	INFERRED	uninitialised frame word passed as word 2 of constant operand 1 (the callee does not use it for this kind)
+local	IRInst__makeLiteralVec4Int	local_94	operand1Word3	INFERRED	uninitialised frame word passed as word 3 of constant operand 1 (the callee does not use it for this kind)
+local	IRInst__makeLiteralVec4Int	local_90	operand1Word4	INFERRED	uninitialised frame word passed as word 4 of constant operand 1 (the callee does not use it for this kind)
+local	IRInst__makeLiteralVec4Int	local_8c	operand1Word5	INFERRED	uninitialised frame word passed as word 5 of constant operand 1 (the callee does not use it for this kind)
+local	IRInst__makeLiteralVec4Int	local_80	operand2Word2	INFERRED	uninitialised frame word passed as word 2 of constant operand 2 (the callee does not use it for this kind)
+local	IRInst__makeLiteralVec4Int	local_7c	operand2Word3	INFERRED	uninitialised frame word passed as word 3 of constant operand 2 (the callee does not use it for this kind)
+local	IRInst__makeLiteralVec4Int	local_78	operand2Word4	INFERRED	uninitialised frame word passed as word 4 of constant operand 2 (the callee does not use it for this kind)
+local	IRInst__makeLiteralVec4Int	local_74	operand2Word5	INFERRED	uninitialised frame word passed as word 5 of constant operand 2 (the callee does not use it for this kind)
+local	IRInst__setIntConstantOperand4	local_b0	operand0Word2	INFERRED	uninitialised frame word passed as word 2 of constant operand 0 (the callee does not use it for this kind)
+local	IRInst__setIntConstantOperand4	local_ac	operand0Word3	INFERRED	uninitialised frame word passed as word 3 of constant operand 0 (the callee does not use it for this kind)
+local	IRInst__setIntConstantOperand4	local_a8	operand0Word4	INFERRED	uninitialised frame word passed as word 4 of constant operand 0 (the callee does not use it for this kind)
+local	IRInst__setIntConstantOperand4	local_a4	operand0Word5	INFERRED	uninitialised frame word passed as word 5 of constant operand 0 (the callee does not use it for this kind)
+local	IRInst__setIntConstantOperand4	local_98	operand1Word2	INFERRED	uninitialised frame word passed as word 2 of constant operand 1 (the callee does not use it for this kind)
+local	IRInst__setIntConstantOperand4	local_94	operand1Word3	INFERRED	uninitialised frame word passed as word 3 of constant operand 1 (the callee does not use it for this kind)
+local	IRInst__setIntConstantOperand4	local_90	operand1Word4	INFERRED	uninitialised frame word passed as word 4 of constant operand 1 (the callee does not use it for this kind)
+local	IRInst__setIntConstantOperand4	local_8c	operand1Word5	INFERRED	uninitialised frame word passed as word 5 of constant operand 1 (the callee does not use it for this kind)
+local	IRInst__setIntConstantOperand4	local_80	operand2Word2	INFERRED	uninitialised frame word passed as word 2 of constant operand 2 (the callee does not use it for this kind)
+local	IRInst__setIntConstantOperand4	local_7c	operand2Word3	INFERRED	uninitialised frame word passed as word 3 of constant operand 2 (the callee does not use it for this kind)
+local	IRInst__setIntConstantOperand4	local_78	operand2Word4	INFERRED	uninitialised frame word passed as word 4 of constant operand 2 (the callee does not use it for this kind)
+local	IRInst__setIntConstantOperand4	local_74	operand2Word5	INFERRED	uninitialised frame word passed as word 5 of constant operand 2 (the callee does not use it for this kind)
+local	IRInst__makeLiteralVec4Float	param_1	inst	INFERRED	instruction whose operand is set
+local	IRInst__makeLiteralVec4Float	param_2	program	INFERRED	program/pass object
+local	IRInst__makeLiteralVec4Float	param_3	operandIndex	INFERRED	operand index
+local	IRInst__makeLiteralVec4Float	local_a0	operand0Word2	INFERRED	uninitialised frame word passed as word 2 of constant operand 0 (the callee does not use it for this kind)
+local	IRInst__makeLiteralVec4Float	local_9c	operand0Word3	INFERRED	uninitialised frame word passed as word 3 of constant operand 0 (the callee does not use it for this kind)
+local	IRInst__makeLiteralVec4Float	local_98	operand0Word4	INFERRED	uninitialised frame word passed as word 4 of constant operand 0 (the callee does not use it for this kind)
+local	IRInst__makeLiteralVec4Float	local_94	operand0Word5	INFERRED	uninitialised frame word passed as word 5 of constant operand 0 (the callee does not use it for this kind)
+local	IRInst__makeLiteralVec4Float	local_88	operand1Word2	INFERRED	uninitialised frame word passed as word 2 of constant operand 1 (the callee does not use it for this kind)
+local	IRInst__makeLiteralVec4Float	local_84	operand1Word3	INFERRED	uninitialised frame word passed as word 3 of constant operand 1 (the callee does not use it for this kind)
+local	IRInst__makeLiteralVec4Float	local_80	operand1Word4	INFERRED	uninitialised frame word passed as word 4 of constant operand 1 (the callee does not use it for this kind)
+local	IRInst__makeLiteralVec4Float	local_7c	operand1Word5	INFERRED	uninitialised frame word passed as word 5 of constant operand 1 (the callee does not use it for this kind)
+local	IRInst__makeLiteralVec4Float	local_70	operand2Word2	INFERRED	uninitialised frame word passed as word 2 of constant operand 2 (the callee does not use it for this kind)
+local	IRInst__makeLiteralVec4Float	local_6c	operand2Word3	INFERRED	uninitialised frame word passed as word 3 of constant operand 2 (the callee does not use it for this kind)
+local	IRInst__makeLiteralVec4Float	local_68	operand2Word4	INFERRED	uninitialised frame word passed as word 4 of constant operand 2 (the callee does not use it for this kind)
+local	IRInst__makeLiteralVec4Float	local_64	operand2Word5	INFERRED	uninitialised frame word passed as word 5 of constant operand 2 (the callee does not use it for this kind)
