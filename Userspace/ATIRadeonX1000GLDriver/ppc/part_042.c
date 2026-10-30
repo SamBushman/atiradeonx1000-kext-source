@@ -3858,7 +3858,7 @@ int FUN_0013f3d4(inst, program)
   uint *puVar19;
   int countdown;
   int local_48;
-  undefined4 local_44;
+  undefined4 operandSelect;
   int local_40 [2];
   int local_38 [2];
   
@@ -3916,7 +3916,7 @@ int FUN_0013f3d4(inst, program)
         local_48 = *(int *)(operandRecord2 + 0x10);
         operandRecord2 = IRInst__getOperandRecord(piVar4,0);
         loopIndexB = 0;
-        local_44 = *(undefined4 *)(operandRecord2 + 0x10);
+        operandSelect = *(undefined4 *)(operandRecord2 + 0x10);
         countdown = 4;
         do {
           if ((*(char *)((int)&local_48 + loopIndexB) != '\x01') &&
@@ -4186,7 +4186,7 @@ int FUN_0013fc38(pass)
   undefined4 uVar30;
   int *piVar31;
   uint uVar32;
-  undefined4 uVar33;
+  undefined4 operandSelect;
   undefined4 uVar34;
   uint uVar35;
   undefined4 local_88;
@@ -4551,7 +4551,7 @@ LAB_001405bc:
               piVar11[0x21] = iVar9 + -1;
               piVar11[5] = piVar11[5] & 0xfffffdff;
               operandRecord = IRInst__getOperandRecord(piVar11,iVar9 + -1);
-              uVar33 = *(undefined4 *)(operandRecord + 0x10);
+              operandSelect = *(undefined4 *)(operandRecord + 0x10);
               piVar5 = (int *)IRInst__clone(piVar11,*(undefined4 *)(pass + 8),0);
               arenaAt378 = *(undefined4 *)(*(int *)(pass + 8) + 0x378);
               vectorAlloc2 = (undefined4 *)Arena__alloc(arenaAt378,0x14);
@@ -4565,7 +4565,7 @@ LAB_001405bc:
               piVar5[0x58] = *(int *)(*(int *)(*(int *)(pass + 8) + 0x6c4) + 0x478);
               IRInst__setExtraOperandSource(piVar11,iVar4,1,*(undefined4 *)(pass + 8));
               operandRecord = IRInst__getOperandRecord(piVar11,piVar11[0x21]);
-              *(undefined4 *)(operandRecord + 0x10) = uVar33;
+              *(undefined4 *)(operandRecord + 0x10) = operandSelect;
               *(undefined1 *)((int)piVar11 + 0x9f) = 1;
               piVar5[0x27] = 0x1010100;
               Block__insertInstAfter(piVar11[0x56],piVar11,piVar5);
