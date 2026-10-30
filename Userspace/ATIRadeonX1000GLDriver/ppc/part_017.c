@@ -2957,31 +2957,31 @@ LAB_000bd970:
 }
 
 /* gld_emitLightingStatePacket @ 0xbd9a0 (160 bytes) */
-void gld_emitLightingStatePacket(int glContext,undefined4 param_2,undefined4 param_3,undefined4 param_4,double fpPassThrough1)
+void gld_emitLightingStatePacket(int glContext,undefined4 passArgR4,undefined4 passArgR5,undefined4 passArgR6,double fpPassThrough1)
 {
   code *glContextPtr275c;
-  int iVar2;
-  undefined4 *puVar3;
+  int packetPtr;
+  undefined4 *packetStart;
   undefined4 r4AfterCall;
   undefined4 staleArgR7;
   undefined4 staleArgR8;
   int a6;
   
   if ((*(uint *)(glContext + 0x44) & 0x100000) == 0) {
-    puVar3 = (undefined4 *)(**(code **)(glContext + 0x2758))(glContext,2);
-    *(undefined4 **)(0x00002748 + glContext + 4) = puVar3;
-    *puVar3 = 0x860;
+    packetStart = (undefined4 *)(**(code **)(glContext + 0x2758))(glContext,2);
+    *(undefined4 **)(0x00002748 + glContext + 4) = packetStart;
+    *packetStart = 0x860;
     a6 = *(int *)(0x00002748 + glContext + 4);
     *(undefined4 *)(a6 + 4) = *(undefined4 *)(glContext + 0x1b78);
-    iVar2 = *(int *)(0x00002748 + glContext + 4);
+    packetPtr = *(int *)(0x00002748 + glContext + 4);
     glContextPtr275c = *(code **)(glContext + 0x275c);
-    *(int *)(0x00002748 + glContext + 4) = iVar2 + 8;
-    (*glContextPtr275c)(glContext,iVar2 + 8,param_3,param_4,staleArgR7,staleArgR8,a6);
+    *(int *)(0x00002748 + glContext + 4) = packetPtr + 8;
+    (*glContextPtr275c)(glContext,packetPtr + 8,passArgR5,passArgR6,staleArgR7,staleArgR8,a6);
     ffvpAnalyzeLightState(glContext);
     fpPassThrough1 = (double)ffvpBuildLightKey(glContext);
-    param_2 = r4AfterCall;
+    passArgR4 = r4AfterCall;
   }
-  ((void (*)())FUN_0004d620)(glContext,param_2,param_3,param_4,fpPassThrough1);
+  ((void (*)())FUN_0004d620)(glContext,passArgR4,passArgR5,passArgR6,fpPassThrough1);
   return;
 }
 
@@ -7500,13 +7500,13 @@ int psnDecAllocateTempsAndCompact(psnState, decodedProgram, rsWords, programImag
 }
 
 /* psnMaskIsSingleComponent @ 0xc2e40 (48 bytes) */
-int psnMaskIsSingleComponent(param_1)
-  undefined4 param_1;
+int psnMaskIsSingleComponent(writeMask)
+  undefined4 writeMask;
 {
-  ushort uVar1;
+  ushort maskBits;
   
-  uVar1 = (*(unsigned short *)((unsigned char *)&(param_1) + 2)) & 0xf;
-  if (((1 < (ushort)(uVar1 - 1)) && (uVar1 != 4)) && (uVar1 != 8)) {
+  maskBits = (*(unsigned short *)((unsigned char *)&(writeMask) + 2)) & 0xf;
+  if (((1 < (ushort)(maskBits - 1)) && (maskBits != 4)) && (maskBits != 8)) {
     return 0;
   }
   return 1;
@@ -8064,20 +8064,20 @@ int psnDecCanFoldIntoSlot(entry, halfSelector, slotCount)
   int halfSelector;
   int slotCount;
 {
-  bool bVar1;
-  ushort *puVar2;
+  bool loopContinue;
+  ushort *sourceSelectPtr;
   int loopIndex;
   
   loopIndex = 0;
-  puVar2 = (ushort *)(entry + (uint)(halfSelector == 8) * 0x40 + 8);
+  sourceSelectPtr = (ushort *)(entry + (uint)(halfSelector == 8) * 0x40 + 8);
   do {
-    if ((*puVar2 & 3) == 3) {
+    if ((*sourceSelectPtr & 3) == 3) {
       return 0;
     }
-    bVar1 = loopIndex != 2;
-    puVar2 = puVar2 + 2;
+    loopContinue = loopIndex != 2;
+    sourceSelectPtr = sourceSelectPtr + 2;
     loopIndex = loopIndex + 1;
-  } while (bVar1);
+  } while (loopContinue);
   if (((*(uint *)((1 - (uint)(halfSelector == 8)) * 0x40 + entry + 0x30) & 0x20) == 0) &&
      (1 < slotCount - 1U)) {
     return 1;
@@ -8429,7 +8429,7 @@ int psnDecRangeHasConflict(decodedProgram, firstEntry, lastEntry, half, passThro
   int halfByteOffset;
   uint addressSlot;
   int decodedProgramWord8;
-  int iVar10;
+  int conflictFlag;
   int slotConflict;
   undefined4 conflictResult;
   int scanOffset;
@@ -8453,13 +8453,13 @@ LAB_000c3fb0:
     scanOffset = scanIndex * 0xa0;
     while( true ) {
       decodedProgramWord8 = scanOffset + decodedProgramWord8;
-      iVar10 = ((int (*)())psnDecReadsRegMask)(decodedProgramWord8,(uint)rgbDestReg,(uint)rgbWriteMask,half);
-      if ((((iVar10 != 0) ||
-           (iVar10 = ((int (*)())psnDecReadsRegMask)(decodedProgramWord8,(uint)alphaDestReg,(uint)alphaWriteMask,half), iVar10 != 0)) ||
-          (iVar10 = ((int (*)())psnDecDestMatchesRegMask)(decodedProgramWord8,(uint)rgbDestReg,(uint)rgbWriteMask,half,passThroughR7,passThroughR8,passThroughR9),
-          iVar10 != 0)) ||
-         (iVar10 = ((int (*)())psnDecDestMatchesRegMask)(decodedProgramWord8,(uint)alphaDestReg,(uint)alphaWriteMask,half,passThroughR7,passThroughR8,passThroughR9),
-         iVar10 != 0)) break;
+      conflictFlag = ((int (*)())psnDecReadsRegMask)(decodedProgramWord8,(uint)rgbDestReg,(uint)rgbWriteMask,half);
+      if ((((conflictFlag != 0) ||
+           (conflictFlag = ((int (*)())psnDecReadsRegMask)(decodedProgramWord8,(uint)alphaDestReg,(uint)alphaWriteMask,half), conflictFlag != 0)) ||
+          (conflictFlag = ((int (*)())psnDecDestMatchesRegMask)(decodedProgramWord8,(uint)rgbDestReg,(uint)rgbWriteMask,half,passThroughR7,passThroughR8,passThroughR9),
+          conflictFlag != 0)) ||
+         (conflictFlag = ((int (*)())psnDecDestMatchesRegMask)(decodedProgramWord8,(uint)alphaDestReg,(uint)alphaWriteMask,half,passThroughR7,passThroughR8,passThroughR9),
+         conflictFlag != 0)) break;
       sourceSelectPtr = (ushort *)(entry + halfByteOffset + 8);
       loopIndex = 0;
       do {
@@ -9378,9 +9378,9 @@ int psnAccumulateRgbSelectRead(selectCode, writeMask, passThroughR5, passThrough
   int sourceUsage;
   int passThroughR8;
 {
-  ushort uVar1;
-  int iVar2;
-  int iVar3;
+  ushort currentUsageBits;
+  int sourceUsageEntry;
+  int secondUsageEntry;
   ushort componentBits;
   
   componentBits = (ushort)(writeMask & 7);
@@ -9479,8 +9479,8 @@ int psnAccumulateRgbSelectRead(selectCode, writeMask, passThroughR5, passThrough
     if (1 < passThroughR5 - 1U) {
       return;
     }
-    iVar2 = sourceUsage + 4;
-    iVar3 = passThroughR8 + 4;
+    sourceUsageEntry = sourceUsage + 4;
+    secondUsageEntry = passThroughR8 + 4;
     goto code_r0x000c5714;
   case 0x13:
     *(ushort *)(sourceUsage + 0xe) = componentBits | *(ushort *)(sourceUsage + 0xe);
@@ -9488,28 +9488,28 @@ int psnAccumulateRgbSelectRead(selectCode, writeMask, passThroughR5, passThrough
     if (1 < passThroughR6 - 1U) {
       return;
     }
-    iVar2 = sourceUsage + 0x10;
-    iVar3 = passThroughR8 + 0xc;
+    sourceUsageEntry = sourceUsage + 0x10;
+    secondUsageEntry = passThroughR8 + 0xc;
 code_r0x000c5714:
-    *(ushort *)(iVar2 + 2) = componentBits | *(ushort *)(iVar2 + 2);
-    *(ushort *)(iVar3 + 2) = componentBits | *(ushort *)(iVar3 + 2);
+    *(ushort *)(sourceUsageEntry + 2) = componentBits | *(ushort *)(sourceUsageEntry + 2);
+    *(ushort *)(secondUsageEntry + 2) = componentBits | *(ushort *)(secondUsageEntry + 2);
     break;
   case 0x1d:
     *(ushort *)(sourceUsage + 2) = componentBits & 7 | *(ushort *)(sourceUsage + 2);
     *(ushort *)(sourceUsage + 0xe) = componentBits & 8 | *(ushort *)(sourceUsage + 0xe);
     break;
   case 0x1e:
-    iVar2 = sourceUsage + 4;
-    iVar3 = sourceUsage + 0x10;
-    uVar1 = *(ushort *)(sourceUsage + 6);
+    sourceUsageEntry = sourceUsage + 4;
+    secondUsageEntry = sourceUsage + 0x10;
+    currentUsageBits = *(ushort *)(sourceUsage + 6);
     goto code_r0x000c5788;
   case 0x1f:
-    iVar2 = sourceUsage + 8;
-    iVar3 = sourceUsage + 0x14;
-    uVar1 = *(ushort *)(sourceUsage + 10);
+    sourceUsageEntry = sourceUsage + 8;
+    secondUsageEntry = sourceUsage + 0x14;
+    currentUsageBits = *(ushort *)(sourceUsage + 10);
 code_r0x000c5788:
-    *(ushort *)(iVar2 + 2) = componentBits & 7 | uVar1;
-    *(ushort *)(iVar3 + 2) = componentBits & 8 | *(ushort *)(iVar3 + 2);
+    *(ushort *)(sourceUsageEntry + 2) = componentBits & 7 | currentUsageBits;
+    *(ushort *)(secondUsageEntry + 2) = componentBits & 8 | *(ushort *)(secondUsageEntry + 2);
   }
   return;
 }
@@ -9523,86 +9523,86 @@ int psnAccumulateAlphaSelectRead(selectCode, writeMask, passThroughR5, passThrou
   int sourceUsage;
   int passThroughR8;
 {
-  int iVar1;
-  ushort uVar2;
-  int iVar3;
+  int sourceUsageEntry;
+  ushort componentBits;
+  int secondUsageEntry;
   
   if ((writeMask & 8) == 0) {
     return;
   }
-  uVar2 = 0;
+  componentBits = 0;
   switch(selectCode) {
   case 0:
   case 3:
   case 6:
   case 0xc:
-    uVar2 = 1;
+    componentBits = 1;
     break;
   case 1:
   case 4:
   case 7:
   case 0xd:
-    uVar2 = 2;
+    componentBits = 2;
     break;
   case 2:
   case 5:
   case 8:
   case 0xe:
-    uVar2 = 4;
+    componentBits = 4;
     break;
   case 9:
   case 10:
   case 0xb:
   case 0xf:
-    uVar2 = 8;
+    componentBits = 8;
   }
   switch(selectCode) {
   case 0:
   case 1:
   case 2:
-    *(ushort *)(sourceUsage + 2) = uVar2 | *(ushort *)(sourceUsage + 2);
+    *(ushort *)(sourceUsage + 2) = componentBits | *(ushort *)(sourceUsage + 2);
     break;
   case 3:
   case 4:
   case 5:
-    *(ushort *)(sourceUsage + 6) = uVar2 | *(ushort *)(sourceUsage + 6);
+    *(ushort *)(sourceUsage + 6) = componentBits | *(ushort *)(sourceUsage + 6);
     break;
   case 6:
   case 7:
   case 8:
-    *(ushort *)(sourceUsage + 10) = uVar2 | *(ushort *)(sourceUsage + 10);
+    *(ushort *)(sourceUsage + 10) = componentBits | *(ushort *)(sourceUsage + 10);
     break;
   case 9:
-    *(ushort *)(sourceUsage + 0xe) = uVar2 | *(ushort *)(sourceUsage + 0xe);
+    *(ushort *)(sourceUsage + 0xe) = componentBits | *(ushort *)(sourceUsage + 0xe);
     break;
   case 10:
-    *(ushort *)(sourceUsage + 0x12) = uVar2 | *(ushort *)(sourceUsage + 0x12);
+    *(ushort *)(sourceUsage + 0x12) = componentBits | *(ushort *)(sourceUsage + 0x12);
     break;
   case 0xb:
-    *(ushort *)(sourceUsage + 0x16) = uVar2 | *(ushort *)(sourceUsage + 0x16);
+    *(ushort *)(sourceUsage + 0x16) = componentBits | *(ushort *)(sourceUsage + 0x16);
     break;
   case 0xc:
   case 0xd:
   case 0xe:
-    *(ushort *)(sourceUsage + 2) = uVar2 | *(ushort *)(sourceUsage + 2);
-    *(ushort *)(passThroughR8 + 2) = uVar2 | *(ushort *)(passThroughR8 + 2);
+    *(ushort *)(sourceUsage + 2) = componentBits | *(ushort *)(sourceUsage + 2);
+    *(ushort *)(passThroughR8 + 2) = componentBits | *(ushort *)(passThroughR8 + 2);
     if (1 < (ushort)((*(unsigned short *)((unsigned char *)&(passThroughR5) + 2)) - 1U)) {
       return;
     }
-    iVar1 = sourceUsage + 4;
-    iVar3 = passThroughR8 + 4;
+    sourceUsageEntry = sourceUsage + 4;
+    secondUsageEntry = passThroughR8 + 4;
     goto code_r0x000c5994;
   case 0xf:
-    *(ushort *)(sourceUsage + 0xe) = uVar2 | *(ushort *)(sourceUsage + 0xe);
-    *(ushort *)(passThroughR8 + 10) = uVar2 | *(ushort *)(passThroughR8 + 10);
+    *(ushort *)(sourceUsage + 0xe) = componentBits | *(ushort *)(sourceUsage + 0xe);
+    *(ushort *)(passThroughR8 + 10) = componentBits | *(ushort *)(passThroughR8 + 10);
     if (1 < (ushort)((*(unsigned short *)((unsigned char *)&(passThroughR6) + 2)) - 1U)) {
       return;
     }
-    iVar1 = sourceUsage + 0x10;
-    iVar3 = passThroughR8 + 0xc;
+    sourceUsageEntry = sourceUsage + 0x10;
+    secondUsageEntry = passThroughR8 + 0xc;
 code_r0x000c5994:
-    *(ushort *)(iVar1 + 2) = uVar2 | *(ushort *)(iVar1 + 2);
-    *(ushort *)(iVar3 + 2) = uVar2 | *(ushort *)(iVar3 + 2);
+    *(ushort *)(sourceUsageEntry + 2) = componentBits | *(ushort *)(sourceUsageEntry + 2);
+    *(ushort *)(secondUsageEntry + 2) = componentBits | *(ushort *)(secondUsageEntry + 2);
   }
   return;
 }
@@ -10640,26 +10640,26 @@ int scCallbackAppendFormatted(unusedArgR3, prefix, format, formatArg1, formatArg
 }
 
 /* scCallbackFopen @ 0xc6ef0 (88 bytes) */
-int scCallbackFopen(unusedArgR3, param_2, param_3)
+int scCallbackFopen(unusedArgR3, path, mode)
   undefined4 unusedArgR3;
-  undefined4 param_2;
-  int param_3;
+  undefined4 path;
+  int mode;
 {
-  undefined4 uVar1;
+  undefined4 file;
   
-  if (param_3 == 2) {
-    uVar1 = _fopen(param_2,"w");
-    return uVar1;
+  if (mode == 2) {
+    file = _fopen(path,"w");
+    return file;
   }
-  if (param_3 != 3) {
-    if (param_3 == 1) {
-      uVar1 = _fopen(param_2,"r");
-      return uVar1;
+  if (mode != 3) {
+    if (mode == 1) {
+      file = _fopen(path,"r");
+      return file;
     }
     return 0;
   }
-  uVar1 = _fopen(param_2,"r+");
-  return uVar1;
+  file = _fopen(path,"r+");
+  return file;
 }
 
 /* scCallbackFclose @ 0xc6f60 (44 bytes) */
@@ -10674,33 +10674,33 @@ int scCallbackFclose(unusedArgR3, param_2)
 }
 
 /* scCallbackFwrite @ 0xc6f90 (40 bytes) */
-int scCallbackFwrite(unusedArgR3, param_2, param_3, param_4)
+int scCallbackFwrite(unusedArgR3, file, buffer, byteCount)
   undefined4 unusedArgR3;
-  int param_2;
-  int param_3;
-  undefined4 param_4;
+  int file;
+  int buffer;
+  undefined4 byteCount;
 {
-  undefined4 uVar1;
+  undefined4 written;
   
-  if ((param_3 != 0) && (param_2 != 0)) {
-    uVar1 = _fwrite(param_3,1,param_4,param_2);
-    return uVar1;
+  if ((buffer != 0) && (file != 0)) {
+    written = _fwrite(buffer,1,byteCount,file);
+    return written;
   }
   return 0;
 }
 
 /* scCallbackFread @ 0xc6fc0 (40 bytes) */
-int scCallbackFread(unusedArgR3, param_2, param_3, param_4)
+int scCallbackFread(unusedArgR3, file, buffer, byteCount)
   undefined4 unusedArgR3;
-  int param_2;
-  int param_3;
-  undefined4 param_4;
+  int file;
+  int buffer;
+  undefined4 byteCount;
 {
-  undefined4 uVar1;
+  undefined4 readCount;
   
-  if ((param_3 != 0) && (param_2 != 0)) {
-    uVar1 = _fread(param_3,1,param_4,param_2);
-    return uVar1;
+  if ((buffer != 0) && (file != 0)) {
+    readCount = _fread(buffer,1,byteCount,file);
+    return readCount;
   }
   return 0;
 }
@@ -10842,21 +10842,21 @@ int ilRecordDefinedConstantPrimary(programRecord, constantIndex, values)
   undefined4 *values;
 {
   undefined4 valuesWordc;
-  int iVar2;
-  int iVar3;
-  uint uVar4;
-  int iVar5;
+  int bitWordIndex;
+  int constantSlot;
+  uint definedBits;
+  int bitWordPtr;
   
-  iVar2 = ((int)constantIndex >> 5) + (uint)((int)constantIndex < 0 && (constantIndex & 0x1f) != 0);
-  iVar3 = constantIndex * 0x10 + programRecord;
-  iVar5 = iVar2 * 4 + programRecord;
-  *(undefined4 *)(iVar3 + 0x1a8) = *values;
-  uVar4 = *(uint *)(iVar5 + 0x188);
-  *(undefined4 *)(iVar3 + 0x1ac) = values[1];
-  *(undefined4 *)(iVar3 + 0x1b0) = values[2];
+  bitWordIndex = ((int)constantIndex >> 5) + (uint)((int)constantIndex < 0 && (constantIndex & 0x1f) != 0);
+  constantSlot = constantIndex * 0x10 + programRecord;
+  bitWordPtr = bitWordIndex * 4 + programRecord;
+  *(undefined4 *)(constantSlot + 0x1a8) = *values;
+  definedBits = *(uint *)(bitWordPtr + 0x188);
+  *(undefined4 *)(constantSlot + 0x1ac) = values[1];
+  *(undefined4 *)(constantSlot + 0x1b0) = values[2];
   valuesWordc = values[3];
-  *(uint *)(iVar5 + 0x188) = 1 << (constantIndex + iVar2 * -0x20 & 0x3f) | uVar4;
-  *(undefined4 *)(iVar3 + 0x1b4) = valuesWordc;
+  *(uint *)(bitWordPtr + 0x188) = 1 << (constantIndex + bitWordIndex * -0x20 & 0x3f) | definedBits;
+  *(undefined4 *)(constantSlot + 0x1b4) = valuesWordc;
   return;
 }
 
@@ -10866,22 +10866,22 @@ int ilRecordDefinedConstantSecondary(programRecord, constantIndex, values)
   uint constantIndex;
   undefined4 *values;
 {
-  int iVar1;
+  int bitWordIndex;
   undefined4 valuesWordc;
-  uint uVar3;
-  int iVar4;
-  int iVar5;
+  uint definedBits;
+  int bitWordPtr;
+  int constantSlot;
   
-  iVar1 = ((int)constantIndex >> 5) + (uint)((int)constantIndex < 0 && (constantIndex & 0x1f) != 0);
-  iVar5 = constantIndex * 0x10 + programRecord;
-  *(undefined4 *)(((unsigned char *)0x000011c8) + iVar5) = *values;
-  iVar4 = iVar1 * 4 + programRecord;
-  uVar3 = *(uint *)(((unsigned char *)0x000011a8) + iVar4);
-  *(undefined4 *)((int)((unsigned char *)0x000011cc) + iVar5) = values[1];
-  *(undefined4 *)(((unsigned char *)0x000011d0U) + iVar5) = values[2];
+  bitWordIndex = ((int)constantIndex >> 5) + (uint)((int)constantIndex < 0 && (constantIndex & 0x1f) != 0);
+  constantSlot = constantIndex * 0x10 + programRecord;
+  *(undefined4 *)(((unsigned char *)0x000011c8) + constantSlot) = *values;
+  bitWordPtr = bitWordIndex * 4 + programRecord;
+  definedBits = *(uint *)(((unsigned char *)0x000011a8) + bitWordPtr);
+  *(undefined4 *)((int)((unsigned char *)0x000011cc) + constantSlot) = values[1];
+  *(undefined4 *)(((unsigned char *)0x000011d0U) + constantSlot) = values[2];
   valuesWordc = values[3];
-  *(uint *)(((unsigned char *)0x000011a8) + iVar4) = 1 << (constantIndex + iVar1 * -0x20 & 0x3f) | uVar3;
-  *(undefined4 *)(((unsigned char *)0x000011d4) + iVar5) = valuesWordc;
+  *(uint *)(((unsigned char *)0x000011a8) + bitWordPtr) = 1 << (constantIndex + bitWordIndex * -0x20 & 0x3f) | definedBits;
+  *(undefined4 *)(((unsigned char *)0x000011d4) + constantSlot) = valuesWordc;
   return;
 }
 

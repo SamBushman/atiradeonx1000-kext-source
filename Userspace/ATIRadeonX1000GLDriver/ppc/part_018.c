@@ -4,36 +4,36 @@
 int ilPopFreeRegister(programRecord)
   int programRecord;
 {
-  int iVar1;
+  int wordPtr;
   uint loopIndex2;
   int loopIndex;
-  uint uVar4;
-  uint uVar5;
+  uint freeBits;
+  uint clearMask;
   int remaining;
   
   loopIndex = 0;
   remaining = 8;
-  iVar1 = programRecord;
+  wordPtr = programRecord;
   do {
-    uVar4 = *(uint *)(iVar1 + 0xc);
-    if (uVar4 != 0) {
+    freeBits = *(uint *)(wordPtr + 0xc);
+    if (freeBits != 0) {
       loopIndex2 = 0;
-      if ((uVar4 & 1) == 0) {
+      if ((freeBits & 1) == 0) {
         do {
           loopIndex2 = loopIndex2 + 1;
-          uVar5 = 1 << (loopIndex2 & 0x3f);
-        } while ((uVar4 & uVar5) == 0);
-        uVar5 = ~uVar5;
+          clearMask = 1 << (loopIndex2 & 0x3f);
+        } while ((freeBits & clearMask) == 0);
+        clearMask = ~clearMask;
       }
       else {
-        uVar5 = 0xfffffffe;
+        clearMask = 0xfffffffe;
       }
-      iVar1 = loopIndex * 4 + programRecord;
-      *(uint *)(iVar1 + 0xc) = uVar5 & *(uint *)(iVar1 + 0xc);
+      wordPtr = loopIndex * 4 + programRecord;
+      *(uint *)(wordPtr + 0xc) = clearMask & *(uint *)(wordPtr + 0xc);
       return loopIndex2 + loopIndex * 0x20;
     }
     loopIndex = loopIndex + 1;
-    iVar1 = iVar1 + 4;
+    wordPtr = wordPtr + 4;
     remaining = remaining + -1;
   } while (remaining != 0);
   return -1;
@@ -686,30 +686,30 @@ int ilMarkOperandRegisterUsed(operandWords, operandExtraWordPtr, programRecord)
   int remaining2;
   int remaining;
   uint operandWord;
-  int iVar2;
+  int bitWordCursor;
   uint registerType;
   uint registerIndex;
-  int iVar5;
+  int bitWordPtr;
   
   operandWord = *operandWords;
   registerIndex = (uint)(ushort)*operandWords;
   registerType = operandWord >> 0x10 & 0x3f;
-  iVar2 = (int)registerIndex >> 5;
+  bitWordCursor = (int)registerIndex >> 5;
   if (registerType != 1) {
     if (registerType == 2) {
       if ((operandWord & 0x1800000) == 0) {
-        iVar2 = iVar2 * 4 + programRecord;
-        *(uint *)(iVar2 + 0x2c) =
-             (-2 << (registerIndex & 0x1f) | 0xfffffffeU >> 0x20 - (registerIndex & 0x1f)) & *(uint *)(iVar2 + 0x2c)
+        bitWordCursor = bitWordCursor * 4 + programRecord;
+        *(uint *)(bitWordCursor + 0x2c) =
+             (-2 << (registerIndex & 0x1f) | 0xfffffffeU >> 0x20 - (registerIndex & 0x1f)) & *(uint *)(bitWordCursor + 0x2c)
         ;
         operandWord = *operandWords;
         goto LAB_000c88e4;
       }
       remaining = 8;
-      iVar2 = programRecord;
+      bitWordCursor = programRecord;
       do {
-        *(undefined4 *)(iVar2 + 0x2c) = 0;
-        iVar2 = iVar2 + 4;
+        *(undefined4 *)(bitWordCursor + 0x2c) = 0;
+        bitWordCursor = bitWordCursor + 4;
         remaining = remaining + -1;
       } while (remaining != 0);
     }
@@ -727,16 +727,16 @@ int ilMarkOperandRegisterUsed(operandWords, operandExtraWordPtr, programRecord)
   }
   else {
     if ((operandWord & 0x1800000) == 0) {
-      iVar5 = iVar2 * 4 + programRecord;
-      *(uint *)(iVar5 + 0xc) = *(uint *)(iVar5 + 0xc) & ~(1 << (registerIndex + iVar2 * -0x20 & 0x3f));
+      bitWordPtr = bitWordCursor * 4 + programRecord;
+      *(uint *)(bitWordPtr + 0xc) = *(uint *)(bitWordPtr + 0xc) & ~(1 << (registerIndex + bitWordCursor * -0x20 & 0x3f));
       operandWord = *operandWords;
       goto LAB_000c88e4;
     }
     remaining2 = 8;
-    iVar2 = programRecord;
+    bitWordCursor = programRecord;
     do {
-      *(undefined4 *)(iVar2 + 0xc) = 0;
-      iVar2 = iVar2 + 4;
+      *(undefined4 *)(bitWordCursor + 0xc) = 0;
+      bitWordCursor = bitWordCursor + 4;
       remaining2 = remaining2 + -1;
     } while (remaining2 != 0);
   }
@@ -4100,28 +4100,28 @@ joined_r0x000cc708:
 #undef initRegsDstBWord7
 
 /* scCreate @ 0xcd05c (176 bytes) */
-int scCreate(scCallbacks, param_2, allocTag)
+int scCreate(scCallbacks, enableFlag, allocTag)
   int scCallbacks;
-  int param_2;
+  int enableFlag;
   uint allocTag;
 {
   int a1;
-  int iVar1;
+  int initStatus;
   
   if ((((((scCallbacks == 0) || (*(code **)(scCallbacks + 0x30) == (code *)0x0)) ||
         (*(int *)(scCallbacks + 0x34) == 0)) ||
        ((*(int *)(scCallbacks + 0x38) == 0 || (*(int *)(scCallbacks + 0x40) == 0)))) ||
       ((*(int *)(scCallbacks + 0x44) == 0 ||
        ((*(int *)(scCallbacks + 0x48) == 0 || (*(int *)(scCallbacks + 0x4c) == 0)))))) ||
-     ((param_2 == 0 ||
+     ((enableFlag == 0 ||
       (a1 = (**(code **)(scCallbacks + 0x30))(*(undefined4 *)(scCallbacks + 0x2c),0x44,allocTag), a1 == 0))))
   {
     a1 = 0;
   }
   else {
     FUN_000da0c0(a1,scCallbacks);
-    iVar1 = FUN_000da420(a1);
-    if (iVar1 != 0) {
+    initStatus = FUN_000da420(a1);
+    if (initStatus != 0) {
       scDestroyCompilerObject(a1,1);
       (**(code **)(scCallbacks + 0x34))(*(undefined4 *)(scCallbacks + 0x2c),a1,allocTag);
       a1 = 0;
@@ -4131,34 +4131,34 @@ int scCreate(scCallbacks, param_2, allocTag)
 }
 
 /* scDestroy @ 0xcd154 (92 bytes) */
-int scDestroy(param_1)
-  undefined4 *param_1;
+int scDestroy(compiler)
+  undefined4 *compiler;
 {
-  undefined4 uVar1;
-  code *pcVar2;
+  undefined4 result;
+  code *freeCallback;
   
-  uVar1 = 3;
-  if (param_1 != (undefined4 *)0x0) {
-    pcVar2 = (code *)*param_1;
-    uVar1 = param_1[1];
-    scDestroyCompilerObject(param_1,1);
-    (*pcVar2)(uVar1,param_1);
-    uVar1 = 0;
+  result = 3;
+  if (compiler != (undefined4 *)0x0) {
+    freeCallback = (code *)*compiler;
+    result = compiler[1];
+    scDestroyCompilerObject(compiler,1);
+    (*freeCallback)(result,compiler);
+    result = 0;
   }
-  return uVar1;
+  return result;
 }
 
 /* scSetCallbackTablesChecked @ 0xcd1b0 (20 bytes) */
-int scSetCallbackTablesChecked(compilerHandle, param_2, param_3)
+int scSetCallbackTablesChecked(compilerHandle, callbackTableA, callbackTableB)
   int compilerHandle;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 callbackTableA;
+  undefined4 callbackTableB;
 {
-  undefined4 uVar1;
+  undefined4 status;
   
   if (compilerHandle != 0) {
-    uVar1 = scSetCallbackTables(compilerHandle,param_2,param_3);
-    return uVar1;
+    status = scSetCallbackTables(compilerHandle,callbackTableA,callbackTableB);
+    return status;
   }
   return 3;
 }
@@ -5090,7 +5090,7 @@ int vsdisPrintOutputMapping(disasmCtx, outputMapEntry, argR5, argR6, argR7, argR
   byte componentSource;
   char *nameCopyCursor;
   undefined4 oneArg;
-  int iVar5;
+  int letterX;
   char *entryCursor;
   char *semanticName;
   char *componentCursorA;
@@ -5102,9 +5102,9 @@ int vsdisPrintOutputMapping(disasmCtx, outputMapEntry, argR5, argR6, argR7, argR
   uint componentSources [5];
   char semanticNameText [4];
   char semanticNameText4;
-  char acStack_1f3 [3];
+  char semanticNameBytes5to7 [3];
   char semanticNameText8;
-  char acStack_1ef [3];
+  char semanticNameBytes9to11 [3];
   char semanticNameText12;
   undefined1 destinationText [128];
   undefined1 componentText0 [64];
@@ -5113,11 +5113,11 @@ int vsdisPrintOutputMapping(disasmCtx, outputMapEntry, argR5, argR6, argR7, argR
   char componentText3 [76];
   
   if ((*(uint *)outputMapEntry & 1) != 0) {
-    nameCopyCursor = acStack_1ef;
+    nameCopyCursor = semanticNameBytes9to11;
     switch(*outputMapEntry) {
     case '\0':
       *(unsigned int *)semanticNameText = (unsigned int)(*(unsigned int *)((unsigned char *)&(s_IL_pos_001a62cc) + 0));
-      (*(unsigned short *)((unsigned char *)&(acStack_1f3) + 0)) = (*(unsigned short *)((unsigned char *)&(s_IL_pos_001a62cc) + 5));
+      (*(unsigned short *)((unsigned char *)&(semanticNameBytes5to7) + 0)) = (*(unsigned short *)((unsigned char *)&(s_IL_pos_001a62cc) + 5));
       semanticNameText4 = s_IL_pos_001a62cc[4];
       semanticName = "IL_pos";
       break;
@@ -5146,7 +5146,7 @@ int vsdisPrintOutputMapping(disasmCtx, outputMapEntry, argR5, argR6, argR7, argR
       break;
     case '\x04':
       *(unsigned int *)semanticNameText = (unsigned int)(*(unsigned int *)((unsigned char *)&(s_IL_fog_001a6300) + 0));
-      (*(unsigned short *)((unsigned char *)&(acStack_1f3) + 0)) = (*(unsigned short *)((unsigned char *)&(s_IL_fog_001a6300) + 5));
+      (*(unsigned short *)((unsigned char *)&(semanticNameBytes5to7) + 0)) = (*(unsigned short *)((unsigned char *)&(s_IL_fog_001a6300) + 5));
       semanticNameText4 = s_IL_fog_001a6300[4];
       semanticName = "IL_fog";
       break;
@@ -5154,7 +5154,7 @@ int vsdisPrintOutputMapping(disasmCtx, outputMapEntry, argR5, argR6, argR7, argR
       argR10Value = (uint)(ushort)(*(unsigned short *)((unsigned char *)&(s_IL_generic_001a6308) + 9));
       *(unsigned int *)semanticNameText = (unsigned int)(*(unsigned int *)((unsigned char *)&(s_IL_generic_001a6308) + 0));
       semanticNameText4 = (*(unsigned int *)((unsigned char *)&(s_IL_generic_001a6308) + 4));
-      (*(unsigned short *)((unsigned char *)&(acStack_1ef) + 0)) = (*(unsigned short *)((unsigned char *)&(s_IL_generic_001a6308) + 9));
+      (*(unsigned short *)((unsigned char *)&(semanticNameBytes9to11) + 0)) = (*(unsigned short *)((unsigned char *)&(s_IL_generic_001a6308) + 9));
       semanticNameText8 = s_IL_generic_001a6308[8];
       semanticName = (char *)(*(unsigned int *)((unsigned char *)&(s_IL_generic_001a6308) + 0));
       break;
@@ -5162,7 +5162,7 @@ int vsdisPrintOutputMapping(disasmCtx, outputMapEntry, argR5, argR6, argR7, argR
       argR10Value = (uint)(ushort)(*(unsigned short *)((unsigned char *)&(s_IL_unknown_001a6314) + 9));
       *(unsigned int *)semanticNameText = (unsigned int)(*(unsigned int *)((unsigned char *)&(s_IL_unknown_001a6314) + 0));
       semanticNameText4 = (*(unsigned int *)((unsigned char *)&(s_IL_unknown_001a6314) + 4));
-      (*(unsigned short *)((unsigned char *)&(acStack_1ef) + 0)) = (*(unsigned short *)((unsigned char *)&(s_IL_unknown_001a6314) + 9));
+      (*(unsigned short *)((unsigned char *)&(semanticNameBytes9to11) + 0)) = (*(unsigned short *)((unsigned char *)&(s_IL_unknown_001a6314) + 9));
       semanticNameText8 = s_IL_unknown_001a6314[8];
       semanticName = (char *)(*(unsigned int *)((unsigned char *)&(s_IL_unknown_001a6314) + 0));
     }
@@ -5211,9 +5211,9 @@ int vsdisPrintOutputMapping(disasmCtx, outputMapEntry, argR5, argR6, argR7, argR
       printf_LDBLStub_1a32d0(destinationText,"%s%s%s%s",componentText0,componentText1,componentText2,entryCursor,entryByteCursor,componentCursorA);
     }
     else {
-      iVar5 = 0x5f;
+      letterX = 0x5f;
       if ((componentMask & 1) != 0) {
-        iVar5 = (int)componentLetters[(byte)outputMapEntry[8]];
+        letterX = (int)componentLetters[(byte)outputMapEntry[8]];
       }
       componentsRemaining = 0x5f;
       if ((componentMask & 2) != 0) {
@@ -5227,7 +5227,7 @@ int vsdisPrintOutputMapping(disasmCtx, outputMapEntry, argR5, argR6, argR7, argR
       if ((componentMask & 8) != 0) {
         entryByteCursor = (char *)(int)componentLetters[(byte)outputMapEntry[0xb]];
       }
-      printf_LDBLStub_1a32d0(destinationText,"o%d.%c%c%c%c",(uint)(byte)outputMapEntry[4],iVar5,componentsRemaining,entryCursor,entryByteCursor,
+      printf_LDBLStub_1a32d0(destinationText,"o%d.%c%c%c%c",(uint)(byte)outputMapEntry[4],letterX,componentsRemaining,entryCursor,entryByteCursor,
                    componentCursorA);
     }
     ((int (*)())scDisasmPrintf)(disasmCtx,";    %s = %s%s",destinationText,semanticNameText,componentLetters + 4,entryCursor,entryByteCursor,componentCursorA);

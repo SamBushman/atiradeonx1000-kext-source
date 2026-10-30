@@ -1899,17 +1899,17 @@ LAB_000a41d0:
 int gld_freePointMaskCache(glContext)
   int glContext;
 {
-  int iVar1;
-  int iVar2;
+  int cacheEntry;
+  int nextEntry;
   
-  iVar1 = *(int *)(glContext + 0x2764);
-  while (iVar1 != 0) {
-    if (*(int *)(iVar1 + 0xbc) != 0) {
-      gld_deleteTextureForStream(glContext,*(undefined4 *)(*(int *)(iVar1 + 0xbc) + 0x7c));
+  cacheEntry = *(int *)(glContext + 0x2764);
+  while (cacheEntry != 0) {
+    if (*(int *)(cacheEntry + 0xbc) != 0) {
+      gld_deleteTextureForStream(glContext,*(undefined4 *)(*(int *)(cacheEntry + 0xbc) + 0x7c));
     }
-    iVar2 = *(int *)(iVar1 + 0x138);
-    (**(code **)(glContext + 0x18))(iVar1);
-    iVar1 = iVar2;
+    nextEntry = *(int *)(cacheEntry + 0x138);
+    (**(code **)(glContext + 0x18))(cacheEntry);
+    cacheEntry = nextEntry;
   }
   *(undefined4 *)(glContext + 0x2778) = 0;
   *(undefined4 *)(glContext + 0x2764) = 0;
@@ -3302,18 +3302,18 @@ int gld_resetRasterStateForInternalDraw(ring, resetFlags, saveArg)
 }
 
 /* gld_markFastClearFlag @ 0xa64d0 (36 bytes) */
-int gld_markFastClearFlag(param_1)
-  int param_1;
+int gld_markFastClearFlag(glContext)
+  int glContext;
 {
-  int iVar1;
-  int iVar2;
+  int boundRecord;
+  int targetRecord;
   
-  iVar1 = *(int *)(*(int *)(param_1 + 4) + 0x150);
-  iVar2 = *(int *)(param_1 + 4) + 0x30;
-  if (iVar1 != 0) {
-    iVar2 = iVar1;
+  boundRecord = *(int *)(*(int *)(glContext + 4) + 0x150);
+  targetRecord = *(int *)(glContext + 4) + 0x30;
+  if (boundRecord != 0) {
+    targetRecord = boundRecord;
   }
-  *(undefined1 *)(iVar2 + 0xc5) = 1;
+  *(undefined1 *)(targetRecord + 0xc5) = 1;
   return;
 }
 
@@ -3727,24 +3727,24 @@ int noop_a6f80()
 /* gld_normalizeVec3 @ 0xa6f90 (168 bytes) */
 void gld_normalizeVec3(float *outVector,float *inVector,double fpPassThrough1)
 {
-  float fVar1;
-  float fVar2;
-  double dVar3;
+  float scale;
+  float inX;
+  double lengthSquared;
   
-  fVar1 = FLOAT_001aa0d4;
-  fVar2 = *inVector;
-  dVar3 = (double)(inVector[2] * inVector[2] + fVar2 * fVar2 + inVector[1] * inVector[1]);
-  if (dVar3 <= (double)FLOAT_001aa0d4) {
+  scale = FLOAT_001aa0d4;
+  inX = *inVector;
+  lengthSquared = (double)(inVector[2] * inVector[2] + inX * inX + inVector[1] * inVector[1]);
+  if (lengthSquared <= (double)FLOAT_001aa0d4) {
     outVector[2] = FLOAT_001aa0d4;
-    *outVector = fVar1;
-    outVector[1] = fVar1;
+    *outVector = scale;
+    outVector[1] = scale;
   }
   else {
-    dVar3 = _sqrt(dVar3);
-    fVar1 = (float)(DOUBLE_001aa200 / dVar3);
-    *outVector = fVar2 * fVar1;
-    outVector[1] = fVar1 * inVector[1];
-    outVector[2] = fVar1 * inVector[2];
+    lengthSquared = _sqrt(lengthSquared);
+    scale = (float)(DOUBLE_001aa200 / lengthSquared);
+    *outVector = inX * scale;
+    outVector[1] = scale * inVector[1];
+    outVector[2] = scale * inVector[2];
   }
   return;
 }
@@ -4095,14 +4095,14 @@ int gld_initContextDispatch(ctx)
 int gldFreeEngineState(ctx)
   int ctx;
 {
-  int iVar1;
+  int engineState;
   
-  iVar1 = ctx + 0x240;
-  ((int (*)())gld_invalidateCachedPointMasks)(iVar1);
-  ((int (*)())gld_freePointMaskCache)(iVar1);
-  gld_destroyUnitCmdLists(iVar1);
-  FUN_0004b710(iVar1);
-  fpVariantCacheFlush(iVar1);
+  engineState = ctx + 0x240;
+  ((int (*)())gld_invalidateCachedPointMasks)(engineState);
+  ((int (*)())gld_freePointMaskCache)(engineState);
+  gld_destroyUnitCmdLists(engineState);
+  FUN_0004b710(engineState);
+  fpVariantCacheFlush(engineState);
   if (*(int *)(((unsigned char *)0x00001358) + ctx) != 0) {
     (**(code **)(ctx + 600))(*(int *)(((unsigned char *)0x00001358) + ctx));
     *(undefined4 *)(((unsigned char *)0x00001358) + ctx) = 0;
@@ -4117,7 +4117,7 @@ int gldFreeEngineState(ctx)
     *(undefined4 *)(ctx + 0x20bc) = 0;
     *(undefined4 *)(0x000020b4 + ctx) = 0;
   }
-  arbProgramTableRelease(iVar1);
+  arbProgramTableRelease(engineState);
   if (*(int *)(ctx + 0x1aa4) != 0) {
     (**(code **)(ctx + 600))(*(int *)(ctx + 0x1aa4));
     *(undefined4 *)(ctx + 0x1aa4) = 0;
@@ -4211,10 +4211,10 @@ int gld_updateDrawBufferConfig(ctx)
 int gldMarkAllStateDirty(glContext)
   int glContext;
 {
-  int iVar1;
-  uint uVar2;
+  int unitCursor;
+  uint unitCount;
   
-  uVar2 = (uint)(byte)((unsigned char *)0x000013b5)[glContext];
+  unitCount = (uint)(byte)((unsigned char *)0x000013b5)[glContext];
   *(undefined1 *)(glContext + 0x2d) = 0xf;
   *(undefined1 *)(glContext + 0x2e) = 3;
   *(undefined1 *)(glContext + 0x30) = 7;
@@ -4228,17 +4228,17 @@ int gldMarkAllStateDirty(glContext)
   *(undefined4 *)(glContext + 0x180c) = 5;
   *(undefined4 *)(glContext + 0x1810) = 0x1f;
   *(undefined1 *)(glContext + 0x2a) = 1;
-  if (uVar2 != 0) {
-    iVar1 = glContext;
-    if (uVar2 == 0) {
-      uVar2 = 1;
+  if (unitCount != 0) {
+    unitCursor = glContext;
+    if (unitCount == 0) {
+      unitCount = 1;
     }
     do {
-      *(undefined1 *)(iVar1 + 0x1814) = 0x3f;
-      *(undefined1 *)(iVar1 + 0x181c) = 3;
-      iVar1 = iVar1 + 1;
-      uVar2 = uVar2 - 1;
-    } while (uVar2 != 0);
+      *(undefined1 *)(unitCursor + 0x1814) = 0x3f;
+      *(undefined1 *)(unitCursor + 0x181c) = 3;
+      unitCursor = unitCursor + 1;
+      unitCount = unitCount - 1;
+    } while (unitCount != 0);
   }
   *(undefined1 *)(glContext + 0x29) = 1;
   *(undefined1 *)(glContext + 0x23ec) = 1;

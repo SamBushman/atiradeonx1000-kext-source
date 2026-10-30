@@ -773,32 +773,32 @@ LAB_000a8cb4:
 }
 
 /* gld_updatePolygonModeFlags @ 0xa8d70 (168 bytes) */
-int gld_updatePolygonModeFlags(glContext, param_2)
+int gld_updatePolygonModeFlags(glContext, stateRecord)
   int glContext;
-  int param_2;
+  int stateRecord;
 {
-  int iVar1;
-  uint uVar2;
+  int currentStateRecord;
+  uint lineModeFlag;
   
-  if (((unsigned char *)0x00003178)[param_2] != '\0') {
+  if (((unsigned char *)0x00003178)[stateRecord] != '\0') {
     *(undefined1 *)(glContext + 0x2f) = 0;
     *(undefined1 *)(glContext + 0x2940) = 1;
     *(uint *)(glContext + 0x1808) = *(uint *)(glContext + 0x1808) | 0x20000000;
   }
   *(undefined1 *)(glContext + 0x29) = 1;
   *(uint *)(glContext + 0x38) = *(uint *)(glContext + 0x38) | 4;
-  iVar1 = *(int *)(*(int *)(glContext + 4) + 0x10);
-  if (((((unsigned char *)0x00003178)[iVar1] == '\0') || ((*(uint *)(glContext + 0x44) & 0x20000) != 0)) ||
-     ((*(short *)(((unsigned char *)0x00003170) + iVar1) != 0x1b02 && (*(short *)(((unsigned char *)0x00003172) + iVar1) != 0x1b02))
+  currentStateRecord = *(int *)(*(int *)(glContext + 4) + 0x10);
+  if (((((unsigned char *)0x00003178)[currentStateRecord] == '\0') || ((*(uint *)(glContext + 0x44) & 0x20000) != 0)) ||
+     ((*(short *)(((unsigned char *)0x00003170) + currentStateRecord) != 0x1b02 && (*(short *)(((unsigned char *)0x00003172) + currentStateRecord) != 0x1b02))
      )) {
-    uVar2 = 0;
+    lineModeFlag = 0;
   }
   else {
-    uVar2 = 1;
+    lineModeFlag = 1;
   }
   *(uint *)(glContext + 0x1928) =
-       *(uint *)(glContext + 0x1928) & 0xfffffffb | *(uint *)(glContext + 0x1928) >> 2 & 1 ^ uVar2 |
-       uVar2 << 2;
+       *(uint *)(glContext + 0x1928) & 0xfffffffb | *(uint *)(glContext + 0x1928) >> 2 & 1 ^ lineModeFlag |
+       lineModeFlag << 2;
   return;
 }
 
@@ -2771,23 +2771,23 @@ void gld_uploadParamConstants(int glContext,int a1,undefined4 a2,double fpPassTh
 }
 
 /* gld_getBoundProgramId @ 0xabb60 (96 bytes) */
-int gld_getBoundProgramId(param_1)
-  int param_1;
+int gld_getBoundProgramId(glContext)
+  int glContext;
 {
-  int iVar1;
+  int programRecord;
   
-  if (*(int *)(((unsigned char *)0x0000121c) + param_1) != 0) {
-    iVar1 = *(int *)(*(int *)(((unsigned char *)0x0000121c) + param_1) + 0x74);
-    if (*(char *)(iVar1 + 0x54) == '\0') {
-      iVar1 = *(int *)(*(int *)(((unsigned char *)0x00001220) + param_1) * 0x18 +
-                       *(int *)(*(int *)(((unsigned char *)0x0000112c) + param_1) + 8) + 0x14);
-      if (iVar1 == 0) {
+  if (*(int *)(((unsigned char *)0x0000121c) + glContext) != 0) {
+    programRecord = *(int *)(*(int *)(((unsigned char *)0x0000121c) + glContext) + 0x74);
+    if (*(char *)(programRecord + 0x54) == '\0') {
+      programRecord = *(int *)(*(int *)(((unsigned char *)0x00001220) + glContext) * 0x18 +
+                       *(int *)(*(int *)(((unsigned char *)0x0000112c) + glContext) + 8) + 0x14);
+      if (programRecord == 0) {
         return 0;
       }
-      iVar1 = *(int *)(iVar1 + 0x74);
+      programRecord = *(int *)(programRecord + 0x74);
     }
-    if (iVar1 != 0) {
-      return *(undefined4 *)(iVar1 + 8);
+    if (programRecord != 0) {
+      return *(undefined4 *)(programRecord + 8);
     }
   }
   return 0;
@@ -3192,17 +3192,17 @@ switchD_000abe1c_caseD_0:
 }
 
 /* gld_emitUnitSelectTokens @ 0xac540 (476 bytes) */
-int gld_emitUnitSelectTokens(glContext, wordVector, param_3, param_4)
+int gld_emitUnitSelectTokens(glContext, wordVector, kind4Index, kind17Index)
   int glContext;
   uint *wordVector;
-  uint param_3;
-  uint param_4;
+  uint kind4Index;
+  uint kind17Index;
 {
   uint wordVectorWord0;
   uint allocation3;
   uint allocation2;
   uint allocation;
-  uint uVar1;
+  uint wordCount;
   
   wordVectorWord0 = *wordVector;
   if (wordVector[1] <= wordVectorWord0) {
@@ -3216,32 +3216,32 @@ int gld_emitUnitSelectTokens(glContext, wordVector, param_3, param_4)
     wordVector[1] = wordVector[1] + 0x80;
   }
   *(undefined4 *)(wordVectorWord0 * 4 + wordVector[2]) = 0xe;
-  uVar1 = *wordVector + 1;
-  *wordVector = uVar1;
-  if (wordVector[1] <= uVar1) {
+  wordCount = *wordVector + 1;
+  *wordVector = wordCount;
+  if (wordVector[1] <= wordCount) {
     allocation2 = (**(code **)(glContext + 0xc))(wordVector[1] * 4 + 0x200);
     if (wordVector[2] != 0) {
       _memcpy(allocation2,wordVector[2],*wordVector << 2);
       (**(code **)(glContext + 0x18))(wordVector[2]);
     }
     wordVector[2] = allocation2;
-    uVar1 = *wordVector;
+    wordCount = *wordVector;
     wordVector[1] = wordVector[1] + 0x80;
   }
-  *(uint *)(uVar1 * 4 + wordVector[2]) = param_4 & 0xffff | 0x170000;
-  uVar1 = *wordVector + 1;
-  *wordVector = uVar1;
-  if (wordVector[1] <= uVar1) {
+  *(uint *)(wordCount * 4 + wordVector[2]) = kind17Index & 0xffff | 0x170000;
+  wordCount = *wordVector + 1;
+  *wordVector = wordCount;
+  if (wordVector[1] <= wordCount) {
     allocation3 = (**(code **)(glContext + 0xc))(wordVector[1] * 4 + 0x200);
     if (wordVector[2] != 0) {
       _memcpy(allocation3,wordVector[2],*wordVector << 2);
       (**(code **)(glContext + 0x18))(wordVector[2]);
     }
     wordVector[2] = allocation3;
-    uVar1 = *wordVector;
+    wordCount = *wordVector;
     wordVector[1] = wordVector[1] + 0x80;
   }
-  *(uint *)(uVar1 * 4 + wordVector[2]) = param_3 & 0xffff | 0x40000;
+  *(uint *)(wordCount * 4 + wordVector[2]) = kind4Index & 0xffff | 0x40000;
   *wordVector = *wordVector + 1;
   return;
 }
@@ -8047,28 +8047,28 @@ LAB_000b4ee0:
 }
 
 /* gld_storeConstantVec4 @ 0xb4f50 (180 bytes) */
-void gld_storeConstantVec4(int param_1,int param_2,undefined4 unusedArgR5,undefined4 unusedArgR6,undefined4 unusedArgR7,undefined4 unusedArgR8,int param_7,double fpPassThrough1,double fpPassThrough2,double fpPassThrough3,double fpPassThrough4)
+void gld_storeConstantVec4(int constantBank,int constantIndex,undefined4 unusedArgR5,undefined4 unusedArgR6,undefined4 unusedArgR7,undefined4 unusedArgR8,int storeRawFloat,double fpPassThrough1,double fpPassThrough2,double fpPassThrough3,double fpPassThrough4)
 {
-  int iVar1;
-  undefined4 uVar2;
+  int constantSlot;
+  undefined4 fp24Value;
   
-  if (param_7 == 0) {
-    uVar2 = ((uint (*)())floatToFp24)(fpPassThrough1);
-    iVar1 = param_2 * 0x10 + param_1;
-    *(undefined4 *)(iVar1 + 0x8c) = uVar2;
-    uVar2 = ((uint (*)())floatToFp24)(fpPassThrough2);
-    *(undefined4 *)(iVar1 + 0x90) = uVar2;
-    uVar2 = ((uint (*)())floatToFp24)(fpPassThrough3);
-    *(undefined4 *)(iVar1 + 0x94) = uVar2;
-    uVar2 = ((uint (*)())floatToFp24)(fpPassThrough4);
-    *(undefined4 *)(iVar1 + 0x98) = uVar2;
+  if (storeRawFloat == 0) {
+    fp24Value = ((uint (*)())floatToFp24)(fpPassThrough1);
+    constantSlot = constantIndex * 0x10 + constantBank;
+    *(undefined4 *)(constantSlot + 0x8c) = fp24Value;
+    fp24Value = ((uint (*)())floatToFp24)(fpPassThrough2);
+    *(undefined4 *)(constantSlot + 0x90) = fp24Value;
+    fp24Value = ((uint (*)())floatToFp24)(fpPassThrough3);
+    *(undefined4 *)(constantSlot + 0x94) = fp24Value;
+    fp24Value = ((uint (*)())floatToFp24)(fpPassThrough4);
+    *(undefined4 *)(constantSlot + 0x98) = fp24Value;
   }
   else {
-    iVar1 = param_2 * 0x10 + param_1;
-    *(float *)(iVar1 + 0x98) = (float)fpPassThrough4;
-    *(float *)(iVar1 + 0x8c) = (float)fpPassThrough1;
-    *(float *)(iVar1 + 0x90) = (float)fpPassThrough2;
-    *(float *)(iVar1 + 0x94) = (float)fpPassThrough3;
+    constantSlot = constantIndex * 0x10 + constantBank;
+    *(float *)(constantSlot + 0x98) = (float)fpPassThrough4;
+    *(float *)(constantSlot + 0x8c) = (float)fpPassThrough1;
+    *(float *)(constantSlot + 0x90) = (float)fpPassThrough2;
+    *(float *)(constantSlot + 0x94) = (float)fpPassThrough3;
   }
   return;
 }
@@ -8720,20 +8720,20 @@ int gld_bindProgramStateAndEmit(glContext, programObj, updateArg)
 }
 
 /* gld_freeProgramImage @ 0xb5f40 (100 bytes) */
-int gld_freeProgramImage(unusedArgR3, param_2)
+int gld_freeProgramImage(unusedArgR3, programRecord)
   undefined4 unusedArgR3;
-  int param_2;
+  int programRecord;
 {
-  int iVar1;
+  int imageBlock;
   
-  iVar1 = *(int *)(param_2 + 0x14);
-  if (iVar1 != 0) {
-    if (*(int *)(iVar1 + 0x5648) != 0) {
-      ilFreeRecordList(*(int *)(iVar1 + 0x5648));
-      iVar1 = *(int *)(param_2 + 0x14);
+  imageBlock = *(int *)(programRecord + 0x14);
+  if (imageBlock != 0) {
+    if (*(int *)(imageBlock + 0x5648) != 0) {
+      ilFreeRecordList(*(int *)(imageBlock + 0x5648));
+      imageBlock = *(int *)(programRecord + 0x14);
     }
-    _free(iVar1);
-    *(undefined4 *)(param_2 + 0x14) = 0;
+    _free(imageBlock);
+    *(undefined4 *)(programRecord + 0x14) = 0;
   }
   return 0;
 }
@@ -8743,24 +8743,24 @@ int gld_destroyUnitCmdLists(glContext)
   int glContext;
 {
   code *glContextPtr1224;
-  int iVar2;
-  int iVar3;
+  int slotCursor;
+  int slotObject;
 
-  iVar2 = glContext;
+  slotCursor = glContext;
   do {
     /* issue #79: the stock loads the slot's object into r4 (`lwz r4,0x1448(r30)`) BEFORE the
      * `beq` that skips an empty slot, so the `bctrl` at 0xb5ff0 sits in a different basic block
      * from the load of its second argument and the indirect-call argument count (1) missed it.
      * The destroy callback (arbfpUnbindWorkAreaChecked) is (ctx, obj): the rebuilt code destroyed whatever
      * garbage was in r4 - the bad free(0x24) here and #74's 0x84c1 / 0x110001. */
-    iVar3 = *(int *)(((unsigned char *)0x00001448) + iVar2);
-    if (iVar3 != 0) {
+    slotObject = *(int *)(((unsigned char *)0x00001448) + slotCursor);
+    if (slotObject != 0) {
       glContextPtr1224 = *(code **)(((unsigned char *)0x00001224) + glContext);
-      *(undefined4 *)(((unsigned char *)0x00001448) + iVar2) = 0;
-      ((int (*)())glContextPtr1224)(glContext,iVar3);
+      *(undefined4 *)(((unsigned char *)0x00001448) + slotCursor) = 0;
+      ((int (*)())glContextPtr1224)(glContext,slotObject);
     }
-    iVar2 = iVar2 + 4;
-  } while (iVar2 != glContext + 0x10);
+    slotCursor = slotCursor + 4;
+  } while (slotCursor != glContext + 0x10);
   return;
 }
 
