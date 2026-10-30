@@ -454,9 +454,9 @@ f620	arbProgramIrToText	r7	PASS-no	f650 bl 0x1a3660	; symbol stub for: _malloc
 f620	arbProgramIrToText	r8	PASS-no	f650 bl 0x1a3660	; symbol stub for: _malloc
 f620	arbProgramIrToText	r10	PASS-no	f650 bl 0x1a3660	; symbol stub for: _malloc
 f8aa0	Program__applySourceTokenToOperand	r8	PASS-indirect	f8b7c bl 0x19e9fc
-f9140	FUN_000f9140	r6	PASS-indirect	f918c bctrl 
-f9140	FUN_000f9140	r7	PASS-indirect	f918c bctrl 
-f9140	FUN_000f9140	r8	PASS-indirect	f918c bctrl 
+f9140	Program__createInstForIlOpcode	r6	PASS-indirect	f918c bctrl 
+f9140	Program__createInstForIlOpcode	r7	PASS-indirect	f918c bctrl 
+f9140	Program__createInstForIlOpcode	r8	PASS-indirect	f918c bctrl 
 fd5c8	Program__translateILStream	r6	PASS-indirect	fd640 bl 0x193e18
 fd5c8	Program__translateILStream	r7	PASS-indirect	fd640 bl 0x193e18
 fd5c8	Program__translateILStream	r8	PASS-indirect	fd640 bl 0x193e18

@@ -318,23 +318,24 @@ int FUN_000ec658(param_1)
   return iVar2;
 }
 
-/* FUN_000ec6b0 @ 0xec6b0 (120 bytes) */
-int FUN_000ec6b0(param_1)
-  int param_1;
+/* Program__findBranchingBlock @ 0xec6b0 (120 bytes) */
+int Program__findBranchingBlock(program)
+  int program;
 {
-  int iVar1;
-  int iVar2;
+  int edgeCount;
+  int nextBlockLink;
+  int block;
   
-  iVar2 = *(int *)(param_1 + 900);
-  iVar1 = *(int *)(iVar2 + 8);
+  block = *(int *)(program + 900);
+  nextBlockLink = *(int *)(block + 8);
   while( true ) {
-    if (iVar1 == 0) {
+    if (nextBlockLink == 0) {
       return 0;
     }
-    iVar1 = Block__predecessorCount(iVar2);
-    if ((1 < iVar1) || (iVar1 = Block__successorCount(iVar2), 1 < iVar1)) break;
-    iVar2 = *(int *)(iVar2 + 8);
-    iVar1 = *(int *)(iVar2 + 8);
+    edgeCount = Block__predecessorCount(block);
+    if ((1 < edgeCount) || (edgeCount = Block__successorCount(block), 1 < edgeCount)) break;
+    block = *(int *)(block + 8);
+    nextBlockLink = *(int *)(block + 8);
   }
   return 1;
 }
@@ -505,19 +506,20 @@ int KhanPs__vslot17_isSimpleInst(this, inst)
 }
 
 /* FUN_000ecb90 @ 0xecb90 (140 bytes) */
-int FUN_000ecb90(param_1, compiler)
-  int param_1;
+int FUN_000ecb90(inst, compiler)
+  int inst;
   undefined4 compiler;
 {
-  int iVar1;
-  undefined4 uVar2;
+  int flagBitQuery;
+  int foldableMov;
+  undefined4 opcodeId;
   
-  iVar1 = FUN_0011379c(compiler,param_1);
-  if (iVar1 == 0) {
-    uVar2 = *(undefined4 *)(*(int *)(param_1 + 0x88) + 8);
-    iVar1 = OpcodeTraits__flagBit2(uVar2,compiler);
-    if (((iVar1 == 0) || (iVar1 = OpcodeTraits__flagBit9(uVar2,compiler), iVar1 != 0)) &&
-       (iVar1 = OpcodeTraits__flagBit8(uVar2,compiler), iVar1 == 0)) {
+  foldableMov = FUN_0011379c(compiler,inst);
+  if (foldableMov == 0) {
+    opcodeId = *(undefined4 *)(*(int *)(inst + 0x88) + 8);
+    flagBitQuery = OpcodeTraits__flagBit2(opcodeId,compiler);
+    if (((flagBitQuery == 0) || (flagBitQuery = OpcodeTraits__flagBit9(opcodeId,compiler), flagBitQuery != 0)) &&
+       (flagBitQuery = OpcodeTraits__flagBit8(opcodeId,compiler), flagBitQuery == 0)) {
       return 0;
     }
   }

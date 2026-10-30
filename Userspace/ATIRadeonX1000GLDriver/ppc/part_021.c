@@ -1417,30 +1417,30 @@ int FUN_000e33cc(compiler, param_2, param_3)
   return;
 }
 
-/* FUN_000e3544 @ 0xe3544 (340 bytes) */
-int FUN_000e3544(compiler, param_2, param_3)
-  int *compiler;
-  int param_2;
-  undefined4 param_3;
+/* EncoderState__init @ 0xe3544 (340 bytes) */
+int EncoderState__init(encoder, program, sinkArg)
+  int *encoder;
+  int program;
+  undefined4 sinkArg;
 {
+  int compilerObj;
   undefined4 arenaAt378;
-  int iVar1;
   undefined4 *vectorAlloc;
-  int *piVar3;
+  int *sinkObject;
   undefined4 allocation;
   
-  iVar1 = *(int *)(param_2 + 8);
-  compiler[0xd] = param_2;
-  compiler[0xc] = -1;
-  *compiler = iVar1;
-  compiler[1] = 0;
-  compiler[2] = 0;
-  compiler[3] = 0;
-  compiler[4] = 0;
-  compiler[5] = 0;
-  compiler[6] = 0;
-  compiler[7] = 0;
-  arenaAt378 = *(undefined4 *)(iVar1 + 0x378);
+  compilerObj = *(int *)(program + 8);
+  encoder[0xd] = program;
+  encoder[0xc] = -1;
+  *encoder = compilerObj;
+  encoder[1] = 0;
+  encoder[2] = 0;
+  encoder[3] = 0;
+  encoder[4] = 0;
+  encoder[5] = 0;
+  encoder[6] = 0;
+  encoder[7] = 0;
+  arenaAt378 = *(undefined4 *)(compilerObj + 0x378);
   vectorAlloc = (undefined4 *)Arena__alloc(arenaAt378,0x14);
   *vectorAlloc = arenaAt378;
   vectorAlloc[1] = 2;
@@ -1448,8 +1448,8 @@ int FUN_000e3544(compiler, param_2, param_3)
   vectorAlloc[2] = 0;
   allocation = Arena__alloc(arenaAt378,8);
   vectorAlloc[3] = allocation;
-  compiler[10] = (int)(vectorAlloc + 1);
-  arenaAt378 = *(undefined4 *)(*compiler + 0x378);
+  encoder[10] = (int)(vectorAlloc + 1);
+  arenaAt378 = *(undefined4 *)(*encoder + 0x378);
   vectorAlloc = (undefined4 *)Arena__alloc(arenaAt378,0x14);
   *vectorAlloc = arenaAt378;
   vectorAlloc[1] = 2;
@@ -1457,8 +1457,8 @@ int FUN_000e3544(compiler, param_2, param_3)
   vectorAlloc[2] = 0;
   allocation = Arena__alloc(arenaAt378,8);
   vectorAlloc[3] = allocation;
-  compiler[0xb] = (int)(vectorAlloc + 1);
-  arenaAt378 = *(undefined4 *)(*compiler + 0x378);
+  encoder[0xb] = (int)(vectorAlloc + 1);
+  arenaAt378 = *(undefined4 *)(*encoder + 0x378);
   vectorAlloc = (undefined4 *)Arena__alloc(arenaAt378,0x14);
   *vectorAlloc = arenaAt378;
   vectorAlloc[1] = 2;
@@ -1466,13 +1466,13 @@ int FUN_000e3544(compiler, param_2, param_3)
   vectorAlloc[4] = arenaAt378;
   allocation = Arena__alloc(arenaAt378,8);
   vectorAlloc[3] = allocation;
-  compiler[9] = (int)(vectorAlloc + 1);
-  piVar3 = *(int **)(*compiler + 0x30c);
-  piVar3 = (int *)(**(code **)(*piVar3 + 0x68))(piVar3,*compiler);
-  compiler[8] = (int)piVar3;
+  encoder[9] = (int)(vectorAlloc + 1);
+  sinkObject = *(int **)(*encoder + 0x30c);
+  sinkObject = (int *)(**(code **)(*sinkObject + 0x68))(sinkObject,*encoder);
+  encoder[8] = (int)sinkObject;
                     
                     
-  (**(code **)(*piVar3 + 0x14))(piVar3,compiler,param_3,*compiler);
+  (**(code **)(*sinkObject + 0x14))(sinkObject,encoder,sinkArg,*encoder);
   return;
 }
 
@@ -1499,11 +1499,11 @@ int MachineCodeWriter__encodeProgram(writer, outBuffer, outSize)
   /* NOTE (issue #64): auStack_78/auStack_74/local_54 declared as 3 separate adjacent locals sharing one
    * real stock stack region. "local_54" is NOT a separate buffer after auStack_74 - per stock disassembly
    * (r1+0x3c=auStack_74, r1+0x5c=local_54, frame size 0xb0) it's simply the name for auStack_74's own
-   * word index 8 (0x74-0x54=0x20=8 words in). FUN_000e3544(auStack_74,...) writes auStack_74[0] through
+   * word index 8 (0x74-0x54=0x20=8 words in). EncoderState__init(auStack_74,...) writes auStack_74[0] through
    * auStack_74[0xd] (up to +0x34 bytes, i.e. through frame offset r1+0x70) - CONFIRMED by reading that
    * callee's own body - so auStack_74's real required size is 0x38 bytes, not the 0x20 the auStack_74..
    * local_54 gap alone would suggest (an earlier version of this fix under-sized it at 0x28 total, which
-   * still let FUN_000e3544's tail writes (words 9-0xd, past local_54) overflow past this whole buffer -
+   * still let EncoderState__init's tail writes (words 9-0xd, past local_54) overflow past this whole buffer -
    * confirmed live: that overflow was clobbering a saved register in the CALLER's (Compiler__compileStages's) frame,
    * corrupting its r30 and causing a second crash further into gldCreateContext). Those extra words are
    * never read back by any other statement in this function (no name exists for them, hence no overflow
@@ -1515,7 +1515,7 @@ int MachineCodeWriter__encodeProgram(writer, outBuffer, outSize)
 #define auStack_74 (auStack_e36bc_combined + 0x4)
 #define local_54 (*(int **)(auStack_e36bc_combined + 0x24))
   
-  ((int (*)())FUN_000e3544)(auStack_74,writer,outSize);
+  ((int (*)())EncoderState__init)(auStack_74,writer,outSize);
   (**(code **)(*local_54 + 0x18))(local_54,*writer);
   block = (int *)writer[0xe1];
   for (nextBlock = (int *)((int *)writer[0xe1])[2]; nextBlock != (int *)0x0; nextBlock = (int *)nextBlock[2]) {

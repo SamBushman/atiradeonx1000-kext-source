@@ -304,9 +304,9 @@ f29f4	pass_assign_slots	r8	PASS-indirect	GARBAGE
 f60c4	Program__dumpConstantRegisters	r9	PASS-indirect	GARBAGE	
 f60c4	Program__dumpConstantRegisters	r10	PASS-indirect	GARBAGE	
 f8aa0	Program__applySourceTokenToOperand	r8	PASS-indirect	GARBAGE	
-f9140	FUN_000f9140	r6	PASS-indirect	GARBAGE-UNSUPPLIED	supply=GARBAGE []; f918c bctrl via +0x14 (argument registers up to r6)
-f9140	FUN_000f9140	r7	PASS-indirect	GARBAGE	
-f9140	FUN_000f9140	r8	PASS-indirect	GARBAGE	
+f9140	Program__createInstForIlOpcode	r6	PASS-indirect	GARBAGE-UNSUPPLIED	supply=GARBAGE []; f918c bctrl via +0x14 (argument registers up to r6)
+f9140	Program__createInstForIlOpcode	r7	PASS-indirect	GARBAGE	
+f9140	Program__createInstForIlOpcode	r8	PASS-indirect	GARBAGE	
 fd5c8	Program__translateILStream	r6	PASS-indirect	GARBAGE	
 fd5c8	Program__translateILStream	r7	PASS-indirect	GARBAGE	
 fd5c8	Program__translateILStream	r8	PASS-indirect	GARBAGE	

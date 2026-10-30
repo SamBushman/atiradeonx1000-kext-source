@@ -1300,7 +1300,7 @@
 0xe3244	EncoderState__destroy_e3244	196	no	indirect call (driver context / vtable / callback)
 0xe3308	EncoderState__destroy_e3308	196	no	indirect call (driver context / vtable / callback)
 0xe33cc	FUN_000e33cc	340	no	indirect call (driver context / vtable / callback)
-0xe3544	FUN_000e3544	340	no	indirect call (driver context / vtable / callback)
+0xe3544	EncoderState__init	340	no	indirect call (driver context / vtable / callback)
 0xe36bc	MachineCodeWriter__encodeProgram	664	no	indirect call (driver context / vtable / callback)
 0xe3968	IRInst__createMovForDest	396	no	indirect call (driver context / vtable / callback)
 0xe3af4	FUN_000e3af4	148	yes	
@@ -1460,7 +1460,7 @@
 0xec4f0	Program__getDominatorInfo	168	yes	
 0xec5b8	Program__getBlocksArray	160	yes	
 0xec658	FUN_000ec658	88	yes	
-0xec6b0	FUN_000ec6b0	120	yes	
+0xec6b0	Program__findBranchingBlock	120	yes	
 0xec728	Program__splitMixedSourceKinds	444	yes	
 0xec8e4	FUN_000ec8e4	60	yes	
 0xec920	FUN_000ec920	240	no	indirect call (driver context / vtable / callback)
@@ -1608,7 +1608,7 @@
 0xf8d50	IRInst__applyDescriptorSelects	568	no	indirect call (driver context / vtable / callback)
 0xf8f88	IRInst__applyDescriptorSwizzle	176	no	indirect call (driver context / vtable / callback)
 0xf9038	FUN_000f9038	264	yes	
-0xf9140	FUN_000f9140	284	no	indirect call (driver context / vtable / callback)
+0xf9140	Program__createInstForIlOpcode	284	no	indirect call (driver context / vtable / callback)
 0xf92fc	Program__appendInst	480	no	indirect call (driver context / vtable / callback)
 0xf94dc	FUN_000f94dc	1268	no	indirect call (driver context / vtable / callback)
 0xf9a58	FUN_000f9a58	3748	no	indirect call (driver context / vtable / callback)

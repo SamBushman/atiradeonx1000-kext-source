@@ -2885,8 +2885,8 @@ e2950	e2a04	other	IfFooterStatic__accept	45
 e2ac4	e2acc	millicode	IREndMakeCall__acceptCallPseudo	2	
 e34c8	e34cc	millicode	FUN_000e33cc	1	
 e3524	e3544	eh-pad	FUN_000e33cc	8	0x193cc0,__Unwind_Resume
-e3640	e3644	millicode	FUN_000e3544	1	
-e369c	e36bc	eh-pad	FUN_000e3544	8	0x193cc0,__Unwind_Resume
+e3640	e3644	millicode	EncoderState__init	1	
+e369c	e36bc	eh-pad	EncoderState__init	8	0x193cc0,__Unwind_Resume
 e3948	e395c	eh-pad	MachineCodeWriter__encodeProgram	5	0xe3308,__Unwind_Resume
 e42c0	e42c4	eh-pad	FUN_000e3b88	1	__Unwind_Resume
 e4d2c	e4d8c	table	ILReader__decodeInstruction	24	
@@ -2983,7 +2983,7 @@ f8258	f8278	eh-pad	DominatorTree__dfsNumber	8	0x193cc0,__Unwind_Resume
 f8430	f8450	eh-pad	DominatorTree__compress	8	0x193cc0,__Unwind_Resume
 f8908	f8928	eh-pad	Program__computeDominators	8	0x193cc0,__Unwind_Resume
 f8cc8	f8ccc	millicode	FUN_000f8c88	1	
-f91e8	f9288	table	FUN_000f9140	40	
+f91e8	f9288	table	Program__createInstForIlOpcode	40	
 f953c	f9550	table	FUN_000f94dc	5	
 f95e4	f9600	other	FUN_000f94dc	7	0x193cc0
 f97a8	f97c4	other	FUN_000f94dc	7	0x193cc0

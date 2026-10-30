@@ -1850,19 +1850,19 @@ int Block__isAncestorOf(ancestor, block)
 }
 
 /* Block__nearestCommonAncestor @ 0xe7924 (104 bytes) */
-int Block__nearestCommonAncestor(param_1, param_2)
-  int param_1;
-  int param_2;
+int Block__nearestCommonAncestor(blockA, blockB)
+  int blockA;
+  int blockB;
 {
-  int iVar1;
-  int iVar2;
+  int isAncestor;
+  int ancestorBlock;
   
-  while ((iVar1 = ((int (*)())Block__isAncestorOf)(param_1,param_2), iVar2 = param_1, iVar1 == 0 &&
-         (iVar1 = ((int (*)())Block__isAncestorOf)(param_2,param_1), iVar2 = param_2, iVar1 == 0))) {
-    param_1 = *(int *)(param_1 + 0xf0);
-    param_2 = *(int *)(param_2 + 0xf0);
+  while ((isAncestor = ((int (*)())Block__isAncestorOf)(blockA,blockB), ancestorBlock = blockA, isAncestor == 0 &&
+         (isAncestor = ((int (*)())Block__isAncestorOf)(blockB,blockA), ancestorBlock = blockB, isAncestor == 0))) {
+    blockA = *(int *)(blockA + 0xf0);
+    blockB = *(int *)(blockB + 0xf0);
   }
-  return iVar2;
+  return ancestorBlock;
 }
 
 /* Block__vectorF8NonEmpty @ 0xe798c (20 bytes) */

@@ -2,7 +2,7 @@
 Compiler__isOptionEnabled compiler
 Compiler__compileStages compiler
 FUN_000e33cc compiler
-FUN_000e3544 compiler
+EncoderState__init compiler
 Block__ctor_ea020 compiler
 Block__ctor_ea148 compiler
 AnyBlock__ctor_ea3c0 compiler

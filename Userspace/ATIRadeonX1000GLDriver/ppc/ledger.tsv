@@ -1300,7 +1300,7 @@
 0xe3244	196	EncoderState__destroy_e3244	part_021	converted
 0xe3308	196	EncoderState__destroy_e3308	part_021	converted
 0xe33cc	340	FUN_000e33cc	part_021	converted
-0xe3544	340	FUN_000e3544	part_021	converted
+0xe3544	340	EncoderState__init	part_021	converted
 0xe36bc	652	MachineCodeWriter__encodeProgram	part_021	converted
 0xe3968	396	IRInst__createMovForDest	part_021	converted
 0xe3af4	148	FUN_000e3af4	part_021	converted
@@ -1460,7 +1460,7 @@
 0xec4f0	124	Program__getDominatorInfo	part_024	converted
 0xec5b8	160	Program__getBlocksArray	part_024	converted
 0xec658	88	FUN_000ec658	part_024	converted
-0xec6b0	120	FUN_000ec6b0	part_024	converted
+0xec6b0	120	Program__findBranchingBlock	part_024	converted
 0xec728	444	Program__splitMixedSourceKinds	part_024	converted
 0xec8e4	60	FUN_000ec8e4	part_024	converted
 0xec920	240	FUN_000ec920	part_024	converted
@@ -1608,7 +1608,7 @@
 0xf8d50	568	IRInst__applyDescriptorSelects	part_026	converted
 0xf8f88	176	IRInst__applyDescriptorSwizzle	part_026	converted
 0xf9038	264	FUN_000f9038	part_026	converted
-0xf9140	284	FUN_000f9140	part_026	converted
+0xf9140	284	Program__createInstForIlOpcode	part_026	converted
 0xf92fc	480	Program__appendInst	part_026	converted
 0xf94dc	968	FUN_000f94dc	part_026	converted
 0xf9a58	2736	FUN_000f9a58	part_026	converted

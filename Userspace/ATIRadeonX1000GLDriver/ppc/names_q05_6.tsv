@@ -2543,3 +2543,81 @@ local	Compiler__setBitInSelectedBlock98	param_1	program	INFERRED	program whose s
 local	Compiler__setBitInSelectedBlock98	param_2	bitIndex	INFERRED	bit number set in the word array at block+0x98
 local	BitSet__findFirstSet	param_1	bitWords	INFERRED	bitmap words (cursor advanced)
 local	BitSet__findFirstSet	param_2	wordCount	INFERRED	number of 32-bit words
+use	Block__nearestCommonAncestor	iVar1	isAncestor	INFERRED	Block__isAncestorOf result for the current pair	^\s*while\ \(\(iVar1\ =\ \(\(int\ \(\*\)\(\)\)FUN_000e78f8\)\(param_1,param_2\),\ iVar2\ =\ param_1,\ iVar1\ ==\ 0\ \&\&$	+2
+use	Block__nearestCommonAncestor	iVar2	ancestorBlock	INFERRED	the block that is an ancestor of the other (return value)	^\s*while\ \(\(iVar1\ =\ \(\(int\ \(\*\)\(\)\)FUN_000e78f8\)\(param_1,param_2\),\ iVar2\ =\ param_1,\ iVar1\ ==\ 0\ \&\&$	+2
+use	Block__nearestCommonAncestor	iVar2	ancestorBlock	INFERRED	the block that is an ancestor of the other (return value)	^\s*return\ iVar2;$	+1
+use	FUN_000f9140	a0	hardwareInfo	INFERRED	compiler+0x30c hardware-info object (vtable +0xb0 query)	^\s*if\ \(\(param_3\ !=\ 0\)\ \&\&$	+3
+use	FUN_000f9140	iVar1	hwQueryResult	INFERRED	hardware-info vtable +0xb0 query: nonzero re-maps six IL opcodes to other IR opcodes	^\s*if\ \(\(param_3\ !=\ 0\)\ \&\&$	+3
+use	FUN_000f9140	iVar3	createdInst	INFERRED	instruction built by the opcode record's constructor callback (+0x14), opcode info patched at +0x88	^\s*iVar3\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x30c\)\ \+\ 0xc\);$	+4
+use	FUN_000f9140	iVar3	createdInst	INFERRED	instruction built by the opcode record's constructor callback (+0x14), opcode info patched at +0x88	^\s*\*\(undefined4\ \*\)\(iVar3\ \+\ 0x88\)\ =\ uVar2;$	+1
+use	FUN_000f9140	iVar3	createdInst	INFERRED	instruction built by the opcode record's constructor callback (+0x14), opcode info patched at +0x88	^\s*\*\(undefined4\ \*\)\(iVar3\ \+\ 0x88\)\ =\ uVar2;$@2	+1
+use	FUN_000f9140	iVar3	createdInst	INFERRED	instruction built by the opcode record's constructor callback (+0x14), opcode info patched at +0x88	^\s*\*\(undefined4\ \*\)\(iVar3\ \+\ 0x88\)\ =\ uVar2;$@3	+1
+use	FUN_000f9140	iVar3	createdInst	INFERRED	instruction built by the opcode record's constructor callback (+0x14), opcode info patched at +0x88	^\s*\*\(undefined4\ \*\)\(iVar3\ \+\ 0x88\)\ =\ uVar2;$@4	+1
+use	FUN_000f9140	iVar3	createdInst	INFERRED	instruction built by the opcode record's constructor callback (+0x14), opcode info patched at +0x88	^\s*\*\(undefined4\ \*\)\(iVar3\ \+\ 0x88\)\ =\ uVar2;$@5	+1
+use	FUN_000f9140	iVar3	createdInst	INFERRED	instruction built by the opcode record's constructor callback (+0x14), opcode info patched at +0x88	^\s*\*\(undefined4\ \*\)\(iVar3\ \+\ 0x88\)\ =\ uVar2;$@6	+1
+use	FUN_000f9140	iVar3	createdInst	INFERRED	instruction built by the opcode record's constructor callback (+0x14), opcode info patched at +0x88	^\s*return\ iVar3;$	+1
+use	Block__nearestCommonAncestor	iVar1	isAncestor	INFERRED	Block__isAncestorOf result for the current pair	^\s*while\ \(\(iVar1\ =\ \(\(int\ \(\*\)\(\)\)FUN_000e78f8\)\(param_1,param_2\),\ iVar2\ =\ param_1,\ iVar1\ ==\ 0\ \&\&$	+2
+use	Block__nearestCommonAncestor	iVar2	ancestorBlock	INFERRED	the block that is an ancestor of the other (return value)	^\s*while\ \(\(iVar1\ =\ \(\(int\ \(\*\)\(\)\)FUN_000e78f8\)\(param_1,param_2\),\ iVar2\ =\ param_1,\ iVar1\ ==\ 0\ \&\&$	+2
+use	Block__nearestCommonAncestor	iVar2	ancestorBlock	INFERRED	the block that is an ancestor of the other (return value)	^\s*return\ iVar2;$	+1
+use	FUN_000f9140	a0	hardwareInfo	INFERRED	compiler+0x30c hardware-info object (vtable +0xb0 query)	^\s*if\ \(\(param_3\ !=\ 0\)\ \&\&$	+3
+use	FUN_000f9140	iVar1	hwQueryResult	INFERRED	hardware-info vtable +0xb0 query: nonzero re-maps six IL opcodes to other IR opcodes	^\s*if\ \(\(param_3\ !=\ 0\)\ \&\&$	+3
+use	FUN_000f9140	iVar3	createdInst	INFERRED	instruction built by the opcode record's constructor callback (+0x14), opcode info patched at +0x88	^\s*iVar3\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x30c\)\ \+\ 0xc\);$	+4
+use	FUN_000f9140	iVar3	createdInst	INFERRED	instruction built by the opcode record's constructor callback (+0x14), opcode info patched at +0x88	^\s*\*\(undefined4\ \*\)\(iVar3\ \+\ 0x88\)\ =\ uVar2;$	+1
+use	FUN_000f9140	iVar3	createdInst	INFERRED	instruction built by the opcode record's constructor callback (+0x14), opcode info patched at +0x88	^\s*\*\(undefined4\ \*\)\(iVar3\ \+\ 0x88\)\ =\ uVar2;$@2	+1
+use	FUN_000f9140	iVar3	createdInst	INFERRED	instruction built by the opcode record's constructor callback (+0x14), opcode info patched at +0x88	^\s*\*\(undefined4\ \*\)\(iVar3\ \+\ 0x88\)\ =\ uVar2;$@3	+1
+use	FUN_000f9140	iVar3	createdInst	INFERRED	instruction built by the opcode record's constructor callback (+0x14), opcode info patched at +0x88	^\s*\*\(undefined4\ \*\)\(iVar3\ \+\ 0x88\)\ =\ uVar2;$@4	+1
+use	FUN_000f9140	iVar3	createdInst	INFERRED	instruction built by the opcode record's constructor callback (+0x14), opcode info patched at +0x88	^\s*\*\(undefined4\ \*\)\(iVar3\ \+\ 0x88\)\ =\ uVar2;$@5	+1
+use	FUN_000f9140	iVar3	createdInst	INFERRED	instruction built by the opcode record's constructor callback (+0x14), opcode info patched at +0x88	^\s*\*\(undefined4\ \*\)\(iVar3\ \+\ 0x88\)\ =\ uVar2;$@6	+1
+use	FUN_000f9140	iVar3	createdInst	INFERRED	instruction built by the opcode record's constructor callback (+0x14), opcode info patched at +0x88	^\s*return\ iVar3;$	+1
+use	LoopHeader__ctor_eafe4	uVar1	copiedField0x144	INFERRED	source+0x144 copied to this[0x51]	^\s*uVar1\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x144\);$	+1
+use	LoopHeader__ctor_eafe4	uVar1	copiedField0x144	INFERRED	source+0x144 copied to this[0x51]	^\s*param_1\[0x51\]\ =\ uVar1;$	+1
+use	LoopHeader__ctor_eafe4	uVar2	copiedField0x140	INFERRED	source+0x140 copied to this[0x50]	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x140\);$	+1
+use	LoopHeader__ctor_eafe4	uVar2	copiedField0x140	INFERRED	source+0x140 copied to this[0x50]	^\s*param_1\[0x50\]\ =\ uVar2;$	+1
+use	LoopHeader__ctor_eafe4	uVar3	copiedField0x13c	INFERRED	source+0x13c copied to this[0x4f]	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x13c\);$	+1
+use	LoopHeader__ctor_eafe4	uVar3	copiedField0x13c	INFERRED	source+0x13c copied to this[0x4f]	^\s*param_1\[0x4f\]\ =\ uVar3;$	+1
+use	LoopHeader__ctor_eafe4	uVar4	copiedField0x12c	INFERRED	source+0x12c copied to this[0x4b]	^\s*uVar4\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 300\);$	+1
+use	LoopHeader__ctor_eafe4	uVar4	copiedField0x12c	INFERRED	source+0x12c copied to this[0x4b]	^\s*param_1\[0x4b\]\ =\ uVar4;$	+1
+use	LoopHeader__ctor_eafe4	uVar5	copiedField0x138	INFERRED	source+0x138 copied to this[0x4e]	^\s*uVar5\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x138\);$	+1
+use	LoopHeader__ctor_eafe4	uVar5	copiedField0x138	INFERRED	source+0x138 copied to this[0x4e]	^\s*param_1\[0x4e\]\ =\ uVar5;$	+1
+use	LoopHeader__ctor_eafe4	uVar6	copiedField0x134	INFERRED	source+0x134 copied to this[0x4d]	^\s*uVar6\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x134\);$	+1
+use	LoopHeader__ctor_eafe4	uVar6	copiedField0x134	INFERRED	source+0x134 copied to this[0x4d]	^\s*param_1\[0x4d\]\ =\ uVar6;$	+1
+use	FUN_000ecb90	iVar1	foldableMov	INFERRED	FUN_0011379c(compiler, inst): inst is a foldable mov	^\s*iVar1\ =\ FUN_0011379c\(param_2,param_1\);$	+2
+use	FUN_000ecb90	iVar1	flagBitQuery	INFERRED	OpcodeTraits flag query on the instruction's opcode id	^\s*iVar1\ =\ FUN_00113090\(uVar2,param_2\);$	+3
+use	FUN_000ecb90	uVar2	opcodeId	INFERRED	opcode id (descriptor +8) of inst	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x88\)\ \+\ 8\);$	+4
+use	FUN_000ec6b0	iVar1	nextBlockLink	INFERRED	next link (+8) of the block list	^\s*iVar1\ =\ \*\(int\ \*\)\(iVar2\ \+\ 8\);$	+1
+use	FUN_000ec6b0	iVar1	nextBlockLink	INFERRED	next link (+8) of the block list	^\s*if\ \(iVar1\ ==\ 0\)\ \{$	+1
+use	FUN_000ec6b0	iVar1	nextBlockLink	INFERRED	next link (+8) of the block list	^\s*iVar1\ =\ \*\(int\ \*\)\(iVar2\ \+\ 8\);$@2	+1
+use	FUN_000ec6b0	iVar1	edgeCount	INFERRED	predecessor / successor count of the block	^\s*iVar1\ =\ FUN_000e79dc\(iVar2\);$	+2
+use	FUN_000ec6b0	iVar2	block	INFERRED	block under test, walked through the list from program+900	^\s*iVar2\ =\ \*\(int\ \*\)\(param_1\ \+\ 900\);$	+2
+use	FUN_000ec6b0	iVar2	block	INFERRED	block under test, walked through the list from program+900	^\s*iVar1\ =\ FUN_000e79dc\(iVar2\);$	+4
+use	FUN_000e3544	iVar1	compilerObj	INFERRED	program+8: the compiler	^\s*iVar1\ =\ \*\(int\ \*\)\(param_2\ \+\ 8\);$	+1
+use	FUN_000e3544	iVar1	compilerObj	INFERRED	program+8: the compiler	^\s*\*param_1\ =\ iVar1;$	+1
+use	FUN_000e3544	iVar1	compilerObj	INFERRED	program+8: the compiler	^\s*uVar4\ =\ \*\(undefined4\ \*\)\(iVar1\ \+\ 0x378\);$	+1
+use	FUN_000e3544	piVar3	sinkObject	INFERRED	object created through hardware-info vtable +0x68; initialised with vtable +0x14 and stored at encoder[8]	^\s*piVar3\ =\ \*\(int\ \*\*\)\(\*param_1\ \+\ 0x30c\);$	+3
+use	FUN_000e3544	piVar3	sinkObject	INFERRED	object created through hardware-info vtable +0x68; initialised with vtable +0x14 and stored at encoder[8]	^\s*\(\*\*\(code\ \*\*\)\(\*piVar3\ \+\ 0x14\)\)\(piVar3,param_1,param_3,\*param_1\);$	+1
+use	LoopHeader__ctor_eaee8	uVar1	copiedField0x144	INFERRED	source+0x144 copied to this[0x51]	^\s*uVar1\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x144\);$	+1
+use	LoopHeader__ctor_eaee8	uVar1	copiedField0x144	INFERRED	source+0x144 copied to this[0x51]	^\s*param_1\[0x51\]\ =\ uVar1;$	+1
+use	LoopHeader__ctor_eaee8	uVar2	copiedField0x140	INFERRED	source+0x140 copied to this[0x50]	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x140\);$	+1
+use	LoopHeader__ctor_eaee8	uVar2	copiedField0x140	INFERRED	source+0x140 copied to this[0x50]	^\s*param_1\[0x50\]\ =\ uVar2;$	+1
+use	LoopHeader__ctor_eaee8	uVar3	copiedField0x13c	INFERRED	source+0x13c copied to this[0x4f]	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x13c\);$	+1
+use	LoopHeader__ctor_eaee8	uVar3	copiedField0x13c	INFERRED	source+0x13c copied to this[0x4f]	^\s*param_1\[0x4f\]\ =\ uVar3;$	+1
+use	LoopHeader__ctor_eaee8	uVar4	copiedField0x12c	INFERRED	source+0x12c copied to this[0x4b]	^\s*uVar4\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 300\);$	+1
+use	LoopHeader__ctor_eaee8	uVar4	copiedField0x12c	INFERRED	source+0x12c copied to this[0x4b]	^\s*param_1\[0x4b\]\ =\ uVar4;$	+1
+use	LoopHeader__ctor_eaee8	uVar5	copiedField0x138	INFERRED	source+0x138 copied to this[0x4e]	^\s*uVar5\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x138\);$	+1
+use	LoopHeader__ctor_eaee8	uVar5	copiedField0x138	INFERRED	source+0x138 copied to this[0x4e]	^\s*param_1\[0x4e\]\ =\ uVar5;$	+1
+use	LoopHeader__ctor_eaee8	uVar6	copiedField0x134	INFERRED	source+0x134 copied to this[0x4d]	^\s*uVar6\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x134\);$	+1
+use	LoopHeader__ctor_eaee8	uVar6	copiedField0x134	INFERRED	source+0x134 copied to this[0x4d]	^\s*param_1\[0x4d\]\ =\ uVar6;$	+1
+local	Block__nearestCommonAncestor	param_1	blockA	INFERRED	first block, moved up through the parent link (+0xf0)
+local	Block__nearestCommonAncestor	param_2	blockB	INFERRED	second block, moved up through the parent link (+0xf0)
+local	Program__loadDefaultConstants	local_38	defaultFloatX	INFERRED	x of the default float constant read by CompileInput__readFloatConst (4-float buffer)
+local	Program__loadDefaultConstants	local_34	defaultFloatY	INFERRED	y of the default float constant
+local	Program__loadDefaultConstants	local_30	defaultFloatZ	INFERRED	z of the default float constant
+local	Program__loadDefaultConstants	local_2c	defaultFloatW	INFERRED	w of the default float constant
+func	FUN_000f9140	Program__createInstForIlOpcode	INFERRED	creates the IR instruction for ilOpcode through the opcode record's constructor callback; for IL opcodes 0x22/0x23/0x40/0x41/0x44/0x49 (when flag and hardware query allow) the instruction's opcode info is replaced by that of IR opcodes 0xdf/0xde/0xf0/0xb7/0xb8/0xb6
+local	FUN_000f9140	param_3	remapFlag	INFERRED	nonzero allows the opcode remapping
+func	FUN_000ec6b0	Program__findBranchingBlock	INFERRED	returns the first block (after the entry) with more than one predecessor or more than one successor, 0 when none
+local	FUN_000ec6b0	param_1	program	INFERRED	program whose blocks (+900) are scanned
+func	FUN_000e3544	EncoderState__init	INFERRED	initialises the encoder state: program and compiler pointers, zeroed counters (+4..+0x1c), three arena vectors (+0x24/+0x28/+0x2c) and the sink object (+0x20)
+local	FUN_000e3544	param_2	program	INFERRED	program whose compiler (+8) is recorded
+local	FUN_000e3544	param_3	sinkArg	INFERRED	argument forwarded to the sink object's initialiser (vtable +0x14)
+local	FUN_000ecb90	param_1	inst	INFERRED	instruction tested

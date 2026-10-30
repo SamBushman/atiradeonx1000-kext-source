@@ -12,8 +12,8 @@
 0xe21cc	Compiler__compileStages
 0xe34c8	FUN_000e33cc
 0xe3524	FUN_000e33cc
-0xe3640	FUN_000e3544
-0xe369c	FUN_000e3544
+0xe3640	EncoderState__init
+0xe369c	EncoderState__init
 0xe3948	MachineCodeWriter__encodeProgram
 0xe42c0	FUN_000e3b88
 0xe5638	ILReader__ctor_e5570

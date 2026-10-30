@@ -2737,54 +2737,54 @@ int FUN_000f9038(param_1, tempIndex, list)
   return inst;
 }
 
-/* FUN_000f9140 @ 0xf9140 (284 bytes) */
-int FUN_000f9140(program, ilOpcode, param_3)
+/* Program__createInstForIlOpcode @ 0xf9140 (284 bytes) */
+int Program__createInstForIlOpcode(program, ilOpcode, remapFlag)
   int program;
   int ilOpcode;
-  int param_3;
+  int remapFlag;
 {
-  int *a0;
-  int iVar1;
+  int *hardwareInfo;
+  int hwQueryResult;
   undefined4 opcodeInfo;
   undefined4 staleArgR6;
   undefined4 staleArgR7;
   undefined4 staleArgR8;
-  int iVar3;
+  int createdInst;
   
-  iVar3 = *(int *)(*(int *)(*(int *)(program + 8) + 0x30c) + 0xc);
-  iVar3 = (**(code **)(ilOpcode * 0x24 + iVar3 + 0x14))
-                    (*(undefined4 *)(ilOpcode * 0x24 + iVar3),*(int *)(program + 8),param_3,staleArgR6,
-                     staleArgR7,staleArgR8,iVar3);
-  if ((param_3 != 0) &&
-     (a0 = *(int **)(*(int *)(program + 8) + 0x30c), iVar1 = (**(code **)(*a0 + 0xb0))(a0),
-     iVar1 != 0)) {
+  createdInst = *(int *)(*(int *)(*(int *)(program + 8) + 0x30c) + 0xc);
+  createdInst = (**(code **)(ilOpcode * 0x24 + createdInst + 0x14))
+                    (*(undefined4 *)(ilOpcode * 0x24 + createdInst),*(int *)(program + 8),remapFlag,staleArgR6,
+                     staleArgR7,staleArgR8,createdInst);
+  if ((remapFlag != 0) &&
+     (hardwareInfo = *(int **)(*(int *)(program + 8) + 0x30c), hwQueryResult = (**(code **)(*hardwareInfo + 0xb0))(hardwareInfo),
+     hwQueryResult != 0)) {
     switch(ilOpcode) {
     case 0x22:
       opcodeInfo = Opcode__getInfo(0xdf);
-      *(undefined4 *)(iVar3 + 0x88) = opcodeInfo;
+      *(undefined4 *)(createdInst + 0x88) = opcodeInfo;
       break;
     case 0x23:
       opcodeInfo = Opcode__getInfo(0xde);
-      *(undefined4 *)(iVar3 + 0x88) = opcodeInfo;
+      *(undefined4 *)(createdInst + 0x88) = opcodeInfo;
       break;
     case 0x40:
       opcodeInfo = Opcode__getInfo(0xf0);
-      *(undefined4 *)(iVar3 + 0x88) = opcodeInfo;
+      *(undefined4 *)(createdInst + 0x88) = opcodeInfo;
       break;
     case 0x41:
       opcodeInfo = Opcode__getInfo(0xb7);
-      *(undefined4 *)(iVar3 + 0x88) = opcodeInfo;
+      *(undefined4 *)(createdInst + 0x88) = opcodeInfo;
       break;
     case 0x44:
       opcodeInfo = Opcode__getInfo(0xb8);
-      *(undefined4 *)(iVar3 + 0x88) = opcodeInfo;
+      *(undefined4 *)(createdInst + 0x88) = opcodeInfo;
       break;
     case 0x49:
       opcodeInfo = Opcode__getInfo(0xb6);
-      *(undefined4 *)(iVar3 + 0x88) = opcodeInfo;
+      *(undefined4 *)(createdInst + 0x88) = opcodeInfo;
     }
   }
-  return iVar3;
+  return createdInst;
 }
 
 /* Program__appendInst @ 0xf92fc (480 bytes) */
@@ -3953,10 +3953,10 @@ int Program__loadDefaultConstants(program, ilReader)
   undefined4 local_44;
   undefined4 local_40;
   undefined4 local_3c;
-  float local_38;
-  float local_34;
-  float local_30;
-  float local_2c;
+  float defaultFloatX;
+  float defaultFloatY;
+  float defaultFloatZ;
+  float defaultFloatW;
   
   programKindSet = *(uint *)(program + 0x30) & 1 | *(uint *)(program + 0x30) >> 0xe & 1;
   boolConstCount = CompileInput__getBoolConstCount(*(undefined4 *)(*(int *)(program + 8) + 0x398),programKindSet);
@@ -3985,11 +3985,11 @@ int Program__loadDefaultConstants(program, ilReader)
   if (0 < floatConstCount) {
     constIndex = 0;
     do {
-      CompileInput__readFloatConst(*(undefined4 *)(*(int *)(program + 8) + 0x398),programKindSet,constIndex,4,&local_38);
-      ((void (*)())ILReader__appendFloatConst)(ilReader,constIndex,(double)local_38,(double)local_34,(double)local_30,(double)local_2c
+      CompileInput__readFloatConst(*(undefined4 *)(*(int *)(program + 8) + 0x398),programKindSet,constIndex,4,&defaultFloatX);
+      ((void (*)())ILReader__appendFloatConst)(ilReader,constIndex,(double)defaultFloatX,(double)defaultFloatY,(double)defaultFloatZ,(double)defaultFloatW
                   );
       nextConstIndex = constIndex + 1;
-      ((int (*)())Program__createConstantVReg)(program,1,constIndex,4,&local_38);
+      ((int (*)())Program__createConstantVReg)(program,1,constIndex,4,&defaultFloatX);
       constIndex = nextConstIndex;
     } while (floatConstCount != nextConstIndex);
   }
@@ -8435,7 +8435,7 @@ code_r0x00101d1c:
   case 7:
     isTranslationKind7 = true;
   }
-  builtInstB = (uint ******)((int (*)())FUN_000f9140)(program,ilOpcode,(uint)*tokenWords >> 0x10 & 0x3fff);
+  builtInstB = (uint ******)((int (*)())Program__createInstForIlOpcode)(program,ilOpcode,(uint)*tokenWords >> 0x10 & 0x3fff);
   ((int (*)())FUN_000f9a58)(program,pendingListA,*ilReader[0x19],loopStackData,outputSlotCounter);
   registerIndex2 = *(short *)((int)*ilReader[0x19] + 2);
   registerFile = Program__registerFileOfIlType(program,(uint)**ilReader[0x19] >> 0x10 & 0x3f);
@@ -8506,7 +8506,7 @@ code_r0x00101d1c:
       scopeLevelPtrCopy = scopeLevelPtr;
       do {
         firstWrittenLaneB = SelectWord__firstWrittenComponent(stagedSelectWord);
-        copiedInst = ((int (*)())FUN_000f9140)(program,ilOpcode,(uint)*tokenWords >> 0x10 & 0x3fff);
+        copiedInst = ((int (*)())Program__createInstForIlOpcode)(program,ilOpcode,(uint)*tokenWords >> 0x10 & 0x3fff);
         stagedSelectCopy = scopeLevelPtrCopy;
         if (0 < (int)operandCountPlusOne) {
           operandLoopIndex = (uint ******)0x0;

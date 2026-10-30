@@ -952,28 +952,28 @@ int LoopHeader__ctor_eaee8(this, source)
   undefined4 *this;
   int source;
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
-  undefined4 uVar3;
-  undefined4 uVar4;
-  undefined4 uVar5;
-  undefined4 uVar6;
+  undefined4 copiedField0x144;
+  undefined4 copiedField0x140;
+  undefined4 copiedField0x13c;
+  undefined4 copiedField0x12c;
+  undefined4 copiedField0x138;
+  undefined4 copiedField0x134;
   
   ((int (*)())Block__ctor_e9f00)(this,source);
-  uVar1 = *(undefined4 *)(source + 0x144);
-  uVar4 = *(undefined4 *)(source + 300);
-  uVar6 = *(undefined4 *)(source + 0x134);
-  uVar5 = *(undefined4 *)(source + 0x138);
-  uVar3 = *(undefined4 *)(source + 0x13c);
-  uVar2 = *(undefined4 *)(source + 0x140);
+  copiedField0x144 = *(undefined4 *)(source + 0x144);
+  copiedField0x12c = *(undefined4 *)(source + 300);
+  copiedField0x134 = *(undefined4 *)(source + 0x134);
+  copiedField0x138 = *(undefined4 *)(source + 0x138);
+  copiedField0x13c = *(undefined4 *)(source + 0x13c);
+  copiedField0x140 = *(undefined4 *)(source + 0x140);
   this[3] = this[3] | 0x20;
   *this = &PTR_FUN_001e9bb8;
-  this[0x4b] = uVar4;
-  this[0x4d] = uVar6;
-  this[0x4e] = uVar5;
-  this[0x4f] = uVar3;
-  this[0x50] = uVar2;
-  this[0x51] = uVar1;
+  this[0x4b] = copiedField0x12c;
+  this[0x4d] = copiedField0x134;
+  this[0x4e] = copiedField0x138;
+  this[0x4f] = copiedField0x13c;
+  this[0x50] = copiedField0x140;
+  this[0x51] = copiedField0x144;
   return;
 }
 
@@ -996,28 +996,28 @@ int LoopHeader__ctor_eafe4(this, source)
   undefined4 *this;
   int source;
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
-  undefined4 uVar3;
-  undefined4 uVar4;
-  undefined4 uVar5;
-  undefined4 uVar6;
+  undefined4 copiedField0x144;
+  undefined4 copiedField0x140;
+  undefined4 copiedField0x13c;
+  undefined4 copiedField0x12c;
+  undefined4 copiedField0x138;
+  undefined4 copiedField0x134;
   
   ((int (*)())Block__ctor_e9f00)(this,source);
-  uVar1 = *(undefined4 *)(source + 0x144);
-  uVar4 = *(undefined4 *)(source + 300);
-  uVar6 = *(undefined4 *)(source + 0x134);
-  uVar5 = *(undefined4 *)(source + 0x138);
-  uVar3 = *(undefined4 *)(source + 0x13c);
-  uVar2 = *(undefined4 *)(source + 0x140);
+  copiedField0x144 = *(undefined4 *)(source + 0x144);
+  copiedField0x12c = *(undefined4 *)(source + 300);
+  copiedField0x134 = *(undefined4 *)(source + 0x134);
+  copiedField0x138 = *(undefined4 *)(source + 0x138);
+  copiedField0x13c = *(undefined4 *)(source + 0x13c);
+  copiedField0x140 = *(undefined4 *)(source + 0x140);
   this[3] = this[3] | 0x20;
   *this = &PTR_FUN_001e9bb8;
-  this[0x4b] = uVar4;
-  this[0x4d] = uVar6;
-  this[0x4e] = uVar5;
-  this[0x4f] = uVar3;
-  this[0x50] = uVar2;
-  this[0x51] = uVar1;
+  this[0x4b] = copiedField0x12c;
+  this[0x4d] = copiedField0x134;
+  this[0x4e] = copiedField0x138;
+  this[0x4f] = copiedField0x13c;
+  this[0x50] = copiedField0x140;
+  this[0x51] = copiedField0x144;
   return;
 }
 
