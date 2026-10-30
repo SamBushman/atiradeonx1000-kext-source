@@ -1144,7 +1144,7 @@
 0xd4e8c	scDumpPixelProgram	84	yes	
 0xd4ef0	ffpsBuildRgbSourceOperand	628	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0xd51a0	ffpsBuildAlphaSourceOperand	460	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0xd5390	FUN_000d5390	548	no	indirect call (driver context / vtable / callback)
+0xd5390	ffpsEmitColorOutputMovs	548	no	indirect call (driver context / vtable / callback)
 0xd55c0	FUN_000d55c0	832	no	indirect call (driver context / vtable / callback)
 0xd5900	ffpsEmitDeclarations	2612	no	indirect call (driver context / vtable / callback)
 0xd6340	ffpsEmitTexEnvCombine	4540	no	indirect call (driver context / vtable / callback)
@@ -1365,7 +1365,7 @@
 0xe86f0	LoopHeader__verify	236	no	indirect call (driver context / vtable / callback)
 0xe87e4	IfHeader__canFlatten	340	no	indirect call (driver context / vtable / callback)
 0xe8938	Block__createEntryExitInsts	176	yes	
-0xe8a08	FUN_000e8a08	376	yes	
+0xe8a08	Block__initVectors	376	yes	
 0xe8bac	FUN_000e8bac	104	yes	
 0xe8c14	FUN_000e8c14	104	yes	
 0xe8c7c	FUN_000e8c7c	104	yes	
@@ -1481,7 +1481,7 @@
 0xee7a0	Program__buildBlockArrayByKey	492	yes	
 0xee9ac	Program__addInst	120	yes	
 0xeea24	Program__pinInputRegisters	556	no	indirect call (driver context / vtable / callback)
-0xeec50	FUN_000eec50	1140	no	indirect call (driver context / vtable / callback)
+0xeec50	Program__emitDepthExportScale	1140	no	indirect call (driver context / vtable / callback)
 0xeee4c	FUN_000eee4c	920	no	indirect call (driver context / vtable / callback)
 0xef204	Program__splitExports	660	no	indirect call (driver context / vtable / callback)
 0xef498	Program__initAndTranslate	1084	no	indirect call (driver context / vtable / callback)
@@ -1561,7 +1561,7 @@
 0xf4d80	ConstRecord__findInTable	92	yes	
 0xf4ddc	ConstRecord__insertSwizzleVariants	512	yes	
 0xf4fdc	Compiler__getOrCreateLoadConstN	588	yes	
-0xf5248	FUN_000f5248	376	yes	
+0xf5248	Compiler__getOrCreateLoadConst4	376	yes	
 0xf53c0	Compiler__getOrCreateLoadConst3	396	yes	
 0xf554c	Compiler__getOrCreateLoadConst2	352	yes	
 0xf56ac	Compiler__getOrCreateLoadConst1	324	yes	

@@ -2638,8 +2638,8 @@ int Block__createEntryExitInsts(block)
   return;
 }
 
-/* FUN_000e8a08 @ 0xe8a08 (376 bytes) */
-int FUN_000e8a08(block)
+/* Block__initVectors @ 0xe8a08 (376 bytes) */
+int Block__initVectors(block)
   int block;
 {
   undefined4 arenaAt374;

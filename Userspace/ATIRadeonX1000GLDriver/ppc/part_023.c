@@ -341,7 +341,7 @@ int Block__ctor_e9d68(this, owner)
   this[0x3f] = 0;
   this[0x40] = 0;
   this[0x41] = 0;
-  FUN_000e8a08(this);
+  Block__initVectors(this);
   Block__createEntryExitInsts(this);
   bitSetIndex = Program__allocateBitSetIndex(this[0x2b],r4AfterCall,staleArgR5,staleArgR6,staleArgR7,ownerField0x110,ownerField0xdc);
   this[0x2d] = bitSetIndex;
@@ -412,7 +412,7 @@ int Block__ctor_e9f00(this, owner)
   this[0x3f] = 0;
   this[0x40] = 0;
   this[0x41] = 0;
-  FUN_000e8a08(this);
+  Block__initVectors(this);
   Block__createEntryExitInsts(this);
   bitSetIndex = Program__allocateBitSetIndex(this[0x2b],r4AfterCall,staleArgR5,staleArgR6,staleArgR7,ownerField0x110,ownerField0xdc);
   this[0x2d] = bitSetIndex;
@@ -460,7 +460,7 @@ int Block__ctor_ea020(this, compiler)
   this[0x43] = 0;
   this[0x44] = 0;
   this[0x45] = 0;
-  FUN_000e8a08(this);
+  Block__initVectors(this);
   Block__createEntryExitInsts(this);
   loopCounter = 0x20;
   puVar1 = this;
@@ -516,7 +516,7 @@ int Block__ctor_ea148(this, compiler)
   this[0x43] = 0;
   this[0x44] = 0;
   this[0x45] = 0;
-  FUN_000e8a08(this);
+  Block__initVectors(this);
   Block__createEntryExitInsts(this);
   loopCounter = 0x20;
   puVar1 = this;

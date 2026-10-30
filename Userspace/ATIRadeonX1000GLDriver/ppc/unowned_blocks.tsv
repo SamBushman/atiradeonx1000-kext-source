@@ -2832,8 +2832,8 @@ d51fc	d5200	padding	ffpsBuildAlphaSourceOperand	1
 d5224	d5230	padding	ffpsBuildAlphaSourceOperand	3	
 d52cc	d52d0	padding	ffpsBuildAlphaSourceOperand	1	
 d5384	d5390	padding	ffpsBuildAlphaSourceOperand	3	
-d53dc	d53e0	padding	FUN_000d5390	1	
-d55b8	d55c0	padding	FUN_000d5390	2	
+d53dc	d53e0	padding	ffpsEmitColorOutputMovs	1	
+d55b8	d55c0	padding	ffpsEmitColorOutputMovs	2	
 d5e58	d5e60	padding	ffpsEmitDeclarations	2	
 d633c	d6340	padding	ffpsEmitDeclarations	1	
 d64b8	d64c0	padding	ffpsEmitTexEnvCombine	2	
@@ -2902,10 +2902,10 @@ e7650	e7658	other	ILReader__nextInstruction	2
 e86d0	e86f0	millicode	Block__verify	8	
 e87dc	e87e4	millicode	LoopHeader__verify	2	
 e89bc	e89dc	eh-pad	Block__createEntryExitInsts	8	0x193cc0,__Unwind_Resume
-e8ad4	e8ad8	millicode	FUN_000e8a08	1	
-e8b20	e8b24	millicode	FUN_000e8a08	1	
-e8b6c	e8b70	millicode	FUN_000e8a08	1	
-e8b8c	e8bac	eh-pad	FUN_000e8a08	8	0x193cc0,__Unwind_Resume
+e8ad4	e8ad8	millicode	Block__initVectors	1	
+e8b20	e8b24	millicode	Block__initVectors	1	
+e8b6c	e8b70	millicode	Block__initVectors	1	
+e8b8c	e8bac	eh-pad	Block__initVectors	8	0x193cc0,__Unwind_Resume
 e9e64	e9e88	eh-pad	Block__ctor_e9d68	9	__Unwind_Resume
 e9ec8	e9ee8	eh-pad	Block__clone	8	0x193cc0,__Unwind_Resume
 e9ffc	ea020	eh-pad	Block__ctor_e9f00	9	__Unwind_Resume
@@ -2953,13 +2953,13 @@ edbf0	edc10	eh-pad	FUN_000ed89c	8	0x193cc0,__Unwind_Resume
 ee114	ee118	millicode	Program__ctor_edd98	1	
 ee214	ee218	millicode	Program__ctor_edd98	1	
 ee244	ee260	other	Program__ctor_edd98	7	0x193cc0
-ee27c	ee29c	eh-pad	FUN_000eec50	8	__Unwind_Resume
+ee27c	ee29c	eh-pad	Program__emitDepthExportScale	8	__Unwind_Resume
 ee618	ee61c	millicode	Program__ctor_ee29c	1	
 ee718	ee71c	millicode	Program__ctor_ee29c	1	
 ee748	ee764	other	Program__ctor_ee29c	7	0x193cc0
-ee780	ee7a0	eh-pad	FUN_000eec50	8	__Unwind_Resume
+ee780	ee7a0	eh-pad	Program__emitDepthExportScale	8	__Unwind_Resume
 ee830	ee850	eh-pad	Program__buildBlockArrayByKey	8	0x193cc0,__Unwind_Resume
-eede8	eee08	eh-pad	FUN_000eec50	8	0x193cc0,__Unwind_Resume
+eede8	eee08	eh-pad	Program__emitDepthExportScale	8	0x193cc0,__Unwind_Resume
 ef038	ef058	eh-pad	FUN_000eee4c	8	0x193cc0,__Unwind_Resume
 ef79c	ef7a0	millicode	Program__initAndTranslate	1	
 ef7f8	ef818	eh-pad	Program__initAndTranslate	8	0x193cc0,__Unwind_Resume

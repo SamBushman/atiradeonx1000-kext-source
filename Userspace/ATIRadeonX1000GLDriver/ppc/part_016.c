@@ -9029,7 +9029,7 @@ LAB_000b66b8:
     } while (bVar2);
   }
   else {
-    FUN_000d5390(glContext,puVar14,0,uVar12,*(uint *)(puVar7 + 0x1668) >> 6 & 0xffff);
+    ffpsEmitColorOutputMovs(glContext,puVar14,0,uVar12,*(uint *)(puVar7 + 0x1668) >> 6 & 0xffff);
     uVar5 = *puVar14;
   }
   if (*(uint *)(puVar7 + 8) <= uVar5) {

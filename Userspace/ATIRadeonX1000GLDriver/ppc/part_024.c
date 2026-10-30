@@ -1817,8 +1817,8 @@ int Program__pinInputRegisters(program)
   return;
 }
 
-/* FUN_000eec50 @ 0xeec50 (1072 bytes) */
-int FUN_000eec50(program, unusedArg2)
+/* Program__emitDepthExportScale @ 0xeec50 (1072 bytes) */
+int Program__emitDepthExportScale(program, unusedArg2)
   int program;
   undefined4 unusedArg2;
 {
@@ -2346,7 +2346,7 @@ int Program__initAndTranslate(program, ilReader)
   hwDescription = *(int **)(*(int *)(program + 8) + 0x30c);
   (**(code **)(*hwDescription + 0x14))(hwDescription,shaderKind,*(int *)(program + 8));
   if (shaderKind2 == 1) {
-    ((int (*)())FUN_000eec50)(program,r4AfterCall2);
+    ((int (*)())Program__emitDepthExportScale)(program,r4AfterCall2);
   }
   else if ((shaderKind2 == 2) || (shaderKind2 == 0)) {
     hwDescription = *(int **)(*(int *)(program + 8) + 0x30c);

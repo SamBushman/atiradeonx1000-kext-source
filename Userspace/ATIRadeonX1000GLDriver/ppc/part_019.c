@@ -232,8 +232,8 @@ LAB_000d52a0:
   return;
 }
 
-/* FUN_000d5390 @ 0xd5390 (548 bytes) */
-int FUN_000d5390(ctx, ilBuilder, isFirstUnit, previousUnit, componentMask)
+/* ffpsEmitColorOutputMovs @ 0xd5390 (548 bytes) */
+int ffpsEmitColorOutputMovs(ctx, ilBuilder, isFirstUnit, previousUnit, componentMask)
   int ctx;
   uint *ilBuilder;
   int isFirstUnit;
@@ -241,7 +241,7 @@ int FUN_000d5390(ctx, ilBuilder, isFirstUnit, previousUnit, componentMask)
   uint componentMask;
 {
   uint newTokenBuffer;
-  bool bVar1;
+  bool notLastComponent;
   uint tokenIndex;
   uint componentToken;
   uint sourceToken;
@@ -298,9 +298,9 @@ int FUN_000d5390(ctx, ilBuilder, isFirstUnit, previousUnit, componentMask)
       *(uint *)(tokenIndex * 4 + ilBuilder[2]) = sourceToken;
       *ilBuilder = *ilBuilder + 1;
     }
-    bVar1 = loopCounter != 3;
+    notLastComponent = loopCounter != 3;
     loopCounter = loopCounter + 1;
-  } while (bVar1);
+  } while (notLastComponent);
   return;
 }
 

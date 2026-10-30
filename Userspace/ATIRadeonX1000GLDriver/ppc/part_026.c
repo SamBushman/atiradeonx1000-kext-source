@@ -221,8 +221,8 @@ int Compiler__getOrCreateLoadConstN(compiler, constCount, firstConstKind, firstC
 }
 #undef local_8c
 
-/* FUN_000f5248 @ 0xf5248 (376 bytes) */
-int FUN_000f5248(compiler, constVec0, constVec1, constVec2, constVec3, constVec4, constVec5, constVec6)
+/* Compiler__getOrCreateLoadConst4 @ 0xf5248 (376 bytes) */
+int Compiler__getOrCreateLoadConst4(compiler, constVec0, constVec1, constVec2, constVec3, constVec4, constVec5, constVec6)
   undefined4 compiler;
   undefined4 constVec0;
   undefined4 constVec1;
@@ -1695,7 +1695,7 @@ LAB_000f70d4:
           loadConst4Op3Word3 = operandPtrTable[6][3];
           loadConst4Op3Word5 = operandPtrTable[6][5];
           loadConst4Op3Word4 = operandPtrTable[6][4];
-          loadConstSource = ((int (*)())FUN_000f5248)(*(undefined4 *)(program + 0x3ac),loadConst4Op0Kind,loadConst4Op0Value,loadConst4Op0Word2,
+          loadConstSource = ((int (*)())Compiler__getOrCreateLoadConst4)(*(undefined4 *)(program + 0x3ac),loadConst4Op0Kind,loadConst4Op0Value,loadConst4Op0Word2,
                                loadConst4Op0Word3,loadConst4Op0Word4,loadConst4Op0Word5,loadConst4Op1Kind);
           programFlags = *(uint *)(program + 0x30);
         }

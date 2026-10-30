@@ -2607,3 +2607,9 @@ local	FUN_000f497c	local_20	selectedMask	INFERRED	laneBytes__selectWhereFirstIsO
 func	FUN_000f9038	Program__emitClampPair	INFERRED	appends two instructions (opcodes 0x17 and 0x19, each reading and writing temp tempIndex with a vec4 float literal FLOAT_001aa0d4 / FLOAT_001aa0e8) to list
 local	FUN_000f9038	param_1	program	INFERRED	program
 local	FUN_000f9038	dVar3	literalValue	INFERRED	float literal widened to double for IRInst__makeLiteralVec4Float
+func	FUN_000e8a08	Block__initVectors	INFERRED	allocates the five empty arena vectors of a block: definitions (+0xc4), dominance frontier (+0xf8), dominator-tree children (+0xf4), successors (+0xd0), predecessors (+0xd4)
+func	FUN_000f5248	Compiler__getOrCreateLoadConst4	INFERRED	Compiler__getOrCreateLoadConstN with count 4 (sibling of Compiler__getOrCreateLoadConst1/2/3)
+func	FUN_000d5390	ffpsEmitColorOutputMovs	INFERRED	for every component set in componentMask emits IL opcode 0xe with destination token 0x17xxxx|component (output color) and the source token of the last texture unit result (or 0x120000 for the first unit)
+use	FUN_000d5390	bVar1	notLastComponent	INFERRED	loop continue flag (component != 3)	^\s*bVar1\ =\ uVar5\ !=\ 3;$	+1
+use	FUN_000d5390	bVar1	notLastComponent	INFERRED	loop continue flag (component != 3)	^\s*\}\ while\ \(bVar1\);$	+1
+func	FUN_000eec50	Program__emitDepthExportScale	INFERRED	for fragment programs with an export block: inserts the export of the default value when none exists, then builds the mad/mul/clamp sequence that rescales the depth export (literals 0.5 and 0.99999994)

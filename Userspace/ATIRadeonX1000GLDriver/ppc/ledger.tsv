@@ -1144,7 +1144,7 @@
 0xd4e8c	60	scDumpPixelProgram	part_019	converted
 0xd4ef0	628	ffpsBuildRgbSourceOperand	part_019	converted
 0xd51a0	460	ffpsBuildAlphaSourceOperand	part_019	converted
-0xd5390	548	FUN_000d5390	part_019	converted
+0xd5390	548	ffpsEmitColorOutputMovs	part_019	converted
 0xd55c0	832	FUN_000d55c0	part_019	converted
 0xd5900	2612	ffpsEmitDeclarations	part_019	converted
 0xd6340	4540	ffpsEmitTexEnvCombine	part_019	converted
@@ -1365,7 +1365,7 @@
 0xe86f0	236	LoopHeader__verify	part_022	converted
 0xe87e4	340	IfHeader__canFlatten	part_022	converted
 0xe8938	132	Block__createEntryExitInsts	part_022	converted
-0xe8a08	376	FUN_000e8a08	part_022	converted
+0xe8a08	376	Block__initVectors	part_022	converted
 0xe8bac	104	FUN_000e8bac	part_022	converted
 0xe8c14	104	FUN_000e8c14	part_022	converted
 0xe8c7c	104	FUN_000e8c7c	part_022	converted
@@ -1481,7 +1481,7 @@
 0xee7a0	144	Program__buildBlockArrayByKey	part_024	converted
 0xee9ac	120	Program__addInst	part_024	converted
 0xeea24	556	Program__pinInputRegisters	part_024	converted
-0xeec50	1072	FUN_000eec50	part_024	converted
+0xeec50	1072	Program__emitDepthExportScale	part_024	converted
 0xeee4c	492	FUN_000eee4c	part_024	converted
 0xef204	660	Program__splitExports	part_024	converted
 0xef498	860	Program__initAndTranslate	part_024	converted
@@ -1561,7 +1561,7 @@
 0xf4d80	92	ConstRecord__findInTable	part_025	converted
 0xf4ddc	512	ConstRecord__insertSwizzleVariants	part_026	converted
 0xf4fdc	352	Compiler__getOrCreateLoadConstN	part_026	converted
-0xf5248	376	FUN_000f5248	part_026	converted
+0xf5248	376	Compiler__getOrCreateLoadConst4	part_026	converted
 0xf53c0	396	Compiler__getOrCreateLoadConst3	part_026	converted
 0xf554c	352	Compiler__getOrCreateLoadConst2	part_026	converted
 0xf56ac	324	Compiler__getOrCreateLoadConst1	part_026	converted
