@@ -824,3 +824,449 @@ local	FUN_000ec920	param_1	program	INFERRED	program whose blocks array is walked
 local	PostLoopFooter__ctor_eb3c8	param_2	registerIndex	INFERRED	register index stored in operand 0 (+8) of the footer instruction
 local	PostLoopFooter__ctor_eb3c8	param_3	loopHeader	INFERRED	stored at this[0x53]
 local	PostLoopFooter__ctor_eb3c8	param_4	useFooterInst	INFERRED	zero builds the opcode 0x81 instruction, nonzero the opcode 0xfd one; stored at this[0x51]
+use	FUN_000fd5c8	iVar34	hwInfoObj	INFERRED	compiler+0x30c hardware-info object; its flag word (+8) has bit 0x20 cleared at start	^\s*iVar34\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x30c\);$	+1
+use	FUN_000fd5c8	iVar34	hwInfoObj	INFERRED	compiler+0x30c hardware-info object; its flag word (+8) has bit 0x20 cleared at start	^\s*\*\(uint\ \*\)\(iVar34\ \+\ 8\)\ =\ \*\(uint\ \*\)\(iVar34\ \+\ 8\)\ \&\ 0xffffffdf;$	+1
+use	FUN_000fd5c8	iVar34	hwRegisterCount	INFERRED	hardware-info +0x50: register count used to size the used-register bitmap	^\s*iVar34\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x30c\)\ \+\ 0x50\);$	+2
+use	FUN_000fd5c8	iVar34	hwRegisterCount	INFERRED	hardware-info +0x50: register count used to size the used-register bitmap	^\s*puVar13\[2\]\ =\ iVar34;$	+1
+use	FUN_000fd5c8	iVar34	nextInstOk	INFERRED	ILReader__nextInstruction result: zero ends the translation	^\s*iVar34\ =\ FUN_000e5e70\(param_2\);$	+2
+use	FUN_000fd5c8	iVar34	atFirstInst	INFERRED	FUN_000e43ec(ilReader): reader state 3 test	^\s*iVar34\ =\ FUN_000e43ec\(param_2\);$	+2
+use	FUN_000fd5c8	iVar34	programInstVector	INFERRED	program+0x3c4: vector of program instructions walked for pending movs	^\s*iVar34\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x3c4\);$	+1
+use	FUN_000fd5c8	iVar34	programInstVector	INFERRED	program+0x3c4: vector of program instructions walked for pending movs	^\s*for\ \(uVar10\ =\ 1;\ uVar10\ <=\ \*\(uint\ \*\)\(iVar34\ \+\ 4\);\ uVar10\ =\ uVar10\ \+\ 1\)\ \{$	+2
+use	FUN_000fd5c8	iVar34	programInstVector	INFERRED	program+0x3c4: vector of program instructions walked for pending movs	^\s*iVar34\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x3c4\);$@2	+1
+use	FUN_000fd5c8	iVar34	interpRecord	INFERRED	+0x38 of the virtual register looked up with FUN_00127608: the interpolator/load record whose lanes are set	^\s*iVar34\ =\ FUN_00127608\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x3ac\),uVar46,ppppppuVar19,0\);$	+5
+use	FUN_000fd5c8	iVar34	interpRecord	INFERRED	+0x38 of the virtual register looked up with FUN_00127608: the interpolator/load record whose lanes are set	^\s*FUN_001041d0\(iVar34,3,\(uint\)\*ppppppuVar49\ >>\ 0x16\ \&\ 3,in_r6,ppppppuVar19\);$	+1
+use	FUN_000fd5c8	iVar34	interpRecord	INFERRED	+0x38 of the virtual register looked up with FUN_00127608: the interpolator/load record whose lanes are set	^\s*\*\(uint\ \*\)\(iVar34\ \+\ 0x13c\)\ =\ \*\(uint\ \*\)\(iVar34\ \+\ 0x13c\)\ \|\ 1;$	+1
+use	FUN_000fd5c8	iVar34	interpRecord	INFERRED	+0x38 of the virtual register looked up with FUN_00127608: the interpolator/load record whose lanes are set	^\s*\*\(uint\ \*\*\*\*\*\*\*\)\(iVar34\ \+\ 0x148\)\ =\ ppppppuVar19;$	+3
+use	FUN_000fd5c8	iVar34	interpRecord	INFERRED	+0x38 of the virtual register looked up with FUN_00127608: the interpolator/load record whose lanes are set	^\s*iVar34\ =\ FUN_00127608\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x3ac\),uVar46,iVar43,0\);$	+2
+use	FUN_000fd5c8	iVar34	interpRecord	INFERRED	+0x38 of the virtual register looked up with FUN_00127608: the interpolator/load record whose lanes are set	^\s*\*\(uint\ \*\)\(iVar34\ \+\ 0x13c\)\ =\ \*\(uint\ \*\)\(iVar34\ \+\ 0x13c\)\ \|\ 1;$@2	+1
+use	FUN_000fd5c8	iVar34	interpRecord	INFERRED	+0x38 of the virtual register looked up with FUN_00127608: the interpolator/load record whose lanes are set	^\s*\*\(uint\ \*\)\(iVar34\ \+\ 0x13c\)\ =\ \*\(uint\ \*\)\(iVar34\ \+\ 0x13c\)\ \|\ 4;$	+1
+use	FUN_000fd5c8	iVar34	interpRecord	INFERRED	+0x38 of the virtual register looked up with FUN_00127608: the interpolator/load record whose lanes are set	^\s*\*\(uint\ \*\)\(iVar34\ \+\ 0x13c\)\ =\ \*\(uint\ \*\)\(iVar34\ \+\ 0x13c\)\ \|\ 2;$	+1
+use	FUN_000fd5c8	iVar34	interpRecord	INFERRED	+0x38 of the virtual register looked up with FUN_00127608: the interpolator/load record whose lanes are set	^\s*FUN_001041d0\(iVar34,iVar43,\(uint\)\*\(byte\ \*\)\(iVar43\ \+\ \(int\)local_70\),ppppppuVar19,$	+2
+use	FUN_000fd5c8	iVar34	interpRecord	INFERRED	+0x38 of the virtual register looked up with FUN_00127608: the interpolator/load record whose lanes are set	^\s*iVar34\ =\ FUN_00127608\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x3ac\),uVar46,ppppppuVar48,0\);$	+2
+use	FUN_000fd5c8	iVar34	interpRecord	INFERRED	+0x38 of the virtual register looked up with FUN_00127608: the interpolator/load record whose lanes are set	^\s*\*\(uint\ \*\)\(iVar34\ \+\ 0x13c\)\ =\ \*\(uint\ \*\)\(iVar34\ \+\ 0x13c\)\ \|\ 1;$@3	+1
+use	FUN_000fd5c8	iVar34	interpRecord	INFERRED	+0x38 of the virtual register looked up with FUN_00127608: the interpolator/load record whose lanes are set	^\s*\*\(uint\ \*\)\(iVar34\ \+\ 0x13c\)\ =\ \*\(uint\ \*\)\(iVar34\ \+\ 0x13c\)\ \|\ 4;$@2	+1
+use	FUN_000fd5c8	iVar34	interpRecord	INFERRED	+0x38 of the virtual register looked up with FUN_00127608: the interpolator/load record whose lanes are set	^\s*\*\(uint\ \*\)\(iVar34\ \+\ 0x13c\)\ =\ \*\(uint\ \*\)\(iVar34\ \+\ 0x13c\)\ \|\ 2;$@2	+1
+use	FUN_000fd5c8	iVar34	interpRecord	INFERRED	+0x38 of the virtual register looked up with FUN_00127608: the interpolator/load record whose lanes are set	^\s*FUN_001041d0\(iVar34,iVar43,1,ppppppuVar19,ppppppuVar48\);$	+1
+use	FUN_000fd5c8	iVar34	registerRangeStart	INFERRED	program+1000/+0x3d8 range start register index, replaced by the register index of the declaration	^\s*iVar34\ =\ \*\(int\ \*\)\(param_1\ \+\ 1000\);$	+1
+use	FUN_000fd5c8	iVar34	registerRangeStart	INFERRED	program+1000/+0x3d8 range start register index, replaced by the register index of the declaration	^\s*iVar34\ =\ iVar43;$	+1
+use	FUN_000fd5c8	iVar34	registerRangeStart	INFERRED	program+1000/+0x3d8 range start register index, replaced by the register index of the declaration	^\s*\*\(int\ \*\)\(param_1\ \+\ 1000\)\ =\ iVar34;$	+1
+use	FUN_000fd5c8	iVar34	registerRangeStart	INFERRED	program+1000/+0x3d8 range start register index, replaced by the register index of the declaration	^\s*iVar34\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x3d8\);$	+1
+use	FUN_000fd5c8	iVar34	registerRangeStart	INFERRED	program+1000/+0x3d8 range start register index, replaced by the register index of the declaration	^\s*iVar34\ =\ iVar43;$@2	+1
+use	FUN_000fd5c8	iVar34	registerRangeStart	INFERRED	program+1000/+0x3d8 range start register index, replaced by the register index of the declaration	^\s*\*\(int\ \*\)\(param_1\ \+\ 0x3d8\)\ =\ iVar34;$	+1
+use	FUN_000fd5c8	iVar34	ilRegisterRecordOffset	INFERRED	ilRegisterIndex * 0xc: byte offset of the declaration record at program+0x78	^\s*iVar34\ =\ \(uint\)bVar4\ \*\ 0xc;$	+2
+use	FUN_000fd5c8	iVar34	ilRegisterRecordOffset	INFERRED	ilRegisterIndex * 0xc: byte offset of the declaration record at program+0x78	^\s*\*\(uint\ \*\)\(iVar34\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x78\)\ \+\ 8\)\ =\ \(uint\)\*ppppppuVar49\ >>\ 0x1d\ \&\ 1;$	+1
+use	FUN_000fd5c8	iVar34	ilRegisterRecordOffset	INFERRED	ilRegisterIndex * 0xc: byte offset of the declaration record at program+0x78	^\s*\*\(int\ \*\)\(iVar34\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x78\)\ \+\ 4\)\ =\ iVar43;$	+1
+use	FUN_000fd5c8	iVar34	ilRegisterRecordOffset	INFERRED	ilRegisterIndex * 0xc: byte offset of the declaration record at program+0x78	^\s*iVar34\ =\ \(uint\)bVar4\ \*\ 0xc;$@2	+1
+use	FUN_000fd5c8	iVar34	ilRegisterRecordOffset	INFERRED	ilRegisterIndex * 0xc: byte offset of the declaration record at program+0x78	^\s*\*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x78\)\ \+\ iVar34\)\ =\ 1;$	+1
+use	FUN_000fd5c8	iVar34	ilRegisterRecordOffset	INFERRED	ilRegisterIndex * 0xc: byte offset of the declaration record at program+0x78	^\s*\*\(uint\ \*\)\(iVar34\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x78\)\ \+\ 4\)\ =\ uVar10;$	+1
+use	FUN_000fd5c8	iVar34	selectLaneByte	INFERRED	template select value (uVar10 + 4) packed into one byte of the staged select word	^\s*iVar34\ =\ uVar10\ \+\ 4;$	+1
+use	FUN_000fd5c8	iVar34	selectLaneByte	INFERRED	template select value (uVar10 + 4) packed into one byte of the staged select word	^\s*in_r7\ =\ \(uint\ \*\*\*\*\*\*\)\(iVar34\ \*\ 0x10000\ \|\ \(uint\)in_r7\ \&\ 0xff00ffff\);$	+1
+use	FUN_000fd5c8	iVar34	selectLaneByte	INFERRED	template select value (uVar10 + 4) packed into one byte of the staged select word	^\s*iVar34\ =\ uVar10\ \+\ 4;$@2	+1
+use	FUN_000fd5c8	iVar34	selectLaneByte	INFERRED	template select value (uVar10 + 4) packed into one byte of the staged select word	^\s*in_r7\ =\ \(uint\ \*\*\*\*\*\*\)\(iVar34\ \*\ 0x100\ \|\ \(uint\)in_r7\ \&\ 0xffff00ff\);$	+1
+use	FUN_000fd5c8	iVar34	selectLaneByte	INFERRED	template select value (uVar10 + 4) packed into one byte of the staged select word	^\s*iVar34\ =\ uVar10\ \+\ 4;$@3	+1
+use	FUN_000fd5c8	iVar34	selectLaneByte	INFERRED	template select value (uVar10 + 4) packed into one byte of the staged select word	^\s*in_r7\ =\ \(uint\ \*\*\*\*\*\*\)\(iVar34\ \*\ 0x1000000\ \|\ \(uint\)in_r7\ \&\ 0xffffff\);$	+1
+use	FUN_000fd5c8	iVar34	selectLaneByte	INFERRED	template select value (uVar10 + 4) packed into one byte of the staged select word	^\s*iVar34\ =\ uVar10\ \+\ 4;$@4	+1
+use	FUN_000fd5c8	iVar34	selectLaneByte	INFERRED	template select value (uVar10 + 4) packed into one byte of the staged select word	^\s*in_r7\ =\ \(uint\ \*\*\*\*\*\*\)\(iVar34\ \*\ 0x10000\ \|\ \(uint\)in_r7\ \&\ 0xff00ffff\);$@2	+1
+use	FUN_000fd5c8	iVar34	selectLaneByte	INFERRED	template select value (uVar10 + 4) packed into one byte of the staged select word	^\s*iVar34\ =\ uVar10\ \+\ 4;$@5	+1
+use	FUN_000fd5c8	iVar34	selectLaneByte	INFERRED	template select value (uVar10 + 4) packed into one byte of the staged select word	^\s*in_r7\ =\ \(uint\ \*\*\*\*\*\*\)\(iVar34\ \*\ 0x100\ \|\ \(uint\)in_r7\ \&\ 0xffff00ff\);$@2	+1
+use	FUN_000fd5c8	iVar34	selectLaneByte	INFERRED	template select value (uVar10 + 4) packed into one byte of the staged select word	^\s*iVar34\ =\ uVar10\ \+\ 4;$@6	+1
+use	FUN_000fd5c8	iVar34	selectLaneByte	INFERRED	template select value (uVar10 + 4) packed into one byte of the staged select word	^\s*in_r7\ =\ \(uint\ \*\*\*\*\*\*\)\(iVar34\ \*\ 0x10000\ \|\ \(uint\)in_r7\ \&\ 0xff00ffff\);$@3	+1
+use	FUN_000fd5c8	iVar34	selectLaneByte	INFERRED	template select value (uVar10 + 4) packed into one byte of the staged select word	^\s*iVar34\ =\ uVar10\ \+\ 4;$@7	+1
+use	FUN_000fd5c8	iVar34	selectLaneByte	INFERRED	template select value (uVar10 + 4) packed into one byte of the staged select word	^\s*in_r7\ =\ \(uint\ \*\*\*\*\*\*\)\(iVar34\ \*\ 0x100\ \|\ \(uint\)in_r7\ \&\ 0xffff00ff\);$@3	+1
+use	FUN_000fd5c8	iVar34	pendingInst	INFERRED	instruction taken from the pending-instruction list (local list head), unlinked and appended to the current block	^\s*iVar34\ =\ local_11c;$	+1
+use	FUN_000fd5c8	iVar34	pendingInst	INFERRED	instruction taken from the pending-instruction list (local list head), unlinked and appended to the current block	^\s*FUN_0019401c\(iVar34\);$	+3
+use	FUN_000fd5c8	iVar34	pendingInst	INFERRED	instruction taken from the pending-instruction list (local list head), unlinked and appended to the current block	^\s*iVar34\ =\ local_14c;$	+1
+use	FUN_000fd5c8	iVar34	pendingInst	INFERRED	instruction taken from the pending-instruction list (local list head), unlinked and appended to the current block	^\s*FUN_0019401c\(iVar34\);$@2	+3
+use	FUN_000fd5c8	iVar34	pendingInst	INFERRED	instruction taken from the pending-instruction list (local list head), unlinked and appended to the current block	^\s*iVar34\ =\ local_14c;$@2	+1
+use	FUN_000fd5c8	iVar34	pendingInst	INFERRED	instruction taken from the pending-instruction list (local list head), unlinked and appended to the current block	^\s*FUN_0019401c\(iVar34\);$@3	+3
+use	FUN_000fd5c8	iVar34	pendingInst	INFERRED	instruction taken from the pending-instruction list (local list head), unlinked and appended to the current block	^\s*iVar34\ =\ local_14c;$@3	+1
+use	FUN_000fd5c8	iVar34	pendingInst	INFERRED	instruction taken from the pending-instruction list (local list head), unlinked and appended to the current block	^\s*FUN_0019401c\(iVar34\);$@4	+3
+use	FUN_000fd5c8	iVar34	pendingInst	INFERRED	instruction taken from the pending-instruction list (local list head), unlinked and appended to the current block	^\s*iVar34\ =\ local_164;$	+1
+use	FUN_000fd5c8	iVar34	pendingInst	INFERRED	instruction taken from the pending-instruction list (local list head), unlinked and appended to the current block	^\s*FUN_0019401c\(iVar34\);$@5	+3
+use	FUN_000fd5c8	iVar34	pendingInst	INFERRED	instruction taken from the pending-instruction list (local list head), unlinked and appended to the current block	^\s*iVar34\ =\ local_164;$@2	+1
+use	FUN_000fd5c8	iVar34	pendingInst	INFERRED	instruction taken from the pending-instruction list (local list head), unlinked and appended to the current block	^\s*FUN_0019401c\(iVar34\);$@6	+3
+use	FUN_000fd5c8	iVar34	laneKind	INFERRED	Program__lookupTable8b68 kind of the declaration, selects how the lanes are set	^\s*iVar34\ =\ FUN_000ec27c\(param_1,\(uint\)\*ppppppuVar49\ >>\ 0x10\ \&\ 0x1f\);$	+1
+use	FUN_000fd5c8	iVar34	laneKind	INFERRED	Program__lookupTable8b68 kind of the declaration, selects how the lanes are set	^\s*if\ \(iVar34\ ==\ 0\)\ \{$@2	+1
+use	FUN_000fd5c8	iVar34	laneKind	INFERRED	Program__lookupTable8b68 kind of the declaration, selects how the lanes are set	^\s*else\ if\ \(iVar34\ ==\ 1\)\ \{$	+1
+use	FUN_000fd5c8	iVar34	laneKind	INFERRED	Program__lookupTable8b68 kind of the declaration, selects how the lanes are set	^\s*FUN_00104104\(uVar46,iVar43,iVar34,ppppppuVar19\);$	+1
+use	FUN_000fd5c8	iVar34	laneKind	INFERRED	Program__lookupTable8b68 kind of the declaration, selects how the lanes are set	^\s*iVar34\ =\ FUN_000ec27c\(param_1,\(uint\)\*ppppppuVar49\ >>\ 0x10\ \&\ 0x3fff\);$	+2
+use	FUN_000fd5c8	iVar34	laneKind	INFERRED	Program__lookupTable8b68 kind of the declaration, selects how the lanes are set	^\s*else\ if\ \(iVar34\ ==\ 1\)\ \{$@2	+1
+use	FUN_000fd5c8	iVar34	laneKind	INFERRED	Program__lookupTable8b68 kind of the declaration, selects how the lanes are set	^\s*if\ \(iVar34\ ==\ 0xd\)\ \{$	+1
+use	FUN_000fd5c8	iVar34	laneKind	INFERRED	Program__lookupTable8b68 kind of the declaration, selects how the lanes are set	^\s*else\ if\ \(iVar34\ ==\ 0xe\)\ \{$	+1
+use	FUN_000fd5c8	iVar34	laneKind	INFERRED	Program__lookupTable8b68 kind of the declaration, selects how the lanes are set	^\s*else\ if\ \(iVar34\ ==\ 0xb\)\ \{$	+1
+use	FUN_000fd5c8	iVar34	laneKind	INFERRED	Program__lookupTable8b68 kind of the declaration, selects how the lanes are set	^\s*else\ if\ \(iVar34\ ==\ 0xc\)\ \{$	+1
+use	FUN_000fd5c8	iVar34	laneKind	INFERRED	Program__lookupTable8b68 kind of the declaration, selects how the lanes are set	^\s*else\ if\ \(iVar34\ ==\ 0xf\)\ \{$	+1
+use	FUN_000fd5c8	iVar34	laneKind	INFERRED	Program__lookupTable8b68 kind of the declaration, selects how the lanes are set	^\s*FUN_00104104\(iVar43,iVar47,iVar34,ppppppuVar19\);$	+1
+use	FUN_000fd5c8	iVar34	destRegisterNumber	INFERRED	destination register number: 0xf when the hardware flag 0x80 applies, otherwise token[1] short	^\s*iVar34\ =\ 0xf;$	+1
+use	FUN_000fd5c8	iVar34	destRegisterNumber	INFERRED	destination register number: 0xf when the hardware flag 0x80 applies, otherwise token[1] short	^\s*iVar34\ =\ \(int\)\*\(short\ \*\)\(\(int\)param_2\[0x1b\]\[1\]\ \+\ 2\);$	+1
+use	FUN_000fd5c8	iVar34	destRegisterNumber	INFERRED	destination register number: 0xf when the hardware flag 0x80 applies, otherwise token[1] short	^\s*\*\(int\ \*\)\(iVar43\ \+\ 8\)\ =\ iVar34;$	+1
+use	FUN_000fd5c8	iVar34	destRegisterNumber	INFERRED	destination register number: 0xf when the hardware flag 0x80 applies, otherwise token[1] short	^\s*iVar34\ =\ 0xf;$@2	+1
+use	FUN_000fd5c8	iVar34	destRegisterNumber	INFERRED	destination register number: 0xf when the hardware flag 0x80 applies, otherwise token[1] short	^\s*iVar34\ =\ \(int\)\*\(short\ \*\)\(\(int\)\*param_2\[0x1b\]\ \+\ 2\);$	+1
+use	FUN_000fd5c8	iVar34	destRegisterNumber	INFERRED	destination register number: 0xf when the hardware flag 0x80 applies, otherwise token[1] short	^\s*\*\(int\ \*\)\(iVar43\ \+\ 8\)\ =\ iVar34;$@2	+1
+use	FUN_000fd5c8	iVar34	destRegisterNumber	INFERRED	destination register number: 0xf when the hardware flag 0x80 applies, otherwise token[1] short	^\s*iVar34\ =\ 0xf;$@3	+1
+use	FUN_000fd5c8	iVar34	destRegisterNumber	INFERRED	destination register number: 0xf when the hardware flag 0x80 applies, otherwise token[1] short	^\s*iVar34\ =\ \(int\)\*\(short\ \*\)\(\(int\)\*param_2\[0x1b\]\ \+\ 2\);$@2	+1
+use	FUN_000fd5c8	iVar34	destRegisterNumber	INFERRED	destination register number: 0xf when the hardware flag 0x80 applies, otherwise token[1] short	^\s*\*\(int\ \*\)\(iVar43\ \+\ 8\)\ =\ iVar34;$@3	+1
+use	FUN_000fd5c8	iVar34	destRegisterNumber	INFERRED	destination register number: 0xf when the hardware flag 0x80 applies, otherwise token[1] short	^\s*\*\(int\ \*\)\(iVar43\ \+\ 8\)\ =\ iVar34;$@4	+1
+use	FUN_000fd5c8	iVar34	destRegisterNumber	INFERRED	destination register number: 0xf when the hardware flag 0x80 applies, otherwise token[1] short	^\s*\*\(int\ \*\)\(iVar43\ \+\ 8\)\ =\ iVar34;$@5	+1
+use	FUN_000fd5c8	iVar34	immConstBuffInst	INFERRED	IRImmedConstBuff instruction (opcode 0x10a) stored at program+0x354	^\s*iVar34\ =\ FUN_00109b74\(0x10a,\*\(undefined4\ \*\)\(param_1\ \+\ 8\)\);$	+5
+use	FUN_000fd5c8	iVar34	firstSourceWordIndex	INFERRED	number of destination token words (1, or 2 when the extension bit 31 of the first word is set): index of the first source token word	^\s*iVar34\ =\ 1;$	+1
+use	FUN_000fd5c8	iVar34	firstSourceWordIndex	INFERRED	number of destination token words (1, or 2 when the extension bit 31 of the first word is set): index of the first source token word	^\s*iVar34\ =\ 2;$	+1
+use	FUN_000fd5c8	iVar34	firstSourceWordIndex	INFERRED	number of destination token words (1, or 2 when the extension bit 31 of the first word is set): index of the first source token word	^\s*pppuVar42\ =\ ppppuVar45\[iVar34\];$	+1
+use	FUN_000fd5c8	iVar34	usedBitmapWord	INFERRED	address of the 32-bit word of the used-register bitmap holding sourceRegisterIndex	^\s*iVar34\ =\ \(uVar44\ >>\ 3\ \&\ 0x1ffffffc\)\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x434\);$	+2
+use	FUN_000fd5c8	iVar34	firstWrittenLane	INFERRED	SelectWord::firstWrittenComponent of the staged select word	^\s*if\ \(\(iVar43\ !=\ 0\)\ \&\&\ \(iVar34\ =\ FUN_000f30d4\(local_178\),\ 1\ <\ \(int\)ppppppuVar38\)\)\ \{$	+1
+use	FUN_000fd5c8	iVar34	firstWrittenLane	INFERRED	SelectWord::firstWrittenComponent of the staged select word	^\s*CONCAT31\(\(int3\)\(\(uint\)ppppppuVar48\ >>\ 8\),$	+2
+use	FUN_000fd5c8	iVar34	firstWrittenLane	INFERRED	SelectWord::firstWrittenComponent of the staged select word	^\s*CONCAT13\(\*\(undefined1\ \*\)\(\(int\)\&local_104\ \+\ iVar34\),\(int3\)ppppppuVar48\);$	+1
+use	FUN_000fd5c8	iVar34	firstWrittenLane	INFERRED	SelectWord::firstWrittenComponent of the staged select word	^\s*\(\*\(unsigned\ short\ \*\)\(\(unsigned\ char\ \*\)\&\(local_104\)\ \+\ 2\)\)\ =\ CONCAT11\(\*\(undefined1\ \*\)\(\(int\)\&local_104\ \+\ iVar34\),\(char\)ppppppuVar48\);$	+1
+use	FUN_000fd5c8	iVar34	hwQueryResult	INFERRED	hardware-info vtable +0x34 query result	^\s*iVar34\ =\ \(\*\*\(code\ \*\*\)\(\*piVar18\ \+\ 0x34\)\)\(piVar18,ppppppuVar19\);$	+2
+use	FUN_000fd5c8	iVar34	selectedLane	INFERRED	lane index picked by the mask scan (last lane whose mask byte is 0), -1 when none	^\s*iVar34\ =\ \-1;$	+1
+use	FUN_000fd5c8	iVar34	selectedLane	INFERRED	lane index picked by the mask scan (last lane whose mask byte is 0), -1 when none	^\s*iVar21\ =\ iVar34;$	+1
+use	FUN_000fd5c8	iVar34	selectedLane	INFERRED	lane index picked by the mask scan (last lane whose mask byte is 0), -1 when none	^\s*if\ \(\(iVar47\ !=\ 0\)\ \&\&\ \(iVar21\ =\ iVar34,\ 0\ <\ iVar47\)\)\ \{$	+1
+use	FUN_000fd5c8	iVar34	selectedLane	INFERRED	lane index picked by the mask scan (last lane whose mask byte is 0), -1 when none	^\s*iVar34\ =\ iVar21;$	+1
+use	FUN_000fd5c8	uVar10	bitmapWordCount	INFERRED	(register count + 31) >> 5: number of 32-bit words of the used-register bitmap, then the clear-loop counter	^\s*uVar10\ =\ iVar34\ \+\ 0x1fU\ >>\ 5;$	+2
+use	FUN_000fd5c8	uVar10	bitmapWordCount	INFERRED	(register count + 31) >> 5: number of 32-bit words of the used-register bitmap, then the clear-loop counter	^\s*puVar13\[1\]\ =\ uVar10;$	+1
+use	FUN_000fd5c8	uVar10	bitmapWordCount	INFERRED	(register count + 31) >> 5: number of 32-bit words of the used-register bitmap, then the clear-loop counter	^\s*if\ \(uVar10\ !=\ 0\)\ \{$	+1
+use	FUN_000fd5c8	uVar10	bitmapWordCount	INFERRED	(register count + 31) >> 5: number of 32-bit words of the used-register bitmap, then the clear-loop counter	^\s*if\ \(uVar10\ ==\ 0\)\ \{$	+2
+use	FUN_000fd5c8	uVar10	bitmapWordCount	INFERRED	(register count + 31) >> 5: number of 32-bit words of the used-register bitmap, then the clear-loop counter	^\s*uVar10\ =\ uVar10\ \-\ 1;$	+1
+use	FUN_000fd5c8	uVar10	bitmapWordCount	INFERRED	(register count + 31) >> 5: number of 32-bit words of the used-register bitmap, then the clear-loop counter	^\s*\}\ while\ \(uVar10\ !=\ 0\);$	+1
+use	FUN_000fd5c8	uVar10	conditionStackStorage	INFERRED	arena storage of the condition stack vector	^\s*uVar10\ =\ FUN_00193e18\(uVar46,8\);$	+2
+use	FUN_000fd5c8	uVar10	programInstIndex	INFERRED	1-based index over the program instruction vector	^\s*for\ \(uVar10\ =\ 1;\ uVar10\ <=\ \*\(uint\ \*\)\(iVar34\ \+\ 4\);\ uVar10\ =\ uVar10\ \+\ 1\)\ \{$	+1
+use	FUN_000fd5c8	uVar10	modifierBit8	INFERRED	bit 8 of the extension token word (declaration flag)	^\s*uVar10\ =\ \(uint\)pppppuVar15\ >>\ 8\ \&\ 1;$	+1
+use	FUN_000fd5c8	uVar10	modifierBit8	INFERRED	bit 8 of the extension token word (declaration flag)	^\s*uVar10\ =\ 0;$	+1
+use	FUN_000fd5c8	uVar10	modifierBit8	INFERRED	bit 8 of the extension token word (declaration flag)	^\s*if\ \(uVar10\ ==\ 0\)\ \{$@2	+1
+use	FUN_000fd5c8	uVar10	selectIndex	INFERRED	running component/select index (+4 gives the select byte value) while the staged select word is packed	^\s*uVar10\ =\ 0;$@2	+1
+use	FUN_000fd5c8	uVar10	selectIndex	INFERRED	running component/select index (+4 gives the select byte value) while the staged select word is packed	^\s*uVar10\ =\ \(uint\)bVar1;$	+1
+use	FUN_000fd5c8	uVar10	selectIndex	INFERRED	running component/select index (+4 gives the select byte value) while the staged select word is packed	^\s*iVar34\ =\ uVar10\ \+\ 4;$	+2
+use	FUN_000fd5c8	uVar10	selectIndex	INFERRED	running component/select index (+4 gives the select byte value) while the staged select word is packed	^\s*iVar34\ =\ uVar10\ \+\ 4;$@2	+2
+use	FUN_000fd5c8	uVar10	selectIndex	INFERRED	running component/select index (+4 gives the select byte value) while the staged select word is packed	^\s*uVar44\ =\ uVar10\ \+\ 4;$	+2
+use	FUN_000fd5c8	uVar10	selectIndex	INFERRED	running component/select index (+4 gives the select byte value) while the staged select word is packed	^\s*iVar34\ =\ uVar10\ \+\ 4;$@3	+2
+use	FUN_000fd5c8	uVar10	selectIndex	INFERRED	running component/select index (+4 gives the select byte value) while the staged select word is packed	^\s*iVar34\ =\ uVar10\ \+\ 4;$@4	+2
+use	FUN_000fd5c8	uVar10	selectIndex	INFERRED	running component/select index (+4 gives the select byte value) while the staged select word is packed	^\s*iVar34\ =\ uVar10\ \+\ 4;$@5	+2
+use	FUN_000fd5c8	uVar10	selectIndex	INFERRED	running component/select index (+4 gives the select byte value) while the staged select word is packed	^\s*in_r7\ =\ \(uint\ \*\*\*\*\*\*\)\(uVar10\ \+\ 4\ \|\ \(uint\)in_r7\ \&\ 0xffffff00\);$	+1
+use	FUN_000fd5c8	uVar10	selectIndex	INFERRED	running component/select index (+4 gives the select byte value) while the staged select word is packed	^\s*uVar10\ =\ \(uint\)\(\*\(int\ \*\)\(PTR_DAT_001e8bc8\ \+\ iVar34\ \*\ 4\)\ ==\ 0\);$	+1
+use	FUN_000fd5c8	uVar10	selectIndex	INFERRED	running component/select index (+4 gives the select byte value) while the staged select word is packed	^\s*iVar34\ =\ uVar10\ \+\ 4;$@6	+2
+use	FUN_000fd5c8	uVar10	selectIndex	INFERRED	running component/select index (+4 gives the select byte value) while the staged select word is packed	^\s*iVar34\ =\ uVar10\ \+\ 4;$@7	+2
+use	FUN_000fd5c8	uVar10	selectIndex	INFERRED	running component/select index (+4 gives the select byte value) while the staged select word is packed	^\s*in_r7\ =\ \(uint\ \*\*\*\*\*\*\)\(uVar10\ \+\ 4\ \|\ \(uint\)in_r7\ \&\ 0xffffff00\);$@2	+1
+use	FUN_000fd5c8	uVar10	tokenModeField	INFERRED	3-bit mode field of the first token word (switch selector of the case)	^\s*uVar10\ =\ \(uint\)\*ppppppuVar49\ >>\ 0x13\ \&\ 7;$	+2
+use	FUN_000fd5c8	uVar10	tokenModeField	INFERRED	3-bit mode field of the first token word (switch selector of the case)	^\s*else\ if\ \(uVar10\ <\ 4\)\ \{$	+2
+use	FUN_000fd5c8	uVar10	tokenModeField	INFERRED	3-bit mode field of the first token word (switch selector of the case)	^\s*else\ if\ \(uVar10\ ==\ 4\)\ \{$	+1
+use	FUN_000fd5c8	uVar10	tokenModeField	INFERRED	3-bit mode field of the first token word (switch selector of the case)	^\s*if\ \(uVar10\ !=\ 5\)\ goto\ code_r0x000feeb8;$	+1
+use	FUN_000fd5c8	uVar10	tokenModeField	INFERRED	3-bit mode field of the first token word (switch selector of the case)	^\s*uVar10\ =\ \(uint\)\*ppppppuVar49\ >>\ 0x16\ \&\ 7;$	+2
+use	FUN_000fd5c8	uVar10	tokenModeField	INFERRED	3-bit mode field of the first token word (switch selector of the case)	^\s*if\ \(uVar10\ ==\ 2\)\ \{$	+1
+use	FUN_000fd5c8	uVar10	tokenModeField	INFERRED	3-bit mode field of the first token word (switch selector of the case)	^\s*else\ if\ \(uVar10\ <\ 3\)\ \{$	+2
+use	FUN_000fd5c8	uVar10	tokenModeField	INFERRED	3-bit mode field of the first token word (switch selector of the case)	^\s*if\ \(uVar10\ ==\ 3\)\ \{$@2	+1
+use	FUN_000fd5c8	uVar10	tokenModeField	INFERRED	3-bit mode field of the first token word (switch selector of the case)	^\s*if\ \(uVar10\ !=\ 4\)\ goto\ code_r0x00102220;$	+1
+use	FUN_000fd5c8	uVar10	registerNumber	INFERRED	register number (ushort at token+2)	^\s*uVar10\ =\ \(uint\)\*\(ushort\ \*\)\(\(int\)ppppppuVar40\ \+\ 2\);$	+2
+use	FUN_000fd5c8	uVar10	registerNumber	INFERRED	register number (ushort at token+2)	^\s*if\ \(uVar44\ <=\ uVar10\)\ \{$	+3
+use	FUN_000fd5c8	uVar10	registerNumber	INFERRED	register number (ushort at token+2)	^\s*puVar14\ =\ \(undefined4\ \*\)\(uVar10\ \*\ 4\ \+\ puVar12\[2\]\);$	+1
+use	FUN_000fd5c8	uVar10	registerNumber	INFERRED	register number (ushort at token+2)	^\s*puVar14\ =\ \(undefined4\ \*\)FUN_0019423c\(local_13c,uVar10\);$	+1
+use	FUN_000fd5c8	uVar10	interpMode	INFERRED	bits 24-27 of the first token word: declaration mode stored at the record +4	^\s*uVar10\ =\ \(uint\)\*ppppppuVar49\ >>\ 0x18\ \&\ 0xf;$	+1
+use	FUN_000fd5c8	uVar10	interpMode	INFERRED	bits 24-27 of the first token word: declaration mode stored at the record +4	^\s*if\ \(uVar10\ !=\ 0\)\ \{$@2	+2
+use	FUN_000fd5c8	uVar10	vectorSize	INFERRED	element count of the vector that receives the new element	^\s*uVar10\ =\ puVar12\[1\];$	+5
+use	FUN_000fd5c8	uVar10	vectorSize	INFERRED	element count of the vector that receives the new element	^\s*piVar36\ =\ \(int\ \*\)FUN_0019423c\(puVar12,uVar10\);$	+1
+use	FUN_000fd5c8	uVar10	loopDepth	INFERRED	element count of the loop stack (puVar13[2])	^\s*uVar10\ =\ puVar13\[2\];$	+2
+use	FUN_000fd5c8	uVar10	loopDepth	INFERRED	element count of the loop stack (puVar13[2])	^\s*if\ \(uVar10\ \-\ 1\ <\ uVar10\)\ \{$	+2
+use	FUN_000fd5c8	uVar10	loopDepth	INFERRED	element count of the loop stack (puVar13[2])	^\s*uVar10\ =\ puVar13\[2\];$@2	+2
+use	FUN_000fd5c8	uVar10	loopDepth	INFERRED	element count of the loop stack (puVar13[2])	^\s*if\ \(uVar10\ \-\ 1\ <\ uVar10\)\ \{$@3	+2
+use	FUN_000fd5c8	uVar10	loopDepth	INFERRED	element count of the loop stack (puVar13[2])	^\s*uVar10\ =\ puVar13\[2\];$@3	+2
+use	FUN_000fd5c8	uVar10	loopDepth	INFERRED	element count of the loop stack (puVar13[2])	^\s*uVar10\ =\ puVar13\[2\];$@4	+2
+use	FUN_000fd5c8	uVar10	loopDepth	INFERRED	element count of the loop stack (puVar13[2])	^\s*if\ \(uVar10\ \-\ 1\ <\ uVar10\)\ \{$@5	+2
+use	FUN_000fd5c8	uVar10	loopDepth	INFERRED	element count of the loop stack (puVar13[2])	^\s*uVar10\ =\ puVar13\[2\];$@5	+1
+use	FUN_000fd5c8	uVar10	loopDepth	INFERRED	element count of the loop stack (puVar13[2])	^\s*if\ \(uVar10\ !=\ 0\)\ \{$@6	+1
+use	FUN_000fd5c8	uVar10	loopDepth	INFERRED	element count of the loop stack (puVar13[2])	^\s*if\ \(uVar10\ \-\ 1\ <\ uVar10\)\ \{$@6	+2
+use	FUN_000fd5c8	uVar10	loopTopIndex	INFERRED	index of the top of the loop stack (count - 1)	^\s*uVar10\ =\ puVar13\[2\]\ \-\ 1;$	+1
+use	FUN_000fd5c8	uVar10	loopTopIndex	INFERRED	index of the top of the loop stack (count - 1)	^\s*if\ \(uVar10\ <\ \(uint\)puVar13\[2\]\)\ \{$	+2
+use	FUN_000fd5c8	uVar10	loopTopIndex	INFERRED	index of the top of the loop stack (count - 1)	^\s*uVar10\ =\ puVar13\[2\]\ \-\ 1;$@2	+3
+use	FUN_000fd5c8	uVar10	scopeTopIndex	INFERRED	index of the top of the scope stack (count - 1)	^\s*uVar10\ =\ puVar14\[2\]\ \-\ 1;$	+3
+use	FUN_000fd5c8	uVar10	scopeTopIndex	INFERRED	index of the top of the scope stack (count - 1)	^\s*uVar10\ =\ puVar14\[2\]\ \-\ 1;$@2	+3
+use	FUN_000fd5c8	uVar10	scopeDepth	INFERRED	element count of the scope stack	^\s*uVar10\ =\ puVar14\[2\];$	+1
+use	FUN_000fd5c8	uVar10	scopeDepth	INFERRED	element count of the scope stack	^\s*if\ \(uVar10\ \-\ 1\ <\ uVar10\)\ \{$@2	+2
+use	FUN_000fd5c8	uVar10	scopeDepth	INFERRED	element count of the scope stack	^\s*FUN_00194208\(puVar12,uVar10\ \-\ 1\);$	+1
+use	FUN_000fd5c8	uVar10	scopeDepth	INFERRED	element count of the scope stack	^\s*uVar10\ =\ puVar24\[2\];$	+2
+use	FUN_000fd5c8	uVar10	scopeDepth	INFERRED	element count of the scope stack	^\s*if\ \(uVar10\ \-\ 1\ <\ uVar10\)\ \{$@4	+2
+use	FUN_000fd5c8	uVar10	scopeDepth	INFERRED	element count of the scope stack	^\s*FUN_00194208\(ppppppuVar19,uVar10\ \-\ 1\);$	+1
+use	FUN_000fd5c8	uVar10	scopeDepth	INFERRED	element count of the scope stack	^\s*uVar10\ =\ puVar14\[2\];$@2	+5
+use	FUN_000fd5c8	uVar10	scopeDepth	INFERRED	element count of the scope stack	^\s*puVar32\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar12,uVar10\);$	+1
+use	FUN_000fd5c8	uVar10	loopRegisterNumber	INFERRED	register number of the loop counter (or 0) passed to PostLoopFooter__ctor_ea828	^\s*uVar10\ =\ \(uint\)\*\(ushort\ \*\)\(\(int\)\*param_2\[0x1b\]\ \+\ 2\);$	+1
+use	FUN_000fd5c8	uVar10	loopRegisterNumber	INFERRED	register number of the loop counter (or 0) passed to PostLoopFooter__ctor_ea828	^\s*uVar10\ =\ 0;$@3	+1
+use	FUN_000fd5c8	uVar10	loopRegisterNumber	INFERRED	register number of the loop counter (or 0) passed to PostLoopFooter__ctor_ea828	^\s*FUN_000ea828\(puVar29,uVar10,uVar46,in_r6,in_r7\);$	+1
+use	FUN_000fd5c8	uVar10	destTokenWord	INFERRED	first destination token word read from ilReader[0x1b]	^\s*uVar10\ =\ \*\*\(uint\ \*\*\)\(iVar43\ \+\ \(int\)param_2\[0x1b\]\);$	+3
+use	FUN_000fd5c8	uVar10	destTokenWord	INFERRED	first destination token word read from ilReader[0x1b]	^\s*uVar46\ =\ FUN_000ec208\(param_1,uVar10\ >>\ 0x10\ \&\ 0x3f\);$	+1
+use	FUN_000fd5c8	iVar43	interpKind	INFERRED	hardware-info vtable +0x48 result for (program, token bits 24-26): stored at the declaration record +4	^\s*iVar43\ =\ \(\*\*\(code\ \*\*\)\(\*piVar18\ \+\ 0x48\)\)\(piVar18,param_1,\(uint\)pppppuVar15\ >>\ 0x18\ \&\ 7\);$	+3
+use	FUN_000fd5c8	iVar43	nextListNode	INFERRED	next link (+8) of the pending instruction list node being flushed	^\s*iVar43\ =\ \*\(int\ \*\)\(local_11c\ \+\ 8\);$	+1
+use	FUN_000fd5c8	iVar43	nextListNode	INFERRED	next link (+8) of the pending instruction list node being flushed	^\s*while\ \(iVar47\ =\ iVar43,\ iVar47\ !=\ 0\)\ \{$	+1
+use	FUN_000fd5c8	iVar43	nextListNode	INFERRED	next link (+8) of the pending instruction list node being flushed	^\s*iVar43\ =\ \*\(int\ \*\)\(iVar47\ \+\ 8\);$	+1
+use	FUN_000fd5c8	iVar43	nextListNode	INFERRED	next link (+8) of the pending instruction list node being flushed	^\s*iVar43\ =\ \*\(int\ \*\)\(local_14c\ \+\ 8\);$	+1
+use	FUN_000fd5c8	iVar43	nextListNode	INFERRED	next link (+8) of the pending instruction list node being flushed	^\s*while\ \(iVar47\ =\ iVar43,\ iVar47\ !=\ 0\)\ \{$@2	+1
+use	FUN_000fd5c8	iVar43	nextListNode	INFERRED	next link (+8) of the pending instruction list node being flushed	^\s*iVar43\ =\ \*\(int\ \*\)\(iVar47\ \+\ 8\);$@2	+1
+use	FUN_000fd5c8	iVar43	nextListNode	INFERRED	next link (+8) of the pending instruction list node being flushed	^\s*iVar43\ =\ \*\(int\ \*\)\(local_14c\ \+\ 8\);$@2	+1
+use	FUN_000fd5c8	iVar43	nextListNode	INFERRED	next link (+8) of the pending instruction list node being flushed	^\s*while\ \(iVar47\ =\ iVar43,\ iVar47\ !=\ 0\)\ \{$@3	+1
+use	FUN_000fd5c8	iVar43	nextListNode	INFERRED	next link (+8) of the pending instruction list node being flushed	^\s*iVar43\ =\ \*\(int\ \*\)\(iVar47\ \+\ 8\);$@3	+1
+use	FUN_000fd5c8	iVar43	nextListNode	INFERRED	next link (+8) of the pending instruction list node being flushed	^\s*iVar43\ =\ \*\(int\ \*\)\(local_14c\ \+\ 8\);$@3	+1
+use	FUN_000fd5c8	iVar43	nextListNode	INFERRED	next link (+8) of the pending instruction list node being flushed	^\s*while\ \(iVar47\ =\ iVar43,\ iVar47\ !=\ 0\)\ \{$@4	+1
+use	FUN_000fd5c8	iVar43	nextListNode	INFERRED	next link (+8) of the pending instruction list node being flushed	^\s*iVar43\ =\ \*\(int\ \*\)\(iVar47\ \+\ 8\);$@4	+1
+use	FUN_000fd5c8	iVar43	nextListNode	INFERRED	next link (+8) of the pending instruction list node being flushed	^\s*iVar43\ =\ \*\(int\ \*\)\(local_164\ \+\ 8\);$	+1
+use	FUN_000fd5c8	iVar43	nextListNode	INFERRED	next link (+8) of the pending instruction list node being flushed	^\s*while\ \(iVar47\ =\ iVar43,\ iVar47\ !=\ 0\)\ \{$@5	+1
+use	FUN_000fd5c8	iVar43	nextListNode	INFERRED	next link (+8) of the pending instruction list node being flushed	^\s*iVar43\ =\ \*\(int\ \*\)\(iVar47\ \+\ 8\);$@5	+1
+use	FUN_000fd5c8	iVar43	nextListNode	INFERRED	next link (+8) of the pending instruction list node being flushed	^\s*iVar43\ =\ \*\(int\ \*\)\(local_164\ \+\ 8\);$@2	+1
+use	FUN_000fd5c8	iVar43	nextListNode	INFERRED	next link (+8) of the pending instruction list node being flushed	^\s*while\ \(iVar47\ =\ iVar43,\ iVar47\ !=\ 0\)\ \{$@6	+1
+use	FUN_000fd5c8	iVar43	nextListNode	INFERRED	next link (+8) of the pending instruction list node being flushed	^\s*iVar43\ =\ \*\(int\ \*\)\(iVar47\ \+\ 8\);$@6	+1
+use	FUN_000fd5c8	iVar43	loadInterpRecord	INFERRED	record returned by the virtual register vtable +0x2c query: lane kind/index are set on it	^\s*iVar43\ =\ \(\*\*\(code\ \*\*\)\(\*piVar18\ \+\ 0x2c\)\)\(\);$	+1
+use	FUN_000fd5c8	iVar43	loadInterpRecord	INFERRED	record returned by the virtual register vtable +0x2c query: lane kind/index are set on it	^\s*\*\(uint\ \*\*\*\*\*\*\*\)\(iVar43\ \+\ 0x140\)\ =\ ppppppuVar19;$	+1
+use	FUN_000fd5c8	iVar43	loadInterpRecord	INFERRED	record returned by the virtual register vtable +0x2c query: lane kind/index are set on it	^\s*FUN_00104104\(iVar43,iVar47,iVar34,ppppppuVar19\);$	+1
+use	FUN_000fd5c8	iVar43	exportVReg	INFERRED	virtual register of type 0x2c (FUN_00127534 lookup, FUN_001275a0 create) used as operand 0 and 1	^\s*iVar43\ =\ FUN_00127534\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x3ac\),0x2c,0,0\);$	+2
+use	FUN_000fd5c8	iVar43	exportVReg	INFERRED	virtual register of type 0x2c (FUN_00127534 lookup, FUN_001275a0 create) used as operand 0 and 1	^\s*iVar43\ =\ FUN_001275a0\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x3ac\),0x2c,0,0\);$	+3
+use	FUN_000fd5c8	iVar43	exportVReg	INFERRED	virtual register of type 0x2c (FUN_00127534 lookup, FUN_001275a0 create) used as operand 0 and 1	^\s*FUN_0012306c\(iVar43,puVar24\);$	+2
+use	FUN_000fd5c8	iVar43	exportVReg	INFERRED	virtual register of type 0x2c (FUN_00127534 lookup, FUN_001275a0 create) used as operand 0 and 1	^\s*FUN_001046c8\(ppppppuVar19,0,iVar43\);$	+1
+use	FUN_000fd5c8	iVar43	opcodeOperandCount	INFERRED	FUN_000f8970(ilOpcode, opcode record table): count compared against the template loop counter	^\s*iVar43\ =\ \(\(int\ \(\*\)\(\)\)FUN_000f8970\)\(iVar34,uVar46\);$	+1
+use	FUN_000fd5c8	iVar43	opcodeOperandCount	INFERRED	FUN_000f8970(ilOpcode, opcode record table): count compared against the template loop counter	^\s*if\ \(0\ <\ iVar43\)\ \{$	+1
+use	FUN_000fd5c8	iVar43	opcodeOperandCount	INFERRED	FUN_000f8970(ilOpcode, opcode record table): count compared against the template loop counter	^\s*\}\ while\ \(iVar43\ !=\ iVar21\);$	+1
+use	FUN_000fd5c8	iVar43	pendingInstB	INFERRED	instruction taken from the pending list head (local_14c), unlinked and appended	^\s*iVar43\ =\ local_14c;$	+1
+use	FUN_000fd5c8	iVar43	pendingInstB	INFERRED	instruction taken from the pending list head (local_14c), unlinked and appended	^\s*FUN_0019401c\(iVar43\);$	+3
+use	FUN_000fd5c8	iVar43	builtInst	INFERRED	instruction built by FUN_000fa958 and pushed on the pending list	^\s*iVar43\ =\ \(\(int\ \(\*\)\(\)\)FUN_000fa958\)\(param_1,uVar10\ \-\ 2,ppppppuVar40,param_2,ppppppuVar38,local_c0,local_124,$	+4
+use	FUN_000fd5c8	iVar43	builtInst	INFERRED	instruction built by FUN_000fa958 and pushed on the pending list	^\s*iVar43\ =\ \(\(int\ \(\*\)\(\)\)FUN_000fa958\)\(param_1,4,0,param_2,ppppppuVar48,1,local_124,local_70,ppppppuVar37,1,$	+4
+use	FUN_000fd5c8	iVar43	enclosingScopeOpcode	INFERRED	FUN_000e47f4(ilReader): opcode of the enclosing structured-control scope	^\s*iVar43\ =\ FUN_000e47f4\(param_2\);$	+2
+use	FUN_000fd5c8	iVar43	enclosingScopeOpcode	INFERRED	FUN_000e47f4(ilReader): opcode of the enclosing structured-control scope	^\s*iVar43\ =\ FUN_000e47f4\(param_2\);$@2	+1
+use	FUN_000fd5c8	iVar43	enclosingScopeOpcode	INFERRED	FUN_000e47f4(ilReader): opcode of the enclosing structured-control scope	^\s*if\ \(iVar43\ ==\ 0x72\)\ \{$	+1
+use	FUN_000fd5c8	iVar43	scopeObject	INFERRED	scope object (loop/if) taken from the top element of the scope stack: +0x150 continue target, +0x154 break target, +0x138/+0x13c counters	^\s*iVar43\ =\ \*piVar18;$	+1
+use	FUN_000fd5c8	iVar43	scopeObject	INFERRED	scope object (loop/if) taken from the top element of the scope stack: +0x150 continue target, +0x154 break target, +0x138/+0x13c counters	^\s*uVar46\ =\ \*\(undefined4\ \*\)\(iVar43\ \+\ 0x154\);$	+1
+use	FUN_000fd5c8	iVar43	scopeObject	INFERRED	scope object (loop/if) taken from the top element of the scope stack: +0x150 continue target, +0x154 break target, +0x138/+0x13c counters	^\s*FUN_000ec0c8\(ppppppuVar48,iVar43,\*\(undefined4\ \*\)\(iVar43\ \+\ 300\),in_r6\);$	+1
+use	FUN_000fd5c8	iVar43	scopeObject	INFERRED	scope object (loop/if) taken from the top element of the scope stack: +0x150 continue target, +0x154 break target, +0x138/+0x13c counters	^\s*\*\(int\ \*\)\(iVar43\ \+\ 0x138\)\ =\ \*\(int\ \*\)\(iVar43\ \+\ 0x138\)\ \+\ 1;$	+1
+use	FUN_000fd5c8	iVar43	scopeObject	INFERRED	scope object (loop/if) taken from the top element of the scope stack: +0x150 continue target, +0x154 break target, +0x138/+0x13c counters	^\s*iVar43\ =\ \*piVar18;$@2	+1
+use	FUN_000fd5c8	iVar43	scopeObject	INFERRED	scope object (loop/if) taken from the top element of the scope stack: +0x150 continue target, +0x154 break target, +0x138/+0x13c counters	^\s*uVar46\ =\ \*\(undefined4\ \*\)\(iVar43\ \+\ 0x150\);$	+1
+use	FUN_000fd5c8	iVar43	scopeObject	INFERRED	scope object (loop/if) taken from the top element of the scope stack: +0x150 continue target, +0x154 break target, +0x138/+0x13c counters	^\s*FUN_000ec178\(ppppppuVar48,iVar43,\*\(undefined4\ \*\)\(iVar43\ \+\ 300\),in_r6\);$	+1
+use	FUN_000fd5c8	iVar43	scopeObject	INFERRED	scope object (loop/if) taken from the top element of the scope stack: +0x150 continue target, +0x154 break target, +0x138/+0x13c counters	^\s*\*\(undefined4\ \*\)\(iVar43\ \+\ 0x13c\)\ =\ 1;$	+1
+use	FUN_000fd5c8	iVar43	scopeObject	INFERRED	scope object (loop/if) taken from the top element of the scope stack: +0x150 continue target, +0x154 break target, +0x138/+0x13c counters	^\s*iVar43\ =\ \*piVar18;$@4	+3
+use	FUN_000fd5c8	iVar43	savedRegisterIndex	INFERRED	register index saved in local_100, stored into operand 0 (+8)	^\s*iVar43\ =\ local_100;$	+1
+use	FUN_000fd5c8	iVar43	savedRegisterIndex	INFERRED	register index saved in local_100, stored into operand 0 (+8)	^\s*\*\(int\ \*\)\(iVar20\ \+\ 8\)\ =\ iVar43;$	+1
+use	FUN_000fd5c8	iVar43	savedRegisterIndex	INFERRED	register index saved in local_100, stored into operand 0 (+8)	^\s*\*\(int\ \*\)\(iVar20\ \+\ 8\)\ =\ iVar43;$@2	+1
+use	FUN_000fd5c8	iVar43	scopeQueryResult	INFERRED	virtual query (vtable +0x38/+0x3c or slots 0xe/0xf) of the scope/block object	^\s*iVar43\ =\ \(\*\*\(code\ \*\*\)\(\*piVar18\ \+\ 0x38\)\)\(\);$	+2
+use	FUN_000fd5c8	iVar43	scopeQueryResult	INFERRED	virtual query (vtable +0x38/+0x3c or slots 0xe/0xf) of the scope/block object	^\s*iVar43\ =\ \(\*\(code\ \*\)\(\*ppppuVar51\)\[0xe\]\)\(ppppuVar51\);$	+2
+use	FUN_000fd5c8	iVar43	scopeQueryResult	INFERRED	virtual query (vtable +0x38/+0x3c or slots 0xe/0xf) of the scope/block object	^\s*iVar43\ =\ \(\*\(code\ \*\)\(\*local_184\)\[0xe\]\)\(\);$	+2
+use	FUN_000fd5c8	iVar43	tableOpcode	INFERRED	opcode read from the opcode table while searching for ilOpcode	^\s*iVar43\ =\ \*piVar18;$@3	+1
+use	FUN_000fd5c8	iVar43	tableOpcode	INFERRED	opcode read from the opcode table while searching for ilOpcode	^\s*if\ \(iVar43\ ==\ 0\)\ goto\ code_r0x00101020;$	+1
+use	FUN_000fd5c8	iVar43	tableOpcode	INFERRED	opcode read from the opcode table while searching for ilOpcode	^\s*\}\ while\ \(iVar34\ !=\ iVar43\);$	+1
+use	FUN_000fd5c8	iVar43	declaredKind	INFERRED	kind field (+4) of the declaration record: 4 and 0xb select the cube/volume coordinate path	^\s*iVar43\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x78\)\ \+\ iVar20\ \+\ 4\);$	+2
+use	FUN_000fd5c8	iVar43	fetchOpcodeCode	INFERRED	IR opcode for the fetch: table value, or 0xae	^\s*iVar43\ =\ \*\(int\ \*\)\(local_64\ \+\ local_74\ \+\ \-0xf70\);$	+1
+use	FUN_000fd5c8	iVar43	fetchOpcodeCode	INFERRED	IR opcode for the fetch: table value, or 0xae	^\s*if\ \(\(iVar43\ !=\ 0xff\)\ \|\|\ \(\*\(int\ \*\)\(iVar20\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x78\)\ \+\ 4\)\ !=\ 7\)\)$	+2
+use	FUN_000fd5c8	iVar43	fetchOpcodeCode	INFERRED	IR opcode for the fetch: table value, or 0xae	^\s*iVar43\ =\ 0xae;$	+1
+use	FUN_000fd5c8	iVar43	fetchOpcodeCode	INFERRED	IR opcode for the fetch: table value, or 0xae	^\s*piVar18\ =\ FUN_001043f0\(iVar43,\*\(undefined4\ \*\)\(param_1\ \+\ 8\)\);$	+1
+use	FUN_000fd5c8	iVar43	declRecordTable	INFERRED	program+0x78: base of the 0xc-byte declaration records	^\s*iVar43\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x78\);$	+2
+use	FUN_000fd5c8	iVar43	declRecordTable	INFERRED	program+0x78: base of the 0xc-byte declaration records	^\s*iVar43\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x78\);$@2	+1
+use	FUN_000fd5c8	iVar43	declRecordTable	INFERRED	program+0x78: base of the 0xc-byte declaration records	^\s*if\ \(\*\(int\ \*\)\(iVar20\ \+\ iVar43\ \+\ 4\)\ ==\ 9\)\ \{$	+1
+use	FUN_000fd5c8	iVar43	declRecordTable	INFERRED	program+0x78: base of the 0xc-byte declaration records	^\s*iVar43\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x78\);$@3	+1
+use	FUN_000fd5c8	iVar43	declRecordTable	INFERRED	program+0x78: base of the 0xc-byte declaration records	^\s*iVar43\ =\ \(\(int\ \(\*\)\(\)\)FUN_000f89e8\)\(\*\(undefined4\ \*\)\(iVar20\ \+\ iVar43\)\);$	+2
+use	FUN_000fd5c8	iVar43	literalAddr	INFERRED	address of the literal vec4 in the template constants (base + cursor*4)	^\s*iVar43\ =\ iVar47\ \+\ \(int\)local_17c\ \*\ 4;$	+4
+use	FUN_000fd5c8	iVar43	optionResult	INFERRED	Compiler__isOptionEnabled(compiler, 3)	^\s*iVar43\ =\ FUN_000e07dc\(\*\(undefined4\ \*\)\(param_1\ \+\ 8\),3\);$	+2
+use	FUN_000fd5c8	iVar43	transformFailed	INFERRED	FUN_0012f0f8 result; nonzero skips the instruction	^\s*iVar43\ =\ FUN_0012f0f8\(param_1,ppppppuVar37,iVar20,in_r6,in_r7,in_r8\);$	+2
+use	FUN_000fd5c8	iVar43	breakTargetBlockB	INFERRED	scope+0x154 break target block of the structured scope	^\s*iVar43\ =\ \*\(int\ \*\)\(iVar20\ \+\ 0x154\);$	+3
+use	FUN_000fd5c8	iVar43	breakTargetBlockB	INFERRED	scope+0x154 break target block of the structured scope	^\s*FUN_000ec3ac\(param_1,iVar43,ppppppuVar48\);$	+2
+use	FUN_000fd5c8	iVar43	breakTargetBlockB	INFERRED	scope+0x154 break target block of the structured scope	^\s*\*\(uint\ \*\*\*\*\*\)\(iVar43\ \+\ 0xb8\)\ =\ local_188;$	+1
+use	FUN_000fd5c8	iVar43	cachedTempIndex	INFERRED	temp register index cached per template token in the local_104 array, allocated on first use	^\s*iVar43\ =\ \(\&local_104\)\[uVar10\ \-\ 0x55\];$	+5
+use	FUN_000fd5c8	iVar43	cachedTempIndex	INFERRED	temp register index cached per template token in the local_104 array, allocated on first use	^\s*\*\(int\ \*\)\(iVar20\ \+\ 8\)\ =\ iVar43;$@3	+1
+use	FUN_000fd5c8	iVar43	loadedProgramValue	INFERRED	value loaded from the program table used for the operand (+0x10)	^\s*iVar43\ =\ \*\(int\ \*\)\(local_60\ \+\ \-0x2c30\);$	+2
+use	FUN_000fd5c8	iVar43	loadedProgramValue	INFERRED	value loaded from the program table used for the operand (+0x10)	^\s*\*\(int\ \*\)\(iVar20\ \+\ 0x10\)\ =\ iVar43;$	+1
+use	FUN_000fd5c8	iVar43	opcodeRecordField	INFERRED	FUN_000f8970(ilOpcode, hardware table): field (+4) of the opcode record, plus one is stored	^\s*iVar43\ =\ \(\(int\ \(\*\)\(\)\)FUN_000f8970\)\(iVar34,\*\(undefined4\ \*\)\(\*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x30c\)\ \+\ 0xc\)\);$	+2
+use	FUN_000fd5c8	iVar43	opcodeFlagBit2	INFERRED	OpcodeTraits__instFlagBit2(compiler, opcode)	^\s*iVar43\ =\ FUN_0011346c\(\*\(undefined4\ \*\)\(param_1\ \+\ 8\),ppppppuVar19\);$	+1
+use	FUN_000fd5c8	iVar43	opcodeFlagBit2	INFERRED	OpcodeTraits__instFlagBit2(compiler, opcode)	^\s*if\ \(iVar43\ !=\ 0\)\ \{$@5	+1
+use	FUN_000fd5c8	iVar43	opcodeFlagBit2	INFERRED	OpcodeTraits__instFlagBit2(compiler, opcode)	^\s*if\ \(\(iVar43\ !=\ 0\)\ \&\&\ \(iVar34\ =\ FUN_000f30d4\(local_178\),\ 1\ <\ \(int\)ppppppuVar38\)\)\ \{$	+1
+use	FUN_000fd5c8	iVar43	vtableSlot5Result	INFERRED	virtual slot 5 result of the object, compared with the loop bound	^\s*iVar43\ =\ \(\*\(code\ \*\)\(\*ppppppuVar38\)\[5\]\)\(ppppppuVar38\);$	+2
+use	FUN_000fd5c8	iVar47	firstRegisterIndex	INFERRED	first register of a declared range (0xf when the hardware flag 0x80 applies, else token short), incremented while registers are created	^\s*iVar47\ =\ 0xf;$	+1
+use	FUN_000fd5c8	iVar47	firstRegisterIndex	INFERRED	first register of a declared range (0xf when the hardware flag 0x80 applies, else token short), incremented while registers are created	^\s*iVar47\ =\ \(int\)\*\(short\ \*\)\(\(int\)ppppuVar45\ \+\ 2\);$	+1
+use	FUN_000fd5c8	iVar47	firstRegisterIndex	INFERRED	first register of a declared range (0xf when the hardware flag 0x80 applies, else token short), incremented while registers are created	^\s*\*\(int\ \*\)\(param_1\ \+\ 1000\)\ =\ iVar47;$	+1
+use	FUN_000fd5c8	iVar47	firstRegisterIndex	INFERRED	first register of a declared range (0xf when the hardware flag 0x80 applies, else token short), incremented while registers are created	^\s*if\ \(\(\(\*\(uint\ \*\)\(param_1\ \+\ 0x30\)\ \&\ 1\)\ !=\ 0\)\ \&\&\ \(iVar47\ <\ iVar43\ \+\ 1\)\)\ \{$	+1
+use	FUN_000fd5c8	iVar47	firstRegisterIndex	INFERRED	first register of a declared range (0xf when the hardware flag 0x80 applies, else token short), incremented while registers are created	^\s*FUN_00127608\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x3ac\),iVar34,iVar47,0\);$	+3
+use	FUN_000fd5c8	iVar47	firstRegisterIndex	INFERRED	first register of a declared range (0xf when the hardware flag 0x80 applies, else token short), incremented while registers are created	^\s*\*\(int\ \*\)\(param_1\ \+\ 1000\)\ =\ iVar47;$@2	+1
+use	FUN_000fd5c8	iVar47	firstRegisterIndex	INFERRED	first register of a declared range (0xf when the hardware flag 0x80 applies, else token short), incremented while registers are created	^\s*if\ \(\(\(\*\(uint\ \*\)\(param_1\ \+\ 0x30\)\ \&\ 1\)\ !=\ 0\)\ \&\&\ \(iVar47\ <\ iVar43\ \+\ 1\)\)\ \{$@2	+1
+use	FUN_000fd5c8	iVar47	firstRegisterIndex	INFERRED	first register of a declared range (0xf when the hardware flag 0x80 applies, else token short), incremented while registers are created	^\s*FUN_00127608\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x3ac\),iVar34,iVar47,0\);$@2	+3
+use	FUN_000fd5c8	iVar47	registerEnd	INFERRED	program+0x3ec: end (exclusive) of the declared register range, raised to registerIndex + 1	^\s*iVar47\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x3ec\);$	+1
+use	FUN_000fd5c8	iVar47	registerEnd	INFERRED	program+0x3ec: end (exclusive) of the declared register range, raised to registerIndex + 1	^\s*if\ \(iVar47\ <=\ iVar43\)\ \{$	+2
+use	FUN_000fd5c8	iVar47	registerEnd	INFERRED	program+0x3ec: end (exclusive) of the declared register range, raised to registerIndex + 1	^\s*\*\(int\ \*\)\(param_1\ \+\ 0x3ec\)\ =\ iVar47;$	+1
+use	FUN_000fd5c8	iVar47	rangeStartValue	INFERRED	program+1000: start of the declared register range, replaced by the new register index	^\s*iVar47\ =\ \*\(int\ \*\)\(param_1\ \+\ 1000\);$	+1
+use	FUN_000fd5c8	iVar47	rangeStartValue	INFERRED	program+1000: start of the declared register range, replaced by the new register index	^\s*iVar47\ =\ iVar43;$	+1
+use	FUN_000fd5c8	iVar47	rangeStartValue	INFERRED	program+1000: start of the declared register range, replaced by the new register index	^\s*\*\(int\ \*\)\(param_1\ \+\ 1000\)\ =\ iVar47;$@3	+1
+use	FUN_000fd5c8	ppppppuVar48	declRegisterNumber	INFERRED	register number (ushort at destination token +2) compared with the declared range	^\s*ppppppuVar48\ =\ \(uint\ \*\*\*\*\*\*\)\(uint\)\*\(ushort\ \*\)\(\(int\)ppppppuVar49\ \+\ 2\);$	+1
+use	FUN_000fd5c8	ppppppuVar48	declRegisterNumber	INFERRED	register number (ushort at destination token +2) compared with the declared range	^\s*if\ \(\(int\)ppppppuVar48\ <=\ \(int\)\*\(uint\ \*\*\*\*\*\*\*\)\(param_1\ \+\ 1000\)\)\ \{$	+2
+use	FUN_000fd5c8	ppppppuVar48	declRegisterNumber	INFERRED	register number (ushort at destination token +2) compared with the declared range	^\s*if\ \(\(int\)puVar53\ <=\ \(int\)ppppppuVar48\)\ \{$	+2
+use	FUN_000fd5c8	ppppppuVar48	declRegisterNumber	INFERRED	register number (ushort at destination token +2) compared with the declared range	^\s*iVar34\ =\ FUN_00127608\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x3ac\),uVar46,ppppppuVar48,0\);$	+1
+use	FUN_000fd5c8	ppppppuVar48	declRegisterNumber	INFERRED	register number (ushort at destination token +2) compared with the declared range	^\s*in_r7\ =\ ppppppuVar48;$	+2
+use	FUN_000fd5c8	ppppppuVar48	declRegisterNumber	INFERRED	register number (ushort at destination token +2) compared with the declared range	^\s*\(\*\*\(code\ \*\*\)\(\*piVar18\ \+\ 0x4c\)\)\(piVar18,param_1,ppppppuVar48\);$	+1
+use	FUN_000fd5c8	ppppppuVar48	opcodeTemplateTable	INFERRED	static template table pointer (PTR_DAT_...) for the opcode, passed to FUN_000fd50c	^\s*ppppppuVar48\ =\ \(uint\ \*\*\*\*\*\*\)PTR_DAT_001e8bd4;$	+1
+use	FUN_000fd5c8	ppppppuVar48	opcodeTemplateTable	INFERRED	static template table pointer (PTR_DAT_...) for the opcode, passed to FUN_000fd50c	^\s*iVar47\ =\ \(\(int\ \(\*\)\(\)\)FUN_000fd50c\)\(param_1,iVar47,\&local_17c,0,ppppppuVar48,ppppppuVar19\);$@2	+2
+use	FUN_000fd5c8	ppppppuVar48	opcodeTemplateTable	INFERRED	static template table pointer (PTR_DAT_...) for the opcode, passed to FUN_000fd50c	^\s*ppppppuVar48\ =\ \(uint\ \*\*\*\*\*\*\)PTR_DAT_001e8bbc;$	+1
+use	FUN_000fd5c8	ppppppuVar48	opcodeTemplateTable	INFERRED	static template table pointer (PTR_DAT_...) for the opcode, passed to FUN_000fd50c	^\s*ppppppuVar48\ =\ \(uint\ \*\*\*\*\*\*\)PTR_DAT_001e8bb4;$	+1
+use	FUN_000fd5c8	ppppppuVar48	opcodeTemplateTable	INFERRED	static template table pointer (PTR_DAT_...) for the opcode, passed to FUN_000fd50c	^\s*iVar47\ =\ \(\(int\ \(\*\)\(\)\)FUN_000fd50c\)\(param_1,iVar47,\&local_17c,0,ppppppuVar48,ppppppuVar19\);$	+2
+use	FUN_000fd5c8	ppppppuVar48	opcodeTemplateTable	INFERRED	static template table pointer (PTR_DAT_...) for the opcode, passed to FUN_000fd50c	^\s*ppppppuVar48\ =\ \(uint\ \*\*\*\*\*\*\)PTR_DAT_001e8b78;$	+1
+use	FUN_000fd5c8	ppppppuVar48	opcodeTemplateTable	INFERRED	static template table pointer (PTR_DAT_...) for the opcode, passed to FUN_000fd50c	^\s*ppppppuVar48\ =\ \(uint\ \*\*\*\*\*\*\)0x0;$	+1
+use	FUN_000fd5c8	ppppppuVar48	opcodeTemplateTable	INFERRED	static template table pointer (PTR_DAT_...) for the opcode, passed to FUN_000fd50c	^\s*ppppppuVar48\ =\ \(uint\ \*\*\*\*\*\*\)PTR_DAT_001e8b80;$	+1
+use	FUN_000fd5c8	ppppppuVar48	opcodeTemplateTable	INFERRED	static template table pointer (PTR_DAT_...) for the opcode, passed to FUN_000fd50c	^\s*ppppppuVar48\ =\ \(uint\ \*\*\*\*\*\*\)PTR_DAT_001e8bac;$	+1
+use	FUN_000fd5c8	ppppppuVar48	opcodeTemplateTable	INFERRED	static template table pointer (PTR_DAT_...) for the opcode, passed to FUN_000fd50c	^\s*ppppppuVar48\ =\ \(uint\ \*\*\*\*\*\*\)PTR_DAT_001e8ba8;$	+1
+use	FUN_000fd5c8	ppppppuVar48	opcodeTemplateTable	INFERRED	static template table pointer (PTR_DAT_...) for the opcode, passed to FUN_000fd50c	^\s*ppppppuVar48\ =\ \(uint\ \*\*\*\*\*\*\)PTR_DAT_001e8bcc;$	+1
+use	FUN_000fd5c8	ppppppuVar48	opcodeTemplateTable	INFERRED	static template table pointer (PTR_DAT_...) for the opcode, passed to FUN_000fd50c	^\s*ppppppuVar48\ =\ \(uint\ \*\*\*\*\*\*\)PTR_DAT_001e8b94;$	+1
+use	FUN_000fd5c8	ppppppuVar48	opcodeTemplateTable	INFERRED	static template table pointer (PTR_DAT_...) for the opcode, passed to FUN_000fd50c	^\s*ppppppuVar48\ =\ \(uint\ \*\*\*\*\*\*\)PTR_DAT_001e8b74;$	+1
+use	FUN_000fd5c8	ppppppuVar48	opcodeTemplateTable	INFERRED	static template table pointer (PTR_DAT_...) for the opcode, passed to FUN_000fd50c	^\s*ppppppuVar48\ =\ \(uint\ \*\*\*\*\*\*\)0x0;$@2	+1
+use	FUN_000fd5c8	ppppppuVar48	opcodeTemplateTable	INFERRED	static template table pointer (PTR_DAT_...) for the opcode, passed to FUN_000fd50c	^\s*ppppppuVar48\ =\ \(uint\ \*\*\*\*\*\*\)PTR_DAT_001e8bc0;$	+1
+use	FUN_000fd5c8	ppppppuVar48	opcodeTemplateTable	INFERRED	static template table pointer (PTR_DAT_...) for the opcode, passed to FUN_000fd50c	^\s*ppppppuVar48\ =\ \(uint\ \*\*\*\*\*\*\)PTR_DAT_001e8b7c;$	+1
+use	FUN_000fd5c8	ppppppuVar48	opcodeTemplateTable	INFERRED	static template table pointer (PTR_DAT_...) for the opcode, passed to FUN_000fd50c	^\s*ppppppuVar48\ =\ \(uint\ \*\*\*\*\*\*\)PTR_DAT_001e8ba4;$	+1
+use	FUN_000fd5c8	ppppppuVar48	opcodeTemplateTable	INFERRED	static template table pointer (PTR_DAT_...) for the opcode, passed to FUN_000fd50c	^\s*ppppppuVar48\ =\ \(uint\ \*\*\*\*\*\*\)PTR_DAT_001e8b90;$	+1
+use	FUN_000fd5c8	ppppppuVar48	opcodeTemplateTable	INFERRED	static template table pointer (PTR_DAT_...) for the opcode, passed to FUN_000fd50c	^\s*ppppppuVar48\ =\ \(uint\ \*\*\*\*\*\*\)PTR_DAT_001e8bc4;$	+1
+use	FUN_000fd5c8	ppppppuVar48	opcodeTemplateTable	INFERRED	static template table pointer (PTR_DAT_...) for the opcode, passed to FUN_000fd50c	^\s*ppppppuVar48\ =\ \(uint\ \*\*\*\*\*\*\)PTR_DAT_001e8ba0;$	+1
+use	FUN_000fd5c8	ppppppuVar48	opcodeTemplateTable	INFERRED	static template table pointer (PTR_DAT_...) for the opcode, passed to FUN_000fd50c	^\s*ppppppuVar48\ =\ \(uint\ \*\*\*\*\*\*\)$	+1
+use	FUN_000fd5c8	ppppppuVar48	opcodeTemplateTable	INFERRED	static template table pointer (PTR_DAT_...) for the opcode, passed to FUN_000fd50c	^\s*ppppppuVar48\ =\ \*\(uint\ \*\*\*\*\*\*\*\)\(\(int\)\&PTR_DAT_001dc75c\ \+\ \(\(uint\)\*ppppppuVar49\ >>\ 0xe\ \&\ 0xc\)\);$	+1
+use	FUN_000fd5c8	ppppppuVar48	opcodeTemplateTable	INFERRED	static template table pointer (PTR_DAT_...) for the opcode, passed to FUN_000fd50c	^\s*iVar47\ =\ \(\(int\ \(\*\)\(\)\)FUN_000fd50c\)\(param_1,iVar47,\&local_17c,local_180,ppppppuVar48,ppppppuVar19\);$	+2
+use	FUN_000fd5c8	ppppppuVar48	opcodeTemplateTable	INFERRED	static template table pointer (PTR_DAT_...) for the opcode, passed to FUN_000fd50c	^\s*ppppppuVar48\ =\ \(uint\ \*\*\*\*\*\*\)$@2	+1
+use	FUN_000fd5c8	ppppppuVar48	opcodeTemplateTable	INFERRED	static template table pointer (PTR_DAT_...) for the opcode, passed to FUN_000fd50c	^\s*ppppppuVar48\ =\ \(uint\ \*\*\*\*\*\*\)$@3	+1
+use	FUN_000fd5c8	ppppppuVar48	opcodeTemplateTable	INFERRED	static template table pointer (PTR_DAT_...) for the opcode, passed to FUN_000fd50c	^\s*if\ \(ppppppuVar48\ !=\ \(uint\ \*\*\*\*\*\*\)0x0\)\ goto\ switchD_00102044_default;$	+1
+use	FUN_000fd5c8	ppppppuVar48	breakBlock	INFERRED	new BreakBlock allocated for a break statement	^\s*ppppppuVar48\ =\ \(uint\ \*\*\*\*\*\*\)\(puVar32\ \+\ 1\);$	+1
+use	FUN_000fd5c8	ppppppuVar48	breakBlock	INFERRED	new BreakBlock allocated for a break statement	^\s*FUN_000ec0c8\(ppppppuVar48,iVar43,\*\(undefined4\ \*\)\(iVar43\ \+\ 300\),in_r6\);$	+1
+use	FUN_000fd5c8	ppppppuVar48	breakBlock	INFERRED	new BreakBlock allocated for a break statement	^\s*FUN_000ec3ac\(param_1,local_184,ppppppuVar48\);$	+3
+use	FUN_000fd5c8	ppppppuVar48	breakBlock	INFERRED	new BreakBlock allocated for a break statement	^\s*local_184\ =\ \(uint\ \*\*\*\*\*\)ppppppuVar48;$	+1
+use	FUN_000fd5c8	ppppppuVar48	createdInst0x12	INFERRED	instruction created with opcode 0x12 and filled through its operand records	^\s*ppppppuVar48\ =\ FUN_001043f0\(0x12,\*\(undefined4\ \*\)\(param_1\ \+\ 8\)\);$	+1
+use	FUN_000fd5c8	ppppppuVar48	createdInst0x12	INFERRED	instruction created with opcode 0x12 and filled through its operand records	^\s*iVar20\ =\ FUN_001054ec\(ppppppuVar48,0\);$	+1
+use	FUN_000fd5c8	ppppppuVar48	createdInst0x12	INFERRED	instruction created with opcode 0x12 and filled through its operand records	^\s*iVar21\ =\ FUN_001054ec\(ppppppuVar48,1\);$	+1
+use	FUN_000fd5c8	ppppppuVar48	createdInst0x12	INFERRED	instruction created with opcode 0x12 and filled through its operand records	^\s*in_r7\ =\ ppppppuVar48;$@3	+2
+use	FUN_000fd5c8	ppppppuVar48	createdInst0x12	INFERRED	instruction created with opcode 0x12 and filled through its operand records	^\s*\(\(void\ \(\*\)\(\)\)FUN_000f79c4\)\(ppppppuVar48,param_1,2,dVar54,dVar54,dVar54,dVar54\);$	+2
+use	FUN_000fd5c8	ppppppuVar48	createdInst0x12	INFERRED	instruction created with opcode 0x12 and filled through its operand records	^\s*\(\(void\ \(\*\)\(\)\)FUN_000f79c4\)\(ppppppuVar48,param_1,2,dVar54,dVar54,dVar54,dVar54\);$@2	+1
+use	FUN_000fd5c8	ppppppuVar48	createdInst0x12	INFERRED	instruction created with opcode 0x12 and filled through its operand records	^\s*\(\(int\ \(\*\)\(\)\)FUN_000f92fc\)\(param_1,ppppppuVar48,local_180\);$	+1
+use	FUN_000fd5c8	ppppppuVar48	continueBlock	INFERRED	new ContinueBlock allocated for a continue statement	^\s*ppppppuVar48\ =\ \(uint\ \*\*\*\*\*\*\)\(puVar32\ \+\ 1\);$@2	+1
+use	FUN_000fd5c8	ppppppuVar48	continueBlock	INFERRED	new ContinueBlock allocated for a continue statement	^\s*FUN_000ec178\(ppppppuVar48,iVar43,\*\(undefined4\ \*\)\(iVar43\ \+\ 300\),in_r6\);$	+1
+use	FUN_000fd5c8	ppppppuVar48	continueBlock	INFERRED	new ContinueBlock allocated for a continue statement	^\s*FUN_000ec3ac\(param_1,local_184,ppppppuVar48\);$@2	+3
+use	FUN_000fd5c8	ppppppuVar48	continueBlock	INFERRED	new ContinueBlock allocated for a continue statement	^\s*local_184\ =\ \(uint\ \*\*\*\*\*\)ppppppuVar48;$@2	+1
+use	FUN_000fd5c8	ppppppuVar48	newBlock	INFERRED	fresh block allocated and made the current block	^\s*ppppppuVar48\ =\ \(uint\ \*\*\*\*\*\*\)\(puVar32\ \+\ 1\);$@3	+2
+use	FUN_000fd5c8	ppppppuVar48	newBlock	INFERRED	fresh block allocated and made the current block	^\s*ppppuVar45\[0x4e\]\ =\ \(uint\ \*\*\*\)ppppppuVar48;$	+3
+use	FUN_000fd5c8	ppppppuVar48	newBlock	INFERRED	fresh block allocated and made the current block	^\s*ppppppuVar48\ =\ \(uint\ \*\*\*\*\*\*\)\(puVar32\ \+\ 1\);$@4	+2
+use	FUN_000fd5c8	ppppppuVar48	newBlock	INFERRED	fresh block allocated and made the current block	^\s*local_180\ =\ \(uint\ \*\*\*\*\*\)ppppppuVar48;$@2	+2
+use	FUN_000fd5c8	ppppppuVar48	newBlock	INFERRED	fresh block allocated and made the current block	^\s*ppppppuVar48\ =\ \(uint\ \*\*\*\*\*\*\)\(puVar29\ \+\ 1\);$	+4
+use	FUN_000fd5c8	ppppppuVar48	newBlock	INFERRED	fresh block allocated and made the current block	^\s*ppppppuVar48\ =\ \(uint\ \*\*\*\*\*\*\)\(puVar28\ \+\ 1\);$	+2
+use	FUN_000fd5c8	ppppppuVar48	newBlock	INFERRED	fresh block allocated and made the current block	^\s*local_180\ =\ \(uint\ \*\*\*\*\*\)ppppppuVar48;$@4	+2
+use	FUN_000fd5c8	ppppppuVar48	ifConditionRef	INFERRED	condition reference taken from the if stack element, passed to IfHeader/IfHeaderStatic constructors	^\s*ppppppuVar48\ =\ \(uint\ \*\*\*\*\*\*\)0x0;$@3	+1
+use	FUN_000fd5c8	ppppppuVar48	ifConditionRef	INFERRED	condition reference taken from the if stack element, passed to IfHeader/IfHeaderStatic constructors	^\s*ppppppuVar48\ =\ \(uint\ \*\*\*\*\*\*\)\*pppppuVar52;$	+2
+use	FUN_000fd5c8	ppppppuVar48	ifConditionRef	INFERRED	condition reference taken from the if stack element, passed to IfHeader/IfHeaderStatic constructors	^\s*FUN_000ea6d0\(pppppuVar15,pvVar16,ppppppuVar48,0,in_r7\);$	+1
+use	FUN_000fd5c8	ppppppuVar48	ifConditionRef	INFERRED	condition reference taken from the if stack element, passed to IfHeader/IfHeaderStatic constructors	^\s*FUN_000ebac8\(pppppuVar15,pvVar16,ppppppuVar48,in_r6\);$	+1
+use	FUN_000fd5c8	ppppppuVar48	ifConditionRef	INFERRED	condition reference taken from the if stack element, passed to IfHeader/IfHeaderStatic constructors	^\s*FUN_000ea6d0\(pppppuVar15,pvVar16,ppppppuVar48,0,in_r7\);$@2	+1
+use	FUN_000fd5c8	ppppppuVar48	ifConditionRef	INFERRED	condition reference taken from the if stack element, passed to IfHeader/IfHeaderStatic constructors	^\s*\(\(int\ \(\*\)\(\)\)FUN_000fadc4\)\(param_1,puVar32,local_188,ppppppuVar48,local_a8,ppppppuVar37,$	+3
+use	FUN_000fd5c8	ppppppuVar48	ifConditionRef	INFERRED	condition reference taken from the if stack element, passed to IfHeader/IfHeaderStatic constructors	^\s*FUN_000ea6d0\(pppppuVar15,uVar46,ppppppuVar48,0,in_r7\);$	+1
+use	FUN_000fd5c8	ppppppuVar48	ifConditionRef	INFERRED	condition reference taken from the if stack element, passed to IfHeader/IfHeaderStatic constructors	^\s*FUN_000ea6d0\(pppppuVar15,pvVar16,ppppppuVar48,0,in_r7\);$@3	+1
+use	FUN_000fd5c8	ppppppuVar48	nextBlock	INFERRED	block after previousBlock (previousBlock[2]) whose instruction list is moved	^\s*ppppppuVar48\ =\ \(uint\ \*\*\*\*\*\*\)local_184\[2\];$	+4
+use	FUN_000fd5c8	ppppppuVar48	nextBlock	INFERRED	block after previousBlock (previousBlock[2]) whose instruction list is moved	^\s*FUN_00193fa4\(ppppppuVar48\ \+\ 0x24\);$	+4
+use	FUN_000fd5c8	ppppppuVar48	nextBlock	INFERRED	block after previousBlock (previousBlock[2]) whose instruction list is moved	^\s*\}\ while\ \(ppppppuVar48\ !=\ \(uint\ \*\*\*\*\*\*\)local_180\);$	+1
+use	FUN_000fd5c8	ppppppuVar48	operandLoopIndex	INFERRED	operand index 0.. while operands are copied	^\s*ppppppuVar48\ =\ \(uint\ \*\*\*\*\*\*\)0x0;$@4	+1
+use	FUN_000fd5c8	ppppppuVar48	operandLoopIndex	INFERRED	operand index 0.. while operands are copied	^\s*in_r6\ =\ ppppppuVar48;$@2	+2
+use	FUN_000fd5c8	ppppppuVar48	operandLoopIndex	INFERRED	operand index 0.. while operands are copied	^\s*iVar23\ =\ FUN_001054ec\(iVar22,ppppppuVar48\);$	+1
+use	FUN_000fd5c8	ppppppuVar48	operandLoopIndex	INFERRED	operand index 0.. while operands are copied	^\s*if\ \(ppppppuVar48\ ==\ \(uint\ \*\*\*\*\*\*\)\(\(int\)\(\(unsigned\ char\ \*\)0x0\)\ \+\ 1U\)\)\ \{$	+1
+use	FUN_000fd5c8	ppppppuVar48	operandLoopIndex	INFERRED	operand index 0.. while operands are copied	^\s*else\ if\ \(ppppppuVar48\ ==\ \(uint\ \*\*\*\*\*\*\)\(\(int\)\(\(unsigned\ char\ \*\)0x0\)\ \+\ 2U\)\)\ \{$	+1
+use	FUN_000fd5c8	ppppppuVar48	operandLoopIndex	INFERRED	operand index 0.. while operands are copied	^\s*if\ \(ppppppuVar48\ ==\ \(uint\ \*\*\*\*\*\*\)\(\(int\)\(\(unsigned\ char\ \*\)0x0\)\ \+\ 3U\)\)\ \{$	+1
+use	FUN_000fd5c8	ppppppuVar48	operandLoopIndex	INFERRED	operand index 0.. while operands are copied	^\s*iVar23\ =\ FUN_001054ec\(iVar22,ppppppuVar48\);$@2	+1
+use	FUN_000fd5c8	ppppppuVar48	operandLoopIndex	INFERRED	operand index 0.. while operands are copied	^\s*ppppppuVar48\ =\ \(uint\ \*\*\*\*\*\*\)\(\(int\)ppppppuVar48\ \+\ 1\);$	+2
+use	FUN_000fd5c8	ppppppuVar48	destSelectWordCopy	INFERRED	select word of operand 0 (+0x10) copied through local_104 and rewritten	^\s*ppppppuVar48\ =\ \*\(uint\ \*\*\*\*\*\*\*\)\(iVar43\ \+\ 0x10\);$	+2
+use	FUN_000fd5c8	ppppppuVar48	destSelectWordCopy	INFERRED	select word of operand 0 (+0x10) copied through local_104 and rewritten	^\s*CONCAT31\(\(int3\)\(\(uint\)ppppppuVar48\ >>\ 8\),$	+2
+use	FUN_000fd5c8	ppppppuVar48	destSelectWordCopy	INFERRED	select word of operand 0 (+0x10) copied through local_104 and rewritten	^\s*CONCAT13\(\*\(undefined1\ \*\)\(\(int\)\&local_104\ \+\ iVar34\),\(int3\)ppppppuVar48\);$	+1
+use	FUN_000fd5c8	ppppppuVar48	destSelectWordCopy	INFERRED	select word of operand 0 (+0x10) copied through local_104 and rewritten	^\s*\(\*\(unsigned\ short\ \*\)\(\(unsigned\ char\ \*\)\&\(local_104\)\ \+\ 0\)\)\ =\ \(undefined2\)\(\(uint\)ppppppuVar48\ >>\ 0x10\);$	+2
+use	FUN_000fd5c8	ppppppuVar48	destSelectWordCopy	INFERRED	select word of operand 0 (+0x10) copied through local_104 and rewritten	^\s*ppppppuVar48\ =\ local_104;$	+1
+use	FUN_000fd5c8	ppppppuVar48	destSelectWordCopy	INFERRED	select word of operand 0 (+0x10) copied through local_104 and rewritten	^\s*\*\(uint\ \*\*\*\*\*\*\*\)\(iVar43\ \+\ 0x10\)\ =\ ppppppuVar48;$	+1
+use	FUN_000fd5c8	ppppppuVar19	interpRegisterNumber	INFERRED	register number of the interpolant declaration (0xf with hardware flag 0x80, else token short)	^\s*ppppppuVar19\ =\ \(uint\ \*\*\*\*\*\*\)\(\(int\)\(\(unsigned\ char\ \*\)0xc\)\ \+\ 3\);$	+1
+use	FUN_000fd5c8	ppppppuVar19	interpRegisterNumber	INFERRED	register number of the interpolant declaration (0xf with hardware flag 0x80, else token short)	^\s*ppppppuVar19\ =\ \(uint\ \*\*\*\*\*\*\)\(int\)\*\(short\ \*\)\(\(int\)\*param_2\[0x19\]\ \+\ 2\);$	+1
+use	FUN_000fd5c8	ppppppuVar19	interpRegisterNumber	INFERRED	register number of the interpolant declaration (0xf with hardware flag 0x80, else token short)	^\s*iVar34\ =\ FUN_00127608\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x3ac\),uVar46,ppppppuVar19,0\);$	+1
+use	FUN_000fd5c8	ppppppuVar19	interpRegisterNumber	INFERRED	register number of the interpolant declaration (0xf with hardware flag 0x80, else token short)	^\s*FUN_001041d0\(iVar34,0,\(uint\)\*ppppppuVar49\ >>\ 0x10\ \&\ 3,in_r6,ppppppuVar19\);$	+5
+use	FUN_000fd5c8	ppppppuVar19	interpRegisterNumber	INFERRED	register number of the interpolant declaration (0xf with hardware flag 0x80, else token short)	^\s*\*\(uint\ \*\*\*\*\*\*\*\)\(iVar34\ \+\ 0x148\)\ =\ ppppppuVar19;$	+1
+use	FUN_000fd5c8	ppppppuVar19	laneKindValue	INFERRED	Program__lookupTable8b68 value for the declaration kind bits of the token	^\s*ppppppuVar19\ =\ \(uint\ \*\*\*\*\*\*\)FUN_000ec27c\(param_1,\(uint\)\*ppppppuVar49\ >>\ 0x10\ \&\ 0x1f\);$	+1
+use	FUN_000fd5c8	ppppppuVar19	laneKindValue	INFERRED	Program__lookupTable8b68 value for the declaration kind bits of the token	^\s*in_r6\ =\ ppppppuVar19;$	+1
+use	FUN_000fd5c8	ppppppuVar19	laneKindValue	INFERRED	Program__lookupTable8b68 value for the declaration kind bits of the token	^\s*FUN_001041d0\(iVar34,iVar43,\(uint\)\*\(byte\ \*\)\(iVar43\ \+\ \(int\)local_70\),ppppppuVar19,$	+2
+use	FUN_000fd5c8	ppppppuVar19	laneKindValue	INFERRED	Program__lookupTable8b68 value for the declaration kind bits of the token	^\s*ppppppuVar19\ =\ \(uint\ \*\*\*\*\*\*\)FUN_000ec27c\(param_1,uVar44\);$	+1
+use	FUN_000fd5c8	ppppppuVar19	laneKindValue	INFERRED	Program__lookupTable8b68 value for the declaration kind bits of the token	^\s*in_r6\ =\ ppppppuVar19;$@4	+1
+use	FUN_000fd5c8	ppppppuVar19	laneKindValue	INFERRED	Program__lookupTable8b68 value for the declaration kind bits of the token	^\s*FUN_001041d0\(iVar34,iVar43,1,ppppppuVar19,ppppppuVar48\);$	+1
+use	FUN_000fd5c8	ppppppuVar19	interpIndexField	INFERRED	bits 21-28 of the token word: interpolant index passed to IRLoadInterp setters	^\s*ppppppuVar19\ =\ \(uint\ \*\*\*\*\*\*\)\(\(uint\)\*ppppppuVar49\ >>\ 0x15\ \&\ 0xff\);$	+1
+use	FUN_000fd5c8	ppppppuVar19	interpIndexField	INFERRED	bits 21-28 of the token word: interpolant index passed to IRLoadInterp setters	^\s*in_r6\ =\ ppppppuVar19;$@2	+2
+use	FUN_000fd5c8	ppppppuVar19	tokenCursor	INFERRED	cursor over the staged token words (ilReader + 0x23 + count)	^\s*ppppppuVar19\ =\ param_2\ \+\ \(int\)param_2\[0x16\]\ \+\ 0x23;$	+1
+use	FUN_000fd5c8	ppppppuVar19	tokenCursor	INFERRED	cursor over the staged token words (ilReader + 0x23 + count)	^\s*pppppuVar15\ =\ \*ppppppuVar19;$	+2
+use	FUN_000fd5c8	ppppppuVar19	createdMov	INFERRED	mov instruction (opcode 0x31) created while translating the opcode	^\s*ppppppuVar19\ =\ FUN_001043f0\(0x31,\*\(undefined4\ \*\)\(param_1\ \+\ 8\)\);$	+1
+use	FUN_000fd5c8	ppppppuVar19	createdMov	INFERRED	mov instruction (opcode 0x31) created while translating the opcode	^\s*iVar34\ =\ FUN_001054ec\(ppppppuVar19,0\);$	+1
+use	FUN_000fd5c8	ppppppuVar19	createdMov	INFERRED	mov instruction (opcode 0x31) created while translating the opcode	^\s*iVar43\ =\ FUN_001054ec\(ppppppuVar19,1\);$	+1
+use	FUN_000fd5c8	ppppppuVar19	createdMov	INFERRED	mov instruction (opcode 0x31) created while translating the opcode	^\s*in_r7\ =\ ppppppuVar19;$@2	+2
+use	FUN_000fd5c8	ppppppuVar19	createdMov	INFERRED	mov instruction (opcode 0x31) created while translating the opcode	^\s*\(\(int\ \(\*\)\(\)\)FUN_000f92fc\)\(param_1,ppppppuVar19,local_180\);$	+1
+use	FUN_000fd5c8	ppppppuVar19	declRegister	INFERRED	register number (short at token +2) of the declaration, compared with the declared range	^\s*ppppppuVar19\ =\ \(uint\ \*\*\*\*\*\*\)\(int\)\*\(short\ \*\)\(\(int\)ppppuVar45\ \+\ 2\);$	+1
+use	FUN_000fd5c8	ppppppuVar19	declRegister	INFERRED	register number (short at token +2) of the declaration, compared with the declared range	^\s*\*\(uint\ \*\*\*\*\*\*\*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x3ac\)\ \+\ 0x44\)\ =\ ppppppuVar19;$	+1
+use	FUN_000fd5c8	ppppppuVar19	declRegister	INFERRED	register number (short at token +2) of the declaration, compared with the declared range	^\s*\*\(uint\ \*\*\*\*\*\*\*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x3ac\)\ \+\ 0x48\)\ =\ ppppppuVar19;$	+1
+use	FUN_000fd5c8	ppppppuVar19	declRegister	INFERRED	register number (short at token +2) of the declaration, compared with the declared range	^\s*if\ \(\(int\)ppppppuVar19\ <=\ \(int\)\*\(uint\ \*\*\*\*\*\*\*\)\(param_1\ \+\ 1000\)\)\ \{$	+2
+use	FUN_000fd5c8	ppppppuVar19	declRegister	INFERRED	register number (short at token +2) of the declaration, compared with the declared range	^\s*if\ \(\(int\)puVar53\ <=\ \(int\)ppppppuVar19\)\ \{$	+2
+use	FUN_000fd5c8	ppppppuVar19	declRegister	INFERRED	register number (short at token +2) of the declaration, compared with the declared range	^\s*\*\(uint\ \*\*\*\*\*\*\*\)\(iVar43\ \+\ 0x4c\)\ =\ ppppppuVar19;$	+1
+use	FUN_000fd5c8	ppppppuVar19	declRegister	INFERRED	register number (short at token +2) of the declaration, compared with the declared range	^\s*\*\(uint\ \*\*\*\*\*\*\*\)\(iVar43\ \+\ 0x54\)\ =\ ppppppuVar19;$	+1
+use	FUN_000fd5c8	ppppppuVar19	declRegister	INFERRED	register number (short at token +2) of the declaration, compared with the declared range	^\s*\*\(uint\ \*\*\*\*\*\*\*\)\(iVar43\ \+\ 0x50\)\ =\ ppppppuVar19;$	+1
+use	FUN_000fd5c8	ppppppuVar19	declRegister	INFERRED	register number (short at token +2) of the declaration, compared with the declared range	^\s*\*\(uint\ \*\*\*\*\*\*\*\)\(iVar43\ \+\ 0x58\)\ =\ ppppppuVar19;$	+1
+use	FUN_000fd5c8	ppppppuVar19	declRegister	INFERRED	register number (short at token +2) of the declaration, compared with the declared range	^\s*\*\(uint\ \*\*\*\*\*\*\*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x3ac\)\ \+\ 0x5c\)\ =\ ppppppuVar19;$	+1
+use	FUN_000fd5c8	ppppppuVar19	declRegister	INFERRED	register number (short at token +2) of the declaration, compared with the declared range	^\s*\*\(uint\ \*\*\*\*\*\*\*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x3ac\)\ \+\ 0x60\)\ =\ ppppppuVar19;$	+1
+use	FUN_000fd5c8	ppppppuVar19	declRegister	INFERRED	register number (short at token +2) of the declaration, compared with the declared range	^\s*\*\(uint\ \*\*\*\*\*\*\*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x3ac\)\ \+\ 100\)\ =\ ppppppuVar19;$	+1
+use	FUN_000fd5c8	ppppppuVar19	declRegister	INFERRED	register number (short at token +2) of the declaration, compared with the declared range	^\s*piVar18\ =\ \(int\ \*\)FUN_00127608\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x3ac\),uVar46,ppppppuVar19,0\);$	+1
+use	FUN_000fd5c8	ppppppuVar19	declRegister	INFERRED	register number (short at token +2) of the declaration, compared with the declared range	^\s*\*\(uint\ \*\*\*\*\*\*\*\)\(iVar43\ \+\ 0x140\)\ =\ ppppppuVar19;$	+1
+use	FUN_000fd5c8	ppppppuVar19	declRegister	INFERRED	register number (short at token +2) of the declaration, compared with the declared range	^\s*in_r6\ =\ ppppppuVar19;$@3	+2
+use	FUN_000fd5c8	ppppppuVar19	instOpcode0xb4	INFERRED	instruction constructed with opcode 0xb4 (IRInst__ctor_10502c)	^\s*ppppppuVar19\ =\ \(uint\ \*\*\*\*\*\*\)\(puVar14\ \+\ 1\);$	+2
+use	FUN_000fd5c8	ppppppuVar19	instOpcode0xb4	INFERRED	instruction constructed with opcode 0xb4 (IRInst__ctor_10502c)	^\s*FUN_001046c8\(ppppppuVar19,0,iVar43\);$	+1
+use	FUN_000fd5c8	ppppppuVar19	instOpcode0xb4	INFERRED	instruction constructed with opcode 0xb4 (IRInst__ctor_10502c)	^\s*iVar43\ =\ FUN_001054ec\(ppppppuVar19,1\);$@2	+1
+use	FUN_000fd5c8	ppppppuVar19	instOpcode0xb4	INFERRED	instruction constructed with opcode 0xb4 (IRInst__ctor_10502c)	^\s*iVar43\ =\ FUN_001054ec\(ppppppuVar19,2\);$	+1
+use	FUN_000fd5c8	ppppppuVar19	instOpcode0xb4	INFERRED	instruction constructed with opcode 0xb4 (IRInst__ctor_10502c)	^\s*iVar43\ =\ FUN_001054ec\(ppppppuVar19,3\);$	+1
+use	FUN_000fd5c8	ppppppuVar19	instOpcode0xb4	INFERRED	instruction constructed with opcode 0xb4 (IRInst__ctor_10502c)	^\s*\(\(int\ \(\*\)\(\)\)FUN_000f8aa0\)\(param_1,local_70,\*param_2\[0x1b\],1,ppppppuVar19\);$	+1
+use	FUN_000fd5c8	ppppppuVar19	instOpcode0xb4	INFERRED	instruction constructed with opcode 0xb4 (IRInst__ctor_10502c)	^\s*\(\(int\ \(\*\)\(\)\)FUN_000f8aa0\)\(param_1,local_70,\*param_2\[0x1b\],2,ppppppuVar19\);$	+1
+use	FUN_000fd5c8	ppppppuVar19	instOpcode0xb4	INFERRED	instruction constructed with opcode 0xb4 (IRInst__ctor_10502c)	^\s*in_r7\ =\ ppppppuVar19;$@3	+2
+use	FUN_000fd5c8	ppppppuVar19	instOpcode0xb4	INFERRED	instruction constructed with opcode 0xb4 (IRInst__ctor_10502c)	^\s*\(\(int\ \(\*\)\(\)\)FUN_000f92fc\)\(param_1,ppppppuVar19,local_180\);$@2	+1
+use	FUN_000fd5c8	ppppppuVar19	scopeVector	INFERRED	vector header (vectorAllocation2 + 1) of the nested scope stack	^\s*ppppppuVar19\ =\ \(uint\ \*\*\*\*\*\*\)\(puVar24\ \+\ 1\);$	+1
+use	FUN_000fd5c8	ppppppuVar19	scopeVector	INFERRED	vector header (vectorAllocation2 + 1) of the nested scope stack	^\s*in_r8\ =\ ppppppuVar19;$	+2
+use	FUN_000fd5c8	ppppppuVar19	scopeVector	INFERRED	vector header (vectorAllocation2 + 1) of the nested scope stack	^\s*FUN_00194208\(ppppppuVar19,uVar10\ \-\ 1\);$	+1
+use	FUN_000fd5c8	ppppppuVar19	scopeVector	INFERRED	vector header (vectorAllocation2 + 1) of the nested scope stack	^\s*in_r8\ =\ ppppppuVar19;$@2	+2
+use	FUN_000fd5c8	ppppppuVar19	scopeVector	INFERRED	vector header (vectorAllocation2 + 1) of the nested scope stack	^\s*in_r8\ =\ ppppppuVar19;$@3	+2
+use	FUN_000fd5c8	ppppppuVar19	scopeVector	INFERRED	vector header (vectorAllocation2 + 1) of the nested scope stack	^\s*in_r8\ =\ ppppppuVar19;$@4	+2
+use	FUN_000fd5c8	ppppppuVar19	scopeVector	INFERRED	vector header (vectorAllocation2 + 1) of the nested scope stack	^\s*in_r8\ =\ ppppppuVar19;$@5	+2
+use	FUN_000fd5c8	ppppppuVar19	scopeVector	INFERRED	vector header (vectorAllocation2 + 1) of the nested scope stack	^\s*if\ \(ppppppuVar19\ !=\ \(uint\ \*\*\*\*\*\*\)0x0\)\ \{$	+1
+use	FUN_000fd5c8	ppppppuVar19	builtInstB	INFERRED	instruction returned by FUN_000f9140 for (program, ilOpcode, token field)	^\s*ppppppuVar19\ =\ \(uint\ \*\*\*\*\*\*\)\(\(int\ \(\*\)\(\)\)FUN_000f9140\)\(param_1,iVar34,\(uint\)\*ppppppuVar49\ >>\ 0x10\ \&\ 0x3fff\);$	+1
+use	FUN_000fd5c8	ppppppuVar19	builtInstB	INFERRED	instruction returned by FUN_000f9140 for (program, ilOpcode, token field)	^\s*iVar43\ =\ FUN_001054ec\(ppppppuVar19,0\);$	+1
+use	FUN_000fd5c8	ppppppuVar19	builtInstB	INFERRED	instruction returned by FUN_000f9140 for (program, ilOpcode, token field)	^\s*in_r8\ =\ ppppppuVar19;$@6	+2
+use	FUN_000fd5c8	ppppppuVar19	builtInstB	INFERRED	instruction returned by FUN_000f9140 for (program, ilOpcode, token field)	^\s*iVar20\ =\ FUN_001054ec\(ppppppuVar19,ppppppuVar40\);$	+1
+use	FUN_000fd5c8	ppppppuVar19	builtInstB	INFERRED	instruction returned by FUN_000f9140 for (program, ilOpcode, token field)	^\s*if\ \(\(!bVar1\)\ \&\&$	+2
+use	FUN_000fd5c8	ppppppuVar19	builtInstB	INFERRED	instruction returned by FUN_000f9140 for (program, ilOpcode, token field)	^\s*in_r7\ =\ ppppppuVar19;$@4	+3
+use	FUN_000fd5c8	ppppppuVar19	builtInstB	INFERRED	instruction returned by FUN_000f9140 for (program, ilOpcode, token field)	^\s*local_b8\ =\ FUN_000f3a30\(ppppppuVar19\);$	+1
+use	FUN_000fd5c8	ppppppuVar19	builtInstB	INFERRED	instruction returned by FUN_000f9140 for (program, ilOpcode, token field)	^\s*pppppuVar52\ =\ ppppppuVar19\[0x25\];$	+3
+use	FUN_000fd5c8	ppppppuVar19	builtInstB	INFERRED	instruction returned by FUN_000f9140 for (program, ilOpcode, token field)	^\s*iVar43\ =\ FUN_0011346c\(\*\(undefined4\ \*\)\(param_1\ \+\ 8\),ppppppuVar19\);$	+2
+use	FUN_000fd5c8	ppppppuVar19	builtInstB	INFERRED	instruction returned by FUN_000f9140 for (program, ilOpcode, token field)	^\s*FUN_00105e54\(iVar22,ppppppuVar48,ppppppuVar19,ppppppuVar48\);$	+1
+use	FUN_000fd5c8	ppppppuVar19	builtInstB	INFERRED	instruction returned by FUN_000f9140 for (program, ilOpcode, token field)	^\s*\*\(uint\ \*\*\*\*\*\*\)\(iVar22\ \+\ 0x120\)\ =\ ppppppuVar19\[0x48\];$	+1
+use	FUN_000fd5c8	ppppppuVar19	builtInstB	INFERRED	instruction returned by FUN_000f9140 for (program, ilOpcode, token field)	^\s*ppppppuVar19\[0x27\]\ =\ \(uint\ \*\*\*\*\*\)local_178;$	+1
+use	FUN_000fd5c8	ppppppuVar19	builtInstB	INFERRED	instruction returned by FUN_000f9140 for (program, ilOpcode, token field)	^\s*iVar43\ =\ FUN_001054ec\(ppppppuVar19,ppppppuVar49\);$	+1
+use	FUN_000fd5c8	ppppppuVar19	builtInstB	INFERRED	instruction returned by FUN_000f9140 for (program, ilOpcode, token field)	^\s*iVar43\ =\ FUN_001054ec\(ppppppuVar19,ppppppuVar49\);$@2	+1
+use	FUN_000fd5c8	ppppppuVar19	builtInstB	INFERRED	instruction returned by FUN_000f9140 for (program, ilOpcode, token field)	^\s*iVar34\ =\ \(\*\*\(code\ \*\*\)\(\*piVar18\ \+\ 0x34\)\)\(piVar18,ppppppuVar19\);$	+1
+use	FUN_000fd5c8	ppppppuVar19	builtInstB	INFERRED	instruction returned by FUN_000f9140 for (program, ilOpcode, token field)	^\s*iVar34\ =\ FUN_001054ec\(ppppppuVar19,0\);$@2	+1
+use	FUN_000fd5c8	ppppppuVar19	builtInstB	INFERRED	instruction returned by FUN_000f9140 for (program, ilOpcode, token field)	^\s*ppppppuVar19\[0x27\]\ =\ \(uint\ \*\*\*\*\*\)local_178;$@2	+1
+use	FUN_000fd5c8	ppppppuVar19	builtInstB	INFERRED	instruction returned by FUN_000f9140 for (program, ilOpcode, token field)	^\s*pppppuVar15\ =\ ppppppuVar19\[0x25\];$	+2
+use	FUN_000fd5c8	ppppppuVar19	builtInstB	INFERRED	instruction returned by FUN_000f9140 for (program, ilOpcode, token field)	^\s*pppppuVar52\ =\ ppppppuVar19\[0x25\];$@2	+1
+use	FUN_000fd5c8	ppppppuVar19	builtInstB	INFERRED	instruction returned by FUN_000f9140 for (program, ilOpcode, token field)	^\s*pppppuVar11\ =\ ppppppuVar19\[0x26\];$	+1
+use	FUN_000fd5c8	ppppppuVar19	builtInstB	INFERRED	instruction returned by FUN_000f9140 for (program, ilOpcode, token field)	^\s*\(\(int\ \(\*\)\(\)\)FUN_000f92fc\)\(param_1,ppppppuVar19,local_180\);$@3	+1
+use	FUN_000fd5c8	iVar21	operandByteOffset	INFERRED	operand number * 4: byte offset into the token operand array, advanced by 0x14	^\s*iVar21\ =\ \(int\)ppppppuVar38\ <<\ 2;$	+1
+use	FUN_000fd5c8	iVar21	operandByteOffset	INFERRED	operand number * 4: byte offset into the token operand array, advanced by 0x14	^\s*\(\(int\ \(\*\)\(\)\)FUN_000f9a58\)\(param_1,local_6c,\*\(undefined4\ \*\)\(\(int\)param_2\[0x19\]\ \+\ iVar21\),ppppppuVar37,$	+2
+use	FUN_000fd5c8	iVar21	operandByteOffset	INFERRED	operand number * 4: byte offset into the token operand array, advanced by 0x14	^\s*iVar21\ =\ iVar21\ \+\ 0x14;$	+1
+use	FUN_000fd5c8	iVar21	fetchInstWordB	INFERRED	word of the fetch instruction (+0x94/+0xa0/+0xac) copied into the operand record +8	^\s*iVar21\ =\ piVar18\[0x2b\];$	+1
+use	FUN_000fd5c8	iVar21	fetchInstWordB	INFERRED	word of the fetch instruction (+0x94/+0xa0/+0xac) copied into the operand record +8	^\s*\*\(int\ \*\)\(iVar43\ \+\ 8\)\ =\ iVar21;$	+1
+use	FUN_000fd5c8	iVar21	fetchInstWordB	INFERRED	word of the fetch instruction (+0x94/+0xa0/+0xac) copied into the operand record +8	^\s*iVar21\ =\ piVar18\[0x2b\];$@2	+1
+use	FUN_000fd5c8	iVar21	fetchInstWordB	INFERRED	word of the fetch instruction (+0x94/+0xa0/+0xac) copied into the operand record +8	^\s*\*\(int\ \*\)\(iVar43\ \+\ 8\)\ =\ iVar21;$@2	+1
+use	FUN_000fd5c8	iVar21	fetchInstWordB	INFERRED	word of the fetch instruction (+0x94/+0xa0/+0xac) copied into the operand record +8	^\s*iVar21\ =\ piVar18\[0x2b\];$@3	+1
+use	FUN_000fd5c8	iVar21	fetchInstWordB	INFERRED	word of the fetch instruction (+0x94/+0xa0/+0xac) copied into the operand record +8	^\s*\*\(int\ \*\)\(iVar43\ \+\ 8\)\ =\ iVar21;$@3	+1
+use	FUN_000fd5c8	iVar21	fetchInstWordB	INFERRED	word of the fetch instruction (+0x94/+0xa0/+0xac) copied into the operand record +8	^\s*iVar21\ =\ piVar18\[0x2b\];$@4	+1
+use	FUN_000fd5c8	iVar21	fetchInstWordB	INFERRED	word of the fetch instruction (+0x94/+0xa0/+0xac) copied into the operand record +8	^\s*\*\(int\ \*\)\(iVar43\ \+\ 8\)\ =\ iVar21;$@4	+1
+use	FUN_000fd5c8	iVar21	fetchInstWordB	INFERRED	word of the fetch instruction (+0x94/+0xa0/+0xac) copied into the operand record +8	^\s*iVar21\ =\ piVar18\[0x25\];$	+1
+use	FUN_000fd5c8	iVar21	fetchInstWordB	INFERRED	word of the fetch instruction (+0x94/+0xa0/+0xac) copied into the operand record +8	^\s*\*\(int\ \*\)\(iVar43\ \+\ 8\)\ =\ iVar21;$@5	+1
+use	FUN_000fd5c8	iVar21	fetchInstWordC	INFERRED	word of the fetch instruction (+0x98) copied into the operand record +0xc	^\s*iVar21\ =\ piVar18\[0x26\];$	+1
+use	FUN_000fd5c8	iVar21	fetchInstWordC	INFERRED	word of the fetch instruction (+0x98) copied into the operand record +0xc	^\s*\*\(int\ \*\)\(iVar43\ \+\ 0xc\)\ =\ iVar21;$	+1
+use	FUN_000fd5c8	iVar21	continueTargetBlockB	INFERRED	scope+0x150: continue target block inserted after previousBlock	^\s*iVar21\ =\ \*\(int\ \*\)\(iVar20\ \+\ 0x150\);$	+2
+use	FUN_000fd5c8	iVar21	continueTargetBlockB	INFERRED	scope+0x150: continue target block inserted after previousBlock	^\s*FUN_000e8e4c\(local_184,iVar21\);$	+1
+use	FUN_000fd5c8	iVar21	continueTargetBlockB	INFERRED	scope+0x150: continue target block inserted after previousBlock	^\s*FUN_000ec3ac\(param_1,iVar21,puVar29\);$	+1
+use	FUN_000fd5c8	iVar21	continueTargetBlockB	INFERRED	scope+0x150: continue target block inserted after previousBlock	^\s*\*\(uint\ \*\*\*\*\*\)\(iVar21\ \+\ 0xb8\)\ =\ local_188;$	+1
+use	FUN_000fd5c8	iVar21	firstWrittenLaneB	INFERRED	SelectWord::firstWrittenComponent of the staged select word	^\s*iVar21\ =\ FUN_000f30d4\(local_178\);$	+1
+use	FUN_000fd5c8	iVar21	firstWrittenLaneB	INFERRED	SelectWord::firstWrittenComponent of the staged select word	^\s*CONCAT31\(\(int3\)\(\(uint\)pppppuVar11\ >>\ 8\),$	+2
+use	FUN_000fd5c8	iVar21	firstWrittenLaneB	INFERRED	SelectWord::firstWrittenComponent of the staged select word	^\s*CONCAT13\(\*\(undefined1\ \*\)\(\(int\)ppppuVar45\ \+\ iVar21\ \+\ 100\),$	+2
+use	FUN_000fd5c8	iVar21	firstWrittenLaneB	INFERRED	SelectWord::firstWrittenComponent of the staged select word	^\s*CONCAT11\(\*\(undefined1\ \*\)\(\(int\)ppppuVar45\ \+\ iVar21\ \+\ 100\),\(char\)pppppuVar11\);$	+1
+use	FUN_000fd5c8	iVar21	firstWrittenLaneB	INFERRED	SelectWord::firstWrittenComponent of the staged select word	^\s*\*\(undefined4\ \*\)\(iVar22\ \+\ 0x9c\)\ =\ \*\(undefined4\ \*\)\(PTR_DAT_001e8b64\ \+\ iVar21\ \*\ 4\);$	+2
+use	FUN_000fd5c8	iVar21	selectedLaneB	INFERRED	lane index chosen by the mask scan, written into the staged select word	^\s*iVar21\ =\ iVar34;$	+1
+use	FUN_000fd5c8	iVar21	selectedLaneB	INFERRED	lane index chosen by the mask scan, written into the staged select word	^\s*if\ \(\(iVar47\ !=\ 0\)\ \&\&\ \(iVar21\ =\ iVar34,\ 0\ <\ iVar47\)\)\ \{$	+1
+use	FUN_000fd5c8	iVar21	selectedLaneB	INFERRED	lane index chosen by the mask scan, written into the staged select word	^\s*iVar34\ =\ iVar21;$	+1
+use	FUN_000fd5c8	iVar21	selectedLaneB	INFERRED	lane index chosen by the mask scan, written into the staged select word	^\s*\*\(char\ \*\)\(iVar34\ \+\ \(int\)in_r7\)\ =\ \(char\)iVar21;$	+1
+use	FUN_000fd5c8	iVar21	selectedLaneB	INFERRED	lane index copy while the mask is scanned	^\s*iVar21\ =\ iVar43;$	+1
+use	FUN_000fd5c8	iVar47	loopRegisterEnd	INFERRED	program+0x3dc: end of the loop-register range raised to registerIndex + 1	^\s*iVar47\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x3dc\);$	^\s*piVar18\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x30c\);$	all	none
+use	FUN_000fd5c8	iVar47	flushNode	INFERRED	pending-instruction list node being flushed	^\s*while\ \(iVar47\ =\ iVar43,\ iVar47\ !=\ 0\)\ \{$	^\s*\}$	all	none
+use	FUN_000fd5c8	iVar21	operandIndexB	INFERRED	loop index over the operands of the opcode	^\s*iVar21\ =\ 0;$	^\s*iVar20\ =\ \*\(int\ \*\)\(local_14c\ \+\ 8\);$	all	none
+use	FUN_000fd5c8	iVar21	flushNodeB	INFERRED	pending-instruction list node being flushed	^\s*while\ \(iVar21\ =\ iVar20,\ iVar21\ !=\ 0\)\ \{$	^\s*iVar20\ =\ \*\(int\ \*\)\(iVar21\ \+\ 8\);$	all	none
+use	FUN_000fd5c8	iVar21	flushNodeB	INFERRED	pending-instruction list node being flushed	^\s*iVar20\ =\ \*\(int\ \*\)\(iVar21\ \+\ 8\);$	^\s*\}$	all	none
