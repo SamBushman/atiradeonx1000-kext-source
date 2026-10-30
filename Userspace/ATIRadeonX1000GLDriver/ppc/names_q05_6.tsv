@@ -2313,3 +2313,65 @@ local	FUN_000f9038	param_2	unusedArg2	INFERRED	passed by the caller (register le
 local	FUN_000f94dc	param_4	unusedArg4	INFERRED	passed by the caller (register leftover) but not read in the body
 local	FUN_000f94dc	param_5	unusedArg5	INFERRED	passed by the caller (register leftover) but not read in the body
 local	FUN_000f9a58	param_4	unusedArg4	INFERRED	passed by the caller (register leftover) but not read in the body
+use	FUN_000e3b88	iVar6	queryResult	INFERRED	scratch for the successive boolean queries on the scanned instruction (vtable +0x50, IRInst__lastSourceKeyEquals, RegKind__flagBit0)	^\s*iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*piVar8\ \+\ 0x50\)\)\(piVar8\);$	+2
+use	FUN_000e3b88	iVar6	queryResult	INFERRED	scratch for the successive boolean queries on the scanned instruction (vtable +0x50, IRInst__lastSourceKeyEquals, RegKind__flagBit0)	^\s*iVar6\ =\ \(\(int\ \(\*\)\(\)\)FUN_000e2f8c\)\(piVar13,uVar11,\*param_1\);$	+2
+use	FUN_000e3b88	iVar6	queryResult	INFERRED	scratch for the successive boolean queries on the scanned instruction (vtable +0x50, IRInst__lastSourceKeyEquals, RegKind__flagBit0)	^\s*if\ \(\(piVar13\[0x20\]\ ==\ 0\)\ \|\|\ \(iVar6\ =\ FUN_00126760\(piVar13\[0x26\]\),\ iVar6\ ==\ 0\)\)\ \{$	+1
+use	FUN_000e3b88	iVar6	savedRegisterNumber	INFERRED	firstPending[0x25]: destination register number restored on the reinitialised mov	^\s*iVar6\ =\ piVar8\[0x25\];$	+1
+use	FUN_000e3b88	iVar6	savedRegisterNumber	INFERRED	firstPending[0x25]: destination register number restored on the reinitialised mov	^\s*piVar8\[0x25\]\ =\ iVar6;$	+1
+use	FUN_000e3b88	iVar6	sourceKey	INFERRED	thunk_FUN_00134de8 key of the first pending instruction's source	^\s*iVar6\ =\ thunk_FUN_00134de8\(\*\(undefined4\ \*\)\(\*param_1\ \+\ 0x6c4\),piVar9\);$	+1
+use	FUN_000e3b88	iVar6	sourceKey	INFERRED	thunk_FUN_00134de8 key of the first pending instruction's source	^\s*if\ \(\(iVar6\ ==\ iVar10\)\ \&\&\ \(piVar5\ !=\ piVar9\)\)\ \{$	+1
+use	FUN_000e3b88	iVar6	moveBlocked	INFERRED	FUN_000e2acc result: nonzero abandons the move	^\s*iVar6\ =\ \(\(int\ \(\*\)\(\)\)FUN_000e2acc\)\(piVar5,iVar14,\*param_1\);$	+2
+use	FUN_000e3b88	iVar6	keyEqualResultB	INFERRED	IRInst__lastSourceKeyEquals result	^\s*iVar6\ =\ \(\(int\ \(\*\)\(\)\)FUN_000e2f8c\)\(piVar5,iVar14,\*param_1\);$	+2
+use	FUN_000e3b88	iVar6	laneIndex	INFERRED	lane counter while the written-lane bytes are inverted	^\s*iVar6\ =\ 0;$	+1
+use	FUN_000e3b88	iVar6	laneIndex	INFERRED	lane counter while the written-lane bytes are inverted	^\s*if\ \(\*\(char\ \*\)\(\(int\)\&local_58\ \+\ iVar6\)\ ==\ '\\x01'\)\ \{$	+2
+use	FUN_000e3b88	iVar6	laneIndex	INFERRED	lane counter while the written-lane bytes are inverted	^\s*\*\(undefined1\ \*\)\(\(int\)\&local_58\ \+\ iVar6\)\ =\ 1;$	+1
+use	FUN_000e3b88	iVar6	laneIndex	INFERRED	lane counter while the written-lane bytes are inverted	^\s*iVar6\ =\ iVar6\ \+\ 1;$	+1
+use	FUN_000e3b88	piVar9	secondPending	INFERRED	second collected pending instruction	^\s*piVar9\ =\ local_54\[1\];$	+1
+use	FUN_000e3b88	piVar9	secondPending	INFERRED	second collected pending instruction	^\s*piVar7\ =\ \(int\ \*\)FUN_00105594\(piVar9,piVar9\[0x21\]\);$	+1
+use	FUN_000e3b88	piVar9	secondPending	INFERRED	second collected pending instruction	^\s*FUN_000f47a8\(iVar14,piVar8,piVar9\);$	+1
+use	FUN_000e3b88	piVar9	secondPending	INFERRED	second collected pending instruction	^\s*local_54\[0\]\ =\ piVar9;$	+1
+use	FUN_000e3b88	piVar9	secondPending	INFERRED	second collected pending instruction	^\s*iVar14\ =\ \(\(int\ \(\*\)\(\)\)FUN_000e2f8c\)\(piVar9,iVar14,\*param_1\);$	+1
+use	FUN_000e3b88	piVar9	secondPending	INFERRED	second collected pending instruction	^\s*piVar8\ =\ \(int\ \*\)\(\(int\ \(\*\)\(\)\)FUN_000e3968\)\(piVar9,piVar7,\*param_1\);$	+1
+use	FUN_000e3b88	piVar9	secondPending	INFERRED	second collected pending instruction	^\s*else\ if\ \(piVar5\ ==\ piVar9\)\ \{$	+1
+use	FUN_000e3b88	piVar9	secondPending	INFERRED	second collected pending instruction	^\s*piVar8\ =\ \(int\ \*\)\(\(int\ \(\*\)\(\)\)FUN_000e3968\)\(piVar8,piVar9,\*param_1\);$	+1
+use	FUN_000e3b88	piVar9	secondPending	INFERRED	second collected pending instruction	^\s*local_54\[0\]\ =\ piVar9;$@2	+1
+use	FUN_000e3b88	piVar9	secondPending	INFERRED	second collected pending instruction	^\s*piVar8\ =\ \(int\ \*\)\(\(int\ \(\*\)\(\)\)FUN_000e3968\)\(piVar9,piVar8,\*param_1\);$	+1
+use	FUN_000e3b88	piVar9	insertAfterInst	INFERRED	instruction after which the cloned mov is inserted (scanInst or the created mov)	^\s*piVar9\ =\ piVar13;$	+1
+use	FUN_000e3b88	piVar9	insertAfterInst	INFERRED	instruction after which the cloned mov is inserted (scanInst or the created mov)	^\s*piVar9\ =\ \(int\ \*\)\(\(int\ \(\*\)\(\)\)FUN_000e3968\)\(local_54\[1\],uVar11,\*param_1\);$	+2
+use	FUN_000e3b88	piVar9	insertAfterInst	INFERRED	instruction after which the cloned mov is inserted (scanInst or the created mov)	^\s*if\ \(piVar9\ ==\ piVar8\)\ \{$	+2
+use	FUN_000e3b88	piVar9	insertAfterInst	INFERRED	instruction after which the cloned mov is inserted (scanInst or the created mov)	^\s*FUN_00193f74\(piVar8,piVar9\);$	+1
+use	FUN_000e3b88	iVar10	savedRegisterFile	INFERRED	firstPending[0x26]: destination register file	^\s*iVar10\ =\ piVar8\[0x26\];$	+1
+use	FUN_000e3b88	iVar10	savedRegisterFile	INFERRED	firstPending[0x26]: destination register file	^\s*uVar12\ =\ \(\(int\ \(\*\)\(\)\)FUN_000e2a04\)\(param_1,\(uint\)\(iVar10\ !=\ 0\)\);$	+2
+use	FUN_000e3b88	iVar10	savedRegisterFile	INFERRED	firstPending[0x26]: destination register file	^\s*piVar8\[0x26\]\ =\ iVar10;$	+1
+use	FUN_000e3b88	iVar10	scanKey	INFERRED	thunk_FUN_00134de8 key of the instruction under scan	^\s*iVar10\ =\ thunk_FUN_00134de8\(\*\(undefined4\ \*\)\(\*param_1\ \+\ 0x6c4\),piVar5\);$	+2
+use	FUN_000e3b88	iVar10	scanKey	INFERRED	thunk_FUN_00134de8 key of the instruction under scan	^\s*iVar10\ =\ thunk_FUN_00134de8\(\*\(undefined4\ \*\)\(\*param_1\ \+\ 0x6c4\),piVar5\);$@2	+1
+use	FUN_000e3b88	iVar10	scanKey	INFERRED	thunk_FUN_00134de8 key of the instruction under scan	^\s*if\ \(iVar14\ ==\ iVar10\)\ \{$	+1
+use	FUN_000e3b88	iVar10	lanesLeft	INFERRED	countdown of the four lanes	^\s*iVar10\ =\ 4;$	+1
+use	FUN_000e3b88	iVar10	lanesLeft	INFERRED	countdown of the four lanes	^\s*iVar10\ =\ iVar10\ \+\ \-1;$	+2
+use	FUN_000e3b88	bVar1	hasTwoPending	INFERRED	two pending instructions were collected (also set when both must be moved)	^\s*bVar1\ =\ iVar14\ ==\ 2;$	+2
+use	FUN_000e3b88	bVar1	hasTwoPending	INFERRED	two pending instructions were collected (also set when both must be moved)	^\s*bVar1\ =\ true;$	+1
+use	FUN_000e3b88	bVar1	hasTwoPending	INFERRED	two pending instructions were collected (also set when both must be moved)	^\s*if\ \(bVar1\)\ \{$@2	+1
+use	FUN_000e3b88	bVar1	hasTwoPending	INFERRED	two pending instructions were collected (also set when both must be moved)	^\s*bVar1\ =\ false;$@2	+1
+use	FUN_000e3b88	bVar1	keyReused	INFERRED	another scanned instruction has the same key as the source (and is not the source)	^\s*bVar1\ =\ false;$	+1
+use	FUN_000e3b88	bVar1	keyReused	INFERRED	another scanned instruction has the same key as the source (and is not the source)	^\s*bVar1\ =\ true;$@2	+1
+use	FUN_000e3b88	bVar1	keyReused	INFERRED	another scanned instruction has the same key as the source (and is not the source)	^\s*if\ \(bVar1\)\ \{$@3	+1
+use	FUN_000e3b88	bVar2	needsClone	INFERRED	the first pending instruction must be cloned before it is turned into a mov	^\s*bVar2\ =\ true;$	+1
+use	FUN_000e3b88	bVar2	needsClone	INFERRED	the first pending instruction must be cloned before it is turned into a mov	^\s*bVar2\ =\ true;$@2	+1
+use	FUN_000e3b88	bVar2	needsClone	INFERRED	the first pending instruction must be cloned before it is turned into a mov	^\s*bVar2\ =\ false;$	+1
+use	FUN_000e3b88	bVar2	needsClone	INFERRED	the first pending instruction must be cloned before it is turned into a mov	^\s*bVar2\ =\ true;$@3	+1
+use	FUN_000e3b88	bVar2	needsClone	INFERRED	the first pending instruction must be cloned before it is turned into a mov	^\s*bVar2\ =\ false;$@2	+1
+use	FUN_000e3b88	bVar2	needsClone	INFERRED	the first pending instruction must be cloned before it is turned into a mov	^\s*bVar2\ =\ true;$@4	+1
+use	FUN_000e3b88	bVar2	needsClone	INFERRED	the first pending instruction must be cloned before it is turned into a mov	^\s*if\ \(bVar2\)\ \{$	+1
+use	FUN_000e3b88	uVar3	flagWord	INFERRED	flag word of the reinitialised mov with bits 0x40/0x20 copied from the old instruction	^\s*uVar3\ =\ piVar8\[5\]\ \&\ 0xffffffbf;$	+2
+use	FUN_000e3b88	uVar3	flagWord	INFERRED	flag word of the reinitialised mov with bits 0x40/0x20 copied from the old instruction	^\s*uVar3\ =\ piVar8\[5\]\ \|\ 0x40;$	+2
+use	FUN_000e3b88	uVar3	flagWord	INFERRED	flag word of the reinitialised mov with bits 0x40/0x20 copied from the old instruction	^\s*piVar8\[5\]\ =\ uVar3\ \&\ 0xffffffdf;$	+1
+use	FUN_000e3b88	uVar3	flagWord	INFERRED	flag word of the reinitialised mov with bits 0x40/0x20 copied from the old instruction	^\s*piVar8\[5\]\ =\ uVar3\ \|\ 0x20;$	+1
+use	FUN_000e3b88	uVar11	instKeyB	INFERRED	thunk_FUN_00134de8 key of scanInst	^\s*uVar11\ =\ thunk_FUN_00134de8\(\*\(undefined4\ \*\)\(\*param_1\ \+\ 0x6c4\),piVar13\);$	+2
+use	FUN_000e3b88	uVar11	writtenLanesCopy	INFERRED	copy of writtenLanes passed to SelectWord__mergeWrittenLanes	^\s*uVar11\ =\ local_58;$	+1
+use	FUN_000e3b88	uVar11	writtenLanesCopy	INFERRED	copy of writtenLanes passed to SelectWord__mergeWrittenLanes	^\s*FUN_000f2f84\(local_54\ \+\ 3,uVar11,\*\(undefined4\ \*\)\(iVar10\ \+\ 0x10\)\);$	+1
+use	FUN_000e3b88	uVar12	slotId	INFERRED	id returned by FUN_000e2a04 for the register file of the mov	^\s*uVar12\ =\ \(\(int\ \(\*\)\(\)\)FUN_000e2a04\)\(param_1,\(uint\)\(iVar10\ !=\ 0\)\);$	+2
+use	FUN_000e3b88	iVar6	secondPendingKey	INFERRED	thunk_FUN_00134de8 key of the second pending instruction	^\s*iVar6\ =\ thunk_FUN_00134de8\(\*\(undefined4\ \*\)\(\*param_1\ \+\ 0x6c4\),local_54\[1\]\);$	^\s*iVar6\ =\ \(\(int\ \(\*\)\(\)\)FUN_000e2f8c\)\(piVar8,iVar6,\*param_1\);$	all	rhs
+use	FUN_000e3b88	iVar6	firstKeyEqualResult	INFERRED	IRInst__lastSourceKeyEquals result for the first pending instruction	^\s*iVar6\ =\ \(\(int\ \(\*\)\(\)\)FUN_000e2f8c\)\(piVar8,iVar6,\*param_1\);$	^\s*bVar2\ =\ true;$	lhs	none
+local	ILReader__nextInstruction	local_68	tokenCount	INFERRED	out parameter of ILReader__decodeInstruction: number of operand tokens of the decoded instruction (used as stack depth/offset later)
+local	ILReader__nextInstruction	local_64	leftConstant	INFERRED	left float constant read by ILReader__readFloatConst for the comparison; also receives the staged call-argument stores of the replay calls
+local	ILReader__nextInstruction	local_54	rightConstant	INFERRED	right float constant array read by ILReader__readFloatConst

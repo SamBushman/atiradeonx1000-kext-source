@@ -871,16 +871,16 @@ int ILReader__nextInstruction(ilReader)
   int *replayStackTop;
   int extraOperandA;
   bool comparisonResult;
-  int local_68;
-  uint local_64;
-  float local_54 [10];
+  int tokenCount;
+  uint leftConstant;
+  float rightConstant [10];
   
   ifSkipDepth = 0;
   waitLabel = 0;
   replaySkipDepth = 0;
 LAB_000e5e9c:
   while( true ) {
-    local_68 = 0;
+    tokenCount = 0;
     if (ilReader[0x1f] == 3) {
       segmentStart = ilReader[0xc];
       ilReader[9] = segmentStart;
@@ -898,7 +898,7 @@ LAB_000e5e9c:
       ilReader[0x1f] = 0;
       ilReader[0xb] = writeCursor;
     }
-    tokenReadOk = ((int (*)())ILReader__decodeInstruction)(ilReader,&local_68,*ilReader);
+    tokenReadOk = ((int (*)())ILReader__decodeInstruction)(ilReader,&tokenCount,*ilReader);
     if (tokenReadOk == 0) {
       return 0;
     }
@@ -1040,8 +1040,8 @@ LAB_000e6ac4:
     ilReader[0xe] = 1;
     goto switchD_000e61ac_caseD_a;
   case 7:
-    local_64 = 6;
-    ((int (*)())ILReader__beginRewrittenReplay_e547c)(ilReader,0x34,local_68,6,argR7,staleArgR8);
+    leftConstant = 6;
+    ((int (*)())ILReader__beginRewrittenReplay_e547c)(ilReader,0x34,tokenCount,6,argR7,staleArgR8);
     break;
   case 8:
     replayStack = (uint *)ilReader[0x22];
@@ -1138,10 +1138,10 @@ LAB_000e6ac4:
     ilReader[0x14] = 0;
     break;
   case 9:
-    local_64 = 8;
-    iVar4 = local_68 + -1;
-    argR7 = ilReader[local_68 + 0x22];
-    local_68 = iVar4;
+    leftConstant = 8;
+    iVar4 = tokenCount + -1;
+    argR7 = ilReader[tokenCount + 0x22];
+    tokenCount = iVar4;
     ((int (*)())ILReader__beginRewrittenReplay_e5384)(ilReader,0x35,iVar4,8,argR7,staleArgR8);
     break;
   default:
@@ -1246,8 +1246,8 @@ LAB_000e6ac4:
     }
     if ((((firstRegisterFile != (secondOperandToken >> 0x10 & 0x3f)) || (firstRegisterFile != 1)) ||
         (iVar4 = Compiler__isOptionEnabled(*ilReader,1), iVar4 == 0)) ||
-       ((iVar4 = ILReader__readFloatConst(ilReader,(int)(short)tokenWord1Snapshot,&local_64,extraOperandA), iVar4 == 0 ||
-        (iVar4 = ILReader__readFloatConst(ilReader,(int)(short)secondOperandToken,local_54,extraOperandB), iVar4 == 0)))) {
+       ((iVar4 = ILReader__readFloatConst(ilReader,(int)(short)tokenWord1Snapshot,&leftConstant,extraOperandA), iVar4 == 0 ||
+        (iVar4 = ILReader__readFloatConst(ilReader,(int)(short)secondOperandToken,rightConstant,extraOperandB), iVar4 == 0)))) {
       ifResultStack = (uint *)ilReader[0xf];
       ifResultStackSizeB = ifResultStack[1];
       if (ifResultStackSizeB < *ifResultStack) {
@@ -1266,22 +1266,22 @@ LAB_000e6ac4:
     }
     switch(tokenWord0Snapshot >> 0x10 & 7) {
     case 0:
-      comparisonResult = GH_U2F((unsigned int)(local_64)) != local_54[0];
+      comparisonResult = GH_U2F((unsigned int)(leftConstant)) != rightConstant[0];
       break;
     case 1:
-      comparisonResult = GH_U2F((unsigned int)(local_64)) == local_54[0];
+      comparisonResult = GH_U2F((unsigned int)(leftConstant)) == rightConstant[0];
       break;
     case 2:
-      comparisonResult = local_54[0] <= GH_U2F((unsigned int)(local_64));
+      comparisonResult = rightConstant[0] <= GH_U2F((unsigned int)(leftConstant));
       break;
     case 3:
-      comparisonResult = local_54[0] < GH_U2F((unsigned int)(local_64));
+      comparisonResult = rightConstant[0] < GH_U2F((unsigned int)(leftConstant));
       break;
     case 4:
-      comparisonResult = GH_U2F((unsigned int)(local_64)) <= local_54[0];
+      comparisonResult = GH_U2F((unsigned int)(leftConstant)) <= rightConstant[0];
       break;
     case 5:
-      comparisonResult = GH_U2F((unsigned int)(local_64)) < local_54[0];
+      comparisonResult = GH_U2F((unsigned int)(leftConstant)) < rightConstant[0];
       break;
     default:
       goto switchD_000e67b4_default;
@@ -1375,25 +1375,25 @@ LAB_000e6870:
   case 0x53:
     goto switchD_000e61ac_caseD_53;
   case 0x65:
-    local_64 = 6;
-    ((int (*)())ILReader__beginRewrittenReplay_e547c)(ilReader,0x6f,local_68,6,argR7,staleArgR8);
+    leftConstant = 6;
+    ((int (*)())ILReader__beginRewrittenReplay_e547c)(ilReader,0x6f,tokenCount,6,argR7,staleArgR8);
     break;
   case 0x66:
-    local_64 = 6;
-    ((int (*)())ILReader__beginRewrittenReplay_e547c)(ilReader,0x70,local_68,6,argR7,staleArgR8);
+    leftConstant = 6;
+    ((int (*)())ILReader__beginRewrittenReplay_e547c)(ilReader,0x70,tokenCount,6,argR7,staleArgR8);
     break;
   case 0x67:
-    local_64 = 8;
-    iVar4 = local_68 + -1;
-    argR7 = ilReader[local_68 + 0x22];
-    local_68 = iVar4;
+    leftConstant = 8;
+    iVar4 = tokenCount + -1;
+    argR7 = ilReader[tokenCount + 0x22];
+    tokenCount = iVar4;
     ((int (*)())ILReader__beginRewrittenReplay_e5384)(ilReader,0x6f,iVar4,8,argR7,staleArgR8);
     break;
   case 0x68:
-    local_64 = 8;
-    iVar4 = local_68 + -1;
-    argR7 = ilReader[local_68 + 0x22];
-    local_68 = iVar4;
+    leftConstant = 8;
+    iVar4 = tokenCount + -1;
+    argR7 = ilReader[tokenCount + 0x22];
+    tokenCount = iVar4;
     ((int (*)())ILReader__beginRewrittenReplay_e5384)(ilReader,0x70,iVar4,8,argR7,staleArgR8);
     break;
   case 0x69:
@@ -1415,7 +1415,7 @@ LAB_000e6870:
         *(undefined4 *)(iVar4 + 8) = 0;
       }
       else if (*(int *)(iVar4 + 8) == 0) {
-        *(int *)(iVar4 + 8) = ilReader[0x1d] + local_68 * -4;
+        *(int *)(iVar4 + 8) = ilReader[0x1d] + tokenCount * -4;
       }
     }
     break;
@@ -1427,7 +1427,7 @@ LAB_000e6870:
       scopeStackTop = (int *)(topIndex * 4 + *(int *)(ilReader[0x10] + 8));
     }
     iVar4 = *scopeStackTop;
-    *(int *)(iVar4 + 0x10) = ilReader[0x1d] + local_68 * -4;
+    *(int *)(iVar4 + 0x10) = ilReader[0x1d] + tokenCount * -4;
     if (*(int *)(iVar4 + 4) != 0) goto LAB_000e7400;
     if (*(int *)(iVar4 + 0x14) != 0) goto switchD_000e61ac_caseD_a;
     replayStack = (uint *)ilReader[0x22];
@@ -1678,18 +1678,18 @@ switchD_000e61ac_caseD_53:
     }
     break;
   case 0x74:
-    local_64 = 0x73;
-    ((int (*)())ILReader__beginRewrittenReplay_e547c)(ilReader,0x6f,local_68,0x73,argR7,staleArgR8);
+    leftConstant = 0x73;
+    ((int (*)())ILReader__beginRewrittenReplay_e547c)(ilReader,0x6f,tokenCount,0x73,argR7,staleArgR8);
     break;
   case 0x75:
-    local_64 = 0x73;
-    ((int (*)())ILReader__beginRewrittenReplay_e547c)(ilReader,0x70,local_68,0x73,argR7,staleArgR8);
+    leftConstant = 0x73;
+    ((int (*)())ILReader__beginRewrittenReplay_e547c)(ilReader,0x70,tokenCount,0x73,argR7,staleArgR8);
   }
   goto LAB_000e5e9c;
 LAB_000e7400:
   if (*(int *)(iVar4 + 0x14) != 0) {
 switchD_000e61ac_caseD_a:
-    DAT_001fa620 = local_68;
+    DAT_001fa620 = tokenCount;
     ilReader[0xd] = ilReader[0xd] + 1;
     return 1;
   }
