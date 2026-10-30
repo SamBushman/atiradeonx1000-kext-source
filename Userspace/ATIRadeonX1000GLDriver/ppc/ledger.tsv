@@ -1164,7 +1164,7 @@
 0xda028	72	CompileInput__readIntConst	part_019	converted
 0xda070	44	CompileInput__readBoolConst	part_019	converted
 0xda09c	36	FUN_000da09c	part_019	converted
-0xda0c0	192	FUN_000da0c0	part_019	converted
+0xda0c0	192	Compiler__createFromRequest_da0c0	part_019	converted
 0xda394	68	scSetCallbackTables	part_019	converted
 0xda420	24	FUN_000da420	part_019	converted
 0xda438	32	FUN_000da438	part_019	converted

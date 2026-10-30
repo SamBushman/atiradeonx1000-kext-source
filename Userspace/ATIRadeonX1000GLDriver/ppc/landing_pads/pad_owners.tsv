@@ -2,7 +2,7 @@
 0xd0340	vsDisassembleToString
 0xd0398	vsDisassembleVertexProgram
 0xd4ec8	scDumpPixelProgram
-0xda180	FUN_000da0c0
+0xda180	Compiler__createFromRequest_da0c0
 0xda578	Compiler__createFromRequest
 0xe1a08	Compiler__init_e1920
 0xe1b30	Compiler__init_e1a48

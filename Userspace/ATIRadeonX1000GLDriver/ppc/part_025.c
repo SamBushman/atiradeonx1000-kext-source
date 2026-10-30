@@ -1189,16 +1189,16 @@ int IRInst__computeSourceReadMask(laneMask, inst, operandIndex, destWriteMask, p
   int loopCounterB;
   undefined4 sourceSelect;
   undefined4 maskedSelect [3];
-  undefined4 local_48;
-  undefined4 local_44;
-  undefined4 local_40;
-  undefined4 local_3c;
-  undefined4 local_38;
-  undefined4 local_34;
-  undefined4 local_30;
-  undefined4 local_2c;
-  undefined4 local_28;
-  undefined4 local_24 [3];
+  undefined4 maskedSelectOut4;
+  undefined4 maskedSelectOut1;
+  undefined4 laneReadMask2;
+  undefined4 laneReadMask3A;
+  undefined4 laneReadMask4A;
+  undefined4 laneReadMask4B;
+  undefined4 laneReadMask3B;
+  undefined4 laneReadMask4C;
+  undefined4 maskedSelectOut2;
+  undefined4 maskedSelectOut3 [3];
   
   (**(code **)(*inst + 0x14))(inst,inst,operandIndex,destWriteMask,program);
   operandRecord = IRInst__getOperandRecord(inst,operandIndex);
@@ -1208,9 +1208,9 @@ int IRInst__computeSourceReadMask(laneMask, inst, operandIndex, destWriteMask, p
   switch(resultMode) {
   case 0:
     operandRecord = IRInst__getOperandRecord(inst,0);
-    ((int (*)())SelectWord__selectWhereMasked)(&local_44,*(undefined4 *)(operandRecord + 0x10),destWriteMask);
+    ((int (*)())SelectWord__selectWhereMasked)(&maskedSelectOut1,*(undefined4 *)(operandRecord + 0x10),destWriteMask);
     loopCounter = 0;
-    maskedSelect[0] = local_44;
+    maskedSelect[0] = maskedSelectOut1;
     loopCounterB = 4;
     do {
       if (*(char *)((int)maskedSelect + loopCounter) != '\x01') {
@@ -1239,8 +1239,8 @@ switchD_000f40d0_caseD_2:
     return laneMask;
   case 3:
     if (operandIndex - 1U < 2) {
-      ((int (*)())laneMask__fromSelectBytes)(&local_40,sourceSelect,2);
-      *laneMask = local_40;
+      ((int (*)())laneMask__fromSelectBytes)(&laneReadMask2,sourceSelect,2);
+      *laneMask = laneReadMask2;
       return laneMask;
     }
     if (operandIndex != 3) {
@@ -1248,12 +1248,12 @@ switchD_000f40d0_caseD_2:
     }
     goto LAB_000f4584;
   case 4:
-    ((int (*)())laneMask__fromSelectBytes)(&local_3c,sourceSelect,3);
-    *laneMask = local_3c;
+    ((int (*)())laneMask__fromSelectBytes)(&laneReadMask3A,sourceSelect,3);
+    *laneMask = laneReadMask3A;
     break;
   case 5:
-    ((int (*)())laneMask__fromSelectBytes)(&local_38,sourceSelect,4);
-    *laneMask = local_38;
+    ((int (*)())laneMask__fromSelectBytes)(&laneReadMask4A,sourceSelect,4);
+    *laneMask = laneReadMask4A;
     break;
   case 6:
     if (operandIndex == 1) {
@@ -1269,20 +1269,20 @@ switchD_000f40d0_caseD_2:
       } while (notLastLane);
     }
     else {
-      ((int (*)())laneMask__fromSelectBytes)(&local_34,sourceSelect,4);
-      *laneMask = local_34;
+      ((int (*)())laneMask__fromSelectBytes)(&laneReadMask4B,sourceSelect,4);
+      *laneMask = laneReadMask4B;
     }
     break;
   case 7:
     if (operandIndex < 3) {
-      ((int (*)())laneMask__fromSelectBytes)(&local_30,sourceSelect,3);
-      *laneMask = local_30;
+      ((int (*)())laneMask__fromSelectBytes)(&laneReadMask3B,sourceSelect,3);
+      *laneMask = laneReadMask3B;
       return laneMask;
     }
     goto LAB_000f4594;
   case 8:
-    ((int (*)())laneMask__fromSelectBytes)(&local_2c,sourceSelect,4);
-    *laneMask = local_2c;
+    ((int (*)())laneMask__fromSelectBytes)(&laneReadMask4C,sourceSelect,4);
+    *laneMask = laneReadMask4C;
     break;
   case 9:
     if (inst[0x4d] < 0) {
@@ -1313,8 +1313,8 @@ switchD_000f40d0_caseD_2:
     if (opcodeNumber < 0xa2) {
       if (0x9d < opcodeNumber) {
         operandRecord = IRInst__getOperandRecord(inst,0);
-        ((int (*)())SelectWord__selectWhereMasked)(&local_28,*(undefined4 *)(operandRecord + 0x10),destWriteMask);
-        maskedSelect[0] = local_28;
+        ((int (*)())SelectWord__selectWhereMasked)(&maskedSelectOut2,*(undefined4 *)(operandRecord + 0x10),destWriteMask);
+        maskedSelect[0] = maskedSelectOut2;
         *laneMask = 0;
         loopCounter = 0;
         loopCounterB = 4;
@@ -1361,8 +1361,8 @@ switchD_000f40d0_caseD_a:
     goto switchD_000f40d0_caseD_b;
   case 0xc:
     operandRecord = IRInst__getOperandRecord(inst,0);
-    ((int (*)())SelectWord__selectWhereMasked)(local_24,*(undefined4 *)(operandRecord + 0x10),destWriteMask);
-    maskedSelect[0] = local_24[0];
+    ((int (*)())SelectWord__selectWhereMasked)(maskedSelectOut3,*(undefined4 *)(operandRecord + 0x10),destWriteMask);
+    maskedSelect[0] = maskedSelectOut3[0];
     *laneMask = 0;
     loopCounter = 0;
     loopCounterB = 4;
@@ -1388,9 +1388,9 @@ LAB_000f45a4:
   case 0xe:
     if (operandIndex == 1) {
       operandRecord = IRInst__getOperandRecord(inst,0);
-      ((int (*)())SelectWord__selectWhereMasked)(&local_48,*(undefined4 *)(operandRecord + 0x10),destWriteMask);
+      ((int (*)())SelectWord__selectWhereMasked)(&maskedSelectOut4,*(undefined4 *)(operandRecord + 0x10),destWriteMask);
       loopCounter = 0;
-      maskedSelect[0] = local_48;
+      maskedSelect[0] = maskedSelectOut4;
       loopCounterB = 4;
       do {
         if (*(char *)((int)maskedSelect + loopCounter) != '\x01') {

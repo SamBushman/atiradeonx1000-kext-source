@@ -33,36 +33,36 @@ int Compiler__selectEntry534ByProgramFlags(param_1)
 }
 
 /* FUN_000e161c @ 0xe161c (156 bytes) */
-int FUN_000e161c(param_1, param_2)
-  int param_1;
-  int param_2;
+int FUN_000e161c(compiler, failureKind)
+  int compiler;
+  int failureKind;
 {
   int iVar1;
   undefined4 uVar2;
   
-  if (*(int *)(param_1 + 0x47c) != 0) {
-    if (param_2 == 5) {
+  if (*(int *)(compiler + 0x47c) != 0) {
+    if (failureKind == 5) {
 LAB_000e1644:
-      *(undefined4 *)(param_1 + 0x318) = 1;
-      *(int *)(param_1 + 0x478) = *(int *)(param_1 + 0x480) + -1;
-      *(undefined4 *)(param_1 + 0x314) = 0;
-      *(undefined4 *)(param_1 + 0x47c) = 0;
+      *(undefined4 *)(compiler + 0x318) = 1;
+      *(int *)(compiler + 0x478) = *(int *)(compiler + 0x480) + -1;
+      *(undefined4 *)(compiler + 0x314) = 0;
+      *(undefined4 *)(compiler + 0x47c) = 0;
       return 1;
     }
-    if (param_2 == 4) {
+    if (failureKind == 4) {
       iVar1 = 0;
-      if (*(int *)(param_1 + 0x6bc) != 0) goto LAB_000e1644;
+      if (*(int *)(compiler + 0x6bc) != 0) goto LAB_000e1644;
       goto LAB_000e16a4;
     }
   }
-  iVar1 = *(int *)(param_1 + 0x6bc);
+  iVar1 = *(int *)(compiler + 0x6bc);
 LAB_000e16a4:
-  if ((iVar1 == 0) && (param_2 == 4)) {
+  if ((iVar1 == 0) && (failureKind == 4)) {
     uVar2 = 1;
-    *(undefined4 *)(param_1 + 0x318) = 1;
-    *(undefined4 *)(param_1 + 0x6b8) = 1;
-    *(undefined4 *)(param_1 + 0x314) = 0;
-    *(undefined4 *)(param_1 + 0x6bc) = 1;
+    *(undefined4 *)(compiler + 0x318) = 1;
+    *(undefined4 *)(compiler + 0x6b8) = 1;
+    *(undefined4 *)(compiler + 0x314) = 0;
+    *(undefined4 *)(compiler + 0x6bc) = 1;
   }
   else {
     uVar2 = 0;

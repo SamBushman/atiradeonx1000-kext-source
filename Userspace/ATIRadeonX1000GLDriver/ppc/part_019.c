@@ -2640,99 +2640,101 @@ int FUN_000da09c(param_1, param_2)
   return;
 }
 
-/* FUN_000da0c0 @ 0xda0c0 (192 bytes) */
-int FUN_000da0c0(param_1, param_2)
+/* Compiler__createFromRequest_da0c0 @ 0xda0c0 (192 bytes) */
+int Compiler__createFromRequest_da0c0(param_1, param_2)
   undefined4 *param_1;
   undefined4 *param_2;
 {
-  int iVar1;
-  undefined4 uVar2;
-  undefined4 uVar3;
-  int iVar4;
-  int iVar5;
-  undefined4 *puStack00000018;
-  undefined4 *puStack0000001c;
+  int hardwareKind;
+  int setjmpResult;
+  int compilerObj;
+  undefined4 requestOwner;
+  undefined4 requestArena;
+  int limitForObject4;
+  int limitForObject8;
+  undefined4 *stateOutHome;
+  undefined4 *requestHome;
   
-  puStack00000018 = param_1;
-  puStack0000001c = param_2;
-  iVar1 = (*(code *)param_2[0xc])(param_2[0xb],0x6c8);
-  uVar3 = puStack0000001c[0xd];
-  *puStack00000018 = uVar3;
-  uVar2 = puStack0000001c[0xb];
-  puStack00000018[1] = uVar2;
-  puStack00000018[3] = *puStack0000001c;
-  puStack00000018[5] = puStack0000001c[1];
-  puStack00000018[4] = puStack0000001c[0x14];
-  if (iVar1 == 0) {
-    puStack00000018[2] = 0;
+  stateOutHome = param_1;
+  requestHome = param_2;
+  compilerObj = (*(code *)param_2[0xc])(param_2[0xb],0x6c8);
+  requestArena = requestHome[0xd];
+  *stateOutHome = requestArena;
+  requestOwner = requestHome[0xb];
+  stateOutHome[1] = requestOwner;
+  stateOutHome[3] = *requestHome;
+  stateOutHome[5] = requestHome[1];
+  stateOutHome[4] = requestHome[0x14];
+  if (compilerObj == 0) {
+    stateOutHome[2] = 0;
     return;
   }
-  Compiler__init_e1a48(iVar1,uVar2,puStack0000001c[0xc],uVar3,0,0,puStack0000001c[0xf],puStack0000001c[0x10]
-               ,puStack0000001c[0x11],puStack0000001c[0x12],puStack0000001c[0x13],
-               puStack0000001c[0xe]);
-  puStack00000018[2] = iVar1;
-  if (*(int *)(iVar1 + 0x314) != 0) {
+  Compiler__init_e1a48(compilerObj,requestOwner,requestHome[0xc],requestArena,0,0,requestHome[0xf],requestHome[0x10]
+               ,requestHome[0x11],requestHome[0x12],requestHome[0x13],
+               requestHome[0xe]);
+  stateOutHome[2] = compilerObj;
+  if (*(int *)(compilerObj + 0x314) != 0) {
     return;
   }
-  iVar1 = _setjmp(*(int **)(iVar1 + 4));
-  if (iVar1 != 0) {
+  setjmpResult = _setjmp(*(int **)(compilerObj + 4));
+  if (setjmpResult != 0) {
     return;
   }
-  if (puStack00000018[3] == -1) {
-    puStack00000018[10] = puStack0000001c[2];
+  if (stateOutHome[3] == -1) {
+    stateOutHome[10] = requestHome[2];
   }
   else {
-    uVar2 = FUN_000cd290(puStack00000018[3]);
-    puStack00000018[10] = uVar2;
+    requestOwner = FUN_000cd290(stateOutHome[3]);
+    stateOutHome[10] = requestOwner;
   }
-  iVar1 = puStack00000018[10];
-  iVar4 = puStack0000001c[3];
-  iVar5 = puStack0000001c[4];
-  if (iVar1 == 2) {
-    Compiler__setHardwareFamily(puStack00000018[2],2);
-    if (iVar5 - 1U < 0x20c) {
-      *(int *)(*(int *)(*(int *)(puStack00000018[2] + 0x310) + 8) + 0x40) = iVar5;
+  hardwareKind = stateOutHome[10];
+  limitForObject4 = requestHome[3];
+  limitForObject8 = requestHome[4];
+  if (hardwareKind == 2) {
+    Compiler__setHardwareFamily(stateOutHome[2],2);
+    if (limitForObject8 - 1U < 0x20c) {
+      *(int *)(*(int *)(*(int *)(stateOutHome[2] + 0x310) + 8) + 0x40) = limitForObject8;
     }
     else {
-      *(undefined4 *)(*(int *)(*(int *)(puStack00000018[2] + 0x310) + 8) + 0x40) = 0x20c;
+      *(undefined4 *)(*(int *)(*(int *)(stateOutHome[2] + 0x310) + 8) + 0x40) = 0x20c;
     }
-    if (iVar4 - 1U < 0x100) goto code_r0x000da340;
+    if (limitForObject4 - 1U < 0x100) goto code_r0x000da340;
   }
   else {
-    if (iVar1 == 3) {
-      Compiler__setHardwareFamily(puStack00000018[2],4);
-      if (iVar5 - 1U < 0x200) {
-        *(int *)(*(int *)(*(int *)(puStack00000018[2] + 0x310) + 8) + 0x40) = iVar5;
+    if (hardwareKind == 3) {
+      Compiler__setHardwareFamily(stateOutHome[2],4);
+      if (limitForObject8 - 1U < 0x200) {
+        *(int *)(*(int *)(*(int *)(stateOutHome[2] + 0x310) + 8) + 0x40) = limitForObject8;
       }
       else {
-        *(undefined4 *)(*(int *)(*(int *)(puStack00000018[2] + 0x310) + 8) + 0x40) = 0x200;
+        *(undefined4 *)(*(int *)(*(int *)(stateOutHome[2] + 0x310) + 8) + 0x40) = 0x200;
       }
-      if (0x3ff < iVar4 - 1U) {
-        *(undefined4 *)(*(int *)(*(int *)(puStack00000018[2] + 0x310) + 4) + 0x40) = 0x400;
+      if (0x3ff < limitForObject4 - 1U) {
+        *(undefined4 *)(*(int *)(*(int *)(stateOutHome[2] + 0x310) + 4) + 0x40) = 0x400;
         return;
       }
 code_r0x000da340:
-      *(int *)(*(int *)(*(int *)(puStack00000018[2] + 0x310) + 4) + 0x40) = iVar4;
+      *(int *)(*(int *)(*(int *)(stateOutHome[2] + 0x310) + 4) + 0x40) = limitForObject4;
       return;
     }
-    if (iVar1 != 1) {
-      *(undefined4 *)(puStack00000018[2] + 0x314) = 0xe;
-      Compiler__setHardwareFamily(puStack00000018[2],1);
+    if (hardwareKind != 1) {
+      *(undefined4 *)(stateOutHome[2] + 0x314) = 0xe;
+      Compiler__setHardwareFamily(stateOutHome[2],1);
       return;
     }
-    Compiler__setHardwareFamily(puStack00000018[2],1);
-    if (iVar5 - 1U < 0x60) {
-      *(int *)(*(int *)(*(int *)(puStack00000018[2] + 0x310) + 8) + 0x40) = iVar5;
+    Compiler__setHardwareFamily(stateOutHome[2],1);
+    if (limitForObject8 - 1U < 0x60) {
+      *(int *)(*(int *)(*(int *)(stateOutHome[2] + 0x310) + 8) + 0x40) = limitForObject8;
     }
     else {
-      *(undefined4 *)(*(int *)(*(int *)(puStack00000018[2] + 0x310) + 8) + 0x40) = 0x60;
+      *(undefined4 *)(*(int *)(*(int *)(stateOutHome[2] + 0x310) + 8) + 0x40) = 0x60;
     }
-    if (iVar4 - 1U < 0x100) {
-      *(int *)(*(int *)(*(int *)(puStack00000018[2] + 0x310) + 4) + 0x40) = iVar5;
+    if (limitForObject4 - 1U < 0x100) {
+      *(int *)(*(int *)(*(int *)(stateOutHome[2] + 0x310) + 4) + 0x40) = limitForObject8;
       return;
     }
   }
-  *(undefined4 *)(*(int *)(*(int *)(puStack00000018[2] + 0x310) + 4) + 0x40) = 0x100;
+  *(undefined4 *)(*(int *)(*(int *)(stateOutHome[2] + 0x310) + 4) + 0x40) = 0x100;
   return;
 }
 
@@ -2804,94 +2806,96 @@ int Compiler__createFromRequest(state, request)
   undefined4 *state;
   undefined4 *request;
 {
-  int iVar1;
-  undefined4 uVar2;
-  undefined4 uVar3;
-  int iVar4;
-  int iVar5;
-  undefined4 *puStack00000018;
-  undefined4 *puStack0000001c;
+  int hardwareKind;
+  int setjmpResult;
+  int compilerObj;
+  undefined4 requestOwner;
+  undefined4 requestArena;
+  int limitForObject4;
+  int limitForObject8;
+  undefined4 *stateOutHome;
+  undefined4 *requestHome;
   
-  puStack00000018 = state;
-  puStack0000001c = request;
-  iVar1 = (*(code *)request[0xc])(request[0xb],0x6c8);
-  uVar3 = puStack0000001c[0xd];
-  *puStack00000018 = uVar3;
-  uVar2 = puStack0000001c[0xb];
-  puStack00000018[1] = uVar2;
-  puStack00000018[3] = *puStack0000001c;
-  puStack00000018[5] = puStack0000001c[1];
-  puStack00000018[4] = puStack0000001c[0x14];
-  if (iVar1 == 0) {
-    puStack00000018[2] = 0;
+  stateOutHome = state;
+  requestHome = request;
+  compilerObj = (*(code *)request[0xc])(request[0xb],0x6c8);
+  requestArena = requestHome[0xd];
+  *stateOutHome = requestArena;
+  requestOwner = requestHome[0xb];
+  stateOutHome[1] = requestOwner;
+  stateOutHome[3] = *requestHome;
+  stateOutHome[5] = requestHome[1];
+  stateOutHome[4] = requestHome[0x14];
+  if (compilerObj == 0) {
+    stateOutHome[2] = 0;
     return;
   }
-  Compiler__init_e1a48(iVar1,uVar2,puStack0000001c[0xc],uVar3,0,0,puStack0000001c[0xf],puStack0000001c[0x10]
-               ,puStack0000001c[0x11],puStack0000001c[0x12],puStack0000001c[0x13],
-               puStack0000001c[0xe]);
-  puStack00000018[2] = iVar1;
-  if (*(int *)(iVar1 + 0x314) != 0) {
+  Compiler__init_e1a48(compilerObj,requestOwner,requestHome[0xc],requestArena,0,0,requestHome[0xf],requestHome[0x10]
+               ,requestHome[0x11],requestHome[0x12],requestHome[0x13],
+               requestHome[0xe]);
+  stateOutHome[2] = compilerObj;
+  if (*(int *)(compilerObj + 0x314) != 0) {
     return;
   }
-  iVar1 = _setjmp(*(int **)(iVar1 + 4));
-  if (iVar1 != 0) {
+  setjmpResult = _setjmp(*(int **)(compilerObj + 4));
+  if (setjmpResult != 0) {
     return;
   }
-  if (puStack00000018[3] == -1) {
-    puStack00000018[10] = puStack0000001c[2];
+  if (stateOutHome[3] == -1) {
+    stateOutHome[10] = requestHome[2];
   }
   else {
-    uVar2 = FUN_000cd290(puStack00000018[3]);
-    puStack00000018[10] = uVar2;
+    requestOwner = FUN_000cd290(stateOutHome[3]);
+    stateOutHome[10] = requestOwner;
   }
-  iVar1 = puStack00000018[10];
-  iVar4 = puStack0000001c[3];
-  iVar5 = puStack0000001c[4];
-  if (iVar1 == 2) {
-    Compiler__setHardwareFamily(puStack00000018[2],2);
-    if (iVar5 - 1U < 0x20c) {
-      *(int *)(*(int *)(*(int *)(puStack00000018[2] + 0x310) + 8) + 0x40) = iVar5;
+  hardwareKind = stateOutHome[10];
+  limitForObject4 = requestHome[3];
+  limitForObject8 = requestHome[4];
+  if (hardwareKind == 2) {
+    Compiler__setHardwareFamily(stateOutHome[2],2);
+    if (limitForObject8 - 1U < 0x20c) {
+      *(int *)(*(int *)(*(int *)(stateOutHome[2] + 0x310) + 8) + 0x40) = limitForObject8;
     }
     else {
-      *(undefined4 *)(*(int *)(*(int *)(puStack00000018[2] + 0x310) + 8) + 0x40) = 0x20c;
+      *(undefined4 *)(*(int *)(*(int *)(stateOutHome[2] + 0x310) + 8) + 0x40) = 0x20c;
     }
-    if (iVar4 - 1U < 0x100) goto code_r0x000da738;
+    if (limitForObject4 - 1U < 0x100) goto code_r0x000da738;
   }
   else {
-    if (iVar1 == 3) {
-      Compiler__setHardwareFamily(puStack00000018[2],4);
-      if (iVar5 - 1U < 0x200) {
-        *(int *)(*(int *)(*(int *)(puStack00000018[2] + 0x310) + 8) + 0x40) = iVar5;
+    if (hardwareKind == 3) {
+      Compiler__setHardwareFamily(stateOutHome[2],4);
+      if (limitForObject8 - 1U < 0x200) {
+        *(int *)(*(int *)(*(int *)(stateOutHome[2] + 0x310) + 8) + 0x40) = limitForObject8;
       }
       else {
-        *(undefined4 *)(*(int *)(*(int *)(puStack00000018[2] + 0x310) + 8) + 0x40) = 0x200;
+        *(undefined4 *)(*(int *)(*(int *)(stateOutHome[2] + 0x310) + 8) + 0x40) = 0x200;
       }
-      if (0x3ff < iVar4 - 1U) {
-        *(undefined4 *)(*(int *)(*(int *)(puStack00000018[2] + 0x310) + 4) + 0x40) = 0x400;
+      if (0x3ff < limitForObject4 - 1U) {
+        *(undefined4 *)(*(int *)(*(int *)(stateOutHome[2] + 0x310) + 4) + 0x40) = 0x400;
         return;
       }
 code_r0x000da738:
-      *(int *)(*(int *)(*(int *)(puStack00000018[2] + 0x310) + 4) + 0x40) = iVar4;
+      *(int *)(*(int *)(*(int *)(stateOutHome[2] + 0x310) + 4) + 0x40) = limitForObject4;
       return;
     }
-    if (iVar1 != 1) {
-      *(undefined4 *)(puStack00000018[2] + 0x314) = 0xe;
-      Compiler__setHardwareFamily(puStack00000018[2],1);
+    if (hardwareKind != 1) {
+      *(undefined4 *)(stateOutHome[2] + 0x314) = 0xe;
+      Compiler__setHardwareFamily(stateOutHome[2],1);
       return;
     }
-    Compiler__setHardwareFamily(puStack00000018[2],1);
-    if (iVar5 - 1U < 0x60) {
-      *(int *)(*(int *)(*(int *)(puStack00000018[2] + 0x310) + 8) + 0x40) = iVar5;
+    Compiler__setHardwareFamily(stateOutHome[2],1);
+    if (limitForObject8 - 1U < 0x60) {
+      *(int *)(*(int *)(*(int *)(stateOutHome[2] + 0x310) + 8) + 0x40) = limitForObject8;
     }
     else {
-      *(undefined4 *)(*(int *)(*(int *)(puStack00000018[2] + 0x310) + 8) + 0x40) = 0x60;
+      *(undefined4 *)(*(int *)(*(int *)(stateOutHome[2] + 0x310) + 8) + 0x40) = 0x60;
     }
-    if (iVar4 - 1U < 0x100) {
-      *(int *)(*(int *)(*(int *)(puStack00000018[2] + 0x310) + 4) + 0x40) = iVar5;
+    if (limitForObject4 - 1U < 0x100) {
+      *(int *)(*(int *)(*(int *)(stateOutHome[2] + 0x310) + 4) + 0x40) = limitForObject8;
       return;
     }
   }
-  *(undefined4 *)(*(int *)(*(int *)(puStack00000018[2] + 0x310) + 4) + 0x40) = 0x100;
+  *(undefined4 *)(*(int *)(*(int *)(stateOutHome[2] + 0x310) + 4) + 0x40) = 0x100;
   return;
 }
 

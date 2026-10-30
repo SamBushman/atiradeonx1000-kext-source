@@ -1370,7 +1370,7 @@ extern int CompileInput__readFloatConst();
 extern int CompileInput__readIntConst();
 extern int CompileInput__readBoolConst();
 extern int FUN_000da09c();
-extern int FUN_000da0c0();
+extern int Compiler__createFromRequest_da0c0();
 extern int scSetCallbackTables();
 extern int FUN_000da420();
 extern int FUN_000da438();

@@ -4110,7 +4110,7 @@ int FUN_000cd05c(scCallbacks, param_2, allocTag)
     a1 = 0;
   }
   else {
-    FUN_000da0c0(a1,scCallbacks);
+    Compiler__createFromRequest_da0c0(a1,scCallbacks);
     iVar1 = FUN_000da420(a1);
     if (iVar1 != 0) {
       scDestroyCompilerObject(a1,1);
