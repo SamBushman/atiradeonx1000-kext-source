@@ -5757,37 +5757,37 @@ int vpStateApplyParameters(ctx, vpCache)
 }
 
 /* vpStateComputeKey @ 0x76ac0 (188 bytes) */
-int vpStateComputeKey(param_1, param_2)
-  int param_1;
-  int param_2;
+int vpStateComputeKey(ctx, stateRecord)
+  int ctx;
+  int stateRecord;
 {
-  uint uVar1;
-  uint uVar2;
+  uint key;
+  uint dirtyFlags;
   
-  uVar2 = *(uint *)(param_1 + 0x44);
-  uVar1 = (uint)*(byte *)(param_2 + 0x36) & uVar2 >> 7 & 1 |
-          ((uint)*(byte *)(param_2 + 0x37) & uVar2 >> 6 & 1) << 1;
-  if (*(char *)(param_2 + 0x33) != '\0') {
-    if (*(char *)(param_2 + 0x30) != '\0') {
-      uVar1 = uVar1 | uVar2 >> 10 & 4;
+  dirtyFlags = *(uint *)(ctx + 0x44);
+  key = (uint)*(byte *)(stateRecord + 0x36) & dirtyFlags >> 7 & 1 |
+          ((uint)*(byte *)(stateRecord + 0x37) & dirtyFlags >> 6 & 1) << 1;
+  if (*(char *)(stateRecord + 0x33) != '\0') {
+    if (*(char *)(stateRecord + 0x30) != '\0') {
+      key = key | dirtyFlags >> 10 & 4;
     }
-    if ((uVar2 & 0x800) != 0) {
-      uVar1 = (uint)(byte)((unsigned char *)0x000011d1)[param_1] << 7 | uVar1 | 8;
+    if ((dirtyFlags & 0x800) != 0) {
+      key = (uint)(byte)((unsigned char *)0x000011d1)[ctx] << 7 | key | 8;
     }
   }
-  if (*(char *)(param_2 + 0x2e) == '\0') {
-    uVar2 = *(uint *)(param_1 + 0x44);
+  if (*(char *)(stateRecord + 0x2e) == '\0') {
+    dirtyFlags = *(uint *)(ctx + 0x44);
   }
   else {
-    uVar2 = *(uint *)(param_1 + 0x44);
-    if ((uVar2 & 0x400) != 0) {
-      uVar1 = uVar1 | (uint)(byte)((unsigned char *)0x000011d2)[param_1] << 0x14 | 0x10;
+    dirtyFlags = *(uint *)(ctx + 0x44);
+    if ((dirtyFlags & 0x400) != 0) {
+      key = key | (uint)(byte)((unsigned char *)0x000011d2)[ctx] << 0x14 | 0x10;
     }
   }
-  if ((uVar2 & 0x2000) != 0) {
-    uVar1 = uVar1 | 0x20;
+  if ((dirtyFlags & 0x2000) != 0) {
+    key = key | 0x20;
   }
-  return uVar1 | (uint)(byte)((unsigned char *)0x00002e0a)[*(int *)(*(int *)(param_1 + 4) + 0x10)] << 6;
+  return key | (uint)(byte)((unsigned char *)0x00002e0a)[*(int *)(*(int *)(ctx + 4) + 0x10)] << 6;
 }
 
 /* vpStateCacheInsert @ 0x76b80 (116 bytes) */

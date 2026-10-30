@@ -4279,40 +4279,40 @@ void gldValidateState(int glContext,undefined4 forwardedArg2,undefined4 forwarde
 }
 
 /* gldEmitTclModeRegs @ 0x90840 (264 bytes) */
-int gldEmitTclModeRegs(param_1)
-  int param_1;
+int gldEmitTclModeRegs(ctx)
+  int ctx;
 {
-  uint uVar1;
-  float fVar2;
-  code *UNRECOVERED_JUMPTABLE;
-  undefined4 *puVar3;
-  bool bVar4;
+  uint reg1b84Masked;
+  float oneF;
+  code *streamSetCurrent;
+  undefined4 *packet;
+  bool xScaleNotOne;
   
-  fVar2 = FLOAT_001aa0e8;
-  if ((*(uint *)(param_1 + 0x8c) & 0x40000000) == 0) {
-    *(uint *)(param_1 + 0x1b74) = *(uint *)(param_1 + 0x1b74) & 0xfffeffff;
-    *(uint *)(param_1 + 0x1b84) = *(uint *)(param_1 + 0x1b84) & 0xfffffcff | 0x43f;
+  oneF = FLOAT_001aa0e8;
+  if ((*(uint *)(ctx + 0x8c) & 0x40000000) == 0) {
+    *(uint *)(ctx + 0x1b74) = *(uint *)(ctx + 0x1b74) & 0xfffeffff;
+    *(uint *)(ctx + 0x1b84) = *(uint *)(ctx + 0x1b84) & 0xfffffcff | 0x43f;
   }
   else {
-    bVar4 = *(float *)(param_1 + 0x2814) != FLOAT_001aa0e8;
-    uVar1 = *(uint *)(param_1 + 0x1b84) & 0xfffffbc0;
-    *(uint *)(param_1 + 0x1b84) = uVar1 | 0x300;
-    if ((bVar4) || (*(float *)(param_1 + 0x2818) != fVar2)) {
-      *(uint *)(param_1 + 0x1b84) = uVar1 | 0x305;
+    xScaleNotOne = *(float *)(ctx + 0x2814) != FLOAT_001aa0e8;
+    reg1b84Masked = *(uint *)(ctx + 0x1b84) & 0xfffffbc0;
+    *(uint *)(ctx + 0x1b84) = reg1b84Masked | 0x300;
+    if ((xScaleNotOne) || (*(float *)(ctx + 0x2818) != oneF)) {
+      *(uint *)(ctx + 0x1b84) = reg1b84Masked | 0x305;
     }
-    *(uint *)(param_1 + 0x1b74) = *(uint *)(param_1 + 0x1b74) | 0x10000;
+    *(uint *)(ctx + 0x1b74) = *(uint *)(ctx + 0x1b74) | 0x10000;
   }
-  puVar3 = (undefined4 *)(**(code **)(param_1 + 0x2758))(param_1,4);
-  *(undefined4 **)(0x00002748 + param_1 + 4) = puVar3;
-  *puVar3 = 0x82c;
-  *(undefined4 *)(*(int *)(0x00002748 + param_1 + 4) + 4) = *(undefined4 *)(param_1 + 0x1b84);
-  *(undefined4 *)(*(int *)(0x00002748 + param_1 + 4) + 8) = 0x887;
-  *(undefined4 *)(*(int *)(0x00002748 + param_1 + 4) + 0xc) = *(undefined4 *)(param_1 + 0x1b74);
-  UNRECOVERED_JUMPTABLE = *(code **)(param_1 + 0x275c);
-  *(int *)(0x00002748 + param_1 + 4) = *(int *)(0x00002748 + param_1 + 4) + 0x10;
+  packet = (undefined4 *)(**(code **)(ctx + 0x2758))(ctx,4);
+  *(undefined4 **)(0x00002748 + ctx + 4) = packet;
+  *packet = 0x82c;
+  *(undefined4 *)(*(int *)(0x00002748 + ctx + 4) + 4) = *(undefined4 *)(ctx + 0x1b84);
+  *(undefined4 *)(*(int *)(0x00002748 + ctx + 4) + 8) = 0x887;
+  *(undefined4 *)(*(int *)(0x00002748 + ctx + 4) + 0xc) = *(undefined4 *)(ctx + 0x1b74);
+  streamSetCurrent = *(code **)(ctx + 0x275c);
+  *(int *)(0x00002748 + ctx + 4) = *(int *)(0x00002748 + ctx + 4) + 0x10;
                     
                     
-  (*UNRECOVERED_JUMPTABLE)(param_1,*(int *)(0x00002748 + param_1 + 4));
+  (*streamSetCurrent)(ctx,*(int *)(0x00002748 + ctx + 4));
   return;
 }
 
@@ -4679,46 +4679,47 @@ LAB_00091090:
 }
 
 /* ffvpFreeTempRegister @ 0x911a0 (316 bytes) */
-int ffvpFreeTempRegister(param_1, param_2)
-  int param_1;
-  int *param_2;
+int ffvpFreeTempRegister(programBuilder, tempOperand)
+  int programBuilder;
+  int *tempOperand;
 {
-  int iVar1;
+  int laneSel;
+  int operandKind;
   
-  iVar1 = *param_2;
-  if (iVar1 == 1) {
-    *(undefined1 *)(param_2[1] * 4 + param_1 + 0x6c4) = 0;
-    *(undefined1 *)(param_2[1] * 4 + param_1 + 0x6c5) = 0;
-    *(undefined1 *)(param_2[1] * 4 + param_1 + 0x6c6) = 0;
+  operandKind = *tempOperand;
+  if (operandKind == 1) {
+    *(undefined1 *)(tempOperand[1] * 4 + programBuilder + 0x6c4) = 0;
+    *(undefined1 *)(tempOperand[1] * 4 + programBuilder + 0x6c5) = 0;
+    *(undefined1 *)(tempOperand[1] * 4 + programBuilder + 0x6c6) = 0;
     return;
   }
-  if (iVar1 == 0) {
-    *(undefined1 *)(param_2[1] * 4 + param_1 + 0x6c4) = 0;
-    *(undefined1 *)(param_2[1] * 4 + param_1 + 0x6c5) = 0;
-    *(undefined1 *)(param_2[1] * 4 + param_1 + 0x6c6) = 0;
-    *(undefined1 *)(param_2[1] * 4 + param_1 + 0x6c7) = 0;
+  if (operandKind == 0) {
+    *(undefined1 *)(tempOperand[1] * 4 + programBuilder + 0x6c4) = 0;
+    *(undefined1 *)(tempOperand[1] * 4 + programBuilder + 0x6c5) = 0;
+    *(undefined1 *)(tempOperand[1] * 4 + programBuilder + 0x6c6) = 0;
+    *(undefined1 *)(tempOperand[1] * 4 + programBuilder + 0x6c7) = 0;
     return;
   }
-  if (iVar1 != 2) {
+  if (operandKind != 2) {
     return;
   }
-  iVar1 = param_2[6];
-  if (iVar1 != 1) {
-    if (iVar1 == 0) {
-      *(undefined1 *)(param_2[1] * 4 + param_1 + 0x6c4) = 0;
+  laneSel = tempOperand[6];
+  if (laneSel != 1) {
+    if (laneSel == 0) {
+      *(undefined1 *)(tempOperand[1] * 4 + programBuilder + 0x6c4) = 0;
       return;
     }
-    if (iVar1 != 2) {
-      if (iVar1 != 3) {
+    if (laneSel != 2) {
+      if (laneSel != 3) {
         return;
       }
-      *(undefined1 *)(param_2[1] * 4 + param_1 + 0x6c7) = 0;
+      *(undefined1 *)(tempOperand[1] * 4 + programBuilder + 0x6c7) = 0;
       return;
     }
-    *(undefined1 *)(param_2[1] * 4 + param_1 + 0x6c6) = 0;
+    *(undefined1 *)(tempOperand[1] * 4 + programBuilder + 0x6c6) = 0;
     return;
   }
-  *(undefined1 *)(param_2[1] * 4 + param_1 + 0x6c5) = 0;
+  *(undefined1 *)(tempOperand[1] * 4 + programBuilder + 0x6c5) = 0;
   return;
 }
 

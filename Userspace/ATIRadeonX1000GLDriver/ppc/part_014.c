@@ -1166,87 +1166,87 @@ LAB_000953b4:
 }
 
 /* ffvpEmitInverseEyeDistance_955a0 @ 0x955a0 (20 bytes) */
-int ffvpEmitInverseEyeDistance_955a0(param_1)
-  int param_1;
+int ffvpEmitInverseEyeDistance_955a0(programBuilder)
+  int programBuilder;
 {
-  undefined4 uVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
+  undefined4 status;
+  int allocStatus;
+  int glCtx;
+  int distSqReg;
   
-  if (param_1 == 0) {
+  if (programBuilder == 0) {
     return 1;
   }
-  uVar1 = 0;
-  iVar3 = *(int *)(param_1 + 0x3d4);
-  if (*(int *)(param_1 + 0x538) == -1) {
-    iVar4 = *(int *)(param_1 + 0x510);
-    if (iVar4 == -1) {
-      ffvpEmitEyeDistanceSquared(param_1);
-      iVar4 = *(int *)(param_1 + 0x510);
-      if (iVar4 == -1) {
+  status = 0;
+  glCtx = *(int *)(programBuilder + 0x3d4);
+  if (*(int *)(programBuilder + 0x538) == -1) {
+    distSqReg = *(int *)(programBuilder + 0x510);
+    if (distSqReg == -1) {
+      ffvpEmitEyeDistanceSquared(programBuilder);
+      distSqReg = *(int *)(programBuilder + 0x510);
+      if (distSqReg == -1) {
         return 2;
       }
     }
-    iVar2 = ffvpAllocTempRegister(param_1,2,param_1 + 0x534);
-    uVar1 = 7;
-    if (iVar2 == 0) {
-      (**(code **)(((unsigned char *)0x00001318) + iVar3))
-                (param_1,**(undefined4 **)(param_1 + 0x3f0),*(undefined4 *)(param_1 + 0x538),
-                 param_1 + 0x53c,**(undefined4 **)(param_1 + 0x3ec),iVar4,param_1 + 0x524,
+    allocStatus = ffvpAllocTempRegister(programBuilder,2,programBuilder + 0x534);
+    status = 7;
+    if (allocStatus == 0) {
+      (**(code **)(((unsigned char *)0x00001318) + glCtx))
+                (programBuilder,**(undefined4 **)(programBuilder + 0x3f0),*(undefined4 *)(programBuilder + 0x538),
+                 programBuilder + 0x53c,**(undefined4 **)(programBuilder + 0x3ec),distSqReg,programBuilder + 0x524,
                  &DAT_001fa5e8);
-      uVar1 = 0;
+      status = 0;
     }
   }
-  return uVar1;
+  return status;
 }
 
 /* ffvpEmitEyeVector_955c0 @ 0x955c0 (20 bytes) */
-int ffvpEmitEyeVector_955c0(param_1)
-  int param_1;
+int ffvpEmitEyeVector_955c0(programBuilder)
+  int programBuilder;
 {
-  undefined4 uVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
+  undefined4 status;
+  int allocStatus;
+  int glCtx;
+  int invDistReg;
   
-  if (param_1 == 0) {
+  if (programBuilder == 0) {
     return 1;
   }
-  iVar3 = *(int *)(param_1 + 0x3d4);
-  if (*(int *)(param_1 + 0x420) != -1) {
+  glCtx = *(int *)(programBuilder + 0x3d4);
+  if (*(int *)(programBuilder + 0x420) != -1) {
     return 0;
   }
-  iVar4 = *(int *)(param_1 + 0x538);
-  if (iVar4 == -1) {
-    ffvpEmitInverseEyeDistance(param_1);
-    iVar4 = *(int *)(param_1 + 0x538);
-    if (iVar4 != -1) goto LAB_0009226c;
+  invDistReg = *(int *)(programBuilder + 0x538);
+  if (invDistReg == -1) {
+    ffvpEmitInverseEyeDistance(programBuilder);
+    invDistReg = *(int *)(programBuilder + 0x538);
+    if (invDistReg != -1) goto LAB_0009226c;
 LAB_00092320:
-    uVar1 = 2;
+    status = 2;
   }
   else {
 LAB_0009226c:
-    if (*(int *)(param_1 + 0x3f8) == -1) {
-      if ((*(uint *)(((unsigned char *)0x000013c0) + iVar3) & 4) == 0) {
-        ffvpEmitEyePositionDp4(param_1);
+    if (*(int *)(programBuilder + 0x3f8) == -1) {
+      if ((*(uint *)(((unsigned char *)0x000013c0) + glCtx) & 4) == 0) {
+        ffvpEmitEyePositionDp4(programBuilder);
       }
       else {
-        ffvpEmitEyePositionMad(param_1);
+        ffvpEmitEyePositionMad(programBuilder);
       }
-      if (*(int *)(param_1 + 0x3f8) == -1) goto LAB_00092320;
+      if (*(int *)(programBuilder + 0x3f8) == -1) goto LAB_00092320;
     }
-    iVar2 = ffvpAllocTempRegister(param_1,1,param_1 + 0x41c);
-    uVar1 = 7;
-    if (iVar2 == 0) {
-      (**(code **)(((unsigned char *)0x000012ec) + iVar3))
-                (param_1,**(undefined4 **)(param_1 + 0x3f0),*(undefined4 *)(param_1 + 0x420),
-                 &DAT_001dbd84,**(undefined4 **)(param_1 + 0x3ec),iVar4,param_1 + 0x54c,&DAT_001fa5e8,
-                 **(undefined4 **)(param_1 + 0x3ec),*(int *)((int)param_1 + 1016),&DAT_001dbd74,&DAT_001fa5e8);
-      uVar1 = 0;
+    allocStatus = ffvpAllocTempRegister(programBuilder,1,programBuilder + 0x41c);
+    status = 7;
+    if (allocStatus == 0) {
+      (**(code **)(((unsigned char *)0x000012ec) + glCtx))
+                (programBuilder,**(undefined4 **)(programBuilder + 0x3f0),*(undefined4 *)(programBuilder + 0x420),
+                 &DAT_001dbd84,**(undefined4 **)(programBuilder + 0x3ec),invDistReg,programBuilder + 0x54c,&DAT_001fa5e8,
+                 **(undefined4 **)(programBuilder + 0x3ec),*(int *)((int)programBuilder + 1016),&DAT_001dbd74,&DAT_001fa5e8);
+      status = 0;
     }
   }
-  return uVar1;
+  return status;
 }
 
 /* ffvpPrepareBlendWeights @ 0x955e0 (40 bytes) */
@@ -4704,10 +4704,10 @@ int ffvpEmitFogTexCoord(programBuilder, texUnit)
   undefined4 texOutFile;
   int texOutReg;
   int glCtx;
-  uint local_78;
-  undefined4 local_74;
-  undefined4 local_70;
-  undefined4 local_6c;
+  uint selectCopy0;
+  undefined4 selectCopy1;
+  undefined4 selectCopy2;
+  undefined4 selectCopy3;
   undefined1 tempA [4];
   undefined4 tempAReg;
   int emit4Src1Select;
@@ -4721,21 +4721,21 @@ int ffvpEmitFogTexCoord(programBuilder, texUnit)
     if (texOutReg != -1) {
       glCtx = *(int *)(programBuilder + 0x3d4);
       texOutFile = *(undefined4 *)(*(int *)(programBuilder + 0x3f0) + 0x14);
-      local_74 = DAT_001dbda8;
-      local_78 = DAT_001dbda4;
-      local_70 = DAT_001dbdac;
-      local_6c = DAT_001dbdb0;
+      selectCopy1 = DAT_001dbda8;
+      selectCopy0 = DAT_001dbda4;
+      selectCopy2 = DAT_001dbdac;
+      selectCopy3 = DAT_001dbdb0;
       if (*(short *)(((unsigned char *)0x00002e06) + *(int *)(*(int *)(glCtx + 4) + 0x10)) == -0x7bae) {
         eyePositionReg = *(int *)(programBuilder + 0x3f8);
         if (eyePositionReg != -1) {
 LAB_0009b914:
           srcTempFileB = **(undefined4 **)(programBuilder + 0x3ec);
-          local_78 = 2;
+          selectCopy0 = 2;
           stateBlock = *(int *)(*(int *)(glCtx + 4) + 0x10);
           if (*(short *)(((unsigned char *)0x00002e06) + stateBlock) != -0x7bae) {
             emit1Src1Negate = &DAT_001dbd94;
             (**(code **)(((unsigned char *)0x00001304) + glCtx))
-                      (programBuilder,texOutFile,texOutReg,&DAT_001dbd24,srcTempFileB,eyePositionReg,&local_78,&DAT_001fa5e8,srcTempFileB,eyePositionReg,&local_78,emit1Src1Negate);
+                      (programBuilder,texOutFile,texOutReg,&DAT_001dbd24,srcTempFileB,eyePositionReg,&selectCopy0,&DAT_001fa5e8,srcTempFileB,eyePositionReg,&selectCopy0,emit1Src1Negate);
             return 0;
           }
           if (*(short *)(((unsigned char *)0x00002e08) + stateBlock) == -0x7aa5) {
@@ -4759,7 +4759,7 @@ LAB_0009b914:
             return 0;
           }
           (**(code **)(((unsigned char *)0x000012e8) + glCtx))
-                    (programBuilder,texOutFile,texOutReg,&DAT_001dbd24,srcTempFileB,eyePositionReg,&local_78,&DAT_001dbd94);
+                    (programBuilder,texOutFile,texOutReg,&DAT_001dbd24,srcTempFileB,eyePositionReg,&selectCopy0,&DAT_001dbd94);
           return 0;
         }
         if ((*(uint *)(((unsigned char *)0x000013c0) + glCtx) & 4) == 0) {
@@ -4775,20 +4775,20 @@ LAB_0009b914:
         }
       }
       else if (*(int *)(programBuilder + 0x50) != -1) {
-        local_78 = *(uint *)(programBuilder + 0x54);
-        if (local_78 < 4) {
-          if (local_78 != 1) {
-            if (local_78 == 0) {
-              local_78 = 0;
+        selectCopy0 = *(uint *)(programBuilder + 0x54);
+        if (selectCopy0 < 4) {
+          if (selectCopy0 != 1) {
+            if (selectCopy0 == 0) {
+              selectCopy0 = 0;
             }
-            else if ((local_78 != 2) && (local_78 != 3)) {
-              local_78 = 4;
+            else if ((selectCopy0 != 2) && (selectCopy0 != 3)) {
+              selectCopy0 = 4;
             }
           }
           (**(code **)(((unsigned char *)0x000012e8) + glCtx))
                     (programBuilder,texOutFile,texOutReg,&DAT_001dbd24,
                      *(undefined4 *)(*(int *)(programBuilder + 0x3ec) + 4),*(int *)(programBuilder + 0x50),
-                     &local_78,&DAT_001fa5e8);
+                     &selectCopy0,&DAT_001fa5e8);
           return 0;
         }
         goto LAB_0009bbb0;
@@ -7790,23 +7790,23 @@ int glGenProgramsARB_impl(ctx, count, ids)
 {
   int iVar1;
   int loopIndex;
-  int *piVar3;
-  int iVar4;
+  int *programTable;
+  int nextId;
   
   if (0 < count) {
-    piVar3 = *(int **)(((unsigned char *)0x0000112c) + ctx);
+    programTable = *(int **)(((unsigned char *)0x0000112c) + ctx);
     loopIndex = 0;
-    iVar4 = *piVar3;
+    nextId = *programTable;
     do {
-      while (iVar1 = ((int (*)())arbProgramFindIndex)(ctx,piVar3,iVar4), iVar1 != 0) {
-        iVar4 = iVar4 + 1;
+      while (iVar1 = ((int (*)())arbProgramFindIndex)(ctx,programTable,nextId), iVar1 != 0) {
+        nextId = nextId + 1;
       }
       iVar1 = loopIndex * 4;
       loopIndex = loopIndex + 1;
-      *(int *)(ids + iVar1) = iVar4;
-      iVar4 = iVar4 + 1;
+      *(int *)(ids + iVar1) = nextId;
+      nextId = nextId + 1;
     } while (count != loopIndex);
-    *piVar3 = iVar4;
+    *programTable = nextId;
   }
   return;
 }
@@ -8102,29 +8102,29 @@ switchD_000a0718_caseD_8811:
 }
 
 /* arbProgramEntryFree @ 0xa0ba0 (188 bytes) */
-int arbProgramEntryFree(context, param_2)
+int arbProgramEntryFree(context, entry)
   int context;
-  undefined4 *param_2;
+  undefined4 *entry;
 {
-  int iVar1;
+  int programObject;
   
-  iVar1 = param_2[5];
-  if (iVar1 != 0) {
-    if (param_2[1] == 0x8804) {
-      arbfpProgramObjectFree(context,iVar1);
-      iVar1 = param_2[5];
+  programObject = entry[5];
+  if (programObject != 0) {
+    if (entry[1] == 0x8804) {
+      arbfpProgramObjectFree(context,programObject);
+      programObject = entry[5];
     }
-    (**(code **)(context + 0x18))(iVar1);
-    param_2[5] = 0;
+    (**(code **)(context + 0x18))(programObject);
+    entry[5] = 0;
   }
-  if (param_2[4] != 0) {
-    (**(code **)(context + 0x18))(param_2[4]);
-    param_2[4] = 0;
+  if (entry[4] != 0) {
+    (**(code **)(context + 0x18))(entry[4]);
+    entry[4] = 0;
   }
-  param_2[2] = 0;
-  param_2[3] = 0xffffffff;
-  *param_2 = 0;
-  param_2[1] = 0;
+  entry[2] = 0;
+  entry[3] = 0xffffffff;
+  *entry = 0;
+  entry[1] = 0;
   return;
 }
 

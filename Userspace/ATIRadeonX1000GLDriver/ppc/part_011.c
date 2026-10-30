@@ -676,69 +676,69 @@ int regBindingSet(ctx, valueId, reg, componentMask, strict)
   uint componentMask;
   int strict;
 {
-  byte bVar1;
-  int *piVar2;
-  uint uVar3;
-  uint uVar4;
-  int iVar5;
+  byte boundMaskByte;
+  int *valueIdPtr;
+  uint componentBit;
+  uint compIdx;
+  int remaining;
   
-  iVar5 = 4;
-  uVar4 = 0;
-  piVar2 = (int *)(reg * 0x10 + ctx + 0x2d87c);
+  remaining = 4;
+  compIdx = 0;
+  valueIdPtr = (int *)(reg * 0x10 + ctx + 0x2d87c);
   do {
-    uVar3 = 1 << (uVar4 & 0x3f);
-    if ((uVar3 & componentMask) != 0) {
-      bVar1 = *(byte *)(reg + ctx + 0x3087c);
-      if (((int)(char)bVar1 >> (uVar4 & 0x3f) & 1U) == 0) {
-        *piVar2 = valueId;
-        *(byte *)(reg + ctx + 0x3087c) = (byte)uVar3 | bVar1;
+    componentBit = 1 << (compIdx & 0x3f);
+    if ((componentBit & componentMask) != 0) {
+      boundMaskByte = *(byte *)(reg + ctx + 0x3087c);
+      if (((int)(char)boundMaskByte >> (compIdx & 0x3f) & 1U) == 0) {
+        *valueIdPtr = valueId;
+        *(byte *)(reg + ctx + 0x3087c) = (byte)componentBit | boundMaskByte;
       }
-      else if ((valueId != *piVar2) && (strict != 0)) {
+      else if ((valueId != *valueIdPtr) && (strict != 0)) {
         return 6;
       }
     }
-    uVar4 = uVar4 + 1;
-    piVar2 = piVar2 + 1;
-    iVar5 = iVar5 + -1;
-    if (iVar5 == 0) {
+    compIdx = compIdx + 1;
+    valueIdPtr = valueIdPtr + 1;
+    remaining = remaining + -1;
+    if (remaining == 0) {
       return 0;
     }
   } while( true );
 }
 
 /* regBindingSetFixedRegister @ 0x77c40 (124 bytes) */
-int regBindingSetFixedRegister(param_1, param_2, param_3, param_4, param_5)
-  int param_1;
-  int param_2;
-  uint param_3;
-  int param_4;
-  undefined4 param_5;
+int regBindingSetFixedRegister(alloc, valueId, componentMask, strict, unusedArg5)
+  int alloc;
+  int valueId;
+  uint componentMask;
+  int strict;
+  undefined4 unusedArg5;
 {
-  byte bVar1;
-  uint uVar2;
-  int *piVar3;
-  uint uVar4;
-  int iVar5;
+  byte boundMaskByte;
+  uint componentBit;
+  int *valueIdPtr;
+  uint compIdx;
+  int remaining;
   
-  uVar4 = 0;
-  iVar5 = 4;
-  piVar3 = (int *)(param_1 + 0x30b8c);
+  compIdx = 0;
+  remaining = 4;
+  valueIdPtr = (int *)(alloc + 0x30b8c);
   do {
-    uVar2 = 1 << (uVar4 & 0x3f);
-    if ((uVar2 & param_3) != 0) {
-      bVar1 = *(byte *)(param_1 + 0x30b9c);
-      if (((int)(char)bVar1 >> (uVar4 & 0x3f) & 1U) == 0) {
-        *piVar3 = param_2;
-        *(byte *)(param_1 + 0x30b9c) = (byte)uVar2 | bVar1;
+    componentBit = 1 << (compIdx & 0x3f);
+    if ((componentBit & componentMask) != 0) {
+      boundMaskByte = *(byte *)(alloc + 0x30b9c);
+      if (((int)(char)boundMaskByte >> (compIdx & 0x3f) & 1U) == 0) {
+        *valueIdPtr = valueId;
+        *(byte *)(alloc + 0x30b9c) = (byte)componentBit | boundMaskByte;
       }
-      else if ((param_2 != *piVar3) && (param_4 != 0)) {
+      else if ((valueId != *valueIdPtr) && (strict != 0)) {
         return 6;
       }
     }
-    uVar4 = uVar4 + 1;
-    piVar3 = piVar3 + 1;
-    iVar5 = iVar5 + -1;
-    if (iVar5 == 0) {
+    compIdx = compIdx + 1;
+    valueIdPtr = valueIdPtr + 1;
+    remaining = remaining + -1;
+    if (remaining == 0) {
       return 0;
     }
   } while( true );
@@ -1135,54 +1135,55 @@ int recordAssignDestinationRegister(ctx, program, recordIndex, keepFlag, chosenR
   char *keepFlag;
   int *chosenReg;
 {
-  char cVar1;
-  undefined4 uVar2;
-  undefined4 uVar3;
-  int iVar4;
-  uint uVar5;
-  int *piVar6;
-  uint *puVar7;
+  char depState;
+  undefined4 combinedMask;
+  undefined4 writeMask;
+  int assignable;
+  int freeReg;
+  uint recordWord0;
+  int *depNode;
+  uint *record;
   
-  puVar7 = (uint *)(recordIndex * 0x10 + program);
-  uVar2 = ((int (*)())recordCombinedWriteMask)(ctx,recordIndex);
-  uVar3 = ((int (*)())recordGetWriteMask)(puVar7);
-  uVar5 = *(uint *)(recordIndex * 0x10 + program);
-  if ((uVar5 & 0xf00) == 0x400) {
-    iVar4 = ((int (*)())recordRegisterIsAssignable)(ctx,program,
-                         (char)(DAT_001aa758)[uVar5 >> 8 & 0xf] * 0x100 + (uVar5 >> 0xd & 0x7f),
-                         uVar2,recordIndex,uVar3);
-    if (iVar4 == 0) {
+  record = (uint *)(recordIndex * 0x10 + program);
+  combinedMask = ((int (*)())recordCombinedWriteMask)(ctx,recordIndex);
+  writeMask = ((int (*)())recordGetWriteMask)(record);
+  recordWord0 = *(uint *)(recordIndex * 0x10 + program);
+  if ((recordWord0 & 0xf00) == 0x400) {
+    assignable = ((int (*)())recordRegisterIsAssignable)(ctx,program,
+                         (char)(DAT_001aa758)[recordWord0 >> 8 & 0xf] * 0x100 + (recordWord0 >> 0xd & 0x7f),
+                         combinedMask,recordIndex,writeMask);
+    if (assignable == 0) {
       *keepFlag = '\0';
       return true;
     }
   }
   else {
-    piVar6 = *(int **)(recordIndex * 4 + ctx + 0xa450);
-    if (piVar6 != (int *)0x0) {
-      cVar1 = *(char *)(*piVar6 * 4 + ctx + 0x3148d);
+    depNode = *(int **)(recordIndex * 4 + ctx + 0xa450);
+    if (depNode != (int *)0x0) {
+      depState = *(char *)(*depNode * 4 + ctx + 0x3148d);
       while( true ) {
-        if ('\0' < cVar1) {
+        if ('\0' < depState) {
           ((int (*)())recordMarkDependentsDirty)(ctx,recordIndex);
           return false;
         }
-        piVar6 = (int *)piVar6[4];
-        if (piVar6 == (int *)0x0) break;
-        cVar1 = *(char *)(*piVar6 * 4 + ctx + 0x3148d);
+        depNode = (int *)depNode[4];
+        if (depNode == (int *)0x0) break;
+        depState = *(char *)(*depNode * 4 + ctx + 0x3148d);
       }
     }
   }
-  iVar4 = ((int (*)())recordFindFreeTempRegister)(ctx,program,uVar2,recordIndex,uVar3);
-  *chosenReg = iVar4;
-  if (iVar4 == -1) {
+  freeReg = ((int (*)())recordFindFreeTempRegister)(ctx,program,combinedMask,recordIndex,writeMask);
+  *chosenReg = freeReg;
+  if (freeReg == -1) {
     ((int (*)())recordMarkDependentsDirty)(ctx,recordIndex);
     *keepFlag = '\0';
   }
   else {
-    uVar5 = *puVar7;
-    *keepFlag = '\x01' - ((char)(DAT_001aa758)[uVar5 >> 8 & 0xf] * 0x100 + (uVar5 >> 0xd & 0x7f) ==
-                        iVar4);
+    recordWord0 = *record;
+    *keepFlag = '\x01' - ((char)(DAT_001aa758)[recordWord0 >> 8 & 0xf] * 0x100 + (recordWord0 >> 0xd & 0x7f) ==
+                        freeReg);
   }
-  return iVar4 != -1;
+  return freeReg != -1;
 }
 
 /* recordMarkPairEmitted @ 0x78950 (64 bytes) */
@@ -2140,25 +2141,25 @@ LAB_00079dc0:
 }
 
 /* recordSourcesAreDistinctTemps @ 0x79e10 (88 bytes) */
-int recordSourcesAreDistinctTemps(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  int param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+int recordSourcesAreDistinctTemps(record, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
+  int record;
+  undefined4 unusedArg2;
+  undefined4 unusedArg3;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
 {
-  uint uVar1;
-  uint uVar2;
-  uint uVar3;
+  uint src0Index;
+  uint src1Index;
+  uint src2Index;
   
-  if ((((*(uint *)(param_1 + 4) & 0xf) == 0) && ((*(uint *)(param_1 + 8) & 0xf) == 0)) &&
-     ((*(uint *)(param_1 + 0xc) & 0xf) == 0)) {
-    uVar1 = *(uint *)(param_1 + 4) & 0x1fe0;
-    uVar2 = *(uint *)(param_1 + 8) & 0x1fe0;
-    if (((uVar1 != uVar2) && (uVar3 = *(uint *)(param_1 + 0xc) & 0x1fe0, uVar2 != uVar3)) &&
-       (uVar1 != uVar3)) {
+  if ((((*(uint *)(record + 4) & 0xf) == 0) && ((*(uint *)(record + 8) & 0xf) == 0)) &&
+     ((*(uint *)(record + 0xc) & 0xf) == 0)) {
+    src0Index = *(uint *)(record + 4) & 0x1fe0;
+    src1Index = *(uint *)(record + 8) & 0x1fe0;
+    if (((src0Index != src1Index) && (src2Index = *(uint *)(record + 0xc) & 0x1fe0, src1Index != src2Index)) &&
+       (src0Index != src2Index)) {
       return 1;
     }
   }
@@ -2270,27 +2271,27 @@ int chunkArenaResetCursor(param_1)
 }
 
 /* chunkArenaFree @ 0x7a070 (156 bytes) */
-int chunkArenaFree(param_1)
-  int param_1;
+int chunkArenaFree(arena)
+  int arena;
 {
-  uint uVar1;
+  uint chunkCount;
   uint loopIndex;
-  int iVar3;
+  int chunkCursor;
   
-  if (*(int *)(param_1 + 0x408) != 0) {
+  if (*(int *)(arena + 0x408) != 0) {
     loopIndex = 0;
-    iVar3 = param_1;
+    chunkCursor = arena;
     do {
       loopIndex = loopIndex + 1;
-      (**(code **)(param_1 + 4))(*(undefined4 *)(iVar3 + 8));
-      uVar1 = *(uint *)(param_1 + 0x408);
-      *(undefined4 *)(iVar3 + 8) = 0;
-      iVar3 = iVar3 + 4;
-    } while (loopIndex < uVar1);
+      (**(code **)(arena + 4))(*(undefined4 *)(chunkCursor + 8));
+      chunkCount = *(uint *)(arena + 0x408);
+      *(undefined4 *)(chunkCursor + 8) = 0;
+      chunkCursor = chunkCursor + 4;
+    } while (loopIndex < chunkCount);
   }
-  *(undefined4 *)(param_1 + 0x40c) = 0;
-  *(undefined4 *)(param_1 + 0x408) = 0;
-  return ((int (*)())chunkArenaResetCursor)(param_1);
+  *(undefined4 *)(arena + 0x40c) = 0;
+  *(undefined4 *)(arena + 0x408) = 0;
+  return ((int (*)())chunkArenaResetCursor)(arena);
 }
 
 /* recordAllocFree @ 0x7a110 (100 bytes) */
@@ -9133,11 +9134,11 @@ int gldEmitProgramConstants(ctx, program, unusedArg3, unusedArg4, unusedArg5, un
 }
 
 /* interpolatorMapInit @ 0x82f60 (416 bytes) */
-int interpolatorMapInit(ctx, builder, param_3, param_4)
+int interpolatorMapInit(ctx, builder, unusedArg3, slotCountOut)
   int ctx;
   int builder;
-  undefined4 param_3;
-  uint *param_4;
+  undefined4 unusedArg3;
+  uint *slotCountOut;
 {
   bool hasPosition;
   uint outputMask;
@@ -9218,7 +9219,7 @@ int interpolatorMapInit(ctx, builder, param_3, param_4)
     nextSlot = nextSlot + 1;
   }
   (**(code **)(((unsigned char *)0x00001334) + ctx))(ctx,0);
-  *param_4 = nextSlot;
+  *slotCountOut = nextSlot;
   return;
 }
 
