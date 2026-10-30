@@ -2789,3 +2789,73 @@ use	Inst__collapseAlgebraic_0015c6d4	piVar8	literalSource	INFERRED	operand sourc
 use	Inst__collapseAlgebraic_0015c6d4	piVar8	literalSource	INFERRED	operand source that receives the literal: the source itself, or its clone when it has several uses	^\s*\(\*\*\(code\ \*\*\)\(\*piVar8\ \+\ 0x88\)\)\(piVar8,iVar5,iVar15,iVar15\);$	+2
 use	Inst__collapseAlgebraic_0015c6d4	piVar8	literalSource	INFERRED	operand source that receives the literal: the source itself, or its clone when it has several uses	^\s*iVar15\ =\ FUN_001054ec\(piVar8,iVar5\);$	+1	rhs	none
 use	Inst__collapseAlgebraic_0015c6d4	piVar8	literalSource	INFERRED	operand source that receives the literal	^\s*iVar5\ =\ piVar8\[0x21\];$@2	+1
+use	Inst__collapseAlgebraic_00158264	iVar2	instOpcodeOrResult	INFERRED	opcode of inst on entry, then the 0/1 return value (same register, not splittable)	^\s*iVar2\ =\ 0;$	+1
+use	Inst__collapseAlgebraic_00158264	iVar2	instOpcodeOrResult	INFERRED	opcode of inst on entry, then the 0/1 return value (same register, not splittable)	^\s*iVar2\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x88\)\ \+\ 8\);$	+1
+use	Inst__collapseAlgebraic_00158264	iVar2	instOpcodeOrResult	INFERRED	opcode of inst on entry, then the 0/1 return value (same register, not splittable)	^\s*if\ \(iVar2\ !=\ 0x12\)\ \{$	+1
+use	Inst__collapseAlgebraic_00158264	iVar2	instOpcodeOrResult	INFERRED	opcode of inst on entry, then the 0/1 return value (same register, not splittable)	^\s*if\ \(\(iVar2\ ==\ 0x14\)\ \|\|\ \(iVar2\ ==\ 0x13\)\)\ \{$	+1
+use	Inst__collapseAlgebraic_00158264	iVar2	instOpcodeOrResult	INFERRED	opcode of inst on entry, then the 0/1 return value (same register, not splittable)	^\s*iVar2\ =\ 0;$@2	+1
+use	Inst__collapseAlgebraic_00158264	iVar2	instOpcodeOrResult	INFERRED	opcode of inst on entry, then the 0/1 return value (same register, not splittable)	^\s*if\ \(iVar2\ ==\ 0\)\ \{$	+1
+use	Inst__collapseAlgebraic_00158264	iVar2	instOpcodeOrResult	INFERRED	opcode of inst on entry, then the 0/1 return value (same register, not splittable)	^\s*local_8c\ =\ iVar2;$	+3
+use	Inst__collapseAlgebraic_00158264	iVar2	instOpcodeOrResult	INFERRED	opcode of inst on entry, then the 0/1 return value (same register, not splittable)	^\s*iVar2\ =\ 1;$	+1
+use	Inst__collapseAlgebraic_00158264	iVar2	instOpcodeOrResult	INFERRED	opcode of inst on entry, then the 0/1 return value (same register, not splittable)	^\s*iVar2\ =\ 0;$@3	+1
+use	Inst__collapseAlgebraic_00158264	iVar2	instOpcodeOrResult	INFERRED	opcode of inst on entry, then the 0/1 return value (same register, not splittable)	^\s*return\ iVar2;$	+1
+use	Inst__collapseAlgebraic_00158264	iVar2	instOpcodeOrResult	INFERRED	opcode of inst on entry, then the 0/1 return value (same register, not splittable)	^\s*return\ iVar2;$@2	+1
+use	Inst__collapseAlgebraic_00158264	iVar2	instOpcodeOrResult	INFERRED	opcode of inst on entry, then the 0/1 return value (same register, not splittable)	^\s*return\ iVar2;$@3	+1
+use	Inst__collapseAlgebraic_00158264	iVar2	instOpcodeOrResult	INFERRED	opcode of inst on entry, then the 0/1 return value (same register, not splittable)	^\s*return\ iVar2;$@4	+1
+use	Inst__collapseAlgebraic_00158264	iVar2	instOpcodeOrResult	INFERRED	opcode of inst on entry, then the 0/1 return value (same register, not splittable)	^\s*return\ iVar2;$@5	+1
+use	Inst__collapseAlgebraic_00158264	iVar2	instOpcodeOrResult	INFERRED	opcode of inst on entry, then the 0/1 return value (same register, not splittable)	^\s*return\ iVar2;$@6	+1
+use	Inst__collapseAlgebraic_00158264	iVar2	instOpcodeOrResult	INFERRED	opcode of inst on entry, then the 0/1 return value (same register, not splittable)	^\s*iVar2\ =\ 0;$@4	+1
+use	Inst__collapseAlgebraic_00158264	iVar2	instOpcodeOrResult	INFERRED	opcode of inst on entry, then the 0/1 return value (same register, not splittable)	^\s*iVar2\ =\ 0;$@5	+1
+use	Inst__collapseAlgebraic_00158264	iVar2	instOpcodeOrResult	INFERRED	opcode of inst on entry, then the 0/1 return value (same register, not splittable)	^\s*iVar2\ =\ 0;$@6	+1
+use	Inst__collapseAlgebraic_00158264	iVar2	instOpcodeOrResult	INFERRED	opcode of inst on entry, then the 0/1 return value (same register, not splittable)	^\s*return\ iVar2;$@7	+1
+use	Inst__collapseAlgebraic_00158264	iVar2	instOpcodeOrResult	INFERRED	opcode of inst on entry, then the 0/1 return value (same register, not splittable)	^\s*return\ iVar2;$@8	+1
+use	Inst__collapseAlgebraic_00158264	iVar2	instOpcodeOrResult	INFERRED	opcode of inst on entry, then the 0/1 return value (same register, not splittable)	^\s*return\ iVar2;$@9	+1
+use	Inst__collapseAlgebraic_00158264	iVar2	instOpcodeOrResult	INFERRED	opcode of inst on entry, then the 0/1 return value (same register, not splittable)	^\s*return\ iVar2;$@10	+1
+use	Inst__collapseAlgebraic_00158264	iVar2	instOpcodeOrResult	INFERRED	opcode of inst on entry, then the 0/1 return value (same register, not splittable)	^\s*return\ iVar2;$@11	+1
+use	Inst__collapseAlgebraic_00158264	iVar2	instOpcodeOrResult	INFERRED	opcode of inst on entry, then the 0/1 return value (same register, not splittable)	^\s*return\ iVar2;$@12	+1
+use	Inst__collapseAlgebraic_00158264	iVar2	instOpcodeOrResult	INFERRED	opcode of inst on entry, then the 0/1 return value (same register, not splittable)	^\s*return\ iVar2;$@13	+1
+use	Inst__collapseAlgebraic_00158264	iVar2	instOpcodeOrResult	INFERRED	opcode of inst on entry, then the 0/1 return value (same register, not splittable)	^\s*return\ iVar2;$@14	+1
+local	Inst__collapseAlgebraic_00158264	piVar6	target	INFERRED	*(compiler+0x30c): target, vtable +0xfc checks the output scale
+use	Inst__collapseAlgebraic_00158264	uVar7	inst2ModBitsA	INFERRED	*(inst2+0xe8): modifier bits of inst2 operand 3	^\s*uVar7\ =\ \*\(uint\ \*\)\(param_3\ \+\ 0xe8\);$	+1
+use	Inst__collapseAlgebraic_00158264	uVar7	inst2ModBitsA	INFERRED	*(inst2+0xe8): modifier bits of inst2 operand 3	^\s*local_5c\ =\ uVar7\ >>\ 1\ \&\ 1;$	+1
+use	Inst__collapseAlgebraic_00158264	uVar7	inst2ModBitsA	INFERRED	*(inst2+0xe8): modifier bits of inst2 operand 3	^\s*FUN_00103d50\(param_3\ \+\ 0xbc,1,uVar7\ \&\ 1\);$	+1
+use	Inst__collapseAlgebraic_00158264	iVar17	opcodeKind	INFERRED	opcode of inst2, then the classification code 0x12/0x13/0x14 (same register, not splittable)	^\s*iVar17\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_3\ \+\ 0x88\)\ \+\ 8\);$	+1
+use	Inst__collapseAlgebraic_00158264	iVar17	opcodeKind	INFERRED	opcode of inst2, then the classification code 0x12/0x13/0x14 (same register, not splittable)	^\s*if\ \(iVar17\ ==\ 0x14\)\ \{$	+1
+use	Inst__collapseAlgebraic_00158264	iVar17	opcodeKind	INFERRED	opcode of inst2, then the classification code 0x12/0x13/0x14 (same register, not splittable)	^\s*iVar17\ =\ 0x14;$	+1
+use	Inst__collapseAlgebraic_00158264	iVar17	opcodeKind	INFERRED	opcode of inst2, then the classification code 0x12/0x13/0x14 (same register, not splittable)	^\s*iVar17\ =\ 0x12;$	+1
+use	Inst__collapseAlgebraic_00158264	iVar17	opcodeKind	INFERRED	opcode of inst2, then the classification code 0x12/0x13/0x14 (same register, not splittable)	^\s*iVar17\ =\ 0x14;$@2	+1
+use	Inst__collapseAlgebraic_00158264	iVar17	opcodeKind	INFERRED	opcode of inst2, then the classification code 0x12/0x13/0x14 (same register, not splittable)	^\s*if\ \(0x14\ <\ iVar17\)\ \{$	+1
+use	Inst__collapseAlgebraic_00158264	iVar17	opcodeKind	INFERRED	opcode of inst2, then the classification code 0x12/0x13/0x14 (same register, not splittable)	^\s*if\ \(iVar17\ ==\ 0x12\)\ \{$	+1
+use	Inst__collapseAlgebraic_00158264	iVar17	opcodeKind	INFERRED	opcode of inst2, then the classification code 0x12/0x13/0x14 (same register, not splittable)	^\s*param_3\ =\ \(\(int\ \(\*\)\(\)\)FUN_00156d48\)\(param_3,param_4,iVar17\);$	+1
+use	Inst__collapseAlgebraic_00158264	iVar17	opcodeKind	INFERRED	opcode of inst2, then the classification code 0x12/0x13/0x14 (same register, not splittable)	^\s*if\ \(iVar17\ ==\ 0x13\)\ \{$	+1
+use	Inst__collapseAlgebraic_00158264	iVar17	opcodeKind	INFERRED	opcode of inst2, then the classification code 0x12/0x13/0x14 (same register, not splittable)	^\s*iVar17\ =\ 0x13;$	+1
+use	Inst__collapseAlgebraic_00158264	iVar17	opcodeKind	INFERRED	opcode of inst2, then the classification code 0x12/0x13/0x14 (same register, not splittable)	^\s*bVar18\ =\ iVar17\ <\ 0x12;$	+2
+use	Inst__collapseAlgebraic_00158264	bVar18	negateLiteral	INFERRED	the literal is negative (magnitude kept in literalMagnitude)	^\s*bVar18\ =\ fparam_1\ <\ 0\.0;$	+2
+use	Inst__collapseAlgebraic_00158264	bVar18	negateLiteral	INFERRED	the literal is negative (magnitude kept in literalMagnitude)	^\s*local_60\ =\ \(uint\)bVar18\ \^\ \*\(uint\ \*\)\(param_3\ \+\ 0xb8\)\ \&\ 1;$	+1
+local	Inst__collapseAlgebraic_00158264	fparam_1	literalMagnitude	INFERRED	absolute value of the literal passed to tryOutputScaleExponent
+local	Inst__collapseAlgebraic_00158264	auStack_a4	exponentPad	INFERRED	second word of the tryOutputScaleExponent out buffer
+local	Inst__collapseAlgebraic_00158264	local_a0	literalValue	INFERRED	float literal read from the operand
+local	Inst__collapseAlgebraic_00158264	local_8c	lastOperandBuf0	INFERRED	IRInst__readLastOperand out buffer word 0
+local	Inst__collapseAlgebraic_00158264	local_88	lastOperandSourceSave	INFERRED	last operand source; nonzero means it must be restored
+local	Inst__collapseAlgebraic_00158264	local_78	lastOperandBuf2	INFERRED	IRInst__readLastOperand out buffer word 2
+local	Inst__collapseAlgebraic_00158264	local_68	inst2ReadMask	INFERRED	SelectWord__readMask out for the inst2 operand
+local	Inst__collapseAlgebraic_00158264	local_64	operandVRegWriteMask	INFERRED	WriteMask__fromSelectWord out for the operand source dest
+use	Inst__collapseAlgebraic_00158264	iVar5	precheckResult	INFERRED	vtable +0x24 / IRInst__hasSingleUse on a0	^\s*iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x24\)\)\(a0\);$	+2
+use	Inst__collapseAlgebraic_00158264	iVar5	vcallfcCheck	INFERRED	target vtable +0xfc: the new output scale is allowed	^\s*iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*piVar6\ \+\ 0xfc\)\)\(piVar6,a0\[0x49\]\ \+\ local_a8,param_3\),$	+2
+use	Inst__collapseAlgebraic_00158264	iVar5	newOutputScale	INFERRED	a0[0x49] + outputScaleExponent	^\s*iVar5\ =\ a0\[0x49\]\ \+\ local_a8;$	+2
+use	Inst__collapseAlgebraic_00158264	iVar5	newOutputScale	INFERRED	a0[0x49] + outputScaleExponent	^\s*a0\[0x49\]\ =\ iVar5;$	+1
+use	Inst__collapseAlgebraic_00158264	iVar5	operandIdxNext	INFERRED	operand index + 1 loop step	^\s*iVar5\ =\ iVar17\ \+\ 1;$	+1
+use	Inst__collapseAlgebraic_00158264	iVar5	operandIdxNext	INFERRED	operand index + 1 loop step	^\s*iVar17\ =\ iVar5;$	+2
+use	Inst__collapseAlgebraic_00158264	iVar16	vcallfcCheckB	INFERRED	target vtable +0xfc result	^\s*iVar16\ =\ \(\*\*\(code\ \*\*\)\(\*piVar6\ \+\ 0xfc\)\)\(piVar6,iVar5,param_3\);$	+2
+use	Inst__collapseAlgebraic_00158264	iVar16	useCountInst2	INFERRED	IRInst__useCount(inst2)	^\s*iVar16\ =\ FUN_00104054\(param_3,param_4\);$	+1
+use	Inst__collapseAlgebraic_00158264	iVar16	useCountInst2	INFERRED	IRInst__useCount(inst2)	^\s*\*\(int\ \*\)\(param_3\ \+\ 0x160\)\ =\ iVar16\ \+\ \*\(int\ \*\)\(param_4\ \+\ 0x478\);$	+1
+use	Inst__collapseAlgebraic_00158264	iVar16	destRecordOperandVReg	INFERRED	IRInst__getOperandRecord(operandVReg,0)	^\s*iVar16\ =\ FUN_001054ec\(piVar3,0\);$	+2
+use	Inst__collapseAlgebraic_00158264	iVar17	exponentFound	INFERRED	tryOutputScaleExponent result	^\s*iVar17\ =\ \(\(undefined4\ \(\*\)\(\)\)FUN_0010ab8c\)\(uVar4,\&local_a8,fparam_1\);$	+2
+use	Inst__collapseAlgebraic_00158264	iVar17	foldAllowed	INFERRED	FUN_0015800c result	^\s*\(iVar17\ =\ \(\(int\ \(\*\)\(\)\)FUN_0015800c\)\(param_3,piVar3,local_a8,uVar14,local_68,param_4\),\ iVar17\ !=\ 0\)\)\ \{$	+1
+use	Inst__collapseAlgebraic_00158264	bVar18	kindBelowAdd	INFERRED	classification code below 0x12 / cleared flag guarding the rewrite	^\s*bVar18\ =\ false;$	+1
+use	Inst__collapseAlgebraic_00158264	bVar18	kindBelowAdd	INFERRED	classification code below 0x12 / cleared flag guarding the rewrite	^\s*if\ \(bVar18\)\ \{$@2	+1
+use	Inst__collapseAlgebraic_00158264	bVar18	kindBelowAdd	INFERRED	classification code below 0x12 / cleared flag guarding the rewrite	^\s*bVar18\ =\ false;$@2	+1
+use	Inst__collapseAlgebraic_00158264	bVar18	kindBelowAdd	INFERRED	classification code below 0x12 / cleared flag guarding the rewrite	^\s*bVar18\ =\ iVar17\ <\ 0x12;$	+1
+use	Inst__collapseAlgebraic_00158264	iVar16	hasSingleUseResultB	INFERRED	IRInst__hasSingleUse(source,program) result	^\s*\(iVar16\ =\ FUN_0010497c\(iVar17,param_4\),\ iVar16\ !=\ 0\)\)\ \&\&\ \(\*\(int\ \*\)\(iVar17\ \+\ 0x120\)\ ==\ 0\)\)$	+1
+use	Inst__collapseAlgebraic_00158264	iVar16	hasSingleUseResultB	INFERRED	IRInst__hasSingleUse(source,program) result	^\s*\(iVar16\ =\ FUN_0010497c\(iVar17,param_4\),\ iVar16\ !=\ 0\)\)\ \&\&\ \(\*\(int\ \*\)\(iVar17\ \+\ 0x120\)\ ==\ 0\)\)$@2	+1
+local	Inst__collapseAlgebraic_00158264	local_a8	outputScaleDelta	INFERRED	out of tryOutputScaleExponent: exponent added to the output scale
