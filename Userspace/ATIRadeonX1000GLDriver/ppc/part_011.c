@@ -5067,10 +5067,10 @@ int evsFoldConstantMoves(compiler, shaderProgram)
   char readsX;
   char readsY;
   char readsZ;
-  char acStack_85 [13];
-  int iStack_78;
-  undefined4 uStack_70;
-  undefined4 uStack_60;
+  char readsWFrame [13];
+  int crBitsImage;
+  undefined4 savedSelectorEnumerant;
+  undefined4 zeroWord60;
   
   instructionCount = *(uint *)(shaderProgram + 0x14);
   if (instructionCount != 0) {
@@ -5090,12 +5090,12 @@ LAB_0007de3c:
       constantW = constantValue[3];
       constantY = constantValue[1];
       constantZ = constantValue[2];
-      uStack_60 = 0;
+      zeroWord60 = 0;
       xIsOne = constantX == 1.0;
       yIsOne = constantY == 1.0;
       wIsOne = constantW == 1.0;
       crBitsX = (uint)(byte)((constantX == 0.0) << 2 | (constantX != 0.0) << 1 | in_xer_so & 1);
-      iStack_78 = crBitsX << 0x1c;
+      crBitsImage = crBitsX << 0x1c;
       zIsOne = constantZ == 1.0;
       zIsZero = constantZ == 0.0;
       yIsZero = constantY == 0.0;
@@ -5114,7 +5114,7 @@ LAB_0007de3c:
           if (((*(int *)(symbol + instructions) == 0x879b) && (*(int *)(laterRecord + 4) == 2)) &&
              (*(int *)(laterRecord + 8) == *(int *)(currentInstruction + 8))) {
             laterHasX = *(int *)(laterRecord + 0xc) != 0;
-            crBitsByte = (byte)((uint)iStack_78 >> 0x18);
+            crBitsByte = (byte)((uint)crBitsImage >> 0x18);
             if (((laterHasX) || (!(bool)(crBitsByte >> 5 & 1))) || ((xIsOne || (passX = 0, constantX == -1.0)))
                ) {
               passX = 1;
@@ -5299,10 +5299,10 @@ LAB_0007e530:
           } while ((scanIndex != 0) && (!producerScanStop));
           if (producerFound) {
             extvsInstReadsTempComponents(shaderProgram + 0x1c,instructions + -0x74,*(undefined4 *)(instructions + -0x50),&readsX,
-                         &readsY,&readsZ,acStack_85);
+                         &readsY,&readsZ,readsWFrame);
             if (((((readsX == '\0') || (writeEnableX != 0)) && ((readsY == '\0' || (writeEnableY != 0))))
                 && ((readsZ == '\0' || (writeEnableZ != 0)))) &&
-               ((acStack_85[0] == '\0' || (writeEnableW != 0)))) {
+               ((readsWFrame[0] == '\0' || (writeEnableW != 0)))) {
               if (instructionIndex < instIndex) {
                 symbol = instIndex - instructionIndex;
                 movRecord = instructionIndex * 0x74;
@@ -5405,10 +5405,10 @@ LAB_0007e760: ;
                  ((*(int *)(currentInstruction + 0x58) == 2 &&
                   (laterRecord = *(int *)(movRecord + 8), *(int *)(currentInstruction + 0x5c) == laterRecord)))) {
                 extvsInstReadsTempComponents(shaderProgram + 0x1c,currentInstruction,laterRecord,&readsX,&readsY,&readsZ,
-                             acStack_85);
+                             readsWFrame);
                 if (((readsX == '\0') || (laneXLoaded != 0)) &&
                    ((((readsY == '\0' || (laneYLoaded != 0)) && ((readsZ == '\0' || (laneZLoaded != 0)))
-                     ) && ((acStack_85[0] == '\0' || (laneWLoaded != 0)))))) {
+                     ) && ((readsWFrame[0] == '\0' || (laneWLoaded != 0)))))) {
                   instructionCount = *(uint *)(shaderProgram + 0x14);
                 }
                 else {
@@ -8864,10 +8864,10 @@ LAB_0007e2d4:
         instIndex = instIndex + 1;
         instructions = movRecord + *(int *)(shaderProgram + 0x18);
         movRecord = movRecord + 0x74;
-        uStack_70 = selectorEnumerant;
+        savedSelectorEnumerant = selectorEnumerant;
         _memcpy(instructions + -0x74,instructions,0x74);
         instructionCount = *(uint *)(shaderProgram + 0x14);
-        selectorEnumerant = uStack_70;
+        selectorEnumerant = savedSelectorEnumerant;
       } while (instIndex < instructionCount);
     }
     instructionCount = instructionCount - 1;
