@@ -1,0 +1,15 @@
+use	Program__hasKillTexture	iVar1	inst	INFERRED	inst walked from param_1+0x98 list	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x98\);$	+1
+use	Program__hasKillTexture	iVar1	inst	INFERRED	inst walked from param_1+0x98 list	^\s*if\ \(\(\(\*\(uint\ \*\)\(iVar1\ \+\ 0x14\)\ \&\ 1\)\ !=\ 0\)\ \&\&\ \(\*\(int\ \*\)\(\*\(int\ \*\)\(iVar1\ \+\ 0x88\)\ \+\ 8\)\ ==\ 0x77\)\)$	+3
+use	Program__hasKillTexture	iVar2	nextInst	INFERRED	next at +8	^\s*iVar2\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x98\)\ \+\ 8\);$	+1
+use	Program__hasKillTexture	iVar2	nextInst	INFERRED	next at +8	^\s*if\ \(iVar2\ ==\ 0\)\ \{$	+1
+use	Program__hasKillTexture	iVar2	nextInst	INFERRED	next at +8	^\s*iVar1\ =\ iVar2;$	+2
+use	FUN_00130690	iVar1	hwRegister	INFERRED	allocated hardware register	^\s*iVar1\ =\ \(\(int\ \(\*\)\(\)\)FUN_0013061c\)\(param_1,param_2\);$	+1
+use	FUN_00130690	iVar1	hwRegister	INFERRED	allocated hardware register	^\s*iVar1\ =\ iVar1\ \+\ 0x20;$	+1
+use	FUN_00130690	iVar1	hwRegister	INFERRED	allocated hardware register	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)FUN_00130478\)\(param_1,iVar1\);$	+1
+use	FUN_00130690	iVar1	hwRegister	INFERRED	allocated hardware register	^\s*\(\(int\ \(\*\)\(\)\)FUN_00130444\)\(param_1,iVar1\);$	+2
+use	FUN_00130690	iVar1	newEntryIndex	INFERRED	previous count at +0x470	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x470\);$	+3
+use	FUN_0011379c	iVar1	opcodeFlagTable	INFERRED	vtable 0x16c table, stride 0x38	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(param_1\ \+\ 0x30c\)\ \+\ 0x16c\)\)\(\*\(int\ \*\*\)\(param_1\ \+\ 0x30c\),param_2\);$	+1
+use	FUN_0011379c	iVar1	opcodeFlagTable	INFERRED	vtable 0x16c table, stride 0x38	^\s*if\ \(\(iVar2\ !=\ 0\)\ \|\|\ \(uVar3\ =\ 1,\ \(\*\(uint\ \*\)\(iVar1\ \+\ iVar4\ \*\ 0x38\)\ \&\ 2\)\ ==\ 0\)\)\ \{$	+1
+use	FUN_0011379c	uVar3	result	INFERRED	1 when flag bit1 set and flagBit7 clear	^\s*if\ \(\(iVar2\ !=\ 0\)\ \|\|\ \(uVar3\ =\ 1,\ \(\*\(uint\ \*\)\(iVar1\ \+\ iVar4\ \*\ 0x38\)\ \&\ 2\)\ ==\ 0\)\)\ \{$	+2
+use	FUN_0011379c	uVar3	result	INFERRED	1 when flag bit1 set and flagBit7 clear	^\s*return\ uVar3;$	+1
+use	FUN_0011379c	iVar4	opcode	INFERRED	inst+0x88 -> +8	^\s*iVar4\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_2\ \+\ 0x88\)\ \+\ 8\);$	+3

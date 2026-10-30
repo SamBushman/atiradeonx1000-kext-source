@@ -492,19 +492,19 @@ int FUN_0012bb48(pass, block)
 int Program__hasKillTexture(param_1)
   int param_1;
 {
-  int iVar1;
-  int iVar2;
+  int inst;
+  int nextInst;
   
-  iVar1 = *(int *)(param_1 + 0x98);
-  iVar2 = *(int *)(*(int *)(param_1 + 0x98) + 8);
+  inst = *(int *)(param_1 + 0x98);
+  nextInst = *(int *)(*(int *)(param_1 + 0x98) + 8);
   while( true ) {
-    if (iVar2 == 0) {
+    if (nextInst == 0) {
       return 0;
     }
-    if (((*(uint *)(iVar1 + 0x14) & 1) != 0) && (*(int *)(*(int *)(iVar1 + 0x88) + 8) == 0x77))
+    if (((*(uint *)(inst + 0x14) & 1) != 0) && (*(int *)(*(int *)(inst + 0x88) + 8) == 0x77))
     break;
-    iVar1 = iVar2;
-    iVar2 = *(int *)(iVar2 + 8);
+    inst = nextInst;
+    nextInst = *(int *)(nextInst + 8);
   }
   return 1;
 }
@@ -3304,23 +3304,24 @@ int FUN_00130690(program, param_2)
   int program;
   int param_2;
 {
-  int iVar1;
+  int newEntryIndex;
+  int hwRegister;
   int callResult;
   
-  iVar1 = ((int (*)())FUN_0013061c)(program,param_2);
+  hwRegister = ((int (*)())FUN_0013061c)(program,param_2);
   if (param_2 == 1) {
-    iVar1 = iVar1 + 0x20;
+    hwRegister = hwRegister + 0x20;
   }
-  callResult = ((int (*)())FUN_00130478)(program,iVar1);
+  callResult = ((int (*)())FUN_00130478)(program,hwRegister);
   if (callResult == 0) {
     Compiler__fail(*(undefined4 *)(program + 8),4);
   }
-  ((int (*)())Program__markHwRegUsed)(program,iVar1);
-  *(int *)(*(int *)(program + 0x470) * 4 + *(int *)(program + 0x458)) = iVar1;
+  ((int (*)())Program__markHwRegUsed)(program,hwRegister);
+  *(int *)(*(int *)(program + 0x470) * 4 + *(int *)(program + 0x458)) = hwRegister;
   *(int *)(*(int *)(program + 0x470) * 4 + *(int *)(program + 0x45c)) = param_2;
-  iVar1 = *(int *)(program + 0x470);
-  *(int *)(program + 0x470) = iVar1 + 1;
-  return iVar1;
+  newEntryIndex = *(int *)(program + 0x470);
+  *(int *)(program + 0x470) = newEntryIndex + 1;
+  return newEntryIndex;
 }
 
 /* FUN_00130728 @ 0x130728 (164 bytes) */
