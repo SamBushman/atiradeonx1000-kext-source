@@ -1216,29 +1216,29 @@ LAB_00193490:
 }
 
 /* R520SchedModel__vslot21 @ 0x193944 (112 bytes) */
-int R520SchedModel__vslot21(this, param_2, param_3, param_4)
+int R520SchedModel__vslot21(this, hwLimits, inst, latencyOut)
   undefined4 this;
-  int *param_2;
-  int param_3;
-  undefined4 *param_4;
+  int *hwLimits;
+  int inst;
+  undefined4 *latencyOut;
 {
   int callResult;
-  undefined4 uVar2;
+  undefined4 result;
   undefined4 in_r7;
   undefined4 in_r8;
-  int iVar3;
+  int opcode;
   
-  iVar3 = *(int *)(*(int *)(param_3 + 0x88) + 8);
-  callResult = (**(code **)(*param_2 + 0x24))
-                    (param_2,param_2,param_3,param_4,in_r7,in_r8,*(int *)(param_3 + 0x88));
-  if ((callResult == 0) || (3 < iVar3 - 0x9eU)) {
-    uVar2 = 0;
+  opcode = *(int *)(*(int *)(inst + 0x88) + 8);
+  callResult = (**(code **)(*hwLimits + 0x24))
+                    (hwLimits,hwLimits,inst,latencyOut,in_r7,in_r8,*(int *)(inst + 0x88));
+  if ((callResult == 0) || (3 < opcode - 0x9eU)) {
+    result = 0;
   }
   else {
-    uVar2 = 1;
-    *param_4 = 2;
+    result = 1;
+    *latencyOut = 2;
   }
-  return uVar2;
+  return result;
 }
 
 /* R520SchedModel__vslot22 @ 0x1939b4 (76 bytes) */

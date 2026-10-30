@@ -793,37 +793,37 @@ int FUN_0017cd18(ctx)
 }
 
 /* FUN_0017cdbc @ 0x17cdbc (192 bytes) */
-int FUN_0017cdbc(param_1)
-  int param_1;
+int FUN_0017cdbc(ctx)
+  int ctx;
 {
   int callResult;
   int loopIndex;
-  undefined4 uVar3;
-  undefined4 uVar4;
+  undefined4 candidateOperand;
+  undefined4 zeroValueNumber;
   
   loopIndex = 1;
-  callResult = Compiler__valueNumberForExpr(*(undefined4 *)(param_1 + 0x238),0);
-  uVar4 = *(undefined4 *)(callResult + 4);
+  callResult = Compiler__valueNumberForExpr(*(undefined4 *)(ctx + 0x238),0);
+  zeroValueNumber = *(undefined4 *)(callResult + 4);
   do {
-    uVar3 = 2;
+    candidateOperand = 2;
     do {
-      callResult = Inst__writtenLanesAllMatchValue(param_1,uVar4,loopIndex);
+      callResult = Inst__writtenLanesAllMatchValue(ctx,zeroValueNumber,loopIndex);
       if (callResult != 0) {
-        callResult = FUN_0017737c(param_1,0,uVar3);
+        callResult = FUN_0017737c(ctx,0,candidateOperand);
         if (callResult == 0) {
-          ((int (*)())FUN_0017c244)(param_1,uVar3);
+          ((int (*)())FUN_0017c244)(ctx,candidateOperand);
         }
         else {
-          FUN_00177548(param_1);
+          FUN_00177548(ctx);
         }
-        ValueKey__rebuild(param_1);
+        ValueKey__rebuild(ctx);
         return 1;
       }
       loopIndex = loopIndex + 1;
       if (2 < loopIndex) {
         return 0;
       }
-      uVar3 = 1;
+      candidateOperand = 1;
     } while (loopIndex != 1);
   } while( true );
 }

@@ -4089,26 +4089,26 @@ LAB_0018da08: ;
 }
 
 /* SchedModel__instructionFitsAlone @ 0x18da48 (116 bytes) */
-int SchedModel__instructionFitsAlone(param_1, param_2)
-  undefined4 param_1;
-  undefined4 param_2;
+int SchedModel__instructionFitsAlone(schedModel, inst)
+  undefined4 schedModel;
+  undefined4 inst;
 {
   int callResult;
-  undefined4 uVar2;
-  undefined4 local_68;
-  undefined4 local_64;
-  undefined1 auStack_60 [8];
-  undefined1 auStack_58 [72];
+  undefined4 freeSlots;
+  undefined4 placedSlotA;
+  undefined4 placedSlotB;
+  undefined1 freeSlotCounts [8];
+  undefined1 packState [72];
   
-  local_64 = 0xffffffff;
-  local_68 = 0xffffffff;
-  ((int (*)())PackState__reset)(auStack_58);
-  callResult = ((int (*)())PackState__tryPlaceInstructionSources)(param_1,&local_68,&local_64,auStack_58,param_2);
-  uVar2 = 0;
+  placedSlotB = 0xffffffff;
+  placedSlotA = 0xffffffff;
+  ((int (*)())PackState__reset)(packState);
+  callResult = ((int (*)())PackState__tryPlaceInstructionSources)(schedModel,&placedSlotA,&placedSlotB,packState,inst);
+  freeSlots = 0;
   if (callResult != 0) {
-    uVar2 = ((int (*)())PackState__countFreeSlots)(auStack_58,auStack_60);
+    freeSlots = ((int (*)())PackState__countFreeSlots)(packState,freeSlotCounts);
   }
-  return uVar2;
+  return freeSlots;
 }
 
 /* R300SchedModel__tryRewriteConsumerSelects @ 0x18dabc (1680 bytes) */

@@ -1,0 +1,24 @@
+local	FUN_00179a34	param_2	lane	INFERRED	lane / source index
+local	FUN_00179a34	uVar1	word0xb8Flags	INFERRED	inst +0xb8 modifier word
+local	FUN_00179a34	uVar5	word0xd0Flags	INFERRED	inst +0xd0 modifier word
+local	FUN_001778e0	bVar1	lastLane	INFERRED	lane == 3
+local	FUN_001778e0	iVar2	laneRecord	INFERRED	new lane info record (FUN_00174ce0) stored at ctx+0x40+lane*4
+local	FUN_001778e0	uVar3	firstLaneRecord	INFERRED	lane record allocated when none existed (then replaced)
+local	FUN_001778e0	iVar4	laneWordPtr	INFERRED	walks ctx + lane*4
+local	FUN_001778e0	dVar6	outputScale	INFERRED	scale factor from the instruction's output scale exponent (inst +0x124)
+local	FUN_0017ad24	param_2	fillValue	INFERRED	word replicated into all four lanes of the constant vec4
+local	FUN_0017ad24	param_3	operandIndex	INFERRED	selects the swizzle table entry and the operand flagged at inst +0x9c
+local	FUN_0017ad24	uVar3	swizzle	INFERRED	swizzle word from the PTR_DAT_001e8b64 table
+local	FUN_0017ad24	local_38	fillVec4	INFERRED	vec4 constant {fillValue x4} passed to FUN_0017a130 (address-taken, whole variable)
+local	FUN_0017cdbc	param_1	ctx	INFERRED	pass context (+0x238 compiler)
+local	FUN_0017cdbc	uVar3	candidateOperand	INFERRED	operand index tried (2 first, then 1)
+local	FUN_0017cdbc	uVar4	zeroValueNumber	INFERRED	value number of constant 0 (valueNumberForExpr(0)+4)
+use	FUN_00179a34	iVar2	lanesEqual	INFERRED	ValueKey__operandLanesEqual(ctx, lane, 1, 2)	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)FUN_00179608\)\(param_1,param_2,1,2\);$	+2
+use	FUN_00179a34	iVar2	valueNumber	INFERRED	lane value number at ctx+0x178	^\s*iVar2\ =\ \*\(int\ \*\)\(param_2\ \*\ 4\ \+\ param_1\ \+\ 0x178\);$	+3
+use	FUN_00179a34	iVar2	selectedOperand	INFERRED	1 or 2 by the sign of the constant	^\s*iVar2\ =\ 1;$	+1
+use	FUN_00179a34	iVar2	selectedOperand	INFERRED	1 or 2 by the sign of the constant	^\s*iVar2\ =\ 2;$	+1
+use	FUN_00179a34	iVar2	selectedOperand	INFERRED	1 or 2 by the sign of the constant	^\s*\*\(undefined4\ \*\)\(\(iVar2\ \*\ 4\ \+\ param_2\)\ \*\ 4\ \+\ param_1\ \+\ 0x168\)\);$	+1
+use	FUN_0017ad24	iVar1	fillOffset	INFERRED	byte offset into fillVec4	^\s*iVar1\ =\ 0;$	+1
+use	FUN_0017ad24	iVar1	fillOffset	INFERRED	byte offset into fillVec4	^\s*\*\(undefined4\ \*\)\(iVar1\ \+\ \(int\)local_38\)\ =\ param_2;$	+2
+use	FUN_0017ad24	iVar1	inst	INFERRED	current instruction ctx+0xb0	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xb0\);$	+4
+use	FUN_0017ad24	iVar1	inst	INFERRED	current instruction ctx+0xb0	^\s*FUN_000e7738\(uVar4,iVar1,iVar2\);$	+1
