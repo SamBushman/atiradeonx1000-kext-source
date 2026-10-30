@@ -63,9 +63,9 @@ int IRKill2__ctor_107f38(this, opcode, compiler)
 }
 
 /* IRCmp2__ctor_107fd0 @ 0x107fd0 (92 bytes) */
-int IRCmp2__ctor_107fd0(this, param_2, compiler)
+int IRCmp2__ctor_107fd0(this, unusedArg2, compiler)
   undefined4 *this;
-  undefined4 param_2;
+  undefined4 unusedArg2;
   int compiler;
 {
   undefined *vtable;

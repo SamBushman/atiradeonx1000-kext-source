@@ -1298,12 +1298,12 @@ int HwLimits__vslot9_failNotSupported()
 }
 
 /* Program__emitLoadVertexAttr @ 0x10de6c (140 bytes) */
-int Program__emitLoadVertexAttr(param_1, program, param_3, vertexAttrWord, param_5, insertRef)
-  undefined4 param_1;
+int Program__emitLoadVertexAttr(unusedArg1, program, unusedArg3, vertexAttrWord, unusedArg5, insertRef)
+  undefined4 unusedArg1;
   int program;
-  undefined4 param_3;
+  undefined4 unusedArg3;
   uint *vertexAttrWord;
-  undefined4 param_5;
+  undefined4 unusedArg5;
   undefined4 insertRef;
 {
   uint attrWordCopy;
@@ -1619,13 +1619,13 @@ int Index__scaleForMode(mode, value)
 }
 
 /* Vslot__outZeroReturnZero @ 0x10e55c (16 bytes) */
-int Vslot__outZeroReturnZero(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 *param_4;
+int Vslot__outZeroReturnZero(unusedArg1, unusedArg2, unusedArg3, out)
+  undefined4 unusedArg1;
+  undefined4 unusedArg2;
+  undefined4 unusedArg3;
+  undefined4 *out;
 {
-  *param_4 = 0;
+  *out = 0;
   return 0;
 }
 
@@ -1662,14 +1662,14 @@ int Program__assignHwRegsToVertexLoads(backend, program)
 int IRInst__query68AndWord4fNotIn6_7(outputInst)
   int *outputInst;
 {
-  int iVar1;
-  undefined4 uVar2;
+  int query68;
+  undefined4 result;
   
-  iVar1 = (**(code **)(*outputInst + 0x68))(outputInst);
-  if ((iVar1 == 0) || (uVar2 = 1, outputInst[0x4f] - 6U < 2)) {
-    uVar2 = 0;
+  query68 = (**(code **)(*outputInst + 0x68))(outputInst);
+  if ((query68 == 0) || (result = 1, outputInst[0x4f] - 6U < 2)) {
+    result = 0;
   }
-  return uVar2;
+  return result;
 }
 
 /* IRInst__query68AndWord4fIs18 @ 0x10e690 (88 bytes) */
@@ -1881,14 +1881,14 @@ int Program__callBackendFinish(program)
 }
 
 /* PsBackend__bindExportRegisters @ 0x10ead4 (484 bytes) */
-int PsBackend__bindExportRegisters(hwState, program, param_3, param_4, param_5, param_6, param_7)
+int PsBackend__bindExportRegisters(hwState, program, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
   int hwState;
   int program;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+  undefined4 unusedArg3;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
 {
   int otherExportInst;
   int outputBaseC;
@@ -2109,14 +2109,14 @@ int KhanPs__vslot87_assignInterpolatorBindings(this, program)
 }
 
 /* PsBackend__assignInterpolatorRegisters @ 0x10ef68 (1052 bytes) */
-int PsBackend__assignInterpolatorRegisters(psBackend, program, param_3, param_4, param_5, param_6, param_7)
+int PsBackend__assignInterpolatorRegisters(psBackend, program, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
   int *psBackend;
   int program;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+  undefined4 unusedArg3;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
 {
   int loadInst;
   int isInterpLoadB;

@@ -65,12 +65,12 @@ int KhanPs__vslot62_lookupTableEntry(this, param_2)
 }
 
 /* KhanPs__vslot90_isProgramKind1 @ 0x12801c (20 bytes) */
-int KhanPs__vslot90_isProgramKind1(this, param_2, param_3)
+int KhanPs__vslot90_isProgramKind1(this, unusedArg2, program)
   undefined4 this;
-  undefined4 param_2;
-  int param_3;
+  undefined4 unusedArg2;
+  int program;
 {
-  return *(int *)(param_3 + 0x138) == 1;
+  return *(int *)(program + 0x138) == 1;
 }
 
 /* KhanPs__getOpcodeTraits @ 0x128030 (28 bytes) */
@@ -165,13 +165,13 @@ int KhanPs__vslot35_publishLimitsAndBindingTables(this, compiler, limitsBlob)
 }
 
 /* KhanPs__vslot8_failNotSupported @ 0x1281b0 (56 bytes) */
-int KhanPs__vslot8_failNotSupported(this, param_2, param_3, param_4, param_5, param_6, compiler)
+int KhanPs__vslot8_failNotSupported(this, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unusedArg6, compiler)
   undefined4 this;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
+  undefined4 unusedArg2;
+  undefined4 unusedArg3;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
   int compiler;
 {
   if (*(int *)(compiler + 0x6c4) != 0) {
@@ -464,19 +464,19 @@ int KhanPs__vslot59_tryEncodeSourceConstant(this, inst, srcIndex, laneSwizzle, c
 }
 
 /* KhanPs__vslot9_createCompareInst @ 0x128930 (420 bytes) */
-int KhanPs__vslot9_createCompareInst(this, compareKind, srcRegA, srcSwizzleA, srcRegB, srcSwizzleB, param_7, param_8, param_9, compiler)
+int KhanPs__vslot9_createCompareInst(this, compareKind, srcRegA, srcSwizzleA, srcRegB, srcSwizzleB, sourceTokenWord, sourceTokens, insertAfter, compiler)
   undefined4 this;
   int compareKind;
   int srcRegA;
   int srcSwizzleA;
   int srcRegB;
   int srcSwizzleB;
-  undefined4 param_7;
-  int param_8;
-  undefined4 param_9;
+  undefined4 sourceTokenWord;
+  int sourceTokens;
+  undefined4 insertAfter;
   int compiler;
 {
-  unsigned int ghidra_home[8] = { this, compareKind, srcRegA, srcSwizzleA, srcRegB, srcSwizzleB, param_7, param_8 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[8] = { this, compareKind, srcRegA, srcSwizzleA, srcRegB, srcSwizzleB, sourceTokenWord, sourceTokens };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   int callResult;
   undefined4 swizzleHandle;
   int operandRecord;
@@ -486,7 +486,7 @@ int KhanPs__vslot9_createCompareInst(this, compareKind, srcRegA, srcSwizzleA, sr
   
   program = *(undefined4 *)(compiler + COMP_currentProgram);
   compareCondition = *(int *)(PTR_DAT_001e8b84 + compareKind * 4);
-  (*(unsigned int *)((unsigned char *)ghidra_home + 24)) = param_7;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 24)) = sourceTokenWord;
   callResult = IRInst__create(0x8b,compiler);
   swizzleHandle = Program__registerFileOfIlType(program,srcSwizzleA);
   operandRecord = IRInst__getOperandRecord(callResult,1);
@@ -496,8 +496,8 @@ int KhanPs__vslot9_createCompareInst(this, compareKind, srcRegA, srcSwizzleA, sr
   operandRecord = IRInst__getOperandRecord(callResult,2);
   *(undefined4 *)(operandRecord + 0xc) = swizzleHandle;
   *(int *)(operandRecord + 8) = srcRegB;
-  Program__applySourceTokenToOperand(program,&(*(unsigned int *)((unsigned char *)ghidra_home + 24)),**(undefined4 **)(param_8 + 0x6c),1,callResult);
-  Program__applySourceTokenToOperand(program,&(*(unsigned int *)((unsigned char *)ghidra_home + 24)),*(undefined4 *)(*(int *)(param_8 + 0x6c) + 4),2,callResult);
+  Program__applySourceTokenToOperand(program,&(*(unsigned int *)((unsigned char *)ghidra_home + 24)),**(undefined4 **)(sourceTokens + 0x6c),1,callResult);
+  Program__applySourceTokenToOperand(program,&(*(unsigned int *)((unsigned char *)ghidra_home + 24)),*(undefined4 *)(*(int *)(sourceTokens + 0x6c) + 4),2,callResult);
   if ((srcRegA == srcRegB) && (srcSwizzleA == srcSwizzleB)) {
     if ((*(uint *)(callResult + 0xb8) & 1) != (*(uint *)(callResult + 0xd0) & 1)) {
       if (((*(uint *)(callResult + 0xb8) & 2) == 0) && ((*(uint *)(callResult + 0xd0) & 2) == 0)) {
@@ -597,14 +597,14 @@ int KhanPs__vslot5_materializeSpecialRegister(this, registerKind, compiler)
 }
 
 /* KhanPs__vslot75_registerConstantMultiples @ 0x128d7c (596 bytes) */
-int KhanPs__vslot75_registerConstantMultiples(this, constRecord, compiler, param_4, param_5, param_6, param_7)
+int KhanPs__vslot75_registerConstantMultiples(this, constRecord, compiler, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
   undefined4 this;
   float *constRecord;
   undefined4 compiler;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
 {
   bool moreMultiples;
   int exprRecord2;
@@ -860,14 +860,14 @@ int KhanVs__vslot73_noOp()
 }
 
 /* KhanVs__vslot99_matchesRegisterMapEntry @ 0x129448 (48 bytes) */
-int KhanVs__vslot99_matchesRegisterMapEntry(this, param_2, param_3)
+int KhanVs__vslot99_matchesRegisterMapEntry(this, registerIndex, program)
   undefined4 this;
-  uint param_2;
-  int param_3;
+  uint registerIndex;
+  int program;
 {
-  return *(byte *)(param_2 * 0xc +
-                   *(int *)(*(int *)(*(int *)(param_3 + 8) + 0x52c) * 4 + *(int *)(param_3 + 8) +
-                           0x524) + 0x10a) == param_2;
+  return *(byte *)(registerIndex * 0xc +
+                   *(int *)(*(int *)(*(int *)(program + 8) + 0x52c) * 4 + *(int *)(program + 8) +
+                           0x524) + 0x10a) == registerIndex;
 }
 
 /* KhanVs__vslot35_publishLimitsAndBindingTables @ 0x129478 (504 bytes) */
@@ -998,13 +998,13 @@ int KhanVs__getOpcodeTraits()
 }
 
 /* FudoVs__vslot8_failNotSupported @ 0x129694 (56 bytes) */
-int FudoVs__vslot8_failNotSupported(this, param_2, param_3, param_4, param_5, param_6, compiler)
+int FudoVs__vslot8_failNotSupported(this, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unusedArg6, compiler)
   undefined4 this;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
+  undefined4 unusedArg2;
+  undefined4 unusedArg3;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
   int compiler;
 {
   if (*(int *)(compiler + 0x6c4) != 0) {
@@ -1054,17 +1054,17 @@ int KhanVs__vslot22_appendRegisterBindingWithLaneArrays(this, laneValues, laneCo
 }
 
 /* KhanVs__vslot21_appendRegisterBinding @ 0x129748 (156 bytes) */
-int KhanVs__vslot21_appendRegisterBinding(this, regIndex, bindingKind, param_4, laneSelectWord, param_6, param_7, param_8, param_9, param_10)
+int KhanVs__vslot21_appendRegisterBinding(this, regIndex, bindingKind, recordWord0xc, laneSelectWord, conditionFlag, unusedArg7, unusedArg8, recordWord0x18, recordWord0x10)
   int this;
   undefined4 regIndex;
   int bindingKind;
-  undefined4 param_4;
+  undefined4 recordWord0xc;
   undefined4 laneSelectWord;
-  int param_6;
-  undefined4 param_7;
-  undefined4 param_8;
-  undefined4 param_9;
-  undefined4 param_10;
+  int conditionFlag;
+  undefined4 unusedArg7;
+  undefined4 unusedArg8;
+  undefined4 recordWord0x18;
+  undefined4 recordWord0x10;
 {
   int record;
   
@@ -1073,7 +1073,7 @@ int KhanVs__vslot21_appendRegisterBinding(this, regIndex, bindingKind, param_4, 
   record = this + record * 0x34 + 0xd60;
   *(int *)(record + 8) = bindingKind;
   *(undefined4 *)(record + 0x1c) = 1;
-  *(undefined4 *)(record + 0xc) = param_4;
+  *(undefined4 *)(record + 0xc) = recordWord0xc;
   *(undefined1 *)(record + 0x37) = (undefined1)regIndex;
   *(undefined1 *)(record + 0x34) = (undefined1)regIndex;
   *(undefined1 *)(record + 0x35) = (undefined1)regIndex;
@@ -1090,9 +1090,9 @@ int KhanVs__vslot21_appendRegisterBinding(this, regIndex, bindingKind, param_4, 
     *(char *)(record + 0x3a) = (char)((uint)laneSelectWord >> 8);
     *(char *)(record + 0x3b) = (char)laneSelectWord;
   }
-  *(undefined4 *)(record + 0x10) = param_10;
-  *(uint *)(record + 0x24) = (uint)(param_6 == 0);
-  *(undefined4 *)(record + 0x18) = param_9;
+  *(undefined4 *)(record + 0x10) = recordWord0x10;
+  *(uint *)(record + 0x24) = (uint)(conditionFlag == 0);
+  *(undefined4 *)(record + 0x18) = recordWord0x18;
   return;
 }
 
@@ -1275,13 +1275,13 @@ LAB_00129b30:
 }
 
 /* KhanVs__vslot71_canCombineSources @ 0x129b48 (632 bytes) */
-int KhanVs__vslot71_canCombineSources(this, inst, replacedSourceIndex, inst2, param_5, param_6, compiler)
+int KhanVs__vslot71_canCombineSources(this, inst, replacedSourceIndex, inst2, unusedArg5, unusedArg6, compiler)
   undefined4 this;
   int *inst;
   int replacedSourceIndex;
   int *inst2;
-  undefined4 param_5;
-  undefined4 param_6;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
   int compiler;
 {
   int slotIndex;
@@ -1662,14 +1662,14 @@ int KhanVs__vslot89_assignLoadBindings(this, program)
 }
 
 /* KhanVs__vslot75_registerConstantMultiples @ 0x12a3c0 (248 bytes) */
-int KhanVs__vslot75_registerConstantMultiples(this, constRecord, compiler, param_4, param_5, param_6, param_7)
+int KhanVs__vslot75_registerConstantMultiples(this, constRecord, compiler, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
   undefined4 this;
   int constRecord;
   undefined4 compiler;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
 {
   undefined4 recordValueBits;
   byte kindFlags;

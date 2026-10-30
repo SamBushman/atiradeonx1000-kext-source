@@ -2679,115 +2679,115 @@ double mulFloatZeroAnnihilates(double fparam_1,double fparam_2)
 }
 
 /* OpcodeSetup__mode9 @ 0x11358c (28 bytes) */
-int OpcodeSetup__mode9(param_1, param_2)
-  int param_1;
-  int param_2;
+int OpcodeSetup__mode9(setup, inst)
+  int setup;
+  int inst;
 {
-  *(undefined4 *)(param_2 + 0x84) = 3;
-  *(undefined4 *)(param_2 + 0x80) = 1;
-  *(undefined4 *)(param_1 + 4) = 9;
+  *(undefined4 *)(inst + 0x84) = 3;
+  *(undefined4 *)(inst + 0x80) = 1;
+  *(undefined4 *)(setup + 4) = 9;
   return;
 }
 
 /* OpcodeSetup__mode6 @ 0x1135a8 (24 bytes) */
-int OpcodeSetup__mode6(param_1, param_2)
-  int param_1;
-  int param_2;
+int OpcodeSetup__mode6(setup, inst)
+  int setup;
+  int inst;
 {
-  *(undefined4 *)(param_2 + 0x84) = 1;
-  *(undefined4 *)(param_2 + 0x80) = 1;
-  *(undefined4 *)(param_1 + 4) = 6;
+  *(undefined4 *)(inst + 0x84) = 1;
+  *(undefined4 *)(inst + 0x80) = 1;
+  *(undefined4 *)(setup + 4) = 6;
   return;
 }
 
 /* OpcodeSetup__mode1 @ 0x1135c0 (44 bytes) */
-int OpcodeSetup__mode1(param_1, param_2)
-  int param_1;
-  int param_2;
+int OpcodeSetup__mode1(setup, inst)
+  int setup;
+  int inst;
 {
-  *(undefined4 *)(param_2 + 0x84) = 0;
-  *(undefined4 *)(param_2 + 300) = 0;
-  *(undefined4 *)(param_2 + 0x80) = 1;
-  *(uint *)(param_2 + 0x14) = *(uint *)(param_2 + 0x14) | 0x18000;
-  *(undefined4 *)(param_1 + 4) = 1;
+  *(undefined4 *)(inst + 0x84) = 0;
+  *(undefined4 *)(inst + 300) = 0;
+  *(undefined4 *)(inst + 0x80) = 1;
+  *(uint *)(inst + 0x14) = *(uint *)(inst + 0x14) | 0x18000;
+  *(undefined4 *)(setup + 4) = 1;
   return;
 }
 
 /* OpcodeSetup__mode7 @ 0x1135ec (80 bytes) */
-int OpcodeSetup__mode7(param_1, inst, param_3)
-  int param_1;
+int OpcodeSetup__mode7(setup, inst, compiler)
+  int setup;
   int inst;
-  int param_3;
+  int compiler;
 {
   *(undefined4 *)(inst + 0x84) = 1;
   *(undefined4 *)(inst + 0x80) = 1;
   *(uint *)(inst + 0x14) = *(uint *)(inst + 0x14) | 0x18;
-  Program__addInst(*(undefined4 *)(param_3 + 0x6c4),inst);
-  *(undefined4 *)(param_1 + 4) = 7;
+  Program__addInst(*(undefined4 *)(compiler + 0x6c4),inst);
+  *(undefined4 *)(setup + 4) = 7;
   return;
 }
 
 /* OpcodeSetup__mode8 @ 0x11363c (84 bytes) */
-int OpcodeSetup__mode8(param_1, inst, param_3)
-  int param_1;
+int OpcodeSetup__mode8(setup, inst, compiler)
+  int setup;
   int inst;
-  int param_3;
+  int compiler;
 {
   *(undefined4 *)(inst + 0x80) = 0;
   *(uint *)(inst + 0x14) = *(uint *)(inst + 0x14) | 0x18;
   *(undefined4 *)(inst + 0x84) = 1;
-  Program__addInst(*(undefined4 *)(param_3 + 0x6c4),inst);
-  *(undefined4 *)(param_1 + 4) = 8;
+  Program__addInst(*(undefined4 *)(compiler + 0x6c4),inst);
+  *(undefined4 *)(setup + 4) = 8;
   return;
 }
 
 /* OpcodeSetup__mode5 @ 0x113690 (84 bytes) */
-int OpcodeSetup__mode5(param_1, inst, param_3)
-  int param_1;
+int OpcodeSetup__mode5(setup, inst, compiler)
+  int setup;
   int inst;
-  int param_3;
+  int compiler;
 {
   *(undefined4 *)(inst + 0x84) = 1;
   *(undefined4 *)(inst + 0x80) = 1;
   *(uint *)(inst + 0x14) = *(uint *)(inst + 0x14) | 0x18018;
-  Program__addInst(*(undefined4 *)(param_3 + 0x6c4),inst);
-  *(undefined4 *)(param_1 + 4) = 5;
+  Program__addInst(*(undefined4 *)(compiler + 0x6c4),inst);
+  *(undefined4 *)(setup + 4) = 5;
   return;
 }
 
 /* OpcodeSetup__mode3 @ 0x1136e4 (40 bytes) */
-int OpcodeSetup__mode3(param_1, param_2)
-  int param_1;
-  int param_2;
+int OpcodeSetup__mode3(setup, inst)
+  int setup;
+  int inst;
 {
-  *(undefined4 *)(param_2 + 0x84) = 1;
-  *(undefined4 *)(param_2 + 0x80) = 1;
-  *(uint *)(param_2 + 0x14) = *(uint *)(param_2 + 0x14) | 0x18000;
-  *(undefined4 *)(param_1 + 4) = 3;
+  *(undefined4 *)(inst + 0x84) = 1;
+  *(undefined4 *)(inst + 0x80) = 1;
+  *(uint *)(inst + 0x14) = *(uint *)(inst + 0x14) | 0x18000;
+  *(undefined4 *)(setup + 4) = 3;
   return;
 }
 
 /* OpcodeSetup__mode2 @ 0x11370c (40 bytes) */
-int OpcodeSetup__mode2(param_1, param_2)
-  int param_1;
-  int param_2;
+int OpcodeSetup__mode2(setup, inst)
+  int setup;
+  int inst;
 {
-  *(undefined4 *)(param_2 + 0x84) = 0;
-  *(undefined4 *)(param_2 + 0x80) = 0;
-  *(uint *)(param_2 + 0x14) = *(uint *)(param_2 + 0x14) | 0x18000;
-  *(undefined4 *)(param_1 + 4) = 2;
+  *(undefined4 *)(inst + 0x84) = 0;
+  *(undefined4 *)(inst + 0x80) = 0;
+  *(uint *)(inst + 0x14) = *(uint *)(inst + 0x14) | 0x18000;
+  *(undefined4 *)(setup + 4) = 2;
   return;
 }
 
 /* OpcodeTraits__instFlagBit2_113734 @ 0x113734 (104 bytes) */
-int OpcodeTraits__instFlagBit2_113734(compiler, inst, param_3, destDescriptor, param_5, foldedResult, param_7)
+int OpcodeTraits__instFlagBit2_113734(compiler, inst, unusedArg3, destDescriptor, unusedArg5, foldedResult, unusedArg7)
   int compiler;
   int inst;
-  undefined4 param_3;
+  undefined4 unusedArg3;
   undefined4 destDescriptor;
-  undefined4 param_5;
+  undefined4 unusedArg5;
   undefined4 foldedResult;
-  undefined4 param_7;
+  undefined4 unusedArg7;
 {
   uint flagBit2;
   int *targetObject;

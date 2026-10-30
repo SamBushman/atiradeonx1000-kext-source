@@ -504,74 +504,74 @@ int IRLoadConst__vslot57(this, compiler)
 }
 
 /* IRStartMakeCall__ctor_10a7d4 @ 0x10a7d4 (104 bytes) */
-int IRStartMakeCall__ctor_10a7d4(this, param_2, param_3, compiler)
+int IRStartMakeCall__ctor_10a7d4(this, ctorWord4b, ctorWord4c, compiler)
   undefined4 *this;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 ctorWord4b;
+  undefined4 ctorWord4c;
   undefined4 compiler;
 {
   undefined *vtable;
   
   IRPseudo__ctor(this,0x90,compiler);
   vtable = PTR_DAT_001e8c18;
-  this[0x4b] = param_2;
+  this[0x4b] = ctorWord4b;
   this[5] = this[5] | 0x100;
   *this = vtable + 8;
-  this[0x4c] = param_3;
+  this[0x4c] = ctorWord4c;
   return;
 }
 
 /* IRStartMakeCall__ctor_10a83c @ 0x10a83c (104 bytes) */
-int IRStartMakeCall__ctor_10a83c(this, param_2, param_3, compiler)
+int IRStartMakeCall__ctor_10a83c(this, ctorWord4b, ctorWord4c, compiler)
   undefined4 *this;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 ctorWord4b;
+  undefined4 ctorWord4c;
   undefined4 compiler;
 {
   undefined *vtable;
   
   IRPseudo__ctor(this,0x90,compiler);
   vtable = PTR_DAT_001e8c18;
-  this[0x4b] = param_2;
+  this[0x4b] = ctorWord4b;
   this[5] = this[5] | 0x100;
   *this = vtable + 8;
-  this[0x4c] = param_3;
+  this[0x4c] = ctorWord4c;
   return;
 }
 
 /* IRStartCallRoutine__ctor_10a8a4 @ 0x10a8a4 (104 bytes) */
-int IRStartCallRoutine__ctor_10a8a4(this, param_2, param_3, compiler)
+int IRStartCallRoutine__ctor_10a8a4(this, ctorWord4b, ctorWord4c, compiler)
   undefined4 *this;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 ctorWord4b;
+  undefined4 ctorWord4c;
   undefined4 compiler;
 {
   undefined *vtable;
   
   IRPseudo__ctor(this,0x8f,compiler);
   vtable = PTR_DAT_001e8c4c;
-  this[0x4b] = param_2;
+  this[0x4b] = ctorWord4b;
   this[5] = this[5] | 0x100;
   *this = vtable + 8;
-  this[0x4c] = param_3;
+  this[0x4c] = ctorWord4c;
   return;
 }
 
 /* IRStartCallRoutine__ctor_10a90c @ 0x10a90c (104 bytes) */
-int IRStartCallRoutine__ctor_10a90c(this, param_2, param_3, compiler)
+int IRStartCallRoutine__ctor_10a90c(this, ctorWord4b, ctorWord4c, compiler)
   undefined4 *this;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 ctorWord4b;
+  undefined4 ctorWord4c;
   undefined4 compiler;
 {
   undefined *vtable;
   
   IRPseudo__ctor(this,0x8f,compiler);
   vtable = PTR_DAT_001e8c4c;
-  this[0x4b] = param_2;
+  this[0x4b] = ctorWord4b;
   this[5] = this[5] | 0x100;
   *this = vtable + 8;
-  this[0x4c] = param_3;
+  this[0x4c] = ctorWord4c;
   return;
 }
 

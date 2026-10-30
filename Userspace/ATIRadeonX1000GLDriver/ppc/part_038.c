@@ -643,11 +643,11 @@ int Object__sumWords4And8(param_1)
 }
 
 /* Object__setWord0 @ 0x1272cc (8 bytes) */
-int Object__setWord0(param_1, param_2)
-  undefined4 *param_1;
-  undefined4 param_2;
+int Object__setWord0(object, value)
+  undefined4 *object;
+  undefined4 value;
 {
-  *param_1 = param_2;
+  *object = value;
   return;
 }
 
@@ -1156,17 +1156,17 @@ int VRegInfo__new_127994(compiler, ownerArg)
 }
 
 /* KhanPs__vslot21_appendRegisterBinding @ 0x127e48 (132 bytes) */
-int KhanPs__vslot21_appendRegisterBinding(this, regIndex, bindingKind, param_4, laneSelectWord, param_6, param_7, param_8, param_9, param_10)
+int KhanPs__vslot21_appendRegisterBinding(this, regIndex, bindingKind, recordWord0xc, laneSelectWord, conditionFlag, unusedArg7, unusedArg8, recordWord0x18, recordWord0x10)
   int this;
   undefined4 regIndex;
   undefined4 bindingKind;
-  undefined4 param_4;
+  undefined4 recordWord0xc;
   undefined4 laneSelectWord;
-  int param_6;
-  undefined4 param_7;
-  undefined4 param_8;
-  undefined4 param_9;
-  undefined4 param_10;
+  int conditionFlag;
+  undefined4 unusedArg7;
+  undefined4 unusedArg8;
+  undefined4 recordWord0x18;
+  undefined4 recordWord0x10;
 {
   int record;
   
@@ -1174,16 +1174,16 @@ int KhanPs__vslot21_appendRegisterBinding(this, regIndex, bindingKind, param_4, 
   *(int *)(((unsigned char *)0x0000172c) + this) = record + 1;
   record = this + record * 0x34 + 0x60;
   *(undefined4 *)(record + 8) = bindingKind;
-  *(undefined4 *)(record + 0xc) = param_4;
-  *(undefined4 *)(record + 0x10) = param_10;
+  *(undefined4 *)(record + 0xc) = recordWord0xc;
+  *(undefined4 *)(record + 0x10) = recordWord0x10;
   *(undefined4 *)(record + 0x1c) = 1;
   *(undefined1 *)(record + 0x37) = (undefined1)regIndex;
   *(char *)(record + 0x38) = (char)((uint)laneSelectWord >> 0x18);
   *(char *)(record + 0x39) = (char)((uint)laneSelectWord >> 0x10);
   *(char *)(record + 0x3a) = (char)((uint)laneSelectWord >> 8);
   *(char *)(record + 0x3b) = (char)laneSelectWord;
-  *(uint *)(record + 0x24) = (uint)(param_6 == 0);
-  *(undefined4 *)(record + 0x18) = param_9;
+  *(uint *)(record + 0x24) = (uint)(conditionFlag == 0);
+  *(undefined4 *)(record + 0x18) = recordWord0x18;
   *(undefined1 *)(record + 0x34) = (undefined1)regIndex;
   *(undefined1 *)(record + 0x35) = (undefined1)regIndex;
   *(undefined1 *)(record + 0x36) = (undefined1)regIndex;

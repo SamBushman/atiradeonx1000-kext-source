@@ -5044,10 +5044,10 @@ LAB_00138d24: ;
 }
 
 /* Program__finishUsevectorChain @ 0x138fb4 (84 bytes) */
-int Program__finishUsevectorChain(inst, param_2, param_3, program)
+int Program__finishUsevectorChain(inst, unusedArg2, unusedArg3, program)
   undefined4 inst;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 unusedArg2;
+  undefined4 unusedArg3;
   int program;
 {
   int *a0;
