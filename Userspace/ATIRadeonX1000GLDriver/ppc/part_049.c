@@ -363,7 +363,7 @@ LAB_001874d4:
   if (inst2[0x48] != 0) {
     return 0;
   }
-  loopIndex = ((int (*)())FUN_001897fc)(inst,operandIndex);
+  loopIndex = ((int (*)())Inst__sourceIsConstantRegisterNotKind3)(inst,operandIndex);
   if (loopIndex != 0) {
     return 0;
   }
@@ -1921,20 +1921,20 @@ int KhanPs__vslot66_callHelper189788(this, param_2)
   return ((int (*)())SelectWord__matchesAnyKnownPattern)(*param_2);
 }
 
-/* FUN_001897fc @ 0x1897fc (68 bytes) */
-int FUN_001897fc(inst, operandIndex)
+/* Inst__sourceIsConstantRegisterNotKind3 @ 0x1897fc (68 bytes) */
+int Inst__sourceIsConstantRegisterNotKind3(inst, operandIndex)
   undefined4 inst;
   undefined4 operandIndex;
 {
   int operandVReg;
-  bool bVar2;
+  bool result;
   
   operandVReg = IRInst__getOperandSource(inst,operandIndex);
-  bVar2 = false;
+  result = false;
   if (*(int *)(operandVReg + 0x98) == 0x33) {
-    bVar2 = *(int *)(operandVReg + 300) != 3;
+    result = *(int *)(operandVReg + 300) != 3;
   }
-  return bVar2;
+  return result;
 }
 
 /* SchedModel__fitsConstantLimit @ 0x189840 (364 bytes) */

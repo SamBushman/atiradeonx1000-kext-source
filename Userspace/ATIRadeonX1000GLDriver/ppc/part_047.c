@@ -326,11 +326,11 @@ undefined4 ValueKey__sourceIsSplatOfConstant(int ctx,int sourceIndex,double cons
   return 0;
 }
 
-/* FUN_00177548 @ 0x177548 (144 bytes) */
-int FUN_00177548(ctx)
+/* ValueKey__flagZeroSelectLanes @ 0x177548 (144 bytes) */
+int ValueKey__flagZeroSelectLanes(ctx)
   int ctx;
 {
-  bool bVar1;
+  bool lastLane;
   int operandRecord;
   int loopIndex;
   
@@ -340,9 +340,9 @@ int FUN_00177548(ctx)
     if (*(char *)(loopIndex + operandRecord + 0x10) == '\0') {
       *(undefined1 *)(loopIndex + *(int *)(ctx + 0xb0) + 0x9c) = 1;
     }
-    bVar1 = loopIndex != 3;
+    lastLane = loopIndex != 3;
     loopIndex = loopIndex + 1;
-  } while (bVar1);
+  } while (lastLane);
   loopIndex = *(int *)(ctx + 0xb0);
   if ((*(uint *)(loopIndex + 0x14) & 0x200) == 0) {
     IRInst__appendSource(loopIndex,*(undefined4 *)(loopIndex + 0x8c));
@@ -1070,18 +1070,18 @@ int IRInst__isOpcode8bOr8c(param_1)
   return *(int *)(*(int *)(param_1 + 0x88) + 8) - 0x8bU < 2;
 }
 
-/* FUN_001789f0 @ 0x1789f0 (168 bytes) */
-int FUN_001789f0(ctx)
+/* ValueKey__sourcesHaveNoModifiers @ 0x1789f0 (168 bytes) */
+int ValueKey__sourcesHaveNoModifiers(ctx)
   int ctx;
 {
   int *a0;
   int callResult;
-  uint uVar2;
+  uint opcodeOffset;
   int loopIndex;
   
   a0 = *(int **)(ctx + 0xb0);
-  uVar2 = *(int *)(a0[0x22] + 8) - 0x12;
-  if ((uVar2 < 0x20) && (loopIndex = 1, (1 << (uVar2 & 0x3f) & 0x800000a7U) != 0)) {
+  opcodeOffset = *(int *)(a0[0x22] + 8) - 0x12;
+  if ((opcodeOffset < 0x20) && (loopIndex = 1, (1 << (opcodeOffset & 0x3f) & 0x800000a7U) != 0)) {
     while( true ) {
       callResult = (**(code **)(*a0 + 0x14))(a0);
       if (callResult < loopIndex) {
@@ -1840,10 +1840,10 @@ int FUN_00179b28(ctx, lane)
   return 0;
 }
 
-/* FUN_00179bbc @ 0x179bbc (136 bytes) */
-int FUN_00179bbc(ctx, param_2)
+/* ValueKey__allOperandLanesEqual @ 0x179bbc (136 bytes) */
+int ValueKey__allOperandLanesEqual(ctx, lane)
   int ctx;
-  undefined4 param_2;
+  undefined4 lane;
 {
   int loopIndex;
   int callResult;
@@ -1852,7 +1852,7 @@ int FUN_00179bbc(ctx, param_2)
   if ((loopIndex != 1) && (1 < loopIndex)) {
     loopIndex = 2;
     do {
-      callResult = ((int (*)())ValueKey__operandLanesEqual)(ctx,param_2,loopIndex + -1,loopIndex);
+      callResult = ((int (*)())ValueKey__operandLanesEqual)(ctx,lane,loopIndex + -1,loopIndex);
       if (callResult == 0) {
         return 0;
       }
@@ -2949,7 +2949,7 @@ int ValueKey__mixLiteralSources(key)
     } while (loopIndex != 0);
     loopPtr7 = *(int **)(key + 0xb0);
     if ((((loopPtr7[5] & 0x200U) != 0) && (loopPtr7[0x48] == 0)) && (loopPtr7[0x49] == 0)) {
-      loopIndex2 = ((int (*)())FUN_001789f0)(key);
+      loopIndex2 = ((int (*)())ValueKey__sourcesHaveNoModifiers)(key);
       if (loopIndex2 != 0) {
         loopIndex = 0;
         loopIndex2 = key;

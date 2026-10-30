@@ -782,7 +782,7 @@ int ValueKey__foldMadZeroMultiplicand(ctx)
         ((int (*)())ValueKey__rewriteAsMovOfOperand)(ctx,3);
       }
       else {
-        FUN_00177548(ctx);
+        ValueKey__flagZeroSelectLanes(ctx);
       }
       ValueKey__rebuild(ctx);
       return 1;
@@ -815,7 +815,7 @@ int ValueKey__foldAddOfZeroSource(ctx)
           ((int (*)())ValueKey__rewriteAsMovOfOperand)(ctx,candidateOperand);
         }
         else {
-          FUN_00177548(ctx);
+          ValueKey__flagZeroSelectLanes(ctx);
         }
         ValueKey__rebuild(ctx);
         return 1;

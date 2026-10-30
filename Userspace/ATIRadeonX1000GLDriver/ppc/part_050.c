@@ -1473,16 +1473,16 @@ int Arena__alloc(param_1, size)
   return result;
 }
 
-/* FUN_00193e74 @ 0x193e74 (68 bytes) */
-int FUN_00193e74(param_1, param_2, param_3)
-  undefined4 param_1;
-  int param_2;
-  int param_3;
+/* Arena__allocZeroed @ 0x193e74 (68 bytes) */
+int Arena__allocZeroed(arena, count, elementSize)
+  undefined4 arena;
+  int count;
+  int elementSize;
 {
   undefined4 callResult;
   
-  callResult = ((int (*)())Arena__alloc)(param_1,param_2 * param_3);
-  _memset(callResult,0,param_2 * param_3);
+  callResult = ((int (*)())Arena__alloc)(arena,count * elementSize);
+  _memset(callResult,0,count * elementSize);
   return callResult;
 }
 

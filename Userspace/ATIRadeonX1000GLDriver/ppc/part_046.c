@@ -1341,7 +1341,7 @@ LAB_00174efc:
         if (*(char *)(loopIndex + loopIndex2 + 0x10) != '\x01') {
           loopPtr4 = (int *)valueKey[0x2c];
           if (*(int *)(loopPtr4[0x22] + 8) == 0x8e) {
-            loopIndex2 = FUN_00179bbc(valueKey,loopIndex);
+            loopIndex2 = ValueKey__allOperandLanesEqual(valueKey,loopIndex);
             if (loopIndex2 == 0) {
               loopPtr4 = (int *)((int (*)())FUN_00174ce0)(valueKey[0x8e],loopIndex,valueKey);
               loopIndex2 = *loopPtr4;
