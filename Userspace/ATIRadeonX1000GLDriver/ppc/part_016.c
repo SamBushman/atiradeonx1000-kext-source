@@ -8540,7 +8540,7 @@ int FUN_000b5c00(glContext, param_2, param_3)
       *(undefined4 *)(uVar10 + 0x5658) = *(undefined4 *)(glContext + 0x1b50);
       if ((*(char *)(glContext + 0x124) == '\0') && ((*(uint *)(glContext + 0x44) & 0x100000) == 0)) {
         (**(code **)(((unsigned char *)0x00001340) + glContext))(glContext);
-        FUN_0008fc70(glContext);
+        ffvpAssignOutputSlots(glContext);
       }
       ((int (*)())FUN_000b5400)(glContext,param_2);
       ((int (*)())FUN_000b5a60)(glContext,param_2);

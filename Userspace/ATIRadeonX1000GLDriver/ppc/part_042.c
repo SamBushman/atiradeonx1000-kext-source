@@ -1588,7 +1588,7 @@ code_r0x0013b658:
     piVar20[0x4e] = (int)piVar22;
   }
   Program__insertBlockBefore(program,piVar12,piVar22);
-  FUN_000e977c(piVar20,piVar12,piVar22);
+  Block__splitOutgoingEdge(piVar20,piVar12,piVar22);
   Block__connect(piVar22,piVar12);
   loopExit = (int *)piVar20[0x4f];
   piVar20 = homeBlock;
@@ -1629,7 +1629,7 @@ code_r0x0013b8e4:
   newBlockAllocB[0x4c] = piVar22;
   newBlockAllocB[1] = blockVtable + 8;
   Program__insertBlockAfter(program,otherPred,newBlock);
-  FUN_000e9948(piVar12,otherPred,newBlock);
+  Block__splitIncomingEdge(piVar12,otherPred,newBlock);
   Block__connect(otherPred,newBlock);
 code_r0x0013ba08:
   arena = *(undefined4 *)(*(int *)(program + 8) + 0x378);

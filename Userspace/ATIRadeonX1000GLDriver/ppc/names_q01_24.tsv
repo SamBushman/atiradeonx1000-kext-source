@@ -1,0 +1,20 @@
+func	FUN_00027990	gld_buildVertexStreamCache	INFERRED	variant of gld_buildVertexStreamLayout for the draw path with cached descriptor blocks: maps the enabled attributes to hardware ids, fills the stream-pair shadows and the two 16-bit {size,format,offset} descriptor blocks at stream+0x258c/0x2590 and their size headers
+local	FUN_00027990	param_1	glContext	INFERRED	the embedded command-stream object (ctx+0x240); +0x243c is the stream count, +0x258c/+0x2590 the two descriptor blocks, +0x1be4.. the stream-control shadows
+local	FUN_00027990	iVar31	engineObjects	INFERRED	*(stream+4): engine object table (+0x1cc current program, +0x20 flag)
+local	FUN_00027990	uVar29	streamCount	INFERRED	number of vertex streams (stream+0x243c, 2..16)
+local	FUN_00027990	local_64	programVertexInfo	INFERRED	**(current program)+4
+local	FUN_00027990	iVar27	programRecord	INFERRED	per-context program record + 0x14
+local	FUN_00027990	local_60	inputMap	INFERRED	program record +0x34: attribute to input-slot map
+local	FUN_00027990	local_68	fetchBase	INFERRED	programVertexInfo+0x24: base index of the program's input table (0 without a program)
+local	FUN_00027990	puVar22	streamBlockA	INFERRED	descriptor block at stream+0x258c: per-stream 16-bit {size, format, offset} entries
+local	FUN_00027990	puVar21	streamBlockB	INFERRED	descriptor block at stream+0x2590: the second copy of the per-stream entries
+local	FUN_00027990	iVar7	arrayDesc	INFERRED	vertexArray[0] of the current vertex array (engine object +0x194): attribute masks at +0x300/+0x304
+local	FUN_00027990	local_70	totalWords	INFERRED	sum of the per-stream word counts (written to the descriptor block headers)
+local	FUN_00027990	local_74	slotCounter	INFERRED	next entry number for defaulted attributes
+local	FUN_00027990	iVar25	streamByteOffset	INFERRED	streamIndex * 4
+local	FUN_00027990	iVar23	wordOffset	INFERRED	running word offset of the next stream inside the vertex record
+local	FUN_00027990	iVar26	attrByteOffset	INFERRED	attrIndex * 4
+local	FUN_00027990	iVar32	attrsLeft	INFERRED	countdown of the 16 attributes in the main loop
+local	FUN_00027990	uVar12	hwAttrId	INFERRED	hardware attribute id 0..0x2f (0x30 = unsupported)
+local	FUN_00027990	uVar24	descriptorWord	INFERRED	program input descriptor word (type bits in 14..17)
+local	FUN_00027990	uVar8	pairIndexOrFormatIndex	INFERRED	streamIndex >> 1, later the per-attribute format index

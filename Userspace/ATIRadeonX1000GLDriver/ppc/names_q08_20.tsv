@@ -4,3 +4,4 @@ local	FUN_0017c910	iVar8	prevLaneOrProgram	INFERRED	previous lane result (-1 = n
 local	FUN_0017c910	iVar9	laneResult	INFERRED	result class of the current lane / table result
 local	FUN_0017cb14	iVar8	prevLaneOrProgram	INFERRED	previous lane result (-1 = none) and, after the loop, compiler->+0x6c4 (two roles share the register; not split because the gate rejects the split)
 local	FUN_0017cb14	iVar9	laneResult	INFERRED	result class of the current lane / table result
+func	FUN_00189df4	SchedModel__classifySlotUse	INFERRED	classifies the ALU unit use of inst: returns 1 when both the vector and scalar slot use classes were assigned (-1 = none), 0 otherwise; fetch instructions are rejected

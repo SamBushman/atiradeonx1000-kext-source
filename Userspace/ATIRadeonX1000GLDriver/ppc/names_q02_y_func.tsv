@@ -1,0 +1,2 @@
+func	FUN_00062940	extvsUploadSingleConstant	INFERRED	stores the four components of one EXT_vertex_shader constant symbol into the program constant block and emits the register packet that loads it
+func	FUN_0005f540	extvsRewriteHardwareInstructions	INFERRED	post-pass over the hardware program: rebuilds the instruction array through recordProgramBuildDependencies, then marks instructions whose three source registers are all distinct temporaries with the alternate opcode forms 0x80/0x81

@@ -1,0 +1,15 @@
+func	FUN_0002c230	gld_validateStreamState	INFERRED	re-validates the draw state when register groups are dirty: program/ffvp revalidation, dirty-state packets, the four draw-buffer indices and the 0x29000000 draw-buffer packet, then rebuilds the vertex stream cache/layout when needed
+local	FUN_0002c230	param_1	glContext	INFERRED	the embedded command-stream object (ctx+0x240); +4 is the engine object table, +0x2460.. the four draw-buffer indices
+local	FUN_0002c230	iVar10	engineObjects	INFERRED	*(stream+4): engine object table (+0x150 bound framebuffer, +0x2a43 dirty byte)
+local	FUN_0002c230	iVar9	engineObjectsAlias	INFERRED	*(stream+4) re-read in the draw-buffer update block
+local	FUN_0002c230	iVar11	bufferSlot	INFERRED	index 0..3 of the draw buffer being resolved
+local	FUN_0002c230	iVar13	bufferEnumOffset	INFERRED	byte offset of the draw-buffer enum in the engine state (2 bytes per slot)
+local	FUN_0002c230	bVar2	moreBuffers	INFERRED	bufferSlot != 3: the loop continues
+local	FUN_0002c230	puVar1	bufferEnumPtr	INFERRED	address of the draw-buffer enum of the slot
+local	FUN_0002c230	puVar6	statePacket	INFERRED	command-stream slot returned by the allocate callback (ctx+0x2758, 0x22d words) for the 0x29000000 draw-buffer packet
+local	FUN_0002c230	puVar4	lastHeader	INFERRED	engine +0x1d8: header word of the previous packet, patched with the packet length
+local	FUN_0002c230	pcVar3	setCurrentFn	INFERRED	callback at stream+0x275c that installs the new current stream pointer
+local	FUN_0002c230	local_48	scalarIn0	INFERRED	scalar 0 of kernel selector 0: drawable word
+local	FUN_0002c230	local_44	scalarIn1	INFERRED	scalar 1: drawable flags & 0xffff3fc0
+local	FUN_0002c230	local_40	scalarIn2	INFERRED	scalar 2: drawableIdHigh
+local	FUN_0002c230	local_3c	scalarIn3	INFERRED	scalar 3: drawableIdLow

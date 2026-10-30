@@ -1,0 +1,88 @@
+use	R300VSchedModel__vslot27	iVar2	destSelectWord	INFERRED	select word of the destination operand of callResult, stored into inst (+0x9c)	^\s*iVar2\ =\ FUN_001054ec\(pvVar5,0\);$	+2
+use	R300VSchedModel__vslot27	iVar2	destSelectWord	INFERRED	select word of the destination operand of callResult, stored into inst (+0x9c)	^\s*param_2\[0x27\]\ =\ iVar2;$	+1
+local	R300VSchedModel__vslot27	in_r5	staleArg3	INFERRED	stale argument register r5 forwarded to the target virtual call
+local	R300VSchedModel__vslot27	in_r6	staleArg4	INFERRED	stale argument register r6 forwarded to the target virtual call
+local	R300VSchedModel__vslot27	in_r7	staleArg5	INFERRED	stale argument register r7 forwarded to the target virtual call
+local	R300VSchedModel__vslot27	in_r8	staleArg6	INFERRED	stale argument register r8 forwarded to the target virtual call
+local	R300VSchedModel__vslot27	local_98	src3CopyOrLaneMask	INFERRED	first word of the copy of operand 3 (IROperand__copyFrom); the same stack slot later accumulates a lane read mask
+local	R300VSchedModel__vslot27	local_94	src3CopyWord1	INFERRED	word 1 of the copy of operand 3
+local	R300VSchedModel__vslot27	local_84	src3CopyWord5	INFERRED	word 5 of the copy of operand 3
+local	R300VSchedModel__vslot27	local_80	src2CopyWord0	INFERRED	word 0 of the copy of operand 2
+local	R300VSchedModel__vslot27	local_7c	src2CopyWord1	INFERRED	word 1 of the copy of operand 2
+local	R300VSchedModel__vslot27	local_6c	src2CopyWord5	INFERRED	word 5 of the copy of operand 2
+local	R300VSchedModel__vslot27	local_68	readMask1	INFERRED	out-parameter of SelectWord__readMask (first absolute-value fix)
+local	R300VSchedModel__vslot27	local_64	selectMasked1	INFERRED	out-parameter of SelectWord__selectWhereMasked
+local	R300VSchedModel__vslot27	local_60	readMask2	INFERRED	read mask of operand 1 of the original mad
+local	R300VSchedModel__vslot27	local_5c	selectMasked2	INFERRED	out-parameter of SelectWord__selectWhereMasked
+local	R300VSchedModel__vslot27	local_58	readMask3	INFERRED	out-parameter of SelectWord__readMask (bank 2 scan)
+local	R300VSchedModel__vslot27	local_54	selectMasked3	INFERRED	out-parameter of SelectWord__selectWhereMasked
+local	R300VSchedModel__vslot27	local_50	readMask4	INFERRED	out-parameter of SelectWord__readMask (bank 1 scan)
+local	R300VSchedModel__vslot27	local_4c	selectMasked4	INFERRED	out-parameter of SelectWord__selectWhereMasked
+use	Inst__movAndShiftUseVector	iVar1	registerKindOk	INFERRED	FUN_001267b8 result for the source register kind	^\s*iVar1\ =\ FUN_001267b8\(uVar2\);$	+2
+use	Inst__movAndShiftUseVector	iVar1	sourceVslot5c	INFERRED	result of the virtual call at vtable +0x5c on the source	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*piVar3\ \+\ 0x5c\)\)\(piVar3\);$	+2
+use	Inst__movAndShiftUseVector	iVar1	sourceVslot48	INFERRED	result of the virtual call at vtable +0x48 on the source	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*piVar3\ \+\ 0x48\)\)\(piVar3\);$	+2
+use	Inst__movAndShiftUseVector	iVar1	canForward	INFERRED	FUN_00184bf0 result: the move can be forwarded to its users	^\s*iVar1\ =\ FUN_00184bf0\(param_1\);$	+2
+use	Inst__movAndShiftUseVector	iVar1	foldedOk	INFERRED	IRInst__foldResultScaleIntoUsers result	^\s*iVar1\ =\ FUN_00184ef0\(uVar2,param_1\[0x49\],param_2\);$	+2
+use	Inst__movAndShiftUseVector	iVar1	lastOperandSelect	INFERRED	select word of the saved last operand	^\s*iVar1\ =\ local_48;$	+1
+use	Inst__movAndShiftUseVector	iVar1	lastOperandSelect	INFERRED	select word of the saved last operand	^\s*\*\(int\ \*\)\(iVar8\ \+\ 0x10\)\ =\ iVar1;$	+1
+use	Inst__movAndShiftUseVector	iVar8	operandCountOrSelect	INFERRED	operand count of the user (loop bound), then the composed select word	^\s*for\ \(iVar1\ =\ 0;\ iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*piVar13\ \+\ 0x14\)\)\(piVar13\),\ iVar1\ <=\ iVar8;$	+2
+use	Inst__movAndShiftUseVector	iVar8	operandCountOrSelect	INFERRED	operand count of the user (loop bound), then the composed select word	^\s*iVar8\ =\ local_38\[0\];$	+1
+use	Inst__movAndShiftUseVector	iVar8	operandCountOrSelect	INFERRED	operand count of the user (loop bound), then the composed select word	^\s*piVar13\[0x27\]\ =\ iVar8;$	+1
+use	Inst__movAndShiftUseVector	iVar8	operandCountOrSelect	INFERRED	operand count of the user (loop bound), then the composed select word	^\s*\*\(int\ \*\)\(iVar7\ \+\ 0x10\)\ =\ iVar8;$	+1
+use	Inst__movAndShiftUseVector	iVar8	operandCountOrSelect	INFERRED	operand count of the user (loop bound), then the composed select word	^\s*iVar8\ =\ FUN_001054ec\(piVar13,piVar13\[0x21\]\);$	+2
+local	Inst__movAndShiftUseVector	local_38	composedSelect	INFERRED	out-parameter of SelectWord__compose
+local	Inst__movAndShiftUseVector	local_58	lastOperandCopy	INFERRED	copy of the last operand record of the user (IRInst__readLastOperand), word 0
+local	Inst__movAndShiftUseVector	local_54	lastOperandCopy1	INFERRED	word 1 of the last operand copy
+local	Inst__movAndShiftUseVector	local_48	lastOperandCopySelect	INFERRED	select word (+0x10) of the last operand copy
+local	Inst__movAndShiftUseVector	local_44	lastOperandCopy5	INFERRED	word 5 of the last operand copy
+use	Inst__movAndShiftUseVector	piVar3	operandFlagsPtr	INFERRED	address of the flags word of operand n of the user (inst1+0x80, step 6 words)	^\s*piVar3\ =\ piVar13\ \+\ 0x20;$	+1
+use	Inst__movAndShiftUseVector	piVar3	operandFlagsPtr	INFERRED	address of the flags word of operand n of the user (inst1+0x80, step 6 words)	^\s*FUN_00103d50\(piVar3\ \+\ 3,2,\(uint\)param_1\[0x2e\]\ >>\ 1\ \&\ 1\);$	+1
+use	Inst__movAndShiftUseVector	piVar3	operandFlagsPtr	INFERRED	address of the flags word of operand n of the user (inst1+0x80, step 6 words)	^\s*FUN_00103d50\(piVar3\ \+\ 3,1,piVar3\[8\]\ \&\ 1U\ \^\ 1\);$	+1
+use	Inst__movAndShiftUseVector	piVar3	operandFlagsPtr	INFERRED	address of the flags word of operand n of the user (inst1+0x80, step 6 words)	^\s*piVar3\ =\ piVar3\ \+\ 6;$	+1
+use	Inst__movAndShiftUseVector	piVar3	operandFlagsPtr	INFERRED	address of the flags word of operand n of the user (inst1+0x80, step 6 words)	^\s*if\ \(\(\(piVar13\[5\]\ \&\ 0x200U\)\ !=\ 0\)\ \&\&$	+3
+use	Inst__movAndShiftUseVector	uVar10	sourceSelectWord	INFERRED	select word of operand 1 of the move source	^\s*uVar10\ =\ \*\(undefined4\ \*\)\(iVar8\ \+\ 0x10\);$	+1
+use	Inst__movAndShiftUseVector	uVar10	sourceSelectWord	INFERRED	select word of operand 1 of the move source	^\s*FUN_000f2bdc\(local_38,uVar10,\*\(undefined4\ \*\)\(iVar8\ \+\ 0x10\)\);$	+1
+use	Inst__movAndShiftUseVector	uVar2	sourceRegister	INFERRED	register field of the move source (or 0)	^\s*uVar2\ =\ 0;$	+1
+use	Inst__movAndShiftUseVector	uVar2	sourceRegister	INFERRED	register field of the move source (or 0)	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(iVar1\ \+\ 0x98\);$	+1
+use	Inst__movAndShiftUseVector	uVar2	sourceRegister	INFERRED	register field of the move source (or 0)	^\s*iVar1\ =\ FUN_001267b8\(uVar2\);$	+1
+use	Inst__movAndShiftUseVector	uVar9	userIndex	INFERRED	index into the user vector (count-1 down to 0)	^\s*uVar9\ =\ puVar12\[1\]\ \-\ 1;$	+2
+use	Inst__movAndShiftUseVector	uVar9	userIndex	INFERRED	index into the user vector (count-1 down to 0)	^\s*if\ \(uVar9\ <\ \*puVar12\)\ \{$	+1
+use	Inst__movAndShiftUseVector	uVar9	userIndex	INFERRED	index into the user vector (count-1 down to 0)	^\s*if\ \(uVar4\ <=\ uVar9\)\ \{$	+3
+use	Inst__movAndShiftUseVector	uVar9	userIndex	INFERRED	index into the user vector (count-1 down to 0)	^\s*puVar5\ =\ \(undefined4\ \*\)\(uVar9\ \*\ 4\ \+\ puVar12\[2\]\);$	+1
+use	Inst__movAndShiftUseVector	uVar9	userIndex	INFERRED	index into the user vector (count-1 down to 0)	^\s*puVar5\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar12,uVar9\);$	+1
+use	Inst__movAndShiftUseVector	uVar9	userIndex	INFERRED	index into the user vector (count-1 down to 0)	^\s*uVar9\ =\ uVar9\ \-\ 1;$	+1
+use	Inst__movAndShiftUseVector	uVar9	userIndex	INFERRED	index into the user vector (count-1 down to 0)	^\s*uVar9\ =\ uVar9\ \-\ 1;$@2	+1
+use	Inst__movAndShiftUseVector	uVar9	userIndex	INFERRED	index into the user vector (count-1 down to 0)	^\s*if\ \(\(int\)uVar9\ <\ 0\)\ break;$	+1
+use	FudoPs__peepholeCombine	bVar1	moreLanes	INFERRED	lane counter != 3	^\s*bVar1\ =\ iVar19\ !=\ 3;$	+1
+use	FudoPs__peepholeCombine	bVar1	moreLanes	INFERRED	lane counter != 3	^\s*\}\ while\ \(bVar1\);$	+1
+local	FudoPs__peepholeCombine	local_58	pairInfoOut	INFERRED	out-parameter of FUN_0014abdc
+use	FudoPs__peepholeCombine	uVar11	splatComponent	INFERRED	component index (SelectWord__splatComponent) of the destination select	^\s*uVar11\ =\ FUN_000f37b8\(\*\(undefined4\ \*\)\(iVar3\ \+\ 0x10\)\);$	+2
+use	FudoPs__peepholeCombine	uVar11	addSrcNegate	INFERRED	negate flag (bit 0) of source 1 of the add	^\s*uVar11\ =\ piVar7\[0x2e\]\ \&\ 1;$	+5
+use	FudoPs__peepholeCombine	uVar11	addSrcNegate	INFERRED	negate flag (bit 0) of source 1 of the add	^\s*if\ \(uVar11\ ==\ 0\)\ \{$	+1
+use	FudoPs__peepholeCombine	uVar14	splatOperandIndex	INFERRED	operand index (1 or 2) holding the -0.5 splat constant	^\s*uVar14\ =\ 2;$	+1
+use	FudoPs__peepholeCombine	uVar14	splatOperandIndex	INFERRED	operand index (1 or 2) holding the -0.5 splat constant	^\s*uVar14\ =\ 1;$	+1
+use	FudoPs__peepholeCombine	uVar14	splatOperandIndex	INFERRED	operand index (1 or 2) holding the -0.5 splat constant	^\s*iVar10\ =\ \(\(undefined4\ \(\*\)\(\)\)FUN_00139838\)\(piVar4,uVar14,\-0\.5\);$	+1
+use	FudoPs__peepholeCombine	uVar17	splatLaneByte	INFERRED	select byte of the splat constant operand at the splat component	^\s*uVar17\ =\ \(uint\)\*\(byte\ \*\)\(iVar3\ \+\ iVar9\ \+\ 0x10\);$	+1
+use	FudoPs__peepholeCombine	uVar17	splatLaneByte	INFERRED	select byte of the splat constant operand at the splat component	^\s*if\ \(\(uVar17\ ==\ uVar11\)\ \&\&\ \(iVar3\ =\ FUN_0010497c\(piVar7,param_5\),\ iVar3\ !=\ 0\)\)\ \{$	+1
+use	FudoPs__peepholeCombine	uVar17	splatLaneByte	INFERRED	select byte of the splat constant operand at the splat component	^\s*uVar20\ =\ \(uint\)\*\(byte\ \*\)\(uVar17\ \+\ iVar9\ \+\ 0x10\);$	+1
+use	FudoPs__peepholeCombine	uVar17	splatLaneByte	INFERRED	select byte of the splat constant operand at the splat component	^\s*uVar18\ =\ \(uint\)\*\(byte\ \*\)\(uVar17\ \+\ iVar9\ \+\ 0x10\);$	+1
+use	FudoPs__peepholeCombine	uVar17	laneSelectB	INFERRED	lane select byte of the second term after the negate swap	^\s*uVar17\ =\ uVar18;$	+1
+use	FudoPs__peepholeCombine	uVar17	laneSelectB	INFERRED	lane select byte of the second term after the negate swap	^\s*uVar17\ =\ uVar20;$	+1
+use	FudoPs__peepholeCombine	uVar17	laneSelectB	INFERRED	lane select byte of the second term after the negate swap	^\s*\(\*\*\(code\ \*\*\)\(\*piVar6\ \+\ 0x88\)\)\(piVar6,1,uVar17,uVar17\);$	+1
+use	FudoPs__peepholeCombine	uVar17	laneSelectB	INFERRED	lane select byte of the second term after the negate swap	^\s*local_54\[0\]\ =\ \*\(int\ \*\)\(PTR_DAT_001e8b64\ \+\ uVar17\ \*\ 4\);$	+1
+use	FudoPs__peepholeCombine	uVar17	laneByte	INFERRED	select byte read from the operand record of combinedInst	^\s*uVar17\ =\ \(uint\)\*\(byte\ \*\)\(iVar19\ \+\ iVar13\ \+\ 0x10\);$	+3
+use	FudoPs__peepholeCombine	uVar18	lane2Select	INFERRED	select byte of source 2 of the add at the splat component	^\s*uVar18\ =\ \(uint\)\*\(byte\ \*\)\(uVar17\ \+\ iVar9\ \+\ 0x10\);$	+2
+use	FudoPs__peepholeCombine	uVar18	lane2Select	INFERRED	select byte of source 2 of the add at the splat component	^\s*uVar20\ =\ uVar18;$	+1
+use	FudoPs__peepholeCombine	uVar20	lane1Select	INFERRED	select byte of source 1 of the add at the splat component (swapped with lane2Select when the first term is not negated)	^\s*uVar20\ =\ \(uint\)\*\(byte\ \*\)\(uVar17\ \+\ iVar9\ \+\ 0x10\);$	+1
+use	FudoPs__peepholeCombine	uVar20	lane1Select	INFERRED	select byte of source 1 of the add at the splat component (swapped with lane2Select when the first term is not negated)	^\s*uVar17\ =\ uVar20;$	+2
+use	FudoPs__peepholeCombine	uVar20	lane1Select	INFERRED	select byte of source 1 of the add at the splat component (swapped with lane2Select when the first term is not negated)	^\s*piVar4\[0x27\]\ =\ \*\(int\ \*\)\(PTR_DAT_001e8b64\ \+\ uVar20\ \*\ 4\);$	+1
+use	FudoPs__peepholeCombine	uVar20	lane1Select	INFERRED	select byte of source 1 of the add at the splat component (swapped with lane2Select when the first term is not negated)	^\s*\(\*\*\(code\ \*\*\)\(\*piVar6\ \+\ 0x88\)\)\(piVar6,1,uVar20,uVar20\);$	+3
+use	FudoPs__peepholeCombine	uVar20	lane1Select	INFERRED	select byte of source 1 of the add at the splat component (swapped with lane2Select when the first term is not negated)	^\s*pcVar2\ =\ PTR_DAT_001e8b64\ \+\ uVar20\ \*\ 4;$	+1
+use	FudoPs__peepholeCombine	uVar21	compilerRef	INFERRED	program[PROG_compiler]: the compiler	^\s*uVar21\ =\ param_5\[PROG_compiler\ /\ 4\];$	+1
+use	FudoPs__peepholeCombine	uVar21	compilerRef	INFERRED	program[PROG_compiler]: the compiler	^\s*iVar3\ =\ FUN_000e07dc\(uVar21,0x3d\);$	+1
+use	FudoPs__peepholeCombine	uVar21	compilerRef	INFERRED	program[PROG_compiler]: the compiler	^\s*FUN_00108174\(piVar4,0x17,uVar21\);$	+1
+use	FudoPs__peepholeCombine	uVar21	compilerRef	INFERRED	program[PROG_compiler]: the compiler	^\s*FUN_00106004\(piVar4,1,iVar3,0,uVar21\);$	+2
+use	FudoPs__peepholeCombine	uVar21	compilerRef	INFERRED	program[PROG_compiler]: the compiler	^\s*FUN_00106804\(piVar4,iVar3,0,uVar21\);$	+1
+use	FudoPs__peepholeCombine	uVar21	compilerRef	INFERRED	program[PROG_compiler]: the compiler	^\s*uVar21\ =\ param_5\[PROG_compiler\ /\ 4\];$@2	+1
+use	FudoPs__peepholeCombine	uVar21	compilerRef	INFERRED	program[PROG_compiler]: the compiler	^\s*uVar21\ =\ param_5\[PROG_compiler\ /\ 4\];$@3	+1
+use	FudoPs__peepholeCombine	uVar21	compilerRef	INFERRED	program[PROG_compiler]: the compiler	^\s*iVar3\ =\ FUN_000e07dc\(uVar21,0x39\);$	+1

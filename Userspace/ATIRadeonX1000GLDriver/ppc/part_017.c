@@ -9797,7 +9797,7 @@ int FUN_000c5e60(psnProgram)
    * each initialized to the same value below, that a later loop (`*(short*)((int)&local_98 +
    * iVar8) = ...`, iVar8 running 0..30) treats as one contiguous 32-byte/16-ushort array -
    * the same Ghidra local-splitting defect class already fixed in FUN_000fd5c8,
-   * FUN_000b6580's local_68 cluster, and this session's own FUN_000f4d80 local_2c cluster.
+   * FUN_000b6580's local_68 cluster, and this session's own ConstRecord__findInTable local_2c cluster.
    * Only local_98's OWN 4 bytes are real storage; the walk past it (needed to reach what
    * should be local_94/local_90/.../local_7c) ran off local_98's real bounds into whatever
    * gcc actually placed next on the stack. Live-verified on real hardware via a hardware
