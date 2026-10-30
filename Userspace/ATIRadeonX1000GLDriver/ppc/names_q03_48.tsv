@@ -1,0 +1,25 @@
+local	FUN_0008f7f0	cVar6	rasterInitFlag	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0008f7f0	uVar7	stateWord2da4	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0008f7f0	uVar8	stateWord2da8	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0008f7f0	uVar11	reg1b84Value	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	FUN_0008f7f0	uVar13	packetWords	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar13\ =\ 0x25;$	+1
+use	FUN_0008f7f0	uVar13	packetWords	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar13\ =\ 0x23;$	+1
+use	FUN_0008f7f0	uVar13	packetWords	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar12\ =\ \(undefined4\ \*\)\(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x2758\)\)\(param_1,uVar13,uVar14,a3_00,a4\);$	+1
+use	FUN_0008f7f0	uVar13	packetBase	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar13\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x2758\)\)\(param_1,0x23,uVar14,a3_00,a4\);$	+3
+use	FUN_0008f7f0	uVar13	stateWord2dac	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar13\ =\ \*\(undefined4\ \*\)\(\(\(unsigned\ char\ \*\)0x00002dac\)\ \+\ iVar17\);$	+1
+use	FUN_0008f7f0	uVar13	stateWord2dac	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar12\[0xd\]\ =\ uVar13;$	+1
+use	FUN_0008f7f0	uVar14	stateWord2da0	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar14\ =\ \*\(undefined4\ \*\)\(\(\(unsigned\ char\ \*\)0x00002da0\)\ \+\ iVar17\);$	+1
+use	FUN_0008f7f0	uVar14	stateWord2da0	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar12\[10\]\ =\ uVar14;$	+1
+use	FUN_0008f7f0	iVar17	stateBlock	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar17\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 4\)\ \+\ 0x10\);$	+1
+use	FUN_0008f7f0	iVar17	stateBlock	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar13\ =\ \*\(undefined4\ \*\)\(\(\(unsigned\ char\ \*\)0x00002dac\)\ \+\ iVar17\);$	+4
+use	FUN_0008f7f0	iVar17	scaledWidth	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar17\ =\ \(int\)\(fVar5\ \*\ \*\(float\ \*\)\(param_1\ \+\ 0x2814\)\ \*\ 0\.5\ \*\ \(fVar1\ \-\ fVar4\)\);$	+2
+use	FUN_0008f7f0	iVar17	scaledWidth	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar12\[1\]\ =\ iVar17\ <<\ 0x10\ \|\ a6\ \&\ 0xffff;$	+1
+local	FUN_0008f7f0	auStack_f8	savedDrawState	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0008f7f0	local_68	i2dHi2	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0008f7f0	uStack_64	i2dLo2	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0008f7f0	local_60	i2dHi3	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0008f7f0	uStack_5c	i2dLo3	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0008f7f0	local_58	i2dHi4	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0008f7f0	uStack_54	i2dLo4	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0008f7f0	local_48	i2dHi5	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0008f7f0	uStack_44	drawableHeightInt	INFERRED	role read off the function body (see notes_gld_q03.md)

@@ -4160,16 +4160,19 @@ int evsEncodeSource(compiler, instructionArray, compileState, operand, isScalarS
   int isScalarSource;
   uint *swizzleOverride;
 {
-  uint uVar1;
+  uint newBuffer;
+  uint tokenIndex;
+  uint symbolWord;
+  uint overrideZ;
   uint registerWord;
   undefined4 uVar3;
   int symbol;
-  uint uVar5;
-  uint uVar6;
+  uint overrideW;
+  uint overrideY;
   int dataType;
   undefined *swizzleWord;
-  uint uVar9;
-  undefined *puVar10;
+  uint overrideX;
+  undefined *finalSwizzle;
   
   swizzleWord = ((unsigned char *)0x00003210);
   switch(operand[2]) {
@@ -4280,8 +4283,8 @@ int evsEncodeSource(compiler, instructionArray, compileState, operand, isScalarS
     swizzleWord = (undefined *)((uint)swizzleWord & 0xffff8fff | 0x5000);
   }
   if (swizzleOverride != (uint *)0x0) {
-    uVar9 = *swizzleOverride;
-    registerWord = uVar9 & 3;
+    overrideX = *swizzleOverride;
+    registerWord = overrideX & 3;
     if (registerWord == 2) {
       swizzleWord = (undefined *)((uint)swizzleWord >> 8 & 7 | (uint)swizzleWord & 0xfffffff8);
     }
@@ -4291,8 +4294,8 @@ int evsEncodeSource(compiler, instructionArray, compileState, operand, isScalarS
     else if (registerWord == 1) {
       swizzleWord = (undefined *)((uint)swizzleWord >> 4 & 7 | (uint)swizzleWord & 0xfffffff8);
     }
-    uVar6 = swizzleOverride[1];
-    registerWord = uVar6 & 3;
+    overrideY = swizzleOverride[1];
+    registerWord = overrideY & 3;
     if (registerWord != 1) {
       if (registerWord == 0) {
         swizzleWord = (undefined *)(((uint)swizzleWord & 7) << 4 | (uint)swizzleWord & 0xffffff8f);
@@ -4304,8 +4307,8 @@ int evsEncodeSource(compiler, instructionArray, compileState, operand, isScalarS
         swizzleWord = (undefined *)((uint)swizzleWord >> 8 & 0x70 | (uint)swizzleWord & 0xffffff8f);
       }
     }
-    uVar1 = swizzleOverride[2];
-    registerWord = uVar1 & 3;
+    overrideZ = swizzleOverride[2];
+    registerWord = overrideZ & 3;
     if (registerWord == 1) {
       swizzleWord = (undefined *)(((uint)swizzleWord & 0x70) << 4 | (uint)swizzleWord & 0xfffff8ff);
     }
@@ -4315,8 +4318,8 @@ int evsEncodeSource(compiler, instructionArray, compileState, operand, isScalarS
     else if ((registerWord != 2) && (registerWord == 3)) {
       swizzleWord = (undefined *)((uint)swizzleWord >> 4 & 0x700 | (uint)swizzleWord & 0xfffff8ff);
     }
-    uVar5 = swizzleOverride[3];
-    registerWord = uVar5 & 3;
+    overrideW = swizzleOverride[3];
+    registerWord = overrideW & 3;
     if (registerWord == 1) {
       swizzleWord = (undefined *)(((uint)swizzleWord & 0x70) << 8 | (uint)swizzleWord & 0xffff8fff);
     }
@@ -4326,32 +4329,32 @@ int evsEncodeSource(compiler, instructionArray, compileState, operand, isScalarS
     else if (registerWord == 2) {
       swizzleWord = (undefined *)(((uint)swizzleWord & 0x700) << 4 | (uint)swizzleWord & 0xffff8fff);
     }
-    if ((uVar9 & 4) != 0) {
+    if ((overrideX & 4) != 0) {
       swizzleWord = (undefined *)(((uint)swizzleWord ^ 8) & 8 | (uint)swizzleWord & 0xfffffff7);
     }
-    if ((uVar6 & 4) != 0) {
+    if ((overrideY & 4) != 0) {
       swizzleWord = (undefined *)(((uint)swizzleWord ^ 0x80) & 0x80 | (uint)swizzleWord & 0xffffff7f);
     }
-    if ((uVar1 & 4) != 0) {
+    if ((overrideZ & 4) != 0) {
       swizzleWord = (undefined *)(((uint)swizzleWord ^ 0x800) & 0x800 | (uint)swizzleWord & 0xfffff7ff);
     }
-    if ((uVar5 & 4) != 0) {
+    if ((overrideW & 4) != 0) {
       swizzleWord = (undefined *)(((uint)swizzleWord ^ 0x8000) & 0x8000 | (uint)swizzleWord & 0xffff7fff);
     }
-    if ((uVar9 & 8) != 0) {
+    if ((overrideX & 8) != 0) {
       swizzleWord = (undefined *)((uint)swizzleWord & 0xffff7777 | 0x100000);
     }
-    if ((uVar6 & 8) != 0) {
+    if ((overrideY & 8) != 0) {
       swizzleWord = (undefined *)((uint)swizzleWord & 0xffff7777 | 0x100000);
     }
-    if ((uVar1 & 8) != 0) {
+    if ((overrideZ & 8) != 0) {
       swizzleWord = (undefined *)((uint)swizzleWord & 0xffff7777 | 0x100000);
     }
-    if ((uVar5 & 8) != 0) {
+    if ((overrideW & 8) != 0) {
       swizzleWord = (undefined *)((uint)swizzleWord & 0xffff7777 | 0x100000);
     }
   }
-  puVar10 = swizzleWord;
+  finalSwizzle = swizzleWord;
   if (*operand != 2) {
     if (*operand != 0) {
       return 0;
@@ -4370,7 +4373,7 @@ int evsEncodeSource(compiler, instructionArray, compileState, operand, isScalarS
       if (dataType == 0x87bf) {
         registerWord = *(uint *)(symbol + 4) & 0xffff | 0x50000;
         if ((*(char *)(symbol + 0x44) != '\0') && (*(int *)(symbol + 0x48) == 1)) {
-          puVar10 = (undefined *)((uint)swizzleWord & 0xffff8fff | 0x4000);
+          finalSwizzle = (undefined *)((uint)swizzleWord & 0xffff8fff | 0x4000);
         }
       }
       else if (dataType == 0x87c0) {
@@ -4380,13 +4383,13 @@ int evsEncodeSource(compiler, instructionArray, compileState, operand, isScalarS
         if (dataType != 0x87be) {
           return 0;
         }
-        uVar9 = *(uint *)(symbol + 8);
+        symbolWord = *(uint *)(symbol + 8);
         registerWord = *(uint *)(symbol + 4) & 0xffff | 0x50000;
-        puVar10 = (undefined *)
-                  ((uVar9 & 7) << 0xc |
-                  (uVar9 & 7) << 8 | (uVar9 & 7) << 4 | uVar9 & 7 | (uint)swizzleWord & 0xffff8888);
+        finalSwizzle = (undefined *)
+                  ((symbolWord & 7) << 0xc |
+                  (symbolWord & 7) << 8 | (symbolWord & 7) << 4 | symbolWord & 7 | (uint)swizzleWord & 0xffff8888);
         if ((*(char *)(symbol + 0x44) != '\0') && (*(int *)(symbol + 0x48) == 0xf)) {
-          puVar10 = (undefined *)((uint)swizzleWord & 0xffff8888 | 0x5441);
+          finalSwizzle = (undefined *)((uint)swizzleWord & 0xffff8888 | 0x5441);
         }
       }
       goto LAB_00074014;
@@ -4402,7 +4405,7 @@ int evsEncodeSource(compiler, instructionArray, compileState, operand, isScalarS
     if (dataType != 0x87be) {
       return 0;
     }
-    uVar9 = *(uint *)(symbol + 8);
+    symbolWord = *(uint *)(symbol + 8);
     registerWord = *(uint *)(symbol + 4);
     symbol = 1;
   }
@@ -4421,45 +4424,45 @@ int evsEncodeSource(compiler, instructionArray, compileState, operand, isScalarS
     if (dataType != 0x87be) {
       return 0;
     }
-    uVar9 = *(uint *)(symbol + 8);
+    symbolWord = *(uint *)(symbol + 8);
     registerWord = *(uint *)(symbol + 4);
     symbol = 4;
   }
   registerWord = registerWord & 0xffff | symbol << 0x10;
-  puVar10 = (undefined *)
-            ((uVar9 & 7) << 0xc |
-            (uVar9 & 7) << 8 | (uVar9 & 7) << 4 | uVar9 & 7 | (uint)swizzleWord & 0xffff8888);
+  finalSwizzle = (undefined *)
+            ((symbolWord & 7) << 0xc |
+            (symbolWord & 7) << 8 | (symbolWord & 7) << 4 | symbolWord & 7 | (uint)swizzleWord & 0xffff8888);
 LAB_00074014:
-  if ((isScalarSource == 0) && (puVar10 == ((unsigned char *)0x00003210))) {
+  if ((isScalarSource == 0) && (finalSwizzle == ((unsigned char *)0x00003210))) {
     if (*(char *)(operand + 6) == '\0') {
-      uVar9 = *instructionArray;
-      if (instructionArray[1] <= uVar9) {
-        uVar9 = (**(code **)(compiler + 0xc))(instructionArray[1] * 4 + 0x200);
+      tokenIndex = *instructionArray;
+      if (instructionArray[1] <= tokenIndex) {
+        newBuffer = (**(code **)(compiler + 0xc))(instructionArray[1] * 4 + 0x200);
         if (instructionArray[2] != 0) {
-          _memcpy(uVar9,instructionArray[2],*instructionArray << 2);
+          _memcpy(newBuffer,instructionArray[2],*instructionArray << 2);
           (**(code **)(compiler + 0x18))(instructionArray[2]);
         }
-        instructionArray[2] = uVar9;
-        uVar9 = *instructionArray;
+        instructionArray[2] = newBuffer;
+        tokenIndex = *instructionArray;
         instructionArray[1] = instructionArray[1] + 0x80;
       }
       uVar3 = 1;
-      *(uint *)(uVar9 * 4 + instructionArray[2]) = registerWord;
+      *(uint *)(tokenIndex * 4 + instructionArray[2]) = registerWord;
       *instructionArray = *instructionArray + 1;
     }
     else {
-      uVar9 = *instructionArray;
-      if (instructionArray[1] <= uVar9) {
-        uVar9 = (**(code **)(compiler + 0xc))(instructionArray[1] * 4 + 0x200);
+      tokenIndex = *instructionArray;
+      if (instructionArray[1] <= tokenIndex) {
+        newBuffer = (**(code **)(compiler + 0xc))(instructionArray[1] * 4 + 0x200);
         if (instructionArray[2] != 0) {
-          _memcpy(uVar9,instructionArray[2],*instructionArray << 2);
+          _memcpy(newBuffer,instructionArray[2],*instructionArray << 2);
           (**(code **)(compiler + 0x18))(instructionArray[2]);
         }
-        instructionArray[2] = uVar9;
-        uVar9 = *instructionArray;
+        instructionArray[2] = newBuffer;
+        tokenIndex = *instructionArray;
         instructionArray[1] = instructionArray[1] + 0x80;
       }
-      *(uint *)(uVar9 * 4 + instructionArray[2]) = registerWord | 0x800000;
+      *(uint *)(tokenIndex * 4 + instructionArray[2]) = registerWord | 0x800000;
       registerWord = *instructionArray + 1;
       *instructionArray = registerWord;
       if (instructionArray[1] <= registerWord) {
@@ -4478,18 +4481,18 @@ LAB_00074014:
     }
   }
   else if (*(char *)(operand + 6) == '\0') {
-    uVar9 = *instructionArray;
-    if (instructionArray[1] <= uVar9) {
-      uVar9 = (**(code **)(compiler + 0xc))(instructionArray[1] * 4 + 0x200);
+    tokenIndex = *instructionArray;
+    if (instructionArray[1] <= tokenIndex) {
+      newBuffer = (**(code **)(compiler + 0xc))(instructionArray[1] * 4 + 0x200);
       if (instructionArray[2] != 0) {
-        _memcpy(uVar9,instructionArray[2],*instructionArray << 2);
+        _memcpy(newBuffer,instructionArray[2],*instructionArray << 2);
         (**(code **)(compiler + 0x18))(instructionArray[2]);
       }
-      instructionArray[2] = uVar9;
-      uVar9 = *instructionArray;
+      instructionArray[2] = newBuffer;
+      tokenIndex = *instructionArray;
       instructionArray[1] = instructionArray[1] + 0x80;
     }
-    *(uint *)(uVar9 * 4 + instructionArray[2]) = registerWord | 0x400000;
+    *(uint *)(tokenIndex * 4 + instructionArray[2]) = registerWord | 0x400000;
     registerWord = *instructionArray + 1;
     *instructionArray = registerWord;
     if (instructionArray[1] <= registerWord) {
@@ -4503,22 +4506,22 @@ LAB_00074014:
       instructionArray[1] = instructionArray[1] + 0x80;
     }
     uVar3 = 2;
-    *(undefined **)(registerWord * 4 + instructionArray[2]) = puVar10;
+    *(undefined **)(registerWord * 4 + instructionArray[2]) = finalSwizzle;
     *instructionArray = *instructionArray + 1;
   }
   else {
-    uVar9 = *instructionArray;
-    if (instructionArray[1] <= uVar9) {
-      uVar9 = (**(code **)(compiler + 0xc))(instructionArray[1] * 4 + 0x200);
+    tokenIndex = *instructionArray;
+    if (instructionArray[1] <= tokenIndex) {
+      newBuffer = (**(code **)(compiler + 0xc))(instructionArray[1] * 4 + 0x200);
       if (instructionArray[2] != 0) {
-        _memcpy(uVar9,instructionArray[2],*instructionArray << 2);
+        _memcpy(newBuffer,instructionArray[2],*instructionArray << 2);
         (**(code **)(compiler + 0x18))(instructionArray[2]);
       }
-      instructionArray[2] = uVar9;
-      uVar9 = *instructionArray;
+      instructionArray[2] = newBuffer;
+      tokenIndex = *instructionArray;
       instructionArray[1] = instructionArray[1] + 0x80;
     }
-    *(uint *)(uVar9 * 4 + instructionArray[2]) = registerWord | 0xc00000;
+    *(uint *)(tokenIndex * 4 + instructionArray[2]) = registerWord | 0xc00000;
     registerWord = *instructionArray + 1;
     *instructionArray = registerWord;
     if (instructionArray[1] <= registerWord) {
@@ -4531,7 +4534,7 @@ LAB_00074014:
       registerWord = *instructionArray;
       instructionArray[1] = instructionArray[1] + 0x80;
     }
-    *(undefined **)(registerWord * 4 + instructionArray[2]) = puVar10;
+    *(undefined **)(registerWord * 4 + instructionArray[2]) = finalSwizzle;
     registerWord = *instructionArray + 1;
     *instructionArray = registerWord;
     if (instructionArray[1] <= registerWord) {

@@ -7674,69 +7674,71 @@ int FUN_000a0350(param_1, param_2)
 }
 
 /* glBindProgramARB_impl @ 0xa0380 (476 bytes) */
-int glBindProgramARB_impl(ctx, target, programId, param_4, param_5, param_6, param_7)
+int glBindProgramARB_impl(ctx, target, programId, unusedArg4, unusedArg5, unusedArg6, entries)
   int ctx;
   int target;
   int programId;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  int param_7;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
+  int entries;
 {
-  uint uVar1;
-  int iVar2;
-  undefined4 uVar3;
+  int entriesBase;
+  int newEntries;
+  uint programCount;
+  int programIndex;
+  undefined4 programObject;
   undefined4 a1;
   int a2;
   undefined4 in_r10;
-  int iVar4;
-  int iVar5;
+  int entryPtr;
+  int programTable;
   
   if ((target == 0x8620) || (target == 0x8804)) {
-    iVar5 = *(int *)(((unsigned char *)0x0000112c) + ctx);
+    programTable = *(int *)(((unsigned char *)0x0000112c) + ctx);
     a2 = programId;
-    iVar2 = ((int (*)())arbProgramFindIndex)(ctx,iVar5,programId);
-    if (iVar2 == 0) {
+    programIndex = ((int (*)())arbProgramFindIndex)(ctx,programTable,programId);
+    if (programIndex == 0) {
       if (programId != 0) {
-        uVar1 = *(uint *)(iVar5 + 4);
-        if ((uVar1 & 7) == 0) {
-          iVar2 = (**(code **)(ctx + 0xc))(uVar1 * 0x18 + 0xc0);
-          if (iVar2 == 0) {
+        programCount = *(uint *)(programTable + 4);
+        if ((programCount & 7) == 0) {
+          newEntries = (**(code **)(ctx + 0xc))(programCount * 0x18 + 0xc0);
+          if (newEntries == 0) {
             return;
           }
-          a2 = *(int *)(iVar5 + 4) * 0x18;
-          (**(code **)(((unsigned char *)0x00001344) + ctx))(iVar2,*(undefined4 *)(iVar5 + 8),a2);
-          (**(code **)(ctx + 0x18))(*(undefined4 *)(iVar5 + 8));
-          *(int *)(iVar5 + 8) = iVar2;
-          uVar1 = *(uint *)(iVar5 + 4);
+          a2 = *(int *)(programTable + 4) * 0x18;
+          (**(code **)(((unsigned char *)0x00001344) + ctx))(newEntries,*(undefined4 *)(programTable + 8),a2);
+          (**(code **)(ctx + 0x18))(*(undefined4 *)(programTable + 8));
+          *(int *)(programTable + 8) = newEntries;
+          programCount = *(uint *)(programTable + 4);
         }
-        ((int (*)())FUN_000a0350)(ctx,uVar1 * 0x18 + *(int *)(iVar5 + 8));
-        *(int *)(*(int *)(iVar5 + 4) * 0x18 + *(int *)(iVar5 + 8) + 4) = target;
-        *(int *)(*(int *)(iVar5 + 4) * 0x18 + *(int *)(iVar5 + 8)) = programId;
+        ((int (*)())FUN_000a0350)(ctx,programCount * 0x18 + *(int *)(programTable + 8));
+        *(int *)(*(int *)(programTable + 4) * 0x18 + *(int *)(programTable + 8) + 4) = target;
+        *(int *)(*(int *)(programTable + 4) * 0x18 + *(int *)(programTable + 8)) = programId;
         if (target == 0x8804) {
-          iVar2 = *(int *)(iVar5 + 8);
-          iVar4 = *(int *)(iVar5 + 4) * 0x18 + iVar2;
-          uVar3 = (**(code **)(ctx + 0xc))(0x78,a1,a2,param_4,param_5,param_6,iVar2);
-          *(undefined4 *)(iVar4 + 0x14) = uVar3;
+          entriesBase = *(int *)(programTable + 8);
+          entryPtr = *(int *)(programTable + 4) * 0x18 + entriesBase;
+          programObject = (**(code **)(ctx + 0xc))(0x78,a1,a2,unusedArg4,unusedArg5,unusedArg6,entriesBase);
+          *(undefined4 *)(entryPtr + 0x14) = programObject;
           arbfpProgramObjectInit(ctx,*(undefined4 *)
-                                (*(int *)(iVar5 + 4) * 0x18 + *(int *)(iVar5 + 8) + 0x14));
-          arbfpBindProgram(ctx,*(undefined4 *)(iVar5 + 4),a2,param_4,param_5,param_6,iVar2,in_r10);
+                                (*(int *)(programTable + 4) * 0x18 + *(int *)(programTable + 8) + 0x14));
+          arbfpBindProgram(ctx,*(undefined4 *)(programTable + 4),a2,unusedArg4,unusedArg5,unusedArg6,entriesBase,in_r10);
         }
-        *(int *)(iVar5 + 4) = *(int *)(iVar5 + 4) + 1;
+        *(int *)(programTable + 4) = *(int *)(programTable + 4) + 1;
         return;
       }
     }
     else {
-      param_7 = *(int *)(iVar5 + 8);
-      if (target != *(int *)(iVar2 * 0x18 + param_7 + 4)) {
+      entries = *(int *)(programTable + 8);
+      if (target != *(int *)(programIndex * 0x18 + entries + 4)) {
         return;
       }
     }
     if (target == 0x8804) {
-      if (iVar2 == 0) {
-        iVar2 = *(int *)(((unsigned char *)0x0000126c) + ctx);
+      if (programIndex == 0) {
+        programIndex = *(int *)(((unsigned char *)0x0000126c) + ctx);
       }
-      arbfpBindProgram(ctx,iVar2,a2,param_4,param_5,param_6,param_7,in_r10);
+      arbfpBindProgram(ctx,programIndex,a2,unusedArg4,unusedArg5,unusedArg6,entries,in_r10);
       return;
     }
   }

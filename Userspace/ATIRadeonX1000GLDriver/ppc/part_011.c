@@ -782,6 +782,10 @@ int recordRegisterIsAssignable(ctx, program, reg, usedValueMask, recordIndex, co
   uint recordIndex;
   uint componentMask;
 {
+  uint *listNode;
+  uint laneBitG;
+  uint *earliestWriterPtr;
+  uint *useNode;
   uint loopCounterG;
   uint componentBit;
   uint loopCounterF;
@@ -795,19 +799,19 @@ int recordRegisterIsAssignable(ctx, program, reg, usedValueMask, recordIndex, co
   bool moreComponents;
   bool conflict;
   int regOffset;
-  uint *puVar4;
+  uint *valueIdPtr;
   undefined4 *headCursor;
-  int iVar6;
-  uint uVar7;
-  uint uVar8;
+  int valueId;
+  uint laneBit;
+  uint writerWriteMask;
   uint loopCounterD;
   uint uVar10;
   int *valueIdCursor;
   uint boundMask;
-  uint uVar13;
-  int iVar14;
-  uint *puVar15;
-  int *piVar16;
+  uint writerRecord;
+  int candidateValueId;
+  uint *earliestPtr;
+  int *seenSlot;
   int remainingB;
   int seenCountdown;
   int seenValueIds [4];
@@ -815,12 +819,12 @@ int recordRegisterIsAssignable(ctx, program, reg, usedValueMask, recordIndex, co
   
   regOffset = reg * 0x10;
   remainingB = 4;
-  puVar4 = (uint *)(regOffset + ctx + 0x2d87c);
+  valueIdPtr = (uint *)(regOffset + ctx + 0x2d87c);
   loopCounterF = 0;
   do {
     if (((componentMask & 1 << (loopCounterF & 0x3f)) == 0) ||
        ((((int)*(char *)(reg + ctx + 0x3087c) >> (loopCounterF & 0x3f) & 1U) != 0 &&
-        (recordIndex == *puVar4)))) {
+        (recordIndex == *valueIdPtr)))) {
       conflict = false;
     }
     else {
@@ -834,7 +838,7 @@ int recordRegisterIsAssignable(ctx, program, reg, usedValueMask, recordIndex, co
       }
       break;
     }
-    puVar4 = puVar4 + 1;
+    valueIdPtr = valueIdPtr + 1;
   } while (!conflict);
   boundMask = (uint)*(char *)(reg + ctx + 0x3087c);
   if ((boundMask & usedValueMask) == 0) {
@@ -846,8 +850,8 @@ int recordRegisterIsAssignable(ctx, program, reg, usedValueMask, recordIndex, co
   headCursor = (undefined4 *)(regOffset + ctx + 0x2a87c);
   do {
     componentBit = 1 << (loopCounterE & 0x3f);
-    if (((((componentBit & boundMask) != 0) && (puVar4 = (uint *)*headCursor, puVar4 != (uint *)0x0)) &&
-        (recordIndex == *puVar4)) && (puVar4[1] == 0)) {
+    if (((((componentBit & boundMask) != 0) && (valueIdPtr = (uint *)*headCursor, valueIdPtr != (uint *)0x0)) &&
+        (recordIndex == *valueIdPtr)) && (valueIdPtr[1] == 0)) {
       boundMask = boundMask & ~componentBit;
       conflict = true;
     }
@@ -863,23 +867,23 @@ int recordRegisterIsAssignable(ctx, program, reg, usedValueMask, recordIndex, co
     do {
       if ((1 << (componentIndex & 0x3f) & boundMask) != 0) {
         if (conflict) {
-          iVar14 = *valueIdCursor;
+          candidateValueId = *valueIdCursor;
           loopCounter = 0;
           seenCountdown = loopIndex;
           do {
-            piVar16 = seenValueIds + loopCounter;
+            seenSlot = seenValueIds + loopCounter;
             seenCountdown = seenCountdown + -1;
             if (seenCountdown == 0) {
-              if (*piVar16 != iVar14) goto LAB_00077f68;
+              if (*seenSlot != candidateValueId) goto LAB_00077f68;
               break;
             }
             loopCounter = loopCounter + 1;
-          } while (*piVar16 != iVar14);
+          } while (*seenSlot != candidateValueId);
         }
         else {
-          iVar14 = *valueIdCursor;
+          candidateValueId = *valueIdCursor;
 LAB_00077f68:
-          seenValueIds[loopIndex] = iVar14;
+          seenValueIds[loopIndex] = candidateValueId;
           conflict = 0 < loopIndex + 1;
           loopIndex = loopIndex + 1;
         }
@@ -893,30 +897,30 @@ LAB_00077f68:
       uVar10 = 0;
       valueIdCursor = seenValueIds;
       do {
-        iVar6 = *valueIdCursor;
+        valueId = *valueIdCursor;
         valueIdCursor = valueIdCursor + 1;
-        if (iVar6 != -1) {
-          for (puVar4 = *(uint **)(iVar6 * 4 + ctx + 0xc450); puVar4 != (uint *)0x0;
-              puVar4 = (uint *)puVar4[4]) {
-            uVar13 = *puVar4;
-            if ((*(uint *)(uVar13 * 4 + ctx + 0x3348c) & 0x40000) == 0) {
-              uVar8 = ((int (*)())recordGetWriteMask)(uVar13 * 0x10 + program);
+        if (valueId != -1) {
+          for (useNode = *(uint **)(valueId * 4 + ctx + 0xc450); useNode != (uint *)0x0;
+              useNode = (uint *)useNode[4]) {
+            writerRecord = *useNode;
+            if ((*(uint *)(writerRecord * 4 + ctx + 0x3348c) & 0x40000) == 0) {
+              writerWriteMask = ((int (*)())recordGetWriteMask)(writerRecord * 0x10 + program);
               loopCounterD = 0;
-              puVar15 = earliestWriter;
+              earliestPtr = earliestWriter;
               remaining = 4;
               do {
-                uVar7 = 1 << (loopCounterD & 0x3f);
-                if ((uVar8 & uVar7 & ~boundMask) != 0) {
-                  if ((uVar7 & uVar10) == 0) {
-                    *puVar15 = uVar13;
-                    uVar10 = uVar10 | uVar7;
+                laneBit = 1 << (loopCounterD & 0x3f);
+                if ((writerWriteMask & laneBit & ~boundMask) != 0) {
+                  if ((laneBit & uVar10) == 0) {
+                    *earliestPtr = writerRecord;
+                    uVar10 = uVar10 | laneBit;
                   }
-                  else if (uVar13 < *puVar15) {
-                    *puVar15 = uVar13;
+                  else if (writerRecord < *earliestPtr) {
+                    *earliestPtr = writerRecord;
                   }
                 }
                 loopCounterD = loopCounterD + 1;
-                puVar15 = puVar15 + 1;
+                earliestPtr = earliestPtr + 1;
                 remaining = remaining + -1;
               } while (remaining != 0);
             }
@@ -926,15 +930,15 @@ LAB_00077f68:
       } while (loopIndex2 != loopIndex);
       if (uVar10 != 0) {
         loopCounterG = 0;
-        puVar4 = earliestWriter;
+        earliestWriterPtr = earliestWriter;
         remainingB = 4;
         do {
-          uVar8 = 1 << (loopCounterG & 0x3f);
-          if (((uVar8 & uVar10) != 0) && (recordIndex == *puVar4)) {
-            uVar10 = uVar10 & ~uVar8;
+          laneBitG = 1 << (loopCounterG & 0x3f);
+          if (((laneBitG & uVar10) != 0) && (recordIndex == *earliestWriterPtr)) {
+            uVar10 = uVar10 & ~laneBitG;
           }
           loopCounterG = loopCounterG + 1;
-          puVar4 = puVar4 + 1;
+          earliestWriterPtr = earliestWriterPtr + 1;
           remainingB = remainingB + -1;
         } while (remainingB != 0);
       }
@@ -949,27 +953,27 @@ LAB_000780d4:
   boundMask = usedValueMask & (uVar10 | boundMask);
   if (boundMask != 0) {
     componentIndex = 0;
-    puVar4 = (uint *)(regOffset + ctx + 0x2d87c);
+    valueIdPtr = (uint *)(regOffset + ctx + 0x2d87c);
     do {
       componentBit = 1 << (componentIndex & 0x3f);
       if ((componentBit & boundMask) != 0) {
         if ((componentMask & componentBit) == 0) {
-          puVar15 = *(uint **)(recordIndex * 4 + ctx + 0xc450);
-          if (puVar15 != (uint *)0x0) {
+          listNode = *(uint **)(recordIndex * 4 + ctx + 0xc450);
+          if (listNode != (uint *)0x0) {
             do {
-              if (*puVar15 == *puVar4) {
+              if (*listNode == *valueIdPtr) {
                 boundMask = boundMask & ~componentBit;
               }
-              puVar15 = (uint *)puVar15[4];
-            } while (puVar15 != (uint *)0x0);
+              listNode = (uint *)listNode[4];
+            } while (listNode != (uint *)0x0);
           }
         }
-        else if (recordIndex == *puVar4) {
+        else if (recordIndex == *valueIdPtr) {
           boundMask = boundMask & ~componentBit;
         }
       }
       moreComponentsB = componentIndex != 3;
-      puVar4 = puVar4 + 1;
+      valueIdPtr = valueIdPtr + 1;
       componentIndex = componentIndex + 1;
     } while (moreComponentsB);
     if (boundMask != 0) {
@@ -978,13 +982,13 @@ LAB_000780d4:
       do {
         componentBit = 1 << (componentIndex & 0x3f);
         if ((((componentBit & boundMask) != 0) && ((componentBit & componentMask) == 0)) &&
-           (piVar16 = *(int **)(recordIndex * 4 + ctx + 0xe450), piVar16 != (int *)0x0)) {
+           (seenSlot = *(int **)(recordIndex * 4 + ctx + 0xe450), seenSlot != (int *)0x0)) {
           do {
-            if (*piVar16 == *valueIdCursor) {
+            if (*seenSlot == *valueIdCursor) {
               boundMask = boundMask & ~componentBit;
             }
-            piVar16 = (int *)piVar16[4];
-          } while (piVar16 != (int *)0x0);
+            seenSlot = (int *)seenSlot[4];
+          } while (seenSlot != (int *)0x0);
         }
         moreComponentsB = componentIndex != 3;
         valueIdCursor = valueIdCursor + 1;
@@ -2033,81 +2037,82 @@ int FUN_00079b00(param_1, param_2, param_3, param_4)
 }
 
 /* recordLinkSourceToDefinition @ 0x79bd0 (532 bytes) */
-int recordLinkSourceToDefinition(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  int param_1;
-  int param_2;
-  int param_3;
-  int param_4;
-  int param_5;
-  int param_6;
-  undefined4 param_7;
+int recordLinkSourceToDefinition(alloc, records, recordsCopy, dependent, recordIndex, sourceSlot, componentSel)
+  int alloc;
+  int records;
+  int recordsCopy;
+  int dependent;
+  int recordIndex;
+  int sourceSlot;
+  undefined4 componentSel;
 {
-  int iVar1;
-  bool bVar2;
-  uint uVar3;
-  uint uVar4;
-  int iVar5;
-  uint uVar6;
-  uint *puVar7;
-  int iVar8;
+  bool linked;
+  int sourceByteOffset;
+  bool fileMatches;
+  uint sourceFile;
+  uint sourceSelect;
+  int writesComponent;
+  uint defFile;
+  uint *sourcePtr;
+  int defIndex;
   int loopIndex;
-  uint *puVar10;
+  uint *defRecord;
   
-  iVar1 = (param_5 * 4 + param_6) * 4;
-  puVar7 = (uint *)(iVar1 + param_2 + 4);
-  uVar4 = ((int (*)())recordGetSourceSelect)(puVar7,param_7);
-  if ((1 < uVar4 - 4) && (iVar8 = param_5 + -1, -1 < iVar8)) {
-    puVar10 = (uint *)(param_2 + iVar8 * 0x10);
+  sourceByteOffset = (recordIndex * 4 + sourceSlot) * 4;
+  sourcePtr = (uint *)(sourceByteOffset + records + 4);
+  sourceSelect = ((int (*)())recordGetSourceSelect)(sourcePtr,componentSel);
+  if ((1 < sourceSelect - 4) && (defIndex = recordIndex + -1, -1 < defIndex)) {
+    defRecord = (uint *)(records + defIndex * 0x10);
     loopIndex = 0;
     do {
-      uVar3 = *puVar7 & 0xf;
-      uVar6 = *puVar10 >> 8 & 0xf;
-      if (uVar3 == 1) {
-        bVar2 = uVar6 == 5;
+      sourceFile = *sourcePtr & 0xf;
+      defFile = *defRecord >> 8 & 0xf;
+      if (sourceFile == 1) {
+        fileMatches = defFile == 5;
 LAB_00079cd0:
-        if (((!bVar2) || ((*puVar10 >> 0xd & 0x7f) != (*puVar7 >> 5 & 0xff))) ||
-           (iVar5 = ((int (*)())recordGetWriteEnable)(puVar10,uVar4), iVar5 == 0)) goto LAB_00079dc0;
-        if ((char)*puVar10 == 'A') {
-          if (((**(uint **)(param_1 + 0x34) & 0x280) == 0) || (uVar4 != 3)) {
+        if (((!fileMatches) || ((*defRecord >> 0xd & 0x7f) != (*sourcePtr >> 5 & 0xff))) ||
+           (writesComponent = ((int (*)())recordGetWriteEnable)(defRecord,sourceSelect), writesComponent == 0)) goto LAB_00079dc0;
+        if ((char)*defRecord == 'A') {
+          if (((**(uint **)(alloc + 0x34) & 0x280) == 0) || (sourceSelect != 3)) {
 LAB_00079d90:
-            ((int (*)())depListAddEdge)(param_1,param_4 + 0x418 + (param_5 * 3 + param_6) * 4,iVar8 - loopIndex,
-                         1 << (uVar4 & 0x3f),0,0,param_4);
-            bVar2 = true;
+            ((int (*)())depListAddEdge)(alloc,dependent + 0x418 + (recordIndex * 3 + sourceSlot) * 4,defIndex - loopIndex,
+                         1 << (sourceSelect & 0x3f),0,0,dependent);
+            linked = true;
           }
           else {
-            ((int (*)())recordSetSourceSelect)(puVar7,param_7,5);
-            if (param_3 == 0) goto LAB_00079dc8;
+            ((int (*)())recordSetSourceSelect)(sourcePtr,componentSel,5);
+            if (recordsCopy == 0) goto LAB_00079dc8;
 LAB_00079d78:
-            bVar2 = true;
-            *(uint *)(iVar1 + param_3 + 4) = *puVar7;
+            linked = true;
+            *(uint *)(sourceByteOffset + recordsCopy + 4) = *sourcePtr;
           }
         }
         else {
-          if (((char)*puVar10 != 'D') || ((uVar4 != 0 && (uVar4 != 3)))) goto LAB_00079d90;
-          ((int (*)())recordSetSourceSelect)(puVar7,param_7,5);
-          if ((param_3 != 0) && ((**(uint **)(param_1 + 0x34) & 0x200) != 0)) goto LAB_00079d78;
+          if (((char)*defRecord != 'D') || ((sourceSelect != 0 && (sourceSelect != 3)))) goto LAB_00079d90;
+          ((int (*)())recordSetSourceSelect)(sourcePtr,componentSel,5);
+          if ((recordsCopy != 0) && ((**(uint **)(alloc + 0x34) & 0x200) != 0)) goto LAB_00079d78;
 LAB_00079dc8:
-          bVar2 = true;
+          linked = true;
         }
       }
       else {
-        if (uVar3 == 0) {
-          bVar2 = uVar6 == 0;
+        if (sourceFile == 0) {
+          fileMatches = defFile == 0;
           goto LAB_00079cd0;
         }
-        if (uVar3 == 3) {
-          bVar2 = uVar6 == 4;
+        if (sourceFile == 3) {
+          fileMatches = defFile == 4;
           goto LAB_00079cd0;
         }
 LAB_00079dc0:
-        bVar2 = false;
+        linked = false;
       }
-      if (iVar8 == loopIndex) {
+      if (defIndex == loopIndex) {
         return;
       }
       loopIndex = loopIndex + 1;
-      puVar10 = puVar10 + -4;
-    } while (!bVar2);
+      defRecord = defRecord + -4;
+    } while (!linked);
   }
   return;
 }
@@ -2418,6 +2423,13 @@ int FUN_0007a4a0(ctx, program, laterPass, tempRegLimit, recordIndex, keepFlagOut
   undefined1 *keepFlagOut;
   uint *chosenRegOut;
 {
+  int *useListNode;
+  int *fixedValueIdCursor;
+  int otherRecordIndex;
+  int slotBase;
+  uint candidateReg;
+  uint recordWord0;
+  uint otherWriteMask;
   uint loopCounterC;
   uint loopCounterB;
   uint componentIndexB;
@@ -2430,9 +2442,9 @@ int FUN_0007a4a0(ctx, program, laterPass, tempRegLimit, recordIndex, keepFlagOut
   bool matched;
   char regFileBase;
   undefined *chosenSwizzle;
-  int iVar4;
-  int iVar5;
-  uint uVar6;
+  int remainingBits;
+  int callResult;
+  uint combinedWriteMask;
   uint writeMask;
   int *listNode;
   undefined4 result;
@@ -2443,34 +2455,34 @@ int FUN_0007a4a0(ctx, program, laterPass, tempRegLimit, recordIndex, keepFlagOut
   uint writeMaskSwizzled;
   uint combinedSwizzledMask;
   uint *record;
-  int *piVar17;
+  int *fixedNode;
   undefined *swizzleWord;
   
   *keepFlagOut = 0;
   *chosenRegOut = 0xffffffff;
   record = (uint *)(recordIndex * 0x10 + program);
-  iVar5 = ((int (*)())FUN_000777b0)(record,laterPass);
-  if (iVar5 == 0) {
-    iVar5 = ((int (*)())FUN_00077800)(record,laterPass);
-    if (iVar5 != 0) {
+  callResult = ((int (*)())FUN_000777b0)(record,laterPass);
+  if (callResult == 0) {
+    callResult = ((int (*)())FUN_00077800)(record,laterPass);
+    if (callResult != 0) {
       swizzleWord = ((unsigned char *)0x00003210U);
-      uVar6 = ((int (*)())recordCombinedWriteMask)(ctx,recordIndex);
+      combinedWriteMask = ((int (*)())recordCombinedWriteMask)(ctx,recordIndex);
       writeMask = ((int (*)())recordGetWriteMask)(record);
       loopCounterC = 0;
       componentIndexB = 0;
-      iVar5 = recordIndex * 4 + ctx;
+      slotBase = recordIndex * 4 + ctx;
       fixedMask = (uint)*(char *)(ctx + 0x30b9c);
 LAB_0007a7b0:
-      if (((uVar6 & fixedMask & 1 << (componentIndexB & 0x3f)) == 0) || (4 < loopCounterC)) goto LAB_0007aa50;
+      if (((combinedWriteMask & fixedMask & 1 << (componentIndexB & 0x3f)) == 0) || (4 < loopCounterC)) goto LAB_0007aa50;
       if (loopCounterC != 4) {
-        if ((1 << (loopCounterC & 0x3f) & ~(uVar6 | fixedMask)) == 0) {
-          iVar4 = 5 - loopCounterC;
+        if ((1 << (loopCounterC & 0x3f) & ~(combinedWriteMask | fixedMask)) == 0) {
+          remainingBits = 5 - loopCounterC;
           do {
             loopCounterC = loopCounterC + 1;
-            iVar4 = iVar4 + -1;
-            if (iVar4 == 0) goto LAB_0007aa50;
+            remainingBits = remainingBits + -1;
+            if (remainingBits == 0) goto LAB_0007aa50;
             if (loopCounterC == 4) goto LAB_0007a7e8;
-          } while ((1 << (loopCounterC & 0x3f) & ~(uVar6 | fixedMask)) == 0);
+          } while ((1 << (loopCounterC & 0x3f) & ~(combinedWriteMask | fixedMask)) == 0);
         }
         swizzleShiftBits = loopCounterC << (componentIndexB << 2 & 0x3c);
         loopCounterC = loopCounterC + 1;
@@ -2482,7 +2494,7 @@ LAB_0007a7e8:
       loopCounterB = 0;
       remaining = 4;
       do {
-        if ((uVar6 & 1 << (loopCounterB & 0x3f)) != 0) {
+        if ((combinedWriteMask & 1 << (loopCounterB & 0x3f)) != 0) {
           combinedSwizzledMask = combinedSwizzledMask | 1 << ((uint)swizzleWord >> ((loopCounterB & 0xf) << 2) & 0xf);
         }
         loopCounterB = loopCounterB + 1;
@@ -2509,8 +2521,8 @@ LAB_0007aa5c:
         remaining = 4;
         do {
           componentBit = 1 << (loopCounter & 0x3f);
-          if (((((componentBit & fixedMask) != 0) && (piVar17 = (int *)*fixedHeadCursor, piVar17 != (int *)0x0)) &&
-              (recordIndex == *piVar17)) && (piVar17[1] == 0)) {
+          if (((((componentBit & fixedMask) != 0) && (fixedNode = (int *)*fixedHeadCursor, fixedNode != (int *)0x0)) &&
+              (recordIndex == *fixedNode)) && (fixedNode[1] == 0)) {
             fixedMask = fixedMask & ~componentBit;
           }
           loopCounter = loopCounter + 1;
@@ -2518,16 +2530,16 @@ LAB_0007aa5c:
           remaining = remaining + -1;
         } while (remaining != 0);
         if (fixedMask == 0) goto LAB_0007aa5c;
-        piVar17 = (int *)(ctx + 0x30b8c);
+        fixedValueIdCursor = (int *)(ctx + 0x30b8c);
         componentIndex = 0;
         do {
           componentBit = 1 << (componentIndex & 0x3f);
           if ((componentBit & fixedMask) != 0) {
             if ((componentBit & writeMaskSwizzled) == 0) {
-              listNode = *(int **)(iVar5 + 0xc450);
+              listNode = *(int **)(slotBase + 0xc450);
               if (listNode != (int *)0x0) {
                 do {
-                  if (((componentBit & listNode[1]) == 0) || (matched = true, *listNode != *piVar17)) {
+                  if (((componentBit & listNode[1]) == 0) || (matched = true, *listNode != *fixedValueIdCursor)) {
                     matched = false;
                   }
                   listNode = (int *)listNode[4];
@@ -2539,25 +2551,25 @@ LAB_0007aa5c:
                 goto LAB_0007a944;
               }
             }
-            else if (recordIndex == *piVar17) {
+            else if (recordIndex == *fixedValueIdCursor) {
 LAB_0007a944:
               fixedMask = fixedMask & ~componentBit;
             }
           }
 LAB_0007a948:
           moreComponents = componentIndex != 3;
-          piVar17 = piVar17 + 1;
+          fixedValueIdCursor = fixedValueIdCursor + 1;
           componentIndex = componentIndex + 1;
         } while (moreComponents);
         if (fixedMask == 0) goto LAB_0007aa5c;
-        piVar17 = (int *)(ctx + 0x30b8c);
+        fixedValueIdCursor = (int *)(ctx + 0x30b8c);
         componentIndex = 0;
         do {
           componentBit = 1 << (componentIndex & 0x3f);
           if ((((componentBit & fixedMask) != 0) && ((componentBit & writeMaskSwizzled) == 0)) &&
-             (listNode = *(int **)(iVar5 + 0xe450), listNode != (int *)0x0)) {
+             (listNode = *(int **)(slotBase + 0xe450), listNode != (int *)0x0)) {
             do {
-              if (((componentBit & listNode[1]) == 0) || (matched = true, *listNode != *piVar17)) {
+              if (((componentBit & listNode[1]) == 0) || (matched = true, *listNode != *fixedValueIdCursor)) {
                 matched = false;
               }
               listNode = (int *)listNode[4];
@@ -2570,7 +2582,7 @@ LAB_0007a948:
           }
 LAB_0007a9d4:
           moreComponents = componentIndex != 3;
-          piVar17 = piVar17 + 1;
+          fixedValueIdCursor = fixedValueIdCursor + 1;
           componentIndex = componentIndex + 1;
         } while (moreComponents);
         chosenSwizzle = (undefined *)0xffffffff;
@@ -2588,46 +2600,46 @@ LAB_0007a680:
   }
   else {
     if (((*(uint *)(recordIndex * 4 + ctx + 0x3348c) & 0x1000) != 0) &&
-       (iVar5 = ((int (*)())recordAssignDestinationRegister)(ctx,program,recordIndex,keepFlagOut,chosenRegOut), iVar5 != 0)) {
+       (callResult = ((int (*)())recordAssignDestinationRegister)(ctx,program,recordIndex,keepFlagOut,chosenRegOut), callResult != 0)) {
       return 1;
     }
-    uVar6 = ((int (*)())recordGetWriteMask)(record);
-    for (piVar17 = *(int **)(recordIndex * 4 + ctx + 0xe450); piVar17 != (int *)0x0;
-        piVar17 = (int *)piVar17[4]) {
-      iVar5 = *piVar17;
-      writeMask = ((int (*)())recordGetWriteMask)(program + iVar5 * 0x10);
-      if (((uVar6 & writeMask) != 0) &&
-         (iVar5 = iVar5 * 4 + ctx, (*(uint *)(iVar5 + 0x3348c) & 0x40000) != 0)) {
-        for (listNode = *(int **)(iVar5 + 0xa450); listNode != (int *)0x0; listNode = (int *)listNode[4]) {
-          if (((recordIndex != *listNode) && ((uVar6 & writeMask & listNode[1]) != 0)) &&
+    otherWriteMask = ((int (*)())recordGetWriteMask)(record);
+    for (useListNode = *(int **)(recordIndex * 4 + ctx + 0xe450); useListNode != (int *)0x0;
+        useListNode = (int *)useListNode[4]) {
+      otherRecordIndex = *useListNode;
+      writeMask = ((int (*)())recordGetWriteMask)(program + otherRecordIndex * 0x10);
+      if (((otherWriteMask & writeMask) != 0) &&
+         (otherRecordIndex = otherRecordIndex * 4 + ctx, (*(uint *)(otherRecordIndex + 0x3348c) & 0x40000) != 0)) {
+        for (listNode = *(int **)(otherRecordIndex + 0xa450); listNode != (int *)0x0; listNode = (int *)listNode[4]) {
+          if (((recordIndex != *listNode) && ((otherWriteMask & writeMask & listNode[1]) != 0)) &&
              ((*(uint *)(*listNode * 4 + ctx + 0x3348c) & 0x40000) == 0)) goto LAB_0007aa90;
         }
       }
     }
     result = ((int (*)())recordCombinedWriteMask)(ctx,recordIndex);
-    iVar5 = ((int (*)())recordDestFileIs0)(record);
-    if (iVar5 == 0) {
-      uVar6 = *record;
+    callResult = ((int (*)())recordDestFileIs0)(record);
+    if (callResult == 0) {
+      recordWord0 = *record;
 LAB_0007a634:
-      regFileBase = (DAT_001aa758)[uVar6 >> 8 & 0xf];
+      regFileBase = (DAT_001aa758)[recordWord0 >> 8 & 0xf];
       destWriteMask = ((int (*)())recordGetWriteMask)(record);
-      iVar5 = ((int (*)())recordRegisterIsAssignable)(ctx,program,regFileBase * 0x100 + (uVar6 >> 0xd & 0x7f),result,recordIndex,
+      callResult = ((int (*)())recordRegisterIsAssignable)(ctx,program,regFileBase * 0x100 + (recordWord0 >> 0xd & 0x7f),result,recordIndex,
                            destWriteMask);
-      if (iVar5 == 0) goto LAB_0007a680;
+      if (callResult == 0) goto LAB_0007a680;
     }
     else {
-      uVar6 = *record;
-      if ((uVar6 >> 0xd & 0x7f) < tempRegLimit) goto LAB_0007a634;
+      recordWord0 = *record;
+      if ((recordWord0 >> 0xd & 0x7f) < tempRegLimit) goto LAB_0007a634;
     }
-    iVar5 = ((int (*)())recordDestFileIs0)(record);
-    if (iVar5 == 0) {
+    callResult = ((int (*)())recordDestFileIs0)(record);
+    if (callResult == 0) {
       if (((*record & 0xf00) != 0x400) || (matched = true, laterPass == 0)) {
         matched = false;
       }
       if (matched) {
         destWriteMask = ((int (*)())recordGetWriteMask)(record);
-        uVar6 = ((int (*)())recordFindFreeTempRegister)(ctx,program,result,recordIndex,destWriteMask);
-        *chosenRegOut = uVar6;
+        candidateReg = ((int (*)())recordFindFreeTempRegister)(ctx,program,result,recordIndex,destWriteMask);
+        *chosenRegOut = candidateReg;
       }
     }
     else {
@@ -2635,8 +2647,8 @@ LAB_0007a634:
       if (tempRegLimit != 0) {
         loopCounter = 0;
         do {
-          iVar5 = ((int (*)())recordRegisterIsAssignable)(ctx,program,loopCounter,result,recordIndex,destWriteMask);
-          if (iVar5 == 0) goto LAB_0007a6e4;
+          callResult = ((int (*)())recordRegisterIsAssignable)(ctx,program,loopCounter,result,recordIndex,destWriteMask);
+          if (callResult == 0) goto LAB_0007a6e4;
           loopCounter = loopCounter + 1;
         } while (tempRegLimit != loopCounter);
       }
