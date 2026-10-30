@@ -3350,7 +3350,7 @@ int gldEnterInternalDrawState(glContext, resetReg1af4, modeBitsB, modeBitsA, sav
   }
   savedWord1930 = *(undefined4 *)(glContext + 0x1930);
   *(undefined4 *)(glContext + 0x1b3c) = 0;
-  FUN_0004b480(glContext,*(uint *)(glContext + 0x18a4) >> 6 & 0xffff);
+  gldClearBoundSlot(glContext,*(uint *)(glContext + 0x18a4) >> 6 & 0xffff);
   a6 = *(code **)(((unsigned char *)0x00001330) + glContext);
   *(uint *)(glContext + 0x1f2c) = *(uint *)(glContext + 0x1f2c) & 0xfffff800 | 0x80;
   (*a6)(glContext,0xc0100000,a2,regValue,a4,a5,a6);
@@ -3543,7 +3543,7 @@ LAB_00087474:
     drawStateWords[7] = 0;
     drawStateWords[0x54b] = 0;
   }
-  ((void (*)())FUN_0004a8f0)(glContext,extraout_r4,in_r5,in_r6,fparam_1);
+  ((void (*)())gldRebindCurrentProgram)(glContext,extraout_r4,in_r5,in_r6,fparam_1);
   (**(code **)(((unsigned char *)0x00001330) + glContext))(glContext,0xc0100000);
   *(uint *)(glContext + 0x1930) = *(uint *)(glContext + 0x1930) & 0x3fefffff;
   packet = (undefined4 *)
@@ -3900,7 +3900,7 @@ int arbfpUnbindWorkAreaChecked(glContext, fpState)
       *(undefined4 *)(((unsigned char *)0x00001488) + glContext) = 0;
     }
     if (workArea == *(int *)(glContext + 0x1e5c)) {
-      FUN_0004b480(glContext,1);
+      gldClearBoundSlot(glContext,1);
       return;
     }
   }
@@ -3926,7 +3926,7 @@ int arbfpUnbindWorkArea(glContext, fpState)
     *(undefined4 *)(((unsigned char *)0x00001488) + glContext) = 0;
   }
   if (workArea == *(int *)(glContext + 0x1e5c)) {
-    FUN_0004b480(glContext,1);
+    gldClearBoundSlot(glContext,1);
     return;
   }
   return;

@@ -4181,7 +4181,7 @@ void gldValidateState(int glContext,undefined4 forwardedArg2,undefined4 forwarde
       forwardedArg2 = extraout_r4_07;
     }
     if ((dirtyMask & 0x2200) != 0) {
-      forwardedFloatArg1 = (double)((double (*)())FUN_0004def0)(glContext,forwardedArg2,forwardedArg3,forwardedArg4,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,
+      forwardedFloatArg1 = (double)((double (*)())gldValidateTextureUnits)(glContext,forwardedArg2,forwardedArg3,forwardedArg4,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,
                                       forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8,forwarded_in_stack_ffffffb8
                                      );
       dirtyMask = *(uint *)(glContext + 0x38);
@@ -4264,7 +4264,7 @@ void gldValidateState(int glContext,undefined4 forwardedArg2,undefined4 forwarde
       FUN_0004dbe0(glContext);
     }
   }
-  FUN_0004d100(glContext);
+  gldValidateAlphaBlendEarlyZ(glContext);
   FUN_00052280(glContext);
   *(undefined1 *)(glContext + 0x2e) = 0;
   *(undefined1 *)(glContext + 0x29) = 0;

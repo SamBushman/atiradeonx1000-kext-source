@@ -3975,7 +3975,7 @@ int FUN_000a7050(ctx)
   ((unsigned char *)0x00002b81)[ctx] = 1;
   uVar7 = (*ctxPtr250)(1,((unsigned char *)0x00003754U),uVar7,staleArgR6,a4,uVar6,0);
   *(undefined4 *)(ctx + 0x20a0) = uVar7;
-  FUN_0004ab60(iVar9);
+  gldInitProgramCacheEntry(iVar9);
   *(undefined2 *)(((unsigned char *)0x000015c8) + *(int *)(ctx + 0x20a0)) = 0xffff;
   *(undefined4 *)(((unsigned char *)0x0000135c) + ctx) = 5;
   uVar7 = (**(code **)(ctx + 0x250))(1,0x14);

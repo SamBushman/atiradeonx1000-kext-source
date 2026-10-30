@@ -877,7 +877,7 @@ PTR_FUN_001e89a8	0x1e89a8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char 
 PTR_FUN_001e89ac	0x1e89ac	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89ac asm("PTR_FUN_001e89ac");	pointer -> vpStateSetConstantVector	data.s
 PTR_FUN_001e89b0	0x1e89b0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89b0 asm("PTR_FUN_001e89b0");	pointer -> ctxTempListFree	data.s
 PTR_FUN_001e89b4	0x1e89b4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89b4 asm("PTR_FUN_001e89b4");	pointer -> extvsPrepareHardwareProgram	data.s
-PTR_FUN_001e89b8	0x1e89b8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89b8 asm("PTR_FUN_001e89b8");	pointer -> FUN_00062510	data.s
+PTR_FUN_001e89b8	0x1e89b8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89b8 asm("PTR_FUN_001e89b8");	pointer -> gldDestroyListObject	data.s
 PTR_FUN_001e89bc	0x1e89bc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89bc asm("PTR_FUN_001e89bc");	pointer -> ctxTempListCreate	data.s
 PTR_FUN_001e89c0	0x1e89c0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89c0 asm("PTR_FUN_001e89c0");	pointer -> vpStateApplyParameters	data.s
 PTR_FUN_001e89c4	0x1e89c4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89c4 asm("PTR_FUN_001e89c4");	pointer -> gldAllocListNode	data.s

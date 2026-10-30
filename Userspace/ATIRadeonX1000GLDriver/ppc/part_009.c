@@ -3811,8 +3811,8 @@ int gldFreeListNodes(glContext)
   return;
 }
 
-/* FUN_00062510 @ 0x62510 (92 bytes) */
-int FUN_00062510(glContext)
+/* gldDestroyListObject @ 0x62510 (92 bytes) */
+int gldDestroyListObject(glContext)
   int glContext;
 {
   if (*(int *)(((unsigned char *)0x000011b4) + glContext) != 0) {
@@ -9963,7 +9963,7 @@ asm(".set extvsInitLimits, _extvsInitLimits");
 asm(".globl FUN_00062410");
 asm(".set FUN_00062410, _gldAllocListNode");
 asm(".globl FUN_00062510");
-asm(".set FUN_00062510, _FUN_00062510");
+asm(".set FUN_00062510, _gldDestroyListObject");
 asm(".globl extvsStateCacheCreate");
 asm(".set extvsStateCacheCreate, _extvsStateCacheCreate");
 asm(".globl extvsStateCacheFreeAll");

@@ -704,8 +704,8 @@ LAB_0004d0d0:
   return;
 }
 
-/* FUN_0004d100 @ 0x4d100 (1264 bytes) */
-int FUN_0004d100(glContext)
+/* gldValidateAlphaBlendEarlyZ @ 0x4d100 (1264 bytes) */
+int gldValidateAlphaBlendEarlyZ(glContext)
   int glContext;
 {
   uint oldWord1bd4;
@@ -1220,8 +1220,8 @@ int gldEmitViewportAndGuardBand(glContext, packet)
   return packet + 0xc;
 }
 
-/* FUN_0004ddc0 @ 0x4ddc0 (104 bytes) */
-int FUN_0004ddc0(glContext)
+/* gldEmitConstantFlushPacket @ 0x4ddc0 (104 bytes) */
+int gldEmitConstantFlushPacket(glContext)
   int glContext;
 {
   undefined4 *puVar1;
@@ -1281,8 +1281,8 @@ int gldSetUnitScaleConstants(glContext, programEntry, unusedArg3, firstUnit, uni
   return;
 }
 
-/* FUN_0004def0 @ 0x4def0 (2428 bytes) */
-double FUN_0004def0(int glContext,undefined4 unusedArg2,uint unitIndexArg,undefined4 unitFormatArg,double fprF1,double fprF2,double fprF3,double fprF4,double fprF5,double fprF6,double fprF7,double fprF8,double fprF9)
+/* gldValidateTextureUnits @ 0x4def0 (2428 bytes) */
+double gldValidateTextureUnits(int glContext,undefined4 unusedArg2,uint unitIndexArg,undefined4 unitFormatArg,double fprF1,double fprF2,double fprF3,double fprF4,double fprF5,double fprF6,double fprF7,double fprF8,double fprF9)
 {
   int boundProgramEntry;
   int boundProgramTexState;
@@ -2251,7 +2251,7 @@ int gldInitStateDefaults(glContext)
   *(undefined4 *)(glContext + 0x233c) = 0x1b0f;
   *(undefined4 *)(glContext + 0x2340) = 0x1b0f;
   *(undefined4 *)(glContext + 0x2344) = 0x1b0f;
-  FUN_0004ab60(glContext);
+  gldInitProgramCacheEntry(glContext);
   glContextWord2454 = *(uint *)(glContext + 0x2454);
   *(undefined4 *)(glContext + 0x1b7c) = 0x80006a;
   if ((int)glContextWord2454 < 0) {
@@ -3115,7 +3115,7 @@ LAB_00050920:
     *(int *)(0x00002748 + glContext + 4) = streamCurrent + 0x48;
     (*streamSetCurrent)(glContext,streamCurrent + 0x48,finalCallArgR5,finalCallArgR6,a4,a5,packet);
   }
-  reserveResult = FUN_0004aa00(glContext,1);
+  reserveResult = arbfpRebindIfOverLimit(glContext,1);
   if (reserveResult == 0) {
     (**(code **)(((unsigned char *)0x00001330) + glContext))(glContext,0xc0100000);
     (**(code **)(((unsigned char *)0x00001338) + glContext))(glContext);
@@ -4519,8 +4519,8 @@ int extvsGetSymbolStorageKind(ctx, position)
   return symbolIndexOrField;
 }
 
-/* FUN_00053000 @ 0x53000 (52 bytes) */
-int FUN_00053000(glContext, updateFlags)
+/* extvsMarkStateDirty @ 0x53000 (52 bytes) */
+int extvsMarkStateDirty(glContext, updateFlags)
   int glContext;
   uint updateFlags;
 {
@@ -4536,8 +4536,8 @@ int FUN_00053000(glContext, updateFlags)
   return;
 }
 
-/* FUN_00053040 @ 0x53040 (20 bytes) */
-int FUN_00053040(param_1, unusedArg2)
+/* extvsSelectRegisterCode @ 0x53040 (20 bytes) */
+int extvsSelectRegisterCode(param_1, unusedArg2)
   undefined4 param_1;
   int unusedArg2;
 {

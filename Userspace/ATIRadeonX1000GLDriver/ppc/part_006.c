@@ -7885,8 +7885,8 @@ int FUN_0004a860(glContext, param_2, param_3, param_4, param_5, param_6, param_7
   return;
 }
 
-/* FUN_0004a8f0 @ 0x4a8f0 (140 bytes) */
-void FUN_0004a8f0(int glContext,undefined4 param_2,undefined4 unusedArgR5,undefined4 unused,double fprF1)
+/* gldRebindCurrentProgram @ 0x4a8f0 (140 bytes) */
+void gldRebindCurrentProgram(int glContext,undefined4 param_2,undefined4 unusedArgR5,undefined4 unused,double fprF1)
 {
   if ((*(uint *)(glContext + 0x44) & 0x20000) == 0) {
     FUN_000b6580(glContext,0);
@@ -7903,8 +7903,8 @@ void FUN_0004a8f0(int glContext,undefined4 param_2,undefined4 unusedArgR5,undefi
   return;
 }
 
-/* FUN_0004a990 @ 0x4a990 (100 bytes) */
-int FUN_0004a990(glContext, unusedArg2)
+/* gldResetProgramEntry @ 0x4a990 (100 bytes) */
+int gldResetProgramEntry(glContext, unusedArg2)
   int glContext;
   undefined4 *unusedArg2;
 {
@@ -7924,8 +7924,8 @@ int FUN_0004a990(glContext, unusedArg2)
   return;
 }
 
-/* FUN_0004aa00 @ 0x4aa00 (136 bytes) */
-int FUN_0004aa00(ctx, unusedArg2)
+/* arbfpRebindIfOverLimit @ 0x4aa00 (136 bytes) */
+int arbfpRebindIfOverLimit(ctx, unusedArg2)
   int ctx;
   int unusedArg2;
 {
@@ -7949,8 +7949,8 @@ int FUN_0004aa00(ctx, unusedArg2)
   return flagValue;
 }
 
-/* FUN_0004aa90 @ 0x4aa90 (196 bytes) */
-int FUN_0004aa90(glContext, programEntry)
+/* gldResetProgramEntryDefaults @ 0x4aa90 (196 bytes) */
+int gldResetProgramEntryDefaults(glContext, programEntry)
   int glContext;
   uint *programEntry;
 {
@@ -7980,8 +7980,8 @@ int FUN_0004aa90(glContext, programEntry)
   return;
 }
 
-/* FUN_0004ab60 @ 0x4ab60 (304 bytes) */
-int FUN_0004ab60(glContext)
+/* gldInitProgramCacheEntry @ 0x4ab60 (304 bytes) */
+int gldInitProgramCacheEntry(glContext)
   int glContext;
 {
   int loopIndex;
@@ -7994,7 +7994,7 @@ int FUN_0004ab60(glContext)
   *(uint *)(((unsigned char *)0x00001544) + *(int *)(glContext + 0x1e60)) =
        *(uint *)(((unsigned char *)0x00001544) + *(int *)(glContext + 0x1e60)) & 0xffc0003f | 0x40;
   *(undefined4 *)(((unsigned char *)0x00001098) + *(int *)(glContext + 0x1e60)) = 1;
-  ((int (*)())FUN_0004aa90)(glContext,((unsigned char *)0x000010ec) + *(int *)(glContext + 0x1e60));
+  ((int (*)())gldResetProgramEntryDefaults)(glContext,((unsigned char *)0x000010ec) + *(int *)(glContext + 0x1e60));
   *(undefined4 *)(glContext + 0x1e84) = 0;
   *(undefined4 *)(glContext + 0x277c) = 0xffffffff;
   *(undefined4 *)(glContext + 0x1e64) = 0;
@@ -8374,8 +8374,8 @@ LAB_0004b340:
   return;
 }
 
-/* FUN_0004b480 @ 0x4b480 (148 bytes) */
-int FUN_0004b480(glContext, slotIndex)
+/* gldClearBoundSlot @ 0x4b480 (148 bytes) */
+int gldClearBoundSlot(glContext, slotIndex)
   int glContext;
   int slotIndex;
 {
@@ -8461,7 +8461,7 @@ int gldReleaseProgramEntry(glContext, programEntry)
   int shiftByteOffset;
   int stateBlock;
   
-  ((int (*)())FUN_0004a990)(glContext,programEntry);
+  ((int (*)())gldResetProgramEntry)(glContext,programEntry);
   if ((glContext != 0) && (stateBlock = *(int *)(((unsigned char *)0x000036c0) + programEntry), stateBlock != 0)) {
     (**(code **)(glContext + 0x18))(*(undefined4 *)(stateBlock + 0xc));
     *(undefined4 *)(stateBlock + 0xc) = 0;
@@ -8556,7 +8556,7 @@ int gldMarkAllProgramsDirty(glContext)
   *(undefined4 *)(glContext + 0x1e60) = allocation;
   _memset(allocation,0,((unsigned char *)0x00003754U));
   *(undefined4 *)(glContext + 0x1e5c) = 0;
-  ((int (*)())FUN_0004ab60)(glContext);
+  ((int (*)())gldInitProgramCacheEntry)(glContext);
   *(undefined2 *)(((unsigned char *)0x000015c8) + *(int *)(glContext + 0x1e60)) = 0xffff;
   FUN_000b5fb0(glContext);
   programTable = *(int *)(((unsigned char *)0x00001154) + glContext);
@@ -8848,7 +8848,7 @@ LAB_0004bee0:
         allocation2 = _malloc(((unsigned char *)0x00003754U));
         *(undefined4 *)(glContext + 0x1e60) = allocation2;
         _memset(allocation2,0,((unsigned char *)0x00003754U));
-        ((int (*)())FUN_0004ab60)(glContext);
+        ((int (*)())gldInitProgramCacheEntry)(glContext);
         *(undefined2 *)(((unsigned char *)0x000015c8) + *(int *)(glContext + 0x1e60)) = 0xffff;
         glContextWord1e6c = *(ushort *)(glContext + 0x1e6c);
       }

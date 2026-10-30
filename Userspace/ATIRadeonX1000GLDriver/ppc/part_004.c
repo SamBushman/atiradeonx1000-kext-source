@@ -4073,7 +4073,7 @@ int gld_drawPixelsAsPoints(ctx, srcPixels, procWidth, procHeight, srcRowBytes, b
       scratchPtr14 = srcRowBytes;
       FUN_000a6140(commandStream,(*(uint *)(ctx + 0x1cf8) ^ 1) & 1 | (uint)(format == 0x1902) << 0xc,
                    scratchPtr13);
-      FUN_0004b480(commandStream,*(uint *)(ctx + 0x1ae4) >> 6 & 0xffff);
+      gldClearBoundSlot(commandStream,*(uint *)(ctx + 0x1ae4) >> 6 & 0xffff);
       *(uint *)(ctx + 0x216c) = *(uint *)(ctx + 0x216c) & 0xfffff800 | 0x80;
     }
     else {
@@ -4264,7 +4264,7 @@ int gld_enterPointDrawState(ring, drawStateSave)
   
   pointSizeWord = *(undefined4 *)(ring + 8);
   FUN_000a6140(ring,(*(uint *)(ring + 0x1ab8) ^ 1) & 1,drawStateSave);
-  FUN_0004b480(ring,*(uint *)(ring + 0x18a4) >> 6 & 0xffff);
+  gldClearBoundSlot(ring,*(uint *)(ring + 0x18a4) >> 6 & 0xffff);
   scratchUint3 = (**(code **)(ring + 0x2758))(ring,0x1f);
   *(undefined4 *)(0x00002748 + ring + 4) = scratchUint3;
   packet = (undefined4 *)gldEmitInternalDrawSetupPackets(ring,scratchUint3);

@@ -251,15 +251,15 @@
 48da0	fragmentProgramToIL	r4	RET	4a7cc blr 
 48da0	fragmentProgramToIL	r5	PASS-no	48f00 bl 0x1a38e0	; symbol stub for: _realloc
 48da0	fragmentProgramToIL	r6	PASS-no	48f00 bl 0x1a38e0	; symbol stub for: _realloc
-4b480	FUN_0004b480	r5	PASS-indirect	4b4cc bctrl 
-4b480	FUN_0004b480	r6	PASS-indirect	4b4cc bctrl 
-4b480	FUN_0004b480	r7	PASS-indirect	4b4cc bctrl 
-4b480	FUN_0004b480	r8	PASS-indirect	4b4cc bctrl 
+4b480	gldClearBoundSlot	r5	PASS-indirect	4b4cc bctrl 
+4b480	gldClearBoundSlot	r6	PASS-indirect	4b4cc bctrl 
+4b480	gldClearBoundSlot	r7	PASS-indirect	4b4cc bctrl 
+4b480	gldClearBoundSlot	r8	PASS-indirect	4b4cc bctrl 
 4c560	FUN_0004c560	r6	PASS-indirect	4c5d0 bl 0x4dc30
 4c560	FUN_0004c560	r7	PASS-indirect	4c5d0 bl 0x4dc30
 4c560	FUN_0004c560	r8	PASS-indirect	4c5d0 bl 0x4dc30
-4d100	FUN_0004d100	r5	PASS-indirect	4d314 bl 0x4ce30
-4d100	FUN_0004d100	r6	PASS-indirect	4d314 bl 0x4ce30
+4d100	gldValidateAlphaBlendEarlyZ	r5	PASS-indirect	4d314 bl 0x4ce30
+4d100	gldValidateAlphaBlendEarlyZ	r6	PASS-indirect	4d314 bl 0x4ce30
 4fd80	extvsUpdateVertexAttributeConstants	r5	PASS-indirect	4fef0 bctrl 
 4fd80	extvsUpdateVertexAttributeConstants	r6	PASS-indirect	4fef0 bctrl 
 4fd80	extvsUpdateVertexAttributeConstants	r7	PASS-indirect	4fef0 bctrl 

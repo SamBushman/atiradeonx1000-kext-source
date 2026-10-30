@@ -8565,7 +8565,7 @@ int FUN_0003b160(ctx, dirtyBits, passThroughResult)
       ((*(uint *)(dirtyBits + 0xc) & 0x4c00000) != 0)))) {
     updateFlags = updateFlags | 1;
   }
-  FUN_00053000(ctx + 0x240,updateFlags);
+  extvsMarkStateDirty(ctx + 0x240,updateFlags);
   constantBank = *(int *)(ctx + 0x29e8) + 0x14;
   if ((updateFlags & 1) != 0) {
     programRecord = currentProgram[0xd];
