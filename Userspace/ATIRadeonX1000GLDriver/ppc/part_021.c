@@ -253,7 +253,7 @@ int Compiler__init_e1920(compiler, allocatorUserData, allocateFn, freeFn, callba
     hwObject = _setjmp(puStack00000018[1]);
     if (hwObject == 0) {
       ((int (*)())Compiler__resetState)(puStack00000018);
-      FUN_000e13b4(puStack00000018);
+      Compiler__resetPerStageState(puStack00000018);
     }
   }
   return;
@@ -313,7 +313,7 @@ int Compiler__init_e1a48(compiler, allocatorUserData, allocateFn, freeFn, callba
     hwObject = _setjmp(puStack00000018[1]);
     if (hwObject == 0) {
       ((int (*)())Compiler__resetState)(puStack00000018);
-      FUN_000e13b4(puStack00000018);
+      Compiler__resetPerStageState(puStack00000018);
     }
   }
   return;
@@ -571,7 +571,7 @@ int Compiler__compileStages(compiler, compileRequest)
   stageIndex = *(int *)(compileRequest + 8) + -1;
   *(int *)(compiler + 0x52c) = stageIndex;
   while (-1 < stageIndex) {
-    FUN_000e13b4(compiler);
+    Compiler__resetPerStageState(compiler);
     stageIndexCopy = *(int *)(compiler + 0x52c);
     if (stageIndexCopy < 2) {
       stageSource = *(undefined4 *)(stageIndexCopy * 4 + compileRequest + 0xc);
@@ -1646,8 +1646,8 @@ int IRInst__createMovForDest(inst, inst2, compiler)
   return newInst;
 }
 
-/* FUN_000e3af4 @ 0xe3af4 (148 bytes) */
-int FUN_000e3af4(inst, compilerCtx)
+/* IRInst__dropAppendedSources @ 0xe3af4 (148 bytes) */
+int IRInst__dropAppendedSources(inst, compilerCtx)
   uint inst;
   undefined4 compilerCtx;
 {

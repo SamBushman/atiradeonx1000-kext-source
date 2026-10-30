@@ -6572,7 +6572,7 @@ LAB_00185f24:
     loopIndex = 0;
     for (loopIndex2 = 1; loopRemaining = (**(code **)(*inst + 0x14))(inst), loopIndex2 <= loopRemaining;
         loopIndex2 = loopIndex2 + 1) {
-      loopRemaining = FUN_000f3b10(inst,loopIndex2);
+      loopRemaining = IRInst__operandReadsXYZ(inst,loopIndex2);
       if (loopRemaining != 0) {
         loopRemaining = loopIndex + 1;
         loopIndex = loopIndex + 2;
@@ -6580,7 +6580,7 @@ LAB_00185f24:
           loopIndex = loopRemaining;
         }
       }
-      FUN_000f3b68(inst,loopIndex2);
+      IRInst__operandReadsW(inst,loopIndex2);
     }
     if (3 < loopIndex) {
       for (loopIndex = 1; loopIndex2 = (**(code **)(*inst + 0x14))(inst), loopIndex <= loopIndex2;
@@ -6604,7 +6604,7 @@ LAB_0018601c:
               sourceHandled = false;
             }
             else {
-              loopIndex2 = FUN_000f2cac(operandSelectBytes[0]);
+              loopIndex2 = SelectWord__firstUsedComponent(operandSelectBytes[0]);
               operandVReg[0x27] = 0x1010100;
               for (loopRemaining = 1; operandCount = (**(code **)(*operandVReg + 0x14))(operandVReg), loopRemaining <= operandCount;
                   loopRemaining = loopRemaining + 1) {

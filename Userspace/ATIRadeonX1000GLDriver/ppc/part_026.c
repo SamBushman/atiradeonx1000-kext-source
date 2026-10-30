@@ -2704,35 +2704,35 @@ int IRInst__applyDescriptorSwizzle(descriptor, inst)
   return;
 }
 
-/* FUN_000f9038 @ 0xf9038 (264 bytes) */
-int FUN_000f9038(param_1, tempIndex, list)
-  int param_1;
+/* Program__emitClampPair @ 0xf9038 (264 bytes) */
+int Program__emitClampPair(program, tempIndex, list)
+  int program;
   undefined4 tempIndex;
   undefined4 list;
 {
   undefined4 inst;
   int operandRecord;
-  double dVar3;
+  double literalValue;
   
-  inst = IRInst__create(0x17,*(undefined4 *)(param_1 + 8));
+  inst = IRInst__create(0x17,*(undefined4 *)(program + 8));
   operandRecord = IRInst__getOperandRecord(inst,0);
   *(undefined4 *)(operandRecord + 0xc) = 0;
   *(undefined4 *)(operandRecord + 8) = tempIndex;
   operandRecord = IRInst__getOperandRecord(inst,1);
-  dVar3 = (double)FLOAT_001aa0d4;
+  literalValue = (double)FLOAT_001aa0d4;
   *(undefined4 *)(operandRecord + 0xc) = 0;
   *(undefined4 *)(operandRecord + 8) = tempIndex;
-  ((void (*)())IRInst__makeLiteralVec4Float)(inst,param_1,2,dVar3,dVar3,dVar3,dVar3);
+  ((void (*)())IRInst__makeLiteralVec4Float)(inst,program,2,literalValue,literalValue,literalValue,literalValue);
   DList__pushBack(list,inst);
-  inst = IRInst__create(0x19,*(undefined4 *)(param_1 + 8));
+  inst = IRInst__create(0x19,*(undefined4 *)(program + 8));
   operandRecord = IRInst__getOperandRecord(inst,0);
   *(undefined4 *)(operandRecord + 0xc) = 0;
   *(undefined4 *)(operandRecord + 8) = tempIndex;
   operandRecord = IRInst__getOperandRecord(inst,1);
-  dVar3 = (double)FLOAT_001aa0e8;
+  literalValue = (double)FLOAT_001aa0e8;
   *(undefined4 *)(operandRecord + 0xc) = 0;
   *(undefined4 *)(operandRecord + 8) = tempIndex;
-  ((void (*)())IRInst__makeLiteralVec4Float)(inst,param_1,2,dVar3,dVar3,dVar3,dVar3);
+  ((void (*)())IRInst__makeLiteralVec4Float)(inst,program,2,literalValue,literalValue,literalValue,literalValue);
   DList__pushBack(list,inst);
   return inst;
 }
@@ -3243,7 +3243,7 @@ LAB_000f9f08:
           *(short *)((int)descriptor + 2) = (short)laneIndex;
           *descriptor = *descriptor & 0xffc0ffff | 0x40000;
         }
-        setupInst = (void *)((int (*)())FUN_000f9038)(pass,laneIndex,list);
+        setupInst = (void *)((int (*)())Program__emitClampPair)(pass,laneIndex,list);
         destTokenWord = *descriptor;
         if ((destTokenWord & 0x400000) == 0) goto LAB_000f9f08;
         hasSetupInstFlag = false;

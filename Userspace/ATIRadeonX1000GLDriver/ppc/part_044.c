@@ -4734,7 +4734,7 @@ LAB_001605dc:
   operandRecord = IRInst__getOperandRecord(inst,0);
   WriteMask__fromSelectWord(auStack_38,*(undefined4 *)(operandRecord + 0x10));
   operandRecord = IRInst__getOperandRecord(node,0);
-  FUN_000f3968(auStack_34,*(undefined4 *)(operandRecord + 0x10),0x1010101);
+  laneBytes__selectWhereFirstIsOne(auStack_34,*(undefined4 *)(operandRecord + 0x10),0x1010101);
   *(int *)(pass + 0x17c) = *(int *)(pass + 0x17c) + 1;
   hasSingleUse = IRInst__hasSingleUse(inst,pass);
   if (hasSingleUse == 0) {

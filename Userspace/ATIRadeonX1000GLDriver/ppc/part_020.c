@@ -3814,33 +3814,33 @@ int FUN_000e13a8(compiler)
   return;
 }
 
-/* FUN_000e13b4 @ 0xe13b4 (152 bytes) */
-int FUN_000e13b4(param_1)
-  int param_1;
+/* Compiler__resetPerStageState @ 0xe13b4 (152 bytes) */
+int Compiler__resetPerStageState(compiler)
+  int compiler;
 {
-  *(undefined4 *)(param_1 + 0x334) = 1;
-  *(undefined4 *)(param_1 + 0x3c4) = 0xffffffff;
-  *(undefined4 *)(param_1 + 0x324) = 0;
-  *(undefined4 *)(param_1 + 0x32c) = 0;
-  *(undefined4 *)(param_1 + 0x330) = 0;
-  *(undefined4 *)(param_1 + 0x338) = 0;
-  *(undefined4 *)(param_1 + 0x33c) = 0;
-  *(undefined4 *)(param_1 + 0x340) = 0;
-  *(undefined4 *)(param_1 + 0x344) = 0;
-  *(undefined4 *)(param_1 + 0x348) = 0;
-  *(undefined4 *)(param_1 + 0x3ac) = 0;
-  *(undefined4 *)(param_1 + 0x3b0) = 0;
-  *(undefined4 *)(param_1 + 0x3b4) = 0;
-  *(undefined4 *)(param_1 + 0x3b8) = 0;
-  *(undefined4 *)(param_1 + 0x3bc) = 0;
-  *(undefined4 *)(param_1 + 0x3c0) = 0;
-  Compiler__resetValueNumbers(param_1);
-  *(undefined4 *)(param_1 + 0x3d0) = 0;
-  *(undefined4 *)(param_1 + 0x648) = 0;
-  if (*(int *)(param_1 + 0x318) == 0) {
-    *(undefined4 *)(param_1 + 0x6bc) = 0;
-    *(undefined4 *)(param_1 + 0x39c) = 0;
-    *(undefined4 *)(param_1 + 0x6b8) = 0;
+  *(undefined4 *)(compiler + 0x334) = 1;
+  *(undefined4 *)(compiler + 0x3c4) = 0xffffffff;
+  *(undefined4 *)(compiler + 0x324) = 0;
+  *(undefined4 *)(compiler + 0x32c) = 0;
+  *(undefined4 *)(compiler + 0x330) = 0;
+  *(undefined4 *)(compiler + 0x338) = 0;
+  *(undefined4 *)(compiler + 0x33c) = 0;
+  *(undefined4 *)(compiler + 0x340) = 0;
+  *(undefined4 *)(compiler + 0x344) = 0;
+  *(undefined4 *)(compiler + 0x348) = 0;
+  *(undefined4 *)(compiler + 0x3ac) = 0;
+  *(undefined4 *)(compiler + 0x3b0) = 0;
+  *(undefined4 *)(compiler + 0x3b4) = 0;
+  *(undefined4 *)(compiler + 0x3b8) = 0;
+  *(undefined4 *)(compiler + 0x3bc) = 0;
+  *(undefined4 *)(compiler + 0x3c0) = 0;
+  Compiler__resetValueNumbers(compiler);
+  *(undefined4 *)(compiler + 0x3d0) = 0;
+  *(undefined4 *)(compiler + 0x648) = 0;
+  if (*(int *)(compiler + 0x318) == 0) {
+    *(undefined4 *)(compiler + 0x6bc) = 0;
+    *(undefined4 *)(compiler + 0x39c) = 0;
+    *(undefined4 *)(compiler + 0x6b8) = 0;
   }
   return;
 }

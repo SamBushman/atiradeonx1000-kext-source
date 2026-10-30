@@ -191,7 +191,7 @@ int Block__splitEdge(fromBlock, toBlock, newBlock)
   undefined4 *successorSlot;
   uint *successorVector;
   
-  successorIndex = FUN_000e7fe0(fromBlock,toBlock);
+  successorIndex = Block__successorIndex(fromBlock,toBlock);
   successorVector = *(uint **)(fromBlock + 0xd0);
   if (successorIndex < *successorVector) {
     edgeVectorCount = successorVector[1];

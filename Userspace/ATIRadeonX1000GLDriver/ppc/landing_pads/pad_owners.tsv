@@ -95,8 +95,8 @@
 0xef038	FUN_000eee4c
 0xef79c	Program__initAndTranslate
 0xef7f8	Program__initAndTranslate
-0xefaf0	FUN_000efa4c
-0xefb0c	FUN_000efa4c
+0xefaf0	Program__orderBlocksByDfs
+0xefb0c	Program__orderBlocksByDfs
 0xefe3c	Program__insertExitMarkerAndFlagBlocks
 0xefea0	Program__insertExitMarkerAndFlagBlocks
 0xf001c	Program__insertExitMarkerAndFlagBlocks

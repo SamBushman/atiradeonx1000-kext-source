@@ -3356,7 +3356,7 @@ code_r0x0013e80c:
                     defRoot = disjointSetFindRoot(inst[0x53],unionFindParents);
                     while ((candidateDef != 0 &&
                            ((candidateRoot = disjointSetFindRoot(*(undefined4 *)(candidateDef + 0x14c),unionFindParents),
-                            defRoot != candidateRoot || (candidateRoot = FUN_000f497c(candidateDef,inst), candidateRoot == 0)
+                            defRoot != candidateRoot || (candidateRoot = IRInst__writeMasksOverlap(candidateDef,inst), candidateRoot == 0)
                             )))) {
                       candidateDef = ((int (*)())FUN_0013ca84)(candidateDef);
                     }

@@ -2963,7 +2963,7 @@ eede8	eee08	eh-pad	FUN_000eec50	8	0x193cc0,__Unwind_Resume
 ef038	ef058	eh-pad	FUN_000eee4c	8	0x193cc0,__Unwind_Resume
 ef79c	ef7a0	millicode	Program__initAndTranslate	1	
 ef7f8	ef818	eh-pad	Program__initAndTranslate	8	0x193cc0,__Unwind_Resume
-efaf0	efb2c	eh-pad	FUN_000efa4c	15	0x193cc0,__Unwind_Resume
+efaf0	efb2c	eh-pad	Program__orderBlocksByDfs	15	0x193cc0,__Unwind_Resume
 efe3c	efe40	millicode	Program__insertExitMarkerAndFlagBlocks	1	
 efea0	efebc	other	Program__insertExitMarkerAndFlagBlocks	7	0x193cc0
 f001c	f003c	eh-pad	Program__insertExitMarkerAndFlagBlocks	8	0x193cc0,__Unwind_Resume

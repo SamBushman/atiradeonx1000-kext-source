@@ -806,33 +806,33 @@ int WriteMask__fromSelectWord(outMask, selectWord)
   return;
 }
 
-/* FUN_000f3968 @ 0xf3968 (104 bytes) */
-int FUN_000f3968(outMask, param_2, param_3)
+/* laneBytes__selectWhereFirstIsOne @ 0xf3968 (104 bytes) */
+int laneBytes__selectWhereFirstIsOne(outMask, selectMask, values)
   undefined4 *outMask;
-  uint param_2;
-  undefined4 param_3;
+  uint selectMask;
+  undefined4 values;
 {
   undefined1 uVar1;
   
   uVar1 = 0;
   *outMask = 0;
-  if (param_2 >> 0x18 == 1) {
-    uVar1 = (undefined1)((uint)param_3 >> 0x18);
+  if (selectMask >> 0x18 == 1) {
+    uVar1 = (undefined1)((uint)values >> 0x18);
   }
   *(undefined1 *)outMask = uVar1;
   uVar1 = 0;
-  if ((param_2 >> 0x10 & 0xff) == 1) {
-    uVar1 = (undefined1)((uint)param_3 >> 0x10);
+  if ((selectMask >> 0x10 & 0xff) == 1) {
+    uVar1 = (undefined1)((uint)values >> 0x10);
   }
   *(undefined1 *)((int)outMask + 1) = uVar1;
   uVar1 = 0;
-  if ((param_2 >> 8 & 0xff) == 1) {
-    uVar1 = (undefined1)((uint)param_3 >> 8);
+  if ((selectMask >> 8 & 0xff) == 1) {
+    uVar1 = (undefined1)((uint)values >> 8);
   }
   *(undefined1 *)((int)outMask + 2) = uVar1;
   uVar1 = 0;
-  if ((param_2 & 0xff) == 1) {
-    uVar1 = (undefined1)param_3;
+  if ((selectMask & 0xff) == 1) {
+    uVar1 = (undefined1)values;
   }
   *(undefined1 *)((int)outMask + 3) = uVar1;
   return;
@@ -909,8 +909,8 @@ int IRInst__destSelectLane3IsX(inst)
   return *(char *)(operandRecord + 0x13) == '\0';
 }
 
-/* FUN_000f3b10 @ 0xf3b10 (88 bytes) */
-int FUN_000f3b10(inst, operandIndex)
+/* IRInst__operandReadsXYZ @ 0xf3b10 (88 bytes) */
+int IRInst__operandReadsXYZ(inst, operandIndex)
   undefined4 inst;
   undefined4 operandIndex;
 {
@@ -933,8 +933,8 @@ int FUN_000f3b10(inst, operandIndex)
   return 0;
 }
 
-/* FUN_000f3b68 @ 0xf3b68 (88 bytes) */
-int FUN_000f3b68(inst, operandIndex)
+/* IRInst__operandReadsW @ 0xf3b68 (88 bytes) */
+int IRInst__operandReadsW(inst, operandIndex)
   undefined4 inst;
   undefined4 operandIndex;
 {
@@ -957,8 +957,8 @@ int FUN_000f3b68(inst, operandIndex)
   return 0;
 }
 
-/* FUN_000f3bc0 @ 0xf3bc0 (112 bytes) */
-int FUN_000f3bc0(inst, operandIndex)
+/* IRInst__operandSelectIsNotDefault @ 0xf3bc0 (112 bytes) */
+int IRInst__operandSelectIsNotDefault(inst, operandIndex)
   undefined4 inst;
   int operandIndex;
 {
@@ -1606,30 +1606,30 @@ int IRInst__sourceLanesAllWritten(inst, operandIndex)
   return 0;
 }
 
-/* FUN_000f497c @ 0xf497c (168 bytes) */
-int FUN_000f497c(inst, inst2)
+/* IRInst__writeMasksOverlap @ 0xf497c (168 bytes) */
+int IRInst__writeMasksOverlap(inst, inst2)
   undefined4 inst;
   undefined4 inst2;
 {
   int operandRecord;
   int iVar1;
-  uint local_28;
-  uint local_24;
-  uint local_20 [5];
+  uint instWriteMask;
+  uint inst2WriteMask;
+  uint selectedMask [5];
   
   operandRecord = IRInst__getOperandRecord(inst,0);
-  ((int (*)())WriteMask__fromSelectWord)(&local_28,*(undefined4 *)(operandRecord + 0x10));
+  ((int (*)())WriteMask__fromSelectWord)(&instWriteMask,*(undefined4 *)(operandRecord + 0x10));
   iVar1 = IRInst__isProjectionOfOpcode2a(inst2);
   if (iVar1 == 0) {
     operandRecord = IRInst__getOperandRecord(inst2,0);
-    ((int (*)())FUN_000f3968)(local_20,*(undefined4 *)(operandRecord + 0x10),DAT_001aa840);
-    local_24 = local_20[0];
+    ((int (*)())laneBytes__selectWhereFirstIsOne)(selectedMask,*(undefined4 *)(operandRecord + 0x10),DAT_001aa840);
+    inst2WriteMask = selectedMask[0];
   }
   else {
     operandRecord = IRInst__getOperandRecord(inst2,0);
-    ((int (*)())WriteMask__fromSelectWord)(&local_24,*(undefined4 *)(operandRecord + 0x10));
+    ((int (*)())WriteMask__fromSelectWord)(&inst2WriteMask,*(undefined4 *)(operandRecord + 0x10));
   }
-  return (local_28 & local_24) != 0;
+  return (instWriteMask & inst2WriteMask) != 0;
 }
 
 /* ConstRecords__fillFloat4 @ 0xf4a24 (56 bytes) */

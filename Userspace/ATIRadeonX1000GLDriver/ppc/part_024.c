@@ -2445,8 +2445,8 @@ int Program__removeInst(program, inst)
   return;
 }
 
-/* FUN_000efa4c @ 0xefa4c (164 bytes) */
-int FUN_000efa4c(program)
+/* Program__orderBlocksByDfs @ 0xefa4c (164 bytes) */
+int Program__orderBlocksByDfs(program)
   int program;
 {
   int block;
@@ -4283,17 +4283,17 @@ int SelectWord__isSplat(selectWord)
   return 0;
 }
 
-/* FUN_000f2cac @ 0xf2cac (92 bytes) */
-int FUN_000f2cac(param_1)
-  undefined4 param_1;
+/* SelectWord__firstUsedComponent @ 0xf2cac (92 bytes) */
+int SelectWord__firstUsedComponent(selectWord)
+  undefined4 selectWord;
 {
-  unsigned int ghidra_home[8] = { param_1, 0, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[8] = { selectWord, 0, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   char *pcVar1;
   int loopCounter;
   int loopCounterB;
   
-  (*(unsigned int *)((unsigned char *)ghidra_home + 0)) = param_1;
-  ((int (*)())SelectWord__isSplat)(param_1);
+  (*(unsigned int *)((unsigned char *)ghidra_home + 0)) = selectWord;
+  ((int (*)())SelectWord__isSplat)(selectWord);
   loopCounterB = 4;
   loopCounter = 0;
   pcVar1 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 0));

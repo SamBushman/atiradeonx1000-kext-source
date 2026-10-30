@@ -9880,8 +9880,8 @@ LAB_00157cf8:
     IROperand__setModifierBits(operandIndex2 * 0x18 + sourceDef + 0x8c,1,negateFlag2);
     operandRecord4 = IRInst__getOperandRecord(sourceDef,~operandIndex2 & 3);
     operandSelectD = *(undefined4 *)(operandRecord4 + 0x10);
-    iVar12 = FUN_000f2cac(operandSelectB);
-    iVar14 = FUN_000f2cac(operandSelectD);
+    iVar12 = SelectWord__firstUsedComponent(operandSelectB);
+    iVar14 = SelectWord__firstUsedComponent(operandSelectD);
     uVar2 = DAT_001b0050 & 0xffffff;
     uVar3 = DAT_001b0050 & 0xffffff;
     operandRecord = IRInst__getOperandRecord(sourceDef,operandIndex2);

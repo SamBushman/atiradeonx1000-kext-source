@@ -253,11 +253,11 @@ ef498	Program__initAndTranslate	ef76c	ef784	-	no-handler
 ef498	Program__initAndTranslate	ef794	ef798	ef7f8	cleanup
 ef498	Program__initAndTranslate	ef7ac	ef7e8	-	no-handler
 ef498	Program__initAndTranslate	ef814	ef8f8	-	no-handler
-efa4c	FUN_000efa4c	efa78	efa7c	-	no-handler
-efa4c	FUN_000efa4c	efa98	efa9c	efaf0	cleanup
-efa4c	FUN_000efa4c	efab0	efab4	-	no-handler
-efa4c	FUN_000efa4c	efad0	efad4	efb0c	cleanup
-efa4c	FUN_000efa4c	efb28	efdc4	-	no-handler
+efa4c	Program__orderBlocksByDfs	efa78	efa7c	-	no-handler
+efa4c	Program__orderBlocksByDfs	efa98	efa9c	efaf0	cleanup
+efa4c	Program__orderBlocksByDfs	efab0	efab4	-	no-handler
+efa4c	Program__orderBlocksByDfs	efad0	efad4	efb0c	cleanup
+efa4c	Program__orderBlocksByDfs	efb28	efdc4	-	no-handler
 efde4	Program__insertExitMarkerAndFlagBlocks	efe1c	efe20	-	no-handler
 efde4	Program__insertExitMarkerAndFlagBlocks	efe34	efe38	efe3c	cleanup
 efde4	Program__insertExitMarkerAndFlagBlocks	efe50	efe54	-	no-handler

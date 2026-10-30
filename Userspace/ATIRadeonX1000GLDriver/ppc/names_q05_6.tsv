@@ -2584,3 +2584,26 @@ func	FUN_000ec658	Program__countInstructions	INFERRED	sums DList__count of the i
 local	FUN_000ec658	param_1	program	INFERRED	program
 local	FUN_000ec3e8	param_1	program	INFERRED	program
 local	FUN_000ec3e8	param_2	node	INFERRED	block prepended
+func	FUN_000f3b10	IRInst__operandReadsXYZ	INFERRED	true when any select byte of operand operandIndex is below 3 (reads x, y or z)
+func	FUN_000f3b68	IRInst__operandReadsW	INFERRED	true when any select byte of operand operandIndex equals 3 (reads w)
+func	FUN_000f3bc0	IRInst__operandSelectIsNotDefault	INFERRED	true unless the select word of operand operandIndex equals the default pattern (UNK_001aa84c for the destination, UNK_001aa848 for sources)
+func	FUN_000f2cac	SelectWord__firstUsedComponent	INFERRED	returns the component selected by the first lane whose byte is not 4 (unused)
+local	FUN_000f2cac	param_1	selectWord	INFERRED	select word scanned
+func	FUN_000e7fe0	Block__successorIndex	INFERRED	index of successor among the non-null entries of the successor vector (+0xd0), -1 when absent
+local	FUN_000e7fe0	param_1	block	INFERRED	block whose successors are scanned
+local	FUN_000e7fe0	param_2	successor	INFERRED	successor looked for
+func	FUN_000f3968	laneBytes__selectWhereFirstIsOne	INFERRED	result byte for each lane = byte of values when the same lane byte of selectMask equals 1, else 0
+local	FUN_000f3968	param_2	selectMask	INFERRED	lane bytes compared with 1
+local	FUN_000f3968	param_3	values	INFERRED	lane bytes copied where selectMask is 1
+func	FUN_000e13b4	Compiler__resetPerStageState	INFERRED	clears the per-stage counters and pointers of the compiler (+0x324..+0x348, +0x3ac..+0x3d0, +0x648) and the retry flags when no failure is pending
+local	FUN_000e13b4	param_1	compiler	INFERRED	compiler
+func	FUN_000e3af4	IRInst__dropAppendedSources	INFERRED	for inst and the following instructions: removes the appended last source (flag 0x200) of every flagged instruction
+func	FUN_000efa4c	Program__orderBlocksByDfs	INFERRED	clears the visit stamps (+0x118) of all blocks, walks the blocks depth-first from the entry block with an explicit stack and a post-order vector, then rebuilds the program's block list (+0x37c) from the order
+local	FUN_000efa4c	param_1	program	INFERRED	program
+func	FUN_000f497c	IRInst__writeMasksOverlap	INFERRED	true when the lanes written by inst and the lanes written (or, for non-projection inst2, selected) by inst2 intersect
+local	FUN_000f497c	local_28	instWriteMask	INFERRED	WriteMask of inst operand 0
+local	FUN_000f497c	local_24	inst2WriteMask	INFERRED	WriteMask of inst2 operand 0 (or laneBytes__selectWhereFirstIsOne result)
+local	FUN_000f497c	local_20	selectedMask	INFERRED	laneBytes__selectWhereFirstIsOne output copied into inst2WriteMask
+func	FUN_000f9038	Program__emitClampPair	INFERRED	appends two instructions (opcodes 0x17 and 0x19, each reading and writing temp tempIndex with a vec4 float literal FLOAT_001aa0d4 / FLOAT_001aa0e8) to list
+local	FUN_000f9038	param_1	program	INFERRED	program
+local	FUN_000f9038	dVar3	literalValue	INFERRED	float literal widened to double for IRInst__makeLiteralVec4Float

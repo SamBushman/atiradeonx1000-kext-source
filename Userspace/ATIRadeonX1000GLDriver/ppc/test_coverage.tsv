@@ -1251,7 +1251,7 @@
 0xe1388	noop_e1388	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0xe138c	noop_e138c	28	yes	
 0xe13a8	FUN_000e13a8	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0xe13b4	FUN_000e13b4	152	yes	
+0xe13b4	Compiler__resetPerStageState	152	yes	
 0xe144c	FUN_000e144c	24	yes	
 0xe1464	Compiler__timerOutputFileName	28	yes	
 0xe1484	Compiler__releaseOutputBuffer	80	no	indirect call (driver context / vtable / callback)
@@ -1303,7 +1303,7 @@
 0xe3544	EncoderState__init	340	no	indirect call (driver context / vtable / callback)
 0xe36bc	MachineCodeWriter__encodeProgram	664	no	indirect call (driver context / vtable / callback)
 0xe3968	IRInst__createMovForDest	396	no	indirect call (driver context / vtable / callback)
-0xe3af4	FUN_000e3af4	148	yes	
+0xe3af4	IRInst__dropAppendedSources	148	yes	
 0xe3b88	FUN_000e3b88	2144	no	indirect call (driver context / vtable / callback)
 0xe43ec	FUN_000e43ec	20	yes	
 0xe4400	setWord30	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
@@ -1354,7 +1354,7 @@
 0xe7de4	Block__isInVectorD4Of	172	yes	
 0xe7e90	Block__findSimplePredecessor	168	no	indirect call (driver context / vtable / callback)
 0xe7f38	Block__findSimpleSuccessor	168	no	indirect call (driver context / vtable / callback)
-0xe7fe0	FUN_000e7fe0	92	yes	
+0xe7fe0	Block__successorIndex	92	yes	
 0xe803c	Block__predecessorIndex	92	yes	
 0xe8098	Block__phiOperandIndexForPredecessor	52	yes	
 0xe80cc	Block__nextUnvisitedSuccessor	88	yes	
@@ -1487,7 +1487,7 @@
 0xef498	Program__initAndTranslate	1084	no	indirect call (driver context / vtable / callback)
 0xef8f8	Program__appendToVector3c8	120	yes	
 0xef970	Program__removeInst	220	yes	
-0xefa4c	FUN_000efa4c	860	yes	
+0xefa4c	Program__orderBlocksByDfs	860	yes	
 0xefde4	Program__insertExitMarkerAndFlagBlocks	888	no	indirect call (driver context / vtable / callback)
 0xf019c	FUN_000f019c	792	no	indirect call (driver context / vtable / callback)
 0xf04d4	IRInst__tryFoldOutputScale	724	no	indirect call (driver context / vtable / callback)
@@ -1497,7 +1497,7 @@
 0xf29f4	pass_assign_slots	488	no	indirect call (driver context / vtable / callback)
 0xf2bdc	SelectWord__compose	128	yes	
 0xf2c5c	SelectWord__isSplat	80	yes	
-0xf2cac	FUN_000f2cac	92	yes	
+0xf2cac	SelectWord__firstUsedComponent	92	yes	
 0xf2d08	Lane__isValid	16	yes	
 0xf2d18	SelectWord__areCompatible	144	yes	
 0xf2da8	SelectWord__matches	112	yes	
@@ -1532,14 +1532,14 @@
 0xf3884	IRInst__destIsSingleComponent	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0xf388c	laneMask__fromSelectBytes	124	yes	
 0xf3908	WriteMask__fromSelectWord	96	yes	
-0xf3968	FUN_000f3968	104	yes	
+0xf3968	laneBytes__selectWhereFirstIsOne	104	yes	
 0xf39d0	FUN_000f39d0	96	yes	
 0xf3a30	IRInst__countWrittenComponents	96	yes	
 0xf3a90	FUN_000f3a90	80	yes	
 0xf3ae0	IRInst__destSelectLane3IsX	48	yes	
-0xf3b10	FUN_000f3b10	88	yes	
-0xf3b68	FUN_000f3b68	88	yes	
-0xf3bc0	FUN_000f3bc0	112	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0xf3b10	IRInst__operandReadsXYZ	88	yes	
+0xf3b68	IRInst__operandReadsW	88	yes	
+0xf3bc0	IRInst__operandSelectIsNotDefault	112	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0xf3c30	IRInst__computeSourceLaneMask	972	no	indirect call (driver context / vtable / callback)
 0xf403c	IRInst__computeSourceReadMask	1404	yes	
 0xf45f8	FUN_000f45f8	160	yes	
@@ -1548,7 +1548,7 @@
 0xf47a8	FUN_000f47a8	180	yes	
 0xf485c	FUN_000f485c	144	yes	
 0xf48ec	IRInst__sourceLanesAllWritten	144	yes	
-0xf497c	FUN_000f497c	168	yes	
+0xf497c	IRInst__writeMasksOverlap	168	yes	
 0xf4a24	ConstRecords__fillFloat4	56	yes	
 0xf4a5c	RegisterMap__nextTempIndex	20	yes	
 0xf4a70	isRegKindBelow21	20	yes	
@@ -1607,7 +1607,7 @@
 0xf8ccc	OpcodeTemplate__lookup	132	no	indirect call (driver context / vtable / callback)
 0xf8d50	IRInst__applyDescriptorSelects	568	no	indirect call (driver context / vtable / callback)
 0xf8f88	IRInst__applyDescriptorSwizzle	176	no	indirect call (driver context / vtable / callback)
-0xf9038	FUN_000f9038	264	yes	
+0xf9038	Program__emitClampPair	264	yes	
 0xf9140	Program__createInstForIlOpcode	284	no	indirect call (driver context / vtable / callback)
 0xf92fc	Program__appendInst	480	no	indirect call (driver context / vtable / callback)
 0xf94dc	FUN_000f94dc	1268	no	indirect call (driver context / vtable / callback)

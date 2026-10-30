@@ -1251,7 +1251,7 @@
 0xe1388	4	noop_e1388	part_020	converted
 0xe138c	28	noop_e138c	part_020	converted
 0xe13a8	12	FUN_000e13a8	part_020	converted
-0xe13b4	152	FUN_000e13b4	part_020	converted
+0xe13b4	152	Compiler__resetPerStageState	part_020	converted
 0xe144c	24	FUN_000e144c	part_020	converted
 0xe1464	28	Compiler__timerOutputFileName	part_020	converted
 0xe1484	80	Compiler__releaseOutputBuffer	part_020	converted
@@ -1303,7 +1303,7 @@
 0xe3544	340	EncoderState__init	part_021	converted
 0xe36bc	652	MachineCodeWriter__encodeProgram	part_021	converted
 0xe3968	396	IRInst__createMovForDest	part_021	converted
-0xe3af4	148	FUN_000e3af4	part_021	converted
+0xe3af4	148	IRInst__dropAppendedSources	part_021	converted
 0xe3b88	1848	FUN_000e3b88	part_021	converted
 0xe43ec	20	FUN_000e43ec	part_021	converted
 0xe4400	8	setWord30	part_021	converted
@@ -1354,7 +1354,7 @@
 0xe7de4	172	Block__isInVectorD4Of	part_022	converted
 0xe7e90	168	Block__findSimplePredecessor	part_022	converted
 0xe7f38	168	Block__findSimpleSuccessor	part_022	converted
-0xe7fe0	92	FUN_000e7fe0	part_022	converted
+0xe7fe0	92	Block__successorIndex	part_022	converted
 0xe803c	92	Block__predecessorIndex	part_022	converted
 0xe8098	52	Block__phiOperandIndexForPredecessor	part_022	converted
 0xe80cc	88	Block__nextUnvisitedSuccessor	part_022	converted
@@ -1487,7 +1487,7 @@
 0xef498	860	Program__initAndTranslate	part_024	converted
 0xef8f8	120	Program__appendToVector3c8	part_024	converted
 0xef970	220	Program__removeInst	part_024	converted
-0xefa4c	164	FUN_000efa4c	part_024	converted
+0xefa4c	164	Program__orderBlocksByDfs	part_024	converted
 0xefde4	536	Program__insertExitMarkerAndFlagBlocks	part_024	converted
 0xf019c	292	FUN_000f019c	part_024	converted
 0xf04d4	724	IRInst__tryFoldOutputScale	part_024	converted
@@ -1497,7 +1497,7 @@
 0xf29f4	488	pass_assign_slots	part_024	converted
 0xf2bdc	128	SelectWord__compose	part_024	converted
 0xf2c5c	80	SelectWord__isSplat	part_024	converted
-0xf2cac	92	FUN_000f2cac	part_024	converted
+0xf2cac	92	SelectWord__firstUsedComponent	part_024	converted
 0xf2d08	16	Lane__isValid	part_024	converted
 0xf2d18	144	SelectWord__areCompatible	part_025	converted
 0xf2da8	112	SelectWord__matches	part_025	converted
@@ -1532,14 +1532,14 @@
 0xf3884	8	IRInst__destIsSingleComponent	part_025	converted
 0xf388c	124	laneMask__fromSelectBytes	part_025	converted
 0xf3908	96	WriteMask__fromSelectWord	part_025	converted
-0xf3968	104	FUN_000f3968	part_025	converted
+0xf3968	104	laneBytes__selectWhereFirstIsOne	part_025	converted
 0xf39d0	96	FUN_000f39d0	part_025	converted
 0xf3a30	96	IRInst__countWrittenComponents	part_025	converted
 0xf3a90	80	FUN_000f3a90	part_025	converted
 0xf3ae0	48	IRInst__destSelectLane3IsX	part_025	converted
-0xf3b10	88	FUN_000f3b10	part_025	converted
-0xf3b68	88	FUN_000f3b68	part_025	converted
-0xf3bc0	112	FUN_000f3bc0	part_025	converted
+0xf3b10	88	IRInst__operandReadsXYZ	part_025	converted
+0xf3b68	88	IRInst__operandReadsW	part_025	converted
+0xf3bc0	112	IRInst__operandSelectIsNotDefault	part_025	converted
 0xf3c30	972	IRInst__computeSourceLaneMask	part_025	converted
 0xf403c	1404	IRInst__computeSourceReadMask	part_025	converted
 0xf45f8	160	FUN_000f45f8	part_025	converted
@@ -1548,7 +1548,7 @@
 0xf47a8	180	FUN_000f47a8	part_025	converted
 0xf485c	144	FUN_000f485c	part_025	converted
 0xf48ec	144	IRInst__sourceLanesAllWritten	part_025	converted
-0xf497c	168	FUN_000f497c	part_025	converted
+0xf497c	168	IRInst__writeMasksOverlap	part_025	converted
 0xf4a24	56	ConstRecords__fillFloat4	part_025	converted
 0xf4a5c	20	RegisterMap__nextTempIndex	part_025	converted
 0xf4a70	20	isRegKindBelow21	part_025	converted
@@ -1607,7 +1607,7 @@
 0xf8ccc	132	OpcodeTemplate__lookup	part_026	converted
 0xf8d50	568	IRInst__applyDescriptorSelects	part_026	converted
 0xf8f88	176	IRInst__applyDescriptorSwizzle	part_026	converted
-0xf9038	264	FUN_000f9038	part_026	converted
+0xf9038	264	Program__emitClampPair	part_026	converted
 0xf9140	284	Program__createInstForIlOpcode	part_026	converted
 0xf92fc	480	Program__appendInst	part_026	converted
 0xf94dc	968	FUN_000f94dc	part_026	converted

@@ -2177,10 +2177,10 @@ int Block__findSimpleSuccessor(block)
   } while( true );
 }
 
-/* FUN_000e7fe0 @ 0xe7fe0 (92 bytes) */
-int FUN_000e7fe0(param_1, param_2)
-  int param_1;
-  int param_2;
+/* Block__successorIndex @ 0xe7fe0 (92 bytes) */
+int Block__successorIndex(block, successor)
+  int block;
+  int successor;
 {
   int iVar1;
   int loopCounter;
@@ -2191,12 +2191,12 @@ int FUN_000e7fe0(param_1, param_2)
   loopCounterB = 0;
   loopCounter = 0;
   do {
-    if (*(uint *)(*(int *)(param_1 + 0xd0) + 4) < loopIndex) {
+    if (*(uint *)(*(int *)(block + 0xd0) + 4) < loopIndex) {
       return -1;
     }
-    iVar1 = *(int *)(*(int *)(*(int *)(param_1 + 0xd0) + 8) + loopCounterB);
+    iVar1 = *(int *)(*(int *)(*(int *)(block + 0xd0) + 8) + loopCounterB);
     if (iVar1 != 0) {
-      if (iVar1 == param_2) {
+      if (iVar1 == successor) {
         return loopCounter;
       }
       loopCounter = loopCounter + 1;
