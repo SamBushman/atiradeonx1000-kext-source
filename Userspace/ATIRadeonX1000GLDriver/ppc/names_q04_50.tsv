@@ -1,0 +1,33 @@
+local	FUN_000a6860	uVar15	packetWords	INFERRED	command packet size: 0x25 words, 0x23 when the 0x5c8 preamble was already emitted (ctx+0x2802)
+local	FUN_000a6860	uVar1	extentYFixed	INFERRED	(int)(ctx+0x2818 * 0.5 * screenScale * (bottom - top)): vertical extent written to the low half of packet word 1
+local	FUN_000a6860	fVar2	rectLeft	INFERRED	float(ctx+0x1358 - ctx+0x13d8): left edge relative to the draw origin
+local	FUN_000a6860	fVar3	rectRight	INFERRED	float(ctx+0x1360 - ctx+0x13d8): right edge
+local	FUN_000a6860	fVar4	rectBottom	INFERRED	float(ctx+0x1364 - ctx+0x13dc): bottom edge
+local	FUN_000a6860	fVar5	rectTop	INFERRED	float(ctx+0x135c - ctx+0x13dc): top edge
+local	FUN_000a6860	fVar6	screenScale	INFERRED	float(*(ctx+8)) scale factor of the viewport scale
+local	FUN_000a6860	fVar8	clipConst0	INFERRED	FLOAT_001aa188 written to packet word 10
+local	FUN_000a6860	fVar9	clipConst1	INFERRED	FLOAT_001aa18c written to packet word 11
+local	FUN_000a6860	fVar10	clipConst2	INFERRED	FLOAT_001aa190 written to packet word 12
+local	FUN_000a6860	fVar11	clipConst3	INFERRED	FLOAT_001aa194 written to packet word 13
+local	FUN_000a6860	fVar12	rectCenterX	INFERRED	(left + right) * 0.5, packet word 6
+local	FUN_000a6860	fVar13	rectCenterY	INFERRED	(top + bottom) * 0.5, packet word 7
+local	FUN_000a6860	puVar14	packet	INFERRED	command packet from the context callback at +0x2758
+local	FUN_000a6860	iVar16	drawFlagACopy	INFERRED	copy of drawFlagA kept as a call argument for FUN_0009d3b0
+local	FUN_000a6860	puVar17	staleArgR6	INFERRED	register left over from the packet fill (constant 0x1087), forwarded to FUN_0009d3b0
+local	FUN_000a6860	puVar18	packetEnd	INFERRED	packet + 0x10 words: new stream write pointer
+local	FUN_000a6860	uVar19	staleArgR7	INFERRED	register left over from the packet fill (0xc0083500), forwarded to FUN_0009d3b0
+use	FUN_000a6860	iVar20	drawFlagB	INFERRED	1 when dirty bit 0x400 is set and byte ctx+0x1491 is nonzero	^\s*if\ \(\(\(param_2\ \&\ 0x400\)\ ==\ 0\)\ \|\|\ \(iVar20\ =\ 1,\ \(\(unsigned\ char\ \*\)0x00001491\)\[param_1\]\ ==\ '\\0'\)\)\ \{$	+2
+use	FUN_000a6860	iVar20	drawFlagB	INFERRED	1 when dirty bit 0x400 is set and byte ctx+0x1491 is nonzero	^\s*FUN_00086ba0\(param_1,0,iVar21,iVar20,auStack_128\);$	+2
+use	FUN_000a6860	iVar20	extentXFixed	INFERRED	(int)(screenScale * ctx+0x2814 * 0.5 * (right - left)): horizontal extent written to the high half of packet word 1	^\s*iVar20\ =\ \(int\)\(fVar6\ \*\ \*\(float\ \*\)\(param_1\ \+\ 0x2814\)\ \*\ FLOAT_001aa10c\ \*\ \(fVar3\ \-\ fVar2\)\);$	+2
+use	FUN_000a6860	iVar20	extentXFixed	INFERRED	(int)(screenScale * ctx+0x2814 * 0.5 * (right - left)): horizontal extent written to the high half of packet word 1	^\s*puVar14\[1\]\ =\ iVar20\ <<\ 0x10\ \|\ uVar1\ \&\ 0xffff;$	+1
+use	FUN_000a6860	iVar20	extentXFixed	INFERRED	(int)(screenScale * ctx+0x2814 * 0.5 * (right - left)): horizontal extent written to the high half of packet word 1	^\s*iVar20\ =\ \(int\)\(fVar6\ \*\ \*\(float\ \*\)\(param_1\ \+\ 0x2814\)\ \*\ FLOAT_001aa10c\ \*\ \(fVar3\ \-\ fVar2\)\);$@2	+2
+use	FUN_000a6860	iVar20	extentXFixed	INFERRED	(int)(screenScale * ctx+0x2814 * 0.5 * (right - left)): horizontal extent written to the high half of packet word 1	^\s*puVar14\[1\]\ =\ iVar20\ <<\ 0x10\ \|\ uVar1\ \&\ 0xffff;$@2	+1
+use	FUN_000a6860	iVar20	extentXFixed	INFERRED	(int)(screenScale * ctx+0x2814 * 0.5 * (right - left)): horizontal extent written to the high half of packet word 1	^\s*FUN_0009d3b0\(param_1,extraout_r4,iVar16,puVar17,puVar18,uVar19,iVar20\);$	+1
+local	FUN_000a6860	iVar21	drawFlagA	INFERRED	1 when dirty bit 0x100 is set and byte ctx+0x1490 is nonzero
+local	FUN_000a6860	dVar22	depthValue	INFERRED	double at engine caps +0x2d88, packet word 8
+local	FUN_000a6860	auStack_128	savedDrawState	INFERRED	144-byte save area for gldEnterInternalDrawState / gldLeaveInternalDrawState
+local	FUN_000a6860	local_98	i2dHi5	INFERRED	0x43300000 high word of an int->double conversion pair
+local	FUN_000a6860	local_80	i2dHi6	INFERRED	0x43300000 high word of an int->double conversion pair
+local	FUN_000a6860	uStack_84	rectTopLo	INFERRED	biased integer top edge (low word of the int->double pair)
+local	FUN_000a6860	uStack_7c	rectBottomLo	INFERRED	biased integer bottom edge (low word of the int->double pair)
+func	FUN_000a6860	gld_emitInternalViewportPacket	INFERRED	within gldEnterInternalDrawState/LeaveInternalDrawState: emits a packet that sets the viewport scale/offset from the draw rectangle (ctx+0x1358..0x1364 minus origin), the 0xc0083500 packet with centre, depth value and clip constants, then calls FUN_0009d3b0

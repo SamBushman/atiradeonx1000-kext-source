@@ -1138,56 +1138,56 @@ extern int atifsAddColorOp();
 extern int atifsAddAlphaOp();
 extern int atifsSetConstant();
 extern uint FUN_000a3560(int param_1,double fparam_1);
-extern int FUN_000a3610();
+extern int gld_roundUpToPowerOfTwo();
 extern int FUN_000a3670();
 extern int FUN_000a36b0();
-extern void FUN_000a3790(undefined4 param_1,undefined4 param_2,uint param_3,int param_4,int *param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12);
-extern void FUN_000a3a60(undefined4 param_1,undefined4 param_2,uint param_3,int param_4,uint *param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13);
-extern int FUN_000a3be0();
+extern void gld_buildCoverageByteTable(undefined4 param_1,undefined4 param_2,uint param_3,int param_4,int *param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12);
+extern void gld_buildCoverageRampTable(undefined4 param_1,undefined4 param_2,uint param_3,int param_4,uint *param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13);
+extern int gld_setPrimitiveInputRegisters();
 extern int FUN_000a43f0();
 extern int FUN_000a4490();
-extern int FUN_000a4550();
+extern int gld_markBoundObjectsDirty();
 extern int FUN_000a46d0();
 extern int FUN_000a4760();
-extern int FUN_000a4770();
+extern int gld_computePointSizePixels();
 extern int FUN_000a4980();
-extern int FUN_000a5c40();
-extern int FUN_000a5ec0();
-extern int FUN_000a6140();
+extern int gld_emitClearColorPacket();
+extern int gld_updateSampleCoverage();
+extern int gld_resetRasterStateForInternalDraw();
 extern int FUN_000a64d0();
-extern int FUN_000a6500();
-extern int FUN_000a6860();
-extern int FUN_000a6cb0();
+extern int gld_emitClearFillPacket();
+extern int gld_emitInternalViewportPacket();
+extern int gld_clearBuffers();
 extern int FUN_000a6f70();
 extern int noop_a6f80();
 extern void FUN_000a6f90(float *param_1,float *param_2,double fparam_1);
-extern int FUN_000a7050();
+extern int gld_initContextDispatch();
 extern int gldFreeEngineState();
-extern int FUN_000a7a60();
+extern int gld_updateDrawBufferConfig();
 extern int gldMarkAllStateDirty();
-extern int FUN_000a7d10();
+extern int gld_buildActiveUnitList();
 extern int FUN_000a7e80();
 extern int FUN_000a7ea0();
 extern int noop_a7ed0();
-extern int FUN_000a7ee0();
+extern int gld_updateTextureUnitState();
 extern int FUN_000a82c0();
 extern int FUN_000a8320();
-extern int FUN_000a8340();
+extern int gld_copyTexCombinerSources();
 extern double FUN_000a8630(int param_1,int param_2,uint param_3,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13);
-extern int FUN_000a8a00();
-extern int FUN_000a8c00();
+extern int gld_transformClipPlanes();
+extern int gld_updateProgramFlags();
 extern int FUN_000a8d70();
-extern int FUN_000a8e20();
+extern int gld_updateLightingFlags();
 extern int FUN_000a9070();
-extern double FUN_000a9640(int param_1,int param_2,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12);
-extern void FUN_000a9ac0(char *param_1,uint *param_2,char *param_3,undefined *param_4,uint param_5,char *param_6,undefined4 param_7,uint param_8,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13);
+extern double gld_updatePointState(int param_1,int param_2,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12);
+extern void gld_validateDirtyState(char *param_1,uint *param_2,char *param_3,undefined *param_4,uint param_5,char *param_6,undefined4 param_7,uint param_8,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13);
 extern int FUN_000ab900();
 extern int FUN_000ab940();
-extern int FUN_000ab9b0();
+extern int gld_classifyOperand();
 extern void FUN_000abab0(int param_1,int param_2,undefined4 param_3,double fparam_1);
 extern int FUN_000abb60();
-extern int FUN_000abbd0();
-extern int FUN_000abd10();
+extern int gld_scanOperandRegisterCount();
+extern int gld_scanProgramTokens();
 extern int FUN_000ac540();
 extern int FUN_000ac720();
 extern int FUN_000aec40();
@@ -1204,33 +1204,33 @@ extern int atifsEmitInputDeclarations();
 extern int atifsCompileCurrentShader();
 extern int noop_b43f0();
 extern int FUN_000b4400();
-extern int FUN_000b4cd0();
+extern int gld_decodeProgramInterface();
 extern void FUN_000b4f50(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,int param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4);
 extern void FUN_000b5010(int param_1,int param_2,int *param_3,int param_4,double fparam_1,double fparam_2,double fparam_3,double fparam_4);
-extern int FUN_000b50a0();
+extern int gld_emitTextureUnitScaleParams();
 extern int noop_b5190();
-extern int FUN_000b51a0();
-extern int FUN_000b5320();
+extern int gld_emitSlotViewportTransforms();
+extern int gld_emitSlotTransformParams();
 extern int noop_b53f0();
-extern int FUN_000b5400();
-extern int FUN_000b57a0();
-extern int FUN_000b5a60();
+extern int gld_emitProgramStatePackets();
+extern int gld_compileFragmentProgramImage();
+extern int gld_emitProgramConstants();
 extern int FUN_000b5b60();
 extern int FUN_000b5ba0();
 extern int FUN_000b5bd0();
-extern int FUN_000b5c00();
+extern int gld_bindProgramStateAndEmit();
 extern int FUN_000b5f40();
 extern int FUN_000b5fb0();
-extern int FUN_000b6020();
+extern int gld_buildUnitSetupCmdList();
 extern int FUN_000b6580();
-extern double FUN_000b6f20(int param_1,int param_2,int param_3,int param_4,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
+extern double gld_updateUnitBiasRegisters(int param_1,int param_2,int param_3,int param_4,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
 extern int extvsInstReadsTempComponents();
 extern int extvsOptimizeProgram();
 extern void FUN_000bd9a0(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,double fparam_1);
-extern int FUN_000bda40();
-extern int FUN_000bde70();
+extern int gld_updateTexCombinerState();
+extern int psnDecDecodeFragmentProgram();
 extern int FUN_000be460();
-extern int FUN_000bee40();
+extern int psnCheckLimitsAndGenerate();
 extern int FUN_000bef40();
 extern int FUN_000bf400();
 extern int FUN_000bf910();
@@ -1277,7 +1277,7 @@ extern int scCallbackFopen();
 extern int scCallbackFclose();
 extern int scCallbackFwrite();
 extern int scCallbackFread();
-extern int FUN_000c6ff0();
+extern int scCreateForContext();
 extern int ilFreeRecordList();
 extern int ilSelectorOneToThreeOrZero();
 extern int ilRecordInputSemantic();
@@ -1302,7 +1302,7 @@ extern int ilRewriteForTextureState();
 extern int FUN_000cd05c();
 extern int scDestroy();
 extern int FUN_000cd1b0();
-extern int FUN_000cd1c4();
+extern int scCompile();
 extern int scCheckHandle();
 extern int scDisassembleIL();
 extern int scDumpSrcShader();
@@ -6402,13 +6402,13 @@ extern unsigned char *PTR_001e88a8;
  * one at a time.
  *
  * Follow-up (still issue #75): PTR_001e8a3c/8a58/8aa4/8b14 below turned out to be the SAME
- * bug hitting a *different* object - FUN_000a7050 (part_015.c) wires up a 4-slot allocator
+ * bug hitting a *different* object - gld_initContextDispatch (part_015.c) wires up a 4-slot allocator
  * vtable {generic-alloc, calloc, realloc, free} at param_1+0x24c.."+0x258, and the calloc
- * slot (+0x250, read back later as param_1+0x10 inside FUN_000b6020, part_016.c) was
+ * slot (+0x250, read back later as param_1+0x10 inside gld_buildUnitSetupCmdList, part_016.c) was
  * PTR_001e8b14 - declared as a plain byte here, so the compiled read only got PTR_001e8b14's
  * top byte (observed live as the literal integer 1) instead of the real 4-byte pointer to
  * _calloc that data.s actually stores there (`.long _calloc`), crashing with pc=0 the moment
- * FUN_000b6020 called it as `(*pcVar8)(1, size)`. Confirmed the neighbors in this same data.s
+ * gld_buildUnitSetupCmdList called it as `(*pcVar8)(1, size)`. Confirmed the neighbors in this same data.s
  * region (_free/_realloc/_memcpy, same 4-slot-vtable pattern) share the identical bug.
  *
  * Given three confirmed live crashes from this exact class in one session, ran the deferred

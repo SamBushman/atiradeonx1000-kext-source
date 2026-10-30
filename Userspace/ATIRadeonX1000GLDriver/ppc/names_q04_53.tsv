@@ -1,0 +1,368 @@
+use	FUN_000a9ac0	iVar5	drawableHeight	INFERRED	*(stream-0xe0) = ctx+0x160, drawable height used to clamp the scissor box	^\s*iVar5\ =\ \*\(int\ \*\)\(param_1\ \+\ \-0xe0\);$	+1
+use	FUN_000a9ac0	iVar5	drawableHeight	INFERRED	*(stream-0xe0) = ctx+0x160, drawable height used to clamp the scissor box	^\s*\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001364\)\ \+\ \(int\)param_1\)\ =\ iVar5;$	+1
+use	FUN_000a9ac0	iVar5	drawableHeight	INFERRED	*(stream-0xe0) = ctx+0x160, drawable height used to clamp the scissor box	^\s*uVar10\ =\ iVar5\ \-\ \(uVar10\ \+\ iVar13\);$	+1
+use	FUN_000a9ac0	iVar5	drawableHeight	INFERRED	*(stream-0xe0) = ctx+0x160, drawable height used to clamp the scissor box	^\s*if\ \(iVar13\ <=\ iVar5\)\ \{$	+2
+use	FUN_000a9ac0	iVar5	drawableHeight	INFERRED	*(stream-0xe0) = ctx+0x160, drawable height used to clamp the scissor box	^\s*\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001364\)\ \+\ \(int\)param_1\)\ =\ iVar5;$@2	+1
+use	FUN_000a9ac0	iVar13	lightDirPtr	INFERRED	engine + 0x2500 + 0x80*light: per-light direction vector (x at +0, y +4, z +8)	^\s*iVar13\ =\ uVar23\ \+\ iVar19;$	+1
+use	FUN_000a9ac0	iVar13	lightDirPtr	INFERRED	engine + 0x2500 + 0x80*light: per-light direction vector (x at +0, y +4, z +8)	^\s*fVar3\ =\ \*\(float\ \*\)\(iVar13\ \+\ 8\)\ \*\ \*\(float\ \*\)\(iVar13\ \+\ 8\)\ \+$	+2
+use	FUN_000a9ac0	iVar13	lightDirPtr	INFERRED	engine + 0x2500 + 0x80*light: per-light direction vector (x at +0, y +4, z +8)	^\s*\*\(undefined4\ \*\)\(param_4\ \+\ 8\)\ =\ \*\(undefined4\ \*\)\(iVar13\ \+\ 4\);$	+2
+use	FUN_000a9ac0	iVar13	lightDirPtr	INFERRED	engine + 0x2500 + 0x80*light: per-light direction vector (x at +0, y +4, z +8)	^\s*\*\(float\ \*\)\(param_4\ \+\ 8\)\ =\ fVar3\ \*\ \*\(float\ \*\)\(iVar13\ \+\ 4\);$	+2
+use	FUN_000a9ac0	fVar3	lightDirLengthSq	INFERRED	squared length of the light direction, normalised with the 0x5f375a00 rsqrt + Newton step	^\s*fVar3\ =\ \*\(float\ \*\)\(iVar13\ \+\ 8\)\ \*\ \*\(float\ \*\)\(iVar13\ \+\ 8\)\ \+$	+1
+use	FUN_000a9ac0	fVar3	lightDirLengthSq	INFERRED	squared length of the light direction, normalised with the 0x5f375a00 rsqrt + Newton step	^\s*if\ \(0\.0\ <\ fVar3\)\ \{$	+2
+use	FUN_000a9ac0	fVar3	lightDirLengthSq	INFERRED	squared length of the light direction, normalised with the 0x5f375a00 rsqrt + Newton step	^\s*fVar8\ =\ \(float\)\(0x5f375a00\ \-\ \(\(uint\)GH_F2U\(fVar3\)\ >>\ 1\)\);$	+7
+use	FUN_000a9ac0	fVar3	spotDirLengthSq	INFERRED	squared length of the second (spot/half-vector) direction at +0x14a0	^\s*fVar3\ =\ \*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x000014a0\)\ \+\ \(int\)\(param_1\ \+\ iVar5\ \+\ 0xc\)\);$	+1
+use	FUN_000a9ac0	fVar3	spotDirLengthSq	INFERRED	squared length of the second (spot/half-vector) direction at +0x14a0	^\s*fVar3\ =\ fVar3\ \*\ fVar3\ \+\ fVar4\ \*\ fVar4\ \+\ fVar7\ \*\ fVar7;$	+3
+use	FUN_000a9ac0	fVar3	spotDirLengthSq	INFERRED	squared length of the second (spot/half-vector) direction at +0x14a0	^\s*fVar8\ =\ \(float\)\(0x5f375a00\ \-\ \(\(uint\)GH_F2U\(fVar3\)\ >>\ 1\)\);$@2	+5
+use	FUN_000a9ac0	fVar3	spotDirLengthSq	INFERRED	squared length of the second (spot/half-vector) direction at +0x14a0	^\s*fVar3\ \*\ \*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x000014a0\)\ \+\ \(int\)\(param_1\ \+\ iVar5\ \+\ 8\)\);$	+1
+use	FUN_000a9ac0	fVar3	spotDirLengthSq	INFERRED	squared length of the second (spot/half-vector) direction at +0x14a0	^\s*fVar3\ \*\ \*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x000014a0\)\ \+\ \(int\)\(param_1\ \+\ iVar5\ \+\ 0xc\)\);$	+1
+use	FUN_000a9ac0	fVar4	lightDirX	INFERRED	x component of the light direction	^\s*fVar4\ =\ \*\(float\ \*\)\(uVar23\ \+\ iVar19\);$	+1
+use	FUN_000a9ac0	fVar4	lightDirX	INFERRED	x component of the light direction	^\s*fVar4\ \*\ fVar4\ \+\ \*\(float\ \*\)\(iVar13\ \+\ 4\)\ \*\ \*\(float\ \*\)\(iVar13\ \+\ 4\);$	+1
+use	FUN_000a9ac0	fVar4	lightDirX	INFERRED	x component of the light direction	^\s*\*\(float\ \*\)\(param_4\ \+\ 4\)\ =\ fVar4;$	+1
+use	FUN_000a9ac0	fVar4	lightDirX	INFERRED	x component of the light direction	^\s*\*\(float\ \*\)\(param_4\ \+\ 4\)\ =\ fVar4\ \*\ fVar3;$	+1
+use	FUN_000a9ac0	fVar4	spotDirX	INFERRED	x component of the spot direction at stream+0x14a0+4	^\s*fVar4\ =\ \*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x000014a0\)\ \+\ \(int\)\(param_1\ \+\ iVar5\ \+\ 4\)\);$	+1
+use	FUN_000a9ac0	fVar4	spotDirX	INFERRED	x component of the spot direction at stream+0x14a0+4	^\s*fVar3\ =\ fVar3\ \*\ fVar3\ \+\ fVar4\ \*\ fVar4\ \+\ fVar7\ \*\ fVar7;$	+1
+use	FUN_000a9ac0	fVar4	spotDirX	INFERRED	x component of the spot direction at stream+0x14a0+4	^\s*\*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x000014f0\)\ \+\ \(int\)\(param_1\ \+\ iVar5\ \+\ 4\)\)\ =\ fVar4;$	+1
+use	FUN_000a9ac0	fVar4	spotDirX	INFERRED	x component of the spot direction at stream+0x14a0+4	^\s*\*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x000014f0\)\ \+\ \(int\)\(param_1\ \+\ iVar5\ \+\ 4\)\)\ =\ fVar4\ \*\ fVar3;$	+1
+use	FUN_000a9ac0	fVar7	newtonTermA	INFERRED	3.0 - guess^2 * lengthSq: Newton step of the light direction normalisation	^\s*fVar7\ =\ 3\.0\ \-\ fVar3;$	+2
+use	FUN_000a9ac0	fVar7	spotDirY	INFERRED	y component of the spot direction	^\s*fVar7\ =\ \*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x000014a0\)\ \+\ \(int\)\(param_1\ \+\ iVar5\ \+\ 8\)\);$	+2
+use	FUN_000a9ac0	fVar7	newtonTermB	INFERRED	3.0 - guess^2 * lengthSq: Newton step of the spot direction normalisation	^\s*fVar7\ =\ 3\.0\ \-\ fVar3;$@2	+2
+use	FUN_000a9ac0	uVar20	stateBit23	INFERRED	bit 23 of stream+0x1874, xor-merged into stream+0x1928	^\s*uVar20\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x1874\)\ >>\ 0x17\ \&\ 1;$	+1
+use	FUN_000a9ac0	uVar20	stateBit23	INFERRED	bit 23 of stream+0x1874, xor-merged into stream+0x1928	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x1928\)\ >>\ 1\ \&\ 1\ \^\ uVar20\ \|\ uVar20\ <<\ 1;$	+1
+use	FUN_000a9ac0	uVar20	dirtyWord38Set	INFERRED	stream+0x38 | 0x58a60: dirty flags after the program change	^\s*uVar20\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x38\)\ \|\ 0x58a60;$	+2
+use	FUN_000a9ac0	uVar20	dirtyWord38Set	INFERRED	stream+0x38 | 0x58a60: dirty flags after the program change	^\s*uVar20\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x38\);$	+1
+use	FUN_000a9ac0	uVar20	dirtyWord38Set	INFERRED	stream+0x38 | 0x58a60: dirty flags after the program change	^\s*param_8\ =\ uVar20\ \|\ 0x1000;$	+1
+use	FUN_000a9ac0	uVar20	dirtyBits0x7000000	INFERRED	dirtyBits[3] & 0x7000000: program/fog/texture state group	^\s*uVar20\ =\ uVar24\ \&\ 0x7000000;$	+2
+use	FUN_000a9ac0	uVar20	dirtyBits0x7000000	INFERRED	dirtyBits[3] & 0x7000000: program/fog/texture state group	^\s*uVar20\ =\ \(uint\)\(byte\)param_1\[0x279c\];$	+1
+use	FUN_000a9ac0	uVar20	dirtyBits0x7000000	INFERRED	dirtyBits[3] & 0x7000000: program/fog/texture state group	^\s*fparam_1\ =\ \(double\)FUN_0008d470\(param_1,puVar16,param_3,param_4,uVar10,param_6,uVar20,$	+2
+use	FUN_000a9ac0	uVar20	dirtyBits0x7000000	INFERRED	dirtyBits[3] & 0x7000000: program/fog/texture state group	^\s*else\ if\ \(uVar20\ ==\ 0\)\ \{$	+1
+use	FUN_000a9ac0	uVar20	dirtyBits0x7000000	INFERRED	dirtyBits[3] & 0x7000000: program/fog/texture state group	^\s*fparam_1\ =\ \(double\)FUN_0008d470\(param_1,puVar16,param_3,param_4,uVar10,param_6,uVar20,$@2	+2
+use	FUN_000a9ac0	uVar20	dirtyBits0x7000000	INFERRED	dirtyBits[3] & 0x7000000: program/fog/texture state group	^\s*iVar19\ =\ FUN_0001a010\(iVar19,\*\(undefined4\ \*\)\(iVar19\ \+\ 0x26a0\),param_3,param_4,uVar10,param_6$	+2
+use	FUN_000a9ac0	uVar20	flagChange	INFERRED	old bit 4 of stream+0x1928 xor the new flag: toggles the bit	^\s*uVar20\ =\ uVar6\ >>\ 4\ \&\ 1\ \^\ uVar10;$	+2
+use	FUN_000a9ac0	uVar20	flagChange	INFERRED	old bit 4 of stream+0x1928 xor the new flag: toggles the bit	^\s*uVar6\ \&\ 0xffffffe7\ \|\ uVar20\ \|\ uVar10\ <<\ 4\ \|\ \(uVar6\ \&\ 8\)\ >>\ 3\ \^\ uVar12\ \|\ uVar12\ <<\ 3;$	+1
+use	FUN_000a9ac0	uVar20	dirtyLightMask	INFERRED	dirtyBits[2] >> 16 & 0xff: lights whose state changed	^\s*uVar20\ =\ \(uint\)pcVar25\ >>\ 0x10\ \&\ 0xff;$	+2
+use	FUN_000a9ac0	uVar20	dirtyLightMask	INFERRED	dirtyBits[2] >> 16 & 0xff: lights whose state changed	^\s*if\ \(\(uVar20\ \&\ 1\)\ !=\ 0\)\ \{$	+1
+use	FUN_000a9ac0	uVar20	dirtyLightMask	INFERRED	dirtyBits[2] >> 16 & 0xff: lights whose state changed	^\s*uVar20\ =\ uVar20\ >>\ 1;$	+1
+use	FUN_000a9ac0	uVar20	dirtyLightMask	INFERRED	dirtyBits[2] >> 16 & 0xff: lights whose state changed	^\s*\}\ while\ \(uVar20\ !=\ 0\);$	+1
+use	FUN_000a9ac0	uVar20	chipVariantBit2	INFERRED	(engine-caps short == -0x7e06) << 2 merged into stream+0x18a4	^\s*uVar20\ =\ \(uint\)\(\*\(short\ \*\)\(\(\(unsigned\ char\ \*\)0x00002d48\)\ \+\ uVar23\)\ ==\ \-0x7e06\)\ <<\ 2;$	+4
+use	FUN_000a9ac0	uVar20	chipVariantBit2	INFERRED	(engine-caps short == -0x7e06) << 2 merged into stream+0x18a4	^\s*uVar20\ =\ uVar10\ >>\ 0x15\ \&\ 4\ \|\ \*\(uint\ \*\)\(param_1\ \+\ 0x18a4\)\ \&\ 0xfffffff9;$	+2
+use	FUN_000a9ac0	uVar20	chipVariantBit2	INFERRED	(engine-caps short == -0x7e06) << 2 merged into stream+0x18a4	^\s*uVar20\ =\ \(uint\)\(\(undefined\ \*\)\(uVar10\ \&\ 0x80040\)\ ==\ \(\(unsigned\ char\ \*\)0x00080040U\)\)\ <<\ 1\ \|$	+1
+use	FUN_000a9ac0	uVar20	chipVariantBit2	INFERRED	(engine-caps short == -0x7e06) << 2 merged into stream+0x18a4	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x18a4\)\ =\ uVar20;$@3	+1
+use	FUN_000a9ac0	uVar20	chipVariantBit2	INFERRED	(engine-caps short == -0x7e06) << 2 merged into stream+0x18a4	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x18a4\)\ =\ uVar10\ >>\ 0x15\ \&\ 4\ \|\ uVar20\ \&\ 0xfffffff9;$	+1
+use	FUN_000a9ac0	uVar20	chipVariantBit2	INFERRED	(engine-caps short == -0x7e06) << 2 merged into stream+0x18a4	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x18a4\)\ =\ uVar10\ \|\ uVar20\ \&\ 0xfffffffb;$	+1
+use	FUN_000a9ac0	uVar20	chipVariantBit2	INFERRED	(engine-caps short == -0x7e06) << 2 merged into stream+0x18a4	^\s*\(\(byte\)\(\(unsigned\ char\ \*\)0x00002d48\)\[uVar23\ \+\ 4\]\ \&\ 1\)\ <<\ 1\ \|\ uVar10\ \|\ uVar20\ \&\ 0xfffffff9;$	+1
+use	FUN_000a9ac0	uVar20	chipVariantBit2	INFERRED	(engine-caps short == -0x7e06) << 2 merged into stream+0x18a4	^\s*uVar10\ >>\ 0x15\ \&\ 4\ \|\ uVar20\ \&\ 0xfffffff9;$	+1
+use	FUN_000a9ac0	uVar20	dirtyKeepMaskLo	INFERRED	0x3f00ff07: dirtyBits[2] bits kept when the second engine path is taken	^\s*uVar20\ =\ 0x3f00ff07;$	+1
+use	FUN_000a9ac0	uVar20	dirtyKeepMaskLo	INFERRED	0x3f00ff07: dirtyBits[2] bits kept when the second engine path is taken	^\s*uVar20\ =\ 0x3f00ff0f;$	+1
+use	FUN_000a9ac0	uVar20	dirtyKeepMaskLo	INFERRED	0x3f00ff07: dirtyBits[2] bits kept when the second engine path is taken	^\s*pcVar17\ =\ \(char\ \*\)\(\(uint\)pcVar25\ \&\ uVar20\);$	+1
+use	FUN_000a9ac0	uVar20	dirtyKeepAny	INFERRED	(dirtyBits[2] & mask) & 0xff00 | high dirty bits: nonzero when anything needs processing	^\s*uVar20\ =\ \(uint\)pcVar17\ \&\ 0xff00\ \|\ \(uint\)puVar21;$	+2
+use	FUN_000a9ac0	uVar20	dirtyKeepAny	INFERRED	(dirtyBits[2] & mask) & 0xff00 | high dirty bits: nonzero when anything needs processing	^\s*\(\*pcVar11\)\(param_1,puVar16,param_3,param_4,uVar20,uVar10\);$	+1
+use	FUN_000a9ac0	uVar20	dirtyKeepAny	INFERRED	(dirtyBits[2] & mask) & 0xff00 | high dirty bits: nonzero when anything needs processing	^\s*uVar20\ =\ \-uVar12;$	+1
+use	FUN_000a9ac0	uVar20	dirtyKeepAny	INFERRED	(dirtyBits[2] & mask) & 0xff00 | high dirty bits: nonzero when anything needs processing	^\s*fparam_1\ =\ \(double\)FUN_0008d470\(param_1,puVar16,param_3,param_4,uVar20,uVar10,puVar21,uVar12$	+2
+use	FUN_000a9ac0	uVar20	dirtyKeepAny	INFERRED	(dirtyBits[2] & mask) & 0xff00 | high dirty bits: nonzero when anything needs processing	^\s*FUN_0008d470\(param_1,puVar16,param_3,param_4,uVar20,uVar12\ \&\ 0xfffddfff,0,uVar12\);$	+1
+use	FUN_000a9ac0	uVar20	dirtyKeepAny	INFERRED	(dirtyBits[2] & mask) & 0xff00 | high dirty bits: nonzero when anything needs processing	^\s*fparam_1\ =\ \(double\)FUN_0008d470\(param_1,puVar16,param_3,param_4,uVar20,uVar10,puVar21,uVar12\);$	+1
+use	FUN_000a9ac0	uVar20	dirtyKeepAny	INFERRED	(dirtyBits[2] & mask) & 0xff00 | high dirty bits: nonzero when anything needs processing	^\s*iVar19\ =\ FUN_0001a010\(iVar19,\*\(undefined4\ \*\)\(iVar19\ \+\ 0x26a0\),param_3,param_4,uVar20,uVar10,$	+2
+use	FUN_000a9ac0	uVar27	stateWord2cc	INFERRED	engine+0x2cc: flag word whose bit 19 is recomputed	^\s*uVar27\ =\ \*\(uint\ \*\)\(iVar26\ \+\ 0x2cc\);$	+1
+use	FUN_000a9ac0	uVar27	stateWord2cc	INFERRED	engine+0x2cc: flag word whose bit 19 is recomputed	^\s*if\ \(\(\(\*\(uint\ \*\)\(iVar26\ \+\ 0x284\)\ \&\ 0x80000800\)\ !=\ 0\)\ \|\|$	+5
+use	FUN_000a9ac0	uVar27	stateWord2cc	INFERRED	engine+0x2cc: flag word whose bit 19 is recomputed	^\s*\*\(uint\ \*\)\(iVar26\ \+\ 0x2cc\)\ =\ uVar10\ <<\ 0x13\ \|\ uVar27\ \&\ 0xfff7ffff;$	+2
+use	FUN_000a9ac0	uVar27	stateWord278	INFERRED	engine+0x278 flag word, bit 11 (and 5) set after the change	^\s*uVar27\ =\ \*\(uint\ \*\)\(iVar26\ \+\ 0x278\);$	+1
+use	FUN_000a9ac0	uVar27	stateWord278	INFERRED	engine+0x278 flag word, bit 11 (and 5) set after the change	^\s*\*\(uint\ \*\)\(iVar26\ \+\ 0x278\)\ =\ uVar27\ \|\ 0x800;$	+1
+use	FUN_000a9ac0	uVar27	stateWord278	INFERRED	engine+0x278 flag word, bit 11 (and 5) set after the change	^\s*\*\(uint\ \*\)\(iVar26\ \+\ 0x278\)\ =\ uVar27\ \|\ 0x820;$	+1
+use	FUN_000a9ac0	iVar29	scissorX	INFERRED	engine+0x3180 scissor x	^\s*iVar29\ =\ \*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00003180\)\ \+\ uVar23\);$	+1
+use	FUN_000a9ac0	iVar29	scissorX	INFERRED	engine+0x3180 scissor x	^\s*\*\(int\ \*\)\(param_1\ \+\ 0x440\)\ =\ iVar29;$	+1
+use	FUN_000a9ac0	iVar29	scissorX	INFERRED	engine+0x3180 scissor x	^\s*iVar9\ =\ iVar29\ \+\ param_5;$	+1
+use	FUN_000a9ac0	iVar29	scissorX	INFERRED	engine+0x3180 scissor x	^\s*if\ \(iVar29\ <\ 0\)\ \{$	+2
+use	FUN_000a9ac0	iVar29	scissorX	INFERRED	engine+0x3180 scissor x	^\s*\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001358\)\ \+\ \(int\)param_1\)\ =\ iVar29;$	+1
+use	FUN_000a9ac0	iVar29	scissorXCopy	INFERRED	engine+0x3180 scissor x (second validate path)	^\s*iVar29\ =\ \*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00003180\)\ \+\ uVar23\);$@2	+1
+use	FUN_000a9ac0	iVar29	scissorXCopy	INFERRED	engine+0x3180 scissor x (second validate path)	^\s*\*\(int\ \*\)\(param_1\ \+\ 0x440\)\ =\ iVar29;$@2	+1
+use	FUN_000a9ac0	iVar29	scissorXCopy	INFERRED	engine+0x3180 scissor x (second validate path)	^\s*iVar5\ =\ iVar29\ \+\ iVar5;$	+1
+use	FUN_000a9ac0	iVar29	scissorXCopy	INFERRED	engine+0x3180 scissor x (second validate path)	^\s*if\ \(iVar29\ <\ 0\)\ \{$@2	+2
+use	FUN_000a9ac0	iVar29	scissorXCopy	INFERRED	engine+0x3180 scissor x (second validate path)	^\s*\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001358\)\ \+\ \(int\)param_1\)\ =\ iVar29;$@2	+1
+use	FUN_000a9ac0	iVar19	adjustedCount	INFERRED	param + (height == 0): count adjusted by whether the height is zero	^\s*iVar19\ =\ param_8\ \+\ \(iVar5\ ==\ 0\);$	+5
+use	FUN_000a9ac0	iVar19	adjustedCount	INFERRED	param + (height == 0): count adjusted by whether the height is zero	^\s*if\ \(iVar5\ ==\ iVar19\)\ goto\ LAB_000a9c74;$	+1
+use	FUN_000a9ac0	iVar19	engineCapsA	INFERRED	*(engine+0x10), capability table	^\s*iVar19\ =\ \*\(int\ \*\)\(iVar26\ \+\ 0x10\);$	+1
+use	FUN_000a9ac0	iVar19	engineCapsA	INFERRED	*(engine+0x10), capability table	^\s*if\ \(\(\*\(double\ \*\)\(0x00001830\ \+\ iVar19\)\ ==\ 1\.0\)\ \&\&\ \(\*\(double\ \*\)\(iVar19\ \+\ 0x1838\)\ ==\ 1\.0\)\)\ \{$	+1
+use	FUN_000a9ac0	iVar19	engineCapsB	INFERRED	*(engine+0x10), capability table	^\s*iVar19\ =\ \*\(int\ \*\)\(iVar26\ \+\ 0x10\);$@2	+3
+use	FUN_000a9ac0	iVar19	engineCapsB	INFERRED	*(engine+0x10), capability table	^\s*param_5\ =\ \(1\ <<\ \(\(byte\)\(\(unsigned\ char\ \*\)0x00004300\)\[iVar19\]\ \&\ 0x3f\)\)\ \-\ 1U\ \&\ 1\ <<\ \(uVar20\ \&\ 0x3f\);$	+1
+use	FUN_000a9ac0	iVar19	engineCapsB	INFERRED	*(engine+0x10), capability table	^\s*if\ \(\(param_6\ ==\ \(char\ \*\)0x0\)\ \|\|\ \(cVar22\ =\ '\\x01',\ \(\(unsigned\ char\ \*\)0x00004302\)\[iVar19\]\ ==\ '\\0'\)\)\ \{$	+1
+use	FUN_000a9ac0	iVar19	drawableWidth	INFERRED	*(stream-0xe4) = ctx+0x15c, drawable width	^\s*iVar19\ =\ \*\(int\ \*\)\(param_1\ \+\ \-0xe4\);$	+1
+use	FUN_000a9ac0	iVar19	drawableWidth	INFERRED	*(stream-0xe4) = ctx+0x15c, drawable width	^\s*\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001360\)\ \+\ \(int\)param_1\)\ =\ iVar19;$	+1
+use	FUN_000a9ac0	iVar19	drawableWidth	INFERRED	*(stream-0xe4) = ctx+0x15c, drawable width	^\s*if\ \(iVar9\ <=\ iVar19\)\ \{$	+2
+use	FUN_000a9ac0	iVar19	drawableWidth	INFERRED	*(stream-0xe4) = ctx+0x15c, drawable width	^\s*\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001360\)\ \+\ \(int\)param_1\)\ =\ iVar19;$@2	+1
+use	FUN_000a9ac0	iVar19	engineCapsC	INFERRED	*(*(stream+4)+0x10), capability table	^\s*iVar19\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 4\)\ \+\ 0x10\);$	+5
+use	FUN_000a9ac0	iVar19	engineCapsD	INFERRED	*(engine+0x10), capability table	^\s*iVar19\ =\ \*\(int\ \*\)\(iVar26\ \+\ 0x10\);$@3	+6
+use	FUN_000a9ac0	iVar19	engineCapsD	INFERRED	*(engine+0x10), capability table	^\s*if\ \(\(\(unsigned\ char\ \*\)0x00004301\)\[iVar19\]\ ==\ '\\0'\)\ \{$	+1
+use	FUN_000a9ac0	iVar19	engineCapsD	INFERRED	*(engine+0x10), capability table	^\s*if\ \(\(\(unsigned\ char\ \*\)0x00002d48\)\[iVar19\ \+\ 2\]\ ==\ '\\0'\)\ \{$	+1
+use	FUN_000a9ac0	iVar19	engineCapsE	INFERRED	*(engine+0x10), capability table	^\s*iVar19\ =\ \*\(int\ \*\)\(iVar26\ \+\ 0x10\);$@4	+1
+use	FUN_000a9ac0	iVar19	engineCapsE	INFERRED	*(engine+0x10), capability table	^\s*if\ \(\(uint\)\(byte\)\(\(unsigned\ char\ \*\)0x00004305\)\[iVar19\]\ !=\ \(uVar10\ >>\ 7\ \&\ 1\)\)\ \{$	+2
+use	FUN_000a9ac0	iVar19	engineCapsE	INFERRED	*(engine+0x10), capability table	^\s*iVar19\ =\ \*\(int\ \*\)\(iVar26\ \+\ 0x10\);$@5	+1
+use	FUN_000a9ac0	iVar19	engineCapsE	INFERRED	*(engine+0x10), capability table	^\s*if\ \(\(uint\)\(byte\)\(\(unsigned\ char\ \*\)0x00004306\)\[iVar19\]\ !=\ \(uVar10\ >>\ 6\ \&\ 1\)\)\ \{$	+2
+use	FUN_000a9ac0	iVar19	noVertexProgramMask	INFERRED	-(no vertex program bound): 0 or -1	^\s*iVar19\ =\ \-\(uint\)\(\*\(int\ \*\)\(param_1\ \+\ \-0x74\)\ ==\ 0\);$	+4
+use	FUN_000a9ac0	iVar19	noVertexProgramMask	INFERRED	-(no vertex program bound): 0 or -1	^\s*if\ \(iVar19\ ==\ \-1\)\ goto\ LAB_000ab014;$	+1
+use	FUN_000a9ac0	iVar19	engineCapsF	INFERRED	*(engine+0x10), capability table	^\s*iVar19\ =\ \*\(int\ \*\)\(iVar26\ \+\ 0x10\);$@6	+1
+use	FUN_000a9ac0	iVar19	engineCapsF	INFERRED	*(engine+0x10), capability table	^\s*if\ \(\(\*\(double\ \*\)\(0x00001830\ \+\ iVar19\)\ ==\ 1\.0\)\ \&\&\ \(\*\(double\ \*\)\(iVar19\ \+\ 0x1838\)\ ==\ 1\.0\)\)\ \{$@2	+1
+use	FUN_000a9ac0	iVar19	drawableHeightCopy	INFERRED	*(stream-0xe0) = ctx+0x160 height (second validate path)	^\s*iVar19\ =\ \*\(int\ \*\)\(param_1\ \+\ \-0xe0\);$	+1
+use	FUN_000a9ac0	iVar19	drawableHeightCopy	INFERRED	*(stream-0xe0) = ctx+0x160 height (second validate path)	^\s*\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001364\)\ \+\ \(int\)param_1\)\ =\ iVar19;$	+1
+use	FUN_000a9ac0	iVar19	drawableHeightCopy	INFERRED	*(stream-0xe0) = ctx+0x160 height (second validate path)	^\s*uVar10\ =\ iVar19\ \-\ \(uVar10\ \+\ iVar13\);$	+1
+use	FUN_000a9ac0	iVar19	drawableHeightCopy	INFERRED	*(stream-0xe0) = ctx+0x160 height (second validate path)	^\s*if\ \(iVar13\ <=\ iVar19\)\ \{$	+2
+use	FUN_000a9ac0	iVar19	drawableHeightCopy	INFERRED	*(stream-0xe0) = ctx+0x160 height (second validate path)	^\s*\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001364\)\ \+\ \(int\)param_1\)\ =\ iVar19;$@2	+1
+use	FUN_000a9ac0	uVar6	chipVariantBit	INFERRED	(engine-caps short compares equal to 0x81fa) << 2	^\s*uVar6\ =\ \(uint\)\(\(\*\(ushort\ \*\)\(\(\(unsigned\ char\ \*\)0x00002d48\)\ \+\ uVar23\)\ \^\ 0x81fa\)\ ==\ 0\)\ <<\ 2;$	+2
+use	FUN_000a9ac0	uVar6	chipVariantBit	INFERRED	(engine-caps short compares equal to 0x81fa) << 2	^\s*\(\(byte\)\(\(unsigned\ char\ \*\)0x00002d48\)\[uVar23\ \+\ 4\]\ \&\ 1\)\ <<\ 1\ \|\ uVar6\ \|\ uVar12\ \&\ 0xfffffff9;$	+1
+use	FUN_000a9ac0	uVar6	modeBitsCheck	INFERRED	stream+0x44 & 0x80040 ^ 0x80040: zero when both mode bits are set	^\s*uVar6\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x44\)\ \&\ 0x80040\ \^\ 0x80040;$	+2
+use	FUN_000a9ac0	uVar6	modeBitsCheck	INFERRED	stream+0x44 & 0x80040 ^ 0x80040: zero when both mode bits are set	^\s*\(uint\)\(uVar6\ ==\ 0\)\ <<\ 1\ \|$	+1
+use	FUN_000a9ac0	uVar6	ctx44Bit13	INFERRED	bit 13 of stream+0x44	^\s*uVar6\ =\ \(uint\)pcVar17\ >>\ 0xd\ \&\ 1;$	+1
+use	FUN_000a9ac0	uVar6	ctx44Bit13	INFERRED	bit 13 of stream+0x44	^\s*if\ \(uVar6\ ==\ 0\)\ \{$	+1
+use	FUN_000a9ac0	uVar6	ctx44Bit13	INFERRED	bit 13 of stream+0x44	^\s*if\ \(uVar6\ !=\ 0\)\ \{$	+1
+use	FUN_000a9ac0	uVar6	ctx44Bit13	INFERRED	bit 13 of stream+0x44	^\s*else\ if\ \(uVar6\ ==\ 0\)\ \{$	+1
+use	FUN_000a9ac0	uVar6	stateWord1874	INFERRED	stream+0x1874 state word	^\s*uVar6\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x1874\);$	+1
+use	FUN_000a9ac0	uVar6	stateWord1874	INFERRED	stream+0x1874 state word	^\s*uVar6\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x1874\)\ \&\ 0xffffbfff;$	+1
+use	FUN_000a9ac0	uVar6	stateWord1874	INFERRED	stream+0x1874 state word	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x1874\)\ =\ uVar6;$	+1
+use	FUN_000a9ac0	uVar6	stateWord1874	INFERRED	stream+0x1874 state word	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x1874\)\ =\ uVar6\ \|\ 0x4000;$	+1
+use	FUN_000a9ac0	uVar6	zeroFlag	INFERRED	0, set to 1 when the scissor box feature is on	^\s*uVar6\ =\ 0;$	+1
+use	FUN_000a9ac0	uVar6	zeroFlag	INFERRED	0, set to 1 when the scissor box feature is on	^\s*uVar6\ =\ 1;$	+1
+use	FUN_000a9ac0	uVar6	zeroFlag	INFERRED	0, set to 1 when the scissor box feature is on	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x1928\)\ \&\ 0xfffffffb\ \|\ \*\(uint\ \*\)\(param_1\ \+\ 0x1928\)\ >>\ 2\ \&\ 1\ \^\ uVar6$	+2
+use	FUN_000a9ac0	uVar6	dirtyKeepMaskHi	INFERRED	0xc0ff00f8: dirtyBits[2] bits that stay pending	^\s*uVar6\ =\ 0xc0ff00f8;$	+1
+use	FUN_000a9ac0	uVar6	dirtyKeepMaskHi	INFERRED	0xc0ff00f8: dirtyBits[2] bits that stay pending	^\s*uVar6\ =\ 0xc0ff00f0;$	+1
+use	FUN_000a9ac0	uVar6	dirtyKeepMaskHi	INFERRED	0xc0ff00f8: dirtyBits[2] bits that stay pending	^\s*\*\(uint\ \*\)\(iVar26\ \+\ 0x26c0\)\ =\ \(uint\)pcVar25\ \&\ uVar6;$	+1
+use	FUN_000a9ac0	uVar6	stateBit23B	INFERRED	bit 23 of stream+0x1874 (second validate path)	^\s*uVar6\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x1874\)\ >>\ 0x17\ \&\ 1;$	+1
+use	FUN_000a9ac0	uVar6	stateBit23B	INFERRED	bit 23 of stream+0x1874 (second validate path)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x1928\)\ \&\ 0xfffffffd\ \|\ \*\(uint\ \*\)\(param_1\ \+\ 0x1928\)\ >>\ 1\ \&\ 1\ \^\ uVar6$	+2
+use	FUN_000a9ac0	uVar6	dirtyWord38SetB	INFERRED	stream+0x38 | 0x58a60 (second validate path)	^\s*uVar6\ =\ \(uint\)puVar21\ \|\ 0x58a60;$	+2
+use	FUN_000a9ac0	uVar6	dirtyWord38SetB	INFERRED	stream+0x38 | 0x58a60 (second validate path)	^\s*uVar6\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x38\);$	+1
+use	FUN_000a9ac0	uVar6	dirtyWord38SetB	INFERRED	stream+0x38 | 0x58a60 (second validate path)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x38\)\ =\ uVar6\ \|\ 0x1000;$	+1
+use	FUN_000a9ac0	uVar6	ctx44Bit15B	INFERRED	bit 15 of stream+0x44	^\s*uVar6\ =\ uVar12\ >>\ 0xf\ \&\ 1;$	+1
+use	FUN_000a9ac0	uVar6	ctx44Bit15B	INFERRED	bit 15 of stream+0x44	^\s*if\ \(uVar6\ !=\ 0\)\ \{$@3	+1
+use	FUN_000a9ac0	uVar6	ctx44Bit15B	INFERRED	bit 15 of stream+0x44	^\s*if\ \(uVar6\ ==\ 0\)\ \{$@2	+1
+use	FUN_000a9ac0	uVar6	ctx44Bit15B	INFERRED	bit 15 of stream+0x44	^\s*if\ \(uVar6\ ==\ 0\)\ \{$@3	+1
+use	FUN_000a9ac0	uVar6	ctx44Word	INFERRED	copy of stream+0x44	^\s*uVar6\ =\ uVar12;$	+1
+use	FUN_000a9ac0	uVar6	ctx44Word	INFERRED	copy of stream+0x44	^\s*uVar6\ =\ uVar12\ \&\ 0xfffd7fff;$	+1
+use	FUN_000a9ac0	uVar6	ctx44Word	INFERRED	copy of stream+0x44	^\s*uVar6\ =\ uVar12\ \&\ 0xfffc3fff;$	+1
+use	FUN_000a9ac0	uVar6	ctx44Word	INFERRED	copy of stream+0x44	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x44\)\ =\ uVar6;$	+1
+use	FUN_000a9ac0	uVar6	ctx44Word	INFERRED	copy of stream+0x44	^\s*uVar10\ =\ uVar6\ \|\ 0x20000;$	+2
+use	FUN_000a9ac0	uVar6	oneFlag	INFERRED	1 when the sample-count test holds	^\s*if\ \(\(\(\(\(unsigned\ char\ \*\)0x00002e2c\)\[\*\(int\ \*\)\(iVar19\ \+\ 0x10\)\]\ ==\ '\\0'\)\ \|\|$@2	+4
+use	FUN_000a9ac0	uVar6	oneFlag	INFERRED	1 when the sample-count test holds	^\s*uVar20\ \&\ 0xffffffe7\ \|\ uVar24\ \|\ uVar10\ <<\ 4\ \|\ \(uVar20\ \&\ 8\)\ >>\ 3\ \^\ uVar6\ \|\ uVar6\ <<\ 3;$	+1
+use	FUN_000a9ac0	uVar12	ctx44Bit15	INFERRED	bit 15 of stream+0x44	^\s*uVar12\ =\ \(uint\)pcVar17\ >>\ 0xf\ \&\ 1;$	+1
+use	FUN_000a9ac0	uVar12	ctx44Bit15	INFERRED	bit 15 of stream+0x44	^\s*if\ \(uVar12\ !=\ 0\)\ \{$	+1
+use	FUN_000a9ac0	uVar12	ctx44Bit15	INFERRED	bit 15 of stream+0x44	^\s*if\ \(uVar12\ ==\ 0\)\ \{$	+1
+use	FUN_000a9ac0	uVar12	ctx44Bit15	INFERRED	bit 15 of stream+0x44	^\s*if\ \(uVar12\ ==\ 0\)\ \{$@2	+1
+use	FUN_000a9ac0	uVar12	sampleCountFlag	INFERRED	1 unless the engine sample-count short at +0x2e28 is -1 or the feature is off	^\s*if\ \(\(\(\(\(unsigned\ char\ \*\)0x00002e2c\)\[\*\(int\ \*\)\(iVar19\ \+\ 0x10\)\]\ ==\ '\\0'\)\ \|\|$	+4
+use	FUN_000a9ac0	uVar12	sampleCountFlag	INFERRED	1 unless the engine sample-count short at +0x2e28 is -1 or the feature is off	^\s*uVar6\ \&\ 0xffffffe7\ \|\ uVar20\ \|\ uVar10\ <<\ 4\ \|\ \(uVar6\ \&\ 8\)\ >>\ 3\ \^\ uVar12\ \|\ uVar12\ <<\ 3;$	+1
+use	FUN_000a9ac0	uVar12	chipVariantBitB	INFERRED	(engine-caps short compares equal) << 2 (second path)	^\s*uVar12\ =\ \(uint\)\(\(\*\(ushort\ \*\)\(\(\(unsigned\ char\ \*\)0x00002d48\)\ \+\ uVar23\)\ \^\ 0x81fa\)\ ==\ 0\)\ <<\ 2;$	+2
+use	FUN_000a9ac0	uVar12	chipVariantBitB	INFERRED	(engine-caps short compares equal) << 2 (second path)	^\s*\(\(byte\)\(\(unsigned\ char\ \*\)0x00002d48\)\[uVar23\ \+\ 4\]\ \&\ 1\)\ <<\ 1\ \|\ uVar12\ \|\ uVar14\ \&\ 0xfffffff9;$	+1
+use	FUN_000a9ac0	uVar12	modeBitsCheckB	INFERRED	stream+0x44 & 0x80040 ^ 0x80040 (second path)	^\s*uVar12\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x44\)\ \&\ 0x80040\ \^\ 0x80040;$	+2
+use	FUN_000a9ac0	uVar12	modeBitsCheckB	INFERRED	stream+0x44 & 0x80040 ^ 0x80040 (second path)	^\s*\(uint\)\(uVar12\ ==\ 0\)\ <<\ 1\ \|$	+1
+use	FUN_000a9ac0	uVar12	ctx44WordB	INFERRED	stream+0x44 state word (second validate path)	^\s*uVar12\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x44\);$	+1
+use	FUN_000a9ac0	uVar12	ctx44WordB	INFERRED	stream+0x44 state word (second validate path)	^\s*uVar6\ =\ uVar12\ >>\ 0xf\ \&\ 1;$	+3
+use	FUN_000a9ac0	uVar12	ctx44WordB	INFERRED	stream+0x44 state word (second validate path)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x44\)\ =\ uVar12\ \&\ 0xfffd7fff;$	+1
+use	FUN_000a9ac0	uVar12	ctx44WordB	INFERRED	stream+0x44 state word (second validate path)	^\s*uVar10\ =\ uVar12\ \&\ 0xfffd7fff;$	+2
+use	FUN_000a9ac0	uVar12	ctx44WordB	INFERRED	stream+0x44 state word (second validate path)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x44\)\ =\ uVar12\ \&\ 0xfffc3fff;$	+1
+use	FUN_000a9ac0	uVar12	ctx44WordB	INFERRED	stream+0x44 state word (second validate path)	^\s*uVar10\ =\ uVar12\ \&\ 0xfffc3fff;$	+1
+use	FUN_000a9ac0	uVar12	ctx44WordB	INFERRED	stream+0x44 state word (second validate path)	^\s*uVar10\ =\ uVar12\ \&\ 0xfffddfff;$	+1
+use	FUN_000a9ac0	uVar12	ctx44WordB	INFERRED	stream+0x44 state word (second validate path)	^\s*fparam_1\ =\ \(double\)FUN_0008d470\(param_1,puVar16,param_3,param_4,uVar20,uVar10,puVar21,uVar12$	+2
+use	FUN_000a9ac0	uVar12	ctx44WordB	INFERRED	stream+0x44 state word (second validate path)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x44\)\ =\ uVar12\ \&\ 0xfffddfff;$	+1
+use	FUN_000a9ac0	uVar12	ctx44WordB	INFERRED	stream+0x44 state word (second validate path)	^\s*FUN_0008d470\(param_1,puVar16,param_3,param_4,uVar20,uVar12\ \&\ 0xfffddfff,0,uVar12\);$	+2
+use	FUN_000a9ac0	uVar12	ctx44WordB	INFERRED	stream+0x44 state word (second validate path)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x44\)\ =\ uVar12\ \|\ 0x28000;$	+1
+use	FUN_000a9ac0	uVar12	ctx44WordB	INFERRED	stream+0x44 state word (second validate path)	^\s*uVar12\ =\ \(bVar2\ \&\ 1\)\ <<\ 0xe\ \|\ uVar12\ \&\ 0xffffbfff\ \|\ 0x28000;$	+2
+use	FUN_000a9ac0	uVar12	ctx44WordB	INFERRED	stream+0x44 state word (second validate path)	^\s*uVar12\ =\ uVar12\ \|\ 0x10000;$	+1
+use	FUN_000a9ac0	uVar12	ctx44WordB	INFERRED	stream+0x44 state word (second validate path)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x44\)\ =\ uVar12;$@2	+1
+use	FUN_000a9ac0	uVar12	ctx44WordB	INFERRED	stream+0x44 state word (second validate path)	^\s*uVar10\ =\ uVar12;$@2	+1
+use	FUN_000a9ac0	uVar12	ctx44WordB	INFERRED	stream+0x44 state word (second validate path)	^\s*uVar6\ =\ uVar12;$	+1
+use	FUN_000a9ac0	uVar12	ctx44WordB	INFERRED	stream+0x44 state word (second validate path)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x44\)\ =\ uVar12\ \&\ 0xfffd7fff;$@2	+1
+use	FUN_000a9ac0	uVar12	ctx44WordB	INFERRED	stream+0x44 state word (second validate path)	^\s*uVar6\ =\ uVar12\ \&\ 0xfffd7fff;$	+3
+use	FUN_000a9ac0	uVar12	ctx44WordB	INFERRED	stream+0x44 state word (second validate path)	^\s*uVar12\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x38\)\ \|\ 0x20;$	+2
+use	FUN_000a9ac0	uVar12	ctx44WordB	INFERRED	stream+0x44 state word (second validate path)	^\s*fparam_1\ =\ \(double\)FUN_0008d470\(param_1,puVar16,param_3,param_4,uVar20,uVar10,puVar21,uVar12\);$	+1
+use	FUN_000a9ac0	pcVar25	dirtyKeepMasked	INFERRED	stateWord2cc & 0xe363fd78	^\s*pcVar25\ =\ \(char\ \*\)\(uVar27\ \&\ 0xe363fd78\);$	+2
+use	FUN_000a9ac0	pcVar25	dirtyKeepMasked	INFERRED	stateWord2cc & 0xe363fd78	^\s*param_3\ =\ pcVar25;$@2	+2
+use	FUN_000a9ac0	pcVar25	dirtyKeepMasked	INFERRED	stateWord2cc & 0xe363fd78	^\s*param_3\ =\ pcVar25;$@3	+1
+use	FUN_000a9ac0	iVar26	drawableWidthCopy	INFERRED	*(stream-0xe4) = ctx+0x15c width (second validate path)	^\s*iVar26\ =\ \*\(int\ \*\)\(param_1\ \+\ \-0xe4\);$	+1
+use	FUN_000a9ac0	iVar26	drawableWidthCopy	INFERRED	*(stream-0xe4) = ctx+0x15c width (second validate path)	^\s*\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001360\)\ \+\ \(int\)param_1\)\ =\ iVar26;$	+1
+use	FUN_000a9ac0	iVar26	drawableWidthCopy	INFERRED	*(stream-0xe4) = ctx+0x15c width (second validate path)	^\s*if\ \(iVar5\ <=\ iVar26\)\ \{$	+2
+use	FUN_000a9ac0	iVar26	drawableWidthCopy	INFERRED	*(stream-0xe4) = ctx+0x15c width (second validate path)	^\s*\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001360\)\ \+\ \(int\)param_1\)\ =\ iVar26;$@2	+1
+use	FUN_000a9ac0	iVar26	engineCapsG	INFERRED	*(*(stream+4)+0x10), capability table	^\s*iVar26\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 4\)\ \+\ 0x10\);$	+4
+use	FUN_000a9ac0	bVar28	stateByte2eNew	INFERRED	stream[0x2e] | 2 (| 3 with fragment program changes)	^\s*bVar28\ =\ param_1\[0x2e\]\ \|\ 2;$	+1
+use	FUN_000a9ac0	bVar28	stateByte2eNew	INFERRED	stream[0x2e] | 2 (| 3 with fragment program changes)	^\s*bVar28\ =\ param_1\[0x2e\]\ \|\ 3;$	+1
+use	FUN_000a9ac0	bVar28	stateByte2eNew	INFERRED	stream[0x2e] | 2 (| 3 with fragment program changes)	^\s*param_1\[0x2e\]\ =\ bVar28;$	+1
+use	FUN_000a9ac0	bVar28	sampleCountA	INFERRED	engine+0x2a5c, horizontal sample count	^\s*bVar28\ =\ \*\(byte\ \*\)\(iVar26\ \+\ 0x2a5c\);$	+1
+use	FUN_000a9ac0	bVar28	sampleCountA	INFERRED	engine+0x2a5c, horizontal sample count	^\s*\*\(ushort\ \*\)\(\(\(unsigned\ char\ \*\)0x000015fc\)\ \+\ iVar26\)\ =\ \(ushort\)bVar28\ \*\ \(short\)\*\(undefined4\ \*\)\(iVar26\ \+\ 0x15c\);$	+1
+use	FUN_000a9ac0	bVar28	sampleCountA	INFERRED	engine+0x2a5c, horizontal sample count	^\s*if\ \(\(bVar28\ <\ 2\)\ \|\|\ \(param_8\ <\ 2\)\)\ \{$	+1
+use	FUN_000a9ac0	bVar28	reg1814Byte	INFERRED	byte at stream+0x1814 before the 0x3f bits are set	^\s*bVar28\ =\ param_3\[0x1814\];$	+1
+use	FUN_000a9ac0	bVar28	reg1814Byte	INFERRED	byte at stream+0x1814 before the 0x3f bits are set	^\s*param_3\[0x1814\]\ =\ bVar28\ \|\ 0x3f;$	+1
+use	FUN_000a9ac0	bVar28	stateByte2eNewB	INFERRED	stream[0x2e] | 2 (second validate path)	^\s*bVar28\ =\ param_1\[0x2e\]\ \|\ 2;$@2	+1
+use	FUN_000a9ac0	bVar28	stateByte2eNewB	INFERRED	stream[0x2e] | 2 (second validate path)	^\s*bVar28\ =\ param_1\[0x2e\]\ \|\ 3;$@2	+1
+use	FUN_000a9ac0	bVar28	stateByte2eNewB	INFERRED	stream[0x2e] | 2 (second validate path)	^\s*param_1\[0x2e\]\ =\ bVar28;$@2	+1
+use	FUN_000a9ac0	bVar28	sampleCountAB	INFERRED	engine+0x2a5c (second validate path)	^\s*bVar28\ =\ \*\(byte\ \*\)\(iVar26\ \+\ 0x2a5c\);$@2	+1
+use	FUN_000a9ac0	bVar28	sampleCountAB	INFERRED	engine+0x2a5c (second validate path)	^\s*\*\(ushort\ \*\)\(\(\(unsigned\ char\ \*\)0x000015fc\)\ \+\ iVar26\)\ =\ \(ushort\)bVar28\ \*\ \(short\)\*\(undefined4\ \*\)\(iVar26\ \+\ 0x15c\);$@2	+1
+use	FUN_000a9ac0	bVar28	sampleCountAB	INFERRED	engine+0x2a5c (second validate path)	^\s*if\ \(\(bVar28\ <\ 2\)\ \|\|\ \(bVar2\ <\ 2\)\)\ \{$	+1
+use	FUN_000a9ac0	bVar1	dirtyNegative	INFERRED	dirtyBits[2] has bit 31 set	^\s*bVar1\ =\ \(int\)pcVar25\ <\ 0;$	+1
+use	FUN_000a9ac0	bVar1	dirtyNegative	INFERRED	dirtyBits[2] has bit 31 set	^\s*bVar1\ =\ \(int\)pcVar25\ <\ 0;$@2	+1
+use	FUN_000a9ac0	bVar1	dirtyNegative	INFERRED	dirtyBits[2] has bit 31 set	^\s*if\ \(\(\(\(uint\)pcVar25\ \&\ 0x800000f0\)\ !=\ 0\)\ \&\&$	+3
+use	FUN_000a9ac0	bVar1	ctx44SignClear	INFERRED	stream+0x44 bit 31 clear	^\s*bVar1\ =\ \(uVar10\ \&\ 0x80000000\)\ ==\ 0;$	+2
+use	FUN_000a9ac0	bVar1	ctx44SignClear	INFERRED	stream+0x44 bit 31 clear	^\s*if\ \(bVar1\)\ \{$	+1
+use	FUN_000a9ac0	bVar2	texFlag6c	INFERRED	bit 0 of byte +0x6c of the bound fragment program record	^\s*bVar2\ =\ \*\(byte\ \*\)\(iVar19\ \+\ 0x6c\);$	+2
+use	FUN_000a9ac0	bVar2	texFlag6c	INFERRED	bit 0 of byte +0x6c of the bound fragment program record	^\s*if\ \(\(bVar2\ \&\ 1\)\ !=\ 0\)\ \{$	+1
+use	FUN_000a9ac0	bVar2	sampleCountB	INFERRED	engine+0x2a5d, vertical sample count	^\s*bVar2\ =\ \*\(byte\ \*\)\(iVar26\ \+\ 0x2a5d\);$	+2
+use	FUN_000a9ac0	bVar2	sampleCountB	INFERRED	engine+0x2a5d, vertical sample count	^\s*\*\(ushort\ \*\)\(\(\(unsigned\ char\ \*\)0x000015fa\)\ \+\ iVar26\)\ =\ \(ushort\)bVar2\ \*\ \(short\)\*\(undefined4\ \*\)\(iVar26\ \+\ 0x160\);$	+1
+use	FUN_000a9ac0	bVar2	reg181cByte	INFERRED	byte at stream+0x181c before bits 0-1 are set	^\s*bVar2\ =\ param_3\[0x181c\];$	+1
+use	FUN_000a9ac0	bVar2	reg181cByte	INFERRED	byte at stream+0x181c before bits 0-1 are set	^\s*uVar10\ =\ bVar2\ \|\ 3;$	+1
+use	FUN_000a9ac0	bVar2	texFlag6cB	INFERRED	bit 0 of byte +0x6c of the bound fragment program record (second path)	^\s*bVar2\ =\ \*\(byte\ \*\)\(iVar19\ \+\ 0x6c\);$@2	+2
+use	FUN_000a9ac0	bVar2	texFlag6cB	INFERRED	bit 0 of byte +0x6c of the bound fragment program record (second path)	^\s*if\ \(\(bVar2\ \&\ 1\)\ !=\ 0\)\ \{$@2	+1
+use	FUN_000a9ac0	bVar2	sampleCountBB	INFERRED	engine+0x2a5d (second path)	^\s*bVar2\ =\ \*\(byte\ \*\)\(iVar26\ \+\ 0x2a5d\);$@2	+1
+use	FUN_000a9ac0	bVar2	sampleCountBB	INFERRED	engine+0x2a5d (second path)	^\s*\*\(ushort\ \*\)\(\(\(unsigned\ char\ \*\)0x000015fa\)\ \+\ iVar26\)\ =\ \(ushort\)bVar2\ \*\ \(short\)\*\(undefined4\ \*\)\(iVar26\ \+\ 0x160\);$@2	+1
+use	FUN_000a9ac0	bVar2	sampleCountBB	INFERRED	engine+0x2a5d (second path)	^\s*if\ \(\(bVar28\ <\ 2\)\ \|\|\ \(bVar2\ <\ 2\)\)\ \{$	+1
+use	FUN_000a9ac0	iVar9	scissorRight	INFERRED	scissor x + width	^\s*iVar9\ =\ iVar29\ \+\ param_5;$	+1
+use	FUN_000a9ac0	iVar9	scissorRight	INFERRED	scissor x + width	^\s*if\ \(iVar9\ <=\ iVar19\)\ \{$	+2
+use	FUN_000a9ac0	uVar10	drawBufferFlagA	INFERRED	bit 6 of engine+0x154, stored at stream+0x1490	^\s*uVar10\ =\ \*\(uint\ \*\)\(iVar19\ \+\ 0x154\)\ >>\ 6\ \&\ 1;$	+2
+use	FUN_000a9ac0	uVar10	drawBufferFlagA	INFERRED	bit 6 of engine+0x154, stored at stream+0x1490	^\s*if\ \(uVar10\ !=\ 0\)\ \{$	+1
+use	FUN_000a9ac0	uVar10	engineWord3e28	INFERRED	engine caps word at +0x3e28	^\s*uVar10\ =\ \*\(uint\ \*\)\(\(\(unsigned\ char\ \*\)0x00003e28\)\ \+\ uVar23\);$	+1
+use	FUN_000a9ac0	uVar10	engineWord3e28	INFERRED	engine caps word at +0x3e28	^\s*uVar10\ =\ 0;$@2	+1
+use	FUN_000a9ac0	uVar10	engineWord3e28	INFERRED	engine caps word at +0x3e28	^\s*if\ \(\(\(\(unsigned\ char\ \*\)0x00004301\)\[iVar19\]\ ==\ '\\0'\)\ \|\|$	+2
+use	FUN_000a9ac0	uVar10	engineWord3e28	INFERRED	engine caps word at +0x3e28	^\s*if\ \(uVar10\ ==\ 0\)\ \{$	+2
+use	FUN_000a9ac0	uVar10	engineWord3e28	INFERRED	engine caps word at +0x3e28	^\s*uVar10\ =\ uVar10\ \-\ 1;$	+2
+use	FUN_000a9ac0	uVar10	engineWord3e28	INFERRED	engine caps word at +0x3e28	^\s*uVar10\ =\ \*\(uint\ \*\)\(iVar26\ \+\ 0x278\);$	+1
+use	FUN_000a9ac0	uVar10	engineWord3e28	INFERRED	engine caps word at +0x3e28	^\s*\*\(uint\ \*\)\(iVar26\ \+\ 0x278\)\ =\ uVar10\ \|\ 0x800;$	+1
+use	FUN_000a9ac0	uVar10	engineWord3e28	INFERRED	engine caps word at +0x3e28	^\s*\*\(uint\ \*\)\(iVar26\ \+\ 0x278\)\ =\ uVar10\ \|\ 0x820;$	+1
+use	FUN_000a9ac0	uVar10	engineWord3e28	INFERRED	engine caps word at +0x3e28	^\s*uVar10\ =\ 0;$@3	+1
+use	FUN_000a9ac0	uVar10	engineWord3e28	INFERRED	engine caps word at +0x3e28	^\s*uVar10\ =\ local_38\ \|\ local_34\ \|\ unaff_r20\ \|\ unaff_r21\ \^\ \(uint\)0x3f800000U;$	+6
+use	FUN_000a9ac0	uVar10	engineWord3e28	INFERRED	engine caps word at +0x3e28	^\s*uVar10\ ==\ 0;$	+2
+use	FUN_000a9ac0	uVar10	engineWord3e28	INFERRED	engine caps word at +0x3e28	^\s*\*\(ushort\ \*\)\(iVar26\ \+\ 0x272\)\ =\ \(ushort\)uVar10\ \|\ \*\(ushort\ \*\)\(iVar26\ \+\ 0x272\);$	+2
+use	FUN_000a9ac0	uVar10	engineWord3e28	INFERRED	engine caps word at +0x3e28	^\s*\*\(uint\ \*\)\(iVar26\ \+\ 0x280\)\ =\ uVar10;$	+1
+use	FUN_000a9ac0	uVar10	engineWord3e28	INFERRED	engine caps word at +0x3e28	^\s*uVar10\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x88\);$	+1
+use	FUN_000a9ac0	uVar10	engineWord3e28	INFERRED	engine caps word at +0x3e28	^\s*1\ <<\ \(\(uint\)puVar16\ \&\ 0x3f\)\ \&\ \*\(uint\ \*\)\(\(\(unsigned\ char\ \*\)0x00002d40\)\ \+\ uVar23\)\ \|\ uVar10;$	+1
+use	FUN_000a9ac0	uVar10	engineWord3e28	INFERRED	engine caps word at +0x3e28	^\s*uVar10\ =\ bVar2\ \|\ 3;$	+1
+use	FUN_000a9ac0	uVar10	engineWord3e28	INFERRED	engine caps word at +0x3e28	^\s*param_3\[0x181c\]\ =\ \(char\)uVar10;$	+1
+use	FUN_000a9ac0	uVar10	engineWord3e28	INFERRED	engine caps word at +0x3e28	^\s*uVar10\ =\ uVar27\ \&\ 0x8000000;$	+2
+use	FUN_000a9ac0	uVar10	engineWord3e28	INFERRED	engine caps word at +0x3e28	^\s*uVar10\ =\ \*\(uint\ \*\)\(\(\(unsigned\ char\ \*\)0x00003184\)\ \+\ uVar23\);$	+1
+use	FUN_000a9ac0	uVar10	engineWord3e28	INFERRED	engine caps word at +0x3e28	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x444\)\ =\ uVar10;$	+1
+use	FUN_000a9ac0	uVar10	engineWord3e28	INFERRED	engine caps word at +0x3e28	^\s*uVar10\ =\ iVar5\ \-\ \(uVar10\ \+\ iVar13\);$	+1
+use	FUN_000a9ac0	uVar10	engineWord3e28	INFERRED	engine caps word at +0x3e28	^\s*iVar13\ =\ uVar10\ \+\ iVar13;$	+1
+use	FUN_000a9ac0	uVar10	engineWord3e28	INFERRED	engine caps word at +0x3e28	^\s*if\ \(\(int\)uVar10\ <\ 0\)\ \{$@2	+2
+use	FUN_000a9ac0	uVar10	engineWord3e28	INFERRED	engine caps word at +0x3e28	^\s*\*\(uint\ \*\)\(\(\(unsigned\ char\ \*\)0x0000135c\)\ \+\ \(int\)param_1\)\ =\ uVar10;$	+1
+use	FUN_000a9ac0	uVar10	engineWord3e28	INFERRED	engine caps word at +0x3e28	^\s*uVar10\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x38\);$	+2
+use	FUN_000a9ac0	uVar10	engineWord3e28	INFERRED	engine caps word at +0x3e28	^\s*uVar10\ =\ uVar27\ \&\ 0x40080;$	+2
+use	FUN_000a9ac0	uVar10	engineWord3e28	INFERRED	engine caps word at +0x3e28	^\s*fparam_1\ =\ \(double\)\(\(int\ \(\*\)\(\)\)FUN_000a8c00\)\(param_1,uVar23,param_3,param_4,param_5,param_6,uVar10\);$	+1
+use	FUN_000a9ac0	uVar10	engineWord3e28	INFERRED	engine caps word at +0x3e28	^\s*FUN_000bda40\(param_1,puVar16,param_3,param_4,param_5,param_6,uVar10,param_8\);$	+1
+use	FUN_000a9ac0	uVar10	engineWord3e28	INFERRED	engine caps word at +0x3e28	^\s*uVar10\ =\ uVar10\ \|\ \(uint\)pcVar25\ \&\ 0x3f000000;$	+1
+use	FUN_000a9ac0	uVar10	engineWord3e28	INFERRED	engine caps word at +0x3e28	^\s*if\ \(uVar10\ ==\ 0\)\ \{$@2	+1
+use	FUN_000a9ac0	uVar10	engineWord3e28	INFERRED	engine caps word at +0x3e28	^\s*uVar10\ =\ 0;$@5	+1
+use	FUN_000a9ac0	uVar10	engineWord3e28	INFERRED	engine caps word at +0x3e28	^\s*uVar10\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x44\);$	+4
+use	FUN_000a9ac0	uVar10	engineWord3e28	INFERRED	engine caps word at +0x3e28	^\s*if\ \(\(uint\)\(byte\)\(\(unsigned\ char\ \*\)0x00004306\)\[iVar19\]\ !=\ \(uVar10\ >>\ 6\ \&\ 1\)\)\ \{$	+3
+use	FUN_000a9ac0	uVar10	engineWord3e28	INFERRED	engine caps word at +0x3e28	^\s*uVar10\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x44\);$@2	+1
+use	FUN_000a9ac0	uVar10	engineWord3e28	INFERRED	engine caps word at +0x3e28	^\s*if\ \(iVar19\ \+\ 1U\ ==\ \(uVar10\ >>\ 0x14\ \&\ 1\)\)\ \{$	+3
+use	FUN_000a9ac0	uVar10	engineWord3e28	INFERRED	engine caps word at +0x3e28	^\s*uVar10\ =\ \(uint\)\(byte\)\(\(unsigned\ char\ \*\)0x00002d48\)\[uVar23\ \+\ 2\]\ <<\ 0x1f\ \|\ uVar10\ \&\ 0x7fffffff;$	+2
+use	FUN_000a9ac0	uVar10	engineWord3e28	INFERRED	engine caps word at +0x3e28	^\s*else\ if\ \(\(int\)uVar10\ <\ 0\)\ \{$	+3
+use	FUN_000a9ac0	uVar10	engineWord3e28	INFERRED	engine caps word at +0x3e28	^\s*uVar10\ =\ uVar10\ \&\ 0xffe7ffff;$	+2
+use	FUN_000a9ac0	uVar10	engineWord3e28	INFERRED	engine caps word at +0x3e28	^\s*\(\*pcVar11\)\(param_1,puVar16,param_3,param_4,uVar20,uVar10\);$	+1
+use	FUN_000a9ac0	uVar10	engineWord3e28	INFERRED	engine caps word at +0x3e28	^\s*uVar10\ =\ uVar10\ \|\ 0x180000;$	+2
+use	FUN_000a9ac0	uVar10	engineWord3e28	INFERRED	engine caps word at +0x3e28	^\s*uVar10\ =\ \-\(\*\(ushort\ \*\)\(\(\(unsigned\ char\ \*\)0x00002d48\)\ \+\ uVar23\)\ \^\ 0x81fa\);$	+1
+use	FUN_000a9ac0	uVar10	engineWord3e28	INFERRED	engine caps word at +0x3e28	^\s*uVar10\ =\ uVar12;$	+1
+use	FUN_000a9ac0	uVar10	engineWord3e28	INFERRED	engine caps word at +0x3e28	^\s*uVar10\ =\ uVar12\ \&\ 0xfffd7fff;$	+1
+use	FUN_000a9ac0	uVar10	engineWord3e28	INFERRED	engine caps word at +0x3e28	^\s*uVar10\ =\ uVar12\ \&\ 0xfffc3fff;$	+1
+use	FUN_000a9ac0	uVar10	engineWord3e28	INFERRED	engine caps word at +0x3e28	^\s*uVar10\ =\ uVar12\ \&\ 0xfffddfff;$	+2
+use	FUN_000a9ac0	uVar10	engineWord3e28	INFERRED	engine caps word at +0x3e28	^\s*fparam_1\ =\ \(double\)FUN_0008d470\(param_1,puVar16,param_3,param_4,uVar20,uVar10,puVar21,uVar12$	+2
+use	FUN_000a9ac0	uVar10	engineWord3e28	INFERRED	engine caps word at +0x3e28	^\s*uVar10\ =\ uVar12;$@2	+1
+use	FUN_000a9ac0	uVar10	engineWord3e28	INFERRED	engine caps word at +0x3e28	^\s*uVar10\ =\ uVar6\ \|\ 0x20000;$	+1
+use	FUN_000a9ac0	uVar10	engineWord3e28	INFERRED	engine caps word at +0x3e28	^\s*fparam_1\ =\ \(double\)FUN_0008d470\(param_1,puVar16,param_3,param_4,uVar20,uVar10,puVar21,uVar12\);$	+1
+use	FUN_000a9ac0	uVar10	engineWord3e28	INFERRED	engine caps word at +0x3e28	^\s*iVar19\ =\ FUN_0001a010\(iVar19,\*\(undefined4\ \*\)\(iVar19\ \+\ 0x26a0\),param_3,param_4,uVar20,uVar10,$	+2
+use	FUN_000a9ac0	uVar10	dirtyBits0x4400000	INFERRED	dirtyBits[3] & 0x4400000	^\s*uVar10\ =\ uVar24\ \&\ 0x4400000;$	+2
+use	FUN_000a9ac0	uVar10	dirtyBits0x4400000	INFERRED	dirtyBits[3] & 0x4400000	^\s*\(\*pcVar11\)\(param_1,puVar16,param_3,param_4,uVar10,param_6\);$	+1
+use	FUN_000a9ac0	uVar10	dirtyBits0x4400000	INFERRED	dirtyBits[3] & 0x4400000	^\s*uVar10\ =\ \-uVar6;$	+1
+use	FUN_000a9ac0	uVar10	dirtyBits0x4400000	INFERRED	dirtyBits[3] & 0x4400000	^\s*fparam_1\ =\ \(double\)FUN_0008d470\(param_1,puVar16,param_3,param_4,uVar10,param_6,uVar20,$	+2
+use	FUN_000a9ac0	uVar10	dirtyBits0x4400000	INFERRED	dirtyBits[3] & 0x4400000	^\s*FUN_0008d470\(param_1,puVar16,param_3,param_4,uVar10,\(uint\)pcVar17\ \&\ 0xfffddfff,0,$	+2
+use	FUN_000a9ac0	uVar10	dirtyBits0x4400000	INFERRED	dirtyBits[3] & 0x4400000	^\s*fparam_1\ =\ \(double\)FUN_0008d470\(param_1,puVar16,param_3,param_4,uVar10,param_6,uVar20,$@2	+2
+use	FUN_000a9ac0	uVar10	dirtyBits0x4400000	INFERRED	dirtyBits[3] & 0x4400000	^\s*iVar19\ =\ FUN_0001a010\(iVar19,\*\(undefined4\ \*\)\(iVar19\ \+\ 0x26a0\),param_3,param_4,uVar10,param_6$	+2
+use	FUN_000a9ac0	uVar10	zeroFlagA	INFERRED	0, set to 1 when the program path changed bit 4 of +0x1928	^\s*uVar10\ =\ 0;$	+1
+use	FUN_000a9ac0	uVar10	zeroFlagA	INFERRED	0, set to 1 when the program path changed bit 4 of +0x1928	^\s*uVar10\ =\ 1;$	+1
+use	FUN_000a9ac0	uVar10	zeroFlagA	INFERRED	0, set to 1 when the program path changed bit 4 of +0x1928	^\s*uVar20\ =\ uVar6\ >>\ 4\ \&\ 1\ \^\ uVar10;$	+2
+use	FUN_000a9ac0	uVar10	zeroFlagA	INFERRED	0, set to 1 when the program path changed bit 4 of +0x1928	^\s*uVar6\ \&\ 0xffffffe7\ \|\ uVar20\ \|\ uVar10\ <<\ 4\ \|\ \(uVar6\ \&\ 8\)\ >>\ 3\ \^\ uVar12\ \|\ uVar12\ <<\ 3;$	+1
+use	FUN_000a9ac0	uVar10	capsFlag2d4a	INFERRED	byte at engine caps +0x2d4a (shifted to bit 31 of stream+0x44)	^\s*uVar10\ =\ \(uint\)\(byte\)\(\(unsigned\ char\ \*\)0x00002d48\)\[uVar23\ \+\ 2\]\ <<\ 0x1f\ \|$	+1
+use	FUN_000a9ac0	uVar10	capsFlag2d4a	INFERRED	byte at engine caps +0x2d4a (shifted to bit 31 of stream+0x44)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x44\)\ =\ uVar10;$	+1
+use	FUN_000a9ac0	uVar10	capsFlag2d4a	INFERRED	byte at engine caps +0x2d4a (shifted to bit 31 of stream+0x44)	^\s*uVar10\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x44\)\ \&\ 0x7fffffff;$	+2
+use	FUN_000a9ac0	uVar10	capsFlag2d4a	INFERRED	byte at engine caps +0x2d4a (shifted to bit 31 of stream+0x44)	^\s*if\ \(\(int\)uVar10\ <\ 0\)\ \{$	+1
+use	FUN_000a9ac0	uVar10	capsFlag2d4a	INFERRED	byte at engine caps +0x2d4a (shifted to bit 31 of stream+0x44)	^\s*uVar20\ =\ uVar10\ >>\ 0x15\ \&\ 4\ \|\ \*\(uint\ \*\)\(param_1\ \+\ 0x18a4\)\ \&\ 0xfffffff9;$	+1
+use	FUN_000a9ac0	uVar10	capsFlag2d4a	INFERRED	byte at engine caps +0x2d4a (shifted to bit 31 of stream+0x44)	^\s*uVar20\ =\ \(uint\)\(\(undefined\ \*\)\(uVar10\ \&\ 0x80040\)\ ==\ \(\(unsigned\ char\ \*\)0x00080040U\)\)\ <<\ 1\ \|$	+2
+use	FUN_000a9ac0	uVar10	capsFlag2d4a	INFERRED	byte at engine caps +0x2d4a (shifted to bit 31 of stream+0x44)	^\s*bVar1\ =\ \(uVar10\ \&\ 0x80000000\)\ ==\ 0;$	+1
+use	FUN_000a9ac0	uVar10	capsFlag2d4a	INFERRED	byte at engine caps +0x2d4a (shifted to bit 31 of stream+0x44)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x18a4\)\ =\ uVar10\ >>\ 0x15\ \&\ 4\ \|\ uVar20\ \&\ 0xfffffff9;$	+1
+use	FUN_000a9ac0	uVar10	capsFlag2d4a	INFERRED	byte at engine caps +0x2d4a (shifted to bit 31 of stream+0x44)	^\s*uVar10\ >>\ 0x15\ \&\ 4\ \|\ uVar20\ \&\ 0xfffffff9;$	+1
+use	FUN_000a9ac0	uVar10	chipVariantBitC	INFERRED	(engine-caps short compare) result	^\s*uVar10\ =\ \(uint\)\(\*\(short\ \*\)\(\(\(unsigned\ char\ \*\)0x00002d48\)\ \+\ uVar23\)\ ==\ \-0x7e06\)\ <<\ 2;$	+2
+use	FUN_000a9ac0	uVar10	chipVariantBitC	INFERRED	(engine-caps short compare) result	^\s*\(\(byte\)\(\(unsigned\ char\ \*\)0x00002d48\)\[uVar23\ \+\ 4\]\ \&\ 1\)\ <<\ 1\ \|\ uVar10\ \|\ uVar20\ \&\ 0xfffffff9;$	+1
+use	FUN_000a9ac0	uVar10	feedbackFlag	INFERRED	1 when a feedback/select condition holds: stored to bit 19 of engine+0x2cc	^\s*if\ \(\(\(\*\(uint\ \*\)\(iVar26\ \+\ 0x284\)\ \&\ 0x80000800\)\ !=\ 0\)\ \|\|$	+6
+use	FUN_000a9ac0	uVar10	feedbackFlag	INFERRED	1 when a feedback/select condition holds: stored to bit 19 of engine+0x2cc	^\s*\*\(uint\ \*\)\(iVar26\ \+\ 0x2cc\)\ =\ uVar10\ <<\ 0x13\ \|\ uVar27\ \&\ 0xfff7ffff;$	+2
+use	FUN_000a9ac0	uVar10	zeroFlagB	INFERRED	0, set to 1 when sample count flag holds	^\s*uVar10\ =\ 0;$@6	+1
+use	FUN_000a9ac0	uVar10	zeroFlagB	INFERRED	0, set to 1 when sample count flag holds	^\s*uVar10\ =\ 1;$@4	+1
+use	FUN_000a9ac0	uVar10	zeroFlagB	INFERRED	0, set to 1 when sample count flag holds	^\s*uVar24\ =\ uVar20\ >>\ 4\ \&\ 1\ \^\ uVar10;$	+2
+use	FUN_000a9ac0	uVar10	zeroFlagB	INFERRED	0, set to 1 when sample count flag holds	^\s*uVar20\ \&\ 0xffffffe7\ \|\ uVar24\ \|\ uVar10\ <<\ 4\ \|\ \(uVar20\ \&\ 8\)\ >>\ 3\ \^\ uVar6\ \|\ uVar6\ <<\ 3;$	+1
+use	FUN_000a9ac0	uVar10	dirtyWord4Lights	INFERRED	dirtyBits[1] & 0xff0000	^\s*uVar10\ =\ param_2\[1\]\ \&\ 0xff0000;$	+3
+use	FUN_000a9ac0	uVar10	dirtyBits0x8000000	INFERRED	stateWord2cc & 0x8000000	^\s*uVar10\ =\ uVar27\ \&\ 0x8000000;$@2	+2
+use	FUN_000a9ac0	uVar10	dirtyBits0x8000000	INFERRED	stateWord2cc & 0x8000000	^\s*uVar10\ =\ \*\(uint\ \*\)\(\(\(unsigned\ char\ \*\)0x00003184\)\ \+\ uVar23\);$@2	+1
+use	FUN_000a9ac0	uVar10	dirtyBits0x8000000	INFERRED	stateWord2cc & 0x8000000	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x444\)\ =\ uVar10;$@2	+1
+use	FUN_000a9ac0	uVar10	dirtyBits0x8000000	INFERRED	stateWord2cc & 0x8000000	^\s*uVar10\ =\ iVar19\ \-\ \(uVar10\ \+\ iVar13\);$	+1
+use	FUN_000a9ac0	uVar10	dirtyBits0x8000000	INFERRED	stateWord2cc & 0x8000000	^\s*iVar13\ =\ uVar10\ \+\ iVar13;$@2	+1
+use	FUN_000a9ac0	uVar10	dirtyBits0x8000000	INFERRED	stateWord2cc & 0x8000000	^\s*if\ \(\(int\)uVar10\ <\ 0\)\ \{$@3	+2
+use	FUN_000a9ac0	uVar10	dirtyBits0x8000000	INFERRED	stateWord2cc & 0x8000000	^\s*\*\(uint\ \*\)\(\(\(unsigned\ char\ \*\)0x0000135c\)\ \+\ \(int\)param_1\)\ =\ uVar10;$@2	+1
+use	FUN_000a9ac0	uVar10	dirtyBits0x8000000	INFERRED	stateWord2cc & 0x8000000	^\s*uVar10\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x38\)\ \|\ 0x4004;$	+2
+use	FUN_000a9ac0	uVar10	dirtyBits0x8000000	INFERRED	stateWord2cc & 0x8000000	^\s*uVar10\ =\ uVar27\ \&\ 0x40080;$@2	+2
+use	FUN_000a9ac0	uVar10	dirtyBits0x8000000	INFERRED	stateWord2cc & 0x8000000	^\s*fparam_1\ =\ \(double\)\(\(int\ \(\*\)\(\)\)FUN_000a8c00\)\(param_1,uVar23,param_3,param_4,uVar27\ \&\ 0x1c000,uVar24,$	+2
+use	FUN_000a9ac0	pcVar17	ctx44Snapshot	INFERRED	stream+0x44 word at the time of the change	^\s*pcVar17\ =\ \*\(char\ \*\*\)\(param_1\ \+\ 0x44\);$	+1
+use	FUN_000a9ac0	pcVar17	ctx44Snapshot	INFERRED	stream+0x44 word at the time of the change	^\s*uVar12\ =\ \(uint\)pcVar17\ >>\ 0xf\ \&\ 1;$	+3
+use	FUN_000a9ac0	pcVar17	ctx44Snapshot	INFERRED	stream+0x44 word at the time of the change	^\s*\*\(char\ \*\*\)\(param_1\ \+\ 0x44\)\ =\ \(char\ \*\)\(\(uint\)pcVar17\ \&\ 0xfffd7fff\);$	+1
+use	FUN_000a9ac0	pcVar17	ctx44Snapshot	INFERRED	stream+0x44 word at the time of the change	^\s*param_6\ =\ \(char\ \*\)\(\(uint\)pcVar17\ \&\ 0xfffd7fff\);$	+2
+use	FUN_000a9ac0	pcVar17	ctx44Snapshot	INFERRED	stream+0x44 word at the time of the change	^\s*\*\(char\ \*\*\)\(param_1\ \+\ 0x44\)\ =\ \(char\ \*\)\(\(uint\)pcVar17\ \&\ 0xfffc3fff\);$	+1
+use	FUN_000a9ac0	pcVar17	ctx44Snapshot	INFERRED	stream+0x44 word at the time of the change	^\s*param_6\ =\ \(char\ \*\)\(\(uint\)pcVar17\ \&\ 0xfffc3fff\);$	+1
+use	FUN_000a9ac0	pcVar17	ctx44Snapshot	INFERRED	stream+0x44 word at the time of the change	^\s*param_6\ =\ \(char\ \*\)\(\(uint\)pcVar17\ \&\ 0xfffddfff\);$	+1
+use	FUN_000a9ac0	pcVar17	ctx44Snapshot	INFERRED	stream+0x44 word at the time of the change	^\s*fparam_1\ =\ \(double\)FUN_0008d470\(param_1,puVar16,param_3,param_4,uVar10,param_6,uVar20,$	+2
+use	FUN_000a9ac0	pcVar17	ctx44Snapshot	INFERRED	stream+0x44 word at the time of the change	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x44\)\ =\ \(uint\)pcVar17\ \&\ 0xfffddfff;$	+1
+use	FUN_000a9ac0	pcVar17	ctx44Snapshot	INFERRED	stream+0x44 word at the time of the change	^\s*FUN_0008d470\(param_1,puVar16,param_3,param_4,uVar10,\(uint\)pcVar17\ \&\ 0xfffddfff,0,$	+3
+use	FUN_000a9ac0	pcVar17	ctx44Snapshot	INFERRED	stream+0x44 word at the time of the change	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x44\)\ =\ \(uint\)pcVar17\ \|\ 0x28000;$	+1
+use	FUN_000a9ac0	pcVar17	ctx44Snapshot	INFERRED	stream+0x44 word at the time of the change	^\s*pcVar17\ =\ \(char\ \*\)\(\(bVar2\ \&\ 1\)\ <<\ 0xe\ \|\ \(uint\)pcVar17\ \&\ 0xffffbfff\ \|\ 0x28000\);$	+2
+use	FUN_000a9ac0	pcVar17	ctx44Snapshot	INFERRED	stream+0x44 word at the time of the change	^\s*pcVar17\ =\ \(char\ \*\)\(\(uint\)pcVar17\ \|\ 0x10000\);$	+1
+use	FUN_000a9ac0	pcVar17	ctx44Snapshot	INFERRED	stream+0x44 word at the time of the change	^\s*\*\(char\ \*\*\)\(param_1\ \+\ 0x44\)\ =\ pcVar17;$@2	+1
+use	FUN_000a9ac0	pcVar17	ctx44Snapshot	INFERRED	stream+0x44 word at the time of the change	^\s*param_6\ =\ pcVar17;$@2	+1
+use	FUN_000a9ac0	pcVar17	ctx44Snapshot	INFERRED	stream+0x44 word at the time of the change	^\s*pcVar18\ =\ pcVar17;$	+1
+use	FUN_000a9ac0	pcVar17	ctx44Snapshot	INFERRED	stream+0x44 word at the time of the change	^\s*\*\(char\ \*\*\)\(param_1\ \+\ 0x44\)\ =\ \(char\ \*\)\(\(uint\)pcVar17\ \&\ 0xfffd7fff\);$@2	+1
+use	FUN_000a9ac0	pcVar17	ctx44Snapshot	INFERRED	stream+0x44 word at the time of the change	^\s*pcVar18\ =\ \(char\ \*\)\(\(uint\)pcVar17\ \&\ 0xfffd7fff\);$	+3
+use	FUN_000a9ac0	pcVar17	ctx44Snapshot	INFERRED	stream+0x44 word at the time of the change	^\s*pcVar17\ =\ \(char\ \*\)\(\*\(uint\ \*\)\(param_1\ \+\ 0x38\)\ \|\ 0x20\);$	+2
+use	FUN_000a9ac0	pcVar17	ctx44Snapshot	INFERRED	stream+0x44 word at the time of the change	^\s*fparam_1\ =\ \(double\)FUN_0008d470\(param_1,puVar16,param_3,param_4,uVar10,param_6,uVar20,$@2	+2
+use	FUN_000a9ac0	pcVar17	dirtyKeepMaskedB	INFERRED	stateWord2cc & 0xe363fd78 (second path)	^\s*pcVar17\ =\ \(char\ \*\)\(uVar27\ \&\ 0xe363fd78\);$	+2
+use	FUN_000a9ac0	pcVar17	dirtyKeepMaskedB	INFERRED	stateWord2cc & 0xe363fd78 (second path)	^\s*param_3\ =\ pcVar17;$	+2
+use	FUN_000a9ac0	pcVar17	dirtyKeepMaskedB	INFERRED	stateWord2cc & 0xe363fd78 (second path)	^\s*param_3\ =\ pcVar17;$@2	+1
+use	FUN_000a9ac0	pcVar17	dirtyKeepSelected	INFERRED	dirtyBits[2] & dirtyKeepMask	^\s*pcVar17\ =\ \(char\ \*\)\(\(uint\)pcVar25\ \&\ uVar20\);$	+1
+use	FUN_000a9ac0	pcVar17	dirtyKeepSelected	INFERRED	dirtyBits[2] & dirtyKeepMask	^\s*uVar20\ =\ \(uint\)pcVar17\ \&\ 0xff00\ \|\ \(uint\)puVar21;$	+1
+use	FUN_000a9ac0	pcVar17	dirtyKeepSelected	INFERRED	dirtyBits[2] & dirtyKeepMask	^\s*if\ \(pcVar17\ !=\ \(char\ \*\)0x0\)\ \{$@2	+2
+use	FUN_000a9ac0	pcVar17	dirtyKeepSelected	INFERRED	dirtyBits[2] & dirtyKeepMask	^\s*if\ \(\(\(uint\)pcVar17\ \&\ 0x3f000008\)\ !=\ 0\)\ \{$	+6
+local	FUN_000a9ac0	cVar22	pointSpriteFlag	INFERRED	1 when the bit count is nonzero and the engine caps byte +0x4302 is set
+local	FUN_000a9ac0	cVar15	enabledBitCount	INFERRED	number of enabled bits counted from the engine caps mask, stored at engine+0x2d0
+local	FUN_000a9ac0	puVar21	dirtyHighMask	INFERRED	dirtyBits[3] & 0x4c00000 (later reused as an argument register image)
+use	FUN_000a9ac0	uVar24	dirtyBitsWord3	INFERRED	dirtyBits[3]	^\s*uVar24\ =\ param_2\[3\];$	+1
+use	FUN_000a9ac0	uVar24	dirtyBitsWord3	INFERRED	dirtyBits[3]	^\s*if\ \(pcVar25\ ==\ \(char\ \*\)0x0\ \&\&\ uVar24\ ==\ 0\)\ goto\ LAB_000aaa50;$	+2
+use	FUN_000a9ac0	uVar24	dirtyBitsWord3	INFERRED	dirtyBits[3]	^\s*uVar20\ =\ uVar24\ \&\ 0x7000000;$	+1
+use	FUN_000a9ac0	uVar24	dirtyBitsWord3	INFERRED	dirtyBits[3]	^\s*if\ \(\(uVar24\ \&\ 0x5000000\)\ !=\ 0\)\ \{$	+1
+use	FUN_000a9ac0	uVar24	dirtyBitsWord3	INFERRED	dirtyBits[3]	^\s*if\ \(\(uVar24\ \&\ 0x200000\)\ !=\ 0\)\ \{$	+1
+use	FUN_000a9ac0	uVar24	dirtyBitsWord3	INFERRED	dirtyBits[3]	^\s*if\ \(\(uVar24\ \&\ 0x1007ffff\)\ !=\ 0\)\ \{$	+1
+use	FUN_000a9ac0	uVar24	dirtyBitsWord3	INFERRED	dirtyBits[3]	^\s*if\ \(\(uVar24\ \&\ 0x7ffff\)\ !=\ 0\)\ \{$	+1
+use	FUN_000a9ac0	uVar24	dirtyBitsWord3	INFERRED	dirtyBits[3]	^\s*if\ \(\(uVar24\ \&\ 1\)\ !=\ 0\)\ \{$	+1
+use	FUN_000a9ac0	uVar24	dirtyBitsWord3	INFERRED	dirtyBits[3]	^\s*if\ \(\(uVar24\ \&\ \(0xc\ <<\ \(\(\(uint\)puVar16\ \&\ 0x1f\)\ <<\ 1\)\ \|\ 1U\)\)\ !=\ 0\)\ \{$	+1
+use	FUN_000a9ac0	uVar24	dirtyBitsWord3	INFERRED	dirtyBits[3]	^\s*if\ \(\(uVar24\ \&\ 0x10000000\)\ !=\ 0\)\ \{$	+1
+use	FUN_000a9ac0	uVar24	dirtyBitsWord3	INFERRED	dirtyBits[3]	^\s*if\ \(\(\(\(uVar27\ \&\ 0x401800\)\ ==\ 0\ \&\&\ \(uVar20\ \&\ 0xffffff\)\ ==\ 0\)\ \&\&\ \(\(uint\)pcVar25\ \&\ 0x3fff0008\)\ ==\ 0$	+2
+use	FUN_000a9ac0	uVar24	dirtyBitsWord3	INFERRED	dirtyBits[3]	^\s*\*\(uint\ \*\)\(iVar26\ \+\ 0x26c4\)\ =\ uVar24\ \&\ 0x1027ffff;$	+1
+use	FUN_000a9ac0	uVar24	dirtyBitsWord3	INFERRED	dirtyBits[3]	^\s*puVar21\ =\ \(undefined\ \*\)\(uVar24\ \&\ 0x4c00000\);$	+1
+use	FUN_000a9ac0	uVar24	dirtyBitsWord3	INFERRED	dirtyBits[3]	^\s*if\ \(\(uVar24\ \&\ 0x800000\)\ !=\ 0\)\ \{$	+1
+use	FUN_000a9ac0	uVar24	dirtyBitsWord3	INFERRED	dirtyBits[3]	^\s*puVar21\ =\ \(undefined\ \*\)\(uVar24\ \&\ 0x4400000\);$	+1
+use	FUN_000a9ac0	uVar24	dirtyBitsWord3	INFERRED	dirtyBits[3]	^\s*if\ \(\(uVar24\ \&\ 0x7000000\)\ ==\ 0\)\ goto\ LAB_000ab460;$	+1
+use	FUN_000a9ac0	uVar24	dirtyBitsWord3	INFERRED	dirtyBits[3]	^\s*if\ \(\(uVar24\ \&\ 0x5000000\)\ !=\ 0\)\ \{$@2	+1
+use	FUN_000a9ac0	uVar24	ctx44Bit13B	INFERRED	bit 13 of stream+0x44 (second validate path)	^\s*uVar24\ =\ uVar12\ >>\ 0xd\ \&\ 1;$	+1
+use	FUN_000a9ac0	uVar24	ctx44Bit13B	INFERRED	bit 13 of stream+0x44 (second validate path)	^\s*if\ \(uVar24\ ==\ 0\)\ \{$	+1
+use	FUN_000a9ac0	uVar24	ctx44Bit13B	INFERRED	bit 13 of stream+0x44 (second validate path)	^\s*if\ \(uVar24\ !=\ 0\)\ \{$	+1
+use	FUN_000a9ac0	uVar24	ctx44Bit13B	INFERRED	bit 13 of stream+0x44 (second validate path)	^\s*else\ if\ \(uVar24\ ==\ 0\)\ \{$	+1
+use	FUN_000a9ac0	uVar24	stateWord1874B	INFERRED	stream+0x1874 (second validate path)	^\s*uVar24\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x1874\);$	+1
+use	FUN_000a9ac0	uVar24	stateWord1874B	INFERRED	stream+0x1874 (second validate path)	^\s*uVar24\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x1874\)\ \&\ 0xffffbfff;$	+1
+use	FUN_000a9ac0	uVar24	stateWord1874B	INFERRED	stream+0x1874 (second validate path)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x1874\)\ =\ uVar24;$	+1
+use	FUN_000a9ac0	uVar24	stateWord1874B	INFERRED	stream+0x1874 (second validate path)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x1874\)\ =\ uVar24\ \|\ 0x4000;$	+1
+use	FUN_000a9ac0	uVar24	flagChangeB	INFERRED	old bit 4 xor new flag (second path)	^\s*uVar24\ =\ uVar20\ >>\ 4\ \&\ 1\ \^\ uVar10;$	+2
+use	FUN_000a9ac0	uVar24	flagChangeB	INFERRED	old bit 4 xor new flag (second path)	^\s*uVar20\ \&\ 0xffffffe7\ \|\ uVar24\ \|\ uVar10\ <<\ 4\ \|\ \(uVar20\ \&\ 8\)\ >>\ 3\ \^\ uVar6\ \|\ uVar6\ <<\ 3;$	+1
+use	FUN_000a9ac0	uVar24	dirtyBits4Word	INFERRED	dirtyBits[4]	^\s*uVar24\ =\ param_2\[4\];$	+1
+use	FUN_000a9ac0	uVar24	dirtyBits4Word	INFERRED	dirtyBits[4]	^\s*if\ \(uVar24\ !=\ 0\ \|\|\ uVar10\ !=\ 0\)\ \{$	+1
+use	FUN_000a9ac0	uVar24	dirtyBits4Word	INFERRED	dirtyBits[4]	^\s*if\ \(uVar24\ !=\ 0\)\ \{$@2	+2
+use	FUN_000a9ac0	uVar24	zeroFlagC	INFERRED	0, set to 1 when the extra feature bit holds	^\s*uVar24\ =\ 0;$	+1
+use	FUN_000a9ac0	uVar24	zeroFlagC	INFERRED	0, set to 1 when the extra feature bit holds	^\s*uVar24\ =\ 1;$	+1
+use	FUN_000a9ac0	uVar24	zeroFlagC	INFERRED	0, set to 1 when the extra feature bit holds	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x1928\)\ \&\ 0xfffffffb\ \|\ \*\(uint\ \*\)\(param_1\ \+\ 0x1928\)\ >>\ 2\ \&\ 1\ \^\ uVar24$	+2
+use	FUN_000a9ac0	uVar24	dirtyScissorBits	INFERRED	stateWord2cc & 0x1c0080	^\s*uVar24\ =\ uVar27\ \&\ 0x1c0080;$	+2
+use	FUN_000a9ac0	uVar24	dirtyScissorBits	INFERRED	stateWord2cc & 0x1c0080	^\s*fparam_1\ =\ \(double\)\(\(int\ \(\*\)\(\)\)FUN_000a8c00\)\(param_1,uVar23,param_3,param_4,uVar27\ \&\ 0x1c000,uVar24,$	+2
+local	FUN_000a9ac0	puVar16	staleR4Chain	INFERRED	r4 value left over after each helper call (stale argument chain)

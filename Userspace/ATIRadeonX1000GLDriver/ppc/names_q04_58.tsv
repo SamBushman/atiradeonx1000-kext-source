@@ -1,0 +1,27 @@
+use	FUN_000a5ec0	uVar7	coverageSamples	INFERRED	(int)(coverageValue * FLOAT_001aa104 * sampleCount + 0.5) >> 2: whole sample groups covered	^\s*uVar7\ =\ \(uint\)\(int\)\(fVar1\ \*\ FLOAT_001aa104\ \*$	+5
+use	FUN_000a5ec0	uVar7	coverageSamples	INFERRED	(int)(coverageValue * FLOAT_001aa104 * sampleCount + 0.5) >> 2: whole sample groups covered	^\s*uVar4\ =\ uVar8\ \^\ \(1\ <<\ \(uVar7\ \+\ \(uVar3\ !=\ 0\)\ \&\ 0x3f\)\)\ \-\ 1U\ \|$	+4
+use	FUN_000a5ec0	uVar4	sampleCountU	INFERRED	engine+0x2a50 sample count; the mask words below are built from it	^\s*uVar4\ =\ \*\(uint\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 4\)\ \+\ 0x2a50\);$	+1
+use	FUN_000a5ec0	uVar4	sampleCountU	INFERRED	engine+0x2a50 sample count; the mask words below are built from it	^\s*uVar4\ =\ \(1\ <<\ \(uVar4\ \&\ 0x3f\)\)\ \-\ 1;$	+2
+use	FUN_000a5ec0	uVar4	sampleCountU	INFERRED	engine+0x2a50 sample count; the mask words below are built from it	^\s*uVar7\ =\ \(uint\)\(int\)\(fVar1\ \*\ FLOAT_001aa104\ \*$	+3
+use	FUN_000a5ec0	uVar4	sampleCountU	INFERRED	engine+0x2a50 sample count; the mask words below are built from it	^\s*uVar8\ =\ \(1\ <<\ \(uVar4\ \&\ 0x3f\)\)\ \-\ 1;$	+1
+use	FUN_000a5ec0	uVar4	sampleCountU	INFERRED	engine+0x2a50 sample count; the mask words below are built from it	^\s*uVar4\ =\ uVar8\ \^\ \(1\ <<\ \(uVar7\ \+\ \(uVar3\ !=\ 0\)\ \&\ 0x3f\)\)\ \-\ 1U\ \|$	+1
+use	FUN_000a5ec0	uVar4	sampleCountU	INFERRED	engine+0x2a50 sample count; the mask words below are built from it	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x1b60\)\ =\ uVar4;$	+1
+local	FUN_000a5ec0	fVar1	coverageValue	INFERRED	GL sample coverage value (ctx+0x438), 1.0 when sample coverage is disabled
+local	FUN_000a5ec0	iVar2	sampleTableOffset	INFERRED	(sampleCountLog - 1) * 4: index into the per-sample-count constant tables DAT_001aa7d0/7dc/7e8
+use	FUN_000a5ec0	uVar3	samplePatternWord	INFERRED	DAT_001aa7e8[...]: sample pattern selector, low 2 bits go to ctx+0x1a60 bits 1-2	^\s*uVar3\ =\ \*\(uint\ \*\)\(\&DAT_001aa7e8\ \+\ iVar2\);$	+1
+use	FUN_000a5ec0	uVar3	samplePatternWord	INFERRED	DAT_001aa7e8[...]: sample pattern selector, low 2 bits go to ctx+0x1a60 bits 1-2	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x1a60\)\ =\ \(uVar3\ \&\ 3\)\ <<\ 1\ \|\ 1;$	+1
+use	FUN_000a5ec0	uVar3	sampleCoverageEnable	INFERRED	bit 25 of ctx+0x44: GL_SAMPLE_COVERAGE enabled	^\s*uVar3\ =\ 0;$	+1
+use	FUN_000a5ec0	uVar3	sampleCoverageEnable	INFERRED	bit 25 of ctx+0x44: GL_SAMPLE_COVERAGE enabled	^\s*uVar3\ =\ uVar7\ >>\ 0x19\ \&\ 1;$	+1
+use	FUN_000a5ec0	uVar3	sampleCoverageEnable	INFERRED	bit 25 of ctx+0x44: GL_SAMPLE_COVERAGE enabled	^\s*if\ \(uVar3\ ==\ 0\)\ \{$	+1
+use	FUN_000a5ec0	uVar3	coverageRemainder	INFERRED	covered sample count & 3: samples beyond the whole groups	^\s*uVar3\ =\ uVar7\ \&\ 3;$	+1
+use	FUN_000a5ec0	uVar3	coverageRemainder	INFERRED	covered sample count & 3: samples beyond the whole groups	^\s*uVar4\ =\ uVar8\ \^\ \(1\ <<\ \(uVar7\ \+\ \(uVar3\ !=\ 0\)\ \&\ 0x3f\)\)\ \-\ 1U\ \|$	+1
+use	FUN_000a5ec0	uVar3	coverageRemainder	INFERRED	covered sample count & 3: samples beyond the whole groups	^\s*\(uVar8\ \^\ \(1\ <<\ \(uVar7\ \+\ \(1\ <\ uVar3\)\ \&\ 0x3f\)\)\ \-\ 1U\)\ <<\ 0xc\ \|$	+2
+local	FUN_000a5ec0	uVar5	samplePositionWord	INFERRED	DAT_001aa7dc[...]: sample position word stored at ctx+0x1a68
+local	FUN_000a5ec0	uVar8	coverageInvertMask	INFERRED	all-sample mask when GL_SAMPLE_COVERAGE_INVERT (ctx+0x43c) is set, else 0
+local	FUN_000a5ec0	cVar9	coverageInvert	INFERRED	ctx+0x43c: GL sample coverage invert flag
+use	FUN_000a5ec0	iVar10	sampleCountRaw	INFERRED	engine+0x2a50: number of samples per pixel	^\s*iVar10\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 4\)\ \+\ 0x2a50\);$	+2
+use	FUN_000a5ec0	iVar10	sampleCountRaw	INFERRED	engine+0x2a50: number of samples per pixel	^\s*iVar10\ =\ iVar10\ >>\ 1;$	+1	rhs	none
+use	FUN_000a5ec0	iVar10	sampleCountLog	INFERRED	sampleCountRaw >> 1: index into the per-sample-count tables	^\s*iVar10\ =\ iVar10\ >>\ 1;$	+1	lhs	none
+use	FUN_000a5ec0	iVar10	sampleCountLog	INFERRED	sampleCountRaw >> 1: index into the per-sample-count tables	^\s*iVar2\ =\ \(iVar10\ \+\ \-1\)\ \*\ 4;$	+1
+use	FUN_000a5ec0	iVar10	sampleCountLog	INFERRED	sampleCountRaw >> 1: index into the per-sample-count tables	^\s*uVar4\ =\ \(uint\)\(iVar10\ ==\ 3\)\ <<\ 0x11\ \|\ uVar4\ \&\ 0xfffcffff;$	+1
+func	FUN_000a5ec0	gld_updateSampleCoverage	INFERRED	derives the multisample state from the sample count (engine+0x2a50): position/pattern words ctx+0x1a60/0x1a68/0x1a6c and the per-sample coverage mask ctx+0x1b60, honouring GL_SAMPLE_COVERAGE value and invert

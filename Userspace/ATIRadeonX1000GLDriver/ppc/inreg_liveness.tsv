@@ -357,16 +357,16 @@ a0d70	glDeleteProgramsARB_impl	r6	PASS-no	a0dac bl 0xa0290
 a0d70	glDeleteProgramsARB_impl	r7	PASS-no	a0dac bl 0xa0290
 a0d70	glDeleteProgramsARB_impl	r8	PASS-no	a0dac bl 0xa0290
 a4980	FUN_000a4980	r8	PASS-no	a4994 bl 0x1a3258
-a5c40	FUN_000a5c40	r5	PASS-indirect	a5e14 bctrl 
-a5c40	FUN_000a5c40	r6	PASS-indirect	a5e14 bctrl 
-a5c40	FUN_000a5c40	r7	PASS-indirect	a5e14 bctrl 
-a5c40	FUN_000a5c40	r8	PASS-indirect	a5e14 bctrl 
-a6500	FUN_000a6500	r5	PASS-no	a6524 bl 0x4e990
-a6500	FUN_000a6500	r6	PASS-no	a6524 bl 0x4e990
-a6500	FUN_000a6500	r7	PASS-no	a6524 bl 0x4e990
-a6500	FUN_000a6500	r8	PASS-no	a6524 bl 0x4e990
-a7050	FUN_000a7050	r5	PASS-indirect	a721c bctrl 
-a7050	FUN_000a7050	r6	PASS-indirect	a721c bctrl 
+a5c40	gld_emitClearColorPacket	r5	PASS-indirect	a5e14 bctrl 
+a5c40	gld_emitClearColorPacket	r6	PASS-indirect	a5e14 bctrl 
+a5c40	gld_emitClearColorPacket	r7	PASS-indirect	a5e14 bctrl 
+a5c40	gld_emitClearColorPacket	r8	PASS-indirect	a5e14 bctrl 
+a6500	gld_emitClearFillPacket	r5	PASS-no	a6524 bl 0x4e990
+a6500	gld_emitClearFillPacket	r6	PASS-no	a6524 bl 0x4e990
+a6500	gld_emitClearFillPacket	r7	PASS-no	a6524 bl 0x4e990
+a6500	gld_emitClearFillPacket	r8	PASS-no	a6524 bl 0x4e990
+a7050	gld_initContextDispatch	r5	PASS-indirect	a721c bctrl 
+a7050	gld_initContextDispatch	r6	PASS-indirect	a721c bctrl 
 afe40	FUN_000afe40	r7	PASS-indirect	afed8 bctrl 
 afe40	FUN_000afe40	r8	PASS-indirect	afed8 bctrl 
 b3630	atifsCompileCurrentShader	r6	PASS-indirect	b3764 bl 0xb15d0
@@ -374,19 +374,19 @@ b3630	atifsCompileCurrentShader	r7	PASS-indirect	b3764 bl 0xb15d0
 b3630	atifsCompileCurrentShader	r8	PASS-indirect	b3764 bl 0xb15d0
 b5010	FUN_000b5010	r7	PASS-no	b5068 bl 0xb4f50
 b5010	FUN_000b5010	r8	PASS-no	b5068 bl 0xb4f50
-b50a0	FUN_000b50a0	r6	PASS-no	b5144 bl 0xb4f50
-b50a0	FUN_000b50a0	r7	PASS-no	b5144 bl 0xb4f50
-b50a0	FUN_000b50a0	r8	PASS-no	b5144 bl 0xb4f50
-b51a0	FUN_000b51a0	r6	PASS-no	b51b4 bl 0x1a3260
-b51a0	FUN_000b51a0	r7	PASS-no	b51b4 bl 0x1a3260
-b51a0	FUN_000b51a0	r8	PASS-no	b51b4 bl 0x1a3260
-b5320	FUN_000b5320	r6	PASS-no	b53a0 bl 0xb4f50
-b5320	FUN_000b5320	r7	PASS-no	b53a0 bl 0xb4f50
-b5320	FUN_000b5320	r8	PASS-no	b53a0 bl 0xb4f50
-b5400	FUN_000b5400	r5	PASS-indirect	b5438 bctrl 
-b5400	FUN_000b5400	r6	PASS-indirect	b5438 bctrl 
-b5400	FUN_000b5400	r7	PASS-indirect	b5438 bctrl 
-b5400	FUN_000b5400	r8	PASS-indirect	b5438 bctrl 
+b50a0	gld_emitTextureUnitScaleParams	r6	PASS-no	b5144 bl 0xb4f50
+b50a0	gld_emitTextureUnitScaleParams	r7	PASS-no	b5144 bl 0xb4f50
+b50a0	gld_emitTextureUnitScaleParams	r8	PASS-no	b5144 bl 0xb4f50
+b51a0	gld_emitSlotViewportTransforms	r6	PASS-no	b51b4 bl 0x1a3260
+b51a0	gld_emitSlotViewportTransforms	r7	PASS-no	b51b4 bl 0x1a3260
+b51a0	gld_emitSlotViewportTransforms	r8	PASS-no	b51b4 bl 0x1a3260
+b5320	gld_emitSlotTransformParams	r6	PASS-no	b53a0 bl 0xb4f50
+b5320	gld_emitSlotTransformParams	r7	PASS-no	b53a0 bl 0xb4f50
+b5320	gld_emitSlotTransformParams	r8	PASS-no	b53a0 bl 0xb4f50
+b5400	gld_emitProgramStatePackets	r5	PASS-indirect	b5438 bctrl 
+b5400	gld_emitProgramStatePackets	r6	PASS-indirect	b5438 bctrl 
+b5400	gld_emitProgramStatePackets	r7	PASS-indirect	b5438 bctrl 
+b5400	gld_emitProgramStatePackets	r8	PASS-indirect	b5438 bctrl 
 b6580	FUN_000b6580	r5	PASS-indirect	b65b8 bl 0x4bbf0
 b6580	FUN_000b6580	r6	PASS-indirect	b65b8 bl 0x4bbf0
 b6580	FUN_000b6580	r7	PASS-indirect	b65b8 bl 0x4bbf0

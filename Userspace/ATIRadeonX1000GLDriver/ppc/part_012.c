@@ -441,7 +441,7 @@ LAB_00083c10:
       *(undefined1 *)(ctx + 0x2435) = 1;
       *(uint *)(ctx + 0x8c) = *(uint *)(ctx + 0x8c) | 0x40000000;
       *(uint *)(ctx + 0x38) = *(uint *)(ctx + 0x38) | 0x1020;
-      validateResult = (double)FUN_000a7d10(ctx);
+      validateResult = (double)gld_buildActiveUnitList(ctx);
       *(undefined1 *)(ctx + 0x29) = 1;
       ((void (*)())gldValidateState)(ctx,extraout_r4,depRecordCopy,depElemSize,builtConstBytes,constRegCount[0],paramList,validateResult,unusedFloatArg2,
                    unusedFloatArg3,unusedFloatArg4,unusedFloatArg5,unusedFloatArg6,unusedFloatArg7,unusedFloatArg8,unusedStackArg);
@@ -451,7 +451,7 @@ LAB_00083c10:
       *(undefined1 *)(ctx + 0x2435) = 1;
       *(uint *)(ctx + 0x8c) = *(uint *)(ctx + 0x8c) | 0x40000000;
       *(uint *)(ctx + 0x38) = *(uint *)(ctx + 0x38) | 0x1020;
-      validateResult = (double)FUN_000a7d10(ctx);
+      validateResult = (double)gld_buildActiveUnitList(ctx);
       *(undefined1 *)(ctx + 0x126) = 1;
       *(undefined1 *)(ctx + 0x29) = 1;
       ((void (*)())gldValidateState)(ctx,extraout_r4_00,unusedArg3,unusedArg4,unusedArg5,unusedArg6,programKind,validateResult,unusedFloatArg2,
@@ -4156,16 +4156,16 @@ int FUN_00088190(ctx, fpState)
     if (fpState == *(char **)(((unsigned char *)0x00001488) + ctx)) {
       if ((fpState[0x36d7] != '\0') &&
          (((*(uint *)(ctx + 0x38) & 0x400) != 0 || ((*(uint *)(ctx + 0x3c) & 1) != 0)))) {
-        FUN_000b51a0(ctx,fpState + 0x18a8,fpState + 0x1784);
+        gld_emitSlotViewportTransforms(ctx,fpState + 0x18a8,fpState + 0x1784);
         fpState[0x120f] = '\0';
       }
       if ((fpState[0x3748] != '\0') && ((*(uint *)(ctx + 0x38) & 0x100) != 0)) {
-        FUN_000b5320(ctx,fpState + 0x18a8,fpState + 0x1784);
+        gld_emitSlotTransformParams(ctx,fpState + 0x18a8,fpState + 0x1784);
         fpState[0x120f] = '\0';
       }
       if ((*(int *)(fpState + 0x374c) != 0) &&
          (*(short *)(ctx + 0x34) != 0 || *(short *)(ctx + 0x32) != 0)) {
-        FUN_000b50a0(ctx,fpState + 0x18a8,fpState + 0x1784);
+        gld_emitTextureUnitScaleParams(ctx,fpState + 0x18a8,fpState + 0x1784);
         fpState[0x120f] = '\0';
       }
     }
@@ -4185,13 +4185,13 @@ int FUN_00088190(ctx, fpState)
       fpState[0x1427] = '\0';
       fpState[0x120f] = '\0';
       if (fpState[0x36d7] != '\0') {
-        FUN_000b51a0(ctx,fpState + 0x18a8,fpState + 0x1784);
+        gld_emitSlotViewportTransforms(ctx,fpState + 0x18a8,fpState + 0x1784);
       }
       if (fpState[0x3748] != '\0') {
-        FUN_000b5320(ctx,fpState + 0x18a8,fpState + 0x1784);
+        gld_emitSlotTransformParams(ctx,fpState + 0x18a8,fpState + 0x1784);
       }
       if (*(int *)(fpState + 0x374c) != 0) {
-        FUN_000b50a0(ctx,fpState + 0x18a8,fpState + 0x1784);
+        gld_emitTextureUnitScaleParams(ctx,fpState + 0x18a8,fpState + 0x1784);
       }
     }
     (**(code **)(ctx + 0x294c))(ctx,workAreaState);

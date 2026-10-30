@@ -4581,7 +4581,7 @@ int FUN_00020330(param_1, param_2)
     ((int (*)())FUN_00020210)(param_1);
   }
   if ((uVar2 & 0x500) != 0) {
-    FUN_000a6cb0(param_1 + 0x240,uVar2);
+    gld_clearBuffers(param_1 + 0x240,uVar2);
     return;
   }
   return;
@@ -5460,7 +5460,7 @@ LAB_000225e8:
           iVar8 = iVar8 + 4;
         } while (unitBitsLeft != 0);
       }
-      fpPassThrough1 = (double)FUN_000a7ee0(ctx,unitMask);
+      fpPassThrough1 = (double)gld_updateTextureUnitState(ctx,unitMask);
       pendingTextureMask = *(uint *)(ctx + GLD_pendingTextureMask);
       if (pendingTextureMask != 0) {
         iVar8 = 0;
@@ -5537,7 +5537,7 @@ LAB_000225e8:
        ) {
       dirtyBits[2] = dirtyWord2;
       *dirtyWord3Ptr = uVar26;
-      ((void (*)())FUN_000a9ac0)(ctx + GLD_commandStream,dirtyBits,dirtyBitsArg,scratchR6,dirtyWord3,dirtyWord1,uVar24,dirtyWord4,fpPassThrough1,
+      ((void (*)())gld_validateDirtyState)(ctx + GLD_commandStream,dirtyBits,dirtyBitsArg,scratchR6,dirtyWord3,dirtyWord1,uVar24,dirtyWord4,fpPassThrough1,
                    fpPassThrough2,fpPassThrough3,fpPassThrough4,fpPassThrough5,fpPassThrough6,fpPassThrough7,fpPassThrough8,staleStackArg_ffffff78,
                    staleStackArg_ffffff80,staleStackArg_ffffff88,staleStackArg_ffffff90,staleStackArg_ffffff98);
       framebufferObj = r4Out4;
@@ -5778,7 +5778,7 @@ int gld_emitDirtyStatePackets(ctx, packet)
   int commandStream;
   
   commandStream = ctx + 0x240;
-  FUN_000a5ec0(commandStream);
+  gld_updateSampleCoverage(commandStream);
   allocatedHere = packet == (undefined4 *)0x0;
   if (allocatedHere) {
     packet = (undefined4 *)(**(code **)(ctx + 0x2998))(commandStream,0x23);

@@ -41,8 +41,8 @@
 0x7a174	FUN_0007a110
 0x7a190	FUN_0007a110
 0xc6e40	psnReallocateTemps
-0xc71d0	FUN_000c6ff0
-0xcd380	FUN_000cd1c4
+0xc71d0	scCreateForContext
+0xcd380	scCompile
 0xce330	FUN_000ce148
 0xce344	FUN_000ce148
 0xcec34	FUN_000cea6c

@@ -1,0 +1,93 @@
+use	FUN_000a3be0	uVar9	bitShift	INFERRED	loop value & 0x3f used as the shift of the 3-bit register field read from ctx+0x1ba0	^\s*uVar9\ =\ param_5\ \&\ 0x3f;$	+1
+use	FUN_000a3be0	uVar9	bitShift	INFERRED	loop value & 0x3f used as the shift of the 3-bit register field read from ctx+0x1ba0	^\s*uVar10\ =\ uVar10\ \+\ \(\*\(uint\ \*\)\(param_1\ \+\ 0x1ba0\)\ >>\ uVar9\ \&\ 7\);$	+1
+use	FUN_000a3be0	uVar7	fieldShift	INFERRED	unit index * 3: bit offset of the unit's 3-bit register count in ctx+0x1ba0	^\s*uVar7\ =\ iVar11\ \*\ 3;$	+1
+use	FUN_000a3be0	uVar7	fieldShift	INFERRED	unit index * 3: bit offset of the unit's 3-bit register count in ctx+0x1ba0	^\s*uVar10\ =\ uVar10\ \+\ \(\*\(uint\ \*\)\(param_1\ \+\ 0x1ba0\)\ >>\ \(uVar7\ \&\ 0x3f\)\ \&\ 7\);$	+1
+use	FUN_000a3be0	iVar16	regBaseSigned	INFERRED	(signed char)register base of the next unit's input group	^\s*iVar16\ =\ \(int\)\(char\)uVar10;$	+1
+use	FUN_000a3be0	iVar16	regBaseSigned	INFERRED	(signed char)register base of the next unit's input group	^\s*param_5\ =\ iVar16\ \+\ 2;$	+1
+use	FUN_000a3be0	iVar16	regBaseSigned	INFERRED	(signed char)register base of the next unit's input group	^\s*\(iVar16\ \+\ 3\)\ \*\ 0x40000\ \&\ 0xfc0000U\ \|$	+1
+use	FUN_000a3be0	iVar16	regBaseSigned	INFERRED	(signed char)register base of the next unit's input group	^\s*\(iVar16\ \+\ 1\)\ \*\ 0x40\ \&\ 0xfc0U\ \|$	+1
+use	FUN_000a3be0	iVar16	regBaseNext	INFERRED	register base + 1	^\s*iVar16\ =\ uVar10\ \+\ 1;$	+1
+use	FUN_000a3be0	iVar16	regBaseNext	INFERRED	register base + 1	^\s*iVar16\ \*\ 0x40\ \&\ 0xfc0U\ \|\ uVar4\ \|\ \*\(uint\ \*\)\(iVar11\ \+\ 0x1ee8\)\ \&\ 0xff000000\ \|\ 0xffe000$	+1
+use	FUN_000a3be0	iVar16	unitWordAddr	INFERRED	ctx + unit * 4: address of the unit input word at +0x1ee8	^\s*iVar16\ =\ iVar11\ \*\ 4\ \+\ param_1;$	+2
+use	FUN_000a3be0	iVar16	unitWordAddr	INFERRED	ctx + unit * 4: address of the unit input word at +0x1ee8	^\s*uVar10\ \&\ 0x3f\ \|\ \*\(uint\ \*\)\(iVar16\ \+\ 0x1ee8\)\ \&\ 0xff000000;$	+1
+use	FUN_000a3be0	iVar16	regBaseSignedB	INFERRED	(signed char)register base in the mask-driven loop	^\s*iVar16\ =\ \(int\)\(char\)uVar10;$@2	+1
+use	FUN_000a3be0	iVar16	regBaseSignedB	INFERRED	(signed char)register base in the mask-driven loop	^\s*\(iVar16\ \+\ 3\)\ \*\ 0x40000\ \&\ 0xfc0000U\ \|$@2	+3
+use	FUN_000a3be0	iVar11	unitWordAddrA	INFERRED	ctx + unit * 4: address of the unit input word at +0x1ee8	^\s*iVar11\ =\ param_3\ \*\ 4\ \+\ param_1;$	+1
+use	FUN_000a3be0	iVar11	unitWordAddrA	INFERRED	ctx + unit * 4: address of the unit input word at +0x1ee8	^\s*\*\(uint\ \*\)\(iVar11\ \+\ 0x1ee8\)\ =$	+1
+use	FUN_000a3be0	iVar11	unitWordAddrA	INFERRED	ctx + unit * 4: address of the unit input word at +0x1ee8	^\s*uVar10\ \&\ 0x3f\ \|\ \*\(uint\ \*\)\(iVar11\ \+\ 0x1ee8\)\ \&\ 0xff000000;$	+1
+use	FUN_000a3be0	iVar11	unitWordAddrB	INFERRED	ctx + unit * 4: address of the unit input word at +0x1ee8	^\s*iVar11\ =\ param_3\ \*\ 4\ \+\ param_1;$@2	+1
+use	FUN_000a3be0	iVar11	unitWordAddrB	INFERRED	ctx + unit * 4: address of the unit input word at +0x1ee8	^\s*\*\(uint\ \*\)\(iVar11\ \+\ 0x1ee8\)\ =$@2	+2
+use	FUN_000a3be0	iVar11	regBaseSignedC	INFERRED	(signed char)register base	^\s*iVar11\ =\ \(int\)\(char\)uVar10;$	+1
+use	FUN_000a3be0	iVar11	regBaseSignedC	INFERRED	(signed char)register base	^\s*\(iVar11\ \+\ 3\)\ \*\ 0x40000\ \&\ 0xfc0000U\ \|$	+3
+use	FUN_000a3be0	iVar11	regBaseNextB	INFERRED	register base + 1	^\s*iVar11\ =\ uVar10\ \+\ 1;$	+1
+use	FUN_000a3be0	iVar11	regBaseNextB	INFERRED	register base + 1	^\s*iVar11\ \*\ 0x40\ \&\ 0xfc0U\ \|\ uVar4\ \|\ \*\(uint\ \*\)\(param_5\ \+\ 8\)\ \&\ 0xff000000\ \|\ 0xffe000;$	+1
+use	FUN_000a3be0	iVar11	unitWordCursor	INFERRED	ctx + 0x1ee0 advanced 4 per unit	^\s*iVar11\ =\ param_1\ \+\ 0x1ee0;$	+1
+use	FUN_000a3be0	iVar11	unitWordCursor	INFERRED	ctx + 0x1ee0 advanced 4 per unit	^\s*\*\(uint\ \*\)\(iVar11\ \+\ 8\)\ =$	+1
+use	FUN_000a3be0	iVar11	unitWordCursor	INFERRED	ctx + 0x1ee0 advanced 4 per unit	^\s*\(iVar16\ \+\ 1\)\ \*\ 0x40\ \&\ 0xfc0U\ \|\ uVar10\ \&\ 0x3f\ \|\ \*\(uint\ \*\)\(iVar11\ \+\ 8\)\ \&\ 0xff000000$	+1
+use	FUN_000a3be0	iVar11	unitWordCursor	INFERRED	ctx + 0x1ee0 advanced 4 per unit	^\s*iVar11\ =\ iVar11\ \+\ 4;$	+1
+use	FUN_000a3be0	iVar11	streamWritePtr	INFERRED	stream write pointer (ctx+0x274c) before it is advanced past the packet	^\s*iVar11\ =\ \*\(int\ \*\)\(0x00002748\ \+\ param_1\ \+\ 4\);$	+1
+use	FUN_000a3be0	iVar11	streamWritePtr	INFERRED	stream write pointer (ctx+0x274c) before it is advanced past the packet	^\s*\*\(int\ \*\)\(0x00002748\ \+\ param_1\ \+\ 4\)\ =\ iVar11\ \+\ 0x34;$	+2
+use	FUN_000a3be0	iVar11	streamWritePtrB	INFERRED	stream write pointer (ctx+0x274c) before it is advanced past the packet	^\s*iVar11\ =\ \*\(int\ \*\)\(0x00002748\ \+\ param_1\ \+\ 4\);$@2	+1
+use	FUN_000a3be0	iVar11	streamWritePtrB	INFERRED	stream write pointer (ctx+0x274c) before it is advanced past the packet	^\s*\*\(int\ \*\)\(0x00002748\ \+\ param_1\ \+\ 4\)\ =\ iVar11\ \+\ 0x30;$	+2
+use	FUN_000a3be0	uVar5	primitiveFlags	INFERRED	primitive table word at +0x110: bit 4 copied to ctx+0x1a64	^\s*uVar5\ =\ \*\(uint\ \*\)\(param_5\ \+\ 0x110\);$	+1
+use	FUN_000a3be0	uVar5	primitiveFlags	INFERRED	primitive table word at +0x110: bit 4 copied to ctx+0x1a64	^\s*param_6\ =\ \(undefined4\ \*\)\(uVar5\ \&\ 0x10\ \|\ \*\(uint\ \*\)\(param_1\ \+\ 0x1a64\)\ \&\ 0xffffffef\);$	+1
+use	FUN_000a3be0	uVar5	ctxCursorA	INFERRED	glContext advanced 4 per unit (unit input words at +0x48)	^\s*uVar5\ =\ param_1;$	+1
+use	FUN_000a3be0	uVar5	ctxCursorA	INFERRED	glContext advanced 4 per unit (unit input words at +0x48)	^\s*if\ \(\(\(\(\*\(uint\ \*\)\(uVar5\ \+\ 0x48\)\ \&\ 0x1f\)\ ==\ 0\)\ \|\|$	+3
+use	FUN_000a3be0	uVar5	ctxCursorA	INFERRED	glContext advanced 4 per unit (unit input words at +0x48)	^\s*uVar5\ =\ uVar5\ \+\ 4;$	+1
+use	FUN_000a3be0	uVar5	registerCount	INFERRED	number of input registers assigned (low byte), stored in the low 7 bits of ctx+0x1f2c	^\s*uVar5\ =\ 0;$	+1
+use	FUN_000a3be0	uVar5	registerCount	INFERRED	number of input registers assigned (low byte), stored in the low 7 bits of ctx+0x1f2c	^\s*uVar5\ =\ uVar10\ \&\ 0xff;$	+1
+use	FUN_000a3be0	uVar5	registerCount	INFERRED	number of input registers assigned (low byte), stored in the low 7 bits of ctx+0x1f2c	^\s*uVar5\ =\ uVar10\ \&\ 0xff;$@2	+1
+use	FUN_000a3be0	uVar5	registerCount	INFERRED	number of input registers assigned (low byte), stored in the low 7 bits of ctx+0x1f2c	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x1f2c\)\ =\ uVar5\ \&\ 0x7f\ \|\ \*\(uint\ \*\)\(param_1\ \+\ 0x1f2c\)\ \&\ 0xffffff80;$	+1
+use	FUN_000a3be0	uVar5	ctxCursorB	INFERRED	glContext advanced 4 per word while the unit input words are copied	^\s*uVar5\ =\ param_1;$@2	+1
+use	FUN_000a3be0	uVar5	ctxCursorB	INFERRED	glContext advanced 4 per word while the unit input words are copied	^\s*puVar8\ =\ \(undefined4\ \*\)\(uVar5\ \+\ 0x1ee8\);$	+2
+local	FUN_000a3be0	uVar14	primitiveTableWord	INFERRED	DAT_001aa7a8[primitiveMode]: low 2 bits go to ctx+0x1b64
+local	FUN_000a3be0	bVar1	noPrimitiveTable	INFERRED	ctx+0x2768 (primitive table) is null
+local	FUN_000a3be0	bVar2	bit29Clear	INFERRED	ctx+0x44 bit 29 is clear
+local	FUN_000a3be0	bVar3	unitEnableMask	INFERRED	per-unit enable byte selected by ctx+0x44 bit 13 (+0x11d3 or +0x1135)
+local	FUN_000a3be0	uVar4	regField	INFERRED	register base & 0x3f: low field of the unit input word
+local	FUN_000a3be0	puVar6	writePtr	INFERRED	stream write pointer while the unit words are appended
+use	FUN_000a3be0	puVar8	packetA	INFERRED	0xd-word register packet (0x10c0 state)	^\s*puVar8\ =\ \(undefined4\ \*\)\(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x2758\)\)\(param_1,0xd\);$	+3
+use	FUN_000a3be0	puVar8	packetA	INFERRED	0xd-word register packet (0x10c0 state)	^\s*\*puVar8\ =\ \(\(unsigned\ char\ \*\)0x000010c0U\);$	+1
+use	FUN_000a3be0	puVar8	packetA	INFERRED	0xd-word register packet (0x10c0 state)	^\s*puVar8\[2\]\ =\ 0x825;$	+4
+use	FUN_000a3be0	puVar8	ctxWordPtrA	INFERRED	pointer to the unit input word at ctx+0x1ee8+4*i	^\s*puVar8\ =\ \(undefined4\ \*\)\(uVar5\ \+\ 0x1ee8\);$	+1
+use	FUN_000a3be0	puVar8	ctxWordPtrA	INFERRED	pointer to the unit input word at ctx+0x1ee8+4*i	^\s*\*\(undefined4\ \*\)\(\(int\)param_6\ \+\ iVar11\)\ =\ \*puVar8;$	+1
+use	FUN_000a3be0	puVar8	packetB	INFERRED	0xc-word register packet (0x1002, 0x825, 0x1007, 0x108e, 0x1098 state)	^\s*puVar8\ =\ \(undefined4\ \*\)\(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x2758\)\)\(param_1,0xc\);$	+3
+use	FUN_000a3be0	puVar8	packetB	INFERRED	0xc-word register packet (0x1002, 0x825, 0x1007, 0x108e, 0x1098 state)	^\s*puVar8\[2\]\ =\ 0x825;$@2	+2
+use	FUN_000a3be0	puVar8	packetB	INFERRED	0xc-word register packet (0x1002, 0x825, 0x1007, 0x108e, 0x1098 state)	^\s*puVar8\[4\]\ =\ \(\(unsigned\ char\ \*\)0x00001007U\);$	+2
+use	FUN_000a3be0	puVar8	packetB	INFERRED	0xc-word register packet (0x1002, 0x825, 0x1007, 0x108e, 0x1098 state)	^\s*puVar8\[6\]\ =\ \(\(unsigned\ char\ \*\)0x0000108eU\);$	+2
+use	FUN_000a3be0	puVar8	packetB	INFERRED	0xc-word register packet (0x1002, 0x825, 0x1007, 0x108e, 0x1098 state)	^\s*puVar8\[8\]\ =\ \(\(unsigned\ char\ \*\)0x00001098U\);$	+2
+use	FUN_000a3be0	puVar8	packetB	INFERRED	0xc-word register packet (0x1002, 0x825, 0x1007, 0x108e, 0x1098 state)	^\s*puVar8\[10\]\ =\ \(\(unsigned\ char\ \*\)0x000010c0U\);$	+3
+use	FUN_000a3be0	puVar8	packetC	INFERRED	9-word packet with the unit input words (0x7101d)	^\s*puVar8\ =\ \(undefined4\ \*\)\(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x2758\)\)\(param_1,9\);$	+3
+use	FUN_000a3be0	puVar8	ctxWordPtrB	INFERRED	pointer to the unit input word at ctx+0x1ee8+4*i	^\s*puVar8\ =\ \(undefined4\ \*\)\(uVar10\ \+\ 0x1ee8\);$	+1
+use	FUN_000a3be0	puVar8	ctxWordPtrB	INFERRED	pointer to the unit input word at ctx+0x1ee8+4*i	^\s*\*puVar6\ =\ \*puVar8;$	+1
+use	FUN_000a3be0	puVar8	packetD	INFERRED	trailing packet	^\s*puVar8\ =\ \(undefined4\ \*\)\(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x2758\)\)\(param_1,2\);$	+3
+use	FUN_000a3be0	uVar10	baseSelectBits	INFERRED	ctx+0x1b52 ushort: base value of the select bits ctx+0x1b50	^\s*uVar10\ =\ \(uint\)\*\(ushort\ \*\)\(param_1\ \+\ 0x1b52\);$	+2
+use	FUN_000a3be0	uVar10	baseSelectBits	INFERRED	ctx+0x1b52 ushort: base value of the select bits ctx+0x1b50	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x1b50\)\ =\ uVar10;$@2	+1
+use	FUN_000a3be0	uVar10	baseSelectBits	INFERRED	ctx+0x1b52 ushort: base value of the select bits ctx+0x1b50	^\s*uVar10\ \|\ \*\(int\ \*\)\(param_5\ \+\ 0xe8\)\ <<\ \(\*\(int\ \*\)\(param_1\ \+\ 0x276c\)\ \*\ 2\ \+\ 0x10U\ \&\ 0x3f\);$	+1
+use	FUN_000a3be0	uVar10	baseSelectBits	INFERRED	ctx+0x1b52 ushort: base value of the select bits ctx+0x1b50	^\s*uVar10\ =\ 0;$	+1
+use	FUN_000a3be0	uVar10	baseSelectBits	INFERRED	ctx+0x1b52 ushort: base value of the select bits ctx+0x1b50	^\s*iVar16\ =\ \(int\)\(char\)uVar10;$	+1
+use	FUN_000a3be0	uVar10	baseSelectBits	INFERRED	ctx+0x1b52 ushort: base value of the select bits ctx+0x1b50	^\s*uVar10\ \&\ 0x3f\ \|\ \*\(uint\ \*\)\(iVar11\ \+\ 0x1ee8\)\ \&\ 0xff000000;$	+1
+use	FUN_000a3be0	uVar10	baseSelectBits	INFERRED	ctx+0x1b52 ushort: base value of the select bits ctx+0x1b50	^\s*uVar10\ =\ uVar10\ \+\ \(\*\(uint\ \*\)\(param_1\ \+\ 0x1ba0\)\ >>\ \(uVar15\ \&\ 0x3f\)\ \&\ 7\);$	+1
+use	FUN_000a3be0	uVar10	baseSelectBits	INFERRED	ctx+0x1b52 ushort: base value of the select bits ctx+0x1b50	^\s*iVar16\ =\ uVar10\ \+\ 1;$	+1
+use	FUN_000a3be0	uVar10	baseSelectBits	INFERRED	ctx+0x1b52 ushort: base value of the select bits ctx+0x1b50	^\s*uVar4\ =\ uVar10\ \&\ 0x3f;$	+2
+use	FUN_000a3be0	uVar10	baseSelectBits	INFERRED	ctx+0x1b52 ushort: base value of the select bits ctx+0x1b50	^\s*uVar10\ =\ 0;$@2	+1
+use	FUN_000a3be0	uVar10	baseSelectBits	INFERRED	ctx+0x1b52 ushort: base value of the select bits ctx+0x1b50	^\s*iVar11\ =\ \(int\)\(char\)uVar10;$	+1
+use	FUN_000a3be0	uVar10	baseSelectBits	INFERRED	ctx+0x1b52 ushort: base value of the select bits ctx+0x1b50	^\s*\(iVar11\ \+\ 1\)\ \*\ 0x40\ \&\ 0xfc0U\ \|\ uVar10\ \&\ 0x3f\ \|\ \*\(uint\ \*\)\(param_5\ \+\ 8\)\ \&\ 0xff000000;$	+1
+use	FUN_000a3be0	uVar10	baseSelectBits	INFERRED	ctx+0x1b52 ushort: base value of the select bits ctx+0x1b50	^\s*uVar10\ =\ uVar10\ \+\ \(\*\(uint\ \*\)\(param_1\ \+\ 0x1ba0\)\ >>\ \(uVar15\ \&\ 0x3f\)\ \&\ 7\);$@2	+1
+use	FUN_000a3be0	uVar10	baseSelectBits	INFERRED	ctx+0x1b52 ushort: base value of the select bits ctx+0x1b50	^\s*iVar11\ =\ uVar10\ \+\ 1;$	+1
+use	FUN_000a3be0	uVar10	baseSelectBits	INFERRED	ctx+0x1b52 ushort: base value of the select bits ctx+0x1b50	^\s*uVar4\ =\ uVar10\ \&\ 0x3f;$@2	+2
+use	FUN_000a3be0	uVar10	baseSelectBits	INFERRED	ctx+0x1b52 ushort: base value of the select bits ctx+0x1b50	^\s*uVar5\ =\ uVar10\ \&\ 0xff;$	+1
+use	FUN_000a3be0	uVar10	baseSelectBits	INFERRED	ctx+0x1b52 ushort: base value of the select bits ctx+0x1b50	^\s*uVar10\ =\ 0;$@3	+1
+use	FUN_000a3be0	uVar10	baseSelectBits	INFERRED	ctx+0x1b52 ushort: base value of the select bits ctx+0x1b50	^\s*iVar12\ =\ \(int\)\(char\)uVar10;$	+1
+use	FUN_000a3be0	uVar10	baseSelectBits	INFERRED	ctx+0x1b52 ushort: base value of the select bits ctx+0x1b50	^\s*uVar10\ \&\ 0x3f\ \|\ \*\(uint\ \*\)\(iVar16\ \+\ 0x1ee8\)\ \&\ 0xff000000;$	+1
+use	FUN_000a3be0	uVar10	baseSelectBits	INFERRED	ctx+0x1b52 ushort: base value of the select bits ctx+0x1b50	^\s*uVar10\ =\ uVar10\ \+\ \(\*\(uint\ \*\)\(param_1\ \+\ 0x1ba0\)\ >>\ \(uVar7\ \&\ 0x3f\)\ \&\ 7\);$	+1
+use	FUN_000a3be0	uVar10	baseSelectBits	INFERRED	ctx+0x1b52 ushort: base value of the select bits ctx+0x1b50	^\s*uVar10\ =\ 0;$@4	+1
+use	FUN_000a3be0	uVar10	baseSelectBits	INFERRED	ctx+0x1b52 ushort: base value of the select bits ctx+0x1b50	^\s*uVar10\ =\ 0;$@5	+1
+use	FUN_000a3be0	uVar10	baseSelectBits	INFERRED	ctx+0x1b52 ushort: base value of the select bits ctx+0x1b50	^\s*iVar16\ =\ \(int\)\(char\)uVar10;$@2	+1
+use	FUN_000a3be0	uVar10	baseSelectBits	INFERRED	ctx+0x1b52 ushort: base value of the select bits ctx+0x1b50	^\s*\(iVar16\ \+\ 1\)\ \*\ 0x40\ \&\ 0xfc0U\ \|\ uVar10\ \&\ 0x3f\ \|\ \*\(uint\ \*\)\(iVar11\ \+\ 8\)\ \&\ 0xff000000$	+1
+use	FUN_000a3be0	uVar10	baseSelectBits	INFERRED	ctx+0x1b52 ushort: base value of the select bits ctx+0x1b50	^\s*uVar10\ =\ uVar10\ \+\ \(\*\(uint\ \*\)\(param_1\ \+\ 0x1ba0\)\ >>\ uVar9\ \&\ 7\);$	+1
+use	FUN_000a3be0	uVar10	baseSelectBits	INFERRED	ctx+0x1b52 ushort: base value of the select bits ctx+0x1b50	^\s*uVar5\ =\ uVar10\ \&\ 0xff;$@2	+1
+use	FUN_000a3be0	uVar10	baseSelectBits	INFERRED	ctx+0x1b52 ushort: base value of the select bits ctx+0x1b50	^\s*\(\*UNRECOVERED_JUMPTABLE\)\(param_1,iVar11\ \+\ 0x30,param_3,uVar10,param_5,param_6,uVar13\);$	+1
+use	FUN_000a3be0	uVar10	ctxCursorC	INFERRED	glContext advanced 4 per word while the unit input words are copied	^\s*uVar10\ =\ param_1;$	+1
+use	FUN_000a3be0	uVar10	ctxCursorC	INFERRED	glContext advanced 4 per word while the unit input words are copied	^\s*puVar8\ =\ \(undefined4\ \*\)\(uVar10\ \+\ 0x1ee8\);$	+2
+local	FUN_000a3be0	iVar12	regBaseSignedD	INFERRED	(signed char)register base in the program-less loop

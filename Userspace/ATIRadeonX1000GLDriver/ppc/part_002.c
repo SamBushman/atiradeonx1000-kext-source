@@ -8817,7 +8817,7 @@ int FUN_00017160(ctx, flagsInOut, pbuffer)
       ((unsigned char *)GLD_yInverted)[ctx] = 0;
     }
   }
-  FUN_000a7a60(ctx);
+  gld_updateDrawBufferConfig(ctx);
   return;
 }
 
@@ -8850,7 +8850,7 @@ int FUN_00017260(ctx)
       attachLeft = attachLeft + -1;
     } while (attachLeft != 0);
   }
-  return FUN_000a7a60(ctx);
+  return gld_updateDrawBufferConfig(ctx);
 }
 
 /* gld_setIntegerEngineParam @ 0x17310 (1008 bytes) */

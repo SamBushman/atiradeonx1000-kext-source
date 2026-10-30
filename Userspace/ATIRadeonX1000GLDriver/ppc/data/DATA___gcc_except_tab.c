@@ -4124,7 +4124,7 @@ const unsigned int sectDATA___gcc_except_tab[5374] = {
     0x0b280000, /* +0x4064 */
     0x00040000, /* +0x4068 */
     0x0b680000, /* +0x406c */
-    0x000b5400, /* -> FUN_000b5400 */ /* +0x4070 */
+    0x000b5400, /* -> gld_emitProgramStatePackets */ /* +0x4070 */
     0x00001000, /* +0x4074 */
     0x0011c400, /* +0x4078 */
     0x00000ba8, /* +0x407c */

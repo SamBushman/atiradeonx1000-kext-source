@@ -41,8 +41,8 @@
 7a174	7a190	FUN_0007a110
 7a190	7a1a0	FUN_0007a110
 c6e40	c6e4c	psnReallocateTemps
-c71d0	c71e0	FUN_000c6ff0
-cd380	cd388	FUN_000cd1c4
+c71d0	c71e0	scCreateForContext
+cd380	cd388	scCompile
 ce330	ce344	FUN_000ce148
 ce344	ce358	FUN_000ce148
 cec34	cec48	FUN_000cea6c

@@ -7904,7 +7904,7 @@ int FUN_0004ab60(glContext)
   int iVar1;
   int iVar2;
   
-  FUN_000b6020(glContext,(*(uint *)(PTR_DAT_001e88c8 + (uint)*(byte *)(glContext + 0x293f) * 0x24 + 0x20
+  gld_buildUnitSetupCmdList(glContext,(*(uint *)(PTR_DAT_001e88c8 + (uint)*(byte *)(glContext + 0x293f) * 0x24 + 0x20
                                  ) ^ 0x800000) >> 0x17 & 1,1);
   *(uint *)(((unsigned char *)0x00001544) + *(int *)(glContext + 0x1e60)) =
        *(uint *)(((unsigned char *)0x00001544) + *(int *)(glContext + 0x1e60)) & 0xffc0003f | 0x40;

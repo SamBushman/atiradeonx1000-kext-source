@@ -906,7 +906,7 @@ PTR_FUN_001e8a1c	0x1e8a1c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char 
 PTR_FUN_001e8a20	0x1e8a20	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a20 asm("PTR_FUN_001e8a20");	pointer -> FUN_0008fb70	data.s
 PTR_FUN_001e8a24	0x1e8a24	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a24 asm("PTR_FUN_001e8a24");	pointer -> arbEmitRecord2Src_op0a	data.s
 PTR_FUN_001e8a28	0x1e8a28	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a28 asm("PTR_FUN_001e8a28");	pointer -> arbEmitRecord2Src_op07	data.s
-PTR_FUN_001e8a2c	0x1e8a2c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a2c asm("PTR_FUN_001e8a2c");	pointer -> FUN_000b57a0	data.s
+PTR_FUN_001e8a2c	0x1e8a2c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a2c asm("PTR_FUN_001e8a2c");	pointer -> gld_compileFragmentProgramImage	data.s
 PTR_FUN_001e8a30	0x1e8a30	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a30 asm("PTR_FUN_001e8a30");	pointer -> arbEmitRecord3Src_op04	data.s
 PTR_FUN_001e8a34	0x1e8a34	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a34 asm("PTR_FUN_001e8a34");	pointer -> arbEmitRecord1Src_op47	data.s
 PTR_FUN_001e8a38	0x1e8a38	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a38 asm("PTR_FUN_001e8a38");	pointer -> FUN_00065610	data.s
@@ -973,7 +973,7 @@ PTR_FUN_001e8b28	0x1e8b28	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char 
 PTR_FUN_001e8b2c	0x1e8b2c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b2c asm("PTR_FUN_001e8b2c");	pointer -> arbEmitRecord1Src_op49	data.s
 PTR_FUN_001e8b30	0x1e8b30	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b30 asm("PTR_FUN_001e8b30");	pointer -> arbEmitRecord2Src_op02	data.s
 PTR_FUN_001e8b34	0x1e8b34	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b34 asm("PTR_FUN_001e8b34");	pointer -> arbEmitIlEnd	data.s
-PTR_FUN_001e8b38	0x1e8b38	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b38 asm("PTR_FUN_001e8b38");	pointer -> FUN_000b5c00	data.s
+PTR_FUN_001e8b38	0x1e8b38	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b38 asm("PTR_FUN_001e8b38");	pointer -> gld_bindProgramStateAndEmit	data.s
 PTR_FUN_001e8b3c	0x1e8b3c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b3c asm("PTR_FUN_001e8b3c");	pointer -> extvsValidateProgramState	data.s
 PTR_FUN_001e8b40	0x1e8b40	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b40 asm("PTR_FUN_001e8b40");	pointer -> FUN_00076c60	data.s
 PTR_DAT_001e8b48	0x1e8b48	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e8b48 asm("PTR_DAT_001e8b48");	pointer -> LD_1f1008	data.s

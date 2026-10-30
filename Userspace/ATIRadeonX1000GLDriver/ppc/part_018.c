@@ -417,22 +417,24 @@ int ilEmitPrologue(outCursor, programRecord, passThroughR5, passThroughR6, passT
   undefined4 passThroughR9;
   undefined4 passThroughR10;
 {
+  int slotMapCursor;
+  int counterTableCursor;
   int remaining2;
   uint programRecordWord74;
   uint programRecordWord54;
   uint programRecordWord60;
   uint programRecordWord8;
   uint loopIndex;
-  bool bVar1;
+  bool notLastBit;
   uint programRecordWord70;
   undefined4 registerNumber;
-  uint *puVar4;
+  uint *freeSlotMapCursor;
   int loopIndex3;
   uint loopIndex4;
-  uint uVar7;
+  uint counterCount;
   uint loopIndex2;
-  int iVar9;
-  uint uVar10;
+  int regTableCursor;
+  uint inputBit;
   int remaining;
   undefined8 allocationResult;
   undefined4 operandToken0;
@@ -523,38 +525,38 @@ int ilEmitPrologue(outCursor, programRecord, passThroughR5, passThroughR6, passT
   if (*(int *)(programRecord + 0x2234) != 0) {
     programRecordWord70 = *(uint *)(programRecord + 0x70);
     programRecordWord74 = *(uint *)(programRecord + 0x74);
-    uVar7 = 0;
+    counterCount = 0;
     loopIndex2 = 0;
-    iVar9 = programRecord;
+    regTableCursor = programRecord;
     do {
-      uVar10 = 1 << (loopIndex2 & 0x3f);
-      if (((programRecordWord70 | programRecordWord74) & uVar10) != 0) {
+      inputBit = 1 << (loopIndex2 & 0x3f);
+      if (((programRecordWord70 | programRecordWord74) & inputBit) != 0) {
         registerNumber = ((int (*)())ilPopFreeRegister)(programRecord);
-        *(undefined4 *)(iVar9 + 0xb8) = registerNumber;
-        if (uVar7 == 0) {
-          uVar7 = 1;
+        *(undefined4 *)(regTableCursor + 0xb8) = registerNumber;
+        if (counterCount == 0) {
+          counterCount = 1;
         }
       }
-      if ((uVar10 & *(uint *)(programRecord + 0x74)) != 0) {
+      if ((inputBit & *(uint *)(programRecord + 0x74)) != 0) {
         registerNumber = ilNextCounterValue(programRecord);
         *(undefined4 *)(programRecord + 0x184) = registerNumber;
-        if (uVar7 < 2) {
-          uVar7 = 2;
+        if (counterCount < 2) {
+          counterCount = 2;
         }
       }
-      bVar1 = loopIndex2 != 0xf;
-      iVar9 = iVar9 + 4;
+      notLastBit = loopIndex2 != 0xf;
+      regTableCursor = regTableCursor + 4;
       loopIndex2 = loopIndex2 + 1;
-    } while (bVar1);
-    if (uVar7 != 0) {
+    } while (notLastBit);
+    if (counterCount != 0) {
       loopIndex = 0;
-      iVar9 = programRecord;
+      counterTableCursor = programRecord;
       do {
         loopIndex = loopIndex + 1;
         registerNumber = ilNextCounterValue(programRecord);
-        *(undefined4 *)(iVar9 + 0x17c) = registerNumber;
-        iVar9 = iVar9 + 4;
-      } while (loopIndex != uVar7);
+        *(undefined4 *)(counterTableCursor + 0x17c) = registerNumber;
+        counterTableCursor = counterTableCursor + 4;
+      } while (loopIndex != counterCount);
     }
   }
   if (*(int *)(programRecord + 0x21d0) != 0) {
@@ -566,21 +568,21 @@ int ilEmitPrologue(outCursor, programRecord, passThroughR5, passThroughR6, passT
   }
   loopIndex3 = 0;
   remaining = 0x10;
-  iVar9 = programRecord;
+  slotMapCursor = programRecord;
   do {
-    *(int *)(iVar9 + 0x232c) = loopIndex3;
+    *(int *)(slotMapCursor + 0x232c) = loopIndex3;
     loopIndex3 = loopIndex3 + 1;
-    iVar9 = iVar9 + 4;
+    slotMapCursor = slotMapCursor + 4;
     remaining = remaining + -1;
   } while (remaining != 0);
   programRecordWord8 = *(uint *)(programRecord + 8);
-  puVar4 = (uint *)(programRecord + 0x232c);
+  freeSlotMapCursor = (uint *)(programRecord + 0x232c);
   loopIndex4 = 0;
   remaining2 = 0x10;
   do {
     if ((1 << (loopIndex4 & 0x3f) & programRecordWord8) == 0) {
-      *puVar4 = loopIndex4;
-      puVar4 = puVar4 + 1;
+      *freeSlotMapCursor = loopIndex4;
+      freeSlotMapCursor = freeSlotMapCursor + 1;
     }
     loopIndex4 = loopIndex4 + 1;
     remaining2 = remaining2 + -1;
@@ -1766,7 +1768,7 @@ LAB_000ca6bc:
     } while (countdown != 0);
     compilerHandle = *(int *)(ctx + 0x186c);
     if (compilerHandle == 0) {
-      FUN_000c6ff0(ctx,1);
+      scCreateForContext(ctx,1);
       compilerHandle = *(int *)(ctx + 0x186c);
     }
     compilerHandle = ((int (*)())FUN_000cd1b0)(compilerHandle,auStack_2b18,auStack_2a5c);
@@ -4154,61 +4156,62 @@ int FUN_000cd1b0(compilerHandle, param_2, param_3)
   return 3;
 }
 
-/* FUN_000cd1c4 @ 0xcd1c4 (92 bytes) */
-int FUN_000cd1c4(param_1, param_2, param_3, param_4)
-  int param_1;
-  int param_2;
-  int param_3;
-  int param_4;
+/* scCompile @ 0xcd1c4 (92 bytes) */
+int scCompile(scHandle, vertexShader, fragmentShader, programOutput)
+  int scHandle;
+  int vertexShader;
+  int fragmentShader;
+  int programOutput;
 {
+  int irModule;
   int iStack00000018Word314;
-  int iVar1;
-  int iVar2;
-  int iStack00000018;
-  int iStack0000001c;
-  undefined4 uStack00000020;
-  undefined4 uStack00000024;
-  undefined4 uStack00000028;
+  int setjmpResult;
+  int retryRequested;
+  int compiler;
+  int outputProgram;
+  undefined4 sourceHandle;
+  undefined4 targetHandle;
+  undefined4 optionsWord;
   
-  if (param_1 == 0) {
+  if (scHandle == 0) {
     return 3;
   }
-  iStack00000018 = *(int *)(param_1 + 8);
-  *(int *)(param_1 + 0x3c) = param_4;
-  *(int *)(param_1 + 0x30) = param_2;
-  *(int *)(param_1 + 0x34) = param_3;
-  *(int *)(param_1 + 0x2c) = param_2;
-  if (iStack00000018 != 0) {
-    uStack00000028 = *(undefined4 *)(param_2 + 0x54);
-    uStack00000024 = *(undefined4 *)(param_3 + 0x4c);
-    uStack00000020 = *(undefined4 *)(param_2 + 0x4c);
-    *(int *)(iStack00000018 + 0x398) = param_1;
-    iStack0000001c = param_4;
-    FUN_000e0ca8(iStack00000018);
+  compiler = *(int *)(scHandle + 8);
+  *(int *)(scHandle + 0x3c) = programOutput;
+  *(int *)(scHandle + 0x30) = vertexShader;
+  *(int *)(scHandle + 0x34) = fragmentShader;
+  *(int *)(scHandle + 0x2c) = vertexShader;
+  if (compiler != 0) {
+    optionsWord = *(undefined4 *)(vertexShader + 0x54);
+    targetHandle = *(undefined4 *)(fragmentShader + 0x4c);
+    sourceHandle = *(undefined4 *)(vertexShader + 0x4c);
+    *(int *)(compiler + 0x398) = scHandle;
+    outputProgram = programOutput;
+    FUN_000e0ca8(compiler);
     do {
-      iVar1 = _setjmp(*(int **)(iStack00000018 + 4));
-      if (iVar1 == 0) {
-        Compiler__resetState(iStack00000018);
-        FUN_000e0cd0(iStack00000018,uStack00000028);
-        iVar1 = FUN_00193b3c(uStack00000020,uStack00000024,iStack00000018);
-        *(int *)(iStack00000018 + 0x524) = iStack0000001c;
-        *(undefined4 *)(iStack0000001c + 0xf8) = 0;
-        *(undefined4 *)(iStack0000001c + 0xfc) =
-             *(undefined4 *)(*(int *)(iStack00000018 + 0x398) + 0x28);
-        Compiler__compileStages(iStack00000018,iVar1);
-        if (iVar1 != 0) {
-          FUN_00193be8(iVar1);
-          Arena__free(*(undefined4 *)(iVar1 + -4),iVar1 + -4);
+      setjmpResult = _setjmp(*(int **)(compiler + 4));
+      if (setjmpResult == 0) {
+        Compiler__resetState(compiler);
+        FUN_000e0cd0(compiler,optionsWord);
+        irModule = FUN_00193b3c(sourceHandle,targetHandle,compiler);
+        *(int *)(compiler + 0x524) = outputProgram;
+        *(undefined4 *)(outputProgram + 0xf8) = 0;
+        *(undefined4 *)(outputProgram + 0xfc) =
+             *(undefined4 *)(*(int *)(compiler + 0x398) + 0x28);
+        Compiler__compileStages(compiler,irModule);
+        if (irModule != 0) {
+          FUN_00193be8(irModule);
+          Arena__free(*(undefined4 *)(irModule + -4),irModule + -4);
         }
       }
-      *(undefined4 *)(iStack00000018 + 0x4d8) = 0;
-      *(undefined4 *)(iStack00000018 + 0x484) = 0;
-      *(undefined4 *)(iStack00000018 + 0x4d4) = 0;
-      *(undefined4 *)(iStack00000018 + 0x488) = 0;
-      iStack00000018Word314 = *(int *)(iStack00000018 + 0x314);
-      FUN_000e0e28(iStack00000018);
-      Compiler__releaseChipAndPools(iStack00000018,0);
-    } while ((iStack00000018Word314 != 0) && (iVar2 = FUN_000e161c(iStack00000018,iStack00000018Word314), iVar2 != 0));
+      *(undefined4 *)(compiler + 0x4d8) = 0;
+      *(undefined4 *)(compiler + 0x484) = 0;
+      *(undefined4 *)(compiler + 0x4d4) = 0;
+      *(undefined4 *)(compiler + 0x488) = 0;
+      iStack00000018Word314 = *(int *)(compiler + 0x314);
+      FUN_000e0e28(compiler);
+      Compiler__releaseChipAndPools(compiler,0);
+    } while ((iStack00000018Word314 != 0) && (retryRequested = FUN_000e161c(compiler,iStack00000018Word314), retryRequested != 0));
     return iStack00000018Word314;
   }
   return 2;

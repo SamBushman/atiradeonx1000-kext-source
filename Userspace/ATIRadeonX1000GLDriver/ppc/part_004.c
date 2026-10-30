@@ -1462,7 +1462,7 @@ int gld_getProgramParameter(ctx, programObject, pname, params)
   _pthread_mutex_lock(*(undefined4 *)(ctx + 0xc));
   if (((programObject != (int *)0x0) && (*programObject != 0)) && (*(int *)(*programObject + 4) != 0)) {
     gld_resolveBoundTextures(ctx,0xffff,pnameCopy,paramsCopy,staleArgR7,staleArgR8);
-    FUN_000a7ee0(ctx,0xffff);
+    gld_updateTextureUnitState(ctx,0xffff);
     ((int (*)())gld_bindProgramObject)(ctx,programObject);
     programHeader = (short *)*programObject;
     if (programHeader[1] == 0) {
@@ -4071,7 +4071,7 @@ int FUN_00029c00(ctx, param_2, procWidth, procHeight, srcRowBytes, bytesPerPixel
       pfVar13 = afStack_148;
       iVar9 = procHeight;
       pfVar14 = srcRowBytes;
-      FUN_000a6140(iVar21,(*(uint *)(ctx + 0x1cf8) ^ 1) & 1 | (uint)(format == 0x1902) << 0xc,
+      gld_resetRasterStateForInternalDraw(iVar21,(*(uint *)(ctx + 0x1cf8) ^ 1) & 1 | (uint)(format == 0x1902) << 0xc,
                    pfVar13);
       FUN_0004b480(iVar21,*(uint *)(ctx + 0x1ae4) >> 6 & 0xffff);
       *(uint *)(ctx + 0x216c) = *(uint *)(ctx + 0x216c) & 0xfffff800 | 0x80;
@@ -4263,7 +4263,7 @@ int FUN_0002a260(ring, param_2)
   undefined4 uVar5;
   
   uVar5 = *(undefined4 *)(ring + 8);
-  FUN_000a6140(ring,(*(uint *)(ring + 0x1ab8) ^ 1) & 1,param_2);
+  gld_resetRasterStateForInternalDraw(ring,(*(uint *)(ring + 0x1ab8) ^ 1) & 1,param_2);
   FUN_0004b480(ring,*(uint *)(ring + 0x18a4) >> 6 & 0xffff);
   uVar3 = (**(code **)(ring + 0x2758))(ring,0x1f);
   *(undefined4 *)(0x00002748 + ring + 4) = uVar3;
@@ -5559,7 +5559,7 @@ int FUN_0002be90(ctx, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_6;
   undefined4 param_7;
 {
-  return FUN_000a3be0(ctx + 0x240,param_3,param_3,param_4,param_5,param_6,param_7);
+  return gld_setPrimitiveInputRegisters(ctx + 0x240,param_3,param_3,param_4,param_5,param_6,param_7);
 }
 
 /* gldTrimVertexCountToPrimitive @ 0x2bea0 (116 bytes) */
@@ -5791,7 +5791,7 @@ LAB_0002c610:
       FUN_00090840(glContext);
     }
     if (*(char *)(engineObjects + 0x20) == '\0') {
-      FUN_000a7d10(glContext);
+      gld_buildActiveUnitList(glContext);
     }
     ffvpSelectLitProgramVariant(glContext);
     FUN_00090960(glContext);
@@ -6030,7 +6030,7 @@ int gld_initContextHardwareState(ctx, pixelFormat)
   *(undefined4 *)(iVar8 + 0x1c) = 0;
   *(undefined4 *)(ctx + 0x1ec) = 0;
   *(undefined4 *)(ctx + 0x1f0) = 0;
-  FUN_000a7050(ctx);
+  gld_initContextDispatch(ctx);
   FUN_000a0f90(iVar10);
   staleFprArg1 = (double)FUN_00052cc0(iVar10);
   *(undefined4 *)(((unsigned char *)0x00002b74) + ctx) = 0;
@@ -6103,7 +6103,7 @@ int gld_initContextHardwareState(ctx, pixelFormat)
   local_44 = DAT_001aa4f8;
   local_4c = DAT_001aa4f0;
   local_48 = DAT_001aa4f4;
-  ((void (*)())FUN_000a9ac0)(iVar10,&local_54,uVar5,piVar1,uVar7,DAT_001aa4f8,DAT_001aa4e8,DAT_001aa4f4,staleFprArg1,
+  ((void (*)())gld_validateDirtyState)(iVar10,&local_54,uVar5,piVar1,uVar7,DAT_001aa4f8,DAT_001aa4e8,DAT_001aa4f4,staleFprArg1,
                staleFpr2,staleFpr3,staleFpr4,staleFpr5,staleFpr6,staleFpr7,staleFpr8,staleStackArg_ffffff78,staleStackArg_ffffff80,
                staleStackArg_ffffff88,staleStackArg_ffffff90,staleStackArg_ffffff98);
   ((int (*)())FUN_0002c6c0)(ctx);
@@ -6195,7 +6195,7 @@ uint gld_prepareDrawCount(int ctx,undefined4 closeFlag,uint primitiveMode,uint v
   }
 LAB_0002cce8:
   if (((unsigned char *)0x00002b80)[ctx] != '\0') {
-    staleFprArg1 = (double)FUN_000a3be0(ctx + GLD_commandStream,primitiveMode,modeForward,vertexCountForward,extraArg4,extraArg5,drawFlagsOrModeBit);
+    staleFprArg1 = (double)gld_setPrimitiveInputRegisters(ctx + GLD_commandStream,primitiveMode,modeForward,vertexCountForward,extraArg4,extraArg5,drawFlagsOrModeBit);
   }
   if (*(int *)(ctx + 0x1b68) != 0) {
     ((void (*)())gld_revalidateStreamProgram)(ctx + GLD_commandStream,primitiveMode,modeForward,vertexCountForward,extraArg4,extraArg5,drawFlagsOrModeBit,staleFprArg1,staleFprArg2,

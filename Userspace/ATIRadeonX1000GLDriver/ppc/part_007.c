@@ -1357,7 +1357,7 @@ LAB_0004df78:
                  (*(ushort *)(unitInfoCursor + 0x46e) & 0x3ff) << 3 | *(uint *)(texObj + 0x18) & 0xffffe007;
             param_4 = *(undefined4 *)(&DAT_001db98c + (uint)*(byte *)(glContext + 0x2941) * 4);
             param_3 = loopIndex;
-            fparam_1 = (double)((double (*)())FUN_000b6f20)(glContext,texObj,loopIndex,param_4,fparam_1,fparam_2,fparam_3
+            fparam_1 = (double)((double (*)())gld_updateUnitBiasRegisters)(glContext,texObj,loopIndex,param_4,fparam_1,fparam_2,fparam_3
                                             ,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,
                                             in_stack_ffffff28);
           }
@@ -1510,7 +1510,7 @@ LAB_0004e294:
           *(uint *)(texRegCursor + 0x1d1c) = uVar13;
           param_4 = *(undefined4 *)(&DAT_001db98c + (uint)*(byte *)(glContext + 0x2941) * 4);
           param_3 = loopIndex;
-          fparam_1 = (double)((double (*)())FUN_000b6f20)(glContext,texObj,loopIndex,param_4,fparam_1,fparam_2,fparam_3,
+          fparam_1 = (double)((double (*)())gld_updateUnitBiasRegisters)(glContext,texObj,loopIndex,param_4,fparam_1,fparam_2,fparam_3,
                                           fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,
                                           in_stack_ffffff28);
           uVar13 = *(uint *)(texObj + 0x14);

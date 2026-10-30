@@ -2983,8 +2983,8 @@ void FUN_000bd9a0(int glContext,undefined4 param_2,undefined4 param_3,undefined4
   return;
 }
 
-/* FUN_000bda40 @ 0xbda40 (1016 bytes) */
-int FUN_000bda40(glContext, unusedArgR4, dirtyBitsArg, scratchR6, dirtyWord3, dirtyWord1, unusedArgR9, dirtyWord4)
+/* gld_updateTexCombinerState @ 0xbda40 (1016 bytes) */
+int gld_updateTexCombinerState(glContext, unusedArgR4, dirtyBitsArg, scratchR6, dirtyWord3, dirtyWord1, unusedArgR9, dirtyWord4)
   int glContext;
   undefined4 unusedArgR4;
   undefined4 dirtyBitsArg;
@@ -2994,154 +2994,158 @@ int FUN_000bda40(glContext, unusedArgR4, dirtyBitsArg, scratchR6, dirtyWord3, di
   undefined4 unusedArgR9;
   undefined4 dirtyWord4;
 {
+  uint combineBits26;
+  int unitFlagsAddrInactive;
+  int activeListOffset;
+  uint texCombineStateWord;
   uint glContextWord44;
   byte glContextByte13b0;
-  byte bVar1;
-  ushort uVar2;
-  short sVar3;
-  uint uVar4;
-  bool bVar5;
-  uint uVar6;
-  ushort uVar7;
-  int iVar8;
+  byte enabledUnitMask;
+  ushort oldUnitFlags;
+  short envSlot1Code;
+  uint slotUses2402;
+  bool unitDisabledByte;
+  uint slotEnableBits;
+  ushort disabledBit14;
+  int ctxUnitCursor;
   uint loopIndex2;
-  int iVar10;
+  int unitEnvBlock;
   uint glContextWord8c;
-  uint uVar12;
-  uint uVar13;
-  uint uVar14;
-  int iVar15;
-  int iVar16;
-  uint uVar17;
+  uint slotCodeBits;
+  uint slotUsesSpecial;
+  uint unitEnableBits;
+  int unitFlagsAddr;
+  int unitWordCursor;
+  uint slotUsesSpecialSrc;
   int loopIndex;
-  uint uVar19;
-  uint uVar20;
-  uint uVar21;
-  int iVar22;
-  int iVar23;
-  uint uVar24;
+  uint slot2Enabled;
+  uint slot1Enabled;
+  uint enabledUnitBits;
+  int envBlockCursor;
+  int unitByteCursor;
+  uint unitsToScan;
   
   glContextWord44 = *(uint *)(glContext + 0x44);
   if (((((glContextWord44 & 0x2000) == 0) || ((*(byte *)(glContext + 0x2e) & 1) != 0)) ||
       ((*(uint *)(glContext + 0x38) & 0x8000) != 0)) || (*(short *)(glContext + 0x42) != 0)) {
     glContextByte13b0 = ((unsigned char *)0x000013b0)[glContext];
-    iVar16 = glContext + 0x44;
+    unitWordCursor = glContext + 0x44;
     *(uint *)(glContext + 0x8c) = *(uint *)(glContext + 0x8c) & 0xf07fffff;
     *(uint *)(glContext + 0x1874) = *(uint *)(glContext + 0x1874) & 0xfdffffff;
-    uVar24 = (uint)*(byte *)(glContext + 0x2b);
+    unitsToScan = (uint)*(byte *)(glContext + 0x2b);
     if ((uint)glContextByte13b0 < (uint)*(byte *)(glContext + 0x2b)) {
-      uVar24 = (uint)glContextByte13b0;
+      unitsToScan = (uint)glContextByte13b0;
     }
     if ((glContextWord44 & 0x20000) == 0) {
       *(undefined1 *)(glContext + 0x1878) = 0;
-      uVar21 = 0;
+      enabledUnitBits = 0;
     }
     else {
       if ((glContextWord44 & 0x2000) == 0) {
-        bVar1 = ((unsigned char *)0x00001135)[glContext];
+        enabledUnitMask = ((unsigned char *)0x00001135)[glContext];
       }
       else {
-        bVar1 = ((unsigned char *)0x000011d3)[glContext];
+        enabledUnitMask = ((unsigned char *)0x000011d3)[glContext];
       }
-      uVar21 = (uint)bVar1;
-      *(byte *)(glContext + 0x1878) = bVar1;
+      enabledUnitBits = (uint)enabledUnitMask;
+      *(byte *)(glContext + 0x1878) = enabledUnitMask;
     }
     loopIndex = 0;
-    if (uVar24 != 0) {
+    if (unitsToScan != 0) {
       loopIndex2 = 0;
-      iVar8 = glContext;
-      iVar22 = glContext;
-      iVar23 = glContext;
+      ctxUnitCursor = glContext;
+      envBlockCursor = glContext;
+      unitByteCursor = glContext;
       while( true ) {
-        uVar6 = *(uint *)(iVar16 + 4) & 0x1e0;
+        slotEnableBits = *(uint *)(unitWordCursor + 4) & 0x1e0;
         if ((glContextWord44 & 0x20000) == 0) {
-          uVar14 = *(uint *)(iVar16 + 4) & 0x1f;
+          unitEnableBits = *(uint *)(unitWordCursor + 4) & 0x1f;
         }
         else {
-          uVar14 = uVar21 & 1 << (loopIndex2 & 0x3f);
+          unitEnableBits = enabledUnitBits & 1 << (loopIndex2 & 0x3f);
         }
-        iVar10 = glContext + 0x450 + loopIndex2 * 0xcc;
-        if ((int)-uVar14 < 0) {
-          iVar15 = loopIndex2 * 2 + glContext;
-          bVar5 = *(char *)(iVar23 + 0x2784) == '\0';
-          *(uint *)(iVar8 + 0x150) = (uint)bVar5;
-          uVar7 = (ushort)bVar5 << 0xe;
-          uVar2 = *(ushort *)(iVar15 + 0x187c);
-          *(ushort *)(iVar15 + 0x187c) = uVar2 & 0xbfff | uVar7;
-          if (uVar6 == 0) {
-            *(ushort *)(iVar15 + 0x187c) = uVar2 & 0x8003 | uVar7;
-            uVar14 = *(uint *)(glContext + 0x8c);
+        unitEnvBlock = glContext + 0x450 + loopIndex2 * 0xcc;
+        if ((int)-unitEnableBits < 0) {
+          unitFlagsAddr = loopIndex2 * 2 + glContext;
+          unitDisabledByte = *(char *)(unitByteCursor + 0x2784) == '\0';
+          *(uint *)(ctxUnitCursor + 0x150) = (uint)unitDisabledByte;
+          disabledBit14 = (ushort)unitDisabledByte << 0xe;
+          oldUnitFlags = *(ushort *)(unitFlagsAddr + 0x187c);
+          *(ushort *)(unitFlagsAddr + 0x187c) = oldUnitFlags & 0xbfff | disabledBit14;
+          if (slotEnableBits == 0) {
+            *(ushort *)(unitFlagsAddr + 0x187c) = oldUnitFlags & 0x8003 | disabledBit14;
+            texCombineStateWord = *(uint *)(glContext + 0x8c);
           }
           else {
-            uVar19 = uVar6 >> 7 & 1;
-            sVar3 = *(short *)(iVar10 + 0x60);
-            uVar14 = uVar6 >> 5 & 1;
-            uVar20 = uVar6 >> 6 & 1;
-            if ((uVar19 == 0) || (uVar17 = 1, 1 < (ushort)(*(short *)(iVar10 + 0x84) + 0x7aefU))) {
-              uVar17 = 0;
+            slot2Enabled = slotEnableBits >> 7 & 1;
+            envSlot1Code = *(short *)(unitEnvBlock + 0x60);
+            texCombineStateWord = slotEnableBits >> 5 & 1;
+            slot1Enabled = slotEnableBits >> 6 & 1;
+            if ((slot2Enabled == 0) || (slotUsesSpecialSrc = 1, 1 < (ushort)(*(short *)(unitEnvBlock + 0x84) + 0x7aefU))) {
+              slotUsesSpecialSrc = 0;
             }
-            uVar12 = 0;
-            if (uVar14 != 0) {
-              uVar12 = *(uint *)(&DAT_001dbf70 +
-                                (*(ushort *)(iVar22 + 0x48c) >> 2 & 4 |
-                                *(ushort *)(iVar22 + 0x48c) & 3) * 4);
+            slotCodeBits = 0;
+            if (texCombineStateWord != 0) {
+              slotCodeBits = *(uint *)(&DAT_001dbf70 +
+                                (*(ushort *)(envBlockCursor + 0x48c) >> 2 & 4 |
+                                *(ushort *)(envBlockCursor + 0x48c) & 3) * 4);
             }
-            if (uVar20 != 0) {
-              uVar12 = uVar12 | *(int *)(&DAT_001dbf70 +
-                                        (*(ushort *)(iVar22 + 0x4b0) >> 2 & 4 |
-                                        *(ushort *)(iVar22 + 0x4b0) & 3) * 4) << 3;
+            if (slot1Enabled != 0) {
+              slotCodeBits = slotCodeBits | *(int *)(&DAT_001dbf70 +
+                                        (*(ushort *)(envBlockCursor + 0x4b0) >> 2 & 4 |
+                                        *(ushort *)(envBlockCursor + 0x4b0) & 3) * 4) << 3;
             }
-            if (uVar19 != 0) {
-              uVar12 = uVar12 | *(int *)(&DAT_001dbf70 +
-                                        (*(ushort *)(iVar22 + 0x4d4) >> 2 & 4 |
-                                        *(ushort *)(iVar22 + 0x4d4) & 3) * 4) << 6;
+            if (slot2Enabled != 0) {
+              slotCodeBits = slotCodeBits | *(int *)(&DAT_001dbf70 +
+                                        (*(ushort *)(envBlockCursor + 0x4d4) >> 2 & 4 |
+                                        *(ushort *)(envBlockCursor + 0x4d4) & 3) * 4) << 6;
             }
-            if (uVar6 >> 8 != 0) {
-              uVar12 = uVar12 | *(int *)(&DAT_001dbf70 +
-                                        (*(ushort *)(iVar22 + 0x4f8) >> 2 & 4 |
-                                        *(ushort *)(iVar22 + 0x4f8) & 3) * 4) << 9;
+            if (slotEnableBits >> 8 != 0) {
+              slotCodeBits = slotCodeBits | *(int *)(&DAT_001dbf70 +
+                                        (*(ushort *)(envBlockCursor + 0x4f8) >> 2 & 4 |
+                                        *(ushort *)(envBlockCursor + 0x4f8) & 3) * 4) << 9;
             }
-            iVar15 = loopIndex2 * 2 + glContext;
-            uVar17 = (((ushort)(*(short *)(iVar10 + 0x3c) + 0x7aefU) < 2 || sVar3 == -0x7aee) ||
-                     sVar3 == -0x7aef) | uVar17;
-            uVar4 = (uint)(*(short *)(iVar10 + 0x3c) == 0x2402 || sVar3 == 0x2402);
-            uVar13 = uVar17 | uVar4;
-            *(ushort *)(iVar15 + 0x187c) =
-                 *(ushort *)(iVar15 + 0x187c) & 0xc003 | (ushort)(uVar12 << 2) & 0x3ffc;
+            unitFlagsAddr = loopIndex2 * 2 + glContext;
+            slotUsesSpecialSrc = (((ushort)(*(short *)(unitEnvBlock + 0x3c) + 0x7aefU) < 2 || envSlot1Code == -0x7aee) ||
+                     envSlot1Code == -0x7aef) | slotUsesSpecialSrc;
+            slotUses2402 = (uint)(*(short *)(unitEnvBlock + 0x3c) == 0x2402 || envSlot1Code == 0x2402);
+            slotUsesSpecial = slotUsesSpecialSrc | slotUses2402;
+            *(ushort *)(unitFlagsAddr + 0x187c) =
+                 *(ushort *)(unitFlagsAddr + 0x187c) & 0xc003 | (ushort)(slotCodeBits << 2) & 0x3ffc;
             glContextWord8c = *(uint *)(glContext + 0x8c);
-            uVar17 = (uVar17 | glContextWord8c >> 0x1b & 1) << 0x1b;
+            slotUsesSpecialSrc = (slotUsesSpecialSrc | glContextWord8c >> 0x1b & 1) << 0x1b;
             *(uint *)(glContext + 0x1874) =
-                 (uVar13 | *(uint *)(glContext + 0x1874) >> 0x19 & 1) << 0x19 |
+                 (slotUsesSpecial | *(uint *)(glContext + 0x1874) >> 0x19 & 1) << 0x19 |
                  *(uint *)(glContext + 0x1874) & 0xfdffffff;
-            uVar12 = (uVar4 | (glContextWord8c & 0xf7ffffff) >> 0x1a & 1) << 0x1a;
-            *(uint *)(glContext + 0x8c) = uVar12 | uVar17 | glContextWord8c & 0xf3ffffff;
-            uVar14 = ((glContextWord8c & 0x2000000) >> 0x19 |
-                     uVar13 | *(short *)(iVar10 + 0x3c) == 0x2400 & uVar14 |
-                              *(short *)(iVar10 + 0x60) == 0x2400 & uVar20 |
-                              *(short *)(iVar10 + 0x84) == 0x2400 & uVar19 |
-                              (uint)(*(short *)(iVar10 + 0xa8) == 0x2400) & uVar6 >> 8) << 0x19 |
-                     uVar12 | uVar17 | glContextWord8c & 0xf1ffffff;
-            *(uint *)(glContext + 0x8c) = uVar14;
+            combineBits26 = (slotUses2402 | (glContextWord8c & 0xf7ffffff) >> 0x1a & 1) << 0x1a;
+            *(uint *)(glContext + 0x8c) = combineBits26 | slotUsesSpecialSrc | glContextWord8c & 0xf3ffffff;
+            texCombineStateWord = ((glContextWord8c & 0x2000000) >> 0x19 |
+                     slotUsesSpecial | *(short *)(unitEnvBlock + 0x3c) == 0x2400 & texCombineStateWord |
+                              *(short *)(unitEnvBlock + 0x60) == 0x2400 & slot1Enabled |
+                              *(short *)(unitEnvBlock + 0x84) == 0x2400 & slot2Enabled |
+                              (uint)(*(short *)(unitEnvBlock + 0xa8) == 0x2400) & slotEnableBits >> 8) << 0x19 |
+                     combineBits26 | slotUsesSpecialSrc | glContextWord8c & 0xf1ffffff;
+            *(uint *)(glContext + 0x8c) = texCombineStateWord;
           }
-          *(uint *)(glContext + 0x8c) = uVar14 | 0x800000;
-          iVar10 = loopIndex * 4;
+          *(uint *)(glContext + 0x8c) = texCombineStateWord | 0x800000;
+          activeListOffset = loopIndex * 4;
           loopIndex = loopIndex + 1;
           *(uint *)(glContext + 0x8c) =
-               (uint)(0 < (int)loopIndex2) << 0x18 | uVar14 & 0xfeffffff | 0x800000;
-          *(uint *)(iVar10 + glContext + 0x98) = loopIndex2;
+               (uint)(0 < (int)loopIndex2) << 0x18 | texCombineStateWord & 0xfeffffff | 0x800000;
+          *(uint *)(activeListOffset + glContext + 0x98) = loopIndex2;
         }
         else {
-          *(undefined4 *)(iVar8 + 0x150) = 0;
-          iVar10 = loopIndex2 * 2 + glContext;
-          *(ushort *)(iVar10 + 0x187c) = *(ushort *)(iVar10 + 0x187c) & 0x8003;
+          *(undefined4 *)(ctxUnitCursor + 0x150) = 0;
+          unitFlagsAddrInactive = loopIndex2 * 2 + glContext;
+          *(ushort *)(unitFlagsAddrInactive + 0x187c) = *(ushort *)(unitFlagsAddrInactive + 0x187c) & 0x8003;
         }
         loopIndex2 = loopIndex2 + 1;
-        iVar16 = iVar16 + 4;
-        iVar8 = iVar8 + 4;
-        iVar22 = iVar22 + 0xcc;
-        iVar23 = iVar23 + 1;
-        uVar24 = uVar24 - 1;
-        if (uVar24 == 0) break;
+        unitWordCursor = unitWordCursor + 4;
+        ctxUnitCursor = ctxUnitCursor + 4;
+        envBlockCursor = envBlockCursor + 0xcc;
+        unitByteCursor = unitByteCursor + 1;
+        unitsToScan = unitsToScan - 1;
+        if (unitsToScan == 0) break;
         glContextWord44 = *(uint *)(glContext + 0x44);
       }
     }
@@ -3150,78 +3154,91 @@ int FUN_000bda40(glContext, unusedArgR4, dirtyBitsArg, scratchR6, dirtyWord3, di
   return;
 }
 
-/* FUN_000bde70 @ 0xbde70 (1504 bytes) */
-int FUN_000bde70(rsWords, programImage, outProgram, scCallbacks)
+/* psnDecDecodeFragmentProgram @ 0xbde70 (1504 bytes) */
+int psnDecDecodeFragmentProgram(rsWords, programImage, outProgram, scCallbacks)
   uint *rsWords;
   uint *programImage;
   undefined4 *outProgram;
   undefined4 *scCallbacks;
 {
+  int aluByteOffset;
+  int texByteOffset;
+  uint aluEnd;
+  uint texCountFlag;
+  uint rsIndex;
+  bool moreAluPhases;
+  uint alphaAddrWord2;
+  uint alphaAddrWord1;
+  uint alphaAddrWord0;
+  uint aluAddrWord2;
+  uint aluAddrWord1;
+  uint aluAddrWord0;
+  uint aluStart;
   uint cursor4Word0;
   uint cursor5Word0;
   uint *cursor5;
   int *cursor3;
   int *cursor2;
-  uint *puVar1;
-  undefined4 *puVar2;
-  bool bVar3;
-  uint uVar4;
-  uint uVar5;
-  uint uVar6;
-  ushort uVar7;
-  undefined4 uVar8;
-  int iVar9;
-  uint uVar10;
-  uint uVar11;
+  uint *texWordPtr;
+  undefined4 *aluWordPtr;
+  bool isFirstTexInst;
+  uint lastRsIndex;
+  uint texWord;
+  uint phaseScan;
+  ushort signedRegIndex;
+  undefined4 status;
+  int recordIndex;
+  uint texStart;
+  uint texIndex;
   int *cursor;
-  uint uVar13;
-  int iVar14;
+  uint phaseCursor;
+  int phaseBias;
   uint *cursor4;
-  int *piVar16;
-  uint uVar17;
-  uint uVar18;
+  int *program;
+  uint recordCount;
+  uint phaseIndex;
   
   if (((scCallbacks == (undefined4 *)0x0) || (scCallbacks[0xd] != -0x54520ff3)) ||
      (outProgram == (undefined4 *)0x0)) {
-    uVar8 = 0x80000005;
+    status = 0x80000005;
   }
   else {
-    iVar14 = -(*programImage & 7);
-    uVar18 = iVar14 + 3;
-    uVar17 = (*rsWords & 0xf) + 1;
-    if (uVar18 < 4) {
-      uVar13 = uVar18;
-      uVar6 = uVar18;
+    phaseBias = -(*programImage & 7);
+    phaseIndex = phaseBias + 3;
+    recordCount = (*rsWords & 0xf) + 1;
+    if (phaseIndex < 4) {
+      phaseCursor = phaseIndex;
+      phaseScan = phaseIndex;
       if ((*programImage >> 3 & 1) != 0) goto LAB_000bdeec;
       while( true ) {
-        uVar17 = uVar17 + (programImage[uVar6 + 2] >> 6 & 0x3f) + 1;
-        uVar13 = uVar6 + 1;
-        if (3 < uVar6 + 1) break;
+        recordCount = recordCount + (programImage[phaseScan + 2] >> 6 & 0x3f) + 1;
+        phaseCursor = phaseScan + 1;
+        if (3 < phaseScan + 1) break;
 LAB_000bdeec:
-        uVar17 = uVar17 + (programImage[uVar13 + 2] >> 0x11 & 0x1f) + 1;
-        uVar6 = uVar13;
+        recordCount = recordCount + (programImage[phaseCursor + 2] >> 0x11 & 0x1f) + 1;
+        phaseScan = phaseCursor;
       }
     }
-    piVar16 = (int *)*outProgram;
-    if (piVar16 == (int *)0x0) {
-      piVar16 = (int *)(*(code *)*scCallbacks)(uVar17 * 0x48 + 0x48);
-      *piVar16 = 0;
-      piVar16[1] = uVar17 + 1;
-      *outProgram = piVar16;
+    program = (int *)*outProgram;
+    if (program == (int *)0x0) {
+      program = (int *)(*(code *)*scCallbacks)(recordCount * 0x48 + 0x48);
+      *program = 0;
+      program[1] = recordCount + 1;
+      *outProgram = program;
     }
-    else if ((*piVar16 != 0) || ((uint)piVar16[1] <= uVar17)) {
+    else if ((*program != 0) || ((uint)program[1] <= recordCount)) {
       return 0x80000006;
     }
-    *(undefined2 *)(piVar16 + 5) = 0;
-    piVar16[2] = 0;
-    *(byte *)((int)piVar16 + 0xd) = (byte)(*rsWords >> 5) & 7;
-    uVar13 = 0;
+    *(undefined2 *)(program + 5) = 0;
+    program[2] = 0;
+    *(byte *)((int)program + 0xd) = (byte)(*rsWords >> 5) & 7;
+    rsIndex = 0;
     cursor4 = rsWords;
-    cursor = piVar16;
+    cursor = program;
     do {
-      uVar4 = uVar13;
+      lastRsIndex = rsIndex;
       cursor[0x12] = 1;
-      uVar13 = uVar4 + 1;
+      rsIndex = lastRsIndex + 1;
       *(byte *)(cursor + 0x14) = (byte)cursor4[1] & 0xf;
       *(byte *)((int)cursor + 0x51) = (byte)(cursor4[1] >> 4) & 1;
       *(byte *)((int)cursor + 0x52) = (byte)(cursor4[1] >> 0xc) & 0xf;
@@ -3235,134 +3252,134 @@ LAB_000bdeec:
       *(undefined1 *)((int)cursor + 0x56) = 0;
       *(ushort *)(cursor + 0x13) = (ushort)(cursor4Word0 >> 5) & 0x7f;
       cursor = cursor + 0x12;
-    } while (uVar13 <= (*rsWords & 0xf));
-    iVar9 = uVar4 + 2;
-    uVar13 = *programImage >> 3 & 1;
-    if (uVar18 < 4) {
-      cursor5 = programImage + iVar14 + 5;
+    } while (rsIndex <= (*rsWords & 0xf));
+    recordIndex = lastRsIndex + 2;
+    texCountFlag = *programImage >> 3 & 1;
+    if (phaseIndex < 4) {
+      cursor5 = programImage + phaseBias + 5;
       do {
         cursor5Word0 = *cursor5;
         cursor5 = cursor5 + 1;
-        uVar6 = cursor5Word0 & 0x3f;
-        uVar10 = cursor5Word0 >> 0xc & 0x1f;
-        if ((uVar13 != 0) && (uVar13 = uVar10 + (cursor5Word0 >> 0x11 & 0x1f), uVar10 <= uVar13)) {
-          iVar14 = uVar10 << 2;
-          cursor2 = piVar16 + iVar9 * 0x12;
-          uVar11 = uVar10;
+        aluStart = cursor5Word0 & 0x3f;
+        texStart = cursor5Word0 >> 0xc & 0x1f;
+        if ((texCountFlag != 0) && (texCountFlag = texStart + (cursor5Word0 >> 0x11 & 0x1f), texStart <= texCountFlag)) {
+          texByteOffset = texStart << 2;
+          cursor2 = program + recordIndex * 0x12;
+          texIndex = texStart;
           do {
             *cursor2 = 2;
-            bVar3 = uVar11 == uVar10;
-            uVar11 = uVar11 + 1;
-            iVar9 = iVar9 + 1;
-            *(byte *)((int)cursor2 + 0x19) = (byte)(*(uint *)(iVar14 + programImage[7]) >> 0xb) & 0xf;
-            uVar5 = *(uint *)(iVar14 + programImage[7]);
-            *(bool *)(cursor2 + 8) = bVar3;
+            isFirstTexInst = texIndex == texStart;
+            texIndex = texIndex + 1;
+            recordIndex = recordIndex + 1;
+            *(byte *)((int)cursor2 + 0x19) = (byte)(*(uint *)(texByteOffset + programImage[7]) >> 0xb) & 0xf;
+            texWord = *(uint *)(texByteOffset + programImage[7]);
+            *(bool *)(cursor2 + 8) = isFirstTexInst;
             *(undefined1 *)((int)cursor2 + 0x1f) = 0;
-            *(byte *)((int)cursor2 + 0x1a) = (byte)(uVar5 >> 0xf) & 7;
-            *(ushort *)((int)cursor2 + 0xe) = (ushort)*(undefined4 *)(iVar14 + programImage[7]) & 0x1f;
-            puVar1 = (uint *)(iVar14 + programImage[7]);
-            iVar14 = iVar14 + 4;
-            *(ushort *)(cursor2 + 3) = (ushort)(*puVar1 >> 6) & 0x1f;
+            *(byte *)((int)cursor2 + 0x1a) = (byte)(texWord >> 0xf) & 7;
+            *(ushort *)((int)cursor2 + 0xe) = (ushort)*(undefined4 *)(texByteOffset + programImage[7]) & 0x1f;
+            texWordPtr = (uint *)(texByteOffset + programImage[7]);
+            texByteOffset = texByteOffset + 4;
+            *(ushort *)(cursor2 + 3) = (ushort)(*texWordPtr >> 6) & 0x1f;
             cursor2 = cursor2 + 0x12;
-          } while (uVar11 <= uVar13);
+          } while (texIndex <= texCountFlag);
         }
-        uVar13 = uVar6 + (cursor5Word0 >> 6 & 0x3f);
-        if (uVar6 <= uVar13) {
-          iVar14 = uVar6 << 2;
-          cursor3 = piVar16 + iVar9 * 0x12;
+        aluEnd = aluStart + (cursor5Word0 >> 6 & 0x3f);
+        if (aluStart <= aluEnd) {
+          aluByteOffset = aluStart << 2;
+          cursor3 = program + recordIndex * 0x12;
           do {
             *cursor3 = 3;
-            *(byte *)(cursor3 + 5) = (byte)(*(uint *)(programImage[8] + iVar14) >> 0x17) & 7;
+            *(byte *)(cursor3 + 5) = (byte)(*(uint *)(programImage[8] + aluByteOffset) >> 0x17) & 7;
             *(byte *)((int)cursor3 + 0x15) =
-                 (byte)((uint)*(undefined4 *)(programImage[8] + iVar14) >> 0x1a) & 7;
+                 (byte)((uint)*(undefined4 *)(programImage[8] + aluByteOffset) >> 0x1a) & 7;
             *(byte *)((int)cursor3 + 0x16) =
-                 (byte)((uint)*(undefined4 *)(programImage[8] + iVar14) >> 0x1d) & 3;
-            uVar4 = *(uint *)(programImage[8] + iVar14) & 0x3f;
-            uVar7 = (ushort)uVar4;
-            if (0x1f < uVar4) {
-              uVar7 = uVar7 - 0x20 | 0x8000;
+                 (byte)((uint)*(undefined4 *)(programImage[8] + aluByteOffset) >> 0x1d) & 3;
+            aluAddrWord0 = *(uint *)(programImage[8] + aluByteOffset) & 0x3f;
+            signedRegIndex = (ushort)aluAddrWord0;
+            if (0x1f < aluAddrWord0) {
+              signedRegIndex = signedRegIndex - 0x20 | 0x8000;
             }
-            *(ushort *)((int)cursor3 + 0xe) = uVar7;
-            uVar4 = *(uint *)(programImage[8] + iVar14) >> 6 & 0x3f;
-            uVar7 = (ushort)uVar4;
-            if (0x1f < uVar4) {
-              uVar7 = uVar7 - 0x20 | 0x8000;
+            *(ushort *)((int)cursor3 + 0xe) = signedRegIndex;
+            aluAddrWord1 = *(uint *)(programImage[8] + aluByteOffset) >> 6 & 0x3f;
+            signedRegIndex = (ushort)aluAddrWord1;
+            if (0x1f < aluAddrWord1) {
+              signedRegIndex = signedRegIndex - 0x20 | 0x8000;
             }
-            *(ushort *)(cursor3 + 4) = uVar7;
-            uVar4 = *(uint *)(programImage[8] + iVar14) >> 0xc & 0x3f;
-            uVar7 = (ushort)uVar4;
-            if (0x1f < uVar4) {
-              uVar7 = uVar7 - 0x20 | 0x8000;
+            *(ushort *)(cursor3 + 4) = signedRegIndex;
+            aluAddrWord2 = *(uint *)(programImage[8] + aluByteOffset) >> 0xc & 0x3f;
+            signedRegIndex = (ushort)aluAddrWord2;
+            if (0x1f < aluAddrWord2) {
+              signedRegIndex = signedRegIndex - 0x20 | 0x8000;
             }
-            *(ushort *)((int)cursor3 + 0x12) = uVar7;
+            *(ushort *)((int)cursor3 + 0x12) = signedRegIndex;
             *(ushort *)(cursor3 + 3) =
-                 (ushort)((uint)*(undefined4 *)(programImage[8] + iVar14) >> 0x12) & 0x1f;
-            *(byte *)(cursor3 + 8) = (byte)(*(uint *)(programImage[9] + iVar14) >> 0x17) & 1;
-            *(byte *)((int)cursor3 + 0x21) = *(byte *)(programImage[9] + iVar14) & 1;
+                 (ushort)((uint)*(undefined4 *)(programImage[8] + aluByteOffset) >> 0x12) & 0x1f;
+            *(byte *)(cursor3 + 8) = (byte)(*(uint *)(programImage[9] + aluByteOffset) >> 0x17) & 1;
+            *(byte *)((int)cursor3 + 0x21) = *(byte *)(programImage[9] + aluByteOffset) & 1;
             *(byte *)((int)cursor3 + 0x22) =
-                 (byte)((uint)*(undefined4 *)(programImage[9] + iVar14) >> 0x19) & 3;
+                 (byte)((uint)*(undefined4 *)(programImage[9] + aluByteOffset) >> 0x19) & 3;
             *(byte *)((int)cursor3 + 0x23) =
-                 (byte)((uint)*(undefined4 *)(programImage[9] + iVar14) >> 0x1b) & 1;
-            uVar4 = *(uint *)(programImage[9] + iVar14) & 0x3f;
-            uVar7 = (ushort)uVar4;
-            if (0x1f < uVar4) {
-              uVar7 = uVar7 - 0x20 | 0x8000;
+                 (byte)((uint)*(undefined4 *)(programImage[9] + aluByteOffset) >> 0x1b) & 1;
+            alphaAddrWord0 = *(uint *)(programImage[9] + aluByteOffset) & 0x3f;
+            signedRegIndex = (ushort)alphaAddrWord0;
+            if (0x1f < alphaAddrWord0) {
+              signedRegIndex = signedRegIndex - 0x20 | 0x8000;
             }
-            *(ushort *)((int)cursor3 + 0x1a) = uVar7;
-            uVar4 = *(uint *)(programImage[9] + iVar14) >> 6 & 0x3f;
-            uVar7 = (ushort)uVar4;
-            if (0x1f < uVar4) {
-              uVar7 = uVar7 - 0x20 | 0x8000;
+            *(ushort *)((int)cursor3 + 0x1a) = signedRegIndex;
+            alphaAddrWord1 = *(uint *)(programImage[9] + aluByteOffset) >> 6 & 0x3f;
+            signedRegIndex = (ushort)alphaAddrWord1;
+            if (0x1f < alphaAddrWord1) {
+              signedRegIndex = signedRegIndex - 0x20 | 0x8000;
             }
-            *(ushort *)(cursor3 + 7) = uVar7;
-            uVar4 = *(uint *)(programImage[9] + iVar14) >> 0xc & 0x3f;
-            uVar7 = (ushort)uVar4;
-            if (0x1f < uVar4) {
-              uVar7 = uVar7 - 0x20 | 0x8000;
+            *(ushort *)(cursor3 + 7) = signedRegIndex;
+            alphaAddrWord2 = *(uint *)(programImage[9] + aluByteOffset) >> 0xc & 0x3f;
+            signedRegIndex = (ushort)alphaAddrWord2;
+            if (0x1f < alphaAddrWord2) {
+              signedRegIndex = signedRegIndex - 0x20 | 0x8000;
             }
-            *(ushort *)((int)cursor3 + 0x1e) = uVar7;
-            uVar6 = uVar6 + 1;
-            iVar9 = iVar9 + 1;
+            *(ushort *)((int)cursor3 + 0x1e) = signedRegIndex;
+            aluStart = aluStart + 1;
+            recordIndex = recordIndex + 1;
             *(ushort *)(cursor3 + 6) =
-                 (ushort)((uint)*(undefined4 *)(programImage[9] + iVar14) >> 0x12) & 0x1f;
-            *(byte *)((int)cursor3 + 0x2a) = (byte)*(undefined4 *)(programImage[0xb] + iVar14) & 0x1f;
-            *(byte *)((int)cursor3 + 0x2d) = (byte)(*(uint *)(programImage[0xb] + iVar14) >> 5) & 3;
-            *(byte *)((int)cursor3 + 0x2b) = (byte)(*(uint *)(programImage[0xb] + iVar14) >> 7) & 0x1f;
-            *(byte *)((int)cursor3 + 0x2e) = (byte)(*(uint *)(programImage[0xb] + iVar14) >> 0xc) & 3;
-            *(byte *)(cursor3 + 0xb) = (byte)(*(uint *)(programImage[0xb] + iVar14) >> 0xe) & 0x1f;
-            *(byte *)((int)cursor3 + 0x2f) = (byte)(*(uint *)(programImage[0xb] + iVar14) >> 0x13) & 3;
-            *(byte *)(cursor3 + 0xc) = (byte)(*(uint *)(programImage[0xb] + iVar14) >> 0x15) & 3;
-            *(byte *)((int)cursor3 + 0x31) = (byte)(*(uint *)(programImage[0xb] + iVar14) >> 0x17) & 0xf;
+                 (ushort)((uint)*(undefined4 *)(programImage[9] + aluByteOffset) >> 0x12) & 0x1f;
+            *(byte *)((int)cursor3 + 0x2a) = (byte)*(undefined4 *)(programImage[0xb] + aluByteOffset) & 0x1f;
+            *(byte *)((int)cursor3 + 0x2d) = (byte)(*(uint *)(programImage[0xb] + aluByteOffset) >> 5) & 3;
+            *(byte *)((int)cursor3 + 0x2b) = (byte)(*(uint *)(programImage[0xb] + aluByteOffset) >> 7) & 0x1f;
+            *(byte *)((int)cursor3 + 0x2e) = (byte)(*(uint *)(programImage[0xb] + aluByteOffset) >> 0xc) & 3;
+            *(byte *)(cursor3 + 0xb) = (byte)(*(uint *)(programImage[0xb] + aluByteOffset) >> 0xe) & 0x1f;
+            *(byte *)((int)cursor3 + 0x2f) = (byte)(*(uint *)(programImage[0xb] + aluByteOffset) >> 0x13) & 3;
+            *(byte *)(cursor3 + 0xc) = (byte)(*(uint *)(programImage[0xb] + aluByteOffset) >> 0x15) & 3;
+            *(byte *)((int)cursor3 + 0x31) = (byte)(*(uint *)(programImage[0xb] + aluByteOffset) >> 0x17) & 0xf;
             *(byte *)((int)cursor3 + 0x32) =
-                 (byte)((uint)*(undefined4 *)(programImage[0xb] + iVar14) >> 0x1b) & 7;
+                 (byte)((uint)*(undefined4 *)(programImage[0xb] + aluByteOffset) >> 0x1b) & 7;
             *(byte *)((int)cursor3 + 0x33) =
-                 (byte)((uint)*(undefined4 *)(programImage[0xb] + iVar14) >> 0x1e) & 1;
-            *(byte *)(cursor3 + 0xd) = (byte)((uint)*(undefined4 *)(programImage[0xb] + iVar14) >> 0x1f);
-            *(byte *)((int)cursor3 + 0x39) = (byte)*(undefined4 *)(iVar14 + programImage[0xc]) & 0x1f;
-            *(byte *)(cursor3 + 0xf) = (byte)(*(uint *)(iVar14 + programImage[0xc]) >> 5) & 3;
-            *(byte *)((int)cursor3 + 0x3a) = (byte)(*(uint *)(iVar14 + programImage[0xc]) >> 7) & 0x1f;
-            *(byte *)((int)cursor3 + 0x3d) = (byte)(*(uint *)(iVar14 + programImage[0xc]) >> 0xc) & 3;
-            *(byte *)((int)cursor3 + 0x3b) = (byte)(*(uint *)(iVar14 + programImage[0xc]) >> 0xe) & 0x1f;
-            *(byte *)((int)cursor3 + 0x3e) = (byte)(*(uint *)(iVar14 + programImage[0xc]) >> 0x13) & 3;
-            *(byte *)((int)cursor3 + 0x3f) = (byte)(*(uint *)(iVar14 + programImage[0xc]) >> 0x15) & 3;
-            *(byte *)(cursor3 + 0x10) = (byte)(*(uint *)(iVar14 + programImage[0xc]) >> 0x17) & 0xf;
+                 (byte)((uint)*(undefined4 *)(programImage[0xb] + aluByteOffset) >> 0x1e) & 1;
+            *(byte *)(cursor3 + 0xd) = (byte)((uint)*(undefined4 *)(programImage[0xb] + aluByteOffset) >> 0x1f);
+            *(byte *)((int)cursor3 + 0x39) = (byte)*(undefined4 *)(aluByteOffset + programImage[0xc]) & 0x1f;
+            *(byte *)(cursor3 + 0xf) = (byte)(*(uint *)(aluByteOffset + programImage[0xc]) >> 5) & 3;
+            *(byte *)((int)cursor3 + 0x3a) = (byte)(*(uint *)(aluByteOffset + programImage[0xc]) >> 7) & 0x1f;
+            *(byte *)((int)cursor3 + 0x3d) = (byte)(*(uint *)(aluByteOffset + programImage[0xc]) >> 0xc) & 3;
+            *(byte *)((int)cursor3 + 0x3b) = (byte)(*(uint *)(aluByteOffset + programImage[0xc]) >> 0xe) & 0x1f;
+            *(byte *)((int)cursor3 + 0x3e) = (byte)(*(uint *)(aluByteOffset + programImage[0xc]) >> 0x13) & 3;
+            *(byte *)((int)cursor3 + 0x3f) = (byte)(*(uint *)(aluByteOffset + programImage[0xc]) >> 0x15) & 3;
+            *(byte *)(cursor3 + 0x10) = (byte)(*(uint *)(aluByteOffset + programImage[0xc]) >> 0x17) & 0xf;
             *(byte *)((int)cursor3 + 0x41) =
-                 (byte)((uint)*(undefined4 *)(iVar14 + programImage[0xc]) >> 0x1b) & 7;
-            puVar2 = (undefined4 *)(iVar14 + programImage[0xc]);
-            iVar14 = iVar14 + 4;
-            *(byte *)((int)cursor3 + 0x42) = (byte)((uint)*puVar2 >> 0x1e) & 1;
+                 (byte)((uint)*(undefined4 *)(aluByteOffset + programImage[0xc]) >> 0x1b) & 7;
+            aluWordPtr = (undefined4 *)(aluByteOffset + programImage[0xc]);
+            aluByteOffset = aluByteOffset + 4;
+            *(byte *)((int)cursor3 + 0x42) = (byte)((uint)*aluWordPtr >> 0x1e) & 1;
             cursor3 = cursor3 + 0x12;
-          } while (uVar6 <= uVar13);
+          } while (aluStart <= aluEnd);
         }
-        bVar3 = uVar18 != 3;
-        uVar13 = 1;
-        uVar18 = uVar18 + 1;
-      } while (bVar3);
+        moreAluPhases = phaseIndex != 3;
+        texCountFlag = 1;
+        phaseIndex = phaseIndex + 1;
+      } while (moreAluPhases);
     }
-    uVar8 = 0;
-    piVar16[2] = uVar17;
+    status = 0;
+    program[2] = recordCount;
   }
-  return uVar8;
+  return status;
 }
 
 /* FUN_000be460 @ 0xbe460 (2472 bytes) */
@@ -3722,17 +3739,17 @@ LAB_000be580:
   return;
 }
 
-/* FUN_000bee40 @ 0xbee40 (244 bytes) */
-int FUN_000bee40(psnProgram, param_2, param_3, unusedArgR6, param_5, param_6, param_7)
+/* psnCheckLimitsAndGenerate @ 0xbee40 (244 bytes) */
+int psnCheckLimitsAndGenerate(psnProgram, passThroughR4, passThroughR5, unusedArgR6, passThroughR7, passThroughR8, passThroughR9)
   int psnProgram;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 passThroughR4;
+  undefined4 passThroughR5;
   undefined4 unusedArgR6;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+  undefined4 passThroughR7;
+  undefined4 passThroughR8;
+  undefined4 passThroughR9;
 {
-  undefined4 uVar1;
+  undefined4 limitStatus;
   
   ((int (*)())FUN_000c5e60)(psnProgram);
   if (*(ushort *)(psnProgram + 0x16) < 5) {
@@ -3742,37 +3759,37 @@ int FUN_000bee40(psnProgram, param_2, param_3, unusedArgR6, param_5, param_6, pa
           if (*(short *)(psnProgram + 0x20) == 0) {
             if (*(ushort *)(psnProgram + 0x22) < 0x20) {
               if (*(ushort *)(psnProgram + 0x24) < 0x20) {
-                ((int (*)())FUN_000be460)(psnProgram,param_2,param_3,0,param_5,param_6,param_7);
-                uVar1 = 0;
+                ((int (*)())FUN_000be460)(psnProgram,passThroughR4,passThroughR5,0,passThroughR7,passThroughR8,passThroughR9);
+                limitStatus = 0;
               }
               else {
-                uVar1 = 0x80000013;
+                limitStatus = 0x80000013;
               }
             }
             else {
-              uVar1 = 0x80000012;
+              limitStatus = 0x80000012;
             }
           }
           else {
-            uVar1 = 0x80000017;
+            limitStatus = 0x80000017;
           }
         }
         else {
-          uVar1 = 0x80000016;
+          limitStatus = 0x80000016;
         }
       }
       else {
-        uVar1 = 0x80000015;
+        limitStatus = 0x80000015;
       }
     }
     else {
-      uVar1 = 0x80000014;
+      limitStatus = 0x80000014;
     }
   }
   else {
-    uVar1 = 0x80000011;
+    limitStatus = 0x80000011;
   }
-  return uVar1;
+  return limitStatus;
 }
 
 /* FUN_000bef40 @ 0xbef40 (1192 bytes) */
@@ -7137,6 +7154,8 @@ int psnDecAllocateTempsAndCompact(psnState, decodedProgram, rsWords, programImag
   int rsWords;
   undefined4 programImage;
 {
+  short *usageWordCursor;
+  undefined4 returnStatus;
   uint stackTop;
   ushort readMask;
   ushort writeMaskLive;
@@ -7166,15 +7185,15 @@ int psnDecAllocateTempsAndCompact(psnState, decodedProgram, rsWords, programImag
   int slotCounter;
   int groupUsageBase;
   int slotOffset;
-  undefined4 uVar7;
+  undefined4 staleArgR7;
   int halfCounter;
   undefined2 *destMapEntry;
   int halfCounter2;
-  uint uVar11;
+  uint tempRegisterCount;
   short targetIndex;
   ushort outputMask;
   ushort renderTarget;
-  short *psVar12;
+  short *targetInitCursor;
   ushort *sourceMapEntry;
   uint freeEntryValue;
   ushort *halfWords;
@@ -7188,44 +7207,44 @@ int psnDecAllocateTempsAndCompact(psnState, decodedProgram, rsWords, programImag
   int initCounter;
   uint uStack_68;
   uint maxTempIndex;
-  short *psStack_60;
-  undefined4 uStack_50;
+  short *freeTempList;
+  undefined4 constOneBits;
   
-  uVar11 = *(uint *)(psnState + 0x30);
+  tempRegisterCount = *(uint *)(psnState + 0x30);
   regMapTable = decodedProgram[3];
-  targetLiveTable = (short *)(regMapTable + uVar11 * 4);
-  psStack_60 = targetLiveTable + 8;
+  targetLiveTable = (short *)(regMapTable + tempRegisterCount * 4);
+  freeTempList = targetLiveTable + 8;
   if (rsWords == 0) {
     freeTempStack = (uint *)0x0;
   }
   else {
     freeTempStack = &uStack_68;
-    uVar11 = 0x80;
+    tempRegisterCount = 0x80;
   }
   targetIndex = 0;
   initCounter = 4;
-  psVar12 = targetLiveTable;
+  targetInitCursor = targetLiveTable;
   do {
-    *psVar12 = targetIndex;
-    psVar12[1] = 0xf;
+    *targetInitCursor = targetIndex;
+    targetInitCursor[1] = 0xf;
     targetIndex = targetIndex + 1;
-    psVar12 = psVar12 + 2;
+    targetInitCursor = targetInitCursor + 2;
     initCounter = initCounter + -1;
   } while (initCounter != 0);
   targetLiveTable[1] = targetLiveTable[1] | 0x10;
   _memset(regMapTable,0,*(int *)(psnState + 0x30) << 2);
   uStack_68 = 0;
-  if (uVar11 != 0) {
-    uStack_68 = uVar11 & 0xffff;
+  if (tempRegisterCount != 0) {
+    uStack_68 = tempRegisterCount & 0xffff;
     freeListIndex = 0;
     freeEntryValue = uStack_68;
     do {
       freeEntryNext = freeEntryValue - 1;
       freeEntryValue = freeEntryNext & 0xffff;
-      psStack_60[freeListIndex] = (short)freeEntryNext;
-      uVar11 = uVar11 - 1;
+      freeTempList[freeListIndex] = (short)freeEntryNext;
+      tempRegisterCount = tempRegisterCount - 1;
       freeListIndex = freeListIndex + 1;
-    } while (uVar11 != 0);
+    } while (tempRegisterCount != 0);
   }
   loopIndex = 0;
   maxTempIndex = 0;
@@ -7241,7 +7260,7 @@ int psnDecAllocateTempsAndCompact(psnState, decodedProgram, rsWords, programImag
       do {
         if (((((*(ushort *)(halfCursor + 6) != 0) && ((*(uint *)(halfCursor + 0x30) & 0x400) != 0)) &&
              ((*(uint *)(halfCursor + 0x30) & 0x1800) == 0)) &&
-            ((uStack_50 = 0x3f800000, *(float *)(halfCursor + 0x2c) == 1.0 &&
+            ((constOneBits = 0x3f800000, *(float *)(halfCursor + 0x2c) == 1.0 &&
              ((*(ushort *)(halfCursor + 10) & 0x10) == 0)))) &&
            ((*(short *)((slotOffset + (*(ushort *)(halfCursor + 8) & 3)) * 2 + entry + 0x80) ==
              *(short *)(halfCursor + 4) &&
@@ -7326,7 +7345,7 @@ int psnDecAllocateTempsAndCompact(psnState, decodedProgram, rsWords, programImag
             sourceMapEntry[1] = readMask | liveMaskBefore;
             if ((liveMaskBefore == 0) && (readMask != 0)) {
               uStack_68 = uStack_68 - 1;
-              newTempRegister = psStack_60[uStack_68];
+              newTempRegister = freeTempList[uStack_68];
               if (maxTempIndex < newTempRegister) {
                 maxTempIndex = (uint)newTempRegister;
               }
@@ -7356,20 +7375,20 @@ int psnDecAllocateTempsAndCompact(psnState, decodedProgram, rsWords, programImag
     }
     *(undefined2 *)(entry + 0x44) = mappedAlphaDest;
     groupCounter = 0;
-    uVar7 = 0xffffffff;
+    staleArgR7 = 0xffffffff;
     groupUsageCursor = entry + 0x10;
     do {
-      psVar12 = (short *)(groupUsageCursor + 4);
+      usageWordCursor = (short *)(groupUsageCursor + 4);
       halfCounter = 0;
       do {
-        if (*psVar12 == 0 && psVar12[0x20] == 0) {
-          psVar12[0x36] = -1;
+        if (*usageWordCursor == 0 && usageWordCursor[0x20] == 0) {
+          usageWordCursor[0x36] = -1;
         }
-        else if ((psVar12[0x36] & 0x8000U) == 0) {
-          psVar12[0x36] = *(short *)(regMapTable + (uint)(ushort)psVar12[0x36] * 4);
+        else if ((usageWordCursor[0x36] & 0x8000U) == 0) {
+          usageWordCursor[0x36] = *(short *)(regMapTable + (uint)(ushort)usageWordCursor[0x36] * 4);
         }
         loopContinue = halfCounter != 2;
-        psVar12 = psVar12 + 1;
+        usageWordCursor = usageWordCursor + 1;
         halfCounter = halfCounter + 1;
       } while (loopContinue);
       loopContinue = groupCounter != 1;
@@ -7380,7 +7399,7 @@ int psnDecAllocateTempsAndCompact(psnState, decodedProgram, rsWords, programImag
       ((int (*)())psnDecRecomputeSourceUsage)(entry);
       ((int (*)())psnDecSortAddressSlots)(entry,0);
       ((int (*)())psnDecSortAddressSlots)(entry,1);
-      ((int (*)())psnDecCanonicalizeEntry)(entry,r4AfterCall,slotCounter,groupUsageBase,uVar7,groupCounter,psVar12,groupUsageCursor);
+      ((int (*)())psnDecCanonicalizeEntry)(entry,r4AfterCall,slotCounter,groupUsageBase,staleArgR7,groupCounter,usageWordCursor,groupUsageCursor);
     }
     loopIndex = loopIndex + 1;
     entryOffset = entryOffset + -0xa0;
@@ -7410,15 +7429,15 @@ int psnDecAllocateTempsAndCompact(psnState, decodedProgram, rsWords, programImag
   *decodedProgram = loopIndex;
   decodedProgram[1] = maxTempIndex + 1;
   if (loopIndex == 0) {
-    uVar7 = 0x80000004;
+    returnStatus = 0x80000004;
   }
   else {
     if (rsWords != 0) {
       ((int (*)())psnDecEncodeHwWords)(decodedProgram,rsWords,programImage);
     }
-    uVar7 = 0;
+    returnStatus = 0;
   }
-  return uVar7;
+  return returnStatus;
 }
 
 /* psnMaskIsSingleComponent @ 0xc2e40 (48 bytes) */
@@ -7684,187 +7703,189 @@ int psnDecRetargetSourceReg(entry, oldComponentSelect, newComponentSelect, newSl
 }
 
 /* psnDecReplaceSourceAddress @ 0xc3240 (916 bytes) */
-int psnDecReplaceSourceAddress(entry, param_2, param_3, param_4, oldAddressOffset, param_6, sourceSwizzlePtr, param_8)
+int psnDecReplaceSourceAddress(entry, oldAddrWord, newAddrWord, halfSelect, oldAddressOffset, sourceReg, sourceSwizzlePtr, freeSlotIndex)
   int entry;
-  uint param_2;
-  uint param_3;
-  int param_4;
+  uint oldAddrWord;
+  uint newAddrWord;
+  int halfSelect;
   uint oldAddressOffset;
-  uint param_6;
+  uint sourceReg;
   undefined4 sourceSwizzlePtr;
-  int param_8;
+  int freeSlotIndex;
 {
+  bool replaceAlpha;
+  int addrSlotScanCursor;
   int loopIndex9;
   int loopIndex8;
   int loopIndex7;
   int loopIndex5;
   int loopIndex4;
   int loopIndex3;
-  bool bVar1;
-  bool bVar2;
-  bool bVar3;
-  ushort uVar4;
-  ushort uVar5;
-  ushort *puVar6;
-  undefined4 *puVar7;
-  uint uVar8;
-  int *piVar9;
-  uint uVar10;
+  bool slotLoopContinue;
+  bool replaceRgb;
+  bool loopContinue;
+  ushort sourceSelectWord;
+  ushort newOffsetShort;
+  ushort *sourceSlotPtr;
+  undefined4 *usageClearCursor;
+  uint slotAddrSel;
+  int *usageFlagCursor;
+  uint sourceAddrSel;
   undefined4 r4AfterCall;
-  uint uVar11;
-  int iVar12;
+  uint halfIndex;
+  int scanHalfCursorB;
   uint loopIndex2;
-  uint uVar14;
-  int iVar15;
+  uint sourceIndex;
+  int selectBankOffset;
   int loopIndex6;
-  undefined2 *puVar17;
-  int iVar18;
-  ushort *puVar19;
-  uint uVar20;
+  undefined2 *addrSlotClearPtr;
+  int scanHalfCursor;
+  ushort *scanSlotPtr;
+  uint replaceSelectBits;
   uint loopIndex;
-  int aiStack_58 [11];
+  int addressUsageFlags [11];
   
-  uVar20 = (oldAddressOffset & 8) << 6;
+  replaceSelectBits = (oldAddressOffset & 8) << 6;
   if ((oldAddressOffset & 7) == 0) {
     if ((oldAddressOffset & 8) == 0) {
       return 0;
     }
   }
   else {
-    uVar20 = uVar20 | 0x100;
+    replaceSelectBits = replaceSelectBits | 0x100;
   }
-  uVar11 = (uint)(param_4 == 8);
-  uVar5 = (ushort)oldAddressOffset;
+  halfIndex = (uint)(halfSelect == 8);
+  newOffsetShort = (ushort)oldAddressOffset;
   if ((oldAddressOffset == 0x10) || (oldAddressOffset == 0x12)) {
     oldAddressOffset = oldAddressOffset & 0xffff;
     loopIndex5 = 0;
-    puVar6 = (ushort *)(entry + uVar11 * 0x40 + 8);
+    sourceSlotPtr = (ushort *)(entry + halfIndex * 0x40 + 8);
     do {
-      bVar1 = loopIndex5 != 2;
-      puVar6[1] = uVar5;
+      slotLoopContinue = loopIndex5 != 2;
+      sourceSlotPtr[1] = newOffsetShort;
       loopIndex5 = loopIndex5 + 1;
-      *puVar6 = *puVar6 & 0xfcff;
-      puVar6 = puVar6 + 2;
-    } while (bVar1);
+      *sourceSlotPtr = *sourceSlotPtr & 0xfcff;
+      sourceSlotPtr = sourceSlotPtr + 2;
+    } while (slotLoopContinue);
     sourceSwizzlePtr = 3;
-    uVar14 = param_6;
+    sourceIndex = sourceReg;
   }
   else {
-    uVar14 = 0;
-    bVar2 = (uVar20 >> 8 & 1) != 0;
-    bVar1 = uVar20 >> 9 != 0;
-    puVar6 = (ushort *)(entry + uVar11 * 0x40 + 8);
+    sourceIndex = 0;
+    replaceRgb = (replaceSelectBits >> 8 & 1) != 0;
+    replaceAlpha = replaceSelectBits >> 9 != 0;
+    sourceSlotPtr = (ushort *)(entry + halfIndex * 0x40 + 8);
     do {
-      uVar10 = *puVar6 & 3;
-      if (((uVar10 < 3) && ((puVar6[1] & 0x1f) == param_6)) &&
-         (iVar15 = ((*puVar6 & 0x300) == 0x100 ^ 1) * 3,
-         *(ushort *)((iVar15 + uVar10) * 2 + entry + 0x80) == param_2)) {
+      sourceAddrSel = *sourceSlotPtr & 3;
+      if (((sourceAddrSel < 3) && ((sourceSlotPtr[1] & 0x1f) == sourceReg)) &&
+         (selectBankOffset = ((*sourceSlotPtr & 0x300) == 0x100 ^ 1) * 3,
+         *(ushort *)((selectBankOffset + sourceAddrSel) * 2 + entry + 0x80) == oldAddrWord)) {
         loopIndex3 = 0;
         loopIndex8 = 0;
         do {
-          puVar7 = (undefined4 *)((int)aiStack_58 + loopIndex8);
+          usageClearCursor = (undefined4 *)((int)addressUsageFlags + loopIndex8);
           loopIndex6 = 0;
           do {
-            bVar3 = loopIndex6 != 2;
-            *puVar7 = 0;
+            loopContinue = loopIndex6 != 2;
+            *usageClearCursor = 0;
             loopIndex6 = loopIndex6 + 1;
-            puVar7 = puVar7 + 1;
-          } while (bVar3);
-          bVar3 = loopIndex3 != 1;
+            usageClearCursor = usageClearCursor + 1;
+          } while (loopContinue);
+          loopContinue = loopIndex3 != 1;
           loopIndex8 = loopIndex8 + 0xc;
           loopIndex3 = loopIndex3 + 1;
-        } while (bVar3);
+        } while (loopContinue);
         loopIndex = 0;
-        iVar12 = entry;
-        iVar18 = entry;
+        scanHalfCursorB = entry;
+        scanHalfCursor = entry;
         do {
-          puVar19 = (ushort *)(iVar18 + 8);
+          scanSlotPtr = (ushort *)(scanHalfCursor + 8);
           loopIndex2 = 0;
           do {
-            if ((uVar11 != loopIndex) || (uVar14 != loopIndex2)) {
-              uVar4 = *puVar19;
-              uVar8 = uVar4 & 3;
-              if (uVar8 == 3) {
-                if (((uVar4 & 0x100) != 0) &&
-                   (aiStack_58[0] = 1, (ushort)(*(short *)(iVar12 + 0x2a) - 1U) < 2)) {
-                  aiStack_58[1] = 1;
+            if ((halfIndex != loopIndex) || (sourceIndex != loopIndex2)) {
+              sourceSelectWord = *scanSlotPtr;
+              slotAddrSel = sourceSelectWord & 3;
+              if (slotAddrSel == 3) {
+                if (((sourceSelectWord & 0x100) != 0) &&
+                   (addressUsageFlags[0] = 1, (ushort)(*(short *)(scanHalfCursorB + 0x2a) - 1U) < 2)) {
+                  addressUsageFlags[1] = 1;
                 }
-                if (((uVar4 & 0x200) != 0) &&
-                   (aiStack_58[3] = 1, (ushort)(*(short *)(iVar12 + 0x2a) - 1U) < 2)) {
-                  aiStack_58[4] = 1;
+                if (((sourceSelectWord & 0x200) != 0) &&
+                   (addressUsageFlags[3] = 1, (ushort)(*(short *)(scanHalfCursorB + 0x2a) - 1U) < 2)) {
+                  addressUsageFlags[4] = 1;
                 }
               }
               else {
-                if ((uVar4 & 0x100) != 0) {
-                  aiStack_58[uVar8] = 1;
+                if ((sourceSelectWord & 0x100) != 0) {
+                  addressUsageFlags[slotAddrSel] = 1;
                 }
-                if ((uVar4 & 0x200) != 0) {
-                  aiStack_58[uVar8 + 3] = 1;
+                if ((sourceSelectWord & 0x200) != 0) {
+                  addressUsageFlags[slotAddrSel + 3] = 1;
                 }
               }
             }
-            bVar3 = loopIndex2 != 2;
-            puVar19 = puVar19 + 2;
+            loopContinue = loopIndex2 != 2;
+            scanSlotPtr = scanSlotPtr + 2;
             loopIndex2 = loopIndex2 + 1;
-          } while (bVar3);
-          bVar3 = loopIndex != 1;
-          iVar18 = iVar18 + 0x40;
-          iVar12 = iVar12 + 0x40;
+          } while (loopContinue);
+          loopContinue = loopIndex != 1;
+          scanHalfCursor = scanHalfCursor + 0x40;
+          scanHalfCursorB = scanHalfCursorB + 0x40;
           loopIndex = loopIndex + 1;
-        } while (bVar3);
+        } while (loopContinue);
         loopIndex9 = 0;
         loopIndex4 = 0x80;
-        param_4 = 0;
+        halfSelect = 0;
         do {
-          piVar9 = (int *)((int)aiStack_58 + param_4);
-          puVar17 = (undefined2 *)(entry + loopIndex4);
+          usageFlagCursor = (int *)((int)addressUsageFlags + halfSelect);
+          addrSlotClearPtr = (undefined2 *)(entry + loopIndex4);
           loopIndex7 = 0;
           do {
-            if (*piVar9 == 0) {
-              *puVar17 = 0xffff;
+            if (*usageFlagCursor == 0) {
+              *addrSlotClearPtr = 0xffff;
             }
-            bVar3 = loopIndex7 != 2;
-            piVar9 = piVar9 + 1;
-            puVar17 = puVar17 + 1;
+            loopContinue = loopIndex7 != 2;
+            usageFlagCursor = usageFlagCursor + 1;
+            addrSlotClearPtr = addrSlotClearPtr + 1;
             loopIndex7 = loopIndex7 + 1;
-          } while (bVar3);
-          bVar3 = loopIndex9 != 1;
-          param_4 = param_4 + 0xc;
+          } while (loopContinue);
+          loopContinue = loopIndex9 != 1;
+          halfSelect = halfSelect + 0xc;
           loopIndex4 = loopIndex4 + 6;
           loopIndex9 = loopIndex9 + 1;
-        } while (bVar3);
-        param_8 = 0;
+        } while (loopContinue);
+        freeSlotIndex = 0;
         sourceSwizzlePtr = 0xffff;
-        iVar12 = entry;
-        while ((((bVar2 && (*(ushort *)(iVar12 + 0x80) != 0xffff)) &&
-                (param_3 != *(ushort *)(iVar12 + 0x80))) ||
-               (((bVar1 && (*(ushort *)(iVar12 + 0x86) != 0xffff)) &&
-                (param_3 != *(ushort *)(iVar12 + 0x86)))))) {
-          bVar3 = param_8 == 2;
-          iVar12 = iVar12 + 2;
-          param_8 = param_8 + 1;
-          if (bVar3) {
-            *(short *)((iVar15 + uVar10) * 2 + entry + 0x80) = (short)param_2;
+        addrSlotScanCursor = entry;
+        while ((((replaceRgb && (*(ushort *)(addrSlotScanCursor + 0x80) != 0xffff)) &&
+                (newAddrWord != *(ushort *)(addrSlotScanCursor + 0x80))) ||
+               (((replaceAlpha && (*(ushort *)(addrSlotScanCursor + 0x86) != 0xffff)) &&
+                (newAddrWord != *(ushort *)(addrSlotScanCursor + 0x86)))))) {
+          loopContinue = freeSlotIndex == 2;
+          addrSlotScanCursor = addrSlotScanCursor + 2;
+          freeSlotIndex = freeSlotIndex + 1;
+          if (loopContinue) {
+            *(short *)((selectBankOffset + sourceAddrSel) * 2 + entry + 0x80) = (short)oldAddrWord;
             return 0;
           }
         }
-        if (bVar2) {
-          *(short *)(param_8 * 2 + entry + 0x80) = (short)param_3;
+        if (replaceRgb) {
+          *(short *)(freeSlotIndex * 2 + entry + 0x80) = (short)newAddrWord;
         }
-        if (bVar1) {
-          *(short *)(param_8 * 2 + entry + 0x86) = (short)param_3;
+        if (replaceAlpha) {
+          *(short *)(freeSlotIndex * 2 + entry + 0x86) = (short)newAddrWord;
         }
-        puVar6[1] = puVar6[1] & 0xffe0 | uVar5;
-        *puVar6 = (*puVar6 & 0xfffc | (ushort)param_8) & 0xfcff | (ushort)uVar20;
+        sourceSlotPtr[1] = sourceSlotPtr[1] & 0xffe0 | newOffsetShort;
+        *sourceSlotPtr = (*sourceSlotPtr & 0xfffc | (ushort)freeSlotIndex) & 0xfcff | (ushort)replaceSelectBits;
       }
-      bVar3 = uVar14 != 2;
-      puVar6 = puVar6 + 2;
-      uVar14 = uVar14 + 1;
-    } while (bVar3);
+      loopContinue = sourceIndex != 2;
+      sourceSlotPtr = sourceSlotPtr + 2;
+      sourceIndex = sourceIndex + 1;
+    } while (loopContinue);
   }
   if (*(int *)(entry + 0x8c) == 2) {
     ((int (*)())psnDecRecomputeSourceUsage)(entry);
-    ((int (*)())psnDecCanonicalizeEntry)(entry,r4AfterCall,uVar11,param_4,oldAddressOffset,uVar14,sourceSwizzlePtr,param_8);
+    ((int (*)())psnDecCanonicalizeEntry)(entry,r4AfterCall,halfIndex,halfSelect,oldAddressOffset,sourceIndex,sourceSwizzlePtr,freeSlotIndex);
   }
   return 0;
 }
@@ -8399,11 +8420,11 @@ LAB_000c3fa8:
 }
 
 /* psnDecTryMergeAddressSlots @ 0xc3fd0 (784 bytes) */
-int psnDecTryMergeAddressSlots(entry, otherEntry, reverseRoles, param_4, unusedArgR7)
+int psnDecTryMergeAddressSlots(entry, otherEntry, reverseRoles, staleArgR6, unusedArgR7)
   int entry;
   int otherEntry;
   int reverseRoles;
-  undefined4 param_4;
+  undefined4 staleArgR6;
   undefined4 unusedArgR7;
 {
   int clearCounter;
@@ -8426,12 +8447,12 @@ int psnDecTryMergeAddressSlots(entry, otherEntry, reverseRoles, param_4, unusedA
   undefined4 r4AfterCall;
   undefined4 r4AfterCall2;
   undefined4 halfSize;
-  uint uVar9;
+  uint slotFound;
   int sourceIndex;
   uint slotSearchIndex;
-  int iVar12;
+  int staleArgR9;
   int usageHalfBase;
-  undefined2 *puVar14;
+  undefined2 *usageSlotPtr;
   int sourceCounter;
   ushort *otherSelectPtr;
   
@@ -8456,7 +8477,7 @@ int psnDecTryMergeAddressSlots(entry, otherEntry, reverseRoles, param_4, unusedA
       if ((destSelectWord & 0x200) != 0) {
         loopIndex = loopIndex + 1;
       }
-      uVar9 = destSelectWord & 0x100;
+      slotFound = destSelectWord & 0x100;
       if ((destSelectWord & 0x100) != 0) {
         loopIndex2 = loopIndex2 + 1;
       }
@@ -8467,9 +8488,9 @@ int psnDecTryMergeAddressSlots(entry, otherEntry, reverseRoles, param_4, unusedA
     } while (loopContinue);
     if ((loopIndex < 4) && (loopIndex2 < 4)) {
       groupIndex = 0;
-      puVar14 = (undefined2 *)(entry + 0x10);
+      usageSlotPtr = (undefined2 *)(entry + 0x10);
       do {
-        usageWordPtr = puVar14 + 2;
+        usageWordPtr = usageSlotPtr + 2;
         slotIndexInit = 0;
         do {
           if ((*usageWordPtr == 0) && (usageWordPtr[0x20] == 0)) {
@@ -8480,74 +8501,74 @@ int psnDecTryMergeAddressSlots(entry, otherEntry, reverseRoles, param_4, unusedA
           slotIndexInit = slotIndexInit + 1;
         } while (loopContinue);
         loopContinue = groupIndex != 1;
-        puVar14 = puVar14 + 3;
+        usageSlotPtr = usageSlotPtr + 3;
         groupIndex = groupIndex + 1;
       } while (loopContinue);
       halfByteOffset = (uint)(reverseRoles != 0) * 0x40;
       sourceIndex = 0;
-      iVar12 = halfByteOffset + 0x16;
+      staleArgR9 = halfByteOffset + 0x16;
       otherSelectPtr = (ushort *)(otherEntry + halfByteOffset + 8);
-      usageHalfBase = entry + iVar12;
+      usageHalfBase = entry + staleArgR9;
       slotSearchIndex = 2;
       do {
         otherSelect = (uint)*otherSelectPtr;
         if ((*otherSelectPtr & 0x100) != 0) {
-          puVar14 = (undefined2 *)(entry + halfByteOffset + 0x14);
+          usageSlotPtr = (undefined2 *)(entry + halfByteOffset + 0x14);
           slotSearchIndex = 0;
-          param_4 = 0xffff;
-          iVar12 = entry;
+          staleArgR6 = 0xffff;
+          staleArgR9 = entry;
           do {
-            uVar9 = 0;
-            if (*(short *)(iVar12 + 0x80) == -1) {
+            slotFound = 0;
+            if (*(short *)(staleArgR9 + 0x80) == -1) {
               if ((otherSelect & 3) == 3) {
                 return 0;
               }
-              uVar9 = 1;
-              *(undefined2 *)(iVar12 + 0x80) = *(undefined2 *)((otherSelect & 3) * 2 + otherEntry + 0x80);
-              *puVar14 = 7;
+              slotFound = 1;
+              *(undefined2 *)(staleArgR9 + 0x80) = *(undefined2 *)((otherSelect & 3) * 2 + otherEntry + 0x80);
+              *usageSlotPtr = 7;
               otherSelect = *otherSelectPtr & 0xfffc | slotSearchIndex;
               *otherSelectPtr = (ushort)otherSelect;
             }
             lastSlotReached = slotSearchIndex == 2;
             slotSearchIndex = slotSearchIndex + 1;
             if (lastSlotReached) {
-              if (uVar9 == 0) {
+              if (slotFound == 0) {
                 return 0;
               }
               break;
             }
-            iVar12 = iVar12 + 2;
-            puVar14 = puVar14 + 1;
-          } while (uVar9 == 0);
+            staleArgR9 = staleArgR9 + 2;
+            usageSlotPtr = usageSlotPtr + 1;
+          } while (slotFound == 0);
         }
         if ((otherSelect & 0x200) != 0) {
-          puVar14 = (undefined2 *)(usageHalfBase + 4);
+          usageSlotPtr = (undefined2 *)(usageHalfBase + 4);
           slotSearchIndex = 0;
-          param_4 = 0xffff;
-          iVar12 = entry;
+          staleArgR6 = 0xffff;
+          staleArgR9 = entry;
           do {
-            uVar9 = 0;
-            if (*(short *)(iVar12 + 0x86) == -1) {
+            slotFound = 0;
+            if (*(short *)(staleArgR9 + 0x86) == -1) {
               if ((otherSelect & 3) == 3) {
                 return 0;
               }
-              uVar9 = 1;
-              *(undefined2 *)(iVar12 + 0x86) = *(undefined2 *)((otherSelect & 3) * 2 + otherEntry + 0x86);
-              *puVar14 = 8;
+              slotFound = 1;
+              *(undefined2 *)(staleArgR9 + 0x86) = *(undefined2 *)((otherSelect & 3) * 2 + otherEntry + 0x86);
+              *usageSlotPtr = 8;
               otherSelect = *otherSelectPtr & 0xfffc | slotSearchIndex;
               *otherSelectPtr = (ushort)otherSelect;
             }
             lastSlotReached = slotSearchIndex == 2;
             slotSearchIndex = slotSearchIndex + 1;
             if (lastSlotReached) {
-              if (uVar9 == 0) {
+              if (slotFound == 0) {
                 return 0;
               }
               break;
             }
-            iVar12 = iVar12 + 2;
-            puVar14 = puVar14 + 1;
-          } while (uVar9 == 0);
+            staleArgR9 = staleArgR9 + 2;
+            usageSlotPtr = usageSlotPtr + 1;
+          } while (slotFound == 0);
         }
         lastSourceReached = sourceIndex == 2;
         otherSelectPtr = otherSelectPtr + 2;
@@ -8571,9 +8592,9 @@ int psnDecTryMergeAddressSlots(entry, otherEntry, reverseRoles, param_4, unusedA
             clearSlotPtr = clearSlotPtr + 2;
           } while (loopContinue);
           ((int (*)())psnDecRecomputeSourceUsage)(entry);
-          ((int (*)())psnDecCanonicalizeEntry)(entry,r4AfterCall,halfSize,param_4,uVar9,slotSearchIndex,iVar12,puVar14);
+          ((int (*)())psnDecCanonicalizeEntry)(entry,r4AfterCall,halfSize,staleArgR6,slotFound,slotSearchIndex,staleArgR9,usageSlotPtr);
           ((int (*)())psnDecRecomputeSourceUsage)(otherEntry);
-          ((int (*)())psnDecCanonicalizeEntry)(otherEntry,r4AfterCall2,halfSize,param_4,uVar9,slotSearchIndex,iVar12,puVar14);
+          ((int (*)())psnDecCanonicalizeEntry)(otherEntry,r4AfterCall2,halfSize,staleArgR6,slotFound,slotSearchIndex,staleArgR9,usageSlotPtr);
           return 1;
         }
       } while( true );
@@ -8587,6 +8608,11 @@ int psnProgramToDecoded(decodedProgram, recordCursor)
   uint *decodedProgram;
   uint *recordCursor;
 {
+  byte controlByte;
+  byte selectByte;
+  ushort sourceRegWord3;
+  ushort sourceRegWord2;
+  ushort sourceRegWord1;
   ushort sourceModifier;
   uint alphaSourceCount;
   uint rgbSourceCount;
@@ -8595,18 +8621,18 @@ int psnProgramToDecoded(decodedProgram, recordCursor)
   ushort *alphaHalf;
   ushort *rgbSourceSlotPtr;
   bool loopContinue;
-  byte bVar2;
+  byte opKindByte;
   undefined4 defaultOperandWord2;
   uint recordKind;
   uint sourceSelectCode;
-  ushort uVar6;
+  ushort sourceSelectWord;
   undefined4 r4AfterCall;
-  uint *puVar7;
-  byte *pbVar8;
+  uint *staleArgR5;
+  byte *staleArgR6;
   ushort *recField0e;
-  char *pcVar10;
+  char *staleArgR7;
   ushort *defaultSlotPtr;
-  byte *pbVar12;
+  byte *staleArgR9;
   int slotCounter;
   ushort *defaultSlotPtr2;
   uint *recField1c;
@@ -8734,32 +8760,32 @@ int psnProgramToDecoded(decodedProgram, recordCursor)
         entry[0x4b] = 0;
         entry[0x46] = 0;
         entry[0x47] = 1;
-        bVar2 = *(byte *)recField1a;
-        uVar6 = (ushort)bVar2;
-        if (bVar2 == 2) {
+        opKindByte = *(byte *)recField1a;
+        sourceSelectWord = (ushort)opKindByte;
+        if (opKindByte == 2) {
           entry[10] = 0xf;
-          uVar6 = *recField0e;
+          sourceRegWord1 = *recField0e;
           entry[0x1d] = 1;
           entry[0x18] = 0;
           entry[0x19] = 1;
-          entry[0x40] = uVar6;
-          uVar6 = (ushort)*(byte *)recField1a;
+          entry[0x40] = sourceRegWord1;
+          sourceSelectWord = (ushort)*(byte *)recField1a;
         }
-        else if (bVar2 < 3) {
-          if (bVar2 == 1) {
+        else if (opKindByte < 3) {
+          if (opKindByte == 1) {
 LAB_000c46e8:
             entry[3] = 0xf;
             entry[2] = *(ushort *)recField0c;
             entry[10] = ~(ushort)*recField1f & 0xf;
             entry[0x40] = *recField0e;
-            uVar6 = (ushort)*(byte *)recField1a;
+            sourceSelectWord = (ushort)*(byte *)recField1a;
           }
         }
-        else if (bVar2 < 5) goto LAB_000c46e8;
-        bVar2 = *recField19;
+        else if (opKindByte < 5) goto LAB_000c46e8;
+        selectByte = *recField19;
         entry[0x16] = 0x3f80;
         entry[0x17] = 0;
-        entry[0x14] = (ushort)bVar2 << 8 | uVar6;
+        entry[0x14] = (ushort)selectByte << 8 | sourceSelectWord;
       }
       else if (recordKind < 3) {
         if (recordKind == 1) {
@@ -8775,14 +8801,14 @@ LAB_000c46e8:
           }
           else {
             entry[3] = 0xf;
-            uVar6 = *recField06;
+            sourceRegWord2 = *recField06;
             entry[10] = 0xf;
-            entry[2] = uVar6;
+            entry[2] = sourceRegWord2;
             entry[0x40] = *recField0a | 0xc000;
             *(undefined4 *)(entry + 0x16) = *(undefined4 *)((uint)*recField0d * 4 + 0x1dc198);
-            bVar2 = *recField0b;
-            if ((bVar2 == 2) || (bVar2 == 3)) {
-              entry[0x1d] = (ushort)bVar2;
+            controlByte = *recField0b;
+            if ((controlByte == 2) || (controlByte == 3)) {
+              entry[0x1d] = (ushort)controlByte;
             }
           }
           if (*recField09 == '\0') {
@@ -8791,9 +8817,9 @@ LAB_000c46e8:
           }
           else {
             entry[0x23] = 0xf;
-            uVar6 = *(ushort *)recField04;
+            sourceRegWord3 = *(ushort *)recField04;
             entry[0x2d] = 0xf;
-            entry[0x22] = uVar6;
+            entry[0x22] = sourceRegWord3;
             entry[0x43] = *(byte *)recField08 | 0xa000;
             *(undefined4 *)(entry + 0x36) =
                  *(undefined4 *)((uint)*(byte *)recField0cCopy78 * 4 + 0x1dc198);
@@ -8907,7 +8933,7 @@ LAB_000c49b0:
             *(undefined4 *)alphaSourceSlotPtr = *(undefined4 *)(sourceSelectCode * 4 + 0x1dc04c);
             alphaSourceSlotPtr[1] = sourceModifier << 0xc | alphaSourceSlotPtr[1];
             alphaSourcesLeft = alphaSourcesLeft - 1;
-            puVar7 = (uint *)0x1dc04c;
+            staleArgR5 = (uint *)0x1dc04c;
             if (alphaSourcesLeft == 0) goto LAB_000c4a74;
             if (slotCounter == 1) {
               sourceSelectCode = (uint)*recField3a;
@@ -8927,7 +8953,7 @@ LAB_000c49b0:
             alphaSourceSlotPtr = alphaSourceSlotPtr + 2;
           } while( true );
         }
-        puVar7 = recField20;
+        staleArgR5 = recField20;
         if (alphaSourceCount != 0) goto LAB_000c49a8;
 LAB_000c4a74:
         entry[0x35] = (ushort)*recField3f;
@@ -8935,11 +8961,11 @@ LAB_000c4a74:
           *(uint *)(entry + 0x38) = *(uint *)(entry + 0x38) | 8;
         }
         *(undefined4 *)(entry + 0x36) = *(undefined4 *)((uint)*recField41 * 4 + 0x1dc198);
-        pbVar8 = recField3f;
-        pcVar10 = recField42;
-        pbVar12 = recField41;
+        staleArgR6 = recField3f;
+        staleArgR7 = recField42;
+        staleArgR9 = recField41;
         ((int (*)())psnDecRecomputeSourceUsage)(entry);
-        ((int (*)())psnDecCanonicalizeEntry)(entry,r4AfterCall,puVar7,pbVar8,pcVar10,alphaHalf,pbVar12,slotCounter);
+        ((int (*)())psnDecCanonicalizeEntry)(entry,r4AfterCall,staleArgR5,staleArgR6,staleArgR7,alphaHalf,staleArgR9,slotCounter);
       }
       recField1a = recField1a + 0x24;
       recField40 = recField40 + 0x12;
@@ -9002,6 +9028,10 @@ int psnDecodedToProgram(decodedProgram, previousRecord, outStatus)
   undefined4 *previousRecord;
   uint *outStatus;
 {
+  undefined1 alphaSourceSelect;
+  ushort sourceSlotWord;
+  uint outputScaleBits;
+  undefined1 alphaSwizzleByte;
   short entryShort3a;
   undefined1 isFirstTexRecord;
   int entryAlias;
@@ -9012,26 +9042,26 @@ int psnDecodedToProgram(decodedProgram, previousRecord, outStatus)
   float entryFloat6c;
   undefined2 rgbDestReg;
   undefined2 alphaDestReg;
-  ushort uVar6;
-  float fVar7;
+  ushort flagsBit4;
+  float oneF;
   int entryMode;
-  short sVar9;
-  undefined1 uVar12;
-  short sVar11;
-  uint uVar10;
-  uint uVar13;
-  uint uVar14;
+  short rgbRegField;
+  undefined1 alphaWriteFlag;
+  short alphaRegField;
+  uint sourceTableIndex;
+  uint rgbSourceModifier;
+  uint channelSwizzle;
   int loopIndex;
-  int iVar16;
+  int sourceSlotCursor;
   int entry;
-  uint uVar18;
-  undefined1 uVar19;
+  uint alphaSourceModifier;
+  undefined1 alphaSourceModifierByte;
   undefined4 headerWord1;
   uint loopIndex3;
-  undefined1 uVar22;
-  undefined1 uVar23;
+  undefined1 rgbSourceSelect;
+  undefined1 rgbSourceModifierByte;
   undefined4 *outRecord;
-  undefined1 uStack_31;
+  undefined1 outputScaleCode;
   
   headerWord1 = previousRecord[1];
   _memset(previousRecord,0,0x48);
@@ -9087,10 +9117,10 @@ int psnDecodedToProgram(decodedProgram, previousRecord, outStatus)
           }
         }
         if ((*(short *)(entry + 0x42) != 0 || *(short *)(entry + 0x46) != 0) ||
-           (uVar12 = 0, (*(uint *)(entry + 0x70) & 1) != 0)) {
-          uVar12 = 1;
+           (alphaWriteFlag = 0, (*(uint *)(entry + 0x70) & 1) != 0)) {
+          alphaWriteFlag = 1;
         }
-        *(undefined1 *)((int)previousRecord + 0x51) = uVar12;
+        *(undefined1 *)((int)previousRecord + 0x51) = alphaWriteFlag;
         if (*(short *)(entry + 0x80) == -1) {
           *(undefined1 *)((int)previousRecord + 0x52) = 0;
         }
@@ -9103,12 +9133,12 @@ int psnDecodedToProgram(decodedProgram, previousRecord, outStatus)
         else {
           *(char *)(previousRecord + 0x14) = (char)*(short *)(entry + 0x86);
         }
-        fVar7 = FLOAT_001aa0e8;
+        oneF = FLOAT_001aa0e8;
         *(bool *)((int)previousRecord + 0x55) = *(float *)(entry + 0x2c) != FLOAT_001aa0e8;
         entryFloat6c = *(float *)(entry + 0x6c);
         *(undefined1 *)((int)previousRecord + 0x57) = 0;
         *(undefined1 *)((int)previousRecord + 0x56) = 0;
-        *(bool *)(previousRecord + 0x15) = entryFloat6c != fVar7;
+        *(bool *)(previousRecord + 0x15) = entryFloat6c != oneF;
       }
       else if (entryMode == 2) {
         *(undefined2 *)(previousRecord + 0x15) = rgbDestReg;
@@ -9117,9 +9147,9 @@ int psnDecodedToProgram(decodedProgram, previousRecord, outStatus)
         *(char *)((int)previousRecord + 0x5d) = (char)*(undefined2 *)(entry + 2);
         *(char *)((int)previousRecord + 0x5e) = (char)*(undefined2 *)(loopIndex3 * 0xa0 + entryArray);
         *(byte *)((int)previousRecord + 0x69) = (byte)(*(ushort *)(entry + 0x42) >> 3) & 1;
-        uVar6 = *(ushort *)(entry + 0x42) >> 4 & 1;
-        *(char *)((int)previousRecord + 0x6b) = (char)uVar6;
-        if (uVar6 != 0) {
+        flagsBit4 = *(ushort *)(entry + 0x42) >> 4 & 1;
+        *(char *)((int)previousRecord + 0x6b) = (char)flagsBit4;
+        if (flagsBit4 != 0) {
           *outStatus = *outStatus | 1;
         }
         loopIndex = 0;
@@ -9128,25 +9158,25 @@ int psnDecodedToProgram(decodedProgram, previousRecord, outStatus)
         *(byte *)(previousRecord + 0x1a) = (byte)(*(ushort *)(entry + 0x46) >> 3) & 1;
         entryAlias = entry;
         do {
-          sVar9 = *(short *)(entryAlias + 0x80);
-          sVar11 = *(short *)(entryAlias + 0x86);
-          if (sVar9 == -1) {
-            sVar9 = -0x8000;
+          rgbRegField = *(short *)(entryAlias + 0x80);
+          alphaRegField = *(short *)(entryAlias + 0x86);
+          if (rgbRegField == -1) {
+            rgbRegField = -0x8000;
           }
-          if (sVar11 == -1) {
-            sVar11 = -0x8000;
+          if (alphaRegField == -1) {
+            alphaRegField = -0x8000;
           }
           if (loopIndex == 1) {
-            *(short *)(previousRecord + 0x16) = sVar9;
-            *(short *)(previousRecord + 0x19) = sVar11;
+            *(short *)(previousRecord + 0x16) = rgbRegField;
+            *(short *)(previousRecord + 0x19) = alphaRegField;
           }
           else if (loopIndex == 0) {
-            *(short *)((int)previousRecord + 0x56) = sVar9;
-            *(short *)((int)previousRecord + 0x62) = sVar11;
+            *(short *)((int)previousRecord + 0x56) = rgbRegField;
+            *(short *)((int)previousRecord + 0x62) = alphaRegField;
           }
           else if (loopIndex == 2) {
-            *(short *)((int)previousRecord + 0x5a) = sVar9;
-            *(short *)((int)previousRecord + 0x66) = sVar11;
+            *(short *)((int)previousRecord + 0x5a) = rgbRegField;
+            *(short *)((int)previousRecord + 0x66) = alphaRegField;
           }
           loopContinue = loopIndex != 2;
           entryAlias = entryAlias + 2;
@@ -9154,50 +9184,50 @@ int psnDecodedToProgram(decodedProgram, previousRecord, outStatus)
         } while (loopContinue);
         loopIndex2 = 0;
         do {
-          uVar22 = 0;
-          uVar13 = 0;
-          uVar12 = 0;
-          uVar18 = 0;
+          rgbSourceSelect = 0;
+          rgbSourceModifier = 0;
+          alphaSourceSelect = 0;
+          alphaSourceModifier = 0;
           loopIndex = 0;
-          iVar16 = entry + 8;
+          sourceSlotCursor = entry + 8;
           do {
-            uVar6 = *(ushort *)(loopIndex2 * 4 + iVar16 + 2);
-            uVar14 = *(ushort *)(loopIndex2 * 4 + iVar16) & 3;
+            sourceSlotWord = *(ushort *)(loopIndex2 * 4 + sourceSlotCursor + 2);
+            channelSwizzle = *(ushort *)(loopIndex2 * 4 + sourceSlotCursor) & 3;
             if (loopIndex == 0) {
-              uVar10 = 6;
-              if (((uVar6 & 0x300) != 0x100) && (uVar10 = 5, (uVar6 & 0x300) != 0x200)) {
-                uVar10 = uVar6 & 0x1f;
+              sourceTableIndex = 6;
+              if (((sourceSlotWord & 0x300) != 0x100) && (sourceTableIndex = 5, (sourceSlotWord & 0x300) != 0x200)) {
+                sourceTableIndex = sourceSlotWord & 0x1f;
               }
-              uVar13 = (uVar6 & 0x3000) >> 0xc;
-              uVar22 = *(undefined1 *)(uVar10 * 4 + 0x1dc000 + uVar14);
+              rgbSourceModifier = (sourceSlotWord & 0x3000) >> 0xc;
+              rgbSourceSelect = *(undefined1 *)(sourceTableIndex * 4 + 0x1dc000 + channelSwizzle);
             }
             else if (loopIndex == 1) {
-              uVar18 = (uVar6 & 0x3000) >> 0xc;
-              uVar12 = *(undefined1 *)((uVar6 & 0x1f) * 4 + 0x1dbfb4 + uVar14);
+              alphaSourceModifier = (sourceSlotWord & 0x3000) >> 0xc;
+              alphaSourceSelect = *(undefined1 *)((sourceSlotWord & 0x1f) * 4 + 0x1dbfb4 + channelSwizzle);
             }
             loopContinue = loopIndex != 1;
-            iVar16 = iVar16 + 0x40;
+            sourceSlotCursor = sourceSlotCursor + 0x40;
             loopIndex = loopIndex + 1;
           } while (loopContinue);
-          uVar23 = (undefined1)uVar13;
-          uVar19 = (undefined1)uVar18;
+          rgbSourceModifierByte = (undefined1)rgbSourceModifier;
+          alphaSourceModifierByte = (undefined1)alphaSourceModifier;
           if (loopIndex2 == 1) {
-            *(undefined1 *)((int)previousRecord + 0x73) = uVar22;
-            *(undefined1 *)((int)previousRecord + 0x76) = uVar23;
-            *(undefined1 *)((int)previousRecord + 0x82) = uVar12;
-            *(undefined1 *)((int)previousRecord + 0x85) = uVar19;
+            *(undefined1 *)((int)previousRecord + 0x73) = rgbSourceSelect;
+            *(undefined1 *)((int)previousRecord + 0x76) = rgbSourceModifierByte;
+            *(undefined1 *)((int)previousRecord + 0x82) = alphaSourceSelect;
+            *(undefined1 *)((int)previousRecord + 0x85) = alphaSourceModifierByte;
           }
           else if (loopIndex2 == 0) {
-            *(undefined1 *)((int)previousRecord + 0x72) = uVar22;
-            *(undefined1 *)((int)previousRecord + 0x75) = uVar23;
-            *(undefined1 *)((int)previousRecord + 0x81) = uVar12;
-            *(undefined1 *)(previousRecord + 0x21) = uVar19;
+            *(undefined1 *)((int)previousRecord + 0x72) = rgbSourceSelect;
+            *(undefined1 *)((int)previousRecord + 0x75) = rgbSourceModifierByte;
+            *(undefined1 *)((int)previousRecord + 0x81) = alphaSourceSelect;
+            *(undefined1 *)(previousRecord + 0x21) = alphaSourceModifierByte;
           }
           else if (loopIndex2 == 2) {
-            *(undefined1 *)(previousRecord + 0x1d) = uVar22;
-            *(undefined1 *)((int)previousRecord + 0x77) = uVar23;
-            *(undefined1 *)((int)previousRecord + 0x83) = uVar12;
-            *(undefined1 *)((int)previousRecord + 0x86) = uVar19;
+            *(undefined1 *)(previousRecord + 0x1d) = rgbSourceSelect;
+            *(undefined1 *)((int)previousRecord + 0x77) = rgbSourceModifierByte;
+            *(undefined1 *)((int)previousRecord + 0x83) = alphaSourceSelect;
+            *(undefined1 *)((int)previousRecord + 0x86) = alphaSourceModifierByte;
           }
           loopContinue = loopIndex2 != 2;
           loopIndex2 = loopIndex2 + 1;
@@ -9205,36 +9235,36 @@ int psnDecodedToProgram(decodedProgram, previousRecord, outStatus)
         loopIndex = 0;
         entryAlias = entry;
         do {
-          uVar13 = (uint)(int)((double)*(float *)(entryAlias + 0x2c) * DOUBLE_001aa290);
-          uStack_31 = (undefined1)uVar13;
-          switch(uVar13 & 0xff) {
+          outputScaleBits = (uint)(int)((double)*(float *)(entryAlias + 0x2c) * DOUBLE_001aa290);
+          outputScaleCode = (undefined1)outputScaleBits;
+          switch(outputScaleBits & 0xff) {
           case 1:
-            uStack_31 = 6;
+            outputScaleCode = 6;
             break;
           case 2:
-            uStack_31 = 5;
+            outputScaleCode = 5;
             break;
           case 4:
-            uStack_31 = 4;
+            outputScaleCode = 4;
             break;
           case 8:
-            uStack_31 = 0;
+            outputScaleCode = 0;
             break;
           case 0x10:
-            uStack_31 = 1;
+            outputScaleCode = 1;
             break;
           case 0x20:
-            uStack_31 = 2;
+            outputScaleCode = 2;
             break;
           case 0x40:
-            uStack_31 = 3;
+            outputScaleCode = 3;
           }
           if (loopIndex == 0) {
-            *(undefined1 *)((int)previousRecord + 0x7a) = uStack_31;
+            *(undefined1 *)((int)previousRecord + 0x7a) = outputScaleCode;
             *(byte *)((int)previousRecord + 0x7b) = (byte)(*(uint *)(entry + 0x30) >> 3) & 1;
           }
           else if (loopIndex == 1) {
-            *(undefined1 *)((int)previousRecord + 0x89) = uStack_31;
+            *(undefined1 *)((int)previousRecord + 0x89) = outputScaleCode;
             *(byte *)((int)previousRecord + 0x8a) = (byte)(*(uint *)(entry + 0x70) >> 3) & 1;
           }
           loopContinue = loopIndex != 1;
@@ -9244,13 +9274,13 @@ int psnDecodedToProgram(decodedProgram, previousRecord, outStatus)
         loopIndex = 0;
         entryAlias = entry;
         do {
-          uVar22 = *(undefined1 *)((uint)*(ushort *)(entryAlias + 0x28) * 2 + 0x1dbf98 + loopIndex);
+          alphaSwizzleByte = *(undefined1 *)((uint)*(ushort *)(entryAlias + 0x28) * 2 + 0x1dbf98 + loopIndex);
           if (loopIndex == 0) {
-            *(undefined1 *)((int)previousRecord + 0x79) = uVar22;
+            *(undefined1 *)((int)previousRecord + 0x79) = alphaSwizzleByte;
             *(char *)(previousRecord + 0x1e) = (char)*(undefined2 *)(entry + 0x2a);
           }
           else if (loopIndex == 1) {
-            *(undefined1 *)(previousRecord + 0x22) = uVar22;
+            *(undefined1 *)(previousRecord + 0x22) = alphaSwizzleByte;
             *(char *)((int)previousRecord + 0x87) = (char)*(undefined2 *)(entry + 0x6a);
           }
           loopContinue = loopIndex != 1;
@@ -9511,128 +9541,139 @@ int psnRaReleaseUse(operand, tempTable, freeList)
   int *tempTable;
   int *freeList;
 {
-  uint uVar1;
-  ushort uVar2;
-  ushort uVar3;
-  int iVar4;
-  ushort *puVar5;
-  int iVar6;
-  ushort uVar8;
-  int iVar7;
-  uint uVar9;
-  short sVar10;
-  int iVar11;
-  uint uVar12;
+  int prevEntryOffset;
+  int freeListBase;
+  int scanIndex;
+  int freeListBaseEnd;
+  int insertByteOffset;
+  ushort neighbourReg;
+  ushort freeCount;
+  ushort releasedReg;
+  ushort tempAltReg;
+  uint freeCountU;
+  uint insertPos;
+  uint tempIndex;
+  ushort usedMask;
+  ushort remainingMask;
+  int shiftCount;
+  ushort *scanCursor;
+  int bankBase;
+  ushort bankMaskBits;
+  int shiftOffset;
+  uint freeCountOld;
+  short expectedPrevReg;
+  int tempEntry;
+  uint scanCounter;
   
-  uVar2 = operand[1];
-  if (uVar2 == 0) {
+  usedMask = operand[1];
+  if (usedMask == 0) {
     *operand = 0;
     return;
   }
-  uVar1 = (uint)*operand;
-  if (uVar1 < *(ushort *)(tempTable + 2)) {
-    iVar6 = tempTable[1];
-    uVar8 = (uVar2 == 8) + 7;
+  tempIndex = (uint)*operand;
+  if (tempIndex < *(ushort *)(tempTable + 2)) {
+    bankBase = tempTable[1];
+    bankMaskBits = (usedMask == 8) + 7;
   }
   else {
-    iVar6 = *tempTable;
-    uVar8 = 0xf;
-    uVar1 = uVar1 - *(ushort *)(tempTable + 2) & 0xffff;
+    bankBase = *tempTable;
+    bankMaskBits = 0xf;
+    tempIndex = tempIndex - *(ushort *)(tempTable + 2) & 0xffff;
   }
-  iVar11 = iVar6 + uVar1 * 8;
-  uVar2 = uVar2 & *(ushort *)(iVar11 + 4);
-  operand[1] = uVar2;
-  if (uVar2 == 0) {
+  tempEntry = bankBase + tempIndex * 8;
+  usedMask = usedMask & *(ushort *)(tempEntry + 4);
+  operand[1] = usedMask;
+  if (usedMask == 0) {
     *operand = 0;
     return;
   }
-  if (uVar8 == 8) {
-    uVar2 = *(ushort *)(iVar11 + 2);
+  if (bankMaskBits == 8) {
+    tempAltReg = *(ushort *)(tempEntry + 2);
   }
   else {
-    uVar2 = *(ushort *)(iVar6 + uVar1 * 8);
+    tempAltReg = *(ushort *)(bankBase + tempIndex * 8);
   }
-  *operand = uVar2;
-  uVar3 = *(ushort *)(iVar11 + 4) & ~operand[1];
-  *(ushort *)(iVar11 + 4) = uVar3;
-  uVar9 = (uint)*(ushort *)(freeList + 1);
-  uVar2 = *operand;
-  uVar1 = uVar9 - 1;
-  if ((uVar8 & uVar3) != 0) {
+  *operand = tempAltReg;
+  remainingMask = *(ushort *)(tempEntry + 4) & ~operand[1];
+  *(ushort *)(tempEntry + 4) = remainingMask;
+  freeCountOld = (uint)*(ushort *)(freeList + 1);
+  releasedReg = *operand;
+  insertPos = freeCountOld - 1;
+  if ((bankMaskBits & remainingMask) != 0) {
     return;
   }
-  if (uVar1 == 0) {
-    iVar11 = *freeList;
-    iVar6 = 0;
-    uVar1 = 0;
+  if (insertPos == 0) {
+    freeListBase = *freeList;
+    insertByteOffset = 0;
+    insertPos = 0;
   }
   else {
-    iVar11 = *freeList;
-    iVar6 = uVar1 * 4;
-    if (uVar2 <= *(ushort *)(iVar6 + iVar11 + -4)) {
-      puVar5 = (ushort *)(iVar6 + iVar11 + -8);
-      uVar12 = uVar1;
+    freeListBase = *freeList;
+    insertByteOffset = insertPos * 4;
+    if (releasedReg <= *(ushort *)(insertByteOffset + freeListBase + -4)) {
+      scanCursor = (ushort *)(insertByteOffset + freeListBase + -8);
+      scanCounter = insertPos;
       do {
-        iVar6 = iVar6 + -4;
-        uVar1 = uVar1 - 1;
-        uVar12 = uVar12 - 1;
-        if (uVar12 == 0) {
-          iVar6 = uVar1 * 4;
+        insertByteOffset = insertByteOffset + -4;
+        insertPos = insertPos - 1;
+        scanCounter = scanCounter - 1;
+        if (scanCounter == 0) {
+          insertByteOffset = insertPos * 4;
           break;
         }
-        uVar3 = *puVar5;
-        puVar5 = puVar5 + -2;
-      } while (uVar2 <= uVar3);
+        neighbourReg = *scanCursor;
+        scanCursor = scanCursor + -2;
+      } while (releasedReg <= neighbourReg);
     }
   }
-  if (*(ushort *)(iVar6 + iVar11) == uVar2) {
-    *(ushort *)(iVar6 + iVar11 + 2) = uVar8 | *(ushort *)(iVar6 + iVar11 + 2);
-    uVar2 = *(ushort *)(freeList + 1);
+  if (*(ushort *)(insertByteOffset + freeListBase) == releasedReg) {
+    *(ushort *)(insertByteOffset + freeListBase + 2) = bankMaskBits | *(ushort *)(insertByteOffset + freeListBase + 2);
+    freeCount = *(ushort *)(freeList + 1);
   }
   else {
-    if (uVar1 < uVar9) {
-      iVar4 = uVar9 - uVar1;
-      iVar7 = uVar9 << 2;
-      if (uVar9 - 1 < uVar1) {
-        iVar4 = 1;
+    if (insertPos < freeCountOld) {
+      shiftCount = freeCountOld - insertPos;
+      shiftOffset = freeCountOld << 2;
+      if (freeCountOld - 1 < insertPos) {
+        shiftCount = 1;
       }
       while( true ) {
-        *(undefined4 *)(iVar7 + iVar11) = *(undefined4 *)(iVar7 + iVar11 + -4);
-        iVar7 = iVar7 + -4;
-        iVar4 = iVar4 + -1;
-        if (iVar4 == 0) break;
-        iVar11 = *freeList;
+        *(undefined4 *)(shiftOffset + freeListBase) = *(undefined4 *)(shiftOffset + freeListBase + -4);
+        shiftOffset = shiftOffset + -4;
+        shiftCount = shiftCount + -1;
+        if (shiftCount == 0) break;
+        freeListBase = *freeList;
       }
-      iVar11 = *freeList;
+      freeListBase = *freeList;
     }
-    *(ushort *)(iVar6 + iVar11) = uVar2;
-    *(ushort *)(iVar6 + *freeList + 2) = uVar8;
-    uVar2 = *(short *)(freeList + 1) + 1;
-    *(ushort *)(freeList + 1) = uVar2;
+    *(ushort *)(insertByteOffset + freeListBase) = releasedReg;
+    *(ushort *)(insertByteOffset + *freeList + 2) = bankMaskBits;
+    freeCount = *(short *)(freeList + 1) + 1;
+    *(ushort *)(freeList + 1) = freeCount;
   }
-  uVar1 = (uint)uVar2;
-  iVar6 = *freeList;
-  if (uVar1 - 1 == 0) {
+  freeCountU = (uint)freeCount;
+  freeListBaseEnd = *freeList;
+  if (freeCountU - 1 == 0) {
     return;
   }
-  iVar11 = (uVar1 - 2) * 4;
-  sVar10 = *(short *)((uVar1 - 1) * 4 + iVar6) + -1;
-  if (*(short *)(iVar6 + iVar11) != sVar10) {
+  prevEntryOffset = (freeCountU - 2) * 4;
+  expectedPrevReg = *(short *)((freeCountU - 1) * 4 + freeListBaseEnd) + -1;
+  if (*(short *)(freeListBaseEnd + prevEntryOffset) != expectedPrevReg) {
     return;
   }
-  if (*(short *)(iVar6 + iVar11 + 2) == 0xf) {
-    iVar7 = uVar1 - 1;
+  if (*(short *)(freeListBaseEnd + prevEntryOffset + 2) == 0xf) {
+    scanIndex = freeCountU - 1;
     while( true ) {
-      iVar11 = iVar11 + -4;
-      uVar2 = uVar2 - 1;
-      *(ushort *)(freeList + 1) = uVar2;
-      iVar7 = iVar7 + -1;
-      if (iVar7 == 0) {
+      prevEntryOffset = prevEntryOffset + -4;
+      freeCount = freeCount - 1;
+      *(ushort *)(freeList + 1) = freeCount;
+      scanIndex = scanIndex + -1;
+      if (scanIndex == 0) {
         return;
       }
-      sVar10 = sVar10 + -1;
-      if (*(short *)(iVar11 + iVar6) != sVar10) break;
-      if (*(short *)(iVar11 + iVar6 + 2) != 0xf) {
+      expectedPrevReg = expectedPrevReg + -1;
+      if (*(short *)(prevEntryOffset + freeListBaseEnd) != expectedPrevReg) break;
+      if (*(short *)(prevEntryOffset + freeListBaseEnd + 2) != 0xf) {
         return;
       }
     }
@@ -9652,104 +9693,111 @@ int psnRaAssignDefinition(operand, tempTable, freeList, unusedArgR6, unusedArgR7
   undefined4 unusedArgR9;
   undefined4 unusedArgR10;
 {
-  ushort uVar1;
-  ushort uVar2;
-  uint uVar3;
+  ushort scanFreeMask;
+  ushort entryFreeMask;
+  ushort entryUsedMask;
+  int freeShiftOffset;
+  int freeByteOffset;
+  uint freePos;
+  ushort bankMaskBits;
+  ushort allocatedReg;
+  ushort resultReg;
+  uint tempIndex;
   ushort *cursor;
-  int iVar5;
-  uint uVar6;
-  ushort *puVar7;
-  ushort uVar9;
-  int iVar8;
-  ushort *puVar10;
+  int bankBase;
+  uint freeEntryCount;
+  ushort *tempEntry;
+  ushort requestedMask;
+  int freeListBase;
+  ushort *freeEntry;
   
-  uVar3 = (uint)*operand;
+  tempIndex = (uint)*operand;
   if ((*operand & 0x8000) == 0) {
-    uVar9 = operand[1];
-    uVar2 = 0;
-    if (uVar9 != 0) {
-      if (uVar3 < *(ushort *)(tempTable + 2)) {
-        iVar5 = tempTable[1];
-        uVar2 = 8;
-        if (uVar9 != 8) {
-          uVar2 = 7;
-          operand[1] = uVar9 & 0xfff7;
+    requestedMask = operand[1];
+    resultReg = 0;
+    if (requestedMask != 0) {
+      if (tempIndex < *(ushort *)(tempTable + 2)) {
+        bankBase = tempTable[1];
+        bankMaskBits = 8;
+        if (requestedMask != 8) {
+          bankMaskBits = 7;
+          operand[1] = requestedMask & 0xfff7;
         }
       }
       else {
-        iVar5 = *tempTable;
-        uVar2 = 0xf;
-        uVar3 = uVar3 - *(ushort *)(tempTable + 2) & 0xffff;
+        bankBase = *tempTable;
+        bankMaskBits = 0xf;
+        tempIndex = tempIndex - *(ushort *)(tempTable + 2) & 0xffff;
       }
-      puVar7 = (ushort *)(iVar5 + uVar3 * 8);
-      uVar9 = puVar7[2];
-      if (uVar9 == 0) {
-        *(undefined2 *)(iVar5 + uVar3 * 8) = 0xffff;
-        puVar7[1] = 0xffff;
+      tempEntry = (ushort *)(bankBase + tempIndex * 8);
+      entryUsedMask = tempEntry[2];
+      if (entryUsedMask == 0) {
+        *(undefined2 *)(bankBase + tempIndex * 8) = 0xffff;
+        tempEntry[1] = 0xffff;
       }
-      puVar7[2] = uVar9 | operand[1];
-      if ((uVar2 & uVar9) == 0) {
-        puVar10 = (ushort *)*freeList;
-        uVar9 = puVar10[1];
-        if ((uVar2 & ~uVar9) == 0) {
-          uVar3 = 0;
-          iVar5 = 0;
-          uVar6 = 1;
+      tempEntry[2] = entryUsedMask | operand[1];
+      if ((bankMaskBits & entryUsedMask) == 0) {
+        freeEntry = (ushort *)*freeList;
+        entryFreeMask = freeEntry[1];
+        if ((bankMaskBits & ~entryFreeMask) == 0) {
+          freePos = 0;
+          freeByteOffset = 0;
+          freeEntryCount = 1;
         }
         else {
-          cursor = puVar10 + 3;
-          uVar3 = 0;
+          cursor = freeEntry + 3;
+          freePos = 0;
           do {
-            uVar6 = uVar3;
-            uVar9 = *cursor;
-            uVar3 = uVar6 + 1;
+            freeEntryCount = freePos;
+            scanFreeMask = *cursor;
+            freePos = freeEntryCount + 1;
             cursor = cursor + 2;
-          } while ((uVar2 & ~uVar9) != 0);
-          iVar5 = uVar3 * 4;
-          uVar6 = uVar6 + 2;
-          puVar10 = puVar10 + uVar3 * 2;
-          uVar9 = puVar10[1];
+          } while ((bankMaskBits & ~scanFreeMask) != 0);
+          freeByteOffset = freePos * 4;
+          freeEntryCount = freeEntryCount + 2;
+          freeEntry = freeEntry + freePos * 2;
+          entryFreeMask = freeEntry[1];
         }
-        uVar1 = *puVar10;
-        puVar10[1] = uVar9 & ~uVar2;
-        if (*(ushort *)(freeList + 1) == uVar6) {
-          if (*(short *)(iVar5 + *freeList + 2) != 0) {
-            *(short *)(freeList + 1) = (short)uVar6 + 1;
-            uVar3 = uVar6;
+        allocatedReg = *freeEntry;
+        freeEntry[1] = entryFreeMask & ~bankMaskBits;
+        if (*(ushort *)(freeList + 1) == freeEntryCount) {
+          if (*(short *)(freeByteOffset + *freeList + 2) != 0) {
+            *(short *)(freeList + 1) = (short)freeEntryCount + 1;
+            freePos = freeEntryCount;
           }
-          *(ushort *)(*freeList + uVar3 * 4) = uVar1 + 1;
-          *(undefined2 *)(uVar3 * 4 + *freeList + 2) = 0xf;
+          *(ushort *)(*freeList + freePos * 4) = allocatedReg + 1;
+          *(undefined2 *)(freePos * 4 + *freeList + 2) = 0xf;
         }
         else {
-          iVar8 = *freeList;
-          if ((*(short *)(iVar8 + iVar5 + 2) == 0) &&
-             (uVar6 = *(ushort *)(freeList + 1) - 1, *(short *)(freeList + 1) = (short)uVar6,
-             uVar3 < (uVar6 & 0xffff))) {
-            iVar5 = uVar3 << 2;
+          freeListBase = *freeList;
+          if ((*(short *)(freeListBase + freeByteOffset + 2) == 0) &&
+             (freeEntryCount = *(ushort *)(freeList + 1) - 1, *(short *)(freeList + 1) = (short)freeEntryCount,
+             freePos < (freeEntryCount & 0xffff))) {
+            freeShiftOffset = freePos << 2;
             while( true ) {
-              uVar3 = uVar3 + 1;
-              *(undefined4 *)(iVar5 + iVar8) = *(undefined4 *)(iVar5 + iVar8 + 4);
-              iVar5 = iVar5 + 4;
-              if (*(ushort *)(freeList + 1) <= uVar3) break;
-              iVar8 = *freeList;
+              freePos = freePos + 1;
+              *(undefined4 *)(freeShiftOffset + freeListBase) = *(undefined4 *)(freeShiftOffset + freeListBase + 4);
+              freeShiftOffset = freeShiftOffset + 4;
+              if (*(ushort *)(freeList + 1) <= freePos) break;
+              freeListBase = *freeList;
             }
           }
         }
-        if ((uVar2 & 7) != 0) {
-          *puVar7 = uVar1;
+        if ((bankMaskBits & 7) != 0) {
+          *tempEntry = allocatedReg;
         }
-        if ((uVar2 & 8) != 0) {
-          puVar7[1] = uVar1;
+        if ((bankMaskBits & 8) != 0) {
+          tempEntry[1] = allocatedReg;
         }
       }
-      if (uVar2 == 8) {
-        uVar2 = puVar7[1];
+      if (bankMaskBits == 8) {
+        resultReg = tempEntry[1];
       }
       else {
-        uVar2 = *puVar7;
+        resultReg = *tempEntry;
       }
     }
-    *operand = uVar2;
+    *operand = resultReg;
     return;
   }
   return;
@@ -10461,7 +10509,7 @@ LAB_000c6e10:
 /* FUN_000c6e40 @ 0xc6e40 (12 bytes) - issue #64 live-repro: a genuine, separate function Ghidra's
  * initial analysis never split out (no standard prologue - it's a 3-instruction tail-call right
  * after the preceding function's blr, only reachable via the PC-relative function-pointer table
- * FUN_000c6ff0 builds; never found by any direct bl/b xref). Confirmed live: FUN_000cd05c calls
+ * scCreateForContext builds; never found by any direct bl/b xref). Confirmed live: FUN_000cd05c calls
  * *(psnState+0x30) - previously transcribed as the raw literal (unsigned char*)0x000c6e40, which
  * pointed at these bytes as DATA instead of as this function's own real code - as
  * (arg, 0x44, param_3), landing here with psnProgram=0x44 after the ABI drops the 3rd arg; this
@@ -10579,46 +10627,46 @@ int scCallbackFread(unusedArgR3, param_2, param_3, param_4)
   return 0;
 }
 
-/* FUN_000c6ff0 @ 0xc6ff0 (464 bytes) */
-int FUN_000c6ff0(ctx, param_2)
+/* scCreateForContext @ 0xc6ff0 (464 bytes) */
+int scCreateForContext(ctx, useDeviceId)
   int ctx;
-  int param_2;
+  int useDeviceId;
 {
   undefined *ctxPtr23d4;
-  undefined4 uVar2;
-  undefined4 local_88;
-  undefined4 local_84;
-  undefined4 local_80;
-  /* issue #64 live-repro: FUN_000cd05c (called below via &local_7c) reads its first argument at
+  undefined4 compilerHandle;
+  undefined4 createInfoWord0;
+  undefined4 createInfoVersion;
+  undefined4 createInfoWord2;
+  /* issue #64 live-repro: FUN_000cd05c (called below via &chipConfigKind) reads its first argument at
    * byte offsets up to +0x4c (*(ctx+0x30)/+0x34/+0x38/+0x40/+0x44/+0x48/+0x4c), i.e. it expects
-   * local_7c through local_30 (and local_54/local_50/local_4c above them) to be ONE contiguous
-   * 0x54-byte buffer - confirmed directly by this function's own "_memset(&local_7c,0,0x54)" a few
+   * chipConfigKind through freadCallback (and optionsVersion/compilerHandleOut/allocCallback above them) to be ONE contiguous
+   * 0x54-byte buffer - confirmed directly by this function's own "_memset(&chipConfigKind,0,0x54)" a few
    * lines down, not a guess. Left as separate scalars (same defect class as auStack_c148 and
    * local_194 in _gldChoosePixelFormat, both fixed earlier this session), the -O0 rebuild does not
    * place them contiguously, so FUN_000cd05c's offset reads miss into whatever real stack slot
    * happens to be there instead - confirmed live: corrupts far enough to zero this function's own
-   * ctx, crashing on the *(ctx+0x186c)=uVar2 store a few lines below. Merged into one
+   * ctx, crashing on the *(ctx+0x186c)=compilerHandle store a few lines below. Merged into one
    * 0x54-byte buffer (offsets confirmed per each name's own hex value, e.g. 0x7c-0x30=0x4c). */
   unsigned char local_7c_buf[0x54];
-#define local_54 (*(undefined4 *)(local_7c_buf + 0x28))
-#define local_50 (*(undefined4 **)(local_7c_buf + 0x2c))
-#define local_4c (*(undefined **)(local_7c_buf + 0x30))
-#define local_48 (*(code **)(local_7c_buf + 0x34))
-#define local_44 (*(code **)(local_7c_buf + 0x38))
-#define local_40 (*(code **)(local_7c_buf + 0x3c))
-#define local_3c (*(code **)(local_7c_buf + 0x40))
-#define local_38 (*(code **)(local_7c_buf + 0x44))
-#define local_34 (*(code **)(local_7c_buf + 0x48))
-#define local_30 (*(code **)(local_7c_buf + 0x4c))
-#define local_7c (*(undefined4 *)(local_7c_buf + 0x00))
-#define local_78 (*(undefined4 *)(local_7c_buf + 0x04))
+#define optionsVersion (*(undefined4 *)(local_7c_buf + 0x28))
+#define compilerHandleOut (*(undefined4 **)(local_7c_buf + 0x2c))
+#define allocCallback (*(undefined **)(local_7c_buf + 0x30))
+#define freeCallback (*(code **)(local_7c_buf + 0x34))
+#define getFlagCallback (*(code **)(local_7c_buf + 0x38))
+#define appendFormattedCallback (*(code **)(local_7c_buf + 0x3c))
+#define fopenCallback (*(code **)(local_7c_buf + 0x40))
+#define fcloseCallback (*(code **)(local_7c_buf + 0x44))
+#define fwriteCallback (*(code **)(local_7c_buf + 0x48))
+#define freadCallback (*(code **)(local_7c_buf + 0x4c))
+#define chipConfigKind (*(undefined4 *)(local_7c_buf + 0x00))
+#define chipRevision (*(undefined4 *)(local_7c_buf + 0x04))
   
   _memset(local_7c_buf,0,0x54);
-  local_78 = *(undefined4 *)(ctx + 0x23d8);
-  local_80 = 0;
-  local_88 = 0;
-  if (param_2 == 0) {
-    local_7c = 0x2c;
+  chipRevision = *(undefined4 *)(ctx + 0x23d8);
+  createInfoWord2 = 0;
+  createInfoWord0 = 0;
+  if (useDeviceId == 0) {
+    chipConfigKind = 0x2c;
   }
   else {
     ctxPtr23d4 = *(undefined **)(ctx + 0x23d4);
@@ -10635,40 +10683,40 @@ int FUN_000c6ff0(ctx, param_2)
         (((ctxPtr23d4 != (undefined *)0x715e && (ctxPtr23d4 != ((unsigned char *)0x00007144))) &&
          ((ctxPtr23d4 != ((unsigned char *)0x00007145) && ((ctxPtr23d4 != ((unsigned char *)0x00007148) && (ctxPtr23d4 != ((unsigned char *)0x00007149))))))))))
        ) {
-      local_7c = 0x3c;
+      chipConfigKind = 0x3c;
     }
     else {
-      local_7c = 0x3e;
+      chipConfigKind = 0x3e;
     }
   }
-  local_4c = (undefined *)FUN_000c6e40;
-  local_48 = scCallbackFree;
-  local_54 = 2;
-  local_44 = scCallbackGetFlagZero;
-  local_40 = scCallbackAppendFormatted;
-  local_84 = 0x7b;
-  local_3c = scCallbackFopen;
-  local_38 = scCallbackFclose;
-  local_34 = scCallbackFwrite;
-  local_30 = scCallbackFread;
-  local_50 = (undefined4 *)(ctx + 0x186c);
-  uVar2 = FUN_000cd05c(&local_7c,&local_88,0x10001);
-  *(undefined4 *)(ctx + 0x186c) = uVar2;
-  *(undefined4 *)(ctx + 0x1870) = local_84;
+  allocCallback = (undefined *)FUN_000c6e40;
+  freeCallback = scCallbackFree;
+  optionsVersion = 2;
+  getFlagCallback = scCallbackGetFlagZero;
+  appendFormattedCallback = scCallbackAppendFormatted;
+  createInfoVersion = 0x7b;
+  fopenCallback = scCallbackFopen;
+  fcloseCallback = scCallbackFclose;
+  fwriteCallback = scCallbackFwrite;
+  freadCallback = scCallbackFread;
+  compilerHandleOut = (undefined4 *)(ctx + 0x186c);
+  compilerHandle = FUN_000cd05c(&chipConfigKind,&createInfoWord0,0x10001);
+  *(undefined4 *)(ctx + 0x186c) = compilerHandle;
+  *(undefined4 *)(ctx + 0x1870) = createInfoVersion;
   return;
 }
-#undef local_54
-#undef local_50
-#undef local_4c
-#undef local_48
-#undef local_44
-#undef local_40
-#undef local_3c
-#undef local_38
-#undef local_34
-#undef local_30
-#undef local_7c
-#undef local_78
+#undef optionsVersion
+#undef compilerHandleOut
+#undef allocCallback
+#undef freeCallback
+#undef getFlagCallback
+#undef appendFormattedCallback
+#undef fopenCallback
+#undef fcloseCallback
+#undef fwriteCallback
+#undef freadCallback
+#undef chipConfigKind
+#undef chipRevision
 
 /* ilFreeRecordList @ 0xc71e0 (76 bytes) */
 int ilFreeRecordList(node)

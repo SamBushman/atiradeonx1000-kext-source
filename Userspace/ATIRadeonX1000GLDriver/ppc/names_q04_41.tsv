@@ -1,0 +1,40 @@
+local	FUN_000a3790	fVar1	coverageValue	INFERRED	coverage (0..255 scale) of the table entry: accumulated sample sum scaled by FLOAT_001aa0f0, +0.5 rounded into the output byte
+local	FUN_000a3790	iVar3	halfSize	INFERRED	signed param_3 / 2 (rounding toward zero): number of table entries produced
+use	FUN_000a3790	dVar5	clampedSizeF	INFERRED	max(1.0, size parameter) as float; divisor of the filter width	^\s*dVar5\ =\ \(double\)FLOAT_001aa0e8;$	+4
+use	FUN_000a3790	dVar5	clampedSizeF	INFERRED	max(1.0, size parameter) as float; divisor of the filter width	^\s*dVar7\ =\ \(double\)\(float\)\(\(double\)CONCAT44\(0x43300000,$	+3
+use	FUN_000a3790	dVar5	sampleWeight	INFERRED	weight added per covered sample: size / (width * (width - 1.0))	^\s*dVar5\ =\ \(double\)\(float\)\(fparam_1\ \*$	+3
+use	FUN_000a3790	dVar5	sampleWeight	INFERRED	weight added per covered sample: size / (width * (width - 1.0))	^\s*dVar8\ =\ \(double\)\(float\)\(dVar5\ \*\ dVar9\ \+\ dVar8\);$	+1
+use	FUN_000a3790	dVar5	sampleWeight	INFERRED	weight added per covered sample: size / (width * (width - 1.0))	^\s*dVar8\ =\ \(double\)\(float\)\(dVar5\ \*\ \(double\)\(\(float\)\(dVar7\ \-\ dVar9\)\ \-\ FLOAT_001aa0e8\)\ \+$	+2
+use	FUN_000a3790	dVar6	clampScratch	INFERRED	scratch for clamping the size parameter against 1.0	^\s*dVar6\ =\ dVar8;$	+1
+use	FUN_000a3790	dVar6	clampScratch	INFERRED	scratch for clamping the size parameter against 1.0	^\s*dVar6\ =\ fparam_1;$	+1
+use	FUN_000a3790	dVar6	clampScratch	INFERRED	scratch for clamping the size parameter against 1.0	^\s*fparam_1\ =\ dVar6;$	+1
+use	FUN_000a3790	dVar6	tableSizeF	INFERRED	param_3 converted to double: total table size in samples	^\s*dVar6\ =\ \(double\)\(float\)\(\(double\)CONCAT44\(0x43300000,param_3\ \^\ 0x80000000\)\ \-\ DOUBLE_001aa1e0\);$	+4
+use	FUN_000a3790	dVar6	tableSizeF	INFERRED	param_3 converted to double: total table size in samples	^\s*if\ \(\(dVar7\ <=\ dVar10\)\ \&\&\ \(dVar10\ <\ \(double\)\(float\)\(dVar6\ \-\ dVar7\)\)\)\ \{$	+1
+use	FUN_000a3790	dVar6	tableSizeF	INFERRED	param_3 converted to double: total table size in samples	^\s*if\ \(\(dVar7\ <=\ dVar10\)\ \&\&\ \(dVar10\ <\ \(double\)\(float\)\(dVar6\ \-\ dVar7\)\)\)\ \{$@2	+1
+local	FUN_000a3790	dVar7	filterWidthF	INFERRED	(int)(tableSize / (clampedSize + FLOAT_001aa108)) as float: number of samples per filter window
+use	FUN_000a3790	dVar8	oneF	INFERRED	constant 1.0 (FLOAT_001aa0e8) used while setting up the weight	^\s*dVar8\ =\ \(double\)FLOAT_001aa0e8;$	+1
+use	FUN_000a3790	dVar8	oneF	INFERRED	constant 1.0 (FLOAT_001aa0e8) used while setting up the weight	^\s*dVar6\ =\ dVar8;$	+2
+use	FUN_000a3790	dVar8	oneF	INFERRED	constant 1.0 (FLOAT_001aa0e8) used while setting up the weight	^\s*if\ \(\-\(float\)\(fparam_1\ \-\ dVar8\)\ <\ 0\.0\)\ \{$	+1
+use	FUN_000a3790	dVar8	oneF	INFERRED	constant 1.0 (FLOAT_001aa0e8) used while setting up the weight	^\s*dVar5\ =\ \(double\)\(float\)\(fparam_1\ \*$	+3
+use	FUN_000a3790	dVar8	coverageSum	INFERRED	accumulated coverage for the current entry, starts at 0.0	^\s*dVar8\ =\ \(double\)FLOAT_001aa0d4;$	+2
+use	FUN_000a3790	dVar8	coverageSum	INFERRED	accumulated coverage for the current entry, starts at 0.0	^\s*fVar1\ =\ \(float\)\(dVar8\ \*\ \(double\)FLOAT_001aa0f0\);$	+1
+use	FUN_000a3790	dVar8	coverageSum	INFERRED	accumulated coverage for the current entry, starts at 0.0	^\s*dVar9\ =\ dVar8;$	+1
+use	FUN_000a3790	dVar8	coverageSum	INFERRED	accumulated coverage for the current entry, starts at 0.0	^\s*dVar8\ =\ \(double\)\(float\)\(dVar5\ \*\ dVar9\ \+\ dVar8\);$	+1
+use	FUN_000a3790	dVar8	coverageSum	INFERRED	accumulated coverage for the current entry, starts at 0.0	^\s*dVar8\ =\ \(double\)\(float\)\(dVar5\ \*\ \(double\)\(\(float\)\(dVar7\ \-\ dVar9\)\ \-\ FLOAT_001aa0e8\)\ \+$	+2
+use	FUN_000a3790	dVar8	coverageSum	INFERRED	accumulated coverage for the current entry, starts at 0.0	^\s*if\ \(dVar8\ <=\ \(double\)FLOAT_001aa0e8\)\ goto\ LAB_000a39f0;$	+1
+use	FUN_000a3790	dVar9	sampleIndexF	INFERRED	float loop counter of the first sample loop	^\s*dVar9\ =\ dVar8;$	+1
+use	FUN_000a3790	dVar9	sampleIndexF	INFERRED	float loop counter of the first sample loop	^\s*dVar8\ =\ \(double\)\(float\)\(dVar5\ \*\ dVar9\ \+\ dVar8\);$	+1
+use	FUN_000a3790	dVar9	sampleIndexF	INFERRED	float loop counter of the first sample loop	^\s*dVar9\ =\ \(double\)\(float\)\(\(double\)CONCAT44\(0x43300000,uVar2\ \^\ 0x80000000\)\ \-\ DOUBLE_001aa1e0\)$	+1
+use	FUN_000a3790	dVar9	sampleIndexF	INFERRED	float loop counter of the first sample loop	^\s*\}\ while\ \(dVar9\ <\ dVar7\);$	+1
+use	FUN_000a3790	dVar9	sampleIndexF2	INFERRED	float loop counter of the second sample loop	^\s*dVar9\ =\ \(double\)FLOAT_001aa0d4;$	+1
+use	FUN_000a3790	dVar9	sampleIndexF2	INFERRED	float loop counter of the second sample loop	^\s*dVar8\ =\ \(double\)\(float\)\(dVar5\ \*\ \(double\)\(\(float\)\(dVar7\ \-\ dVar9\)\ \-\ FLOAT_001aa0e8\)\ \+$	+2
+use	FUN_000a3790	dVar9	sampleIndexF2	INFERRED	float loop counter of the second sample loop	^\s*dVar9\ =\ \(double\)\(float\)\(\(double\)CONCAT44\(0x43300000,uVar2\ \^\ 0x80000000\)\ \-\ DOUBLE_001aa1e0\)$@2	+1
+use	FUN_000a3790	dVar9	sampleIndexF2	INFERRED	float loop counter of the second sample loop	^\s*\}\ while\ \(dVar9\ <\ dVar7\);$@2	+1
+use	FUN_000a3790	dVar10	samplePosF	INFERRED	float position of sample (loopIndex2 + entry) inside the table, tested against the window	^\s*dVar10\ =\ \(double\)\(float\)\(\(double\)CONCAT44\(0x43300000,$	+6
+use	FUN_000a3790	dVar10	samplePosF2	INFERRED	float position of sample (loopIndex3 + entry) inside the table, tested against the window	^\s*dVar10\ =\ \(double\)\(float\)\(\(double\)CONCAT44\(0x43300000,uVar2\ \+\ iVar4\ \^\ 0x80000000\)\ \-$	+3
+local	FUN_000a3790	cStack_19	outByte	INFERRED	entry value stored to the output table; 0xff terminates the table
+local	FUN_000a3790	param_3	tableSize	INFERRED	size of the table in samples
+local	FUN_000a3790	param_4	outTable	INFERRED	output byte table, one coverage byte per entry
+local	FUN_000a3790	param_5	outCount	INFERRED	receives the number of entries written
+func	FUN_000a3790	gld_buildCoverageByteTable	INFERRED	builds a byte table (param_4, count in *param_5) of box-filtered 0..255 coverage values for a float size parameter (callers pass ctx+0xe0/+0x104 or a quantized value); terminates early on a 0xff entry
+func	FUN_000a7ee0	gld_updateTextureUnitState	INFERRED	for every unit in the mask: recomputes the per-unit register words (+0x48, +0x18a8/+0x18ac, +0x187c), sets the dirty-unit masks (ctx+0x272/+0x274) from the bound texture object (ctx+0x18c+4*unit) or clears the unit when unbound

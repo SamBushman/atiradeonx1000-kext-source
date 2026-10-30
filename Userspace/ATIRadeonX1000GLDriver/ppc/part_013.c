@@ -3657,7 +3657,7 @@ int FUN_0008f7f0(ctx, param_2, param_3, rect, param_5)
   }
   else {
     recordCommands = true;
-    FUN_000a5c40(ctx);
+    gld_emitClearColorPacket(ctx);
     recordBase = *(int *)(0x00002748 + ctx + 4);
   }
   uVar14 = 0;
@@ -4187,7 +4187,7 @@ void gldValidateState(int glContext,undefined4 param_2,undefined4 param_3,undefi
       dirtyMask2 = *(uint *)(glContext + 0x3c);
     }
     if ((dirtyMask2 & 0x1000) != 0) {
-      FUN_000a5ec0(glContext);
+      gld_updateSampleCoverage(glContext);
     }
   }
   if ((*(uint *)(glContext + 0x44) & 0x100000) == 0) {
