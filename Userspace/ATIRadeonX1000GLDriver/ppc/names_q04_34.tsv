@@ -1,6 +1,9 @@
 local	psnRaAssignDefinition	param_1	operand	INFERRED	{register number, component mask} pair (ushort[2]); register >= 0x8000 means already assigned; rewritten with the assigned register
 local	psnRaAssignDefinition	param_2	tempTable	INFERRED	temp-register table: two banks of 8-byte entries (bank pointers at [0]/[1], first bank size ushort at +8); entry+4 holds the used component mask
 local	psnRaAssignDefinition	param_3	freeList	INFERRED	free-register list of {register, free component mask} 4-byte entries (head pointer at [0], count at [1])
+local	psnRaReleaseUse	param_1	operand	INFERRED	{register number, component mask} pair (ushort[2]); register >= 0x8000 means already assigned; rewritten with the assigned register
+local	psnRaReleaseUse	param_2	tempTable	INFERRED	temp-register table: two banks of 8-byte entries (bank pointers at [0]/[1], first bank size ushort at +8); entry+4 holds the used component mask
+local	psnRaReleaseUse	param_3	freeList	INFERRED	free-register list of {register, free component mask} 4-byte entries (head pointer at [0], count at [1])
 local	scCallbackAppendFormatted	param_2	prefix	INFERRED	string copied to the local buffer before the formatted text is appended after it (_strcpy(buf, param_2))
 local	scCallbackAppendFormatted	param_3	format	INFERRED	printf format passed to the vsnprintf-style call that appends at buf+strlen(prefix) with 0x100-length bytes left
 local	scCallbackAppendFormatted	param_4	formatArg1	INFERRED	first variadic value forwarded in r6
@@ -8,14 +11,11 @@ local	scCallbackAppendFormatted	param_5	formatArg2	INFERRED	variadic value forwa
 local	scCallbackAppendFormatted	param_6	formatArg3	INFERRED	variadic value forwarded in r8
 local	scCallbackAppendFormatted	param_7	formatArg4	INFERRED	variadic value forwarded in r9
 local	scCallbackAppendFormatted	param_8	formatArg5	INFERRED	variadic value forwarded in r10
+local	gldMarkAllStateDirty	param_1	glContext	INFERRED	the stream/state object whose +0x29 flag, +0x2c..+0x34 and +0x38/+0x3c/+0x40 dirty words FUN_000a9ac0 (stream) consumes; every dirty word is set to its full mask here
+local	FUN_000cd05c	param_1	scCallbacks	INFERRED	callback block: +0x2c user data, +0x30 allocator, +0x34 free (all checked non-NULL, plus +0x38..+0x4c)
+local	FUN_000cd05c	param_3	allocTag	INFERRED	third argument handed unchanged to the allocator (+0x30) and to the free callback (+0x34)
 local	FUN_000ab940	param_1	srcKind	INFERRED	3 selects the special encodings (0x17/0x18), anything else gives type 4
 local	FUN_000ab940	param_2	srcValue	INFERRED	value stored in the first output word (or tested == 1 for kind 3)
 local	FUN_000ab940	param_4	outOperand	INFERRED	two-word output {value, type code 4 / 0x17 / 0x18}
 local	FUN_000ab940	param_5	outIsSpecial	INFERRED	output byte: 1 when srcKind == 3, else 0
 local	FUN_000ab940	param_6	altSrcValue	INFERRED	value stored instead of srcValue for the kind-3 / srcValue != 1 case
-local	psnRaReleaseUse	param_1	operand	INFERRED	{register number, component mask} pair (ushort[2]); register >= 0x8000 means already assigned; rewritten with the assigned register
-local	psnRaReleaseUse	param_2	tempTable	INFERRED	temp-register table: two banks of 8-byte entries (bank pointers at [0]/[1], first bank size ushort at +8); entry+4 holds the used component mask
-local	psnRaReleaseUse	param_3	freeList	INFERRED	free-register list of {register, free component mask} 4-byte entries (head pointer at [0], count at [1])
-local	gldMarkAllStateDirty	param_1	stream	INFERRED	the stream/state object whose +0x29 flag, +0x2c..+0x34 and +0x38/+0x3c/+0x40 dirty words FUN_000a9ac0 (stream) consumes; every dirty word is set to its full mask here
-local	FUN_000cd05c	param_1	scCallbacks	INFERRED	callback block: +0x2c user data, +0x30 allocator, +0x34 free (all checked non-NULL, plus +0x38..+0x4c)
-local	FUN_000cd05c	param_3	allocTag	INFERRED	third argument handed unchanged to the allocator (+0x30) and to the free callback (+0x34)

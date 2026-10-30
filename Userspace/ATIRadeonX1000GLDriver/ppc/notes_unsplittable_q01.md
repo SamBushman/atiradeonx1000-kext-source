@@ -6,3 +6,7 @@
 ## Giant functions: `scratch*` labels (Tools/userspace/lpnames/scratchnames.py)
 
 `gldTextureMakeResident`, `glCopyTexSubImage_impl` (0x353a0), `dxtCompressImage` (0x1c380), `glTexSubImage_impl`, `gld_updateTextureHardwareState` (0x2ddf0) and `glCopyPixels_impl` keep ~100 Ghidra locals each, almost all of them one C variable that holds many unrelated temporaries (`lw2.py gldTextureMakeResident`: iVar25 has 16 webs, iVar33 9, iVar11 16; only 30 of 116 variables have a single web). Splitting them is out of reach of the compile gate (fake-struct stack blocks, address-taken arrays, x = f(x) chains, condition-register pseudo-variables). Every remaining local of these functions is therefore named `scratch<Kind><N>` (Int, Uint, Short, Flag, Float, Double, Ptr, Stack<hex>), N = the Ghidra number, meaning "register-allocation scratch with no single role". Variables that were given a real role earlier keep it. Parameters are named by role where the callers/arguments show it (`scratchArg3`/`scratchArg6` in `gldTextureMakeResident` are parameters the function also reuses as locals).
+
+## Hybrid locals of the mid-size functions (scratchnames.py --hybrid-only 0 5, names_q01_29.tsv)
+
+Every local of parts 000-005 that `find_webs` reports with two or more webs (one C variable, several unrelated temporaries) and that no earlier row had split or named is labelled `scratch<Kind><N>` (270 variables). Single-web locals were left for role names.

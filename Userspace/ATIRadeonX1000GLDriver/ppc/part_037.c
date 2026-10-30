@@ -152,14 +152,14 @@ int FUN_0011eaa0(program)
   undefined4 predecessorCount;
   uint clearCountC;
   uint bitsetWordCount;
-  /* issue #64 live-repro: iteratorState is the iterator state object passed to FUN_00194938/
-   * FUN_00194a94, which read/write program[0..4] - 5 words, 0x14 bytes. iteratorState was declared
+  /* issue #64 live-repro: iteratorState is the iterator state object passed to HashTableIterator__advance/
+   * HashTableIterator__begin, which read/write program[0..4] - 5 words, 0x14 bytes. iteratorState was declared
    * only 16 bytes (4 words); iteratorCurrent sits exactly at the missing 5th word by its own hex name
    * (0x60-0x50=0x10). The main loop below re-reads iteratorCurrent as its own continuation value
-   * (iVar13 = iteratorCurrent) right after each FUN_00194938 call - with the two locals not contiguous,
+   * (iVar13 = iteratorCurrent) right after each HashTableIterator__advance call - with the two locals not contiguous,
    * that call's real update to program[4] never reaches iteratorCurrent, so iVar13 never changes and the
    * while(iVar13!=0) loop spins forever (confirmed live: the rebuilt driver hangs at 99% CPU
-   * inside FUN_00194938, never returning). Merged into one 0x14-byte buffer. */
+   * inside HashTableIterator__advance, never returning). Merged into one 0x14-byte buffer. */
   unsigned char iteratorState [0x14];
 #define iteratorCurrent (*(int *)(iteratorState + 0x10))
   
@@ -201,7 +201,7 @@ int FUN_0011eaa0(program)
       bitsetWordCount = bitsetWordCount - 1;
     } while (bitsetWordCount != 0);
   }
-  FUN_00194a94(iteratorState,*(undefined4 *)(*(int *)(program + 0x3ac) + 4));
+  HashTableIterator__begin(iteratorState,*(undefined4 *)(*(int *)(program + 0x3ac) + 4));
   registerRecord = iteratorCurrent;
   while (registerRecord != 0) {
     registerId = *(uint *)(registerRecord + 0x1c);
@@ -284,7 +284,7 @@ int FUN_0011eaa0(program)
         defByteOffsetB = defByteOffsetB + 4;
       }
     }
-    FUN_00194938(iteratorState);
+    HashTableIterator__advance(iteratorState);
     registerRecord = iteratorCurrent;
   }
   if (definedInBlocks != (int *)0x0) {

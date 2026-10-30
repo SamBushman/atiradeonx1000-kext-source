@@ -721,9 +721,9 @@ int FUN_0012740c(param_1)
   int param_1;
 {
   /* issue #64 live-repro: same iterator-object split as FUN_0011eaa0 (part_037.c), fixed earlier
-   * this session - auStack_38 is walked by FUN_00194938/FUN_00194a94 as param_1[0..4] (0x14 bytes)
+   * this session - auStack_38 is walked by HashTableIterator__advance/HashTableIterator__begin as param_1[0..4] (0x14 bytes)
    * but declared only 16 bytes; local_28, the missing 5th word, is what this loop reads back as its
-   * own continuation value. Separated, FUN_00194938's real update never reached local_28, so the
+   * own continuation value. Separated, HashTableIterator__advance's real update never reached local_28, so the
    * loop never saw it become null - not just a hang: the same (unchanging) local_28 object got
    * re-passed to the vtable call on every spin instead of the real next node, repeatedly
    * re-processing/re-freeing one object - a plausible source of the unrelated heap corruption seen
@@ -732,10 +732,10 @@ int FUN_0012740c(param_1)
   unsigned char auStack_38 [0x14];
 #define local_28 (*(int **)(auStack_38 + 0x10))
   
-  FUN_00194a94(auStack_38,*(undefined4 *)(param_1 + 4));
+  HashTableIterator__begin(auStack_38,*(undefined4 *)(param_1 + 4));
   while (local_28 != (int *)0x0) {
     (**(code **)(*local_28 + 4))(local_28);
-    FUN_00194938(auStack_38);
+    HashTableIterator__advance(auStack_38);
   }
   return;
 }
@@ -922,9 +922,9 @@ int FUN_00127850(owner)
   int elementQuery18;
   int matchCount;
   /* issue #64 live-repro: same iterator-object split as FUN_0011eaa0 (part_037.c), fixed earlier
-   * this session - iteratorState is walked by FUN_00194938/FUN_00194a94 as owner[0..4] (0x14 bytes)
+   * this session - iteratorState is walked by HashTableIterator__advance/HashTableIterator__begin as owner[0..4] (0x14 bytes)
    * but declared only 16 bytes; iteratorCurrent, the missing 5th word, is what this loop reads back as its
-   * own continuation value. Separated, FUN_00194938's real update never reached iteratorCurrent, so the
+   * own continuation value. Separated, HashTableIterator__advance's real update never reached iteratorCurrent, so the
    * loop never saw it become null - not just a hang: the same (unchanging) iteratorCurrent object got
    * re-passed to the vtable call on every spin instead of the real next node, repeatedly
    * re-processing/re-freeing one object - a plausible source of the unrelated heap corruption seen
@@ -933,14 +933,14 @@ int FUN_00127850(owner)
   unsigned char iteratorState [0x14];
 #define iteratorCurrent (*(int **)(iteratorState + 0x10))
   
-  FUN_00194a94(iteratorState,*(undefined4 *)(owner + 4));
+  HashTableIterator__begin(iteratorState,*(undefined4 *)(owner + 4));
   matchCount = 0;
   while (iteratorCurrent != (int *)0x0) {
     elementQuery18 = (**(code **)(*iteratorCurrent + 0x18))(iteratorCurrent);
     if (elementQuery18 != 0) {
       matchCount = matchCount + 1;
     }
-    FUN_00194938(iteratorState);
+    HashTableIterator__advance(iteratorState);
   }
   return matchCount;
 }
