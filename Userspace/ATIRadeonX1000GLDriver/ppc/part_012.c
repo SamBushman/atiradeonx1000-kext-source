@@ -3106,45 +3106,46 @@ int FUN_000867b0(param_1)
 }
 
 /* FUN_00086840 @ 0x86840 (228 bytes) */
-int FUN_00086840(param_1)
-  int param_1;
+int FUN_00086840(ctx)
+  int ctx;
 {
-  bool bVar1;
-  int iVar2;
-  code *pcVar3;
+  int cmdPos;
+  bool morePlanes;
+  int regBase;
+  code *streamSetCurrent;
   undefined4 *a6;
   undefined4 in_r5;
   undefined4 in_r6;
   undefined4 in_r7;
   undefined4 in_r8;
-  uint uVar4;
+  uint clipPlaneMask;
   uint loopCounter;
-  undefined4 *puVar6;
+  undefined4 *planeEquation;
   
-  puVar6 = (undefined4 *)(param_1 + 0x3d8);
+  planeEquation = (undefined4 *)(ctx + 0x3d8);
   loopCounter = 0;
-  uVar4 = *(uint *)(((unsigned char *)0x00003e28) + *(int *)(*(int *)(param_1 + 4) + 0x10));
+  clipPlaneMask = *(uint *)(((unsigned char *)0x00003e28) + *(int *)(*(int *)(ctx + 4) + 0x10));
   do {
-    if ((uVar4 & 1 << (loopCounter & 0x3f)) != 0) {
-      a6 = (undefined4 *)(**(code **)(param_1 + 0x2758))(param_1,7);
-      *(undefined4 **)(0x00002748 + param_1 + 4) = a6;
+    if ((clipPlaneMask & 1 << (loopCounter & 0x3f)) != 0) {
+      a6 = (undefined4 *)(**(code **)(ctx + 0x2758))(ctx,7);
+      *(undefined4 **)(0x00002748 + ctx + 4) = a6;
       *a6 = 0x880;
-      iVar2 = *(int *)(param_1 + 0x1be0);
+      regBase = *(int *)(ctx + 0x1be0);
       a6[2] = 0x38882;
-      a6[1] = loopCounter + iVar2;
-      a6[3] = *puVar6;
-      a6[4] = puVar6[1];
-      a6[5] = puVar6[2];
-      a6[6] = puVar6[3];
-      iVar2 = *(int *)(0x00002748 + param_1 + 4);
-      pcVar3 = *(code **)(param_1 + 0x275c);
-      *(int *)(0x00002748 + param_1 + 4) = iVar2 + 0x1c;
-      (*pcVar3)(param_1,iVar2 + 0x1c,in_r5,in_r6,in_r7,in_r8,a6);
+      a6[1] = loopCounter + regBase;
+      a6[3] = *planeEquation;
+      a6[4] = planeEquation[1];
+      a6[5] = planeEquation[2];
+      a6[6] = planeEquation[3];
+      cmdPos = *(int *)(0x00002748 + ctx + 4);
+      streamSetCurrent = *(code **)(ctx + 0x275c);
+      *(int *)(0x00002748 + ctx + 4) = cmdPos + 0x1c;
+      (*streamSetCurrent)(ctx,cmdPos + 0x1c,in_r5,in_r6,in_r7,in_r8,a6);
     }
-    bVar1 = loopCounter != 5;
-    puVar6 = puVar6 + 4;
+    morePlanes = loopCounter != 5;
+    planeEquation = planeEquation + 4;
     loopCounter = loopCounter + 1;
-  } while (bVar1);
+  } while (morePlanes);
   return;
 }
 
@@ -3673,58 +3674,59 @@ LAB_00087474:
 }
 
 /* arbfpUpdateConstantsFp24 @ 0x87800 (344 bytes) */
-int arbfpUpdateConstantsFp24(context, param_2, param_3, param_4)
+int arbfpUpdateConstantsFp24(context, fpProgram, unusedArg3, unusedArg4)
   int context;
-  int param_2;
-  undefined4 param_3;
-  undefined4 param_4;
+  int fpProgram;
+  undefined4 unusedArg3;
+  undefined4 unusedArg4;
 {
-  int iVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
-  int iVar5;
-  int iVar6;
+  int constRegOffset;
+  int slotPtr;
+  int fp24X;
+  int fp24Y;
+  int fp24Z;
+  int fp24W;
+  int fpInfo;
   int loopIndex;
-  int iVar8;
-  int iVar9;
-  int iVar10;
-  float fStack_48;
-  float fStack_44;
-  float fStack_40;
-  float fStack_3c;
+  int entryOffset;
+  int hwConstants;
+  int paramEntry;
+  float paramX;
+  float paramY;
+  float paramZ;
+  float paramW;
   
-  iVar6 = *(int *)(param_2 + 0x74);
-  iVar9 = *(int *)(*(int *)(((unsigned char *)0x00001130) + context) * 4 + *(int *)(param_2 + 0x70));
-  if (0 < *(int *)(iVar6 + 0x84)) {
+  fpInfo = *(int *)(fpProgram + 0x74);
+  hwConstants = *(int *)(*(int *)(((unsigned char *)0x00001130) + context) * 4 + *(int *)(fpProgram + 0x70));
+  if (0 < *(int *)(fpInfo + 0x84)) {
     loopIndex = 0;
-    iVar8 = 0;
+    entryOffset = 0;
     do {
-      iVar10 = iVar8 + *(int *)(iVar6 + 0x80);
-      if (*(int *)(iVar10 + 8) != 0x34) {
-        arbfpFetchParameterValue(context,iVar10,&fStack_48,param_4);
-        iVar2 = ((uint (*)())floatToFp24)((double)fStack_48);
-        iVar3 = ((uint (*)())floatToFp24)((double)fStack_44);
-        iVar4 = ((uint (*)())floatToFp24)((double)fStack_40);
-        iVar5 = ((uint (*)())floatToFp24)((double)fStack_3c);
-        iVar6 = *(int *)(iVar10 + 4) * 0x10;
-        iVar1 = iVar6 + iVar9;
-        if ((((iVar2 == *(int *)(iVar1 + 0x8c)) && (iVar3 == *(int *)(iVar1 + 0x90))) &&
-            (iVar4 == *(int *)(iVar1 + 0x94))) && (iVar5 == *(int *)(iVar1 + 0x98))) {
-          iVar6 = *(int *)(param_2 + 0x74);
+      paramEntry = entryOffset + *(int *)(fpInfo + 0x80);
+      if (*(int *)(paramEntry + 8) != 0x34) {
+        arbfpFetchParameterValue(context,paramEntry,&paramX,unusedArg4);
+        fp24X = ((uint (*)())floatToFp24)((double)paramX);
+        fp24Y = ((uint (*)())floatToFp24)((double)paramY);
+        fp24Z = ((uint (*)())floatToFp24)((double)paramZ);
+        fp24W = ((uint (*)())floatToFp24)((double)paramW);
+        constRegOffset = *(int *)(paramEntry + 4) * 0x10;
+        slotPtr = constRegOffset + hwConstants;
+        if ((((fp24X == *(int *)(slotPtr + 0x8c)) && (fp24Y == *(int *)(slotPtr + 0x90))) &&
+            (fp24Z == *(int *)(slotPtr + 0x94))) && (fp24W == *(int *)(slotPtr + 0x98))) {
+          fpInfo = *(int *)(fpProgram + 0x74);
         }
         else {
-          *(int *)(iVar6 + iVar9 + 0x8c) = iVar2;
-          *(int *)(*(int *)(iVar10 + 4) * 0x10 + iVar9 + 0x90) = iVar3;
-          *(int *)(*(int *)(iVar10 + 4) * 0x10 + iVar9 + 0x94) = iVar4;
-          *(int *)(*(int *)(iVar10 + 4) * 0x10 + iVar9 + 0x98) = iVar5;
+          *(int *)(constRegOffset + hwConstants + 0x8c) = fp24X;
+          *(int *)(*(int *)(paramEntry + 4) * 0x10 + hwConstants + 0x90) = fp24Y;
+          *(int *)(*(int *)(paramEntry + 4) * 0x10 + hwConstants + 0x94) = fp24Z;
+          *(int *)(*(int *)(paramEntry + 4) * 0x10 + hwConstants + 0x98) = fp24W;
           *(undefined4 *)(context + 0x1e64) = 0;
-          iVar6 = *(int *)(param_2 + 0x74);
+          fpInfo = *(int *)(fpProgram + 0x74);
         }
       }
       loopIndex = loopIndex + 1;
-      iVar8 = iVar8 + 0x14;
-    } while (loopIndex < *(int *)(iVar6 + 0x84));
+      entryOffset = entryOffset + 0x14;
+    } while (loopIndex < *(int *)(fpInfo + 0x84));
   }
   return;
 }

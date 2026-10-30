@@ -69,46 +69,46 @@ int noop_76e60()
 }
 
 /* vpStateFree @ 0x76e70 (356 bytes) */
-int vpStateFree(param_1, param_2)
-  int param_1;
-  int param_2;
+int vpStateFree(ctx, state)
+  int ctx;
+  int state;
 {
-  int iVar1;
+  int constantsBase;
   
-  iVar1 = param_2 + 0x13c;
-  if ((iVar1 != 0) && (*(int *)(param_2 + 0x150) != 0)) {
-    (**(code **)(((unsigned char *)0x000012ac) + param_1))(param_1,iVar1);
+  constantsBase = state + 0x13c;
+  if ((constantsBase != 0) && (*(int *)(state + 0x150) != 0)) {
+    (**(code **)(((unsigned char *)0x000012ac) + ctx))(ctx,constantsBase);
   }
-  if (*(int *)(param_2 + 8) != 0) {
-    (**(code **)(param_1 + 0x18))(*(int *)(param_2 + 8));
+  if (*(int *)(state + 8) != 0) {
+    (**(code **)(ctx + 0x18))(*(int *)(state + 8));
   }
-  if (*(int *)(param_2 + 0x10) != 0) {
-    (**(code **)(param_1 + 0x18))(*(int *)(param_2 + 0x10));
+  if (*(int *)(state + 0x10) != 0) {
+    (**(code **)(ctx + 0x18))(*(int *)(state + 0x10));
   }
-  if (*(int *)(param_2 + 0x3c) != 0) {
-    (**(code **)(param_1 + 0x18))(*(int *)(param_2 + 0x3c));
+  if (*(int *)(state + 0x3c) != 0) {
+    (**(code **)(ctx + 0x18))(*(int *)(state + 0x3c));
   }
-  if (*(int *)(param_2 + 0x44) != 0) {
-    (**(code **)(param_1 + 0x18))(*(int *)(param_2 + 0x44));
+  if (*(int *)(state + 0x44) != 0) {
+    (**(code **)(ctx + 0x18))(*(int *)(state + 0x44));
   }
-  if (*(int *)(param_2 + 0x114) != 0) {
-    (**(code **)(param_1 + 0x18))(*(int *)(param_2 + 0x114));
+  if (*(int *)(state + 0x114) != 0) {
+    (**(code **)(ctx + 0x18))(*(int *)(state + 0x114));
   }
-  if (*(int *)(param_2 + 0x11c) != 0) {
-    (**(code **)(param_1 + 0x18))(*(int *)(param_2 + 0x11c));
+  if (*(int *)(state + 0x11c) != 0) {
+    (**(code **)(ctx + 0x18))(*(int *)(state + 0x11c));
   }
-  if (*(int *)(((unsigned char *)0x000013d8) + param_2) != 0) {
-    (**(code **)(param_1 + 0x18))(*(int *)(((unsigned char *)0x000013d8) + param_2));
+  if (*(int *)(((unsigned char *)0x000013d8) + state) != 0) {
+    (**(code **)(ctx + 0x18))(*(int *)(((unsigned char *)0x000013d8) + state));
   }
-  if (*(int *)(param_2 + 0x124) != 0) {
-    (**(code **)(param_1 + 0x18))(*(int *)(param_2 + 0x124));
+  if (*(int *)(state + 0x124) != 0) {
+    (**(code **)(ctx + 0x18))(*(int *)(state + 0x124));
   }
-  if (iVar1 == *(int *)(((unsigned char *)0x0000148c) + param_1)) {
-    *(undefined4 *)(((unsigned char *)0x0000148c) + param_1) = 0;
+  if (constantsBase == *(int *)(((unsigned char *)0x0000148c) + ctx)) {
+    *(undefined4 *)(((unsigned char *)0x0000148c) + ctx) = 0;
   }
                     
                     
-  (**(code **)(param_1 + 0x18))(param_2);
+  (**(code **)(ctx + 0x18))(state);
   return;
 }
 
@@ -250,66 +250,66 @@ int vpStateCacheCreate(ctx, shaderTable, firstSlot)
 }
 
 /* vpStateCacheFreeAll @ 0x772f4 (300 bytes) */
-int vpStateCacheFreeAll(param_1, param_2, param_3)
-  int param_1;
-  int *param_2;
-  int param_3;
+int vpStateCacheFreeAll(ctx, cacheTablePtr, freeAll)
+  int ctx;
+  int *cacheTablePtr;
+  int freeAll;
 {
   int loopCounter;
-  int *piVar1;
-  bool bVar2;
-  uint uVar3;
-  int *piVar4;
-  int iVar5;
-  int iVar6;
-  uint uVar7;
+  int *slotPtr;
+  bool moreSlots;
+  uint endIndex;
+  int *slotCursor;
+  int cacheTable;
+  int variant;
+  uint firstIndex;
   int loopIndex;
-  int iVar9;
-  int *piVar10;
+  int byteOffset;
+  int *bucket;
   
-  iVar5 = *param_2;
-  if (iVar5 != 0) {
-    if (param_3 == 0) {
-      uVar7 = *(uint *)(((unsigned char *)0x0000118c) + param_1);
-      uVar3 = uVar7 + 1;
+  cacheTable = *cacheTablePtr;
+  if (cacheTable != 0) {
+    if (freeAll == 0) {
+      firstIndex = *(uint *)(((unsigned char *)0x0000118c) + ctx);
+      endIndex = firstIndex + 1;
     }
     else {
-      uVar7 = 0;
-      uVar3 = *(uint *)(*(int *)(((unsigned char *)0x0000116c) + param_1) + 0x10);
+      firstIndex = 0;
+      endIndex = *(uint *)(*(int *)(((unsigned char *)0x0000116c) + ctx) + 0x10);
     }
-    if (uVar7 < uVar3) {
-      iVar9 = uVar7 << 2;
+    if (firstIndex < endIndex) {
+      byteOffset = firstIndex << 2;
       loopIndex = 0;
       while( true ) {
-        piVar10 = *(int **)(iVar5 + iVar9);
-        if (piVar10 != (int *)0x0) {
-          if (*(char *)(*piVar10 + 0x134) == '\0') {
-            ((int (*)())vpStateFree)(param_1,*piVar10);
-            *piVar10 = 0;
+        bucket = *(int **)(cacheTable + byteOffset);
+        if (bucket != (int *)0x0) {
+          if (*(char *)(*bucket + 0x134) == '\0') {
+            ((int (*)())vpStateFree)(ctx,*bucket);
+            *bucket = 0;
           }
-          if (param_3 != 0) {
+          if (freeAll != 0) {
             loopCounter = 0;
-            piVar4 = piVar10;
+            slotCursor = bucket;
             do {
-              piVar1 = piVar4 + 1;
-              piVar4 = piVar4 + 1;
-              iVar6 = *piVar1;
-              while (iVar6 != 0) {
-                *piVar4 = *(int *)(iVar6 + 0x138);
-                ((int (*)())vpStateFree)(param_1,iVar6);
-                iVar6 = *piVar4;
+              slotPtr = slotCursor + 1;
+              slotCursor = slotCursor + 1;
+              variant = *slotPtr;
+              while (variant != 0) {
+                *slotCursor = *(int *)(variant + 0x138);
+                ((int (*)())vpStateFree)(ctx,variant);
+                variant = *slotCursor;
               }
-              bVar2 = loopCounter != 0x1f;
+              moreSlots = loopCounter != 0x1f;
               loopCounter = loopCounter + 1;
-            } while (bVar2);
-            (**(code **)(param_1 + 0x18))(piVar10);
-            *(undefined4 *)(*param_2 + iVar9) = 0;
+            } while (moreSlots);
+            (**(code **)(ctx + 0x18))(bucket);
+            *(undefined4 *)(*cacheTablePtr + byteOffset) = 0;
           }
         }
         loopIndex = loopIndex + 1;
-        iVar9 = iVar9 + 4;
-        if (loopIndex == uVar3 - uVar7) break;
-        iVar5 = *param_2;
+        byteOffset = byteOffset + 4;
+        if (loopIndex == endIndex - firstIndex) break;
+        cacheTable = *cacheTablePtr;
       }
     }
   }
@@ -370,47 +370,48 @@ int FUN_000774c0(param_1, param_2)
 }
 
 /* FUN_00077560 @ 0x77560 (228 bytes) */
-int FUN_00077560(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  int param_1;
-  int param_2;
-  uint param_3;
-  undefined4 param_4;
-  undefined4 param_5;
+int FUN_00077560(alloc, recordIndex, depth, unusedArg4, unusedArg5, param_6, param_7)
+  int alloc;
+  int recordIndex;
+  uint depth;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
   undefined4 param_6;
   undefined4 param_7;
 {
-  bool bVar1;
-  int iVar2;
-  int iVar3;
-  uint uVar4;
-  uint uVar5;
-  int *piVar6;
-  undefined4 *puVar7;
+  int callerSlotBase;
+  bool moreSlots;
+  int slotBase;
+  int liveCount;
+  uint sourceMaskBit;
+  uint sourceSlot;
+  int *sourceListHead;
+  undefined4 *depNode;
   
-  iVar2 = param_2 * 4 + param_1;
-  if (*(uint *)(iVar2 + 0x10454) < param_3) {
-    *(uint *)(iVar2 + 0x10454) = param_3;
+  slotBase = recordIndex * 4 + alloc;
+  if (*(uint *)(slotBase + 0x10454) < depth) {
+    *(uint *)(slotBase + 0x10454) = depth;
   }
-  if ((*(uint *)(iVar2 + 0x3348c) & 0x10000) == 0) {
-    iVar3 = *(int *)(param_1 + 0x26870);
-    *(uint *)(iVar2 + 0x3348c) = *(uint *)(iVar2 + 0x3348c) | 0x10000;
-    uVar5 = 0;
-    piVar6 = (int *)(param_2 * 0xc + param_1 + 0x450);
-    *(int *)(param_1 + 0x26870) = iVar3 + 1;
-    *(int *)(0x00024870 + iVar3 * 4 + param_1) = param_2;
-    iVar3 = iVar2;
+  if ((*(uint *)(slotBase + 0x3348c) & 0x10000) == 0) {
+    liveCount = *(int *)(alloc + 0x26870);
+    *(uint *)(slotBase + 0x3348c) = *(uint *)(slotBase + 0x3348c) | 0x10000;
+    sourceSlot = 0;
+    sourceListHead = (int *)(recordIndex * 0xc + alloc + 0x450);
+    *(int *)(alloc + 0x26870) = liveCount + 1;
+    *(int *)(0x00024870 + liveCount * 4 + alloc) = recordIndex;
+    callerSlotBase = slotBase;
     do {
-      uVar4 = 1 << (uVar5 & 0x3f) & *(uint *)(iVar2 + 0x6450);
-      if (uVar4 != 0) {
-        for (puVar7 = (undefined4 *)*piVar6; puVar7 != (undefined4 *)0x0;
-            puVar7 = (undefined4 *)puVar7[4]) {
-          ((int (*)())FUN_00077560)(param_1,*puVar7,param_3 + 1,param_4,param_5,iVar3,uVar4);
+      sourceMaskBit = 1 << (sourceSlot & 0x3f) & *(uint *)(slotBase + 0x6450);
+      if (sourceMaskBit != 0) {
+        for (depNode = (undefined4 *)*sourceListHead; depNode != (undefined4 *)0x0;
+            depNode = (undefined4 *)depNode[4]) {
+          ((int (*)())FUN_00077560)(alloc,*depNode,depth + 1,unusedArg4,unusedArg5,callerSlotBase,sourceMaskBit);
         }
       }
-      bVar1 = uVar5 != 2;
-      piVar6 = piVar6 + 1;
-      uVar5 = uVar5 + 1;
-    } while (bVar1);
+      moreSlots = sourceSlot != 2;
+      sourceListHead = sourceListHead + 1;
+      sourceSlot = sourceSlot + 1;
+    } while (moreSlots);
   }
   return;
 }
@@ -446,50 +447,50 @@ int depListRemove(listHead, node)
 }
 
 /* FUN_000776b0 @ 0x776b0 (176 bytes) */
-int FUN_000776b0(param_1)
-  int param_1;
+int FUN_000776b0(alloc)
+  int alloc;
 {
-  bool bVar1;
-  undefined4 *puVar2;
-  int iVar3;
+  bool moreWords;
+  undefined4 *clearPtr;
+  int remaining;
   
-  *(undefined4 *)(param_1 + 0x30c20) = 0;
-  if ((**(uint **)(param_1 + 0x34) & 0x40) == 0) {
-    *(undefined4 *)(param_1 + 0x30c24) = 0;
-    puVar2 = (undefined4 *)(param_1 + 0x30c28);
-    iVar3 = 0;
+  *(undefined4 *)(alloc + 0x30c20) = 0;
+  if ((**(uint **)(alloc + 0x34) & 0x40) == 0) {
+    *(undefined4 *)(alloc + 0x30c24) = 0;
+    clearPtr = (undefined4 *)(alloc + 0x30c28);
+    remaining = 0;
     do {
-      bVar1 = iVar3 != 1;
-      *puVar2 = 0;
-      iVar3 = iVar3 + 1;
-      puVar2 = puVar2 + 1;
-    } while (bVar1);
-    puVar2 = (undefined4 *)(param_1 + 0x30c30);
-    iVar3 = 6;
+      moreWords = remaining != 1;
+      *clearPtr = 0;
+      remaining = remaining + 1;
+      clearPtr = clearPtr + 1;
+    } while (moreWords);
+    clearPtr = (undefined4 *)(alloc + 0x30c30);
+    remaining = 6;
     do {
-      *puVar2 = 0;
-      puVar2 = puVar2 + 1;
-      iVar3 = iVar3 + -1;
-    } while (iVar3 != 0);
-    *(undefined4 *)(((unsigned char *)0x00030c4c) + param_1) = 0;
-    *(undefined4 *)(((unsigned char *)0x00030c48) + param_1) = 0;
+      *clearPtr = 0;
+      clearPtr = clearPtr + 1;
+      remaining = remaining + -1;
+    } while (remaining != 0);
+    *(undefined4 *)(((unsigned char *)0x00030c4c) + alloc) = 0;
+    *(undefined4 *)(((unsigned char *)0x00030c48) + alloc) = 0;
   }
   else {
-    puVar2 = (undefined4 *)(param_1 + 0x31450);
-    iVar3 = 0xf;
+    clearPtr = (undefined4 *)(alloc + 0x31450);
+    remaining = 0xf;
     do {
-      *puVar2 = 0;
-      puVar2 = puVar2 + 1;
-      iVar3 = iVar3 + -1;
-    } while (iVar3 != 0);
+      *clearPtr = 0;
+      clearPtr = clearPtr + 1;
+      remaining = remaining + -1;
+    } while (remaining != 0);
   }
-  puVar2 = (undefined4 *)(param_1 + 0x30ba0);
-  iVar3 = 0x20;
+  clearPtr = (undefined4 *)(alloc + 0x30ba0);
+  remaining = 0x20;
   do {
-    *puVar2 = 0;
-    puVar2 = puVar2 + 1;
-    iVar3 = iVar3 + -1;
-  } while (iVar3 != 0);
+    *clearPtr = 0;
+    clearPtr = clearPtr + 1;
+    remaining = remaining + -1;
+  } while (remaining != 0);
   return;
 }
 
@@ -1403,41 +1404,43 @@ int regBindingClear(ctx, reg, compIndex)
 }
 
 /* chunkArenaAlloc @ 0x78e00 (228 bytes) */
-int chunkArenaAlloc(param_1, size)
-  undefined4 *param_1;
+int chunkArenaAlloc(arena, size)
+  undefined4 *arena;
   uint size;
 {
-  undefined4 uVar1;
-  uint uVar2;
-  uint uVar3;
-  int iVar4;
+  int cursor;
+  uint chunkCount;
+  undefined4 newChunk;
+  uint chunkIndex;
+  uint bytesLeft;
+  int chunkCountOld;
   
-  uVar3 = param_1[0x105];
-  if (uVar3 < size) {
-    uVar3 = param_1[0x102];
-    uVar2 = param_1[0x104];
-    if (uVar3 <= uVar2) {
-      if (0xfe < uVar3) {
+  bytesLeft = arena[0x105];
+  if (bytesLeft < size) {
+    chunkCount = arena[0x102];
+    chunkIndex = arena[0x104];
+    if (chunkCount <= chunkIndex) {
+      if (0xfe < chunkCount) {
         return 0;
       }
-      uVar1 = (*(code *)*param_1)(0x1000);
-      iVar4 = param_1[0x102];
-      param_1[uVar3 + 2] = uVar1;
-      if (param_1[iVar4 + 2] == 0) {
+      newChunk = (*(code *)*arena)(0x1000);
+      chunkCountOld = arena[0x102];
+      arena[chunkCount + 2] = newChunk;
+      if (arena[chunkCountOld + 2] == 0) {
         return 0;
       }
-      uVar2 = param_1[0x104];
-      param_1[0x102] = iVar4 + 1;
+      chunkIndex = arena[0x104];
+      arena[0x102] = chunkCountOld + 1;
     }
-    uVar3 = 0x1000;
-    param_1[0x105] = 0x1000;
-    param_1[0x104] = uVar2 + 1;
-    param_1[0x103] = param_1[uVar2 + 2];
+    bytesLeft = 0x1000;
+    arena[0x105] = 0x1000;
+    arena[0x104] = chunkIndex + 1;
+    arena[0x103] = arena[chunkIndex + 2];
   }
-  iVar4 = param_1[0x103];
-  param_1[0x105] = uVar3 - size;
-  param_1[0x103] = size + iVar4;
-  return (size + iVar4) - size;
+  cursor = arena[0x103];
+  arena[0x105] = bytesLeft - size;
+  arena[0x103] = size + cursor;
+  return (size + cursor) - size;
 }
 
 /* recordSourceFileIs2 @ 0x78ef0 (24 bytes) */
@@ -1914,50 +1917,51 @@ int recordSetWriteMask(param_1, param_2)
 }
 
 /* depListAddEdge @ 0x79910 (248 bytes) */
-int depListAddEdge(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
-  int *param_2;
-  int param_3;
-  uint param_4;
-  int param_5;
-  int param_6;
-  undefined4 param_7;
+int depListAddEdge(unusedArg1, listHead, recordIndex, componentMask, nodeField2, nodeField3, arena)
+  undefined4 unusedArg1;
+  int *listHead;
+  int recordIndex;
+  uint componentMask;
+  int nodeField2;
+  int nodeField3;
+  undefined4 arena;
 {
-  int iVar1;
-  int *piVar2;
-  int *piVar3;
+  int *newNode;
+  int nextNode;
+  int *node;
+  int *lastNode;
   
-  piVar2 = (int *)*param_2;
-  if ((int *)*param_2 == (int *)0x0) {
-    piVar2 = (int *)((int (*)())chunkArenaAlloc)(param_7,0x14);
-    *param_2 = (int)piVar2;
-    if (piVar2 != (int *)0x0) {
-      piVar2[3] = param_6;
-      *piVar2 = param_3;
-      piVar2[1] = param_4;
-      piVar2[4] = 0;
-      piVar2[2] = param_5;
+  node = (int *)*listHead;
+  if ((int *)*listHead == (int *)0x0) {
+    newNode = (int *)((int (*)())chunkArenaAlloc)(arena,0x14);
+    *listHead = (int)newNode;
+    if (newNode != (int *)0x0) {
+      newNode[3] = nodeField3;
+      *newNode = recordIndex;
+      newNode[1] = componentMask;
+      newNode[4] = 0;
+      newNode[2] = nodeField2;
       return 0;
     }
   }
   else {
     do {
-      piVar3 = piVar2;
-      if (param_3 == *piVar3) {
-        piVar3[1] = param_4 | piVar3[1];
+      lastNode = node;
+      if (recordIndex == *lastNode) {
+        lastNode[1] = componentMask | lastNode[1];
         return 0;
       }
-      piVar2 = (int *)piVar3[4];
-    } while ((int *)piVar3[4] != (int *)0x0);
-    piVar2 = (int *)((int (*)())chunkArenaAlloc)(param_7,0x14);
-    piVar3[4] = (int)piVar2;
-    if (piVar2 != (int *)0x0) {
-      *piVar2 = param_3;
-      piVar2[1] = param_4;
-      piVar2[4] = 0;
-      iVar1 = piVar3[4];
-      *(int *)(iVar1 + 0xc) = param_6;
-      *(int *)(iVar1 + 8) = param_5;
+      node = (int *)lastNode[4];
+    } while ((int *)lastNode[4] != (int *)0x0);
+    newNode = (int *)((int (*)())chunkArenaAlloc)(arena,0x14);
+    lastNode[4] = (int)newNode;
+    if (newNode != (int *)0x0) {
+      *newNode = recordIndex;
+      newNode[1] = componentMask;
+      newNode[4] = 0;
+      nextNode = lastNode[4];
+      *(int *)(nextNode + 0xc) = nodeField3;
+      *(int *)(nextNode + 8) = nodeField2;
       return 0;
     }
   }
