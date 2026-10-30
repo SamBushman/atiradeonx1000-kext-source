@@ -2673,6 +2673,16 @@ int FUN_0007aae0(ctx, registerCount, readyCycle, keepFlag, chosenReg, program, p
   undefined4 param_7;
   undefined4 laterPass;
 {
+  char *chosenAffinity;
+  int otherIndex;
+  int score;
+  uint *chosenRecordPtr;
+  int affinityBase;
+  int unitAllowed;
+  int bestScore;
+  int fitOk;
+  int assignOk;
+  int pairState;
   uint sourceIndexB;
   int loopCounterB;
   int loopCounter;
@@ -2681,12 +2691,12 @@ int FUN_0007aae0(ctx, registerCount, readyCycle, keepFlag, chosenReg, program, p
   uint loopIndex;
   uint loopIndex2;
   bool allOwned;
-  byte bVar2;
-  int iVar3;
-  int iVar4;
-  uint *puVar5;
+  byte chosenUnitByte;
+  int remainingRegisters;
+  int registerCountArg;
+  uint *candidateRecord;
   undefined4 *userHeadCursor;
-  int iVar7;
+  int candidateFits;
   int iVar8;
   undefined4 a2;
   int a4;
@@ -2695,7 +2705,7 @@ int FUN_0007aae0(ctx, registerCount, readyCycle, keepFlag, chosenReg, program, p
   int candidateSlot;
   undefined4 chosenRegValue;
   int otherAllowed;
-  char *pcVar13;
+  char *slotCursor;
   uint sourceMask;
   uint chosenUnit;
   int candidateIndex;
@@ -2712,7 +2722,7 @@ int FUN_0007aae0(ctx, registerCount, readyCycle, keepFlag, chosenReg, program, p
   int chosenRecord;
   int haveChoice;
   uint chosenKeepFlag;
-  int local_5c;
+  int queueBase;
   undefined4 *local_58;
   
   *keepFlag = 0;
@@ -2723,38 +2733,38 @@ int FUN_0007aae0(ctx, registerCount, readyCycle, keepFlag, chosenReg, program, p
   }
   else {
     loopCounterB = 0;
-    pcVar13 = (char *)(ctx + 0x3087c);
-    iVar3 = registerCount;
+    slotCursor = (char *)(ctx + 0x3087c);
+    remainingRegisters = registerCount;
     do {
-      if (*pcVar13 == '\0') {
+      if (*slotCursor == '\0') {
         loopCounterB = loopCounterB + 1;
       }
-      pcVar13 = pcVar13 + 1;
-      iVar3 = iVar3 + -1;
-    } while (iVar3 != 0);
+      slotCursor = slotCursor + 1;
+      remainingRegisters = remainingRegisters + -1;
+    } while (remainingRegisters != 0);
   }
-  iVar3 = *(int *)(ctx + 0x35490);
+  pairState = *(int *)(ctx + 0x35490);
   uStack00000020 = readyCycle;
   puStack00000024 = keepFlag;
   puStack00000028 = chosenReg;
-  if (iVar3 == 2) {
+  if (pairState == 2) {
     chosenRecord = *(int *)(ctx + 0x35494);
     *(undefined4 *)(ctx + 0x35490) = 3;
-    iVar3 = ((int (*)())recordAssignDestinationRegister)(ctx,program,chosenRecord,keepFlag,chosenReg);
-    if (iVar3 != 0) {
+    assignOk = ((int (*)())recordAssignDestinationRegister)(ctx,program,chosenRecord,keepFlag,chosenReg);
+    if (assignOk != 0) {
       ((int (*)())FUN_00078950)(ctx);
       return chosenRecord;
     }
   }
-  else if (iVar3 == 3) {
+  else if (pairState == 3) {
     *(undefined4 *)(ctx + 0x35490) = 0;
   }
-  else if (iVar3 == 1) {
+  else if (pairState == 1) {
     chosenRecord = *(int *)(ctx + 0x35498);
     keepFlagTmp[0] = 0;
-    iVar3 = ((int (*)())FUN_0007a4a0)(ctx,program,laterPass,registerCount,chosenRecord,keepFlagTmp,chosenRegTmp);
+    fitOk = ((int (*)())FUN_0007a4a0)(ctx,program,laterPass,registerCount,chosenRecord,keepFlagTmp,chosenRegTmp);
     *(undefined4 *)(ctx + 0x35490) = 3;
-    if (iVar3 != 0) {
+    if (fitOk != 0) {
       *puStack00000024 = keepFlagTmp[0];
       *puStack00000028 = chosenRegTmp[0];
       ((int (*)())FUN_00078950)(ctx);
@@ -2763,9 +2773,9 @@ int FUN_0007aae0(ctx, registerCount, readyCycle, keepFlag, chosenReg, program, p
   }
   chosenRecord = 0;
   if (*(int *)(ctx + 0x28874) != 0) {
-    local_5c = ctx + 0x20000;
+    queueBase = ctx + 0x20000;
     local_58 = &candidateRegValue;
-    iVar3 = -1;
+    bestScore = -1;
     queueCursor = (int *)(ctx + 0x26874);
     chosenKeepFlag = 0;
     haveChoice = 0;
@@ -2781,31 +2791,31 @@ int FUN_0007aae0(ctx, registerCount, readyCycle, keepFlag, chosenReg, program, p
       } while (moreSources);
       a5 = &candidateKeepFlag;
       a2 = laterPass;
-      iVar4 = registerCount;
-      iVar7 = ((int (*)())FUN_0007a4a0)(ctx,program,laterPass,registerCount,a4,a5,local_58);
-      if (iVar7 != 0) {
-        iVar7 = 100;
+      registerCountArg = registerCount;
+      candidateFits = ((int (*)())FUN_0007a4a0)(ctx,program,laterPass,registerCount,a4,a5,local_58);
+      if (candidateFits != 0) {
+        score = 100;
         if (uStack00000020 <= (uint)queueCursor[-0x1001]) {
-          iVar7 = 0;
+          score = 0;
         }
         candidateIndex = *queueCursor;
         candidateSlot = candidateIndex * 4 + ctx;
-        iVar7 = *(int *)(candidateSlot + 0x10454) * 2 + iVar7;
+        score = *(int *)(candidateSlot + 0x10454) * 2 + score;
         if (*(int *)(candidateSlot + 0x8450) != 0) {
-          iVar7 = iVar7 + 0x20;
+          score = score + 0x20;
         }
         sourceMask = *(uint *)(candidateSlot + 0x6450);
         loopCounter = 0;
         sourceIndexB = 0;
-        puVar5 = (uint *)(program + candidateIndex * 0x10);
+        candidateRecord = (uint *)(program + candidateIndex * 0x10);
         do {
-          puVar5 = puVar5 + 1;
-          if (((sourceMask & 1 << (sourceIndexB & 0x3f)) != 0) && (iVar8 = ((int (*)())recordSourceFileIs0)(puVar5), iVar8 != 0))
+          candidateRecord = candidateRecord + 1;
+          if (((sourceMask & 1 << (sourceIndexB & 0x3f)) != 0) && (iVar8 = ((int (*)())recordSourceFileIs0)(candidateRecord), iVar8 != 0))
           {
             allOwned = true;
             iVar8 = 4;
             userHeadCursor = (undefined4 *)
-                     (((char)(DAT_001aa760)[*puVar5 & 0xf] * 0x100 + (*puVar5 >> 5 & 0xff)) * 0x10
+                     (((char)(DAT_001aa760)[*candidateRecord & 0xf] * 0x100 + (*candidateRecord >> 5 & 0xff)) * 0x10
                       + ctx + 0x2a87c);
             do {
               userNode = (int *)*userHeadCursor;
@@ -2825,12 +2835,12 @@ int FUN_0007aae0(ctx, registerCount, readyCycle, keepFlag, chosenReg, program, p
           moreSources = sourceIndexB != 2;
           sourceIndexB = sourceIndexB + 1;
         } while (moreSources);
-        iVar7 = loopCounter * (registerCount - loopCounterB) * 2 + iVar7;
-        if ((iVar3 < iVar7) || (loopIndex == 0)) {
+        score = loopCounter * (registerCount - loopCounterB) * 2 + score;
+        if ((bestScore < score) || (loopIndex == 0)) {
           chosenKeepFlag = (uint)candidateKeepFlag;
           haveChoice = 1;
           chosenRegValue = candidateRegValue;
-          iVar3 = iVar7;
+          bestScore = score;
           chosenRecord = candidateIndex;
         }
       }
@@ -2840,48 +2850,48 @@ int FUN_0007aae0(ctx, registerCount, readyCycle, keepFlag, chosenReg, program, p
     if (haveChoice != 0) {
       *puStack00000024 = (char)chosenKeepFlag;
       *puStack00000028 = chosenRegValue;
-      puVar5 = (uint *)(program + chosenRecord * 0x10);
-      bVar2 = (byte)*puVar5 >> 6;
-      chosenUnit = bVar2 & 1;
-      iVar3 = (*(code *)(PTR_FUN_001e9150)[chosenUnit])
-                        (ctx,chosenRecord,a2,iVar4,a4,a5,&PTR_FUN_001e9150);
-      if (iVar3 == 0) {
+      chosenRecordPtr = (uint *)(program + chosenRecord * 0x10);
+      chosenUnitByte = (byte)*chosenRecordPtr >> 6;
+      chosenUnit = chosenUnitByte & 1;
+      unitAllowed = (*(code *)(PTR_FUN_001e9150)[chosenUnit])
+                        (ctx,chosenRecord,a2,registerCountArg,a4,a5,&PTR_FUN_001e9150);
+      if (unitAllowed == 0) {
         return chosenRecord;
       }
       if (*(int *)(ctx + 0x28874) == 0) {
         return chosenRecord;
       }
-      iVar3 = ctx + 0x3148c;
+      affinityBase = ctx + 0x3148c;
       loopIndex2 = 0;
-      queueCursor = (int *)(local_5c + 0x6874);
-      pcVar13 = (char *)(iVar3 + chosenRecord * 4);
+      queueCursor = (int *)(queueBase + 0x6874);
+      chosenAffinity = (char *)(affinityBase + chosenRecord * 4);
       do {
-        iVar7 = *queueCursor;
-        otherRecord = (uint *)(program + iVar7 * 0x10);
+        otherIndex = *queueCursor;
+        otherRecord = (uint *)(program + otherIndex * 0x10);
         otherUnit = (byte)((byte)*otherRecord >> 6) & 1;
         otherAllowed = (*(code *)(PTR_FUN_001e9150)[otherUnit])
-                           (ctx,iVar7,a2,iVar4,a4,a5,&PTR_FUN_001e9150);
+                           (ctx,otherIndex,a2,registerCountArg,a4,a5,&PTR_FUN_001e9150);
         if ((otherAllowed != 0) && (chosenUnit != otherUnit)) {
-          otherAllowed = iVar3 + iVar7 * 4;
-          if ((*puVar5 & 0x40) == 0) {
-            otherRecord = puVar5;
+          otherAllowed = affinityBase + otherIndex * 4;
+          if ((*chosenRecordPtr & 0x40) == 0) {
+            otherRecord = chosenRecordPtr;
           }
-          if (((((int)*pcVar13 + (int)*(char *)(iVar3 + iVar7 * 4) < 3) &&
-               ((int)pcVar13[1] + (int)*(char *)(otherAllowed + 1) < 2)) &&
-              ((int)pcVar13[2] + (int)*(char *)(otherAllowed + 2) < 2)) &&
-             (((int)pcVar13[3] + (int)*(char *)(otherAllowed + 3) < 2 && ((*otherRecord & 0xf00) != 0x400))))
+          if (((((int)*chosenAffinity + (int)*(char *)(affinityBase + otherIndex * 4) < 3) &&
+               ((int)chosenAffinity[1] + (int)*(char *)(otherAllowed + 1) < 2)) &&
+              ((int)chosenAffinity[2] + (int)*(char *)(otherAllowed + 2) < 2)) &&
+             (((int)chosenAffinity[3] + (int)*(char *)(otherAllowed + 3) < 2 && ((*otherRecord & 0xf00) != 0x400))))
           {
-            if ((bVar2 & 1) == 0) {
-              *(int *)(ctx + 0x35494) = iVar7;
+            if ((chosenUnitByte & 1) == 0) {
+              *(int *)(ctx + 0x35494) = otherIndex;
               *(int *)(ctx + 0x35498) = chosenRecord;
             }
             else {
-              *(int *)(ctx + 0x35498) = iVar7;
+              *(int *)(ctx + 0x35498) = otherIndex;
               *(int *)(ctx + 0x35494) = chosenRecord;
             }
             if (*(int *)(ctx + 0x35494) == chosenRecord) {
-              iVar3 = ((int (*)())recordAssignDestinationRegister)(ctx,program,chosenRecord,keepFlagTmp,chosenRegTmp);
-              if (iVar3 != 0) {
+              assignOk = ((int (*)())recordAssignDestinationRegister)(ctx,program,chosenRecord,keepFlagTmp,chosenRegTmp);
+              if (assignOk != 0) {
                 *(undefined4 *)(ctx + 0x35490) = 1;
                 *puStack00000024 = keepFlagTmp[0];
                 *puStack00000028 = chosenRegTmp[0];

@@ -3939,22 +3939,31 @@ int FUN_00087e70()
 }
 
 /* FUN_00087e80 @ 0x87e80 (764 bytes) */
-int FUN_00087e80(param_1, fpRecord, workArea, keyWords)
-  undefined4 *param_1;
+int FUN_00087e80(ctx, fpRecord, workArea, keyWords)
+  undefined4 *ctx;
   int fpRecord;
   int workArea;
   undefined4 *keyWords;
 {
+  uint bits;
+  undefined4 shaderField7c;
+  undefined4 statWord;
+  undefined4 keyWord1;
+  int buildStatus;
+  int bitCount;
+  int fillPtr;
+  int partCountA;
+  int partCountB;
   int remaining;
-  bool bVar1;
-  uint uVar2;
-  undefined4 uVar3;
-  int iVar4;
-  undefined4 uVar5;
-  int iVar6;
+  bool moreRounds;
+  uint flags;
+  undefined4 modeByte;
+  int texEnumValue;
+  undefined4 keyWord2;
+  int altMode;
   int loopCounter;
   int workAreaState;
-  int iVar9;
+  int shaderInfo;
   /* local_48/local_44/local_40/local_3c/local_38/local_34/local_30 are one contiguous 7-word array
    * (&local_48 passed to FUN_000b4400, which internally indexes it keyWords[0]..keyWords[6] - and that
    * value flows straight through into ilRewriteForTextureState as its own keyWords, where keyWords[1] seeds a loop
@@ -3974,9 +3983,9 @@ int FUN_00087e80(param_1, fpRecord, workArea, keyWords)
 #define local_30 local_48_arr[6]
 
   workAreaState = workArea + 0x124;
-  uVar3 = param_1[0x8f8];
+  modeByte = ctx[0x8f8];
   *(undefined4 *)(((unsigned char *)0x000037cc) + workArea) = 0;
-  ((unsigned char *)0x000037e8)[workArea] = (char)uVar3;
+  ((unsigned char *)0x000037e8)[workArea] = (char)modeByte;
   if (workArea == 0) {
     return 0;
   }
@@ -3986,61 +3995,61 @@ int FUN_00087e80(param_1, fpRecord, workArea, keyWords)
   local_30 = 0;
   local_40 = 0;
   local_3c = 0;
-  uVar3 = keyWords[1];
-  uVar5 = keyWords[2];
-  iVar6 = param_1[0x8f8];
+  keyWord1 = keyWords[1];
+  keyWord2 = keyWords[2];
+  altMode = ctx[0x8f8];
   *(undefined4 *)(workArea + 4) = *keyWords;
-  *(undefined4 *)(workArea + 8) = uVar3;
-  *(undefined4 *)(workArea + 0xc) = uVar5;
+  *(undefined4 *)(workArea + 8) = keyWord1;
+  *(undefined4 *)(workArea + 0xc) = keyWord2;
   local_48 = keyWords[2];
   local_44 = *keyWords;
   if (fpRecord != 0) {
     *(undefined4 *)(((unsigned char *)0x000011fc) + workArea) = 0;
-    iVar9 = *(int *)(fpRecord + 0x74);
-    iVar4 = FUN_000abb60(param_1);
-    if (iVar4 == 0x801) {
+    shaderInfo = *(int *)(fpRecord + 0x74);
+    texEnumValue = FUN_000abb60(ctx);
+    if (texEnumValue == 0x801) {
       local_3c = local_3c | 0xc;
     }
-    else if (iVar4 == 0x2601) {
+    else if (texEnumValue == 0x2601) {
       local_3c = local_3c | 4;
     }
-    else if (iVar4 == 0x800) {
+    else if (texEnumValue == 0x800) {
       local_3c = local_3c | 8;
     }
-    if (*(char *)(iVar9 + 5) != '\0') goto LAB_00088008;
+    if (*(char *)(shaderInfo + 5) != '\0') goto LAB_00088008;
   }
   else {
     local_3c = 2;
     _memset(((unsigned char *)0x00003100) + workArea,0,0x100);
     remaining = 0x10;
-    iVar4 = workAreaState;
+    fillPtr = workAreaState;
     do {
-      ((unsigned char *)0x00002fdc)[iVar4] = 1;
-      iVar4 = iVar4 + 1;
+      ((unsigned char *)0x00002fdc)[fillPtr] = 1;
+      fillPtr = fillPtr + 1;
       remaining = remaining + -1;
     } while (remaining != 0);
     *(undefined4 *)(((unsigned char *)0x000011fc) + workArea) = 0;
   }
-  iVar4 = param_1[0x917];
-  if (iVar4 != 0) {
+  bitCount = ctx[0x917];
+  if (bitCount != 0) {
     local_38 = 0;
     do {
       local_38 = local_38 << 1 | 1;
-      iVar4 = iVar4 + -1;
-    } while (iVar4 != 0);
+      bitCount = bitCount + -1;
+    } while (bitCount != 0);
     local_3c = local_3c | 0x400;
   }
 LAB_00088008:
-  if (iVar6 != 0) {
+  if (altMode != 0) {
     local_3c = local_3c | 0x100;
-    *(undefined4 *)(0x00001830 + workArea) = param_1[0x9db];
+    *(undefined4 *)(0x00001830 + workArea) = ctx[0x9db];
   }
-  uVar2 = local_3c | 0x80;
+  flags = local_3c | 0x80;
   if (*(char *)(workArea + 0x120) != '\0') {
-    uVar2 = local_3c | 0x280;
+    flags = local_3c | 0x280;
   }
-  local_3c = uVar2;
-  iVar4 = FUN_000b4400(param_1,workArea + 0x18a8,workArea + 0x1784,&local_48,workAreaState);
+  local_3c = flags;
+  buildStatus = FUN_000b4400(ctx,workArea + 0x18a8,workArea + 0x1784,&local_48,workAreaState);
 #undef local_48
 #undef local_44
 #undef local_40
@@ -4048,49 +4057,49 @@ LAB_00088008:
 #undef local_38
 #undef local_34
 #undef local_30
-  if (iVar4 == 1) {
+  if (buildStatus == 1) {
     return 0xfffffffe;
   }
   if (fpRecord != 0) {
-    if (iVar6 == 0) {
-      iVar6 = *(int *)(((unsigned char *)0x000037cc) + workArea);
-      iVar9 = *(int *)(((unsigned char *)0x000037d0) + workArea);
+    if (altMode == 0) {
+      partCountA = *(int *)(((unsigned char *)0x000037cc) + workArea);
+      partCountB = *(int *)(((unsigned char *)0x000037d0) + workArea);
     }
     else {
-      iVar6 = *(int *)(((unsigned char *)0x000037d8) + workArea);
-      iVar9 = *(int *)(((unsigned char *)0x000037dc) + workArea);
+      partCountA = *(int *)(((unsigned char *)0x000037d8) + workArea);
+      partCountB = *(int *)(((unsigned char *)0x000037dc) + workArea);
     }
-    if (iVar4 == 0) {
+    if (buildStatus == 0) {
       *(undefined1 *)(fpRecord + 0x6c) = 1;
     }
     else {
       *(undefined1 *)(fpRecord + 0x6c) = 0;
-      *param_1 = 1;
+      *ctx = 1;
     }
-    uVar3 = *(undefined4 *)(((unsigned char *)0x00003874) + workArea);
-    *(int *)(fpRecord + 0x54) = iVar6;
-    *(int *)(fpRecord + 0x58) = iVar9;
+    statWord = *(undefined4 *)(((unsigned char *)0x00003874) + workArea);
+    *(int *)(fpRecord + 0x54) = partCountA;
+    *(int *)(fpRecord + 0x58) = partCountB;
     loopCounter = 0;
     *(undefined4 *)(fpRecord + 100) = 0;
-    *(undefined4 *)(fpRecord + 0x5c) = uVar3;
+    *(undefined4 *)(fpRecord + 0x5c) = statWord;
     do {
-      for (uVar2 = *(uint *)(((unsigned char *)0x000010b8) + workAreaState); uVar2 != 0; uVar2 = uVar2 >> 1) {
-        if ((uVar2 & 1) != 0) {
+      for (bits = *(uint *)(((unsigned char *)0x000010b8) + workAreaState); bits != 0; bits = bits >> 1) {
+        if ((bits & 1) != 0) {
           *(int *)(fpRecord + 100) = *(int *)(fpRecord + 100) + 1;
         }
       }
-      bVar1 = loopCounter != 7;
+      moreRounds = loopCounter != 7;
       workAreaState = workAreaState + 4;
       loopCounter = loopCounter + 1;
-    } while (bVar1);
+    } while (moreRounds);
     *(int *)(fpRecord + 0x68) = *(int *)(((unsigned char *)0x00003870) + workArea) + 1;
-    uVar3 = *(undefined4 *)(*(int *)(fpRecord + 0x74) + 0x7c);
-    *(int *)(fpRecord + 0x50) = iVar6 + iVar9;
-    *(undefined4 *)(fpRecord + 0x60) = uVar3;
+    shaderField7c = *(undefined4 *)(*(int *)(fpRecord + 0x74) + 0x7c);
+    *(int *)(fpRecord + 0x50) = partCountA + partCountB;
+    *(undefined4 *)(fpRecord + 0x60) = shaderField7c;
     *(undefined *)(fpRecord + 2) = ((unsigned char *)0x000036d7)[workArea];
     *(undefined *)(fpRecord + 1) = ((unsigned char *)0x000036d6)[workArea];
   }
-  if (iVar4 == 0) {
+  if (buildStatus == 0) {
     return 0;
   }
   return 0xffffffff;
@@ -4276,102 +4285,106 @@ LAB_0008855c:
 int arbLexNumber(parser)
   int parser;
 {
-  byte bVar1;
+  double exponentScale;
+  double fracScale;
+  double intBias;
+  byte suffixChar;
+  byte curChar;
   bool bVar2;
-  double dVar3;
-  double dVar4;
-  int iVar5;
-  byte *pbVar6;
-  byte *pbVar7;
-  uint uVar8;
-  double dVar9;
-  double dVar10;
+  double ten;
+  double tenth;
+  int exponent;
+  byte *cursor;
+  byte *fracCursor;
+  uint expDigit;
+  double intBias2;
+  double value;
   
-  dVar3 = DOUBLE_001aa238;
-  dVar9 = DOUBLE_001aa1e0;
-  pbVar6 = *(byte **)(parser + 0xc);
-  bVar1 = *pbVar6;
-  dVar10 = DOUBLE_001aa228;
-  while ((bVar1 - 0x30 & 0xff) < 10) {
-    pbVar6 = pbVar6 + 1;
-    *(byte **)(parser + 0xc) = pbVar6;
-    dVar10 = dVar10 * dVar3 + ((double)CONCAT44(0x43300000,bVar1 - 0x30 ^ 0x80000000) - dVar9);
-    bVar1 = *pbVar6;
+  ten = DOUBLE_001aa238;
+  intBias2 = DOUBLE_001aa1e0;
+  cursor = *(byte **)(parser + 0xc);
+  curChar = *cursor;
+  value = DOUBLE_001aa228;
+  while ((curChar - 0x30 & 0xff) < 10) {
+    cursor = cursor + 1;
+    *(byte **)(parser + 0xc) = cursor;
+    value = value * ten + ((double)CONCAT44(0x43300000,curChar - 0x30 ^ 0x80000000) - intBias2);
+    curChar = *cursor;
   }
-  if ((bVar1 == 0x2e) && (pbVar7 = pbVar6 + 1, pbVar6[1] != 0x2e)) {
-    *(byte **)(parser + 0xc) = pbVar7;
-    dVar4 = DOUBLE_001aa220;
-    dVar3 = DOUBLE_001aa1e0;
-    bVar1 = pbVar6[1];
-    dVar9 = DOUBLE_001aa220;
-    while ((bVar1 - 0x30 & 0xff) < 10) {
-      pbVar7 = pbVar7 + 1;
-      *(byte **)(parser + 0xc) = pbVar7;
-      dVar10 = dVar9 * ((double)CONCAT44(0x43300000,bVar1 - 0x30 ^ 0x80000000) - dVar3) + dVar10;
-      dVar9 = dVar9 * dVar4;
-      bVar1 = *pbVar7;
+  if ((curChar == 0x2e) && (fracCursor = cursor + 1, cursor[1] != 0x2e)) {
+    *(byte **)(parser + 0xc) = fracCursor;
+    tenth = DOUBLE_001aa220;
+    intBias = DOUBLE_001aa1e0;
+    curChar = cursor[1];
+    fracScale = DOUBLE_001aa220;
+    while ((curChar - 0x30 & 0xff) < 10) {
+      fracCursor = fracCursor + 1;
+      *(byte **)(parser + 0xc) = fracCursor;
+      value = fracScale * ((double)CONCAT44(0x43300000,curChar - 0x30 ^ 0x80000000) - intBias) + value;
+      fracScale = fracScale * tenth;
+      curChar = *fracCursor;
     }
     bVar2 = false;
   }
   else {
     bVar2 = true;
   }
-  pbVar6 = *(byte **)(parser + 0xc);
-  if ((*pbVar6 != 0x45) && (*pbVar6 != 0x65)) goto LAB_0008886c;
-  *(byte **)(parser + 0xc) = pbVar6 + 1;
-  if (pbVar6[1] == 0x2d) {
+  cursor = *(byte **)(parser + 0xc);
+  if ((*cursor != 0x45) && (*cursor != 0x65)) goto LAB_0008886c;
+  *(byte **)(parser + 0xc) = cursor + 1;
+  if (cursor[1] == 0x2d) {
     bVar2 = true;
-    *(byte **)(parser + 0xc) = pbVar6 + 2;
+    *(byte **)(parser + 0xc) = cursor + 2;
   }
   else {
     bVar2 = false;
-    if (pbVar6[1] == 0x2b) {
-      *(byte **)(parser + 0xc) = pbVar6 + 2;
+    if (cursor[1] == 0x2b) {
+      *(byte **)(parser + 0xc) = cursor + 2;
     }
   }
-  pbVar6 = *(byte **)(parser + 0xc);
-  uVar8 = (uint)*pbVar6;
-  if ((uVar8 - 0x30 & 0xff) < 10) {
+  cursor = *(byte **)(parser + 0xc);
+  expDigit = (uint)*cursor;
+  if ((expDigit - 0x30 & 0xff) < 10) {
 LAB_000887c4:
-    iVar5 = 0;
+    exponent = 0;
     do {
-      iVar5 = iVar5 * 10 + uVar8 + -0x30;
-      if (1000 < iVar5) {
-        iVar5 = 1000;
+      exponent = exponent * 10 + expDigit + -0x30;
+      if (1000 < exponent) {
+        exponent = 1000;
       }
-      pbVar6 = pbVar6 + 1;
-      *(byte **)(parser + 0xc) = pbVar6;
-      uVar8 = (uint)*pbVar6;
-    } while ((uVar8 - 0x30 & 0xff) < 10);
-    dVar9 = DOUBLE_001aa200;
-    if (0 < iVar5) {
+      cursor = cursor + 1;
+      *(byte **)(parser + 0xc) = cursor;
+      expDigit = (uint)*cursor;
+    } while ((expDigit - 0x30 & 0xff) < 10);
+    exponentScale = DOUBLE_001aa200;
+    if (0 < exponent) {
       do {
-        dVar9 = dVar9 * DOUBLE_001aa238;
-        iVar5 = iVar5 + -1;
-      } while (iVar5 != 0);
-      pbVar6 = *(byte **)(parser + 0xc);
+        exponentScale = exponentScale * DOUBLE_001aa238;
+        exponent = exponent + -1;
+      } while (exponent != 0);
+      cursor = *(byte **)(parser + 0xc);
     }
   }
   else {
     ((int (*)())arbSetError)(parser,"Invalid scientific notation.");
-    pbVar6 = *(byte **)(parser + 0xc);
-    uVar8 = (uint)*pbVar6;
-    dVar9 = DOUBLE_001aa200;
-    if ((uVar8 - 0x30 & 0xff) < 10) goto LAB_000887c4;
+    cursor = *(byte **)(parser + 0xc);
+    expDigit = (uint)*cursor;
+    exponentScale = DOUBLE_001aa200;
+    if ((expDigit - 0x30 & 0xff) < 10) goto LAB_000887c4;
   }
   if (bVar2) {
-    dVar9 = DOUBLE_001aa200 / dVar9;
+    exponentScale = DOUBLE_001aa200 / exponentScale;
   }
-  dVar10 = dVar10 * dVar9;
+  value = value * exponentScale;
   bVar2 = false;
 LAB_0008886c:
-  bVar1 = *pbVar6;
-  if ((((byte)(bVar1 + 0xbf) < 0x1a) || ((byte)(bVar1 + 0x9f) < 0x1a)) || (bVar1 == 0x5f)) {
+  suffixChar = *cursor;
+  if ((((byte)(suffixChar + 0xbf) < 0x1a) || ((byte)(suffixChar + 0x9f) < 0x1a)) || (suffixChar == 0x5f)) {
     ((int (*)())arbSetError)(parser,"invalid suffix on number");
   }
-  *(double *)(parser + 0x1c) = dVar10;
-  *(int *)(parser + 0x18) = (int)GH_F2U((float)(dVar10));
-  if ((bVar2) && (dVar10 == (double)CONCAT44(0x43300000,(int)dVar10) - DOUBLE_001aa250)) {
+  *(double *)(parser + 0x1c) = value;
+  *(int *)(parser + 0x18) = (int)GH_F2U((float)(value));
+  if ((bVar2) && (value == (double)CONCAT44(0x43300000,(int)value) - DOUBLE_001aa250)) {
     *(undefined4 *)(parser + 0x14) = 0xf;
   }
   else {
