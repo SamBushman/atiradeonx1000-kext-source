@@ -1553,26 +1553,31 @@ int KhanVs__vslot29_swapIfArmsWhenNotFlattenable(this, program)
   undefined4 this;
   int program;
 {
-  int iVar1;
+  int canFlatten;
+  int firstSuccessor;
+  int successorCount;
+  int armInstCount;
+  int isIfHeader;
+  int nextLink;
   int block;
   int *ifHeader;
-  undefined1 auStack_28 [24];
+  undefined1 flattenInfo [24];
   
   ifHeader = *(int **)(program + 900);
-  iVar1 = ifHeader[2];
-  while (iVar1 != 0) {
-    iVar1 = (**(code **)(*ifHeader + 0x24))(ifHeader);
-    if (iVar1 != 0) {
+  nextLink = ifHeader[2];
+  while (nextLink != 0) {
+    isIfHeader = (**(code **)(*ifHeader + 0x24))(ifHeader);
+    if (isIfHeader != 0) {
       block = ifHeader[0x4d];
-      iVar1 = DList__count(block + 0x90);
-      if ((((iVar1 < 3) && (iVar1 = Block__successorCount(block), iVar1 == 1)) &&
-          (iVar1 = Block__getSuccessor(block,0), iVar1 == ifHeader[0x4f])) &&
-         (iVar1 = IfHeader__canFlatten(ifHeader,auStack_28), iVar1 == 0)) {
+      armInstCount = DList__count(block + 0x90);
+      if ((((armInstCount < 3) && (successorCount = Block__successorCount(block), successorCount == 1)) &&
+          (firstSuccessor = Block__getSuccessor(block,0), firstSuccessor == ifHeader[0x4f])) &&
+         (canFlatten = IfHeader__canFlatten(ifHeader,flattenInfo), canFlatten == 0)) {
         ifHeader = (int *)IfHeader__swapArms(program,ifHeader);
       }
     }
     ifHeader = (int *)ifHeader[2];
-    iVar1 = ifHeader[2];
+    nextLink = ifHeader[2];
   }
   return;
 }
