@@ -882,7 +882,7 @@ code_r0x00132828:
                           if (((nextRow != 0) &&
                               (nextRow = ((int (*)())InterferenceGraph__resolveNode)(graph,nextBlock,useCoalesced), nextRow != excludedRegs0))
                              && ((innerIndexOrScratch != nextRow ||
-                                 (compFlagResult = FUN_000f313c(walkInst,compCounter), compFlagResult != 0))))
+                                 (compFlagResult = IRInst__isLaneWritten(walkInst,compCounter), compFlagResult != 0))))
                           goto code_r0x00132970;
                           moreComponents = compCounter != 3;
                           compCounter = compCounter + 1;
@@ -1514,7 +1514,7 @@ LAB_00133bd0:
         pendingSrcDef = IRInst__getOperandSource(pendingInst,1);
         newCopyInst = (int *)RegAlloc__emitSpillReload(copyState,pendingInst,pendingSrcDef,pass + 0x464);
         srcRecordA = IRInst__getOperandRecord(pendingInst,1);
-        FUN_000f366c(&swizzleWord,*(undefined4 *)(srcRecordA + 0x10));
+        WriteMask__fromUsedComponents(&swizzleWord,*(undefined4 *)(srcRecordA + 0x10));
         newCopyInst[0x27] = swizzleWord;
         FUN_000f370c(&newSwizzleWord,swizzleWord);
         newSwizzle = newSwizzleWord;
@@ -4729,7 +4729,7 @@ int HwLimits__computeBlockLiveness(this, regCount, program, compiler)
   bitCount = regCount * 4;
   blockIndex = 1;
   *(uint *)(program + 0x30) = *(uint *)(program + 0x30) | 0x1000;
-  blockArray = FUN_000ec4f0(program);
+  blockArray = Program__getDominatorInfo(program);
   bitsetWordCount = bitCount + 0x1fU >> 5;
   bitsetHasWords = bitsetWordCount != 0;
   bitsetAllocBytes = bitsetWordCount * 4 + 0xc;

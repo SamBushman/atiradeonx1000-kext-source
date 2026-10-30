@@ -440,9 +440,9 @@ ea148	Block__ctor_ea148	r5	PASS-no	ea194 bl 0x1940a8
 ea148	Block__ctor_ea148	r6	PASS-no	ea194 bl 0x1940a8
 ea148	Block__ctor_ea148	r7	PASS-no	ea194 bl 0x1940a8
 ea148	Block__ctor_ea148	r8	PASS-no	ea194 bl 0x1940a8
-f1d7c	FUN_000f1d7c	r6	PASS-indirect	f1dd8 bl 0x193e18
-f1d7c	FUN_000f1d7c	r7	PASS-indirect	f1dd8 bl 0x193e18
-f1d7c	FUN_000f1d7c	r8	PASS-indirect	f1dd8 bl 0x193e18
+f1d7c	Program__propagateMovThroughUses	r6	PASS-indirect	f1dd8 bl 0x193e18
+f1d7c	Program__propagateMovThroughUses	r7	PASS-indirect	f1dd8 bl 0x193e18
+f1d7c	Program__propagateMovThroughUses	r8	PASS-indirect	f1dd8 bl 0x193e18
 f29f4	pass_assign_slots	r5	PASS-indirect	f2a10 bl 0x10ea30
 f29f4	pass_assign_slots	r6	PASS-indirect	f2a10 bl 0x10ea30
 f29f4	pass_assign_slots	r7	PASS-indirect	f2a10 bl 0x10ea30
@@ -454,9 +454,9 @@ f620	arbProgramIrToText	r7	PASS-no	f650 bl 0x1a3660	; symbol stub for: _malloc
 f620	arbProgramIrToText	r8	PASS-no	f650 bl 0x1a3660	; symbol stub for: _malloc
 f620	arbProgramIrToText	r10	PASS-no	f650 bl 0x1a3660	; symbol stub for: _malloc
 f8aa0	Program__applySourceTokenToOperand	r8	PASS-indirect	f8b7c bl 0x19e9fc
-f9140	FUN_000f9140	r6	PASS-indirect	f918c bctrl 
-f9140	FUN_000f9140	r7	PASS-indirect	f918c bctrl 
-f9140	FUN_000f9140	r8	PASS-indirect	f918c bctrl 
-fd5c8	FUN_000fd5c8	r6	PASS-indirect	fd640 bl 0x193e18
-fd5c8	FUN_000fd5c8	r7	PASS-indirect	fd640 bl 0x193e18
-fd5c8	FUN_000fd5c8	r8	PASS-indirect	fd640 bl 0x193e18
+f9140	Program__createInstForIlOpcode	r6	PASS-indirect	f918c bctrl 
+f9140	Program__createInstForIlOpcode	r7	PASS-indirect	f918c bctrl 
+f9140	Program__createInstForIlOpcode	r8	PASS-indirect	f918c bctrl 
+fd5c8	Program__translateILStream	r6	PASS-indirect	fd640 bl 0x193e18
+fd5c8	Program__translateILStream	r7	PASS-indirect	fd640 bl 0x193e18
+fd5c8	Program__translateILStream	r8	PASS-indirect	fd640 bl 0x193e18

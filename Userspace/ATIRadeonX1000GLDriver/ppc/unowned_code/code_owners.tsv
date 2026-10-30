@@ -48,8 +48,8 @@
 0xcec34	FUN_000cea6c
 0xcec48	FUN_000cea6c
 0xd9f34	ConstBank__addMappedEntry
-0xd9f78	FUN_000d9f3c
-0xda880	FUN_000da78c
+0xd9f78	CompileInput__lacksFlag0x200000
+0xda880	MiniFloat__decode
 0xe2084	Compiler__releaseChipAndPools
 0xe208c	Compiler__releaseChipAndPools
 0xe2884	Block__accept
@@ -61,7 +61,7 @@
 0xe29bc	IfFooterStatic__accept
 0xe29e0	IfFooterStatic__accept
 0xe7650	ILReader__nextInstruction
-0xec1e4	FUN_000ec1d0
+0xec1e4	Program__ensureVRegType13
 0x10451c	IRInst__replaceExtraData
 0x10dcfc	HwLimits__vslot10_failNotSupported
 0x10ddf4	KhanPs__vslot16_getConstant0xb5

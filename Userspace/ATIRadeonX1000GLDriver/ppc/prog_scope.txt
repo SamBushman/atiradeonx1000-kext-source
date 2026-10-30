@@ -17,4 +17,4 @@ pass_minreg_order program
 pass_remove_empty_graphs program
 pass_rewrite program
 pass_ssa_build program
-FUN_000f94dc program
+Program__emitInputMerge program

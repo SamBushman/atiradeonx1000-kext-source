@@ -144,7 +144,7 @@ int R520VMachineAssembler__vslot30_assembleBlockThenSlot40(this, node, block)
   
   (**(code **)(*this + 0x34))(this,block,*(undefined4 *)(node + 0xdc));
   UNRECOVERED_JUMPTABLE = *(code **)(*this + 0xa0);
-  nodeHandle = FUN_000e7d5c(*(undefined4 *)(node + 300));
+  nodeHandle = Block__getLoopFooterRegister(*(undefined4 *)(node + 300));
                     
                     
   (*UNRECOVERED_JUMPTABLE)(this,nodeHandle);
@@ -675,7 +675,7 @@ int R520VMachineAssembler__vslot24_assembleWithPredicateSet(this, node, block, c
   }
   (**(code **)(*this + 0x34))(this,block,*(undefined4 *)(node + 0xdc));
   UNRECOVERED_JUMPTABLE = *(code **)(*this + 0x9c);
-  nodeHandle = FUN_000e7d5c(node);
+  nodeHandle = Block__getLoopFooterRegister(node);
                     
                     
   (*UNRECOVERED_JUMPTABLE)(this,nodeHandle,*(undefined4 *)(node + 0x134));
@@ -1056,7 +1056,7 @@ int R520MachineAssembler__vslot5_beginProgram(this, programArg, allocArg, compil
   int registerLimit;
   
   *(undefined4 *)(this + 0xa4) = *(undefined4 *)(compiler + 0x30c);
-  recordBuffer = FUN_000e14e4(compiler,0x963c,allocArg);
+  recordBuffer = Compiler__setQueriedTableEntry4d4(compiler,0x963c,allocArg);
   *(undefined4 *)(this + 0xac) = recordBuffer;
   _memset(recordBuffer,0,0x963c);
   registerLimit = *(int *)(*(int *)(compiler + 0x30c) + 0x40);
@@ -1803,7 +1803,7 @@ int R520MachineAssembler__vslot24_assembleWithTarget(this, node, block)
     emittedNothing = false;
   }
   pcVar4 = *(code **)(*this + 0x9c);
-  uVar2 = FUN_000e7d5c(node);
+  uVar2 = Block__getLoopFooterRegister(node);
   (*pcVar4)(this,uVar2,*(undefined4 *)(node + 0x134));
   if (emittedNothing) {
     *(undefined1 *)(this[0x18] * 0x48 + this[0x2a] + -0x44) = 1;

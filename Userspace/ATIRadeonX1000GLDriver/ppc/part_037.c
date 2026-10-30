@@ -41,7 +41,7 @@ int Program__noSuccessorHasMultipleSuccessors(program)
     if (nextBlock == 0) {
       return 1;
     }
-    blockQuery79b8 = FUN_000e79b8(block);
+    blockQuery79b8 = Block__hasMultiplePredecessors(block);
     if (blockQuery79b8 != 0) {
       successorByteOffset = 0;
       for (loopIndex = 1; loopIndex <= *(uint *)(*(int *)(block + 0xd4) + 4); loopIndex = loopIndex + 1) {
@@ -1497,7 +1497,7 @@ int Program__eliminatePhiCopies(pass)
   undefined4 arena;
   int tempCount [7];
   
-  blockCursor = (undefined4 *)FUN_000ec4f0(pass);
+  blockCursor = (undefined4 *)Program__getDominatorInfo(pass);
   listCount = DList__count(pass + 0x37c);
   arena = *(undefined4 *)(*(int *)(pass + 8) + 0x378);
   allocation = (undefined4 *)Arena__alloc(arena,0x14);
@@ -2842,7 +2842,7 @@ int Program__runSsaPipeline(program)
   int remaining;
   
   Program__removeUnreachableBlocks(program);
-  FUN_000f88b4(program);
+  Program__computeDominators(program);
   ((int (*)())Program__insertPhiNodes)(program);
   ((int (*)())pass_ssa_build)(program);
   hoistInstructionsEnabled = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),0xe);
@@ -2850,7 +2850,7 @@ int Program__runSsaPipeline(program)
     ((int (*)())Program__computeHoistWeights)(program);
     ((int (*)())Program__hoistInstructions)(program);
   }
-  FUN_000ec8e4(program);
+  Program__freezeVRegs(program);
   table = *(int **)(program + 0x3b0);
   remaining = *table;
   if (remaining != 0) {
@@ -2863,7 +2863,7 @@ int Program__runSsaPipeline(program)
       remaining = remaining + -1;
     } while (remaining != 0);
   }
-  return FUN_000f019c(program);
+  return Program__trimOutputChain(program);
 }
 
 /* VRegPool__constructByKind @ 0x122e90 (44 bytes) */

@@ -367,7 +367,7 @@ int Program__collapseIfRegion(pass, block)
     if (((((((int)((ulonglong)branchInst2 >> 0x20) != 0) &&
            (footerBlock = Block__getBranchInst(block,(int)branchInst2,staleArg5,staleArg6,staleArg7,staleArg8,a6),
            *(int *)(*(int *)(footerBlock + 0x88) + 8) == 0x8b)) &&
-          (footerBlock = FUN_000e9294(block), footerBlock != 0)) &&
+          (footerBlock = IfHeader__armsAreSimple(block), footerBlock != 0)) &&
          ((footerBlock = block[0x4f], block[0x43] == 0 && (block[0x44] == 0)))) &&
         ((((block[3] & 0x10U) == 0 &&
           ((*(int *)(footerBlock + 0x10c) == 0 && (*(int *)(footerBlock + 0x110) == 0)))) &&
@@ -533,14 +533,14 @@ int FudoPs__vslot69_shouldFlattenIf(this, ifHeader, optionSource, staleArg4, sta
   double intToDoubleBias;
   undefined8 optionResult;
   
-  isIfRegion = FUN_000e9294(ifHeader);
+  isIfRegion = IfHeader__armsAreSimple(ifHeader);
   if (isIfRegion != 0) {
     thenBlock = *(int *)(ifHeader + 0x134);
     elseBlock = *(int *)(ifHeader + 0x138);
     thenHasKillTexture = ((int (*)())Program__hasKillTexture)(thenBlock);
     if ((thenHasKillTexture == 0) && (thenHasKillTexture = ((int (*)())Program__hasKillTexture)(elseBlock), thenHasKillTexture == 0)) {
       armLimitKind = 3;
-      optionResult = FUN_000e0830(optionSource,0,3);
+      optionResult = Compiler__isCurrentHandle(optionSource,0,3);
       if ((int)((ulonglong)optionResult >> 0x20) == 0) {
         if ((*(uint *)(ifHeader + 0xc) & 0x800) == 0) {
           optionResult = Block__hasInstWithQuery28(thenBlock,(int)optionResult,armLimitKind,staleArg4,staleArg5,staleArg6,staleArg7);
@@ -1648,7 +1648,7 @@ int FudoPs__flattenIfs(this, flattenPass)
 {
   int callResult;
   
-  callResult = FUN_000e0830(*(undefined4 *)(flattenPass + 8),0,0);
+  callResult = Compiler__isCurrentHandle(*(undefined4 *)(flattenPass + 8),0,0);
   if (callResult == 0) {
     ((int (*)())pass_flatten_ifs)(flattenPass);
     return;
@@ -2325,7 +2325,7 @@ LAB_0012ed24:
       chainSecondKey = *(undefined4 *)(chainBlock + 0x13c);
       chainHeadKey = 0xffffffff;
       if (!foundInChain) goto LAB_0012ed5c;
-      chainLastBlock = FUN_000e83bc(containerBlock);
+      chainLastBlock = Block__getFirstRealInst(containerBlock);
       predicateRegister = *(undefined4 *)(chainLastBlock + 0x94);
     }
     newInst2 = IRInst__create(0x31,*(undefined4 *)(program + 8));

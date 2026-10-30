@@ -2581,7 +2581,7 @@ int ilRewriteForTextureState(ctx, param_2, compileRecord, ilSource, param_5)
    * correct, but leaving local_c100/local_c0fc/local_c0f8/local_c0f0/local_c0d0/local_c090 as
    * separate, non-overlapping locals was NOT harmless - confirmed live on real hardware. Stock's
    * real code does do pointer arithmetic from this buffer into them: FUN_000cd1b0 (called with
-   * auStack_c148) tail-calls into scSetCallbackTables/FUN_000e2524, which read *(auStack_c148+0x4c)
+   * auStack_c148) tail-calls into scSetCallbackTables/Compiler__compileWithRetry, which read *(auStack_c148+0x4c)
    * expecting local_c0fc's value; a loop just below also writes local_c0f0[8..15], expecting
    * those words to land in local_c0d0. With the locals declared separately, the compiler placed
    * them elsewhere on the stack, so auStack_c148+0x4c stayed at its memset'd 0 instead of the
@@ -4110,8 +4110,8 @@ int FUN_000cd05c(scCallbacks, param_2, allocTag)
     a1 = 0;
   }
   else {
-    FUN_000da0c0(a1,scCallbacks);
-    iVar1 = FUN_000da420(a1);
+    Compiler__createFromRequest_da0c0(a1,scCallbacks);
+    iVar1 = Compiler__getFailureCode(a1);
     if (iVar1 != 0) {
       scDestroyCompilerObject(a1,1);
       (**(code **)(scCallbacks + 0x34))(*(undefined4 *)(scCallbacks + 0x2c),a1,allocTag);
@@ -4189,7 +4189,7 @@ int FUN_000cd1c4(param_1, param_2, param_3, param_4)
       iVar1 = _setjmp(*(int **)(iStack00000018 + 4));
       if (iVar1 == 0) {
         Compiler__resetState(iStack00000018);
-        FUN_000e0cd0(iStack00000018,uStack00000028);
+        Compiler__applyRequestFlags(iStack00000018,uStack00000028);
         iVar1 = FUN_00193b3c(uStack00000020,uStack00000024,iStack00000018);
         *(int *)(iStack00000018 + 0x524) = iStack0000001c;
         *(undefined4 *)(iStack0000001c + 0xf8) = 0;
@@ -4208,7 +4208,7 @@ int FUN_000cd1c4(param_1, param_2, param_3, param_4)
       iStack00000018Word314 = *(int *)(iStack00000018 + 0x314);
       FUN_000e0e28(iStack00000018);
       Compiler__releaseChipAndPools(iStack00000018,0);
-    } while ((iStack00000018Word314 != 0) && (iVar2 = FUN_000e161c(iStack00000018,iStack00000018Word314), iVar2 != 0));
+    } while ((iStack00000018Word314 != 0) && (iVar2 = Compiler__tryRetryAfterFailure(iStack00000018,iStack00000018Word314), iVar2 != 0));
     return iStack00000018Word314;
   }
   return 2;
@@ -6955,7 +6955,7 @@ double FUN_000d10dc(undefined4 outText,uint registerWord,undefined4 argR5,undefi
         printf_LDBLStub_1a32d0(outText,"r%02u",registerWord,argR6,argR7,argR8,argR9,argR10);
       }
       else {
-        immediateValue = (double)((double (*)())FUN_000da78c)(registerWord & 0xffffdfff,floatArg1);
+        immediateValue = (double)((double (*)())MiniFloat__decode)(registerWord & 0xffffdfff,floatArg1);
         ten = DOUBLE_001aa238;
         i2dMagic = DOUBLE_001aa1e0;
         if (immediateValue == (double)FLOAT_001aa0d4) {

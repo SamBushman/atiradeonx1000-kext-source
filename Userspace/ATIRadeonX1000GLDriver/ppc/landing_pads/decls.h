@@ -566,7 +566,7 @@ extern int eh_pad_19de30();
 extern int eh_pad_19df28();
 extern int eh_pad_19dfcc();
 extern int eh_pad_1a2874();
-extern int FUN_000e3308();
+extern int EncoderState__destroy_e3308();
 extern int Block__dtor_ea270();
 extern int Arena__free();
 extern int MachineAssembler__dtor_19b91c();

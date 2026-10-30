@@ -1642,7 +1642,7 @@ int R300VMachineAssembler__init(this, program, allocatorArg, compiler)
   *(undefined4 *)(this + 0x54) = allocation;
   allocation = Arena__alloc(*(undefined4 *)(compiler + COMP_arenaA),*(int *)(compiler + COMP_nextInstId) << 3);
   *(undefined4 *)(this + 8) = allocation;
-  uVar2 = FUN_000e14e4(compiler,0x28,allocatorArg);
+  uVar2 = Compiler__setQueriedTableEntry4d4(compiler,0x28,allocatorArg);
   *(undefined4 *)(this + 0x50) = uVar2;
   _memset(uVar2,0,0x28);
   **(int **)(this + 0x50) = maxInstructions;
@@ -1707,7 +1707,7 @@ int R300VMachineAssembler__vslot24_assembleWithTarget(this, node, block)
   
   (**(code **)(*this + 0x34))(this,block,*(undefined4 *)(node + 0xdc));
   UNRECOVERED_JUMPTABLE = *(code **)(*this + 0x9c);
-  nodeHandle = FUN_000e7d5c(node);
+  nodeHandle = Block__getLoopFooterRegister(node);
                     
                     
   (*UNRECOVERED_JUMPTABLE)(this,nodeHandle,*(undefined4 *)(node + 0x134));
@@ -1939,7 +1939,7 @@ int R300VMachineAssembler__assembleBlock(this, block)
     }
     iVar3 = this[3];
     if (**(int **)(iVar3 + 0x6c4) == 0) {
-      groupInst = (int *)FUN_000e3b88(this[4],block,piVar5,lookahead);
+      groupInst = (int *)Block__materializePendingMovs(this[4],block,piVar5,lookahead);
       if ((groupInst == (int *)0x0) || (lookahead[0] == 0)) {
         iVar3 = this[3];
       }

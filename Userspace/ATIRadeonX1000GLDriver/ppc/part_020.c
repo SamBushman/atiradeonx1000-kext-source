@@ -792,18 +792,19 @@ int ildisPrintHeader(disassembler, passThroughR4, passThroughR5, fmtArgR6, fmtAr
   char *shaderTypeTextArg;
   undefined4 fmtArgR10;
 {
+  uint majorVersion;
   uint shaderType;
   undefined4 r4AfterCall;
   char *shaderTypeText;
-  uint uVar3;
+  uint headerToken;
   uint minorVersion;
   char shaderTypeChar0;
   char shaderTypeCharsRest [15];
   undefined1 auStack_118 [268];
   
-  uVar3 = **(uint **)(disassembler + 8);
+  headerToken = **(uint **)(disassembler + 8);
   *(uint **)(disassembler + 8) = *(uint **)(disassembler + 8) + 1;
-  shaderType = uVar3 >> 0x10 & 0xff;
+  shaderType = headerToken >> 0x10 & 0xff;
   if (shaderType == 1) {
     shaderTypeTextArg = "ps";
     shaderTypeChar0 = s_ps_001a8390[0];
@@ -822,13 +823,13 @@ int ildisPrintHeader(disassembler, passThroughR4, passThroughR5, fmtArgR6, fmtAr
     shaderTypeCharsRest[0] = s_gs_001a8394[1];
     shaderTypeCharsRest[1] = s_gs_001a8394[2];
   }
-  minorVersion = uVar3 & 0xff;
+  minorVersion = headerToken & 0xff;
   shaderTypeText = &shaderTypeChar0;
-  uVar3 = uVar3 >> 8 & 0xff;
-  printf_LDBLStub_1a32d0(auStack_118,"il_%s_%d_%d",shaderTypeText,uVar3,minorVersion,fmtArgR8,shaderTypeTextArg,fmtArgR10);
+  majorVersion = headerToken >> 8 & 0xff;
+  printf_LDBLStub_1a32d0(auStack_118,"il_%s_%d_%d",shaderTypeText,majorVersion,minorVersion,fmtArgR8,shaderTypeTextArg,fmtArgR10);
   *(uint *)(disassembler + 0x218) = (uint)(shaderType == 1);
-  ildisAppendf(disassembler,auStack_118,shaderTypeText,uVar3,minorVersion,fmtArgR8,shaderTypeTextArg,fmtArgR10);
-  return ildisFlushLine(disassembler,r4AfterCall,shaderTypeText,uVar3,minorVersion,fmtArgR8,shaderTypeTextArg,fmtArgR10);
+  ildisAppendf(disassembler,auStack_118,shaderTypeText,majorVersion,minorVersion,fmtArgR8,shaderTypeTextArg,fmtArgR10);
+  return ildisFlushLine(disassembler,r4AfterCall,shaderTypeText,majorVersion,minorVersion,fmtArgR8,shaderTypeTextArg,fmtArgR10);
 }
 
 /* ildisPrintRegisterType @ 0xdcef4 (640 bytes) */
@@ -3220,15 +3221,15 @@ int ildisRun(disassembler, passThroughR4, passThroughR5, fmtArgR6, fmtArgR7, fmt
   undefined4 fmtArgR7;
   undefined4 fmtArgR8;
 {
-  undefined8 uVar1;
+  undefined8 printResult;
   
   do {
     if ((uint)(*(int *)(disassembler + 0xc) * 4 + *(int *)(disassembler + 4)) <= *(uint *)(disassembler + 8)) {
       return;
     }
-    uVar1 = ((int (*)())ildisPrintInstruction)(disassembler,passThroughR4,passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,*(int *)(disassembler + 4));
-    passThroughR4 = (undefined4)uVar1;
-  } while ((int)((ulonglong)uVar1 >> 0x20) != 0);
+    printResult = ((int (*)())ildisPrintInstruction)(disassembler,passThroughR4,passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,*(int *)(disassembler + 4));
+    passThroughR4 = (undefined4)printResult;
+  } while ((int)((ulonglong)printResult >> 0x20) != 0);
   return;
 }
 
@@ -3296,28 +3297,28 @@ int ildisDisassembleBody(disassembler, tokenStart, tokenCount, fmtArgR6, fmtArgR
 }
 
 /* Compiler__setOptionBit @ 0xe0794 (36 bytes) */
-int Compiler__setOptionBit(param_1, param_2)
-  int param_1;
-  uint param_2;
+int Compiler__setOptionBit(compiler, optionBit)
+  int compiler;
+  uint optionBit;
 {
-  int iVar1;
+  int optionByteAddress;
   
-  iVar1 = ((int)param_2 >> 3) + param_1;
-  *(byte *)(iVar1 + 0x59c) = (byte)(1 << (param_2 & 7)) | *(byte *)(iVar1 + 0x59c);
+  optionByteAddress = ((int)optionBit >> 3) + compiler;
+  *(byte *)(optionByteAddress + 0x59c) = (byte)(1 << (optionBit & 7)) | *(byte *)(optionByteAddress + 0x59c);
   return;
 }
 
 /* Compiler__clearOptionBit @ 0xe07b8 (36 bytes) */
-int Compiler__clearOptionBit(param_1, param_2)
-  int param_1;
-  uint param_2;
+int Compiler__clearOptionBit(compiler, optionBit)
+  int compiler;
+  uint optionBit;
 {
-  int iVar1;
+  int optionByteAddress;
   
-  iVar1 = ((int)param_2 >> 3) + param_1;
-  *(byte *)(iVar1 + 0x59c) =
-       ((byte)(-2 << (param_2 & 7)) | (byte)(0xfffffffe >> 0x20 - (param_2 & 7))) &
-       *(byte *)(iVar1 + 0x59c);
+  optionByteAddress = ((int)optionBit >> 3) + compiler;
+  *(byte *)(optionByteAddress + 0x59c) =
+       ((byte)(-2 << (optionBit & 7)) | (byte)(0xfffffffe >> 0x20 - (optionBit & 7))) &
+       *(byte *)(optionByteAddress + 0x59c);
   return;
 }
 
@@ -3326,22 +3327,22 @@ int Compiler__isOptionEnabled(compiler, optionId)
   int compiler;
   uint optionId;
 {
-  int iVar1;
+  int targetAllows;
   
   if ((((int)*(char *)(((int)optionId >> 3) + compiler + 0x59c) >> (optionId & 7) & 1U) != 0) &&
-     (iVar1 = BitSet__testBit(*(undefined4 *)(compiler + COMP_target),optionId), iVar1 != 0)) {
+     (targetAllows = BitSet__testBit(*(undefined4 *)(compiler + COMP_target),optionId), targetAllows != 0)) {
     return 1;
   }
   return 0;
 }
 
-/* FUN_000e0830 @ 0xe0830 (32 bytes) */
-int FUN_000e0830(param_1, param_2, param_3)
-  int param_1;
-  int param_2;
-  int param_3;
+/* Compiler__isCurrentHandle @ 0xe0830 (32 bytes) */
+int Compiler__isCurrentHandle(compiler, flag, handle)
+  int compiler;
+  int flag;
+  int handle;
 {
-  if ((param_2 == 0) && (*(int *)(param_1 + 0x64c) == param_3)) {
+  if ((flag == 0) && (*(int *)(compiler + 0x64c) == handle)) {
     return 1;
   }
   return 0;
@@ -3461,99 +3462,99 @@ int Compiler__setDefaultOptions(compiler)
 }
 
 /* FUN_000e0ca8 @ 0xe0ca8 (28 bytes) */
-int FUN_000e0ca8(param_1)
-  int param_1;
+int FUN_000e0ca8(compiler)
+  int compiler;
 {
-  *(undefined4 *)(param_1 + 0x318) = 0;
-  *(undefined4 *)(param_1 + 0x478) = 0x400;
-  *(undefined4 *)(param_1 + 0x47c) = 0;
-  *(undefined4 *)(param_1 + 0x480) = 0;
+  *(undefined4 *)(compiler + 0x318) = 0;
+  *(undefined4 *)(compiler + 0x478) = 0x400;
+  *(undefined4 *)(compiler + 0x47c) = 0;
+  *(undefined4 *)(compiler + 0x480) = 0;
   return;
 }
 
 /* testBit24 @ 0xe0cc8 (8 bytes) */
-int testBit24(param_1, param_2)
-  undefined4 param_1;
+int testBit24(unusedArg1, param_2)
+  undefined4 unusedArg1;
   uint param_2;
 {
   return param_2 >> 0x18 & 1;
 }
 
-/* FUN_000e0cd0 @ 0xe0cd0 (308 bytes) */
-int FUN_000e0cd0(param_1, param_2)
-  undefined4 param_1;
-  uint param_2;
+/* Compiler__applyRequestFlags @ 0xe0cd0 (308 bytes) */
+int Compiler__applyRequestFlags(compiler, requestFlags)
+  undefined4 compiler;
+  uint requestFlags;
 {
   int iVar1;
   
-  iVar1 = ((int (*)())testBit24)(param_1,param_2);
+  iVar1 = ((int (*)())testBit24)(compiler,requestFlags);
   if (iVar1 != 0) {
-    ((int (*)())Compiler__clearOptionBit)(param_1,9);
-    ((int (*)())Compiler__clearOptionBit)(param_1,0x14);
-    ((int (*)())Compiler__clearOptionBit)(param_1,0x1c);
-    ((int (*)())Compiler__clearOptionBit)(param_1,0x1d);
-    ((int (*)())Compiler__clearOptionBit)(param_1,0x39);
-    ((int (*)())Compiler__clearOptionBit)(param_1,0x3b);
-    ((int (*)())Compiler__clearOptionBit)(param_1,0x42);
-    ((int (*)())Compiler__clearOptionBit)(param_1,0x27);
+    ((int (*)())Compiler__clearOptionBit)(compiler,9);
+    ((int (*)())Compiler__clearOptionBit)(compiler,0x14);
+    ((int (*)())Compiler__clearOptionBit)(compiler,0x1c);
+    ((int (*)())Compiler__clearOptionBit)(compiler,0x1d);
+    ((int (*)())Compiler__clearOptionBit)(compiler,0x39);
+    ((int (*)())Compiler__clearOptionBit)(compiler,0x3b);
+    ((int (*)())Compiler__clearOptionBit)(compiler,0x42);
+    ((int (*)())Compiler__clearOptionBit)(compiler,0x27);
   }
-  if ((param_2 & 0x100000) != 0) {
-    ((int (*)())Compiler__setOptionBit)(param_1,0x2a);
+  if ((requestFlags & 0x100000) != 0) {
+    ((int (*)())Compiler__setOptionBit)(compiler,0x2a);
   }
-  if ((param_2 & 0x200000) != 0) {
-    ((int (*)())Compiler__setOptionBit)(param_1,0x2b);
+  if ((requestFlags & 0x200000) != 0) {
+    ((int (*)())Compiler__setOptionBit)(compiler,0x2b);
   }
-  if ((param_2 & 0x200) != 0) {
-    ((int (*)())Compiler__clearOptionBit)(param_1,0x3f);
+  if ((requestFlags & 0x200) != 0) {
+    ((int (*)())Compiler__clearOptionBit)(compiler,0x3f);
   }
-  if ((param_2 & 0x800) != 0) {
-    ((int (*)())Compiler__clearOptionBit)(param_1,0x37);
+  if ((requestFlags & 0x800) != 0) {
+    ((int (*)())Compiler__clearOptionBit)(compiler,0x37);
   }
-  if ((param_2 & 0x1000) != 0) {
-    ((int (*)())Compiler__setOptionBit)(param_1,0x3e);
+  if ((requestFlags & 0x1000) != 0) {
+    ((int (*)())Compiler__setOptionBit)(compiler,0x3e);
   }
-  if ((param_2 & 0x2000) != 0) {
-    ((int (*)())Compiler__setOptionBit)(param_1,0x4e);
+  if ((requestFlags & 0x2000) != 0) {
+    ((int (*)())Compiler__setOptionBit)(compiler,0x4e);
   }
-  if ((param_2 & 0x4000) != 0) {
-    ((int (*)())Compiler__setOptionBit)(param_1,0x4f);
+  if ((requestFlags & 0x4000) != 0) {
+    ((int (*)())Compiler__setOptionBit)(compiler,0x4f);
     return;
   }
   return;
 }
 
 /* Compiler__logf @ 0xe0e0c (28 bytes) */
-int Compiler__logf(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+int Compiler__logf(unusedArg1, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7, unusedArg8)
+  undefined4 unusedArg1;
+  undefined4 unusedArg2;
+  undefined4 unusedArg3;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
+  undefined4 unusedArg8;
 {
   return;
 }
 
 /* FUN_000e0e28 @ 0xe0e28 (116 bytes) */
-int FUN_000e0e28(param_1)
-  int param_1;
+int FUN_000e0e28(compiler)
+  int compiler;
 {
   int loopCounter;
   undefined1 auStack_b8 [128];
   undefined1 local_38;
   
-  if (0 < *(int *)(param_1 + 0x3a4)) {
+  if (0 < *(int *)(compiler + 0x3a4)) {
     loopCounter = 0;
     do {
-      _memcpy(auStack_b8,loopCounter + *(int *)(param_1 + 0x3a0),0x80);
+      _memcpy(auStack_b8,loopCounter + *(int *)(compiler + 0x3a0),0x80);
       loopCounter = loopCounter + 0x80;
       local_38 = 0;
-    } while (loopCounter < *(int *)(param_1 + 0x3a4));
+    } while (loopCounter < *(int *)(compiler + 0x3a4));
   }
-  *(undefined4 *)(param_1 + 0x3a8) = 0;
-  *(undefined4 *)(param_1 + 0x3a4) = 0;
+  *(undefined4 *)(compiler + 0x3a8) = 0;
+  *(undefined4 *)(compiler + 0x3a4) = 0;
   return;
 }
 
@@ -3564,24 +3565,24 @@ int noop_e0e9c()
 }
 
 /* noop_e0ea0 @ 0xe0ea0 (28 bytes) */
-int noop_e0ea0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+int noop_e0ea0(unusedArg1, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7, unusedArg8)
+  undefined4 unusedArg1;
+  undefined4 unusedArg2;
+  undefined4 unusedArg3;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
+  undefined4 unusedArg8;
 {
   return;
 }
 
 /* isWhitespaceChar @ 0xe0ebc (44 bytes) */
-int isWhitespaceChar(param_1)
-  int param_1;
+int isWhitespaceChar(ch)
+  int ch;
 {
-  if ((((param_1 != 0x20) && (param_1 != 9)) && (param_1 != 10)) && (param_1 != 0xd)) {
+  if ((((ch != 0x20) && (ch != 9)) && (ch != 10)) && (ch != 0xd)) {
     return 0;
   }
   return 1;
@@ -3793,73 +3794,73 @@ int noop_e1388()
 }
 
 /* noop_e138c @ 0xe138c (28 bytes) */
-int noop_e138c(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+int noop_e138c(unusedArg1, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7, unusedArg8)
+  undefined4 unusedArg1;
+  undefined4 unusedArg2;
+  undefined4 unusedArg3;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
+  undefined4 unusedArg8;
 {
   return;
 }
 
 /* FUN_000e13a8 @ 0xe13a8 (12 bytes) */
-int FUN_000e13a8(param_1)
-  int param_1;
+int FUN_000e13a8(compiler)
+  int compiler;
 {
-  *(undefined4 *)(param_1 + 0x31c) = 1;
+  *(undefined4 *)(compiler + 0x31c) = 1;
   return;
 }
 
-/* FUN_000e13b4 @ 0xe13b4 (152 bytes) */
-int FUN_000e13b4(param_1)
-  int param_1;
+/* Compiler__resetPerStageState @ 0xe13b4 (152 bytes) */
+int Compiler__resetPerStageState(compiler)
+  int compiler;
 {
-  *(undefined4 *)(param_1 + 0x334) = 1;
-  *(undefined4 *)(param_1 + 0x3c4) = 0xffffffff;
-  *(undefined4 *)(param_1 + 0x324) = 0;
-  *(undefined4 *)(param_1 + 0x32c) = 0;
-  *(undefined4 *)(param_1 + 0x330) = 0;
-  *(undefined4 *)(param_1 + 0x338) = 0;
-  *(undefined4 *)(param_1 + 0x33c) = 0;
-  *(undefined4 *)(param_1 + 0x340) = 0;
-  *(undefined4 *)(param_1 + 0x344) = 0;
-  *(undefined4 *)(param_1 + 0x348) = 0;
-  *(undefined4 *)(param_1 + 0x3ac) = 0;
-  *(undefined4 *)(param_1 + 0x3b0) = 0;
-  *(undefined4 *)(param_1 + 0x3b4) = 0;
-  *(undefined4 *)(param_1 + 0x3b8) = 0;
-  *(undefined4 *)(param_1 + 0x3bc) = 0;
-  *(undefined4 *)(param_1 + 0x3c0) = 0;
-  Compiler__resetValueNumbers(param_1);
-  *(undefined4 *)(param_1 + 0x3d0) = 0;
-  *(undefined4 *)(param_1 + 0x648) = 0;
-  if (*(int *)(param_1 + 0x318) == 0) {
-    *(undefined4 *)(param_1 + 0x6bc) = 0;
-    *(undefined4 *)(param_1 + 0x39c) = 0;
-    *(undefined4 *)(param_1 + 0x6b8) = 0;
+  *(undefined4 *)(compiler + 0x334) = 1;
+  *(undefined4 *)(compiler + 0x3c4) = 0xffffffff;
+  *(undefined4 *)(compiler + 0x324) = 0;
+  *(undefined4 *)(compiler + 0x32c) = 0;
+  *(undefined4 *)(compiler + 0x330) = 0;
+  *(undefined4 *)(compiler + 0x338) = 0;
+  *(undefined4 *)(compiler + 0x33c) = 0;
+  *(undefined4 *)(compiler + 0x340) = 0;
+  *(undefined4 *)(compiler + 0x344) = 0;
+  *(undefined4 *)(compiler + 0x348) = 0;
+  *(undefined4 *)(compiler + 0x3ac) = 0;
+  *(undefined4 *)(compiler + 0x3b0) = 0;
+  *(undefined4 *)(compiler + 0x3b4) = 0;
+  *(undefined4 *)(compiler + 0x3b8) = 0;
+  *(undefined4 *)(compiler + 0x3bc) = 0;
+  *(undefined4 *)(compiler + 0x3c0) = 0;
+  Compiler__resetValueNumbers(compiler);
+  *(undefined4 *)(compiler + 0x3d0) = 0;
+  *(undefined4 *)(compiler + 0x648) = 0;
+  if (*(int *)(compiler + 0x318) == 0) {
+    *(undefined4 *)(compiler + 0x6bc) = 0;
+    *(undefined4 *)(compiler + 0x39c) = 0;
+    *(undefined4 *)(compiler + 0x6b8) = 0;
   }
   return;
 }
 
 /* FUN_000e144c @ 0xe144c (24 bytes) */
-int FUN_000e144c(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  int param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+int FUN_000e144c(compiler, value588, unusedArg3, value58c, value590, value598, value594)
+  int compiler;
+  undefined4 value588;
+  undefined4 unusedArg3;
+  undefined4 value58c;
+  undefined4 value590;
+  undefined4 value598;
+  undefined4 value594;
 {
-  *(undefined4 *)(param_1 + 0x594) = param_7;
-  *(undefined4 *)(param_1 + 0x588) = param_2;
-  *(undefined4 *)(param_1 + 0x58c) = param_4;
-  *(undefined4 *)(param_1 + 0x590) = param_5;
-  *(undefined4 *)(param_1 + 0x598) = param_6;
+  *(undefined4 *)(compiler + 0x594) = value594;
+  *(undefined4 *)(compiler + 0x588) = value588;
+  *(undefined4 *)(compiler + 0x58c) = value58c;
+  *(undefined4 *)(compiler + 0x590) = value590;
+  *(undefined4 *)(compiler + 0x598) = value598;
   return;
 }
 
@@ -3870,38 +3871,38 @@ int Compiler__timerOutputFileName()
 }
 
 /* Compiler__releaseOutputBuffer @ 0xe1484 (80 bytes) */
-int Compiler__releaseOutputBuffer(param_1)
-  int param_1;
+int Compiler__releaseOutputBuffer(compiler)
+  int compiler;
 {
-  if (*(int *)(param_1 + 0x584) != 0) {
+  if (*(int *)(compiler + 0x584) != 0) {
     /* issue #79 class: r4 = `lwz r4,0x584(r3)` (the field just tested) is the object handed to the release callback */
-    (**(code **)(param_1 + 0x34c))(*(undefined4 *)(param_1 + 0x354),*(undefined4 *)(param_1 + 0x584));
-    *(undefined4 *)(param_1 + 0x584) = 0;
+    (**(code **)(compiler + 0x34c))(*(undefined4 *)(compiler + 0x354),*(undefined4 *)(compiler + 0x584));
+    *(undefined4 *)(compiler + 0x584) = 0;
   }
   return;
 }
 
 /* Compiler__setTableEntry534 @ 0xe14d4 (16 bytes) */
-int Compiler__setTableEntry534(param_1, param_2, param_3)
-  int param_1;
-  int param_2;
-  undefined4 param_3;
+int Compiler__setTableEntry534(compiler, entryIndex, entryValue)
+  int compiler;
+  int entryIndex;
+  undefined4 entryValue;
 {
-  *(undefined4 *)(param_2 * 4 + param_1 + 0x534) = param_3;
+  *(undefined4 *)(entryIndex * 4 + compiler + 0x534) = entryValue;
   return;
 }
 
-/* FUN_000e14e4 @ 0xe14e4 (80 bytes) */
-int FUN_000e14e4(param_1, param_2, param_3)
-  int param_1;
-  undefined4 param_2;
-  int param_3;
+/* Compiler__setQueriedTableEntry4d4 @ 0xe14e4 (80 bytes) */
+int Compiler__setQueriedTableEntry4d4(compiler, queryArg, tableIndex)
+  int compiler;
+  undefined4 queryArg;
+  int tableIndex;
 {
-  undefined4 uVar1;
+  undefined4 queryResult;
   
-  uVar1 = (**(code **)(**(int **)(param_1 + 0x30c) + 0x174))
-                    (*(int **)(param_1 + 0x30c),param_2,param_3,param_1);
-  *(undefined4 *)(param_3 * 4 + param_1 + 0x4d4) = uVar1;
+  queryResult = (**(code **)(**(int **)(compiler + 0x30c) + 0x174))
+                    (*(int **)(compiler + 0x30c),queryArg,tableIndex,compiler);
+  *(undefined4 *)(tableIndex * 4 + compiler + 0x4d4) = queryResult;
   return;
 }
 
@@ -3925,12 +3926,12 @@ int Compiler__allocateOrFail(compiler, size)
   int compiler;
   uint size;
 {
-  int iVar1;
+  int memory;
   
-  iVar1 = (**(code **)(compiler + 0x350))(*(undefined4 *)(compiler + 0x354),size);
-  if (iVar1 == 0) {
+  memory = (**(code **)(compiler + 0x350))(*(undefined4 *)(compiler + 0x354),size);
+  if (memory == 0) {
     ((int (*)())Compiler__fail)(compiler,2);
   }
-  return iVar1;
+  return memory;
 }
 
