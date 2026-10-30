@@ -2682,7 +2682,7 @@ int FUN_000da0c0(param_1, param_2)
     puStack00000018[10] = puStack0000001c[2];
   }
   else {
-    uVar2 = FUN_000cd290(puStack00000018[3]);
+    uVar2 = vsOpcodeSourceCount(puStack00000018[3]);
     puStack00000018[10] = uVar2;
   }
   iVar1 = puStack00000018[10];
@@ -2841,7 +2841,7 @@ int Compiler__createFromRequest(state, request)
     puStack00000018[10] = puStack0000001c[2];
   }
   else {
-    uVar2 = FUN_000cd290(puStack00000018[3]);
+    uVar2 = vsOpcodeSourceCount(puStack00000018[3]);
     puStack00000018[10] = uVar2;
   }
   iVar1 = puStack00000018[10];
@@ -3610,7 +3610,7 @@ void ildisPrintFixedPoint(undefined4 disassembler,uint fieldBits,uint integerBit
   }
   intToDoubleHi3 = 0x43300000;
   textBufferPtr = textBuffer;
-  ((char * (*)())FUN_000cdc3c)(disassembler,10,textBufferPtr,
+  ((char * (*)())vsdisFormatFloat)(disassembler,10,textBufferPtr,
                (double)((float)(DOUBLE_001aa200 /
                                ((double)CONCAT44(0x43300000,fractionScale) - DOUBLE_001aa250)) *
                         (float)((double)CONCAT44(0x43300000,fractionField) - DOUBLE_001aa250) + integerPart));

@@ -1,0 +1,1 @@
+func	FUN_000b4400	gld_compileILProgram	INFERRED	clears the compile output and record, runs the IL rewrite (ilRewriteForTextureState) and the hardware encoder (psnEncodeHwProgram) for an IL source, returns 1 on bad arguments, 2 on rewrite failure, 6 when too many registers, else a mapped encoder status

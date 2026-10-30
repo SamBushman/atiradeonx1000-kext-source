@@ -1757,7 +1757,7 @@ int FUN_000307a0(ctx, packetIndex)
   *headerWord = (int)cursor - (int)headerWord >> 2 | *headerWord;
   *(int **)(ctx + GLD_lastHeader) = cursor;
   *cursor = packetIndex * 0x1000000 + 0x16000000;
-  return FUN_000a8320(ctx,packetIndex);
+  return gld_clearPacketSlot(ctx,packetIndex);
 }
 
 /* FUN_00030840 @ 0x30840 (124 bytes) */
@@ -10424,7 +10424,7 @@ int FUN_0003e250(param_1)
       iVar2 = iVar2 + 4;
       iVar5 = iVar5 + -1;
     } while (iVar5 != 0);
-    FUN_000a1090(param_1 + 0x240,local_68,local_58);
+    gld_setUnitTargetBits(param_1 + 0x240,local_68,local_58);
   }
   return;
 }
@@ -10470,7 +10470,7 @@ int FUN_0003e3a0(param_1, param_2)
     }
   }
   glBindFragmentShaderATI_impl(param_1,iVar2);
-  uVar1 = FUN_000a11a0(param_1);
+  uVar1 = gld_getFragmentShaderKind(param_1);
   *(undefined4 *)(param_1 + 0x27b8) = uVar1;
   return 1;
 }

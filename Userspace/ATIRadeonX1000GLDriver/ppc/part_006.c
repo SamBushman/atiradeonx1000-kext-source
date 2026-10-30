@@ -324,7 +324,7 @@ int atifsReplayProgram(param_1, param_2, param_3)
   ((int (*)())atifsReplayTextureOps)(param_1,param_3,param_2[3] >> 0x10 & 0xff,param_2 + (param_2[3] & 0xffff));
   ((int (*)())atifsReplayColorAlphaOps)(param_1,param_3,param_2[4] >> 0x10 & 0xff,param_2 + (param_2[4] & 0xffff));
   glEndFragmentShaderATI_impl(param_1);
-  uVar3 = FUN_000a11a0(param_1);
+  uVar3 = gld_getFragmentShaderKind(param_1);
   *(undefined4 *)(param_1 + 0x27b8) = uVar3;
   return 1;
 }
@@ -7805,14 +7805,14 @@ int FUN_0004a860(glContext, param_2, param_3, param_4, param_5, param_6, param_7
 void FUN_0004a8f0(int glContext,undefined4 param_2,undefined4 param_3,undefined4 param_4,double fparam_1)
 {
   if ((*(uint *)(glContext + 0x44) & 0x20000) == 0) {
-    FUN_000b6580(glContext,0);
+    ffpsBuildProgram(glContext,0);
                     
                     
     (**(code **)(glContext + 0x294c))(glContext,*(undefined4 *)(glContext + 0x1e5c));
     return;
   }
   if ((*(uint *)(glContext + 0x44) & 0x2000) != 0) {
-    ((undefined4 (*)())FUN_000afe40)(glContext,0,param_3,param_4,fparam_1);
+    ((undefined4 (*)())gld_compileFragmentProgram)(glContext,0,param_3,param_4,fparam_1);
     return;
   }
   atifsCompileCurrentShader(glContext);
@@ -8227,7 +8227,7 @@ LAB_0004b2f8:
           FUN_00087e80(glContext,0,puVar5,puVar5 + 4);
         }
         else {
-          FUN_000b6580(glContext,1);
+          ffpsBuildProgram(glContext,1);
         }
         ((unsigned char *)0x000036c4)[iVar9] = 1;
       }
@@ -8446,7 +8446,7 @@ int FUN_0004b7d0(glContext)
   *(undefined4 *)(glContext + 0x1e5c) = 0;
   ((int (*)())FUN_0004ab60)(glContext);
   *(undefined2 *)(((unsigned char *)0x000015c8) + *(int *)(glContext + 0x1e60)) = 0xffff;
-  FUN_000b5fb0(glContext);
+  gld_destroyUnitCmdLists(glContext);
   iVar4 = *(int *)(((unsigned char *)0x00001154) + glContext);
   iVar1 = *(int *)(iVar4 + 0x88);
   if (iVar1 != 0) {

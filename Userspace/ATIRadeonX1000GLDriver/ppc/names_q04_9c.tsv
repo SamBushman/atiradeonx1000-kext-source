@@ -1,0 +1,23 @@
+use	FUN_000c7930	uVar1	ilRegWord2300T	INFERRED	state word +0x2300: IL temp register used by the shadow compare tokens	^\s*uVar1\ =\ \*\(uint\ \*\)\(param_2\ \+\ 0x2300\);$@5	+1
+use	FUN_000c7930	uVar1	ilRegWord2300T	INFERRED	state word +0x2300: IL temp register used by the shadow compare tokens	^\s*uVar1\ =\ uVar1\ \&\ 0xffff\ \|\ 0x40000;$	+3
+use	FUN_000c7930	iVar2	slotCursor	INFERRED	param_2 advanced 4 per compare unit (flags at +0x21f0, registers at +0x21e0)	^\s*iVar2\ =\ param_2;$	+1
+use	FUN_000c7930	iVar2	slotCursor	INFERRED	param_2 advanced 4 per compare unit (flags at +0x21f0, registers at +0x21e0)	^\s*if\ \(\*\(int\ \*\)\(iVar2\ \+\ 0x21f0\)\ !=\ 0\)\ \{$	+1
+use	FUN_000c7930	iVar2	slotCursor	INFERRED	param_2 advanced 4 per compare unit (flags at +0x21f0, registers at +0x21e0)	^\s*uVar1\ =\ \*\(uint\ \*\)\(iVar2\ \+\ 0x21e0\);$	+1
+use	FUN_000c7930	iVar2	slotCursor	INFERRED	param_2 advanced 4 per compare unit (flags at +0x21f0, registers at +0x21e0)	^\s*param_7\ =\ \*\(uint\ \*\)\(iVar2\ \+\ 0x21e0\)\ \&\ 0xffff\ \|\ 0x40000;$	+1
+use	FUN_000c7930	iVar2	slotCursor	INFERRED	param_2 advanced 4 per compare unit (flags at +0x21f0, registers at +0x21e0)	^\s*iVar2\ =\ iVar2\ \+\ 4;$	+1
+use	FUN_000c7930	iVar2	slotCursor	INFERRED	param_2 advanced 4 per compare unit (flags at +0x21f0, registers at +0x21e0)	^\s*iVar2\ =\ param_2;$@2	+1
+use	FUN_000c7930	iVar2	slotCursor	INFERRED	param_2 advanced 4 per compare unit (flags at +0x21f0, registers at +0x21e0)	^\s*if\ \(\*\(int\ \*\)\(iVar2\ \+\ 0x21f0\)\ !=\ 0\)\ \{$@2	+1
+use	FUN_000c7930	iVar2	slotCursor	INFERRED	param_2 advanced 4 per compare unit (flags at +0x21f0, registers at +0x21e0)	^\s*iVar2\ =\ iVar2\ \+\ 4;$@2	+1
+use	FUN_000c7930	iVar2	slotCursor	INFERRED	param_2 advanced 4 per compare unit (flags at +0x21f0, registers at +0x21e0)	^\s*iVar2\ =\ param_2;$@3	+1
+use	FUN_000c7930	iVar2	slotCursor	INFERRED	param_2 advanced 4 per compare unit (flags at +0x21f0, registers at +0x21e0)	^\s*if\ \(\*\(int\ \*\)\(iVar2\ \+\ 0x21f0\)\ !=\ 0\)\ \{$@3	+1
+use	FUN_000c7930	iVar2	slotCursor	INFERRED	param_2 advanced 4 per compare unit (flags at +0x21f0, registers at +0x21e0)	^\s*uVar1\ =\ \*\(uint\ \*\)\(iVar2\ \+\ 0x21e0\);$@2	+1
+use	FUN_000c7930	iVar2	slotCursor	INFERRED	param_2 advanced 4 per compare unit (flags at +0x21f0, registers at +0x21e0)	^\s*param_1\[3\]\ =\ \*\(uint\ \*\)\(iVar2\ \+\ 0x21e0\)\ \&\ 0xffff\ \|\ 0x40000;$	+1
+use	FUN_000c7930	iVar2	slotCursor	INFERRED	param_2 advanced 4 per compare unit (flags at +0x21f0, registers at +0x21e0)	^\s*iVar2\ =\ iVar2\ \+\ 4;$@3	+1
+use	FUN_000c7930	iVar2	slotCursor	INFERRED	param_2 advanced 4 per compare unit (flags at +0x21f0, registers at +0x21e0)	^\s*iVar2\ =\ param_2;$@4	+1
+use	FUN_000c7930	iVar2	slotCursor	INFERRED	param_2 advanced 4 per compare unit (flags at +0x21f0, registers at +0x21e0)	^\s*if\ \(\*\(int\ \*\)\(iVar2\ \+\ 0x21f0\)\ !=\ 0\)\ \{$@4	+1
+use	FUN_000c7930	iVar2	slotCursor	INFERRED	param_2 advanced 4 per compare unit (flags at +0x21f0, registers at +0x21e0)	^\s*param_1\[2\]\ =\ \*\(uint\ \*\)\(iVar2\ \+\ 0x21e0\)\ \&\ 0xffff\ \|\ 0x40000;$	+1
+use	FUN_000c7930	iVar2	slotCursor	INFERRED	param_2 advanced 4 per compare unit (flags at +0x21f0, registers at +0x21e0)	^\s*iVar2\ =\ iVar2\ \+\ 4;$@4	+1
+local	FUN_000c7930	uVar4	flagToken	INFERRED	0, or 0x100000 when state word +0x230c is zero: extra flag token word
+local	FUN_000c7930	param_1	tokenCursor	INFERRED	output token cursor, advanced after each emitted instruction; also the returned pointer
+local	FUN_000c7930	param_2	ilState	INFERRED	IL compile state: shadow mode at +0x22fc, compare registers +0x21e0.., temp registers +0x2300/+0x2304/+0x2308
+func	FUN_000c7930	ilEmitShadowStateTokens	INFERRED	appends the tokens that set up the shadow-compare registers for the active mode (state +0x22fc: 1, 2 or 3) to the output token stream and returns the new write pointer

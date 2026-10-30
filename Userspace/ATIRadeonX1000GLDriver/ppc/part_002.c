@@ -9560,14 +9560,14 @@ int glCopyPixels_impl(ctx, rasterPos, srcX, srcY, width, height, copyType)
   else {
     *(uint *)(ctx + 0x26b0) = scratchUint41 | 0x40;
   }
-  if (((((((*(int *)(ctx + 0x18c) == 0) || (scratchInt33 = FUN_000a4760(ctx), scratchInt33 == 0)) &&
-         ((*(int *)(ctx + 400) == 0 || (scratchInt33 = FUN_000a4760(ctx), scratchInt33 == 1)))) &&
-        ((*(int *)(ctx + 0x194) == 0 || (scratchInt33 = FUN_000a4760(ctx), scratchInt33 == 2)))) &&
-       ((*(int *)(ctx + 0x198) == 0 || (scratchInt33 = FUN_000a4760(ctx), scratchInt33 == 3)))) &&
-      ((((*(int *)(ctx + 0x19c) == 0 || (scratchInt33 = FUN_000a4760(ctx), scratchInt33 == 4)) &&
-        ((*(int *)(ctx + 0x1a0) == 0 || (scratchInt33 = FUN_000a4760(ctx), scratchInt33 == 5)))) &&
-       ((*(int *)(ctx + 0x1a4) == 0 || (scratchInt33 = FUN_000a4760(ctx), scratchInt33 == 6)))))) &&
-     ((*(int *)(ctx + 0x1a8) == 0 || (scratchInt33 = FUN_000a4760(ctx), scratchInt33 == 7)))) {
+  if (((((((*(int *)(ctx + 0x18c) == 0) || (scratchInt33 = gld_getActiveSampleIndex(ctx), scratchInt33 == 0)) &&
+         ((*(int *)(ctx + 400) == 0 || (scratchInt33 = gld_getActiveSampleIndex(ctx), scratchInt33 == 1)))) &&
+        ((*(int *)(ctx + 0x194) == 0 || (scratchInt33 = gld_getActiveSampleIndex(ctx), scratchInt33 == 2)))) &&
+       ((*(int *)(ctx + 0x198) == 0 || (scratchInt33 = gld_getActiveSampleIndex(ctx), scratchInt33 == 3)))) &&
+      ((((*(int *)(ctx + 0x19c) == 0 || (scratchInt33 = gld_getActiveSampleIndex(ctx), scratchInt33 == 4)) &&
+        ((*(int *)(ctx + 0x1a0) == 0 || (scratchInt33 = gld_getActiveSampleIndex(ctx), scratchInt33 == 5)))) &&
+       ((*(int *)(ctx + 0x1a4) == 0 || (scratchInt33 = gld_getActiveSampleIndex(ctx), scratchInt33 == 6)))))) &&
+     ((*(int *)(ctx + 0x1a8) == 0 || (scratchInt33 = gld_getActiveSampleIndex(ctx), scratchInt33 == 7)))) {
     scratchUint41 = *(uint *)(ctx + 0x26b0) & 0xfffdffff;
     *(uint *)(ctx + 0x26b0) = scratchUint41;
   }
@@ -10426,14 +10426,14 @@ int glDrawPixels_impl(ctx, rasterPos, width, height, format, pixelType, pixels, 
   formatArg = format;
   typeArg = pixelType;
   pfStack0000001c = rasterPos;
-  if (((((((*(int *)(ctx + GLD_unitObject0) == 0) || (iVar11 = FUN_000a4760(ctx), iVar11 == 0)) &&
-         ((*(int *)(ctx + GLD_unitObject1) == 0 || (iVar11 = FUN_000a4760(ctx), iVar11 == 1)))) &&
-        ((*(int *)(ctx + GLD_unitObject2) == 0 || (iVar11 = FUN_000a4760(ctx), iVar11 == 2)))) &&
-       ((*(int *)(ctx + GLD_unitObject3) == 0 || (iVar11 = FUN_000a4760(ctx), iVar11 == 3)))) &&
-      (((*(int *)(ctx + GLD_unitObject4) == 0 || (iVar11 = FUN_000a4760(ctx), iVar11 == 4)) &&
-       ((*(int *)(ctx + GLD_unitObject5) == 0 || (iVar11 = FUN_000a4760(ctx), iVar11 == 5)))))) &&
-     (((*(int *)(ctx + GLD_unitObject6) == 0 || (iVar11 = FUN_000a4760(ctx), iVar11 == 6)) &&
-      ((*(int *)(ctx + GLD_unitObject7) == 0 || (iVar11 = FUN_000a4760(ctx), iVar11 == 7)))))) {
+  if (((((((*(int *)(ctx + GLD_unitObject0) == 0) || (iVar11 = gld_getActiveSampleIndex(ctx), iVar11 == 0)) &&
+         ((*(int *)(ctx + GLD_unitObject1) == 0 || (iVar11 = gld_getActiveSampleIndex(ctx), iVar11 == 1)))) &&
+        ((*(int *)(ctx + GLD_unitObject2) == 0 || (iVar11 = gld_getActiveSampleIndex(ctx), iVar11 == 2)))) &&
+       ((*(int *)(ctx + GLD_unitObject3) == 0 || (iVar11 = gld_getActiveSampleIndex(ctx), iVar11 == 3)))) &&
+      (((*(int *)(ctx + GLD_unitObject4) == 0 || (iVar11 = gld_getActiveSampleIndex(ctx), iVar11 == 4)) &&
+       ((*(int *)(ctx + GLD_unitObject5) == 0 || (iVar11 = gld_getActiveSampleIndex(ctx), iVar11 == 5)))))) &&
+     (((*(int *)(ctx + GLD_unitObject6) == 0 || (iVar11 = gld_getActiveSampleIndex(ctx), iVar11 == 6)) &&
+      ((*(int *)(ctx + GLD_unitObject7) == 0 || (iVar11 = gld_getActiveSampleIndex(ctx), iVar11 == 7)))))) {
     pathFlagsB = *(uint *)(ctx + GLD_drawPixelsFlags) & 0xfffdffff;
     *(uint *)(ctx + GLD_drawPixelsFlags) = pathFlagsB;
   }

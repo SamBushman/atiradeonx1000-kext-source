@@ -1,0 +1,45 @@
+local	FUN_000a9070	fVar1	envSrcFloat34	INFERRED	float word at +0x34 of the unit environment source record
+local	FUN_000a9070	fVar3	envSrcFloat38	INFERRED	float word at +0x38 of the unit environment source record
+local	FUN_000a9070	uVar9	dirtyUnits	INFERRED	dirty unit mask: the three byte lanes of dirtyBits[4] ORed together
+use	FUN_000a9070	iVar10	boundTexObject	INFERRED	texture object bound to the unit (ctx+0x13f8 shadow, or the fbo attachment +0xbc)	^\s*iVar10\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x29a8\)\ \+\ 0xbc\);$	+1
+use	FUN_000a9070	iVar10	boundTexObject	INFERRED	texture object bound to the unit (ctx+0x13f8 shadow, or the fbo attachment +0xbc)	^\s*iVar10\ =\ \*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x000013f8\)\ \+\ iVar15\);$	+1
+use	FUN_000a9070	iVar10	boundTexObject	INFERRED	texture object bound to the unit (ctx+0x13f8 shadow, or the fbo attachment +0xbc)	^\s*if\ \(iVar10\ ==\ 0\)\ \{$	+1
+use	FUN_000a9070	iVar10	boundTexObject	INFERRED	texture object bound to the unit (ctx+0x13f8 shadow, or the fbo attachment +0xbc)	^\s*if\ \(iVar10\ !=\ 0\)\ \{$	+2
+use	FUN_000a9070	iVar10	boundTexObject	INFERRED	texture object bound to the unit (ctx+0x13f8 shadow, or the fbo attachment +0xbc)	^\s*FUN_00086a10\(param_1\ \+\ 0x240,puVar19,iVar10\);$	+1
+use	FUN_000a9070	iVar10	unitCombinerBase	INFERRED	glContextPtr4 + 0x1ae8: base of the per-unit combiner words	^\s*iVar10\ =\ param_1\ \+\ 0x1ae8;$	+1
+use	FUN_000a9070	iVar10	unitCombinerBase	INFERRED	glContextPtr4 + 0x1ae8: base of the per-unit combiner words	^\s*puVar11\ =\ \(uint\ \*\)\(iVar10\ \+\ iVar17\);$	+1
+use	FUN_000a9070	iVar10	unitCombinerBase	INFERRED	glContextPtr4 + 0x1ae8: base of the per-unit combiner words	^\s*\*\(uint\ \*\)\(iVar10\ \+\ iVar17\)\ =$	+3
+use	FUN_000a9070	iVar10	unitCombinerBase	INFERRED	glContextPtr4 + 0x1ae8: base of the per-unit combiner words	^\s*\*\(uint\ \*\)\(iVar10\ \+\ iVar17\)\ =$@2	+2
+use	FUN_000a9070	iVar10	unitCombinerBase	INFERRED	glContextPtr4 + 0x1ae8: base of the per-unit combiner words	^\s*\*\(uint\ \*\)\(iVar10\ \+\ iVar17\)\ =$@3	+2
+use	FUN_000a9070	iVar10	unitCombinerBase	INFERRED	glContextPtr4 + 0x1ae8: base of the per-unit combiner words	^\s*\*\(uint\ \*\)\(iVar10\ \+\ iVar17\)\ =$@4	+3
+use	FUN_000a9070	iVar10	unitCombinerBase	INFERRED	glContextPtr4 + 0x1ae8: base of the per-unit combiner words	^\s*\*\(uint\ \*\)\(iVar10\ \+\ iVar17\)\ =$@5	+2
+use	FUN_000a9070	iVar10	unitCombinerBase	INFERRED	glContextPtr4 + 0x1ae8: base of the per-unit combiner words	^\s*\*\(uint\ \*\)\(iVar10\ \+\ iVar17\)\ =$@6	+2
+local	FUN_000a9070	puVar11	unitCombinerWords	INFERRED	combiner words of the unit (unitCombinerBase + unit * 8)
+local	FUN_000a9070	uVar12	envSrcShortValue	INFERRED	16-bit environment field widened for the bit-pattern remap
+use	FUN_000a9070	uVar13	unitBit	INFERRED	1 << unit index	^\s*uVar13\ =\ 1\ <<\ \(uVar16\ \&\ 0x3f\);$	+1
+use	FUN_000a9070	uVar13	unitBit	INFERRED	1 << unit index	^\s*uVar13\ =\ 1\ <<\ \(uVar16\ \&\ 0x3f\);$@2	+1
+use	FUN_000a9070	uVar13	unitBit	INFERRED	1 << unit index	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x29f4\)\ =\ \~uVar13\ \&\ \*\(uint\ \*\)\(param_1\ \+\ 0x29f4\);$	+2
+use	FUN_000a9070	uVar13	unitBit	INFERRED	1 << unit index	^\s*if\ \(\(param_2\ \&\ uVar13\)\ !=\ 0\)\ \{$	+1
+use	FUN_000a9070	uVar13	envSrcShortCopy	INFERRED	16-bit environment field widened for the bit-pattern remap	^\s*uVar13\ =\ \(uint\)\*\(ushort\ \*\)\(puVar18\ \+\ 6\);$	+1
+use	FUN_000a9070	uVar13	envSrcShortCopy	INFERRED	16-bit environment field widened for the bit-pattern remap	^\s*if\ \(uVar13\ !=\ \(ushort\)puVar19\[2\]\)\ \{$	+1
+use	FUN_000a9070	uVar13	envSrcShortCopy	INFERRED	16-bit environment field widened for the bit-pattern remap	^\s*puVar11\[1\]\ =\ \(\(uVar13\ \*\ 0xb5\ >>\ 7\ \&\ 1\ \|\ uVar13\ \*\ 0x177\ >>\ 8\ \&\ 2\ \|$	+2
+use	FUN_000a9070	uVar13	envSrcShortCopy	INFERRED	16-bit environment field widened for the bit-pattern remap	^\s*uVar13\ =\ \(uint\)uVar8;$	+1
+use	FUN_000a9070	uVar13	envSrcShortCopy	INFERRED	16-bit environment field widened for the bit-pattern remap	^\s*if\ \(uVar13\ !=\ uVar7\)\ \{$	+1
+use	FUN_000a9070	uVar13	envSrcShortCopy	INFERRED	16-bit environment field widened for the bit-pattern remap	^\s*puVar11\[1\]\ =\ \(\(uVar13\ \*\ 0x11\ >>\ 4\ \&\ 1\ \|\ uVar13\ \*\ 0x37\ >>\ 6\ \&\ 2\ \|\ uVar13\ \*\ 0x51\ >>\ 7\ \&\ 4$	+2
+use	FUN_000a9070	uVar13	envSrcShortCopy	INFERRED	16-bit environment field widened for the bit-pattern remap	^\s*uVar13\ =\ \(uint\)uVar8;$@2	+1
+use	FUN_000a9070	uVar13	envSrcShortCopy	INFERRED	16-bit environment field widened for the bit-pattern remap	^\s*if\ \(uVar13\ !=\ uVar7\)\ \{$@2	+1
+use	FUN_000a9070	uVar13	envSrcShortCopy	INFERRED	16-bit environment field widened for the bit-pattern remap	^\s*puVar11\[1\]\ =\ \(\(uVar13\ \*\ 0x11\ >>\ 4\ \&\ 1\ \|\ uVar13\ \*\ 0x37\ >>\ 6\ \&\ 2\ \|\ uVar13\ \*\ 0x51\ >>\ 7\ \&\ 4$@2	+2
+use	FUN_000a9070	uVar13	envSrcShortCopy	INFERRED	16-bit environment field widened for the bit-pattern remap	^\s*uVar13\ =\ \(uint\)uVar8;$@3	+1
+use	FUN_000a9070	uVar13	envSrcShortCopy	INFERRED	16-bit environment field widened for the bit-pattern remap	^\s*if\ \(uVar13\ !=\ uVar7\)\ \{$@3	+1
+use	FUN_000a9070	uVar13	envSrcShortCopy	INFERRED	16-bit environment field widened for the bit-pattern remap	^\s*\*puVar11\ =\ \(\(uVar13\ \*\ 0x11\ >>\ 4\ \&\ 1\ \|\ uVar13\ \*\ 0x37\ >>\ 6\ \&\ 2\ \|\ uVar13\ \*\ 0x51\ >>\ 7\ \&\ 4\ \|$	+2
+use	FUN_000a9070	uVar13	filterKind	INFERRED	1, or 3 - (float <= FLOAT_001aa158): combiner filter kind code	^\s*uVar13\ =\ 1;$	+1
+use	FUN_000a9070	uVar13	filterKind	INFERRED	1, or 3 - (float <= FLOAT_001aa158): combiner filter kind code	^\s*uVar13\ =\ 3\ \-\ \(fVar1\ <=\ FLOAT_001aa158\);$	+1
+use	FUN_000a9070	uVar13	filterKind	INFERRED	1, or 3 - (float <= FLOAT_001aa158): combiner filter kind code	^\s*puVar11\[1\]\ =\ \(uVar13\ \&\ 3\)\ <<\ 0xb\ \|\ puVar11\[1\]\ \&\ 0xffffe7ff;$	+1
+use	FUN_000a9070	uVar13	filterKind	INFERRED	1, or 3 - (float <= FLOAT_001aa158): combiner filter kind code	^\s*uVar13\ =\ 1;$@2	+1
+use	FUN_000a9070	uVar13	filterKind	INFERRED	1, or 3 - (float <= FLOAT_001aa158): combiner filter kind code	^\s*uVar13\ =\ 3\ \-\ \(fVar3\ <=\ FLOAT_001aa158\);$	+1
+use	FUN_000a9070	uVar13	filterKind	INFERRED	1, or 3 - (float <= FLOAT_001aa158): combiner filter kind code	^\s*puVar11\[1\]\ =\ \(uVar13\ \&\ 3\)\ <<\ 0x11\ \|\ puVar11\[1\]\ \&\ 0xfff9ffff;$	+1
+local	FUN_000a9070	iVar14	unitCombinerBase8	INFERRED	glContextPtr4 + 0x1ae4 + unit * 8: first combiner word pair of the unit
+local	FUN_000a9070	iVar15	streamBase	INFERRED	glContextPtr4 + 0x240, the embedded stream object
+local	FUN_000a9070	puVar18	envSrc	INFERRED	unit environment source record (caps+0x31c4 + unit * 0x7c)
+local	FUN_000a9070	puVar19	envDst	INFERRED	unit environment destination block (engine+0x690 + unit * 0xcc)
+func	FUN_000a9070	gld_commitTexEnvUnits	INFERRED	for every unit in the dirty mask copies the texture environment record (caps+0x31c4+unit*0x7c) into the unit block (engine+0x690+unit*0xcc) and recomputes the combiner words (+0x1ae4/0x1ae8) with the bit-pattern remaps

@@ -1,0 +1,80 @@
+use	FUN_000bfed0	bVar1	recByte6	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*bVar1\ =\ \*\(byte\ \*\)\(\(int\)puVar60\ \+\ 6\);$	+1
+use	FUN_000bfed0	bVar1	recByte6	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*\(bVar1\ \&\ 1\)\ <<\ 6\ \|\ \(bVar9\ \&\ 7\)\ <<\ 3\ \|\ \(bVar8\ \&\ 1\)\ <<\ 2\ \|\ 3;$	+1
+use	FUN_000bfed0	bVar1	recBytee	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*bVar1\ =\ \*\(byte\ \*\)\(\(int\)puVar60\ \+\ 0xe\);$	+1
+use	FUN_000bfed0	bVar1	recBytee	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*\(uint\)bVar5\ <<\ 8\ \|\ \(bVar4\ \&\ 3\)\ <<\ 6\ \|\ \(bVar3\ \&\ 1\)\ <<\ 5\ \|\ \(bVar2\ \&\ 1\)\ <<\ 4\ \|\ bVar1\ \&\ 7;$	+1
+use	FUN_000bfed0	bVar2	recByte7	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*bVar2\ =\ \*\(byte\ \*\)\(\(int\)puVar60\ \+\ 7\);$	+1
+use	FUN_000bfed0	bVar2	recByte7	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*\(bVar2\ \&\ 7\)\ <<\ 0x19\ \|$	+1
+use	FUN_000bfed0	bVar2	recByte3f	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*bVar2\ =\ \*\(byte\ \*\)\(\(int\)puVar60\ \+\ 0x3f\);$	+1
+use	FUN_000bfed0	bVar2	recByte3f	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*\(uint\)bVar2\ <<\ 0x1e\ \|$	+1
+use	FUN_000bfed0	bVar2	recBytef	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*bVar2\ =\ \*\(byte\ \*\)\(\(int\)puVar60\ \+\ 0xf\);$	+1
+use	FUN_000bfed0	bVar2	recBytef	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*\(uint\)bVar5\ <<\ 8\ \|\ \(bVar4\ \&\ 3\)\ <<\ 6\ \|\ \(bVar3\ \&\ 1\)\ <<\ 5\ \|\ \(bVar2\ \&\ 1\)\ <<\ 4\ \|\ bVar1\ \&\ 7;$	+1
+use	FUN_000bfed0	bVar3	recByte2d	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*bVar3\ =\ \*\(byte\ \*\)\(\(int\)puVar60\ \+\ 0x2d\);$	+1
+use	FUN_000bfed0	bVar3	recByte2d	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*\(bVar3\ \&\ 3\)\ <<\ 0xb\ \|$	+1
+use	FUN_000bfed0	bVar4	recByte9	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*bVar4\ =\ \*\(byte\ \*\)\(\(int\)puVar60\ \+\ 9\);$	+1
+use	FUN_000bfed0	bVar4	recByte9	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*\(bVar4\ \&\ 1\)\ <<\ 7\ \|$	+1
+use	FUN_000bfed0	bVar4	recByte2e	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*bVar4\ =\ \*\(byte\ \*\)\(\(int\)puVar60\ \+\ 0x2e\);$	+1
+use	FUN_000bfed0	bVar4	recByte2e	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*\(bVar4\ \&\ 3\)\ <<\ 0x18\ \|$	+1
+use	FUN_000bfed0	bVar4	recByte11	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*bVar4\ =\ \*\(byte\ \*\)\(\(int\)puVar60\ \+\ 0x11\);$	+1
+use	FUN_000bfed0	bVar4	recByte11	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*\(uint\)bVar5\ <<\ 8\ \|\ \(bVar4\ \&\ 3\)\ <<\ 6\ \|\ \(bVar3\ \&\ 1\)\ <<\ 5\ \|\ \(bVar2\ \&\ 1\)\ <<\ 4\ \|\ bVar1\ \&\ 7;$	+1
+use	FUN_000bfed0	bVar5	recByteb	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*bVar5\ =\ \*\(byte\ \*\)\(\(int\)puVar60\ \+\ 0xb\);$	+1
+use	FUN_000bfed0	bVar5	recByteb	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*\(bVar5\ \&\ 1\)\ <<\ 10\ \|$	+1
+use	FUN_000bfed0	bVar5	recByte32	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*bVar5\ =\ \*\(byte\ \*\)\(\(int\)puVar60\ \+\ 0x32\);$	+1
+use	FUN_000bfed0	bVar5	recByte32	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*\(bVar5\ \&\ 7\)\ <<\ 0x1a\ \|$	+1
+use	FUN_000bfed0	bVar5	recByte12	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*bVar5\ =\ \*\(byte\ \*\)\(\(int\)puVar60\ \+\ 0x12\);$	+1
+use	FUN_000bfed0	bVar5	recByte12	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*\(uint\)bVar5\ <<\ 8\ \|\ \(bVar4\ \&\ 3\)\ <<\ 6\ \|\ \(bVar3\ \&\ 1\)\ <<\ 5\ \|\ \(bVar2\ \&\ 1\)\ <<\ 4\ \|\ bVar1\ \&\ 7;$	+1
+use	FUN_000bfed0	bVar6	recByte1d	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*bVar6\ =\ \*\(byte\ \*\)\(\(int\)puVar60\ \+\ 0x1d\);$	+1
+use	FUN_000bfed0	bVar6	recByte1d	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*\(bVar6\ \&\ 7\)\ <<\ 0xb\ \|$	+1
+use	FUN_000bfed0	bVar6	recByte16	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*bVar6\ =\ \*\(byte\ \*\)\(\(int\)puVar60\ \+\ 0x16\);$	+1
+use	FUN_000bfed0	bVar6	recByte16	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*\(bVar6\ \&\ 3\)\ <<\ 0x1d\ \|$	+1
+use	FUN_000bfed0	bVar6	recByte13	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*bVar6\ =\ \*\(byte\ \*\)\(\(int\)puVar60\ \+\ 0x13\);$	+1
+use	FUN_000bfed0	bVar6	recByte13	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*\(bVar6\ \&\ 0x1f\)\ <<\ 0x10\ \|$	+1
+use	FUN_000bfed0	bVar7	recByte1e	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*bVar7\ =\ \*\(byte\ \*\)\(\(int\)puVar60\ \+\ 0x1e\);$	+1
+use	FUN_000bfed0	bVar7	recByte1e	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*uVar48\ =\ \(bVar7\ \&\ 1\)\ <<\ 0xe\ \|$	+1
+use	FUN_000bfed0	bVar7	recByte45	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*bVar7\ =\ \*\(byte\ \*\)\(\(int\)puVar60\ \+\ 0x45\);$	+1
+use	FUN_000bfed0	bVar7	recByte45	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*\(uint\)bVar7\ <<\ 0x1f\ \|$	+1
+use	FUN_000bfed0	bVar8	recByte5	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*bVar8\ =\ \*\(byte\ \*\)\(\(int\)puVar60\ \+\ 5\);$	+1
+use	FUN_000bfed0	bVar8	recByte5	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*uVar48\ =\ \(bVar10\ \&\ 1\)\ <<\ 10\ \|\ \(bVar9\ \&\ 1\)\ <<\ 6\ \|\ \(bVar8\ \&\ 7\)\ <<\ 3\ \|\ \(bVar7\ \&\ 1\)\ <<\ 2\ \|\ 2;$	+1
+use	FUN_000bfed0	bVar9	recByte5B	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*bVar9\ =\ \*\(byte\ \*\)\(\(int\)puVar60\ \+\ 5\);$	+1
+use	FUN_000bfed0	bVar9	recByte5B	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*\(bVar1\ \&\ 1\)\ <<\ 6\ \|\ \(bVar9\ \&\ 7\)\ <<\ 3\ \|\ \(bVar8\ \&\ 1\)\ <<\ 2\ \|\ 3;$	+1
+use	FUN_000bfed0	bVar9	recByte3d	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*bVar9\ =\ \*\(byte\ \*\)\(\(int\)puVar60\ \+\ 0x3d\);$	+1
+use	FUN_000bfed0	bVar9	recByte3d	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*\(bVar9\ \&\ 3\)\ <<\ 0x18\ \|$	+1
+use	FUN_000bfed0	bVar9	recByte6B	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*bVar9\ =\ \*\(byte\ \*\)\(\(int\)puVar60\ \+\ 6\);$	+1
+use	FUN_000bfed0	bVar9	recByte6B	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*uVar48\ =\ \(bVar10\ \&\ 1\)\ <<\ 10\ \|\ \(bVar9\ \&\ 1\)\ <<\ 6\ \|\ \(bVar8\ \&\ 7\)\ <<\ 3\ \|\ \(bVar7\ \&\ 1\)\ <<\ 2\ \|\ 2;$	+1
+use	FUN_000bfed0	bVar10	recByte41	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*bVar10\ =\ \*\(byte\ \*\)\(\(int\)puVar60\ \+\ 0x41\);$	+1
+use	FUN_000bfed0	bVar10	recByte41	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*\(bVar10\ \&\ 7\)\ <<\ 0x1a\ \|$	+1
+use	FUN_000bfed0	bVar10	recBytebB	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*bVar10\ =\ \*\(byte\ \*\)\(\(int\)puVar60\ \+\ 0xb\);$	+1
+use	FUN_000bfed0	bVar10	recBytebB	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*uVar48\ =\ \(bVar10\ \&\ 1\)\ <<\ 10\ \|\ \(bVar9\ \&\ 1\)\ <<\ 6\ \|\ \(bVar8\ \&\ 7\)\ <<\ 3\ \|\ \(bVar7\ \&\ 1\)\ <<\ 2\ \|\ 2;$	+1
+use	FUN_000bfed0	bVar11	recByte22	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*bVar11\ =\ \*\(byte\ \*\)\(\(int\)puVar60\ \+\ 0x22\);$	+1
+use	FUN_000bfed0	bVar11	recByte22	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*\(bVar11\ \&\ 3\)\ <<\ 0x1d\ \|$	+1
+use	FUN_000bfed0	bVar11	recByte17	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*bVar11\ =\ \*\(byte\ \*\)\(\(int\)puVar60\ \+\ 0x17\);$	+1
+use	FUN_000bfed0	bVar11	recByte17	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*\(uint\)bVar12\ <<\ 0x1f\ \|\ \(uVar24\ \&\ 0x1ff\)\ <<\ 0x10\ \|\ \(bVar15\ \&\ 0x1f\)\ <<\ 8\ \|\ bVar11\ \&\ 0x1f;$	+1
+use	FUN_000bfed0	bVar12	recByte23	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*bVar12\ =\ \*\(byte\ \*\)\(\(int\)puVar60\ \+\ 0x23\);$	+1
+use	FUN_000bfed0	bVar12	recByte23	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*\(uint\)bVar12\ <<\ 0x1f\ \|$	+1
+use	FUN_000bfed0	bVar12	recByte19	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*bVar12\ =\ \*\(byte\ \*\)\(\(int\)puVar60\ \+\ 0x19\);$	+1
+use	FUN_000bfed0	bVar12	recByte19	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*\(uint\)bVar12\ <<\ 0x1f\ \|\ \(uVar24\ \&\ 0x1ff\)\ <<\ 0x10\ \|\ \(bVar15\ \&\ 0x1f\)\ <<\ 8\ \|\ bVar11\ \&\ 0x1f;$	+1
+use	FUN_000bfed0	bVar13	recByte16B	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*bVar13\ =\ \*\(byte\ \*\)\(\(int\)puVar60\ \+\ 0x16\);$	+1
+use	FUN_000bfed0	bVar13	recByte16B	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*\(bVar13\ \&\ 1\)\ <<\ 0x1c\ \|$	+1
+use	FUN_000bfed0	bVar14	recByte31	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*bVar14\ =\ \*\(byte\ \*\)\(\(int\)puVar60\ \+\ 0x31\);$	+1
+use	FUN_000bfed0	bVar14	recByte31	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*uVar42\ <<\ 0xc\ \|\ uVar22\ >>\ 3\ \&\ 0x800\ \|\ \(uVar22\ \&\ 0x7f\)\ <<\ 4\ \|\ bVar14\ \&\ 0xf;$	+1
+use	FUN_000bfed0	bVar15	recByte2f	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*bVar15\ =\ \*\(byte\ \*\)\(\(int\)puVar60\ \+\ 0x2f\);$	+1
+use	FUN_000bfed0	bVar15	recByte2f	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*\(bVar15\ \&\ 3\)\ <<\ 0x17\ \|$	+1
+use	FUN_000bfed0	bVar16	recByte3e	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*bVar16\ =\ \*\(byte\ \*\)\(\(int\)puVar60\ \+\ 0x3e\);$	+1
+use	FUN_000bfed0	bVar16	recByte3e	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*\(uint\)bVar16\ <<\ 0x1e\ \|$	+1
+use	FUN_000bfed0	bVar16	recByte15	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*bVar16\ =\ \*\(byte\ \*\)\(\(int\)puVar60\ \+\ 0x15\);$	+1
+use	FUN_000bfed0	bVar16	recByte15	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*\(bVar16\ \&\ 3\)\ <<\ 0x1a\ \|$	+1
+use	FUN_000bfed0	uVar18	recShort12	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*uVar18\ =\ \*\(ushort\ \*\)\(\(int\)puVar60\ \+\ 0x12\);$	+1
+use	FUN_000bfed0	uVar18	recShort12	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*if\ \(\(uVar18\ \&\ 0x2000\)\ ==\ 0\)\ \{$	+1
+use	FUN_000bfed0	uVar18	recShort12	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*\(uVar18\ \&\ 0x4000\)\ <<\ 0xf\ \|$	+3
+use	FUN_000bfed0	uVar19	recShort12B	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*uVar19\ =\ \*\(ushort\ \*\)\(\(int\)puVar60\ \+\ 0x12\);$	+1
+use	FUN_000bfed0	uVar19	recShort12B	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*\(uVar19\ \&\ 0x4000\)\ <<\ 9\ \|$	+2
+use	FUN_000bfed0	uVar19	recShort1a	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*uVar19\ =\ \*\(ushort\ \*\)\(\(int\)puVar60\ \+\ 0x1a\);$	+1
+use	FUN_000bfed0	uVar19	recShort1a	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*if\ \(\(uVar19\ \&\ 0x2000\)\ ==\ 0\)\ \{$	+1
+use	FUN_000bfed0	uVar19	recShort1a	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*uVar19\ >>\ 5\ \&\ 0x200\ \|\ uVar19\ >>\ 7\ \&\ 0x100\ \|\ uVar50\ \&\ 0xff\ \|\ uVar19\ \&\ 0x7f;$	+1
+use	FUN_000bfed0	uVar21	recShort1e	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*uVar21\ =\ \*\(ushort\ \*\)\(\(int\)puVar60\ \+\ 0x1e\);$	+1
+use	FUN_000bfed0	uVar21	recShort1e	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*if\ \(\(uVar21\ \&\ 0x2000\)\ ==\ 0\)\ \{$	+1
+use	FUN_000bfed0	uVar21	recShort1e	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*\(uVar21\ \&\ 0x4000\)\ <<\ 0xf\ \|$	+3
+use	FUN_000bfed0	uVar24	recShorte	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*uVar24\ =\ \*\(ushort\ \*\)\(\(int\)puVar60\ \+\ 0xe\);$	+1
+use	FUN_000bfed0	uVar24	recShorte	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*\(uVar17\ \&\ 0x7f\)\ <<\ 0x10\ \|\ uVar24\ >>\ 7\ \&\ 0x80\ \|\ uVar24\ \&\ 0x7f;$	+1
+use	FUN_000bfed0	uVar24	recShorte	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*uVar24\ =\ \*\(ushort\ \*\)\(\(int\)puVar60\ \+\ 0xe\);$@2	+1
+use	FUN_000bfed0	uVar24	recShorte	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*if\ \(\(uVar24\ \&\ 0x2000\)\ ==\ 0\)\ \{$	+1
+use	FUN_000bfed0	uVar24	recShorte	INFERRED	load of one record field: type and byte offset from the record base are in the name	^\s*uVar24\ >>\ 5\ \&\ 0x200\ \|\ uVar24\ >>\ 7\ \&\ 0x100\ \|\ uVar40\ \&\ 0xff\ \|\ uVar24\ \&\ 0x7f;$	+1

@@ -559,7 +559,7 @@ int freeAndNullField(param_1)
   /* issue #74 / #79: this is the stock's plain free-and-null helper again. It used to carry a
    * malloc_size() guard because the bad values it freed on CGLDestroyContext teardown (0x84c1,
    * 0x110001 in #74; 0x24 in FUN_0004b5d0, #79) looked like table entries - the guard hid a
-   * real bug instead of fixing it: FUN_000b5fb0 dropped the object it hands the destroy
+   * real bug instead of fixing it: gld_destroyUnitCmdLists dropped the object it hands the destroy
    * callback (`lwz r4,0x1448(r30)`, loaded before the branch, so its indirect-call argument
    * count missed it) and the destructor ran on whatever r4 held. With that fixed, cgl_probe
    * runs clean on real hardware WITHOUT the guard (5 runs, zero malloc warnings). */
@@ -772,7 +772,7 @@ LAB_0004d260:
     *(uint *)(glContext + 0x18a4) = *(uint *)(glContext + 0x18a4) | 0x10;
     if ((*(uint *)(((unsigned char *)0x00001544) + glContextWord1e5c) & 0x10) == 0) {
 LAB_0004d2c8:
-      FUN_000b6580(glContext,0);
+      ffpsBuildProgram(glContext,0);
       (**(code **)(((unsigned char *)0x00001334) + glContext))(glContext,0);
       (**(code **)(glContext + 0x294c))(glContext,*(undefined4 *)(glContext + 0x1e5c));
     }
@@ -890,14 +890,14 @@ void FUN_0004d620(int glContext,undefined4 param_2,undefined4 param_3,undefined4
   
   glContextWord44 = *(uint *)(glContext + 0x44);
   if ((glContextWord44 & 0x20000) == 0) {
-    FUN_000b6580(glContext,0);
+    ffpsBuildProgram(glContext,0);
                     
                     
     (**(code **)(glContext + 0x294c))(glContext,*(undefined4 *)(glContext + 0x1e5c));
     return;
   }
   if ((glContextWord44 & 0x2000) != 0) {
-    ((undefined4 (*)())FUN_000afe40)(glContext,0,param_3,param_4,fparam_1);
+    ((undefined4 (*)())gld_compileFragmentProgram)(glContext,0,param_3,param_4,fparam_1);
     return;
   }
   if ((glContextWord44 & 0x80100000) == 0x80000000) {
@@ -1604,7 +1604,7 @@ LAB_0004e760:
     glContextWord44 = *(uint *)(glContext + 0x44);
   }
   if ((glContextWord44 & 0x20000) == 0) {
-    FUN_000b6580(glContext,0);
+    ffpsBuildProgram(glContext,0);
                     
                     
     (**(code **)(glContext + 0x294c))(glContext,*(undefined4 *)(glContext + 0x1e5c));
@@ -1614,7 +1614,7 @@ LAB_0004e760:
     atifsCompileCurrentShader(glContext);
     return;
   }
-  ((undefined4 (*)())FUN_000afe40)(glContext,0,param_3,param_4,fparam_1);
+  ((undefined4 (*)())gld_compileFragmentProgram)(glContext,0,param_3,param_4,fparam_1);
   return;
 }
 
@@ -1764,7 +1764,7 @@ int FUN_0004eba0(glContext, param_2, param_3, param_4, param_5, param_6, param_7
       (iVar1 = FUN_0001a010(iVar1,*(undefined4 *)(iVar1 + 0x26a0),param_3,param_4,param_5,param_6,
                             param_7), iVar1 != 0)) || (glContextWord2768 == 0)) {
     glState = *(int *)(glContext + 4);
-    iVar1 = ((uint (*)())FUN_000a3560)(glContext,(double)*(float *)(((unsigned char *)0x00002e20) + *(int *)(glState + 0x10)));
+    iVar1 = ((uint (*)())gld_quantizePointSizeInt)(glContext,(double)*(float *)(((unsigned char *)0x00002e20) + *(int *)(glState + 0x10)));
     uVar2 = *(undefined4 *)(*(int *)(glContext + 4) + 0x26a0);
     *(short *)(glContext + 0x1b42) = (short)((uint)(glContextWord8 * iVar1) >> 1);
     iVar1 = FUN_0001a010(*(int *)(glContext + 4),uVar2,param_3,param_4,param_5,param_6,glState);
@@ -1824,7 +1824,7 @@ int FUN_0004ed90(glContext)
   
   glContextWord2768 = *(int *)(glContext + 0x2768);
   glContextWord8 = *(int *)(glContext + 8);
-  iVar4 = FUN_000a3670(glContext);
+  iVar4 = gld_isPointAttenuationActive(glContext);
   glContextWord44 = *(uint *)(glContext + 0x44);
   if (((glContextWord44 & 0x60020000) == 0x40000000) && (glContextWord2768 != 0)) {
     *(short *)(glContext + 0x1ccc) = (short)*(undefined4 *)(glContextWord2768 + 4);
@@ -2041,14 +2041,14 @@ void FUN_0004f2e0(int glContext,undefined4 param_2,undefined4 param_3,undefined4
     }
   }
   if ((*(uint *)(glContext + 0x44) & 0x20000) == 0) {
-    FUN_000b6580(glContext,0);
+    ffpsBuildProgram(glContext,0);
     (**(code **)(glContext + 0x294c))(glContext,*(undefined4 *)(glContext + 0x1e5c));
   }
   else if ((*(uint *)(glContext + 0x44) & 0x2000) == 0) {
     atifsCompileCurrentShader(glContext);
   }
   else {
-    ((undefined4 (*)())FUN_000afe40)(glContext,0,param_3,param_4,fparam_1);
+    ((undefined4 (*)())gld_compileFragmentProgram)(glContext,0,param_3,param_4,fparam_1);
   }
   uVar5 = ((int (*)())FUN_0004f160)(glContext,*(uint *)(puVar3 + (uint)colorFormatIndex * 0x24 + 0x1c) >> 0x1e);
   *(uint *)(glContext + 0x1a54) = uVar5 & 0x3ff | *(uint *)(glContext + 0x1a54) & 0xfffffc00;

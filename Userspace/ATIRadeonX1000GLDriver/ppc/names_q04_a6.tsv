@@ -1,0 +1,95 @@
+use	extvsOptimizeProgram	uVar21	operandWord	INFERRED	first word of the operand record at puVar14 (the select / data type word)	^\s*uVar21\ =\ \*puVar14;$	+1
+use	extvsOptimizeProgram	uVar21	operandWord	INFERRED	first word of the operand record at puVar14 (the select / data type word)	^\s*switch\(uVar21\)\ \{$@13	+1
+use	extvsOptimizeProgram	uVar21	operandWord	INFERRED	first word of the operand record at puVar14 (the select / data type word)	^\s*uVar21\ =\ \*puVar17;$@5	+1
+use	extvsOptimizeProgram	uVar21	operandWord	INFERRED	first word of the operand record at puVar14 (the select / data type word)	^\s*uVar21\ =\ puVar38\[0x12\];$	+1
+use	extvsOptimizeProgram	uVar21	operandWord	INFERRED	first word of the operand record at puVar14 (the select / data type word)	^\s*uVar21\ =\ puVar38\[0x13\];$	+1
+use	extvsOptimizeProgram	uVar21	operandWord	INFERRED	first word of the operand record at puVar14 (the select / data type word)	^\s*uVar21\ =\ puVar38\[0x14\];$	+1
+use	extvsOptimizeProgram	uVar21	operandWord	INFERRED	first word of the operand record at puVar14 (the select / data type word)	^\s*uVar21\ =\ \*puVar17;$@6	+2
+use	extvsOptimizeProgram	uVar21	operandWord	INFERRED	first word of the operand record at puVar14 (the select / data type word)	^\s*uVar21\ =\ 0x87d9;$@3	+1
+use	extvsOptimizeProgram	uVar21	operandWord	INFERRED	first word of the operand record at puVar14 (the select / data type word)	^\s*uVar21\ =\ 0x87da;$@3	+1
+use	extvsOptimizeProgram	uVar21	operandWord	INFERRED	first word of the operand record at puVar14 (the select / data type word)	^\s*uVar21\ =\ 0x87db;$@3	+1
+use	extvsOptimizeProgram	uVar21	operandWord	INFERRED	first word of the operand record at puVar14 (the select / data type word)	^\s*uVar21\ =\ 0x87dc;$@3	+1
+use	extvsOptimizeProgram	uVar21	operandWord	INFERRED	first word of the operand record at puVar14 (the select / data type word)	^\s*uVar21\ =\ 0x87d5;$@5	+1
+use	extvsOptimizeProgram	uVar21	operandWord	INFERRED	first word of the operand record at puVar14 (the select / data type word)	^\s*uVar21\ =\ 0x87d6;$@5	+1
+use	extvsOptimizeProgram	uVar21	operandWord	INFERRED	first word of the operand record at puVar14 (the select / data type word)	^\s*uVar21\ =\ 0x87d7;$@5	+1
+use	extvsOptimizeProgram	uVar21	operandWord	INFERRED	first word of the operand record at puVar14 (the select / data type word)	^\s*uVar21\ =\ 0x87d8;$@5	+1
+use	extvsOptimizeProgram	uVar21	operandWord	INFERRED	first word of the operand record at puVar14 (the select / data type word)	^\s*uVar21\ =\ 0x87df;$@3	+1
+use	extvsOptimizeProgram	uVar21	operandWord	INFERRED	first word of the operand record at puVar14 (the select / data type word)	^\s*uVar21\ =\ 0x87de;$@5	+1
+use	extvsOptimizeProgram	uVar21	operandWord	INFERRED	first word of the operand record at puVar14 (the select / data type word)	^\s*uVar21\ =\ puVar38\[0x12\];$@2	+2
+use	extvsOptimizeProgram	uVar21	operandWord	INFERRED	first word of the operand record at puVar14 (the select / data type word)	^\s*uVar21\ =\ puVar38\[0x13\];$@2	+2
+use	extvsOptimizeProgram	uVar21	operandWord	INFERRED	first word of the operand record at puVar14 (the select / data type word)	^\s*uVar21\ =\ puVar38\[0x14\];$@2	+2
+use	extvsOptimizeProgram	uVar21	operandWord	INFERRED	first word of the operand record at puVar14 (the select / data type word)	^\s*\*puVar14\ =\ uVar21;$@2	+1
+use	extvsOptimizeProgram	uVar21	operandWord	INFERRED	first word of the operand record at puVar14 (the select / data type word)	^\s*uVar21\ =\ \*puVar14;$@2	+2
+use	extvsOptimizeProgram	uVar21	operandWord	INFERRED	first word of the operand record at puVar14 (the select / data type word)	^\s*uVar21\ =\ \*puVar17;$@13	+1
+use	extvsOptimizeProgram	uVar21	operandWord	INFERRED	first word of the operand record at puVar14 (the select / data type word)	^\s*uVar21\ =\ puVar38\[0x12\];$@5	+1
+use	extvsOptimizeProgram	uVar21	operandWord	INFERRED	first word of the operand record at puVar14 (the select / data type word)	^\s*uVar21\ =\ puVar38\[0x13\];$@5	+1
+use	extvsOptimizeProgram	uVar21	operandWord	INFERRED	first word of the operand record at puVar14 (the select / data type word)	^\s*uVar21\ =\ puVar38\[0x14\];$@5	+1
+use	extvsOptimizeProgram	uVar21	operandWord	INFERRED	first word of the operand record at puVar14 (the select / data type word)	^\s*uVar21\ =\ \*puVar17;$@14	+2
+use	extvsOptimizeProgram	uVar21	operandWord	INFERRED	first word of the operand record at puVar14 (the select / data type word)	^\s*uVar21\ =\ 0x87d9;$@7	+1
+use	extvsOptimizeProgram	uVar21	operandWord	INFERRED	first word of the operand record at puVar14 (the select / data type word)	^\s*uVar21\ =\ 0x87da;$@7	+1
+use	extvsOptimizeProgram	uVar21	operandWord	INFERRED	first word of the operand record at puVar14 (the select / data type word)	^\s*uVar21\ =\ 0x87db;$@7	+1
+use	extvsOptimizeProgram	uVar21	operandWord	INFERRED	first word of the operand record at puVar14 (the select / data type word)	^\s*uVar21\ =\ 0x87dc;$@7	+1
+use	extvsOptimizeProgram	uVar21	operandWord	INFERRED	first word of the operand record at puVar14 (the select / data type word)	^\s*uVar21\ =\ 0x87d5;$@11	+1
+use	extvsOptimizeProgram	uVar21	operandWord	INFERRED	first word of the operand record at puVar14 (the select / data type word)	^\s*uVar21\ =\ 0x87d6;$@11	+1
+use	extvsOptimizeProgram	uVar21	operandWord	INFERRED	first word of the operand record at puVar14 (the select / data type word)	^\s*uVar21\ =\ 0x87d7;$@11	+1
+use	extvsOptimizeProgram	uVar21	operandWord	INFERRED	first word of the operand record at puVar14 (the select / data type word)	^\s*uVar21\ =\ 0x87d8;$@11	+1
+use	extvsOptimizeProgram	uVar21	operandWord	INFERRED	first word of the operand record at puVar14 (the select / data type word)	^\s*uVar21\ =\ 0x87df;$@7	+1
+use	extvsOptimizeProgram	uVar21	operandWord	INFERRED	first word of the operand record at puVar14 (the select / data type word)	^\s*uVar21\ =\ 0x87de;$@11	+1
+use	extvsOptimizeProgram	uVar21	operandWord	INFERRED	first word of the operand record at puVar14 (the select / data type word)	^\s*uVar21\ =\ puVar38\[0x12\];$@6	+2
+use	extvsOptimizeProgram	uVar21	operandWord	INFERRED	first word of the operand record at puVar14 (the select / data type word)	^\s*uVar21\ =\ puVar38\[0x13\];$@6	+2
+use	extvsOptimizeProgram	uVar21	operandWord	INFERRED	first word of the operand record at puVar14 (the select / data type word)	^\s*uVar21\ =\ puVar38\[0x14\];$@6	+2
+use	extvsOptimizeProgram	uVar21	operandWord	INFERRED	first word of the operand record at puVar14 (the select / data type word)	^\s*\*puVar14\ =\ uVar21;$@4	+1
+local	extvsOptimizeProgram	uVar36	remainingInsts	INFERRED	instruction count - sweep step: number of instructions at or after the current one
+use	extvsOptimizeProgram	bVar1	destXUnused	INFERRED	destination component X of the instruction is not enabled	^\s*bVar1\ =\ \*\(char\ \*\)\(iVar13\ \+\ \-0x65\)\ ==\ '\\0';$	+2
+use	extvsOptimizeProgram	bVar1	destXUnused	INFERRED	destination component X of the instruction is not enabled	^\s*if\ \(\(\(\(bVar1\)\ \|\|\ \(bVar15\ !=\ 0\)\)\ \&\&\ \(\(cVar2\ ==\ '\\0'\ \|\|\ \(bVar12\ !=\ 0\)\)\)\)\ \&\&$	+3
+use	extvsOptimizeProgram	bVar1	destXUnused	INFERRED	destination component X of the instruction is not enabled	^\s*if\ \(\(\(\(\(\(\(bVar1\)\ \|\|\ \(bVar12\ !=\ 0\)\)\ \&\&\ \(\(cVar2\ ==\ '\\0'\ \|\|\ \(bVar11\ !=\ 0\)\)\)\)\ \&\&$	+3
+use	extvsOptimizeProgram	bVar1	destXUnused	INFERRED	destination component X of the instruction is not enabled	^\s*if\ \(\(\(\(\(bVar1\)\ \|\|\ \(\(local_68\ ==\ '\\0'\ \|\|\ \(bVar15\ !=\ 0\)\)\)\)\ \&\&$	+4
+use	extvsOptimizeProgram	bVar1	destXUnused	INFERRED	destination component X of the instruction is not enabled	^\s*if\ \(\(\(\(\(bVar1\)\ \|\|\ \(bVar15\ !=\ 0\)\)\ \&\&\ \(\(cVar2\ ==\ '\\0'\ \|\|\ \(bVar12\ !=\ 0\)\)\)\)\ \&\&$	+3
+use	extvsOptimizeProgram	bVar1	destXUnused	INFERRED	destination component X of the instruction is not enabled	^\s*if\ \(\(\(\(bVar1\)\ \|\|\ \(\(local_68\ ==\ '\\0'\ \|\|\ \(bVar11\ !=\ 0\)\)\)\)\ \&\&$	+4
+use	extvsOptimizeProgram	bVar1	canContinue	INFERRED	true until a conflicting later instruction is found	^\s*bVar1\ =\ true;$	+1
+use	extvsOptimizeProgram	bVar1	canContinue	INFERRED	true until a conflicting later instruction is found	^\s*bVar1\ =\ false;$	+1
+use	extvsOptimizeProgram	bVar1	canContinue	INFERRED	true until a conflicting later instruction is found	^\s*if\ \(bVar1\)\ goto\ LAB_000ba8a8;$	+1
+use	extvsOptimizeProgram	bVar1	canContinue	INFERRED	true until a conflicting later instruction is found	^\s*bVar1\ =\ true;$@2	+1
+use	extvsOptimizeProgram	bVar1	canContinue	INFERRED	true until a conflicting later instruction is found	^\s*bVar1\ =\ false;$@2	+1
+use	extvsOptimizeProgram	bVar1	canContinue	INFERRED	true until a conflicting later instruction is found	^\s*if\ \(bVar1\)\ \{$	+1
+use	extvsOptimizeProgram	bVar1	canContinue	INFERRED	true until a conflicting later instruction is found	^\s*bVar1\ =\ true;$@3	+1
+use	extvsOptimizeProgram	bVar1	canContinue	INFERRED	true until a conflicting later instruction is found	^\s*bVar1\ =\ false;$@3	+1
+use	extvsOptimizeProgram	bVar1	canContinue	INFERRED	true until a conflicting later instruction is found	^\s*if\ \(!bVar1\)\ goto\ LAB_000bd6dc;$	+1
+use	extvsOptimizeProgram	bVar1	canContinue	INFERRED	true until a conflicting later instruction is found	^\s*bVar1\ =\ true;$@4	+1
+use	extvsOptimizeProgram	bVar1	canContinue	INFERRED	true until a conflicting later instruction is found	^\s*bVar1\ =\ true;$@6	+1
+use	extvsOptimizeProgram	bVar1	canContinue	INFERRED	true until a conflicting later instruction is found	^\s*bVar1\ =\ true;$@7	+1
+use	extvsOptimizeProgram	bVar1	canContinue	INFERRED	true until a conflicting later instruction is found	^\s*bVar1\ =\ false;$@5	+1
+use	extvsOptimizeProgram	bVar1	canContinue	INFERRED	true until a conflicting later instruction is found	^\s*if\ \(\(uVar8\ <=\ uVar32\)\ \|\|\ \(bVar1\)\)\ break;$	+1
+use	extvsOptimizeProgram	bVar1	canContinue	INFERRED	true until a conflicting later instruction is found	^\s*bVar1\ =\ true;$@5	+1
+use	extvsOptimizeProgram	bVar1	canContinue	INFERRED	true until a conflicting later instruction is found	^\s*bVar1\ =\ false;$@4	+1
+use	extvsOptimizeProgram	bVar1	canContinue	INFERRED	true until a conflicting later instruction is found	^\s*if\ \(!bVar1\)\ \{$	+1
+use	extvsOptimizeProgram	bVar1	canContinue	INFERRED	true until a conflicting later instruction is found	^\s*bVar1\ =\ true;$@8	+1
+use	extvsOptimizeProgram	bVar1	canContinue	INFERRED	true until a conflicting later instruction is found	^\s*bVar1\ =\ false;$@6	+1
+use	extvsOptimizeProgram	bVar1	canContinue	INFERRED	true until a conflicting later instruction is found	^\s*if\ \(!bVar1\)\ goto\ LAB_000bd970;$	+1
+use	extvsOptimizeProgram	bVar5	fusable	INFERRED	the pair of instructions can still be fused	^\s*bVar5\ =\ true;$	+1
+use	extvsOptimizeProgram	bVar5	fusable	INFERRED	the pair of instructions can still be fused	^\s*bVar5\ =\ false;$	+1
+use	extvsOptimizeProgram	bVar5	fusable	INFERRED	the pair of instructions can still be fused	^\s*bVar5\ =\ true;$@2	+1
+use	extvsOptimizeProgram	bVar5	fusable	INFERRED	the pair of instructions can still be fused	^\s*if\ \(\(\(\(\(\(\(bVar1\)\ \|\|\ \(bVar12\ !=\ 0\)\)\ \&\&\ \(\(cVar2\ ==\ '\\0'\ \|\|\ \(bVar11\ !=\ 0\)\)\)\)\ \&\&$	+3
+use	extvsOptimizeProgram	bVar5	fusable	INFERRED	the pair of instructions can still be fused	^\s*bVar5\ =\ true;$@3	+1
+use	extvsOptimizeProgram	bVar5	fusable	INFERRED	the pair of instructions can still be fused	^\s*bVar5\ =\ false;$@2	+1
+use	extvsOptimizeProgram	bVar5	fusable	INFERRED	the pair of instructions can still be fused	^\s*bVar5\ =\ true;$@6	+1
+use	extvsOptimizeProgram	bVar5	fusable	INFERRED	the pair of instructions can still be fused	^\s*bVar5\ =\ false;$@4	+1
+use	extvsOptimizeProgram	bVar5	fusable	INFERRED	the pair of instructions can still be fused	^\s*if\ \(bVar5\)\ goto\ LAB_000ba610;$	+1
+use	extvsOptimizeProgram	bVar5	fusable	INFERRED	the pair of instructions can still be fused	^\s*bVar5\ =\ true;$@4	+1
+use	extvsOptimizeProgram	bVar5	fusable	INFERRED	the pair of instructions can still be fused	^\s*bVar5\ =\ false;$@3	+1
+use	extvsOptimizeProgram	bVar5	fusable	INFERRED	the pair of instructions can still be fused	^\s*bVar5\ =\ true;$@5	+1
+use	extvsOptimizeProgram	bVar5	fusable	INFERRED	the pair of instructions can still be fused	^\s*if\ \(\(\(\(\(bVar1\)\ \|\|\ \(bVar15\ !=\ 0\)\)\ \&\&\ \(\(cVar2\ ==\ '\\0'\ \|\|\ \(bVar12\ !=\ 0\)\)\)\)\ \&\&$	+3
+use	extvsOptimizeProgram	bVar5	notFused	INFERRED	false once the sweep concluded with a fused pair	^\s*bVar5\ =\ false;$@5	+1
+use	extvsOptimizeProgram	bVar5	notFused	INFERRED	false once the sweep concluded with a fused pair	^\s*bVar5\ =\ true;$@7	+1
+use	extvsOptimizeProgram	bVar5	notFused	INFERRED	false once the sweep concluded with a fused pair	^\s*if\ \(\(piVar20\[\-0xe\]\ !=\ 2\)\ \|\|\ \(bVar5\ =\ true,\ piVar20\[\-0xd\]\ !=\ \*\(int\ \*\)\(iVar9\ \+\ 8\)\)\)$	+1
+use	extvsOptimizeProgram	bVar5	notFused	INFERRED	false once the sweep concluded with a fused pair	^\s*bVar5\ =\ false;$@6	+1
+use	extvsOptimizeProgram	bVar5	notFused	INFERRED	false once the sweep concluded with a fused pair	^\s*\}\ while\ \(\(iVar13\ !=\ 0\)\ \&\&\ \(piVar20\ =\ piVar20\ \+\ 0x1d,\ !bVar5\)\);$	+1
+local	extvsOptimizeProgram	bVar12	laterReadFlagA	INFERRED	accumulated read flag of a later instruction (first of four component flags)
+local	extvsOptimizeProgram	bVar15	laterReadFlagB	INFERRED	accumulated read flag of a later instruction (second component flag)
+local	extvsOptimizeProgram	bVar11	laterReadFlagC	INFERRED	accumulated read flag of a later instruction (third component flag)
+local	extvsOptimizeProgram	bVar10	laterReadFlagD	INFERRED	accumulated read flag of a later instruction (fourth component flag)
+local	extvsOptimizeProgram	puVar14	operandRecordPtr	INFERRED	pointer to the operand record of the later instruction (inst + 0x44)
+local	extvsOptimizeProgram	puVar17	srcRecordPtr	INFERRED	pointer to the source operand record of the instruction (+0x28 or +0x44)
+local	extvsOptimizeProgram	iVar18	instKind	INFERRED	opcode kind word of the instruction (inst - 0x70 from its end): 1 add, 2 multiply, 3 matrix multiply
+local	extvsOptimizeProgram	iVar26	laterSrcKind	INFERRED	select word of the source operand of the later instruction
+local	extvsOptimizeProgram	iVar34	wantedKind	INFERRED	opcode kind searched for in the sweep (2)

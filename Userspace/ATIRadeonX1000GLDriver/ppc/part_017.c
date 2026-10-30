@@ -58,32 +58,34 @@ int extvsOptimizeProgram(ctx, shader)
   uint addSearchIndex;
   uint matMulSearchIndex;
   uint mulSearchIndex;
-  bool bVar1;
+  bool destXUnused;
+  bool canContinue;
   char destEnableY;
   char destEnableZ;
   char destEnableW;
-  bool bVar5;
+  bool fusable;
+  bool notFused;
   int remainingLater;
   char *laterFlagCursor;
   uint instCount;
   int laterInstPtr;
-  byte bVar10;
-  byte bVar11;
-  byte bVar12;
+  byte laterReadFlagD;
+  byte laterReadFlagC;
+  byte laterReadFlagA;
   int instEnd;
-  byte bVar15;
-  undefined4 *puVar14;
+  byte laterReadFlagB;
+  undefined4 *operandRecordPtr;
   uint instCountAtEntry;
-  undefined4 *puVar17;
-  int iVar18;
+  undefined4 *srcRecordPtr;
+  int instKind;
   undefined4 addInstWord48;
   int *laterDestSlot;
-  undefined4 uVar21;
+  undefined4 operandWord;
   int shaderWord20;
   undefined4 addInstWord50;
   undefined4 addInstWord38;
   undefined4 addInstWord2cMapped;
-  int iVar26;
+  int laterSrcKind;
   undefined4 addInstWord4c_2;
   undefined4 addInstWord34;
   undefined4 addInstWord30_2;
@@ -91,9 +93,9 @@ int extvsOptimizeProgram(ctx, shader)
   int symbolTable;
   uint sweepStep;
   uint scanIndex;
-  int iVar34;
+  int wantedKind;
   int instEndOffset;
-  uint uVar36;
+  uint remainingInsts;
   undefined4 *addInst;
   undefined4 *mulInst;
   int iStack00000018;
@@ -111,99 +113,99 @@ int extvsOptimizeProgram(ctx, shader)
     sweepStep = 0;
     do {
       laterInstPtr = *(int *)(shader + 0x18);
-      uVar36 = instCountAtEntry - sweepStep;
+      remainingInsts = instCountAtEntry - sweepStep;
       instEnd = instEndOffset + laterInstPtr;
       destEnableY = *(char *)(instEnd + -0x61);
       destEnableZ = *(char *)(instEnd + -0x5d);
       destEnableW = *(char *)(instEnd + -0x59);
-      bVar1 = *(char *)(instEnd + -0x65) == '\0';
-      if ((((bVar1) && (destEnableY == '\0')) && (destEnableZ == '\0')) && (destEnableW == '\0')) {
+      destXUnused = *(char *)(instEnd + -0x65) == '\0';
+      if ((((destXUnused) && (destEnableY == '\0')) && (destEnableZ == '\0')) && (destEnableW == '\0')) {
 LAB_000ba610:
         shiftCursorOffset = instEndOffset;
-        if (uVar36 < instCount) {
+        if (remainingInsts < instCount) {
           do {
-            uVar36 = uVar36 + 1;
+            remainingInsts = remainingInsts + 1;
             shiftSrc = shiftCursorOffset + *(int *)(shader + 0x18);
             _memcpy(shiftSrc + -0x74,shiftSrc,0x74);
             instCount = *(uint *)(shader + 0x14);
             shiftCursorOffset = shiftCursorOffset + 0x74;
-          } while (uVar36 < instCount);
+          } while (remainingInsts < instCount);
         }
         instCount = instCount - 1;
         *(uint *)(shader + 0x14) = instCount;
       }
       else {
-        iVar18 = *(int *)(instEnd + -0x70);
-        if (iVar18 == 1) {
-          if (uVar36 < instCount) {
-            remaining = instCount - uVar36;
+        instKind = *(int *)(instEnd + -0x70);
+        if (instKind == 1) {
+          if (remainingInsts < instCount) {
+            remaining = instCount - remainingInsts;
             laterDestSlot = (int *)(instEnd + 4);
-            bVar12 = 0;
-            bVar15 = 0;
-            bVar11 = 0;
-            bVar10 = 0;
+            laterReadFlagA = 0;
+            laterReadFlagB = 0;
+            laterReadFlagC = 0;
+            laterReadFlagD = 0;
             do {
               if ((*laterDestSlot == 1) && (laterDestSlot[1] == *(int *)(instEnd + -0x6c))) {
-                bVar15 = bVar15 | *(byte *)((int)laterDestSlot + 0xb);
-                bVar12 = bVar12 | *(byte *)((int)laterDestSlot + 0xf);
-                bVar11 = bVar11 | *(byte *)((int)laterDestSlot + 0x13);
-                bVar10 = bVar10 | *(byte *)((int)laterDestSlot + 0x17);
+                laterReadFlagB = laterReadFlagB | *(byte *)((int)laterDestSlot + 0xb);
+                laterReadFlagA = laterReadFlagA | *(byte *)((int)laterDestSlot + 0xf);
+                laterReadFlagC = laterReadFlagC | *(byte *)((int)laterDestSlot + 0x13);
+                laterReadFlagD = laterReadFlagD | *(byte *)((int)laterDestSlot + 0x17);
               }
               laterDestSlot = laterDestSlot + 0x1d;
               remaining = remaining + -1;
             } while (remaining != 0);
           }
           else {
-            bVar15 = 0;
-            bVar12 = 0;
-            bVar11 = 0;
-            bVar10 = 0;
+            laterReadFlagB = 0;
+            laterReadFlagA = 0;
+            laterReadFlagC = 0;
+            laterReadFlagD = 0;
           }
-          if ((((bVar1) || (bVar15 != 0)) && ((destEnableY == '\0' || (bVar12 != 0)))) &&
-             (((destEnableZ == '\0' || (bVar11 != 0)) && ((destEnableW == '\0' || (bVar10 != 0))))))
+          if ((((destXUnused) || (laterReadFlagB != 0)) && ((destEnableY == '\0' || (laterReadFlagA != 0)))) &&
+             (((destEnableZ == '\0' || (laterReadFlagC != 0)) && ((destEnableW == '\0' || (laterReadFlagD != 0))))))
           goto LAB_000ba610;
         }
         else {
           if (*(int *)(instEnd + -0x74) == 0x87a2) {
-            if (uVar36 < instCount) {
-              remaining = instCount - uVar36;
+            if (remainingInsts < instCount) {
+              remaining = instCount - remainingInsts;
               laterFlagCursor = (char *)(instEnd + 0x38);
-              bVar5 = true;
-              bVar12 = 0;
-              bVar11 = 0;
-              bVar10 = 0;
-              bVar15 = 0;
+              fusable = true;
+              laterReadFlagA = 0;
+              laterReadFlagC = 0;
+              laterReadFlagD = 0;
+              laterReadFlagB = 0;
               do {
                 if (((*laterFlagCursor != '\0') || (laterFlagCursor[0x1c] != '\0')) || (laterFlagCursor[0x38] != '\0')) {
-                  bVar5 = false;
+                  fusable = false;
                 }
                 if ((*(int *)(laterFlagCursor + -0x34) == 2) &&
                    (*(int *)(laterFlagCursor + -0x30) == *(int *)(instEnd + -0x6c))) {
-                  bVar12 = bVar12 | laterFlagCursor[-0x29];
-                  bVar11 = bVar11 | laterFlagCursor[-0x25];
-                  bVar10 = bVar10 | laterFlagCursor[-0x21];
-                  bVar15 = bVar15 | laterFlagCursor[-0x1d];
+                  laterReadFlagA = laterReadFlagA | laterFlagCursor[-0x29];
+                  laterReadFlagC = laterReadFlagC | laterFlagCursor[-0x25];
+                  laterReadFlagD = laterReadFlagD | laterFlagCursor[-0x21];
+                  laterReadFlagB = laterReadFlagB | laterFlagCursor[-0x1d];
                 }
                 laterFlagCursor = laterFlagCursor + 0x74;
                 remaining = remaining + -1;
               } while (remaining != 0);
             }
             else {
-              bVar5 = true;
-              bVar12 = 0;
-              bVar11 = 0;
-              bVar10 = 0;
-              bVar15 = 0;
+              fusable = true;
+              laterReadFlagA = 0;
+              laterReadFlagC = 0;
+              laterReadFlagD = 0;
+              laterReadFlagB = 0;
             }
-            if (((((((bVar1) || (bVar12 != 0)) && ((destEnableY == '\0' || (bVar11 != 0)))) &&
-                  ((destEnableZ == '\0' || (bVar10 != 0)))) && ((destEnableW == '\0' || (bVar15 != 0)))) &&
-                (bVar5)) || (instCount <= uVar36)) goto LAB_000ba610;
-            remaining = instCount - uVar36;
+            if (((((((destXUnused) || (laterReadFlagA != 0)) && ((destEnableY == '\0' || (laterReadFlagC != 0)))) &&
+                  ((destEnableZ == '\0' || (laterReadFlagD != 0)))) && ((destEnableW == '\0' || (laterReadFlagB != 0)))) &&
+                (fusable)) || (instCount <= remainingInsts)) goto LAB_000ba610;
+            remaining = instCount - remainingInsts;
             laterFlagCursor = (char *)(instEnd + 0x38);
-            bVar5 = true;
+            fusable = true;
             do {
               if (((*laterFlagCursor != '\0') || (laterFlagCursor[0x1c] != '\0')) || (laterFlagCursor[0x38] != '\0')) {
-                bVar5 = false;
+                fusable = false;
               }
               laterFlagCursor = laterFlagCursor + 0x74;
               remaining = remaining + -1;
@@ -211,29 +213,29 @@ LAB_000ba610:
           }
           else {
             if (*(char *)(shader + 0x7b) == '\0') {
-              if (iVar18 == 2) {
-                iVar18 = *(int *)(instEnd + -0x6c);
+              if (instKind == 2) {
+                instKind = *(int *)(instEnd + -0x6c);
                 shaderWord20 = *(int *)(shader + 0x20);
                 goto LAB_000ba1a0;
               }
             }
-            else if (iVar18 == 2) {
-              iVar18 = *(int *)(instEnd + -0x6c);
+            else if (instKind == 2) {
+              instKind = *(int *)(instEnd + -0x6c);
               shaderWord20 = *(int *)(shader + 0x20);
-              if (*(int *)(iVar18 * 0x54 + shaderWord20 + 0x28) == 0x87c4) goto LAB_000ba664;
+              if (*(int *)(instKind * 0x54 + shaderWord20 + 0x28) == 0x87c4) goto LAB_000ba664;
 LAB_000ba1a0:
-              if (*(int *)(iVar18 * 0x54 + shaderWord20 + 0x24) == 0x87c0) goto LAB_000ba664;
+              if (*(int *)(instKind * 0x54 + shaderWord20 + 0x24) == 0x87c0) goto LAB_000ba664;
             }
-            if (uVar36 < instCount) {
-              bVar10 = 0;
-              bVar11 = 0;
-              bVar12 = 0;
-              bVar15 = 0;
-              bVar5 = true;
-              iVar18 = instEndOffset;
-              scanIndex = uVar36;
+            if (remainingInsts < instCount) {
+              laterReadFlagD = 0;
+              laterReadFlagC = 0;
+              laterReadFlagA = 0;
+              laterReadFlagB = 0;
+              fusable = true;
+              instKind = instEndOffset;
+              scanIndex = remainingInsts;
               while( true ) {
-                laterInstPtr = iVar18 + laterInstPtr;
+                laterInstPtr = instKind + laterInstPtr;
                 if ((((*(int *)(laterInstPtr + 0x20) == 2) &&
                      (shaderWord20 = *(int *)(instEnd + -0x6c), *(int *)(laterInstPtr + 0x24) == shaderWord20)) ||
                     ((*(int *)(laterInstPtr + 0x3c) == 2 &&
@@ -241,79 +243,79 @@ LAB_000ba1a0:
                    ((*(int *)(laterInstPtr + 0x58) == 2 &&
                     (shaderWord20 = *(int *)(instEnd + -0x6c), *(int *)(laterInstPtr + 0x5c) == shaderWord20)))) {
                   extvsInstReadsTempComponents(symbolTable,laterInstPtr,shaderWord20,&readsX,&readsY,&readsZ,readsW);
-                  if (((((bVar1) || ((readsX == '\0' || (bVar15 != 0)))) &&
-                       ((destEnableY == '\0' || ((readsY == '\0' || (bVar12 != 0)))))) &&
-                      ((destEnableZ == '\0' || ((readsZ == '\0' || (bVar11 != 0)))))) &&
-                     ((destEnableW == '\0' || ((readsW[0] == '\0' || (bVar10 != 0)))))) {
+                  if (((((destXUnused) || ((readsX == '\0' || (laterReadFlagB != 0)))) &&
+                       ((destEnableY == '\0' || ((readsY == '\0' || (laterReadFlagA != 0)))))) &&
+                      ((destEnableZ == '\0' || ((readsZ == '\0' || (laterReadFlagC != 0)))))) &&
+                     ((destEnableW == '\0' || ((readsW[0] == '\0' || (laterReadFlagD != 0)))))) {
                     instCount = *(uint *)(shader + 0x14);
                   }
                   else {
                     instCount = *(uint *)(shader + 0x14);
-                    bVar5 = false;
+                    fusable = false;
                   }
                 }
                 if ((*(int *)(laterInstPtr + 4) == 2) && (*(int *)(laterInstPtr + 8) == *(int *)(instEnd + -0x6c)))
                 {
-                  bVar10 = bVar10 | *(byte *)(laterInstPtr + 0x1b);
-                  bVar15 = bVar15 | *(byte *)(laterInstPtr + 0xf);
-                  bVar12 = bVar12 | *(byte *)(laterInstPtr + 0x13);
-                  bVar11 = bVar11 | *(byte *)(laterInstPtr + 0x17);
+                  laterReadFlagD = laterReadFlagD | *(byte *)(laterInstPtr + 0x1b);
+                  laterReadFlagB = laterReadFlagB | *(byte *)(laterInstPtr + 0xf);
+                  laterReadFlagA = laterReadFlagA | *(byte *)(laterInstPtr + 0x13);
+                  laterReadFlagC = laterReadFlagC | *(byte *)(laterInstPtr + 0x17);
                 }
                 scanIndex = scanIndex + 1;
-                iVar18 = iVar18 + 0x74;
+                instKind = instKind + 0x74;
                 if (instCount <= scanIndex) break;
                 laterInstPtr = *(int *)(shader + 0x18);
               }
             }
             else {
-              bVar5 = true;
-              bVar15 = 0;
-              bVar12 = 0;
-              bVar11 = 0;
-              bVar10 = 0;
+              fusable = true;
+              laterReadFlagB = 0;
+              laterReadFlagA = 0;
+              laterReadFlagC = 0;
+              laterReadFlagD = 0;
             }
-            if (((((bVar1) || (bVar15 != 0)) && ((destEnableY == '\0' || (bVar12 != 0)))) &&
-                ((((destEnableZ == '\0' || (bVar11 != 0)) && ((destEnableW == '\0' || (bVar10 != 0)))) &&
-                 (bVar5)))) || (instCount <= uVar36)) goto LAB_000ba610;
-            bVar5 = true;
-            bVar11 = 0;
-            bVar12 = 0;
-            bVar15 = 0;
-            bVar10 = 0;
+            if (((((destXUnused) || (laterReadFlagB != 0)) && ((destEnableY == '\0' || (laterReadFlagA != 0)))) &&
+                ((((destEnableZ == '\0' || (laterReadFlagC != 0)) && ((destEnableW == '\0' || (laterReadFlagD != 0)))) &&
+                 (fusable)))) || (instCount <= remainingInsts)) goto LAB_000ba610;
+            fusable = true;
+            laterReadFlagC = 0;
+            laterReadFlagA = 0;
+            laterReadFlagB = 0;
+            laterReadFlagD = 0;
             laterOffset = instEndOffset;
-            scanIndex = uVar36;
+            scanIndex = remainingInsts;
             do {
-              iVar18 = laterOffset + *(int *)(shader + 0x18);
-              if ((((*(int *)(iVar18 + 0x20) == 2) &&
-                   (shaderWord20 = *(int *)(instEnd + -0x6c), *(int *)(iVar18 + 0x24) == shaderWord20)) ||
-                  ((*(int *)(iVar18 + 0x3c) == 2 &&
-                   (shaderWord20 = *(int *)(instEnd + -0x6c), *(int *)(iVar18 + 0x40) == shaderWord20)))) ||
-                 ((*(int *)(iVar18 + 0x58) == 2 &&
-                  (shaderWord20 = *(int *)(instEnd + -0x6c), *(int *)(iVar18 + 0x5c) == shaderWord20)))) {
-                extvsInstReadsTempComponents(symbolTable,iVar18,shaderWord20,&readsX,&readsY,&readsZ,readsW);
-                if ((((bVar1) || ((readsX == '\0' || (bVar11 != 0)))) &&
-                    (((destEnableY == '\0' || ((readsY == '\0' || (bVar12 != 0)))) &&
-                     ((destEnableZ == '\0' || ((readsZ == '\0' || (bVar15 != 0)))))))) &&
-                   ((destEnableW == '\0' || ((readsW[0] == '\0' || (bVar10 != 0)))))) {
+              instKind = laterOffset + *(int *)(shader + 0x18);
+              if ((((*(int *)(instKind + 0x20) == 2) &&
+                   (shaderWord20 = *(int *)(instEnd + -0x6c), *(int *)(instKind + 0x24) == shaderWord20)) ||
+                  ((*(int *)(instKind + 0x3c) == 2 &&
+                   (shaderWord20 = *(int *)(instEnd + -0x6c), *(int *)(instKind + 0x40) == shaderWord20)))) ||
+                 ((*(int *)(instKind + 0x58) == 2 &&
+                  (shaderWord20 = *(int *)(instEnd + -0x6c), *(int *)(instKind + 0x5c) == shaderWord20)))) {
+                extvsInstReadsTempComponents(symbolTable,instKind,shaderWord20,&readsX,&readsY,&readsZ,readsW);
+                if ((((destXUnused) || ((readsX == '\0' || (laterReadFlagC != 0)))) &&
+                    (((destEnableY == '\0' || ((readsY == '\0' || (laterReadFlagA != 0)))) &&
+                     ((destEnableZ == '\0' || ((readsZ == '\0' || (laterReadFlagB != 0)))))))) &&
+                   ((destEnableW == '\0' || ((readsW[0] == '\0' || (laterReadFlagD != 0)))))) {
                   instCount = *(uint *)(shader + 0x14);
                 }
                 else {
                   instCount = *(uint *)(shader + 0x14);
-                  bVar5 = false;
+                  fusable = false;
                 }
               }
-              if ((*(int *)(iVar18 + 4) == 2) && (*(int *)(iVar18 + 8) == *(int *)(instEnd + -0x6c)))
+              if ((*(int *)(instKind + 4) == 2) && (*(int *)(instKind + 8) == *(int *)(instEnd + -0x6c)))
               {
-                bVar10 = bVar10 | *(byte *)(iVar18 + 0x1b);
-                bVar11 = bVar11 | *(byte *)(iVar18 + 0xf);
-                bVar12 = bVar12 | *(byte *)(iVar18 + 0x13);
-                bVar15 = bVar15 | *(byte *)(iVar18 + 0x17);
+                laterReadFlagD = laterReadFlagD | *(byte *)(instKind + 0x1b);
+                laterReadFlagC = laterReadFlagC | *(byte *)(instKind + 0xf);
+                laterReadFlagA = laterReadFlagA | *(byte *)(instKind + 0x13);
+                laterReadFlagB = laterReadFlagB | *(byte *)(instKind + 0x17);
               }
               scanIndex = scanIndex + 1;
               laterOffset = laterOffset + 0x74;
             } while (scanIndex < instCount);
           }
-          if (bVar5) goto LAB_000ba610;
+          if (fusable) goto LAB_000ba610;
         }
       }
 LAB_000ba664:
@@ -329,46 +331,46 @@ LAB_000ba664:
       mulInst = (undefined4 *)(mulOffset + instArray);
       if ((((*(int *)(mulOffset + instArray) == 0x8786) && (mulInst[1] == 2)) &&
           ((mulInst[3] != 0 && ((mulInst[4] != 0 && (mulInst[5] != 0)))))) &&
-         ((mulInst[6] != 0 && (uVar36 = mulSearchIndex + 1, addSearchIndex = uVar36, uVar36 < instCount)))) {
+         ((mulInst[6] != 0 && (remainingInsts = mulSearchIndex + 1, addSearchIndex = remainingInsts, remainingInsts < instCount)))) {
         do {
           addInstOffset = addSearchIndex * 0x74;
           addInst = (undefined4 *)(instArray + addInstOffset);
           if (*(int *)(instArray + addInstOffset) == 0x8787) {
-            iVar18 = addInst[8];
-            if ((iVar18 != 2) || (shaderWord20 = mulInst[2], addInst[9] != shaderWord20)) {
+            instKind = addInst[8];
+            if ((instKind != 2) || (shaderWord20 = mulInst[2], addInst[9] != shaderWord20)) {
               if ((addInst[0xf] != 2) || (shaderWord20 = mulInst[2], addInst[0x10] != shaderWord20))
               goto LAB_000ba7ec;
-              iVar34 = 2;
-              if (iVar18 == 2) goto LAB_000ba7dc;
+              wantedKind = 2;
+              if (instKind == 2) goto LAB_000ba7dc;
             }
             else {
-              iVar34 = addInst[0xf];
-              if (iVar34 == 2) {
+              wantedKind = addInst[0xf];
+              if (wantedKind == 2) {
 LAB_000ba7dc:
                 if (addInst[9] == addInst[0x10]) goto LAB_000ba7ec;
               }
             }
-            bVar1 = true;
-            if (uVar36 < addSearchIndex) {
-              remainingLater = addSearchIndex - uVar36;
-              laterSrcSlot = (int *)(instArray + uVar36 * 0x74 + 0x20);
+            canContinue = true;
+            if (remainingInsts < addSearchIndex) {
+              remainingLater = addSearchIndex - remainingInsts;
+              laterSrcSlot = (int *)(instArray + remainingInsts * 0x74 + 0x20);
               do {
                 if ((((*laterSrcSlot == 2) && (laterSrcSlot[1] == shaderWord20)) ||
                     ((laterSrcSlot[7] == 2 && (laterSrcSlot[8] == shaderWord20)))) ||
                    ((((laterSrcSlot[0xe] == 2 && (laterSrcSlot[0xf] == shaderWord20)) ||
-                     ((iVar26 = laterSrcSlot[-7], iVar26 == 2 && (laterSrcSlot[-6] == shaderWord20)))) ||
-                    (((iVar26 == mulInst[8] && (laterSrcSlot[-6] == mulInst[9])) ||
-                     ((iVar26 == mulInst[0xf] && (laterSrcSlot[-6] == mulInst[0x10])))))))) {
-                  bVar1 = false;
+                     ((laterSrcKind = laterSrcSlot[-7], laterSrcKind == 2 && (laterSrcSlot[-6] == shaderWord20)))) ||
+                    (((laterSrcKind == mulInst[8] && (laterSrcSlot[-6] == mulInst[9])) ||
+                     ((laterSrcKind == mulInst[0xf] && (laterSrcSlot[-6] == mulInst[0x10])))))))) {
+                  canContinue = false;
                 }
                 laterSrcSlot = laterSrcSlot + 0x1d;
                 remainingLater = remainingLater + -1;
               } while (remainingLater != 0);
-              if (bVar1) goto LAB_000ba8a8;
+              if (canContinue) goto LAB_000ba8a8;
 LAB_000ba754:
-              bVar1 = true;
-              remainingLater = addSearchIndex - uVar36;
-              laterSrcSlot = (int *)(uVar36 * 0x74 + instArray + 0x20);
+              canContinue = true;
+              remainingLater = addSearchIndex - remainingInsts;
+              laterSrcSlot = (int *)(remainingInsts * 0x74 + instArray + 0x20);
               if ((addSearchIndex < mulSearchIndex + 2) || (addSearchIndex == 0)) {
                 remainingLater = 1;
               }
@@ -379,17 +381,17 @@ LAB_000ba754:
                     (((*laterSrcSlot == 2 && (laterSrcSlot[1] == addInst[2])) ||
                      ((((laterSrcSlot[7] == 2 && (laterSrcSlot[8] == addInst[2])) ||
                        ((laterSrcSlot[0xe] == 2 && (laterSrcSlot[0xf] == addInst[2])))) ||
-                      ((iVar26 = laterSrcSlot[-7], iVar18 == iVar26 && (laterSrcSlot[-6] == addInst[9]))))))))
-                   || (((iVar26 == iVar34 && (laterSrcSlot[-6] == addInst[0x10])) ||
-                       ((iVar26 == addInst[1] && (laterSrcSlot[-6] == addInst[2])))))) {
-                  bVar1 = false;
+                      ((laterSrcKind = laterSrcSlot[-7], instKind == laterSrcKind && (laterSrcSlot[-6] == addInst[9]))))))))
+                   || (((laterSrcKind == wantedKind && (laterSrcSlot[-6] == addInst[0x10])) ||
+                       ((laterSrcKind == addInst[1] && (laterSrcSlot[-6] == addInst[2])))))) {
+                  canContinue = false;
                 }
                 laterSrcSlot = laterSrcSlot + 0x1d;
                 remainingLater = remainingLater + -1;
               } while (remainingLater != 0);
-              if (bVar1) {
+              if (canContinue) {
 LAB_000bc018:
-                bVar1 = true;
+                canContinue = true;
                 afterAddIndex = addSearchIndex + 1;
                 if (afterAddIndex < instCount) {
                   remainingLater = instCount - afterAddIndex;
@@ -398,12 +400,12 @@ LAB_000bc018:
                     if ((((*laterSrcSlot == 2) && (laterSrcSlot[1] == shaderWord20)) ||
                         ((laterSrcSlot[7] == 2 && (laterSrcSlot[8] == shaderWord20)))) ||
                        ((laterSrcSlot[0xe] == 2 && (laterSrcSlot[0xf] == shaderWord20)))) {
-                      bVar1 = false;
+                      canContinue = false;
                     }
                     laterSrcSlot = laterSrcSlot + 0x1d;
                     remainingLater = remainingLater + -1;
                   } while (remainingLater != 0);
-                  if (!bVar1) goto LAB_000bd6dc;
+                  if (!canContinue) goto LAB_000bd6dc;
                 }
                 addSrcIndex = addInst[9];
                 *mulInst = 0x8788;
@@ -414,7 +416,7 @@ LAB_000bc018:
                   addInstWord4c_2 = addInst[0x13];
                   addInstWord50 = addInst[0x14];
                   addInstWord54 = addInst[0x15];
-                  mulInst[0x16] = iVar34;
+                  mulInst[0x16] = wantedKind;
                   mulInst[0x17] = addInstWord40;
                   mulInst[0x18] = addInstWord44;
                   mulInst[0x19] = addInstWord48;
@@ -432,7 +434,7 @@ LAB_000bc018:
                   addInstWord48_2 = addInst[0x12];
                   addInstWord4c = addInst[0x13];
                   addInstWord50_2 = addInst[0x14];
-                  mulInst[0x16] = iVar18;
+                  mulInst[0x16] = instKind;
                   mulInst[0x17] = addSrcIndex;
                   mulInst[0x18] = addInstWord28;
                   mulInst[0x19] = addInstWord2c;
@@ -445,7 +447,7 @@ LAB_000bc018:
                   addInst[0xd] = addInstWord50_2;
                 }
                 addInstWord8 = addInst[2];
-                puVar14 = addInst + 0x11;
+                operandRecordPtr = addInst + 0x11;
                 addInstWordc = addInst[3];
                 addInstWord10 = addInst[4];
                 mulInst[1] = addInst[1];
@@ -475,7 +477,7 @@ LAB_000bc018:
                   addInstWord28Mapped = 0x87de;
                 }
                 addInstWord2cMapped = addInst[0xb];
-                *puVar14 = addInstWord28Mapped;
+                *operandRecordPtr = addInstWord28Mapped;
                 switch(addInstWord2cMapped) {
                 case 0x87d9:
                   addInstWord2cMapped = 0x87d5;
@@ -530,10 +532,10 @@ LAB_000bc018:
                 }
                 addInstWord28Mapped = addInst[10];
                 addInst[0x14] = addInstWord34Mapped;
-                puVar17 = mulInst + 10;
+                srcRecordPtr = mulInst + 10;
                 switch(addInstWord28Mapped) {
                 case 0x87d5:
-                  addInstWord28Mapped = *puVar17;
+                  addInstWord28Mapped = *srcRecordPtr;
                   break;
                 case 0x87d6:
                   addInstWord28Mapped = mulInst[0xb];
@@ -545,7 +547,7 @@ LAB_000bc018:
                   addInstWord28Mapped = mulInst[0xd];
                   break;
                 case 0x87d9:
-                  addInstWord28Mapped = *puVar17;
+                  addInstWord28Mapped = *srcRecordPtr;
                   switch(addInstWord28Mapped) {
                   case 0x87d5:
 switchD_000bc544_caseD_87d5:
@@ -667,7 +669,7 @@ switchD_000bc544_caseD_87df:
                 addInst[10] = addInstWord28Mapped;
                 switch(addInstWord2cMapped) {
                 case 0x87d5:
-                  addInstWord2cMapped = *puVar17;
+                  addInstWord2cMapped = *srcRecordPtr;
                   break;
                 case 0x87d6:
                   addInstWord2cMapped = mulInst[0xb];
@@ -679,7 +681,7 @@ switchD_000bc544_caseD_87df:
                   addInstWord2cMapped = mulInst[0xd];
                   break;
                 case 0x87d9:
-                  addInstWord2cMapped = *puVar17;
+                  addInstWord2cMapped = *srcRecordPtr;
                   switch(addInstWord2cMapped) {
                   case 0x87d5:
 switchD_000bc79c_caseD_87d5:
@@ -801,7 +803,7 @@ switchD_000bc79c_caseD_87df:
                 addInst[0xb] = addInstWord2cMapped;
                 switch(addInstWord30Mapped) {
                 case 0x87d5:
-                  addInstWord30Mapped = *puVar17;
+                  addInstWord30Mapped = *srcRecordPtr;
                   break;
                 case 0x87d6:
                   addInstWord30Mapped = mulInst[0xb];
@@ -813,7 +815,7 @@ switchD_000bc79c_caseD_87df:
                   addInstWord30Mapped = mulInst[0xd];
                   break;
                 case 0x87d9:
-                  addInstWord30Mapped = *puVar17;
+                  addInstWord30Mapped = *srcRecordPtr;
                   switch(addInstWord30Mapped) {
                   case 0x87d5:
 switchD_000bc9f4_caseD_87d5:
@@ -935,7 +937,7 @@ switchD_000bc9f4_caseD_87df:
                 addInst[0xc] = addInstWord30Mapped;
                 switch(addInstWord34Mapped) {
                 case 0x87d5:
-                  addInstWord34Mapped = *puVar17;
+                  addInstWord34Mapped = *srcRecordPtr;
                   break;
                 case 0x87d6:
                   addInstWord34Mapped = mulInst[0xb];
@@ -947,7 +949,7 @@ switchD_000bc9f4_caseD_87df:
                   addInstWord34Mapped = mulInst[0xd];
                   break;
                 case 0x87d9:
-                  addInstWord34Mapped = *puVar17;
+                  addInstWord34Mapped = *srcRecordPtr;
                   switch(addInstWord34Mapped) {
                   case 0x87d5:
 switchD_000bcc4c_caseD_87d5:
@@ -1065,69 +1067,69 @@ switchD_000bcc4c_caseD_87df:
                     goto switchD_000bcc4c_caseD_87df;
                   }
                 }
-                uVar21 = *puVar14;
+                operandWord = *operandRecordPtr;
                 addInst[0xd] = addInstWord34Mapped;
-                puVar17 = mulInst + 0x11;
-                switch(uVar21) {
+                srcRecordPtr = mulInst + 0x11;
+                switch(operandWord) {
                 case 0x87d5:
-                  uVar21 = *puVar17;
+                  operandWord = *srcRecordPtr;
                   break;
                 case 0x87d6:
-                  uVar21 = mulInst[0x12];
+                  operandWord = mulInst[0x12];
                   break;
                 case 0x87d7:
-                  uVar21 = mulInst[0x13];
+                  operandWord = mulInst[0x13];
                   break;
                 case 0x87d8:
-                  uVar21 = mulInst[0x14];
+                  operandWord = mulInst[0x14];
                   break;
                 case 0x87d9:
-                  uVar21 = *puVar17;
-                  switch(uVar21) {
+                  operandWord = *srcRecordPtr;
+                  switch(operandWord) {
                   case 0x87d5:
 switchD_000bcea8_caseD_87d5:
-                    uVar21 = 0x87d9;
+                    operandWord = 0x87d9;
                     break;
                   case 0x87d6:
 switchD_000bcea8_caseD_87d6:
-                    uVar21 = 0x87da;
+                    operandWord = 0x87da;
                     break;
                   case 0x87d7:
 switchD_000bcea8_caseD_87d7:
-                    uVar21 = 0x87db;
+                    operandWord = 0x87db;
                     break;
                   case 0x87d8:
 switchD_000bcea8_caseD_87d8:
-                    uVar21 = 0x87dc;
+                    operandWord = 0x87dc;
                     break;
                   case 0x87d9:
 switchD_000bcea8_caseD_87d9:
-                    uVar21 = 0x87d5;
+                    operandWord = 0x87d5;
                     break;
                   case 0x87da:
 switchD_000bcea8_caseD_87da:
-                    uVar21 = 0x87d6;
+                    operandWord = 0x87d6;
                     break;
                   case 0x87db:
 switchD_000bcea8_caseD_87db:
-                    uVar21 = 0x87d7;
+                    operandWord = 0x87d7;
                     break;
                   case 0x87dc:
 switchD_000bcea8_caseD_87dc:
-                    uVar21 = 0x87d8;
+                    operandWord = 0x87d8;
                     break;
                   case 0x87de:
 switchD_000bcea8_caseD_87de:
-                    uVar21 = 0x87df;
+                    operandWord = 0x87df;
                     break;
                   case 0x87df:
 switchD_000bcea8_caseD_87df:
-                    uVar21 = 0x87de;
+                    operandWord = 0x87de;
                   }
                   break;
                 case 0x87da:
-                  uVar21 = mulInst[0x12];
-                  switch(uVar21) {
+                  operandWord = mulInst[0x12];
+                  switch(operandWord) {
                   case 0x87d5:
                     goto switchD_000bcea8_caseD_87d5;
                   case 0x87d6:
@@ -1151,8 +1153,8 @@ switchD_000bcea8_caseD_87df:
                   }
                   break;
                 case 0x87db:
-                  uVar21 = mulInst[0x13];
-                  switch(uVar21) {
+                  operandWord = mulInst[0x13];
+                  switch(operandWord) {
                   case 0x87d5:
                     goto switchD_000bcea8_caseD_87d5;
                   case 0x87d6:
@@ -1176,8 +1178,8 @@ switchD_000bcea8_caseD_87df:
                   }
                   break;
                 case 0x87dc:
-                  uVar21 = mulInst[0x14];
-                  switch(uVar21) {
+                  operandWord = mulInst[0x14];
+                  switch(operandWord) {
                   case 0x87d5:
                     goto switchD_000bcea8_caseD_87d5;
                   case 0x87d6:
@@ -1201,10 +1203,10 @@ switchD_000bcea8_caseD_87df:
                   }
                 }
                 addInstWord48Mapped = addInst[0x12];
-                *puVar14 = uVar21;
+                *operandRecordPtr = operandWord;
                 switch(addInstWord48Mapped) {
                 case 0x87d5:
-                  addInstWord48Mapped = *puVar17;
+                  addInstWord48Mapped = *srcRecordPtr;
                   break;
                 case 0x87d6:
                   addInstWord48Mapped = mulInst[0x12];
@@ -1216,7 +1218,7 @@ switchD_000bcea8_caseD_87df:
                   addInstWord48Mapped = mulInst[0x14];
                   break;
                 case 0x87d9:
-                  addInstWord48Mapped = *puVar17;
+                  addInstWord48Mapped = *srcRecordPtr;
                   switch(addInstWord48Mapped) {
                   case 0x87d5:
 switchD_000bd100_caseD_87d5:
@@ -1338,7 +1340,7 @@ switchD_000bd100_caseD_87df:
                 addInst[0x12] = addInstWord48Mapped;
                 switch(addInstWord4cMapped) {
                 case 0x87d5:
-                  addInstWord4cMapped = *puVar17;
+                  addInstWord4cMapped = *srcRecordPtr;
                   break;
                 case 0x87d6:
                   addInstWord4cMapped = mulInst[0x12];
@@ -1350,7 +1352,7 @@ switchD_000bd100_caseD_87df:
                   addInstWord4cMapped = mulInst[0x14];
                   break;
                 case 0x87d9:
-                  addInstWord4cMapped = *puVar17;
+                  addInstWord4cMapped = *srcRecordPtr;
                   switch(addInstWord4cMapped) {
                   case 0x87d5:
 switchD_000bd358_caseD_87d5:
@@ -1472,7 +1474,7 @@ switchD_000bd358_caseD_87df:
                 addInst[0x13] = addInstWord4cMapped;
                 switch(addInstWord50Mapped) {
                 case 0x87d5:
-                  addInstWord50Mapped = *puVar17;
+                  addInstWord50Mapped = *srcRecordPtr;
                   break;
                 case 0x87d6:
                   addInstWord50Mapped = mulInst[0x12];
@@ -1484,7 +1486,7 @@ switchD_000bd358_caseD_87df:
                   addInstWord50Mapped = mulInst[0x14];
                   break;
                 case 0x87d9:
-                  addInstWord50Mapped = *puVar17;
+                  addInstWord50Mapped = *srcRecordPtr;
                   switch(addInstWord50Mapped) {
                   case 0x87d5:
 switchD_000bd5b0_caseD_87d5:
@@ -1633,11 +1635,11 @@ switchD_000bd5b0_caseD_87df:
               }
 LAB_000bd6dc:
               addSearchIndex = addSearchIndex + 1;
-              bVar1 = true;
+              canContinue = true;
             }
             else {
 LAB_000ba8a8:
-              bVar1 = true;
+              canContinue = true;
               afterAddIndex = addSearchIndex + 1;
               if (afterAddIndex < instCount) {
                 remainingLater = instCount - afterAddIndex;
@@ -1646,20 +1648,20 @@ LAB_000ba8a8:
                   if (((*laterSrcSlot == 2) && (laterSrcSlot[1] == shaderWord20)) ||
                      (((laterSrcSlot[7] == 2 && (laterSrcSlot[8] == shaderWord20)) ||
                       ((laterSrcSlot[0xe] == 2 && (laterSrcSlot[0xf] == shaderWord20)))))) {
-                    bVar1 = false;
+                    canContinue = false;
                   }
                   laterSrcSlot = laterSrcSlot + 0x1d;
                   remainingLater = remainingLater + -1;
                 } while (remainingLater != 0);
-                if (!bVar1) {
-                  if (uVar36 < addSearchIndex) goto LAB_000ba754;
+                if (!canContinue) {
+                  if (remainingInsts < addSearchIndex) goto LAB_000ba754;
                   goto LAB_000bc018;
                 }
               }
               *addInst = 0x8788;
               if (addInst[9] == shaderWord20) {
                 addInstWord28Mapped = addInst[10];
-                addInst[0x16] = iVar34;
+                addInst[0x16] = wantedKind;
                 addInst[0x17] = addInst[0x10];
                 addInst[0x18] = addInst[0x11];
                 addInst[0x19] = addInst[0x12];
@@ -1670,7 +1672,7 @@ LAB_000ba8a8:
               else {
                 addInst[0x18] = addInst[10];
                 addInstWord28Mapped = addInst[0x11];
-                addInst[0x16] = iVar18;
+                addInst[0x16] = instKind;
                 addInst[0x17] = addInst[9];
                 addInst[0x19] = addInst[0xb];
                 addInst[0x1a] = addInst[0xc];
@@ -1681,7 +1683,7 @@ LAB_000ba8a8:
                 addInst[0xd] = addInst[0x14];
                 addInst[10] = addInstWord28Mapped;
               }
-              puVar14 = addInst + 0x11;
+              operandRecordPtr = addInst + 0x11;
               switch(addInstWord28Mapped) {
               case 0x87d9:
                 addInstWord28Mapped = 0x87d5;
@@ -1699,7 +1701,7 @@ LAB_000ba8a8:
                 addInstWord28Mapped = 0x87de;
               }
               addInstWord2cMapped = addInst[0xb];
-              *puVar14 = addInstWord28Mapped;
+              *operandRecordPtr = addInstWord28Mapped;
               switch(addInstWord2cMapped) {
               case 0x87d9:
                 addInstWord2cMapped = 0x87d5;
@@ -1753,12 +1755,12 @@ LAB_000ba8a8:
                 addInstWord34Mapped = 0x87de;
               }
               addInst[0x14] = addInstWord34Mapped;
-              puVar17 = mulInst + 10;
+              srcRecordPtr = mulInst + 10;
               addInst[9] = mulInst[9];
               addInstWord28Mapped = addInst[10];
               switch(addInstWord28Mapped) {
               case 0x87d5:
-                addInstWord28Mapped = *puVar17;
+                addInstWord28Mapped = *srcRecordPtr;
                 break;
               case 0x87d6:
                 addInstWord28Mapped = mulInst[0xb];
@@ -1770,7 +1772,7 @@ LAB_000ba8a8:
                 addInstWord28Mapped = mulInst[0xd];
                 break;
               case 0x87d9:
-                addInstWord28Mapped = *puVar17;
+                addInstWord28Mapped = *srcRecordPtr;
                 switch(addInstWord28Mapped) {
                 case 0x87d5:
 switchD_000badac_caseD_87d5:
@@ -1892,7 +1894,7 @@ switchD_000badac_caseD_87df:
               addInst[10] = addInstWord28Mapped;
               switch(addInstWord2cMapped) {
               case 0x87d5:
-                addInstWord2cMapped = *puVar17;
+                addInstWord2cMapped = *srcRecordPtr;
                 break;
               case 0x87d6:
                 addInstWord2cMapped = mulInst[0xb];
@@ -1904,7 +1906,7 @@ switchD_000badac_caseD_87df:
                 addInstWord2cMapped = mulInst[0xd];
                 break;
               case 0x87d9:
-                addInstWord2cMapped = *puVar17;
+                addInstWord2cMapped = *srcRecordPtr;
                 switch(addInstWord2cMapped) {
                 case 0x87d5:
 switchD_000bb004_caseD_87d5:
@@ -2026,7 +2028,7 @@ switchD_000bb004_caseD_87df:
               addInst[0xb] = addInstWord2cMapped;
               switch(addInstWord30Mapped) {
               case 0x87d5:
-                addInstWord30Mapped = *puVar17;
+                addInstWord30Mapped = *srcRecordPtr;
                 break;
               case 0x87d6:
                 addInstWord30Mapped = mulInst[0xb];
@@ -2038,7 +2040,7 @@ switchD_000bb004_caseD_87df:
                 addInstWord30Mapped = mulInst[0xd];
                 break;
               case 0x87d9:
-                addInstWord30Mapped = *puVar17;
+                addInstWord30Mapped = *srcRecordPtr;
                 switch(addInstWord30Mapped) {
                 case 0x87d5:
 switchD_000bb25c_caseD_87d5:
@@ -2160,7 +2162,7 @@ switchD_000bb25c_caseD_87df:
               addInst[0xc] = addInstWord30Mapped;
               switch(addInstWord34Mapped) {
               case 0x87d5:
-                addInstWord34Mapped = *puVar17;
+                addInstWord34Mapped = *srcRecordPtr;
                 break;
               case 0x87d6:
                 addInstWord34Mapped = mulInst[0xb];
@@ -2172,7 +2174,7 @@ switchD_000bb25c_caseD_87df:
                 addInstWord34Mapped = mulInst[0xd];
                 break;
               case 0x87d9:
-                addInstWord34Mapped = *puVar17;
+                addInstWord34Mapped = *srcRecordPtr;
                 switch(addInstWord34Mapped) {
                 case 0x87d5:
 switchD_000bb4b4_caseD_87d5:
@@ -2291,69 +2293,69 @@ switchD_000bb4b4_caseD_87df:
                 }
               }
               addInst[0xd] = addInstWord34Mapped;
-              puVar17 = mulInst + 0x11;
+              srcRecordPtr = mulInst + 0x11;
               addInst[0x10] = mulInst[0x10];
-              uVar21 = *puVar14;
-              switch(uVar21) {
+              operandWord = *operandRecordPtr;
+              switch(operandWord) {
               case 0x87d5:
-                uVar21 = *puVar17;
+                operandWord = *srcRecordPtr;
                 break;
               case 0x87d6:
-                uVar21 = mulInst[0x12];
+                operandWord = mulInst[0x12];
                 break;
               case 0x87d7:
-                uVar21 = mulInst[0x13];
+                operandWord = mulInst[0x13];
                 break;
               case 0x87d8:
-                uVar21 = mulInst[0x14];
+                operandWord = mulInst[0x14];
                 break;
               case 0x87d9:
-                uVar21 = *puVar17;
-                switch(uVar21) {
+                operandWord = *srcRecordPtr;
+                switch(operandWord) {
                 case 0x87d5:
 switchD_000bb718_caseD_87d5:
-                  uVar21 = 0x87d9;
+                  operandWord = 0x87d9;
                   break;
                 case 0x87d6:
 switchD_000bb718_caseD_87d6:
-                  uVar21 = 0x87da;
+                  operandWord = 0x87da;
                   break;
                 case 0x87d7:
 switchD_000bb718_caseD_87d7:
-                  uVar21 = 0x87db;
+                  operandWord = 0x87db;
                   break;
                 case 0x87d8:
 switchD_000bb718_caseD_87d8:
-                  uVar21 = 0x87dc;
+                  operandWord = 0x87dc;
                   break;
                 case 0x87d9:
 switchD_000bb718_caseD_87d9:
-                  uVar21 = 0x87d5;
+                  operandWord = 0x87d5;
                   break;
                 case 0x87da:
 switchD_000bb718_caseD_87da:
-                  uVar21 = 0x87d6;
+                  operandWord = 0x87d6;
                   break;
                 case 0x87db:
 switchD_000bb718_caseD_87db:
-                  uVar21 = 0x87d7;
+                  operandWord = 0x87d7;
                   break;
                 case 0x87dc:
 switchD_000bb718_caseD_87dc:
-                  uVar21 = 0x87d8;
+                  operandWord = 0x87d8;
                   break;
                 case 0x87de:
 switchD_000bb718_caseD_87de:
-                  uVar21 = 0x87df;
+                  operandWord = 0x87df;
                   break;
                 case 0x87df:
 switchD_000bb718_caseD_87df:
-                  uVar21 = 0x87de;
+                  operandWord = 0x87de;
                 }
                 break;
               case 0x87da:
-                uVar21 = mulInst[0x12];
-                switch(uVar21) {
+                operandWord = mulInst[0x12];
+                switch(operandWord) {
                 case 0x87d5:
                   goto switchD_000bb718_caseD_87d5;
                 case 0x87d6:
@@ -2377,8 +2379,8 @@ switchD_000bb718_caseD_87df:
                 }
                 break;
               case 0x87db:
-                uVar21 = mulInst[0x13];
-                switch(uVar21) {
+                operandWord = mulInst[0x13];
+                switch(operandWord) {
                 case 0x87d5:
                   goto switchD_000bb718_caseD_87d5;
                 case 0x87d6:
@@ -2402,8 +2404,8 @@ switchD_000bb718_caseD_87df:
                 }
                 break;
               case 0x87dc:
-                uVar21 = mulInst[0x14];
-                switch(uVar21) {
+                operandWord = mulInst[0x14];
+                switch(operandWord) {
                 case 0x87d5:
                   goto switchD_000bb718_caseD_87d5;
                 case 0x87d6:
@@ -2427,10 +2429,10 @@ switchD_000bb718_caseD_87df:
                 }
               }
               addInstWord48Mapped = addInst[0x12];
-              *puVar14 = uVar21;
+              *operandRecordPtr = operandWord;
               switch(addInstWord48Mapped) {
               case 0x87d5:
-                addInstWord48Mapped = *puVar17;
+                addInstWord48Mapped = *srcRecordPtr;
                 break;
               case 0x87d6:
                 addInstWord48Mapped = mulInst[0x12];
@@ -2442,7 +2444,7 @@ switchD_000bb718_caseD_87df:
                 addInstWord48Mapped = mulInst[0x14];
                 break;
               case 0x87d9:
-                addInstWord48Mapped = *puVar17;
+                addInstWord48Mapped = *srcRecordPtr;
                 switch(addInstWord48Mapped) {
                 case 0x87d5:
 switchD_000bb970_caseD_87d5:
@@ -2564,7 +2566,7 @@ switchD_000bb970_caseD_87df:
               addInst[0x12] = addInstWord48Mapped;
               switch(addInstWord4cMapped) {
               case 0x87d5:
-                addInstWord4cMapped = *puVar17;
+                addInstWord4cMapped = *srcRecordPtr;
                 break;
               case 0x87d6:
                 addInstWord4cMapped = mulInst[0x12];
@@ -2576,7 +2578,7 @@ switchD_000bb970_caseD_87df:
                 addInstWord4cMapped = mulInst[0x14];
                 break;
               case 0x87d9:
-                addInstWord4cMapped = *puVar17;
+                addInstWord4cMapped = *srcRecordPtr;
                 switch(addInstWord4cMapped) {
                 case 0x87d5:
 switchD_000bbbc8_caseD_87d5:
@@ -2698,7 +2700,7 @@ switchD_000bbbc8_caseD_87df:
               addInst[0x13] = addInstWord4cMapped;
               switch(addInstWord50Mapped) {
               case 0x87d5:
-                addInstWord50Mapped = *puVar17;
+                addInstWord50Mapped = *srcRecordPtr;
                 break;
               case 0x87d6:
                 addInstWord50Mapped = mulInst[0x12];
@@ -2710,7 +2712,7 @@ switchD_000bbbc8_caseD_87df:
                 addInstWord50Mapped = mulInst[0x14];
                 break;
               case 0x87d9:
-                addInstWord50Mapped = *puVar17;
+                addInstWord50Mapped = *srcRecordPtr;
                 switch(addInstWord50Mapped) {
                 case 0x87d5:
 switchD_000bbe20_caseD_87d5:
@@ -2843,20 +2845,20 @@ switchD_000bbe20_caseD_87df:
                   shiftOffset = shiftOffset + 0x74;
                 } while (mulScanStart < instCount);
                 addSearchIndex = addSearchIndex + 2;
-                bVar1 = true;
+                canContinue = true;
               }
               else {
-                bVar1 = true;
-                addSearchIndex = uVar36;
+                canContinue = true;
+                addSearchIndex = remainingInsts;
               }
             }
           }
           else {
 LAB_000ba7ec:
-            bVar1 = false;
+            canContinue = false;
             addSearchIndex = addSearchIndex + 1;
           }
-          if ((instCount <= addSearchIndex) || (bVar1)) break;
+          if ((instCount <= addSearchIndex) || (canContinue)) break;
           instArray = *(int *)(shader + 0x18);
         } while( true );
       }
@@ -2874,52 +2876,52 @@ LAB_000ba7ec:
             followerIndex = matMulSearchIndex + 1;
             if (followerIndex < instCount) {
               followerCount = instCount - followerIndex;
-              bVar1 = true;
+              canContinue = true;
               fusedPartnerIndex = 0;
               laterSrc1Slot = (int *)(followerIndex * 0x74 + instArray + 0x3c);
               do {
                 if ((*laterSrc1Slot == 2) && (laterSrc1Slot[1] == *(int *)(matMulInst + 8))) {
                   if ((((laterSrc1Slot[-0xf] == 0x8798) && (laterSrc1Slot[-7] == 2)) &&
-                      (iVar18 = *(int *)(shader + 0x20) + laterSrc1Slot[-6] * 0x54,
-                      *(char *)(iVar18 + 0x44) != '\0')) &&
-                     ((*(int *)(iVar18 + 0x48) == 0xba7 && (fusedPartnerIndex == 0)))) {
-                    bVar5 = false;
+                      (instKind = *(int *)(shader + 0x20) + laterSrc1Slot[-6] * 0x54,
+                      *(char *)(instKind + 0x44) != '\0')) &&
+                     ((*(int *)(instKind + 0x48) == 0xba7 && (fusedPartnerIndex == 0)))) {
+                    notFused = false;
                     fusedPartnerIndex = followerIndex;
                   }
                   else {
 LAB_000bd88c:
-                    bVar1 = false;
-                    bVar5 = true;
+                    canContinue = false;
+                    notFused = true;
                   }
                 }
                 else {
                   if (((laterSrc1Slot[-7] == 2) && (laterSrc1Slot[-6] == *(int *)(matMulInst + 8))) ||
                      ((laterSrc1Slot[7] == 2 && (laterSrc1Slot[8] == *(int *)(matMulInst + 8))))) goto LAB_000bd88c;
-                  if ((laterSrc1Slot[-0xe] != 2) || (bVar5 = true, laterSrc1Slot[-0xd] != *(int *)(matMulInst + 8)))
+                  if ((laterSrc1Slot[-0xe] != 2) || (notFused = true, laterSrc1Slot[-0xd] != *(int *)(matMulInst + 8)))
                   {
-                    bVar5 = false;
+                    notFused = false;
                   }
                 }
                 followerIndex = followerIndex + 1;
                 followerCount = followerCount + -1;
-              } while ((followerCount != 0) && (laterSrc1Slot = laterSrc1Slot + 0x1d, !bVar5));
-              if (!bVar1) goto LAB_000bd970;
+              } while ((followerCount != 0) && (laterSrc1Slot = laterSrc1Slot + 0x1d, !notFused));
+              if (!canContinue) goto LAB_000bd970;
               partnerOffset = fusedPartnerIndex * 0x74;
             }
             else {
               fusedPartnerIndex = 0;
               partnerOffset = 0;
             }
-            iVar18 = *(int *)(shader + 0x2c);
-            if (iVar18 == 0) {
-              iVar18 = extvsAppendSymbol(iStack00000018,symbolTable,
+            instKind = *(int *)(shader + 0x2c);
+            if (instKind == 0) {
+              instKind = extvsAppendSymbol(iStack00000018,symbolTable,
                                     *(undefined4 *)(*(int *)(((unsigned char *)0x0000116c) + iStack00000018) + 0x18)
                                    );
               instArray = *(int *)(shader + 0x18);
-              *(int *)(shader + 0x2c) = iVar18;
+              *(int *)(shader + 0x2c) = instKind;
             }
             partnerOffset = partnerOffset + instArray;
-            *(int *)(matMulInst + 0x24) = iVar18;
+            *(int *)(matMulInst + 0x24) = instKind;
             partnerOffsetWord8 = *(undefined4 *)(partnerOffset + 8);
             partnerOffsetWordc = *(undefined4 *)(partnerOffset + 0xc);
             partnerOffsetWord10 = *(undefined4 *)(partnerOffset + 0x10);
@@ -2954,8 +2956,8 @@ LAB_000bd970:
   return;
 }
 
-/* FUN_000bd9a0 @ 0xbd9a0 (160 bytes) */
-void FUN_000bd9a0(int glContext,undefined4 param_2,undefined4 param_3,undefined4 param_4,double fpPassThrough1)
+/* gld_emitLightingStatePacket @ 0xbd9a0 (160 bytes) */
+void gld_emitLightingStatePacket(int glContext,undefined4 param_2,undefined4 param_3,undefined4 param_4,double fpPassThrough1)
 {
   code *glContextPtr275c;
   int iVar2;
@@ -3382,8 +3384,8 @@ LAB_000bdeec:
   return status;
 }
 
-/* FUN_000be460 @ 0xbe460 (2472 bytes) */
-int FUN_000be460(psnProgram, rsWords, programImage, unusedArgR6, unusedArgR7, unusedArgR8, unusedArgR9)
+/* psnEncodeHwProgramPhased @ 0xbe460 (2472 bytes) */
+int psnEncodeHwProgramPhased(psnProgram, rsWords, programImage, unusedArgR6, unusedArgR7, unusedArgR8, unusedArgR9)
   int psnProgram;
   uint *rsWords;
   uint *programImage;
@@ -3394,82 +3396,89 @@ int FUN_000be460(psnProgram, rsWords, programImage, unusedArgR6, unusedArgR7, un
 {
   ushort psnProgramShort16;
   uint loopIndex;
-  ushort uVar1;
+  ushort regWord;
   ushort psnProgramShort22;
-  int iVar3;
-  bool bVar4;
-  bool bVar5;
-  int *piVar6;
-  uint uVar7;
-  uint uVar8;
-  uint uVar9;
-  uint *puVar10;
-  int *piVar11;
+  int texByteOffset;
+  int aluByteOffset;
+  bool aluPending;
+  bool texSeen;
+  int *rsScanNextCopy;
+  uint rsWordPartial;
+  uint aluBaseIndex;
+  uint recordKind;
+  uint phaseTexCount;
+  uint aluRegField;
+  uint rsOutIndex;
+  uint rsCountMasked;
+  uint *instRecord;
+  int *rsScanCur;
   uint loopIndex2;
-  int iVar13;
-  uint uVar14;
-  int *piVar15;
-  int *piVar16;
-  uint uVar17;
+  int aluHwIndex;
+  uint phaseAluCount;
+  int *rsScanAhead;
+  int *rsScanPrev;
+  uint rsOutIndexNext;
+  uint texBaseIndex;
   uint *cursor;
-  byte bVar19;
-  byte bVar20;
+  byte rsFlagsByte;
+  byte usedFlagsAccum;
+  byte depthWriteAccum;
   uint psnProgramWord8;
   uint loopIndex3;
-  uint uVar23;
-  int iVar24;
+  uint phaseTexCountMinus1;
+  int phaseSlot;
   
   psnProgramShort16 = *(ushort *)(psnProgram + 0x16);
   psnProgramShort22 = *(ushort *)(psnProgram + 0x22);
   psnProgramWord8 = *(uint *)(psnProgram + 8);
-  iVar24 = 4 - (uint)psnProgramShort16;
+  phaseSlot = 4 - (uint)psnProgramShort16;
   if ((*(int *)(psnProgram + 0x48) == 1) && (psnProgramWord8 != 0)) {
-    piVar15 = (int *)(psnProgram + 0x90);
+    rsScanAhead = (int *)(psnProgram + 0x90);
     loopIndex2 = 1;
-    piVar6 = piVar15;
-    piVar16 = (int *)(psnProgram + 0x48);
-    uVar9 = 0;
+    rsScanNextCopy = rsScanAhead;
+    rsScanPrev = (int *)(psnProgram + 0x48);
+    rsOutIndex = 0;
     do {
-      piVar11 = piVar6;
-      uVar17 = uVar9;
-      if ((piVar16[2] & 0xff00ffU) != 0) {
-        uVar17 = uVar9 + 1;
-        rsWords[uVar9 + 1] = 0;
-        bVar19 = *(byte *)(piVar16 + 2);
-        rsWords[uVar9 + 1] = bVar19 & 0xf;
-        uVar7 = (*(byte *)((int)piVar16 + 9) & 1) << 4 | bVar19 & 0xf;
-        rsWords[uVar9 + 1] = uVar7;
-        uVar7 = (*(byte *)((int)piVar16 + 10) & 0xf) << 0xc | uVar7;
-        rsWords[uVar9 + 1] = uVar7;
-        uVar7 = (*(byte *)((int)piVar16 + 0xb) & 3) << 0x10 | uVar7;
-        rsWords[uVar9 + 1] = uVar7;
-        uVar7 = (*(byte *)(piVar16 + 3) & 1) << 0x19 | uVar7;
-        rsWords[uVar9 + 1] = uVar7;
-        uVar7 = (uint)*(byte *)((int)piVar16 + 0xd) << 0x1b | uVar7;
-        rsWords[uVar9 + 1] = uVar7;
-        uVar7 = (*(ushort *)(piVar16 + 1) & 0x7f) << 5 | uVar7;
-        rsWords[uVar9 + 1] = uVar7;
-        rsWords[uVar9 + 1] = (*(ushort *)((int)piVar16 + 6) & 0x7f) << 0x12 | uVar7;
+      rsScanCur = rsScanNextCopy;
+      rsOutIndexNext = rsOutIndex;
+      if ((rsScanPrev[2] & 0xff00ffU) != 0) {
+        rsOutIndexNext = rsOutIndex + 1;
+        rsWords[rsOutIndex + 1] = 0;
+        rsFlagsByte = *(byte *)(rsScanPrev + 2);
+        rsWords[rsOutIndex + 1] = rsFlagsByte & 0xf;
+        rsWordPartial = (*(byte *)((int)rsScanPrev + 9) & 1) << 4 | rsFlagsByte & 0xf;
+        rsWords[rsOutIndex + 1] = rsWordPartial;
+        rsWordPartial = (*(byte *)((int)rsScanPrev + 10) & 0xf) << 0xc | rsWordPartial;
+        rsWords[rsOutIndex + 1] = rsWordPartial;
+        rsWordPartial = (*(byte *)((int)rsScanPrev + 0xb) & 3) << 0x10 | rsWordPartial;
+        rsWords[rsOutIndex + 1] = rsWordPartial;
+        rsWordPartial = (*(byte *)(rsScanPrev + 3) & 1) << 0x19 | rsWordPartial;
+        rsWords[rsOutIndex + 1] = rsWordPartial;
+        rsWordPartial = (uint)*(byte *)((int)rsScanPrev + 0xd) << 0x1b | rsWordPartial;
+        rsWords[rsOutIndex + 1] = rsWordPartial;
+        rsWordPartial = (*(ushort *)(rsScanPrev + 1) & 0x7f) << 5 | rsWordPartial;
+        rsWords[rsOutIndex + 1] = rsWordPartial;
+        rsWords[rsOutIndex + 1] = (*(ushort *)((int)rsScanPrev + 6) & 0x7f) << 0x12 | rsWordPartial;
       }
       loopIndex2 = loopIndex2 + 1;
-      if (*piVar15 != 1) break;
-      piVar15 = piVar15 + 0x12;
-      piVar6 = piVar11 + 0x12;
-      piVar16 = piVar11;
-      uVar9 = uVar17;
+      if (*rsScanAhead != 1) break;
+      rsScanAhead = rsScanAhead + 0x12;
+      rsScanNextCopy = rsScanCur + 0x12;
+      rsScanPrev = rsScanCur;
+      rsOutIndex = rsOutIndexNext;
     } while (loopIndex2 <= psnProgramWord8);
-    uVar9 = uVar17 & 0xff;
-    if (uVar17 != 0) goto LAB_000be580;
+    rsCountMasked = rsOutIndexNext & 0xff;
+    if (rsOutIndexNext != 0) goto LAB_000be580;
   }
   else {
     loopIndex2 = 1;
   }
-  uVar9 = 1;
+  rsCountMasked = 1;
   rsWords[1] = 0;
 LAB_000be580:
-  uVar9 = uVar9 - 1 & 0xf;
-  *rsWords = uVar9;
-  *rsWords = (*(byte *)(psnProgram + 0xd) & 7) << 5 | uVar9;
+  rsCountMasked = rsCountMasked - 1 & 0xf;
+  *rsWords = rsCountMasked;
+  *rsWords = (*(byte *)(psnProgram + 0xd) & 7) << 5 | rsCountMasked;
   programImage[1] = psnProgramShort22 & 0x7f;
   *programImage = psnProgramShort16 - 1 & 7;
   programImage[0xd] = 0;
@@ -3479,260 +3488,260 @@ LAB_000be580:
   programImage[5] = 0;
   programImage[6] = 0;
   if (loopIndex2 <= psnProgramWord8) {
-    bVar4 = false;
-    uVar7 = 0;
-    uVar17 = 0;
+    aluPending = false;
+    aluBaseIndex = 0;
+    texBaseIndex = 0;
     loopIndex = 0;
     loopIndex3 = 0;
-    puVar10 = (uint *)(psnProgram + loopIndex2 * 0x48);
-    bVar20 = 0;
-    bVar19 = 0;
-    bVar5 = false;
-    cursor = puVar10 + 0x1a;
+    instRecord = (uint *)(psnProgram + loopIndex2 * 0x48);
+    depthWriteAccum = 0;
+    usedFlagsAccum = 0;
+    texSeen = false;
+    cursor = instRecord + 0x1a;
     do {
-      uVar8 = *puVar10;
-      iVar13 = uVar7 + loopIndex;
-      if (uVar8 == 2) {
-        if (*(char *)((int)puVar10 + 0x1a) != '\0') {
-          iVar3 = (uVar17 + loopIndex3) * 4;
-          *(undefined4 *)(programImage[7] + iVar3) = 0;
-          *(uint *)(iVar3 + programImage[7]) =
-               *(byte *)((int)puVar10 + 0xf) & 0x1f | *(uint *)(iVar3 + programImage[7]) & 0xffffffe0;
-          *(uint *)(iVar3 + programImage[7]) =
-               (*(byte *)((int)puVar10 + 0xd) & 0x1f) << 6 |
-               *(uint *)(iVar3 + programImage[7]) & 0xfffff83f;
-          *(uint *)(iVar3 + programImage[7]) =
-               (*(byte *)((int)puVar10 + 0x19) & 0xf) << 0xb |
-               *(uint *)(iVar3 + programImage[7]) & 0xffff87ff;
-          *(uint *)(iVar3 + programImage[7]) =
-               (*(byte *)((int)puVar10 + 0x1a) & 7) << 0xf |
-               *(uint *)(iVar3 + programImage[7]) & 0xfffc7fff;
-          *(uint *)(iVar3 + programImage[7]) =
-               (*(ushort *)((int)puVar10 + 0xe) & 0x20) << 0xe |
-               *(uint *)(iVar3 + programImage[7]) & 0xfff7ffff;
-          *(uint *)(iVar3 + programImage[7]) =
-               (*(ushort *)(puVar10 + 3) & 0x20) << 0xf | *(uint *)(iVar3 + programImage[7]) & 0xffefffff
+      recordKind = *instRecord;
+      aluHwIndex = aluBaseIndex + loopIndex;
+      if (recordKind == 2) {
+        if (*(char *)((int)instRecord + 0x1a) != '\0') {
+          texByteOffset = (texBaseIndex + loopIndex3) * 4;
+          *(undefined4 *)(programImage[7] + texByteOffset) = 0;
+          *(uint *)(texByteOffset + programImage[7]) =
+               *(byte *)((int)instRecord + 0xf) & 0x1f | *(uint *)(texByteOffset + programImage[7]) & 0xffffffe0;
+          *(uint *)(texByteOffset + programImage[7]) =
+               (*(byte *)((int)instRecord + 0xd) & 0x1f) << 6 |
+               *(uint *)(texByteOffset + programImage[7]) & 0xfffff83f;
+          *(uint *)(texByteOffset + programImage[7]) =
+               (*(byte *)((int)instRecord + 0x19) & 0xf) << 0xb |
+               *(uint *)(texByteOffset + programImage[7]) & 0xffff87ff;
+          *(uint *)(texByteOffset + programImage[7]) =
+               (*(byte *)((int)instRecord + 0x1a) & 7) << 0xf |
+               *(uint *)(texByteOffset + programImage[7]) & 0xfffc7fff;
+          *(uint *)(texByteOffset + programImage[7]) =
+               (*(ushort *)((int)instRecord + 0xe) & 0x20) << 0xe |
+               *(uint *)(texByteOffset + programImage[7]) & 0xfff7ffff;
+          *(uint *)(texByteOffset + programImage[7]) =
+               (*(ushort *)(instRecord + 3) & 0x20) << 0xf | *(uint *)(texByteOffset + programImage[7]) & 0xffefffff
           ;
-          if (!bVar5) {
-            bVar5 = true;
+          if (!texSeen) {
+            texSeen = true;
             *programImage = *programImage | 8;
           }
           loopIndex3 = loopIndex3 + 1;
-          bVar4 = false;
+          aluPending = false;
         }
       }
-      else if ((1 < uVar8) && (uVar8 < 5)) {
-        iVar3 = iVar13 * 4;
-        *(undefined4 *)(programImage[8] + iVar3) = 0;
-        uVar1 = *(ushort *)((int)puVar10 + 0xe);
-        uVar8 = uVar1 & 0x1f;
-        if ((uVar1 & 0x8000) != 0) {
-          uVar8 = (uVar1 & 0x1f) + 0x20;
+      else if ((1 < recordKind) && (recordKind < 5)) {
+        aluByteOffset = aluHwIndex * 4;
+        *(undefined4 *)(programImage[8] + aluByteOffset) = 0;
+        regWord = *(ushort *)((int)instRecord + 0xe);
+        aluRegField = regWord & 0x1f;
+        if ((regWord & 0x8000) != 0) {
+          aluRegField = (regWord & 0x1f) + 0x20;
         }
-        *(uint *)(iVar3 + programImage[8]) = uVar8 | *(uint *)(iVar3 + programImage[8]) & 0xffffffc0;
-        uVar8 = *(ushort *)(puVar10 + 4) & 0x1f;
-        if ((*(ushort *)(puVar10 + 4) & 0x8000) != 0) {
-          uVar8 = uVar8 + 0x20;
+        *(uint *)(aluByteOffset + programImage[8]) = aluRegField | *(uint *)(aluByteOffset + programImage[8]) & 0xffffffc0;
+        aluRegField = *(ushort *)(instRecord + 4) & 0x1f;
+        if ((*(ushort *)(instRecord + 4) & 0x8000) != 0) {
+          aluRegField = aluRegField + 0x20;
         }
-        *(uint *)(iVar3 + programImage[8]) = uVar8 << 6 | *(uint *)(iVar3 + programImage[8]) & 0xfffff03f;
-        uVar8 = *(ushort *)((int)puVar10 + 0x12) & 0x1f;
-        if ((*(ushort *)((int)puVar10 + 0x12) & 0x8000) != 0) {
-          uVar8 = uVar8 + 0x20;
+        *(uint *)(aluByteOffset + programImage[8]) = aluRegField << 6 | *(uint *)(aluByteOffset + programImage[8]) & 0xfffff03f;
+        aluRegField = *(ushort *)((int)instRecord + 0x12) & 0x1f;
+        if ((*(ushort *)((int)instRecord + 0x12) & 0x8000) != 0) {
+          aluRegField = aluRegField + 0x20;
         }
-        *(uint *)(iVar3 + programImage[8]) = uVar8 << 0xc | *(uint *)(iVar3 + programImage[8]) & 0xfffc0fff;
-        *(uint *)(iVar3 + programImage[8]) =
-             (*(byte *)((int)puVar10 + 0xd) & 0x1f) << 0x12 |
-             *(uint *)(iVar3 + programImage[8]) & 0xff83ffff;
-        *(uint *)(iVar3 + programImage[8]) =
-             (*(byte *)(puVar10 + 5) & 7) << 0x17 | *(uint *)(iVar3 + programImage[8]) & 0xfc7fffff;
-        *(uint *)(iVar3 + programImage[8]) =
-             (*(byte *)((int)puVar10 + 0x15) & 7) << 0x1a |
-             *(uint *)(iVar3 + programImage[8]) & 0xe3ffffff;
-        *(uint *)(iVar3 + programImage[8]) =
-             (*(byte *)((int)puVar10 + 0x16) & 3) << 0x1d |
-             *(uint *)(iVar3 + programImage[8]) & 0x9fffffff;
-        *(undefined4 *)(programImage[9] + iVar3) = 0;
-        uVar8 = *(ushort *)((int)puVar10 + 0x1a) & 0x1f;
-        if ((*(ushort *)((int)puVar10 + 0x1a) & 0x8000) != 0) {
-          uVar8 = uVar8 + 0x20;
+        *(uint *)(aluByteOffset + programImage[8]) = aluRegField << 0xc | *(uint *)(aluByteOffset + programImage[8]) & 0xfffc0fff;
+        *(uint *)(aluByteOffset + programImage[8]) =
+             (*(byte *)((int)instRecord + 0xd) & 0x1f) << 0x12 |
+             *(uint *)(aluByteOffset + programImage[8]) & 0xff83ffff;
+        *(uint *)(aluByteOffset + programImage[8]) =
+             (*(byte *)(instRecord + 5) & 7) << 0x17 | *(uint *)(aluByteOffset + programImage[8]) & 0xfc7fffff;
+        *(uint *)(aluByteOffset + programImage[8]) =
+             (*(byte *)((int)instRecord + 0x15) & 7) << 0x1a |
+             *(uint *)(aluByteOffset + programImage[8]) & 0xe3ffffff;
+        *(uint *)(aluByteOffset + programImage[8]) =
+             (*(byte *)((int)instRecord + 0x16) & 3) << 0x1d |
+             *(uint *)(aluByteOffset + programImage[8]) & 0x9fffffff;
+        *(undefined4 *)(programImage[9] + aluByteOffset) = 0;
+        aluRegField = *(ushort *)((int)instRecord + 0x1a) & 0x1f;
+        if ((*(ushort *)((int)instRecord + 0x1a) & 0x8000) != 0) {
+          aluRegField = aluRegField + 0x20;
         }
-        *(uint *)(iVar3 + programImage[9]) = uVar8 | *(uint *)(iVar3 + programImage[9]) & 0xffffffc0;
-        uVar8 = *(ushort *)(puVar10 + 7) & 0x1f;
-        if ((*(ushort *)(puVar10 + 7) & 0x8000) != 0) {
-          uVar8 = uVar8 + 0x20;
+        *(uint *)(aluByteOffset + programImage[9]) = aluRegField | *(uint *)(aluByteOffset + programImage[9]) & 0xffffffc0;
+        aluRegField = *(ushort *)(instRecord + 7) & 0x1f;
+        if ((*(ushort *)(instRecord + 7) & 0x8000) != 0) {
+          aluRegField = aluRegField + 0x20;
         }
-        *(uint *)(iVar3 + programImage[9]) = uVar8 << 6 | *(uint *)(iVar3 + programImage[9]) & 0xfffff03f;
-        uVar8 = *(ushort *)((int)puVar10 + 0x1e) & 0x1f;
-        if ((*(ushort *)((int)puVar10 + 0x1e) & 0x8000) != 0) {
-          uVar8 = uVar8 + 0x20;
+        *(uint *)(aluByteOffset + programImage[9]) = aluRegField << 6 | *(uint *)(aluByteOffset + programImage[9]) & 0xfffff03f;
+        aluRegField = *(ushort *)((int)instRecord + 0x1e) & 0x1f;
+        if ((*(ushort *)((int)instRecord + 0x1e) & 0x8000) != 0) {
+          aluRegField = aluRegField + 0x20;
         }
-        *(uint *)(iVar3 + programImage[9]) = uVar8 << 0xc | *(uint *)(iVar3 + programImage[9]) & 0xfffc0fff;
-        *(uint *)(iVar3 + programImage[9]) =
-             (*(byte *)((int)puVar10 + 0x19) & 0x1f) << 0x12 |
-             *(uint *)(iVar3 + programImage[9]) & 0xff83ffff;
-        *(uint *)(iVar3 + programImage[9]) =
-             (*(byte *)(puVar10 + 8) & 1) << 0x17 | *(uint *)(iVar3 + programImage[9]) & 0xff7fffff;
-        *(uint *)(iVar3 + programImage[9]) =
-             (*(byte *)((int)puVar10 + 0x21) & 1) << 0x18 |
-             *(uint *)(iVar3 + programImage[9]) & 0xfeffffff;
-        *(uint *)(iVar3 + programImage[9]) =
-             (*(byte *)((int)puVar10 + 0x22) & 3) << 0x19 |
-             *(uint *)(iVar3 + programImage[9]) & 0xf9ffffff;
-        *(uint *)(iVar3 + programImage[9]) =
-             (*(byte *)((int)puVar10 + 0x23) & 1) << 0x1b |
-             *(uint *)(iVar3 + programImage[9]) & 0xf7ffffff;
+        *(uint *)(aluByteOffset + programImage[9]) = aluRegField << 0xc | *(uint *)(aluByteOffset + programImage[9]) & 0xfffc0fff;
+        *(uint *)(aluByteOffset + programImage[9]) =
+             (*(byte *)((int)instRecord + 0x19) & 0x1f) << 0x12 |
+             *(uint *)(aluByteOffset + programImage[9]) & 0xff83ffff;
+        *(uint *)(aluByteOffset + programImage[9]) =
+             (*(byte *)(instRecord + 8) & 1) << 0x17 | *(uint *)(aluByteOffset + programImage[9]) & 0xff7fffff;
+        *(uint *)(aluByteOffset + programImage[9]) =
+             (*(byte *)((int)instRecord + 0x21) & 1) << 0x18 |
+             *(uint *)(aluByteOffset + programImage[9]) & 0xfeffffff;
+        *(uint *)(aluByteOffset + programImage[9]) =
+             (*(byte *)((int)instRecord + 0x22) & 3) << 0x19 |
+             *(uint *)(aluByteOffset + programImage[9]) & 0xf9ffffff;
+        *(uint *)(aluByteOffset + programImage[9]) =
+             (*(byte *)((int)instRecord + 0x23) & 1) << 0x1b |
+             *(uint *)(aluByteOffset + programImage[9]) & 0xf7ffffff;
         if (programImage[10] != 0) {
-          *(undefined4 *)(programImage[10] + iVar3) = 0;
-          *(uint *)(iVar3 + programImage[10]) =
-               *(ushort *)((int)puVar10 + 0xe) >> 5 & 1 |
-               *(uint *)(iVar3 + programImage[10]) & 0xfffffffe;
-          *(uint *)(iVar3 + programImage[10]) =
-               *(ushort *)(puVar10 + 4) >> 4 & 2 | *(uint *)(iVar3 + programImage[10]) & 0xfffffffd;
-          *(uint *)(iVar3 + programImage[10]) =
-               *(ushort *)((int)puVar10 + 0x12) >> 3 & 4 |
-               *(uint *)(iVar3 + programImage[10]) & 0xfffffffb;
-          *(uint *)(iVar3 + programImage[10]) =
-               *(ushort *)(puVar10 + 3) >> 2 & 8 | *(uint *)(iVar3 + programImage[10]) & 0xfffffff7;
-          *(uint *)(iVar3 + programImage[10]) =
-               *(ushort *)((int)puVar10 + 0x1a) >> 1 & 0x10 |
-               *(uint *)(iVar3 + programImage[10]) & 0xffffffef;
-          *(uint *)(iVar3 + programImage[10]) =
-               *(ushort *)(puVar10 + 7) & 0x20 | *(uint *)(iVar3 + programImage[10]) & 0xffffffdf;
-          *(uint *)(iVar3 + programImage[10]) =
-               (*(ushort *)((int)puVar10 + 0x1e) & 0x20) << 1 |
-               *(uint *)(iVar3 + programImage[10]) & 0xffffffbf;
-          *(uint *)(iVar3 + programImage[10]) =
-               (*(ushort *)(puVar10 + 6) & 0x20) << 2 | *(uint *)(iVar3 + programImage[10]) & 0xffffff7f;
+          *(undefined4 *)(programImage[10] + aluByteOffset) = 0;
+          *(uint *)(aluByteOffset + programImage[10]) =
+               *(ushort *)((int)instRecord + 0xe) >> 5 & 1 |
+               *(uint *)(aluByteOffset + programImage[10]) & 0xfffffffe;
+          *(uint *)(aluByteOffset + programImage[10]) =
+               *(ushort *)(instRecord + 4) >> 4 & 2 | *(uint *)(aluByteOffset + programImage[10]) & 0xfffffffd;
+          *(uint *)(aluByteOffset + programImage[10]) =
+               *(ushort *)((int)instRecord + 0x12) >> 3 & 4 |
+               *(uint *)(aluByteOffset + programImage[10]) & 0xfffffffb;
+          *(uint *)(aluByteOffset + programImage[10]) =
+               *(ushort *)(instRecord + 3) >> 2 & 8 | *(uint *)(aluByteOffset + programImage[10]) & 0xfffffff7;
+          *(uint *)(aluByteOffset + programImage[10]) =
+               *(ushort *)((int)instRecord + 0x1a) >> 1 & 0x10 |
+               *(uint *)(aluByteOffset + programImage[10]) & 0xffffffef;
+          *(uint *)(aluByteOffset + programImage[10]) =
+               *(ushort *)(instRecord + 7) & 0x20 | *(uint *)(aluByteOffset + programImage[10]) & 0xffffffdf;
+          *(uint *)(aluByteOffset + programImage[10]) =
+               (*(ushort *)((int)instRecord + 0x1e) & 0x20) << 1 |
+               *(uint *)(aluByteOffset + programImage[10]) & 0xffffffbf;
+          *(uint *)(aluByteOffset + programImage[10]) =
+               (*(ushort *)(instRecord + 6) & 0x20) << 2 | *(uint *)(aluByteOffset + programImage[10]) & 0xffffff7f;
         }
         loopIndex = loopIndex + 1;
-        bVar4 = true;
-        *(undefined4 *)(programImage[0xb] + iVar3) = 0;
-        *(uint *)(iVar3 + programImage[0xb]) =
-             *(byte *)((int)puVar10 + 0x2a) & 0x1f | *(uint *)(iVar3 + programImage[0xb]) & 0xffffffe0;
-        *(uint *)(iVar3 + programImage[0xb]) =
-             (*(byte *)((int)puVar10 + 0x2d) & 3) << 5 |
-             *(uint *)(iVar3 + programImage[0xb]) & 0xffffff9f;
-        *(uint *)(iVar3 + programImage[0xb]) =
-             (*(byte *)((int)puVar10 + 0x2b) & 0x1f) << 7 |
-             *(uint *)(iVar3 + programImage[0xb]) & 0xfffff07f;
-        *(uint *)(iVar3 + programImage[0xb]) =
-             (*(byte *)((int)puVar10 + 0x2e) & 3) << 0xc |
-             *(uint *)(iVar3 + programImage[0xb]) & 0xffffcfff;
-        *(uint *)(iVar3 + programImage[0xb]) =
-             (*(byte *)(puVar10 + 0xb) & 0x1f) << 0xe | *(uint *)(iVar3 + programImage[0xb]) & 0xfff83fff
+        aluPending = true;
+        *(undefined4 *)(programImage[0xb] + aluByteOffset) = 0;
+        *(uint *)(aluByteOffset + programImage[0xb]) =
+             *(byte *)((int)instRecord + 0x2a) & 0x1f | *(uint *)(aluByteOffset + programImage[0xb]) & 0xffffffe0;
+        *(uint *)(aluByteOffset + programImage[0xb]) =
+             (*(byte *)((int)instRecord + 0x2d) & 3) << 5 |
+             *(uint *)(aluByteOffset + programImage[0xb]) & 0xffffff9f;
+        *(uint *)(aluByteOffset + programImage[0xb]) =
+             (*(byte *)((int)instRecord + 0x2b) & 0x1f) << 7 |
+             *(uint *)(aluByteOffset + programImage[0xb]) & 0xfffff07f;
+        *(uint *)(aluByteOffset + programImage[0xb]) =
+             (*(byte *)((int)instRecord + 0x2e) & 3) << 0xc |
+             *(uint *)(aluByteOffset + programImage[0xb]) & 0xffffcfff;
+        *(uint *)(aluByteOffset + programImage[0xb]) =
+             (*(byte *)(instRecord + 0xb) & 0x1f) << 0xe | *(uint *)(aluByteOffset + programImage[0xb]) & 0xfff83fff
         ;
-        *(uint *)(iVar3 + programImage[0xb]) =
-             (*(byte *)((int)puVar10 + 0x2f) & 3) << 0x13 |
-             *(uint *)(iVar3 + programImage[0xb]) & 0xffe7ffff;
-        *(uint *)(iVar3 + programImage[0xb]) =
-             (*(byte *)(puVar10 + 0xc) & 3) << 0x15 | *(uint *)(iVar3 + programImage[0xb]) & 0xff9fffff;
-        *(uint *)(iVar3 + programImage[0xb]) =
-             (*(byte *)((int)puVar10 + 0x31) & 0xf) << 0x17 |
-             *(uint *)(iVar3 + programImage[0xb]) & 0xf87fffff;
-        *(uint *)(iVar3 + programImage[0xb]) =
-             (*(byte *)((int)puVar10 + 0x32) & 7) << 0x1b |
-             *(uint *)(iVar3 + programImage[0xb]) & 0xc7ffffff;
-        *(uint *)(iVar3 + programImage[0xb]) =
-             (*(byte *)((int)puVar10 + 0x33) & 1) << 0x1e |
-             *(uint *)(iVar3 + programImage[0xb]) & 0xbfffffff;
-        *(uint *)(iVar3 + programImage[0xb]) =
-             (uint)*(byte *)(puVar10 + 0xd) << 0x1f | *(uint *)(iVar3 + programImage[0xb]) & 0x7fffffff;
-        *(undefined4 *)(programImage[0xc] + iVar3) = 0;
-        *(uint *)(iVar3 + programImage[0xc]) =
-             *(byte *)((int)puVar10 + 0x39) & 0x1f | *(uint *)(iVar3 + programImage[0xc]) & 0xffffffe0;
-        *(uint *)(iVar3 + programImage[0xc]) =
-             (*(byte *)(puVar10 + 0xf) & 3) << 5 | *(uint *)(iVar3 + programImage[0xc]) & 0xffffff9f;
-        *(uint *)(iVar3 + programImage[0xc]) =
-             (*(byte *)((int)puVar10 + 0x3a) & 0x1f) << 7 |
-             *(uint *)(iVar3 + programImage[0xc]) & 0xfffff07f;
-        *(uint *)(iVar3 + programImage[0xc]) =
-             (*(byte *)((int)puVar10 + 0x3d) & 3) << 0xc |
-             *(uint *)(iVar3 + programImage[0xc]) & 0xffffcfff;
-        *(uint *)(iVar3 + programImage[0xc]) =
-             (*(byte *)((int)puVar10 + 0x3b) & 0x1f) << 0xe |
-             *(uint *)(iVar3 + programImage[0xc]) & 0xfff83fff;
-        *(uint *)(iVar3 + programImage[0xc]) =
-             (*(byte *)((int)puVar10 + 0x3e) & 3) << 0x13 |
-             *(uint *)(iVar3 + programImage[0xc]) & 0xffe7ffff;
-        *(uint *)(iVar3 + programImage[0xc]) =
-             (*(byte *)((int)puVar10 + 0x3f) & 3) << 0x15 |
-             *(uint *)(iVar3 + programImage[0xc]) & 0xff9fffff;
-        *(uint *)(iVar3 + programImage[0xc]) =
-             (*(byte *)(puVar10 + 0x10) & 0xf) << 0x17 |
-             *(uint *)(iVar3 + programImage[0xc]) & 0xf87fffff;
-        *(uint *)(iVar3 + programImage[0xc]) =
-             (*(byte *)((int)puVar10 + 0x41) & 7) << 0x1b |
-             *(uint *)(iVar3 + programImage[0xc]) & 0xc7ffffff;
-        *(uint *)(iVar3 + programImage[0xc]) =
-             (*(byte *)((int)puVar10 + 0x42) & 1) << 0x1e |
-             *(uint *)(iVar3 + programImage[0xc]) & 0xbfffffff;
-        bVar20 = bVar20 | *(byte *)((int)puVar10 + 0x23);
-        bVar19 = bVar19 | *(byte *)((int)puVar10 + 0x15) | *(byte *)((int)puVar10 + 0x21);
+        *(uint *)(aluByteOffset + programImage[0xb]) =
+             (*(byte *)((int)instRecord + 0x2f) & 3) << 0x13 |
+             *(uint *)(aluByteOffset + programImage[0xb]) & 0xffe7ffff;
+        *(uint *)(aluByteOffset + programImage[0xb]) =
+             (*(byte *)(instRecord + 0xc) & 3) << 0x15 | *(uint *)(aluByteOffset + programImage[0xb]) & 0xff9fffff;
+        *(uint *)(aluByteOffset + programImage[0xb]) =
+             (*(byte *)((int)instRecord + 0x31) & 0xf) << 0x17 |
+             *(uint *)(aluByteOffset + programImage[0xb]) & 0xf87fffff;
+        *(uint *)(aluByteOffset + programImage[0xb]) =
+             (*(byte *)((int)instRecord + 0x32) & 7) << 0x1b |
+             *(uint *)(aluByteOffset + programImage[0xb]) & 0xc7ffffff;
+        *(uint *)(aluByteOffset + programImage[0xb]) =
+             (*(byte *)((int)instRecord + 0x33) & 1) << 0x1e |
+             *(uint *)(aluByteOffset + programImage[0xb]) & 0xbfffffff;
+        *(uint *)(aluByteOffset + programImage[0xb]) =
+             (uint)*(byte *)(instRecord + 0xd) << 0x1f | *(uint *)(aluByteOffset + programImage[0xb]) & 0x7fffffff;
+        *(undefined4 *)(programImage[0xc] + aluByteOffset) = 0;
+        *(uint *)(aluByteOffset + programImage[0xc]) =
+             *(byte *)((int)instRecord + 0x39) & 0x1f | *(uint *)(aluByteOffset + programImage[0xc]) & 0xffffffe0;
+        *(uint *)(aluByteOffset + programImage[0xc]) =
+             (*(byte *)(instRecord + 0xf) & 3) << 5 | *(uint *)(aluByteOffset + programImage[0xc]) & 0xffffff9f;
+        *(uint *)(aluByteOffset + programImage[0xc]) =
+             (*(byte *)((int)instRecord + 0x3a) & 0x1f) << 7 |
+             *(uint *)(aluByteOffset + programImage[0xc]) & 0xfffff07f;
+        *(uint *)(aluByteOffset + programImage[0xc]) =
+             (*(byte *)((int)instRecord + 0x3d) & 3) << 0xc |
+             *(uint *)(aluByteOffset + programImage[0xc]) & 0xffffcfff;
+        *(uint *)(aluByteOffset + programImage[0xc]) =
+             (*(byte *)((int)instRecord + 0x3b) & 0x1f) << 0xe |
+             *(uint *)(aluByteOffset + programImage[0xc]) & 0xfff83fff;
+        *(uint *)(aluByteOffset + programImage[0xc]) =
+             (*(byte *)((int)instRecord + 0x3e) & 3) << 0x13 |
+             *(uint *)(aluByteOffset + programImage[0xc]) & 0xffe7ffff;
+        *(uint *)(aluByteOffset + programImage[0xc]) =
+             (*(byte *)((int)instRecord + 0x3f) & 3) << 0x15 |
+             *(uint *)(aluByteOffset + programImage[0xc]) & 0xff9fffff;
+        *(uint *)(aluByteOffset + programImage[0xc]) =
+             (*(byte *)(instRecord + 0x10) & 0xf) << 0x17 |
+             *(uint *)(aluByteOffset + programImage[0xc]) & 0xf87fffff;
+        *(uint *)(aluByteOffset + programImage[0xc]) =
+             (*(byte *)((int)instRecord + 0x41) & 7) << 0x1b |
+             *(uint *)(aluByteOffset + programImage[0xc]) & 0xc7ffffff;
+        *(uint *)(aluByteOffset + programImage[0xc]) =
+             (*(byte *)((int)instRecord + 0x42) & 1) << 0x1e |
+             *(uint *)(aluByteOffset + programImage[0xc]) & 0xbfffffff;
+        depthWriteAccum = depthWriteAccum | *(byte *)((int)instRecord + 0x23);
+        usedFlagsAccum = usedFlagsAccum | *(byte *)((int)instRecord + 0x15) | *(byte *)((int)instRecord + 0x21);
       }
-      if ((loopIndex2 == psnProgramWord8) || ((cursor[-8] == 2 && ((bVar4 || (*(char *)cursor != '\0')))))) {
+      if ((loopIndex2 == psnProgramWord8) || ((cursor[-8] == 2 && ((aluPending || (*(char *)cursor != '\0')))))) {
         if (loopIndex3 == 0) {
           loopIndex3 = 1;
-          uVar8 = 1;
-          uVar23 = 0;
+          phaseTexCount = 1;
+          phaseTexCountMinus1 = 0;
         }
         else {
-          uVar8 = loopIndex3 & 0xff;
-          uVar23 = loopIndex3 - 1;
+          phaseTexCount = loopIndex3 & 0xff;
+          phaseTexCountMinus1 = loopIndex3 - 1;
         }
-        uVar14 = loopIndex & 0xff;
+        phaseAluCount = loopIndex & 0xff;
         if (loopIndex == 0) {
-          iVar13 = iVar13 * 4;
-          *(undefined4 *)(programImage[8] + iVar13) = 0;
-          *(undefined4 *)(programImage[9] + iVar13) = 0;
+          aluHwIndex = aluHwIndex * 4;
+          *(undefined4 *)(programImage[8] + aluHwIndex) = 0;
+          *(undefined4 *)(programImage[9] + aluHwIndex) = 0;
           if (programImage[10] != 0) {
-            *(undefined4 *)(programImage[10] + iVar13) = 0;
+            *(undefined4 *)(programImage[10] + aluHwIndex) = 0;
           }
-          uVar14 = 1;
-          *(undefined4 *)(programImage[0xb] + iVar13) = 0;
-          *(undefined4 *)(programImage[0xc] + iVar13) = 0;
+          phaseAluCount = 1;
+          *(undefined4 *)(programImage[0xb] + aluHwIndex) = 0;
+          *(undefined4 *)(programImage[0xc] + aluHwIndex) = 0;
           loopIndex = 1;
         }
-        programImage[iVar24 + 2] =
-             (uVar23 & 0x1e0) << 0x17 |
-             (uVar17 & 0x1e0) << 0x13 |
-             (uVar14 - 1) * 0x40 & 0xfc0 |
-             (uVar8 - 1) * 0x20000 & 0x3e0000 |
-             uVar7 & 0x3f | (uVar17 & 0x1f) << 0xc | programImage[iVar24 + 2] & 0xc00000;
-        if (iVar24 == 1) {
+        programImage[phaseSlot + 2] =
+             (phaseTexCountMinus1 & 0x1e0) << 0x17 |
+             (texBaseIndex & 0x1e0) << 0x13 |
+             (phaseAluCount - 1) * 0x40 & 0xfc0 |
+             (phaseTexCount - 1) * 0x20000 & 0x3e0000 |
+             aluBaseIndex & 0x3f | (texBaseIndex & 0x1f) << 0xc | programImage[phaseSlot + 2] & 0xc00000;
+        if (phaseSlot == 1) {
           programImage[6] = (loopIndex - 1) * 0x200 & 0x38000 |
-                       (uVar7 & 0x1c0) << 6 | programImage[6] & 0xfffc0fff;
+                       (aluBaseIndex & 0x1c0) << 6 | programImage[6] & 0xfffc0fff;
         }
-        else if (iVar24 == 0) {
-          programImage[6] = (loopIndex - 1) * 8 & 0xe00 | uVar7 & 0x1c0 | programImage[6] & 0xfffff03f;
+        else if (phaseSlot == 0) {
+          programImage[6] = (loopIndex - 1) * 8 & 0xe00 | aluBaseIndex & 0x1c0 | programImage[6] & 0xfffff03f;
         }
-        else if (iVar24 == 2) {
+        else if (phaseSlot == 2) {
           programImage[6] = (loopIndex - 1) * 0x8000 & 0xe00000 |
-                       (uVar7 & 0x1c0) << 0xc | programImage[6] & 0xff03ffff;
+                       (aluBaseIndex & 0x1c0) << 0xc | programImage[6] & 0xff03ffff;
         }
-        else if (iVar24 == 3) {
+        else if (phaseSlot == 3) {
           programImage[6] = (loopIndex - 1) * 0x200000 & 0x38000000 |
-                       (uVar7 & 0x1c0) << 0x12 | programImage[6] & 0xc0ffffff;
+                       (aluBaseIndex & 0x1c0) << 0x12 | programImage[6] & 0xc0ffffff;
         }
-        if (bVar19 != 0) {
-          programImage[iVar24 + 2] = programImage[iVar24 + 2] | 0x400000;
+        if (usedFlagsAccum != 0) {
+          programImage[phaseSlot + 2] = programImage[phaseSlot + 2] | 0x400000;
         }
-        if (bVar20 != 0) {
-          programImage[iVar24 + 2] = programImage[iVar24 + 2] | 0x800000;
+        if (depthWriteAccum != 0) {
+          programImage[phaseSlot + 2] = programImage[phaseSlot + 2] | 0x800000;
           programImage[0xd] = programImage[0xd] | 1;
         }
-        if (bVar5) {
-          uVar17 = uVar17 + loopIndex3;
+        if (texSeen) {
+          texBaseIndex = texBaseIndex + loopIndex3;
         }
-        uVar7 = uVar7 + loopIndex;
-        iVar24 = iVar24 + 1;
+        aluBaseIndex = aluBaseIndex + loopIndex;
+        phaseSlot = phaseSlot + 1;
         loopIndex = 0;
         loopIndex3 = 0;
-        bVar20 = 0;
-        bVar19 = 0;
-        bVar5 = true;
+        depthWriteAccum = 0;
+        usedFlagsAccum = 0;
+        texSeen = true;
       }
       loopIndex2 = loopIndex2 + 1;
-      puVar10 = puVar10 + 0x12;
+      instRecord = instRecord + 0x12;
       cursor = cursor + 0x12;
     } while (loopIndex2 <= psnProgramWord8);
   }
@@ -3751,7 +3760,7 @@ int psnCheckLimitsAndGenerate(psnProgram, passThroughR4, passThroughR5, unusedAr
 {
   undefined4 limitStatus;
   
-  ((int (*)())FUN_000c5e60)(psnProgram);
+  ((int (*)())psnAnalyzeProgram)(psnProgram);
   if (*(ushort *)(psnProgram + 0x16) < 5) {
     if (*(ushort *)(psnProgram + 0x18) < 0x11) {
       if (*(ushort *)(psnProgram + 0x1a) < 0x21) {
@@ -3759,7 +3768,7 @@ int psnCheckLimitsAndGenerate(psnProgram, passThroughR4, passThroughR5, unusedAr
           if (*(short *)(psnProgram + 0x20) == 0) {
             if (*(ushort *)(psnProgram + 0x22) < 0x20) {
               if (*(ushort *)(psnProgram + 0x24) < 0x20) {
-                ((int (*)())FUN_000be460)(psnProgram,passThroughR4,passThroughR5,0,passThroughR7,passThroughR8,passThroughR9);
+                ((int (*)())psnEncodeHwProgramPhased)(psnProgram,passThroughR4,passThroughR5,0,passThroughR7,passThroughR8,passThroughR9);
                 limitStatus = 0;
               }
               else {
@@ -3792,49 +3801,51 @@ int psnCheckLimitsAndGenerate(psnProgram, passThroughR4, passThroughR5, unusedAr
   return limitStatus;
 }
 
-/* FUN_000bef40 @ 0xbef40 (1192 bytes) */
-int FUN_000bef40(psnProgram, param_2, param_3, unusedArgR6, param_5)
+/* psnRemapTempRegisters @ 0xbef40 (1192 bytes) */
+int psnRemapTempRegisters(psnProgram, passThroughR4, passThroughR5, unusedArgR6, recordFieldCursor)
   int psnProgram;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 passThroughR4;
+  undefined4 passThroughR5;
   undefined4 unusedArgR6;
-  dword *param_5;
+  dword *recordFieldCursor;
 {
-  bool bVar1;
-  byte bVar2;
-  ushort uVar3;
-  dword dVar4;
-  int iVar5;
-  uint uVar6;
-  int iVar7;
-  int *piVar8;
-  undefined4 uVar9;
-  char *pcVar10;
-  ushort *puVar11;
-  ushort *puVar12;
-  dword *pdVar13;
-  dword *pdVar14;
-  int *piVar15;
-  dword *pdVar16;
-  char *pcVar17;
+  bool bankFlag;
+  byte operandKindByte;
+  ushort regIndexField;
+  dword nextRecordKind;
+  int tableValueNext;
+  uint recordKind;
+  int remapIndex;
+  int *slotScanCursor;
+  undefined4 limitStatus;
+  char *enableFlag20Ptr;
+  ushort *regField12Ptr;
+  ushort *regField10Ptr;
+  dword *nextRecordPtr;
+  dword *recordPtr;
+  int *highTableCursor;
+  dword *scanRecordPtr;
+  char *enableFlag14Ptr;
   uint loopIndex;
-  dword *pdVar19;
-  ushort *puVar20;
+  dword *scanNextPtr;
+  dword *regField0eCursor;
+  ushort *regField18Ptr;
   uint psnProgramWord8;
-  ushort *puVar22;
-  ushort *puVar23;
-  char *pcVar24;
-  ushort *puVar25;
-  char *pcVar26;
-  dword *pdVar27;
-  ushort *puVar28;
-  ushort *puVar29;
-  ushort *puVar30;
-  int iVar31;
-  int aiStack_148 [32];
-  int aiStack_c8 [35];
+  ushort *regField1ePtr;
+  ushort *regField06Ptr;
+  char *enableFlag0bPtr;
+  ushort *regField04Ptr;
+  char *enableFlag09Ptr;
+  dword *scanNextPtr2;
+  dword *regField0cCursor;
+  ushort *kindField1aPtr;
+  ushort *regField1cPtr;
+  ushort *regField1aPtr;
+  int countdownIndex;
+  int regRemapTable [32];
+  int regRemapTableHigh [35];
   
-  ((int (*)())FUN_000c5e60)(psnProgram);
+  ((int (*)())psnAnalyzeProgram)(psnProgram);
   if (*(ushort *)(psnProgram + 0x16) < 5) {
     if (*(ushort *)(psnProgram + 0x18) < 0x11) {
       if (*(ushort *)(psnProgram + 0x1a) < 0x201) {
@@ -3842,210 +3853,210 @@ int FUN_000bef40(psnProgram, param_2, param_3, unusedArgR6, param_5)
           if (*(short *)(psnProgram + 0x20) == 0) {
             if (*(ushort *)(psnProgram + 0x22) < 0x40) {
               if (*(ushort *)(psnProgram + 0x24) < 0x40) {
-                pdVar16 = &(*(GhidraMachOCommand *)0x0000001c).filesize;
+                scanRecordPtr = &(*(GhidraMachOCommand *)0x0000001c).filesize;
                 psnProgramWord8 = *(uint *)(psnProgram + 8);
-                iVar7 = 0;
-                iVar31 = 0x40;
+                remapIndex = 0;
+                countdownIndex = 0x40;
                 do {
-                  *(undefined4 *)(iVar7 + (int)aiStack_148) = 0xffffffff;
-                  iVar7 = iVar7 + 4;
-                  iVar31 = iVar31 + -1;
-                } while (iVar31 != 0);
+                  *(undefined4 *)(remapIndex + (int)regRemapTable) = 0xffffffff;
+                  remapIndex = remapIndex + 4;
+                  countdownIndex = countdownIndex + -1;
+                } while (countdownIndex != 0);
                 if ((psnProgramWord8 != 0) &&
-                   (pdVar14 = (dword *)(psnProgram + 0x48), param_5 = pdVar14,
+                   (recordPtr = (dword *)(psnProgram + 0x48), recordFieldCursor = recordPtr,
                    *(int *)(psnProgram + 0x48) == 1)) {
-                  pdVar19 = (dword *)(psnProgram + 0x90);
+                  scanNextPtr = (dword *)(psnProgram + 0x90);
                   loopIndex = 1;
-                  bVar1 = false;
-                  pdVar27 = pdVar19;
-                  pdVar16 = pdVar14;
+                  bankFlag = false;
+                  scanNextPtr2 = scanNextPtr;
+                  scanRecordPtr = recordPtr;
                   do {
-                    pdVar13 = pdVar27;
-                    if ((*(char *)((int)pdVar16 + 9) != '\0') &&
-                       (uVar3 = *(ushort *)(pdVar16 + 1), aiStack_148[uVar3] = 0,
-                       (uVar3 & 0x20) != 0)) {
-                      bVar1 = true;
+                    nextRecordPtr = scanNextPtr2;
+                    if ((*(char *)((int)scanRecordPtr + 9) != '\0') &&
+                       (regIndexField = *(ushort *)(scanRecordPtr + 1), regRemapTable[regIndexField] = 0,
+                       (regIndexField & 0x20) != 0)) {
+                      bankFlag = true;
                     }
-                    if ((*(char *)((int)pdVar16 + 0xb) != '\0') &&
-                       (uVar3 = *(ushort *)((int)pdVar16 + 6), aiStack_148[uVar3] = 0,
-                       (uVar3 & 0x20) != 0)) {
-                      bVar1 = true;
+                    if ((*(char *)((int)scanRecordPtr + 0xb) != '\0') &&
+                       (regIndexField = *(ushort *)((int)scanRecordPtr + 6), regRemapTable[regIndexField] = 0,
+                       (regIndexField & 0x20) != 0)) {
+                      bankFlag = true;
                     }
                     loopIndex = loopIndex + 1;
                     if (psnProgramWord8 < loopIndex) break;
-                    dVar4 = *pdVar19;
-                    pdVar19 = pdVar19 + 0x12;
-                    pdVar27 = pdVar13 + 0x12;
-                    pdVar16 = pdVar13;
-                  } while (dVar4 == 1);
-                  if (bVar1) {
-                    iVar7 = 0x20;
-                    iVar31 = 0;
-                    piVar15 = aiStack_c8;
+                    nextRecordKind = *scanNextPtr;
+                    scanNextPtr = scanNextPtr + 0x12;
+                    scanNextPtr2 = nextRecordPtr + 0x12;
+                    scanRecordPtr = nextRecordPtr;
+                  } while (nextRecordKind == 1);
+                  if (bankFlag) {
+                    remapIndex = 0x20;
+                    countdownIndex = 0;
+                    highTableCursor = regRemapTableHigh;
                     do {
-                      if (*piVar15 == 0) {
-                        if (aiStack_148[iVar31] != -1) {
-                          piVar8 = aiStack_148 + iVar31 + 1;
+                      if (*highTableCursor == 0) {
+                        if (regRemapTable[countdownIndex] != -1) {
+                          slotScanCursor = regRemapTable + countdownIndex + 1;
                           do {
-                            iVar5 = *piVar8;
-                            iVar31 = iVar31 + 1;
-                            piVar8 = piVar8 + 1;
-                          } while (iVar5 != -1);
+                            tableValueNext = *slotScanCursor;
+                            countdownIndex = countdownIndex + 1;
+                            slotScanCursor = slotScanCursor + 1;
+                          } while (tableValueNext != -1);
                         }
-                        *piVar15 = iVar31;
-                        aiStack_148[iVar31] = iVar7;
+                        *highTableCursor = countdownIndex;
+                        regRemapTable[countdownIndex] = remapIndex;
                       }
-                      bVar1 = iVar7 != 0x3f;
-                      piVar15 = piVar15 + 1;
-                      iVar7 = iVar7 + 1;
-                    } while (bVar1);
-                    pdVar19 = (dword *)(psnProgram + 0x56);
-                    puVar28 = (ushort *)(psnProgram + 0x62);
-                    param_5 = (dword *)(psnProgram + 0x54);
-                    puVar22 = (ushort *)(psnProgram + 0x66);
-                    puVar23 = (ushort *)(psnProgram + 0x4e);
-                    pcVar24 = (char *)(psnProgram + 0x53);
-                    puVar25 = (ushort *)(psnProgram + 0x4c);
-                    pcVar26 = (char *)(psnProgram + 0x51);
-                    puVar29 = (ushort *)(psnProgram + 100);
-                    puVar20 = (ushort *)(psnProgram + 0x60);
-                    pcVar10 = (char *)(psnProgram + 0x68);
-                    puVar11 = (ushort *)(psnProgram + 0x5a);
-                    puVar12 = (ushort *)(psnProgram + 0x58);
+                      bankFlag = remapIndex != 0x3f;
+                      highTableCursor = highTableCursor + 1;
+                      remapIndex = remapIndex + 1;
+                    } while (bankFlag);
+                    regField0eCursor = (dword *)(psnProgram + 0x56);
+                    kindField1aPtr = (ushort *)(psnProgram + 0x62);
+                    recordFieldCursor = (dword *)(psnProgram + 0x54);
+                    regField1ePtr = (ushort *)(psnProgram + 0x66);
+                    regField06Ptr = (ushort *)(psnProgram + 0x4e);
+                    enableFlag0bPtr = (char *)(psnProgram + 0x53);
+                    regField04Ptr = (ushort *)(psnProgram + 0x4c);
+                    enableFlag09Ptr = (char *)(psnProgram + 0x51);
+                    regField1cPtr = (ushort *)(psnProgram + 100);
+                    regField18Ptr = (ushort *)(psnProgram + 0x60);
+                    enableFlag20Ptr = (char *)(psnProgram + 0x68);
+                    regField12Ptr = (ushort *)(psnProgram + 0x5a);
+                    regField10Ptr = (ushort *)(psnProgram + 0x58);
                     loopIndex = 1;
-                    pcVar17 = (char *)(psnProgram + 0x5c);
-                    pdVar16 = pdVar19;
-                    pdVar27 = param_5;
-                    puVar30 = puVar28;
+                    enableFlag14Ptr = (char *)(psnProgram + 0x5c);
+                    scanRecordPtr = regField0eCursor;
+                    regField0cCursor = recordFieldCursor;
+                    regField1aPtr = kindField1aPtr;
                     do {
-                      uVar6 = *pdVar14;
-                      if (uVar6 != 2) {
-                        if (uVar6 < 3) {
-                          if (uVar6 == 1) {
-                            if ((*pcVar26 != '\0') && (iVar7 = aiStack_148[*puVar25], iVar7 != -1))
+                      recordKind = *recordPtr;
+                      if (recordKind != 2) {
+                        if (recordKind < 3) {
+                          if (recordKind == 1) {
+                            if ((*enableFlag09Ptr != '\0') && (remapIndex = regRemapTable[*regField04Ptr], remapIndex != -1))
                             {
-                              *puVar25 = (ushort)iVar7;
+                              *regField04Ptr = (ushort)remapIndex;
                             }
-                            if ((*pcVar24 != '\0') && (iVar7 = aiStack_148[*puVar23], iVar7 != -1))
+                            if ((*enableFlag0bPtr != '\0') && (remapIndex = regRemapTable[*regField06Ptr], remapIndex != -1))
                             {
-                              *puVar23 = (ushort)iVar7;
+                              *regField06Ptr = (ushort)remapIndex;
                             }
                           }
                         }
-                        else if (uVar6 < 5) {
-                          if ((*pcVar17 != '\0') &&
-                             (iVar7 = aiStack_148[*(ushort *)param_5], iVar7 != -1)) {
-                            *(ushort *)param_5 = (ushort)iVar7;
+                        else if (recordKind < 5) {
+                          if ((*enableFlag14Ptr != '\0') &&
+                             (remapIndex = regRemapTable[*(ushort *)recordFieldCursor], remapIndex != -1)) {
+                            *(ushort *)recordFieldCursor = (ushort)remapIndex;
                           }
-                          if (((*(ushort *)pdVar19 & 0x8000) == 0) &&
-                             (iVar7 = aiStack_148[*(ushort *)pdVar19], iVar7 != -1)) {
-                            *(ushort *)pdVar19 = (ushort)iVar7;
+                          if (((*(ushort *)regField0eCursor & 0x8000) == 0) &&
+                             (remapIndex = regRemapTable[*(ushort *)regField0eCursor], remapIndex != -1)) {
+                            *(ushort *)regField0eCursor = (ushort)remapIndex;
                           }
-                          if (((*puVar12 & 0x8000) == 0) &&
-                             (iVar7 = aiStack_148[*puVar12], iVar7 != -1)) {
-                            *puVar12 = (ushort)iVar7;
+                          if (((*regField10Ptr & 0x8000) == 0) &&
+                             (remapIndex = regRemapTable[*regField10Ptr], remapIndex != -1)) {
+                            *regField10Ptr = (ushort)remapIndex;
                           }
-                          if (((*puVar11 & 0x8000) == 0) &&
-                             (iVar7 = aiStack_148[*puVar11], iVar7 != -1)) {
-                            *puVar11 = (ushort)iVar7;
+                          if (((*regField12Ptr & 0x8000) == 0) &&
+                             (remapIndex = regRemapTable[*regField12Ptr], remapIndex != -1)) {
+                            *regField12Ptr = (ushort)remapIndex;
                           }
-                          if ((*pcVar10 != '\0') && (iVar7 = aiStack_148[*puVar20], iVar7 != -1)) {
-                            *puVar20 = (ushort)iVar7;
+                          if ((*enableFlag20Ptr != '\0') && (remapIndex = regRemapTable[*regField18Ptr], remapIndex != -1)) {
+                            *regField18Ptr = (ushort)remapIndex;
                           }
-                          if (((*puVar30 & 0x8000) == 0) &&
-                             (iVar7 = aiStack_148[*puVar30], iVar7 != -1)) {
-                            *puVar30 = (ushort)iVar7;
+                          if (((*regField1aPtr & 0x8000) == 0) &&
+                             (remapIndex = regRemapTable[*regField1aPtr], remapIndex != -1)) {
+                            *regField1aPtr = (ushort)remapIndex;
                           }
-                          if (((*puVar29 & 0x8000) == 0) &&
-                             (iVar7 = aiStack_148[*puVar29], iVar7 != -1)) {
-                            *puVar29 = (ushort)iVar7;
+                          if (((*regField1cPtr & 0x8000) == 0) &&
+                             (remapIndex = regRemapTable[*regField1cPtr], remapIndex != -1)) {
+                            *regField1cPtr = (ushort)remapIndex;
                           }
-                          if (((*puVar22 & 0x8000) == 0) &&
-                             (iVar7 = aiStack_148[*puVar22], iVar7 != -1)) {
-                            *puVar22 = (ushort)iVar7;
+                          if (((*regField1ePtr & 0x8000) == 0) &&
+                             (remapIndex = regRemapTable[*regField1ePtr], remapIndex != -1)) {
+                            *regField1ePtr = (ushort)remapIndex;
                           }
                         }
                         goto LAB_000bf33c;
                       }
-                      bVar2 = *(byte *)puVar28;
-                      if (bVar2 == 2) {
+                      operandKindByte = *(byte *)kindField1aPtr;
+                      if (operandKindByte == 2) {
 LAB_000bf224:
-                        iVar7 = aiStack_148[*(ushort *)pdVar16];
-                        if (iVar7 != -1) {
-                          *(ushort *)pdVar16 = (ushort)iVar7;
+                        remapIndex = regRemapTable[*(ushort *)scanRecordPtr];
+                        if (remapIndex != -1) {
+                          *(ushort *)scanRecordPtr = (ushort)remapIndex;
                         }
                       }
-                      else if (bVar2 < 3) {
-                        if (bVar2 == 1) {
+                      else if (operandKindByte < 3) {
+                        if (operandKindByte == 1) {
 LAB_000bf20c:
-                          iVar7 = aiStack_148[*(ushort *)pdVar27];
-                          if (iVar7 != -1) {
-                            *(ushort *)pdVar27 = (ushort)iVar7;
+                          remapIndex = regRemapTable[*(ushort *)regField0cCursor];
+                          if (remapIndex != -1) {
+                            *(ushort *)regField0cCursor = (ushort)remapIndex;
                           }
                           goto LAB_000bf224;
                         }
                       }
-                      else if (bVar2 < 5) goto LAB_000bf20c;
+                      else if (operandKindByte < 5) goto LAB_000bf20c;
 LAB_000bf33c:
                       loopIndex = loopIndex + 1;
-                      pdVar14 = pdVar14 + 0x12;
-                      pdVar16 = pdVar16 + 0x12;
-                      puVar22 = puVar22 + 0x24;
-                      puVar23 = puVar23 + 0x24;
-                      pcVar24 = pcVar24 + 0x48;
-                      puVar25 = puVar25 + 0x24;
-                      pcVar26 = pcVar26 + 0x48;
-                      pdVar27 = pdVar27 + 0x12;
-                      puVar28 = puVar28 + 0x24;
-                      puVar29 = puVar29 + 0x24;
-                      puVar30 = puVar30 + 0x24;
-                      puVar20 = puVar20 + 0x24;
-                      pcVar10 = pcVar10 + 0x48;
-                      puVar11 = puVar11 + 0x24;
-                      puVar12 = puVar12 + 0x24;
-                      pdVar19 = pdVar19 + 0x12;
-                      param_5 = param_5 + 0x12;
-                      pcVar17 = pcVar17 + 0x48;
+                      recordPtr = recordPtr + 0x12;
+                      scanRecordPtr = scanRecordPtr + 0x12;
+                      regField1ePtr = regField1ePtr + 0x24;
+                      regField06Ptr = regField06Ptr + 0x24;
+                      enableFlag0bPtr = enableFlag0bPtr + 0x48;
+                      regField04Ptr = regField04Ptr + 0x24;
+                      enableFlag09Ptr = enableFlag09Ptr + 0x48;
+                      regField0cCursor = regField0cCursor + 0x12;
+                      kindField1aPtr = kindField1aPtr + 0x24;
+                      regField1cPtr = regField1cPtr + 0x24;
+                      regField1aPtr = regField1aPtr + 0x24;
+                      regField18Ptr = regField18Ptr + 0x24;
+                      enableFlag20Ptr = enableFlag20Ptr + 0x48;
+                      regField12Ptr = regField12Ptr + 0x24;
+                      regField10Ptr = regField10Ptr + 0x24;
+                      regField0eCursor = regField0eCursor + 0x12;
+                      recordFieldCursor = recordFieldCursor + 0x12;
+                      enableFlag14Ptr = enableFlag14Ptr + 0x48;
                     } while (loopIndex <= psnProgramWord8);
                   }
                 }
-                ((int (*)())FUN_000be460)(psnProgram,param_2,param_3,1,param_5,aiStack_148,pdVar16);
-                uVar9 = 0;
+                ((int (*)())psnEncodeHwProgramPhased)(psnProgram,passThroughR4,passThroughR5,1,recordFieldCursor,regRemapTable,scanRecordPtr);
+                limitStatus = 0;
               }
               else {
-                uVar9 = 0x80000013;
+                limitStatus = 0x80000013;
               }
             }
             else {
-              uVar9 = 0x80000012;
+              limitStatus = 0x80000012;
             }
           }
           else {
-            uVar9 = 0x80000017;
+            limitStatus = 0x80000017;
           }
         }
         else {
-          uVar9 = 0x80000016;
+          limitStatus = 0x80000016;
         }
       }
       else {
-        uVar9 = 0x80000015;
+        limitStatus = 0x80000015;
       }
     }
     else {
-      uVar9 = 0x80000014;
+      limitStatus = 0x80000014;
     }
   }
   else {
-    uVar9 = 0x80000011;
+    limitStatus = 0x80000011;
   }
-  return uVar9;
+  return limitStatus;
 }
 
-/* FUN_000bf400 @ 0xbf400 (1260 bytes) */
-int FUN_000bf400(param_1, param_2, unusedArgR5, unusedArgR6, unusedArgR7, unusedArgR8, unusedArgR9)
-  int param_1;
-  uint param_2;
+/* psnPlanPhases @ 0xbf400 (1260 bytes) */
+int psnPlanPhases(psnProgram, wantedPhaseCount, unusedArgR5, unusedArgR6, unusedArgR7, unusedArgR8, unusedArgR9)
+  int psnProgram;
+  uint wantedPhaseCount;
   undefined4 unusedArgR5;
   undefined4 unusedArgR6;
   undefined4 unusedArgR7;
@@ -4054,209 +4065,213 @@ int FUN_000bf400(param_1, param_2, unusedArgR5, unusedArgR6, unusedArgR7, unused
 {
   uint loopIndex3;
   uint loopIndex2;
-  bool bVar1;
-  byte bVar2;
-  bool bVar3;
-  uint uVar4;
-  char cVar5;
-  char cVar6;
-  char cVar10;
-  uint uVar7;
-  int iVar8;
-  int *piVar9;
+  bool needSplit;
+  bool anyFlagsSet;
+  byte channelMaskByte;
+  bool splittable;
+  uint recordKind;
+  uint nextPendingRecord;
+  uint selectBits;
+  char texDimModeA;
+  char texDimModeB;
+  char texDimModeC;
+  uint recordKind2;
+  int pendingRecordPtr;
+  int *rsScanPtr;
   uint loopIndex;
-  uint uVar12;
-  uint uVar13;
-  uint *puVar14;
-  uint uVar15;
-  undefined1 *puVar16;
-  uint uVar17;
-  uint uVar18;
-  byte bVar19;
+  uint recordCount;
+  uint recordNumber2;
+  uint *recordPtr;
+  uint recordNumber;
+  uint pendingRecord;
+  undefined1 *flagPtr;
+  uint texRegCount;
+  uint hasHighAddress;
+  byte usedFlags;
   
-  if (param_2 <= (*(byte *)(param_1 + 0xf) & 0xf)) {
+  if (wantedPhaseCount <= (*(byte *)(psnProgram + 0xf) & 0xf)) {
     return;
   }
-  uVar12 = *(uint *)(param_1 + 8);
-  if ((*(int *)(param_1 + 0x48) == 1) && (uVar12 != 0)) {
-    piVar9 = (int *)(param_1 + 0x90);
+  recordCount = *(uint *)(psnProgram + 8);
+  if ((*(int *)(psnProgram + 0x48) == 1) && (recordCount != 0)) {
+    rsScanPtr = (int *)(psnProgram + 0x90);
     loopIndex = 1;
     do {
       loopIndex = loopIndex + 1;
-      if (*piVar9 != 1) goto LAB_000bf474;
-      piVar9 = piVar9 + 0x12;
-    } while (loopIndex <= uVar12);
+      if (*rsScanPtr != 1) goto LAB_000bf474;
+      rsScanPtr = rsScanPtr + 0x12;
+    } while (loopIndex <= recordCount);
 LAB_000bf44c:
-    bVar19 = 0;
-    uVar18 = 0;
-    bVar3 = true;
+    usedFlags = 0;
+    hasHighAddress = 0;
+    splittable = true;
   }
   else {
     loopIndex = 1;
 LAB_000bf474:
-    if (uVar12 < loopIndex) goto LAB_000bf44c;
-    bVar19 = 0;
-    bVar3 = true;
-    puVar14 = (uint *)(param_1 + loopIndex * 0x48);
-    uVar17 = 0;
+    if (recordCount < loopIndex) goto LAB_000bf44c;
+    usedFlags = 0;
+    splittable = true;
+    recordPtr = (uint *)(psnProgram + loopIndex * 0x48);
+    texRegCount = 0;
     loopIndex3 = 0;
-    bVar1 = false;
-    uVar18 = 0;
-    uVar15 = loopIndex;
+    needSplit = false;
+    hasHighAddress = 0;
+    recordNumber = loopIndex;
     do {
-      uVar4 = *puVar14;
-      if (uVar4 < 5) {
-        if (uVar4 < 3) {
-          if ((uVar4 == 2) &&
-             (bVar19 = bVar19 | *(byte *)(puVar14 + 1) | *(byte *)((int)puVar14 + 0x1b),
-             *(char *)((int)puVar14 + 0x1a) != '\0')) {
-            uVar18 = uVar18 | -(uint)(puVar14[7] & 0xffff00) >> 0x1f;
+      recordKind = *recordPtr;
+      if (recordKind < 5) {
+        if (recordKind < 3) {
+          if ((recordKind == 2) &&
+             (usedFlags = usedFlags | *(byte *)(recordPtr + 1) | *(byte *)((int)recordPtr + 0x1b),
+             *(char *)((int)recordPtr + 0x1a) != '\0')) {
+            hasHighAddress = hasHighAddress | -(uint)(recordPtr[7] & 0xffff00) >> 0x1f;
           }
         }
         else {
-          bVar19 = bVar19 | *(byte *)(puVar14 + 1);
+          usedFlags = usedFlags | *(byte *)(recordPtr + 1);
         }
       }
-      else if ((uVar4 == 5) && (bVar19 = bVar19 | *(byte *)(puVar14 + 1), bVar3)) {
-        if ((*(char *)((int)puVar14 + 0xe) != '\0') || (*(char *)((int)puVar14 + 0x11) != '\0')) {
-          bVar1 = true;
+      else if ((recordKind == 5) && (usedFlags = usedFlags | *(byte *)(recordPtr + 1), splittable)) {
+        if ((*(char *)((int)recordPtr + 0xe) != '\0') || (*(char *)((int)recordPtr + 0x11) != '\0')) {
+          needSplit = true;
         }
-        uVar4 = puVar14[4] & 0xff00ff00;
-        if ((uVar4 != 0) &&
-           ((*(ushort *)(puVar14 + 3) < loopIndex3 || (*(char *)((int)puVar14 + 0x19) != '\0')))) {
-          bVar1 = true;
+        selectBits = recordPtr[4] & 0xff00ff00;
+        if ((selectBits != 0) &&
+           ((*(ushort *)(recordPtr + 3) < loopIndex3 || (*(char *)((int)recordPtr + 0x19) != '\0')))) {
+          needSplit = true;
         }
-        cVar5 = *(char *)(puVar14 + 5);
-        cVar6 = *(char *)((int)puVar14 + 0x15);
-        cVar10 = cVar5;
-        if ((uVar4 != 0) && (cVar10 = cVar6, uVar4 == 0x100ff00)) {
-          cVar5 = cVar6;
+        texDimModeA = *(char *)(recordPtr + 5);
+        texDimModeB = *(char *)((int)recordPtr + 0x15);
+        texDimModeC = texDimModeA;
+        if ((selectBits != 0) && (texDimModeC = texDimModeB, selectBits == 0x100ff00)) {
+          texDimModeA = texDimModeB;
         }
-        cVar6 = cVar10;
-        if ((cVar5 == '\x01') || (cVar6 = cVar5, cVar5 != '\0')) {
-          if (cVar6 == '\x02') goto LAB_000bf5b4;
-          if (cVar6 == '\x01') {
-            uVar17 = uVar17 - *(byte *)((int)puVar14 + 0x13);
+        texDimModeB = texDimModeC;
+        if ((texDimModeA == '\x01') || (texDimModeB = texDimModeA, texDimModeA != '\0')) {
+          if (texDimModeB == '\x02') goto LAB_000bf5b4;
+          if (texDimModeB == '\x01') {
+            texRegCount = texRegCount - *(byte *)((int)recordPtr + 0x13);
           }
         }
-        else if (cVar10 == '\x02') {
+        else if (texDimModeC == '\x02') {
 LAB_000bf5b4:
-          uVar17 = uVar17 + 1;
+          texRegCount = texRegCount + 1;
         }
-        bVar3 = !bVar1;
-        if (4 < uVar17) {
-          bVar1 = true;
-          bVar3 = false;
+        splittable = !needSplit;
+        if (4 < texRegCount) {
+          needSplit = true;
+          splittable = false;
         }
       }
-      uVar15 = uVar15 + 1;
+      recordNumber = recordNumber + 1;
       loopIndex3 = loopIndex3 + 1;
-      puVar14 = puVar14 + 0x12;
-    } while (uVar15 <= uVar12);
+      recordPtr = recordPtr + 0x12;
+    } while (recordNumber <= recordCount);
     if (loopIndex3 != 0) goto LAB_000bf45c;
   }
   loopIndex3 = 1;
 LAB_000bf45c:
-  if ((*(short *)(param_1 + 0x20) == 0) && (*(short *)(param_1 + 0x12) == 0)) {
-    *(short *)(param_1 + 0x12) = (short)loopIndex3 + -1;
+  if ((*(short *)(psnProgram + 0x20) == 0) && (*(short *)(psnProgram + 0x12) == 0)) {
+    *(short *)(psnProgram + 0x12) = (short)loopIndex3 + -1;
   }
-  if (!bVar3) {
-    *(undefined2 *)(param_1 + 0x28) = 1;
+  if (!splittable) {
+    *(undefined2 *)(psnProgram + 0x28) = 1;
   }
-  if ((*(short *)(param_1 + 0x28) != 0) && (*(short *)(param_1 + 0x22) == 0)) {
-    *(undefined2 *)(param_1 + 0x22) = 1;
+  if ((*(short *)(psnProgram + 0x28) != 0) && (*(short *)(psnProgram + 0x22) == 0)) {
+    *(undefined2 *)(psnProgram + 0x22) = 1;
   }
-  if (loopIndex <= uVar12) {
-    bVar1 = bVar19 != 0;
-    puVar14 = (uint *)(param_1 + loopIndex * 0x48);
+  if (loopIndex <= recordCount) {
+    anyFlagsSet = usedFlags != 0;
+    recordPtr = (uint *)(psnProgram + loopIndex * 0x48);
     loopIndex2 = 0;
-    puVar16 = (undefined1 *)((int)puVar14 + -3);
-    uVar15 = 100000;
-    uVar13 = loopIndex;
+    flagPtr = (undefined1 *)((int)recordPtr + -3);
+    pendingRecord = 100000;
+    recordNumber2 = loopIndex;
     do {
-      uVar7 = *puVar14;
-      uVar4 = uVar15;
-      if (uVar7 < 5) {
-        if (uVar7 < 3) {
-          if (uVar7 == 2) {
-            if (uVar18 == 0) {
-              *(undefined1 *)((int)puVar14 + 0x1d) = 7;
-              *(undefined1 *)((int)puVar14 + 0x1e) = 1;
-              puVar14[5] = puVar14[5] & 0xffff | 0x1b1b0000;
+      recordKind2 = *recordPtr;
+      nextPendingRecord = pendingRecord;
+      if (recordKind2 < 5) {
+        if (recordKind2 < 3) {
+          if (recordKind2 == 2) {
+            if (hasHighAddress == 0) {
+              *(undefined1 *)((int)recordPtr + 0x1d) = 7;
+              *(undefined1 *)((int)recordPtr + 0x1e) = 1;
+              recordPtr[5] = recordPtr[5] & 0xffff | 0x1b1b0000;
             }
-            bVar2 = *(byte *)((int)puVar14 + 0x1f);
-            if (bVar2 != 0) {
-              if ((bVar2 & 2) != 0) {
-                puVar14[5] = puVar14[5] >> 2 & 0x300000 | puVar14[5] & 0xffcfffff;
+            channelMaskByte = *(byte *)((int)recordPtr + 0x1f);
+            if (channelMaskByte != 0) {
+              if ((channelMaskByte & 2) != 0) {
+                recordPtr[5] = recordPtr[5] >> 2 & 0x300000 | recordPtr[5] & 0xffcfffff;
               }
-              if ((bVar2 & 4) != 0) {
-                puVar14[5] = puVar14[5] >> 4 & 0xc0000 | puVar14[5] & 0xfff3ffff;
+              if ((channelMaskByte & 4) != 0) {
+                recordPtr[5] = recordPtr[5] >> 4 & 0xc0000 | recordPtr[5] & 0xfff3ffff;
               }
-              if ((bVar2 & 8) != 0) {
-                puVar14[5] = puVar14[5] >> 6 & 0x30000 | puVar14[5] & 0xfffcffff;
+              if ((channelMaskByte & 8) != 0) {
+                recordPtr[5] = recordPtr[5] >> 6 & 0x30000 | recordPtr[5] & 0xfffcffff;
               }
             }
-            uVar4 = uVar13;
-            if (((!bVar1) && (*(char *)(puVar14 + 8) != '\0')) && (uVar15 != 100000)) {
-              iVar8 = param_1 + uVar15 * 0x48;
-              *(undefined1 *)(iVar8 + 4) = 1;
-              *(undefined1 *)(iVar8 + 0x1b) = 1;
-              *(undefined1 *)(puVar14 + 1) = 1;
+            nextPendingRecord = recordNumber2;
+            if (((!anyFlagsSet) && (*(char *)(recordPtr + 8) != '\0')) && (pendingRecord != 100000)) {
+              pendingRecordPtr = psnProgram + pendingRecord * 0x48;
+              *(undefined1 *)(pendingRecordPtr + 4) = 1;
+              *(undefined1 *)(pendingRecordPtr + 0x1b) = 1;
+              *(undefined1 *)(recordPtr + 1) = 1;
             }
           }
         }
         else {
-          if (((*(char *)((int)puVar14 + 0x15) == '\0') && ((puVar14[8] & 0xff00ff) == 0)) &&
-             (loopIndex2 != *(ushort *)(param_1 + 0x12))) {
-            *puVar14 = 4;
+          if (((*(char *)((int)recordPtr + 0x15) == '\0') && ((recordPtr[8] & 0xff00ff) == 0)) &&
+             (loopIndex2 != *(ushort *)(psnProgram + 0x12))) {
+            *recordPtr = 4;
           }
-          if ((bVar1) || (uVar15 == 100000)) {
+          if ((anyFlagsSet) || (pendingRecord == 100000)) {
 LAB_000bf860:
-            uVar4 = 100000;
+            nextPendingRecord = 100000;
           }
           else {
-            iVar8 = param_1 + uVar15 * 0x48;
-            *(undefined1 *)(iVar8 + 4) = 1;
-            *(undefined1 *)(iVar8 + 0x1b) = 1;
-            *(undefined1 *)(puVar14 + 1) = 1;
-            uVar4 = 100000;
+            pendingRecordPtr = psnProgram + pendingRecord * 0x48;
+            *(undefined1 *)(pendingRecordPtr + 4) = 1;
+            *(undefined1 *)(pendingRecordPtr + 0x1b) = 1;
+            *(undefined1 *)(recordPtr + 1) = 1;
+            nextPendingRecord = 100000;
           }
         }
       }
-      else if (uVar7 == 5) {
-        if ((!bVar1) && (uVar15 != 100000)) {
-          iVar8 = param_1 + uVar15 * 0x48;
-          *(undefined1 *)(iVar8 + 4) = 1;
-          *(undefined1 *)(iVar8 + 0x1b) = 1;
-          *(undefined1 *)(puVar14 + 1) = 1;
+      else if (recordKind2 == 5) {
+        if ((!anyFlagsSet) && (pendingRecord != 100000)) {
+          pendingRecordPtr = psnProgram + pendingRecord * 0x48;
+          *(undefined1 *)(pendingRecordPtr + 4) = 1;
+          *(undefined1 *)(pendingRecordPtr + 0x1b) = 1;
+          *(undefined1 *)(recordPtr + 1) = 1;
         }
-        if ((((byte)(*(byte *)((int)puVar14 + 0x12) & 0xf0) ==
-              (byte)(*(byte *)((int)puVar14 + 0x12) << 4)) || (loopIndex2 == 0)) ||
-           (1 < *(int *)(puVar16 + -0x45) - 3U)) goto LAB_000bf860;
-        *puVar16 = 1;
-        uVar4 = 100000;
+        if ((((byte)(*(byte *)((int)recordPtr + 0x12) & 0xf0) ==
+              (byte)(*(byte *)((int)recordPtr + 0x12) << 4)) || (loopIndex2 == 0)) ||
+           (1 < *(int *)(flagPtr + -0x45) - 3U)) goto LAB_000bf860;
+        *flagPtr = 1;
+        nextPendingRecord = 100000;
       }
-      uVar13 = uVar13 + 1;
+      recordNumber2 = recordNumber2 + 1;
       loopIndex2 = loopIndex2 + 1;
-      puVar14 = puVar14 + 0x12;
-      puVar16 = puVar16 + 0x48;
-      uVar15 = uVar4;
-    } while (uVar13 <= uVar12);
+      recordPtr = recordPtr + 0x12;
+      flagPtr = flagPtr + 0x48;
+      pendingRecord = nextPendingRecord;
+    } while (recordNumber2 <= recordCount);
     if (((loopIndex2 != 0) &&
-        (iVar8 = (*(ushort *)(param_1 + 0x12) + loopIndex) * 0x48, *(int *)(param_1 + iVar8) == 3)) &&
-       (bVar19 == 0)) {
-      *(undefined1 *)(param_1 + iVar8 + 4) = 1;
+        (pendingRecordPtr = (*(ushort *)(psnProgram + 0x12) + loopIndex) * 0x48, *(int *)(psnProgram + pendingRecordPtr) == 3)) &&
+       (usedFlags == 0)) {
+      *(undefined1 *)(psnProgram + pendingRecordPtr + 4) = 1;
     }
   }
-  if (((uVar18 != 0) || (bVar19 != 0)) || (*(short *)(param_1 + 0x20) != 0)) {
-    param_2 = param_2 | param_2 << 4;
+  if (((hasHighAddress != 0) || (usedFlags != 0)) || (*(short *)(psnProgram + 0x20) != 0)) {
+    wantedPhaseCount = wantedPhaseCount | wantedPhaseCount << 4;
   }
-  *(char *)(param_1 + 0xf) = (char)param_2;
+  *(char *)(psnProgram + 0xf) = (char)wantedPhaseCount;
   return;
 }
 
-/* FUN_000bf910 @ 0xbf910 (796 bytes) */
-int FUN_000bf910(swizzleCode, selectX, selectY, selectZ)
+/* ilRemapSwizzleTriple @ 0xbf910 (796 bytes) */
+int ilRemapSwizzleTriple(swizzleCode, selectX, selectY, selectZ)
   uint *swizzleCode;
   undefined4 *selectX;
   undefined4 *selectY;
@@ -4443,8 +4458,8 @@ LAB_000bfb34:
   return;
 }
 
-/* FUN_000bfcc0 @ 0xbfcc0 (440 bytes) */
-int FUN_000bfcc0(swizzleCode, channelSelect)
+/* ilRemapSwizzleSingle @ 0xbfcc0 (440 bytes) */
+int ilRemapSwizzleSingle(swizzleCode, channelSelect)
   uint *swizzleCode;
   undefined4 *channelSelect;
 {
@@ -4537,12 +4552,33 @@ int FUN_000bfcc0(swizzleCode, channelSelect)
   return;
 }
 
-/* FUN_000bfed0 @ 0xbfed0 (2464 bytes) */
-int FUN_000bfed0(psnProgram, rsWords, programImage)
+/* psnEncodeHwProgram @ 0xbfed0 (2464 bytes) */
+int psnEncodeHwProgram(psnProgram, rsWords, programImage)
   int psnProgram;
   uint *rsWords;
   uint *programImage;
 {
+  uint hwRecordHeader;
+  uint signMask10;
+  uint rsOutCount;
+  uint signMaskE;
+  ushort recShort1a;
+  byte recByte15;
+  byte recByte19;
+  byte recByte17;
+  byte recBytebB;
+  byte recByte6B;
+  byte recByte3d;
+  byte recByte45;
+  byte recByte13;
+  byte recByte16;
+  byte recByte12;
+  byte recByte32;
+  byte recByte11;
+  byte recByte2e;
+  byte recBytef;
+  byte recByte3f;
+  byte recBytee;
   uint instWord24_2;
   uint instWord14;
   uint instWord0;
@@ -4567,79 +4603,79 @@ int FUN_000bfed0(psnProgram, rsWords, programImage)
   ushort psnProgramShort22;
   ushort psnProgramShort28;
   ushort psnProgramShort12;
-  byte bVar1;
-  byte bVar2;
-  byte bVar3;
-  byte bVar4;
-  byte bVar5;
-  byte bVar6;
-  byte bVar7;
-  byte bVar8;
-  byte bVar9;
-  byte bVar10;
-  byte bVar11;
-  byte bVar12;
-  byte bVar13;
-  byte bVar14;
-  byte bVar15;
-  byte bVar16;
+  byte recByte6;
+  byte recByte7;
+  byte recByte2d;
+  byte recByte9;
+  byte recByteb;
+  byte recByte1d;
+  byte recByte1e;
+  byte recByte5;
+  byte recByte5B;
+  byte recByte41;
+  byte recByte22;
+  byte recByte23;
+  byte recByte16B;
+  byte recByte31;
+  byte recByte2f;
+  byte recByte3e;
   ushort instShort3;
-  ushort uVar18;
-  ushort uVar19;
+  ushort recShort12;
+  ushort recShort12B;
   ushort instShort7;
-  ushort uVar21;
+  ushort recShort1e;
   ushort instShort3_2;
   ushort instShort6;
-  ushort uVar24;
-  bool bVar25;
-  uint uVar26;
-  uint uVar27;
-  uint uVar28;
-  uint uVar29;
-  uint uVar30;
-  uint uVar31;
-  uint uVar32;
-  uint uVar33;
-  uint uVar34;
-  uint uVar35;
-  uint uVar36;
-  uint uVar37;
-  uint uVar38;
+  ushort recShorte;
+  bool needEndRecord;
+  uint hwWordC_f2;
+  uint hwWordC_f5;
+  uint hwWordC_f8;
+  uint hwWordC_f15;
+  uint hwWordC_f18;
+  uint hwWordC_f21;
+  uint hwWord10_f12;
+  uint hwWord10_f14;
+  uint hwWord10_f19;
+  uint hwWord10_f21;
+  uint hwWord14_f14;
+  uint hwWord14_f17;
+  uint hwWord14_f20;
   int *nextScanInst;
-  uint uVar40;
-  uint uVar41;
-  uint uVar42;
-  uint uVar43;
-  uint uVar44;
+  uint rsWordPartial;
+  uint hwWordC_f0;
+  uint hwWord14_f12;
+  uint rsOutIndex;
+  uint hwWordC_f13;
   undefined4 staleArgR6;
   undefined4 staleArgR7;
-  int *piVar45;
+  int *rsScanCur;
   undefined4 staleArgR8;
   int *scanInst;
-  uint uVar47;
-  uint uVar48;
-  int iVar49;
-  uint uVar50;
-  uint uVar51;
+  uint signMask12;
+  uint rsOutIndexNext;
+  int hwRecordCountEnd;
+  uint signMask1a;
+  uint signMask1e;
   int *prevScanInst;
-  int iVar53;
-  uint uVar54;
-  uint uVar55;
-  int iVar56;
-  int iVar57;
-  byte bVar58;
+  int endRecordOffset;
+  uint signMask1c;
+  uint firstAddrWord;
+  int hwRecordIndex;
+  int prevHwRecordIndex;
+  byte depthWriteAccum;
   uint loopIndex2;
   uint *outCursor;
-  uint local_78;
-  uint local_74;
-  uint local_70;
-  uint local_6c;
-  uint *local_68;
-  uint *local_64;
-  uint *local_60;
+  uint fieldTemp0;
+  uint fieldTemp1;
+  uint fieldTemp2;
+  uint fieldTemp3;
+  uint *fieldTemp3Ptr;
+  uint *fieldTemp1Ptr;
+  uint *fieldTemp2Ptr;
   
   outCursor = programImage;
-  ((int (*)())FUN_000c5e60)(psnProgram);
+  ((int (*)())psnAnalyzeProgram)(psnProgram);
   if (0x10 < *(ushort *)(psnProgram + 0x18)) {
     return 0x80000014;
   }
@@ -4653,90 +4689,90 @@ int FUN_000bfed0(psnProgram, rsWords, programImage)
   if (0xff < *(ushort *)(psnProgram + 0x24)) {
     return 0x80000013;
   }
-  ((int (*)())FUN_000bf400)(psnProgram,1,outCursor,staleArgR6,staleArgR7,staleArgR8,(uint)*(ushort *)(psnProgram + 0x20));
+  ((int (*)())psnPlanPhases)(psnProgram,1,outCursor,staleArgR6,staleArgR7,staleArgR8,(uint)*(ushort *)(psnProgram + 0x20));
   psnProgramWord8 = *(uint *)(psnProgram + 8);
   if ((*(int *)(psnProgram + 0x48) == 1) && (psnProgramWord8 != 0)) {
     scanInst = (int *)(psnProgram + 0x90);
     loopIndex2 = 1;
     nextScanInst = scanInst;
-    uVar43 = 0;
+    rsOutIndex = 0;
     prevScanInst = (int *)(psnProgram + 0x48);
     do {
-      piVar45 = nextScanInst;
-      uVar48 = uVar43;
+      rsScanCur = nextScanInst;
+      rsOutIndexNext = rsOutIndex;
       if ((prevScanInst[2] & 0xff00ffU) != 0) {
-        uVar48 = uVar43 + 1;
-        rsWords[uVar43 + 1] = 0;
+        rsOutIndexNext = rsOutIndex + 1;
+        rsWords[rsOutIndex + 1] = 0;
         prevScanInstByte2 = *(byte *)(prevScanInst + 2);
-        rsWords[uVar43 + 1] = prevScanInstByte2 & 0xf;
-        uVar40 = (*(byte *)((int)prevScanInst + 9) & 1) << 4 | prevScanInstByte2 & 0xf;
-        rsWords[uVar43 + 1] = uVar40;
-        uVar40 = (*(byte *)((int)prevScanInst + 10) & 0xf) << 0xc | uVar40;
-        rsWords[uVar43 + 1] = uVar40;
-        uVar40 = (*(byte *)((int)prevScanInst + 0xb) & 3) << 0x10 | uVar40;
-        rsWords[uVar43 + 1] = uVar40;
-        uVar40 = (*(byte *)(prevScanInst + 3) & 1) << 0x19 | uVar40;
-        rsWords[uVar43 + 1] = uVar40;
-        uVar40 = (*(ushort *)(prevScanInst + 1) & 0x7f) << 5 | uVar40;
-        rsWords[uVar43 + 1] = uVar40;
-        rsWords[uVar43 + 1] = (*(ushort *)((int)prevScanInst + 6) & 0x7f) << 0x12 | uVar40;
+        rsWords[rsOutIndex + 1] = prevScanInstByte2 & 0xf;
+        rsWordPartial = (*(byte *)((int)prevScanInst + 9) & 1) << 4 | prevScanInstByte2 & 0xf;
+        rsWords[rsOutIndex + 1] = rsWordPartial;
+        rsWordPartial = (*(byte *)((int)prevScanInst + 10) & 0xf) << 0xc | rsWordPartial;
+        rsWords[rsOutIndex + 1] = rsWordPartial;
+        rsWordPartial = (*(byte *)((int)prevScanInst + 0xb) & 3) << 0x10 | rsWordPartial;
+        rsWords[rsOutIndex + 1] = rsWordPartial;
+        rsWordPartial = (*(byte *)(prevScanInst + 3) & 1) << 0x19 | rsWordPartial;
+        rsWords[rsOutIndex + 1] = rsWordPartial;
+        rsWordPartial = (*(ushort *)(prevScanInst + 1) & 0x7f) << 5 | rsWordPartial;
+        rsWords[rsOutIndex + 1] = rsWordPartial;
+        rsWords[rsOutIndex + 1] = (*(ushort *)((int)prevScanInst + 6) & 0x7f) << 0x12 | rsWordPartial;
       }
       loopIndex2 = loopIndex2 + 1;
       if (*scanInst != 1) break;
       scanInst = scanInst + 0x12;
-      nextScanInst = piVar45 + 0x12;
-      uVar43 = uVar48;
-      prevScanInst = piVar45;
+      nextScanInst = rsScanCur + 0x12;
+      rsOutIndex = rsOutIndexNext;
+      prevScanInst = rsScanCur;
     } while (loopIndex2 <= psnProgramWord8);
-    uVar43 = uVar48 & 0xff;
-    if (uVar48 == 0) goto LAB_000c004c;
+    rsOutCount = rsOutIndexNext & 0xff;
+    if (rsOutIndexNext == 0) goto LAB_000c004c;
   }
   else {
     loopIndex2 = 1;
 LAB_000c004c:
-    uVar43 = 1;
+    rsOutCount = 1;
     rsWords[1] = 0;
   }
-  uVar43 = uVar43 - 1 & 0xf;
-  *rsWords = uVar43;
-  *rsWords = (*(byte *)(psnProgram + 0xd) & 7) << 5 | uVar43;
+  rsOutCount = rsOutCount - 1 & 0xf;
+  *rsWords = rsOutCount;
+  *rsWords = (*(byte *)(psnProgram + 0xd) & 7) << 5 | rsOutCount;
   if (psnProgramWord8 < loopIndex2) {
-    iVar56 = 0;
-    bVar58 = 0;
-    iVar53 = 0;
-    iVar49 = 1;
+    hwRecordIndex = 0;
+    depthWriteAccum = 0;
+    endRecordOffset = 0;
+    hwRecordCountEnd = 1;
   }
   else {
-    local_68 = &local_6c;
-    local_60 = &local_70;
-    bVar58 = 0;
+    fieldTemp3Ptr = &fieldTemp3;
+    fieldTemp2Ptr = &fieldTemp2;
+    depthWriteAccum = 0;
     inst = (uint *)(loopIndex2 * 0x48 + psnProgram);
-    local_64 = &local_74;
-    bVar25 = true;
+    fieldTemp1Ptr = &fieldTemp1;
+    needEndRecord = true;
     loopIndex = 0;
-    iVar56 = 0;
+    hwRecordIndex = 0;
     do {
-      iVar57 = iVar56;
+      prevHwRecordIndex = hwRecordIndex;
       instWord0 = *inst;
-      uVar48 = 0;
+      hwRecordHeader = 0;
       if (instWord0 < 5) {
         if (instWord0 < 3) {
           if (instWord0 == 2) {
-            uVar24 = *(ushort *)((int)inst + 0xe);
+            recShorte = *(ushort *)((int)inst + 0xe);
             instShort3 = *(ushort *)(inst + 3);
-            bVar25 = true;
+            needEndRecord = true;
             instWord14 = inst[5];
-            bVar1 = *(byte *)((int)inst + 6);
-            bVar2 = *(byte *)((int)inst + 7);
+            recByte6 = *(byte *)((int)inst + 6);
+            recByte7 = *(byte *)((int)inst + 7);
             instByte2 = *(byte *)(inst + 2);
-            bVar4 = *(byte *)((int)inst + 9);
-            bVar5 = *(byte *)((int)inst + 0xb);
-            bVar6 = *(byte *)((int)inst + 0x1d);
-            bVar7 = *(byte *)((int)inst + 0x1e);
+            recByte9 = *(byte *)((int)inst + 9);
+            recByteb = *(byte *)((int)inst + 0xb);
+            recByte1d = *(byte *)((int)inst + 0x1d);
+            recByte1e = *(byte *)((int)inst + 0x1e);
             instShort4_2 = *(ushort *)(inst + 4);
-            uVar19 = *(ushort *)((int)inst + 0x12);
+            recShort12B = *(ushort *)((int)inst + 0x12);
             instByte1_2 = *(byte *)(inst + 1);
-            bVar9 = *(byte *)((int)inst + 5);
+            recByte5B = *(byte *)((int)inst + 5);
             *(uint *)(loopIndex + programImage[4] + 4) =
                  (*(byte *)((int)inst + 0x1b) & 1) << 0x19 |
                  (*(byte *)(inst + 7) & 1) << 0x1a |
@@ -4753,14 +4789,14 @@ LAB_000c004c:
                  instWord14 >> 10 & 0xc00 |
                  instWord14 >> 0xe & 0x300 |
                  (instShort3 & 0x4000) << 9 |
-                 (instShort3 & 0x7f) << 0x10 | uVar24 >> 7 & 0x80 | uVar24 & 0x7f;
-            uVar48 = (bVar7 & 1) << 0xe |
-                     (bVar6 & 7) << 0xb |
-                     (bVar5 & 1) << 10 |
-                     (bVar4 & 1) << 7 |
+                 (instShort3 & 0x7f) << 0x10 | recShorte >> 7 & 0x80 | recShorte & 0x7f;
+            hwRecordHeader = (recByte1e & 1) << 0xe |
+                     (recByte1d & 7) << 0xb |
+                     (recByteb & 1) << 10 |
+                     (recByte9 & 1) << 7 |
                      (instByte2 & 1) << 0x16 |
-                     (bVar2 & 7) << 0x19 |
-                     (bVar1 & 1) << 6 | (bVar9 & 7) << 3 | (instByte1_2 & 1) << 2 | 3;
+                     (recByte7 & 7) << 0x19 |
+                     (recByte6 & 1) << 6 | (recByte5B & 7) << 3 | (instByte1_2 & 1) << 2 | 3;
             *(uint *)(loopIndex + programImage[4] + 0xc) =
                  instWord14 << 0x1e |
                  (instWord14 & 0xc) << 0x1a |
@@ -4770,16 +4806,16 @@ LAB_000c004c:
                  (instWord14 & 0xc00) << 2 |
                  instWord14 >> 2 & 0xc00 |
                  instWord14 >> 6 & 0x300 |
-                 (uVar19 & 0x4000) << 9 |
-                 (uVar19 & 0x7f) << 0x10 | instShort4_2 >> 7 & 0x80 | instShort4_2 & 0x7f;
+                 (recShort12B & 0x4000) << 9 |
+                 (recShort12B & 0x7f) << 0x10 | instShort4_2 >> 7 & 0x80 | instShort4_2 & 0x7f;
             *(undefined4 *)(loopIndex + programImage[4] + 0x10) = 0;
             *(undefined4 *)(loopIndex + programImage[4] + 0x14) = 0;
           }
         }
         else {
-          uVar24 = *(ushort *)((int)inst + 0xe);
-          uVar40 = 0xffffff80;
-          uVar48 = (*(byte *)(inst + 0x11) & 3) << 0x17 |
+          recShorte = *(ushort *)((int)inst + 0xe);
+          signMaskE = 0xffffff80;
+          hwRecordHeader = (*(byte *)(inst + 0x11) & 3) << 0x17 |
                    (*(byte *)((int)inst + 0x43) & 1) << 0x15 |
                    (*(byte *)(inst + 0xd) & 1) << 9 |
                    (*(byte *)((int)inst + 0x42) & 1) << 0x14 |
@@ -4795,214 +4831,214 @@ LAB_000c004c:
                    (*(byte *)((int)inst + 6) & 1) << 6 |
                    (*(byte *)((int)inst + 5) & 7) << 3 |
                    (*(byte *)(inst + 1) & 1) << 2 | (uint)(instWord0 == 3);
-          if ((uVar24 & 0x2000) == 0) {
-            uVar40 = 0;
+          if ((recShorte & 0x2000) == 0) {
+            signMaskE = 0;
           }
           instShort4 = *(ushort *)(inst + 4);
-          uVar43 = 0xffffff80;
+          signMask10 = 0xffffff80;
           if ((instShort4 & 0x2000) == 0) {
-            uVar43 = 0;
+            signMask10 = 0;
           }
-          uVar18 = *(ushort *)((int)inst + 0x12);
-          uVar47 = 0xffffff80;
-          if ((uVar18 & 0x2000) == 0) {
-            uVar47 = 0;
+          recShort12 = *(ushort *)((int)inst + 0x12);
+          signMask12 = 0xffffff80;
+          if ((recShort12 & 0x2000) == 0) {
+            signMask12 = 0;
           }
-          uVar19 = *(ushort *)((int)inst + 0x1a);
+          recShort1a = *(ushort *)((int)inst + 0x1a);
           instBytec = *(byte *)(inst + 0xc);
-          uVar50 = 0xffffff80;
-          if ((uVar19 & 0x2000) == 0) {
-            uVar50 = 0;
+          signMask1a = 0xffffff80;
+          if ((recShort1a & 0x2000) == 0) {
+            signMask1a = 0;
           }
           instShort7 = *(ushort *)(inst + 7);
-          uVar54 = 0xffffff80;
+          signMask1c = 0xffffff80;
           if ((instShort7 & 0x2000) == 0) {
-            uVar54 = 0;
+            signMask1c = 0;
           }
-          uVar21 = *(ushort *)((int)inst + 0x1e);
-          uVar51 = 0xffffff80;
-          if ((uVar21 & 0x2000) == 0) {
-            uVar51 = 0;
+          recShort1e = *(ushort *)((int)inst + 0x1e);
+          signMask1e = 0xffffff80;
+          if ((recShort1e & 0x2000) == 0) {
+            signMask1e = 0;
           }
-          local_6c = (uint)*(byte *)((int)inst + 0x2a);
-          bVar2 = *(byte *)((int)inst + 0x3f);
+          fieldTemp3 = (uint)*(byte *)((int)inst + 0x2a);
+          recByte3f = *(byte *)((int)inst + 0x3f);
           instWord24 = inst[9];
-          local_70 = instWord24 >> 0x17 & 7;
-          local_78 = instWord24 >> 0x1d;
-          local_74 = instWord24 >> 0x1a & 7;
-          ((int (*)())FUN_000bf910)(local_68,&local_78,local_64,local_60);
-          uVar41 = local_6c & 3;
-          uVar26 = local_78 & 7;
-          uVar27 = local_74 & 7;
+          fieldTemp2 = instWord24 >> 0x17 & 7;
+          fieldTemp0 = instWord24 >> 0x1d;
+          fieldTemp1 = instWord24 >> 0x1a & 7;
+          ((int (*)())ilRemapSwizzleTriple)(fieldTemp3Ptr,&fieldTemp0,fieldTemp1Ptr,fieldTemp2Ptr);
+          hwWordC_f0 = fieldTemp3 & 3;
+          hwWordC_f2 = fieldTemp0 & 7;
+          hwWordC_f5 = fieldTemp1 & 7;
           instWord24_2 = inst[9];
-          uVar28 = local_70 & 7;
-          local_6c = instWord24_2 >> 7 & 7;
-          local_74 = instWord24_2 >> 0xd & 7;
-          local_78 = instWord24_2 >> 10 & 7;
-          local_70 = (uint)*(byte *)((int)inst + 0x2b);
-          ((int (*)())FUN_000bf910)(local_60,local_64,&local_78,local_68);
-          bVar3 = *(byte *)((int)inst + 0x2d);
-          bVar4 = *(byte *)((int)inst + 0x2e);
-          bVar5 = *(byte *)((int)inst + 0x32);
-          bVar6 = *(byte *)((int)inst + 0x16);
-          bVar7 = *(byte *)((int)inst + 0x45);
-          uVar44 = local_70 & 3;
-          uVar29 = local_74 & 7;
-          uVar30 = local_78 & 7;
-          uVar31 = local_6c & 7;
-          local_78 = (uint)*(byte *)((int)inst + 0x36);
-          local_6c = (uint)*(byte *)((int)inst + 0x39);
-          ((int (*)())FUN_000bfcc0)(local_68,&local_78);
-          uVar32 = local_6c & 3;
-          uVar33 = local_78 & 7;
-          local_6c = (uint)*(byte *)((int)inst + 0x37);
-          local_78 = (uint)*(byte *)((int)inst + 0x3a);
-          ((int (*)())FUN_000bfcc0)(&local_78,local_68);
+          hwWordC_f8 = fieldTemp2 & 7;
+          fieldTemp3 = instWord24_2 >> 7 & 7;
+          fieldTemp1 = instWord24_2 >> 0xd & 7;
+          fieldTemp0 = instWord24_2 >> 10 & 7;
+          fieldTemp2 = (uint)*(byte *)((int)inst + 0x2b);
+          ((int (*)())ilRemapSwizzleTriple)(fieldTemp2Ptr,fieldTemp1Ptr,&fieldTemp0,fieldTemp3Ptr);
+          recByte2d = *(byte *)((int)inst + 0x2d);
+          recByte2e = *(byte *)((int)inst + 0x2e);
+          recByte32 = *(byte *)((int)inst + 0x32);
+          recByte16 = *(byte *)((int)inst + 0x16);
+          recByte45 = *(byte *)((int)inst + 0x45);
+          hwWordC_f13 = fieldTemp2 & 3;
+          hwWordC_f15 = fieldTemp1 & 7;
+          hwWordC_f18 = fieldTemp0 & 7;
+          hwWordC_f21 = fieldTemp3 & 7;
+          fieldTemp0 = (uint)*(byte *)((int)inst + 0x36);
+          fieldTemp3 = (uint)*(byte *)((int)inst + 0x39);
+          ((int (*)())ilRemapSwizzleSingle)(fieldTemp3Ptr,&fieldTemp0);
+          hwWord10_f12 = fieldTemp3 & 3;
+          hwWord10_f14 = fieldTemp0 & 7;
+          fieldTemp3 = (uint)*(byte *)((int)inst + 0x37);
+          fieldTemp0 = (uint)*(byte *)((int)inst + 0x3a);
+          ((int (*)())ilRemapSwizzleSingle)(&fieldTemp0,fieldTemp3Ptr);
           instBytef = *(byte *)(inst + 0xf);
-          bVar9 = *(byte *)((int)inst + 0x3d);
+          recByte3d = *(byte *)((int)inst + 0x3d);
           instShort3_2 = *(ushort *)(inst + 3);
-          bVar10 = *(byte *)((int)inst + 0x41);
-          bVar11 = *(byte *)((int)inst + 0x22);
+          recByte41 = *(byte *)((int)inst + 0x41);
+          recByte22 = *(byte *)((int)inst + 0x22);
           instShort6 = *(ushort *)(inst + 6);
-          uVar34 = local_78 & 3;
-          bVar12 = *(byte *)((int)inst + 0x23);
+          hwWord10_f19 = fieldTemp0 & 3;
+          recByte23 = *(byte *)((int)inst + 0x23);
           instByte10 = *(byte *)(inst + 0x10);
-          uVar35 = local_6c & 7;
-          bVar14 = *(byte *)((int)inst + 0x31);
+          hwWord10_f21 = fieldTemp3 & 7;
+          recByte31 = *(byte *)((int)inst + 0x31);
           instWord28 = inst[10];
-          local_78 = instWord28 >> 0x1d;
-          local_70 = instWord28 >> 0x17 & 7;
-          local_74 = instWord28 >> 0x1a & 7;
-          local_6c = (uint)*(byte *)(inst + 0xb);
-          ((int (*)())FUN_000bf910)(local_68,&local_78,local_64,local_60);
-          uVar42 = local_6c & 3;
-          uVar36 = local_78 & 7;
-          uVar37 = local_74 & 7;
-          local_78 = (uint)*(byte *)(inst + 0xe);
-          uVar38 = local_70 & 7;
-          local_70 = (uint)*(byte *)((int)inst + 0x3b);
-          ((int (*)())FUN_000bfcc0)(local_60,&local_78);
-          bVar25 = false;
-          bVar15 = *(byte *)((int)inst + 0x2f);
-          bVar16 = *(byte *)((int)inst + 0x3e);
+          fieldTemp0 = instWord28 >> 0x1d;
+          fieldTemp2 = instWord28 >> 0x17 & 7;
+          fieldTemp1 = instWord28 >> 0x1a & 7;
+          fieldTemp3 = (uint)*(byte *)(inst + 0xb);
+          ((int (*)())ilRemapSwizzleTriple)(fieldTemp3Ptr,&fieldTemp0,fieldTemp1Ptr,fieldTemp2Ptr);
+          hwWord14_f12 = fieldTemp3 & 3;
+          hwWord14_f14 = fieldTemp0 & 7;
+          hwWord14_f17 = fieldTemp1 & 7;
+          fieldTemp0 = (uint)*(byte *)(inst + 0xe);
+          hwWord14_f20 = fieldTemp2 & 7;
+          fieldTemp2 = (uint)*(byte *)((int)inst + 0x3b);
+          ((int (*)())ilRemapSwizzleSingle)(fieldTemp2Ptr,&fieldTemp0);
+          needEndRecord = false;
+          recByte2f = *(byte *)((int)inst + 0x2f);
+          recByte3e = *(byte *)((int)inst + 0x3e);
           *(uint *)(loopIndex + programImage[4] + 4) =
                (uint)instBytec << 0x1e |
-               (uVar18 & 0x4000) << 0xf |
-               (uVar18 & 0x8000) << 0xd |
-               (uVar47 & 0xff | uVar18 & 0x7f) << 0x14 |
+               (recShort12 & 0x4000) << 0xf |
+               (recShort12 & 0x8000) << 0xd |
+               (signMask12 & 0xff | recShort12 & 0x7f) << 0x14 |
                (instShort4 & 0x4000) << 5 |
                (instShort4 & 0x8000) << 3 |
-               (uVar43 & 0xff | instShort4 & 0x7f) << 10 |
-               uVar24 >> 5 & 0x200 | uVar24 >> 7 & 0x100 | uVar40 & 0xff | uVar24 & 0x7f;
+               (signMask10 & 0xff | instShort4 & 0x7f) << 10 |
+               recShorte >> 5 & 0x200 | recShorte >> 7 & 0x100 | signMaskE & 0xff | recShorte & 0x7f;
           *(uint *)(loopIndex + programImage[4] + 8) =
-               (uint)bVar2 << 0x1e |
-               (uVar21 & 0x4000) << 0xf |
-               (uVar21 & 0x8000) << 0xd |
-               (uVar51 & 0xff | uVar21 & 0x7f) << 0x14 |
+               (uint)recByte3f << 0x1e |
+               (recShort1e & 0x4000) << 0xf |
+               (recShort1e & 0x8000) << 0xd |
+               (signMask1e & 0xff | recShort1e & 0x7f) << 0x14 |
                (instShort7 & 0x4000) << 5 |
                (instShort7 & 0x8000) << 3 |
-               (uVar54 & 0xff | instShort7 & 0x7f) << 10 |
-               uVar19 >> 5 & 0x200 | uVar19 >> 7 & 0x100 | uVar50 & 0xff | uVar19 & 0x7f;
+               (signMask1c & 0xff | instShort7 & 0x7f) << 10 |
+               recShort1a >> 5 & 0x200 | recShort1a >> 7 & 0x100 | signMask1a & 0xff | recShort1a & 0x7f;
           *(uint *)(loopIndex + programImage[4] + 0xc) =
-               (uint)bVar7 << 0x1f |
-               (bVar6 & 3) << 0x1d |
-               (bVar5 & 7) << 0x1a |
-               (bVar4 & 3) << 0x18 |
-               (bVar3 & 3) << 0xb |
-               uVar31 << 0x15 |
-               uVar30 << 0x12 |
-               uVar29 << 0xf | uVar44 << 0xd | uVar28 << 8 | uVar27 << 5 | uVar26 << 2 | uVar41;
+               (uint)recByte45 << 0x1f |
+               (recByte16 & 3) << 0x1d |
+               (recByte32 & 7) << 0x1a |
+               (recByte2e & 3) << 0x18 |
+               (recByte2d & 3) << 0xb |
+               hwWordC_f21 << 0x15 |
+               hwWordC_f18 << 0x12 |
+               hwWordC_f15 << 0xf | hwWordC_f13 << 0xd | hwWordC_f8 << 8 | hwWordC_f5 << 5 | hwWordC_f2 << 2 | hwWordC_f0;
           *(uint *)(loopIndex + programImage[4] + 0x10) =
                instShort6 >> 3 & 0x800 |
                (instShort6 & 0x7f) << 4 |
                instByte10 & 0xf |
-               (uint)bVar12 << 0x1f |
-               (bVar11 & 3) << 0x1d |
-               (bVar10 & 7) << 0x1a |
-               (bVar9 & 3) << 0x18 |
-               (instBytef & 3) << 0x11 | uVar35 << 0x15 | uVar34 << 0x13 | uVar33 << 0xe | uVar32 << 0xc
+               (uint)recByte23 << 0x1f |
+               (recByte22 & 3) << 0x1d |
+               (recByte41 & 7) << 0x1a |
+               (recByte3d & 3) << 0x18 |
+               (instBytef & 3) << 0x11 | hwWord10_f21 << 0x15 | hwWord10_f19 << 0x13 | hwWord10_f14 << 0xe | hwWord10_f12 << 0xc
           ;
           *(uint *)(loopIndex + programImage[4] + 0x14) =
-               (uint)bVar16 << 0x1e |
-               (bVar15 & 3) << 0x17 |
-               (local_78 & 7) << 0x1b |
-               (local_70 & 3) << 0x19 |
-               uVar38 << 0x14 |
-               uVar37 << 0x11 |
-               uVar36 << 0xe |
-               uVar42 << 0xc | instShort3_2 >> 3 & 0x800 | (instShort3_2 & 0x7f) << 4 | bVar14 & 0xf;
+               (uint)recByte3e << 0x1e |
+               (recByte2f & 3) << 0x17 |
+               (fieldTemp0 & 7) << 0x1b |
+               (fieldTemp2 & 3) << 0x19 |
+               hwWord14_f20 << 0x14 |
+               hwWord14_f17 << 0x11 |
+               hwWord14_f14 << 0xe |
+               hwWord14_f12 << 0xc | instShort3_2 >> 3 & 0x800 | (instShort3_2 & 0x7f) << 4 | recByte31 & 0xf;
           if (*inst == 3) {
-            bVar58 = bVar58 | *(byte *)((int)inst + 0x23);
+            depthWriteAccum = depthWriteAccum | *(byte *)((int)inst + 0x23);
           }
         }
       }
       else if (instWord0 == 5) {
-        bVar1 = *(byte *)((int)inst + 0xe);
-        bVar2 = *(byte *)((int)inst + 0xf);
-        bVar25 = false;
+        recBytee = *(byte *)((int)inst + 0xe);
+        recBytef = *(byte *)((int)inst + 0xf);
+        needEndRecord = false;
         instByte4 = *(byte *)(inst + 4);
-        bVar4 = *(byte *)((int)inst + 0x11);
-        bVar5 = *(byte *)((int)inst + 0x12);
-        bVar6 = *(byte *)((int)inst + 0x13);
+        recByte11 = *(byte *)((int)inst + 0x11);
+        recByte12 = *(byte *)((int)inst + 0x12);
+        recByte13 = *(byte *)((int)inst + 0x13);
         instByte1 = *(byte *)(inst + 1);
-        bVar8 = *(byte *)((int)inst + 5);
-        bVar9 = *(byte *)((int)inst + 6);
-        bVar10 = *(byte *)((int)inst + 0xb);
-        bVar11 = *(byte *)((int)inst + 0x17);
+        recByte5 = *(byte *)((int)inst + 5);
+        recByte6B = *(byte *)((int)inst + 6);
+        recBytebB = *(byte *)((int)inst + 0xb);
+        recByte17 = *(byte *)((int)inst + 0x17);
         instShort3_3 = *(ushort *)(inst + 3);
-        bVar12 = *(byte *)((int)inst + 0x19);
-        bVar13 = *(byte *)((int)inst + 0x16);
+        recByte19 = *(byte *)((int)inst + 0x19);
+        recByte16B = *(byte *)((int)inst + 0x16);
         instByte5 = *(byte *)(inst + 5);
         instByte6 = *(byte *)(inst + 6);
-        bVar16 = *(byte *)((int)inst + 0x15);
+        recByte15 = *(byte *)((int)inst + 0x15);
         *(undefined4 *)(programImage[4] + loopIndex + 4) = 0;
-        uVar48 = (bVar10 & 1) << 10 | (bVar9 & 1) << 6 | (bVar8 & 7) << 3 | (instByte1 & 1) << 2 | 2;
+        hwRecordHeader = (recBytebB & 1) << 10 | (recByte6B & 1) << 6 | (recByte5 & 7) << 3 | (instByte1 & 1) << 2 | 2;
         *(uint *)(programImage[4] + loopIndex + 8) =
-             (bVar13 & 1) << 0x1c |
-             (bVar16 & 3) << 0x1a |
+             (recByte16B & 1) << 0x1c |
+             (recByte15 & 3) << 0x1a |
              (instByte5 & 3) << 0x18 |
-             (bVar6 & 0x1f) << 0x10 |
-             (uint)bVar5 << 8 | (bVar4 & 3) << 6 | (instByte4 & 1) << 5 | (bVar2 & 1) << 4 | bVar1 & 7;
+             (recByte13 & 0x1f) << 0x10 |
+             (uint)recByte12 << 8 | (recByte11 & 3) << 6 | (instByte4 & 1) << 5 | (recBytef & 1) << 4 | recBytee & 7;
         *(uint *)(programImage[4] + loopIndex + 0xc) =
-             (uint)bVar12 << 0x1f | (instShort3_3 & 0x1ff) << 0x10 | (instByte6 & 0x1f) << 8 | bVar11 & 0x1f;
+             (uint)recByte19 << 0x1f | (instShort3_3 & 0x1ff) << 0x10 | (instByte6 & 0x1f) << 8 | recByte17 & 0x1f;
         *(undefined4 *)(programImage[4] + loopIndex + 0x10) = 0;
         *(undefined4 *)(programImage[4] + loopIndex + 0x14) = 0;
       }
       loopIndex2 = loopIndex2 + 1;
-      iVar56 = iVar57 + 1;
+      hwRecordIndex = prevHwRecordIndex + 1;
       inst = inst + 0x12;
-      *(uint *)(programImage[4] + loopIndex) = uVar48;
+      *(uint *)(programImage[4] + loopIndex) = hwRecordHeader;
       loopIndex = loopIndex + 0x18;
     } while (loopIndex2 <= psnProgramWord8);
-    iVar49 = iVar56;
-    if (!bVar25) goto LAB_000c07dc;
-    iVar53 = iVar56 * 0x18;
-    iVar49 = iVar57 + 2;
+    hwRecordCountEnd = hwRecordIndex;
+    if (!needEndRecord) goto LAB_000c07dc;
+    endRecordOffset = hwRecordIndex * 0x18;
+    hwRecordCountEnd = prevHwRecordIndex + 2;
   }
-  *(undefined4 *)(programImage[4] + iVar53) = 0;
-  *(undefined4 *)(iVar53 + programImage[4] + 4) = 0;
-  *(undefined4 *)(iVar53 + programImage[4] + 8) = 0;
-  *(undefined4 *)(iVar53 + programImage[4] + 0xc) = 0;
-  *(undefined4 *)(iVar53 + programImage[4] + 0x10) = 0;
-  *(undefined4 *)(iVar53 + programImage[4] + 0x14) = 0;
-  *(uint *)(iVar53 + programImage[4]) = *(uint *)(iVar53 + programImage[4]) & 0xfffffffc | 1;
-  *(uint *)(iVar53 + programImage[4]) = *(uint *)(iVar53 + programImage[4]) | 4;
-  if ((iVar56 != 0) && ((uint)*(ushort *)(psnProgram + 0x12) == iVar56 - 1U)) {
-    *(short *)(psnProgram + 0x12) = (short)iVar56;
+  *(undefined4 *)(programImage[4] + endRecordOffset) = 0;
+  *(undefined4 *)(endRecordOffset + programImage[4] + 4) = 0;
+  *(undefined4 *)(endRecordOffset + programImage[4] + 8) = 0;
+  *(undefined4 *)(endRecordOffset + programImage[4] + 0xc) = 0;
+  *(undefined4 *)(endRecordOffset + programImage[4] + 0x10) = 0;
+  *(undefined4 *)(endRecordOffset + programImage[4] + 0x14) = 0;
+  *(uint *)(endRecordOffset + programImage[4]) = *(uint *)(endRecordOffset + programImage[4]) & 0xfffffffc | 1;
+  *(uint *)(endRecordOffset + programImage[4]) = *(uint *)(endRecordOffset + programImage[4]) | 4;
+  if ((hwRecordIndex != 0) && ((uint)*(ushort *)(psnProgram + 0x12) == hwRecordIndex - 1U)) {
+    *(short *)(psnProgram + 0x12) = (short)hwRecordIndex;
   }
 LAB_000c07dc:
   programImage[2] = 0;
-  programImage[3] = (iVar49 + -1) * 0x10000 & 0x1ff0000;
-  uVar55 = *(ushort *)(psnProgram + 0x10) & 0x1ff;
-  programImage[2] = uVar55;
+  programImage[3] = (hwRecordCountEnd + -1) * 0x10000 & 0x1ff0000;
+  firstAddrWord = *(ushort *)(psnProgram + 0x10) & 0x1ff;
+  programImage[2] = firstAddrWord;
   psnProgramShort12 = *(ushort *)(psnProgram + 0x12);
   programImage[1] = 0;
-  programImage[2] = (psnProgramShort12 & 0x1ff) << 0x10 | uVar55;
+  programImage[2] = (psnProgramShort12 & 0x1ff) << 0x10 | firstAddrWord;
   psnProgramShort28 = *(ushort *)(psnProgram + 0x28);
   *programImage = 0;
   programImage[1] = (uint)psnProgramShort28 << 0x1f;
   psnProgramShort22 = *(ushort *)(psnProgram + 0x22);
-  programImage[5] = (uint)(bVar58 != 0);
+  programImage[5] = (uint)(depthWriteAccum != 0);
   *programImage = psnProgramShort22 & 0x7f;
   return 0;
 }
@@ -5991,20 +6027,21 @@ int psnDecDecodeHwInstruction(decoded, wordsMode0, wordsMode2)
   bool loopContinue2;
   float outputScale;
   ushort referencedSrcpOp;
-  int iVar6;
+  int hwImage;
   uint sourceModifierCopy;
-  uint uVar8;
+  uint alphaWordValue;
   ushort *propagateHalf;
   ushort source1Flags;
-  uint uVar11;
-  ushort uVar13;
+  uint hwWordValue;
+  uint fieldAccum;
+  ushort slotSelect;
   uint addressSlot;
   ushort sourceSwizzleWord;
   uint rgbOpTableOffset;
   ushort *sourceFlagsPtr;
-  ushort *puVar17;
+  ushort *recordPtr;
   int halfCounter3;
-  ushort *puVar19;
+  ushort *slotWordPtr;
   ushort previousReadMaskB;
   undefined4 outputScaleWord;
   int rsWordPtr;
@@ -6021,30 +6058,30 @@ int psnDecDecodeHwInstruction(decoded, wordsMode0, wordsMode2)
   decoded[0x45] = 0;
   decoded[0x42] = 0;
   decoded[0x43] = 0;
-  iVar6 = *(int *)(decoded + 0x48);
+  hwImage = *(int *)(decoded + 0x48);
   if (entryMode != 1) {
     if (entryMode == 0) {
-      rsWordPtr = iVar6 * 4 + wordsMode0;
+      rsWordPtr = hwImage * 4 + wordsMode0;
       decoded[2] = (ushort)((uint)*(undefined4 *)(rsWordPtr + 4) >> 0x12) & 0x7f;
       decoded[0x40] = *(byte *)(rsWordPtr + 6) >> 4 | 0xc000;
       if ((*(ushort *)(rsWordPtr + 4) & 3) != 0) {
         decoded[10] = 0xf;
         decoded[3] = 0xf;
-        uVar13 = *(ushort *)(rsWordPtr + 4) & 3;
-        if ((uVar13 == 2) || (uVar13 == 3)) {
-          decoded[0x1d] = uVar13;
+        slotSelect = *(ushort *)(rsWordPtr + 4) & 3;
+        if ((slotSelect == 2) || (slotSelect == 3)) {
+          decoded[0x1d] = slotSelect;
         }
       }
-      iVar6 = iVar6 * 4 + wordsMode0;
+      hwImage = hwImage * 4 + wordsMode0;
       *(undefined4 *)(decoded + 0x16) =
-           *(undefined4 *)((*(uint *)(iVar6 + 4) >> 0x19 & 0x7c) + 0x1dc198);
-      decoded[0x22] = (ushort)(*(uint *)(iVar6 + 4) >> 5) & 0x7f;
-      decoded[0x43] = (ushort)*(undefined4 *)(iVar6 + 4) & 0xf | 0xa000;
-      rsWord = *(uint *)(iVar6 + 4);
+           *(undefined4 *)((*(uint *)(hwImage + 4) >> 0x19 & 0x7c) + 0x1dc198);
+      decoded[0x22] = (ushort)(*(uint *)(hwImage + 4) >> 5) & 0x7f;
+      decoded[0x43] = (ushort)*(undefined4 *)(hwImage + 4) & 0xf | 0xa000;
+      rsWord = *(uint *)(hwImage + 4);
       if ((rsWord & 0x10) != 0) {
         decoded[0x2d] = 0xf;
         decoded[0x23] = 0xf;
-        rsWord = *(uint *)(iVar6 + 4);
+        rsWord = *(uint *)(hwImage + 4);
       }
       *(undefined4 *)(decoded + 0x36) = *(undefined4 *)((rsWord >> 0x17 & 4) + 0x1dc198);
       return;
@@ -6053,11 +6090,11 @@ int psnDecDecodeHwInstruction(decoded, wordsMode0, wordsMode2)
       return;
     }
     groupCounter = 0;
-    iVar6 = iVar6 * 4 + wordsMode2;
-    alphaAddrWord = *(uint *)(iVar6 + 0x198);
-    rgbAddrWord = *(uint *)(iVar6 + 0x98);
-    uVar8 = *(uint *)(iVar6 + 0x398);
-    rgbInstWord = *(uint *)(iVar6 + 0x298);
+    hwImage = hwImage * 4 + wordsMode2;
+    alphaAddrWord = *(uint *)(hwImage + 0x198);
+    rgbAddrWord = *(uint *)(hwImage + 0x98);
+    alphaWordValue = *(uint *)(hwImage + 0x398);
+    rgbInstWord = *(uint *)(hwImage + 0x298);
     decoded[0x40] = (ushort)rgbAddrWord & 0x3f;
     decoded[0x43] = (ushort)alphaAddrWord & 0x3f;
     decoded[0x41] = (ushort)(rgbAddrWord >> 6) & 0x3f;
@@ -6066,14 +6103,14 @@ int psnDecDecodeHwInstruction(decoded, wordsMode0, wordsMode2)
     decoded[0x45] = (ushort)(alphaAddrWord >> 0xc) & 0x3f;
     addressSlotOffset = 0x80;
     do {
-      puVar19 = (ushort *)((int)decoded + addressSlotOffset);
+      slotWordPtr = (ushort *)((int)decoded + addressSlotOffset);
       slotCounter = 0;
       do {
-        if (0x1f < *puVar19) {
-          *puVar19 = *puVar19 - 0x20 | 0x8000;
+        if (0x1f < *slotWordPtr) {
+          *slotWordPtr = *slotWordPtr - 0x20 | 0x8000;
         }
         loopContinue = slotCounter != 2;
-        puVar19 = puVar19 + 1;
+        slotWordPtr = slotWordPtr + 1;
         slotCounter = slotCounter + 1;
       } while (loopContinue);
       loopContinue = groupCounter != 1;
@@ -6081,18 +6118,18 @@ int psnDecDecodeHwInstruction(decoded, wordsMode0, wordsMode2)
       groupCounter = groupCounter + 1;
     } while (loopContinue);
     groupSetupCounter = 0;
-    puVar19 = decoded;
-    puVar17 = decoded;
+    slotWordPtr = decoded;
+    recordPtr = decoded;
     do {
-      puVar17[0x3a] = 1;
-      puVar17[0x1a] = 1;
+      recordPtr[0x3a] = 1;
+      recordPtr[0x1a] = 1;
       defaultOperandWord2 = (*(unsigned int *)&DAT_001dbf94);
       loopContinue = groupSetupCounter != 2;
-      puVar17 = puVar17 + 1;
+      recordPtr = recordPtr + 1;
       groupSetupCounter = groupSetupCounter + 1;
-      *(undefined4 *)(puVar19 + 4) = (*(unsigned int *)&DAT_001dbf94);
-      *(undefined4 *)(puVar19 + 0x24) = defaultOperandWord2;
-      puVar19 = puVar19 + 2;
+      *(undefined4 *)(slotWordPtr + 4) = (*(unsigned int *)&DAT_001dbf94);
+      *(undefined4 *)(slotWordPtr + 0x24) = defaultOperandWord2;
+      slotWordPtr = slotWordPtr + 2;
     } while (loopContinue);
     rgbAddrHigh = (ushort)(rgbAddrWord >> 0x10);
     decoded[3] = rgbAddrHigh >> 7 & 7;
@@ -6108,15 +6145,15 @@ LAB_000c1ab0:
       sourceIndex = 0;
       sourceSelectCode = rgbInstWord & 0x1f;
       sourceModifierCopy = sourceModifier;
-      puVar19 = decoded + 4;
+      slotWordPtr = decoded + 4;
       rgbSourcesLeft = rgbOpTableOffset;
       if (rgbOpTableOffset == 0) {
         rgbSourcesLeft = 1;
       }
       do {
         sourceIndex = sourceIndex + 1;
-        *(undefined4 *)puVar19 = *(undefined4 *)(sourceSelectCode * 4 + 0x1dc0d8);
-        puVar19[1] = (ushort)(sourceModifierCopy << 0xc) | puVar19[1];
+        *(undefined4 *)slotWordPtr = *(undefined4 *)(sourceSelectCode * 4 + 0x1dc0d8);
+        slotWordPtr[1] = (ushort)(sourceModifierCopy << 0xc) | slotWordPtr[1];
         rgbSourcesLeft = rgbSourcesLeft - 1;
         if (rgbSourcesLeft == 0) break;
         sourceSelectCode = rgbInstWord >> 7 & 0x1f;
@@ -6130,7 +6167,7 @@ LAB_000c1ab0:
             sourceModifierCopy = 0;
           }
         }
-        puVar19 = puVar19 + 2;
+        slotWordPtr = slotWordPtr + 2;
       } while( true );
     }
     decoded[0x15] = (ushort)(rgbInstWord >> 0x15) & 3;
@@ -6151,7 +6188,7 @@ LAB_000c1ab0:
     if ((alphaAddrWord & 0x8000000) != 0) {
       decoded[0x21] = decoded[0x21] | 0x10;
     }
-    alphaOpTableOffset = uVar8 >> 0x15 & 0x3c;
+    alphaOpTableOffset = alphaWordValue >> 0x15 & 0x3c;
     decoded[0x34] = *(ushort *)(alphaOpTableOffset + 0x1dc098);
     alphaOpTableOffset = (uint)*(ushort *)(alphaOpTableOffset + 0x1dc09a);
     if ((rgbInstWord & 0x7800000) == 0x1000000) {
@@ -6161,17 +6198,17 @@ LAB_000c1ab0:
     }
     else if (alphaOpTableOffset == 0) {
 LAB_000c1cec:
-      decoded[0x35] = (ushort)(uVar8 >> 0x15) & 3;
-      if ((uVar8 & 0x40000000) != 0) {
+      decoded[0x35] = (ushort)(alphaWordValue >> 0x15) & 3;
+      if ((alphaWordValue & 0x40000000) != 0) {
         *(uint *)(decoded + 0x38) = *(uint *)(decoded + 0x38) | 8;
       }
-      *(undefined4 *)(decoded + 0x36) = *(undefined4 *)((uVar8 >> 0x19 & 0x1c) + 0x1dc198);
+      *(undefined4 *)(decoded + 0x36) = *(undefined4 *)((alphaWordValue >> 0x19 & 0x1c) + 0x1dc198);
       ((int (*)())psnDecRecomputeSourceUsage)(decoded);
       selectsRewritten = false;
       groupNumber = 1;
-      puVar19 = decoded;
+      slotWordPtr = decoded;
       do {
-        if ((puVar19[0x41] != 0xffff) && (puVar19[0x40] == puVar19[0x41])) {
+        if ((slotWordPtr[0x41] != 0xffff) && (slotWordPtr[0x40] == slotWordPtr[0x41])) {
           halfByteOffset = 0;
           rewriteSelectKey = (groupNumber & 0xff) << 8 | 1;
           do {
@@ -6190,9 +6227,9 @@ LAB_000c1cec:
             halfByteOffset = halfByteOffset + 0x40;
           } while (loopContinue2);
         }
-        thirdSlotAddress = puVar19[0x42];
+        thirdSlotAddress = slotWordPtr[0x42];
         if (thirdSlotAddress != 0xffff) {
-          if (puVar19[0x40] == thirdSlotAddress) {
+          if (slotWordPtr[0x40] == thirdSlotAddress) {
             halfByteOffset = 0;
             rewriteSelectKey = (groupNumber & 0xff) << 8 | 2;
             do {
@@ -6211,7 +6248,7 @@ LAB_000c1cec:
               halfByteOffset = halfByteOffset + 0x40;
             } while (loopContinue2);
           }
-          else if (puVar19[0x41] == thirdSlotAddress) {
+          else if (slotWordPtr[0x41] == thirdSlotAddress) {
             halfByteOffset = 0;
             rewriteSelectKey = (groupNumber & 0xff) << 8 | 2;
             do {
@@ -6232,31 +6269,31 @@ LAB_000c1cec:
           }
         }
         loopContinue2 = groupNumber != 2;
-        puVar19 = puVar19 + 3;
+        slotWordPtr = slotWordPtr + 3;
         groupNumber = groupNumber + 1;
       } while (loopContinue2);
       if (selectsRewritten) {
         ((int (*)())psnDecRecomputeSourceUsage)(decoded);
         groupIndex = 0;
-        puVar19 = decoded + 8;
+        slotWordPtr = decoded + 8;
         do {
-          puVar17 = puVar19 + 2;
+          recordPtr = slotWordPtr + 2;
           slotIndex = 0;
           do {
-            if (*puVar17 == 0 && puVar17[0x20] == 0) {
-              puVar17[0x36] = 0xffff;
+            if (*recordPtr == 0 && recordPtr[0x20] == 0) {
+              recordPtr[0x36] = 0xffff;
             }
             loopContinue = slotIndex != 2;
-            puVar17 = puVar17 + 1;
+            recordPtr = recordPtr + 1;
             slotIndex = slotIndex + 1;
           } while (loopContinue);
           loopContinue = groupIndex != 1;
-          puVar19 = puVar19 + 3;
+          slotWordPtr = slotWordPtr + 3;
           groupIndex = groupIndex + 1;
         } while (loopContinue);
       }
       entryChanged = false;
-      uVar8 = 0;
+      alphaWordValue = 0;
       halfOffsetCursor = 0;
       do {
         peepholeHalf = halfOffsetCursor + (int)decoded;
@@ -6391,27 +6428,27 @@ LAB_000c14b0:
             if (((alphaOpTableOffset - 1 & 0xffff) < 2) || (alphaOpTableOffset == 4)) {
               sourceSlots = peepholeHalf + 8;
               sourceByteOffset = 0;
-              restrictMaskCopy = uVar8;
+              restrictMaskCopy = alphaWordValue;
               do {
                 sourceSwizzleOfSlot = *(ushort *)(sourceByteOffset + sourceSlots + 2);
-                uVar8 = restrictMaskCopy;
+                alphaWordValue = restrictMaskCopy;
                 if ((sourceSwizzleOfSlot | 0xfffffff9) == 0xffffffff) {
                   swizzleMode = sourceSwizzleOfSlot & 0x300;
-                  uVar8 = (writeAndOutputMaskInt & 3) << 1 | (int)(writeAndOutputMaskInt & 4) >> 2;
+                  alphaWordValue = (writeAndOutputMaskInt & 3) << 1 | (int)(writeAndOutputMaskInt & 4) >> 2;
                   if (swizzleMode != 0x100) {
                     if (swizzleMode < 0x101) {
-                      uVar8 = alphaOpTableOffset;
+                      alphaWordValue = alphaOpTableOffset;
                       if ((sourceSwizzleOfSlot & 0x300) != 0) {
-                        uVar8 = restrictMaskCopy;
+                        alphaWordValue = restrictMaskCopy;
                       }
                     }
                     else if (swizzleMode == 0x200) {
-                      uVar8 = (writeAndOutputMaskInt & 1) << 2 | writeAndOutputMaskBits >> 1 & 3;
+                      alphaWordValue = (writeAndOutputMaskInt & 1) << 2 | writeAndOutputMaskBits >> 1 & 3;
                     }
                     else {
-                      uVar8 = restrictMaskCopy;
+                      alphaWordValue = restrictMaskCopy;
                       if (swizzleMode == 0x300) {
-                        uVar8 = (writeAndOutputMaskInt & 2) << 1 | (int)(writeAndOutputMaskInt & 4) >> 1 | (writeAndOutputMaskInt & 1) << 3;
+                        alphaWordValue = (writeAndOutputMaskInt & 2) << 1 | (int)(writeAndOutputMaskInt & 4) >> 1 | (writeAndOutputMaskInt & 1) << 3;
                         if ((writeAndOutputMaskBits & 1) == 0) {
                           *(ushort *)(sourceByteOffset + sourceSlots) = *(ushort *)(sourceByteOffset + sourceSlots) & 0xfdff;
                         }
@@ -6422,11 +6459,11 @@ LAB_000c14b0:
                     }
                   }
                   entryChanged = true;
-                  *(ushort *)(sourceByteOffset + sourceSlots + 2) = sourceSwizzleOfSlot & ~((ushort)uVar8 ^ 0xf | 0x300);
+                  *(ushort *)(sourceByteOffset + sourceSlots + 2) = sourceSwizzleOfSlot & ~((ushort)alphaWordValue ^ 0xf | 0x300);
                 }
                 loopContinue2 = sourceByteOffset != 8;
                 sourceByteOffset = sourceByteOffset + 4;
-                restrictMaskCopy = uVar8;
+                restrictMaskCopy = alphaWordValue;
               } while (loopContinue2);
             }
           }
@@ -6455,48 +6492,48 @@ LAB_000c14b0:
           if (!entryChanged) {
             return;
           }
-          puVar19 = (ushort *)0x0;
+          slotWordPtr = (ushort *)0x0;
           copyHalfNumber = 0;
           srcpSelectsUsed = 0;
           halfIndex = 0;
           do {
-            puVar17 = decoded + halfIndex * 0x20;
-            opcode = puVar17[0x14];
-            uVar11 = *(uint *)(puVar17 + 0x18);
-            puVar17[10] = 0;
-            puVar17[0xb] = 0;
-            puVar17[0x10] = 0;
-            puVar17[0x11] = 0;
-            puVar17[0xe] = 0;
-            puVar17[0xf] = 0;
-            puVar17[0x12] = 0;
-            puVar17[0x13] = 0;
-            puVar17[0xc] = 0;
-            puVar17[0xd] = 0;
-            *(uint *)(puVar17 + 0x18) = uVar11 & 0xffffff89;
+            recordPtr = decoded + halfIndex * 0x20;
+            opcode = recordPtr[0x14];
+            hwWordValue = *(uint *)(recordPtr + 0x18);
+            recordPtr[10] = 0;
+            recordPtr[0xb] = 0;
+            recordPtr[0x10] = 0;
+            recordPtr[0x11] = 0;
+            recordPtr[0xe] = 0;
+            recordPtr[0xf] = 0;
+            recordPtr[0x12] = 0;
+            recordPtr[0x13] = 0;
+            recordPtr[0xc] = 0;
+            recordPtr[0xd] = 0;
+            *(uint *)(recordPtr + 0x18) = hwWordValue & 0xffffff89;
             if (opcode == 2) {
-              *(uint *)(puVar17 + 0x18) = uVar11 & 0xffffff89 | 0x52;
-              puVar19 = puVar17;
+              *(uint *)(recordPtr + 0x18) = hwWordValue & 0xffffff89 | 0x52;
+              slotWordPtr = recordPtr;
             }
             nextHalfIndex = halfIndex + 1;
             if (opcode == 0xd) {
               copyHalfNumber = nextHalfIndex;
             }
             opcodeInSet1f1 = (1 << ((int)(short)opcode & 0x3fU) & 0x1f1U) != 0;
-            uVar11 = 0;
-            propagateHalf = puVar17;
+            fieldAccum = 0;
+            propagateHalf = recordPtr;
             do {
-              sourceSelect = puVar17[uVar11 * 2 + 4];
-              sourceSwizzleWord = puVar17[uVar11 * 2 + 5];
+              sourceSelect = recordPtr[fieldAccum * 2 + 4];
+              sourceSwizzleWord = recordPtr[fieldAccum * 2 + 5];
               addressSlot = sourceSelect & 3;
               componentMode = sourceSwizzleWord & 0x300;
               componentSelect = sourceSwizzleWord & 0x1f;
               componentModeIs300 = componentMode == 0x300;
               if (componentModeIs300) {
-                *(uint *)(puVar17 + 0x18) = *(uint *)(puVar17 + 0x18) | 0x10;
+                *(uint *)(recordPtr + 0x18) = *(uint *)(recordPtr + 0x18) | 0x10;
               }
               if ((opcode == 3) && ((componentSelect | 0xfffffff9) == 0xffffffff)) {
-                slotComponentMask = (1 < uVar11) + 3;
+                slotComponentMask = (1 < fieldAccum) + 3;
                 if (componentMode == 0x200) {
                   slotComponentMask = slotComponentMask * 4 & 4 | slotComponentMask >> 1;
                 }
@@ -6511,7 +6548,7 @@ LAB_000c14b0:
               propagateHalf[0x1a] = 0;
               sourceFlagsPtr = propagateHalf + 0x1a;
               if (((componentSelect & 0x10) == 0) &&
-                 (((sourceSwizzleWord & 0x300) != 0 || (((puVar17[3] | puVar17[1]) & 0xffef & ~componentSelect) != 0))))
+                 (((sourceSwizzleWord & 0x300) != 0 || (((recordPtr[3] | recordPtr[1]) & 0xffef & ~componentSelect) != 0))))
               {
                 propagateHalf[0x1a] = 8;
               }
@@ -6533,7 +6570,7 @@ LAB_000c14b0:
                 referencedHalfIndex = ((sourceSelect & 0x300) >> 8) - 1;
                 referencedSrcpOp = decoded[referencedHalfIndex * 0x20 + 0x15];
                 if (halfIndex != referencedHalfIndex) {
-                  *(uint *)(puVar17 + 0x18) = *(uint *)(puVar17 + 0x18) | 0x20;
+                  *(uint *)(recordPtr + 0x18) = *(uint *)(recordPtr + 0x18) | 0x20;
                 }
                 addressSlot = (uint)(referencedSrcpOp - 1 < 2);
                 *sourceFlagsPtr = *sourceFlagsPtr | 0x10;
@@ -6545,13 +6582,13 @@ LAB_000c14b0:
               if ((sourceSwizzleWord & 0x2000) != 0) {
                 *sourceFlagsPtr = *sourceFlagsPtr | 0x40;
               }
-              if ((halfIndex == 1) && (uVar11 == 2)) {
-                puVar19 = (ushort *)0x0;
+              if ((halfIndex == 1) && (fieldAccum == 2)) {
+                slotWordPtr = (ushort *)0x0;
               }
               if ((sourceSelect & 0x100) != 0) {
                 readComponents = componentSelect & 7;
                 if ((readComponents | 0xfffffff9) == 0xffffffff) {
-                  writeAndOutputMask = puVar17[3] | puVar17[1];
+                  writeAndOutputMask = recordPtr[3] | recordPtr[1];
                   writeAndOutputMaskWide = (uint)writeAndOutputMask;
                   replicatedMask = writeAndOutputMaskWide & 0xffef;
                   if (componentMode == 0x200) {
@@ -6568,47 +6605,47 @@ LAB_000c14b0:
                   }
                 }
                 readComponentBits = (ushort)readComponents;
-                puVar17[readSlot + 10] = readComponentBits | puVar17[readSlot + 10];
-                if (puVar19 != (ushort *)0x0) {
-                  puVar19[readSlot + 10] = readComponentBits | puVar19[readSlot + 10];
+                recordPtr[readSlot + 10] = readComponentBits | recordPtr[readSlot + 10];
+                if (slotWordPtr != (ushort *)0x0) {
+                  slotWordPtr[readSlot + 10] = readComponentBits | slotWordPtr[readSlot + 10];
                 }
                 if (!slotIsNotSrcp) {
-                  puVar17[readSlot + 0x10] = readComponentBits | puVar17[readSlot + 0x10];
-                  puVar17[addressSlot + 10] = readComponentBits | puVar17[addressSlot + 10];
-                  puVar17[addressSlot + 0x10] = readComponentBits | puVar17[addressSlot + 0x10];
-                  if (puVar19 != (ushort *)0x0) {
-                    previousReadMaskB = puVar19[addressSlot + 10];
-                    puVar19[readSlot + 0x10] = readComponentBits | puVar19[readSlot + 0x10];
-                    puVar19[addressSlot + 10] = readComponentBits | previousReadMaskB;
-                    puVar19[addressSlot + 0x10] = readComponentBits | puVar19[addressSlot + 0x10];
+                  recordPtr[readSlot + 0x10] = readComponentBits | recordPtr[readSlot + 0x10];
+                  recordPtr[addressSlot + 10] = readComponentBits | recordPtr[addressSlot + 10];
+                  recordPtr[addressSlot + 0x10] = readComponentBits | recordPtr[addressSlot + 0x10];
+                  if (slotWordPtr != (ushort *)0x0) {
+                    previousReadMaskB = slotWordPtr[addressSlot + 10];
+                    slotWordPtr[readSlot + 0x10] = readComponentBits | slotWordPtr[readSlot + 0x10];
+                    slotWordPtr[addressSlot + 10] = readComponentBits | previousReadMaskB;
+                    slotWordPtr[addressSlot + 0x10] = readComponentBits | slotWordPtr[addressSlot + 0x10];
                   }
                 }
               }
               if ((sourceSelect & 0x200) != 0) {
                 alphaReadComponentBits = (ushort)componentSelect & 8;
                 if ((((componentModeIs300) && (opcode < 9)) && (opcodeInSet1f1)) &&
-                   ((~(puVar17[3] | puVar17[1]) & 1) != 0)) {
+                   ((~(recordPtr[3] | recordPtr[1]) & 1) != 0)) {
                   alphaReadComponentBits = 0;
                 }
-                puVar17[readSlot + 0xd] = alphaReadComponentBits | puVar17[readSlot + 0xd];
-                if (puVar19 != (ushort *)0x0) {
-                  puVar19[readSlot + 0xd] = alphaReadComponentBits | puVar19[readSlot + 0xd];
+                recordPtr[readSlot + 0xd] = alphaReadComponentBits | recordPtr[readSlot + 0xd];
+                if (slotWordPtr != (ushort *)0x0) {
+                  slotWordPtr[readSlot + 0xd] = alphaReadComponentBits | slotWordPtr[readSlot + 0xd];
                 }
                 if (!slotIsNotSrcp) {
-                  puVar17[readSlot + 0x12] = alphaReadComponentBits | puVar17[readSlot + 0x12];
-                  puVar17[addressSlot + 0xd] = alphaReadComponentBits | puVar17[addressSlot + 0xd];
-                  puVar17[addressSlot + 0x12] = alphaReadComponentBits | puVar17[addressSlot + 0x12];
-                  if (puVar19 != (ushort *)0x0) {
-                    previousReadMask = puVar19[addressSlot + 0xd];
-                    puVar19[readSlot + 0x12] = alphaReadComponentBits | puVar19[readSlot + 0x12];
-                    puVar19[addressSlot + 0xd] = alphaReadComponentBits | previousReadMask;
-                    puVar19[addressSlot + 0x12] = alphaReadComponentBits | puVar19[addressSlot + 0x12];
+                  recordPtr[readSlot + 0x12] = alphaReadComponentBits | recordPtr[readSlot + 0x12];
+                  recordPtr[addressSlot + 0xd] = alphaReadComponentBits | recordPtr[addressSlot + 0xd];
+                  recordPtr[addressSlot + 0x12] = alphaReadComponentBits | recordPtr[addressSlot + 0x12];
+                  if (slotWordPtr != (ushort *)0x0) {
+                    previousReadMask = slotWordPtr[addressSlot + 0xd];
+                    slotWordPtr[readSlot + 0x12] = alphaReadComponentBits | slotWordPtr[readSlot + 0x12];
+                    slotWordPtr[addressSlot + 0xd] = alphaReadComponentBits | previousReadMask;
+                    slotWordPtr[addressSlot + 0x12] = alphaReadComponentBits | slotWordPtr[addressSlot + 0x12];
                   }
                 }
               }
-              loopContinue2 = uVar11 != 2;
+              loopContinue2 = fieldAccum != 2;
               propagateHalf = propagateHalf + 1;
-              uVar11 = uVar11 + 1;
+              fieldAccum = fieldAccum + 1;
             } while (loopContinue2);
             halfIndex = nextHalfIndex;
           } while (nextHalfIndex != 2);
@@ -6629,62 +6666,62 @@ LAB_000c14b0:
             *(uint *)(decoded + 0x38) = *(uint *)(decoded + 0x38) | 4;
           }
           halfCounter = 0;
-          puVar19 = decoded;
+          slotWordPtr = decoded;
           do {
-            if ((puVar19[1] == 0 && puVar19[3] == 0) && ((*(uint *)(puVar19 + 0x18) & 1) == 0)) {
-              *(uint *)(puVar19 + 0x18) = *(uint *)(puVar19 + 0x18) & 0xfffffffb;
+            if ((slotWordPtr[1] == 0 && slotWordPtr[3] == 0) && ((*(uint *)(slotWordPtr + 0x18) & 1) == 0)) {
+              *(uint *)(slotWordPtr + 0x18) = *(uint *)(slotWordPtr + 0x18) & 0xfffffffb;
             }
             loopContinue = halfCounter != 1;
-            puVar19 = puVar19 + 0x20;
+            slotWordPtr = slotWordPtr + 0x20;
             halfCounter = halfCounter + 1;
           } while (loopContinue);
           halfIndexB = 0;
-          puVar17 = decoded + 10;
-          puVar19 = decoded;
+          recordPtr = decoded + 10;
+          slotWordPtr = decoded;
           do {
             halfIndexB = halfIndexB + 1;
             if ((srcpSelectsUsed & halfIndexB * 0x100) == 0) {
-              puVar17[0xb] = 0;
+              recordPtr[0xb] = 0;
             }
-            if ((puVar17[-9] == 0 && puVar17[-7] == 0) &&
-               (uVar11 = *(uint *)(puVar17 + 0xe), (uVar11 & 1) == 0)) {
-              puVar17[8] = 0;
-              puVar17[9] = 0;
-              puVar17[0] = 0;
-              puVar17[1] = 0;
-              puVar17[2] = 0;
-              puVar17[3] = 0;
-              puVar17[4] = 0;
-              puVar17[5] = 0;
-              *(uint *)(puVar17 + 0xe) = uVar11 & 0xfffffff7;
-              puVar17[6] = 0;
-              puVar17[7] = 0;
-              puVar17[0xc] = 0x3f80;
-              puVar17[0xd] = 0;
-              if ((*(uint *)(puVar19 + 0x38) & 6) == 0) {
-                puVar17[0x12] = 1;
-                puVar17[0x11] = 1;
-                puVar17[0x10] = 1;
-                *(uint *)(puVar17 + 0xe) = uVar11 & 0xffffffe5;
+            if ((recordPtr[-9] == 0 && recordPtr[-7] == 0) &&
+               (fieldAccum = *(uint *)(recordPtr + 0xe), (fieldAccum & 1) == 0)) {
+              recordPtr[8] = 0;
+              recordPtr[9] = 0;
+              recordPtr[0] = 0;
+              recordPtr[1] = 0;
+              recordPtr[2] = 0;
+              recordPtr[3] = 0;
+              recordPtr[4] = 0;
+              recordPtr[5] = 0;
+              *(uint *)(recordPtr + 0xe) = fieldAccum & 0xfffffff7;
+              recordPtr[6] = 0;
+              recordPtr[7] = 0;
+              recordPtr[0xc] = 0x3f80;
+              recordPtr[0xd] = 0;
+              if ((*(uint *)(slotWordPtr + 0x38) & 6) == 0) {
+                recordPtr[0x12] = 1;
+                recordPtr[0x11] = 1;
+                recordPtr[0x10] = 1;
+                *(uint *)(recordPtr + 0xe) = fieldAccum & 0xffffffe5;
                 defaultOperandWord2 = (*(unsigned int *)&DAT_001dbf94);
-                puVar17[10] = 0;
-                *(undefined4 *)(puVar17 + -6) = defaultOperandWord2;
-                *(undefined4 *)(puVar17 + -2) = defaultOperandWord2;
-                *(undefined4 *)(puVar17 + -4) = defaultOperandWord2;
+                recordPtr[10] = 0;
+                *(undefined4 *)(recordPtr + -6) = defaultOperandWord2;
+                *(undefined4 *)(recordPtr + -2) = defaultOperandWord2;
+                *(undefined4 *)(recordPtr + -4) = defaultOperandWord2;
               }
             }
-            puVar17 = puVar17 + 0x20;
-            puVar19 = puVar19 + -0x20;
+            recordPtr = recordPtr + 0x20;
+            slotWordPtr = slotWordPtr + -0x20;
           } while (halfIndexB != 2);
           halfCounter2 = 0;
-          puVar19 = decoded;
+          slotWordPtr = decoded;
           do {
-            if (((puVar19[1] != 0 || puVar19[3] != 0) || ((*(uint *)(puVar19 + 0x18) & 1) != 0)) &&
+            if (((slotWordPtr[1] != 0 || slotWordPtr[3] != 0) || ((*(uint *)(slotWordPtr + 0x18) & 1) != 0)) &&
                ((decoded[0xd] != 0 || decoded[0xe] != 0) || decoded[0xf] != 0)) {
-              *(uint *)(puVar19 + 0x18) = *(uint *)(puVar19 + 0x18) | 2;
+              *(uint *)(slotWordPtr + 0x18) = *(uint *)(slotWordPtr + 0x18) | 2;
             }
             loopContinue = halfCounter2 != 1;
-            puVar19 = puVar19 + 0x20;
+            slotWordPtr = slotWordPtr + 0x20;
             decoded = decoded + 0x1d;
             halfCounter2 = halfCounter2 + 1;
           } while (loopContinue);
@@ -6692,37 +6729,37 @@ LAB_000c14b0:
         }
       } while( true );
     }
-    alphaSourceModifier = uVar8 >> 5 & 3;
+    alphaSourceModifier = alphaWordValue >> 5 & 3;
 LAB_000c1c40:
-    iVar6 = 0;
-    alphaSourceSelectCode = uVar8 & 0x1f;
+    hwImage = 0;
+    alphaSourceSelectCode = alphaWordValue & 0x1f;
     sourceModifier = alphaSourceModifier;
-    puVar19 = decoded + 0x24;
+    slotWordPtr = decoded + 0x24;
     alphaSourcesLeft = alphaOpTableOffset;
     if (alphaOpTableOffset == 0) {
       alphaSourcesLeft = 1;
     }
     do {
-      iVar6 = iVar6 + 1;
-      *(undefined4 *)puVar19 = *(undefined4 *)(alphaSourceSelectCode * 4 + 0x1dc04c);
-      puVar19[1] = (ushort)(sourceModifier << 0xc) | puVar19[1];
+      hwImage = hwImage + 1;
+      *(undefined4 *)slotWordPtr = *(undefined4 *)(alphaSourceSelectCode * 4 + 0x1dc04c);
+      slotWordPtr[1] = (ushort)(sourceModifier << 0xc) | slotWordPtr[1];
       alphaSourcesLeft = alphaSourcesLeft - 1;
       if (alphaSourcesLeft == 0) goto LAB_000c1cec;
-      alphaSourceSelectCode = uVar8 >> 7 & 0x1f;
-      sourceModifier = uVar8 >> 0xc & 3;
-      if (iVar6 != 1) {
-        if (iVar6 == 0) goto LAB_000c1c40;
-        alphaSourceSelectCode = uVar8 >> 0xe & 0x1f;
-        sourceModifier = uVar8 >> 0x13 & 3;
-        if (iVar6 != 2) {
+      alphaSourceSelectCode = alphaWordValue >> 7 & 0x1f;
+      sourceModifier = alphaWordValue >> 0xc & 3;
+      if (hwImage != 1) {
+        if (hwImage == 0) goto LAB_000c1c40;
+        alphaSourceSelectCode = alphaWordValue >> 0xe & 0x1f;
+        sourceModifier = alphaWordValue >> 0x13 & 3;
+        if (hwImage != 2) {
           alphaSourceSelectCode = 0;
           sourceModifier = 0;
         }
       }
-      puVar19 = puVar19 + 2;
+      slotWordPtr = slotWordPtr + 2;
     } while( true );
   }
-  programWordPtr = iVar6 * 4 + wordsMode2;
+  programWordPtr = hwImage * 4 + wordsMode2;
   decoded[2] = (ushort)(*(uint *)(programWordPtr + 0x18) >> 6) & 0x1f;
   decoded[0x40] = (ushort)*(undefined4 *)(programWordPtr + 0x18) & 0x1f;
   texFieldCode = *(uint *)(programWordPtr + 0x18) >> 0xf & 7;
@@ -6741,7 +6778,7 @@ LAB_000c1c40:
     decoded[3] = 0xf;
   }
 LAB_000c1950:
-  texWord = *(uint *)(iVar6 * 4 + wordsMode2 + 0x18);
+  texWord = *(uint *)(hwImage * 4 + wordsMode2 + 0x18);
   decoded[0x16] = 0x3f80;
   decoded[0x17] = 0;
   decoded[0x14] = (ushort)(texWord >> 3) & 0xf00 | (ushort)(texWord >> 0xf) & 7;
@@ -6857,288 +6894,310 @@ int psnDecEncodeHwWords(decodedProgram, rsWords, programImage)
   uint decodedProgramWord8;
   int loopIndex2;
   int loopIndex;
-  bool bVar1;
-  ushort uVar2;
-  ushort uVar3;
-  float fVar4;
-  int iVar5;
-  int iVar6;
-  uint uVar7;
-  int iVar8;
-  uint uVar9;
-  int iVar10;
-  uint uVar11;
-  uint uVar12;
-  int iVar13;
-  int iVar14;
+  bool moreLoops;
+  ushort alphaDestReg;
+  ushort sourceSlotWord;
+  ushort rgbRegField;
+  ushort interpModeField;
+  ushort alphaRegField;
+  float oneF;
+  int entryMode;
+  int halfCursorSwizzle;
+  int halfCursorScale;
+  int aluWordBaseA;
+  int slotCursor;
+  int alphaWritten;
+  int texWordPtrB;
+  int texWordPtr;
+  int recordIndexBytes;
+  uint oldWordValue;
+  uint alphaSelectAccum;
+  uint alphaRegValue;
+  uint newFieldBitsB;
+  int entry;
+  uint newFieldBits;
+  uint swizzleByte;
+  uint scaleCode;
+  uint rgbSelectAccum;
+  uint rgbRegValue;
+  uint regLowBits;
+  int rsWordPtr;
+  int aluWordPtr;
+  uint swizzleSel;
+  uint destRegField;
+  uint rgbSourceSelect;
+  uint oldWordValueB;
+  int aluWordBase;
+  int sourceSlotBase;
   uint loopIndex3;
-  uint uVar16;
-  double dVar17;
+  uint oldWordValueC;
+  uint alphaSourceSelect;
+  double scaleValue;
   
   decodedProgramWord0 = *decodedProgram;
   if (decodedProgramWord0 != 0) {
     loopIndex3 = 0;
     do {
       decodedProgramWord8 = decodedProgram[2];
-      iVar8 = loopIndex3 * 0xa0 + decodedProgramWord8;
-      iVar5 = *(int *)(iVar8 + 0x8c);
-      iVar6 = *(int *)(iVar8 + 0x90);
-      uVar12 = (uint)*(ushort *)(iVar8 + 4);
-      uVar2 = *(ushort *)(iVar8 + 0x44);
-      if (iVar5 == 1) {
-        iVar5 = iVar6 * 4 + programImage;
-        uVar7 = *(uint *)(iVar5 + 0x18);
-        uVar9 = (uVar12 & 0x1f) << 6;
-        *(uint *)(iVar5 + 0x18) = uVar9 | uVar7 & 0xfffff83f;
-        if ((*(short *)(iVar8 + 2) == 0 && *(short *)(iVar8 + 6) == 0) &&
-           ((*(uint *)(iVar8 + 0x30) & 1) == 0)) {
-          *(uint *)(iVar5 + 0x18) = uVar9 | uVar7 & 0xfffc783f;
+      entry = loopIndex3 * 0xa0 + decodedProgramWord8;
+      entryMode = *(int *)(entry + 0x8c);
+      recordIndexBytes = *(int *)(entry + 0x90);
+      destRegField = (uint)*(ushort *)(entry + 4);
+      alphaDestReg = *(ushort *)(entry + 0x44);
+      if (entryMode == 1) {
+        texWordPtr = recordIndexBytes * 4 + programImage;
+        oldWordValue = *(uint *)(texWordPtr + 0x18);
+        newFieldBits = (destRegField & 0x1f) << 6;
+        *(uint *)(texWordPtr + 0x18) = newFieldBits | oldWordValue & 0xfffff83f;
+        if ((*(short *)(entry + 2) == 0 && *(short *)(entry + 6) == 0) &&
+           ((*(uint *)(entry + 0x30) & 1) == 0)) {
+          *(uint *)(texWordPtr + 0x18) = newFieldBits | oldWordValue & 0xfffc783f;
         }
-        iVar6 = iVar6 * 4 + programImage;
-        uVar12 = *(uint *)(iVar6 + 0x18);
-        uVar9 = *(ushort *)(iVar8 + 0x80) & 0x1f;
-        *(uint *)(iVar6 + 0x18) = uVar9 | uVar12 & 0xffffffe0;
-        uVar7 = (*(byte *)(iVar8 + 0x29) & 7) << 0xf;
-        *(uint *)(iVar6 + 0x18) = uVar7 | uVar9 | uVar12 & 0xfffc7fe0;
-        *(uint *)(iVar6 + 0x18) =
-             (*(ushort *)(iVar8 + 0x28) & 0xf00) << 3 | uVar7 | uVar9 | uVar12 & 0xfff807e0;
+        recordIndexBytes = recordIndexBytes * 4 + programImage;
+        oldWordValueB = *(uint *)(recordIndexBytes + 0x18);
+        regLowBits = *(ushort *)(entry + 0x80) & 0x1f;
+        *(uint *)(recordIndexBytes + 0x18) = regLowBits | oldWordValueB & 0xffffffe0;
+        newFieldBitsB = (*(byte *)(entry + 0x29) & 7) << 0xf;
+        *(uint *)(recordIndexBytes + 0x18) = newFieldBitsB | regLowBits | oldWordValueB & 0xfffc7fe0;
+        *(uint *)(recordIndexBytes + 0x18) =
+             (*(ushort *)(entry + 0x28) & 0xf00) << 3 | newFieldBitsB | regLowBits | oldWordValueB & 0xfff807e0;
         decodedProgramWord0 = *decodedProgram;
       }
-      else if (iVar5 == 0) {
-        iVar6 = iVar6 * 4;
-        iVar5 = iVar6 + rsWords;
-        uVar16 = *(uint *)(iVar5 + 4);
-        uVar9 = (uVar12 & 0x7f) << 0x12;
-        uVar7 = (uVar2 & 0x7f) << 5;
-        *(uint *)(iVar5 + 4) = uVar7 | uVar9 | uVar16 & 0xfe03f01f;
-        if ((*(short *)(iVar8 + 2) == 0 && *(short *)(iVar8 + 6) == 0) &&
-           ((*(uint *)(iVar8 + 0x30) & 1) == 0)) {
-          *(uint *)(iVar5 + 4) = uVar7 | uVar9 | uVar16 & 0xfe00f01f;
+      else if (entryMode == 0) {
+        recordIndexBytes = recordIndexBytes * 4;
+        texWordPtrB = recordIndexBytes + rsWords;
+        oldWordValueC = *(uint *)(texWordPtrB + 4);
+        newFieldBits = (destRegField & 0x7f) << 0x12;
+        newFieldBitsB = (alphaDestReg & 0x7f) << 5;
+        *(uint *)(texWordPtrB + 4) = newFieldBitsB | newFieldBits | oldWordValueC & 0xfe03f01f;
+        if ((*(short *)(entry + 2) == 0 && *(short *)(entry + 6) == 0) &&
+           ((*(uint *)(entry + 0x30) & 1) == 0)) {
+          *(uint *)(texWordPtrB + 4) = newFieldBitsB | newFieldBits | oldWordValueC & 0xfe00f01f;
         }
         else {
-          uVar2 = *(ushort *)(iVar8 + 0x3a);
-          if ((uVar2 == 2) || (uVar2 == 3)) {
-            *(uint *)(iVar6 + rsWords + 4) =
-                 (uVar2 & 3) << 0x10 | *(uint *)(iVar6 + rsWords + 4) & 0xfffcffff;
+          interpModeField = *(ushort *)(entry + 0x3a);
+          if ((interpModeField == 2) || (interpModeField == 3)) {
+            *(uint *)(recordIndexBytes + rsWords + 4) =
+                 (interpModeField & 3) << 0x10 | *(uint *)(recordIndexBytes + rsWords + 4) & 0xfffcffff;
           }
-          else if (uVar2 == 0) {
-            *(uint *)(iVar6 + rsWords + 4) = *(uint *)(iVar6 + rsWords + 4) & 0xfffcffff | 0x10000;
+          else if (interpModeField == 0) {
+            *(uint *)(recordIndexBytes + rsWords + 4) = *(uint *)(recordIndexBytes + rsWords + 4) & 0xfffcffff | 0x10000;
           }
         }
-        if ((*(short *)(iVar8 + 0x42) != 0 || *(short *)(iVar8 + 0x46) != 0) ||
-           (iVar5 = 0, (*(uint *)(iVar8 + 0x70) & 1) != 0)) {
-          iVar5 = 1;
+        if ((*(short *)(entry + 0x42) != 0 || *(short *)(entry + 0x46) != 0) ||
+           (alphaWritten = 0, (*(uint *)(entry + 0x70) & 1) != 0)) {
+          alphaWritten = 1;
         }
-        iVar10 = iVar6 + rsWords;
-        uVar7 = *(uint *)(iVar10 + 4);
-        uVar9 = iVar5 << 4;
-        *(uint *)(iVar10 + 4) = uVar9 | uVar7 & 0xffffffef;
-        if (*(ushort *)(iVar8 + 0x80) == 0xffff) {
-          *(uint *)(iVar10 + 4) = uVar9 | uVar7 & 0xffff0fef;
-        }
-        else {
-          *(uint *)(iVar10 + 4) =
-               (*(ushort *)(iVar8 + 0x80) & 0xf) << 0xc | uVar9 | uVar7 & 0xffff0fef;
-        }
-        if (*(ushort *)(iVar8 + 0x86) == 0xffff) {
-          *(uint *)(iVar6 + rsWords + 4) = *(uint *)(iVar6 + rsWords + 4) & 0xfffffff0;
+        rsWordPtr = recordIndexBytes + rsWords;
+        oldWordValue = *(uint *)(rsWordPtr + 4);
+        newFieldBits = alphaWritten << 4;
+        *(uint *)(rsWordPtr + 4) = newFieldBits | oldWordValue & 0xffffffef;
+        if (*(ushort *)(entry + 0x80) == 0xffff) {
+          *(uint *)(rsWordPtr + 4) = newFieldBits | oldWordValue & 0xffff0fef;
         }
         else {
-          *(uint *)(iVar6 + rsWords + 4) =
-               *(ushort *)(iVar8 + 0x86) & 0xf | *(uint *)(iVar6 + rsWords + 4) & 0xfffffff0;
+          *(uint *)(rsWordPtr + 4) =
+               (*(ushort *)(entry + 0x80) & 0xf) << 0xc | newFieldBits | oldWordValue & 0xffff0fef;
         }
-        fVar4 = FLOAT_001aa0e8;
-        iVar6 = iVar6 + rsWords;
-        uVar7 = *(uint *)(iVar6 + 4);
-        uVar9 = (uint)(*(float *)(iVar8 + 0x2c) != FLOAT_001aa0e8) << 0x1b;
-        *(uint *)(iVar6 + 4) = uVar9 | uVar7 & 0x7ffffff;
-        *(uint *)(iVar6 + 4) =
-             (uint)(*(float *)(iVar8 + 0x6c) != fVar4) << 0x19 | uVar9 | uVar7 & 0x5ffffff;
+        if (*(ushort *)(entry + 0x86) == 0xffff) {
+          *(uint *)(recordIndexBytes + rsWords + 4) = *(uint *)(recordIndexBytes + rsWords + 4) & 0xfffffff0;
+        }
+        else {
+          *(uint *)(recordIndexBytes + rsWords + 4) =
+               *(ushort *)(entry + 0x86) & 0xf | *(uint *)(recordIndexBytes + rsWords + 4) & 0xfffffff0;
+        }
+        oneF = FLOAT_001aa0e8;
+        recordIndexBytes = recordIndexBytes + rsWords;
+        oldWordValue = *(uint *)(recordIndexBytes + 4);
+        newFieldBits = (uint)(*(float *)(entry + 0x2c) != FLOAT_001aa0e8) << 0x1b;
+        *(uint *)(recordIndexBytes + 4) = newFieldBits | oldWordValue & 0x7ffffff;
+        *(uint *)(recordIndexBytes + 4) =
+             (uint)(*(float *)(entry + 0x6c) != oneF) << 0x19 | newFieldBits | oldWordValue & 0x5ffffff;
         decodedProgramWord0 = *decodedProgram;
       }
-      else if (iVar5 == 2) {
-        iVar6 = iVar6 * 4;
-        iVar10 = iVar6 + programImage;
+      else if (entryMode == 2) {
+        recordIndexBytes = recordIndexBytes * 4;
+        aluWordPtr = recordIndexBytes + programImage;
         loopIndex2 = 0;
-        *(uint *)(iVar10 + 0x98) = (uVar12 & 0x1f) << 0x12 | *(uint *)(iVar10 + 0x98) & 0xff83ffff;
-        *(uint *)(iVar10 + 0x198) = (uVar2 & 0x1f) << 0x12 | *(uint *)(iVar10 + 0x198) & 0xff83ffff;
-        uVar12 = *(uint *)(iVar10 + 0x98);
-        uVar9 = (*(ushort *)(iVar8 + 2) & 7) << 0x1a;
-        *(uint *)(iVar10 + 0x98) = uVar9 | uVar12 & 0xe3ffffff;
-        *(uint *)(iVar10 + 0x98) =
-             (*(ushort *)(loopIndex3 * 0xa0 + decodedProgramWord8) & 3) << 0x1d | uVar9 | uVar12 & 0x83ffffff;
-        uVar12 = *(uint *)(iVar10 + 0x198);
-        uVar9 = (*(ushort *)(iVar8 + 0x42) & 8) << 0x15;
-        *(uint *)(iVar10 + 0x198) = uVar9 | uVar12 & 0xfeffffff;
-        uVar7 = (*(ushort *)(iVar8 + 0x42) & 0x10) << 0x17;
-        *(uint *)(iVar10 + 0x198) = uVar7 | uVar9 | uVar12 & 0xf6ffffff;
-        *(uint *)(iVar10 + 0x198) =
-             (*(ushort *)(iVar8 + 0x40) & 3) << 0x19 | uVar7 | uVar9 | uVar12 & 0xf0ffffff;
-        *(uint *)(iVar10 + 0x98) =
-             (*(ushort *)(iVar8 + 6) & 7) << 0x17 | *(uint *)(iVar10 + 0x98) & 0xfc7fffff;
-        *(uint *)(iVar10 + 0x198) =
-             (*(ushort *)(iVar8 + 0x46) & 8) << 0x14 | *(uint *)(iVar10 + 0x198) & 0xff7fffff;
-        iVar5 = iVar8;
+        *(uint *)(aluWordPtr + 0x98) = (destRegField & 0x1f) << 0x12 | *(uint *)(aluWordPtr + 0x98) & 0xff83ffff;
+        *(uint *)(aluWordPtr + 0x198) = (alphaDestReg & 0x1f) << 0x12 | *(uint *)(aluWordPtr + 0x198) & 0xff83ffff;
+        oldWordValueB = *(uint *)(aluWordPtr + 0x98);
+        newFieldBits = (*(ushort *)(entry + 2) & 7) << 0x1a;
+        *(uint *)(aluWordPtr + 0x98) = newFieldBits | oldWordValueB & 0xe3ffffff;
+        *(uint *)(aluWordPtr + 0x98) =
+             (*(ushort *)(loopIndex3 * 0xa0 + decodedProgramWord8) & 3) << 0x1d | newFieldBits | oldWordValueB & 0x83ffffff;
+        oldWordValueB = *(uint *)(aluWordPtr + 0x198);
+        newFieldBits = (*(ushort *)(entry + 0x42) & 8) << 0x15;
+        *(uint *)(aluWordPtr + 0x198) = newFieldBits | oldWordValueB & 0xfeffffff;
+        newFieldBitsB = (*(ushort *)(entry + 0x42) & 0x10) << 0x17;
+        *(uint *)(aluWordPtr + 0x198) = newFieldBitsB | newFieldBits | oldWordValueB & 0xf6ffffff;
+        *(uint *)(aluWordPtr + 0x198) =
+             (*(ushort *)(entry + 0x40) & 3) << 0x19 | newFieldBitsB | newFieldBits | oldWordValueB & 0xf0ffffff;
+        *(uint *)(aluWordPtr + 0x98) =
+             (*(ushort *)(entry + 6) & 7) << 0x17 | *(uint *)(aluWordPtr + 0x98) & 0xfc7fffff;
+        *(uint *)(aluWordPtr + 0x198) =
+             (*(ushort *)(entry + 0x46) & 8) << 0x14 | *(uint *)(aluWordPtr + 0x198) & 0xff7fffff;
+        slotCursor = entry;
         do {
-          uVar2 = *(ushort *)(iVar5 + 0x80);
-          uVar9 = (uint)uVar2;
-          uVar3 = *(ushort *)(iVar5 + 0x86);
-          uVar7 = (uint)uVar3;
-          if (uVar9 == 0xffff) {
-            uVar9 = 0x20;
+          rgbRegField = *(ushort *)(slotCursor + 0x80);
+          rgbRegValue = (uint)rgbRegField;
+          alphaRegField = *(ushort *)(slotCursor + 0x86);
+          alphaRegValue = (uint)alphaRegField;
+          if (rgbRegValue == 0xffff) {
+            rgbRegValue = 0x20;
           }
-          else if ((short)uVar2 < 0) {
-            uVar9 = ((int)(short)uVar2 & 0x7fffU) + 0x20;
+          else if ((short)rgbRegField < 0) {
+            rgbRegValue = ((int)(short)rgbRegField & 0x7fffU) + 0x20;
           }
-          if (uVar7 == 0xffff) {
-            uVar7 = 0x20;
+          if (alphaRegValue == 0xffff) {
+            alphaRegValue = 0x20;
           }
-          else if ((short)uVar3 < 0) {
-            uVar7 = ((int)(short)uVar3 & 0x7fffU) + 0x20;
+          else if ((short)alphaRegField < 0) {
+            alphaRegValue = ((int)(short)alphaRegField & 0x7fffU) + 0x20;
           }
           if (loopIndex2 == 1) {
-            *(uint *)(iVar10 + 0x98) = (uVar9 & 0x3f) << 6 | *(uint *)(iVar10 + 0x98) & 0xfffff03f;
-            *(uint *)(iVar10 + 0x198) = (uVar7 & 0x3f) << 6 | *(uint *)(iVar10 + 0x198) & 0xfffff03f
+            *(uint *)(aluWordPtr + 0x98) = (rgbRegValue & 0x3f) << 6 | *(uint *)(aluWordPtr + 0x98) & 0xfffff03f;
+            *(uint *)(aluWordPtr + 0x198) = (alphaRegValue & 0x3f) << 6 | *(uint *)(aluWordPtr + 0x198) & 0xfffff03f
             ;
           }
           else if (loopIndex2 == 0) {
-            *(uint *)(iVar10 + 0x98) = uVar9 & 0x3f | *(uint *)(iVar10 + 0x98) & 0xffffffc0;
-            *(uint *)(iVar10 + 0x198) = uVar7 & 0x3f | *(uint *)(iVar10 + 0x198) & 0xffffffc0;
+            *(uint *)(aluWordPtr + 0x98) = rgbRegValue & 0x3f | *(uint *)(aluWordPtr + 0x98) & 0xffffffc0;
+            *(uint *)(aluWordPtr + 0x198) = alphaRegValue & 0x3f | *(uint *)(aluWordPtr + 0x198) & 0xffffffc0;
           }
           else if (loopIndex2 == 2) {
-            *(uint *)(iVar10 + 0x98) = (uVar9 & 0x3f) << 0xc | *(uint *)(iVar10 + 0x98) & 0xfffc0fff
+            *(uint *)(aluWordPtr + 0x98) = (rgbRegValue & 0x3f) << 0xc | *(uint *)(aluWordPtr + 0x98) & 0xfffc0fff
             ;
-            *(uint *)(iVar10 + 0x198) =
-                 (uVar7 & 0x3f) << 0xc | *(uint *)(iVar10 + 0x198) & 0xfffc0fff;
+            *(uint *)(aluWordPtr + 0x198) =
+                 (alphaRegValue & 0x3f) << 0xc | *(uint *)(aluWordPtr + 0x198) & 0xfffc0fff;
           }
-          bVar1 = loopIndex2 != 2;
-          iVar5 = iVar5 + 2;
+          moreLoops = loopIndex2 != 2;
+          slotCursor = slotCursor + 2;
           loopIndex2 = loopIndex2 + 1;
-        } while (bVar1);
-        iVar5 = iVar6 + programImage;
+        } while (moreLoops);
+        aluWordBaseA = recordIndexBytes + programImage;
         loopIndex = 0;
         do {
-          uVar12 = 0;
-          uVar9 = 0;
-          uVar16 = 0;
-          uVar7 = 0;
+          rgbSourceSelect = 0;
+          rgbSelectAccum = 0;
+          alphaSourceSelect = 0;
+          alphaSelectAccum = 0;
           loopIndex2 = 0;
-          iVar14 = iVar8 + 8;
+          sourceSlotBase = entry + 8;
           do {
-            uVar2 = *(ushort *)(loopIndex * 4 + iVar14 + 2);
-            uVar11 = *(ushort *)(loopIndex * 4 + iVar14) & 3;
+            sourceSlotWord = *(ushort *)(loopIndex * 4 + sourceSlotBase + 2);
+            swizzleSel = *(ushort *)(loopIndex * 4 + sourceSlotBase) & 3;
             if (loopIndex2 == 0) {
-              uVar12 = 6;
-              if (((uVar2 & 0x300) != 0x100) && (uVar12 = 5, (uVar2 & 0x300) != 0x200)) {
-                uVar12 = uVar2 & 0x1f;
+              rgbSourceSelect = 6;
+              if (((sourceSlotWord & 0x300) != 0x100) && (rgbSourceSelect = 5, (sourceSlotWord & 0x300) != 0x200)) {
+                rgbSourceSelect = sourceSlotWord & 0x1f;
               }
-              uVar9 = (uVar2 & 0x3000) >> 0xc;
-              uVar12 = (uint)*(byte *)(uVar12 * 4 + 0x1dc000 + uVar11);
+              rgbSelectAccum = (sourceSlotWord & 0x3000) >> 0xc;
+              rgbSourceSelect = (uint)*(byte *)(rgbSourceSelect * 4 + 0x1dc000 + swizzleSel);
             }
             else if (loopIndex2 == 1) {
-              uVar7 = (uVar2 & 0x3000) >> 0xc;
-              uVar16 = (uint)*(byte *)((uVar2 & 0x1f) * 4 + 0x1dbfb4 + uVar11);
+              alphaSelectAccum = (sourceSlotWord & 0x3000) >> 0xc;
+              alphaSourceSelect = (uint)*(byte *)((sourceSlotWord & 0x1f) * 4 + 0x1dbfb4 + swizzleSel);
             }
-            bVar1 = loopIndex2 != 1;
-            iVar14 = iVar14 + 0x40;
+            moreLoops = loopIndex2 != 1;
+            sourceSlotBase = sourceSlotBase + 0x40;
             loopIndex2 = loopIndex2 + 1;
-          } while (bVar1);
+          } while (moreLoops);
           if (loopIndex == 1) {
-            *(uint *)(iVar5 + 0x298) =
-                 uVar9 << 0xc | (uVar12 & 0x1f) << 7 | *(uint *)(iVar5 + 0x298) & 0xffffc07f;
-            *(uint *)(iVar5 + 0x398) =
-                 uVar7 << 0xc | (uVar16 & 0x1f) << 7 | *(uint *)(iVar5 + 0x398) & 0xffffc07f;
+            *(uint *)(aluWordBaseA + 0x298) =
+                 rgbSelectAccum << 0xc | (rgbSourceSelect & 0x1f) << 7 | *(uint *)(aluWordBaseA + 0x298) & 0xffffc07f;
+            *(uint *)(aluWordBaseA + 0x398) =
+                 alphaSelectAccum << 0xc | (alphaSourceSelect & 0x1f) << 7 | *(uint *)(aluWordBaseA + 0x398) & 0xffffc07f;
           }
           else if (loopIndex == 0) {
-            *(uint *)(iVar5 + 0x298) =
-                 uVar9 << 5 | uVar12 & 0x1f | *(uint *)(iVar5 + 0x298) & 0xffffff80;
-            *(uint *)(iVar5 + 0x398) =
-                 uVar7 << 5 | uVar16 & 0x1f | *(uint *)(iVar5 + 0x398) & 0xffffff80;
+            *(uint *)(aluWordBaseA + 0x298) =
+                 rgbSelectAccum << 5 | rgbSourceSelect & 0x1f | *(uint *)(aluWordBaseA + 0x298) & 0xffffff80;
+            *(uint *)(aluWordBaseA + 0x398) =
+                 alphaSelectAccum << 5 | alphaSourceSelect & 0x1f | *(uint *)(aluWordBaseA + 0x398) & 0xffffff80;
           }
           else if (loopIndex == 2) {
-            *(uint *)(iVar5 + 0x298) =
-                 uVar9 << 0x13 | (uVar12 & 0x1f) << 0xe | *(uint *)(iVar5 + 0x298) & 0xffe03fff;
-            *(uint *)(iVar5 + 0x398) =
-                 uVar7 << 0x13 | (uVar16 & 0x1f) << 0xe | *(uint *)(iVar5 + 0x398) & 0xffe03fff;
+            *(uint *)(aluWordBaseA + 0x298) =
+                 rgbSelectAccum << 0x13 | (rgbSourceSelect & 0x1f) << 0xe | *(uint *)(aluWordBaseA + 0x298) & 0xffe03fff;
+            *(uint *)(aluWordBaseA + 0x398) =
+                 alphaSelectAccum << 0x13 | (alphaSourceSelect & 0x1f) << 0xe | *(uint *)(aluWordBaseA + 0x398) & 0xffe03fff;
           }
-          bVar1 = loopIndex != 2;
+          moreLoops = loopIndex != 2;
           loopIndex = loopIndex + 1;
-        } while (bVar1);
+        } while (moreLoops);
         loopIndex = 0;
-        iVar5 = iVar8;
+        halfCursorScale = entry;
         do {
-          dVar17 = (double)*(float *)(iVar5 + 0x2c) * DOUBLE_001aa290;
-          if (DOUBLE_001aa1e8 <= dVar17) {
-            uVar9 = (int)(dVar17 - DOUBLE_001aa1e8) + 0x80000000;
+          scaleValue = (double)*(float *)(halfCursorScale + 0x2c) * DOUBLE_001aa290;
+          if (DOUBLE_001aa1e8 <= scaleValue) {
+            scaleCode = (int)(scaleValue - DOUBLE_001aa1e8) + 0x80000000;
           }
           else {
-            uVar9 = (uint)(int)dVar17;
+            scaleCode = (uint)(int)scaleValue;
           }
-          switch(uVar9) {
+          switch(scaleCode) {
           case 1:
-            uVar9 = 6;
+            scaleCode = 6;
             break;
           case 2:
-            uVar9 = 5;
+            scaleCode = 5;
             break;
           case 4:
-            uVar9 = 4;
+            scaleCode = 4;
             break;
           case 8:
-            uVar9 = 0;
+            scaleCode = 0;
             break;
           case 0x10:
-            uVar9 = 1;
+            scaleCode = 1;
             break;
           case 0x20:
-            uVar9 = 2;
+            scaleCode = 2;
             break;
           case 0x40:
-            uVar9 = 3;
+            scaleCode = 3;
           }
           if (loopIndex == 0) {
-            iVar13 = iVar6 + programImage;
-            uVar7 = *(uint *)(iVar13 + 0x298);
-            uVar9 = (uVar9 & 7) << 0x1b;
-            *(uint *)(iVar13 + 0x298) = uVar9 | uVar7 & 0xc7ffffff;
-            *(uint *)(iVar13 + 0x298) =
-                 (*(uint *)(iVar8 + 0x30) & 8) << 0x1b | uVar9 | uVar7 & 0x87ffffff;
+            aluWordBase = recordIndexBytes + programImage;
+            oldWordValue = *(uint *)(aluWordBase + 0x298);
+            scaleCode = (scaleCode & 7) << 0x1b;
+            *(uint *)(aluWordBase + 0x298) = scaleCode | oldWordValue & 0xc7ffffff;
+            *(uint *)(aluWordBase + 0x298) =
+                 (*(uint *)(entry + 0x30) & 8) << 0x1b | scaleCode | oldWordValue & 0x87ffffff;
           }
           else if (loopIndex == 1) {
-            iVar13 = iVar6 + programImage;
-            uVar7 = *(uint *)(iVar13 + 0x398);
-            uVar9 = (uVar9 & 7) << 0x1b;
-            *(uint *)(iVar13 + 0x398) = uVar9 | uVar7 & 0xc7ffffff;
-            *(uint *)(iVar13 + 0x398) =
-                 (*(uint *)(iVar8 + 0x70) & 8) << 0x1b | uVar9 | uVar7 & 0x87ffffff;
+            aluWordBase = recordIndexBytes + programImage;
+            oldWordValue = *(uint *)(aluWordBase + 0x398);
+            scaleCode = (scaleCode & 7) << 0x1b;
+            *(uint *)(aluWordBase + 0x398) = scaleCode | oldWordValue & 0xc7ffffff;
+            *(uint *)(aluWordBase + 0x398) =
+                 (*(uint *)(entry + 0x70) & 8) << 0x1b | scaleCode | oldWordValue & 0x87ffffff;
           }
-          bVar1 = loopIndex != 1;
-          iVar5 = iVar5 + 0x40;
+          moreLoops = loopIndex != 1;
+          halfCursorScale = halfCursorScale + 0x40;
           loopIndex = loopIndex + 1;
-        } while (bVar1);
-        iVar6 = iVar6 + programImage;
+        } while (moreLoops);
+        recordIndexBytes = recordIndexBytes + programImage;
         loopIndex = 0;
-        iVar5 = iVar8;
+        halfCursorSwizzle = entry;
         do {
-          uVar9 = (uint)*(byte *)((uint)*(ushort *)(iVar5 + 0x28) * 2 + 0x1dbf98 + loopIndex);
+          swizzleByte = (uint)*(byte *)((uint)*(ushort *)(halfCursorSwizzle + 0x28) * 2 + 0x1dbf98 + loopIndex);
           if (loopIndex == 0) {
-            uVar7 = *(uint *)(iVar6 + 0x298);
-            uVar9 = (uVar9 & 0xf) << 0x17;
-            *(uint *)(iVar6 + 0x298) = uVar9 | uVar7 & 0xf87fffff;
-            *(uint *)(iVar6 + 0x298) =
-                 (*(ushort *)(iVar8 + 0x2a) & 3) << 0x15 | uVar9 | uVar7 & 0xf81fffff;
+            oldWordValue = *(uint *)(recordIndexBytes + 0x298);
+            swizzleByte = (swizzleByte & 0xf) << 0x17;
+            *(uint *)(recordIndexBytes + 0x298) = swizzleByte | oldWordValue & 0xf87fffff;
+            *(uint *)(recordIndexBytes + 0x298) =
+                 (*(ushort *)(entry + 0x2a) & 3) << 0x15 | swizzleByte | oldWordValue & 0xf81fffff;
           }
           else if (loopIndex == 1) {
-            uVar7 = *(uint *)(iVar6 + 0x398);
-            uVar9 = (uVar9 & 0xf) << 0x17;
-            *(uint *)(iVar6 + 0x398) = uVar9 | uVar7 & 0xf87fffff;
-            *(uint *)(iVar6 + 0x398) =
-                 (*(ushort *)(iVar8 + 0x6a) & 3) << 0x15 | uVar9 | uVar7 & 0xf81fffff;
+            oldWordValue = *(uint *)(recordIndexBytes + 0x398);
+            swizzleByte = (swizzleByte & 0xf) << 0x17;
+            *(uint *)(recordIndexBytes + 0x398) = swizzleByte | oldWordValue & 0xf87fffff;
+            *(uint *)(recordIndexBytes + 0x398) =
+                 (*(ushort *)(entry + 0x6a) & 3) << 0x15 | swizzleByte | oldWordValue & 0xf81fffff;
           }
-          bVar1 = loopIndex != 1;
-          iVar5 = iVar5 + 0x40;
+          moreLoops = loopIndex != 1;
+          halfCursorSwizzle = halfCursorSwizzle + 0x40;
           loopIndex = loopIndex + 1;
-        } while (bVar1);
+        } while (moreLoops);
         decodedProgramWord0 = *decodedProgram;
       }
       loopIndex3 = loopIndex3 + 1;
@@ -8085,219 +8144,232 @@ int psnDecSwapAddressSlotsInSources(entry, slotA, slotB, group, passThroughR7, p
 }
 
 /* psnDecTryRebindAddressWithRollback @ 0xc38a0 (1208 bytes) */
-int psnDecTryRebindAddressWithRollback(entry, param_2, param_3, param_4, param_5, param_6)
+int psnDecTryRebindAddressWithRollback(entry, oldAddressValue, newAddressValue, opcode, excludeMask, rebindFlags)
   int entry;
-  uint param_2;
-  undefined4 param_3;
-  int param_4;
-  uint param_5;
-  uint param_6;
+  uint oldAddressValue;
+  undefined4 newAddressValue;
+  int opcode;
+  uint excludeMask;
+  uint rebindFlags;
 {
   uint loopIndex;
-  bool bVar1;
-  bool bVar2;
-  bool bVar3;
-  ushort uVar4;
-  ushort uVar5;
-  bool bVar6;
-  undefined4 uVar7;
-  short *psVar8;
-  int iVar9;
-  uint uVar10;
-  uint uVar11;
-  int iVar12;
+  bool moreInit;
+  bool rgbAffected;
+  bool alphaNotAffected;
+  bool moreScan;
+  ushort sourceSelectWord;
+  ushort sourceUsageMask;
+  bool slot1Free;
+  bool changed;
+  bool moreSlots;
+  undefined4 slotMaskHigh;
+  short *usageCursor;
+  int halfBase;
+  uint excludeMaskCopy;
+  uint freeSlotIndex;
+  uint usageWordValue;
+  int slotRowBase;
+  int sourceIndex;
   undefined4 r4AfterCall;
-  undefined4 uVar13;
-  int iVar14;
-  int iVar15;
-  ushort *puVar16;
-  int iVar17;
-  ushort *puVar18;
-  int iVar19;
-  ushort *puVar20;
-  ushort *puVar21;
-  int iVar22;
-  undefined4 auStack_108 [2];
-  undefined1 auStack_100 [180];
+  undefined4 slotMaskLow;
+  undefined4 staleArgR9;
+  undefined4 slotMaskLowB;
+  int scanIndex;
+  int halfIndex;
+  int scanCounter;
+  int addrSlotByteOffset;
+  int usageGroupBase;
+  ushort *slotRef;
+  int halfScan;
+  int bankSelect;
+  ushort *usageMaskCursor;
+  int usageClearCursor;
+  int entryCursor;
+  ushort *sourceSlotCursor;
+  ushort *addrSlotCursor;
+  ushort *sourceSlotPtr;
+  int halfLoop;
+  undefined4 slotMaskTable [2];
+  undefined1 entryBackup [180];
   
-  uVar10 = param_5;
-  _memcpy(auStack_100,entry,0xa0);
-  iVar17 = 0;
-  uVar13 = 0xffffffff;
-  iVar19 = entry + 0x10;
+  excludeMaskCopy = excludeMask;
+  _memcpy(entryBackup,entry,0xa0);
+  halfScan = 0;
+  slotMaskLow = 0xffffffff;
+  usageClearCursor = entry + 0x10;
   do {
-    psVar8 = (short *)(iVar19 + 4);
-    iVar15 = 0;
+    usageCursor = (short *)(usageClearCursor + 4);
+    scanCounter = 0;
     do {
-      if ((*psVar8 == 0) && (psVar8[0x20] == 0)) {
-        psVar8[0x36] = -1;
+      if ((*usageCursor == 0) && (usageCursor[0x20] == 0)) {
+        usageCursor[0x36] = -1;
       }
-      bVar1 = iVar15 != 2;
-      psVar8 = psVar8 + 1;
-      iVar15 = iVar15 + 1;
-    } while (bVar1);
-    bVar1 = iVar17 != 1;
-    iVar19 = iVar19 + 6;
-    iVar17 = iVar17 + 1;
-  } while (bVar1);
-  bVar1 = (param_6 & 7) != 0;
-  if ((bVar1) && (*(ushort *)(entry + 0x80) != param_2)) {
-    if ((*(ushort *)(entry + 0x82) == 0xffff) || (param_2 == *(ushort *)(entry + 0x82))) {
-      ((int (*)())psnDecSwapAddressSlotsInSources)(entry,0,1,0,uVar10,0xffffffff,3);
+      moreInit = scanCounter != 2;
+      usageCursor = usageCursor + 1;
+      scanCounter = scanCounter + 1;
+    } while (moreInit);
+    moreInit = halfScan != 1;
+    usageClearCursor = usageClearCursor + 6;
+    halfScan = halfScan + 1;
+  } while (moreInit);
+  rgbAffected = (rebindFlags & 7) != 0;
+  if ((rgbAffected) && (*(ushort *)(entry + 0x80) != oldAddressValue)) {
+    if ((*(ushort *)(entry + 0x82) == 0xffff) || (oldAddressValue == *(ushort *)(entry + 0x82))) {
+      ((int (*)())psnDecSwapAddressSlotsInSources)(entry,0,1,0,excludeMaskCopy,0xffffffff,3);
     }
-    else if ((*(ushort *)(entry + 0x84) == 0xffff) || (param_2 == *(ushort *)(entry + 0x84))) {
-      ((int (*)())psnDecSwapAddressSlotsInSources)(entry,0,2,0,uVar10,0xffffffff,3);
+    else if ((*(ushort *)(entry + 0x84) == 0xffff) || (oldAddressValue == *(ushort *)(entry + 0x84))) {
+      ((int (*)())psnDecSwapAddressSlotsInSources)(entry,0,2,0,excludeMaskCopy,0xffffffff,3);
     }
   }
-  bVar2 = (param_6 >> 3 & 1) == 0;
-  if (bVar2) {
-    iVar17 = 0;
+  alphaNotAffected = (rebindFlags >> 3 & 1) == 0;
+  if (alphaNotAffected) {
+    bankSelect = 0;
     goto LAB_000c3a40;
   }
-  if (*(ushort *)(entry + 0x86) != param_2) {
-    if ((*(ushort *)(entry + 0x88) == 0xffff) || (param_2 == *(ushort *)(entry + 0x88))) {
-      iVar17 = 1;
-      ((int (*)())psnDecSwapAddressSlotsInSources)(entry,0,1,1,uVar10,uVar13,iVar15);
+  if (*(ushort *)(entry + 0x86) != oldAddressValue) {
+    if ((*(ushort *)(entry + 0x88) == 0xffff) || (oldAddressValue == *(ushort *)(entry + 0x88))) {
+      bankSelect = 1;
+      ((int (*)())psnDecSwapAddressSlotsInSources)(entry,0,1,1,excludeMaskCopy,slotMaskLow,scanCounter);
       goto LAB_000c3a40;
     }
-    if ((*(ushort *)(entry + 0x8a) == 0xffff) || (param_2 == *(ushort *)(entry + 0x8a))) {
-      iVar17 = 1;
-      ((int (*)())psnDecSwapAddressSlotsInSources)(entry,0,2,1,uVar10,uVar13,iVar15);
+    if ((*(ushort *)(entry + 0x8a) == 0xffff) || (oldAddressValue == *(ushort *)(entry + 0x8a))) {
+      bankSelect = 1;
+      ((int (*)())psnDecSwapAddressSlotsInSources)(entry,0,2,1,excludeMaskCopy,slotMaskLow,scanCounter);
       goto LAB_000c3a40;
     }
   }
-  iVar17 = 1;
+  bankSelect = 1;
 LAB_000c3a40:
-  iVar22 = 0;
-  iVar15 = entry + 0x10;
-  iVar19 = entry;
+  halfLoop = 0;
+  usageGroupBase = entry + 0x10;
+  entryCursor = entry;
   do {
-    puVar20 = (ushort *)(iVar19 + 10);
-    puVar18 = (ushort *)(iVar15 + 4);
-    iVar14 = 0;
+    sourceSlotCursor = (ushort *)(entryCursor + 10);
+    usageMaskCursor = (ushort *)(usageGroupBase + 4);
+    scanIndex = 0;
     do {
-      uVar4 = puVar20[-1];
-      puVar16 = (ushort *)(uVar4 & 0x100);
-      if ((uVar4 & 0x100) == 0) {
-        if ((uVar4 & 0x200) != 0) {
-          uVar5 = puVar18[3];
-          puVar16 = (ushort *)((int)((unsigned char *)0x0) + 1);
+      sourceSelectWord = sourceSlotCursor[-1];
+      slotRef = (ushort *)(sourceSelectWord & 0x100);
+      if ((sourceSelectWord & 0x100) == 0) {
+        if ((sourceSelectWord & 0x200) != 0) {
+          sourceUsageMask = usageMaskCursor[3];
+          slotRef = (ushort *)((int)((unsigned char *)0x0) + 1);
           goto LAB_000c3ab0;
         }
       }
       else {
-        uVar5 = *puVar18;
-        puVar16 = (ushort *)0x0;
+        sourceUsageMask = *usageMaskCursor;
+        slotRef = (ushort *)0x0;
 LAB_000c3ab0:
-        if ((((uVar4 & 3) < 3) &&
-            (iVar12 = (int)puVar16 * 3,
-            *(ushort *)((iVar12 + (uVar4 & 3)) * 2 + entry + 0x80) == param_2)) &&
-           ((*puVar20 & 0x1f & (uint)uVar5 & ~param_5) != 0)) {
-          iVar9 = (int)puVar16 * 6 + entry;
-          bVar6 = *(short *)(iVar9 + 0x82) == -1;
-          uVar10 = (uint)bVar6;
-          puVar16 = (ushort *)(int)(short)(ushort)bVar6;
-          if (*(short *)(iVar9 + 0x84) == -1) {
-            uVar10 = 2;
-            puVar16 = (ushort *)((int)((unsigned char *)0x0) + 2);
+        if ((((sourceSelectWord & 3) < 3) &&
+            (slotRowBase = (int)slotRef * 3,
+            *(ushort *)((slotRowBase + (sourceSelectWord & 3)) * 2 + entry + 0x80) == oldAddressValue)) &&
+           ((*sourceSlotCursor & 0x1f & (uint)sourceUsageMask & ~excludeMask) != 0)) {
+          halfBase = (int)slotRef * 6 + entry;
+          slot1Free = *(short *)(halfBase + 0x82) == -1;
+          freeSlotIndex = (uint)slot1Free;
+          slotRef = (ushort *)(int)(short)(ushort)slot1Free;
+          if (*(short *)(halfBase + 0x84) == -1) {
+            freeSlotIndex = 2;
+            slotRef = (ushort *)((int)((unsigned char *)0x0) + 2);
           }
-          *(short *)((iVar12 + uVar10) * 2 + entry + 0x80) = (short)param_2;
-          puVar20[-1] = (ushort)puVar16 | puVar20[-1] & 0xfffc;
+          *(short *)((slotRowBase + freeSlotIndex) * 2 + entry + 0x80) = (short)oldAddressValue;
+          sourceSlotCursor[-1] = (ushort)slotRef | sourceSlotCursor[-1] & 0xfffc;
         }
       }
-      bVar6 = iVar14 != 2;
-      puVar20 = puVar20 + 2;
-      puVar18 = puVar18 + 1;
-      iVar14 = iVar14 + 1;
-    } while (bVar6);
-    bVar6 = iVar22 == 1;
-    iVar19 = iVar19 + 0x40;
-    iVar15 = iVar15 + 0x40;
-    iVar22 = iVar22 + 1;
-    if (bVar6) {
-      bVar6 = false;
-      iVar22 = 0;
-      iVar15 = 0x80;
+      moreSlots = scanIndex != 2;
+      sourceSlotCursor = sourceSlotCursor + 2;
+      usageMaskCursor = usageMaskCursor + 1;
+      scanIndex = scanIndex + 1;
+    } while (moreSlots);
+    moreSlots = halfLoop == 1;
+    entryCursor = entryCursor + 0x40;
+    usageGroupBase = usageGroupBase + 0x40;
+    halfLoop = halfLoop + 1;
+    if (moreSlots) {
+      changed = false;
+      halfLoop = 0;
+      addrSlotByteOffset = 0x80;
       do {
-        puVar20 = (ushort *)(entry + iVar15);
+        addrSlotCursor = (ushort *)(entry + addrSlotByteOffset);
         loopIndex = 0;
         do {
-          uVar7 = _UNK_001aa7f8;
-          uVar13 = _UNK_001aa7f4;
-          if (*puVar20 == param_2) {
-            iVar14 = 0;
-            iVar19 = entry;
+          slotMaskHigh = _UNK_001aa7f8;
+          slotMaskLowB = _UNK_001aa7f4;
+          if (*addrSlotCursor == oldAddressValue) {
+            halfIndex = 0;
+            entryCursor = entry;
             do {
-              puVar21 = (ushort *)(iVar19 + 8);
-              iVar12 = 0;
+              sourceSlotPtr = (ushort *)(entryCursor + 8);
+              sourceIndex = 0;
               do {
-                uVar4 = *puVar21;
-                puVar18 = (ushort *)(uint)uVar4;
-                auStack_108[0] = uVar13;
-                auStack_108[1] = uVar7;
-                puVar16 = (ushort *)auStack_108[iVar22];
-                if ((uVar4 & 3) == loopIndex) {
-                  if (((uint)puVar16 & uVar4 & 0x300) != 0) {
-                    uVar5 = puVar21[1];
-                    uVar11 = (uint)uVar5;
-                    puVar16 = puVar21 + 1;
-                    if ((uVar5 & param_5) != 0) {
-                      if ((uVar5 & 0x2000) == 0) {
-                        uVar11 = uVar5 ^ 0x1000;
-                        puVar21[1] = (ushort)uVar11;
+                sourceSelectWord = *sourceSlotPtr;
+                usageMaskCursor = (ushort *)(uint)sourceSelectWord;
+                slotMaskTable[0] = slotMaskLowB;
+                slotMaskTable[1] = slotMaskHigh;
+                slotRef = (ushort *)slotMaskTable[halfLoop];
+                if ((sourceSelectWord & 3) == loopIndex) {
+                  if (((uint)slotRef & sourceSelectWord & 0x300) != 0) {
+                    sourceUsageMask = sourceSlotPtr[1];
+                    usageWordValue = (uint)sourceUsageMask;
+                    slotRef = sourceSlotPtr + 1;
+                    if ((sourceUsageMask & excludeMask) != 0) {
+                      if ((sourceUsageMask & 0x2000) == 0) {
+                        usageWordValue = sourceUsageMask ^ 0x1000;
+                        sourceSlotPtr[1] = (ushort)usageWordValue;
                       }
-                      puVar18 = (ushort *)(uVar4 & 0xfffffffc | 3);
-                      *puVar21 = (ushort)puVar18;
-                      if ((param_4 != 7) || ((1 < (uVar11 & 0x1f) - 1 && ((uVar11 & 0x1f) != 4)))) {
-                        puVar21[1] = (ushort)uVar11 | (ushort)param_6;
+                      usageMaskCursor = (ushort *)(sourceSelectWord & 0xfffffffc | 3);
+                      *sourceSlotPtr = (ushort)usageMaskCursor;
+                      if ((opcode != 7) || ((1 < (usageWordValue & 0x1f) - 1 && ((usageWordValue & 0x1f) != 4)))) {
+                        sourceSlotPtr[1] = (ushort)usageWordValue | (ushort)rebindFlags;
                       }
-                      if ((param_6 & 1) == 0) {
-                        *puVar16 = *puVar16 & 0xfffe;
+                      if ((rebindFlags & 1) == 0) {
+                        *slotRef = *slotRef & 0xfffe;
                       }
-                      if ((param_6 & 2) == 0) {
-                        *puVar16 = *puVar16 & 0xfffd;
+                      if ((rebindFlags & 2) == 0) {
+                        *slotRef = *slotRef & 0xfffd;
                       }
-                      if ((param_6 & 4) == 0) {
-                        *puVar16 = *puVar16 & 0xfffb;
+                      if ((rebindFlags & 4) == 0) {
+                        *slotRef = *slotRef & 0xfffb;
                       }
-                      if (bVar2) {
-                        *puVar16 = *puVar16 & 0xfff7;
+                      if (alphaNotAffected) {
+                        *slotRef = *slotRef & 0xfff7;
                       }
-                      bVar6 = true;
-                      *puVar21 = uVar4 & 0xfcfc | 3 | (ushort)auStack_108[iVar17];
+                      changed = true;
+                      *sourceSlotPtr = sourceSelectWord & 0xfcfc | 3 | (ushort)slotMaskTable[bankSelect];
                     }
                   }
                 }
-                bVar3 = iVar12 != 2;
-                puVar21 = puVar21 + 2;
-                iVar12 = iVar12 + 1;
-              } while (bVar3);
-              bVar3 = iVar14 != 1;
-              iVar19 = iVar19 + 0x40;
-              iVar14 = iVar14 + 1;
-            } while (bVar3);
+                moreScan = sourceIndex != 2;
+                sourceSlotPtr = sourceSlotPtr + 2;
+                sourceIndex = sourceIndex + 1;
+              } while (moreScan);
+              moreScan = halfIndex != 1;
+              entryCursor = entryCursor + 0x40;
+              halfIndex = halfIndex + 1;
+            } while (moreScan);
           }
-          uVar13 = 3;
-          bVar3 = loopIndex != 2;
-          puVar20 = puVar20 + 1;
+          staleArgR9 = 3;
+          moreScan = loopIndex != 2;
+          addrSlotCursor = addrSlotCursor + 1;
           loopIndex = loopIndex + 1;
-        } while (bVar3);
-        bVar3 = iVar22 != 1;
-        iVar15 = iVar15 + 6;
-        iVar22 = iVar22 + 1;
-      } while (bVar3);
-      if (bVar6) {
-        if (bVar1) {
-          *(undefined2 *)(entry + 0x80) = (*(unsigned short *)((unsigned char *)&(param_3) + 2));
+        } while (moreScan);
+        moreScan = halfLoop != 1;
+        addrSlotByteOffset = addrSlotByteOffset + 6;
+        halfLoop = halfLoop + 1;
+      } while (moreScan);
+      if (changed) {
+        if (rgbAffected) {
+          *(undefined2 *)(entry + 0x80) = (*(unsigned short *)((unsigned char *)&(newAddressValue) + 2));
         }
-        if (!bVar2) {
-          *(undefined2 *)(entry + 0x86) = (*(unsigned short *)((unsigned char *)&(param_3) + 2));
+        if (!alphaNotAffected) {
+          *(undefined2 *)(entry + 0x86) = (*(unsigned short *)((unsigned char *)&(newAddressValue) + 2));
         }
         ((int (*)())psnDecRecomputeSourceUsage)(entry);
-        ((int (*)())psnDecCanonicalizeEntry)(entry,r4AfterCall,iVar19,loopIndex,puVar20,uVar13,puVar16,puVar18);
+        ((int (*)())psnDecCanonicalizeEntry)(entry,r4AfterCall,entryCursor,loopIndex,addrSlotCursor,staleArgR9,slotRef,usageMaskCursor);
       }
       else {
-        _memcpy(entry,auStack_100,0xa0);
+        _memcpy(entry,entryBackup,0xa0);
       }
       return 1;
     }
@@ -9803,40 +9875,41 @@ int psnRaAssignDefinition(operand, tempTable, freeList, unusedArgR6, unusedArgR7
   return;
 }
 
-/* FUN_000c5e60 @ 0xc5e60 (1524 bytes) */
-int FUN_000c5e60(psnProgram)
+/* psnAnalyzeProgram @ 0xc5e60 (1524 bytes) */
+int psnAnalyzeProgram(psnProgram)
   undefined4 *psnProgram;
 {
   undefined4 *cursor7;
   int loopIndex2;
   uint loopIndex;
-  uint uVar1;
-  ushort uVar2;
-  undefined4 *puVar3;
-  ushort *puVar4;
-  ushort *puVar5;
-  ushort *puVar6;
-  char *pcVar7;
+  uint usedBit;
+  ushort regFieldValue;
+  undefined4 *returnCursor;
+  ushort *recFieldShortPtr10;
+  ushort *recFieldShortPtre;
+  ushort *recFieldShortPtr6;
+  char *recFieldBytePtr9;
   int iVar8;
-  char *pcVar9;
-  ushort *puVar10;
+  int wordIndex;
+  char *recFieldBytePtrb;
+  ushort *recFieldShortPtr4;
   ushort maxRegister;
-  uint uVar12;
-  ushort *puVar13;
-  byte *pbVar14;
-  ushort *puVar15;
-  char *pcVar16;
-  ushort *puVar17;
-  ushort *puVar18;
+  uint fileUseSum;
+  ushort *recFieldShortPtr18;
+  byte *recFieldBytePtr19;
+  ushort *recFieldShortPtrc;
+  char *recFieldBytePtr34;
+  ushort *recFieldShortPtr1e;
+  ushort *recFieldShortPtr1c;
   ushort *cursor2;
   ushort *cursor3;
-  ushort *puVar21;
+  ushort *recFieldShortPtr1a;
   ushort *cursor4;
-  char *pcVar23;
-  ushort *puVar24;
+  char *recFieldBytePtr20;
+  ushort *recFieldShortPtr12;
   ushort *cursor5;
   ushort *cursor6;
-  char *pcVar27;
+  char *recFieldBytePtr14;
   char *cursor;
   uint kind1Count;
   int remaining;
@@ -9845,122 +9918,124 @@ int FUN_000c5e60(psnProgram)
    * each initialized to the same value below, that a later loop (`*(short*)((int)&local_98 +
    * iVar8) = ...`, iVar8 running 0..30) treats as one contiguous 32-byte/16-ushort array -
    * the same Ghidra local-splitting defect class already fixed in FUN_000fd5c8,
-   * FUN_000b6580's local_68 cluster, and this session's own ConstRecord__findInTable local_2c cluster.
+   * ffpsBuildProgram's local_68 cluster, and this session's own ConstRecord__findInTable local_2c cluster.
    * Only local_98's OWN 4 bytes are real storage; the walk past it (needed to reach what
    * should be local_94/local_90/.../local_7c) ran off local_98's real bounds into whatever
    * gcc actually placed next on the stack. Live-verified on real hardware via a hardware
    * watchpoint on the calling function's saved r30/r31 stack slot: this loop's clamping
    * store (`*(undefined2*)((int)&local_98+iVar8) = 0xff;`) was confirmed to be the exact
-   * write corrupting that slot, which is what caused FUN_000b4400's r30 to read back as
+   * write corrupting that slot, which is what caused gld_compileILProgram's r30 to read back as
    * 0xff00ff and crash on its next stack-relative access. Fixed by giving the cluster real,
    * guaranteed-contiguous storage as an array (local_7c is kept as its own separate variable
    * too, since it is independently used above for the early-return check; fileUseCounts[7] is
    * initialized to the same value alongside it so the walk's last slot still gets it). */
   uint fileUseCounts[8];
   uint local_7c;
-  uint local_78;
-  uint local_74;
+  uint alreadyAnalysed;
+  uint fileCount4;
+  uint fileCount3;
   int noKind2Yet;
-  uint local_6c;
+  uint fileCount2;
   uint local_68;
+  uint fileCount1;
   uint kind2Count;
   undefined4 maxFlaggedRegister;
-  uint local_5c;
-  uint local_58;
+  uint fileCount0;
+  uint instructionCount;
   
-  local_7c = (uint)*(ushort *)(psnProgram + 5);
-  if (local_7c != 0) {
+  alreadyAnalysed = (uint)*(ushort *)(psnProgram + 5);
+  if (alreadyAnalysed != 0) {
     return;
   }
-  local_58 = psnProgram[2];
-  fileUseCounts[0] = local_7c;
-  fileUseCounts[1] = local_7c;
-  fileUseCounts[2] = local_7c;
-  fileUseCounts[3] = local_7c;
-  fileUseCounts[4] = local_7c;
-  fileUseCounts[5] = local_7c;
-  fileUseCounts[6] = local_7c;
-  fileUseCounts[7] = local_7c;
-  if (local_58 == 0) {
-    local_5c = local_58;
-    local_74 = local_58;
-    local_6c = local_58;
-    local_78 = local_58;
+  instructionCount = psnProgram[2];
+  fileUseCounts[0] = alreadyAnalysed;
+  fileUseCounts[1] = alreadyAnalysed;
+  fileUseCounts[2] = alreadyAnalysed;
+  fileUseCounts[3] = alreadyAnalysed;
+  fileUseCounts[4] = alreadyAnalysed;
+  fileUseCounts[5] = alreadyAnalysed;
+  fileUseCounts[6] = alreadyAnalysed;
+  fileUseCounts[7] = alreadyAnalysed;
+  if (instructionCount == 0) {
+    fileCount0 = instructionCount;
+    fileCount3 = instructionCount;
+    fileCount2 = instructionCount;
+    fileCount4 = instructionCount;
     noKind2Yet = 1;
     maxFlaggedRegister = 0;
-    local_68 = local_58;
-    kind2Count = local_58;
+    fileCount1 = instructionCount;
+    kind2Count = instructionCount;
     maxRegister = 0;
   }
   else {
-    puVar21 = (ushort *)((int)psnProgram + 0x62);
+    recFieldShortPtr1a = (ushort *)((int)psnProgram + 0x62);
     kind1Count = 0;
     kind2Count = 0;
     noKind2Yet = 1;
-    local_68 = 0;
-    local_78 = 0;
-    local_6c = 0;
-    local_5c = 0;
-    local_74 = 0;
+    fileCount1 = 0;
+    fileCount4 = 0;
+    fileCount2 = 0;
+    fileCount0 = 0;
+    fileCount3 = 0;
     maxFlaggedRegister = 0;
-    pcVar23 = (char *)(psnProgram + 0x1a);
-    puVar24 = (ushort *)((int)psnProgram + 0x5a);
-    puVar4 = (ushort *)(psnProgram + 0x16);
-    puVar5 = (ushort *)((int)psnProgram + 0x56);
-    puVar15 = (ushort *)(psnProgram + 0x15);
-    pcVar16 = (char *)(psnProgram + 0x1f);
-    puVar17 = (ushort *)((int)psnProgram + 0x66);
-    puVar18 = (ushort *)(psnProgram + 0x19);
-    puVar13 = (ushort *)(psnProgram + 0x18);
-    pcVar27 = (char *)(psnProgram + 0x17);
-    pbVar14 = (byte *)((int)psnProgram + 0x61);
-    puVar10 = (ushort *)(psnProgram + 0x13);
-    pcVar7 = (char *)((int)psnProgram + 0x51);
-    puVar6 = (ushort *)((int)psnProgram + 0x4e);
-    pcVar9 = (char *)((int)psnProgram + 0x53);
+    recFieldBytePtr20 = (char *)(psnProgram + 0x1a);
+    recFieldShortPtr12 = (ushort *)((int)psnProgram + 0x5a);
+    recFieldShortPtr10 = (ushort *)(psnProgram + 0x16);
+    recFieldShortPtre = (ushort *)((int)psnProgram + 0x56);
+    recFieldShortPtrc = (ushort *)(psnProgram + 0x15);
+    recFieldBytePtr34 = (char *)(psnProgram + 0x1f);
+    recFieldShortPtr1e = (ushort *)((int)psnProgram + 0x66);
+    recFieldShortPtr1c = (ushort *)(psnProgram + 0x19);
+    recFieldShortPtr18 = (ushort *)(psnProgram + 0x18);
+    recFieldBytePtr14 = (char *)(psnProgram + 0x17);
+    recFieldBytePtr19 = (byte *)((int)psnProgram + 0x61);
+    recFieldShortPtr4 = (ushort *)(psnProgram + 0x13);
+    recFieldBytePtr9 = (char *)((int)psnProgram + 0x51);
+    recFieldShortPtr6 = (ushort *)((int)psnProgram + 0x4e);
+    recFieldBytePtrb = (char *)((int)psnProgram + 0x53);
     loopIndex = 1;
     maxRegister = 0;
-    cursor2 = puVar5;
-    cursor3 = puVar4;
-    cursor4 = puVar21;
-    cursor5 = puVar24;
-    cursor6 = puVar15;
-    cursor = pcVar23;
+    cursor2 = recFieldShortPtre;
+    cursor3 = recFieldShortPtr10;
+    cursor4 = recFieldShortPtr1a;
+    cursor5 = recFieldShortPtr12;
+    cursor6 = recFieldShortPtrc;
+    cursor = recFieldBytePtr20;
     cursor7 = psnProgram;
     do {
       cursor7 = cursor7 + 0x12;
       switch(*cursor7) {
       case 1:
-        if ((*pcVar9 != '\0') && (maxRegister < *puVar6)) {
-          maxRegister = *puVar6;
+        if ((*recFieldBytePtrb != '\0') && (maxRegister < *recFieldShortPtr6)) {
+          maxRegister = *recFieldShortPtr6;
         }
-        if ((*pcVar7 != '\0') && (maxRegister < *puVar10)) {
-          maxRegister = *puVar10;
+        if ((*recFieldBytePtr9 != '\0') && (maxRegister < *recFieldShortPtr4)) {
+          maxRegister = *recFieldShortPtr4;
         }
         kind1Count = kind1Count + 1 & 0xffff;
         break;
       case 2:
         if (noKind2Yet == 0) {
           if (*cursor != '\0') {
-            local_5c = local_5c + 1 & 0xffff;
-            local_78 = local_78 + 1 & 0xffff;
+            fileCount0 = fileCount0 + 1 & 0xffff;
+            fileCount4 = fileCount4 + 1 & 0xffff;
           }
         }
         else {
-          local_5c = local_5c + 1 & 0xffff;
+          fileCount0 = fileCount0 + 1 & 0xffff;
         }
-        if (*(byte *)puVar21 < 8) {
-          uVar1 = 1 << ((int)(char)*(byte *)puVar21 & 0x3fU);
-          if ((uVar1 & 0xba) == 0) {
-            if ((uVar1 & 4) == 0) {
-              if ((uVar1 & 0x40) != 0) {
-                uVar2 = *cursor3;
+        if (*(byte *)recFieldShortPtr1a < 8) {
+          usedBit = 1 << ((int)(char)*(byte *)recFieldShortPtr1a & 0x3fU);
+          if ((usedBit & 0xba) == 0) {
+            if ((usedBit & 4) == 0) {
+              if ((usedBit & 0x40) != 0) {
+                regFieldValue = *cursor3;
                 if (*cursor3 <= maxRegister) {
-                  uVar2 = maxRegister;
+                  regFieldValue = maxRegister;
                 }
-                maxRegister = *puVar24;
-                if (*puVar24 <= uVar2) {
-                  maxRegister = uVar2;
+                maxRegister = *recFieldShortPtr12;
+                if (*recFieldShortPtr12 <= regFieldValue) {
+                  maxRegister = regFieldValue;
                 }
                 goto LAB_000c60a8;
               }
@@ -9974,12 +10049,12 @@ LAB_000c60a8:
             if (maxRegister < *cursor2) {
               maxRegister = *cursor2;
             }
-            if (maxRegister < *puVar15) {
-              maxRegister = *puVar15;
+            if (maxRegister < *recFieldShortPtrc) {
+              maxRegister = *recFieldShortPtrc;
             }
-            if (*pbVar14 < 0x10) {
-              iVar8 = (uint)*pbVar14 * 2;
-              *(short *)((int)fileUseCounts + iVar8) = *(short *)((int)fileUseCounts + iVar8) + 1;
+            if (*recFieldBytePtr19 < 0x10) {
+              wordIndex = (uint)*recFieldBytePtr19 * 2;
+              *(short *)((int)fileUseCounts + wordIndex) = *(short *)((int)fileUseCounts + wordIndex) + 1;
             }
           }
         }
@@ -9988,145 +10063,145 @@ LAB_000c60a8:
         break;
       case 3:
       case 4:
-        if (local_5c == 0) {
-          local_5c = 1;
+        if (fileCount0 == 0) {
+          fileCount0 = 1;
         }
-        if ((*pcVar27 != '\0') && (maxRegister < *cursor6)) {
+        if ((*recFieldBytePtr14 != '\0') && (maxRegister < *cursor6)) {
           maxRegister = *cursor6;
         }
-        uVar2 = *puVar5;
-        if ((uVar2 & 0x8000) == 0) {
-          if (maxRegister < uVar2) {
-            maxRegister = uVar2;
+        regFieldValue = *recFieldShortPtre;
+        if ((regFieldValue & 0x8000) == 0) {
+          if (maxRegister < regFieldValue) {
+            maxRegister = regFieldValue;
           }
         }
-        else if (maxFlaggedRegister < (uVar2 & 0x7fff)) {
-          maxFlaggedRegister = uVar2 & 0x7fff;
+        else if (maxFlaggedRegister < (regFieldValue & 0x7fff)) {
+          maxFlaggedRegister = regFieldValue & 0x7fff;
         }
-        uVar2 = *puVar4;
-        if ((uVar2 & 0x8000) == 0) {
-          if (maxRegister < uVar2) {
-            maxRegister = uVar2;
+        regFieldValue = *recFieldShortPtr10;
+        if ((regFieldValue & 0x8000) == 0) {
+          if (maxRegister < regFieldValue) {
+            maxRegister = regFieldValue;
           }
         }
-        else if (maxFlaggedRegister < (uVar2 & 0x7fff)) {
-          maxFlaggedRegister = uVar2 & 0x7fff;
+        else if (maxFlaggedRegister < (regFieldValue & 0x7fff)) {
+          maxFlaggedRegister = regFieldValue & 0x7fff;
         }
-        uVar2 = *cursor5;
-        if ((uVar2 & 0x8000) == 0) {
-          if (maxRegister < uVar2) {
-            maxRegister = uVar2;
+        regFieldValue = *cursor5;
+        if ((regFieldValue & 0x8000) == 0) {
+          if (maxRegister < regFieldValue) {
+            maxRegister = regFieldValue;
           }
         }
-        else if (maxFlaggedRegister < (uVar2 & 0x7fff)) {
-          maxFlaggedRegister = uVar2 & 0x7fff;
+        else if (maxFlaggedRegister < (regFieldValue & 0x7fff)) {
+          maxFlaggedRegister = regFieldValue & 0x7fff;
         }
-        if ((*pcVar23 != '\0') && (maxRegister < *puVar13)) {
-          maxRegister = *puVar13;
+        if ((*recFieldBytePtr20 != '\0') && (maxRegister < *recFieldShortPtr18)) {
+          maxRegister = *recFieldShortPtr18;
         }
-        uVar2 = *cursor4;
-        if ((uVar2 & 0x8000) == 0) {
-          if (maxRegister < uVar2) {
-            maxRegister = uVar2;
+        regFieldValue = *cursor4;
+        if ((regFieldValue & 0x8000) == 0) {
+          if (maxRegister < regFieldValue) {
+            maxRegister = regFieldValue;
           }
         }
-        else if (maxFlaggedRegister < (uVar2 & 0x7fff)) {
-          maxFlaggedRegister = uVar2 & 0x7fff;
+        else if (maxFlaggedRegister < (regFieldValue & 0x7fff)) {
+          maxFlaggedRegister = regFieldValue & 0x7fff;
         }
-        uVar2 = *puVar18;
-        if ((uVar2 & 0x8000) == 0) {
-          if (maxRegister < uVar2) {
-            maxRegister = uVar2;
+        regFieldValue = *recFieldShortPtr1c;
+        if ((regFieldValue & 0x8000) == 0) {
+          if (maxRegister < regFieldValue) {
+            maxRegister = regFieldValue;
           }
         }
-        else if (maxFlaggedRegister < (uVar2 & 0x7fff)) {
-          maxFlaggedRegister = uVar2 & 0x7fff;
+        else if (maxFlaggedRegister < (regFieldValue & 0x7fff)) {
+          maxFlaggedRegister = regFieldValue & 0x7fff;
         }
-        uVar2 = *puVar17;
-        if ((uVar2 & 0x8000) == 0) {
-          if (maxRegister < uVar2) {
-            maxRegister = uVar2;
+        regFieldValue = *recFieldShortPtr1e;
+        if ((regFieldValue & 0x8000) == 0) {
+          if (maxRegister < regFieldValue) {
+            maxRegister = regFieldValue;
           }
         }
-        else if (maxFlaggedRegister < (uVar2 & 0x7fff)) {
-          maxFlaggedRegister = uVar2 & 0x7fff;
+        else if (maxFlaggedRegister < (regFieldValue & 0x7fff)) {
+          maxFlaggedRegister = regFieldValue & 0x7fff;
         }
-        if (*pcVar16 != '\0') {
-          local_74 = local_74 + 1 & 0xffff;
+        if (*recFieldBytePtr34 != '\0') {
+          fileCount3 = fileCount3 + 1 & 0xffff;
         }
         noKind2Yet = 1;
-        local_68 = local_68 + 1 & 0xffff;
+        fileCount1 = fileCount1 + 1 & 0xffff;
         break;
       case 5:
-        local_6c = local_6c + 1 & 0xffff;
+        fileCount2 = fileCount2 + 1 & 0xffff;
       }
       loopIndex = loopIndex + 1;
-      pcVar16 = pcVar16 + 0x48;
-      puVar17 = puVar17 + 0x24;
-      puVar18 = puVar18 + 0x24;
+      recFieldBytePtr34 = recFieldBytePtr34 + 0x48;
+      recFieldShortPtr1e = recFieldShortPtr1e + 0x24;
+      recFieldShortPtr1c = recFieldShortPtr1c + 0x24;
       cursor4 = cursor4 + 0x24;
-      puVar13 = puVar13 + 0x24;
-      pcVar23 = pcVar23 + 0x48;
+      recFieldShortPtr18 = recFieldShortPtr18 + 0x24;
+      recFieldBytePtr20 = recFieldBytePtr20 + 0x48;
       cursor5 = cursor5 + 0x24;
-      puVar4 = puVar4 + 0x24;
-      puVar5 = puVar5 + 0x24;
+      recFieldShortPtr10 = recFieldShortPtr10 + 0x24;
+      recFieldShortPtre = recFieldShortPtre + 0x24;
       cursor6 = cursor6 + 0x24;
-      pcVar27 = pcVar27 + 0x48;
-      pbVar14 = pbVar14 + 0x48;
-      puVar15 = puVar15 + 0x24;
+      recFieldBytePtr14 = recFieldBytePtr14 + 0x48;
+      recFieldBytePtr19 = recFieldBytePtr19 + 0x48;
+      recFieldShortPtrc = recFieldShortPtrc + 0x24;
       cursor2 = cursor2 + 0x24;
-      puVar24 = puVar24 + 0x24;
+      recFieldShortPtr12 = recFieldShortPtr12 + 0x24;
       cursor3 = cursor3 + 0x24;
-      puVar21 = puVar21 + 0x24;
+      recFieldShortPtr1a = recFieldShortPtr1a + 0x24;
       cursor = cursor + 0x48;
-      puVar10 = puVar10 + 0x24;
-      pcVar7 = pcVar7 + 0x48;
-      puVar6 = puVar6 + 0x24;
-      pcVar9 = pcVar9 + 0x48;
-    } while (loopIndex <= local_58);
+      recFieldShortPtr4 = recFieldShortPtr4 + 0x24;
+      recFieldBytePtr9 = recFieldBytePtr9 + 0x48;
+      recFieldShortPtr6 = recFieldShortPtr6 + 0x24;
+      recFieldBytePtrb = recFieldBytePtrb + 0x48;
+    } while (loopIndex <= instructionCount);
     if (kind1Count != 0) goto LAB_000c6350;
   }
   kind1Count = 1;
 LAB_000c6350:
-  if (local_5c == 0) {
-    local_5c = 1;
-    local_68 = 1;
+  if (fileCount0 == 0) {
+    fileCount0 = 1;
+    fileCount1 = 1;
   }
   if (noKind2Yet == 0) {
-    local_68 = local_68 + 1 & 0xffff;
+    fileCount1 = fileCount1 + 1 & 0xffff;
   }
-  uVar12 = (local_68 + local_78 & 0xffff) + local_74 & 0xffff;
-  if (uVar12 < kind2Count) {
-    uVar12 = kind2Count;
+  fileUseSum = (fileCount1 + fileCount4 & 0xffff) + fileCount3 & 0xffff;
+  if (fileUseSum < kind2Count) {
+    fileUseSum = kind2Count;
   }
-  if (uVar12 < local_6c) {
-    uVar12 = local_6c;
+  if (fileUseSum < fileCount2) {
+    fileUseSum = fileCount2;
   }
-  if (uVar12 < kind1Count) {
-    uVar12 = kind1Count;
+  if (fileUseSum < kind1Count) {
+    fileUseSum = kind1Count;
   }
   *(ushort *)((int)psnProgram + 0x22) = maxRegister;
-  *(short *)((int)psnProgram + 0x26) = (short)uVar12;
-  *(short *)((int)psnProgram + 0x1e) = (short)(local_68 + local_78);
+  *(short *)((int)psnProgram + 0x26) = (short)fileUseSum;
+  *(short *)((int)psnProgram + 0x1e) = (short)(fileCount1 + fileCount4);
   *(short *)(psnProgram + 6) = (short)kind1Count;
-  *(short *)((int)psnProgram + 0x16) = (short)local_5c;
+  *(short *)((int)psnProgram + 0x16) = (short)fileCount0;
   *(undefined2 *)(psnProgram + 10) = 0;
-  *(short *)(psnProgram + 8) = (short)local_6c;
+  *(short *)(psnProgram + 8) = (short)fileCount2;
   loopIndex2 = 0;
   remaining = 0x10;
-  *(short *)(psnProgram + 7) = (short)local_68;
+  *(short *)(psnProgram + 7) = (short)fileCount1;
   *(short *)((int)psnProgram + 0x1a) = (short)kind2Count;
   *(undefined2 *)(psnProgram + 9) = (*(unsigned short *)((unsigned char *)&(maxFlaggedRegister) + 2));
-  puVar3 = psnProgram;
+  returnCursor = psnProgram;
   do {
     maxRegister = *(ushort *)((int)fileUseCounts + loopIndex2);
     if (0xff < maxRegister) {
       maxRegister = 0xff;
       *(undefined2 *)((int)fileUseCounts + loopIndex2) = 0xff;
     }
-    *(char *)((int)puVar3 + 0x2a) = (char)maxRegister;
+    *(char *)((int)returnCursor + 0x2a) = (char)maxRegister;
     loopIndex2 = loopIndex2 + 2;
-    puVar3 = (undefined4 *)((int)puVar3 + 1);
+    returnCursor = (undefined4 *)((int)returnCursor + 1);
     remaining = remaining + -1;
   } while (remaining != 0);
   *(undefined2 *)(psnProgram + 5) = 1;
@@ -10134,80 +10209,83 @@ LAB_000c6350:
 }
 
 /* psnReallocateTemps @ 0xc6470 (1284 bytes) */
-int psnReallocateTemps(psnState, psnProgram, param_3, passThroughR6, sourceUsage, passThroughR8, unusedArgR9, param_8)
+int psnReallocateTemps(psnState, psnProgram, useSecondBank, passThroughR6, sourceUsage, passThroughR8, unusedArgR9, scanIndex)
   int psnState;
   int psnProgram;
-  undefined2 *param_3;
+  undefined2 *useSecondBank;
   uint *passThroughR6;
   uint *sourceUsage;
   undefined4 *passThroughR8;
   undefined4 unusedArgR9;
-  uint param_8;
+  uint scanIndex;
 {
+  bool notLastSlot;
+  byte destMaskByte;
+  byte sourceUseByteB;
   ushort instShort7;
   ushort instShort3;
   byte instByte10;
   uint instKind;
-  bool bVar1;
-  byte bVar2;
-  ushort uVar3;
-  ushort uVar4;
-  uint uVar5;
-  uint uVar6;
+  bool pastLastEntry;
+  byte srcSelectByte;
+  ushort destRegBeforeAssign;
+  ushort destRegCopy;
+  uint lowComponentBit;
+  uint workMask;
   int loopIndex;
-  uint uVar8;
-  byte bVar9;
+  uint collectedEntry;
+  byte sourceUseFlags;
   uint collectedCount;
   int psnProgramWord8;
   int loopIndex2;
   uint *lastVisitedInst;
   uint *inst;
-  ushort auStack_8b8 [4];
-  undefined4 uStack_8b0;
-  undefined4 uStack_8ac;
-  undefined2 *puStack_8a8;
-  undefined2 uStack_8a4;
-  ushort uStack_8a0;
-  undefined2 uStack_89e;
-  ushort uStack_89c;
-  undefined2 uStack_89a;
-  undefined2 *puStack_898;
-  undefined2 *puStack_894;
-  undefined2 uStack_890;
-  undefined4 uStack_88c;
-  undefined4 uStack_888;
-  undefined4 uStack_884;
-  undefined4 uStack_880;
-  uint uStack_87c;
-  undefined4 uStack_878;
-  undefined4 uStack_874;
-  undefined4 uStack_870;
-  undefined4 uStack_86c;
-  undefined4 uStack_868;
-  uint auStack_864 [519];
+  ushort zeroedOperandBlock [4];
+  undefined4 zeroedOperandWord0;
+  undefined4 zeroedOperandWord1;
+  undefined2 *freeListBase;
+  undefined2 freeListCount;
+  ushort releaseOperandReg;
+  undefined2 releaseOperandMask;
+  ushort secondOperandReg;
+  undefined2 secondOperandMask;
+  undefined2 *tempTableBank0;
+  undefined2 *tempTableBank1;
+  undefined2 tempTableSplit;
+  undefined4 tempTablePad;
+  undefined4 zeroWordA;
+  undefined4 zeroWordB;
+  undefined4 zeroWordC;
+  uint defOperand;
+  undefined4 defOperandPad0;
+  undefined4 defOperandPad1;
+  undefined4 defOperandPad2;
+  undefined4 defOperandPad3;
+  undefined4 defOperandPad4;
+  uint collectedRegs [519];
   
-  uVar6 = 0xf;
-  puStack_8a8 = *(undefined2 **)(psnState + 0x1c);
-  auStack_8b8[1] = 0;
-  auStack_8b8[0] = 0;
-  auStack_8b8[3] = 0;
-  auStack_8b8[2] = 0;
-  (*(unsigned short *)((unsigned char *)&(uStack_8b0) + 2)) = 0;
-  (*(unsigned short *)((unsigned char *)&(uStack_8b0) + 0)) = 0;
-  (*(unsigned short *)((unsigned char *)&(uStack_8ac) + 2)) = 0;
-  (*(unsigned short *)((unsigned char *)&(uStack_8ac) + 0)) = 0;
-  *puStack_8a8 = 0;
-  puStack_8a8[1] = 0xf;
-  uStack_8a4 = 1;
-  uStack_890 = SUB42((unsigned long)param_3,0);
-  puStack_898 = puStack_8a8 + *(int *)(psnState + 0x30) * 2;
-  _memset(puStack_898,0,*(int *)(psnState + 0x30) << 3);
-  if (param_3 == (undefined2 *)0x0) {
-    puStack_894 = param_3;
+  workMask = 0xf;
+  freeListBase = *(undefined2 **)(psnState + 0x1c);
+  zeroedOperandBlock[1] = 0;
+  zeroedOperandBlock[0] = 0;
+  zeroedOperandBlock[3] = 0;
+  zeroedOperandBlock[2] = 0;
+  (*(unsigned short *)((unsigned char *)&(zeroedOperandWord0) + 2)) = 0;
+  (*(unsigned short *)((unsigned char *)&(zeroedOperandWord0) + 0)) = 0;
+  (*(unsigned short *)((unsigned char *)&(zeroedOperandWord1) + 2)) = 0;
+  (*(unsigned short *)((unsigned char *)&(zeroedOperandWord1) + 0)) = 0;
+  *freeListBase = 0;
+  freeListBase[1] = 0xf;
+  freeListCount = 1;
+  tempTableSplit = SUB42((unsigned long)useSecondBank,0);
+  tempTableBank0 = freeListBase + *(int *)(psnState + 0x30) * 2;
+  _memset(tempTableBank0,0,*(int *)(psnState + 0x30) << 3);
+  if (useSecondBank == (undefined2 *)0x0) {
+    tempTableBank1 = useSecondBank;
   }
   else {
-    puStack_894 = puStack_898 + *(int *)(psnState + 0x30) * 4;
-    _memset(puStack_894,0,*(int *)(psnState + 0x30) * 8);
+    tempTableBank1 = tempTableBank0 + *(int *)(psnState + 0x30) * 4;
+    _memset(tempTableBank1,0,*(int *)(psnState + 0x30) * 8);
   }
   psnProgramWord8 = *(int *)(psnProgram + 8);
   if (psnProgramWord8 != 0) {
@@ -10218,10 +10296,10 @@ int psnReallocateTemps(psnState, psnProgram, param_3, passThroughR6, sourceUsage
     do {
       instKind = *inst;
       if (instKind == 2) {
-        uStack_89e = 0xf;
-        uStack_8a0 = *(ushort *)(inst + 3);
+        releaseOperandMask = 0xf;
+        releaseOperandReg = *(ushort *)(inst + 3);
         if (*(char *)((int)inst + 0x1a) == '\0') {
-          uVar6 = 0;
+          workMask = 0;
           *(undefined2 *)(inst + 3) = 0;
           *(undefined1 *)((int)inst + 0x1f) = 0xf;
           *(undefined1 *)((int)inst + 0x19) = 0;
@@ -10232,58 +10310,58 @@ int psnReallocateTemps(psnState, psnProgram, param_3, passThroughR6, sourceUsage
             *(undefined2 *)(inst + 3) = 0;
           }
           else {
-            ((int (*)())psnRaReleaseUse)(&uStack_8a0,&puStack_898,&puStack_8a8);
-            *(ushort *)(inst + 3) = uStack_8a0;
+            ((int (*)())psnRaReleaseUse)(&releaseOperandReg,&tempTableBank0,&freeListBase);
+            *(ushort *)(inst + 3) = releaseOperandReg;
           }
-          uStack_87c = CONCAT22(*(undefined2 *)((int)inst + 0xe),
+          defOperand = CONCAT22(*(undefined2 *)((int)inst + 0xe),
                                 (ushort)*(byte *)((int)inst + 0x1f)) ^ 0xf;
-          ((int (*)())psnRaAssignDefinition)(&uStack_87c,&puStack_898,&puStack_8a8,passThroughR6,sourceUsage,passThroughR8,uVar6,param_8);
-          uVar6 = (uint)(*(unsigned short *)((unsigned char *)&(uStack_87c) + 0));
-          *(ushort *)((int)inst + 0xe) = (*(unsigned short *)((unsigned char *)&(uStack_87c) + 0));
+          ((int (*)())psnRaAssignDefinition)(&defOperand,&tempTableBank0,&freeListBase,passThroughR6,sourceUsage,passThroughR8,workMask,scanIndex);
+          workMask = (uint)(*(unsigned short *)((unsigned char *)&(defOperand) + 0));
+          *(ushort *)((int)inst + 0xe) = (*(unsigned short *)((unsigned char *)&(defOperand) + 0));
         }
         if (((lastVisitedInst == (uint *)0x0) || (*lastVisitedInst != 2)) || (*(char *)(lastVisitedInst + 8) != '\0')) {
           collectedCount = 0;
         }
         sourceUsage = (uint *)(uint)*(byte *)((int)inst + 0x1a);
         if (sourceUsage != (uint *)0x0) {
-          uVar5 = collectedCount;
+          lowComponentBit = collectedCount;
           if (collectedCount == 0) {
-            uVar6 = (uint)*(ushort *)((int)inst + 0xe);
+            workMask = (uint)*(ushort *)((int)inst + 0xe);
           }
           else {
             instShort3 = *(ushort *)(inst + 3);
             passThroughR8 = (undefined4 *)(uint)instShort3;
-            uVar4 = *(ushort *)((int)inst + 0xe);
-            uVar6 = (uint)uVar4;
-            param_8 = 0;
-            passThroughR6 = auStack_864;
+            destRegCopy = *(ushort *)((int)inst + 0xe);
+            workMask = (uint)destRegCopy;
+            scanIndex = 0;
+            passThroughR6 = collectedRegs;
             do {
-              uVar8 = passThroughR6[param_8];
-              if ((instShort3 == uVar8) && (sourceUsage != (uint *)((int)((unsigned char *)0x0) + 2))) {
-                uVar5 = 0;
+              collectedEntry = passThroughR6[scanIndex];
+              if ((instShort3 == collectedEntry) && (sourceUsage != (uint *)((int)((unsigned char *)0x0) + 2))) {
+                lowComponentBit = 0;
                 *(undefined1 *)(lastVisitedInst + 8) = 1;
               }
-              if (uVar8 == uVar4) {
-                collectedCount = param_8;
+              if (collectedEntry == destRegCopy) {
+                collectedCount = scanIndex;
               }
-              param_8 = param_8 + 1;
-            } while (param_8 < uVar5);
-            bVar1 = collectedCount < uVar5;
-            collectedCount = uVar5;
-            if (bVar1) goto LAB_000c6e10;
+              scanIndex = scanIndex + 1;
+            } while (scanIndex < lowComponentBit);
+            pastLastEntry = collectedCount < lowComponentBit;
+            collectedCount = lowComponentBit;
+            if (pastLastEntry) goto LAB_000c6e10;
           }
-          collectedCount = uVar5 + 1;
-          auStack_864[uVar5] = uVar6;
+          collectedCount = lowComponentBit + 1;
+          collectedRegs[lowComponentBit] = workMask;
         }
         goto LAB_000c6e10;
       }
       if (instKind < 3) {
         if (instKind == 1) {
-          uStack_8a0 = *(ushort *)((int)inst + 6);
-          uVar6 = 0xf;
-          uStack_89e = 0xf;
-          uStack_89a = 0xf;
-          uStack_89c = *(ushort *)(inst + 1);
+          releaseOperandReg = *(ushort *)((int)inst + 6);
+          workMask = 0xf;
+          releaseOperandMask = 0xf;
+          secondOperandMask = 0xf;
+          secondOperandReg = *(ushort *)(inst + 1);
           if (*(char *)((int)inst + 0xb) == '\0') {
             *(undefined2 *)((int)inst + 6) = 0;
             *(undefined1 *)((int)inst + 0xf) = 0xf;
@@ -10291,9 +10369,9 @@ int psnReallocateTemps(psnState, psnProgram, param_3, passThroughR6, sourceUsage
             *(undefined1 *)((int)inst + 10) = 0;
           }
           else {
-            ((int (*)())psnRaReleaseUse)(&uStack_8a0,&puStack_898,&puStack_8a8);
-            *(ushort *)((int)inst + 6) = uStack_8a0;
-            *(byte *)((int)inst + 0xf) = (byte)uStack_89e ^ 0xf;
+            ((int (*)())psnRaReleaseUse)(&releaseOperandReg,&tempTableBank0,&freeListBase);
+            *(ushort *)((int)inst + 6) = releaseOperandReg;
+            *(byte *)((int)inst + 0xf) = (byte)releaseOperandMask ^ 0xf;
           }
           if (*(char *)((int)inst + 9) == '\0') {
             *(ushort *)(inst + 1) = 0;
@@ -10302,221 +10380,221 @@ int psnReallocateTemps(psnState, psnProgram, param_3, passThroughR6, sourceUsage
             *(undefined1 *)(inst + 2) = 0;
           }
           else {
-            ((int (*)())psnRaReleaseUse)(&uStack_89c,&puStack_898,&puStack_8a8);
-            *(ushort *)(inst + 1) = uStack_89c;
-            *(byte *)((int)inst + 0xe) = (byte)uStack_89a ^ 0xf;
+            ((int (*)())psnRaReleaseUse)(&secondOperandReg,&tempTableBank0,&freeListBase);
+            *(ushort *)(inst + 1) = secondOperandReg;
+            *(byte *)((int)inst + 0xe) = (byte)secondOperandMask ^ 0xf;
           }
         }
         goto LAB_000c6e10;
       }
       if (4 < instKind) goto LAB_000c6e10;
-      uStack_8a0 = *(ushort *)(inst + 3);
-      uStack_89c = *(ushort *)(inst + 6);
-      uStack_89a = 0;
-      uStack_89e = (ushort)*(byte *)(inst + 5);
+      releaseOperandReg = *(ushort *)(inst + 3);
+      secondOperandReg = *(ushort *)(inst + 6);
+      secondOperandMask = 0;
+      releaseOperandMask = (ushort)*(byte *)(inst + 5);
       if (*(char *)(inst + 8) != '\0') {
-        uStack_89a = 8;
+        secondOperandMask = 8;
       }
-      ((int (*)())psnRaReleaseUse)(&uStack_8a0,&puStack_898,&puStack_8a8);
-      *(ushort *)(inst + 3) = uStack_8a0;
-      *(byte *)(inst + 5) = (byte)uStack_89e;
-      ((int (*)())psnRaReleaseUse)(&uStack_89c,&puStack_898,&puStack_8a8);
-      uVar6 = 7;
-      uStack_880 = 0;
-      uStack_87c = 0;
-      uStack_878 = 0;
-      uStack_874 = 0;
-      uStack_870 = 0;
-      uStack_86c = 0;
-      uStack_868 = 0;
-      uStack_88c = 0;
-      uStack_888 = 0;
-      uStack_884 = 0;
-      *(ushort *)(inst + 6) = uStack_89c;
-      *(byte *)(inst + 8) = (byte)(-(uint)uStack_89a >> 0x1f);
-      bVar9 = *(byte *)(inst + 5) | *(byte *)((int)inst + 0x15);
-      if (bVar9 == 0) {
-        uVar6 = 0;
+      ((int (*)())psnRaReleaseUse)(&releaseOperandReg,&tempTableBank0,&freeListBase);
+      *(ushort *)(inst + 3) = releaseOperandReg;
+      *(byte *)(inst + 5) = (byte)releaseOperandMask;
+      ((int (*)())psnRaReleaseUse)(&secondOperandReg,&tempTableBank0,&freeListBase);
+      workMask = 7;
+      zeroWordC = 0;
+      defOperand = 0;
+      defOperandPad0 = 0;
+      defOperandPad1 = 0;
+      defOperandPad2 = 0;
+      defOperandPad3 = 0;
+      defOperandPad4 = 0;
+      tempTablePad = 0;
+      zeroWordA = 0;
+      zeroWordB = 0;
+      *(ushort *)(inst + 6) = secondOperandReg;
+      *(byte *)(inst + 8) = (byte)(-(uint)secondOperandMask >> 0x1f);
+      sourceUseFlags = *(byte *)(inst + 5) | *(byte *)((int)inst + 0x15);
+      if (sourceUseFlags == 0) {
+        workMask = 0;
       }
-      bVar2 = *(byte *)((int)inst + 0x31);
-      uVar6 = -(uint)(byte)(*(byte *)(inst + 8) | *(byte *)((int)inst + 0x21) |
-                           *(byte *)((int)inst + 0x23)) >> 0x1c & 8 | uVar6;
-      if ((bVar2 < 10) && ((1 << ((int)(char)bVar2 & 0x3fU) & 0x3b1U) != 0)) {
-        uVar6 = uVar6 & (bVar9 | 8);
+      srcSelectByte = *(byte *)((int)inst + 0x31);
+      workMask = -(uint)(byte)(*(byte *)(inst + 8) | *(byte *)((int)inst + 0x21) |
+                           *(byte *)((int)inst + 0x23)) >> 0x1c & 8 | workMask;
+      if ((srcSelectByte < 10) && ((1 << ((int)(char)srcSelectByte & 0x3fU) & 0x3b1U) != 0)) {
+        workMask = workMask & (sourceUseFlags | 8);
       }
-      if (((bVar2 == 10) || (bVar2 == 2)) && ((uVar6 & 7) != 0)) {
-        uVar6 = uVar6 | 8;
+      if (((srcSelectByte == 10) || (srcSelectByte == 2)) && ((workMask & 7) != 0)) {
+        workMask = workMask | 8;
       }
       instByte10 = *(byte *)(inst + 0x10);
-      if ((instByte10 == 1) && ((uVar6 & 8) != 0)) {
-        uVar6 = uVar6 | 7;
+      if ((instByte10 == 1) && ((workMask & 8) != 0)) {
+        workMask = workMask | 7;
       }
-      switch(bVar2) {
+      switch(srcSelectByte) {
       case 0:
       case 7:
       case 8:
-        ((int (*)())psnAccumulateRgbSelectRead)((uint)*(byte *)((int)inst + 0x2a),uVar6,(uint)*(byte *)(inst + 0xc),
-                     (uint)*(byte *)((int)inst + 0x3f),&uStack_87c,&uStack_88c);
-        ((int (*)())psnAccumulateRgbSelectRead)((uint)*(byte *)((int)inst + 0x2b),uVar6,(uint)*(byte *)(inst + 0xc),
-                     (uint)*(byte *)((int)inst + 0x3f),&uStack_87c,&uStack_88c);
-        bVar9 = *(byte *)(inst + 0xb);
+        ((int (*)())psnAccumulateRgbSelectRead)((uint)*(byte *)((int)inst + 0x2a),workMask,(uint)*(byte *)(inst + 0xc),
+                     (uint)*(byte *)((int)inst + 0x3f),&defOperand,&tempTablePad);
+        ((int (*)())psnAccumulateRgbSelectRead)((uint)*(byte *)((int)inst + 0x2b),workMask,(uint)*(byte *)(inst + 0xc),
+                     (uint)*(byte *)((int)inst + 0x3f),&defOperand,&tempTablePad);
+        sourceUseByteB = *(byte *)(inst + 0xb);
         goto code_r0x000c6a30;
       case 1:
       case 4:
       case 5:
-        ((int (*)())psnAccumulateRgbSelectRead)((uint)*(byte *)((int)inst + 0x2a),uVar6,(uint)*(byte *)(inst + 0xc),
-                     (uint)*(byte *)((int)inst + 0x3f),&uStack_87c,&uStack_88c);
-        bVar9 = *(byte *)((int)inst + 0x2b);
+        ((int (*)())psnAccumulateRgbSelectRead)((uint)*(byte *)((int)inst + 0x2a),workMask,(uint)*(byte *)(inst + 0xc),
+                     (uint)*(byte *)((int)inst + 0x3f),&defOperand,&tempTablePad);
+        sourceUseByteB = *(byte *)((int)inst + 0x2b);
 code_r0x000c6a30:
-        passThroughR8 = &uStack_88c;
-        sourceUsage = &uStack_87c;
+        passThroughR8 = &tempTablePad;
+        sourceUsage = &defOperand;
         passThroughR6 = (uint *)(uint)*(byte *)((int)inst + 0x3f);
-        ((int (*)())psnAccumulateRgbSelectRead)((uint)bVar9,uVar6,(uint)*(byte *)(inst + 0xc),passThroughR6,sourceUsage,passThroughR8);
+        ((int (*)())psnAccumulateRgbSelectRead)((uint)sourceUseByteB,workMask,(uint)*(byte *)(inst + 0xc),passThroughR6,sourceUsage,passThroughR8);
         instByte10 = *(byte *)(inst + 0x10);
         break;
       case 2:
-        sourceUsage = &uStack_87c;
-        passThroughR8 = &uStack_88c;
-        ((int (*)())psnAccumulateRgbSelectRead)((uint)*(byte *)((int)inst + 0x2a),uVar6,(uint)*(byte *)(inst + 0xc),
+        sourceUsage = &defOperand;
+        passThroughR8 = &tempTablePad;
+        ((int (*)())psnAccumulateRgbSelectRead)((uint)*(byte *)((int)inst + 0x2a),workMask,(uint)*(byte *)(inst + 0xc),
                      (uint)*(byte *)((int)inst + 0x3f),sourceUsage,passThroughR8);
-        ((int (*)())psnAccumulateRgbSelectRead)((uint)*(byte *)((int)inst + 0x2b),uVar6,(uint)*(byte *)(inst + 0xc),
+        ((int (*)())psnAccumulateRgbSelectRead)((uint)*(byte *)((int)inst + 0x2b),workMask,(uint)*(byte *)(inst + 0xc),
                      (uint)*(byte *)((int)inst + 0x3f),sourceUsage,passThroughR8);
-        ((int (*)())psnAccumulateAlphaSelectRead)((uint)*(byte *)((int)inst + 0x39),uVar6,(uint)*(byte *)(inst + 0xc),
+        ((int (*)())psnAccumulateAlphaSelectRead)((uint)*(byte *)((int)inst + 0x39),workMask,(uint)*(byte *)(inst + 0xc),
                      (uint)*(byte *)((int)inst + 0x3f),sourceUsage,passThroughR8);
         passThroughR6 = (uint *)(uint)*(byte *)((int)inst + 0x3f);
-        ((int (*)())psnAccumulateAlphaSelectRead)((uint)*(byte *)((int)inst + 0x3a),uVar6,(uint)*(byte *)(inst + 0xc),
+        ((int (*)())psnAccumulateAlphaSelectRead)((uint)*(byte *)((int)inst + 0x3a),workMask,(uint)*(byte *)(inst + 0xc),
                      passThroughR6,sourceUsage,passThroughR8);
         instByte10 = *(byte *)(inst + 0x10);
         break;
       case 3:
-        sourceUsage = &uStack_87c;
-        passThroughR8 = &uStack_88c;
-        ((int (*)())psnAccumulateRgbSelectRead)((uint)*(byte *)((int)inst + 0x2a),uVar6 & 3,(uint)*(byte *)(inst + 0xc),
+        sourceUsage = &defOperand;
+        passThroughR8 = &tempTablePad;
+        ((int (*)())psnAccumulateRgbSelectRead)((uint)*(byte *)((int)inst + 0x2a),workMask & 3,(uint)*(byte *)(inst + 0xc),
                      (uint)*(byte *)((int)inst + 0x3f),sourceUsage,passThroughR8);
-        ((int (*)())psnAccumulateRgbSelectRead)((uint)*(byte *)((int)inst + 0x2b),uVar6 & 3,(uint)*(byte *)(inst + 0xc),
+        ((int (*)())psnAccumulateRgbSelectRead)((uint)*(byte *)((int)inst + 0x2b),workMask & 3,(uint)*(byte *)(inst + 0xc),
                      (uint)*(byte *)((int)inst + 0x3f),sourceUsage,passThroughR8);
         passThroughR6 = (uint *)(uint)*(byte *)((int)inst + 0x3f);
-        ((int (*)())psnAccumulateRgbSelectRead)((uint)*(byte *)(inst + 0xb),uVar6 & 4,(uint)*(byte *)(inst + 0xc),passThroughR6
+        ((int (*)())psnAccumulateRgbSelectRead)((uint)*(byte *)(inst + 0xb),workMask & 4,(uint)*(byte *)(inst + 0xc),passThroughR6
                      ,sourceUsage,passThroughR8);
         instByte10 = *(byte *)(inst + 0x10);
         break;
       case 6:
         break;
       case 9:
-        sourceUsage = &uStack_87c;
+        sourceUsage = &defOperand;
         passThroughR6 = (uint *)(uint)*(byte *)((int)inst + 0x3f);
-        passThroughR8 = &uStack_88c;
-        ((int (*)())psnAccumulateRgbSelectRead)((uint)*(byte *)((int)inst + 0x2a),uVar6,(uint)*(byte *)(inst + 0xc),
+        passThroughR8 = &tempTablePad;
+        ((int (*)())psnAccumulateRgbSelectRead)((uint)*(byte *)((int)inst + 0x2a),workMask,(uint)*(byte *)(inst + 0xc),
                      passThroughR6,sourceUsage,passThroughR8);
         instByte10 = *(byte *)(inst + 0x10);
       }
       if (instByte10 < 0xc) {
-        uVar5 = 1 << ((int)(char)instByte10 & 0x3fU);
-        if ((uVar5 & 0x61) == 0) {
-          if ((uVar5 & 0xc) == 0) {
-            if ((uVar5 & 0xf80) != 0) {
+        lowComponentBit = 1 << ((int)(char)instByte10 & 0x3fU);
+        if ((lowComponentBit & 0x61) == 0) {
+          if ((lowComponentBit & 0xc) == 0) {
+            if ((lowComponentBit & 0xf80) != 0) {
               passThroughR6 = (uint *)(uint)*(byte *)((int)inst + 0x3f);
-              passThroughR8 = &uStack_88c;
-              sourceUsage = &uStack_87c;
-              ((int (*)())psnAccumulateAlphaSelectRead)((uint)*(byte *)((int)inst + 0x39),uVar6,(uint)*(byte *)(inst + 0xc)
-                           ,passThroughR6,&uStack_87c,passThroughR8);
+              passThroughR8 = &tempTablePad;
+              sourceUsage = &defOperand;
+              ((int (*)())psnAccumulateAlphaSelectRead)((uint)*(byte *)((int)inst + 0x39),workMask,(uint)*(byte *)(inst + 0xc)
+                           ,passThroughR6,&defOperand,passThroughR8);
             }
             goto code_r0x000c6c50;
           }
-          ((int (*)())psnAccumulateAlphaSelectRead)((uint)*(byte *)((int)inst + 0x39),uVar6,(uint)*(byte *)(inst + 0xc),
-                       (uint)*(byte *)((int)inst + 0x3f),&uStack_87c,&uStack_88c);
-          bVar9 = *(byte *)((int)inst + 0x3a);
+          ((int (*)())psnAccumulateAlphaSelectRead)((uint)*(byte *)((int)inst + 0x39),workMask,(uint)*(byte *)(inst + 0xc),
+                       (uint)*(byte *)((int)inst + 0x3f),&defOperand,&tempTablePad);
+          destMaskByte = *(byte *)((int)inst + 0x3a);
         }
         else {
-          ((int (*)())psnAccumulateAlphaSelectRead)((uint)*(byte *)((int)inst + 0x39),uVar6,(uint)*(byte *)(inst + 0xc),
-                       (uint)*(byte *)((int)inst + 0x3f),&uStack_87c,&uStack_88c);
-          ((int (*)())psnAccumulateAlphaSelectRead)((uint)*(byte *)((int)inst + 0x3a),uVar6,(uint)*(byte *)(inst + 0xc),
-                       (uint)*(byte *)((int)inst + 0x3f),&uStack_87c,&uStack_88c);
-          bVar9 = *(byte *)((int)inst + 0x3b);
+          ((int (*)())psnAccumulateAlphaSelectRead)((uint)*(byte *)((int)inst + 0x39),workMask,(uint)*(byte *)(inst + 0xc),
+                       (uint)*(byte *)((int)inst + 0x3f),&defOperand,&tempTablePad);
+          ((int (*)())psnAccumulateAlphaSelectRead)((uint)*(byte *)((int)inst + 0x3a),workMask,(uint)*(byte *)(inst + 0xc),
+                       (uint)*(byte *)((int)inst + 0x3f),&defOperand,&tempTablePad);
+          destMaskByte = *(byte *)((int)inst + 0x3b);
         }
-        passThroughR8 = &uStack_88c;
+        passThroughR8 = &tempTablePad;
         passThroughR6 = (uint *)(uint)*(byte *)((int)inst + 0x3f);
-        sourceUsage = &uStack_87c;
-        ((int (*)())psnAccumulateAlphaSelectRead)((uint)bVar9,uVar6,(uint)*(byte *)(inst + 0xc),passThroughR6,&uStack_87c,passThroughR8);
+        sourceUsage = &defOperand;
+        ((int (*)())psnAccumulateAlphaSelectRead)((uint)destMaskByte,workMask,(uint)*(byte *)(inst + 0xc),passThroughR6,&defOperand,passThroughR8);
       }
 code_r0x000c6c50:
-      uVar3 = *(ushort *)((int)inst + 0xe);
-      param_8 = (uint)uVar3;
-      uStack_87c = CONCAT22(uVar3,(*(unsigned short *)((unsigned char *)&(uStack_87c) + 2)));
-      uStack_878 = CONCAT22(*(undefined2 *)(inst + 4),(*(unsigned short *)((unsigned char *)&(uStack_878) + 2)));
-      uStack_874 = CONCAT22(*(undefined2 *)((int)inst + 0x12),(*(unsigned short *)((unsigned char *)&(uStack_874) + 2)));
-      uStack_870 = CONCAT22(*(undefined2 *)((int)inst + 0x1a),(*(unsigned short *)((unsigned char *)&(uStack_870) + 2)));
+      destRegBeforeAssign = *(ushort *)((int)inst + 0xe);
+      scanIndex = (uint)destRegBeforeAssign;
+      defOperand = CONCAT22(destRegBeforeAssign,(*(unsigned short *)((unsigned char *)&(defOperand) + 2)));
+      defOperandPad0 = CONCAT22(*(undefined2 *)(inst + 4),(*(unsigned short *)((unsigned char *)&(defOperandPad0) + 2)));
+      defOperandPad1 = CONCAT22(*(undefined2 *)((int)inst + 0x12),(*(unsigned short *)((unsigned char *)&(defOperandPad1) + 2)));
+      defOperandPad2 = CONCAT22(*(undefined2 *)((int)inst + 0x1a),(*(unsigned short *)((unsigned char *)&(defOperandPad2) + 2)));
       instShort7 = *(ushort *)(inst + 7);
-      uVar6 = (uint)instShort7;
-      uStack_86c = CONCAT22(instShort7,(*(unsigned short *)((unsigned char *)&(uStack_86c) + 2)));
-      uStack_888 = CONCAT22(*(undefined2 *)(inst + 4),(*(unsigned short *)((unsigned char *)&(uStack_888) + 2)));
-      uStack_884 = CONCAT22(*(undefined2 *)((int)inst + 0x1a),(*(unsigned short *)((unsigned char *)&(uStack_884) + 2)));
-      uStack_88c = CONCAT22(uVar3,(*(unsigned short *)((unsigned char *)&(uStack_88c) + 2)));
-      uStack_880 = CONCAT22(instShort7,(*(unsigned short *)((unsigned char *)&(uStack_880) + 2)));
-      uStack_868 = CONCAT22(*(undefined2 *)((int)inst + 0x1e),(*(unsigned short *)((unsigned char *)&(uStack_868) + 2)));
-      ((int (*)())psnRaAssignDefinition)(&uStack_87c,&puStack_898,&puStack_8a8,passThroughR6,sourceUsage,passThroughR8,uVar6,param_8);
-      *(ushort *)((int)inst + 0xe) = (*(unsigned short *)((unsigned char *)&(uStack_87c) + 0));
-      ((int (*)())psnRaAssignDefinition)(&uStack_878,&puStack_898,&puStack_8a8,passThroughR6,sourceUsage,passThroughR8,uVar6,param_8);
-      *(undefined2 *)(inst + 4) = (*(unsigned short *)((unsigned char *)&(uStack_878) + 0));
-      ((int (*)())psnRaAssignDefinition)(&uStack_874,&puStack_898,&puStack_8a8,passThroughR6,sourceUsage,passThroughR8,uVar6,param_8);
-      *(undefined2 *)((int)inst + 0x12) = (*(unsigned short *)((unsigned char *)&(uStack_874) + 0));
-      ((int (*)())psnRaAssignDefinition)(&uStack_870,&puStack_898,&puStack_8a8,passThroughR6,sourceUsage,passThroughR8,uVar6,param_8);
-      *(undefined2 *)((int)inst + 0x1a) = (*(unsigned short *)((unsigned char *)&(uStack_870) + 0));
-      ((int (*)())psnRaAssignDefinition)(&uStack_86c,&puStack_898,&puStack_8a8,passThroughR6,sourceUsage,passThroughR8,uVar6,param_8);
-      *(undefined2 *)(inst + 7) = (*(unsigned short *)((unsigned char *)&(uStack_86c) + 0));
-      ((int (*)())psnRaAssignDefinition)(&uStack_868,&puStack_898,&puStack_8a8,passThroughR6,sourceUsage,passThroughR8,uVar6,param_8);
+      workMask = (uint)instShort7;
+      defOperandPad3 = CONCAT22(instShort7,(*(unsigned short *)((unsigned char *)&(defOperandPad3) + 2)));
+      zeroWordA = CONCAT22(*(undefined2 *)(inst + 4),(*(unsigned short *)((unsigned char *)&(zeroWordA) + 2)));
+      zeroWordB = CONCAT22(*(undefined2 *)((int)inst + 0x1a),(*(unsigned short *)((unsigned char *)&(zeroWordB) + 2)));
+      tempTablePad = CONCAT22(destRegBeforeAssign,(*(unsigned short *)((unsigned char *)&(tempTablePad) + 2)));
+      zeroWordC = CONCAT22(instShort7,(*(unsigned short *)((unsigned char *)&(zeroWordC) + 2)));
+      defOperandPad4 = CONCAT22(*(undefined2 *)((int)inst + 0x1e),(*(unsigned short *)((unsigned char *)&(defOperandPad4) + 2)));
+      ((int (*)())psnRaAssignDefinition)(&defOperand,&tempTableBank0,&freeListBase,passThroughR6,sourceUsage,passThroughR8,workMask,scanIndex);
+      *(ushort *)((int)inst + 0xe) = (*(unsigned short *)((unsigned char *)&(defOperand) + 0));
+      ((int (*)())psnRaAssignDefinition)(&defOperandPad0,&tempTableBank0,&freeListBase,passThroughR6,sourceUsage,passThroughR8,workMask,scanIndex);
+      *(undefined2 *)(inst + 4) = (*(unsigned short *)((unsigned char *)&(defOperandPad0) + 0));
+      ((int (*)())psnRaAssignDefinition)(&defOperandPad1,&tempTableBank0,&freeListBase,passThroughR6,sourceUsage,passThroughR8,workMask,scanIndex);
+      *(undefined2 *)((int)inst + 0x12) = (*(unsigned short *)((unsigned char *)&(defOperandPad1) + 0));
+      ((int (*)())psnRaAssignDefinition)(&defOperandPad2,&tempTableBank0,&freeListBase,passThroughR6,sourceUsage,passThroughR8,workMask,scanIndex);
+      *(undefined2 *)((int)inst + 0x1a) = (*(unsigned short *)((unsigned char *)&(defOperandPad2) + 0));
+      ((int (*)())psnRaAssignDefinition)(&defOperandPad3,&tempTableBank0,&freeListBase,passThroughR6,sourceUsage,passThroughR8,workMask,scanIndex);
+      *(undefined2 *)(inst + 7) = (*(unsigned short *)((unsigned char *)&(defOperandPad3) + 0));
+      ((int (*)())psnRaAssignDefinition)(&defOperandPad4,&tempTableBank0,&freeListBase,passThroughR6,sourceUsage,passThroughR8,workMask,scanIndex);
       *(undefined1 *)(inst + 0xd) = 0;
-      *(undefined2 *)((int)inst + 0x1e) = (*(unsigned short *)((unsigned char *)&(uStack_868) + 0));
+      *(undefined2 *)((int)inst + 0x1e) = (*(unsigned short *)((unsigned char *)&(defOperandPad4) + 0));
       if ((lastVisitedInst != (uint *)0x0) && (*lastVisitedInst - 3 < 2)) {
         loopIndex = 0;
-        passThroughR6 = (uint *)(auStack_8b8 + 4);
+        passThroughR6 = (uint *)(zeroedOperandBlock + 4);
         passThroughR8 = (undefined4 *)(uint)*(ushort *)(inst + 3);
-        param_8 = (uint)*(ushort *)(inst + 6);
-        sourceUsage = &uStack_8ac;
-        uVar6 = -(uint)*(byte *)(inst + 8) >> 0x1c & 8 | (uint)*(byte *)(inst + 5);
+        scanIndex = (uint)*(ushort *)(inst + 6);
+        sourceUsage = &zeroedOperandWord1;
+        workMask = -(uint)*(byte *)(inst + 8) >> 0x1c & 8 | (uint)*(byte *)(inst + 5);
         do {
           if ((passThroughR8 == (undefined4 *)(uint)*(ushort *)(loopIndex + (int)passThroughR6)) &&
-             ((uVar6 & *(ushort *)((int)auStack_8b8 + loopIndex)) != 0)) {
+             ((workMask & *(ushort *)((int)zeroedOperandBlock + loopIndex)) != 0)) {
             *(undefined1 *)(inst + 0xd) = 1;
           }
-          if ((param_8 == *(ushort *)(loopIndex + (int)sourceUsage)) &&
-             ((uVar6 & *(ushort *)((int)auStack_8b8 + loopIndex + 4)) != 0)) {
+          if ((scanIndex == *(ushort *)(loopIndex + (int)sourceUsage)) &&
+             ((workMask & *(ushort *)((int)zeroedOperandBlock + loopIndex + 4)) != 0)) {
             *(undefined1 *)(inst + 0xd) = 1;
           }
-          bVar1 = loopIndex != 2;
+          notLastSlot = loopIndex != 2;
           loopIndex = loopIndex + 2;
-        } while (bVar1);
+        } while (notLastSlot);
       }
-      (*(unsigned short *)((unsigned char *)&(uStack_8b0) + 0)) = *(undefined2 *)((int)inst + 0xe);
-      (*(unsigned short *)((unsigned char *)&(uStack_8b0) + 2)) = *(undefined2 *)(inst + 4);
-      (*(unsigned short *)((unsigned char *)&(uStack_8ac) + 0)) = *(undefined2 *)((int)inst + 0x1a);
-      uVar6 = (uint)*(ushort *)(inst + 7);
-      auStack_8b8[0] = (*(unsigned short *)((unsigned char *)&(uStack_88c) + 2));
-      auStack_8b8[1] = (*(unsigned short *)((unsigned char *)&(uStack_888) + 2));
-      (*(unsigned short *)((unsigned char *)&(uStack_8ac) + 2)) = *(ushort *)(inst + 7);
-      auStack_8b8[2] = (*(unsigned short *)((unsigned char *)&(uStack_884) + 2));
-      auStack_8b8[3] = (*(unsigned short *)((unsigned char *)&(uStack_880) + 2));
+      (*(unsigned short *)((unsigned char *)&(zeroedOperandWord0) + 0)) = *(undefined2 *)((int)inst + 0xe);
+      (*(unsigned short *)((unsigned char *)&(zeroedOperandWord0) + 2)) = *(undefined2 *)(inst + 4);
+      (*(unsigned short *)((unsigned char *)&(zeroedOperandWord1) + 0)) = *(undefined2 *)((int)inst + 0x1a);
+      workMask = (uint)*(ushort *)(inst + 7);
+      zeroedOperandBlock[0] = (*(unsigned short *)((unsigned char *)&(tempTablePad) + 2));
+      zeroedOperandBlock[1] = (*(unsigned short *)((unsigned char *)&(zeroWordA) + 2));
+      (*(unsigned short *)((unsigned char *)&(zeroedOperandWord1) + 2)) = *(ushort *)(inst + 7);
+      zeroedOperandBlock[2] = (*(unsigned short *)((unsigned char *)&(zeroWordB) + 2));
+      zeroedOperandBlock[3] = (*(unsigned short *)((unsigned char *)&(zeroWordC) + 2));
 LAB_000c6e10:
       loopIndex2 = loopIndex2 + 1;
       lastVisitedInst = inst;
       inst = inst + -0x12;
     } while (psnProgramWord8 != loopIndex2);
   }
-  ((int (*)())FUN_000c5e60)(psnProgram);
+  ((int (*)())psnAnalyzeProgram)(psnProgram);
   return;
 }
 
-/* FUN_000c6e40 @ 0xc6e40 (12 bytes) - issue #64 live-repro: a genuine, separate function Ghidra's
+/* scCallbackAlloc @ 0xc6e40 (12 bytes) - issue #64 live-repro: a genuine, separate function Ghidra's
  * initial analysis never split out (no standard prologue - it's a 3-instruction tail-call right
  * after the preceding function's blr, only reachable via the PC-relative function-pointer table
- * scCreateForContext builds; never found by any direct bl/b xref). Confirmed live: FUN_000cd05c calls
+ * scCreateForContext builds; never found by any direct bl/b xref). Confirmed live: scCreate calls
  * *(psnState+0x30) - previously transcribed as the raw literal (unsigned char*)0x000c6e40, which
  * pointed at these bytes as DATA instead of as this function's own real code - as
- * (arg, 0x44, param_3), landing here with psnProgram=0x44 after the ABI drops the 3rd arg; this
+ * (arg, 0x44, useSecondBank), landing here with psnProgram=0x44 after the ABI drops the 3rd arg; this
  * confirmed-real code is or r3,r4,r4 / li r4,1 / b 0x1a3700 (the _calloc picsymbolstub), i.e. this
  * is the allocator half of an alloc/free callback pair with the very next function, scCallbackFree
  * (_free(psnProgram)). Otherwise unreachable without this fix (issue #64). */
-int FUN_000c6e40(psnState, psnProgram)
+int scCallbackAlloc(psnState, psnProgram)
   undefined4 psnState;
   size_t psnProgram;
 {
@@ -10637,13 +10715,13 @@ int scCreateForContext(ctx, useDeviceId)
   undefined4 createInfoWord0;
   undefined4 createInfoVersion;
   undefined4 createInfoWord2;
-  /* issue #64 live-repro: FUN_000cd05c (called below via &chipConfigKind) reads its first argument at
+  /* issue #64 live-repro: scCreate (called below via &chipConfigKind) reads its first argument at
    * byte offsets up to +0x4c (*(ctx+0x30)/+0x34/+0x38/+0x40/+0x44/+0x48/+0x4c), i.e. it expects
    * chipConfigKind through freadCallback (and optionsVersion/compilerHandleOut/allocCallback above them) to be ONE contiguous
    * 0x54-byte buffer - confirmed directly by this function's own "_memset(&chipConfigKind,0,0x54)" a few
    * lines down, not a guess. Left as separate scalars (same defect class as auStack_c148 and
    * local_194 in _gldChoosePixelFormat, both fixed earlier this session), the -O0 rebuild does not
-   * place them contiguously, so FUN_000cd05c's offset reads miss into whatever real stack slot
+   * place them contiguously, so scCreate's offset reads miss into whatever real stack slot
    * happens to be there instead - confirmed live: corrupts far enough to zero this function's own
    * ctx, crashing on the *(ctx+0x186c)=compilerHandle store a few lines below. Merged into one
    * 0x54-byte buffer (offsets confirmed per each name's own hex value, e.g. 0x7c-0x30=0x4c). */
@@ -10689,7 +10767,7 @@ int scCreateForContext(ctx, useDeviceId)
       chipConfigKind = 0x3e;
     }
   }
-  allocCallback = (undefined *)FUN_000c6e40;
+  allocCallback = (undefined *)scCallbackAlloc;
   freeCallback = scCallbackFree;
   optionsVersion = 2;
   getFlagCallback = scCallbackGetFlagZero;
@@ -10700,7 +10778,7 @@ int scCreateForContext(ctx, useDeviceId)
   fwriteCallback = scCallbackFwrite;
   freadCallback = scCallbackFread;
   compilerHandleOut = (undefined4 *)(ctx + 0x186c);
-  compilerHandle = FUN_000cd05c(&chipConfigKind,&createInfoWord0,0x10001);
+  compilerHandle = scCreate(&chipConfigKind,&createInfoWord0,0x10001);
   *(undefined4 *)(ctx + 0x186c) = compilerHandle;
   *(undefined4 *)(ctx + 0x1870) = createInfoVersion;
   return;

@@ -1,0 +1,79 @@
+use	FUN_000bf400	uVar13	recordNumber2	INFERRED	1-based number of the record visited by the second pass	^\s*uVar13\ =\ uVar11;$	+1
+use	FUN_000bf400	uVar13	recordNumber2	INFERRED	1-based number of the record visited by the second pass	^\s*uVar4\ =\ uVar13;$	+1
+use	FUN_000bf400	uVar13	recordNumber2	INFERRED	1-based number of the record visited by the second pass	^\s*uVar13\ =\ uVar13\ \+\ 1;$@2	+1
+use	FUN_000bf400	uVar13	recordNumber2	INFERRED	1-based number of the record visited by the second pass	^\s*\}\ while\ \(uVar13\ <=\ uVar12\);$	+1
+local	FUN_000bf400	uVar17	texRegCount	INFERRED	running count of texture registers consumed by the RS-kind (5) records; more than 4 forces a split
+use	FUN_000bf400	bVar1	needSplit	INFERRED	set when a record's addressing needs a new phase (overflow of registers, dependent reads)	^\s*bVar1\ =\ false;$	+1
+use	FUN_000bf400	bVar1	needSplit	INFERRED	set when a record's addressing needs a new phase (overflow of registers, dependent reads)	^\s*bVar1\ =\ true;$	+1
+use	FUN_000bf400	bVar1	needSplit	INFERRED	set when a record's addressing needs a new phase (overflow of registers, dependent reads)	^\s*bVar1\ =\ true;$@2	+1
+use	FUN_000bf400	bVar1	needSplit	INFERRED	set when a record's addressing needs a new phase (overflow of registers, dependent reads)	^\s*bVar3\ =\ !bVar1;$	+1
+use	FUN_000bf400	bVar1	needSplit	INFERRED	set when a record's addressing needs a new phase (overflow of registers, dependent reads)	^\s*bVar1\ =\ true;$@3	+1
+use	FUN_000bf400	bVar1	anyFlagsSet	INFERRED	OR of the record flag bytes is non-zero	^\s*bVar1\ =\ bVar19\ !=\ 0;$	+1
+use	FUN_000bf400	bVar1	anyFlagsSet	INFERRED	OR of the record flag bytes is non-zero	^\s*if\ \(\(\(!bVar1\)\ \&\&\ \(\*\(char\ \*\)\(puVar14\ \+\ 8\)\ !=\ '\\0'\)\)\ \&\&\ \(uVar15\ !=\ 100000\)\)\ \{$	+1
+use	FUN_000bf400	bVar1	anyFlagsSet	INFERRED	OR of the record flag bytes is non-zero	^\s*if\ \(\(bVar1\)\ \|\|\ \(uVar15\ ==\ 100000\)\)\ \{$	+1
+use	FUN_000bf400	bVar1	anyFlagsSet	INFERRED	OR of the record flag bytes is non-zero	^\s*if\ \(\(!bVar1\)\ \&\&\ \(uVar15\ !=\ 100000\)\)\ \{$	+1
+local	FUN_000bf400	bVar2	channelMaskByte	INFERRED	byte +0x1f of the ALU record: per-channel remap flags 2/4/8
+local	FUN_000bf400	bVar3	splittable	INFERRED	cleared once a kind-5 record cannot be placed in the current phase
+use	FUN_000bf400	uVar4	recordKind	INFERRED	kind word of the record (1 RS, 2 texture, 3 and 4 ALU, 5 control)	^\s*uVar4\ =\ \*puVar14;$	+6
+use	FUN_000bf400	uVar4	recordKind	INFERRED	kind word of the record (1 RS, 2 texture, 3 and 4 ALU, 5 control)	^\s*else\ if\ \(\(uVar4\ ==\ 5\)\ \&\&\ \(bVar19\ =\ bVar19\ \|\ \*\(byte\ \*\)\(puVar14\ \+\ 1\),\ bVar3\)\)\ \{$	+1
+use	FUN_000bf400	uVar4	selectBits	INFERRED	record word +0x10 & 0xff00ff00: texture source select bits	^\s*uVar4\ =\ puVar14\[4\]\ \&\ 0xff00ff00;$	+3
+use	FUN_000bf400	uVar4	selectBits	INFERRED	record word +0x10 & 0xff00ff00: texture source select bits	^\s*if\ \(\(uVar4\ !=\ 0\)\ \&\&\ \(cVar10\ =\ cVar6,\ uVar4\ ==\ 0x100ff00\)\)\ \{$	+1
+use	FUN_000bf400	uVar4	nextPendingRecord	INFERRED	record number to remember for the next pass (100000 = none)	^\s*uVar4\ =\ uVar15;$	+1
+use	FUN_000bf400	uVar4	nextPendingRecord	INFERRED	record number to remember for the next pass (100000 = none)	^\s*uVar4\ =\ uVar13;$	+1
+use	FUN_000bf400	uVar4	nextPendingRecord	INFERRED	record number to remember for the next pass (100000 = none)	^\s*uVar4\ =\ 100000;$	+1
+use	FUN_000bf400	uVar4	nextPendingRecord	INFERRED	record number to remember for the next pass (100000 = none)	^\s*uVar4\ =\ 100000;$@2	+1
+use	FUN_000bf400	uVar4	nextPendingRecord	INFERRED	record number to remember for the next pass (100000 = none)	^\s*uVar4\ =\ 100000;$@3	+1
+use	FUN_000bf400	uVar4	nextPendingRecord	INFERRED	record number to remember for the next pass (100000 = none)	^\s*uVar15\ =\ uVar4;$	+1
+local	FUN_000bf400	cVar5	texDimModeA	INFERRED	texture dimension mode byte at +0x14
+use	FUN_000bf400	cVar6	texDimModeB	INFERRED	texture dimension mode byte at +0x15, or the resolved mode	^\s*cVar6\ =\ \*\(char\ \*\)\(\(int\)puVar14\ \+\ 0x15\);$	+1
+use	FUN_000bf400	cVar6	texDimModeB	INFERRED	texture dimension mode byte at +0x15, or the resolved mode	^\s*if\ \(\(uVar4\ !=\ 0\)\ \&\&\ \(cVar10\ =\ cVar6,\ uVar4\ ==\ 0x100ff00\)\)\ \{$	+2
+use	FUN_000bf400	cVar6	texDimModeB	INFERRED	texture dimension mode byte at +0x15, or the resolved mode	^\s*cVar6\ =\ cVar10;$	+1
+use	FUN_000bf400	cVar6	texDimModeB	INFERRED	texture dimension mode byte at +0x15, or the resolved mode	^\s*if\ \(\(cVar5\ ==\ '\\x01'\)\ \|\|\ \(cVar6\ =\ cVar5,\ cVar5\ !=\ '\\0'\)\)\ \{$	+3
+use	FUN_000bf400	cVar10	texDimModeC	INFERRED	resolved texture dimension mode used to adjust the register count	^\s*cVar10\ =\ cVar5;$	+1
+use	FUN_000bf400	cVar10	texDimModeC	INFERRED	resolved texture dimension mode used to adjust the register count	^\s*if\ \(\(uVar4\ !=\ 0\)\ \&\&\ \(cVar10\ =\ cVar6,\ uVar4\ ==\ 0x100ff00\)\)\ \{$	+1
+use	FUN_000bf400	cVar10	texDimModeC	INFERRED	resolved texture dimension mode used to adjust the register count	^\s*cVar6\ =\ cVar10;$	+1
+use	FUN_000bf400	cVar10	texDimModeC	INFERRED	resolved texture dimension mode used to adjust the register count	^\s*else\ if\ \(cVar10\ ==\ '\\x02'\)\ \{$	+1
+local	FUN_000bf400	uVar7	recordKind2	INFERRED	kind word of the record in the second pass
+local	FUN_000bf400	iVar8	pendingRecordPtr	INFERRED	record whose flags are set when its result is consumed by the next record
+local	FUN_000bf400	piVar9	rsScanPtr	INFERRED	pointer advanced 0x12 words per RS record to find the first non-RS record
+local	FUN_000bf400	uVar12	recordCount	INFERRED	number of instruction records (psnProgram+8)
+use	FUN_000bf400	puVar14	recordPtr	INFERRED	current 0x48-byte instruction record	^\s*puVar14\ =\ \(uint\ \*\)\(param_1\ \+\ uVar11\ \*\ 0x48\);$	+1
+use	FUN_000bf400	puVar14	recordPtr	INFERRED	current 0x48-byte instruction record	^\s*uVar4\ =\ \*puVar14;$	+1
+use	FUN_000bf400	puVar14	recordPtr	INFERRED	current 0x48-byte instruction record	^\s*if\ \(\(uVar4\ ==\ 2\)\ \&\&$	+4
+use	FUN_000bf400	puVar14	recordPtr	INFERRED	current 0x48-byte instruction record	^\s*bVar19\ =\ bVar19\ \|\ \*\(byte\ \*\)\(puVar14\ \+\ 1\);$	+1
+use	FUN_000bf400	puVar14	recordPtr	INFERRED	current 0x48-byte instruction record	^\s*else\ if\ \(\(uVar4\ ==\ 5\)\ \&\&\ \(bVar19\ =\ bVar19\ \|\ \*\(byte\ \*\)\(puVar14\ \+\ 1\),\ bVar3\)\)\ \{$	+2
+use	FUN_000bf400	puVar14	recordPtr	INFERRED	current 0x48-byte instruction record	^\s*uVar4\ =\ puVar14\[4\]\ \&\ 0xff00ff00;$	+3
+use	FUN_000bf400	puVar14	recordPtr	INFERRED	current 0x48-byte instruction record	^\s*cVar5\ =\ \*\(char\ \*\)\(puVar14\ \+\ 5\);$	+2
+use	FUN_000bf400	puVar14	recordPtr	INFERRED	current 0x48-byte instruction record	^\s*uVar17\ =\ uVar17\ \-\ \*\(byte\ \*\)\(\(int\)puVar14\ \+\ 0x13\);$	+1
+use	FUN_000bf400	puVar14	recordPtr	INFERRED	current 0x48-byte instruction record	^\s*puVar14\ =\ puVar14\ \+\ 0x12;$	+1
+use	FUN_000bf400	puVar14	recordPtr	INFERRED	current 0x48-byte instruction record	^\s*puVar14\ =\ \(uint\ \*\)\(param_1\ \+\ uVar11\ \*\ 0x48\);$@2	+1
+use	FUN_000bf400	puVar14	recordPtr	INFERRED	current 0x48-byte instruction record	^\s*puVar16\ =\ \(undefined1\ \*\)\(\(int\)puVar14\ \+\ \-3\);$	+1
+use	FUN_000bf400	puVar14	recordPtr	INFERRED	current 0x48-byte instruction record	^\s*uVar7\ =\ \*puVar14;$	+1
+use	FUN_000bf400	puVar14	recordPtr	INFERRED	current 0x48-byte instruction record	^\s*\*\(undefined1\ \*\)\(\(int\)puVar14\ \+\ 0x1d\)\ =\ 7;$	+3
+use	FUN_000bf400	puVar14	recordPtr	INFERRED	current 0x48-byte instruction record	^\s*bVar2\ =\ \*\(byte\ \*\)\(\(int\)puVar14\ \+\ 0x1f\);$	+1
+use	FUN_000bf400	puVar14	recordPtr	INFERRED	current 0x48-byte instruction record	^\s*puVar14\[5\]\ =\ puVar14\[5\]\ >>\ 2\ \&\ 0x300000\ \|\ puVar14\[5\]\ \&\ 0xffcfffff;$	+1
+use	FUN_000bf400	puVar14	recordPtr	INFERRED	current 0x48-byte instruction record	^\s*puVar14\[5\]\ =\ puVar14\[5\]\ >>\ 4\ \&\ 0xc0000\ \|\ puVar14\[5\]\ \&\ 0xfff3ffff;$	+1
+use	FUN_000bf400	puVar14	recordPtr	INFERRED	current 0x48-byte instruction record	^\s*puVar14\[5\]\ =\ puVar14\[5\]\ >>\ 6\ \&\ 0x30000\ \|\ puVar14\[5\]\ \&\ 0xfffcffff;$	+1
+use	FUN_000bf400	puVar14	recordPtr	INFERRED	current 0x48-byte instruction record	^\s*if\ \(\(\(!bVar1\)\ \&\&\ \(\*\(char\ \*\)\(puVar14\ \+\ 8\)\ !=\ '\\0'\)\)\ \&\&\ \(uVar15\ !=\ 100000\)\)\ \{$	+1
+use	FUN_000bf400	puVar14	recordPtr	INFERRED	current 0x48-byte instruction record	^\s*\*\(undefined1\ \*\)\(puVar14\ \+\ 1\)\ =\ 1;$	+1
+use	FUN_000bf400	puVar14	recordPtr	INFERRED	current 0x48-byte instruction record	^\s*if\ \(\(\(\*\(char\ \*\)\(\(int\)puVar14\ \+\ 0x15\)\ ==\ '\\0'\)\ \&\&\ \(\(puVar14\[8\]\ \&\ 0xff00ff\)\ ==\ 0\)\)\ \&\&$	+3
+use	FUN_000bf400	puVar14	recordPtr	INFERRED	current 0x48-byte instruction record	^\s*\*\(undefined1\ \*\)\(puVar14\ \+\ 1\)\ =\ 1;$@2	+1
+use	FUN_000bf400	puVar14	recordPtr	INFERRED	current 0x48-byte instruction record	^\s*\*\(undefined1\ \*\)\(puVar14\ \+\ 1\)\ =\ 1;$@3	+1
+use	FUN_000bf400	puVar14	recordPtr	INFERRED	current 0x48-byte instruction record	^\s*if\ \(\(\(\(byte\)\(\*\(byte\ \*\)\(\(int\)puVar14\ \+\ 0x12\)\ \&\ 0xf0\)\ ==$	+3
+use	FUN_000bf400	puVar14	recordPtr	INFERRED	current 0x48-byte instruction record	^\s*puVar14\ =\ puVar14\ \+\ 0x12;$@2	+1
+use	FUN_000bf400	uVar15	recordNumber	INFERRED	1-based number of the record visited by the first pass	^\s*uVar15\ =\ uVar11;$	+1
+use	FUN_000bf400	uVar15	recordNumber	INFERRED	1-based number of the record visited by the first pass	^\s*uVar15\ =\ uVar15\ \+\ 1;$	+1
+use	FUN_000bf400	uVar15	recordNumber	INFERRED	1-based number of the record visited by the first pass	^\s*\}\ while\ \(uVar15\ <=\ uVar12\);$	+1
+use	FUN_000bf400	uVar15	pendingRecord	INFERRED	number of the record waiting for its consumer; 100000 = none	^\s*uVar15\ =\ 100000;$	+1
+use	FUN_000bf400	uVar15	pendingRecord	INFERRED	number of the record waiting for its consumer; 100000 = none	^\s*uVar4\ =\ uVar15;$	+1
+use	FUN_000bf400	uVar15	pendingRecord	INFERRED	number of the record waiting for its consumer; 100000 = none	^\s*if\ \(\(\(!bVar1\)\ \&\&\ \(\*\(char\ \*\)\(puVar14\ \+\ 8\)\ !=\ '\\0'\)\)\ \&\&\ \(uVar15\ !=\ 100000\)\)\ \{$	+2
+use	FUN_000bf400	uVar15	pendingRecord	INFERRED	number of the record waiting for its consumer; 100000 = none	^\s*if\ \(\(bVar1\)\ \|\|\ \(uVar15\ ==\ 100000\)\)\ \{$	+1
+use	FUN_000bf400	uVar15	pendingRecord	INFERRED	number of the record waiting for its consumer; 100000 = none	^\s*iVar8\ =\ param_1\ \+\ uVar15\ \*\ 0x48;$@2	+1
+use	FUN_000bf400	uVar15	pendingRecord	INFERRED	number of the record waiting for its consumer; 100000 = none	^\s*if\ \(\(!bVar1\)\ \&\&\ \(uVar15\ !=\ 100000\)\)\ \{$	+2
+use	FUN_000bf400	uVar15	pendingRecord	INFERRED	number of the record waiting for its consumer; 100000 = none	^\s*uVar15\ =\ uVar4;$	+1
+local	FUN_000bf400	puVar16	flagPtr	INFERRED	record pointer - 3: flag byte of the previous record's consumer (+0x45)
+local	FUN_000bf400	uVar18	hasHighAddress	INFERRED	non-zero when some texture record uses an address in the high range (word +0x1c & 0xffff00)
+local	FUN_000bf400	bVar19	usedFlags	INFERRED	OR of the use flag bytes of all records
+local	FUN_000bf400	param_2	wantedPhaseCount	INFERRED	requested number of phases; replicated to both nibbles of psnProgram+0xf
+local	FUN_000bf400	param_1	psnProgram	INFERRED	decoded program (records of 0x48 bytes from +0x48)
+func	FUN_000bf400	psnPlanPhases	INFERRED	scans the decoded records and decides how many phases (psnProgram+0xf, +0x12, +0x22, +0x28) the program needs: counts texture registers, detects dependent reads and flags records whose results feed the next phase

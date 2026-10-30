@@ -3956,7 +3956,7 @@ int FUN_00087e80(param_1, fpRecord, workArea, keyWords)
   int workAreaState;
   int iVar9;
   /* local_48/local_44/local_40/local_3c/local_38/local_34/local_30 are one contiguous 7-word array
-   * (&local_48 passed to FUN_000b4400, which internally indexes it keyWords[0]..keyWords[6] - and that
+   * (&local_48 passed to gld_compileILProgram, which internally indexes it keyWords[0]..keyWords[6] - and that
    * value flows straight through into ilRewriteForTextureState as its own keyWords, where keyWords[1] seeds a loop
    * counter). Declared as 7 separate scalars, they landed non-adjacent at -O0 (confirmed live: the
    * value ilRewriteForTextureState read via keyWords[1] was heap-garbage-sized, not the small local_44 value),
@@ -3997,7 +3997,7 @@ int FUN_00087e80(param_1, fpRecord, workArea, keyWords)
   if (fpRecord != 0) {
     *(undefined4 *)(((unsigned char *)0x000011fc) + workArea) = 0;
     iVar9 = *(int *)(fpRecord + 0x74);
-    iVar4 = FUN_000abb60(param_1);
+    iVar4 = gld_getBoundProgramId(param_1);
     if (iVar4 == 0x801) {
       local_3c = local_3c | 0xc;
     }
@@ -4040,7 +4040,7 @@ LAB_00088008:
     uVar2 = local_3c | 0x280;
   }
   local_3c = uVar2;
-  iVar4 = FUN_000b4400(param_1,workArea + 0x18a8,workArea + 0x1784,&local_48,workAreaState);
+  iVar4 = gld_compileILProgram(param_1,workArea + 0x18a8,workArea + 0x1784,&local_48,workAreaState);
 #undef local_48
 #undef local_44
 #undef local_40

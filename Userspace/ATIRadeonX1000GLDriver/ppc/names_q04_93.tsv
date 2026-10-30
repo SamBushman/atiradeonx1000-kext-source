@@ -1,0 +1,72 @@
+use	FUN_000afe40	iVar11	instanceSlotOffset	INFERRED	unit index (ctx+0x1130) * 4: offset into the program instance table	^\s*iVar11\ =\ \*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001130\)\ \+\ param_1\)\ \*\ 4;$	+2
+use	FUN_000afe40	iVar11	instanceSlotOffset	INFERRED	unit index (ctx+0x1130) * 4: offset into the program instance table	^\s*\*\(undefined4\ \*\)\(iVar11\ \+\ uVar8\)\ =\ uVar4;$	+1
+use	FUN_000afe40	iVar11	instanceSlotOffset	INFERRED	unit index (ctx+0x1130) * 4: offset into the program instance table	^\s*\*\(undefined4\ \*\)\(iVar11\ \+\ uVar8\)\ =\ 0;$	+1
+use	FUN_000afe40	iVar11	paramCount	INFERRED	number of local parameters of the program state (+0x84)	^\s*iVar11\ =\ \*\(int\ \*\)\(pcVar18\ \+\ 0x84\);$	+1
+use	FUN_000afe40	iVar11	paramCount	INFERRED	number of local parameters of the program state (+0x84)	^\s*if\ \(0\ <\ iVar11\)\ \{$	+1
+use	FUN_000afe40	iVar11	paramCount	INFERRED	number of local parameters of the program state (+0x84)	^\s*iVar11\ =\ \*\(int\ \*\)\(pcVar18\ \+\ 0x84\);$@2	+1
+use	FUN_000afe40	iVar11	paramCount	INFERRED	number of local parameters of the program state (+0x84)	^\s*\}\ while\ \(iVar15\ <\ iVar11\);$	+1
+use	FUN_000afe40	iVar11	tokenByteOffset	INFERRED	token count * 4: byte offset of the next token	^\s*iVar11\ =\ local_1ec\ \*\ 4;$	+2
+use	FUN_000afe40	iVar11	tokenByteOffset	INFERRED	token count * 4: byte offset of the next token	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\(\(unsigned\ char\ \*\)0x00001288\)\ \+\ param_1\)\)\(param_1,a1,a2,local_5c,in_r7,in_r8,iVar11\);$	+1
+use	FUN_000afe40	iVar11	tokenByteOffset	INFERRED	token count * 4: byte offset of the next token	^\s*if\ \(iVar11\ <\ 0\)\ \{$	+1
+use	FUN_000afe40	iVar11	tokenByteOffset	INFERRED	token count * 4: byte offset of the next token	^\s*if\ \(iVar11\ ==\ \-1\)\ \{$	+1
+use	FUN_000afe40	iVar11	errorTextLength	INFERRED	strlen of the resource-error message	^\s*iVar11\ =\ _strlen\(auStack_170\);$	+2
+use	FUN_000afe40	iVar11	scanResult	INFERRED	result of gld_scanProgramTokens (0 = bad IL)	^\s*iVar11\ =\ \(\(int\ \(\*\)\(\)\)FUN_000abd10\)\(param_1,a1,param_4\);$	+2
+use	FUN_000afe40	iVar11	compileResult	INFERRED	result of the compile callback at ctx+0x1288: -1 resources exceeded, -2 failed	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\(\(unsigned\ char\ \*\)0x00001288\)\ \+\ param_1\)\)\(param_1,a1,a2,param_4\);$	+1
+use	FUN_000afe40	iVar11	compileResult	INFERRED	result of the compile callback at ctx+0x1288: -1 resources exceeded, -2 failed	^\s*if\ \(iVar11\ ==\ \-1\)\ \{$@2	+1
+use	FUN_000afe40	iVar11	compileResult	INFERRED	result of the compile callback at ctx+0x1288: -1 resources exceeded, -2 failed	^\s*if\ \(iVar11\ ==\ \-2\)\ \{$	+1
+use	FUN_000afe40	uVar4	newInstance	INFERRED	program instance object created through the callbacks at ctx+0x10 / +0x1284	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(\(\(unsigned\ char\ \*\)0x00001284\)\ \+\ param_1\)\)\(param_1\);$	+3
+use	FUN_000afe40	uVar4	newInstance	INFERRED	program instance object created through the callbacks at ctx+0x10 / +0x1284	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(\(\(unsigned\ char\ \*\)0x00001284\)\ \+\ param_1\)\)\(param_1\);$@2	+3
+use	FUN_000afe40	uVar4	paramConstWord	INFERRED	word of the program parameter vector appended to the token stream	^\s*uVar4\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(iVar17\ \+\ 0xc\)\ \*\ 0x10\ \+\ \*\(int\ \*\)\(pcVar18\ \+\ 0x8c\)\);$	+1
+use	FUN_000afe40	uVar4	paramConstWord	INFERRED	word of the program parameter vector appended to the token stream	^\s*\*\(undefined4\ \*\)\(local_1ec\ \*\ 4\ \+\ local_1e4\)\ =\ uVar4;$	+1
+use	FUN_000afe40	uVar4	paramConstWord	INFERRED	word of the program parameter vector appended to the token stream	^\s*uVar4\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(iVar17\ \+\ 0xc\)\ \*\ 0x10\ \+\ \*\(int\ \*\)\(pcVar18\ \+\ 0x8c\)\ \+\ 4\);$	+1
+use	FUN_000afe40	uVar4	paramConstWord	INFERRED	word of the program parameter vector appended to the token stream	^\s*\*\(undefined4\ \*\)\(local_1ec\ \*\ 4\ \+\ local_1e4\)\ =\ uVar4;$@2	+1
+use	FUN_000afe40	uVar4	paramConstWord	INFERRED	word of the program parameter vector appended to the token stream	^\s*uVar4\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(iVar17\ \+\ 0xc\)\ \*\ 0x10\ \+\ \*\(int\ \*\)\(pcVar18\ \+\ 0x8c\)\ \+\ 8\);$	+1
+use	FUN_000afe40	uVar4	paramConstWord	INFERRED	word of the program parameter vector appended to the token stream	^\s*\*\(undefined4\ \*\)\(local_1ec\ \*\ 4\ \+\ local_1e4\)\ =\ uVar4;$@3	+1
+use	FUN_000afe40	uVar4	paramConstWord	INFERRED	word of the program parameter vector appended to the token stream	^\s*uVar4\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(iVar17\ \+\ 0xc\)\ \*\ 0x10\ \+\ \*\(int\ \*\)\(pcVar18\ \+\ 0x8c\)\ \+\ 0xc\);$	+1
+use	FUN_000afe40	uVar4	paramConstWord	INFERRED	word of the program parameter vector appended to the token stream	^\s*\*\(undefined4\ \*\)\(local_1ec\ \*\ 4\ \+\ local_1e4\)\ =\ uVar4;$@4	+1
+use	FUN_000afe40	uVar4	failedInstance	INFERRED	instance pointer saved before it is cleared after a failed compile	^\s*uVar4\ =\ \*\(undefined4\ \*\)\(iVar19\ \*\ 4\ \+\ iVar15\);$	+1
+use	FUN_000afe40	uVar4	failedInstance	INFERRED	instance pointer saved before it is cleared after a failed compile	^\s*\(\*\*\(code\ \*\*\)\(\(\(unsigned\ char\ \*\)0x00001224\)\ \+\ param_1\)\)\(param_1,uVar4\);$	+1
+use	FUN_000afe40	uVar4	failedInstance	INFERRED	instance pointer saved before it is cleared after a failed compile	^\s*uVar4\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001130\)\ \+\ param_1\)\ \*\ 4\ \+\ \*\(int\ \*\)\(a1\ \+\ 0x70\)\);$	+1
+use	FUN_000afe40	iVar15	paramRecord	INFERRED	0x14-byte program parameter record (kind at +8, value at +4)	^\s*iVar15\ =\ iVar11\ \*\ 0x14\ \+\ \*\(int\ \*\)\(iVar19\ \+\ 0x80\);$	+2
+use	FUN_000afe40	iVar15	paramRecord	INFERRED	0x14-byte program parameter record (kind at +8, value at +4)	^\s*param_4\ =\ \*\(uint\ \*\*\)\(iVar15\ \+\ 4\);$	+1
+use	FUN_000afe40	iVar15	paramRecord	INFERRED	0x14-byte program parameter record (kind at +8, value at +4)	^\s*\(param_1,a2,iVar11,param_4,$	+2
+use	FUN_000afe40	iVar15	paramRecord	INFERRED	0x14-byte program parameter record (kind at +8, value at +4)	^\s*FUN_0008ebb0\(param_1,iVar15,\&local_1e0,param_4\);$	+2
+use	FUN_000afe40	uVar5	tokenCountCache	INFERRED	token count kept in a local while the declaration tokens are appended	^\s*uVar5\ =\ local_1ec;$	+1
+use	FUN_000afe40	uVar5	tokenCountCache	INFERRED	token count kept in a local while the declaration tokens are appended	^\s*if\ \(local_1e8\ <=\ uVar5\)\ \{$	+1
+use	FUN_000afe40	uVar5	tokenCountCache	INFERRED	token count kept in a local while the declaration tokens are appended	^\s*uVar5\ =\ local_1ec;$@2	+1
+use	FUN_000afe40	uVar5	tokenCountCache	INFERRED	token count kept in a local while the declaration tokens are appended	^\s*\*\(uint\ \*\)\(uVar5\ \*\ 4\ \+\ local_1e4\)\ =\ uVar8;$	+3
+use	FUN_000afe40	uVar5	tokenCountCache	INFERRED	token count kept in a local while the declaration tokens are appended	^\s*if\ \(local_1e8\ <=\ uVar5\)\ \{$@2	+1
+use	FUN_000afe40	uVar5	tokenCountCache	INFERRED	token count kept in a local while the declaration tokens are appended	^\s*uVar5\ =\ local_1ec;$@3	+1
+use	FUN_000afe40	uVar5	tokenCountCache	INFERRED	token count kept in a local while the declaration tokens are appended	^\s*\*\(undefined4\ \*\)\(uVar5\ \*\ 4\ \+\ local_1e4\)\ =\ 0x1ff0016;$	+1
+use	FUN_000afe40	uVar5	tokenCountCache	INFERRED	token count kept in a local while the declaration tokens are appended	^\s*uVar5\ =\ local_1ec\ \+\ 1;$@2	+2
+use	FUN_000afe40	uVar5	tokenCountCache	INFERRED	token count kept in a local while the declaration tokens are appended	^\s*if\ \(local_1e8\ <=\ uVar5\)\ \{$@3	+1
+use	FUN_000afe40	uVar5	tokenCountCache	INFERRED	token count kept in a local while the declaration tokens are appended	^\s*uVar5\ =\ local_1ec;$@4	+1
+use	FUN_000afe40	uVar5	tokenCountCache	INFERRED	token count kept in a local while the declaration tokens are appended	^\s*\*\(undefined4\ \*\)\(uVar5\ \*\ 4\ \+\ local_1e4\)\ =\ 0x1c;$	+1
+use	FUN_000afe40	uVar5	tokenCountCache	INFERRED	token count kept in a local while the declaration tokens are appended	^\s*uVar5\ =\ local_1ec\ \+\ 1;$@3	+1
+use	FUN_000afe40	uVar5	tokenCountCache	INFERRED	token count kept in a local while the declaration tokens are appended	^\s*local_1ec\ =\ uVar5;$@3	+1
+use	FUN_000afe40	uVar5	tokenCountCache	INFERRED	token count kept in a local while the declaration tokens are appended	^\s*if\ \(local_1e8\ <=\ uVar5\)\ \{$@4	+1
+use	FUN_000afe40	uVar5	tokenCountCache	INFERRED	token count kept in a local while the declaration tokens are appended	^\s*uVar5\ =\ local_1ec;$@5	+1
+use	FUN_000afe40	uVar5	tokenCountCache	INFERRED	token count kept in a local while the declaration tokens are appended	^\s*\*\(undefined4\ \*\)\(uVar5\ \*\ 4\ \+\ local_1e4\)\ =\ 0x47;$	+1
+use	FUN_000afe40	uVar5	tokenCountCache	INFERRED	token count kept in a local while the declaration tokens are appended	^\s*uVar5\ =\ local_1ec;$@6	+1
+local	FUN_000afe40	a2	programInstance	INFERRED	compiled program instance for the current unit
+local	FUN_000afe40	a1	boundProgram	INFERRED	bound fragment program object (ctx+0x121c)
+use	FUN_000afe40	uVar8	instanceTable	INFERRED	boundProgram+0x70: table of program instances per unit	^\s*uVar8\ =\ \*\(uint\ \*\)\(a1\ \+\ 0x70\);$	+1
+use	FUN_000afe40	uVar8	instanceTable	INFERRED	boundProgram+0x70: table of program instances per unit	^\s*a2\ =\ \*\(char\ \*\*\)\(iVar11\ \+\ uVar8\);$	+1
+use	FUN_000afe40	uVar8	instanceTable	INFERRED	boundProgram+0x70: table of program instances per unit	^\s*\*\(undefined4\ \*\)\(iVar11\ \+\ uVar8\)\ =\ uVar4;$	+1
+use	FUN_000afe40	uVar8	instanceTable	INFERRED	boundProgram+0x70: table of program instances per unit	^\s*\*\(undefined4\ \*\)\(iVar11\ \+\ uVar8\)\ =\ 0;$	+1
+use	FUN_000afe40	uVar8	instanceTable	INFERRED	boundProgram+0x70: table of program instances per unit	^\s*uVar8\ =\ \*\(uint\ \*\)\(a1\ \+\ 0x70\);$@2	+1
+use	FUN_000afe40	uVar8	instanceTable	INFERRED	boundProgram+0x70: table of program instances per unit	^\s*\*\(undefined4\ \*\)\(iVar11\ \*\ 4\ \+\ uVar8\)\ =\ uVar4;$	+1
+use	FUN_000afe40	uVar8	instanceTable	INFERRED	boundProgram+0x70: table of program instances per unit	^\s*uVar8\ =\ 0x3ff0016;$	+1
+use	FUN_000afe40	uVar8	instanceTable	INFERRED	boundProgram+0x70: table of program instances per unit	^\s*uVar8\ =\ uVar16\ <<\ 0x10\ \|\ 0x8000019;$	+1
+use	FUN_000afe40	uVar8	instanceTable	INFERRED	boundProgram+0x70: table of program instances per unit	^\s*uVar8\ =\ uVar16\ <<\ 0x10\ \|\ 0x9000019;$	+1
+use	FUN_000afe40	uVar8	instanceTable	INFERRED	boundProgram+0x70: table of program instances per unit	^\s*uVar8\ =\ uVar16\ <<\ 0x10\ \|\ 0xa000019;$	+1
+use	FUN_000afe40	uVar8	instanceTable	INFERRED	boundProgram+0x70: table of program instances per unit	^\s*uVar8\ =\ uVar16\ <<\ 0x10\ \|\ 0xb000019;$	+1
+use	FUN_000afe40	uVar8	instanceTable	INFERRED	boundProgram+0x70: table of program instances per unit	^\s*uVar8\ =\ uVar16\ <<\ 0x10\ \|\ 0xc000019;$	+1
+use	FUN_000afe40	uVar8	instanceTable	INFERRED	boundProgram+0x70: table of program instances per unit	^\s*uVar8\ =\ uVar16\ <<\ 0x10\ \|\ 0x12000019;$	+1
+use	FUN_000afe40	uVar8	instanceTable	INFERRED	boundProgram+0x70: table of program instances per unit	^\s*\*\(uint\ \*\)\(uVar5\ \*\ 4\ \+\ local_1e4\)\ =\ uVar8;$	+1
+use	FUN_000afe40	uVar8	constDeclToken	INFERRED	0x10000 | register: constant declaration token	^\s*uVar8\ =\ 0x10000;$	+1
+use	FUN_000afe40	uVar8	constDeclToken	INFERRED	0x10000 | register: constant declaration token	^\s*uVar8\ =\ \*\(uint\ \*\)\(iVar17\ \+\ 4\)\ \&\ 0xffff\ \|\ uVar8\ \&\ 0xffff0000;$	+1
+use	FUN_000afe40	uVar8	constDeclToken	INFERRED	0x10000 | register: constant declaration token	^\s*\*\(uint\ \*\)\(local_1ec\ \*\ 4\ \+\ local_1e4\)\ =\ uVar8;$	+1
+local	FUN_000afe40	iVar17	paramRecordA	INFERRED	0x14-byte program parameter record of the 0x34 (local constant) kind
+local	FUN_000afe40	param_2	forceRecompile	INFERRED	1 forces a recompile even when the instance is already compiled
+func	FUN_000afe40	gld_compileFragmentProgram	INFERRED	builds the instance table entry for the bound fragment program and translates its IL records (0x70 bytes: destination plus three source operands) into tokens through gld_emitInstructionTokens / gld_emitFormatConvertTokens, then compiles them through the callback at ctx+0x1288; failure texts "Fragment program exceeded native resources" / "program had bad or unsupported IL"

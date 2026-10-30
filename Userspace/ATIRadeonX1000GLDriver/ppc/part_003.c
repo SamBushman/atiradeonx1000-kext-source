@@ -5726,7 +5726,7 @@ int _gldInitDispatch(ctx, dispatch, savedState, updateArg3, updateArg4)
   savedState[5] = word1;
   *(undefined4 **)(ctx + GLD_dispatchTable) = dispatch;
   do {
-    staleFprArg1 = (double)FUN_000a82c0(ctx,unit);
+    staleFprArg1 = (double)gld_dropStaleTextureShadow(ctx,unit);
     entry = PTR_FUN_001e8950;
     moreUnits = unit != 0xf;
     unit = unit + 1;

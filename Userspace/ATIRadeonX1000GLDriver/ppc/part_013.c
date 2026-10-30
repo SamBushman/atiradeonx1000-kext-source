@@ -4074,7 +4074,7 @@ void gldValidateState(int glContext,undefined4 param_2,undefined4 param_3,undefi
   }
   dirtyMask2 = *(uint *)(glContext + 0x1808) & 0x20000000;
   if (dirtyMask2 != 0) {
-    fparam_1 = (double)FUN_000a4980(glContext,param_2,param_3,param_4,param_5);
+    fparam_1 = (double)gld_buildSmoothPointMask(glContext,param_2,param_3,param_4,param_5);
     param_2 = extraout_r4;
   }
   dirtyMask = *(uint *)(glContext + 0x38);
@@ -4131,7 +4131,7 @@ void gldValidateState(int glContext,undefined4 param_2,undefined4 param_3,undefi
         param_2 = extraout_r4_09;
       }
       if ((dirtyMask & 0x20) != 0) {
-        ((void (*)())FUN_000bd9a0)(glContext,param_2,param_3,param_4,fparam_1);
+        ((void (*)())gld_emitLightingStatePacket)(glContext,param_2,param_3,param_4,fparam_1);
         dirtyMask = *(uint *)(glContext + 0x38);
         param_2 = extraout_r4_10;
       }

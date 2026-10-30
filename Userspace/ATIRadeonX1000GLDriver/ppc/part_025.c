@@ -1886,7 +1886,7 @@ int ConstRecord__findInTable(constTables, constRecord)
   /* issue #64 live-repro (crash #4, past the case-0x28 fix): local_2c/local_28/local_24/
    * local_20/local_1c were 5 SEPARATELY declared locals that selectedTable's pointer arithmetic
    * (`selectedTable = selectedTable + 1`, below) treats as one contiguous 5-word array - the same
-   * Ghidra local-splitting defect class already fixed in FUN_000fd5c8 and FUN_000b6580's
+   * Ghidra local-splitting defect class already fixed in FUN_000fd5c8 and ffpsBuildProgram's
    * local_68 cluster. An initial fix just gave local_2c a value (matching the +4-per-slot
    * source pattern the other four follow: local_28=constTables+8, local_24=+0xc, local_20=+0x10,
    * local_1c=+0x14, so local_2c=+4) but that alone was insufficient: live-verified via a real

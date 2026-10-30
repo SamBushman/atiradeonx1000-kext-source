@@ -1,0 +1,116 @@
+use	FUN_000be460	uVar1	regWord	INFERRED	16-bit register field (+0xe) of the ALU record	^\s*uVar1\ =\ \*\(ushort\ \*\)\(\(int\)puVar10\ \+\ 0xe\);$	+4
+use	FUN_000be460	uVar9	rsOutIndex	INFERRED	number of RS words written so far	^\s*uVar9\ =\ 0;$	+1
+use	FUN_000be460	uVar9	rsOutIndex	INFERRED	number of RS words written so far	^\s*uVar17\ =\ uVar9;$	+1
+use	FUN_000be460	uVar9	rsOutIndex	INFERRED	number of RS words written so far	^\s*uVar17\ =\ uVar9\ \+\ 1;$	+2
+use	FUN_000be460	uVar9	rsOutIndex	INFERRED	number of RS words written so far	^\s*param_2\[uVar9\ \+\ 1\]\ =\ bVar19\ \&\ 0xf;$	+1
+use	FUN_000be460	uVar9	rsOutIndex	INFERRED	number of RS words written so far	^\s*param_2\[uVar9\ \+\ 1\]\ =\ uVar7;$	+1
+use	FUN_000be460	uVar9	rsOutIndex	INFERRED	number of RS words written so far	^\s*param_2\[uVar9\ \+\ 1\]\ =\ uVar7;$@2	+1
+use	FUN_000be460	uVar9	rsOutIndex	INFERRED	number of RS words written so far	^\s*param_2\[uVar9\ \+\ 1\]\ =\ uVar7;$@3	+1
+use	FUN_000be460	uVar9	rsOutIndex	INFERRED	number of RS words written so far	^\s*param_2\[uVar9\ \+\ 1\]\ =\ uVar7;$@4	+1
+use	FUN_000be460	uVar9	rsOutIndex	INFERRED	number of RS words written so far	^\s*param_2\[uVar9\ \+\ 1\]\ =\ uVar7;$@5	+1
+use	FUN_000be460	uVar9	rsOutIndex	INFERRED	number of RS words written so far	^\s*param_2\[uVar9\ \+\ 1\]\ =\ uVar7;$@6	+2
+use	FUN_000be460	uVar9	rsOutIndex	INFERRED	number of RS words written so far	^\s*uVar9\ =\ uVar17;$	+1
+use	FUN_000be460	uVar9	rsCountMasked	INFERRED	RS word count & 0xff, or 1 for the empty case	^\s*uVar9\ =\ uVar17\ \&\ 0xff;$	+1
+use	FUN_000be460	uVar9	rsCountMasked	INFERRED	RS word count & 0xff, or 1 for the empty case	^\s*uVar9\ =\ 1;$	+1
+use	FUN_000be460	uVar9	rsCountMasked	INFERRED	RS word count & 0xff, or 1 for the empty case	^\s*uVar9\ =\ uVar9\ \-\ 1\ \&\ 0xf;$	+3
+use	FUN_000be460	iVar3	texByteOffset	INFERRED	(texture base + index) * 4: byte offset into the texture instruction word arrays	^\s*iVar3\ =\ \(uVar17\ \+\ uVar22\)\ \*\ 4;$	+5
+use	FUN_000be460	iVar3	texByteOffset	INFERRED	(texture base + index) * 4: byte offset into the texture instruction word arrays	^\s*\*\(uint\ \*\)\(iVar3\ \+\ param_3\[7\]\)\ \&\ 0xfffff83f;$	+2
+use	FUN_000be460	iVar3	texByteOffset	INFERRED	(texture base + index) * 4: byte offset into the texture instruction word arrays	^\s*\*\(uint\ \*\)\(iVar3\ \+\ param_3\[7\]\)\ \&\ 0xffff87ff;$	+2
+use	FUN_000be460	iVar3	texByteOffset	INFERRED	(texture base + index) * 4: byte offset into the texture instruction word arrays	^\s*\*\(uint\ \*\)\(iVar3\ \+\ param_3\[7\]\)\ \&\ 0xfffc7fff;$	+2
+use	FUN_000be460	iVar3	texByteOffset	INFERRED	(texture base + index) * 4: byte offset into the texture instruction word arrays	^\s*\*\(uint\ \*\)\(iVar3\ \+\ param_3\[7\]\)\ \&\ 0xfff7ffff;$	+3
+use	FUN_000be460	iVar3	aluByteOffset	INFERRED	hardware ALU index * 4: byte offset into the ALU word arrays (programImage[8..0xc])	^\s*iVar3\ =\ iVar13\ \*\ 4;$	+2
+use	FUN_000be460	iVar3	aluByteOffset	INFERRED	hardware ALU index * 4: byte offset into the ALU word arrays (programImage[8..0xc])	^\s*\*\(uint\ \*\)\(iVar3\ \+\ param_3\[8\]\)\ =\ uVar8\ \|\ \*\(uint\ \*\)\(iVar3\ \+\ param_3\[8\]\)\ \&\ 0xffffffc0;$	+1
+use	FUN_000be460	iVar3	aluByteOffset	INFERRED	hardware ALU index * 4: byte offset into the ALU word arrays (programImage[8..0xc])	^\s*\*\(uint\ \*\)\(iVar3\ \+\ param_3\[8\]\)\ =\ uVar8\ <<\ 6\ \|\ \*\(uint\ \*\)\(iVar3\ \+\ param_3\[8\]\)\ \&\ 0xfffff03f;$	+1
+use	FUN_000be460	iVar3	aluByteOffset	INFERRED	hardware ALU index * 4: byte offset into the ALU word arrays (programImage[8..0xc])	^\s*\*\(uint\ \*\)\(iVar3\ \+\ param_3\[8\]\)\ =\ uVar8\ <<\ 0xc\ \|\ \*\(uint\ \*\)\(iVar3\ \+\ param_3\[8\]\)\ \&\ 0xfffc0fff;$	+2
+use	FUN_000be460	iVar3	aluByteOffset	INFERRED	hardware ALU index * 4: byte offset into the ALU word arrays (programImage[8..0xc])	^\s*\*\(uint\ \*\)\(iVar3\ \+\ param_3\[8\]\)\ \&\ 0xff83ffff;$	+4
+use	FUN_000be460	iVar3	aluByteOffset	INFERRED	hardware ALU index * 4: byte offset into the ALU word arrays (programImage[8..0xc])	^\s*\*\(uint\ \*\)\(iVar3\ \+\ param_3\[8\]\)\ \&\ 0xe3ffffff;$	+2
+use	FUN_000be460	iVar3	aluByteOffset	INFERRED	hardware ALU index * 4: byte offset into the ALU word arrays (programImage[8..0xc])	^\s*\*\(uint\ \*\)\(iVar3\ \+\ param_3\[8\]\)\ \&\ 0x9fffffff;$	+2
+use	FUN_000be460	iVar3	aluByteOffset	INFERRED	hardware ALU index * 4: byte offset into the ALU word arrays (programImage[8..0xc])	^\s*\*\(uint\ \*\)\(iVar3\ \+\ param_3\[9\]\)\ =\ uVar8\ \|\ \*\(uint\ \*\)\(iVar3\ \+\ param_3\[9\]\)\ \&\ 0xffffffc0;$	+1
+use	FUN_000be460	iVar3	aluByteOffset	INFERRED	hardware ALU index * 4: byte offset into the ALU word arrays (programImage[8..0xc])	^\s*\*\(uint\ \*\)\(iVar3\ \+\ param_3\[9\]\)\ =\ uVar8\ <<\ 6\ \|\ \*\(uint\ \*\)\(iVar3\ \+\ param_3\[9\]\)\ \&\ 0xfffff03f;$	+1
+use	FUN_000be460	iVar3	aluByteOffset	INFERRED	hardware ALU index * 4: byte offset into the ALU word arrays (programImage[8..0xc])	^\s*\*\(uint\ \*\)\(iVar3\ \+\ param_3\[9\]\)\ =\ uVar8\ <<\ 0xc\ \|\ \*\(uint\ \*\)\(iVar3\ \+\ param_3\[9\]\)\ \&\ 0xfffc0fff;$	+2
+use	FUN_000be460	iVar3	aluByteOffset	INFERRED	hardware ALU index * 4: byte offset into the ALU word arrays (programImage[8..0xc])	^\s*\*\(uint\ \*\)\(iVar3\ \+\ param_3\[9\]\)\ \&\ 0xff83ffff;$	+4
+use	FUN_000be460	iVar3	aluByteOffset	INFERRED	hardware ALU index * 4: byte offset into the ALU word arrays (programImage[8..0xc])	^\s*\*\(uint\ \*\)\(iVar3\ \+\ param_3\[9\]\)\ \&\ 0xfeffffff;$	+2
+use	FUN_000be460	iVar3	aluByteOffset	INFERRED	hardware ALU index * 4: byte offset into the ALU word arrays (programImage[8..0xc])	^\s*\*\(uint\ \*\)\(iVar3\ \+\ param_3\[9\]\)\ \&\ 0xf9ffffff;$	+2
+use	FUN_000be460	iVar3	aluByteOffset	INFERRED	hardware ALU index * 4: byte offset into the ALU word arrays (programImage[8..0xc])	^\s*\*\(uint\ \*\)\(iVar3\ \+\ param_3\[9\]\)\ \&\ 0xf7ffffff;$	+1
+use	FUN_000be460	iVar3	aluByteOffset	INFERRED	hardware ALU index * 4: byte offset into the ALU word arrays (programImage[8..0xc])	^\s*\*\(undefined4\ \*\)\(param_3\[10\]\ \+\ iVar3\)\ =\ 0;$	+2
+use	FUN_000be460	iVar3	aluByteOffset	INFERRED	hardware ALU index * 4: byte offset into the ALU word arrays (programImage[8..0xc])	^\s*\*\(uint\ \*\)\(iVar3\ \+\ param_3\[10\]\)\ \&\ 0xfffffffe;$	+4
+use	FUN_000be460	iVar3	aluByteOffset	INFERRED	hardware ALU index * 4: byte offset into the ALU word arrays (programImage[8..0xc])	^\s*\*\(uint\ \*\)\(iVar3\ \+\ param_3\[10\]\)\ \&\ 0xfffffffb;$	+4
+use	FUN_000be460	iVar3	aluByteOffset	INFERRED	hardware ALU index * 4: byte offset into the ALU word arrays (programImage[8..0xc])	^\s*\*\(uint\ \*\)\(iVar3\ \+\ param_3\[10\]\)\ \&\ 0xffffffef;$	+4
+use	FUN_000be460	iVar3	aluByteOffset	INFERRED	hardware ALU index * 4: byte offset into the ALU word arrays (programImage[8..0xc])	^\s*\*\(uint\ \*\)\(iVar3\ \+\ param_3\[10\]\)\ \&\ 0xffffffbf;$	+3
+use	FUN_000be460	iVar3	aluByteOffset	INFERRED	hardware ALU index * 4: byte offset into the ALU word arrays (programImage[8..0xc])	^\s*\*\(undefined4\ \*\)\(param_3\[0xb\]\ \+\ iVar3\)\ =\ 0;$	+4
+use	FUN_000be460	iVar3	aluByteOffset	INFERRED	hardware ALU index * 4: byte offset into the ALU word arrays (programImage[8..0xc])	^\s*\*\(uint\ \*\)\(iVar3\ \+\ param_3\[0xb\]\)\ \&\ 0xffffff9f;$	+2
+use	FUN_000be460	iVar3	aluByteOffset	INFERRED	hardware ALU index * 4: byte offset into the ALU word arrays (programImage[8..0xc])	^\s*\*\(uint\ \*\)\(iVar3\ \+\ param_3\[0xb\]\)\ \&\ 0xfffff07f;$	+2
+use	FUN_000be460	iVar3	aluByteOffset	INFERRED	hardware ALU index * 4: byte offset into the ALU word arrays (programImage[8..0xc])	^\s*\*\(uint\ \*\)\(iVar3\ \+\ param_3\[0xb\]\)\ \&\ 0xffffcfff;$	+3
+use	FUN_000be460	iVar3	aluByteOffset	INFERRED	hardware ALU index * 4: byte offset into the ALU word arrays (programImage[8..0xc])	^\s*\*\(uint\ \*\)\(iVar3\ \+\ param_3\[0xb\]\)\ =$@6	+1
+use	FUN_000be460	iVar3	aluByteOffset	INFERRED	hardware ALU index * 4: byte offset into the ALU word arrays (programImage[8..0xc])	^\s*\*\(uint\ \*\)\(iVar3\ \+\ param_3\[0xb\]\)\ \&\ 0xffe7ffff;$	+4
+use	FUN_000be460	iVar3	aluByteOffset	INFERRED	hardware ALU index * 4: byte offset into the ALU word arrays (programImage[8..0xc])	^\s*\*\(uint\ \*\)\(iVar3\ \+\ param_3\[0xb\]\)\ \&\ 0xf87fffff;$	+2
+use	FUN_000be460	iVar3	aluByteOffset	INFERRED	hardware ALU index * 4: byte offset into the ALU word arrays (programImage[8..0xc])	^\s*\*\(uint\ \*\)\(iVar3\ \+\ param_3\[0xb\]\)\ \&\ 0xc7ffffff;$	+2
+use	FUN_000be460	iVar3	aluByteOffset	INFERRED	hardware ALU index * 4: byte offset into the ALU word arrays (programImage[8..0xc])	^\s*\*\(uint\ \*\)\(iVar3\ \+\ param_3\[0xb\]\)\ \&\ 0xbfffffff;$	+9
+use	FUN_000be460	iVar3	aluByteOffset	INFERRED	hardware ALU index * 4: byte offset into the ALU word arrays (programImage[8..0xc])	^\s*\*\(uint\ \*\)\(iVar3\ \+\ param_3\[0xc\]\)\ \&\ 0xfffff07f;$	+2
+use	FUN_000be460	iVar3	aluByteOffset	INFERRED	hardware ALU index * 4: byte offset into the ALU word arrays (programImage[8..0xc])	^\s*\*\(uint\ \*\)\(iVar3\ \+\ param_3\[0xc\]\)\ \&\ 0xffffcfff;$	+2
+use	FUN_000be460	iVar3	aluByteOffset	INFERRED	hardware ALU index * 4: byte offset into the ALU word arrays (programImage[8..0xc])	^\s*\*\(uint\ \*\)\(iVar3\ \+\ param_3\[0xc\]\)\ \&\ 0xfff83fff;$	+2
+use	FUN_000be460	iVar3	aluByteOffset	INFERRED	hardware ALU index * 4: byte offset into the ALU word arrays (programImage[8..0xc])	^\s*\*\(uint\ \*\)\(iVar3\ \+\ param_3\[0xc\]\)\ \&\ 0xffe7ffff;$	+2
+use	FUN_000be460	iVar3	aluByteOffset	INFERRED	hardware ALU index * 4: byte offset into the ALU word arrays (programImage[8..0xc])	^\s*\*\(uint\ \*\)\(iVar3\ \+\ param_3\[0xc\]\)\ \&\ 0xff9fffff;$	+2
+use	FUN_000be460	iVar3	aluByteOffset	INFERRED	hardware ALU index * 4: byte offset into the ALU word arrays (programImage[8..0xc])	^\s*\*\(uint\ \*\)\(iVar3\ \+\ param_3\[0xc\]\)\ \&\ 0xf87fffff;$	+2
+use	FUN_000be460	iVar3	aluByteOffset	INFERRED	hardware ALU index * 4: byte offset into the ALU word arrays (programImage[8..0xc])	^\s*\*\(uint\ \*\)\(iVar3\ \+\ param_3\[0xc\]\)\ \&\ 0xc7ffffff;$	+2
+use	FUN_000be460	iVar3	aluByteOffset	INFERRED	hardware ALU index * 4: byte offset into the ALU word arrays (programImage[8..0xc])	^\s*\*\(uint\ \*\)\(iVar3\ \+\ param_3\[0xc\]\)\ \&\ 0xbfffffff;$	+1
+local	FUN_000be460	bVar4	aluPending	INFERRED	true after an ALU record was written, false after a texture record
+local	FUN_000be460	bVar5	texSeen	INFERRED	true once the first texture instruction was written (sets programImage[0] bit 3)
+local	FUN_000be460	piVar6	rsScanNextCopy	INFERRED	copy of the next-record pointer in the RS loop
+use	FUN_000be460	uVar7	rsWordPartial	INFERRED	RS output word assembled step by step from the record fields	^\s*uVar7\ =\ \(\*\(byte\ \*\)\(\(int\)piVar16\ \+\ 9\)\ \&\ 1\)\ <<\ 4\ \|\ bVar19\ \&\ 0xf;$	+13
+use	FUN_000be460	uVar7	aluBaseIndex	INFERRED	hardware ALU index at the start of the current phase	^\s*uVar7\ =\ 0;$	+1
+use	FUN_000be460	uVar7	aluBaseIndex	INFERRED	hardware ALU index at the start of the current phase	^\s*iVar13\ =\ uVar7\ \+\ uVar9;$	+1
+use	FUN_000be460	uVar7	aluBaseIndex	INFERRED	hardware ALU index at the start of the current phase	^\s*uVar7\ \&\ 0x3f\ \|\ \(uVar17\ \&\ 0x1f\)\ <<\ 0xc\ \|\ param_3\[iVar24\ \+\ 2\]\ \&\ 0xc00000;$	+1
+use	FUN_000be460	uVar7	aluBaseIndex	INFERRED	hardware ALU index at the start of the current phase	^\s*\(uVar7\ \&\ 0x1c0\)\ <<\ 6\ \|\ param_3\[6\]\ \&\ 0xfffc0fff;$	+1
+use	FUN_000be460	uVar7	aluBaseIndex	INFERRED	hardware ALU index at the start of the current phase	^\s*param_3\[6\]\ =\ \(uVar9\ \-\ 1\)\ \*\ 8\ \&\ 0xe00\ \|\ uVar7\ \&\ 0x1c0\ \|\ param_3\[6\]\ \&\ 0xfffff03f;$	+1
+use	FUN_000be460	uVar7	aluBaseIndex	INFERRED	hardware ALU index at the start of the current phase	^\s*\(uVar7\ \&\ 0x1c0\)\ <<\ 0xc\ \|\ param_3\[6\]\ \&\ 0xff03ffff;$	+1
+use	FUN_000be460	uVar7	aluBaseIndex	INFERRED	hardware ALU index at the start of the current phase	^\s*\(uVar7\ \&\ 0x1c0\)\ <<\ 0x12\ \|\ param_3\[6\]\ \&\ 0xc0ffffff;$	+1
+use	FUN_000be460	uVar7	aluBaseIndex	INFERRED	hardware ALU index at the start of the current phase	^\s*uVar7\ =\ uVar7\ \+\ uVar9;$	+1
+use	FUN_000be460	uVar8	recordKind	INFERRED	kind word of the instruction record (1 RS, 2 texture, 3 and 4 ALU)	^\s*uVar8\ =\ \*puVar10;$	+1
+use	FUN_000be460	uVar8	recordKind	INFERRED	kind word of the instruction record (1 RS, 2 texture, 3 and 4 ALU)	^\s*if\ \(uVar8\ ==\ 2\)\ \{$	+1
+use	FUN_000be460	uVar8	recordKind	INFERRED	kind word of the instruction record (1 RS, 2 texture, 3 and 4 ALU)	^\s*else\ if\ \(\(1\ <\ uVar8\)\ \&\&\ \(uVar8\ <\ 5\)\)\ \{$	+1
+use	FUN_000be460	uVar8	aluRegField	INFERRED	5-bit register field of an ALU source, +0x20 when bit 15 selects the second bank	^\s*uVar8\ =\ uVar1\ \&\ 0x1f;$	+1
+use	FUN_000be460	uVar8	aluRegField	INFERRED	5-bit register field of an ALU source, +0x20 when bit 15 selects the second bank	^\s*uVar8\ =\ \(uVar1\ \&\ 0x1f\)\ \+\ 0x20;$	+1
+use	FUN_000be460	uVar8	aluRegField	INFERRED	5-bit register field of an ALU source, +0x20 when bit 15 selects the second bank	^\s*\*\(uint\ \*\)\(iVar3\ \+\ param_3\[8\]\)\ =\ uVar8\ \|\ \*\(uint\ \*\)\(iVar3\ \+\ param_3\[8\]\)\ \&\ 0xffffffc0;$	+1
+use	FUN_000be460	uVar8	aluRegField	INFERRED	5-bit register field of an ALU source, +0x20 when bit 15 selects the second bank	^\s*uVar8\ =\ \*\(ushort\ \*\)\(puVar10\ \+\ 4\)\ \&\ 0x1f;$	+1
+use	FUN_000be460	uVar8	aluRegField	INFERRED	5-bit register field of an ALU source, +0x20 when bit 15 selects the second bank	^\s*uVar8\ =\ uVar8\ \+\ 0x20;$	+1
+use	FUN_000be460	uVar8	aluRegField	INFERRED	5-bit register field of an ALU source, +0x20 when bit 15 selects the second bank	^\s*\*\(uint\ \*\)\(iVar3\ \+\ param_3\[8\]\)\ =\ uVar8\ <<\ 6\ \|\ \*\(uint\ \*\)\(iVar3\ \+\ param_3\[8\]\)\ \&\ 0xfffff03f;$	+1
+use	FUN_000be460	uVar8	aluRegField	INFERRED	5-bit register field of an ALU source, +0x20 when bit 15 selects the second bank	^\s*uVar8\ =\ \*\(ushort\ \*\)\(\(int\)puVar10\ \+\ 0x12\)\ \&\ 0x1f;$	+1
+use	FUN_000be460	uVar8	aluRegField	INFERRED	5-bit register field of an ALU source, +0x20 when bit 15 selects the second bank	^\s*uVar8\ =\ uVar8\ \+\ 0x20;$@2	+1
+use	FUN_000be460	uVar8	aluRegField	INFERRED	5-bit register field of an ALU source, +0x20 when bit 15 selects the second bank	^\s*\*\(uint\ \*\)\(iVar3\ \+\ param_3\[8\]\)\ =\ uVar8\ <<\ 0xc\ \|\ \*\(uint\ \*\)\(iVar3\ \+\ param_3\[8\]\)\ \&\ 0xfffc0fff;$	+1
+use	FUN_000be460	uVar8	aluRegField	INFERRED	5-bit register field of an ALU source, +0x20 when bit 15 selects the second bank	^\s*uVar8\ =\ \*\(ushort\ \*\)\(\(int\)puVar10\ \+\ 0x1a\)\ \&\ 0x1f;$	+1
+use	FUN_000be460	uVar8	aluRegField	INFERRED	5-bit register field of an ALU source, +0x20 when bit 15 selects the second bank	^\s*uVar8\ =\ uVar8\ \+\ 0x20;$@3	+1
+use	FUN_000be460	uVar8	aluRegField	INFERRED	5-bit register field of an ALU source, +0x20 when bit 15 selects the second bank	^\s*\*\(uint\ \*\)\(iVar3\ \+\ param_3\[9\]\)\ =\ uVar8\ \|\ \*\(uint\ \*\)\(iVar3\ \+\ param_3\[9\]\)\ \&\ 0xffffffc0;$	+1
+use	FUN_000be460	uVar8	aluRegField	INFERRED	5-bit register field of an ALU source, +0x20 when bit 15 selects the second bank	^\s*uVar8\ =\ \*\(ushort\ \*\)\(puVar10\ \+\ 7\)\ \&\ 0x1f;$	+1
+use	FUN_000be460	uVar8	aluRegField	INFERRED	5-bit register field of an ALU source, +0x20 when bit 15 selects the second bank	^\s*uVar8\ =\ uVar8\ \+\ 0x20;$@4	+1
+use	FUN_000be460	uVar8	aluRegField	INFERRED	5-bit register field of an ALU source, +0x20 when bit 15 selects the second bank	^\s*\*\(uint\ \*\)\(iVar3\ \+\ param_3\[9\]\)\ =\ uVar8\ <<\ 6\ \|\ \*\(uint\ \*\)\(iVar3\ \+\ param_3\[9\]\)\ \&\ 0xfffff03f;$	+1
+use	FUN_000be460	uVar8	aluRegField	INFERRED	5-bit register field of an ALU source, +0x20 when bit 15 selects the second bank	^\s*uVar8\ =\ \*\(ushort\ \*\)\(\(int\)puVar10\ \+\ 0x1e\)\ \&\ 0x1f;$	+1
+use	FUN_000be460	uVar8	aluRegField	INFERRED	5-bit register field of an ALU source, +0x20 when bit 15 selects the second bank	^\s*uVar8\ =\ uVar8\ \+\ 0x20;$@5	+1
+use	FUN_000be460	uVar8	aluRegField	INFERRED	5-bit register field of an ALU source, +0x20 when bit 15 selects the second bank	^\s*\*\(uint\ \*\)\(iVar3\ \+\ param_3\[9\]\)\ =\ uVar8\ <<\ 0xc\ \|\ \*\(uint\ \*\)\(iVar3\ \+\ param_3\[9\]\)\ \&\ 0xfffc0fff;$	+1
+use	FUN_000be460	uVar8	phaseTexCount	INFERRED	number of texture instructions of the phase (at least 1)	^\s*uVar8\ =\ 1;$	+1
+use	FUN_000be460	uVar8	phaseTexCount	INFERRED	number of texture instructions of the phase (at least 1)	^\s*uVar8\ =\ uVar22\ \&\ 0xff;$	+1
+use	FUN_000be460	uVar8	phaseTexCount	INFERRED	number of texture instructions of the phase (at least 1)	^\s*\(uVar8\ \-\ 1\)\ \*\ 0x20000\ \&\ 0x3e0000\ \|$	+1
+local	FUN_000be460	puVar10	instRecord	INFERRED	current 0x48-byte instruction record
+local	FUN_000be460	piVar11	rsScanCur	INFERRED	current RS record pointer
+local	FUN_000be460	iVar13	aluHwIndex	INFERRED	hardware ALU instruction index (phase base + count)
+local	FUN_000be460	uVar14	phaseAluCount	INFERRED	number of ALU instructions of the phase (at least 1)
+local	FUN_000be460	piVar15	rsScanAhead	INFERRED	RS record pointer advanced 0x12 words per step
+local	FUN_000be460	piVar16	rsScanPrev	INFERRED	previous RS record examined for output
+use	FUN_000be460	uVar17	rsOutIndexNext	INFERRED	RS word index after this record	^\s*uVar17\ =\ uVar9;$	+1
+use	FUN_000be460	uVar17	rsOutIndexNext	INFERRED	RS word index after this record	^\s*uVar17\ =\ uVar9\ \+\ 1;$	+1
+use	FUN_000be460	uVar17	rsOutIndexNext	INFERRED	RS word index after this record	^\s*uVar9\ =\ uVar17;$	+1
+use	FUN_000be460	uVar17	rsOutIndexNext	INFERRED	RS word index after this record	^\s*uVar9\ =\ uVar17\ \&\ 0xff;$	+2
+use	FUN_000be460	uVar17	texBaseIndex	INFERRED	hardware texture instruction index at the start of the current phase	^\s*uVar17\ =\ 0;$	+1
+use	FUN_000be460	uVar17	texBaseIndex	INFERRED	hardware texture instruction index at the start of the current phase	^\s*iVar3\ =\ \(uVar17\ \+\ uVar22\)\ \*\ 4;$	+1
+use	FUN_000be460	uVar17	texBaseIndex	INFERRED	hardware texture instruction index at the start of the current phase	^\s*\(uVar17\ \&\ 0x1e0\)\ <<\ 0x13\ \|$	+1
+use	FUN_000be460	uVar17	texBaseIndex	INFERRED	hardware texture instruction index at the start of the current phase	^\s*uVar7\ \&\ 0x3f\ \|\ \(uVar17\ \&\ 0x1f\)\ <<\ 0xc\ \|\ param_3\[iVar24\ \+\ 2\]\ \&\ 0xc00000;$	+1
+use	FUN_000be460	uVar17	texBaseIndex	INFERRED	hardware texture instruction index at the start of the current phase	^\s*uVar17\ =\ uVar17\ \+\ uVar22;$	+1
+use	FUN_000be460	bVar19	rsFlagsByte	INFERRED	byte +8 of the RS record being encoded	^\s*bVar19\ =\ \*\(byte\ \*\)\(piVar16\ \+\ 2\);$	+3
+use	FUN_000be460	bVar19	usedFlagsAccum	INFERRED	OR of the flag bytes +0x15 and +0x21 of the ALU records	^\s*bVar19\ =\ 0;$	+1
+use	FUN_000be460	bVar19	usedFlagsAccum	INFERRED	OR of the flag bytes +0x15 and +0x21 of the ALU records	^\s*bVar19\ =\ bVar19\ \|\ \*\(byte\ \*\)\(\(int\)puVar10\ \+\ 0x15\)\ \|\ \*\(byte\ \*\)\(\(int\)puVar10\ \+\ 0x21\);$	+1
+use	FUN_000be460	bVar19	usedFlagsAccum	INFERRED	OR of the flag bytes +0x15 and +0x21 of the ALU records	^\s*if\ \(bVar19\ !=\ 0\)\ \{$	+1
+use	FUN_000be460	bVar19	usedFlagsAccum	INFERRED	OR of the flag bytes +0x15 and +0x21 of the ALU records	^\s*bVar19\ =\ 0;$@2	+1
+local	FUN_000be460	bVar20	depthWriteAccum	INFERRED	OR of byte +0x23 over the ALU records
+local	FUN_000be460	uVar23	phaseTexCountMinus1	INFERRED	number of texture instructions of the phase minus 1
+local	FUN_000be460	iVar24	phaseSlot	INFERRED	4 - number of phases: index of the programImage phase word
+func	FUN_000be460	psnEncodeHwProgramPhased	INFERRED	phase-based variant of psnEncodeHwProgram: encodes RS words, texture instruction words (programImage[7]) and ALU words (programImage[8..0xc]) for each phase of the decoded program, tracking the per-phase instruction counts in programImage[2..6]

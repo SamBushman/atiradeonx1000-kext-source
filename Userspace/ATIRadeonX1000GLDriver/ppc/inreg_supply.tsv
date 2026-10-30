@@ -274,8 +274,8 @@ a5c40	gld_emitClearColorPacket	r7	PASS-indirect	GARBAGE
 a5c40	gld_emitClearColorPacket	r8	PASS-indirect	GARBAGE	
 a7050	gld_initContextDispatch	r5	PASS-indirect	GARBAGE	
 a7050	gld_initContextDispatch	r6	PASS-indirect	GARBAGE	
-afe40	FUN_000afe40	r7	PASS-indirect	GARBAGE	
-afe40	FUN_000afe40	r8	PASS-indirect	GARBAGE	
+afe40	gld_compileFragmentProgram	r7	PASS-indirect	GARBAGE	
+afe40	gld_compileFragmentProgram	r8	PASS-indirect	GARBAGE	
 b3630	atifsCompileCurrentShader	r6	PASS-indirect	GARBAGE	
 b3630	atifsCompileCurrentShader	r7	PASS-indirect	GARBAGE	
 b3630	atifsCompileCurrentShader	r8	PASS-indirect	GARBAGE	
@@ -283,12 +283,12 @@ b5400	gld_emitProgramStatePackets	r5	PASS-indirect	GARBAGE
 b5400	gld_emitProgramStatePackets	r6	PASS-indirect	GARBAGE	
 b5400	gld_emitProgramStatePackets	r7	PASS-indirect	GARBAGE	
 b5400	gld_emitProgramStatePackets	r8	PASS-indirect	GARBAGE	
-b6580	FUN_000b6580	r5	PASS-indirect	GARBAGE-REVIEWED (same: ctx->alloc(size) at 0xb66d4 / 0x4b9dc)	supply=SUPPLIED [DEF:1ef5c in 1ecd0 DEF:24318 in 242f0 DEF:24398 in 24370 DEF:24418 in 243f0 DEF:24498 in 24470 DEF:24518 in 244f0 DEF:24598 in 24570 DEF:24618 in 245f0 DEF:2469]; 4b9dc bctrl via +0xc (argument registers up to r5)
-b6580	FUN_000b6580	r6	PASS-indirect	GARBAGE	
-b6580	FUN_000b6580	r7	PASS-indirect	GARBAGE	
-b6580	FUN_000b6580	r8	PASS-indirect	GARBAGE	
-bd9a0	FUN_000bd9a0	r7	PASS-indirect	GARBAGE	
-bd9a0	FUN_000bd9a0	r8	PASS-indirect	GARBAGE	
+b6580	ffpsBuildProgram	r5	PASS-indirect	GARBAGE-REVIEWED (same: ctx->alloc(size) at 0xb66d4 / 0x4b9dc)	supply=SUPPLIED [DEF:1ef5c in 1ecd0 DEF:24318 in 242f0 DEF:24398 in 24370 DEF:24418 in 243f0 DEF:24498 in 24470 DEF:24518 in 244f0 DEF:24598 in 24570 DEF:24618 in 245f0 DEF:2469]; 4b9dc bctrl via +0xc (argument registers up to r5)
+b6580	ffpsBuildProgram	r6	PASS-indirect	GARBAGE	
+b6580	ffpsBuildProgram	r7	PASS-indirect	GARBAGE	
+b6580	ffpsBuildProgram	r8	PASS-indirect	GARBAGE	
+bd9a0	gld_emitLightingStatePacket	r7	PASS-indirect	GARBAGE	
+bd9a0	gld_emitLightingStatePacket	r8	PASS-indirect	GARBAGE	
 db574	ildisPrintFixedPoint	r8	PASS-import	GARBAGE	
 db574	ildisPrintFixedPoint	r10	PASS-import	GARBAGE	
 e36bc	MachineCodeWriter__encodeProgram	r8	PASS-deep	GARBAGE	

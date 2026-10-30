@@ -1,7 +1,7 @@
 function	name	call_lo	call_hi	landing_pad	action
-cd05c	FUN_000cd05c	cd0e0	cd0e4	-	no-handler
-cd05c	FUN_000cd05c	cd0f0	cd0f4	cd10c	cleanup
-cd05c	FUN_000cd05c	cd0f8	cd134	-	no-handler
+cd05c	scCreate	cd0e0	cd0e4	-	no-handler
+cd05c	scCreate	cd0f0	cd0f4	cd10c	cleanup
+cd05c	scCreate	cd0f8	cd134	-	no-handler
 d0304	vsDisassembleToString	d0338	d033c	d0340	cleanup
 d0304	vsDisassembleToString	d0340	d0344	-	no-handler
 d035c	vsDisassembleVertexProgram	d0390	d0394	d0398	cleanup

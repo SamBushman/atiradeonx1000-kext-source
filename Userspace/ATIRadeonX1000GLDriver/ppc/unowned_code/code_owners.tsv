@@ -43,10 +43,10 @@
 0xc6e40	psnReallocateTemps
 0xc71d0	scCreateForContext
 0xcd380	scCompile
-0xce330	FUN_000ce148
-0xce344	FUN_000ce148
-0xcec34	FUN_000cea6c
-0xcec48	FUN_000cea6c
+0xce330	vsDisasmSourceOperand
+0xce344	vsDisasmSourceOperand
+0xcec34	vsDisasmDestOperand
+0xcec48	vsDisasmDestOperand
 0xd9f34	ConstBank__addMappedEntry
 0xd9f78	FUN_000d9f3c
 0xda880	FUN_000da78c
