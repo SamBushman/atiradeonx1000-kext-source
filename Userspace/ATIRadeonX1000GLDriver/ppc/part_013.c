@@ -4038,7 +4038,7 @@ int ffvpComputeOutputMasks(glContext)
 }
 
 /* gldValidateState @ 0x90470 (952 bytes) */
-void gldValidateState(int glContext,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9)
+void gldValidateState(int glContext,undefined4 forwardedArg2,undefined4 forwardedArg3,undefined4 forwardedArg4,undefined4 forwardedArg5,undefined4 forwardedArg6,undefined4 forwardedArg7,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8,double fparam_9)
 {
   uint dirtyMask;
   undefined4 extraout_r4;
@@ -4062,7 +4062,7 @@ void gldValidateState(int glContext,undefined4 param_2,undefined4 param_3,undefi
   undefined4 extraout_r4_17;
   undefined4 extraout_r4_18;
   uint dirtyMask2;
-  double in_stack_ffffffb8;
+  double forwarded_in_stack_ffffffb8;
   
   if (*(char *)(glContext + 0x1868) != '\0') {
     if ((*(uint *)(glContext + 0x44) & 0x100000) == 0) {
@@ -4074,81 +4074,81 @@ void gldValidateState(int glContext,undefined4 param_2,undefined4 param_3,undefi
   }
   dirtyMask2 = *(uint *)(glContext + 0x1808) & 0x20000000;
   if (dirtyMask2 != 0) {
-    fparam_1 = (double)FUN_000a4980(glContext,param_2,param_3,param_4,param_5);
-    param_2 = extraout_r4;
+    forwardedFloatArg1 = (double)FUN_000a4980(glContext,forwardedArg2,forwardedArg3,forwardedArg4,forwardedArg5);
+    forwardedArg2 = extraout_r4;
   }
   dirtyMask = *(uint *)(glContext + 0x38);
   if (dirtyMask != 0) {
     if ((dirtyMask & 4) != 0) {
-      fparam_1 = (double)((double (*)())gldValidatePolygonMode)(glContext,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,
-                                      fparam_7,fparam_8);
+      forwardedFloatArg1 = (double)((double (*)())gldValidatePolygonMode)(glContext,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,
+                                      forwardedFloatArg7,forwardedFloatArg8);
       dirtyMask = *(uint *)(glContext + 0x38);
-      param_2 = extraout_r4_00;
+      forwardedArg2 = extraout_r4_00;
     }
     if ((dirtyMask & 2) != 0) {
-      fparam_1 = (double)FUN_0004eba0(glContext,param_2,param_3,param_4,param_5,param_6,dirtyMask2);
+      forwardedFloatArg1 = (double)FUN_0004eba0(glContext,forwardedArg2,forwardedArg3,forwardedArg4,forwardedArg5,forwardedArg6,dirtyMask2);
       dirtyMask = *(uint *)(glContext + 0x38);
-      param_2 = extraout_r4_01;
+      forwardedArg2 = extraout_r4_01;
     }
     if ((dirtyMask & 8) != 0) {
-      fparam_1 = (double)FUN_0004ed90(glContext);
+      forwardedFloatArg1 = (double)FUN_0004ed90(glContext);
       dirtyMask = *(uint *)(glContext + 0x38);
-      param_2 = extraout_r4_02;
+      forwardedArg2 = extraout_r4_02;
     }
     if ((dirtyMask & 0x400) != 0) {
-      fparam_1 = (double)((double (*)())FUN_000520c0)(glContext,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,
-                                      fparam_7,fparam_8);
+      forwardedFloatArg1 = (double)((double (*)())FUN_000520c0)(glContext,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,
+                                      forwardedFloatArg7,forwardedFloatArg8);
       dirtyMask = *(uint *)(glContext + 0x38);
-      param_2 = extraout_r4_03;
+      forwardedArg2 = extraout_r4_03;
     }
     if ((dirtyMask & 0x100) != 0) {
-      ((void (*)())FUN_0004f2e0)(glContext,param_2,param_3,param_4,fparam_1);
-      fparam_1 = (double)ffvpBuildFogKey(glContext,extraout_r4_04,param_3,param_4,param_5,param_6);
+      ((void (*)())FUN_0004f2e0)(glContext,forwardedArg2,forwardedArg3,forwardedArg4,forwardedFloatArg1);
+      forwardedFloatArg1 = (double)ffvpBuildFogKey(glContext,extraout_r4_04,forwardedArg3,forwardedArg4,forwardedArg5,forwardedArg6);
       dirtyMask = *(uint *)(glContext + 0x38);
-      param_2 = extraout_r4_05;
+      forwardedArg2 = extraout_r4_05;
     }
     if ((dirtyMask & 0x800) != 0) {
-      fparam_1 = (double)ffvpBuildBlendKey(glContext);
+      forwardedFloatArg1 = (double)ffvpBuildBlendKey(glContext);
       dirtyMask = *(uint *)(glContext + 0x38);
-      param_2 = extraout_r4_06;
+      forwardedArg2 = extraout_r4_06;
     }
     if ((dirtyMask & 0x4000) != 0) {
-      fparam_1 = (double)gldValidateCullFace(glContext);
+      forwardedFloatArg1 = (double)gldValidateCullFace(glContext);
       dirtyMask = *(uint *)(glContext + 0x38);
-      param_2 = extraout_r4_07;
+      forwardedArg2 = extraout_r4_07;
     }
     if ((dirtyMask & 0x2200) != 0) {
-      fparam_1 = (double)((double (*)())FUN_0004def0)(glContext,param_2,param_3,param_4,fparam_1,fparam_2,fparam_3,
-                                      fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,in_stack_ffffffb8
+      forwardedFloatArg1 = (double)((double (*)())FUN_0004def0)(glContext,forwardedArg2,forwardedArg3,forwardedArg4,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,
+                                      forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8,forwarded_in_stack_ffffffb8
                                      );
       dirtyMask = *(uint *)(glContext + 0x38);
-      param_2 = extraout_r4_08;
+      forwardedArg2 = extraout_r4_08;
     }
     if ((*(uint *)(glContext + 0x8c) & 0x40000000) == 0) {
       if ((dirtyMask & 0x20000) != 0) {
-        fparam_1 = (double)FUN_000867b0(glContext);
+        forwardedFloatArg1 = (double)FUN_000867b0(glContext);
         dirtyMask = *(uint *)(glContext + 0x38);
-        param_2 = extraout_r4_09;
+        forwardedArg2 = extraout_r4_09;
       }
       if ((dirtyMask & 0x20) != 0) {
-        ((void (*)())FUN_000bd9a0)(glContext,param_2,param_3,param_4,fparam_1);
+        ((void (*)())FUN_000bd9a0)(glContext,forwardedArg2,forwardedArg3,forwardedArg4,forwardedFloatArg1);
         dirtyMask = *(uint *)(glContext + 0x38);
-        param_2 = extraout_r4_10;
+        forwardedArg2 = extraout_r4_10;
       }
       if ((dirtyMask & 0x1000) != 0) {
         if (*(char *)(glContext + 0x1868) == '\0') {
-          extvsValidateProgramState(glContext,param_2);
-          param_2 = extraout_r4_12;
+          extvsValidateProgramState(glContext,forwardedArg2);
+          forwardedArg2 = extraout_r4_12;
         }
         else {
           (**(code **)((int)((unsigned char *)0x000011cc) + glContext))(glContext);
-          param_2 = extraout_r4_11;
+          forwardedArg2 = extraout_r4_11;
         }
       }
     }
     else if ((dirtyMask & 0x20) != 0) {
-      ((void (*)())FUN_0004d620)(glContext,param_2,param_3,param_4,fparam_1);
-      param_2 = extraout_r4_13;
+      ((void (*)())FUN_0004d620)(glContext,forwardedArg2,forwardedArg3,forwardedArg4,forwardedFloatArg1);
+      forwardedArg2 = extraout_r4_13;
     }
   }
   dirtyMask2 = *(uint *)(glContext + 0x3c);
@@ -4156,30 +4156,30 @@ void gldValidateState(int glContext,undefined4 param_2,undefined4 param_3,undefi
     if ((dirtyMask2 & 1) != 0) {
       gldValidateDepthTest(glContext);
       dirtyMask2 = *(uint *)(glContext + 0x3c);
-      param_2 = extraout_r4_14;
+      forwardedArg2 = extraout_r4_14;
     }
     if ((dirtyMask2 & 2) != 0) {
       gldValidateScissor(glContext);
       dirtyMask2 = *(uint *)(glContext + 0x3c);
-      param_2 = extraout_r4_15;
+      forwardedArg2 = extraout_r4_15;
     }
     if ((dirtyMask2 & 8) != 0) {
       gldValidateBlend(glContext);
       dirtyMask2 = *(uint *)(glContext + 0x3c);
-      param_2 = extraout_r4_16;
+      forwardedArg2 = extraout_r4_16;
     }
     if ((dirtyMask2 & 0x10) != 0) {
       gldValidateAlphaTest(glContext);
       dirtyMask2 = *(uint *)(glContext + 0x3c);
-      param_2 = extraout_r4_17;
+      forwardedArg2 = extraout_r4_17;
     }
     if ((dirtyMask2 & 0x20) != 0) {
       gldValidateStencil(glContext);
       dirtyMask2 = *(uint *)(glContext + 0x3c);
-      param_2 = extraout_r4_18;
+      forwardedArg2 = extraout_r4_18;
     }
     if ((dirtyMask2 & 0x40) != 0) {
-      FUN_00050140(glContext,param_2,param_3,param_4,param_5,param_6);
+      FUN_00050140(glContext,forwardedArg2,forwardedArg3,forwardedArg4,forwardedArg5,forwardedArg6);
       dirtyMask2 = *(uint *)(glContext + 0x3c);
     }
     if ((dirtyMask2 & 0x400) != 0) {

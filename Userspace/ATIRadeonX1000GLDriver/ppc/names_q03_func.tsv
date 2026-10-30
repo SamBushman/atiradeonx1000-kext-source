@@ -68,4 +68,3 @@ func	FUN_00086ba0	gldEnterInternalDrawState	INFERRED	saves the current state (gl
 func	FUN_000872e0	gldLeaveInternalDrawState	INFERRED	restores the 33 state words from the snapshot (inverse of gldSaveRasterState) and re-emits the register packets 0x887 and 0x766
 func	FUN_0008fc70	ffvpAssignOutputSlots	INFERRED	assigns vertex output register slots (FUN_0004fc80 per slot) for position, colours, texcoords, fog and blend weights from the ctx flags and records the slot numbers in the ctx output tables (+0x19c..), then sets the output count in ctx+0x131/+0x2430..
 func	FUN_000900a0	ffvpComputeOutputMasks	INFERRED	computes the vertex output masks ctx+0x1b9c/+0x1ba0/+0x1ca0 from lighting, texgen, fog and blend state and, when any of them changed, re-runs ffvpAssignOutputSlots
-func	FUN_000934f0	ffvpEmitSphereMapCoord_934f0	INFERRED	second copy of ffvpEmitSphereMapCoord (identical emit sequence, lazy slot builder+0x4e4)

@@ -838,7 +838,7 @@
 0x93130	168	ffvpEmitPointSizePassThrough	part_013	converted
 0x931e0	404	ffvpEmitFogPassThrough	part_013	converted
 0x93390	352	FUN_00093390	part_013	converted
-0x934f0	20	ffvpEmitSphereMapCoord_934f0	part_014	converted
+0x934f0	20	FUN_000934f0	part_014	converted
 0x93510	1220	ffvpEmitBlendedEyeNormal	part_014	converted
 0x939e0	52	ffvpPrepareRescaledNormal	part_014	converted
 0x93a20	24	ffvpPrepareNormalizedNormal	part_014	converted

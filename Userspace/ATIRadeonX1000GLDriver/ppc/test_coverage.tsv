@@ -839,7 +839,7 @@
 0x93130	ffvpEmitPointSizePassThrough	168	no	indirect call (driver context / vtable / callback)
 0x931e0	ffvpEmitFogPassThrough	404	no	indirect call (driver context / vtable / callback)
 0x93390	FUN_00093390	352	no	indirect call (driver context / vtable / callback)
-0x934f0	ffvpEmitSphereMapCoord_934f0	20	yes	
+0x934f0	FUN_000934f0	20	yes	
 0x93510	ffvpEmitBlendedEyeNormal	1220	no	indirect call (driver context / vtable / callback)
 0x939e0	ffvpPrepareRescaledNormal	52	yes	
 0x93a20	ffvpPrepareNormalizedNormal	24	yes	

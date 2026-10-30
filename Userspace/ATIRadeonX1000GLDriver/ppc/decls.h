@@ -1045,7 +1045,7 @@ extern int ffvpEmitTexCoordPassThrough();
 extern int ffvpEmitPointSizePassThrough();
 extern int ffvpEmitFogPassThrough();
 extern int FUN_00093390();
-extern int ffvpEmitSphereMapCoord_934f0();
+extern int FUN_000934f0();
 extern int ffvpEmitBlendedEyeNormal();
 extern int ffvpPrepareRescaledNormal();
 extern int ffvpPrepareNormalizedNormal();

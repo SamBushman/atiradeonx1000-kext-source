@@ -1164,8 +1164,8 @@ LAB_0006e054:
 }
 
 /* FUN_0006e460 @ 0x6e460 (1928 bytes) */
-int FUN_0006e460(param_1, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate)
-  int param_1;
+int FUN_0006e460(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate)
+  int ctx;
   uint dstFile;
   uint dstIndex;
   int *dstMask;
@@ -1181,7 +1181,7 @@ int FUN_0006e460(param_1, dstFile, dstIndex, dstMask, src0File, src0Index, src0S
   uint uVar1;
   int iVar2;
   uint uVar3;
-  undefined4 uVar4;
+  undefined4 newBuffer;
   uint uVar5;
   uint uVar6;
   uint uVar7;
@@ -1189,33 +1189,33 @@ int FUN_0006e460(param_1, dstFile, dstIndex, dstMask, src0File, src0Index, src0S
   uint uVar9;
   uint uVar10;
   uint uVar11;
-  uint uVar12;
-  uint uVar13;
+  uint dstToken;
+  uint src1ModifierToken;
   int iVar14;
-  uint uVar15;
-  uint uVar16;
-  uint uVar17;
-  uint *puVar18;
+  uint src0ModifierToken;
+  uint src0Token;
+  uint dstMaskToken;
+  uint *tokenCountPtr;
   
-  uVar16 = 0x101;
-  uVar12 = (dstFile & 0x3f) << 0x10 | dstIndex & 0xffff | 0x400000;
-  puVar18 = (uint *)(param_1 + 0x754);
-  uVar13 = 0;
-  uVar15 = 0;
+  src0Token = 0x101;
+  dstToken = (dstFile & 0x3f) << 0x10 | dstIndex & 0xffff | 0x400000;
+  tokenCountPtr = (uint *)(ctx + 0x754);
+  src1ModifierToken = 0;
+  src0ModifierToken = 0;
   if ((dstFile == 0x12) || (dstFile == 0x13)) {
-    uVar12 = uVar12 | 0x400000;
-    uVar16 = 1;
+    dstToken = dstToken | 0x400000;
+    src0Token = 1;
   }
-  uVar17 = uVar16 | 0x54;
+  dstMaskToken = src0Token | 0x54;
   if (*dstMask == 0) {
     iVar14 = dstMask[3];
     iVar8 = dstMask[1];
     iVar2 = dstMask[2];
 LAB_0006e560:
-    uVar12 = uVar12 | 0x400000;
-    uVar17 = (uint)(iVar14 != 0) * 0x40 |
+    dstToken = dstToken | 0x400000;
+    dstMaskToken = (uint)(iVar14 != 0) * 0x40 |
              (uint)(iVar2 != 0) * 0x10 |
-             (uint)(iVar8 != 0) * 4 | (uint)(*dstMask != 0) | uVar16 & 0xffffff00;
+             (uint)(iVar8 != 0) * 4 | (uint)(*dstMask != 0) | src0Token & 0xffffff00;
   }
   else {
     iVar8 = dstMask[1];
@@ -1234,7 +1234,7 @@ LAB_0006e560:
       goto LAB_0006e560;
     }
   }
-  uVar16 = (src0File & 0x3f) << 0x10 | src0Index & 0xffff;
+  src0Token = (src0File & 0x3f) << 0x10 | src0Index & 0xffff;
   if (*src0Negate == 0) {
     uVar7 = src0Negate[1];
     if (uVar7 != 0) {
@@ -1293,8 +1293,8 @@ LAB_0006e560:
     uVar3 = src0Select[1];
     uVar1 = src0Select[2];
 LAB_0006e6b0:
-    uVar16 = uVar16 | 0x400000;
-    uVar15 = (uVar5 & 1) << 0xf |
+    src0Token = src0Token | 0x400000;
+    src0ModifierToken = (uVar5 & 1) << 0xf |
              (uVar9 & 7) << 0xc |
              (uVar6 & 1) << 0xb |
              (uVar1 & 7) << 8 |
@@ -1366,115 +1366,115 @@ LAB_0006e6b0:
     uVar3 = src1Select[2];
   }
   uVar1 = uVar1 | 0x400000;
-  uVar13 = (uVar6 & 1) << 0xf |
+  src1ModifierToken = (uVar6 & 1) << 0xf |
            (uVar9 & 7) << 0xc |
            (uVar7 & 1) << 0xb |
            (uVar3 & 7) << 8 |
            (uVar10 & 1) << 7 | (uVar5 & 7) << 4 | (*src1Negate & 1) << 3 | uVar11 & 7;
 LAB_0006e804:
-  uVar3 = *puVar18;
-  iVar14 = *(int *)(param_1 + 0x3d4);
-  if (*(uint *)(param_1 + 0x758) <= uVar3) {
-    uVar4 = (**(code **)(iVar14 + 0xc))(*(uint *)(param_1 + 0x758) * 4 + 0x200);
-    if (*(int *)(param_1 + 0x75c) != 0) {
-      _memcpy(uVar4,*(int *)(param_1 + 0x75c),*puVar18 << 2);
-      (**(code **)(iVar14 + 0x18))(*(undefined4 *)(param_1 + 0x75c));
+  uVar3 = *tokenCountPtr;
+  iVar14 = *(int *)(ctx + 0x3d4);
+  if (*(uint *)(ctx + 0x758) <= uVar3) {
+    newBuffer = (**(code **)(iVar14 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
+    if (*(int *)(ctx + 0x75c) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*tokenCountPtr << 2);
+      (**(code **)(iVar14 + 0x18))(*(undefined4 *)(ctx + 0x75c));
     }
-    *(undefined4 *)(param_1 + 0x75c) = uVar4;
-    uVar3 = *puVar18;
-    *(int *)(param_1 + 0x758) = *(int *)(param_1 + 0x758) + 0x80;
+    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    uVar3 = *tokenCountPtr;
+    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
   }
-  *(undefined4 *)(uVar3 * 4 + *(int *)(param_1 + 0x75c)) = 0x4e;
-  uVar3 = *puVar18 + 1;
-  *puVar18 = uVar3;
-  iVar14 = *(int *)(param_1 + 0x3d4);
-  if (*(uint *)(param_1 + 0x758) <= uVar3) {
-    uVar4 = (**(code **)(iVar14 + 0xc))(*(uint *)(param_1 + 0x758) * 4 + 0x200);
-    if (*(int *)(param_1 + 0x75c) != 0) {
-      _memcpy(uVar4,*(int *)(param_1 + 0x75c),*puVar18 << 2);
-      (**(code **)(iVar14 + 0x18))(*(undefined4 *)(param_1 + 0x75c));
+  *(undefined4 *)(uVar3 * 4 + *(int *)(ctx + 0x75c)) = 0x4e;
+  uVar3 = *tokenCountPtr + 1;
+  *tokenCountPtr = uVar3;
+  iVar14 = *(int *)(ctx + 0x3d4);
+  if (*(uint *)(ctx + 0x758) <= uVar3) {
+    newBuffer = (**(code **)(iVar14 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
+    if (*(int *)(ctx + 0x75c) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*tokenCountPtr << 2);
+      (**(code **)(iVar14 + 0x18))(*(undefined4 *)(ctx + 0x75c));
     }
-    *(undefined4 *)(param_1 + 0x75c) = uVar4;
-    uVar3 = *puVar18;
-    *(int *)(param_1 + 0x758) = *(int *)(param_1 + 0x758) + 0x80;
+    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    uVar3 = *tokenCountPtr;
+    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
   }
-  *(uint *)(uVar3 * 4 + *(int *)(param_1 + 0x75c)) = uVar12;
-  uVar3 = *puVar18 + 1;
-  *puVar18 = uVar3;
-  if ((uVar12 & 0x400000) != 0) {
-    iVar14 = *(int *)(param_1 + 0x3d4);
-    if (*(uint *)(param_1 + 0x758) <= uVar3) {
-      uVar4 = (**(code **)(iVar14 + 0xc))(*(uint *)(param_1 + 0x758) * 4 + 0x200);
-      if (*(int *)(param_1 + 0x75c) != 0) {
-        _memcpy(uVar4,*(int *)(param_1 + 0x75c),*puVar18 << 2);
-        (**(code **)(iVar14 + 0x18))(*(undefined4 *)(param_1 + 0x75c));
+  *(uint *)(uVar3 * 4 + *(int *)(ctx + 0x75c)) = dstToken;
+  uVar3 = *tokenCountPtr + 1;
+  *tokenCountPtr = uVar3;
+  if ((dstToken & 0x400000) != 0) {
+    iVar14 = *(int *)(ctx + 0x3d4);
+    if (*(uint *)(ctx + 0x758) <= uVar3) {
+      newBuffer = (**(code **)(iVar14 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
+      if (*(int *)(ctx + 0x75c) != 0) {
+        _memcpy(newBuffer,*(int *)(ctx + 0x75c),*tokenCountPtr << 2);
+        (**(code **)(iVar14 + 0x18))(*(undefined4 *)(ctx + 0x75c));
       }
-      *(undefined4 *)(param_1 + 0x75c) = uVar4;
-      uVar3 = *puVar18;
-      *(int *)(param_1 + 0x758) = *(int *)(param_1 + 0x758) + 0x80;
+      *(undefined4 *)(ctx + 0x75c) = newBuffer;
+      uVar3 = *tokenCountPtr;
+      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
     }
-    *(uint *)(uVar3 * 4 + *(int *)(param_1 + 0x75c)) = uVar17;
-    uVar3 = *puVar18 + 1;
-    *puVar18 = uVar3;
+    *(uint *)(uVar3 * 4 + *(int *)(ctx + 0x75c)) = dstMaskToken;
+    uVar3 = *tokenCountPtr + 1;
+    *tokenCountPtr = uVar3;
   }
-  iVar14 = *(int *)(param_1 + 0x3d4);
-  if (*(uint *)(param_1 + 0x758) <= uVar3) {
-    uVar4 = (**(code **)(iVar14 + 0xc))(*(uint *)(param_1 + 0x758) * 4 + 0x200);
-    if (*(int *)(param_1 + 0x75c) != 0) {
-      _memcpy(uVar4,*(int *)(param_1 + 0x75c),*puVar18 << 2);
-      (**(code **)(iVar14 + 0x18))(*(undefined4 *)(param_1 + 0x75c));
+  iVar14 = *(int *)(ctx + 0x3d4);
+  if (*(uint *)(ctx + 0x758) <= uVar3) {
+    newBuffer = (**(code **)(iVar14 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
+    if (*(int *)(ctx + 0x75c) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*tokenCountPtr << 2);
+      (**(code **)(iVar14 + 0x18))(*(undefined4 *)(ctx + 0x75c));
     }
-    *(undefined4 *)(param_1 + 0x75c) = uVar4;
-    uVar3 = *puVar18;
-    *(int *)(param_1 + 0x758) = *(int *)(param_1 + 0x758) + 0x80;
+    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    uVar3 = *tokenCountPtr;
+    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
   }
-  *(uint *)(uVar3 * 4 + *(int *)(param_1 + 0x75c)) = uVar16;
-  uVar12 = *puVar18 + 1;
-  *puVar18 = uVar12;
-  if ((uVar16 & 0x400000) != 0) {
-    iVar14 = *(int *)(param_1 + 0x3d4);
-    if (*(uint *)(param_1 + 0x758) <= uVar12) {
-      uVar4 = (**(code **)(iVar14 + 0xc))(*(uint *)(param_1 + 0x758) * 4 + 0x200);
-      if (*(int *)(param_1 + 0x75c) != 0) {
-        _memcpy(uVar4,*(int *)(param_1 + 0x75c),*puVar18 << 2);
-        (**(code **)(iVar14 + 0x18))(*(undefined4 *)(param_1 + 0x75c));
+  *(uint *)(uVar3 * 4 + *(int *)(ctx + 0x75c)) = src0Token;
+  dstToken = *tokenCountPtr + 1;
+  *tokenCountPtr = dstToken;
+  if ((src0Token & 0x400000) != 0) {
+    iVar14 = *(int *)(ctx + 0x3d4);
+    if (*(uint *)(ctx + 0x758) <= dstToken) {
+      newBuffer = (**(code **)(iVar14 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
+      if (*(int *)(ctx + 0x75c) != 0) {
+        _memcpy(newBuffer,*(int *)(ctx + 0x75c),*tokenCountPtr << 2);
+        (**(code **)(iVar14 + 0x18))(*(undefined4 *)(ctx + 0x75c));
       }
-      *(undefined4 *)(param_1 + 0x75c) = uVar4;
-      uVar12 = *puVar18;
-      *(int *)(param_1 + 0x758) = *(int *)(param_1 + 0x758) + 0x80;
+      *(undefined4 *)(ctx + 0x75c) = newBuffer;
+      dstToken = *tokenCountPtr;
+      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
     }
-    *(uint *)(uVar12 * 4 + *(int *)(param_1 + 0x75c)) = uVar15;
-    uVar12 = *puVar18 + 1;
-    *puVar18 = uVar12;
+    *(uint *)(dstToken * 4 + *(int *)(ctx + 0x75c)) = src0ModifierToken;
+    dstToken = *tokenCountPtr + 1;
+    *tokenCountPtr = dstToken;
   }
-  iVar14 = *(int *)(param_1 + 0x3d4);
-  if (*(uint *)(param_1 + 0x758) <= uVar12) {
-    uVar4 = (**(code **)(iVar14 + 0xc))(*(uint *)(param_1 + 0x758) * 4 + 0x200);
-    if (*(int *)(param_1 + 0x75c) != 0) {
-      _memcpy(uVar4,*(int *)(param_1 + 0x75c),*puVar18 << 2);
-      (**(code **)(iVar14 + 0x18))(*(undefined4 *)(param_1 + 0x75c));
+  iVar14 = *(int *)(ctx + 0x3d4);
+  if (*(uint *)(ctx + 0x758) <= dstToken) {
+    newBuffer = (**(code **)(iVar14 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
+    if (*(int *)(ctx + 0x75c) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*tokenCountPtr << 2);
+      (**(code **)(iVar14 + 0x18))(*(undefined4 *)(ctx + 0x75c));
     }
-    *(undefined4 *)(param_1 + 0x75c) = uVar4;
-    uVar12 = *puVar18;
-    *(int *)(param_1 + 0x758) = *(int *)(param_1 + 0x758) + 0x80;
+    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    dstToken = *tokenCountPtr;
+    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
   }
-  *(uint *)(uVar12 * 4 + *(int *)(param_1 + 0x75c)) = uVar1;
-  uVar16 = *puVar18 + 1;
-  *puVar18 = uVar16;
+  *(uint *)(dstToken * 4 + *(int *)(ctx + 0x75c)) = uVar1;
+  src0Token = *tokenCountPtr + 1;
+  *tokenCountPtr = src0Token;
   if ((uVar1 & 0x400000) != 0) {
-    iVar14 = *(int *)(param_1 + 0x3d4);
-    if (*(uint *)(param_1 + 0x758) <= uVar16) {
-      uVar4 = (**(code **)(iVar14 + 0xc))(*(uint *)(param_1 + 0x758) * 4 + 0x200);
-      if (*(int *)(param_1 + 0x75c) != 0) {
-        _memcpy(uVar4,*(int *)(param_1 + 0x75c),*puVar18 << 2);
-        (**(code **)(iVar14 + 0x18))(*(undefined4 *)(param_1 + 0x75c));
+    iVar14 = *(int *)(ctx + 0x3d4);
+    if (*(uint *)(ctx + 0x758) <= src0Token) {
+      newBuffer = (**(code **)(iVar14 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
+      if (*(int *)(ctx + 0x75c) != 0) {
+        _memcpy(newBuffer,*(int *)(ctx + 0x75c),*tokenCountPtr << 2);
+        (**(code **)(iVar14 + 0x18))(*(undefined4 *)(ctx + 0x75c));
       }
-      *(undefined4 *)(param_1 + 0x75c) = uVar4;
-      uVar16 = *puVar18;
-      *(int *)(param_1 + 0x758) = *(int *)(param_1 + 0x758) + 0x80;
+      *(undefined4 *)(ctx + 0x75c) = newBuffer;
+      src0Token = *tokenCountPtr;
+      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
     }
-    *(uint *)(uVar16 * 4 + *(int *)(param_1 + 0x75c)) = uVar13;
-    *puVar18 = *puVar18 + 1;
+    *(uint *)(src0Token * 4 + *(int *)(ctx + 0x75c)) = src1ModifierToken;
+    *tokenCountPtr = *tokenCountPtr + 1;
   }
   return;
 }

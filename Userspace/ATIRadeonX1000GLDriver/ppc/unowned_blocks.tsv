@@ -2020,8 +2020,8 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 932fc	93300	padding	ffvpEmitFogPassThrough	1	
 93338	93340	padding	ffvpEmitFogPassThrough	2	
 9338c	93390	padding	ffvpEmitFogPassThrough	1	
-934fc	93500	padding	ffvpEmitSphereMapCoord_934f0	1	
-93508	93510	padding	ffvpEmitSphereMapCoord_934f0	2	
+934fc	93500	padding	FUN_000934f0	1	
+93508	93510	padding	FUN_000934f0	2	
 939d4	939e0	padding	ffvpEmitBlendedEyeNormal	3	
 93a08	93a10	padding	ffvpPrepareRescaledNormal	2	
 93a1c	93a20	padding	ffvpPrepareRescaledNormal	1	

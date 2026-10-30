@@ -1,0 +1,8 @@
+local	FUN_0006e460	param_1	ctx	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0006e460	puVar18	tokenCountPtr	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0006e460	uVar4	newBuffer	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0006e460	uVar12	dstToken	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0006e460	uVar13	src1ModifierToken	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0006e460	uVar15	src0ModifierToken	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0006e460	uVar16	src0Token	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0006e460	uVar17	dstMaskToken	INFERRED	role read off the function body (see notes_gld_q03.md)
