@@ -1920,11 +1920,11 @@
 0x10f38c	328	FUN_0010f38c	part_031	converted
 0x10f4d4	560	Program__classifyExportInsts	part_031	converted
 0x10f704	376	Program__countUsedInterpolatorSlots	part_032	converted
-0x10f87c	424	FUN_0010f87c	part_032	converted
-0x10fa24	304	FUN_0010fa24	part_032	converted
-0x10fb54	308	FUN_0010fb54	part_032	converted
-0x10fc88	272	FUN_0010fc88	part_032	converted
-0x10fd98	396	FUN_0010fd98	part_032	converted
+0x10f87c	424	Program__renumberExportInsts	part_032	converted
+0x10fa24	304	Program__bindLinkRecordsToSlots	part_032	converted
+0x10fb54	308	Program__assignExportSlotsByKind	part_032	converted
+0x10fc88	272	Program__assignOutputExportSlots	part_032	converted
+0x10fd98	396	Program__assignSharedExportSlots	part_032	converted
 0x10ff24	252	FUN_0010ff24	part_032	converted
 0x110020	204	FUN_00110020	part_032	converted
 0x1102e0	124	Program__packInterpolatorEntries	part_032	converted
@@ -2215,7 +2215,7 @@
 0x115f28	40	IrEmitThenCut__opcodeInfo_atexit_dtor_op263	part_036	converted
 0x115f50	40	IrDot2Add__opcodeInfo_atexit_dtor_001fbdc4	part_036	converted
 0x115f78	40	IrAddFloat__opcodeInfo_atexit_dtor_op18	part_036	converted
-0x115fa0	34636	FUN_00115fa0	part_036	converted
+0x115fa0	34636	Compiler__initStaticLocals	part_036	converted
 0x11e6ec	8	Value__lowHalfword	part_036	converted
 0x11e6f4	140	IRPhi__getUniqueSource	part_036	converted
 0x11e780	108	IRInst__allSourcesDefined	part_036	converted
@@ -2230,7 +2230,7 @@
 0x11f7fc	164	Program__assignVectorSlot	part_037	converted
 0x11f8a0	756	FUN_0011f8a0	part_037	converted
 0x11fb94	944	Program__foldUselessPhis	part_037	converted
-0x11ff7c	3416	FUN_0011ff7c	part_037	converted
+0x11ff7c	3416	Program__sequentializeParallelCopies	part_037	converted
 0x120cd4	384	FUN_00120cd4	part_037	converted
 0x121000	1160	Program__hoistInstructions	part_037	converted
 0x1214fc	6188	pass_ssa_build	part_037	converted
@@ -2341,7 +2341,7 @@
 0x127ecc	24	KhanPs__vslot78_getLimit_0x20Or0x40	part_038	converted
 0x127ee4	64	KhanPs__vslot76_getBindingLimit	part_039	converted
 0x127f24	180	KhanPs__createSchedModels	part_039	converted
-0x127fd8	32	FUN_00127fd8	part_039	converted
+0x127fd8	32	LandingPad__resume_127fd8	part_039	converted
 0x127ff8	36	KhanPs__vslot62_lookupTableEntry	part_039	converted
 0x12801c	20	KhanPs__vslot90_isProgramKind1	part_039	converted
 0x128030	28	KhanPs__getOpcodeTraits	part_039	converted
@@ -2391,7 +2391,7 @@
 0x12ab04	108	IRInst__hasOperandKindClass1	part_039	converted
 0x12ab80	88	pass_optimize_control_flow	part_039	converted
 0x12abd8	128	IfHeader__swapArms	part_039	converted
-0x12ac58	452	FUN_0012ac58	part_039	converted
+0x12ac58	452	Block__findLoopEntryPredecessor	part_039	converted
 0x12ae1c	80	Block__footerTargetOrSelf	part_039	converted
 0x12ae6c	132	Block__hasInstWithQuery28	part_039	converted
 0x12aef0	248	Program__mergeBlockWithSuccessor	part_039	converted
@@ -2423,7 +2423,7 @@
 0x12e56c	660	IfFooter__ctor_12e56c	part_040	converted
 0x12e8c0	304	Program__splitCriticalEdges	part_040	converted
 0x12eacc	1428	FUN_0012eacc	part_040	converted
-0x12f0f8	3356	FUN_0012f0f8	part_040	converted
+0x12f0f8	3356	Program__unrollLoop	part_040	converted
 0x12fe8c	476	Program__isRegionTrivial	part_040	converted
 0x1300b0	836	pass_remove_empty_graphs	part_040	converted
 0x1303f4	48	Array4__contains	part_040	converted
@@ -2468,7 +2468,7 @@
 0x131d08	1440	RegAlloc__buildClassTables	part_041	converted
 0x1322a8	416	HwLimits__buildInterferenceGraph	part_041	converted
 0x1330f4	328	InterferenceGraph__addEdgesForInst	part_041	converted
-0x13323c	3348	FUN_0013323c	part_041	converted
+0x13323c	3348	RegAlloc__insertSpillCode	part_041	converted
 0x133fe4	140	FUN_00133fe4	part_041	converted
 0x134400	600	FUN_00134400	part_041	converted
 0x134658	612	RegAlloc__run	part_041	converted
@@ -2483,7 +2483,7 @@
 0x134cd4	20	InterferenceGraph__storeAliasEntry	part_041	converted
 0x134ce8	200	ColorGraph__countSameClassNeighbors	part_041	converted
 0x134db0	56	BitSet__clearAllWords	part_041	converted
-0x134de8	264	FUN_00134de8	part_041	converted
+0x134de8	264	RegAlloc__registerOfInst	part_041	converted
 0x134ef4	204	NeighbourList__reserveAppendSlot	part_041	converted
 0x134fc0	80	storeAfterLocate	part_041	converted
 0x135010	128	NeighbourList__free_135010	part_041	converted

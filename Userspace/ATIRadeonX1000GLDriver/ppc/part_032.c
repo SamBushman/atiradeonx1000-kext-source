@@ -71,8 +71,8 @@ int Program__countUsedInterpolatorSlots(scopeId, vector, compiler)
   return usedSlotCount;
 }
 
-/* FUN_0010f87c @ 0x10f87c (424 bytes) */
-int FUN_0010f87c(program, param_2, vector)
+/* Program__renumberExportInsts @ 0x10f87c (424 bytes) */
+int Program__renumberExportInsts(program, param_2, vector)
   int program;
   undefined4 param_2;
   uint *vector;
@@ -155,8 +155,8 @@ int FUN_0010f87c(program, param_2, vector)
   return;
 }
 
-/* FUN_0010fa24 @ 0x10fa24 (304 bytes) */
-int FUN_0010fa24(scopeId, slotOwnerRegister, firstSlot, slotEnd, vector)
+/* Program__bindLinkRecordsToSlots @ 0x10fa24 (304 bytes) */
+int Program__bindLinkRecordsToSlots(scopeId, slotOwnerRegister, firstSlot, slotEnd, vector)
   int scopeId;
   int slotOwnerRegister;
   int firstSlot;
@@ -208,8 +208,8 @@ LAB_0010fb28:
   return;
 }
 
-/* FUN_0010fb54 @ 0x10fb54 (308 bytes) */
-int FUN_0010fb54(vector, nextSlotRef, program)
+/* Program__assignExportSlotsByKind @ 0x10fb54 (308 bytes) */
+int Program__assignExportSlotsByKind(vector, nextSlotRef, program)
   uint *vector;
   int *nextSlotRef;
   int program;
@@ -265,11 +265,11 @@ int FUN_0010fb54(vector, nextSlotRef, program)
     } while ((int)loopIndex < (int)vectorCount);
     slotEnd = slotEnd + 1;
   }
-  return ((int (*)())FUN_0010fa24)(2,slotOwnerRegister,firstSlot,slotEnd,*(undefined4 *)(program + 0x418));
+  return ((int (*)())Program__bindLinkRecordsToSlots)(2,slotOwnerRegister,firstSlot,slotEnd,*(undefined4 *)(program + 0x418));
 }
 
-/* FUN_0010fc88 @ 0x10fc88 (272 bytes) */
-int FUN_0010fc88(bindContext, vector, param_3, program)
+/* Program__assignOutputExportSlots @ 0x10fc88 (272 bytes) */
+int Program__assignOutputExportSlots(bindContext, vector, param_3, program)
   undefined4 bindContext;
   uint *vector;
   undefined4 param_3;
@@ -318,11 +318,11 @@ int FUN_0010fc88(bindContext, vector, param_3, program)
     } while ((int)loopIndex < (int)vectorCount);
     slotEnd = slotEnd + 1;
   }
-  return ((int (*)())FUN_0010fa24)(bindContext,slotOwnerRegister,outputBase,slotEnd,*(undefined4 *)(program + 0x418));
+  return ((int (*)())Program__bindLinkRecordsToSlots)(bindContext,slotOwnerRegister,outputBase,slotEnd,*(undefined4 *)(program + 0x418));
 }
 
-/* FUN_0010fd98 @ 0x10fd98 (396 bytes) */
-int FUN_0010fd98(scopeId, vector, nextSlotRef, program)
+/* Program__assignSharedExportSlots @ 0x10fd98 (396 bytes) */
+int Program__assignSharedExportSlots(scopeId, vector, nextSlotRef, program)
   undefined4 scopeId;
   uint *vector;
   int *nextSlotRef;
@@ -401,7 +401,7 @@ LAB_0010febc:
     } while ((int)loopIndex < (int)vectorCount);
     endSlot = *nextSlotRef;
   }
-  return ((int (*)())FUN_0010fa24)(scopeId,slotTable,firstSlot,endSlot,*(undefined4 *)(program + 0x418));
+  return ((int (*)())Program__bindLinkRecordsToSlots)(scopeId,slotTable,firstSlot,endSlot,*(undefined4 *)(program + 0x418));
 }
 
 /* FUN_0010ff24 @ 0x10ff24 (252 bytes) */
@@ -2323,7 +2323,7 @@ LAB_0011293c:
             }
           }
           else {
-            ((int (*)())FUN_0010fb54)(*(undefined4 *)(program + 0x420),&nextSlot,program);
+            ((int (*)())Program__assignExportSlotsByKind)(*(undefined4 *)(program + 0x420),&nextSlot,program);
           }
           goto LAB_00112c28;
         }
@@ -2334,17 +2334,17 @@ LAB_0011293c:
       } while (loopIndex < recordCount);
       kind2Vector = *(uint **)(program + 0x420);
     }
-    ((int (*)())FUN_0010fd98)(2,kind2Vector,&nextSlot,program);
+    ((int (*)())Program__assignSharedExportSlots)(2,kind2Vector,&nextSlot,program);
 LAB_00112c28:
-    ((int (*)())FUN_0010fd98)(3,*(undefined4 *)(program + 0x424),&nextSlot,program);
+    ((int (*)())Program__assignSharedExportSlots)(3,*(undefined4 *)(program + 0x424),&nextSlot,program);
     Vector__shellSort(*(undefined4 *)(program + 0x41c),Compare__descendingByField140);
-    ((int (*)())FUN_0010fd98)(1,*(undefined4 *)(program + 0x41c),&nextSlot,program);
+    ((int (*)())Program__assignSharedExportSlots)(1,*(undefined4 *)(program + 0x41c),&nextSlot,program);
   }
   else {
     *(int *)(program + 0x3f0) = nextSlot - *(int *)(program + 1000);
-    ((int (*)())FUN_0010fc88)(2,*(undefined4 *)(program + 0x420),&nextSlot,program);
-    ((int (*)())FUN_0010fc88)(3,*(undefined4 *)(program + 0x424),&nextSlot,program);
-    ((int (*)())FUN_0010fc88)(1,*(undefined4 *)(program + 0x41c),&nextSlot,program);
+    ((int (*)())Program__assignOutputExportSlots)(2,*(undefined4 *)(program + 0x420),&nextSlot,program);
+    ((int (*)())Program__assignOutputExportSlots)(3,*(undefined4 *)(program + 0x424),&nextSlot,program);
+    ((int (*)())Program__assignOutputExportSlots)(1,*(undefined4 *)(program + 0x41c),&nextSlot,program);
   }
   *(int *)(program + 0x234) = nextSlot + 1;
   slotMask = 0;

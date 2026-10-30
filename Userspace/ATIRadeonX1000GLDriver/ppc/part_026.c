@@ -7839,7 +7839,7 @@ code_r0x00103300:
         argR6 = &previousBlock;
         argR7 = &currentBlock;
         argR8 = (uint ******)&scopeLevel;
-        iVar43 = FUN_0012f0f8(program,loopStackData,iVar20,argR6,argR7,argR8);
+        iVar43 = Program__unrollLoop(program,loopStackData,iVar20,argR6,argR7,argR8);
         if (iVar43 != 0) goto switchD_0010061c_caseD_1;
         if (*(int *)(*(int *)(*(int *)(program + 8) + 0x30c) + 0x4c) < (int)scopeLevel) {
           Compiler__fail(*(int *)(program + 8),8);

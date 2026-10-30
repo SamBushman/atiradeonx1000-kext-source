@@ -2286,7 +2286,7 @@ int FUN_0012eacc(program)
     if (isOrdinaryEntry == 0) {
       chainHeadKey = *(undefined4 *)(pendingEntry + 300);
       chainSecondKey = 0;
-      conditionKey = FUN_0012ac58(chainHeadKey,chainKey);
+      conditionKey = Block__findLoopEntryPredecessor(chainHeadKey,chainKey);
 LAB_0012ed5c:
       predicateRegister = 0;
       if (conditionKey != 0) {
@@ -2404,8 +2404,8 @@ LAB_0012ed24:
   } while( true );
 }
 
-/* FUN_0012f0f8 @ 0x12f0f8 (3356 bytes) */
-int FUN_0012f0f8(pass, loopStack, block, lastBlockRef, newBlockOut, blockCounter)
+/* Program__unrollLoop @ 0x12f0f8 (3356 bytes) */
+int Program__unrollLoop(pass, loopStack, block, lastBlockRef, newBlockOut, blockCounter)
   int pass;
   int loopStack;
   int block;

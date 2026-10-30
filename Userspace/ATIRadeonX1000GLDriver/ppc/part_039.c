@@ -42,8 +42,8 @@ int KhanPs__createSchedModels(this, compiler)
   return;
 }
 
-/* FUN_00127fd8 @ 0x127fd8 (32 bytes) */
-int FUN_00127fd8(param_1)
+/* LandingPad__resume_127fd8 @ 0x127fd8 (32 bytes) */
+int LandingPad__resume_127fd8(param_1)
   undefined4 param_1;
 {
   int extraout_r3;
@@ -1988,8 +1988,8 @@ int IfHeader__swapArms(program, ifHeader)
   return ifHeader;
 }
 
-/* FUN_0012ac58 @ 0x12ac58 (452 bytes) */
-int FUN_0012ac58(targetLoop, block)
+/* Block__findLoopEntryPredecessor @ 0x12ac58 (452 bytes) */
+int Block__findLoopEntryPredecessor(targetLoop, block)
   int targetLoop;
   int *block;
 {
@@ -2265,7 +2265,7 @@ asm(".set FUN_00127ee4, _KhanPs__vslot76_getBindingLimit");
 asm(".globl FUN_00127f24");
 asm(".set FUN_00127f24, _KhanPs__createSchedModels");
 asm(".globl FUN_00127fd8");
-asm(".set FUN_00127fd8, _FUN_00127fd8");
+asm(".set FUN_00127fd8, _LandingPad__resume_127fd8");
 asm(".globl FUN_00127ff8");
 asm(".set FUN_00127ff8, _KhanPs__vslot62_lookupTableEntry");
 asm(".globl FUN_0012801c");

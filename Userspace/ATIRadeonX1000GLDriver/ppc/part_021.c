@@ -567,7 +567,7 @@ int Compiler__compileStages(compiler, compileRequest)
   sourceTable = "ASSEMBLY";
   *(char **)(compiler + 0x620) = "GLOBAL_ALLOC";
   *(char **)(compiler + 0x634) = "ASSEMBLY";
-  FUN_00115fa0(compiler);
+  Compiler__initStaticLocals(compiler);
   stageIndex = *(int *)(compileRequest + 8) + -1;
   *(int *)(compiler + 0x52c) = stageIndex;
   while (-1 < stageIndex) {

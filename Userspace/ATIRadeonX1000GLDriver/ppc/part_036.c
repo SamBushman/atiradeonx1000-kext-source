@@ -392,8 +392,8 @@ int IrAddFloat__opcodeInfo_atexit_dtor_op18()
   return;
 }
 
-/* FUN_00115fa0 @ 0x115fa0 (34636 bytes) */
-int FUN_00115fa0()
+/* Compiler__initStaticLocals @ 0x115fa0 (34636 bytes) */
+int Compiler__initStaticLocals()
 {
   int guardResult;
   undefined *vtablePtr;

@@ -1115,8 +1115,8 @@ int InterferenceGraph__addEdgesForInst(graph, inst)
   return;
 }
 
-/* FUN_0013323c @ 0x13323c (3348 bytes) */
-int FUN_0013323c(pass, copyState)
+/* RegAlloc__insertSpillCode @ 0x13323c (3348 bytes) */
+int RegAlloc__insertSpillCode(pass, copyState)
   int pass;
   undefined4 copyState;
 {
@@ -2042,7 +2042,7 @@ int RegAlloc__run(pass)
     }
     backendB = *(int **)(*(int *)(pass + 8) + 0x30c);
     (**(code **)(*backendB + 0x144))(backendB,*(undefined4 *)(pass + 0x464),pass);
-    ((int (*)())FUN_0013323c)(pass,*(undefined4 *)(pass + 0x3c0));
+    ((int (*)())RegAlloc__insertSpillCode)(pass,*(undefined4 *)(pass + 0x3c0));
     ((int (*)())Program__freeBlockBitsets)(pass);
     if (allocationRound != 0) {
       ((int (*)())RegAlloc__accumulateUseWeights)(*(undefined4 *)(pass + 0x3c0),*(undefined4 *)(pass + 8));
@@ -2325,8 +2325,8 @@ int BitSet__clearAllWords(copyState)
   return;
 }
 
-/* FUN_00134de8 @ 0x134de8 (264 bytes) */
-int FUN_00134de8(allocator, inst)
+/* RegAlloc__registerOfInst @ 0x134de8 (264 bytes) */
+int RegAlloc__registerOfInst(allocator, inst)
   int allocator;
   int *inst;
 {
@@ -5187,4 +5187,4 @@ asm(".set FUN_00138694, _HwLimits__computeBlockLiveness");
  * "thunk_FUN_xxx" IS calling FUN_xxx - which is exactly what the original binary's trampoline
  * did. */
 asm(".globl _thunk_FUN_00134de8");
-asm(".set _thunk_FUN_00134de8, _FUN_00134de8");
+asm(".set _thunk_FUN_00134de8, _RegAlloc__registerOfInst");

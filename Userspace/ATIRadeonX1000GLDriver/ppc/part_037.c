@@ -978,8 +978,8 @@ int Program__foldUselessPhis(program)
 #undef vecData
 #undef vecArena
 
-/* FUN_0011ff7c @ 0x11ff7c (3416 bytes) */
-int FUN_0011ff7c(pass, block, vector, vector2, vector3, vector4, vector5, tempCounter)
+/* Program__sequentializeParallelCopies @ 0x11ff7c (3416 bytes) */
+int Program__sequentializeParallelCopies(pass, block, vector, vector2, vector3, vector4, vector5, tempCounter)
   int pass;
   int *block;
   uint *vector;
@@ -1554,7 +1554,7 @@ int FUN_00120cd4(pass)
       staleArg7 = locationVector;
       staleArg8 = readyVector;
       staleArg9 = instTableVector;
-      ((int (*)())FUN_0011ff7c)(pass,*blockCursor,allocation + 1,pendingCopyVector,locationVector,readyVector,instTableVector,staleTempCountRef);
+      ((int (*)())Program__sequentializeParallelCopies)(pass,*blockCursor,allocation + 1,pendingCopyVector,locationVector,readyVector,instTableVector,staleTempCountRef);
     } while (loopIndex <= listCount);
   }
   if (instTableVector != (undefined4 *)0x0) {
@@ -2780,7 +2780,7 @@ LAB_001228ec:
       targetB = *(int **)(*(int *)(program + PROG_compiler) + COMP_target);
       targetQueryC0b = (**(code **)(*targetB + 0xc0))(targetB);
       if (targetQueryC0b != 0) {
-        FUN_0010f87c(program,2,*(undefined4 *)(program + 0x420));
+        Program__renumberExportInsts(program,2,*(undefined4 *)(program + 0x420));
         option7On = Compiler__isOptionEnabled(*(undefined4 *)(program + PROG_compiler),0x3f);
         if (option7On != 0) {
           Program__packInterpolatorEntries(program,1,*(undefined4 *)(program + 0x41c));

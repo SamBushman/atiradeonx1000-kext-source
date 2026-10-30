@@ -389,8 +389,8 @@ ffd5c	ffd60	FUN_000fd5c8
 12eef4	12ef10	FUN_0012eacc
 12efa8	12efac	FUN_0012eacc
 12f090	12f0b0	FUN_0012eacc
-12f3b0	12f3b4	FUN_0012f0f8
-12fe18	12fe38	FUN_0012f0f8
+12f3b0	12f3b4	Program__unrollLoop
+12fe18	12fe38	Program__unrollLoop
 130068	130080	Program__isRegionTrivial
 130f08	130f28	Program__appendLoadFa
 130fac	130fcc	Program__prependLoad79
@@ -399,8 +399,8 @@ ffd5c	ffd60	FUN_000fd5c8
 131b68	131b88	RegAlloc__findFreeSpillSlot
 132448	13245c	HwLimits__buildInterferenceGraph
 13245c	13247c	HwLimits__buildInterferenceGraph
-133f50	133f64	FUN_0013323c
-133f84	133f9c	FUN_0013323c
+133f50	133f64	RegAlloc__insertSpillCode
+133f84	133f9c	RegAlloc__insertSpillCode
 134070	134090	FUN_00133fe4
 1348bc	1348dc	RegAlloc__run
 1351a4	1351c4	InterferenceNode__ctor_135110

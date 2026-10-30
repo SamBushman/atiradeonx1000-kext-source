@@ -3281,8 +3281,8 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 12eef4	12ef10	other	FUN_0012eacc	7	0x193cc0
 12efa8	12efac	millicode	FUN_0012eacc	1	
 12f090	12f0b0	eh-pad	FUN_0012eacc	8	0x193cc0,__Unwind_Resume
-12f3b0	12f3b4	millicode	FUN_0012f0f8	1	
-12fe18	12fe38	eh-pad	FUN_0012f0f8	8	0x193cc0,__Unwind_Resume
+12f3b0	12f3b4	millicode	Program__unrollLoop	1	
+12fe18	12fe38	eh-pad	Program__unrollLoop	8	0x193cc0,__Unwind_Resume
 130068	130080	eh-pad	Program__isRegionTrivial	6	0x193cc0,__Unwind_Resume
 1308dc	1308e0	millicode	IRInst__advanceToChainEnd	1	
 130f08	130f28	eh-pad	Program__appendLoadFa	8	0x193cc0,__Unwind_Resume
@@ -3291,11 +3291,11 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 1313d8	1313f8	eh-pad	RegAlloc__emitSpillStore	8	0x193cc0,__Unwind_Resume
 131b68	131b88	eh-pad	RegAlloc__findFreeSpillSlot	8	0x193cc0,__Unwind_Resume
 132448	13247c	eh-pad	HwLimits__buildInterferenceGraph	13	0x193cc0,__Unwind_Resume
-133f50	133f64	other	FUN_0013323c	5	0x193cc0
-133f84	133f9c	eh-pad	FUN_0013323c	6	0x193cc0,__Unwind_Resume
+133f50	133f64	other	RegAlloc__insertSpillCode	5	0x193cc0
+133f84	133f9c	eh-pad	RegAlloc__insertSpillCode	6	0x193cc0,__Unwind_Resume
 134070	134090	eh-pad	FUN_00133fe4	8	0x193cc0,__Unwind_Resume
 1348bc	1348dc	eh-pad	RegAlloc__run	8	0x193cc0,__Unwind_Resume
-134ef0	134ef4	millicode	FUN_00134de8	1	
+134ef0	134ef4	millicode	RegAlloc__registerOfInst	1	
 1351a4	1351c4	eh-pad	InterferenceNode__ctor_135110	8	0x193cc0,__Unwind_Resume
 135258	135278	eh-pad	InterferenceNode__ctor_1351c4	8	0x193cc0,__Unwind_Resume
 1361b4	1361d4	eh-pad	pass_color_graph	8	0x193cc0,__Unwind_Resume

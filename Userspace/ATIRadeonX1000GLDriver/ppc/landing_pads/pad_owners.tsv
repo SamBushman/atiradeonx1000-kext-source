@@ -389,8 +389,8 @@
 0x12eef4	FUN_0012eacc
 0x12efa8	FUN_0012eacc
 0x12f090	FUN_0012eacc
-0x12f3b0	FUN_0012f0f8
-0x12fe18	FUN_0012f0f8
+0x12f3b0	Program__unrollLoop
+0x12fe18	Program__unrollLoop
 0x130068	Program__isRegionTrivial
 0x130f08	Program__appendLoadFa
 0x130fac	Program__prependLoad79
@@ -399,8 +399,8 @@
 0x131b68	RegAlloc__findFreeSpillSlot
 0x132448	HwLimits__buildInterferenceGraph
 0x13245c	HwLimits__buildInterferenceGraph
-0x133f50	FUN_0013323c
-0x133f84	FUN_0013323c
+0x133f50	RegAlloc__insertSpillCode
+0x133f84	RegAlloc__insertSpillCode
 0x134070	FUN_00133fe4
 0x1348bc	RegAlloc__run
 0x1351a4	InterferenceNode__ctor_135110
