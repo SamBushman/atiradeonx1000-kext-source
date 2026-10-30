@@ -5132,56 +5132,57 @@ int R300VSchedModel__vslot2_reset(param_1)
 }
 
 /* FUN_0018f850 @ 0x18f850 (200 bytes) */
-int FUN_0018f850(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
-  int *param_2;
-  int *param_3;
-  int param_4;
+int FUN_0018f850(staleArg1, slotsA, slotsB, strict)
+  undefined4 staleArg1;
+  int *slotsA;
+  int *slotsB;
+  int strict;
 {
-  bool bVar1;
-  int iVar2;
-  int iVar3;
+  int slotACommon;
+  bool b0DiffersB1;
+  int slotA1;
+  int slotB0;
   
-  iVar2 = param_2[1];
-  if (*param_2 == iVar2) {
-    iVar3 = *param_3;
-    bVar1 = iVar3 != param_3[1];
-    if ((bVar1) && (iVar2 != 0)) {
+  slotA1 = slotsA[1];
+  if (*slotsA == slotA1) {
+    slotB0 = *slotsB;
+    b0DiffersB1 = slotB0 != slotsB[1];
+    if ((b0DiffersB1) && (slotA1 != 0)) {
       return 0;
     }
-    if (iVar2 == param_2[2]) {
-      if (iVar2 == 0) {
-        if ((((param_4 == 0) && (bVar1)) && (iVar3 != param_3[2])) && (param_3[1] != param_3[2])) {
+    if (slotA1 == slotsA[2]) {
+      if (slotA1 == 0) {
+        if ((((strict == 0) && (b0DiffersB1)) && (slotB0 != slotsB[2])) && (slotsB[1] != slotsB[2])) {
           return 0;
         }
       }
       else {
-        if (bVar1) {
+        if (b0DiffersB1) {
           return 0;
         }
-        if (iVar3 != param_3[2]) {
+        if (slotB0 != slotsB[2]) {
           return 0;
         }
       }
     }
   }
   else {
-    iVar3 = param_2[2];
-    if (*param_2 == iVar3) {
-      if (*param_3 == param_3[2]) {
+    slotACommon = slotsA[2];
+    if (*slotsA == slotACommon) {
+      if (*slotsB == slotsB[2]) {
         return 1;
       }
     }
     else {
-      if (iVar2 != iVar3) {
+      if (slotA1 != slotACommon) {
         return 1;
       }
-      iVar3 = iVar2;
-      if (param_3[1] == param_3[2]) {
+      slotACommon = slotA1;
+      if (slotsB[1] == slotsB[2]) {
         return 1;
       }
     }
-    if (iVar3 != 0) {
+    if (slotACommon != 0) {
       return 0;
     }
   }

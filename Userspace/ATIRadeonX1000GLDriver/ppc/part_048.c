@@ -416,77 +416,79 @@ LAB_0017c5b4:
 int FUN_0017c5e0(ctx)
   int ctx;
 {
+  int currentProgram;
+  int operandClass;
   int findInPtrSetResult;
   int compareCondition;
   int operandRecord;
-  bool bVar1;
-  bool bVar2;
+  bool laneFlag;
+  bool usedUniformConstant;
   int compareCode;
   int inst;
   undefined4 *exprRecord;
-  int iVar6;
-  int iVar7;
+  int laneResult;
+  int prevLaneResult;
   int loopIndex;
-  int iVar9;
+  int laneEntryPtr;
   
-  bVar2 = false;
+  usedUniformConstant = false;
   compareCode = signToCompareCode(0);
   loopIndex = 0;
-  iVar7 = -1;
-  iVar9 = ctx;
+  prevLaneResult = -1;
+  laneEntryPtr = ctx;
   do {
     operandRecord = IRInst__getOperandRecord(*(undefined4 *)(ctx + 0xb0),0);
-    iVar6 = iVar7;
+    laneResult = prevLaneResult;
     if (*(char *)(loopIndex + operandRecord + 0x10) != '\x01') {
-      iVar6 = *(int *)(iVar9 + 0x178);
-      if (iVar6 < 0) {
-        exprRecord = (undefined4 *)Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),iVar6);
-        iVar6 = signToCompareCode(*exprRecord);
+      operandClass = *(int *)(laneEntryPtr + 0x178);
+      if (operandClass < 0) {
+        exprRecord = (undefined4 *)Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),operandClass);
+        operandClass = signToCompareCode(*exprRecord);
         inst = *(int *)(ctx + 0xb0);
       }
       else {
-        if (iVar6 < 1) {
+        if (operandClass < 1) {
           return 0;
         }
-        findInPtrSetResult = Compiler__findInPtrSet(*(undefined4 *)(ctx + 0x238),iVar6);
+        findInPtrSetResult = Compiler__findInPtrSet(*(undefined4 *)(ctx + 0x238),operandClass);
         inst = *(int *)(ctx + 0xb0);
-        iVar6 = *(int *)(findInPtrSetResult + 0xc);
+        operandClass = *(int *)(findInPtrSetResult + 0xc);
         if ((*(uint *)(inst + 0xb8) & 2) != 0) {
-          iVar6 = (DAT_001e61d0)[iVar6];
+          operandClass = (DAT_001e61d0)[operandClass];
         }
-        bVar2 = true;
+        usedUniformConstant = true;
         if ((*(uint *)(inst + 0xb8) & 1) != 0) {
-          iVar6 = *(int *)(&DAT_001e61b8 + iVar6 * 4);
+          operandClass = *(int *)(&DAT_001e61b8 + operandClass * 4);
         }
       }
       compareCondition = IRInst__getCompareCondition(inst);
-      iVar6 = *(int *)(&DAT_001e61e8 + (compareCondition * 6 + iVar6 * 0x30 + compareCode) * 4);
-      if (iVar6 == 1) {
-        iVar6 = 2;
+      operandClass = *(int *)(&DAT_001e61e8 + (compareCondition * 6 + operandClass * 0x30 + compareCode) * 4);
+      if (operandClass == 1) {
+        laneResult = 2;
       }
-      else if (iVar6 == 2) {
-        iVar6 = 3;
+      else if (operandClass == 2) {
+        laneResult = 3;
       }
       else {
-        if (iVar6 == 0) {
+        if (operandClass == 0) {
           return 0;
         }
-        iVar6 = 0;
+        laneResult = 0;
       }
-      if ((iVar7 != -1) && (bVar1 = iVar6 != iVar7, iVar6 = iVar7, bVar1)) {
+      if ((prevLaneResult != -1) && (laneFlag = laneResult != prevLaneResult, laneResult = prevLaneResult, laneFlag)) {
         return 0;
       }
     }
-    bVar1 = loopIndex == 3;
-    iVar9 = iVar9 + 4;
+    laneFlag = loopIndex == 3;
+    laneEntryPtr = laneEntryPtr + 4;
     loopIndex = loopIndex + 1;
-    iVar7 = iVar6;
-    if (bVar1) {
-      if (bVar2) {
-        iVar7 = *(int *)(*(int *)(ctx + 0x238) + 0x6c4);
-        *(int *)(iVar7 + 0x134) = *(int *)(iVar7 + 0x134) + 1;
+    prevLaneResult = laneResult;
+    if (laneFlag) {
+      if (usedUniformConstant) {
+        currentProgram = *(int *)(*(int *)(ctx + 0x238) + 0x6c4);
+        *(int *)(currentProgram + 0x134) = *(int *)(currentProgram + 0x134) + 1;
       }
-      ((int (*)())FUN_0017c244)(ctx,iVar6);
+      ((int (*)())FUN_0017c244)(ctx,laneResult);
       ValueKey__rebuild(ctx);
       return 1;
     }
