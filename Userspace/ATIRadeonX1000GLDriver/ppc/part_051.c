@@ -733,37 +733,38 @@ int R300MachineAssembler__beginNextRecord(this)
 }
 
 /* R300MachineAssembler__vslot4_finishProgram @ 0x1961c8 (296 bytes) */
-int R300MachineAssembler__vslot4_finishProgram(param_1)
-  int *param_1;
+int R300MachineAssembler__vslot4_finishProgram(this)
+  int *this;
 {
-  uint uVar1;
-  int iVar2;
-  uint uVar3;
-  int iVar4;
+  int count;
+  uint temporaryCount;
+  int programRegisterLimit;
+  uint registerCount;
+  int lastIndex;
   
-  *(int *)(param_1[0x17] + 0x93b8) = param_1[0x24];
-  *(int *)(param_1[0x17] + 0x9364) = *(int *)(*(int *)(param_1[3] + 0x6c4) + 0x7c) + 1;
-  iVar2 = *(int *)(*(int *)(param_1[3] + 0x6c4) + 0x80);
-  *(undefined4 *)(param_1[0x17] + 0x9368) = *(undefined4 *)(*(int *)(param_1[3] + 0x6c4) + 0x84);
-  uVar3 = iVar2 + 1;
-  uVar1 = *(uint *)(param_1[0x17] + 0x9364);
-  if (uVar3 < uVar1) {
-    uVar3 = uVar1;
+  *(int *)(this[0x17] + 0x93b8) = this[0x24];
+  *(int *)(this[0x17] + 0x9364) = *(int *)(*(int *)(this[3] + 0x6c4) + 0x7c) + 1;
+  programRegisterLimit = *(int *)(*(int *)(this[3] + 0x6c4) + 0x80);
+  *(undefined4 *)(this[0x17] + 0x9368) = *(undefined4 *)(*(int *)(this[3] + 0x6c4) + 0x84);
+  registerCount = programRegisterLimit + 1;
+  temporaryCount = *(uint *)(this[0x17] + 0x9364);
+  if (registerCount < temporaryCount) {
+    registerCount = temporaryCount;
   }
-  *(uint *)(param_1[0x17] + 0x9364) = uVar3;
-  iVar4 = 0;
-  iVar2 = FUN_0013061c(*(undefined4 *)(param_1[3] + 0x6c4),0);
-  if (iVar2 != 0) {
-    iVar4 = iVar2 + -1;
+  *(uint *)(this[0x17] + 0x9364) = registerCount;
+  lastIndex = 0;
+  count = FUN_0013061c(*(undefined4 *)(this[3] + 0x6c4),0);
+  if (count != 0) {
+    lastIndex = count + -1;
   }
-  if (param_1[0x18] == param_1[0x1d] + 1) {
-    (**(code **)(*param_1 + 0xbc))(param_1);
-    (**(code **)(*param_1 + 0xc0))(param_1);
-    (**(code **)(*param_1 + 0x15c))(param_1);
+  if (this[0x18] == this[0x1d] + 1) {
+    (**(code **)(*this + 0xbc))(this);
+    (**(code **)(*this + 0xc0))(this);
+    (**(code **)(*this + 0x15c))(this);
   }
                     
                     
-  (**(code **)(*param_1 + 0x144))(param_1,param_1[0x1e],iVar4);
+  (**(code **)(*this + 0x144))(this,this[0x1e],lastIndex);
   return;
 }
 
@@ -1221,10 +1222,15 @@ int R300MachineAssembler__placeInstructionConstants(this, inst, constantAllocato
   int *inst;
   undefined4 constantAllocator;
 {
+  int sourceOperandCount2;
+  int sourceOperandCount;
+  int isConstantSource;
+  int operandCount;
+  int placed;
   int operandRecord;
   int operandIndex;
   uint sourceLaneWord;
-  int iVar2;
+  int opcode;
   int *inst1;
   undefined4 operandVReg;
   int *a0;
@@ -1232,31 +1238,31 @@ int R300MachineAssembler__placeInstructionConstants(this, inst, constantAllocato
   int *operandVReg2;
   undefined4 operandVReg3;
   int operandIndex2;
-  uint local_28 [3];
+  uint readMask [3];
   
-  iVar2 = *(int *)(inst[0x22] + 8);
-  if ((((iVar2 == 0x9e) || (iVar2 == 0xa0)) || (iVar2 == 0x9f)) || (operandIndex2 = 1, iVar2 == 0xa1)) {
+  opcode = *(int *)(inst[0x22] + 8);
+  if ((((opcode == 0x9e) || (opcode == 0xa0)) || (opcode == 0x9f)) || (operandIndex2 = 1, opcode == 0xa1)) {
     operandRecord = IRInst__getOperandRecord(inst,0);
     if (((*(char *)(operandRecord + 0x10) == '\0') ||
         (operandRecord = IRInst__getOperandRecord(inst,0), *(char *)(operandRecord + 0x11) == '\0')) ||
        (operandRecord = IRInst__getOperandRecord(inst,0), *(char *)(operandRecord + 0x12) == '\0')) {
       operandVReg = IRInst__getOperandSource(inst,1);
-      iVar2 = FUN_0018d388(constantAllocator,operandVReg,0);
-      if (iVar2 == 0) {
+      placed = FUN_0018d388(constantAllocator,operandVReg,0);
+      if (placed == 0) {
         return 0;
       }
     }
     operandRecord = IRInst__getOperandRecord(inst,0);
     if (*(char *)(operandRecord + 0x13) == '\0') {
       operandVReg = IRInst__getOperandSource(inst,1);
-      iVar2 = FUN_0018d388(constantAllocator,operandVReg,1);
-      if (iVar2 == 0) {
+      placed = FUN_0018d388(constantAllocator,operandVReg,1);
+      if (placed == 0) {
         return 0;
       }
     }
   }
   else {
-    for (; iVar2 = (**(code **)(*inst + 0x14))(inst), operandIndex2 <= iVar2; operandIndex2 = operandIndex2 + 1) {
+    for (; operandCount = (**(code **)(*inst + 0x14))(inst), operandIndex2 <= operandCount; operandIndex2 = operandIndex2 + 1) {
       a0 = (int *)IRInst__getOperandSource(inst,operandIndex2);
       callResult = (**(code **)(*a0 + 0x60))(a0);
       inst1 = inst;
@@ -1268,53 +1274,53 @@ int R300MachineAssembler__placeInstructionConstants(this, inst, constantAllocato
         a0 = operandVReg2;
       }
       operandIndex = IRInst__getOperandRecord(inst1,operandIndex);
-      SelectWord__readMask(local_28,*(undefined4 *)(operandIndex + 0x10));
-      sourceLaneWord = local_28[0];
-      iVar2 = (**(code **)(*a0 + 0x5c))(a0);
-      if (iVar2 == 0) {
+      SelectWord__readMask(readMask,*(undefined4 *)(operandIndex + 0x10));
+      sourceLaneWord = readMask[0];
+      isConstantSource = (**(code **)(*a0 + 0x5c))(a0);
+      if (isConstantSource == 0) {
         if ((a0[0x26] != 0x33) || (a0[0x4b] == 3)) {
           if ((sourceLaneWord & 0xffffff00) == 0) {
             if ((sourceLaneWord & 0xff) == 0) goto LAB_001971a8;
-            iVar2 = FUN_0018c7f4(constantAllocator,a0,1);
+            placed = FUN_0018c7f4(constantAllocator,a0,1);
           }
           else if ((sourceLaneWord & 0xff) == 0) {
-            iVar2 = FUN_0018c7f4(constantAllocator,a0,0);
+            placed = FUN_0018c7f4(constantAllocator,a0,0);
           }
           else {
-            iVar2 = FUN_0018c980(constantAllocator,a0,a0);
+            placed = FUN_0018c980(constantAllocator,a0,a0);
           }
 joined_r0x00197160:
-          if (iVar2 == 0) {
+          if (placed == 0) {
             return 0;
           }
         }
       }
       else {
         if ((sourceLaneWord & 0xffffff00) != 0) {
-          iVar2 = (**(code **)(*a0 + 0x14))(a0);
-          if (iVar2 == 1) {
+          sourceOperandCount = (**(code **)(*a0 + 0x14))(a0);
+          if (sourceOperandCount == 1) {
             operandVReg = IRInst__getOperandSource(a0,1);
-            iVar2 = FUN_0018d388(constantAllocator,operandVReg,0);
+            placed = FUN_0018d388(constantAllocator,operandVReg,0);
           }
           else {
             operandVReg = IRInst__getOperandSource(a0,1);
             operandVReg3 = IRInst__getOperandSource(a0,2);
-            iVar2 = FUN_0018cdd8(constantAllocator,operandVReg,operandVReg3,0);
+            placed = FUN_0018cdd8(constantAllocator,operandVReg,operandVReg3,0);
           }
-          if (iVar2 == 0) {
+          if (placed == 0) {
             return 0;
           }
         }
         if ((sourceLaneWord & 0xff) != 0) {
-          iVar2 = (**(code **)(*a0 + 0x14))(a0);
-          if (iVar2 == 1) {
+          sourceOperandCount2 = (**(code **)(*a0 + 0x14))(a0);
+          if (sourceOperandCount2 == 1) {
             operandVReg = IRInst__getOperandSource(a0,1);
-            iVar2 = FUN_0018d388(constantAllocator,operandVReg,1);
+            placed = FUN_0018d388(constantAllocator,operandVReg,1);
           }
           else {
             operandVReg = IRInst__getOperandSource(a0,1);
             operandVReg3 = IRInst__getOperandSource(a0,2);
-            iVar2 = FUN_0018cdd8(constantAllocator,operandVReg,operandVReg3,1);
+            placed = FUN_0018cdd8(constantAllocator,operandVReg,operandVReg3,1);
           }
           goto joined_r0x00197160;
         }

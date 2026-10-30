@@ -2307,44 +2307,44 @@ int evaluateConstantComparison(inst, resultKnownOut)
   undefined4 *resultKnownOut;
 {
   undefined4 laneMask;
-  int iVar2;
-  bool bVar3;
-  int local_48;
-  float local_44;
-  int local_30;
-  float local_2c;
+  int gotConstant;
+  bool comparisonResult;
+  int src1Kind;
+  float src1Value;
+  int src2Kind;
+  float src2Value;
   
   laneMask = DAT_001b2d70;
-  iVar2 = IRInst__getUniformSourceConstant(inst,1,DAT_001b2d70,&local_48);
-  if ((((iVar2 == 0) || (local_48 != 2)) ||
-      (iVar2 = IRInst__getUniformSourceConstant(inst,2,laneMask,&local_30), iVar2 == 0)) || (local_30 != 2)) {
-    bVar3 = false;
+  gotConstant = IRInst__getUniformSourceConstant(inst,1,DAT_001b2d70,&src1Kind);
+  if ((((gotConstant == 0) || (src1Kind != 2)) ||
+      (gotConstant = IRInst__getUniformSourceConstant(inst,2,laneMask,&src2Kind), gotConstant == 0)) || (src2Kind != 2)) {
+    comparisonResult = false;
     *resultKnownOut = 0;
   }
   else {
-    bVar3 = false;
+    comparisonResult = false;
     switch(*(undefined4 *)(inst + 300)) {
     case 0:
-      bVar3 = local_44 == local_2c;
+      comparisonResult = src1Value == src2Value;
       break;
     case 1:
-      bVar3 = local_44 != local_2c;
+      comparisonResult = src1Value != src2Value;
       break;
     case 2:
-      bVar3 = local_2c < local_44;
+      comparisonResult = src2Value < src1Value;
       break;
     case 3:
-      bVar3 = local_2c <= local_44;
+      comparisonResult = src2Value <= src1Value;
       break;
     case 4:
-      bVar3 = local_44 < local_2c;
+      comparisonResult = src1Value < src2Value;
       break;
     case 5:
-      bVar3 = local_44 <= local_2c;
+      comparisonResult = src1Value <= src2Value;
     }
     *resultKnownOut = 1;
   }
-  return bVar3;
+  return comparisonResult;
 }
 
 /* R520MachineAssembler__vslot29_patchBranchTarget @ 0x1a1160 (144 bytes) */

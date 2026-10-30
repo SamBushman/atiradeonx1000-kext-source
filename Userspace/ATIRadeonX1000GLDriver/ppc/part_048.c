@@ -762,33 +762,33 @@ int FUN_0017cb14(ctx)
 }
 
 /* FUN_0017cd18 @ 0x17cd18 (164 bytes) */
-int FUN_0017cd18(param_1)
-  int param_1;
+int FUN_0017cd18(ctx)
+  int ctx;
 {
-  bool bVar1;
+  bool notLastOperand;
   int callResult;
-  undefined4 uVar3;
+  undefined4 zeroValueNumber;
   int loopIndex;
   
-  callResult = Compiler__valueNumberForExpr(*(undefined4 *)(param_1 + 0x238),0);
+  callResult = Compiler__valueNumberForExpr(*(undefined4 *)(ctx + 0x238),0);
   loopIndex = 1;
-  uVar3 = *(undefined4 *)(callResult + 4);
+  zeroValueNumber = *(undefined4 *)(callResult + 4);
   do {
-    callResult = Inst__writtenLanesAllMatchValue(param_1,uVar3,loopIndex);
+    callResult = Inst__writtenLanesAllMatchValue(ctx,zeroValueNumber,loopIndex);
     if (callResult != 0) {
-      callResult = FUN_0017737c(param_1,0,3);
+      callResult = FUN_0017737c(ctx,0,3);
       if (callResult == 0) {
-        ((int (*)())FUN_0017c244)(param_1,3);
+        ((int (*)())FUN_0017c244)(ctx,3);
       }
       else {
-        FUN_00177548(param_1);
+        FUN_00177548(ctx);
       }
-      ValueKey__rebuild(param_1);
+      ValueKey__rebuild(ctx);
       return 1;
     }
-    bVar1 = loopIndex != 2;
+    notLastOperand = loopIndex != 2;
     loopIndex = loopIndex + 1;
-  } while (bVar1);
+  } while (notLastOperand);
   return 0;
 }
 
