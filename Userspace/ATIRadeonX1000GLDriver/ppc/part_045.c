@@ -393,9 +393,11 @@ int Scheduler__issueNode(scheduler, node)
   int node;
 {
   int iVar1;
+  int vcalld4Result;
+  int vcall5cResult;
   
-  iVar1 = (**(code **)(**(int **)(node + 0x38) + 0x5c))(*(int **)(node + 0x38),node);
-  if (iVar1 == 0) {
+  vcall5cResult = (**(code **)(**(int **)(node + 0x38) + 0x5c))(*(int **)(node + 0x38),node);
+  if (vcall5cResult == 0) {
     (**(code **)(*(int *)scheduler[2] + 0x74))((int *)scheduler[2],node,scheduler[0xc]);
   }
   else {
@@ -408,8 +410,8 @@ int Scheduler__issueNode(scheduler, node)
   ((int (*)())SchedModel__uncountNode)(scheduler[2],node);
   (**(code **)(*(int *)scheduler[3] + 0x10))((int *)scheduler[3],node);
   ((int (*)())Scheduler__releaseOperandsOfIssuedNode)(scheduler,node);
-  iVar1 = (**(code **)(**(int **)(*scheduler + 0x30c) + 0xd4))(*(int **)(*scheduler + 0x30c));
-  if ((iVar1 != 0) && ((*(uint *)(*(int *)(node + 0x38) + 0x14) & 0x1000) != 0)) {
+  vcalld4Result = (**(code **)(**(int **)(*scheduler + 0x30c) + 0xd4))(*(int **)(*scheduler + 0x30c));
+  if ((vcalld4Result != 0) && ((*(uint *)(*(int *)(node + 0x38) + 0x14) & 0x1000) != 0)) {
     ((int (*)())Scheduler__splitAddressRegisterUses)(scheduler);
   }
   ((int (*)())Scheduler__updateSuccessorsAfterIssue)(scheduler,node);
@@ -1465,10 +1467,12 @@ int Scheduler__onNodeReady(scheduler, node)
   int isNodeReadyResult;
   int balanceEnabled;
   int iVar1;
+  int vcall34Result;
+  int vcall50Result;
   int iVar2;
   
-  iVar1 = (**(code **)(*(int *)scheduler[2] + 0x50))((int *)scheduler[2],node);
-  if (iVar1 == 0) goto LAB_0016ef60;
+  vcall50Result = (**(code **)(*(int *)scheduler[2] + 0x50))((int *)scheduler[2],node);
+  if (vcall50Result == 0) goto LAB_0016ef60;
   balanceEnabled = Compiler__isOptionEnabled(*scheduler,0x28);
   if (balanceEnabled == 0) {
 LAB_0016ef04:
@@ -1476,8 +1480,8 @@ LAB_0016ef04:
   }
   else {
     iVar2 = 1;
-    iVar1 = (**(code **)(*(int *)scheduler[2] + 0x34))((int *)scheduler[2],node);
-    if (iVar1 == 0) goto LAB_0016ef04;
+    vcall34Result = (**(code **)(*(int *)scheduler[2] + 0x34))((int *)scheduler[2],node);
+    if (vcall34Result == 0) goto LAB_0016ef04;
   }
   iVar1 = (**(code **)(*(int *)scheduler[2] + 0x4c))
                     ((int *)scheduler[2],*(undefined4 *)(node + 0x38));
@@ -1644,6 +1648,7 @@ int Scheduler__selectNextNode(scheduler, cycleLimit)
   bool moreComponents;
   uint edgeIndex;
   int iVar4;
+  int isOptionEnabledResult;
   char *groupSelectCursor;
   uint predVectorCount;
   undefined4 pendingConsumers;
@@ -1828,8 +1833,8 @@ LAB_0017036c:
           }
           savedNext = *(int *)(node + 8);
           DList__unlink(node);
-          iVar4 = Compiler__isOptionEnabled(*scheduler,0x27);
-          if ((((iVar4 != 0) && (iVar4 = Compiler__isOptionEnabled(*scheduler,0x2b), iVar4 == 0)) &&
+          isOptionEnabledResult = Compiler__isOptionEnabled(*scheduler,0x27);
+          if ((((isOptionEnabledResult != 0) && (isOptionEnabledResult = Compiler__isOptionEnabled(*scheduler,0x2b), isOptionEnabledResult == 0)) &&
               (scheduler[0x46] == 0)) &&
              ((*(int *)(node + 0x60) == 0 || ((*(uint *)(scheduler[1] + 0x30) & 0x2000) != 0)))) {
             deferredBucket = (**(code **)(*(int *)scheduler[2] + 0x3c))((int *)scheduler[2],nodeInst);
@@ -3827,7 +3832,7 @@ int FUN_001725c4(inst, operandIndex2, compiler)
   int newInst;
   undefined4 operandVReg;
   int vcall28Result;
-  int iVar3;
+  int callResult;
   int block;
   int operandIndex;
   int *afterInst;
@@ -3854,34 +3859,34 @@ int FUN_001725c4(inst, operandIndex2, compiler)
     IROperand__setModifierBits(inst + operandIndex2 * 6 + 0x23,2,0);
     IROperand__setModifierBits(newInst + 0xa4,2,1);
   }
-  iVar3 = FUN_00165604(block,newInst);
+  callResult = FUN_00165604(block,newInst);
   operandIndex = 1;
-  if (*(int *)(iVar3 + 0x158) == 0) {
+  if (*(int *)(callResult + 0x158) == 0) {
     *(int *)(*(int *)(compiler + 0x6c4) + 0x238) = *(int *)(*(int *)(compiler + 0x6c4) + 0x238) + 1;
     vcall28Result = (**(code **)(*inst + 0x28))(inst);
     if (vcall28Result == 0) {
-      Block__insertInstBefore(block,inst,iVar3);
+      Block__insertInstBefore(block,inst,callResult);
     }
     else {
       for (afterInst = (int *)inst[1]; afterInst != (int *)0x0; afterInst = (int *)afterInst[1]) {
         vcall28Result = (**(code **)(*afterInst + 0x28))(afterInst);
         if (vcall28Result == 0) {
-          Block__insertInstAfter(block,afterInst,iVar3);
-          return iVar3;
+          Block__insertInstAfter(block,afterInst,callResult);
+          return callResult;
         }
       }
-      Block__prependInst(block,iVar3);
+      Block__prependInst(block,callResult);
     }
   }
   else {
     for (; block = (**(code **)(*inst + 0x14))(inst), operandIndex <= block; operandIndex = operandIndex + 1) {
       block = IRInst__getOperandSource(inst,operandIndex);
       if (newInst == block) {
-        IRInst__setOperandSource(inst,operandIndex,iVar3,0,compiler);
+        IRInst__setOperandSource(inst,operandIndex,callResult,0,compiler);
       }
     }
   }
-  return iVar3;
+  return callResult;
 }
 
 /* ThreadModel__vslot4 @ 0x17281c (416 bytes) */
@@ -3994,10 +3999,10 @@ int FUN_001729bc(param_1)
 int ValueKey__maybeRefineSources(param_1)
   int param_1;
 {
-  int iVar1;
+  int isOptionEnabledResult;
   
-  iVar1 = Compiler__isOptionEnabled(*(undefined4 *)(param_1 + 0x238),9);
-  if ((iVar1 != 0) && (iVar1 = Compiler__isOptionEnabled(*(undefined4 *)(param_1 + 0x238),0x30), iVar1 != 0)) {
+  isOptionEnabledResult = Compiler__isOptionEnabled(*(undefined4 *)(param_1 + 0x238),9);
+  if ((isOptionEnabledResult != 0) && (isOptionEnabledResult = Compiler__isOptionEnabled(*(undefined4 *)(param_1 + 0x238),0x30), isOptionEnabledResult != 0)) {
     ValueKey__splitDestinationIfEligible(param_1);
     return;
   }
@@ -4074,63 +4079,67 @@ int KeyLaneTable__hashByOpcode(param_1)
 }
 
 /* KeyLaneTable__eqKeys @ 0x172bd0 (332 bytes) */
-int KeyLaneTable__eqKeys(param_1, param_2)
-  int param_1;
-  int param_2;
+int KeyLaneTable__eqKeys(keyA, keyB)
+  int keyA;
+  int keyB;
 {
-  int *piVar1;
-  int *piVar2;
-  int iVar3;
-  undefined4 uVar4;
-  int iVar5;
-  int iVar6;
+  int operandIdx;
+  int laneSlotB;
+  int cursorA;
+  int cursorB;
+  int *laneFieldPtrA;
+  int *laneFieldPtrB;
+  int opcodeCheck;
+  undefined4 result;
+  int fieldsA;
+  int fieldsB;
   int iVar7;
-  int iVar8;
-  int *piVar9;
-  int iVar10;
-  undefined4 *puVar11;
-  int iVar12;
-  undefined4 *puVar13;
+  int laneB;
+  int *keyInst;
+  int recordB;
+  undefined4 *selectCursorA;
+  int recordA;
+  undefined4 *selectCursorB;
   
-  iVar12 = *(int *)(param_1 + 4);
-  iVar10 = *(int *)(param_2 + 4);
-  piVar9 = *(int **)(iVar12 + 0xb0);
-  iVar7 = *(int *)(param_1 + 8);
-  iVar8 = *(int *)(param_2 + 8);
-  iVar3 = OpcodeTraits__flag1WithoutFlag7(*(undefined4 *)(iVar12 + 0x238),piVar9);
-  iVar5 = iVar12 + 0xb4;
-  iVar6 = iVar10 + 0xb4;
-  if ((((iVar3 == 0) || (*(int *)(iVar12 + 0xb4) != *(int *)(iVar10 + 0xb4))) ||
-      (*(int *)(iVar12 + 0xc0) != *(int *)(iVar10 + 0xc0))) ||
-     (*(int *)(iVar12 + 0xc4) != *(int *)(iVar10 + 0xc4))) {
+  recordA = *(int *)(keyA + 4);
+  recordB = *(int *)(keyB + 4);
+  keyInst = *(int **)(recordA + 0xb0);
+  iVar7 = *(int *)(keyA + 8);
+  laneB = *(int *)(keyB + 8);
+  opcodeCheck = OpcodeTraits__flag1WithoutFlag7(*(undefined4 *)(recordA + 0x238),keyInst);
+  fieldsA = recordA + 0xb4;
+  fieldsB = recordB + 0xb4;
+  if ((((opcodeCheck == 0) || (*(int *)(recordA + 0xb4) != *(int *)(recordB + 0xb4))) ||
+      (*(int *)(recordA + 0xc0) != *(int *)(recordB + 0xc0))) ||
+     (*(int *)(recordA + 0xc4) != *(int *)(recordB + 0xc4))) {
 LAB_00172d04:
-    uVar4 = 0xffffffff;
+    result = 0xffffffff;
   }
   else {
-    iVar7 = iVar7 * 4 + iVar5;
-    iVar3 = iVar8 * 4 + iVar6;
-    iVar8 = iVar7 + 0x14;
-    iVar10 = iVar3 + 0x14;
-    puVar11 = (undefined4 *)(iVar7 + 0xc4);
-    puVar13 = (undefined4 *)(iVar3 + 0xc4);
-    for (iVar3 = 1; iVar7 = (**(code **)(*piVar9 + 0x14))(piVar9), iVar3 <= iVar7; iVar3 = iVar3 + 1
+    iVar7 = iVar7 * 4 + fieldsA;
+    laneSlotB = laneB * 4 + fieldsB;
+    cursorA = iVar7 + 0x14;
+    cursorB = laneSlotB + 0x14;
+    selectCursorA = (undefined4 *)(iVar7 + 0xc4);
+    selectCursorB = (undefined4 *)(laneSlotB + 0xc4);
+    for (operandIdx = 1; iVar7 = (**(code **)(*keyInst + 0x14))(keyInst), operandIdx <= iVar7; operandIdx = operandIdx + 1
         ) {
-      iVar7 = Ptr__equalNonNull(*puVar11,*puVar13);
-      if (((iVar7 == 0) || (*(int *)(iVar5 + 0x108) != *(int *)(iVar6 + 0x108))) ||
-         (*(int *)(iVar8 + 0x20) != *(int *)(iVar10 + 0x20))) goto LAB_00172d04;
-      piVar1 = (int *)(iVar8 + 0x30);
-      iVar5 = iVar5 + 4;
-      piVar2 = (int *)(iVar10 + 0x30);
-      iVar8 = iVar8 + 0x20;
-      iVar10 = iVar10 + 0x20;
-      iVar6 = iVar6 + 4;
-      puVar11 = puVar11 + 4;
-      puVar13 = puVar13 + 4;
-      if (*piVar1 != *piVar2) goto LAB_00172d04;
+      iVar7 = Ptr__equalNonNull(*selectCursorA,*selectCursorB);
+      if (((iVar7 == 0) || (*(int *)(fieldsA + 0x108) != *(int *)(fieldsB + 0x108))) ||
+         (*(int *)(cursorA + 0x20) != *(int *)(cursorB + 0x20))) goto LAB_00172d04;
+      laneFieldPtrA = (int *)(cursorA + 0x30);
+      fieldsA = fieldsA + 4;
+      laneFieldPtrB = (int *)(cursorB + 0x30);
+      cursorA = cursorA + 0x20;
+      cursorB = cursorB + 0x20;
+      fieldsB = fieldsB + 4;
+      selectCursorA = selectCursorA + 4;
+      selectCursorB = selectCursorB + 4;
+      if (*laneFieldPtrA != *laneFieldPtrB) goto LAB_00172d04;
     }
-    uVar4 = 0;
+    result = 0;
   }
-  return uVar4;
+  return result;
 }
 
 /* ScopedExprTable__hashKey @ 0x172d1c (168 bytes) */
@@ -4328,11 +4337,11 @@ int noop_172fb4()
 int FUN_00172fb8(valueKey)
   int valueKey;
 {
-  int iVar1;
+  int vcall54Result;
   undefined4 uVar2;
   
-  iVar1 = (**(code **)(**(int **)(valueKey + 0xb0) + 0x54))(*(int **)(valueKey + 0xb0));
-  if ((iVar1 == 0) || (uVar2 = 1, *(int *)(*(int *)(valueKey + 0xb0) + 0xb0) != 0x2a)) {
+  vcall54Result = (**(code **)(**(int **)(valueKey + 0xb0) + 0x54))(*(int **)(valueKey + 0xb0));
+  if ((vcall54Result == 0) || (uVar2 = 1, *(int *)(*(int *)(valueKey + 0xb0) + 0xb0) != 0x2a)) {
     uVar2 = 0;
   }
   return uVar2;

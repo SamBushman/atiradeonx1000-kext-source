@@ -62,12 +62,6 @@ use	FUN_0014375c	iVar7	operandSource	INFERRED	role read off the web definition: 
 use	FUN_0014375c	iVar7	operandRecord	INFERRED	role read off the web definition: result of a call to a named function / virtual slot	^\s*iVar7\ =\ FUN_001054ec\(iVar18,iVar19\);$	+1
 use	FUN_0014375c	iVar7	operandRecord	INFERRED	role read off the web definition: result of a call to a named function / virtual slot	^\s*local_78\ =\ \*\(int\ \*\)\(iVar7\ \+\ 0x10\);$	+1
 use	FUN_0014375c	iVar7	operandRecord	INFERRED	role read off the web definition: result of a call to a named function / virtual slot	^\s*iVar7\ =\ FUN_001054ec\(iVar18,iVar19\);$@2	+2
-use	FUN_001440e4	iVar7	isBeforeOrSameResult	INFERRED	role read off the web definition: result of a call to a named function / virtual slot	^\s*iVar7\ =\ FUN_00104800\(iVar27,iVar25\);$	+2
-use	FUN_001440e4	iVar7	isBeforeOrSameResult	INFERRED	role read off the web definition: result of a call to a named function / virtual slot	^\s*iVar7\ =\ FUN_00104800\(iVar27,iVar26\);$	+2
-use	FUN_001440e4	iVar7	isBeforeOrSameResult	INFERRED	role read off the web definition: result of a call to a named function / virtual slot	^\s*if\ \(\(!bVar2\)\ \&\&\ \(iVar7\ =\ FUN_00104800\(iVar27,local_8c\),\ iVar7\ !=\ 0\)\)\ \{$	+1
-use	FUN_001440e4	iVar7	vcall1cResult	INFERRED	role read off the web definition: result of a call to a named function / virtual slot	^\s*iVar7\ =\ \(\*\*\(code\ \*\*\)\(\*piVar20\ \+\ 0x1c\)\)\(piVar20\);$	+2
-use	FUN_001440e4	iVar7	vcall2cResult	INFERRED	role read off the web definition: result of a call to a named function / virtual slot	^\s*iVar7\ =\ \(\*\*\(code\ \*\*\)\(\*piVar20\ \+\ 0x2c\)\)\(piVar20\);$	+1
-use	FUN_001440e4	iVar7	vcall2cResult	INFERRED	role read off the web definition: result of a call to a named function / virtual slot	^\s*if\ \(iVar7\ !=\ 0\)\ \{$@4	+1
 use	FUN_001440e4	local_84	operandSource	INFERRED	role read off the web definition: result of a call to a named function / virtual slot	^\s*local_84\ =\ FUN_00105594\(iVar24,1\);$	+1
 use	FUN_001440e4	local_84	operandSource	INFERRED	role read off the web definition: result of a call to a named function / virtual slot	^\s*if\ \(local_84\ ==\ iVar8\)\ \{$	+1
 use	FUN_001440e4	local_88	operandSourceB	INFERRED	role read off the web definition: result of a call to a named function / virtual slot	^\s*local_88\ =\ FUN_00105594\(iVar25,1\);$	+1

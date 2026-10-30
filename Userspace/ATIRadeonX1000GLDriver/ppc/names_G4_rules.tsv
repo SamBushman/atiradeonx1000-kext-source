@@ -52,7 +52,6 @@ local	FUN_001506d0	iVar2	useBPrecheck	INFERRED	FUN_00146cd8(param_2,..): prechec
 local	FUN_00151318	uVar2	callResult	INFERRED	holds one call's result that is tested or returned
 local	FUN_00151a74	uVar7	callResult	INFERRED	holds one call's result that is tested or returned
 local	FUN_00158c3c	piVar5	callResult	INFERRED	holds one call's result that is tested or returned
-local	FUN_00162dfc	piVar3	callResult	INFERRED	holds one call's result that is tested or returned
 local	FUN_001633f8	iVar1	callResult	INFERRED	holds one call's result that is tested or returned
 local	FUN_00167e1c	uVar3	callResult	INFERRED	holds one call's result that is tested or returned
 local	FUN_00172b70	iVar1	callResult	INFERRED	holds one call's result that is tested or returned
@@ -1365,3 +1364,4 @@ local	FUN_001d8c18	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (o
 local	FUN_001d8c70	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
 local	FUN_001d8f58	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
 local	FUN_001d8fc0	param_1	this2	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_00162dfc	piVar3	chainedSource	INFERRED	holds one call's result that is tested or returned
